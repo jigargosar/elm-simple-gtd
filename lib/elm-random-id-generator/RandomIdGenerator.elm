@@ -1,25 +1,25 @@
 module RandomIdGenerator exposing (..)
 
-import Random.Pcg as Rng
+import Random.Pcg as Random exposing (Generator)
 import Char
 
 
 lowercaseLetter =
-    Rng.map (\n -> Char.fromCode (n + 97)) (Rng.int 0 25)
+    Random.map (\n -> Char.fromCode (n + 97)) (Random.int 0 25)
 
 
 uppercaseLetter =
-    Rng.map (\n -> Char.fromCode (n + 65)) (Rng.int 0 25)
+    Random.map (\n -> Char.fromCode (n + 65)) (Random.int 0 25)
 
 
 digit =
-    Rng.map (\n -> Char.fromCode (n + 48)) (Rng.int 0 9)
+    Random.map (\n -> Char.fromCode (n + 48)) (Random.int 0 9)
 
 
 alphaNumericChar =
-    Rng.frequency [ ( 26, lowercaseLetter ), ( 26, uppercaseLetter ), ( 10, digit ) ]
+    Random.frequency [ ( 26, lowercaseLetter ), ( 26, uppercaseLetter ), ( 10, digit ) ]
 
 
+idGen : Generator String
 idGen =
-    Rng.step (Rng.list 64 alphaNumericChar)
-        >> Tuple.mapFirst String.fromList
+    Random.map (String.fromList) (Random.list 64 alphaNumericChar)

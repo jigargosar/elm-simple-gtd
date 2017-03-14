@@ -1,7 +1,8 @@
 module Todos exposing (..)
 
 import Random.Pcg as Random exposing (Seed)
-import Todos.Todo exposing (Todo)
+import RandomIdGenerator
+import Todos.Todo as Todo exposing (Todo)
 
 
 type ProjectType
@@ -28,5 +29,17 @@ todoModelGenerator =
     Random.map initWithSeed Random.independentSeed
 
 
-initWithSeed seed =
-    TodosModel (Todos [] seed)
+initWithSeed =
+    generateTestTodo >> uncurry initWithTodo
+
+
+initWithTodo todo seed =
+    let
+        ( todo, newSeed ) =
+            generateTestTodo seed
+    in
+        TodosModel (Todos [ todo ] newSeed)
+
+
+generateTestTodo =
+    RandomIdGenerator.idGen (Todo.create "foo")

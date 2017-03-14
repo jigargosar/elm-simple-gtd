@@ -42,7 +42,7 @@ update msg =
                 addNewTodoAndDeactivateAddNewTodoMode
 
             OnNewTodoEnterPressed ->
-                addNewTodoAndDeactivateAddNewTodoMode
+                addNewTodoAndContinueAdding
 
             _ ->
                 identity

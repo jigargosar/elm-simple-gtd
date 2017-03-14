@@ -43,28 +43,22 @@ activateAddNewTodoMode text =
     setEditModeTo (EditNewTodoMode text)
 
 
-addNewTodo text =
-    Return.map (\m -> ( Todos.addNewTodo text m.todosModel, Return.singleton m ))
-        >> Return.andThen (uncurry setTodosModel)
-
-
 setTodosModel todosModel =
     Return.map (\m -> { m | todosModel = todosModel })
 
 
-deactivateAddNewTodoMode : Return Msg Model -> Return Msg Model
-deactivateAddNewTodoMode =
-    Return.andThen
-        (\m ->
-            m
-                |> (Return.singleton
-                        >> (case getEditMode m of
-                                EditNewTodoMode text ->
-                                    addNewTodo text
-                                        >> setEditModeTo NotEditing
+addNewTodoAnddeactivateAddNewTodoMode : Return Msg Model -> Return Msg Model
+addNewTodoAnddeactivateAddNewTodoMode =
+    Return.map (\m -> ( getEditMode m, Return.singleton m ))
+        >> Return.andThen (uncurry createAndAddNewTodo)
+        >> setEditModeTo NotEditing
 
-                                _ ->
-                                    setEditModeTo NotEditing
-                           )
-                   )
-        )
+
+createAndAddNewTodo editMode =
+    case editMode of
+        EditNewTodoMode text ->
+            Return.map (\m -> ( Todos.addNewTodo text m.todosModel, Return.singleton m ))
+                >> Return.andThen (uncurry setTodosModel)
+
+        _ ->
+            identity

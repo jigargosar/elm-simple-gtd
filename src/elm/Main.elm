@@ -40,6 +40,8 @@ update msg =
 
             OnNewTodoBlur ->
                 deactivateAddNewTodoMode
+            OnNewTodoEnterPressed ->
+                deactivateAddNewTodoMode
 
             _ ->
                 identity

@@ -12,3 +12,4 @@ type Msg
     | OnEditTodo TodoId
     | OnNewTodoTextChanged String
     | OnNewTodoBlur
+    | OnNewTodoEnterPressed

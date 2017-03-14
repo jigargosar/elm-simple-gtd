@@ -3,7 +3,7 @@ module Todos.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
+import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import Todos exposing (EditMode(..), TodosModel)
 import Todos.Todo as Todo exposing (TodoId)
 
@@ -14,6 +14,7 @@ type alias ViewConfig msg =
     , onEdit : TodoId -> msg
     , onNewTodoTextChanged : String -> msg
     , onNewTodoBlur : msg
+    , onNewTodoEnterPressed : msg
     }
 
 
@@ -47,6 +48,7 @@ addNewTodoView viewConfig text =
         , value text
         , onBlur viewConfig.onNewTodoBlur
         , autofocus True
+        , onEnter
         ]
         []
 

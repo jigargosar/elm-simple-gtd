@@ -25,5 +25,5 @@ elmAppView m =
     div []
         [ div [] [ text "Hello" ]
         , div [] [ text ("editMode = " ++ (toString m.editMode)) ]
-        , Todos.View.listView todoListViewConfig (getTodosModel m)
+        , Todos.View.listView todoListViewConfig (getEditMode m) (getTodosModel m)
         ]

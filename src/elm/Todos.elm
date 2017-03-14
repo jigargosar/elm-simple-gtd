@@ -2,7 +2,7 @@ module Todos exposing (..)
 
 import Random.Pcg as Random exposing (Seed)
 import RandomIdGenerator
-import Todos.Todo as Todo exposing (Todo)
+import Todos.Todo as Todo exposing (Todo, TodoId)
 
 
 type ProjectType
@@ -48,3 +48,10 @@ initWithTodo todos seed =
 
 map mapper (TodosModel todos) =
     List.map mapper todos.todoList
+
+
+type EditMode
+    = AddingNewTodo
+    | EditTodo TodoId
+    | NotEditing
+

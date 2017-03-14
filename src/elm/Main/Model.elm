@@ -1,16 +1,10 @@
 module Main.Model exposing (..)
 
 import Return
-import Todos exposing (TodosModel)
+import Todos exposing (EditMode(AddingNewTodo, NotEditing), TodosModel)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import Todos.Todo exposing (TodoId)
-
-
-type EditMode
-    = AddingNewTodo
-    | EditTodo TodoId
-    | NotEditing
 
 
 type alias Model =
@@ -38,5 +32,18 @@ setEditModeTo editMode =
     Return.map (\m -> { m | editMode = AddingNewTodo })
 
 
+getEditMode =
+    (.editMode)
+
+
 activateAddTodoMode =
     setEditModeTo AddingNewTodo
+
+
+isAddTodoModeActive m =
+    case getEditMode m of
+        AddingNewTodo ->
+            True
+
+        _ ->
+            False

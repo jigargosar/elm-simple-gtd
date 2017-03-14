@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Todos exposing (TodosModel)
+import Todos exposing (EditMode, TodosModel)
 import Todos.Todo as Todo exposing (TodoId)
 
 
@@ -15,8 +15,8 @@ type alias ViewConfig msg =
     }
 
 
-listView : ViewConfig msg -> TodosModel -> Html msg
-listView viewConfig todosModel =
+listView : ViewConfig msg -> EditMode -> TodosModel -> Html msg
+listView viewConfig editMode todosModel =
     div []
         [ innerListView viewConfig todosModel
         , addTodoView viewConfig

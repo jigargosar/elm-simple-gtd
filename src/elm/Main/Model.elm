@@ -79,8 +79,11 @@ createAndAddNewTodo : EditMode -> ReturnMapper
 createAndAddNewTodo editMode =
     case editMode of
         EditNewTodoMode text ->
-            Return.map (\m -> ( Todos.addNewTodo text m.todosModel, Return.singleton m ))
-                >> Return.andThen (uncurry setTodosModel)
+            if String.trim text |> String.isEmpty then
+                identity
+            else
+                Return.map (\m -> ( Todos.addNewTodo text m.todosModel, Return.singleton m ))
+                    >> Return.andThen (uncurry setTodosModel)
 
         _ ->
             identity

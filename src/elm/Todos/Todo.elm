@@ -10,3 +10,6 @@ type alias Todo =
 
 create =
     Todo
+
+todoGenerator text =
+    Random.map (Todo text) RandomIdGenerator.idGen

@@ -34,12 +34,8 @@ initWithSeed =
 
 
 initWithTodo todo seed =
-    let
-        ( todo, newSeed ) =
-            generateTestTodo seed
-    in
-        TodosModel (Todos [ todo ] newSeed)
+    TodosModel (Todos [ todo ] seed)
 
 
 generateTestTodo =
-    RandomIdGenerator.idGen (Todo.create "foo")
+    Random.step (Todo.todoGenerator "foo")

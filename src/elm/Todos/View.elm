@@ -17,7 +17,14 @@ type alias ViewConfig msg =
 
 listView : ViewConfig msg -> TodosModel -> Html msg
 listView viewConfig todosModel =
-    div [] [ innerListView viewConfig todosModel ]
+    div []
+        [ innerListView viewConfig todosModel
+        , addTodoView viewConfig
+        ]
+
+
+addTodoView viewConfig =
+    button [ onClick viewConfig.onAdd ] [ text "Add Todo" ]
 
 
 innerListView viewConfig todosModel =

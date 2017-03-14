@@ -13,10 +13,13 @@ import Todos.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 
+todoListViewConfig = { onAdd = OnAddTodo
+    , onDelete = OnDeleteTodo
+    , onEdit = OnEditTodo
+    }
 
 elmAppView m =
     div []
-        [ div []
-            [ text "Hello" ]
-        , Todos.View.listView (getTodosModel m)
+        [ div [] [ text "Hello" ]
+        , Todos.View.listView todoListViewConfig (getTodosModel m)
         ]

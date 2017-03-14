@@ -12,7 +12,7 @@ main : Program Flags Model Msg
 main =
     Navigation.programWithFlags LocationChanged
         --    TimeTravel.Navigation.programWithFlags LocationChanged
-        { init = \{now} _ -> ( Model.initWithTime now, {- onSignIn () -} Cmd.none )
+        { init = \{ now } _ -> ( Model.initWithTime now, {- onSignIn () -} Cmd.none )
         , view = elmAppView
         , update = update
         , subscriptions =
@@ -30,4 +30,10 @@ update msg =
     Return.singleton
         >> case msg of
             LocationChanged loc ->
+                identity
+
+            OnAddTodo ->
+                identity
+
+            _ ->
                 identity

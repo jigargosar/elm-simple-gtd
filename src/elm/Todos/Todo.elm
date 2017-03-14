@@ -3,9 +3,10 @@ module Todos.Todo exposing (..)
 import RandomIdGenerator
 import Random.Pcg as Random exposing (Seed)
 
+type alias TodoId = String
 
 type alias Todo =
-    { text : String, id : String }
+    { text : String, id : TodoId }
 
 
 create =

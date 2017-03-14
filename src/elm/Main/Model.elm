@@ -44,11 +44,8 @@ activateAddNewTodoMode text =
 
 
 addNewTodo text =
-    Return.andThen
-        (\m ->
-            Todos.addNewTodo text m.todosModel
-                |> (setTodosModel # Return.singleton m)
-        )
+    Return.map (\m -> ( Todos.addNewTodo text m.todosModel, Return.singleton m ))
+        >> Return.andThen (uncurry setTodosModel)
 
 
 setTodosModel todosModel =

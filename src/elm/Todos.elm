@@ -66,6 +66,13 @@ addNewTodo text (TodosModel todos) =
         todos |> append todo |> setSeed seed |> TodosModel
 
 
+deleteTodo todoId (TodosModel todos) =
+    todos.todoList
+        |> List.filter (\todo -> todoId /= (Todo.getId todo))
+        |> (setTodoList # todos)
+        |> TodosModel
+
+
 setSeed seed todos =
     { todos | seed = seed }
 

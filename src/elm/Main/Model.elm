@@ -90,4 +90,5 @@ createAndAddNewTodo editMode =
 
 
 deleteTodo todoId =
-    Return.map identity
+    Return.map (\m -> ( Todos.deleteTodo todoId m.todosModel, Return.singleton m ))
+                        >> Return.andThen (uncurry setTodosModel)

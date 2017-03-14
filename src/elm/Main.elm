@@ -39,9 +39,9 @@ update msg =
                 activateAddNewTodoMode text
 
             OnNewTodoBlur ->
-                addNewTodoAnddeactivateAddNewTodoMode
+                addNewTodoAndDeactivateAddNewTodoMode
             OnNewTodoEnterPressed ->
-                addNewTodoAnddeactivateAddNewTodoMode
+                addNewTodoAndDeactivateAddNewTodoMode
 
             _ ->
                 identity

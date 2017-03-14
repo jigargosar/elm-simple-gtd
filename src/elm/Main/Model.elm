@@ -57,8 +57,8 @@ setTodosModel todosModel =
     Return.map (\m -> { m | todosModel = todosModel })
 
 
-addNewTodoAnddeactivateAddNewTodoMode : ReturnMapper
-addNewTodoAnddeactivateAddNewTodoMode =
+addNewTodoAndDeactivateAddNewTodoMode : ReturnMapper
+addNewTodoAndDeactivateAddNewTodoMode =
     Return.map (\m -> ( getEditMode m, Return.singleton m ))
         >> Return.andThen (uncurry createAndAddNewTodo)
         >> setEditModeTo NotEditing

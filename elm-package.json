@@ -5,7 +5,8 @@
     "license": "BSD3",
     "source-directories": [
         "src/elm",
-        "lib/elm-decode-extra"
+        "lib/elm-decode-extra",
+        "lib/elm-random-id-generator"
     ],
     "exposed-modules": [],
     "dependencies": {

@@ -1,5 +1,7 @@
 module Todos exposing (..)
 
+import Random.Pcg exposing (Seed)
+
 
 type ProjectType
     = InboxProject
@@ -22,5 +24,6 @@ type TodosModel
     = TodosModel Todos
 
 
-init =
+init : Seed -> TodosModel
+init seed =
     TodosModel { todos = [] }

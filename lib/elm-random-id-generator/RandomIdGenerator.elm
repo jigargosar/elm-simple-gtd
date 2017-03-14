@@ -1,4 +1,4 @@
-module IdGen exposing (..)
+module RandomIdGenerator exposing (..)
 
 import Random.Pcg as Rng
 import Char

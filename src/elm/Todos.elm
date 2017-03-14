@@ -1,6 +1,6 @@
 module Todos exposing (..)
 
-import Random.Pcg exposing (Seed)
+import Random.Pcg as Random exposing (Seed)
 
 
 type ProjectType
@@ -24,6 +24,6 @@ type TodosModel
     = TodosModel Todos
 
 
-init : Seed -> TodosModel
-init seed =
-    TodosModel { todos = [] }
+todoModelGenerator : Random.Generator TodosModel
+todoModelGenerator =
+    Random.map (\seed -> TodosModel { todos = [] }) Random.independentSeed

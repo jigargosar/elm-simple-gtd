@@ -58,7 +58,7 @@ innerListView viewConfig todosModel =
 
 
 todoView onDelete todo =
-    li []
+    div []
         [ button [ onClick (onDelete (Todo.getId todo)) ] [ text "x" ]
         , text " | "
         , Todo.getText todo |> text

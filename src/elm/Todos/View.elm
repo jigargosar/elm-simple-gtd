@@ -27,7 +27,7 @@ listView viewConfig editMode todosModel =
 
 addTodoView viewConfig editMode =
     case editMode of
-        AddingNewTodo text ->
+        EditNewTodoMode text ->
             addNewTodoView viewConfig text
 
         _ ->

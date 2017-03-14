@@ -1,7 +1,7 @@
 module Main.Model exposing (..)
 
 import Return
-import Todos exposing (EditMode(AddingNewTodo, NotEditing), TodosModel)
+import Todos exposing (EditMode(EditNewTodoMode, NotEditing), TodosModel)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import Todos.Todo exposing (TodoId)
@@ -36,5 +36,9 @@ getEditMode =
     (.editMode)
 
 
-activateAddTodoMode text =
-    setEditModeTo (AddingNewTodo text)
+activateAddNewTodoMode text =
+    setEditModeTo (EditNewTodoMode text)
+
+
+deactivateAddNewTodoMode =
+    setEditModeTo NotEditing

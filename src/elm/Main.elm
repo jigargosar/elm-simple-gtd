@@ -33,13 +33,13 @@ update msg =
                 identity
 
             OnAddTodoClicked ->
-                activateAddTodoMode ""
+                activateAddNewTodoMode ""
 
             OnNewTodoTextChanged text->
-                activateAddTodoMode text
+                activateAddNewTodoMode text
 
             OnNewTodoBlur ->
-                identity
+                deactivateAddNewTodoMode
 
             _ ->
                 identity

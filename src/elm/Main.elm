@@ -33,7 +33,7 @@ update msg =
                 identity
 
             OnAddTodo ->
-                identity
+                setAddTodoMode
 
             _ ->
                 identity

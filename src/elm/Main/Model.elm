@@ -4,10 +4,19 @@ import Return
 import Todos exposing (TodosModel)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
+import Todos.Todo exposing (TodoId)
+
+
+type EditMode
+    = AddTodo
+    | EditTodo TodoId
+    | NotEditing
 
 
 type alias Model =
-    { todosModel : TodosModel }
+    { todosModel : TodosModel
+    , editMode : EditMode
+    }
 
 
 initWithTime : Time -> Model
@@ -16,7 +25,14 @@ initWithTime =
 
 
 initWithSeed seed =
-    { todosModel = Random.step Todos.todoModelGenerator seed |> Tuple.first }
+    { todosModel = Random.step Todos.todoModelGenerator seed |> Tuple.first
+    , editMode = NotEditing
+    }
 
 
-getTodosModel = (.todosModel)
+getTodosModel =
+    (.todosModel)
+
+
+setAddTodoMode m =
+    { m | editMode = AddTodo }

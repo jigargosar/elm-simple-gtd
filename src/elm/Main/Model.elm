@@ -8,7 +8,7 @@ import Todos.Todo exposing (TodoId)
 
 
 type EditMode
-    = AddTodo
+    = AddingNewTodo
     | EditTodo TodoId
     | NotEditing
 
@@ -35,8 +35,8 @@ getTodosModel =
 
 
 setEditModeTo editMode =
-    Return.map (\m -> { m | editMode = AddTodo })
+    Return.map (\m -> { m | editMode = AddingNewTodo })
 
 
 activateAddTodoMode =
-    setEditModeTo AddTodo
+    setEditModeTo AddingNewTodo

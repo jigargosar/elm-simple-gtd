@@ -41,4 +41,14 @@ activateAddNewTodoMode text =
 
 
 deactivateAddNewTodoMode =
-    setEditModeTo NotEditing
+    Return.andThen
+        (\m ->
+            m
+                |> Return.singleton
+                >> case getEditMode m of
+                    EditNewTodoMode text ->
+                        setEditModeTo NotEditing
+
+                    _ ->
+                        setEditModeTo NotEditing
+        )

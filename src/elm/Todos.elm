@@ -1,6 +1,7 @@
 module Todos exposing (..)
 
 import Random.Pcg as Random exposing (Seed)
+import Todos.Todo exposing (Todo)
 
 
 type ProjectType
@@ -10,10 +11,6 @@ type ProjectType
 
 type alias Project =
     { id : String, name : String, type_ : ProjectType }
-
-
-type alias Todo =
-    { id : String, text : String }
 
 
 type alias Todos =

@@ -35,11 +35,12 @@ update msg =
             OnAddTodoClicked ->
                 activateAddNewTodoMode ""
 
-            OnNewTodoTextChanged text->
+            OnNewTodoTextChanged text ->
                 activateAddNewTodoMode text
 
             OnNewTodoBlur ->
                 addNewTodoAndDeactivateAddNewTodoMode
+
             OnNewTodoEnterPressed ->
                 addNewTodoAndDeactivateAddNewTodoMode
 

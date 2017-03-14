@@ -34,12 +34,16 @@ initWithSeed =
 
 
 generateTestTodo =
-    Random.step (Todo.todoGenerator "foo")
+    Random.step (todoListGenerator)
 
 
-initWithTodo todo seed =
-    TodosModel (Todos [ todo ] seed)
+todoListGenerator : Random.Generator (List Todo)
+todoListGenerator =
+    Random.list 10 (Todo.todoGenerator "foo")
 
+
+initWithTodo todos seed =
+    TodosModel (Todos todos seed)
 
 
 map mapper (TodosModel todos) =

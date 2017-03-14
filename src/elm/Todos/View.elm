@@ -37,13 +37,18 @@ addTodoView viewConfig editMode =
 addTodoButton viewConfig =
     button
         [ onClick viewConfig.onAddTodoClicked
-        , onBlur viewConfig.onNewTodoBlur
         ]
         [ text "Add Todo" ]
 
 
 addNewTodoView viewConfig text =
-    input [ onInput viewConfig.onNewTodoTextChanged, value text ] []
+    input
+        [ onInput viewConfig.onNewTodoTextChanged
+        , value text
+        , onBlur viewConfig.onNewTodoBlur
+        , autofocus True
+        ]
+        []
 
 
 innerListView viewConfig todosModel =

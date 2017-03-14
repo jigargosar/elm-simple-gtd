@@ -34,5 +34,9 @@ getTodosModel =
     (.todosModel)
 
 
-setAddTodoMode m =
-    { m | editMode = AddTodo }
+setEditModeTo editMode =
+    Return.map (\m -> { m | editMode = AddTodo })
+
+
+activateAddTodoMode =
+    setEditModeTo AddTodo

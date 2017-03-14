@@ -10,3 +10,5 @@ type Msg
     | OnAddTodoClicked
     | OnDeleteTodo TodoId
     | OnEditTodo TodoId
+    | OnNewTodoTextChanged String
+    | OnNewTodoBlur

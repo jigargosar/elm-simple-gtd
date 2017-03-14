@@ -36,14 +36,5 @@ getEditMode =
     (.editMode)
 
 
-activateAddTodoMode =
-    setEditModeTo AddingNewTodo
-
-
-isAddTodoModeActive m =
-    case getEditMode m of
-        AddingNewTodo ->
-            True
-
-        _ ->
-            False
+activateAddTodoMode text =
+    setEditModeTo (AddingNewTodo text)

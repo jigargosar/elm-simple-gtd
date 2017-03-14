@@ -18,6 +18,8 @@ todoListViewConfig =
     { onAddTodoClicked = OnAddTodoClicked
     , onDelete = OnDeleteTodo
     , onEdit = OnEditTodo
+    , onNewTodoTextChanged = OnNewTodoTextChanged
+    , onNewTodoBlur = OnNewTodoBlur
     }
 
 

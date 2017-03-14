@@ -15,7 +15,7 @@ import Toolkit.Operators exposing (..)
 
 
 todoListViewConfig =
-    { onAdd = OnAddTodo
+    { onAddTodoClicked = OnAddTodoClicked
     , onDelete = OnDeleteTodo
     , onEdit = OnEditTodo
     }

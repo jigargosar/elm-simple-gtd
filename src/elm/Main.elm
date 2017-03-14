@@ -32,7 +32,7 @@ update msg =
             LocationChanged loc ->
                 identity
 
-            OnAddTodo ->
+            OnAddTodoClicked ->
                 activateAddTodoMode
 
             _ ->

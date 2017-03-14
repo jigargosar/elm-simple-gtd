@@ -9,7 +9,7 @@ import Todos.Todo as Todo exposing (TodoId)
 
 
 type alias ViewConfig msg =
-    { onAdd : msg
+    { onAddTodoClicked : msg
     , onDelete : TodoId -> msg
     , onEdit : TodoId -> msg
     }
@@ -24,7 +24,7 @@ listView viewConfig todosModel =
 
 
 addTodoView viewConfig =
-    button [ onClick viewConfig.onAdd ] [ text "Add Todo" ]
+    button [ onClick viewConfig.onAddTodoClicked ] [ text "Add Todo" ]
 
 
 innerListView viewConfig todosModel =

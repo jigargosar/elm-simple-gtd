@@ -3,6 +3,8 @@ module Todos exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import RandomIdGenerator
 import Todos.Todo as Todo exposing (Todo, TodoId)
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
 
 
 type ProjectType
@@ -55,3 +57,26 @@ type EditMode
     | EditTodo TodoId
     | NotEditing
 
+
+addNewTodo text (TodosModel todos) =
+    let
+        ( todo, seed ) =
+            generateTodo text todos.seed
+    in
+        todos |> append todo |> setSeed seed |> TodosModel
+
+
+setSeed seed todos =
+    { todos | seed = seed }
+
+
+append todo todos =
+    todos.todoList ++ [ todo ] |> setTodoList # todos
+
+
+setTodoList todoList todos =
+    { todos | todoList = todoList }
+
+
+generateTodo text =
+    Random.step (Todo.todoGenerator text)

@@ -17,6 +17,10 @@ type alias ViewConfig msg =
 
 listView : ViewConfig msg -> TodosModel -> Html msg
 listView viewConfig todosModel =
+    div [] [ innerListView viewConfig todosModel ]
+
+
+innerListView viewConfig todosModel =
     ul [] (Todos.map todoView todosModel)
 
 

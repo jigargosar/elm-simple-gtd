@@ -48,7 +48,7 @@ addNewTodoView viewConfig text =
         , value text
         , onBlur viewConfig.onNewTodoBlur
         , autofocus True
-        , onEnter
+        , onEnter viewConfig.onNewTodoEnterPressed
         ]
         []
 

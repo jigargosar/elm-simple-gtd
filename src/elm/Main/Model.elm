@@ -29,7 +29,7 @@ getTodosModel =
 
 
 setEditModeTo editMode =
-    Return.map (\m -> { m | editMode = AddingNewTodo })
+    Return.map (\m -> { m | editMode = editMode })
 
 
 getEditMode =

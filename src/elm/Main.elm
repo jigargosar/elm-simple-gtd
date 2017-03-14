@@ -44,5 +44,8 @@ update msg =
             OnNewTodoEnterPressed ->
                 addNewTodoAndContinueAdding
 
+            OnDeleteTodo todoId ->
+                deleteTodo todoId
+
             _ ->
                 identity

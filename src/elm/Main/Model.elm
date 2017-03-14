@@ -87,3 +87,7 @@ createAndAddNewTodo editMode =
 
         _ ->
             identity
+
+
+deleteTodo todoId =
+    Return.map identity

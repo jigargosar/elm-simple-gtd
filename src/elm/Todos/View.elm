@@ -54,8 +54,12 @@ addNewTodoView viewConfig text =
 
 
 innerListView viewConfig todosModel =
-    ul [] (Todos.map todoView todosModel)
+    ul [] (Todos.map (todoView viewConfig.onDelete) todosModel)
 
 
-todoView todo =
-    li [] [ Todo.getText todo |> text ]
+todoView onDelete todo =
+    li []
+        [ button [ onClick (onDelete (Todo.getId todo)) ] [ text "x" ]
+        , text " | "
+        , Todo.getText todo |> text
+        ]

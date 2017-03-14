@@ -1,0 +1,12 @@
+elm-stuff/
+.idea/workspace.xml
+node_modules/
+dev/
+log.txt
+build/
+build.zip
+tmp/
+.idea/dataSources/
+config.json
+pouchdb-sqlite/
+src/web/bower_components/

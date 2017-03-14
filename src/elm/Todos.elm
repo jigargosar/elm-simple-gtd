@@ -15,7 +15,7 @@ type alias Project =
 
 
 type alias Todos =
-    { todos : List Todo
+    { todoList : List Todo
     , seed : Seed
     }
 
@@ -39,3 +39,8 @@ generateTestTodo =
 
 initWithTodo todo seed =
     TodosModel (Todos [ todo ] seed)
+
+
+
+map mapper (TodosModel todos) =
+    List.map mapper todos.todoList

@@ -17,3 +17,6 @@ initWithTime =
 
 initWithSeed seed =
     { todosModel = Random.step Todos.todoModelGenerator seed |> Tuple.first }
+
+
+getTodosModel = (.todosModel)

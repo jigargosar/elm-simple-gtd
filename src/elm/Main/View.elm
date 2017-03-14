@@ -9,11 +9,14 @@ import Json.Decode
 import Json.Encode
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
+import Todos.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 
 
 elmAppView m =
     div []
-        [ text "Hello"
+        [ div []
+            [ text "Hello" ]
+        , Todos.View.listView (getTodosModel m)
         ]

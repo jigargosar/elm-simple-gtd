@@ -59,9 +59,20 @@ setTodosModel todosModel =
 
 addNewTodoAndDeactivateAddNewTodoMode : ReturnMapper
 addNewTodoAndDeactivateAddNewTodoMode =
+    addNewTodo
+        >> setEditModeTo NotEditing
+
+
+addNewTodoAndContinueAdding : ReturnMapper
+addNewTodoAndContinueAdding =
+    addNewTodo
+        >> activateAddNewTodoMode ""
+
+
+addNewTodo : ReturnMapper
+addNewTodo =
     Return.map (\m -> ( getEditMode m, Return.singleton m ))
         >> Return.andThen (uncurry createAndAddNewTodo)
-        >> setEditModeTo NotEditing
 
 
 createAndAddNewTodo : EditMode -> ReturnMapper

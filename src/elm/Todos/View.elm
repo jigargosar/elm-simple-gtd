@@ -35,7 +35,11 @@ addTodoView viewConfig editMode =
 
 
 addTodoButton viewConfig =
-    button [ onClick viewConfig.onAddTodoClicked ] [ text "Add Todo" ]
+    button
+        [ onClick viewConfig.onAddTodoClicked
+        , onBlur viewConfig.onNewTodoBlur
+        ]
+        [ text "Add Todo" ]
 
 
 addNewTodoView viewConfig text =

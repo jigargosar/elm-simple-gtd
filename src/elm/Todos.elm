@@ -33,9 +33,9 @@ initWithSeed =
     generateTestTodo >> uncurry initWithTodo
 
 
-initWithTodo todo seed =
-    TodosModel (Todos [ todo ] seed)
-
-
 generateTestTodo =
     Random.step (Todo.todoGenerator "foo")
+
+
+initWithTodo todo seed =
+    TodosModel (Todos [ todo ] seed)

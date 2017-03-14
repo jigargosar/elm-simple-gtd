@@ -16,44 +16,55 @@ type alias Model =
     }
 
 
+type alias ReturnMapper =
+    Return Msg Model -> Return Msg Model
+
+
 initWithTime : Time -> Model
 initWithTime =
     round >> Random.initialSeed >> initWithSeed
 
 
+initWithSeed : Seed -> Model
 initWithSeed seed =
     { todosModel = Random.step Todos.todoModelGenerator seed |> Tuple.first
     , editMode = NotEditing
     }
 
 
+getTodosModel : Model -> TodosModel
 getTodosModel =
     (.todosModel)
 
 
+setEditModeTo : EditMode -> ReturnMapper
 setEditModeTo editMode =
     Return.map (\m -> { m | editMode = editMode })
 
 
+getEditMode : Model -> EditMode
 getEditMode =
     (.editMode)
 
 
+activateAddNewTodoMode : String -> ReturnMapper
 activateAddNewTodoMode text =
     setEditModeTo (EditNewTodoMode text)
 
 
+setTodosModel : TodosModel -> ReturnMapper
 setTodosModel todosModel =
     Return.map (\m -> { m | todosModel = todosModel })
 
 
-addNewTodoAnddeactivateAddNewTodoMode : Return Msg Model -> Return Msg Model
+addNewTodoAnddeactivateAddNewTodoMode : ReturnMapper
 addNewTodoAnddeactivateAddNewTodoMode =
     Return.map (\m -> ( getEditMode m, Return.singleton m ))
         >> Return.andThen (uncurry createAndAddNewTodo)
         >> setEditModeTo NotEditing
 
 
+createAndAddNewTodo : EditMode -> ReturnMapper
 createAndAddNewTodo editMode =
     case editMode of
         EditNewTodoMode text ->

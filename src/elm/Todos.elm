@@ -17,7 +17,9 @@ type alias Todo =
 
 
 type alias Todos =
-    { todos : List Todo }
+    { todos : List Todo
+    , seed : Seed
+    }
 
 
 type TodosModel
@@ -26,4 +28,8 @@ type TodosModel
 
 todoModelGenerator : Random.Generator TodosModel
 todoModelGenerator =
-    Random.map (\seed -> TodosModel { todos = [] }) Random.independentSeed
+    Random.map initWithSeed Random.independentSeed
+
+
+initWithSeed seed =
+    TodosModel (Todos [] seed)

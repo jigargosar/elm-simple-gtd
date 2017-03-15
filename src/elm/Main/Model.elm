@@ -129,8 +129,8 @@ createAndAddNewTodo editMode =
             if String.trim text |> String.isEmpty then
                 identity
             else
-                Return.map (\m -> ( Todos.addNewTodo text m.todosModel, Return.singleton m ))
-                    >> Return.andThen (uncurry setTodosModel)
+                Return.map (\m -> ( Todos.addNewTodo text m.todosModel, m ))
+                    >> Return.map (\( todosModel, m ) -> { m | todosModel = todosModel })
 
         _ ->
             identity

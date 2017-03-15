@@ -45,6 +45,7 @@ update msg =
             OnNewTodoEnterPressed ->
                 addNewTodoAndContinueAdding
 
+
             OnDeleteTodoClicked todoId ->
                 deleteTodo todoId
 

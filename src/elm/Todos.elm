@@ -64,6 +64,7 @@ addNewTodo text (TodosModel todos) =
         ( todo, seed ) =
             generateTodo text todos.seed
     in
+        --        (todos |> append todo |> setSeed seed |> TodosModel, todo)
         todos |> append todo |> setSeed seed |> TodosModel
 
 

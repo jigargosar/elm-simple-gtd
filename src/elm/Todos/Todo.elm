@@ -31,8 +31,8 @@ encode todo =
 decoder : Decoder Todo
 decoder =
     D.succeed Todo
-        |> D.required "_id" D.string
         |> D.required "text" D.string
+        |> D.required "_id" D.string
 
 
 decodeValue =

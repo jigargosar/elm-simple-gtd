@@ -26,3 +26,6 @@ setText text todo=
 
 getId =
     (.id)
+
+equalById todo1 todo2 =
+    getId todo1 == getId todo2

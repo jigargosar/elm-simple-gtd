@@ -56,6 +56,7 @@ addNewTodoView viewConfig text =
         []
 
 
+todoListView : EditMode -> ViewConfig msg -> TodosModel -> Html msg
 todoListView editMode viewConfig todosModel =
     ul []
         (todosModel
@@ -81,9 +82,9 @@ todoView onDeleteTodoClicked onEditTodoClicked editMode viewConfig todo =
     let
         inner =
             case editMode of
-                EditTodoMode todoId ->
-                    if todoId == (Todo.getId todo) then
-                        todoListEditView viewConfig todo
+                EditTodoMode editingTodo ->
+                    if Todo.equalById editingTodo todo then
+                        todoListEditView viewConfig editingTodo
                     else
                         todoListItemView viewConfig todo
 

@@ -8,6 +8,7 @@ import Time exposing (Time)
 import Todos.Todo as Todo exposing (Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
+import Tuple2
 
 
 type alias Model =
@@ -131,8 +132,8 @@ createAndAddNewTodo editMode =
             else
                 Return.andThen
                     (\m ->
-                        Todos.addNewTodoReturnWithCmd text m.todosModel
-                            |> Tuple.mapFirst ((,) # m)
+                        Todos.addNewTodo text m.todosModel
+                            |> Tuple2.mapEach ((,) # m) (\addedTodo -> Cmd.none)
                     )
                     >> setTodosModelFromTuple
 

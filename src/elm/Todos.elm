@@ -59,21 +59,21 @@ type EditMode
     | NotEditing
 
 
+--addNewTodo text (TodosModel todos) =
+--    let
+--        ( todo, seed ) =
+--            generateTodo text todos.seed
+--    in
+--        --        (todos |> append todo |> setSeed seed |> TodosModel, todo)
+--        todos |> append todo |> setSeed seed |> TodosModel
+
+
 addNewTodo text (TodosModel todos) =
     let
         ( todo, seed ) =
             generateTodo text todos.seed
     in
-        --        (todos |> append todo |> setSeed seed |> TodosModel, todo)
-        todos |> append todo |> setSeed seed |> TodosModel
-
-
-addNewTodoReturnWithCmd text (TodosModel todos) =
-    let
-        ( todo, seed ) =
-            generateTodo text todos.seed
-    in
-        (  todos |> append todo |> setSeed seed |> TodosModel , Cmd.none)
+        (  todos |> append todo |> setSeed seed |> TodosModel , todo)
 
 
 replaceTodoIfIdMatches todo (TodosModel todos) =

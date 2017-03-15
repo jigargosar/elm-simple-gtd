@@ -16,6 +16,13 @@ async function boot() {
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"].embed(document.getElementById("root"), {now: Date.now()})
 
+
+    app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {
+        const bulkResult = await dbMap[dbName].bulkDocs(docs)
+        // console.log("bulkResult:", dbName, bulkResult, docs)
+        // app.ports.onPouchDBBulkDocksResponse.send([dbName, bulkResult, docs])
+    })
+
 }
 
 boot().catch(console.error)

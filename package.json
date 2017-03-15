@@ -31,7 +31,9 @@
     "webpack-dev-server": "2.4.1"
   },
   "dependencies": {
+    "alien-date": "0.2.2",
     "babel-polyfill": "6.23.0",
+    "parse-messy-time": "2.1.0",
     "pouchdb-browser": "6.1.2",
     "pouchdb-find": "0.10.5",
     "pouchdb-upsert": "2.1.0",

@@ -18,14 +18,20 @@ type alias TodoId =
 
 type alias Todo =
     { text : String
+    , rev : String
     , id : TodoId
     }
+
+
+createWithTextAndId text id =
+    Todo text "" id
 
 
 encode : Todo -> E.Value
 encode todo =
     E.object
         [ "text" => E.string (getText todo)
+        , "_rev" => E.string (getRev todo)
         , "_id" => E.string (getId todo)
         ]
 
@@ -34,6 +40,7 @@ decoder : Decoder Todo
 decoder =
     D.succeed Todo
         |> D.required "text" D.string
+        |> D.required "_rev" D.string
         |> D.required "_id" D.string
 
 
@@ -60,11 +67,15 @@ decodeList =
 
 
 todoGenerator text =
-    Random.map (Todo text) RandomIdGenerator.idGen
+    Random.map (createWithTextAndId text) RandomIdGenerator.idGen
 
 
 getText =
     (.text)
+
+
+getRev =
+    (.rev)
 
 
 setText text todo =

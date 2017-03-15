@@ -11,6 +11,7 @@ import FunctionalHelpers exposing (..)
 import Result.Extra as Result
 import Dict.Extra as Dict
 
+
 type alias TodoId =
     String
 
@@ -22,8 +23,8 @@ type alias Todo =
 encode : Todo -> E.Value
 encode todo =
     E.object
-        [ "_id" => E.string (getId todo)
-        , "text" => E.string (getText todo)
+        [ "text" => E.string (getText todo)
+        , "_id" => E.string (getId todo)
         ]
 
 
@@ -83,4 +84,6 @@ equalById todo1 todo2 =
 isTextEmpty todo =
     getText todo |> String.trim |> String.isEmpty
 
-fromListById = Dict.fromListBy getId
+
+fromListById =
+    Dict.fromListBy getId

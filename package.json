@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "preinstall":"elm-package install -y",
+    "preinstall": "elm-package install -y",
     "dev": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server",
     "hot": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline"
   },
@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "babel-polyfill": "6.23.0",
+    "pouchdb-browser": "^6.1.2",
+    "pouchdb-upsert": "^2.1.0",
     "ramda": "0.23.0"
   }
 }

@@ -29,3 +29,7 @@ getId =
 
 equalById todo1 todo2 =
     getId todo1 == getId todo2
+
+
+isTextEmpty todo=
+    getText todo |> String.trim |> String.isEmpty

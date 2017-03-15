@@ -53,14 +53,17 @@ update msg =
             OnEditTodoTextChanged text ->
                 updateEditTodoText text
 
-            --            OnEditTodoBlur ->
-            --                addNewTodoAndDeactivateAddNewTodoMode
-            --
-            --            OnEditTodoEnterPressed ->
-            --                addNewTodoAndContinueAdding
-            _ ->
-                let
-                    _ =
-                        Debug.log "WARN: msg ignored" (msg)
-                in
-                    identity
+            OnEditTodoBlur ->
+                saveEditingTodoAndDeactivateEditTodoMode
+
+            OnEditTodoEnterPressed ->
+                saveEditingTodoAndDeactivateEditTodoMode
+
+
+
+--            _ ->
+--                let
+--                    _ =
+--                        Debug.log "WARN: msg ignored" (msg)
+--                in
+--                    identity

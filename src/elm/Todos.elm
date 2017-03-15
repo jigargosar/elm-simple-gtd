@@ -66,6 +66,20 @@ addNewTodo text (TodosModel todos) =
         todos |> append todo |> setSeed seed |> TodosModel
 
 
+updateTodo updatedTodo (TodosModel todos) =
+    let
+        todoList =
+            todos.todoList
+                .|> (\todo ->
+                        if Todo.equalById todo updatedTodo then
+                            updatedTodo
+                        else
+                            todo
+                    )
+    in
+        TodosModel todos
+
+
 deleteTodo todoId (TodosModel todos) =
     todos.todoList
         |> List.filter (\todo -> todoId /= (Todo.getId todo))

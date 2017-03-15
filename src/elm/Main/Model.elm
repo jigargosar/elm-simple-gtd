@@ -83,6 +83,31 @@ addNewTodoAndDeactivateAddNewTodoMode =
     addNewTodo
         >> setEditModeTo NotEditing
 
+saveEditingTodoAndDeactivateEditTodoMode : ReturnMapper
+saveEditingTodoAndDeactivateEditTodoMode =
+    saveEditingTodo
+        >> setEditModeTo NotEditing
+
+saveEditingTodo: ReturnMapper
+saveEditingTodo =
+    Return.map (\m -> ( getEditMode m, Return.singleton m ))
+            >> Return.andThen (uncurry saveEditingTodoHelp)
+
+
+saveEditingTodoHelp: EditMode -> ReturnMapper
+saveEditingTodoHelp editMode=
+    case editMode of
+        EditTodoMode todo ->
+            if Todo.isTextEmpty todo then
+                identity
+            else
+                Return.map (\m -> ( Todos.updateTodo todo m.todosModel, Return.singleton m ))
+                    >> Return.andThen (uncurry setTodosModel)
+
+        _ ->
+                    identity
+
+
 
 addNewTodoAndContinueAdding : ReturnMapper
 addNewTodoAndContinueAdding =

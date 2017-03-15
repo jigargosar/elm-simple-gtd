@@ -130,13 +130,13 @@ createAndAddNewTodo editMode =
                 identity
             else
                 Return.map (\m -> ( Todos.addNewTodo text m.todosModel, m ))
-                    >> setTodosModel2
+                    >> setTodosModelFromTuple
 
         _ ->
             identity
 
 
-setTodosModel2 =
+setTodosModelFromTuple =
     Return.map (\( todosModel, m ) -> { m | todosModel = todosModel })
 
 

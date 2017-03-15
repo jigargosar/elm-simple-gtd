@@ -5,13 +5,13 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import Todos exposing (EditMode(..), TodosModel)
-import Todos.Todo as Todo exposing (TodoId)
+import Todos.Todo as Todo exposing (Todo, TodoId)
 
 
 type alias ViewConfig msg =
     { onAddTodoClicked : msg
     , onDeleteTodoClicked : TodoId -> msg
-    , onEditTodoClicked : TodoId -> msg
+    , onEditTodoClicked : Todo -> msg
     , onEditTodoTextChanged : String -> msg
     , onEditTodoBlur : msg
     , onEditTodoEnterPressed : msg

@@ -155,5 +155,9 @@ persistTodoCmd todo =
     PouchDB.pouchDBBulkDocsHelp "todo-db" [ Todo.encode todo ]
 
 
-setEncodedTodoList encodedList model =
-    model
+setEncodedTodoList encodedList =
+    let
+        _ =
+            1
+    in
+        identity

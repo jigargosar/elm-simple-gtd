@@ -7,10 +7,18 @@ import "./index.html"
 import PouchDB from "./local-pouch-db"
 
 
-const todoDB = PouchDB("todo-db")
+async function boot() {
+    const todoDB = await PouchDB("todo-db")
 
-console.log(todoDB)
+    const allTodos = await todoDB.allDocs()
 
-const Elm = require("elm/Main.elm")
-const app = Elm["Main"].embed(document.getElementById("root"), {now: Date.now()})
+    console.log(allTodos)
+    const Elm = require("elm/Main.elm")
+    const app = Elm["Main"].embed(document.getElementById("root"), {now: Date.now()})
+}
+
+boot().catch(console.error)
+
+
+
 

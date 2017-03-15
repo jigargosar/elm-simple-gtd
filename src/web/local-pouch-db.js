@@ -10,7 +10,7 @@ PouchDB.plugin(require('pouchdb-upsert'))
 
 global.PouchDB = PouchDB
 
-module.exports = async(dbName, indices = []) => {
+export default async(dbName, indices = []) => {
     const db = new PouchDB(dbName)
 
     function createIndex(index) {
@@ -61,7 +61,8 @@ module.exports = async(dbName, indices = []) => {
         bulkDocs,
         _db: db,
         upsert,
-        deleteIndices
+        deleteIndices,
+        allDocs: async () => await db.allDocs()
     }
 }
 

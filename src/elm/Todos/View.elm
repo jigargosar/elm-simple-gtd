@@ -77,6 +77,18 @@ todoListView editMode viewConfig todosModel =
 --            todoListItemView
 
 
+todoView onDeleteTodoClicked onEditTodoClicked editMode viewConfig todo =
+    case editMode of
+        EditTodoMode todoId ->
+            if todoId == (Todo.getId todo) then
+                todoListEditView viewConfig todo
+            else
+                todoListItemView viewConfig todo
+
+        _ ->
+            todoListItemView viewConfig todo
+
+
 todoListItemView viewConfig todo =
     let
         deleteOnClick =

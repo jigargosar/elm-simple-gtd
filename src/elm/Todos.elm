@@ -87,6 +87,7 @@ todoModelGenerator =
     Random.map initWithSeed Random.independentSeed
 
 
+deleteTodo : TodoId -> TodosModel -> ( TodosModel, Maybe Todo )
 deleteTodo todoId (TodosModel todos) =
     let
         todoList =

@@ -11,7 +11,7 @@ import Todos.Todo as Todo exposing (TodoId)
 type alias ViewConfig msg =
     { onAddTodoClicked : msg
     , onDeleteTodoClicked : TodoId -> msg
-    , onEdit : TodoId -> msg
+    , onEditTodoClicked : TodoId -> msg
     , onNewTodoTextChanged : String -> msg
     , onNewTodoBlur : msg
     , onNewTodoEnterPressed : msg
@@ -57,26 +57,26 @@ todoListView editMode viewConfig todosModel =
     ul []
         (todosModel
             |> Todos.map
-                (todoView viewConfig.onDeleteTodoClicked viewConfig.onEdit editMode viewConfig)
+                (todoView viewConfig.onDeleteTodoClicked viewConfig.onEditTodoClicked editMode viewConfig)
         )
 
 
-todoView onDeleteTodoClicked onEdit editMode viewConfig todo =
+todoView onDeleteTodoClicked onEditTodoClicked editMode viewConfig todo =
     case editMode of
         EditTodoMode todoId ->
             todoListEditView viewConfig todo
 
         _ ->
-            todoListItemView onDeleteTodoClicked onEdit todo
+            todoListItemView onDeleteTodoClicked onEditTodoClicked todo
 
 
-todoListItemView onDeleteTodoClicked onEdit todo =
+todoListItemView onDeleteTodoClicked onEditTodoClicked todo =
     let
         deleteOnClick =
             onClick (onDeleteTodoClicked (Todo.getId todo))
 
         editOnClick =
-            onClick (onEdit (Todo.getId todo))
+            onClick (onEditTodoClicked (Todo.getId todo))
     in
         div []
             [ button [ deleteOnClick ] [ text "x" ]

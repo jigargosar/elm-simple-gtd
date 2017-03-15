@@ -48,12 +48,14 @@ update msg =
                 deleteTodo todoId
 
             OnEditTodo todoId ->
---                activateEditTodoMode todoId
-                identity
+                                activateEditTodoMode todoId
+--                identity
 
-            _ ->
-                let
-                    _ =
-                        Debug.log "WARN: msg ignored" (msg)
-                in
-                    identity
+
+
+--            _ ->
+--                let
+--                    _ =
+--                        Debug.log "WARN: msg ignored" (msg)
+--                in
+--                    identity

@@ -2,7 +2,7 @@ module Main.Model exposing (..)
 
 import Main.Msg exposing (Msg)
 import Return exposing (Return)
-import Todos exposing (EditMode(EditNewTodoMode, NotEditing), TodosModel)
+import Todos exposing (EditMode(..), TodosModel)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import Todos.Todo exposing (TodoId)
@@ -52,6 +52,11 @@ activateAddNewTodoMode text =
     setEditModeTo (EditNewTodoMode text)
 
 
+activateEditTodoMode : TodoId -> ReturnMapper
+activateEditTodoMode todoId =
+    setEditModeTo (EditTodoMode todoId)
+
+
 setTodosModel : TodosModel -> ReturnMapper
 setTodosModel todosModel =
     Return.map (\m -> { m | todosModel = todosModel })
@@ -91,4 +96,4 @@ createAndAddNewTodo editMode =
 
 deleteTodo todoId =
     Return.map (\m -> ( Todos.deleteTodo todoId m.todosModel, Return.singleton m ))
-                        >> Return.andThen (uncurry setTodosModel)
+        >> Return.andThen (uncurry setTodosModel)

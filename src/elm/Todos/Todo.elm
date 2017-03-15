@@ -9,7 +9,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import FunctionalHelpers exposing (..)
 import Result.Extra as Result
-
+import Dict.Extra as Dict
 
 type alias TodoId =
     String
@@ -82,3 +82,5 @@ equalById todo1 todo2 =
 
 isTextEmpty todo =
     getText todo |> String.trim |> String.isEmpty
+
+fromListById = Dict.fromListBy getId

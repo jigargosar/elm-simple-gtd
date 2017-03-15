@@ -156,8 +156,8 @@ persistTodoCmd todo =
 
 
 setEncodedTodoList encodedList =
-    let
-        _ =
-            Todo.decodeList encodedList
-    in
-        identity
+    Return.map
+        (\m ->
+            ( Todos.upsertTodoList (Todo.decodeList encodedList) m.todosModel, m )
+        )
+        >> setTodosModelFromTuple

@@ -1,11 +1,13 @@
 module Todos exposing (..)
 
+import Dict
 import Random.Pcg as Random exposing (Seed)
 import RandomIdGenerator
 import Todos.Todo as Todo exposing (Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
+import Dict.Extra as Dict
 
 
 type ProjectType
@@ -59,6 +61,7 @@ type EditMode
     | NotEditing
 
 
+
 --addNewTodo text (TodosModel todos) =
 --    let
 --        ( todo, seed ) =
@@ -73,7 +76,7 @@ addNewTodo text (TodosModel todos) =
         ( todo, seed ) =
             generateTodo text todos.seed
     in
-        (  todos |> append todo |> setSeed seed |> TodosModel , todo)
+        ( todos |> append todo |> setSeed seed |> TodosModel, todo )
 
 
 replaceTodoIfIdMatches todo (TodosModel todos) =
@@ -83,6 +86,18 @@ replaceTodoIfIdMatches todo (TodosModel todos) =
                 |> List.replaceIf (Todo.equalById todo) todo
     in
         todos |> setTodoList todoList |> TodosModel
+
+
+upsertTodoList : List Todo -> TodosModel -> TodosModel
+upsertTodoList upsertList (TodosModel todos) =
+    let
+        finalTodoList : List Todo
+        finalTodoList =
+            Todo.fromListById todos.todoList
+                |> Dict.union (Todo.fromListById upsertList)
+                |> Dict.values
+    in
+        todos |> setTodoList finalTodoList |> TodosModel
 
 
 deleteTodo todoId (TodosModel todos) =

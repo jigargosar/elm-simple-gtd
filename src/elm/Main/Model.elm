@@ -153,3 +153,7 @@ deleteTodo todoId =
 
 persistTodoCmd todo =
     PouchDB.pouchDBBulkDocsHelp "todo-db" [ Todo.encode todo ]
+
+
+setEncodedTodoList encodedList model =
+    model

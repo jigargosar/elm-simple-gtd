@@ -13,11 +13,11 @@ async function boot() {
         "todo-db":await PouchDB("todo-db")
     }
 
-    const allTodos = await dbMap["todo-db"].allDocs()
+    const allTodos = await dbMap["todo-db"].find({selector:{"_id":{"$ne":null}}})
 
     console.log(allTodos)
     const Elm = require("elm/Main.elm")
-    const app = Elm["Main"].embed(document.getElementById("root"), {now: Date.now()})
+    const app = Elm["Main"].embed(document.getElementById("root"), {now: Date.now(), allTodos})
 
 
     app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {

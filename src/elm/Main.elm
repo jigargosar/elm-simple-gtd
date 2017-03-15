@@ -1,10 +1,11 @@
 port module Main exposing (..)
 
+import Json.Encode as E
 import Main.Model as Model exposing (..)
 import Main.Msg exposing (..)
 import Main.View exposing (elmAppView)
-import Navigation
-import Return
+import Navigation exposing (Location)
+import Return exposing (Return)
 import Time exposing (Time)
 import PouchDB
 
@@ -13,7 +14,7 @@ main : Program Flags Model Msg
 main =
     Navigation.programWithFlags LocationChanged
         --    TimeTravel.Navigation.programWithFlags LocationChanged
-        { init = \{ now } _ -> ( Model.initWithTime now, {- onSignIn () -} Cmd.none )
+        { init = init
         , view = elmAppView
         , update = update
         , subscriptions =
@@ -23,8 +24,13 @@ main =
         }
 
 
+init : Flags -> Location -> Return Msg Model
+init { now, allTodos } location =
+    ( Model.initWithTime now |> setEncodedTodoList allTodos, Cmd.none )
+
+
 type alias Flags =
-    { now : Time }
+    { now : Time, allTodos : List E.Value }
 
 
 update msg =
@@ -44,7 +50,6 @@ update msg =
 
             OnNewTodoEnterPressed ->
                 addNewTodoAndContinueAdding
-
 
             OnDeleteTodoClicked todoId ->
                 deleteTodo todoId

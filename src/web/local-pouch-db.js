@@ -62,7 +62,7 @@ export default async(dbName, indices = []) => {
         _db: db,
         upsert,
         deleteIndices,
-        allDocs: async () => await db.allDocs()
+        _allDocs: async () => await db.allDocs()
     }
 }
 

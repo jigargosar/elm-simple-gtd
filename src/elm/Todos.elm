@@ -111,7 +111,7 @@ replaceTodoIfIdMatches todo (TodosModel todos) =
             todos.todoList
                 |> List.replaceIf (Todo.equalById todo) todo
     in
-        todos |> setTodoList todoList |> TodosModel
+        ( todos |> setTodoList todoList |> TodosModel, todo )
 
 
 addNewTodo text (TodosModel todos) =

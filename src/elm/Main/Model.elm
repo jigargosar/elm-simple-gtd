@@ -105,7 +105,11 @@ saveEditingTodoHelp editMode =
             if Todo.isTextEmpty todo then
                 identity
             else
-                Return.map (\m -> ( Todos.replaceTodoIfIdMatches todo m.todosModel, m ))
+                Return.andThen
+                    (\m ->
+                        Todos.replaceTodoIfIdMatches todo m.todosModel
+                            |> Tuple2.mapEach ((,) # m) persistTodoCmd
+                    )
                     >> setTodosModelFromTuple
 
         _ ->

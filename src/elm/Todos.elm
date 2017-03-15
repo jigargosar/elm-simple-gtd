@@ -11,7 +11,7 @@ module Todos
         , deleteTodo
         , replaceTodoIfIdMatches
           -- for views
-        , mapAll
+        , rejectMap
         )
 
 import Dict
@@ -21,6 +21,7 @@ import Todos.Todo as Todo exposing (Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
+import Maybe.Extra as Maybe
 import Dict.Extra as Dict
 import FunctionalHelpers exposing (..)
 
@@ -62,6 +63,10 @@ filter filter (TodosModel todos) =
 
 reject filter (TodosModel todos) =
     FunctionalHelpers.reject filter todos.todoList
+
+
+rejectMap filter mapper (TodosModel todos) =
+    todos.todoList |> List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))
 
 
 setSeed seed todos =

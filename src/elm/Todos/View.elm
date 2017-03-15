@@ -60,7 +60,7 @@ todoListView : EditMode -> ViewConfig msg -> TodosModel -> Html msg
 todoListView editMode viewConfig todosModel =
     ul []
         (todosModel
-            |> Todos.mapAll
+            |> Todos.rejectMap Todo.isDeleted
                 (todoView viewConfig.onDeleteTodoClicked viewConfig.onEditTodoClicked editMode viewConfig)
         )
 

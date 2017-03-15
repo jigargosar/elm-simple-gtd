@@ -26,7 +26,7 @@ main =
 
 init : Flags -> Location -> Return Msg Model
 init { now, allTodos } location =
-    ( Model.initWithTime now |> setEncodedTodoList allTodos, Cmd.none )
+    Model.initWithTime now |> Return.singleton |> setEncodedTodoList allTodos
 
 
 type alias Flags =

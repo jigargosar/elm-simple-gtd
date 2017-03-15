@@ -129,7 +129,11 @@ createAndAddNewTodo editMode =
             if String.trim text |> String.isEmpty then
                 identity
             else
-                Return.map (\m -> ( Todos.addNewTodo text m.todosModel, m ))
+                Return.andThen
+                    (\m ->
+                        Todos.addNewTodoReturnWithCmd text m.todosModel
+                            |> Tuple.mapFirst ((,) # m)
+                    )
                     >> setTodosModelFromTuple
 
         _ ->

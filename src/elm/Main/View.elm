@@ -17,7 +17,10 @@ import Toolkit.Operators exposing (..)
 todoListViewConfig =
     { onAddTodoClicked = OnAddTodoClicked
     , onDeleteTodoClicked = OnDeleteTodoClicked
-    , onEditTodoClicked = OnEditTodo
+    , onEditTodoClicked = OnEditTodoClicked
+    , onEditTodoTextChanged = OnNewTodoTextChanged
+    , onEditTodoBlur = OnNewTodoBlur
+    , onEditTodoEnterPressed = OnNewTodoEnterPressed
     , onNewTodoTextChanged = OnNewTodoTextChanged
     , onNewTodoBlur = OnNewTodoBlur
     , onNewTodoEnterPressed = OnNewTodoEnterPressed

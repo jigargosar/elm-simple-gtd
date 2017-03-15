@@ -12,6 +12,9 @@ type alias ViewConfig msg =
     { onAddTodoClicked : msg
     , onDeleteTodoClicked : TodoId -> msg
     , onEditTodoClicked : TodoId -> msg
+    , onEditTodoTextChanged : String -> msg
+    , onEditTodoBlur : msg
+    , onEditTodoEnterPressed : msg
     , onNewTodoTextChanged : String -> msg
     , onNewTodoBlur : msg
     , onNewTodoEnterPressed : msg

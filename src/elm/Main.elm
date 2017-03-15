@@ -47,7 +47,7 @@ update msg =
             OnDeleteTodoClicked todoId ->
                 deleteTodo todoId
 
-            OnEditTodo todoId ->
+            OnEditTodoClicked todoId ->
                                 activateEditTodoMode todoId
 --                identity
 

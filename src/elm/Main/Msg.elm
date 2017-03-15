@@ -9,7 +9,7 @@ type Msg
     = LocationChanged Location
     | OnAddTodoClicked
     | OnDeleteTodoClicked TodoId
-    | OnEditTodo TodoId
+    | OnEditTodoClicked TodoId
     | OnNewTodoTextChanged String
     | OnNewTodoBlur
     | OnNewTodoEnterPressed

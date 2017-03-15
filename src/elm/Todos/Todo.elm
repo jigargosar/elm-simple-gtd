@@ -10,6 +10,7 @@ import Toolkit.Helpers exposing (..)
 import FunctionalHelpers exposing (..)
 import Result.Extra as Result
 import Dict.Extra as Dict
+import Time exposing (Time)
 
 
 type alias TodoId =
@@ -18,19 +19,21 @@ type alias TodoId =
 
 type alias Todo =
     { text : String
+    , dueAt : Maybe Time
     , rev : String
     , id : TodoId
     }
 
 
 createWithTextAndId text id =
-    Todo text "" id
+    Todo text Nothing "" id
 
 
 encode : Todo -> E.Value
 encode todo =
     E.object
         [ "text" => E.string (getText todo)
+        , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "_rev" => E.string (getRev todo)
         , "_id" => E.string (getId todo)
         ]
@@ -40,6 +43,7 @@ decoder : Decoder Todo
 decoder =
     D.succeed Todo
         |> D.required "text" D.string
+        |> D.optional "dueAt" (D.maybe D.float) Nothing
         |> D.required "_rev" D.string
         |> D.required "_id" D.string
 
@@ -72,6 +76,10 @@ todoGenerator text =
 
 getText =
     (.text)
+
+
+getDueAt =
+    (.dueAt)
 
 
 getRev =

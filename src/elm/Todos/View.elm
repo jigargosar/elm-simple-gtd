@@ -10,7 +10,7 @@ import Todos.Todo as Todo exposing (TodoId)
 
 type alias ViewConfig msg =
     { onAddTodoClicked : msg
-    , onDeleteClicked : TodoId -> msg
+    , onDeleteTodoClicked : TodoId -> msg
     , onEdit : TodoId -> msg
     , onNewTodoTextChanged : String -> msg
     , onNewTodoBlur : msg
@@ -57,18 +57,23 @@ todoListView editMode viewConfig todosModel =
     ul []
         (todosModel
             |> Todos.map
-                (todoView viewConfig.onDeleteClicked viewConfig.onEdit editMode viewConfig)
+                (todoView viewConfig.onDeleteTodoClicked viewConfig.onEdit editMode viewConfig)
         )
 
 
-todoView onDeleteClicked onEdit editMode viewConfig todo =
-    todoListItemView onDeleteClicked onEdit todo
+todoView onDeleteTodoClicked onEdit editMode viewConfig todo =
+    case editMode of
+        EditTodoMode todoId ->
+            todoListEditView viewConfig todo
+
+        _ ->
+            todoListItemView onDeleteTodoClicked onEdit todo
 
 
-todoListItemView onDeleteClicked onEdit todo =
+todoListItemView onDeleteTodoClicked onEdit todo =
     let
         deleteOnClick =
-            onClick (onDeleteClicked (Todo.getId todo))
+            onClick (onDeleteTodoClicked (Todo.getId todo))
 
         editOnClick =
             onClick (onEdit (Todo.getId todo))
@@ -77,3 +82,14 @@ todoListItemView onDeleteClicked onEdit todo =
             [ button [ deleteOnClick ] [ text "x" ]
             , div [ editOnClick ] [ Todo.getText todo |> text ]
             ]
+
+
+todoListEditView viewConfig todo =
+    input
+        [ onInput viewConfig.onNewTodoTextChanged
+        , value (Todo.getText todo)
+        , onBlur viewConfig.onNewTodoBlur
+        , autofocus True
+        , onEnter viewConfig.onNewTodoEnterPressed
+        ]
+        []

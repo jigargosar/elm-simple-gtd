@@ -17,7 +17,9 @@ type alias TodoId =
 
 
 type alias Todo =
-    { text : String, id : TodoId }
+    { text : String
+    , id : TodoId
+    }
 
 
 encode : Todo -> E.Value

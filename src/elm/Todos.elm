@@ -55,11 +55,14 @@ initWithTodos todos seed =
 mapAll mapper (TodosModel todos) =
     List.map mapper todos.todoList
 
+
 filter filter (TodosModel todos) =
     List.filter filter todos.todoList
 
+
 reject filter (TodosModel todos) =
-    List.filter filter todos.todoList
+    reject filter todos.todoList
+
 
 setSeed seed todos =
     { todos | seed = seed }

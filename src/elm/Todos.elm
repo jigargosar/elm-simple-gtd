@@ -67,16 +67,11 @@ addNewTodo text (TodosModel todos) =
         todos |> append todo |> setSeed seed |> TodosModel
 
 
-updateTodo updatedTodo (TodosModel todos) =
+replaceTodoIfIdMatches todo (TodosModel todos) =
     let
         todoList =
             todos.todoList
-                .|> (\todo ->
-                        if Todo.equalById todo updatedTodo then
-                            updatedTodo
-                        else
-                            todo
-                    )
+                |> List.replaceIf (Todo.equalById todo) todo
     in
         todos |> setTodoList todoList |> TodosModel
 

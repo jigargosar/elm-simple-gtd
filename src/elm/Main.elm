@@ -6,6 +6,7 @@ import Main.View exposing (elmAppView)
 import Navigation
 import Return
 import Time exposing (Time)
+import PouchDB
 
 
 main : Program Flags Model Msg

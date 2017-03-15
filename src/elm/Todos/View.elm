@@ -100,7 +100,7 @@ todoListItemView viewConfig todo =
             onClick (viewConfig.onDeleteTodoClicked (Todo.getId todo))
 
         editOnClick =
-            onClick (viewConfig.onEditTodoClicked (Todo.getId todo))
+            onClick (viewConfig.onEditTodoClicked todo)
     in
         div []
             [ button [ deleteOnClick ] [ text "x" ]

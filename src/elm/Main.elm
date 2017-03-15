@@ -51,14 +51,13 @@ update msg =
                 activateEditTodoMode todo
 
             OnEditTodoTextChanged text ->
-                activateEditTodoMode text
+                updateEditTodoText text
 
---            OnEditTodoBlur ->
---                addNewTodoAndDeactivateAddNewTodoMode
---
---            OnEditTodoEnterPressed ->
---                addNewTodoAndContinueAdding
-
+            --            OnEditTodoBlur ->
+            --                addNewTodoAndDeactivateAddNewTodoMode
+            --
+            --            OnEditTodoEnterPressed ->
+            --                addNewTodoAndContinueAdding
             _ ->
                 let
                     _ =

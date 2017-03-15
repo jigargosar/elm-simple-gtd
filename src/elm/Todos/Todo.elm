@@ -20,6 +20,9 @@ todoGenerator text =
 getText =
     (.text)
 
+setText text todo=
+    {todo| text=text}
+
 
 getId =
     (.id)

@@ -47,8 +47,17 @@ update msg =
             OnDeleteTodoClicked todoId ->
                 deleteTodo todoId
 
-            OnEditTodoClicked todoId ->
-                activateEditTodoMode todoId
+            OnEditTodoClicked todo ->
+                activateEditTodoMode todo
+
+            OnEditTodoTextChanged text ->
+                activateEditTodoMode text
+
+--            OnEditTodoBlur ->
+--                addNewTodoAndDeactivateAddNewTodoMode
+--
+--            OnEditTodoEnterPressed ->
+--                addNewTodoAndContinueAdding
 
             _ ->
                 let

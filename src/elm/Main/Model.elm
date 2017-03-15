@@ -5,7 +5,7 @@ import Return exposing (Return)
 import Todos exposing (EditMode(..), TodosModel)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todos.Todo exposing (TodoId)
+import Todos.Todo as Todo exposing (Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
@@ -52,9 +52,25 @@ activateAddNewTodoMode text =
     setEditModeTo (EditNewTodoMode text)
 
 
-activateEditTodoMode : TodoId -> ReturnMapper
-activateEditTodoMode todoId =
-    setEditModeTo (EditTodoMode todoId)
+activateEditTodoMode : Todo -> ReturnMapper
+activateEditTodoMode todo =
+    setEditModeTo (EditTodoMode todo)
+
+
+updateEditTodoText : String -> ReturnMapper
+updateEditTodoText text =
+    Return.map (\m -> ( getEditMode m, Return.singleton m ))
+        >> Return.andThen (uncurry (updateEditTodoTextHelp text))
+
+
+updateEditTodoTextHelp : String -> EditMode -> ReturnMapper
+updateEditTodoTextHelp text editMode =
+    case editMode of
+        EditTodoMode todo ->
+            setEditModeTo (EditTodoMode (Todo.setText text todo))
+
+        _ ->
+            identity
 
 
 setTodosModel : TodosModel -> ReturnMapper

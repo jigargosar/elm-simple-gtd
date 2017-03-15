@@ -54,7 +54,7 @@ map mapper (TodosModel todos) =
 
 type EditMode
     = EditNewTodoMode String
-    | EditTodoMode TodoId
+    | EditTodoMode Todo
     | NotEditing
 
 

@@ -22,6 +22,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
 import Dict.Extra as Dict
+import FunctionalHelpers exposing (..)
 
 
 type ProjectType
@@ -87,10 +88,14 @@ todoModelGenerator =
 
 
 deleteTodo todoId (TodosModel todos) =
-    todos.todoList
-        |> List.filter (\todo -> todoId /= (Todo.getId todo))
-        |> (setTodoList # todos)
-        |> TodosModel
+    let
+        todoList =
+            todos.todoList
+                |> List.updateIf (Todo.hasId todoId) (Todo.markDeleted)
+    in
+        ( setTodoList todoList todos |> TodosModel
+        , List.find (Todo.hasId todoId) todoList
+        )
 
 
 upsertTodoList : List Todo -> TodosModel -> TodosModel

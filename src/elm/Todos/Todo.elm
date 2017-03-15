@@ -20,13 +20,14 @@ type alias TodoId =
 type alias Todo =
     { text : String
     , dueAt : Maybe Time
+    , deleted: Bool
     , rev : String
     , id : TodoId
     }
 
 
 createWithTextAndId text id =
-    Todo text Nothing "" id
+    Todo text Nothing False "" id
 
 
 encode : Todo -> E.Value
@@ -34,6 +35,7 @@ encode todo =
     E.object
         [ "text" => E.string (getText todo)
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
+        , "deleted" => E.bool (isDeleted todo)
         , "_rev" => E.string (getRev todo)
         , "_id" => E.string (getId todo)
         ]
@@ -44,6 +46,7 @@ decoder =
     D.succeed Todo
         |> D.required "text" D.string
         |> D.optional "dueAt" (D.maybe D.float) Nothing
+        |> D.optional "deleted" D.bool False
         |> D.required "_rev" D.string
         |> D.required "_id" D.string
 
@@ -84,7 +87,7 @@ getDueAt =
 
 getRev =
     (.rev)
-
+isDeleted= (.deleted)
 
 setText text todo =
     { todo | text = text }
@@ -93,6 +96,8 @@ setText text todo =
 getId =
     (.id)
 
+markDeleted todo =
+    {todo| deleted = True}
 
 equalById todo1 todo2 =
     getId todo1 == getId todo2
@@ -101,6 +106,7 @@ equalById todo1 todo2 =
 isTextEmpty todo =
     getText todo |> String.trim |> String.isEmpty
 
+hasId todoId = getId >> equals todoId
 
 fromListById =
     Dict.fromListBy getId

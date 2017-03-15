@@ -151,8 +151,12 @@ setTodosModelFromTuple =
 
 
 deleteTodo todoId =
-    Return.map (\m -> ( Todos.deleteTodo todoId m.todosModel, Return.singleton m ))
-        >> Return.andThen (uncurry setTodosModel)
+    Return.andThen
+        (\m ->
+            Todos.deleteTodo todoId m.todosModel
+                |> Tuple2.mapEach ((,) # m) persistTodoCmd
+        )
+        >> setTodosModelFromTuple
 
 
 persistTodoCmd todo =

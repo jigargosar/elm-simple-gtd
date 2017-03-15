@@ -11,7 +11,7 @@ module Todos
         , deleteTodo
         , replaceTodoIfIdMatches
           -- for views
-        , map
+        , mapAll
         )
 
 import Dict
@@ -52,7 +52,7 @@ initWithTodos todos seed =
     TodosModel (Todos todos seed)
 
 
-map mapper (TodosModel todos) =
+mapAll mapper (TodosModel todos) =
     List.map mapper todos.todoList
 
 

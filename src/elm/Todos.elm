@@ -68,6 +68,14 @@ addNewTodo text (TodosModel todos) =
         todos |> append todo |> setSeed seed |> TodosModel
 
 
+addNewTodoReturnTuple text (TodosModel todos) =
+    let
+        ( todo, seed ) =
+            generateTodo text todos.seed
+    in
+        ( todo, todos |> append todo |> setSeed seed |> TodosModel )
+
+
 replaceTodoIfIdMatches todo (TodosModel todos) =
     let
         todoList =

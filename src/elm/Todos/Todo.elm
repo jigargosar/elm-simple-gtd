@@ -16,6 +16,7 @@ type alias Todo =
     { text : String, id : TodoId }
 
 
+encode : Todo -> E.Value
 encode todo =
     E.object
         [ "_id" => E.string (getId todo)

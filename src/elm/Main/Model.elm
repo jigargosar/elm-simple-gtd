@@ -1,6 +1,7 @@
 module Main.Model exposing (..)
 
 import Main.Msg exposing (Msg)
+import PouchDB
 import Return exposing (Return)
 import Todos exposing (EditMode(..), TodosModel)
 import Random.Pcg as Random exposing (Seed)
@@ -133,7 +134,7 @@ createAndAddNewTodo editMode =
                 Return.andThen
                     (\m ->
                         Todos.addNewTodo text m.todosModel
-                            |> Tuple2.mapEach ((,) # m) (\addedTodo -> Cmd.none)
+                            |> Tuple2.mapEach ((,) # m) persistTodoCmd
                     )
                     >> setTodosModelFromTuple
 
@@ -151,4 +152,4 @@ deleteTodo todoId =
 
 
 persistTodoCmd todo =
-    Todo.encode todo
+    PouchDB.pouchDBBulkDocsHelp "todo-db" [ Todo.encode todo ]

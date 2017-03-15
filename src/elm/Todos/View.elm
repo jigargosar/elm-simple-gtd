@@ -21,12 +21,12 @@ type alias ViewConfig msg =
 allTodosView : ViewConfig msg -> EditMode -> TodosModel -> Html msg
 allTodosView viewConfig editMode todosModel =
     div []
-        [ todoListView viewConfig todosModel
-        , addTodoView viewConfig editMode
+        [ todoListView editMode viewConfig todosModel
+        , addTodoView editMode viewConfig
         ]
 
 
-addTodoView viewConfig editMode =
+addTodoView editMode viewConfig =
     case editMode of
         EditNewTodoMode text ->
             addNewTodoView viewConfig text
@@ -53,11 +53,19 @@ addNewTodoView viewConfig text =
         []
 
 
-todoListView viewConfig todosModel =
-    ul [] (Todos.map (todoView viewConfig.onDeleteClicked viewConfig.onEdit) todosModel)
+todoListView editMode viewConfig todosModel =
+    ul []
+        (todosModel
+            |> Todos.map
+                (todoView viewConfig.onDeleteClicked viewConfig.onEdit editMode viewConfig)
+        )
 
 
-todoView onDeleteClicked onEdit todo =
+todoView onDeleteClicked onEdit editMode viewConfig todo =
+    todoListItemView onDeleteClicked onEdit todo
+
+
+todoListItemView onDeleteClicked onEdit todo =
     let
         deleteOnClick =
             onClick (onDeleteClicked (Todo.getId todo))

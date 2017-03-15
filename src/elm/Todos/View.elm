@@ -10,7 +10,7 @@ import Todos.Todo as Todo exposing (TodoId)
 
 type alias ViewConfig msg =
     { onAddTodoClicked : msg
-    , onDelete : TodoId -> msg
+    , onDeleteClicked : TodoId -> msg
     , onEdit : TodoId -> msg
     , onNewTodoTextChanged : String -> msg
     , onNewTodoBlur : msg
@@ -54,13 +54,13 @@ addNewTodoView viewConfig text =
 
 
 todoListView viewConfig todosModel =
-    ul [] (Todos.map (todoView viewConfig.onDelete viewConfig.onEdit) todosModel)
+    ul [] (Todos.map (todoView viewConfig.onDeleteClicked viewConfig.onEdit) todosModel)
 
 
-todoView onDelete onEdit todo =
+todoView onDeleteClicked onEdit todo =
     let
         deleteOnClick =
-            onClick (onDelete (Todo.getId todo))
+            onClick (onDeleteClicked (Todo.getId todo))
 
         editOnClick =
             onClick (onEdit (Todo.getId todo))

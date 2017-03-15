@@ -44,8 +44,16 @@ update msg =
             OnNewTodoEnterPressed ->
                 addNewTodoAndContinueAdding
 
-            OnDeleteTodo todoId ->
+            OnDeleteTodoClicked todoId ->
                 deleteTodo todoId
 
-            _ ->
+            OnEditTodo todoId ->
+--                activateEditTodoMode todoId
                 identity
+
+            _ ->
+                let
+                    _ =
+                        Debug.log "WARN: msg ignored" (msg)
+                in
+                    identity

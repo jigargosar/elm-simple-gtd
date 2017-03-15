@@ -8,7 +8,7 @@ import Todos.Todo exposing (TodoId)
 type Msg
     = LocationChanged Location
     | OnAddTodoClicked
-    | OnDeleteTodo TodoId
+    | OnDeleteTodoClicked TodoId
     | OnEditTodo TodoId
     | OnNewTodoTextChanged String
     | OnNewTodoBlur

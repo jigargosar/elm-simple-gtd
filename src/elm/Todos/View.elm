@@ -18,10 +18,10 @@ type alias ViewConfig msg =
     }
 
 
-listView : ViewConfig msg -> EditMode -> TodosModel -> Html msg
-listView viewConfig editMode todosModel =
+allTodosView : ViewConfig msg -> EditMode -> TodosModel -> Html msg
+allTodosView viewConfig editMode todosModel =
     div []
-        [ innerListView viewConfig todosModel
+        [ todoListView viewConfig todosModel
         , addTodoView viewConfig editMode
         ]
 
@@ -53,7 +53,7 @@ addNewTodoView viewConfig text =
         []
 
 
-innerListView viewConfig todosModel =
+todoListView viewConfig todosModel =
     ul [] (Todos.map (todoView viewConfig.onDelete) todosModel)
 
 

@@ -50,10 +50,10 @@ module.exports = async(dbName, indices = []) => {
 
     await Promise.all(_.map(createIndex, indices))
 
-    //noinspection JSUnresolvedVariable
-    if (WEB_PACK_DEV_SERVER === true) {
-        startRemoteSync()
-    }
+    // //noinspection JSUnresolvedVariable
+    // if (WEB_PACK_DEV_SERVER === true) {
+    //     startRemoteSync()
+    // }
 
     return {
         find,

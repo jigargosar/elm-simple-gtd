@@ -6,7 +6,8 @@
     "source-directories": [
         "src/elm",
         "lib/elm-decode-extra",
-        "lib/elm-random-id-generator"
+        "lib/elm-random-id-generator",
+        "lib/elm-functional-helpers"
     ],
     "exposed-modules": [],
     "dependencies": {

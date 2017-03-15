@@ -7,9 +7,6 @@ import Json.Encode as E
 port onPouchDBBulkDocksResponse : (D.Value -> msg) -> Sub msg
 
 
-port onPouchDBJSVal : (D.Value -> msg) -> Sub msg
-
-
 
 -- COMMANDS
 

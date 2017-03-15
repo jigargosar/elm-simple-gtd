@@ -158,6 +158,6 @@ persistTodoCmd todo =
 setEncodedTodoList encodedList =
     let
         _ =
-            1
+            Todo.decodeList encodedList
     in
         identity

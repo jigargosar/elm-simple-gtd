@@ -1,11 +1,14 @@
 module Todos.Todo exposing (..)
 
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
 import Json.Encode as E
 import RandomIdGenerator
 import Random.Pcg as Random exposing (Seed)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import FunctionalHelpers exposing (..)
+import Result.Extra as Result
 
 
 type alias TodoId =
@@ -22,6 +25,35 @@ encode todo =
         [ "_id" => E.string (getId todo)
         , "text" => E.string (getText todo)
         ]
+
+
+decoder : Decoder Todo
+decoder =
+    D.succeed Todo
+        |> D.required "_id" D.string
+        |> D.required "text" D.string
+
+
+decodeValue =
+    D.decodeValue decoder
+
+
+decodeList : List D.Value -> List Todo
+decodeList =
+    List.map decodeValue
+        >> List.filterMap
+            (\result ->
+                case result of
+                    Ok todo ->
+                        Just todo
+
+                    Err x ->
+                        let
+                            _ =
+                                Debug.log "Error while decoding todo"
+                        in
+                            Nothing
+            )
 
 
 create =

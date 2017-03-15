@@ -1,6 +1,7 @@
 module Main.Model exposing (..)
 
 import Main.Msg exposing (Msg)
+import Maybe.Extra as Maybe
 import PouchDB
 import Return exposing (Return)
 import Todos exposing (EditMode(..), TodosModel)
@@ -154,9 +155,13 @@ deleteTodo todoId =
     Return.andThen
         (\m ->
             Todos.deleteTodo todoId m.todosModel
-                |> Tuple2.mapEach ((,) # m) persistTodoCmd
+                |> Tuple2.mapEach ((,) # m) persistTodoCmdMaybe
         )
         >> setTodosModelFromTuple
+
+
+persistTodoCmdMaybe =
+    Maybe.unwrap Cmd.none persistTodoCmd
 
 
 persistTodoCmd todo =

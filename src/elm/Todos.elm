@@ -1,4 +1,18 @@
-module Todos exposing (..)
+module Todos
+    exposing
+        ( --types
+          TodosModel
+        , EditMode(..)
+          -- init
+        , todoModelGenerator
+        , upsertTodoList
+          -- crud
+        , addNewTodo
+        , deleteTodo
+        , replaceTodoIfIdMatches
+          -- for views
+        , map
+        )
 
 import Dict
 import Random.Pcg as Random exposing (Seed)
@@ -29,25 +43,11 @@ type TodosModel
     = TodosModel Todos
 
 
-todoModelGenerator : Random.Generator TodosModel
-todoModelGenerator =
-    Random.map initWithSeed Random.independentSeed
-
-
 initWithSeed =
-    generateTestTodo >> uncurry initWithTodo
+    initWithTodos []
 
 
-generateTestTodo =
-    Random.step (todoListGenerator)
-
-
-todoListGenerator : Random.Generator (List Todo)
-todoListGenerator =
-    Random.list 10 (Todo.todoGenerator "foo")
-
-
-initWithTodo todos seed =
+initWithTodos todos seed =
     TodosModel (Todos todos seed)
 
 
@@ -79,6 +79,11 @@ type EditMode
     = EditNewTodoMode String
     | EditTodoMode Todo
     | NotEditing
+
+
+todoModelGenerator : Random.Generator TodosModel
+todoModelGenerator =
+    Random.map initWithSeed Random.independentSeed
 
 
 deleteTodo todoId (TodosModel todos) =

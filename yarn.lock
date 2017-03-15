@@ -1293,13 +1293,13 @@ date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
 
-debug@2.6.0, debug@^2.1.1, debug@^2.2.0:
+debug@2.6.0, debug@^2.1.0, debug@^2.1.1, debug@^2.2.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
   dependencies:
     ms "0.7.2"
 
-debug@2.6.1, debug@^2.1.0:
+debug@2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
@@ -3352,7 +3352,7 @@ postcss@5.2.16, postcss@^5.0.0, postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.1
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
-pouchdb-browser@^6.1.2:
+pouchdb-browser@6.1.2:
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/pouchdb-browser/-/pouchdb-browser-6.1.2.tgz#9770da91f293aa6f92d252f2f91bd62519ce6f70"
   dependencies:
@@ -3373,7 +3373,7 @@ pouchdb-extend@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/pouchdb-extend/-/pouchdb-extend-0.1.2.tgz#d1ce511bf704ed2e29f7bf428a416acfffa124b8"
 
-pouchdb-find@^0.10.5:
+pouchdb-find@0.10.5:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/pouchdb-find/-/pouchdb-find-0.10.5.tgz#34f285b8a56496a98f9cef2e1a1f6a0aac4eae8b"
   dependencies:
@@ -3405,7 +3405,7 @@ pouchdb-promise@^6.1.2:
   dependencies:
     lie "3.1.0"
 
-pouchdb-upsert@^2.1.0:
+pouchdb-upsert@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/pouchdb-upsert/-/pouchdb-upsert-2.1.0.tgz#60ea2ecc7b2484c027c442df3877811f2ad0e3b7"
   dependencies:

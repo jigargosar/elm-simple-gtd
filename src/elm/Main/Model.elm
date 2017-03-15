@@ -148,3 +148,7 @@ setTodosModelFromTuple =
 deleteTodo todoId =
     Return.map (\m -> ( Todos.deleteTodo todoId m.todosModel, Return.singleton m ))
         >> Return.andThen (uncurry setTodosModel)
+
+
+persistTodoCmd todo =
+    Todo.encode todo

@@ -130,10 +130,14 @@ createAndAddNewTodo editMode =
                 identity
             else
                 Return.map (\m -> ( Todos.addNewTodo text m.todosModel, m ))
-                    >> Return.map (\( todosModel, m ) -> { m | todosModel = todosModel })
+                    >> setTodosModel2
 
         _ ->
             identity
+
+
+setTodosModel2 =
+    Return.map (\( todosModel, m ) -> { m | todosModel = todosModel })
 
 
 deleteTodo todoId =

@@ -54,12 +54,18 @@ addNewTodoView viewConfig text =
 
 
 todoListView viewConfig todosModel =
-    ul [] (Todos.map (todoView viewConfig.onDelete) todosModel)
+    ul [] (Todos.map (todoView viewConfig.onDelete viewConfig.onEdit) todosModel)
 
 
-todoView onDelete todo =
-    div []
-        [ button [ onClick (onDelete (Todo.getId todo)) ] [ text "x" ]
-        , text " | "
-        , Todo.getText todo |> text
-        ]
+todoView onDelete onEdit todo =
+    let
+        deleteOnClick =
+            onClick (onDelete (Todo.getId todo))
+
+        editOnClick =
+            onClick (onEdit (Todo.getId todo))
+    in
+        div []
+            [ button [ deleteOnClick ] [ text "x" ]
+            , div [ editOnClick ] [ Todo.getText todo |> text ]
+            ]

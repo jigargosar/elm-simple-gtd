@@ -8,9 +8,12 @@ import PouchDB from "./local-pouch-db"
 
 
 async function boot() {
-    const todoDB = await PouchDB("todo-db")
 
-    const allTodos = await todoDB.allDocs()
+    const dbMap = {
+        "todo-db":await PouchDB("todo-db")
+    }
+
+    const allTodos = await dbMap["todo-db"].allDocs()
 
     console.log(allTodos)
     const Elm = require("elm/Main.elm")
@@ -20,7 +23,7 @@ async function boot() {
     app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {
         const bulkResult = await dbMap[dbName].bulkDocs(docs)
         // console.log("bulkResult:", dbName, bulkResult, docs)
-        // app.ports.onPouchDBBulkDocksResponse.send([dbName, bulkResult, docs])
+        app.ports["onPouchDBBulkDocksResponse"].send([dbName, bulkResult, docs])
     })
 
 }

@@ -13,3 +13,6 @@ type Msg
     | OnNewTodoTextChanged String
     | OnNewTodoBlur
     | OnNewTodoEnterPressed
+    | OnEditTodoTextChanged String
+    | OnEditTodoBlur
+    | OnEditTodoEnterPressed

@@ -55,58 +55,6 @@ map mapper (TodosModel todos) =
     List.map mapper todos.todoList
 
 
-type EditMode
-    = EditNewTodoMode String
-    | EditTodoMode Todo
-    | NotEditing
-
-
-
---addNewTodo text (TodosModel todos) =
---    let
---        ( todo, seed ) =
---            generateTodo text todos.seed
---    in
---        --        (todos |> append todo |> setSeed seed |> TodosModel, todo)
---        todos |> append todo |> setSeed seed |> TodosModel
-
-
-addNewTodo text (TodosModel todos) =
-    let
-        ( todo, seed ) =
-            generateTodo text todos.seed
-    in
-        ( todos |> append todo |> setSeed seed |> TodosModel, todo )
-
-
-replaceTodoIfIdMatches todo (TodosModel todos) =
-    let
-        todoList =
-            todos.todoList
-                |> List.replaceIf (Todo.equalById todo) todo
-    in
-        todos |> setTodoList todoList |> TodosModel
-
-
-upsertTodoList : List Todo -> TodosModel -> TodosModel
-upsertTodoList upsertList (TodosModel todos) =
-    let
-        finalTodoList : List Todo
-        finalTodoList =
-            Todo.fromListById todos.todoList
-                |> Dict.union (Todo.fromListById upsertList)
-                |> Dict.values
-    in
-        todos |> setTodoList finalTodoList |> TodosModel
-
-
-deleteTodo todoId (TodosModel todos) =
-    todos.todoList
-        |> List.filter (\todo -> todoId /= (Todo.getId todo))
-        |> (setTodoList # todos)
-        |> TodosModel
-
-
 setSeed seed todos =
     { todos | seed = seed }
 
@@ -121,3 +69,49 @@ setTodoList todoList todos =
 
 generateTodo text =
     Random.step (Todo.todoGenerator text)
+
+
+
+-- external
+
+
+type EditMode
+    = EditNewTodoMode String
+    | EditTodoMode Todo
+    | NotEditing
+
+
+deleteTodo todoId (TodosModel todos) =
+    todos.todoList
+        |> List.filter (\todo -> todoId /= (Todo.getId todo))
+        |> (setTodoList # todos)
+        |> TodosModel
+
+
+upsertTodoList : List Todo -> TodosModel -> TodosModel
+upsertTodoList upsertList (TodosModel todos) =
+    let
+        finalTodoList : List Todo
+        finalTodoList =
+            Todo.fromListById todos.todoList
+                |> Dict.union (Todo.fromListById upsertList)
+                |> Dict.values
+    in
+        todos |> setTodoList finalTodoList |> TodosModel
+
+
+replaceTodoIfIdMatches todo (TodosModel todos) =
+    let
+        todoList =
+            todos.todoList
+                |> List.replaceIf (Todo.equalById todo) todo
+    in
+        todos |> setTodoList todoList |> TodosModel
+
+
+addNewTodo text (TodosModel todos) =
+    let
+        ( todo, seed ) =
+            generateTodo text todos.seed
+    in
+        ( todos |> append todo |> setSeed seed |> TodosModel, todo )

@@ -78,15 +78,19 @@ todoListView editMode viewConfig todosModel =
 
 
 todoView onDeleteTodoClicked onEditTodoClicked editMode viewConfig todo =
-    case editMode of
-        EditTodoMode todoId ->
-            if todoId == (Todo.getId todo) then
-                todoListEditView viewConfig todo
-            else
-                todoListItemView viewConfig todo
+    let
+        inner =
+            case editMode of
+                EditTodoMode todoId ->
+                    if todoId == (Todo.getId todo) then
+                        todoListEditView viewConfig todo
+                    else
+                        todoListItemView viewConfig todo
 
-        _ ->
-            todoListItemView viewConfig todo
+                _ ->
+                    todoListItemView viewConfig todo
+    in
+        div [] [ inner, hr [] [] ]
 
 
 todoListItemView viewConfig todo =
@@ -105,10 +109,10 @@ todoListItemView viewConfig todo =
 
 todoListEditView viewConfig todo =
     input
-        [ onInput viewConfig.onNewTodoTextChanged
+        [ onInput viewConfig.onEditTodoTextChanged
         , value (Todo.getText todo)
-        , onBlur viewConfig.onNewTodoBlur
+        , onBlur viewConfig.onEditTodoBlur
         , autofocus True
-        , onEnter viewConfig.onNewTodoEnterPressed
+        , onEnter viewConfig.onEditTodoEnterPressed
         ]
         []

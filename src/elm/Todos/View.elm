@@ -64,22 +64,26 @@ todoListView editMode viewConfig todosModel =
         )
 
 
-todoView onDeleteTodoClicked onEditTodoClicked editMode viewConfig todo =
-    case editMode of
-        EditTodoMode todoId ->
-            todoListEditView viewConfig todo
 
-        _ ->
-            todoListItemView onDeleteTodoClicked onEditTodoClicked todo
+--todoView onDeleteTodoClicked onEditTodoClicked editMode viewConfig todo =
+--    case editMode of
+--        EditTodoMode todoId ->
+--            if todoId == (Todo.getId todo) then
+--                todoListEditView
+--             else
+--                todoListItemView
+--
+--        _ ->
+--            todoListItemView
 
 
-todoListItemView onDeleteTodoClicked onEditTodoClicked todo =
+todoListItemView viewConfig todo =
     let
         deleteOnClick =
-            onClick (onDeleteTodoClicked (Todo.getId todo))
+            onClick (viewConfig.onDeleteTodoClicked (Todo.getId todo))
 
         editOnClick =
-            onClick (onEditTodoClicked (Todo.getId todo))
+            onClick (viewConfig.onEditTodoClicked (Todo.getId todo))
     in
         div []
             [ button [ deleteOnClick ] [ text "x" ]

@@ -61,7 +61,7 @@ filter filter (TodosModel todos) =
 
 
 reject filter (TodosModel todos) =
-    reject filter todos.todoList
+    FunctionalHelpers.reject filter todos.todoList
 
 
 setSeed seed todos =

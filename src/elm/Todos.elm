@@ -77,7 +77,7 @@ updateTodo updatedTodo (TodosModel todos) =
                             todo
                     )
     in
-        TodosModel todos
+        todos |> setTodoList todoList |> TodosModel
 
 
 deleteTodo todoId (TodosModel todos) =

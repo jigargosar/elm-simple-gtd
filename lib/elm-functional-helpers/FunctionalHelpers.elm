@@ -28,6 +28,10 @@ unless pred =
     when (pred >> not)
 
 
+reject pred =
+    List.filter (pred >> not)
+
+
 gt =
     (>)
 

@@ -38,13 +38,17 @@ initWithFlagsAndLocation { now, encodedTodoList } location =
     let
         _ =
             Todo.decodeTodoList encodedTodoList
+
+        todoModelSeedTuple =
+            round >> Random.initialSeed >> Random.step Todos.todoModelGenerator
     in
-        initWithTime now |> Return.singleton |> setEncodedTodoList encodedTodoList
-
-
-initWithTime : Time -> Model
-initWithTime =
-    round >> Random.initialSeed >> initWithSeed
+        now
+            |> (todoModelSeedTuple
+                    >> Tuple.first
+                    >> (Model # NotEditing)
+                    >> Return.singleton
+                    >> setEncodedTodoList encodedTodoList
+               )
 
 
 initWithSeed : Seed -> Model

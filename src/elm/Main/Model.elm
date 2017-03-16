@@ -20,7 +20,7 @@ type alias EncodedTodoList =
 
 
 type alias Flags =
-    { now : Time, allTodos : EncodedTodoList }
+    { now : Time, encodedTodoList : EncodedTodoList }
 
 
 type alias Model =
@@ -34,8 +34,12 @@ type alias ReturnMapper =
 
 
 initWithFlagsAndLocation : Flags -> Location -> Return Msg Model
-initWithFlagsAndLocation { now, allTodos } location =
-    initWithTime now |> Return.singleton |> setEncodedTodoList allTodos
+initWithFlagsAndLocation { now, encodedTodoList } location =
+    let
+        _ =
+            Todo.decodeList encodedTodoList
+    in
+        initWithTime now |> Return.singleton |> setEncodedTodoList encodedTodoList
 
 
 initWithTime : Time -> Model

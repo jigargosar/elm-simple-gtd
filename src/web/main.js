@@ -17,7 +17,7 @@ async function boot() {
 
     console.log(allTodos)
     const Elm = require("elm/Main.elm")
-    const app = Elm["Main"].embed(document.getElementById("root"), {now: Date.now(), allTodos})
+    const app = Elm["Main"].embed(document.getElementById("root"), {now: Date.now(), encodedTodoList: allTodos})
 
 
     app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {

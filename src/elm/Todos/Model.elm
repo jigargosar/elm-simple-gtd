@@ -67,11 +67,10 @@ addNewTodo text todos =
 
 replaceTodoIfIdMatches todo model =
     let
-        todoList =
-            model.todoList
-                |> Todo.replaceIfEqualById todo
+        newTodoList =
+            getTodoList >> Todo.replaceIfEqualById todo
     in
-        ( model |> setTodoList todoList, todo )
+        ( setTodoList (newTodoList model) model, todo )
 
 
 upsertTodoList upsertList todos =

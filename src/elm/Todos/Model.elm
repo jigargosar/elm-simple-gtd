@@ -78,15 +78,16 @@ replaceTodoIfIdMatches todo =
         updateTodoList newTodoList >> (,) # todo
 
 
-upsertTodoList upsertList todos =
+upsertTodoList upsertList model =
     let
-        finalTodoList : List Todo
+        finalTodoList : Model -> List Todo
         finalTodoList =
-            Todo.fromListById todos.todoList
-                |> Dict.union (Todo.fromListById upsertList)
-                |> Dict.values
+            getTodoList
+                >> Todo.fromListById
+                >> Dict.union (Todo.fromListById upsertList)
+                >> Dict.values
     in
-        todos |> setTodoList finalTodoList
+        setTodoList (finalTodoList model) model
 
 
 deleteTodo todoId todos =

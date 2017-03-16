@@ -184,7 +184,7 @@ persistTodoCmdMaybe =
 
 
 persistTodoCmd todo =
-    PouchDB.pouchDBBulkDocsHelp "todo-db" [ Todo.encode todo ]
+    PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)
 
 
 setEncodedTodoList encodedList =

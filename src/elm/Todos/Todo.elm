@@ -32,13 +32,12 @@ createWithTextAndId text id =
     Todo text Nothing False "" id
 
 
-type alias EncodedTodoList =
-    List E.Value
-
-
 type alias EncodedTodo =
     E.Value
 
+
+type alias EncodedTodoList =
+    List EncodedTodo
 
 encode : Todo -> EncodedTodo
 encode todo =
@@ -49,6 +48,10 @@ encode todo =
         , "_rev" => E.string (getRev todo)
         , "_id" => E.string (getId todo)
         ]
+
+encodeSingleton : Todo -> EncodedTodoList
+encodeSingleton todo =
+    [ encode todo ]
 
 
 decoder : Decoder Todo

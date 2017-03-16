@@ -55,7 +55,8 @@ update msg =
                     )
 
             OnDeleteTodoClicked todoId ->
-                deleteTodo todoId
+                Return.andThen (deleteTodo todoId
+                    >> Tuple2.mapSecond persistTodoCmdMaybe)
 
             OnEditTodoClicked todo ->
                 activateEditTodoMode todo

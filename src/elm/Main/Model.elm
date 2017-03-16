@@ -199,13 +199,9 @@ setTodosModelFromTuple =
     Return.map (\( todosModel, m ) -> { m | todosModel = todosModel })
 
 
-deleteTodo todoId =
-    Return.andThen
-        (\m ->
-            TodoCollection.deleteTodo todoId m.todosModel
-                |> Tuple2.mapEach ((,) # m) persistTodoCmdMaybe
-        )
-        >> setTodosModelFromTuple
+deleteTodo todoId m =
+    TodoCollection.deleteTodo todoId m.todosModel
+        |> Tuple2.mapFirst (setTodosModel2 # m)
 
 
 persistTodoCmdMaybe =

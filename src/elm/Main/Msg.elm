@@ -5,6 +5,14 @@ import Navigation exposing (Location)
 import TodoCollection.Todo exposing (Todo, TodoId)
 
 
+type ProcessingModel
+    = NotProcessing
+    | StartProcessing Todo
+    | ProcessAsActionable Todo
+    | ProcessAsNotActionable Todo
+
+
+
 type Msg
     = LocationChanged Location
     | OnAddTodoClicked
@@ -19,3 +27,4 @@ type Msg
     | OnProcessButtonClicked
     | OnActionableYesClicked
     | OnActionableNoClicked
+    | OnUpdateProcessingModel ProcessingModel

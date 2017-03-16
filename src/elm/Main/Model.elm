@@ -2,6 +2,7 @@ module Main.Model exposing (..)
 
 import Json.Encode as E
 import List.Extra as List
+import Main.Msg exposing (..)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
@@ -12,13 +13,6 @@ import TodoCollection.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-
-
-type ProcessingModel
-    = NotProcessing
-    | StartProcessing Todo
-    | ProcessAsActionable Todo
-    | ProcessAsNotActionable Todo
 
 
 type alias Model =
@@ -103,6 +97,7 @@ processAsActionable bool =
                         ProcessAsActionable todo
                     else
                         ProcessAsNotActionable todo
+
                 _ ->
                     NotProcessing
         )

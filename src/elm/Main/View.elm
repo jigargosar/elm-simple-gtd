@@ -53,8 +53,8 @@ startProcessingView todo =
             [ text "Processing : " ]
         , h1 [] [ Todo.getText todo |> text ]
         , h2 [] [ text "Is it Actionable?" ]
-        , button [ onClick OnActionableYesClicked ] [ text "YES" ]
-        , button [ onClick OnActionableNoClicked ] [ text "NO" ]
+        , button [ OnUpdateProcessingModel (ProcessAsActionable todo) |> onClick  ] [ text "YES" ]
+        , button [ OnUpdateProcessingModel (ProcessAsNotActionable todo) |> onClick ] [ text "NO" ]
         ]
 
 
@@ -74,7 +74,7 @@ processAsNotActionableView todo =
         [ h3 []
             [ text "Processing : " ]
         , h1 [] [ Todo.getText todo |> text ]
-        , h2 [] [ text "Can be done under 2 mins" ]
+        , h2 [] [ text "Eliminate ?" ]
         , button [ onClick OnActionableYesClicked ] [ text "YES" ]
         , button [ onClick OnActionableNoClicked ] [ text "NO" ]
         ]

@@ -9,6 +9,8 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import FunctionalHelpers exposing (..)
 import Result.Extra as Result
+import List.Extra as List
+import Dict
 import Dict.Extra as Dict
 import Time exposing (Time)
 
@@ -20,7 +22,7 @@ type alias TodoId =
 type alias Todo =
     { text : String
     , dueAt : Maybe Time
-    , deleted: Bool
+    , deleted : Bool
     , rev : String
     , id : TodoId
     }
@@ -87,7 +89,11 @@ getDueAt =
 
 getRev =
     (.rev)
-isDeleted= (.deleted)
+
+
+isDeleted =
+    (.deleted)
+
 
 setText text todo =
     { todo | text = text }
@@ -96,8 +102,10 @@ setText text todo =
 getId =
     (.id)
 
+
 markDeleted todo =
-    {todo| deleted = True}
+    { todo | deleted = True }
+
 
 equalById todo1 todo2 =
     getId todo1 == getId todo2
@@ -106,7 +114,14 @@ equalById todo1 todo2 =
 isTextEmpty todo =
     getText todo |> String.trim |> String.isEmpty
 
-hasId todoId = getId >> equals todoId
+
+hasId todoId =
+    getId >> equals todoId
+
 
 fromListById =
     Dict.fromListBy getId
+
+
+replaceIfEqualById todo =
+    List.replaceIf (equalById todo) todo

@@ -69,7 +69,7 @@ replaceTodoIfIdMatches todo model =
     let
         todoList =
             model.todoList
-                |> List.replaceIf (Todo.equalById todo) todo
+                |> Todo.replaceIfEqualById todo
     in
         ( model |> setTodoList todoList, todo )
 

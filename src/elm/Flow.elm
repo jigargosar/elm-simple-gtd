@@ -70,6 +70,7 @@ onBack ( _, parentNodes ) =
 test : Maybe Tracker
 test =
     rootTracker
+        |> tapLog "start"
         |> onNo
         ?|> tapLog "no"
         ?+> onYes

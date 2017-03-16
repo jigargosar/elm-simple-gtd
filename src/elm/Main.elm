@@ -14,7 +14,7 @@ main : Program Flags Model Msg
 main =
     Navigation.programWithFlags LocationChanged
         --    TimeTravel.Navigation.programWithFlags LocationChanged
-        { init = Model.init
+        { init = Model.initWithFlagsAndLocation
         , view = elmAppView
         , update = update
         , subscriptions =

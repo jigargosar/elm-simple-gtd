@@ -29,8 +29,8 @@ type alias ReturnMapper =
     Return Msg Model -> Return Msg Model
 
 
-init : Flags -> Location -> Return Msg Model
-init { now, allTodos } location =
+initWithFlagsAndLocation : Flags -> Location -> Return Msg Model
+initWithFlagsAndLocation { now, allTodos } location =
     initWithTime now |> Return.singleton |> setEncodedTodoList allTodos
 
 

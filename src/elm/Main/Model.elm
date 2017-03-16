@@ -36,14 +36,13 @@ type alias ReturnMapper =
 initWithFlagsAndLocation : Flags -> Location -> Return Msg Model
 initWithFlagsAndLocation { now, encodedTodoList } location =
     let
-        todoList =
-            Todo.decodeTodoList encodedTodoList
-
         generateTodoModel =
-            Random.step (Todos.todoModelGenerator todoList)
+            Todo.decodeTodoList
+                >> Todos.todoModelGenerator
+                >> Random.step
 
         todoModelSeedTuple =
-            round >> Random.initialSeed >> generateTodoModel >> Tuple.first
+            round >> Random.initialSeed >> generateTodoModel encodedTodoList >> Tuple.first
     in
         now
             |> todoModelSeedTuple

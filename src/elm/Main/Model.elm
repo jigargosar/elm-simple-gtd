@@ -10,14 +10,10 @@ import Return exposing (Return)
 import Todos exposing (EditMode(..), TodosModel)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todos.Todo as Todo exposing (Todo, TodoId)
+import Todos.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-
-
-type alias EncodedTodoList =
-    List E.Value
 
 
 type alias Flags =

@@ -59,13 +59,8 @@ getTodosModel =
     (.todosModel)
 
 
-setEditModeTo : EditMode -> ReturnMapper
-setEditModeTo editMode =
-    Return.map (\m -> { m | editMode = editMode })
-
-
-setEditModeTo2 : EditMode -> ModelMapper
-setEditModeTo2 editMode m =
+setEditModeTo : EditMode -> ModelMapper
+setEditModeTo editMode m =
     { m | editMode = editMode }
 
 
@@ -76,19 +71,19 @@ getEditMode =
 
 activateAddNewTodoMode : String -> ModelMapper
 activateAddNewTodoMode text =
-    setEditModeTo2 (EditNewTodoMode text)
+    setEditModeTo (EditNewTodoMode text)
 
 
 activateEditTodoMode : Todo -> ModelMapper
 activateEditTodoMode todo =
-    setEditModeTo2 (EditTodoMode todo)
+    setEditModeTo (EditTodoMode todo)
 
 
 updateEditTodoText : String -> ModelMapper
 updateEditTodoText text m =
     case getEditMode m of
         EditTodoMode todo ->
-            setEditModeTo2 (EditTodoMode (Todo.setText text todo)) m
+            setEditModeTo (EditTodoMode (Todo.setText text todo)) m
 
         _ ->
             m
@@ -107,7 +102,7 @@ updateTodosModel fun model =
 addNewTodoAndDeactivateAddNewTodoMode : Model -> ( Model, Maybe Todo )
 addNewTodoAndDeactivateAddNewTodoMode =
     addNewTodo
-        >> Tuple2.mapFirst (setEditModeTo2 NotEditing)
+        >> Tuple2.mapFirst (setEditModeTo NotEditing)
 
 
 addNewTodoAndContinueAdding : Model -> ( Model, Maybe Todo )
@@ -138,7 +133,7 @@ deleteTodo todoId m =
 saveEditingTodoAndDeactivateEditTodoMode : Model -> ( Model, Maybe Todo )
 saveEditingTodoAndDeactivateEditTodoMode =
     saveEditingTodo
-        >> Tuple2.mapFirst (setEditModeTo2 NotEditing)
+        >> Tuple2.mapFirst (setEditModeTo NotEditing)
 
 
 saveEditingTodo : Model -> ( Model, Maybe Todo )

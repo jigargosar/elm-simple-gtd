@@ -1,10 +1,8 @@
 module Main.Model exposing (..)
 
 import Json.Encode as E
-import Main.Msg exposing (Msg)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
-import PouchDB
 import RandomIdGenerator as Random
 import TodoCollection exposing (EditMode(..), TodosModel)
 import Random.Pcg as Random exposing (Seed)
@@ -27,7 +25,6 @@ type alias Model =
 
 modelConstructor editMode todosModel =
     Model todosModel editMode
-
 
 
 type alias ModelMapper =

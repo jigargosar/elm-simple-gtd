@@ -4,7 +4,7 @@ module Flow exposing (..)
 type Branch
     = Leaf
         { question : String
-        , onBack : () -> Maybe Branch
+        , onBack : Maybe Branch
         }
     | YesNoBranch
         { question : String
@@ -17,21 +17,21 @@ type Branch
 isActionable =
     YesNoBranch
         { question = "Is it Actionable?"
-        , onYes = canItBeDoneUnder2Min
-        , onNo = isItWorthKeeping
+        , onYes = canItBeDoneUnder2Min (\_ -> Just isActionable)
+        , onNo = isItWorthKeeping (\_ -> Just isActionable)
         , onBack = Nothing
         }
 
 
-canItBeDoneUnder2Min =
+canItBeDoneUnder2Min back =
     Leaf
         { question = "Can it be done in less than 2 minutes ?"
-        , onBack = (\_ -> Just isActionable)
+        , onBack = back ()
         }
 
 
-isItWorthKeeping =
+isItWorthKeeping back =
     Leaf
         { question = "Is it worth keeping ?"
-        , onBack = (\_ -> Just isActionable)
+        , onBack = back ()
         }

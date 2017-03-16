@@ -32,7 +32,15 @@ createWithTextAndId text id =
     Todo text Nothing False "" id
 
 
-encode : Todo -> E.Value
+type alias EncodedTodoList =
+    List E.Value
+
+
+type alias EncodedTodo =
+    E.Value
+
+
+encode : Todo -> EncodedTodo
 encode todo =
     E.object
         [ "text" => E.string (getText todo)
@@ -45,7 +53,7 @@ encode todo =
 
 decoder : Decoder Todo
 decoder =
-    D.succeed Todo
+    D.decode Todo
         |> D.required "text" D.string
         |> D.optional "dueAt" (D.maybe D.float) Nothing
         |> D.optional "deleted" D.bool False

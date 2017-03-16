@@ -29,7 +29,5 @@ todoListViewConfig =
 
 elmAppView m =
     div []
-        [ div [] [ text "Stuff" ]
-          --        , div [] [ text ("editMode = " ++ (toString m.editMode)) ]
-        , TodoCollection.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
+        [ TodoCollection.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
         ]

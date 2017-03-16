@@ -2,4 +2,9 @@ module Project.Model exposing (..)
 
 
 type alias Project =
-    { id : String, rev : String, name : String, note : String }
+    { id : String
+    , rev : String
+    , name : String
+    , isDeleted : Bool
+    , note : String
+    }

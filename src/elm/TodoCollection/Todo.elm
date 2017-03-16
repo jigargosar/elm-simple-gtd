@@ -53,23 +53,18 @@ defaultDeleted =
     False
 
 
-type NonActionableStuffType
+type StuffType
     = Trash
     | SomeDay
     | Reference
-
-
-type ActionableStuffType
-    = MultiStepProjectPlanning
-    | CanBeDoneUnder2Minutes
-    | DelegateAndScheduleFollowup
-    | Calender
-    | Next
-
-
-type StuffType
-    = ActionableStuff ActionableStuffType
-    | NonActionableStuff NonActionableStuffType
+    | ProjectPlanningAction
+      -- MultiStep
+    | DoItNow
+      -- less than 2 mins
+    | WaitingForListAction
+      -- possible follow up frequency?
+    | CalenderAction
+    | NextAction
 
 
 type ProcessingState

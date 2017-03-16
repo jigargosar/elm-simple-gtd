@@ -49,8 +49,12 @@ appendTodo todo todos =
     todos.todoList ++ [ todo ] |> setTodoList # todos
 
 
-setTodoList todoList todos =
-    { todos | todoList = todoList }
+setTodoList todoList model =
+    { model | todoList = todoList }
+
+
+updateTodoList fun model =
+    setTodoList (fun model) model
 
 
 generateTodo text todos =
@@ -70,7 +74,7 @@ replaceTodoIfIdMatches todo model =
         newTodoList =
             getTodoList >> Todo.replaceIfEqualById todo
     in
-        ( setTodoList (newTodoList model) model, todo )
+        ( updateTodoList (newTodoList) model, todo )
 
 
 upsertTodoList upsertList todos =

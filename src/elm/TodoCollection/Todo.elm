@@ -53,6 +53,19 @@ defaultDeleted =
     False
 
 
+type DoneState
+    = Pending
+    | Done
+
+
+type ProcessingState
+    = InBasket
+    | Pending
+    | Done
+    | WaitingFor
+    | SomeDayMayBe
+
+
 type alias Todo =
     { id : TodoId
     , rev : String

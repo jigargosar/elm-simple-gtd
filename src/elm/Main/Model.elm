@@ -85,19 +85,24 @@ setProcessingModel processingModel m =
     { m | processingModel = processingModel }
 
 
+updateProcessingModel fun m =
+    setProcessingModel (fun m) m
+
+
 startProcessing todoList =
     todoList |> List.getAt 0 ?|> StartProcessing 0 todoList ?= NotProcessing
 
 
-processAsActionable bool m =
-    (case (m.processingModel) of
-        StartProcessing idx list todo ->
-            ProcessAsActionable idx list todo
+processAsActionable bool =
+    updateProcessingModel
+        (\m ->
+            case (m.processingModel) of
+                StartProcessing idx list todo ->
+                    ProcessAsActionable idx list todo
 
-        _ ->
-            NotProcessing
-    )
-        |> (setProcessingModel # m)
+                _ ->
+                    NotProcessing
+        )
 
 
 getProcessingModel =

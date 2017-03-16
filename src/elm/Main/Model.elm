@@ -1,6 +1,7 @@
 module Main.Model exposing (..)
 
 import Json.Encode as E
+import List.Extra as List
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
@@ -15,7 +16,7 @@ import Tuple2
 
 type ProcessingModel
     = NotProcessing
-    | StartProcessing Int (List Todo)
+    | StartProcessing Int (List Todo) Todo
 
 
 type alias Model =
@@ -76,8 +77,15 @@ activateEditTodoMode todo =
 
 activateProcessingMode : ModelMapper
 activateProcessingMode m =
-    { m | processingModel = StartProcessing 0 (getTodoCollection m |> TodoCollection.asList) }
+    { m | processingModel = startProcessing (getTodoCollection m |> TodoCollection.asList) }
 
+startProcessing todoList =
+    todoList |> List.getAt 0 ?|> StartProcessing 0 todoList ?= NotProcessing
+
+
+
+
+getProcessingModel = (.processingModel)
 
 updateEditTodoText : String -> ModelMapper
 updateEditTodoText text m =

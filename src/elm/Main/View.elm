@@ -7,6 +7,7 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Json.Encode
+import List.Extra as List
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
 import TodoCollection.View
@@ -29,6 +30,15 @@ todoListViewConfig =
 
 
 elmAppView m =
-    div []
-        [ TodoCollection.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
-        ]
+    case Main.Model.getProcessingModel m of
+        NotProcessing ->
+            div []
+                [ TodoCollection.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
+                ]
+
+        StartProcessing index todoList todo ->
+            startProcessingView todo
+
+
+startProcessingView todo =
+    div [] [ text "Processing : ", toString todo |> text ]

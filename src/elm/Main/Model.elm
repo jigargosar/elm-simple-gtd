@@ -88,21 +88,6 @@ startProcessing todoList =
     todoList |> List.getAt 0 ?|> StartProcessing ?= NotProcessing
 
 
-processAsActionable bool =
-    updateProcessingModel
-        (\m ->
-            case (m.processingModel) of
-                StartProcessing todo ->
-                    if bool then
-                        ProcessAsActionable todo
-                    else
-                        ProcessAsNotActionable todo
-
-                _ ->
-                    NotProcessing
-        )
-
-
 getProcessingModel =
     (.processingModel)
 

@@ -12,7 +12,6 @@ type ProcessingModel
     | ProcessAsNotActionable Todo
 
 
-
 type Msg
     = LocationChanged Location
     | OnAddTodoClicked
@@ -25,6 +24,4 @@ type Msg
     | OnEditTodoBlur
     | OnEditTodoEnterPressed
     | OnProcessButtonClicked
-    | OnActionableYesClicked
-    | OnActionableNoClicked
     | OnUpdateProcessingModel ProcessingModel

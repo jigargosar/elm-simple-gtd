@@ -98,12 +98,6 @@ update msg =
             OnProcessButtonClicked ->
                 Return.map Model.activateProcessingMode
 
-            OnActionableYesClicked ->
-                Return.map (Model.processAsActionable True)
-
-            OnActionableNoClicked ->
-                Return.map (Model.processAsActionable False)
-
             OnUpdateProcessingModel processingModel ->
                 Return.map (Model.setProcessingModel processingModel)
 

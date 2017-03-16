@@ -111,7 +111,7 @@ processAsReference todo =
     div []
         [ header todo
         , h2 [] [ text "Not Actionable >> Worth Keeping >> Move to Reference ?" ]
-        , lastActionButtons ProcessAsActionable todo
+        , lastActionButtons StartProcessing todo
         ]
 
 

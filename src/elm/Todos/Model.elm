@@ -1,6 +1,6 @@
 module Todos.Model exposing (..)
 
-import FunctionalHelpers
+import FunctionalHelpers exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Todos.Todo as Todo exposing (Todo)
 
@@ -23,8 +23,14 @@ type alias Model =
 initWithTodos todos seed =
     Model todos seed
 
-getTodoList = (.todoList)
+
+getTodoList =
+    (.todoList)
 
 
 reject filter todos =
     FunctionalHelpers.reject filter todos.todoList
+
+
+rejectMap filter mapper =
+    getTodoList >> List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))

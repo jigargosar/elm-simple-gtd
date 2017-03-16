@@ -1,5 +1,6 @@
 module Flow exposing (..)
 
+import List.Extra
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
@@ -10,7 +11,7 @@ type Node
 
 
 isActionable =
-    Branch "isActionable"
+    Branch "Is it Actionable ?"
         (Leaf "Can be done under 2 mins?")
         (Branch "Is it worth keeping?"
             (Branch "Could Require Action Later ?"
@@ -42,6 +43,7 @@ getQuestion ( node, _ ) =
             q
 
 
+onYes : Tracker -> Maybe Tracker
 onYes ( node, parentNodes ) =
     case node of
         Branch q y n ->
@@ -49,3 +51,25 @@ onYes ( node, parentNodes ) =
 
         Leaf q ->
             Nothing
+
+
+onNo : Tracker -> Maybe Tracker
+onNo ( node, parentNodes ) =
+    case node of
+        Branch q y n ->
+            Just ( n, node :: parentNodes )
+
+        Leaf q ->
+            Nothing
+
+
+onBack ( _, parentNodes ) =
+    List.Extra.uncons parentNodes
+
+
+test : Maybe Node
+test =
+    onNo rootTracker
+        ?+> onYes
+        ?|> Tuple.first
+        |> Debug.log "test"

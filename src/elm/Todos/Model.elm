@@ -5,7 +5,7 @@ import Random.Pcg as Random exposing (Seed)
 import Todos.Todo as Todo exposing (Todo)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
-
+import List.Extra as List
 
 type ProjectType
     = InboxProject
@@ -64,3 +64,12 @@ addNewTodo text todos =
             generateTodo text todos
     in
         ( todos |> append todo |> setSeed seed, todo )
+
+
+replaceTodoIfIdMatches todo todos =
+    let
+        todoList =
+            todos.todoList
+                |> List.replaceIf (Todo.equalById todo) todo
+    in
+        ( todos |> setTodoList todoList, todo )

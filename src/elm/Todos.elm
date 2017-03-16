@@ -91,13 +91,8 @@ upsertTodoList upsertList (TodosModel todos) =
         todos |> setTodoList finalTodoList |> TodosModel
 
 
-replaceTodoIfIdMatches todo (TodosModel todos) =
-    let
-        todoList =
-            todos.todoList
-                |> List.replaceIf (Todo.equalById todo) todo
-    in
-        ( todos |> setTodoList todoList |> TodosModel, todo )
+replaceTodoIfIdMatches todo =
+    toModel >> Model.replaceTodoIfIdMatches todo >> Tuple2.mapFirst TodosModel
 
 
 addNewTodo text =

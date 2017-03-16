@@ -10,6 +10,8 @@ type ProcessingModel
     | StartProcessing Todo
     | ProcessAsActionable Todo
     | ProcessAsNotActionable Todo
+    | ProcessAsTrash Todo
+    | ProcessAsWorthKeeping Todo
 
 
 type Msg

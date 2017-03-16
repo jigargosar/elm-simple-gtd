@@ -46,6 +46,12 @@ elmAppView m =
         ProcessAsNotActionable todo ->
             processAsNotActionableView todo
 
+        ProcessAsTrash todo ->
+            processAsTrashView todo
+
+        ProcessAsWorthKeeping todo ->
+            processAsWorthKeeping todo
+
 
 startProcessingView todo =
     div []
@@ -66,15 +72,30 @@ processAsActionableView todo =
 processAsNotActionableView todo =
     div []
         [ header todo
-        , h2 [] [ text "NotActionable >> Eliminate ?" ]
-        , yesNoButtons ProcessAsActionable ProcessAsNotActionable todo
+        , h2 [] [ text "Not Actionable >> Is it worth keeping ?" ]
+        , yesNoButtons ProcessAsWorthKeeping ProcessAsTrash todo
+        ]
+
+
+processAsTrashView todo =
+    div []
+        [ header todo
+        , h2 [] [ text "Not Actionable >> Trash >> Are You Sure ?" ]
+        , yesNoButtons ProcessAsTrash ProcessAsNotActionable todo
+        ]
+
+
+processAsWorthKeeping todo =
+    div []
+        [ header todo
+        , h2 [] [ text "Not Actionable >> Worth Keeping >> Could Require Action Later ?" ]
+        , yesNoButtons ProcessAsTrash ProcessAsWorthKeeping todo
         ]
 
 
 header todo =
     div []
-        [ h3 []
-            [ text "Processing : " ]
+        [ h3 [] [ text "Processing : " ]
         , h1 [] [ Todo.getText todo |> text ]
         ]
 

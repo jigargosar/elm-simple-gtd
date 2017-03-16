@@ -64,7 +64,7 @@ update msg =
                 Return.map (Model.activateEditTodoMode todo)
 
             OnEditTodoTextChanged text ->
-                Model.updateEditTodoText text
+                Return.map (Model.updateEditTodoText text)
 
             OnEditTodoBlur ->
                 Model.saveEditingTodoAndDeactivateEditTodoMode

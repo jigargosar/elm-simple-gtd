@@ -84,20 +84,14 @@ activateEditTodoMode todo =
     setEditModeTo2 (EditTodoMode todo)
 
 
-updateEditTodoText : String -> ReturnMapper
-updateEditTodoText text =
-    Return.map (\m -> ( getEditMode m, Return.singleton m ))
-        >> Return.andThen (uncurry (updateEditTodoTextHelp text))
-
-
-updateEditTodoTextHelp : String -> EditMode -> ReturnMapper
-updateEditTodoTextHelp text editMode =
-    case editMode of
+updateEditTodoText : String -> ModelMapper
+updateEditTodoText text m =
+    case getEditMode m of
         EditTodoMode todo ->
-            setEditModeTo (EditTodoMode (Todo.setText text todo))
+            setEditModeTo2 (EditTodoMode (Todo.setText text todo)) m
 
         _ ->
-            identity
+            m
 
 
 setTodosModel : TodosModel -> ModelMapper

@@ -62,7 +62,7 @@ type NonActionableStuffType
 type ActionableStuffType
     = MultiStepProjectPlanning
     | CanBeDoneUnder2Minutes
-    | Delegate
+    | DelegateAndScheduleFollowup
     | Calender
     | Next
 

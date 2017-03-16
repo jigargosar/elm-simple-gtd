@@ -67,9 +67,20 @@ onBack ( _, parentNodes ) =
     List.Extra.uncons parentNodes
 
 
-test : Maybe Node
+test : Maybe Tracker
 test =
-    onNo rootTracker
+    rootTracker
+        |> onNo
+        ?|> tapLog "no"
         ?+> onYes
-        ?|> Tuple.first
-        |> Debug.log "test"
+        ?|> tapLog "yes"
+        ?+> onNo
+        ?|> tapLog "no"
+
+
+tapLog str val =
+    let
+        _ =
+            val |> (Tuple.first >> Debug.log str)
+    in
+        val

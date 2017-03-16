@@ -56,10 +56,6 @@ startProcessingView todo =
         ]
 
 
-onClickUpdatePM processingModel todo =
-    OnUpdateProcessingModel (processingModel todo) |> onClick
-
-
 processAsActionableView todo =
     div []
         [ header todo
@@ -83,4 +79,15 @@ header todo =
         [ h3 []
             [ text "Processing : " ]
         , h1 [] [ Todo.getText todo |> text ]
+        ]
+
+
+onClickUpdatePM processingModel todo =
+    OnUpdateProcessingModel (processingModel todo) |> onClick
+
+
+yesNoButtons pmYes pmNo todo =
+    div []
+        [ button [ onClickUpdatePM pmYes todo ] [ text "YES" ]
+        , button [ onClickUpdatePM pmNo todo ] [ text "NO" ]
         ]

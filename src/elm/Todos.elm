@@ -32,10 +32,6 @@ type TodosModel
     = TodosModel Model
 
 
-withModel fn (TodosModel model) =
-    fn model
-
-
 toModel (TodosModel model) =
     model
 

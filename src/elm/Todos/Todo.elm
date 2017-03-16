@@ -15,6 +15,14 @@ import Dict.Extra as Dict
 import Time exposing (Time)
 
 
+type alias TodoId =
+    String
+
+
+type alias EncodedTodoList =
+    List EncodedTodo
+
+
 defaultRevision =
     ""
 
@@ -25,10 +33,6 @@ defaultDueAt =
 
 defaultDeleted =
     False
-
-
-type alias TodoId =
-    String
 
 
 type alias Todo =
@@ -71,10 +75,6 @@ encode todo =
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (isDeleted todo)
         ]
-
-
-type alias EncodedTodoList =
-    List EncodedTodo
 
 
 encodeSingleton : Todo -> EncodedTodoList

@@ -81,7 +81,7 @@ processAsTrashView todo =
     div []
         [ header todo
         , h2 [] [ text "Not Actionable >> Trash >> Are You Sure ?" ]
-        , yesNoButtons ProcessAsTrash ProcessAsNotActionable todo
+        , lastActionButtons ProcessAsNotActionable todo
         ]
 
 
@@ -107,5 +107,12 @@ onClickUpdatePM processingModel todo =
 yesNoButtons pmYes pmNo todo =
     div []
         [ button [ onClickUpdatePM pmYes todo ] [ text "YES" ]
+        , button [ onClickUpdatePM pmNo todo ] [ text "NO" ]
+        ]
+
+
+lastActionButtons pmNo todo =
+    div []
+        [ button [ OnUpdateProcessingModel NotProcessing |> onClick ] [ text "YES" ]
         , button [ onClickUpdatePM pmNo todo ] [ text "NO" ]
         ]

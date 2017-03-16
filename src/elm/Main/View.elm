@@ -87,7 +87,7 @@ processAsTrashView todo =
     div []
         [ header todo
         , h2 [] [ text "Not Actionable >> Not Worth Keeping >> Trash it ?" ]
-        , lastActionButtons ProcessAsNotActionable todo
+        , lastActionButtons StartProcessing todo
         ]
 
 
@@ -111,7 +111,7 @@ processAsReference todo =
     div []
         [ header todo
         , h2 [] [ text "Not Actionable >> Worth Keeping >> Move to Reference ?" ]
-        , lastActionButtons ProcessAsWorthKeeping todo
+        , lastActionButtons ProcessAsActionable todo
         ]
 
 

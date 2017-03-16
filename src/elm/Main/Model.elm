@@ -40,11 +40,10 @@ initWithFlagsAndLocation { now, encodedTodoList } location =
             Todo.decodeTodoList encodedTodoList
 
         todoModelSeedTuple =
-            round >> Random.initialSeed >> Random.step Todos.todoModelGenerator
+            round >> Random.initialSeed >> Random.step Todos.todoModelGenerator >> Tuple.first
     in
         now
             |> (todoModelSeedTuple
-                    >> Tuple.first
                     >> (Model # NotEditing)
                     >> Return.singleton
                     >> setEncodedTodoList encodedTodoList

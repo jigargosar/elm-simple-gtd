@@ -42,9 +42,25 @@ setSeed seed todos =
     { todos | seed = seed }
 
 
+getSeed =
+    (.seed)
+
+
 append todo todos =
     todos.todoList ++ [ todo ] |> setTodoList # todos
 
 
 setTodoList todoList todos =
     { todos | todoList = todoList }
+
+
+generateTodo text todos =
+    Random.step (Todo.todoGenerator text) (getSeed todos)
+
+
+addNewTodo text todos =
+    let
+        ( todo, seed ) =
+            generateTodo text todos
+    in
+        ( todos |> append todo |> setSeed seed, todo )

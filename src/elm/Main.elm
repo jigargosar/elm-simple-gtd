@@ -99,6 +99,14 @@ update msg =
                 Return.map Model.activateProcessingMode
 
 
+            OnActionableYesClicked ->
+                Return.map (Model.processAsActionable True)
+
+
+            OnActionableNoClicked ->
+                Return.map (Model.processAsActionable False)
+
+
 
 --            _ ->
 --                let

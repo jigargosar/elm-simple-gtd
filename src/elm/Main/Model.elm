@@ -17,6 +17,7 @@ import Tuple2
 type ProcessingModel
     = NotProcessing
     | StartProcessing Int (List Todo) Todo
+    | ProcessAsActionable Int (List Todo) Todo
 
 
 type alias Model =
@@ -77,15 +78,31 @@ activateEditTodoMode todo =
 
 activateProcessingMode : ModelMapper
 activateProcessingMode m =
-    { m | processingModel = startProcessing (getTodoCollection m |> TodoCollection.asList) }
+    setProcessingModel (startProcessing (getTodoCollection m |> TodoCollection.asList)) m
+
+
+setProcessingModel processingModel m =
+    { m | processingModel = processingModel }
+
 
 startProcessing todoList =
     todoList |> List.getAt 0 ?|> StartProcessing 0 todoList ?= NotProcessing
 
 
+processAsActionable bool m =
+    (case (m.processingModel) of
+        StartProcessing idx list todo ->
+            ProcessAsActionable idx list todo
+
+        _ ->
+            NotProcessing
+    )
+        |> (setProcessingModel # m)
 
 
-getProcessingModel = (.processingModel)
+getProcessingModel =
+    (.processingModel)
+
 
 updateEditTodoText : String -> ModelMapper
 updateEditTodoText text m =

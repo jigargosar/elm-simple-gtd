@@ -17,3 +17,5 @@ type Msg
     | OnEditTodoBlur
     | OnEditTodoEnterPressed
     | OnProcessButtonClicked
+    | OnActionableYesClicked
+    | OnActionableNoClicked

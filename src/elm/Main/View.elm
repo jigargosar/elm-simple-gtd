@@ -40,11 +40,27 @@ elmAppView m =
         StartProcessing index todoList todo ->
             startProcessingView todo
 
+        ProcessAsActionable _ _ todo ->
+            processAsActionableView todo
+
 
 startProcessingView todo =
     div []
         [ h3 []
             [ text "Processing : " ]
         , h1 [] [ Todo.getText todo |> text ]
-        , button [] [ text "Is it Actionable?" ]
+        , h2 [] [ text "Is it Actionable?" ]
+        , button [ onClick OnActionableYesClicked ] [ text "YES" ]
+        , button [ onClick OnActionableNoClicked ] [ text "NO" ]
+        ]
+
+
+processAsActionableView todo =
+    div []
+        [ h3 []
+            [ text "Processing : " ]
+        , h1 [] [ Todo.getText todo |> text ]
+        , h2 [] [ text "Can be done under 2 mins" ]
+        , button [ onClick OnActionableYesClicked ] [ text "YES" ]
+        , button [ onClick OnActionableNoClicked ] [ text "NO" ]
         ]

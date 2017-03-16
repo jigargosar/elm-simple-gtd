@@ -24,7 +24,7 @@ import Toolkit.Helpers exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import FunctionalHelpers exposing (..)
-import Todos.Model as Model exposing (Model, append, setSeed, setTodoList)
+import Todos.Model as Model exposing (Model)
 import Tuple2
 
 
@@ -44,10 +44,6 @@ type EditMode
     = EditNewTodoMode String
     | EditTodoMode Todo
     | NotEditing
-
-
-rejectMap filter mapper =
-    toModel >> Model.rejectMap filter mapper
 
 
 todoModelGenerator : Random.Generator TodosModel
@@ -71,3 +67,11 @@ replaceTodoIfIdMatches todo =
 
 addNewTodo text =
     toModel >> Model.addNewTodo text >> Tuple2.mapFirst TodosModel
+
+
+
+-- view external
+
+
+rejectMap filter mapper =
+    toModel >> Model.rejectMap filter mapper

@@ -45,10 +45,6 @@ getSeed =
     (.seed)
 
 
-append todo todos =
-    todos.todoList ++ [ todo ] |> setTodoList # todos
-
-
 setTodoList todoList todos =
     { todos | todoList = todoList }
 
@@ -61,6 +57,9 @@ addNewTodo text todos =
     let
         ( todo, seed ) =
             generateTodo text todos
+
+        append todo todos =
+            todos.todoList ++ [ todo ] |> setTodoList # todos
     in
         ( todos |> append todo |> setSeed seed, todo )
 

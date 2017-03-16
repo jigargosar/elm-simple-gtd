@@ -60,15 +60,8 @@ todoModelGenerator =
 
 
 deleteTodo : TodoId -> TodosModel -> ( TodosModel, Maybe Todo )
-deleteTodo todoId (TodosModel todos) =
-    let
-        todoList =
-            todos.todoList
-                |> List.updateIf (Todo.hasId todoId) (Todo.markDeleted)
-    in
-        ( setTodoList todoList todos |> TodosModel
-        , List.find (Todo.hasId todoId) todoList
-        )
+deleteTodo todoId =
+    toModel >> Model.deleteTodo todoId >> Tuple2.mapFirst TodosModel
 
 
 upsertTodoList : List Todo -> TodosModel -> TodosModel

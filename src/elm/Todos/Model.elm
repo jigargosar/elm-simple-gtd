@@ -83,3 +83,14 @@ upsertTodoList upsertList todos =
                 |> Dict.values
     in
         todos |> setTodoList finalTodoList
+
+
+deleteTodo todoId todos =
+    let
+        todoList =
+            todos.todoList
+                |> List.updateIf (Todo.hasId todoId) (Todo.markDeleted)
+    in
+        ( setTodoList todoList todos
+        , List.find (Todo.hasId todoId) todoList
+        )

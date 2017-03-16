@@ -15,19 +15,6 @@ import Dict.Extra as Dict
 import Time exposing (Time)
 
 
-type alias TodoId =
-    String
-
-
-type alias Todo =
-    { text : String
-    , dueAt : Maybe Time
-    , deleted : Bool
-    , rev : String
-    , id : TodoId
-    }
-
-
 defaultRevision =
     ""
 
@@ -40,8 +27,21 @@ defaultDeleted =
     False
 
 
+type alias TodoId =
+    String
+
+
+type alias Todo =
+    { id : TodoId
+    , rev : String
+    , text : String
+    , dueAt : Maybe Time
+    , deleted : Bool
+    }
+
+
 todoConstructor id rev text dueAt deleted =
-    Todo text dueAt deleted rev id
+    Todo id rev text dueAt deleted
 
 
 decoder : Decoder Todo
@@ -62,24 +62,24 @@ type alias EncodedTodo =
     E.Value
 
 
+encode : Todo -> EncodedTodo
+encode todo =
+    E.object
+        [ "_id" => E.string (getId todo)
+        , "_rev" => E.string (getRev todo)
+        , "text" => E.string (getText todo)
+        , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
+        , "deleted" => E.bool (isDeleted todo)
+        ]
+
+
 type alias EncodedTodoList =
     List EncodedTodo
 
 
-encode : Todo -> EncodedTodo
-encode todo =
-    E.object
-        [ "text" => E.string (getText todo)
-        , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
-        , "deleted" => E.bool (isDeleted todo)
-        , "_rev" => E.string (getRev todo)
-        , "_id" => E.string (getId todo)
-        ]
-
-
 encodeSingleton : Todo -> EncodedTodoList
-encodeSingleton todo =
-    [ encode todo ]
+encodeSingleton =
+    encode >> List.singleton
 
 
 decodeValue =

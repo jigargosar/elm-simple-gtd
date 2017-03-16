@@ -34,3 +34,16 @@ reject filter todos =
 
 rejectMap filter mapper =
     getTodoList >> List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))
+
+
+setSeed seed todos =
+    { todos | seed = seed }
+
+
+append todo todos =
+    todos.todoList ++ [ todo ] |> setTodoList # todos
+
+
+setTodoList todoList todos =
+    { todos | todoList = todoList }
+

@@ -24,7 +24,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Dict.Extra as Dict
 import FunctionalHelpers exposing (..)
-import Todos.Model as Model exposing (Model)
+import Todos.Model as Model exposing (Model, append, setSeed, setTodoList)
 
 
 type TodosModel
@@ -49,18 +49,6 @@ reject filter =
 
 rejectMap filter mapper =
     toModel >> Model.rejectMap filter mapper
-
-
-setSeed seed todos =
-    { todos | seed = seed }
-
-
-append todo todos =
-    todos.todoList ++ [ todo ] |> setTodoList # todos
-
-
-setTodoList todoList todos =
-    { todos | todoList = todoList }
 
 
 generateTodo text =

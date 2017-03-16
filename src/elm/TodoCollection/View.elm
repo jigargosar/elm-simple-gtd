@@ -24,7 +24,8 @@ type alias ViewConfig msg =
 allTodosView : ViewConfig msg -> EditMode -> TodoCollection -> Html msg
 allTodosView viewConfig editMode todoCollection =
     div []
-        [ addTodoView editMode viewConfig
+        [ h1 [] [ text "Stuff" ]
+        , addTodoView editMode viewConfig
         , todoListView editMode viewConfig todoCollection
         ]
 
@@ -39,7 +40,7 @@ addTodoView editMode viewConfig =
 
 
 addTodoButton viewConfig =
-    button [ onClick viewConfig.onAddTodoClicked ] [ text "Add Stuff" ]
+    button [ onClick viewConfig.onAddTodoClicked ] [ text "Add" ]
 
 
 addNewTodoView viewConfig text =

@@ -39,12 +39,16 @@ withModel fn (TodosModel model) =
     fn model
 
 
+toModel (TodosModel model) =
+    model
+
+
 reject filter =
-    withModel (Model.reject filter)
+    toModel >> Model.reject filter
 
 
-rejectMap filter mapper (TodosModel todos) =
-    todos.todoList |> List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))
+rejectMap filter mapper =
+    toModel >> Model.rejectMap filter mapper
 
 
 setSeed seed todos =

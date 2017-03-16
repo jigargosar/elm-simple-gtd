@@ -1,7 +1,7 @@
 module TodoCollection
     exposing
         ( --types
-          TodosModel
+          TodoCollection
         , EditMode(..)
           -- init
         , todoModelGenerator
@@ -27,11 +27,11 @@ import TodoCollection.Model as Model exposing (Model)
 import Tuple2
 
 
-type TodosModel
-    = TodosModel Model
+type TodoCollection
+    = TodoCollection Model
 
 
-toModel (TodosModel model) =
+toModel (TodoCollection model) =
     model
 
 
@@ -45,22 +45,22 @@ type EditMode
     | NotEditing
 
 
-todoModelGenerator : List Todo -> Random.Generator TodosModel
+todoModelGenerator : List Todo -> Random.Generator TodoCollection
 todoModelGenerator todoList =
-    Random.map (Model.init todoList >> TodosModel) Random.independentSeed
+    Random.map (Model.init todoList >> TodoCollection) Random.independentSeed
 
 
-deleteTodo : TodoId -> TodosModel -> ( TodosModel, Maybe Todo )
+deleteTodo : TodoId -> TodoCollection -> ( TodoCollection, Maybe Todo )
 deleteTodo todoId =
-    toModel >> Model.deleteTodo todoId >> Tuple2.mapFirst TodosModel
+    toModel >> Model.deleteTodo todoId >> Tuple2.mapFirst TodoCollection
 
 
 replaceTodoIfIdMatches todo =
-    toModel >> Model.replaceTodoIfIdMatches todo >> Tuple2.mapFirst TodosModel
+    toModel >> Model.replaceTodoIfIdMatches todo >> Tuple2.mapFirst TodoCollection
 
 
 addNewTodo text =
-    toModel >> Model.addNewTodo text >> Tuple2.mapFirst TodosModel
+    toModel >> Model.addNewTodo text >> Tuple2.mapFirst TodoCollection
 
 
 

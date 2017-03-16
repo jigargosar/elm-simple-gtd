@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
-import TodoCollection exposing (EditMode(..), TodosModel)
+import TodoCollection exposing (EditMode(..), TodoCollection)
 import TodoCollection.Todo as Todo exposing (Todo, TodoId)
 
 
@@ -21,10 +21,10 @@ type alias ViewConfig msg =
     }
 
 
-allTodosView : ViewConfig msg -> EditMode -> TodosModel -> Html msg
-allTodosView viewConfig editMode todosModel =
+allTodosView : ViewConfig msg -> EditMode -> TodoCollection -> Html msg
+allTodosView viewConfig editMode todoCollection =
     div []
-        [ todoListView editMode viewConfig todosModel
+        [ todoListView editMode viewConfig todoCollection
         , addTodoView editMode viewConfig
         ]
 
@@ -56,10 +56,10 @@ addNewTodoView viewConfig text =
         []
 
 
-todoListView : EditMode -> ViewConfig msg -> TodosModel -> Html msg
-todoListView editMode viewConfig todosModel =
+todoListView : EditMode -> ViewConfig msg -> TodoCollection -> Html msg
+todoListView editMode viewConfig todoCollection =
     ul []
-        (todosModel
+        (todoCollection
             |> TodoCollection.rejectMap Todo.isDeleted
                 (todoView viewConfig.onDeleteTodoClicked viewConfig.onEditTodoClicked editMode viewConfig)
         )

@@ -4,7 +4,7 @@ import Json.Encode as E
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
-import TodoCollection exposing (EditMode(..), TodosModel)
+import TodoCollection exposing (EditMode(..), TodoCollection)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import TodoCollection.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
@@ -13,15 +13,14 @@ import Toolkit.Helpers exposing (..)
 import Tuple2
 
 
-
 type alias Model =
-    { todosModel : TodosModel
+    { todoCollection : TodoCollection
     , editMode : EditMode
     }
 
 
-modelConstructor editMode todosModel =
-    Model todosModel editMode
+modelConstructor editMode todoCollection =
+    Model todoCollection editMode
 
 
 type alias ModelMapper =
@@ -44,9 +43,9 @@ init now encodedTodoList =
             >> (modelConstructor NotEditing)
 
 
-getTodosModel : Model -> TodosModel
-getTodosModel =
-    (.todosModel)
+getTodoCollection : Model -> TodoCollection
+getTodoCollection =
+    (.todoCollection)
 
 
 setEditModeTo : EditMode -> ModelMapper
@@ -79,14 +78,14 @@ updateEditTodoText text m =
             m
 
 
-setTodosModel : TodosModel -> ModelMapper
-setTodosModel todosModel m =
-    { m | todosModel = todosModel }
+setTodoCollection : TodoCollection -> ModelMapper
+setTodoCollection todoCollection m =
+    { m | todoCollection = todoCollection }
 
 
-updateTodosModel : (Model -> TodosModel) -> ModelMapper
-updateTodosModel fun model =
-    setTodosModel (fun model) model
+updateTodoCollection : (Model -> TodoCollection) -> ModelMapper
+updateTodoCollection fun model =
+    setTodoCollection (fun model) model
 
 
 addNewTodoAndDeactivateAddNewTodoMode : Model -> ( Model, Maybe Todo )
@@ -108,16 +107,16 @@ addNewTodo m =
             if String.trim text |> String.isEmpty then
                 ( m, Nothing )
             else
-                TodoCollection.addNewTodo text m.todosModel
-                    |> Tuple2.mapEach (setTodosModel # m) (Just)
+                TodoCollection.addNewTodo text m.todoCollection
+                    |> Tuple2.mapEach (setTodoCollection # m) (Just)
 
         _ ->
             ( m, Nothing )
 
 
 deleteTodo todoId m =
-    TodoCollection.deleteTodo todoId m.todosModel
-        |> Tuple2.mapFirst (setTodosModel # m)
+    TodoCollection.deleteTodo todoId m.todoCollection
+        |> Tuple2.mapFirst (setTodoCollection # m)
 
 
 saveEditingTodoAndDeactivateEditTodoMode : Model -> ( Model, Maybe Todo )
@@ -133,8 +132,8 @@ saveEditingTodo m =
             if Todo.isTextEmpty todo then
                 ( m, Nothing )
             else
-                TodoCollection.replaceTodoIfIdMatches todo m.todosModel
-                    |> Tuple2.mapEach (setTodosModel # m) (Just)
+                TodoCollection.replaceTodoIfIdMatches todo m.todoCollection
+                    |> Tuple2.mapEach (setTodoCollection # m) (Just)
 
         _ ->
             ( m, Nothing )

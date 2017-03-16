@@ -7,18 +7,24 @@ import Toolkit.Helpers exposing (..)
 
 type Node
     = Branch String Node Node
-    | Leaf String
+    | Action String
+    | ConfirmAction String Node
 
 
 isActionable =
     Branch "Is it Actionable ?"
-        (Leaf "Can be done under 2 mins?")
+        (Branch "Can be done under 2 mins?"
+            (ConfirmAction "Do it now?"
+                (Action "Timer Started, Go Go Go !!!")
+            )
+            (Action "Involves Multiple Steps?")
+        )
         (Branch "Is it worth keeping?"
             (Branch "Could Require Action Later ?"
-                (Leaf "Move to SomDay/Maybe List?")
-                (Leaf "Move to Reference?")
+                (Action "Move to SomDay/Maybe List?")
+                (Action "Move to Reference?")
             )
-            (Leaf "Trash it ?")
+            (Action "Trash it ?")
         )
 
 
@@ -39,7 +45,10 @@ getQuestion ( node, _ ) =
         Branch q _ _ ->
             q
 
-        Leaf q ->
+        Action q ->
+            q
+
+        ConfirmAction q a ->
             q
 
 
@@ -49,8 +58,11 @@ onYes ( node, parentNodes ) =
         Branch q y n ->
             Just ( y, node :: parentNodes )
 
-        Leaf q ->
+        Action q ->
             Nothing
+
+        ConfirmAction q a ->
+            Just ( a, node :: parentNodes )
 
 
 onNo : Tracker -> Maybe Tracker
@@ -59,8 +71,11 @@ onNo ( node, parentNodes ) =
         Branch q y n ->
             Just ( n, node :: parentNodes )
 
-        Leaf q ->
+        Action q ->
             Nothing
+
+        ConfirmAction q a ->
+            onBack ( node, parentNodes )
 
 
 onBack ( _, parentNodes ) =

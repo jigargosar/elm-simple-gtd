@@ -1,7 +1,9 @@
 module Main.Model exposing (..)
 
+import Json.Encode as E
 import Main.Msg exposing (Msg)
 import Maybe.Extra as Maybe
+import Navigation exposing (Location)
 import PouchDB
 import Return exposing (Return)
 import Todos exposing (EditMode(..), TodosModel)
@@ -13,6 +15,10 @@ import Toolkit.Helpers exposing (..)
 import Tuple2
 
 
+type alias Flags =
+    { now : Time, allTodos : List E.Value }
+
+
 type alias Model =
     { todosModel : TodosModel
     , editMode : EditMode
@@ -21,6 +27,11 @@ type alias Model =
 
 type alias ReturnMapper =
     Return Msg Model -> Return Msg Model
+
+
+init : Flags -> Location -> Return Msg Model
+init { now, allTodos } location =
+    initWithTime now |> Return.singleton |> setEncodedTodoList allTodos
 
 
 initWithTime : Time -> Model

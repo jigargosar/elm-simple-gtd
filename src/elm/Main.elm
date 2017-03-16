@@ -14,7 +14,7 @@ main : Program Flags Model Msg
 main =
     Navigation.programWithFlags LocationChanged
         --    TimeTravel.Navigation.programWithFlags LocationChanged
-        { init = init
+        { init = Model.init
         , view = elmAppView
         , update = update
         , subscriptions =
@@ -22,15 +22,6 @@ main =
                 Sub.batch
                     []
         }
-
-
-init : Flags -> Location -> Return Msg Model
-init { now, allTodos } location =
-    Model.initWithTime now |> Return.singleton |> setEncodedTodoList allTodos
-
-
-type alias Flags =
-    { now : Time, allTodos : List E.Value }
 
 
 update msg =

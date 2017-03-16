@@ -51,8 +51,7 @@ startProcessingView todo =
     div []
         [ header todo
         , h2 [] [ text "Is it Actionable?" ]
-        , button [ onClickUpdatePM ProcessAsActionable todo ] [ text "YES" ]
-        , button [ onClickUpdatePM ProcessAsNotActionable todo ] [ text "NO" ]
+        , yesNoButtons ProcessAsActionable ProcessAsNotActionable todo
         ]
 
 
@@ -60,8 +59,7 @@ processAsActionableView todo =
     div []
         [ header todo
         , h2 [] [ text "Can be done under 2 mins" ]
-        , button [ onClickUpdatePM ProcessAsActionable todo ] [ text "YES" ]
-        , button [ onClickUpdatePM ProcessAsNotActionable todo ] [ text "NO" ]
+        , yesNoButtons ProcessAsActionable ProcessAsNotActionable todo
         ]
 
 
@@ -69,8 +67,7 @@ processAsNotActionableView todo =
     div []
         [ header todo
         , h2 [] [ text "Eliminate ?" ]
-        , button [ onClickUpdatePM ProcessAsActionable todo ] [ text "YES" ]
-        , button [ onClickUpdatePM ProcessAsNotActionable todo ] [ text "NO" ]
+        , yesNoButtons ProcessAsActionable ProcessAsNotActionable todo
         ]
 
 

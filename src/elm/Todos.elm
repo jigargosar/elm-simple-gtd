@@ -46,9 +46,9 @@ type EditMode
     | NotEditing
 
 
-todoModelGenerator : Random.Generator TodosModel
-todoModelGenerator =
-    Random.map (Model.init [] >> TodosModel) Random.independentSeed
+todoModelGenerator : List Todo  -> Random.Generator TodosModel
+todoModelGenerator todoList =
+    Random.map (Model.init todoList >> TodosModel) Random.independentSeed
 
 
 deleteTodo : TodoId -> TodosModel -> ( TodosModel, Maybe Todo )

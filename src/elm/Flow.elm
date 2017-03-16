@@ -15,7 +15,19 @@ isActionable =
         (Branch "Is it worth keeping?"
             (Branch "Could Require Action Later ?"
                 (Leaf "Move to SomDay/Maybe List?")
-                (Leaf "Move to SomDay/Maybe List?")
+                (Leaf "Move to Reference?")
             )
             (Leaf "Trash it ?")
         )
+
+
+type alias Tracker =
+    ( Node, List Node )
+
+
+tracker node =
+    ( node, [] )
+
+
+root =
+    tracker isActionable

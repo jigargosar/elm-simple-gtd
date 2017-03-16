@@ -24,19 +24,23 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Dict.Extra as Dict
 import FunctionalHelpers exposing (..)
-import Todos.Model as Model exposing (Todos)
+import Todos.Model as Model exposing (Model)
 
 
 type TodosModel
-    = TodosModel Todos
+    = TodosModel Model
 
 
 initWithSeed =
     Model.initWithTodos [] >> TodosModel
 
 
-reject filter (TodosModel todos) =
-    FunctionalHelpers.reject filter todos.todoList
+withModel fn (TodosModel model) =
+    fn model
+
+
+reject filter =
+    withModel (Model.reject filter)
 
 
 rejectMap filter mapper (TodosModel todos) =

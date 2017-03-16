@@ -43,7 +43,7 @@ elmAppView m =
 
 startProcessingView todo =
     div []
-        [ p []
+        [ h3 []
             [ text "Processing : " ]
         , h1 [] [ Todo.getText todo |> text ]
         ]

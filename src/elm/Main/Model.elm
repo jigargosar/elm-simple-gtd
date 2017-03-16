@@ -50,13 +50,6 @@ initWithFlagsAndLocation { now, encodedTodoList } location =
                )
 
 
-initWithSeed : Seed -> Model
-initWithSeed seed =
-    { todosModel = Random.step Todos.todoModelGenerator seed |> Tuple.first
-    , editMode = NotEditing
-    }
-
-
 getTodosModel : Model -> TodosModel
 getTodosModel =
     (.todosModel)

@@ -6,7 +6,6 @@ import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import PouchDB
 import RandomIdGenerator as Random
-import Return exposing (Return)
 import TodoCollection exposing (EditMode(..), TodosModel)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
@@ -29,9 +28,6 @@ type alias Model =
 modelConstructor editMode todosModel =
     Model todosModel editMode
 
-
-type alias ReturnMapper =
-    Return Msg Model -> Return Msg Model
 
 
 type alias ModelMapper =

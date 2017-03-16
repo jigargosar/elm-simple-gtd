@@ -88,6 +88,10 @@ update msg =
 --                    identity
 
 
+type alias ReturnMapper =
+    Return Msg Model -> Return Msg Model
+
+
 persistTodoCmdMaybe =
     Maybe.unwrap Cmd.none persistTodoCmd
 

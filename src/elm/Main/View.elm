@@ -49,9 +49,7 @@ elmAppView m =
 
 startProcessingView todo =
     div []
-        [ h3 []
-            [ text "Processing : " ]
-        , h1 [] [ Todo.getText todo |> text ]
+        [ header todo
         , h2 [] [ text "Is it Actionable?" ]
         , button [ onClickUpdatePM ProcessAsActionable todo ] [ text "YES" ]
         , button [ onClickUpdatePM ProcessAsNotActionable todo ] [ text "NO" ]
@@ -64,9 +62,7 @@ onClickUpdatePM processingModel todo =
 
 processAsActionableView todo =
     div []
-        [ h3 []
-            [ text "Processing : " ]
-        , h1 [] [ Todo.getText todo |> text ]
+        [ header todo
         , h2 [] [ text "Can be done under 2 mins" ]
         , button [ onClickUpdatePM ProcessAsActionable todo ] [ text "YES" ]
         , button [ onClickUpdatePM ProcessAsNotActionable todo ] [ text "NO" ]
@@ -75,10 +71,16 @@ processAsActionableView todo =
 
 processAsNotActionableView todo =
     div []
-        [ h3 []
-            [ text "Processing : " ]
-        , h1 [] [ Todo.getText todo |> text ]
+        [ header todo
         , h2 [] [ text "Eliminate ?" ]
         , button [ onClickUpdatePM ProcessAsActionable todo ] [ text "YES" ]
         , button [ onClickUpdatePM ProcessAsNotActionable todo ] [ text "NO" ]
+        ]
+
+
+header todo =
+    div []
+        [ h3 []
+            [ text "Processing : " ]
+        , h1 [] [ Todo.getText todo |> text ]
         ]

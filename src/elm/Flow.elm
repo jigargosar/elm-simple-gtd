@@ -3,11 +3,11 @@ module Flow exposing (..)
 
 type Branch
     = Leaf
-        { questionText : String
+        { question : String
         , onBack : () -> Maybe Branch
         }
     | YesNoBranch
-        { questionText : String
+        { question : String
         , onBack : Maybe Branch
         , onYes : Branch
         , onNo : Branch
@@ -16,7 +16,7 @@ type Branch
 
 isActionable =
     YesNoBranch
-        { questionText = "Is it Actionable?"
+        { question = "Is it Actionable?"
         , onYes = canItBeDoneUnder2Min
         , onNo = isItWorthKeeping
         , onBack = Nothing
@@ -25,13 +25,13 @@ isActionable =
 
 canItBeDoneUnder2Min =
     Leaf
-        { questionText = "Can it be done in less than 2 minutes ?"
+        { question = "Can it be done in less than 2 minutes ?"
         , onBack = (\_ -> Just isActionable)
         }
 
 
 isItWorthKeeping =
     Leaf
-        { questionText = "Is it worth keeping ?"
+        { question = "Is it worth keeping ?"
         , onBack = (\_ -> Just isActionable)
         }

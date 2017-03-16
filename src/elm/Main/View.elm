@@ -24,6 +24,7 @@ todoListViewConfig =
     , onNewTodoTextChanged = OnNewTodoTextChanged
     , onNewTodoBlur = OnNewTodoBlur
     , onNewTodoEnterPressed = OnNewTodoEnterPressed
+    , onProcessButtonClicked = OnProcessButtonClicked
     }
 
 

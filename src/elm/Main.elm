@@ -95,6 +95,9 @@ update msg =
                         >> Tuple2.mapSecond persistTodoCmdMaybe
                     )
 
+            OnProcessButtonClicked ->
+                Return.map Model.activateProcessingMode
+
 
 
 --            _ ->

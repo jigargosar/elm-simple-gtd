@@ -16,3 +16,4 @@ type Msg
     | OnEditTodoTextChanged String
     | OnEditTodoBlur
     | OnEditTodoEnterPressed
+    | OnProcessButtonClicked

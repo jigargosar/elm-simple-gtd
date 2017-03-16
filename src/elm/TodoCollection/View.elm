@@ -18,6 +18,7 @@ type alias ViewConfig msg =
     , onNewTodoTextChanged : String -> msg
     , onNewTodoBlur : msg
     , onNewTodoEnterPressed : msg
+    , onProcessButtonClicked : msg
     }
 
 

@@ -11,6 +11,8 @@ module TodoCollection
         , replaceTodoIfIdMatches
           -- for views
         , rejectMap
+        -- temp
+        , asList
         )
 
 import Dict
@@ -34,7 +36,9 @@ type TodoCollection
 toModel (TodoCollection model) =
     model
 
+-- temp
 
+asList = toModel >> Model.getTodoList
 
 -- external
 

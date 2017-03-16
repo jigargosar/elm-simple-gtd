@@ -13,14 +13,20 @@ import Toolkit.Helpers exposing (..)
 import Tuple2
 
 
+type ProcessingModel
+    = NotProcessing
+    | StartProcessing Int (List Todo)
+
+
 type alias Model =
     { todoCollection : TodoCollection
     , editMode : EditMode
+    , processingModel : ProcessingModel
     }
 
 
 modelConstructor editMode todoCollection =
-    Model todoCollection editMode
+    Model todoCollection editMode NotProcessing
 
 
 type alias ModelMapper =
@@ -66,6 +72,11 @@ activateAddNewTodoMode text =
 activateEditTodoMode : Todo -> ModelMapper
 activateEditTodoMode todo =
     setEditModeTo (EditTodoMode todo)
+
+
+activateProcessingMode : ModelMapper
+activateProcessingMode m =
+    { m | processingModel = StartProcessing 0 (getTodoCollection m |> TodoCollection.asList) }
 
 
 updateEditTodoText : String -> ModelMapper

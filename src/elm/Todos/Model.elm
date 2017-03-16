@@ -6,6 +6,9 @@ import Todos.Todo as Todo exposing (Todo)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
+import Dict
+import Dict.Extra as Dict
+
 
 type ProjectType
     = InboxProject
@@ -73,3 +76,15 @@ replaceTodoIfIdMatches todo todos =
                 |> List.replaceIf (Todo.equalById todo) todo
     in
         ( todos |> setTodoList todoList, todo )
+
+
+
+upsertTodoList upsertList todos =
+    let
+        finalTodoList : List Todo
+        finalTodoList =
+            Todo.fromListById todos.todoList
+                |> Dict.union (Todo.fromListById upsertList)
+                |> Dict.values
+    in
+        todos |> setTodoList finalTodoList

@@ -15,6 +15,7 @@ module Todos
         )
 
 import Dict
+import Dict.Extra as Dict
 import Random.Pcg as Random exposing (Seed)
 import RandomIdGenerator
 import Todos.Todo as Todo exposing (Todo, TodoId)
@@ -22,7 +23,6 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Dict.Extra as Dict
 import FunctionalHelpers exposing (..)
 import Todos.Model as Model exposing (Model, append, setSeed, setTodoList)
 import Tuple2
@@ -80,15 +80,8 @@ deleteTodo todoId (TodosModel todos) =
 
 
 upsertTodoList : List Todo -> TodosModel -> TodosModel
-upsertTodoList upsertList (TodosModel todos) =
-    let
-        finalTodoList : List Todo
-        finalTodoList =
-            Todo.fromListById todos.todoList
-                |> Dict.union (Todo.fromListById upsertList)
-                |> Dict.values
-    in
-        todos |> setTodoList finalTodoList |> TodosModel
+upsertTodoList upsertList =
+    toModel >> Model.upsertTodoList upsertList >> TodosModel
 
 
 replaceTodoIfIdMatches todo =

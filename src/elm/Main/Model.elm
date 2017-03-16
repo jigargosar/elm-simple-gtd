@@ -112,7 +112,8 @@ updateTodosModel fun model =
 
 updateTodosModelTuple2 : (Model -> ( TodosModel, x )) -> Model -> ( Model, x )
 updateTodosModelTuple2 fun model =
-    setTodosModel (fun model) model
+    fun model
+        |> Tuple2.mapFirst (setTodosModel # model)
 
 
 addNewTodoAndDeactivateAddNewTodoMode : Model -> ( Model, Maybe Todo )

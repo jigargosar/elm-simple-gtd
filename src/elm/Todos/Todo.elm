@@ -28,6 +28,20 @@ type alias Todo =
     }
 
 
+todoConstructor id rev text dueAt deleted =
+    Todo text dueAt deleted rev id
+
+
+decoder : Decoder Todo
+decoder =
+    D.decode todoConstructor
+        |> D.required "_id" D.string
+        |> D.required "_rev" D.string
+        |> D.required "text" D.string
+        |> D.optional "dueAt" (D.maybe D.float) Nothing
+        |> D.optional "deleted" D.bool False
+
+
 createWithTextAndId text id =
     Todo text Nothing False "" id
 
@@ -54,16 +68,6 @@ encode todo =
 encodeSingleton : Todo -> EncodedTodoList
 encodeSingleton todo =
     [ encode todo ]
-
-
-decoder : Decoder Todo
-decoder =
-    D.decode Todo
-        |> D.required "text" D.string
-        |> D.optional "dueAt" (D.maybe D.float) Nothing
-        |> D.optional "deleted" D.bool False
-        |> D.required "_rev" D.string
-        |> D.required "_id" D.string
 
 
 decodeValue =

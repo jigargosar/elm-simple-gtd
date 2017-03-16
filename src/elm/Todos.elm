@@ -5,7 +5,6 @@ module Todos
         , EditMode(..)
           -- init
         , todoModelGenerator
-        , upsertTodoList
           -- crud
         , addNewTodo
         , deleteTodo
@@ -54,11 +53,6 @@ todoModelGenerator todoList =
 deleteTodo : TodoId -> TodosModel -> ( TodosModel, Maybe Todo )
 deleteTodo todoId =
     toModel >> Model.deleteTodo todoId >> Tuple2.mapFirst TodosModel
-
-
-upsertTodoList : List Todo -> TodosModel -> TodosModel
-upsertTodoList upsertList =
-    toModel >> Model.upsertTodoList upsertList >> TodosModel
 
 
 replaceTodoIfIdMatches todo =

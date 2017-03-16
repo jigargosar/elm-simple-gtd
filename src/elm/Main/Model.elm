@@ -42,14 +42,17 @@ initWithFlagsAndLocation { now, encodedTodoList } location =
                 >> Todos.todoModelGenerator
                 >> Random.step
 
-        todoModelSeedTuple =
+        todoModelFromSeed =
             Random.seedFromTime >> generateTodoModel encodedTodoList >> Tuple.first
     in
         now
-            |> todoModelSeedTuple
-            >> (Model # NotEditing)
+            |> todoModelFromSeed
+            >> (init NotEditing)
             >> Return.singleton
-            >> setEncodedTodoList encodedTodoList
+
+
+init editMode todosModel =
+    Model todosModel editMode
 
 
 getTodosModel : Model -> TodosModel
@@ -183,11 +186,3 @@ persistTodoCmdMaybe =
 
 persistTodoCmd todo =
     PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)
-
-
-setEncodedTodoList encodedList =
-    Return.map
-        (\m ->
-            ( Todos.upsertTodoList (Todo.decodeTodoList encodedList) m.todosModel, m )
-        )
-        >> setTodosModelFromTuple

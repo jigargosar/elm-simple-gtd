@@ -10,6 +10,7 @@ import Json.Encode
 import List.Extra as List
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
+import TodoCollection.Todo as Todo
 import TodoCollection.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -41,4 +42,8 @@ elmAppView m =
 
 
 startProcessingView todo =
-    div [] [ text "Processing : ", toString todo |> text ]
+    div []
+        [ p []
+            [ text "Processing : " ]
+        , h1 [] [ Todo.getText todo |> text ]
+        ]

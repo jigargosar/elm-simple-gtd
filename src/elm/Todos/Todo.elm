@@ -39,6 +39,7 @@ type alias EncodedTodo =
 type alias EncodedTodoList =
     List EncodedTodo
 
+
 encode : Todo -> EncodedTodo
 encode todo =
     E.object
@@ -48,6 +49,7 @@ encode todo =
         , "_rev" => E.string (getRev todo)
         , "_id" => E.string (getId todo)
         ]
+
 
 encodeSingleton : Todo -> EncodedTodoList
 encodeSingleton todo =
@@ -68,8 +70,8 @@ decodeValue =
     D.decodeValue decoder
 
 
-decodeList : List D.Value -> List Todo
-decodeList =
+decodeTodoList : EncodedTodoList -> List Todo
+decodeTodoList =
     List.map decodeValue
         >> List.filterMap
             (\result ->

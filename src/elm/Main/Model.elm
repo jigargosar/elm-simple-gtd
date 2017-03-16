@@ -37,7 +37,7 @@ initWithFlagsAndLocation : Flags -> Location -> Return Msg Model
 initWithFlagsAndLocation { now, encodedTodoList } location =
     let
         _ =
-            Todo.decodeList encodedTodoList
+            Todo.decodeTodoList encodedTodoList
     in
         initWithTime now |> Return.singleton |> setEncodedTodoList encodedTodoList
 
@@ -190,6 +190,6 @@ persistTodoCmd todo =
 setEncodedTodoList encodedList =
     Return.map
         (\m ->
-            ( Todos.upsertTodoList (Todo.decodeList encodedList) m.todosModel, m )
+            ( Todos.upsertTodoList (Todo.decodeTodoList encodedList) m.todosModel, m )
         )
         >> setTodosModelFromTuple

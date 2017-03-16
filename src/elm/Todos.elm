@@ -32,24 +32,12 @@ type TodosModel
     = TodosModel Model
 
 
-initWithSeed =
-    Model.initWithTodos [] >> TodosModel
-
-
 withModel fn (TodosModel model) =
     fn model
 
 
 toModel (TodosModel model) =
     model
-
-
-reject filter =
-    toModel >> Model.reject filter
-
-
-rejectMap filter mapper =
-    toModel >> Model.rejectMap filter mapper
 
 
 
@@ -62,9 +50,13 @@ type EditMode
     | NotEditing
 
 
+rejectMap filter mapper =
+    toModel >> Model.rejectMap filter mapper
+
+
 todoModelGenerator : Random.Generator TodosModel
 todoModelGenerator =
-    Random.map initWithSeed Random.independentSeed
+    Random.map (Model.init [] >> TodosModel) Random.independentSeed
 
 
 deleteTodo : TodoId -> TodosModel -> ( TodosModel, Maybe Todo )

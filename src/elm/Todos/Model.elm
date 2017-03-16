@@ -25,16 +25,12 @@ type alias Model =
     }
 
 
-initWithTodos todos seed =
+init todos seed =
     Model todos seed
 
 
 getTodoList =
     (.todoList)
-
-
-reject filter todos =
-    FunctionalHelpers.reject filter todos.todoList
 
 
 rejectMap filter mapper =
@@ -76,7 +72,6 @@ replaceTodoIfIdMatches todo todos =
                 |> List.replaceIf (Todo.equalById todo) todo
     in
         ( todos |> setTodoList todoList, todo )
-
 
 
 upsertTodoList upsertList todos =

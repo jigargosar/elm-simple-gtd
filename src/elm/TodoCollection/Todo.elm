@@ -1,4 +1,4 @@
-module Todos.Todo exposing (..)
+module TodoCollection.Todo exposing (..)
 
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D

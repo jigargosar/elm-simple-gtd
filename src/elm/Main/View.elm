@@ -9,7 +9,7 @@ import Json.Decode
 import Json.Encode
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
-import Todos.View
+import TodoCollection.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 
@@ -31,5 +31,5 @@ elmAppView m =
     div []
         [ div [] [ text "Hello" ]
         , div [] [ text ("editMode = " ++ (toString m.editMode)) ]
-        , Todos.View.allTodosView todoListViewConfig (getEditMode m) (getTodosModel m)
+        , TodoCollection.View.allTodosView todoListViewConfig (getEditMode m) (getTodosModel m)
         ]

@@ -7,10 +7,10 @@ import Navigation exposing (Location)
 import PouchDB
 import RandomIdGenerator as Random
 import Return exposing (Return)
-import Todos exposing (EditMode(..), TodosModel)
+import TodoCollection exposing (EditMode(..), TodosModel)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todos.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
+import TodoCollection.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -39,7 +39,7 @@ initWithFlagsAndLocation { now, encodedTodoList } location =
     let
         generateTodoModel =
             Todo.decodeTodoList
-                >> Todos.todoModelGenerator
+                >> TodoCollection.todoModelGenerator
                 >> Random.step
 
         todoModelFromSeed =
@@ -124,7 +124,7 @@ saveEditingTodoHelp editMode =
             else
                 Return.andThen
                     (\m ->
-                        Todos.replaceTodoIfIdMatches todo m.todosModel
+                        TodoCollection.replaceTodoIfIdMatches todo m.todosModel
                             |> Tuple2.mapEach ((,) # m) persistTodoCmd
                     )
                     >> setTodosModelFromTuple
@@ -154,7 +154,7 @@ createAndAddNewTodo editMode =
             else
                 Return.andThen
                     (\m ->
-                        Todos.addNewTodo text m.todosModel
+                        TodoCollection.addNewTodo text m.todosModel
                             |> Tuple2.mapEach ((,) # m) persistTodoCmd
                     )
                     >> setTodosModelFromTuple
@@ -170,7 +170,7 @@ setTodosModelFromTuple =
 deleteTodo todoId =
     Return.andThen
         (\m ->
-            Todos.deleteTodo todoId m.todosModel
+            TodoCollection.deleteTodo todoId m.todosModel
                 |> Tuple2.mapEach ((,) # m) persistTodoCmdMaybe
         )
         >> setTodosModelFromTuple

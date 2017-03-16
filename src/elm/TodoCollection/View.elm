@@ -1,11 +1,11 @@
-module Todos.View exposing (..)
+module TodoCollection.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
-import Todos exposing (EditMode(..), TodosModel)
-import Todos.Todo as Todo exposing (Todo, TodoId)
+import TodoCollection exposing (EditMode(..), TodosModel)
+import TodoCollection.Todo as Todo exposing (Todo, TodoId)
 
 
 type alias ViewConfig msg =
@@ -60,7 +60,7 @@ todoListView : EditMode -> ViewConfig msg -> TodosModel -> Html msg
 todoListView editMode viewConfig todosModel =
     ul []
         (todosModel
-            |> Todos.rejectMap Todo.isDeleted
+            |> TodoCollection.rejectMap Todo.isDeleted
                 (todoView viewConfig.onDeleteTodoClicked viewConfig.onEditTodoClicked editMode viewConfig)
         )
 

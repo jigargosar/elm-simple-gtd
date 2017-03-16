@@ -1,8 +1,8 @@
-module Todos.Model exposing (..)
+module TodoCollection.Model exposing (..)
 
 import FunctionalHelpers exposing (..)
 import Random.Pcg as Random exposing (Seed)
-import Todos.Todo as Todo exposing (Todo)
+import TodoCollection.Todo as Todo exposing (Todo)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
@@ -25,8 +25,8 @@ type alias Model =
     }
 
 
-init todos seed =
-    Model todos seed
+init todoCollection seed =
+    Model todoCollection seed
 
 
 getTodoList =
@@ -37,16 +37,16 @@ rejectMap filter mapper =
     getTodoList >> List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))
 
 
-setSeed seed todos =
-    { todos | seed = seed }
+setSeed seed todoCollection =
+    { todoCollection | seed = seed }
 
 
 getSeed =
     (.seed)
 
 
-appendTodo todo todos =
-    todos.todoList ++ [ todo ] |> setTodoList # todos
+appendTodo todo todoCollection =
+    todoCollection.todoList ++ [ todo ] |> setTodoList # todoCollection
 
 
 setTodoList todoList model =
@@ -57,16 +57,16 @@ updateTodoList fun model =
     setTodoList (fun model) model
 
 
-generateTodo text todos =
-    Random.step (Todo.todoGenerator text) (getSeed todos)
+generateTodo text todoCollection =
+    Random.step (Todo.todoGenerator text) (getSeed todoCollection)
 
 
-addNewTodo text todos =
+addNewTodo text todoCollection =
     let
         ( todo, seed ) =
-            generateTodo text todos
+            generateTodo text todoCollection
     in
-        ( todos |> appendTodo todo |> setSeed seed, todo )
+        ( todoCollection |> appendTodo todo |> setSeed seed, todo )
 
 
 replaceTodoIfIdMatches : Todo -> Model -> ( Model, Todo )
@@ -90,12 +90,12 @@ upsertTodoList upsertList =
         updateTodoList finalTodoList
 
 
-deleteTodo todoId todos =
+deleteTodo todoId todoCollection =
     let
         todoList =
-            todos.todoList
+            todoCollection.todoList
                 |> List.updateIf (Todo.hasId todoId) (Todo.markDeleted)
     in
-        ( setTodoList todoList todos
+        ( setTodoList todoList todoCollection
         , List.find (Todo.hasId todoId) todoList
         )

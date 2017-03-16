@@ -10,7 +10,6 @@ import Time exposing (Time)
 import PouchDB
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
-import Function exposing ((>>>), (<<<))
 import Maybe.Extra as Maybe
 import TodoCollection.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2

@@ -13,9 +13,6 @@ import Toolkit.Helpers exposing (..)
 import Tuple2
 
 
-type alias Flags =
-    { now : Time, encodedTodoList : EncodedTodoList }
-
 
 type alias Model =
     { todosModel : TodosModel
@@ -31,8 +28,8 @@ type alias ModelMapper =
     Model -> Model
 
 
-initWithFlagsAndLocation : Flags -> Location -> Model
-initWithFlagsAndLocation { now, encodedTodoList } location =
+init : Time -> EncodedTodoList -> Model
+init now encodedTodoList =
     let
         generateTodoModel =
             Todo.decodeTodoList

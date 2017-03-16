@@ -1,7 +1,7 @@
 port module Main exposing (..)
 
 import Json.Encode as E
-import Main.Model as Model exposing (Flags, Model)
+import Main.Model as Model exposing (Model)
 import Main.Msg exposing (..)
 import Main.View exposing (elmAppView)
 import Navigation exposing (Location)
@@ -16,11 +16,23 @@ import TodoCollection.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
 
 
+type alias ReturnTA =
+    Return Msg Model
+
+
+type alias ReturnMapper =
+    ReturnTA -> ReturnTA
+
+
+type alias Flags =
+    { now : Time, encodedTodoList : EncodedTodoList }
+
+
 main : Program Flags Model Msg
 main =
     Navigation.programWithFlags LocationChanged
         --    TimeTravel.Navigation.programWithFlags LocationChanged
-        { init = Model.initWithFlagsAndLocation >>> Return.singleton
+        { init = init
         , view = elmAppView
         , update = update
         , subscriptions =
@@ -30,11 +42,12 @@ main =
         }
 
 
-type alias ReturnMapper =
-    Return Msg Model -> Return Msg Model
+init : Flags -> Location -> ReturnTA
+init { now, encodedTodoList } location =
+    Model.init now encodedTodoList |> Return.singleton
 
 
-update : Msg -> Model -> Return Msg Model
+update : Msg -> Model -> ReturnTA
 update msg =
     Return.singleton
         >> case msg of

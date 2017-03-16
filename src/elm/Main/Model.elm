@@ -105,6 +105,11 @@ setTodosModel todosModel m =
     { m | todosModel = todosModel }
 
 
+updateTodosModel : (Model -> TodosModel) -> ModelMapper
+updateTodosModel fun model =
+    setTodosModel (fun model) model
+
+
 addNewTodoAndDeactivateAddNewTodoMode : Model -> ( Model, Maybe Todo )
 addNewTodoAndDeactivateAddNewTodoMode =
     addNewTodo

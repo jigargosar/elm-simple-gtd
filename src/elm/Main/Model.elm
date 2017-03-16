@@ -30,6 +30,10 @@ type alias Model =
     }
 
 
+modelConstructor editMode todosModel =
+    Model todosModel editMode
+
+
 type alias ReturnMapper =
     Return Msg Model -> Return Msg Model
 
@@ -47,12 +51,8 @@ initWithFlagsAndLocation { now, encodedTodoList } location =
     in
         now
             |> todoModelFromSeed
-            >> (init NotEditing)
+            >> (modelConstructor NotEditing)
             >> Return.singleton
-
-
-init editMode todosModel =
-    Model todosModel editMode
 
 
 getTodosModel : Model -> TodosModel

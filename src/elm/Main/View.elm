@@ -58,7 +58,7 @@ startProcessingView todo =
 processAsActionableView todo =
     div []
         [ header todo
-        , h2 [] [ text "Can be done under 2 mins" ]
+        , h2 [] [ text "Actionable >> Can be done under 2 mins" ]
         , yesNoButtons ProcessAsActionable ProcessAsNotActionable todo
         ]
 
@@ -66,7 +66,7 @@ processAsActionableView todo =
 processAsNotActionableView todo =
     div []
         [ header todo
-        , h2 [] [ text "Eliminate ?" ]
+        , h2 [] [ text "NotActionable >> Eliminate ?" ]
         , yesNoButtons ProcessAsActionable ProcessAsNotActionable todo
         ]
 

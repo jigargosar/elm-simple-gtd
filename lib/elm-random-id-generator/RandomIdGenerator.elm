@@ -1,7 +1,8 @@
 module RandomIdGenerator exposing (..)
 
-import Random.Pcg as Random exposing (Generator)
+import Random.Pcg as Random exposing (Generator, Seed)
 import Char
+import Time exposing (Time)
 
 
 lowercaseLetter =
@@ -23,3 +24,6 @@ alphaNumericChar =
 idGen : Generator String
 idGen =
     Random.map (String.fromList) (Random.list 64 alphaNumericChar)
+
+seedFromTime: Time -> Seed
+seedFromTime = round >> Random.initialSeed

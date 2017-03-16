@@ -5,6 +5,7 @@ import Main.Msg exposing (Msg)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import PouchDB
+import RandomIdGenerator as Random
 import Return exposing (Return)
 import Todos exposing (EditMode(..), TodosModel)
 import Random.Pcg as Random exposing (Seed)
@@ -42,7 +43,7 @@ initWithFlagsAndLocation { now, encodedTodoList } location =
                 >> Random.step
 
         todoModelSeedTuple =
-            round >> Random.initialSeed >> generateTodoModel encodedTodoList >> Tuple.first
+            Random.seedFromTime >> generateTodoModel encodedTodoList >> Tuple.first
     in
         now
             |> todoModelSeedTuple

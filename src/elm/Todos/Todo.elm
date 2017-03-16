@@ -28,6 +28,18 @@ type alias Todo =
     }
 
 
+defaultRevision =
+    ""
+
+
+defaultDueAt =
+    Nothing
+
+
+defaultDeleted =
+    False
+
+
 todoConstructor id rev text dueAt deleted =
     Todo text dueAt deleted rev id
 
@@ -38,12 +50,12 @@ decoder =
         |> D.required "_id" D.string
         |> D.required "_rev" D.string
         |> D.required "text" D.string
-        |> D.optional "dueAt" (D.maybe D.float) Nothing
-        |> D.optional "deleted" D.bool False
+        |> D.optional "dueAt" (D.maybe D.float) defaultDueAt
+        |> D.optional "deleted" D.bool defaultDeleted
 
 
-createWithTextAndId text id =
-    Todo text Nothing False "" id
+initWithTextAndId text id =
+    todoConstructor id defaultRevision text defaultDueAt defaultDeleted
 
 
 type alias EncodedTodo =
@@ -93,7 +105,7 @@ decodeTodoList =
 
 
 todoGenerator text =
-    Random.map (createWithTextAndId text) RandomIdGenerator.idGen
+    Random.map (initWithTextAndId text) RandomIdGenerator.idGen
 
 
 getText =

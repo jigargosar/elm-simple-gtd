@@ -53,11 +53,6 @@ defaultDeleted =
     False
 
 
-type DoneState
-    = Pending
-    | Done
-
-
 type ProcessingState
     = InBasket
     | Pending

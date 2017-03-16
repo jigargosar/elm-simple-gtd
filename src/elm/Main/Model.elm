@@ -151,10 +151,10 @@ saveEditingTodoHelp editMode =
             identity
 
 
-addNewTodoAndContinueAdding : ReturnMapper
+addNewTodoAndContinueAdding : Model -> ( Model, Maybe Todo )
 addNewTodoAndContinueAdding =
-    addNewTodo
-        >> activateAddNewTodoMode ""
+    addNewTodo2
+        >> Tuple2.mapFirst (activateAddNewTodoMode2 "")
 
 
 addNewTodo : ReturnMapper

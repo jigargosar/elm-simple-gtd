@@ -49,7 +49,10 @@ update msg =
                     )
 
             OnNewTodoEnterPressed ->
-                addNewTodoAndContinueAdding
+                Return.andThen
+                    (addNewTodoAndContinueAdding
+                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                    )
 
             OnDeleteTodoClicked todoId ->
                 deleteTodo todoId

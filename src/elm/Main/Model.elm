@@ -100,13 +100,8 @@ updateEditTodoTextHelp text editMode =
             identity
 
 
-setTodosModel : TodosModel -> ReturnMapper
-setTodosModel todosModel =
-    Return.map (\m -> { m | todosModel = todosModel })
-
-
-setTodosModel2 : TodosModel -> ModelMapper
-setTodosModel2 todosModel m =
+setTodosModel : TodosModel -> ModelMapper
+setTodosModel todosModel m =
     { m | todosModel = todosModel }
 
 
@@ -114,6 +109,26 @@ addNewTodoAndDeactivateAddNewTodoMode : Model -> ( Model, Maybe Todo )
 addNewTodoAndDeactivateAddNewTodoMode =
     addNewTodo
         >> Tuple2.mapFirst (setEditModeTo2 NotEditing)
+
+
+addNewTodoAndContinueAdding : Model -> ( Model, Maybe Todo )
+addNewTodoAndContinueAdding =
+    addNewTodo
+        >> Tuple2.mapFirst (activateAddNewTodoMode "")
+
+
+addNewTodo : Model -> ( Model, Maybe Todo )
+addNewTodo m =
+    case getEditMode m of
+        EditNewTodoMode text ->
+            if String.trim text |> String.isEmpty then
+                ( m, Nothing )
+            else
+                TodoCollection.addNewTodo text m.todosModel
+                    |> Tuple2.mapEach (setTodosModel # m) (Just)
+
+        _ ->
+            ( m, Nothing )
 
 
 saveEditingTodoAndDeactivateEditTodoMode : ReturnMapper
@@ -146,33 +161,13 @@ saveEditingTodoHelp editMode =
             identity
 
 
-addNewTodoAndContinueAdding : Model -> ( Model, Maybe Todo )
-addNewTodoAndContinueAdding =
-    addNewTodo
-        >> Tuple2.mapFirst (activateAddNewTodoMode "")
-
-
-addNewTodo : Model -> ( Model, Maybe Todo )
-addNewTodo m =
-    case getEditMode m of
-        EditNewTodoMode text ->
-            if String.trim text |> String.isEmpty then
-                ( m, Nothing )
-            else
-                TodoCollection.addNewTodo text m.todosModel
-                    |> Tuple2.mapEach (setTodosModel2 # m) (Just)
-
-        _ ->
-            ( m, Nothing )
-
-
 setTodosModelFromTuple =
     Return.map (\( todosModel, m ) -> { m | todosModel = todosModel })
 
 
 deleteTodo todoId m =
     TodoCollection.deleteTodo todoId m.todosModel
-        |> Tuple2.mapFirst (setTodosModel2 # m)
+        |> Tuple2.mapFirst (setTodosModel # m)
 
 
 persistTodoCmd todo =

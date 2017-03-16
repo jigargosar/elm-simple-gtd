@@ -52,6 +52,12 @@ elmAppView m =
         ProcessAsWorthKeeping todo ->
             processAsWorthKeeping todo
 
+        ProcessAsSomeDay todo ->
+            processAsSomeDay todo
+
+        ProcessAsReference todo ->
+            processAsReference todo
+
 
 startProcessingView todo =
     div []
@@ -80,7 +86,7 @@ processAsNotActionableView todo =
 processAsTrashView todo =
     div []
         [ header todo
-        , h2 [] [ text "Not Actionable >> Trash >> Are You Sure ?" ]
+        , h2 [] [ text "Not Actionable >> Not Worth Keeping >> Trash it ?" ]
         , lastActionButtons ProcessAsNotActionable todo
         ]
 
@@ -89,7 +95,23 @@ processAsWorthKeeping todo =
     div []
         [ header todo
         , h2 [] [ text "Not Actionable >> Worth Keeping >> Could Require Action Later ?" ]
-        , yesNoButtons ProcessAsTrash ProcessAsWorthKeeping todo
+        , yesNoButtons ProcessAsSomeDay ProcessAsReference todo
+        ]
+
+
+processAsSomeDay todo =
+    div []
+        [ header todo
+        , h2 [] [ text "Not Actionable >> Worth Keeping >> Move to SomDay/Maybe List?" ]
+        , lastActionButtons ProcessAsWorthKeeping todo
+        ]
+
+
+processAsReference todo =
+    div []
+        [ header todo
+        , h2 [] [ text "Not Actionable >> Worth Keeping >> Move to Reference ?" ]
+        , lastActionButtons ProcessAsWorthKeeping todo
         ]
 
 

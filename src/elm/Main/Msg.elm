@@ -12,6 +12,9 @@ type ProcessingModel
     | ProcessAsNotActionable Todo
     | ProcessAsTrash Todo
     | ProcessAsWorthKeeping Todo
+    | ProcessAsSomeDay Todo
+    | ProcessAsReference Todo
+
 
 
 type Msg

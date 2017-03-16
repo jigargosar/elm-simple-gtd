@@ -8,13 +8,16 @@ import Navigation exposing (Location)
 import Return exposing (Return)
 import Time exposing (Time)
 import PouchDB
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
+import Function exposing ((>>>), (<<<))
 
 
 main : Program Flags Model Msg
 main =
     Navigation.programWithFlags LocationChanged
         --    TimeTravel.Navigation.programWithFlags LocationChanged
-        { init = Model.initWithFlagsAndLocation
+        { init = Model.initWithFlagsAndLocation >>> Return.singleton
         , view = elmAppView
         , update = update
         , subscriptions =

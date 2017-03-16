@@ -68,7 +68,7 @@ addNewTodo text todoCollection =
         ( todo, newTodoCollection ) =
             generate (Todo.todoGenerator text) todoCollection
     in
-        ( newTodoCollection |> appendTodo todo, todo )
+        (  appendTodo todo newTodoCollection, todo )
 
 
 replaceTodoIfIdMatches : Todo -> Model -> ( Model, Todo )

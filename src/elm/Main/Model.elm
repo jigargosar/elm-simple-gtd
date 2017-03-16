@@ -34,7 +34,7 @@ type alias ReturnMapper =
     Return Msg Model -> Return Msg Model
 
 
-initWithFlagsAndLocation : Flags -> Location -> Return Msg Model
+initWithFlagsAndLocation : Flags -> Location -> Model
 initWithFlagsAndLocation { now, encodedTodoList } location =
     let
         generateTodoModel =
@@ -48,7 +48,6 @@ initWithFlagsAndLocation { now, encodedTodoList } location =
         now
             |> todoModelFromSeed
             >> (modelConstructor NotEditing)
-            >> Return.singleton
 
 
 getTodosModel : Model -> TodosModel

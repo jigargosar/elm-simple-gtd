@@ -1,14 +1,5 @@
-module Project.Model exposing (Project)
-
-
-type alias ProjectName =
-    String
-
-
-type ProjectType
-    = InboxProject
-    | CustomProject ProjectName
+module Project.Model exposing (..)
 
 
 type alias Project =
-    { id : String, type_ : ProjectType }
+    { id : String, rev : String, name : String }

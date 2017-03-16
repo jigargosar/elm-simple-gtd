@@ -16,8 +16,9 @@ import Tuple2
 
 type ProcessingModel
     = NotProcessing
-    | StartProcessing Int (List Todo) Todo
-    | ProcessAsActionable Int (List Todo) Todo
+    | StartProcessing Todo
+    | ProcessAsActionable Todo
+    | ProcessAsNotActionable Todo
 
 
 type alias Model =
@@ -90,16 +91,18 @@ updateProcessingModel fun m =
 
 
 startProcessing todoList =
-    todoList |> List.getAt 0 ?|> StartProcessing 0 todoList ?= NotProcessing
+    todoList |> List.getAt 0 ?|> StartProcessing ?= NotProcessing
 
 
 processAsActionable bool =
     updateProcessingModel
         (\m ->
             case (m.processingModel) of
-                StartProcessing idx list todo ->
-                    ProcessAsActionable idx list todo
-
+                StartProcessing todo ->
+                    if bool then
+                        ProcessAsActionable todo
+                    else
+                        ProcessAsNotActionable todo
                 _ ->
                     NotProcessing
         )

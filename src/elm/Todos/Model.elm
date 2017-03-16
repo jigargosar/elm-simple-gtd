@@ -3,6 +3,8 @@ module Todos.Model exposing (..)
 import FunctionalHelpers exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Todos.Todo as Todo exposing (Todo)
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
 
 
 type ProjectType
@@ -46,4 +48,3 @@ append todo todos =
 
 setTodoList todoList todos =
     { todos | todoList = todoList }
-

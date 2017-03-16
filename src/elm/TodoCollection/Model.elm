@@ -8,6 +8,7 @@ import Toolkit.Helpers exposing (..)
 import List.Extra as List
 import Dict
 import Dict.Extra as Dict
+import Tuple2
 
 
 type ProjectType
@@ -57,16 +58,17 @@ updateTodoList fun model =
     setTodoList (fun model) model
 
 
-generateTodo text todoCollection =
-    Random.step (Todo.todoGenerator text) (getSeed todoCollection)
+generate generator todoCollection =
+    Random.step generator (getSeed todoCollection)
+        |> Tuple2.mapSecond (setSeed # todoCollection)
 
 
 addNewTodo text todoCollection =
     let
-        ( todo, seed ) =
-            generateTodo text todoCollection
+        ( todo, newTodoCollection ) =
+            generate (Todo.todoGenerator text) todoCollection
     in
-        ( todoCollection |> appendTodo todo |> setSeed seed, todo )
+        ( newTodoCollection |> appendTodo todo, todo )
 
 
 replaceTodoIfIdMatches : Todo -> Model -> ( Model, Todo )

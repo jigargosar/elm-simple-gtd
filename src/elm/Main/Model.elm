@@ -148,11 +148,3 @@ saveEditingTodo m =
 
         _ ->
             ( m, Nothing )
-
-
-setTodosModelFromTuple =
-    Return.map (\( todosModel, m ) -> { m | todosModel = todosModel })
-
-
-persistTodoCmd todo =
-    PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)

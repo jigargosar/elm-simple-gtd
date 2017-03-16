@@ -135,34 +135,24 @@ deleteTodo todoId m =
         |> Tuple2.mapFirst (setTodosModel # m)
 
 
-saveEditingTodoAndDeactivateEditTodoMode : ReturnMapper
+saveEditingTodoAndDeactivateEditTodoMode : Model -> ( Model, Maybe Todo )
 saveEditingTodoAndDeactivateEditTodoMode =
     saveEditingTodo
-        >> setEditModeTo NotEditing
+        >> Tuple2.mapFirst (setEditModeTo2 NotEditing)
 
 
-saveEditingTodo : ReturnMapper
-saveEditingTodo =
-    Return.map (\m -> ( getEditMode m, Return.singleton m ))
-        >> Return.andThen (uncurry saveEditingTodoHelp)
-
-
-saveEditingTodoHelp : EditMode -> ReturnMapper
-saveEditingTodoHelp editMode =
-    case editMode of
+saveEditingTodo : Model -> ( Model, Maybe Todo )
+saveEditingTodo m =
+    case getEditMode m of
         EditTodoMode todo ->
             if Todo.isTextEmpty todo then
-                identity
+                ( m, Nothing )
             else
-                Return.andThen
-                    (\m ->
-                        TodoCollection.replaceTodoIfIdMatches todo m.todosModel
-                            |> Tuple2.mapEach ((,) # m) persistTodoCmd
-                    )
-                    >> setTodosModelFromTuple
+                TodoCollection.replaceTodoIfIdMatches todo m.todosModel
+                    |> Tuple2.mapEach (setTodosModel # m) (Just)
 
         _ ->
-            identity
+            ( m, Nothing )
 
 
 setTodosModelFromTuple =

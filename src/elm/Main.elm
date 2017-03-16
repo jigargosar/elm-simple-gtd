@@ -67,10 +67,16 @@ update msg =
                 Return.map (Model.updateEditTodoText text)
 
             OnEditTodoBlur ->
-                Model.saveEditingTodoAndDeactivateEditTodoMode
+                Return.andThen
+                    (Model.saveEditingTodoAndDeactivateEditTodoMode
+                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                    )
 
             OnEditTodoEnterPressed ->
-                Model.saveEditingTodoAndDeactivateEditTodoMode
+                Return.andThen
+                    (Model.saveEditingTodoAndDeactivateEditTodoMode
+                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                    )
 
 
 

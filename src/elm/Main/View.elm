@@ -46,4 +46,5 @@ startProcessingView todo =
         [ h3 []
             [ text "Processing : " ]
         , h1 [] [ Todo.getText todo |> text ]
+        , button [] [ text "Is it Actionable?" ]
         ]

@@ -30,6 +30,11 @@ main =
         }
 
 
+type alias ReturnMapper =
+    Return Msg Model -> Return Msg Model
+
+
+update : Msg -> Model -> Return Msg Model
 update msg =
     Return.singleton
         >> case msg of
@@ -86,10 +91,6 @@ update msg =
 --                        Debug.log "WARN: msg ignored" (msg)
 --                in
 --                    identity
-
-
-type alias ReturnMapper =
-    Return Msg Model -> Return Msg Model
 
 
 persistTodoCmdMaybe =

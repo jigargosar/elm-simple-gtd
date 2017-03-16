@@ -74,11 +74,6 @@ getEditMode =
     (.editMode)
 
 
-activateAddNewTodoMode : String -> ReturnMapper
-activateAddNewTodoMode text =
-    setEditModeTo (EditNewTodoMode text)
-
-
 activateAddNewTodoMode2 : String -> ModelMapper
 activateAddNewTodoMode2 text =
     setEditModeTo2 (EditNewTodoMode text)

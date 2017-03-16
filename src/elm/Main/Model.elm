@@ -74,8 +74,8 @@ getEditMode =
     (.editMode)
 
 
-activateAddNewTodoMode2 : String -> ModelMapper
-activateAddNewTodoMode2 text =
+activateAddNewTodoMode : String -> ModelMapper
+activateAddNewTodoMode text =
     setEditModeTo2 (EditNewTodoMode text)
 
 
@@ -112,7 +112,7 @@ setTodosModel2 todosModel m =
 
 addNewTodoAndDeactivateAddNewTodoMode : Model -> ( Model, Maybe Todo )
 addNewTodoAndDeactivateAddNewTodoMode =
-    addNewTodo2
+    addNewTodo
         >> Tuple2.mapFirst (setEditModeTo2 NotEditing)
 
 
@@ -148,18 +148,12 @@ saveEditingTodoHelp editMode =
 
 addNewTodoAndContinueAdding : Model -> ( Model, Maybe Todo )
 addNewTodoAndContinueAdding =
-    addNewTodo2
-        >> Tuple2.mapFirst (activateAddNewTodoMode2 "")
+    addNewTodo
+        >> Tuple2.mapFirst (activateAddNewTodoMode "")
 
 
-addNewTodo : ReturnMapper
-addNewTodo =
-    Return.map (\m -> ( getEditMode m, Return.singleton m ))
-        >> Return.andThen (uncurry createAndAddNewTodo)
-
-
-addNewTodo2 : Model -> ( Model, Maybe Todo )
-addNewTodo2 m =
+addNewTodo : Model -> ( Model, Maybe Todo )
+addNewTodo m =
     case getEditMode m of
         EditNewTodoMode text ->
             if String.trim text |> String.isEmpty then

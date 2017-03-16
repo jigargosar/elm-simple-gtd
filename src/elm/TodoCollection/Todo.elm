@@ -53,6 +53,25 @@ defaultDeleted =
     False
 
 
+type NonActionableStuffType
+    = Trash
+    | SomeDay
+    | Reference
+
+
+type ActionableStuffType
+    = MultiStepProjectPlanning
+    | CanBeDoneUnder2Minutes
+    | Delegate
+    | Calender
+    | Next
+
+
+type StuffType
+    = ActionableStuff ActionableStuffType
+    | NonActionableStuff NonActionableStuffType
+
+
 type ProcessingState
     = InBasket
     | Pending

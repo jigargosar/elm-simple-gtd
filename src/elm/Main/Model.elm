@@ -34,6 +34,10 @@ type alias ReturnMapper =
     Return Msg Model -> Return Msg Model
 
 
+type alias ModelMapper =
+    Model -> Model
+
+
 initWithFlagsAndLocation : Flags -> Location -> Model
 initWithFlagsAndLocation { now, encodedTodoList } location =
     let
@@ -60,6 +64,11 @@ setEditModeTo editMode =
     Return.map (\m -> { m | editMode = editMode })
 
 
+setEditModeTo2 : EditMode -> ModelMapper
+setEditModeTo2 editMode m =
+    { m | editMode = editMode }
+
+
 getEditMode : Model -> EditMode
 getEditMode =
     (.editMode)
@@ -68,6 +77,11 @@ getEditMode =
 activateAddNewTodoMode : String -> ReturnMapper
 activateAddNewTodoMode text =
     setEditModeTo (EditNewTodoMode text)
+
+
+activateAddNewTodoMode2 : String -> ModelMapper
+activateAddNewTodoMode2 text =
+    setEditModeTo2 (EditNewTodoMode text)
 
 
 activateEditTodoMode : Todo -> ReturnMapper

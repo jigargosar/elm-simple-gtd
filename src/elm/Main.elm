@@ -34,10 +34,10 @@ update msg =
                 identity
 
             OnAddTodoClicked ->
-                activateAddNewTodoMode ""
+                Return.map (Model.activateAddNewTodoMode2 "")
 
             OnNewTodoTextChanged text ->
-                activateAddNewTodoMode text
+                Return.map (Model.activateAddNewTodoMode2 text)
 
             OnNewTodoBlur ->
                 addNewTodoAndDeactivateAddNewTodoMode

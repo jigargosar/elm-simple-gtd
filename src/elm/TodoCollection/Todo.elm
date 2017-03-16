@@ -1,4 +1,22 @@
-module TodoCollection.Todo exposing (..)
+module TodoCollection.Todo
+    exposing
+        ( TodoId
+        , Todo
+        , EncodedTodoList
+        , todoGenerator
+        , replaceIfEqualById
+        , fromListById
+        , hasId
+        , markDeleted
+        , decodeTodoList
+        , setText
+        , isTextEmpty
+        , isDeleted
+        , equalById
+        , encodeSingleton
+        , getId
+        , getText
+        )
 
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D

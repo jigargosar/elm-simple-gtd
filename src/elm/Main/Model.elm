@@ -166,24 +166,6 @@ addNewTodo m =
             ( m, Nothing )
 
 
-createAndAddNewTodo : EditMode -> ReturnMapper
-createAndAddNewTodo editMode =
-    case editMode of
-        EditNewTodoMode text ->
-            if String.trim text |> String.isEmpty then
-                identity
-            else
-                Return.andThen
-                    (\m ->
-                        TodoCollection.addNewTodo text m.todosModel
-                            |> Tuple2.mapEach ((,) # m) persistTodoCmd
-                    )
-                    >> setTodosModelFromTuple
-
-        _ ->
-            identity
-
-
 setTodosModelFromTuple =
     Return.map (\( todosModel, m ) -> { m | todosModel = todosModel })
 

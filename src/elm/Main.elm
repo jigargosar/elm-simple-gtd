@@ -1,7 +1,7 @@
 port module Main exposing (..)
 
 import Json.Encode as E
-import Main.Model as Model exposing (..)
+import Main.Model as Model exposing (Flags, Model)
 import Main.Msg exposing (..)
 import Main.View exposing (elmAppView)
 import Navigation exposing (Location)
@@ -44,31 +44,33 @@ update msg =
 
             OnNewTodoBlur ->
                 Return.andThen
-                    (addNewTodoAndDeactivateAddNewTodoMode
+                    (Model.addNewTodoAndDeactivateAddNewTodoMode
                         >> Tuple2.mapSecond persistTodoCmdMaybe
                     )
 
             OnNewTodoEnterPressed ->
                 Return.andThen
-                    (addNewTodoAndContinueAdding
+                    (Model.addNewTodoAndContinueAdding
                         >> Tuple2.mapSecond persistTodoCmdMaybe
                     )
 
             OnDeleteTodoClicked todoId ->
-                Return.andThen (deleteTodo todoId
-                    >> Tuple2.mapSecond persistTodoCmdMaybe)
+                Return.andThen
+                    (Model.deleteTodo todoId
+                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                    )
 
             OnEditTodoClicked todo ->
-                activateEditTodoMode todo
+                Return.map (Model.activateEditTodoMode todo)
 
             OnEditTodoTextChanged text ->
-                updateEditTodoText text
+                Model.updateEditTodoText text
 
             OnEditTodoBlur ->
-                saveEditingTodoAndDeactivateEditTodoMode
+                Model.saveEditingTodoAndDeactivateEditTodoMode
 
             OnEditTodoEnterPressed ->
-                saveEditingTodoAndDeactivateEditTodoMode
+                Model.saveEditingTodoAndDeactivateEditTodoMode
 
 
 

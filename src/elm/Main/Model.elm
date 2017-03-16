@@ -79,9 +79,9 @@ activateAddNewTodoMode text =
     setEditModeTo2 (EditNewTodoMode text)
 
 
-activateEditTodoMode : Todo -> ReturnMapper
+activateEditTodoMode : Todo -> ModelMapper
 activateEditTodoMode todo =
-    setEditModeTo (EditTodoMode todo)
+    setEditModeTo2 (EditTodoMode todo)
 
 
 updateEditTodoText : String -> ReturnMapper
@@ -131,6 +131,11 @@ addNewTodo m =
             ( m, Nothing )
 
 
+deleteTodo todoId m =
+    TodoCollection.deleteTodo todoId m.todosModel
+        |> Tuple2.mapFirst (setTodosModel # m)
+
+
 saveEditingTodoAndDeactivateEditTodoMode : ReturnMapper
 saveEditingTodoAndDeactivateEditTodoMode =
     saveEditingTodo
@@ -163,11 +168,6 @@ saveEditingTodoHelp editMode =
 
 setTodosModelFromTuple =
     Return.map (\( todosModel, m ) -> { m | todosModel = todosModel })
-
-
-deleteTodo todoId m =
-    TodoCollection.deleteTodo todoId m.todosModel
-        |> Tuple2.mapFirst (setTodosModel # m)
 
 
 persistTodoCmd todo =

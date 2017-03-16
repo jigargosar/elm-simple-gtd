@@ -40,7 +40,10 @@ addTodoView editMode viewConfig =
 
 
 addTodoButton viewConfig =
-    button [ onClick viewConfig.onAddTodoClicked ] [ text "Add" ]
+    div []
+        [ button [ onClick viewConfig.onAddTodoClicked ] [ text "Add" ]
+        , button [ onClick viewConfig.onAddTodoClicked ] [ text "Process" ]
+        ]
 
 
 addNewTodoView viewConfig text =

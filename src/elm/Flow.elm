@@ -1,5 +1,8 @@
 module Flow exposing (..)
 
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
+
 
 type Branch
     = Leaf
@@ -21,6 +24,7 @@ isActionable =
         , onNo = isItWorthKeeping (\_ -> Just isActionable)
         , onBack = Nothing
         }
+        |> Debug.log "isActionable"
 
 
 canItBeDoneUnder2Min back =

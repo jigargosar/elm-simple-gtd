@@ -29,5 +29,23 @@ tracker node =
     ( node, [] )
 
 
-root =
+rootTracker =
     tracker isActionable
+
+
+getQuestion ( node, _ ) =
+    case node of
+        Branch q _ _ ->
+            q
+
+        Leaf q ->
+            q
+
+
+onYes ( node, parentNodes ) =
+    case node of
+        Branch q y n ->
+            Just ( y, node :: parentNodes )
+
+        Leaf q ->
+            Nothing

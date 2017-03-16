@@ -24,21 +24,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Dict.Extra as Dict
 import FunctionalHelpers exposing (..)
-
-
-type ProjectType
-    = InboxProject
-    | CustomProject
-
-
-type alias Project =
-    { id : String, name : String, type_ : ProjectType }
-
-
-type alias Todos =
-    { todoList : List Todo
-    , seed : Seed
-    }
+import Todos.Model as Model exposing (Todos)
 
 
 type TodosModel
@@ -46,19 +32,7 @@ type TodosModel
 
 
 initWithSeed =
-    initWithTodos []
-
-
-initWithTodos todos seed =
-    TodosModel (Todos todos seed)
-
-
-mapAll mapper (TodosModel todos) =
-    List.map mapper todos.todoList
-
-
-filter filter (TodosModel todos) =
-    List.filter filter todos.todoList
+    Model.initWithTodos [] >> TodosModel
 
 
 reject filter (TodosModel todos) =

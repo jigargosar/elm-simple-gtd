@@ -204,9 +204,5 @@ deleteTodo todoId m =
         |> Tuple2.mapFirst (setTodosModel2 # m)
 
 
-persistTodoCmdMaybe =
-    Maybe.unwrap Cmd.none persistTodoCmd
-
-
 persistTodoCmd todo =
     PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)

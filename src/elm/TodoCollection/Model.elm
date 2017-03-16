@@ -11,15 +11,6 @@ import Dict.Extra as Dict
 import Tuple2
 
 
-type ProjectType
-    = InboxProject
-    | CustomProject
-
-
-type alias Project =
-    { id : String, name : String, type_ : ProjectType }
-
-
 type alias Model =
     { todoList : List Todo
     , seed : Seed

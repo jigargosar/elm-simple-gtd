@@ -15,8 +15,12 @@ import Toolkit.Helpers exposing (..)
 import Tuple2
 
 
+type alias EncodedTodoList =
+    List E.Value
+
+
 type alias Flags =
-    { now : Time, allTodos : List E.Value }
+    { now : Time, allTodos : EncodedTodoList }
 
 
 type alias Model =

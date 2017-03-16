@@ -25,6 +25,7 @@ import Maybe.Extra as Maybe
 import Dict.Extra as Dict
 import FunctionalHelpers exposing (..)
 import Todos.Model as Model exposing (Model, append, setSeed, setTodoList)
+import Tuple2
 
 
 type TodosModel
@@ -49,10 +50,6 @@ reject filter =
 
 rejectMap filter mapper =
     toModel >> Model.rejectMap filter mapper
-
-
-generateTodo text =
-    Random.step (Todo.todoGenerator text)
 
 
 
@@ -103,9 +100,5 @@ replaceTodoIfIdMatches todo (TodosModel todos) =
         ( todos |> setTodoList todoList |> TodosModel, todo )
 
 
-addNewTodo text (TodosModel todos) =
-    let
-        ( todo, seed ) =
-            generateTodo text todos.seed
-    in
-        ( todos |> append todo |> setSeed seed |> TodosModel, todo )
+addNewTodo text =
+    toModel >> Model.addNewTodo text >> Tuple2.mapFirst TodosModel

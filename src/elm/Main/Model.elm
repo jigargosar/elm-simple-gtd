@@ -110,10 +110,15 @@ setTodosModel todosModel =
     Return.map (\m -> { m | todosModel = todosModel })
 
 
-addNewTodoAndDeactivateAddNewTodoMode : ReturnMapper
+setTodosModel2 : TodosModel -> ModelMapper
+setTodosModel2 todosModel m =
+    { m | todosModel = todosModel }
+
+
+addNewTodoAndDeactivateAddNewTodoMode : Model -> ( Model, Maybe Todo )
 addNewTodoAndDeactivateAddNewTodoMode =
-    addNewTodo
-        >> setEditModeTo NotEditing
+    addNewTodo2
+        >> Tuple2.mapFirst (setEditModeTo2 NotEditing)
 
 
 saveEditingTodoAndDeactivateEditTodoMode : ReturnMapper
@@ -156,6 +161,20 @@ addNewTodo : ReturnMapper
 addNewTodo =
     Return.map (\m -> ( getEditMode m, Return.singleton m ))
         >> Return.andThen (uncurry createAndAddNewTodo)
+
+
+addNewTodo2 : Model -> ( Model, Maybe Todo )
+addNewTodo2 m =
+    case getEditMode m of
+        EditNewTodoMode text ->
+            if String.trim text |> String.isEmpty then
+                ( m, Nothing )
+            else
+                TodoCollection.addNewTodo text m.todosModel
+                    |> Tuple2.mapEach (setTodosModel2 # m) (Just)
+
+        _ ->
+            ( m, Nothing )
 
 
 createAndAddNewTodo : EditMode -> ReturnMapper

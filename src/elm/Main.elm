@@ -11,6 +11,9 @@ import PouchDB
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Function exposing ((>>>), (<<<))
+import Maybe.Extra as Maybe
+import TodoCollection.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
+import Tuple2
 
 
 main : Program Flags Model Msg
@@ -40,7 +43,10 @@ update msg =
                 Return.map (Model.activateAddNewTodoMode2 text)
 
             OnNewTodoBlur ->
-                addNewTodoAndDeactivateAddNewTodoMode
+                Return.andThen
+                    (addNewTodoAndDeactivateAddNewTodoMode
+                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                    )
 
             OnNewTodoEnterPressed ->
                 addNewTodoAndContinueAdding
@@ -68,3 +74,11 @@ update msg =
 --                        Debug.log "WARN: msg ignored" (msg)
 --                in
 --                    identity
+
+
+persistTodoCmdMaybe =
+    Maybe.unwrap Cmd.none persistTodoCmd
+
+
+persistTodoCmd todo =
+    PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)

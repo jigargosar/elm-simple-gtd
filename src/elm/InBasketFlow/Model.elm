@@ -76,30 +76,30 @@ getTrackersCurrentNode =
     getTracker >> trackerGetNode
 
 
-isConfirmActionNode =
-    getTrackersCurrentNode >> isConfirmAction
-
-
-isNodeTypeAction node =
-    case node of
-        Action _ _ ->
-            True
-
-        _ ->
-            False
-
-
-isActionNode =
-    getTrackersCurrentNode >> isNodeTypeAction
-
-
-isConfirmAction node =
-    case node of
-        ConfirmAction _ _ ->
-            True
-
-        _ ->
-            False
+--isConfirmActionNode =
+--    getTrackersCurrentNode >> isConfirmAction
+--
+--
+--isNodeTypeAction node =
+--    case node of
+--        Action _ _ ->
+--            True
+--
+--        _ ->
+--            False
+--
+--
+--isActionNode =
+--    getTrackersCurrentNode >> isNodeTypeAction
+--
+--
+--isConfirmAction node =
+--    case node of
+--        ConfirmAction _ _ ->
+--            True
+--
+--        _ ->
+--            False
 
 
 getQuestion model =

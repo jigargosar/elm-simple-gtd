@@ -27,10 +27,11 @@ flowDialogView toClickMsg model =
         ]
 
 
-nodeList : List ( Bool, Html msg ) -> List (Html msg)
-nodeList =
-    List.filter Tuple.first >> List.map Tuple.second
 
-
-showNoButton =
-    Model.isActionNode >> not
+--nodeList : List ( Bool, Html msg ) -> List (Html msg)
+--nodeList =
+--    List.filter Tuple.first >> List.map Tuple.second
+--
+--
+--showNoButton =
+--    Model.isActionNode >> not

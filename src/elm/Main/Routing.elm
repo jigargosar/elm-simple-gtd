@@ -2,6 +2,7 @@ module Main.Routing exposing (..)
 
 import Main.Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
+import Navigation exposing (Location)
 import RouteHash
 import RouteUrl.Builder as Builder exposing (..)
 import Function exposing ((>>>), (<<<))
@@ -36,3 +37,8 @@ builder2messages builder =
         _ ->
             -- If nothing provided for this part of the URL, return empty list
             []
+
+
+hash2messages : Location -> List Msg
+hash2messages location =
+    builder2messages (Builder.fromHash location.href)

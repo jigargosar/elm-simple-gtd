@@ -71,6 +71,10 @@ init now encodedTodoList =
             >> (modelConstructor NotEditing)
 
 
+updateSomething =
+    setEditModeTo NotEditing
+
+
 getInBasketFlowModel =
     (.inBasketFlowModel)
 

@@ -120,7 +120,7 @@ update msg =
                     _ =
                         Debug.log "\"onParsedUrl\"" ("onParsedUrl")
                 in
-                    identity
+                    Return.map (updateSomething)
 
 
 

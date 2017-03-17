@@ -21,7 +21,7 @@ flowDialogView toClickMsg model =
         , div []
             (nodeList
                 [ True => button [ onClick (toClickMsg Model.Yes) ] [ "Yes" |> text ]
-                , True => button [ onClick (toClickMsg Model.No) ] [ "No" |> text ]
+                , showNoButton model => button [ onClick (toClickMsg Model.No) ] [ "No" |> text ]
                 , True => button [ onClick (toClickMsg Model.Back) ] [ "Back" |> text ]
                 ]
             )
@@ -31,3 +31,7 @@ flowDialogView toClickMsg model =
 nodeList : List ( Bool, Html msg ) -> List (Html msg)
 nodeList =
     List.filter Tuple.first >> List.map Tuple.second
+
+
+showNoButton model =
+    Model.isConfirmActionNode model

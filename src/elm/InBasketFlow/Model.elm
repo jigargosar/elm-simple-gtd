@@ -66,18 +66,31 @@ getTracker =
     (.tracker)
 
 
-getTrackerNode : Tracker msg -> Node msg
-getTrackerNode =
+trackerGetNode : Tracker msg -> Node msg
+trackerGetNode =
     Tuple.first
 
 
-getCurrentNode : Model msg -> Node msg
-getCurrentNode =
-    getTracker >> getTrackerNode
+getTrackersCurrentNode : Model msg -> Node msg
+getTrackersCurrentNode =
+    getTracker >> trackerGetNode
+
+
+isConfirmActionNode =
+    getTrackersCurrentNode >> isConfirmAction
+
+
+isConfirmAction node =
+    case node of
+        ConfirmAction _ _ ->
+            True
+
+        _ ->
+            False
 
 
 getQuestion model =
-    case getCurrentNode model of
+    case getTrackersCurrentNode model of
         Branch q _ _ ->
             q
 

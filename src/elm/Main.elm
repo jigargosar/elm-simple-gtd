@@ -41,18 +41,6 @@ main =
         }
 
 
-
---main : Program Flags Model Msg
---main =
---    Navigation.programWithFlags LocationChanged
---        --    TimeTravel.Navigation.programWithFlags LocationChanged
---        { init = init
---        , view = elmAppView
---        , update = update
---        , subscriptions = subscriptions
---        }
-
-
 subscriptions m =
     Sub.batch
         []

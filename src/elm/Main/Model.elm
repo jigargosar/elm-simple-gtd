@@ -47,7 +47,7 @@ rootNode =
 
 
 modelConstructor editMode todoCollection =
-    Model todoCollection editMode (Flow.init rootNode) TodoListViewState
+    Model todoCollection editMode TodoListViewState
 
 
 type alias ModelMapper =
@@ -84,6 +84,18 @@ showTodoList =
 
 showProcessInBasket =
     setViewState (ProcessInBasketViewState (Flow.init rootNode))
+
+
+updateFlowModelWithActionType actionType m =
+    m
+        |> case getViewState m of
+            ProcessInBasketViewState flowModel ->
+                Flow.update actionType flowModel
+                    |> ProcessInBasketViewState
+                    |> setViewState
+
+            _ ->
+                identity
 
 
 getTodoCollection : Model -> TodoCollection

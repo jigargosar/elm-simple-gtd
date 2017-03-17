@@ -13,7 +13,6 @@ delta2builder previous current =
     builder
         |> replacePath [ current.viewState |> toString ]
         |> Just
-        |> Maybe.map (prependToPath [ "asd" ])
 
 
 delta2hash : Model -> Model -> Maybe UrlChange

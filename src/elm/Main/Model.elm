@@ -17,10 +17,16 @@ import Tuple2
 import InBasketFlow as Flow
 
 
+type ViewState
+    = TodoListView
+    | InBasketFlowView (Flow.Model Msg)
+
+
 type alias Model =
     { todoCollection : TodoCollection
     , editMode : EditMode
     , inBasketFlowModel : Flow.Model Msg
+    , viewState : ViewState
     }
 
 
@@ -42,7 +48,7 @@ rootNode =
 
 
 modelConstructor editMode todoCollection =
-    Model todoCollection editMode (Flow.init rootNode)
+    Model todoCollection editMode (Flow.init rootNode) TodoListView
 
 
 type alias ModelMapper =

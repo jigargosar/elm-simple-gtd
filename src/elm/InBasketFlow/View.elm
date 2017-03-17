@@ -8,4 +8,4 @@ import InBasketFlow.Model as Model exposing (Model)
 
 
 flowDialogView model =
-    div [] [ text << InBasketFlow.Model.getQuestion model ]
+    div [] [ Model.getQuestion model |> text ]

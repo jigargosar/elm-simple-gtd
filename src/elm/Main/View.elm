@@ -5,6 +5,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
+import InBasketFlow
+import InBasketFlow.View
 import Json.Decode
 import Json.Encode
 import List.Extra as List
@@ -31,6 +33,10 @@ todoListViewConfig =
 
 
 elmAppView m =
+    InBasketFlow.testModel ?|> InBasketFlow.View.flowDialogView ?= div [] [ "No Model" |> text ]
+
+
+elmAppView2 m =
     case Main.Model.getProcessingModel m of
         NotProcessing ->
             div []

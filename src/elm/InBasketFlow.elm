@@ -24,8 +24,8 @@ rootNode =
         )
 
 
-test : Maybe Model
-test =
+testModel : Maybe Model
+testModel =
     Model.init rootNode
         |> logNode "start"
         |> Model.onNo

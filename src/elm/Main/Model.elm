@@ -1,5 +1,6 @@
 module Main.Model exposing (..)
 
+import InBasketFlow.View
 import Json.Encode as E
 import List.Extra as List
 import Main.Msg exposing (..)
@@ -69,7 +70,15 @@ getInBasketFlowModel =
 
 
 updateInBasketFlowModel clickType =
-    identity
+    case clickType of
+        InBasketFlow.View.Yes ->
+            identity
+
+        InBasketFlow.View.No ->
+            identity
+
+        InBasketFlow.View.Back ->
+            identity
 
 
 getTodoCollection : Model -> TodoCollection

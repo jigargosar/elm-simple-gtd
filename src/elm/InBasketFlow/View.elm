@@ -34,4 +34,4 @@ nodeList =
 
 
 showNoButton =
-    Model.isConfirmActionNode >> not
+    Model.isActionNode >> not

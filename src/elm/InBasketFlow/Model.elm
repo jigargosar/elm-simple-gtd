@@ -80,6 +80,19 @@ isConfirmActionNode =
     getTrackersCurrentNode >> isConfirmAction
 
 
+isNodeTypeAction node =
+    case node of
+        Action _ _ ->
+            True
+
+        _ ->
+            False
+
+
+isActionNode =
+    getTrackersCurrentNode >> isNodeTypeAction
+
+
 isConfirmAction node =
     case node of
         ConfirmAction _ _ ->

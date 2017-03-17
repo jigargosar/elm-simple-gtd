@@ -41,7 +41,3 @@ tapLog str val =
             val |> (Tuple.first >> Debug.log str)
     in
         val
-
-
-
--- view

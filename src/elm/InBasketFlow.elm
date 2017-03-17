@@ -24,12 +24,13 @@ rootNode =
         )
 
 
-test : Maybe Tracker
-test =
-    init rootNode
-        |> onNo
-        ?+> onYes
-        ?+> onNo
+
+--test : Maybe Tracker
+--test =
+--    init rootNode
+--        |> onNo
+--        ?+> onYes
+--        ?+> onNo
 
 
 logNode =

@@ -8,4 +8,11 @@ import InBasketFlow.Model as Model exposing (Model)
 
 
 flowDialogView model =
-    div [] [ Model.getQuestion model |> text ]
+    div []
+        [ h1 []
+            [ Model.getQuestion model |> text ]
+        , div []
+            [ button [] [ "Yes" |> text ]
+            , button [] [ "No" |> text ]
+            ]
+        ]

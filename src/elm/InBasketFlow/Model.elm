@@ -67,8 +67,30 @@ getQuestion model =
             q
 
 
-onYes : Tracker -> Maybe Tracker
-onYes ( node, parentNodes ) =
+setTracker tracker model =
+    { model | tracker = tracker }
+
+
+updateMaybeTracker fun model =
+    fun model
+        ?|> setTracker
+        # model
+
+
+onYes =
+    updateMaybeTracker (getTracker >> trackerOnYes)
+
+
+onNo =
+    updateMaybeTracker (getTracker >> trackerOnNo)
+
+
+onBack =
+    updateMaybeTracker (getTracker >> trackerOnBack)
+
+
+trackerOnYes : Tracker -> Maybe Tracker
+trackerOnYes ( node, parentNodes ) =
     case node of
         Branch q y n ->
             Just ( y, node :: parentNodes )
@@ -80,8 +102,8 @@ onYes ( node, parentNodes ) =
             Just ( a, node :: parentNodes )
 
 
-onNo : Tracker -> Maybe Tracker
-onNo ( node, parentNodes ) =
+trackerOnNo : Tracker -> Maybe Tracker
+trackerOnNo ( node, parentNodes ) =
     case node of
         Branch q y n ->
             Just ( n, node :: parentNodes )
@@ -90,8 +112,9 @@ onNo ( node, parentNodes ) =
             Nothing
 
         ConfirmAction q a ->
-            onBack ( node, parentNodes )
+            trackerOnBack ( node, parentNodes )
 
 
-onBack ( _, parentNodes ) =
+trackerOnBack : Tracker -> Maybe Tracker
+trackerOnBack ( _, parentNodes ) =
     List.uncons parentNodes

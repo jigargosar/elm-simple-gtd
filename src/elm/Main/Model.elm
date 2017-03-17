@@ -20,7 +20,6 @@ import Flow
 type ViewState
     = TodoListViewState
     | ProcessInBasketViewState (Flow.Model Msg)
-    | InitialViewState
 
 
 type alias Model =
@@ -92,6 +91,7 @@ updateFlowModelWithActionType actionType =
 setViewState viewState m =
     { m | viewState = viewState }
 
+getViewState = (.viewState)
 
 showTodoList =
     setViewState TodoListViewState

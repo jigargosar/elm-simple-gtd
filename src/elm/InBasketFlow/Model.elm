@@ -108,7 +108,8 @@ getTrackersCurrentNode =
 --            False
 
 
-getNextActions model =
+getNextActions : Model msg -> List (NodeNextActions msg)
+getNextActions =
     getTracker >> trackerGetNextActions
 
 
@@ -120,15 +121,19 @@ type NodeNextActions msg
 
 
 trackerGetNextActions tracker =
-    case trackerGetNode tracker of
-        Branch q y n ->
-            [ YesNA, NoNa ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
+    let
+        backNA =
+            trackerGetBackNaAsSingletonIfNotRoot tracker
+    in
+        case trackerGetNode tracker of
+            Branch q y n ->
+                [ YesNA, NoNa ] ++ backNA
 
-        Action q msg ->
-            [ YesNA ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
+            Action q msg ->
+                [ YesNA ] ++ backNA
 
-        ConfirmAction q a ->
-            [ YesNA ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
+            ConfirmAction q a ->
+                [ YesNA ] ++ backNA
 
 
 trackerGetBackNaAsSingletonIfNotRoot tracker =

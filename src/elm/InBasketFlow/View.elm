@@ -19,14 +19,30 @@ flowDialogView toClickMsg model =
         [ h1 []
             [ Model.getQuestion model |> text ]
         , div []
-            ([ button [ onClick (toClickMsg Model.Yes) ] [ "Yes" |> text ]
-             , button [ onClick (toClickMsg Model.No) ] [ "No" |> text ]
-             , button [ onClick (toClickMsg Model.Back) ] [ "Back" |> text ]
-             ]
-            )
+            (nextActionButtons toClickMsg model)
         ]
 
-pm model = Model.getNextActions
+
+nextActionButtons : (InBasketFlowActionType -> msg) -> Model msg -> List (Html msg)
+nextActionButtons toClickMsg =
+    Model.getNextActions
+        >> List.map (createButton toClickMsg)
+
+
+createButton toClickMsg na =
+    case na of
+        Model.YesNA ->
+            button [ onClick (toClickMsg Model.Yes) ] [ "Yes" |> text ]
+
+        Model.NoNa ->
+            button [ onClick (toClickMsg Model.No) ] [ "No" |> text ]
+
+        Model.BackNa ->
+            button [ onClick (toClickMsg Model.Back) ] [ "Back" |> text ]
+
+        Model.YesCustom msg ->
+            button [ onClick msg ] [ "Yes" |> text ]
+
 
 
 --nodeList : List ( Bool, Html msg ) -> List (Html msg)

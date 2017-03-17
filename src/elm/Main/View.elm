@@ -1,5 +1,6 @@
 module Main.View exposing (elmAppView)
 
+import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -16,6 +17,7 @@ import TodoCollection.Todo as Todo
 import TodoCollection.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
+import InBasketFlow.Model as InBasketFlow
 
 
 todoListViewConfig =
@@ -32,8 +34,43 @@ todoListViewConfig =
     }
 
 
+rootNode =
+    InBasketFlow.branchNode "Is it Actionable ?"
+        (InBasketFlow.branchNode "Can be done under 2 mins?"
+            (InBasketFlow.confirmActionNode "Do it now?"
+                (InBasketFlow.actionNode "Timer Started, Go Go Go !!!")
+            )
+            (InBasketFlow.actionNode "Involves Multiple Steps?")
+        )
+        (InBasketFlow.branchNode "Is it worth keeping?"
+            (InBasketFlow.branchNode "Could Require actionNode Later ?"
+                (InBasketFlow.actionNode "Move to SomDay/Maybe List?")
+                (InBasketFlow.actionNode "Move to Reference?")
+            )
+            (InBasketFlow.actionNode "Trash it ?")
+        )
+
+
+testModel =
+    InBasketFlow.init rootNode
+        |> logNode "start"
+        |> InBasketFlow.onNo
+        ?|> logNode "no"
+        ?+> InBasketFlow.onNo
+        ?|> logNode "no"
+
+
+
+--        ?+> InBasketFlow.onYes
+--        ?|> logNode "yes"
+
+
+logNode =
+    tapLog (InBasketFlow.getQuestion)
+
+
 elmAppView m =
-    InBasketFlow.testModel ?|> InBasketFlow.View.flowDialogView ?= div [] [ "No Model" |> text ]
+    testModel ?|> InBasketFlow.View.flowDialogView ?= div [] [ "No Model" |> text ]
 
 
 elmAppView2 m =

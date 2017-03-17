@@ -27,10 +27,14 @@ rootNode =
 test : Maybe Tracker
 test =
     createTracker rootNode
-        |> tapLog "start" Tuple.first
+        |> logNode "start"
         |> onNo
-        ?|> tapLog "no" Tuple.first
+        ?|> logNode "no"
         ?+> onYes
-        ?|> tapLog "yes" Tuple.first
+        ?|> logNode "yes"
         ?+> onNo
-        ?|> tapLog "no" Tuple.first
+        ?|> logNode "no"
+
+
+logNode =
+    tapLog Tuple.first

@@ -95,12 +95,6 @@ update msg =
                         >> Tuple2.mapSecond persistTodoCmdMaybe
                     )
 
-            OnProcessButtonClicked ->
-                Return.map Model.activateProcessingMode
-
-            OnUpdateProcessingModel processingModel ->
-                Return.map (Model.setProcessingModel processingModel)
-
             OnTrashItYesClicked ->
                 identity
 

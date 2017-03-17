@@ -5,18 +5,6 @@ import Navigation exposing (Location)
 import TodoCollection.Todo exposing (Todo, TodoId)
 
 
-type ProcessingModel
-    = NotProcessing
-    | StartProcessing Todo
-    | ProcessAsActionable Todo
-    | ProcessAsNotActionable Todo
-    | ProcessAsTrash Todo
-    | ProcessAsWorthKeeping Todo
-    | ProcessAsSomeDay Todo
-    | ProcessAsReference Todo
-
-
-
 type Msg
     = LocationChanged Location
     | OnAddTodoClicked
@@ -28,6 +16,4 @@ type Msg
     | OnEditTodoTextChanged String
     | OnEditTodoBlur
     | OnEditTodoEnterPressed
-    | OnProcessButtonClicked
-    | OnUpdateProcessingModel ProcessingModel
     | OnTrashItYesClicked

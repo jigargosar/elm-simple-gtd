@@ -19,12 +19,12 @@ import InBasketFlow
 type alias Model =
     { todoCollection : TodoCollection
     , editMode : EditMode
-    , processingModel : ProcessingModel
+    , inBasketFlowModel : InBasketFlow.Model
     }
 
 
 modelConstructor editMode todoCollection =
-    Model todoCollection editMode NotProcessing
+    Model todoCollection editMode InBasketFlow.init
 
 
 type alias ModelMapper =
@@ -70,27 +70,6 @@ activateAddNewTodoMode text =
 activateEditTodoMode : Todo -> ModelMapper
 activateEditTodoMode todo =
     setEditModeTo (EditTodoMode todo)
-
-
-activateProcessingMode : ModelMapper
-activateProcessingMode m =
-    setProcessingModel (startProcessing (getTodoCollection m |> TodoCollection.asList)) m
-
-
-setProcessingModel processingModel m =
-    { m | processingModel = processingModel }
-
-
-updateProcessingModel fun m =
-    setProcessingModel (fun m) m
-
-
-startProcessing todoList =
-    todoList |> List.getAt 0 ?|> StartProcessing ?= NotProcessing
-
-
-getProcessingModel =
-    (.processingModel)
 
 
 updateEditTodoText : String -> ModelMapper

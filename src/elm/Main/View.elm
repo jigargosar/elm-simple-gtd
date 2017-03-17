@@ -38,16 +38,16 @@ rootNode =
     InBasketFlow.branchNode "Is it Actionable ?"
         (InBasketFlow.branchNode "Can be done under 2 mins?"
             (InBasketFlow.confirmActionNode "Do it now?"
-                (InBasketFlow.actionNode "Timer Started, Go Go Go !!!")
+                (InBasketFlow.actionNode "Timer Started, Go Go Go !!!" OnTrashItYesClicked)
             )
-            (InBasketFlow.actionNode "Involves Multiple Steps?")
+            (InBasketFlow.actionNode "Involves Multiple Steps?" OnTrashItYesClicked)
         )
         (InBasketFlow.branchNode "Is it worth keeping?"
             (InBasketFlow.branchNode "Could Require actionNode Later ?"
-                (InBasketFlow.actionNode "Move to SomDay/Maybe List?")
-                (InBasketFlow.actionNode "Move to Reference?")
+                (InBasketFlow.actionNode "Move to SomDay/Maybe List?" OnTrashItYesClicked)
+                (InBasketFlow.actionNode "Move to Reference?" OnTrashItYesClicked)
             )
-            (InBasketFlow.actionNode "Trash it ?")
+            (InBasketFlow.actionNode "Trash it ?" OnTrashItYesClicked)
         )
 
 

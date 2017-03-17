@@ -5,21 +5,21 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
 
-type Node
-    = Branch String Node Node
-    | Action String
-    | ConfirmAction String Node
+type Node msg
+    = Branch String (Node msg) (Node msg)
+    | Action String msg
+    | ConfirmAction String (Node msg)
 
 
-type alias Tracker =
-    ( Node, List Node )
+type alias Tracker msg =
+    ( Node msg, List (Node msg) )
 
 
-type alias Model =
-    { tracker : Tracker }
+type alias Model msg =
+    { tracker : Tracker msg }
 
 
-init : Node -> Model
+init : Node msg -> Model msg
 init rootNode =
     { tracker = createTracker rootNode }
 
@@ -40,17 +40,17 @@ createTracker node =
     ( node, [] )
 
 
-getTracker : Model -> Tracker
+getTracker : Model msg -> Tracker msg
 getTracker =
     (.tracker)
 
 
-getTrackerNode : Tracker -> Node
+getTrackerNode : Tracker msg -> Node msg
 getTrackerNode =
     Tuple.first
 
 
-getCurrentNode : Model -> Node
+getCurrentNode : Model msg -> Node msg
 getCurrentNode =
     getTracker >> getTrackerNode
 
@@ -60,7 +60,7 @@ getQuestion model =
         Branch q _ _ ->
             q
 
-        Action q ->
+        Action q _ ->
             q
 
         ConfirmAction q a ->
@@ -89,32 +89,32 @@ onBack =
     updateMaybeTracker (getTracker >> trackerOnBack)
 
 
-trackerOnYes : Tracker -> Maybe Tracker
+trackerOnYes : Tracker msg -> Maybe (Tracker msg)
 trackerOnYes ( node, parentNodes ) =
     case node of
         Branch q y n ->
             Just ( y, node :: parentNodes )
 
-        Action q ->
+        Action q _ ->
             Nothing
 
         ConfirmAction q a ->
             Just ( a, node :: parentNodes )
 
 
-trackerOnNo : Tracker -> Maybe Tracker
+trackerOnNo : Tracker msg -> Maybe (Tracker msg)
 trackerOnNo ( node, parentNodes ) =
     case node of
         Branch q y n ->
             Just ( n, node :: parentNodes )
 
-        Action q ->
+        Action q _ ->
             Nothing
 
         ConfirmAction q a ->
             trackerOnBack ( node, parentNodes )
 
 
-trackerOnBack : Tracker -> Maybe Tracker
+trackerOnBack : Tracker msg -> Maybe (Tracker msg)
 trackerOnBack ( _, parentNodes ) =
     List.uncons parentNodes

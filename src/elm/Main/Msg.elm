@@ -30,3 +30,4 @@ type Msg
     | OnEditTodoEnterPressed
     | OnProcessButtonClicked
     | OnUpdateProcessingModel ProcessingModel
+    | OnTrashItYesClicked

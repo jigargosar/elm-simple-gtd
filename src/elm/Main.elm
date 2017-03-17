@@ -101,6 +101,9 @@ update msg =
             OnUpdateProcessingModel processingModel ->
                 Return.map (Model.setProcessingModel processingModel)
 
+            OnTrashItYesClicked ->
+                identity
+
 
 
 --            _ ->

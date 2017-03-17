@@ -32,8 +32,11 @@ testModel =
         ?|> logNode "no"
         ?+> Model.onNo
         ?|> logNode "no"
-        ?+> Model.onYes
-        ?|> logNode "yes"
+
+
+
+--        ?+> Model.onYes
+--        ?|> logNode "yes"
 
 
 logNode =

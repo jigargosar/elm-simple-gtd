@@ -110,6 +110,9 @@ update msg =
             OnInBasketFlowButtonClicked actionType ->
                 Return.map (Model.updateInBasketFlowModelWithActionType actionType)
 
+            OnParsedUrl ->
+                identity
+
 
 
 --            _ ->

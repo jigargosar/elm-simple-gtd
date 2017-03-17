@@ -43,11 +43,13 @@
         "ohanhi/keyboard-extra": "2.0.2 <= v < 3.0.0",
         "rluiten/elm-date-extra": "8.2.0 <= v < 9.0.0",
         "rluiten/elm-text-search": "3.1.1 <= v < 4.0.0",
-        "sporto/erl": "11.1.1 <= v < 12.0.0",
+        "sporto/erl": "10.0.0 <= v < 12.0.0",
         "tomjkidd/elm-multiway-tree-zipper": "1.10.2 <= v < 2.0.0",
         "tripokey/elm-fuzzy": "5.0.3 <= v < 6.0.0",
         "ydschneider/regex-builder": "1.0.0 <= v < 2.0.0" ,
-        "jigargosar/elm-debug-extra":"3.0.0 <= v < 4.0.0"
+        "jigargosar/elm-debug-extra":"3.0.0 <= v < 4.0.0",
+        "rgrempel/elm-route-url":"3.0.0 <= v < 4.0.0"
+
     },
 
     "dependency-sources": {

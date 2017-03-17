@@ -19,7 +19,7 @@ import InBasketFlow as Flow
 
 type ViewState
     = TodoListViewState
-    | InBasketFlowViewState (Flow.Model Msg)
+    | ProcessInBasketViewState (Flow.Model Msg)
     | InitialViewState
 
 
@@ -87,6 +87,18 @@ updateInBasketFlowModel fun model =
 
 updateInBasketFlowModelWithActionType actionType =
     updateInBasketFlowModel (getInBasketFlowModel >> Flow.update actionType)
+
+
+setViewState viewState m =
+    { m | viewState = viewState }
+
+
+showTodoList =
+    setViewState TodoListViewState
+
+
+showProcessInBasket =
+    setViewState (ProcessInBasketViewState (Flow.init rootNode))
 
 
 getTodoCollection : Model -> TodoCollection

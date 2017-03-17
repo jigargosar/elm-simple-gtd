@@ -23,19 +23,14 @@ delta2hash =
 builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
-        first :: rest ->
-            case String.toInt first of
-                Ok value ->
-                    [ Msg.OnParsedUrl ]
-
-                Err _ ->
-                    -- If it wasn't an integer, then no action ... we could
-                    -- show an error instead, of course.
-                    []
+        "list"::[] ->
+            Msg.OnShowTodoList
+        "process-inbasket"::[] ->
+                    Msg.OnProcessInBasket
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list
-            [ Msg.OnParsedUrl ]
+            []
 
 
 hash2messages : Location -> List Msg

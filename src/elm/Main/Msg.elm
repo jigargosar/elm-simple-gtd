@@ -22,4 +22,5 @@ type Msg
     | OnNoClicked
     | OnBackClicked
     | OnInBasketFlowButtonClicked InBasketFlowActionType
-    | OnParsedUrl
+    | OnShowTodoList
+    | OnProcessInBasket

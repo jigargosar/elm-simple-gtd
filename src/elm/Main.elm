@@ -115,8 +115,11 @@ update msg =
             OnInBasketFlowButtonClicked actionType ->
                 Return.map (Model.updateInBasketFlowModelWithActionType actionType)
 
-            OnParsedUrl ->
-                identity
+            OnShowTodoList ->
+                Return.map(Model.showTodoList)
+
+            OnProcessInBasket ->
+                            Return.map(Model.showProcessInBasket)
 
 
 

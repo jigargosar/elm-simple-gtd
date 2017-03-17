@@ -49,7 +49,7 @@ rootNode =
 
 
 modelConstructor editMode todoCollection =
-    Model todoCollection editMode (Flow.init rootNode) InitialViewState
+    Model todoCollection editMode (Flow.init rootNode) TodoListViewState
 
 
 type alias ModelMapper =
@@ -73,7 +73,7 @@ init now encodedTodoList =
 
 
 updateSomething model =
-    { model | viewState = TodoListViewState }
+    { model | viewState = InitialViewState }
 
 
 getInBasketFlowModel =

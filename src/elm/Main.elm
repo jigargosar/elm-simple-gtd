@@ -116,7 +116,11 @@ update msg =
                 Return.map (Model.updateInBasketFlowModelWithActionType actionType)
 
             OnParsedUrl ->
-                identity
+                let
+                    _ =
+                        Debug.log "\"onParsedUrl\"" ("onParsedUrl")
+                in
+                    identity
 
 
 

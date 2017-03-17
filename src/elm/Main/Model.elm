@@ -25,7 +25,6 @@ type ViewState
 type alias Model =
     { todoCollection : TodoCollection
     , editMode : EditMode
-    , inBasketFlowModel : Flow.Model Msg
     , viewState : ViewState
     }
 
@@ -71,27 +70,13 @@ init now encodedTodoList =
             >> (modelConstructor NotEditing)
 
 
-getFlowModel =
-    (.inBasketFlowModel)
-
-
-setFlowModel : Flow.Model Msg -> ModelMapper
-setFlowModel inBasketFlowModel model =
-    { model | inBasketFlowModel = inBasketFlowModel }
-
-
-updateFlowModel fun model =
-    setFlowModel (fun model) model
-
-
-updateFlowModelWithActionType actionType =
-    updateFlowModel (getFlowModel >> Flow.update actionType)
-
-
 setViewState viewState m =
     { m | viewState = viewState }
 
-getViewState = (.viewState)
+
+getViewState =
+    (.viewState)
+
 
 showTodoList =
     setViewState TodoListViewState

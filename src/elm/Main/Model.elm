@@ -72,10 +72,6 @@ init now encodedTodoList =
             >> (modelConstructor NotEditing)
 
 
-updateSomething model =
-    { model | viewState = InitialViewState }
-
-
 getInBasketFlowModel =
     (.inBasketFlowModel)
 

@@ -10,17 +10,10 @@ import RouteUrl exposing (UrlChange)
 
 delta2builder : Model -> Model -> Maybe Builder
 delta2builder previous current =
-    let
-        _ =
-            Debug.log "222" ("222")
-    in
-        builder
-            |> replacePath [ current.viewState |> toString ]
-            |> Just
-
-
-
---        |> Maybe.map (prependToPath [ "asd" ])
+    builder
+        |> replacePath [ current.viewState |> toString ]
+        |> Just
+        |> Maybe.map (prependToPath [ "asd" ])
 
 
 delta2hash : Model -> Model -> Maybe UrlChange
@@ -30,24 +23,20 @@ delta2hash =
 
 builder2messages : Builder -> List Msg
 builder2messages builder =
-    let
-        _ =
-            Debug.log "\"111\"" ("111")
-    in
-        case path builder of
-            first :: rest ->
-                case String.toInt first of
-                    Ok value ->
-                        [ Msg.OnParsedUrl ]
+    case path builder of
+        first :: rest ->
+            case String.toInt first of
+                Ok value ->
+                    [ Msg.OnParsedUrl ]
 
-                    Err _ ->
-                        -- If it wasn't an integer, then no action ... we could
-                        -- show an error instead, of course.
-                        []
+                Err _ ->
+                    -- If it wasn't an integer, then no action ... we could
+                    -- show an error instead, of course.
+                    []
 
-            _ ->
-                -- If nothing provided for this part of the URL, return empty list
-                [ Msg.OnParsedUrl ]
+        _ ->
+            -- If nothing provided for this part of the URL, return empty list
+            [ Msg.OnParsedUrl ]
 
 
 hash2messages : Location -> List Msg

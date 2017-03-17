@@ -1,6 +1,6 @@
 module Main.Model exposing (..)
 
-import InBasketFlow.View
+import Flow.View
 import Json.Encode as E
 import List.Extra as List
 import Main.Msg exposing (..)
@@ -14,7 +14,7 @@ import TodoCollection.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-import InBasketFlow as Flow
+import Flow
 
 
 type ViewState

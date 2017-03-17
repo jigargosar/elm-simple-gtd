@@ -1,7 +1,7 @@
-module InBasketFlow exposing (..)
+module Flow exposing (..)
 
 import DebugExtra.Debug exposing (tapLog)
-import InBasketFlow.Model as Model exposing (Model)
+import Flow.Model as Model exposing (Model)
 import List.Extra
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -48,11 +48,18 @@ type alias Model msg =
 init =
     Model.init
 
-branch = Model.branchNode
 
-confirmAction = Model.confirmActionNode
+branch =
+    Model.branchNode
 
 
-action= Model.actionNode
+confirmAction =
+    Model.confirmActionNode
 
-update = Model.update
+
+action =
+    Model.actionNode
+
+
+update =
+    Model.update

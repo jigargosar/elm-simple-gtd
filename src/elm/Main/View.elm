@@ -6,8 +6,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import InBasketFlow
-import InBasketFlow.View
+import Flow
+import Flow.View
 import Json.Decode
 import Json.Encode
 import List.Extra as List
@@ -17,7 +17,7 @@ import TodoCollection.Todo as Todo
 import TodoCollection.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import InBasketFlow.Model as InBasketFlow exposing (Node)
+import Flow.Model as Flow exposing (Node)
 
 
 todoListViewConfig =
@@ -34,7 +34,7 @@ todoListViewConfig =
 
 
 elmAppView m =
-    div [] [ getInBasketFlowModel m |> InBasketFlow.View.flowDialogView OnInBasketFlowButtonClicked ]
+    div [] [ getInBasketFlowModel m |> Flow.View.flowDialogView OnInBasketFlowButtonClicked ]
 
 
 todoListView m =

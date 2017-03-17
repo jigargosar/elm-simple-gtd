@@ -1,6 +1,6 @@
 module Main.Msg exposing (..)
 
-import InBasketFlow.Model exposing (InBasketFlowActionType(..))
+import Flow.Model exposing (InBasketFlowActionType(..))
 import Json.Decode
 import Navigation exposing (Location)
 import TodoCollection.Todo exposing (Todo, TodoId)

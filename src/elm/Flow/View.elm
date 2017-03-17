@@ -1,10 +1,10 @@
-module InBasketFlow.View exposing (..)
+module Flow.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import InBasketFlow.Model as Model exposing (InBasketFlowActionType, Model)
+import Flow.Model as Model exposing (InBasketFlowActionType, Model)
 import List.Extra
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)

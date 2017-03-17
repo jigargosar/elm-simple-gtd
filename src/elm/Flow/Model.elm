@@ -1,4 +1,4 @@
-module InBasketFlow.Model exposing (..)
+module Flow.Model exposing (..)
 
 import FunctionalHelpers exposing (..)
 import List.Extra as List

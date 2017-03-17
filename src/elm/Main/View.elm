@@ -41,7 +41,10 @@ appView m =
 
 
 toolbarView m =
-    div [] [ button [ onClick OnProcessInBasket ] [ text "Process In-Basket" ] ]
+    div []
+        [ button [ onClick OnShowTodoList ] [ text "Show Todo List" ]
+        , button [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
+        ]
 
 
 centerView m =

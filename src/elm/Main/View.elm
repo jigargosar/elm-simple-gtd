@@ -34,7 +34,7 @@ todoListViewConfig =
 
 
 elmAppView m =
-    div [] [ getInBasketFlowModel m |> Flow.View.flowDialogView OnInBasketFlowButtonClicked ]
+    div [] [ getFlowModel m |> Flow.View.flowDialogView OnFlowButtonClicked ]
 
 
 todoListView m =

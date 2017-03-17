@@ -12,7 +12,7 @@ type Node msg
     | ConfirmAction String (Node msg)
 
 
-type InBasketFlowActionType
+type FlowActionType
     = Yes
     | No
     | Back

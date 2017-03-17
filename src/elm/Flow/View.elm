@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Flow.Model as Model exposing (InBasketFlowActionType, Model)
+import Flow.Model as Model exposing (FlowActionType, Model)
 import List.Extra
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -13,7 +13,7 @@ import Function.Infix exposing (..)
 import FunctionalHelpers exposing (..)
 
 
-flowDialogView : (InBasketFlowActionType -> msg) -> Model msg -> Html msg
+flowDialogView : (FlowActionType -> msg) -> Model msg -> Html msg
 flowDialogView toClickMsg model =
     div []
         [ h1 []
@@ -23,7 +23,7 @@ flowDialogView toClickMsg model =
         ]
 
 
-nextActionButtons : (InBasketFlowActionType -> msg) -> Model msg -> List (Html msg)
+nextActionButtons : (FlowActionType -> msg) -> Model msg -> List (Html msg)
 nextActionButtons toClickMsg =
     Model.getNextActions
         >> List.map (createButton toClickMsg)

@@ -72,21 +72,21 @@ init now encodedTodoList =
             >> (modelConstructor NotEditing)
 
 
-getInBasketFlowModel =
+getFlowModel =
     (.inBasketFlowModel)
 
 
-setInBasketFlowModel : Flow.Model Msg -> ModelMapper
-setInBasketFlowModel inBasketFlowModel model =
+setFlowModel : Flow.Model Msg -> ModelMapper
+setFlowModel inBasketFlowModel model =
     { model | inBasketFlowModel = inBasketFlowModel }
 
 
-updateInBasketFlowModel fun model =
-    setInBasketFlowModel (fun model) model
+updateFlowModel fun model =
+    setFlowModel (fun model) model
 
 
-updateInBasketFlowModelWithActionType actionType =
-    updateInBasketFlowModel (getInBasketFlowModel >> Flow.update actionType)
+updateFlowModelWithActionType actionType =
+    updateFlowModel (getFlowModel >> Flow.update actionType)
 
 
 setViewState viewState m =

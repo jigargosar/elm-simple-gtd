@@ -112,8 +112,8 @@ update msg =
             OnBackClicked ->
                 identity
 
-            OnInBasketFlowButtonClicked actionType ->
-                Return.map (Model.updateInBasketFlowModelWithActionType actionType)
+            OnFlowButtonClicked actionType ->
+                Return.map (Model.updateFlowModelWithActionType actionType)
 
             OnShowTodoList ->
                 Return.map(Model.showTodoList)

@@ -1,7 +1,7 @@
 module InBasketFlow exposing (..)
 
 import DebugExtra.Debug exposing (tapLog)
-import InBasketFlow.Model exposing (Tracker, actionNode, branchNode, confirmActionNode, onNo, onYes, createTracker)
+import InBasketFlow.Model exposing (..)
 import List.Extra
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -37,4 +37,4 @@ test =
 
 
 logNode =
-    tapLog Tuple.first
+    tapLog (InBasketFlow.Model.getQuestion)

@@ -31,15 +31,18 @@ init rootNode =
 
 
 update at model =
-    case at of
-        Yes ->
-            model
+    model
+        |> (case at of
+                Yes ->
+                    onYes
 
-        No ->
-            model
+                No ->
+                    onNo
 
-        Back ->
-            model
+                Back ->
+                    onBack
+           )
+        >> Maybe.withDefault model
 
 
 branchNode =

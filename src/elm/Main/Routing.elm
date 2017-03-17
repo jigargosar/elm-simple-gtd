@@ -15,7 +15,7 @@ delta2builder previous current =
             Debug.log "222" ("222")
     in
         builder
-            |> replacePath [ "0" ]
+            |> replacePath [ current.viewState |> toString ]
             |> Just
 
 

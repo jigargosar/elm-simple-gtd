@@ -18,8 +18,9 @@ import InBasketFlow as Flow
 
 
 type ViewState
-    = TodoListView
-    | InBasketFlowView (Flow.Model Msg)
+    = TodoListViewState
+    | InBasketFlowViewState (Flow.Model Msg)
+    | InitialViewState
 
 
 type alias Model =
@@ -48,7 +49,7 @@ rootNode =
 
 
 modelConstructor editMode todoCollection =
-    Model todoCollection editMode (Flow.init rootNode) TodoListView
+    Model todoCollection editMode (Flow.init rootNode) InitialViewState
 
 
 type alias ModelMapper =
@@ -71,8 +72,8 @@ init now encodedTodoList =
             >> (modelConstructor NotEditing)
 
 
-updateSomething =
-    setEditModeTo NotEditing
+updateSomething model =
+    { model | viewState = TodoListViewState }
 
 
 getInBasketFlowModel =

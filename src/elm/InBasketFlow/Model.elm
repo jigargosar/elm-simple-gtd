@@ -15,6 +15,15 @@ type alias Tracker =
     ( Node, List Node )
 
 
+type alias Model =
+    { tracker : Tracker }
+
+
+init : Node -> Model
+init rootNode =
+    { tracker = createTracker rootNode }
+
+
 branchNode =
     Branch
 
@@ -31,8 +40,23 @@ createTracker node =
     ( node, [] )
 
 
-getQuestion ( node, _ ) =
-    case node of
+getTracker : Model -> Tracker
+getTracker =
+    (.tracker)
+
+
+getTrackerNode : Tracker -> Node
+getTrackerNode =
+    Tuple.first
+
+
+getCurrentNode : Model -> Node
+getCurrentNode =
+    getTracker >> getTrackerNode
+
+
+getQuestion model =
+    case getCurrentNode model of
         Branch q _ _ ->
             q
 

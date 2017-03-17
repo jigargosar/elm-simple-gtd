@@ -26,14 +26,10 @@ rootNode =
 
 test : Maybe Tracker
 test =
-    createTracker rootNode
-        |> logNode "start"
+    init rootNode
         |> onNo
-        ?|> logNode "no"
         ?+> onYes
-        ?|> logNode "yes"
         ?+> onNo
-        ?|> logNode "no"
 
 
 logNode =

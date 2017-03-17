@@ -38,7 +38,7 @@ createButton toClickMsg na =
             button [ onClick (toClickMsg Model.No) ] [ "No" |> text ]
 
         Model.BackNa ->
-            button [ onClick (toClickMsg Model.Back) ] [ "Back" |> text ]
+            button [ onClick (toClickMsg Model.Back) ] [ "Cancel" |> text ]
 
         Model.YesCustom msg ->
             button [ onClick msg ] [ "Yes" |> text ]

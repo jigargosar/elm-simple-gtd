@@ -98,6 +98,15 @@ update msg =
             OnTrashItYesClicked ->
                 identity
 
+            OnYesClicked ->
+                identity
+
+            OnNoClicked ->
+                identity
+
+            OnBackClicked ->
+                identity
+
 
 
 --            _ ->

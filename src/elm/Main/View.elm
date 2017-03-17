@@ -66,6 +66,11 @@ rootNode =
 logNode =
     tapLog (InBasketFlow.getQuestion)
 
+flowViewConfig = {
+        onYes=OnYesClicked
+        , onNo = OnNoClicked
+        , onBack = OnBackClicked
+    }
 
 elmAppView m =
     div [] [ getInBasketFlowModel m |> InBasketFlow.View.flowDialogView ]

@@ -2,7 +2,10 @@ module Main.Routing exposing (..)
 
 import Main.Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
-import RouteUrl.Builder exposing (..)
+import RouteHash
+import RouteUrl.Builder as Builder exposing (..)
+import Function exposing ((>>>), (<<<))
+import RouteUrl exposing (UrlChange)
 
 
 delta2builder : Model -> Model -> Maybe Builder
@@ -10,6 +13,11 @@ delta2builder previous current =
     builder
         |> replacePath [ "0" ]
         |> Just
+
+
+delta2hash : Model -> Model -> Maybe UrlChange
+delta2hash =
+    delta2builder >>> Maybe.map toHashChange
 
 
 builder2messages : Builder -> List Msg

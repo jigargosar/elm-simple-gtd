@@ -17,7 +17,7 @@ import TodoCollection.Todo as Todo
 import TodoCollection.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import InBasketFlow.Model as InBasketFlow
+import InBasketFlow.Model as InBasketFlow exposing (Node)
 
 
 todoListViewConfig =
@@ -33,6 +33,7 @@ todoListViewConfig =
     }
 
 
+rootNode : Node Msg
 rootNode =
     InBasketFlow.branch "Is it Actionable ?"
         (InBasketFlow.branch "Can be done under 2 mins?"
@@ -66,12 +67,15 @@ rootNode =
 logNode =
     tapLog (InBasketFlow.getQuestion)
 
+
+
 --flowViewConfig = {
 --        onClick = OnInBasketFlowButtonClicked
 --    }
 
+
 elmAppView m =
-    div [] [ getInBasketFlowModel m |> InBasketFlow.View.flowDialogView OnInBasketFlowButtonClicked]
+    div [] [ getInBasketFlowModel m |> InBasketFlow.View.flowDialogView OnInBasketFlowButtonClicked ]
 
 
 todoListView m =

@@ -41,4 +41,4 @@ builder2messages builder =
 
 hash2messages : Location -> List Msg
 hash2messages location =
-    builder2messages (Builder.fromHash location.href)
+    builder2messages (fromHash location.href)

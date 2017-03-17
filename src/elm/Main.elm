@@ -4,7 +4,7 @@ import Json.Encode as E
 import Main.Model as Model exposing (Model)
 import Main.Msg exposing (..)
 import Main.Routing
-import Main.View exposing (elmAppView)
+import Main.View exposing (view)
 import Navigation exposing (Location)
 import Return exposing (Return)
 import RouteUrl exposing (RouteUrlProgram)
@@ -36,7 +36,7 @@ main =
         , location2messages = Main.Routing.hash2messages
         , init = init
         , update = update
-        , view = elmAppView
+        , view = view
         , subscriptions = subscriptions
         }
 

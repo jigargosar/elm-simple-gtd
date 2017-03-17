@@ -1,4 +1,4 @@
-module Main.View exposing (elmAppView)
+module Main.View exposing (view)
 
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
@@ -33,7 +33,18 @@ todoListViewConfig =
     }
 
 
-elmAppView m =
+view m =
+    div []
+        [ toolbarView m
+        , centerView m
+        ]
+
+
+toolbarView m =
+    div [] [ button [ onClick OnProcessInBasket ] [ text "Process In-Basket" ] ]
+
+
+centerView m =
     case getViewState m of
         TodoListViewState ->
             todoListView m
@@ -48,6 +59,5 @@ flowView flowModel =
 
 todoListView m =
     div []
-        [ button [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
-        , TodoCollection.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
+        [ TodoCollection.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
         ]

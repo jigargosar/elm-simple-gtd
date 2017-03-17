@@ -1,4 +1,4 @@
-module Flow exposing (..)
+module InBasketFlow exposing (..)
 
 import List.Extra
 import Toolkit.Operators exposing (..)

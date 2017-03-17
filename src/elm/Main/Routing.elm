@@ -23,10 +23,11 @@ delta2hash =
 builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
-        "list"::[] ->
-            Msg.OnShowTodoList
-        "process-inbasket"::[] ->
-                    Msg.OnProcessInBasket
+        "list" :: [] ->
+            [ Msg.OnShowTodoList ]
+
+        "process-inbasket" :: [] ->
+            [ Msg.OnProcessInBasket ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

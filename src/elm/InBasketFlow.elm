@@ -1,5 +1,6 @@
 module InBasketFlow exposing (..)
 
+import DebugExtra.Debug exposing (tapLog)
 import InBasketFlow.Model exposing (Tracker, actionNode, branchNode, confirmActionNode, onNo, onYes, createTracker)
 import List.Extra
 import Toolkit.Operators exposing (..)
@@ -35,9 +36,3 @@ test =
         ?|> tapLog "no"
 
 
-tapLog str val =
-    let
-        _ =
-            val |> (Tuple.first >> Debug.log str)
-    in
-        val

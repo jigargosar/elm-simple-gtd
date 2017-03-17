@@ -3,7 +3,6 @@ module Main.Routing exposing (..)
 import Main.Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
 import Navigation exposing (Location)
-import RouteHash
 import RouteUrl.Builder as Builder exposing (..)
 import Function exposing ((>>>), (<<<))
 import RouteUrl exposing (UrlChange)

@@ -11,6 +11,12 @@ type Node msg
     | ConfirmAction String (Node msg)
 
 
+type InBasketFlowActionType
+    = Yes
+    | No
+    | Back
+
+
 type alias Tracker msg =
     ( Node msg, List (Node msg) )
 
@@ -22,6 +28,18 @@ type alias Model msg =
 init : Node msg -> Model msg
 init rootNode =
     { tracker = createTracker rootNode }
+
+
+update at model =
+    case at of
+        Yes ->
+            model
+
+        No ->
+            model
+
+        Back ->
+            model
 
 
 branchNode =

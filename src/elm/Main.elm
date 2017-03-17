@@ -107,8 +107,8 @@ update msg =
             OnBackClicked ->
                 identity
 
-            OnInBasketFlowButtonClicked clickType ->
-                Return.map (Model.updateInBasketFlowModel clickType)
+            OnInBasketFlowButtonClicked actionType ->
+                Return.map (Model.updateInBasketFlowModelWithActionType actionType)
 
 
 

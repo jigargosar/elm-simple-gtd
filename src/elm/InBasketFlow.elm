@@ -54,3 +54,5 @@ confirmAction = Model.confirmActionNode
 
 
 action= Model.actionNode
+
+update = Model.update

@@ -69,16 +69,17 @@ getInBasketFlowModel =
     (.inBasketFlowModel)
 
 
-updateInBasketFlowModel clickType =
-    case clickType of
-        InBasketFlow.View.Yes ->
-            identity
+setInBasketFlowModel : Flow.Model Msg -> ModelMapper
+setInBasketFlowModel inBasketFlowModel model =
+    { model | inBasketFlowModel = inBasketFlowModel }
 
-        InBasketFlow.View.No ->
-            identity
 
-        InBasketFlow.View.Back ->
-            identity
+updateInBasketFlowModel fun model =
+    setInBasketFlowModel (fun model) model
+
+
+updateInBasketFlowModelWithActionType actionType =
+    updateInBasketFlowModel (getInBasketFlowModel >> Flow.update actionType)
 
 
 getTodoCollection : Model -> TodoCollection

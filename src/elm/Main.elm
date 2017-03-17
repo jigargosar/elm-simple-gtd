@@ -3,9 +3,11 @@ port module Main exposing (..)
 import Json.Encode as E
 import Main.Model as Model exposing (Model)
 import Main.Msg exposing (..)
+import Main.Routing
 import Main.View exposing (elmAppView)
 import Navigation exposing (Location)
 import Return exposing (Return)
+import RouteUrl exposing (RouteUrlProgram)
 import Time exposing (Time)
 import PouchDB
 import Toolkit.Operators exposing (..)
@@ -27,22 +29,37 @@ type alias Flags =
     { now : Time, encodedTodoList : EncodedTodoList }
 
 
-main : Program Flags Model Msg
+main : RouteUrlProgram Flags Model Msg
 main =
-    Navigation.programWithFlags LocationChanged
-        --    TimeTravel.Navigation.programWithFlags LocationChanged
-        { init = init
-        , view = elmAppView
+    RouteUrl.programWithFlags
+        { delta2url = Main.Routing.delta2hash
+        , location2messages = Main.Routing.hash2messages
+        , init = init
         , update = update
-        , subscriptions =
-            \_ ->
-                Sub.batch
-                    []
+        , view = elmAppView
+        , subscriptions = subscriptions
         }
 
 
-init : Flags -> Location -> ReturnTA
-init { now, encodedTodoList } location =
+
+--main : Program Flags Model Msg
+--main =
+--    Navigation.programWithFlags LocationChanged
+--        --    TimeTravel.Navigation.programWithFlags LocationChanged
+--        { init = init
+--        , view = elmAppView
+--        , update = update
+--        , subscriptions = subscriptions
+--        }
+
+
+subscriptions m =
+    Sub.batch
+        []
+
+
+init : Flags -> ReturnTA
+init { now, encodedTodoList } =
     Model.init now encodedTodoList |> Return.singleton
 
 

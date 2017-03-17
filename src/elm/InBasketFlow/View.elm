@@ -33,5 +33,5 @@ nodeList =
     List.filter Tuple.first >> List.map Tuple.second
 
 
-showNoButton model =
-    Model.isConfirmActionNode model
+showNoButton =
+    Model.isConfirmActionNode >> not

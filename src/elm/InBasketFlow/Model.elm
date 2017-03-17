@@ -125,10 +125,10 @@ trackerGetNextActions tracker =
             [ YesNA, NoNa ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
 
         Action q msg ->
-            [ YesNA, NoNa ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
+            [ YesNA ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
 
         ConfirmAction q a ->
-            [ YesNA, NoNa ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
+            [ YesNA ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
 
 
 trackerGetBackNaAsSingletonIfNotRoot tracker =

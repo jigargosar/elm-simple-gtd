@@ -33,47 +33,6 @@ todoListViewConfig =
     }
 
 
-rootNode : Node Msg
-rootNode =
-    InBasketFlow.branch "Is it Actionable ?"
-        (InBasketFlow.branch "Can be done under 2 mins?"
-            (InBasketFlow.confirmAction "Do it now?"
-                (InBasketFlow.action "Timer Started, Go Go Go !!!" OnTrashItYesClicked)
-            )
-            (InBasketFlow.action "Involves Multiple Steps?" OnTrashItYesClicked)
-        )
-        (InBasketFlow.branch "Is it worth keeping?"
-            (InBasketFlow.branch "Could Require actionNode Later ?"
-                (InBasketFlow.action "Move to SomDay/Maybe List?" OnTrashItYesClicked)
-                (InBasketFlow.action "Move to Reference?" OnTrashItYesClicked)
-            )
-            (InBasketFlow.action "Trash it ?" OnTrashItYesClicked)
-        )
-
-
-
---testModel =
---    InBasketFlow.init rootNode
---        |> logNode "start"
---        |> InBasketFlow.onNo
---        ?|> logNode "no"
---        ?+> InBasketFlow.onNo
---        ?|> logNode "no"
---
---        ?+> InBasketFlow.onYes
---        ?|> logNode "yes"
-
-
-logNode =
-    tapLog (InBasketFlow.getQuestion)
-
-
-
---flowViewConfig = {
---        onClick = OnInBasketFlowButtonClicked
---    }
-
-
 elmAppView m =
     div [] [ getInBasketFlowModel m |> InBasketFlow.View.flowDialogView OnInBasketFlowButtonClicked ]
 

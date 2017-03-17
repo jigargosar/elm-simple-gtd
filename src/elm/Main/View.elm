@@ -1,4 +1,4 @@
-module Main.View exposing (view)
+module Main.View exposing (appView)
 
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
@@ -33,7 +33,7 @@ todoListViewConfig =
     }
 
 
-view m =
+appView m =
     div []
         [ toolbarView m
         , centerView m

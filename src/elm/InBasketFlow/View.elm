@@ -7,12 +7,20 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import InBasketFlow.Model as Model exposing (Model)
 
 
-flowDialogView model =
+type InBasketFlowActionType
+    = Yes
+    | No
+    | Back
+
+
+flowDialogView : (InBasketFlowActionType -> msg) -> Model msg -> Html msg
+flowDialogView toClickMsg model =
     div []
         [ h1 []
             [ Model.getQuestion model |> text ]
         , div []
-            [ button [] [ "Yes" |> text ]
-            , button [] [ "No" |> text ]
+            [ button [ onClick (toClickMsg Yes) ] [ "Yes" |> text ]
+            , button [ onClick (toClickMsg No) ] [ "No" |> text ]
+            , button [ onClick (toClickMsg Back) ] [ "Back" |> text ]
             ]
         ]

@@ -71,7 +71,7 @@ logNode =
 --    }
 
 elmAppView m =
-    div [] [ getInBasketFlowModel m |> InBasketFlow.View.flowDialogView ]
+    div [] [ getInBasketFlowModel m |> InBasketFlow.View.flowDialogView OnInBasketFlowButtonClicked]
 
 
 todoListView m =

@@ -107,6 +107,9 @@ update msg =
             OnBackClicked ->
                 identity
 
+            OnInBasketFlowButtonClicked clickType ->
+                identity
+
 
 
 --            _ ->

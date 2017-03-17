@@ -1,5 +1,6 @@
 module Main.Msg exposing (..)
 
+import InBasketFlow.View exposing (InBasketFlowActionType)
 import Json.Decode
 import Navigation exposing (Location)
 import TodoCollection.Todo exposing (Todo, TodoId)
@@ -20,7 +21,4 @@ type Msg
     | OnYesClicked
     | OnNoClicked
     | OnBackClicked
-
-
-
---    | OnInBasketFlowButtonClicked InbasketFlowActionType
+    | OnInBasketFlowButtonClicked InBasketFlowActionType

@@ -48,5 +48,6 @@ flowView flowModel =
 
 todoListView m =
     div []
-        [ TodoCollection.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
+        [ button [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
+        , TodoCollection.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
         ]

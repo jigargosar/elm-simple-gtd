@@ -10,6 +10,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Function exposing (..)
 import Function.Infix exposing (..)
+import FunctionalHelpers exposing (..)
 
 
 flowDialogView : (InBasketFlowActionType -> msg) -> Model msg -> Html msg
@@ -18,10 +19,12 @@ flowDialogView toClickMsg model =
         [ h1 []
             [ Model.getQuestion model |> text ]
         , div []
-            [ button [ onClick (toClickMsg Model.Yes) ] [ "Yes" |> text ]
-            , button [ onClick (toClickMsg Model.No) ] [ "No" |> text ]
-            , button [ onClick (toClickMsg Model.Back) ] [ "Back" |> text ]
-            ]
+            (nodeList
+                [ True => button [ onClick (toClickMsg Model.Yes) ] [ "Yes" |> text ]
+                , True => button [ onClick (toClickMsg Model.No) ] [ "No" |> text ]
+                , True => button [ onClick (toClickMsg Model.Back) ] [ "Back" |> text ]
+                ]
+            )
         ]
 
 

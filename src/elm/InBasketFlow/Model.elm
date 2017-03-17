@@ -122,21 +122,20 @@ type NodeNextActions msg
 trackerGetNextActions tracker =
     case trackerGetNode tracker of
         Branch q y n ->
-            [ YesNA, NoNa ] ++ getBackNaAsSingletonIfNotRoot
+            [ YesNA, NoNa ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
 
         Action q msg ->
-            [ YesNA, NoNa ] ++ getBackNaAsSingletonIfNotRoot
+            [ YesNA, NoNa ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
 
         ConfirmAction q a ->
-            [ YesNA, NoNa ] ++ getBackNaAsSingletonIfNotRoot
+            [ YesNA, NoNa ] ++ trackerGetBackNaAsSingletonIfNotRoot tracker
 
 
-getBackNaAsSingletonIfNotRoot node tracker =
-    (if trackerIsRoot tracker then
+trackerGetBackNaAsSingletonIfNotRoot tracker =
+    if trackerIsRoot tracker then
         []
-     else
+    else
         [ BackNa ]
-    )
 
 
 trackerIsRoot =

@@ -18,7 +18,6 @@ type alias ViewConfig msg =
     , onNewTodoTextChanged : String -> msg
     , onNewTodoBlur : msg
     , onNewTodoEnterPressed : msg
-    , onProcessButtonClicked : msg
     }
 
 
@@ -43,7 +42,6 @@ addTodoView editMode viewConfig =
 addTodoButton viewConfig =
     div []
         [ button [ onClick viewConfig.onAddTodoClicked ] [ text "Add" ]
-        , button [ onClick viewConfig.onProcessButtonClicked ] [ text "Process" ]
         ]
 
 

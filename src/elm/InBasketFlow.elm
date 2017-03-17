@@ -40,6 +40,17 @@ import Toolkit.Helpers exposing (..)
 logNode =
     tapLog (Model.getQuestion)
 
-type alias Model = Model.Model
 
-init = Model.init
+type alias Model msg =
+    Model.Model msg
+
+
+init =
+    Model.init
+
+branch = Model.branchNode
+
+confirmAction = Model.confirmActionNode
+
+
+action= Model.actionNode

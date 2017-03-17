@@ -13,18 +13,35 @@ import TodoCollection.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-import InBasketFlow
+import InBasketFlow as Flow
 
 
 type alias Model =
     { todoCollection : TodoCollection
     , editMode : EditMode
-    , inBasketFlowModel : InBasketFlow.Model
+    , inBasketFlowModel : Flow.Model Msg
     }
 
 
+rootNode =
+    Flow.branch "Is it Actionable ?"
+        (Flow.branch "Can be done under 2 mins?"
+            (Flow.confirmAction "Do it now?"
+                (Flow.action "Timer Started, Go Go Go !!!" OnTrashItYesClicked)
+            )
+            (Flow.action "Involves Multiple Steps?" OnTrashItYesClicked)
+        )
+        (Flow.branch "Is it worth keeping?"
+            (Flow.branch "Could Require actionNode Later ?"
+                (Flow.action "Move to SomDay/Maybe List?" OnTrashItYesClicked)
+                (Flow.action "Move to Reference?" OnTrashItYesClicked)
+            )
+            (Flow.action "Trash it ?" OnTrashItYesClicked)
+        )
+
+
 modelConstructor editMode todoCollection =
-    Model todoCollection editMode InBasketFlow.init
+    Model todoCollection editMode (Flow.init rootNode)
 
 
 type alias ModelMapper =
@@ -46,6 +63,8 @@ init now encodedTodoList =
             |> todoModelFromSeed
             >> (modelConstructor NotEditing)
 
+
+getInBasketFlowModel = (.inBasketFlowModel)
 
 getTodoCollection : Model -> TodoCollection
 getTodoCollection =

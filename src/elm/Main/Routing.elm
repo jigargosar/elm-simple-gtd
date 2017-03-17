@@ -11,9 +11,13 @@ import RouteUrl exposing (UrlChange)
 
 delta2builder : Model -> Model -> Maybe Builder
 delta2builder previous current =
-    builder
-        |> replacePath [ "0" ]
-        |> Just
+    let
+        _ =
+            Debug.log "222" ("222")
+    in
+        builder
+            |> replacePath [ "0" ]
+            |> Just
 
 
 

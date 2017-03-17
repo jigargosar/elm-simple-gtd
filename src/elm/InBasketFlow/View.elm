@@ -19,11 +19,10 @@ flowDialogView toClickMsg model =
         [ h1 []
             [ Model.getQuestion model |> text ]
         , div []
-            (nodeList
-                [ True => button [ onClick (toClickMsg Model.Yes) ] [ "Yes" |> text ]
-                , showNoButton model => button [ onClick (toClickMsg Model.No) ] [ "No" |> text ]
-                , True => button [ onClick (toClickMsg Model.Back) ] [ "Back" |> text ]
-                ]
+            ([ button [ onClick (toClickMsg Model.Yes) ] [ "Yes" |> text ]
+             , button [ onClick (toClickMsg Model.No) ] [ "No" |> text ]
+             , button [ onClick (toClickMsg Model.Back) ] [ "Back" |> text ]
+             ]
             )
         ]
 

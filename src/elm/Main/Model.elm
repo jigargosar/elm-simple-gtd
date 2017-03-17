@@ -64,7 +64,13 @@ init now encodedTodoList =
             >> (modelConstructor NotEditing)
 
 
-getInBasketFlowModel = (.inBasketFlowModel)
+getInBasketFlowModel =
+    (.inBasketFlowModel)
+
+
+updateInBasketFlowModel clickType =
+    identity
+
 
 getTodoCollection : Model -> TodoCollection
 getTodoCollection =

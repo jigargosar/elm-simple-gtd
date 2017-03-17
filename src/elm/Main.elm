@@ -108,7 +108,7 @@ update msg =
                 identity
 
             OnInBasketFlowButtonClicked clickType ->
-                identity
+                Return.map (Model.updateInBasketFlowModel clickType)
 
 
 

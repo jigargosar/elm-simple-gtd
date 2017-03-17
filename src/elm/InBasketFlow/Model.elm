@@ -1,5 +1,6 @@
 module InBasketFlow.Model exposing (..)
 
+import FunctionalHelpers exposing (..)
 import List.Extra as List
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -71,9 +72,14 @@ trackerGetNode =
     Tuple.first
 
 
+trackerGetParents =
+    Tuple.second
+
+
 getTrackersCurrentNode : Model msg -> Node msg
 getTrackersCurrentNode =
     getTracker >> trackerGetNode
+
 
 
 --isConfirmActionNode =
@@ -100,6 +106,41 @@ getTrackersCurrentNode =
 --
 --        _ ->
 --            False
+
+
+getNextActions model =
+    getTracker >> trackerGetNextActions
+
+
+type NodeNextActions msg
+    = YesNA
+    | NoNa
+    | BackNa
+    | YesCustom msg
+
+
+trackerGetNextActions tracker =
+    case trackerGetNode tracker of
+        Branch q y n ->
+            [ YesNA, NoNa ] ++ getBackNaAsSingletonIfNotRoot
+
+        Action q msg ->
+            [ YesNA, NoNa ] ++ getBackNaAsSingletonIfNotRoot
+
+        ConfirmAction q a ->
+            [ YesNA, NoNa ] ++ getBackNaAsSingletonIfNotRoot
+
+
+getBackNaAsSingletonIfNotRoot node tracker =
+    (if trackerIsRoot tracker then
+        []
+     else
+        [ BackNa ]
+    )
+
+
+trackerIsRoot =
+    trackerGetParents >> List.isEmpty
 
 
 getQuestion model =

@@ -26,6 +26,7 @@ flowDialogView toClickMsg model =
             )
         ]
 
+pm model = Model.getNextActions
 
 
 --nodeList : List ( Bool, Html msg ) -> List (Html msg)

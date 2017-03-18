@@ -23,16 +23,25 @@ inBasketFlow =
 
 
 type alias Model =
-    Flow.Model Msg
+    { flow : Flow.Model Msg
+    }
 
 
 modelConstructor todoList =
-    inBasketFlow
+    Model inBasketFlow
 
 
 init todoList =
     modelConstructor todoList
 
 
-update =
-    Flow.update
+setFlow flow model =
+    { model | flow = floor }
+
+
+updateFlow fun model =
+    setFlow (fun model) model
+
+
+updateWithActionType actionType =
+    updateFlow (\_ -> Flow.update actionType)

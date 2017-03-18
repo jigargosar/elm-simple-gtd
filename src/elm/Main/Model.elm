@@ -78,7 +78,7 @@ updateInBasketFlowWithActionType actionType m =
     m
         |> case getViewState m of
             ProcessInBasketViewState inBasketFlowModel ->
-                InBasketFlow.update actionType inBasketFlowModel
+                InBasketFlow.updateWithActionType actionType inBasketFlowModel
                     |> ProcessInBasketViewState
                     |> setViewState
 

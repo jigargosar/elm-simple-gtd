@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import TodoCollection exposing (EditMode(..), TodoCollection)
+import TodoCollection.Model as Model
 import TodoCollection.Todo as Todo exposing (Todo, TodoId)
 
 
@@ -60,7 +61,7 @@ todoListView : EditMode -> ViewConfig msg -> TodoCollection -> Html msg
 todoListView editMode viewConfig todoCollection =
     ul []
         (todoCollection
-            |> TodoCollection.rejectMap Todo.isDeleted
+            |> Model.rejectMap Todo.isDeleted
                 (todoView viewConfig.onDeleteTodoClicked viewConfig.onEditTodoClicked editMode viewConfig)
         )
 

@@ -83,6 +83,8 @@ type alias Todo =
     , deleted : Bool
     }
 
+type alias TodoList = List Todo
+
 
 todoConstructor id rev text dueAt deleted =
     Todo id rev text dueAt deleted

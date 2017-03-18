@@ -9,10 +9,7 @@ module TodoCollection
         , addNewTodo
         , deleteTodo
         , replaceTodoIfIdMatches
-          -- for views
-        , rejectMap
           -- temp
-        , asList__
         , getInBasketTodoList__
         )
 
@@ -30,20 +27,16 @@ import TodoCollection.Model as Model exposing (Model)
 import Tuple2
 
 
-type TodoCollection
-    = TodoCollection Model
+type alias TodoCollection =
+    Model.Model
 
 
-toModel (TodoCollection model) =
-    model
+toModel =
+    identity
 
 
 
 -- temp
-
-
-asList__ =
-    toModel >> Model.getTodoList
 
 
 getInBasketTodoList__ : TodoCollection -> List Todo
@@ -63,25 +56,16 @@ type EditMode
 
 todoModelGenerator : List Todo -> Random.Generator TodoCollection
 todoModelGenerator todoList =
-    Random.map (Model.init todoList >> TodoCollection) Random.independentSeed
+    Random.map (Model.init todoList) Random.independentSeed
 
 
-deleteTodo : TodoId -> TodoCollection -> ( TodoCollection, Maybe Todo )
-deleteTodo todoId =
-    toModel >> Model.deleteTodo todoId >> Tuple2.mapFirst TodoCollection
+deleteTodo =
+    Model.deleteTodo
 
 
-replaceTodoIfIdMatches todo =
-    toModel >> Model.replaceTodoIfIdMatches todo >> Tuple2.mapFirst TodoCollection
+replaceTodoIfIdMatches =
+    Model.replaceTodoIfIdMatches
 
 
-addNewTodo text =
-    toModel >> Model.addNewTodo text >> Tuple2.mapFirst TodoCollection
-
-
-
--- view external
-
-
-rejectMap filter mapper =
-    toModel >> Model.rejectMap filter mapper
+addNewTodo =
+    Model.addNewTodo

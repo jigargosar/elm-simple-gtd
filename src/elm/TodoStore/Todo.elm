@@ -35,28 +35,6 @@ defaultDeleted =
     False
 
 
-type StuffType
-    = Trash
-    | SomeDay
-    | Reference
-    | ProjectPlanningAction
-      -- MultiStep
-    | DoItNow
-      -- less than 2 mins
-    | WaitingForListAction
-      -- possible follow up frequency?
-    | CalenderAction
-    | NextAction
-
-
-type ProcessingState
-    = InBasket
-    | Pending
-    | Done
-    | WaitingFor
-    | SomeDayMayBe
-
-
 type alias Todo =
     { id : TodoId
     , rev : String
@@ -198,4 +176,5 @@ getFirstInBasketTodo =
     List.find isNotDeleted
 
 
-setContextUnder2m todo = todo
+setContextUnder2m todo =
+    todo

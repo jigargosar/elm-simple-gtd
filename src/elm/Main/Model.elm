@@ -22,14 +22,14 @@ type ViewState
 
 
 type alias Model =
-    { todoCollection : TodoStore
+    { todoStore : TodoStore
     , editMode : EditMode
     , viewState : ViewState
     }
 
 
-modelConstructor editMode todoCollection =
-    Model todoCollection editMode TodoListViewState
+modelConstructor editMode todoStore =
+    Model todoStore editMode TodoListViewState
 
 
 type alias ModelMapper =
@@ -126,7 +126,7 @@ deleteTodoInBasketFlow m =
 
 getTodoCollection : Model -> TodoStore
 getTodoCollection =
-    (.todoCollection)
+    (.todoStore)
 
 
 setEditModeTo : EditMode -> ModelMapper
@@ -160,8 +160,8 @@ updateEditTodoText text m =
 
 
 setTodoCollection : TodoStore -> ModelMapper
-setTodoCollection todoCollection m =
-    { m | todoCollection = todoCollection }
+setTodoCollection todoStore m =
+    { m | todoStore = todoStore }
 
 
 updateTodoCollection : (Model -> TodoStore) -> ModelMapper
@@ -188,7 +188,7 @@ addNewTodo m =
             if String.trim text |> String.isEmpty then
                 ( m, Nothing )
             else
-                TodoStore.addNewTodo text m.todoCollection
+                TodoStore.addNewTodo text m.todoStore
                     |> Tuple2.mapEach (setTodoCollection # m) (Just)
 
         _ ->
@@ -196,7 +196,7 @@ addNewTodo m =
 
 
 deleteTodo todoId m =
-    TodoStore.deleteTodo todoId m.todoCollection
+    TodoStore.deleteTodo todoId m.todoStore
         |> Tuple2.mapFirst (setTodoCollection # m)
 
 
@@ -220,5 +220,5 @@ saveEditingTodo m =
 
 
 replaceTodoIfIdMatches todo m =
-    TodoStore.replaceTodoIfIdMatches todo m.todoCollection
+    TodoStore.replaceTodoIfIdMatches todo m.todoStore
         |> Tuple2.mapEach (setTodoCollection # m) (Just)

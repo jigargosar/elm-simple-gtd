@@ -17,8 +17,8 @@ type alias Model =
     }
 
 
-init todoCollection seed =
-    Model todoCollection seed
+init todoStore seed =
+    Model todoStore seed
 
 
 generator : TodoList -> Random.Generator Model
@@ -46,16 +46,16 @@ getFirstInBasketTodo: Model -> Maybe Todo
 getFirstInBasketTodo =
     getTodoList >> Todo.getFirstInBasketTodo
 
-setSeed seed todoCollection =
-    { todoCollection | seed = seed }
+setSeed seed todoStore =
+    { todoStore | seed = seed }
 
 
 getSeed =
     (.seed)
 
 
-appendTodo todo todoCollection =
-    todoCollection.todoList ++ [ todo ] |> setTodoList # todoCollection
+appendTodo todo todoStore =
+    todoStore.todoList ++ [ todo ] |> setTodoList # todoStore
 
 
 setTodoList todoList model =
@@ -66,15 +66,15 @@ updateTodoList fun model =
     setTodoList (fun model) model
 
 
-generate generator todoCollection =
-    Random.step generator (getSeed todoCollection)
-        |> Tuple2.mapSecond (setSeed # todoCollection)
+generate generator todoStore =
+    Random.step generator (getSeed todoStore)
+        |> Tuple2.mapSecond (setSeed # todoStore)
 
 
-addNewTodo text todoCollection =
+addNewTodo text todoStore =
     let
         ( todo, newTodoCollection ) =
-            generate (Todo.generator text) todoCollection
+            generate (Todo.generator text) todoStore
     in
         ( appendTodo todo newTodoCollection, todo )
 
@@ -100,12 +100,12 @@ upsertTodoList upsertList =
         updateTodoList finalTodoList
 
 
-deleteTodo todoId todoCollection =
+deleteTodo todoId todoStore =
     let
         todoList =
-            todoCollection.todoList
+            todoStore.todoList
                 |> List.updateIf (Todo.hasId todoId) (Todo.markDeleted)
     in
-        ( setTodoList todoList todoCollection
+        ( setTodoList todoList todoStore
         , List.find (Todo.hasId todoId) todoList
         )

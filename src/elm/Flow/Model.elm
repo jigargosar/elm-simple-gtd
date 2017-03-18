@@ -81,7 +81,7 @@ getTrackersCurrentNode =
     getTracker >> trackerGetNode
 
 
-trackerGetNextActions__ flowActionToMsg tracker =
+trackerGetNextActions flowActionToMsg tracker =
     let
         backNA =
             if trackerIsRoot tracker then
@@ -106,8 +106,8 @@ trackerGetNextActions__ flowActionToMsg tracker =
                 [ yesAction ] ++ backNA
 
 
-getNextActions__ flowActionToMsg =
-    getTracker >> trackerGetNextActions__ flowActionToMsg
+getNextActions flowActionToMsg =
+    getTracker >> trackerGetNextActions flowActionToMsg
 
 
 trackerIsRoot =

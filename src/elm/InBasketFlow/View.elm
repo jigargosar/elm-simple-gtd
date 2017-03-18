@@ -27,7 +27,7 @@ flowView flowModel =
 
 
 nextActionButtons flowModel =
-    flowModel |> FlowModel__.getNextActions__ Msg.OnInBasketFlowAction .|> createNAB
+    flowModel |> FlowModel__.getNextActions Msg.OnInBasketFlowAction .|> createNAB
 
 
 createNAB ( buttonText, onClickMsg ) =

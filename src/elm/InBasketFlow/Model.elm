@@ -83,3 +83,8 @@ updateWithActionType actionType =
 
 mapFlow mapper =
     getFlow >> mapper
+
+getQuestion =
+    getFlow >> Flow.getQuestion
+
+getFlowActions flowActionToMsg = getFlow >> Flow.getNextActions flowActionToMsg

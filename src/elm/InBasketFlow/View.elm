@@ -14,19 +14,19 @@ import Main.Msg as Msg exposing (Msg)
 
 view : Model -> Html Msg
 view model =
-    Model.mapFlow flowView model
+    flowView model
 
 
-flowView flowModel =
+flowView model =
     div []
         [ h1 []
-            [ Flow.getQuestion flowModel |> text ]
-        , flowActionBar flowModel
+            [ Model.getQuestion model |> text ]
+        , flowActionBar model
         ]
 
 
-flowActionBar flowModel =
-    div [] (flowModel |> Flow.getNextActions Msg.OnInBasketFlowAction .|> createNAB)
+flowActionBar model =
+    div [] (Model.getFlowActions Msg.OnInBasketFlowAction model .|> createNAB)
 
 
 createNAB ( buttonText, onClickMsg ) =

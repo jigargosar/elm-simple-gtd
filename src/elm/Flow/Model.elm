@@ -81,61 +81,6 @@ getTrackersCurrentNode =
     getTracker >> trackerGetNode
 
 
-
---isConfirmActionNode =
---    getTrackersCurrentNode >> isConfirmAction
---
---
---isNodeTypeAction node =
---    case node of
---        Action _ _ ->
---            True
---
---        _ ->
---            False
---
---
---isActionNode =
---    getTrackersCurrentNode >> isNodeTypeAction
---
---
---isConfirmAction node =
---    case node of
---        ConfirmAction _ _ ->
---            True
---
---        _ ->
---            False
-
-
-getNextActions : Model msg -> List (NodeNextActions msg)
-getNextActions =
-    getTracker >> trackerGetNextActions
-
-
-type NodeNextActions msg
-    = YesNA
-    | NoNA
-    | BackNA
-    | YesCustom msg
-
-
-trackerGetNextActions tracker =
-    let
-        backNA =
-            trackerGetBackNaAsSingletonIfNotRoot tracker
-    in
-        case trackerGetNode tracker of
-            Branch q y n ->
-                [ YesNA, NoNA ] ++ backNA
-
-            Action q msg ->
-                [ YesNA ] ++ backNA
-
-            ConfirmAction q a ->
-                [ YesNA ] ++ backNA
-
-
 trackerGetNextActions__ flowActionToMsg tracker =
     let
         backNA =
@@ -163,13 +108,6 @@ trackerGetNextActions__ flowActionToMsg tracker =
 
 getNextActions__ flowActionToMsg =
     getTracker >> trackerGetNextActions__ flowActionToMsg
-
-
-trackerGetBackNaAsSingletonIfNotRoot tracker =
-    if trackerIsRoot tracker then
-        []
-    else
-        [ BackNA ]
 
 
 trackerIsRoot =

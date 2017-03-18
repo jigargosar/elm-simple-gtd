@@ -38,6 +38,7 @@ flowView vm =
         ]
 
 
+flowActionBar : ViewModel -> Html Msg
 flowActionBar vm =
     let
         buttonView ( buttonText, onClickMsg ) =

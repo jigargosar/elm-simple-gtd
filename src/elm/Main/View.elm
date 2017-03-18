@@ -1,11 +1,13 @@
 module Main.View exposing (appView)
 
-import DebugExtra.Debug exposing (tapLog)
-import DecodeExtra exposing (traceDecoder)
+import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
+import DebugExtra.Debug exposing (tapLog)
+import DecodeExtra exposing (traceDecoder)
 import Flow
 import Flow.View
 import Json.Decode
@@ -15,8 +17,6 @@ import Main.Model exposing (..)
 import Main.Msg exposing (..)
 import TodoCollection.Todo as Todo
 import TodoCollection.View
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
 import Flow.Model as Flow exposing (Node)
 import InBasketFlow
 

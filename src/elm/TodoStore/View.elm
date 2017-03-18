@@ -9,7 +9,7 @@ import TodoStore.Model as Model
 import TodoStore.Todo as Todo exposing (Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
-import Dict
+import Dict exposing (Dict)
 import Dict.Extra as Dict
 
 
@@ -61,32 +61,40 @@ addNewTodoView viewConfig text =
         []
 
 
+
+--todoListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg
+--todoListView editMode viewConfig todoCollection =
+--    let
+--        mapperArgs =
+--            ( (todoView editMode viewConfig), todoCollection )
+--
+--        mapper =
+--            uncurry Model.mapAllExceptDeleted
+--    in
+--        div []
+--            [ ul [] (mapper mapperArgs)
+--            ]
+
+
 todoListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg
-todoListView editMode viewConfig todoCollection =
+todoListView editMode viewConfig todoStore =
     let
-        mapperArgs =
-            ( (todoView editMode viewConfig), todoCollection )
-
-        mapper =
-            uncurry Model.mapAllExceptDeleted
-    in
-        div []
-            [ ul [] (mapper mapperArgs)
-            ]
-
-
-todoListView2 : EditMode -> ViewConfig msg -> TodoStore -> Html msg
-todoListView2 editMode viewConfig model =
-    let
+        typeToTodoList : Dict String (List Todo)
         typeToTodoList =
-            Model.groupByType model
+            Model.groupByType todoStore
+
+        todoView_ : Todo -> Html msg
+        todoView_ =
+            (todoView editMode viewConfig)
     in
-        div [] (typeToTodoList |> Dict.map todoGroupView |> Dict.values)
+        div [] (typeToTodoList |> Dict.map (todoGroupView todoView_) |> Dict.values)
 
 
-todoGroupView groupName todoList =
+todoGroupView todoView_ groupName todoList =
     div []
-        [ h1 [] []
+        [ h1 []
+            [ text groupName ]
+        , div [] (todoList .|> todoView_)
         ]
 
 

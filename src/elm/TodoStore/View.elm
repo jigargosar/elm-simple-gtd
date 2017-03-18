@@ -7,6 +7,8 @@ import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import TodoStore exposing (EditMode(..), TodoStore)
 import TodoStore.Model as Model
 import TodoStore.Todo as Todo exposing (Todo, TodoId)
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
 
 
 type alias ViewConfig msg =
@@ -59,28 +61,14 @@ addNewTodoView viewConfig text =
 
 todoListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg
 todoListView editMode viewConfig todoCollection =
-    ul []
-        (todoCollection
-            |> Model.mapAllExceptDeleted
-                (todoView viewConfig.onDeleteTodoClicked viewConfig.onEditTodoClicked editMode viewConfig)
-        )
+    let
+        mapperArgs =
+            ( (todoView editMode viewConfig), todoCollection )
+    in
+        ul [] ((uncurry Model.mapAllExceptDeleted) mapperArgs)
 
 
-stuffListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg
-stuffListView editMode viewConfig todoCollection =
-    ul []
-        (todoCollection
-            |> Model.mapAllExceptDeleted
-                (todoView
-                    viewConfig.onDeleteTodoClicked
-                    viewConfig.onEditTodoClicked
-                    editMode
-                    viewConfig
-                )
-        )
-
-
-todoView onDeleteTodoClicked onEditTodoClicked editMode viewConfig todo =
+todoView editMode viewConfig todo =
     let
         inner =
             case editMode of

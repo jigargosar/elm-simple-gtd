@@ -17,7 +17,7 @@ type Msg
     | OnEditTodoTextChanged String
     | OnEditTodoBlur
     | OnEditTodoEnterPressed
-    | OnTrashItYesClicked
+    | OnFlowTrashItClicked
     | OnYesClicked
     | OnNoClicked
     | OnBackClicked

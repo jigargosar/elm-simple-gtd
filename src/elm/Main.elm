@@ -100,7 +100,7 @@ update msg =
                         >> Tuple2.mapSecond persistTodoCmdMaybe
                     )
 
-            OnTrashItYesClicked ->
+            OnFlowTrashItClicked ->
                 identity
 
             OnYesClicked ->

@@ -58,7 +58,7 @@ centerView m =
 
 
 flowView flowModel =
-    div [] [ Flow.View.flowDialogView OnInBasketFlowButtonClicked flowModel ]
+    div [] [ Flow.View.flowDialogView OnInBasketFlowAction flowModel ]
 
 
 todoListView m =

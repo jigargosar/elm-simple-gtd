@@ -12,10 +12,10 @@ type Node msg
     | ConfirmAction String (Node msg)
 
 
-type FlowActionType
-    = Yes
-    | No
-    | Back
+type FlowAction
+    = YesAction
+    | NoAction
+    | BackAction
 
 
 type alias Tracker msg =
@@ -34,13 +34,13 @@ init rootNode =
 update at model =
     model
         |> (case at of
-                Yes ->
+                YesAction ->
                     onYes
 
-                No ->
+                NoAction ->
                     onNo
 
-                Back ->
+                BackAction ->
                     onBack
            )
         >> Maybe.withDefault model

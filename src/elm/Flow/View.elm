@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Flow.Model as Model exposing (FlowActionType, Model)
+import Flow.Model as Model exposing (FlowAction, Model)
 import List.Extra
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -13,7 +13,7 @@ import Function.Infix exposing (..)
 import FunctionalHelpers exposing (..)
 
 
-flowDialogView : (FlowActionType -> msg) -> Model msg -> Html msg
+flowDialogView : (FlowAction -> msg) -> Model msg -> Html msg
 flowDialogView toClickMsg model =
     div []
         [ h1 []
@@ -23,7 +23,7 @@ flowDialogView toClickMsg model =
         ]
 
 
-nextActionButtons : (FlowActionType -> msg) -> Model msg -> List (Html msg)
+nextActionButtons : (FlowAction -> msg) -> Model msg -> List (Html msg)
 nextActionButtons toClickMsg =
     Model.getNextActions
         >> List.map (createButton toClickMsg)
@@ -32,13 +32,13 @@ nextActionButtons toClickMsg =
 createButton toClickMsg na =
     case na of
         Model.YesNA ->
-            button [ onClick (toClickMsg Model.Yes) ] [ "Yes" |> text ]
+            button [ onClick (toClickMsg Model.YesAction) ] [ "Yes" |> text ]
 
         Model.NoNa ->
-            button [ onClick (toClickMsg Model.No) ] [ "No" |> text ]
+            button [ onClick (toClickMsg Model.NoAction) ] [ "No" |> text ]
 
         Model.BackNa ->
-            button [ onClick (toClickMsg Model.Back) ] [ "Cancel" |> text ]
+            button [ onClick (toClickMsg Model.BackAction) ] [ "Cancel" |> text ]
 
         Model.YesCustom msg ->
             button [ onClick msg ] [ "Yes" |> text ]

@@ -112,7 +112,7 @@ update msg =
             OnBackClicked ->
                 identity
 
-            OnInBasketFlowButtonClicked actionType ->
+            OnInBasketFlowAction actionType ->
                 Return.map (Model.updateInBasketFlowWithActionType actionType)
 
             OnShowTodoList ->

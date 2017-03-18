@@ -29,7 +29,7 @@ type alias Model =
     }
 
 
-rootNode =
+inBasketFlow =
     Flow.branch "Is it Actionable ?"
         (Flow.branch "Can be done under 2 mins?"
             (Flow.confirmAction "Do it now?"
@@ -83,7 +83,7 @@ showTodoList =
 
 
 showProcessInBasket =
-    setViewState (ProcessInBasketViewState (Flow.init rootNode))
+    setViewState (ProcessInBasketViewState (Flow.init inBasketFlow))
 
 
 updateFlowModelWithActionType actionType m =

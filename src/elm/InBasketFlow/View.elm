@@ -43,6 +43,15 @@ view =
 
 flowView : ViewModel -> Html Msg
 flowView vm =
+    vm.maybeTodo ?|> processTodoView # vm ?= processingCompleteView
+
+
+processingCompleteView =
+    h1 [] [ text "Hurray! All stuff is processed ;)" ]
+
+
+processTodoView : TodoViewModel -> ViewModel -> Html Msg
+processTodoView todoVM vm =
     div []
         [ questionView vm
         , actionBar vm

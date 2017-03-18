@@ -9,7 +9,7 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
 import Flow
-import Flow.View
+
 import Json.Decode
 import Json.Encode
 import List.Extra as List
@@ -55,12 +55,7 @@ centerView m =
             todoListView m
 
         InBasketFlowViewState inBasketFlowModel ->
-            --            InBasketFlow.mapFlow__ flowView inBasketFlowModel
             InBasketFlow.View.view inBasketFlowModel
-
-
-flowView flowModel =
-    div [] [ Flow.View.flowDialogView OnInBasketFlowAction flowModel ]
 
 
 todoListView m =

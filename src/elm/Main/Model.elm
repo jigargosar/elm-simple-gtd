@@ -1,6 +1,5 @@
 module Main.Model exposing (..)
 
-import Flow.View
 import Json.Encode as E
 import List.Extra as List
 import Main.Msg exposing (..)

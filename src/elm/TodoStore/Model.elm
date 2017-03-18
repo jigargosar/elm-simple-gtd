@@ -12,7 +12,7 @@ import Tuple2
 
 
 type alias Model =
-    { todoList : List Todo
+    { todoList : TodoList
     , seed : Seed
     }
 
@@ -21,7 +21,7 @@ init todoCollection seed =
     Model todoCollection seed
 
 
-generator : List Todo -> Random.Generator Model
+generator : TodoList -> Random.Generator Model
 generator todoList =
     Random.map (init todoList) Random.independentSeed
 
@@ -36,7 +36,7 @@ rejectMap filter mapper =
 getAllExceptDeleted =
     rejectMap Todo.isDeleted
 
-getInBasketTodoList : Model -> List Todo
+getInBasketTodoList : Model -> TodoList
 getInBasketTodoList =
     rejectMap Todo.isDeleted identity
 
@@ -85,7 +85,7 @@ replaceTodoIfIdMatches todo =
 
 upsertTodoList upsertList =
     let
-        finalTodoList : Model -> List Todo
+        finalTodoList : Model -> TodoList
         finalTodoList =
             getTodoList
                 >> Todo.fromListById

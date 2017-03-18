@@ -1,22 +1,4 @@
-module TodoStore.Todo
-    exposing
-        ( TodoId
-        , Todo
-        , EncodedTodoList
-        , generator
-        , replaceIfEqualById
-        , fromListById
-        , hasId
-        , markDeleted
-        , decodeTodoList
-        , setText
-        , isTextEmpty
-        , isDeleted
-        , equalById
-        , encodeSingleton
-        , getId
-        , getText
-        )
+module TodoStore.Todo exposing (..)
 
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
@@ -130,7 +112,7 @@ decodeValue =
     D.decodeValue decoder
 
 
-decodeTodoList : EncodedTodoList -> List Todo
+decodeTodoList : EncodedTodoList -> TodoList
 decodeTodoList =
     List.map decodeValue
         >> List.filterMap

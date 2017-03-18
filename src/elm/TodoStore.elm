@@ -39,7 +39,7 @@ toModel =
 -- temp
 
 
-getInBasketTodoList__ : TodoStore -> List Todo
+getInBasketTodoList__ : TodoStore -> TodoList
 getInBasketTodoList__ =
     toModel >> Model.getInBasketTodoList
 

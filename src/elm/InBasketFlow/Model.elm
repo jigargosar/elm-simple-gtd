@@ -4,7 +4,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Flow
 import Main.Msg exposing (Msg(OnFlowTrashItClicked))
-import TodoStore.Todo exposing (Todo)
+import TodoStore.Todo exposing (Todo, TodoList)
 
 
 inBasketFlow =
@@ -35,7 +35,7 @@ type alias ModelMapper =
 
 type alias Model =
     { flow : FlowModel
-    , todoList : List Todo
+    , todoList : TodoList
     }
 
 

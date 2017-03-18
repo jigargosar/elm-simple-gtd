@@ -60,7 +60,7 @@ processTodoView todoVM vm =
 
 
 todoView vm =
-    p [] [ text vm.text ]
+    h3 [] [ text vm.text ]
 
 
 questionView vm =

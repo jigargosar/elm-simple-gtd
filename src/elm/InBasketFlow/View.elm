@@ -1,18 +1,20 @@
 module InBasketFlow.View exposing (..)
 
 import Flow.Model as FlowModel__
+import InBasketFlow
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import InBasketFlow.Model as Model
-import Main.Msg as Msg
+import InBasketFlow.Model as Model exposing (Model)
+import Main.Msg as Msg exposing (Msg)
 
 
+view : Model -> Html Msg
 view model =
-    Model.mapFlow flowView
+    Model.mapFlow flowView model
 
 
 flowView flowModel =

@@ -55,7 +55,8 @@ centerView m =
             todoListView m
 
         InBasketFlowViewState inBasketFlowModel ->
-            InBasketFlow.mapFlow__ flowView inBasketFlowModel
+            --            InBasketFlow.mapFlow__ flowView inBasketFlowModel
+            InBasketFlow.View.view inBasketFlowModel
 
 
 flowView flowModel =

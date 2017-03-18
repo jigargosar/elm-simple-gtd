@@ -3,7 +3,7 @@ module TodoCollection.Todo
         ( TodoId
         , Todo
         , EncodedTodoList
-        , todoGenerator
+        , generator
         , replaceIfEqualById
         , fromListById
         , hasId
@@ -83,7 +83,9 @@ type alias Todo =
     , deleted : Bool
     }
 
-type alias TodoList = List Todo
+
+type alias TodoList =
+    List Todo
 
 
 todoConstructor id rev text dueAt deleted =
@@ -146,7 +148,7 @@ decodeTodoList =
             )
 
 
-todoGenerator text =
+generator text =
     Random.map (initWithTextAndId text) RandomIdGenerator.idGen
 
 

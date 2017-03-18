@@ -33,6 +33,8 @@ getTodoList =
 rejectMap filter mapper =
     getTodoList >> List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))
 
+getAllExceptDeleted =
+    rejectMap Todo.isDeleted
 
 getInBasketTodoList : Model -> List Todo
 getInBasketTodoList =
@@ -67,7 +69,7 @@ generate generator todoCollection =
 addNewTodo text todoCollection =
     let
         ( todo, newTodoCollection ) =
-            generate (Todo.todoGenerator text) todoCollection
+            generate (Todo.generator text) todoCollection
     in
         ( appendTodo todo newTodoCollection, todo )
 

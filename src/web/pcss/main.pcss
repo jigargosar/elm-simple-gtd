@@ -1,20 +1,28 @@
 @import "lib/reset.pcss";
 
-body{
-  margin-left:1rem;
+body {
+  margin-left: 1rem;
 }
 
-button{
+button {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5em;
   margin-right: 0.5rem;
   margin-top: 0.5rem;
-  min-width:100px;
+  min-width: 100px;
   border: none;
   background-color: rgba(0, 191, 255, 0.7);
+
+  cursor: pointer;
+  outline: none;
 }
 
-#in-basket-flow-container{
+button:hover {
+  transform: scale(1.2);
+  border: 1px solid black;
+}
+
+#in-basket-flow-container {
   margin-left: 3rem;
 }

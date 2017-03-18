@@ -21,6 +21,6 @@ type Msg
     | OnYesClicked
     | OnNoClicked
     | OnBackClicked
-    | OnFlowButtonClicked FlowActionType
+    | OnInBasketFlowButtonClicked FlowActionType
     | OnShowTodoList
     | OnProcessInBasket

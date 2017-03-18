@@ -86,7 +86,7 @@ showProcessInBasket =
     setViewState (ProcessInBasketViewState (Flow.init inBasketFlow))
 
 
-updateFlowModelWithActionType actionType m =
+updateInBasketFlowWithActionType actionType m =
     m
         |> case getViewState m of
             ProcessInBasketViewState flowModel ->

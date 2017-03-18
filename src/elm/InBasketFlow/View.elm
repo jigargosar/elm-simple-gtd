@@ -8,6 +8,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import InBasketFlow.Model as Model
+import Main.Msg as Msg
 
 
 view model =
@@ -18,6 +19,7 @@ flowView flowModel =
     div []
         [ h1 []
             [ FlowModel.getQuestion flowModel |> text ]
-          --            , div []
-          --                (nextActionButtons toClickMsg model)
+        , div []
+            --                          (nextActionButtons Msg.OnInBasketFlowAction flowModel)
+            []
         ]

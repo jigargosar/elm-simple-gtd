@@ -8,10 +8,11 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 
 
+
 view model =
     div []
             [ h1 []
-                [ Model.getQuestion model |> text ]
+                [ InbasketFlow.Model.getQuestion model |> text ]
 --            , div []
 --                (nextActionButtons toClickMsg model)
             ]

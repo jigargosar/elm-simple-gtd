@@ -87,6 +87,13 @@ updateInBasketFlowWithActionType actionType m =
             _ ->
                 identity
 
+moveTodoToUnder2mList todo model =
+        let
+            updatedTodo =
+                Todo.setContextUnder2m todo
+        in
+
+    replaceTodoIfIdMatches updatedTodo model
 
 moveProcessingTodoToUnder2mList m =
     m
@@ -187,8 +194,11 @@ saveEditingTodo m =
             if Todo.isTextEmpty todo then
                 ( m, Nothing )
             else
-                TodoStore.replaceTodoIfIdMatches todo m.todoCollection
-                    |> Tuple2.mapEach (setTodoCollection # m) (Just)
+                replaceTodoIfIdMatches todo m.todoCollection
 
         _ ->
             ( m, Nothing )
+
+replaceTodoIfIdMatches todo m =
+    TodoStore.replaceTodoIfIdMatches todo m.todoCollection
+        |> Tuple2.mapEach (setTodoCollection # m) (Just)

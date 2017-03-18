@@ -196,3 +196,6 @@ isNotDeleted =
 
 getFirstInBasketTodo =
     List.find isNotDeleted
+
+
+setContextUnder2m todo = todo

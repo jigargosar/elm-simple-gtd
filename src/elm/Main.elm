@@ -122,7 +122,10 @@ update msg =
                 Return.map (Model.startProcessingInBasket)
 
             MoveToUnder2mList ->
-                Return.map (Model.moveProcessingTodoToUnder2mList)
+                Return.andThen
+                    (Model.moveProcessingTodoToUnder2mList
+                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                    )
 
 
 

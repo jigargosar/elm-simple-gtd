@@ -4,7 +4,7 @@ import Dict
 import Dict.Extra as Dict
 import Random.Pcg as Random exposing (Seed)
 import RandomIdGenerator
-import TodoStore.Todo as Todo exposing (Todo, TodoId, TodoList)
+import Todo as Todo exposing (Todo, TodoId, TodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List

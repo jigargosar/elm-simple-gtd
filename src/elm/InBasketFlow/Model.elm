@@ -4,7 +4,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Flow
 import Main.Msg as Msg exposing (Msg)
-import TodoStore.Todo exposing (Todo, TodoList)
+import Todo exposing (Todo, TodoList)
 
 
 inBasketFlow =

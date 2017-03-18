@@ -15,7 +15,7 @@ import Json.Encode
 import List.Extra as List
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
-import TodoStore.Todo as Todo
+import Todo as Todo
 import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InBasketFlow

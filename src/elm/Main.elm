@@ -13,7 +13,7 @@ import PouchDB
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
-import TodoStore.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
+import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
 
 

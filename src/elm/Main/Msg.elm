@@ -3,7 +3,7 @@ module Main.Msg exposing (..)
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Navigation exposing (Location)
-import TodoStore.Todo exposing (Todo, TodoId)
+import Todo exposing (Todo, TodoId)
 
 
 type Msg

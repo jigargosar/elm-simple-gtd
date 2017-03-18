@@ -6,7 +6,7 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import TodoStore exposing (EditMode(..), TodoStore)
 import TodoStore.Model as Model
-import TodoStore.Todo as Todo exposing (Todo, TodoId)
+import Todo as Todo exposing (Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Dict exposing (Dict)

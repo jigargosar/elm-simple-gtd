@@ -1,12 +1,12 @@
-module TodoCollection.View exposing (..)
+module TodoStore.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
-import TodoCollection exposing (EditMode(..), TodoCollection)
-import TodoCollection.Model as Model
-import TodoCollection.Todo as Todo exposing (Todo, TodoId)
+import TodoStore exposing (EditMode(..), TodoStore)
+import TodoStore.Model as Model
+import TodoStore.Todo as Todo exposing (Todo, TodoId)
 
 
 type alias ViewConfig msg =
@@ -22,7 +22,7 @@ type alias ViewConfig msg =
     }
 
 
-allTodosView : ViewConfig msg -> EditMode -> TodoCollection -> Html msg
+allTodosView : ViewConfig msg -> EditMode -> TodoStore -> Html msg
 allTodosView viewConfig editMode todoCollection =
     div []
         [ h1 [] [ text "Stuff" ]
@@ -57,7 +57,7 @@ addNewTodoView viewConfig text =
         []
 
 
-todoListView : EditMode -> ViewConfig msg -> TodoCollection -> Html msg
+todoListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg
 todoListView editMode viewConfig todoCollection =
     ul []
         (todoCollection

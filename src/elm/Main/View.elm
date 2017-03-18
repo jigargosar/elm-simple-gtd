@@ -15,8 +15,8 @@ import Json.Encode
 import List.Extra as List
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
-import TodoCollection.Todo as Todo
-import TodoCollection.View
+import TodoStore.Todo as Todo
+import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InBasketFlow
 import InBasketFlow.View
@@ -60,5 +60,5 @@ centerView m =
 
 todoListView m =
     div []
-        [ TodoCollection.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
+        [ TodoStore.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
         ]

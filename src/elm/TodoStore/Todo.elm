@@ -1,4 +1,4 @@
-module TodoCollection.Todo
+module TodoStore.Todo
     exposing
         ( TodoId
         , Todo

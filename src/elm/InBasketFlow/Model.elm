@@ -4,7 +4,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Flow
 import Main.Msg exposing (Msg(OnFlowTrashItClicked))
-import TodoCollection.Todo exposing (Todo)
+import TodoStore.Todo exposing (Todo)
 
 
 inBasketFlow =

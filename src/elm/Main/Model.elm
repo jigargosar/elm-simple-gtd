@@ -6,10 +6,10 @@ import Main.Msg exposing (..)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
-import TodoCollection exposing (EditMode(..), TodoCollection)
+import TodoStore exposing (EditMode(..), TodoStore)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import TodoCollection.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
+import TodoStore.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -22,7 +22,7 @@ type ViewState
 
 
 type alias Model =
-    { todoCollection : TodoCollection
+    { todoCollection : TodoStore
     , editMode : EditMode
     , viewState : ViewState
     }
@@ -41,7 +41,7 @@ init now encodedTodoList =
     let
         generateTodoModel =
             Todo.decodeTodoList
-                >> TodoCollection.generator
+                >> TodoStore.generator
                 >> Random.step
 
         todoModelFromSeed =
@@ -66,7 +66,7 @@ showTodoList =
 
 startProcessingInBasket model =
     getTodoCollection model
-        |> TodoCollection.getInBasketTodoList__
+        |> TodoStore.getInBasketTodoList__
         |> InBasketFlow.init
         |> InBasketFlowViewState
         |> setViewState
@@ -85,7 +85,7 @@ updateInBasketFlowWithActionType actionType m =
                 identity
 
 
-getTodoCollection : Model -> TodoCollection
+getTodoCollection : Model -> TodoStore
 getTodoCollection =
     (.todoCollection)
 
@@ -120,12 +120,12 @@ updateEditTodoText text m =
             m
 
 
-setTodoCollection : TodoCollection -> ModelMapper
+setTodoCollection : TodoStore -> ModelMapper
 setTodoCollection todoCollection m =
     { m | todoCollection = todoCollection }
 
 
-updateTodoCollection : (Model -> TodoCollection) -> ModelMapper
+updateTodoCollection : (Model -> TodoStore) -> ModelMapper
 updateTodoCollection fun model =
     setTodoCollection (fun model) model
 
@@ -149,7 +149,7 @@ addNewTodo m =
             if String.trim text |> String.isEmpty then
                 ( m, Nothing )
             else
-                TodoCollection.addNewTodo text m.todoCollection
+                TodoStore.addNewTodo text m.todoCollection
                     |> Tuple2.mapEach (setTodoCollection # m) (Just)
 
         _ ->
@@ -157,7 +157,7 @@ addNewTodo m =
 
 
 deleteTodo todoId m =
-    TodoCollection.deleteTodo todoId m.todoCollection
+    TodoStore.deleteTodo todoId m.todoCollection
         |> Tuple2.mapFirst (setTodoCollection # m)
 
 
@@ -174,7 +174,7 @@ saveEditingTodo m =
             if Todo.isTextEmpty todo then
                 ( m, Nothing )
             else
-                TodoCollection.replaceTodoIfIdMatches todo m.todoCollection
+                TodoStore.replaceTodoIfIdMatches todo m.todoCollection
                     |> Tuple2.mapEach (setTodoCollection # m) (Just)
 
         _ ->

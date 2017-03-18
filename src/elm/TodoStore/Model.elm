@@ -1,8 +1,8 @@
-module TodoCollection.Model exposing (..)
+module TodoStore.Model exposing (..)
 
 import FunctionalHelpers exposing (..)
 import Random.Pcg as Random exposing (Seed)
-import TodoCollection.Todo as Todo exposing (Todo)
+import TodoStore.Todo as Todo exposing (Todo)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List

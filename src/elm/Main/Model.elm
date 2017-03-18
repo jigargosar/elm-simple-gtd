@@ -6,14 +6,14 @@ import Main.Msg exposing (..)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
-import TodoStore exposing (EditMode(..), TodoStore)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
+import Todo as Todo exposing (EditMode(..), EncodedTodoList, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
 import InBasketFlow
+import TodoStore exposing (TodoStore)
 
 
 type ViewState

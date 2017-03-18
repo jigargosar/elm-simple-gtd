@@ -41,6 +41,12 @@ type ListType
     | Under2m
 
 
+type EditMode
+    = EditNewTodoMode String
+    | EditTodoMode Todo
+    | NotEditing
+
+
 type alias Todo =
     { id : TodoId
     , rev : String

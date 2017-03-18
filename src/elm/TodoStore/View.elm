@@ -4,13 +4,14 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
-import TodoStore exposing (EditMode(..), TodoStore)
+import TodoStore exposing (TodoStore)
 import TodoStore.Model as Model
-import Todo as Todo exposing (Todo, TodoId)
+import Todo as Todo exposing (EditMode, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Dict exposing (Dict)
 import Dict.Extra as Dict
+import Todo.View
 
 
 type alias ViewConfig msg =
@@ -35,7 +36,7 @@ allTodosView viewConfig editMode todoStore =
 
         todoView_ : Todo -> Html msg
         todoView_ =
-            (todoView editMode viewConfig)
+            (Todo.View.todoView editMode viewConfig)
     in
         div [] (typeToTodoList |> Dict.map (todoGroupView todoView_) |> Dict.values)
 
@@ -46,44 +47,3 @@ todoGroupView todoView_ groupName todoList =
             [ text groupName ]
         , div [] (todoList .|> todoView_)
         ]
-
-
-todoView editMode viewConfig todo =
-    let
-        inner =
-            case editMode of
-                EditTodoMode editingTodo ->
-                    if Todo.equalById editingTodo todo then
-                        todoListEditView viewConfig editingTodo
-                    else
-                        todoListItemView viewConfig todo
-
-                _ ->
-                    todoListItemView viewConfig todo
-    in
-        div [] [ inner, hr [] [] ]
-
-
-todoListItemView viewConfig todo =
-    let
-        deleteOnClick =
-            onClick (viewConfig.onDeleteTodoClicked (Todo.getId todo))
-
-        editOnClick =
-            onClick (viewConfig.onEditTodoClicked todo)
-    in
-        div []
-            [ button [ deleteOnClick ] [ text "x" ]
-            , div [ editOnClick ] [ Todo.getText todo |> text ]
-            ]
-
-
-todoListEditView viewConfig todo =
-    input
-        [ onInput viewConfig.onEditTodoTextChanged
-        , value (Todo.getText todo)
-        , onBlur viewConfig.onEditTodoBlur
-        , autofocus True
-        , onEnter viewConfig.onEditTodoEnterPressed
-        ]
-        []

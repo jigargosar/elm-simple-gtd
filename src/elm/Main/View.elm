@@ -1,6 +1,5 @@
 module Main.View exposing (appView)
 
-import TodoStore exposing (EditMode(EditNewTodoMode))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
@@ -15,7 +14,7 @@ import Json.Encode
 import List.Extra as List
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
-import Todo as Todo
+import Todo as Todo exposing (EditMode(..))
 import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InBasketFlow

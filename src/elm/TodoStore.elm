@@ -31,12 +31,6 @@ getFirstInBasketTodo =
 -- external
 
 
-type EditMode
-    = EditNewTodoMode String
-    | EditTodoMode Todo
-    | NotEditing
-
-
 generator =
     Model.generator
 

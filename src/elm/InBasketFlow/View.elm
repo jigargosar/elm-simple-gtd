@@ -54,8 +54,13 @@ processTodoView : TodoViewModel -> ViewModel -> Html Msg
 processTodoView todoVM vm =
     div []
         [ questionView vm
+        , todoView todoVM
         , actionBar vm
         ]
+
+
+todoView vm =
+    p [] [ text vm.text ]
 
 
 questionView vm =

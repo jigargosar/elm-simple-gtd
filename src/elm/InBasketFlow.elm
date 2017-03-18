@@ -48,6 +48,10 @@ init todoList =
     modelConstructor todoList
 
 
+
+-- .flow
+
+
 getFlow : Model -> FlowModel
 getFlow =
     (.flow)
@@ -76,6 +80,10 @@ updateMaybeFlow maybeUpdater model =
 updateWithActionType : Flow.Model.FlowActionType -> ModelMapper
 updateWithActionType actionType =
     updateFlow (getFlow >> Flow.update actionType)
+
+
+
+-- end .flow
 
 
 mapFlow mapper =

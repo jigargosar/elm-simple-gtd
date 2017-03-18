@@ -88,6 +88,16 @@ updateInBasketFlowWithActionType actionType m =
                 identity
 
 
+moveProcessingTodoToUnder2mList m =
+    m
+        |> case getViewState m of
+            InBasketFlowViewState maybeTodo inBasketFlowModel ->
+                startProcessingInBasket
+
+            _ ->
+                identity
+
+
 getTodoCollection : Model -> TodoStore
 getTodoCollection =
     (.todoCollection)

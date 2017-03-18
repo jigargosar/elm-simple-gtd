@@ -122,7 +122,7 @@ update msg =
                 Return.map (Model.startProcessingInBasket)
 
             MoveToUnder2mList ->
-                identity
+                Return.map (Model.moveProcessingTodoToUnder2mList)
 
 
 

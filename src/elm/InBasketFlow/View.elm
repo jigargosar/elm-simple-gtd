@@ -26,8 +26,7 @@ view model =
 
 flowView model =
     div []
-        [ h1 []
-            [ Model.getQuestion model |> text ]
+        [ h1 [] [ Model.getQuestion model |> text ]
         , flowActionBar model
         ]
 

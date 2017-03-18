@@ -29,8 +29,7 @@ type alias ViewConfig msg =
 allTodosView : ViewConfig msg -> EditMode -> TodoStore -> Html msg
 allTodosView viewConfig editMode todoCollection =
     div []
-        [ h1 [] [ text "Stuff" ]
-        , addTodoView editMode viewConfig
+        [ addTodoView editMode viewConfig
         , todoListView editMode viewConfig todoCollection
         ]
 

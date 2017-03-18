@@ -33,6 +33,9 @@ getTodoList =
 mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
+groupByType =
+    getTodoList >> Todo.groupByType
+
 
 getInBasketTodoList : Model -> TodoList
 getInBasketTodoList =

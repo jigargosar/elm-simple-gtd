@@ -9,6 +9,8 @@ import TodoStore.Model as Model
 import TodoStore.Todo as Todo exposing (Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
+import Dict
+import Dict.Extra as Dict
 
 
 type alias ViewConfig msg =
@@ -70,8 +72,22 @@ todoListView editMode viewConfig todoCollection =
     in
         div []
             [ ul [] (mapper mapperArgs)
-            , ul [] (mapper mapperArgs)
             ]
+
+
+todoListView2 : EditMode -> ViewConfig msg -> TodoStore -> Html msg
+todoListView2 editMode viewConfig model =
+    let
+        typeToTodoList =
+            Model.groupByType model
+    in
+        div [] (typeToTodoList |> Dict.map todoGroupView |> Dict.values)
+
+
+todoGroupView groupName todoList =
+    div []
+        [ h1 [] []
+        ]
 
 
 todoView editMode viewConfig todo =

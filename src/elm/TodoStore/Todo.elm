@@ -234,3 +234,5 @@ getFirstInBasketTodo =
 
 setContextUnder2m =
     setListType Under2m
+
+groupByType = Dict.groupBy (getListType >> toString)

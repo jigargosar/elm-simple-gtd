@@ -9,7 +9,6 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
 import Flow
-
 import Json.Decode
 import Json.Encode
 import List.Extra as List
@@ -44,8 +43,8 @@ appView m =
 
 toolbarView m =
     div []
-        [ button [ onClick OnShowTodoList ] [ text "Show Todo List" ]
-        , button [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
+        [ button [ onClick OnShowTodoList ] [ text "Show List" ]
+        , button [ onClick OnProcessInBasket ] [ text "Process Stuff" ]
         ]
 
 

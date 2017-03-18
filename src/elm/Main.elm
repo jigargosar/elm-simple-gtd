@@ -129,7 +129,7 @@ update msg =
 
             MarkDeleted ->
                 Return.andThen
-                    (Model.moveInBasketProcessingTodoToUnder2mList
+                    (Model.deleteTodoInBasketFlow
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 

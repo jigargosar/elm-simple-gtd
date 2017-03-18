@@ -95,11 +95,29 @@ moveTodoToUnder2mList maybeTodo model =
         ?= ( model, Nothing )
 
 
+deleteMaybeTodo : Maybe Todo -> Model -> ( Model, Maybe Todo )
+deleteMaybeTodo maybeTodo model =
+    maybeTodo
+        ?|> (Todo.getId >> deleteTodo # model)
+        ?= ( model, Nothing )
+
+
 moveInBasketProcessingTodoToUnder2mList m =
     m
         |> case getViewState m of
             InBasketFlowViewState maybeTodo inBasketFlowModel ->
                 moveTodoToUnder2mList maybeTodo
+                    >> Tuple.mapFirst startProcessingInBasket
+
+            _ ->
+                (,) # Nothing
+
+
+deleteTodoInBasketFlow m =
+    m
+        |> case getViewState m of
+            InBasketFlowViewState maybeTodo inBasketFlowModel ->
+                deleteMaybeTodo maybeTodo
                     >> Tuple.mapFirst startProcessingInBasket
 
             _ ->

@@ -66,6 +66,20 @@ todoListView editMode viewConfig todoCollection =
         )
 
 
+stuffListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg
+stuffListView editMode viewConfig todoCollection =
+    ul []
+        (todoCollection
+            |> Model.mapAllExceptDeleted
+                (todoView
+                    viewConfig.onDeleteTodoClicked
+                    viewConfig.onEditTodoClicked
+                    editMode
+                    viewConfig
+                )
+        )
+
+
 todoView onDeleteTodoClicked onEditTodoClicked editMode viewConfig todo =
     let
         inner =

@@ -11,16 +11,27 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import InBasketFlow.Model as Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
 import FunctionalHelpers exposing (..)
+import TodoStore.Todo
+
+
+type alias TodoViewModel =
+    { text : String }
 
 
 type alias ViewModel =
-    { question : String
+    { maybeTodo : Maybe TodoViewModel
+    , question : String
     , flowActions : List ( String, Msg )
     }
 
 
+toTodoViewModel todo =
+    { text = TodoStore.Todo.getText todo }
+
+
 toViewModel model =
-    { question = Model.getQuestion model
+    { maybeTodo = Model.getCurrentTodo model ?|> toTodoViewModel
+    , question = Model.getQuestion model
     , flowActions = Model.getFlowActions Msg.OnInBasketFlowAction model
     }
 

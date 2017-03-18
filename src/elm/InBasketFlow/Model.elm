@@ -77,6 +77,21 @@ updateWithActionType actionType =
     updateFlow (getFlow >> Flow.update actionType)
 
 
+getTodoList : Model -> TodoList
+getTodoList =
+    (.todoList)
+
+
+setTodoList : TodoList -> ModelMapper
+setTodoList todoList model =
+    { model | todoList = todoList }
+
+
+updateTodoList : (Model -> TodoList) -> ModelMapper
+updateTodoList updater model =
+    setTodoList (updater model) model
+
+
 
 -- end .flow
 
@@ -84,7 +99,14 @@ updateWithActionType actionType =
 mapFlow mapper =
     getFlow >> mapper
 
+
 getQuestion =
     getFlow >> Flow.getQuestion
 
-getFlowActions flowActionToMsg = getFlow >> Flow.getNextActions flowActionToMsg
+
+getFlowActions flowActionToMsg =
+    getFlow >> Flow.getNextActions flowActionToMsg
+
+
+getCurrentTodo =
+    getTodoList >> List.head

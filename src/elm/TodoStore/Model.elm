@@ -33,6 +33,7 @@ getTodoList =
 mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
+
 groupByType =
     getTodoList >> Todo.groupByType
 
@@ -42,9 +43,10 @@ getInBasketTodoList =
     mapAllExceptDeleted identity
 
 
-getFirstInBasketTodo: Model -> Maybe Todo
+getFirstInBasketTodo : Model -> Maybe Todo
 getFirstInBasketTodo =
     getTodoList >> Todo.getFirstInBasketTodo
+
 
 setSeed seed todoStore =
     { todoStore | seed = seed }
@@ -86,18 +88,6 @@ replaceTodoIfIdMatches todo =
             getTodoList >> Todo.replaceIfEqualById todo
     in
         updateTodoList newTodoList >> (,) # todo
-
-
-upsertTodoList upsertList =
-    let
-        finalTodoList : Model -> TodoList
-        finalTodoList =
-            getTodoList
-                >> Todo.fromListById
-                >> Dict.union (Todo.fromListById upsertList)
-                >> Dict.values
-    in
-        updateTodoList finalTodoList
 
 
 deleteTodo todoId todoStore =

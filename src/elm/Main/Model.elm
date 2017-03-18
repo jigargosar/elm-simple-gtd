@@ -73,8 +73,7 @@ startProcessingInBasket model =
         |> TodoStore.getInBasket__
         |> InBasketFlow.init
         |> InBasketFlowViewState (getFirstInBasketTodo model)
-        |> setViewState
-        # model
+        |> (setViewState # model)
 
 
 updateInBasketFlowWithActionType actionType m =

@@ -29,6 +29,10 @@ type alias FlowModel =
     Flow.Model Msg
 
 
+type alias ModelMapper =
+    Model -> Model
+
+
 type alias Model =
     { flow : FlowModel
     }
@@ -47,24 +51,24 @@ getFlow =
     (.flow)
 
 
-setFlow : FlowModel -> Model -> Model
+setFlow : FlowModel -> ModelMapper
 setFlow flow model =
     { model | flow = flow }
 
 
-updateFlow : (Model -> FlowModel) -> Model -> Model
+updateFlow : (Model -> FlowModel) -> ModelMapper
 updateFlow fun model =
     setFlow (fun model) model
 
 
-updateMaybeFlow : (Model -> Maybe FlowModel) -> Model -> Model
+updateMaybeFlow : (Model -> Maybe FlowModel) -> ModelMapper
 updateMaybeFlow fun model =
     fun model
         |> Maybe.map ((flip setFlow) model)
         |> Maybe.withDefault model
 
 
-updateWithActionType : Flow.Model.FlowActionType -> Model -> Model
+updateWithActionType : Flow.Model.FlowActionType -> ModelMapper
 updateWithActionType actionType =
     updateFlow (getFlow >> Flow.update actionType)
 

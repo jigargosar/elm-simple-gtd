@@ -121,6 +121,9 @@ update msg =
             OnProcessInBasket ->
                 Return.map (Model.startProcessingInBasket)
 
+            MoveToUnder2mList ->
+                identity
+
 
 
 --            _ ->

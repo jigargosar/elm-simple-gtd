@@ -10,6 +10,13 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import InBasketFlow.Model as Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
+import FunctionalHelpers exposing (..)
+
+
+type alias ViewModel =
+    { question : String
+    , flowActions : List ( String, Msg )
+    }
 
 
 view : Model -> Html Msg

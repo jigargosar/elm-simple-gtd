@@ -64,8 +64,11 @@ todoListView editMode viewConfig todoCollection =
     let
         mapperArgs =
             ( (todoView editMode viewConfig), todoCollection )
+
+        mapper =
+            uncurry Model.mapAllExceptDeleted
     in
-        ul [] ((uncurry Model.mapAllExceptDeleted) mapperArgs)
+        ul [] (mapper mapperArgs)
 
 
 todoView editMode viewConfig todo =

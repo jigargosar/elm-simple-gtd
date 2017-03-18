@@ -33,13 +33,17 @@ view =
 flowView : ViewModel -> Html Msg
 flowView vm =
     div []
-        [ h1 [] [ vm.question |> text ]
-        , flowActionBar vm
+        [ questionView vm
+        , actionBar vm
         ]
 
 
-flowActionBar : ViewModel -> Html Msg
-flowActionBar vm =
+questionView vm =
+    h1 [] [ vm.question |> text ]
+
+
+actionBar : ViewModel -> Html Msg
+actionBar vm =
     let
         buttonView ( buttonText, onClickMsg ) =
             button [ onClick onClickMsg ] [ text buttonText ]

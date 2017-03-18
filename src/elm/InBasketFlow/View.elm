@@ -1,6 +1,6 @@
 module InBasketFlow.View exposing (..)
 
-import Flow.Model as FlowModel__
+import Flow
 import InBasketFlow
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -20,14 +20,14 @@ view model =
 flowView flowModel =
     div []
         [ h1 []
-            [ FlowModel__.getQuestion flowModel |> text ]
+            [ Flow.getQuestion flowModel |> text ]
         , div []
             (nextActionButtons flowModel)
         ]
 
 
 nextActionButtons flowModel =
-    flowModel |> FlowModel__.getNextActions Msg.OnInBasketFlowAction .|> createNAB
+    flowModel |> Flow.getNextActions Msg.OnInBasketFlowAction .|> createNAB
 
 
 createNAB ( buttonText, onClickMsg ) =

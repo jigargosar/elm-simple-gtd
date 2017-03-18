@@ -18,7 +18,3 @@ updateWithActionType =
 
 type alias Model =
     Model.Model
-
-
-mapFlow__ =
-    Model.mapFlow

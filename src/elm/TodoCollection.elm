@@ -4,7 +4,7 @@ module TodoCollection
           TodoCollection
         , EditMode(..)
           -- init
-        , todoModelGenerator
+        , generator
           -- crud
         , addNewTodo
         , deleteTodo
@@ -54,9 +54,8 @@ type EditMode
     | NotEditing
 
 
-todoModelGenerator : List Todo -> Random.Generator TodoCollection
-todoModelGenerator todoList =
-    Random.map (Model.init todoList) Random.independentSeed
+generator =
+    Model.generator
 
 
 deleteTodo =

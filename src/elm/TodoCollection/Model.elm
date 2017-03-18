@@ -21,6 +21,11 @@ init todoCollection seed =
     Model todoCollection seed
 
 
+generator : List Todo -> Random.Generator Model
+generator todoList =
+    Random.map (init todoList) Random.independentSeed
+
+
 getTodoList =
     (.todoList)
 

@@ -41,7 +41,7 @@ init now encodedTodoList =
     let
         generateTodoModel =
             Todo.decodeTodoList
-                >> TodoCollection.todoModelGenerator
+                >> TodoCollection.generator
                 >> Random.step
 
         todoModelFromSeed =

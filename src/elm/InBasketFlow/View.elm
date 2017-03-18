@@ -19,21 +19,28 @@ type alias ViewModel =
     }
 
 
+toViewModel model =
+    { question = Model.getQuestion model
+    , flowActions = Model.getFlowActions Msg.OnInBasketFlowAction model
+    }
+
+
 view : Model -> Html Msg
-view model =
-    flowView model
+view =
+    toViewModel >> flowView
 
 
-flowView model =
+flowView : ViewModel -> Html Msg
+flowView vm =
     div []
-        [ h1 [] [ Model.getQuestion model |> text ]
-        , flowActionBar model
+        [ h1 [] [ vm.question |> text ]
+        , flowActionBar vm
         ]
 
 
-flowActionBar model =
-    div [] (Model.getFlowActions Msg.OnInBasketFlowAction model .|> createNAB)
-
-
-createNAB ( buttonText, onClickMsg ) =
-    button [ onClick onClickMsg ] [ text buttonText ]
+flowActionBar vm =
+    let
+        buttonView ( buttonText, onClickMsg ) =
+            button [ onClick onClickMsg ] [ text buttonText ]
+    in
+        div [] (vm.flowActions .|> buttonView)

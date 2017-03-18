@@ -25,5 +25,7 @@ idGen : Generator String
 idGen =
     Random.map (String.fromList) (Random.list 64 alphaNumericChar)
 
-seedFromTime: Time -> Seed
-seedFromTime = round >> Random.initialSeed
+
+seedFromTime : Time -> Seed
+seedFromTime =
+    round >> Random.initialSeed

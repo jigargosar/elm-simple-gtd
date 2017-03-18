@@ -39,6 +39,10 @@ getInBasketTodoList =
     mapAllExceptDeleted identity
 
 
+getFirstInBasketTodo: Model -> Maybe Todo
+getFirstInBasketTodo =
+    getTodoList >> Todo.getFirstInBasketTodo
+
 setSeed seed todoCollection =
     { todoCollection | seed = seed }
 

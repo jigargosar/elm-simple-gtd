@@ -185,6 +185,14 @@ replaceIfEqualById todo =
 rejectMap filter mapper =
     List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))
 
+
 mapAllExceptDeleted =
     rejectMap isDeleted
 
+
+isNotDeleted =
+    isDeleted >> not
+
+
+getFirstInBasketTodo =
+    List.find isNotDeleted

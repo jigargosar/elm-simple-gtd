@@ -59,6 +59,9 @@ setViewState viewState m =
 getViewState =
     (.viewState)
 
+getFirstInBasketTodo =
+    getTodoCollection >> TodoStore.getFirstInBasketTodo
+
 
 showTodoList =
     setViewState TodoListViewState

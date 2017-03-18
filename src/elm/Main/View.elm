@@ -54,7 +54,7 @@ centerView m =
             todoListView m
 
         InBasketFlowViewState inBasketFlowModel ->
-            InBasketFlow.View.view Nothing inBasketFlowModel
+            InBasketFlow.View.view (getFirstInBasketTodo m) inBasketFlowModel
 
 
 todoListView m =

@@ -1,17 +1,4 @@
-module TodoStore
-    exposing
-        ( --types
-          TodoStore
-        , EditMode(..)
-          -- init
-        , generator
-          -- crud
-        , addNewTodo
-        , deleteTodo
-        , replaceTodoIfIdMatches
-          -- temp
-        , getInBasket__
-        )
+module TodoStore exposing (..)
 
 import Dict
 import Dict.Extra as Dict
@@ -31,17 +18,13 @@ type alias TodoStore =
     Model.Model
 
 
-toModel =
-    identity
-
-
-
--- temp
-
-
 getInBasket__ : TodoStore -> TodoList
 getInBasket__ =
-    toModel >> Model.getInBasketTodoList
+    Model.getInBasketTodoList
+
+
+getFirstInBasketTodo =
+    Model.getFirstInBasketTodo
 
 
 

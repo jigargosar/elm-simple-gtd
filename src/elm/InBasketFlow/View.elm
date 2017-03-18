@@ -8,5 +8,10 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 
 
-view =
-    p [] [ text "Hello View" ]
+view model =
+    div []
+            [ h1 []
+                [ Model.getQuestion model |> text ]
+--            , div []
+--                (nextActionButtons toClickMsg model)
+            ]

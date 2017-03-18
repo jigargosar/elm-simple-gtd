@@ -61,11 +61,14 @@ updateFlow updater model =
     setFlow (updater model) model
 
 
+setMaybeFlow : Maybe FlowModel -> ModelMapper
+setMaybeFlow maybeFlow model =
+    maybeFlow ?|> setFlow # model ?= model
+
+
 updateMaybeFlow : (Model -> Maybe FlowModel) -> ModelMapper
-updateMaybeFlow fun model =
-    fun model
-        |> Maybe.map ((flip setFlow) model)
-        |> Maybe.withDefault model
+updateMaybeFlow maybeUpdater model =
+    setMaybeFlow (maybeUpdater model) model
 
 
 updateWithActionType : Flow.Model.FlowActionType -> ModelMapper

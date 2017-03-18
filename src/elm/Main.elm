@@ -119,7 +119,7 @@ update msg =
                 Return.map (Model.showTodoList)
 
             OnProcessInBasket ->
-                Return.map (Model.showProcessInBasket)
+                Return.map (Model.startProcessingInBasket)
 
 
 

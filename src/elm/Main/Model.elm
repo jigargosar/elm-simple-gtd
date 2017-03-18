@@ -65,7 +65,7 @@ showTodoList =
     setViewState TodoListViewState
 
 
-showProcessInBasket =
+startProcessingInBasket =
     ProcessInBasketViewState InBasketFlow.init |> setViewState
 
 

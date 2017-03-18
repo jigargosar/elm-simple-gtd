@@ -115,8 +115,8 @@ getNextActions =
 
 type NodeNextActions msg
     = YesNA
-    | NoNa
-    | BackNa
+    | NoNA
+    | BackNA
     | YesCustom msg
 
 
@@ -127,7 +127,7 @@ trackerGetNextActions tracker =
     in
         case trackerGetNode tracker of
             Branch q y n ->
-                [ YesNA, NoNa ] ++ backNA
+                [ YesNA, NoNA ] ++ backNA
 
             Action q msg ->
                 [ YesNA ] ++ backNA
@@ -136,15 +136,40 @@ trackerGetNextActions tracker =
                 [ YesNA ] ++ backNA
 
 
-getNextActions__ toNodeNextActionMsg =
-    getNextActions
+trackerGetNextActions__ flowActionToMsg tracker =
+    let
+        backNA =
+            if trackerIsRoot tracker then
+                []
+            else
+                [ "Back" => flowActionToMsg BackAction ]
+
+        yesAction =
+            "Yes" => flowActionToMsg YesAction
+
+        noAction =
+            "No" => flowActionToMsg NoAction
+    in
+        case trackerGetNode tracker of
+            Branch q y n ->
+                [ yesAction, noAction ] ++ backNA
+
+            Action q msg ->
+                [ "Yes" => msg ] ++ backNA
+
+            ConfirmAction q a ->
+                [ yesAction ] ++ backNA
+
+
+getNextActions__ flowActionToMsg =
+    getTracker >> trackerGetNextActions__ flowActionToMsg
 
 
 trackerGetBackNaAsSingletonIfNotRoot tracker =
     if trackerIsRoot tracker then
         []
     else
-        [ BackNa ]
+        [ BackNA ]
 
 
 trackerIsRoot =

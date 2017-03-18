@@ -235,4 +235,6 @@ getFirstInBasketTodo =
 setContextUnder2m =
     setListType Under2m
 
-groupByType = Dict.groupBy (getListType >> toString)
+
+groupByType =
+    List.filter isNotDeleted >> Dict.groupBy (getListType >> toString)

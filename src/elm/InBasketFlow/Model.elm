@@ -3,22 +3,22 @@ module InBasketFlow.Model exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Flow
-import Main.Msg exposing (Msg(OnFlowTrashItClicked))
+import Main.Msg as Msg
 import TodoStore.Todo exposing (Todo, TodoList)
 
 
 inBasketFlow =
     Flow.branch "Is it Actionable ?"
         (Flow.branch "Can be done under 2 mins?"
-            (Flow.action "Batch it in Under 2 minutes?" OnFlowTrashItClicked)
-            (Flow.action "Involves Multiple Steps?" OnFlowTrashItClicked)
+            (Flow.action "Batch it in Under 2 minutes?" Msg.MoveToUnder2mList)
+            (Flow.action "Involves Multiple Steps?" Msg.OnFlowTrashItClicked)
         )
         (Flow.branch "Is it worth keeping?"
             (Flow.branch "Could Require actionNode Later ?"
-                (Flow.action "Move to SomDay/Maybe List?" OnFlowTrashItClicked)
-                (Flow.action "Move to Reference?" OnFlowTrashItClicked)
+                (Flow.action "Move to SomDay/Maybe List?" Msg.OnFlowTrashItClicked)
+                (Flow.action "Move to Reference?" Msg.OnFlowTrashItClicked)
             )
-            (Flow.action "Trash it ?" OnFlowTrashItClicked)
+            (Flow.action "Trash it ?" Msg.OnFlowTrashItClicked)
         )
         |> Flow.init
 

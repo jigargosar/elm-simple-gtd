@@ -18,6 +18,7 @@ type Msg
     | OnEditTodoBlur
     | OnEditTodoEnterPressed
     | OnFlowTrashItClicked
+    | MoveToUnder2mList
     | OnYesClicked
     | OnNoClicked
     | OnBackClicked

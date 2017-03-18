@@ -63,3 +63,5 @@ action =
 
 update =
     Model.update
+
+type alias FlowActionType = Model.FlowActionType

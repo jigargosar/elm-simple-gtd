@@ -77,7 +77,7 @@ updateMaybeFlow maybeUpdater model =
     setMaybeFlow (maybeUpdater model) model
 
 
-updateWithActionType : Flow.Model.FlowActionType -> ModelMapper
+updateWithActionType : Flow.FlowActionType -> ModelMapper
 updateWithActionType actionType =
     updateFlow (getFlow >> Flow.update actionType)
 

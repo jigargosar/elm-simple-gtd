@@ -28,15 +28,6 @@ type alias ViewConfig msg =
 
 allTodosView : ViewConfig msg -> EditMode -> TodoStore -> Html msg
 allTodosView viewConfig editMode todoStore =
-    div []
-        [ todoListView editMode viewConfig todoStore
-        ]
-
-
-
-
-todoListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg
-todoListView editMode viewConfig todoStore =
     let
         typeToTodoList : Dict String (List Todo)
         typeToTodoList =

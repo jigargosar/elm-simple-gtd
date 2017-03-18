@@ -43,7 +43,9 @@ view =
 
 flowView : ViewModel -> Html Msg
 flowView vm =
-    vm.maybeTodo ?|> processTodoView # vm ?= processingCompleteView
+    div [id "in-basket-flow-container"]
+        [ vm.maybeTodo ?|> processTodoView # vm ?= processingCompleteView
+        ]
 
 
 processingCompleteView =

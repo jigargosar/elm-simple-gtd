@@ -1,7 +1,10 @@
 module InBasketFlow exposing (..)
 
 import Flow
+import Flow.Model
 import Main.Msg exposing (Msg(OnFlowTrashItClicked))
+import Toolkit.Operators exposing (..)
+import Toolkit.Helpers exposing (..)
 
 
 inBasketFlow =
@@ -35,13 +38,32 @@ init todoList =
     modelConstructor todoList
 
 
+getFlow : Model -> Flow.Model Msg
+getFlow =
+    (.flow)
+
+
+setFlow : Flow.Model Msg -> Model -> Model
 setFlow flow model =
-    { model | flow = floor }
+    { model | flow = flow }
 
 
+updateFlow : (Model -> Flow.Model Msg) -> Model -> Model
 updateFlow fun model =
     setFlow (fun model) model
 
 
+updateMaybeFlow : (Model -> Maybe (Flow.Model Msg)) -> Model -> Model
+updateMaybeFlow fun model =
+    fun model
+        |> Maybe.map ((flip setFlow) model)
+        |> Maybe.withDefault model
+
+
+updateWithActionType : Flow.Model.FlowActionType -> Model -> Model
 updateWithActionType actionType =
-    updateFlow (\_ -> Flow.update actionType)
+    updateFlow (getFlow >> Flow.update actionType)
+
+
+mapFlow mapper =
+    getFlow >> mapper

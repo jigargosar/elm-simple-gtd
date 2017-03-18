@@ -18,6 +18,7 @@ import TodoCollection.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Flow.Model as Flow exposing (Node)
+import InBasketFlow
 
 
 todoListViewConfig =
@@ -52,8 +53,8 @@ centerView m =
         TodoListViewState ->
             todoListView m
 
-        ProcessInBasketViewState flowModel ->
-            flowView flowModel
+        ProcessInBasketViewState inBasketFlowModel ->
+            InBasketFlow.mapFlow flowView inBasketFlowModel
 
 
 flowView flowModel =

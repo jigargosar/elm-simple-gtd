@@ -4,9 +4,6 @@ import Flow
 import Main.Msg exposing (Msg(OnFlowTrashItClicked))
 
 
-
-
-
 inBasketFlow =
     Flow.branch "Is it Actionable ?"
         (Flow.branch "Can be done under 2 mins?"
@@ -23,9 +20,14 @@ inBasketFlow =
             (Flow.action "Trash it ?" OnFlowTrashItClicked)
         )
 
-type alias Model = Flow.Model Msg
 
-init = Flow.init inBasketFlow
+type alias Model =
+    Flow.Model Msg
 
-update = Flow.update
 
+init =
+    Flow.init inBasketFlow
+
+
+update =
+    Flow.update

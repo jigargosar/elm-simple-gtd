@@ -1,11 +1,12 @@
 module Main.View exposing (appView)
 
+import TodoStore exposing (EditMode(EditNewTodoMode))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
+import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
 import Flow
@@ -45,7 +46,32 @@ toolbarView m =
     div []
         [ button [ onClick OnShowTodoList ] [ text "Show List" ]
         , button [ onClick OnProcessInBasket ] [ text "Process Stuff" ]
+        , addTodoView (getEditMode m) todoListViewConfig
         ]
+
+
+addTodoView editMode viewConfig =
+    case editMode of
+        EditNewTodoMode text ->
+            addNewTodoView viewConfig text
+
+        _ ->
+            addTodoButton viewConfig
+
+
+addNewTodoView viewConfig text =
+    input
+        [ onInput viewConfig.onNewTodoTextChanged
+        , value text
+        , onBlur viewConfig.onNewTodoBlur
+        , autofocus True
+        , onEnter viewConfig.onNewTodoEnterPressed
+        ]
+        []
+
+
+addTodoButton viewConfig =
+    button [ onClick viewConfig.onAddTodoClicked ] [ text "Add" ]
 
 
 centerView m =

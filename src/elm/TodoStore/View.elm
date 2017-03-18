@@ -29,35 +29,10 @@ type alias ViewConfig msg =
 allTodosView : ViewConfig msg -> EditMode -> TodoStore -> Html msg
 allTodosView viewConfig editMode todoStore =
     div []
-        [ addTodoView editMode viewConfig
-        , todoListView editMode viewConfig todoStore
+        [ todoListView editMode viewConfig todoStore
         ]
 
 
-addTodoView editMode viewConfig =
-    case editMode of
-        EditNewTodoMode text ->
-            addNewTodoView viewConfig text
-
-        _ ->
-            addTodoButton viewConfig
-
-
-addTodoButton viewConfig =
-    div []
-        [ button [ onClick viewConfig.onAddTodoClicked ] [ text "Add" ]
-        ]
-
-
-addNewTodoView viewConfig text =
-    input
-        [ onInput viewConfig.onNewTodoTextChanged
-        , value text
-        , onBlur viewConfig.onNewTodoBlur
-        , autofocus True
-        , onEnter viewConfig.onNewTodoEnterPressed
-        ]
-        []
 
 
 todoListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg

@@ -35,12 +35,18 @@ defaultDeleted =
     False
 
 
+type ListType
+    = InBasket
+    | Under2m
+
+
 type alias Todo =
     { id : TodoId
     , rev : String
     , text : String
     , dueAt : Maybe Time
     , deleted : Bool
+    , listType : ListType
     }
 
 
@@ -48,8 +54,8 @@ type alias TodoList =
     List Todo
 
 
-todoConstructor id rev text dueAt deleted =
-    Todo id rev text dueAt deleted
+todoConstructor id rev text dueAt deleted listType =
+    Todo id rev text dueAt deleted listType
 
 
 decoder : Decoder Todo
@@ -60,10 +66,23 @@ decoder =
         |> D.required "text" D.string
         |> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         |> D.optional "deleted" D.bool defaultDeleted
+        |> D.optional "listType" (D.map stringToListType D.string) InBasket
+
+
+stringToListType string =
+    case string of
+        "InBasket" ->
+            InBasket
+
+        "Under2m" ->
+            Under2m
+
+        _ ->
+            InBasket
 
 
 initWithTextAndId text id =
-    todoConstructor id defaultRevision text defaultDueAt defaultDeleted
+    todoConstructor id defaultRevision text defaultDueAt defaultDeleted InBasket
 
 
 type alias EncodedTodo =

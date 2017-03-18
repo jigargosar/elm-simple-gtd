@@ -57,8 +57,8 @@ setFlow flow model =
 
 
 updateFlow : (Model -> FlowModel) -> ModelMapper
-updateFlow fun model =
-    setFlow (fun model) model
+updateFlow updater model =
+    setFlow (updater model) model
 
 
 updateMaybeFlow : (Model -> Maybe FlowModel) -> ModelMapper

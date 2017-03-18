@@ -68,7 +68,10 @@ todoListView editMode viewConfig todoCollection =
         mapper =
             uncurry Model.mapAllExceptDeleted
     in
-        ul [] (mapper mapperArgs)
+        div []
+            [ ul [] (mapper mapperArgs)
+            , ul [] (mapper mapperArgs)
+            ]
 
 
 todoView editMode viewConfig todo =

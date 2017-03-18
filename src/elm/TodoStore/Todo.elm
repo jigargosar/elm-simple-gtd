@@ -221,12 +221,16 @@ inBasketListPredicates =
     applyList [ isNotDeleted, getListType >> equals InBasket ]
 
 
+inBasketFilter =
+    (inBasketListPredicates >> List.all identity)
+
+
 getInBasketList =
-    List.filter (inBasketListPredicates >> List.all identity)
+    List.filter inBasketFilter
 
 
 getFirstInBasketTodo =
-    getInBasketList >> List.head
+    List.find inBasketFilter
 
 
 setContextUnder2m =

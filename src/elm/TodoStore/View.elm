@@ -61,7 +61,7 @@ todoListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg
 todoListView editMode viewConfig todoCollection =
     ul []
         (todoCollection
-            |> Model.rejectMap Todo.isDeleted
+            |> Model.mapAllExceptDeleted
                 (todoView viewConfig.onDeleteTodoClicked viewConfig.onEditTodoClicked editMode viewConfig)
         )
 

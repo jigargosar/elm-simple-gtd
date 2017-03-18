@@ -10,7 +10,7 @@ import TodoStore.Todo exposing (Todo, TodoList)
 inBasketFlow =
     Flow.branch "Is it Actionable ?"
         (Flow.branch "Can be done under 2 mins?"
-            (Flow.confirmAction "Do it now?"
+            (Flow.confirmAction "Batch it in Under 2 minutes?"
                 (Flow.action "Timer Started, Go Go Go !!!" OnFlowTrashItClicked)
             )
             (Flow.action "Involves Multiple Steps?" OnFlowTrashItClicked)

@@ -136,6 +136,10 @@ trackerGetNextActions tracker =
                 [ YesNA ] ++ backNA
 
 
+getNextActions__ toNodeNextActionMsg =
+    getNextActions
+
+
 trackerGetBackNaAsSingletonIfNotRoot tracker =
     if trackerIsRoot tracker then
         []

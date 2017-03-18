@@ -19,6 +19,7 @@ import TodoCollection.Todo as Todo
 import TodoCollection.View
 import Flow.Model as Flow exposing (Node)
 import InBasketFlow
+import InBasketFlow.View
 
 
 todoListViewConfig =

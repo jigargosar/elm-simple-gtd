@@ -6,7 +6,6 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import TodoCollection exposing (EditMode(..), TodoCollection)
 import TodoCollection.Todo as Todo exposing (Todo, TodoId)
-import InBasketFlow.View
 
 
 type alias ViewConfig msg =

@@ -67,7 +67,7 @@ showTodoList =
 
 startProcessingInBasket model =
     getTodoCollection model
-        |> TodoCollection.getInBasketTodoList
+        |> TodoCollection.getInBasketTodoList__
         |> InBasketFlow.init
         |> InBasketFlowViewState
         |> setViewState

@@ -12,6 +12,7 @@ import InBasketFlow.Model as Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
 import FunctionalHelpers exposing (..)
 import TodoStore.Todo exposing (Todo)
+import Function exposing ((>>>))
 
 
 type alias TodoViewModel =
@@ -29,16 +30,16 @@ toTodoViewModel todo =
     { text = TodoStore.Todo.getText todo }
 
 
-toViewModel model =
-    { maybeTodo = Model.getCurrentTodo model ?|> toTodoViewModel
+toViewModel maybeTodo model =
+    { maybeTodo = maybeTodo ?|> toTodoViewModel
     , question = Model.getQuestion model
     , flowActions = Model.getFlowActions Msg.OnInBasketFlowAction model
     }
 
 
 view : Maybe Todo -> Model -> Html Msg
-view maybeTodo =
-    toViewModel >> flowView
+view =
+    toViewModel >>> flowView
 
 
 flowView : ViewModel -> Html Msg

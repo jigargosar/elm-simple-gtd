@@ -21,12 +21,12 @@ flowView flowModel =
     div []
         [ h1 []
             [ Flow.getQuestion flowModel |> text ]
-        , nextActionBar flowModel
+        , flowActionBar flowModel
         ]
 
 
-nextActionBar flowModel =
-    div [] [ flowModel |> Flow.getNextActions Msg.OnInBasketFlowAction .|> createNAB ]
+flowActionBar flowModel =
+    div [] (flowModel |> Flow.getNextActions Msg.OnInBasketFlowAction .|> createNAB)
 
 
 createNAB ( buttonText, onClickMsg ) =

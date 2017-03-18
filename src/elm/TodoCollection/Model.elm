@@ -29,6 +29,11 @@ rejectMap filter mapper =
     getTodoList >> List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))
 
 
+getInBasketTodoList : Model -> List Todo
+getInBasketTodoList =
+    rejectMap Todo.isDeleted identity
+
+
 setSeed seed todoCollection =
     { todoCollection | seed = seed }
 
@@ -59,7 +64,7 @@ addNewTodo text todoCollection =
         ( todo, newTodoCollection ) =
             generate (Todo.todoGenerator text) todoCollection
     in
-        (  appendTodo todo newTodoCollection, todo )
+        ( appendTodo todo newTodoCollection, todo )
 
 
 replaceTodoIfIdMatches : Todo -> Model -> ( Model, Todo )

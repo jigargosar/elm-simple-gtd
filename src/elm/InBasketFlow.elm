@@ -19,14 +19,19 @@ inBasketFlow =
             )
             (Flow.action "Trash it ?" OnFlowTrashItClicked)
         )
+        |> Flow.init
 
 
 type alias Model =
     Flow.Model Msg
 
 
-init =
-    Flow.init inBasketFlow
+modelConstructor todoList =
+    inBasketFlow
+
+
+init todoList =
+    modelConstructor todoList
 
 
 update =

@@ -11,8 +11,9 @@ module TodoCollection
         , replaceTodoIfIdMatches
           -- for views
         , rejectMap
-        -- temp
+          -- temp
         , asList
+        , getInBasketTodoList
         )
 
 import Dict
@@ -36,9 +37,15 @@ type TodoCollection
 toModel (TodoCollection model) =
     model
 
+
+
 -- temp
 
-asList = toModel >> Model.getTodoList
+
+asList =
+    toModel >> Model.getTodoList
+
+
 
 -- external
 
@@ -65,6 +72,11 @@ replaceTodoIfIdMatches todo =
 
 addNewTodo text =
     toModel >> Model.addNewTodo text >> Tuple2.mapFirst TodoCollection
+
+
+getInBasketTodoList : TodoCollection -> List Todo
+getInBasketTodoList =
+    toModel >> Model.getInBasketTodoList
 
 
 

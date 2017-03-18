@@ -25,8 +25,12 @@ inBasketFlow =
         |> Flow.init
 
 
+type alias FlowModel =
+    Flow.Model Msg
+
+
 type alias Model =
-    { flow : Flow.Model Msg
+    { flow : FlowModel
     }
 
 
@@ -38,22 +42,22 @@ init todoList =
     modelConstructor todoList
 
 
-getFlow : Model -> Flow.Model Msg
+getFlow : Model -> FlowModel
 getFlow =
     (.flow)
 
 
-setFlow : Flow.Model Msg -> Model -> Model
+setFlow : FlowModel -> Model -> Model
 setFlow flow model =
     { model | flow = flow }
 
 
-updateFlow : (Model -> Flow.Model Msg) -> Model -> Model
+updateFlow : (Model -> FlowModel) -> Model -> Model
 updateFlow fun model =
     setFlow (fun model) model
 
 
-updateMaybeFlow : (Model -> Maybe (Flow.Model Msg)) -> Model -> Model
+updateMaybeFlow : (Model -> Maybe FlowModel) -> Model -> Model
 updateMaybeFlow fun model =
     fun model
         |> Maybe.map ((flip setFlow) model)

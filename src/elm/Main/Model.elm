@@ -144,6 +144,11 @@ activateAddNewTodoMode text =
     setEditModeTo (EditNewTodoMode text)
 
 
+deActivateAddNewTodoMode : ModelMapper
+deActivateAddNewTodoMode =
+    setEditModeTo (NotEditing)
+
+
 activateEditTodoMode : Todo -> ModelMapper
 activateEditTodoMode todo =
     setEditModeTo (EditTodoMode todo)

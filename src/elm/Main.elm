@@ -65,10 +65,7 @@ update msg =
                 Return.map (Model.activateAddNewTodoMode text)
 
             OnNewTodoBlur ->
-                Return.andThen
-                    (Model.addNewTodoAndDeactivateAddNewTodoMode
-                        >> Tuple2.mapSecond persistMaybeTodoCmd
-                    )
+                Return.map (Model.deActivateAddNewTodoMode)
 
             OnNewTodoEnterPressed ->
                 Return.andThen

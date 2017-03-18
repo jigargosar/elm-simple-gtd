@@ -3,6 +3,7 @@ module InBasketFlow exposing (..)
 import Flow
 import Flow.Model
 import Main.Msg exposing (Msg(OnFlowTrashItClicked))
+import TodoCollection.Todo exposing (Todo)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
@@ -35,11 +36,12 @@ type alias ModelMapper =
 
 type alias Model =
     { flow : FlowModel
+    , todoList : List Todo
     }
 
 
 modelConstructor todoList =
-    Model inBasketFlow
+    Model inBasketFlow todoList
 
 
 init todoList =

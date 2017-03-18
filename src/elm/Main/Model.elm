@@ -14,12 +14,12 @@ import TodoCollection.Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-import Flow
+import InBasketFlow
 
 
 type ViewState
     = TodoListViewState
-    | ProcessInBasketViewState (Flow.Model Msg)
+    | ProcessInBasketViewState InBasketFlow.Model
 
 
 type alias Model =
@@ -27,23 +27,6 @@ type alias Model =
     , editMode : EditMode
     , viewState : ViewState
     }
-
-
-inBasketFlow =
-    Flow.branch "Is it Actionable ?"
-        (Flow.branch "Can be done under 2 mins?"
-            (Flow.confirmAction "Do it now?"
-                (Flow.action "Timer Started, Go Go Go !!!" OnFlowTrashItClicked)
-            )
-            (Flow.action "Involves Multiple Steps?" OnFlowTrashItClicked)
-        )
-        (Flow.branch "Is it worth keeping?"
-            (Flow.branch "Could Require actionNode Later ?"
-                (Flow.action "Move to SomDay/Maybe List?" OnFlowTrashItClicked)
-                (Flow.action "Move to Reference?" OnFlowTrashItClicked)
-            )
-            (Flow.action "Trash it ?" OnFlowTrashItClicked)
-        )
 
 
 modelConstructor editMode todoCollection =
@@ -83,14 +66,14 @@ showTodoList =
 
 
 showProcessInBasket =
-    setViewState (ProcessInBasketViewState (Flow.init inBasketFlow))
+    setViewState (ProcessInBasketViewState InBasketFlow.init)
 
 
 updateInBasketFlowWithActionType actionType m =
     m
         |> case getViewState m of
-            ProcessInBasketViewState flowModel ->
-                Flow.update actionType flowModel
+            ProcessInBasketViewState inBasketFlowModel ->
+                InBasketFlow.update actionType inBasketFlowModel
                     |> ProcessInBasketViewState
                     |> setViewState
 

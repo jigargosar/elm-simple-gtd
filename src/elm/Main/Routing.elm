@@ -20,7 +20,7 @@ getPathFromModel model =
         Model.TodoListViewState ->
             "list"
 
-        Model.InBasketFlowViewState _ ->
+        Model.InBasketFlowViewState _ _ ->
             "process-inbasket"
 
 

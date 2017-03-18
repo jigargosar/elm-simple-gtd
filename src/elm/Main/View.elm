@@ -53,8 +53,8 @@ centerView m =
         TodoListViewState ->
             todoListView m
 
-        InBasketFlowViewState inBasketFlowModel ->
-            InBasketFlow.View.view (getFirstInBasketTodo m) inBasketFlowModel
+        InBasketFlowViewState maybeTodo inBasketFlowModel ->
+            InBasketFlow.View.view maybeTodo inBasketFlowModel
 
 
 todoListView m =

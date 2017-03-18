@@ -18,7 +18,7 @@ import InBasketFlow
 
 type ViewState
     = TodoListViewState
-    | InBasketFlowViewState InBasketFlow.Model
+    | InBasketFlowViewState (Maybe Todo) InBasketFlow.Model
 
 
 type alias Model =
@@ -72,7 +72,7 @@ startProcessingInBasket model =
     getTodoCollection model
         |> TodoStore.getInBasket__
         |> InBasketFlow.init
-        |> InBasketFlowViewState
+        |> InBasketFlowViewState (getFirstInBasketTodo model)
         |> setViewState
         # model
 
@@ -80,9 +80,9 @@ startProcessingInBasket model =
 updateInBasketFlowWithActionType actionType m =
     m
         |> case getViewState m of
-            InBasketFlowViewState inBasketFlowModel ->
+            InBasketFlowViewState maybeTodo inBasketFlowModel ->
                 InBasketFlow.updateWithActionType actionType inBasketFlowModel
-                    |> InBasketFlowViewState
+                    |> InBasketFlowViewState maybeTodo
                     |> setViewState
 
             _ ->

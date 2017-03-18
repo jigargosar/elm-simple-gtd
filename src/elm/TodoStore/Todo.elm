@@ -9,6 +9,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import FunctionalHelpers exposing (..)
 import Result.Extra as Result
+import List
 import List.Extra as List
 import Dict
 import Dict.Extra as Dict
@@ -215,8 +216,17 @@ isNotDeleted =
     isDeleted >> not
 
 
+inBasketListPredicates : Todo -> List Bool
+inBasketListPredicates =
+    applyList [ isNotDeleted, getListType >> equals InBasket ]
+
+
+getInBasketList =
+    List.filter (inBasketListPredicates >> List.all identity)
+
+
 getFirstInBasketTodo =
-    List.find isNotDeleted
+    getInBasketList >> List.head
 
 
 setContextUnder2m =

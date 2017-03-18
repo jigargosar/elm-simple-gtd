@@ -39,23 +39,9 @@ module.exports = {
         // new webpack.ProvidePlugin({
         //     firebase:"firebase"
         // }),
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: "vendor",
-        //     filename: "vendor.js",
-        //     chunks: ["options"]
-        // })
         // new HtmlWebpackPlugin({ title: 'Example', template: './index.html' }),
         // new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer ] } })
         // new WriteFilePlugin(),
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: 'inline',
-        //     filename: 'inline.js',
-        //     minChunks: Infinity
-        // }),
-        // new webpack.optimize.AggressiveSplittingPlugin({
-        //     minSize: 5000,
-        //     maxSize: 10000
-        // })
         new webpack.optimize.CommonsChunkPlugin({
             name:"common",
             minChunks:2

@@ -67,19 +67,19 @@ update msg =
             OnNewTodoBlur ->
                 Return.andThen
                     (Model.addNewTodoAndDeactivateAddNewTodoMode
-                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                        >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
             OnNewTodoEnterPressed ->
                 Return.andThen
                     (Model.addNewTodoAndContinueAdding
-                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                        >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
             OnDeleteTodoClicked todoId ->
                 Return.andThen
                     (Model.deleteTodo todoId
-                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                        >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
             OnEditTodoClicked todo ->
@@ -91,13 +91,13 @@ update msg =
             OnEditTodoBlur ->
                 Return.andThen
                     (Model.saveEditingTodoAndDeactivateEditTodoMode
-                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                        >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
             OnEditTodoEnterPressed ->
                 Return.andThen
                     (Model.saveEditingTodoAndDeactivateEditTodoMode
-                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                        >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
             OnFlowTrashItClicked ->
@@ -123,8 +123,8 @@ update msg =
 
             MoveToUnder2mList ->
                 Return.andThen
-                    (Model.moveProcessingTodoToUnder2mList
-                        >> Tuple2.mapSecond persistTodoCmdMaybe
+                    (Model.moveInBasketProcessingTodoToUnder2mList
+                        >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
 
@@ -137,7 +137,7 @@ update msg =
 --                    identity
 
 
-persistTodoCmdMaybe =
+persistMaybeTodoCmd =
     Maybe.unwrap Cmd.none persistTodoCmd
 
 

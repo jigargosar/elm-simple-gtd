@@ -1,18 +1,23 @@
 module InBasketFlow.View exposing (..)
 
+import Flow.Model as FlowModel
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-
+import InBasketFlow.Model as Model
 
 
 view model =
+    Model.mapFlow flowView
+
+
+flowView flowModel =
     div []
-            [ h1 []
-                [ InbasketFlow.Model.getQuestion model |> text ]
---            , div []
---                (nextActionButtons toClickMsg model)
-            ]
+        [ h1 []
+            [ FlowModel.getQuestion flowModel |> text ]
+          --            , div []
+          --                (nextActionButtons toClickMsg model)
+        ]

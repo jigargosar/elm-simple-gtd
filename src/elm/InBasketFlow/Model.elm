@@ -6,6 +6,7 @@ import Flow
 import Main.Msg exposing (Msg(OnFlowTrashItClicked))
 import TodoCollection.Todo exposing (Todo)
 
+
 inBasketFlow =
     Flow.branch "Is it Actionable ?"
         (Flow.branch "Can be done under 2 mins?"
@@ -40,6 +41,8 @@ type alias Model =
 
 modelConstructor todoList =
     Model inBasketFlow todoList
+
+
 
 -- .flow
 

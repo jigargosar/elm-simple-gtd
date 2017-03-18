@@ -97,6 +97,7 @@ encode todo =
         , "text" => E.string (getText todo)
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (isDeleted todo)
+        , "listType" => E.string (getListType todo |> toString)
         ]
 
 
@@ -153,6 +154,10 @@ setText text todo =
 
 getId =
     (.id)
+
+
+getListType =
+    (.listType)
 
 
 markDeleted todo =

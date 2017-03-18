@@ -65,8 +65,12 @@ showTodoList =
     setViewState TodoListViewState
 
 
-startProcessingInBasket =
-    ProcessInBasketViewState InBasketFlow.init |> setViewState
+startProcessingInBasket model =
+    getTodoCollection model
+        |> InBasketFlow.init
+        |> ProcessInBasketViewState
+        |> setViewState
+        # model
 
 
 updateInBasketFlowWithActionType actionType m =

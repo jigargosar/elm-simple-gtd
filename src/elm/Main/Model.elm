@@ -66,7 +66,7 @@ showTodoList =
 
 
 showProcessInBasket =
-    setViewState (ProcessInBasketViewState InBasketFlow.init)
+    ProcessInBasketViewState InBasketFlow.init |> setViewState
 
 
 updateInBasketFlowWithActionType actionType m =

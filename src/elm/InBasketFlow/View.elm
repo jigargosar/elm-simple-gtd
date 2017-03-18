@@ -11,7 +11,7 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import InBasketFlow.Model as Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
 import FunctionalHelpers exposing (..)
-import TodoStore.Todo
+import TodoStore.Todo exposing (Todo)
 
 
 type alias TodoViewModel =
@@ -36,14 +36,14 @@ toViewModel model =
     }
 
 
-view : Model -> Html Msg
-view =
+view : Maybe Todo -> Model -> Html Msg
+view maybeTodo =
     toViewModel >> flowView
 
 
 flowView : ViewModel -> Html Msg
 flowView vm =
-    div [id "in-basket-flow-container"]
+    div [ id "in-basket-flow-container" ]
         [ vm.maybeTodo ?|> processTodoView # vm ?= processingCompleteView
         ]
 

@@ -61,21 +61,6 @@ addNewTodoView viewConfig text =
         []
 
 
-
---todoListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg
---todoListView editMode viewConfig todoCollection =
---    let
---        mapperArgs =
---            ( (todoView editMode viewConfig), todoCollection )
---
---        mapper =
---            uncurry Model.mapAllExceptDeleted
---    in
---        div []
---            [ ul [] (mapper mapperArgs)
---            ]
-
-
 todoListView : EditMode -> ViewConfig msg -> TodoStore -> Html msg
 todoListView editMode viewConfig todoStore =
     let

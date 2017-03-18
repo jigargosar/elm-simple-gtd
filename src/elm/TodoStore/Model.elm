@@ -2,7 +2,7 @@ module TodoStore.Model exposing (..)
 
 import FunctionalHelpers exposing (..)
 import Random.Pcg as Random exposing (Seed)
-import TodoStore.Todo as Todo exposing (Todo)
+import TodoStore.Todo as Todo exposing (Todo, TodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
@@ -33,8 +33,10 @@ getTodoList =
 rejectMap filter mapper =
     getTodoList >> List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))
 
+
 getAllExceptDeleted =
     rejectMap Todo.isDeleted
+
 
 getInBasketTodoList : Model -> TodoList
 getInBasketTodoList =

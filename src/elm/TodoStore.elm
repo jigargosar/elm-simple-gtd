@@ -10,14 +10,14 @@ module TodoStore
         , deleteTodo
         , replaceTodoIfIdMatches
           -- temp
-        , getInBasketTodoList__
+        , getInBasket__
         )
 
 import Dict
 import Dict.Extra as Dict
 import Random.Pcg as Random exposing (Seed)
 import RandomIdGenerator
-import TodoStore.Todo as Todo exposing (Todo, TodoId)
+import TodoStore.Todo as Todo exposing (Todo, TodoId, TodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
@@ -39,8 +39,8 @@ toModel =
 -- temp
 
 
-getInBasketTodoList__ : TodoStore -> TodoList
-getInBasketTodoList__ =
+getInBasket__ : TodoStore -> TodoList
+getInBasket__ =
     toModel >> Model.getInBasketTodoList
 
 

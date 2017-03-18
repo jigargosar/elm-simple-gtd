@@ -53,7 +53,7 @@ centerView m =
         TodoListViewState ->
             todoListView m
 
-        ProcessInBasketViewState inBasketFlowModel ->
+        InBasketFlowViewState inBasketFlowModel ->
             InBasketFlow.mapFlow flowView inBasketFlowModel
 
 

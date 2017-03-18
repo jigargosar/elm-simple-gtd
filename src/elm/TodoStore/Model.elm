@@ -30,17 +30,13 @@ getTodoList =
     (.todoList)
 
 
-rejectMap filter mapper =
-    getTodoList >> List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))
-
-
-getAllExceptDeleted =
-    rejectMap Todo.isDeleted
+mapAllExceptDeleted filter mapper =
+    getTodoList >> Todo.mapAllExceptDeleted
 
 
 getInBasketTodoList : Model -> TodoList
 getInBasketTodoList =
-    rejectMap Todo.isDeleted identity
+    mapAllExceptDeleted Todo.isDeleted identity
 
 
 setSeed seed todoCollection =

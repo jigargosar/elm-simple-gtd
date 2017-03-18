@@ -66,19 +66,6 @@ todoListView editMode viewConfig todoCollection =
         )
 
 
-
---todoView onDeleteTodoClicked onEditTodoClicked editMode viewConfig todo =
---    case editMode of
---        EditTodoMode todoId ->
---            if todoId == (Todo.getId todo) then
---                todoListEditView
---             else
---                todoListItemView
---
---        _ ->
---            todoListItemView
-
-
 todoView onDeleteTodoClicked onEditTodoClicked editMode viewConfig todo =
     let
         inner =

@@ -216,13 +216,12 @@ isNotDeleted =
     isDeleted >> not
 
 
-inBasketListPredicates : Todo -> List Bool
-inBasketListPredicates =
-    applyList [ isNotDeleted, getListType >> equals InBasket ]
-
-
 inBasketFilter =
-    (inBasketListPredicates >> List.all identity)
+    toAllPassPredicate [ isNotDeleted, getListType >> equals InBasket ]
+
+
+toAllPassPredicate predicateList =
+    (applyList predicateList >> List.all identity)
 
 
 getInBasketList =

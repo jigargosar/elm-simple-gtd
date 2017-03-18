@@ -50,6 +50,14 @@ type alias Todo =
     }
 
 
+type alias Model =
+    Todo
+
+
+type alias ModelMapper =
+    Model -> Model
+
+
 type alias TodoList =
     List Todo
 
@@ -156,8 +164,19 @@ getId =
     (.id)
 
 
+getListType : Model -> ListType
 getListType =
     (.listType)
+
+
+setListType : ListType -> ModelMapper
+setListType listType model =
+    { model | listType = listType }
+
+
+updateListType : (Model -> ListType) -> ModelMapper
+updateListType updater model =
+    setListType (updater model) model
 
 
 markDeleted todo =
@@ -200,5 +219,5 @@ getFirstInBasketTodo =
     List.find isNotDeleted
 
 
-setContextUnder2m todo =
-    todo
+setContextUnder2m =
+    setListType Under2m

@@ -89,12 +89,10 @@ updateInBasketFlowWithActionType actionType m =
 
 
 moveTodoToUnder2mList : Maybe Todo -> Model -> ( Model, Maybe Todo )
-moveTodoToUnder2mList todo model =
-    let
-        updatedTodo =
-            Todo.setContextUnder2m todo
-    in
-        updatedTodo ?|> replaceTodoIfIdMatches # model ?= ( model, Nothing )
+moveTodoToUnder2mList maybeTodo model =
+    maybeTodo
+        ?|> (Todo.setContextUnder2m >> (replaceTodoIfIdMatches # model))
+        ?= ( model, Nothing )
 
 
 moveInBasketProcessingTodoToUnder2mList m =

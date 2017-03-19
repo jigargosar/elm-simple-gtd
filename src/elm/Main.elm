@@ -92,7 +92,7 @@ update msg =
 
             OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
-                    >> Return.command (Task.attempt OnDomFocusResult (Dom.focus "sadfsfsd"))
+                    >> Return.command (domFocusCmd focusInputId OnDomFocusResult)
 
             OnDomFocusResult result ->
                 let
@@ -159,6 +159,10 @@ update msg =
 --                        Debug.log "WARN: msg ignored" (msg)
 --                in
 --                    identity
+
+
+domFocusCmd id msg =
+    Task.attempt msg (Dom.focus id)
 
 
 saveEditingTodo =

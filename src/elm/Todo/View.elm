@@ -1,7 +1,7 @@
 module Todo.View exposing (..)
 
 import Json.Decode
-import Polymer.Attributes exposing (boolProperty)
+import Polymer.Attributes exposing (boolProperty, icon)
 import Todo exposing (EditMode(EditTodoMode))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -65,9 +65,8 @@ todoItemView editing vc todo =
         deleteOnClick =
             onClick (vc.onDeleteTodoClicked (Todo.getId todo))
     in
-        item
-            [ class "list-item" ]
+        item []
             [ checkbox [ checked False ] []
             , todoItemBody editing vc todo
-            , div [ class "hover" ] [ iconButton [ deleteOnClick, attribute "icon" "delete" ] [] ]
+            , div [ class "hover" ] [ iconButton [ deleteOnClick, icon "delete" ] [] ]
             ]

@@ -29,24 +29,30 @@
 
 .list-item-container {
   background-color: white;
+
+
+  &  paper-item:hover{
+    & .hover{
+      display: flex;
+    }
+  }
+  & paper-item {
+    border-top: 1px solid rgba(179, 179, 179, 0.53);
+
+    & .hover {
+      display: none;
+    }
+
+    & paper-icon-button {
+      color: gray;
+    }
+
+    & paper-item-body{
+      cursor: pointer;
+    }
+
+  }
+
+
 }
 
-.list-item:hover{
-  & .hover{
-    display: flex;
-  }
-}
-.list-item {
-  border-top: 1px solid rgba(179, 179, 179, 0.53);
-  & .hover {
-    display: none;
-  }
-  & paper-icon-button {
-    color: gray;
-  }
-
-  & paper-item-body{
-    cursor: pointer;
-  }
-
-}

@@ -50,7 +50,9 @@ todoListEditView viewConfig todo =
     node "paper-item"
         []
         [ node "paper-input"
-            [ onInput viewConfig.onEditTodoTextChanged
+            [
+             class "edit-todo-input"
+            , onInput viewConfig.onEditTodoTextChanged
             , value (Todo.getText todo)
             , onBlur viewConfig.onEditTodoBlur
             , autofocus True

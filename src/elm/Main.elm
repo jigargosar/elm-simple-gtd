@@ -97,7 +97,7 @@ update msg =
             OnDomFocusResult result ->
                 let
                     _ =
-                        result |> Result.mapError (Debug.log "Error: DomFocusResult")
+                        result |> Result.mapError (Debug.log "Error: Dom.focus")
                 in
                     identity
 

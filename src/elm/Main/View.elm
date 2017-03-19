@@ -100,11 +100,12 @@ addNewTodoView viewConfig text =
 
 
 addTodoButton viewConfig =
-    node "paper-button"
-        [ attribute "raised" "true"
-        , onClick viewConfig.onAddTodoClicked
-        ]
-        [ text "Add" ]
+    --    node "paper-button"
+    --        [ attribute "raised" "true"
+    --        , onClick viewConfig.onAddTodoClicked
+    --        ]
+    --        [ text "Add" ]
+    node "paper-fab" [ attribute "icon" "add", onClick viewConfig.onAddTodoClicked ] []
 
 
 centerView m =

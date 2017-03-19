@@ -10,6 +10,7 @@ import Main.View exposing (appView)
 import Navigation exposing (Location)
 import Return exposing (Return)
 import RouteUrl exposing (RouteUrlProgram)
+import Task
 import Time exposing (Time)
 import PouchDB
 import Toolkit.Operators exposing (..)
@@ -91,8 +92,15 @@ update msg =
 
             OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
+                    >> Return.command (Task.attempt OnFocusResult (Dom.focus focusInputId))
 
-            --                >> Return.effect_ (Dom.focus )
+            OnFocusResult result ->
+                let
+                    _ =
+                        Debug.log "result" (result)
+                in
+                    identity
+
             OnEditTodoTextChanged text ->
                 Return.map (Model.updateEditTodoText text)
 

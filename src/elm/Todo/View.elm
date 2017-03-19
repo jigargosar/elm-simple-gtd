@@ -9,6 +9,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import KeyboardExtra exposing (onEscape)
+import Polymer.Paper as Paper exposing (checkbox)
 
 
 todoView editMode viewConfig todo =
@@ -40,8 +41,9 @@ todoListItemView viewConfig todo =
             onClick (viewConfig.onEditTodoClicked todo)
     in
         node "paper-item"
-            [ class "list-item", editOnClick ]
-            [ node "paper-item-body" [] [ Todo.getText todo |> text ]
+            [ class "list-item" ]
+            [ checkbox [ checked False ] []
+            , node "paper-item-body" [ editOnClick ] [ Todo.getText todo |> text ]
             , div [ class "hover" ] [ node "paper-icon-button" [ deleteOnClick, attribute "icon" "delete" ] [] ]
             ]
 

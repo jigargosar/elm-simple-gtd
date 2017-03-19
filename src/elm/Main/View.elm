@@ -38,7 +38,12 @@ appView m =
     div []
         [ headerView m
         , div [ id "center-view" ] [ centerView m ]
-        , node "paper-fab" [ id "add-fab", attribute "icon" "add" ] []
+        , node "paper-fab"
+            [ id "add-fab"
+            , attribute "icon" "add"
+            , onClick OnAddTodoClicked
+            ]
+            []
         ]
 
 
@@ -67,26 +72,13 @@ headerView m =
         ]
 
 
-
---headerView m =
---    node "app-header"
---        [ attribute "reveals" "true"
---          --        , attribute "fixed" "true"
---        ]
---        [ node "app-toolbar"
---            []
---            [ div [ attribute "main-title" "true" ] [ text "main title" ]
---            ]
---        ]
-
-
 addTodoView editMode viewConfig =
     case editMode of
         EditNewTodoMode text ->
             addNewTodoView viewConfig text
 
         _ ->
-            addTodoButton viewConfig
+            span [] []
 
 
 addNewTodoView viewConfig text =
@@ -100,8 +92,9 @@ addNewTodoView viewConfig text =
         []
 
 
-addTodoButton viewConfig =
-    node "paper-fab" [ id "add-fab", attribute "icon" "add", onClick viewConfig.onAddTodoClicked ] []
+
+--addTodoButton viewConfig =
+--    node "paper-fab" [ id "add-fab", attribute "icon" "add", onClick viewConfig.onAddTodoClicked ] []
 
 
 centerView m =

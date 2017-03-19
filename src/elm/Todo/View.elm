@@ -39,7 +39,6 @@ todoListItemView viewConfig todo =
         editOnClick =
             onClick (viewConfig.onEditTodoClicked todo)
     in
-        --        div []
         node "paper-item"
             []
             [ div [ editOnClick ] [ Todo.getText todo |> text ]

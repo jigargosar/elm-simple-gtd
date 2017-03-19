@@ -74,7 +74,7 @@ update msg =
             OnNewTodoEnterPressed ->
                 saveNewTodo
 
-            OnEditTodoKeyUp key ->
+            OnNewTodoKeyUp key ->
                 case key of
                     Enter ->
                         saveNewTodo

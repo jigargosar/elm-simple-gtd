@@ -62,11 +62,17 @@ todoItemBody editing vc todo =
 
 todoItemView editing vc todo =
     let
-        deleteOnClick =
-            onClick (vc.onDeleteTodoClicked (Todo.getId todo))
+        hoverIcons =
+            div [ class "hover" ]
+                [ deleteIconButton vc todo
+                ]
     in
         item []
             [ checkbox [ checked False ] []
             , todoItemBody editing vc todo
-            , div [ class "hover" ] [ iconButton [ deleteOnClick, icon "delete" ] [] ]
+            , hoverIcons
             ]
+
+
+deleteIconButton vc todo =
+    iconButton [ onClick (vc.onDeleteTodoClicked (Todo.getId todo)), icon "delete" ] []

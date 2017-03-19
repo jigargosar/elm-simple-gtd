@@ -34,26 +34,45 @@ todoListViewConfig =
     }
 
 
+
+{-
+   <app-header reveals>
+       <app-toolbar>
+         <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
+         <div main-title>My app</div>
+         <paper-icon-button icon="delete"></paper-icon-button>
+         <paper-icon-button icon="search"></paper-icon-button>
+         <paper-icon-button icon="close"></paper-icon-button>
+         <paper-progress value="10" indeterminate bottom-item></paper-progress>
+       </app-toolbar>
+     </app-header>
+-}
+
+
 appView m =
     div []
-        [ toolbarView m
+        [ headerView m
         , centerView m
         ]
 
 
-toolbarView m =
-    div []
-        [ node "paper-button"
-            [ attribute "raised" "true"
-            , onClick OnShowTodoList
+headerView m =
+    node "app-header"
+        []
+        [ node "app-toolbar"
+            []
+            [ node "paper-button"
+                [ attribute "raised" "true"
+                , onClick OnShowTodoList
+                ]
+                [ text "Show List" ]
+            , node "paper-button"
+                [ attribute "raised" "true"
+                , onClick OnProcessInBasket
+                ]
+                [ text "Process Stuff" ]
+            , addTodoView (getEditMode m) todoListViewConfig
             ]
-            [ text "Show List" ]
-        , node "paper-button"
-            [ attribute "raised" "true"
-            , onClick OnProcessInBasket
-            ]
-            [ text "Process Stuff" ]
-        , addTodoView (getEditMode m) todoListViewConfig
         ]
 
 

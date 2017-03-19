@@ -19,6 +19,7 @@ import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InBasketFlow
 import InBasketFlow.View
+import Polymer.Paper exposing (material)
 
 
 todoListViewConfig =

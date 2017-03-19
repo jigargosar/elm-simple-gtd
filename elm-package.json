@@ -48,8 +48,9 @@
         "tomjkidd/elm-multiway-tree-zipper": "1.10.2 <= v < 2.0.0",
         "tripokey/elm-fuzzy": "5.0.3 <= v < 6.0.0",
         "ydschneider/regex-builder": "1.0.0 <= v < 2.0.0" ,
-        "jigargosar/elm-debug-extra":"3.0.0 <= v < 4.0.0",
-        "rgrempel/elm-route-url":"3.0.0 <= v < 4.0.0"
+        "rgrempel/elm-route-url":"3.0.0 <= v < 4.0.0",
+        "edvail/elm-polymer":"3.0.0 <= v < 4.0.0",
+        "jigargosar/elm-debug-extra":"3.0.0 <= v < 4.0.0"
 
     },
 

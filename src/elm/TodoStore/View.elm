@@ -12,6 +12,7 @@ import Dict exposing (Dict)
 import Dict.Extra as Dict
 import Todo.View
 import Html.Keyed as Keyed
+import Polymer.Paper exposing (material)
 
 
 type alias ViewConfig msg =
@@ -44,5 +45,5 @@ allTodosView viewConfig editMode todoStore =
 todoGroupView todoView_ groupName todoList =
     div [ class "list-group-view" ]
         [ div [ class "group-title" ] [ text groupName ]
-        , Keyed.node "div" [ class "list-item-container" ] (todoList .|> todoView_)
+        , material [] [ Keyed.node "div" [ class "list-item-container" ] (todoList .|> todoView_) ]
         ]

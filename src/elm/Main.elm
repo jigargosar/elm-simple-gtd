@@ -1,6 +1,7 @@
 port module Main exposing (..)
 
 import Json.Encode as E
+import Keyboard.Extra exposing (Key(Enter, Escape))
 import Main.Model as Model exposing (Model)
 import Main.Msg exposing (..)
 import Main.Routing
@@ -94,19 +95,21 @@ update msg =
                 Return.map (Model.updateEditTodoText text)
 
             OnEditTodoBlur ->
-                Return.andThen
-                    (Model.saveEditingTodoAndDeactivateEditTodoMode
-                        >> Tuple2.mapSecond persistMaybeTodoCmd
-                    )
+                saveEditingTodo
 
             OnEditTodoEnterPressed ->
-                Return.andThen
-                    (Model.saveEditingTodoAndDeactivateEditTodoMode
-                        >> Tuple2.mapSecond persistMaybeTodoCmd
-                    )
+                saveEditingTodo
 
             OnEditTodoKeyUp key ->
-                identity
+                case key of
+                    Enter ->
+                        saveEditingTodo
+
+                    Escape ->
+                        identity
+
+                    _ ->
+                        identity
 
             OnFlowTrashItClicked ->
                 identity
@@ -149,6 +152,13 @@ update msg =
 --                        Debug.log "WARN: msg ignored" (msg)
 --                in
 --                    identity
+
+
+saveEditingTodo =
+    Return.andThen
+        (Model.saveEditingTodoAndDeactivateEditTodoMode
+            >> Tuple2.mapSecond persistMaybeTodoCmd
+        )
 
 
 persistMaybeTodoCmd =

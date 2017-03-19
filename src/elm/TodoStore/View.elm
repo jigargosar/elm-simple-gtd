@@ -38,9 +38,13 @@ allTodosView viewConfig editMode todoStore =
 
         todoView : Todo -> ( TodoId, Html msg )
         todoView =
-            (Todo.View.todoView editMode viewConfig)
+            Todo.View.todoView editMode viewConfig
+
+        todoListContainers : List ( String, Html msg )
+        todoListContainers =
+            typeToTodoList |> Dict.map (todoListContainerView todoView) |> Dict.toList
     in
-        Keyed.node "div" [] (typeToTodoList |> Dict.map (todoListContainerView todoView) |> Dict.toList)
+        Keyed.node "div" [] todoListContainers
 
 
 todoListContainerView todoView listName todoList =

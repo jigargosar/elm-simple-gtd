@@ -1,44 +1,41 @@
 /*@import "lib/reset.pcss";*/
 
-
-#center-view{
-  margin:75px 50px;
+#center-view {
+  margin: 75px 50px;
 }
 
-
-#add-fab{
+#add-fab {
   position: fixed;
   right: 10px;
   bottom: 10px;
 }
 
-
-.edit-todo-input{
+.edit-todo-input {
   width: 100%;
 }
 
-.flex-expand{
-    flex:1 1 auto;
+.flex-expand {
+  flex: 1 1 auto;
 }
 
-
-.group-title{
+.group-title {
   text-transform: capitalize;
   padding-top: 2rem;
   margin: 0 1rem 0.5rem;
   font-size: 0.9rem;
-  font-weight:600;
+  font-weight: 600;
   color: rgba(0, 0, 0, 0.44);
 }
 
-
-.list-item-container{
+.list-item-container {
   background-color: white;
 }
 
-.list-item{
+.list-item {
   border-top: 1px solid rgba(179, 179, 179, 0.53);
-
+  & .hover {
+    display: none;
+  }
   & paper-icon-button {
     color: gray;
   }

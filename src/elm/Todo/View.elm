@@ -42,7 +42,7 @@ todoListItemView viewConfig todo =
         node "paper-item"
             [ class "list-item", editOnClick ]
             [ node "paper-item-body" [] [ Todo.getText todo |> text ]
-            , node "paper-icon-button" [ deleteOnClick, attribute "icon" "delete" ] []
+            , div [ class "hover" ] [ node "paper-icon-button" [ deleteOnClick, attribute "icon" "delete" ] [] ]
             ]
 
 

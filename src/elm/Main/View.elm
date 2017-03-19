@@ -43,7 +43,7 @@ appView m =
 
 toolbarView m =
     div []
-        [ button [ onClick OnShowTodoList ] [ text "Show List" ]
+        [ node "paper-button" [ onClick OnShowTodoList ] [ text "Show List" ]
         , button [ onClick OnProcessInBasket ] [ text "Process Stuff" ]
         , addTodoView (getEditMode m) todoListViewConfig
         ]

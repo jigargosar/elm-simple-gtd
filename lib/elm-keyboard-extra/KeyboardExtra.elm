@@ -1,10 +1,11 @@
-module Keyboard.Extra exposing (..)
+module KeyboardExtra exposing (..)
 
 import Html exposing (Attribute)
 import Html.Events as E
 import Json.Decode as D exposing (Decoder)
 import Keyboard
 import Keyboard.Extra as Keyboard exposing (Key)
+import Keyboard.Extra as KX
 
 
 onKeyUp : (Key -> msg) -> Attribute msg
@@ -28,5 +29,5 @@ onEscape msg =
     E.on "keyup" (succeedIfDecodedKeyEquals Keyboard.Escape msg)
 
 
-keyUps msg =
-    Keyboard.ups (Keyboard.fromCode >> msg)
+keyUps =
+    KX.ups

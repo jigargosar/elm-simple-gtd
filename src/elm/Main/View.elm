@@ -1,6 +1,6 @@
 module Main.View exposing (appView)
 
-import Keyboard.Extra as Keyboard exposing (onEscape)
+import KeyboardExtra as Keyboard exposing (onEscape)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (..)

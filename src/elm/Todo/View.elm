@@ -47,7 +47,7 @@ todoListItemView viewConfig todo =
 
 
 todoListEditView viewConfig todo =
-    input
+    node "paper-input"
         [ onInput viewConfig.onEditTodoTextChanged
         , value (Todo.getText todo)
         , onBlur viewConfig.onEditTodoBlur

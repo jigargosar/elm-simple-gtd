@@ -16,13 +16,16 @@ import Polymer.Paper as Paper exposing (checkbox, iconButton, item, itemBody)
 
 todoView editMode viewConfig todo =
     let
-        editing =
+        editingTodoTuple =
             case editMode of
                 EditTodoMode editingTodo ->
-                    Todo.equalById editingTodo todo
+                    if Todo.equalById editingTodo todo then
+                        ( True, editingTodo )
+                    else
+                        ( False, todo )
 
                 _ ->
-                    False
+                    ( False, todo )
 
         inner =
             --            case editMode of
@@ -33,7 +36,7 @@ todoView editMode viewConfig todo =
             --                        todoListItemView editing viewConfig todo
             --
             --                _ ->
-            todoItemView editing viewConfig todo
+            todoItemView viewConfig editingTodoTuple
     in
         ( Todo.getId todo, inner )
 
@@ -51,9 +54,7 @@ todoItemBody editing vc todo =
                     , value (Todo.getText todo)
                     , onInput vc.onEditTodoTextChanged
                     , onBlur vc.onEditTodoBlur
-                    , KeyboardExtra.onEscape vc.onNewTodoBlur
-                    , KeyboardExtra.onEnter vc.onEditTodoEnterPressed
-                    , onKeyUp vc.onEditTodoKeyUp
+                      --                    , onKeyUp vc.onEditTodoKeyUp
                     , autofocus True
                     ]
                     []
@@ -62,7 +63,7 @@ todoItemBody editing vc todo =
             itemBody [ onEditTodoClicked ] [ Todo.getText todo |> text ]
 
 
-todoItemView editing vc todo =
+todoItemView vc ( editing, todo )=
     let
         hoverIcons =
             div [ class "hover" ]

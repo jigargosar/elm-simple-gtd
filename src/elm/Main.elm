@@ -92,7 +92,11 @@ update msg =
                 Return.map (Model.activateEditTodoMode todo)
 
             OnEditTodoTextChanged text ->
-                Return.map (Model.updateEditTodoText text)
+                let
+                    _ =
+                        Debug.log "\"updating\"" ("updating")
+                in
+                    Return.map (Model.updateEditTodoText text)
 
             OnEditTodoBlur ->
                 saveEditingTodo

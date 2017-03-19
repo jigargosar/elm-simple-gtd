@@ -28,8 +28,6 @@ todoListViewConfig =
     , onEditTodoTextChanged = OnEditTodoTextChanged
     , onEditTodoBlur = OnEditTodoBlur
     , onEditTodoKeyUp = OnEditTodoKeyUp
-    , onNewTodoTextChanged = OnNewTodoTextChanged
-    , onNewTodoBlur = OnNewTodoBlur
     }
 
 
@@ -82,9 +80,9 @@ newTodoInputId =
 addNewTodoView vc text =
     Paper.input
         [ id newTodoInputId
-        , onInput vc.onNewTodoTextChanged
+        , onInput OnNewTodoTextChanged
         , value text
-        , onBlur vc.onNewTodoBlur
+        , onBlur OnNewTodoBlur
         , onKeyUp OnNewTodoKeyUp
         , autofocus True
         ]

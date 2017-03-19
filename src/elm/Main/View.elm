@@ -59,13 +59,14 @@ appView m =
 headerView m =
     node "app-header"
         [ attribute "reveals" "true"
-          --        , attribute "fixed" "true"
+        , attribute "fixed" "true"
         , attribute "condenses" "true"
-        , attribute "effects" "material"
+        , attribute "effects" "waterfall"
         ]
         [ node "app-toolbar"
             []
-            [ node "paper-button"
+            [ node "paper-icon-button" [ attribute "icon" "favorite" ] []
+            , node "paper-button"
                 [ attribute "raised" "true"
                 , onClick OnShowTodoList
                 ]

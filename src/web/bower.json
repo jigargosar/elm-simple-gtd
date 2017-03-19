@@ -28,6 +28,7 @@
     "paper-input": "PolymerElements/paper-input#^1.1.23",
     "paper-card": "PolymerElements/paper-card#^1.1.4",
     "paper-item": "PolymerElements/paper-item#^1.2.1",
-    "app-layout": "PolymerElements/app-layout#^0.10.7"
+    "app-layout": "PolymerElements/app-layout#^0.10.7",
+    "paper-tabs": "PolymerElements/paper-tabs#^1.8.0"
   }
 }

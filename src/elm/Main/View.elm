@@ -57,16 +57,11 @@ headerView m =
         [ node "app-toolbar"
             []
             [ node "paper-icon-button" [ attribute "icon" "menu" ] []
-            , node "paper-button"
-                [ attribute "raised" "true"
-                , onClick OnShowTodoList
+            , node "paper-tabs"
+                []
+                [ node "paper-tab" [ onClick OnShowTodoList ] [ text "Lists" ]
+                , node "paper-tab" [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
                 ]
-                [ text "Show List" ]
-            , node "paper-button"
-                [ attribute "raised" "true"
-                , onClick OnProcessInBasket
-                ]
-                [ text "Process Stuff" ]
             , addTodoView (getEditMode m) todoListViewConfig
             ]
         ]

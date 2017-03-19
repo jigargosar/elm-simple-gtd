@@ -20,6 +20,8 @@ module.exports = {
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
         common:["babel-polyfill",
+                "./src/web/bower_components/webcomponentsjs/webcomponents-lite.js",
+                "./src/web/bower_components/web-animations-js/web-animations.min.js",
         ],
         main: [
             './src/web/main.js',

@@ -61,7 +61,7 @@ update msg =
             LocationChanged loc ->
                 identity
 
-            OnAddTodoClicked focusInputId->
+            OnAddTodoClicked focusInputId ->
                 Return.map (Model.activateAddNewTodoMode "")
                     >> Return.command (domFocusCmd focusInputId OnDomFocusResult)
 
@@ -69,17 +69,21 @@ update msg =
                 Return.map (Model.activateAddNewTodoMode text)
 
             OnNewTodoBlur ->
-                let
-                    _ =
-                        Debug.log "\"blur\"" ("blur")
-                in
-                    Return.map (Model.deActivateAddNewTodoMode)
+                Return.map (Model.deactivateEditingMode)
 
             OnNewTodoEnterPressed ->
-                Return.andThen
-                    (Model.addNewTodoAndContinueAdding
-                        >> Tuple2.mapSecond persistMaybeTodoCmd
-                    )
+                saveNewTodo
+
+            OnEditTodoKeyUp key ->
+                case key of
+                    Enter ->
+                        saveNewTodo
+
+                    Escape ->
+                        deactivateEditingMode
+
+                    _ ->
+                        identity
 
             OnDeleteTodoClicked todoId ->
                 let
@@ -114,7 +118,7 @@ update msg =
                         saveEditingTodo
 
                     Escape ->
-                        Return.map Model.deactivateEditingMode
+                        deactivateEditingMode
 
                     _ ->
                         identity
@@ -171,6 +175,17 @@ saveEditingTodo =
         (Model.saveEditingTodoAndDeactivateEditTodoMode
             >> Tuple2.mapSecond persistMaybeTodoCmd
         )
+
+
+saveNewTodo =
+    Return.andThen
+        (Model.addNewTodoAndContinueAdding
+            >> Tuple2.mapSecond persistMaybeTodoCmd
+        )
+
+
+deactivateEditingMode =
+    Return.map (Model.deactivateEditingMode)
 
 
 persistMaybeTodoCmd =

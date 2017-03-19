@@ -17,6 +17,7 @@ type Msg
     | OnNewTodoTextChanged String
     | OnNewTodoBlur
     | OnNewTodoEnterPressed
+    | OnNewTodoKeyUp Key
     | OnEditTodoTextChanged String
     | OnEditTodoBlur
     | OnEditTodoKeyUp Key

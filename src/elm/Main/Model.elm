@@ -208,7 +208,11 @@ deleteTodo todoId m =
 saveEditingTodoAndDeactivateEditTodoMode : Model -> ( Model, Maybe Todo )
 saveEditingTodoAndDeactivateEditTodoMode =
     saveEditingTodo
-        >> Tuple2.mapFirst (setEditModeTo NotEditing)
+        >> Tuple2.mapFirst deactivateEditingMode
+
+
+deactivateEditingMode =
+    setEditModeTo NotEditing
 
 
 saveEditingTodo : Model -> ( Model, Maybe Todo )

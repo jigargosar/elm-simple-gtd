@@ -110,7 +110,7 @@ update msg =
                         saveEditingTodo
 
                     Escape ->
-                        saveEditingTodo
+                        Return.map Model.deactivateEditingMode
 
                     _ ->
                         identity

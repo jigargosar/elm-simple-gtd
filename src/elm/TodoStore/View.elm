@@ -44,5 +44,5 @@ allTodosView viewConfig editMode todoStore =
 todoGroupView todoView_ groupName todoList =
     div [ class "list-group-view" ]
         [ div [ class "group-title" ] [ text groupName ]
-        , Keyed.node "div" [] (todoList .|> todoView_)
+        , Keyed.node "div" [ class "list-item-container" ] (todoList .|> todoView_)
         ]

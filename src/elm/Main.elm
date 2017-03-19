@@ -91,18 +91,13 @@ update msg =
 
             OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
---                >> Return.effect_ (Dom.focus )
 
+            --                >> Return.effect_ (Dom.focus )
             OnEditTodoTextChanged text ->
-                let
-                    _ =
-                        Debug.log "\"updating\"" ("updating")
-                in
-                    Return.map (Model.updateEditTodoText text)
+                Return.map (Model.updateEditTodoText text)
 
             OnEditTodoBlur ->
                 saveEditingTodo
-
 
             OnEditTodoKeyUp key ->
                 case key of

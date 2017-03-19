@@ -42,25 +42,21 @@ todoView editMode viewConfig todo =
 
 
 todoItemBody editing vc todo =
-    let
-        onEditTodoClicked =
-            onClick (vc.onEditTodoClicked todo)
-    in
-        if editing then
-            itemBody []
-                [ Paper.input
-                    [ class "edit-todo-input"
-                    , boolProperty "noLabelFloat" True
-                    , value (Todo.getText todo)
-                    , onInput vc.onEditTodoTextChanged
-                    , onBlur vc.onEditTodoBlur
-                    , onKeyUp vc.onEditTodoKeyUp
-                    , autofocus True
-                    ]
-                    []
+    if editing then
+        itemBody []
+            [ Paper.input
+                [ class "edit-todo-input"
+                , boolProperty "noLabelFloat" True
+                , value (Todo.getText todo)
+                , onInput vc.onEditTodoTextChanged
+                , onBlur vc.onEditTodoBlur
+                , onKeyUp vc.onEditTodoKeyUp
+                , autofocus True
                 ]
-        else
-            itemBody [ onEditTodoClicked ] [ Todo.getText todo |> text ]
+                []
+            ]
+    else
+        itemBody [] [ Todo.getText todo |> text ]
 
 
 todoItemView vc ( editing, todo ) =

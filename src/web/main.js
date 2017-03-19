@@ -1,6 +1,6 @@
 "use strict";
 
-// import "./pcss/main.pcss"
+import "./pcss/main.pcss"
 
 import "./index.html"
 

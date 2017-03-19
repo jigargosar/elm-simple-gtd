@@ -52,7 +52,7 @@ todoListViewConfig =
 appView m =
     div []
         [ headerView m
-        , centerView m
+        , div [id "center-view"] [centerView m]
         ]
 
 

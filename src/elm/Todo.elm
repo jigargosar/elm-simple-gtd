@@ -7,7 +7,7 @@ import RandomIdGenerator
 import Random.Pcg as Random exposing (Seed)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
-import FunctionalHelpers exposing (..)
+import FunctionExtra exposing (..)
 import Result.Extra as Result
 import List
 import List.Extra as List
@@ -40,11 +40,11 @@ type ListType
     = InBasket
     | Under2m
 
-
 type EditMode
     = EditNewTodoMode String
     | EditTodoMode Todo
     | NotEditing
+
 
 
 type alias Todo =

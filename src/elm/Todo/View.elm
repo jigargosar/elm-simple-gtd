@@ -4,7 +4,7 @@ import Json.Decode
 import Todo exposing (EditMode(EditTodoMode))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionalHelpers exposing (..)
+import FunctionExtra exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

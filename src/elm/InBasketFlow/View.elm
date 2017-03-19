@@ -10,7 +10,7 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import InBasketFlow.Model as Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
-import FunctionalHelpers exposing (..)
+import FunctionExtra exposing (..)
 import Todo exposing (Todo)
 import Function exposing ((>>>))
 

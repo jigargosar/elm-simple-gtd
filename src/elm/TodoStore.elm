@@ -9,7 +9,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import FunctionalHelpers exposing (..)
+import FunctionExtra exposing (..)
 import TodoStore.Model as Model exposing (Model)
 import Tuple2
 

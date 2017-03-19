@@ -1,6 +1,6 @@
 module Flow.Model exposing (..)
 
-import FunctionalHelpers exposing (..)
+import FunctionExtra exposing (..)
 import List.Extra as List
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)

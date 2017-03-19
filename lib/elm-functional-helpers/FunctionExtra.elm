@@ -1,4 +1,4 @@
-module FunctionalHelpers exposing (..)
+module FunctionExtra exposing (..)
 
 
 (=>) =

@@ -1,6 +1,6 @@
 module TodoStore.Model exposing (..)
 
-import FunctionalHelpers exposing (..)
+import FunctionExtra exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Todo as Todo exposing (Todo, TodoList)
 import Toolkit.Operators exposing (..)

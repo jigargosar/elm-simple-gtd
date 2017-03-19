@@ -101,8 +101,6 @@ update msg =
             OnEditTodoBlur ->
                 saveEditingTodo
 
-            OnEditTodoEnterPressed ->
-                saveEditingTodo
 
             OnEditTodoKeyUp key ->
                 case key of

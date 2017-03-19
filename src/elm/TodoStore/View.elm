@@ -22,7 +22,6 @@ type alias ViewConfig msg =
     , onEditTodoClicked : Todo -> msg
     , onEditTodoTextChanged : String -> msg
     , onEditTodoBlur : msg
-    , onEditTodoEnterPressed : msg
     , onEditTodoKeyUp : Key -> msg
     , onNewTodoTextChanged : String -> msg
     , onNewTodoBlur : msg
@@ -37,15 +36,15 @@ allTodosView viewConfig editMode todoStore =
         typeToTodoList =
             Model.groupByType todoStore
 
-        todoView_ : Todo -> ( TodoId, Html msg )
-        todoView_ =
+        todoView : Todo -> ( TodoId, Html msg )
+        todoView =
             (Todo.View.todoView editMode viewConfig)
     in
-        Keyed.node "div" [] (typeToTodoList |> Dict.map (todoGroupView todoView_) |> Dict.toList)
+        Keyed.node "div" [] (typeToTodoList |> Dict.map (todoGroupView todoView) |> Dict.toList)
 
 
-todoGroupView todoView_ groupName todoList =
+todoGroupView todoView groupName todoList =
     div [ class "list-group-view" ]
         [ div [ class "group-title" ] [ text groupName ]
-        , material [] [ Keyed.node "div" [ class "list-item-container" ] (todoList .|> todoView_) ]
+        , material [ class "todo-list" ] [ Keyed.node "div" [] (todoList .|> todoView) ]
         ]

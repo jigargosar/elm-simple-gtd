@@ -17,7 +17,6 @@ type Msg
     | OnNewTodoEnterPressed
     | OnEditTodoTextChanged String
     | OnEditTodoBlur
-    | OnEditTodoEnterPressed
     | OnEditTodoKeyUp Key
     | OnFlowTrashItClicked
     | MoveToUnder2mList

@@ -54,7 +54,7 @@ todoItemBody editing vc todo =
                     , value (Todo.getText todo)
                     , onInput vc.onEditTodoTextChanged
                     , onBlur vc.onEditTodoBlur
-                      --                    , onKeyUp vc.onEditTodoKeyUp
+                    , onKeyUp vc.onEditTodoKeyUp
                     , autofocus True
                     ]
                     []
@@ -63,7 +63,7 @@ todoItemBody editing vc todo =
             itemBody [ onEditTodoClicked ] [ Todo.getText todo |> text ]
 
 
-todoItemView vc ( editing, todo )=
+todoItemView vc ( editing, todo ) =
     let
         hoverIcons =
             div [ class "hover" ]

@@ -24,6 +24,7 @@
     "platinum-sw": "polymerelements/platinum-sw#^1.3.0",
     "web-animations-js": "web-animations/web-animations-js#^2.2.1",
     "polymer": "^1.8.1",
-    "polymerfire": "firebase/polymerfire#^0.10.3"
+    "polymerfire": "firebase/polymerfire#^0.10.3",
+    "paper-input": "PolymerElements/paper-input#^1.1.23"
   }
 }

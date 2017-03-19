@@ -38,6 +38,7 @@ appView m =
     div []
         [ headerView m
         , div [ id "center-view" ] [ centerView m ]
+        , node "paper-fab" [ id "add-fab", attribute "icon" "add" ] []
         ]
 
 
@@ -100,7 +101,7 @@ addNewTodoView viewConfig text =
 
 
 addTodoButton viewConfig =
-    node "paper-fab" [ attribute "icon" "add", onClick viewConfig.onAddTodoClicked ] []
+    node "paper-fab" [ id "add-fab", attribute "icon" "add", onClick viewConfig.onAddTodoClicked ] []
 
 
 centerView m =

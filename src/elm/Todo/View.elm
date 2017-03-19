@@ -15,6 +15,14 @@ import Polymer.Paper as Paper exposing (checkbox)
 
 todoView editMode viewConfig todo =
     let
+        editing =
+            case editMode of
+                EditTodoMode editingTodo ->
+                    Todo.equalById editingTodo todo
+
+                _ ->
+                    False
+
         inner =
             case editMode of
                 EditTodoMode editingTodo ->

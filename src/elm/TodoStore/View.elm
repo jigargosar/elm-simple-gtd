@@ -3,6 +3,7 @@ module TodoStore.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Keyboard.Extra exposing (Key)
 import TodoStore exposing (TodoStore)
 import TodoStore.Model as Model
 import Todo as Todo exposing (EditMode, Todo, TodoId)
@@ -22,6 +23,7 @@ type alias ViewConfig msg =
     , onEditTodoTextChanged : String -> msg
     , onEditTodoBlur : msg
     , onEditTodoEnterPressed : msg
+    , onEditTodoKeyUp : Key -> msg
     , onNewTodoTextChanged : String -> msg
     , onNewTodoBlur : msg
     , onNewTodoEnterPressed : msg

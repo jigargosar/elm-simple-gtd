@@ -105,6 +105,9 @@ update msg =
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
+            OnEditTodoKeyUp key ->
+                identity
+
             OnFlowTrashItClicked ->
                 identity
 

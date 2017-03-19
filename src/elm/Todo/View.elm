@@ -1,6 +1,7 @@
 module Todo.View exposing (..)
 
 import Json.Decode
+import Keyboard.Extra exposing (Key(Enter, Escape))
 import Polymer.Attributes exposing (boolProperty, icon)
 import Todo exposing (EditMode(EditTodoMode))
 import Toolkit.Helpers exposing (..)
@@ -9,7 +10,7 @@ import FunctionExtra exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import KeyboardExtra exposing (onEscape)
+import KeyboardExtra exposing (onEscape, onKeyUp)
 import Polymer.Paper as Paper exposing (checkbox, iconButton, item, itemBody)
 
 
@@ -52,6 +53,7 @@ todoItemBody editing vc todo =
                     , onBlur vc.onEditTodoBlur
                     , KeyboardExtra.onEscape vc.onNewTodoBlur
                     , KeyboardExtra.onEnter vc.onEditTodoEnterPressed
+                    , onKeyUp vc.onEditTodoKeyUp
                     , autofocus True
                     ]
                     []

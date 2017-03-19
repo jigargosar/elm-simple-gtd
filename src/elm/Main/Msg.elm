@@ -2,6 +2,7 @@ module Main.Msg exposing (..)
 
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
+import Keyboard.Extra exposing (Key)
 import Navigation exposing (Location)
 import Todo exposing (Todo, TodoId)
 
@@ -17,6 +18,7 @@ type Msg
     | OnEditTodoTextChanged String
     | OnEditTodoBlur
     | OnEditTodoEnterPressed
+    | OnEditTodoKeyUp Key
     | OnFlowTrashItClicked
     | MoveToUnder2mList
     | OnYesClicked

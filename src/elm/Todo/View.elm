@@ -41,13 +41,13 @@ onTap msg =
     on "click" (Json.Decode.succeed msg)
 
 
-todoListItemView editing viewConfig todo =
+todoListItemView editing vc todo =
     let
         deleteOnClick =
-            onTap (viewConfig.onDeleteTodoClicked (Todo.getId todo))
+            onTap (vc.onDeleteTodoClicked (Todo.getId todo))
 
         onEditTodoClicked =
-            onClick (viewConfig.onEditTodoClicked todo)
+            onClick (vc.onEditTodoClicked todo)
 
         itemBody_ =
             if editing then
@@ -56,10 +56,10 @@ todoListItemView editing viewConfig todo =
                         [ class "edit-todo-input"
                         , boolProperty "noLabelFloat" True
                         , value (Todo.getText todo)
-                        , onInput viewConfig.onEditTodoTextChanged
-                        , onBlur viewConfig.onEditTodoBlur
-                        , KeyboardExtra.onEscape viewConfig.onNewTodoBlur
-                        , KeyboardExtra.onEnter viewConfig.onEditTodoEnterPressed
+                        , onInput vc.onEditTodoTextChanged
+                        , onBlur vc.onEditTodoBlur
+                        , KeyboardExtra.onEscape vc.onNewTodoBlur
+                        , KeyboardExtra.onEnter vc.onEditTodoEnterPressed
                         , autofocus True
                         ]
                         []

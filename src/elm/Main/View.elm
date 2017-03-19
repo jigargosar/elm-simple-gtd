@@ -34,21 +34,6 @@ todoListViewConfig =
     }
 
 
-
-{-
-   <app-header reveals>
-       <app-toolbar>
-         <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
-         <div main-title>My app</div>
-         <paper-icon-button icon="delete"></paper-icon-button>
-         <paper-icon-button icon="search"></paper-icon-button>
-         <paper-icon-button icon="close"></paper-icon-button>
-         <paper-progress value="10" indeterminate bottom-item></paper-progress>
-       </app-toolbar>
-     </app-header>
--}
-
-
 appView m =
     div []
         [ headerView m
@@ -65,7 +50,7 @@ headerView m =
         ]
         [ node "app-toolbar"
             []
-            [ node "paper-icon-button" [ attribute "icon" "delete" ] []
+            [ node "paper-icon-button" [ attribute "icon" "menu" ] []
             , node "paper-button"
                 [ attribute "raised" "true"
                 , onClick OnShowTodoList

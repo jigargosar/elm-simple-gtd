@@ -34,8 +34,9 @@ todoListItemView viewConfig todo =
         editOnClick =
             onClick (viewConfig.onEditTodoClicked todo)
     in
-        div []
-            [ button [ deleteOnClick ] [ text "x" ]
+        node "paper-item"
+            []
+            [ node "paper-button" [ deleteOnClick ] [ text "x" ]
             , div [ editOnClick ] [ Todo.getText todo |> text ]
             ]
 

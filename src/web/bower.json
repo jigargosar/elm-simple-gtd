@@ -26,6 +26,7 @@
     "polymer": "^1.8.1",
     "polymerfire": "firebase/polymerfire#^0.10.3",
     "paper-input": "PolymerElements/paper-input#^1.1.23",
-    "paper-card": "PolymerElements/paper-card#^1.1.4"
+    "paper-card": "PolymerElements/paper-card#^1.1.4",
+    "paper-item": "PolymerElements/paper-item#^1.2.1"
   }
 }

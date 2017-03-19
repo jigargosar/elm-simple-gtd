@@ -42,9 +42,9 @@ allTodosView viewConfig editMode todoStore =
 
 
 todoGroupView todoView_ groupName todoList =
-    --    div []
-    node "paper-card"
-        []
+    div []
+        --    node "paper-card"
+        --        []
         [ h1 []
             [ text groupName ]
         , div [] (todoList .|> todoView_)

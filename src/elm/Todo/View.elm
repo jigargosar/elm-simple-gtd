@@ -44,7 +44,7 @@ onTap msg =
 todoListItemView editing vc todo =
     let
         deleteOnClick =
-            onTap (vc.onDeleteTodoClicked (Todo.getId todo))
+            onClick (vc.onDeleteTodoClicked (Todo.getId todo))
 
         onEditTodoClicked =
             onClick (vc.onEditTodoClicked todo)

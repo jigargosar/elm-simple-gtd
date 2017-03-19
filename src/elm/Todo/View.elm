@@ -10,7 +10,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import KeyboardExtra exposing (onEscape)
-import Polymer.Paper as Paper exposing (checkbox)
+import Polymer.Paper as Paper exposing (checkbox, item, itemBody)
 
 
 todoView editMode viewConfig todo =
@@ -46,18 +46,17 @@ todoListItemView editing viewConfig todo =
         deleteOnClick =
             onTap (viewConfig.onDeleteTodoClicked (Todo.getId todo))
 
-        editOnClick =
+        onEditTodoClicked =
             onClick (viewConfig.onEditTodoClicked todo)
 
-        itemBody =
+        itemBody_ =
             if editing then
-                node "paper-item-body"
-                    []
-                    [ node "paper-input"
+                itemBody []
+                    [ Paper.input
                         [ class "edit-todo-input"
                         , boolProperty "noLabelFloat" True
-                        , onInput viewConfig.onEditTodoTextChanged
                         , value (Todo.getText todo)
+                        , onInput viewConfig.onEditTodoTextChanged
                         , onBlur viewConfig.onEditTodoBlur
                         , KeyboardExtra.onEscape viewConfig.onNewTodoBlur
                         , KeyboardExtra.onEnter viewConfig.onEditTodoEnterPressed
@@ -66,11 +65,11 @@ todoListItemView editing viewConfig todo =
                         []
                     ]
             else
-                node "paper-item-body" [ editOnClick ] [ Todo.getText todo |> text ]
+                itemBody [ onEditTodoClicked ] [ Todo.getText todo |> text ]
     in
-        node "paper-item"
+        item
             [ class "list-item" ]
             [ checkbox [ checked False ] []
-            , itemBody
+            , itemBody_
             , div [ class "hover" ] [ node "paper-icon-button" [ deleteOnClick, attribute "icon" "delete" ] [] ]
             ]

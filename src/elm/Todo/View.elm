@@ -9,6 +9,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
+import KeyboardExtra exposing (onEscape)
 
 
 todoView editMode viewConfig todo =
@@ -50,11 +51,11 @@ todoListEditView viewConfig todo =
     node "paper-item"
         []
         [ node "paper-input"
-            [
-             class "edit-todo-input"
+            [ class "edit-todo-input"
             , onInput viewConfig.onEditTodoTextChanged
             , value (Todo.getText todo)
             , onBlur viewConfig.onEditTodoBlur
+            , onEscape viewConfig.onNewTodoBlur
             , autofocus True
             , onEnter viewConfig.onEditTodoEnterPressed
             ]

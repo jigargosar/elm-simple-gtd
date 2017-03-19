@@ -1,5 +1,6 @@
 module Todo.View exposing (..)
 
+import Json.Decode
 import Todo exposing (EditMode(EditTodoMode))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -26,10 +27,14 @@ todoView editMode viewConfig todo =
         div [] [ inner, hr [] [] ]
 
 
+onTap msg =
+    on "tap" (Json.Decode.succeed msg)
+
+
 todoListItemView viewConfig todo =
     let
         deleteOnClick =
-            onClick (viewConfig.onDeleteTodoClicked (Todo.getId todo))
+            onTap (viewConfig.onDeleteTodoClicked (Todo.getId todo))
 
         editOnClick =
             onClick (viewConfig.onEditTodoClicked todo)
@@ -37,8 +42,11 @@ todoListItemView viewConfig todo =
         node "paper-item"
             --        node "div"
             []
-            [ node "paper-button" [ attribute "raised" "true", deleteOnClick ] [ text "x" ]
-            , div [ editOnClick ] [ Todo.getText todo |> text ]
+            [ node "paper-item-body"
+                []
+                [ node "paper-button" [ attribute "raised" "true", deleteOnClick ] [ text "x" ]
+                , div [ editOnClick ] [ Todo.getText todo |> text ]
+                ]
             ]
 
 

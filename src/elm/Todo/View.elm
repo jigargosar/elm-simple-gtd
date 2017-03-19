@@ -47,11 +47,14 @@ todoListItemView viewConfig todo =
 
 
 todoListEditView viewConfig todo =
-    node "paper-input"
-        [ onInput viewConfig.onEditTodoTextChanged
-        , value (Todo.getText todo)
-        , onBlur viewConfig.onEditTodoBlur
-        , autofocus True
-        , onEnter viewConfig.onEditTodoEnterPressed
-        ]
+    node "paper-item"
         []
+        [ node "paper-input"
+            [ onInput viewConfig.onEditTodoTextChanged
+            , value (Todo.getText todo)
+            , onBlur viewConfig.onEditTodoBlur
+            , autofocus True
+            , onEnter viewConfig.onEditTodoEnterPressed
+            ]
+            []
+        ]

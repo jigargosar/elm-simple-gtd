@@ -3,18 +3,16 @@ module KeyboardExtra exposing (..)
 import Html exposing (Attribute)
 import Html.Events as Events
 import Json.Decode as D exposing (Decoder)
-import Keyboard
-import Keyboard.Extra as Keyboard exposing (Key)
-import Keyboard.Extra as KX
+import Keyboard.Extra as KX exposing (Key)
 
 
 onKeyUp : (Key -> msg) -> Attribute msg
 onKeyUp onKeyMsg =
-    Events.on "keyup" (D.map onKeyMsg Keyboard.targetKey)
+    Events.on "keyup" (D.map onKeyMsg KX.targetKey)
 
 
 succeedIfDecodedKeyEquals key msg =
-    Keyboard.targetKey
+    KX.targetKey
         |> D.andThen
             (\actualKey ->
                 let
@@ -30,12 +28,12 @@ succeedIfDecodedKeyEquals key msg =
 
 onEscape : msg -> Attribute msg
 onEscape msg =
-    Events.on "keyup" (succeedIfDecodedKeyEquals Keyboard.Escape msg)
+    Events.on "keyup" (succeedIfDecodedKeyEquals KX.Escape msg)
 
 
 onEnter : msg -> Attribute msg
 onEnter msg =
-    Events.on "keyup" (succeedIfDecodedKeyEquals Keyboard.Enter msg)
+    Events.on "keyup" (succeedIfDecodedKeyEquals KX.Enter msg)
 
 
 keyUps =

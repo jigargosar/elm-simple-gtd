@@ -18,8 +18,8 @@ import Polymer.Paper exposing (material)
 
 
 type alias ViewConfig msg =
-    { onAddTodoClicked : msg
-    , onDeleteTodoClicked : TodoId -> msg
+    {
+    onDeleteTodoClicked : TodoId -> msg
     , onEditTodoClicked : Dom.Id -> Todo -> msg
     , onEditTodoTextChanged : String -> msg
     , onEditTodoBlur : msg

@@ -10,7 +10,7 @@ import Todo exposing (Todo, TodoId)
 
 type Msg
     = LocationChanged Location
-    | OnAddTodoClicked
+    | OnAddTodoClicked Dom.Id
     | OnDeleteTodoClicked TodoId
     | OnEditTodoClicked Dom.Id Todo
     | OnDomFocusResult (Result Dom.Error ())

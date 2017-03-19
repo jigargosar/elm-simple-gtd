@@ -23,8 +23,7 @@ import Polymer.Paper exposing (material)
 
 
 todoListViewConfig =
-    { onAddTodoClicked = OnAddTodoClicked
-    , onDeleteTodoClicked = OnDeleteTodoClicked
+    { onDeleteTodoClicked = OnDeleteTodoClicked
     , onEditTodoClicked = OnEditTodoClicked
     , onEditTodoTextChanged = OnEditTodoTextChanged
     , onEditTodoBlur = OnEditTodoBlur
@@ -42,7 +41,7 @@ appView m =
         , node "paper-fab"
             [ id "add-fab"
             , attribute "icon" "add"
-            , onClick OnAddTodoClicked
+            , onClick (OnAddTodoClicked newTodoInputId)
             ]
             []
         ]
@@ -77,9 +76,14 @@ addTodoView editMode viewConfig =
             span [] []
 
 
+newTodoInputId =
+    "new-todo-input"
+
+
 addNewTodoView viewConfig text =
     node "paper-input"
-        [ onInput viewConfig.onNewTodoTextChanged
+        [ id newTodoInputId
+        , onInput viewConfig.onNewTodoTextChanged
         , value text
         , onBlur viewConfig.onNewTodoBlur
         , KeyboardExtra.onEscape viewConfig.onNewTodoBlur

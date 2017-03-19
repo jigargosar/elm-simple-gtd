@@ -61,8 +61,9 @@ update msg =
             LocationChanged loc ->
                 identity
 
-            OnAddTodoClicked ->
+            OnAddTodoClicked focusInputId->
                 Return.map (Model.activateAddNewTodoMode "")
+                    >> Return.command (domFocusCmd focusInputId OnDomFocusResult)
 
             OnNewTodoTextChanged text ->
                 Return.map (Model.activateAddNewTodoMode text)

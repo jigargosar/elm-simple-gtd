@@ -52,14 +52,16 @@ todoListViewConfig =
 appView m =
     div []
         [ headerView m
-        , div [id "center-view"] [centerView m]
+        , div [ id "center-view" ] [ centerView m ]
         ]
 
 
 headerView m =
     node "app-header"
         [ attribute "reveals" "true"
-        , attribute "fixed" "true"
+          --        , attribute "fixed" "true"
+        , attribute "condenses" "true"
+        , attribute "effects" "material"
         ]
         [ node "app-toolbar"
             []

@@ -65,7 +65,11 @@ update msg =
                 Return.map (Model.activateAddNewTodoMode text)
 
             OnNewTodoBlur ->
-                Return.map (Model.deActivateAddNewTodoMode)
+                let
+                    _ =
+                        Debug.log "\"blur\"" ("blur")
+                in
+                    Return.map (Model.deActivateAddNewTodoMode)
 
             OnNewTodoEnterPressed ->
                 Return.andThen

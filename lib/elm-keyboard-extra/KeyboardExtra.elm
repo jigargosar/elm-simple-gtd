@@ -19,7 +19,7 @@ succeedIfDecodedKeyEquals key msg =
             (\actualKey ->
                 let
                     _ =
-                        Debug.log "actualKey" (actualKey)
+                        Debug.log "actualKey, expectedKey" ( actualKey, key )
                 in
                     if key == actualKey then
                         D.succeed msg

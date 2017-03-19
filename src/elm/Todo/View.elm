@@ -41,7 +41,7 @@ todoListItemView viewConfig todo =
     in
         node "paper-item"
             [ editOnClick ]
-            [ div [] [ Todo.getText todo |> text ]
+            [ div [ class "flex-expand" ] [ Todo.getText todo |> text ]
             , node "paper-icon-button" [ deleteOnClick, attribute "icon" "delete" ] []
             ]
 

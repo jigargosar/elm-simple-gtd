@@ -37,31 +37,36 @@ todoView editMode viewConfig todo =
         ( Todo.getId todo, inner )
 
 
+todoItemBody editing vc todo =
+    let
+        onEditTodoClicked =
+            onClick (vc.onEditTodoClicked todo)
+    in
+        if editing then
+            itemBody []
+                [ Paper.input
+                    [ class "edit-todo-input"
+                    , boolProperty "noLabelFloat" True
+                    , value (Todo.getText todo)
+                    , onInput vc.onEditTodoTextChanged
+                    , onBlur vc.onEditTodoBlur
+                    , KeyboardExtra.onEscape vc.onNewTodoBlur
+                    , KeyboardExtra.onEnter vc.onEditTodoEnterPressed
+                    , autofocus True
+                    ]
+                    []
+                ]
+        else
+            itemBody [ onEditTodoClicked ] [ Todo.getText todo |> text ]
+
+
 todoItemView editing vc todo =
     let
         deleteOnClick =
             onClick (vc.onDeleteTodoClicked (Todo.getId todo))
 
-        onEditTodoClicked =
-            onClick (vc.onEditTodoClicked todo)
-
         itemBody_ =
-            if editing then
-                itemBody []
-                    [ Paper.input
-                        [ class "edit-todo-input"
-                        , boolProperty "noLabelFloat" True
-                        , value (Todo.getText todo)
-                        , onInput vc.onEditTodoTextChanged
-                        , onBlur vc.onEditTodoBlur
-                        , KeyboardExtra.onEscape vc.onNewTodoBlur
-                        , KeyboardExtra.onEnter vc.onEditTodoEnterPressed
-                        , autofocus True
-                        ]
-                        []
-                    ]
-            else
-                itemBody [ onEditTodoClicked ] [ Todo.getText todo |> text ]
+            todoItemBody editing vc todo
     in
         item
             [ class "list-item" ]

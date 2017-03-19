@@ -8,7 +8,6 @@ import FunctionExtra exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import KeyboardExtra exposing (onEscape)
 
 
@@ -55,9 +54,9 @@ todoListEditView viewConfig todo =
             , onInput viewConfig.onEditTodoTextChanged
             , value (Todo.getText todo)
             , onBlur viewConfig.onEditTodoBlur
-            , onEscape viewConfig.onNewTodoBlur
+            , KeyboardExtra.onEscape viewConfig.onNewTodoBlur
+            , KeyboardExtra.onEnter viewConfig.onEditTodoEnterPressed
             , autofocus True
-            , onEnter viewConfig.onEditTodoEnterPressed
             ]
             []
         ]

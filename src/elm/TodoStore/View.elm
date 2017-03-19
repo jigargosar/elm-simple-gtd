@@ -3,7 +3,6 @@ module TodoStore.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import TodoStore exposing (TodoStore)
 import TodoStore.Model as Model
 import Todo as Todo exposing (EditMode, Todo, TodoId)

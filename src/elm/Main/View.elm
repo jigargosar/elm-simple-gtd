@@ -6,7 +6,6 @@ import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
 import Flow

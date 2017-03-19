@@ -106,7 +106,7 @@ update msg =
                         saveEditingTodo
 
                     Escape ->
-                        identity
+                        saveEditingTodo
 
                     _ ->
                         identity

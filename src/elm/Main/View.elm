@@ -65,7 +65,7 @@ headerView m =
         ]
         [ node "app-toolbar"
             []
-            [ node "paper-icon-button" [ attribute "icon" "favorite" ] []
+            [ node "paper-icon-button" [ attribute "icon" "delete" ] []
             , node "paper-button"
                 [ attribute "raised" "true"
                 , onClick OnShowTodoList

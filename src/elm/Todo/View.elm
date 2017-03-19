@@ -32,12 +32,12 @@ todoView editMode viewConfig todo =
             --                        todoListItemView editing viewConfig todo
             --
             --                _ ->
-            todoListItemView editing viewConfig todo
+            todoItemView editing viewConfig todo
     in
         ( Todo.getId todo, inner )
 
 
-todoListItemView editing vc todo =
+todoItemView editing vc todo =
     let
         deleteOnClick =
             onClick (vc.onDeleteTodoClicked (Todo.getId todo))

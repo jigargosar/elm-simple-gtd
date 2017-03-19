@@ -69,8 +69,20 @@ todoItemView vc ( editing, todo ) =
             div [ class "hover" ]
                 [ deleteIconButton vc todo
                 ]
+
+        onEditTodoClicked =
+            onClick (vc.onEditTodoClicked todo)
+
+        itemOptionalAttributes =
+            if editing then
+                []
+            else
+                [ onEditTodoClicked ]
+
+        itemAttributes =
+            [] ++ itemOptionalAttributes
     in
-        item []
+        item itemAttributes
             [ checkbox [ checked False ] []
             , todoItemBody editing vc todo
             , hoverIcons

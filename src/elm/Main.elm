@@ -92,12 +92,12 @@ update msg =
 
             OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
-                    >> Return.command (Task.attempt OnDomFocusResult (Dom.focus focusInputId))
+                    >> Return.command (Task.attempt OnDomFocusResult (Dom.focus "sadfsfsd"))
 
             OnDomFocusResult result ->
                 let
                     _ =
-                        Debug.log "result" (result)
+                        result |> Result.mapError (Debug.log "Error: DomFocusResult")
                 in
                     identity
 

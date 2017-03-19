@@ -10,7 +10,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import KeyboardExtra exposing (onEscape)
-import Polymer.Paper as Paper exposing (checkbox, item, itemBody)
+import Polymer.Paper as Paper exposing (checkbox, iconButton, item, itemBody)
 
 
 todoView editMode viewConfig todo =
@@ -64,13 +64,10 @@ todoItemView editing vc todo =
     let
         deleteOnClick =
             onClick (vc.onDeleteTodoClicked (Todo.getId todo))
-
-        itemBody_ =
-            todoItemBody editing vc todo
     in
         item
             [ class "list-item" ]
             [ checkbox [ checked False ] []
-            , itemBody_
-            , div [ class "hover" ] [ node "paper-icon-button" [ deleteOnClick, attribute "icon" "delete" ] [] ]
+            , todoItemBody editing vc todo
+            , div [ class "hover" ] [ iconButton [ deleteOnClick, attribute "icon" "delete" ] [] ]
             ]

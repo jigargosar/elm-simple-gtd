@@ -58,7 +58,9 @@ appView m =
 
 headerView m =
     node "app-header"
-        []
+        [ attribute "reveals" "true"
+        , attribute "fixed" "true"
+        ]
         [ node "app-toolbar"
             []
             [ node "paper-button"

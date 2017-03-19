@@ -24,7 +24,7 @@ todoView editMode viewConfig todo =
                 _ ->
                     todoListItemView viewConfig todo
     in
-        ( Todo.getId todo, div [] [ inner, hr [] [] ] )
+        ( Todo.getId todo, inner )
 
 
 onTap msg =
@@ -39,13 +39,8 @@ todoListItemView viewConfig todo =
         editOnClick =
             onClick (viewConfig.onEditTodoClicked todo)
     in
-        node "paper-item"
-            --        node "div"
-            []
-            [ node "paper-item-body"
-                []
-                [ div [ editOnClick ] [ Todo.getText todo |> text ]
-                ]
+        div []
+            [ div [ editOnClick ] [ Todo.getText todo |> text ]
             , node "paper-button" [ attribute "raised" "true", deleteOnClick ] [ text "x" ]
             ]
 

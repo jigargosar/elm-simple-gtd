@@ -8,6 +8,7 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/elm-random-id-generator" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/elm-functional-helpers" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/web" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/elm-keyboard-extra" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

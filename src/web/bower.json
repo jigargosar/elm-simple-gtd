@@ -1,0 +1,29 @@
+{
+  "name": "web",
+  "authors": [
+    "Jigar Gosar <jigar.gosar@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "iron-icons": "polymerelements/iron-icons#^1.0.0",
+    "paper-button": "polymerelements/paper-button#^1.0.0",
+    "paper-fab": "polymerelements/paper-fab#^1.0.0",
+    "paper-checkbox": "^1.4.2",
+    "paper-icon-button": "polymerelements/paper-icon-button#^1.0.0",
+    "platinum-sw": "polymerelements/platinum-sw#^1.3.0",
+    "web-animations-js": "web-animations/web-animations-js#^2.2.1",
+    "polymer": "^1.8.1",
+    "polymerfire": "firebase/polymerfire#^0.10.3"
+  }
+}

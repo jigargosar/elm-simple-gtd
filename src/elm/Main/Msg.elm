@@ -16,7 +16,6 @@ type Msg
     | OnDomFocusResult (Result Dom.Error ())
     | OnNewTodoTextChanged String
     | OnNewTodoBlur
-    | OnNewTodoEnterPressed
     | OnNewTodoKeyUp Key
     | OnEditTodoTextChanged String
     | OnEditTodoBlur

@@ -30,7 +30,6 @@ todoListViewConfig =
     , onEditTodoKeyUp = OnEditTodoKeyUp
     , onNewTodoTextChanged = OnNewTodoTextChanged
     , onNewTodoBlur = OnNewTodoBlur
-    , onNewTodoEnterPressed = OnNewTodoEnterPressed
     }
 
 

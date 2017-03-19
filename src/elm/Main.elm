@@ -69,10 +69,7 @@ update msg =
                 Return.map (Model.activateAddNewTodoMode text)
 
             OnNewTodoBlur ->
-                Return.map (Model.deactivateEditingMode)
-
-            OnNewTodoEnterPressed ->
-                saveNewTodo
+                deactivateEditingMode
 
             OnNewTodoKeyUp key ->
                 case key of

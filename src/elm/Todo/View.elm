@@ -40,7 +40,7 @@ todoListItemView viewConfig todo =
             onClick (viewConfig.onEditTodoClicked todo)
     in
         node "paper-item"
-            [ editOnClick ]
+            [ class "list-item", editOnClick ]
             [ node "paper-item-body" [] [ Todo.getText todo |> text ]
             , node "paper-icon-button" [ deleteOnClick, attribute "icon" "delete" ] []
             ]
@@ -48,7 +48,7 @@ todoListItemView viewConfig todo =
 
 todoListEditView viewConfig todo =
     node "paper-item"
-        []
+        [ class "list-item" ]
         [ node "paper-input"
             [ class "edit-todo-input"
             , onInput viewConfig.onEditTodoTextChanged

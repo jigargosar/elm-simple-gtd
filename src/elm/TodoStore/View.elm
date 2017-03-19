@@ -12,6 +12,7 @@ import Toolkit.Helpers exposing (..)
 import Dict exposing (Dict)
 import Dict.Extra as Dict
 import Todo.View
+import Html.Keyed as Keyed
 
 
 type alias ViewConfig msg =
@@ -38,7 +39,7 @@ allTodosView viewConfig editMode todoStore =
         todoView_ =
             (Todo.View.todoView editMode viewConfig)
     in
-        div [] (typeToTodoList |> Dict.map (todoGroupView todoView_) |> Dict.values)
+        Keyed.node "div" [] (typeToTodoList |> Dict.map (todoGroupView todoView_) |> Dict.toList)
 
 
 todoGroupView todoView_ groupName todoList =

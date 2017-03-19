@@ -44,7 +44,7 @@ appView m =
 toolbarView m =
     div []
         [ node "paper-button" [ onClick OnShowTodoList ] [ text "Show List" ]
-        , button [ onClick OnProcessInBasket ] [ text "Process Stuff" ]
+        , node "paper-button" [ onClick OnProcessInBasket ] [ text "Process Stuff" ]
         , addTodoView (getEditMode m) todoListViewConfig
         ]
 
@@ -59,7 +59,7 @@ addTodoView editMode viewConfig =
 
 
 addNewTodoView viewConfig text =
-    input
+    node "paper-input"
         [ onInput viewConfig.onNewTodoTextChanged
         , value text
         , onBlur viewConfig.onNewTodoBlur
@@ -70,7 +70,7 @@ addNewTodoView viewConfig text =
 
 
 addTodoButton viewConfig =
-    button [ onClick viewConfig.onAddTodoClicked ] [ text "Add" ]
+    node "paper-button" [ onClick viewConfig.onAddTodoClicked ] [ text "Add" ]
 
 
 centerView m =

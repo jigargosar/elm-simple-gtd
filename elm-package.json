@@ -7,7 +7,7 @@
         "src/elm",
         "lib/elm-decode-extra",
         "lib/elm-random-id-generator",
-        "lib/elm-functional-helpers",
+        "lib/elm-function-extra",
         "lib/elm-keyboard-extra"
     ],
     "exposed-modules": [],

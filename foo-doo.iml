@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/elm" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/elm-decode-extra" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/elm-random-id-generator" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/lib/elm-functional-helpers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/elm-function-extra" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/web" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/elm-keyboard-extra" isTestSource="false" />
     </content>

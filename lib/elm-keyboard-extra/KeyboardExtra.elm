@@ -17,16 +17,25 @@ succeedIfDecodedKeyEquals key msg =
     Keyboard.targetKey
         |> D.andThen
             (\actualKey ->
-                if key == actualKey then
-                    D.succeed msg
-                else
-                    D.fail "Not intrested"
+                let
+                    _ =
+                        Debug.log "actualKey" (actualKey)
+                in
+                    if key == actualKey then
+                        D.succeed msg
+                    else
+                        D.fail "Not intrested"
             )
 
 
 onEscape : msg -> Attribute msg
 onEscape msg =
     Events.on "keyup" (succeedIfDecodedKeyEquals Keyboard.Escape msg)
+
+
+onEnter : msg -> Attribute msg
+onEnter msg =
+    Events.on "keyup" (succeedIfDecodedKeyEquals Keyboard.Enter msg)
 
 
 keyUps =

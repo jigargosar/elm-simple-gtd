@@ -1,6 +1,6 @@
 module Main.View exposing (appView)
 
-import KeyboardExtra as Keyboard exposing (onEscape)
+import KeyboardExtra as KeyboardExtra exposing (onEscape)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
@@ -87,8 +87,8 @@ addNewTodoView viewConfig text =
         [ onInput viewConfig.onNewTodoTextChanged
         , value text
         , onBlur viewConfig.onNewTodoBlur
-        , onEscape viewConfig.onNewTodoBlur
-        , onEnter viewConfig.onNewTodoEnterPressed
+        , KeyboardExtra.onEscape viewConfig.onNewTodoBlur
+        , KeyboardExtra.onEnter viewConfig.onNewTodoEnterPressed
         , autofocus True
         ]
         []

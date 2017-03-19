@@ -108,6 +108,4 @@ centerView m =
 
 
 todoListView m =
-    div []
-        [ TodoStore.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
-        ]
+    TodoStore.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)

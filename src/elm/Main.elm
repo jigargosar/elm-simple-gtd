@@ -74,10 +74,14 @@ update msg =
                     )
 
             OnDeleteTodoClicked todoId ->
-                Return.andThen
-                    (Model.deleteTodo todoId
-                        >> Tuple2.mapSecond persistMaybeTodoCmd
-                    )
+                let
+                    _ =
+                        Debug.log "todoId" (todoId)
+                in
+                    Return.andThen
+                        (Model.deleteTodo todoId
+                            >> Tuple2.mapSecond persistMaybeTodoCmd
+                        )
 
             OnEditTodoClicked todo ->
                 Return.map (Model.activateEditTodoMode todo)

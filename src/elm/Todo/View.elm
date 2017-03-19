@@ -1,6 +1,7 @@
 module Todo.View exposing (..)
 
 import Json.Decode
+import Polymer.Attributes exposing (boolProperty)
 import Todo exposing (EditMode(EditTodoMode))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -53,6 +54,7 @@ todoListEditView viewConfig todo =
         [ class "list-item" ]
         [ node "paper-input"
             [ class "edit-todo-input"
+            , boolProperty "noLabelFloat" True
             , onInput viewConfig.onEditTodoTextChanged
             , value (Todo.getText todo)
             , onBlur viewConfig.onEditTodoBlur

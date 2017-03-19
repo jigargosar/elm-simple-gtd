@@ -24,15 +24,15 @@ todoView editMode viewConfig todo =
                     False
 
         inner =
-            case editMode of
-                EditTodoMode editingTodo ->
-                    if Todo.equalById editingTodo todo then
-                        todoListEditView viewConfig editingTodo
-                    else
-                        todoListItemView viewConfig todo
-
-                _ ->
-                    todoListItemView viewConfig todo
+            --            case editMode of
+            --                EditTodoMode editingTodo ->
+            --                    if Todo.equalById editingTodo todo then
+            --                        todoListEditView viewConfig editingTodo
+            --                    else
+            --                        todoListItemView editing viewConfig todo
+            --
+            --                _ ->
+            todoListItemView editing viewConfig todo
     in
         ( Todo.getId todo, inner )
 
@@ -41,34 +41,36 @@ onTap msg =
     on "click" (Json.Decode.succeed msg)
 
 
-todoListItemView viewConfig todo =
+todoListItemView editing viewConfig todo =
     let
         deleteOnClick =
             onTap (viewConfig.onDeleteTodoClicked (Todo.getId todo))
 
         editOnClick =
             onClick (viewConfig.onEditTodoClicked todo)
+
+        itemBody =
+            if editing then
+                node "paper-item-body"
+                    []
+                    [ node "paper-input"
+                        [ class "edit-todo-input"
+                        , boolProperty "noLabelFloat" True
+                        , onInput viewConfig.onEditTodoTextChanged
+                        , value (Todo.getText todo)
+                        , onBlur viewConfig.onEditTodoBlur
+                        , KeyboardExtra.onEscape viewConfig.onNewTodoBlur
+                        , KeyboardExtra.onEnter viewConfig.onEditTodoEnterPressed
+                        , autofocus True
+                        ]
+                        []
+                    ]
+            else
+                node "paper-item-body" [ editOnClick ] [ Todo.getText todo |> text ]
     in
         node "paper-item"
             [ class "list-item" ]
             [ checkbox [ checked False ] []
-            , node "paper-item-body" [ editOnClick ] [ Todo.getText todo |> text ]
+            , itemBody
             , div [ class "hover" ] [ node "paper-icon-button" [ deleteOnClick, attribute "icon" "delete" ] [] ]
             ]
-
-
-todoListEditView viewConfig todo =
-    node "paper-item"
-        [ class "list-item" ]
-        [ node "paper-input"
-            [ class "edit-todo-input"
-            , boolProperty "noLabelFloat" True
-            , onInput viewConfig.onEditTodoTextChanged
-            , value (Todo.getText todo)
-            , onBlur viewConfig.onEditTodoBlur
-            , KeyboardExtra.onEscape viewConfig.onNewTodoBlur
-            , KeyboardExtra.onEnter viewConfig.onEditTodoEnterPressed
-            , autofocus True
-            ]
-            []
-        ]

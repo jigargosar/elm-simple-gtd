@@ -37,10 +37,6 @@ todoView editMode viewConfig todo =
         ( Todo.getId todo, inner )
 
 
-onTap msg =
-    on "click" (Json.Decode.succeed msg)
-
-
 todoListItemView editing vc todo =
     let
         deleteOnClick =

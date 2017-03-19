@@ -40,10 +40,10 @@ allTodosView viewConfig editMode todoStore =
         todoView =
             (Todo.View.todoView editMode viewConfig)
     in
-        Keyed.node "div" [] (typeToTodoList |> Dict.map (todoListView todoView) |> Dict.toList)
+        Keyed.node "div" [] (typeToTodoList |> Dict.map (todoListContainerView todoView) |> Dict.toList)
 
 
-todoListView todoView listName todoList =
+todoListContainerView todoView listName todoList =
     div []
         [ div [ class "todo-list-title" ] [ text listName ]
         , material [ class "todo-list" ] [ Keyed.node "div" [] (todoList .|> todoView) ]

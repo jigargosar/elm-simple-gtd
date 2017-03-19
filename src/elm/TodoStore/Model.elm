@@ -6,7 +6,7 @@ import Todo as Todo exposing (Todo, TodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
-import Dict
+import Dict exposing (Dict)
 import Dict.Extra as Dict
 import Tuple2
 
@@ -34,8 +34,14 @@ mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
 
+groupByType : Model -> Dict String (List Todo)
 groupByType =
     getTodoList >> Todo.groupByType
+
+
+todoLists : Model -> List ( String, List Todo )
+todoLists =
+    groupByType >> Dict.toList
 
 
 getInBasketTodoList : Model -> TodoList

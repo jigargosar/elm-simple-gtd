@@ -32,23 +32,21 @@ type alias ViewConfig msg =
 allTodosView : ViewConfig msg -> EditMode -> TodoStore -> Html msg
 allTodosView viewConfig editMode todoStore =
     let
-        typeToTodoList : Dict String (List Todo)
-        typeToTodoList =
-            Model.groupByType todoStore
-
         todoView : Todo -> ( TodoId, Html msg )
         todoView =
             Todo.View.todoView editMode viewConfig
 
-        todoListContainers : List ( String, Html msg )
-        todoListContainers =
-            typeToTodoList |> Dict.map (todoListContainerView todoView) |> Dict.toList
+        todoListViewsWithKey : List ( String, Html msg )
+        todoListViewsWithKey =
+            Model.todoLists todoStore .|> todoListViewWithKey todoView
     in
-        Keyed.node "div" [] todoListContainers
+        Keyed.node "div" [] todoListViewsWithKey
 
 
-todoListContainerView todoView listName todoList =
-    div []
-        [ div [ class "todo-list-title" ] [ text listName ]
-        , material [ class "todo-list" ] [ Keyed.node "div" [] (todoList .|> todoView) ]
+todoListViewWithKey todoView ( listTitle, todoList ) =
+    ( listTitle
+    , div []
+        [ div [ class "todo-list-title" ] [ text listTitle ]
+        , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
         ]
+    )

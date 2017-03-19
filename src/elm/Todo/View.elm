@@ -28,7 +28,7 @@ todoView editMode viewConfig todo =
 
 
 onTap msg =
-    on "tap" (Json.Decode.succeed msg)
+    on "click" (Json.Decode.succeed msg)
 
 
 todoListItemView viewConfig todo =
@@ -39,7 +39,9 @@ todoListItemView viewConfig todo =
         editOnClick =
             onClick (viewConfig.onEditTodoClicked todo)
     in
-        div []
+        --        div []
+        node "paper-item"
+            []
             [ div [ editOnClick ] [ Todo.getText todo |> text ]
             , node "paper-button" [ attribute "raised" "true", deleteOnClick ] [ text "x" ]
             ]

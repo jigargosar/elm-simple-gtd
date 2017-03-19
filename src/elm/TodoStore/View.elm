@@ -35,7 +35,7 @@ allTodosView viewConfig editMode todoStore =
         typeToTodoList =
             Model.groupByType todoStore
 
-        todoView_ : Todo -> Html msg
+        todoView_ : Todo -> ( TodoId, Html msg )
         todoView_ =
             (Todo.View.todoView editMode viewConfig)
     in
@@ -48,5 +48,5 @@ todoGroupView todoView_ groupName todoList =
         --        []
         [ h1 []
             [ text groupName ]
-        , div [] (todoList .|> todoView_)
+        , Keyed.node "div" [] (todoList .|> todoView_)
         ]

@@ -24,7 +24,7 @@ todoView editMode viewConfig todo =
                 _ ->
                     todoListItemView viewConfig todo
     in
-        div [] [ inner, hr [] [] ]
+        ( Todo.getId todo, div [] [ inner, hr [] [] ] )
 
 
 onTap msg =

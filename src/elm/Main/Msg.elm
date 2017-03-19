@@ -1,5 +1,6 @@
 module Main.Msg exposing (..)
 
+import Dom
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
@@ -11,7 +12,7 @@ type Msg
     = LocationChanged Location
     | OnAddTodoClicked
     | OnDeleteTodoClicked TodoId
-    | OnEditTodoClicked Todo
+    | OnEditTodoClicked Dom.Id Todo
     | OnNewTodoTextChanged String
     | OnNewTodoBlur
     | OnNewTodoEnterPressed

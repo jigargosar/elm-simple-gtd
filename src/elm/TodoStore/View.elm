@@ -1,5 +1,6 @@
 module TodoStore.View exposing (..)
 
+import Dom
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -19,7 +20,7 @@ import Polymer.Paper exposing (material)
 type alias ViewConfig msg =
     { onAddTodoClicked : msg
     , onDeleteTodoClicked : TodoId -> msg
-    , onEditTodoClicked : Todo -> msg
+    , onEditTodoClicked : Dom.Id -> Todo -> msg
     , onEditTodoTextChanged : String -> msg
     , onEditTodoBlur : msg
     , onEditTodoKeyUp : Key -> msg

@@ -1,5 +1,6 @@
 port module Main exposing (..)
 
+import Dom
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Main.Model as Model exposing (Model)
@@ -88,8 +89,9 @@ update msg =
                             >> Tuple2.mapSecond persistMaybeTodoCmd
                         )
 
-            OnEditTodoClicked todo ->
+            OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
+--                >> Return.effect_ (Dom.focus )
 
             OnEditTodoTextChanged text ->
                 let

@@ -56,39 +56,39 @@ appView m =
         ]
 
 
+headerView m =
+    node "app-header"
+        [ attribute "reveals" "true"
+        , attribute "fixed" "true"
+        ]
+        [ node "app-toolbar"
+            []
+            [ node "paper-button"
+                [ attribute "raised" "true"
+                , onClick OnShowTodoList
+                ]
+                [ text "Show List" ]
+            , node "paper-button"
+                [ attribute "raised" "true"
+                , onClick OnProcessInBasket
+                ]
+                [ text "Process Stuff" ]
+            , addTodoView (getEditMode m) todoListViewConfig
+            ]
+        ]
+
+
 
 --headerView m =
 --    node "app-header"
 --        [ attribute "reveals" "true"
---        , attribute "fixed" "true"
+--          --        , attribute "fixed" "true"
 --        ]
 --        [ node "app-toolbar"
 --            []
---            [ node "paper-button"
---                [ attribute "raised" "true"
---                , onClick OnShowTodoList
---                ]
---                [ text "Show List" ]
---            , node "paper-button"
---                [ attribute "raised" "true"
---                , onClick OnProcessInBasket
---                ]
---                [ text "Process Stuff" ]
---            , addTodoView (getEditMode m) todoListViewConfig
+--            [ div [ attribute "main-title" "true" ] [ text "main title" ]
 --            ]
 --        ]
-
-
-headerView m =
-    node "app-header"
-        [ attribute "reveals" "true"
-          --        , attribute "fixed" "true"
-        ]
-        [ node "app-toolbar"
-            []
-            [ div [ attribute "main-title" "true" ] [ text "main title" ]
-            ]
-        ]
 
 
 addTodoView editMode viewConfig =

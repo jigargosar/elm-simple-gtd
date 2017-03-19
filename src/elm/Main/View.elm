@@ -19,7 +19,7 @@ import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InBasketFlow
 import InBasketFlow.View
-import Polymer.Paper exposing (material)
+import Polymer.Paper as Paper exposing (material)
 
 
 todoListViewConfig =
@@ -81,7 +81,7 @@ newTodoInputId =
 
 
 addNewTodoView viewConfig text =
-    node "paper-input"
+    Paper.input
         [ id newTodoInputId
         , onInput viewConfig.onNewTodoTextChanged
         , value text

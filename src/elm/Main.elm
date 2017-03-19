@@ -92,9 +92,9 @@ update msg =
 
             OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
-                    >> Return.command (Task.attempt OnFocusResult (Dom.focus focusInputId))
+                    >> Return.command (Task.attempt OnDomFocusResult (Dom.focus focusInputId))
 
-            OnFocusResult result ->
+            OnDomFocusResult result ->
                 let
                     _ =
                         Debug.log "result" (result)

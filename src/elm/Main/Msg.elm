@@ -13,7 +13,7 @@ type Msg
     | OnAddTodoClicked
     | OnDeleteTodoClicked TodoId
     | OnEditTodoClicked Dom.Id Todo
-    | OnFocusResult (Result Dom.Error ())
+    | OnDomFocusResult (Result Dom.Error ())
     | OnNewTodoTextChanged String
     | OnNewTodoBlur
     | OnNewTodoEnterPressed

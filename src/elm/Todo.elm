@@ -47,7 +47,21 @@ type ListType
     | Reference
 
 
-listTypeToNameIndexTuple listType =
+getAllListTypes =
+    [ InBasket
+    , Under2m
+    , SomeDayMayBe
+    , WaitingFor
+    , Project
+    , Calender
+    , NextAction
+    , Reference
+    ]
+
+getListTypeName =
+    getListType >> listTypeToName
+
+listTypeToName listType =
     case listType of
         InBasket ->
             "In Basket"

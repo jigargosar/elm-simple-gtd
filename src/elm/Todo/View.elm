@@ -4,7 +4,7 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Main.Msg
-import Polymer.Attributes exposing (boolProperty, icon)
+import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
 import Todo exposing (EditMode(EditTodoMode))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -100,8 +100,18 @@ deleteIconButton vc todo =
 optionsIconButton vc todo =
     menuButton [ onClickStopPropagation vc.noOp ]
         [ iconButton [ icon "more-vert", class "dropdown-trigger" ] []
-        , Paper.menu [ class "dropdown-content" ]
-            [ item [] [ text "Inbasket" ]
-            , item [] [ text "Under2m" ]
+        , Paper.menu
+            [ class "dropdown-content"
+            , attribute "attr-for-selected" "list-type"
+            , attribute "selected" (Todo.getListTypeName todo)
             ]
+            (Todo.getAllListTypes
+                .|> (\listType ->
+                        item
+                            [ attribute "list-type" (Todo.listTypeToName listType)
+                            , onClick (vc.onEditMoveToClicked listType)
+                            ]
+                            [ text (Todo.listTypeToName listType) ]
+                    )
+            )
         ]

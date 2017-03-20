@@ -15,7 +15,7 @@ import Json.Encode
 import List.Extra as List
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
-import Todo as Todo exposing (EditMode(..))
+import Todo as Todo exposing (EditMode(..), ListType)
 import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InBasketFlow
@@ -30,6 +30,7 @@ todoListViewConfig =
     , onEditTodoBlur = OnEditTodoBlur
     , onEditTodoKeyUp = OnEditTodoKeyUp
     , noOp = NoOp
+    , onEditMoveToClicked = OnEditMoveToClicked ListType
     }
 
 

@@ -27,7 +27,7 @@ inBasketFlow =
                 (Flow.action "Move to SomDay/Maybe List?" Msg.OnFlowTrashItClicked)
                 (Flow.action "Move to Reference?" Msg.OnFlowTrashItClicked)
             )
-            (Flow.action "Trash it ?" Msg.MarkDeleted)
+            (Flow.action "Trash it ?" Msg.OnFlowMarkDeleted)
         )
         |> Flow.init
 

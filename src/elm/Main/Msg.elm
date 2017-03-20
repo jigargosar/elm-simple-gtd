@@ -28,4 +28,4 @@ type Msg
     | OnInBasketFlowAction FlowAction
     | OnShowTodoList
     | OnProcessInBasket
-    | MarkDeleted
+    | OnFlowMarkDeleted

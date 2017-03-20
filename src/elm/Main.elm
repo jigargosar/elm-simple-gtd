@@ -147,7 +147,7 @@ update msg =
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
-            MarkDeleted ->
+            OnFlowMarkDeleted ->
                 Return.andThen
                     (Model.deleteTodoInBasketFlow
                         >> Tuple2.mapSecond persistMaybeTodoCmd

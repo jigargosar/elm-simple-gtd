@@ -10,15 +10,15 @@ import Todo exposing (Todo, TodoList)
 inBasketFlow =
     Flow.branch "Is it Actionable ?"
         (Flow.branch "Can be done under 2 mins?"
-            (Flow.action "Batch it in Under 2 minutes?" Msg.MoveToUnder2mList)
+            (Flow.action "Batch it in Under 2 minutes?" Msg.OnFlowMoveToUnder2mList)
             (Flow.branch "Involves Multiple Steps?"
-                (Flow.action "Move To Projects?" Msg.MoveToUnder2mList)
+                (Flow.action "Move To Projects?" Msg.OnFlowMoveToUnder2mList)
                 (Flow.branch "Am I the right Person to do this?"
                     (Flow.branch "Should it be done at specific time?"
-                        (Flow.action "Move To Calender?" Msg.MoveToUnder2mList)
-                        (Flow.action "Move To Next Actions?" Msg.MoveToUnder2mList)
+                        (Flow.action "Move To Calender?" Msg.OnFlowMoveToUnder2mList)
+                        (Flow.action "Move To Next Actions?" Msg.OnFlowMoveToUnder2mList)
                     )
-                    (Flow.action "Move To Waiting For?" Msg.MoveToUnder2mList)
+                    (Flow.action "Move To Waiting For?" Msg.OnFlowMoveToUnder2mList)
                 )
             )
         )

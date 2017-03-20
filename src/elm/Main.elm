@@ -141,7 +141,7 @@ update msg =
             OnProcessInBasket ->
                 Return.map (Model.startProcessingInBasket)
 
-            MoveToUnder2mList ->
+            OnFlowMoveToUnder2mList ->
                 Return.andThen
                     (Model.moveInBasketProcessingTodoToUnder2mList
                         >> Tuple2.mapSecond persistMaybeTodoCmd

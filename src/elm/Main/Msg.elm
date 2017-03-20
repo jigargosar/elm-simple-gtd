@@ -21,7 +21,7 @@ type Msg
     | OnEditTodoBlur
     | OnEditTodoKeyUp Key
     | OnFlowTrashItClicked
-    | MoveToUnder2mList
+    | OnFlowMoveToUnder2mList
     | OnYesClicked
     | OnNoClicked
     | OnBackClicked

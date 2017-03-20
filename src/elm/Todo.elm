@@ -50,16 +50,18 @@ type ListType
 getAllListTypes =
     [ InBasket
     , Under2m
-    , SomeDayMayBe
+    , NextAction
+    , Calender
     , WaitingFor
     , Project
-    , Calender
-    , NextAction
+    , SomeDayMayBe
     , Reference
     ]
 
+
 getListTypeName =
     getListType >> listTypeToName
+
 
 listTypeToName listType =
     case listType of

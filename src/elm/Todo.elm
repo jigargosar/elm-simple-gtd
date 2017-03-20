@@ -47,6 +47,18 @@ type ListType
     | Reference
 
 
+listTypeNameTuple =
+    [ InBasket => "In Basket"
+    , Under2m => "Under2m"
+    , SomeDayMayBe => "SomeDayMayBe"
+    , WaitingFor => "WaitingFor"
+    , Project => "Project"
+    , Calender => "Calender"
+    , NextAction => "NextAction"
+    , Reference => "Reference"
+    ]
+
+
 inBasket =
     InBasket
 
@@ -122,16 +134,21 @@ decoder =
         |> D.optional "listType" (D.map stringToListType D.string) InBasket
 
 
+listTypeEncodings =
+    [ InBasket
+    , Under2m
+    , SomeDayMayBe
+    , WaitingFor
+    , Project
+    , Calender
+    , NextAction
+    , Reference
+    ]
+        |> Dict.fromListBy toString
+
+
 stringToListType string =
-    case string of
-        "InBasket" ->
-            InBasket
-
-        "Under2m" ->
-            Under2m
-
-        _ ->
-            InBasket
+    listTypeEncodings |> Dict.get string ?= InBasket
 
 
 initWithTextAndId text id =

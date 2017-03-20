@@ -5,6 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Keyboard.Extra exposing (Key)
+import Polymer.Attributes exposing (stringProperty)
 import TodoStore exposing (TodoStore)
 import TodoStore.Model as Model
 import Todo as Todo exposing (EditMode, Todo, TodoId)
@@ -14,7 +15,7 @@ import Dict exposing (Dict)
 import Dict.Extra as Dict
 import Todo.View
 import Html.Keyed as Keyed
-import Polymer.Paper exposing (material)
+import Polymer.Paper exposing (badge, material)
 
 
 type alias ViewConfig msg =
@@ -43,7 +44,8 @@ allTodosView viewConfig editMode todoStore =
 todoListViewWithKey todoView ( listTitle, todoList ) =
     ( listTitle
     , div []
-        [ div [ class "todo-list-title" ] [ text listTitle ]
+        [ div [ id listTitle, class "todo-list-title" ] [ text listTitle ]
+        , badge [ stringProperty "for" listTitle, stringProperty "label" "10" ] []
         , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
         ]
     )

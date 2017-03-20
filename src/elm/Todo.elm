@@ -49,9 +49,9 @@ type ListType
 
 getAllListTypes =
     [ Calender
-    , InBasket
     , Under2m
     , NextAction
+    , InBasket
     , WaitingFor
     , Project
     , SomeDayMayBe

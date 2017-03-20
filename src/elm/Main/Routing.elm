@@ -18,7 +18,7 @@ delta2builder previous current =
 getPathFromModel model =
     case Model.getViewState model of
         Model.TodoListViewState ->
-            "list"
+            "lists"
 
         Model.InBasketFlowViewState _ _ ->
             "process-inbasket"
@@ -32,7 +32,7 @@ delta2hash =
 builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
-        "list" :: [] ->
+        "lists" :: [] ->
             [ Msg.OnShowTodoList ]
 
         "process-inbasket" :: [] ->

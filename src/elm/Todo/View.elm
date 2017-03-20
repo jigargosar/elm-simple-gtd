@@ -82,7 +82,7 @@ todoItemView vc ( editing, todo ) =
                 [ onEditTodoClicked ]
 
         itemAttributes =
-            [] ++ itemOptionalAttributes
+            [ class "todo-item" ] ++ itemOptionalAttributes
     in
         item itemAttributes
             [ checkbox [ checked False ] []

@@ -9,7 +9,7 @@ import Keyboard.Extra exposing (Key)
 import Polymer.Attributes exposing (stringProperty)
 import TodoStore exposing (TodoStore)
 import TodoStore.Model as Model
-import Todo as Todo exposing (EditMode, Todo, TodoId)
+import Todo as Todo exposing (EditMode, ListType, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Dict exposing (Dict)
@@ -25,7 +25,8 @@ type alias ViewConfig msg =
     , onEditTodoTextChanged : String -> msg
     , onEditTodoBlur : msg
     , onEditTodoKeyUp : Key -> msg
-    , noOp: msg
+    , noOp : msg
+    , onEditMoveToClicked : ListType -> msg
     }
 
 

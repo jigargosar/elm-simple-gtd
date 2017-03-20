@@ -168,6 +168,12 @@ update msg =
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
+            OnEditMoveToClicked listType ->
+                Return.andThen
+                    (Model.moveEditingTodoToListType listType
+                        >> Tuple2.mapSecond persistMaybeTodoCmd
+                    )
+
 
 
 --            _ ->

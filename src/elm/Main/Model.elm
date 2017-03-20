@@ -237,6 +237,17 @@ saveEditingTodoAndDeactivateEditTodoMode =
         >> Tuple2.mapFirst deactivateEditingMode
 
 
+moveEditingTodoToListType listType m =
+    (case getEditMode m of
+        EditTodoMode todo ->
+            setEditModeTo (EditTodoMode (Todo.setListType listType todo)) m
+
+        _ ->
+            m
+    )
+        |> saveEditingTodoAndDeactivateEditTodoMode
+
+
 deactivateEditingMode =
     setEditModeTo NotEditing
 

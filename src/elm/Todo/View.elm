@@ -68,8 +68,8 @@ todoItemView vc ( editing, todo ) =
     let
         hoverIcons =
             div [ class "hover hover-icons" ]
-                [ deleteIconButton vc todo
-                , optionsIconButton vc todo
+                [ --                deleteIconButton vc todo
+                  optionsIconButton vc todo
                 ]
 
         onEditTodoClicked =
@@ -99,7 +99,8 @@ optionsIconButton vc todo =
     menuButton []
         [ iconButton [ icon "more-vert", class "dropdown-trigger" ] []
         , Paper.menu [ class "dropdown-content" ]
-            [ item [] [ text "Inbasket" ]
+            [ item [ onClick (vc.onDeleteTodoClicked (Todo.getId todo)) ] [ text "Trash" ]
+            , item [] [ text "Inbasket" ]
             , item [] [ text "Under2m" ]
             ]
         ]

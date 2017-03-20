@@ -48,10 +48,10 @@ type ListType
 
 
 getAllListTypes =
-    [ InBasket
+    [ Calender
+    , InBasket
     , Under2m
     , NextAction
-    , Calender
     , WaitingFor
     , Project
     , SomeDayMayBe

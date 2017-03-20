@@ -98,7 +98,10 @@ deleteIconButton vc todo =
 
 
 optionsIconButton vc todo =
-    menuButton [ onClickStopPropagation vc.noOp ]
+    menuButton
+        [ onClickStopPropagation vc.noOp
+        , attribute "horizontal-align" "right"
+        ]
         [ iconButton [ icon "more-vert", class "dropdown-trigger" ] []
         , Paper.menu
             [ class "dropdown-content"

@@ -8,7 +8,7 @@ import Navigation exposing (Location)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todo as Todo exposing (EditMode(..), EncodedTodoList, Todo, TodoId)
+import Todo as Todo exposing (EditMode(..), EncodedTodoList, ListType, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -107,6 +107,24 @@ moveInBasketProcessingTodoToUnder2mList m =
         |> case getViewState m of
             InBasketFlowViewState maybeTodo inBasketFlowModel ->
                 moveTodoToUnder2mList maybeTodo
+                    >> Tuple.mapFirst startProcessingInBasket
+
+            _ ->
+                (,) # Nothing
+
+
+moveTodoToListType : ListType -> Maybe Todo -> Model -> ( Model, Maybe Todo )
+moveTodoToListType listType maybeTodo model =
+    maybeTodo
+        ?|> (Todo.setListType listType >> (replaceTodoIfIdMatches # model))
+        ?= ( model, Nothing )
+
+
+moveInBasketProcessingTodoToListType listType m =
+    m
+        |> case getViewState m of
+            InBasketFlowViewState maybeTodo inBasketFlowModel ->
+                moveTodoToListType listType maybeTodo
                     >> Tuple.mapFirst startProcessingInBasket
 
             _ ->

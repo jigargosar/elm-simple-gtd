@@ -50,28 +50,28 @@ type ListType
 listTypeToNameIndexTuple listType =
     case listType of
         InBasket ->
-            ( "In Basket", 0 )
+            "In Basket"
 
         Under2m ->
-            ( "Under2m", 1 )
+            "Under2m"
 
         SomeDayMayBe ->
-            ( "SomeDayMayBe", 2 )
+            "SomeDayMayBe"
 
         WaitingFor ->
-            ( "WaitingFor", 3 )
+            "WaitingFor"
 
         Project ->
-            ( "Project", 4 )
+            "Project"
 
         Calender ->
-            ( "Calender", 5 )
+            "Calender"
 
         NextAction ->
-            ( "NextAction", 6 )
+            "NextAction"
 
         Reference ->
-            ( "Reference", 7 )
+            "Reference"
 
 
 inBasket =

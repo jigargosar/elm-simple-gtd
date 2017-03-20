@@ -9,7 +9,8 @@ import Todo exposing (ListType, Todo, TodoId)
 
 
 type Msg
-    = LocationChanged Location
+    = NoOp
+    | LocationChanged Location
     | OnAddTodoClicked Dom.Id
     | OnDeleteTodoClicked TodoId
     | OnEditTodoClicked Dom.Id Todo

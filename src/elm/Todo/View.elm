@@ -1,7 +1,9 @@
 module Todo.View exposing (..)
 
+import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Keyboard.Extra exposing (Key(Enter, Escape))
+import Main.Msg
 import Polymer.Attributes exposing (boolProperty, icon)
 import Todo exposing (EditMode(EditTodoMode))
 import Toolkit.Helpers exposing (..)
@@ -68,8 +70,8 @@ todoItemView vc ( editing, todo ) =
     let
         hoverIcons =
             div [ class "hover hover-icons" ]
-                [ --                deleteIconButton vc todo
-                  optionsIconButton vc todo
+                [ deleteIconButton vc todo
+                , optionsIconButton vc todo
                 ]
 
         onEditTodoClicked =
@@ -96,11 +98,10 @@ deleteIconButton vc todo =
 
 
 optionsIconButton vc todo =
-    menuButton []
+    menuButton [ onClickStopPropagation Main.Msg.NoOp ]
         [ iconButton [ icon "more-vert", class "dropdown-trigger" ] []
         , Paper.menu [ class "dropdown-content" ]
-            [ item [ onClick (vc.onDeleteTodoClicked (Todo.getId todo)) ] [ text "Trash" ]
-            , item [] [ text "Inbasket" ]
+            [ item [] [ text "Inbasket" ]
             , item [] [ text "Under2m" ]
             ]
         ]

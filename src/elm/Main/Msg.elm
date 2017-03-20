@@ -5,7 +5,7 @@ import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
 import Navigation exposing (Location)
-import Todo exposing (Todo, TodoId)
+import Todo exposing (ListType, Todo, TodoId)
 
 
 type Msg
@@ -22,6 +22,7 @@ type Msg
     | OnEditTodoKeyUp Key
     | OnFlowTrashItClicked
     | OnFlowMoveToSomeDayMaybe
+    | OnFlowMoveTo ListType
     | OnFlowMoveToUnder2mList
     | OnYesClicked
     | OnNoClicked

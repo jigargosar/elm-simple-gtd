@@ -139,6 +139,19 @@ getEditMode =
     (.editMode)
 
 
+getSelectedTabIndex : Model -> Int
+getSelectedTabIndex =
+    getViewState
+        >> (\vs ->
+                case vs of
+                    TodoListViewState ->
+                        0
+
+                    InBasketFlowViewState ->
+                        1
+           )
+
+
 activateAddNewTodoMode : String -> ModelMapper
 activateAddNewTodoMode text =
     setEditModeTo (EditNewTodoMode text)

@@ -39,15 +39,24 @@ defaultDeleted =
 type ListType
     = InBasket
     | Under2m
+    | SomeDayMayBe
+    | WaitingFor
+    | Project
+    | Calender
 
-inBasket = InBasket
-under2m = Under2m
+
+inBasket =
+    InBasket
+
+
+under2m =
+    Under2m
+
 
 type EditMode
     = EditNewTodoMode String
     | EditTodoMode Todo
     | NotEditing
-
 
 
 type alias Todo =

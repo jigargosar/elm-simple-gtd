@@ -2,6 +2,7 @@ module InBasketFlow.View exposing (..)
 
 import Flow
 import InBasketFlow
+import Polymer.Attributes exposing (boolProperty)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
@@ -74,6 +75,10 @@ actionBar : ViewModel -> Html Msg
 actionBar vm =
     let
         buttonView ( buttonText, onClickMsg ) =
-            button [ onClick onClickMsg ] [ text buttonText ]
+            Polymer.Paper.button
+                [ boolProperty "raised" True
+                , onClick onClickMsg
+                ]
+                [ text buttonText ]
     in
         div [] (vm.flowActions .|> buttonView)

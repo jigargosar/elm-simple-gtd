@@ -47,16 +47,31 @@ type ListType
     | Reference
 
 
-listTypeNameTuple =
-    [ InBasket => "In Basket"
-    , Under2m => "Under2m"
-    , SomeDayMayBe => "SomeDayMayBe"
-    , WaitingFor => "WaitingFor"
-    , Project => "Project"
-    , Calender => "Calender"
-    , NextAction => "NextAction"
-    , Reference => "Reference"
-    ]
+listTypeToName listType =
+    case listType of
+        InBasket ->
+            "In Basket"
+
+        Under2m ->
+            "Under2m"
+
+        SomeDayMayBe ->
+            "SomeDayMayBe"
+
+        WaitingFor ->
+            "WaitingFor"
+
+        Project ->
+            "Project"
+
+        Calender ->
+            "Calender"
+
+        NextAction ->
+            "NextAction"
+
+        Reference ->
+            "Reference"
 
 
 inBasket =

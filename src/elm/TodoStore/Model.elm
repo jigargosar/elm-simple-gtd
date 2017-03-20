@@ -34,14 +34,9 @@ mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
 
-groupByType : Model -> Dict String (List Todo)
-groupByType =
-    getTodoList >> Todo.groupByType
-
-
 todoLists : Model -> List ( String, List Todo )
 todoLists =
-    groupByType >> Dict.toList
+    getTodoList >> Todo.groupByType >> Dict.toList
 
 
 getInBasketTodoList : Model -> TodoList

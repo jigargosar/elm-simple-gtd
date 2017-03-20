@@ -329,4 +329,15 @@ setContextUnder2m =
 
 
 todoListsByType =
-    List.filter isNotDeleted >> Dict.groupBy (getListType >> toString) >> Dict.toList
+    List.filter isNotDeleted
+        >> Dict.groupBy (getListType >> toString)
+        >> (\dict ->
+                getAllListTypes
+                    .|> (\listType ->
+                            let
+                                _ =
+                                    1
+                            in
+                                ( listTypeToName listType, Dict.get (toString listType) dict ?= [] )
+                        )
+           )

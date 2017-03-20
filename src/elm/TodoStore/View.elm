@@ -3,6 +3,7 @@ module TodoStore.View exposing (..)
 import Dom
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Attributes.Extra exposing (intProperty)
 import Html.Events exposing (..)
 import Keyboard.Extra exposing (Key)
 import Polymer.Attributes exposing (stringProperty)
@@ -43,11 +44,11 @@ allTodosView viewConfig editMode todoStore =
 
 todoListViewWithKey todoView ( listTitle, todoList ) =
     ( listTitle
-    , div [class "todo-list-container"]
+    , div [ class "todo-list-container" ]
         [ div [ class "todo-list-title" ]
             [ div [ class "paper-badge-container" ]
                 [ span [] [ text listTitle ]
-                , badge [ stringProperty "label" "10" ] []
+                , badge [ intProperty "label" (List.length todoList) ] []
                 ]
             ]
         , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)

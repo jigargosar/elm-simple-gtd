@@ -43,9 +43,13 @@ allTodosView viewConfig editMode todoStore =
 
 todoListViewWithKey todoView ( listTitle, todoList ) =
     ( listTitle
-    , div []
-        [ div [ id listTitle, class "todo-list-title" ] [ text listTitle ]
-        , badge [ stringProperty "for" listTitle, stringProperty "label" "10" ] []
+    , div [class "todo-list-container"]
+        [ div [ class "todo-list-title" ]
+            [ div [ class "paper-badge-container" ]
+                [ span [] [ text listTitle ]
+                , badge [ stringProperty "label" "10" ] []
+                ]
+            ]
         , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
         ]
     )

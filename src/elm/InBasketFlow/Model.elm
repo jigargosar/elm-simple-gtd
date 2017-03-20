@@ -16,20 +16,20 @@ inBasketFlow =
         (Flow.branch "Can be done under 2 mins?"
             (Flow.action "Batch it in Under 2 minutes?" (moveTo Todo.under2m))
             (Flow.branch "Involves Multiple Steps?"
-                (Flow.action "Move To Projects?" Msg.OnFlowMoveToUnder2mList)
+                (Flow.action "Move To Projects?" (moveTo Todo.project))
                 (Flow.branch "Am I the right Person to do this?"
                     (Flow.branch "Should it be done at specific time?"
-                        (Flow.action "Move To Calender?" Msg.OnFlowMoveToUnder2mList)
-                        (Flow.action "Move To Next Actions?" Msg.OnFlowMoveToUnder2mList)
+                        (Flow.action "Move To Calender?" (moveTo Todo.calender))
+                        (Flow.action "Move To Next Actions?" (moveTo Todo.nextAction))
                     )
-                    (Flow.action "Move To Waiting For?" Msg.OnFlowMoveToUnder2mList)
+                    (Flow.action "Move To Waiting For?" (moveTo Todo.waitingFor))
                 )
             )
         )
         (Flow.branch "Is it worth keeping?"
             (Flow.branch "Could Require actionNode Later ?"
-                (Flow.action "Move to SomDay/Maybe List?" Msg.OnFlowMoveToSomeDayMaybe)
-                (Flow.action "Move to Reference?" Msg.OnFlowTrashItClicked)
+                (Flow.action "Move to SomDay/Maybe List?" (moveTo Todo.someDayMayBe))
+                (Flow.action "Move to Reference?" (moveTo Todo.reference))
             )
             (Flow.action "Trash it ?" Msg.OnFlowMarkDeleted)
         )

@@ -43,6 +43,8 @@ type ListType
     | WaitingFor
     | Project
     | Calender
+    | NextAction
+    | Reference
 
 
 inBasket =
@@ -51,6 +53,20 @@ inBasket =
 
 under2m =
     Under2m
+
+
+
+someDayMayBe = SomeDayMayBe
+waitingFor = WaitingFor
+project = Project
+calender = Calender
+nextAction =NextAction
+reference=Reference
+
+
+
+
+
 
 
 type EditMode

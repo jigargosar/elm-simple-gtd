@@ -1,5 +1,6 @@
 module Main.View exposing (appView)
 
+import Html.Attributes.Extra exposing (intProperty)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -55,7 +56,7 @@ headerView m =
             []
             [ node "paper-icon-button" [ attribute "icon" "menu" ] []
             , node "paper-tabs"
-                []
+                [ intProperty "selected" 0 ]
                 [ node "paper-tab" [ onClick OnShowTodoList ] [ text "Lists" ]
                 , node "paper-tab" [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
                 ]

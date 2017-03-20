@@ -25,6 +25,7 @@ type alias ViewConfig msg =
     , onEditTodoTextChanged : String -> msg
     , onEditTodoBlur : msg
     , onEditTodoKeyUp : Key -> msg
+    , noOp: msg
     }
 
 

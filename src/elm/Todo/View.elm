@@ -98,7 +98,7 @@ deleteIconButton vc todo =
 
 
 optionsIconButton vc todo =
-    menuButton [ onClickStopPropagation Main.Msg.NoOp ]
+    menuButton [ onClickStopPropagation vc.noOp ]
         [ iconButton [ icon "more-vert", class "dropdown-trigger" ] []
         , Paper.menu [ class "dropdown-content" ]
             [ item [] [ text "Inbasket" ]

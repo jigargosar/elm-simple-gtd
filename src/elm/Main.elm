@@ -58,6 +58,9 @@ update : Msg -> Model -> ReturnTA
 update msg =
     Return.singleton
         >> case msg of
+            NoOp ->
+                identity
+
             LocationChanged loc ->
                 identity
 

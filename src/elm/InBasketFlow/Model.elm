@@ -7,10 +7,14 @@ import Main.Msg as Msg exposing (Msg)
 import Todo exposing (Todo, TodoList)
 
 
+moveTo =
+    Msg.OnFlowMoveTo
+
+
 inBasketFlow =
     Flow.branch "Is it Actionable ?"
         (Flow.branch "Can be done under 2 mins?"
-            (Flow.action "Batch it in Under 2 minutes?" Msg.OnFlowMoveToUnder2mList)
+            (Flow.action "Batch it in Under 2 minutes?" (moveTo Todo.under2m))
             (Flow.branch "Involves Multiple Steps?"
                 (Flow.action "Move To Projects?" Msg.OnFlowMoveToUnder2mList)
                 (Flow.branch "Am I the right Person to do this?"

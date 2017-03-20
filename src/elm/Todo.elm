@@ -40,6 +40,9 @@ type ListType
     = InBasket
     | Under2m
 
+inBasket = InBasket
+under2m = Under2m
+
 type EditMode
     = EditNewTodoMode String
     | EditTodoMode Todo

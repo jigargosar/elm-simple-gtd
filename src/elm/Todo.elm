@@ -328,5 +328,5 @@ setContextUnder2m =
     setListType Under2m
 
 
-groupByType =
-    List.filter isNotDeleted >> Dict.groupBy (getListType >> toString)
+todoLists =
+    List.filter isNotDeleted >> Dict.groupBy (getListType >> toString) >> Dict.toList

@@ -109,7 +109,7 @@ optionsIconButton vc todo =
                 .|> (\listType ->
                         item
                             [ attribute "list-type" (Todo.listTypeToName listType)
-                            , onClick (vc.onEditMoveToClicked listType)
+                            , onClick (vc.onTodoMoveToClicked listType todo)
                             ]
                             [ text (Todo.listTypeToName listType) ]
                     )

@@ -26,7 +26,7 @@ type alias ViewConfig msg =
     , onEditTodoBlur : msg
     , onEditTodoKeyUp : Key -> msg
     , noOp : msg
-    , onEditMoveToClicked : ListType -> msg
+    , onTodoMoveToClicked : ListType -> Todo -> msg
     }
 
 

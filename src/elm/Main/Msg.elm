@@ -21,7 +21,7 @@ type Msg
     | OnEditTodoTextChanged String
     | OnEditTodoBlur
     | OnEditTodoKeyUp Key
-    | OnEditMoveToClicked ListType
+    | OnTodoMoveToClicked ListType Todo
     | OnFlowTrashItClicked
     | OnFlowMoveToSomeDayMaybe
     | OnFlowMoveTo ListType

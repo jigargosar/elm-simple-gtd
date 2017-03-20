@@ -30,7 +30,7 @@ todoListViewConfig =
     , onEditTodoBlur = OnEditTodoBlur
     , onEditTodoKeyUp = OnEditTodoKeyUp
     , noOp = NoOp
-    , onEditMoveToClicked = OnEditMoveToClicked
+    , onTodoMoveToClicked = OnTodoMoveToClicked
     }
 
 

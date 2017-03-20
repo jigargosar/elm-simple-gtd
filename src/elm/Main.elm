@@ -168,9 +168,9 @@ update msg =
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
-            OnEditMoveToClicked listType ->
+            OnTodoMoveToClicked listType todo->
                 Return.andThen
-                    (Model.moveEditingTodoToListType listType
+                    (Model.todoToListType listType todo
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 

@@ -69,6 +69,7 @@ todoItemView vc ( editing, todo ) =
         hoverIcons =
             div [ class "hover" ]
                 [ deleteIconButton vc todo
+                , optionsIconButton vc todo
                 ]
 
         onEditTodoClicked =
@@ -92,3 +93,7 @@ todoItemView vc ( editing, todo ) =
 
 deleteIconButton vc todo =
     iconButton [ onClick (vc.onDeleteTodoClicked (Todo.getId todo)), icon "delete" ] []
+
+
+optionsIconButton vc todo =
+    iconButton [ icon "more-vert" ] []

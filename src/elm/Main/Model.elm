@@ -147,7 +147,7 @@ getSelectedTabIndex =
                     TodoListViewState ->
                         0
 
-                    InBasketFlowViewState ->
+                    InBasketFlowViewState _ _ ->
                         1
            )
 

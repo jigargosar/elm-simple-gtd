@@ -56,7 +56,7 @@ headerView m =
             []
             [ node "paper-icon-button" [ attribute "icon" "menu" ] []
             , node "paper-tabs"
-                [ intProperty "selected" getSelectedTabIndex m ]
+                [ intProperty "selected" (getSelectedTabIndex m) ]
                 [ node "paper-tab" [ onClick OnShowTodoList ] [ text "Lists" ]
                 , node "paper-tab" [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
                 ]

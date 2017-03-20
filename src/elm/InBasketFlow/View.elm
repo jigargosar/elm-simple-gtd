@@ -12,6 +12,7 @@ import Main.Msg as Msg exposing (Msg)
 import FunctionExtra exposing (..)
 import Todo exposing (Todo)
 import Function exposing ((>>>))
+import Polymer.Paper exposing (material)
 
 
 type alias TodoViewModel =
@@ -43,7 +44,7 @@ view =
 
 flowView : ViewModel -> Html Msg
 flowView vm =
-    div [ id "in-basket-flow-container" ]
+    material [ id "in-basket-flow-container" ]
         [ vm.maybeTodo ?|> processTodoView # vm ?= processingCompleteView
         ]
 

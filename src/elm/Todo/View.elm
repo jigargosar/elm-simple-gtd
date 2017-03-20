@@ -11,7 +11,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import KeyboardExtra exposing (onEscape, onKeyUp)
-import Polymer.Paper as Paper exposing (checkbox, iconButton, item, itemBody)
+import Polymer.Paper as Paper exposing (checkbox, iconButton, item, itemBody, menuButton)
 
 
 todoView editMode viewConfig todo =
@@ -67,7 +67,7 @@ todoItemBody editing vc todo =
 todoItemView vc ( editing, todo ) =
     let
         hoverIcons =
-            div [ class "hover" ]
+            div [ class "hover hover-icons" ]
                 [ deleteIconButton vc todo
                 , optionsIconButton vc todo
                 ]
@@ -96,4 +96,10 @@ deleteIconButton vc todo =
 
 
 optionsIconButton vc todo =
-    iconButton [ icon "more-vert" ] []
+    menuButton []
+        [ iconButton [ icon "more-vert", class "dropdown-trigger" ] []
+        , Paper.menu [ class "dropdown-content" ]
+            [ item [] [ text "Inbasket" ]
+            , item [] [ text "Under2m" ]
+            ]
+        ]

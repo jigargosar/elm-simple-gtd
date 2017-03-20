@@ -147,6 +147,12 @@ update msg =
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
+            OnFlowMoveToSomeDayMaybe ->
+                Return.andThen
+                    (Model.moveInBasketProcessingTodoToUnder2mList
+                        >> Tuple2.mapSecond persistMaybeTodoCmd
+                    )
+
             OnFlowMarkDeleted ->
                 Return.andThen
                     (Model.deleteTodoInBasketFlow

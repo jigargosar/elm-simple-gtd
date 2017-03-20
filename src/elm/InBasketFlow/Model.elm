@@ -24,7 +24,7 @@ inBasketFlow =
         )
         (Flow.branch "Is it worth keeping?"
             (Flow.branch "Could Require actionNode Later ?"
-                (Flow.action "Move to SomDay/Maybe List?" Msg.OnFlowTrashItClicked)
+                (Flow.action "Move to SomDay/Maybe List?" Msg.OnFlowMoveToSomeDayMaybe)
                 (Flow.action "Move to Reference?" Msg.OnFlowTrashItClicked)
             )
             (Flow.action "Trash it ?" Msg.OnFlowMarkDeleted)

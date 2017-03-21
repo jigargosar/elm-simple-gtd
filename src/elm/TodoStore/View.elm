@@ -18,6 +18,7 @@ import Dict.Extra as Dict
 import Todo.View
 import Html.Keyed as Keyed
 import Polymer.Paper exposing (..)
+import FunctionExtra exposing (..)
 
 
 type alias ViewConfig msg =
@@ -86,4 +87,13 @@ listTypeMenuItems =
 
 
 listTypeMenuItem ( name, todoList ) =
-    item [] [ text name ]
+    item []
+        [ div [ class "paper-badge-container" ]
+            [ span [] [ text name ]
+            , badge
+                [ classList [ "hidden" => (List.length todoList == 0) ]
+                , intProperty "label" (List.length todoList)
+                ]
+                []
+            ]
+        ]

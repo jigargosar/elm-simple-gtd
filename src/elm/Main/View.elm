@@ -59,6 +59,26 @@ headerLayoutView m =
         ]
 
 
+headerView m =
+    header
+        [ attribute "reveals" "true"
+        , attribute "fixed" "true"
+        , attribute "condenses" "true"
+        , attribute "effects" "waterfall"
+        ]
+        [ toolbar
+            []
+            [ iconButton [ icon "menu" ] []
+            , tabs
+                [ intProperty "selected" (getSelectedTabIndex m) ]
+                [ tab [ onClick OnShowTodoList ] [ text "Lists" ]
+                , tab [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
+                ]
+            , addTodoView (getEditMode m) todoListViewConfig
+            ]
+        ]
+
+
 mainView m =
     div [ id "center-view" ] [ centerView m ]
 
@@ -97,26 +117,6 @@ appDrawerView m =
             [ item [] [ text "Item One" ]
             , item [] [ text "Item 2" ]
             , item [] [ text "Item 3" ]
-            ]
-        ]
-
-
-headerView m =
-    header
-        [ attribute "reveals" "true"
-        , attribute "fixed" "true"
-        , attribute "condenses" "true"
-        , attribute "effects" "waterfall"
-        ]
-        [ toolbar
-            []
-            [ iconButton [ icon "menu" ] []
-            , tabs
-                [ intProperty "selected" (getSelectedTabIndex m) ]
-                [ tab [ onClick OnShowTodoList ] [ text "Lists" ]
-                , tab [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
-                ]
-            , addTodoView (getEditMode m) todoListViewConfig
             ]
         ]
 

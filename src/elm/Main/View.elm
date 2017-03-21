@@ -67,7 +67,7 @@ drawerLayoutView m =
                     , item []
                         [ itemBody [] [ text "Inbox" ]
                         , iconButton
-                            [ icon "vaadin-icons:vaadin-v"
+                            [ icon "vaadin-icons:start-cog"
                             , onClick OnProcessInbox
                             ]
                             []

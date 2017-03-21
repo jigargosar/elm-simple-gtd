@@ -18,13 +18,13 @@ type alias TodoStore =
     Model.Model
 
 
-getInBasket__ : TodoStore -> TodoList
-getInBasket__ =
-    Model.getInBasketTodoList
+getInbox__ : TodoStore -> TodoList
+getInbox__ =
+    Model.getInboxTodoList
 
 
-getFirstInBasketTodo =
-    Model.getFirstInBasketTodo
+getFirstInboxTodo =
+    Model.getFirstInboxTodo
 
 
 

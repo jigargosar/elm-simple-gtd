@@ -135,36 +135,36 @@ update msg =
             OnBackClicked ->
                 identity
 
-            OnInBasketFlowAction actionType ->
-                Return.map (Model.updateInBasketFlowWithActionType actionType)
+            OnInboxFlowAction actionType ->
+                Return.map (Model.updateInboxFlowWithActionType actionType)
 
             OnShowTodoList ->
                 Return.map (Model.showTodoList)
 
-            OnProcessInBasket ->
-                Return.map (Model.startProcessingInBasket)
+            OnProcessInbox ->
+                Return.map (Model.startProcessingInbox)
 
             OnFlowMoveToUnder2mList ->
                 Return.andThen
-                    (Model.moveInBasketProcessingTodoToUnder2mList
+                    (Model.moveInboxProcessingTodoToUnder2mList
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
             OnFlowMoveToSomeDayMaybe ->
                 Return.andThen
-                    (Model.moveInBasketProcessingTodoToUnder2mList
+                    (Model.moveInboxProcessingTodoToUnder2mList
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
             OnFlowMoveTo listType ->
                 Return.andThen
-                    (Model.moveInBasketProcessingTodoToListType listType
+                    (Model.moveInboxProcessingTodoToListType listType
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
             OnFlowMarkDeleted ->
                 Return.andThen
-                    (Model.deleteTodoInBasketFlow
+                    (Model.deleteTodoInboxFlow
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 

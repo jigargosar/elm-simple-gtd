@@ -12,13 +12,13 @@ import Todo as Todo exposing (EditMode(..), EncodedTodoList, ListType, Todo, Tod
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-import InBasketFlow
+import InboxFlow
 import TodoStore exposing (TodoStore)
 
 
 type ViewState
     = TodoListViewState
-    | InBasketFlowViewState (Maybe Todo) InBasketFlow.Model
+    | InboxFlowViewState (Maybe Todo) InboxFlow.Model
 
 
 type alias Model =
@@ -60,28 +60,28 @@ getViewState =
     (.viewState)
 
 
-getFirstInBasketTodo =
-    getTodoCollection >> TodoStore.getFirstInBasketTodo
+getFirstInboxTodo =
+    getTodoCollection >> TodoStore.getFirstInboxTodo
 
 
 showTodoList =
     setViewState TodoListViewState
 
 
-startProcessingInBasket model =
+startProcessingInbox model =
     getTodoCollection model
-        |> TodoStore.getInBasket__
-        |> InBasketFlow.init
-        |> InBasketFlowViewState (getFirstInBasketTodo model)
+        |> TodoStore.getInbox__
+        |> InboxFlow.init
+        |> InboxFlowViewState (getFirstInboxTodo model)
         |> (setViewState # model)
 
 
-updateInBasketFlowWithActionType actionType m =
+updateInboxFlowWithActionType actionType m =
     m
         |> case getViewState m of
-            InBasketFlowViewState maybeTodo inBasketFlowModel ->
-                InBasketFlow.updateWithActionType actionType inBasketFlowModel
-                    |> InBasketFlowViewState maybeTodo
+            InboxFlowViewState maybeTodo inboxFlowModel ->
+                InboxFlow.updateWithActionType actionType inboxFlowModel
+                    |> InboxFlowViewState maybeTodo
                     |> setViewState
 
             _ ->
@@ -102,12 +102,12 @@ deleteMaybeTodo maybeTodo model =
         ?= ( model, Nothing )
 
 
-moveInBasketProcessingTodoToUnder2mList m =
+moveInboxProcessingTodoToUnder2mList m =
     m
         |> case getViewState m of
-            InBasketFlowViewState maybeTodo inBasketFlowModel ->
+            InboxFlowViewState maybeTodo inboxFlowModel ->
                 moveTodoToUnder2mList maybeTodo
-                    >> Tuple.mapFirst startProcessingInBasket
+                    >> Tuple.mapFirst startProcessingInbox
 
             _ ->
                 (,) # Nothing
@@ -120,23 +120,23 @@ moveTodoToListType listType maybeTodo model =
         ?= ( model, Nothing )
 
 
-moveInBasketProcessingTodoToListType listType m =
+moveInboxProcessingTodoToListType listType m =
     m
         |> case getViewState m of
-            InBasketFlowViewState maybeTodo inBasketFlowModel ->
+            InboxFlowViewState maybeTodo inboxFlowModel ->
                 moveTodoToListType listType maybeTodo
-                    >> Tuple.mapFirst startProcessingInBasket
+                    >> Tuple.mapFirst startProcessingInbox
 
             _ ->
                 (,) # Nothing
 
 
-deleteTodoInBasketFlow m =
+deleteTodoInboxFlow m =
     m
         |> case getViewState m of
-            InBasketFlowViewState maybeTodo inBasketFlowModel ->
+            InboxFlowViewState maybeTodo inboxFlowModel ->
                 deleteMaybeTodo maybeTodo
-                    >> Tuple.mapFirst startProcessingInBasket
+                    >> Tuple.mapFirst startProcessingInbox
 
             _ ->
                 (,) # Nothing
@@ -165,7 +165,7 @@ getSelectedTabIndex =
                     TodoListViewState ->
                         0
 
-                    InBasketFlowViewState _ _ ->
+                    InboxFlowViewState _ _ ->
                         1
            )
 

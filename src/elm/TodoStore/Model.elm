@@ -39,14 +39,14 @@ todoLists =
     getTodoList >> Todo.todoListsByType
 
 
-getInBasketTodoList : Model -> TodoList
-getInBasketTodoList =
+getInboxTodoList : Model -> TodoList
+getInboxTodoList =
     mapAllExceptDeleted identity
 
 
-getFirstInBasketTodo : Model -> Maybe Todo
-getFirstInBasketTodo =
-    getTodoList >> Todo.getFirstInBasketTodo
+getFirstInboxTodo : Model -> Maybe Todo
+getFirstInboxTodo =
+    getTodoList >> Todo.getFirstInboxTodo
 
 
 setSeed seed todoStore =

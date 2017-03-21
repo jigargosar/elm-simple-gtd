@@ -1,4 +1,4 @@
-module InBasketFlow.Model exposing (..)
+module InboxFlow.Model exposing (..)
 
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -11,7 +11,7 @@ moveTo =
     Msg.OnFlowMoveTo
 
 
-inBasketFlow =
+inboxFlow =
     Flow.branch "Is it Actionable ?"
         (Flow.branch "Can be done under 2 mins?"
             (Flow.action "Batch it in Under 2 minutes?" (moveTo Todo.under2m))
@@ -51,7 +51,7 @@ type alias Model =
 
 
 modelConstructor todoList =
-    Model inBasketFlow todoList
+    Model inboxFlow todoList
 
 
 

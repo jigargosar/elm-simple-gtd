@@ -1,7 +1,7 @@
-module InBasketFlow exposing (..)
+module InboxFlow exposing (..)
 
 import Flow
-import InBasketFlow.Model as Model
+import InboxFlow.Model as Model
 import Main.Msg exposing (Msg(OnFlowTrashItClicked))
 import Todo exposing (Todo)
 import Toolkit.Operators exposing (..)

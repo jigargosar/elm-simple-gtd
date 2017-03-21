@@ -29,7 +29,7 @@ type Msg
     | OnYesClicked
     | OnNoClicked
     | OnBackClicked
-    | OnInBasketFlowAction FlowAction
+    | OnInboxFlowAction FlowAction
     | OnShowTodoList
-    | OnProcessInBasket
+    | OnProcessInbox
     | OnFlowMarkDeleted

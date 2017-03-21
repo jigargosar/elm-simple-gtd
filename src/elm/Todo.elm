@@ -37,7 +37,7 @@ defaultDeleted =
 
 
 type ListType
-    = InBasket
+    = Inbox
     | Under2m
     | SomeDayMayBe
     | WaitingFor
@@ -51,7 +51,7 @@ getAllListTypes =
     [ Calender
     , Under2m
     , NextAction
-    , InBasket
+    , Inbox
     , WaitingFor
     , Project
     , SomeDayMayBe
@@ -65,7 +65,7 @@ getListTypeName =
 
 listTypeToName listType =
     case listType of
-        InBasket ->
+        Inbox ->
             "Inbox"
 
         Under2m ->
@@ -90,8 +90,8 @@ listTypeToName listType =
             "Reference"
 
 
-inBasket =
-    InBasket
+inbox =
+    Inbox
 
 
 under2m =
@@ -162,11 +162,11 @@ decoder =
         |> D.required "text" D.string
         |> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         |> D.optional "deleted" D.bool defaultDeleted
-        |> D.optional "listType" (D.map stringToListType D.string) InBasket
+        |> D.optional "listType" (D.map stringToListType D.string) Inbox
 
 
 listTypeEncodings =
-    [ InBasket
+    [ Inbox
     , Under2m
     , SomeDayMayBe
     , WaitingFor
@@ -179,11 +179,11 @@ listTypeEncodings =
 
 
 stringToListType string =
-    listTypeEncodings |> Dict.get string ?= InBasket
+    listTypeEncodings |> Dict.get string ?= Inbox
 
 
 initWithTextAndId text id =
-    todoConstructor id defaultRevision text defaultDueAt defaultDeleted InBasket
+    todoConstructor id defaultRevision text defaultDueAt defaultDeleted Inbox
 
 
 type alias EncodedTodo =
@@ -308,20 +308,20 @@ isNotDeleted =
     isDeleted >> not
 
 
-inBasketFilter =
-    toAllPassPredicate [ isNotDeleted, getListType >> equals InBasket ]
+inboxFilter =
+    toAllPassPredicate [ isNotDeleted, getListType >> equals Inbox ]
 
 
 toAllPassPredicate predicateList =
     (applyList predicateList >> List.all identity)
 
 
-getInBasketList =
-    List.filter inBasketFilter
+getInboxList =
+    List.filter inboxFilter
 
 
-getFirstInBasketTodo =
-    List.find inBasketFilter
+getFirstInboxTodo =
+    List.find inboxFilter
 
 
 setContextUnder2m =

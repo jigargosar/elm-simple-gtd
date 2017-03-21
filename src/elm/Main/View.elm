@@ -19,8 +19,8 @@ import Main.Msg exposing (..)
 import Todo as Todo exposing (EditMode(..), ListType)
 import TodoStore.View
 import Flow.Model as Flow exposing (Node)
-import InBasketFlow
-import InBasketFlow.View
+import InboxFlow
+import InboxFlow.View
 import Polymer.Paper as Paper exposing (fab, iconButton, item, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
@@ -100,7 +100,7 @@ headerView m =
                      ,
                   -}
                   tab [ onClick OnShowTodoList ] [ text "Lists" ]
-                , tab [ onClick OnProcessInBasket ] [ text "Process Inbox" ]
+                , tab [ onClick OnProcessInbox ] [ text "Process Inbox" ]
                 ]
             , addTodoView (getEditMode m) todoListViewConfig
             ]
@@ -184,8 +184,8 @@ centerView m =
         TodoListViewState ->
             todoListView m
 
-        InBasketFlowViewState maybeTodo inBasketFlowModel ->
-            InBasketFlow.View.view maybeTodo inBasketFlowModel
+        InboxFlowViewState maybeTodo inboxFlowModel ->
+            InboxFlow.View.view maybeTodo inboxFlowModel
 
 
 todoListView m =

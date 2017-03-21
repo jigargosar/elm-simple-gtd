@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/elm-function-extra" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/web" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/elm-keyboard-extra" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/elm-stuff/build-artifacts" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">

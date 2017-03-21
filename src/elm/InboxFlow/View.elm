@@ -1,14 +1,14 @@
-module InBasketFlow.View exposing (..)
+module InboxFlow.View exposing (..)
 
 import Flow
-import InBasketFlow
+import InboxFlow
 import Polymer.Attributes exposing (boolProperty)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import InBasketFlow.Model as Model exposing (Model)
+import InboxFlow.Model as Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
 import FunctionExtra exposing (..)
 import Todo exposing (Todo)
@@ -34,7 +34,7 @@ toTodoViewModel todo =
 toViewModel maybeTodo model =
     { maybeTodo = maybeTodo ?|> toTodoViewModel
     , question = Model.getQuestion model
-    , flowActions = Model.getFlowActions Msg.OnInBasketFlowAction model
+    , flowActions = Model.getFlowActions Msg.OnInboxFlowAction model
     }
 
 

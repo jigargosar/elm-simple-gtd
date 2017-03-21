@@ -36,11 +36,14 @@ todoListViewConfig =
     }
 
 
+
+--        , appDrawerView m
+
+
 appView m =
     div []
         [ headerView m
-          --        , appDrawerView m
-        , div [ id "center-view" ] [ centerView m ]
+        , mainView m
         , node "paper-fab"
             [ id "add-fab"
             , attribute "icon" "add"
@@ -48,6 +51,10 @@ appView m =
             ]
             []
         ]
+
+
+mainView m =
+    div [ id "center-view" ] [ centerView m ]
 
 
 

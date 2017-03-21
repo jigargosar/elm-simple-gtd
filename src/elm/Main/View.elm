@@ -21,7 +21,7 @@ import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InboxFlow
 import InboxFlow.View
-import Polymer.Paper as Paper exposing (button, fab, iconButton, item, material, menu, tab, tabs)
+import Polymer.Paper as Paper exposing (button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
 
@@ -65,7 +65,7 @@ drawerLayoutView m =
                     [ item [ onClick OnShowTodoList ] [ text "All" ]
                     , item [] [ text "Calendar" ]
                     , item []
-                        [ text "Inbox"
+                        [ itemBody [] [ text "Inbox" ]
                         , button [ onClick OnProcessInbox ] [ text "Process" ]
                         ]
                     , item [] [ text "Waiting For" ]

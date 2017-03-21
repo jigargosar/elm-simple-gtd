@@ -88,29 +88,11 @@ updateInboxFlowWithActionType actionType m =
                 identity
 
 
-moveTodoToUnder2mList : Maybe Todo -> Model -> ( Model, Maybe Todo )
-moveTodoToUnder2mList maybeTodo model =
-    maybeTodo
-        ?|> (Todo.setContextUnder2m >> (replaceTodoIfIdMatches # model))
-        ?= ( model, Nothing )
-
-
 deleteMaybeTodo : Maybe Todo -> Model -> ( Model, Maybe Todo )
 deleteMaybeTodo maybeTodo model =
     maybeTodo
         ?|> (Todo.getId >> deleteTodo # model)
         ?= ( model, Nothing )
-
-
-moveInboxProcessingTodoToUnder2mList m =
-    m
-        |> case getViewState m of
-            InboxFlowViewState maybeTodo inboxFlowModel ->
-                moveTodoToUnder2mList maybeTodo
-                    >> Tuple.mapFirst startProcessingInbox
-
-            _ ->
-                (,) # Nothing
 
 
 moveTodoToListType : ListType -> Maybe Todo -> Model -> ( Model, Maybe Todo )

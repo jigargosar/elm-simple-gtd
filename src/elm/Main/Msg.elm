@@ -22,13 +22,7 @@ type Msg
     | OnEditTodoBlur
     | OnEditTodoKeyUp Key
     | OnTodoMoveToClicked ListType Todo
-    | OnFlowTrashItClicked
-    | OnFlowMoveToSomeDayMaybe
     | OnFlowMoveTo ListType
-    | OnFlowMoveToUnder2mList
-    | OnYesClicked
-    | OnNoClicked
-    | OnBackClicked
     | OnInboxFlowAction FlowAction
     | OnShowTodoList
     | OnProcessInbox

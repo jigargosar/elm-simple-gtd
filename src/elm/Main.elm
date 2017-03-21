@@ -123,18 +123,6 @@ update msg =
                     _ ->
                         identity
 
-            OnFlowTrashItClicked ->
-                identity
-
-            OnYesClicked ->
-                identity
-
-            OnNoClicked ->
-                identity
-
-            OnBackClicked ->
-                identity
-
             OnInboxFlowAction actionType ->
                 Return.map (Model.updateInboxFlowWithActionType actionType)
 
@@ -143,18 +131,6 @@ update msg =
 
             OnProcessInbox ->
                 Return.map (Model.startProcessingInbox)
-
-            OnFlowMoveToUnder2mList ->
-                Return.andThen
-                    (Model.moveInboxProcessingTodoToUnder2mList
-                        >> Tuple2.mapSecond persistMaybeTodoCmd
-                    )
-
-            OnFlowMoveToSomeDayMaybe ->
-                Return.andThen
-                    (Model.moveInboxProcessingTodoToUnder2mList
-                        >> Tuple2.mapSecond persistMaybeTodoCmd
-                    )
 
             OnFlowMoveTo listType ->
                 Return.andThen
@@ -168,7 +144,7 @@ update msg =
                         >> Tuple2.mapSecond persistMaybeTodoCmd
                     )
 
-            OnTodoMoveToClicked listType todo->
+            OnTodoMoveToClicked listType todo ->
                 Return.andThen
                     (Model.todoToListType listType todo
                         >> Tuple2.mapSecond persistMaybeTodoCmd

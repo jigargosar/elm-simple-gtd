@@ -58,7 +58,7 @@ drawerLayoutView m =
     drawerLayout []
         [ drawer [ attribute "slot" "drawer" ]
             [ toolbar [] [ text "Simple GTD" ]
-            , div [ style [ "height" => "100%", "overflow" => "auto" ] ]
+            , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
                 [ menu
                     [ stringProperty "selected" "0"
                     ]

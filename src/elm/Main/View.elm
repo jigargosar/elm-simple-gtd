@@ -65,6 +65,7 @@ headerView m =
         , attribute "fixed" "true"
         , attribute "condenses" "true"
         , attribute "effects" "waterfall"
+        , attribute "slot" "header"
         ]
         [ toolbar
             []

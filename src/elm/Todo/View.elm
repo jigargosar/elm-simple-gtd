@@ -95,7 +95,7 @@ todoItemView vc ( editing, todo ) =
 
 
 doneIconButton vc todo =
-    iconButton [ class "check-icon", icon "check" ] []
+    iconButton [ class "check", icon "check" ] []
 
 
 deleteIconButton vc todo =

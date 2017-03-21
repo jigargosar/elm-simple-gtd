@@ -5,7 +5,7 @@ import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Html exposing (div, span, text)
+import Html exposing (div, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import DebugExtra.Debug exposing (tapLog)
@@ -66,7 +66,11 @@ drawerLayoutView m =
                     , item [] [ text "Calendar" ]
                     , item []
                         [ itemBody [] [ text "Inbox" ]
-                        , button [ onClick OnProcessInbox ] [ text "Process" ]
+                        , iconButton
+                            [ icon "vaadin-icons:vaadin-v"
+                            , onClick OnProcessInbox
+                            ]
+                            []
                         ]
                     , item [] [ text "Waiting For" ]
                     , item [] [ text "Next Actions" ]

@@ -13,7 +13,7 @@ import Main.Msg as Msg exposing (Msg)
 import FunctionExtra exposing (..)
 import Todo exposing (Todo)
 import Function exposing ((>>>))
-import Polymer.Paper exposing (material)
+import Polymer.Paper exposing (iconButton, material)
 
 
 type alias TodoViewModel =

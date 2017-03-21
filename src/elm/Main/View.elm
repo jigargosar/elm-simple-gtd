@@ -54,9 +54,11 @@ appView m =
 
 
 drawerLayoutView m =
-    drawerLayout
-        []
-        [ drawer [] []
+    drawerLayout []
+        [ drawer []
+            [ toolbar [] [ text "Simple GTD" ]
+            , text "hw"
+            ]
         , headerLayoutView m
         ]
 

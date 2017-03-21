@@ -60,7 +60,7 @@ drawerLayoutView m =
             , menu
                 [ stringProperty "selected" "0"
                 ]
-                [ item [] [ text "Calender" ]
+                [ item [] [ text "Calendar" ]
                 , item [] [ text "Inbox" ]
                 , item [] [ text "Waiting For" ]
                 , item [] [ text "Next Actions" ]
@@ -93,7 +93,8 @@ headerView m =
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
             , tabs
                 [ intProperty "selected" (getSelectedTabIndex m) ]
-                [ tab [ onClick OnShowTodoList ] [ text "Lists" ]
+                [ tab [ onClick OnShowTodoList ] [ text "Calendar" ]
+                , tab [ onClick OnShowTodoList ] [ text "Lists" ]
                 , tab [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
                 ]
             , addTodoView (getEditMode m) todoListViewConfig

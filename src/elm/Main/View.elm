@@ -57,7 +57,14 @@ drawerLayoutView m =
     drawerLayout []
         [ drawer []
             [ toolbar [] [ text "Simple GTD" ]
-            , text "hw"
+            , menu
+                [ stringProperty "selected" "0"
+                ]
+                [ item [] [ text "Calender" ]
+                , item [] [ text "Inbox" ]
+                , item [] [ text "Waiting For" ]
+                , item [] [ text "Next Actions" ]
+                ]
             ]
         , headerLayoutView m
         ]

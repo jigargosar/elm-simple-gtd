@@ -66,7 +66,7 @@ getListTypeName =
 listTypeToName listType =
     case listType of
         InBasket ->
-            "In Basket"
+            "Inbox"
 
         Under2m ->
             "Under2m"

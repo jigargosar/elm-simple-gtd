@@ -42,8 +42,10 @@ todoListViewConfig =
 
 appView m =
     div []
-        [ headerView m
-        , mainView m
+        [ headerLayout []
+            [ headerView m
+            , mainView m
+            ]
         , node "paper-fab"
             [ id "add-fab"
             , attribute "icon" "add"

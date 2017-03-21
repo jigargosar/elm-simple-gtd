@@ -65,16 +65,6 @@ drawerMenu todoStore =
         [ stringProperty "selected" "0"
         ]
         ([ item [ onClick OnShowTodoList ] [ text "All" ]
-         , item [] [ text "Calendar" ]
-         , item [ class "has-hover-items" ]
-            [ itemBody [] [ text "Inbox" ]
-            , iconButton
-                [ class "hover-items"
-                , icon "vaadin-icons:start-cog"
-                , onClick OnProcessInbox
-                ]
-                []
-            ]
          , hr [] []
          ]
             ++ listTypeMenuItems todoStore

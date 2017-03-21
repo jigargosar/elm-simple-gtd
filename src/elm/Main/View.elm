@@ -54,13 +54,9 @@ appView m =
 
 
 drawerLayoutView m =
-    drawerLayout []
-        [ drawer [ attribute "slot" "drawer" ]
-            [ toolbar []
-                [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-                , text "Foo Doo"
-                ]
-            ]
+    drawerLayout
+        []
+        [ drawer [] []
         , headerLayoutView m
         ]
 

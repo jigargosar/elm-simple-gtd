@@ -14,7 +14,7 @@ moveTo =
 inboxFlow =
     Flow.branch "Is it Actionable ?"
         (Flow.branch "Can be done under 2 mins?"
-            (Flow.action "Batch it in Under 2 minutes?" (moveTo Todo.under2m))
+            (Flow.action "Batch it in Under 2 minutes?" (moveTo Todo.nextAction))
             (Flow.branch "Involves Multiple Steps?"
                 (Flow.action "Move To Projects?" (moveTo Todo.project))
                 (Flow.branch "Am I the right Person to do this?"

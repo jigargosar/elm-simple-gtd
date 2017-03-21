@@ -38,7 +38,6 @@ defaultDeleted =
 
 type ListType
     = Inbox
-    | Under2m
     | SomeDayMayBe
     | WaitingFor
     | Project
@@ -49,7 +48,6 @@ type ListType
 
 getAllListTypes =
     [ Calender
-    , Under2m
     , NextAction
     , Inbox
     , WaitingFor
@@ -67,9 +65,6 @@ listTypeToName listType =
     case listType of
         Inbox ->
             "Inbox"
-
-        Under2m ->
-            "Under2m"
 
         SomeDayMayBe ->
             "SomeDayMayBe"
@@ -92,10 +87,6 @@ listTypeToName listType =
 
 inbox =
     Inbox
-
-
-under2m =
-    Under2m
 
 
 someDayMayBe =
@@ -167,7 +158,6 @@ decoder =
 
 listTypeEncodings =
     [ Inbox
-    , Under2m
     , SomeDayMayBe
     , WaitingFor
     , Project
@@ -322,10 +312,6 @@ getInboxList =
 
 getFirstInboxTodo =
     List.find inboxFilter
-
-
-setContextUnder2m =
-    setListType Under2m
 
 
 todoListsByType =

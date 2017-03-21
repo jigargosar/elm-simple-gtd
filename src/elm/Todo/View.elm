@@ -9,11 +9,11 @@ import Todo exposing (EditMode(EditTodoMode))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Html exposing (..)
+import Html exposing (div, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import KeyboardExtra exposing (onEscape, onKeyUp)
-import Polymer.Paper as Paper exposing (checkbox, iconButton, item, itemBody, menuButton)
+import Polymer.Paper exposing (..)
 
 
 todoView editMode viewConfig todo =
@@ -50,7 +50,7 @@ todoInputId todo =
 todoItemBody editing vc todo =
     if editing then
         itemBody []
-            [ Paper.input
+            [ input
                 [ id (todoInputId todo)
                 , class "edit-todo-input"
                 , boolProperty "noLabelFloat" True
@@ -103,7 +103,7 @@ optionsIconButton vc todo =
         , attribute "horizontal-align" "right"
         ]
         [ iconButton [ icon "more-vert", class "dropdown-trigger" ] []
-        , Paper.menu
+        , menu
             [ class "dropdown-content"
             , attribute "attr-for-selected" "list-type"
             , attribute "selected" (Todo.getListTypeName todo)

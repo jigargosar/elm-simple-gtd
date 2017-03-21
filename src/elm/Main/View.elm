@@ -96,9 +96,11 @@ headerView m =
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
             , tabs
                 [ intProperty "selected" (getSelectedTabIndex m) ]
-                [ tab [ onClick OnShowTodoList ] [ text "Calendar" ]
-                , tab [ onClick OnShowTodoList ] [ text "Lists" ]
-                , tab [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
+                [ {- tab [ onClick OnShowTodoList ] [ text "Calendar" ]
+                     ,
+                  -}
+                  tab [ onClick OnShowTodoList ] [ text "Lists" ]
+                , tab [ onClick OnProcessInBasket ] [ text "Process Inbox" ]
                 ]
             , addTodoView (getEditMode m) todoListViewConfig
             ]

@@ -64,10 +64,11 @@ drawerLayoutView m =
                     ]
                     [ item [ onClick OnShowTodoList ] [ text "All" ]
                     , item [] [ text "Calendar" ]
-                    , item []
+                    , item [ class "has-hover-items" ]
                         [ itemBody [] [ text "Inbox" ]
                         , iconButton
-                            [ icon "vaadin-icons:start-cog"
+                            [ class "hover-items"
+                            , icon "vaadin-icons:start-cog"
                             , onClick OnProcessInbox
                             ]
                             []

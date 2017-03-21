@@ -75,7 +75,7 @@ headerLayoutView m =
 headerView m =
     header
         [ attribute "reveals" "true"
-          --        , attribute "fixed" "true"
+        , attribute "fixed" "true"
         , attribute "condenses" "true"
         , attribute "effects" "waterfall"
         , attribute "slot" "header"

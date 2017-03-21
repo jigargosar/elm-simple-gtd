@@ -313,10 +313,6 @@ todoListsByType =
         >> (\dict ->
                 getAllListTypes
                     .|> (\listType ->
-                            let
-                                _ =
-                                    1
-                            in
-                                ( listTypeToName listType, Dict.get (toString listType) dict ?= [] )
+                            ( listTypeToName listType, Dict.get (toString listType) dict ?= [] )
                         )
            )

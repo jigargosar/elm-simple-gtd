@@ -59,26 +59,7 @@ drawerLayoutView m =
         [ drawer [ attribute "slot" "drawer" ]
             [ toolbar [] [ text "Simple GTD" ]
             , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
-                [ menu
-                    [ stringProperty "selected" "0"
-                    ]
-                    [ item [ onClick OnShowTodoList ] [ text "All" ]
-                    , item [] [ text "Calendar" ]
-                    , item [ class "has-hover-items" ]
-                        [ itemBody [] [ text "Inbox" ]
-                        , iconButton
-                            [ class "hover-items"
-                            , icon "vaadin-icons:start-cog"
-                            , onClick OnProcessInbox
-                            ]
-                            []
-                        ]
-                    , item [] [ text "Waiting For" ]
-                    , item [] [ text "Next Actions" ]
-                    , item [] [ text "Projects" ]
-                    , item [] [ text "Some Day" ]
-                    , item [] [ text "Reference" ]
-                    ]
+                [ TodoStore.View.drawerMenu (getTodoCollection m)
                 ]
             ]
         , headerLayout []

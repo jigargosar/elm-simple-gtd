@@ -1,12 +1,13 @@
 module TodoStore.View exposing (..)
 
 import Dom
-import Html exposing (..)
+import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (..)
 import Html.Attributes.Extra exposing (intProperty)
 import Html.Events exposing (..)
 import Keyboard.Extra exposing (Key)
-import Polymer.Attributes exposing (stringProperty)
+import Main.Msg exposing (..)
+import Polymer.Attributes exposing (icon, stringProperty)
 import TodoStore exposing (TodoStore)
 import TodoStore.Model as Model
 import Todo as Todo exposing (EditMode, ListType, Todo, TodoId)
@@ -16,7 +17,7 @@ import Dict exposing (Dict)
 import Dict.Extra as Dict
 import Todo.View
 import Html.Keyed as Keyed
-import Polymer.Paper exposing (badge, material)
+import Polymer.Paper exposing (..)
 
 
 type alias ViewConfig msg =
@@ -56,3 +57,26 @@ todoListViewWithKey todoView ( listTitle, todoList ) =
         , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
         ]
     )
+
+
+drawerMenu todoStore =
+    menu
+        [ stringProperty "selected" "0"
+        ]
+        [ item [ onClick OnShowTodoList ] [ text "All" ]
+        , item [] [ text "Calendar" ]
+        , item [ class "has-hover-items" ]
+            [ itemBody [] [ text "Inbox" ]
+            , iconButton
+                [ class "hover-items"
+                , icon "vaadin-icons:start-cog"
+                , onClick OnProcessInbox
+                ]
+                []
+            ]
+        , item [] [ text "Waiting For" ]
+        , item [] [ text "Next Actions" ]
+        , item [] [ text "Projects" ]
+        , item [] [ text "Some Day" ]
+        , item [] [ text "Reference" ]
+        ]

@@ -157,14 +157,7 @@ decoder =
 
 
 listTypeEncodings =
-    [ Inbox
-    , SomeDayMayBe
-    , WaitingFor
-    , Project
-    , Calender
-    , NextAction
-    , Reference
-    ]
+    getAllListTypes
         |> Dict.fromListBy toString
 
 

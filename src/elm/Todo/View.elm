@@ -70,7 +70,8 @@ todoItemView vc ( editing, todo ) =
     let
         hoverIcons =
             div [ class "hover hover-icons" ]
-                [ deleteIconButton vc todo
+                [ doneIconButton vc todo
+                , deleteIconButton vc todo
                 , optionsIconButton vc todo
                 ]
 
@@ -91,6 +92,10 @@ todoItemView vc ( editing, todo ) =
             , todoItemBody editing vc todo
             , hoverIcons
             ]
+
+
+doneIconButton vc todo =
+    iconButton [ class "check-icon", icon "check" ] []
 
 
 deleteIconButton vc todo =

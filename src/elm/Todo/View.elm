@@ -63,7 +63,7 @@ todoItemBody editing vc todo =
                 []
             ]
     else
-        itemBody [] [ Todo.getText todo |> text ]
+        itemBody [] [ span [ class "ellipsis" ] [ Todo.getText todo |> text ] ]
 
 
 todoItemView vc ( editing, todo ) =

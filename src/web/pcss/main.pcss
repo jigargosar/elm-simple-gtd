@@ -4,6 +4,12 @@
   display: none !important;
 }
 
+.ellipsis{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 paper-icon-button {
   color: gray;
 }
@@ -53,6 +59,8 @@ paper-icon-button {
   & .todo-item {
     border-top: 1px solid rgba(179, 179, 179, 0.53);
 
+
+    
     & .hover {
       display: none;
     }

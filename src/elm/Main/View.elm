@@ -56,7 +56,7 @@ appView m =
 
 drawerLayoutView m =
     drawerLayout []
-        [ drawer []
+        [ drawer [ attribute "slot" "drawer" ]
             [ toolbar [] [ text "Simple GTD" ]
             , div [ style [ "height" => "100%", "overflow" => "auto" ] ]
                 [ menu
@@ -72,43 +72,28 @@ drawerLayoutView m =
                     ]
                 ]
             ]
-        , headerLayoutView m
-        ]
-
-
-headerLayoutView m =
-    headerLayout []
-        [ headerView m
-        , mainView m
-        ]
-
-
-headerView m =
-    header
-        [ attribute "reveals" "true"
-        , attribute "fixed" "true"
-        , attribute "condenses" "true"
-        , attribute "effects" "waterfall"
-        , attribute "slot" "header"
-        ]
-        [ toolbar
-            []
-            [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-            , tabs
-                [ intProperty "selected" (getSelectedTabIndex m) ]
-                [ {- tab [ onClick OnShowTodoList ] [ text "Calendar" ]
-                     ,
-                  -}
-                  tab [ onClick OnShowTodoList ] [ text "Lists" ]
-                , tab [ onClick OnProcessInbox ] [ text "Process Inbox" ]
+        , headerLayout []
+            [ header
+                [ attribute "reveals" "true"
+                , attribute "fixed" "true"
+                , attribute "condenses" "true"
+                , attribute "effects" "waterfall"
+                , attribute "slot" "header"
                 ]
-            , addTodoView (getEditMode m) todoListViewConfig
+                [ toolbar
+                    []
+                    [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
+                    , tabs
+                        [ intProperty "selected" (getSelectedTabIndex m) ]
+                        [ tab [ onClick OnShowTodoList ] [ text "Lists" ]
+                        , tab [ onClick OnProcessInbox ] [ text "Process Inbox" ]
+                        ]
+                    , addTodoView (getEditMode m) todoListViewConfig
+                    ]
+                ]
+            , div [ id "center-view" ] [ centerView m ]
             ]
         ]
-
-
-mainView m =
-    div [ id "center-view" ] [ centerView m ]
 
 
 

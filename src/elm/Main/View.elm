@@ -2,7 +2,7 @@ module Main.View exposing (appView)
 
 import Html.Attributes.Extra exposing (intProperty)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
-import Polymer.Attributes exposing (stringProperty)
+import Polymer.Attributes exposing (icon, stringProperty)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
@@ -21,7 +21,8 @@ import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InBasketFlow
 import InBasketFlow.View
-import Polymer.Paper as Paper exposing (drawerPanel, material)
+import Polymer.Paper as Paper exposing (iconButton, material)
+import Polymer.App exposing (..)
 
 
 todoListViewConfig =
@@ -39,7 +40,7 @@ appView m =
     div []
         [ headerView m
         , appDrawerView m
-          --        , div [ id "center-view" ] [ centerView m ]
+        , div [ id "center-view" ] [ centerView m ]
         , node "paper-fab"
             [ id "add-fab"
             , attribute "icon" "add"
@@ -49,41 +50,42 @@ appView m =
         ]
 
 
-appDrawerView m =
-    drawerPanel
-        []
-        [ div [ attribute "drawer" "true" ]
-            [ menu
-                [ stringProperty "selected" "0"
-                ]
-                [ Paper.item [] [ text "Item One" ]
-                , Paper.item [] [ text "Item 2" ]
-                , Paper.item [] [ text "Item 3" ]
-                ]
-            ]
-        , div
-            [ id "center-view"
-            , attribute "main" "true"
-            ]
-            [ centerView m ]
-        ]
-
-
 
 --appDrawerView m =
---    node "app-drawer"
---        [ stringProperty "persistent" "true"
---        , stringProperty "opened" "true"
---        , stringProperty "elevation" "0"
---        ]
---        [ menu
---            [ stringProperty "selected" "0"
+--    drawerPanel
+--        []
+--        [ div [ attribute "drawer" "true" ]
+--            [ menu
+--                [ stringProperty "selected" "0"
+--                ]
+--                [ Paper.item [] [ text "Item One" ]
+--                , Paper.item [] [ text "Item 2" ]
+--                , Paper.item [] [ text "Item 3" ]
+--                ]
 --            ]
---            [ Paper.item [] [ text "Item One" ]
---            , Paper.item [] [ text "Item 2" ]
---            , Paper.item [] [ text "Item 3" ]
+--        , div
+--            [ id "center-view"
+--            , attribute "main" "true"
 --            ]
+--            [ centerView m ]
 --        ]
+--
+
+
+appDrawerView m =
+    node "app-drawer"
+        [ stringProperty "persistent" "true"
+        , stringProperty "opened" "true"
+        , stringProperty "elevation" "0"
+        ]
+        [ menu
+            [ stringProperty "selected" "0"
+            ]
+            [ Paper.item [] [ text "Item One" ]
+            , Paper.item [] [ text "Item 2" ]
+            , Paper.item [] [ text "Item 3" ]
+            ]
+        ]
 
 
 headerView m =

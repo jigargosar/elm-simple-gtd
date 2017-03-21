@@ -42,13 +42,23 @@ todoListViewConfig =
 
 appView m =
     div []
-        [ headerLayoutView m
+        [ --        headerLayoutView m
+          drawerLayoutView m
         , fab
             [ id "add-fab"
             , attribute "icon" "add"
             , onClick (OnAddTodoClicked newTodoInputId)
             ]
             []
+        ]
+
+
+drawerLayoutView m =
+    drawerLayout []
+        [ drawer [ attribute "slot" "drawer" ]
+            [ toolbar [] [ text "Getting Started" ]
+            ]
+        , headerLayoutView m
         ]
 
 

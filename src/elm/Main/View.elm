@@ -64,6 +64,9 @@ drawerLayoutView m =
                 , item [] [ text "Inbox" ]
                 , item [] [ text "Waiting For" ]
                 , item [] [ text "Next Actions" ]
+                , item [] [ text "Projects" ]
+                , item [] [ text "Some Day" ]
+                , item [] [ text "Reference" ]
                 ]
             ]
         , headerLayoutView m

@@ -87,20 +87,25 @@ listTypeMenuItems =
 
 
 listTypeMenuItem ( listType, todoList ) =
-    item [ class "has-hover-items" ]
-        ([ itemBody []
-            [ span []
-                [ badge
-                    [ classList [ "hidden" => (List.length todoList == 0), "drawer-list-type-badge" => True ]
-                    , intProperty "label" (List.length todoList)
+    let
+        ltName =
+            Todo.listTypeToName listType
+    in
+        item [ class "has-hover-items" ]
+            ([ span [ id ltName ] [ text (ltName) ]
+             , itemBody [] []
+             , badge
+                [ classList
+                    [ "hidden" => (List.length todoList == 0)
+                    , "drawer-list-type-badge" => True
                     ]
-                    []
-                , text (Todo.listTypeToName listType)
+                , intProperty "label" (List.length todoList)
+                , attribute "for" ltName
                 ]
-            ]
-         ]
-            ++ addHoverItems listType
-        )
+                []
+             ]
+                ++ addHoverItems listType
+            )
 
 
 addHoverItems listType =

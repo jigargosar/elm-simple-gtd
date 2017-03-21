@@ -56,7 +56,7 @@ appView m =
 drawerLayoutView m =
     drawerLayout []
         [ drawer [ attribute "slot" "drawer" ]
-            [ toolbar [] [ text "Getting Started" ]
+            [ toolbar [] []
             ]
         , headerLayoutView m
         ]

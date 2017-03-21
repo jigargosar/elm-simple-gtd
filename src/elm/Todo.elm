@@ -48,9 +48,9 @@ type ListType
 
 getAllListTypes =
     [ Calender
-    , NextAction
     , Inbox
     , WaitingFor
+    , NextAction
     , Project
     , SomeDayMayBe
     , Reference

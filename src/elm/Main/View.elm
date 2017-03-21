@@ -56,7 +56,10 @@ appView m =
 drawerLayoutView m =
     drawerLayout []
         [ drawer [ attribute "slot" "drawer" ]
-            [ toolbar [] []
+            [ toolbar []
+                [ iconButton [ icon "menu" ] []
+                , text "Foo Doo"
+                ]
             ]
         , headerLayoutView m
         ]
@@ -72,15 +75,14 @@ headerLayoutView m =
 headerView m =
     header
         [ attribute "reveals" "true"
-        , attribute "fixed" "true"
+          --        , attribute "fixed" "true"
         , attribute "condenses" "true"
         , attribute "effects" "waterfall"
         , attribute "slot" "header"
         ]
         [ toolbar
             []
-            [ iconButton [ icon "menu" ] []
-            , tabs
+            [ tabs
                 [ intProperty "selected" (getSelectedTabIndex m) ]
                 [ tab [ onClick OnShowTodoList ] [ text "Lists" ]
                 , tab [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]

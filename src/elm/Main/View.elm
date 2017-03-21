@@ -1,12 +1,12 @@
 module Main.View exposing (appView)
 
-import Html.Attributes.Extra exposing (intProperty)
+import Html.Attributes.Extra exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
-import Polymer.Attributes exposing (icon, stringProperty)
+import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html exposing (div, span, text)
+import Html.Attributes exposing (class, classList, id, attribute, value, autofocus)
 import Html.Events exposing (..)
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
@@ -21,7 +21,7 @@ import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InBasketFlow
 import InBasketFlow.View
-import Polymer.Paper as Paper exposing (iconButton, material)
+import Polymer.Paper as Paper exposing (fab, iconButton, item, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 
 
@@ -42,16 +42,20 @@ todoListViewConfig =
 
 appView m =
     div []
-        [ headerLayout []
-            [ headerView m
-            , mainView m
-            ]
-        , node "paper-fab"
+        [ headerLayoutView m
+        , fab
             [ id "add-fab"
             , attribute "icon" "add"
             , onClick (OnAddTodoClicked newTodoInputId)
             ]
             []
+        ]
+
+
+headerLayoutView m =
+    headerLayout []
+        [ headerView m
+        , mainView m
         ]
 
 
@@ -82,7 +86,7 @@ mainView m =
 
 
 appDrawerView m =
-    node "app-drawer"
+    drawer
         [ stringProperty "persistent" "true"
         , stringProperty "opened" "true"
         , stringProperty "elevation" "0"
@@ -90,27 +94,27 @@ appDrawerView m =
         [ menu
             [ stringProperty "selected" "0"
             ]
-            [ Paper.item [] [ text "Item One" ]
-            , Paper.item [] [ text "Item 2" ]
-            , Paper.item [] [ text "Item 3" ]
+            [ item [] [ text "Item One" ]
+            , item [] [ text "Item 2" ]
+            , item [] [ text "Item 3" ]
             ]
         ]
 
 
 headerView m =
-    node "app-header"
+    header
         [ attribute "reveals" "true"
         , attribute "fixed" "true"
         , attribute "condenses" "true"
         , attribute "effects" "waterfall"
         ]
-        [ node "app-toolbar"
+        [ toolbar
             []
-            [ node "paper-icon-button" [ attribute "icon" "menu" ] []
-            , node "paper-tabs"
+            [ iconButton [ icon "menu" ] []
+            , tabs
                 [ intProperty "selected" (getSelectedTabIndex m) ]
-                [ node "paper-tab" [ onClick OnShowTodoList ] [ text "Lists" ]
-                , node "paper-tab" [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
+                [ tab [ onClick OnShowTodoList ] [ text "Lists" ]
+                , tab [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]
                 ]
             , addTodoView (getEditMode m) todoListViewConfig
             ]

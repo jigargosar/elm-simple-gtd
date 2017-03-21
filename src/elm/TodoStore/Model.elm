@@ -34,8 +34,8 @@ mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
 
-todoLists : Model -> List ( String, List Todo )
-todoLists =
+getTodoLists : Model -> List ( String, List Todo )
+getTodoLists =
     getTodoList >> Todo.todoListsByType
 
 

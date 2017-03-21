@@ -1,7 +1,7 @@
 module TodoStore.View exposing (..)
 
 import Dom
-import Html exposing (Html, div, span, text)
+import Html exposing (Html, div, hr, span, text)
 import Html.Attributes exposing (..)
 import Html.Attributes.Extra exposing (intProperty)
 import Html.Events exposing (..)
@@ -40,7 +40,7 @@ allTodosView viewConfig editMode todoStore =
 
         todoListViewsWithKey : List ( String, Html msg )
         todoListViewsWithKey =
-            Model.todoLists todoStore .|> todoListViewWithKey todoView
+            Model.getTodoLists todoStore .|> todoListViewWithKey todoView
     in
         Keyed.node "div" [] todoListViewsWithKey
 
@@ -63,9 +63,9 @@ drawerMenu todoStore =
     menu
         [ stringProperty "selected" "0"
         ]
-        [ item [ onClick OnShowTodoList ] [ text "All" ]
-        , item [] [ text "Calendar" ]
-        , item [ class "has-hover-items" ]
+        ([ item [ onClick OnShowTodoList ] [ text "All" ]
+         , item [] [ text "Calendar" ]
+         , item [ class "has-hover-items" ]
             [ itemBody [] [ text "Inbox" ]
             , iconButton
                 [ class "hover-items"
@@ -74,9 +74,16 @@ drawerMenu todoStore =
                 ]
                 []
             ]
-        , item [] [ text "Waiting For" ]
-        , item [] [ text "Next Actions" ]
-        , item [] [ text "Projects" ]
-        , item [] [ text "Some Day" ]
-        , item [] [ text "Reference" ]
-        ]
+         , hr [] []
+         ]
+            ++ listTypeMenuItems todoStore
+        )
+
+
+listTypeMenuItems =
+    Model.getTodoLists
+        >> List.map listTypeMenuItem
+
+
+listTypeMenuItem ( name, todoList ) =
+    item [] [ text name ]

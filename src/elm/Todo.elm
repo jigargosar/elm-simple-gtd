@@ -316,3 +316,14 @@ todoListsByType =
                             ( listTypeToName listType, Dict.get (toString listType) dict ?= [] )
                         )
            )
+
+
+todoListsByType2 =
+    List.filter isNotDeleted
+        >> Dict.groupBy (getListType >> toString)
+        >> (\dict ->
+                getAllListTypes
+                    .|> (\listType ->
+                            ( listType, Dict.get (toString listType) dict ?= [] )
+                        )
+           )

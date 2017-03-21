@@ -39,6 +39,10 @@ getTodoLists =
     getTodoList >> Todo.todoListsByType
 
 
+getTodoLists2 =
+    getTodoList >> Todo.todoListsByType2
+
+
 getInboxTodoList : Model -> TodoList
 getInboxTodoList =
     mapAllExceptDeleted identity

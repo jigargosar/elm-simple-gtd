@@ -10,7 +10,7 @@ import Main.Msg exposing (..)
 import Polymer.Attributes exposing (icon, stringProperty)
 import TodoStore exposing (TodoStore)
 import TodoStore.Model as Model
-import Todo as Todo exposing (EditMode, ListType, Todo, TodoId)
+import Todo as Todo exposing (EditMode, ListType(Inbox), Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Dict exposing (Dict)
@@ -82,18 +82,37 @@ drawerMenu todoStore =
 
 
 listTypeMenuItems =
-    Model.getTodoLists
+    Model.getTodoLists2
         >> List.map listTypeMenuItem
 
 
-listTypeMenuItem ( name, todoList ) =
-    item []
-        [ div [ class "paper-badge-container" ]
-            [ span [] [ text name ]
-            , badge
-                [ classList [ "hidden" => (List.length todoList == 0) ]
-                , intProperty "label" (List.length todoList)
+listTypeMenuItem ( listType, todoList ) =
+    item [ class "has-hover-items" ]
+        ([ itemBody []
+            [ span []
+                [ badge
+                    [ classList [ "hidden" => (List.length todoList == 0), "drawer-list-type-badge" => True ]
+                    , intProperty "label" (List.length todoList)
+                    ]
+                    []
+                , text (Todo.listTypeToName listType)
+                ]
+            ]
+         ]
+            ++ addHoverItems listType
+        )
+
+
+addHoverItems listType =
+    case listType of
+        Inbox ->
+            [ iconButton
+                [ class "hover-items"
+                , icon "vaadin-icons:start-cog"
+                , onClick OnProcessInbox
                 ]
                 []
             ]
-        ]
+
+        _ ->
+            []

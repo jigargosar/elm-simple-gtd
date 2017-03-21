@@ -2,6 +2,7 @@ module Main.View exposing (appView)
 
 import Html.Attributes.Extra exposing (intProperty)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
+import Polymer.Attributes exposing (stringProperty)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (..)
@@ -37,6 +38,7 @@ todoListViewConfig =
 appView m =
     div []
         [ headerView m
+        , appDrawerView m
         , div [ id "center-view" ] [ centerView m ]
         , node "paper-fab"
             [ id "add-fab"
@@ -44,6 +46,22 @@ appView m =
             , onClick (OnAddTodoClicked newTodoInputId)
             ]
             []
+        ]
+
+
+appDrawerView m =
+    node "app-drawer"
+        [ stringProperty "persistent" "true"
+        , stringProperty "opened" "true"
+        , stringProperty "elevation" "0"
+        ]
+        [ menu
+            [ stringProperty "selected" "0"
+            ]
+            [ Paper.item [] [ text "Item One" ]
+            , Paper.item [] [ text "Item 2" ]
+            , Paper.item [] [ text "Item 3" ]
+            ]
         ]
 
 

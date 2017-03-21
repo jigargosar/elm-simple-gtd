@@ -57,7 +57,7 @@ drawerLayoutView m =
     drawerLayout []
         [ drawer [ attribute "slot" "drawer" ]
             [ toolbar []
-                [ iconButton [ icon "menu" ] []
+                [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
                 , text "Foo Doo"
                 ]
             ]
@@ -82,7 +82,8 @@ headerView m =
         ]
         [ toolbar
             []
-            [ tabs
+            [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
+            , tabs
                 [ intProperty "selected" (getSelectedTabIndex m) ]
                 [ tab [ onClick OnShowTodoList ] [ text "Lists" ]
                 , tab [ onClick OnProcessInBasket ] [ text "Process In-Basket" ]

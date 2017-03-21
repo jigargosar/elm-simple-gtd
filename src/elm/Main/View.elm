@@ -6,7 +6,7 @@ import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (div, span, text)
-import Html.Attributes exposing (class, classList, id, attribute, value, autofocus)
+import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
@@ -23,6 +23,7 @@ import InBasketFlow
 import InBasketFlow.View
 import Polymer.Paper as Paper exposing (fab, iconButton, item, material, menu, tab, tabs)
 import Polymer.App exposing (..)
+import FunctionExtra exposing (..)
 
 
 todoListViewConfig =
@@ -57,16 +58,18 @@ drawerLayoutView m =
     drawerLayout []
         [ drawer []
             [ toolbar [] [ text "Simple GTD" ]
-            , menu
-                [ stringProperty "selected" "0"
-                ]
-                [ item [] [ text "Calendar" ]
-                , item [] [ text "Inbox" ]
-                , item [] [ text "Waiting For" ]
-                , item [] [ text "Next Actions" ]
-                , item [] [ text "Projects" ]
-                , item [] [ text "Some Day" ]
-                , item [] [ text "Reference" ]
+            , div [ style [ "height" => "100%", "overflow" => "auto" ] ]
+                [ menu
+                    [ stringProperty "selected" "0"
+                    ]
+                    [ item [] [ text "Calendar" ]
+                    , item [] [ text "Inbox" ]
+                    , item [] [ text "Waiting For" ]
+                    , item [] [ text "Next Actions" ]
+                    , item [] [ text "Projects" ]
+                    , item [] [ text "Some Day" ]
+                    , item [] [ text "Reference" ]
+                    ]
                 ]
             ]
         , headerLayoutView m

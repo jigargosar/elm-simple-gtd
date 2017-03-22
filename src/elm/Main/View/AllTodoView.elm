@@ -46,7 +46,7 @@ createTodoListViewConfig model =
 
 todoListViewsWithKey : Model -> List ( String, Html Msg )
 todoListViewsWithKey m =
-    m |> todoListsByType .|> todoListViewWithKey (createTodoListViewConfig m)
+    List.map (todoListViewWithKey (createTodoListViewConfig m)) (todoListsByType m)
 
 
 allTodosView : Model -> Html Msg

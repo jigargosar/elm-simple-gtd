@@ -26,6 +26,7 @@ import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
 
 
+createTodoListViewConfig : Model -> TodoStore.View.ViewConfig Msg
 createTodoListViewConfig model =
     { onDeleteTodoClicked = OnDeleteTodoClicked
     , onEditTodoClicked = OnEditTodoClicked
@@ -36,6 +37,7 @@ createTodoListViewConfig model =
     , onTodoMoveToClicked = OnTodoMoveToClicked
     , now = getNow model
     , editMode = getEditMode model
+    , onTodoDoneClicked = OnTodoDoneClicked
     }
 
 

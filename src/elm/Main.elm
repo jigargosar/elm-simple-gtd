@@ -98,6 +98,9 @@ update msg =
                             >> Tuple2.mapSecond persistMaybeTodoCmd
                         )
 
+            OnTodoDoneClicked todoId ->
+                identity
+
             OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
                     >> Return.command (domFocusCmd focusInputId OnDomFocusResult)

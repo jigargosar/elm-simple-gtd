@@ -32,6 +32,7 @@ type alias ViewConfig msg =
     , onTodoMoveToClicked : Group -> Todo -> msg
     , now : Time
     , editMode : EditMode
+    , onTodoDoneClicked : TodoId -> msg
     }
 
 

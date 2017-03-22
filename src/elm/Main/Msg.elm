@@ -21,6 +21,7 @@ type Msg
     | OnNewTodoKeyUp Key
     | OnEditTodoTextChanged String
     | OnEditTodoBlur
+    | OnTodoDoneClicked TodoId
     | OnEditTodoKeyUp Key
     | OnTodoMoveToClicked Todo.Group Todo
     | MoveTodoToListTypeWithNow Todo.Group Todo Time

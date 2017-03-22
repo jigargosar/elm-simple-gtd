@@ -31,7 +31,7 @@ type alias Model =
     }
 
 
-modelConstructor now todoList editMode ( todoStore, seed ) =
+modelConstructor now todoList editMode seed =
     Model now todoList editMode TodoListViewState seed
 
 
@@ -44,16 +44,9 @@ init now encodedTodoList =
     let
         todoList =
             Todo.decodeTodoList encodedTodoList
-
-        generateTodoModel =
-            todoList |> TodoStore.generator >> Random.step
-
-        todoModelFromSeed =
-            Random.seedFromTime >> generateTodoModel
     in
-        now
-            |> todoModelFromSeed
-            >> modelConstructor now todoList NotEditing
+        Random.seedFromTime now
+            |> modelConstructor now todoList NotEditing
 
 
 setViewState viewState m =

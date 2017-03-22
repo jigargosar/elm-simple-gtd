@@ -243,7 +243,7 @@ generator createdAt text =
 
 createdAtInWords : Time -> Todo -> String
 createdAtInWords now =
-    .createdAt >> Date.fromTime >> Date.Distance.inWords # (Date.fromTime now)
+    .createdAt >> Date.fromTime >> Date.Distance.inWords (Date.fromTime now)
 
 
 getText =

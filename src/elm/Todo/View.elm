@@ -66,7 +66,9 @@ todoItemBody editing vc todo =
     else
         itemBody []
             [ span [ class "ellipsis" ] [ Todo.getText todo |> text ]
-            , span [class "small dim" ] [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago") ]
+            , span [ class "small dim" ]
+                [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago")
+                ]
             ]
 
 

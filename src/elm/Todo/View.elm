@@ -90,8 +90,7 @@ hoverIcons vc todo =
 
 nonHoverIcons vc todo =
     div [ class "hide-on-hover" ]
-        [ doneIconButton vc todo
-        ]
+        ([] ++ (ifElse Todo.isDone (doneIconButton vc >> List.singleton) (\_ -> []) todo))
 
 
 doneIconButton vc todo =

@@ -52,12 +52,12 @@ allTodosView m =
 
         todoListViewsWithKey : List ( String, Html Msg )
         todoListViewsWithKey =
-            m |> getTodoList >> Todo.todoListsByType .|> todoListViewWithKey (todoView vc)
+            m |> getTodoList >> Todo.todoListsByType .|> todoListViewWithKey vc
     in
         Keyed.node "div" [] todoListViewsWithKey
 
 
-todoListViewWithKey todoView ( listTitle, todoList ) =
+todoListViewWithKey vc ( listTitle, todoList ) =
     ( listTitle
     , div [ class "todo-list-container" ]
         [ div [ class "todo-list-title" ]
@@ -66,7 +66,7 @@ todoListViewWithKey todoView ( listTitle, todoList ) =
                 , badge [ intProperty "label" (List.length todoList) ] []
                 ]
             ]
-        , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
+        , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
         ]
     )
 

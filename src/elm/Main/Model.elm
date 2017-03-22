@@ -8,7 +8,7 @@ import Navigation exposing (Location)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todo as Todo exposing (EditMode(..), EncodedTodoList, ListType, Todo, TodoId)
+import Todo as Todo exposing (EditMode(..), EncodedTodoList, Group, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -95,7 +95,7 @@ deleteMaybeTodo maybeTodo model =
         ?= ( model, Nothing )
 
 
-moveTodoToListType : ListType -> Maybe Todo -> Model -> ( Model, Maybe Todo )
+moveTodoToListType : Group -> Maybe Todo -> Model -> ( Model, Maybe Todo )
 moveTodoToListType listType maybeTodo model =
     maybeTodo
         ?|> (Todo.setListType listType >> (replaceTodoIfIdMatches # model))

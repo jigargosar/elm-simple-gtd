@@ -10,7 +10,7 @@ import Main.Msg exposing (..)
 import Polymer.Attributes exposing (icon, stringProperty)
 import TodoStore exposing (TodoStore)
 import TodoStore.Model as Model
-import Todo as Todo exposing (EditMode, ListType(Inbox), Todo, TodoId)
+import Todo as Todo exposing (EditMode, Group(Inbox), Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Dict exposing (Dict)
@@ -28,7 +28,7 @@ type alias ViewConfig msg =
     , onEditTodoBlur : msg
     , onEditTodoKeyUp : Key -> msg
     , noOp : msg
-    , onTodoMoveToClicked : ListType -> Todo -> msg
+    , onTodoMoveToClicked : Group -> Todo -> msg
     }
 
 

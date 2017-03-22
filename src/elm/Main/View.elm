@@ -16,7 +16,7 @@ import Json.Encode
 import List.Extra as List
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
-import Todo as Todo exposing (EditMode(..), ListType)
+import Todo as Todo exposing (EditMode(..), Group)
 import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InboxFlow

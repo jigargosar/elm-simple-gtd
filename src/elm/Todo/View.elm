@@ -1,5 +1,6 @@
 module Todo.View exposing (..)
 
+import Date.Distance exposing (inWords)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Keyboard.Extra exposing (Key(Enter, Escape))
@@ -63,7 +64,10 @@ todoItemBody editing vc todo =
                 []
             ]
     else
-        itemBody [] [ span [ class "ellipsis" ] [ Todo.getText todo |> text ] ]
+        itemBody []
+            [ span [ class "ellipsis" ] [ Todo.getText todo |> text ]
+            , span [] [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ "ago") ]
+            ]
 
 
 todoItemView vc ( editing, todo ) =

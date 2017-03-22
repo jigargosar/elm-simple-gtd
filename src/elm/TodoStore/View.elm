@@ -19,6 +19,7 @@ import Todo.View
 import Html.Keyed as Keyed
 import Polymer.Paper exposing (..)
 import FunctionExtra exposing (..)
+import Time exposing (Time)
 
 
 type alias ViewConfig msg =
@@ -29,6 +30,7 @@ type alias ViewConfig msg =
     , onEditTodoKeyUp : Key -> msg
     , noOp : msg
     , onTodoMoveToClicked : Group -> Todo -> msg
+    , now: Time
     }
 
 

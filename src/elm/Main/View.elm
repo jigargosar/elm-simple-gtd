@@ -26,7 +26,7 @@ import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
 
 
-todoListViewConfig =
+createTodoListViewConfig model =
     { onDeleteTodoClicked = OnDeleteTodoClicked
     , onEditTodoClicked = OnEditTodoClicked
     , onEditTodoTextChanged = OnEditTodoTextChanged
@@ -34,6 +34,7 @@ todoListViewConfig =
     , onEditTodoKeyUp = OnEditTodoKeyUp
     , noOp = NoOp
     , onTodoMoveToClicked = OnTodoMoveToClicked
+    , now = getNow model
     }
 
 
@@ -73,7 +74,7 @@ drawerLayoutView m =
                 [ toolbar
                     []
                     [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-                    , addTodoView (getEditMode m) todoListViewConfig
+                    , addTodoView (getEditMode m) (createTodoListViewConfig m)
                     ]
                 ]
             , div [ id "center-view" ] [ centerView m ]
@@ -159,4 +160,4 @@ centerView m =
 
 
 todoListView m =
-    TodoStore.View.allTodosView todoListViewConfig (getEditMode m) (getTodoCollection m)
+    TodoStore.View.allTodosView (createTodoListViewConfig m) (getEditMode m) (getTodoCollection m)

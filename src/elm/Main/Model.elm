@@ -22,14 +22,15 @@ type ViewState
 
 
 type alias Model =
-    { todoStore : TodoStore
+    { now : Time
+    , todoStore : TodoStore
     , editMode : EditMode
     , viewState : ViewState
     }
 
 
-modelConstructor editMode todoStore =
-    Model todoStore editMode TodoListViewState
+modelConstructor now editMode todoStore =
+    Model now todoStore editMode TodoListViewState
 
 
 type alias ModelMapper =
@@ -49,12 +50,13 @@ init now encodedTodoList =
     in
         now
             |> todoModelFromSeed
-            >> (modelConstructor NotEditing)
+            >> (modelConstructor now NotEditing)
 
 
 setViewState viewState m =
     { m | viewState = viewState }
 
+getNow = .now
 
 getViewState =
     (.viewState)

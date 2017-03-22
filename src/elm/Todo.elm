@@ -1,5 +1,7 @@
 module Todo exposing (..)
 
+import Date
+import Date.Distance
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -237,6 +239,11 @@ decodeTodoList =
 
 generator createdAt text =
     Random.map (initWith createdAt text) RandomIdGenerator.idGen
+
+
+createdAtInWords : Time -> Todo -> String
+createdAtInWords now =
+    .createdAt >> Date.fromTime >> Date.Distance.inWords # (Date.fromTime now)
 
 
 getText =

@@ -203,6 +203,7 @@ encode todo =
     E.object
         [ "_id" => E.string (getId todo)
         , "_rev" => E.string (getRev todo)
+        , "done" => E.bool (getDone todo)
         , "text" => E.string (getText todo)
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (isDeleted todo)
@@ -279,6 +280,21 @@ isDeleted =
 
 setText text todo =
     { todo | text = text }
+
+
+getDone : Model -> Bool
+getDone =
+    (.done)
+
+
+setDone : Bool -> ModelMapper
+setDone done model =
+    { model | done = done }
+
+
+updateDone : (Model -> Bool) -> ModelMapper
+updateDone updater model =
+    setDone (updater model) model
 
 
 getCreatedAt : Model -> Time

@@ -67,7 +67,7 @@ update msg =
                 identity
 
             OnAddTodoClicked focusInputId ->
-                Return.map (Model.activateEditNewTodoMode "")
+                activateEditNewTodoMode ""
                     >> domFocus focusInputId OnDomResult
 
             OnNewTodoTextChanged text ->
@@ -157,11 +157,11 @@ domFocus =
 
 addNewTodoAndContinueAdding text =
     onTodoListMsg (TodoList.addNewTodo text)
-        >> activateEditNewTodoMode
+        >> activateEditNewTodoMode ""
 
 
-activateEditNewTodoMode =
-    Return.map (Model.activateEditNewTodoMode "")
+activateEditNewTodoMode text =
+    Return.map (Model.activateEditNewTodoMode text)
 
 
 setTodoTextAndDeactivateEditing todo =

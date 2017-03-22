@@ -133,7 +133,7 @@ type alias TodoFields =
 
 
 type alias Todo =
-    PouchDB.Document TodoFields
+    PouchDB.Document (PouchDB.WithTimeStamps TodoFields)
 
 
 type alias Model =
@@ -150,13 +150,14 @@ type alias TodoList =
 
 todoConstructor : PouchDB.Id -> PouchDB.Revision -> String -> Maybe Time -> Bool -> Group -> Todo
 todoConstructor id rev text dueAt deleted listType =
-    --    Todo (PouchDB.Document id rev) text dueAt deleted listType
     { id = id
     , rev = rev
     , text = text
     , dueAt = dueAt
     , deleted = deleted
     , listType = listType
+    , createdAt = 0
+    , modifiedAt = 0
     }
 
 

@@ -2,6 +2,7 @@ port module PouchDB exposing (..)
 
 import Json.Decode as D
 import Json.Encode as E
+import Time exposing (Time)
 
 
 port onPouchDBBulkDocksResponse : (D.Value -> msg) -> Sub msg
@@ -44,3 +45,7 @@ type alias Revision =
 
 type alias Document moreFields =
     { moreFields | id : Id, rev : Revision }
+
+
+type alias WithTimeStamps otherFields =
+    { otherFields | createdAt : Time, modifiedAt : Time }

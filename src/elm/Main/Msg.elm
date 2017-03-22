@@ -39,4 +39,4 @@ type Msg
     | OnFlowMarkDeleted
     | OnSaveNewTodoAndContinueAdding Time
     | SaveEditingTodoWithNow Time
-    | UpdateTodoWithNow TodoAction TodoId Time
+    | UpdateTodo TodoAction TodoId Time

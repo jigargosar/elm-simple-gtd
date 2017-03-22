@@ -139,15 +139,14 @@ update msg =
             --                        >> Tuple2.mapSecond persistMaybeTodoCmd
             --                    )
             OnTodoMoveToClicked listType todo ->
-                --                moveTodoToListType listType todo
-                updateTodoWithNow (SetGroup listType) todo
+                updateTodo (SetGroup listType) todo
 
             OnDeleteTodoClicked todoId ->
-                --                updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.markDeleted todoId)
-                updateTodoIdWithNow (Msg.Delete) todoId
+                updateTodoId (Msg.Delete) todoId
 
             OnTodoDoneClicked todoId ->
-                updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.toggleDone todoId)
+                --                updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.toggleDone todoId)
+                updateTodoId (Msg.ToggleDone) todoId
 
             MoveTodoToListTypeWithNow listType todo now ->
                 moveTodoToListTypeWithNow now listType todo
@@ -155,7 +154,7 @@ update msg =
             MoveFlowTodoToListTypeWithNow listType now ->
                 moveFlowTodoToListTypeWithNow now listType
 
-            UpdateTodoWithNow todoAction todoId now ->
+            UpdateTodo todoAction todoId now ->
                 updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todoId)
 
 
@@ -168,12 +167,12 @@ update msg =
 --                    identity
 
 
-updateTodoWithNow action todo =
-    updateTodoIdWithNow action (Todo.getId todo)
+updateTodo action todo =
+    updateTodoId action (Todo.getId todo)
 
 
-updateTodoIdWithNow action todoId =
-    withNow (UpdateTodoWithNow action todoId)
+updateTodoId action todoId =
+    withNow (UpdateTodo action todoId)
 
 
 updateAndPersistMaybeTodo updater =

@@ -5,7 +5,7 @@ import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Html exposing (div, node, span, text)
+import Html exposing (div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import DebugExtra.Debug exposing (tapLog)
@@ -16,12 +16,12 @@ import Json.Encode
 import List.Extra as List
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
-import Todo as Todo exposing (EditMode(..), Group)
+import Todo as Todo exposing (EditMode(..), Group(Inbox))
 import TodoStore.View
 import Flow.Model as Flow exposing (Node)
 import InboxFlow
 import InboxFlow.View
-import Polymer.Paper as Paper exposing (button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
+import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
 
@@ -58,7 +58,7 @@ drawerLayoutView m =
         [ drawer [ attribute "slot" "drawer" ]
             [ toolbar [] [ text "Simple GTD" ]
             , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
-                [--                TodoStore.View.drawerMenu (getTodoCollection m)
+                [ drawerMenuView m
                 ]
             ]
         , headerLayout []
@@ -80,26 +80,61 @@ drawerLayoutView m =
         ]
 
 
+drawerMenuView m =
+    menu
+        [ stringProperty "selected" "0"
+        ]
+        ([ item [ onClick OnShowTodoList ] [ text "All" ]
+         , hr [] []
+         ]
+            ++ listTypeMenuItems m
+        )
 
---appDrawerView m =
---    drawerPanel
---        []
---        [ div [ attribute "drawer" "true" ]
---            [ menu
---                [ stringProperty "selected" "0"
---                ]
---                [ Paper.item [] [ text "Item One" ]
---                , Paper.item [] [ text "Item 2" ]
---                , Paper.item [] [ text "Item 3" ]
---                ]
---            ]
---        , div
---            [ id "center-view"
---            , attribute "main" "true"
---            ]
---            [ centerView m ]
---        ]
---
+
+getTodoLists =
+    getTodoList >> Todo.todoListsByType2
+
+
+listTypeMenuItems =
+    getTodoLists
+        >> List.map listTypeMenuItem
+
+
+listTypeMenuItem ( listType, todoList ) =
+    let
+        ltName =
+            Todo.listTypeToName listType
+    in
+        item [ class "has-hover-items" ]
+            ([ span [ id ltName ] [ text (ltName) ]
+             , itemBody [] []
+             , badge
+                [ classList
+                    [ "hidden" => (List.length todoList == 0)
+                    , "drawer-list-type-badge" => True
+                    ]
+                , intProperty "label" (List.length todoList)
+                , attribute "for" ltName
+                ]
+                []
+             ]
+                ++ addHoverItems listType
+            )
+
+
+addHoverItems listType =
+    case listType of
+        Inbox ->
+            [ iconButton
+                [ class "hover-items"
+                , icon "vaadin-icons:start-cog"
+                , onClick OnProcessInbox
+                ]
+                []
+            ]
+
+        _ ->
+            []
 
 
 appDrawerView m =

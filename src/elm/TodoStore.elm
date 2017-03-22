@@ -35,36 +35,3 @@ getFirstInboxTodo =
 
 generator =
     Model.generator
-
-
-replaceTodoIfIdMatches =
-    Model.replaceTodoIfIdMatches
-
-
-addNewTodo =
-    Model.addNewTodo
-
-
-deleteAction =
-    Model.Delete
-
-
-toggleDoneAction =
-    Model.ToggleDone
-
-
-doneAction =
-    Model.Done
-
-
-editTodo : Model.Action -> TodoId -> Model -> ( Model, Cmd msg )
-editTodo =
-    Model.editTodo >>>> Tuple.mapSecond persistMaybeTodoCmd
-
-
-persistMaybeTodoCmd =
-    Maybe.unwrap Cmd.none persistTodoCmd
-
-
-persistTodoCmd todo =
-    PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)

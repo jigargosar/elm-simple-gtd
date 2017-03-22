@@ -103,9 +103,6 @@ update msg =
             OnEditTodoTextChanged text ->
                 Return.map (Model.updateEditTodoText text)
 
-            SaveEditingTodoWithNow now ->
-                saveEditingTodoWithNow now
-
             OnEditTodoBlur todo ->
                 onTodoListMsg (TodoList.setText (Todo.getText todo) (Todo.getId todo))
                     >> deactivateEditingMode
@@ -156,17 +153,6 @@ onTodoListMsg =
 
 domFocusCmd id msg =
     Task.attempt msg (Dom.focus id)
-
-
-saveEditingTodo =
-    Return.command (withNowOld SaveEditingTodoWithNow)
-
-
-saveEditingTodoWithNow now =
-    Return.andThen
-        (Model.saveEditingTodoAndDeactivateEditTodoMode now
-            >> Tuple2.mapSecond persistMaybeTodoCmd
-        )
 
 
 withNowOld : (Time -> Msg) -> Cmd Msg

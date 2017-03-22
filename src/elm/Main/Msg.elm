@@ -34,5 +34,4 @@ type Msg
     | OnShowTodoList
     | OnProcessInbox
     | OnSaveNewTodoAndContinueAdding Time
-    | SaveEditingTodoWithNow Time
     | OnTodoListMsg TodoListMsg

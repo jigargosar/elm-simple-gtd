@@ -88,19 +88,6 @@ update msg =
                     _ ->
                         identity
 
-            OnDeleteTodoClicked todoId ->
-                let
-                    _ =
-                        Debug.log "todoId" (todoId)
-                in
-                    Return.andThen
-                        (Model.deleteTodo todoId
-                            >> Tuple2.mapSecond persistMaybeTodoCmd
-                        )
-
-            OnTodoDoneClicked todoId ->
-                identity
-
             OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
                     >> Return.command (domFocusCmd focusInputId OnDomFocusResult)
@@ -152,6 +139,19 @@ update msg =
 
             OnTodoMoveToClicked listType todo ->
                 moveTodoToListType listType todo
+
+            OnDeleteTodoClicked todoId ->
+                let
+                    _ =
+                        Debug.log "todoId" (todoId)
+                in
+                    Return.andThen
+                        (Model.deleteTodo todoId
+                            >> Tuple2.mapSecond persistMaybeTodoCmd
+                        )
+
+            OnTodoDoneClicked todoId ->
+                identity
 
             MoveTodoToListTypeWithNow listType todo now ->
                 moveTodoToListTypeWithNow now listType todo

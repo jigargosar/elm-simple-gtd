@@ -183,18 +183,6 @@ updateSeed updater model =
     setSeed (updater model) model
 
 
-updateTodoMaybe : (Todo -> Todo) -> TodoId -> Model -> ( Model, Maybe Todo )
-updateTodoMaybe updater todoId m =
-    let
-        todoList =
-            m.todoList
-                |> List.updateIf (Todo.hasId todoId) updater
-    in
-        ( setTodoList todoList m
-        , List.find (Todo.hasId todoId) todoList
-        )
-
-
 saveEditingTodoAndDeactivateEditTodoMode : Time -> Model -> ( Model, Maybe Todo )
 saveEditingTodoAndDeactivateEditTodoMode now =
     saveEditingTodo now
@@ -247,26 +235,3 @@ updateInboxFlowWithActionType actionType m =
 
             _ ->
                 identity
-
-
-updateTodoWithAction todoAction now todoId =
-    let
-        --        todoId = Todo.getId todo
-        todoActionUpdater =
-            case todoAction of
-                SetGroup group ->
-                    Todo.setListType group
-
-                ToggleDone ->
-                    Todo.toggleDone
-
-                Delete ->
-                    Todo.markDeleted
-
-        modifiedAtUpdater =
-            Todo.setModifiedAt now
-
-        todoUpdater =
-            todoActionUpdater >> modifiedAtUpdater
-    in
-        updateTodoMaybe todoUpdater todoId

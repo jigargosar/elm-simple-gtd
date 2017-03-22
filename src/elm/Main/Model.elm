@@ -69,14 +69,6 @@ groupedTodoLists =
     getTodoList >> Todo.groupedTodoLists
 
 
-setTodoList : TodoList -> ModelMapper
-setTodoList todoList model =
-    { model | todoList = todoList }
-
-
-updateTodoList : (Model -> TodoList) -> ModelMapper
-updateTodoList updater model =
-    setTodoList (updater model) model
 
 
 getFirstInboxTodo =

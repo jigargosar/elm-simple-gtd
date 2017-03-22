@@ -1,13 +1,13 @@
 module TodoList exposing (..)
 
 import List.Extra
-import Main.Model exposing (Model)
+import Main.Model exposing (Model, ModelMapper)
 import Maybe.Extra
 import Random.Pcg as Random
 import Return exposing (Return, ReturnF)
 import Task
 import Time exposing (Time)
-import Todo exposing (Todo, TodoGroup, TodoId)
+import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -66,7 +66,17 @@ addNewTodoAt text now m =
 
 
 addTodo todo =
-    Main.Model.updateTodoList (Main.Model.getTodoList >> (::) todo)
+    updateTodoList (Main.Model.getTodoList >> (::) todo)
+
+
+setTodoList : TodoList -> ModelMapper
+setTodoList todoList model =
+    { model | todoList = todoList }
+
+
+updateTodoList : (Model -> TodoList) -> ModelMapper
+updateTodoList updater model =
+    setTodoList (updater model) model
 
 
 updateAndPersistMaybeTodo updater =
@@ -120,6 +130,6 @@ updateTodoMaybe updater todoId m =
             m.todoList
                 |> List.Extra.updateIf (Todo.hasId todoId) updater
     in
-        ( Main.Model.setTodoList todoList m
+        ( setTodoList todoList m
         , List.Extra.find (Todo.hasId todoId) todoList
         )

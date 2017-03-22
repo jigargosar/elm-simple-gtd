@@ -7,20 +7,14 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
 
-type ActionType
+type Action
     = ToggleDone
     | SetGroup TodoGroup
     | Delete
 
 
-type alias Action =
-    { id : TodoId
-    , type_ : ActionType
-    }
-
-
 type TodoListMsg
-    = UpdateTodoAt Action Time
-    | UpdateTodo Action
+    = UpdateTodoAt Action TodoId Time
+    | UpdateTodo Action TodoId
 
 

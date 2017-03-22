@@ -19,25 +19,20 @@ update : TodoListMsg -> Model -> ( Model, Cmd TodoListMsg )
 update msg =
     Return.singleton
         >> case msg of
-            UpdateTodoAt { type_, id } now ->
-                updateAndPersistMaybeTodo (updateTodoWithAction type_ now id)
+            UpdateTodoAt action id now ->
+                updateAndPersistMaybeTodo (updateTodoWithAction action now id)
 
-            UpdateTodo action ->
-                withNow (UpdateTodoAt action)
+            UpdateTodo action id ->
+                withNow (UpdateTodoAt action id)
 
 
 updateAndPersistMaybeTodo updater =
     Return.andThen
-        (updater
-            >> Tuple2.mapSecond persistMaybeTodoCmd
-        )
+        (updater >> Tuple2.mapSecond persistMaybeTodoCmd)
 
 
-toggleDone id = Action id ToggleDone |> UpdateTodo
-
-
---updateTodoId action todoId =
---    withNow (UpdateTodo action todoId)
+toggleDone =
+    UpdateTodo ToggleDone
 
 
 withNow : (Time -> TodoListMsg) -> ReturnF TodoListMsg Model
@@ -53,11 +48,11 @@ persistTodoCmd todo =
     PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)
 
 
-updateTodoWithAction actionType now todoId =
+updateTodoWithAction action now todoId =
     let
         --        todoId = Todo.getId todo
         todoActionUpdater =
-            case actionType of
+            case action of
                 SetGroup group ->
                     Todo.setListType group
 

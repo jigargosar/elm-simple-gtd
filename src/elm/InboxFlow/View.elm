@@ -33,14 +33,17 @@ toTodoViewModel todo =
 
 toViewModel maybeTodo model =
     { maybeTodo = maybeTodo ?|> toTodoViewModel
-    , question = Model.getQuestion model
-    , flowActions = Model.getFlowActions Msg.OnInboxFlowAction model
+    , question =
+        Model.getQuestion model
+        --    , flowActions = Model.getFlowActions Msg.OnInboxFlowAction model
     }
 
 
-inboxFlowView : Maybe Todo -> Model -> Html Msg
-inboxFlowView =
-    toViewModel >>> flowView
+
+--inboxFlowView : Maybe Todo -> Model -> Html Msg
+--inboxFlowView =
+--    toViewModel >>> flowView
+--
 
 
 flowView : ViewModel -> Html Msg

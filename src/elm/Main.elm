@@ -119,9 +119,6 @@ update msg =
                     _ ->
                         identity
 
-            OnInboxFlowAction actionType ->
-                Return.map (Model.updateInboxFlowWithActionType actionType)
-
             OnShowTodoList ->
                 Return.map (Model.showTodoList)
 

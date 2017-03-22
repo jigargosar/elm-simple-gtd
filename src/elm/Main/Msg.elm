@@ -30,7 +30,6 @@ type Msg
     | OnTodoDoneClicked TodoId
     | OnEditTodoKeyUp Key
     | OnTodoMoveToClicked TodoGroup Todo
-    | OnInboxFlowAction FlowAction
     | OnShowTodoList
     | OnProcessInbox
     | OnSaveNewTodoAndContinueAdding Time

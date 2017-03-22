@@ -3,6 +3,7 @@ module Main.View exposing (appView)
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
+import Main.View.AllTodoView exposing (allTodosView)
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -29,19 +30,6 @@ import Main.View.DrawerMenu exposing (appDrawerMenuView)
 import Todo.View
 
 
-createTodoListViewConfig : Model -> TodoStore.View.ViewConfig Msg
-createTodoListViewConfig model =
-    { onDeleteTodoClicked = OnDeleteTodoClicked
-    , onEditTodoClicked = OnEditTodoClicked
-    , onEditTodoTextChanged = OnEditTodoTextChanged
-    , onEditTodoBlur = OnEditTodoBlur
-    , onEditTodoKeyUp = OnEditTodoKeyUp
-    , noOp = NoOp
-    , onTodoMoveToClicked = OnTodoMoveToClicked
-    , now = getNow model
-    , editMode = getEditMode model
-    , onTodoDoneClicked = OnTodoDoneClicked
-    }
 
 
 appView m =
@@ -111,65 +99,16 @@ addNewTodoView text =
 centerView m =
     case getViewState m of
         TodoListViewState ->
-            todoListView m
+            allTodosView  m
 
         InboxFlowViewState maybeTodo inboxFlowModel ->
             InboxFlow.View.view maybeTodo inboxFlowModel
 
 
-todoListView m =
-    allTodosView (createTodoListViewConfig m) m
+
 
 
 
 --    div [] []
 
 
-allTodosView : ViewConfig msg -> Model -> Html msg
-allTodosView vc model =
-    let
-        todoListViewsWithKey : List ( String, Html msg )
-        todoListViewsWithKey =
-            model |> getTodoList >> Todo.todoListsByType .|> todoListViewWithKey (todoView vc)
-    in
-        Keyed.node "div" [] todoListViewsWithKey
-
-
-todoListViewWithKey todoView ( listTitle, todoList ) =
-    ( listTitle
-    , div [ class "todo-list-container" ]
-        [ div [ class "todo-list-title" ]
-            [ div [ class "paper-badge-container" ]
-                [ span [] [ text listTitle ]
-                , badge [ intProperty "label" (List.length todoList) ] []
-                ]
-            ]
-        , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
-        ]
-    )
-
-
-todoView : ViewConfig msg -> Todo -> ( TodoId, Html msg )
-todoView vc todo =
-    let
-        todoId =
-            Todo.getId todo
-
-        notEditingView =
-            Todo.View.todoViewNotEditing vc todo
-
-        editingView todo =
-            Todo.View.todoViewEditing vc todo
-
-        todoViewHelp =
-            case vc.editMode of
-                EditTodoMode editingTodo ->
-                    if Todo.equalById editingTodo todo then
-                        editingView editingTodo
-                    else
-                        notEditingView
-
-                _ ->
-                    notEditingView
-    in
-        ( todoId, todoViewHelp )

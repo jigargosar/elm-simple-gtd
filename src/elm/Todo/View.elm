@@ -91,7 +91,12 @@ todoItemView vc ( editing, todo ) =
 
 
 doneIconButton vc todo =
-    iconButton [ class "check", icon "check" ] []
+    iconButton
+        [ class "check"
+        , onClick (vc.onTodoDoneClicked (Todo.getId todo))
+        , icon "check"
+        ]
+        []
 
 
 deleteIconButton vc todo =

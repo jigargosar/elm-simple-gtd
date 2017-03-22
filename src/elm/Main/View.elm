@@ -63,7 +63,7 @@ drawerLayoutView m =
         [ drawer [ attribute "slot" "drawer" ]
             [ toolbar [] [ text "Simple GTD" ]
             , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
-                [ TodoStore.View.drawerMenu (getTodoCollection m)
+                [--                TodoStore.View.drawerMenu (getTodoCollection m)
                 ]
             ]
         , headerLayout []
@@ -163,4 +163,5 @@ centerView m =
 
 
 todoListView m =
-    TodoStore.View.allTodosView (createTodoListViewConfig m) (getTodoCollection m)
+    --TodoStore.View.allTodosView (createTodoListViewConfig m) (getTodoCollection m)
+    div [] []

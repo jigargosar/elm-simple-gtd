@@ -14,6 +14,7 @@ import Toolkit.Helpers exposing (..)
 import Tuple2
 import InboxFlow
 import TodoStore exposing (TodoStore)
+import TodoStore.Model
 
 
 type ViewState
@@ -144,16 +145,6 @@ updateEditTodoText text m =
             m
 
 
-setTodoCollection : TodoStore -> ModelMapper
-setTodoCollection todoStore m =
-    { m | todoStore = todoStore }
-
-
-updateTodoCollection : (Model -> TodoStore) -> ModelMapper
-updateTodoCollection fun model =
-    setTodoCollection (fun model) model
-
-
 addNewTodoAndContinueAdding : Time -> Model -> ( Model, Maybe Todo )
 addNewTodoAndContinueAdding now =
     addNewTodo now
@@ -167,16 +158,45 @@ addNewTodo now m =
             if String.trim text |> String.isEmpty then
                 ( m, Nothing )
             else
-                TodoStore.addNewTodo now text m.todoStore
-                    |> Tuple2.mapEach (setTodoCollection # m) (Just)
+                addNewTodoHelp now text m
 
         _ ->
             ( m, Nothing )
 
 
+addNewTodoHelp : Time -> String -> Model -> ( Model, Maybe Todo )
+addNewTodoHelp createdAt text model =
+    let
+        foo : ( Seed, Todo )
+        foo =
+            Random.step (Todo.generator createdAt text) (getSeed model)
+                |> Tuple2.swap
+    in
+        foo
+            |> Tuple.mapFirst (setSeed # model)
+            |> (\( model, todo ) -> ( updateTodoList (getTodoList >> (::) todo) model, Just todo ))
+
+
+getSeed : Model -> Seed
+getSeed =
+    (.seed)
+
+
+setSeed : Seed -> ModelMapper
+setSeed seed model =
+    { model | seed = seed }
+
+
+updateSeed : (Model -> Seed) -> ModelMapper
+updateSeed updater model =
+    setSeed (updater model) model
+
+
+updateTodo : TodoStore.Model.Action -> TodoId -> Model -> ( Model, Cmd msg )
 updateTodo action todoId m =
-    TodoStore.editTodo action todoId m.todoStore
-        |> Tuple2.mapFirst (setTodoCollection # m)
+    --    TodoStore.editTodo action todoId m.todoStore
+    --        |> Tuple2.mapFirst (setTodoCollection # m)
+    ( m, Cmd.none )
 
 
 saveEditingTodoAndDeactivateEditTodoMode : Time -> Model -> ( Model, Maybe Todo )
@@ -202,9 +222,23 @@ saveEditingTodo now m =
             ( m, Nothing )
 
 
+replaceTodoIfIdMatches2 : Time -> Todo -> Model -> ( Model, Todo )
+replaceTodoIfIdMatches2 now todo =
+    let
+        updatedTodoWithModifiedAt =
+            Todo.setModifiedAt now todo
+
+        newTodoList =
+            getTodoList >> Todo.replaceIfEqualById updatedTodoWithModifiedAt
+    in
+        updateTodoList newTodoList >> (,) # updatedTodoWithModifiedAt
+
+
+replaceTodoIfIdMatches : Time -> Todo -> Model -> ( Model, Maybe Todo )
 replaceTodoIfIdMatches now todo m =
-    TodoStore.replaceTodoIfIdMatches now todo m.todoStore
-        |> Tuple2.mapEach (setTodoCollection # m) (Just)
+    --    replaceTodoIfIdMatches2 now todo m.todoStore
+    --        |> Tuple2.mapEach (setTodoCollection # m) (Just)
+    ( m, Nothing )
 
 
 

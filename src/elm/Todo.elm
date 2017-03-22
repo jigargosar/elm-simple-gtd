@@ -243,7 +243,16 @@ generator createdAt text =
 
 createdAtInWords : Time -> Todo -> String
 createdAtInWords now =
-    .createdAt
+    getCreatedAt
+        >> Date.fromTime
+        >> Date.Distance.inWordsWithConfig
+            ({ defaultConfig | includeSeconds = True })
+            (Date.fromTime now)
+
+
+modifiedAtInWords : Time -> Todo -> String
+modifiedAtInWords now =
+    getModifiedAt
         >> Date.fromTime
         >> Date.Distance.inWordsWithConfig
             ({ defaultConfig | includeSeconds = True })
@@ -268,6 +277,22 @@ isDeleted =
 
 setText text todo =
     { todo | text = text }
+
+
+getCreatedAt : Model -> Time
+getCreatedAt =
+    (.createdAt)
+
+
+setCreatedAt : Time -> ModelMapper
+setCreatedAt createdAt model =
+    { model | createdAt = createdAt }
+
+
+updateCreatedAt : (Model -> Time) -> ModelMapper
+updateCreatedAt updater model =
+    setCreatedAt (updater model) model
+
 
 getModifiedAt : Model -> Time
 getModifiedAt =

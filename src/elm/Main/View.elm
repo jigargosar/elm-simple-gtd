@@ -7,7 +7,7 @@ import Main.View.AllTodoView exposing (allTodosView)
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Html exposing (Html, div, hr, node, span, text)
+import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import DebugExtra.Debug exposing (tapLog)
@@ -111,3 +111,10 @@ addTodoFabView m =
         , onClick (OnAddTodoClicked newTodoInputId)
         ]
         []
+
+
+type AttributeTypes msg
+    = AttrPresent (Attribute msg)
+    | AttrAbsent
+    | AttrMaybe (Maybe (Attribute msg))
+    | List (AttributeTypes msg)

@@ -211,29 +211,33 @@ saveEditingTodo now m =
             if Todo.isTextEmpty todo then
                 ( m, Nothing )
             else
-                replaceTodoIfIdMatches now todo m
+                replaceTodoIfIdMatchesMaybe now todo m
 
         _ ->
             ( m, Nothing )
 
 
-replaceTodoIfIdMatches2 : Time -> Todo -> Model -> ( Model, Todo )
-replaceTodoIfIdMatches2 now todo =
+replaceTodoIfIdMatches : Time -> Todo -> Model -> ( Model, Maybe Todo )
+replaceTodoIfIdMatches now todo model =
     let
         updatedTodoWithModifiedAt =
             Todo.setModifiedAt now todo
 
-        newTodoList =
+        todoListUpdater =
             getTodoList >> Todo.replaceIfEqualById updatedTodoWithModifiedAt
+
+        newModel =
+            updateTodoList todoListUpdater model
     in
-        updateTodoList newTodoList >> (,) # updatedTodoWithModifiedAt
+        ( newModel, findTodoEqualById todo newModel )
 
 
-replaceTodoIfIdMatches : Time -> Todo -> Model -> ( Model, Maybe Todo )
-replaceTodoIfIdMatches now todo m =
-    --    replaceTodoIfIdMatches2 now todo m.todoStore
-    --        |> Tuple2.mapEach (setTodoCollection # m) (Just)
-    ( m, Nothing )
+findTodoEqualById todo =
+    getTodoList >> List.find (Todo.equalById todo)
+
+
+replaceTodoIfIdMatchesMaybe now todo =
+    replaceTodoIfIdMatches now todo
 
 
 
@@ -267,7 +271,7 @@ updateInboxFlowWithActionType actionType m =
 
 moveTodoToListType now listType todo m =
     Todo.setListType listType todo
-        |> ((replaceTodoIfIdMatches now) # m)
+        |> ((replaceTodoIfIdMatchesMaybe now) # m)
 
 
 moveMaybeTodoToListType : Time -> TodoGroup -> Maybe Todo -> Model -> ( Model, Maybe Todo )

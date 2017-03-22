@@ -292,9 +292,18 @@ setDone done model =
     { model | done = done }
 
 
+markDone : ModelMapper
+markDone =
+    setDone True
+
+
 updateDone : (Model -> Bool) -> ModelMapper
 updateDone updater model =
     setDone (updater model) model
+
+toggleDone : ModelMapper
+toggleDone =
+    updateDone (isDone >> not)
 
 
 getCreatedAt : Model -> Time
@@ -346,6 +355,7 @@ updateListType updater model =
     setListType (updater model) model
 
 
+markDeleted : ModelMapper
 markDeleted todo =
     { todo | deleted = True }
 

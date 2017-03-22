@@ -99,24 +99,14 @@ replaceTodoIfIdMatches now todo =
         updateTodoList newTodoList >> (,) # updatedTodoWithModifiedAt
 
 
-deleteTodo todoId todoStore =
+updateTodo : (Todo -> Todo) -> TodoId -> Model -> ( Model, Maybe Todo )
+updateTodo updater todoId m =
     let
         todoList =
-            todoStore.todoList
-                |> List.updateIf (Todo.hasId todoId) (Todo.markDeleted)
+            m.todoList
+                |> List.updateIf (Todo.hasId todoId) updater
     in
-        ( setTodoList todoList todoStore
-        , List.find (Todo.hasId todoId) todoList
-        )
-
-
-markTodoDone todoId todoStore =
-    let
-        todoList =
-            todoStore.todoList
-                |> List.updateIf (Todo.hasId todoId) (Todo.setDone True)
-    in
-        ( setTodoList todoList todoStore
+        ( setTodoList todoList m
         , List.find (Todo.hasId todoId) todoList
         )
 
@@ -128,13 +118,17 @@ type Action
 
 
 editTodo : Action -> TodoId -> Model -> ( Model, Maybe Todo )
-editTodo action todoId todoStore =
-    case action of
-        Delete ->
-            deleteTodo todoId todoStore
+editTodo action =
+    let
+        updater =
+            case action of
+                Delete ->
+                    Todo.markDeleted
 
-        Done ->
-            markTodoDone todoId todoStore
+                Done ->
+                    Todo.markDone
 
-        ToggleDone ->
-            markTodoDone todoId todoStore
+                ToggleDone ->
+                    Todo.toggleDone
+    in
+        updateTodo updater

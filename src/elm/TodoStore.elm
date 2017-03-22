@@ -38,10 +38,6 @@ generator =
     Model.generator
 
 
-deleteTodo =
-    Model.deleteTodo
-
-
 replaceTodoIfIdMatches =
     Model.replaceTodoIfIdMatches
 
@@ -56,6 +52,7 @@ update =
 
 deleteAction =
     Model.Delete
+
 
 toggleDoneAction =
     Model.ToggleDone

@@ -270,8 +270,10 @@ moveTodoToListType now listType todo m =
         |> ((replaceTodoIfIdMatches now) # m)
 
 
-updateTodoWithAction todoAction now todoId =
+updateTodoWithAction todoAction now todo =
     let
+        todoId = Todo.getId todo
+
         todoActionUpdater =
             case todoAction of
                 SetGroup group ->

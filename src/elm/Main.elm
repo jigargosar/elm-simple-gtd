@@ -80,7 +80,7 @@ update msg =
             OnNewTodoKeyUp key ->
                 case key of
                     Enter ->
-                        Return.command (withNow OnSaveNewTodoAndContinueAdding)
+                        Return.command (withNowOld OnSaveNewTodoAndContinueAdding)
 
                     Escape ->
                         deactivateEditingMode
@@ -139,7 +139,8 @@ update msg =
             --                        >> Tuple2.mapSecond persistMaybeTodoCmd
             --                    )
             OnTodoMoveToClicked listType todo ->
-                moveTodoToListType listType todo
+                --                moveTodoToListType listType todo
+                withNow (UpdateTodoWithNow (SetGroup listType) todo)
 
             OnDeleteTodoClicked todoId ->
                 updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.markDeleted todoId)
@@ -153,8 +154,8 @@ update msg =
             MoveFlowTodoToListTypeWithNow listType now ->
                 moveFlowTodoToListTypeWithNow now listType
 
-            UpdateTodo todoId todoAction now ->
-                updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todoId)
+            UpdateTodoWithNow todoAction todo now ->
+                updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todo)
 
 
 
@@ -178,7 +179,7 @@ domFocusCmd id msg =
 
 
 onFlowMoveTo listType =
-    Return.command (withNow (MoveFlowTodoToListTypeWithNow listType))
+    Return.command (withNowOld (MoveFlowTodoToListTypeWithNow listType))
 
 
 moveFlowTodoToListTypeWithNow now listType =
@@ -189,7 +190,7 @@ moveFlowTodoToListTypeWithNow now listType =
 
 
 moveTodoToListType listType todo =
-    Return.command (withNow (MoveTodoToListTypeWithNow listType todo))
+    Return.command (withNowOld (MoveTodoToListTypeWithNow listType todo))
 
 
 moveTodoToListTypeWithNow now listType todo =
@@ -200,7 +201,7 @@ moveTodoToListTypeWithNow now listType todo =
 
 
 saveEditingTodo =
-    Return.command (withNow SaveEditingTodoWithNow)
+    Return.command (withNowOld SaveEditingTodoWithNow)
 
 
 saveEditingTodoWithNow now =
@@ -210,9 +211,14 @@ saveEditingTodoWithNow now =
         )
 
 
-withNow : (Time -> Msg) -> Cmd Msg
-withNow msg =
+withNowOld : (Time -> Msg) -> Cmd Msg
+withNowOld msg =
     Task.perform msg Time.now
+
+
+withNow : (Time -> Msg) -> ( Model, Cmd Msg ) -> ( Model, Cmd Msg )
+withNow msg =
+    Task.perform msg Time.now |> Return.command
 
 
 saveNewTodoAndContinueAdding now =

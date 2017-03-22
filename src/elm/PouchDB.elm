@@ -32,3 +32,15 @@ encodeAsSetting key value =
 
 pouchDBPersistSetting key value =
     pouchDBUpsert ( "settings", key, value )
+
+
+type alias Id =
+    String
+
+
+type alias Revision =
+    String
+
+
+type alias Document moreFields =
+    { moreFields | id : Id, rev : Revision }

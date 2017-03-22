@@ -217,6 +217,11 @@ deleteTodo todoId m =
         |> Tuple2.mapFirst (setTodoCollection # m)
 
 
+deleteTodo2 todoId m =
+    TodoStore.editTodo TodoStore.deleteAction todoId m.todoStore
+        |> Tuple2.mapFirst (setTodoCollection # m)
+
+
 saveEditingTodoAndDeactivateEditTodoMode : Time -> Model -> ( Model, Maybe Todo )
 saveEditingTodoAndDeactivateEditTodoMode now =
     saveEditingTodo now

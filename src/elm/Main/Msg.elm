@@ -29,7 +29,7 @@ type Msg
     | OnEditTodoBlur
     | OnTodoDoneClicked TodoId
     | OnEditTodoKeyUp Key
-    | OnTodoMoveToClicked TodoGroup Todo
+    | OnSetTodoGroupClicked TodoGroup Todo
     | OnShowTodoList
     | OnProcessInbox
     | OnSaveNewTodoAndContinueAdding Time

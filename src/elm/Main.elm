@@ -125,8 +125,8 @@ update msg =
             OnProcessInbox ->
                 Return.map (Model.startProcessingInbox)
 
-            OnTodoMoveToClicked listType todo ->
-                updateTodo (SetGroup listType) todo
+            OnSetTodoGroupClicked todoGroup todo ->
+                updateTodo (Msg.SetGroup todoGroup) todo
 
             OnDeleteTodoClicked todoId ->
                 updateTodoId (Msg.Delete) todoId

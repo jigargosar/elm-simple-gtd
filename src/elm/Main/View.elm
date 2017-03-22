@@ -67,7 +67,7 @@ appHeaderView m =
         [ toolbar
             []
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-            , addTodoView (getEditMode m)
+            , newTodoInputView (getEditMode m)
             ]
         ]
 
@@ -83,7 +83,11 @@ appMainView m =
         ]
 
 
-addTodoView editMode =
+newTodoInputId =
+    "new-todo-input"
+
+
+newTodoInputView editMode =
     case editMode of
         EditNewTodoMode text ->
             Paper.input
@@ -98,10 +102,6 @@ addTodoView editMode =
 
         _ ->
             span [] []
-
-
-newTodoInputId =
-    "new-todo-input"
 
 
 addTodoFabView m =

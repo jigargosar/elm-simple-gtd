@@ -21,46 +21,6 @@ import FunctionExtra exposing (..)
 import Time exposing (Time)
 
 
-type alias ViewConfig msg =
-    { onDeleteTodoClicked : TodoId -> msg
-    , onEditTodoClicked : Dom.Id -> Todo -> msg
-    , onEditTodoTextChanged : String -> msg
-    , onEditTodoBlur : msg
-    , onEditTodoKeyUp : Key -> msg
-    , noOp : msg
-    , onTodoMoveToClicked : TodoGroup -> Todo -> msg
-    , now : Time
-    , editMode : EditMode
-    , onTodoDoneClicked : TodoId -> msg
-    }
-
-
-todoView : ViewConfig msg -> Todo -> ( TodoId, Html msg )
-todoView vc todo =
-    let
-        todoId =
-            Todo.getId todo
-
-        notEditingView =
-            Todo.View.todoViewNotEditing vc todo
-
-        editingView todo =
-            Todo.View.todoViewEditing vc todo
-
-        todoViewHelp =
-            case vc.editMode of
-                EditTodoMode editingTodo ->
-                    if Todo.equalById editingTodo todo then
-                        editingView editingTodo
-                    else
-                        notEditingView
-
-                _ ->
-                    notEditingView
-    in
-        ( todoId, todoViewHelp )
-
-
 todoListViewWithKey todoView ( listTitle, todoList ) =
     ( listTitle
     , div [ class "todo-list-container" ]

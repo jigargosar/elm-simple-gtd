@@ -1,9 +1,12 @@
 module Main.View.AllTodoView exposing (..)
 
+import Dom
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
+import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Polymer.Attributes exposing (icon)
+import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (Html, div, hr, node, span, text)
@@ -18,7 +21,6 @@ import List.Extra as List
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
 import Todo as Todo exposing (EditMode(..), TodoGroup(Inbox), Todo, TodoId)
-import TodoStore.View exposing (ViewConfig)
 import Flow.Model as Flow exposing (Node)
 import InboxFlow
 import InboxFlow.View
@@ -29,7 +31,21 @@ import Main.View.DrawerMenu exposing (appDrawerMenuView)
 import Todo.View
 
 
-createTodoListViewConfig : Model -> TodoStore.View.ViewConfig Msg
+type alias ViewConfig msg =
+    { onDeleteTodoClicked : TodoId -> msg
+    , onEditTodoClicked : Dom.Id -> Todo -> msg
+    , onEditTodoTextChanged : String -> msg
+    , onEditTodoBlur : msg
+    , onEditTodoKeyUp : Key -> msg
+    , noOp : msg
+    , onTodoMoveToClicked : TodoGroup -> Todo -> msg
+    , now : Time
+    , editMode : EditMode
+    , onTodoDoneClicked : TodoId -> msg
+    }
+
+
+createTodoListViewConfig : Model -> ViewConfig Msg
 createTodoListViewConfig model =
     { onDeleteTodoClicked = OnDeleteTodoClicked
     , onEditTodoClicked = OnEditTodoClicked

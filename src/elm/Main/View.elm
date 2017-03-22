@@ -30,8 +30,6 @@ import Main.View.DrawerMenu exposing (appDrawerMenuView)
 import Todo.View
 
 
-
-
 appView m =
     div []
         [ drawerLayoutView m
@@ -46,12 +44,7 @@ appView m =
 
 drawerLayoutView m =
     drawerLayout []
-        [ drawer [ attribute "slot" "drawer" ]
-            [ toolbar [] [ text "Simple GTD" ]
-            , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
-                [ appDrawerMenuView m
-                ]
-            ]
+        [ appDrawerView m
         , headerLayout []
             [ header
                 [ attribute "reveals" "true"
@@ -67,6 +60,15 @@ drawerLayoutView m =
                     ]
                 ]
             , div [ id "main-view" ] [ mainView m ]
+            ]
+        ]
+
+
+appDrawerView m =
+    drawer [ attribute "slot" "drawer" ]
+        [ toolbar [] [ text "Simple GTD" ]
+        , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
+            [ appDrawerMenuView m
             ]
         ]
 
@@ -99,16 +101,11 @@ addNewTodoView text =
 mainView m =
     case getViewState m of
         TodoListViewState ->
-            allTodosView  m
+            allTodosView m
 
         InboxFlowViewState maybeTodo inboxFlowModel ->
             InboxFlow.View.view maybeTodo inboxFlowModel
 
 
 
-
-
-
 --    div [] []
-
-

@@ -41,7 +41,13 @@ todoViewNotEditing vc todo =
     let
         itemBodyView =
             itemBody []
-                [ span [ class "ellipsis" ] [ Todo.getText todo |> text ]
+                [ span
+                    [ classList
+                        [ "ellipsis" => True
+                        , "done" => Todo.isDone todo
+                        ]
+                    ]
+                    [ Todo.getText todo |> text ]
                 , span [ class "small dim" ]
                     [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
                     , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")

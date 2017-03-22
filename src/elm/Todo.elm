@@ -198,6 +198,8 @@ encode todo =
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (isDeleted todo)
         , "listType" => E.string (getListType todo |> toString)
+        , "createdAt" => E.int (todo.createdAt |> round)
+        , "modifiedAt" => E.int (todo.modifiedAt |> round)
         ]
 
 

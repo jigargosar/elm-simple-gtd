@@ -13,6 +13,7 @@ import RouteUrl exposing (RouteUrlProgram)
 import Task
 import Time exposing (Time)
 import PouchDB
+import TodoList
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
@@ -138,7 +139,7 @@ update msg =
                 updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todoId)
 
             TodoListMsg msg ->
-                identity
+                Return.andThen (TodoList.update msg)
 
 
 

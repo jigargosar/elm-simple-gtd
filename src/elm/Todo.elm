@@ -1,7 +1,7 @@
 module Todo exposing (..)
 
 import Date
-import Date.Distance
+import Date.Distance exposing (defaultConfig)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -243,7 +243,11 @@ generator createdAt text =
 
 createdAtInWords : Time -> Todo -> String
 createdAtInWords now =
-    .createdAt >> Date.fromTime >> Date.Distance.inWords (Date.fromTime now)
+    .createdAt
+        >> Date.fromTime
+        >> Date.Distance.inWordsWithConfig
+            ({ defaultConfig | includeSeconds = True })
+            (Date.fromTime now)
 
 
 getText =

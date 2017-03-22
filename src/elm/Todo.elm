@@ -116,7 +116,6 @@ reference =
     Reference
 
 
-
 type alias TodoFields =
     { done : Bool
     , text : String

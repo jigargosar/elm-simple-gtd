@@ -6,6 +6,7 @@ import Keyboard.Extra exposing (Key(Enter, Escape))
 import Main.Model as Model exposing (Model)
 import Main.Msg as Msg exposing (..)
 import Main.Routing
+import Main.TodoListMsg
 import Main.View exposing (appView)
 import Navigation exposing (Location)
 import Return exposing (Return)
@@ -133,7 +134,7 @@ update msg =
                 updateTodoId (Msg.Delete) todoId
 
             OnTodoDoneClicked todoId ->
-                updateTodoId (Msg.ToggleDone) todoId
+                onTodoListMsg (Main.TodoListMsg.toggleDone todoId)
 
             UpdateTodo todoAction todoId now ->
                 updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todoId)
@@ -149,6 +150,10 @@ update msg =
 --                        Debug.log "WARN: msg ignored" (msg)
 --                in
 --                    identity
+
+
+onTodoListMsg todoListMsg =
+    Return.andThen (update (TodoListMsg todoListMsg))
 
 
 updateTodo action todo =

@@ -22,3 +22,6 @@ type alias Action =
 type Msg
     = UpdateTodoAt Action Time
     | UpdateTodo Action
+
+
+toggleDone id = Action id ToggleDone |> UpdateTodo

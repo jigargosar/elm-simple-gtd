@@ -36,34 +36,35 @@ type alias ViewConfig msg =
     }
 
 
-allTodosView : ViewConfig msg -> TodoStore -> Html msg
-allTodosView viewConfig todoStore =
+todoView : ViewConfig msg -> Todo -> ( TodoId, Html msg )
+todoView vc todo =
     let
-        todoView : Todo -> ( TodoId, Html msg )
-        todoView todo =
-            let
-                todoId =
-                    Todo.getId todo
+        todoId =
+            Todo.getId todo
 
-                editingTodoTuple =
-                    case viewConfig.editMode of
-                        EditTodoMode editingTodo ->
-                            if Todo.equalById editingTodo todo then
-                                ( True, editingTodo )
-                            else
-                                ( False, todo )
+        editingTodoTuple =
+            case vc.editMode of
+                EditTodoMode editingTodo ->
+                    if Todo.equalById editingTodo todo then
+                        ( True, editingTodo )
+                    else
+                        ( False, todo )
 
-                        _ ->
-                            ( False, todo )
+                _ ->
+                    ( False, todo )
 
-                todoView =
-                    Todo.View.todoView viewConfig editingTodoTuple
-            in
-                ( todoId, todoView )
+        todoView =
+            Todo.View.todoView vc editingTodoTuple
+    in
+        ( todoId, todoView )
 
+
+allTodosView : ViewConfig msg -> TodoStore -> Html msg
+allTodosView vc todoStore =
+    let
         todoListViewsWithKey : List ( String, Html msg )
         todoListViewsWithKey =
-            Model.getTodoLists todoStore .|> todoListViewWithKey todoView
+            Model.getTodoLists todoStore .|> todoListViewWithKey (todoView vc)
     in
         Keyed.node "div" [] todoListViewsWithKey
 

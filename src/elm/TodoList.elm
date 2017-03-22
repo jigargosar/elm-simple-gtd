@@ -15,7 +15,7 @@ import PouchDB
 import Tuple2
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : TodoListMsg -> Model -> ( Model, Cmd TodoListMsg )
 update msg =
     Return.singleton
         >> case msg of
@@ -33,12 +33,14 @@ updateAndPersistMaybeTodo updater =
         )
 
 
+toggleDone id = Action id ToggleDone |> UpdateTodo
+
 
 --updateTodoId action todoId =
 --    withNow (UpdateTodo action todoId)
 
 
-withNow : (Time -> Msg) -> ReturnF Msg Model
+withNow : (Time -> TodoListMsg) -> ReturnF TodoListMsg Model
 withNow msg =
     Task.perform msg Time.now |> Return.command
 

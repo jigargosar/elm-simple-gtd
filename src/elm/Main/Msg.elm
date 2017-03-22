@@ -4,7 +4,7 @@ import Dom
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
-import Main.TodoListMsg as TodoList
+import Main.TodoListMsg exposing (TodoListMsg)
 import Navigation exposing (Location)
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
@@ -36,4 +36,4 @@ type Msg
     | OnSaveNewTodoAndContinueAdding Time
     | SaveEditingTodoWithNow Time
     | UpdateTodo TodoAction TodoId Time
-    | TodoListMsg TodoList.Msg
+    | OnTodoListMsg TodoListMsg

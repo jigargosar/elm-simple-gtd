@@ -148,16 +148,16 @@ type alias TodoList =
     List Todo
 
 
-todoConstructor : PouchDB.Id -> PouchDB.Revision -> String -> Maybe Time -> Bool -> Group -> Todo
-todoConstructor id rev text dueAt deleted listType =
+todoConstructor : PouchDB.Id -> PouchDB.Revision -> String -> Maybe Time -> Bool -> Group -> Time -> Time -> Todo
+todoConstructor id rev text dueAt deleted listType createdAt modifiedAt =
     { id = id
     , rev = rev
     , text = text
     , dueAt = dueAt
     , deleted = deleted
     , listType = listType
-    , createdAt = 0
-    , modifiedAt = 0
+    , createdAt = createdAt
+    , modifiedAt = modifiedAt
     }
 
 
@@ -170,6 +170,8 @@ decoder =
         |> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         |> D.optional "deleted" D.bool defaultDeleted
         |> D.optional "listType" (D.map stringToListType D.string) Inbox
+        |> D.optional "createdAt" (D.float) 0
+        |> D.optional "modifedAt" (D.float) 0
 
 
 listTypeEncodings =
@@ -181,8 +183,9 @@ stringToListType string =
     listTypeEncodings |> Dict.get string ?= Inbox
 
 
+initWithTextAndId : String -> TodoId -> Todo
 initWithTextAndId text id =
-    todoConstructor id defaultRevision text defaultDueAt defaultDeleted Inbox
+    todoConstructor id defaultRevision text defaultDueAt defaultDeleted Inbox 0 0
 
 
 type alias EncodedTodo =

@@ -72,6 +72,9 @@ getTodoList : Model -> TodoList
 getTodoList =
     (.todoList)
 
+todoListsByType=
+    getTodoList >> Todo.todoListsByType
+
 
 setTodoList : TodoList -> ModelMapper
 setTodoList todoList model =

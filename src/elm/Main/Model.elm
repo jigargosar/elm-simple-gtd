@@ -150,15 +150,13 @@ addNewTodo now m =
 
 addNewTodoHelp : Time -> String -> Model -> ( Model, Maybe Todo )
 addNewTodoHelp createdAt text model =
-    let
-        foo : ( Seed, Todo )
-        foo =
-            Random.step (Todo.generator createdAt text) (getSeed model)
-                |> Tuple2.swap
-    in
-        foo
-            |> Tuple.mapFirst (setSeed # model)
-            |> (\( model, todo ) -> ( updateTodoList (getTodoList >> (::) todo) model, Just todo ))
+    Random.step (Todo.generator createdAt text) (getSeed model)
+        |> Tuple.mapSecond (setSeed # model)
+        |> (\( todo, model ) -> ( addTodo todo model, Just todo ))
+
+
+addTodo todo =
+    updateTodoList (getTodoList >> (::) todo)
 
 
 getSeed : Model -> Seed

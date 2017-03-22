@@ -140,7 +140,7 @@ update msg =
             --                    )
             OnTodoMoveToClicked listType todo ->
                 --                moveTodoToListType listType todo
-                withNow (UpdateTodoWithNow (SetGroup listType) todo)
+                updateTodoWithNow (SetGroup listType) todo
 
             OnDeleteTodoClicked todoId ->
                 updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.markDeleted todoId)
@@ -165,6 +165,10 @@ update msg =
 --                        Debug.log "WARN: msg ignored" (msg)
 --                in
 --                    identity
+
+
+updateTodoWithNow action todo =
+    withNow (UpdateTodoWithNow action todo)
 
 
 updateAndPersistMaybeTodo updater =

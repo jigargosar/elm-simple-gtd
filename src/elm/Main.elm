@@ -71,7 +71,7 @@ update msg =
                     >> domFocus focusInputId OnDomResult
 
             OnNewTodoTextChanged text ->
-                Return.map (Model.activateEditNewTodoMode text)
+                activateEditNewTodoMode text
 
             OnNewTodoBlur ->
                 deactivateEditingMode

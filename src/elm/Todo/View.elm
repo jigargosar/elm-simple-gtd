@@ -34,11 +34,7 @@ todoViewEditing vc todo =
                     []
                 ]
     in
-        item [ todoItemClass ]
-            [ checkBoxView
-            , itemBodyView
-            , hoverIcons vc todo
-            ]
+        todoViewWithItemBodyView itemBodyView vc todo
 
 
 todoViewNotEditing vc todo =
@@ -52,22 +48,25 @@ todoViewNotEditing vc todo =
                     ]
                 ]
     in
-        item
-            [ todoItemClass
-            , onClick (vc.onEditTodoClicked (todoInputId todo) todo)
-            ]
-            [ checkBoxView
-            , itemBodyView
-            , hoverIcons vc todo
-            ]
+        todoViewWithItemBodyView itemBodyView vc todo
+
+
+todoViewWithItemBodyView itemBodyView vc todo =
+    item (todoItemAttributes vc todo)
+        [ checkBoxView
+        , itemBodyView
+        , hoverIcons vc todo
+        ]
 
 
 checkBoxView =
     checkbox [ checked False ] []
 
 
-todoItemClass =
-    class "todo-item"
+todoItemAttributes vc todo =
+    [ class "todo-item"
+    , onClick (vc.onEditTodoClicked (todoInputId todo) todo)
+    ]
 
 
 todoInputId todo =

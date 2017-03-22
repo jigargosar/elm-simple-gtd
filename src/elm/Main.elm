@@ -141,14 +141,10 @@ update msg =
                 moveTodoToListType listType todo
 
             OnDeleteTodoClicked todoId ->
-                let
-                    _ =
-                        Debug.log "todoId" (todoId)
-                in
-                    Return.andThen
-                        (Model.deleteTodo todoId
-                            >> Tuple2.mapSecond persistMaybeTodoCmd
-                        )
+                Return.andThen
+                    (Model.deleteTodo todoId
+                        >> Tuple2.mapSecond persistMaybeTodoCmd
+                    )
 
             OnTodoDoneClicked todoId ->
                 identity

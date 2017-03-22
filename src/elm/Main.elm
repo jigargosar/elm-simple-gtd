@@ -143,10 +143,10 @@ update msg =
                 moveTodoToListType listType todo
 
             OnDeleteTodoClicked todoId ->
-                Return.andThen (Model.updateTodo TodoStore.deleteAction todoId)
+                updateAndPersistTodo (Model.updateTodo Todo.markDeleted todoId)
 
             OnTodoDoneClicked todoId ->
-                Return.andThen (Model.updateTodo TodoStore.toggleDoneAction todoId)
+                updateAndPersistTodo (Model.updateTodo Todo.toggleDone todoId)
 
             MoveTodoToListTypeWithNow listType todo now ->
                 moveTodoToListTypeWithNow now listType todo
@@ -162,6 +162,13 @@ update msg =
 --                        Debug.log "WARN: msg ignored" (msg)
 --                in
 --                    identity
+
+
+updateAndPersistTodo updater =
+    Return.andThen
+        (updater
+            >> Tuple2.mapSecond persistMaybeTodoCmd
+        )
 
 
 domFocusCmd id msg =

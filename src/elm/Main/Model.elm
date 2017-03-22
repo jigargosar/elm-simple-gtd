@@ -192,11 +192,16 @@ updateSeed updater model =
     setSeed (updater model) model
 
 
-updateTodo : TodoStore.Model.Action -> TodoId -> Model -> ( Model, Cmd msg )
-updateTodo action todoId m =
-    --    TodoStore.editTodo action todoId m.todoStore
-    --        |> Tuple2.mapFirst (setTodoCollection # m)
-    ( m, Cmd.none )
+updateTodo : (Todo -> Todo) -> TodoId -> Model -> ( Model, Maybe Todo )
+updateTodo updater todoId m =
+    let
+        todoList =
+            m.todoList
+                |> List.updateIf (Todo.hasId todoId) updater
+    in
+        ( setTodoList todoList m
+        , List.find (Todo.hasId todoId) todoList
+        )
 
 
 saveEditingTodoAndDeactivateEditTodoMode : Time -> Model -> ( Model, Maybe Todo )

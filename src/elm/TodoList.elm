@@ -15,6 +15,19 @@ import PouchDB
 import Tuple2
 
 
+toggleDone =
+    UpdateTodo ToggleDone
+
+
+delete =
+    UpdateTodo Delete
+
+
+setGroup : TodoGroup -> TodoId -> TodoListMsg
+setGroup =
+    SetGroup >> UpdateTodo
+
+
 update : TodoListMsg -> Model -> ( Model, Cmd TodoListMsg )
 update msg =
     Return.singleton
@@ -29,14 +42,6 @@ update msg =
 updateAndPersistMaybeTodo updater =
     Return.andThen
         (updater >> Tuple2.mapSecond persistMaybeTodoCmd)
-
-
-toggleDone =
-    UpdateTodo ToggleDone
-
-delete = UpdateTodo Delete
-
-setGroup = SetGroup >> UpdateTodo
 
 
 withNow : (Time -> TodoListMsg) -> ReturnF TodoListMsg Model

@@ -270,6 +270,14 @@ moveTodoToListType now listType todo m =
         |> ((replaceTodoIfIdMatches now) # m)
 
 
+updateTodoByAction todoId todoAction now =
+    let
+        todoActionToUpdaterFunction =
+            1
+    in
+        identity
+
+
 moveMaybeTodoToListType : Time -> TodoGroup -> Maybe Todo -> Model -> ( Model, Maybe Todo )
 moveMaybeTodoToListType now listType maybeTodo model =
     maybeTodo

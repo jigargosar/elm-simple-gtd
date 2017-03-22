@@ -9,8 +9,8 @@ import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
 
 
-type TodoEditAction
-    = SetGroup
+type TodoAction
+    = SetGroup TodoGroup
     | ToggleDone
     | Delete
 
@@ -39,3 +39,4 @@ type Msg
     | OnFlowMarkDeleted
     | OnSaveNewTodoAndContinueAdding Time
     | SaveEditingTodoWithNow Time
+    | UpdateTodo TodoId TodoAction Time

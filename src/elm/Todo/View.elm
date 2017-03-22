@@ -89,7 +89,7 @@ hoverIcons vc todo =
 
 
 nonHoverIcons vc todo =
-    div [ class "non-hover-icons" ]
+    div [ class "non-hover" ]
         [ doneIconButton vc todo
         ]
 

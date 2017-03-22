@@ -55,12 +55,7 @@
 .todo-list {
   background-color: white;
 
-  & .todo-item:hover {
-    & .hover {
-      display: flex;
-    }
-  }
-  
+
   & .todo-item {
     border-top: 1px solid rgba(179, 179, 179, 0.53);
 
@@ -71,6 +66,14 @@
     
     & .hover {
       display: none;
+    }
+
+    &:hover .non-hover {
+      display: none;
+    }
+
+    &:hover .hover {
+      display: flex;
     }
 
     & paper-item-body {

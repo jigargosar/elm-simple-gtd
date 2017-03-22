@@ -148,8 +148,11 @@ type alias TodoList =
     List Todo
 
 
-todoConstructor : PouchDB.Id -> PouchDB.Revision -> String -> Maybe Time -> Bool -> Group -> Time -> Time -> Todo
-todoConstructor id rev text dueAt deleted listType createdAt modifiedAt =
+
+--todoConstructor : PouchDB.Id -> PouchDB.Revision -> String -> Maybe Time -> Bool -> Group -> Time -> Time -> Todo
+
+
+todoConstructor id rev createdAt modifiedAt text dueAt deleted listType =
     { id = id
     , rev = rev
     , text = text
@@ -161,17 +164,15 @@ todoConstructor id rev text dueAt deleted listType createdAt modifiedAt =
     }
 
 
-
-
 decoder : Decoder Todo
 decoder =
     D.decode todoConstructor
         |> PouchDB.documentFieldsDecoder
+        |> PouchDB.timeStampFieldsDecoder
         |> D.required "text" D.string
         |> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         |> D.optional "deleted" D.bool defaultDeleted
         |> D.optional "listType" (D.map stringToListType D.string) Inbox
-        |> PouchDB.timeStampFieldsDecoder
 
 
 listTypeEncodings =
@@ -185,7 +186,7 @@ stringToListType string =
 
 initWithTextAndId : String -> TodoId -> Todo
 initWithTextAndId text id =
-    todoConstructor id defaultRevision text defaultDueAt defaultDeleted Inbox 0 0
+    todoConstructor id defaultRevision 0 0 text defaultDueAt defaultDeleted Inbox
 
 
 type alias EncodedTodo =

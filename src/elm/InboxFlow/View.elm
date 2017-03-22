@@ -38,8 +38,8 @@ toViewModel maybeTodo model =
     }
 
 
-view : Maybe Todo -> Model -> Html Msg
-view =
+inboxFlowView : Maybe Todo -> Model -> Html Msg
+inboxFlowView =
     toViewModel >>> flowView
 
 

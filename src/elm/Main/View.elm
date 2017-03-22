@@ -23,7 +23,7 @@ import Todo as Todo exposing (EditMode(..), TodoGroup(Inbox), Todo, TodoId)
 import TodoStore.View exposing (ViewConfig)
 import Flow.Model as Flow exposing (Node)
 import InboxFlow
-import InboxFlow.View
+import InboxFlow.View exposing (inboxFlowView)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
@@ -80,7 +80,7 @@ appMainView m =
                 allTodosView m
 
             InboxFlowViewState maybeTodo inboxFlowModel ->
-                InboxFlow.View.view maybeTodo inboxFlowModel
+                inboxFlowView maybeTodo inboxFlowModel
         ]
 
 

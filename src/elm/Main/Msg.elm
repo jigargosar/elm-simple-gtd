@@ -15,11 +15,6 @@ type TodoAction
     | Delete
 
 
-type UpdateTodoAction
-    = UpdateTodoWithNow TodoAction TodoId Time
-    | UpdateTodoWithAction TodoAction TodoId
-
-
 type Msg
     = NoOp
     | LocationChanged Location

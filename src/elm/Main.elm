@@ -172,6 +172,11 @@ saveNewTodoAndContinueAdding now =
 
 addNewTodoAndContinueAdding text =
     onTodoListMsg (TodoList.addNewTodo text)
+        >> activateEditNewTodoMode
+
+
+activateEditNewTodoMode =
+    Return.map (Model.activateEditNewTodoMode "")
 
 
 setTodoTextAndDeactivateEditing todo =

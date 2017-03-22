@@ -142,17 +142,12 @@ addNewTodo now m =
             if String.trim text |> String.isEmpty then
                 ( m, Nothing )
             else
-                addNewTodoHelp now text m
+                Random.step (Todo.generator now text) (getSeed m)
+                    |> Tuple.mapSecond (setSeed # m)
+                    |> apply2 ( uncurry addTodo, Tuple.first >> Just )
 
         _ ->
             ( m, Nothing )
-
-
-addNewTodoHelp : Time -> String -> Model -> ( Model, Maybe Todo )
-addNewTodoHelp createdAt text model =
-    Random.step (Todo.generator createdAt text) (getSeed model)
-        |> Tuple.mapSecond (setSeed # model)
-        |> (\( todo, model ) -> ( addTodo todo model, Just todo ))
 
 
 addTodo todo =

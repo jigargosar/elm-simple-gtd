@@ -142,10 +142,10 @@ update msg =
                 moveTodoToListType listType todo
 
             OnDeleteTodoClicked todoId ->
-                updateAndPersistTodo (Model.updateTodoMaybe Todo.markDeleted todoId)
+                updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.markDeleted todoId)
 
             OnTodoDoneClicked todoId ->
-                updateAndPersistTodo (Model.updateTodoMaybe Todo.toggleDone todoId)
+                updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.toggleDone todoId)
 
             MoveTodoToListTypeWithNow listType todo now ->
                 moveTodoToListTypeWithNow now listType todo
@@ -163,7 +163,7 @@ update msg =
 --                    identity
 
 
-updateAndPersistTodo updater =
+updateAndPersistMaybeTodo updater =
     Return.andThen
         (updater
             >> Tuple2.mapSecond persistMaybeTodoCmd

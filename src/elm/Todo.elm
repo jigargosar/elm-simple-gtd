@@ -301,6 +301,7 @@ updateDone : (Model -> Bool) -> ModelMapper
 updateDone updater model =
     setDone (updater model) model
 
+
 toggleDone : ModelMapper
 toggleDone =
     updateDone (isDone >> not)

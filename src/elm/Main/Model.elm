@@ -8,7 +8,7 @@ import Navigation exposing (Location)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todo as Todo exposing (EditMode(..), EncodedTodoList, Group, Todo, TodoId)
+import Todo as Todo exposing (EditMode(..), EncodedTodoList, Group, Todo, TodoId, TodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -23,14 +23,16 @@ type ViewState
 
 type alias Model =
     { now : Time
+    , seed : Seed
+    , todoList : TodoList
     , todoStore : TodoStore
     , editMode : EditMode
     , viewState : ViewState
     }
 
 
-modelConstructor now editMode todoStore =
-    Model now todoStore editMode TodoListViewState
+modelConstructor now editMode todoStore seed =
+    Model now seed [] todoStore editMode TodoListViewState
 
 
 type alias ModelMapper =
@@ -46,11 +48,11 @@ init now encodedTodoList =
                 >> Random.step
 
         todoModelFromSeed =
-            Random.seedFromTime >> generateTodoModel encodedTodoList >> Tuple.first
+            Random.seedFromTime >> generateTodoModel encodedTodoList
     in
         now
             |> todoModelFromSeed
-            >> (modelConstructor now NotEditing)
+            >> uncurry (modelConstructor now NotEditing)
 
 
 setViewState viewState m =

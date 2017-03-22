@@ -81,61 +81,6 @@ startProcessingInbox model =
         |> (setViewState # model)
 
 
-updateInboxFlowWithActionType actionType m =
-    m
-        |> case getViewState m of
-            InboxFlowViewState maybeTodo inboxFlowModel ->
-                InboxFlow.updateWithActionType actionType inboxFlowModel
-                    |> InboxFlowViewState maybeTodo
-                    |> setViewState
-
-            _ ->
-                identity
-
-
-
---deleteMaybeTodo : Maybe Todo -> Model -> ( Model, Maybe Todo )
---deleteMaybeTodo maybeTodo model =
---    maybeTodo
---        ?|> (Todo.getId >> deleteTodo # model)
---        ?= ( model, Nothing )
-
-
-moveTodoToListType now listType todo m =
-    Todo.setListType listType todo
-        |> ((replaceTodoIfIdMatches now) # m)
-
-
-moveMaybeTodoToListType : Time -> Group -> Maybe Todo -> Model -> ( Model, Maybe Todo )
-moveMaybeTodoToListType now listType maybeTodo model =
-    maybeTodo
-        ?|> ((moveTodoToListType now listType) # model)
-        ?= ( model, Nothing )
-
-
-moveInboxProcessingTodoToListType now listType m =
-    m
-        |> case getViewState m of
-            InboxFlowViewState maybeTodo inboxFlowModel ->
-                moveMaybeTodoToListType now listType maybeTodo
-                    >> Tuple.mapFirst startProcessingInbox
-
-            _ ->
-                (,) # Nothing
-
-
-
---deleteTodoInboxFlow m =
---    m
---        |> case getViewState m of
---            InboxFlowViewState maybeTodo inboxFlowModel ->
---                deleteMaybeTodo maybeTodo
---                    >> Tuple.mapFirst startProcessingInbox
---
---            _ ->
---                (,) # Nothing
-
-
 getTodoCollection : Model -> TodoStore
 getTodoCollection =
     (.todoStore)
@@ -245,3 +190,55 @@ saveEditingTodo now m =
 replaceTodoIfIdMatches now todo m =
     TodoStore.replaceTodoIfIdMatches now todo m.todoStore
         |> Tuple2.mapEach (setTodoCollection # m) (Just)
+
+
+
+--deleteMaybeTodo : Maybe Todo -> Model -> ( Model, Maybe Todo )
+--deleteMaybeTodo maybeTodo model =
+--    maybeTodo
+--        ?|> (Todo.getId >> deleteTodo # model)
+--        ?= ( model, Nothing )
+--deleteTodoInboxFlow m =
+--    m
+--        |> case getViewState m of
+--            InboxFlowViewState maybeTodo inboxFlowModel ->
+--                deleteMaybeTodo maybeTodo
+--                    >> Tuple.mapFirst startProcessingInbox
+--
+--            _ ->
+--                (,) # Nothing
+
+
+updateInboxFlowWithActionType actionType m =
+    m
+        |> case getViewState m of
+            InboxFlowViewState maybeTodo inboxFlowModel ->
+                InboxFlow.updateWithActionType actionType inboxFlowModel
+                    |> InboxFlowViewState maybeTodo
+                    |> setViewState
+
+            _ ->
+                identity
+
+
+moveTodoToListType now listType todo m =
+    Todo.setListType listType todo
+        |> ((replaceTodoIfIdMatches now) # m)
+
+
+moveMaybeTodoToListType : Time -> Group -> Maybe Todo -> Model -> ( Model, Maybe Todo )
+moveMaybeTodoToListType now listType maybeTodo model =
+    maybeTodo
+        ?|> ((moveTodoToListType now listType) # model)
+        ?= ( model, Nothing )
+
+
+moveInboxProcessingTodoToListType now listType m =
+    m
+        |> case getViewState m of
+            InboxFlowViewState maybeTodo inboxFlowModel ->
+                moveMaybeTodoToListType now listType maybeTodo
+                    >> Tuple.mapFirst startProcessingInbox
+
+            _ ->
+                (,) # Nothing

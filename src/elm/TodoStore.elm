@@ -5,7 +5,6 @@ import Dict.Extra as Dict
 import Random.Pcg as Random exposing (Seed)
 import RandomIdGenerator
 import Todo as Todo exposing (Todo, TodoId, TodoList)
-import TodoStore.Update
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
@@ -44,10 +43,6 @@ replaceTodoIfIdMatches =
 
 addNewTodo =
     Model.addNewTodo
-
-
-update =
-    TodoStore.Update.update
 
 
 deleteAction =

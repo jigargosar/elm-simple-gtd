@@ -24,6 +24,7 @@ import InboxFlow.View
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
+import Main.View.DrawerMenu exposing (appDrawerMenuView)
 
 
 createTodoListViewConfig : Model -> TodoStore.View.ViewConfig Msg
@@ -58,7 +59,7 @@ drawerLayoutView m =
         [ drawer [ attribute "slot" "drawer" ]
             [ toolbar [] [ text "Simple GTD" ]
             , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
-                [ drawerMenuView m
+                [ appDrawerMenuView m
                 ]
             ]
         , headerLayout []
@@ -80,77 +81,6 @@ drawerLayoutView m =
         ]
 
 
-drawerMenuView m =
-    menu
-        [ stringProperty "selected" "0"
-        ]
-        ([ item [ onClick OnShowTodoList ] [ text "All" ]
-         , hr [] []
-         ]
-            ++ listTypeMenuItems m
-        )
-
-
-getTodoLists =
-    getTodoList >> Todo.todoListsByType2
-
-
-listTypeMenuItems =
-    getTodoLists
-        >> List.map listTypeMenuItem
-
-
-listTypeMenuItem ( listType, todoList ) =
-    let
-        ltName =
-            Todo.listTypeToName listType
-    in
-        item [ class "has-hover-items" ]
-            ([ span [ id ltName ] [ text (ltName) ]
-             , itemBody [] []
-             , badge
-                [ classList
-                    [ "hidden" => (List.length todoList == 0)
-                    , "drawer-list-type-badge" => True
-                    ]
-                , intProperty "label" (List.length todoList)
-                , attribute "for" ltName
-                ]
-                []
-             ]
-                ++ addHoverItems listType
-            )
-
-
-addHoverItems listType =
-    case listType of
-        Inbox ->
-            [ iconButton
-                [ class "hover-items"
-                , icon "vaadin-icons:start-cog"
-                , onClick OnProcessInbox
-                ]
-                []
-            ]
-
-        _ ->
-            []
-
-
-appDrawerView m =
-    drawer
-        [ stringProperty "persistent" "true"
-        , stringProperty "opened" "true"
-        , stringProperty "elevation" "0"
-        ]
-        [ menu
-            [ stringProperty "selected" "0"
-            ]
-            [ item [] [ text "Item One" ]
-            , item [] [ text "Item 2" ]
-            , item [] [ text "Item 3" ]
-            ]
-        ]
 
 
 addTodoView editMode =

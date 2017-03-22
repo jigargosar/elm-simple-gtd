@@ -8,7 +8,6 @@ import Html.Events exposing (..)
 import Keyboard.Extra exposing (Key)
 import Main.Msg exposing (..)
 import Polymer.Attributes exposing (icon, stringProperty)
-import TodoStore exposing (TodoStore)
 import TodoStore.Model as Model
 import Todo as Todo exposing (EditMode(EditTodoMode), TodoGroup(Inbox), Todo, TodoId)
 import Toolkit.Operators exposing (..)
@@ -60,16 +59,6 @@ todoView vc todo =
                     notEditingView
     in
         ( todoId, todoViewHelp )
-
-
-allTodosView : ViewConfig msg -> TodoStore -> Html msg
-allTodosView vc todoStore =
-    let
-        todoListViewsWithKey : List ( String, Html msg )
-        todoListViewsWithKey =
-            Model.getTodoLists todoStore .|> todoListViewWithKey (todoView vc)
-    in
-        Keyed.node "div" [] todoListViewsWithKey
 
 
 todoListViewWithKey todoView ( listTitle, todoList ) =

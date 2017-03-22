@@ -16,14 +16,5 @@ import Function exposing ((>>>>))
 import PouchDB
 
 
-type alias TodoStore =
-    Model.Model
-
-
-getInbox__ : TodoStore -> TodoList
-getInbox__ =
-    Model.getInboxTodoList
-
-
-getFirstInboxTodo =
-    Model.getFirstInboxTodo
+_ =
+    1

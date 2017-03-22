@@ -95,7 +95,7 @@ newTodoInputView editMode =
                 , onInput OnNewTodoTextChanged
                 , value text
                 , onBlur OnNewTodoBlur
-                , onKeyUp OnNewTodoKeyUp
+                , onKeyUp (OnNewTodoKeyUp text)
                 , autofocus True
                 ]
                 []

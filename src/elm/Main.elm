@@ -75,13 +75,10 @@ update msg =
             OnNewTodoBlur ->
                 deactivateEditingMode
 
-            OnSaveNewTodoAndContinueAdding now ->
-                saveNewTodoAndContinueAdding now
-
-            OnNewTodoKeyUp key ->
+            OnNewTodoKeyUp text key ->
                 case key of
                     Enter ->
-                        Return.command (withNowOld OnSaveNewTodoAndContinueAdding)
+                        addNewTodoAndContinueAdding text
 
                     Escape ->
                         deactivateEditingMode
@@ -161,13 +158,6 @@ withNowOld msg =
 withNow : (Time -> Msg) -> ( Model, Cmd Msg ) -> ( Model, Cmd Msg )
 withNow msg =
     Task.perform msg Time.now |> Return.command
-
-
-saveNewTodoAndContinueAdding now =
-    Return.andThen
-        (Model.addNewTodoAndContinueAdding now
-            >> Tuple2.mapSecond persistMaybeTodoCmd
-        )
 
 
 addNewTodoAndContinueAdding text =

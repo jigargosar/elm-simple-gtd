@@ -129,31 +129,6 @@ updateEditTodoText text m =
             m
 
 
-addNewTodoAndContinueAdding : Time -> Model -> ( Model, Maybe Todo )
-addNewTodoAndContinueAdding now =
-    addNewTodo now
-        >> Tuple2.mapFirst (activateEditNewTodoMode "")
-
-
-addNewTodo : Time -> Model -> ( Model, Maybe Todo )
-addNewTodo now m =
-    case getEditMode m of
-        EditNewTodoMode text ->
-            if String.trim text |> String.isEmpty then
-                ( m, Nothing )
-            else
-                Random.step (Todo.generator now text) (getSeed m)
-                    |> Tuple.mapSecond (setSeed # m)
-                    |> apply2 ( uncurry addTodo, Tuple.first >> Just )
-
-        _ ->
-            ( m, Nothing )
-
-
-addTodo todo =
-    updateTodoList (getTodoList >> (::) todo)
-
-
 getSeed : Model -> Seed
 getSeed =
     (.seed)

@@ -19,7 +19,7 @@ type Msg
     | OnDomFocusResult (Result Dom.Error ())
     | OnNewTodoTextChanged String
     | OnNewTodoBlur
-    | OnNewTodoKeyUp Key
+    | OnNewTodoKeyUp String Key
     | OnEditTodoTextChanged String
     | OnEditTodoBlur Todo
     | OnTodoDoneClicked TodoId
@@ -27,5 +27,4 @@ type Msg
     | OnSetTodoGroupClicked TodoGroup Todo
     | OnShowTodoList
     | ProcessInbox
-    | OnSaveNewTodoAndContinueAdding Time
     | OnTodoListMsg TodoListMsg

@@ -9,6 +9,12 @@ import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
 
 
+type TodoEditAction
+    = SetGroup
+    | ToggleDone
+    | Delete
+
+
 type Msg
     = NoOp
     | LocationChanged Location
@@ -25,7 +31,7 @@ type Msg
     | OnEditTodoKeyUp Key
     | OnTodoMoveToClicked TodoGroup Todo
     | MoveTodoToListTypeWithNow TodoGroup Todo Time
-    | MoveFlowTodoToListTypeWithNow  TodoGroup Time
+    | MoveFlowTodoToListTypeWithNow TodoGroup Time
     | OnFlowMoveTo TodoGroup
     | OnInboxFlowAction FlowAction
     | OnShowTodoList

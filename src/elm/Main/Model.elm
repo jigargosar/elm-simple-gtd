@@ -24,7 +24,6 @@ type ViewState
 type alias Model =
     { now : Time
     , todoList : TodoList
-    , todoStore : TodoStore
     , editMode : EditMode
     , viewState : ViewState
     , seed : Seed
@@ -32,7 +31,7 @@ type alias Model =
 
 
 modelConstructor now todoList editMode ( todoStore, seed ) =
-    Model now todoList todoStore editMode TodoListViewState seed
+    Model now todoList editMode TodoListViewState seed
 
 
 type alias ModelMapper =
@@ -68,25 +67,38 @@ getViewState =
     (.viewState)
 
 
+getTodoList : Model -> TodoList
+getTodoList =
+    (.todoList)
+
+
+setTodoList : TodoList -> ModelMapper
+setTodoList todoList model =
+    { model | todoList = todoList }
+
+
+updateTodoList : (Model -> TodoList) -> ModelMapper
+updateTodoList updater model =
+    setTodoList (updater model) model
+
+
 getFirstInboxTodo =
-    getTodoCollection >> TodoStore.getFirstInboxTodo
+    getTodoList >> Todo.getFirstInboxTodo
 
 
 showTodoList =
     setViewState TodoListViewState
 
 
+mapAllExceptDeleted mapper =
+    getTodoList >> Todo.mapAllExceptDeleted mapper
+
+
 startProcessingInbox model =
-    getTodoCollection model
-        |> TodoStore.getInbox__
+    mapAllExceptDeleted identity model
         |> InboxFlow.init
         |> InboxFlowViewState (getFirstInboxTodo model)
         |> (setViewState # model)
-
-
-getTodoCollection : Model -> TodoStore
-getTodoCollection =
-    (.todoStore)
 
 
 setEditModeTo : EditMode -> ModelMapper

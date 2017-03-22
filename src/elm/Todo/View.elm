@@ -62,6 +62,7 @@ todoViewWithItemBodyView itemBodyView vc todo =
         [ checkBoxView
         , itemBodyView
         , hoverIcons vc todo
+        , nonHoverIcons vc todo
         ]
 
 
@@ -84,6 +85,12 @@ hoverIcons vc todo =
         [ doneIconButton vc todo
         , deleteIconButton vc todo
         , optionsIconButton vc todo
+        ]
+
+
+nonHoverIcons vc todo =
+    div [ class "non-hover-icons" ]
+        [ doneIconButton vc todo
         ]
 
 

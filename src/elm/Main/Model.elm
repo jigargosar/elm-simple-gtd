@@ -273,7 +273,15 @@ moveTodoToListType now listType todo m =
 updateTodoByAction todoId todoAction now model =
     let
         todoActionToUpdaterFunction =
-            1
+            case todoAction of
+                SetGroup group ->
+                    Todo.setListType group
+
+                ToggleDone ->
+                    Todo.toggleDone
+
+                Delete ->
+                    Todo.markDeleted
     in
         ( model, Nothing )
 

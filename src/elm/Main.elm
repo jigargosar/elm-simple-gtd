@@ -135,9 +135,6 @@ update msg =
             OnTodoDoneClicked todoId ->
                 onTodoListMsg (TodoList.toggleDone todoId)
 
-            UpdateTodo todoAction todoId now ->
-                updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todoId)
-
             OnTodoListMsg msg ->
                 Return.andThen (TodoList.update msg >> Return.mapCmd OnTodoListMsg)
 
@@ -153,21 +150,6 @@ update msg =
 
 onTodoListMsg =
     OnTodoListMsg >> update >> Return.andThen
-
-
-updateTodo action todo =
-    updateTodoId action (Todo.getId todo)
-
-
-updateTodoId action todoId =
-    withNow (UpdateTodo action todoId)
-
-
-updateAndPersistMaybeTodo updater =
-    Return.andThen
-        (updater
-            >> Tuple2.mapSecond persistMaybeTodoCmd
-        )
 
 
 domFocusCmd id msg =

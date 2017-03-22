@@ -6,7 +6,7 @@ import Json.Decode
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Main.Msg
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
-import Todo exposing (EditMode(EditTodoMode))
+import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)

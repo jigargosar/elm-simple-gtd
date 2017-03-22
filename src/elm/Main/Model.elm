@@ -8,7 +8,7 @@ import Navigation exposing (Location)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todo as Todo exposing (EditMode(..), EncodedTodoList, TodoGroup, Todo, TodoId, TodoList)
+import Todo as Todo exposing (EncodedTodoList, TodoGroup, Todo, TodoId, TodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -18,6 +18,12 @@ import InboxFlow
 type ViewState
     = TodoListViewState
     | InboxFlowViewState (Maybe Todo) InboxFlow.Model
+
+
+type EditMode
+    = EditNewTodoMode String
+    | EditTodoMode Todo
+    | NotEditing
 
 
 type alias Model =

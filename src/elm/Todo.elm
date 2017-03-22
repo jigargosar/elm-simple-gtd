@@ -116,11 +116,6 @@ reference =
     Reference
 
 
-type EditMode
-    = EditNewTodoMode String
-    | EditTodoMode Todo
-    | NotEditing
-
 
 type alias TodoFields =
     { done : Bool

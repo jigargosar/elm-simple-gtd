@@ -20,7 +20,7 @@ import Json.Encode
 import List.Extra as List
 import Main.Model exposing (..)
 import Main.Msg exposing (..)
-import Todo as Todo exposing (EditMode(..), TodoGroup(Inbox), Todo, TodoId)
+import Todo as Todo exposing (TodoGroup(Inbox), Todo, TodoId)
 import Flow.Model as Flow exposing (Node)
 import InboxFlow
 import InboxFlow.View

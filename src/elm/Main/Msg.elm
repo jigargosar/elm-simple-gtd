@@ -23,8 +23,8 @@ type Msg
     | OnEditTodoBlur
     | OnEditTodoKeyUp Key
     | OnTodoMoveToClicked Todo.Group Todo
-    | MoveTodoToListTypeWithNow Time Todo.Group Todo
-    | MoveFlowTodoToListTypeWithNow Time Todo.Group
+    | MoveTodoToListTypeWithNow Todo.Group Todo Time
+    | MoveFlowTodoToListTypeWithNow  Todo.Group Time
     | OnFlowMoveTo Todo.Group
     | OnInboxFlowAction FlowAction
     | OnShowTodoList

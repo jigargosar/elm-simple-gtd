@@ -150,11 +150,11 @@ update msg =
             OnTodoMoveToClicked listType todo ->
                 moveTodoToListType listType todo
 
-            MoveTodoToListTypeWithNow now listType todo ->
+            MoveTodoToListTypeWithNow listType todo now ->
                 moveTodoToListTypeWithNow now listType todo
 
-            MoveFlowTodoToListTypeWithNow now listType todo ->
-                moveFlowTodoToListTypeWithNow now listType todo
+            MoveFlowTodoToListTypeWithNow listType now ->
+                moveFlowTodoToListTypeWithNow now listType
 
 
 
@@ -171,7 +171,7 @@ domFocusCmd id msg =
 
 
 onFlowMoveTo listType =
-    Return.command (withNow MoveFlowTodoToListTypeWithNow listType)
+    Return.command (withNow (MoveFlowTodoToListTypeWithNow listType))
 
 
 moveFlowTodoToListTypeWithNow now listType =
@@ -182,7 +182,7 @@ moveFlowTodoToListTypeWithNow now listType =
 
 
 moveTodoToListType listType todo =
-    Return.command (withNow MoveTodoToListTypeWithNow listType todo)
+    Return.command (withNow (MoveTodoToListTypeWithNow listType todo))
 
 
 moveTodoToListTypeWithNow now listType todo =

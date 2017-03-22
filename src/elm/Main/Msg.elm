@@ -6,7 +6,7 @@ import Json.Decode
 import Keyboard.Extra exposing (Key)
 import Navigation exposing (Location)
 import Time exposing (Time)
-import Todo exposing (Todo, TodoId)
+import Todo exposing (Todo, TodoGroup, TodoId)
 
 
 type Msg
@@ -23,10 +23,10 @@ type Msg
     | OnEditTodoBlur
     | OnTodoDoneClicked TodoId
     | OnEditTodoKeyUp Key
-    | OnTodoMoveToClicked Todo.Group Todo
-    | MoveTodoToListTypeWithNow Todo.Group Todo Time
-    | MoveFlowTodoToListTypeWithNow  Todo.Group Time
-    | OnFlowMoveTo Todo.Group
+    | OnTodoMoveToClicked TodoGroup Todo
+    | MoveTodoToListTypeWithNow TodoGroup Todo Time
+    | MoveFlowTodoToListTypeWithNow  TodoGroup Time
+    | OnFlowMoveTo TodoGroup
     | OnInboxFlowAction FlowAction
     | OnShowTodoList
     | OnProcessInbox

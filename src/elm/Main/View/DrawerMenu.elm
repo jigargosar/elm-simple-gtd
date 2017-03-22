@@ -12,7 +12,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Main.Model exposing (getTodoList)
-import Todo exposing (Group(Inbox))
+import Todo exposing (TodoGroup(Inbox))
 
 
 appDrawerMenuView m =

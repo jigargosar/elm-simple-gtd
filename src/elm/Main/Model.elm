@@ -8,7 +8,7 @@ import Navigation exposing (Location)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todo as Todo exposing (EditMode(..), EncodedTodoList, Group, Todo, TodoId, TodoList)
+import Todo as Todo exposing (EditMode(..), EncodedTodoList, TodoGroup, Todo, TodoId, TodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -72,7 +72,8 @@ getTodoList : Model -> TodoList
 getTodoList =
     (.todoList)
 
-todoListsByType=
+
+todoListsByType =
     getTodoList >> Todo.todoListsByType
 
 
@@ -283,7 +284,7 @@ moveTodoToListType now listType todo m =
         |> ((replaceTodoIfIdMatches now) # m)
 
 
-moveMaybeTodoToListType : Time -> Group -> Maybe Todo -> Model -> ( Model, Maybe Todo )
+moveMaybeTodoToListType : Time -> TodoGroup -> Maybe Todo -> Model -> ( Model, Maybe Todo )
 moveMaybeTodoToListType now listType maybeTodo model =
     maybeTodo
         ?|> ((moveTodoToListType now listType) # model)

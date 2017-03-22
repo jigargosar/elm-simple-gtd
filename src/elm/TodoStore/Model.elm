@@ -78,10 +78,10 @@ generate generator todoStore =
         |> Tuple2.mapSecond (setSeed # todoStore)
 
 
-addNewTodo text todoStore =
+addNewTodo createdAt text todoStore =
     let
         ( todo, newTodoCollection ) =
-            generate (Todo.generator text) todoStore
+            generate (Todo.generator createdAt text) todoStore
     in
         ( appendTodo todo newTodoCollection, todo )
 

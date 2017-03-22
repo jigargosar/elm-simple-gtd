@@ -182,26 +182,20 @@ updateTodoCollection fun model =
     setTodoCollection (fun model) model
 
 
-addNewTodoAndDeactivateAddNewTodoMode : Model -> ( Model, Maybe Todo )
-addNewTodoAndDeactivateAddNewTodoMode =
-    addNewTodo
-        >> Tuple2.mapFirst (setEditModeTo NotEditing)
-
-
-addNewTodoAndContinueAdding : Model -> ( Model, Maybe Todo )
-addNewTodoAndContinueAdding =
-    addNewTodo
+addNewTodoAndContinueAdding : Time -> Model -> ( Model, Maybe Todo )
+addNewTodoAndContinueAdding now =
+    addNewTodo now
         >> Tuple2.mapFirst (activateAddNewTodoMode "")
 
 
-addNewTodo : Model -> ( Model, Maybe Todo )
-addNewTodo m =
+addNewTodo : Time -> Model -> ( Model, Maybe Todo )
+addNewTodo now m =
     case getEditMode m of
         EditNewTodoMode text ->
             if String.trim text |> String.isEmpty then
                 ( m, Nothing )
             else
-                TodoStore.addNewTodo text m.todoStore
+                TodoStore.addNewTodo now text m.todoStore
                     |> Tuple2.mapEach (setTodoCollection # m) (Just)
 
         _ ->

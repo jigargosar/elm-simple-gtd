@@ -185,9 +185,9 @@ stringToListType string =
     listTypeEncodings |> Dict.get string ?= Inbox
 
 
-initWithTextAndId : String -> TodoId -> Todo
-initWithTextAndId text id =
-    todoConstructor id defaultRevision 0 0 text defaultDueAt defaultDeleted Inbox
+initWith : Time -> String -> TodoId -> Todo
+initWith createdAt text id =
+    todoConstructor id defaultRevision createdAt createdAt text defaultDueAt defaultDeleted Inbox
 
 
 type alias EncodedTodo =
@@ -235,8 +235,8 @@ decodeTodoList =
             )
 
 
-generator text =
-    Random.map (initWithTextAndId text) RandomIdGenerator.idGen
+generator createdAt text =
+    Random.map (initWith createdAt text) RandomIdGenerator.idGen
 
 
 getText =

@@ -5,6 +5,7 @@ import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
 import Navigation exposing (Location)
+import Time exposing (Time)
 import Todo exposing (Group, Todo, TodoId)
 
 
@@ -27,3 +28,4 @@ type Msg
     | OnShowTodoList
     | OnProcessInbox
     | OnFlowMarkDeleted
+    | OnSaveNewTodoAndContinueAdding Time

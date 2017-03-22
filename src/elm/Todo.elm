@@ -148,10 +148,7 @@ type alias TodoList =
     List Todo
 
 
-
---todoConstructor : PouchDB.Id -> PouchDB.Revision -> String -> Maybe Time -> Bool -> Group -> Time -> Time -> Todo
-
-
+todoConstructor : PouchDB.Id -> PouchDB.Revision -> Time -> Time -> String -> Maybe Time -> Bool -> Group -> Todo
 todoConstructor id rev createdAt modifiedAt text dueAt deleted listType =
     { id = id
     , rev = rev

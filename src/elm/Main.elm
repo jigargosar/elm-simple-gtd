@@ -112,6 +112,9 @@ update msg =
             OnEditTodoTextChanged text ->
                 Return.map (Model.updateEditTodoText text)
 
+            SaveEditingTodoWithNow now ->
+                saveEditingTodoWithNow now
+
             OnEditTodoBlur ->
                 saveEditingTodo
 
@@ -136,10 +139,7 @@ update msg =
                 Return.map (Model.startProcessingInbox)
 
             OnFlowMoveTo listType ->
-                Return.andThen
-                    (Model.moveInboxProcessingTodoToListType listType
-                        >> Tuple2.mapSecond persistMaybeTodoCmd
-                    )
+                onFlowMoveTo listType
 
             OnFlowMarkDeleted ->
                 Return.andThen
@@ -148,10 +148,13 @@ update msg =
                     )
 
             OnTodoMoveToClicked listType todo ->
-                Return.andThen
-                    (Model.todoToListType listType todo
-                        >> Tuple2.mapSecond persistMaybeTodoCmd
-                    )
+                moveTodoToListType listType todo
+
+            MoveTodoToListTypeWithNow now listType todo ->
+                moveTodoToListTypeWithNow now listType todo
+
+            MoveFlowTodoToListTypeWithNow now listType todo ->
+                moveFlowTodoToListTypeWithNow now listType todo
 
 
 
@@ -167,9 +170,35 @@ domFocusCmd id msg =
     Task.attempt msg (Dom.focus id)
 
 
-saveEditingTodo =
+onFlowMoveTo listType =
+    Return.command (withNow MoveFlowTodoToListTypeWithNow listType)
+
+
+moveFlowTodoToListTypeWithNow now listType =
     Return.andThen
-        (Model.saveEditingTodoAndDeactivateEditTodoMode
+        (Model.moveInboxProcessingTodoToListType now listType
+            >> Tuple2.mapSecond persistMaybeTodoCmd
+        )
+
+
+moveTodoToListType listType todo =
+    Return.command (withNow MoveTodoToListTypeWithNow listType todo)
+
+
+moveTodoToListTypeWithNow now listType todo =
+    Return.andThen
+        (Model.moveTodoToListType now listType todo
+            >> Tuple2.mapSecond persistMaybeTodoCmd
+        )
+
+
+saveEditingTodo =
+    Return.command (withNow SaveEditingTodoWithNow)
+
+
+saveEditingTodoWithNow now =
+    Return.andThen
+        (Model.saveEditingTodoAndDeactivateEditTodoMode now
             >> Tuple2.mapSecond persistMaybeTodoCmd
         )
 

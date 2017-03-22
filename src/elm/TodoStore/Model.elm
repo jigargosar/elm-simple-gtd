@@ -2,6 +2,7 @@ module TodoStore.Model exposing (..)
 
 import FunctionExtra exposing (..)
 import Random.Pcg as Random exposing (Seed)
+import Time exposing (Time)
 import Todo as Todo exposing (Todo, TodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -86,13 +87,16 @@ addNewTodo createdAt text todoStore =
         ( appendTodo todo newTodoCollection, todo )
 
 
-replaceTodoIfIdMatches : Todo -> Model -> ( Model, Todo )
-replaceTodoIfIdMatches todo =
+replaceTodoIfIdMatches : Time -> Todo -> Model -> ( Model, Todo )
+replaceTodoIfIdMatches now todo =
     let
+        updatedTodoWithModifiedAt =
+            Todo.setModifiedAt now todo
+
         newTodoList =
-            getTodoList >> Todo.replaceIfEqualById todo
+            getTodoList >> Todo.replaceIfEqualById updatedTodoWithModifiedAt
     in
-        updateTodoList newTodoList >> (,) # todo
+        updateTodoList newTodoList >> (,) # updatedTodoWithModifiedAt
 
 
 deleteTodo todoId todoStore =

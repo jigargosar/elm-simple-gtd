@@ -56,7 +56,10 @@ init now encodedTodoList =
 setViewState viewState m =
     { m | viewState = viewState }
 
-getNow = .now
+
+getNow =
+    .now
+
 
 getViewState =
     (.viewState)
@@ -97,18 +100,23 @@ deleteMaybeTodo maybeTodo model =
         ?= ( model, Nothing )
 
 
-moveTodoToListType : Group -> Maybe Todo -> Model -> ( Model, Maybe Todo )
-moveTodoToListType listType maybeTodo model =
+moveTodoToListType now listType todo m =
+    Todo.setListType listType todo
+        |> ((replaceTodoIfIdMatches now) # m)
+
+
+moveMaybeTodoToListType : Time -> Group -> Maybe Todo -> Model -> ( Model, Maybe Todo )
+moveMaybeTodoToListType now listType maybeTodo model =
     maybeTodo
-        ?|> (Todo.setListType listType >> (replaceTodoIfIdMatches # model))
+        ?|> ((moveTodoToListType now listType) # model)
         ?= ( model, Nothing )
 
 
-moveInboxProcessingTodoToListType listType m =
+moveInboxProcessingTodoToListType now listType m =
     m
         |> case getViewState m of
             InboxFlowViewState maybeTodo inboxFlowModel ->
-                moveTodoToListType listType maybeTodo
+                moveMaybeTodoToListType now listType maybeTodo
                     >> Tuple.mapFirst startProcessingInbox
 
             _ ->
@@ -209,34 +217,29 @@ deleteTodo todoId m =
         |> Tuple2.mapFirst (setTodoCollection # m)
 
 
-saveEditingTodoAndDeactivateEditTodoMode : Model -> ( Model, Maybe Todo )
-saveEditingTodoAndDeactivateEditTodoMode =
-    saveEditingTodo
+saveEditingTodoAndDeactivateEditTodoMode : Time -> Model -> ( Model, Maybe Todo )
+saveEditingTodoAndDeactivateEditTodoMode now =
+    saveEditingTodo now
         >> Tuple2.mapFirst deactivateEditingMode
-
-
-todoToListType listType todo m =
-    Todo.setListType listType todo
-        |> (replaceTodoIfIdMatches # m)
 
 
 deactivateEditingMode =
     setEditModeTo NotEditing
 
 
-saveEditingTodo : Model -> ( Model, Maybe Todo )
-saveEditingTodo m =
+saveEditingTodo : Time -> Model -> ( Model, Maybe Todo )
+saveEditingTodo now m =
     case getEditMode m of
         EditTodoMode todo ->
             if Todo.isTextEmpty todo then
                 ( m, Nothing )
             else
-                replaceTodoIfIdMatches todo m
+                replaceTodoIfIdMatches now todo m
 
         _ ->
             ( m, Nothing )
 
 
-replaceTodoIfIdMatches todo m =
-    TodoStore.replaceTodoIfIdMatches todo m.todoStore
+replaceTodoIfIdMatches now todo m =
+    TodoStore.replaceTodoIfIdMatches now todo m.todoStore
         |> Tuple2.mapEach (setTodoCollection # m) (Just)

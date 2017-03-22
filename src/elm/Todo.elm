@@ -269,6 +269,20 @@ isDeleted =
 setText text todo =
     { todo | text = text }
 
+getModifiedAt : Model -> Time
+getModifiedAt =
+    (.modifiedAt)
+
+
+setModifiedAt : Time -> ModelMapper
+setModifiedAt modifiedAt model =
+    { model | modifiedAt = modifiedAt }
+
+
+updateModifiedAt : (Model -> Time) -> ModelMapper
+updateModifiedAt updater model =
+    setModifiedAt (updater model) model
+
 
 getId =
     (.id)

@@ -27,11 +27,3 @@ getInbox__ =
 
 getFirstInboxTodo =
     Model.getFirstInboxTodo
-
-
-
--- external
-
-
-generator =
-    Model.generator

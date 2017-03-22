@@ -93,11 +93,11 @@ updateInboxFlowWithActionType actionType m =
                 identity
 
 
-deleteMaybeTodo : Maybe Todo -> Model -> ( Model, Maybe Todo )
-deleteMaybeTodo maybeTodo model =
-    maybeTodo
-        ?|> (Todo.getId >> deleteTodo # model)
-        ?= ( model, Nothing )
+--deleteMaybeTodo : Maybe Todo -> Model -> ( Model, Maybe Todo )
+--deleteMaybeTodo maybeTodo model =
+--    maybeTodo
+--        ?|> (Todo.getId >> deleteTodo # model)
+--        ?= ( model, Nothing )
 
 
 moveTodoToListType now listType todo m =
@@ -123,15 +123,15 @@ moveInboxProcessingTodoToListType now listType m =
                 (,) # Nothing
 
 
-deleteTodoInboxFlow m =
-    m
-        |> case getViewState m of
-            InboxFlowViewState maybeTodo inboxFlowModel ->
-                deleteMaybeTodo maybeTodo
-                    >> Tuple.mapFirst startProcessingInbox
-
-            _ ->
-                (,) # Nothing
+--deleteTodoInboxFlow m =
+--    m
+--        |> case getViewState m of
+--            InboxFlowViewState maybeTodo inboxFlowModel ->
+--                deleteMaybeTodo maybeTodo
+--                    >> Tuple.mapFirst startProcessingInbox
+--
+--            _ ->
+--                (,) # Nothing
 
 
 getTodoCollection : Model -> TodoStore
@@ -213,11 +213,6 @@ addNewTodo now m =
 
 
 deleteTodo todoId m =
-    TodoStore.deleteTodo todoId m.todoStore
-        |> Tuple2.mapFirst (setTodoCollection # m)
-
-
-deleteTodo2 todoId m =
     TodoStore.editTodo TodoStore.deleteAction todoId m.todoStore
         |> Tuple2.mapFirst (setTodoCollection # m)
 

@@ -132,16 +132,17 @@ update msg =
                 onFlowMoveTo listType
 
             OnFlowMarkDeleted ->
-                Return.andThen
-                    (Model.deleteTodoInboxFlow
-                        >> Tuple2.mapSecond persistMaybeTodoCmd
-                    )
+                identity
 
+            --                Return.andThen
+            --                    (Model.deleteTodoInboxFlow
+            --                        >> Tuple2.mapSecond persistMaybeTodoCmd
+            --                    )
             OnTodoMoveToClicked listType todo ->
                 moveTodoToListType listType todo
 
             OnDeleteTodoClicked todoId ->
-                Return.andThen (Model.deleteTodo2 todoId)
+                Return.andThen (Model.deleteTodo todoId)
 
             OnTodoDoneClicked todoId ->
                 identity

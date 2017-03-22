@@ -44,13 +44,13 @@ createTodoListViewConfig model =
     }
 
 
-allTodosView : Model -> Html msg
+allTodosView : Model -> Html Msg
 allTodosView m =
     let
         vc =
             (createTodoListViewConfig m)
 
-        todoListViewsWithKey : List ( String, Html msg )
+        todoListViewsWithKey : List ( String, Html Msg )
         todoListViewsWithKey =
             m |> getTodoList >> Todo.todoListsByType .|> todoListViewWithKey (todoView vc)
     in

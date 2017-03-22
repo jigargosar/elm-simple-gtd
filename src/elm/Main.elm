@@ -127,10 +127,10 @@ update msg =
                 Return.map (Model.startProcessingInbox)
 
             OnSetTodoGroupClicked todoGroup todo ->
-                updateTodo (Msg.SetGroup todoGroup) todo
+                onTodoListMsg (TodoList.setGroup todoGroup (Todo.getId todo))
 
             OnDeleteTodoClicked todoId ->
-                updateTodoId (Msg.Delete) todoId
+                onTodoListMsg (TodoList.delete todoId)
 
             OnTodoDoneClicked todoId ->
                 onTodoListMsg (TodoList.toggleDone todoId)

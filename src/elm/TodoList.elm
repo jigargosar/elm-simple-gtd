@@ -34,6 +34,10 @@ updateAndPersistMaybeTodo updater =
 toggleDone =
     UpdateTodo ToggleDone
 
+delete = UpdateTodo Delete
+
+setGroup = SetGroup >> UpdateTodo
+
 
 withNow : (Time -> TodoListMsg) -> ReturnF TodoListMsg Model
 withNow msg =

@@ -203,7 +203,7 @@ encode todo =
     E.object
         [ "_id" => E.string (getId todo)
         , "_rev" => E.string (getRev todo)
-        , "done" => E.bool (getDone todo)
+        , "done" => E.bool (isDone todo)
         , "text" => E.string (getText todo)
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (isDeleted todo)
@@ -282,8 +282,8 @@ setText text todo =
     { todo | text = text }
 
 
-getDone : Model -> Bool
-getDone =
+isDone : Model -> Bool
+isDone =
     (.done)
 
 

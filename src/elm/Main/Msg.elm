@@ -32,6 +32,6 @@ type Msg
     | OnEditTodoKeyUp Todo Key
     | OnSetTodoGroupClicked TodoGroup Todo
     | OnShowTodoList
-    | OnProcessInbox
+    | ProcessInbox
     | OnSaveNewTodoAndContinueAdding Time
     | OnTodoListMsg TodoListMsg

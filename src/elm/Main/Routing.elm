@@ -36,7 +36,7 @@ builder2messages builder =
             [ Msg.OnShowTodoList ]
 
         "process-inbox" :: [] ->
-            [ Msg.OnProcessInbox ]
+            [ Msg.ProcessInbox ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

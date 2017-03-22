@@ -120,7 +120,7 @@ update msg =
             OnShowTodoList ->
                 Return.map (Model.showTodoList)
 
-            OnProcessInbox ->
+            ProcessInbox ->
                 Return.map (Model.startProcessingInbox)
 
             OnSetTodoGroupClicked todoGroup todo ->

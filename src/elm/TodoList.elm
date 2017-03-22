@@ -35,7 +35,7 @@ setText =
 
 addNewTodo : String -> TodoListMsg
 addNewTodo =
-    AddNewTodo String
+    AddNewTodo
 
 
 update : TodoListMsg -> Model -> ( Model, Cmd TodoListMsg )

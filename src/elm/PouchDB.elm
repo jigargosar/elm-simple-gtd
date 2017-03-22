@@ -61,4 +61,4 @@ documentFieldsDecoder =
 timeStampFieldsDecoder : Decoder (Time -> Time -> otherFields) -> Decoder otherFields
 timeStampFieldsDecoder =
     D.optional "createdAt" (D.float) 0
-        >> D.optional "modifedAt" (D.float) 0
+        >> D.optional "modifiedAt" (D.float) 0

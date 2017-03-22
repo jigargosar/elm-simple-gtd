@@ -104,14 +104,12 @@ update msg =
                 Return.map (Model.updateEditTodoText text)
 
             OnEditTodoBlur todo ->
-                onTodoListMsg (TodoList.setText (Todo.getText todo) (Todo.getId todo))
-                    >> deactivateEditingMode
+                setTextAndDeactivateEditing todo
 
             OnEditTodoKeyUp todo key ->
                 case key of
                     Enter ->
-                        onTodoListMsg (TodoList.setText (Todo.getText todo) (Todo.getId todo))
-                            >> deactivateEditingMode
+                        setTextAndDeactivateEditing todo
 
                     Escape ->
                         deactivateEditingMode
@@ -170,6 +168,11 @@ saveNewTodoAndContinueAdding now =
         (Model.addNewTodoAndContinueAdding now
             >> Tuple2.mapSecond persistMaybeTodoCmd
         )
+
+
+setTextAndDeactivateEditing todo =
+    onTodoListMsg (TodoList.setText (Todo.getText todo) (Todo.getId todo))
+        >> deactivateEditingMode
 
 
 deactivateEditingMode =

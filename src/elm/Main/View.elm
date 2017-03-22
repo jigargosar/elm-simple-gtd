@@ -41,14 +41,9 @@ createTodoListViewConfig model =
     }
 
 
-
---        , appDrawerView m
-
-
 appView m =
     div []
-        [ --        headerLayoutView m
-          drawerLayoutView m
+        [ drawerLayoutView m
         , fab
             [ id "add-fab"
             , attribute "icon" "add"

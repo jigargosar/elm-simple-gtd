@@ -32,7 +32,7 @@ import Todo.View
 
 appView m =
     div []
-        [ drawerLayoutView m
+        [ appDrawerLayoutView m
         , fab
             [ id "add-fab"
             , attribute "icon" "add"
@@ -42,12 +42,12 @@ appView m =
         ]
 
 
-drawerLayoutView m =
+appDrawerLayoutView m =
     drawerLayout []
         [ appDrawerView m
         , headerLayout []
             [ appHeaderView m
-            , div [ id "main-view" ] [ mainView m ]
+            , appMainView m
             ]
         ]
 
@@ -77,6 +77,17 @@ appHeaderView m =
         ]
 
 
+appMainView m =
+    div [ id "main-view" ]
+        [ case getViewState m of
+            TodoListViewState ->
+                allTodosView m
+
+            InboxFlowViewState maybeTodo inboxFlowModel ->
+                InboxFlow.View.view maybeTodo inboxFlowModel
+        ]
+
+
 addTodoView editMode =
     case editMode of
         EditNewTodoMode text ->
@@ -100,15 +111,6 @@ addNewTodoView text =
         , autofocus True
         ]
         []
-
-
-mainView m =
-    case getViewState m of
-        TodoListViewState ->
-            allTodosView m
-
-        InboxFlowViewState maybeTodo inboxFlowModel ->
-            InboxFlow.View.view maybeTodo inboxFlowModel
 
 
 

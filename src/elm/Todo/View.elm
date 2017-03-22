@@ -81,7 +81,7 @@ todoInputId todo =
 
 
 hoverIcons vc todo =
-    div [ class "hover hover-icons" ]
+    div [ class "show-on-hover" ]
         [ doneIconButton vc todo
         , deleteIconButton vc todo
         , optionsIconButton vc todo
@@ -89,7 +89,7 @@ hoverIcons vc todo =
 
 
 nonHoverIcons vc todo =
-    div [ class "non-hover" ]
+    div [ class "hide-on-hover" ]
         [ doneIconButton vc todo
         ]
 

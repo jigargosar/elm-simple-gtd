@@ -142,10 +142,10 @@ update msg =
                 moveTodoToListType listType todo
 
             OnDeleteTodoClicked todoId ->
-                updateAndPersistTodo (Model.updateTodo Todo.markDeleted todoId)
+                updateAndPersistTodo (Model.updateTodoMaybe Todo.markDeleted todoId)
 
             OnTodoDoneClicked todoId ->
-                updateAndPersistTodo (Model.updateTodo Todo.toggleDone todoId)
+                updateAndPersistTodo (Model.updateTodoMaybe Todo.toggleDone todoId)
 
             MoveTodoToListTypeWithNow listType todo now ->
                 moveTodoToListTypeWithNow now listType todo

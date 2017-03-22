@@ -182,8 +182,8 @@ updateSeed updater model =
     setSeed (updater model) model
 
 
-updateTodo : (Todo -> Todo) -> TodoId -> Model -> ( Model, Maybe Todo )
-updateTodo updater todoId m =
+updateTodoMaybe : (Todo -> Todo) -> TodoId -> Model -> ( Model, Maybe Todo )
+updateTodoMaybe updater todoId m =
     let
         todoList =
             m.todoList

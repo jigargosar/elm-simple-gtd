@@ -127,7 +127,8 @@ type EditMode
 
 
 type alias TodoFields =
-    { text : String
+    { done : Bool
+    , text : String
     , dueAt : Maybe Time
     , deleted : Bool
     , listType : Group
@@ -150,10 +151,10 @@ type alias TodoList =
     List Todo
 
 
-todoConstructor : PouchDB.Id -> PouchDB.Revision -> Time -> Time -> String -> Maybe Time -> Bool -> Group -> Todo
-todoConstructor id rev createdAt modifiedAt text dueAt deleted listType =
+todoConstructor id rev createdAt modifiedAt done text dueAt deleted listType =
     { id = id
     , rev = rev
+    , done = done
     , text = text
     , dueAt = dueAt
     , deleted = deleted
@@ -164,7 +165,8 @@ todoConstructor id rev createdAt modifiedAt text dueAt deleted listType =
 
 
 todoFieldsDecoder =
-    D.required "text" D.string
+    D.optional "done" D.bool False
+        >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         >> D.optional "deleted" D.bool defaultDeleted
         >> D.optional "listType" (D.map stringToListType D.string) Inbox
@@ -189,7 +191,7 @@ stringToListType string =
 
 initWith : Time -> String -> TodoId -> Todo
 initWith createdAt text id =
-    todoConstructor id defaultRevision createdAt createdAt text defaultDueAt defaultDeleted Inbox
+    todoConstructor id defaultRevision createdAt createdAt False text defaultDueAt defaultDeleted Inbox
 
 
 type alias EncodedTodo =

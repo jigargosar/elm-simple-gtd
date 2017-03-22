@@ -90,7 +90,7 @@ hoverIcons vc todo =
 doneIconButton vc todo =
     iconButton
         [ class "check"
-        , onClick (vc.onTodoDoneClicked (Todo.getId todo))
+        , onClickStopPropagation (vc.onTodoDoneClicked (Todo.getId todo))
         , icon "check"
         ]
         []

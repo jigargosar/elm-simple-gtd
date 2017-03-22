@@ -4,6 +4,7 @@ import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Main.View.AllTodoView exposing (allTodosView)
+import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -113,8 +114,28 @@ addTodoFabView m =
         []
 
 
-type AttributeTypes msg
+type AttributeType msg
     = AttrPresent (Attribute msg)
     | AttrAbsent
     | AttrMaybe (Maybe (Attribute msg))
-    | List (AttributeTypes msg)
+    | L1 (List (AttributeType msg))
+    | L2 (List (Attribute msg))
+
+
+toAttributes : AttributeType msg -> List (Attribute msg)
+toAttributes attributeType =
+    case attributeType of
+        AttrPresent attr ->
+            [ attr ]
+
+        AttrAbsent ->
+            []
+
+        AttrMaybe maybeAttr ->
+            Maybe.toList maybeAttr
+
+        L1 list ->
+            list |> List.concatMap toAttributes
+
+        L2 list ->
+            list

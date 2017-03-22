@@ -96,7 +96,7 @@ nonHoverIcons vc todo =
 
 doneIconButton vc todo =
     iconButton
-        [ class "done"
+        [ class ("done-" ++ toString (Todo.isDone todo))
         , onClickStopPropagation (vc.onTodoDoneClicked (Todo.getId todo))
         , icon "check"
         ]

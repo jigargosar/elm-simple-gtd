@@ -13,6 +13,8 @@ import Maybe.Extra as Maybe
 import FunctionExtra exposing (..)
 import TodoStore.Model as Model exposing (Model)
 import Tuple2
+import Function exposing ((>>>>))
+import PouchDB
 
 
 type alias TodoStore =
@@ -48,4 +50,18 @@ addNewTodo =
     Model.addNewTodo
 
 
-update = TodoStore.Update.update
+update =
+    TodoStore.Update.update
+
+
+editTodo : Model.Action -> TodoId -> Model -> ( Model, Cmd msg )
+editTodo =
+    Model.editTodo >>>> Tuple.mapSecond persistMaybeTodoCmd
+
+
+persistMaybeTodoCmd =
+    Maybe.unwrap Cmd.none persistTodoCmd
+
+
+persistTodoCmd todo =
+    PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)

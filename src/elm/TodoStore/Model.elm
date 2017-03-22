@@ -3,7 +3,7 @@ module TodoStore.Model exposing (..)
 import FunctionExtra exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todo as Todo exposing (Todo, TodoList)
+import Todo as Todo exposing (Todo, TodoId, TodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import List.Extra as List
@@ -108,3 +108,29 @@ deleteTodo todoId todoStore =
         ( setTodoList todoList todoStore
         , List.find (Todo.hasId todoId) todoList
         )
+
+
+markTodoDone todoId todoStore =
+    let
+        todoList =
+            todoStore.todoList
+                |> List.updateIf (Todo.hasId todoId) (Todo.setDone True)
+    in
+        ( setTodoList todoList todoStore
+        , List.find (Todo.hasId todoId) todoList
+        )
+
+
+type Action
+    = Delete
+    | Done
+
+
+editTodo : Action -> TodoId -> Model -> ( Model, Maybe Todo )
+editTodo action todoId todoStore =
+    case action of
+        Delete ->
+            deleteTodo todoId todoStore
+
+        Done ->
+            markTodoDone todoId todoStore

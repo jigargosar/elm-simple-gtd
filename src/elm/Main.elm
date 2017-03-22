@@ -19,6 +19,7 @@ import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
 import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
+import Function exposing ((>>>))
 
 
 type alias ReturnTA =
@@ -67,7 +68,7 @@ update msg =
 
             OnAddTodoClicked focusInputId ->
                 Return.map (Model.activateEditNewTodoMode "")
-                    >> Return.command (domFocusCmd focusInputId OnDomFocusResult)
+                    >> domFocus focusInputId OnDomResult
 
             OnNewTodoTextChanged text ->
                 Return.map (Model.activateEditNewTodoMode text)
@@ -88,12 +89,12 @@ update msg =
 
             OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
-                    >> Return.command (domFocusCmd focusInputId OnDomFocusResult)
+                    >> domFocus focusInputId OnDomResult
 
-            OnDomFocusResult result ->
+            OnDomResult result ->
                 let
                     _ =
-                        result |> Result.mapError (Debug.log "Error: Dom.focus")
+                        result |> Result.mapError (Debug.log "Error: Dom")
                 in
                     identity
 
@@ -148,6 +149,10 @@ onTodoListMsg =
 
 domFocusCmd id msg =
     Task.attempt msg (Dom.focus id)
+
+
+domFocus =
+    domFocusCmd >>> Return.command
 
 
 addNewTodoAndContinueAdding text =

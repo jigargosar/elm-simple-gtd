@@ -270,9 +270,9 @@ moveTodoToListType now listType todo m =
         |> ((replaceTodoIfIdMatches now) # m)
 
 
-updateTodoByAction todoId todoAction now model =
+updateTodoWithAction todoAction now todoId =
     let
-        todoActionToUpdaterFunction =
+        todoActionUpdater =
             case todoAction of
                 SetGroup group ->
                     Todo.setListType group
@@ -282,8 +282,13 @@ updateTodoByAction todoId todoAction now model =
 
                 Delete ->
                     Todo.markDeleted
+
+        modifiedAtUpdater = Todo.setModifiedAt now
+
+        todoUpdater = todoActionUpdater >> modifiedAtUpdater
+
     in
-        ( model, Nothing )
+        updateTodoMaybe todoUpdater todoId
 
 
 moveMaybeTodoToListType : Time -> TodoGroup -> Maybe Todo -> Model -> ( Model, Maybe Todo )

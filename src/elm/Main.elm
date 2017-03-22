@@ -154,7 +154,8 @@ update msg =
                 moveFlowTodoToListTypeWithNow now listType
 
             UpdateTodo todoId todoAction now ->
-                updateAndPersistMaybeTodo (Model.updateTodoByAction todoId todoAction now)
+                updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todoId)
+
 
 
 --            _ ->

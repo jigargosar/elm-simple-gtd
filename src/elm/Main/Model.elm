@@ -23,16 +23,16 @@ type ViewState
 
 type alias Model =
     { now : Time
-    , seed : Seed
     , todoList : TodoList
     , todoStore : TodoStore
     , editMode : EditMode
     , viewState : ViewState
+    , seed : Seed
     }
 
 
-modelConstructor now editMode todoStore seed =
-    Model now seed [] todoStore editMode TodoListViewState
+modelConstructor now todoList editMode ( todoStore, seed ) =
+    Model now todoList todoStore editMode TodoListViewState seed
 
 
 type alias ModelMapper =
@@ -42,17 +42,18 @@ type alias ModelMapper =
 init : Time -> EncodedTodoList -> Model
 init now encodedTodoList =
     let
+        todoList =
+            Todo.decodeTodoList encodedTodoList
+
         generateTodoModel =
-            Todo.decodeTodoList
-                >> TodoStore.generator
-                >> Random.step
+            todoList |> TodoStore.generator >> Random.step
 
         todoModelFromSeed =
-            Random.seedFromTime >> generateTodoModel encodedTodoList
+            Random.seedFromTime >> generateTodoModel
     in
         now
             |> todoModelFromSeed
-            >> uncurry (modelConstructor now NotEditing)
+            >> modelConstructor now todoList NotEditing
 
 
 setViewState viewState m =

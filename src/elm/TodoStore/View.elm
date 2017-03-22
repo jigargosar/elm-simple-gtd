@@ -42,16 +42,22 @@ todoView vc todo =
         todoId =
             Todo.getId todo
 
+        notEditingView =
+            Todo.View.todoViewNotEditing vc todo
+
+        editingView todo =
+            Todo.View.todoViewEditing vc todo
+
         todoViewHelp =
             case vc.editMode of
                 EditTodoMode editingTodo ->
                     if Todo.equalById editingTodo todo then
-                        Todo.View.todoViewEditing vc editingTodo
+                        editingView editingTodo
                     else
-                        Todo.View.todoViewNotEditing vc todo
+                        notEditingView
 
                 _ ->
-                    Todo.View.todoViewNotEditing vc todo
+                    notEditingView
     in
         ( todoId, todoViewHelp )
 

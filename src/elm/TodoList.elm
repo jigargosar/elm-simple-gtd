@@ -3,6 +3,7 @@ module TodoList exposing (..)
 import List.Extra
 import Main.Model exposing (Model)
 import Maybe.Extra
+import Random.Pcg as Random
 import Return exposing (Return, ReturnF)
 import Task
 import Time exposing (Time)
@@ -42,14 +43,30 @@ update : TodoListMsg -> Model -> ( Model, Cmd TodoListMsg )
 update msg =
     Return.singleton
         >> case msg of
-            UpdateTodoAt action id now ->
-                updateAndPersistMaybeTodo (updateTodoWithAction action now id)
-
             UpdateTodo action id ->
                 withNow (UpdateTodoAt action id)
 
+            UpdateTodoAt action id now ->
+                updateAndPersistMaybeTodo (updateTodoAt action id now)
+
             AddNewTodo text ->
-                identity
+                withNow (AddNewTodoAt text)
+
+            AddNewTodoAt text now ->
+                updateAndPersistMaybeTodo (addNewTodoAt text now)
+
+
+addNewTodoAt text now m =
+    if String.trim text |> String.isEmpty then
+        ( m, Nothing )
+    else
+        Random.step (Todo.generator now text) (Main.Model.getSeed m)
+            |> Tuple.mapSecond (Main.Model.setSeed # m)
+            |> apply2 ( uncurry addTodo, Tuple.first >> Just )
+
+
+addTodo todo =
+    Main.Model.updateTodoList (Main.Model.getTodoList >> (::) todo)
 
 
 updateAndPersistMaybeTodo updater =
@@ -70,7 +87,7 @@ persistTodoCmd todo =
     PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)
 
 
-updateTodoWithAction action now todoId =
+updateTodoAt action todoId now =
     let
         --        todoId = Todo.getId todo
         todoActionUpdater =

@@ -18,5 +18,6 @@ type TodoListMsg
     = UpdateTodoAt UpdateAction TodoId Time
     | UpdateTodo UpdateAction TodoId
     | AddNewTodo String
+    | AddNewTodoAt String Time
 
 

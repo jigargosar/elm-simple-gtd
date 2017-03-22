@@ -17,8 +17,8 @@ import KeyboardExtra exposing (onEscape, onKeyUp)
 import Polymer.Paper exposing (..)
 
 
-todoView viewConfig ((editing, todo) as editingTodoTuple) =
-        ( Todo.getId todo, todoItemView viewConfig editingTodoTuple )
+todoView viewConfig (( editing, todo ) as editingTodoTuple) =
+    todoItemView viewConfig editingTodoTuple
 
 
 todoInputId todo =

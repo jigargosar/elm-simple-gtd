@@ -42,6 +42,7 @@ allTodosView viewConfig todoStore =
         todoView : Todo -> ( TodoId, Html msg )
         todoView todo =
             let
+                todoId = Todo.getId todo
                 editingTodoTuple =
                     case viewConfig.editMode of
                         EditTodoMode editingTodo ->
@@ -53,7 +54,7 @@ allTodosView viewConfig todoStore =
                         _ ->
                             ( False, todo )
             in
-                Todo.View.todoView viewConfig editingTodoTuple
+                (todoId, Todo.View.todoView viewConfig editingTodoTuple)
 
         todoListViewsWithKey : List ( String, Html msg )
         todoListViewsWithKey =

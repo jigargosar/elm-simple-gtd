@@ -13,7 +13,6 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
 import InboxFlow
-import TodoStore.Model
 
 
 type ViewState

@@ -13,7 +13,6 @@ import RouteUrl exposing (RouteUrlProgram)
 import Task
 import Time exposing (Time)
 import PouchDB
-import TodoStore
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe

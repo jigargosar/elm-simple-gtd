@@ -17,10 +17,10 @@ import KeyboardExtra exposing (onEscape, onKeyUp)
 import Polymer.Paper exposing (..)
 
 
-todoView editMode viewConfig todo =
+todoView viewConfig todo =
     let
         editingTodoTuple =
-            case editMode of
+            case viewConfig.editMode of
                 EditTodoMode editingTodo ->
                     if Todo.equalById editingTodo todo then
                         ( True, editingTodo )

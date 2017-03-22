@@ -30,16 +30,17 @@ type alias ViewConfig msg =
     , onEditTodoKeyUp : Key -> msg
     , noOp : msg
     , onTodoMoveToClicked : Group -> Todo -> msg
-    , now: Time
+    , now : Time
+    , editMode : EditMode
     }
 
 
-allTodosView : ViewConfig msg -> EditMode -> TodoStore -> Html msg
-allTodosView viewConfig editMode todoStore =
+allTodosView : ViewConfig msg -> TodoStore -> Html msg
+allTodosView viewConfig todoStore =
     let
         todoView : Todo -> ( TodoId, Html msg )
         todoView =
-            Todo.View.todoView editMode viewConfig
+            Todo.View.todoView viewConfig
 
         todoListViewsWithKey : List ( String, Html msg )
         todoListViewsWithKey =

@@ -35,6 +35,7 @@ createTodoListViewConfig model =
     , noOp = NoOp
     , onTodoMoveToClicked = OnTodoMoveToClicked
     , now = getNow model
+    , editMode = getEditMode model
     }
 
 
@@ -160,4 +161,4 @@ centerView m =
 
 
 todoListView m =
-    TodoStore.View.allTodosView (createTodoListViewConfig m) (getEditMode m) (getTodoCollection m)
+    TodoStore.View.allTodosView (createTodoListViewConfig m) (getTodoCollection m)

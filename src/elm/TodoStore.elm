@@ -54,6 +54,14 @@ update =
     TodoStore.Update.update
 
 
+deleteAction =
+    Model.Delete
+
+
+doneAction =
+    Model.Done
+
+
 editTodo : Model.Action -> TodoId -> Model -> ( Model, Cmd msg )
 editTodo =
     Model.editTodo >>>> Tuple.mapSecond persistMaybeTodoCmd

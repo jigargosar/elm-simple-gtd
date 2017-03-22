@@ -31,22 +31,17 @@ type alias Model =
     }
 
 
-modelConstructor now todoList editMode seed =
-    Model now todoList editMode TodoListViewState seed
-
-
 type alias ModelMapper =
     Model -> Model
 
 
 init : Time -> EncodedTodoList -> Model
 init now encodedTodoList =
-    let
-        todoList =
-            Todo.decodeTodoList encodedTodoList
-    in
-        Random.seedFromTime now
-            |> modelConstructor now todoList NotEditing
+    Model now
+        (Todo.decodeTodoList encodedTodoList)
+        NotEditing
+        TodoListViewState
+        (Random.seedFromTime now)
 
 
 setViewState viewState m =

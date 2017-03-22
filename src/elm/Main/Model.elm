@@ -270,10 +270,9 @@ moveTodoToListType now listType todo m =
         |> ((replaceTodoIfIdMatches now) # m)
 
 
-updateTodoWithAction todoAction now todo =
+updateTodoWithAction todoAction now todoId =
     let
-        todoId = Todo.getId todo
-
+        --        todoId = Todo.getId todo
         todoActionUpdater =
             case todoAction of
                 SetGroup group ->
@@ -285,10 +284,11 @@ updateTodoWithAction todoAction now todo =
                 Delete ->
                     Todo.markDeleted
 
-        modifiedAtUpdater = Todo.setModifiedAt now
+        modifiedAtUpdater =
+            Todo.setModifiedAt now
 
-        todoUpdater = todoActionUpdater >> modifiedAtUpdater
-
+        todoUpdater =
+            todoActionUpdater >> modifiedAtUpdater
     in
         updateTodoMaybe todoUpdater todoId
 

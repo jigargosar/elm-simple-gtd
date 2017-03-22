@@ -4,7 +4,7 @@ import Dom
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Main.Model as Model exposing (Model)
-import Main.Msg exposing (..)
+import Main.Msg as Msg exposing (..)
 import Main.Routing
 import Main.View exposing (appView)
 import Navigation exposing (Location)
@@ -143,7 +143,8 @@ update msg =
                 updateTodoWithNow (SetGroup listType) todo
 
             OnDeleteTodoClicked todoId ->
-                updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.markDeleted todoId)
+                --                updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.markDeleted todoId)
+                updateTodoIdWithNow (Msg.Delete) todoId
 
             OnTodoDoneClicked todoId ->
                 updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.toggleDone todoId)
@@ -154,8 +155,8 @@ update msg =
             MoveFlowTodoToListTypeWithNow listType now ->
                 moveFlowTodoToListTypeWithNow now listType
 
-            UpdateTodoWithNow todoAction todo now ->
-                updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todo)
+            UpdateTodoWithNow todoAction todoId now ->
+                updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todoId)
 
 
 
@@ -168,7 +169,11 @@ update msg =
 
 
 updateTodoWithNow action todo =
-    withNow (UpdateTodoWithNow action todo)
+    updateTodoIdWithNow action (Todo.getId todo)
+
+
+updateTodoIdWithNow action todoId =
+    withNow (UpdateTodoWithNow action todoId)
 
 
 updateAndPersistMaybeTodo updater =

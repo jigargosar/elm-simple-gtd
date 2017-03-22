@@ -55,6 +55,17 @@ todoView vc todo =
 
         todoView =
             Todo.View.todoView vc editingTodoTuple
+
+        todoView2 =
+            case vc.editMode of
+                EditTodoMode editingTodo ->
+                    if Todo.equalById editingTodo todo then
+                        Todo.View.todoViewEditing vc editingTodo
+                    else
+                        Todo.View.todoViewNotEditing vc todo
+
+                _ ->
+                    Todo.View.todoViewNotEditing vc todo
     in
         ( todoId, todoView )
 

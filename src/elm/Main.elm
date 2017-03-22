@@ -169,6 +169,8 @@ saveNewTodoAndContinueAdding now =
             >> Tuple2.mapSecond persistMaybeTodoCmd
         )
 
+addNewTodoAndContinueAdding text =
+    onTodoListMsg (TodoList.addNewTodo text)
 
 setTextAndDeactivateEditing todo =
     onTodoListMsg (TodoList.setText (Todo.getText todo) (Todo.getId todo))

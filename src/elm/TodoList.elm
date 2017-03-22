@@ -33,6 +33,11 @@ setText =
     SetText >> UpdateTodo
 
 
+addNewTodo : String -> TodoListMsg
+addNewTodo =
+    AddNewTodo String
+
+
 update : TodoListMsg -> Model -> ( Model, Cmd TodoListMsg )
 update msg =
     Return.singleton
@@ -42,6 +47,9 @@ update msg =
 
             UpdateTodo action id ->
                 withNow (UpdateTodoAt action id)
+
+            AddNewTodo text ->
+                identity
 
 
 updateAndPersistMaybeTodo updater =

@@ -10,7 +10,7 @@ import Main.Msg exposing (..)
 import Polymer.Attributes exposing (icon, stringProperty)
 import TodoStore exposing (TodoStore)
 import TodoStore.Model as Model
-import Todo as Todo exposing (EditMode, Group(Inbox), Todo, TodoId)
+import Todo as Todo exposing (EditMode(EditTodoMode), Group(Inbox), Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Dict exposing (Dict)
@@ -40,8 +40,20 @@ allTodosView : ViewConfig msg -> TodoStore -> Html msg
 allTodosView viewConfig todoStore =
     let
         todoView : Todo -> ( TodoId, Html msg )
-        todoView =
-            Todo.View.todoView viewConfig
+        todoView todo =
+            let
+                editingTodoTuple =
+                    case viewConfig.editMode of
+                        EditTodoMode editingTodo ->
+                            if Todo.equalById editingTodo todo then
+                                ( True, editingTodo )
+                            else
+                                ( False, todo )
+
+                        _ ->
+                            ( False, todo )
+            in
+                Todo.View.todoView viewConfig editingTodoTuple
 
         todoListViewsWithKey : List ( String, Html msg )
         todoListViewsWithKey =

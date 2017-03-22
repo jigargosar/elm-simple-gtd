@@ -74,7 +74,7 @@ drawerLayoutView m =
                 [ toolbar
                     []
                     [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-                    , addTodoView (getEditMode m) (createTodoListViewConfig m)
+                    , addTodoView (getEditMode m)
                     ]
                 ]
             , div [ id "center-view" ] [ centerView m ]
@@ -120,10 +120,10 @@ appDrawerView m =
         ]
 
 
-addTodoView editMode viewConfig =
+addTodoView editMode =
     case editMode of
         EditNewTodoMode text ->
-            addNewTodoView viewConfig text
+            addNewTodoView text
 
         _ ->
             span [] []
@@ -133,7 +133,7 @@ newTodoInputId =
     "new-todo-input"
 
 
-addNewTodoView vc text =
+addNewTodoView text =
     Paper.input
         [ id newTodoInputId
         , onInput OnNewTodoTextChanged

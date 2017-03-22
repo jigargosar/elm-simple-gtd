@@ -74,7 +74,7 @@ getTodoList =
 
 
 todoListsByType =
-    getTodoList >> Todo.todoListsByType
+    getTodoList >> Todo.groupedTodoLists
 
 
 setTodoList : TodoList -> ModelMapper

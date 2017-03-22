@@ -37,11 +37,11 @@ mapAllExceptDeleted mapper =
 
 getTodoLists : Model -> List ( String, List Todo )
 getTodoLists =
-    getTodoList >> Todo.todoListsByType
+    getTodoList >> Todo.groupedTodoLists
 
 
 getTodoLists2 =
-    getTodoList >> Todo.todoListsByType2
+    getTodoList >> Todo.groupedTodoLists2
 
 
 getInboxTodoList : Model -> TodoList

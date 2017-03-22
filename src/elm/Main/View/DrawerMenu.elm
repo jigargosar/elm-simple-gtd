@@ -27,7 +27,7 @@ appDrawerMenuView m =
 
 
 getTodoLists =
-    getTodoList >> Todo.todoListsByType2
+    getTodoList >> Todo.groupedTodoLists2
 
 
 listTypeMenuItems =

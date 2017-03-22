@@ -57,6 +57,9 @@ update =
 deleteAction =
     Model.Delete
 
+toggleDoneAction =
+    Model.ToggleDone
+
 
 doneAction =
     Model.Done

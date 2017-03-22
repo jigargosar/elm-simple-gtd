@@ -146,7 +146,7 @@ update msg =
                 Return.andThen (Model.updateTodo TodoStore.deleteAction todoId)
 
             OnTodoDoneClicked todoId ->
-                Return.andThen (Model.updateTodo TodoStore.doneAction todoId)
+                Return.andThen (Model.updateTodo TodoStore.toggleDoneAction todoId)
 
             MoveTodoToListTypeWithNow listType todo now ->
                 moveTodoToListTypeWithNow now listType todo

@@ -124,6 +124,7 @@ markTodoDone todoId todoStore =
 type Action
     = Delete
     | Done
+    | ToggleDone
 
 
 editTodo : Action -> TodoId -> Model -> ( Model, Maybe Todo )
@@ -133,4 +134,7 @@ editTodo action todoId todoStore =
             deleteTodo todoId todoStore
 
         Done ->
+            markTodoDone todoId todoStore
+
+        ToggleDone ->
             markTodoDone todoId todoStore

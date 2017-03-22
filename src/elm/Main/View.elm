@@ -66,7 +66,7 @@ drawerLayoutView m =
                     , addTodoView (getEditMode m)
                     ]
                 ]
-            , div [ id "center-view" ] [ centerView m ]
+            , div [ id "main-view" ] [ mainView m ]
             ]
         ]
 
@@ -96,7 +96,7 @@ addNewTodoView text =
         []
 
 
-centerView m =
+mainView m =
     case getViewState m of
         TodoListViewState ->
             allTodosView  m

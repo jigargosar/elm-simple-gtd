@@ -33,12 +33,7 @@ import Todo.View
 appView m =
     div []
         [ appDrawerLayoutView m
-        , fab
-            [ id "add-fab"
-            , attribute "icon" "add"
-            , onClick (OnAddTodoClicked newTodoInputId)
-            ]
-            []
+        , addTodoFabView m
         ]
 
 
@@ -91,7 +86,15 @@ appMainView m =
 addTodoView editMode =
     case editMode of
         EditNewTodoMode text ->
-            addNewTodoView text
+            Paper.input
+                [ id newTodoInputId
+                , onInput OnNewTodoTextChanged
+                , value text
+                , onBlur OnNewTodoBlur
+                , onKeyUp OnNewTodoKeyUp
+                , autofocus True
+                ]
+                []
 
         _ ->
             span [] []
@@ -101,17 +104,10 @@ newTodoInputId =
     "new-todo-input"
 
 
-addNewTodoView text =
-    Paper.input
-        [ id newTodoInputId
-        , onInput OnNewTodoTextChanged
-        , value text
-        , onBlur OnNewTodoBlur
-        , onKeyUp OnNewTodoKeyUp
-        , autofocus True
+addTodoFabView m =
+    fab
+        [ id "add-fab"
+        , attribute "icon" "add"
+        , onClick (OnAddTodoClicked newTodoInputId)
         ]
         []
-
-
-
---    div [] []

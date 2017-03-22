@@ -44,15 +44,11 @@ createTodoListViewConfig model =
     }
 
 
-todoListViewsWithKey : Model -> List ( String, Html Msg )
-todoListViewsWithKey =
+allTodosView : Model -> Html Msg
+allTodosView =
     apply2 ( createTodoListViewConfig >> todoListViewWithKey, todoListsByType )
         >> uncurry List.map
-
-
-allTodosView : Model -> Html Msg
-allTodosView m =
-    Keyed.node "div" [] (todoListViewsWithKey m)
+        >> Keyed.node "div" []
 
 
 todoListViewWithKey vc ( listTitle, todoList ) =

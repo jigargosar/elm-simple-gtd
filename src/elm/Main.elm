@@ -128,16 +128,6 @@ update msg =
             OnProcessInbox ->
                 Return.map (Model.startProcessingInbox)
 
-            OnFlowMoveTo listType ->
-                onFlowMoveTo listType
-
-            OnFlowMarkDeleted ->
-                identity
-
-            --                Return.andThen
-            --                    (Model.deleteTodoInboxFlow
-            --                        >> Tuple2.mapSecond persistMaybeTodoCmd
-            --                    )
             OnTodoMoveToClicked listType todo ->
                 updateTodo (SetGroup listType) todo
 
@@ -145,14 +135,7 @@ update msg =
                 updateTodoId (Msg.Delete) todoId
 
             OnTodoDoneClicked todoId ->
-                --                updateAndPersistMaybeTodo (Model.updateTodoMaybe Todo.toggleDone todoId)
                 updateTodoId (Msg.ToggleDone) todoId
-
-            MoveTodoToListTypeWithNow listType todo now ->
-                moveTodoToListTypeWithNow now listType todo
-
-            MoveFlowTodoToListTypeWithNow listType now ->
-                moveFlowTodoToListTypeWithNow now listType
 
             UpdateTodo todoAction todoId now ->
                 updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todoId)
@@ -184,28 +167,6 @@ updateAndPersistMaybeTodo updater =
 
 domFocusCmd id msg =
     Task.attempt msg (Dom.focus id)
-
-
-onFlowMoveTo listType =
-    Return.command (withNowOld (MoveFlowTodoToListTypeWithNow listType))
-
-
-moveFlowTodoToListTypeWithNow now listType =
-    Return.andThen
-        (Model.moveInboxProcessingTodoToListType now listType
-            >> Tuple2.mapSecond persistMaybeTodoCmd
-        )
-
-
-moveTodoToListType listType todo =
-    Return.command (withNowOld (MoveTodoToListTypeWithNow listType todo))
-
-
-moveTodoToListTypeWithNow now listType todo =
-    Return.andThen
-        (Model.moveTodoToListType now listType todo
-            >> Tuple2.mapSecond persistMaybeTodoCmd
-        )
 
 
 saveEditingTodo =

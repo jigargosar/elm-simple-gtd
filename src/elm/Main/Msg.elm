@@ -30,13 +30,9 @@ type Msg
     | OnTodoDoneClicked TodoId
     | OnEditTodoKeyUp Key
     | OnTodoMoveToClicked TodoGroup Todo
-    | MoveTodoToListTypeWithNow TodoGroup Todo Time
-    | MoveFlowTodoToListTypeWithNow TodoGroup Time
-    | OnFlowMoveTo TodoGroup
     | OnInboxFlowAction FlowAction
     | OnShowTodoList
     | OnProcessInbox
-    | OnFlowMarkDeleted
     | OnSaveNewTodoAndContinueAdding Time
     | SaveEditingTodoWithNow Time
     | UpdateTodo TodoAction TodoId Time

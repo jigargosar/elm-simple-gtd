@@ -86,10 +86,11 @@ mapAllExceptDeleted mapper =
 
 
 startProcessingInbox model =
-    mapAllExceptDeleted identity model
-        |> InboxFlow.init
-        |> InboxFlowViewState (getFirstInboxTodo model)
-        |> (setViewState # model)
+    --    mapAllExceptDeleted identity model
+    --        |> InboxFlow.init
+    --        |> InboxFlowViewState (getFirstInboxTodo model)
+    --        |> (setViewState # model)
+    model
 
 
 setEditModeTo : EditMode -> ModelMapper
@@ -236,23 +237,6 @@ findTodoEqualById todo =
     getTodoList >> List.find (Todo.equalById todo)
 
 
-
---deleteMaybeTodo : Maybe Todo -> Model -> ( Model, Maybe Todo )
---deleteMaybeTodo maybeTodo model =
---    maybeTodo
---        ?|> (Todo.getId >> deleteTodo # model)
---        ?= ( model, Nothing )
---deleteTodoInboxFlow m =
---    m
---        |> case getViewState m of
---            InboxFlowViewState maybeTodo inboxFlowModel ->
---                deleteMaybeTodo maybeTodo
---                    >> Tuple.mapFirst startProcessingInbox
---
---            _ ->
---                (,) # Nothing
-
-
 updateInboxFlowWithActionType actionType m =
     m
         |> case getViewState m of
@@ -263,11 +247,6 @@ updateInboxFlowWithActionType actionType m =
 
             _ ->
                 identity
-
-
-moveTodoToListType now listType todo m =
-    Todo.setListType listType todo
-        |> ((replaceTodoIfIdMatches now) # m)
 
 
 updateTodoWithAction todoAction now todoId =
@@ -291,21 +270,3 @@ updateTodoWithAction todoAction now todoId =
             todoActionUpdater >> modifiedAtUpdater
     in
         updateTodoMaybe todoUpdater todoId
-
-
-moveMaybeTodoToListType : Time -> TodoGroup -> Maybe Todo -> Model -> ( Model, Maybe Todo )
-moveMaybeTodoToListType now listType maybeTodo model =
-    maybeTodo
-        ?|> ((moveTodoToListType now listType) # model)
-        ?= ( model, Nothing )
-
-
-moveInboxProcessingTodoToListType now listType m =
-    m
-        |> case getViewState m of
-            InboxFlowViewState maybeTodo inboxFlowModel ->
-                moveMaybeTodoToListType now listType maybeTodo
-                    >> Tuple.mapFirst startProcessingInbox
-
-            _ ->
-                (,) # Nothing

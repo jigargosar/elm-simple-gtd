@@ -7,8 +7,9 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 
 
-init todoList =
-    Model.modelConstructor todoList
+--init todoList =
+--    Model.modelConstructor todoList
+--
 
 
 updateWithActionType =

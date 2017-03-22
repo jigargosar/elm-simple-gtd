@@ -7,33 +7,33 @@ import Main.Msg as Msg exposing (Msg)
 import Todo exposing (Todo, TodoList)
 
 
-moveTo =
-    Msg.OnFlowMoveTo
-
-
-inboxFlow =
-    Flow.branch "Is it Actionable ?"
-        (Flow.branch "Can be done under 2 mins?"
-            (Flow.action "Batch it in Under 2 minutes?" (moveTo Todo.nextAction))
-            (Flow.branch "Involves Multiple Steps?"
-                (Flow.action "Move To Projects?" (moveTo Todo.project))
-                (Flow.branch "Am I the right Person to do this?"
-                    (Flow.branch "Should it be done at specific time?"
-                        (Flow.action "Move To Calender?" (moveTo Todo.calender))
-                        (Flow.action "Move To Next Actions?" (moveTo Todo.nextAction))
-                    )
-                    (Flow.action "Move To Waiting For?" (moveTo Todo.waitingFor))
-                )
-            )
-        )
-        (Flow.branch "Is it worth keeping?"
-            (Flow.branch "Could Require actionNode Later ?"
-                (Flow.action "Move to SomDay/Maybe List?" (moveTo Todo.someDayMayBe))
-                (Flow.action "Move to Reference?" (moveTo Todo.reference))
-            )
-            (Flow.action "Trash it ?" Msg.OnFlowMarkDeleted)
-        )
-        |> Flow.init
+--moveTo =
+--    Msg.OnFlowMoveTo
+--
+--
+--inboxFlow =
+--    Flow.branch "Is it Actionable ?"
+--        (Flow.branch "Can be done under 2 mins?"
+--            (Flow.action "Batch it in Under 2 minutes?" (moveTo Todo.nextAction))
+--            (Flow.branch "Involves Multiple Steps?"
+--                (Flow.action "Move To Projects?" (moveTo Todo.project))
+--                (Flow.branch "Am I the right Person to do this?"
+--                    (Flow.branch "Should it be done at specific time?"
+--                        (Flow.action "Move To Calender?" (moveTo Todo.calender))
+--                        (Flow.action "Move To Next Actions?" (moveTo Todo.nextAction))
+--                    )
+--                    (Flow.action "Move To Waiting For?" (moveTo Todo.waitingFor))
+--                )
+--            )
+--        )
+--        (Flow.branch "Is it worth keeping?"
+--            (Flow.branch "Could Require actionNode Later ?"
+--                (Flow.action "Move to SomDay/Maybe List?" (moveTo Todo.someDayMayBe))
+--                (Flow.action "Move to Reference?" (moveTo Todo.reference))
+--            )
+--            (Flow.action "Trash it ?" Msg.OnFlowMarkDeleted)
+--        )
+--        |> Flow.init
 
 
 type alias FlowModel =
@@ -50,11 +50,9 @@ type alias Model =
     }
 
 
-modelConstructor todoList =
-    Model inboxFlow todoList
 
-
-
+--modelConstructor todoList =
+--    Model inboxFlow todoList
 -- .flow
 
 

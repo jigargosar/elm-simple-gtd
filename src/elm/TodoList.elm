@@ -3,7 +3,8 @@ module TodoList exposing (..)
 import List.Extra
 import Main.Model exposing (Model)
 import Maybe.Extra
-import Return exposing (Return)
+import Return exposing (Return, ReturnF)
+import Task
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
 import Toolkit.Helpers exposing (..)
@@ -14,15 +15,15 @@ import PouchDB
 import Tuple2
 
 
-update : Msg -> Model -> Return msg Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg =
     Return.singleton
         >> case msg of
-            UpdateTodoAt { actionType, id, at } ->
-                updateAndPersistMaybeTodo (updateTodoWithAction actionType at id)
+            UpdateTodoAt { type_, id } now ->
+                updateAndPersistMaybeTodo (updateTodoWithAction type_ now id)
 
             UpdateTodo action ->
-                identity
+                withNow (UpdateTodoAt action)
 
 
 updateAndPersistMaybeTodo updater =
@@ -30,6 +31,16 @@ updateAndPersistMaybeTodo updater =
         (updater
             >> Tuple2.mapSecond persistMaybeTodoCmd
         )
+
+
+
+--updateTodoId action todoId =
+--    withNow (UpdateTodo action todoId)
+
+
+withNow : (Time -> Msg) -> ReturnF Msg Model
+withNow msg =
+    Task.perform msg Time.now |> Return.command
 
 
 persistMaybeTodoCmd =

@@ -139,7 +139,7 @@ update msg =
                 updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todoId)
 
             TodoListMsg msg ->
-                Return.andThen (TodoList.update msg)
+                Return.andThen (TodoList.update msg >> Return.mapCmd TodoListMsg)
 
 
 

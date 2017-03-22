@@ -3,6 +3,7 @@ module Todo exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import PouchDB
 import RandomIdGenerator
 import Random.Pcg as Random exposing (Seed)
 import Toolkit.Operators exposing (..)
@@ -123,14 +124,16 @@ type EditMode
     | NotEditing
 
 
-type alias Todo =
-    { id : TodoId
-    , rev : String
-    , text : String
+type alias TodoFields =
+    { text : String
     , dueAt : Maybe Time
     , deleted : Bool
     , listType : Group
     }
+
+
+type alias Todo =
+    PouchDB.Document TodoFields
 
 
 type alias Model =
@@ -145,8 +148,16 @@ type alias TodoList =
     List Todo
 
 
+todoConstructor : PouchDB.Id -> PouchDB.Revision -> String -> Maybe Time -> Bool -> Group -> Todo
 todoConstructor id rev text dueAt deleted listType =
-    Todo id rev text dueAt deleted listType
+    --    Todo (PouchDB.Document id rev) text dueAt deleted listType
+    { id = id
+    , rev = rev
+    , text = text
+    , dueAt = dueAt
+    , deleted = deleted
+    , listType = listType
+    }
 
 
 decoder : Decoder Todo

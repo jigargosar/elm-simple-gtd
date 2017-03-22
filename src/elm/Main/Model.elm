@@ -65,7 +65,7 @@ getTodoList =
     (.todoList)
 
 
-todoListsByType =
+groupedTodoLists =
     getTodoList >> Todo.groupedTodoLists
 
 

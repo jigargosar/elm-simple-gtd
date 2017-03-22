@@ -144,42 +144,8 @@ updateSeed updater model =
     setSeed (updater model) model
 
 
-saveEditingTodoAndDeactivateEditTodoMode : Time -> Model -> ( Model, Maybe Todo )
-saveEditingTodoAndDeactivateEditTodoMode now =
-    saveEditingTodo now
-        >> Tuple2.mapFirst deactivateEditingMode
-
-
 deactivateEditingMode =
     setEditModeTo NotEditing
-
-
-saveEditingTodo : Time -> Model -> ( Model, Maybe Todo )
-saveEditingTodo now m =
-    case getEditMode m of
-        EditTodoMode todo ->
-            if Todo.isTextEmpty todo then
-                ( m, Nothing )
-            else
-                replaceTodoIfIdMatches now todo m
-
-        _ ->
-            ( m, Nothing )
-
-
-replaceTodoIfIdMatches : Time -> Todo -> Model -> ( Model, Maybe Todo )
-replaceTodoIfIdMatches now todo model =
-    let
-        updatedTodoWithModifiedAt =
-            Todo.setModifiedAt now todo
-
-        todoListUpdater =
-            getTodoList >> Todo.replaceIfEqualById updatedTodoWithModifiedAt
-
-        newModel =
-            updateTodoList todoListUpdater model
-    in
-        ( newModel, findTodoEqualById todo newModel )
 
 
 findTodoEqualById todo =

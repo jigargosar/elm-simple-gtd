@@ -1,6 +1,7 @@
 port module PouchDB exposing (..)
 
-import Json.Decode as D
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Time exposing (Time)
 
@@ -49,3 +50,15 @@ type alias Document moreFields =
 
 type alias WithTimeStamps otherFields =
     { otherFields | createdAt : Time, modifiedAt : Time }
+
+
+documentFieldsDecoder : Decoder (Id -> Revision -> otherFields) -> Decoder otherFields
+documentFieldsDecoder =
+    D.required "_id" D.string
+        >> D.required "_rev" D.string
+
+
+timeStampFieldsDecoder : Decoder (Time -> Time -> otherFields) -> Decoder otherFields
+timeStampFieldsDecoder =
+    D.optional "createdAt" (D.float) 0
+        >> D.optional "modifedAt" (D.float) 0

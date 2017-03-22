@@ -152,26 +152,26 @@ todoConstructor : PouchDB.Id -> PouchDB.Revision -> String -> Maybe Time -> Bool
 todoConstructor id rev text dueAt deleted listType createdAt modifiedAt =
     { id = id
     , rev = rev
-    , createdAt = createdAt
-    , modifiedAt = modifiedAt
     , text = text
     , dueAt = dueAt
     , deleted = deleted
     , listType = listType
+    , createdAt = createdAt
+    , modifiedAt = modifiedAt
     }
+
+
 
 
 decoder : Decoder Todo
 decoder =
     D.decode todoConstructor
-        |> D.required "_id" D.string
-        |> D.required "_rev" D.string
-        |> D.optional "createdAt" (D.float) 0
-        |> D.optional "modifedAt" (D.float) 0
+        |> PouchDB.documentFieldsDecoder
         |> D.required "text" D.string
         |> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         |> D.optional "deleted" D.bool defaultDeleted
         |> D.optional "listType" (D.map stringToListType D.string) Inbox
+        |> PouchDB.timeStampFieldsDecoder
 
 
 listTypeEncodings =

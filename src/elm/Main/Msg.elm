@@ -10,12 +10,6 @@ import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
 
 
-type TodoAction
-    = SetGroup TodoGroup
-    | ToggleDone
-    | Delete
-
-
 type Msg
     = NoOp
     | LocationChanged Location

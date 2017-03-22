@@ -211,7 +211,7 @@ saveEditingTodo now m =
             if Todo.isTextEmpty todo then
                 ( m, Nothing )
             else
-                replaceTodoIfIdMatchesMaybe now todo m
+                replaceTodoIfIdMatches now todo m
 
         _ ->
             ( m, Nothing )
@@ -234,10 +234,6 @@ replaceTodoIfIdMatches now todo model =
 
 findTodoEqualById todo =
     getTodoList >> List.find (Todo.equalById todo)
-
-
-replaceTodoIfIdMatchesMaybe now todo =
-    replaceTodoIfIdMatches now todo
 
 
 
@@ -271,7 +267,7 @@ updateInboxFlowWithActionType actionType m =
 
 moveTodoToListType now listType todo m =
     Todo.setListType listType todo
-        |> ((replaceTodoIfIdMatchesMaybe now) # m)
+        |> ((replaceTodoIfIdMatches now) # m)
 
 
 moveMaybeTodoToListType : Time -> TodoGroup -> Maybe Todo -> Model -> ( Model, Maybe Todo )

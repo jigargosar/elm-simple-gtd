@@ -46,19 +46,7 @@ drawerLayoutView m =
     drawerLayout []
         [ appDrawerView m
         , headerLayout []
-            [ header
-                [ attribute "reveals" "true"
-                , attribute "fixed" "true"
-                , attribute "condenses" "true"
-                , attribute "effects" "waterfall"
-                , attribute "slot" "header"
-                ]
-                [ toolbar
-                    []
-                    [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-                    , addTodoView (getEditMode m)
-                    ]
-                ]
+            [ appHeaderView m
             , div [ id "main-view" ] [ mainView m ]
             ]
         ]
@@ -69,6 +57,22 @@ appDrawerView m =
         [ toolbar [] [ text "Simple GTD" ]
         , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
             [ appDrawerMenuView m
+            ]
+        ]
+
+
+appHeaderView m =
+    header
+        [ attribute "reveals" "true"
+        , attribute "fixed" "true"
+        , attribute "condenses" "true"
+        , attribute "effects" "waterfall"
+        , attribute "slot" "header"
+        ]
+        [ toolbar
+            []
+            [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
+            , addTodoView (getEditMode m)
             ]
         ]
 

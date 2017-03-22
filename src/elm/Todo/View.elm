@@ -27,8 +27,8 @@ todoViewEditing vc todo =
                     , boolProperty "noLabelFloat" True
                     , value (Todo.getText todo)
                     , onInput vc.onEditTodoTextChanged
-                    , onBlur vc.onEditTodoBlur
-                    , onKeyUp vc.onEditTodoKeyUp
+                    , onBlur (vc.onEditTodoBlur todo)
+                    , onKeyUp (vc.onEditTodoKeyUp todo)
                     , autofocus True
                     ]
                     []

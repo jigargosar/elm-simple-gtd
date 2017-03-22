@@ -10,6 +10,7 @@ import FunctionExtra exposing (..)
 type Action
     = ToggleDone
     | SetGroup TodoGroup
+    | SetText String
     | Delete
 
 

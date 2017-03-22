@@ -27,9 +27,9 @@ type Msg
     | OnNewTodoBlur
     | OnNewTodoKeyUp Key
     | OnEditTodoTextChanged String
-    | OnEditTodoBlur
+    | OnEditTodoBlur Todo
     | OnTodoDoneClicked TodoId
-    | OnEditTodoKeyUp Key
+    | OnEditTodoKeyUp Todo Key
     | OnSetTodoGroupClicked TodoGroup Todo
     | OnShowTodoList
     | OnProcessInbox

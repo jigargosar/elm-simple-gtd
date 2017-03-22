@@ -106,13 +106,15 @@ update msg =
             SaveEditingTodoWithNow now ->
                 saveEditingTodoWithNow now
 
-            OnEditTodoBlur ->
-                saveEditingTodo
+            OnEditTodoBlur todo ->
+                onTodoListMsg (TodoList.setText (Todo.getText todo) (Todo.getId todo))
+                    >> deactivateEditingMode
 
-            OnEditTodoKeyUp key ->
+            OnEditTodoKeyUp todo key ->
                 case key of
                     Enter ->
-                        saveEditingTodo
+                        onTodoListMsg (TodoList.setText (Todo.getText todo) (Todo.getId todo))
+                            >> deactivateEditingMode
 
                     Escape ->
                         deactivateEditingMode

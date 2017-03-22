@@ -28,6 +28,11 @@ setGroup =
     SetGroup >> UpdateTodo
 
 
+setText : String -> TodoId -> TodoListMsg
+setText =
+    SetText >> UpdateTodo
+
+
 update : TodoListMsg -> Model -> ( Model, Cmd TodoListMsg )
 update msg =
     Return.singleton
@@ -70,6 +75,9 @@ updateTodoWithAction action now todoId =
 
                 Delete ->
                     Todo.markDeleted
+
+                SetText text ->
+                    Todo.setText text
 
         modifiedAtUpdater =
             Todo.setModifiedAt now

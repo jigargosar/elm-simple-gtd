@@ -42,21 +42,7 @@ todoView vc todo =
         todoId =
             Todo.getId todo
 
-        editingTodoTuple =
-            case vc.editMode of
-                EditTodoMode editingTodo ->
-                    if Todo.equalById editingTodo todo then
-                        ( True, editingTodo )
-                    else
-                        ( False, todo )
-
-                _ ->
-                    ( False, todo )
-
-        todoView =
-            Todo.View.todoView vc editingTodoTuple
-
-        todoView2 =
+        todoViewHelp =
             case vc.editMode of
                 EditTodoMode editingTodo ->
                     if Todo.equalById editingTodo todo then
@@ -67,7 +53,7 @@ todoView vc todo =
                 _ ->
                     Todo.View.todoViewNotEditing vc todo
     in
-        ( todoId, todoView )
+        ( todoId, todoViewHelp )
 
 
 allTodosView : ViewConfig msg -> TodoStore -> Html msg

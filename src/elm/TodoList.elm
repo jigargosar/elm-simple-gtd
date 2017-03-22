@@ -7,34 +7,10 @@ import Todo exposing (TodoGroup, TodoId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import Main.TodoListMsg exposing (..)
 
 
-type ActionType
-    = ToggleDone
-    | SetGroup TodoGroup
-    | Delete
-
-
-type alias AtTime a =
-    { a | at : Time }
-
-
-type alias Action =
-    { id : TodoId
-    , actionType : ActionType
-    }
-
-
-type alias ActionAt =
-    AtTime Action
-
-
-type Msg
-    = UpdateTodoAt ActionAt
-    | UpdateTodo Action
-
-
-update : Msg -> Model -> Return msg Model
+update : TodoListMsg -> Model -> Return msg Model
 update msg =
     Return.singleton
         >> case msg of

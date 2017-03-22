@@ -137,6 +137,9 @@ update msg =
             UpdateTodo todoAction todoId now ->
                 updateAndPersistMaybeTodo (Model.updateTodoWithAction todoAction now todoId)
 
+            TodoListMsg msg ->
+                identity
+
 
 
 --            _ ->

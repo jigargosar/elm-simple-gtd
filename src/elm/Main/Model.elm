@@ -109,8 +109,8 @@ getEditMode =
     (.editMode)
 
 
-activateAddNewTodoMode : String -> ModelMapper
-activateAddNewTodoMode text =
+activateEditNewTodoMode : String -> ModelMapper
+activateEditNewTodoMode text =
     setEditModeTo (EditNewTodoMode text)
 
 
@@ -132,7 +132,7 @@ updateEditTodoText text m =
 addNewTodoAndContinueAdding : Time -> Model -> ( Model, Maybe Todo )
 addNewTodoAndContinueAdding now =
     addNewTodo now
-        >> Tuple2.mapFirst (activateAddNewTodoMode "")
+        >> Tuple2.mapFirst (activateEditNewTodoMode "")
 
 
 addNewTodo : Time -> Model -> ( Model, Maybe Todo )

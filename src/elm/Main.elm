@@ -66,11 +66,11 @@ update msg =
                 identity
 
             OnAddTodoClicked focusInputId ->
-                Return.map (Model.activateAddNewTodoMode "")
+                Return.map (Model.activateEditNewTodoMode "")
                     >> Return.command (domFocusCmd focusInputId OnDomFocusResult)
 
             OnNewTodoTextChanged text ->
-                Return.map (Model.activateAddNewTodoMode text)
+                Return.map (Model.activateEditNewTodoMode text)
 
             OnNewTodoBlur ->
                 deactivateEditingMode

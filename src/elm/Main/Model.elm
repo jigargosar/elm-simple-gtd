@@ -93,6 +93,7 @@ updateInboxFlowWithActionType actionType m =
                 identity
 
 
+
 --deleteMaybeTodo : Maybe Todo -> Model -> ( Model, Maybe Todo )
 --deleteMaybeTodo maybeTodo model =
 --    maybeTodo
@@ -121,6 +122,7 @@ moveInboxProcessingTodoToListType now listType m =
 
             _ ->
                 (,) # Nothing
+
 
 
 --deleteTodoInboxFlow m =
@@ -213,7 +215,11 @@ addNewTodo now m =
 
 
 deleteTodo todoId m =
-    TodoStore.editTodo TodoStore.deleteAction todoId m.todoStore
+    updateTodo TodoStore.deleteAction todoId m
+
+
+updateTodo action todoId m =
+    TodoStore.editTodo action todoId m.todoStore
         |> Tuple2.mapFirst (setTodoCollection # m)
 
 

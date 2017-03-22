@@ -150,16 +150,6 @@ domFocusCmd id msg =
     Task.attempt msg (Dom.focus id)
 
 
-withNowOld : (Time -> Msg) -> Cmd Msg
-withNowOld msg =
-    Task.perform msg Time.now
-
-
-withNow : (Time -> Msg) -> ( Model, Cmd Msg ) -> ( Model, Cmd Msg )
-withNow msg =
-    Task.perform msg Time.now |> Return.command
-
-
 addNewTodoAndContinueAdding text =
     onTodoListMsg (TodoList.addNewTodo text)
         >> activateEditNewTodoMode
@@ -176,11 +166,3 @@ setTodoTextAndDeactivateEditing todo =
 
 deactivateEditingMode =
     Return.map (Model.deactivateEditingMode)
-
-
-persistMaybeTodoCmd =
-    Maybe.unwrap Cmd.none persistTodoCmd
-
-
-persistTodoCmd todo =
-    PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)

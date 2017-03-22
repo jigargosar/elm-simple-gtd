@@ -214,10 +214,6 @@ addNewTodo now m =
             ( m, Nothing )
 
 
-deleteTodo todoId m =
-    updateTodo TodoStore.deleteAction todoId m
-
-
 updateTodo action todoId m =
     TodoStore.editTodo action todoId m.todoStore
         |> Tuple2.mapFirst (setTodoCollection # m)

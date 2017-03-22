@@ -13,6 +13,7 @@ import RouteUrl exposing (RouteUrlProgram)
 import Task
 import Time exposing (Time)
 import PouchDB
+import TodoStore
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
@@ -142,10 +143,10 @@ update msg =
                 moveTodoToListType listType todo
 
             OnDeleteTodoClicked todoId ->
-                Return.andThen (Model.deleteTodo todoId)
+                Return.andThen (Model.updateTodo TodoStore.deleteAction todoId)
 
             OnTodoDoneClicked todoId ->
-                identity
+                Return.andThen (Model.updateTodo TodoStore.doneAction todoId)
 
             MoveTodoToListTypeWithNow listType todo now ->
                 moveTodoToListTypeWithNow now listType todo

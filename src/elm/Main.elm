@@ -133,6 +133,9 @@ update msg =
             OnTodoListMsg msg ->
                 Return.andThen (TodoList.update msg >> Return.mapCmd OnTodoListMsg)
 
+            OnDomMsg msg ->
+                identity
+
 
 
 --            _ ->

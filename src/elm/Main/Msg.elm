@@ -28,3 +28,6 @@ type Msg
     | OnShowTodoList
     | ProcessInbox
     | OnTodoListMsg TodoListMsg
+    | OnDomMsg DomMsg
+
+type DomMsg = OnResult (Result Dom.Error ())

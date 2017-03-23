@@ -14,20 +14,20 @@ import Function exposing ((>>>))
 --focusCmd : Dom.Id -> (DomResult -> msg) -> Cmd msg
 
 
-focusCmd =
-    Dom.focus >> (flip Task.attempt)
+type alias UpdateReturn =
+    Return DomMsg Model
 
 
-type alias UpdateReturnF msg =
-    Return msg Model -> Return msg Model
+type alias UpdateReturnF =
+    UpdateReturn -> UpdateReturn
 
 
-focus : DomId -> (DomResult -> msg) -> UpdateReturnF msg
+focus : DomId -> (DomResult -> DomMsg) -> UpdateReturnF
 focus =
-    focusCmd >>> Return.command
+    Dom.focus >> (flip Task.attempt) >>> Return.command
 
 
-update : DomMsg -> Model -> ( Model, Cmd DomMsg )
+update : DomMsg -> Model -> UpdateReturn
 update msg =
     Return.singleton
         >> case msg of

@@ -1,6 +1,6 @@
 module ViewState exposing (..)
 
-import Todo exposing (Todo)
+import Todo exposing (Todo, TodoGroup)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -10,7 +10,9 @@ type NavigationAction
     = ShowAllTodoLists
     | StartProcessingInbox
 
-type TodoListViewState = All
 
-
-type ViewState = TodoList TodoListViewState
+type ViewState
+    = All
+    | Group TodoGroup
+    | Done
+    | Bin

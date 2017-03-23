@@ -12,14 +12,14 @@ import ViewState exposing (..)
 delta2builder : Model -> Model -> Maybe Builder
 delta2builder previous current =
     builder
-        |> replacePath [ getPathFromModel current ]
+        |> replacePath (getPathFromModel current)
         |> Just
 
 
 getPathFromModel model =
     case Model.getViewState model of
         AllTodoListsViewState ->
-            "lists"
+            [ "lists", "all" ]
 
 
 delta2hash : Model -> Model -> Maybe UrlChange
@@ -30,7 +30,7 @@ delta2hash =
 builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
-        "lists" :: [] ->
+        "lists" :: "all" :: [] ->
             [ Msg.OnShowTodoList ]
 
         _ ->

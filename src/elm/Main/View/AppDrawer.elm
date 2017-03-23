@@ -1,18 +1,40 @@
-module Main.View.DrawerMenu exposing (..)
+module Main.View.AppDrawer exposing (..)
 
-import Html exposing (hr, span, text)
-import Html.Attributes.Extra exposing (intProperty)
-import Main.Msg exposing (Msg(OnShowTodoList))
-import Polymer.Attributes exposing (icon, stringProperty)
-import Polymer.Paper exposing (badge, iconButton, item, itemBody, menu)
+import Html.Attributes.Extra exposing (..)
+import Html.Keyed as Keyed
+import Html exposing (Attribute, Html, div, hr, node, span, text)
+import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
+import Html.Events exposing (..)
+import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
+import Main.View.AllTodoView exposing (allTodosView)
+import Maybe.Extra as Maybe
+import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
+import DebugExtra.Debug exposing (tapLog)
+import DecodeExtra exposing (traceDecoder)
+import Flow
+import Json.Decode
+import Json.Encode
+import List.Extra as List
+import Main.Model exposing (..)
+import Main.Msg exposing (..)
+import Todo exposing (Todo, TodoId)
+import Flow.Model as Flow exposing (Node)
+import Polymer.Paper exposing (..)
+import Polymer.App as App
 import FunctionExtra exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
-import Main.Model exposing (getTodoList)
-import Todo exposing (TodoGroup(Inbox))
+import Todo.View
+import ViewState exposing (..)
+
+
+appDrawerView m =
+    App.drawer [ attribute "slot" "drawer" ]
+        [ App.toolbar [] [ text "Simple GTD" ]
+        , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
+            [ appDrawerMenuView m
+            ]
+        ]
 
 
 appDrawerMenuView m =

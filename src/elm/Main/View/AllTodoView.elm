@@ -25,7 +25,6 @@ import Flow.Model as Flow exposing (Node)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
-import Main.View.DrawerMenu exposing (appDrawerMenuView)
 import Todo.View
 
 

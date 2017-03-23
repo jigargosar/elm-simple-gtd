@@ -2,15 +2,16 @@ module Main.View exposing (appView)
 
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
+import Html exposing (Attribute, Html, div, hr, node, span, text)
+import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
+import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Main.View.AllTodoView exposing (allTodosView)
+import Main.View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Html exposing (Attribute, Html, div, hr, node, span, text)
-import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
-import Html.Events exposing (..)
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
 import Flow
@@ -21,10 +22,9 @@ import Main.Model exposing (..)
 import Main.Msg exposing (..)
 import Todo exposing (Todo, TodoId)
 import Flow.Model as Flow exposing (Node)
-import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
+import Polymer.Paper exposing (..)
 import Polymer.App as App
 import FunctionExtra exposing (..)
-import Main.View.DrawerMenu exposing (appDrawerMenuView)
 import Todo.View
 import ViewState exposing (..)
 
@@ -42,15 +42,6 @@ appDrawerLayoutView m =
         , App.headerLayout []
             [ appHeaderView m
             , appMainView m
-            ]
-        ]
-
-
-appDrawerView m =
-    App.drawer [ attribute "slot" "drawer" ]
-        [ App.toolbar [] [ text "Simple GTD" ]
-        , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
-            [ appDrawerMenuView m
             ]
         ]
 
@@ -89,7 +80,7 @@ newTodoInputId =
 newTodoInputView editMode =
     case editMode of
         EditNewTodoMode text ->
-            Paper.input
+            input
                 [ id newTodoInputId
                 , onInput OnNewTodoTextChanged
                 , value text

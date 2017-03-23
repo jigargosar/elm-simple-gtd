@@ -1,4 +1,4 @@
-module Main.TodoListMsg exposing (..)
+module TodoAction exposing (..)
 
 import Time exposing (Time)
 import Todo exposing (TodoGroup, TodoId)
@@ -14,8 +14,10 @@ type TodoUpdateActionType
     | Delete
 
 
-type TodoListMsg
-    = UpdateTodoAt TodoUpdateActionType TodoId Time
-    | UpdateTodo TodoUpdateActionType TodoId
-    | AddNewTodo String
-    | AddNewTodoAt String Time
+type alias UpdateActionTA =
+    { now : Time, action : TodoUpdateActionType, id : TodoId }
+
+
+type TodoAction
+    = Update UpdateActionTA
+    | Add String Time

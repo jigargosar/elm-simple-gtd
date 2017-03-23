@@ -17,7 +17,6 @@ type Msg
     | OnAddTodoClicked Dom.Id
     | OnDeleteTodoClicked TodoId
     | OnEditTodoClicked Dom.Id Todo
-    | OnDomResult (Result Dom.Error ())
     | OnNewTodoTextChanged String
     | OnNewTodoBlur
     | OnNewTodoKeyUp String Key
@@ -30,5 +29,3 @@ type Msg
     | ProcessInbox
     | OnTodoListMsg TodoListMsg
     | OnDomMsg DomMsg
-
-

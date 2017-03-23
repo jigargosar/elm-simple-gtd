@@ -70,7 +70,7 @@ update msg =
 
             OnAddTodoClicked focusInputId ->
                 activateEditNewTodoMode ""
-                    >> domFocus focusInputId OnDomResult
+                    >> domFocus focusInputId
 
             OnNewTodoTextChanged text ->
                 activateEditNewTodoMode text
@@ -91,14 +91,7 @@ update msg =
 
             OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
-                    >> domFocus focusInputId OnDomResult
-
-            OnDomResult result ->
-                let
-                    _ =
-                        result |> Result.mapError (Debug.log "Error: Dom")
-                in
-                    identity
+                    >> domFocus focusInputId
 
             OnEditTodoTextChanged text ->
                 Return.map (Model.updateEditTodoText text)
@@ -152,16 +145,7 @@ onTodoListMsg =
     OnTodoListMsg >> update >> Return.andThen
 
 
-domFocusCmd id msg =
-    Task.attempt msg (Dom.focus id)
-
-
-
---domFocus =
---    domFocusCmd >>> Return.command
-
-
-domFocus id msg =
+domFocus id =
     Return.andThen (update (OnDomMsg (DomTypes.focus id)))
 
 

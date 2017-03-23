@@ -113,6 +113,9 @@ update msg =
             OnShowTodoList ->
                 Return.map (Model.showTodoList)
 
+            OnBinClicked ->
+                identity
+
             OnSetTodoGroupClicked todoGroup todo ->
                 onTodoListMsg (TodoList.setGroup todoGroup (Todo.getId todo))
 

@@ -27,7 +27,7 @@ focus =
     focusCmd >>> Return.command
 
 
-update : DomMsg -> Model -> ( Model, Cmd msg )
+update : DomMsg -> Model -> ( Model, Cmd DomMsg )
 update msg =
     Return.singleton
         >> case msg of
@@ -39,4 +39,4 @@ update msg =
                     identity
 
             Focus id ->
-                identity
+                focus id OnResult

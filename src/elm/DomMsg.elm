@@ -18,10 +18,3 @@ type DomMsg
     | Focus Dom.Id
 
 
-focusCmd : Dom.Id -> (DomResult -> msg) -> Cmd msg
-focusCmd =
-    Dom.focus >> (flip Task.attempt)
-
-
-focus =
-    focusCmd >>> Return.command

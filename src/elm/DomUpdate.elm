@@ -1,9 +1,18 @@
 module DomUpdate exposing (..)
 
+import Dom
+import DomMsg exposing (..)
+import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import Task
 
-_  = 
-    1
 
+focusCmd : Dom.Id -> (DomResult -> msg) -> Cmd msg
+focusCmd =
+    Dom.focus >> (flip Task.attempt)
+
+
+focus =
+    focusCmd >>> Return.command

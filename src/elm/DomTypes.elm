@@ -17,7 +17,7 @@ type alias DomId =
     Dom.Id
 
 
-type DomMsgType
+type DomMsg
     = OnResult DomResult
     | Focus DomId
 

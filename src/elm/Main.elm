@@ -2,6 +2,7 @@ port module Main exposing (..)
 
 import Dom
 import DomTypes
+import DomUpdate
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Main.Model as Model exposing (Model)
@@ -135,7 +136,7 @@ update msg =
                 Return.andThen (TodoList.update msg >> Return.mapCmd OnTodoListMsg)
 
             OnDomMsg msg ->
-                identity
+                Return.andThen (DomUpdate.update msg >> Return.mapCmd OnDomMsg)
 
 
 

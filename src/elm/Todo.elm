@@ -22,6 +22,9 @@ import Time exposing (Time)
 type alias TodoId =
     String
 
+type alias TodoText =
+    String
+
 
 type alias EncodedTodoList =
     List EncodedTodo

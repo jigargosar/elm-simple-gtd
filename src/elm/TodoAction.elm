@@ -1,7 +1,7 @@
 module TodoAction exposing (..)
 
 import Time exposing (Time)
-import Todo exposing (TodoGroup, TodoId)
+import Todo exposing (TodoGroup, TodoId, TodoText)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -15,8 +15,8 @@ type EditAction
 
 
 type TodoAction
-    = Edit EditAction TodoId Time
-    | New String Time
+    = Edit EditAction TodoId
+    | New TodoText
 
 
 type alias TodoActionTA =

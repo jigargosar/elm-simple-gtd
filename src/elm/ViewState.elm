@@ -7,10 +7,4 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
 
-type ViewState
-    = AllTodoListsViewState
-    | InboxFlowViewState (Maybe Todo) InboxFlow.Model
-
-
-defaultViewState =
-    AllTodoListsViewState
+_=1

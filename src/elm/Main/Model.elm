@@ -13,7 +13,15 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
 import InboxFlow
-import ViewState exposing (..)
+
+
+type ViewState
+    = AllTodoListsViewState
+    | InboxFlowViewState (Maybe Todo) InboxFlow.Model
+
+
+defaultViewState =
+    AllTodoListsViewState
 
 
 type EditMode
@@ -40,7 +48,7 @@ init now encodedTodoList =
     Model now
         (Todo.decodeTodoList encodedTodoList)
         NotEditing
-        ViewState.defaultViewState
+        defaultViewState
         (Random.seedFromTime now)
 
 

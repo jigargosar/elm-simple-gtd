@@ -1,6 +1,6 @@
 module Main.Routing exposing (..)
 
-import Main.Model as Model exposing (Model)
+import Main.Model as Model exposing (Model, ViewState(..))
 import Main.Msg as Msg exposing (Msg)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)

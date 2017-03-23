@@ -18,6 +18,7 @@ import InboxFlow
 type ViewState
     = TodoListViewState
     | InboxFlowViewState (Maybe Todo) InboxFlow.Model
+    | FilterViewState
 
 
 type EditMode

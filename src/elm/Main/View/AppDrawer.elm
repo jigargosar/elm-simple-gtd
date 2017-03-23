@@ -45,7 +45,17 @@ appDrawerMenuView m =
          , hr [] []
          ]
             ++ listTypeMenuItems m
+            ++ [ hr [] [] ]
+            ++ [ binItemView m, doneItemView m ]
         )
+
+
+binItemView m =
+    item [] [ text "Bin" ]
+
+
+doneItemView m =
+    item [] [ text "Done" ]
 
 
 getTodoLists =

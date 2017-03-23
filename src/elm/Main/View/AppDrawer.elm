@@ -32,21 +32,20 @@ appDrawerView m =
     App.drawer [ attribute "slot" "drawer" ]
         [ App.toolbar [] [ text "Simple GTD" ]
         , div
-            [ style [ "height" => "120vh", "overflow" => "scroll" ]
+            [ style [ "height" => "100%", "overflow" => "scroll" ]
             ]
             [ menu
                 [ stringProperty "selected" "0"
-                , style [ "height" => "120vh", "overflow" => "scroll" ]
                 ]
-                [ div [ style [ "height" => "120vh", "overflow" => "scroll" ] ]
-                    ([ item [ onClick OnShowTodoList ] [ text "All" ]
-                     , hr [] []
-                     ]
-                        ++ listTypeMenuItems m
-                        ++ [ hr [] [] ]
-                        ++ [ binItemView m, doneItemView m ]
-                    )
-                ]
+                ([ item [ onClick OnShowTodoList ] [ text "All" ]
+                 , hr [] []
+                 ]
+                    ++ listTypeMenuItems m
+                    ++ [ hr [] [] ]
+                    ++ [ binItemView m
+                       , doneItemView m
+                       ]
+                )
             ]
         ]
 

@@ -14,10 +14,12 @@ type UpdateAction
     | Delete
 
 
+type alias UpdateActionTA =
+    { now : Time, action : UpdateAction }
+
+
 type TodoListMsg
     = UpdateTodoAt UpdateAction TodoId Time
     | UpdateTodo UpdateAction TodoId
     | AddNewTodo String
     | AddNewTodoAt String Time
-
-

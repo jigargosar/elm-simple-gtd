@@ -6,6 +6,7 @@ import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import Function exposing ((>>>), (<<<))
 import RouteUrl exposing (UrlChange)
+import ViewState exposing (..)
 
 
 delta2builder : Model -> Model -> Maybe Builder
@@ -17,10 +18,10 @@ delta2builder previous current =
 
 getPathFromModel model =
     case Model.getViewState model of
-        Model.TodoListViewState ->
+        TodoListViewState ->
             "lists"
 
-        Model.InboxFlowViewState _ _ ->
+        InboxFlowViewState _ _ ->
             "process-inbox"
 
 

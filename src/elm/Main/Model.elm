@@ -13,11 +13,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
 import InboxFlow
-
-
-type ViewState
-    = TodoListViewState
-    | InboxFlowViewState (Maybe Todo) InboxFlow.Model
+import ViewState exposing (..)
 
 
 type EditMode
@@ -44,7 +40,7 @@ init now encodedTodoList =
     Model now
         (Todo.decodeTodoList encodedTodoList)
         NotEditing
-        TodoListViewState
+        ViewState.default
         (Random.seedFromTime now)
 
 
@@ -67,8 +63,6 @@ getTodoList =
 
 groupedTodoLists =
     getTodoList >> Todo.groupedTodoLists
-
-
 
 
 getFirstInboxTodo =

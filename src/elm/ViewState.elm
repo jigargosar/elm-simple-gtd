@@ -6,11 +6,6 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
 
-type NavigationAction
-    = ShowAllTodoLists
-    | StartProcessingInbox
-
-
 type ViewState
     = AllGrouped
     | Group TodoGroup

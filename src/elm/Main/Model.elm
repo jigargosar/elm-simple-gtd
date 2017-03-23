@@ -40,7 +40,7 @@ init now encodedTodoList =
     Model now
         (Todo.decodeTodoList encodedTodoList)
         NotEditing
-        ViewState.default
+        ViewState.defaultViewState
         (Random.seedFromTime now)
 
 

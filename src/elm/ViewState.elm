@@ -12,5 +12,5 @@ type ViewState
     | InboxFlowViewState (Maybe Todo) InboxFlow.Model
 
 
-default =
+defaultViewState =
     AllTodoListsViewState

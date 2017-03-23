@@ -16,5 +16,3 @@ type alias DomResult =
 type DomMsg
     = OnResult DomResult
     | Focus Dom.Id
-
-

@@ -31,23 +31,24 @@ import ViewState exposing (..)
 appDrawerView m =
     App.drawer [ attribute "slot" "drawer" ]
         [ App.toolbar [] [ text "Simple GTD" ]
-        , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
-            [ appDrawerMenuView m
+        , div
+            [ style [ "height" => "120vh", "overflow" => "scroll" ]
+            ]
+            [ menu
+                [ stringProperty "selected" "0"
+                , style [ "height" => "120vh", "overflow" => "scroll" ]
+                ]
+                [ div [ style [ "height" => "120vh", "overflow" => "scroll" ] ]
+                    ([ item [ onClick OnShowTodoList ] [ text "All" ]
+                     , hr [] []
+                     ]
+                        ++ listTypeMenuItems m
+                        ++ [ hr [] [] ]
+                        ++ [ binItemView m, doneItemView m ]
+                    )
+                ]
             ]
         ]
-
-
-appDrawerMenuView m =
-    menu
-        [ stringProperty "selected" "0"
-        ]
-        ([ item [ onClick OnShowTodoList ] [ text "All" ]
-         , hr [] []
-         ]
-            ++ listTypeMenuItems m
-            ++ [ hr [] [] ]
-            ++ [ binItemView m, doneItemView m ]
-        )
 
 
 binItemView m =

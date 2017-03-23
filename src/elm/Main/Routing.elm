@@ -18,7 +18,7 @@ delta2builder previous current =
 
 getPathFromModel model =
     case Model.getViewState model of
-        ViewState.All ->
+        ViewState.AllGrouped ->
             [ "lists", "all" ]
 
         _ ->

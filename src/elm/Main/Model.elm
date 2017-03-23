@@ -77,7 +77,7 @@ getFirstInboxTodo =
 
 
 showTodoList =
-    setViewState ViewState.All
+    setViewState ViewState.AllGrouped
 
 
 mapAllExceptDeleted mapper =

@@ -12,11 +12,11 @@ type NavigationAction
 
 
 type ViewState
-    = All
+    = AllGrouped
     | Group TodoGroup
     | Done
     | Bin
 
 
 defaultViewState =
-    All
+    AllGrouped

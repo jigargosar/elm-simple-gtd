@@ -65,7 +65,7 @@ appHeaderView m =
 appMainView m =
     div [ id "main-view" ]
         [ case getViewState m of
-            ViewState.All ->
+            ViewState.AllGrouped ->
                 allTodoListView m
 
             _ ->

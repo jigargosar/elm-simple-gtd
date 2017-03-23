@@ -22,6 +22,7 @@ import Time exposing (Time)
 type alias TodoId =
     String
 
+
 type alias TodoText =
     String
 
@@ -388,6 +389,10 @@ isNotDeleted =
 
 inboxFilter =
     toAllPassPredicate [ isNotDeleted, getListType >> equals Inbox ]
+
+
+binFilter =
+    toAllPassPredicate [ isDeleted ]
 
 
 toAllPassPredicate predicateList =

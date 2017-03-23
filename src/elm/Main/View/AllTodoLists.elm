@@ -18,7 +18,7 @@ import Flow
 import Json.Decode
 import Json.Encode
 import List.Extra as List
-import Main.Model exposing (..)
+import Main.Model as Model exposing (..)
 import Main.Msg exposing (..)
 import Todo as Todo exposing (TodoGroup(Inbox), Todo, TodoId)
 import Flow.Model as Flow exposing (Node)
@@ -64,6 +64,12 @@ allTodoListByGroupView =
         >> Keyed.node "div" []
 
 
+binView : Model -> Html Msg
+binView =
+    apply2 ( createTodoListViewConfig, Model.getBinTodoList )
+        >> uncurry todoListView
+
+
 keyedTodoListView vc ( listTitle, todoList ) =
     ( listTitle
     , div [ class "todo-list-container" ]
@@ -76,6 +82,10 @@ keyedTodoListView vc ( listTitle, todoList ) =
         , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
         ]
     )
+
+
+todoListView vc todoList =
+    Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
 
 
 todoView : ViewConfig msg -> Todo -> ( TodoId, Html msg )

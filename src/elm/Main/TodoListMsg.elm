@@ -7,7 +7,7 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
 
-type UpdateAction
+type TodoActionType
     = ToggleDone
     | SetGroup TodoGroup
     | SetText String
@@ -15,11 +15,11 @@ type UpdateAction
 
 
 type alias UpdateActionTA =
-    { now : Time, action : UpdateAction }
+    { now : Time, action : TodoActionType }
 
 
 type TodoListMsg
-    = UpdateTodoAt UpdateAction TodoId Time
-    | UpdateTodo UpdateAction TodoId
+    = UpdateTodoAt TodoActionType TodoId Time
+    | UpdateTodo TodoActionType TodoId
     | AddNewTodo String
     | AddNewTodoAt String Time

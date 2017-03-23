@@ -9,6 +9,7 @@ import Main.TodoListMsg exposing (TodoListMsg)
 import Navigation exposing (Location)
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
+import ViewState exposing (ViewState)
 
 
 type Msg
@@ -29,3 +30,4 @@ type Msg
     | OnShowBin
     | OnTodoListMsg TodoListMsg
     | OnDomMsg DomMsg
+    | ChangeViewState ViewState

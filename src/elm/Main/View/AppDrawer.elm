@@ -30,11 +30,13 @@ import ViewState exposing (..)
 
 appDrawerView m =
     App.drawer [ attribute "slot" "drawer" ]
-        [ App.toolbar [] [ text "Simple GTD" ]
-        , div
+        [ div
             [ style [ "height" => "100%", "overflow" => "scroll" ]
             ]
-            [ menu
+            [ {- App.toolbar [] [ text "Simple GTD" ]
+                 ,
+              -}
+              menu
                 [ stringProperty "selected" "0"
                 ]
                 ([ item [ onClick OnShowTodoList ] [ text "All" ]

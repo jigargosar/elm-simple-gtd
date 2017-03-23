@@ -1,6 +1,6 @@
 module TodoList exposing (..)
 
-import List.Extra
+import List.Extra as List
 import Main.Model exposing (Model, ModelMapper)
 import Maybe.Extra
 import Random.Pcg as Random
@@ -125,10 +125,10 @@ updateTodoAt action todoId now =
 updateTodoMaybe : (Todo -> Todo) -> TodoId -> Model -> ( Model, Maybe Todo )
 updateTodoMaybe updater todoId m =
     let
-        todoList =
+        newTodoList =
             m.todoList
-                |> List.Extra.updateIf (Todo.hasId todoId) updater
+                |> List.updateIf (Todo.hasId todoId) updater
     in
-        ( setTodoList todoList m
-        , List.Extra.find (Todo.hasId todoId) todoList
+        ( setTodoList newTodoList m
+        , List.find (Todo.hasId todoId) newTodoList
         )

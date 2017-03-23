@@ -1,4 +1,4 @@
-module Main.View.AllTodoView exposing (..)
+module Main.View.AllTodoLists exposing (..)
 
 import Dom
 import Html.Attributes.Extra exposing (..)
@@ -57,8 +57,8 @@ createTodoListViewConfig model =
     }
 
 
-allTodosView : Model -> Html Msg
-allTodosView =
+allTodoListView : Model -> Html Msg
+allTodoListView =
     apply2 ( createTodoListViewConfig >> keyedTodoListView, groupedTodoLists )
         >> uncurry List.map
         >> Keyed.node "div" []

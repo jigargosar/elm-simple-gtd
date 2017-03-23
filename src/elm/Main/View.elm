@@ -6,7 +6,7 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
-import Main.View.AllTodoView exposing (allTodosView)
+import Main.View.AllTodoLists exposing (allTodoListView)
 import Main.View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -66,10 +66,10 @@ appMainView m =
     div [ id "main-view" ]
         [ case getViewState m of
             ViewState.All ->
-                allTodosView m
+                allTodoListView m
 
             _ ->
-                allTodosView m
+                allTodoListView m
         ]
 
 

@@ -1,7 +1,7 @@
 module Main.Msg exposing (..)
 
 import Dom
-import DomMsg exposing (DomMsg)
+import DomMsg exposing (DomMsgType)
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
@@ -29,6 +29,6 @@ type Msg
     | OnShowTodoList
     | ProcessInbox
     | OnTodoListMsg TodoListMsg
-    | OnDomMsg DomMsg
+    | OnDomMsg DomMsgType
 
 

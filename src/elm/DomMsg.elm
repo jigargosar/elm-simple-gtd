@@ -13,6 +13,6 @@ type alias DomResult =
     Result Dom.Error ()
 
 
-type DomMsg
+type DomMsgType
     = OnResult DomResult
     | Focus Dom.Id

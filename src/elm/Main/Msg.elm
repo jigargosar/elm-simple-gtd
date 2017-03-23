@@ -1,7 +1,7 @@
 module Main.Msg exposing (..)
 
 import Dom
-import DomMsg exposing (DomMsgType)
+import DomTypes exposing (DomMsgType)
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)

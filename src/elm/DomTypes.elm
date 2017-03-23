@@ -1,4 +1,4 @@
-module DomMsg exposing (..)
+module DomTypes exposing (..)
 
 import Dom
 import Return
@@ -11,6 +11,10 @@ import Function exposing ((>>>))
 
 type alias DomResult =
     Result Dom.Error ()
+
+
+type alias DomId =
+    Dom.Id
 
 
 type DomMsgType

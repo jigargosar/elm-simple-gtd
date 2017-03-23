@@ -1,7 +1,7 @@
 module DomUpdate exposing (..)
 
 import Dom
-import DomMsg exposing (..)
+import DomTypes exposing (..)
 import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)

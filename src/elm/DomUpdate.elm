@@ -27,3 +27,6 @@ update msg =
                         result |> Result.mapError (Debug.log "Error: Dom")
                 in
                     identity
+
+            OnFocus id ->
+                identity

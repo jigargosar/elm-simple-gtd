@@ -1,6 +1,7 @@
 port module Main exposing (..)
 
 import Dom
+import DomTypes
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Main.Model as Model exposing (Model)
@@ -154,8 +155,13 @@ domFocusCmd id msg =
     Task.attempt msg (Dom.focus id)
 
 
-domFocus =
-    domFocusCmd >>> Return.command
+
+--domFocus =
+--    domFocusCmd >>> Return.command
+
+
+domFocus id msg =
+    Return.andThen (update (OnDomMsg (DomTypes.focus id)))
 
 
 addNewTodoAndContinueAdding text =

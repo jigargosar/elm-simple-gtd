@@ -22,7 +22,7 @@ import Main.Msg exposing (..)
 import Todo exposing (Todo, TodoId)
 import Flow.Model as Flow exposing (Node)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
-import Polymer.App exposing (..)
+import Polymer.App as App
 import FunctionExtra exposing (..)
 import Main.View.DrawerMenu exposing (appDrawerMenuView)
 import Todo.View
@@ -37,9 +37,9 @@ appView m =
 
 
 appDrawerLayoutView m =
-    drawerLayout []
+    App.drawerLayout []
         [ appDrawerView m
-        , headerLayout []
+        , App.headerLayout []
             [ appHeaderView m
             , appMainView m
             ]
@@ -47,8 +47,8 @@ appDrawerLayoutView m =
 
 
 appDrawerView m =
-    drawer [ attribute "slot" "drawer" ]
-        [ toolbar [] [ text "Simple GTD" ]
+    App.drawer [ attribute "slot" "drawer" ]
+        [ App.toolbar [] [ text "Simple GTD" ]
         , div [ style [ "height" => "100vh", "overflow" => "auto" ] ]
             [ appDrawerMenuView m
             ]
@@ -56,14 +56,14 @@ appDrawerView m =
 
 
 appHeaderView m =
-    header
+    App.header
         [ attribute "reveals" "true"
         , attribute "fixed" "true"
         , attribute "condenses" "true"
         , attribute "effects" "waterfall"
         , attribute "slot" "header"
         ]
-        [ toolbar
+        [ App.toolbar
             []
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
             , newTodoInputView (getEditMode m)

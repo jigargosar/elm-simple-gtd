@@ -99,7 +99,6 @@ persistTodoCmd todo =
 
 updateTodoAt action todoId now =
     let
-        --        todoId = Todo.getId todo
         todoActionUpdater =
             case action of
                 SetGroup group ->

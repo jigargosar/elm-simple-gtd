@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/elm" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/elm-decode-extra" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/elm-random-id-generator" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/elm-function-extra" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/web" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lib/elm-keyboard-extra" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/elm-stuff/build-artifacts" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

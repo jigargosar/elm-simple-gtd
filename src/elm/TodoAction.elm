@@ -14,10 +14,10 @@ type EditAction
     | Delete
 
 
-type TodoAction
+type TodoActionType
     = Edit EditAction TodoId
     | New TodoText
 
 
-type alias TodoActionTA =
-    { now : Time, action : TodoAction }
+type alias TodoAction =
+    { now : Time, type_ : TodoActionType }

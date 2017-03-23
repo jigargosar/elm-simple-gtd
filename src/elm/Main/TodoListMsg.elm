@@ -15,7 +15,7 @@ type TodoActionType
 
 
 type alias UpdateActionTA =
-    { now : Time, action : TodoActionType }
+    { now : Time, action : TodoActionType, id : TodoId }
 
 
 type TodoListMsg

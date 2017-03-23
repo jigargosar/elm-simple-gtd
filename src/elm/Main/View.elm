@@ -111,30 +111,3 @@ addTodoFabView m =
         , onClick (OnAddTodoClicked newTodoInputId)
         ]
         []
-
-
-type AttributeType msg
-    = AttrPresent (Attribute msg)
-    | AttrAbsent
-    | AttrMaybe (Maybe (Attribute msg))
-    | L1 (List (AttributeType msg))
-    | L2 (List (Attribute msg))
-
-
-toAttributes : AttributeType msg -> List (Attribute msg)
-toAttributes attributeType =
-    case attributeType of
-        AttrPresent attr ->
-            [ attr ]
-
-        AttrAbsent ->
-            []
-
-        AttrMaybe maybeAttr ->
-            Maybe.toList maybeAttr
-
-        L1 list ->
-            list |> List.concatMap toAttributes
-
-        L2 list ->
-            list

@@ -57,8 +57,8 @@ createTodoListViewConfig model =
     }
 
 
-allTodoListView : Model -> Html Msg
-allTodoListView =
+allGroupedTodoListView : Model -> Html Msg
+allGroupedTodoListView =
     apply2 ( createTodoListViewConfig >> keyedTodoListView, groupedTodoLists )
         >> uncurry List.map
         >> Keyed.node "div" []

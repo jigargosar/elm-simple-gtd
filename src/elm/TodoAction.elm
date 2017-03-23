@@ -17,3 +17,7 @@ type EditAction
 type TodoAction
     = Edit EditAction TodoId Time
     | New String Time
+
+
+type alias TodoActionTA =
+    { now : Time, action : TodoAction }

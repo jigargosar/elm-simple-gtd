@@ -22,6 +22,7 @@ import Maybe.Extra as Maybe
 import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
 import Function exposing ((>>>))
+import ViewState
 
 
 type alias UpdateReturn =
@@ -114,7 +115,7 @@ update msg =
                 Return.map (Model.showTodoList)
 
             OnBinClicked ->
-                identity
+                Return.map (Model.setViewState ViewState.Bin)
 
             OnSetTodoGroupClicked todoGroup todo ->
                 onTodoListMsg (TodoList.setGroup todoGroup (Todo.getId todo))

@@ -1,13 +1,12 @@
 module DomUpdate exposing (..)
 
 import Dom
-import DomMsg exposing (..)
+import DomT exposing (..)
 import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Task
-
 
 focusCmd : Dom.Id -> (DomResult -> msg) -> Cmd msg
 focusCmd =
@@ -16,3 +15,4 @@ focusCmd =
 
 focus =
     focusCmd >>> Return.command
+

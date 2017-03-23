@@ -8,9 +8,9 @@ import FunctionExtra exposing (..)
 
 
 type ViewState
-    = TodoListViewState
+    = AllTodoListsViewState
     | InboxFlowViewState (Maybe Todo) InboxFlow.Model
 
 
 default =
-    TodoListViewState
+    AllTodoListsViewState

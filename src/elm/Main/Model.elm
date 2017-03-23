@@ -70,7 +70,7 @@ getFirstInboxTodo =
 
 
 showTodoList =
-    setViewState TodoListViewState
+    setViewState AllTodoListsViewState
 
 
 mapAllExceptDeleted mapper =

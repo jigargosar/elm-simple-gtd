@@ -132,6 +132,9 @@ update msg =
             OnDomMsg msg ->
                 Return.andThen (DomUpdate.update msg >> Return.mapCmd OnDomMsg)
 
+            ChangeViewState viewState ->
+                Return.map (Model.setViewState viewState)
+
 
 
 --            _ ->

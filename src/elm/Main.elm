@@ -1,7 +1,7 @@
 port module Main exposing (..)
 
 import Dom
-import DomTypes
+import DomTypes exposing (DomId)
 import DomUpdate
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
@@ -24,12 +24,12 @@ import Tuple2
 import Function exposing ((>>>))
 
 
-type alias ReturnTA =
+type alias UpdateReturn =
     Return Msg Model
 
 
-type alias ReturnMapper =
-    ReturnTA -> ReturnTA
+type alias UpdateReturnF =
+    UpdateReturn -> UpdateReturn
 
 
 type alias Flags =
@@ -53,12 +53,12 @@ subscriptions m =
         []
 
 
-init : Flags -> ReturnTA
+init : Flags -> UpdateReturn
 init { now, encodedTodoList } =
     Model.init now encodedTodoList |> Return.singleton
 
 
-update : Msg -> Model -> ReturnTA
+update : Msg -> Model -> UpdateReturn
 update msg =
     Return.singleton
         >> case msg of
@@ -145,8 +145,13 @@ onTodoListMsg =
     OnTodoListMsg >> update >> Return.andThen
 
 
-domFocus id =
-    Return.andThen (update (OnDomMsg (DomTypes.focus id)))
+onDomMsg =
+    OnDomMsg >> update >> Return.andThen
+
+
+domFocus : DomId -> UpdateReturnF
+domFocus =
+    DomTypes.focus >> onDomMsg
 
 
 addNewTodoAndContinueAdding text =

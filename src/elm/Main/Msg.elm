@@ -14,7 +14,6 @@ import ViewState exposing (ViewState)
 
 type Msg
     = NoOp
-    | LocationChanged Location
     | OnAddTodoClicked Dom.Id
     | OnDeleteTodoClicked TodoId
     | OnEditTodoClicked Dom.Id Todo

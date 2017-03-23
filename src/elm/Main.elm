@@ -66,9 +66,6 @@ update msg =
             NoOp ->
                 identity
 
-            LocationChanged loc ->
-                identity
-
             OnAddTodoClicked focusInputId ->
                 activateEditNewTodoMode ""
                     >> domFocus focusInputId

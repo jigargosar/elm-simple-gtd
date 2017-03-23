@@ -21,9 +21,6 @@ getPathFromModel model =
         AllTodoListsViewState ->
             "lists"
 
-        InboxFlowViewState _ _ ->
-            "process-inbox"
-
 
 delta2hash : Model -> Model -> Maybe UrlChange
 delta2hash =
@@ -35,9 +32,6 @@ builder2messages builder =
     case path builder of
         "lists" :: [] ->
             [ Msg.OnShowTodoList ]
-
-        "process-inbox" :: [] ->
-            [ Msg.ProcessInbox ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

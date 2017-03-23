@@ -12,12 +12,10 @@ import Todo as Todo exposing (EncodedTodoList, TodoGroup, Todo, TodoId, TodoList
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-import InboxFlow
 
 
 type ViewState
     = AllTodoListsViewState
-    | InboxFlowViewState (Maybe Todo) InboxFlow.Model
 
 
 defaultViewState =
@@ -85,14 +83,6 @@ mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
 
-startProcessingInbox model =
-    --    mapAllExceptDeleted identity model
-    --        |> InboxFlow.init
-    --        |> InboxFlowViewState (getFirstInboxTodo model)
-    --        |> (setViewState # model)
-    model
-
-
 setEditModeTo : EditMode -> ModelMapper
 setEditModeTo editMode m =
     { m | editMode = editMode }
@@ -144,15 +134,3 @@ deactivateEditingMode =
 
 findTodoEqualById todo =
     getTodoList >> List.find (Todo.equalById todo)
-
-
-updateInboxFlowWithActionType actionType m =
-    m
-        |> case getViewState m of
-            InboxFlowViewState maybeTodo inboxFlowModel ->
-                InboxFlow.updateWithActionType actionType inboxFlowModel
-                    |> InboxFlowViewState maybeTodo
-                    |> setViewState
-
-            _ ->
-                identity

@@ -2,7 +2,7 @@ module Main.View.DrawerMenu exposing (..)
 
 import Html exposing (hr, span, text)
 import Html.Attributes.Extra exposing (intProperty)
-import Main.Msg exposing (Msg(ProcessInbox, OnShowTodoList))
+import Main.Msg exposing (Msg(OnShowTodoList))
 import Polymer.Attributes exposing (icon, stringProperty)
 import Polymer.Paper exposing (badge, iconButton, item, itemBody, menu)
 import Toolkit.Helpers exposing (..)
@@ -59,14 +59,13 @@ listTypeMenuItem ( listType, todoList ) =
 
 addHoverItems listType =
     case listType of
-        Inbox ->
-            [ iconButton
-                [ class "hover-items"
-                , icon "vaadin-icons:start-cog"
-                , onClick ProcessInbox
-                ]
-                []
-            ]
-
+        --        Inbox ->
+        --            [ iconButton
+        --                [ class "hover-items"
+        --                , icon "vaadin-icons:start-cog"
+        --                , onClick ProcessInbox
+        --                ]
+        --                []
+        --            ]
         _ ->
             []

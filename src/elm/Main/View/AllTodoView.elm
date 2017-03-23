@@ -22,8 +22,6 @@ import Main.Model exposing (..)
 import Main.Msg exposing (..)
 import Todo as Todo exposing (TodoGroup(Inbox), Todo, TodoId)
 import Flow.Model as Flow exposing (Node)
-import InboxFlow
-import InboxFlow.View
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)

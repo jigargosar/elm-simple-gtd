@@ -26,6 +26,5 @@ type Msg
     | OnEditTodoKeyUp Todo Key
     | OnSetTodoGroupClicked TodoGroup Todo
     | OnShowTodoList
-    | ProcessInbox
     | OnTodoListMsg TodoListMsg
     | OnDomMsg DomMsg

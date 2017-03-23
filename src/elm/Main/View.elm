@@ -21,7 +21,6 @@ import Main.Model exposing (..)
 import Main.Msg exposing (..)
 import Todo exposing (Todo, TodoId)
 import Flow.Model as Flow exposing (Node)
-import InboxFlow
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
@@ -77,10 +76,6 @@ appMainView m =
         [ case getViewState m of
             AllTodoListsViewState ->
                 allTodosView m
-
-            InboxFlowViewState maybeTodo inboxFlowModel ->
-                --                inboxFlowView maybeTodo inboxFlowModel
-                div [] [ text "Inbox Flow disabled; needs redisigining" ]
         ]
 
 

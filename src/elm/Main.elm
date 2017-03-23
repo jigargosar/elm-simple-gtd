@@ -113,9 +113,6 @@ update msg =
             OnShowTodoList ->
                 Return.map (Model.showTodoList)
 
-            ProcessInbox ->
-                Return.map (Model.startProcessingInbox)
-
             OnSetTodoGroupClicked todoGroup todo ->
                 onTodoListMsg (TodoList.setGroup todoGroup (Todo.getId todo))
 

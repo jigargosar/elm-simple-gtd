@@ -1,10 +1,16 @@
 module ViewState exposing (..)
 
-import InboxFlow
 import Todo exposing (Todo)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
 
-_=1
+type NavigationAction
+    = ShowAllTodoLists
+    | StartProcessingInbox
+
+type TodoListViewState = All
+
+
+type ViewState = TodoList TodoListViewState

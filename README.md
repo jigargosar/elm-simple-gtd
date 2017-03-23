@@ -1,6 +1,6 @@
+## Demo
 
-Work In Progress
 
-[Demo](./demo.gif)
+![Alt Demo](./demo.gif)
 
 

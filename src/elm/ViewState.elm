@@ -16,3 +16,7 @@ type ViewState
     | Group TodoGroup
     | Done
     | Bin
+
+
+defaultViewState =
+    All

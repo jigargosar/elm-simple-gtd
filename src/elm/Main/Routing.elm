@@ -1,6 +1,6 @@
 module Main.Routing exposing (..)
 
-import Main.Model as Model exposing (Model, ViewState(..))
+import Main.Model as Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
@@ -18,8 +18,11 @@ delta2builder previous current =
 
 getPathFromModel model =
     case Model.getViewState model of
-        AllTodoListsViewState ->
+        ViewState.All ->
             [ "lists", "all" ]
+
+        _ ->
+            []
 
 
 delta2hash : Model -> Model -> Maybe UrlChange

@@ -12,14 +12,15 @@ import Todo as Todo exposing (EncodedTodoList, TodoGroup, Todo, TodoId, TodoList
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
+import ViewState exposing (ViewState, defaultViewState)
 
 
-type ViewState
-    = AllTodoListsViewState
-
-
-defaultViewState =
-    AllTodoListsViewState
+--type ViewState
+--    = AllTodoListsViewState
+--
+--
+--defaultViewState =
+--    AllTodoListsViewState
 
 
 type EditMode
@@ -76,7 +77,7 @@ getFirstInboxTodo =
 
 
 showTodoList =
-    setViewState AllTodoListsViewState
+    setViewState ViewState.All
 
 
 mapAllExceptDeleted mapper =

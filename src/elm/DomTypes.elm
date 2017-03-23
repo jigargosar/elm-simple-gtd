@@ -19,4 +19,4 @@ type alias DomId =
 
 type DomMsgType
     = OnResult DomResult
-    | Focus DomId
+--    | Focus DomId

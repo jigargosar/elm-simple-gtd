@@ -16,3 +16,14 @@ focusCmd =
 
 focus =
     focusCmd >>> Return.command
+
+
+update msg =
+    Return.singleton
+        >> case msg of
+            OnResult result ->
+                let
+                    _ =
+                        result |> Result.mapError (Debug.log "Error: Dom")
+                in
+                    identity

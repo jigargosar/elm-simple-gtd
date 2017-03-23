@@ -53,7 +53,7 @@ appDrawerView m =
 
 
 binItemView m =
-    item [onClick OnBinClicked] [ text "Bin" ]
+    item [onClick OnShowBin] [ text "Bin" ]
 
 
 doneItemView m =

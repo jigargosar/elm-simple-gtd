@@ -21,6 +21,9 @@ getPathFromModel model =
         ViewState.AllGrouped ->
             [ "lists", "all" ]
 
+        ViewState.Bin ->
+            [ "lists", "bin" ]
+
         _ ->
             []
 
@@ -35,6 +38,9 @@ builder2messages builder =
     case path builder of
         "lists" :: "all" :: [] ->
             [ Msg.OnShowTodoList ]
+
+        "lists" :: "bin" :: [] ->
+            [ Msg.OnShowBin ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

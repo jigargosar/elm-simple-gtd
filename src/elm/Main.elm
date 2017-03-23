@@ -114,7 +114,7 @@ update msg =
             OnShowTodoList ->
                 Return.map (Model.showTodoList)
 
-            OnBinClicked ->
+            OnShowBin ->
                 Return.map (Model.setViewState ViewState.Bin)
 
             OnSetTodoGroupClicked todoGroup todo ->

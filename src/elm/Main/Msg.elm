@@ -1,6 +1,7 @@
 module Main.Msg exposing (..)
 
 import Dom
+import DomMsg exposing (DomMsg)
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
@@ -30,4 +31,4 @@ type Msg
     | OnTodoListMsg TodoListMsg
     | OnDomMsg DomMsg
 
-type DomMsg = OnResult (Result Dom.Error ())
+

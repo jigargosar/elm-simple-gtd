@@ -21,3 +21,27 @@ type TodoActionType
 
 type alias TodoAction =
     { now : Time, type_ : TodoActionType }
+
+
+toggleDone : TodoId -> TodoActionType
+toggleDone =
+    Edit ToggleDone
+
+
+
+--
+--delete =
+--    Edit Delete
+--setGroup : TodoGroup -> TodoId -> TodoListMsg
+--setGroup =
+--    SetGroup >> UpdateTodo
+--
+--
+--setText : String -> TodoId -> TodoListMsg
+--setText =
+--    SetText >> UpdateTodo
+--
+--
+--addNewTodo : String -> TodoListMsg
+--addNewTodo =
+--    AddNewTodo

@@ -9,6 +9,7 @@ import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Main.View.AllTodoLists exposing (allTodoListByGroupView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
+import TodoGroupViewModel exposing (getTodoGroupsViewModel)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import DebugExtra.Debug exposing (tapLog)
@@ -61,14 +62,20 @@ doneItemView m =
 
 
 todoGroupsMenuItems =
-    getGroupedTodoLists
+    getTodoGroupsViewModel
         >> List.map listTypeMenuItem
 
 
-listTypeMenuItem ( listType, todoList ) =
+listTypeMenuItem vm =
     let
         ltName =
-            Todo.groupToName listType
+            vm.name
+
+        todoList =
+            vm.todoList
+
+        listType =
+            vm.group
     in
         item [ class "has-hover-items" ]
             ([ span [ id ltName ] [ text (ltName) ]

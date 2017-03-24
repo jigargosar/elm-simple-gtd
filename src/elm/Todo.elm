@@ -53,10 +53,6 @@ type TodoGroup
     | Reference
 
 
-type alias TodoGroupViewModel =
-    { group : TodoGroup, displayName : String }
-
-
 getAllListTypes =
     [ Calender
     , Inbox
@@ -433,5 +429,9 @@ groupedTodoLists =
            )
 
 
-getTodoGroups =
+getTodoGroupsViewModel =
     identity
+
+
+type alias TodoGroupViewModel =
+    { group : TodoGroup, displayName : String, todoList : TodoList }

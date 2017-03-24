@@ -77,7 +77,7 @@ getGroupedTodoLists =
 
 
 getTodoGroups =
-    getTodoList >> Todo.getTodoGroups
+    getTodoList >> Todo.getTodoGroupsViewModel
 
 
 getBinTodoList =

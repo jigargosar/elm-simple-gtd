@@ -6,7 +6,7 @@ import Main.Types exposing (ViewType(..))
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
-import Function exposing ((>>>))
+import FunctionExtra.Operators exposing (..)
 
 
 delta2builder : Model -> Model -> Maybe Builder

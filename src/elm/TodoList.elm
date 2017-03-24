@@ -90,12 +90,21 @@ withNow msg =
     Task.perform msg Time.now |> Return.command
 
 
+
+--persistMaybeTodoCmd =
+--    Maybe.Extra.unwrap Cmd.none persistTodoCmd
+
+
 persistMaybeTodoCmd =
-    Maybe.Extra.unwrap Cmd.none persistTodoCmd
+    Maybe.Extra.unwrap Cmd.none upsertTodoCmd
 
 
 persistTodoCmd todo =
     PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)
+
+
+upsertTodoCmd todo =
+    PouchDB.pouchDBUpsert ( "todo-db", Todo.getId todo, (Todo.encode todo) )
 
 
 updateTodoAt action todoId now =

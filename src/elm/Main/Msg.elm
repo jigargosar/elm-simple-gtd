@@ -31,11 +31,6 @@ onNewTodo =
 
 type Msg
     = NoOp
-    | OnAddTodoClicked Dom.Id
-    | OnNewTodoTextChanged String
-    | OnNewTodoBlur
-    | OnNewTodoKeyUp String Key
-      --
     | OnNewTodoMsg NewTodoMsg
       --
     | OnEditTodoClicked Dom.Id Todo

@@ -68,8 +68,13 @@ getTodoList =
     (.todoList)
 
 
-groupedTodoLists =
+getGroupedTodoLists =
     getTodoList >> Todo.groupedTodoLists
+
+
+getGroupedTodoLists2 =
+    getTodoList >> Todo.groupedTodoLists2
+
 
 getBinTodoList =
     getTodoList >> List.filter Todo.binFilter

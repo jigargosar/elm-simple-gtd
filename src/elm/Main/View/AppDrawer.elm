@@ -60,12 +60,10 @@ doneItemView m =
     item [] [ text "Done" ]
 
 
-getTodoLists =
-    getTodoList >> Todo.groupedTodoLists2
 
 
 listTypeMenuItems =
-    getTodoLists
+    getGroupedTodoLists2
         >> List.map listTypeMenuItem
 
 

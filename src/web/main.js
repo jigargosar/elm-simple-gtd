@@ -25,14 +25,11 @@ async function boot() {
 
     app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {
         const bulkResult = await dbMap[dbName].bulkDocs(docs)
-
         // const conflicts =
         //         _.filter(_.compose(_.propEq("name","conflict"),_.head))(_.zip(bulkResult, docs))
         //
         // console.log(conflicts)
-
         console.log("bulkResult:", dbName, bulkResult, docs)
-
         app.ports["onPouchDBBulkDocksResponse"].send([dbName, bulkResult, docs])
     })
 

@@ -68,11 +68,11 @@ getTodoList =
     (.todoList)
 
 
-getGroupedTodoLists =
+getGroupedTodoLists__ =
     getTodoList >> Todo.groupedTodoLists__
 
 
-getGroupedTodoLists2 =
+getGroupedTodoLists =
     getTodoList >> Todo.groupedTodoLists
 
 

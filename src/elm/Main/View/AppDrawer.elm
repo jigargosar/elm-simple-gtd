@@ -63,7 +63,7 @@ doneItemView m =
 
 
 listTypeMenuItems =
-    getGroupedTodoLists2
+    getGroupedTodoLists
         >> List.map listTypeMenuItem
 
 

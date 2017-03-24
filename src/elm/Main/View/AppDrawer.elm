@@ -73,9 +73,6 @@ listTypeMenuItem vm =
 
         todoList =
             vm.todoList
-
-        listType =
-            vm.group
     in
         item [ class "has-hover-items" ]
             ([ span [ id ltName ] [ text (ltName) ]
@@ -90,7 +87,7 @@ listTypeMenuItem vm =
                 ]
                 []
              ]
-                ++ addHoverItems listType
+                ++ addHoverItems vm.group
             )
 
 

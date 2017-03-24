@@ -60,6 +60,7 @@ masterUpdate msg =
                 Return.andThen (update msg >> Return.mapCmd LowFrequencyMsg)
 
 
+updateHighMsg : MsgHigh -> Model -> Return MsgHigh Model
 updateHighMsg msg =
     Return.singleton
         >> case msg of

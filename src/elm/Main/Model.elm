@@ -69,11 +69,11 @@ getTodoList =
 
 
 getGroupedTodoLists =
-    getTodoList >> Todo.groupedTodoLists
+    getTodoList >> Todo.groupedTodoLists__
 
 
 getGroupedTodoLists2 =
-    getTodoList >> Todo.groupedTodoLists2
+    getTodoList >> Todo.groupedTodoLists
 
 
 getBinTodoList =

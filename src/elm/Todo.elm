@@ -407,7 +407,7 @@ getFirstInboxTodo =
     List.find inboxFilter
 
 
-groupedTodoLists =
+groupedTodoLists__ =
     List.filter isNotDeleted
         >> Dict.groupBy (getListType >> toString)
         >> (\dict ->
@@ -418,7 +418,7 @@ groupedTodoLists =
            )
 
 
-groupedTodoLists2 =
+groupedTodoLists =
     List.filter isNotDeleted
         >> Dict.groupBy (getListType >> toString)
         >> (\dict ->

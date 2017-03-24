@@ -84,10 +84,6 @@ getFirstInboxTodo =
     getTodoList >> Todo.getFirstInboxTodo
 
 
-showTodoList =
-    setViewState ViewState.AllGrouped
-
-
 mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 

@@ -108,12 +108,6 @@ update msg =
                     _ ->
                         identity
 
-            OnShowTodoList ->
-                Return.map (Model.showTodoList)
-
-            OnShowBin ->
-                Return.map (Model.setViewState ViewState.Bin)
-
             OnSetTodoGroupClicked todoGroup todo ->
                 onTodoListMsg (TodoList.setGroup todoGroup (Todo.getId todo))
 

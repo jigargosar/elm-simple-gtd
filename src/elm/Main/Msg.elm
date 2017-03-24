@@ -25,8 +25,6 @@ type Msg
     | OnTodoDoneClicked TodoId
     | OnEditTodoKeyUp Todo Key
     | OnSetTodoGroupClicked TodoGroup Todo
-    | OnShowTodoList
-    | OnShowBin
     | OnTodoListMsg TodoListMsg
     | OnDomMsg DomMsg
     | ChangeViewState ViewState

@@ -37,10 +37,10 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "all" :: [] ->
-            [ Msg.OnShowTodoList ]
+            [ Msg.ChangeViewState ViewState.AllGrouped ]
 
         "lists" :: "bin" :: [] ->
-            [ Msg.OnShowBin ]
+            [ Msg.ChangeViewState ViewState.Bin ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

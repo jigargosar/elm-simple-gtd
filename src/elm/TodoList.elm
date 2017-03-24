@@ -7,7 +7,7 @@ import Random.Pcg as Random
 import Return exposing (Return, ReturnF)
 import Task
 import Time exposing (Time)
-import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
+import Todo exposing (Todo, TodoGroupType, TodoId, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -25,7 +25,7 @@ delete =
     UpdateTodo Delete
 
 
-setGroup : TodoGroup -> TodoId -> TodoListMsg
+setGroup : TodoGroupType -> TodoId -> TodoListMsg
 setGroup =
     SetGroup >> UpdateTodo
 

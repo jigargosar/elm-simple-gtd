@@ -43,7 +43,7 @@ defaultDeleted =
     False
 
 
-type TodoGroup
+type TodoGroupType
     = Inbox
     | SomeDayMayBe
     | WaitingFor
@@ -125,7 +125,7 @@ type alias TodoFields =
     , text : String
     , dueAt : Maybe Time
     , deleted : Bool
-    , listType : TodoGroup
+    , listType : TodoGroupType
     }
 
 
@@ -335,17 +335,17 @@ getId =
     (.id)
 
 
-getListType : Model -> TodoGroup
+getListType : Model -> TodoGroupType
 getListType =
     (.listType)
 
 
-setListType : TodoGroup -> ModelMapper
+setListType : TodoGroupType -> ModelMapper
 setListType listType model =
     { model | listType = listType }
 
 
-updateListType : (Model -> TodoGroup) -> ModelMapper
+updateListType : (Model -> TodoGroupType) -> ModelMapper
 updateListType updater model =
     setListType (updater model) model
 

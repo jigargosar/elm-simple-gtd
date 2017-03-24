@@ -1,6 +1,6 @@
 module ViewState exposing (..)
 
-import Todo exposing (Todo, TodoGroup)
+import Todo exposing (Todo, TodoGroupType)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -8,7 +8,7 @@ import FunctionExtra exposing (..)
 
 type ViewState
     = AllGrouped
-    | Group TodoGroup
+    | Group TodoGroupType
     | Done
     | Bin
 

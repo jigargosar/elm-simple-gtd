@@ -8,7 +8,7 @@ import Keyboard.Extra exposing (Key)
 import Main.TodoListMsg exposing (TodoListMsg)
 import Navigation exposing (Location)
 import Time exposing (Time)
-import Todo exposing (Todo, TodoGroup, TodoId)
+import Todo exposing (Todo, TodoGroupType, TodoId)
 import ViewState exposing (ViewState)
 
 
@@ -24,7 +24,7 @@ type Msg
     | OnEditTodoBlur Todo
     | OnTodoDoneClicked TodoId
     | OnEditTodoKeyUp Todo Key
-    | OnSetTodoGroupClicked TodoGroup Todo
+    | OnSetTodoGroupClicked TodoGroupType Todo
     | OnShowTodoList
     | OnShowBin
     | OnTodoListMsg TodoListMsg

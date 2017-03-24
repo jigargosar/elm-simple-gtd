@@ -1,7 +1,7 @@
 module TodoAction exposing (..)
 
 import Time exposing (Time)
-import Todo exposing (TodoGroup, TodoId, TodoText)
+import Todo exposing (TodoGroupType, TodoId, TodoText)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -9,7 +9,7 @@ import FunctionExtra exposing (..)
 
 type EditAction
     = ToggleDone
-    | SetGroup TodoGroup
+    | SetGroup TodoGroupType
     | SetText String
     | Delete
 

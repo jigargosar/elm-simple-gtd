@@ -64,7 +64,7 @@ getDoneTodoList =
 getFilteredTodoList =
     apply2 ( getCurrentTodoListFilter, getTodoList )
         >> uncurry List.filter
-        >> List.sort Todo.getCreatedAt
+        >> List.sortBy Todo.getCreatedAt
 
 
 getCurrentTodoListFilter model =

@@ -83,7 +83,8 @@ todoInputId todo =
 
 hoverIcons vc todo =
     div [ class "show-on-hover" ]
-        [ doneIconButton vc todo
+        [ startIconButton vc todo
+        , doneIconButton vc todo
         , deleteIconButton vc todo
         , optionsIconButton vc todo
         ]
@@ -105,6 +106,10 @@ doneIconButton vc todo =
 
 deleteIconButton vc todo =
     iconButton [ onClick (vc.onDeleteTodoClicked (Todo.getId todo)), icon "delete" ] []
+
+
+startIconButton vc todo =
+    iconButton [ onClick (vc.onDeleteTodoClicked (Todo.getId todo)), icon "av:play-circle-outline" ] []
 
 
 optionsIconButton vc todo =

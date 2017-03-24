@@ -48,7 +48,7 @@ getTodoList =
 getFilteredTodoList =
     apply2 ( getCurrentTodoListFilter, getTodoList )
         >> uncurry List.filter
-        >> List.sortBy (Todo.getCreatedAt >> negate)
+        >> List.sortBy (Todo.getModifiedAt >> negate)
 
 
 getCurrentTodoListFilter model =

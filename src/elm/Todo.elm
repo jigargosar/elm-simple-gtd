@@ -412,12 +412,22 @@ binFilter =
     toAllPassPredicate [ isDeleted ]
 
 
+filterAllPass =
+    toAllPassPredicate >> List.filter
+
+rejectAnyPass =
+    toAnyPassPredicate >> List.filterNot
+
+
 doneFilter =
     toAllPassPredicate [ isNotDeleted, isDone ]
 
 
 toAllPassPredicate predicateList =
     (applyList predicateList >> List.all identity)
+
+toAnyPassPredicate predicateList =
+    (applyList predicateList >> List.any identity)
 
 
 getInboxList =

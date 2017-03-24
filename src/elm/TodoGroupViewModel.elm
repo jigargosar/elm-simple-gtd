@@ -16,7 +16,7 @@ type alias TodoGroupViewModel =
 getTodoGroupsViewModel : Model -> List TodoGroupViewModel
 getTodoGroupsViewModel =
     Model.getTodoList
-        >> List.filter Todo.isNotDeleted
+        >> Todo.rejectAnyPass [ Todo.isDeleted, Todo.isDone ]
         >> Dict.groupBy (Todo.getGroup >> toString)
         >> (\dict ->
                 Todo.getAllTodoGroups

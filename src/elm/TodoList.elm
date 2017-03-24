@@ -119,7 +119,7 @@ updateTodoAt action todoId now =
                     Todo.toggleDone
 
                 ToggleDelete ->
-                    Todo.toggleDelete
+                    Todo.toggleDeleted
 
                 SetText text ->
                     Todo.setText text

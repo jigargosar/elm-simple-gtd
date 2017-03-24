@@ -284,6 +284,11 @@ updateDeleted updater model =
     setDeleted (updater model) model
 
 
+toggleDeleted : ModelF
+toggleDeleted =
+    updateDeleted (isDeleted >> not)
+
+
 setText text todo =
     { todo | text = text }
 
@@ -311,11 +316,6 @@ updateDone updater model =
 toggleDone : ModelF
 toggleDone =
     updateDone (isDone >> not)
-
-
-toggleDelete : ModelF
-toggleDelete =
-    updateDeleted (isDeleted >> not)
 
 
 getCreatedAt : Model -> Time

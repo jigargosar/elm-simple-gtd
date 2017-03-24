@@ -73,7 +73,7 @@ checkBoxView =
 
 todoItemAttributes vc todo =
     [ class "todo-item"
-    , onClick (vc.onEditTodoClicked (todoInputId todo) todo)
+    , onClickStopPropagation (vc.onEditTodoClicked (todoInputId todo) todo)
     ]
 
 
@@ -105,11 +105,11 @@ doneIconButton vc todo =
 
 
 deleteIconButton vc todo =
-    iconButton [ onClick (vc.onDeleteTodoClicked (Todo.getId todo)), icon "delete" ] []
+    iconButton [ onClickStopPropagation (vc.onDeleteTodoClicked (Todo.getId todo)), icon "delete" ] []
 
 
 startIconButton vc todo =
-    iconButton [ onClick (vc.onDeleteTodoClicked (Todo.getId todo)), icon "av:play-circle-outline" ] []
+    iconButton [ onClickStopPropagation (vc.onDeleteTodoClicked (Todo.getId todo)), icon "av:play-circle-outline" ] []
 
 
 optionsIconButton vc todo =
@@ -127,7 +127,7 @@ optionsIconButton vc todo =
                 .|> (\listType ->
                         item
                             [ attribute "list-type" (Todo.groupToName listType)
-                            , onClick (vc.onTodoMoveToClicked listType todo)
+                            , onClickStopPropagation (vc.onTodoMoveToClicked listType todo)
                             ]
                             [ text (Todo.groupToName listType) ]
                     )

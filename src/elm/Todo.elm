@@ -65,11 +65,11 @@ getAllListTypes =
 
 
 getListTypeName =
-    getListType >> listTypeToName
+    getListType >> todoGroupToName
 
 
-listTypeToName listType =
-    case listType of
+todoGroupToName todoGroup =
+    case todoGroup of
         Inbox ->
             "Inbox"
 
@@ -413,7 +413,7 @@ groupedTodoLists__ =
         >> (\dict ->
                 getAllListTypes
                     .|> (\listType ->
-                            ( listTypeToName listType, Dict.get (toString listType) dict ?= [] )
+                            ( todoGroupToName listType, Dict.get (toString listType) dict ?= [] )
                         )
            )
 

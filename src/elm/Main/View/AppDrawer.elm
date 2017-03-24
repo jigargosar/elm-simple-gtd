@@ -42,7 +42,7 @@ appDrawerView m =
                 ([ item [ onClick OnShowTodoList ] [ text "All" ]
                  , hr [] []
                  ]
-                    ++ todoGroupMenuItems m
+                    ++ todoGroupsMenuItems m
                     ++ [ hr [] [] ]
                     ++ [ binItemView m
                        , doneItemView m
@@ -60,7 +60,7 @@ doneItemView m =
     item [] [ text "Done" ]
 
 
-todoGroupMenuItems =
+todoGroupsMenuItems =
     getGroupedTodoLists
         >> List.map listTypeMenuItem
 

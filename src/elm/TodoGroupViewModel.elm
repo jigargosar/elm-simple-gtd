@@ -6,15 +6,17 @@ import Todo exposing (TodoGroup, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import Main.Model as Model exposing (Model)
 
 
 type alias TodoGroupViewModel =
     { group : TodoGroup, name : String, todoList : TodoList, count : Int, isEmpty : Bool }
 
 
-getTodoGroupsViewModel : TodoList -> List TodoGroupViewModel
+getTodoGroupsViewModel : Model -> List TodoGroupViewModel
 getTodoGroupsViewModel =
-    List.filter Todo.isNotDeleted
+    Model.getTodoList
+        >> List.filter Todo.isNotDeleted
         >> Dict.groupBy (Todo.getGroup >> toString)
         >> (\dict ->
                 Todo.getAllTodoGroups

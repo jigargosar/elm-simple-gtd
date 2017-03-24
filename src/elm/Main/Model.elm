@@ -9,7 +9,6 @@ import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import Todo as Todo exposing (EncodedTodoList, TodoGroup, Todo, TodoId, TodoList)
-import TodoGroupViewModel exposing (getTodoGroupsViewModel)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -75,10 +74,6 @@ getGroupedTodoLists__ =
 
 getGroupedTodoLists =
     getTodoList >> Todo.groupedTodoLists
-
-
-getTodoGroupsViewModel =
-    getTodoList >> TodoGroupViewModel.getTodoGroupsViewModel
 
 
 getBinTodoList =

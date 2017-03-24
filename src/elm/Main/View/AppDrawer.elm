@@ -68,11 +68,11 @@ todoGroupsMenuItems =
 
 listTypeMenuItem vm =
     let
-        ltName =
-            vm.name
+        badgeForId =
+            "id-for-badge" ++ vm.name
     in
         item [ class "has-hover-items" ]
-            ([ span [ id ltName ] [ text (ltName) ]
+            ([ span [ id badgeForId ] [ text (badgeForId) ]
              , itemBody [] []
              , badge
                 [ classList
@@ -80,7 +80,7 @@ listTypeMenuItem vm =
                     , "drawer-list-type-badge" => True
                     ]
                 , intProperty "label" (vm.count)
-                , attribute "for" ltName
+                , attribute "for" badgeForId
                 ]
                 []
              ]

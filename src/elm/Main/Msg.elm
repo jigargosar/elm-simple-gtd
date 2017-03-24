@@ -11,7 +11,15 @@ import Navigation exposing (Location)
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
 
-type MasterMsg = HighFrequencyMsg String| LowFrequencyMsg Msg
+
+type MasterMsg
+    = HighFrequencyMsg MsgHigh
+    | LowFrequencyMsg Msg
+
+
+type MsgHigh
+    = Tick Time
+
 
 type Msg
     = NoOp

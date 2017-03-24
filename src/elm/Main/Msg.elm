@@ -11,6 +11,7 @@ import Navigation exposing (Location)
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
 import FunctionExtra.Operators exposing (..)
+import Function
 
 
 type NewTodoMsg

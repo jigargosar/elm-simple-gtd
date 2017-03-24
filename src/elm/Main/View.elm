@@ -88,10 +88,10 @@ newTodoInputView editMode =
         EditNewTodoMode text ->
             input
                 [ id newTodoInputId
-                , onInput OnNewTodoTextChanged
+                , onInput onNewTodo.input
                 , value text
-                , onBlur OnNewTodoBlur
-                , onKeyUp (OnNewTodoKeyUp text)
+                , onBlur onNewTodo.blur
+                , onKeyUp (onNewTodo.keyUp text)
                 , autofocus True
                 ]
                 []
@@ -104,6 +104,6 @@ addTodoFabView m =
     fab
         [ id "add-fab"
         , attribute "icon" "add"
-        , onClick (onAddTodoClicked newTodoInputId)
+        , onClick (onNewTodo.add newTodoInputId)
         ]
         []

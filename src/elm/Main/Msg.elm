@@ -20,20 +20,12 @@ type NewTodoMsg
     | NewTodoKeyUp String Key
 
 
-onAddTodoClicked =
-    AddTodoClicked >> OnNewTodoMsg
-
-
-onNewTodoTextChanged =
-    NewTodoTextChanged >> OnNewTodoMsg
-
-
-onNewTodoBlur =
-    NewTodoBlur |> OnNewTodoMsg
-
-
-onNewTodoKeyUp =
-    NewTodoKeyUp >>> OnNewTodoMsg
+onNewTodo =
+    { add = AddTodoClicked >> OnNewTodoMsg
+    , input = NewTodoTextChanged >> OnNewTodoMsg
+    , blur = NewTodoBlur |> OnNewTodoMsg
+    , keyUp = NewTodoKeyUp >>> OnNewTodoMsg
+    }
 
 
 type Msg

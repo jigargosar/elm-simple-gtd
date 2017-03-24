@@ -19,7 +19,6 @@ type Msg
     | OnNewTodoBlur
     | OnNewTodoKeyUp String Key
       --
-      --
     | OnEditTodoClicked Dom.Id Todo
     | OnEditTodoTextChanged String
     | OnEditTodoBlur Todo

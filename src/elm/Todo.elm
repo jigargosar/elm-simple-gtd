@@ -65,10 +65,10 @@ getAllTodoGroups =
 
 
 getListTypeName =
-    getListType >> todoGroupToName
+    getGroup >> groupToName
 
 
-todoGroupToName todoGroup =
+groupToName todoGroup =
     case todoGroup of
         Inbox ->
             "Inbox"
@@ -201,7 +201,7 @@ encode todo =
         , "text" => E.string (getText todo)
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (isDeleted todo)
-        , "listType" => E.string (getListType todo |> toString)
+        , "listType" => E.string (getGroup todo |> toString)
         , "createdAt" => E.int (todo.createdAt |> round)
         , "modifiedAt" => E.int (todo.modifiedAt |> round)
         ]
@@ -335,8 +335,8 @@ getId =
     (.id)
 
 
-getListType : Model -> TodoGroup
-getListType =
+getGroup : Model -> TodoGroup
+getGroup =
     (.listType)
 
 
@@ -388,7 +388,7 @@ isNotDeleted =
 
 
 inboxFilter =
-    toAllPassPredicate [ isNotDeleted, getListType >> equals Inbox ]
+    toAllPassPredicate [ isNotDeleted, getGroup >> equals Inbox ]
 
 
 binFilter =
@@ -409,18 +409,18 @@ getFirstInboxTodo =
 
 groupedTodoLists__ =
     List.filter isNotDeleted
-        >> Dict.groupBy (getListType >> toString)
+        >> Dict.groupBy (getGroup >> toString)
         >> (\dict ->
                 getAllTodoGroups
                     .|> (\listType ->
-                            ( todoGroupToName listType, Dict.get (toString listType) dict ?= [] )
+                            ( groupToName listType, Dict.get (toString listType) dict ?= [] )
                         )
            )
 
 
 groupedTodoLists =
     List.filter isNotDeleted
-        >> Dict.groupBy (getListType >> toString)
+        >> Dict.groupBy (getGroup >> toString)
         >> (\dict ->
                 getAllTodoGroups
                     .|> (\listType ->

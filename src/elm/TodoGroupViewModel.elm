@@ -13,15 +13,17 @@ type alias TodoGroupViewModel =
 
 
 getTodoGroupsViewModel =
-    identity
-
-
-groupedTodoLists__ =
     List.filter Todo.isNotDeleted
-        >> Dict.groupBy (Todo.getListType >> toString)
+        >> Dict.groupBy (Todo.getGroup >> toString)
         >> (\dict ->
                 Todo.getAllTodoGroups
-                    .|> (\group ->
-                            ( Todo.todoGroupToName group, Dict.get (toString group) dict ?= [] )
-                        )
+                    .|> toViewModel dict
            )
+
+
+toViewModel dict =
+    apply3
+        ( identity
+        , Todo.groupToName
+        , toString >> Dict.get # dict ?= []
+        )

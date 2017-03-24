@@ -68,7 +68,7 @@ todoGroupsMenuItems =
 listTypeMenuItem ( listType, todoList ) =
     let
         ltName =
-            Todo.todoGroupToName listType
+            Todo.groupToName listType
     in
         item [ class "has-hover-items" ]
             ([ span [ id ltName ] [ text (ltName) ]

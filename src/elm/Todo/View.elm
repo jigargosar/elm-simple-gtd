@@ -120,10 +120,10 @@ optionsIconButton vc todo =
             (Todo.getAllTodoGroups
                 .|> (\listType ->
                         item
-                            [ attribute "list-type" (Todo.todoGroupToName listType)
+                            [ attribute "list-type" (Todo.groupToName listType)
                             , onClick (vc.onTodoMoveToClicked listType todo)
                             ]
-                            [ text (Todo.todoGroupToName listType) ]
+                            [ text (Todo.groupToName listType) ]
                     )
             )
         ]

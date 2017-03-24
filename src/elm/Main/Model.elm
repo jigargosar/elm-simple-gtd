@@ -54,7 +54,7 @@ getGroupedTodoLists =
 
 
 getBinTodoList =
-    getTodoList >> List.filter Todo.binFilter >> List.sortBy (Todo.getCreatedAt >> negate)
+    getTodoList >> List.filter Todo.binFilter
 
 
 getDoneTodoList =
@@ -69,14 +69,14 @@ getFilteredTodoList =
 
 getCurrentTodoListFilter model =
     case getViewState model of
-        AllByGroupView ->
-            always (True)
-
         BinView ->
             Todo.binFilter
 
         DoneView ->
             Todo.doneFilter
+
+        _ ->
+            always (True)
 
 
 getFirstInboxTodo =

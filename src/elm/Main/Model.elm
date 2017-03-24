@@ -3,7 +3,7 @@ module Main.Model exposing (..)
 import Json.Encode as E
 import List.Extra as List
 import Main.Msg exposing (..)
-import Main.Types exposing (EditMode(EditNewTodoMode, EditTodoMode, NotEditing), Model, ModelF, defaultViewType)
+import Main.Types exposing (EditMode(EditNewTodoMode, EditTodoMode, NotEditing), Model, ModelF, ViewType(..), defaultViewType)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
@@ -59,6 +59,24 @@ getBinTodoList =
 
 getDoneTodoList =
     getTodoList >> List.filter Todo.doneFilter
+
+
+getFilteredTodoList =
+    apply2 ( getCurrentTodoListFilter, getTodoList )
+        >> uncurry List.filter
+        >> List.sort Todo.getCreatedAt
+
+
+getCurrentTodoListFilter model =
+    case getViewState model of
+        AllByGroupView ->
+            always (True)
+
+        BinView ->
+            Todo.binFilter
+
+        DoneView ->
+            Todo.doneFilter
 
 
 getFirstInboxTodo =

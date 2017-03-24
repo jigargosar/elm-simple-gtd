@@ -81,6 +81,11 @@ todoListView vc todoList =
     Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
 
 
+todoListView2 =
+    apply2 ( createTodoListViewConfig, Model.getFilteredTodoList )
+    >> (\ (vc, todoList) -> Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc))
+
+
 keyedTodoListView vc ( listTitle, todoList ) =
     ( listTitle
     , div [ class "todo-list-container" ]

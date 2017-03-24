@@ -18,7 +18,7 @@ type MasterMsg
 
 
 type MsgHigh
-    = Tick Time
+    = UpdateNow Time
 
 
 type Msg

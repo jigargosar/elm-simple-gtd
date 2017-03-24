@@ -32,8 +32,20 @@ setViewState viewState m =
     { m | viewState = viewState }
 
 
+getNow : Model -> Time
 getNow =
-    .now
+    (.now)
+
+
+setNow : Time -> ModelF
+setNow now model =
+    { model | now = now }
+
+
+updateNow : (Model -> Time) -> ModelF
+updateNow updater model =
+    setNow (updater model) model
+
 
 
 getViewState =

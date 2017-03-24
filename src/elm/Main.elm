@@ -45,7 +45,7 @@ main =
         , init = Function.map (Return.mapCmd LowFrequencyMsg) init
         , update = masterUpdate
         , view = Function.map (Html.map LowFrequencyMsg) appView
-        , subscriptions = \m -> Sub.batch [ Time.every Time.second (Tick >> HighFrequencyMsg) ]
+        , subscriptions = \m -> Sub.batch [ Time.every Time.second (UpdateNow >> HighFrequencyMsg) ]
         }
 
 
@@ -63,12 +63,8 @@ masterUpdate msg =
 updateHighMsg msg =
     Return.singleton
         >> case msg of
-            Tick now ->
-                let
-                    _ =
-                        Debug.log "elapsed" (now)
-                in
-                    identity
+            UpdateNow now ->
+                Return.map (Model.setNow now)
 
 
 init : Flags -> UpdateReturn

@@ -140,7 +140,7 @@ onNewTodoMsg msg =
         NewTodoBlur ->
             deactivateEditingMode
 
-        NewTodoKeyUp text key ->
+        NewTodoKeyUp ( text, key ) ->
             case key of
                 Enter ->
                     addNewTodoAndContinueAdding text

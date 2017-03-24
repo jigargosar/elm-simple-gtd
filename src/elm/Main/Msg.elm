@@ -18,14 +18,14 @@ type NewTodoMsg
     = AddTodoClicked Dom.Id
     | NewTodoTextChanged String
     | NewTodoBlur
-    | NewTodoKeyUp String Key
+    | NewTodoKeyUp (String, Key)
 
 
 onNewTodo =
     { add = AddTodoClicked >> OnNewTodoMsg
     , input = NewTodoTextChanged >> OnNewTodoMsg
     , blur = NewTodoBlur |> OnNewTodoMsg
-    , keyUp = (\a b -> OnNewTodoMsg (NewTodoKeyUp a b))
+    , keyUp = NewTodoKeyUp >> OnNewTodoMsg
     }
 
 

@@ -426,25 +426,3 @@ getInboxList =
 
 getFirstInboxTodo =
     List.find inboxFilter
-
-
-groupedTodoLists__ =
-    List.filter isNotDeleted
-        >> Dict.groupBy (getGroup >> toString)
-        >> (\dict ->
-                getAllTodoGroups
-                    .|> (\listType ->
-                            ( groupToName listType, Dict.get (toString listType) dict ?= [] )
-                        )
-           )
-
-
-groupedTodoLists =
-    List.filter isNotDeleted
-        >> Dict.groupBy (getGroup >> toString)
-        >> (\dict ->
-                getAllTodoGroups
-                    .|> (\listType ->
-                            ( listType, Dict.get (toString listType) dict ?= [] )
-                        )
-           )

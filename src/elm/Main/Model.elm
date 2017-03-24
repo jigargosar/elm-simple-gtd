@@ -45,14 +45,6 @@ getTodoList =
     (.todoList)
 
 
-getGroupedTodoLists__ =
-    getTodoList >> Todo.groupedTodoLists__
-
-
-getGroupedTodoLists =
-    getTodoList >> Todo.groupedTodoLists
-
-
 getFilteredTodoList =
     apply2 ( getCurrentTodoListFilter, getTodoList )
         >> uncurry List.filter

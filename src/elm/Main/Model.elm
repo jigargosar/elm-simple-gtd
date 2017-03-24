@@ -33,8 +33,19 @@ init now encodedTodoList =
         ActiveTask.init
 
 
-setViewState viewState m =
-    { m | viewState = viewState }
+getMainViewType : Model -> MainViewType
+getMainViewType =
+    (.mainViewType)
+
+
+setMainViewType : MainViewType -> ModelF
+setMainViewType mainViewType model =
+    { model | mainViewType = mainViewType }
+
+
+updateMainViewType : (Model -> MainViewType) -> ModelF
+updateMainViewType updater model =
+    setMainViewType (updater model) model
 
 
 getNow : Model -> Time
@@ -52,8 +63,6 @@ updateNow updater model =
     setNow (updater model) model
 
 
-getViewState =
-    (.viewState)
 
 
 getTodoList : Model -> TodoList
@@ -68,7 +77,7 @@ getFilteredTodoList =
 
 
 getCurrentTodoListFilter model =
-    case getViewState model of
+    case getMainViewType model of
         BinView ->
             Todo.binFilter
 

@@ -119,7 +119,7 @@ update msg =
                 Return.andThen (DomUpdate.update msg >> Return.mapCmd OnDomMsg)
 
             SetMainViewType viewState ->
-                Return.map (Model.setViewState viewState)
+                Return.map (Model.setMainViewType viewState)
 
             UpdateNow now ->
                 Return.map (Model.setNow now)

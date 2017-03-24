@@ -30,7 +30,7 @@ type alias Model =
     { now : Time
     , todoList : TodoList
     , editMode : EditMode
-    , viewState : MainViewType
+    , mainViewType : MainViewType
     , seed : Seed
     , activeTask : ActiveTask
     }

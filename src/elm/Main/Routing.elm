@@ -17,7 +17,7 @@ delta2builder previous current =
 
 
 getPathFromModel model =
-    case Model.getViewState model of
+    case Model.getMainViewType model of
         AllByGroupView ->
             [ "lists", "all" ]
 

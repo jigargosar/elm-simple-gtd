@@ -64,7 +64,7 @@ appHeaderView m =
 
 appMainView m =
     div [ id "main-view" ]
-        [ case getViewState m of
+        [ case getMainViewType m of
             AllByGroupView ->
                 allTodoListByGroupView m
 

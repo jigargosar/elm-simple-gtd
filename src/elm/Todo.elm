@@ -427,3 +427,7 @@ groupedTodoLists =
                             ( listType, Dict.get (toString listType) dict ?= [] )
                         )
            )
+
+
+getTodoGroups =
+    identity

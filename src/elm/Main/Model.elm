@@ -76,6 +76,10 @@ getGroupedTodoLists =
     getTodoList >> Todo.groupedTodoLists
 
 
+getTodoGroups =
+    getTodoList >> Todo.getTodoGroups
+
+
 getBinTodoList =
     getTodoList >> List.filter Todo.binFilter
 

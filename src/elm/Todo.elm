@@ -429,7 +429,4 @@ groupedTodoLists =
            )
 
 
-getTodoGroupsViewModel =
-    identity
-
 

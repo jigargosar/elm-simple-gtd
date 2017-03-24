@@ -56,7 +56,7 @@ getGroupedTodoLists =
 getFilteredTodoList =
     apply2 ( getCurrentTodoListFilter, getTodoList )
         >> uncurry List.filter
-        >> List.sortBy Todo.getCreatedAt
+        >> List.sortBy (Todo.getCreatedAt >> negate)
 
 
 getCurrentTodoListFilter model =

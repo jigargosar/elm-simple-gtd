@@ -20,7 +20,7 @@ import Json.Encode
 import List.Extra as List
 import Main.Model as Model exposing (..)
 import Main.Msg exposing (..)
-import Todo as Todo exposing (TodoGroupType(Inbox), Todo, TodoId)
+import Todo as Todo exposing (TodoGroup(Inbox), Todo, TodoId)
 import Flow.Model as Flow exposing (Node)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
@@ -35,7 +35,7 @@ type alias ViewConfig msg =
     , onEditTodoBlur : Todo -> msg
     , onEditTodoKeyUp : Todo -> Key -> msg
     , noOp : msg
-    , onTodoMoveToClicked : TodoGroupType -> Todo -> msg
+    , onTodoMoveToClicked : TodoGroup -> Todo -> msg
     , now : Time
     , editMode : EditMode
     , onTodoDoneClicked : TodoId -> msg

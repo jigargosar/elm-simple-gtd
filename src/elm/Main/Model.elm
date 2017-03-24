@@ -8,7 +8,7 @@ import Navigation exposing (Location)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todo as Todo exposing (EncodedTodoList, TodoGroupType, Todo, TodoId, TodoList)
+import Todo as Todo exposing (EncodedTodoList, TodoGroup, Todo, TodoId, TodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2

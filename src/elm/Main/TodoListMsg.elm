@@ -1,7 +1,7 @@
 module Main.TodoListMsg exposing (..)
 
 import Time exposing (Time)
-import Todo exposing (TodoGroupType, TodoId)
+import Todo exposing (TodoGroup, TodoId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -9,7 +9,7 @@ import FunctionExtra exposing (..)
 
 type TodoUpdateActionType
     = ToggleDone
-    | SetGroup TodoGroupType
+    | SetGroup TodoGroup
     | SetText String
     | Delete
 

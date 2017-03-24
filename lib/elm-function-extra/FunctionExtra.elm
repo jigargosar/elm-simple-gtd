@@ -1,10 +1,6 @@
 module FunctionExtra exposing (..)
 
 
-(=>) =
-    (,)
-infix 9 =>
-
 
 ifElse : (a -> Bool) -> (a -> b) -> (a -> b) -> a -> b
 ifElse pred onTrue onFalse value =

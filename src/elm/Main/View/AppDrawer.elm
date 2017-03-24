@@ -26,6 +26,7 @@ import Flow.Model as Flow exposing (Node)
 import Polymer.Paper exposing (..)
 import Polymer.App as App
 import FunctionExtra exposing (..)
+import FunctionExtra.Operators exposing (..)
 import Todo.View
 
 

@@ -1,7 +1,15 @@
 module FunctionExtra.Operators exposing (..)
 
+
+(=>) =
+    (,)
+infix 9 =>
+
+
 (>>>) : (a -> b -> c) -> (c -> d) -> a -> b -> d
-(>>>) ff f x y = ff x y |> f
+(>>>) ff f x y =
+    ff x y |> f
+
 
 {-|
 ```elm
@@ -11,7 +19,9 @@ bar <<< foo
 ```
 -}
 (<<<) : (c -> d) -> (a -> b -> c) -> a -> b -> d
-(<<<) = flip (>>>)
+(<<<) =
+    flip (>>>)
+
 
 {-|
 ```elm
@@ -21,7 +31,9 @@ foo >>>> bar
 ```
 -}
 (>>>>) : (a -> b -> c -> d) -> (d -> e) -> a -> b -> c -> e
-(>>>>) fff f x y z = fff x y z |> f
+(>>>>) fff f x y z =
+    fff x y z |> f
+
 
 {-|
 ```elm
@@ -31,5 +43,5 @@ bar <<<< foo
 ```
 -}
 (<<<<) : (d -> e) -> (a -> b -> c -> d) -> a -> b -> c -> e
-(<<<<) = flip (>>>>)
-
+(<<<<) =
+    flip (>>>>)

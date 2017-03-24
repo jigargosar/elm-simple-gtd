@@ -22,4 +22,5 @@ type DomMsg
     | Focus DomId
 
 
-focus = Focus
+focus =
+    Focus

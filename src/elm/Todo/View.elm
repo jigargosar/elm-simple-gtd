@@ -10,6 +10,7 @@ import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import FunctionExtra.Operators exposing (..)
 import Html exposing (div, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

@@ -21,11 +21,26 @@ type NewTodoMsg
     | NewTodoKeyUp String Key
 
 
+type EditTodoMsg
+    = EditTodoClicked Dom.Id Todo
+    | EditTodoTextChanged String
+    | EditTodoBlur Todo
+    | EditTodoKeyUp Todo Key
+
+
 onNewTodo =
     { add = AddTodoClicked >> OnNewTodoMsg
     , input = NewTodoTextChanged >> OnNewTodoMsg
     , blur = NewTodoBlur |> OnNewTodoMsg
     , keyUp = NewTodoKeyUp >>> OnNewTodoMsg
+    }
+
+
+onEditTodo =
+    { edit = EditTodoClicked >>> OnEditTodoMsg
+    , input = EditTodoTextChanged >> OnEditTodoMsg
+    , blur = EditTodoBlur >> OnEditTodoMsg
+    , keyUp = EditTodoKeyUp >>> OnEditTodoMsg
     }
 
 
@@ -37,6 +52,8 @@ type Msg
     | OnEditTodoTextChanged String
     | OnEditTodoBlur Todo
     | OnEditTodoKeyUp Todo Key
+      --
+    | OnEditTodoMsg EditTodoMsg
       --
     | OnDeleteTodoClicked TodoId
     | OnTodoDoneClicked TodoId

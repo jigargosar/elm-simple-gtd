@@ -27,6 +27,7 @@ import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, it
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
 import Todo.View
+import TodoGroupViewModel exposing (TodoGroupViewModel, getTodoGroupsViewModel)
 
 
 type alias ViewConfig msg =
@@ -60,7 +61,7 @@ createTodoListViewConfig model =
 
 allTodoListByGroupView : Model -> Html Msg
 allTodoListByGroupView =
-    apply2 ( createTodoListViewConfig >> keyedTodoListView, getGroupedTodoLists__ )
+    apply2 ( createTodoListViewConfig >> keyedTodoListView, getTodoGroupsViewModel )
         >> uncurry List.map
         >> Keyed.node "div" []
 
@@ -68,19 +69,20 @@ allTodoListByGroupView =
 todoListView : Model -> Html Msg
 todoListView =
     apply2 ( createTodoListViewConfig, Model.getFilteredTodoList )
-    >> (\ (vc, todoList) -> Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc))
+        >> (\( vc, todoList ) -> Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc))
 
 
-keyedTodoListView vc ( listTitle, todoList ) =
-    ( listTitle
+keyedTodoListView : ViewConfig Msg -> TodoGroupViewModel -> ( String, Html Msg )
+keyedTodoListView vc vm =
+    ( vm.name
     , div [ class "todo-list-container" ]
         [ div [ class "todo-list-title" ]
             [ div [ class "paper-badge-container" ]
-                [ span [] [ text listTitle ]
-                , badge [ intProperty "label" (List.length todoList) ] []
+                [ span [] [ text vm.name ]
+                , badge [ intProperty "label" (vm.count) ] []
                 ]
             ]
-        , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
+        , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> todoView vc)
         ]
     )
 

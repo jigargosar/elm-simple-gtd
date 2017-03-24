@@ -13,30 +13,32 @@ const _ = R
 async function boot() {
 
     const dbMap = {
-        "todo-db":await PouchDB("todo-db")
+        "todo-db": await PouchDB("todo-db")
     }
 
-    const allTodos = await dbMap["todo-db"].find({selector:{"_id":{"$ne":null}}})
+    const allTodos = await dbMap["todo-db"].find({selector: {"_id": {"$ne": null}}})
+    // console.log(allTodos)
 
-    console.log(allTodos)
     const Elm = require("elm/Main.elm")
-    const app = Elm["Main"].embed(document.getElementById("root"), {now: Date.now(), encodedTodoList: allTodos})
+    const app = Elm["Main"]
+        .embed(document.getElementById("root"), {now: Date.now(), encodedTodoList: allTodos})
 
 
-    app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {
+    app.ports["pouchDBBulkDocks"].subscribe(async ([dbName, docs]) => {
         const bulkResult = await dbMap[dbName].bulkDocs(docs)
         // const conflicts =
-        //         _.filter(_.compose(_.propEq("name","conflict"),_.head))(_.zip(bulkResult, docs))
-        //
+        //     _.filter(_.compose(_.propEq("name", "conflict"), _.head)
+        //     )(_.zip(bulkResult, docs))
         // console.log(conflicts)
+        //
         console.log("bulkResult:", dbName, bulkResult, docs)
         app.ports["onPouchDBBulkDocksResponse"].send([dbName, bulkResult, docs])
     })
 
-    app.ports["pouchDBUpsert"].subscribe(async([dbName, id, doc]) => {
+    app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
         const upsertResult = await dbMap[dbName].upsert(id, doc)
-        if(_.F()){
-            console.log("upsertResult",upsertResult)
+        if (_.F()) {
+            console.log("upsertResult", upsertResult)
         }
     });
 

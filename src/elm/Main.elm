@@ -61,6 +61,9 @@ update msg =
             NoOp ->
                 identity
 
+            OnNewTodoMsg msg ->
+                onNewTodoMsg msg
+
             OnAddTodoClicked focusInputId ->
                 activateEditNewTodoMode ""
                     >> domFocus focusInputId
@@ -124,6 +127,8 @@ update msg =
             UpdateNow now ->
                 Return.map (Model.setNow now)
 
+onNewTodoMsg msg =
+    identity
 
 onTodoListMsg =
     OnTodoMsg >> update >> Return.andThen

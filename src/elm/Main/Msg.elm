@@ -26,6 +26,8 @@ type Msg
     | OnNewTodoBlur
     | OnNewTodoKeyUp String Key
       --
+    | OnNewTodoMsg NewTodoMsg
+      --
     | OnEditTodoClicked Dom.Id Todo
     | OnEditTodoTextChanged String
     | OnEditTodoBlur Todo

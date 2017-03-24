@@ -64,27 +64,6 @@ update msg =
             OnNewTodoMsg msg ->
                 onNewTodoMsg msg
 
-            OnAddTodoClicked focusInputId ->
-                activateEditNewTodoMode ""
-                    >> domFocus focusInputId
-
-            OnNewTodoTextChanged text ->
-                activateEditNewTodoMode text
-
-            OnNewTodoBlur ->
-                deactivateEditingMode
-
-            OnNewTodoKeyUp text key ->
-                case key of
-                    Enter ->
-                        addNewTodoAndContinueAdding text
-
-                    Escape ->
-                        deactivateEditingMode
-
-                    _ ->
-                        identity
-
             OnEditTodoClicked focusInputId todo ->
                 Return.map (Model.activateEditTodoMode todo)
                     >> domFocus focusInputId
@@ -140,7 +119,7 @@ onNewTodoMsg msg =
         NewTodoBlur ->
             deactivateEditingMode
 
-        NewTodoKeyUp ( text, key ) ->
+        NewTodoKeyUp text key ->
             case key of
                 Enter ->
                     addNewTodoAndContinueAdding text

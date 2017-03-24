@@ -6,6 +6,7 @@ import Main.Types exposing (ViewType(..))
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
+import Function exposing ((>>>))
 
 
 delta2builder : Model -> Model -> Maybe Builder
@@ -39,13 +40,13 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "all" :: [] ->
-            [ Msg.ChangeViewState AllByGroupView ]
+            [ Msg.ChangeView AllByGroupView ]
 
         "lists" :: "bin" :: [] ->
-            [ Msg.ChangeViewState BinView ]
+            [ Msg.ChangeView BinView ]
 
         "lists" :: "done" :: [] ->
-            [ Msg.ChangeViewState DoneView ]
+            [ Msg.ChangeView DoneView ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

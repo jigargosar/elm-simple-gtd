@@ -27,4 +27,4 @@ type Msg
     | OnSetTodoGroupClicked TodoGroup Todo
     | OnTodoListMsg TodoListMsg
     | OnDomMsg DomMsg
-    | ChangeViewState ViewType
+    | ChangeView ViewType

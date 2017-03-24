@@ -22,7 +22,6 @@ import Maybe.Extra as Maybe
 import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
 import Function exposing ((>>>))
-import ViewState
 
 
 type alias UpdateReturn =
@@ -123,7 +122,7 @@ update msg =
             OnDomMsg msg ->
                 Return.andThen (DomUpdate.update msg >> Return.mapCmd OnDomMsg)
 
-            ChangeViewState viewState ->
+            ChangeView viewState ->
                 Return.map (Model.setViewState viewState)
 
 

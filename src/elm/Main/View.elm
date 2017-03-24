@@ -6,7 +6,7 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
-import Main.Types exposing (EditMode(EditNewTodoMode))
+import Main.Types exposing (EditMode(..), ViewType(..))
 import Main.View.AllTodoLists exposing (allTodoListByGroupView, binView, doneView)
 import Main.View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
@@ -27,7 +27,6 @@ import Polymer.Paper exposing (..)
 import Polymer.App as App
 import FunctionExtra exposing (..)
 import Todo.View
-import ViewState exposing (..)
 
 
 appView m =
@@ -66,13 +65,13 @@ appHeaderView m =
 appMainView m =
     div [ id "main-view" ]
         [ case getViewState m of
-            ViewState.AllByGroupView ->
+            AllByGroupView ->
                 allTodoListByGroupView m
 
-            ViewState.BinView ->
+            BinView ->
                 binView m
 
-            ViewState.DoneView ->
+            DoneView ->
                 doneView m
 
             _ ->

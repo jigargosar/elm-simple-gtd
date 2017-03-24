@@ -1,5 +1,6 @@
 module Main.Model exposing (..)
 
+import ActiveTask
 import Json.Encode as E
 import List.Extra as List
 import Main.Msg exposing (..)
@@ -15,6 +16,9 @@ import Toolkit.Helpers exposing (..)
 import Tuple2
 
 
+{-|
+    for external files
+-}
 type alias Model =
     Main.Types.Model
 
@@ -26,6 +30,7 @@ init now encodedTodoList =
         NotEditing
         defaultViewType
         (Random.seedFromTime now)
+        ActiveTask.init
 
 
 setViewState viewState m =
@@ -45,7 +50,6 @@ setNow now model =
 updateNow : (Model -> Time) -> ModelF
 updateNow updater model =
     setNow (updater model) model
-
 
 
 getViewState =

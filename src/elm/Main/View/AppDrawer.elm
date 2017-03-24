@@ -40,7 +40,7 @@ appDrawerView m =
               menu
                 [ stringProperty "selected" "0"
                 ]
-                ([ item [ onClick OnShowTodoList ] [ text "All" ]
+                ([ item [ onClick (ChangeViewState ViewState.AllGrouped) ] [ text "All" ]
                  , hr [] []
                  ]
                     ++ todoGroupsMenuItems m
@@ -54,11 +54,11 @@ appDrawerView m =
 
 
 binItemView m =
-    item [ onClick OnShowBin ] [ text "Bin" ]
+    item [ onClick (ChangeViewState ViewState.Bin) ] [ text "Bin" ]
 
 
 doneItemView m =
-    item [] [ text "Done" ]
+    item [ onClick (ChangeViewState ViewState.Done) ] [ text "Done" ]
 
 
 todoGroupsMenuItems =

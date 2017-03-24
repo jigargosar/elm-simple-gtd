@@ -79,6 +79,9 @@ getGroupedTodoLists =
 getBinTodoList =
     getTodoList >> List.filter Todo.binFilter
 
+getDoneTodoList =
+    getTodoList >> List.filter Todo.doneFilter
+
 
 getFirstInboxTodo =
     getTodoList >> Todo.getFirstInboxTodo

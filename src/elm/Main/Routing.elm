@@ -42,6 +42,9 @@ builder2messages builder =
         "lists" :: "bin" :: [] ->
             [ Msg.ChangeViewState ViewState.Bin ]
 
+        "lists" :: "done" :: [] ->
+            [ Msg.ChangeViewState ViewState.Done ]
+
         _ ->
             -- If nothing provided for this part of the URL, return empty list
             []

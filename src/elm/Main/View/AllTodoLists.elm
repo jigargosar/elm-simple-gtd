@@ -69,6 +69,11 @@ binView =
     apply2 ( createTodoListViewConfig, Model.getBinTodoList )
         >> uncurry todoListView
 
+binView : Model -> Html Msg
+binView =
+    apply2 ( createTodoListViewConfig, Model.getDoneTodoList )
+        >> uncurry todoListView
+
 
 keyedTodoListView vc ( listTitle, todoList ) =
     ( listTitle

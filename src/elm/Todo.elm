@@ -395,6 +395,10 @@ binFilter =
     toAllPassPredicate [ isDeleted ]
 
 
+doneFilter =
+    toAllPassPredicate [ isNotDeleted, isDone ]
+
+
 toAllPassPredicate predicateList =
     (applyList predicateList >> List.all identity)
 

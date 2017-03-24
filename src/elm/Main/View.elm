@@ -70,6 +70,8 @@ appMainView m =
 
             ViewState.Bin ->
                 binView m
+            ViewState.Done ->
+                binView m
 
             _ ->
                 allTodoListByGroupView m

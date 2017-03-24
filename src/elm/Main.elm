@@ -127,8 +127,34 @@ update msg =
             UpdateNow now ->
                 Return.map (Model.setNow now)
 
+
 onNewTodoMsg msg =
-    identity
+    let
+        _ =
+            case msg of
+                AddTodoClicked focusInputId ->
+                    activateEditNewTodoMode ""
+                        >> domFocus focusInputId
+
+                NewTodoTextChanged text ->
+                    activateEditNewTodoMode text
+
+                NewTodoBlur ->
+                    deactivateEditingMode
+
+                NewTodoKeyUp text key ->
+                    case key of
+                        Enter ->
+                            addNewTodoAndContinueAdding text
+
+                        Escape ->
+                            deactivateEditingMode
+
+                        _ ->
+                            identity
+    in
+        identity
+
 
 onTodoListMsg =
     OnTodoMsg >> update >> Return.andThen

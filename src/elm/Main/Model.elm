@@ -54,7 +54,7 @@ getGroupedTodoLists =
 
 
 getBinTodoList =
-    getTodoList >> List.filter Todo.binFilter
+    getTodoList >> List.filter Todo.binFilter >> List.sortBy (Todo.getCreatedAt >> negate)
 
 
 getDoneTodoList =

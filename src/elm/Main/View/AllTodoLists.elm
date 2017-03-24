@@ -77,6 +77,10 @@ doneView =
         >> uncurry todoListView
 
 
+todoListView vc todoList =
+    Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
+
+
 keyedTodoListView vc ( listTitle, todoList ) =
     ( listTitle
     , div [ class "todo-list-container" ]
@@ -89,10 +93,6 @@ keyedTodoListView vc ( listTitle, todoList ) =
         , Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
         ]
     )
-
-
-todoListView vc todoList =
-    Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
 
 
 todoView : ViewConfig msg -> Todo -> ( TodoId, Html msg )

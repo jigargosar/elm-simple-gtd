@@ -67,27 +67,6 @@ update msg =
             OnEditTodoMsg msg ->
                 onEditTodoMsg msg
 
-            OnEditTodoClicked focusInputId todo ->
-                Return.map (Model.activateEditTodoMode todo)
-                    >> domFocus focusInputId
-
-            OnEditTodoTextChanged text ->
-                Return.map (Model.updateEditTodoText text)
-
-            OnEditTodoBlur todo ->
-                setTodoTextAndDeactivateEditing todo
-
-            OnEditTodoKeyUp todo key ->
-                case key of
-                    Enter ->
-                        setTodoTextAndDeactivateEditing todo
-
-                    Escape ->
-                        deactivateEditingMode
-
-                    _ ->
-                        identity
-
             OnSetTodoGroupClicked todoGroup todo ->
                 onTodoListMsg (TodoList.setGroup todoGroup (Todo.getId todo))
 

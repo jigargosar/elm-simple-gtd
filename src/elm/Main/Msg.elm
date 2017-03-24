@@ -47,12 +47,6 @@ onEditTodo =
 type Msg
     = NoOp
     | OnNewTodoMsg NewTodoMsg
-      --
-    | OnEditTodoClicked Dom.Id Todo
-    | OnEditTodoTextChanged String
-    | OnEditTodoBlur Todo
-    | OnEditTodoKeyUp Todo Key
-      --
     | OnEditTodoMsg EditTodoMsg
       --
     | OnDeleteTodoClicked TodoId

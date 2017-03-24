@@ -25,7 +25,7 @@ onNewTodo =
     { add = AddTodoClicked >> OnNewTodoMsg
     , input = NewTodoTextChanged >> OnNewTodoMsg
     , blur = NewTodoBlur |> OnNewTodoMsg
-    , keyUp = NewTodoKeyUp >>> OnNewTodoMsg
+    , keyUp = (\a b -> OnNewTodoMsg (NewTodoKeyUp a b))
     }
 
 

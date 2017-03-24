@@ -26,7 +26,7 @@ import Html
 
 
 type alias UpdateReturn =
-    Return Msg Model
+    Return MsgLow Model
 
 
 type alias UpdateReturnF =
@@ -37,7 +37,7 @@ type alias Flags =
     { now : Time, encodedTodoList : EncodedTodoList }
 
 
-main : RouteUrlProgram Flags Model MasterMsg
+main : RouteUrlProgram Flags Model Msg
 main =
     RouteUrl.programWithFlags
         { delta2url = Main.Routing.delta2hash
@@ -49,7 +49,7 @@ main =
         }
 
 
-masterUpdate : MasterMsg -> Model -> ( Model, Cmd MasterMsg )
+masterUpdate : Msg -> Model -> ( Model, Cmd Msg )
 masterUpdate msg =
     Return.singleton
         >> case msg of
@@ -73,7 +73,7 @@ init { now, encodedTodoList } =
     Model.init now encodedTodoList |> Return.singleton
 
 
-update : Msg -> Model -> UpdateReturn
+update : MsgLow -> Model -> UpdateReturn
 update msg =
     Return.singleton
         >> case msg of

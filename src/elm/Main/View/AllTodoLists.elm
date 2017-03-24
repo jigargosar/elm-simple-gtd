@@ -44,7 +44,7 @@ type alias ViewConfig msg =
     }
 
 
-createTodoListViewConfig : Model -> ViewConfig Msg
+createTodoListViewConfig : Model -> ViewConfig MsgLow
 createTodoListViewConfig model =
     { onDeleteTodoClicked = OnDeleteTodoClicked
     , onEditTodoClicked = OnEditTodoClicked
@@ -59,20 +59,20 @@ createTodoListViewConfig model =
     }
 
 
-allTodoListByGroupView : Model -> Html Msg
+allTodoListByGroupView : Model -> Html MsgLow
 allTodoListByGroupView =
     apply2 ( createTodoListViewConfig >> keyedTodoListView, getTodoGroupsViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
 
 
-todoListView : Model -> Html Msg
+todoListView : Model -> Html MsgLow
 todoListView =
     apply2 ( createTodoListViewConfig, Model.getFilteredTodoList )
         >> (\( vc, todoList ) -> Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc))
 
 
-keyedTodoListView : ViewConfig Msg -> TodoGroupViewModel -> Maybe ( String, Html Msg )
+keyedTodoListView : ViewConfig MsgLow -> TodoGroupViewModel -> Maybe ( String, Html MsgLow )
 keyedTodoListView vc vm =
     if vm.isEmpty then
         Nothing

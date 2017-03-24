@@ -12,16 +12,16 @@ import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
 
 
-type MasterMsg
+type Msg
     = HighFrequencyMsg MsgHigh
-    | LowFrequencyMsg Msg
+    | LowFrequencyMsg MsgLow
 
 
 type MsgHigh
     = UpdateNow Time
 
 
-type Msg
+type MsgLow
     = NoOp
     | OnAddTodoClicked Dom.Id
     | OnDeleteTodoClicked TodoId

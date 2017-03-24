@@ -112,13 +112,13 @@ update msg =
             OnTodoDoneClicked todoId ->
                 onTodoListMsg (TodoList.toggleDone todoId)
 
-            OnTodoListMsg msg ->
-                Return.andThen (TodoList.update msg >> Return.mapCmd OnTodoListMsg)
+            OnTodoMsg msg ->
+                Return.andThen (TodoList.update msg >> Return.mapCmd OnTodoMsg)
 
             OnDomMsg msg ->
                 Return.andThen (DomUpdate.update msg >> Return.mapCmd OnDomMsg)
 
-            ChangeView viewState ->
+            OnChangeViewMsg viewState ->
                 Return.map (Model.setViewState viewState)
 
             UpdateNow now ->
@@ -126,7 +126,7 @@ update msg =
 
 
 onTodoListMsg =
-    OnTodoListMsg >> update >> Return.andThen
+    OnTodoMsg >> update >> Return.andThen
 
 
 onDomMsg =

@@ -9,7 +9,7 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
 
-type ViewType
+type ChangeViewMsg
     = AllByGroupView
     | GroupView TodoGroup
     | DoneView
@@ -30,7 +30,7 @@ type alias Model =
     { now : Time
     , todoList : TodoList
     , editMode : EditMode
-    , viewState : ViewType
+    , viewState : ChangeViewMsg
     , seed : Seed
     , activeTask : ActiveTask
     }

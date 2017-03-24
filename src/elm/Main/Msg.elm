@@ -5,8 +5,8 @@ import DomTypes exposing (DomMsg)
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
-import Main.TodoListMsg exposing (TodoListMsg)
-import Main.Types exposing (ViewType)
+import Main.TodoListMsg exposing (TodoMsg)
+import Main.Types exposing (ChangeViewMsg)
 import Navigation exposing (Location)
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
@@ -29,7 +29,7 @@ type Msg
     | OnTodoDoneClicked TodoId
     | OnSetTodoGroupClicked TodoGroup Todo
       --
-    | OnTodoListMsg TodoListMsg
+    | OnTodoMsg TodoMsg
     | OnDomMsg DomMsg
-    | ChangeView ViewType
+    | OnChangeViewMsg ChangeViewMsg
     | UpdateNow Time

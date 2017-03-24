@@ -26,22 +26,22 @@ toggleDelete =
     UpdateTodo ToggleDelete
 
 
-setGroup : TodoGroup -> TodoId -> TodoListMsg
+setGroup : TodoGroup -> TodoId -> TodoMsg
 setGroup =
     SetGroup >> UpdateTodo
 
 
-setText : String -> TodoId -> TodoListMsg
+setText : String -> TodoId -> TodoMsg
 setText =
     SetText >> UpdateTodo
 
 
-addNewTodo : String -> TodoListMsg
+addNewTodo : String -> TodoMsg
 addNewTodo =
     AddNewTodo
 
 
-update : TodoListMsg -> Model -> ( Model, Cmd TodoListMsg )
+update : TodoMsg -> Model -> ( Model, Cmd TodoMsg )
 update msg =
     Return.singleton
         >> case msg of
@@ -86,7 +86,7 @@ updateAndPersistMaybeTodo updater =
         (updater >> Tuple2.mapSecond persistMaybeTodoCmd)
 
 
-withNow : (Time -> TodoListMsg) -> ReturnF TodoListMsg Model
+withNow : (Time -> TodoMsg) -> ReturnF TodoMsg Model
 withNow msg =
     Task.perform msg Time.now |> Return.command
 

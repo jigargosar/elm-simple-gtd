@@ -14,7 +14,7 @@ type TodoUpdateActionType
     | ToggleDelete
 
 
-type TodoListMsg
+type TodoMsg
     = UpdateTodoAt TodoUpdateActionType TodoId Time
     | UpdateTodo TodoUpdateActionType TodoId
     | AddNewTodo String

@@ -6,7 +6,7 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
-import Main.Types exposing (ViewType(..))
+import Main.Types exposing (ChangeViewMsg(..))
 import Main.View.AllTodoLists exposing (allTodoListByGroupView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -41,7 +41,7 @@ appDrawerView m =
               menu
                 [ stringProperty "selected" "0"
                 ]
-                ([ item [ onClick (ChangeView AllByGroupView) ] [ text "All" ]
+                ([ item [ onClick (OnChangeViewMsg AllByGroupView) ] [ text "All" ]
                  , hr [] []
                  ]
                     ++ todoGroupsMenuItems m
@@ -55,11 +55,11 @@ appDrawerView m =
 
 
 binItemView m =
-    item [ onClick (ChangeView BinView) ] [ text "Bin" ]
+    item [ onClick (OnChangeViewMsg BinView) ] [ text "Bin" ]
 
 
 doneItemView m =
-    item [ onClick (ChangeView DoneView) ] [ text "Done" ]
+    item [ onClick (OnChangeViewMsg DoneView) ] [ text "Done" ]
 
 
 todoGroupsMenuItems =

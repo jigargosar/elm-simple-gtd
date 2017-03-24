@@ -9,7 +9,7 @@ import FunctionExtra exposing (..)
 
 
 type alias TodoGroupViewModel =
-    { group : TodoGroup, displayName : String, todoList : TodoList }
+    { group : TodoGroup, name : String, todoList : TodoList, count : Int, isEmpty : Bool }
 
 
 getTodoGroupsViewModel : TodoList -> List TodoGroupViewModel
@@ -29,4 +29,10 @@ toViewModel dict =
         , Todo.groupToName
         , (toString >> Dict.get # dict >> Maybe.withDefault [])
         )
-        >> uncurry3 TodoGroupViewModel
+        >> toViewModelHelp
+
+
+toViewModelHelp ( group, name, list ) =
+    list
+        |> apply3 ( identity, List.length, List.isEmpty )
+        >> uncurry3 (TodoGroupViewModel group name)

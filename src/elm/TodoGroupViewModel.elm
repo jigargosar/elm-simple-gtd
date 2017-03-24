@@ -20,8 +20,8 @@ groupedTodoLists__ =
     List.filter Todo.isNotDeleted
         >> Dict.groupBy (Todo.getListType >> toString)
         >> (\dict ->
-                Todo.getTodoGroups
-                    .|> (\listType ->
-                            ( Todo.todoGroupToName listType, Dict.get (toString listType) dict ?= [] )
+                Todo.getAllTodoGroups
+                    .|> (\group ->
+                            ( Todo.todoGroupToName group, Dict.get (toString group) dict ?= [] )
                         )
            )

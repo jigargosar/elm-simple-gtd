@@ -117,7 +117,7 @@ optionsIconButton vc todo =
             , attribute "attr-for-selected" "list-type"
             , attribute "selected" (Todo.getListTypeName todo)
             ]
-            (Todo.getTodoGroups
+            (Todo.getAllTodoGroups
                 .|> (\listType ->
                         item
                             [ attribute "list-type" (Todo.todoGroupToName listType)

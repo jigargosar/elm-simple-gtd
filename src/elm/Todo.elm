@@ -53,7 +53,7 @@ type TodoGroup
     | Reference
 
 
-getTodoGroups =
+getAllTodoGroups =
     [ Calender
     , Inbox
     , WaitingFor
@@ -175,7 +175,7 @@ decoder =
 
 
 listTypeEncodings =
-    getTodoGroups
+    getAllTodoGroups
         |> Dict.fromListBy toString
 
 
@@ -411,7 +411,7 @@ groupedTodoLists__ =
     List.filter isNotDeleted
         >> Dict.groupBy (getListType >> toString)
         >> (\dict ->
-                getTodoGroups
+                getAllTodoGroups
                     .|> (\listType ->
                             ( todoGroupToName listType, Dict.get (toString listType) dict ?= [] )
                         )
@@ -422,11 +422,8 @@ groupedTodoLists =
     List.filter isNotDeleted
         >> Dict.groupBy (getListType >> toString)
         >> (\dict ->
-                getTodoGroups
+                getAllTodoGroups
                     .|> (\listType ->
                             ( listType, Dict.get (toString listType) dict ?= [] )
                         )
            )
-
-
-

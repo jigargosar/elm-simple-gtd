@@ -24,6 +24,9 @@ getPathFromModel model =
         ViewState.Bin ->
             [ "lists", "bin" ]
 
+        ViewState.Done ->
+            [ "lists", "done" ]
+
         _ ->
             []
 

@@ -70,19 +70,16 @@ listTypeMenuItem vm =
     let
         ltName =
             vm.name
-
-        todoList =
-            vm.todoList
     in
         item [ class "has-hover-items" ]
             ([ span [ id ltName ] [ text (ltName) ]
              , itemBody [] []
              , badge
                 [ classList
-                    [ "hidden" => (List.length todoList == 0)
+                    [ "hidden" => (vm.isEmpty)
                     , "drawer-list-type-badge" => True
                     ]
-                , intProperty "label" (List.length todoList)
+                , intProperty "label" (vm.count)
                 , attribute "for" ltName
                 ]
                 []

@@ -125,15 +125,6 @@ update msg =
                 Return.map (Model.setNow now)
 
 
-
---            _ ->
---                let
---                    _ =
---                        Debug.log "WARN: msg ignored" (msg)
---                in
---                    identity
-
-
 onTodoListMsg =
     OnTodoListMsg >> update >> Return.andThen
 

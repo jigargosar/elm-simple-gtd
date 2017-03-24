@@ -6,7 +6,7 @@ import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
 import Main.TodoListMsg exposing (TodoMsg)
-import Main.Types exposing (ViewType)
+import Main.Types exposing (MainViewType)
 import Navigation exposing (Location)
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
@@ -31,5 +31,5 @@ type Msg
       --
     | OnTodoMsg TodoMsg
     | OnDomMsg DomMsg
-    | SetView ViewType
+    | SetMainViewType MainViewType
     | UpdateNow Time

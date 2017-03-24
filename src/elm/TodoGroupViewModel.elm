@@ -1,6 +1,6 @@
 module TodoGroupViewModel exposing (..)
 
-import Dict
+import Dict exposing (Dict)
 import Dict.Extra as Dict
 import Todo exposing (TodoGroup, TodoList)
 import Toolkit.Helpers exposing (..)
@@ -12,6 +12,7 @@ type alias TodoGroupViewModel =
     { group : TodoGroup, displayName : String, todoList : TodoList }
 
 
+getTodoGroupsViewModel : TodoList -> List TodoGroupViewModel
 getTodoGroupsViewModel =
     List.filter Todo.isNotDeleted
         >> Dict.groupBy (Todo.getGroup >> toString)
@@ -21,9 +22,11 @@ getTodoGroupsViewModel =
            )
 
 
+toViewModel : Dict String TodoList -> TodoGroup -> TodoGroupViewModel
 toViewModel dict =
     apply3
         ( identity
         , Todo.groupToName
-        , toString >> Dict.get # dict ?= []
+        , (toString >> Dict.get # dict >> Maybe.withDefault [])
         )
+        >> uncurry3 TodoGroupViewModel

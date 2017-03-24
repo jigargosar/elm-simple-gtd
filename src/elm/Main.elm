@@ -129,31 +129,27 @@ update msg =
 
 
 onNewTodoMsg msg =
-    let
-        _ =
-            case msg of
-                AddTodoClicked focusInputId ->
-                    activateEditNewTodoMode ""
-                        >> domFocus focusInputId
+    case msg of
+        AddTodoClicked focusInputId ->
+            activateEditNewTodoMode ""
+                >> domFocus focusInputId
 
-                NewTodoTextChanged text ->
-                    activateEditNewTodoMode text
+        NewTodoTextChanged text ->
+            activateEditNewTodoMode text
 
-                NewTodoBlur ->
+        NewTodoBlur ->
+            deactivateEditingMode
+
+        NewTodoKeyUp text key ->
+            case key of
+                Enter ->
+                    addNewTodoAndContinueAdding text
+
+                Escape ->
                     deactivateEditingMode
 
-                NewTodoKeyUp text key ->
-                    case key of
-                        Enter ->
-                            addNewTodoAndContinueAdding text
-
-                        Escape ->
-                            deactivateEditingMode
-
-                        _ ->
-                            identity
-    in
-        identity
+                _ ->
+                    identity
 
 
 onTodoListMsg =

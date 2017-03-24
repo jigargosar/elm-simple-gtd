@@ -69,10 +69,10 @@ todoGroupsMenuItems =
 listTypeMenuItem vm =
     let
         badgeForId =
-            "id-for-badge" ++ vm.name
+            "id-for-badge-" ++ vm.name
     in
         item [ class "has-hover-items" ]
-            ([ span [ id badgeForId ] [ text (badgeForId) ]
+            ([ span [ id badgeForId ] [ text (vm.name) ]
              , itemBody [] []
              , badge
                 [ classList

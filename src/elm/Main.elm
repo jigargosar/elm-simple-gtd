@@ -104,7 +104,8 @@ onNewTodoMsg msg =
         NewTodoKeyUp text key ->
             case key of
                 Enter ->
-                    addNewTodoAndContinueAdding text
+                    onTodoListMsg (TodoList.addNewTodo text)
+                        >> activateEditNewTodoMode ""
 
                 Escape ->
                     deactivateEditingMode
@@ -148,11 +149,6 @@ onDomMsg =
 domFocus : DomId -> ReturnF
 domFocus =
     DomTypes.focus >> onDomMsg
-
-
-addNewTodoAndContinueAdding text =
-    onTodoListMsg (TodoList.addNewTodo text)
-        >> activateEditNewTodoMode ""
 
 
 activateEditNewTodoMode text =

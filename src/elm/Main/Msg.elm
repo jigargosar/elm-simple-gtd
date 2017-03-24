@@ -13,15 +13,6 @@ import Todo exposing (Todo, TodoGroup, TodoId)
 
 
 type Msg
-    = HighFrequencyMsg MsgHigh
-    | LowFrequencyMsg MsgLow
-
-
-type MsgHigh
-    = UpdateNow Time
-
-
-type MsgLow
     = NoOp
     | OnAddTodoClicked Dom.Id
     | OnDeleteTodoClicked TodoId
@@ -37,3 +28,4 @@ type MsgLow
     | OnTodoListMsg TodoListMsg
     | OnDomMsg DomMsg
     | ChangeView ViewType
+    | UpdateNow Time

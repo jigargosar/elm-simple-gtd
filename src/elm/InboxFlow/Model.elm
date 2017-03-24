@@ -3,7 +3,7 @@ module InboxFlow.Model exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Flow
-import Main.Msg as Msg exposing (MsgLow)
+import Main.Msg as Msg exposing (Msg)
 import Todo exposing (Todo, TodoList)
 
 
@@ -37,7 +37,7 @@ import Todo exposing (Todo, TodoList)
 
 
 type alias FlowModel =
-    Flow.Model MsgLow
+    Flow.Model Msg
 
 
 type alias ModelMapper =

@@ -1,7 +1,7 @@
 module Main.Routing exposing (..)
 
 import Main.Model as Model exposing (Model)
-import Main.Msg as Msg exposing (MsgLow)
+import Main.Msg as Msg exposing (Msg)
 import Main.Types exposing (ViewType(..))
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
@@ -36,7 +36,7 @@ delta2hash =
     delta2builder >>> Maybe.map toHashChange
 
 
-builder2messages : Builder -> List MsgLow
+builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "all" :: [] ->
@@ -53,6 +53,6 @@ builder2messages builder =
             []
 
 
-hash2messages : Location -> List MsgLow
+hash2messages : Location -> List Msg
 hash2messages location =
     builder2messages (fromHash location.href)

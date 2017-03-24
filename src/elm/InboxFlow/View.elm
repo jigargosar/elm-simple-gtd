@@ -9,7 +9,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import InboxFlow.Model as Model exposing (Model)
-import Main.Msg as Msg exposing (MsgLow)
+import Main.Msg as Msg exposing (Msg)
 import FunctionExtra exposing (..)
 import Todo exposing (Todo)
 import Function exposing ((>>>))
@@ -23,7 +23,7 @@ type alias TodoViewModel =
 type alias ViewModel =
     { maybeTodo : Maybe TodoViewModel
     , question : String
-    , flowActions : List ( String, MsgLow )
+    , flowActions : List ( String, Msg )
     }
 
 
@@ -46,7 +46,7 @@ toViewModel maybeTodo model =
 --
 
 
-flowView : ViewModel -> Html MsgLow
+flowView : ViewModel -> Html Msg
 flowView vm =
     material [ id "in-basket-flow-container" ]
         [ vm.maybeTodo ?|> processTodoView # vm ?= processingCompleteView
@@ -57,7 +57,7 @@ processingCompleteView =
     h1 [] [ text "Hurray! All stuff is processed ;)" ]
 
 
-processTodoView : TodoViewModel -> ViewModel -> Html MsgLow
+processTodoView : TodoViewModel -> ViewModel -> Html Msg
 processTodoView todoVM vm =
     div []
         [ questionView vm
@@ -74,7 +74,7 @@ questionView vm =
     h1 [] [ vm.question |> text ]
 
 
-actionBar : ViewModel -> Html MsgLow
+actionBar : ViewModel -> Html Msg
 actionBar vm =
     let
         buttonView ( buttonText, onClickMsg ) =

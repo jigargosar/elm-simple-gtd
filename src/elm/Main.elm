@@ -25,12 +25,12 @@ import Function exposing ((>>>))
 import Html
 
 
-type alias UpdateReturn =
-    Return MsgLow Model
+type alias Return =
+    Return.Return Msg Model
 
 
-type alias UpdateReturnF =
-    UpdateReturn -> UpdateReturn
+type alias ReturnF =
+    Return -> Return
 
 
 type alias Flags =
@@ -41,39 +41,20 @@ main : RouteUrlProgram Flags Model Msg
 main =
     RouteUrl.programWithFlags
         { delta2url = Main.Routing.delta2hash
-        , location2messages = Function.map (List.map LowFrequencyMsg) Main.Routing.hash2messages
-        , init = Function.map (Return.mapCmd LowFrequencyMsg) init
-        , update = masterUpdate
-        , view = Function.map (Html.map LowFrequencyMsg) appView
-        , subscriptions = \m -> Sub.batch [ Time.every Time.second (UpdateNow >> HighFrequencyMsg) ]
+        , location2messages = Main.Routing.hash2messages
+        , init = init
+        , update = update
+        , view = appView
+        , subscriptions = \m -> Sub.batch [ Time.every Time.second (UpdateNow) ]
         }
 
 
-masterUpdate : Msg -> Model -> ( Model, Cmd Msg )
-masterUpdate msg =
-    Return.singleton
-        >> case msg of
-            HighFrequencyMsg msg ->
-                Return.andThen (updateHighMsg msg >> Return.mapCmd HighFrequencyMsg)
-
-            LowFrequencyMsg msg ->
-                Return.andThen (update msg >> Return.mapCmd LowFrequencyMsg)
-
-
-updateHighMsg : MsgHigh -> Model -> Return MsgHigh Model
-updateHighMsg msg =
-    Return.singleton
-        >> case msg of
-            UpdateNow now ->
-                Return.map (Model.setNow now)
-
-
-init : Flags -> UpdateReturn
+init : Flags -> Return
 init { now, encodedTodoList } =
     Model.init now encodedTodoList |> Return.singleton
 
 
-update : MsgLow -> Model -> UpdateReturn
+update : Msg -> Model -> Return
 update msg =
     Return.singleton
         >> case msg of
@@ -140,6 +121,9 @@ update msg =
             ChangeView viewState ->
                 Return.map (Model.setViewState viewState)
 
+            UpdateNow now ->
+                Return.map (Model.setNow now)
+
 
 
 --            _ ->
@@ -158,7 +142,7 @@ onDomMsg =
     OnDomMsg >> update >> Return.andThen
 
 
-domFocus : DomId -> UpdateReturnF
+domFocus : DomId -> ReturnF
 domFocus =
     DomTypes.focus >> onDomMsg
 

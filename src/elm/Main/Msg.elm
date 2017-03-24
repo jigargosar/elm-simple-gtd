@@ -19,14 +19,16 @@ type Msg
     | OnNewTodoBlur
     | OnNewTodoKeyUp String Key
       --
-    | OnDeleteTodoClicked TodoId
-    | OnEditTodoClicked Dom.Id Todo
       --
+    | OnEditTodoClicked Dom.Id Todo
     | OnEditTodoTextChanged String
     | OnEditTodoBlur Todo
-    | OnTodoDoneClicked TodoId
     | OnEditTodoKeyUp Todo Key
+      --
+    | OnDeleteTodoClicked TodoId
+    | OnTodoDoneClicked TodoId
     | OnSetTodoGroupClicked TodoGroup Todo
+      --
     | OnTodoListMsg TodoListMsg
     | OnDomMsg DomMsg
     | ChangeView ViewType

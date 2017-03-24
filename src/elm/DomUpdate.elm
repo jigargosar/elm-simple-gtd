@@ -2,13 +2,13 @@ module DomUpdate exposing (..)
 
 import Dom
 import DomTypes exposing (..)
-import Main.Model exposing (Model)
 import Return exposing (Return)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Task
 import Function exposing ((>>>))
+import Main.Types exposing (Model)
 
 
 --focusCmd : Dom.Id -> (DomResult -> msg) -> Cmd msg

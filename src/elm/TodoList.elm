@@ -1,7 +1,8 @@
 module TodoList exposing (..)
 
 import List.Extra as List
-import Main.Model exposing (Model, ModelMapper)
+import Main.Model exposing (Model)
+import Main.Types exposing (ModelF)
 import Maybe.Extra
 import Random.Pcg as Random
 import Return exposing (Return, ReturnF)
@@ -70,12 +71,12 @@ addTodo todo =
     updateTodoList (Main.Model.getTodoList >> (::) todo)
 
 
-setTodoList : TodoList -> ModelMapper
+setTodoList : TodoList -> ModelF
 setTodoList todoList model =
     { model | todoList = todoList }
 
 
-updateTodoList : (Model -> TodoList) -> ModelMapper
+updateTodoList : (Model -> TodoList) -> ModelF
 updateTodoList updater model =
     setTodoList (updater model) model
 

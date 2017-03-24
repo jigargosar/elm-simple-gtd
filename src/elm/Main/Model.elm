@@ -3,6 +3,7 @@ module Main.Model exposing (..)
 import Json.Encode as E
 import List.Extra as List
 import Main.Msg exposing (..)
+import Main.Types exposing (EditMode(EditNewTodoMode, EditTodoMode, NotEditing), Model, ModelF)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
@@ -15,31 +16,8 @@ import Tuple2
 import ViewState exposing (ViewState, defaultViewState)
 
 
---type ViewState
---    = AllTodoListsViewState
---
---
---defaultViewState =
---    AllTodoListsViewState
-
-
-type EditMode
-    = EditNewTodoMode String
-    | EditTodoMode Todo
-    | NotEditing
-
-
 type alias Model =
-    { now : Time
-    , todoList : TodoList
-    , editMode : EditMode
-    , viewState : ViewState
-    , seed : Seed
-    }
-
-
-type alias ModelMapper =
-    Model -> Model
+    Main.Types.Model
 
 
 init : Time -> EncodedTodoList -> Model
@@ -79,6 +57,7 @@ getGroupedTodoLists =
 getBinTodoList =
     getTodoList >> List.filter Todo.binFilter
 
+
 getDoneTodoList =
     getTodoList >> List.filter Todo.doneFilter
 
@@ -91,7 +70,7 @@ mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
 
-setEditModeTo : EditMode -> ModelMapper
+setEditModeTo : EditMode -> ModelF
 setEditModeTo editMode m =
     { m | editMode = editMode }
 
@@ -101,17 +80,17 @@ getEditMode =
     (.editMode)
 
 
-activateEditNewTodoMode : String -> ModelMapper
+activateEditNewTodoMode : String -> ModelF
 activateEditNewTodoMode text =
     setEditModeTo (EditNewTodoMode text)
 
 
-activateEditTodoMode : Todo -> ModelMapper
+activateEditTodoMode : Todo -> ModelF
 activateEditTodoMode todo =
     setEditModeTo (EditTodoMode todo)
 
 
-updateEditTodoText : String -> ModelMapper
+updateEditTodoText : String -> ModelF
 updateEditTodoText text m =
     case getEditMode m of
         EditTodoMode todo ->
@@ -126,12 +105,12 @@ getSeed =
     (.seed)
 
 
-setSeed : Seed -> ModelMapper
+setSeed : Seed -> ModelF
 setSeed seed model =
     { model | seed = seed }
 
 
-updateSeed : (Model -> Seed) -> ModelMapper
+updateSeed : (Model -> Seed) -> ModelF
 updateSeed updater model =
     setSeed (updater model) model
 

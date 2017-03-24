@@ -5,6 +5,7 @@ import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
+import Main.Types exposing (EditMode(EditTodoMode))
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)

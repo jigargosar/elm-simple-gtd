@@ -3,7 +3,7 @@ module Main.Model exposing (..)
 import Json.Encode as E
 import List.Extra as List
 import Main.Msg exposing (..)
-import Main.Types exposing (EditMode(EditNewTodoMode, EditTodoMode, NotEditing), Model, ModelF)
+import Main.Types exposing (EditMode(EditNewTodoMode, EditTodoMode, NotEditing), Model, ModelF, defaultViewType)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
@@ -13,7 +13,6 @@ import Todo as Todo exposing (EncodedTodoList, TodoGroup, Todo, TodoId, TodoList
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-import ViewState exposing (ViewState, defaultViewState)
 
 
 type alias Model =
@@ -25,7 +24,7 @@ init now encodedTodoList =
     Model now
         (Todo.decodeTodoList encodedTodoList)
         NotEditing
-        defaultViewState
+        defaultViewType
         (Random.seedFromTime now)
 
 

@@ -2,11 +2,22 @@ module Main.Types exposing (..)
 
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
-import Todo exposing (Todo, TodoList)
+import Todo exposing (Todo, TodoGroup, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import ViewState exposing (ViewState)
+
+
+type ViewType
+    = AllByGroupView
+    | GroupView TodoGroup
+    | DoneView
+    | BinView
+
+
+defaultViewType =
+    AllByGroupView
+
 
 type EditMode
     = EditNewTodoMode String
@@ -18,7 +29,7 @@ type alias Model =
     { now : Time
     , todoList : TodoList
     , editMode : EditMode
-    , viewState : ViewState
+    , viewState : ViewType
     , seed : Seed
     }
 

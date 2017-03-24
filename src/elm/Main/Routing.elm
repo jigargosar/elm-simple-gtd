@@ -2,11 +2,10 @@ module Main.Routing exposing (..)
 
 import Main.Model as Model exposing (Model)
 import Main.Msg as Msg exposing (Msg)
+import Main.Types exposing (ViewType(..))
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
-import Function exposing ((>>>), (<<<))
 import RouteUrl exposing (UrlChange)
-import ViewState exposing (..)
 
 
 delta2builder : Model -> Model -> Maybe Builder
@@ -18,13 +17,13 @@ delta2builder previous current =
 
 getPathFromModel model =
     case Model.getViewState model of
-        ViewState.AllGrouped ->
+        AllByGroupView ->
             [ "lists", "all" ]
 
-        ViewState.Bin ->
+        BinView ->
             [ "lists", "bin" ]
 
-        ViewState.Done ->
+        DoneView ->
             [ "lists", "done" ]
 
         _ ->
@@ -40,13 +39,13 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "all" :: [] ->
-            [ Msg.ChangeViewState ViewState.AllGrouped ]
+            [ Msg.ChangeViewState AllByGroupView ]
 
         "lists" :: "bin" :: [] ->
-            [ Msg.ChangeViewState ViewState.Bin ]
+            [ Msg.ChangeViewState BinView ]
 
         "lists" :: "done" :: [] ->
-            [ Msg.ChangeViewState ViewState.Done ]
+            [ Msg.ChangeViewState DoneView ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

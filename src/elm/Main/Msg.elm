@@ -51,7 +51,7 @@ type Msg
       --
     | OnDeleteTodoClicked TodoId
     | OnTodoDoneClicked TodoId
-    | OnSetTodoGroupClicked TodoGroup Todo
+    | OnSetTodoGroupClicked TodoGroup TodoId
       --
     | OnTodoMsg TodoMsg
     | OnDomMsg DomMsg

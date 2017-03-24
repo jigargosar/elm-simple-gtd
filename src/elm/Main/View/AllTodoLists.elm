@@ -37,7 +37,7 @@ type alias ViewConfig msg =
     , onEditTodoBlur : Todo -> msg
     , onEditTodoKeyUp : Todo -> Key -> msg
     , noOp : msg
-    , onTodoMoveToClicked : TodoGroup -> Todo -> msg
+    , onTodoMoveToClicked : TodoGroup -> TodoId -> msg
     , now : Time
     , editMode : EditMode
     , onTodoDoneClicked : TodoId -> msg

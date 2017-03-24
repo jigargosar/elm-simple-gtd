@@ -67,8 +67,8 @@ update msg =
             OnEditTodoMsg msg ->
                 onEditTodoMsg msg
 
-            OnSetTodoGroupClicked todoGroup todo ->
-                onTodoListMsg (TodoList.setGroup todoGroup (Todo.getId todo))
+            OnSetTodoGroupClicked todoGroup todoId ->
+                onTodoListMsg (TodoList.setGroup todoGroup todoId)
 
             OnDeleteTodoClicked todoId ->
                 onTodoListMsg (TodoList.toggleDelete todoId)

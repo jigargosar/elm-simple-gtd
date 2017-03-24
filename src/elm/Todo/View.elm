@@ -127,7 +127,7 @@ optionsIconButton vc todo =
                 .|> (\listType ->
                         item
                             [ attribute "list-type" (Todo.groupToName listType)
-                            , onClickStopPropagation (vc.onTodoMoveToClicked listType todo)
+                            , onClickStopPropagation (vc.onTodoMoveToClicked listType (Todo.getId todo))
                             ]
                             [ text (Todo.groupToName listType) ]
                     )

@@ -18,6 +18,7 @@ type NewTodoMsg
     | NewTodoBlur
     | NewTodoKeyUp String Key
 
+onAddTodoClicked = AddTodoClicked >> OnNewTodoMsg
 
 type Msg
     = NoOp

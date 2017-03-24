@@ -104,6 +104,6 @@ addTodoFabView m =
     fab
         [ id "add-fab"
         , attribute "icon" "add"
-        , onClick (newTodoInputId |> AddTodoClicked >> OnNewTodoMsg)
+        , onClick (onAddTodoClicked newTodoInputId)
         ]
         []

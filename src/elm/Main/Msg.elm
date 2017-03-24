@@ -15,11 +15,13 @@ import Todo exposing (Todo, TodoGroup, TodoId)
 type Msg
     = NoOp
     | OnAddTodoClicked Dom.Id
-    | OnDeleteTodoClicked TodoId
-    | OnEditTodoClicked Dom.Id Todo
     | OnNewTodoTextChanged String
     | OnNewTodoBlur
     | OnNewTodoKeyUp String Key
+      --
+    | OnDeleteTodoClicked TodoId
+    | OnEditTodoClicked Dom.Id Todo
+      --
     | OnEditTodoTextChanged String
     | OnEditTodoBlur Todo
     | OnTodoDoneClicked TodoId

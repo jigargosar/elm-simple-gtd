@@ -45,7 +45,8 @@ defaultDeleted =
 
 
 type TodoGroup
-    = Inbox
+    = Session
+    | Inbox
     | SomeDayMayBe
     | WaitingFor
     | Project
@@ -55,7 +56,8 @@ type TodoGroup
 
 
 getAllTodoGroups =
-    [ Calender
+    [ Session
+    , Calender
     , Inbox
     , WaitingFor
     , NextAction
@@ -71,6 +73,9 @@ getListTypeName =
 
 groupToName todoGroup =
     case todoGroup of
+        Session ->
+            "Session"
+
         Inbox ->
             "Inbox"
 
@@ -415,6 +420,7 @@ binFilter =
 filterAllPass =
     toAllPassPredicate >> List.filter
 
+
 rejectAnyPass =
     toAnyPassPredicate >> List.filterNot
 
@@ -425,6 +431,7 @@ doneFilter =
 
 toAllPassPredicate predicateList =
     (applyList predicateList >> List.all identity)
+
 
 toAnyPassPredicate predicateList =
     (applyList predicateList >> List.any identity)

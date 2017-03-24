@@ -10,6 +10,7 @@ import Main.Types exposing (MainViewType)
 import Navigation exposing (Location)
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
+import FunctionExtra.Operators exposing (..)
 
 
 type NewTodoMsg
@@ -18,7 +19,22 @@ type NewTodoMsg
     | NewTodoBlur
     | NewTodoKeyUp String Key
 
-onAddTodoClicked = AddTodoClicked >> OnNewTodoMsg
+
+onAddTodoClicked =
+    AddTodoClicked >> OnNewTodoMsg
+
+
+onNewTodoTextChanged =
+    NewTodoTextChanged >> OnNewTodoMsg
+
+
+onNewTodoBlur =
+    NewTodoBlur |> OnNewTodoMsg
+
+
+onNewTodoKeyUp =
+    NewTodoKeyUp >>> OnNewTodoMsg
+
 
 type Msg
     = NoOp

@@ -11,7 +11,7 @@ type TodoUpdateActionType
     = ToggleDone
     | SetGroup TodoGroup
     | SetText String
-    | Delete
+    | ToggleDelete
 
 
 type TodoListMsg

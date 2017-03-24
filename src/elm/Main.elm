@@ -111,7 +111,7 @@ update msg =
                 onTodoListMsg (TodoList.setGroup todoGroup (Todo.getId todo))
 
             OnDeleteTodoClicked todoId ->
-                onTodoListMsg (TodoList.delete todoId)
+                onTodoListMsg (TodoList.toggleDelete todoId)
 
             OnTodoDoneClicked todoId ->
                 onTodoListMsg (TodoList.toggleDone todoId)

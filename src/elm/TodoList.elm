@@ -22,8 +22,8 @@ toggleDone =
     UpdateTodo ToggleDone
 
 
-delete =
-    UpdateTodo Delete
+toggleDelete =
+    UpdateTodo ToggleDelete
 
 
 setGroup : TodoGroup -> TodoId -> TodoListMsg
@@ -118,8 +118,8 @@ updateTodoAt action todoId now =
                 ToggleDone ->
                     Todo.toggleDone
 
-                Delete ->
-                    Todo.markDeleted
+                ToggleDelete ->
+                    Todo.toggleDelete
 
                 SetText text ->
                     Todo.setText text

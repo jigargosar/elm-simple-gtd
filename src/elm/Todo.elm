@@ -138,7 +138,7 @@ type alias Model =
     Todo
 
 
-type alias ModelMapper =
+type alias ModelF =
     Model -> Model
 
 
@@ -269,8 +269,19 @@ getRev =
     (.rev)
 
 
+isDeleted : Model -> Bool
 isDeleted =
     (.deleted)
+
+
+setDeleted : Bool -> ModelF
+setDeleted deleted model =
+    { model | deleted = deleted }
+
+
+updateDeleted : (Model -> Bool) -> ModelF
+updateDeleted updater model =
+    setDeleted (updater model) model
 
 
 setText text todo =
@@ -282,24 +293,29 @@ isDone =
     (.done)
 
 
-setDone : Bool -> ModelMapper
+setDone : Bool -> ModelF
 setDone done model =
     { model | done = done }
 
 
-markDone : ModelMapper
+markDone : ModelF
 markDone =
     setDone True
 
 
-updateDone : (Model -> Bool) -> ModelMapper
+updateDone : (Model -> Bool) -> ModelF
 updateDone updater model =
     setDone (updater model) model
 
 
-toggleDone : ModelMapper
+toggleDone : ModelF
 toggleDone =
     updateDone (isDone >> not)
+
+
+toggleDelete : ModelF
+toggleDelete =
+    updateDeleted (isDeleted >> not)
 
 
 getCreatedAt : Model -> Time
@@ -307,12 +323,12 @@ getCreatedAt =
     (.createdAt)
 
 
-setCreatedAt : Time -> ModelMapper
+setCreatedAt : Time -> ModelF
 setCreatedAt createdAt model =
     { model | createdAt = createdAt }
 
 
-updateCreatedAt : (Model -> Time) -> ModelMapper
+updateCreatedAt : (Model -> Time) -> ModelF
 updateCreatedAt updater model =
     setCreatedAt (updater model) model
 
@@ -322,12 +338,12 @@ getModifiedAt =
     (.modifiedAt)
 
 
-setModifiedAt : Time -> ModelMapper
+setModifiedAt : Time -> ModelF
 setModifiedAt modifiedAt model =
     { model | modifiedAt = modifiedAt }
 
 
-updateModifiedAt : (Model -> Time) -> ModelMapper
+updateModifiedAt : (Model -> Time) -> ModelF
 updateModifiedAt updater model =
     setModifiedAt (updater model) model
 
@@ -341,17 +357,17 @@ getGroup =
     (.listType)
 
 
-setListType : TodoGroup -> ModelMapper
+setListType : TodoGroup -> ModelF
 setListType listType model =
     { model | listType = listType }
 
 
-updateListType : (Model -> TodoGroup) -> ModelMapper
+updateListType : (Model -> TodoGroup) -> ModelF
 updateListType updater model =
     setListType (updater model) model
 
 
-markDeleted : ModelMapper
+markDeleted : ModelF
 markDeleted todo =
     { todo | deleted = True }
 

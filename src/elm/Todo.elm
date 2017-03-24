@@ -433,5 +433,3 @@ getTodoGroupsViewModel =
     identity
 
 
-type alias TodoGroupViewModel =
-    { group : TodoGroup, displayName : String, todoList : TodoList }

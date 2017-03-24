@@ -65,23 +65,8 @@ allTodoListByGroupView =
         >> Keyed.node "div" []
 
 
-binView : Model -> Html Msg
-binView =
-    apply2 ( createTodoListViewConfig, Model.getBinTodoList )
-        >> uncurry todoListView
-
-
-doneView : Model -> Html Msg
-doneView =
-    apply2 ( createTodoListViewConfig, Model.getDoneTodoList )
-        >> uncurry todoListView
-
-
-todoListView vc todoList =
-    Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
-
-
-todoListView2 =
+todoListView : Model -> Html Msg
+todoListView =
     apply2 ( createTodoListViewConfig, Model.getFilteredTodoList )
     >> (\ (vc, todoList) -> Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc))
 

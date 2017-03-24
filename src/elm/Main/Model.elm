@@ -53,14 +53,6 @@ getGroupedTodoLists =
     getTodoList >> Todo.groupedTodoLists
 
 
-getBinTodoList =
-    getTodoList >> List.filter Todo.binFilter
-
-
-getDoneTodoList =
-    getTodoList >> List.filter Todo.doneFilter
-
-
 getFilteredTodoList =
     apply2 ( getCurrentTodoListFilter, getTodoList )
         >> uncurry List.filter

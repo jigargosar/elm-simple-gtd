@@ -7,7 +7,7 @@ import Html.Attributes exposing (attribute, autofocus, class, classList, id, sty
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Main.Types exposing (EditMode(..), ViewType(..))
-import Main.View.AllTodoLists exposing (allTodoListByGroupView, binView, doneView)
+import Main.View.AllTodoLists exposing (..)
 import Main.View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -69,10 +69,10 @@ appMainView m =
                 allTodoListByGroupView m
 
             BinView ->
-                binView m
+                todoListView m
 
             DoneView ->
-                doneView m
+                todoListView m
 
             _ ->
                 allTodoListByGroupView m

@@ -22,6 +22,7 @@ import Maybe.Extra as Maybe
 import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
 import Function exposing ((>>>))
+import Html
 
 
 type alias UpdateReturn =
@@ -36,21 +37,27 @@ type alias Flags =
     { now : Time, encodedTodoList : EncodedTodoList }
 
 
-main : RouteUrlProgram Flags Model Msg
+main : RouteUrlProgram Flags Model MasterMsg
 main =
     RouteUrl.programWithFlags
         { delta2url = Main.Routing.delta2hash
-        , location2messages = Main.Routing.hash2messages
-        , init = init
-        , update = update
-        , view = appView
-        , subscriptions = subscriptions
+        , location2messages = Function.map (List.map LowFrequencyMsg) Main.Routing.hash2messages
+        , init = Function.map (Return.mapCmd LowFrequencyMsg) init
+        , update = masterUpdate
+        , view = Function.map (Html.map LowFrequencyMsg) appView
+        , subscriptions = \m -> Sub.batch []
         }
 
 
-subscriptions m =
-    Sub.batch
-        []
+masterUpdate : MasterMsg -> Model -> ( Model, Cmd MasterMsg )
+masterUpdate msg =
+    Return.singleton
+        >> case msg of
+            HighFrequencyMsg foo ->
+                identity
+
+            LowFrequencyMsg msg ->
+                Return.andThen (update msg >> Return.mapCmd LowFrequencyMsg)
 
 
 init : Flags -> UpdateReturn

@@ -12,6 +12,13 @@ import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
 
 
+type NewTodoMsg
+    = AddTodoClicked Dom.Id
+    | NewTodoTextChanged String
+    | NewTodoBlur
+    | NewTodoKeyUp String Key
+
+
 type Msg
     = NoOp
     | OnAddTodoClicked Dom.Id

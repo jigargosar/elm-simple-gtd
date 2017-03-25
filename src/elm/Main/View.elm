@@ -116,28 +116,8 @@ activeTaskView { todoVM, elapsedTime } m =
 
 
 toHHMMSS : Time -> String
-toHHMMSS time =
-    let
-        elapsedMilli =
-            round time
-
-        millis =
-            elapsedMilli % 1000
-
-        seconds =
-            (elapsedMilli // 1000) % (60)
-
-        minutes =
-            (elapsedMilli // (1000 * 60)) % 60
-
-        hours =
-            (elapsedMilli // (1000 * 60 * 60))
-
-        res : List Int
-        res =
-            [ hours, minutes, seconds ]
-    in
-        res .|> toString |> String.join ":"
+toHHMMSS =
+    toHMSList >> List.map toString >> String.join ":"
 
 
 toHMSList : Time -> List Int

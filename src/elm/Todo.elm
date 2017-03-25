@@ -449,5 +449,10 @@ getFirstInboxTodo =
     List.find inboxFilter
 
 
+toVM : Todo -> ViewModel
 toVM =
     identity
+
+
+type alias ViewModel =
+    Todo

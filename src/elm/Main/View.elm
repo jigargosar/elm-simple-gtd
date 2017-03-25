@@ -71,22 +71,20 @@ activeTaskAppToolBarView : Model -> Html Msg
 activeTaskAppToolBarView m =
     case getActiveTaskViewModel m of
         Just taskVm ->
-            div [] [ activeTaskView taskVm m ]
+            div [ class "active-task-view"] [ activeTaskView taskVm m ]
 
         Nothing ->
-            div [ class "hidden" ] [ App.toolbar [] [] ]
+            div [ class "hidden" ] []
 
 
 activeTaskView : ActiveTaskViewModel -> Model -> Html Msg
 activeTaskView { todoVM, elapsedTime } m =
-    App.toolbar []
-        [ div []
-            [ div [] [ text todoVM.text ]
-            , div [ class "small" ] [ text ("Time Spent: " ++ TimeExtra.toHHMMSS elapsedTime) ]
-            , iconButton [ icon "av:pause" ] []
-            , iconButton [ icon "av:stop" ] []
-            , iconButton [ icon "check" ] []
-            ]
+    div []
+        [ div [] [ text todoVM.text ]
+        , div [ class "small" ] [ text ("Time Spent: " ++ TimeExtra.toHHMMSS elapsedTime) ]
+        , iconButton [ icon "av:pause" ] []
+        , iconButton [ icon "av:stop" ] []
+        , iconButton [ icon "check" ] []
         ]
 
 

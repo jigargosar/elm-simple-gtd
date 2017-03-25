@@ -13,7 +13,7 @@ import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Main.TodoListMsg exposing (..)
+import TodoListTypes exposing (..)
 import PouchDB
 import Tuple2
 import TodoAction

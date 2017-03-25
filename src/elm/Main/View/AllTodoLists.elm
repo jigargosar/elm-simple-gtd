@@ -5,7 +5,7 @@ import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
-import Main.TodoListMsg
+import TodoListTypes
 import Main.Types exposing (EditMode(EditTodoMode))
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
@@ -58,7 +58,7 @@ createTodoListViewConfig model =
     , now = getNow model
     , editMode = getEditMode model
     , onTodoDoneClicked = OnTodoDoneClicked
-    , onTodoStartClicked = Main.TodoListMsg.Start >> OnTodoMsg
+    , onTodoStartClicked = TodoListTypes.Start >> OnTodoMsg
     }
 
 

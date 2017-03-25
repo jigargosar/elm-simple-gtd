@@ -5,7 +5,7 @@ import DomTypes exposing (DomMsg)
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
-import Main.TodoListMsg exposing (TodoMsg)
+import TodoListTypes exposing (TodoMsg)
 import Main.Types exposing (MainViewType)
 import Navigation exposing (Location)
 import Time exposing (Time)

@@ -29,6 +29,7 @@ import Flow.Model as Flow exposing (Node)
 import Polymer.Paper exposing (..)
 import Polymer.App as App
 import FunctionExtra exposing (..)
+import FunctionExtra.Operators exposing (..)
 import Todo.View
 
 
@@ -70,10 +71,10 @@ activeTaskAppToolBarView : Model -> Html Msg
 activeTaskAppToolBarView m =
     case getActiveTaskViewModel m of
         Just taskVm ->
-            activeTaskView taskVm m
+            div [] [ activeTaskView taskVm m ]
 
         Nothing ->
-            App.toolbar [ class "hidden" ] []
+            div [ class "hidden" ] [ App.toolbar [] [] ]
 
 
 activeTaskView : ActiveTaskViewModel -> Model -> Html Msg
@@ -82,6 +83,9 @@ activeTaskView { todoVM, elapsedTime } m =
         [ div []
             [ div [] [ text todoVM.text ]
             , div [ class "small" ] [ text ("Time Spent: " ++ TimeExtra.toHHMMSS elapsedTime) ]
+            , iconButton [ icon "av:pause" ] []
+            , iconButton [ icon "av:stop" ] []
+            , iconButton [ icon "check" ] []
             ]
         ]
 

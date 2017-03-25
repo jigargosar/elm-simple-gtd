@@ -1,5 +1,6 @@
 module Main.View exposing (appView)
 
+import ActiveTask
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, hr, node, span, text)
@@ -59,6 +60,13 @@ appHeaderView m =
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
             , newTodoInputView (getEditMode m)
             ]
+        , (case m.activeTask of
+            ActiveTask.Some task ->
+                App.toolbar [] [ text "active-task" ]
+
+            ActiveTask.None ->
+                App.toolbar [ class "hidden" ] []
+          )
         ]
 
 

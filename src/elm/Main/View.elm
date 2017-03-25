@@ -78,8 +78,16 @@ activeTaskView : ActiveTaskViewModel -> Model -> Html Msg
 activeTaskView { todoVM, elapsedTime } m =
     App.toolbar []
         [ div [] [ text todoVM.text ]
-        , div [] [ elapsedTime |> toString >> text ]
+        , div [] [ elapsedTime |> toHHMMSS >> text ]
         ]
+
+
+toHHMMSS time =
+    let
+        _ =
+            1
+    in
+        toString time
 
 
 appMainView m =

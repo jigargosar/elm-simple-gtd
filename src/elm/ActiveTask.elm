@@ -35,7 +35,7 @@ getTodoId =
 getElapsedTime now task =
     case task.state of
         Started time ->
-            Just (now - time)
+            (now - time) + task.timeSpent
 
         Stopped ->
-            Nothing
+            task.timeSpent

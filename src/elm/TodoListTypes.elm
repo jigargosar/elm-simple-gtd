@@ -21,3 +21,4 @@ type TodoMsg
     | AddNewTodoAt String Time
     | Start TodoId
     | Stop
+    | StopAndMarkDone

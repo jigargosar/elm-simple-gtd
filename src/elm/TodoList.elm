@@ -46,6 +46,10 @@ stop =
     Stop
 
 
+stopAndMarkDone =
+    StopAndMarkDone
+
+
 update : TodoMsg -> Model -> ( Model, Cmd TodoMsg )
 update msg =
     Return.singleton
@@ -68,6 +72,10 @@ update msg =
             Stop ->
                 stopTaskIfActive
 
+            StopAndMarkDone ->
+                markDoneIfActive
+                    >> stopTaskIfActive
+
 
 startActiveTask id =
     Return.map (updateActiveTask (Main.Model.getNow >> ActiveTask.start id))
@@ -75,6 +83,15 @@ startActiveTask id =
 
 stopTaskIfActive =
     Return.map (setActiveTask ActiveTask.init)
+
+
+markDoneIfActive =
+    Return.andThen
+        (\m ->
+            getActiveTask m
+                ?|> ((.id) >> toggleDone >> (update # m))
+                ?= Return.singleton m
+        )
 
 
 getActiveTask : Model -> MaybeActiveTask

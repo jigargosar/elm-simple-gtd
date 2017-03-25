@@ -75,7 +75,7 @@ activeTaskAppToolBarView m =
 
 
 activeTaskView : ActiveTaskViewModel -> Model -> Html Msg
-activeTaskView ( now, task, todo ) m =
+activeTaskView { now, task, todo } m =
     App.toolbar [] [ text ("active-task") ]
 
 

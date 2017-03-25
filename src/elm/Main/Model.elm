@@ -1,6 +1,6 @@
 module Main.Model exposing (..)
 
-import ActiveTask
+import ActiveTask exposing (ActiveTask)
 import Dict
 import Json.Encode as E
 import List.Extra as List
@@ -35,7 +35,7 @@ init now encodedTodoList =
 
 
 type alias ActiveTaskViewModel =
-    ( Time, ActiveTask.Task, Todo )
+    { task : ActiveTask.Task, todo : Todo, now : Time }
 
 
 getActiveTaskViewModel : Model -> Maybe ActiveTaskViewModel
@@ -44,11 +44,15 @@ getActiveTaskViewModel m =
         maybeTodo =
             m.activeTask ?|> ActiveTask.getTodoId ?+> (getTodoById # m)
     in
-        maybe3Tuple
-            ( getNow m |> Just
-            , m.activeTask
+        maybe2Tuple
+            ( m.activeTask
             , maybeTodo
             )
+            ?|> (toActiveTaskVM # m)
+
+
+toActiveTaskVM ( task, todo ) m =
+    { task = task, todo = todo, now = getNow m }
 
 
 getTodoById : TodoId -> Model -> Maybe Todo

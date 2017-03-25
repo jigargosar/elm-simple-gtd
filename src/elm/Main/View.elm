@@ -60,14 +60,21 @@ appHeaderView m =
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
             , newTodoInputView (getEditMode m)
             ]
-        , (case m.activeTask of
-            ActiveTask.Some task ->
-                App.toolbar [] [ text "active-task" ]
-
-            ActiveTask.None ->
-                App.toolbar [ class "hidden" ] []
-          )
+        , activeTaskToolBarView m
         ]
+
+
+activeTaskToolBarView m =
+    case m.activeTask of
+        ActiveTask.Some task ->
+            activeTaskToolBarView task m
+
+        ActiveTask.None ->
+            App.toolbar [ class "hidden" ] []
+
+
+activeTaskView task m =
+    App.toolbar [] [ text "active-task" ]
 
 
 appMainView m =

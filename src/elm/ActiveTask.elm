@@ -26,3 +26,7 @@ init =
 
 start id now =
     Task id (Started now) 0 now |> Just
+
+
+getTodoId =
+    Maybe.map (.id)

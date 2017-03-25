@@ -66,16 +66,16 @@ appHeaderView m =
 
 activeTaskAppToolBarView : Model -> Html Msg
 activeTaskAppToolBarView m =
-    case m.activeTask of
-        Just task ->
-            activeTaskView task m
+    case getActiveTaskViewModel m of
+        Just taskTodo ->
+            activeTaskView taskTodo m
 
         Nothing ->
             App.toolbar [ class "hidden" ] []
 
 
-activeTaskView : ActiveTask.Task -> Model -> Html Msg
-activeTaskView task m =
+activeTaskView : ActiveTaskViewModel -> Model -> Html Msg
+activeTaskView ( now, task, todo ) m =
     App.toolbar [] [ text ("active-task") ]
 
 

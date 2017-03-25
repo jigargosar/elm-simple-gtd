@@ -1,6 +1,7 @@
 module Main.Model exposing (..)
 
 import ActiveTask
+import Dict
 import Json.Encode as E
 import List.Extra as List
 import Main.Msg exposing (..)
@@ -32,6 +33,15 @@ init now encodedTodoList =
         (Random.seedFromTime now)
         ActiveTask.init
 
+type alias ActiveTaskViewModel = (Time, Task, Todo)
+
+getActiveTaskViewModel m =
+    ActiveTask.getTodoId m.activeTask ?+> getTodoById # m ?|> (,,) (getNow m) m.activeTask
+
+
+getTodoById id =
+    getTodoList >> Todo.findById id
+
 
 getMainViewType : Model -> MainViewType
 getMainViewType =
@@ -61,8 +71,6 @@ setNow now model =
 updateNow : (Model -> Time) -> ModelF
 updateNow updater model =
     setNow (updater model) model
-
-
 
 
 getTodoList : Model -> TodoList

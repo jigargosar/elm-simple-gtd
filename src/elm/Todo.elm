@@ -392,6 +392,9 @@ hasId todoId =
 fromListById =
     Dict.fromListBy getId
 
+findById id =
+    List.find (hasId id)
+
 
 replaceIfEqualById todo =
     List.replaceIf (equalById todo) todo

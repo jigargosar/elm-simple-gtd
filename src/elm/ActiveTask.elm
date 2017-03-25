@@ -12,7 +12,7 @@ type State
     | Stopped
 
 
-type alias MaybeTask =
+type alias MaybeActiveTask =
     Maybe Task
 
 

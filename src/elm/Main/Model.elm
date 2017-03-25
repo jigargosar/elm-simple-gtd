@@ -1,6 +1,6 @@
 module Main.Model exposing (..)
 
-import ActiveTask exposing (MaybeTask)
+import ActiveTask exposing (MaybeActiveTask)
 import Dict
 import InboxFlow.View exposing (TodoViewModel)
 import Json.Encode as E

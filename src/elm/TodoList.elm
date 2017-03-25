@@ -1,6 +1,6 @@
 module TodoList exposing (..)
 
-import ActiveTask
+import ActiveTask exposing (MaybeActiveTask)
 import List.Extra as List
 import Main.Model exposing (Model)
 import Main.Types exposing (ModelF)
@@ -61,13 +61,31 @@ update msg =
             Start id ->
                 startActiveTask id
 
+            Stop ->
+                stopTaskIfActive
+
 
 startActiveTask id =
-    Return.map (setActiveTask id)
+    Return.map (updateActiveTask (Main.Model.getNow >> ActiveTask.start id))
 
 
-setActiveTask id model =
-    { model | activeTask = ActiveTask.start id (Main.Model.getNow model) }
+stopTaskIfActive =
+    Return.map (setActiveTask ActiveTask.init)
+
+
+getActiveTask : Model -> MaybeActiveTask
+getActiveTask =
+    (.activeTask)
+
+
+setActiveTask : MaybeActiveTask -> ModelF
+setActiveTask activeTask model =
+    { model | activeTask = activeTask }
+
+
+updateActiveTask : (Model -> MaybeActiveTask) -> ModelF
+updateActiveTask updater model =
+    setActiveTask (updater model) model
 
 
 addNewTodoAt text now m =

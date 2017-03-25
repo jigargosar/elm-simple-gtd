@@ -1,5 +1,6 @@
 module TodoList exposing (..)
 
+import ActiveTask
 import List.Extra as List
 import Main.Model exposing (Model)
 import Main.Types exposing (ModelF)
@@ -58,7 +59,15 @@ update msg =
                 updateAndPersistMaybeTodo (addNewTodoAt text now)
 
             Start id ->
-                identity
+                startActiveTask id
+
+
+startActiveTask id =
+    Return.map (setActiveTask id)
+
+
+setActiveTask id model =
+    { model | activeTask = ActiveTask.start id (Main.Model.getNow model) }
 
 
 addNewTodoAt text now m =

@@ -23,3 +23,7 @@ type alias Task =
 
 init =
     None
+
+
+start id now =
+    Task id (Started now) 0 now |> Some

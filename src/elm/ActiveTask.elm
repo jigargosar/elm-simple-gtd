@@ -12,7 +12,7 @@ type State
     | Stopped
 
 
-type alias ActiveTask =
+type alias MaybeTask =
     Maybe Task
 
 
@@ -30,3 +30,12 @@ start id now =
 
 getTodoId =
     (.id)
+
+
+getElapsedTime now task =
+    case task.state of
+        Started time ->
+            Just (now - time)
+
+        Stopped ->
+            Nothing

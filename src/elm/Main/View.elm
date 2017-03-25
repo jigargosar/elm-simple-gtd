@@ -1,6 +1,6 @@
 module Main.View exposing (appView)
 
-import ActiveTask
+import ActiveTask exposing (MaybeTask)
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, hr, node, span, text)
@@ -75,8 +75,11 @@ activeTaskAppToolBarView m =
 
 
 activeTaskView : ActiveTaskViewModel -> Model -> Html Msg
-activeTaskView { now, task, todoVM } m =
-    App.toolbar [] [ text ("active-task") ]
+activeTaskView { todoVM, elapsedTime } m =
+    App.toolbar []
+        [ div [] [ text todoVM.text ]
+        , div [] [ elapsedTime |> toString >> text ]
+        ]
 
 
 appMainView m =

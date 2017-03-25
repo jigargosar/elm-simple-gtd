@@ -31,6 +31,7 @@ import Polymer.App as App
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 import Todo.View
+import TodoListTypes
 
 
 appView m =
@@ -81,10 +82,10 @@ activeTaskView : ActiveTaskViewModel -> Model -> Html Msg
 activeTaskView { todoVM, elapsedTime } m =
     div []
         [ div [ class "title" ] [ text todoVM.text ]
-        , div [class "col" ]
+        , div [ class "col" ]
             [ div [ class "elapsed-time" ] [ text (TimeExtra.toHHMMSS elapsedTime) ]
             , iconButton [ icon "av:pause" ] []
-            , iconButton [ icon "av:stop" ] []
+            , iconButton [ icon "av:stop", TodoListTypes.Stop |> OnTodoMsg >> onClick ] []
             , iconButton [ icon "check" ] []
             ]
         ]

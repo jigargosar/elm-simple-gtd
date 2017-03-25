@@ -33,10 +33,16 @@
         /*max-height: 368px;*/
     }
 
-    app-toolbar {
-        background-color: #4285f4;
-        color: #fff;
-    }
+    /*app-toolbar {*/
+        /*background-color: #4285f4;*/
+        /*color: #fff;*/
+    /*}*/
+
+    /*app-toolbar#foo {*/
+        /*background-color: #4285f4;*/
+        /*color: #fff;*/
+    /*}*/
+
 
     paper-icon-button + [main-title] {
         margin-left: 24px;
@@ -50,14 +56,21 @@
 
     app-header {
         @apply(--layout-fixed-top);
-        background-color: #4285f4;
         color: #fff;
+        background-color: #4285f4;
         --app-header-background-rear-layer: {
             background-color: #ef6c00;
         };
         --app-header-shadow: {
             box-shadow: inset 0px 5px 2px -3px rgba(0, 0, 0, 0.2);
         };
+    }
+
+    app-header paper-icon-button{
+        color: #fff;
+        --paper-icon-button-hover:{
+            color: #fff;
+        }
     }
 
     .todo-list-title {
@@ -116,12 +129,7 @@
         padding: 0;
     }
 
-    app-toolbar paper-icon-button{
-        color: #fff;
-        --paper-icon-button-hover:{
-            color: #fff;
-        }
-    }
+
 
 
 

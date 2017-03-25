@@ -71,10 +71,10 @@ activeTaskAppToolBarView : Model -> Html Msg
 activeTaskAppToolBarView m =
     case getActiveTaskViewModel m of
         Just taskVm ->
-            div [ class "active-task-view"] [ activeTaskView taskVm m ]
+            div [ class "active-task-view", attribute "sticky" "true" ] [ activeTaskView taskVm m ]
 
         Nothing ->
-            div [ class "hidden" ] []
+            div [ class "active-task-view", attribute "sticky" "true" ] []
 
 
 activeTaskView : ActiveTaskViewModel -> Model -> Html Msg

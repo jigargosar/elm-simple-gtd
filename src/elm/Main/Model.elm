@@ -38,15 +38,17 @@ type alias ActiveTaskViewModel =
     ( Time, ActiveTask.Task, Todo )
 
 
-getActiveTaskViewModel : m -> Maybe ActiveTaskViewModel
+getActiveTaskViewModel : Model -> Maybe ActiveTaskViewModel
 getActiveTaskViewModel m =
-    m.activeTask
-        ?|> apply3
-                ( (\_ -> getNow m |> Just)
-                , Just
-                , ActiveTask.getTodoId >> Maybe.andThen (getTodoById # m)
-                )
-        ?+> maybe3Tuple
+    let
+        maybeTodo =
+            m.activeTask ?|> ActiveTask.getTodoId ?+> (getTodoById # m)
+    in
+        maybe3Tuple
+            ( getNow m |> Just
+            , m.activeTask
+            , maybeTodo
+            )
 
 
 getTodoById : TodoId -> Model -> Maybe Todo

@@ -13,6 +13,7 @@ import Main.View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
+import TimeExtra
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import DebugExtra.Debug exposing (tapLog)
@@ -78,74 +79,11 @@ activeTaskAppToolBarView m =
 activeTaskView : ActiveTaskViewModel -> Model -> Html Msg
 activeTaskView { todoVM, elapsedTime } m =
     App.toolbar []
-        [ div [] [ text (todoVM.text ++ " - " ++ (toHHMMSS elapsedTime)) ]
+        [ div []
+            [ div [] [ text todoVM.text ]
+            , div [ class "small" ] [ text ("Time Spent: " ++ TimeExtra.toHHMMSS elapsedTime) ]
+            ]
         ]
-
-
-
---toHHMMSS : Time -> String
---toHHMMSS time =
---    let
---        roundToFloat =
---            round >> toFloat
---
---        roundToString =
---            round >> toString
---
---        secondsMilli =
---            time / Time.second |> roundToFloat |> (*) Time.second
---
---        minutesMilli =
---            time / Time.minute |> roundToFloat |> (*) Time.minute
---
---        hoursMilli =
---            time / Time.hour |> roundToFloat |> (*) Time.hour
---
---        seconds =
---            abs (secondsMilli - minutesMilli) / Time.second |> roundToString
---
---        --        seconds =
---        --            rem (round time) (round Time.second) |> toString
---        minutes =
---            abs (minutesMilli - hoursMilli) / Time.minute |> roundToString
---
---        hours =
---            (hoursMilli) / Time.hour |> roundToString
---    in
---        [ hours, minutes, seconds ] |> String.join ":"
-
-
-toHHMMSS : Time -> String
-toHHMMSS =
-    toHMSList >> List.map (toString >> pad 2 '0') >> String.join ":"
-
-
-pad max char string =
-    if max <= String.length string then
-        string
-    else
-        pad max char ((String.fromChar char) ++ string)
-
-
-toHMSList : Time -> List Int
-toHMSList time =
-    let
-        elapsedMilli =
-            round time
-
-        millis =
-            elapsedMilli % 1000
-
-        seconds =
-            (elapsedMilli // 1000) % (60)
-
-        minutes =
-            (elapsedMilli // (1000 * 60)) % 60
-
-        hours =
-            (elapsedMilli // (1000 * 60 * 60))
-    in
-        [ hours, minutes, seconds ]
 
 
 appMainView m =

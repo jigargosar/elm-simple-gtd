@@ -392,6 +392,7 @@ hasId todoId =
 fromListById =
     Dict.fromListBy getId
 
+
 findById id =
     List.find (hasId id)
 
@@ -446,3 +447,7 @@ getInboxList =
 
 getFirstInboxTodo =
     List.find inboxFilter
+
+
+toVM =
+    identity

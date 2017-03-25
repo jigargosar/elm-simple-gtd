@@ -117,7 +117,14 @@ activeTaskView { todoVM, elapsedTime } m =
 
 toHHMMSS : Time -> String
 toHHMMSS =
-    toHMSList >> List.map toString >> String.join ":"
+    toHMSList >> List.map (toString >> pad 2 '0') >> String.join ":"
+
+
+pad max char string =
+    if max >= String.length string then
+        string
+    else
+        pad max char ((toString char) ++ string)
 
 
 toHMSList : Time -> List Int

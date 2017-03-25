@@ -100,10 +100,10 @@ toHHMMSS time =
             time / Time.hour |> roundToFloat |> (*) Time.hour
 
         seconds =
-            (secondsMilli - minutesMilli) / Time.second |> roundToString
+            abs (secondsMilli - minutesMilli) / Time.second |> roundToString
 
         minutes =
-            (minutesMilli - hoursMilli) / Time.minute |> roundToString
+            abs (minutesMilli - hoursMilli) / Time.minute |> roundToString
 
         hours =
             (hoursMilli) / Time.hour |> roundToString

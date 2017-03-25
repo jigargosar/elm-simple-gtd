@@ -2,6 +2,7 @@ module Main.Model exposing (..)
 
 import ActiveTask exposing (ActiveTask)
 import Dict
+import InboxFlow.View exposing (TodoViewModel)
 import Json.Encode as E
 import List.Extra as List
 import Main.Msg exposing (..)
@@ -35,7 +36,7 @@ init now encodedTodoList =
 
 
 type alias ActiveTaskViewModel =
-    { task : ActiveTask.Task, todo : Todo, now : Time }
+    { task : ActiveTask.Task, todoVM : TodoViewModel, now : Time }
 
 
 getActiveTaskViewModel : Model -> Maybe ActiveTaskViewModel
@@ -46,7 +47,7 @@ getActiveTaskViewModel m =
     in
         maybe2Tuple
             ( m.activeTask
-            , maybeTodo
+            , maybeTodo ?|> Todo.toVM
             )
             ?|> (toActiveTaskVM # m)
 

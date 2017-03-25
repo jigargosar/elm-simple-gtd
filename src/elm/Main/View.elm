@@ -124,3 +124,6 @@ addTodoFabView m =
         , onClick (onNewTodo.add newTodoInputId)
         ]
         []
+
+
+type alias TodoViewModel = Todo

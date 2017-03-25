@@ -121,10 +121,10 @@ toHHMMSS =
 
 
 pad max char string =
-    if max >= String.length string then
+    if max <= String.length string then
         string
     else
-        pad max char ((toString char) ++ string)
+        pad max char ((String.fromChar char) ++ string)
 
 
 toHMSList : Time -> List Int

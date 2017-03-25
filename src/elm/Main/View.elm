@@ -80,7 +80,7 @@ activeTaskAppToolBarView m =
 activeTaskView : ActiveTaskViewModel -> Model -> Html Msg
 activeTaskView { todoVM, elapsedTime } m =
     div []
-        [ div [] [ text todoVM.text ]
+        [ div [class "title"] [ text todoVM.text ]
         , div [ class "small" ] [ text ("Time Spent: " ++ TimeExtra.toHHMMSS elapsedTime) ]
         , iconButton [ icon "av:pause" ] []
         , iconButton [ icon "av:stop" ] []

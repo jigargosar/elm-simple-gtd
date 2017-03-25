@@ -33,12 +33,23 @@ init now encodedTodoList =
         (Random.seedFromTime now)
         ActiveTask.init
 
-type alias ActiveTaskViewModel = (Time, Task, Todo)
 
+type alias ActiveTaskViewModel =
+    ( Time, ActiveTask.Task, Todo )
+
+
+getActiveTaskViewModel : m -> Maybe ActiveTaskViewModel
 getActiveTaskViewModel m =
-    ActiveTask.getTodoId m.activeTask ?+> getTodoById # m ?|> (,,) (getNow m) m.activeTask
+    m.activeTask
+        ?|> apply3
+                ( (\_ -> getNow m |> Just)
+                , Just
+                , ActiveTask.getTodoId >> Maybe.andThen (getTodoById # m)
+                )
+        ?+> maybe3Tuple
 
 
+getTodoById : TodoId -> Model -> Maybe Todo
 getTodoById id =
     getTodoList >> Todo.findById id
 

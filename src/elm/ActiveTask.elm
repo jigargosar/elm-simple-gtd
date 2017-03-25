@@ -29,4 +29,4 @@ start id now =
 
 
 getTodoId =
-    Maybe.map (.id)
+    (.id)

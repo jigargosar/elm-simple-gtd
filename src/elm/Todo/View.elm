@@ -109,7 +109,7 @@ deleteIconButton vc todo =
 
 
 startIconButton vc todo =
-    iconButton [ onClickStopPropagation (vc.onDeleteTodoClicked (Todo.getId todo)), icon "av:play-circle-outline" ] []
+    iconButton [ onClickStopPropagation (vc.onTodoStartClicked (Todo.getId todo)), icon "av:play-circle-outline" ] []
 
 
 optionsIconButton vc todo =

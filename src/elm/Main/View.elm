@@ -12,6 +12,7 @@ import Main.View.AllTodoLists exposing (..)
 import Main.View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
+import Time
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import DebugExtra.Debug exposing (tapLog)
@@ -84,10 +85,31 @@ activeTaskView { todoVM, elapsedTime } m =
 
 toHHMMSS time =
     let
-        _ =
-            1
+        roundToFloat =
+            round >> toFloat
+
+        roundToString =
+            round >> toString
+
+        secondsMilli =
+            time / Time.second |> roundToFloat |> (*) Time.second
+
+        minutesMilli =
+            time / Time.minute |> roundToFloat |> (*) Time.minute
+
+        hoursMilli =
+            time / Time.hour |> roundToFloat |> (*) Time.hour
+
+        seconds =
+            (secondsMilli - minutesMilli) / Time.second |> roundToString
+
+        minutes =
+            (minutesMilli - hoursMilli) / Time.minute |> roundToString
+
+        hours =
+            (hoursMilli) / Time.hour |> roundToString
     in
-        toString time
+        [ hours, minutes, seconds ] |> String.join ":"
 
 
 appMainView m =

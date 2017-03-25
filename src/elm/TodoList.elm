@@ -42,6 +42,10 @@ addNewTodo =
     AddNewTodo
 
 
+stop =
+    Stop
+
+
 update : TodoMsg -> Model -> ( Model, Cmd TodoMsg )
 update msg =
     Return.singleton

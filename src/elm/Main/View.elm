@@ -14,6 +14,7 @@ import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
 import TimeExtra
+import TodoList
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import DebugExtra.Debug exposing (tapLog)
@@ -85,7 +86,7 @@ activeTaskView { todoVM, elapsedTime } m =
         , div [ class "col" ]
             [ div [ class "elapsed-time" ] [ text (TimeExtra.toHHMMSS elapsedTime) ]
             , iconButton [ icon "av:pause" ] []
-            , iconButton [ icon "av:stop", TodoListTypes.Stop |> OnTodoMsg >> onClick ] []
+            , iconButton [ icon "av:stop", TodoList.stop |> OnTodoMsg >> onClick ] []
             , iconButton [ icon "check" ] []
             ]
         ]

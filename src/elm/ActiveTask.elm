@@ -12,9 +12,8 @@ type State
     | Stopped
 
 
-type ActiveTask
-    = None
-    | Some Task
+type alias ActiveTask =
+    Maybe Task
 
 
 type alias Task =
@@ -22,8 +21,8 @@ type alias Task =
 
 
 init =
-    None
+    Nothing
 
 
 start id now =
-    Task id (Started now) 0 now |> Some
+    Task id (Started now) 0 now |> Just

@@ -140,6 +140,27 @@ toHHMMSS time =
         res .|> toString |> String.join ":"
 
 
+toHMSList : Time -> List Int
+toHMSList time =
+    let
+        elapsedMilli =
+            round time
+
+        millis =
+            elapsedMilli % 1000
+
+        seconds =
+            (elapsedMilli // 1000) % (60)
+
+        minutes =
+            (elapsedMilli // (1000 * 60)) % 60
+
+        hours =
+            (elapsedMilli // (1000 * 60 * 60))
+    in
+        [ hours, minutes, seconds ]
+
+
 appMainView m =
     div [ id "main-view" ]
         [ case getMainViewType m of

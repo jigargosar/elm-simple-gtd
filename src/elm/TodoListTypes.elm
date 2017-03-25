@@ -9,6 +9,7 @@ import FunctionExtra exposing (..)
 
 type UpdateAction
     = ToggleDone
+    | MarkDone
     | SetGroup TodoGroup
     | SetText String
     | ToggleDelete

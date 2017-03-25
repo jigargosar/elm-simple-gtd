@@ -23,6 +23,10 @@ toggleDone =
     UpdateTodo ToggleDone
 
 
+markDone =
+    UpdateTodo MarkDone
+
+
 toggleDelete =
     UpdateTodo ToggleDelete
 
@@ -168,6 +172,9 @@ updateTodoAt action todoId now =
 
                 ToggleDone ->
                     Todo.toggleDone
+
+                MarkDone ->
+                    Todo.markDone
 
                 ToggleDelete ->
                     Todo.toggleDeleted

@@ -57,6 +57,9 @@ update msg =
             AddNewTodoAt text now ->
                 updateAndPersistMaybeTodo (addNewTodoAt text now)
 
+            Start id ->
+                identity
+
 
 addNewTodoAt text now m =
     if String.trim text |> String.isEmpty then

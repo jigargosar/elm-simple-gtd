@@ -19,3 +19,4 @@ type TodoMsg
     | UpdateTodo TodoUpdateActionType TodoId
     | AddNewTodo String
     | AddNewTodoAt String Time
+    | Start TodoId

@@ -131,12 +131,8 @@ onEditTodoMsg msg =
     in
         case msg of
             EditTodoClicked focusInputId todo ->
-                let
-                    _ =
-                        Debug.log "edit todo clicked" ( focusInputId, todo )
-                in
-                    Return.map (Model.activateEditTodoMode todo)
-                        >> domFocus focusInputId
+                Return.map (Model.activateEditTodoMode todo)
+                    >> domFocus focusInputId
 
             EditTodoTextChanged text ->
                 Return.map (Model.updateEditTodoText text)

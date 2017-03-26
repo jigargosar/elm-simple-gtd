@@ -1,5 +1,6 @@
 module KeyboardExtra exposing (..)
 
+import DecodeExtra exposing (traceDecoder)
 import Html exposing (Attribute)
 import Html.Events as Events
 import Json.Decode as D exposing (Decoder)
@@ -9,7 +10,16 @@ import FunctionExtra.Operators exposing (..)
 
 onKeyUp : (Key -> msg) -> Attribute msg
 onKeyUp onKeyMsg =
-    Events.on "keyup" (D.map onKeyMsg KX.targetKey)
+    Events.on "keyup" (D.map onKeyMsg (traceDecoder "keyup" targetKeyDecoder))
+
+
+targetKeyDecoder : Decoder Key
+targetKeyDecoder =
+    D.map KX.fromCode (D.field "keyCode2" D.int)
+
+
+type alias KeyboardEvent =
+    { key : Key, isShiftDown : Bool }
 
 
 succeedIfDecodedKeyEquals key msg =
@@ -51,3 +61,19 @@ subscription tagger =
 
 update setter =
     KX.update >>> setter
+
+
+isShiftDown =
+    KX.isPressed KX.Shift
+
+
+isControlDown =
+    KX.isPressed KX.Control
+
+
+isAltDown =
+    KX.isPressed KX.Alt
+
+
+isMetaDown =
+    KX.isPressed KX.Meta

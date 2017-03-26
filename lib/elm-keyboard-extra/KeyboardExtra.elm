@@ -4,18 +4,26 @@ import DecodeExtra exposing (traceDecoder)
 import Html exposing (Attribute)
 import Html.Events as Events
 import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
 import Keyboard.Extra as KX exposing (Key)
 import FunctionExtra.Operators exposing (..)
 
 
-onKeyUp : (Key -> msg) -> Attribute msg
+onKeyUp : (KeyboardEvent -> msg) -> Attribute msg
 onKeyUp onKeyMsg =
-    Events.on "keyup" (D.map onKeyMsg (traceDecoder "keyup" targetKeyDecoder))
+    Events.on "keyup" (D.map onKeyMsg keyboardEventDecoder)
 
 
 targetKeyDecoder : Decoder Key
 targetKeyDecoder =
     D.map KX.fromCode (D.field "keyCode" D.int)
+
+
+keyboardEventDecoder : Decoder KeyboardEvent
+keyboardEventDecoder =
+    D.succeed KeyboardEvent
+        |> D.custom targetKeyDecoder
+        |> D.required "shiftKey" D.bool
 
 
 type alias KeyboardEvent =

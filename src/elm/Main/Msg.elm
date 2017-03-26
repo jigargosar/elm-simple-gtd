@@ -12,20 +12,21 @@ import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
 import FunctionExtra.Operators exposing (..)
 import Function
+import KeyboardExtra exposing (KeyboardEvent)
 
 
 type NewTodoMsg
     = AddTodoClicked Dom.Id
     | NewTodoTextChanged String
     | NewTodoBlur
-    | NewTodoKeyUp String Key
+    | NewTodoKeyUp String KeyboardEvent
 
 
 type EditTodoMsg
     = EditTodoClicked Dom.Id Todo
     | EditTodoTextChanged String
     | EditTodoBlur Todo
-    | EditTodoKeyUp Todo Key
+    | EditTodoKeyUp Todo KeyboardEvent
 
 
 onNewTodo =

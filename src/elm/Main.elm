@@ -105,7 +105,7 @@ onNewTodoMsg msg =
             NewTodoBlur ->
                 deactivateEditingMode
 
-            NewTodoKeyUp text key ->
+            NewTodoKeyUp text { key } ->
                 case key of
                     Enter ->
                         onTodoListMsg (TodoList.addNewTodo text)
@@ -135,7 +135,7 @@ onEditTodoMsg msg =
             EditTodoBlur todo ->
                 setTodoTextAndDeactivateEditing todo
 
-            EditTodoKeyUp todo key ->
+            EditTodoKeyUp todo { key } ->
                 case key of
                     Enter ->
                         setTodoTextAndDeactivateEditing todo

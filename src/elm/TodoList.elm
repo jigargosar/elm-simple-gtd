@@ -3,9 +3,9 @@ module TodoList exposing (..)
 import ActiveTask exposing (MaybeActiveTask)
 import DomTypes exposing (DomId)
 import List.Extra as List
-import Main.Model exposing (Model)
+import Main.Model
 import Main.Msg exposing (Msg)
-import Main.Types exposing (ModelF)
+import Main.Types exposing (Model, ModelF)
 import Maybe.Extra
 import Random.Pcg as Random
 import Return exposing (Return, ReturnF)
@@ -65,7 +65,7 @@ todoInputId todo =
     "edit-todo-input-" ++ (Todo.getId todo)
 
 
-update : { editTodo : DomId -> Todo -> Msg } -> TodoMsg -> Model -> ( Model, Cmd TodoMsg )
+update : { editTodo : DomId -> Todo -> Msg } -> TodoMsg -> Model -> ( Model, Cmd Msg )
 update config msg =
     Return.singleton
         >> case msg of
@@ -87,6 +87,7 @@ update config msg =
             SplitNewTodoFromAt todo now ->
                 updateAndPersistMaybeTodo (splitNewTodoFromAt todo now)
 
+            --                    >> config.editTodo (todoInputId todo) todo
             Start id ->
                 startActiveTask id
 
@@ -98,10 +99,16 @@ update config msg =
                     >> stopTaskIfActive
 
 
+startActiveTask : TodoId -> RF
 startActiveTask id =
     Return.map (updateActiveTask (Main.Model.getNow >> ActiveTask.start id))
 
 
+type alias RF =
+    Return Msg Model -> Return Msg Model
+
+
+stopTaskIfActive : Return Msg Model -> Return Msg Model
 stopTaskIfActive =
     Return.map (setActiveTask ActiveTask.init)
 
@@ -164,9 +171,9 @@ updateAndPersistMaybeTodo updater =
         (updater >> Tuple2.mapSecond persistMaybeTodoCmd)
 
 
-withNow : (Time -> TodoMsg) -> ReturnF TodoMsg Model
+withNow : (Time -> TodoMsg) -> ReturnF Msg Model
 withNow msg =
-    Task.perform msg Time.now |> Return.command
+    Task.perform (msg >> Main.Msg.OnTodoMsg) Time.now |> Return.command
 
 
 

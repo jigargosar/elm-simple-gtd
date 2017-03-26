@@ -82,7 +82,6 @@ update msg =
                     (TodoList.update
                         { editTodo = EditTodoClicked >>> OnEditTodoMsg }
                         msg
-                        >> Return.mapCmd OnTodoMsg
                     )
 
             OnDomMsg msg ->

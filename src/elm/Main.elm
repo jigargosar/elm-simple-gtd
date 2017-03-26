@@ -44,7 +44,7 @@ main =
         , init = init
         , update = update
         , view = appView
-        , subscriptions = \m -> Sub.batch [ Time.every Time.second (UpdateNow) ]
+        , subscriptions = \m -> Sub.batch [ Time.every Time.second (OnUpdateNow) ]
         }
 
 
@@ -85,7 +85,7 @@ update msg =
             SetMainViewType viewState ->
                 Return.map (Model.setMainViewType viewState)
 
-            UpdateNow now ->
+            OnUpdateNow now ->
                 Return.map (Model.setNow now)
 
 

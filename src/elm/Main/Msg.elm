@@ -55,4 +55,4 @@ type Msg
       --
     | OnTodoMsg TodoMsg
     | SetMainViewType MainViewType
-    | UpdateNow Time
+    | OnUpdateNow Time

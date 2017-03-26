@@ -1,8 +1,6 @@
 port module Main exposing (..)
 
 import Dom
-import DomTypes exposing (DomId)
-import DomUpdate
 import FunctionExtra exposing (..)
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
@@ -84,9 +82,6 @@ update msg =
                         msg
                     )
 
-            OnDomMsg msg ->
-                Return.andThen (DomUpdate.update msg >> Return.mapCmd OnDomMsg)
-
             SetMainViewType viewState ->
                 Return.map (Model.setMainViewType viewState)
 
@@ -102,7 +97,7 @@ onNewTodoMsg msg =
         case msg of
             AddTodoClicked focusInputId ->
                 activateEditNewTodoMode ""
-                    >> domFocus focusInputId
+                    >> focusFirstAutoFocusElement
 
             NewTodoTextChanged text ->
                 activateEditNewTodoMode text
@@ -163,15 +158,6 @@ onEditTodoMsg msg =
 
 onTodoListMsg =
     OnTodoMsg >> update >> Return.andThen
-
-
-onDomMsg =
-    OnDomMsg >> update >> Return.andThen
-
-
-domFocus : DomId -> ReturnF
-domFocus =
-    DomTypes.focus >> onDomMsg
 
 
 deactivateEditingMode =

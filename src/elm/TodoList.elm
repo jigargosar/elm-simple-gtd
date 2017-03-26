@@ -3,7 +3,7 @@ module TodoList exposing (..)
 import ActiveTask exposing (MaybeActiveTask)
 import List.Extra as List
 import Main.Model
-import Main.Msg exposing (EditTodoMsg(EditTodoClicked), Msg(..))
+import Main.Msg as Msg exposing (..)
 import Main.Types exposing (Model, ModelF)
 import Maybe.Extra
 import Random.Pcg as Random
@@ -92,7 +92,7 @@ update update2 msg =
                 Return.andThen
                     (splitNewTodoFromAt todo now
                         >> mapMaybeSecondToCmd
-                            (applyList [ persistTodoCmd, editTodoClicked >> msgToCmd ] >> Cmd.batch)
+                            (applyList [ persistTodoCmd, onEditTodo.edit >> msgToCmd ] >> Cmd.batch)
                     )
 
             Start id ->
@@ -108,10 +108,6 @@ update update2 msg =
 
 mapMaybeSecondToCmd maybeToCmd =
     Tuple2.mapSecond (Maybe.map maybeToCmd >> Maybe.withDefault Cmd.none)
-
-
-editTodoClicked =
-    EditTodoClicked >> OnEditTodoMsg
 
 
 startActiveTask : TodoId -> RF
@@ -188,7 +184,7 @@ updateAndPersistMaybeTodo updater =
 
 withNow : (Time -> TodoMsg) -> ReturnF Msg Model
 withNow msg =
-    Task.perform (msg >> Main.Msg.OnTodoMsg) Time.now |> Return.command
+    Task.perform (msg >> Msg.OnTodoMsg) Time.now |> Return.command
 
 
 

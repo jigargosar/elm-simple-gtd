@@ -12,6 +12,7 @@ import Todo exposing (Todo, TodoGroup, TodoId)
 import FunctionExtra.Operators exposing (..)
 import Function
 import KeyboardExtra exposing (KeyboardEvent)
+import Task
 
 
 type NewTodoMsg
@@ -56,3 +57,8 @@ type Msg
     | OnTodoMsg TodoMsg
     | SetMainViewType MainViewType
     | OnUpdateNow Time
+
+
+msgToCmd : msg -> Cmd msg
+msgToCmd x =
+    Task.perform identity (Task.succeed x)

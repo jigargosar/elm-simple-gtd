@@ -64,11 +64,6 @@ todoInputId todo =
     "edit-todo-input-" ++ (Todo.getId todo)
 
 
-msgToCmd : msg -> Cmd msg
-msgToCmd x =
-    Task.perform identity (Task.succeed x)
-
-
 update : (Msg -> Model -> Return Msg Model) -> TodoMsg -> Model -> ( Model, Cmd Msg )
 update update2 msg =
     Return.singleton

@@ -56,6 +56,15 @@ async function boot() {
         }, 0)
     })
 
+
+    app.ports["startAlarm"].subscribe(()=>{
+        sound.start()
+    })
+
+
+    app.ports["stopAlarm"].subscribe(()=>{
+        sound.stop()
+    })
 }
 
 boot().catch(console.error)

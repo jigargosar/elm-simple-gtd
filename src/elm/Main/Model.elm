@@ -128,11 +128,7 @@ mapAllExceptDeleted mapper =
 
 setEditModeTo : EditMode -> ModelF
 setEditModeTo editMode m =
-    let
-        _ =
-            Debug.log "changing editMode" (editMode)
-    in
-        { m | editMode = editMode }
+    { m | editMode = editMode }
 
 
 getEditMode : Model -> EditMode

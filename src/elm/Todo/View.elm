@@ -34,8 +34,11 @@ todoViewEditing vc todo =
                     ]
                     []
                 ]
+
+        itemAttributes =
+            []
     in
-        todoViewWithItemBodyView itemBodyView vc todo
+        todoViewWithItemBodyView itemAttributes itemBodyView vc todo
 
 
 todoViewNotEditing vc todo =
@@ -54,12 +57,19 @@ todoViewNotEditing vc todo =
                     , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
                     ]
                 ]
+
+        itemAttributes =
+            [ onClickStopPropagation (vc.onEditTodoClicked (todoInputId todo) todo) ]
     in
-        todoViewWithItemBodyView itemBodyView vc todo
+        todoViewWithItemBodyView itemAttributes itemBodyView vc todo
 
 
-todoViewWithItemBodyView itemBodyView vc todo =
-    item (todoItemAttributes vc todo)
+todoViewWithItemBodyView itemAttributes itemBodyView vc todo =
+    item
+        ([ class "todo-item"
+         ]
+            ++ itemAttributes
+        )
         [ checkBoxView
         , itemBodyView
         , hoverIcons vc todo
@@ -69,12 +79,6 @@ todoViewWithItemBodyView itemBodyView vc todo =
 
 checkBoxView =
     checkbox [ checked False ] []
-
-
-todoItemAttributes vc todo =
-    [ class "todo-item"
-    , onClickStopPropagation (vc.onEditTodoClicked (todoInputId todo) todo)
-    ]
 
 
 todoInputId todo =

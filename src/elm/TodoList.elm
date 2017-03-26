@@ -90,11 +90,12 @@ update update2 msg =
                 withNow (SplitNewTodoFromAt todo)
 
             SplitNewTodoFromAt todo now ->
-                Return.andThen
-                    (splitNewTodoFromAt todo now
-                        >> mapMaybeSecondToCmd
-                            (applyList [ persistTodoCmd, focusTodo >> message ] >> Cmd.batch)
-                    )
+                --                Return.andThen
+                --                    (splitNewTodoFromAt todo now
+                --                        >> mapMaybeSecondToCmd
+                --                            (applyList [ persistTodoCmd, focusTodo >> message ] >> Cmd.batch)
+                --                    )
+                identity
 
             Start id ->
                 startActiveTask id

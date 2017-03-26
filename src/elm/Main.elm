@@ -131,8 +131,12 @@ onEditTodoMsg msg =
     in
         case msg of
             EditTodoClicked focusInputId todo ->
-                Return.map (Model.activateEditTodoMode todo)
-                    >> domFocus focusInputId
+                let
+                    _ =
+                        Debug.log "edit todo clicked" ( focusInputId, todo )
+                in
+                    Return.map (Model.activateEditTodoMode todo)
+                        >> domFocus focusInputId
 
             EditTodoTextChanged text ->
                 Return.map (Model.updateEditTodoText text)
@@ -143,9 +147,13 @@ onEditTodoMsg msg =
             EditTodoKeyUp todo { key, isShiftDown } ->
                 case key of
                     Enter ->
-                        setTodoTextAndDeactivateEditing todo
-                            >> whenBool isShiftDown (onTodoListMsg (TodoList.splitNewTodoFrom todo))
+                        let
+                            _ =
+                                Debug.log "EditTodoKeyUp" ("enter presseed")
+                        in
+                            setTodoTextAndDeactivateEditing todo
 
+                    --                            >> whenBool isShiftDown (onTodoListMsg (TodoList.splitNewTodoFrom todo))
                     Escape ->
                         deactivateEditingMode
 

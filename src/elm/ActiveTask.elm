@@ -8,7 +8,7 @@ import FunctionExtra exposing (..)
 
 
 type State
-    = Started Time
+    = Started Time Time
     | Stopped
 
 
@@ -25,7 +25,7 @@ init =
 
 
 start id now =
-    Task id (Started now) 0 now |> Just
+    Task id (Started now now) 0 now |> Just
 
 
 getTodoId =
@@ -34,8 +34,8 @@ getTodoId =
 
 getElapsedTime now task =
     case task.state of
-        Started time ->
-            (now - time) + task.timeSpent
+        Started startedAt lastBeepedAt ->
+            (now - startedAt) + task.timeSpent
 
         Stopped ->
             task.timeSpent

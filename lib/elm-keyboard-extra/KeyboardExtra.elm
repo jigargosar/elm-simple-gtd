@@ -15,7 +15,7 @@ onKeyUp onKeyMsg =
 
 targetKeyDecoder : Decoder Key
 targetKeyDecoder =
-    D.map KX.fromCode (D.field "keyCode2" D.int)
+    D.map KX.fromCode (D.field "keyCode" D.int)
 
 
 type alias KeyboardEvent =

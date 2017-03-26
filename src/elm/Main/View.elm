@@ -87,7 +87,7 @@ activeTaskView { todoVM, elapsedTime } m =
             [ div [ class "elapsed-time" ] [ text (TimeExtra.toHHMMSS elapsedTime) ]
             , iconButton [ icon "av:pause" ] []
             , iconButton [ icon "av:stop", TodoList.stop |> OnTodoMsg >> onClick ] []
-            , iconButton [ icon "check" , TodoList.stopAndMarkDone |> OnTodoMsg >> onClick ] []
+            , iconButton [ icon "check", TodoList.stopAndMarkDone |> OnTodoMsg >> onClick ] []
             ]
         ]
 

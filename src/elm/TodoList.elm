@@ -86,8 +86,8 @@ update config msg =
 
             SplitNewTodoFromAt todo now ->
                 updateAndPersistMaybeTodo (splitNewTodoFromAt todo now)
+                    >> config.editTodo (todoInputId todo) todo
 
-            --                    >> config.editTodo (todoInputId todo) todo
             Start id ->
                 startActiveTask id
 

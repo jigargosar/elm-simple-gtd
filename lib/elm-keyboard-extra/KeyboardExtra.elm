@@ -4,6 +4,7 @@ import Html exposing (Attribute)
 import Html.Events as Events
 import Json.Decode as D exposing (Decoder)
 import Keyboard.Extra as KX exposing (Key)
+import FunctionExtra.Operators exposing (..)
 
 
 onKeyUp : (Key -> msg) -> Attribute msg
@@ -38,3 +39,15 @@ onEnter msg =
 
 keyUps =
     KX.ups
+
+
+init =
+    KX.initialState
+
+
+subscription tagger =
+    Sub.map tagger KX.subscriptions
+
+
+update setter =
+    KX.update >>> setter

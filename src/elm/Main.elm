@@ -132,7 +132,7 @@ onEditTodoMsg msg =
         case msg of
             EditTodoClicked todo ->
                 Return.map (Model.activateEditTodoMode todo)
-                    >> Return.command (autoFocusFirstInput)
+                    >> Return.command (focusFirstAutoFocusElement)
 
             EditTodoTextChanged text ->
                 Return.map (Model.updateEditTodoText text)
@@ -177,5 +177,5 @@ deactivateEditingMode =
 port domFocusSelector : String -> Cmd msg
 
 
-autoFocusFirstInput =
+focusFirstAutoFocusElement =
     domFocusSelector ".auto-focus"

@@ -1,7 +1,6 @@
 module TodoList exposing (..)
 
 import ActiveTask exposing (MaybeActiveTask)
-import DomTypes exposing (DomId)
 import List.Extra as List
 import Main.Model
 import Main.Msg exposing (EditTodoMsg(EditTodoClicked), Msg(..))

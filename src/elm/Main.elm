@@ -126,12 +126,8 @@ onEditTodoMsg msg =
     in
         case msg of
             EditTodoClicked todo ->
-                let
-                    _ =
-                        Debug.log "todo" (todo)
-                in
-                    Return.map (Model.activateEditTodoMode todo)
-                        >> Return.command (focusFirstAutoFocusElement)
+                Return.map (Model.activateEditTodoMode todo)
+                    >> focusFirstAutoFocusElement
 
             EditTodoTextChanged text ->
                 Return.map (Model.updateEditTodoText text)
@@ -173,4 +169,4 @@ port documentQuerySelectorAndFocus : String -> Cmd msg
 
 
 focusFirstAutoFocusElement =
-    documentQuerySelectorAndFocus ".auto-focus"
+    documentQuerySelectorAndFocus ".auto-focus" |> Return.command

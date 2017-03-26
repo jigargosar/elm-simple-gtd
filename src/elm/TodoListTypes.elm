@@ -1,7 +1,7 @@
 module TodoListTypes exposing (..)
 
 import Time exposing (Time)
-import Todo exposing (TodoGroup, TodoId)
+import Todo exposing (Todo, TodoGroup, TodoId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -20,6 +20,7 @@ type TodoMsg
     | UpdateTodo UpdateAction TodoId
     | AddNewTodo String
     | AddNewTodoAt String Time
+    | SplitNewTodoFrom Todo
     | Start TodoId
     | Stop
     | StopAndMarkDone

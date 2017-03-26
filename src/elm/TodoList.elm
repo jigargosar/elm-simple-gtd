@@ -46,6 +46,11 @@ addNewTodo =
     AddNewTodo
 
 
+splitNewTodoFrom : Todo -> TodoMsg
+splitNewTodoFrom =
+    SplitNewTodoFrom
+
+
 stop =
     Stop
 

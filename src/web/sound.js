@@ -6,15 +6,27 @@ const _ = R
 import howler from "howler"
 
 
+export default () => {
+    const Howl = howler.Howl
 
+    const sound = new Howl({
+        src: ['alarm.ogg']
+    });
 
-const Howl = howler.Howl
+    let id1 = null;
 
-const sound = new Howl({
-    src: ['alarm.ogg']
-});
+    const start = () => {
+        stop()
+        id1 = sound.play()
+        sound.fade(0, 1, 5000, id1)
+    }
 
-const id1 = sound.play();
+    const stop = () => {
+        if (id1) sound.stop()
+    }
 
-sound.fade(0, 1, 5000, id1);
-
+    return {
+        start,
+        stop
+    }
+}

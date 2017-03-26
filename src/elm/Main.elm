@@ -170,3 +170,9 @@ port documentQuerySelectorAndFocus : String -> Cmd msg
 
 focusFirstAutoFocusElement =
     documentQuerySelectorAndFocus ".auto-focus" |> Return.command
+
+
+port startAlarm : () -> Cmd msg
+
+
+port stopAlarm : () -> Cmd msg

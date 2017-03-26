@@ -93,7 +93,7 @@ update update2 msg =
                 Return.andThen
                     (splitNewTodoFromAt todo now
                         >> mapMaybeSecondToCmd
-                            (applyList [ persistTodoCmd, focusTodo >> message ] >> Cmd.batch)
+                            (applyList [ persistTodoCmd, editTodo >> message ] >> Cmd.batch)
                     )
 
             Start id ->
@@ -111,8 +111,8 @@ mapMaybeSecondToCmd maybeToCmd =
     Tuple2.mapSecond (Maybe.map maybeToCmd >> Maybe.withDefault Cmd.none)
 
 
-focusTodo todo =
-    EditTodoClicked (todoInputId todo) todo |> OnEditTodoMsg
+editTodo todo =
+    EditTodoClicked todo |> OnEditTodoMsg
 
 
 startActiveTask : TodoId -> RF

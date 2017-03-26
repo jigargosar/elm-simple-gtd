@@ -59,7 +59,7 @@ todoViewNotEditing vc todo =
                 ]
 
         itemAttributes =
-            [ onClickStopPropagation (vc.onEditTodoClicked (todoInputId todo) todo) ]
+            [ onClickStopPropagation (vc.onEditTodoClicked todo) ]
     in
         todoViewWithItemBodyView itemAttributes itemBodyView vc todo
 

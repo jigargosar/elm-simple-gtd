@@ -130,9 +130,8 @@ onEditTodoMsg msg =
                 >> deactivateEditingMode
     in
         case msg of
-            EditTodoClicked focusInputId todo ->
+            EditTodoClicked todo ->
                 Return.map (Model.activateEditTodoMode todo)
-                    >> domFocus focusInputId
 
             EditTodoTextChanged text ->
                 Return.map (Model.updateEditTodoText text)

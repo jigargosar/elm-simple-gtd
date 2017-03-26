@@ -33,7 +33,7 @@ import TodoGroupViewModel exposing (TodoGroupViewModel, getTodoGroupsViewModel)
 
 type alias ViewConfig msg =
     { onDeleteTodoClicked : TodoId -> msg
-    , onEditTodoClicked : Dom.Id -> Todo -> msg
+    , onEditTodoClicked : Todo -> msg
     , onEditTodoTextChanged : String -> msg
     , onEditTodoBlur : Todo -> msg
     , onEditTodoKeyUp : Todo -> KeyboardEvent -> msg

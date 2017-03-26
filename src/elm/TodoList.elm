@@ -75,6 +75,12 @@ update msg =
             AddNewTodoAt text now ->
                 updateAndPersistMaybeTodo (addNewTodoAt text now)
 
+            SplitNewTodoFrom todo ->
+                withNow (SplitNewTodoFromAt todo)
+
+            SplitNewTodoFromAt todo now ->
+                updateAndPersistMaybeTodo (splitNewTodoFromAt todo now)
+
             Start id ->
                 startActiveTask id
 
@@ -123,6 +129,11 @@ addNewTodoAt text now m =
         ( m, Nothing )
     else
         Random.step (Todo.generator now text) (Main.Model.getSeed m)
+            |> Tuple.mapSecond (Main.Model.setSeed # m)
+            |> apply2 ( uncurry addTodo, Tuple.first >> Just )
+
+splitNewTodoFromAt todo now m =
+        Random.step (Todo.copyGenerator now todo) (Main.Model.getSeed m)
             |> Tuple.mapSecond (Main.Model.setSeed # m)
             |> apply2 ( uncurry addTodo, Tuple.first >> Just )
 

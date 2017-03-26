@@ -21,6 +21,7 @@ type TodoMsg
     | AddNewTodo String
     | AddNewTodoAt String Time
     | SplitNewTodoFrom Todo
+    | SplitNewTodoFromAt Todo Time
     | Start TodoId
     | Stop
     | StopAndMarkDone

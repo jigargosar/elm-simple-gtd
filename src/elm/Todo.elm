@@ -194,6 +194,10 @@ initWith createdAt text id =
     todoConstructor id defaultRevision createdAt createdAt False text defaultDueAt defaultDeleted Inbox
 
 
+copyTodo createdAt todo id =
+    { todo | id = id, createdAt = createdAt, modifiedAt = createdAt }
+
+
 type alias EncodedTodo =
     E.Value
 
@@ -242,6 +246,10 @@ decodeTodoList =
 
 generator createdAt text =
     Random.map (initWith createdAt text) RandomIdGenerator.idGen
+
+
+copyGenerator createdAt todo =
+    Random.map (copyTodo createdAt todo) RandomIdGenerator.idGen
 
 
 createdAtInWords : Time -> Todo -> String

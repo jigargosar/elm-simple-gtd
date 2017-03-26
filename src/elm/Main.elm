@@ -3,6 +3,7 @@ port module Main exposing (..)
 import Dom
 import DomTypes exposing (DomId)
 import DomUpdate
+import FunctionExtra exposing (..)
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Main.Model as Model exposing (Model)
@@ -135,10 +136,11 @@ onEditTodoMsg msg =
             EditTodoBlur todo ->
                 setTodoTextAndDeactivateEditing todo
 
-            EditTodoKeyUp todo { key } ->
+            EditTodoKeyUp todo { key, isShiftDown } ->
                 case key of
                     Enter ->
                         setTodoTextAndDeactivateEditing todo
+                            >> whenBool isShiftDown (onTodoListMsg (TodoList.splitNewTodoFrom todo))
 
                     Escape ->
                         deactivateEditingMode

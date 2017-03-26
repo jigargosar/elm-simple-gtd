@@ -2,7 +2,7 @@ module TodoList exposing (..)
 
 import ActiveTask exposing (MaybeActiveTask)
 import List.Extra as List
-import Main.Model
+import Main.Model as Model
 import Main.Msg as Msg exposing (..)
 import Main.Types exposing (Model, ModelF)
 import Maybe.Extra
@@ -107,7 +107,7 @@ mapMaybeSecondToCmd maybeToCmd =
 
 startActiveTask : TodoId -> RF
 startActiveTask id =
-    Return.map (updateActiveTask (Main.Model.getNow >> ActiveTask.start id))
+    Return.map (updateActiveTask (Model.getNow >> ActiveTask.start id))
 
 
 type alias RF =
@@ -147,19 +147,19 @@ addNewTodoAt text now m =
     if String.trim text |> String.isEmpty then
         ( m, Nothing )
     else
-        Random.step (Todo.generator now text) (Main.Model.getSeed m)
-            |> Tuple.mapSecond (Main.Model.setSeed # m)
+        Random.step (Todo.generator now text) (Model.getSeed m)
+            |> Tuple.mapSecond (Model.setSeed # m)
             |> apply2 ( uncurry addTodo, Tuple.first >> Just )
 
 
 splitNewTodoFromAt todo now m =
-    Random.step (Todo.copyGenerator now todo) (Main.Model.getSeed m)
-        |> Tuple.mapSecond (Main.Model.setSeed # m)
+    Random.step (Todo.copyGenerator now todo) (Model.getSeed m)
+        |> Tuple.mapSecond (Model.setSeed # m)
         |> apply2 ( uncurry addTodo, Tuple.first >> Just )
 
 
 addTodo todo =
-    updateTodoList (Main.Model.getTodoList >> (::) todo)
+    updateTodoList (Model.getTodoList >> (::) todo)
 
 
 setTodoList : TodoList -> ModelF

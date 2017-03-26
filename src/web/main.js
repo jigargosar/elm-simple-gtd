@@ -43,12 +43,15 @@ async function boot() {
     });
 
 
-    app.ports["focusSelector"].subscribe((selector) =>{
-        const selected = document.querySelector(selector)
-        if(selected){
-            selected.focus()
-        }
-
+    app.ports["documentQuerySelectorAndFocus"].subscribe((selector) =>{
+        setTimeout(()=>{
+            requestAnimationFrame(()=>{
+                const selected = document.querySelector(selector)
+                if(selected){
+                    selected.focus()
+                }
+            })
+        },0)
     })
 
 }

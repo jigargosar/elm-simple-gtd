@@ -195,7 +195,7 @@ initWith createdAt text id =
 
 
 copyTodo createdAt todo id =
-    { todo | id = id, createdAt = createdAt, modifiedAt = createdAt }
+    { todo | id = id, rev = defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
 
 
 type alias EncodedTodo =

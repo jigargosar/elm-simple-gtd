@@ -65,6 +65,11 @@ todoInputId todo =
     "edit-todo-input-" ++ (Todo.getId todo)
 
 
+message : msg -> Cmd msg
+message x =
+    Task.perform identity (Task.succeed x)
+
+
 update : (Msg -> Model -> Return Msg Model) -> TodoMsg -> Model -> ( Model, Cmd Msg )
 update update2 msg =
     Return.singleton
@@ -85,11 +90,11 @@ update update2 msg =
                 withNow (SplitNewTodoFromAt todo)
 
             SplitNewTodoFromAt todo now ->
-                updateAndPersistMaybeTodo (splitNewTodoFromAt todo now)
-                    >> Return.andThen
-                        (update2
-                            (EditTodoClicked (todoInputId todo) todo |> OnEditTodoMsg)
-                        )
+                Return.andThen
+                    (splitNewTodoFromAt todo now
+                        >> mapMaybeSecondToCmd
+                            (applyList [ persistTodoCmd, focusTodo >> message ] >> Cmd.batch)
+                    )
 
             Start id ->
                 startActiveTask id
@@ -100,6 +105,14 @@ update update2 msg =
             StopAndMarkDone ->
                 markDoneIfActive (update update2)
                     >> stopTaskIfActive
+
+
+mapMaybeSecondToCmd maybeToCmd =
+    Tuple2.mapSecond (Maybe.map maybeToCmd >> Maybe.withDefault Cmd.none)
+
+
+focusTodo todo =
+    EditTodoClicked (todoInputId todo) todo |> OnEditTodoMsg
 
 
 startActiveTask : TodoId -> RF

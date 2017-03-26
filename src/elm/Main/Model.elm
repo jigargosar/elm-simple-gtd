@@ -128,7 +128,11 @@ mapAllExceptDeleted mapper =
 
 setEditModeTo : EditMode -> ModelF
 setEditModeTo editMode m =
-    { m | editMode = editMode }
+    let
+        _ =
+            Debug.log "changing editMode" (editMode)
+    in
+        { m | editMode = editMode }
 
 
 getEditMode : Model -> EditMode
@@ -173,6 +177,19 @@ updateSeed updater model =
 
 deactivateEditingMode =
     setEditModeTo NotEditing
+
+
+deactivateEditingModeFor : Todo -> ModelF
+deactivateEditingModeFor todo model =
+    case getEditMode model of
+        EditTodoMode editingTodo ->
+            if Todo.equalById todo editingTodo then
+                deactivateEditingMode model
+            else
+                model
+
+        _ ->
+            model
 
 
 findTodoEqualById todo =

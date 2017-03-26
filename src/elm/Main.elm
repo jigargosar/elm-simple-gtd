@@ -127,12 +127,16 @@ onEditTodoMsg msg =
     let
         setTodoTextAndDeactivateEditing todo =
             onTodoListMsg (TodoList.setText (Todo.getText todo) (Todo.getId todo))
-                >> deactivateEditingMode
+                >> deactivateEditingModeFor todo
     in
         case msg of
             EditTodoClicked todo ->
-                Return.map (Model.activateEditTodoMode todo)
-                    >> Return.command (focusFirstAutoFocusElement)
+                let
+                    _ =
+                        Debug.log "todo" (todo)
+                in
+                    Return.map (Model.activateEditTodoMode todo)
+                        >> Return.command (focusFirstAutoFocusElement)
 
             EditTodoTextChanged text ->
                 Return.map (Model.updateEditTodoText text)
@@ -172,6 +176,11 @@ domFocus =
 
 deactivateEditingMode =
     Return.map (Model.deactivateEditingMode)
+
+
+deactivateEditingModeFor : Todo -> ReturnF
+deactivateEditingModeFor =
+    Model.deactivateEditingModeFor >> Return.map
 
 
 port documentQuerySelectorAndFocus : String -> Cmd msg

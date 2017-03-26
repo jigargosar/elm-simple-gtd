@@ -42,6 +42,15 @@ async function boot() {
         }
     });
 
+
+    app.ports["focusSelector"].subscribe((selector) =>{
+        const selected = document.querySelector(selector)
+        if(selected){
+            selected.focus()
+        }
+
+    })
+
 }
 
 boot().catch(console.error)

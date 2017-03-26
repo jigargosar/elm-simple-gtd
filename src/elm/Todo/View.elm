@@ -24,7 +24,7 @@ todoViewEditing vc todo =
             itemBody []
                 [ input
                     [ id (todoInputId todo)
-                    , class "edit-todo-input"
+                    , class "edit-todo-input auto-focus"
                     , boolProperty "noLabelFloat" True
                     , value (Todo.getText todo)
                     , onInput vc.onEditTodoTextChanged

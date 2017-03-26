@@ -174,8 +174,8 @@ deactivateEditingMode =
     Return.map (Model.deactivateEditingMode)
 
 
-port domFocusSelector : String -> Cmd msg
+port documentQuerySelectorAndFocus : String -> Cmd msg
 
 
 focusFirstAutoFocusElement =
-    domFocusSelector ".auto-focus"
+    documentQuerySelectorAndFocus ".auto-focus"

@@ -152,8 +152,8 @@ onEditTodoMsg msg =
                                 Debug.log "EditTodoKeyUp" ("enter presseed")
                         in
                             setTodoTextAndDeactivateEditing todo
+                                >> whenBool isShiftDown (onTodoListMsg (TodoList.splitNewTodoFrom todo))
 
-                    --                            >> whenBool isShiftDown (onTodoListMsg (TodoList.splitNewTodoFrom todo))
                     Escape ->
                         deactivateEditingMode
 

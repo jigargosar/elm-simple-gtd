@@ -24,7 +24,7 @@ async function boot() {
         .embed(document.getElementById("root"), {now: Date.now(), encodedTodoList: allTodos})
 
 
-    app.ports["pouchDBBulkDocks"].subscribe(async ([dbName, docs]) => {
+    app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {
         const bulkResult = await dbMap[dbName].bulkDocs(docs)
         // const conflicts =
         //     _.filter(_.compose(_.propEq("name", "conflict"), _.head)
@@ -35,7 +35,7 @@ async function boot() {
         app.ports["onPouchDBBulkDocksResponse"].send([dbName, bulkResult, docs])
     })
 
-    app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
+    app.ports["pouchDBUpsert"].subscribe(async([dbName, id, doc]) => {
         const upsertResult = await dbMap[dbName].upsert(id, doc)
         if (_.F()) {
             console.log("upsertResult", upsertResult)
@@ -43,15 +43,15 @@ async function boot() {
     });
 
 
-    app.ports["documentQuerySelectorAndFocus"].subscribe((selector) =>{
-        setTimeout(()=>{
-            requestAnimationFrame(()=>{
+    app.ports["documentQuerySelectorAndFocus"].subscribe((selector) => {
+        setTimeout(() => {
+            requestAnimationFrame(() => {
                 const selected = document.querySelector(selector)
-                if(selected){
+                if (selected) {
                     selected.focus()
                 }
             })
-        },0)
+        }, 0)
     })
 
 }

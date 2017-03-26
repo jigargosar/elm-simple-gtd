@@ -1,8 +1,10 @@
 module TodoList exposing (..)
 
 import ActiveTask exposing (MaybeActiveTask)
+import DomTypes exposing (DomId)
 import List.Extra as List
 import Main.Model exposing (Model)
+import Main.Msg exposing (Msg)
 import Main.Types exposing (ModelF)
 import Maybe.Extra
 import Random.Pcg as Random
@@ -59,8 +61,12 @@ stopAndMarkDone =
     StopAndMarkDone
 
 
-update : TodoMsg -> Model -> ( Model, Cmd TodoMsg )
-update msg =
+todoInputId todo =
+    "edit-todo-input-" ++ (Todo.getId todo)
+
+
+update : { editTodo : DomId -> Todo -> Msg } -> TodoMsg -> Model -> ( Model, Cmd TodoMsg )
+update config msg =
     Return.singleton
         >> case msg of
             UpdateTodo action id ->
@@ -88,7 +94,7 @@ update msg =
                 stopTaskIfActive
 
             StopAndMarkDone ->
-                markDoneIfActive
+                markDoneIfActive (update config)
                     >> stopTaskIfActive
 
 
@@ -100,7 +106,7 @@ stopTaskIfActive =
     Return.map (setActiveTask ActiveTask.init)
 
 
-markDoneIfActive =
+markDoneIfActive update =
     Return.andThen
         (\m ->
             getActiveTask m
@@ -132,10 +138,11 @@ addNewTodoAt text now m =
             |> Tuple.mapSecond (Main.Model.setSeed # m)
             |> apply2 ( uncurry addTodo, Tuple.first >> Just )
 
+
 splitNewTodoFromAt todo now m =
-        Random.step (Todo.copyGenerator now todo) (Main.Model.getSeed m)
-            |> Tuple.mapSecond (Main.Model.setSeed # m)
-            |> apply2 ( uncurry addTodo, Tuple.first >> Just )
+    Random.step (Todo.copyGenerator now todo) (Main.Model.getSeed m)
+        |> Tuple.mapSecond (Main.Model.setSeed # m)
+        |> apply2 ( uncurry addTodo, Tuple.first >> Just )
 
 
 addTodo todo =

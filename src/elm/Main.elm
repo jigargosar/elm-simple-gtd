@@ -78,7 +78,12 @@ update msg =
                 onTodoListMsg (TodoList.toggleDone todoId)
 
             OnTodoMsg msg ->
-                Return.andThen (TodoList.update msg >> Return.mapCmd OnTodoMsg)
+                Return.andThen
+                    (TodoList.update
+                        { editTodo = EditTodoClicked >>> OnEditTodoMsg }
+                        msg
+                        >> Return.mapCmd OnTodoMsg
+                    )
 
             OnDomMsg msg ->
                 Return.andThen (DomUpdate.update msg >> Return.mapCmd OnDomMsg)

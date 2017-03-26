@@ -1,7 +1,7 @@
 module Main.Routing exposing (..)
 
 import Main.Model as Model exposing (Model)
-import Main.Msg as Msg exposing (Msg)
+import Msg as Msg exposing (Msg)
 import Main.Types exposing (MainViewType(..))
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)

@@ -3,7 +3,7 @@ module InboxFlow.Model exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Flow
-import Main.Msg as Msg exposing (Msg)
+import Msg as Msg exposing (Msg)
 import Todo exposing (Todo, TodoList)
 
 

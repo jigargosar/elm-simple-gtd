@@ -5,7 +5,7 @@ import Dict
 import InboxFlow.View exposing (TodoViewModel)
 import Json.Encode as E
 import List.Extra as List
-import Main.Msg exposing (..)
+import Msg exposing (..)
 import Main.Types exposing (EditMode(EditNewTodoMode, EditTodoMode, NotEditing), Model, ModelF, MainViewType(..), defaultViewType)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)

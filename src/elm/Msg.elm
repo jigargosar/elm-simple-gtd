@@ -1,4 +1,4 @@
-module Main.Msg exposing (..)
+module Msg exposing (..)
 
 import Dom
 import Flow.Model exposing (FlowAction(..))

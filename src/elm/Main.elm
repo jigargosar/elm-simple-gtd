@@ -5,7 +5,7 @@ import FunctionExtra exposing (..)
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Main.Model as Model exposing (Model)
-import Main.Msg as Msg exposing (..)
+import Msg as Msg exposing (..)
 import Main.Routing
 import Main.View exposing (appView)
 import Navigation exposing (Location)

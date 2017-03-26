@@ -3,7 +3,7 @@ module TodoList exposing (..)
 import ActiveTask exposing (MaybeActiveTask)
 import List.Extra as List
 import Main.Model as Model
-import Main.Msg as Msg exposing (..)
+import Msg as Msg exposing (..)
 import Main.Types exposing (Model, ModelF)
 import Maybe.Extra
 import Random.Pcg as Random

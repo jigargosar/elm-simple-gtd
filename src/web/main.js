@@ -8,19 +8,7 @@ import PouchDB from "./local-pouch-db"
 
 import R from "ramda"
 
-import howler from "howler"
-
-const Howl = howler.Howl
-
-const sound = new Howl({
-    src: ['alarm.ogg']
-});
-
-const id1 = sound.play();
-
-sound.fade(0, 1, 5000, id1);
-
-console.log(howler)
+import sound from "./sound"
 
 const _ = R
 

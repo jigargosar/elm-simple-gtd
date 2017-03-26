@@ -118,11 +118,11 @@ newTodoInputView editMode =
         EditNewTodoMode text ->
             input
                 [ id newTodoInputId
+                , class ".auto-focus"
                 , onInput onNewTodo.input
                 , value text
                 , onBlur onNewTodo.blur
                 , onKeyUp (onNewTodo.keyUp text)
-                , autofocus True
                 ]
                 []
 

@@ -80,7 +80,7 @@ update msg =
             OnTodoMsg msg ->
                 Return.andThen
                     (TodoList.update
-                        { editTodo = EditTodoClicked >>> OnEditTodoMsg }
+                        update
                         msg
                     )
 

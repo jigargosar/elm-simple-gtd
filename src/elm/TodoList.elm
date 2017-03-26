@@ -4,7 +4,7 @@ import ActiveTask exposing (MaybeActiveTask)
 import DomTypes exposing (DomId)
 import List.Extra as List
 import Main.Model
-import Main.Msg exposing (Msg)
+import Main.Msg exposing (EditTodoMsg(EditTodoClicked), Msg(..))
 import Main.Types exposing (Model, ModelF)
 import Maybe.Extra
 import Random.Pcg as Random
@@ -65,8 +65,8 @@ todoInputId todo =
     "edit-todo-input-" ++ (Todo.getId todo)
 
 
-update : { editTodo : DomId -> Todo -> Msg } -> TodoMsg -> Model -> ( Model, Cmd Msg )
-update config msg =
+update : (Msg -> Model -> Return Msg Model) -> TodoMsg -> Model -> ( Model, Cmd Msg )
+update update2 msg =
     Return.singleton
         >> case msg of
             UpdateTodo action id ->
@@ -86,7 +86,10 @@ update config msg =
 
             SplitNewTodoFromAt todo now ->
                 updateAndPersistMaybeTodo (splitNewTodoFromAt todo now)
-                    >> config.editTodo (todoInputId todo) todo
+                    >> Return.andThen
+                        (update2
+                            (EditTodoClicked (todoInputId todo) todo |> OnEditTodoMsg)
+                        )
 
             Start id ->
                 startActiveTask id
@@ -95,7 +98,7 @@ update config msg =
                 stopTaskIfActive
 
             StopAndMarkDone ->
-                markDoneIfActive (update config)
+                markDoneIfActive (update update2)
                     >> stopTaskIfActive
 
 

@@ -1,5 +1,6 @@
 module TodoMsg exposing (..)
 
+import KeyboardExtra exposing (KeyboardEvent)
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)
 import Toolkit.Helpers exposing (..)
@@ -7,6 +8,21 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 
+
+type NewTodoMsg
+    = AddTodoClicked
+    | NewTodoTextChanged String
+    | NewTodoBlur
+    | NewTodoKeyUp String KeyboardEvent
+
+
+type EditTodoMsg
+    = StartEditingTodo Todo
+    | EditTodoTextChanged String
+    | EditTodoBlur Todo
+    | EditTodoKeyUp Todo KeyboardEvent
+
+type EditModeMsg = OnNewTodoMsg NewTodoMsg | OnEditTodoMsg EditTodoMsg
 
 type UpdateAction
     = ToggleDone
@@ -37,6 +53,7 @@ type TodoMsg
     | StopAndMarkDone
     | OnRequiresNowAction RequiresNowAction
     | OnActionWithNow RequiresNowAction Time
+    | OnEditModeMsg EditModeMsg
 
 
 update =

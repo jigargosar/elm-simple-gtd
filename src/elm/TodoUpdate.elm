@@ -3,10 +3,10 @@ module TodoUpdate exposing (..)
 import RunningTodoDetails exposing (RunningTodoDetails)
 import List.Extra as List
 import Main.Model as Model
-import Types exposing (Model, ModelF, Msg)
+import Types exposing (Model, ModelF, Msg, Return, ReturnF)
 import Maybe.Extra
 import Random.Pcg as Random
-import Return exposing (Return, ReturnF)
+import Return
 import Task
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
@@ -47,6 +47,9 @@ update msg =
             OnActionWithNow action now ->
                 onWithNow action now
 
+            OnEditModeMsg msg ->
+                onEditModeMsg msg
+
 
 andThenMapSecond fun toCmd =
     Return.andThen (fun >> Tuple.mapSecond toCmd)
@@ -69,27 +72,23 @@ onWithNow action now =
             andThenMapSecond (copyNewTodo todo now) persistAndEditTodoCmd
 
 
-startTodo : TodoId -> RF
+startTodo : TodoId -> ReturnF
 startTodo id =
     Return.map (updateRunningTodoDetails (Model.getNow >> RunningTodoDetails.start id))
 
 
-type alias RF =
-    Return Msg Model -> Return Msg Model
-
-
-stopRunningTodo : Return Msg Model -> Return Msg Model
+stopRunningTodo : ReturnF
 stopRunningTodo =
     Return.map (setRunningTodoDetails RunningTodoDetails.init)
 
 
-markRunningTodoDone : RF
+markRunningTodoDone : ReturnF
 markRunningTodoDone =
     apply2 ( Tuple.first >> Model.getRunningTodoId, identity )
         >> uncurry (Maybe.Extra.unwrap identity markTodoIdDone)
 
 
-markTodoIdDone : TodoId -> RF
+markTodoIdDone : TodoId -> ReturnF
 markTodoIdDone id =
     Return.andThen (update (markDone id))
 
@@ -138,7 +137,7 @@ updateAndPersistMaybeTodo updater =
         (updater >> Tuple2.mapSecond persistMaybeTodoCmd)
 
 
-withNow : (Time -> TodoMsg) -> ReturnF Msg Model
+withNow : (Time -> TodoMsg) -> ReturnF
 withNow msg =
     Task.perform (msg >> Types.OnTodoMsg) Time.now |> Return.command
 
@@ -198,3 +197,8 @@ updateTodoMaybe updater todoId m =
         ( setTodoList newTodoList m
         , List.find (Todo.hasId todoId) newTodoList
         )
+
+
+onEditModeMsg : EditModeMsg -> ReturnF
+onEditModeMsg msg =
+    identity

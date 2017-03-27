@@ -34,7 +34,6 @@ import FunctionExtra.Operators exposing (..)
 import Todo.View
 
 
-
 appView m =
     div []
         [ appDrawerLayoutView m
@@ -134,7 +133,7 @@ addTodoFabView m =
     fab
         [ id "add-fab"
         , attribute "icon" "add"
-        , onClick (onNewTodo.add newTodoInputId)
+        , onClick onNewTodo.add
         ]
         []
 

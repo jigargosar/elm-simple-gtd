@@ -91,7 +91,7 @@ onNewTodoMsg msg =
             Return.map (Model.activateEditNewTodoMode text)
     in
         case msg of
-            AddTodoClicked focusInputId ->
+            AddTodoClicked ->
                 activateEditNewTodoMode ""
                     >> focusFirstAutoFocusElement
 

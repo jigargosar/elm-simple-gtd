@@ -16,7 +16,7 @@ import TodoMsg exposing (TodoMsg)
 
 
 type NewTodoMsg
-    = AddTodoClicked Dom.Id
+    = AddTodoClicked
     | NewTodoTextChanged String
     | NewTodoBlur
     | NewTodoKeyUp String KeyboardEvent
@@ -30,7 +30,7 @@ type EditTodoMsg
 
 
 onNewTodo =
-    { add = AddTodoClicked >> OnNewTodoMsg
+    { add = AddTodoClicked |> OnNewTodoMsg
     , input = NewTodoTextChanged >> OnNewTodoMsg
     , blur = NewTodoBlur |> OnNewTodoMsg
     , keyUp = NewTodoKeyUp >>> OnNewTodoMsg

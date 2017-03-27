@@ -53,9 +53,9 @@ update msg =
 splitNewTodoAt todo now =
     Return.andThen
         (splitNewTodoFromAt todo now
-            >> mapMaybeSecondToCmd
+            >> Tuple2.mapSecond
                 (applyList
-                    [ persistTodoCmd, Msg.startEditingTodo  >> Msg.toCmd ]
+                    [ persistTodoCmd, Msg.startEditingTodo >> Msg.toCmd ]
                     >> Cmd.batch
                 )
         )
@@ -71,10 +71,6 @@ onWithNow action now =
 
         SplitNewTodoFrom todo ->
             splitNewTodoAt todo now
-
-
-mapMaybeSecondToCmd maybeToCmd =
-    Tuple2.mapSecond (Maybe.map maybeToCmd >> Maybe.withDefault Cmd.none)
 
 
 startRunningTodoDetails : TodoId -> RF
@@ -129,7 +125,7 @@ addNewTodoAt text now m =
 splitNewTodoFromAt todo now m =
     Random.step (Todo.copyGenerator now todo) (Model.getSeed m)
         |> Tuple.mapSecond (Model.setSeed # m)
-        |> apply2 ( uncurry addTodo, Tuple.first >> Just )
+        |> apply2 ( uncurry addTodo, Tuple.first )
 
 
 addTodo todo =

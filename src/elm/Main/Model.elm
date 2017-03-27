@@ -1,6 +1,6 @@
 module Main.Model exposing (..)
 
-import ActiveTodo exposing (ActiveTodo, MaybeActiveTodo)
+import ActiveTodoState exposing (ActiveTodoState, MaybeActiveTodoState)
 import Dict
 import InboxFlow.View exposing (TodoViewModel)
 import Json.Encode as E
@@ -32,51 +32,40 @@ init now encodedTodoList =
         NotEditing
         defaultViewType
         (Random.seedFromTime now)
-        ActiveTodo.init
+        ActiveTodoState.init
 
 
 type alias ActiveTaskViewModel =
     { todoVM : Todo.ViewModel, now : Time, elapsedTime : Time }
 
 
-getActiveTodo : Model -> MaybeActiveTodo
-getActiveTodo =
-    (.activeTodo)
+getActiveTodoState : Model -> MaybeActiveTodoState
+getActiveTodoState =
+    (.activeTodoState)
 
-
-setActiveTodo : MaybeActiveTodo -> ModelF
-setActiveTodo activeTodo model =
-    { model | activeTodo = activeTodo }
-
-
-updateActiveTodo : (Model -> MaybeActiveTodo) -> ModelF
-updateActiveTodo updater model =
-    setActiveTodo (updater model) model
-
-
-getActiveTodoId =
-    getActiveTodo >> ActiveTodo.getMaybeId
+getActiveTodoStateId =
+    getActiveTodoState >> ActiveTodoState.getMaybeId
 
 
 getActiveTaskViewModel : Model -> Maybe ActiveTaskViewModel
 getActiveTaskViewModel m =
     let
         maybeTodo =
-            getActiveTodoId m ?+> (getTodoById # m)
+            getActiveTodoStateId m ?+> (getTodoById # m)
     in
-        maybe2Tuple ( getActiveTodo m, maybeTodo )
+        maybe2Tuple ( getActiveTodoState m, maybeTodo )
             ?|> (toActiveTaskVM # m)
 
 
-toActiveTaskVM : ( ActiveTodo, Todo ) -> Model -> ActiveTaskViewModel
-toActiveTaskVM ( activeTodo, todo ) m =
+toActiveTaskVM : ( ActiveTodoState, Todo ) -> Model -> ActiveTaskViewModel
+toActiveTaskVM ( activeTodoState, todo ) m =
     let
         now =
             getNow m
     in
         { todoVM = Todo.toVM todo
         , now = now
-        , elapsedTime = ActiveTodo.getElapsedTime now activeTodo
+        , elapsedTime = ActiveTodoState.getElapsedTime now activeTodoState
         }
 
 

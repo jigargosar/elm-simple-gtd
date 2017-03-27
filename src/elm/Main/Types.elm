@@ -1,6 +1,6 @@
 module Main.Types exposing (..)
 
-import ActiveTodo exposing (MaybeActiveTodo)
+import ActiveTodoState exposing (MaybeActiveTodoState)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoList)
@@ -32,7 +32,7 @@ type alias Model =
     , editMode : EditMode
     , mainViewType : MainViewType
     , seed : Seed
-    , activeTodo : MaybeActiveTodo
+    , activeTodoState : MaybeActiveTodoState
     }
 
 

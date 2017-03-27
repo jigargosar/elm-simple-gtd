@@ -1,6 +1,6 @@
 module Main.View exposing (appView)
 
-import ActiveTodo exposing (MaybeActiveTodo)
+import ActiveTodoState exposing (MaybeActiveTodoState)
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, hr, node, span, text)

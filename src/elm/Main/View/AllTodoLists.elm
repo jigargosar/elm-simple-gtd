@@ -63,21 +63,21 @@ createTodoListViewConfig model =
 
 allTodoListByGroupView : Model -> Html Msg
 allTodoListByGroupView =
-    apply2 ( foo, getTodoGroupsViewModel )
+    apply2 ( todoViewFromModel >> keyedTodoGroupView, getTodoGroupsViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
 
 
-foo model =
-    keyedTodoGroupView (todoView (createTodoListViewConfig model))
-
-
 todoListView : Model -> Html Msg
 todoListView =
-    apply2 ( createTodoListViewConfig >> todoView, Model.getFilteredTodoList )
+    apply2 ( todoViewFromModel, Model.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
                 Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
            )
+
+
+todoViewFromModel =
+    createTodoListViewConfig >> todoView
 
 
 type alias TodoView =

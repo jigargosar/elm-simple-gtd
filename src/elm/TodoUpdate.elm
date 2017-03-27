@@ -34,7 +34,7 @@ update msg =
     Return.singleton
         >> case msg of
             Start id ->
-                startRunningTodo id
+                startTodo id
 
             Stop ->
                 stopRunningTodo
@@ -71,8 +71,8 @@ onWithNow action now =
             andThenMapSecond (copyNewTodo todo now) persistAndEditTodoCmd
 
 
-startRunningTodo : TodoId -> RF
-startRunningTodo id =
+startTodo : TodoId -> RF
+startTodo id =
     Return.map (updateRunningTodoDetails (Model.getNow >> RunningTodoDetails.start id))
 
 

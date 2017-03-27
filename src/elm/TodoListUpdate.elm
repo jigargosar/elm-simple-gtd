@@ -94,7 +94,7 @@ markDoneIfActive =
     Return.andThen
         (\m ->
             getActiveTask m
-                ?|> ((.id) >> toggleDone >> (update # m))
+                ?|> ((.id) >> markDone >> (update # m))
                 ?= Return.singleton m
         )
 

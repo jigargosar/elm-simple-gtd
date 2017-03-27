@@ -99,6 +99,6 @@ type Msg
     | OnUpdateNow Time
 
 
-msgToCmd : msg2 -> Cmd msg2
+msgToCmd : msg -> Cmd msg
 msgToCmd msg =
     Task.perform identity (Task.succeed msg)

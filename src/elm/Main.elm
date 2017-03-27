@@ -90,7 +90,7 @@ onEditModeMsg msg =
             Return.map (Model.activateEditNewTodoMode text)
 
         setTodoTextAndDeactivateEditing todo =
-            onTodoListMsg (Types.setText (Todo.getText todo) (Todo.getId todo))
+            andThenUpdate (Types.setText (Todo.getText todo) (Todo.getId todo))
                 >> deactivateEditingModeFor todo
     in
         case msg of
@@ -107,7 +107,7 @@ onEditModeMsg msg =
             NewTodoKeyUp text { key } ->
                 case key of
                     Enter ->
-                        onTodoListMsg (Types.saveNewTodo text)
+                        andThenUpdate (Types.saveNewTodo text)
                             >> activateEditNewTodoMode ""
 
                     Escape ->
@@ -134,7 +134,7 @@ onEditModeMsg msg =
                                 Debug.log "EditTodoKeyUp" ("enter presseed")
                         in
                             setTodoTextAndDeactivateEditing todo
-                                >> whenBool isShiftDown (onTodoListMsg (Types.splitNewTodoFrom todo))
+                                >> whenBool isShiftDown (andThenUpdate (Types.splitNewTodoFrom todo))
 
                     Escape ->
                         deactivateEditingMode
@@ -143,7 +143,7 @@ onEditModeMsg msg =
                         identity
 
 
-onTodoListMsg =
+andThenUpdate =
     update >> Return.andThen
 
 

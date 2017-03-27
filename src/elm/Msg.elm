@@ -100,6 +100,11 @@ type Msg
     | OnMsgList (List Msg)
 
 
-msgToCmd : msg -> Cmd msg
-msgToCmd msg =
-    Task.perform identity (Task.succeed msg)
+toCmds : List Msg -> Cmd Msg
+toCmds msgList =
+    Task.perform identity (msgList |> OnMsgList >> Task.succeed)
+
+
+toCmd : Msg -> Cmd Msg
+toCmd =
+    List.singleton >> toCmds

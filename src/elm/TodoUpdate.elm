@@ -55,7 +55,7 @@ splitNewTodoAt todo now =
         (splitNewTodoFromAt todo now
             >> mapMaybeSecondToCmd
                 (applyList
-                    [ persistTodoCmd, Msg.startEditingTodo >> Msg.msgToCmd ]
+                    [ persistTodoCmd, Msg.startEditingTodo  >> Msg.toCmd ]
                     >> Cmd.batch
                 )
         )

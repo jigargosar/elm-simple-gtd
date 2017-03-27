@@ -85,16 +85,18 @@ stopRunningTodoDetails =
     Return.map (setRunningTodoDetails RunningTodoDetails.init)
 
 
-andThenMaybe fn =
-    Return.andThen (\m -> m |> fn >> Maybe.withDefault (Return.singleton m))
+markRunningTodoDetailsDone return =
+    let
+        maybeTodoId =
+            Model.getRunningTodoId (Tuple.first return)
+    in
+        return
+            |> case maybeTodoId of
+                Nothing ->
+                    identity
 
-
-markRunningTodoDetailsDone =
-    andThenMaybe
-        (apply2 ( Model.getRunningTodoId >> Maybe.map markDone, Just )
-            >> maybe2Tuple
-            >> Maybe.map (uncurry update)
-        )
+                Just todoId ->
+                    markDone todoId |> update >> Return.andThen
 
 
 setRunningTodoDetails : Maybe RunningTodoDetails -> ModelF

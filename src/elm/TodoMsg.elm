@@ -27,14 +27,13 @@ type CreateAction
 
 type NowAction
     = UpdateTodo UpdateAction TodoId
-    | CreateNewTodoRN String
-    | SplitNewTodoFromRN Todo
+    | CreateNewTodo String
+    | SplitNewTodoFrom Todo
 
 
 type TodoMsg
-    = CreateNewTodo String
-    | SplitNewTodoFrom Todo
-    | SplitNewTodoFromAt Todo Time
+    = CreateNewTodoOld String
+    | SplitNewTodoFromOld Todo
     | Start TodoId
     | Stop
     | StopAndMarkDone
@@ -67,11 +66,11 @@ setText text =
 
 
 saveNewTodo =
-    CreateNewTodo
+    CreateNewTodoOld
 
 
 splitNewTodoFrom =
-    SplitNewTodoFrom
+    SplitNewTodoFromOld
 
 
 start =

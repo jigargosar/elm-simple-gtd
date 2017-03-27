@@ -18,10 +18,6 @@ import Tuple2
 import TodoMsg exposing (..)
 
 
-todoInputId todo =
-    "edit-todo-input-" ++ (Todo.getId todo)
-
-
 update : TodoMsg -> ReturnF
 update msg =
     case msg of

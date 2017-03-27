@@ -32,12 +32,6 @@ update : TodoMsg -> Model -> ( Model, Cmd Msg )
 update msg =
     Return.singleton
         >> case msg of
-            CreateNewTodoOld text ->
-                withNow (OnNowAction (CreateNewTodo text))
-
-            SplitNewTodoFromOld todo ->
-                withNow (SplitNewTodoFrom todo |> OnNowAction)
-
             Start id ->
                 startActiveTask id
 

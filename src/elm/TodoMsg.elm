@@ -32,9 +32,7 @@ type NowAction
 
 
 type TodoMsg
-    = CreateNewTodoOld String
-    | SplitNewTodoFromOld Todo
-    | Start TodoId
+    = Start TodoId
     | Stop
     | StopAndMarkDone
     | OnRequiresNowAction NowAction
@@ -70,7 +68,7 @@ saveNewTodo =
 
 
 splitNewTodoFrom =
-    SplitNewTodoFromOld
+    SplitNewTodoFrom >> OnRequiresNowAction
 
 
 start =

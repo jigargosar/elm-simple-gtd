@@ -52,8 +52,8 @@ setRunningTodoDetails runningTodoDetails model =
     { model | runningTodoDetails = runningTodoDetails }
 
 
-updateRunningTodoDetails : (Model -> Maybe RunningTodoDetails) -> ModelF
-updateRunningTodoDetails updater model =
+updateMaybeRunningTodoDetails : (Model -> Maybe RunningTodoDetails) -> ModelF
+updateMaybeRunningTodoDetails updater model =
     setRunningTodoDetails (updater model) model
 
 
@@ -63,17 +63,36 @@ stopRunningTodo =
 
 
 startTodo id =
-    updateRunningTodoDetails (Model.getNow >> RunningTodoDetails.start id)
+    updateMaybeRunningTodoDetails (Model.getNow >> RunningTodoDetails.start id)
 
 
 shouldBeep =
-    getRunningTodoDetails >> Maybe.Extra.unwrap False shouldBeepHelp
+    apply2 ( getRunningTodoDetails, Model.getNow >> Just )
+        >> maybe2Tuple
+        >> Maybe.Extra.unwrap False shouldBeepHelp
 
 
-shouldBeepHelp details =
+shouldBeepHelp ( details, now ) =
     case details.state of
-        RunningTodoDetails.Running _ ->
-            False
+        RunningTodoDetails.Running { lastBeepedAt } ->
+            lastBeepedAt - now > 15 * Time.second
 
         _ ->
             False
+
+
+updateLastBeepedTo : Time -> ModelF
+updateLastBeepedTo now =
+    updateMaybeRunningTodoDetails
+        (apply2 ( getRunningTodoDetails, Just )
+            >> maybe2Tuple
+            >> Maybe.map
+                (\( d, m ) ->
+                    case d.state of
+                        RunningTodoDetails.Running runningDetails ->
+                            d
+
+                        _ ->
+                            d
+                )
+        )

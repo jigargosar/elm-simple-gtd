@@ -3,6 +3,7 @@ port module Main exposing (..)
 import Dom
 import EditModeUpdate
 import Model.EditMode
+import Model.RunningTodo
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import FunctionExtra exposing (..)
@@ -75,6 +76,17 @@ update msg =
 
             OnUpdateNow now ->
                 Return.map (Model.setNow now)
+                    >> Return.andThen
+                        (\m ->
+                            let
+                                shouldBeep =
+                                    Model.RunningTodo.shouldBeep m
+                            in
+                                if shouldBeep then
+                                    ( Model.RunningTodo.updateLastBeepedTo now m, startAlarm () )
+                                else
+                                    Return.singleton m
+                        )
 
             OnMsgList messages ->
                 onMsgList messages
@@ -85,14 +97,8 @@ onMsgList =
     flip (List.foldl (update >> Return.andThen))
 
 
-
-
 andThenUpdate =
     update >> Return.andThen
-
-
-
-
 
 
 port startAlarm : () -> Cmd msg

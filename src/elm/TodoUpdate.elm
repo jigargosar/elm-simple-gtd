@@ -50,11 +50,8 @@ update msg =
                 onWithNow action now
 
 
-splitNewTodoAt todo now =
-    Return.andThen
-        (splitNewTodoFromAt todo now
-            >> Tuple2.mapSecond persistAndEditTodoCmd
-        )
+andThenMapSecond fun toCmd =
+    Return.andThen (fun >> Tuple.mapSecond toCmd)
 
 
 persistAndEditTodoCmd =
@@ -64,14 +61,14 @@ persistAndEditTodoCmd =
 
 onWithNow action now =
     case action of
-        UpdateTodo action id ->
+        Update action id ->
             updateAndPersistMaybeTodo (updateTodoAt action id now)
 
-        CreateNewTodo text ->
+        Create text ->
             updateAndPersistMaybeTodo (addNewTodoAt text now)
 
-        SplitNewTodoFrom todo ->
-            splitNewTodoAt todo now
+        CopyAndEdit todo ->
+            andThenMapSecond (copyNewTodo todo now) persistAndEditTodoCmd
 
 
 startRunningTodoDetails : TodoId -> RF
@@ -123,7 +120,7 @@ addNewTodoAt text now m =
             |> apply2 ( uncurry addTodo, Tuple.first >> Just )
 
 
-splitNewTodoFromAt todo now m =
+copyNewTodo todo now m =
     Random.step (Todo.copyGenerator now todo) (Model.getSeed m)
         |> Tuple.mapSecond (Model.setSeed # m)
         |> apply2 ( uncurry addTodo, Tuple.first )

@@ -30,9 +30,9 @@ type CreateAction
 
 
 type RequiresNowAction
-    = UpdateTodo UpdateAction TodoId
-    | CreateNewTodo String
-    | SplitNewTodoFrom Todo
+    = Update UpdateAction TodoId
+    | Create String
+    | CopyAndEdit Todo
 
 
 type TodoMsg
@@ -43,36 +43,36 @@ type TodoMsg
     | OnActionWithNow RequiresNowAction Time
 
 
-updateTodo =
-    UpdateTodo >>> OnRequiresNowAction
+update =
+    Update >>> OnRequiresNowAction
 
 
 toggleDone =
-    updateTodo ToggleDone
+    update ToggleDone
 
 
 markDone =
-    updateTodo MarkDone
+    update MarkDone
 
 
 toggleDelete =
-    updateTodo ToggleDelete
+    update ToggleDelete
 
 
 setGroup group =
-    updateTodo (SetGroup group)
+    update (SetGroup group)
 
 
 setText text =
-    updateTodo (SetText text)
+    update (SetText text)
 
 
 saveNewTodo =
-    CreateNewTodo >> OnRequiresNowAction
+    Create >> OnRequiresNowAction
 
 
 splitNewTodoFrom =
-    SplitNewTodoFrom >> OnRequiresNowAction
+    CopyAndEdit >> OnRequiresNowAction
 
 
 start =

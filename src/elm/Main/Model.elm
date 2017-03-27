@@ -48,8 +48,8 @@ getRunningTodoId =
     getRunningTodoDetails >> RunningTodoDetails.getMaybeId
 
 
-getRunningTodoDetailsViewModel : Model -> Maybe RunningTodoDetailsViewModel
-getRunningTodoDetailsViewModel m =
+getRunningTodoViewModel : Model -> Maybe RunningTodoDetailsViewModel
+getRunningTodoViewModel m =
     let
         maybeTodo =
             getRunningTodoId m ?+> (getTodoById # m)

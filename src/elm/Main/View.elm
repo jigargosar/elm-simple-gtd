@@ -69,7 +69,7 @@ appHeaderView m =
 
 runningTodoDetailsAppToolBarView : Model -> Html Msg
 runningTodoDetailsAppToolBarView m =
-    case getRunningTodoDetailsViewModel m of
+    case getRunningTodoViewModel m of
         Just taskVm ->
             div [ class "active-task-view", attribute "sticky" "true" ] [ runningTodoDetailsView taskVm m ]
 

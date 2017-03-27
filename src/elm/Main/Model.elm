@@ -25,14 +25,6 @@ type alias Model =
     Main.Types.Model
 
 
-init : Time -> EncodedTodoList -> Model
-init now encodedTodoList =
-    Model now
-        (Todo.decodeTodoList encodedTodoList)
-        NotEditing
-        defaultViewType
-        (Random.seedFromTime now)
-        RunningTodoDetails.init
 
 
 type alias RunningTodoViewModel =

@@ -85,16 +85,13 @@ stopRunningTodo =
     Return.map (setRunningTodoDetails RunningTodoDetails.init)
 
 
+markRunningTodoDone : RF
 markRunningTodoDone =
     apply2 ( Tuple.first >> Model.getRunningTodoId, identity )
-        >> uncurry markMaybeTodoIdDone
+        >> uncurry (Maybe.Extra.unwrap identity markTodoIdDone)
 
 
-markMaybeTodoIdDone : Maybe TodoId -> RF
-markMaybeTodoIdDone =
-    Maybe.Extra.unwrap identity markTodoIdDone
-
-
+markTodoIdDone : TodoId -> RF
 markTodoIdDone id =
     Return.andThen (update (markDone id))
 

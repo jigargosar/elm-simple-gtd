@@ -84,13 +84,12 @@ shouldBeepHelp ( details, now ) =
 updateLastBeepedTo : Time -> ModelF
 updateLastBeepedTo now =
     updateMaybeRunningTodoDetails
-        (apply2 ( getRunningTodoDetails, Just )
-            >> maybe2Tuple
+        (getRunningTodoDetails
             >> Maybe.map
-                (\( d, m ) ->
+                (\d ->
                     case d.state of
-                        RunningTodoDetails.Running runningDetails ->
-                            d
+                        RunningTodoDetails.Running runningState ->
+                            { d | state = RunningTodoDetails.Running { runningState | lastBeepedAt = now } }
 
                         _ ->
                             d

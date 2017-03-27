@@ -46,18 +46,18 @@ getActiveTaskViewModel m =
             m.activeTodo |> ActiveTodo.getTodoId ?+> (getTodoById # m)
     in
         maybe2Tuple
-            ( m.activeTodo
+            ( ActiveTodo.toVm m.activeTodo
             , maybeTodo ?|> Todo.toVM
             )
             ?|> (toActiveTaskVM # m)
 
 
-toActiveTaskVM ( task, todoVM ) m =
+toActiveTaskVM ( activeTodoVM, todoVM ) m =
     let
         now =
             getNow m
     in
-        { task = task, todoVM = todoVM, now = now, elapsedTime = ActiveTodo.getElapsedTime__ now task }
+        { elapsedTime = activeTodoVM.elapsedTime, todoVM = todoVM, now = now }
 
 
 getTodoById : TodoId -> Model -> Maybe Todo

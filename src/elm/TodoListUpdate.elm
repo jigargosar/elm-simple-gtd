@@ -43,9 +43,9 @@ update msg =
                     >> stopTaskIfActive
 
             OnRequiresNowAction action ->
-                withNow (ActionWithNow action)
+                withNow (OnActionWithNow action)
 
-            ActionWithNow action now ->
+            OnActionWithNow action now ->
                 onWithNow action now
 
 

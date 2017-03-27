@@ -36,7 +36,7 @@ type TodoMsg
     | Stop
     | StopAndMarkDone
     | OnRequiresNowAction RequiresNowAction
-    | ActionWithNow RequiresNowAction Time
+    | OnActionWithNow RequiresNowAction Time
 
 
 updateTodo =

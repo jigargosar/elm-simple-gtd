@@ -5,7 +5,7 @@ import Dict
 import InboxFlow.View exposing (TodoViewModel)
 import Json.Encode as E
 import List.Extra as List
-import Types exposing (EditMode(EditNewTodoMode, EditTodoMode, NotEditing), Model, ModelF, MainViewType(..), defaultViewType)
+import Types exposing (Model, ModelF, MainViewType(..), defaultViewType)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
@@ -118,8 +118,6 @@ mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
 
-
-
 getSeed : Model -> Seed
 getSeed =
     (.seed)
@@ -128,7 +126,6 @@ getSeed =
 setSeed : Seed -> ModelF
 setSeed seed model =
     { model | seed = seed }
-
 
 
 findTodoEqualById todo =

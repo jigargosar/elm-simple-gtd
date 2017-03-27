@@ -133,7 +133,7 @@ stop =
 
 
 stopAndMarkDone =
-    OnTodoMsg TodoMsg.StopAndMarkDone
+    OnTodoMsg TodoMsg.MarkDoneAndStop
 
 
 type Msg

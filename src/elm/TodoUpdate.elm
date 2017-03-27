@@ -27,7 +27,7 @@ update msg =
         Stop ->
             stopRunningTodo
 
-        StopAndMarkDone ->
+        MarkDoneAndStop ->
             markRunningTodoDone
                 >> stopRunningTodo
 

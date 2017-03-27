@@ -35,7 +35,7 @@ type RequiresNowAction
 type TodoMsg
     = Start TodoId
     | Stop
-    | StopAndMarkDone
+    | MarkDoneAndStop
     | OnRequiresNowAction RequiresNowAction
     | OnActionWithNow RequiresNowAction Time
 
@@ -81,4 +81,4 @@ stop =
 
 
 stopAndMarkDone =
-    StopAndMarkDone
+    MarkDoneAndStop

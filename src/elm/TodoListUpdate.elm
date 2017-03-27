@@ -96,12 +96,6 @@ stopTaskIfActive =
 
 
 markDoneIfActive =
-    --    Return.andThen
-    --        (\m ->
-    --            getActiveTask m
-    --                ?|> ((.id) >> markDone >> (update # m))
-    --                ?= Return.singleton m
-    --        )
     Return.andThen
         (apply2 ( getActiveTask >> Maybe.map ((.id) >> markDone), identity )
             >> uncurry updateMaybeMsg

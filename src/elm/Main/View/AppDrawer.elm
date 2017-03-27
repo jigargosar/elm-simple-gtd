@@ -6,11 +6,11 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
+import Model.TodoList
 import Types exposing (MainViewType(..), Msg(SetMainViewType))
 import Main.View.AllTodoLists exposing (allTodoListByGroupView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
-import TodoGroupViewModel exposing (getTodoGroupsViewModel)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import DebugExtra.Debug exposing (tapLog)
@@ -62,7 +62,7 @@ doneItemView m =
 
 
 todoGroupsMenuItems =
-    getTodoGroupsViewModel
+    Model.TodoList.getTodoGroupsViewModel
         >> List.map listTypeMenuItem
 
 

@@ -6,7 +6,7 @@ import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditMode
-import Model.TodoList
+import Model.TodoList exposing (TodoGroupViewModel)
 import Types exposing (..)
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
@@ -29,7 +29,6 @@ import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, it
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
 import Todo.View
-import TodoGroupViewModel exposing (TodoGroupViewModel, getTodoGroupsViewModel)
 
 
 type alias ViewConfig msg =
@@ -65,7 +64,7 @@ createTodoListViewConfig model =
 
 allTodoListByGroupView : Model -> Html Msg
 allTodoListByGroupView =
-    apply2 ( todoViewFromModel >> keyedTodoGroupView, getTodoGroupsViewModel )
+    apply2 ( todoViewFromModel >> keyedTodoGroupView, Model.TodoList.getTodoGroupsViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
 

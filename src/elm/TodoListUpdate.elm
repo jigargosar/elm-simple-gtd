@@ -38,14 +38,14 @@ update msg =
     Return.singleton
         >> case msg of
             Start id ->
-                startActiveTask id
+                startActiveTodo id
 
             Stop ->
-                stopActiveTask
+                stopActiveTodo
 
             StopAndMarkDone ->
-                markActiveTaskDone
-                    >> stopActiveTask
+                markActiveTodoDone
+                    >> stopActiveTodo
 
             OnRequiresNowAction action ->
                 withNow (OnActionWithNow action)
@@ -81,44 +81,44 @@ mapMaybeSecondToCmd maybeToCmd =
     Tuple2.mapSecond (Maybe.map maybeToCmd >> Maybe.withDefault Cmd.none)
 
 
-startActiveTask : TodoId -> RF
-startActiveTask id =
-    Return.map (updateActiveTask (Model.getNow >> ActiveTodoState.start id))
+startActiveTodo : TodoId -> RF
+startActiveTodo id =
+    Return.map (updateActiveTodo (Model.getNow >> ActiveTodoState.start id))
 
 
 type alias RF =
     Return Msg Model -> Return Msg Model
 
 
-stopActiveTask : Return Msg Model -> Return Msg Model
-stopActiveTask =
-    Return.map (setActiveTask ActiveTodoState.init)
+stopActiveTodo : Return Msg Model -> Return Msg Model
+stopActiveTodo =
+    Return.map (setActiveTodo ActiveTodoState.init)
 
 
 andThenMaybe fn =
     Return.andThen (\m -> m |> fn >> Maybe.withDefault (Return.singleton m))
 
 
-markActiveTaskDone =
+markActiveTodoDone =
     andThenMaybe
-        (apply2 ( getActiveTask >> Maybe.map ((.id) >> markDone), Just )
+        (apply2 ( getActiveTodo >> Maybe.map ((.id) >> markDone), Just )
             >> mapMaybe2Tuple (uncurry update)
         )
 
 
-getActiveTask : Model -> MaybeActiveTodoState
-getActiveTask =
+getActiveTodo : Model -> MaybeActiveTodoState
+getActiveTodo =
     (.activeTodoState)
 
 
-setActiveTask : MaybeActiveTodoState -> ModelF
-setActiveTask activeTodoState model =
+setActiveTodo : MaybeActiveTodoState -> ModelF
+setActiveTodo activeTodoState model =
     { model | activeTodoState = activeTodoState }
 
 
-updateActiveTask : (Model -> MaybeActiveTodoState) -> ModelF
-updateActiveTask updater model =
-    setActiveTask (updater model) model
+updateActiveTodo : (Model -> MaybeActiveTodoState) -> ModelF
+updateActiveTodo updater model =
+    setActiveTodo (updater model) model
 
 
 addNewTodoAt text now m =

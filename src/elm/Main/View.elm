@@ -64,22 +64,22 @@ appHeaderView m =
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
             , newTodoInputView (getEditMode m)
             ]
-        , activeTaskAppToolBarView m
+        , activeTodoAppToolBarView m
         ]
 
 
-activeTaskAppToolBarView : Model -> Html Msg
-activeTaskAppToolBarView m =
-    case getActiveTaskViewModel m of
+activeTodoAppToolBarView : Model -> Html Msg
+activeTodoAppToolBarView m =
+    case getActiveTodoViewModel m of
         Just taskVm ->
-            div [ class "active-task-view", attribute "sticky" "true" ] [ activeTaskView taskVm m ]
+            div [ class "active-task-view", attribute "sticky" "true" ] [ activeTodoView taskVm m ]
 
         Nothing ->
             div [ class "active-task-view", attribute "sticky" "true" ] []
 
 
-activeTaskView : ActiveTaskViewModel -> Model -> Html Msg
-activeTaskView { todoVM, elapsedTime } m =
+activeTodoView : ActiveTodoViewModel -> Model -> Html Msg
+activeTodoView { todoVM, elapsedTime } m =
     div []
         [ div [ class "title" ] [ text todoVM.text ]
         , div [ class "col" ]

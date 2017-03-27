@@ -6,7 +6,7 @@ const _ = R
 import howler from "howler"
 
 
-export default () => {
+export default (function () {
     const Howl = howler.Howl
 
     const sound = new Howl({
@@ -18,7 +18,7 @@ export default () => {
     const start = () => {
         stop()
         id1 = sound.play()
-        sound.fade(0, 1, 5000, id1)
+        sound.fade(1, 0, 2000, id1)
     }
 
     const stop = () => {
@@ -29,4 +29,4 @@ export default () => {
         start,
         stop
     }
-}
+}())

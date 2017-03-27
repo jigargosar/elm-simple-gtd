@@ -35,12 +35,12 @@ type TodoMsg
     = Start TodoId
     | Stop
     | StopAndMarkDone
-    | OnRequiresNowAction NowAction
-    | OnNowAction NowAction Time
+    | OnNowAction NowAction
+    | OnActionWithNow NowAction Time
 
 
 updateTodo =
-    UpdateTodo >>> OnRequiresNowAction
+    UpdateTodo >>> OnNowAction
 
 
 toggleDone =
@@ -64,11 +64,11 @@ setText text =
 
 
 saveNewTodo =
-    CreateNewTodo >> OnRequiresNowAction
+    CreateNewTodo >> OnNowAction
 
 
 splitNewTodoFrom =
-    SplitNewTodoFrom >> OnRequiresNowAction
+    SplitNewTodoFrom >> OnNowAction
 
 
 start =

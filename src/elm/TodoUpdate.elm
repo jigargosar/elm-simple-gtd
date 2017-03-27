@@ -1,4 +1,4 @@
-module TodoListUpdate exposing (..)
+module TodoUpdate exposing (..)
 
 import RunningTodoDetails exposing (RunningTodoDetails)
 import List.Extra as List

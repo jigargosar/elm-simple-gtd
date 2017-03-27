@@ -14,7 +14,7 @@ import RouteUrl exposing (RouteUrlProgram)
 import Task
 import Time exposing (Time)
 import PouchDB
-import TodoListUpdate exposing (..)
+import TodoUpdate exposing (..)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
@@ -67,7 +67,7 @@ update msg =
                 onEditTodoMsg msg
 
             OnTodoMsg msg ->
-                Return.andThen (TodoListUpdate.update msg)
+                Return.andThen (TodoUpdate.update msg)
 
             SetMainViewType viewState ->
                 Return.map (Model.setMainViewType viewState)

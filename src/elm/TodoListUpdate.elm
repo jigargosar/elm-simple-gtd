@@ -41,11 +41,11 @@ update msg =
                 startActiveTask id
 
             Stop ->
-                stopTaskIfActive
+                stopActiveTask
 
             StopAndMarkDone ->
-                markDoneIfActive
-                    >> stopTaskIfActive
+                markActiveTaskDone
+                    >> stopActiveTask
 
             OnRequiresNowAction action ->
                 withNow (OnActionWithNow action)
@@ -90,12 +90,12 @@ type alias RF =
     Return Msg Model -> Return Msg Model
 
 
-stopTaskIfActive : Return Msg Model -> Return Msg Model
-stopTaskIfActive =
+stopActiveTask : Return Msg Model -> Return Msg Model
+stopActiveTask =
     Return.map (setActiveTask ActiveTask.init)
 
 
-markDoneIfActive =
+markActiveTaskDone =
     Return.andThen
         (apply2 ( getActiveTask >> Maybe.map ((.id) >> markDone), identity )
             >> uncurry updateMaybeMsg

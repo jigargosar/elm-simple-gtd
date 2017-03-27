@@ -33,7 +33,7 @@ update msg =
     Return.singleton
         >> case msg of
             CreateNewTodo text ->
-                withNow (CreateNewTodoAt text)
+                withNow (OnNowAction (CreateNewTodoRN text))
 
             CreateNewTodoAt text now ->
                 updateAndPersistMaybeTodo (addNewTodoAt text now)

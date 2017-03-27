@@ -90,13 +90,16 @@ markRunningTodoDone return =
         maybeTodoId =
             Model.getRunningTodoId (Tuple.first return)
     in
-        return
-            |> case maybeTodoId of
-                Nothing ->
-                    identity
+        markMaybeTodoIdDone maybeTodoId return
 
-                Just todoId ->
-                    markDone todoId |> update >> Return.andThen
+
+markMaybeTodoIdDone maybeTodoId =
+    case maybeTodoId of
+        Nothing ->
+            identity
+
+        Just todoId ->
+            markDone todoId |> update >> Return.andThen
 
 
 setRunningTodoDetails : Maybe RunningTodoDetails -> ModelF

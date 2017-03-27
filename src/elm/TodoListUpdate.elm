@@ -20,14 +20,12 @@ import Tuple2
 import TodoAction
 
 
-
-
 todoInputId todo =
     "edit-todo-input-" ++ (Todo.getId todo)
 
 
-update : (Msg -> Model -> Return Msg Model) -> TodoMsg -> Model -> ( Model, Cmd Msg )
-update update2 msg =
+update : TodoMsg -> Model -> ( Model, Cmd Msg )
+update msg =
     Return.singleton
         >> case msg of
             UpdateTodo action id ->
@@ -59,7 +57,7 @@ update update2 msg =
                 stopTaskIfActive
 
             StopAndMarkDone ->
-                markDoneIfActive (update update2)
+                markDoneIfActive
                     >> stopTaskIfActive
 
 
@@ -81,7 +79,7 @@ stopTaskIfActive =
     Return.map (setActiveTask ActiveTask.init)
 
 
-markDoneIfActive update =
+markDoneIfActive =
     Return.andThen
         (\m ->
             getActiveTask m

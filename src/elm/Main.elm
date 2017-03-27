@@ -77,11 +77,7 @@ update msg =
                 onTodoListMsg (TodoListMsg.toggleDone todoId)
 
             OnTodoMsg msg ->
-                Return.andThen
-                    (TodoListUpdate.update
-                        update
-                        msg
-                    )
+                Return.andThen (TodoListUpdate.update msg)
 
             SetMainViewType viewState ->
                 Return.map (Model.setMainViewType viewState)

@@ -6,7 +6,7 @@ import InboxFlow.View exposing (TodoViewModel)
 import Json.Encode as E
 import List.Extra as List
 import Msg exposing (..)
-import Main.Types exposing (EditMode(EditNewTodoMode, EditTodoMode, NotEditing), Model, ModelF, MainViewType(..), defaultViewType)
+import Types exposing (EditMode(EditNewTodoMode, EditTodoMode, NotEditing), Model, ModelF, MainViewType(..), defaultViewType)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
@@ -22,7 +22,7 @@ import Tuple2
     for external files
 -}
 type alias Model =
-    Main.Types.Model
+    Types.Model
 
 
 

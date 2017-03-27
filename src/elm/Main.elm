@@ -24,7 +24,7 @@ import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
 import Function exposing ((>>>))
 import Html
-import Main.Types exposing (EditMode(NotEditing), defaultViewType)
+import Types exposing (EditMode(NotEditing), defaultViewType)
 import RunningTodoDetails
 
 
@@ -54,7 +54,7 @@ main =
 
 init : Flags -> Return
 init { now, encodedTodoList } =
-    Main.Types.Model
+    Types.Model
         now
         (Todo.decodeTodoList encodedTodoList)
         NotEditing

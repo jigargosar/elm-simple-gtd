@@ -4,7 +4,7 @@ import RunningTodoDetails exposing (RunningTodoDetails)
 import List.Extra as List
 import Main.Model as Model
 import Msg exposing (Msg)
-import Main.Types exposing (Model, ModelF)
+import Types exposing (Model, ModelF)
 import Maybe.Extra
 import Random.Pcg as Random
 import Return exposing (Return, ReturnF)

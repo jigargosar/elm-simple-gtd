@@ -1,4 +1,4 @@
-module Main.Types exposing (..)
+module Types exposing (..)
 
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Random.Pcg exposing (Seed)

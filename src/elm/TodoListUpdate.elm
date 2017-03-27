@@ -1,6 +1,6 @@
 module TodoListUpdate exposing (..)
 
-import ActiveTodoState exposing (MaybeActiveTodoState)
+import ActiveTodoState exposing (ActiveTodoState)
 import List.Extra as List
 import Main.Model as Model
 import Msg exposing (Msg)
@@ -106,17 +106,17 @@ markActiveTodoDone =
         )
 
 
-getActiveTodo : Model -> MaybeActiveTodoState
+getActiveTodo : Model -> Maybe ActiveTodoState
 getActiveTodo =
     (.activeTodoState)
 
 
-setActiveTodo : MaybeActiveTodoState -> ModelF
+setActiveTodo : Maybe ActiveTodoState -> ModelF
 setActiveTodo activeTodoState model =
     { model | activeTodoState = activeTodoState }
 
 
-updateActiveTodo : (Model -> MaybeActiveTodoState) -> ModelF
+updateActiveTodo : (Model -> Maybe ActiveTodoState) -> ModelF
 updateActiveTodo updater model =
     setActiveTodo (updater model) model
 

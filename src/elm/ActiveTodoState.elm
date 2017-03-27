@@ -12,10 +12,6 @@ type State
     | Stopped
 
 
-type alias MaybeActiveTodoState =
-    Maybe ActiveTodoState
-
-
 type alias ActiveTodoState =
     { id : TodoId, state : State, timeSpent : Time, startTime : Time }
 

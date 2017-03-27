@@ -1,6 +1,6 @@
 module Main.Model exposing (..)
 
-import ActiveTodoState exposing (ActiveTodoState, MaybeActiveTodoState)
+import ActiveTodoState exposing (ActiveTodoState)
 import Dict
 import InboxFlow.View exposing (TodoViewModel)
 import Json.Encode as E
@@ -39,7 +39,7 @@ type alias ActiveTodoViewModel =
     { todoVM : Todo.ViewModel, now : Time, elapsedTime : Time }
 
 
-getActiveTodoState : Model -> MaybeActiveTodoState
+getActiveTodoState : Model -> Maybe ActiveTodoState
 getActiveTodoState =
     (.activeTodoState)
 

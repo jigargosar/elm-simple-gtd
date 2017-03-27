@@ -32,9 +32,7 @@ type NowAction
 
 
 type TodoMsg
-    =
-
-    CreateNewTodo String
+    = CreateNewTodo String
     | CreateNewTodoAt String Time
     | SplitNewTodoFrom Todo
     | SplitNewTodoFromAt Todo Time

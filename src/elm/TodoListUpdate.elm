@@ -32,12 +32,6 @@ update : TodoMsg -> Model -> ( Model, Cmd Msg )
 update msg =
     Return.singleton
         >> case msg of
-            UpdateTodoOld action id ->
-                withNow (UpdateTodoAt action id)
-
-            UpdateTodoAt action id now ->
-                updateAndPersistMaybeTodo (updateTodoAt action id now)
-
             CreateNewTodo text ->
                 withNow (CreateNewTodoAt text)
 

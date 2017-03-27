@@ -66,7 +66,7 @@ setText text =
 
 
 saveNewTodo =
-    CreateNewTodoOld
+    CreateNewTodo >> OnRequiresNowAction
 
 
 splitNewTodoFrom =

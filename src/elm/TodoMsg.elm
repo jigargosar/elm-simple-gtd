@@ -9,20 +9,16 @@ import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 
 
-type NewTodoMsg
+type EditModeMsg
     = AddTodoClicked
     | NewTodoTextChanged String
     | NewTodoBlur
     | NewTodoKeyUp String KeyboardEvent
-
-
-type EditTodoMsg
-    = StartEditingTodo Todo
+    | StartEditingTodo Todo
     | EditTodoTextChanged String
     | EditTodoBlur Todo
     | EditTodoKeyUp Todo KeyboardEvent
 
-type EditModeMsg = OnNewTodoMsg NewTodoMsg | OnEditTodoMsg EditTodoMsg
 
 type UpdateAction
     = ToggleDone

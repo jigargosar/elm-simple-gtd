@@ -28,7 +28,7 @@ start id now =
     ActiveTodo id (Started now now) 0 now |> Just
 
 
-getMabyeId =
+getMaybeId =
     Maybe.map (.id)
 
 

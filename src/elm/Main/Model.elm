@@ -39,13 +39,32 @@ type alias ActiveTaskViewModel =
     { todoVM : Todo.ViewModel, now : Time, elapsedTime : Time }
 
 
+getActiveTodo : Model -> MaybeActiveTodo
+getActiveTodo =
+    (.activeTodo)
+
+
+setActiveTodo : MaybeActiveTodo -> ModelF
+setActiveTodo activeTodo model =
+    { model | activeTodo = activeTodo }
+
+
+updateActiveTodo : (Model -> MaybeActiveTodo) -> ModelF
+updateActiveTodo updater model =
+    setActiveTodo (updater model) model
+
+
+getActiveTodoId =
+    getActiveTodo >> ActiveTodo.getMaybeId
+
+
 getActiveTaskViewModel : Model -> Maybe ActiveTaskViewModel
 getActiveTaskViewModel m =
     let
         maybeTodo =
-            m.activeTodo |> ActiveTodo.getMabyeId ?+> (getTodoById # m)
+            getActiveTodoId m ?+> (getTodoById # m)
     in
-        maybe2Tuple ( m.activeTodo, maybeTodo )
+        maybe2Tuple ( getActiveTodo m, maybeTodo )
             ?|> (toActiveTaskVM # m)
 
 

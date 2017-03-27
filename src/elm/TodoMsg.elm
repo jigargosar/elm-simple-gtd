@@ -15,11 +15,20 @@ type UpdateAction
     | ToggleDelete
 
 
+
+--    | CopyAndStartEdit
+
+
+type CreateAction
+    = FromText String
+    | FromId TodoId
+
+
 type TodoMsg
     = UpdateTodoAt UpdateAction TodoId Time
     | UpdateTodo UpdateAction TodoId
-    | SaveNewTodo String
-    | SaveNewTodoAt String Time
+    | CreateNewTodo String
+    | CreateNewTodoAt String Time
     | SplitNewTodoFrom Todo
     | SplitNewTodoFromAt Todo Time
     | Start TodoId
@@ -48,7 +57,7 @@ setText text =
 
 
 saveNewTodo =
-    SaveNewTodo
+    CreateNewTodo
 
 
 splitNewTodoFrom =

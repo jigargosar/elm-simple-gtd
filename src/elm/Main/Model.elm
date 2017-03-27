@@ -158,11 +158,6 @@ setSeed seed model =
     { model | seed = seed }
 
 
-updateSeed : (Model -> Seed) -> ModelF
-updateSeed updater model =
-    setSeed (updater model) model
-
-
 deactivateEditingMode =
     setEditModeTo NotEditing
 

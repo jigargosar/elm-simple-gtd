@@ -80,11 +80,11 @@ todoListView =
            )
 
 
-type alias KeyedTodoView =
+type alias TodoView =
     Todo -> ( TodoId, Html Msg )
 
 
-keyedTodoGroupView : KeyedTodoView -> TodoGroupViewModel -> Maybe ( String, Html Msg )
+keyedTodoGroupView : TodoView -> TodoGroupViewModel -> Maybe ( String, Html Msg )
 keyedTodoGroupView todoView vm =
     if vm.isEmpty then
         Nothing
@@ -103,7 +103,7 @@ keyedTodoGroupView todoView vm =
             )
 
 
-todoView : ViewConfig msg -> KeyedTodoView
+todoView : ViewConfig msg -> Todo -> ( TodoId, Html msg )
 todoView vc todo =
     let
         todoId =

@@ -20,6 +20,10 @@ import Tuple2
 import TodoAction
 
 
+toggleDone =
+    UpdateTodo ToggleDone
+
+
 todoInputId todo =
     "edit-todo-input-" ++ (Todo.getId todo)
 

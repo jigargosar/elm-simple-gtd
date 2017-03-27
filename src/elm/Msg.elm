@@ -4,7 +4,7 @@ import Dom
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
-import TodoListMsg exposing (TodoMsg)
+import TodoListMsg exposing (TodoMsg(..), UpdateAction(..))
 import Main.Types exposing (MainViewType)
 import Navigation exposing (Location)
 import Time exposing (Time)
@@ -43,6 +43,42 @@ onEditTodo =
     , blur = EditTodoBlur >> OnEditTodoMsg
     , keyUp = EditTodoKeyUp >>> OnEditTodoMsg
     }
+
+
+toggleDone =
+    UpdateTodo ToggleDone >> OnTodoMsg
+
+
+markDone =
+    UpdateTodo MarkDone >> OnTodoMsg
+
+
+toggleDelete =
+    UpdateTodo ToggleDelete >> OnTodoMsg
+
+
+setGroup group =
+    UpdateTodo (SetGroup group) >> OnTodoMsg
+
+
+setText text =
+    UpdateTodo (SetText text) >> OnTodoMsg
+
+
+addNewTodo =
+    AddNewTodo >> OnTodoMsg
+
+
+splitNewTodoFrom =
+    SplitNewTodoFrom >> OnTodoMsg
+
+
+stop =
+    OnTodoMsg Stop
+
+
+stopAndMarkDone =
+    OnTodoMsg StopAndMarkDone
 
 
 todoMsg =

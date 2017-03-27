@@ -68,13 +68,13 @@ update msg =
                 onEditTodoMsg msg
 
             OnSetTodoGroupClicked todoGroup todoId ->
-                onTodoListMsg (TodoListMsg.setGroup todoGroup todoId)
+                onTodoListMsg (Msg.setGroup todoGroup todoId)
 
             OnDeleteTodoClicked todoId ->
-                onTodoListMsg (TodoListMsg.toggleDelete todoId)
+                onTodoListMsg (Msg.toggleDelete todoId)
 
             OnTodoDoneClicked todoId ->
-                onTodoListMsg (TodoListMsg.toggleDone todoId)
+                onTodoListMsg (Msg.toggleDone todoId)
 
             OnTodoMsg msg ->
                 Return.andThen (TodoListUpdate.update msg)
@@ -105,7 +105,7 @@ onNewTodoMsg msg =
             NewTodoKeyUp text { key } ->
                 case key of
                     Enter ->
-                        onTodoListMsg (TodoListMsg.addNewTodo text)
+                        onTodoListMsg (Msg.addNewTodo text)
                             >> activateEditNewTodoMode ""
 
                     Escape ->
@@ -118,7 +118,7 @@ onNewTodoMsg msg =
 onEditTodoMsg msg =
     let
         setTodoTextAndDeactivateEditing todo =
-            onTodoListMsg (TodoListMsg.setText (Todo.getText todo) (Todo.getId todo))
+            onTodoListMsg (Msg.setText (Todo.getText todo) (Todo.getId todo))
                 >> deactivateEditingModeFor todo
     in
         case msg of
@@ -140,7 +140,7 @@ onEditTodoMsg msg =
                                 Debug.log "EditTodoKeyUp" ("enter presseed")
                         in
                             setTodoTextAndDeactivateEditing todo
-                                >> whenBool isShiftDown (onTodoListMsg (TodoListMsg.splitNewTodoFrom todo))
+                                >> whenBool isShiftDown (onTodoListMsg (Msg.splitNewTodoFrom todo))
 
                     Escape ->
                         deactivateEditingMode
@@ -150,7 +150,7 @@ onEditTodoMsg msg =
 
 
 onTodoListMsg =
-    OnTodoMsg >> update >> Return.andThen
+    update >> Return.andThen
 
 
 deactivateEditingMode =

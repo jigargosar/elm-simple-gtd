@@ -3,7 +3,7 @@ module TodoListUpdate exposing (..)
 import ActiveTask exposing (MaybeActiveTask)
 import List.Extra as List
 import Main.Model as Model
-import Msg as Msg exposing (..)
+import Msg exposing (Msg)
 import Main.Types exposing (Model, ModelF)
 import Maybe.Extra
 import Random.Pcg as Random
@@ -14,18 +14,18 @@ import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-
 import PouchDB
 import Tuple2
 import TodoAction
-
-
-toggleDone =
-    UpdateTodo ToggleDone
+import TodoMsg exposing (..)
 
 
 todoInputId todo =
     "edit-todo-input-" ++ (Todo.getId todo)
+
+
+onEditTodo =
+    Msg.onEditTodo
 
 
 update : TodoMsg -> Model -> ( Model, Cmd Msg )
@@ -51,7 +51,10 @@ update msg =
                 Return.andThen
                     (splitNewTodoFromAt todo now
                         >> mapMaybeSecondToCmd
-                            (applyList [ persistTodoCmd, onEditTodo.edit >> msgToCmd ] >> Cmd.batch)
+                            (applyList
+                                [ persistTodoCmd, onEditTodo.edit >> Msg.msgToCmd ]
+                                >> Cmd.batch
+                            )
                     )
 
             Start id ->

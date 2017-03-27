@@ -12,26 +12,7 @@ import FunctionExtra.Operators exposing (..)
 import Function
 import KeyboardExtra exposing (KeyboardEvent)
 import Task
-
-
-type UpdateAction
-    = ToggleDone
-    | MarkDone
-    | SetGroup TodoGroup
-    | SetText String
-    | ToggleDelete
-
-
-type TodoMsg
-    = UpdateTodoAt UpdateAction TodoId Time
-    | UpdateTodo UpdateAction TodoId
-    | AddNewTodo String
-    | AddNewTodoAt String Time
-    | SplitNewTodoFrom Todo
-    | SplitNewTodoFromAt Todo Time
-    | Start TodoId
-    | Stop
-    | StopAndMarkDone
+import TodoMsg exposing (TodoMsg)
 
 
 type NewTodoMsg
@@ -65,43 +46,43 @@ onEditTodo =
 
 
 toggleDone =
-    UpdateTodo ToggleDone >> OnTodoMsg
+    TodoMsg.toggleDone >> OnTodoMsg
 
 
 markDone =
-    UpdateTodo MarkDone >> OnTodoMsg
+    TodoMsg.markDone >> OnTodoMsg
 
 
 toggleDelete =
-    UpdateTodo ToggleDelete >> OnTodoMsg
+    TodoMsg.toggleDelete >> OnTodoMsg
 
 
 setGroup group =
-    UpdateTodo (SetGroup group) >> OnTodoMsg
+    TodoMsg.setGroup group >> OnTodoMsg
 
 
 setText text =
-    UpdateTodo (SetText text) >> OnTodoMsg
+    TodoMsg.setText text >> OnTodoMsg
 
 
 addNewTodo =
-    AddNewTodo >> OnTodoMsg
+    TodoMsg.addNewTodo >> OnTodoMsg
 
 
 splitNewTodoFrom =
-    SplitNewTodoFrom >> OnTodoMsg
+    TodoMsg.splitNewTodoFrom >> OnTodoMsg
 
 
 start =
-    Start >> OnTodoMsg
+    TodoMsg.start >> OnTodoMsg
 
 
 stop =
-    OnTodoMsg Stop
+    OnTodoMsg TodoMsg.stop
 
 
 stopAndMarkDone =
-    OnTodoMsg StopAndMarkDone
+    OnTodoMsg TodoMsg.StopAndMarkDone
 
 
 type Msg

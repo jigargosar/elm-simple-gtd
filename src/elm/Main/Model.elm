@@ -57,7 +57,7 @@ toActiveTaskVM ( task, todoVM ) m =
         now =
             getNow m
     in
-        { task = task, todoVM = todoVM, now = now, elapsedTime = ActiveTodo.getElapsedTime now task }
+        { task = task, todoVM = todoVM, now = now, elapsedTime = ActiveTodo.getElapsedTime__ now task }
 
 
 getTodoById : TodoId -> Model -> Maybe Todo

@@ -32,7 +32,7 @@ getTodoId =
     Maybe.map (.id)
 
 
-getElapsedTime now activeTodo =
+getElapsedTime__ now activeTodo =
     case activeTodo.state of
         Started startedAt lastBeepedAt ->
             (now - startedAt) + activeTodo.timeSpent

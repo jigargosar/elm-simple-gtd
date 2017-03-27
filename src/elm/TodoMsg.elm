@@ -16,10 +16,6 @@ type UpdateAction
     | ToggleDelete
 
 
-
---    | CopyAndStartEdit
-
-
 type CreateAction
     = FromText String
     | FromId TodoId

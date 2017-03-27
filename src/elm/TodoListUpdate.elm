@@ -38,14 +38,14 @@ update msg =
     Return.singleton
         >> case msg of
             Start id ->
-                startActiveTodo id
+                startRunningTodoDetails id
 
             Stop ->
-                stopActiveTodo
+                stopRunningTodoDetails
 
             StopAndMarkDone ->
-                markActiveTodoDone
-                    >> stopActiveTodo
+                markRunningTodoDetailsDone
+                    >> stopRunningTodoDetails
 
             OnRequiresNowAction action ->
                 withNow (OnActionWithNow action)
@@ -81,44 +81,44 @@ mapMaybeSecondToCmd maybeToCmd =
     Tuple2.mapSecond (Maybe.map maybeToCmd >> Maybe.withDefault Cmd.none)
 
 
-startActiveTodo : TodoId -> RF
-startActiveTodo id =
-    Return.map (updateActiveTodo (Model.getNow >> RunningTodoDetails.start id))
+startRunningTodoDetails : TodoId -> RF
+startRunningTodoDetails id =
+    Return.map (updateRunningTodoDetails (Model.getNow >> RunningTodoDetails.start id))
 
 
 type alias RF =
     Return Msg Model -> Return Msg Model
 
 
-stopActiveTodo : Return Msg Model -> Return Msg Model
-stopActiveTodo =
-    Return.map (setActiveTodo RunningTodoDetails.init)
+stopRunningTodoDetails : Return Msg Model -> Return Msg Model
+stopRunningTodoDetails =
+    Return.map (setRunningTodoDetails RunningTodoDetails.init)
 
 
 andThenMaybe fn =
     Return.andThen (\m -> m |> fn >> Maybe.withDefault (Return.singleton m))
 
 
-markActiveTodoDone =
+markRunningTodoDetailsDone =
     andThenMaybe
-        (apply2 ( getActiveTodo >> Maybe.map ((.id) >> markDone), Just )
+        (apply2 ( getRunningTodoDetails >> Maybe.map ((.id) >> markDone), Just )
             >> mapMaybe2Tuple (uncurry update)
         )
 
 
-getActiveTodo : Model -> Maybe RunningTodoDetails
-getActiveTodo =
+getRunningTodoDetails : Model -> Maybe RunningTodoDetails
+getRunningTodoDetails =
     (.runningTodoDetails)
 
 
-setActiveTodo : Maybe RunningTodoDetails -> ModelF
-setActiveTodo runningTodoDetails model =
+setRunningTodoDetails : Maybe RunningTodoDetails -> ModelF
+setRunningTodoDetails runningTodoDetails model =
     { model | runningTodoDetails = runningTodoDetails }
 
 
-updateActiveTodo : (Model -> Maybe RunningTodoDetails) -> ModelF
-updateActiveTodo updater model =
-    setActiveTodo (updater model) model
+updateRunningTodoDetails : (Model -> Maybe RunningTodoDetails) -> ModelF
+updateRunningTodoDetails updater model =
+    setRunningTodoDetails (updater model) model
 
 
 addNewTodoAt text now m =

@@ -43,6 +43,7 @@ getActiveTodoState : Model -> MaybeActiveTodoState
 getActiveTodoState =
     (.activeTodoState)
 
+
 getActiveTodoStateId =
     getActiveTodoState >> ActiveTodoState.getMaybeId
 

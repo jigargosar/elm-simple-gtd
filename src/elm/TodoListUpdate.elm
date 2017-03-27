@@ -32,7 +32,7 @@ update : TodoMsg -> Model -> ( Model, Cmd Msg )
 update msg =
     Return.singleton
         >> case msg of
-            UpdateTodo action id ->
+            UpdateTodoOld action id ->
                 withNow (UpdateTodoAt action id)
 
             UpdateTodoAt action id now ->
@@ -80,7 +80,7 @@ splitNewTodoAt todo now =
 
 onWithNow action now =
     case action of
-        UpdateTodoRN action id ->
+        UpdateTodo action id ->
             updateAndPersistMaybeTodo (updateTodoAt action id now)
 
         CreateNewTodoRN text ->

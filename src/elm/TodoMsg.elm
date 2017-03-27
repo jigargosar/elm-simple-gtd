@@ -25,14 +25,14 @@ type CreateAction
 
 
 type NowAction
-    = UpdateTodoRN UpdateAction TodoId
+    = UpdateTodo UpdateAction TodoId
     | CreateNewTodoRN String
     | SplitNewTodoFromRN Todo
 
 
 type TodoMsg
     = UpdateTodoAt UpdateAction TodoId Time
-    | UpdateTodo UpdateAction TodoId
+    | UpdateTodoOld UpdateAction TodoId
     | CreateNewTodo String
     | CreateNewTodoAt String Time
     | SplitNewTodoFrom Todo
@@ -45,23 +45,23 @@ type TodoMsg
 
 
 toggleDone =
-    UpdateTodo ToggleDone
+    UpdateTodoOld ToggleDone
 
 
 markDone =
-    UpdateTodo MarkDone
+    UpdateTodoOld MarkDone
 
 
 toggleDelete =
-    UpdateTodo ToggleDelete
+    UpdateTodoOld ToggleDelete
 
 
 setGroup group =
-    UpdateTodo (SetGroup group)
+    UpdateTodoOld (SetGroup group)
 
 
 setText text =
-    UpdateTodo (SetText text)
+    UpdateTodoOld (SetText text)
 
 
 saveNewTodo =

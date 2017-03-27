@@ -121,7 +121,7 @@ onEditTodoMsg msg =
                 >> deactivateEditingModeFor todo
     in
         case msg of
-            EditTodoClicked todo ->
+            StartEditingTodo todo ->
                 Return.map (Model.activateEditTodoMode todo)
                     >> focusFirstAutoFocusElement
 

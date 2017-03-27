@@ -23,7 +23,7 @@ type NewTodoMsg
 
 
 type EditTodoMsg
-    = EditTodoClicked Todo
+    = StartEditingTodo Todo
     | EditTodoTextChanged String
     | EditTodoBlur Todo
     | EditTodoKeyUp Todo KeyboardEvent
@@ -38,7 +38,7 @@ onNewTodo =
 
 
 onEditTodo =
-    { editClicked = EditTodoClicked >> OnEditTodoMsg
+    { startEditing = StartEditingTodo >> OnEditTodoMsg
     , input = EditTodoTextChanged >> OnEditTodoMsg
     , blur = EditTodoBlur >> OnEditTodoMsg
     , keyUp = EditTodoKeyUp >>> OnEditTodoMsg

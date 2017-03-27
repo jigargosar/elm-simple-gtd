@@ -1,6 +1,6 @@
 module Main.Model exposing (..)
 
-import ActiveTodo exposing (MaybeActiveTodo)
+import ActiveTodo exposing (ActiveTodo, MaybeActiveTodo)
 import Dict
 import InboxFlow.View exposing (TodoViewModel)
 import Json.Encode as E
@@ -43,22 +43,22 @@ getActiveTaskViewModel : Model -> Maybe ActiveTaskViewModel
 getActiveTaskViewModel m =
     let
         maybeTodo =
-            m.activeTodo |> ActiveTodo.getTodoId ?+> (getTodoById # m)
+            m.activeTodo |> ActiveTodo.getMabyeId ?+> (getTodoById # m)
     in
-        maybe2Tuple
-            ( ActiveTodo.toVm (getNow m) m.activeTodo
-            , maybeTodo ?|> Todo.toVM
-            )
+        maybe2Tuple ( m.activeTodo, maybeTodo )
             ?|> (toActiveTaskVM # m)
 
 
-toActiveTaskVM : ( ActiveTodo.ViewModel, Todo.ViewModel ) -> Model -> ActiveTaskViewModel
-toActiveTaskVM ( activeTodoVM, todoVM ) m =
+toActiveTaskVM : ( ActiveTodo, Todo ) -> Model -> ActiveTaskViewModel
+toActiveTaskVM ( activeTodo, todo ) m =
     let
         now =
             getNow m
     in
-        { elapsedTime = activeTodoVM.elapsedTime, todoVM = todoVM, now = now }
+        { todoVM = Todo.toVM todo
+        , now = now
+        , elapsedTime = ActiveTodo.getElapsedTime now activeTodo
+        }
 
 
 getTodoById : TodoId -> Model -> Maybe Todo

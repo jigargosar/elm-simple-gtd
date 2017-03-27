@@ -28,11 +28,11 @@ start id now =
     ActiveTodo id (Started now now) 0 now |> Just
 
 
-getTodoId =
+getMabyeId =
     Maybe.map (.id)
 
 
-getElapsedTime__ now activeTodo =
+getElapsedTime now activeTodo =
     case activeTodo.state of
         Started startedAt lastBeepedAt ->
             (now - startedAt) + activeTodo.timeSpent
@@ -40,11 +40,3 @@ getElapsedTime__ now activeTodo =
         Stopped ->
             activeTodo.timeSpent
 
-
-type alias ViewModel =
-    { elapsedTime : Time }
-
-
-toVm : Time -> MaybeActiveTodo -> Maybe ViewModel
-toVm now =
-    Maybe.map (getElapsedTime__ now >> ViewModel)

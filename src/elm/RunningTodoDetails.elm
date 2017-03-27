@@ -7,8 +7,12 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
 
+type alias StartedState =
+    { startedAt : Time, lastBeepedAt : Time }
+
+
 type State
-    = Started Time Time
+    = Started StartedState
     | Stopped
 
 
@@ -30,7 +34,7 @@ getMaybeId =
 
 getElapsedTime now runningTodoDetails =
     case runningTodoDetails.state of
-        Started startedAt lastBeepedAt ->
+        Started { startedAt, lastBeepedAt } ->
             (now - startedAt) + runningTodoDetails.timeSpent
 
         Stopped ->

@@ -6,7 +6,7 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
-import Types exposing (EditMode(..), MainViewType(..))
+import Types exposing (EditMode(..), MainViewType(..), Msg, onNewTodo)
 import Main.View.AllTodoLists exposing (..)
 import Main.View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
@@ -22,8 +22,8 @@ import Flow
 import Json.Decode
 import Json.Encode
 import List.Extra as List
-import Main.Model exposing (..)
-import Msg exposing (..)
+import Main.Model as Model exposing (RunningTodoViewModel)
+import Types exposing (Model)
 import Todo exposing (Todo, TodoId)
 import Flow.Model as Flow exposing (Node)
 import Polymer.Paper exposing (..)
@@ -61,7 +61,7 @@ appHeaderView m =
         [ App.toolbar
             []
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-            , newTodoInputView (getEditMode m)
+            , newTodoInputView (Model.getEditMode m)
             ]
         , runningTodoAppToolBarView m
         ]
@@ -69,7 +69,7 @@ appHeaderView m =
 
 runningTodoAppToolBarView : Model -> Html Msg
 runningTodoAppToolBarView m =
-    case getRunningTodoViewModel m of
+    case Model.getRunningTodoViewModel m of
         Just taskVm ->
             div [ class "active-task-view", attribute "sticky" "true" ] [ runningTodoView taskVm m ]
 
@@ -84,15 +84,15 @@ runningTodoView { todoVM, elapsedTime } m =
         , div [ class "col" ]
             [ div [ class "elapsed-time" ] [ text (TimeExtra.toHHMMSS elapsedTime) ]
             , iconButton [ icon "av:pause" ] []
-            , iconButton [ icon "av:stop", Msg.stop |> onClick ] []
-            , iconButton [ icon "check", Msg.stopAndMarkDone |> onClick ] []
+            , iconButton [ icon "av:stop", Types.stop |> onClick ] []
+            , iconButton [ icon "check", Types.stopAndMarkDone |> onClick ] []
             ]
         ]
 
 
 appMainView m =
     div [ id "main-view" ]
-        [ case getMainViewType m of
+        [ case Model.getMainViewType m of
             AllByGroupView ->
                 allTodoListByGroupView m
 

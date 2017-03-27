@@ -3,8 +3,9 @@ module InboxFlow.Model exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Flow
-import Msg as Msg exposing (Msg)
 import Todo exposing (Todo, TodoList)
+import Types exposing (Msg)
+
 
 
 --moveTo =

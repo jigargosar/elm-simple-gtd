@@ -5,7 +5,6 @@ import Dict
 import InboxFlow.View exposing (TodoViewModel)
 import Json.Encode as E
 import List.Extra as List
-import Msg exposing (..)
 import Types exposing (EditMode(EditNewTodoMode, EditTodoMode, NotEditing), Model, ModelF, MainViewType(..), defaultViewType)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
@@ -16,15 +15,6 @@ import Todo as Todo exposing (EncodedTodoList, TodoGroup, Todo, TodoId, TodoList
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-
-
-{-|
-    for external files
--}
-type alias Model =
-    Types.Model
-
-
 
 
 type alias RunningTodoViewModel =

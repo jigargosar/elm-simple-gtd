@@ -6,7 +6,8 @@ import Todo exposing (TodoGroup, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Main.Model as Model exposing (Model)
+import Main.Model as Model
+import Types exposing (Model)
 
 
 type alias TodoGroupViewModel =

@@ -1,5 +1,8 @@
 module Types exposing (..)
 
+import CmdExtra
+import KeyboardExtra exposing (KeyboardEvent)
+import Return
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
@@ -7,6 +10,8 @@ import Todo exposing (Todo, TodoGroup, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import FunctionExtra.Operators exposing (..)
+import TodoMsg exposing (TodoMsg)
 
 
 type MainViewType
@@ -38,3 +43,106 @@ type alias Model =
 
 type alias ModelF =
     Model -> Model
+
+
+type alias Return =
+    Return.Return Msg Model
+
+
+type alias ReturnF =
+    Return -> Return
+
+
+type NewTodoMsg
+    = AddTodoClicked
+    | NewTodoTextChanged String
+    | NewTodoBlur
+    | NewTodoKeyUp String KeyboardEvent
+
+
+type EditTodoMsg
+    = StartEditingTodo Todo
+    | EditTodoTextChanged String
+    | EditTodoBlur Todo
+    | EditTodoKeyUp Todo KeyboardEvent
+
+
+onNewTodo =
+    { startAdding = AddTodoClicked |> OnNewTodoMsg
+    , input = NewTodoTextChanged >> OnNewTodoMsg
+    , blur = NewTodoBlur |> OnNewTodoMsg
+    , keyUp = NewTodoKeyUp >>> OnNewTodoMsg
+    }
+
+
+startEditingTodo =
+    StartEditingTodo >> OnEditTodoMsg
+
+
+onEditTodo =
+    { startEditing = startEditingTodo
+    , input = EditTodoTextChanged >> OnEditTodoMsg
+    , blur = EditTodoBlur >> OnEditTodoMsg
+    , keyUp = EditTodoKeyUp >>> OnEditTodoMsg
+    }
+
+
+toggleDone =
+    TodoMsg.toggleDone >> OnTodoMsg
+
+
+markDone =
+    TodoMsg.markDone >> OnTodoMsg
+
+
+toggleDelete =
+    TodoMsg.toggleDelete >> OnTodoMsg
+
+
+setGroup group =
+    TodoMsg.setGroup group >> OnTodoMsg
+
+
+setText text =
+    TodoMsg.setText text >> OnTodoMsg
+
+
+saveNewTodo =
+    TodoMsg.saveNewTodo >> OnTodoMsg
+
+
+splitNewTodoFrom =
+    TodoMsg.splitNewTodoFrom >> OnTodoMsg
+
+
+start =
+    TodoMsg.start >> OnTodoMsg
+
+
+stop =
+    OnTodoMsg TodoMsg.stop
+
+
+stopAndMarkDone =
+    OnTodoMsg TodoMsg.StopAndMarkDone
+
+
+type Msg
+    = NoOp
+    | OnNewTodoMsg NewTodoMsg
+    | OnEditTodoMsg EditTodoMsg
+      --
+    | OnTodoMsg TodoMsg
+    | SetMainViewType MainViewType
+    | OnUpdateNow Time
+    | OnMsgList (List Msg)
+
+
+toCmds : List Msg -> Cmd Msg
+toCmds =
+    CmdExtra.toCmds OnMsgList
+
+
+toCmd : msg -> Cmd msg
+toCmd =
+    CmdExtra.toCmd

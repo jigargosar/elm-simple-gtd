@@ -3,8 +3,7 @@ module TodoUpdate exposing (..)
 import RunningTodoDetails exposing (RunningTodoDetails)
 import List.Extra as List
 import Main.Model as Model
-import Msg exposing (Msg)
-import Types exposing (Model, ModelF)
+import Types exposing (Model, ModelF, Msg)
 import Maybe.Extra
 import Random.Pcg as Random
 import Return exposing (Return, ReturnF)
@@ -54,7 +53,7 @@ andThenMapSecond fun toCmd =
 
 
 persistAndEditTodoCmd =
-    applyList [ persistTodoCmd, Msg.startEditingTodo >> Msg.toCmd ]
+    applyList [ persistTodoCmd, Types.startEditingTodo >> Types.toCmd ]
         >> Cmd.batch
 
 
@@ -141,7 +140,7 @@ updateAndPersistMaybeTodo updater =
 
 withNow : (Time -> TodoMsg) -> ReturnF Msg Model
 withNow msg =
-    Task.perform (msg >> Msg.OnTodoMsg) Time.now |> Return.command
+    Task.perform (msg >> Types.OnTodoMsg) Time.now |> Return.command
 
 
 

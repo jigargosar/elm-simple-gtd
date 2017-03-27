@@ -9,11 +9,11 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import InboxFlow.Model as Model exposing (Model)
-import Msg as Msg exposing (Msg)
 import FunctionExtra exposing (..)
 import Todo exposing (Todo)
 import Function exposing ((>>>))
 import Polymer.Paper exposing (iconButton, material)
+import Types exposing (Msg)
 
 
 type alias TodoViewModel =

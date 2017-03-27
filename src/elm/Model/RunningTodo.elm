@@ -89,7 +89,10 @@ updateLastBeepedTo now =
                 (\d ->
                     case d.state of
                         RunningTodoDetails.Running runningState ->
-                            { d | state = RunningTodoDetails.Running { runningState | lastBeepedAt = now } }
+                            { d
+                                | state =
+                                    RunningTodoDetails.Running { runningState | lastBeepedAt = now }
+                            }
 
                         _ ->
                             d

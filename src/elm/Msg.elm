@@ -1,5 +1,6 @@
 module Msg exposing (..)
 
+import CmdExtra
 import Dom
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
@@ -101,10 +102,10 @@ type Msg
 
 
 toCmds : List Msg -> Cmd Msg
-toCmds msgList =
-    Task.perform identity (msgList |> OnMsgList >> Task.succeed)
+toCmds =
+    CmdExtra.toCmds OnMsgList
 
 
-toCmd : Msg -> Cmd Msg
+toCmd : msg -> Cmd msg
 toCmd =
-    List.singleton >> toCmds
+    CmdExtra.toCmd

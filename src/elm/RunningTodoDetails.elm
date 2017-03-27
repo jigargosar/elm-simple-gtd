@@ -8,17 +8,17 @@ import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 
 
-type alias StartedState =
+type alias RunningState =
     { startedAt : Time, lastBeepedAt : Time }
 
 
 type State
-    = Started StartedState
+    = Running RunningState
     | Stopped
 
 
 createStartedState =
-    StartedState >>> Started
+    RunningState >>> Running
 
 
 type alias RunningTodoDetails =
@@ -39,7 +39,7 @@ getMaybeId =
 
 getElapsedTime now runningTodoDetails =
     case runningTodoDetails.state of
-        Started { startedAt, lastBeepedAt } ->
+        Running { startedAt, lastBeepedAt } ->
             (now - startedAt) + runningTodoDetails.timeSpent
 
         Stopped ->

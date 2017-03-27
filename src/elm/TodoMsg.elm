@@ -33,7 +33,6 @@ type NowAction
 
 type TodoMsg
     = CreateNewTodo String
-    | CreateNewTodoAt String Time
     | SplitNewTodoFrom Todo
     | SplitNewTodoFromAt Todo Time
     | Start TodoId

@@ -35,9 +35,6 @@ update msg =
             CreateNewTodo text ->
                 withNow (OnNowAction (CreateNewTodoRN text))
 
-            CreateNewTodoAt text now ->
-                updateAndPersistMaybeTodo (addNewTodoAt text now)
-
             SplitNewTodoFrom todo ->
                 withNow (SplitNewTodoFromAt todo)
 

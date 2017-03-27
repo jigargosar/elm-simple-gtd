@@ -76,7 +76,12 @@ update msg =
                 Return.map (Model.setNow now)
 
             OnMsgList messages ->
-                (List.foldl (\msg return -> return |> Return.andThen (update msg))) # messages
+                onMsgList messages
+
+
+onMsgList : List Msg -> ReturnF
+onMsgList =
+    flip (List.foldl (update >> Return.andThen))
 
 
 onNewTodoMsg : NewTodoMsg -> ReturnF

@@ -1,7 +1,6 @@
 module FunctionExtra exposing (..)
 
 
-
 ifElse : (a -> Bool) -> (a -> b) -> (a -> b) -> a -> b
 ifElse pred onTrue onFalse value =
     if pred value then
@@ -50,16 +49,3 @@ equals =
 
 notEquals =
     (/=)
-
-
-maybe2Tuple : (Maybe a, Maybe b) -> Maybe (a, b)
-maybe2Tuple tuple =
-  case tuple of
-    (Just a, Just b) ->
-      Just (a, b)
-
-    _ ->
-      Nothing
-
-
-mapMaybe2Tuple fn = maybe2Tuple >> Maybe.map fn

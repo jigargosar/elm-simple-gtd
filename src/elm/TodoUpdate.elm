@@ -91,14 +91,10 @@ andThenMaybe fn =
 
 markRunningTodoDetailsDone =
     andThenMaybe
-        (apply2 ( getRunningTodoDetails >> Maybe.map ((.id) >> markDone), Just )
-            >> mapMaybe2Tuple (uncurry update)
+        (apply2 ( Model.getRunningTodoId >> Maybe.map markDone, Just )
+            >> maybe2Tuple
+            >> Maybe.map (uncurry update)
         )
-
-
-getRunningTodoDetails : Model -> Maybe RunningTodoDetails
-getRunningTodoDetails =
-    (.runningTodoDetails)
 
 
 setRunningTodoDetails : Maybe RunningTodoDetails -> ModelF

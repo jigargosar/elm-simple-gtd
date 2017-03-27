@@ -62,11 +62,8 @@ update msg =
             NoOp ->
                 identity
 
-            OnNewTodoMsg msg ->
-                onNewTodoMsg msg
-
-            OnEditTodoMsg msg ->
-                onEditTodoMsg msg
+            OnEditModeMsg msg ->
+                onEditModeMsg msg
 
             OnTodoMsg msg ->
                 Return.andThen (TodoUpdate.update msg)
@@ -86,11 +83,15 @@ onMsgList =
     flip (List.foldl (update >> Return.andThen))
 
 
-onNewTodoMsg : NewTodoMsg -> ReturnF
-onNewTodoMsg msg =
+onEditModeMsg : EditModeMsg -> ReturnF
+onEditModeMsg msg =
     let
         activateEditNewTodoMode text =
             Return.map (Model.activateEditNewTodoMode text)
+
+        setTodoTextAndDeactivateEditing todo =
+            onTodoListMsg (Types.setText (Todo.getText todo) (Todo.getId todo))
+                >> deactivateEditingModeFor todo
     in
         case msg of
             AddTodoClicked ->
@@ -115,15 +116,6 @@ onNewTodoMsg msg =
                     _ ->
                         identity
 
-
-onEditTodoMsg : EditTodoMsg -> ReturnF
-onEditTodoMsg msg =
-    let
-        setTodoTextAndDeactivateEditing todo =
-            onTodoListMsg (Types.setText (Todo.getText todo) (Todo.getId todo))
-                >> deactivateEditingModeFor todo
-    in
-        case msg of
             StartEditingTodo todo ->
                 Return.map (Model.activateEditTodoMode todo)
                     >> focusFirstAutoFocusElement

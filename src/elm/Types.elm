@@ -53,37 +53,34 @@ type alias ReturnF =
     Return -> Return
 
 
-type NewTodoMsg
+type EditModeMsg
     = AddTodoClicked
     | NewTodoTextChanged String
     | NewTodoBlur
     | NewTodoKeyUp String KeyboardEvent
-
-
-type EditTodoMsg
-    = StartEditingTodo Todo
+    | StartEditingTodo Todo
     | EditTodoTextChanged String
     | EditTodoBlur Todo
     | EditTodoKeyUp Todo KeyboardEvent
 
 
 onNewTodo =
-    { startAdding = AddTodoClicked |> OnNewTodoMsg
-    , input = NewTodoTextChanged >> OnNewTodoMsg
-    , blur = NewTodoBlur |> OnNewTodoMsg
-    , keyUp = NewTodoKeyUp >>> OnNewTodoMsg
+    { startAdding = AddTodoClicked |> OnEditModeMsg
+    , input = NewTodoTextChanged >> OnEditModeMsg
+    , blur = NewTodoBlur |> OnEditModeMsg
+    , keyUp = NewTodoKeyUp >>> OnEditModeMsg
     }
 
 
 startEditingTodo =
-    StartEditingTodo >> OnEditTodoMsg
+    StartEditingTodo >> OnEditModeMsg
 
 
 onEditTodo =
     { startEditing = startEditingTodo
-    , input = EditTodoTextChanged >> OnEditTodoMsg
-    , blur = EditTodoBlur >> OnEditTodoMsg
-    , keyUp = EditTodoKeyUp >>> OnEditTodoMsg
+    , input = EditTodoTextChanged >> OnEditModeMsg
+    , blur = EditTodoBlur >> OnEditModeMsg
+    , keyUp = EditTodoKeyUp >>> OnEditModeMsg
     }
 
 
@@ -129,8 +126,7 @@ stopAndMarkDone =
 
 type Msg
     = NoOp
-    | OnNewTodoMsg NewTodoMsg
-    | OnEditTodoMsg EditTodoMsg
+    | OnEditModeMsg EditModeMsg
       --
     | OnTodoMsg TodoMsg
     | SetMainViewType MainViewType

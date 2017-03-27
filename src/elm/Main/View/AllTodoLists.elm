@@ -63,19 +63,29 @@ createTodoListViewConfig model =
 
 allTodoListByGroupView : Model -> Html Msg
 allTodoListByGroupView =
-    apply2 ( createTodoListViewConfig >> keyedTodoGroupView, getTodoGroupsViewModel )
+    apply2 ( foo, getTodoGroupsViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
 
 
+foo model =
+    keyedTodoGroupView (todoView (createTodoListViewConfig model))
+
+
 todoListView : Model -> Html Msg
 todoListView =
-    apply2 ( createTodoListViewConfig, Model.getFilteredTodoList )
-        >> (\( vc, todoList ) -> Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc))
+    apply2 ( createTodoListViewConfig >> todoView, Model.getFilteredTodoList )
+        >> (\( todoView, todoList ) ->
+                Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
+           )
 
 
-keyedTodoGroupView : ViewConfig Msg -> TodoGroupViewModel -> Maybe ( String, Html Msg )
-keyedTodoGroupView vc vm =
+type alias KeyedTodoView =
+    Todo -> ( TodoId, Html Msg )
+
+
+keyedTodoGroupView : KeyedTodoView -> TodoGroupViewModel -> Maybe ( String, Html Msg )
+keyedTodoGroupView todoView vm =
     if vm.isEmpty then
         Nothing
     else
@@ -88,12 +98,12 @@ keyedTodoGroupView vc vm =
                         , badge [ intProperty "label" (vm.count) ] []
                         ]
                     ]
-                , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> todoView vc)
+                , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> todoView)
                 ]
             )
 
 
-todoView : ViewConfig msg -> Todo -> ( TodoId, Html msg )
+todoView : ViewConfig msg -> KeyedTodoView
 todoView vc todo =
     let
         todoId =

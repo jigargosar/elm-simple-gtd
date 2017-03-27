@@ -85,12 +85,13 @@ stopRunningTodoDetails =
     Return.map (setRunningTodoDetails RunningTodoDetails.init)
 
 
-markRunningTodoDone return =
-    let
-        maybeTodoId =
-            Model.getRunningTodoId (Tuple.first return)
-    in
-        markMaybeTodoIdDone maybeTodoId return
+getRunningTodoId =
+    Tuple.first >> Model.getRunningTodoId
+
+
+markRunningTodoDone =
+    apply2 ( getRunningTodoId, identity )
+        >> uncurry markMaybeTodoIdDone
 
 
 markMaybeTodoIdDone maybeTodoId =

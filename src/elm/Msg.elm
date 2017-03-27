@@ -90,10 +90,6 @@ type Msg
     | OnNewTodoMsg NewTodoMsg
     | OnEditTodoMsg EditTodoMsg
       --
-    | OnDeleteTodoClicked TodoId
-    | OnTodoDoneClicked TodoId
-    | OnSetTodoGroupClicked TodoGroup TodoId
-      --
     | OnTodoMsg TodoMsg
     | SetMainViewType MainViewType
     | OnUpdateNow Time

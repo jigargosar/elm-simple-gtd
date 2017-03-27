@@ -85,62 +85,50 @@ onMsgList =
 
 onEditModeMsg : EditModeMsg -> ReturnF
 onEditModeMsg msg =
-    let
-        activateEditNewTodoMode text =
-            Return.map (Model.activateEditNewTodoMode text)
+    case msg of
+        AddTodoClicked ->
+            activateEditNewTodoMode ""
+                >> focusFirstAutoFocusElement
 
-        setTodoTextAndDeactivateEditing todo =
-            andThenUpdate (Types.setText (Todo.getText todo) (Todo.getId todo))
-                >> deactivateEditingModeFor todo
-    in
-        case msg of
-            AddTodoClicked ->
-                activateEditNewTodoMode ""
-                    >> focusFirstAutoFocusElement
+        NewTodoTextChanged text ->
+            activateEditNewTodoMode text
 
-            NewTodoTextChanged text ->
-                activateEditNewTodoMode text
+        NewTodoBlur ->
+            deactivateEditingMode
 
-            NewTodoBlur ->
-                deactivateEditingMode
+        NewTodoKeyUp text { key } ->
+            case key of
+                Enter ->
+                    andThenUpdate (Types.saveNewTodo text)
+                        >> activateEditNewTodoMode ""
 
-            NewTodoKeyUp text { key } ->
-                case key of
-                    Enter ->
-                        andThenUpdate (Types.saveNewTodo text)
-                            >> activateEditNewTodoMode ""
+                Escape ->
+                    deactivateEditingMode
 
-                    Escape ->
-                        deactivateEditingMode
+                _ ->
+                    identity
 
-                    _ ->
-                        identity
+        StartEditingTodo todo ->
+            Return.map (Model.activateEditTodoMode todo)
+                >> focusFirstAutoFocusElement
 
-            StartEditingTodo todo ->
-                Return.map (Model.activateEditTodoMode todo)
-                    >> focusFirstAutoFocusElement
+        EditTodoTextChanged text ->
+            Return.map (Model.updateEditTodoText text)
 
-            EditTodoTextChanged text ->
-                Return.map (Model.updateEditTodoText text)
+        EditTodoBlur todo ->
+            setTodoTextAndDeactivateEditing todo
 
-            EditTodoBlur todo ->
-                setTodoTextAndDeactivateEditing todo
+        EditTodoKeyUp todo { key, isShiftDown } ->
+            case key of
+                Enter ->
+                    setTodoTextAndDeactivateEditing todo
+                        >> whenBool isShiftDown (andThenUpdate (Types.splitNewTodoFrom todo))
 
-            EditTodoKeyUp todo { key, isShiftDown } ->
-                case key of
-                    Enter ->
-                        let
-                            _ =
-                                Debug.log "EditTodoKeyUp" ("enter presseed")
-                        in
-                            setTodoTextAndDeactivateEditing todo
-                                >> whenBool isShiftDown (andThenUpdate (Types.splitNewTodoFrom todo))
+                Escape ->
+                    deactivateEditingMode
 
-                    Escape ->
-                        deactivateEditingMode
-
-                    _ ->
-                        identity
+                _ ->
+                    identity
 
 
 andThenUpdate =
@@ -154,6 +142,15 @@ deactivateEditingMode =
 deactivateEditingModeFor : Todo -> ReturnF
 deactivateEditingModeFor =
     Model.deactivateEditingModeFor >> Return.map
+
+
+activateEditNewTodoMode text =
+    Return.map (Model.activateEditNewTodoMode text)
+
+
+setTodoTextAndDeactivateEditing todo =
+    andThenUpdate (Types.setText (Todo.getText todo) (Todo.getId todo))
+        >> deactivateEditingModeFor todo
 
 
 port documentQuerySelectorAndFocus : String -> Cmd msg

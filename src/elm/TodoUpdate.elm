@@ -40,7 +40,7 @@ update msg =
                 stopRunningTodoDetails
 
             StopAndMarkDone ->
-                markRunningTodoDetailsDone
+                markRunningTodoDone
                     >> stopRunningTodoDetails
 
             OnRequiresNowAction action ->
@@ -85,7 +85,7 @@ stopRunningTodoDetails =
     Return.map (setRunningTodoDetails RunningTodoDetails.init)
 
 
-markRunningTodoDetailsDone return =
+markRunningTodoDone return =
     let
         maybeTodoId =
             Model.getRunningTodoId (Tuple.first return)

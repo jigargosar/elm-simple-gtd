@@ -53,12 +53,13 @@ update msg =
 splitNewTodoAt todo now =
     Return.andThen
         (splitNewTodoFromAt todo now
-            >> Tuple2.mapSecond
-                (applyList
-                    [ persistTodoCmd, Msg.startEditingTodo >> Msg.toCmd ]
-                    >> Cmd.batch
-                )
+            >> Tuple2.mapSecond persistAndEditTodoCmd
         )
+
+
+persistAndEditTodoCmd =
+    applyList [ persistTodoCmd, Msg.startEditingTodo >> Msg.toCmd ]
+        >> Cmd.batch
 
 
 onWithNow action now =

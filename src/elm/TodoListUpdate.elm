@@ -1,4 +1,4 @@
-module TodoList exposing (..)
+module TodoListUpdate exposing (..)
 
 import ActiveTask exposing (MaybeActiveTask)
 import List.Extra as List
@@ -14,7 +14,7 @@ import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import TodoListTypes exposing (..)
+import TodoListMsg exposing (..)
 import PouchDB
 import Tuple2
 import TodoAction

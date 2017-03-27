@@ -1,4 +1,4 @@
-module TodoListTypes exposing (..)
+module TodoListMsg exposing (..)
 
 import Time exposing (Time)
 import Todo exposing (Todo, TodoGroup, TodoId)

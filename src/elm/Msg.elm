@@ -4,7 +4,7 @@ import Dom
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
-import TodoListTypes exposing (TodoMsg)
+import TodoListMsg exposing (TodoMsg)
 import Main.Types exposing (MainViewType)
 import Navigation exposing (Location)
 import Time exposing (Time)
@@ -42,6 +42,13 @@ onEditTodo =
     , input = EditTodoTextChanged >> OnEditTodoMsg
     , blur = EditTodoBlur >> OnEditTodoMsg
     , keyUp = EditTodoKeyUp >>> OnEditTodoMsg
+    }
+
+
+todoMsg =
+    { start = TodoListMsg.Start >> OnTodoMsg
+    , stop = OnTodoMsg TodoListMsg.Stop
+    , stopAndMarkDone = OnTodoMsg TodoListMsg.StopAndMarkDone
     }
 
 

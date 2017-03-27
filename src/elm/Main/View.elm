@@ -14,7 +14,7 @@ import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
 import TimeExtra
-import TodoList
+import TodoListUpdate
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import DebugExtra.Debug exposing (tapLog)
@@ -32,7 +32,7 @@ import Polymer.App as App
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 import Todo.View
-import TodoListTypes
+import TodoListMsg
 
 
 appView m =
@@ -86,8 +86,8 @@ activeTaskView { todoVM, elapsedTime } m =
         , div [ class "col" ]
             [ div [ class "elapsed-time" ] [ text (TimeExtra.toHHMMSS elapsedTime) ]
             , iconButton [ icon "av:pause" ] []
-            , iconButton [ icon "av:stop", TodoList.stop |> OnTodoMsg >> onClick ] []
-            , iconButton [ icon "check", TodoList.stopAndMarkDone |> OnTodoMsg >> onClick ] []
+            , iconButton [ icon "av:stop", todoMsg.stop |> onClick ] []
+            , iconButton [ icon "check", todoMsg.stopAndMarkDone |> onClick ] []
             ]
         ]
 

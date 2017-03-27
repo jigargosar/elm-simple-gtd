@@ -14,7 +14,7 @@ import RouteUrl exposing (RouteUrlProgram)
 import Task
 import Time exposing (Time)
 import PouchDB
-import TodoList
+import TodoListUpdate exposing (..)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
@@ -67,17 +67,17 @@ update msg =
                 onEditTodoMsg msg
 
             OnSetTodoGroupClicked todoGroup todoId ->
-                onTodoListMsg (TodoList.setGroup todoGroup todoId)
+                onTodoListMsg (TodoListUpdate.setGroup todoGroup todoId)
 
             OnDeleteTodoClicked todoId ->
-                onTodoListMsg (TodoList.toggleDelete todoId)
+                onTodoListMsg (TodoListUpdate.toggleDelete todoId)
 
             OnTodoDoneClicked todoId ->
-                onTodoListMsg (TodoList.toggleDone todoId)
+                onTodoListMsg (TodoListUpdate.toggleDone todoId)
 
             OnTodoMsg msg ->
                 Return.andThen
-                    (TodoList.update
+                    (TodoListUpdate.update
                         update
                         msg
                     )
@@ -108,7 +108,7 @@ onNewTodoMsg msg =
             NewTodoKeyUp text { key } ->
                 case key of
                     Enter ->
-                        onTodoListMsg (TodoList.addNewTodo text)
+                        onTodoListMsg (TodoListUpdate.addNewTodo text)
                             >> activateEditNewTodoMode ""
 
                     Escape ->
@@ -121,7 +121,7 @@ onNewTodoMsg msg =
 onEditTodoMsg msg =
     let
         setTodoTextAndDeactivateEditing todo =
-            onTodoListMsg (TodoList.setText (Todo.getText todo) (Todo.getId todo))
+            onTodoListMsg (TodoListUpdate.setText (Todo.getText todo) (Todo.getId todo))
                 >> deactivateEditingModeFor todo
     in
         case msg of
@@ -143,7 +143,7 @@ onEditTodoMsg msg =
                                 Debug.log "EditTodoKeyUp" ("enter presseed")
                         in
                             setTodoTextAndDeactivateEditing todo
-                                >> whenBool isShiftDown (onTodoListMsg (TodoList.splitNewTodoFrom todo))
+                                >> whenBool isShiftDown (onTodoListMsg (TodoListUpdate.splitNewTodoFrom todo))
 
                     Escape ->
                         deactivateEditingMode

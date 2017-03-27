@@ -5,6 +5,7 @@ import Todo exposing (TodoId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import FunctionExtra.Operators exposing (..)
 
 
 type alias StartedState =
@@ -16,6 +17,10 @@ type State
     | Stopped
 
 
+createStartedState =
+    StartedState >>> Started
+
+
 type alias RunningTodoDetails =
     { id : TodoId, state : State, timeSpent : Time, startTime : Time }
 
@@ -25,7 +30,7 @@ init =
 
 
 start id now =
-    RunningTodoDetails id (Started now now) 0 now |> Just
+    RunningTodoDetails id (createStartedState now now) 0 now |> Just
 
 
 getMaybeId =

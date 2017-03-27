@@ -24,6 +24,17 @@ type CreateAction
     | FromId TodoId
 
 
+type MasterTodoMsg
+    = WithoutNow
+    | WithNow
+
+
+type RequiresNowActions
+    = UpdateTodoRN UpdateAction TodoId
+    | CreateNewTodoRN String
+    | SplitNewTodoFromRN Todo
+
+
 type TodoMsg
     = UpdateTodoAt UpdateAction TodoId Time
     | UpdateTodo UpdateAction TodoId

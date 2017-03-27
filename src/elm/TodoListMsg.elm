@@ -25,3 +25,43 @@ type TodoMsg
     | Start TodoId
     | Stop
     | StopAndMarkDone
+
+
+toggleDone =
+    UpdateTodo ToggleDone
+
+
+markDone =
+    UpdateTodo MarkDone
+
+
+toggleDelete =
+    UpdateTodo ToggleDelete
+
+
+setGroup : TodoGroup -> TodoId -> TodoMsg
+setGroup =
+    SetGroup >> UpdateTodo
+
+
+setText : String -> TodoId -> TodoMsg
+setText =
+    SetText >> UpdateTodo
+
+
+addNewTodo : String -> TodoMsg
+addNewTodo =
+    AddNewTodo
+
+
+splitNewTodoFrom : Todo -> TodoMsg
+splitNewTodoFrom =
+    SplitNewTodoFrom
+
+
+stop =
+    Stop
+
+
+stopAndMarkDone =
+    StopAndMarkDone

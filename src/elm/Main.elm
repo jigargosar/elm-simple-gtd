@@ -22,6 +22,7 @@ import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
 import Function exposing ((>>>))
 import Html
+import TodoListMsg
 
 
 type alias Return =
@@ -67,13 +68,13 @@ update msg =
                 onEditTodoMsg msg
 
             OnSetTodoGroupClicked todoGroup todoId ->
-                onTodoListMsg (TodoListUpdate.setGroup todoGroup todoId)
+                onTodoListMsg (TodoListMsg.setGroup todoGroup todoId)
 
             OnDeleteTodoClicked todoId ->
-                onTodoListMsg (TodoListUpdate.toggleDelete todoId)
+                onTodoListMsg (TodoListMsg.toggleDelete todoId)
 
             OnTodoDoneClicked todoId ->
-                onTodoListMsg (TodoListUpdate.toggleDone todoId)
+                onTodoListMsg (TodoListMsg.toggleDone todoId)
 
             OnTodoMsg msg ->
                 Return.andThen
@@ -108,7 +109,7 @@ onNewTodoMsg msg =
             NewTodoKeyUp text { key } ->
                 case key of
                     Enter ->
-                        onTodoListMsg (TodoListUpdate.addNewTodo text)
+                        onTodoListMsg (TodoListMsg.addNewTodo text)
                             >> activateEditNewTodoMode ""
 
                     Escape ->
@@ -121,7 +122,7 @@ onNewTodoMsg msg =
 onEditTodoMsg msg =
     let
         setTodoTextAndDeactivateEditing todo =
-            onTodoListMsg (TodoListUpdate.setText (Todo.getText todo) (Todo.getId todo))
+            onTodoListMsg (TodoListMsg.setText (Todo.getText todo) (Todo.getId todo))
                 >> deactivateEditingModeFor todo
     in
         case msg of
@@ -143,7 +144,7 @@ onEditTodoMsg msg =
                                 Debug.log "EditTodoKeyUp" ("enter presseed")
                         in
                             setTodoTextAndDeactivateEditing todo
-                                >> whenBool isShiftDown (onTodoListMsg (TodoListUpdate.splitNewTodoFrom todo))
+                                >> whenBool isShiftDown (onTodoListMsg (TodoListMsg.splitNewTodoFrom todo))
 
                     Escape ->
                         deactivateEditingMode

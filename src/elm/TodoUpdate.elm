@@ -62,7 +62,7 @@ persistAndEditTodoCmd =
 onWithNow action now =
     case action of
         Update action id ->
-            updateAndPersistMaybeTodo (updateTodoAt action id now)
+            updateAndPersistMaybeTodo (updateTodo action id now)
 
         Create text ->
             updateAndPersistMaybeTodo (addNewTodoAt text now)
@@ -160,7 +160,7 @@ upsertTodoCmd todo =
     PouchDB.pouchDBUpsert ( "todo-db", Todo.getId todo, (Todo.encode todo) )
 
 
-updateTodoAt action todoId now =
+updateTodo action todoId now =
     let
         todoActionUpdater =
             case action of

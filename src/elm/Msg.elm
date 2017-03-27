@@ -30,7 +30,7 @@ type EditTodoMsg
 
 
 onNewTodo =
-    { addClicked = AddTodoClicked |> OnNewTodoMsg
+    { startAdding = AddTodoClicked |> OnNewTodoMsg
     , input = NewTodoTextChanged >> OnNewTodoMsg
     , blur = NewTodoBlur |> OnNewTodoMsg
     , keyUp = NewTodoKeyUp >>> OnNewTodoMsg

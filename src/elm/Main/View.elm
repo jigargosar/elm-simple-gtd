@@ -133,7 +133,7 @@ addTodoFabView m =
     fab
         [ id "add-fab"
         , attribute "icon" "add"
-        , onClick onNewTodo.addClicked
+        , onClick onNewTodo.startAdding
         ]
         []
 

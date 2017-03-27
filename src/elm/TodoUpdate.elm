@@ -90,8 +90,8 @@ markRunningTodoDone =
         >> uncurry markMaybeTodoIdDone
 
 
-markMaybeTodoIdDone maybeTodoId =
-    Maybe.Extra.unwrap identity (markDone >> update >> Return.andThen) maybeTodoId
+markMaybeTodoIdDone =
+    Maybe.Extra.unwrap identity (markDone >> update >> Return.andThen)
 
 
 setRunningTodoDetails : Maybe RunningTodoDetails -> ModelF

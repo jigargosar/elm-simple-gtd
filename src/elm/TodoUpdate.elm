@@ -124,11 +124,6 @@ withNow msg =
     Task.perform (msg >> Types.OnTodoMsg) Time.now |> Return.command
 
 
-
---persistMaybeTodoCmd =
---    Maybe.Extra.unwrap Cmd.none persistTodoCmd
-
-
 persistMaybeTodoCmd =
     Maybe.Extra.unwrap Cmd.none upsertTodoCmd
 

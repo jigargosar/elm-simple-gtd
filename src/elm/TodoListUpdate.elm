@@ -48,14 +48,7 @@ update msg =
                 withNow (SplitNewTodoFromAt todo)
 
             SplitNewTodoFromAt todo now ->
-                Return.andThen
-                    (splitNewTodoFromAt todo now
-                        >> mapMaybeSecondToCmd
-                            (applyList
-                                [ persistTodoCmd, onEditTodo.startEditing >> Msg.msgToCmd ]
-                                >> Cmd.batch
-                            )
-                    )
+                splitNewTodoAt todo now
 
             Start id ->
                 startActiveTask id
@@ -74,10 +67,27 @@ update msg =
                 onWithNow action now
 
 
+splitNewTodoAt todo now =
+    Return.andThen
+        (splitNewTodoFromAt todo now
+            >> mapMaybeSecondToCmd
+                (applyList
+                    [ persistTodoCmd, onEditTodo.startEditing >> Msg.msgToCmd ]
+                    >> Cmd.batch
+                )
+        )
+
+
 onWithNow action now =
     case action of
-        _ ->
-            identity
+        UpdateTodoRN action id ->
+            updateAndPersistMaybeTodo (updateTodoAt action id now)
+
+        CreateNewTodoRN text ->
+            updateAndPersistMaybeTodo (addNewTodoAt text now)
+
+        SplitNewTodoFromRN todo ->
+            splitNewTodoAt todo now
 
 
 mapMaybeSecondToCmd maybeToCmd =

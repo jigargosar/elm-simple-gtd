@@ -103,7 +103,7 @@ keyedTodoGroupView todoView vm =
             )
 
 
-todoView : ViewConfig msg -> Todo -> ( TodoId, Html msg )
+todoView : ViewConfig Msg -> TodoView
 todoView vc todo =
     let
         todoId =

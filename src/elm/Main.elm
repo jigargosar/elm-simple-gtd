@@ -76,6 +76,7 @@ update msg =
                 Return.map (Model.setNow now)
 
 
+onNewTodoMsg : NewTodoMsg -> ReturnF
 onNewTodoMsg msg =
     let
         activateEditNewTodoMode text =
@@ -105,6 +106,7 @@ onNewTodoMsg msg =
                         identity
 
 
+onEditTodoMsg : EditTodoMsg -> ReturnF
 onEditTodoMsg msg =
     let
         setTodoTextAndDeactivateEditing todo =

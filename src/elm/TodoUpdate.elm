@@ -16,7 +16,6 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import PouchDB
 import Tuple2
-import TodoAction
 import TodoMsg exposing (..)
 
 

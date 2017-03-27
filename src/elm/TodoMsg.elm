@@ -24,12 +24,7 @@ type CreateAction
     | FromId TodoId
 
 
-type MasterTodoMsg
-    = WithoutNow
-    | WithNow
-
-
-type RequiresNowActions
+type NowAction
     = UpdateTodoRN UpdateAction TodoId
     | CreateNewTodoRN String
     | SplitNewTodoFromRN Todo
@@ -45,6 +40,8 @@ type TodoMsg
     | Start TodoId
     | Stop
     | StopAndMarkDone
+    | OnRequiresNowAction NowAction
+    | OnNowAction NowAction Time
 
 
 toggleDone =

@@ -67,6 +67,18 @@ update msg =
                 markDoneIfActive
                     >> stopTaskIfActive
 
+            OnRequiresNowAction action ->
+                withNow (OnNowAction action)
+
+            OnNowAction action now ->
+                onWithNow action now
+
+
+onWithNow action now =
+    case action of
+        _ ->
+            identity
+
 
 mapMaybeSecondToCmd maybeToCmd =
     Tuple2.mapSecond (Maybe.map maybeToCmd >> Maybe.withDefault Cmd.none)

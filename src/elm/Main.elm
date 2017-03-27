@@ -1,6 +1,7 @@
 port module Main exposing (..)
 
 import Dom
+import EditModeUpdate
 import Model.EditMode
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
@@ -64,7 +65,7 @@ update msg =
                 identity
 
             OnEditModeMsg msg ->
-                onEditModeMsg msg
+                EditModeUpdate.onEditModeMsg msg
 
             OnTodoMsg msg ->
                 TodoUpdate.update msg
@@ -84,81 +85,14 @@ onMsgList =
     flip (List.foldl (update >> Return.andThen))
 
 
-onEditModeMsg : EditModeMsg -> ReturnF
-onEditModeMsg msg =
-    case msg of
-        AddTodoClicked ->
-            activateEditNewTodoMode ""
-                >> focusFirstAutoFocusElement
-
-        NewTodoTextChanged text ->
-            activateEditNewTodoMode text
-
-        NewTodoBlur ->
-            deactivateEditingMode
-
-        NewTodoKeyUp text { key } ->
-            case key of
-                Enter ->
-                    andThenUpdate (Types.saveNewTodo text)
-                        >> activateEditNewTodoMode ""
-
-                Escape ->
-                    deactivateEditingMode
-
-                _ ->
-                    identity
-
-        StartEditingTodo todo ->
-            Return.map (Model.EditMode.activateEditTodoMode todo)
-                >> focusFirstAutoFocusElement
-
-        EditTodoTextChanged text ->
-            Return.map (Model.EditMode.updateEditTodoText text)
-
-        EditTodoBlur todo ->
-            setTodoTextAndDeactivateEditing todo
-
-        EditTodoKeyUp todo { key, isShiftDown } ->
-            case key of
-                Enter ->
-                    setTodoTextAndDeactivateEditing todo
-                        >> whenBool isShiftDown (andThenUpdate (Types.splitNewTodoFrom todo))
-
-                Escape ->
-                    deactivateEditingMode
-
-                _ ->
-                    identity
 
 
 andThenUpdate =
     update >> Return.andThen
 
 
-deactivateEditingMode =
-    Return.map (Model.EditMode.deactivateEditingMode)
 
 
-deactivateEditingModeFor : Todo -> ReturnF
-deactivateEditingModeFor =
-    Model.EditMode.deactivateEditingModeFor >> Return.map
-
-
-activateEditNewTodoMode text =
-    Return.map (Model.EditMode.activateEditNewTodoMode text)
-
-
-setTodoTextAndDeactivateEditing todo =
-    andThenUpdate (Types.setText (Todo.getText todo) (Todo.getId todo))
-        >> deactivateEditingModeFor todo
-
-
-port documentQuerySelectorAndFocus : String -> Cmd msg
-
-
-focusFirstAutoFocusElement =
-    documentQuerySelectorAndFocus ".auto-focus" |> Return.command
 
 
 port startAlarm : () -> Cmd msg

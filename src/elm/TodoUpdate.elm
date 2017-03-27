@@ -90,6 +90,7 @@ markRunningTodoDone =
         >> uncurry markMaybeTodoIdDone
 
 
+markMaybeTodoIdDone : Maybe TodoId -> RF
 markMaybeTodoIdDone =
     Maybe.Extra.unwrap identity (markDone >> update >> Return.andThen)
 

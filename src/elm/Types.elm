@@ -64,24 +64,36 @@ type EditModeMsg
     | EditTodoKeyUp Todo KeyboardEvent
 
 
-onNewTodo =
-    { startAdding = AddTodoClicked |> OnEditModeMsg
-    , input = NewTodoTextChanged >> OnEditModeMsg
-    , blur = NewTodoBlur |> OnEditModeMsg
-    , keyUp = NewTodoKeyUp >>> OnEditModeMsg
-    }
+startAddingTodo =
+    AddTodoClicked |> OnEditModeMsg
+
+
+onNewTodoInput =
+    NewTodoTextChanged >> OnEditModeMsg
+
+
+onNewTodoBlur =
+    NewTodoBlur |> OnEditModeMsg
+
+
+onNewTodoKeyUp =
+    NewTodoKeyUp >>> OnEditModeMsg
 
 
 startEditingTodo =
     StartEditingTodo >> OnEditModeMsg
 
 
-onEditTodo =
-    { startEditing = startEditingTodo
-    , input = EditTodoTextChanged >> OnEditModeMsg
-    , blur = EditTodoBlur >> OnEditModeMsg
-    , keyUp = EditTodoKeyUp >>> OnEditModeMsg
-    }
+onEditTodoInput =
+    EditTodoTextChanged >> OnEditModeMsg
+
+
+onEditTodoBlur =
+    EditTodoBlur >> OnEditModeMsg
+
+
+onEditTodoKeyUp =
+    EditTodoKeyUp >>> OnEditModeMsg
 
 
 toggleDone =

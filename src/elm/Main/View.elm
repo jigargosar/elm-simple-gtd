@@ -6,7 +6,7 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
-import Types exposing (EditMode(..), MainViewType(..), Msg, onNewTodo)
+import Types exposing (..)
 import Main.View.AllTodoLists exposing (..)
 import Main.View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
@@ -117,10 +117,10 @@ newTodoInputView editMode =
             input
                 [ id newTodoInputId
                 , class "auto-focus"
-                , onInput onNewTodo.input
+                , onInput onNewTodoInput
                 , value text
-                , onBlur onNewTodo.blur
-                , onKeyUp (onNewTodo.keyUp text)
+                , onBlur onNewTodoBlur
+                , onKeyUp (onNewTodoKeyUp text)
                 ]
                 []
 
@@ -132,7 +132,7 @@ addTodoFabView m =
     fab
         [ id "add-fab"
         , attribute "icon" "add"
-        , onClick onNewTodo.startAdding
+        , onClick startAddingTodo
         ]
         []
 

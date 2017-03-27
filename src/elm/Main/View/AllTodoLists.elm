@@ -5,7 +5,7 @@ import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
-import Types exposing (EditMode(EditTodoMode), Msg(NoOp), onEditTodo)
+import Types exposing (..)
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -48,10 +48,10 @@ type alias ViewConfig msg =
 createTodoListViewConfig : Model -> ViewConfig Msg
 createTodoListViewConfig model =
     { onDeleteTodoClicked = Types.toggleDelete
-    , onEditTodoClicked = onEditTodo.startEditing
-    , onEditTodoTextChanged = onEditTodo.input
-    , onEditTodoBlur = onEditTodo.blur
-    , onEditTodoKeyUp = onEditTodo.keyUp
+    , onEditTodoClicked = startEditingTodo
+    , onEditTodoTextChanged = onEditTodoInput
+    , onEditTodoBlur = onEditTodoBlur
+    , onEditTodoKeyUp = onEditTodoKeyUp
     , noOp = NoOp
     , onTodoMoveToClicked = Types.setGroup
     , now = Model.getNow model

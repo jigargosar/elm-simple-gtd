@@ -28,6 +28,11 @@ onEditTodo =
     Msg.onEditTodo
 
 
+updateMaybeMsg : Maybe TodoMsg -> Model -> ( Model, Cmd Msg )
+updateMaybeMsg maybeMsg =
+    Maybe.Extra.unwrap Return.singleton update maybeMsg
+
+
 update : TodoMsg -> Model -> ( Model, Cmd Msg )
 update msg =
     Return.singleton

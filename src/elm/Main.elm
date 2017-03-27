@@ -22,7 +22,6 @@ import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
 import Function exposing ((>>>))
 import Html
-import TodoListMsg
 
 
 type alias Return =

@@ -4,7 +4,6 @@ import Dom
 import Flow.Model exposing (FlowAction(..))
 import Json.Decode
 import Keyboard.Extra exposing (Key)
-import TodoListMsg exposing (TodoMsg(..), UpdateAction(..))
 import Main.Types exposing (MainViewType)
 import Navigation exposing (Location)
 import Time exposing (Time)
@@ -13,6 +12,26 @@ import FunctionExtra.Operators exposing (..)
 import Function
 import KeyboardExtra exposing (KeyboardEvent)
 import Task
+
+
+type UpdateAction
+    = ToggleDone
+    | MarkDone
+    | SetGroup TodoGroup
+    | SetText String
+    | ToggleDelete
+
+
+type TodoMsg
+    = UpdateTodoAt UpdateAction TodoId Time
+    | UpdateTodo UpdateAction TodoId
+    | AddNewTodo String
+    | AddNewTodoAt String Time
+    | SplitNewTodoFrom Todo
+    | SplitNewTodoFromAt Todo Time
+    | Start TodoId
+    | Stop
+    | StopAndMarkDone
 
 
 type NewTodoMsg

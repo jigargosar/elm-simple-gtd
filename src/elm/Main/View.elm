@@ -32,7 +32,7 @@ import Polymer.App as App
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 import Todo.View
-import TodoListMsg
+
 
 
 appView m =

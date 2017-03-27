@@ -1,6 +1,7 @@
 port module Main exposing (..)
 
 import Dom
+import Model.EditMode
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import FunctionExtra exposing (..)
@@ -109,11 +110,11 @@ onEditModeMsg msg =
                     identity
 
         StartEditingTodo todo ->
-            Return.map (Model.activateEditTodoMode todo)
+            Return.map (Model.EditMode.activateEditTodoMode todo)
                 >> focusFirstAutoFocusElement
 
         EditTodoTextChanged text ->
-            Return.map (Model.updateEditTodoText text)
+            Return.map (Model.EditMode.updateEditTodoText text)
 
         EditTodoBlur todo ->
             setTodoTextAndDeactivateEditing todo
@@ -136,16 +137,16 @@ andThenUpdate =
 
 
 deactivateEditingMode =
-    Return.map (Model.deactivateEditingMode)
+    Return.map (Model.EditMode.deactivateEditingMode)
 
 
 deactivateEditingModeFor : Todo -> ReturnF
 deactivateEditingModeFor =
-    Model.deactivateEditingModeFor >> Return.map
+    Model.EditMode.deactivateEditingModeFor >> Return.map
 
 
 activateEditNewTodoMode text =
-    Return.map (Model.activateEditNewTodoMode text)
+    Return.map (Model.EditMode.activateEditNewTodoMode text)
 
 
 setTodoTextAndDeactivateEditing todo =

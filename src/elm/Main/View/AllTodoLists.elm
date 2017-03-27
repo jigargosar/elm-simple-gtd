@@ -5,6 +5,7 @@ import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
+import Model.EditMode
 import Types exposing (..)
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
@@ -55,7 +56,7 @@ createTodoListViewConfig model =
     , noOp = NoOp
     , onTodoMoveToClicked = Types.setGroup
     , now = Model.getNow model
-    , editMode = Model.getEditMode model
+    , editMode = Model.EditMode.getEditMode model
     , onTodoDoneClicked = Types.toggleDone
     , onTodoStartClicked = Types.start
     }

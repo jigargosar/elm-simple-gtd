@@ -118,34 +118,6 @@ mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
 
-setEditModeTo : EditMode -> ModelF
-setEditModeTo editMode m =
-    { m | editMode = editMode }
-
-
-getEditMode : Model -> EditMode
-getEditMode =
-    (.editMode)
-
-
-activateEditNewTodoMode : String -> ModelF
-activateEditNewTodoMode text =
-    setEditModeTo (EditNewTodoMode text)
-
-
-activateEditTodoMode : Todo -> ModelF
-activateEditTodoMode todo =
-    setEditModeTo (EditTodoMode todo)
-
-
-updateEditTodoText : String -> ModelF
-updateEditTodoText text m =
-    case getEditMode m of
-        EditTodoMode todo ->
-            setEditModeTo (EditTodoMode (Todo.setText text todo)) m
-
-        _ ->
-            m
 
 
 getSeed : Model -> Seed
@@ -157,22 +129,6 @@ setSeed : Seed -> ModelF
 setSeed seed model =
     { model | seed = seed }
 
-
-deactivateEditingMode =
-    setEditModeTo NotEditing
-
-
-deactivateEditingModeFor : Todo -> ModelF
-deactivateEditingModeFor todo model =
-    case getEditMode model of
-        EditTodoMode editingTodo ->
-            if Todo.equalById todo editingTodo then
-                deactivateEditingMode model
-            else
-                model
-
-        _ ->
-            model
 
 
 findTodoEqualById todo =

@@ -36,7 +36,10 @@ onNewTodo =
     , keyUp = NewTodoKeyUp >>> OnNewTodoMsg
     }
 
-startEditingTodo = StartEditingTodo >> OnEditTodoMsg
+
+startEditingTodo =
+    StartEditingTodo >> OnEditTodoMsg
+
 
 onEditTodo =
     { startEditing = startEditingTodo
@@ -97,5 +100,5 @@ type Msg
 
 
 msgToCmd : msg -> Cmd msg
-msgToCmd x =
-    Task.perform identity (Task.succeed x)
+msgToCmd msg =
+    Task.perform identity (Task.succeed msg)

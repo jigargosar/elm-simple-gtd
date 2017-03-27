@@ -24,10 +24,6 @@ todoInputId todo =
     "edit-todo-input-" ++ (Todo.getId todo)
 
 
-onEditTodo =
-    Msg.onEditTodo
-
-
 updateMaybeMsg : Maybe TodoMsg -> Model -> ( Model, Cmd Msg )
 updateMaybeMsg maybeMsg =
     Maybe.Extra.unwrap Return.singleton update maybeMsg
@@ -59,7 +55,7 @@ splitNewTodoAt todo now =
         (splitNewTodoFromAt todo now
             >> mapMaybeSecondToCmd
                 (applyList
-                    [ persistTodoCmd, onEditTodo.startEditing >> Msg.msgToCmd ]
+                    [ persistTodoCmd, Msg.startEditingTodo >> Msg.msgToCmd ]
                     >> Cmd.batch
                 )
         )

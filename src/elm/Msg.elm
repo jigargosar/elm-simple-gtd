@@ -36,9 +36,10 @@ onNewTodo =
     , keyUp = NewTodoKeyUp >>> OnNewTodoMsg
     }
 
+startEditingTodo = StartEditingTodo >> OnEditTodoMsg
 
 onEditTodo =
-    { startEditing = StartEditingTodo >> OnEditTodoMsg
+    { startEditing = startEditingTodo
     , input = EditTodoTextChanged >> OnEditTodoMsg
     , blur = EditTodoBlur >> OnEditTodoMsg
     , keyUp = EditTodoKeyUp >>> OnEditTodoMsg

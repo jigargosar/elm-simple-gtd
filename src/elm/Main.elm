@@ -104,7 +104,7 @@ onNewTodoMsg msg =
             NewTodoKeyUp text { key } ->
                 case key of
                     Enter ->
-                        onTodoListMsg (Msg.addNewTodo text)
+                        onTodoListMsg (Msg.saveNewTodo text)
                             >> activateEditNewTodoMode ""
 
                     Escape ->

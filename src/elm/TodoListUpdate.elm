@@ -38,10 +38,10 @@ update msg =
             UpdateTodoAt action id now ->
                 updateAndPersistMaybeTodo (updateTodoAt action id now)
 
-            AddNewTodo text ->
-                withNow (AddNewTodoAt text)
+            SaveNewTodo text ->
+                withNow (SaveNewTodoAt text)
 
-            AddNewTodoAt text now ->
+            SaveNewTodoAt text now ->
                 updateAndPersistMaybeTodo (addNewTodoAt text now)
 
             SplitNewTodoFrom todo ->

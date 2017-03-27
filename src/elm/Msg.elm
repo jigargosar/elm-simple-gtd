@@ -65,8 +65,8 @@ setText text =
     TodoMsg.setText text >> OnTodoMsg
 
 
-addNewTodo =
-    TodoMsg.addNewTodo >> OnTodoMsg
+saveNewTodo =
+    TodoMsg.saveNewTodo >> OnTodoMsg
 
 
 splitNewTodoFrom =

@@ -6,6 +6,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
+
 type UpdateAction
     = ToggleDone
     | MarkDone
@@ -17,8 +18,8 @@ type UpdateAction
 type TodoMsg
     = UpdateTodoAt UpdateAction TodoId Time
     | UpdateTodo UpdateAction TodoId
-    | AddNewTodo String
-    | AddNewTodoAt String Time
+    | SaveNewTodo String
+    | SaveNewTodoAt String Time
     | SplitNewTodoFrom Todo
     | SplitNewTodoFromAt Todo Time
     | Start TodoId
@@ -46,8 +47,8 @@ setText text =
     UpdateTodo (SetText text)
 
 
-addNewTodo =
-    AddNewTodo
+saveNewTodo =
+    SaveNewTodo
 
 
 splitNewTodoFrom =

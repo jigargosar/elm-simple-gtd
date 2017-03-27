@@ -5,6 +5,7 @@ import Todo exposing (Todo, TodoGroup, TodoId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import FunctionExtra.Operators exposing (..)
 
 
 type UpdateAction
@@ -44,24 +45,28 @@ type TodoMsg
     | OnNowAction NowAction Time
 
 
+updateTodo =
+    UpdateTodo >>> OnRequiresNowAction
+
+
 toggleDone =
-    UpdateTodoOld ToggleDone
+    updateTodo ToggleDone
 
 
 markDone =
-    UpdateTodoOld MarkDone
+    updateTodo MarkDone
 
 
 toggleDelete =
-    UpdateTodoOld ToggleDelete
+    updateTodo ToggleDelete
 
 
 setGroup group =
-    UpdateTodoOld (SetGroup group)
+    updateTodo (SetGroup group)
 
 
 setText text =
-    UpdateTodoOld (SetText text)
+    updateTodo (SetText text)
 
 
 saveNewTodo =

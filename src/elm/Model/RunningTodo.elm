@@ -8,7 +8,7 @@ import Todo exposing (Todo)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Types exposing (Model)
+import Types exposing (Model, ModelF)
 
 
 getRunningTodoViewModel : Model -> Maybe RunningTodoViewModel
@@ -44,3 +44,22 @@ toRunningTodoDetailsVM ( runningTodoDetails, todo ) m =
         , now = now
         , elapsedTime = RunningTodoDetails.getElapsedTime now runningTodoDetails
         }
+
+
+setRunningTodoDetails : Maybe RunningTodoDetails -> ModelF
+setRunningTodoDetails runningTodoDetails model =
+    { model | runningTodoDetails = runningTodoDetails }
+
+
+updateRunningTodoDetails : (Model -> Maybe RunningTodoDetails) -> ModelF
+updateRunningTodoDetails updater model =
+    setRunningTodoDetails (updater model) model
+
+
+stopRunningTodo : ModelF
+stopRunningTodo =
+    setRunningTodoDetails RunningTodoDetails.init
+
+
+startTodo id =
+    updateRunningTodoDetails (Model.getNow >> RunningTodoDetails.start id)

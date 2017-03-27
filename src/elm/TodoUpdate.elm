@@ -24,7 +24,7 @@ update : TodoMsg -> ReturnF
 update msg =
     case msg of
         Start id ->
-            startTodo id
+            Return.map (Model.RunningTodo.startTodo id)
 
         Stop ->
             stopRunningTodo
@@ -61,30 +61,15 @@ onWithNow action now =
             andThenMapSecond (copyNewTodo todo now) persistAndEditTodoCmd
 
 
-startTodo : TodoId -> ReturnF
-startTodo id =
-    Return.map (updateRunningTodoDetails (Model.getNow >> RunningTodoDetails.start id))
-
-
 stopRunningTodo : ReturnF
 stopRunningTodo =
-    Return.map (setRunningTodoDetails RunningTodoDetails.init)
+    Return.map (Model.RunningTodo.stopRunningTodo)
 
 
 markRunningTodoDone : ReturnF
 markRunningTodoDone =
     apply2 ( Tuple.first >> Model.RunningTodo.getRunningTodoId, identity )
         >> uncurry (Maybe.Extra.unwrap identity (markDone >> update))
-
-
-setRunningTodoDetails : Maybe RunningTodoDetails -> ModelF
-setRunningTodoDetails runningTodoDetails model =
-    { model | runningTodoDetails = runningTodoDetails }
-
-
-updateRunningTodoDetails : (Model -> Maybe RunningTodoDetails) -> ModelF
-updateRunningTodoDetails updater model =
-    setRunningTodoDetails (updater model) model
 
 
 addNewTodoAt text now m =

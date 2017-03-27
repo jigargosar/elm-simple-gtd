@@ -97,6 +97,7 @@ type Msg
     | OnTodoMsg TodoMsg
     | SetMainViewType MainViewType
     | OnUpdateNow Time
+    | OnMsgList (List Msg)
 
 
 msgToCmd : msg -> Cmd msg

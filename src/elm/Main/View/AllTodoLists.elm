@@ -63,7 +63,7 @@ createTodoListViewConfig model =
 
 allTodoListByGroupView : Model -> Html Msg
 allTodoListByGroupView =
-    apply2 ( createTodoListViewConfig >> keyedTodoListView, getTodoGroupsViewModel )
+    apply2 ( createTodoListViewConfig >> keyedTodoGroupView, getTodoGroupsViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
 
@@ -74,8 +74,8 @@ todoListView =
         >> (\( vc, todoList ) -> Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc))
 
 
-keyedTodoListView : ViewConfig Msg -> TodoGroupViewModel -> Maybe ( String, Html Msg )
-keyedTodoListView vc vm =
+keyedTodoGroupView : ViewConfig Msg -> TodoGroupViewModel -> Maybe ( String, Html Msg )
+keyedTodoGroupView vc vm =
     if vm.isEmpty then
         Nothing
     else

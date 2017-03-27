@@ -1,4 +1,4 @@
-module ActiveTask exposing (..)
+module ActiveTodo exposing (..)
 
 import Time exposing (Time)
 import Todo exposing (TodoId)
@@ -12,11 +12,11 @@ type State
     | Stopped
 
 
-type alias MaybeActiveTask =
-    Maybe ActiveTask
+type alias MaybeActiveTodo =
+    Maybe ActiveTodo
 
 
-type alias ActiveTask =
+type alias ActiveTodo =
     { id : TodoId, state : State, timeSpent : Time, startTime : Time }
 
 
@@ -25,17 +25,17 @@ init =
 
 
 start id now =
-    ActiveTask id (Started now now) 0 now |> Just
+    ActiveTodo id (Started now now) 0 now |> Just
 
 
 getTodoId =
-    (.id)
+    Maybe.map (.id)
 
 
-getElapsedTime now task =
-    case task.state of
+getElapsedTime now activeTodo =
+    case activeTodo.state of
         Started startedAt lastBeepedAt ->
-            (now - startedAt) + task.timeSpent
+            (now - startedAt) + activeTodo.timeSpent
 
         Stopped ->
-            task.timeSpent
+            activeTodo.timeSpent

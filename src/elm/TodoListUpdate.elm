@@ -1,6 +1,6 @@
 module TodoListUpdate exposing (..)
 
-import ActiveTask exposing (MaybeActiveTask)
+import ActiveTodo exposing (MaybeActiveTodo)
 import List.Extra as List
 import Main.Model as Model
 import Msg exposing (Msg)
@@ -83,7 +83,7 @@ mapMaybeSecondToCmd maybeToCmd =
 
 startActiveTask : TodoId -> RF
 startActiveTask id =
-    Return.map (updateActiveTask (Model.getNow >> ActiveTask.start id))
+    Return.map (updateActiveTask (Model.getNow >> ActiveTodo.start id))
 
 
 type alias RF =
@@ -92,7 +92,7 @@ type alias RF =
 
 stopActiveTask : Return Msg Model -> Return Msg Model
 stopActiveTask =
-    Return.map (setActiveTask ActiveTask.init)
+    Return.map (setActiveTask ActiveTodo.init)
 
 
 andThenMaybe fn =
@@ -106,17 +106,17 @@ markActiveTaskDone =
         )
 
 
-getActiveTask : Model -> MaybeActiveTask
+getActiveTask : Model -> MaybeActiveTodo
 getActiveTask =
-    (.activeTask)
+    (.activeTodo)
 
 
-setActiveTask : MaybeActiveTask -> ModelF
-setActiveTask activeTask model =
-    { model | activeTask = activeTask }
+setActiveTask : MaybeActiveTodo -> ModelF
+setActiveTask activeTodo model =
+    { model | activeTodo = activeTodo }
 
 
-updateActiveTask : (Model -> MaybeActiveTask) -> ModelF
+updateActiveTask : (Model -> MaybeActiveTodo) -> ModelF
 updateActiveTask updater model =
     setActiveTask (updater model) model
 

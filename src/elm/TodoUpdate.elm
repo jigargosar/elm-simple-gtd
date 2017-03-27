@@ -2,7 +2,7 @@ module TodoUpdate exposing (..)
 
 import RunningTodoDetails exposing (RunningTodoDetails)
 import List.Extra as List
-import Main.Model as Model
+import Model as Model
 import Types exposing (Model, ModelF, Msg, Return, ReturnF)
 import Maybe.Extra
 import Random.Pcg as Random

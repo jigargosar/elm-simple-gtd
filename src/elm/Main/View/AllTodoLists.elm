@@ -19,7 +19,7 @@ import Flow
 import Json.Decode
 import Json.Encode
 import List.Extra as List
-import Main.Model as Model
+import Model as Model
 import Types exposing (Model)
 import Todo as Todo exposing (TodoGroup(Inbox), Todo, TodoId)
 import Flow.Model as Flow exposing (Node)

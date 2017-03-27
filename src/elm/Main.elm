@@ -6,7 +6,7 @@ import Random.Pcg as Random exposing (Seed)
 import FunctionExtra exposing (..)
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
-import Main.Model as Model
+import Model as Model
 import Main.Routing
 import Main.View exposing (appView)
 import Navigation exposing (Location)

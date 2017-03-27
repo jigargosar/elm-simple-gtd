@@ -19,7 +19,7 @@ import Flow
 import Json.Decode
 import Json.Encode
 import List.Extra as List
-import Main.Model exposing (..)
+import Model exposing (..)
 import Todo exposing (Todo, TodoId)
 import Flow.Model as Flow exposing (Node)
 import Polymer.Paper exposing (..)

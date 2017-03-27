@@ -1,4 +1,4 @@
-module Main.Model exposing (..)
+module Model exposing (..)
 
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Dict

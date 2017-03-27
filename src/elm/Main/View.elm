@@ -22,7 +22,7 @@ import Flow
 import Json.Decode
 import Json.Encode
 import List.Extra as List
-import Main.Model as Model exposing (RunningTodoViewModel)
+import Model as Model exposing (RunningTodoViewModel)
 import Types exposing (Model)
 import Todo exposing (Todo, TodoId)
 import Flow.Model as Flow exposing (Node)

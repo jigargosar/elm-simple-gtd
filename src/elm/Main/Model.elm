@@ -35,7 +35,7 @@ init now encodedTodoList =
         RunningTodoDetails.init
 
 
-type alias RunningTodoDetailsViewModel =
+type alias RunningTodoViewModel =
     { todoVM : Todo.ViewModel, now : Time, elapsedTime : Time }
 
 
@@ -48,7 +48,7 @@ getRunningTodoId =
     getRunningTodoDetails >> RunningTodoDetails.getMaybeId
 
 
-getRunningTodoViewModel : Model -> Maybe RunningTodoDetailsViewModel
+getRunningTodoViewModel : Model -> Maybe RunningTodoViewModel
 getRunningTodoViewModel m =
     let
         maybeTodo =
@@ -58,7 +58,7 @@ getRunningTodoViewModel m =
             ?|> (toRunningTodoDetailsVM # m)
 
 
-toRunningTodoDetailsVM : ( RunningTodoDetails, Todo ) -> Model -> RunningTodoDetailsViewModel
+toRunningTodoDetailsVM : ( RunningTodoDetails, Todo ) -> Model -> RunningTodoViewModel
 toRunningTodoDetailsVM ( runningTodoDetails, todo ) m =
     let
         now =

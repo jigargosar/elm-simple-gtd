@@ -49,7 +49,7 @@ type alias ViewConfig msg =
 createTodoListViewConfig : Model -> ViewConfig Msg
 createTodoListViewConfig model =
     { onDeleteTodoClicked = OnDeleteTodoClicked
-    , onEditTodoClicked = onEditTodo.edit
+    , onEditTodoClicked = onEditTodo.editClicked
     , onEditTodoTextChanged = onEditTodo.input
     , onEditTodoBlur = onEditTodo.blur
     , onEditTodoKeyUp = onEditTodo.keyUp

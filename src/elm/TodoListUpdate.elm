@@ -52,7 +52,7 @@ update msg =
                     (splitNewTodoFromAt todo now
                         >> mapMaybeSecondToCmd
                             (applyList
-                                [ persistTodoCmd, onEditTodo.edit >> Msg.msgToCmd ]
+                                [ persistTodoCmd, onEditTodo.editClicked >> Msg.msgToCmd ]
                                 >> Cmd.batch
                             )
                     )

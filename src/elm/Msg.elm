@@ -38,7 +38,7 @@ onNewTodo =
 
 
 onEditTodo =
-    { edit = EditTodoClicked >> OnEditTodoMsg
+    { editClicked = EditTodoClicked >> OnEditTodoMsg
     , input = EditTodoTextChanged >> OnEditTodoMsg
     , blur = EditTodoBlur >> OnEditTodoMsg
     , keyUp = EditTodoKeyUp >>> OnEditTodoMsg

@@ -73,19 +73,16 @@ splitNewTodoFrom =
     SplitNewTodoFrom >> OnTodoMsg
 
 
+start =
+    Start >> OnTodoMsg
+
+
 stop =
     OnTodoMsg Stop
 
 
 stopAndMarkDone =
     OnTodoMsg StopAndMarkDone
-
-
-todoMsg =
-    { start = TodoListMsg.Start >> OnTodoMsg
-    , stop = OnTodoMsg TodoListMsg.Stop
-    , stopAndMarkDone = OnTodoMsg TodoListMsg.StopAndMarkDone
-    }
 
 
 type Msg

@@ -58,7 +58,7 @@ createTodoListViewConfig model =
     , now = getNow model
     , editMode = getEditMode model
     , onTodoDoneClicked = OnTodoDoneClicked
-    , onTodoStartClicked = todoMsg.start
+    , onTodoStartClicked = Msg.start
     }
 
 

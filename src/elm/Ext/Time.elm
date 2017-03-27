@@ -1,9 +1,10 @@
-module TimeExtra exposing (..)
+module Ext.Time exposing (..)
 
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+
 
 --toHHMMSS : Time -> String
 --toHHMMSS time =

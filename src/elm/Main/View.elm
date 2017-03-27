@@ -15,7 +15,7 @@ import Main.View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
-import TimeExtra
+import Ext.Time
 import TodoUpdate
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -84,7 +84,7 @@ runningTodoView { todoVM, elapsedTime } m =
     div []
         [ div [ class "title" ] [ text todoVM.text ]
         , div [ class "col" ]
-            [ div [ class "elapsed-time" ] [ text (TimeExtra.toHHMMSS elapsedTime) ]
+            [ div [ class "elapsed-time" ] [ text (Ext.Time.toHHMMSS elapsedTime) ]
             , iconButton [ icon "av:pause" ] []
             , iconButton [ icon "av:stop", Types.stop |> onClick ] []
             , iconButton [ icon "check", Types.stopAndMarkDone |> onClick ] []

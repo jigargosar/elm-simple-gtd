@@ -1,4 +1,4 @@
-module CmdExtra exposing (..)
+module Ext.Cmd exposing (..)
 
 import Task
 import Toolkit.Helpers exposing (..)

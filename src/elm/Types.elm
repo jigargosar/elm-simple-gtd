@@ -1,6 +1,6 @@
 module Types exposing (..)
 
-import CmdExtra
+import Ext.Cmd
 import KeyboardExtra exposing (KeyboardEvent)
 import Return
 import RunningTodoDetails exposing (RunningTodoDetails)
@@ -148,9 +148,9 @@ type Msg
 
 toCmds : List Msg -> Cmd Msg
 toCmds =
-    CmdExtra.toCmds OnMsgList
+    Ext.Cmd.toCmds OnMsgList
 
 
 toCmd : msg -> Cmd msg
 toCmd =
-    CmdExtra.toCmd
+    Ext.Cmd.toCmd

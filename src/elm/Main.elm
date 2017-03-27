@@ -66,7 +66,7 @@ update msg =
                 onEditModeMsg msg
 
             OnTodoMsg msg ->
-                Return.andThen (TodoUpdate.update msg)
+                TodoUpdate.update msg
 
             SetMainViewType viewState ->
                 Return.map (Model.setMainViewType viewState)

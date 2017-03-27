@@ -22,30 +22,24 @@ todoInputId todo =
     "edit-todo-input-" ++ (Todo.getId todo)
 
 
-updateMaybeMsg : Maybe TodoMsg -> Model -> ( Model, Cmd Msg )
-updateMaybeMsg maybeMsg =
-    Maybe.Extra.unwrap Return.singleton update maybeMsg
-
-
-update : TodoMsg -> Model -> ( Model, Cmd Msg )
+update : TodoMsg -> ReturnF
 update msg =
-    Return.singleton
-        >> case msg of
-            Start id ->
-                startTodo id
+    case msg of
+        Start id ->
+            startTodo id
 
-            Stop ->
-                stopRunningTodo
+        Stop ->
+            stopRunningTodo
 
-            StopAndMarkDone ->
-                markRunningTodoDone
-                    >> stopRunningTodo
+        StopAndMarkDone ->
+            markRunningTodoDone
+                >> stopRunningTodo
 
-            OnRequiresNowAction action ->
-                withNow (OnActionWithNow action)
+        OnRequiresNowAction action ->
+            withNow (OnActionWithNow action)
 
-            OnActionWithNow action now ->
-                onWithNow action now
+        OnActionWithNow action now ->
+            onWithNow action now
 
 
 andThenMapSecond fun toCmd =
@@ -82,12 +76,7 @@ stopRunningTodo =
 markRunningTodoDone : ReturnF
 markRunningTodoDone =
     apply2 ( Tuple.first >> Model.getRunningTodoId, identity )
-        >> uncurry (Maybe.Extra.unwrap identity markTodoIdDone)
-
-
-markTodoIdDone : TodoId -> ReturnF
-markTodoIdDone id =
-    Return.andThen (update (markDone id))
+        >> uncurry (Maybe.Extra.unwrap identity (markDone >> update))
 
 
 setRunningTodoDetails : Maybe RunningTodoDetails -> ModelF

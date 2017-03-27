@@ -1,5 +1,6 @@
 module Model.RunningTodo exposing (..)
 
+import Maybe.Extra
 import Model
 import Model.TodoList
 import RunningTodoDetails exposing (RunningTodoDetails)
@@ -63,3 +64,16 @@ stopRunningTodo =
 
 startTodo id =
     updateRunningTodoDetails (Model.getNow >> RunningTodoDetails.start id)
+
+
+shouldBeep =
+    getRunningTodoDetails >> Maybe.Extra.unwrap False shouldBeepHelp
+
+
+shouldBeepHelp details =
+    case details.state of
+        RunningTodoDetails.Running _ ->
+            False
+
+        _ ->
+            False

@@ -102,8 +102,7 @@ andThenMaybe fn =
 markActiveTaskDone =
     andThenMaybe
         (apply2 ( getActiveTask >> Maybe.map ((.id) >> markDone), Just )
-            >> maybe2Tuple
-            >> Maybe.map (uncurry update)
+            >> mapMaybe2Tuple (uncurry update)
         )
 
 

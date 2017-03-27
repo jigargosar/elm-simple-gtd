@@ -25,6 +25,10 @@ type CreateAction
     | FromId TodoId
 
 
+
+--type ActiveTaskAction = Start TodoId | Stop | MarkDone
+
+
 type RequiresNowAction
     = UpdateTodo UpdateAction TodoId
     | CreateNewTodo String

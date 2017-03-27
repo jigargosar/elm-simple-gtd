@@ -13,10 +13,10 @@ type State
 
 
 type alias MaybeActiveTask =
-    Maybe Task
+    Maybe ActiveTask
 
 
-type alias Task =
+type alias ActiveTask =
     { id : TodoId, state : State, timeSpent : Time, startTime : Time }
 
 
@@ -25,7 +25,7 @@ init =
 
 
 start id now =
-    Task id (Started now now) 0 now |> Just
+    ActiveTask id (Started now now) 0 now |> Just
 
 
 getTodoId =

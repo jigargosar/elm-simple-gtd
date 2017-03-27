@@ -95,10 +95,15 @@ stopActiveTask =
     Return.map (setActiveTask ActiveTask.init)
 
 
+andThenMaybe fn =
+    Return.andThen (\m -> m |> fn >> Maybe.withDefault (Return.singleton m))
+
+
 markActiveTaskDone =
-    Return.andThen
-        (apply2 ( getActiveTask >> Maybe.map ((.id) >> markDone), identity )
-            >> uncurry updateMaybeMsg
+    andThenMaybe
+        (apply2 ( getActiveTask >> Maybe.map ((.id) >> markDone), Just )
+            >> maybe2Tuple
+            >> Maybe.map (uncurry update)
         )
 
 

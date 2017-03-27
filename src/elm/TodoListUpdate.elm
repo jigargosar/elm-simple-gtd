@@ -42,10 +42,10 @@ update msg =
                 markDoneIfActive
                     >> stopTaskIfActive
 
-            OnNowAction action ->
-                withNow (OnActionWithNow action)
+            OnRequiresNowAction action ->
+                withNow (WithNow action)
 
-            OnActionWithNow action now ->
+            WithNow action now ->
                 onWithNow action now
 
 

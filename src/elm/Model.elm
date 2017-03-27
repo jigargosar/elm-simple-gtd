@@ -11,50 +11,10 @@ import Navigation exposing (Location)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todo as Todo exposing (EncodedTodoList, TodoGroup, Todo, TodoId, TodoList)
+import Todo as Todo exposing (TodoGroup, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-
-
-type alias RunningTodoViewModel =
-    { todoVM : Todo.ViewModel, now : Time, elapsedTime : Time }
-
-
-getRunningTodoDetails : Model -> Maybe RunningTodoDetails
-getRunningTodoDetails =
-    (.runningTodoDetails)
-
-
-getRunningTodoId =
-    getRunningTodoDetails >> RunningTodoDetails.getMaybeId
-
-
-getRunningTodoViewModel : Model -> Maybe RunningTodoViewModel
-getRunningTodoViewModel m =
-    let
-        maybeTodo =
-            getRunningTodoId m ?+> (getTodoById # m)
-    in
-        maybe2Tuple ( getRunningTodoDetails m, maybeTodo )
-            ?|> (toRunningTodoDetailsVM # m)
-
-
-toRunningTodoDetailsVM : ( RunningTodoDetails, Todo ) -> Model -> RunningTodoViewModel
-toRunningTodoDetailsVM ( runningTodoDetails, todo ) m =
-    let
-        now =
-            getNow m
-    in
-        { todoVM = Todo.toVM todo
-        , now = now
-        , elapsedTime = RunningTodoDetails.getElapsedTime now runningTodoDetails
-        }
-
-
-getTodoById : TodoId -> Model -> Maybe Todo
-getTodoById id =
-    getTodoList >> Todo.findById id
 
 
 getMainViewType : Model -> MainViewType
@@ -87,37 +47,6 @@ updateNow updater model =
     setNow (updater model) model
 
 
-getTodoList : Model -> TodoList
-getTodoList =
-    (.todoList)
-
-
-getFilteredTodoList =
-    apply2 ( getCurrentTodoListFilter, getTodoList )
-        >> uncurry List.filter
-        >> List.sortBy (Todo.getModifiedAt >> negate)
-
-
-getCurrentTodoListFilter model =
-    case getMainViewType model of
-        BinView ->
-            Todo.binFilter
-
-        DoneView ->
-            Todo.doneFilter
-
-        _ ->
-            always (True)
-
-
-getFirstInboxTodo =
-    getTodoList >> Todo.getFirstInboxTodo
-
-
-mapAllExceptDeleted mapper =
-    getTodoList >> Todo.mapAllExceptDeleted mapper
-
-
 getSeed : Model -> Seed
 getSeed =
     (.seed)
@@ -126,7 +55,3 @@ getSeed =
 setSeed : Seed -> ModelF
 setSeed seed model =
     { model | seed = seed }
-
-
-findTodoEqualById todo =
-    getTodoList >> List.find (Todo.equalById todo)

@@ -6,6 +6,7 @@ import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditMode
+import Model.TodoList
 import Types exposing (..)
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
@@ -71,7 +72,7 @@ allTodoListByGroupView =
 
 todoListView : Model -> Html Msg
 todoListView =
-    apply2 ( todoViewFromModel, Model.getFilteredTodoList )
+    apply2 ( todoViewFromModel, Model.TodoList.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
                 Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
            )

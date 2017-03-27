@@ -2,6 +2,7 @@ module TodoGroupViewModel exposing (..)
 
 import Dict exposing (Dict)
 import Dict.Extra as Dict
+import Model.TodoList
 import Todo exposing (TodoGroup, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -16,7 +17,7 @@ type alias TodoGroupViewModel =
 
 getTodoGroupsViewModel : Model -> List TodoGroupViewModel
 getTodoGroupsViewModel =
-    Model.getTodoList
+    Model.TodoList.getTodoList
         >> Todo.rejectAnyPass [ Todo.isDeleted, Todo.isDone ]
         >> Dict.groupBy (Todo.getGroup >> toString)
         >> (\dict ->

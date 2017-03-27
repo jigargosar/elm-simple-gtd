@@ -6,7 +6,9 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
+import Model
 import Model.EditMode
+import Model.RunningTodo exposing (RunningTodoViewModel)
 import Types exposing (..)
 import Main.View.AllTodoLists exposing (..)
 import Main.View.AppDrawer exposing (appDrawerView)
@@ -23,7 +25,6 @@ import Flow
 import Json.Decode
 import Json.Encode
 import List.Extra as List
-import Model as Model exposing (RunningTodoViewModel)
 import Types exposing (Model)
 import Todo exposing (Todo, TodoId)
 import Flow.Model as Flow exposing (Node)
@@ -70,7 +71,7 @@ appHeaderView m =
 
 runningTodoAppToolBarView : Model -> Html Msg
 runningTodoAppToolBarView m =
-    case Model.getRunningTodoViewModel m of
+    case Model.RunningTodo.getRunningTodoViewModel m of
         Just taskVm ->
             div [ class "active-task-view", attribute "sticky" "true" ] [ runningTodoView taskVm m ]
 

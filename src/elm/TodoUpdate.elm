@@ -1,5 +1,7 @@
 module TodoUpdate exposing (..)
 
+import Model.RunningTodo
+import Model.TodoList
 import RunningTodoDetails exposing (RunningTodoDetails)
 import List.Extra as List
 import Model as Model
@@ -71,7 +73,7 @@ stopRunningTodo =
 
 markRunningTodoDone : ReturnF
 markRunningTodoDone =
-    apply2 ( Tuple.first >> Model.getRunningTodoId, identity )
+    apply2 ( Tuple.first >> Model.RunningTodo.getRunningTodoId, identity )
         >> uncurry (Maybe.Extra.unwrap identity (markDone >> update))
 
 
@@ -91,27 +93,13 @@ addNewTodoAt text now m =
     else
         Random.step (Todo.generator now text) (Model.getSeed m)
             |> Tuple.mapSecond (Model.setSeed # m)
-            |> apply2 ( uncurry addTodo, Tuple.first >> Just )
+            |> apply2 ( uncurry Model.TodoList.addTodo, Tuple.first >> Just )
 
 
 copyNewTodo todo now m =
     Random.step (Todo.copyGenerator now todo) (Model.getSeed m)
         |> Tuple.mapSecond (Model.setSeed # m)
-        |> apply2 ( uncurry addTodo, Tuple.first )
-
-
-addTodo todo =
-    updateTodoList (Model.getTodoList >> (::) todo)
-
-
-setTodoList : TodoList -> ModelF
-setTodoList todoList model =
-    { model | todoList = todoList }
-
-
-updateTodoList : (Model -> TodoList) -> ModelF
-updateTodoList updater model =
-    setTodoList (updater model) model
+        |> apply2 ( uncurry Model.TodoList.addTodo, Tuple.first )
 
 
 updateAndPersistMaybeTodo updater =
@@ -161,16 +149,4 @@ updateTodo action todoId now =
         todoUpdater =
             todoActionUpdater >> modifiedAtUpdater
     in
-        updateTodoMaybe todoUpdater todoId
-
-
-updateTodoMaybe : (Todo -> Todo) -> TodoId -> Model -> ( Model, Maybe Todo )
-updateTodoMaybe updater todoId m =
-    let
-        newTodoList =
-            m.todoList
-                |> List.updateIf (Todo.hasId todoId) updater
-    in
-        ( setTodoList newTodoList m
-        , List.find (Todo.hasId todoId) newTodoList
-        )
+        Model.TodoList.updateTodoMaybe todoUpdater todoId

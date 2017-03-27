@@ -40,7 +40,11 @@ getElapsedTime__ now activeTodo =
         Stopped ->
             activeTodo.timeSpent
 
-type alias ViewModel = {elapsedTime: Time}
 
+type alias ViewModel =
+    { elapsedTime : Time }
+
+
+toVm : Time -> MaybeActiveTodo -> Maybe ViewModel
 toVm now =
-    Maybe.map ( getElapsedTime__ now >> ViewModel)
+    Maybe.map (getElapsedTime__ now >> ViewModel)

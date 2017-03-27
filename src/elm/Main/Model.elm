@@ -36,7 +36,7 @@ init now encodedTodoList =
 
 
 type alias ActiveTaskViewModel =
-    { task : ActiveTodo.ActiveTodo, todoVM : Todo.ViewModel, now : Time, elapsedTime : Time }
+    { todoVM : Todo.ViewModel, now : Time, elapsedTime : Time }
 
 
 getActiveTaskViewModel : Model -> Maybe ActiveTaskViewModel
@@ -46,12 +46,13 @@ getActiveTaskViewModel m =
             m.activeTodo |> ActiveTodo.getTodoId ?+> (getTodoById # m)
     in
         maybe2Tuple
-            ( ActiveTodo.toVm m.activeTodo
+            ( ActiveTodo.toVm (getNow m) m.activeTodo
             , maybeTodo ?|> Todo.toVM
             )
             ?|> (toActiveTaskVM # m)
 
 
+toActiveTaskVM : ( ActiveTodo.ViewModel, Todo.ViewModel ) -> Model -> ActiveTaskViewModel
 toActiveTaskVM ( activeTodoVM, todoVM ) m =
     let
         now =

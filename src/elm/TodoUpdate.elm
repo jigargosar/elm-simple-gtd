@@ -47,9 +47,6 @@ update msg =
             OnActionWithNow action now ->
                 onWithNow action now
 
-            OnEditModeMsg msg ->
-                onEditModeMsg msg
-
 
 andThenMapSecond fun toCmd =
     Return.andThen (fun >> Tuple.mapSecond toCmd)
@@ -197,8 +194,3 @@ updateTodoMaybe updater todoId m =
         ( setTodoList newTodoList m
         , List.find (Todo.hasId todoId) newTodoList
         )
-
-
-onEditModeMsg : EditModeMsg -> ReturnF
-onEditModeMsg msg =
-    identity

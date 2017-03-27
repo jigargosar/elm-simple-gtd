@@ -92,7 +92,11 @@ markRunningTodoDone =
 
 markMaybeTodoIdDone : Maybe TodoId -> RF
 markMaybeTodoIdDone =
-    Maybe.Extra.unwrap identity (markDone >> update >> Return.andThen)
+    Maybe.Extra.unwrap identity markTodoIdDone
+
+
+markTodoIdDone id =
+    Return.andThen (update (markDone id))
 
 
 setRunningTodoDetails : Maybe RunningTodoDetails -> ModelF

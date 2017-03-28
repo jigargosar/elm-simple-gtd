@@ -75,7 +75,7 @@ shouldBeep =
 shouldBeepHelp ( details, now ) =
     case details.state of
         RunningTodoDetails.Running { lastBeepedAt } ->
-            now - lastBeepedAt > 15 * Time.second
+            now - lastBeepedAt > 10 * Time.minute
 
         _ ->
             False

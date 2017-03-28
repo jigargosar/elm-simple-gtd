@@ -75,18 +75,7 @@ update msg =
                 Return.map (Model.setMainViewType viewState)
 
             OnUpdateNow now ->
-                Return.map (Model.setNow now)
-                    >> Return.andThen
-                        (\m ->
-                            let
-                                shouldBeep =
-                                    Model.RunningTodo.shouldBeep m
-                            in
-                                if shouldBeep then
-                                    ( Model.RunningTodo.updateLastBeepedTo now m, startAlarm () )
-                                else
-                                    Return.singleton m
-                        )
+                onUpdateNow now
 
             OnMsgList messages ->
                 onMsgList messages
@@ -99,6 +88,21 @@ onMsgList =
 
 andThenUpdate =
     update >> Return.andThen
+
+
+onUpdateNow now =
+    Return.map (Model.setNow now)
+        >> Return.andThen
+            (\m ->
+                let
+                    shouldBeep =
+                        Model.RunningTodo.shouldBeep m
+                in
+                    if shouldBeep then
+                        ( Model.RunningTodo.updateLastBeepedTo now m, startAlarm () )
+                    else
+                        Return.singleton m
+            )
 
 
 port startAlarm : () -> Cmd msg

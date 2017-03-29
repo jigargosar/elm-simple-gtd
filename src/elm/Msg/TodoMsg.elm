@@ -17,15 +17,6 @@ type UpdateAction
     | ToggleDelete
 
 
-type CreateAction
-    = FromText String
-    | FromId TodoId
-
-
-
---type ActiveTaskAction = Start TodoId | Stop | MarkDone
-
-
 type RequiresNowAction
     = Update UpdateAction TodoId
     | Create String

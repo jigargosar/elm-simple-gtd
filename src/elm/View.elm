@@ -16,7 +16,7 @@ import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
 import Ext.Time
-import TodoUpdate
+import Update.TodoUpdate
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import DebugExtra.Debug exposing (tapLog)

@@ -1,4 +1,4 @@
-module EditModeUpdate exposing (..)
+module Update.EditModeUpdate exposing (..)
 
 import DomPorts exposing (focusFirstAutoFocusElement)
 import Keyboard.Extra exposing (Key(Enter, Escape))

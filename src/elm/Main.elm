@@ -1,7 +1,7 @@
 port module Main exposing (..)
 
 import Dom
-import EditModeUpdate
+import Update.EditModeUpdate
 import Model.EditMode
 import Model.RunningTodo
 import RandomIdGenerator as Random
@@ -18,7 +18,7 @@ import RouteUrl exposing (RouteUrlProgram)
 import Task
 import Time exposing (Time)
 import PouchDB
-import TodoUpdate exposing (..)
+import Update.TodoUpdate exposing (..)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
@@ -66,10 +66,10 @@ update msg =
                 identity
 
             OnEditModeMsg msg ->
-                EditModeUpdate.onEditModeMsg msg
+                Update.EditModeUpdate.onEditModeMsg msg
 
             OnTodoMsg msg ->
-                TodoUpdate.update msg
+                Update.TodoUpdate.update msg
 
             SetMainViewType viewState ->
                 Return.map (Model.setMainViewType viewState)

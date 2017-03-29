@@ -1,4 +1,4 @@
-module TodoUpdate exposing (..)
+module Update.TodoUpdate exposing (..)
 
 import Model.RunningTodo
 import Model.TodoList

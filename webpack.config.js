@@ -8,7 +8,7 @@ const isDevEnv = nodeENV === "development"
 console.log("debug:", isDevEnv, nodeENV)
 
 
-const outputDir = isDevEnv ? "dev" : "build"
+const outputDir = isDevEnv ? "dev" : "docs"
 
 
 module.exports = {

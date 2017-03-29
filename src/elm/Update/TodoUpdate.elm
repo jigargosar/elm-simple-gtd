@@ -42,6 +42,18 @@ update msg =
         ToggleDone id ->
             withNow (OnActionWithNow (Update ToggleDoneUA id))
 
+        MarkDone id ->
+            withNow (OnActionWithNow (Update MarkDoneUA id))
+
+        SetGroup group id ->
+            withNow (OnActionWithNow (Update (SetGroupUA group) id))
+
+        SetText text id ->
+            withNow (OnActionWithNow (Update (SetTextUA text) id))
+
+        ToggleDelete id ->
+            withNow (OnActionWithNow (Update (ToggleDeleteUA) id))
+
 
 andThenMapSecond fun toCmd =
     Return.andThen (fun >> Tuple.mapSecond toCmd)

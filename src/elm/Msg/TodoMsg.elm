@@ -30,30 +30,26 @@ type TodoMsg
     | OnRequiresNowAction RequiresNowAction
     | OnActionWithNow RequiresNowAction Time
     | ToggleDone TodoId
-
-
-update =
-    Update >>> OnRequiresNowAction
-
-
-toggleDone =
-    update ToggleDoneUA
+    | MarkDone TodoId
+    | SetGroup TodoGroup TodoId
+    | SetText String TodoId
+    | ToggleDelete TodoId
 
 
 markDone =
-    update MarkDoneUA
+    MarkDone
 
 
 toggleDelete =
-    update ToggleDeleteUA
+    ToggleDelete
 
 
-setGroup group =
-    update (SetGroupUA group)
+setGroup =
+    SetGroup
 
 
-setText text =
-    update (SetTextUA text)
+setText =
+    SetText
 
 
 saveNewTodo =

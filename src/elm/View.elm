@@ -62,7 +62,7 @@ appHeaderView m =
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
             , newTodoInputView (Model.EditMode.getEditMode m)
             ]
-        , runningTodoView m
+          --        , runningTodoView m
         ]
 
 

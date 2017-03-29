@@ -26,7 +26,7 @@ import Todo as Todo exposing (TodoGroup(Inbox), Todo, TodoId)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)
-import Todo.View
+import View.Todo
 
 
 type alias ViewConfig msg =
@@ -109,10 +109,10 @@ todoView vc todo =
             Todo.getId todo
 
         notEditingView =
-            Todo.View.todoViewNotEditing vc todo
+            View.Todo.todoViewNotEditing vc todo
 
         editingView todo =
-            Todo.View.todoViewEditing vc todo
+            View.Todo.todoViewEditing vc todo
 
         todoViewHelp =
             case vc.editMode of

@@ -31,7 +31,7 @@ import Polymer.Paper exposing (..)
 import Polymer.App as App
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import Todo.View
+import View.Todo
 
 
 appView m =

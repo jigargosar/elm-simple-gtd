@@ -1,4 +1,4 @@
-module Todo.View exposing (..)
+module View.Todo exposing (..)
 
 import Date.Distance exposing (inWords)
 import Html.Events.Extra exposing (onClickStopPropagation)

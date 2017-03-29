@@ -33,9 +33,6 @@ update msg =
             markRunningTodoDone
                 >> stopRunningTodo
 
-        OnRequiresNowAction action ->
-            withNow (OnActionWithNow action)
-
         OnActionWithNow action now ->
             onWithNow action now
 

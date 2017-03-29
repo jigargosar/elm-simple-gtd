@@ -27,7 +27,6 @@ type TodoMsg
     = Start TodoId
     | Stop
     | MarkRunningTodoDone
-    | OnRequiresNowAction RequiresNowAction
     | OnActionWithNow RequiresNowAction Time
     | ToggleDone TodoId
     | MarkDone TodoId

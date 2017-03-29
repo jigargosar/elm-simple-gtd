@@ -19,8 +19,8 @@ type UpdateAction
 
 type RequiresNowAction
     = Update UpdateAction TodoId
-    | Create String
-    | CopyAndEdit Todo
+    | CreateA String
+    | CopyAndEditA Todo
 
 
 type TodoMsg
@@ -53,11 +53,11 @@ setText =
 
 
 saveNewTodo =
-    Create >> OnRequiresNowAction
+    CreateA >> OnRequiresNowAction
 
 
 splitNewTodoFrom =
-    CopyAndEdit >> OnRequiresNowAction
+    CopyAndEditA >> OnRequiresNowAction
 
 
 start =

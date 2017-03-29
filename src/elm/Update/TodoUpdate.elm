@@ -69,10 +69,10 @@ onWithNow action now =
         Update action id ->
             updateAndPersistMaybeTodo (updateTodo action id now)
 
-        Create text ->
+        CreateA text ->
             updateAndPersistMaybeTodo (addNewTodoAt text now)
 
-        CopyAndEdit todo ->
+        CopyAndEditA todo ->
             andThenMapSecond (copyNewTodo todo now) persistAndEditTodoCmd
 
 

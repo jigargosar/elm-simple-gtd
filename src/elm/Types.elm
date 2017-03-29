@@ -45,14 +45,6 @@ type alias ModelF =
     Model -> Model
 
 
-type alias Return =
-    Return.Return Msg Model
-
-
-type alias ReturnF =
-    Return -> Return
-
-
 type EditModeMsg
     = AddTodoClicked
     | NewTodoTextChanged String
@@ -154,3 +146,11 @@ toCmds =
 toCmd : msg -> Cmd msg
 toCmd =
     Ext.Cmd.toCmd
+
+
+type alias Return =
+    Return.Return Msg Model
+
+
+type alias ReturnF =
+    Return -> Return

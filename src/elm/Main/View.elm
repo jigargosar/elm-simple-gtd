@@ -21,13 +21,12 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
-import Flow
+
 import Json.Decode
 import Json.Encode
 import List.Extra as List
 import Types exposing (Model)
 import Todo exposing (Todo, TodoId)
-import Flow.Model as Flow exposing (Node)
 import Polymer.Paper exposing (..)
 import Polymer.App as App
 import FunctionExtra exposing (..)

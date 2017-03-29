@@ -17,14 +17,12 @@ import Html.Attributes exposing (attribute, autofocus, class, classList, id, sty
 import Html.Events exposing (..)
 import DebugExtra.Debug exposing (tapLog)
 import DecodeExtra exposing (traceDecoder)
-import Flow
 import Json.Decode
 import Json.Encode
 import List.Extra as List
 import Model as Model
 import Types exposing (Model)
 import Todo as Todo exposing (TodoGroup(Inbox), Todo, TodoId)
-import Flow.Model as Flow exposing (Node)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)

@@ -2,7 +2,6 @@ module Model exposing (..)
 
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Dict
-import InboxFlow.View exposing (TodoViewModel)
 import Json.Encode as E
 import List.Extra as List
 import Types exposing (Model, ModelF, MainViewType(..), defaultViewType)

@@ -41,11 +41,6 @@ setNow now model =
     { model | now = now }
 
 
-updateNow : (Model -> Time) -> ModelF
-updateNow updater model =
-    setNow (updater model) model
-
-
 getSeed : Model -> Seed
 getSeed =
     (.seed)

@@ -1,4 +1,4 @@
-module Main.View exposing (appView)
+module View exposing (appView)
 
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
@@ -10,8 +10,8 @@ import Model
 import Model.EditMode
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Types exposing (..)
-import Main.View.AllTodoLists exposing (..)
-import Main.View.AppDrawer exposing (appDrawerView)
+import View.AllTodoLists exposing (..)
+import View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)

@@ -1,4 +1,4 @@
-module Main.View.AllTodoLists exposing (..)
+module View.AllTodoLists exposing (..)
 
 import Dom
 import Html.Attributes.Extra exposing (..)

@@ -1,4 +1,4 @@
-module Main.Routing exposing (..)
+module Routing exposing (..)
 
 import Model as Model
 import Types exposing (MainViewType(..), Model, Msg)

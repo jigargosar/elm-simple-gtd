@@ -10,8 +10,8 @@ import FunctionExtra exposing (..)
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model
-import Main.Routing
-import Main.View exposing (appView)
+import Routing
+import View exposing (appView)
 import Navigation exposing (Location)
 import Return
 import RouteUrl exposing (RouteUrlProgram)
@@ -37,8 +37,8 @@ type alias Flags =
 main : RouteUrlProgram Flags Model Msg
 main =
     RouteUrl.programWithFlags
-        { delta2url = Main.Routing.delta2hash
-        , location2messages = Main.Routing.hash2messages
+        { delta2url = Routing.delta2hash
+        , location2messages = Routing.hash2messages
         , init = init
         , update = update
         , view = appView

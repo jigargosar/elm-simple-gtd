@@ -1,4 +1,4 @@
-module Main.View.AppDrawer exposing (..)
+module View.AppDrawer exposing (..)
 
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
@@ -8,7 +8,7 @@ import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Model.TodoList
 import Types exposing (MainViewType(..), Msg(SetMainViewType))
-import Main.View.AllTodoLists exposing (allTodoListByGroupView)
+import View.AllTodoLists exposing (allTodoListByGroupView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)

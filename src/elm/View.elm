@@ -9,7 +9,6 @@ import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Model
 import Model.EditMode
 import Model.RunningTodo exposing (RunningTodoViewModel)
-import Msg.TodoMsg exposing (TodoMsg)
 import Types exposing (..)
 import View.AllTodoLists exposing (..)
 import View.AppDrawer exposing (appDrawerView)
@@ -17,7 +16,6 @@ import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
 import Ext.Time
-import Update.TodoUpdate
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import DebugExtra.Debug exposing (tapLog)
@@ -37,7 +35,7 @@ import View.Todo
 appView m =
     div []
         [ appDrawerLayoutView m
-        , addTodoFabView m |> Html.map OnTodoMsg
+        , addTodoFabView m
         ]
 
 
@@ -48,7 +46,6 @@ appDrawerLayoutView m =
             [ appHeaderView m
             , appMainView m
             ]
-            |> Html.map OnTodoMsg
         ]
 
 
@@ -69,7 +66,7 @@ appHeaderView m =
         ]
 
 
-runningTodoAppToolBarView : Model -> Html TodoMsg
+runningTodoAppToolBarView : Model -> Html Msg
 runningTodoAppToolBarView m =
     case Model.RunningTodo.getRunningTodoViewModel m of
         Just taskVm ->
@@ -79,7 +76,7 @@ runningTodoAppToolBarView m =
             div [ class "active-task-view", attribute "sticky" "true" ] []
 
 
-runningTodoView : RunningTodoViewModel -> Model -> Html TodoMsg
+runningTodoView : RunningTodoViewModel -> Model -> Html Msg
 runningTodoView { todoVM, elapsedTime } m =
     div []
         [ div [ class "title" ] [ text todoVM.text ]

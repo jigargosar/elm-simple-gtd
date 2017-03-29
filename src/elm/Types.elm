@@ -6,12 +6,61 @@ import Return
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
-import Todo exposing (Todo, TodoGroup, TodoList)
+import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import Msg.TodoMsg as TodoMsg exposing (TodoMsg(..))
+
+
+type UpdateAction
+    = ToggleDoneUA
+    | MarkDoneUA
+    | SetGroupUA TodoGroup
+    | SetTextUA String
+    | ToggleDeleteUA
+
+
+type RequiresNowAction
+    = Update UpdateAction TodoId
+    | CreateA String
+    | CopyAndEditA Todo
+
+
+markDone =
+    MarkDone
+
+
+toggleDelete =
+    ToggleDelete
+
+
+setGroup =
+    SetGroup
+
+
+setText =
+    SetText
+
+
+saveNewTodo =
+    Create
+
+
+splitNewTodoFrom =
+    CopyAndEdit
+
+
+start =
+    Start
+
+
+stop =
+    Stop
+
+
+markRunningTodoDone =
+    MarkRunningTodoDone
 
 
 type MainViewType
@@ -78,47 +127,34 @@ onEditTodoKeyUp =
 
 
 toggleDone =
-    TodoMsg.ToggleDone
-
-
-markDone =
-    TodoMsg.markDone
-
-
-toggleDelete =
-    TodoMsg.toggleDelete
-
-
-setGroup group =
-    TodoMsg.setGroup group
-
-
-setText text =
-    TodoMsg.setText text
-
-
-saveNewTodo =
-    TodoMsg.saveNewTodo
-
-
-splitNewTodoFrom =
-    TodoMsg.splitNewTodoFrom
-
-
-start =
-    TodoMsg.start
-
-
-stop =
-    TodoMsg.stop
+    ToggleDone
 
 
 stopAndMarkDone =
-    TodoMsg.MarkRunningTodoDone
+    MarkRunningTodoDone
 
 
 type Msg
-    = OnTodoMsg TodoMsg
+    = NoOp
+    | Start TodoId
+    | Stop
+    | MarkRunningTodoDone
+    | OnActionWithNow RequiresNowAction Time
+    | ToggleDone TodoId
+    | MarkDone TodoId
+    | SetGroup TodoGroup TodoId
+    | SetText String TodoId
+    | ToggleDelete TodoId
+    | Create String
+    | CopyAndEdit Todo
+    | AddTodoClicked
+    | NewTodoTextChanged String
+    | NewTodoBlur
+    | NewTodoKeyUp String KeyboardEvent
+    | StartEditingTodo Todo
+    | EditTodoTextChanged String
+    | EditTodoBlur Todo
+    | EditTodoKeyUp Todo KeyboardEvent
     | SetMainViewType MainViewType
     | OnUpdateNow Time
     | OnMsgList (List Msg)

@@ -35,6 +35,14 @@ type TodoMsg
     | ToggleDelete TodoId
     | Create String
     | CopyAndEdit Todo
+    | AddTodoClicked
+    | NewTodoTextChanged String
+    | NewTodoBlur
+    | NewTodoKeyUp String KeyboardEvent
+    | StartEditingTodo Todo
+    | EditTodoTextChanged String
+    | EditTodoBlur Todo
+    | EditTodoKeyUp Todo KeyboardEvent
 
 
 markDone =

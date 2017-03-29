@@ -36,9 +36,6 @@ update msg =
             NoOp ->
                 identity
 
-            OnEditModeMsg msg ->
-                Update.TodoUpdate.onEditModeMsg msg
-
             OnTodoMsg msg ->
                 Update.TodoUpdate.update msg
 

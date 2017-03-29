@@ -8,7 +8,7 @@ import Model.TodoList
 import RunningTodoDetails exposing (RunningTodoDetails)
 import List.Extra as List
 import Model as Model
-import Types exposing (EditModeMsg(..), Model, ModelF, Msg, Return, ReturnF)
+import Types exposing (Model, ModelF, Msg, Return, ReturnF)
 import Maybe.Extra
 import Random.Pcg as Random
 import Return
@@ -21,55 +21,6 @@ import FunctionExtra exposing (..)
 import PouchDB
 import Tuple2
 import Msg.TodoMsg exposing (..)
-
-
-onEditModeMsg : EditModeMsg -> ReturnF
-onEditModeMsg msg =
-    case msg of
-        AddTodoClicked ->
-            activateEditNewTodoMode ""
-                >> focusFirstAutoFocusElement
-
-        NewTodoTextChanged text ->
-            activateEditNewTodoMode text
-
-        NewTodoBlur ->
-            deactivateEditingMode
-
-        NewTodoKeyUp text { key } ->
-            case key of
-                Enter ->
-                    Return.command (Types.saveNewTodo text |> Types.toCmd)
-                        >> activateEditNewTodoMode ""
-
-                Escape ->
-                    deactivateEditingMode
-
-                _ ->
-                    identity
-
-        StartEditingTodo todo ->
-            Return.map (Model.EditMode.activateEditTodoMode todo)
-                >> focusFirstAutoFocusElement
-
-        EditTodoTextChanged text ->
-            Return.map (Model.EditMode.updateEditTodoText text)
-
-        EditTodoBlur todo ->
-            setTodoTextAndDeactivateEditing todo
-
-        EditTodoKeyUp todo { key, isShiftDown } ->
-            case key of
-                Enter ->
-                    setTodoTextAndDeactivateEditing todo
-                        >> whenBool isShiftDown
-                            (Return.command (Types.splitNewTodoFrom todo |> Types.toCmd))
-
-                Escape ->
-                    deactivateEditingMode
-
-                _ ->
-                    identity
 
 
 deactivateEditingMode =
@@ -126,6 +77,51 @@ update msg =
 
         CopyAndEdit todo ->
             withNow (OnActionWithNow (CopyAndEditA todo))
+
+        AddTodoClicked ->
+            activateEditNewTodoMode ""
+                >> focusFirstAutoFocusElement
+
+        NewTodoTextChanged text ->
+            activateEditNewTodoMode text
+
+        NewTodoBlur ->
+            deactivateEditingMode
+
+        NewTodoKeyUp text { key } ->
+            case key of
+                Enter ->
+                    Return.command (Types.saveNewTodo text |> Types.toCmd)
+                        >> activateEditNewTodoMode ""
+
+                Escape ->
+                    deactivateEditingMode
+
+                _ ->
+                    identity
+
+        StartEditingTodo todo ->
+            Return.map (Model.EditMode.activateEditTodoMode todo)
+                >> focusFirstAutoFocusElement
+
+        EditTodoTextChanged text ->
+            Return.map (Model.EditMode.updateEditTodoText text)
+
+        EditTodoBlur todo ->
+            setTodoTextAndDeactivateEditing todo
+
+        EditTodoKeyUp todo { key, isShiftDown } ->
+            case key of
+                Enter ->
+                    setTodoTextAndDeactivateEditing todo
+                        >> whenBool isShiftDown
+                            (Return.command (Types.splitNewTodoFrom todo |> Types.toCmd))
+
+                Escape ->
+                    deactivateEditingMode
+
+                _ ->
+                    identity
 
 
 andThenMapSecond fun toCmd =

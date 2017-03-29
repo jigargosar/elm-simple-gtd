@@ -11,7 +11,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import Msg.TodoMsg as TodoMsg exposing (TodoMsg)
+import Msg.TodoMsg as TodoMsg exposing (TodoMsg(..))
 
 
 type MainViewType
@@ -45,47 +45,36 @@ type alias ModelF =
     Model -> Model
 
 
-type EditModeMsg
-    = AddTodoClicked
-    | NewTodoTextChanged String
-    | NewTodoBlur
-    | NewTodoKeyUp String KeyboardEvent
-    | StartEditingTodo Todo
-    | EditTodoTextChanged String
-    | EditTodoBlur Todo
-    | EditTodoKeyUp Todo KeyboardEvent
-
-
 startAddingTodo =
-    AddTodoClicked |> OnEditModeMsg
+    AddTodoClicked |> OnTodoMsg
 
 
 onNewTodoInput =
-    NewTodoTextChanged >> OnEditModeMsg
+    NewTodoTextChanged >> OnTodoMsg
 
 
 onNewTodoBlur =
-    NewTodoBlur |> OnEditModeMsg
+    NewTodoBlur |> OnTodoMsg
 
 
 onNewTodoKeyUp =
-    NewTodoKeyUp >>> OnEditModeMsg
+    NewTodoKeyUp >>> OnTodoMsg
 
 
 startEditingTodo =
-    StartEditingTodo >> OnEditModeMsg
+    StartEditingTodo >> OnTodoMsg
 
 
 onEditTodoInput =
-    EditTodoTextChanged >> OnEditModeMsg
+    EditTodoTextChanged >> OnTodoMsg
 
 
 onEditTodoBlur =
-    EditTodoBlur >> OnEditModeMsg
+    EditTodoBlur >> OnTodoMsg
 
 
 onEditTodoKeyUp =
-    EditTodoKeyUp >>> OnEditModeMsg
+    EditTodoKeyUp >>> OnTodoMsg
 
 
 toggleDone =
@@ -130,8 +119,6 @@ stopAndMarkDone =
 
 type Msg
     = NoOp
-    | OnEditModeMsg EditModeMsg
-      --
     | OnTodoMsg TodoMsg
     | SetMainViewType MainViewType
     | OnUpdateNow Time

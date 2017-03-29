@@ -55,11 +55,11 @@ setText =
 
 
 saveNewTodo =
-    CreateA >> OnRequiresNowAction
+    Create
 
 
 splitNewTodoFrom =
-    CopyAndEditA >> OnRequiresNowAction
+    CopyAndEdit
 
 
 start =

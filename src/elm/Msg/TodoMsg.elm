@@ -10,11 +10,11 @@ import FunctionExtra.Operators exposing (..)
 
 
 type UpdateAction
-    = ToggleDone
-    | MarkDone
-    | SetGroup TodoGroup
-    | SetText String
-    | ToggleDelete
+    = ToggleDoneUA
+    | MarkDoneUA
+    | SetGroupUA TodoGroup
+    | SetTextUA String
+    | ToggleDeleteUA
 
 
 type RequiresNowAction
@@ -29,6 +29,7 @@ type TodoMsg
     | MarkRunningTodoDone
     | OnRequiresNowAction RequiresNowAction
     | OnActionWithNow RequiresNowAction Time
+    | ToggleDone TodoId
 
 
 update =
@@ -36,23 +37,23 @@ update =
 
 
 toggleDone =
-    update ToggleDone
+    update ToggleDoneUA
 
 
 markDone =
-    update MarkDone
+    update MarkDoneUA
 
 
 toggleDelete =
-    update ToggleDelete
+    update ToggleDeleteUA
 
 
 setGroup group =
-    update (SetGroup group)
+    update (SetGroupUA group)
 
 
 setText text =
-    update (SetText text)
+    update (SetTextUA text)
 
 
 saveNewTodo =

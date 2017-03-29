@@ -89,7 +89,7 @@ onEditTodoKeyUp =
 
 
 toggleDone =
-    TodoMsg.toggleDone >> OnTodoMsg
+    TodoMsg.ToggleDone >> OnTodoMsg
 
 
 markDone =

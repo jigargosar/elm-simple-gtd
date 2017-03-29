@@ -39,6 +39,9 @@ update msg =
         OnActionWithNow action now ->
             onWithNow action now
 
+        ToggleDone id ->
+            withNow (OnActionWithNow (Update ToggleDoneUA id))
+
 
 andThenMapSecond fun toCmd =
     Return.andThen (fun >> Tuple.mapSecond toCmd)
@@ -113,19 +116,19 @@ updateTodo action todoId now =
     let
         todoActionUpdater =
             case action of
-                SetGroup group ->
+                SetGroupUA group ->
                     Todo.setListType group
 
-                ToggleDone ->
+                ToggleDoneUA ->
                     Todo.toggleDone
 
-                MarkDone ->
+                MarkDoneUA ->
                     Todo.markDone
 
-                ToggleDelete ->
+                ToggleDeleteUA ->
                     Todo.toggleDeleted
 
-                SetText text ->
+                SetTextUA text ->
                     Todo.setText text
 
         modifiedAtUpdater =

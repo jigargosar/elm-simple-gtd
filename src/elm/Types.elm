@@ -46,80 +46,79 @@ type alias ModelF =
 
 
 startAddingTodo =
-    AddTodoClicked |> OnTodoMsg
+    AddTodoClicked
 
 
 onNewTodoInput =
-    NewTodoTextChanged >> OnTodoMsg
+    NewTodoTextChanged
 
 
 onNewTodoBlur =
-    NewTodoBlur |> OnTodoMsg
+    NewTodoBlur
 
 
 onNewTodoKeyUp =
-    NewTodoKeyUp >>> OnTodoMsg
+    NewTodoKeyUp
 
 
 startEditingTodo =
-    StartEditingTodo >> OnTodoMsg
+    StartEditingTodo
 
 
 onEditTodoInput =
-    EditTodoTextChanged >> OnTodoMsg
+    EditTodoTextChanged
 
 
 onEditTodoBlur =
-    EditTodoBlur >> OnTodoMsg
+    EditTodoBlur
 
 
 onEditTodoKeyUp =
-    EditTodoKeyUp >>> OnTodoMsg
+    EditTodoKeyUp
 
 
 toggleDone =
-    TodoMsg.ToggleDone >> OnTodoMsg
+    TodoMsg.ToggleDone
 
 
 markDone =
-    TodoMsg.markDone >> OnTodoMsg
+    TodoMsg.markDone
 
 
 toggleDelete =
-    TodoMsg.toggleDelete >> OnTodoMsg
+    TodoMsg.toggleDelete
 
 
 setGroup group =
-    TodoMsg.setGroup group >> OnTodoMsg
+    TodoMsg.setGroup group
 
 
 setText text =
-    TodoMsg.setText text >> OnTodoMsg
+    TodoMsg.setText text
 
 
 saveNewTodo =
-    TodoMsg.saveNewTodo >> OnTodoMsg
+    TodoMsg.saveNewTodo
 
 
 splitNewTodoFrom =
-    TodoMsg.splitNewTodoFrom >> OnTodoMsg
+    TodoMsg.splitNewTodoFrom
 
 
 start =
-    TodoMsg.start >> OnTodoMsg
+    TodoMsg.start
 
 
 stop =
-    OnTodoMsg TodoMsg.stop
+    TodoMsg.stop
 
 
 stopAndMarkDone =
-    OnTodoMsg TodoMsg.MarkRunningTodoDone
+    TodoMsg.MarkRunningTodoDone
 
 
 type Msg
-    = NoOp
-    | OnTodoMsg TodoMsg
+    = OnTodoMsg TodoMsg
     | SetMainViewType MainViewType
     | OnUpdateNow Time
     | OnMsgList (List Msg)

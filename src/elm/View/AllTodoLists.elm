@@ -7,6 +7,7 @@ import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditMode
 import Model.TodoList exposing (TodoGroupViewModel)
+import Msg.TodoMsg as TodoMsg exposing (TodoMsg)
 import Types exposing (..)
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
@@ -44,14 +45,14 @@ type alias ViewConfig msg =
     }
 
 
-createTodoListViewConfig : Model -> ViewConfig Msg
+createTodoListViewConfig : Model -> ViewConfig TodoMsg
 createTodoListViewConfig model =
     { onDeleteTodoClicked = Types.toggleDelete
     , onEditTodoClicked = startEditingTodo
     , onEditTodoTextChanged = onEditTodoInput
     , onEditTodoBlur = onEditTodoBlur
     , onEditTodoKeyUp = onEditTodoKeyUp
-    , noOp = NoOp
+    , noOp = TodoMsg.NoOp
     , onTodoMoveToClicked = Types.setGroup
     , now = Model.getNow model
     , editMode = Model.EditMode.getEditMode model
@@ -60,14 +61,14 @@ createTodoListViewConfig model =
     }
 
 
-allTodoListByGroupView : Model -> Html Msg
+allTodoListByGroupView : Model -> Html TodoMsg
 allTodoListByGroupView =
     apply2 ( todoViewFromModel >> keyedTodoGroupView, Model.TodoList.getTodoGroupsViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
 
 
-todoListView : Model -> Html Msg
+todoListView : Model -> Html TodoMsg
 todoListView =
     apply2 ( todoViewFromModel, Model.TodoList.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
@@ -80,10 +81,10 @@ todoViewFromModel =
 
 
 type alias TodoView =
-    Todo -> ( TodoId, Html Msg )
+    Todo -> ( TodoId, Html TodoMsg )
 
 
-keyedTodoGroupView : TodoView -> TodoGroupViewModel -> Maybe ( String, Html Msg )
+keyedTodoGroupView : TodoView -> TodoGroupViewModel -> Maybe ( String, Html TodoMsg )
 keyedTodoGroupView todoView vm =
     if vm.isEmpty then
         Nothing
@@ -102,7 +103,7 @@ keyedTodoGroupView todoView vm =
             )
 
 
-todoView : ViewConfig Msg -> TodoView
+todoView : ViewConfig TodoMsg -> TodoView
 todoView vc todo =
     let
         todoId =

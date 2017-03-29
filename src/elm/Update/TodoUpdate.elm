@@ -36,9 +36,10 @@ activateEditNewTodoMode text =
     Return.map (Model.EditMode.activateEditNewTodoMode text)
 
 
-setTodoTextAndDeactivateEditing todo =
-    Return.command (Types.setText (Todo.getText todo) (Todo.getId todo) |> Types.toCmd)
-        >> deactivateEditingModeFor todo
+
+--setTodoTextAndDeactivateEditing todo =
+--    Return.command (Types.setText (Todo.getText todo) (Todo.getId todo) |> Types.toCmd)
+--        >> deactivateEditingModeFor todo
 
 
 update : TodoMsg -> ReturnF
@@ -47,81 +48,86 @@ update msg =
         Start id ->
             Return.map (Model.RunningTodo.startTodo id)
 
-        Stop ->
-            stopRunningTodo
+        _ ->
+            identity
 
-        MarkRunningTodoDone ->
-            markRunningTodoDone
-                >> stopRunningTodo
 
-        OnActionWithNow action now ->
-            onWithNow action now
 
-        ToggleDone id ->
-            withNow (OnActionWithNow (Update ToggleDoneUA id))
-
-        MarkDone id ->
-            withNow (OnActionWithNow (Update MarkDoneUA id))
-
-        SetGroup group id ->
-            withNow (OnActionWithNow (Update (SetGroupUA group) id))
-
-        SetText text id ->
-            withNow (OnActionWithNow (Update (SetTextUA text) id))
-
-        ToggleDelete id ->
-            withNow (OnActionWithNow (Update (ToggleDeleteUA) id))
-
-        Create text ->
-            withNow (OnActionWithNow (CreateA text))
-
-        CopyAndEdit todo ->
-            withNow (OnActionWithNow (CopyAndEditA todo))
-
-        AddTodoClicked ->
-            activateEditNewTodoMode ""
-                >> focusFirstAutoFocusElement
-
-        NewTodoTextChanged text ->
-            activateEditNewTodoMode text
-
-        NewTodoBlur ->
-            deactivateEditingMode
-
-        NewTodoKeyUp text { key } ->
-            case key of
-                Enter ->
-                    Return.command (Types.saveNewTodo text |> Types.toCmd)
-                        >> activateEditNewTodoMode ""
-
-                Escape ->
-                    deactivateEditingMode
-
-                _ ->
-                    identity
-
-        StartEditingTodo todo ->
-            Return.map (Model.EditMode.activateEditTodoMode todo)
-                >> focusFirstAutoFocusElement
-
-        EditTodoTextChanged text ->
-            Return.map (Model.EditMode.updateEditTodoText text)
-
-        EditTodoBlur todo ->
-            setTodoTextAndDeactivateEditing todo
-
-        EditTodoKeyUp todo { key, isShiftDown } ->
-            case key of
-                Enter ->
-                    setTodoTextAndDeactivateEditing todo
-                        >> whenBool isShiftDown
-                            (Return.command (Types.splitNewTodoFrom todo |> Types.toCmd))
-
-                Escape ->
-                    deactivateEditingMode
-
-                _ ->
-                    identity
+--        Stop ->
+--            stopRunningTodo
+--
+--        MarkRunningTodoDone ->
+--            markRunningTodoDone
+--                >> stopRunningTodo
+--
+--        OnActionWithNow action now ->
+--            onWithNow action now
+--
+--        ToggleDone id ->
+--            withNow (OnActionWithNow (Update ToggleDoneUA id))
+--
+--        MarkDone id ->
+--            withNow (OnActionWithNow (Update MarkDoneUA id))
+--
+--        SetGroup group id ->
+--            withNow (OnActionWithNow (Update (SetGroupUA group) id))
+--
+--        SetText text id ->
+--            withNow (OnActionWithNow (Update (SetTextUA text) id))
+--
+--        ToggleDelete id ->
+--            withNow (OnActionWithNow (Update (ToggleDeleteUA) id))
+--
+--        Create text ->
+--            withNow (OnActionWithNow (CreateA text))
+--
+--        CopyAndEdit todo ->
+--            withNow (OnActionWithNow (CopyAndEditA todo))
+--
+--        AddTodoClicked ->
+--            activateEditNewTodoMode ""
+--                >> focusFirstAutoFocusElement
+--
+--        NewTodoTextChanged text ->
+--            activateEditNewTodoMode text
+--
+--        NewTodoBlur ->
+--            deactivateEditingMode
+--
+--        NewTodoKeyUp text { key } ->
+--            case key of
+--                Enter ->
+--                    Return.command (Types.saveNewTodo text |> Types.toCmd)
+--                        >> activateEditNewTodoMode ""
+--
+--                Escape ->
+--                    deactivateEditingMode
+--
+--                _ ->
+--                    identity
+--
+--        StartEditingTodo todo ->
+--            Return.map (Model.EditMode.activateEditTodoMode todo)
+--                >> focusFirstAutoFocusElement
+--
+--        EditTodoTextChanged text ->
+--            Return.map (Model.EditMode.updateEditTodoText text)
+--
+--        EditTodoBlur todo ->
+--            setTodoTextAndDeactivateEditing todo
+--
+--        EditTodoKeyUp todo { key, isShiftDown } ->
+--            case key of
+--                Enter ->
+--                    setTodoTextAndDeactivateEditing todo
+--                        >> whenBool isShiftDown
+--                            (Return.command (Types.splitNewTodoFrom todo |> Types.toCmd))
+--
+--                Escape ->
+--                    deactivateEditingMode
+--
+--                _ ->
+--                    identity
 
 
 andThenMapSecond fun toCmd =

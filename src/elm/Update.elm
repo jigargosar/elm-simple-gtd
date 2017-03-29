@@ -33,9 +33,6 @@ update : Msg -> Model -> Return
 update msg =
     Return.singleton
         >> case msg of
-            NoOp ->
-                identity
-
             OnTodoMsg msg ->
                 Update.TodoUpdate.update msg
 

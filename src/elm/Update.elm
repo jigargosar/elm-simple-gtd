@@ -1,7 +1,6 @@
 port module Update exposing (..)
 
 import Dom
-import Update.EditModeUpdate
 import Model.EditMode
 import Model.RunningTodo
 import RandomIdGenerator as Random
@@ -38,7 +37,7 @@ update msg =
                 identity
 
             OnEditModeMsg msg ->
-                Update.EditModeUpdate.onEditModeMsg msg
+                Update.TodoUpdate.onEditModeMsg msg
 
             OnTodoMsg msg ->
                 Update.TodoUpdate.update msg

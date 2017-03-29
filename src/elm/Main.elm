@@ -1,7 +1,6 @@
 port module Main exposing (..)
 
 import Dom
-import Update.EditModeUpdate
 import Model.EditMode
 import Model.RunningTodo
 import RandomIdGenerator as Random

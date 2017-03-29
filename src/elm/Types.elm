@@ -11,7 +11,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import TodoMsg exposing (TodoMsg)
+import Msg.TodoMsg exposing (TodoMsg)
 
 
 type MainViewType
@@ -89,43 +89,43 @@ onEditTodoKeyUp =
 
 
 toggleDone =
-    TodoMsg.toggleDone >> OnTodoMsg
+    Msg.TodoMsg.toggleDone >> OnTodoMsg
 
 
 markDone =
-    TodoMsg.markDone >> OnTodoMsg
+    Msg.TodoMsg.markDone >> OnTodoMsg
 
 
 toggleDelete =
-    TodoMsg.toggleDelete >> OnTodoMsg
+    Msg.TodoMsg.toggleDelete >> OnTodoMsg
 
 
 setGroup group =
-    TodoMsg.setGroup group >> OnTodoMsg
+    Msg.TodoMsg.setGroup group >> OnTodoMsg
 
 
 setText text =
-    TodoMsg.setText text >> OnTodoMsg
+    Msg.TodoMsg.setText text >> OnTodoMsg
 
 
 saveNewTodo =
-    TodoMsg.saveNewTodo >> OnTodoMsg
+    Msg.TodoMsg.saveNewTodo >> OnTodoMsg
 
 
 splitNewTodoFrom =
-    TodoMsg.splitNewTodoFrom >> OnTodoMsg
+    Msg.TodoMsg.splitNewTodoFrom >> OnTodoMsg
 
 
 start =
-    TodoMsg.start >> OnTodoMsg
+    Msg.TodoMsg.start >> OnTodoMsg
 
 
 stop =
-    OnTodoMsg TodoMsg.stop
+    OnTodoMsg Msg.TodoMsg.stop
 
 
 stopAndMarkDone =
-    OnTodoMsg TodoMsg.MarkRunningTodoDone
+    OnTodoMsg Msg.TodoMsg.MarkRunningTodoDone
 
 
 type Msg

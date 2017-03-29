@@ -1,4 +1,4 @@
-module TodoMsg exposing (..)
+module Msg.TodoMsg exposing (..)
 
 import KeyboardExtra exposing (KeyboardEvent)
 import Time exposing (Time)

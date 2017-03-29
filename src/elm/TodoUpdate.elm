@@ -17,7 +17,7 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import PouchDB
 import Tuple2
-import TodoMsg exposing (..)
+import Msg.TodoMsg exposing (..)
 
 
 update : TodoMsg -> ReturnF

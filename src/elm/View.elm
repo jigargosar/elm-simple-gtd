@@ -62,12 +62,12 @@ appHeaderView m =
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
             , newTodoInputView (Model.EditMode.getEditMode m)
             ]
-        , runningTodoAppToolBarView m
+        , runningTodoView m
         ]
 
 
-runningTodoAppToolBarView : Model -> Html Msg
-runningTodoAppToolBarView m =
+runningTodoView : Model -> Html Msg
+runningTodoView m =
     case Model.RunningTodo.getRunningTodoViewModel m of
         Just taskVm ->
             div [ class "active-task-view", attribute "sticky" "true" ] [ runningTodoViewHelp taskVm m ]

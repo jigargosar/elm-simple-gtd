@@ -34,6 +34,8 @@ type TodoMsg
     | SetGroup TodoGroup TodoId
     | SetText String TodoId
     | ToggleDelete TodoId
+    | Create String
+    | CopyAndEdit Todo
 
 
 markDone =

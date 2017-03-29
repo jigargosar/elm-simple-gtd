@@ -54,6 +54,12 @@ update msg =
         ToggleDelete id ->
             withNow (OnActionWithNow (Update (ToggleDeleteUA) id))
 
+        Create text ->
+            withNow (OnActionWithNow (CreateA text))
+
+        CopyAndEdit todo ->
+            withNow (OnActionWithNow (CopyAndEditA todo))
+
 
 andThenMapSecond fun toCmd =
     Return.andThen (fun >> Tuple.mapSecond toCmd)

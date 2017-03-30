@@ -208,19 +208,24 @@ saveEditingTodoAndDeactivateEditingHelp todo editTodoModel =
 
                 maybeProject =
                     Model.ProjectList.getProjectByName projectName m
-
-                newM =
-                    case maybeProject of
-                        Nothing ->
-                            Model.ProjectList.createProject projectName m
-
-                        Just project ->
-                            ( project, m )
             in
-                Return.singleton m
+                case maybeProject of
+                    Nothing ->
+                        Model.ProjectList.createProject projectName m
+                            |> Tuple2.swap
+                            |> Tuple.mapSecond persistProject
+
+                    Just project ->
+                        ( project, m )
+                            |> Tuple2.swap
+                            |> Tuple.mapSecond persistProject
         )
         >> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
         >> deactivateEditingModeFor todo
+
+
+persistProject project =
+    Cmd.none
 
 
 andThenMapSecond fun toCmd =

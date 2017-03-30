@@ -3,8 +3,10 @@ port module Update exposing (..)
 import Dom
 import DomPorts exposing (focusFirstAutoFocusElement, focusPaperInput)
 import Model.EditMode
+import Model.ProjectList
 import Model.RunningTodo
 import Model.TodoList
+import Project exposing (ProjectId, ProjectName)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import FunctionExtra exposing (..)
@@ -185,9 +187,29 @@ activateEditNewTodoMode text =
     Return.map (Model.EditMode.activateEditNewTodoMode text)
 
 
-saveEditingTodoAndDeactivateEditing todo =
-    Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
-        >> deactivateEditingModeFor todo
+type ProjectAction
+    = CreateProject ProjectName
+    | ProjectFound ProjectId
+
+
+saveEditingTodoAndDeactivateEditing todo return =
+    let
+        ( model, _ ) =
+            return
+
+        editTodoModel =
+            Model.EditMode.getEditTodoModeModel model
+
+        maybeProjectId : Maybe ProjectId
+        maybeProjectId =
+            editTodoModel ?+> getMaybeProjectId
+
+        getMaybeProjectId { projectName } =
+            Model.ProjectList.getProjectId projectName model
+    in
+        return
+            |> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
+            >> deactivateEditingModeFor todo
 
 
 andThenMapSecond fun toCmd =

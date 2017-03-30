@@ -109,4 +109,13 @@ toViewModelHelp ( group, name, list ) =
 
 
 getUpdatedTodo fields todoId =
-    getTodoById todoId >> Maybe.map (Todo.updateFields fields)
+    getTodoById todoId >> Maybe.map (updateTodoFields fields)
+
+
+updateTodoFields fields =
+    case fields of
+        Types.TodoText text ->
+            Todo.setText text
+
+        _ ->
+            identity

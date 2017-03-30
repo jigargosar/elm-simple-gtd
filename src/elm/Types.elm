@@ -48,7 +48,7 @@ type alias Model =
     , mainViewType : MainViewType
     , seed : Seed
     , runningTodoDetails : Maybe RunningTodoDetails
-    , projects : ProjectList
+    , projectList : ProjectList
     }
 
 
@@ -56,6 +56,6 @@ type alias ModelF =
     Model -> Model
 
 
-type TodoFields =
-    TodoText String
+type TodoFields
+    = TodoText String
     | TodoProjectName ProjectName

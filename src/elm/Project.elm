@@ -13,3 +13,12 @@ type alias Project
 type alias ProjectList = List Project
 
 type alias ProjectName = String
+
+type alias ProjectId = String
+
+
+nameEquals name = getName >> equals name
+
+getName = .name
+
+getId = .id

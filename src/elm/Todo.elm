@@ -127,7 +127,7 @@ reference =
     Reference
 
 
-type alias TodoFields =
+type alias TodoRecord =
     { done : Bool
     , text : String
     , dueAt : Maybe Time
@@ -137,7 +137,7 @@ type alias TodoFields =
 
 
 type alias Todo =
-    PouchDB.Document (PouchDB.WithTimeStamps TodoFields)
+    PouchDB.Document (PouchDB.WithTimeStamps TodoRecord)
 
 
 type alias Model =
@@ -468,5 +468,3 @@ type alias ViewModel =
 
 
 
-updateFields fields todo =
-    todo

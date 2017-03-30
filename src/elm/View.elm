@@ -29,6 +29,7 @@ import Polymer.Paper exposing (..)
 import Polymer.App as App
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
+import View.ProjectList exposing (projectListView)
 import View.Todo
 
 
@@ -101,7 +102,10 @@ appMainView m =
             DoneView ->
                 todoListView m
 
-            _ ->
+            ProjectsView ->
+                projectListView m
+
+            GroupView _ ->
                 allTodoListByGroupView m
         ]
 

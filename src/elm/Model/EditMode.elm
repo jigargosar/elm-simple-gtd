@@ -1,11 +1,12 @@
 module Model.EditMode exposing (..)
 
+import Maybe.Extra as Maybe
 import Todo exposing (Todo)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Msg exposing (..)
-import Types exposing (EditMode(..), Model, ModelF)
+import Types exposing (EditMode(..), Model, ModelF, createEditTodoMode)
 
 
 setEditModeTo : EditMode -> ModelF
@@ -25,17 +26,18 @@ activateEditNewTodoMode text =
 
 activateEditTodoMode : Todo -> ModelF
 activateEditTodoMode todo =
-    setEditModeTo (EditTodoMode todo)
+    setEditModeTo (createEditTodoMode todo)
 
 
 updateEditTodoText : String -> ModelF
 updateEditTodoText text m =
-    case getEditMode m of
-        EditTodoMode todo ->
-            setEditModeTo (EditTodoMode (Todo.setText text todo)) m
+    m
+        |> case getEditMode m of
+            EditTodoMode model ->
+                setEditModeTo (EditTodoMode ({ model | todoText = text }))
 
-        _ ->
-            m
+            _ ->
+                identity
 
 
 deactivateEditingMode =
@@ -44,12 +46,38 @@ deactivateEditingMode =
 
 deactivateEditingModeFor : Todo -> ModelF
 deactivateEditingModeFor todo model =
+    case getEditTodoModeId model of
+        Nothing ->
+            model
+
+        Just id ->
+            model
+                |> if Todo.hasId id todo then
+                    deactivateEditingMode
+                   else
+                    identity
+
+
+
+--    case getEditMode model of
+--        EditTodoMode { todoId } ->
+--            if Todo.hasId todoId todo then
+--                deactivateEditingMode model
+--            else
+--                model
+--
+--        _ ->
+--            model
+
+
+getEditTodoModeId =
+    getEditTodoModeModel >> Maybe.map (.todoId)
+
+
+getEditTodoModeModel model =
     case getEditMode model of
-        EditTodoMode editingTodo ->
-            if Todo.equalById todo editingTodo then
-                deactivateEditingMode model
-            else
-                model
+        EditTodoMode model ->
+            Just model
 
         _ ->
-            model
+            Nothing

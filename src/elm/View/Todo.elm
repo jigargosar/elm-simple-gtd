@@ -18,59 +18,42 @@ import Polymer.Paper exposing (..)
 
 
 todoViewEditing vc todo =
-    let
-        itemBodyView =
-            itemBody []
-                [ input
-                    [ id (todoInputId todo)
-                    , class "edit-todo-input auto-focus"
-                    , boolProperty "noLabelFloat" True
-                    , value (Todo.getText todo)
-                    , onInput vc.onEditTodoTextChanged
-                    , onBlur (vc.onEditTodoBlur todo)
-                    , onKeyUp (vc.onEditTodoKeyUp todo)
-                    , autofocus True
-                    ]
-                    []
+    item [ class "todo-item" ]
+        [ itemBody []
+            [ input
+                [ id (todoInputId todo)
+                , class "edit-todo-input auto-focus"
+                , boolProperty "noLabelFloat" True
+                , value (Todo.getText todo)
+                , onInput vc.onEditTodoTextChanged
+                , onBlur (vc.onEditTodoBlur todo)
+                , onKeyUp (vc.onEditTodoKeyUp todo)
+                , autofocus True
                 ]
-
-        itemAttributes =
-            []
-    in
-        todoViewWithItemBodyView itemAttributes itemBodyView vc todo
+                []
+            ]
+        ]
 
 
 todoViewNotEditing vc todo =
-    let
-        itemBodyView =
-            itemBody []
-                [ span
-                    [ classList
-                        [ "ellipsis" => True
-                        , "done" => Todo.isDone todo
-                        ]
-                    ]
-                    [ Todo.getText todo |> text ]
-                , span [ class "small dim" ]
-                    [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
-                    , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
+    item
+        [ class "todo-item"
+        , onClickStopPropagation (vc.onEditTodoClicked todo)
+        ]
+        [ checkBoxView
+        , itemBody []
+            [ span
+                [ classList
+                    [ "ellipsis" => True
+                    , "done" => Todo.isDone todo
                     ]
                 ]
-
-        itemAttributes =
-            [ onClickStopPropagation (vc.onEditTodoClicked todo) ]
-    in
-        todoViewWithItemBodyView itemAttributes itemBodyView vc todo
-
-
-todoViewWithItemBodyView itemAttributes itemBodyView vc todo =
-    item
-        ([ class "todo-item"
-         ]
-            ++ itemAttributes
-        )
-        [ checkBoxView
-        , itemBodyView
+                [ Todo.getText todo |> text ]
+            , span [ class "small dim" ]
+                [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
+                , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
+                ]
+            ]
         , hoverIcons vc todo
         , nonHoverIcons vc todo
         ]

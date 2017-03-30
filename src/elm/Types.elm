@@ -9,7 +9,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import Project exposing (ProjectList)
+import Project exposing (ProjectList, ProjectName)
 
 
 type MainViewType
@@ -26,7 +26,7 @@ defaultViewType =
 
 type EditMode
     = EditNewTodoMode String
-    | EditTodoMode Todo
+    | EditTodoMode ProjectName Todo
     | NotEditing
 
 
@@ -37,7 +37,7 @@ type alias Model =
     , mainViewType : MainViewType
     , seed : Seed
     , runningTodoDetails : Maybe RunningTodoDetails
-    , projects: ProjectList
+    , projects : ProjectList
     }
 
 

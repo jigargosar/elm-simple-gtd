@@ -8,7 +8,8 @@ import FunctionExtra.Operators exposing (..)
 
 
 type alias Project
-    = PouchDB.Document { name : String }
+    = PouchDB.Document { name : ProjectName }
 
 type alias ProjectList = List Project
 
+type alias ProjectName = String

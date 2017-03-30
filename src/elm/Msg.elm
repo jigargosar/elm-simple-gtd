@@ -3,6 +3,7 @@ module Msg exposing (..)
 import Dom
 import Ext.Cmd
 import KeyboardExtra exposing (KeyboardEvent)
+import Project exposing (ProjectName)
 import Return
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Random.Pcg exposing (Seed)
@@ -81,9 +82,6 @@ onNewTodoKeyUp =
     NewTodoKeyUp
 
 
-onEditTodoInput =
-    EditTodoTextChanged
-
 
 onEditTodoBlur =
     EditTodoBlur
@@ -121,6 +119,7 @@ type Msg
     | StartEditingTodo Todo
     | FocusPaperInput String
     | EditTodoTextChanged String
+    | EditTodoProjectNameChanged ProjectName
     | EditTodoBlur Todo
     | EditTodoKeyUp Todo KeyboardEvent
     | SetMainViewType MainViewType

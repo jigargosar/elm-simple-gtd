@@ -20,14 +20,13 @@ import Polymer.Paper exposing (..)
 
 todoViewEditing vc projectName todoText todo =
     item [ class "todo-item" ]
-        [ itemBody []
+        [ itemBody [ onKeyUp (vc.onEditTodoKeyUp todo) ]
             [ input
                 [ id (todoInputId todo)
                 , class "edit-todo-input auto-focus"
                 , stringProperty "label" "Todo"
                 , value (todoText)
-                , onInput vc.onEditTodoTextChanged
-                , onKeyUp (vc.onEditTodoKeyUp todo)
+                , onInput Msg.EditTodoTextChanged
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
                 ]
@@ -35,8 +34,10 @@ todoViewEditing vc projectName todoText todo =
             , input
                 [ class "project-name-input"
                 , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
+                , onInput Msg.EditTodoProjectNameChanged
                 , stringProperty "label" "Project Name"
                 , value projectName
+
                 ]
                 []
             ]

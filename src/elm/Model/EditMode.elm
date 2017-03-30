@@ -1,6 +1,7 @@
 module Model.EditMode exposing (..)
 
 import Maybe.Extra as Maybe
+import Project exposing (ProjectName)
 import Todo exposing (Todo)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -35,6 +36,17 @@ updateEditTodoText text m =
         |> case getEditMode m of
             EditTodoMode model ->
                 setEditModeTo (EditTodoMode ({ model | todoText = text }))
+
+            _ ->
+                identity
+
+
+updateEditTodoProjectName : ProjectName -> ModelF
+updateEditTodoProjectName projectName m =
+    m
+        |> case getEditMode m of
+            EditTodoMode model ->
+                setEditModeTo (EditTodoMode ({ model | projectName = projectName }))
 
             _ ->
                 identity

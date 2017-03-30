@@ -31,7 +31,6 @@ import View.Todo
 
 type alias ViewConfig msg =
     { onDeleteTodoClicked : TodoId -> msg
-    , onEditTodoTextChanged : String -> msg
     , onEditTodoBlur : Todo -> msg
     , onEditTodoKeyUp : Todo -> KeyboardEvent -> msg
     , noOp : msg
@@ -46,7 +45,6 @@ type alias ViewConfig msg =
 createTodoListViewConfig : Model -> ViewConfig Msg
 createTodoListViewConfig model =
     { onDeleteTodoClicked = Msg.toggleDelete
-    , onEditTodoTextChanged = onEditTodoInput
     , onEditTodoBlur = onEditTodoBlur
     , onEditTodoKeyUp = onEditTodoKeyUp
     , noOp = NoOp
@@ -114,7 +112,7 @@ todoView vc todo =
 
         todoViewHelp =
             case vc.editMode of
-                EditTodoMode {todoId, projectName, todoText} ->
+                EditTodoMode { todoId, projectName, todoText } ->
                     if Todo.hasId todoId todo then
                         editingView projectName todoText todo
                     else

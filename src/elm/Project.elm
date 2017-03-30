@@ -7,18 +7,33 @@ import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 
 
-type alias Project
-    = PouchDB.Document { name : ProjectName }
-
-type alias ProjectList = List Project
-
-type alias ProjectName = String
-
-type alias ProjectId = String
+type alias Project =
+    PouchDB.Document { name : ProjectName }
 
 
-nameEquals name = getName >> equals name
+type alias ProjectList =
+    List Project
 
-getName = .name
 
-getId = .id
+type alias ProjectName =
+    String
+
+
+type alias ProjectId =
+    String
+
+
+nameEquals name =
+    getName >> equals name
+
+
+getName =
+    .name
+
+
+getId =
+    .id
+
+
+create name =
+    { id = "", rev = "", name = name }

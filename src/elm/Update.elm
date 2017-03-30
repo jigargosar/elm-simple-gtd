@@ -30,7 +30,7 @@ import Function exposing ((>>>))
 import Html
 import Msg exposing (..)
 import RunningTodoDetails
-import Types exposing (Model)
+import Types exposing (EditTodoModeModel, Model)
 
 
 update : Msg -> Model -> Return
@@ -187,22 +187,44 @@ activateEditNewTodoMode text =
     Return.map (Model.EditMode.activateEditNewTodoMode text)
 
 
-saveEditingTodoAndDeactivateEditing todo return =
+type Foo
+    = NoProjectFound ProjectName
+    | ProjectFound Project
+
+
+saveEditingTodoAndDeactivateEditing : Todo -> ReturnF
+saveEditingTodoAndDeactivateEditing todo =
+    Return.andThen
+        (\m ->
+            m
+                |> Model.EditMode.getEditTodoModeModel
+                >> Maybe.unwrap (Return.singleton m) (saveEditingTodoAndDeactivateEditingHelp todo # m)
+        )
+
+
+saveEditingTodoAndDeactivateEditingHelp : Todo -> EditTodoModeModel -> Model -> Return
+saveEditingTodoAndDeactivateEditingHelp todo editTodoModel model =
     let
-        ( model, _ ) =
-            return
-
-        editTodoModel =
-            Model.EditMode.getEditTodoModeModel model
-
         getMaybeProject { projectName } =
             Model.ProjectList.getProjectByName projectName model
-
-        maybeProject : Maybe Project
-        maybeProject =
-            editTodoModel ?+> getMaybeProject
+                ?|> ProjectFound
+                ?= NoProjectFound projectName
     in
-        return
+        model
+            |> Return.singleton
+            >> Return.andThen
+                (\m ->
+                    let
+                        _ =
+                            case getMaybeProject editTodoModel of
+                                NoProjectFound projectName ->
+                                    Model.ProjectList.createProject projectName
+
+                                ProjectFound project ->
+                                    project
+                    in
+                        Return.singleton m
+                )
             |> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
             >> deactivateEditingModeFor todo
 

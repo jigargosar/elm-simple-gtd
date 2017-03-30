@@ -16,3 +16,6 @@ getProjectByName projectName =
 
 
 getProjectList = (.projectList)
+
+
+createProject = Project.create

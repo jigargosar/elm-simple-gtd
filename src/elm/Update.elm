@@ -187,11 +187,6 @@ activateEditNewTodoMode text =
     Return.map (Model.EditMode.activateEditNewTodoMode text)
 
 
-type Foo
-    = NoProjectFound ProjectName
-    | ProjectFound Project
-
-
 saveEditingTodoAndDeactivateEditing : Todo -> ReturnF
 saveEditingTodoAndDeactivateEditing todo =
     Return.andThen
@@ -204,29 +199,29 @@ saveEditingTodoAndDeactivateEditing todo =
 
 saveEditingTodoAndDeactivateEditingHelp : Todo -> EditTodoModeModel -> Model -> Return
 saveEditingTodoAndDeactivateEditingHelp todo editTodoModel model =
-    let
-        getMaybeProject { projectName } =
-            Model.ProjectList.getProjectByName projectName model
-                ?|> ProjectFound
-                ?= NoProjectFound projectName
-    in
-        model
-            |> Return.singleton
-            >> Return.andThen
-                (\m ->
-                    let
-                        _ =
-                            case getMaybeProject editTodoModel of
-                                NoProjectFound projectName ->
-                                    Model.ProjectList.createProject projectName
+    model
+        |> Return.singleton
+        >> Return.andThen
+            (\m ->
+                let
+                    { projectName } =
+                        editTodoModel
 
-                                ProjectFound project ->
-                                    project
-                    in
-                        Return.singleton m
-                )
-            |> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
-            >> deactivateEditingModeFor todo
+                    maybeProject =
+                        Model.ProjectList.getProjectByName projectName model
+
+                    project =
+                        case maybeProject of
+                            Nothing ->
+                                Model.ProjectList.createProject projectName
+
+                            Just project ->
+                                project
+                in
+                    Return.singleton m
+            )
+        |> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
+        >> deactivateEditingModeFor todo
 
 
 andThenMapSecond fun toCmd =

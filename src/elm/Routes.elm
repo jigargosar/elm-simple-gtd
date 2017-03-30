@@ -27,6 +27,9 @@ getPathFromModel model =
         DoneView ->
             [ "lists", "done" ]
 
+        ProjectsView ->
+            [ "lists", "projects" ]
+
         _ ->
             []
 
@@ -41,6 +44,9 @@ builder2messages builder =
     case path builder of
         "lists" :: "all" :: [] ->
             [ Msg.SetMainViewType AllByGroupView ]
+
+        "lists" :: "projects" :: [] ->
+            [ Msg.SetMainViewType ProjectsView ]
 
         "lists" :: "bin" :: [] ->
             [ Msg.SetMainViewType BinView ]

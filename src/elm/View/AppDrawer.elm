@@ -54,7 +54,7 @@ divider =
 
 
 projectsItemView m =
-    divider
+    item [onClick (SetMainViewType ProjectsView)] [ text "Projects" ]
 
 
 binItemView m =

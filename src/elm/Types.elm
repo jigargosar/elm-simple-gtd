@@ -17,6 +17,7 @@ type MainViewType
     | GroupView TodoGroup
     | DoneView
     | BinView
+    | ProjectsView
 
 
 defaultViewType =

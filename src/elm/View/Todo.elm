@@ -29,6 +29,7 @@ todoViewEditing vc todo =
                 , onBlur (vc.onEditTodoBlur todo)
                 , onKeyUp (vc.onEditTodoKeyUp todo)
                 , autofocus True
+                , placeholder "Todo Text"
                 ]
                 []
             ]

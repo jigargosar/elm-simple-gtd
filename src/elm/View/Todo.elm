@@ -23,15 +23,16 @@ todoViewEditing vc todo =
             [ input
                 [ id (todoInputId todo)
                 , class "edit-todo-input auto-focus"
-                , boolProperty "noLabelFloat" True
+                  --                , boolProperty "noLabelFloat" True
+                , stringProperty "label" "Todo"
                 , value (Todo.getText todo)
                 , onInput vc.onEditTodoTextChanged
                 , onBlur (vc.onEditTodoBlur todo)
                 , onKeyUp (vc.onEditTodoKeyUp todo)
                 , autofocus True
-                , placeholder "Todo Text"
                 ]
                 []
+            , input [ stringProperty "label" "Project Name" ] []
             ]
         ]
 

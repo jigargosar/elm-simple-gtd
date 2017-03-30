@@ -21,7 +21,7 @@ import Json.Decode
 import Json.Encode
 import List.Extra as List
 import Model as Model
-import Msg exposing (Model)
+import Types exposing (EditMode(..), Model, ModelF)
 import Todo as Todo exposing (TodoGroup(Inbox), Todo, TodoId)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)

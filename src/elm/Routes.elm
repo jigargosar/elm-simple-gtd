@@ -1,11 +1,12 @@
 module Routes exposing (..)
 
 import Model as Model
-import Msg exposing (MainViewType(..), Model, Msg)
+import Msg exposing (Msg)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
 import FunctionExtra.Operators exposing (..)
+import Types exposing (MainViewType(..), Model)
 
 
 delta2builder : Model -> Model -> Maybe Builder

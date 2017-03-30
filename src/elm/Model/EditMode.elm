@@ -5,6 +5,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Msg exposing (..)
+import Types exposing (EditMode(..), Model, ModelF)
 
 
 setEditModeTo : EditMode -> ModelF

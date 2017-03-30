@@ -28,6 +28,7 @@ import Function exposing ((>>>))
 import Html
 import Msg exposing (..)
 import RunningTodoDetails
+import Types exposing (Model)
 
 
 update : Msg -> Model -> Return

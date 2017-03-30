@@ -7,7 +7,7 @@ import Html.Attributes exposing (attribute, autofocus, class, classList, id, sty
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Model.TodoList
-import Msg exposing (MainViewType(..), Msg(SetMainViewType))
+import Msg exposing (Msg(SetMainViewType))
 import View.AllTodoLists exposing (allTodoListByGroupView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -24,6 +24,7 @@ import Polymer.Paper exposing (..)
 import Polymer.App as App
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
+import Types exposing (MainViewType(..))
 
 
 appDrawerView m =

@@ -4,7 +4,6 @@ import RunningTodoDetails exposing (RunningTodoDetails)
 import Dict
 import Json.Encode as E
 import List.Extra as List
-import Msg exposing (Model, ModelF, MainViewType(..), defaultViewType)
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import RandomIdGenerator as Random
@@ -14,6 +13,7 @@ import Todo as Todo exposing (TodoGroup, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
+import Types exposing (MainViewType, Model, ModelF)
 
 
 getMainViewType : Model -> MainViewType

@@ -10,6 +10,7 @@ import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model
 import Routes
+import Types exposing (EditMode(..))
 import View exposing (appView)
 import Navigation exposing (Location)
 import Return
@@ -33,7 +34,7 @@ type alias Flags =
     { now : Time, encodedTodoList : EncodedTodoList }
 
 
-main : RouteUrlProgram Flags Model Msg
+main : RouteUrlProgram Flags Types.Model Msg
 main =
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash
@@ -47,11 +48,11 @@ main =
 
 init : Flags -> Return
 init { now, encodedTodoList } =
-    Msg.Model
+    Types.Model
         now
         (Todo.decodeTodoList encodedTodoList)
         NotEditing
-        defaultViewType
+        Types.defaultViewType
         (Random.seedFromTime now)
         RunningTodoDetails.init
         |> Return.singleton

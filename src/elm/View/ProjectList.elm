@@ -61,4 +61,14 @@ createTodoListViewConfig model =
 
 
 projectListView m =
-    div [] [ text "projectList" ]
+    Keyed.node "paper-material" [ class "project-list" ] (projectItems)
+
+
+projectItems =
+    [ ( "1", projectItem "Kill Todoist" )
+    , ( "2", projectItem "Kill OneTab" )
+    ]
+
+
+projectItem name =
+    item [] [ itemBody [] [ text name ] ]

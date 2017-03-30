@@ -38,6 +38,7 @@ appDrawerView m =
                 ([ item [ onClick (SetMainViewType AllByGroupView) ] [ text "All" ]
                  , divider
                  , projectsItemView m
+                 , divider
                  ]
                     ++ todoGroupsMenuItems m
                     ++ [ divider
@@ -54,7 +55,7 @@ divider =
 
 
 projectsItemView m =
-    item [onClick (SetMainViewType ProjectsView)] [ text "Projects" ]
+    item [ onClick (SetMainViewType ProjectsView) ] [ text "Projects" ]
 
 
 binItemView m =

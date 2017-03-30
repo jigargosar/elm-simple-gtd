@@ -103,8 +103,9 @@ update msg =
 
             EditTodoTextChanged text ->
                 Return.map (Model.EditMode.updateEditTodoText text)
+
             EditTodoProjectNameChanged projectName ->
-                    Return.map (Model.EditMode.updateEditTodoProjectName projectName)
+                Return.map (Model.EditMode.updateEditTodoProjectName projectName)
 
             EditTodoBlur todo ->
                 setTodoTextAndDeactivateEditing todo

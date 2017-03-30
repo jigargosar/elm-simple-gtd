@@ -38,6 +38,9 @@ update msg =
             NoOp ->
                 identity
 
+            FocusPaperInput selector ->
+                focusFirstAutoFocusElement selector
+
             Start id ->
                 Return.map (Model.RunningTodo.startTodo id)
 

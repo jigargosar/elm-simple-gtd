@@ -48,9 +48,15 @@ async function boot() {
     app.ports["documentQuerySelectorAndFocus"].subscribe((selector) => {
         setTimeout(() => {
             requestAnimationFrame(() => {
-                const selected = document.querySelector(selector)
-                if (selected) {
-                    selected.focus()
+                const toFocus = document.querySelector(selector)
+                console.log("toFocus", toFocus, document.activeElement)
+                if (toFocus && document.activeElement !== toFocus) {
+                    toFocus.focus()
+                }else{
+                    console.log("not focusing")
+                }
+                if (toFocus ) {
+                    toFocus.$.input.focus()
                 }
             })
         }, 0)

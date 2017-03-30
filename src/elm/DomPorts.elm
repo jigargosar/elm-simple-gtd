@@ -11,3 +11,7 @@ port documentQuerySelectorAndFocus : String -> Cmd msg
 
 focusFirstAutoFocusElement =
     documentQuerySelectorAndFocus ".auto-focus" |> Return.command
+
+
+focusPaperInput selector =
+    documentQuerySelectorAndFocus selector |> Return.command

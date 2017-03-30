@@ -1,5 +1,6 @@
 module Msg exposing (..)
 
+import Dom
 import Ext.Cmd
 import KeyboardExtra exposing (KeyboardEvent)
 import Return
@@ -80,8 +81,6 @@ onNewTodoKeyUp =
     NewTodoKeyUp
 
 
-
-
 onEditTodoInput =
     EditTodoTextChanged
 
@@ -120,6 +119,7 @@ type Msg
     | NewTodoBlur
     | NewTodoKeyUp String KeyboardEvent
     | StartEditingTodo Todo
+    | FocusPaperInput String
     | EditTodoTextChanged String
     | EditTodoBlur Todo
     | EditTodoKeyUp Todo KeyboardEvent

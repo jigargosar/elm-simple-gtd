@@ -4,35 +4,35 @@
   visibility: hidden !important;
 }
 
-.ellipsis{
+.ellipsis {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.small{
+.small {
   font-size: 0.7rem;
   line-height: 1.2em;
 }
 
-.dim{
+.dim {
   opacity: 0.5;
 }
 
-.col{
+.col {
   display: flex;
   align-items: center;
 }
 
-.active-task-view{
+.active-task-view {
   padding: 16px 16px 0;
-  & .title{
+  & .title {
 
   }
 
-  & .elapsed-time{
+  & .elapsed-time {
     display: inline-block;
-    
+
   }
 }
 
@@ -54,33 +54,37 @@
   flex: 1 1 auto;
 }
 
-
-.has-hover-items:hover{
-  & .hover-items{
+.has-hover-items:hover {
+  & .hover-items {
     display: block;
   }
 }
 
-.has-hover-items{
-  & .hover-items{
+.has-hover-items {
+  & .hover-items {
     display: none;
   }
 }
 
+.project-list {
+  background-color: white;
 
+  & .project-item {
+    border-top: 1px solid rgba(179, 179, 179, 0.53);
+  }
+}
 
 .todo-list {
   background-color: white;
 
-
   & .todo-item {
     border-top: 1px solid rgba(179, 179, 179, 0.53);
 
-    & .done{
+    & .done {
       text-decoration: line-through;
       opacity: 0.6;
     }
-    
+
     & .show-on-hover {
       display: none;
     }

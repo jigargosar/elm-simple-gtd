@@ -71,4 +71,4 @@ projectItems =
 
 
 projectItem name =
-    item [] [ itemBody [] [ text name ] ]
+    item [class "project-item"] [ itemBody [] [ text name ] ]

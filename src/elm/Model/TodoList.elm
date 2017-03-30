@@ -8,7 +8,7 @@ import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Types exposing (MainViewType(..), Model, ModelF)
+import Types exposing (MainViewType(..), Model, ModelF, TodoField)
 
 
 getTodoList : Model -> TodoList
@@ -108,12 +108,13 @@ toViewModelHelp ( group, name, list ) =
         >> uncurry3 (TodoGroupViewModel group name)
 
 
+getUpdatedTodo : List TodoField -> TodoId -> Model -> Maybe Todo
 getUpdatedTodo fields todoId =
-    getTodoById todoId >> Maybe.map (updateTodoFields fields)
+    getTodoById todoId >> Maybe.map (List.foldl updateTodoFields # fields)
 
 
-updateTodoFields fields =
-    case fields of
+updateTodoFields field =
+    case field of
         Types.TodoText text ->
             Todo.setText text
 

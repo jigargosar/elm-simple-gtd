@@ -9,7 +9,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import Project exposing (ProjectList, ProjectName)
+import Project exposing (Project, ProjectList, ProjectName)
 
 
 type MainViewType
@@ -56,6 +56,6 @@ type alias ModelF =
     Model -> Model
 
 
-type TodoFields
+type TodoField
     = TodoText String
-    | TodoProjectName ProjectName
+    | TodoProject Project

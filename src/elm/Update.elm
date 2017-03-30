@@ -211,8 +211,22 @@ saveEditingTodoAndDeactivateEditingHelp todo editTodoModel =
             in
                 case maybeProject of
                     Nothing ->
-                        Model.ProjectList.createProject projectName m
-                            |> Tuple.mapSecond persistProject
+                        let
+                            modelProjectTuple =
+                                Model.ProjectList.createProject projectName m
+
+                            ( _, project ) =
+                                modelProjectTuple
+
+                            _ =
+                                Msg.UpdateTodoFields
+                                    [ Types.TodoText editTodoModel.todoText
+                                    , Types.TodoProject project
+                                    ]
+                                    editTodoModel.todoId
+                        in
+                            modelProjectTuple
+                                |> Tuple.mapSecond persistProject
 
                     Just project ->
                         ( m, project )

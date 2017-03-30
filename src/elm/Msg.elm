@@ -13,7 +13,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import Types exposing (MainViewType, Model, TodoFields)
+import Types exposing (MainViewType, Model, TodoField)
 
 
 type UpdateAction
@@ -78,7 +78,6 @@ onNewTodoKeyUp =
     NewTodoKeyUp
 
 
-
 onEditTodoBlur =
     EditTodoBlur
 
@@ -121,7 +120,7 @@ type Msg
     | SetMainViewType MainViewType
     | OnUpdateNow Time
     | OnMsgList (List Msg)
-    | UpdateTodoFields TodoFields TodoId
+    | UpdateTodoFields (List TodoField) TodoId
 
 
 toCmds : List Msg -> Cmd Msg

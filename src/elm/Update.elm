@@ -212,12 +212,10 @@ saveEditingTodoAndDeactivateEditingHelp todo editTodoModel =
                 case maybeProject of
                     Nothing ->
                         Model.ProjectList.createProject projectName m
-                            |> Tuple2.swap
                             |> Tuple.mapSecond persistProject
 
                     Just project ->
-                        ( project, m )
-                            |> Tuple2.swap
+                        ( m, project )
                             |> Tuple.mapSecond persistProject
         )
         >> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)

@@ -197,29 +197,27 @@ saveEditingTodoAndDeactivateEditing todo =
         )
 
 
-saveEditingTodoAndDeactivateEditingHelp : Todo -> EditTodoModeModel -> Model -> Return
-saveEditingTodoAndDeactivateEditingHelp todo editTodoModel model =
-    model
-        |> Return.singleton
-        >> Return.andThen
-            (\m ->
-                let
-                    { projectName } =
-                        editTodoModel
+saveEditingTodoAndDeactivateEditingHelp : Todo -> EditTodoModeModel -> ReturnF
+saveEditingTodoAndDeactivateEditingHelp todo editTodoModel =
+    Return.andThen
+        (\m ->
+            let
+                { projectName } =
+                    editTodoModel
 
-                    maybeProject =
-                        Model.ProjectList.getProjectByName projectName model
+                maybeProject =
+                    Model.ProjectList.getProjectByName projectName m
 
-                    project =
-                        case maybeProject of
-                            Nothing ->
-                                Model.ProjectList.createProject projectName
+                _ =
+                    case maybeProject of
+                        Nothing ->
+                            Model.ProjectList.createProject projectName m
 
-                            Just project ->
-                                project
-                in
-                    Return.singleton m
-            )
+                        Just project ->
+                            m
+            in
+                Return.singleton m
+        )
         |> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
         >> deactivateEditingModeFor todo
 

@@ -4,18 +4,37 @@ import List.Extra as List
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Project
+import Project exposing (ProjectList, ProjectName)
+import Types exposing (Model, ModelF)
 
-init = []
+
+init =
+    []
+
 
 getProjectIdByName projectName =
     getProjectByName projectName >> Maybe.map Project.getId
+
 
 getProjectByName projectName =
     getProjectList >> List.find (Project.nameEquals projectName)
 
 
-getProjectList = (.projectList)
+createProject : ProjectName -> ModelF
+createProject projectName =
+    Project.create >> updateProjectList (getProjectList >> List.append)
 
 
-createProject = Project.create
+getProjectList : Model -> ProjectList
+getProjectList =
+    (.projectList)
+
+
+setProjectList : ProjectList -> ModelF
+setProjectList projectList model =
+    { model | projectList = projectList }
+
+
+updateProjectList : (Model -> ProjectList) -> ModelF
+updateProjectList updater model =
+    setProjectList (updater model) model

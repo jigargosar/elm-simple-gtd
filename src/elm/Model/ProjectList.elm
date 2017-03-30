@@ -8,10 +8,10 @@ import Project
 
 init = []
 
-getProjectId projectName =
-    getProjectById projectName >> Maybe.map Project.getId
+getProjectIdByName projectName =
+    getProjectByName projectName >> Maybe.map Project.getId
 
-getProjectById projectName =
+getProjectByName projectName =
     getProjectList >> List.find (Project.nameEquals projectName)
 
 

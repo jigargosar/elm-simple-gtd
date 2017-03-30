@@ -108,12 +108,12 @@ update msg =
                 Return.map (Model.EditMode.updateEditTodoProjectName projectName)
 
             EditTodoBlur todo ->
-                setTodoTextAndDeactivateEditing todo
+                saveEditingTodoAndDeactivateEditing todo
 
             EditTodoKeyUp todo { key, isShiftDown } ->
                 case key of
                     Enter ->
-                        setTodoTextAndDeactivateEditing todo
+                        saveEditingTodoAndDeactivateEditing todo
                             >> whenBool isShiftDown
                                 (Return.command (Msg.splitNewTodoFrom todo |> Msg.toCmd))
 
@@ -176,8 +176,8 @@ activateEditNewTodoMode text =
     Return.map (Model.EditMode.activateEditNewTodoMode text)
 
 
-setTodoTextAndDeactivateEditing todo =
-    Return.command (Msg.setText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
+saveEditingTodoAndDeactivateEditing todo =
+    Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
         >> deactivateEditingModeFor todo
 
 

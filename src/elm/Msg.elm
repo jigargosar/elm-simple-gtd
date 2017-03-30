@@ -42,10 +42,6 @@ setGroup =
     SetGroup
 
 
-setText =
-    SetText
-
-
 saveNewTodo =
     Create
 

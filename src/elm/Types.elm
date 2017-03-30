@@ -9,6 +9,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
+import Project exposing (ProjectList)
 
 
 type MainViewType
@@ -35,6 +36,7 @@ type alias Model =
     , mainViewType : MainViewType
     , seed : Seed
     , runningTodoDetails : Maybe RunningTodoDetails
+    , projects: ProjectList
     }
 
 

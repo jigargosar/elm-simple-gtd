@@ -2,6 +2,7 @@ port module Main exposing (..)
 
 import Dom
 import Model.EditMode
+import Model.ProjectList
 import Model.RunningTodo
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
@@ -55,4 +56,5 @@ init { now, encodedTodoList } =
         Types.defaultViewType
         (Random.seedFromTime now)
         RunningTodoDetails.init
+        Model.ProjectList.init
         |> Return.singleton

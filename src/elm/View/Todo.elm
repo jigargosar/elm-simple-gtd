@@ -19,7 +19,7 @@ import Polymer.Paper exposing (..)
 
 todoViewEditing vc todo =
     item [ class "todo-item" ]
-        [ itemBody []
+        [ itemBody [ onBlur (vc.onEditTodoBlur todo) ]
             [ input
                 [ id (todoInputId todo)
                 , class "edit-todo-input auto-focus"
@@ -27,7 +27,6 @@ todoViewEditing vc todo =
                 , stringProperty "label" "Todo"
                 , value (Todo.getText todo)
                 , onInput vc.onEditTodoTextChanged
-                , onBlur (vc.onEditTodoBlur todo)
                 , onKeyUp (vc.onEditTodoKeyUp todo)
                 , autofocus True
                 ]

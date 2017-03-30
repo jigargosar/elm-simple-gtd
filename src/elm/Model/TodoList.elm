@@ -106,3 +106,7 @@ toViewModelHelp ( group, name, list ) =
     list
         |> apply3 ( identity, List.length, List.isEmpty )
         >> uncurry3 (TodoGroupViewModel group name)
+
+
+getUpdatedTodo fields todoId =
+    getTodoById todoId >> Maybe.map (Todo.updateFields fields)

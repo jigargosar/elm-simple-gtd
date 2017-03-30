@@ -465,3 +465,8 @@ toVM =
 
 type alias ViewModel =
     Todo
+
+
+
+updateFields fields todo =
+    todo

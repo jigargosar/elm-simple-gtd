@@ -132,6 +132,15 @@ update msg =
             OnMsgList messages ->
                 onMsgList messages
 
+            UpdateTodoFields fields todoId ->
+                Return.map
+                    (apply2
+                        ( identity
+                        , Model.TodoList.getUpdatedTodo fields todoId
+                        )
+                        >> Tuple.first
+                    )
+
 
 onMsgList : List Msg -> ReturnF
 onMsgList =

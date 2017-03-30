@@ -54,3 +54,8 @@ type alias Model =
 
 type alias ModelF =
     Model -> Model
+
+
+type TodoFields =
+    TodoText String
+    | TodoProjectName ProjectName

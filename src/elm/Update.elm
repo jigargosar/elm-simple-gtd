@@ -1,7 +1,7 @@
 port module Update exposing (..)
 
 import Dom
-import DomPorts exposing (focusFirstAutoFocusElement)
+import DomPorts exposing (focusFirstAutoFocusElement, focusPaperInput)
 import Model.EditMode
 import Model.RunningTodo
 import Model.TodoList
@@ -39,7 +39,7 @@ update msg =
                 identity
 
             FocusPaperInput selector ->
-                focusFirstAutoFocusElement selector
+                focusPaperInput selector
 
             Start id ->
                 Return.map (Model.RunningTodo.startTodo id)

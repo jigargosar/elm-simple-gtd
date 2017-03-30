@@ -20,7 +20,7 @@ import Polymer.Paper exposing (..)
 
 todoViewEditing vc todo =
     item [ class "todo-item" ]
-        [ itemBody [ ]
+        [ itemBody []
             [ input
                 [ id (todoInputId todo)
                 , class "edit-todo-input auto-focus"
@@ -32,7 +32,12 @@ todoViewEditing vc todo =
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
                 ]
                 []
-            , input [ stringProperty "label" "Project Name" ] []
+            , input
+                [ class "project-name-input"
+                , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
+                , stringProperty "label" "Project Name"
+                ]
+                []
             ]
         ]
 

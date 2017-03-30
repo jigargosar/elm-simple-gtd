@@ -4,7 +4,7 @@ import List.Extra as List
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Project exposing (ProjectList, ProjectName)
+import Project exposing (Project, ProjectList, ProjectName)
 import Types exposing (Model, ModelF)
 
 
@@ -20,9 +20,13 @@ getProjectByName projectName =
     getProjectList >> List.find (Project.nameEquals projectName)
 
 
-createProject : ProjectName -> ModelF
-createProject projectName =
-    updateProjectList (getProjectList >> (::) (Project.create projectName))
+createProject : ProjectName -> Model -> ( Project, Model )
+createProject projectName model =
+    let
+        project =
+            Project.create projectName
+    in
+        ( project, updateProjectList (getProjectList >> (::) project) model )
 
 
 getProjectList : Model -> ProjectList

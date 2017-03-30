@@ -209,13 +209,13 @@ saveEditingTodoAndDeactivateEditingHelp todo editTodoModel =
                 maybeProject =
                     Model.ProjectList.getProjectByName projectName m
 
-                _ =
+                newM =
                     case maybeProject of
                         Nothing ->
                             Model.ProjectList.createProject projectName m
 
                         Just project ->
-                            m
+                            ( project, m )
             in
                 Return.singleton m
         )

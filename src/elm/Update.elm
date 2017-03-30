@@ -135,12 +135,12 @@ update msg =
                 onMsgList messages
 
             UpdateTodoFields fields todoId ->
-                Return.map
+                Return.andThen
                     (apply2
                         ( identity
                         , Model.TodoList.getUpdatedTodo fields todoId
                         )
-                        >> Tuple.first
+                        >> Tuple.mapSecond persistMaybeTodoCmd
                     )
 
 

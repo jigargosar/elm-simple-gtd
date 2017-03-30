@@ -195,12 +195,12 @@ saveEditingTodoAndDeactivateEditing todo return =
         editTodoModel =
             Model.EditMode.getEditTodoModeModel model
 
-        maybeProjectId : Maybe Project
-        maybeProjectId =
-            editTodoModel ?+> getMaybeProject
-
         getMaybeProject { projectName } =
             Model.ProjectList.getProjectByName projectName model
+
+        maybeProject : Maybe Project
+        maybeProject =
+            editTodoModel ?+> getMaybeProject
     in
         return
             |> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)

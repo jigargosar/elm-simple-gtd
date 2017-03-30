@@ -80,8 +80,6 @@ onNewTodoKeyUp =
     NewTodoKeyUp
 
 
-startEditingTodo =
-    StartEditingTodo
 
 
 onEditTodoInput =

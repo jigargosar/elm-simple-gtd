@@ -4,6 +4,7 @@ import Date.Distance exposing (inWords)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Keyboard.Extra exposing (Key(Enter, Escape))
+import Msg
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -38,7 +39,7 @@ todoViewEditing vc todo =
 todoViewNotEditing vc todo =
     item
         [ class "todo-item"
-        , onClickStopPropagation (vc.onEditTodoClicked todo)
+        , onClickStopPropagation (Msg.StartEditingTodo todo)
         ]
         [ checkBoxView
         , itemBody []

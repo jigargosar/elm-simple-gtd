@@ -31,7 +31,6 @@ import View.Todo
 
 type alias ViewConfig msg =
     { onDeleteTodoClicked : TodoId -> msg
-    , onEditTodoClicked : Todo -> msg
     , onEditTodoTextChanged : String -> msg
     , onEditTodoBlur : Todo -> msg
     , onEditTodoKeyUp : Todo -> KeyboardEvent -> msg
@@ -47,7 +46,6 @@ type alias ViewConfig msg =
 createTodoListViewConfig : Model -> ViewConfig Msg
 createTodoListViewConfig model =
     { onDeleteTodoClicked = Msg.toggleDelete
-    , onEditTodoClicked = startEditingTodo
     , onEditTodoTextChanged = onEditTodoInput
     , onEditTodoBlur = onEditTodoBlur
     , onEditTodoKeyUp = onEditTodoKeyUp

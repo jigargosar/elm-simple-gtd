@@ -180,7 +180,7 @@ andThenMapSecond fun toCmd =
 
 
 persistAndEditTodoCmd =
-    applyList [ persistTodoCmd, Msg.startEditingTodo >> Msg.toCmd ]
+    applyList [ persistTodoCmd, Msg.StartEditingTodo >> Msg.toCmd ]
         >> Cmd.batch
 
 

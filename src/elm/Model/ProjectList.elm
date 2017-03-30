@@ -22,7 +22,7 @@ getProjectByName projectName =
 
 createProject : ProjectName -> ModelF
 createProject projectName =
-    Project.create >> updateProjectList (getProjectList >> List.append)
+    updateProjectList (getProjectList >> (::) (Project.create projectName))
 
 
 getProjectList : Model -> ProjectList

@@ -193,7 +193,8 @@ saveEditingTodoAndDeactivateEditing todo =
         (\m ->
             m
                 |> Model.EditMode.getEditTodoModeModel
-                >> Maybe.unwrap (Return.singleton m) (saveEditingTodoAndDeactivateEditingHelp todo # m)
+                ?|> (saveEditingTodoAndDeactivateEditingHelp todo # (Return.singleton m))
+                ?= Return.singleton m
         )
 
 
@@ -218,7 +219,7 @@ saveEditingTodoAndDeactivateEditingHelp todo editTodoModel =
             in
                 Return.singleton m
         )
-        |> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
+        >> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
         >> deactivateEditingModeFor todo
 
 

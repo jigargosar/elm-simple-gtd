@@ -24,7 +24,7 @@ import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
 import Function exposing ((>>>))
 import Html
-import Types exposing (..)
+import Msg exposing (..)
 import RunningTodoDetails
 import Update
 
@@ -47,7 +47,7 @@ main =
 
 init : Flags -> Return
 init { now, encodedTodoList } =
-    Types.Model
+    Msg.Model
         now
         (Todo.decodeTodoList encodedTodoList)
         NotEditing

@@ -7,7 +7,7 @@ import Html.Attributes exposing (attribute, autofocus, class, classList, id, sty
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Model.TodoList
-import Types exposing (MainViewType(..), Msg(SetMainViewType))
+import Msg exposing (MainViewType(..), Msg(SetMainViewType))
 import View.AllTodoLists exposing (allTodoListByGroupView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)

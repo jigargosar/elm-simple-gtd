@@ -1,7 +1,7 @@
 module Routes exposing (..)
 
 import Model as Model
-import Types exposing (MainViewType(..), Model, Msg)
+import Msg exposing (MainViewType(..), Model, Msg)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
@@ -39,13 +39,13 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "all" :: [] ->
-            [ Types.SetMainViewType AllByGroupView ]
+            [ Msg.SetMainViewType AllByGroupView ]
 
         "lists" :: "bin" :: [] ->
-            [ Types.SetMainViewType BinView ]
+            [ Msg.SetMainViewType BinView ]
 
         "lists" :: "done" :: [] ->
-            [ Types.SetMainViewType DoneView ]
+            [ Msg.SetMainViewType DoneView ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

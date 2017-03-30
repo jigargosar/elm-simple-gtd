@@ -26,7 +26,7 @@ import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
 import Tuple2
 import Function exposing ((>>>))
 import Html
-import Types exposing (..)
+import Msg exposing (..)
 import RunningTodoDetails
 
 
@@ -84,7 +84,7 @@ update msg =
             NewTodoKeyUp text { key } ->
                 case key of
                     Enter ->
-                        Return.command (Types.saveNewTodo text |> Types.toCmd)
+                        Return.command (Msg.saveNewTodo text |> Msg.toCmd)
                             >> activateEditNewTodoMode ""
 
                     Escape ->
@@ -108,7 +108,7 @@ update msg =
                     Enter ->
                         setTodoTextAndDeactivateEditing todo
                             >> whenBool isShiftDown
-                                (Return.command (Types.splitNewTodoFrom todo |> Types.toCmd))
+                                (Return.command (Msg.splitNewTodoFrom todo |> Msg.toCmd))
 
                     Escape ->
                         deactivateEditingMode
@@ -170,7 +170,7 @@ activateEditNewTodoMode text =
 
 
 setTodoTextAndDeactivateEditing todo =
-    Return.command (Types.setText (Todo.getText todo) (Todo.getId todo) |> Types.toCmd)
+    Return.command (Msg.setText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
         >> deactivateEditingModeFor todo
 
 
@@ -179,7 +179,7 @@ andThenMapSecond fun toCmd =
 
 
 persistAndEditTodoCmd =
-    applyList [ persistTodoCmd, Types.startEditingTodo >> Types.toCmd ]
+    applyList [ persistTodoCmd, Msg.startEditingTodo >> Msg.toCmd ]
         >> Cmd.batch
 
 

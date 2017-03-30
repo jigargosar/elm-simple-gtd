@@ -18,6 +18,7 @@ import List.Extra as List
 import Dict
 import Dict.Extra as Dict
 import Time exposing (Time)
+import Project
 
 
 type alias TodoId =

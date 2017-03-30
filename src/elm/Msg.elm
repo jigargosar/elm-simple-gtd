@@ -1,4 +1,4 @@
-module Types exposing (..)
+module Msg exposing (..)
 
 import Ext.Cmd
 import KeyboardExtra exposing (KeyboardEvent)

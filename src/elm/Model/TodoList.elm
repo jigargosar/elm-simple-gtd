@@ -8,7 +8,7 @@ import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Types exposing (MainViewType(BinView, DoneView), Model, ModelF)
+import Msg exposing (MainViewType(BinView, DoneView), Model, ModelF)
 
 
 getTodoList : Model -> TodoList

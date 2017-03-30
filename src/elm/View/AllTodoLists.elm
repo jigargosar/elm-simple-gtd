@@ -7,7 +7,7 @@ import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditMode
 import Model.TodoList exposing (TodoGroupViewModel)
-import Types exposing (..)
+import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -21,7 +21,7 @@ import Json.Decode
 import Json.Encode
 import List.Extra as List
 import Model as Model
-import Types exposing (Model)
+import Msg exposing (Model)
 import Todo as Todo exposing (TodoGroup(Inbox), Todo, TodoId)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
@@ -46,17 +46,17 @@ type alias ViewConfig msg =
 
 createTodoListViewConfig : Model -> ViewConfig Msg
 createTodoListViewConfig model =
-    { onDeleteTodoClicked = Types.toggleDelete
+    { onDeleteTodoClicked = Msg.toggleDelete
     , onEditTodoClicked = startEditingTodo
     , onEditTodoTextChanged = onEditTodoInput
     , onEditTodoBlur = onEditTodoBlur
     , onEditTodoKeyUp = onEditTodoKeyUp
     , noOp = NoOp
-    , onTodoMoveToClicked = Types.setGroup
+    , onTodoMoveToClicked = Msg.setGroup
     , now = Model.getNow model
     , editMode = Model.EditMode.getEditMode model
-    , onTodoDoneClicked = Types.toggleDone
-    , onTodoStartClicked = Types.start
+    , onTodoDoneClicked = Msg.toggleDone
+    , onTodoStartClicked = Msg.start
     }
 
 

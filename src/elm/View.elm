@@ -9,7 +9,7 @@ import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Model
 import Model.EditMode
 import Model.RunningTodo exposing (RunningTodoViewModel)
-import Types exposing (..)
+import Msg exposing (..)
 import View.AllTodoLists exposing (..)
 import View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
@@ -23,7 +23,7 @@ import DecodeExtra exposing (traceDecoder)
 import Json.Decode
 import Json.Encode
 import List.Extra as List
-import Types exposing (Model)
+import Msg exposing (Model)
 import Todo exposing (Todo, TodoId)
 import Polymer.Paper exposing (..)
 import Polymer.App as App
@@ -83,8 +83,8 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         , div [ class "col" ]
             [ div [ class "elapsed-time" ] [ text (Ext.Time.toHHMMSS elapsedTime) ]
             , iconButton [ icon "av:pause" ] []
-            , iconButton [ icon "av:stop", Types.stop |> onClick ] []
-            , iconButton [ icon "check", Types.stopAndMarkDone |> onClick ] []
+            , iconButton [ icon "av:stop", Msg.stop |> onClick ] []
+            , iconButton [ icon "check", Msg.stopAndMarkDone |> onClick ] []
             ]
         ]
 

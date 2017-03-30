@@ -4,7 +4,7 @@ import Todo exposing (Todo)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Types exposing (..)
+import Msg exposing (..)
 
 
 setEditModeTo : EditMode -> ModelF

@@ -29,37 +29,6 @@ import FunctionExtra exposing (..)
 import View.Todo
 
 
-type alias ViewConfig msg =
-    { onDeleteTodoClicked : TodoId -> msg
-    , onEditTodoClicked : Todo -> msg
-    , onEditTodoTextChanged : String -> msg
-    , onEditTodoBlur : Todo -> msg
-    , onEditTodoKeyUp : Todo -> KeyboardEvent -> msg
-    , noOp : msg
-    , onTodoMoveToClicked : TodoGroup -> TodoId -> msg
-    , now : Time
-    , editMode : EditMode
-    , onTodoDoneClicked : TodoId -> msg
-    , onTodoStartClicked : TodoId -> msg
-    }
-
-
-createTodoListViewConfig : Model -> ViewConfig Msg
-createTodoListViewConfig model =
-    { onDeleteTodoClicked = Msg.toggleDelete
-    , onEditTodoClicked = startEditingTodo
-    , onEditTodoTextChanged = onEditTodoInput
-    , onEditTodoBlur = onEditTodoBlur
-    , onEditTodoKeyUp = onEditTodoKeyUp
-    , noOp = NoOp
-    , onTodoMoveToClicked = Msg.setGroup
-    , now = Model.getNow model
-    , editMode = Model.EditMode.getEditMode model
-    , onTodoDoneClicked = Msg.toggleDone
-    , onTodoStartClicked = Msg.start
-    }
-
-
 projectListView m =
     Keyed.node "paper-material" [ class "project-list" ] (projectItems)
 
@@ -71,4 +40,4 @@ projectItems =
 
 
 projectItem name =
-    item [class "project-item"] [ itemBody [] [ text name ] ]
+    item [ class "project-item" ] [ itemBody [] [ text name ] ]

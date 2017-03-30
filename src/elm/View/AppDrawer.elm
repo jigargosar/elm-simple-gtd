@@ -32,23 +32,29 @@ appDrawerView m =
         [ div
             [ style [ "height" => "100%", "overflow" => "scroll" ]
             ]
-            [ {- App.toolbar [] [ text "Simple GTD" ]
-                 ,
-              -}
-              menu
+            [ menu
                 [ stringProperty "selected" "0"
                 ]
                 ([ item [ onClick (SetMainViewType AllByGroupView) ] [ text "All" ]
-                 , hr [] []
+                 , divider
+                 , projectsItemView m
                  ]
                     ++ todoGroupsMenuItems m
-                    ++ [ hr [] [] ]
-                    ++ [ binItemView m
+                    ++ [ divider
+                       , binItemView m
                        , doneItemView m
                        ]
                 )
             ]
         ]
+
+
+divider =
+    hr [] []
+
+
+projectsItemView m =
+    divider
 
 
 binItemView m =

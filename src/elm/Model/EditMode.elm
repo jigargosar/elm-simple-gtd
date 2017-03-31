@@ -72,20 +72,6 @@ deactivateEditingMode =
     setEditMode NotEditing
 
 
-deactivateEditingModeFor : Todo -> ModelF
-deactivateEditingModeFor todo model =
-    model
-        |> case getEditMode model of
-            EditTodoMode editTodoModel ->
-                if Todo.equalById todo editTodoModel.todo then
-                    deactivateEditingMode
-                else
-                    identity
-
-            _ ->
-                identity
-
-
 createEditTodoMode : Todo -> Model -> EditMode
 createEditTodoMode todo model =
     todo

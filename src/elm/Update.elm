@@ -191,11 +191,6 @@ deactivateEditingMode =
     Return.map (Model.EditMode.deactivateEditingMode)
 
 
-deactivateEditingModeFor : Todo -> ReturnF
-deactivateEditingModeFor =
-    Model.EditMode.deactivateEditingModeFor >> Return.map
-
-
 activateEditNewTodoMode text =
     Return.map (Model.EditMode.activateEditNewTodoMode text)
 
@@ -209,7 +204,7 @@ saveEditingTodoAndDeactivateEditing todo =
                 ?|> (saveEditingTodoHelp todo # (Return.singleton m))
                 ?= Return.singleton m
         )
-        >> deactivateEditingModeFor todo
+        >> deactivateEditingMode
 
 
 saveEditingTodoHelp : Todo -> EditTodoModeModel -> ReturnF

@@ -86,15 +86,20 @@ updateName updater model =
 
 
 projectConstructor id rev createdAt modifiedAt name =
-    { id = id, rev = rev, name = name, createdAt = createdAt, modifiedAt = modifiedAt }
+    { id = id
+    , rev = rev
+    , name = name
+    , createdAt = createdAt
+    , modifiedAt = modifiedAt
+    }
 
 
 projectGenerator name now =
     let
-        init name now id =
+        createWithId id =
             projectConstructor id "" now now name
     in
-        Random.map (init name now) RandomIdGenerator.idGen
+        Random.map createWithId RandomIdGenerator.idGen
 
 
 type alias EncodedProject =

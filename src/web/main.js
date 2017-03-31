@@ -20,11 +20,16 @@ async function boot() {
     }
 
     const allTodos = await dbMap["todo-db"].find({selector: {"_id": {"$ne": null}}})
+    const allProjects = await dbMap["project-db"].find({selector: {"_id": {"$ne": null}}})
     // console.log(allTodos)
 
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]
-        .embed(document.getElementById("root"), {now: Date.now(), encodedTodoList: allTodos})
+        .embed(document.getElementById("root"), {
+            now: Date.now(),
+            encodedTodoList: allTodos,
+            encodedProjectList: allProjects
+        })
 
 
     // app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {
@@ -38,11 +43,11 @@ async function boot() {
     //     app.ports["onPouchDBBulkDocksResponse"].send([dbName, bulkResult, docs])
     // })
 
-    app.ports["pouchDBUpsert"].subscribe(async([dbName, id, doc]) => {
-        console.log("upserting", dbName, doc, id )
+    app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
+        console.log("upserting", dbName, doc, id)
         const upsertResult = await dbMap[dbName].upsert(id, doc)
         // if (_.F()) {
-            console.log("upsertResult", upsertResult)
+        console.log("upsertResult", upsertResult)
 
         // }
     });
@@ -55,10 +60,10 @@ async function boot() {
                 // console.log("toFocus", toFocus, document.activeElement)
                 if (toFocus && document.activeElement !== toFocus) {
                     toFocus.focus()
-                }else{
+                } else {
                     // console.log("not focusing")
                 }
-                if (toFocus ) {
+                if (toFocus) {
                     toFocus.$.input.focus()
                 }
             })
@@ -66,12 +71,12 @@ async function boot() {
     })
 
 
-    app.ports["startAlarm"].subscribe(()=>{
+    app.ports["startAlarm"].subscribe(() => {
         sound.start()
     })
 
 
-    app.ports["stopAlarm"].subscribe(()=>{
+    app.ports["stopAlarm"].subscribe(() => {
         sound.stop()
     })
 }

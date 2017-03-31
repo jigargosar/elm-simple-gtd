@@ -1,7 +1,7 @@
 port module Update exposing (..)
 
 import Dom
-import DomPorts exposing (focusFirstAutoFocusElement, focusPaperInputCmd)
+import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import Model.EditMode
 import Model.ProjectList
 import Model.RunningTodo
@@ -79,7 +79,7 @@ update msg =
 
             AddTodoClicked ->
                 activateEditNewTodoMode ""
-                    >> focusFirstAutoFocusElement
+                    >> autoFocusPaperInputCmd
 
             NewTodoTextChanged text ->
                 activateEditNewTodoMode text
@@ -101,7 +101,7 @@ update msg =
 
             StartEditingTodo todo ->
                 Return.map (Model.EditMode.activateEditTodoMode todo)
-                    >> focusFirstAutoFocusElement
+                    >> autoFocusPaperInputCmd
 
             EditTodoTextChanged text ->
                 Return.map (Model.EditMode.updateEditTodoText text)

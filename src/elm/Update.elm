@@ -299,7 +299,7 @@ stopRunningTodo =
 markRunningTodoDone : ReturnF
 markRunningTodoDone =
     apply2 ( Tuple.first >> Model.RunningTodo.getRunningTodoId, identity )
-        >> uncurry (Maybe.unwrap identity (markDone >> update >> Return.andThen))
+        >> uncurry (Maybe.unwrap identity (markDone >> andThenUpdate))
 
 
 addNewTodoAt : String -> Time -> Model -> ( Todo, Model )

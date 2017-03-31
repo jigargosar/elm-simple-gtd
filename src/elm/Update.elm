@@ -201,13 +201,13 @@ saveEditingTodoAndDeactivateEditing todo =
 
 saveEditingTodoHelp : Todo -> EditTodoModeModel -> ReturnF
 saveEditingTodoHelp todo editTodoModel =
-    Return.andThen (getOrCreateAndPersisitProject editTodoModel)
+    Return.andThen (getOrCreateAndPersistProject editTodoModel)
         >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
         >> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
 
 
-getOrCreateAndPersisitProject : EditTodoModeModel -> Model -> ( ( Project, Model ), Cmd Msg )
-getOrCreateAndPersisitProject editTodoModel m =
+getOrCreateAndPersistProject : EditTodoModeModel -> Model -> ( ( Project, Model ), Cmd Msg )
+getOrCreateAndPersistProject editTodoModel m =
     let
         { projectName } =
             editTodoModel

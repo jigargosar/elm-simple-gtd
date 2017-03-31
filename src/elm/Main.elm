@@ -60,5 +60,5 @@ init { now, encodedTodoList, encodedProjectList } =
         Types.defaultViewType
         (Random.seedFromTime now)
         RunningTodoDetails.init
-        Project.decodeProjectList encodedProjectList
+        (Project.decodeProjectList encodedProjectList)
         |> Return.singleton

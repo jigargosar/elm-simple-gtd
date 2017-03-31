@@ -10,10 +10,6 @@ import Project exposing (Project, ProjectList, ProjectName)
 import Types exposing (Model, ModelF)
 
 
-init =
-    []
-
-
 getProjectIdByName projectName =
     getProjectByName projectName >> Maybe.map Project.getId
 

@@ -4,6 +4,7 @@ import Dom
 import Model.EditMode
 import Model.ProjectList
 import Model.RunningTodo
+import Project exposing (EncodedProjectList)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import FunctionExtra exposing (..)
@@ -32,7 +33,10 @@ import Update
 
 
 type alias Flags =
-    { now : Time, encodedTodoList : EncodedTodoList }
+    { now : Time
+    , encodedTodoList : EncodedTodoList
+    , encodedProjectList : EncodedProjectList
+    }
 
 
 main : RouteUrlProgram Flags Types.Model Msg
@@ -48,7 +52,7 @@ main =
 
 
 init : Flags -> Return
-init { now, encodedTodoList } =
+init { now, encodedTodoList, encodedProjectList } =
     Types.Model
         now
         (Todo.decodeTodoList encodedTodoList)
@@ -56,5 +60,5 @@ init { now, encodedTodoList } =
         Types.defaultViewType
         (Random.seedFromTime now)
         RunningTodoDetails.init
-        Model.ProjectList.init
+        Project.decodeProjectList encodedProjectList
         |> Return.singleton

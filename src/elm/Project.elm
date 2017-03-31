@@ -7,6 +7,7 @@ import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 import Random.Pcg as Random exposing (..)
 import RandomIdGenerator
+import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 
@@ -84,12 +85,16 @@ updateName updater model =
     setName (updater model) model
 
 
-initWithNameAndId name now id =
-    { id = id, rev = "", name = name, createdAt = now, modifiedAt = now }
+projectConstructor id rev name createdAt modifiedAt =
+    { id = id, rev = rev, name = name, createdAt = createdAt, modifiedAt = modifiedAt }
 
 
 projectGenerator name now =
-    Random.map (initWithNameAndId name now) RandomIdGenerator.idGen
+    let
+        init name now id =
+            projectConstructor id "" name now now
+    in
+        Random.map (init name now) RandomIdGenerator.idGen
 
 
 type alias EncodedProject =
@@ -114,3 +119,32 @@ encode project =
 encodeSingleton : Project -> EncodedProjectList
 encodeSingleton =
     encode >> List.singleton
+
+
+decoder : Decoder Project
+decoder =
+    D.decode projectConstructor
+        |> PouchDB.documentFieldsDecoder
+        |> PouchDB.timeStampFieldsDecoder
+        |> D.required "name" D.string
+
+
+decodeValue =
+    D.decodeValue decoder
+
+
+decodeProjectList encodedProjectList =
+    List.map decodeValue
+        >> List.filterMap
+            (\result ->
+                case result of
+                    Ok todo ->
+                        Just todo
+
+                    Err x ->
+                        let
+                            _ =
+                                Debug.log "Error while decoding todo"
+                        in
+                            Nothing
+            )

@@ -109,9 +109,6 @@ update msg =
             EditTodoProjectNameChanged projectName ->
                 Return.map (Model.EditMode.updateEditTodoProjectName projectName)
 
-            EditTodoBlur todo ->
-                saveAndDeactivateEditingTodo todo
-
             EditTodoKeyUp todo { key, isShiftDown } ->
                 case key of
                     Enter ->

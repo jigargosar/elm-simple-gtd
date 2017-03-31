@@ -79,10 +79,6 @@ onNewTodoKeyUp =
     NewTodoKeyUp
 
 
-onEditTodoBlur =
-    EditTodoBlur
-
-
 onEditTodoKeyUp =
     EditTodoKeyUp
 
@@ -116,7 +112,6 @@ type Msg
     | FocusPaperInput String
     | EditTodoTextChanged String
     | EditTodoProjectNameChanged ProjectName
-    | EditTodoBlur Todo
     | EditTodoKeyUp Todo KeyboardEvent
     | SetMainViewType MainViewType
     | OnUpdateNow Time

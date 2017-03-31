@@ -81,18 +81,6 @@ deactivateEditingModeFor todo model =
                     identity
 
 
-
---    case getEditMode model of
---        EditTodoMode { todoId } ->
---            if Todo.hasId todoId todo then
---                deactivateEditingMode model
---            else
---                model
---
---        _ ->
---            model
-
-
 getEditTodoModeId =
     getEditTodoModeModel >> Maybe.map (.todoId)
 

@@ -32,7 +32,7 @@ onAutoCompleteSelected tagger =
 
 todoViewEditing vc projectName todoText todo =
     item [ class "todo-item" ]
-        [ itemBody [ onKeyUp (vc.onEditTodoKeyUp todo) ]
+        [ itemBody []
             [ input
                 [ id (todoInputId todo)
                 , class "edit-todo-input auto-focus"
@@ -41,6 +41,7 @@ todoViewEditing vc projectName todoText todo =
                 , onInput Msg.EditTodoTextChanged
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
+                , onKeyUp (vc.onEditTodoKeyUp todo)
                 ]
                 []
             , input

@@ -7,12 +7,12 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Msg exposing (..)
-import Types exposing (EditMode(..), Model, ModelF, createEditTodoMode)
+import Types exposing (EditMode(..), EditTodoModeModel, Model, ModelF)
 
 
-setEditModeTo : EditMode -> ModelF
-setEditModeTo editMode m =
-    { m | editMode = editMode }
+activateEditNewTodoMode : String -> ModelF
+activateEditNewTodoMode text =
+    setEditMode (EditNewTodoMode text)
 
 
 getEditMode : Model -> EditMode
@@ -20,14 +20,19 @@ getEditMode =
     (.editMode)
 
 
-activateEditNewTodoMode : String -> ModelF
-activateEditNewTodoMode text =
-    setEditModeTo (EditNewTodoMode text)
+setEditMode : EditMode -> ModelF
+setEditMode editMode model =
+    { model | editMode = editMode }
+
+
+updateEditMode : (Model -> EditMode) -> ModelF
+updateEditMode updater model =
+    setEditMode (updater model) model
 
 
 activateEditTodoMode : Todo -> ModelF
 activateEditTodoMode todo =
-    setEditModeTo (createEditTodoMode todo)
+    setEditMode (createEditTodoMode todo)
 
 
 updateEditTodoText : String -> ModelF
@@ -35,7 +40,7 @@ updateEditTodoText text m =
     m
         |> case getEditMode m of
             EditTodoMode model ->
-                setEditModeTo (EditTodoMode ({ model | todoText = text }))
+                setEditMode (EditTodoMode ({ model | todoText = text }))
 
             _ ->
                 identity
@@ -46,14 +51,14 @@ updateEditTodoProjectName projectName m =
     m
         |> case getEditMode m of
             EditTodoMode model ->
-                setEditModeTo (EditTodoMode ({ model | projectName = projectName }))
+                setEditMode (EditTodoMode ({ model | projectName = projectName }))
 
             _ ->
                 identity
 
 
 deactivateEditingMode =
-    setEditModeTo NotEditing
+    setEditMode NotEditing
 
 
 deactivateEditingModeFor : Todo -> ModelF
@@ -93,3 +98,10 @@ getEditTodoModeModel model =
 
         _ ->
             Nothing
+
+
+createEditTodoMode : Todo -> EditMode
+createEditTodoMode =
+    apply3 ( Todo.getId, Todo.getText, (\_ -> "Foo") )
+        >> uncurry3 EditTodoModeModel
+        >> EditTodoMode

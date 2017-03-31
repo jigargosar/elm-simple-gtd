@@ -34,12 +34,6 @@ type EditMode
     | NotEditing
 
 
-createEditTodoMode : Todo -> EditMode
-createEditTodoMode =
-    apply3 ( Todo.getId, Todo.getText, (\_ -> "Foo") )
-        >> uncurry3 EditTodoModeModel
-        >> EditTodoMode
-
 
 type alias Model =
     { now : Time

@@ -216,7 +216,6 @@ saveEditingTodoHelp : Todo -> EditTodoModeModel -> ReturnF
 saveEditingTodoHelp todo editTodoModel =
     Return.andThen (getOrCreateAndPersistProject editTodoModel)
         >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
-        >> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
 
 
 getOrCreateAndPersistProject : EditTodoModeModel -> Model -> ( ( Project, Model ), Cmd Msg )
@@ -231,7 +230,7 @@ getOrCreateAndPersistProject editTodoModel m =
         case maybeProject of
             Nothing ->
                 Model.ProjectList.createProject projectName (Model.getNow m) m
-                    |> apply2 ( identity, Tuple.first >> persistProject )
+                    |> apply2 ( identity, Tuple.first >> upsertProjectCmd )
 
             Just project ->
                 Return.singleton ( project, m )
@@ -247,10 +246,6 @@ updateTodoFromEditTodoModel editTodoModel ( project, m ) =
                 editTodoModel.todoId
     in
         update updateTodoMsg m
-
-
-persistProject project =
-    Cmd.none
 
 
 andThenMapSecond fun toCmd =

@@ -122,5 +122,5 @@ updateField field =
         Types.TodoText text ->
             Todo.setText text
 
-        _ ->
+        Types.TodoProject project ->
             identity

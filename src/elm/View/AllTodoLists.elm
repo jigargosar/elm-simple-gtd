@@ -22,7 +22,7 @@ import Json.Decode
 import Json.Encode
 import List.Extra as List
 import Model as Model
-import Types exposing (EditMode(..), Model, ModelF)
+import Types exposing (EditMode(..), EditTodoModel, Model, ModelF)
 import Todo as Todo exposing (TodoGroup(Inbox), Todo, TodoId)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
@@ -36,7 +36,7 @@ type alias ViewConfig msg =
     , noOp : msg
     , onTodoMoveToClicked : TodoGroup -> TodoId -> msg
     , now : Time
-    , editMode : EditMode
+    , editTodoModel : Maybe EditTodoModel
     , onTodoDoneClicked : TodoId -> msg
     , onTodoStartClicked : TodoId -> msg
     , encodedProjectNames : Json.Encode.Value
@@ -50,7 +50,7 @@ createTodoListViewConfig model =
     , noOp = NoOp
     , onTodoMoveToClicked = Msg.setGroup
     , now = Model.getNow model
-    , editMode = Model.EditMode.getEditMode model
+    , editTodoModel = Model.EditMode.getEditTodoModel model
     , onTodoDoneClicked = Msg.toggleDone
     , onTodoStartClicked = Msg.start
     , encodedProjectNames = Model.ProjectList.getEncodedProjectNames model
@@ -109,14 +109,14 @@ todoView vc todo =
             View.Todo.todoViewNotEditing vc todo
 
         todoViewHelp =
-            case vc.editMode of
-                EditTodoMode em ->
-                    if Todo.equalById em.todo todo then
-                        View.Todo.todoViewEditing vc em
+            case vc.editTodoModel of
+                Just etm ->
+                    if Todo.equalById etm.todo todo then
+                        View.Todo.todoViewEditing vc etm
                     else
                         notEditingView
 
-                _ ->
+                Nothing ->
                     notEditingView
     in
         ( todoId, todoViewHelp )

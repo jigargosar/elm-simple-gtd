@@ -197,7 +197,7 @@ saveAndDeactivateEditingTodo todo =
     Return.andThen
         (\m ->
             m
-                |> Model.EditMode.getEditTodoModeModel
+                |> Model.EditMode.getEditTodoModel
                 ?|> (saveEditingTodoHelp todo # (Return.singleton m))
                 ?= Return.singleton m
         )

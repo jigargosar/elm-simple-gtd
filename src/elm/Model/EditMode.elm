@@ -48,7 +48,7 @@ updateEditTodoText text m =
                 identity
 
 
-getEditTodoModeModel model =
+getEditTodoModel model =
     case getEditMode model of
         EditTodoMode model ->
             Just model

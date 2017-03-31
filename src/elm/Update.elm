@@ -134,9 +134,9 @@ update msg =
             OnMsgList messages ->
                 onMsgList messages
 
-            UpdateTodoFields fields todoId ->
+            UpdateTodoFields fields todo ->
                 Return.andThen
-                    (Model.TodoList.updateTodoWithFields fields todoId
+                    (Model.TodoList.updateTodoWithFields fields (Todo.getId todo)
                         >> updateTodoModifiedAt
                     )
 
@@ -243,7 +243,7 @@ updateTodoFromEditTodoModel editTodoModel ( project, m ) =
                 [ Types.TodoText editTodoModel.todoText
                 , Types.TodoProject project
                 ]
-                editTodoModel.todoId
+                editTodoModel.todo
     in
         update updateTodoMsg m
 

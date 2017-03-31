@@ -48,6 +48,15 @@ updateEditTodoText text m =
                 identity
 
 
+getEditTodoModeModel model =
+    case getEditMode model of
+        EditTodoMode model ->
+            Just model
+
+        _ ->
+            Nothing
+
+
 updateEditTodoProjectName : ProjectName -> ModelF
 updateEditTodoProjectName projectName m =
     m
@@ -69,36 +78,23 @@ deactivateEditingMode =
 
 deactivateEditingModeFor : Todo -> ModelF
 deactivateEditingModeFor todo model =
-    case getEditTodoModeId model of
-        Nothing ->
-            model
-
-        Just id ->
-            model
-                |> if Todo.hasId id todo then
+    model
+        |> case getEditMode model of
+            EditTodoMode editTodoModel ->
+                if Todo.equalById todo editTodoModel.todo then
                     deactivateEditingMode
-                   else
+                else
                     identity
 
-
-getEditTodoModeId =
-    getEditTodoModeModel >> Maybe.map (.todoId)
-
-
-getEditTodoModeModel model =
-    case getEditMode model of
-        EditTodoMode model ->
-            Just model
-
-        _ ->
-            Nothing
+            _ ->
+                identity
 
 
 createEditTodoMode : Todo -> Model -> EditMode
 createEditTodoMode todo model =
     todo
         |> apply3
-            ( Todo.getId
+            ( identity
             , Todo.getText
             , getProjectNameOfTodo # model
             )

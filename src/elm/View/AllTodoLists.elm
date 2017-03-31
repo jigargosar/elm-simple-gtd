@@ -115,9 +115,9 @@ todoView vc todo =
 
         todoViewHelp =
             case vc.editMode of
-                EditTodoMode { todoId, projectName, todoText } ->
-                    if Todo.hasId todoId todo then
-                        editingView projectName todoText todo
+                EditTodoMode em ->
+                    if Todo.equalById em.todo todo then
+                        editingView em.projectName em.todoText todo
                     else
                         notEditingView
 

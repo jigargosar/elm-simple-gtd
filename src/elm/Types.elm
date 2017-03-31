@@ -25,14 +25,13 @@ defaultViewType =
 
 
 type alias EditTodoModeModel =
-    { todoId : TodoId, todoText : String, projectName : ProjectName }
+    { todo : Todo, todoText : String, projectName : ProjectName }
 
 
 type EditMode
     = EditNewTodoMode String
     | EditTodoMode EditTodoModeModel
     | NotEditing
-
 
 
 type alias Model =

@@ -121,7 +121,7 @@ type Msg
     | SetMainViewType MainViewType
     | OnUpdateNow Time
     | OnMsgList (List Msg)
-    | UpdateTodoFields (List TodoField) TodoId
+    | UpdateTodoFields (List TodoField) Todo
 
 
 toCmds : List Msg -> Cmd Msg

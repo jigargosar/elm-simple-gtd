@@ -102,15 +102,10 @@ keyedTodoGroupView todoView vm =
 todoView : ViewConfig Msg -> TodoView
 todoView vc todo =
     ( Todo.getId todo
-    , todoViewHelp vc todo
-    )
-
-
-todoViewHelp : ViewConfig Msg -> Todo -> Html Msg
-todoViewHelp vc todo =
-    case vc.editTodoModelFor todo of
+    , case vc.editTodoModelFor todo of
         Just etm ->
             View.Todo.todoViewEditing vc etm
 
         Nothing ->
             View.Todo.todoViewNotEditing vc todo
+    )

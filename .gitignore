@@ -3,7 +3,7 @@ elm-stuff/
 node_modules/
 dev/
 log.txt
-build/
+./build/
 build.zip
 tmp/
 .idea/dataSources/

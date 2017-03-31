@@ -46,10 +46,9 @@ async function boot() {
     app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
         console.log("upserting", dbName, doc, id)
         const upsertResult = await dbMap[dbName].upsert(id, doc)
-        // if (_.F()) {
-        console.log("upsertResult", upsertResult)
-
-        // }
+        if (_.F()) {
+            console.log("upsertResult", upsertResult)
+        }
     });
 
 

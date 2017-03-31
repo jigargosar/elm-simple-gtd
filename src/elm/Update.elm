@@ -201,39 +201,39 @@ saveEditingTodoAndDeactivateEditing todo =
 
 saveEditingTodoHelp : Todo -> EditTodoModeModel -> ReturnF
 saveEditingTodoHelp todo editTodoModel =
-    Return.andThen
-        (\m ->
-            let
-                { projectName } =
-                    editTodoModel
-
-                maybeProject =
-                    Model.ProjectList.getProjectByName projectName m
-            in
-                case maybeProject of
-                    Nothing ->
-                        let
-                            modelProjectTuple =
-                                Model.ProjectList.createProject projectName m
-
-                            ( _, project ) =
-                                modelProjectTuple
-
-                            _ =
-                                Msg.UpdateTodoFields
-                                    [ Types.TodoText editTodoModel.todoText
-                                    , Types.TodoProject project
-                                    ]
-                                    editTodoModel.todoId
-                        in
-                            modelProjectTuple
-                                |> Tuple.mapSecond persistProject
-
-                    Just project ->
-                        ( m, project )
-                            |> Tuple.mapSecond (\_ -> Cmd.none)
-        )
+    Return.andThen (getOrCreateProject editTodoModel)
+        >> Return.andThen updateTodoFromEditTodoModel editTodoModel
+        >> Return.map Tuple.second
         >> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
+
+
+getOrCreateProject editTodoModel m =
+    let
+        { projectName } =
+            editTodoModel
+
+        maybeProject =
+            Model.ProjectList.getProjectByName projectName m
+    in
+        case maybeProject of
+            Nothing ->
+                Model.ProjectList.createProject projectName m
+                    |> apply2 ( identity, Tuple.first >> persistProject )
+
+            Just project ->
+                Return.singleton ( project, m )
+
+
+updateTodoFromEditTodoModel editTodoModel m =
+    let
+        updateTodoMsg =
+            Msg.UpdateTodoFields
+                [ Types.TodoText editTodoModel.todoText
+                , Types.TodoProject project
+                ]
+                editTodoModel.todoId
+    in
+        Return.singleton m
 
 
 persistProject project =

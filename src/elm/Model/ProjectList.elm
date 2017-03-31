@@ -20,13 +20,13 @@ getProjectByName projectName =
     getProjectList >> List.find (Project.nameEquals projectName)
 
 
-createProject : ProjectName -> Model -> ( Model, Project )
+createProject : ProjectName -> Model -> ( Project, Model )
 createProject projectName model =
     let
         project =
             Project.create projectName
     in
-        ( updateProjectList (getProjectList >> (::) project) model, project )
+        ( project, updateProjectList (getProjectList >> (::) project) model )
 
 
 getProjectList : Model -> ProjectList

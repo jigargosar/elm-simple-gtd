@@ -9,7 +9,7 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 import Msg exposing (..)
-import Types exposing (EditMode(..), EditTodoModeModel, Model, ModelF)
+import Types exposing (EditMode(..), EditTodoModel, Model, ModelF)
 
 
 activateEditNewTodoMode : String -> ModelF
@@ -80,7 +80,7 @@ createEditTodoMode todo model =
             , Todo.getText
             , getProjectNameOfTodo # model
             )
-        >> uncurry3 EditTodoModeModel
+        >> uncurry3 EditTodoModel
         >> EditTodoMode
 
 

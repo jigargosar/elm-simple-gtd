@@ -30,7 +30,7 @@ import Function exposing ((>>>))
 import Html
 import Msg exposing (..)
 import RunningTodoDetails
-import Types exposing (EditTodoModeModel, Model)
+import Types exposing (EditTodoModel, Model)
 
 
 update : Msg -> Model -> Return
@@ -103,10 +103,10 @@ update msg =
                 Return.map (Model.EditMode.activateEditTodoMode todo)
                     >> autoFocusPaperInputCmd
 
-            EditTodoTextChanged text ->
+            EditTodoTextChanged etm text ->
                 Return.map (Model.EditMode.updateEditTodoText text)
 
-            EditTodoProjectNameChanged projectName ->
+            EditTodoProjectNameChanged etm projectName ->
                 Return.map (Model.EditMode.updateEditTodoProjectName projectName)
 
             EditTodoKeyUp todo { key, isShiftDown } ->
@@ -204,13 +204,13 @@ saveAndDeactivateEditingTodo todo =
         >> deactivateEditingMode
 
 
-saveEditingTodoHelp : Todo -> EditTodoModeModel -> ReturnF
+saveEditingTodoHelp : Todo -> EditTodoModel -> ReturnF
 saveEditingTodoHelp todo editTodoModel =
     Return.andThen (getOrCreateAndPersistProject editTodoModel)
         >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
 
 
-getOrCreateAndPersistProject : EditTodoModeModel -> Model -> ( ( Project, Model ), Cmd Msg )
+getOrCreateAndPersistProject : EditTodoModel -> Model -> ( ( Project, Model ), Cmd Msg )
 getOrCreateAndPersistProject editTodoModel m =
     let
         { projectName } =

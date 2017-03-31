@@ -108,14 +108,11 @@ todoView vc todo =
         notEditingView =
             View.Todo.todoViewNotEditing vc todo
 
-        editingView projectName todoText todo =
-            View.Todo.todoViewEditing vc projectName todoText todo
-
         todoViewHelp =
             case vc.editMode of
                 EditTodoMode em ->
                     if Todo.equalById em.todo todo then
-                        editingView em.projectName em.todoText todo
+                        View.Todo.todoViewEditing vc em
                     else
                         notEditingView
 

@@ -35,33 +35,33 @@ getEncodedProjectNames =
     Json.Encode.list [ Json.Encode.string "Foo" ]
 
 
-todoViewEditing vc projectName todoText todo =
+todoViewEditing vc etm =
     item [ class "todo-item" ]
         [ itemBody []
             [ input
-                [ id (todoInputId todo)
+                [ id (todoInputId etm.todo)
                 , class "edit-todo-input auto-focus"
                 , stringProperty "label" "Todo"
-                , value (todoText)
-                , onInput Msg.EditTodoTextChanged
+                , value (etm.todoText)
+                , onInput (Msg.EditTodoTextChanged etm)
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                , onKeyUp (vc.onEditTodoKeyUp todo)
+                , onKeyUp (vc.onEditTodoKeyUp etm.todo)
                 ]
                 []
             , input
-                [ id (todoProjectInputId todo)
+                [ id (todoProjectInputId etm.todo)
                 , class "project-name-input"
                 , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                , onInput Msg.EditTodoProjectNameChanged
+                , onInput (Msg.EditTodoProjectNameChanged etm)
                 , stringProperty "label" "Project Name"
-                , value projectName
+                , value etm.projectName
                 ]
                 []
             , Html.node "paper-autocomplete-suggestions"
-                [ stringProperty "for" (todoProjectInputId todo)
+                [ stringProperty "for" (todoProjectInputId etm.todo)
                 , property "source" (vc.encodedProjectNames)
-                , onAutoCompleteSelected Msg.EditTodoProjectNameChanged
+                , onAutoCompleteSelected (Msg.EditTodoProjectNameChanged etm)
                 , intProperty "minLength" 0
                 ]
                 []

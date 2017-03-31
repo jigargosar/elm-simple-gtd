@@ -13,7 +13,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import Types exposing (MainViewType, Model, TodoField)
+import Types exposing (EditTodoModel, MainViewType, Model, TodoField)
 
 
 type UpdateAction
@@ -110,8 +110,8 @@ type Msg
     | NewTodoKeyUp String KeyboardEvent
     | StartEditingTodo Todo
     | FocusPaperInput String
-    | EditTodoTextChanged String
-    | EditTodoProjectNameChanged ProjectName
+    | EditTodoTextChanged EditTodoModel String
+    | EditTodoProjectNameChanged EditTodoModel ProjectName
     | EditTodoKeyUp Todo KeyboardEvent
     | SetMainViewType MainViewType
     | OnUpdateNow Time

@@ -24,13 +24,13 @@ defaultViewType =
     AllByGroupView
 
 
-type alias EditTodoModeModel =
+type alias EditTodoModel =
     { todo : Todo, todoText : String, projectName : ProjectName }
 
 
 type EditMode
     = EditNewTodoMode String
-    | EditTodoMode EditTodoModeModel
+    | EditTodoMode EditTodoModel
     | NotEditing
 
 

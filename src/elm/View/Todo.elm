@@ -1,6 +1,7 @@
 module View.Todo exposing (..)
 
 import Date.Distance exposing (inWords)
+import DecodeExtra exposing (traceDecoder)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Json.Encode
@@ -21,12 +22,17 @@ import Polymer.Paper exposing (..)
 
 textValue : Json.Decode.Decoder String
 textValue =
-    Json.Decode.at [ "text" ] Json.Decode.string
+    Json.Decode.at [ "detail", "text" ] Json.Decode.string
 
 
-onInput2 : (String -> msg) -> Html.Attribute msg
-onInput2 tagger =
+onAutoCompleteChange : (String -> msg) -> Html.Attribute msg
+onAutoCompleteChange tagger =
     on "autocomplete-change" (Json.Decode.map tagger textValue)
+
+
+onAutoCompleteSelected : (String -> msg) -> Html.Attribute msg
+onAutoCompleteSelected tagger =
+    on "autocomplete-selected" (Json.Decode.map tagger (traceDecoder "sdf" textValue))
 
 
 todoViewEditing vc projectName todoText todo =
@@ -37,7 +43,7 @@ todoViewEditing vc projectName todoText todo =
                 , class "edit-todo-input auto-focus"
                 , stringProperty "label" "Todo"
                 , value (todoText)
-                  --                , onInput Msg.EditTodoTextChanged
+                , onInput Msg.EditTodoTextChanged
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
                 ]
@@ -46,7 +52,7 @@ todoViewEditing vc projectName todoText todo =
                 [ id (todoProjectInputId todo)
                 , class "project-name-input"
                 , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                , onInput Msg.EditTodoProjectNameChanged
+                  --                , onInput Msg.EditTodoProjectNameChanged
                 , stringProperty "label" "Project Name"
                 , value projectName
                 ]
@@ -54,7 +60,7 @@ todoViewEditing vc projectName todoText todo =
             , Html.node "paper-autocomplete-suggestions"
                 [ stringProperty "for" (todoProjectInputId todo)
                 , property "source" (Json.Encode.list [ Json.Encode.string "Foo" ])
-                , onInput2 Msg.EditTodoProjectNameChanged
+                , onAutoCompleteSelected Msg.EditTodoProjectNameChanged
                 ]
                 []
             ]

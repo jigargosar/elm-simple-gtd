@@ -53,7 +53,11 @@ updateEditTodoProjectName projectName m =
     m
         |> case getEditMode m of
             EditTodoMode model ->
-                setEditMode (EditTodoMode ({ model | projectName = projectName }))
+                let
+                    _ =
+                        Debug.log "project name changed" (projectName)
+                in
+                    setEditMode (EditTodoMode ({ model | projectName = projectName }))
 
             _ ->
                 identity

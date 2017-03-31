@@ -6,7 +6,7 @@ import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Project exposing (Project, ProjectList, ProjectName)
+import Project exposing (Project, ProjectId, ProjectList, ProjectName)
 import Types exposing (Model, ModelF)
 
 
@@ -18,7 +18,16 @@ getProjectByName projectName =
     getProjectList >> List.find (Project.nameEquals projectName)
 
 
-createProject : ProjectName -> Time ->Model -> ( Project, Model )
+getProjectByMaybeId : Maybe ProjectId -> Model -> Maybe Project
+getProjectByMaybeId maybeProjectId model =
+    maybeProjectId ?+> getProjectById # model
+
+
+getProjectById id =
+    getProjectList >> List.find (Project.getId >> equals id)
+
+
+createProject : ProjectName -> Time -> Model -> ( Project, Model )
 createProject projectName now =
     Model.generate (Project.projectGenerator projectName now)
         >> addProjectFromTuple

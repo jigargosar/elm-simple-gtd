@@ -1,11 +1,13 @@
 module Model.EditMode exposing (..)
 
 import Maybe.Extra as Maybe
-import Project exposing (ProjectName)
+import Model.ProjectList
+import Project exposing (Project, ProjectName)
 import Todo exposing (Todo)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import FunctionExtra.Operators exposing (..)
 import Msg exposing (..)
 import Types exposing (EditMode(..), EditTodoModeModel, Model, ModelF)
 
@@ -32,7 +34,7 @@ updateEditMode updater model =
 
 activateEditTodoMode : Todo -> ModelF
 activateEditTodoMode todo =
-    setEditMode (createEditTodoMode todo)
+    updateEditMode (createEditTodoMode todo)
 
 
 updateEditTodoText : String -> ModelF
@@ -100,8 +102,23 @@ getEditTodoModeModel model =
             Nothing
 
 
-createEditTodoMode : Todo -> EditMode
-createEditTodoMode =
-    apply3 ( Todo.getId, Todo.getText, (\_ -> "Foo") )
+createEditTodoMode : Todo -> Model -> EditMode
+createEditTodoMode todo model =
+    todo
+        |> apply3
+            ( Todo.getId
+            , Todo.getText
+            , getProjectNameOfTodo # model
+            )
         >> uncurry3 EditTodoModeModel
         >> EditTodoMode
+
+
+getProjectOfTodo : Todo -> Model -> Maybe Project
+getProjectOfTodo todo model =
+    Todo.getProjectId todo |> Model.ProjectList.getProjectByMaybeId # model
+
+
+getProjectNameOfTodo : Todo -> Model -> ProjectName
+getProjectNameOfTodo =
+    getProjectOfTodo >>> Maybe.unwrap "" Project.getName

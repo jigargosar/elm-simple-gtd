@@ -33,24 +33,24 @@ type alias ProjectName =
 
 
 type alias ProjectId =
-    String
+    PouchDB.Id
 
 
 nameEquals name =
     getName >> equals name
 
 
-getId : Model -> PouchDB.Id
+getId : Model -> ProjectId
 getId =
     (.id)
 
 
-setId : PouchDB.Id -> ModelF
+setId : ProjectId -> ModelF
 setId id model =
     { model | id = id }
 
 
-updateId : (Model -> PouchDB.Id) -> ModelF
+updateId : (Model -> ProjectId) -> ModelF
 updateId updater model =
     setId (updater model) model
 

@@ -4,6 +4,7 @@ import Dict exposing (Dict)
 import Dict.Extra
 import List.Extra as List
 import Model
+import Project
 import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -123,4 +124,4 @@ updateField field =
             Todo.setText text
 
         Types.TodoProject project ->
-            identity
+            Todo.setProjectId (Just (Project.getId project))

@@ -3,6 +3,7 @@ module View.Todo exposing (..)
 import Date.Distance exposing (inWords)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
+import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Msg
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
@@ -18,6 +19,16 @@ import KeyboardExtra exposing (onEscape, onKeyUp)
 import Polymer.Paper exposing (..)
 
 
+textValue : Json.Decode.Decoder String
+textValue =
+    Json.Decode.at [ "text" ] Json.Decode.string
+
+
+onInput2 : (String -> msg) -> Html.Attribute msg
+onInput2 tagger =
+    on "autocomplete-change" (Json.Decode.map tagger textValue)
+
+
 todoViewEditing vc projectName todoText todo =
     item [ class "todo-item" ]
         [ itemBody [ onKeyUp (vc.onEditTodoKeyUp todo) ]
@@ -26,18 +37,24 @@ todoViewEditing vc projectName todoText todo =
                 , class "edit-todo-input auto-focus"
                 , stringProperty "label" "Todo"
                 , value (todoText)
-                , onInput Msg.EditTodoTextChanged
+                  --                , onInput Msg.EditTodoTextChanged
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
                 ]
                 []
             , input
-                [ class "project-name-input"
+                [ id (todoProjectInputId todo)
+                , class "project-name-input"
                 , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
                 , onInput Msg.EditTodoProjectNameChanged
                 , stringProperty "label" "Project Name"
                 , value projectName
-
+                ]
+                []
+            , Html.node "paper-autocomplete-suggestions"
+                [ stringProperty "for" (todoProjectInputId todo)
+                , property "source" (Json.Encode.list [ Json.Encode.string "Foo" ])
+                , onInput2 Msg.EditTodoProjectNameChanged
                 ]
                 []
             ]
@@ -74,6 +91,10 @@ checkBoxView =
 
 todoInputId todo =
     "edit-todo-input-" ++ (Todo.getId todo)
+
+
+todoProjectInputId todo =
+    "edit-todo-project-input-" ++ (Todo.getId todo)
 
 
 hoverIcons vc todo =

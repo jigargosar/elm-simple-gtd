@@ -36,7 +36,7 @@ type alias ViewConfig msg =
     , noOp : msg
     , onTodoMoveToClicked : TodoGroup -> TodoId -> msg
     , now : Time
-    , editTodoModel : Maybe EditTodoModel
+    , editTodoModel : Todo -> Maybe EditTodoModel
     , onTodoDoneClicked : TodoId -> msg
     , onTodoStartClicked : TodoId -> msg
     , encodedProjectNames : Json.Encode.Value
@@ -50,7 +50,7 @@ createTodoListViewConfig model =
     , noOp = NoOp
     , onTodoMoveToClicked = Msg.setGroup
     , now = Model.getNow model
-    , editTodoModel = Model.EditMode.getEditTodoModel model
+    , editTodoModel = Model.EditMode.getEditTodoModel model |> getEditTodoModelForTodo
     , onTodoDoneClicked = Msg.toggleDone
     , onTodoStartClicked = Msg.start
     , encodedProjectNames = Model.ProjectList.getEncodedProjectNames model
@@ -102,7 +102,7 @@ keyedTodoGroupView todoView vm =
 todoView : ViewConfig Msg -> TodoView
 todoView vc todo =
     ( Todo.getId todo
-    , todoViewHelp vc (getEditTodoModelForTodo vc.editTodoModel todo) todo
+    , todoViewHelp vc (vc.editTodoModel todo) todo
     )
 
 
@@ -117,8 +117,8 @@ todoViewHelp vc maybeEditTodoModel todo =
 
 
 getEditTodoModelForTodo : Maybe EditTodoModel -> Todo -> Maybe EditTodoModel
-getEditTodoModelForTodo editTodoModel todo =
-    case editTodoModel of
+getEditTodoModelForTodo maybeETM todo =
+    case maybeETM of
         Just etm ->
             if Todo.equalById etm.todo todo then
                 Just etm

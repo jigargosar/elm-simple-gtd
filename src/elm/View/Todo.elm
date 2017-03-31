@@ -2,6 +2,7 @@ module View.Todo exposing (..)
 
 import Date.Distance exposing (inWords)
 import DecodeExtra exposing (traceDecoder)
+import Html.Attributes.Extra exposing (intProperty)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Json.Encode
@@ -59,8 +60,9 @@ todoViewEditing vc projectName todoText todo =
                 []
             , Html.node "paper-autocomplete-suggestions"
                 [ stringProperty "for" (todoProjectInputId todo)
-                , property "source" (getEncodedProjectNames)
+                , property "source" (vc.encodedProjectNames)
                 , onAutoCompleteSelected Msg.EditTodoProjectNameChanged
+                , intProperty "minLength" 0
                 ]
                 []
             ]

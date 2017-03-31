@@ -1,5 +1,6 @@
 module Model.ProjectList exposing (..)
 
+import Json.Encode
 import List.Extra as List
 import Model
 import Time exposing (Time)
@@ -8,6 +9,10 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Project exposing (Project, ProjectId, ProjectList, ProjectName)
 import Types exposing (Model, ModelF)
+
+
+getEncodedProjectNames =
+    getProjectList >> List.map (Project.getName >> Json.Encode.string) >> Json.Encode.list
 
 
 getProjectIdByName projectName =

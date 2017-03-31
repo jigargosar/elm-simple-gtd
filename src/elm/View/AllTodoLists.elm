@@ -6,6 +6,7 @@ import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditMode
+import Model.ProjectList
 import Model.TodoList exposing (TodoGroupViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
@@ -39,6 +40,7 @@ type alias ViewConfig msg =
     , editMode : EditMode
     , onTodoDoneClicked : TodoId -> msg
     , onTodoStartClicked : TodoId -> msg
+    , encodedProjectNames : Json.Encode.Value
     }
 
 
@@ -53,6 +55,7 @@ createTodoListViewConfig model =
     , editMode = Model.EditMode.getEditMode model
     , onTodoDoneClicked = Msg.toggleDone
     , onTodoStartClicked = Msg.start
+    , encodedProjectNames = Model.ProjectList.getEncodedProjectNames model
     }
 
 

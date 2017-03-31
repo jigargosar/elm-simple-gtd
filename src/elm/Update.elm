@@ -202,11 +202,11 @@ saveEditingTodoAndDeactivateEditing todo =
 saveEditingTodoHelp : Todo -> EditTodoModeModel -> ReturnF
 saveEditingTodoHelp todo editTodoModel =
     Return.andThen (getOrCreateProject editTodoModel)
-        >> Return.andThen updateTodoFromEditTodoModel editTodoModel
-        >> Return.map Tuple.second
+        >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
         >> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
 
 
+getOrCreateProject : EditTodoModeModel -> Model -> ( ( Project, Model ), Cmd Msg )
 getOrCreateProject editTodoModel m =
     let
         { projectName } =
@@ -224,7 +224,7 @@ getOrCreateProject editTodoModel m =
                 Return.singleton ( project, m )
 
 
-updateTodoFromEditTodoModel editTodoModel m =
+updateTodoFromEditTodoModel editTodoModel ( project, m ) =
     let
         updateTodoMsg =
             Msg.UpdateTodoFields

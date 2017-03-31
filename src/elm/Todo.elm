@@ -5,6 +5,7 @@ import Date.Distance exposing (defaultConfig)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Maybe.Extra as Maybe
 import PouchDB
 import RandomIdGenerator
 import Random.Pcg as Random exposing (Seed)
@@ -18,7 +19,7 @@ import List.Extra as List
 import Dict
 import Dict.Extra as Dict
 import Time exposing (Time)
-import Project
+import Project exposing (ProjectId)
 
 
 type alias TodoId =
@@ -133,6 +134,7 @@ type alias TodoRecord =
     , dueAt : Maybe Time
     , deleted : Bool
     , listType : TodoGroup
+    , projectId : Maybe ProjectId
     }
 
 
@@ -152,7 +154,7 @@ type alias TodoList =
     List Todo
 
 
-todoConstructor id rev createdAt modifiedAt done text dueAt deleted listType =
+todoConstructor id rev createdAt modifiedAt done text dueAt deleted listType projectId =
     { id = id
     , rev = rev
     , done = done
@@ -160,17 +162,19 @@ todoConstructor id rev createdAt modifiedAt done text dueAt deleted listType =
     , dueAt = dueAt
     , deleted = deleted
     , listType = listType
+    , projectId = projectId
     , createdAt = createdAt
     , modifiedAt = modifiedAt
     }
 
 
-todoFieldsDecoder =
+todoRecordDecoder =
     D.optional "done" D.bool False
         >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         >> D.optional "deleted" D.bool defaultDeleted
         >> D.optional "listType" (D.map stringToListType D.string) Inbox
+        >> D.optional "projectId" (D.nullable D.string) Nothing
 
 
 decoder : Decoder Todo
@@ -178,7 +182,7 @@ decoder =
     D.decode todoConstructor
         |> PouchDB.documentFieldsDecoder
         |> PouchDB.timeStampFieldsDecoder
-        |> todoFieldsDecoder
+        |> todoRecordDecoder
 
 
 listTypeEncodings =
@@ -188,11 +192,6 @@ listTypeEncodings =
 
 stringToListType string =
     listTypeEncodings |> Dict.get string ?= Inbox
-
-
-initWith : Time -> String -> TodoId -> Todo
-initWith createdAt text id =
-    todoConstructor id defaultRevision createdAt createdAt False text defaultDueAt defaultDeleted Inbox
 
 
 copyTodo createdAt todo id =
@@ -213,6 +212,7 @@ encode todo =
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (isDeleted todo)
         , "listType" => E.string (getGroup todo |> toString)
+        , "projectId" => (todo |> getProjectId >> Maybe.unwrap E.null E.string)
         , "createdAt" => E.int (todo.createdAt |> round)
         , "modifiedAt" => E.int (todo.modifiedAt |> round)
         ]
@@ -246,7 +246,21 @@ decodeTodoList =
 
 
 generator createdAt text =
-    Random.map (initWith createdAt text) RandomIdGenerator.idGen
+    let
+        initWith id =
+            todoConstructor
+                id
+                defaultRevision
+                createdAt
+                createdAt
+                False
+                text
+                defaultDueAt
+                defaultDeleted
+                Inbox
+                Nothing
+    in
+        Random.map initWith RandomIdGenerator.idGen
 
 
 copyGenerator createdAt todo =
@@ -366,6 +380,21 @@ getId =
     (.id)
 
 
+getProjectId : Model -> Maybe ProjectId
+getProjectId =
+    (.projectId)
+
+
+setProjectId : Maybe ProjectId -> ModelF
+setProjectId projectId model =
+    { model | projectId = projectId }
+
+
+updateProjectId : (Model -> Maybe ProjectId) -> ModelF
+updateProjectId updater model =
+    setProjectId (updater model) model
+
+
 getGroup : Model -> TodoGroup
 getGroup =
     (.listType)
@@ -465,6 +494,3 @@ toVM =
 
 type alias ViewModel =
     Todo
-
-
-

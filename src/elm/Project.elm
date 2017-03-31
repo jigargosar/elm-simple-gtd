@@ -84,12 +84,12 @@ updateName updater model =
     setName (updater model) model
 
 
-initWithNameAndId name id =
-    { id = id, rev = "", name = name, createdAt = 0, modifiedAt = 0 }
+initWithNameAndId name now id =
+    { id = id, rev = "", name = name, createdAt = now, modifiedAt = now }
 
 
-projectGenerator name =
-    Random.map (initWithNameAndId name) RandomIdGenerator.idGen
+projectGenerator name now =
+    Random.map (initWithNameAndId name now) RandomIdGenerator.idGen
 
 
 type alias EncodedProject =

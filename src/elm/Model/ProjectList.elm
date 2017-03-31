@@ -2,6 +2,7 @@ module Model.ProjectList exposing (..)
 
 import List.Extra as List
 import Model
+import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -21,9 +22,9 @@ getProjectByName projectName =
     getProjectList >> List.find (Project.nameEquals projectName)
 
 
-createProject : ProjectName -> Model -> ( Project, Model )
-createProject projectName =
-    Model.generate (Project.projectGenerator projectName)
+createProject : ProjectName -> Time ->Model -> ( Project, Model )
+createProject projectName now =
+    Model.generate (Project.projectGenerator projectName now)
         >> addProjectFromTuple
 
 

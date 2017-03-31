@@ -230,7 +230,7 @@ getOrCreateAndPersistProject editTodoModel m =
     in
         case maybeProject of
             Nothing ->
-                Model.ProjectList.createProject projectName m
+                Model.ProjectList.createProject projectName (Model.getNow m) m
                     |> apply2 ( identity, Tuple.first >> persistProject )
 
             Just project ->

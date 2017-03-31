@@ -1,6 +1,7 @@
 module Model.ProjectList exposing (..)
 
 import List.Extra as List
+import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -21,12 +22,13 @@ getProjectByName projectName =
 
 
 createProject : ProjectName -> Model -> ( Project, Model )
-createProject projectName model =
-    let
-        project =
-            Project.create projectName
-    in
-        ( project, updateProjectList (getProjectList >> (::) project) model )
+createProject projectName =
+    Model.generate (Project.projectGenerator projectName)
+        >> addProjectFromTuple
+
+
+addProjectFromTuple ( project, model ) =
+    ( project, updateProjectList (getProjectList >> (::) project) model )
 
 
 getProjectList : Model -> ProjectList

@@ -1,0 +1,80 @@
+<html><head><link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="./paper-autocomplete-suggestions.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
+<link rel="import" href="../paper-material/paper-material.html">
+
+
+</head><body><dom-module id="paper-autocomplete">
+  <style>
+     :host {
+      display: block;
+      box-sizing: border-box;
+      position: relative;
+      --paper-input-container-focus-color: var(--primary-color);
+    }
+
+    .input-wrapper {
+      @apply(--layout-horizontal);
+    }
+
+    .input-wrapper paper-input {
+      @apply(--layout-flex);
+    }
+
+    paper-input ::content input::-ms-clear {
+      display: none;
+    }
+
+    #clear {
+      display: none;
+      margin-top: auto;
+      line-height: 8px;
+
+      --paper-icon-button: {
+        height: 24px;
+        width: 24px;
+        padding: 2px;
+      };
+    }
+
+    .sr-only {
+      position: absolute;
+      clip: rect(1px, 1px, 1px, 1px);
+    }
+
+    paper-autocomplete-suggestions {
+      --suggestions-wrapper: {
+        @apply(--paper-autocomplete-suggestions-wrapper);
+      };
+
+      --paper-item-min-height: var(--paper-autocomplete-suggestions-item-min-height, 36px);
+    }
+  </style>
+  <template>
+    <div class="input-wrapper" role="combobox" aria-haspopup="true" aria-owns="suggestionsWrapper" aria-expanded$="[[_isSuggestionsOpened]]">
+      
+      <label for="autocompleteInput" class="sr-only">[[label]]</label>
+
+      
+      <input type="hidden" name$="[[name]]" value$="[[value]]">
+
+      <paper-input id="autocompleteInput" label="[[label]]" no-label-float="[[noLabelFloat]]" disabled="{{disabled}}" auto-validate$="[[autoValidate]]" error-message$="[[errorMessage]]" required$="[[required]]" value="{{text}}" allowed-pattern="[[allowedPattern]]" pattern="[[pattern]]" always-float-label="[[alwaysFloatLabel]]" char-counter$="[[charCounter]]" maxlength$="[[maxlength]]" placeholder="[[placeholder]]" role="textbox" aria-autocomplete="list" aria-multiline="false" aria-activedescendant$="[[_highlightedSuggestion.elementId]]" aria-disabled$="[[disabled]]" aria-controls="autocompleteStatus suggestionsWrapper">
+
+                  <paper-icon-button suffix="" id="clear" icon="clear" on-click="_clear"></paper-icon-button>
+        </paper-input>
+      
+      <span id="autocompleteStatus" role="status" class="sr-only">[[_highlightedSuggestion.textValue]]</span>
+    </div>
+
+    <paper-autocomplete-suggestions for="autocompleteInput" id="paperAutocompleteSuggestions" min-length="[[minLength]]" text-property="[[textProperty]]" value-property="[[valueProperty]]" selected-option="{{_selectedOption}}" remote-source="[[remoteSource]]" event-namespace="[[eventNamespace]]" highlighted-suggestion="{{_highlightedSuggestion}}" is-open="{{_isSuggestionsOpened}}">
+      <content id="templates" select="[autocomplete-custom-template]"></content>
+    </paper-autocomplete-suggestions>
+  </template>
+</dom-module>
+<script>!function(){Polymer({is:"paper-autocomplete",properties:{autoValidate:{type:Boolean,value:!1},errorMessage:{type:String},label:String,noLabelFloat:{type:Boolean,value:!1},alwaysFloatLabel:{type:Boolean,value:!1},placeholder:String,required:{type:Boolean,value:!1},source:{type:Array,observer:"_onSourceChanged"},textProperty:{type:String,value:"text"},valueProperty:{type:String,value:"value"},value:{type:Object,notify:!0},text:{type:String,notify:!0,value:""},disableShowClear:{type:Boolean,value:!1},remoteSource:{type:Boolean,value:!1},eventNamespace:{type:String,value:"-"},minLength:{type:Number,value:1},pattern:String,allowedPattern:String,charCounter:{type:Boolean,value:!1},maxlength:{type:Number},name:String,queryFn:{type:Function},_value:{value:void 0},_text:{value:void 0},_isClearButtonVisible:{type:Boolean,value:!1},_isSuggestionsOpened:{type:Boolean,value:!1},_selectedOption:{type:Object}},observers:["_onQueryFnChanged(queryFn)"],listeners:{"autocompleteInput.input":"_onInput"},ready:function(){this._value=this.value,this.addEventListener("autocomplete"+this.eventNamespace+"selected",this._onAutocompleteSelected.bind(this))},_clear:function(){var e={text:this.text,value:this.value};this.value=null,this._value=null,this.text="",this._text="",this._fireEvent(e,"reset"),this._hideClearButton(),this.$.autocompleteInput.focus()},_fireEvent:function(e,t){var i=this._getId(),n="autocomplete"+this.eventNamespace+t;this.fire(n,{id:i,value:e[this.valueProperty]||e.value,text:e[this.textProperty]||e.text,target:this,option:e})},_onSourceChanged:function(){this.$.paperAutocompleteSuggestions.source=this.source},_onQueryFnChanged:function(){this.$.paperAutocompleteSuggestions.queryFn=this.queryFn},_onInput:function(){this.$.autocompleteInput.value?this._showClearButton():this._hideClearButton()},_onAutocompleteSelected:function(e){var t=e.detail;this.value=t.value,this.text=t.text},_showClearButton:function(){this.disableShowClear||this._isClearButtonVisible||(this.$.clear.style.display="block",this._isClearButtonVisible=!0)},_hideClearButton:function(){this._isClearButtonVisible&&(this.$.clear.style.display="none",this._isClearButtonVisible=!1)},_getId:function(){var e=this.getAttribute("id");return e||(e=this.dataset.id),e},getValue:function(){return this.value},getOption:function(){return{text:this.text,value:this.value}},setOption:function(e){this.text=e[this.textProperty]||e.text,this.value=e[this.valueProperty]||e.value,this._showClearButton()},disable:function(){this.disabled=!0,this.$.autocompleteInput.disabled=!0},enable:function(){this.disabled=!1,this.$.autocompleteInput.disabled=!1},suggestions:function(e){this.$.paperAutocompleteSuggestions.suggestions(e)},validate:function(){return this.$.autocompleteInput.validate()},clear:function(){this._value="",this._text="",this._clear()},reset:function(){this._clear()},hideSuggestions:function(){this._hideClearButton(),this.$.paperAutocompleteSuggestions.hideSuggestions()}})}();</script>
+</body></html>

@@ -1,0 +1,134 @@
+<html><head><link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+
+
+
+</head><body><dom-module id="paper-header-panel">
+  <template>
+    <style>
+      :host {
+        @apply(--layout-vertical);
+
+        position: relative;
+        height: 100%;
+
+        @apply(--paper-header-panel);
+      }
+
+      #mainContainer {
+        @apply(--layout-flex);
+
+        position: relative;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      #mainPanel {
+        @apply(--layout-vertical);
+        @apply(--layout-flex);
+
+        position: relative;
+        min-height: 0;
+
+        @apply(--paper-header-panel-body);
+      }
+
+      #mainContainer {
+        @apply(--paper-header-panel-container);
+      }
+
+      /*
+       * mode: scroll
+       */
+      :host([mode=scroll]) #mainContainer {
+        @apply(--paper-header-panel-scroll-container);
+
+        overflow: visible;
+      }
+
+      :host([mode=scroll]) {
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /*
+       * mode: cover
+       */
+      :host([mode=cover]) #mainContainer {
+        @apply(--paper-header-panel-cover-container);
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      :host([mode=cover]) #mainPanel {
+        position: static;
+      }
+
+      /*
+       * mode: standard
+       */
+      :host([mode=standard]) #mainContainer {
+        @apply(--paper-header-panel-standard-container);
+      }
+
+      /*
+       * mode: seamed
+       */
+      :host([mode=seamed]) #mainContainer {
+        @apply(--paper-header-panel-seamed-container);
+      }
+
+
+      /*
+       * mode: waterfall
+       */
+      :host([mode=waterfall]) #mainContainer {
+        @apply(--paper-header-panel-waterfall-container);
+      }
+
+      /*
+       * mode: waterfall-tall
+       */
+      :host([mode=waterfall-tall]) #mainContainer {
+        @apply(--paper-header-panel-waterfall-tall-container);
+      }
+
+      #dropShadow {
+        transition: opacity 0.5s;
+        height: 6px;
+        box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+
+        @apply(--paper-header-panel-shadow);
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #dropShadow.has-shadow {
+        opacity: 1;
+      }
+    </style>
+
+    <content id="headerContent" select="paper-toolbar, .paper-header"></content>
+
+    <div id="mainPanel">
+      <div id="mainContainer" class$="[[_computeMainContainerClass(mode)]]">
+        <content id="mainContent" select="*"></content>
+      </div>
+      <div id="dropShadow"></div>
+    </div>
+  </template>
+
+  <script>!function(){"use strict";var t={outerScroll:{scroll:!0},shadowMode:{standard:2,waterfall:1,"waterfall-tall":1},tallMode:{"waterfall-tall":!0}};Polymer({is:"paper-header-panel",properties:{mode:{type:String,value:"standard",observer:"_modeChanged",reflectToAttribute:!0},shadow:{type:Boolean,value:!1},tallClass:{type:String,value:"tall"},atTop:{type:Boolean,value:!0,notify:!0,readOnly:!0,reflectToAttribute:!0}},observers:["_computeDropShadowHidden(atTop, mode, shadow)"],ready:function(){this.scrollHandler=this._scroll.bind(this)},attached:function(){this._addListener(),this._keepScrollingState()},detached:function(){this._removeListener()},get header(){return Polymer.dom(this.$.headerContent).getDistributedNodes()[0]},get scroller(){return this._getScrollerForMode(this.mode)},get visibleShadow(){return this.$.dropShadow.classList.contains("has-shadow")},_computeDropShadowHidden:function(e,s,o){var l=t.shadowMode[s];this.shadow?this.toggleClass("has-shadow",!0,this.$.dropShadow):2===l?this.toggleClass("has-shadow",!0,this.$.dropShadow):1!==l||e?this.toggleClass("has-shadow",!1,this.$.dropShadow):this.toggleClass("has-shadow",!0,this.$.dropShadow)},_computeMainContainerClass:function(t){var e={};return e.flex="cover"!==t,Object.keys(e).filter(function(t){return e[t]}).join(" ")},_addListener:function(){this.scroller.addEventListener("scroll",this.scrollHandler,!1)},_removeListener:function(){this.scroller.removeEventListener("scroll",this.scrollHandler)},_modeChanged:function(e,s){var o=t,l=this.header;l&&(o.tallMode[s]&&!o.tallMode[e]?(l.classList.remove(this.tallClass),this.async(function(){l.classList.remove("animate")},200)):this.toggleClass("animate",o.tallMode[e],l)),this._keepScrollingState()},_keepScrollingState:function(){var e=this.scroller,s=this.header;this._setAtTop(0===e.scrollTop),s&&this.tallClass&&t.tallMode[this.mode]&&this.toggleClass(this.tallClass,this.atTop||s.classList.contains(this.tallClass)&&e.scrollHeight<this.offsetHeight,s)},_scroll:function(){this._keepScrollingState(),this.fire("content-scroll",{target:this.scroller},{bubbles:!1})},_getScrollerForMode:function(e){return t.outerScroll[e]?this:this.$.mainContainer}})}();</script>
+</dom-module>
+</body></html>

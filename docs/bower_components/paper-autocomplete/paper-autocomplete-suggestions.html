@@ -1,0 +1,67 @@
+<html><head><link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
+<link rel="import" href="../paper-material/paper-material.html">
+
+
+
+</head><body><dom-module id="paper-autocomplete-suggestions">
+  <style>
+    paper-material {
+      display: none;
+      position: absolute;
+      width: 100%;
+      z-index: 1000;
+      background-color: white;
+      max-height: 252px;
+      overflow-y: auto;
+
+      @apply(--suggestions-wrapper);
+    }
+
+    paper-item {
+      min-height: var(--paper-item-min-height, 36px);
+    }
+
+    paper-item,
+    :host ::content paper-item {
+      position: relative;
+      line-height: 18px;
+    }
+
+    paper-item:hover,
+    :host ::content paper-item:hover {
+      background: #eee;
+      color: #333;
+      cursor: pointer;
+    }
+
+    paper-item.active,
+    :host ::content paper-item.active {
+      background: #eee;
+      color: #333;
+    }
+
+  </style>
+
+  <template>
+    <div>
+      
+      <paper-material elevation="1" id="suggestionsWrapper" unselectable="on"></paper-material>
+
+      
+      <template id="defaultTemplate">
+        <paper-item id$="[[_getSuggestionId(index)]]" role="option" aria-selected="false" on-tap="_onSelect">
+          <div>[[_getItemText(item)]]</div>
+          <paper-ripple></paper-ripple>
+        </paper-item>
+      </template>
+
+      
+      <content id="templates" select="[autocomplete-custom-template]"></content>
+    </div>
+  </template>
+</dom-module>
+
+<script>!function(){var e={UP:"up",DOWN:"down"},t={LEFT_ARROW:37,RIGHT_ARROW:39,UP_ARROW:38,DOWN_ARROW:40,ENTER:13,ESCAPE:27};Polymer({is:"paper-autocomplete-suggestions",behaviors:[Polymer.Templatizer],properties:{for:{type:String},isOpen:{type:Boolean,value:!1,notify:!0},minLength:{type:Number,value:1},maxViewableItems:{type:Number,value:7},textProperty:{type:String,value:"text"},valueProperty:{type:String,value:"value"},source:{type:Array},selectedOption:{type:Object,notify:!0},remoteSource:{type:Boolean,value:!1},eventNamespace:{type:String,value:"-"},highlightedSuggestion:{type:Object,value:{},notify:!0},_suggestionTemplate:{type:Object,value:function(){var e=this.getEffectiveChildren();return e.length>0?e[0]:this.$.defaultTemplate}},_suggestions:{type:Array,observer:"_onSuggestionsChanged"},_currentIndex:{type:Number,value:-1},_scrollIndex:{type:Number,value:0},_itemHeight:{type:Number,value:36,observer:"_itemHeightChanged"},_value:{value:void 0},_text:{value:void 0},_idItemSeed:{type:String,value:"aria-"+(new Date).getTime()+"-"+Math.floor(1e3*Math.random()),readOnly:!0},_bindedFunctions:{type:Object,value:{_onKeyPress:null,_onFocus:null,_onBlur:null}},_hasItemHighBeenCalculated:{type:Boolean,value:!1}},ready:function(){this._value=this.value,this.dataHost=this,this.templatize(this._suggestionTemplate),this.$.suggestionsWrapper.addEventListener("mousedown",function(e){e.preventDefault()})},attached:function(){if(this._input=this.parentNode.querySelector("#"+this.for),null===this._input)throw new Error("Cannot find input field with id: "+this.for);this._bindedFunctions._onKeypress=this._onKeypress.bind(this),this._bindedFunctions._onFocus=this._onFocus.bind(this),this._bindedFunctions._onBlur=this._onBlur.bind(this),this._input.addEventListener("keyup",this._bindedFunctions._onKeypress),this._input.addEventListener("focus",this._bindedFunctions._onFocus),this._input.addEventListener("blur",this._bindedFunctions._onBlur)},detached:function(){this.cancelDebouncer("_onSuggestionChanged"),this._input.removeEventListener("keyup",this._bindedFunctions._onKeypress),this._input.removeEventListener("focus",this._bindedFunctions._onFocus),this._input.removeEventListener("blur",this._bindedFunctions._onBlur),this._input=null},_getItemText:function(e){return e[this.textProperty]},_showSuggestionsWrapper:function(){var e=this.$.suggestionsWrapper;e.style.display="block",e.setAttribute("role","listbox"),this.isOpen=!0},_hideSuggestionsWrapper:function(){var e=this.$.suggestionsWrapper;e.style.display="none",e.removeAttribute("role"),this.isOpen=!1,this.highlightedSuggestion={},this._clearSuggestions()},_handleSuggestions:function(e){this.remoteSource?this._remoteSuggestions():this._createSuggestions(e)},_remoteSuggestions:function(){var e=this._input.value,t={text:e,value:e};e&&e.length>=this.minLength?this._fireEvent(t,"change"):this._suggestions=[]},_bindSuggestions:function(e){e.length&&e.length>0?(this._suggestions=e,this._currentIndex=-1,this._scrollIndex=0):this._suggestions=[]},_createSuggestions:function(e){this._currentIndex=-1,this._scrollIndex=0;var t=e.target.value;t&&t.length>=this.minLength?(t=t.toLowerCase(),this.source&&this.source.length>0&&(this._suggestions=this.queryFn(this.source,t))):this._suggestions=[]},_renderSuggestions:function(e){var t=Polymer.dom(this.$.suggestionsWrapper);this._clearSuggestions(),e.forEach(function(e,i){var s=this.stamp({item:e,index:i});t.appendChild(s.root)}.bind(this))},_clearSuggestions:function(){var e=Polymer.dom(this.$.suggestionsWrapper);e.children.forEach(function(t){e.removeChild(t)})},_onSuggestionsChanged:function(){this.debounce("_onSuggestionChanged",function(){if(this._renderSuggestions(this._suggestions),this._suggestions.length>0?this._showSuggestionsWrapper():this._hideSuggestionsWrapper(),Polymer.dom.flush(),this._resetScroll(),!this._hasItemHighBeenCalculated){var e=this.$.suggestionsWrapper.querySelector("paper-item");null!==e&&(this._itemHeight=e.offsetHeight,this._hasItemHighBeenCalculated=!0)}},100)},_selection:function(e){var t=this._suggestions[e];this._input.value=t[this.textProperty],this.selectedOption=t,this._value=this.value,this._text=this.text,this._emptyItems(),this._fireEvent(t,"selected"),this.hideSuggestions()},_getItems:function(){return this.$.suggestionsWrapper.querySelectorAll("paper-item")},_emptyItems:function(){this._suggestions=[]},_getId:function(){var e=this.getAttribute("id");return e||(e=this.dataset.id),e},_removeActive:function(e){[].slice.call(e).forEach(function(e){e.classList.remove("active"),e.setAttribute("aria-selected","false")})},_onKeypress:function(i){switch(i.which||i.keyCode){case t.DOWN_ARROW:this._moveHighlighted(e.DOWN);break;case t.UP_ARROW:this._moveHighlighted(e.UP);break;case t.ENTER:this._keyenter();break;case t.ESCAPE:this._hideSuggestionsWrapper();break;case t.LEFT_ARROW:case t.RIGHT_ARROW:break;default:this._handleSuggestions(i)}},_keyenter:function(){if("block"===this.$.suggestionsWrapper.style.display&&this._currentIndex>-1){var e=this._currentIndex;this._selection(e)}},_moveHighlighted:function(t){var i=this._getItems();if(0!==i.length){var s=i.length-1,n=0===this._currentIndex,r=this._currentIndex===s;if((this._currentIndex===-1||n)&&t===e.UP)this._currentIndex=s;else if(r&&t===e.DOWN)this._currentIndex=0;else{var o=t===e.DOWN?1:-1;this._currentIndex=this._currentIndex+o}var u=this._suggestions[this._currentIndex],h=i[this._currentIndex];this._removeActive(i),h.classList.add("active"),h.setAttribute("aria-selected","true"),this._setHighlightedSuggestion(u,h.id),this._scroll(t)}},_scroll:function(t){var i,s,n=this._currentIndex-this._scrollIndex,r=0===this._currentIndex&&n<0,o=this._currentIndex===this._suggestions.length-1&&n>=this.maxViewableItems;r&&t===e.DOWN?(i=0,s=!0):o&&t===e.UP?(i=this._suggestions.length-this.maxViewableItems,s=!0):t===e.UP?(i=this._scrollIndex-1,s=n<0):(i=this._scrollIndex+1,s=n>=this.maxViewableItems),s&&(this._scrollIndex=i,this.$.suggestionsWrapper.scrollTop=this._scrollIndex*this._itemHeight)},_resetScroll:function(){this.$.suggestionsWrapper.scrollTop=0},_setHighlightedSuggestion:function(e,t){this.highlightedSuggestion={option:e,elementId:t,textValue:e[this.textProperty],value:e[this.valueProperty]}},_fireEvent:function(e,t){var i=this._getId(),s="autocomplete"+this.eventNamespace+t;this.fire(s,{id:i,value:e[this.valueProperty]||e.value,text:e[this.textProperty]||e.text,target:this,option:e})},_onSelect:function(e){var t=e.model.index;this._selection(t)},_onBlur:function(){var e={text:this.text,value:this.value};this._fireEvent(e,"blur"),this.hideSuggestions()},_onFocus:function(){var e={text:this.text,value:this.value};this._fireEvent(e,"focus")},_getSuggestionId:function(e){return this._idItemSeed+"-"+e},_itemHeightChanged:function(){this.$.suggestionsWrapper.style.maxHeight=this._itemHeight*this.maxViewableItems+"px"},suggestions:function(e){this._bindSuggestions(e)},hideSuggestions:function(){setTimeout(function(){this._hideSuggestionsWrapper()}.bind(this),300)},queryFn:function(e,t){var i=[];return e.forEach(function(e){var s,n;"object"==typeof e?(s=e[this.textProperty],n=e[this.valueProperty]):(s=e.toString(),n=s),0===s.toLowerCase().indexOf(t)&&i.push({text:s,value:n})}.bind(this)),i}})}();</script>
+</body></html>

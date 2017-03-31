@@ -27,8 +27,13 @@ createProject projectName =
         >> addProjectFromTuple
 
 
-addProjectFromTuple ( project, model ) =
-    ( project, updateProjectList (getProjectList >> (::) project) model )
+addProjectFromTuple : ( Project, Model ) -> ( Project, Model )
+addProjectFromTuple =
+    apply2 ( Tuple.first, uncurry addProject )
+
+
+addProject project =
+    updateProjectList (getProjectList >> (::) project)
 
 
 getProjectList : Model -> ProjectList

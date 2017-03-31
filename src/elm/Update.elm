@@ -303,15 +303,15 @@ markRunningTodoDone =
 
 
 addNewTodoAt : String -> Time -> Model -> ( Todo, Model )
-addNewTodoAt text now m =
-    Model.generate (Todo.generator now text) m
-        |> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
+addNewTodoAt text now =
+    Model.generate (Todo.generator now text)
+        >> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
 
 
 copyNewTodo : Todo -> Time -> Model -> ( Todo, Model )
-copyNewTodo todo now m =
-    Model.generate (Todo.copyGenerator now todo) m
-        |> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
+copyNewTodo todo now =
+    Model.generate (Todo.copyGenerator now todo)
+        >> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
 
 
 withNow : (Time -> Msg) -> ReturnF

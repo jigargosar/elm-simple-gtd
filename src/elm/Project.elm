@@ -85,14 +85,14 @@ updateName updater model =
     setName (updater model) model
 
 
-projectConstructor id rev name createdAt modifiedAt =
+projectConstructor id rev createdAt modifiedAt name =
     { id = id, rev = rev, name = name, createdAt = createdAt, modifiedAt = modifiedAt }
 
 
 projectGenerator name now =
     let
         init name now id =
-            projectConstructor id "" name now now
+            projectConstructor id "" now now name
     in
         Random.map (init name now) RandomIdGenerator.idGen
 
@@ -133,7 +133,8 @@ decodeValue =
     D.decodeValue decoder
 
 
-decodeProjectList encodedProjectList =
+decodeProjectList : EncodedProjectList -> ProjectList
+decodeProjectList =
     List.map decodeValue
         >> List.filterMap
             (\result ->

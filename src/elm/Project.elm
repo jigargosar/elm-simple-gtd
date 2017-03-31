@@ -5,6 +5,8 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
+import Random.Pcg as Random exposing(..)
+import RandomIdGenerator
 
 
 type alias Project =
@@ -37,3 +39,11 @@ getId =
 
 create name =
     { id = "", rev = "", name = name }
+
+initWithNameAndId name id =
+    { id = id, rev = "", name = name }
+
+
+projectGenerator name =
+    Random.map (initWithNameAndId name) RandomIdGenerator.idGen
+

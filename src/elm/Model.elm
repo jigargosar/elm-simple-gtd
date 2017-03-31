@@ -49,3 +49,9 @@ getSeed =
 setSeed : Seed -> ModelF
 setSeed seed model =
     { model | seed = seed }
+
+
+generate : Random.Generator a -> Model -> ( a, Model )
+generate generator m =
+    Random.step generator (getSeed m)
+        |> Tuple.mapSecond (setSeed # m)

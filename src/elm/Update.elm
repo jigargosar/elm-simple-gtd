@@ -304,8 +304,7 @@ markRunningTodoDone =
 
 addNewTodoAt : String -> Time -> Model -> ( Todo, Model )
 addNewTodoAt text now m =
-    Random.step (Todo.generator now text) (Model.getSeed m)
-        |> Tuple.mapSecond (Model.setSeed # m)
+    Model.generate (Todo.generator now text) m
         |> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
 
 

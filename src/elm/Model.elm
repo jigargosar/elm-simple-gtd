@@ -26,11 +26,6 @@ setMainViewType mainViewType model =
     { model | mainViewType = mainViewType }
 
 
-updateMainViewType : (Model -> MainViewType) -> ModelF
-updateMainViewType updater model =
-    setMainViewType (updater model) model
-
-
 getNow : Model -> Time
 getNow =
     (.now)
@@ -41,17 +36,12 @@ setNow now model =
     { model | now = now }
 
 
-getSeed : Model -> Seed
-getSeed =
-    (.seed)
-
-
-setSeed : Seed -> ModelF
-setSeed seed model =
+setSeed__ : Seed -> ModelF
+setSeed__ seed model =
     { model | seed = seed }
 
 
 generate : Random.Generator a -> Model -> ( a, Model )
 generate generator m =
-    Random.step generator (getSeed m)
-        |> Tuple.mapSecond (setSeed # m)
+    Random.step generator (m.seed)
+        |> Tuple.mapSecond (setSeed__ # m)

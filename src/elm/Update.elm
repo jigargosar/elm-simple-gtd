@@ -310,8 +310,7 @@ addNewTodoAt text now m =
 
 copyNewTodo : Todo -> Time -> Model -> ( Todo, Model )
 copyNewTodo todo now m =
-    Random.step (Todo.copyGenerator now todo) (Model.getSeed m)
-        |> Tuple.mapSecond (Model.setSeed # m)
+    Model.generate (Todo.copyGenerator now todo) m
         |> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
 
 

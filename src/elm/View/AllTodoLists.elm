@@ -102,21 +102,25 @@ keyedTodoGroupView todoView vm =
 todoView : ViewConfig Msg -> TodoView
 todoView vc todo =
     let
-        todoId =
-            Todo.getId todo
-
-        notEditingView =
-            View.Todo.todoViewNotEditing vc todo
-
         todoViewHelp =
-            case vc.editTodoModel of
+            case getEditTodoModelForTodo vc.editTodoModel todo of
                 Just etm ->
-                    if Todo.equalById etm.todo todo then
-                        View.Todo.todoViewEditing vc etm
-                    else
-                        notEditingView
+                    View.Todo.todoViewEditing vc etm
 
                 Nothing ->
-                    notEditingView
+                    View.Todo.todoViewNotEditing vc todo
     in
-        ( todoId, todoViewHelp )
+        ( Todo.getId todo, todoViewHelp )
+
+
+getEditTodoModelForTodo : Maybe EditTodoModel -> Todo -> Maybe EditTodoModel
+getEditTodoModelForTodo editTodoModel todo =
+    case editTodoModel of
+        Just etm ->
+            if Todo.equalById etm.todo todo then
+                Just etm
+            else
+                Nothing
+
+        Nothing ->
+            Nothing

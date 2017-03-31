@@ -6,12 +6,8 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
 
-port documentQuerySelectorAndFocus : String -> Cmd msg
+port focusPaperInputByQuerySelector : String -> Cmd msg
 
 
-focusFirstAutoFocusElement =
-    documentQuerySelectorAndFocus ".auto-focus" |> Return.command
-
-
-focusPaperInput selector =
-    documentQuerySelectorAndFocus selector |> Return.command
+focusPaperInputCmd selector =
+    focusPaperInputByQuerySelector selector |> Return.command

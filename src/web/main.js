@@ -52,7 +52,7 @@ async function boot() {
     });
 
 
-    app.ports["documentQuerySelectorAndFocus"].subscribe((selector) => {
+    app.ports["focusPaperInputByQuerySelector"].subscribe((selector) => {
         setTimeout(() => {
             requestAnimationFrame(() => {
                 const toFocus = document.querySelector(selector)

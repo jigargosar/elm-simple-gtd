@@ -30,6 +30,10 @@ onAutoCompleteSelected tagger =
     on "autocomplete-selected" (Json.Decode.map tagger (traceDecoder "selected" textValue))
 
 
+getEncodedProjectNames =
+    Json.Encode.list [ Json.Encode.string "Foo" ]
+
+
 todoViewEditing vc projectName todoText todo =
     item [ class "todo-item" ]
         [ itemBody []
@@ -55,7 +59,7 @@ todoViewEditing vc projectName todoText todo =
                 []
             , Html.node "paper-autocomplete-suggestions"
                 [ stringProperty "for" (todoProjectInputId todo)
-                , property "source" (Json.Encode.list [ Json.Encode.string "Foo" ])
+                , property "source" (getEncodedProjectNames)
                 , onAutoCompleteSelected Msg.EditTodoProjectNameChanged
                 ]
                 []

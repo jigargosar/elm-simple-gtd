@@ -57,11 +57,25 @@ createTodoListViewConfig model =
     }
 
 
-allTodoListByGroupView : Model -> Html Msg
-allTodoListByGroupView =
-    apply2 ( todoViewFromModel >> keyedTodoGroupView, Model.TodoList.getTodoGroupsViewModel )
-        >> uncurry List.filterMap
-        >> Keyed.node "div" []
+type alias TodoView =
+    Todo -> ( TodoId, Html Msg )
+
+
+todoViewFromModel : Model -> TodoView
+todoViewFromModel =
+    createTodoListViewConfig >> keyedTodoView
+
+
+keyedTodoView : ViewConfig Msg -> TodoView
+keyedTodoView vc todo =
+    ( Todo.getId todo
+    , case vc.editTodoModelFor todo of
+        Just etm ->
+            View.Todo.todoViewEditing vc etm
+
+        Nothing ->
+            View.Todo.todoViewNotEditing vc todo
+    )
 
 
 todoListView : Model -> Html Msg
@@ -72,12 +86,11 @@ todoListView =
            )
 
 
-todoViewFromModel =
-    createTodoListViewConfig >> keyedTodoView
-
-
-type alias TodoView =
-    Todo -> ( TodoId, Html Msg )
+allTodoListByGroupView : Model -> Html Msg
+allTodoListByGroupView =
+    apply2 ( todoViewFromModel >> keyedTodoGroupView, Model.TodoList.getTodoGroupsViewModel )
+        >> uncurry List.filterMap
+        >> Keyed.node "div" []
 
 
 keyedTodoGroupView : TodoView -> TodoGroupViewModel -> Maybe ( String, Html Msg )
@@ -97,15 +110,3 @@ keyedTodoGroupView todoView vm =
                 , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> todoView)
                 ]
             )
-
-
-keyedTodoView : ViewConfig Msg -> TodoView
-keyedTodoView vc todo =
-    ( Todo.getId todo
-    , case vc.editTodoModelFor todo of
-        Just etm ->
-            View.Todo.todoViewEditing vc etm
-
-        Nothing ->
-            View.Todo.todoViewNotEditing vc todo
-    )

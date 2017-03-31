@@ -141,8 +141,8 @@ update msg =
                     )
 
 
-updateTodoModifiedAt : ( Model, Maybe Todo ) -> Return
-updateTodoModifiedAt ( m, maybeTodo ) =
+updateTodoModifiedAt : ( Maybe Todo, Model ) -> Return
+updateTodoModifiedAt ( maybeTodo, m ) =
     m
         |> Return.singleton
         >> case maybeTodo of
@@ -257,21 +257,38 @@ andThenMapSecond fun toCmd =
     Return.andThen (fun >> Tuple.mapSecond toCmd)
 
 
-persistAndEditTodoCmd =
-    applyList [ persistTodoCmd, Msg.StartEditingTodo >> Msg.toCmd ]
-        >> Cmd.batch
+persistAndEditTodoCmd : ( Todo, Model ) -> Return
+persistAndEditTodoCmd ( todo, model ) =
+    persistTodoFromTuple ( todo, model )
+        |> andThenUpdate (Msg.StartEditingTodo todo)
 
 
+persistTodoFromTuple : ( Todo, Model ) -> Return
+persistTodoFromTuple ( todo, model ) =
+    ( model, persistTodoCmd todo )
+
+
+persistMaybeTodoFromTuple : ( Maybe Todo, Model ) -> Return
+persistMaybeTodoFromTuple ( maybeTodo, model ) =
+    case maybeTodo of
+        Nothing ->
+            model ! []
+
+        Just todo ->
+            model ! [ persistTodoCmd todo ]
+
+
+onWithNow : RequiresNowAction -> Time -> ReturnF
 onWithNow action now =
     case action of
         Update action id ->
-            updateAndPersistMaybeTodo (updateTodo action id now)
+            Return.andThen (updateTodo action id now >> persistMaybeTodoFromTuple)
 
         CreateA text ->
-            updateAndPersistMaybeTodo (addNewTodoAt text now)
+            Return.andThen (addNewTodoAt text now >> persistTodoFromTuple)
 
         CopyAndEditA todo ->
-            andThenMapSecond (copyNewTodo todo now) persistAndEditTodoCmd
+            Return.andThen (copyNewTodo todo now >> persistAndEditTodoCmd)
 
 
 stopRunningTodo : ReturnF
@@ -285,24 +302,18 @@ markRunningTodoDone =
         >> uncurry (Maybe.unwrap identity (markDone >> update >> Return.andThen))
 
 
+addNewTodoAt : String -> Time -> Model -> ( Todo, Model )
 addNewTodoAt text now m =
-    if String.trim text |> String.isEmpty then
-        ( m, Nothing )
-    else
-        Random.step (Todo.generator now text) (Model.getSeed m)
-            |> Tuple.mapSecond (Model.setSeed # m)
-            |> apply2 ( uncurry Model.TodoList.addTodo, Tuple.first >> Just )
+    Random.step (Todo.generator now text) (Model.getSeed m)
+        |> Tuple.mapSecond (Model.setSeed # m)
+        |> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
 
 
+copyNewTodo : Todo -> Time -> Model -> ( Todo, Model )
 copyNewTodo todo now m =
     Random.step (Todo.copyGenerator now todo) (Model.getSeed m)
         |> Tuple.mapSecond (Model.setSeed # m)
-        |> apply2 ( uncurry Model.TodoList.addTodo, Tuple.first )
-
-
-updateAndPersistMaybeTodo updater =
-    Return.andThen
-        (updater >> Tuple2.mapSecond persistMaybeTodoCmd)
+        |> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
 
 
 withNow : (Time -> Msg) -> ReturnF

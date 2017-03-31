@@ -65,15 +65,15 @@ updateTodoList updater model =
     setTodoList (updater model) model
 
 
-updateTodoMaybe : (Todo -> Todo) -> TodoId -> Model -> ( Model, Maybe Todo )
+updateTodoMaybe : (Todo -> Todo) -> TodoId -> Model -> ( Maybe Todo, Model )
 updateTodoMaybe updater todoId m =
     let
         newTodoList =
             m.todoList
                 |> List.updateIf (Todo.hasId todoId) updater
     in
-        ( setTodoList newTodoList m
-        , List.find (Todo.hasId todoId) newTodoList
+        ( List.find (Todo.hasId todoId) newTodoList
+        , setTodoList newTodoList m
         )
 
 
@@ -108,7 +108,7 @@ toViewModelHelp ( group, name, list ) =
         >> uncurry3 (TodoGroupViewModel group name)
 
 
-updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Model, Maybe Todo )
+updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Maybe Todo, Model )
 updateTodoWithFields fields =
     updateTodoMaybe (updateFields fields)
 

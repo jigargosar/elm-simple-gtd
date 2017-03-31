@@ -265,7 +265,7 @@ persistAndEditTodoCmd ( todo, model ) =
 
 persistTodoFromTuple : ( Todo, Model ) -> Return
 persistTodoFromTuple ( todo, model ) =
-    ( model, persistTodoCmd todo )
+    ( model, upsertTodoCmd todo )
 
 
 persistMaybeTodoFromTuple : ( Maybe Todo, Model ) -> Return
@@ -275,7 +275,7 @@ persistMaybeTodoFromTuple ( maybeTodo, model ) =
             model ! []
 
         Just todo ->
-            model ! [ persistTodoCmd todo ]
+            model ! [ upsertTodoCmd todo ]
 
 
 onWithNow : RequiresNowAction -> Time -> ReturnF
@@ -323,15 +323,20 @@ persistMaybeTodoCmd =
     Maybe.unwrap Cmd.none upsertTodoCmd
 
 
-persistTodoCmd todo =
-    PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)
 
-persistProjectCmd project =
-    PouchDB.pouchDBBulkDocsHelp "project-db" (Project.encodeSingleton project)
+--persistTodoCmd todo =
+--    PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)
+--
+--persistProjectCmd project =
+--    PouchDB.pouchDBBulkDocsHelp "project-db" (Project.encodeSingleton project)
 
 
 upsertTodoCmd todo =
     PouchDB.pouchDBUpsert ( "todo-db", Todo.getId todo, (Todo.encode todo) )
+
+
+upsertProjectCmd project =
+    PouchDB.pouchDBUpsert ( "project-db", Project.getId project, (Project.encode project) )
 
 
 updateTodo action todoId now =

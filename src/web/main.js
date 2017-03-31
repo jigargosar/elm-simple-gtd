@@ -16,6 +16,7 @@ async function boot() {
 
     const dbMap = {
         "todo-db": await PouchDB("todo-db")
+        , "project-db": await PouchDB("project-db")
     }
 
     const allTodos = await dbMap["todo-db"].find({selector: {"_id": {"$ne": null}}})
@@ -26,16 +27,16 @@ async function boot() {
         .embed(document.getElementById("root"), {now: Date.now(), encodedTodoList: allTodos})
 
 
-    app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {
-        const bulkResult = await dbMap[dbName].bulkDocs(docs)
-        // const conflicts =
-        //     _.filter(_.compose(_.propEq("name", "conflict"), _.head)
-        //     )(_.zip(bulkResult, docs))
-        // console.log(conflicts)
-        //
-        console.log("bulkResult:", dbName, bulkResult, docs)
-        app.ports["onPouchDBBulkDocksResponse"].send([dbName, bulkResult, docs])
-    })
+    // app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {
+    //     const bulkResult = await dbMap[dbName].bulkDocs(docs)
+    //     // const conflicts =
+    //     //     _.filter(_.compose(_.propEq("name", "conflict"), _.head)
+    //     //     )(_.zip(bulkResult, docs))
+    //     // console.log(conflicts)
+    //     //
+    //     console.log("bulkResult:", dbName, bulkResult, docs)
+    //     app.ports["onPouchDBBulkDocksResponse"].send([dbName, bulkResult, docs])
+    // })
 
     app.ports["pouchDBUpsert"].subscribe(async([dbName, id, doc]) => {
         const upsertResult = await dbMap[dbName].upsert(id, doc)
@@ -49,11 +50,11 @@ async function boot() {
         setTimeout(() => {
             requestAnimationFrame(() => {
                 const toFocus = document.querySelector(selector)
-                console.log("toFocus", toFocus, document.activeElement)
+                // console.log("toFocus", toFocus, document.activeElement)
                 if (toFocus && document.activeElement !== toFocus) {
                     toFocus.focus()
                 }else{
-                    console.log("not focusing")
+                    // console.log("not focusing")
                 }
                 if (toFocus ) {
                     toFocus.$.input.focus()

@@ -6,9 +6,11 @@ import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditMode
+import Model.ProjectList
 import Model.TodoList exposing (TodoGroupViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
+import Project
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -30,14 +32,16 @@ import View.Todo
 
 
 projectListView m =
-    Keyed.node "paper-material" [ class "project-list" ] (projectItems)
+    div []
+        [ Keyed.node "paper-material"
+            [ class "project-list" ]
+            (m |> Model.ProjectList.getProjectList >> projectItems)
+        ]
 
 
 projectItems =
-    [ ( "1", projectItem "Kill Todoist" )
-    , ( "2", projectItem "Kill OneTab" )
-    ]
+    List.map (apply2 ( Project.getId, projectItem ))
 
 
-projectItem name =
-    item [ class "project-item" ] [ itemBody [] [ text name ] ]
+projectItem project =
+    item [ class "project-item" ] [ itemBody [] [ project |> Project.getName >> text ] ]

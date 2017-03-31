@@ -73,7 +73,7 @@ todoListView =
 
 
 todoViewFromModel =
-    createTodoListViewConfig >> todoView
+    createTodoListViewConfig >> keyedTodoView
 
 
 type alias TodoView =
@@ -99,8 +99,8 @@ keyedTodoGroupView todoView vm =
             )
 
 
-todoView : ViewConfig Msg -> TodoView
-todoView vc todo =
+keyedTodoView : ViewConfig Msg -> TodoView
+keyedTodoView vc todo =
     ( Todo.getId todo
     , case vc.editTodoModelFor todo of
         Just etm ->

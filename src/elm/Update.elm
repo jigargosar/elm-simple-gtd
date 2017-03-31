@@ -193,13 +193,14 @@ saveEditingTodoAndDeactivateEditing todo =
         (\m ->
             m
                 |> Model.EditMode.getEditTodoModeModel
-                ?|> (saveEditingTodoAndDeactivateEditingHelp todo # (Return.singleton m))
+                ?|> (saveEditingTodoHelp todo # (Return.singleton m))
                 ?= Return.singleton m
         )
+        >> deactivateEditingModeFor todo
 
 
-saveEditingTodoAndDeactivateEditingHelp : Todo -> EditTodoModeModel -> ReturnF
-saveEditingTodoAndDeactivateEditingHelp todo editTodoModel =
+saveEditingTodoHelp : Todo -> EditTodoModeModel -> ReturnF
+saveEditingTodoHelp todo editTodoModel =
     Return.andThen
         (\m ->
             let
@@ -230,10 +231,9 @@ saveEditingTodoAndDeactivateEditingHelp todo editTodoModel =
 
                     Just project ->
                         ( m, project )
-                            |> Tuple.mapSecond persistProject
+                            |> Tuple.mapSecond (\_ -> Cmd.none)
         )
         >> Return.command (Msg.SetText (Todo.getText todo) (Todo.getId todo) |> Msg.toCmd)
-        >> deactivateEditingModeFor todo
 
 
 persistProject project =

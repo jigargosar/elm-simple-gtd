@@ -25,14 +25,9 @@ textValue =
     Json.Decode.at [ "detail", "text" ] Json.Decode.string
 
 
-onAutoCompleteChange : (String -> msg) -> Html.Attribute msg
-onAutoCompleteChange tagger =
-    on "autocomplete-change" (Json.Decode.map tagger textValue)
-
-
 onAutoCompleteSelected : (String -> msg) -> Html.Attribute msg
 onAutoCompleteSelected tagger =
-    on "autocomplete-selected" (Json.Decode.map tagger (traceDecoder "sdf" textValue))
+    on "autocomplete-selected" (Json.Decode.map tagger (traceDecoder "selected" textValue))
 
 
 todoViewEditing vc projectName todoText todo =
@@ -52,7 +47,7 @@ todoViewEditing vc projectName todoText todo =
                 [ id (todoProjectInputId todo)
                 , class "project-name-input"
                 , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                  --                , onInput Msg.EditTodoProjectNameChanged
+                , onInput Msg.EditTodoProjectNameChanged
                 , stringProperty "label" "Project Name"
                 , value projectName
                 ]

@@ -136,12 +136,25 @@ update msg =
 
             UpdateTodoFields fields todoId ->
                 Return.andThen
-                    (apply2
-                        ( identity
-                        , Model.TodoList.getUpdatedTodo fields todoId
-                        )
-                        >> Tuple.mapSecond persistMaybeTodoCmd
+                    (Model.TodoList.updateTodoWithFields fields todoId
+                        >> updateTodoModifiedAt
                     )
+
+
+updateTodoModifiedAt : ( Model, Maybe Todo ) -> Return
+updateTodoModifiedAt ( m, maybeTodo ) =
+    m
+        |> Return.singleton
+        >> case maybeTodo of
+            Just todo ->
+                let
+                    id =
+                        Todo.getId todo
+                in
+                    withNow (OnActionWithNow (Update UpdateModifiedAtUA id))
+
+            Nothing ->
+                identity
 
 
 onMsgList : List Msg -> ReturnF
@@ -233,7 +246,7 @@ updateTodoFromEditTodoModel editTodoModel ( project, m ) =
                 ]
                 editTodoModel.todoId
     in
-        Return.singleton m
+        update updateTodoMsg m
 
 
 persistProject project =
@@ -327,6 +340,9 @@ updateTodo action todoId now =
 
                 SetTextUA text ->
                     Todo.setText text
+
+                UpdateModifiedAtUA ->
+                    identity
 
         modifiedAtUpdater =
             Todo.setModifiedAt now

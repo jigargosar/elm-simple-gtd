@@ -108,12 +108,16 @@ toViewModelHelp ( group, name, list ) =
         >> uncurry3 (TodoGroupViewModel group name)
 
 
-getUpdatedTodo : List TodoField -> TodoId -> Model -> Maybe Todo
-getUpdatedTodo fields todoId =
-    getTodoById todoId >> Maybe.map (List.foldl updateTodoFields # fields)
+updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Model, Maybe Todo )
+updateTodoWithFields fields =
+    updateTodoMaybe (updateFields fields)
 
 
-updateTodoFields field =
+updateFields fields =
+    List.foldl updateField # fields
+
+
+updateField field =
     case field of
         Types.TodoText text ->
             Todo.setText text

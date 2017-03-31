@@ -22,6 +22,7 @@ type UpdateAction
     | SetGroupUA TodoGroup
     | SetTextUA String
     | ToggleDeleteUA
+    | UpdateModifiedAtUA
 
 
 type RequiresNowAction

@@ -1,5 +1,6 @@
 module Model.Types exposing (..)
 
+import EditModel.Types exposing (..)
 import Project exposing (ProjectList, ProjectName)
 import Random.Pcg exposing (Seed)
 import RunningTodoDetails exposing (RunningTodoDetails)
@@ -8,6 +9,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Time exposing (Time)
+
 
 type MainViewType
     = AllByGroupView
@@ -21,20 +23,10 @@ defaultViewType =
     AllByGroupView
 
 
-type alias EditTodoModel =
-    { todo : Todo, todoText : String, projectName : ProjectName }
-
-
-type EditState
-    = NewTodo String
-    | EditTodo EditTodoModel
-    | None
-
-
 type alias Model =
     { now : Time
     , todoList : TodoList
-    , editState : EditState
+    , editModel : EditModel
     , mainViewType : MainViewType
     , seed : Seed
     , runningTodoDetails : Maybe RunningTodoDetails
@@ -44,4 +36,3 @@ type alias Model =
 
 type alias ModelF =
     Model -> Model
-

@@ -1,5 +1,6 @@
-module Model.EditState exposing (..)
+module Model.EditModel exposing (..)
 
+import EditModel.Types exposing (..)
 import Maybe.Extra as Maybe
 import Model.Internal exposing (..)
 import Model.ProjectList
@@ -15,12 +16,12 @@ import Model.Types exposing (..)
 
 activateNewTodoMode : String -> ModelF
 activateNewTodoMode text =
-    setEditState (NewTodo text)
+    setEditModel (NewTodo text)
 
 
-setEditStateToEditTodo : Todo -> ModelF
-setEditStateToEditTodo todo =
-    updateEditState (createEditTodoModel todo >> EditTodo)
+setEditModelToEditTodo : Todo -> ModelF
+setEditModelToEditTodo todo =
+    updateEditModel (createEditTodoModel todo >> EditTodo)
 
 
 createEditTodoModel : Todo -> Model -> EditTodoModel
@@ -37,16 +38,16 @@ createEditTodoModel todo model =
 updateEditTodoText : String -> ModelF
 updateEditTodoText text m =
     m
-        |> case getEditState m of
+        |> case getEditModel m of
             EditTodo model ->
-                setEditState (EditTodo ({ model | todoText = text }))
+                setEditModel (EditTodo ({ model | todoText = text }))
 
             _ ->
                 identity
 
 
 getEditTodoModel model =
-    case getEditState model of
+    case getEditModel model of
         EditTodo model ->
             Just model
 
@@ -55,7 +56,7 @@ getEditTodoModel model =
 
 
 getEditNewTodoModel model =
-    case getEditState model of
+    case getEditModel model of
         NewTodo model ->
             Just model
 
@@ -66,16 +67,16 @@ getEditNewTodoModel model =
 updateEditTodoProjectName : ProjectName -> ModelF
 updateEditTodoProjectName projectName m =
     m
-        |> case getEditState m of
+        |> case getEditModel m of
             EditTodo model ->
-                setEditState (EditTodo ({ model | projectName = projectName }))
+                setEditModel (EditTodo ({ model | projectName = projectName }))
 
             _ ->
                 identity
 
 
 deactivateEditingMode =
-    setEditState None
+    setEditModel None
 
 
 getProjectOfTodo : Todo -> Model -> Maybe Project

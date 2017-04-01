@@ -1,5 +1,6 @@
 module Model.Internal exposing (..)
 
+import EditModel.Types exposing (..)
 import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -21,16 +22,17 @@ updateSeed : (Model -> Seed) -> ModelF
 updateSeed updater model =
     setSeed (updater model) model
 
-getEditState : Model -> EditState
-getEditState =
-    (.editState)
+
+getEditModel : Model -> EditModel
+getEditModel =
+    (.editModel)
 
 
-setEditState : EditState -> ModelF
-setEditState editState model =
-    { model | editState = editState }
+setEditModel : EditModel -> ModelF
+setEditModel editModel model =
+    { model | editModel = editModel }
 
 
-updateEditState : (Model -> EditState) -> ModelF
-updateEditState updater model =
-    setEditState (updater model) model
+updateEditModel : (Model -> EditModel) -> ModelF
+updateEditModel updater model =
+    setEditModel (updater model) model

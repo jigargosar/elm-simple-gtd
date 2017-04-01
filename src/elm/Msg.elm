@@ -1,6 +1,7 @@
 module Msg exposing (..)
 
 import Dom
+import EditModel.Types exposing (..)
 import Ext.Cmd
 import KeyboardExtra exposing (KeyboardEvent)
 import Model.Types exposing (..)
@@ -9,7 +10,7 @@ import Return
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
-import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
+import Todo exposing (Todo, TodoGroup, TodoId, TodoList, TodoText)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -106,7 +107,7 @@ type Msg
     | Create String
     | CopyAndEdit Todo
     | AddTodoClicked
-    | NewTodoTextChanged String
+    | NewTodoTextChanged TodoText
     | NewTodoBlur
     | NewTodoKeyUp String KeyboardEvent
     | StartEditingTodo Todo

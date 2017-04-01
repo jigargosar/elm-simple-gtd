@@ -2,7 +2,8 @@ port module Update exposing (..)
 
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
-import Model.EditState
+import EditModel.Types exposing (..)
+import Model.EditModel
 import Model.ProjectList
 import Model.RunningTodo
 import Model.TodoList
@@ -101,14 +102,14 @@ update msg =
                         identity
 
             StartEditingTodo todo ->
-                Return.map (Model.EditState.setEditStateToEditTodo todo)
+                Return.map (Model.EditModel.setEditModelToEditTodo todo)
                     >> autoFocusPaperInputCmd
 
             EditTodoTextChanged etm text ->
-                Return.map (Model.EditState.updateEditTodoText text)
+                Return.map (Model.EditModel.updateEditTodoText text)
 
             EditTodoProjectNameChanged etm projectName ->
-                Return.map (Model.EditState.updateEditTodoProjectName projectName)
+                Return.map (Model.EditModel.updateEditTodoProjectName projectName)
 
             EditTodoKeyUp todo { key, isShiftDown } ->
                 case key of
@@ -186,11 +187,11 @@ port stopAlarm : () -> Cmd msg
 
 
 deactivateEditingMode =
-    Return.map (Model.EditState.deactivateEditingMode)
+    Return.map (Model.EditModel.deactivateEditingMode)
 
 
 activateEditNewTodoMode text =
-    Return.map (Model.EditState.activateNewTodoMode text)
+    Return.map (Model.EditModel.activateNewTodoMode text)
 
 
 saveAndDeactivateEditingTodo : Todo -> ReturnF
@@ -198,7 +199,7 @@ saveAndDeactivateEditingTodo todo =
     Return.andThen
         (\m ->
             m
-                |> Model.EditState.getEditTodoModel
+                |> Model.EditModel.getEditTodoModel
                 ?|> (saveEditingTodoHelp todo # (Return.singleton m))
                 ?= Return.singleton m
         )

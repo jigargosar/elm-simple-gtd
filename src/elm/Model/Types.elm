@@ -10,7 +10,6 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Time exposing (Time)
 
-
 type MainViewType
     = AllByGroupView
     | GroupView TodoGroup
@@ -19,8 +18,6 @@ type MainViewType
     | ProjectsView
 
 
-defaultViewType =
-    AllByGroupView
 
 
 type alias Model =
@@ -36,3 +33,4 @@ type alias Model =
 
 type alias ModelF =
     Model -> Model
+

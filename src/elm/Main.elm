@@ -54,12 +54,5 @@ main =
 
 init : Flags -> Return
 init { now, encodedTodoList, encodedProjectList } =
-    { now = now
-    , todoList = Todo.decodeTodoList encodedTodoList
-    , editModel = EditModel.init
-    , mainViewType = defaultViewType
-    , seed = Random.seedFromTime now
-    , runningTodoDetails = RunningTodoDetails.init
-    , projectList = Project.decodeProjectList encodedProjectList
-    }
+    Model.init now encodedTodoList encodedProjectList
         |> Return.singleton

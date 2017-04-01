@@ -1,6 +1,8 @@
 module Model exposing (..)
 
+import EditModel
 import Model.Internal exposing (..)
+import Project
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Dict
 import Json.Encode as E
@@ -42,3 +44,14 @@ generate : Random.Generator a -> Model -> ( a, Model )
 generate generator m =
     Random.step generator (m.seed)
         |> Tuple.mapSecond (setSeed # m)
+
+
+init now encodedTodoList encodedProjectList =
+    { now = now
+    , todoList = Todo.decodeTodoList encodedTodoList
+    , editModel = EditModel.init
+    , mainViewType = AllByGroupView
+    , seed = Random.seedFromTime now
+    , runningTodoDetails = RunningTodoDetails.init
+    , projectList = Project.decodeProjectList encodedProjectList
+    }

@@ -28,23 +28,11 @@ import TodoModel.Types exposing (..)
 
 
 getDeleted__ =
-    Internal.getDeleted
+    getDeleted
 
 
 
 ---
-
-
-defaultDueAt =
-    Nothing
-
-
-defaultDeleted =
-    False
-
-
-defaultDone =
-    False
 
 
 getAllTodoContexts =

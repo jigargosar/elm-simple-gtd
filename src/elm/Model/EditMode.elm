@@ -66,12 +66,7 @@ getEditTodoModelForTodoHelp maybeETM todo =
             else
                 Nothing
     in
-        case maybeETM of
-            Just etm ->
-                foo etm
-
-            Nothing ->
-                Nothing
+        Maybe.andThen foo maybeETM
 
 
 getEditTodoModelForTodo =

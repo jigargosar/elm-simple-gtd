@@ -60,16 +60,16 @@ update msg =
                 onWithNow action now
 
             SetTodoDone bool id ->
-                setTodoFields [ TodoDoneField bool ] id
+                setTodoFieldsAndUpdateModifiedAt [ TodoDoneField bool ] id
 
             SetTodoContext todoContext id ->
-                setTodoFields [ TodoContextField todoContext ] id
+                setTodoFieldsAndUpdateModifiedAt [ TodoContextField todoContext ] id
 
             SetText text id ->
-                setTodoFields [ TodoTextField text ] id
+                setTodoFieldsAndUpdateModifiedAt [ TodoTextField text ] id
 
             SetTodoDeleted bool id ->
-                setTodoFields [ TodoDeletedField bool ] id
+                setTodoFieldsAndUpdateModifiedAt [ TodoDeletedField bool ] id
 
             Create text ->
                 withNow (OnActionWithNow (CreateA text))
@@ -153,7 +153,7 @@ updateMaybeTodoModifiedAt ( maybeTodo, m ) =
 --    m|> setTodo
 
 
-setTodoFields fields todoId =
+setTodoFieldsAndUpdateModifiedAt fields todoId =
     Return.andThen
         (Model.TodoList.updateTodoWithFields fields todoId
             >> updateMaybeTodoModifiedAt
@@ -235,7 +235,7 @@ getOrCreateAndPersistProject editTodoModel m =
 
 
 updateTodoFromEditTodoModel editTodoModel ( project, m ) =
-    setTodoFields
+    setTodoFieldsAndUpdateModifiedAt
         [ TodoTextField editTodoModel.todoText
         , TodoProjectIdField (project |> Project.getId >> Just)
         ]

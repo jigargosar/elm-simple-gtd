@@ -267,7 +267,7 @@ onWithNow : RequiresNowAction -> Time -> ReturnF
 onWithNow action now =
     case action of
         UpdateTodoModifiedAt id ->
-            Return.andThen (updateTodo id now >> persistMaybeTodoFromTuple)
+            Return.andThen (Model.TodoList.updateTodoMaybe (Todo.setModifiedAt now) id >> persistMaybeTodoFromTuple)
 
         CreateA text ->
             Return.andThen (addNewTodoAt text now >> persistTodoFromTuple)
@@ -314,11 +314,3 @@ upsertTodoCmd todo =
 
 upsertProjectCmd project =
     PouchDB.pouchDBUpsert ( "project-db", Project.getId project, (Project.encode project) )
-
-
-updateTodo todoId now =
-    let
-        modifiedAtUpdater =
-            Todo.setModifiedAt now
-    in
-        Model.TodoList.updateTodoMaybe modifiedAtUpdater todoId

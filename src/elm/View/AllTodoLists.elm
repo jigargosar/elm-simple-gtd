@@ -33,7 +33,7 @@ import View.Todo
 
 type alias ViewConfig msg =
     { onDeleteTodoClicked : TodoId -> msg
-    , onEditTodoKeyUp : Todo -> KeyboardEvent -> msg
+    , onEditTodoKeyUp : TodoModel -> KeyboardEvent -> msg
     , noOp : msg
     , onTodoMoveToClicked : TodoGroup -> TodoId -> msg
     , now : Time
@@ -59,7 +59,7 @@ createTodoListViewConfig model =
 
 
 type alias TodoView =
-    Todo -> ( TodoId, Html Msg )
+    TodoModel -> ( TodoId, Html Msg )
 
 
 todoViewFromModel : Model -> TodoView

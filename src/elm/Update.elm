@@ -141,7 +141,7 @@ update msg =
                     )
 
 
-updateTodoModifiedAt : ( Maybe Todo, Model ) -> Return
+updateTodoModifiedAt : ( Maybe TodoModel, Model ) -> Return
 updateTodoModifiedAt ( maybeTodo, m ) =
     m
         |> Return.singleton
@@ -195,7 +195,7 @@ activateEditNewTodoMode text =
     Return.map (Model.EditModel.activateNewTodoMode text)
 
 
-saveAndDeactivateEditingTodo : Todo -> ReturnF
+saveAndDeactivateEditingTodo : TodoModel -> ReturnF
 saveAndDeactivateEditingTodo todo =
     Return.andThen
         (\m ->
@@ -207,7 +207,7 @@ saveAndDeactivateEditingTodo todo =
         >> deactivateEditingMode
 
 
-saveEditingTodoHelp : Todo -> EditTodoModel -> ReturnF
+saveEditingTodoHelp : TodoModel -> EditTodoModel -> ReturnF
 saveEditingTodoHelp todo editTodoModel =
     Return.andThen (getOrCreateAndPersistProject editTodoModel)
         >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
@@ -247,18 +247,18 @@ andThenMapSecond fun toCmd =
     Return.andThen (fun >> Tuple.mapSecond toCmd)
 
 
-persistAndEditTodoCmd : ( Todo, Model ) -> Return
+persistAndEditTodoCmd : ( TodoModel, Model ) -> Return
 persistAndEditTodoCmd ( todo, model ) =
     persistTodoFromTuple ( todo, model )
         |> andThenUpdate (Msg.StartEditingTodo todo)
 
 
-persistTodoFromTuple : ( Todo, Model ) -> Return
+persistTodoFromTuple : ( TodoModel, Model ) -> Return
 persistTodoFromTuple ( todo, model ) =
     ( model, upsertTodoCmd todo )
 
 
-persistMaybeTodoFromTuple : ( Maybe Todo, Model ) -> Return
+persistMaybeTodoFromTuple : ( Maybe TodoModel, Model ) -> Return
 persistMaybeTodoFromTuple ( maybeTodo, model ) =
     case maybeTodo of
         Nothing ->
@@ -292,13 +292,13 @@ markRunningTodoDone =
         >> uncurry (Maybe.unwrap identity (markDone >> andThenUpdate))
 
 
-addNewTodoAt : String -> Time -> Model -> ( Todo, Model )
+addNewTodoAt : String -> Time -> Model -> ( TodoModel, Model )
 addNewTodoAt text now =
     Model.generate (Todo.generator now text)
         >> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
 
 
-copyNewTodo : Todo -> Time -> Model -> ( Todo, Model )
+copyNewTodo : TodoModel -> Time -> Model -> ( TodoModel, Model )
 copyNewTodo todo now =
     Model.generate (Todo.copyGenerator now todo)
         >> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )

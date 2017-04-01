@@ -44,12 +44,12 @@ type alias TodoRecord =
     }
 
 
-type alias Todo =
+type alias TodoModel =
     PouchDB.Document (PouchDB.WithTimeStamps TodoRecord)
 
 
-type alias TodoList =
-    List Todo
+type alias TodoListModel =
+    List TodoModel
 
 
 type alias EncodedTodo =
@@ -57,4 +57,4 @@ type alias EncodedTodo =
 
 
 type alias ViewModel =
-    Todo
+    TodoModel

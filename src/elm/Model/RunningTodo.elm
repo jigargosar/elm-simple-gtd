@@ -36,7 +36,7 @@ getRunningTodoId =
     getRunningTodoDetails >> RunningTodoDetails.getMaybeId
 
 
-toRunningTodoDetailsVM : ( RunningTodoDetails, Todo ) -> Model -> RunningTodoViewModel
+toRunningTodoDetailsVM : ( RunningTodoDetails, TodoModel ) -> Model -> RunningTodoViewModel
 toRunningTodoDetailsVM ( runningTodoDetails, todo ) m =
     let
         now =

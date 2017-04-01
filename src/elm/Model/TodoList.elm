@@ -14,7 +14,7 @@ import Model.Types exposing (..)
 import Types exposing (TodoField)
 
 
-getTodoList : Model -> TodoList
+getTodoList : Model -> TodoListModel
 getTodoList =
     (.todoList)
 
@@ -45,7 +45,7 @@ mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
 
-getTodoById : TodoId -> Model -> Maybe Todo
+getTodoById : TodoId -> Model -> Maybe TodoModel
 getTodoById id =
     getTodoList >> Todo.findById id
 
@@ -58,17 +58,17 @@ addTodo todo =
     updateTodoList (getTodoList >> (::) todo)
 
 
-setTodoList : TodoList -> ModelF
+setTodoList : TodoListModel -> ModelF
 setTodoList todoList model =
     { model | todoList = todoList }
 
 
-updateTodoList : (Model -> TodoList) -> ModelF
+updateTodoList : (Model -> TodoListModel) -> ModelF
 updateTodoList updater model =
     setTodoList (updater model) model
 
 
-updateTodoMaybe : (Todo -> Todo) -> TodoId -> Model -> ( Maybe Todo, Model )
+updateTodoMaybe : (TodoModel -> TodoModel) -> TodoId -> Model -> ( Maybe TodoModel, Model )
 updateTodoMaybe updater todoId m =
     let
         newTodoList =
@@ -81,7 +81,7 @@ updateTodoMaybe updater todoId m =
 
 
 type alias TodoGroupViewModel =
-    { group : TodoGroup, name : String, todoList : TodoList, count : Int, isEmpty : Bool }
+    { group : TodoGroup, name : String, todoList : TodoListModel, count : Int, isEmpty : Bool }
 
 
 getTodoGroupsViewModel : Model -> List TodoGroupViewModel
@@ -95,7 +95,7 @@ getTodoGroupsViewModel =
            )
 
 
-toViewModel : Dict String TodoList -> TodoGroup -> TodoGroupViewModel
+toViewModel : Dict String TodoListModel -> TodoGroup -> TodoGroupViewModel
 toViewModel dict =
     apply3
         ( identity
@@ -111,7 +111,7 @@ toViewModelHelp ( group, name, list ) =
         >> uncurry3 (TodoGroupViewModel group name)
 
 
-updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Maybe Todo, Model )
+updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Maybe TodoModel, Model )
 updateTodoWithFields fields =
     updateTodoMaybe (updateFields fields)
 

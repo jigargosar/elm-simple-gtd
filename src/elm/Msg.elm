@@ -31,7 +31,7 @@ type UpdateAction
 type RequiresNowAction
     = Update UpdateAction TodoId
     | CreateA String
-    | CopyAndEditA Todo
+    | CopyAndEditA TodoModel
 
 
 markDone =
@@ -106,20 +106,20 @@ type Msg
     | SetText String TodoId
     | ToggleDelete TodoId
     | Create String
-    | CopyAndEdit Todo
+    | CopyAndEdit TodoModel
     | AddTodoClicked
     | NewTodoTextChanged TodoText
     | NewTodoBlur
     | NewTodoKeyUp String KeyboardEvent
-    | StartEditingTodo Todo
+    | StartEditingTodo TodoModel
     | FocusPaperInput String
     | EditTodoTextChanged EditTodoModel String
     | EditTodoProjectNameChanged EditTodoModel ProjectName
-    | EditTodoKeyUp Todo KeyboardEvent
+    | EditTodoKeyUp TodoModel KeyboardEvent
     | SetMainViewType MainViewType
     | OnNowChanged Time
     | OnMsgList (List Msg)
-    | UpdateTodoFields (List TodoField) Todo
+    | UpdateTodoFields (List TodoField) TodoModel
 
 
 toCmds : List Msg -> Cmd Msg

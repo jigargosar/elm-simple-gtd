@@ -8,7 +8,7 @@ import TodoModel.Types exposing (..)
 
 
 type alias EditTodoModel =
-    { todo : Todo, todoText : TodoText, projectName : Project.ProjectName }
+    { todo : TodoModel, todoText : TodoText, projectName : Project.ProjectName }
 
 
 type alias NewTodoModel =

@@ -142,4 +142,4 @@ addTodoFabView m =
 
 
 type alias TodoViewModel =
-    Todo
+    TodoModel

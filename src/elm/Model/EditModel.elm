@@ -20,12 +20,12 @@ activateNewTodoMode text =
     setEditModel (NewTodo text)
 
 
-setEditModelToEditTodo : Todo -> ModelF
+setEditModelToEditTodo : TodoModel -> ModelF
 setEditModelToEditTodo todo =
     updateEditModel (createEditTodoModel todo >> EditTodo)
 
 
-createEditTodoModel : Todo -> Model -> EditTodoModel
+createEditTodoModel : TodoModel -> Model -> EditTodoModel
 createEditTodoModel todo model =
     todo
         |> apply3
@@ -80,11 +80,11 @@ deactivateEditingMode =
     setEditModel None
 
 
-getProjectOfTodo : Todo -> Model -> Maybe Project
+getProjectOfTodo : TodoModel -> Model -> Maybe Project
 getProjectOfTodo todo model =
     Todo.getProjectId todo |> Model.ProjectList.getProjectByMaybeId # model
 
 
-getProjectNameOfTodo : Todo -> Model -> ProjectName
+getProjectNameOfTodo : TodoModel -> Model -> ProjectName
 getProjectNameOfTodo =
     getProjectOfTodo >>> Maybe.unwrap "" Project.getName

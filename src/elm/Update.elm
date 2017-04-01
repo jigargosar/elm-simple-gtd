@@ -237,10 +237,8 @@ getOrCreateAndPersistProject editTodoModel =
 
 
 createAndSaveProject projectName =
-    Return.andThen
-        (Model.ProjectList.addNewProject projectName
-            >> apply2 ( identity, Tuple.first >> upsertProjectCmd )
-        )
+    Return.map (Model.ProjectList.addNewProject projectName)
+        >> Return.effect_ (Tuple.first >> upsertProjectCmd)
 
 
 updateTodoFromEditTodoModel editTodoModel ( project, m ) =

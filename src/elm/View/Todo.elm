@@ -147,13 +147,13 @@ optionsIconButton vc todo =
             , attribute "attr-for-selected" "list-type"
             , attribute "selected" (Todo.getContextName todo)
             ]
-            (Todo.getAllTodoGroups
+            (Todo.getAllTodoContexts
                 .|> (\context ->
                         item
-                            [ attribute "list-type" (Todo.groupToName context)
+                            [ attribute "list-type" (Todo.todoContextToName context)
                             , onClickStopPropagation (vc.onTodoMoveToClicked context (Todo.getId todo))
                             ]
-                            [ text (Todo.groupToName context) ]
+                            [ text (Todo.todoContextToName context) ]
                     )
             )
         ]

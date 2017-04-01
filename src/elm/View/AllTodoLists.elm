@@ -7,7 +7,7 @@ import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditModel
 import Model.ProjectList
-import Model.TodoList exposing (TodoGroupViewModel)
+import Model.TodoList exposing (TodoContextViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
@@ -35,7 +35,7 @@ type alias ViewConfig msg =
     { onDeleteTodoClicked : TodoId -> msg
     , onEditTodoKeyUp : TodoModel -> KeyboardEvent -> msg
     , noOp : msg
-    , onTodoMoveToClicked : TodoGroup -> TodoId -> msg
+    , onTodoMoveToClicked : TodoContext -> TodoId -> msg
     , now : Time
     , onTodoDoneClicked : TodoId -> msg
     , onTodoStartClicked : TodoId -> msg
@@ -49,7 +49,7 @@ createTodoListViewConfig model =
     { onDeleteTodoClicked = Msg.toggleDelete
     , onEditTodoKeyUp = onEditTodoKeyUp
     , noOp = NoOp
-    , onTodoMoveToClicked = Msg.setGroup
+    , onTodoMoveToClicked = Msg.setTodoContext
     , now = Model.getNow model
     , onTodoDoneClicked = Msg.toggleDone
     , onTodoStartClicked = Msg.start
@@ -92,15 +92,15 @@ todoListView =
            )
 
 
-allTodoListByGroupView : Model -> Html Msg
-allTodoListByGroupView =
-    apply2 ( todoViewFromModel >> keyedTodoGroupView, Model.TodoList.getTodoGroupsViewModel )
+allTodoListByTodoContextView : Model -> Html Msg
+allTodoListByTodoContextView =
+    apply2 ( todoViewFromModel >> keyedTodoContextView, Model.TodoList.getTodoContextsViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
 
 
-keyedTodoGroupView : TodoView -> TodoGroupViewModel -> Maybe ( String, Html Msg )
-keyedTodoGroupView todoView vm =
+keyedTodoContextView : TodoView -> TodoContextViewModel -> Maybe ( String, Html Msg )
+keyedTodoContextView todoView vm =
     if vm.isEmpty then
         Nothing
     else

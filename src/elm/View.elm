@@ -94,8 +94,8 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
 appMainView m =
     div [ id "main-view" ]
         [ case Model.getMainViewType m of
-            AllByGroupView ->
-                allTodoListByGroupView m
+            AllByTodoContextView ->
+                allTodoListByTodoContextView m
 
             BinView ->
                 todoListView m
@@ -106,8 +106,8 @@ appMainView m =
             ProjectsView ->
                 projectListView m
 
-            GroupView _ ->
-                allTodoListByGroupView m
+            TodoContextView _ ->
+                allTodoListByTodoContextView m
         ]
 
 

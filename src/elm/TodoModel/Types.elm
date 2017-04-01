@@ -19,7 +19,7 @@ type alias TodoText =
     String
 
 
-type TodoGroup
+type TodoContext
     = Session
     | Inbox
     | SomeDayMayBe
@@ -35,7 +35,7 @@ type alias TodoRecord =
     , text : TodoText
     , dueAt : Maybe Time
     , deleted : Bool
-    , context : TodoGroup
+    , context : TodoContext
     , projectId : Maybe ProjectId
     }
 

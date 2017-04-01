@@ -65,8 +65,8 @@ update msg =
             MarkDone id ->
                 withNow (OnActionWithNow (Update MarkDoneUA id))
 
-            SetGroup group id ->
-                withNow (OnActionWithNow (Update (SetGroupUA group) id))
+            SetTodoContext todoContext id ->
+                withNow (OnActionWithNow (Update (SetTodoContextUA todoContext) id))
 
             SetText text id ->
                 withNow (OnActionWithNow (Update (SetTextUA text) id))
@@ -315,7 +315,7 @@ persistMaybeTodoCmd =
 
 
 upsertTodoCmd todo =
-    PouchDB.pouchDBUpsert ( "todo-db", Todo.getId todo, (Todo.encode todo) )
+    PouchDB.pouchDBUpsert ( "todo-db", Todo.getId todo, (Todo.encodeTodo todo) )
 
 
 upsertProjectCmd project =
@@ -326,8 +326,8 @@ updateTodo action todoId now =
     let
         todoActionUpdater =
             case action of
-                SetGroupUA group ->
-                    Todo.setContext group
+                SetTodoContextUA todoContext ->
+                    Todo.setContext todoContext
 
                 ToggleDoneUA ->
                     Todo.toggleDone

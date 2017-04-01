@@ -31,7 +31,7 @@ defaultDeleted =
     False
 
 
-getAllTodoGroups =
+getAllTodoContexts =
     [ Session
     , Calender
     , Inbox
@@ -44,11 +44,11 @@ getAllTodoGroups =
 
 
 getContextName =
-    getGroup >> groupToName
+    getTodoContext >> todoContextToName
 
 
-groupToName todoGroup =
-    case todoGroup of
+todoContextToName todoContext =
+    case todoContext of
         Session ->
             "Session"
 
@@ -134,7 +134,7 @@ todoDecoder =
 
 
 contextEncodings =
-    getAllTodoGroups
+    getAllTodoContexts
         |> Dict.fromListBy toString
 
 
@@ -146,8 +146,8 @@ copyTodo createdAt todo id =
     { todo | id = id, rev = PouchDB.defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
 
 
-encode : TodoModel -> EncodedTodo
-encode todo =
+encodeTodo : TodoModel -> EncodedTodo
+encodeTodo todo =
     E.object
         [ "_id" => E.string (getId todo)
         , "_rev" => E.string (getRev todo)
@@ -155,17 +155,11 @@ encode todo =
         , "text" => E.string (getText todo)
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (isDeleted todo)
-        , "context" => E.string (getGroup todo |> toString)
+        , "context" => E.string (getTodoContext todo |> toString)
         , "projectId" => (todo |> getProjectId >> Maybe.unwrap E.null E.string)
         , "createdAt" => E.int (todo.createdAt |> round)
         , "modifiedAt" => E.int (todo.modifiedAt |> round)
         ]
-
-
-
-
-
-
 
 
 todoGenerator createdAt text =
@@ -326,17 +320,17 @@ updateProjectId updater model =
     setProjectId (updater model) model
 
 
-getGroup : Model -> TodoGroup
-getGroup =
+getTodoContext : Model -> TodoContext
+getTodoContext =
     (.context)
 
 
-setContext : TodoGroup -> ModelF
+setContext : TodoContext -> ModelF
 setContext context model =
     { model | context = context }
 
 
-updateContext : (Model -> TodoGroup) -> ModelF
+updateContext : (Model -> TodoContext) -> ModelF
 updateContext updater model =
     setContext (updater model) model
 
@@ -383,7 +377,7 @@ isNotDeleted =
 
 
 inboxFilter =
-    toAllPassPredicate [ isNotDeleted, getGroup >> equals Inbox ]
+    toAllPassPredicate [ isNotDeleted, getTodoContext >> equals Inbox ]
 
 
 binFilter =

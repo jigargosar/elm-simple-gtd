@@ -8,7 +8,7 @@ import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Model.TodoList
 import Msg exposing (Msg(SetMainViewType))
-import View.AllTodoLists exposing (allTodoListByGroupView)
+import View.AllTodoLists exposing (allTodoListByTodoContextView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
@@ -36,12 +36,12 @@ appDrawerView m =
             [ menu
                 [ stringProperty "selected" "0"
                 ]
-                ([ item [ onClick (SetMainViewType AllByGroupView) ] [ text "All" ]
+                ([ item [ onClick (SetMainViewType AllByTodoContextView) ] [ text "All" ]
                  , divider
                  , projectsItemView m
                  , divider
                  ]
-                    ++ todoGroupsMenuItems m
+                    ++ todoContextsMenuItems m
                     ++ [ divider
                        , binItemView m
                        , doneItemView m
@@ -67,8 +67,8 @@ doneItemView m =
     item [ onClick (SetMainViewType DoneView) ] [ text "Done" ]
 
 
-todoGroupsMenuItems =
-    Model.TodoList.getTodoGroupsViewModel
+todoContextsMenuItems =
+    Model.TodoList.getTodoContextsViewModel
         >> List.map contextMenuItem
 
 
@@ -90,7 +90,7 @@ contextMenuItem vm =
                 ]
                 []
              ]
-                ++ addHoverItems vm.group
+                ++ addHoverItems vm.todoContext
             )
 
 

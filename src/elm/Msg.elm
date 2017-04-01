@@ -22,7 +22,7 @@ import Types exposing (..)
 type UpdateAction
     = ToggleDoneUA
     | MarkDoneUA
-    | SetGroupUA TodoGroup
+    | SetTodoContextUA TodoContext
     | SetTextUA String
     | ToggleDeleteUA
     | UpdateModifiedAtUA
@@ -42,8 +42,8 @@ toggleDelete =
     ToggleDelete
 
 
-setGroup =
-    SetGroup
+setTodoContext =
+    SetTodoContext
 
 
 saveNewTodo =
@@ -102,7 +102,7 @@ type Msg
     | OnActionWithNow RequiresNowAction Time
     | ToggleDone TodoId
     | MarkDone TodoId
-    | SetGroup TodoGroup TodoId
+    | SetTodoContext TodoContext TodoId
     | SetText String TodoId
     | ToggleDelete TodoId
     | Create String

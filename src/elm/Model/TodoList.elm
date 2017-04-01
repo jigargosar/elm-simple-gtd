@@ -81,35 +81,35 @@ updateTodoMaybe updater todoId m =
         )
 
 
-type alias TodoGroupViewModel =
-    { group : TodoGroup, name : String, todoList : TodoListModel, count : Int, isEmpty : Bool }
+type alias TodoContextViewModel =
+    { todoContext : TodoContext, name : String, todoList : TodoListModel, count : Int, isEmpty : Bool }
 
 
-getTodoGroupsViewModel : Model -> List TodoGroupViewModel
-getTodoGroupsViewModel =
+getTodoContextsViewModel : Model -> List TodoContextViewModel
+getTodoContextsViewModel =
     getTodoList
         >> Todo.rejectAnyPass [ Todo.isDeleted, Todo.isDone ]
-        >> Dict.Extra.groupBy (Todo.getGroup >> toString)
+        >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
         >> (\dict ->
-                Todo.getAllTodoGroups
+                Todo.getAllTodoContexts
                     .|> toViewModel dict
            )
 
 
-toViewModel : Dict String TodoListModel -> TodoGroup -> TodoGroupViewModel
+toViewModel : Dict String TodoListModel -> TodoContext -> TodoContextViewModel
 toViewModel dict =
     apply3
         ( identity
-        , Todo.groupToName
+        , Todo.todoContextToName
         , (toString >> Dict.get # dict >> Maybe.withDefault [])
         )
         >> toViewModelHelp
 
 
-toViewModelHelp ( group, name, list ) =
+toViewModelHelp ( todoContext, name, list ) =
     list
         |> apply3 ( identity, List.length, List.isEmpty )
-        >> uncurry3 (TodoGroupViewModel group name)
+        >> uncurry3 (TodoContextViewModel todoContext name)
 
 
 updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Maybe TodoModel, Model )

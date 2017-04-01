@@ -13,8 +13,8 @@ import TodoModel.Types exposing (..)
 
 
 type MainViewType
-    = AllByGroupView
-    | GroupView TodoGroup
+    = AllByTodoContextView
+    | TodoContextView TodoContext
     | DoneView
     | BinView
     | ProjectsView

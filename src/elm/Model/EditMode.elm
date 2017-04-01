@@ -69,6 +69,7 @@ getEditTodoModelForTodoHelp maybeETM todo =
         Maybe.andThen foo maybeETM
 
 
+getEditTodoModelForTodo : Model -> Todo -> Maybe EditTodoModel
 getEditTodoModelForTodo =
     getEditTodoModel >> getEditTodoModelForTodoHelp
 

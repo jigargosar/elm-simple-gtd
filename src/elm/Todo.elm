@@ -74,34 +74,6 @@ todoContextToName todoContext =
             "Reference"
 
 
-inbox =
-    Inbox
-
-
-someDayMayBe =
-    SomeDayMayBe
-
-
-waitingFor =
-    WaitingFor
-
-
-project =
-    Project
-
-
-calender =
-    Calender
-
-
-nextAction =
-    NextAction
-
-
-reference =
-    Reference
-
-
 todoConstructor id rev createdAt modifiedAt done text dueAt deleted context projectId =
     { id = id
     , rev = rev

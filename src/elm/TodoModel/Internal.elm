@@ -39,11 +39,17 @@ set field model =
         TodoDoneField done ->
             { model | done = done }
 
+        TodoDeletedField deleted ->
+            { model | deleted = deleted }
+
         TodoTextField text ->
             { model | text = text }
 
-        _ ->
-            model
+        TodoContextField context ->
+            { model | context = context }
+
+        TodoProjectIdField projectId ->
+            { model | projectId = projectId }
 
 
 update : (Model -> ModelField) -> ModelF
@@ -55,7 +61,7 @@ updateFields : List (Model -> ModelField) -> ModelF
 updateFields fields =
     List.foldl update # fields
 
+
 setFields : List ModelField -> ModelF
 setFields fields =
     List.foldl set # fields
-

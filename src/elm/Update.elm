@@ -63,7 +63,7 @@ update msg =
                 setTodoFields [ TodoDoneField bool ] id
 
             SetTodoContext todoContext id ->
-                withNow (OnActionWithNow (Update (SetTodoContextUA todoContext) id))
+                setTodoFields [ TodoContextField todoContext ] id
 
             SetText text id ->
                 withNow (OnActionWithNow (Update (SetTextUA text) id))

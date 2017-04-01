@@ -229,12 +229,16 @@ getOrCreateAndPersistProject editTodoModel =
             in
                 case maybeProject of
                     Nothing ->
-                        Model.ProjectList.addNewProject projectName (Model.getNow m) m
-                            |> apply2 ( identity, Tuple.first >> upsertProjectCmd )
+                        createAndSaveProject projectName m
 
                     Just project ->
                         Return.singleton ( project, m )
         )
+
+
+createAndSaveProject projectName m =
+    Model.ProjectList.addNewProject projectName (Model.getNow m) m
+        |> apply2 ( identity, Tuple.first >> upsertProjectCmd )
 
 
 updateTodoFromEditTodoModel editTodoModel ( project, m ) =

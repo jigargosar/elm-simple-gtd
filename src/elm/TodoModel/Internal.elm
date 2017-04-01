@@ -36,10 +36,10 @@ updateDeleted updater model =
 set : ModelField -> ModelF
 set field model =
     case field of
-        DoneField done ->
+        TodoDoneField done ->
             { model | done = done }
 
-        TextField text ->
+        TodoTextField text ->
             { model | text = text }
 
         _ ->
@@ -55,7 +55,7 @@ updateFields : List (Model -> ModelField) -> ModelF
 updateFields fields =
     List.foldl update # fields
 
-
 setFields : List ModelField -> ModelF
 setFields fields =
     List.foldl set # fields
+

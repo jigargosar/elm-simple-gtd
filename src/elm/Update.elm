@@ -235,8 +235,8 @@ updateTodoFromEditTodoModel editTodoModel ( project, m ) =
     let
         updateTodoMsg =
             Msg.UpdateTodoFields
-                [ TodoModel.Types.TextField editTodoModel.todoText
-                , TodoModel.Types.ProjectIdField (project |> Project.getId >> Just)
+                [ TodoTextField editTodoModel.todoText
+                , TodoProjectIdField (project |> Project.getId >> Just)
                 ]
                 editTodoModel.todo
     in

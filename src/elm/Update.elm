@@ -196,12 +196,12 @@ activateEditNewTodoMode text =
 saveAndDeactivateEditingTodo : ReturnF
 saveAndDeactivateEditingTodo =
     returnAndThenMaybe (Model.EditModel.getEditTodoModel >> Maybe.map saveEditingTodo)
-        >> deactivateEditingMode
 
 
 saveEditingTodo editTodoModel =
     Return.andThen (getOrCreateAndPersistProject editTodoModel)
         >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
+        >> deactivateEditingMode
 
 
 returnAndThenMaybe : (Model -> Maybe ReturnF) -> ReturnF

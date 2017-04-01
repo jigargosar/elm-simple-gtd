@@ -105,15 +105,16 @@ todoDecoder =
         |> todoRecordDecoder
 
 
+contextDecoder : Decoder TodoContext
 contextDecoder =
     let
-        stringToContext string =
+        createContext string =
             getAllTodoContexts
                 |> Dict.fromListBy toString
                 |> Dict.get string
                 ?= Inbox
     in
-        D.map stringToContext D.string
+        D.string |> D.map createContext
 
 
 copyTodo createdAt todo id =

@@ -93,7 +93,7 @@ todoRecordDecoder =
         >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         >> D.optional "deleted" D.bool defaultDeleted
-        >> D.optional "context" (D.map stringToContext D.string) Inbox
+        >> D.optional "context" contextDecoder Inbox
         >> D.optional "projectId" (D.nullable D.string) Nothing
 
 
@@ -105,13 +105,15 @@ todoDecoder =
         |> todoRecordDecoder
 
 
-contextEncodings =
-    getAllTodoContexts
-        |> Dict.fromListBy toString
-
-
-stringToContext string =
-    contextEncodings |> Dict.get string ?= Inbox
+contextDecoder =
+    let
+        stringToContext string =
+            getAllTodoContexts
+                |> Dict.fromListBy toString
+                |> Dict.get string
+                ?= Inbox
+    in
+        D.map stringToContext D.string
 
 
 copyTodo createdAt todo id =

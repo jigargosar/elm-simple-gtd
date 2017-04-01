@@ -9,6 +9,7 @@ import Maybe.Extra as Maybe
 import PouchDB
 import RandomIdGenerator
 import Random.Pcg as Random exposing (Seed)
+import TodoModel.Internal as Internal exposing (..)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import FunctionExtra exposing (..)
@@ -21,6 +22,17 @@ import Dict.Extra as Dict
 import Time exposing (Time)
 import Project exposing (ProjectId)
 import TodoModel.Types exposing (..)
+
+
+---
+
+
+getDeleted__ =
+    Internal.getDeleted
+
+
+
+---
 
 
 defaultDueAt =
@@ -133,7 +145,7 @@ encodeTodo todo =
         , "done" => E.bool (isDone todo)
         , "text" => E.string (getText todo)
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
-        , "deleted" => E.bool (isDeleted todo)
+        , "deleted" => E.bool (getDeleted todo)
         , "context" => E.string (getTodoContext todo |> toString)
         , "projectId" => (todo |> getProjectId >> Maybe.unwrap E.null E.string)
         , "createdAt" => E.int (todo.createdAt |> round)
@@ -193,32 +205,9 @@ getRev =
     (.rev)
 
 
-type alias Model =
-    TodoModel
-
-
-type alias ModelF =
-    Model -> Model
-
-
-isDeleted : Model -> Bool
-isDeleted =
-    (.deleted)
-
-
-setDeleted : Bool -> ModelF
-setDeleted deleted model =
-    { model | deleted = deleted }
-
-
-updateDeleted : (Model -> Bool) -> ModelF
-updateDeleted updater model =
-    setDeleted (updater model) model
-
-
 toggleDeleted : ModelF
 toggleDeleted =
-    updateDeleted (isDeleted >> not)
+    updateDeleted (getDeleted >> not)
 
 
 setText text todo =
@@ -348,11 +337,11 @@ rejectMap filter mapper =
 
 
 mapAllExceptDeleted =
-    rejectMap isDeleted
+    rejectMap getDeleted
 
 
 isNotDeleted =
-    isDeleted >> not
+    getDeleted >> not
 
 
 inboxFilter =
@@ -360,7 +349,7 @@ inboxFilter =
 
 
 binFilter =
-    toAllPassPredicate [ isDeleted ]
+    toAllPassPredicate [ getDeleted ]
 
 
 filterAllPass =

@@ -233,14 +233,6 @@ returnMaybeAndThen f1 f2 =
         )
 
 
-returnMaybeAndThen2 : (Model -> Maybe x) -> (x -> ReturnF) -> ReturnF
-returnMaybeAndThen2 f1 f2 =
-    Return.andThen
-        (\m ->
-            f1 m ?|> f2 ?= identity |> (\rf -> Return.singleton m |> rf)
-        )
-
-
 getOrCreateAndPersistProject : EditTodoModel -> Return -> ReturnTuple Project
 getOrCreateAndPersistProject editTodoModel =
     Return.andThen

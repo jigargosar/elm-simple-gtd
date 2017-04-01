@@ -193,28 +193,6 @@ activateEditNewTodoMode text =
     Return.map (Model.EditModel.activateNewTodoMode text)
 
 
-
---saveAndDeactivateEditingTodo : ReturnF
---saveAndDeactivateEditingTodo =
---    returnAndThenMaybe
---        (getEditTodoModel
---            >> Maybe.map
---                (\editTodoModel ->
---                    getOrCreateAndPersistProject editTodoModel
---                        >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
---                        >> deactivateEditingMode
---                )
---        )
---returnAndThenMaybe : (Model -> Maybe ReturnF) -> ReturnF
---returnAndThenMaybe fun ( model, cmd ) =
---    case fun model of
---        Just returnF ->
---            returnF ( model, cmd )
---
---        Nothing ->
---            ( model, cmd )
-
-
 saveAndDeactivateEditingTodo : ReturnF
 saveAndDeactivateEditingTodo =
     returnMaybeAndThen getEditTodoModel
@@ -258,38 +236,6 @@ getOrCreateAndPersistProject editTodoModel =
 createAndSaveProject projectName =
     Return.map (Model.ProjectList.addNewProject projectName)
         >> Return.effect_ (Tuple.first >> upsertProjectCmd)
-
-
-saveAndDeactivateEditingTodo2 : Model -> Return
-saveAndDeactivateEditingTodo2 model =
-    let
-        updateAndGetMaybeTodo editTodoModel project =
-            Model.TodoList.updateAndGetMaybeTodo
-                [ TodoTextField editTodoModel.todoText
-                , TodoProjectIdField (project |> Project.getId >> Just)
-                ]
-                (Todo.getId editTodoModel.todo)
-                model
-
-        getProject editTodoModel =
-            getProjectFromEditTodoModel editTodoModel model ?|> (,) editTodoModel
-
-        getUpdatedTodo ( editTodoModel, project ) =
-            updateAndGetMaybeTodo editTodoModel project ?|> (,,) editTodoModel project
-
-        saveTodoAndProject ( editTodoModel, project, todo ) =
-            Model.TodoList.upsertTodo todo model ! [ upsertTodoCmd todo ]
-    in
-        model
-            |> getEditTodoModel
-            ?+> getProject
-            ?+> getUpdatedTodo
-            ?|> saveTodoAndProject
-            ?= (model ! [])
-
-
-getProjectFromEditTodoModel { projectName } =
-    getProjectByName projectName
 
 
 updateTodoFromEditTodoModel editTodoModel ( project, m ) =

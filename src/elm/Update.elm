@@ -101,7 +101,7 @@ update msg =
                         identity
 
             StartEditingTodo todo ->
-                Return.map (Model.EditMode.activateEditTodoMode todo)
+                Return.map (Model.EditMode.startEditingTodo todo)
                     >> autoFocusPaperInputCmd
 
             EditTodoTextChanged etm text ->

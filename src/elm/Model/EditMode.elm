@@ -18,9 +18,20 @@ activateEditNewTodoMode text =
     setEditMode (EditNewTodoMode text)
 
 
-activateEditTodoMode : Todo -> ModelF
-activateEditTodoMode todo =
-    updateEditMode (createEditTodoMode todo)
+startEditingTodo : Todo -> ModelF
+startEditingTodo todo =
+    updateEditMode (createEditTodoModel todo >> EditTodoMode)
+
+
+createEditTodoModel : Todo -> Model -> EditTodoModel
+createEditTodoModel todo model =
+    todo
+        |> apply3
+            ( identity
+            , Todo.getText
+            , getProjectNameOfTodo # model
+            )
+        >> uncurry3 EditTodoModel
 
 
 updateEditTodoText : String -> ModelF
@@ -41,6 +52,7 @@ getEditTodoModel model =
 
         _ ->
             Nothing
+
 
 getEditNewTodoModel model =
     case getEditMode model of
@@ -64,18 +76,6 @@ updateEditTodoProjectName projectName m =
 
 deactivateEditingMode =
     setEditMode NotEditing
-
-
-createEditTodoMode : Todo -> Model -> EditMode
-createEditTodoMode todo model =
-    todo
-        |> apply3
-            ( identity
-            , Todo.getText
-            , getProjectNameOfTodo # model
-            )
-        >> uncurry3 EditTodoModel
-        >> EditTodoMode
 
 
 getProjectOfTodo : Todo -> Model -> Maybe Project

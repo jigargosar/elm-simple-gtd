@@ -200,11 +200,17 @@ saveAndDeactivateEditingTodo =
         >> deactivateEditingMode
 
 
-returnAndThenMaybe : (Model -> Maybe Return) -> ReturnF
+saveAndDeactivateEditingTodo2 : ReturnF
+saveAndDeactivateEditingTodo2 =
+    returnAndThenMaybe (Model.EditModel.getEditTodoModel >> Maybe.map foo)
+        >> deactivateEditingMode
+
+
+returnAndThenMaybe : (Model -> Maybe ReturnF) -> ReturnF
 returnAndThenMaybe fun ( model, cmd ) =
     case fun model of
-        Just return ->
-            return
+        Just returnF ->
+            returnF ( model, cmd )
 
         Nothing ->
             ( model, cmd )

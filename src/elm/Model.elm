@@ -30,6 +30,11 @@ setMainViewType mainViewType model =
     { model | mainViewType = mainViewType }
 
 
+updateMainViewType : (Model -> MainViewType) -> ModelF
+updateMainViewType updater model =
+    setMainViewType (updater model) model
+
+
 getNow : Model -> Time
 getNow =
     (.now)
@@ -38,6 +43,11 @@ getNow =
 setNow : Time -> ModelF
 setNow now model =
     { model | now = now }
+
+
+updateNow : (Model -> Time) -> ModelF
+updateNow updater model =
+    setNow (updater model) model
 
 
 generate : Random.Generator a -> Model -> ( a, Model )

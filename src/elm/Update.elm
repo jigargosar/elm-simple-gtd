@@ -271,6 +271,34 @@ saveAndDeactivateEditingTodo2 model =
             ?= (model ! [])
 
 
+saveAndDeactivateEditingTodo3 : Model -> Return
+saveAndDeactivateEditingTodo3 model =
+    let
+        updateAndGetMaybeTodo editTodoModel project =
+            Model.TodoList.updateAndGetMaybeTodo
+                [ TodoTextField editTodoModel.todoText
+                , TodoProjectIdField (project |> Project.getId >> Just)
+                ]
+                (Todo.getId editTodoModel.todo)
+                model
+
+        getProject editTodoModel =
+            getProjectFromEditTodoModel editTodoModel model ?|> (,) editTodoModel
+
+        getUpdatedTodo ( editTodoModel, project ) =
+            updateAndGetMaybeTodo editTodoModel project ?|> (,,) editTodoModel project
+
+        saveTodoAndProject ( editTodoModel, project, todo ) =
+            Model.TodoList.upsertTodo todo model ! [ upsertTodoCmd todo ]
+    in
+        model
+            |> getEditTodoModel
+            ?+> getProject
+            ?+> getUpdatedTodo
+            ?|> saveTodoAndProject
+            ?= (model ! [])
+
+
 getProjectFromEditTodoModel { projectName } =
     getProjectByName projectName
 

@@ -59,19 +59,24 @@ getEditTodoModel model =
 
 getEditTodoModelForTodoHelp : Maybe EditTodoModel -> Todo -> Maybe EditTodoModel
 getEditTodoModelForTodoHelp maybeETM todo =
-    case maybeETM of
-        Just etm ->
+    let
+        foo etm =
             if Todo.equalById etm.todo todo then
                 Just etm
             else
                 Nothing
+    in
+        case maybeETM of
+            Just etm ->
+                foo etm
 
-        Nothing ->
-            Nothing
+            Nothing ->
+                Nothing
 
 
+getEditTodoModelForTodo =
+    getEditTodoModel >> getEditTodoModelForTodoHelp
 
-getEditTodoModelForTodo = getEditTodoModel >> getEditTodoModelForTodoHelp
 
 updateEditTodoProjectName : ProjectName -> ModelF
 updateEditTodoProjectName projectName m =

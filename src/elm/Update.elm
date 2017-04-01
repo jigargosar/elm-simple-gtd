@@ -195,15 +195,13 @@ activateEditNewTodoMode text =
 
 saveAndDeactivateEditingTodo : ReturnF
 saveAndDeactivateEditingTodo =
-    Return.map (apply2 ( Model.EditModel.getEditTodoModel >> Maybe.map foo, identity ))
-        >> Return.andThen blah
+    returnAndThenMaybe (Model.EditModel.getEditTodoModel >> Maybe.map saveEditingTodo)
         >> deactivateEditingMode
 
 
-saveAndDeactivateEditingTodo2 : ReturnF
-saveAndDeactivateEditingTodo2 =
-    returnAndThenMaybe (Model.EditModel.getEditTodoModel >> Maybe.map foo)
-        >> deactivateEditingMode
+saveEditingTodo editTodoModel =
+    Return.andThen (getOrCreateAndPersistProject editTodoModel)
+        >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
 
 
 returnAndThenMaybe : (Model -> Maybe ReturnF) -> ReturnF
@@ -214,21 +212,6 @@ returnAndThenMaybe fun ( model, cmd ) =
 
         Nothing ->
             ( model, cmd )
-
-
-blah : ( Maybe ReturnF, Model ) -> Return
-blah =
-    (\( maybeReturnF, m ) ->
-        --                       maybeReturnF ?|> Return.singleton m ?= Return.singleton m
-        maybeReturnF ?|> (\rf -> rf (Return.singleton m)) ?= (Return.singleton m)
-    )
-
-
-foo =
-    (\editTodoModel ->
-        Return.andThen (getOrCreateAndPersistProject editTodoModel)
-            >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
-    )
 
 
 getOrCreateAndPersistProject : EditTodoModel -> Model -> ( ( Project, Model ), Cmd Msg )

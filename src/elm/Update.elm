@@ -199,7 +199,7 @@ saveAndDeactivateEditingTodo =
         (getMaybeEditTodoModel
             >> Maybe.map
                 (\editTodoModel ->
-                    Return.andThen (getOrCreateAndPersistProject editTodoModel)
+                    getOrCreateAndPersistProject editTodoModel
                         >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
                         >> deactivateEditingMode
                 )
@@ -216,22 +216,25 @@ returnAndThenMaybe fun ( model, cmd ) =
             ( model, cmd )
 
 
-getOrCreateAndPersistProject : EditTodoModel -> Model -> ( ( Project, Model ), Cmd Msg )
-getOrCreateAndPersistProject editTodoModel m =
-    let
-        { projectName } =
-            editTodoModel
+getOrCreateAndPersistProject : EditTodoModel -> Return -> ReturnTuple Project
+getOrCreateAndPersistProject editTodoModel =
+    Return.andThen
+        (\m ->
+            let
+                { projectName } =
+                    editTodoModel
 
-        maybeProject =
-            Model.ProjectList.getProjectByName projectName m
-    in
-        case maybeProject of
-            Nothing ->
-                Model.ProjectList.addNewProject projectName (Model.getNow m) m
-                    |> apply2 ( identity, Tuple.first >> upsertProjectCmd )
+                maybeProject =
+                    Model.ProjectList.getProjectByName projectName m
+            in
+                case maybeProject of
+                    Nothing ->
+                        Model.ProjectList.addNewProject projectName (Model.getNow m) m
+                            |> apply2 ( identity, Tuple.first >> upsertProjectCmd )
 
-            Just project ->
-                Return.singleton ( project, m )
+                    Just project ->
+                        Return.singleton ( project, m )
+        )
 
 
 updateTodoFromEditTodoModel editTodoModel ( project, m ) =

@@ -112,6 +112,10 @@ toCmd =
 type alias Return =
     Return.Return Msg Model
 
+type alias ReturnTuple a =
+    Return.Return Msg (a, Model)
+
 
 type alias ReturnF =
     Return -> Return
+

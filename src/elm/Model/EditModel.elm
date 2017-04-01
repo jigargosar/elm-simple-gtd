@@ -47,7 +47,7 @@ updateEditTodoText text m =
                 identity
 
 
-getMaybeEditTodoModel model =
+getEditTodoModel model =
     case getEditModel model of
         EditTodo model ->
             Just model

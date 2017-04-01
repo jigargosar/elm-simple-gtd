@@ -3,7 +3,7 @@ port module Update exposing (..)
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import EditModel.Types exposing (..)
-import Model.EditModel exposing (getMaybeEditTodoModel)
+import Model.EditModel exposing (getEditTodoModel)
 import Model.ProjectList exposing (getProjectByName)
 import Model.RunningTodo
 import Model.TodoList
@@ -196,7 +196,7 @@ activateEditNewTodoMode text =
 saveAndDeactivateEditingTodo : ReturnF
 saveAndDeactivateEditingTodo =
     returnAndThenMaybe
-        (getMaybeEditTodoModel
+        (getEditTodoModel
             >> Maybe.map
                 (\editTodoModel ->
                     getOrCreateAndPersistProject editTodoModel
@@ -254,19 +254,19 @@ saveAndDeactivateEditingTodo2 model =
                 (Todo.getId editTodoModel.todo)
                 model
 
-        getMaybeProject editTodoModel =
+        getProject editTodoModel =
             getProjectFromEditTodoModel editTodoModel model ?|> (,) editTodoModel
 
-        getMaybeUpdatedTodo ( editTodoModel, project ) =
+        getUpdatedTodo ( editTodoModel, project ) =
             updateAndGetMaybeTodo editTodoModel project ?|> (,,) editTodoModel project
 
         saveTodoAndProject ( editTodoModel, project, todo ) =
             Model.TodoList.upsertTodo todo model ! [ upsertTodoCmd todo ]
     in
         model
-            |> getMaybeEditTodoModel
-            ?+> getMaybeProject
-            ?+> getMaybeUpdatedTodo
+            |> getEditTodoModel
+            ?+> getProject
+            ?+> getUpdatedTodo
             ?|> saveTodoAndProject
             ?= (model ! [])
 

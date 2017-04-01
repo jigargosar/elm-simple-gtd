@@ -75,7 +75,7 @@ keyedTodoView vc todo =
 
 
 getMaybeEditTodoView vc todo =
-    Model.EditModel.getMaybeEditTodoModel vc.model
+    Model.EditModel.getEditTodoModel vc.model
         ?+> (\etm ->
                 if Todo.equalById todo etm.todo then
                     Just (View.Todo.todoViewEditing vc etm)

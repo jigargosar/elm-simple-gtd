@@ -55,7 +55,7 @@ init : Flags -> Return
 init { now, encodedTodoList, encodedProjectList } =
     { now = now
     , todoList = Todo.decodeTodoList encodedTodoList
-    , editMode = NotEditing
+    , editMode = None
     , mainViewType = defaultViewType
     , seed = Random.seedFromTime now
     , runningTodoDetails = RunningTodoDetails.init

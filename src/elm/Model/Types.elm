@@ -27,9 +27,9 @@ type alias EditTodoModel =
 
 
 type EditMode
-    = EditNewTodoMode String
-    | EditTodoMode EditTodoModel
-    | NotEditing
+    = NewTodo String
+    | EditTodo EditTodoModel
+    | None
 
 
 type alias Model =

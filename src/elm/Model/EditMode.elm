@@ -13,14 +13,14 @@ import Msg exposing (..)
 import Model.Types exposing (..)
 
 
-activateEditNewTodoMode : String -> ModelF
-activateEditNewTodoMode text =
-    setEditMode (EditNewTodoMode text)
+activateNewTodoMode : String -> ModelF
+activateNewTodoMode text =
+    setEditMode (NewTodo text)
 
 
-startEditingTodo : Todo -> ModelF
-startEditingTodo todo =
-    updateEditMode (createEditTodoModel todo >> EditTodoMode)
+setEditModeToEditTodo : Todo -> ModelF
+setEditModeToEditTodo todo =
+    updateEditMode (createEditTodoModel todo >> EditTodo)
 
 
 createEditTodoModel : Todo -> Model -> EditTodoModel
@@ -38,8 +38,8 @@ updateEditTodoText : String -> ModelF
 updateEditTodoText text m =
     m
         |> case getEditMode m of
-            EditTodoMode model ->
-                setEditMode (EditTodoMode ({ model | todoText = text }))
+            EditTodo model ->
+                setEditMode (EditTodo ({ model | todoText = text }))
 
             _ ->
                 identity
@@ -47,7 +47,7 @@ updateEditTodoText text m =
 
 getEditTodoModel model =
     case getEditMode model of
-        EditTodoMode model ->
+        EditTodo model ->
             Just model
 
         _ ->
@@ -56,7 +56,7 @@ getEditTodoModel model =
 
 getEditNewTodoModel model =
     case getEditMode model of
-        EditNewTodoMode model ->
+        NewTodo model ->
             Just model
 
         _ ->
@@ -67,15 +67,15 @@ updateEditTodoProjectName : ProjectName -> ModelF
 updateEditTodoProjectName projectName m =
     m
         |> case getEditMode m of
-            EditTodoMode model ->
-                setEditMode (EditTodoMode ({ model | projectName = projectName }))
+            EditTodo model ->
+                setEditMode (EditTodo ({ model | projectName = projectName }))
 
             _ ->
                 identity
 
 
 deactivateEditingMode =
-    setEditMode NotEditing
+    setEditMode None
 
 
 getProjectOfTodo : Todo -> Model -> Maybe Project

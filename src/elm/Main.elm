@@ -47,7 +47,7 @@ main =
         , init = init
         , update = Update.update
         , view = appView
-        , subscriptions = \m -> Sub.batch [ Time.every Time.second (OnUpdateNow) ]
+        , subscriptions = \m -> Sub.batch [ Time.every Time.second (OnNowChanged) ]
         }
 
 

@@ -125,7 +125,7 @@ update msg =
             SetMainViewType viewType ->
                 Return.map (Model.setMainViewType viewType)
 
-            OnUpdateNow now ->
+            OnNowChanged now ->
                 onUpdateNow now
 
             OnMsgList messages ->

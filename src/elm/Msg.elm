@@ -114,7 +114,7 @@ type Msg
     | EditTodoProjectNameChanged EditTodoModel ProjectName
     | EditTodoKeyUp Todo KeyboardEvent
     | SetMainViewType MainViewType
-    | OnUpdateNow Time
+    | OnNowChanged Time
     | OnMsgList (List Msg)
     | UpdateTodoFields (List TodoField) Todo
 

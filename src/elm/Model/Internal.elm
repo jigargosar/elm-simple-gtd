@@ -20,3 +20,17 @@ setSeed seed model =
 updateSeed : (Model -> Seed) -> ModelF
 updateSeed updater model =
     setSeed (updater model) model
+
+getEditMode : Model -> EditMode
+getEditMode =
+    (.editMode)
+
+
+setEditMode : EditMode -> ModelF
+setEditMode editMode model =
+    { model | editMode = editMode }
+
+
+updateEditMode : (Model -> EditMode) -> ModelF
+updateEditMode updater model =
+    setEditMode (updater model) model

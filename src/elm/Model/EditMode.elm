@@ -1,6 +1,7 @@
 module Model.EditMode exposing (..)
 
 import Maybe.Extra as Maybe
+import Model.Internal exposing (..)
 import Model.ProjectList
 import Project exposing (Project, ProjectName)
 import Todo exposing (Todo)
@@ -15,21 +16,6 @@ import Model.Types exposing (..)
 activateEditNewTodoMode : String -> ModelF
 activateEditNewTodoMode text =
     setEditMode (EditNewTodoMode text)
-
-
-getEditMode : Model -> EditMode
-getEditMode =
-    (.editMode)
-
-
-setEditMode : EditMode -> ModelF
-setEditMode editMode model =
-    { model | editMode = editMode }
-
-
-updateEditMode : (Model -> EditMode) -> ModelF
-updateEditMode updater model =
-    setEditMode (updater model) model
 
 
 activateEditTodoMode : Todo -> ModelF
@@ -51,6 +37,14 @@ updateEditTodoText text m =
 getEditTodoModel model =
     case getEditMode model of
         EditTodoMode model ->
+            Just model
+
+        _ ->
+            Nothing
+
+getEditNewTodoModel model =
+    case getEditMode model of
+        EditNewTodoMode model ->
             Just model
 
         _ ->

@@ -61,7 +61,7 @@ appHeaderView m =
         [ App.toolbar
             []
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-            , newTodoInputView (Model.EditMode.getEditMode m)
+            , newTodoInputView (Model.EditMode.getEditNewTodoModel m)
             ]
           --        , runningTodoView m
         ]
@@ -114,9 +114,9 @@ newTodoInputId =
     "new-todo-input"
 
 
-newTodoInputView editMode =
-    case editMode of
-        EditNewTodoMode text ->
+newTodoInputView maybeNewTodoModel =
+    case maybeNewTodoModel of
+        Just text ->
             input
                 [ id newTodoInputId
                 , class "auto-focus"
@@ -127,7 +127,7 @@ newTodoInputView editMode =
                 ]
                 []
 
-        _ ->
+        Nothing ->
             span [] []
 
 

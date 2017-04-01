@@ -88,7 +88,7 @@ type alias TodoContextViewModel =
 getTodoContextsViewModel : Model -> List TodoContextViewModel
 getTodoContextsViewModel =
     getTodoList
-        >> Todo.rejectAnyPass [ Todo.getDeleted__, Todo.isDone ]
+        >> Todo.rejectAnyPass [ Todo.getDeleted, Todo.isDone ]
         >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
         >> (\dict ->
                 Todo.getAllTodoContexts

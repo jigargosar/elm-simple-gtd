@@ -24,15 +24,20 @@ import Project exposing (ProjectId)
 import TodoModel.Types exposing (..)
 
 
----
+getDeleted =
+    Internal.getDeleted
 
 
-getDeleted__ =
-    getDeleted
+defaultDueAt =
+    Nothing
 
 
+defaultDeleted =
+    False
 
----
+
+defaultDone =
+    False
 
 
 getAllTodoContexts =

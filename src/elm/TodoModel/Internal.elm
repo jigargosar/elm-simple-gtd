@@ -29,14 +29,3 @@ updateDeleted updater model =
     setDeleted (updater model) model
 
 
-defaultDueAt =
-    Nothing
-
-
-defaultDeleted =
-    False
-
-
-defaultDone =
-    False
-

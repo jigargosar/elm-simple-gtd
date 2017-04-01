@@ -227,12 +227,14 @@ getOrCreateAndPersistProject editTodoModel =
                 maybeProject =
                     Model.ProjectList.getProjectByName projectName m
             in
-                case maybeProject of
-                    Nothing ->
-                        createAndSaveProject projectName (Return.singleton m)
+                m
+                    |> Return.singleton
+                    >> case maybeProject of
+                        Nothing ->
+                            createAndSaveProject projectName
 
-                    Just project ->
-                        Return.singleton ( project, m )
+                        Just project ->
+                            Return.map ((,) project)
         )
 
 

@@ -26,8 +26,8 @@ getMainViewType =
 
 
 setMainViewType : MainViewType -> ModelF
-setMainViewType mainViewType model =
-    { model | mainViewType = mainViewType }
+setMainViewType =
+    MainViewTypeField >> set
 
 
 updateMainViewType : (Model -> MainViewType) -> ModelF

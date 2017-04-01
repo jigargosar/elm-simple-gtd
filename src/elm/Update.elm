@@ -148,11 +148,6 @@ updateMaybeTodoModifiedAt ( maybeTodo, m ) =
                 identity
 
 
-
---updateTodoModifiedAt (todo, m) =
---    m|> setTodo
-
-
 setTodoFieldsAndUpdateModifiedAt fields todoId =
     Return.andThen
         (Model.TodoList.updateTodoWithFields fields todoId

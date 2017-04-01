@@ -21,16 +21,16 @@ updateSeed : (Model -> Seed) -> ModelF
 updateSeed updater model =
     setSeed (updater model) model
 
-getEditMode : Model -> EditMode
-getEditMode =
-    (.editMode)
+getEditState : Model -> EditState
+getEditState =
+    (.editState)
 
 
-setEditMode : EditMode -> ModelF
-setEditMode editMode model =
-    { model | editMode = editMode }
+setEditState : EditState -> ModelF
+setEditState editState model =
+    { model | editState = editState }
 
 
-updateEditMode : (Model -> EditMode) -> ModelF
-updateEditMode updater model =
-    setEditMode (updater model) model
+updateEditState : (Model -> EditState) -> ModelF
+updateEditState updater model =
+    setEditState (updater model) model

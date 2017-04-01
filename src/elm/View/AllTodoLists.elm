@@ -5,7 +5,7 @@ import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
-import Model.EditMode
+import Model.EditState
 import Model.ProjectList
 import Model.TodoList exposing (TodoGroupViewModel)
 import Msg exposing (..)
@@ -74,7 +74,7 @@ keyedTodoView vc todo =
 
 
 getMaybeEditTodoView vc todo =
-    Model.EditMode.getEditTodoModel vc.model
+    Model.EditState.getEditTodoModel vc.model
         ?+> (\etm ->
                 if Todo.equalById todo etm.todo then
                     Just (View.Todo.todoViewEditing vc etm)

@@ -7,7 +7,7 @@ import Html.Attributes exposing (attribute, autofocus, class, classList, id, sty
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
 import Model
-import Model.EditMode
+import Model.EditState
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (..)
 import View.AllTodoLists exposing (..)
@@ -61,7 +61,7 @@ appHeaderView m =
         [ App.toolbar
             []
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-            , newTodoInputView (Model.EditMode.getEditNewTodoModel m)
+            , newTodoInputView (Model.EditState.getEditNewTodoModel m)
             ]
           --        , runningTodoView m
         ]

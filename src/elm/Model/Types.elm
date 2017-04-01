@@ -9,7 +9,6 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Time exposing (Time)
 
-
 type MainViewType
     = AllByGroupView
     | GroupView TodoGroup
@@ -26,7 +25,7 @@ type alias EditTodoModel =
     { todo : Todo, todoText : String, projectName : ProjectName }
 
 
-type EditMode
+type EditState
     = NewTodo String
     | EditTodo EditTodoModel
     | None
@@ -35,7 +34,7 @@ type EditMode
 type alias Model =
     { now : Time
     , todoList : TodoList
-    , editMode : EditMode
+    , editState : EditState
     , mainViewType : MainViewType
     , seed : Seed
     , runningTodoDetails : Maybe RunningTodoDetails
@@ -45,3 +44,4 @@ type alias Model =
 
 type alias ModelF =
     Model -> Model
+

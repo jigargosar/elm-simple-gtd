@@ -1,4 +1,4 @@
-module Model.EditMode exposing (..)
+module Model.EditState exposing (..)
 
 import Maybe.Extra as Maybe
 import Model.Internal exposing (..)
@@ -15,12 +15,12 @@ import Model.Types exposing (..)
 
 activateNewTodoMode : String -> ModelF
 activateNewTodoMode text =
-    setEditMode (NewTodo text)
+    setEditState (NewTodo text)
 
 
-setEditModeToEditTodo : Todo -> ModelF
-setEditModeToEditTodo todo =
-    updateEditMode (createEditTodoModel todo >> EditTodo)
+setEditStateToEditTodo : Todo -> ModelF
+setEditStateToEditTodo todo =
+    updateEditState (createEditTodoModel todo >> EditTodo)
 
 
 createEditTodoModel : Todo -> Model -> EditTodoModel
@@ -37,16 +37,16 @@ createEditTodoModel todo model =
 updateEditTodoText : String -> ModelF
 updateEditTodoText text m =
     m
-        |> case getEditMode m of
+        |> case getEditState m of
             EditTodo model ->
-                setEditMode (EditTodo ({ model | todoText = text }))
+                setEditState (EditTodo ({ model | todoText = text }))
 
             _ ->
                 identity
 
 
 getEditTodoModel model =
-    case getEditMode model of
+    case getEditState model of
         EditTodo model ->
             Just model
 
@@ -55,7 +55,7 @@ getEditTodoModel model =
 
 
 getEditNewTodoModel model =
-    case getEditMode model of
+    case getEditState model of
         NewTodo model ->
             Just model
 
@@ -66,16 +66,16 @@ getEditNewTodoModel model =
 updateEditTodoProjectName : ProjectName -> ModelF
 updateEditTodoProjectName projectName m =
     m
-        |> case getEditMode m of
+        |> case getEditState m of
             EditTodo model ->
-                setEditMode (EditTodo ({ model | projectName = projectName }))
+                setEditState (EditTodo ({ model | projectName = projectName }))
 
             _ ->
                 identity
 
 
 deactivateEditingMode =
-    setEditMode None
+    setEditState None
 
 
 getProjectOfTodo : Todo -> Model -> Maybe Project

@@ -1,7 +1,7 @@
 port module Main exposing (..)
 
 import Dom
-import Model.EditMode
+import Model.EditState
 import Model.ProjectList
 import Model.RunningTodo
 import Project exposing (EncodedProjectList)
@@ -55,7 +55,7 @@ init : Flags -> Return
 init { now, encodedTodoList, encodedProjectList } =
     { now = now
     , todoList = Todo.decodeTodoList encodedTodoList
-    , editMode = None
+    , editState = None
     , mainViewType = defaultViewType
     , seed = Random.seedFromTime now
     , runningTodoDetails = RunningTodoDetails.init

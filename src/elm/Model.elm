@@ -50,6 +50,21 @@ updateNow updater model =
     { model | now = updater model }
 
 
+set : ModelField -> ModelF
+set field model =
+    case field of
+        NowField now ->
+            { model | now = now }
+
+        MainViewTypeField mainViewType ->
+            { model | mainViewType = mainViewType }
+
+
+update : (Model -> ModelField) -> ModelF
+update updater model =
+    set (updater model) model
+
+
 generate : Random.Generator a -> Model -> ( a, Model )
 generate generator m =
     Random.step generator (m.seed)

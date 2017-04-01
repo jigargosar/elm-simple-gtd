@@ -10,14 +10,13 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Time exposing (Time)
 
+
 type MainViewType
     = AllByGroupView
     | GroupView TodoGroup
     | DoneView
     | BinView
     | ProjectsView
-
-
 
 
 type alias Model =
@@ -31,6 +30,10 @@ type alias Model =
     }
 
 
+type ModelField
+    = NowField Time
+    | MainViewTypeField MainViewType
+
+
 type alias ModelF =
     Model -> Model
-

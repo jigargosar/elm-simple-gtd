@@ -149,10 +149,8 @@ updateMaybeTodoModifiedAt ( maybeTodo, m ) =
 
 
 updateTodoFieldsAndModifiedAt fields todoId =
-    Return.andThen
-        (Model.TodoList.updateTodoWithFields fields todoId
-            >> updateMaybeTodoModifiedAt
-        )
+    Return.map (Model.TodoList.updateTodoWithFields fields todoId)
+        >> Return.andThen updateMaybeTodoModifiedAt
 
 
 onMsgList : List Msg -> ReturnF
@@ -198,7 +196,7 @@ saveAndDeactivateEditingTodo =
     returnMaybeAndThen getEditTodoModel
         (\editTodoModel ->
             getOrCreateAndPersistProject editTodoModel
-                >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
+                >> updateTodoFromEditTodoModel editTodoModel
                 >> deactivateEditingMode
         )
 
@@ -238,13 +236,16 @@ createAndSaveProject projectName =
         >> Return.effect_ (Tuple.first >> upsertProjectCmd)
 
 
-updateTodoFromEditTodoModel editTodoModel ( project, m ) =
-    updateTodoFieldsAndModifiedAt
-        [ TodoTextField editTodoModel.todoText
-        , TodoProjectIdField (project |> Project.getId >> Just)
-        ]
-        (Todo.getId editTodoModel.todo)
-        (Return.singleton m)
+updateTodoFromEditTodoModel editTodoModel =
+    Return.andThen
+        (\( project, m ) ->
+            updateTodoFieldsAndModifiedAt
+                [ TodoTextField editTodoModel.todoText
+                , TodoProjectIdField (project |> Project.getId >> Just)
+                ]
+                (Todo.getId editTodoModel.todo)
+                (Return.singleton m)
+        )
 
 
 onWithNow : RequiresNowAction -> Time -> ReturnF

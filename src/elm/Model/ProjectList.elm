@@ -8,7 +8,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Project exposing (Project, ProjectId, ProjectList, ProjectName)
-import Types exposing (Model, ModelF)
+import Model.Types exposing (..)
 
 
 getEncodedProjectNames =

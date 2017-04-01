@@ -9,7 +9,7 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 import Msg exposing (..)
-import Types exposing (EditMode(..), EditTodoModel, Model, ModelF)
+import Model.Types exposing (..)
 
 
 activateEditNewTodoMode : String -> ModelF

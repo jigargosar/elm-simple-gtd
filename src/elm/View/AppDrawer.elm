@@ -24,7 +24,7 @@ import Polymer.Paper exposing (..)
 import Polymer.App as App
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import Types exposing (MainViewType(..))
+import Model.Types exposing (..)
 
 
 appDrawerView m =

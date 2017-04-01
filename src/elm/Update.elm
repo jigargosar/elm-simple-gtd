@@ -30,7 +30,8 @@ import Function exposing ((>>>))
 import Html
 import Msg exposing (..)
 import RunningTodoDetails
-import Types exposing (EditTodoModel, Model)
+import Model.Types exposing (..)
+import Types
 
 
 update : Msg -> Model -> Return

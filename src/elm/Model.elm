@@ -14,7 +14,8 @@ import Todo as Todo exposing (TodoGroup, Todo, TodoId)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-import Types exposing (MainViewType, Model, ModelF)
+import Model.Types exposing (..)
+import Types exposing (..)
 
 
 getMainViewType : Model -> MainViewType

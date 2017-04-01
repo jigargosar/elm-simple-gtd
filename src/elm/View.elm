@@ -23,7 +23,7 @@ import DecodeExtra exposing (traceDecoder)
 import Json.Decode
 import Json.Encode
 import List.Extra as List
-import Types exposing (EditMode(..), MainViewType(..), Model)
+import Model.Types exposing (..)
 import Todo exposing (Todo, TodoId)
 import Polymer.Paper exposing (..)
 import Polymer.App as App

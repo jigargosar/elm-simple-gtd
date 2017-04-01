@@ -9,7 +9,8 @@ import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Types exposing (MainViewType(..), Model, ModelF, TodoField)
+import Model.Types exposing (..)
+import Types exposing (TodoField)
 
 
 getTodoList : Model -> TodoList

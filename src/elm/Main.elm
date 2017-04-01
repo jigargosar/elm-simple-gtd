@@ -12,7 +12,7 @@ import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model
 import Routes
-import Types exposing (EditMode(..))
+import Model.Types exposing (..)
 import View exposing (appView)
 import Navigation exposing (Location)
 import Return
@@ -39,7 +39,7 @@ type alias Flags =
     }
 
 
-main : RouteUrlProgram Flags Types.Model Msg
+main : RouteUrlProgram Flags Model Msg
 main =
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash
@@ -56,7 +56,7 @@ init { now, encodedTodoList, encodedProjectList } =
     { now = now
     , todoList = Todo.decodeTodoList encodedTodoList
     , editMode = NotEditing
-    , mainViewType = Types.defaultViewType
+    , mainViewType = defaultViewType
     , seed = Random.seedFromTime now
     , runningTodoDetails = RunningTodoDetails.init
     , projectList = Project.decodeProjectList encodedProjectList

@@ -3,6 +3,7 @@ module Msg exposing (..)
 import Dom
 import Ext.Cmd
 import KeyboardExtra exposing (KeyboardEvent)
+import Model.Types exposing (..)
 import Project exposing (ProjectName)
 import Return
 import RunningTodoDetails exposing (RunningTodoDetails)
@@ -13,7 +14,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import Types exposing (EditTodoModel, MainViewType, Model, TodoField)
+import Types exposing (..)
 
 
 type UpdateAction

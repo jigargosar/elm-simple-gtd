@@ -4,7 +4,7 @@ import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Types exposing (Model, ModelF)
+import Model.Types exposing (..)
 
 
 getSeed : Model -> Seed

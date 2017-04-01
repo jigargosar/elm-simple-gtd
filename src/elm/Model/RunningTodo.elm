@@ -9,7 +9,7 @@ import Todo exposing (Todo)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import Types exposing (Model, ModelF)
+import Model.Types exposing (..)
 
 
 getRunningTodoViewModel : Model -> Maybe RunningTodoViewModel

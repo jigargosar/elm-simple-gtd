@@ -241,6 +241,7 @@ returnAndMapTupleFirst f =
     Return.andThen (\( x, m ) -> (f x) (Return.singleton m))
 
 
+updateTodoFromEditTodoModel : EditTodoModel -> ReturnTuple Project -> Return
 updateTodoFromEditTodoModel editTodoModel =
     returnAndMapTupleFirst
         (\project ->

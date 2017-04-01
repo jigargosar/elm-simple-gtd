@@ -4,7 +4,7 @@ import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import EditModel.Types exposing (..)
 import Model.EditModel exposing (getMaybeEditTodoModel)
-import Model.ProjectList
+import Model.ProjectList exposing (getProjectByName)
 import Model.RunningTodo
 import Model.TodoList
 import Project exposing (Project, ProjectId, ProjectName)
@@ -246,30 +246,28 @@ createAndSaveProject projectName =
 saveAndDeactivateEditingTodo2 : Model -> Return
 saveAndDeactivateEditingTodo2 model =
     let
+        defaultReturn =
+            model ! []
+
         foo editTodoModel =
             let
-                { projectName } =
-                    editTodoModel
-
-                getMaybeProject =
-                    Model.ProjectList.getProjectByName projectName model
-
                 maybeProject =
-                    getMaybeProject
+                    getProjectFromEditTodoModel editTodoModel model
 
                 zz editTodoModel =
                     getOrCreateAndPersistProject editTodoModel
                         >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
                         >> deactivateEditingMode
             in
-                model ! []
+                defaultReturn
     in
-        case getMaybeEditTodoModel model of
-            Nothing ->
-                model ! []
+        model
+            |> getMaybeEditTodoModel
+            |> Maybe.unwrap defaultReturn foo
 
-            Just editTodoModel ->
-                foo editTodoModel
+
+getProjectFromEditTodoModel { projectName } =
+    getProjectByName projectName
 
 
 updateTodoFromEditTodoModel editTodoModel ( project, m ) =

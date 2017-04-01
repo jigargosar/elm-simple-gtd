@@ -3,7 +3,7 @@ port module Update exposing (..)
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import EditModel.Types exposing (..)
-import Model.EditModel exposing (getEditTodoModel)
+import Model.EditModel exposing (getMaybeEditTodoModel)
 import Model.ProjectList exposing (getProjectByName)
 import Model.RunningTodo
 import Model.TodoList
@@ -193,7 +193,7 @@ activateEditNewTodoMode text =
 
 saveAndDeactivateEditingTodo : ReturnF
 saveAndDeactivateEditingTodo =
-    returnMaybeAndThen getEditTodoModel
+    returnAndMapMaybe getMaybeEditTodoModel
         (\editTodoModel ->
             getOrCreateAndPersistProject editTodoModel
                 >> updateTodoFromEditTodoModel editTodoModel
@@ -206,8 +206,8 @@ returnAndMapTupleFirst f =
     Return.andThen (\( x, m ) -> (f x) (Return.singleton m))
 
 
-returnMaybeAndThen : (Model -> Maybe x) -> (x -> ReturnF) -> ReturnF
-returnMaybeAndThen f1 f2 =
+returnAndMapMaybe : (Model -> Maybe x) -> (x -> ReturnF) -> ReturnF
+returnAndMapMaybe f1 f2 =
     Return.andThen
         (\m ->
             f1 m ?|> f2 ?= identity |> (\rf -> Return.singleton m |> rf)

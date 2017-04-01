@@ -200,6 +200,16 @@ saveAndDeactivateEditingTodo =
         >> deactivateEditingMode
 
 
+returnAndThenMaybe : (Model -> Maybe Return) -> ReturnF
+returnAndThenMaybe fun ( model, cmd ) =
+    case fun model of
+        Just return ->
+            return
+
+        Nothing ->
+            ( model, cmd )
+
+
 blah : ( Maybe ReturnF, Model ) -> Return
 blah =
     (\( maybeReturnF, m ) ->

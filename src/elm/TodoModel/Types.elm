@@ -36,10 +36,10 @@ type TodoGroup
 
 type alias TodoRecord =
     { done : Bool
-    , text : String
+    , text : TodoText
     , dueAt : Maybe Time
     , deleted : Bool
-    , listType : TodoGroup
+    , context : TodoGroup
     , projectId : Maybe ProjectId
     }
 

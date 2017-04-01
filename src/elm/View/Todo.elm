@@ -145,15 +145,15 @@ optionsIconButton vc todo =
         , menu
             [ class "dropdown-content"
             , attribute "attr-for-selected" "list-type"
-            , attribute "selected" (Todo.getListTypeName todo)
+            , attribute "selected" (Todo.getContextName todo)
             ]
             (Todo.getAllTodoGroups
-                .|> (\listType ->
+                .|> (\context ->
                         item
-                            [ attribute "list-type" (Todo.groupToName listType)
-                            , onClickStopPropagation (vc.onTodoMoveToClicked listType (Todo.getId todo))
+                            [ attribute "list-type" (Todo.groupToName context)
+                            , onClickStopPropagation (vc.onTodoMoveToClicked context (Todo.getId todo))
                             ]
-                            [ text (Todo.groupToName listType) ]
+                            [ text (Todo.groupToName context) ]
                     )
             )
         ]

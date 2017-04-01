@@ -47,7 +47,7 @@ getAllTodoGroups =
     ]
 
 
-getListTypeName =
+getContextName =
     getGroup >> groupToName
 
 
@@ -106,14 +106,14 @@ reference =
     Reference
 
 
-todoConstructor id rev createdAt modifiedAt done text dueAt deleted listType projectId =
+todoConstructor id rev createdAt modifiedAt done text dueAt deleted context projectId =
     { id = id
     , rev = rev
     , done = done
     , text = text
     , dueAt = dueAt
     , deleted = deleted
-    , listType = listType
+    , context = context
     , projectId = projectId
     , createdAt = createdAt
     , modifiedAt = modifiedAt
@@ -125,7 +125,7 @@ todoRecordDecoder =
         >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         >> D.optional "deleted" D.bool defaultDeleted
-        >> D.optional "listType" (D.map stringToListType D.string) Inbox
+        >> D.optional "context" (D.map stringToContext D.string) Inbox
         >> D.optional "projectId" (D.nullable D.string) Nothing
 
 
@@ -137,13 +137,13 @@ decoder =
         |> todoRecordDecoder
 
 
-listTypeEncodings =
+contextEncodings =
     getAllTodoGroups
         |> Dict.fromListBy toString
 
 
-stringToListType string =
-    listTypeEncodings |> Dict.get string ?= Inbox
+stringToContext string =
+    contextEncodings |> Dict.get string ?= Inbox
 
 
 copyTodo createdAt todo id =
@@ -159,7 +159,7 @@ encode todo =
         , "text" => E.string (getText todo)
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (isDeleted todo)
-        , "listType" => E.string (getGroup todo |> toString)
+        , "context" => E.string (getGroup todo |> toString)
         , "projectId" => (todo |> getProjectId >> Maybe.unwrap E.null E.string)
         , "createdAt" => E.int (todo.createdAt |> round)
         , "modifiedAt" => E.int (todo.modifiedAt |> round)
@@ -353,17 +353,17 @@ updateProjectId updater model =
 
 getGroup : Model -> TodoGroup
 getGroup =
-    (.listType)
+    (.context)
 
 
-setListType : TodoGroup -> ModelF
-setListType listType model =
-    { model | listType = listType }
+setContext : TodoGroup -> ModelF
+setContext context model =
+    { model | context = context }
 
 
-updateListType : (Model -> TodoGroup) -> ModelF
-updateListType updater model =
-    setListType (updater model) model
+updateContext : (Model -> TodoGroup) -> ModelF
+updateContext updater model =
+    setContext (updater model) model
 
 
 markDeleted : ModelF

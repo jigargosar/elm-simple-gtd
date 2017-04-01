@@ -69,10 +69,10 @@ doneItemView m =
 
 todoGroupsMenuItems =
     Model.TodoList.getTodoGroupsViewModel
-        >> List.map listTypeMenuItem
+        >> List.map contextMenuItem
 
 
-listTypeMenuItem vm =
+contextMenuItem vm =
     let
         badgeForId =
             "id-for-badge-" ++ vm.name
@@ -94,8 +94,8 @@ listTypeMenuItem vm =
             )
 
 
-addHoverItems listType =
-    case listType of
+addHoverItems context =
+    case context of
         --        Inbox ->
         --            [ iconButton
         --                [ class "hover-items"

@@ -334,7 +334,7 @@ updateTodo action todoId now =
         todoActionUpdater =
             case action of
                 SetGroupUA group ->
-                    Todo.setListType group
+                    Todo.setContext group
 
                 ToggleDoneUA ->
                     Todo.toggleDone

@@ -238,10 +238,6 @@ updateTodoFromEditTodoModel editTodoModel ( project, m ) =
         (Return.singleton m)
 
 
-andThenMapSecond fun toCmd =
-    Return.andThen (fun >> Tuple.mapSecond toCmd)
-
-
 onWithNow : RequiresNowAction -> Time -> ReturnF
 onWithNow action now =
     case action of

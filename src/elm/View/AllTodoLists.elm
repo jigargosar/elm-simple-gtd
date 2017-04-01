@@ -37,7 +37,7 @@ type alias ViewConfig msg =
     , noOp : msg
     , onTodoMoveToClicked : TodoContext -> TodoId -> msg
     , now : Time
-    , onTodoDoneClicked : TodoId -> msg
+    , onTodoDoneClicked : Bool -> TodoId -> msg
     , onTodoStartClicked : TodoId -> msg
     , encodedProjectNames : Json.Encode.Value
     , model : Model
@@ -51,7 +51,7 @@ createTodoListViewConfig model =
     , noOp = NoOp
     , onTodoMoveToClicked = Msg.setTodoContext
     , now = Model.getNow model
-    , onTodoDoneClicked = Msg.toggleDone
+    , onTodoDoneClicked = Msg.SetTodoDone
     , onTodoStartClicked = Msg.start
     , encodedProjectNames = Model.ProjectList.getEncodedProjectNames model
     , model = model

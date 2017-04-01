@@ -59,11 +59,8 @@ update msg =
             OnActionWithNow action now ->
                 onWithNow action now
 
-            ToggleDone id ->
-                withNow (OnActionWithNow (Update ToggleDoneUA id))
-
-            MarkDone id ->
-                withNow (OnActionWithNow (Update MarkDoneUA id))
+            SetTodoDone bool id ->
+                setTodoFields [ TodoDoneField bool ] id
 
             SetTodoContext todoContext id ->
                 withNow (OnActionWithNow (Update (SetTodoContextUA todoContext) id))
@@ -151,7 +148,7 @@ updateTodoModifiedAt ( maybeTodo, m ) =
                 identity
 
 
-updateTodoFields fields todoId =
+setTodoFields fields todoId =
     Return.andThen
         (Model.TodoList.updateTodoWithFields fields todoId
             >> updateTodoModifiedAt
@@ -233,7 +230,7 @@ getOrCreateAndPersistProject editTodoModel m =
 
 
 updateTodoFromEditTodoModel editTodoModel ( project, m ) =
-    updateTodoFields
+    setTodoFields
         [ TodoTextField editTodoModel.todoText
         , TodoProjectIdField (project |> Project.getId >> Just)
         ]
@@ -287,7 +284,7 @@ stopRunningTodo =
 markRunningTodoDone : ReturnF
 markRunningTodoDone =
     apply2 ( Tuple.first >> Model.RunningTodo.getRunningTodoId, identity )
-        >> uncurry (Maybe.unwrap identity (markDone >> andThenUpdate))
+        >> uncurry (Maybe.unwrap identity (SetTodoDone True >> andThenUpdate))
 
 
 addNewTodoAt : String -> Time -> Model -> ( TodoModel, Model )
@@ -325,9 +322,6 @@ updateTodo action todoId now =
             case action of
                 SetTodoContextUA todoContext ->
                     Todo.setContext todoContext
-
-                ToggleDoneUA ->
-                    Todo.toggleDone
 
                 MarkDoneUA ->
                     Todo.markDone

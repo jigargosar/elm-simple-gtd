@@ -20,8 +20,7 @@ import Types exposing (..)
 
 
 type UpdateAction
-    = ToggleDoneUA
-    | MarkDoneUA
+    = MarkDoneUA
     | SetTodoContextUA TodoContext
     | SetTextUA String
     | ToggleDeleteUA
@@ -33,9 +32,6 @@ type RequiresNowAction
     | CreateA String
     | CopyAndEditA TodoModel
 
-
-markDone =
-    MarkDone
 
 
 toggleDelete =
@@ -86,10 +82,6 @@ onEditTodoKeyUp =
     EditTodoKeyUp
 
 
-toggleDone =
-    ToggleDone
-
-
 stopAndMarkDone =
     MarkRunningTodoDone
 
@@ -100,8 +92,7 @@ type Msg
     | Stop
     | MarkRunningTodoDone
     | OnActionWithNow RequiresNowAction Time
-    | ToggleDone TodoId
-    | MarkDone TodoId
+    | SetTodoDone Bool TodoId
     | SetTodoContext TodoContext TodoId
     | SetText String TodoId
     | ToggleDelete TodoId

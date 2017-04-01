@@ -235,11 +235,6 @@ updateDone updater model =
     setDone (updater model) model
 
 
-toggleDone : ModelF
-toggleDone =
-    updateDone (isDone >> not)
-
-
 getCreatedAt : Model -> Time
 getCreatedAt =
     (.createdAt)

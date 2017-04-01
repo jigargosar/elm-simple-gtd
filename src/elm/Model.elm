@@ -47,7 +47,7 @@ setNow now model =
 
 updateNow : (Model -> Time) -> ModelF
 updateNow updater model =
-    setNow (updater model) model
+    { model | now = updater model }
 
 
 generate : Random.Generator a -> Model -> ( a, Model )

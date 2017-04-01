@@ -53,8 +53,7 @@ type alias EncodedTodo =
 
 
 type TodoFields
-    = IdField TodoId
-    | DoneField Bool
+    = DoneField Bool
     | TextField TodoText
     | DeletedField Bool
     | ContextField TodoContext

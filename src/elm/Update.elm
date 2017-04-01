@@ -122,8 +122,8 @@ update msg =
                     _ ->
                         identity
 
-            SetMainViewType viewState ->
-                Return.map (Model.setMainViewType viewState)
+            SetMainViewType viewType ->
+                Return.map (Model.setMainViewType viewType)
 
             OnUpdateNow now ->
                 onUpdateNow now

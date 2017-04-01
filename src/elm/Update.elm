@@ -193,27 +193,52 @@ activateEditNewTodoMode text =
     Return.map (Model.EditModel.activateNewTodoMode text)
 
 
+
+--saveAndDeactivateEditingTodo : ReturnF
+--saveAndDeactivateEditingTodo =
+--    returnAndThenMaybe
+--        (getEditTodoModel
+--            >> Maybe.map
+--                (\editTodoModel ->
+--                    getOrCreateAndPersistProject editTodoModel
+--                        >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
+--                        >> deactivateEditingMode
+--                )
+--        )
+--returnAndThenMaybe : (Model -> Maybe ReturnF) -> ReturnF
+--returnAndThenMaybe fun ( model, cmd ) =
+--    case fun model of
+--        Just returnF ->
+--            returnF ( model, cmd )
+--
+--        Nothing ->
+--            ( model, cmd )
+
+
 saveAndDeactivateEditingTodo : ReturnF
 saveAndDeactivateEditingTodo =
-    returnAndThenMaybe
-        (getEditTodoModel
-            >> Maybe.map
-                (\editTodoModel ->
-                    getOrCreateAndPersistProject editTodoModel
-                        >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
-                        >> deactivateEditingMode
-                )
+    returnMaybeAndThen getEditTodoModel
+        (\editTodoModel ->
+            getOrCreateAndPersistProject editTodoModel
+                >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
+                >> deactivateEditingMode
         )
 
 
-returnAndThenMaybe : (Model -> Maybe ReturnF) -> ReturnF
-returnAndThenMaybe fun ( model, cmd ) =
-    case fun model of
-        Just returnF ->
-            returnF ( model, cmd )
+returnMaybeAndThen : (Model -> Maybe x) -> (x -> ReturnF) -> ReturnF
+returnMaybeAndThen f1 f2 =
+    Return.andThen
+        (\m ->
+            f1 m ?|> f2 ?= identity |> (\rf -> Return.singleton m |> rf)
+        )
 
-        Nothing ->
-            ( model, cmd )
+
+returnMaybeAndThen2 : (Model -> Maybe x) -> (x -> ReturnF) -> ReturnF
+returnMaybeAndThen2 f1 f2 =
+    Return.andThen
+        (\m ->
+            f1 m ?|> f2 ?= identity |> (\rf -> Return.singleton m |> rf)
+        )
 
 
 getOrCreateAndPersistProject : EditTodoModel -> Return -> ReturnTuple Project

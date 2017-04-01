@@ -199,16 +199,14 @@ saveAndDeactivateEditingTodo =
         (\m ->
             m
                 |> Model.EditModel.getEditTodoModel
-                ?|> (saveEditingTodoHelp # (Return.singleton m))
+                ?|> (\editTodoModel ->
+                        Return.singleton m
+                            |> Return.andThen (getOrCreateAndPersistProject editTodoModel)
+                            >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
+                    )
                 ?= Return.singleton m
         )
         >> deactivateEditingMode
-
-
-saveEditingTodoHelp : EditTodoModel -> ReturnF
-saveEditingTodoHelp editTodoModel =
-    Return.andThen (getOrCreateAndPersistProject editTodoModel)
-        >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
 
 
 getOrCreateAndPersistProject : EditTodoModel -> Model -> ( ( Project, Model ), Cmd Msg )

@@ -19,7 +19,8 @@ import Json.Decode
 import Json.Encode
 import List.Extra as List
 import Model exposing (..)
-import Todo exposing (Todo, TodoId)
+import Todo
+import TodoModel.Types exposing (..)
 import Polymer.Paper exposing (..)
 import Polymer.App as App
 import FunctionExtra exposing (..)

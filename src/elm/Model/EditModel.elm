@@ -5,7 +5,8 @@ import Maybe.Extra as Maybe
 import Model.Internal exposing (..)
 import Model.ProjectList
 import Project exposing (Project, ProjectName)
-import Todo exposing (Todo)
+import Todo
+import TodoModel.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)

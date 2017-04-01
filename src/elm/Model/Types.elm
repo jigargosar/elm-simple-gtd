@@ -4,11 +4,11 @@ import EditModel.Types exposing (..)
 import Project exposing (ProjectList, ProjectName)
 import Random.Pcg exposing (Seed)
 import RunningTodoDetails exposing (RunningTodoDetails)
-import Todo exposing (Todo, TodoGroup, TodoList)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Time exposing (Time)
+import TodoModel.Types exposing (..)
 
 
 type MainViewType

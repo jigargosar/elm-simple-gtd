@@ -1,10 +1,10 @@
 module EditModel.Types exposing (..)
 
 import Project
-import Todo exposing (Todo, TodoText)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import TodoModel.Types exposing (..)
 
 
 type alias EditTodoModel =

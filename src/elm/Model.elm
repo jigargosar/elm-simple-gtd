@@ -12,7 +12,8 @@ import Navigation exposing (Location)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import Todo as Todo exposing (TodoGroup, Todo, TodoId)
+import TodoModel.Types exposing (..)
+import Todo
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2

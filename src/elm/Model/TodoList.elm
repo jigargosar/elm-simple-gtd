@@ -5,7 +5,8 @@ import Dict.Extra
 import List.Extra as List
 import Model
 import Project
-import Todo exposing (Todo, TodoGroup, TodoId, TodoList)
+import Todo
+import TodoModel.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)

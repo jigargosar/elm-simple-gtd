@@ -1,11 +1,11 @@
 module RunningTodoDetails exposing (..)
 
 import Time exposing (Time)
-import Todo exposing (TodoId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
+import TodoModel.Types exposing (TodoId)
 
 
 type alias RunningState =

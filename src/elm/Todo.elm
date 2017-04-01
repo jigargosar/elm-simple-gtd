@@ -20,18 +20,7 @@ import Dict
 import Dict.Extra as Dict
 import Time exposing (Time)
 import Project exposing (ProjectId)
-
-
-type alias TodoId =
-    String
-
-
-type alias TodoText =
-    String
-
-
-type alias EncodedTodoList =
-    List EncodedTodo
+import TodoModel.Types exposing (..)
 
 
 defaultRevision =
@@ -44,17 +33,6 @@ defaultDueAt =
 
 defaultDeleted =
     False
-
-
-type TodoGroup
-    = Session
-    | Inbox
-    | SomeDayMayBe
-    | WaitingFor
-    | Project
-    | Calender
-    | NextAction
-    | Reference
 
 
 getAllTodoGroups =
@@ -128,32 +106,6 @@ reference =
     Reference
 
 
-type alias TodoRecord =
-    { done : Bool
-    , text : String
-    , dueAt : Maybe Time
-    , deleted : Bool
-    , listType : TodoGroup
-    , projectId : Maybe ProjectId
-    }
-
-
-type alias Todo =
-    PouchDB.Document (PouchDB.WithTimeStamps TodoRecord)
-
-
-type alias Model =
-    Todo
-
-
-type alias ModelF =
-    Model -> Model
-
-
-type alias TodoList =
-    List Todo
-
-
 todoConstructor id rev createdAt modifiedAt done text dueAt deleted listType projectId =
     { id = id
     , rev = rev
@@ -196,10 +148,6 @@ stringToListType string =
 
 copyTodo createdAt todo id =
     { todo | id = id, rev = defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
-
-
-type alias EncodedTodo =
-    E.Value
 
 
 encode : Todo -> EncodedTodo
@@ -295,6 +243,14 @@ getDueAt =
 
 getRev =
     (.rev)
+
+
+type alias Model =
+    Todo
+
+
+type alias ModelF =
+    Model -> Model
 
 
 isDeleted : Model -> Bool
@@ -490,7 +446,3 @@ getFirstInboxTodo =
 toVM : Todo -> ViewModel
 toVM =
     identity
-
-
-type alias ViewModel =
-    Todo

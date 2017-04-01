@@ -14,6 +14,7 @@ import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model
 import Routes
 import Model.Types exposing (..)
+import TodoModel.Types exposing (..)
 import View exposing (appView)
 import Navigation exposing (Location)
 import Return
@@ -24,7 +25,7 @@ import PouchDB
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
-import Todo as Todo exposing (EncodedTodoList, Todo, TodoId)
+import Todo
 import Tuple2
 import Function exposing ((>>>))
 import Html

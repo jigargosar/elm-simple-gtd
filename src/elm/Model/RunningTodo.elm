@@ -5,7 +5,8 @@ import Model
 import Model.TodoList
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Time exposing (Time)
-import Todo exposing (Todo)
+import Todo
+import TodoModel.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -23,7 +24,7 @@ getRunningTodoViewModel m =
 
 
 type alias RunningTodoViewModel =
-    { todoVM : Todo.ViewModel, now : Time, elapsedTime : Time }
+    { todoVM : ViewModel, now : Time, elapsedTime : Time }
 
 
 getRunningTodoDetails : Model -> Maybe RunningTodoDetails

@@ -23,10 +23,6 @@ import Project exposing (ProjectId)
 import TodoModel.Types exposing (..)
 
 
-defaultRevision =
-    ""
-
-
 defaultDueAt =
     Nothing
 
@@ -147,7 +143,7 @@ stringToContext string =
 
 
 copyTodo createdAt todo id =
-    { todo | id = id, rev = defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
+    { todo | id = id, rev = PouchDB.defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
 
 
 encode : TodoModel -> EncodedTodo
@@ -193,12 +189,12 @@ decodeTodoList =
             )
 
 
-generator createdAt text =
+todoGenerator createdAt text =
     let
         initWith id =
             todoConstructor
                 id
-                defaultRevision
+                PouchDB.defaultRevision
                 createdAt
                 createdAt
                 False

@@ -294,7 +294,7 @@ markRunningTodoDone =
 
 addNewTodoAt : String -> Time -> Model -> ( TodoModel, Model )
 addNewTodoAt text now =
-    Model.generate (Todo.generator now text)
+    Model.generate (Todo.todoGenerator now text)
         >> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
 
 

@@ -42,6 +42,9 @@ type alias Id =
 type alias Revision =
     String
 
+defaultRevision =
+    ""
+
 
 type alias Document moreFields =
     { moreFields | id : Id, rev : Revision }

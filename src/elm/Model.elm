@@ -12,6 +12,7 @@ import Navigation exposing (Location)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
+import TodoListModel
 import TodoModel.Types exposing (..)
 import Todo
 import Toolkit.Operators exposing (..)
@@ -74,7 +75,7 @@ generate generator m =
 
 init now encodedTodoList encodedProjectList =
     { now = now
-    , todoList = Todo.decodeTodoList encodedTodoList
+    , todoList = TodoListModel.decodeTodoList encodedTodoList
     , editModel = EditModel.init
     , mainViewType = AllByGroupView
     , seed = Random.seedFromTime now

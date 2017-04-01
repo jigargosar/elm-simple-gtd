@@ -14,6 +14,7 @@ import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model
 import Routes
 import Model.Types exposing (..)
+import TodoListModel.Types exposing (..)
 import TodoModel.Types exposing (..)
 import View exposing (appView)
 import Navigation exposing (Location)

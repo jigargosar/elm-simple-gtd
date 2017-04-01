@@ -314,13 +314,6 @@ persistMaybeTodoCmd =
 
 
 
---persistTodoCmd todo =
---    PouchDB.pouchDBBulkDocsHelp "todo-db" (Todo.encodeSingleton todo)
---
---persistProjectCmd project =
---    PouchDB.pouchDBBulkDocsHelp "project-db" (Project.encodeSingleton project)
-
-
 upsertTodoCmd todo =
     PouchDB.pouchDBUpsert ( "todo-db", Todo.getId todo, (Todo.encode todo) )
 

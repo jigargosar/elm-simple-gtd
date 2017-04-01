@@ -121,11 +121,6 @@ encode project =
         ]
 
 
-encodeSingleton : Project -> EncodedProjectList
-encodeSingleton =
-    encode >> List.singleton
-
-
 decoder : Decoder Project
 decoder =
     D.decode projectConstructor
@@ -134,13 +129,9 @@ decoder =
         |> D.required "name" D.string
 
 
-decodeValue =
-    D.decodeValue decoder
-
-
 decodeProjectList : EncodedProjectList -> ProjectList
 decodeProjectList =
-    List.map decodeValue
+    List.map (D.decodeValue decoder)
         >> List.filterMap
             (\result ->
                 case result of

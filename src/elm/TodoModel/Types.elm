@@ -48,13 +48,7 @@ type alias ViewModel =
     TodoModel
 
 
-type alias TodoListModel =
-    List TodoModel
-
-
 type alias EncodedTodo =
     E.Value
 
 
-type alias EncodedTodoList =
-    List EncodedTodo

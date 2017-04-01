@@ -6,6 +6,7 @@ import List.Extra as List
 import Model
 import Project
 import Todo
+import TodoListModel.Types exposing (..)
 import TodoModel.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)

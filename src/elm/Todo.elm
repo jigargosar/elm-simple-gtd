@@ -125,8 +125,8 @@ todoRecordDecoder =
         >> D.optional "projectId" (D.nullable D.string) Nothing
 
 
-decoder : Decoder TodoModel
-decoder =
+todoDecoder : Decoder TodoModel
+todoDecoder =
     D.decode todoConstructor
         |> PouchDB.documentFieldsDecoder
         |> PouchDB.timeStampFieldsDecoder
@@ -162,31 +162,10 @@ encode todo =
         ]
 
 
-encodeSingleton : TodoModel -> EncodedTodoList
-encodeSingleton =
-    encode >> List.singleton
 
 
-decodeValue =
-    D.decodeValue decoder
 
 
-decodeTodoList : EncodedTodoList -> TodoListModel
-decodeTodoList =
-    List.map decodeValue
-        >> List.filterMap
-            (\result ->
-                case result of
-                    Ok todo ->
-                        Just todo
-
-                    Err x ->
-                        let
-                            _ =
-                                Debug.log "Error while decoding todo"
-                        in
-                            Nothing
-            )
 
 
 todoGenerator createdAt text =

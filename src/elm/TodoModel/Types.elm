@@ -58,3 +58,11 @@ type alias EncodedTodo =
 
 type alias ViewModel =
     TodoModel
+
+
+type alias EditTodoModel =
+    { todo : TodoModel, todoText : TodoText, projectName : Project.ProjectName }
+
+
+type alias NewTodoModel =
+    TodoText

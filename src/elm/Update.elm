@@ -236,15 +236,19 @@ createAndSaveProject projectName =
         >> Return.effect_ (Tuple.first >> upsertProjectCmd)
 
 
+returnAndMapTupleFirst : (x -> ReturnF) -> ReturnTuple x -> Return
+returnAndMapTupleFirst f =
+    Return.andThen (\( x, m ) -> (f x) (Return.singleton m))
+
+
 updateTodoFromEditTodoModel editTodoModel =
-    Return.andThen
-        (\( project, m ) ->
+    returnAndMapTupleFirst
+        (\project ->
             updateTodoFieldsAndModifiedAt
                 [ TodoTextField editTodoModel.todoText
                 , TodoProjectIdField (project |> Project.getId >> Just)
                 ]
                 (Todo.getId editTodoModel.todo)
-                (Return.singleton m)
         )
 
 

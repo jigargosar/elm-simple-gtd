@@ -246,24 +246,29 @@ createAndSaveProject projectName =
 saveAndDeactivateEditingTodo2 : Model -> Return
 saveAndDeactivateEditingTodo2 model =
     let
-        defaultReturn =
-            model ! []
+        updateAndGetMaybeTodo editTodoModel project =
+            Model.TodoList.updateAndGetMaybeTodo
+                [ TodoTextField editTodoModel.todoText
+                , TodoProjectIdField (project |> Project.getId >> Just)
+                ]
+                (Todo.getId editTodoModel.todo)
+                model
 
-        foo editTodoModel =
-            let
-                maybeProject =
-                    getProjectFromEditTodoModel editTodoModel model
+        getMaybeProject editTodoModel =
+            getProjectFromEditTodoModel editTodoModel model ?|> (,) editTodoModel
 
-                zz editTodoModel =
-                    getOrCreateAndPersistProject editTodoModel
-                        >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
-                        >> deactivateEditingMode
-            in
-                defaultReturn
+        getMaybeUpdatedTodo ( editTodoModel, project ) =
+            updateAndGetMaybeTodo editTodoModel project ?|> (,,) editTodoModel project
+
+        saveTodoAndProject ( editTodoModel, project, todo ) =
+            Model.TodoList.upsertTodo todo model ! [ upsertTodoCmd todo ]
     in
         model
             |> getMaybeEditTodoModel
-            |> Maybe.unwrap defaultReturn foo
+            ?+> getMaybeProject
+            ?+> getMaybeUpdatedTodo
+            ?|> saveTodoAndProject
+            ?= (model ! [])
 
 
 getProjectFromEditTodoModel { projectName } =

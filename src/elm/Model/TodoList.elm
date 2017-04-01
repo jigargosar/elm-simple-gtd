@@ -3,6 +3,7 @@ module Model.TodoList exposing (..)
 import Dict exposing (Dict)
 import Dict.Extra
 import List.Extra as List
+import Maybe.Extra as Maybe
 import Model
 import Project
 import Todo
@@ -115,3 +116,28 @@ toViewModelHelp ( todoContext, name, list ) =
 updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Maybe TodoModel, Model )
 updateTodoWithFields fields =
     updateTodoMaybe (Todo.setFields fields)
+
+
+updateAndGetMaybeTodo fields todoId model =
+    model |> getTodoById todoId ?|> Todo.setFields fields
+
+
+upsertTodo todo model =
+    let
+        maybeIndex =
+            model |> getTodoList >> List.findIndex (Todo.equalById todo)
+    in
+        case maybeIndex of
+            Nothing ->
+                addTodo todo model
+
+            Just index ->
+                updateTodoList
+                    (\m ->
+                        let
+                            tl =
+                                getTodoList m
+                        in
+                            tl |> List.setAt index todo ?= tl
+                    )
+                    model

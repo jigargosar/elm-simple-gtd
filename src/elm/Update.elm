@@ -246,15 +246,30 @@ createAndSaveProject projectName =
 saveAndDeactivateEditingTodo2 : Model -> Return
 saveAndDeactivateEditingTodo2 model =
     let
-        _ =
-            getMaybeEditTodoModel model
-                ?|> (\editTodoModel ->
-                        getOrCreateAndPersistProject editTodoModel
-                            >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
-                            >> deactivateEditingMode
-                    )
+        foo editTodoModel =
+            let
+                { projectName } =
+                    editTodoModel
+
+                getMaybeProject =
+                    Model.ProjectList.getProjectByName projectName model
+
+                maybeProject =
+                    getMaybeProject
+
+                zz editTodoModel =
+                    getOrCreateAndPersistProject editTodoModel
+                        >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
+                        >> deactivateEditingMode
+            in
+                model ! []
     in
-        model ! []
+        case getMaybeEditTodoModel model of
+            Nothing ->
+                model ! []
+
+            Just editTodoModel ->
+                foo editTodoModel
 
 
 updateTodoFromEditTodoModel editTodoModel ( project, m ) =

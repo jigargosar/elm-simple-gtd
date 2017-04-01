@@ -66,10 +66,10 @@ update msg =
                 setTodoFields [ TodoContextField todoContext ] id
 
             SetText text id ->
-                withNow (OnActionWithNow (Update (SetTextUA text) id))
+                setTodoFields [ TodoTextField text ] id
 
-            ToggleDelete id ->
-                withNow (OnActionWithNow (Update (ToggleDeleteUA) id))
+            SetTodoDeleted bool id ->
+                setTodoFields [ TodoDeletedField bool ] id
 
             Create text ->
                 withNow (OnActionWithNow (CreateA text))

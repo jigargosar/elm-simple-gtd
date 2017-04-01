@@ -33,11 +33,6 @@ type RequiresNowAction
     | CopyAndEditA TodoModel
 
 
-
-toggleDelete =
-    ToggleDelete
-
-
 setTodoContext =
     SetTodoContext
 
@@ -95,7 +90,7 @@ type Msg
     | SetTodoDone Bool TodoId
     | SetTodoContext TodoContext TodoId
     | SetText String TodoId
-    | ToggleDelete TodoId
+    | SetTodoDeleted Bool TodoId
     | Create String
     | CopyAndEdit TodoModel
     | AddTodoClicked

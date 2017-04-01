@@ -28,6 +28,14 @@ getDeleted =
     Internal.getDeleted
 
 
+updateFields =
+    Internal.updateFields
+
+
+setFields =
+    Internal.setFields
+
+
 defaultDueAt =
     Nothing
 

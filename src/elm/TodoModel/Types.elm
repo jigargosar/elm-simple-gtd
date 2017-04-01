@@ -52,7 +52,7 @@ type alias EncodedTodo =
     E.Value
 
 
-type TodoFields
+type TodoField
     = DoneField Bool
     | TextField TodoText
     | DeletedField Bool

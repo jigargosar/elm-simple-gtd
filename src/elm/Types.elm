@@ -12,6 +12,5 @@ import FunctionExtra.Operators exposing (..)
 import Project exposing (Project, ProjectList, ProjectName)
 
 
-type TodoField
-    = TodoText String
-    | TodoProject Project
+_ =
+    1

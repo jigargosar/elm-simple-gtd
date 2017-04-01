@@ -235,8 +235,8 @@ updateTodoFromEditTodoModel editTodoModel ( project, m ) =
     let
         updateTodoMsg =
             Msg.UpdateTodoFields
-                [ Types.TodoText editTodoModel.todoText
-                , Types.TodoProject project
+                [ TodoModel.Types.TextField editTodoModel.todoText
+                , TodoModel.Types.ProjectIdField (project |> Project.getId >> Just)
                 ]
                 editTodoModel.todo
     in
@@ -311,7 +311,6 @@ withNow msg =
 
 persistMaybeTodoCmd =
     Maybe.unwrap Cmd.none upsertTodoCmd
-
 
 
 upsertTodoCmd todo =

@@ -12,7 +12,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Model.Types exposing (..)
-import Types exposing (TodoField)
+import Types exposing (..)
 
 
 getTodoList : Model -> TodoListModel
@@ -114,17 +114,4 @@ toViewModelHelp ( todoContext, name, list ) =
 
 updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Maybe TodoModel, Model )
 updateTodoWithFields fields =
-    updateTodoMaybe (updateFields fields)
-
-
-updateFields fields =
-    List.foldl updateField # fields
-
-
-updateField field =
-    case field of
-        Types.TodoText text ->
-            Todo.setText text
-
-        Types.TodoProject project ->
-            Todo.setProjectId (Just (Project.getId project))
+    updateTodoMaybe (Todo.setFields fields)

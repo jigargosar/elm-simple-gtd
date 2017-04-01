@@ -11,6 +11,8 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/elm-keyboard-extra" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/elm-stuff/packages" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/elm-stuff/build-artifacts" />
+      <excludeFolder url="file://$MODULE_DIR$/polymer" />
+      <excludeFolder url="file://$MODULE_DIR$/src/web/bower_components" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

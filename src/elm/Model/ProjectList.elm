@@ -32,9 +32,10 @@ getProjectById id =
     getProjectList >> List.find (Project.getId >> equals id)
 
 
-addNewProject : ProjectName -> Time -> Model -> ( Project, Model )
-addNewProject projectName now =
-    Model.generate (Project.projectGenerator projectName now)
+addNewProject : ProjectName -> Model -> ( Project, Model )
+addNewProject projectName model =
+    model
+        |> Model.generate (Project.projectGenerator projectName (Model.getNow model))
         >> addProjectFromTuple
 
 

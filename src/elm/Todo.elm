@@ -31,6 +31,10 @@ defaultDeleted =
     False
 
 
+defaultDone =
+    False
+
+
 getAllTodoContexts =
     [ Session
     , Calender
@@ -89,7 +93,7 @@ todoConstructor id rev createdAt modifiedAt done text dueAt deleted context proj
 
 
 todoRecordDecoder =
-    D.optional "done" D.bool False
+    D.optional "done" D.bool defaultDone
         >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         >> D.optional "deleted" D.bool defaultDeleted
@@ -145,7 +149,7 @@ todoGenerator createdAt text =
                 PouchDB.defaultRevision
                 createdAt
                 createdAt
-                False
+                defaultDone
                 text
                 defaultDueAt
                 defaultDeleted

@@ -242,27 +242,6 @@ andThenMapSecond fun toCmd =
     Return.andThen (fun >> Tuple.mapSecond toCmd)
 
 
-persistAndEditTodoCmd : ( TodoModel, Model ) -> Return
-persistAndEditTodoCmd ( todo, model ) =
-    persistTodoFromTuple ( todo, model )
-        |> andThenUpdate (Msg.StartEditingTodo todo)
-
-
-persistTodoFromTuple : ( TodoModel, Model ) -> Return
-persistTodoFromTuple ( todo, model ) =
-    ( model, upsertTodoCmd todo )
-
-
-persistMaybeTodoFromTuple : ( Maybe TodoModel, Model ) -> Return
-persistMaybeTodoFromTuple ( maybeTodo, model ) =
-    case maybeTodo of
-        Nothing ->
-            model ! []
-
-        Just todo ->
-            model ! [ upsertTodoCmd todo ]
-
-
 onWithNow : RequiresNowAction -> Time -> ReturnF
 onWithNow action now =
     case action of
@@ -302,6 +281,27 @@ copyNewTodo todo now =
 withNow : (Time -> Msg) -> ReturnF
 withNow msg =
     Task.perform (msg) Time.now |> Return.command
+
+
+persistAndEditTodoCmd : ( TodoModel, Model ) -> Return
+persistAndEditTodoCmd ( todo, model ) =
+    persistTodoFromTuple ( todo, model )
+        |> andThenUpdate (Msg.StartEditingTodo todo)
+
+
+persistTodoFromTuple : ( TodoModel, Model ) -> Return
+persistTodoFromTuple ( todo, model ) =
+    ( model, upsertTodoCmd todo )
+
+
+persistMaybeTodoFromTuple : ( Maybe TodoModel, Model ) -> Return
+persistMaybeTodoFromTuple ( maybeTodo, model ) =
+    case maybeTodo of
+        Nothing ->
+            model ! []
+
+        Just todo ->
+            model ! [ upsertTodoCmd todo ]
 
 
 persistMaybeTodoCmd =

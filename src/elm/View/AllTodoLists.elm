@@ -69,16 +69,18 @@ todoViewFromModel =
 keyedTodoView : ViewConfig Msg -> TodoView
 keyedTodoView vc todo =
     ( Todo.getId todo
-    , case Model.EditMode.getEditTodoModel vc.model of
-        Just etm ->
-            if Todo.equalById todo etm.todo then
-                View.Todo.todoViewEditing vc etm
-            else
-                View.Todo.todoViewNotEditing vc todo
-
-        Nothing ->
-            View.Todo.todoViewNotEditing vc todo
+    , getMaybeEditTodoView vc todo ?= View.Todo.todoViewNotEditing vc todo
     )
+
+
+getMaybeEditTodoView vc todo =
+    Model.EditMode.getEditTodoModel vc.model
+        ?+> (\etm ->
+                if Todo.equalById todo etm.todo then
+                    Just (View.Todo.todoViewEditing vc etm)
+                else
+                    Nothing
+            )
 
 
 todoListView : Model -> Html Msg

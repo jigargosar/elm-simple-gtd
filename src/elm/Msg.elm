@@ -19,18 +19,10 @@ import FunctionExtra.Operators exposing (..)
 import Types exposing (..)
 
 
-type UpdateAction
-    = MarkDoneUA
-    | SetTodoContextUA TodoContext
-    | SetTextUA String
-    | ToggleDeleteUA
-    | UpdateModifiedAtUA
-
-
 type RequiresNowAction
-    = Update UpdateAction TodoId
-    | CreateA String
+    = CreateA String
     | CopyAndEditA TodoModel
+    | UpdateTodoModifiedAt TodoId
 
 
 setTodoContext =

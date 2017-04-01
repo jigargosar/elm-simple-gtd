@@ -132,8 +132,8 @@ update msg =
                 onMsgList messages
 
 
-updateTodoModifiedAt : ( Maybe TodoModel, Model ) -> Return
-updateTodoModifiedAt ( maybeTodo, m ) =
+updateMaybeTodoModifiedAt : ( Maybe TodoModel, Model ) -> Return
+updateMaybeTodoModifiedAt ( maybeTodo, m ) =
     m
         |> Return.singleton
         >> case maybeTodo of
@@ -142,16 +142,21 @@ updateTodoModifiedAt ( maybeTodo, m ) =
                     id =
                         Todo.getId todo
                 in
-                    withNow (OnActionWithNow (Update UpdateModifiedAtUA id))
+                    withNow (OnActionWithNow (UpdateTodoModifiedAt id))
 
             Nothing ->
                 identity
 
 
+
+--updateTodoModifiedAt (todo, m) =
+--    m|> setTodo
+
+
 setTodoFields fields todoId =
     Return.andThen
         (Model.TodoList.updateTodoWithFields fields todoId
-            >> updateTodoModifiedAt
+            >> updateMaybeTodoModifiedAt
         )
 
 
@@ -266,8 +271,8 @@ persistMaybeTodoFromTuple ( maybeTodo, model ) =
 onWithNow : RequiresNowAction -> Time -> ReturnF
 onWithNow action now =
     case action of
-        Update action id ->
-            Return.andThen (updateTodo action id now >> persistMaybeTodoFromTuple)
+        UpdateTodoModifiedAt id ->
+            Return.andThen (updateTodo id now >> persistMaybeTodoFromTuple)
 
         CreateA text ->
             Return.andThen (addNewTodoAt text now >> persistTodoFromTuple)
@@ -316,29 +321,9 @@ upsertProjectCmd project =
     PouchDB.pouchDBUpsert ( "project-db", Project.getId project, (Project.encode project) )
 
 
-updateTodo action todoId now =
+updateTodo todoId now =
     let
-        todoActionUpdater =
-            case action of
-                SetTodoContextUA todoContext ->
-                    Todo.setContext todoContext
-
-                MarkDoneUA ->
-                    Todo.markDone
-
-                ToggleDeleteUA ->
-                    Todo.toggleDeleted
-
-                SetTextUA text ->
-                    Todo.setText text
-
-                UpdateModifiedAtUA ->
-                    identity
-
         modifiedAtUpdater =
             Todo.setModifiedAt now
-
-        todoUpdater =
-            todoActionUpdater >> modifiedAtUpdater
     in
-        Model.TodoList.updateTodoMaybe todoUpdater todoId
+        Model.TodoList.updateTodoMaybe modifiedAtUpdater todoId

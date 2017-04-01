@@ -1,6 +1,6 @@
 module Model exposing (..)
 
-import Model.Internal exposing (setSeed)
+import Model.Internal as Internal exposing (..)
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Dict
 import Json.Encode as E
@@ -37,9 +37,7 @@ setNow now model =
     { model | now = now }
 
 
-
-
 generate : Random.Generator a -> Model -> ( a, Model )
 generate generator m =
     Random.step generator (m.seed)
-        |> Tuple.mapSecond (Model.Internal.setSeed # m)
+        |> Tuple.mapSecond (Internal.setSeed # m)

@@ -134,12 +134,6 @@ update msg =
             OnMsgList messages ->
                 onMsgList messages
 
-            UpdateTodoFields fields todo ->
-                Return.andThen
-                    (Model.TodoList.updateTodoWithFields fields (Todo.getId todo)
-                        >> updateTodoModifiedAt
-                    )
-
 
 updateTodoModifiedAt : ( Maybe TodoModel, Model ) -> Return
 updateTodoModifiedAt ( maybeTodo, m ) =
@@ -155,6 +149,13 @@ updateTodoModifiedAt ( maybeTodo, m ) =
 
             Nothing ->
                 identity
+
+
+updateTodoFields fields todoId =
+    Return.andThen
+        (Model.TodoList.updateTodoWithFields fields todoId
+            >> updateTodoModifiedAt
+        )
 
 
 onMsgList : List Msg -> ReturnF
@@ -232,15 +233,12 @@ getOrCreateAndPersistProject editTodoModel m =
 
 
 updateTodoFromEditTodoModel editTodoModel ( project, m ) =
-    let
-        updateTodoMsg =
-            Msg.UpdateTodoFields
-                [ TodoTextField editTodoModel.todoText
-                , TodoProjectIdField (project |> Project.getId >> Just)
-                ]
-                editTodoModel.todo
-    in
-        update updateTodoMsg m
+    updateTodoFields
+        [ TodoTextField editTodoModel.todoText
+        , TodoProjectIdField (project |> Project.getId >> Just)
+        ]
+        (Todo.getId editTodoModel.todo)
+        (Return.singleton m)
 
 
 andThenMapSecond fun toCmd =

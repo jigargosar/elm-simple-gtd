@@ -119,7 +119,6 @@ type Msg
     | SetMainViewType MainViewType
     | OnNowChanged Time
     | OnMsgList (List Msg)
-    | UpdateTodoFields (List TodoField) TodoModel
 
 
 toCmds : List Msg -> Cmd Msg

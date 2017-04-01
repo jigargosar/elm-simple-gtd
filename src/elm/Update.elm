@@ -112,7 +112,7 @@ update msg =
             EditTodoKeyUp todo { key, isShiftDown } ->
                 case key of
                     Enter ->
-                        saveAndDeactivateEditingTodo todo
+                        saveAndDeactivateEditingTodo
                             >> whenBool isShiftDown
                                 (Return.command (Msg.splitNewTodoFrom todo |> Msg.toCmd))
 
@@ -193,20 +193,20 @@ activateEditNewTodoMode text =
     Return.map (Model.EditModel.activateNewTodoMode text)
 
 
-saveAndDeactivateEditingTodo : TodoModel -> ReturnF
-saveAndDeactivateEditingTodo todo =
+saveAndDeactivateEditingTodo : ReturnF
+saveAndDeactivateEditingTodo =
     Return.andThen
         (\m ->
             m
                 |> Model.EditModel.getEditTodoModel
-                ?|> (saveEditingTodoHelp todo # (Return.singleton m))
+                ?|> (saveEditingTodoHelp # (Return.singleton m))
                 ?= Return.singleton m
         )
         >> deactivateEditingMode
 
 
-saveEditingTodoHelp : TodoModel -> EditTodoModel -> ReturnF
-saveEditingTodoHelp todo editTodoModel =
+saveEditingTodoHelp : EditTodoModel -> ReturnF
+saveEditingTodoHelp editTodoModel =
     Return.andThen (getOrCreateAndPersistProject editTodoModel)
         >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
 

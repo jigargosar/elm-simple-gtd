@@ -243,6 +243,20 @@ createAndSaveProject projectName =
         >> Return.effect_ (Tuple.first >> upsertProjectCmd)
 
 
+saveAndDeactivateEditingTodo2 : Model -> Return
+saveAndDeactivateEditingTodo2 model =
+    let
+        _ =
+            getMaybeEditTodoModel model
+                ?|> (\editTodoModel ->
+                        getOrCreateAndPersistProject editTodoModel
+                            >> Return.andThen (updateTodoFromEditTodoModel editTodoModel)
+                            >> deactivateEditingMode
+                    )
+    in
+        model ! []
+
+
 updateTodoFromEditTodoModel editTodoModel ( project, m ) =
     updateTodoFieldsAndModifiedAt
         [ TodoTextField editTodoModel.todoText

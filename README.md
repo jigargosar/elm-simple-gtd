@@ -1,4 +1,4 @@
-# **[Live Demo](https://jigargosar.github.io/elm-simple-gtd/)**
+# **[SimpleGTD.com](https://simplegtd.com/)**
 
 ## Screen Shot
 

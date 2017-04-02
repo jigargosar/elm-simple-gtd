@@ -217,11 +217,12 @@ returnAndMapMaybe f1 f2 =
         )
 
 
-
---returnMapAndThen : (model -> x) -> (x -> Return.ReturnF msg model) -> Return.ReturnF msg model
-
-
-returnMapAndThen f1 f2 =
+returnWith :
+    (a -> x)
+    -> (x -> Return.Return msg a -> Return.Return msg b)
+    -> Return.Return msg a
+    -> Return.Return msg b
+returnWith f1 f2 =
     Return.map (apply2 ( f1, identity ))
         >> returnAndMapTupleFirst f2
 
@@ -232,7 +233,7 @@ getOrCreateAndPersistProject editTodoModel =
         { projectName } =
             editTodoModel
     in
-        returnMapAndThen (Model.ProjectList.getProjectByName projectName)
+        returnWith (Model.ProjectList.getProjectByName projectName)
             (\maybeProject ->
                 case maybeProject of
                     Nothing ->

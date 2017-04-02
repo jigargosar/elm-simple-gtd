@@ -229,7 +229,7 @@ stopRunningTodo =
 markRunningTodoDone : ReturnF
 markRunningTodoDone =
     Return.maybeTransformWith (Model.RunningTodo.getRunningTodoId)
-        (SetTodoDone True >> andThenUpdate)
+        (updateTodo [ Todo.SetDone True ])
 
 
 addNewTodoAt : String -> Time -> Model -> ( Todo, Model )

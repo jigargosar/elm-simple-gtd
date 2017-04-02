@@ -125,12 +125,14 @@ newTodoInputView maybeNewTodoModel =
                 , value text
                 , onBlur onNewTodoBlur
                 , onKeyUp (onNewTodoKeyUp text)
+                , stringProperty "label" "New Todo"
+                , boolProperty "alwaysFloatLabel" True
                 , style [ ( "width", "100%" ), "color" => "white" ]
                 ]
                 []
 
         Nothing ->
-            h1 [id "toolbar-title"] [ text "SimpleGTD" ]
+            h1 [ id "toolbar-title" ] [ text "SimpleGTD" ]
 
 
 addTodoFabView m =

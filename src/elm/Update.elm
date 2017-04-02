@@ -74,13 +74,11 @@ update msg =
 
             Create text ->
                 Return.transformWith Model.getNow
-                    (\now ->
-                        Return.andThen
-                            (addNewTodoAt text now >> persistTodoFromTuple)
-                    )
+                    (\now -> Return.andThen (addNewTodoAt text now >> persistTodoFromTuple))
 
             CopyAndEdit todo ->
-                withNow (OnActionWithNow (CopyAndEditA todo))
+                Return.transformWith Model.getNow
+                    (\now -> Return.andThen (copyNewTodo todo now >> persistAndEditTodoCmd))
 
             AddTodoClicked ->
                 activateEditNewTodoMode ""

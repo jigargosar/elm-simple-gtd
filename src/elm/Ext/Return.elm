@@ -17,7 +17,7 @@ transformTupleWith f =
 andMapMaybe f1 f2 =
     Return.andThen
         (\m ->
-            f1 m ?|> f2 ?= identity |> (\rf -> Return.singleton m |> rf)
+            f1 m ?|> f2 ?= identity |> apply (Return.singleton m)
         )
 
 

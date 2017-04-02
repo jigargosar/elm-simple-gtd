@@ -196,7 +196,7 @@ saveAndDeactivateEditingTodo : ReturnF
 saveAndDeactivateEditingTodo =
     Return.maybeTransformWith getMaybeEditTodoModel
         (\editTodoModel ->
-            getOrCreateAndPersistProject editTodoModel
+            findOrCreateProjectByName editTodoModel.projectName
                 >> updateTodoFromEditTodoModel editTodoModel
                 >> deactivateEditingMode
         )
@@ -206,21 +206,17 @@ saveAndDeactivateEditingTodo =
 --returnAndMapTupleFirst : (x -> ReturnF) -> ReturnTuple x -> Return.Return Msg Model
 
 
-getOrCreateAndPersistProject : EditTodoModel -> Return -> ReturnTuple Project
-getOrCreateAndPersistProject editTodoModel =
-    let
-        { projectName } =
-            editTodoModel
-    in
-        Return.transformWith (Model.ProjectList.getProjectByName projectName)
-            (\maybeProject ->
-                case maybeProject of
-                    Nothing ->
-                        createAndPersistProject projectName
+findOrCreateProjectByName : ProjectName -> Return -> ReturnTuple Project
+findOrCreateProjectByName projectName =
+    Return.transformWith (Model.ProjectList.getProjectByName projectName)
+        (\maybeProject ->
+            case maybeProject of
+                Nothing ->
+                    createAndPersistProject projectName
 
-                    Just project ->
-                        Return.map ((,) project)
-            )
+                Just project ->
+                    Return.map ((,) project)
+        )
 
 
 createAndPersistProject projectName =

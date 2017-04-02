@@ -143,7 +143,7 @@ startIconButton vc todo =
 
 optionsIconButton vc todo =
     menuButton
-        [ onClickStopPropagation vc.noOp
+        [ onClickStopPropagation Msg.NoOp
         , attribute "horizontal-align" "right"
         ]
         [ iconButton [ icon "more-vert", class "dropdown-trigger" ] []
@@ -156,7 +156,7 @@ optionsIconButton vc todo =
                 .|> (\context ->
                         item
                             [ attribute "list-type" (Todo.todoContextToName context)
-                            , onClickStopPropagation (vc.onTodoMoveToClicked context (Todo.getId todo))
+                            , onClickStopPropagation (Msg.SetTodoContext context (Todo.getId todo))
                             ]
                             [ text (Todo.todoContextToName context) ]
                     )

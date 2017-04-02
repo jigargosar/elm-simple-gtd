@@ -31,26 +31,16 @@ import FunctionExtra exposing (..)
 import View.Todo
 
 
-type alias ViewConfig msg =
-    { onDeleteTodoClicked : TodoId -> msg
-    , onEditTodoKeyUp : Todo -> KeyboardEvent -> msg
-    , noOp : msg
-    , onTodoMoveToClicked : TodoContext -> TodoId -> msg
-    , now : Time
-    , onTodoStartClicked : TodoId -> msg
+type alias ViewConfig =
+    { now : Time
     , encodedProjectNames : Json.Encode.Value
     , model : Model
     }
 
 
-createTodoListViewConfig : Model -> ViewConfig Msg
+createTodoListViewConfig : Model -> ViewConfig
 createTodoListViewConfig model =
-    { onDeleteTodoClicked = Msg.ToggleTodoDeleted
-    , onEditTodoKeyUp = onEditTodoKeyUp
-    , noOp = NoOp
-    , onTodoMoveToClicked = Msg.setTodoContext
-    , now = Model.getNow model
-    , onTodoStartClicked = Msg.start
+    { now = Model.getNow model
     , encodedProjectNames = Model.ProjectList.getEncodedProjectNames model
     , model = model
     }
@@ -65,7 +55,7 @@ todoViewFromModel =
     createTodoListViewConfig >> keyedTodoView
 
 
-keyedTodoView : ViewConfig Msg -> TodoView
+keyedTodoView : ViewConfig -> TodoView
 keyedTodoView vc todo =
     ( Todo.getId todo
     , getMaybeEditTodoView vc todo ?= View.Todo.todoViewNotEditing vc todo

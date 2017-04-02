@@ -1,6 +1,6 @@
 module Todo.Internal exposing (..)
 
-import Project
+import Project exposing (ProjectId)
 import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -46,6 +46,21 @@ updateDeleted updater model =
     setDeleted (updater model) model
 
 
+getProjectId : Model -> Maybe ProjectId
+getProjectId =
+    (.projectId)
+
+
+setProjectId : Maybe ProjectId -> ModelF
+setProjectId projectId model =
+    { model | projectId = projectId }
+
+
+updateProjectId : (Model -> Maybe ProjectId) -> ModelF
+updateProjectId updater model =
+    setProjectId (updater model) model
+
+
 getModifiedAt : Model -> Time
 getModifiedAt =
     (.modifiedAt)
@@ -80,7 +95,7 @@ update field model =
             { model | projectId = projectId }
 
         SetProject project ->
-            update (SetProjectId (Just (Project.getId project))) model
+            setProjectId (project |> Project.getId >> Just) model
 
         ToggleDone ->
             updateDone (getDone >> not) model

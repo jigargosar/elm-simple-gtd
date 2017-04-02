@@ -107,24 +107,3 @@ updateAndGetTodo actions todoId model =
         ( List.find (Todo.hasId todoId) newTodoList
         , setTodoList newTodoList model
         )
-
-
-upsertTodo todo model =
-    let
-        maybeIndex =
-            model |> getTodoList >> List.findIndex (Todo.equalById todo)
-    in
-        case maybeIndex of
-            Nothing ->
-                addTodo todo model
-
-            Just index ->
-                updateTodoList
-                    (\m ->
-                        let
-                            tl =
-                                getTodoList m
-                        in
-                            tl |> List.setAt index todo ?= tl
-                    )
-                    model

@@ -58,3 +58,4 @@ type TodoField
     | TodoDeletedField Bool
     | TodoContextField TodoContext
     | TodoProjectIdField (Maybe ProjectId)
+    | TodoProjectField (Maybe Project.Project)

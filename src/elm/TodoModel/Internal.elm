@@ -1,5 +1,6 @@
 module TodoModel.Internal exposing (..)
 
+import Project
 import TodoModel.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -50,6 +51,9 @@ set field model =
 
         TodoProjectIdField projectId ->
             { model | projectId = projectId }
+
+        TodoProjectField project ->
+            { model | projectId = project ?|> Project.getId }
 
 
 update : (Model -> ModelField) -> ModelF

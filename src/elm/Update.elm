@@ -230,7 +230,7 @@ updateTodoFromEditTodoModel editTodoModel =
         (\project ->
             updateTodoFieldsAndModifiedAt
                 [ TodoTextField editTodoModel.todoText
-                , TodoProjectIdField (project |> Project.getId >> Just)
+                , TodoProjectField (Just project)
                 ]
                 (Todo.getId editTodoModel.todo)
         )

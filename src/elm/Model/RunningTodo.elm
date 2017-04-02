@@ -6,7 +6,7 @@ import Model.TodoList
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Time exposing (Time)
 import Todo
-import TodoModel.Types exposing (..)
+import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)

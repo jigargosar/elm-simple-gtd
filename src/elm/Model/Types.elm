@@ -9,7 +9,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Time exposing (Time)
-import TodoModel.Types exposing (..)
+import Todo.Types exposing (..)
 
 
 type MainViewType

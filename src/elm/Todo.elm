@@ -9,7 +9,7 @@ import Maybe.Extra as Maybe
 import PouchDB
 import RandomIdGenerator
 import Random.Pcg as Random exposing (Seed)
-import TodoModel.Internal as Internal exposing (..)
+import Todo.Internal as Internal exposing (..)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import FunctionExtra exposing (..)
@@ -21,7 +21,7 @@ import Dict
 import Dict.Extra as Dict
 import Time exposing (Time)
 import Project exposing (ProjectId)
-import TodoModel.Types exposing (..)
+import Todo.Types exposing (..)
 
 
 getDeleted =

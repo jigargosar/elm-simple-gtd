@@ -4,7 +4,7 @@ import Project
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
-import TodoModel.Types exposing (..)
+import Todo.Types exposing (..)
 
 
 type alias EditTodoModel =

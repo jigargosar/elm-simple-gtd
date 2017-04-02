@@ -10,7 +10,7 @@ import Return
 import RunningTodoDetails exposing (RunningTodoDetails)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
-import TodoModel.Types exposing (..)
+import Todo.Types exposing (..)
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)

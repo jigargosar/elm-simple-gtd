@@ -1,7 +1,7 @@
-module TodoModel.Internal exposing (..)
+module Todo.Internal exposing (..)
 
 import Project
-import TodoModel.Types exposing (..)
+import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)

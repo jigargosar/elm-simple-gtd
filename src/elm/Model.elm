@@ -13,7 +13,7 @@ import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import TodoListModel
-import TodoModel.Types exposing (..)
+import Todo.Types exposing (..)
 import Todo
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)

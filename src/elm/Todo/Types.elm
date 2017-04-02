@@ -1,4 +1,4 @@
-module TodoModel.Types exposing (..)
+module Todo.Types exposing (..)
 
 import PouchDB
 import Project exposing (ProjectId)

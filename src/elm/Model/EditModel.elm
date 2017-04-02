@@ -6,7 +6,7 @@ import Model.Internal exposing (..)
 import Model.ProjectList
 import Project exposing (Project, ProjectName)
 import Todo
-import TodoModel.Types exposing (..)
+import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)

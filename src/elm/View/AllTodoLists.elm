@@ -24,7 +24,7 @@ import List.Extra as List
 import Model as Model
 import Model.Types exposing (..)
 import Todo
-import TodoModel.Types exposing (..)
+import Todo.Types exposing (..)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import FunctionExtra exposing (..)

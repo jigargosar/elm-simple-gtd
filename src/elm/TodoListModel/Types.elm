@@ -1,6 +1,6 @@
 module TodoListModel.Types exposing (..)
 
-import TodoModel.Types exposing (EncodedTodo, TodoModel)
+import Todo.Types exposing (EncodedTodo, TodoModel)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)

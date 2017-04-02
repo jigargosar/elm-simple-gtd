@@ -5,7 +5,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
-import TodoModel.Types exposing (TodoId)
+import Todo.Types exposing (TodoId)
 
 
 type alias RunningState =

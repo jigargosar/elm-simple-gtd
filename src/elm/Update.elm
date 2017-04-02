@@ -27,7 +27,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
 import Todo as Todo
-import TodoModel.Types exposing (..)
+import Todo.Types exposing (..)
 import Tuple2
 import Function exposing ((>>>))
 import Html

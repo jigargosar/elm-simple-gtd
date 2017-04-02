@@ -22,7 +22,6 @@ import Types exposing (..)
 type RequiresNowAction
     = CreateA String
     | CopyAndEditA Todo
-    | UpdateTodoModifiedAt TodoId
 
 
 setTodoContext =

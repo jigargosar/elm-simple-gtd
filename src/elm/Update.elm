@@ -223,9 +223,6 @@ updateTodoFromEditTodoModel editTodoModel =
 onWithNow : RequiresNowAction -> Time -> ReturnF
 onWithNow action now =
     case action of
-        UpdateTodoModifiedAt id ->
-            Return.andThen (Model.TodoList.updateAndGetMaybeTodo (Todo.setModifiedAt now) id >> persistMaybeTodoFromTuple)
-
         CreateA text ->
             Return.andThen (addNewTodoAt text now >> persistTodoFromTuple)
 

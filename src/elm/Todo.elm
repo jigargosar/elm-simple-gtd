@@ -251,16 +251,6 @@ getModifiedAt =
     (.modifiedAt)
 
 
-setModifiedAt : Time -> ModelF
-setModifiedAt modifiedAt model =
-    { model | modifiedAt = modifiedAt }
-
-
-updateModifiedAt : (Model -> Time) -> ModelF
-updateModifiedAt updater model =
-    setModifiedAt (updater model) model
-
-
 getId =
     (.id)
 

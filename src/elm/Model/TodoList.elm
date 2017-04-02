@@ -112,8 +112,8 @@ updateAndGetTodo actions todoId model =
             )
 
 
-copyNewTodo : TodoId -> Time -> Model -> Maybe ( Todo, Model )
-copyNewTodo todoId now model =
+copyTodoById : TodoId -> Time -> Model -> Maybe ( Todo, Model )
+copyTodoById todoId now model =
     findTodoById todoId model
         ?|> (\todo ->
                 Model.generate (Todo.copyGenerator now todo) model

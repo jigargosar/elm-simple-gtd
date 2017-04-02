@@ -185,7 +185,7 @@ copyAndEditTodo todoId =
     Return.transformWith Model.getNow
         (\now ->
             Return.andThenMaybe
-                (Model.TodoList.copyNewTodo todoId now ?|>> persistAndEditTodoCmd)
+                (Model.TodoList.copyTodoById todoId now ?|>> persistAndEditTodoCmd)
         )
 
 

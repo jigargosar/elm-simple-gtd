@@ -217,22 +217,43 @@ returnAndMapMaybe f1 f2 =
         )
 
 
+
+--returnMapAndThen : (model -> x) -> (x -> Return.ReturnF msg model) -> Return.ReturnF msg model
+
+
+returnMapAndThen f1 f2 =
+    Return.map (apply2 ( f1, identity ))
+        >> returnAndMapTupleFirst f2
+
+
 getOrCreateAndPersistProject : EditTodoModel -> Return -> ReturnTuple Project
 getOrCreateAndPersistProject editTodoModel =
     let
         { projectName } =
             editTodoModel
     in
-        Return.map (apply2 ( Model.ProjectList.getProjectByName projectName, identity ))
-            >> returnAndMapTupleFirst
-                (\maybeProject ->
-                    case maybeProject of
-                        Nothing ->
-                            createAndSaveProject projectName
+        returnMapAndThen (Model.ProjectList.getProjectByName projectName)
+            (\maybeProject ->
+                case maybeProject of
+                    Nothing ->
+                        createAndSaveProject projectName
 
-                        Just project ->
-                            Return.map ((,) project)
-                )
+                    Just project ->
+                        Return.map ((,) project)
+            )
+
+
+
+--        Return.map (apply2 ( Model.ProjectList.getProjectByName projectName, identity ))
+--            >> returnAndMapTupleFirst
+--                (\maybeProject ->
+--                    case maybeProject of
+--                        Nothing ->
+--                            createAndSaveProject projectName
+--
+--                        Just project ->
+--                            Return.map ((,) project)
+--                )
 
 
 createAndSaveProject projectName =

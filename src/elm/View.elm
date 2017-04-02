@@ -125,11 +125,12 @@ newTodoInputView maybeNewTodoModel =
                 , value text
                 , onBlur onNewTodoBlur
                 , onKeyUp (onNewTodoKeyUp text)
+                , style [ ( "width", "100%" ), "color" => "white" ]
                 ]
                 []
 
         Nothing ->
-            h1 [] [ text "SimpleGTD" ]
+            h1 [id "toolbar-title"] [ text "SimpleGTD" ]
 
 
 addTodoFabView m =

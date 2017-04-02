@@ -26,6 +26,10 @@ maybeTransformWith f1 f2 =
         )
 
 
+andThenMaybe f =
+    Return.andThen (\m -> f m ?= Return.singleton m)
+
+
 transformWithComplexImplementation :
     (a -> x)
     -> (x -> Return msg a -> Return msg b)

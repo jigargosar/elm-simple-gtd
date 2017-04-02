@@ -72,9 +72,7 @@ type Msg
     | Start TodoId
     | Stop
     | MarkRunningTodoDone
-    | SetTodoDone Bool TodoId
     | ToggleTodoDone TodoId
-    | SetTodoDeleted Bool TodoId
     | ToggleTodoDeleted TodoId
     | SetTodoContext TodoContext TodoId
     | SetTodoText String TodoId

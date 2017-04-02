@@ -57,9 +57,6 @@ update msg =
                 markRunningTodoDone
                     >> stopRunningTodo
 
-            SetTodoDone bool id ->
-                updateTodo [ Todo.SetDone bool ] id
-
             ToggleTodoDone id ->
                 updateTodo [ Todo.ToggleDone ] id
 
@@ -71,9 +68,6 @@ update msg =
 
             SetTodoText text id ->
                 updateTodo [ Todo.SetText text ] id
-
-            SetTodoDeleted bool id ->
-                updateTodo [ Todo.SetDeleted bool ] id
 
             Create text ->
                 Return.transformWith Model.getNow

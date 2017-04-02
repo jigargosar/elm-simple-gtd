@@ -212,10 +212,6 @@ isNotDeleted =
     getDeleted >> not
 
 
-inboxFilter =
-    toAllPassPredicate [ isNotDeleted, getTodoContext >> equals Inbox ]
-
-
 binFilter =
     toAllPassPredicate [ getDeleted ]
 

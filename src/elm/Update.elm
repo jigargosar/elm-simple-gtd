@@ -132,8 +132,6 @@ update msg =
                 onMsgList messages
 
 
-
-
 updateTodo actions todoId =
     Return.andThenMaybe
         (Model.TodoList.updateAndGetTodo actions todoId >> Maybe.map persistTodoFromTuple)
@@ -256,14 +254,9 @@ persistTodoFromTuple ( todo, model ) =
     ( model, upsertTodoCmd todo )
 
 
-persistMaybeTodoFromTuple : ( Maybe Todo, Model ) -> Return
-persistMaybeTodoFromTuple ( maybeTodo, model ) =
-    case maybeTodo of
-        Nothing ->
-            model ! []
-
-        Just todo ->
-            model ! [ upsertTodoCmd todo ]
+persistTodoFromMaybeTuple : Maybe ( Todo, Model ) -> Return
+persistTodoFromMaybeTuple maybeTuple =
+    maybeTuple ?|> (\( todo, model ) -> model ! [ upsertTodoCmd todo ])
 
 
 persistMaybeTodoCmd =

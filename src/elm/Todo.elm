@@ -176,23 +176,6 @@ getText =
     (.text)
 
 
-getDueAt =
-    (.dueAt)
-
-
-getRev =
-    (.rev)
-
-
-toggleDeleted : ModelF
-toggleDeleted =
-    updateDeleted (getDeleted >> not)
-
-
-setText text todo =
-    { todo | text = text }
-
-
 isDone : Model -> Bool
 isDone =
     (.done)
@@ -223,18 +206,6 @@ equalById todo1 todo2 =
 
 hasId todoId =
     getId >> equals todoId
-
-
-replaceIfEqualById todo =
-    List.replaceIf (equalById todo) todo
-
-
-rejectMap filter mapper =
-    List.filterMap (ifElse (filter >> not) (mapper >> Just) (\_ -> Nothing))
-
-
-mapAllExceptDeleted =
-    rejectMap getDeleted
 
 
 isNotDeleted =

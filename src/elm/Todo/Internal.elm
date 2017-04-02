@@ -1,5 +1,6 @@
 module Todo.Internal exposing (..)
 
+import PouchDB
 import Project exposing (ProjectId)
 import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -14,6 +15,36 @@ type alias Model =
 
 type alias ModelF =
     Model -> Model
+
+
+getRev : Model -> PouchDB.Revision
+getRev =
+    (.rev)
+
+
+setRev : PouchDB.Revision -> ModelF
+setRev rev model =
+    { model | rev = rev }
+
+
+updateRev : (Model -> PouchDB.Revision) -> ModelF
+updateRev updater model =
+    setRev (updater model) model
+
+
+getDueAt : Model -> Maybe Time
+getDueAt =
+    (.dueAt)
+
+
+setDueAt : Maybe Time -> ModelF
+setDueAt dueAt model =
+    { model | dueAt = dueAt }
+
+
+updateDueAt : (Model -> Maybe Time) -> ModelF
+updateDueAt updater model =
+    setDueAt (updater model) model
 
 
 getDone : Model -> Bool

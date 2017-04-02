@@ -260,16 +260,6 @@ getProjectId =
     (.projectId)
 
 
-setProjectId : Maybe ProjectId -> ModelF
-setProjectId projectId model =
-    { model | projectId = projectId }
-
-
-updateProjectId : (Model -> Maybe ProjectId) -> ModelF
-updateProjectId updater model =
-    setProjectId (updater model) model
-
-
 getTodoContext : Model -> TodoContext
 getTodoContext =
     (.context)

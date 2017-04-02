@@ -97,11 +97,8 @@ toViewModelHelp ( todoContext, name, list ) =
 updateAndGetTodo : List TodoUpdateAction -> TodoId -> Model -> ( Maybe Todo, Model )
 updateAndGetTodo actions todoId model =
     let
-        now =
-            Model.getNow model
-
         updater =
-            Todo.update actions now
+            Todo.update actions (Model.getNow model)
 
         newTodoList =
             model.todoList

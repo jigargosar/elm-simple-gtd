@@ -61,16 +61,16 @@ update msg =
                 onWithNow action now
 
             SetTodoDone bool id ->
-                updateTodoFieldsAndModifiedAt [ Todo.SetDone bool ] id
+                updateTodo [ Todo.SetDone bool ] id
 
             SetTodoContext todoContext id ->
-                updateTodoFieldsAndModifiedAt [ Todo.SetContext todoContext ] id
+                updateTodo [ Todo.SetContext todoContext ] id
 
-            SetText text id ->
-                updateTodoFieldsAndModifiedAt [ Todo.SetText text ] id
+            SetTodoText text id ->
+                updateTodo [ Todo.SetText text ] id
 
             SetTodoDeleted bool id ->
-                updateTodoFieldsAndModifiedAt [ Todo.SetDeleted bool ] id
+                updateTodo [ Todo.SetDeleted bool ] id
 
             Create text ->
                 Return.transformWith Model.getNow
@@ -135,7 +135,7 @@ update msg =
                 onMsgList messages
 
 
-updateTodoFieldsAndModifiedAt actions todoId =
+updateTodo actions todoId =
     Return.map (Model.TodoList.updateAndGetTodo actions todoId)
         >> Return.andThen persistMaybeTodoFromTuple
 
@@ -214,7 +214,7 @@ updateTodoFromEditTodoModel : EditTodoModel -> ReturnTuple Project -> Return
 updateTodoFromEditTodoModel editTodoModel =
     Return.transformModelTupleWith
         (\project ->
-            updateTodoFieldsAndModifiedAt
+            updateTodo
                 [ Todo.SetText editTodoModel.todoText
                 , Todo.SetProject project
                 ]

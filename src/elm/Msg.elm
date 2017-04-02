@@ -80,7 +80,7 @@ type Msg
     | OnActionWithNow RequiresNowAction Time
     | SetTodoDone Bool TodoId
     | SetTodoContext TodoContext TodoId
-    | SetText String TodoId
+    | SetTodoText String TodoId
     | SetTodoDeleted Bool TodoId
     | Create String
     | CopyAndEdit Todo

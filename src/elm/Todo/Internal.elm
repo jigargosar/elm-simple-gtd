@@ -37,33 +37,23 @@ updateDeleted updater model =
 set : ModelField -> ModelF
 set field model =
     case field of
-        SetTodoDone done ->
+        SetDone done ->
             { model | done = done }
 
-        SetTodoDeleted deleted ->
+        SetDeleted deleted ->
             { model | deleted = deleted }
 
-        SetTodoText text ->
+        SetText text ->
             { model | text = text }
 
-        SetTodoContext context ->
+        SetContext context ->
             { model | context = context }
 
-        SetTodoProjectId projectId ->
+        SetProjectId projectId ->
             { model | projectId = projectId }
 
-        SetTodoProject project ->
-            { model | projectId = project ?|> Project.getId }
-
-
-update : (Model -> ModelField) -> ModelF
-update updater model =
-    set (updater model) model
-
-
-updateFields : List (Model -> ModelField) -> ModelF
-updateFields fields =
-    List.foldl update # fields
+        SetProject project ->
+            set (SetProjectId (Just (Project.getId project))) model
 
 
 setFields : List ModelField -> ModelF

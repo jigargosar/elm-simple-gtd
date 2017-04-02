@@ -61,16 +61,16 @@ update msg =
                 onWithNow action now
 
             SetTodoDone bool id ->
-                updateTodoFieldsAndModifiedAt [ Todo.SetTodoDone bool ] id
+                updateTodoFieldsAndModifiedAt [ Todo.SetDone bool ] id
 
             SetTodoContext todoContext id ->
-                updateTodoFieldsAndModifiedAt [ Todo.SetTodoContext todoContext ] id
+                updateTodoFieldsAndModifiedAt [ Todo.SetContext todoContext ] id
 
             SetText text id ->
-                updateTodoFieldsAndModifiedAt [ Todo.SetTodoText text ] id
+                updateTodoFieldsAndModifiedAt [ Todo.SetText text ] id
 
             SetTodoDeleted bool id ->
-                updateTodoFieldsAndModifiedAt [ Todo.SetTodoDeleted bool ] id
+                updateTodoFieldsAndModifiedAt [ Todo.SetDeleted bool ] id
 
             Create text ->
                 withNow (OnActionWithNow (CreateA text))
@@ -229,8 +229,8 @@ updateTodoFromEditTodoModel editTodoModel =
     Return.transformModelTupleWith
         (\project ->
             updateTodoFieldsAndModifiedAt
-                [ Todo.SetTodoText editTodoModel.todoText
-                , Todo.SetTodoProject (Just project)
+                [ Todo.SetText editTodoModel.todoText
+                , Todo.SetProject project
                 ]
                 (Todo.getId editTodoModel.todo)
         )

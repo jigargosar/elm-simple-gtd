@@ -53,9 +53,9 @@ type alias EncodedTodo =
 
 
 type TodoAction
-    = SetTodoDone Bool
-    | SetTodoText TodoText
-    | SetTodoDeleted Bool
-    | SetTodoContext TodoContext
-    | SetTodoProjectId (Maybe ProjectId)
-    | SetTodoProject (Maybe Project.Project)
+    = SetDone Bool
+    | SetText TodoText
+    | SetDeleted Bool
+    | SetContext TodoContext
+    | SetProjectId (Maybe ProjectId)
+    | SetProject Project.Project

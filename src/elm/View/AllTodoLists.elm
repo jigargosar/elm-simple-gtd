@@ -1,6 +1,7 @@
 module View.AllTodoLists exposing (..)
 
 import Dom
+import EditModel.Types exposing (EditTodoModel)
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
@@ -34,7 +35,7 @@ import View.Todo
 type alias ViewContext =
     { now : Time
     , encodedProjectNames : Json.Encode.Value
-    , model : Model
+    , maybeEditTodoModel : Maybe EditTodoModel
     }
 
 
@@ -63,7 +64,7 @@ keyedTodoView vc todo =
 
 
 getMaybeEditTodoView vc todo =
-    Model.EditModel.getMaybeEditTodoModel vc.model
+    vc.maybeEditTodoModel
         ?+> (\etm ->
                 if Todo.equalById todo etm.todo then
                     Just (View.Todo.todoViewEditing vc etm)

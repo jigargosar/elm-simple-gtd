@@ -27,8 +27,6 @@ saveNewTodo =
     Create
 
 
-
-
 start =
     Start
 
@@ -75,7 +73,7 @@ type Msg
     | SetTodoContext TodoContext TodoId
     | SetTodoText String TodoId
     | Create String
-    | CopyAndEdit Todo
+    | CopyAndEdit TodoId
     | AddTodoClicked
     | NewTodoTextChanged TodoText
     | NewTodoBlur

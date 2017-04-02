@@ -6,6 +6,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Project
+import Time exposing (Time)
 import Todo
 import TodoList
 import TodoList.Types exposing (..)
@@ -108,4 +109,13 @@ updateAndGetTodo actions todoId model =
                             , setTodoList newTodoList model
                             )
                    )
+            )
+
+
+copyNewTodo : TodoId -> Time -> Model -> Maybe ( Todo, Model )
+copyNewTodo todoId now model =
+    findTodoById todoId model
+        ?|> (\todo ->
+                Model.generate (Todo.copyGenerator now todo) model
+                    |> apply2 ( Tuple.first, uncurry addTodo )
             )

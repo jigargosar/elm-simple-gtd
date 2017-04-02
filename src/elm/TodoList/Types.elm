@@ -1,16 +1,14 @@
-module TodoListModel.Types exposing (..)
+module TodoList.Types exposing (..)
 
 import Todo.Types exposing (EncodedTodo, Todo)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
-type alias TodoListModel =
+
+type alias TodoList =
     List Todo
 
 
 type alias EncodedTodoList =
     List EncodedTodo
-
-
-

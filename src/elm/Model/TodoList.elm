@@ -7,7 +7,8 @@ import Maybe.Extra as Maybe
 import Model
 import Project
 import Todo
-import TodoListModel.Types exposing (..)
+import TodoList
+import TodoList.Types exposing (..)
 import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -16,7 +17,7 @@ import Model.Types exposing (..)
 import Types exposing (..)
 
 
-getTodoList : Model -> TodoListModel
+getTodoList : Model -> TodoList
 getTodoList =
     (.todoList)
 
@@ -49,7 +50,7 @@ mapAllExceptDeleted mapper =
 
 getTodoById : TodoId -> Model -> Maybe Todo
 getTodoById id =
-    getTodoList >> Todo.findById id
+    getTodoList >> TodoList.findById id
 
 
 findTodoEqualById todo =
@@ -60,12 +61,12 @@ addTodo todo =
     updateTodoList (getTodoList >> (::) todo)
 
 
-setTodoList : TodoListModel -> ModelF
+setTodoList : TodoList -> ModelF
 setTodoList todoList model =
     { model | todoList = todoList }
 
 
-updateTodoList : (Model -> TodoListModel) -> ModelF
+updateTodoList : (Model -> TodoList) -> ModelF
 updateTodoList updater model =
     setTodoList (updater model) model
 
@@ -83,7 +84,7 @@ updateAndGetMaybeTodo updater todoId m =
 
 
 type alias TodoContextViewModel =
-    { todoContext : TodoContext, name : String, todoList : TodoListModel, count : Int, isEmpty : Bool }
+    { todoContext : TodoContext, name : String, todoList : TodoList, count : Int, isEmpty : Bool }
 
 
 getTodoContextsViewModel : Model -> List TodoContextViewModel
@@ -97,7 +98,7 @@ getTodoContextsViewModel =
            )
 
 
-toViewModel : Dict String TodoListModel -> TodoContext -> TodoContextViewModel
+toViewModel : Dict String TodoList -> TodoContext -> TodoContextViewModel
 toViewModel dict =
     apply3
         ( identity

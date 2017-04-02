@@ -1,16 +1,20 @@
-module TodoListModel exposing (..)
+module TodoList exposing (..)
 
 import Todo
-import TodoListModel.Types exposing (..)
+import TodoList.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import List
+import List.Extra as List
+import Dict
+import Dict.Extra as Dict
 
 
-decodeTodoList : EncodedTodoList -> TodoListModel
+decodeTodoList : EncodedTodoList -> TodoList
 decodeTodoList =
     List.map (D.decodeValue Todo.todoDecoder)
         >> List.filterMap
@@ -26,3 +30,7 @@ decodeTodoList =
                         in
                             Nothing
             )
+
+
+findById id =
+    List.find (Todo.hasId id)

@@ -265,29 +265,13 @@ getTodoContext =
     (.context)
 
 
-markDeleted : ModelF
-markDeleted todo =
-    { todo | deleted = True }
-
-
 equalById todo1 todo2 =
     getId todo1 == getId todo2
-
-
-isTextEmpty todo =
-    getText todo |> String.trim |> String.isEmpty
 
 
 hasId todoId =
     getId >> equals todoId
 
-
-fromListById =
-    Dict.fromListBy getId
-
-
-findById id =
-    List.find (hasId id)
 
 
 replaceIfEqualById todo =

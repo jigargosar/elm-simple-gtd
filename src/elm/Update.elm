@@ -230,7 +230,7 @@ createAndSaveProject projectName =
 
 updateTodoFromEditTodoModel : EditTodoModel -> ReturnTuple Project -> Return
 updateTodoFromEditTodoModel editTodoModel =
-    Return.transformTupleWith
+    Return.transformModelTupleWith
         (\project ->
             updateTodoFieldsAndModifiedAt
                 [ TodoTextField editTodoModel.todoText

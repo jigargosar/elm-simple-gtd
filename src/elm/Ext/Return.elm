@@ -6,12 +6,9 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 
 
-transformTupleWith f =
+transformModelTupleWith f =
     Return.andThen (\( x, m ) -> (f x) (Return.singleton m))
 
-
-
---returnAndMapMaybe : (Model -> Maybe x) -> (x -> ReturnF) -> ReturnF
 
 
 maybeTransformWith :

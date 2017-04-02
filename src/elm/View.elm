@@ -2,7 +2,7 @@ module View exposing (appView)
 
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
-import Html exposing (Attribute, Html, div, hr, node, span, text)
+import Html exposing (Attribute, Html, div, h1, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
@@ -129,7 +129,7 @@ newTodoInputView maybeNewTodoModel =
                 []
 
         Nothing ->
-            span [] []
+            h1 [] [ text "SimpleGTD" ]
 
 
 addTodoFabView m =

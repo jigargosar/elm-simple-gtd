@@ -36,6 +36,14 @@ createEditTodoModel todo model =
         >> uncurry3 EditTodoModel
 
 
+getProjectNameOfTodo : Todo -> Model -> ProjectName
+getProjectNameOfTodo todo model =
+    Todo.getMaybeProjectId todo
+        ?+> (Model.ProjectList.findProjectById # model)
+        ?|> Project.getName
+        ?= ""
+
+
 updateEditTodoText : String -> ModelF
 updateEditTodoText text m =
     m
@@ -78,11 +86,3 @@ updateEditTodoProjectName projectName m =
 
 deactivateEditingMode =
     setEditModel None
-
-
-getProjectNameOfTodo : Todo -> Model -> ProjectName
-getProjectNameOfTodo todo model =
-    Todo.getMaybeProjectId todo
-        ?+> (Model.ProjectList.findProjectById # model)
-        ?|> Project.getName
-        ?= ""

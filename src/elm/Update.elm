@@ -216,14 +216,14 @@ getOrCreateAndPersistProject editTodoModel =
             (\maybeProject ->
                 case maybeProject of
                     Nothing ->
-                        createAndSaveProject projectName
+                        createAndPersistProject projectName
 
                     Just project ->
                         Return.map ((,) project)
             )
 
 
-createAndSaveProject projectName =
+createAndPersistProject projectName =
     Return.map (Model.ProjectList.addNewProject projectName)
         >> Return.effect_ (Tuple.first >> upsertProjectCmd)
 

@@ -38,11 +38,11 @@ type alias ViewContext =
     }
 
 
-createTodoListViewConfig : Model -> ViewContext
-createTodoListViewConfig model =
+createViewContext : Model -> ViewContext
+createViewContext model =
     { now = Model.getNow model
     , encodedProjectNames = Model.ProjectList.getEncodedProjectNames model
-    , model = model
+    , maybeEditTodoModel = Model.EditModel.getMaybeEditTodoModel model
     }
 
 
@@ -52,7 +52,7 @@ type alias TodoView =
 
 todoViewFromModel : Model -> TodoView
 todoViewFromModel =
-    createTodoListViewConfig >> keyedTodoView
+    createViewContext >> keyedTodoView
 
 
 keyedTodoView : ViewContext -> TodoView

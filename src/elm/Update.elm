@@ -112,7 +112,7 @@ update msg =
             EditTodoKeyUp { key, isShiftDown } ->
                 case key of
                     Enter ->
-                        saveAndDeactivateEditingTodo
+                        onEditTodoEnterPressed isShiftDown
 
                     --                            >> whenBool isShiftDown
                     --                                (Return.command (CopyAndEdit |> Msg.toCmd))
@@ -175,8 +175,8 @@ activateEditNewTodoMode text =
     Return.map (Model.EditModel.activateNewTodoMode text)
 
 
-saveAndDeactivateEditingTodo : ReturnF
-saveAndDeactivateEditingTodo =
+onEditTodoEnterPressed : Bool -> ReturnF
+onEditTodoEnterPressed isShiftDown =
     Return.maybeTransformWith getMaybeEditTodoModel
         (\editTodoModel ->
             findOrCreateProjectByName editTodoModel.projectName

@@ -114,7 +114,7 @@ todoRecordDecoder =
         >> D.optional "projectId" (D.nullable D.string) Nothing
 
 
-todoDecoder : Decoder TodoModel
+todoDecoder : Decoder Todo
 todoDecoder =
     D.decode todoConstructor
         |> PouchDB.documentFieldsDecoder
@@ -138,7 +138,7 @@ copyTodo createdAt todo id =
     { todo | id = id, rev = PouchDB.defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
 
 
-encodeTodo : TodoModel -> EncodedTodo
+encodeTodo : Todo -> EncodedTodo
 encodeTodo todo =
     E.object
         [ "_id" => E.string (getId todo)
@@ -176,7 +176,7 @@ copyGenerator createdAt todo =
     Random.map (copyTodo createdAt todo) RandomIdGenerator.idGen
 
 
-createdAtInWords : Time -> TodoModel -> String
+createdAtInWords : Time -> Todo -> String
 createdAtInWords now =
     getCreatedAt
         >> Date.fromTime
@@ -185,7 +185,7 @@ createdAtInWords now =
             (Date.fromTime now)
 
 
-modifiedAtInWords : Time -> TodoModel -> String
+modifiedAtInWords : Time -> Todo -> String
 modifiedAtInWords now =
     getModifiedAt
         >> Date.fromTime
@@ -376,6 +376,6 @@ getFirstInboxTodo =
     List.find inboxFilter
 
 
-toVM : TodoModel -> ViewModel
+toVM : Todo -> ViewModel
 toVM =
     identity

@@ -21,7 +21,7 @@ import Types exposing (..)
 
 type RequiresNowAction
     = CreateA String
-    | CopyAndEditA TodoModel
+    | CopyAndEditA Todo
     | UpdateTodoModifiedAt TodoId
 
 
@@ -84,16 +84,16 @@ type Msg
     | SetText String TodoId
     | SetTodoDeleted Bool TodoId
     | Create String
-    | CopyAndEdit TodoModel
+    | CopyAndEdit Todo
     | AddTodoClicked
     | NewTodoTextChanged TodoText
     | NewTodoBlur
     | NewTodoKeyUp String KeyboardEvent
-    | StartEditingTodo TodoModel
+    | StartEditingTodo Todo
     | FocusPaperInput String
     | EditTodoTextChanged EditTodoModel String
     | EditTodoProjectNameChanged EditTodoModel ProjectName
-    | EditTodoKeyUp TodoModel KeyboardEvent
+    | EditTodoKeyUp Todo KeyboardEvent
     | SetMainViewType MainViewType
     | OnNowChanged Time
     | OnMsgList (List Msg)

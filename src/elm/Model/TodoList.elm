@@ -47,7 +47,7 @@ mapAllExceptDeleted mapper =
     getTodoList >> Todo.mapAllExceptDeleted mapper
 
 
-getTodoById : TodoId -> Model -> Maybe TodoModel
+getTodoById : TodoId -> Model -> Maybe Todo
 getTodoById id =
     getTodoList >> Todo.findById id
 
@@ -70,7 +70,7 @@ updateTodoList updater model =
     setTodoList (updater model) model
 
 
-updateTodoMaybe : (TodoModel -> TodoModel) -> TodoId -> Model -> ( Maybe TodoModel, Model )
+updateTodoMaybe : (Todo -> Todo) -> TodoId -> Model -> ( Maybe Todo, Model )
 updateTodoMaybe updater todoId m =
     let
         newTodoList =
@@ -113,7 +113,7 @@ toViewModelHelp ( todoContext, name, list ) =
         >> uncurry3 (TodoContextViewModel todoContext name)
 
 
-updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Maybe TodoModel, Model )
+updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Maybe Todo, Model )
 updateTodoWithFields fields =
     updateTodoMaybe (Todo.setFields fields)
 

@@ -133,7 +133,7 @@ update msg =
                 onMsgList messages
 
 
-updateMaybeTodoModifiedAt : ( Maybe TodoModel, Model ) -> Return
+updateMaybeTodoModifiedAt : ( Maybe Todo, Model ) -> Return
 updateMaybeTodoModifiedAt ( maybeTodo, m ) =
     m
         |> Return.singleton
@@ -260,13 +260,13 @@ markRunningTodoDone =
         >> uncurry (Maybe.unwrap identity (SetTodoDone True >> andThenUpdate))
 
 
-addNewTodoAt : String -> Time -> Model -> ( TodoModel, Model )
+addNewTodoAt : String -> Time -> Model -> ( Todo, Model )
 addNewTodoAt text now =
     Model.generate (Todo.todoGenerator now text)
         >> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
 
 
-copyNewTodo : TodoModel -> Time -> Model -> ( TodoModel, Model )
+copyNewTodo : Todo -> Time -> Model -> ( Todo, Model )
 copyNewTodo todo now =
     Model.generate (Todo.copyGenerator now todo)
         >> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
@@ -277,18 +277,18 @@ withNow msg =
     Task.perform (msg) Time.now |> Return.command
 
 
-persistAndEditTodoCmd : ( TodoModel, Model ) -> Return
+persistAndEditTodoCmd : ( Todo, Model ) -> Return
 persistAndEditTodoCmd ( todo, model ) =
     persistTodoFromTuple ( todo, model )
         |> andThenUpdate (Msg.StartEditingTodo todo)
 
 
-persistTodoFromTuple : ( TodoModel, Model ) -> Return
+persistTodoFromTuple : ( Todo, Model ) -> Return
 persistTodoFromTuple ( todo, model ) =
     ( model, upsertTodoCmd todo )
 
 
-persistMaybeTodoFromTuple : ( Maybe TodoModel, Model ) -> Return
+persistMaybeTodoFromTuple : ( Maybe Todo, Model ) -> Return
 persistMaybeTodoFromTuple ( maybeTodo, model ) =
     case maybeTodo of
         Nothing ->

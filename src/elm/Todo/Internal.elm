@@ -8,7 +8,7 @@ import FunctionExtra exposing (..)
 
 
 type alias Model =
-    TodoModel
+    Todo
 
 
 type alias ModelF =

@@ -27,8 +27,6 @@ saveNewTodo =
     Create
 
 
-splitNewTodoFrom =
-    CopyAndEdit
 
 
 start =
@@ -86,7 +84,7 @@ type Msg
     | FocusPaperInput String
     | EditTodoTextChanged String
     | EditTodoProjectNameChanged ProjectName
-    | EditTodoKeyUp Todo KeyboardEvent
+    | EditTodoKeyUp KeyboardEvent
     | SetMainViewType MainViewType
     | OnNowChanged Time
     | OnMsgList (List Msg)

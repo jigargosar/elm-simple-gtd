@@ -63,14 +63,18 @@ keyedTodoView vc todo =
     )
 
 
+getMaybeEditTodoView : ViewContext -> Todo -> Maybe (Html Msg)
 getMaybeEditTodoView vc todo =
     vc.maybeEditTodoModel
-        ?+> (\etm ->
-                if Todo.equalById todo etm.todo then
-                    Just (View.Todo.todoViewEditing vc etm)
-                else
-                    Nothing
-            )
+        ?+> foo vc todo
+
+
+foo : ViewContext -> Todo -> EditTodoModel -> Maybe (Html Msg)
+foo vc todo etm =
+    if Todo.hasId etm.todoId todo then
+        Just (View.Todo.todoViewEditing vc etm)
+    else
+        Nothing
 
 
 todoListView : Model -> Html Msg

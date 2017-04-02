@@ -39,18 +39,18 @@ todoViewEditing vc etm =
     item [ class "todo-item" ]
         [ itemBody []
             [ input
-                [ id (todoInputId etm.todo)
+                [ id (todoInputId etm.todoId)
                 , class "edit-todo-input auto-focus"
                 , stringProperty "label" "Todo"
                 , value (etm.todoText)
                 , onInput Msg.EditTodoTextChanged
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                , onKeyUp (Msg.EditTodoKeyUp etm.todo)
+                , onKeyUp Msg.EditTodoKeyUp
                 ]
                 []
             , input
-                [ id (todoProjectInputId etm.todo)
+                [ id (todoProjectInputId etm.todoId)
                 , class "project-name-input"
                 , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
                 , onInput Msg.EditTodoProjectNameChanged
@@ -59,7 +59,7 @@ todoViewEditing vc etm =
                 ]
                 []
             , Html.node "paper-autocomplete-suggestions"
-                [ stringProperty "for" (todoProjectInputId etm.todo)
+                [ stringProperty "for" (todoProjectInputId etm.todoId)
                 , property "source" (vc.encodedProjectNames)
                 , onAutoCompleteSelected Msg.EditTodoProjectNameChanged
                 , intProperty "minLength" 0
@@ -97,12 +97,12 @@ checkBoxView =
     checkbox [ checked False ] []
 
 
-todoInputId todo =
-    "edit-todo-input-" ++ (Todo.getId todo)
+todoInputId todoId =
+    "edit-todo-input-" ++ todoId
 
 
-todoProjectInputId todo =
-    "edit-todo-project-input-" ++ (Todo.getId todo)
+todoProjectInputId todoId =
+    "edit-todo-project-input-" ++ todoId
 
 
 hoverIcons vc todo =

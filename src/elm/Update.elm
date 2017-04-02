@@ -109,13 +109,13 @@ update msg =
             EditTodoProjectNameChanged projectName ->
                 Return.map (Model.EditModel.updateEditTodoProjectName projectName)
 
-            EditTodoKeyUp todo { key, isShiftDown } ->
+            EditTodoKeyUp { key, isShiftDown } ->
                 case key of
                     Enter ->
                         saveAndDeactivateEditingTodo
-                            >> whenBool isShiftDown
-                                (Return.command (Msg.splitNewTodoFrom todo |> Msg.toCmd))
 
+                    --                            >> whenBool isShiftDown
+                    --                                (Return.command (CopyAndEdit |> Msg.toCmd))
                     Escape ->
                         deactivateEditingMode
 
@@ -211,7 +211,7 @@ updateTodoFromEditTodoModel editTodoModel =
                 [ Todo.SetText editTodoModel.todoText
                 , Todo.SetProject project
                 ]
-                (Todo.getId editTodoModel.todo)
+                editTodoModel.todoId
         )
 
 

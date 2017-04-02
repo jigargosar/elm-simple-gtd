@@ -201,7 +201,10 @@ saveAndDeactivateEditingTodo =
         )
 
 
-returnAndMapTupleFirst : (x -> ReturnF) -> ReturnTuple x -> Return
+
+--returnAndMapTupleFirst : (x -> ReturnF) -> ReturnTuple x -> Return.Return Msg Model
+
+
 returnAndMapTupleFirst f =
     Return.andThen (\( x, m ) -> (f x) (Return.singleton m))
 
@@ -216,24 +219,20 @@ returnAndMapMaybe f1 f2 =
 
 getOrCreateAndPersistProject : EditTodoModel -> Return -> ReturnTuple Project
 getOrCreateAndPersistProject editTodoModel =
-    Return.andThen
-        (\m ->
-            let
-                { projectName } =
-                    editTodoModel
-
-                maybeProject =
-                    Model.ProjectList.getProjectByName projectName m
-            in
-                m
-                    |> Return.singleton
-                    >> case maybeProject of
+    let
+        { projectName } =
+            editTodoModel
+    in
+        Return.map (apply2 ( Model.ProjectList.getProjectByName projectName, identity ))
+            >> returnAndMapTupleFirst
+                (\maybeProject ->
+                    case maybeProject of
                         Nothing ->
                             createAndSaveProject projectName
 
                         Just project ->
                             Return.map ((,) project)
-        )
+                )
 
 
 createAndSaveProject projectName =

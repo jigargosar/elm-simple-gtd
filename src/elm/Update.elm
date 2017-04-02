@@ -74,13 +74,6 @@ update msg =
                 Return.transformWith Model.getNow
                     (\now -> Return.andThen (addNewTodoAt text now >> persistTodoFromTuple))
 
-            CopyAndEdit todoId ->
-                Return.transformWith Model.getNow
-                    (\now ->
-                        Return.andThenMaybe
-                            (Model.TodoList.copyNewTodo todoId now ?|>> persistAndEditTodoCmd)
-                    )
-
             AddTodoClicked ->
                 activateEditNewTodoMode ""
                     >> autoFocusPaperInputCmd
@@ -118,8 +111,6 @@ update msg =
                     Enter ->
                         onEditTodoEnterPressed isShiftDown
 
-                    --                            >> whenBool isShiftDown
-                    --                                (Return.command (CopyAndEdit |> Msg.toCmd))
                     Escape ->
                         deactivateEditingMode
 
@@ -185,8 +176,16 @@ onEditTodoEnterPressed isShiftDown =
         (\editTodoModel ->
             findOrCreateProjectByName editTodoModel.projectName
                 >> updateTodoFromEditTodoModel editTodoModel
-                >> whenBool isShiftDown (Return.command (CopyAndEdit editTodoModel.todoId |> Msg.toCmd))
+                >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todoId)
                 >> deactivateEditingMode
+        )
+
+
+copyAndEditTodo todoId =
+    Return.transformWith Model.getNow
+        (\now ->
+            Return.andThenMaybe
+                (Model.TodoList.copyNewTodo todoId now ?|>> persistAndEditTodoCmd)
         )
 
 

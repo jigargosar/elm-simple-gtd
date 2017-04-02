@@ -73,7 +73,6 @@ type Msg
     | SetTodoContext TodoContext TodoId
     | SetTodoText String TodoId
     | Create String
-    | CopyAndEdit TodoId
     | AddTodoClicked
     | NewTodoTextChanged TodoText
     | NewTodoBlur

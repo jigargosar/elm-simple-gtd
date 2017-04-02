@@ -113,7 +113,7 @@ toViewModelHelp ( todoContext, name, list ) =
         >> uncurry3 (TodoContextViewModel todoContext name)
 
 
-updateTodoWithFields : List TodoField -> TodoId -> Model -> ( Maybe Todo, Model )
+updateTodoWithFields : List TodoAction -> TodoId -> Model -> ( Maybe Todo, Model )
 updateTodoWithFields fields =
     updateTodoMaybe (Todo.setFields fields)
 

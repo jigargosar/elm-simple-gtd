@@ -52,10 +52,10 @@ type alias EncodedTodo =
     E.Value
 
 
-type TodoField
-    = TodoDoneField Bool
-    | TodoTextField TodoText
-    | TodoDeletedField Bool
-    | TodoContextField TodoContext
-    | TodoProjectIdField (Maybe ProjectId)
-    | TodoProjectField (Maybe Project.Project)
+type TodoAction
+    = SetTodoDone Bool
+    | SetTodoText TodoText
+    | SetTodoDeleted Bool
+    | SetTodoContext TodoContext
+    | SetTodoProjectId (Maybe ProjectId)
+    | SetTodoProject (Maybe Project.Project)

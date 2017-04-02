@@ -16,7 +16,7 @@ type alias ModelF =
 
 
 type alias ModelField =
-    TodoField
+    TodoAction
 
 
 getDeleted : Model -> Bool
@@ -37,22 +37,22 @@ updateDeleted updater model =
 set : ModelField -> ModelF
 set field model =
     case field of
-        TodoDoneField done ->
+        SetTodoDone done ->
             { model | done = done }
 
-        TodoDeletedField deleted ->
+        SetTodoDeleted deleted ->
             { model | deleted = deleted }
 
-        TodoTextField text ->
+        SetTodoText text ->
             { model | text = text }
 
-        TodoContextField context ->
+        SetTodoContext context ->
             { model | context = context }
 
-        TodoProjectIdField projectId ->
+        SetTodoProjectId projectId ->
             { model | projectId = projectId }
 
-        TodoProjectField project ->
+        SetTodoProject project ->
             { model | projectId = project ?|> Project.getId }
 
 

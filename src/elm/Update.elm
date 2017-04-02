@@ -27,7 +27,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
 import Todo as Todo
-import Todo.Types exposing (..)
+import Todo.Types as Todo exposing (Todo)
 import Tuple2
 import Function exposing ((>>>))
 import Html
@@ -61,16 +61,16 @@ update msg =
                 onWithNow action now
 
             SetTodoDone bool id ->
-                updateTodoFieldsAndModifiedAt [ TodoDoneField bool ] id
+                updateTodoFieldsAndModifiedAt [ Todo.SetTodoDone bool ] id
 
             SetTodoContext todoContext id ->
-                updateTodoFieldsAndModifiedAt [ TodoContextField todoContext ] id
+                updateTodoFieldsAndModifiedAt [ Todo.SetTodoContext todoContext ] id
 
             SetText text id ->
-                updateTodoFieldsAndModifiedAt [ TodoTextField text ] id
+                updateTodoFieldsAndModifiedAt [ Todo.SetTodoText text ] id
 
             SetTodoDeleted bool id ->
-                updateTodoFieldsAndModifiedAt [ TodoDeletedField bool ] id
+                updateTodoFieldsAndModifiedAt [ Todo.SetTodoDeleted bool ] id
 
             Create text ->
                 withNow (OnActionWithNow (CreateA text))
@@ -229,8 +229,8 @@ updateTodoFromEditTodoModel editTodoModel =
     Return.transformModelTupleWith
         (\project ->
             updateTodoFieldsAndModifiedAt
-                [ TodoTextField editTodoModel.todoText
-                , TodoProjectField (Just project)
+                [ Todo.SetTodoText editTodoModel.todoText
+                , Todo.SetTodoProject (Just project)
                 ]
                 (Todo.getId editTodoModel.todo)
         )

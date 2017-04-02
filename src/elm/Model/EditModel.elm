@@ -29,7 +29,7 @@ createEditTodoModel : Todo -> Model -> EditTodoModel
 createEditTodoModel todo model =
     todo
         |> apply3
-            ( identity
+            ( Todo.getId
             , Todo.getText
             , getProjectNameOfTodo # model
             )
@@ -80,11 +80,9 @@ deactivateEditingMode =
     setEditModel None
 
 
-getProjectOfTodo : Todo -> Model -> Maybe Project
-getProjectOfTodo todo model =
-    Todo.getProjectId todo |> Model.ProjectList.getProjectByMaybeId # model
-
-
 getProjectNameOfTodo : Todo -> Model -> ProjectName
-getProjectNameOfTodo =
-    getProjectOfTodo >>> Maybe.unwrap "" Project.getName
+getProjectNameOfTodo todo model =
+    Todo.getMaybeProjectId todo
+        ?+> (Model.ProjectList.findProjectById # model)
+        ?|> Project.getName
+        ?= ""

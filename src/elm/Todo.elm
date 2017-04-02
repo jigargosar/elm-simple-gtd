@@ -190,8 +190,8 @@ getId =
     (.id)
 
 
-getProjectId : Model -> Maybe ProjectId
-getProjectId =
+getMaybeProjectId : Model -> Maybe ProjectId
+getMaybeProjectId =
     (.projectId)
 
 

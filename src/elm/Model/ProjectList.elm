@@ -23,12 +23,7 @@ getProjectByName projectName =
     getProjectList >> List.find (Project.nameEquals projectName)
 
 
-getProjectByMaybeId : Maybe ProjectId -> Model -> Maybe Project
-getProjectByMaybeId maybeProjectId model =
-    maybeProjectId ?+> getProjectById # model
-
-
-getProjectById id =
+findProjectById id =
     getProjectList >> List.find (Project.getId >> equals id)
 
 

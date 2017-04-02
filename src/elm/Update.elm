@@ -205,7 +205,7 @@ saveAndDeactivateEditingTodo =
 --returnAndMapTupleFirst : (x -> ReturnF) -> ReturnTuple x -> Return.Return Msg Model
 
 
-returnTransformFromTuple f =
+returnTransformTupleWith f =
     Return.andThen (\( x, m ) -> (f x) (Return.singleton m))
 
 
@@ -224,7 +224,7 @@ returnTransformWith :
     -> Return.Return msg b
 returnTransformWith f1 f2 =
     Return.map (apply2 ( f1, identity ))
-        >> returnTransformFromTuple f2
+        >> returnTransformTupleWith f2
 
 
 getOrCreateAndPersistProject : EditTodoModel -> Return -> ReturnTuple Project
@@ -251,7 +251,7 @@ createAndSaveProject projectName =
 
 updateTodoFromEditTodoModel : EditTodoModel -> ReturnTuple Project -> Return
 updateTodoFromEditTodoModel editTodoModel =
-    returnTransformFromTuple
+    returnTransformTupleWith
         (\project ->
             updateTodoFieldsAndModifiedAt
                 [ TodoTextField editTodoModel.todoText

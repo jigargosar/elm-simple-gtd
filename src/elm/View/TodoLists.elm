@@ -1,4 +1,4 @@
-module View.AllTodoLists exposing (..)
+module View.TodoLists exposing (..)
 
 import Dom
 import EditModel.Types exposing (EditTodoModel)

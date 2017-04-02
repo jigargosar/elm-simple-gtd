@@ -10,7 +10,7 @@ import Model
 import Model.EditModel
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (..)
-import View.AllTodoLists exposing (..)
+import View.TodoLists exposing (..)
 import View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)

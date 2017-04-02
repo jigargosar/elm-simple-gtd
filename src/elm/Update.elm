@@ -132,14 +132,13 @@ update msg =
                 onMsgList messages
 
 
+andThenMaybe f =
+    Return.andThen (\m -> f m ?= Return.singleton m)
+
+
 updateTodo actions todoId =
-    Return.andThen
-        (\m ->
-            m
-                |> Model.TodoList.updateAndGetTodo actions todoId
-                ?|> persistTodoFromTuple
-                ?= Return.singleton m
-        )
+    andThenMaybe
+        (Model.TodoList.updateAndGetTodo actions todoId >> Maybe.map persistTodoFromTuple)
 
 
 onMsgList : List Msg -> ReturnF

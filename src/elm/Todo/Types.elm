@@ -52,7 +52,7 @@ type alias EncodedTodo =
     E.Value
 
 
-type TodoAction
+type TodoUpdateAction
     = SetDone Bool
     | SetText TodoText
     | SetDeleted Bool

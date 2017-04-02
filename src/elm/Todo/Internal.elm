@@ -30,7 +30,7 @@ updateDeleted updater model =
     setDeleted (updater model) model
 
 
-update : TodoAction -> ModelF
+update : TodoUpdateAction -> ModelF
 update field model =
     case field of
         SetDone done ->
@@ -52,6 +52,6 @@ update field model =
             update (SetProjectId (Just (Project.getId project))) model
 
 
-updateAll : List TodoAction -> ModelF
+updateAll : List TodoUpdateAction -> ModelF
 updateAll action =
     List.foldl update # action

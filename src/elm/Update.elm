@@ -149,9 +149,11 @@ updateMaybeTodoModifiedAt ( maybeTodo, m ) =
                 identity
 
 
-updateTodoFieldsAndModifiedAt fields todoId =
-    Return.map (Model.TodoList.updateTodoWithFields fields todoId)
-        >> Return.andThen updateMaybeTodoModifiedAt
+updateTodoFieldsAndModifiedAt actions todoId =
+    Return.andThen
+        (Model.TodoList.updateAndGetTodo actions todoId
+            >> updateMaybeTodoModifiedAt
+        )
 
 
 onMsgList : List Msg -> ReturnF

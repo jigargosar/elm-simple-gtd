@@ -60,3 +60,4 @@ type TodoUpdateAction
     | SetProjectId (Maybe ProjectId)
     | SetProject Project.Project
     | ToggleDone
+    | ToggleDeleted

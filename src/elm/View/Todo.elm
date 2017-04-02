@@ -131,7 +131,7 @@ doneIconButton vc todo =
 deleteIconButton vc todo =
     iconButton
         [ onClickStopPropagation
-            (vc.onDeleteTodoClicked (todo |> Todo.getDeleted >> not) (Todo.getId todo))
+            (vc.onDeleteTodoClicked (Todo.getId todo))
         , icon "delete"
         ]
         []

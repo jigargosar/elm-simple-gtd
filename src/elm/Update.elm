@@ -63,6 +63,9 @@ update msg =
             ToggleTodoDone id ->
                 updateTodo [ Todo.ToggleDone ] id
 
+            ToggleTodoDeleted id ->
+                updateTodo [ Todo.ToggleDeleted ] id
+
             SetTodoContext todoContext id ->
                 updateTodo [ Todo.SetContext todoContext ] id
 

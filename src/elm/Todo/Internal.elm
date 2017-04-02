@@ -146,6 +146,9 @@ update field model =
         ToggleDone ->
             updateDone (getDone >> not) model
 
+        ToggleDeleted ->
+            updateDeleted (getDeleted >> not) model
+
 
 updateAll : List TodoUpdateAction -> Time -> ModelF
 updateAll action now =

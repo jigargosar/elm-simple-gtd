@@ -74,6 +74,7 @@ type Msg
     | MarkRunningTodoDone
     | SetTodoDone Bool TodoId
     | ToggleTodoDone TodoId
+    | ToggleTodoDeleted TodoId
     | SetTodoContext TodoContext TodoId
     | SetTodoText String TodoId
     | SetTodoDeleted Bool TodoId

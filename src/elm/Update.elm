@@ -181,7 +181,14 @@ onEditTodoEnterPressed isShiftDown =
     Return.maybeTransformWith getMaybeEditTodoModel
         (\editTodoModel ->
             findOrCreateProjectByName editTodoModel.projectName
-                >> updateTodoFromEditTodoModel editTodoModel
+                >> Return.transformModelTupleWith
+                    (\project ->
+                        updateTodo
+                            [ Todo.SetText editTodoModel.todoText
+                            , Todo.SetProject project
+                            ]
+                            editTodoModel.todoId
+                    )
                 >> deactivateEditingMode
         )
 
@@ -202,18 +209,6 @@ findOrCreateProjectByName projectName =
 createAndPersistProject projectName =
     Return.map (Model.ProjectList.addNewProject projectName)
         >> Return.effect_ (Tuple.first >> upsertProjectCmd)
-
-
-updateTodoFromEditTodoModel : EditTodoModel -> ReturnTuple Project -> Return
-updateTodoFromEditTodoModel editTodoModel =
-    Return.transformModelTupleWith
-        (\project ->
-            updateTodo
-                [ Todo.SetText editTodoModel.todoText
-                , Todo.SetProject project
-                ]
-                editTodoModel.todoId
-        )
 
 
 stopRunningTodo : ReturnF

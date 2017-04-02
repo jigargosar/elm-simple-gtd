@@ -31,14 +31,14 @@ import FunctionExtra exposing (..)
 import View.Todo
 
 
-type alias ViewConfig =
+type alias ViewContext =
     { now : Time
     , encodedProjectNames : Json.Encode.Value
     , model : Model
     }
 
 
-createTodoListViewConfig : Model -> ViewConfig
+createTodoListViewConfig : Model -> ViewContext
 createTodoListViewConfig model =
     { now = Model.getNow model
     , encodedProjectNames = Model.ProjectList.getEncodedProjectNames model
@@ -55,7 +55,7 @@ todoViewFromModel =
     createTodoListViewConfig >> keyedTodoView
 
 
-keyedTodoView : ViewConfig -> TodoView
+keyedTodoView : ViewContext -> TodoView
 keyedTodoView vc todo =
     ( Todo.getId todo
     , getMaybeEditTodoView vc todo ?= View.Todo.todoViewNotEditing vc todo

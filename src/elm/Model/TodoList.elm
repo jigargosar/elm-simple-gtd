@@ -63,18 +63,6 @@ updateTodoList updater model =
     setTodoList (updater model) model
 
 
-updateAndGetMaybeTodo : (Todo -> Todo) -> TodoId -> Model -> ( Maybe Todo, Model )
-updateAndGetMaybeTodo updater todoId m =
-    let
-        newTodoList =
-            m.todoList
-                |> List.updateIf (Todo.hasId todoId) updater
-    in
-        ( List.find (Todo.hasId todoId) newTodoList
-        , setTodoList newTodoList m
-        )
-
-
 type alias TodoContextViewModel =
     { todoContext : TodoContext, name : String, todoList : TodoList, count : Int, isEmpty : Bool }
 
@@ -114,8 +102,14 @@ updateAndGetTodo actions todoId model =
 
         updater =
             Todo.update actions now
+
+        newTodoList =
+            model.todoList
+                |> List.updateIf (Todo.hasId todoId) updater
     in
-        updateAndGetMaybeTodo updater todoId model
+        ( List.find (Todo.hasId todoId) newTodoList
+        , setTodoList newTodoList model
+        )
 
 
 upsertTodo todo model =

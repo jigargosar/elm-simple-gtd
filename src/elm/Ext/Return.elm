@@ -28,4 +28,4 @@ transformWith :
     -> Return msg b
 transformWith f1 f2 =
     Return.map (apply2 ( f1, identity ))
-        >> transformTupleWith f2
+        >> Return.andThen (\( x, m ) -> (f2 x) (Return.singleton m))

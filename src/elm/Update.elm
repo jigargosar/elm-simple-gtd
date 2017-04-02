@@ -205,7 +205,7 @@ saveAndDeactivateEditingTodo =
 --returnAndMapTupleFirst : (x -> ReturnF) -> ReturnTuple x -> Return.Return Msg Model
 
 
-returnAndMapTupleFirst f =
+returnTransformFromTuple f =
     Return.andThen (\( x, m ) -> (f x) (Return.singleton m))
 
 
@@ -217,14 +217,14 @@ returnAndMapMaybe f1 f2 =
         )
 
 
-returnWith :
+returnTransformWith :
     (a -> x)
     -> (x -> Return.Return msg a -> Return.Return msg b)
     -> Return.Return msg a
     -> Return.Return msg b
-returnWith f1 f2 =
+returnTransformWith f1 f2 =
     Return.map (apply2 ( f1, identity ))
-        >> returnAndMapTupleFirst f2
+        >> returnTransformFromTuple f2
 
 
 getOrCreateAndPersistProject : EditTodoModel -> Return -> ReturnTuple Project
@@ -233,7 +233,7 @@ getOrCreateAndPersistProject editTodoModel =
         { projectName } =
             editTodoModel
     in
-        returnWith (Model.ProjectList.getProjectByName projectName)
+        returnTransformWith (Model.ProjectList.getProjectByName projectName)
             (\maybeProject ->
                 case maybeProject of
                     Nothing ->
@@ -244,19 +244,6 @@ getOrCreateAndPersistProject editTodoModel =
             )
 
 
-
---        Return.map (apply2 ( Model.ProjectList.getProjectByName projectName, identity ))
---            >> returnAndMapTupleFirst
---                (\maybeProject ->
---                    case maybeProject of
---                        Nothing ->
---                            createAndSaveProject projectName
---
---                        Just project ->
---                            Return.map ((,) project)
---                )
-
-
 createAndSaveProject projectName =
     Return.map (Model.ProjectList.addNewProject projectName)
         >> Return.effect_ (Tuple.first >> upsertProjectCmd)
@@ -264,7 +251,7 @@ createAndSaveProject projectName =
 
 updateTodoFromEditTodoModel : EditTodoModel -> ReturnTuple Project -> Return
 updateTodoFromEditTodoModel editTodoModel =
-    returnAndMapTupleFirst
+    returnTransformFromTuple
         (\project ->
             updateTodoFieldsAndModifiedAt
                 [ TodoTextField editTodoModel.todoText

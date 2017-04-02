@@ -1,6 +1,6 @@
 module Ext.Return exposing (..)
 
-import Return exposing (Return)
+import Return exposing (Return, ReturnF)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
@@ -14,19 +14,23 @@ transformTupleWith f =
 --returnAndMapMaybe : (Model -> Maybe x) -> (x -> ReturnF) -> ReturnF
 
 
-transformWithMaybe f1 f2 =
+maybeTransformWith :
+    (a -> Maybe x)
+    -> (x -> ReturnF msg a)
+    -> ReturnF msg a
+maybeTransformWith f1 f2 =
     Return.andThen
         (\m ->
             f1 m ?|> f2 ?= identity |> apply (Return.singleton m)
         )
 
 
-transformWith2 :
+transformWithComplexImplementation :
     (a -> x)
     -> (x -> Return msg a -> Return msg b)
     -> Return msg a
     -> Return msg b
-transformWith2 f1 f2 =
+transformWithComplexImplementation f1 f2 =
     Return.map (apply2 ( f1, identity ))
         >> Return.andThen (\( x, m ) -> (f2 x) (Return.singleton m))
 

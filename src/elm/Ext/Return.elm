@@ -14,7 +14,7 @@ transformTupleWith f =
 --returnAndMapMaybe : (Model -> Maybe x) -> (x -> ReturnF) -> ReturnF
 
 
-andMapMaybe f1 f2 =
+transformWithMaybe f1 f2 =
     Return.andThen
         (\m ->
             f1 m ?|> f2 ?= identity |> apply (Return.singleton m)

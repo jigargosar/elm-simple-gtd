@@ -194,7 +194,7 @@ activateEditNewTodoMode text =
 
 saveAndDeactivateEditingTodo : ReturnF
 saveAndDeactivateEditingTodo =
-    Return.andMapMaybe getMaybeEditTodoModel
+    Return.transformWithMaybe getMaybeEditTodoModel
         (\editTodoModel ->
             getOrCreateAndPersistProject editTodoModel
                 >> updateTodoFromEditTodoModel editTodoModel

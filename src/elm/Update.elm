@@ -60,6 +60,9 @@ update msg =
             SetTodoDone bool id ->
                 updateTodo [ Todo.SetDone bool ] id
 
+            ToggleTodoDone id ->
+                updateTodo [ Todo.ToggleDone ] id
+
             SetTodoContext todoContext id ->
                 updateTodo [ Todo.SetContext todoContext ] id
 

@@ -59,3 +59,4 @@ type TodoUpdateAction
     | SetContext TodoContext
     | SetProjectId (Maybe ProjectId)
     | SetProject Project.Project
+    | ToggleDone

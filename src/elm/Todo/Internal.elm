@@ -16,6 +16,21 @@ type alias ModelF =
     Model -> Model
 
 
+getDone : Model -> Bool
+getDone =
+    (.done)
+
+
+setDone : Bool -> ModelF
+setDone done model =
+    { model | done = done }
+
+
+updateDone : (Model -> Bool) -> ModelF
+updateDone updater model =
+    setDone (updater model) model
+
+
 getDeleted : Model -> Bool
 getDeleted =
     (.deleted)
@@ -66,6 +81,9 @@ update field model =
 
         SetProject project ->
             update (SetProjectId (Just (Project.getId project))) model
+
+        ToggleDone ->
+            updateDone (getDone >> not) model
 
 
 updateAll : List TodoUpdateAction -> Time -> ModelF

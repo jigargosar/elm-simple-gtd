@@ -40,14 +40,6 @@ getCurrentTodoListFilter model =
             always (True)
 
 
-getFirstInboxTodo =
-    getTodoList >> Todo.getFirstInboxTodo
-
-
-mapAllExceptDeleted mapper =
-    getTodoList >> Todo.mapAllExceptDeleted mapper
-
-
 getTodoById : TodoId -> Model -> Maybe Todo
 getTodoById id =
     getTodoList >> TodoList.findById id

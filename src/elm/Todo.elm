@@ -172,24 +172,6 @@ copyGenerator createdAt todo =
     Random.map (copyTodo createdAt todo) RandomIdGenerator.idGen
 
 
-createdAtInWords : Time -> Todo -> String
-createdAtInWords now =
-    getCreatedAt
-        >> Date.fromTime
-        >> Date.Distance.inWordsWithConfig
-            ({ defaultConfig | includeSeconds = True })
-            (Date.fromTime now)
-
-
-modifiedAtInWords : Time -> Todo -> String
-modifiedAtInWords now =
-    getModifiedAt
-        >> Date.fromTime
-        >> Date.Distance.inWordsWithConfig
-            ({ defaultConfig | includeSeconds = True })
-            (Date.fromTime now)
-
-
 getText =
     (.text)
 
@@ -287,14 +269,24 @@ toAnyPassPredicate predicateList =
     (applyList predicateList >> List.any identity)
 
 
-getInboxList =
-    List.filter inboxFilter
-
-
-getFirstInboxTodo =
-    List.find inboxFilter
-
-
 toVM : Todo -> ViewModel
 toVM =
     identity
+
+
+createdAtInWords : Time -> Todo -> String
+createdAtInWords now =
+    getCreatedAt
+        >> Date.fromTime
+        >> Date.Distance.inWordsWithConfig
+            ({ defaultConfig | includeSeconds = True })
+            (Date.fromTime now)
+
+
+modifiedAtInWords : Time -> Todo -> String
+modifiedAtInWords now =
+    getModifiedAt
+        >> Date.fromTime
+        >> Date.Distance.inWordsWithConfig
+            ({ defaultConfig | includeSeconds = True })
+            (Date.fromTime now)

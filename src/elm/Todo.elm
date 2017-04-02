@@ -29,7 +29,7 @@ getDeleted =
 
 
 setFields =
-    Internal.setFields
+    Internal.updateAll
 
 
 defaultDueAt =

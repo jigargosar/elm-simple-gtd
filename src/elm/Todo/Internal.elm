@@ -15,10 +15,6 @@ type alias ModelF =
     Model -> Model
 
 
-type alias ModelField =
-    TodoAction
-
-
 getDeleted : Model -> Bool
 getDeleted =
     (.deleted)
@@ -34,8 +30,8 @@ updateDeleted updater model =
     setDeleted (updater model) model
 
 
-set : ModelField -> ModelF
-set field model =
+update : TodoAction -> ModelF
+update field model =
     case field of
         SetDone done ->
             { model | done = done }
@@ -53,9 +49,9 @@ set field model =
             { model | projectId = projectId }
 
         SetProject project ->
-            set (SetProjectId (Just (Project.getId project))) model
+            update (SetProjectId (Just (Project.getId project))) model
 
 
-setFields : List ModelField -> ModelF
-setFields fields =
-    List.foldl set # fields
+updateAll : List TodoAction -> ModelF
+updateAll action =
+    List.foldl update # action

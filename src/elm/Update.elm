@@ -135,13 +135,7 @@ update msg =
 
 updateTodoFieldsAndModifiedAt actions todoId =
     Return.map (Model.TodoList.updateAndGetTodo actions todoId)
-        >> Return.transformMaybeModelTupleWith
-            (\todo ->
-                Return.transformWith (Model.getNow)
-                    (\now ->
-                        identity
-                    )
-            )
+        >> Return.andThen persistMaybeTodoFromTuple
 
 
 onMsgList : List Msg -> ReturnF

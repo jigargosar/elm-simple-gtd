@@ -28,7 +28,7 @@ getDeleted =
     Internal.getDeleted
 
 
-setFields =
+update =
     Internal.updateAll
 
 

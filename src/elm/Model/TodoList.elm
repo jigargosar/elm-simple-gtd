@@ -115,11 +115,11 @@ toViewModelHelp ( todoContext, name, list ) =
 
 updateTodoWithFields : List TodoUpdateAction -> TodoId -> Model -> ( Maybe Todo, Model )
 updateTodoWithFields fields =
-    updateTodoMaybe (Todo.setFields fields)
+    updateTodoMaybe (Todo.update fields)
 
 
 updateAndGetMaybeTodo fields todoId model =
-    model |> getTodoById todoId ?|> Todo.setFields fields
+    model |> getTodoById todoId ?|> Todo.update fields
 
 
 upsertTodo todo model =

@@ -254,11 +254,6 @@ persistTodoFromTuple ( todo, model ) =
     ( model, upsertTodoCmd todo )
 
 
-persistTodoFromMaybeTuple : Maybe ( Todo, Model ) -> Return
-persistTodoFromMaybeTuple maybeTuple =
-    maybeTuple ?|> (\( todo, model ) -> model ! [ upsertTodoCmd todo ])
-
-
 persistMaybeTodoCmd =
     Maybe.unwrap Cmd.none upsertTodoCmd
 

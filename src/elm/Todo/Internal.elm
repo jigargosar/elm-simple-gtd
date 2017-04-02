@@ -92,7 +92,7 @@ update field model =
             { model | context = context }
 
         SetProjectId projectId ->
-            { model | projectId = projectId }
+            setProjectId projectId model
 
         SetProject project ->
             setProjectId (project |> Project.getId >> Just) model

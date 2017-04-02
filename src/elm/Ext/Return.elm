@@ -21,11 +21,23 @@ andMapMaybe f1 f2 =
         )
 
 
+transformWith2 :
+    (a -> x)
+    -> (x -> Return msg a -> Return msg b)
+    -> Return msg a
+    -> Return msg b
+transformWith2 f1 f2 =
+    Return.map (apply2 ( f1, identity ))
+        >> Return.andThen (\( x, m ) -> (f2 x) (Return.singleton m))
+
+
 transformWith :
     (a -> x)
     -> (x -> Return msg a -> Return msg b)
     -> Return msg a
     -> Return msg b
 transformWith f1 f2 =
-    Return.map (apply2 ( f1, identity ))
-        >> Return.andThen (\( x, m ) -> (f2 x) (Return.singleton m))
+    Return.andThen
+        (\m ->
+            (f2 (f1 m)) (Return.singleton m)
+        )

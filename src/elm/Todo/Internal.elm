@@ -5,6 +5,7 @@ import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import Time exposing (Time)
 
 
 type alias Model =
@@ -30,6 +31,21 @@ updateDeleted updater model =
     setDeleted (updater model) model
 
 
+getModifiedAt : Model -> Time
+getModifiedAt =
+    (.modifiedAt)
+
+
+setModifiedAt : Time -> ModelF
+setModifiedAt modifiedAt model =
+    { model | modifiedAt = modifiedAt }
+
+
+updateModifiedAt : (Model -> Time) -> ModelF
+updateModifiedAt updater model =
+    setModifiedAt (updater model) model
+
+
 update : TodoUpdateAction -> ModelF
 update field model =
     case field of
@@ -52,6 +68,7 @@ update field model =
             update (SetProjectId (Just (Project.getId project))) model
 
 
-updateAll : List TodoUpdateAction -> ModelF
-updateAll action =
-    List.foldl update # action
+updateAll : List TodoUpdateAction -> Time -> ModelF
+updateAll action now =
+    (List.foldl update # action)
+        >> setModifiedAt now

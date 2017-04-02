@@ -70,8 +70,8 @@ updateTodoList updater model =
     setTodoList (updater model) model
 
 
-updateTodoMaybe : (Todo -> Todo) -> TodoId -> Model -> ( Maybe Todo, Model )
-updateTodoMaybe updater todoId m =
+updateAndGetMaybeTodo : (Todo -> Todo) -> TodoId -> Model -> ( Maybe Todo, Model )
+updateAndGetMaybeTodo updater todoId m =
     let
         newTodoList =
             m.todoList
@@ -114,12 +114,15 @@ toViewModelHelp ( todoContext, name, list ) =
 
 
 updateAndGetTodo : List TodoUpdateAction -> TodoId -> Model -> ( Maybe Todo, Model )
-updateAndGetTodo fields =
-    updateTodoMaybe (Todo.update fields)
+updateAndGetTodo actions todoId model =
+    let
+        now =
+            Model.getNow model
 
-
-updateAndGetMaybeTodo fields todoId model =
-    model |> getTodoById todoId ?|> Todo.update fields
+        updater =
+            Todo.update actions now
+    in
+        updateAndGetMaybeTodo updater todoId model
 
 
 upsertTodo todo model =

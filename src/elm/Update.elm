@@ -133,27 +133,15 @@ update msg =
                 onMsgList messages
 
 
-updateMaybeTodoModifiedAt : ( Maybe Todo, Model ) -> Return
-updateMaybeTodoModifiedAt ( maybeTodo, m ) =
-    m
-        |> Return.singleton
-        >> case maybeTodo of
-            Just todo ->
-                let
-                    id =
-                        Todo.getId todo
-                in
-                    withNow (OnActionWithNow (UpdateTodoModifiedAt id))
-
-            Nothing ->
-                identity
-
-
 updateTodoFieldsAndModifiedAt actions todoId =
-    Return.andThen
-        (Model.TodoList.updateAndGetTodo actions todoId
-            >> updateMaybeTodoModifiedAt
-        )
+    Return.map (Model.TodoList.updateAndGetTodo actions todoId)
+        >> Return.transformMaybeModelTupleWith
+            (\todo ->
+                Return.transformWith (Model.getNow)
+                    (\now ->
+                        identity
+                    )
+            )
 
 
 onMsgList : List Msg -> ReturnF
@@ -242,7 +230,7 @@ onWithNow : RequiresNowAction -> Time -> ReturnF
 onWithNow action now =
     case action of
         UpdateTodoModifiedAt id ->
-            Return.andThen (Model.TodoList.updateTodoMaybe (Todo.setModifiedAt now) id >> persistMaybeTodoFromTuple)
+            Return.andThen (Model.TodoList.updateAndGetMaybeTodo (Todo.setModifiedAt now) id >> persistMaybeTodoFromTuple)
 
         CreateA text ->
             Return.andThen (addNewTodoAt text now >> persistTodoFromTuple)

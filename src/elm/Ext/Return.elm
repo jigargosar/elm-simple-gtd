@@ -1,5 +1,6 @@
 module Ext.Return exposing (..)
 
+import Maybe.Extra as Maybe
 import Return exposing (Return, ReturnF)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -9,6 +10,9 @@ import FunctionExtra exposing (..)
 transformModelTupleWith f =
     Return.andThen (\( x, m ) -> (f x) (Return.singleton m))
 
+
+transformMaybeModelTupleWith f =
+    transformModelTupleWith (Maybe.unwrap identity f)
 
 
 maybeTransformWith :

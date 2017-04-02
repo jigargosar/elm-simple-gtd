@@ -19,11 +19,6 @@ import FunctionExtra.Operators exposing (..)
 import Types exposing (..)
 
 
-type RequiresNowAction
-    = CreateA String
-    | CopyAndEditA Todo
-
-
 setTodoContext =
     SetTodoContext
 
@@ -77,7 +72,6 @@ type Msg
     | Start TodoId
     | Stop
     | MarkRunningTodoDone
-    | OnActionWithNow RequiresNowAction Time
     | SetTodoDone Bool TodoId
     | SetTodoContext TodoContext TodoId
     | SetTodoText String TodoId
@@ -111,10 +105,10 @@ toCmd =
 type alias Return =
     Return.Return Msg Model
 
+
 type alias ReturnTuple a =
-    Return.Return Msg (a, Model)
+    Return.Return Msg ( a, Model )
 
 
 type alias ReturnF =
     Return -> Return
-

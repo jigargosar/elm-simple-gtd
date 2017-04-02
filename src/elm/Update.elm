@@ -57,9 +57,6 @@ update msg =
                 markRunningTodoDone
                     >> stopRunningTodo
 
-            OnActionWithNow action now ->
-                onWithNow action now
-
             SetTodoDone bool id ->
                 updateTodo [ Todo.SetDone bool ] id
 
@@ -188,10 +185,6 @@ saveAndDeactivateEditingTodo =
         )
 
 
-
---returnAndMapTupleFirst : (x -> ReturnF) -> ReturnTuple x -> Return.Return Msg Model
-
-
 findOrCreateProjectByName : ProjectName -> Return -> ReturnTuple Project
 findOrCreateProjectByName projectName =
     Return.transformWith (Model.ProjectList.getProjectByName projectName)
@@ -220,16 +213,6 @@ updateTodoFromEditTodoModel editTodoModel =
                 ]
                 (Todo.getId editTodoModel.todo)
         )
-
-
-onWithNow : RequiresNowAction -> Time -> ReturnF
-onWithNow action now =
-    case action of
-        CreateA text ->
-            Return.andThen (addNewTodoAt text now >> persistTodoFromTuple)
-
-        CopyAndEditA todo ->
-            Return.andThen (copyNewTodo todo now >> persistAndEditTodoCmd)
 
 
 stopRunningTodo : ReturnF

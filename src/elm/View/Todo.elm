@@ -46,7 +46,7 @@ todoViewEditing vc etm =
                 , onInput Msg.EditTodoTextChanged
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                , onKeyUp (vc.onEditTodoKeyUp etm.todo)
+                , onKeyUp (Msg.EditTodoKeyUp etm.todo)
                 ]
                 []
             , input
@@ -131,14 +131,14 @@ doneIconButton vc todo =
 deleteIconButton vc todo =
     iconButton
         [ onClickStopPropagation
-            (vc.onDeleteTodoClicked (Todo.getId todo))
+            (Msg.ToggleTodoDeleted (Todo.getId todo))
         , icon "delete"
         ]
         []
 
 
 startIconButton vc todo =
-    iconButton [ onClickStopPropagation (vc.onTodoStartClicked (Todo.getId todo)), icon "av:play-circle-outline" ] []
+    iconButton [ onClickStopPropagation (Msg.Start (Todo.getId todo)), icon "av:play-circle-outline" ] []
 
 
 optionsIconButton vc todo =

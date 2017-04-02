@@ -122,7 +122,7 @@ nonHoverIcons vc todo =
 doneIconButton vc todo =
     iconButton
         [ class ("done-" ++ toString (Todo.isDone todo))
-        , onClickStopPropagation (vc.onTodoDoneClicked (Todo.getId todo))
+        , onClickStopPropagation (Msg.ToggleTodoDone (Todo.getId todo))
         , icon "check"
         ]
         []

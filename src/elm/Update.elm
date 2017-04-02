@@ -3,6 +3,7 @@ port module Update exposing (..)
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import EditModel.Types exposing (..)
+import Ext.Return as Return
 import Model.EditModel exposing (getMaybeEditTodoModel)
 import Model.ProjectList exposing (getProjectByName)
 import Model.RunningTodo
@@ -193,7 +194,7 @@ activateEditNewTodoMode text =
 
 saveAndDeactivateEditingTodo : ReturnF
 saveAndDeactivateEditingTodo =
-    returnAndMapMaybe getMaybeEditTodoModel
+    Return.andMapMaybe getMaybeEditTodoModel
         (\editTodoModel ->
             getOrCreateAndPersistProject editTodoModel
                 >> updateTodoFromEditTodoModel editTodoModel
@@ -205,35 +206,13 @@ saveAndDeactivateEditingTodo =
 --returnAndMapTupleFirst : (x -> ReturnF) -> ReturnTuple x -> Return.Return Msg Model
 
 
-returnTransformTupleWith f =
-    Return.andThen (\( x, m ) -> (f x) (Return.singleton m))
-
-
-returnAndMapMaybe : (Model -> Maybe x) -> (x -> ReturnF) -> ReturnF
-returnAndMapMaybe f1 f2 =
-    Return.andThen
-        (\m ->
-            f1 m ?|> f2 ?= identity |> (\rf -> Return.singleton m |> rf)
-        )
-
-
-returnTransformWith :
-    (a -> x)
-    -> (x -> Return.Return msg a -> Return.Return msg b)
-    -> Return.Return msg a
-    -> Return.Return msg b
-returnTransformWith f1 f2 =
-    Return.map (apply2 ( f1, identity ))
-        >> returnTransformTupleWith f2
-
-
 getOrCreateAndPersistProject : EditTodoModel -> Return -> ReturnTuple Project
 getOrCreateAndPersistProject editTodoModel =
     let
         { projectName } =
             editTodoModel
     in
-        returnTransformWith (Model.ProjectList.getProjectByName projectName)
+        Return.transformWith (Model.ProjectList.getProjectByName projectName)
             (\maybeProject ->
                 case maybeProject of
                     Nothing ->
@@ -251,7 +230,7 @@ createAndSaveProject projectName =
 
 updateTodoFromEditTodoModel : EditTodoModel -> ReturnTuple Project -> Return
 updateTodoFromEditTodoModel editTodoModel =
-    returnTransformTupleWith
+    Return.transformTupleWith
         (\project ->
             updateTodoFieldsAndModifiedAt
                 [ TodoTextField editTodoModel.todoText

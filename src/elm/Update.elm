@@ -103,10 +103,10 @@ update msg =
                 Return.map (Model.EditModel.setEditModelToEditTodo todo)
                     >> autoFocusPaperInputCmd
 
-            EditTodoTextChanged etm text ->
+            EditTodoTextChanged text ->
                 Return.map (Model.EditModel.updateEditTodoText text)
 
-            EditTodoProjectNameChanged etm projectName ->
+            EditTodoProjectNameChanged projectName ->
                 Return.map (Model.EditModel.updateEditTodoProjectName projectName)
 
             EditTodoKeyUp todo { key, isShiftDown } ->

@@ -84,8 +84,8 @@ type Msg
     | NewTodoKeyUp String KeyboardEvent
     | StartEditingTodo Todo
     | FocusPaperInput String
-    | EditTodoTextChanged EditTodoModel String
-    | EditTodoProjectNameChanged EditTodoModel ProjectName
+    | EditTodoTextChanged String
+    | EditTodoProjectNameChanged ProjectName
     | EditTodoKeyUp Todo KeyboardEvent
     | SetMainViewType MainViewType
     | OnNowChanged Time

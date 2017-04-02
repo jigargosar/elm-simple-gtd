@@ -43,7 +43,7 @@ todoViewEditing vc etm =
                 , class "edit-todo-input auto-focus"
                 , stringProperty "label" "Todo"
                 , value (etm.todoText)
-                , onInput (Msg.EditTodoTextChanged etm)
+                , onInput Msg.EditTodoTextChanged
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
                 , onKeyUp (vc.onEditTodoKeyUp etm.todo)
@@ -53,7 +53,7 @@ todoViewEditing vc etm =
                 [ id (todoProjectInputId etm.todo)
                 , class "project-name-input"
                 , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                , onInput (Msg.EditTodoProjectNameChanged etm)
+                , onInput Msg.EditTodoProjectNameChanged
                 , stringProperty "label" "Project Name"
                 , value etm.projectName
                 ]
@@ -61,7 +61,7 @@ todoViewEditing vc etm =
             , Html.node "paper-autocomplete-suggestions"
                 [ stringProperty "for" (todoProjectInputId etm.todo)
                 , property "source" (vc.encodedProjectNames)
-                , onAutoCompleteSelected (Msg.EditTodoProjectNameChanged etm)
+                , onAutoCompleteSelected Msg.EditTodoProjectNameChanged
                 , intProperty "minLength" 0
                 ]
                 []

@@ -73,7 +73,11 @@ update msg =
                 updateTodoFieldsAndModifiedAt [ Todo.SetDeleted bool ] id
 
             Create text ->
-                withNow (OnActionWithNow (CreateA text))
+                Return.transformWith Model.getNow
+                    (\now ->
+                        Return.andThen
+                            (addNewTodoAt text now >> persistTodoFromTuple)
+                    )
 
             CopyAndEdit todo ->
                 withNow (OnActionWithNow (CopyAndEditA todo))

@@ -222,8 +222,8 @@ stopRunningTodo =
 
 markRunningTodoDone : ReturnF
 markRunningTodoDone =
-    apply2 ( Tuple.first >> Model.RunningTodo.getRunningTodoId, identity )
-        >> uncurry (Maybe.unwrap identity (SetTodoDone True >> andThenUpdate))
+    Return.maybeTransformWith (Model.RunningTodo.getRunningTodoId)
+        (SetTodoDone True >> andThenUpdate)
 
 
 addNewTodoAt : String -> Time -> Model -> ( Todo, Model )

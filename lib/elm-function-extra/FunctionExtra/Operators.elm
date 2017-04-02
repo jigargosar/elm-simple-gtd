@@ -6,6 +6,11 @@ module FunctionExtra.Operators exposing (..)
 infix 9 =>
 
 
+(?|>>) f1 f2 =
+    f1 >> Maybe.map f2
+infixl 0 ?|>>
+
+
 (>>>) : (a -> b -> c) -> (c -> d) -> a -> b -> d
 (>>>) ff f x y =
     ff x y |> f

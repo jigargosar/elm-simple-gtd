@@ -12,6 +12,7 @@ import Project exposing (Project, ProjectId, ProjectName)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
 import FunctionExtra exposing (..)
+import FunctionExtra.Operators exposing (..)
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model
@@ -134,7 +135,7 @@ update msg =
 
 updateTodo actions todoId =
     Return.andThenMaybe
-        (Model.TodoList.updateAndGetTodo actions todoId >> Maybe.map persistTodoFromTuple)
+        (Model.TodoList.updateAndGetTodo actions todoId ?|>> persistTodoFromTuple)
 
 
 onMsgList : List Msg -> ReturnF

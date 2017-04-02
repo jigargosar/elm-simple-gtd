@@ -265,16 +265,6 @@ getTodoContext =
     (.context)
 
 
-setContext : TodoContext -> ModelF
-setContext context model =
-    { model | context = context }
-
-
-updateContext : (Model -> TodoContext) -> ModelF
-updateContext updater model =
-    setContext (updater model) model
-
-
 markDeleted : ModelF
 markDeleted todo =
     { todo | deleted = True }

@@ -74,10 +74,10 @@ type Msg
     | MarkRunningTodoDone
     | SetTodoDone Bool TodoId
     | ToggleTodoDone TodoId
+    | SetTodoDeleted Bool TodoId
     | ToggleTodoDeleted TodoId
     | SetTodoContext TodoContext TodoId
     | SetTodoText String TodoId
-    | SetTodoDeleted Bool TodoId
     | Create String
     | CopyAndEdit Todo
     | AddTodoClicked

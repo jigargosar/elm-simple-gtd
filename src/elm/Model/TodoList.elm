@@ -40,8 +40,8 @@ getCurrentTodoListFilter model =
             always (True)
 
 
-getTodoById : TodoId -> Model -> Maybe Todo
-getTodoById id =
+findTodoById : TodoId -> Model -> Maybe Todo
+findTodoById id =
     getTodoList >> TodoList.findById id
 
 
@@ -94,16 +94,18 @@ toViewModelHelp ( todoContext, name, list ) =
         >> uncurry3 (TodoContextViewModel todoContext name)
 
 
-updateAndGetTodo : List TodoUpdateAction -> TodoId -> Model -> ( Maybe Todo, Model )
+updateAndGetTodo : List TodoUpdateAction -> TodoId -> Model -> Maybe ( Todo, Model )
 updateAndGetTodo actions todoId model =
-    let
-        updater =
-            Todo.update actions (Model.getNow model)
-
-        newTodoList =
-            model.todoList
-                |> List.updateIf (Todo.hasId todoId) updater
-    in
-        ( List.find (Todo.hasId todoId) newTodoList
-        , setTodoList newTodoList model
-        )
+    model
+        |> findTodoById todoId
+        ?|> (Todo.update actions (Model.getNow model)
+                >> (\todo ->
+                        let
+                            newTodoList =
+                                List.replaceIf (Todo.hasId todoId) todo model.todoList
+                        in
+                            ( todo
+                            , setTodoList newTodoList model
+                            )
+                   )
+            )

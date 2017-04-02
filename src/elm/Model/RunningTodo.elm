@@ -17,7 +17,7 @@ getRunningTodoViewModel : Model -> Maybe RunningTodoViewModel
 getRunningTodoViewModel m =
     let
         maybeTodo =
-            getRunningTodoId m ?+> (Model.TodoList.getTodoById # m)
+            getRunningTodoId m ?+> (Model.TodoList.findTodoById # m)
     in
         maybe2Tuple ( getRunningTodoDetails m, maybeTodo )
             ?|> (toRunningTodoDetailsVM # m)

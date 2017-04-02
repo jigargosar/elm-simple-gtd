@@ -61,6 +61,21 @@ updateProjectId updater model =
     setProjectId (updater model) model
 
 
+getCreatedAt : Model -> Time
+getCreatedAt =
+    (.createdAt)
+
+
+setCreatedAt : Time -> ModelF
+setCreatedAt createdAt model =
+    { model | createdAt = createdAt }
+
+
+updateCreatedAt : (Model -> Time) -> ModelF
+updateCreatedAt updater model =
+    setCreatedAt (updater model) model
+
+
 getModifiedAt : Model -> Time
 getModifiedAt =
     (.modifiedAt)

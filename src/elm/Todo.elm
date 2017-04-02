@@ -216,36 +216,6 @@ isDone =
     (.done)
 
 
-setDone : Bool -> ModelF
-setDone done model =
-    { model | done = done }
-
-
-markDone : ModelF
-markDone =
-    setDone True
-
-
-updateDone : (Model -> Bool) -> ModelF
-updateDone updater model =
-    setDone (updater model) model
-
-
-getCreatedAt : Model -> Time
-getCreatedAt =
-    (.createdAt)
-
-
-setCreatedAt : Time -> ModelF
-setCreatedAt createdAt model =
-    { model | createdAt = createdAt }
-
-
-updateCreatedAt : (Model -> Time) -> ModelF
-updateCreatedAt updater model =
-    setCreatedAt (updater model) model
-
-
 getModifiedAt : Model -> Time
 getModifiedAt =
     (.modifiedAt)
@@ -271,7 +241,6 @@ equalById todo1 todo2 =
 
 hasId todoId =
     getId >> equals todoId
-
 
 
 replaceIfEqualById todo =

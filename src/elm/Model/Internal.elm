@@ -25,6 +25,7 @@ updateSeed : (Model -> Seed) -> ModelF
 updateSeed updater model =
     setSeed (updater model) model
 
+
 getTodoList : Model -> TodoList
 getTodoList =
     (.todoList)

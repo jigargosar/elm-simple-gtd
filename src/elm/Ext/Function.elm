@@ -4,6 +4,8 @@ module Ext.Function exposing (..)
 apply a f =
     f a
 
+
+
 ifElse : (a -> Bool) -> (a -> b) -> (a -> b) -> a -> b
 ifElse pred onTrue onFalse value =
     if pred value then

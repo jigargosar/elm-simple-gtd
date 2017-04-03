@@ -8,5 +8,3 @@ import Ext.Function exposing (..)
 
 init =
     None
-
-

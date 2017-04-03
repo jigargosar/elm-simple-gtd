@@ -4,6 +4,6 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 
-_  =
-    1
 
+_ =
+    1

@@ -1,6 +1,6 @@
 module ProjectList.Types exposing (..)
 
-import Project exposing (Project)
+import Project exposing (EncodedProject, Project)
 import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -18,3 +18,7 @@ type alias Model =
 
 type alias ModelF =
     Model -> Model
+
+
+type alias EncodedProjectList =
+    List EncodedProject

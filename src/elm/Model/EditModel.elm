@@ -13,7 +13,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Msg exposing (..)
 import Model.Types exposing (..)
-import ProjectList
+import ProjectStore
 
 
 activateNewTodoMode : String -> ModelF

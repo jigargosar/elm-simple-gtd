@@ -1,8 +1,8 @@
-module ProjectList exposing (..)
+module ProjectStore exposing (..)
 
-import Project exposing (Project, ProjectName)
-import ProjectList.Types exposing (..)
-import ProjectList.Internal as Internal exposing (..)
+import Project exposing (EncodedProject, Project, ProjectName)
+import ProjectStore.Types exposing (..)
+import ProjectStore.Internal as Internal exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -16,11 +16,11 @@ import Time exposing (Time)
 
 
 generator encodedProjectList =
-    Random.map (\seed -> ProjectListModel seed (decodeList encodedProjectList) |> ProjectList) Random.independentSeed
+    Random.map (\seed -> ProjectStoreModel seed (decodeListOfEncodedProjects encodedProjectList) |> ProjectStore) Random.independentSeed
 
 
-decodeList : EncodedProjectList -> List Project
-decodeList =
+decodeListOfEncodedProjects : List EncodedProject -> List Project
+decodeListOfEncodedProjects =
     List.map (D.decodeValue Project.decoder)
         >> List.filterMap
             (\result ->
@@ -57,19 +57,19 @@ findProjectById id =
     getList >> List.find (Project.getId >> equals id)
 
 
-addNewProject : ProjectName -> Time -> ProjectList -> ( Project, ProjectList )
+addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
 addNewProject projectName now =
     generate (Project.projectGenerator projectName now)
         >> addProjectFromTuple
 
 
-generate : Random.Generator a -> ProjectList -> ( a, ProjectList )
+generate : Random.Generator a -> ProjectStore -> ( a, ProjectStore )
 generate generator m =
     Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
 
 
-addProjectFromTuple : ( Project, ProjectList ) -> ( Project, ProjectList )
+addProjectFromTuple : ( Project, ProjectStore ) -> ( Project, ProjectStore )
 addProjectFromTuple =
     apply2 ( Tuple.first, uncurry addProject )
 

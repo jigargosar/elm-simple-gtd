@@ -2,7 +2,7 @@ module Model.Types exposing (..)
 
 import EditModel.Types exposing (..)
 import Project exposing (ProjectName)
-import ProjectList.Types exposing (ProjectList)
+import ProjectStore.Types exposing (ProjectStore)
 import Random.Pcg exposing (Seed)
 import RunningTodo exposing (RunningTodo)
 import TodoList.Types exposing (..)
@@ -28,7 +28,7 @@ type alias Model =
     , mainViewType : MainViewType
     , seed : Seed
     , maybeRunningTodo : Maybe RunningTodo
-    , projectList : ProjectList
+    , projectStore : ProjectStore
     }
 
 

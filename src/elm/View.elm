@@ -31,7 +31,7 @@ import Polymer.Paper exposing (..)
 import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import View.ProjectList exposing (projectListView)
+import View.ProjectList exposing (projectStoreView)
 import View.Todo
 
 
@@ -106,7 +106,7 @@ appMainView m =
                 todoListView m
 
             ProjectsView ->
-                projectListView m
+                projectStoreView m
 
             TodoContextView _ ->
                 allTodoListByTodoContextView m

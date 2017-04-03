@@ -3,9 +3,9 @@ module Model exposing (..)
 import EditModel
 import Model.Internal exposing (..)
 import Msg exposing (Return)
-import Project exposing (EncodedProjectList, ProjectName)
-import ProjectList
-import ProjectList.Types exposing (ProjectList)
+import Project exposing (EncodedProject, ProjectName)
+import ProjectStore
+import ProjectStore.Types exposing (ProjectStore)
 import RunningTodo exposing (RunningTodo)
 import Dict
 import Json.Encode as E
@@ -32,14 +32,14 @@ generate generatorFn m =
         |> Tuple.mapSecond (setSeed # m)
 
 
-init : Time -> EncodedTodoList -> EncodedProjectList -> Model
-init now encodedTodoList encodedProjectList =
+init : Time -> EncodedTodoList -> List EncodedProject -> Model
+init now encodedTodoList encodedProjectStore =
     let
         initialSeed =
             Random.seedFromTime now
 
-        ( projectList, newSeed ) =
-            Random.step (ProjectList.generator encodedProjectList) initialSeed
+        ( projectStore, newSeed ) =
+            Random.step (ProjectStore.generator encodedProjectStore) initialSeed
     in
         { now = now
         , todoList = TodoList.decodeTodoList encodedTodoList
@@ -47,33 +47,33 @@ init now encodedTodoList encodedProjectList =
         , mainViewType = AllByTodoContextView
         , seed = initialSeed
         , maybeRunningTodo = Nothing
-        , projectList = projectList
+        , projectStore = projectStore
         }
 
 
-updateProjectListFromTuple : (ProjectList -> ( x, ProjectList )) -> Model -> ( x, Model )
-updateProjectListFromTuple f m =
+updateProjectStoreFromTuple : (ProjectStore -> ( x, ProjectStore )) -> Model -> ( x, Model )
+updateProjectStoreFromTuple f m =
     let
-        ( x, projectList ) =
-            f (getProjectList m)
+        ( x, projectStore ) =
+            f (getProjectStore m)
     in
-        ( x, setProjectList projectList m )
+        ( x, setProjectStore projectStore m )
 
 
 addNewProject projectName model =
     model
-        |> updateProjectListFromTuple
-            (ProjectList.addNewProject projectName (getNow model))
+        |> updateProjectStoreFromTuple
+            (ProjectStore.addNewProject projectName (getNow model))
 
 
 findProjectByName projectName =
-    getProjectList >> ProjectList.findProjectByName projectName
+    getProjectStore >> ProjectStore.findProjectByName projectName
 
 
 getProjectNameOfTodo : Todo -> Model -> ProjectName
 getProjectNameOfTodo todo model =
     Todo.getMaybeProjectId todo
         ?+> (\id ->
-                model |> getProjectList >> ProjectList.findProjectNameById id
+                model |> getProjectStore >> ProjectStore.findProjectNameById id
             )
         ?= ""

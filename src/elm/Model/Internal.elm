@@ -1,7 +1,7 @@
 module Model.Internal exposing (..)
 
 import EditModel.Types exposing (..)
-import ProjectList.Types exposing (ProjectList)
+import ProjectStore.Types exposing (ProjectStore)
 import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -82,19 +82,19 @@ updateMaybeRunningTodo updater model =
     setMaybeRunningTodo (updater model) model
 
 
-getProjectList : Model -> ProjectList
-getProjectList =
-    (.projectList)
+getProjectStore : Model -> ProjectStore
+getProjectStore =
+    (.projectStore)
 
 
-setProjectList : ProjectList -> ModelF
-setProjectList projectList model =
-    { model | projectList = projectList }
+setProjectStore : ProjectStore -> ModelF
+setProjectStore projectStore model =
+    { model | projectStore = projectStore }
 
 
-updateProjectList : (Model -> ProjectList) -> ModelF
-updateProjectList updater model =
-    setProjectList (updater model) model
+updateProjectStore : (Model -> ProjectStore) -> ModelF
+updateProjectStore updater model =
+    setProjectStore (updater model) model
 
 
 getMainViewType : Model -> MainViewType

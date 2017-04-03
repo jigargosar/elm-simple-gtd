@@ -1,4 +1,4 @@
-module ProjectList.Types exposing (..)
+module ProjectStore.Types exposing (..)
 
 import Project exposing (EncodedProject, Project)
 import Random.Pcg exposing (Seed)
@@ -8,21 +8,17 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 
 
-type ProjectList
-    = ProjectList ProjectListModel
+type ProjectStore
+    = ProjectStore ProjectStoreModel
 
 
-type alias ProjectListModel =
+type alias ProjectStoreModel =
     { seed : Seed, list : List Project }
 
 
 type alias Model =
-    ProjectList
+    ProjectStore
 
 
 type alias ModelF =
     Model -> Model
-
-
-type alias EncodedProjectList =
-    List EncodedProject

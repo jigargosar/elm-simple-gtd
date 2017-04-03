@@ -4,7 +4,7 @@ import Dom
 import EditModel
 import Model.EditModel
 import Model.RunningTodo
-import Project exposing (EncodedProjectList)
+import Project exposing (EncodedProject)
 import Ext.Random as Random
 import Random.Pcg as Random exposing (Seed)
 import Ext.Function exposing (..)
@@ -37,7 +37,7 @@ import Update
 type alias Flags =
     { now : Time
     , encodedTodoList : EncodedTodoList
-    , encodedProjectList : EncodedProjectList
+    , encodedProjectList : List EncodedProject
     }
 
 

@@ -8,11 +8,10 @@ import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditModel
 import Model.Internal as Model
-
 import Model.TodoList exposing (TodoContextViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
-import ProjectList
+import ProjectStore
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -44,7 +43,7 @@ type alias ViewContext =
 createViewContext : Model -> ViewContext
 createViewContext model =
     { now = Model.getNow model
-    , encodedProjectNames = Model.getProjectList model |> ProjectList.getEncodedProjectNames
+    , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames
     , maybeEditTodoModel = Model.EditModel.getMaybeEditTodoModel model
     }
 

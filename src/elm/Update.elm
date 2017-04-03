@@ -10,7 +10,7 @@ import Model.RunningTodo as Model
 import Model.TodoList as Model
 import Project exposing (Project, ProjectId, ProjectName)
 import Ext.Random as Random
-import ProjectList
+import ProjectStore
 import Random.Pcg as Random exposing (Seed)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)

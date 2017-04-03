@@ -102,10 +102,6 @@ type alias EncodedProject =
     E.Value
 
 
-type alias EncodedProjectList =
-    List EncodedProject
-
-
 encode : Project -> EncodedProject
 encode project =
     E.object

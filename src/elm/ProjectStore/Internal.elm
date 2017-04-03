@@ -1,7 +1,7 @@
-module ProjectList.Internal exposing (..)
+module ProjectStore.Internal exposing (..)
 
 import Project exposing (Project)
-import ProjectList.Types exposing (..)
+import ProjectStore.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -9,11 +9,11 @@ import Ext.Function.Infix exposing (..)
 import Random.Pcg exposing (Seed)
 
 
-withModel f (ProjectList model) =
-    f model |> ProjectList
+withModel f (ProjectStore model) =
+    f model |> ProjectStore
 
 
-get f (ProjectList model) =
+get f (ProjectStore model) =
     f model
 
 

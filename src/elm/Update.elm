@@ -204,16 +204,14 @@ updateTodoFromEditTodoModel editTodoModel =
 
 findOrCreateProjectByName : ProjectName -> Return -> ReturnTuple Project
 findOrCreateProjectByName projectName =
-    Return.transformWith (Model.getProjectByName projectName)
+    Return.andThenWith (Model.getProjectByName projectName)
         (Maybe.unpack
-            (\_ -> createAndPersistProject projectName)
-            (\project -> Return.map (\model -> ( project, model )))
+            (\_ ->
+                Model.addNewProject projectName
+                    >> (\( project, model ) -> ( project, model ) ! [ upsertProjectCmd project ])
+            )
+            (\project -> (\model -> ( project, model ) ! []))
         )
-
-
-createAndPersistProject projectName =
-    Return.map (Model.addNewProject projectName)
-        >> Return.effect_ (Tuple.first >> upsertProjectCmd)
 
 
 stopRunningTodo : ReturnF

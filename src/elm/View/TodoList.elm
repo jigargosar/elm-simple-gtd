@@ -71,7 +71,7 @@ getMaybeEditTodoView vc todo =
 
 foo : ViewContext -> Todo -> EditTodoModel -> Maybe (Html Msg)
 foo vc todo etm =
-    if Todo.hasId etm.todoId todo then
+    if Todo.equalById etm.todo todo then
         Just (View.Todo.todoViewEditing vc etm)
     else
         Nothing

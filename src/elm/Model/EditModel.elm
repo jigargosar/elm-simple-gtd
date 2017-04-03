@@ -28,12 +28,13 @@ setEditModelToEditTodo todo =
 createEditTodoModel : Todo -> Model -> EditTodoModel
 createEditTodoModel todo model =
     todo
-        |> apply3
+        |> apply4
             ( Todo.getId
+            , identity
             , Todo.getText
             , getProjectNameOfTodo # model
             )
-        >> uncurry3 EditTodoModel
+        >> uncurry4 EditTodoModel
 
 
 getProjectNameOfTodo : Todo -> Model -> ProjectName

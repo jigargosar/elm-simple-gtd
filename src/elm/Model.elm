@@ -64,3 +64,7 @@ addNewProject projectName model =
     model
         |> updateProjectListFromTuple
             (ProjectList.addNewProject projectName (getNow model))
+
+
+findProjectByName projectName =
+    getProjectList >> ProjectList.findProjectByName projectName

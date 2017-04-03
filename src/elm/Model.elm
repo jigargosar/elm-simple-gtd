@@ -10,7 +10,7 @@ import Json.Encode as E
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
-import RandomIdGenerator as Random
+import Ext.Random as Random
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import TodoList

@@ -7,7 +7,7 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Maybe.Extra as Maybe
 import PouchDB
-import RandomIdGenerator
+import Ext.Random as Random
 import Random.Pcg as Random exposing (Seed)
 import Todo.Internal as Internal exposing (..)
 import Toolkit.Operators exposing (..)
@@ -165,11 +165,11 @@ todoGenerator createdAt text =
                 Inbox
                 Nothing
     in
-        Random.map initWith RandomIdGenerator.idGen
+        Random.map initWith Random.idGenerator
 
 
 copyGenerator createdAt todo =
-    Random.map (copyTodo createdAt todo) RandomIdGenerator.idGen
+    Random.map (copyTodo createdAt todo) Random.idGenerator
 
 
 getText =

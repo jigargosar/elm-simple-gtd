@@ -1,4 +1,4 @@
-module RandomIdGenerator exposing (..)
+module Ext.Random exposing (..)
 
 import Random.Pcg as Random exposing (Generator, Seed)
 import Char
@@ -21,11 +21,15 @@ alphaNumericChar =
     Random.frequency [ ( 26, lowercaseLetter ), ( 26, uppercaseLetter ), ( 10, digit ) ]
 
 
-idGen : Generator String
-idGen =
+idGenerator : Generator String
+idGenerator =
     Random.map (String.fromList) (Random.list 64 alphaNumericChar)
 
 
 seedFromTime : Time -> Seed
 seedFromTime =
     round >> Random.initialSeed
+
+
+mapWithIdGenerator f =
+    Random.map f idGenerator

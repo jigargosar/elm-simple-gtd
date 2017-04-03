@@ -6,7 +6,7 @@ import Model.EditModel
 import Model.ProjectList
 import Model.RunningTodo
 import Project exposing (EncodedProjectList)
-import RandomIdGenerator as Random
+import Ext.Random as Random
 import Random.Pcg as Random exposing (Seed)
 import Ext.Function exposing (..)
 import Json.Encode as E

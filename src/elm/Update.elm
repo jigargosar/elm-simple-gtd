@@ -9,7 +9,7 @@ import Model.ProjectList as Model exposing (findProjectByName)
 import Model.RunningTodo as Model
 import Model.TodoList as Model
 import Project exposing (Project, ProjectId, ProjectName)
-import RandomIdGenerator as Random
+import Ext.Random as Random
 import Random.Pcg as Random exposing (Seed)
 import Ext.Function exposing (..)
 import Ext.Function.Operators exposing (..)

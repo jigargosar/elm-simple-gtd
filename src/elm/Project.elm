@@ -6,7 +6,7 @@ import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Operators exposing (..)
 import Random.Pcg as Random exposing (..)
-import RandomIdGenerator
+import Ext.Random as Random
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -99,7 +99,7 @@ projectGenerator name now =
         createWithId id =
             projectConstructor id "" now now name
     in
-        Random.map createWithId RandomIdGenerator.idGen
+        Random.mapWithIdGenerator createWithId
 
 
 type alias EncodedProject =

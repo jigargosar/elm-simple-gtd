@@ -2,7 +2,7 @@ module Model.RunningTodo exposing (..)
 
 import Maybe.Extra as Maybe
 import Model
-import Model.Internal exposing (..)
+import Model.Internal as Model
 import Model.TodoList
 import RunningTodo exposing (RunningTodo)
 import Time exposing (Time)
@@ -21,7 +21,7 @@ getRunningTodoViewModel m =
         maybeTodo =
             getRunningTodoId m ?+> (Model.TodoList.findTodoById # m)
     in
-        maybe2Tuple ( getMaybeRunningTodo m, maybeTodo )
+        maybe2Tuple ( Model.getMaybeRunningTodo m, maybeTodo )
             ?|> (toRunningTodoVM # m)
 
 
@@ -30,7 +30,7 @@ type alias RunningTodoViewModel =
 
 
 getRunningTodoId =
-    getMaybeRunningTodo >> RunningTodo.getMaybeId
+    Model.getMaybeRunningTodo >> RunningTodo.getMaybeId
 
 
 toRunningTodoVM : ( RunningTodo, Todo ) -> Model -> RunningTodoViewModel
@@ -47,16 +47,16 @@ toRunningTodoVM ( runningTodo, todo ) m =
 
 stopRunningTodo : ModelF
 stopRunningTodo =
-    setMaybeRunningTodo Nothing
+    Model.setMaybeRunningTodo Nothing
 
 
 startTodo id =
-    updateMaybeRunningTodo (Model.getNow >> RunningTodo.start id)
+    Model.updateMaybeRunningTodo (Model.getNow >> RunningTodo.start id)
 
 
 shouldBeep : Model -> Bool
 shouldBeep =
-    apply2 ( Model.getNow >> Just, getMaybeRunningTodo )
+    apply2 ( Model.getNow >> Just, Model.getMaybeRunningTodo )
         >> maybe2Tuple
         >>? uncurry RunningTodo.shouldBeep
         >>?= False
@@ -64,7 +64,7 @@ shouldBeep =
 
 setLastBeepedAt : Time -> ModelF
 setLastBeepedAt now =
-    updateMaybeRunningTodo
-        (getMaybeRunningTodo
+    Model.updateMaybeRunningTodo
+        (Model.getMaybeRunningTodo
             ?>> RunningTodo.setLastBeepedAt now
         )

@@ -1,6 +1,7 @@
 module Routes exposing (..)
 
 import Model as Model
+import Model.Internal as Model
 import Msg exposing (Msg)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)

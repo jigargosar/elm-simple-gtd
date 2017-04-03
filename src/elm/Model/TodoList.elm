@@ -18,7 +18,7 @@ import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
-import Model.Internal exposing (..)
+import Model.Internal as Model
 import Types exposing (..)
 
 
@@ -96,7 +96,7 @@ updateAndGetTodo actions todoId model =
                                 List.replaceIf (Todo.hasId todoId) todo model.todoList
                         in
                             ( todo
-                            , setTodoList newTodoList model
+                            , Model.setTodoList newTodoList model
                             )
                    )
             )

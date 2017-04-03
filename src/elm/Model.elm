@@ -4,6 +4,7 @@ import EditModel
 import Model.Internal exposing (..)
 import Msg exposing (Return)
 import Project exposing (EncodedProjectList)
+import ProjectList
 import RunningTodo exposing (RunningTodo)
 import Dict
 import Json.Encode as E
@@ -77,11 +78,18 @@ generate generatorFn m =
 
 init : Time -> EncodedTodoList -> EncodedProjectList -> Model
 init now encodedTodoList encodedProjectList =
-    { now = now
-    , todoList = TodoList.decodeTodoList encodedTodoList
-    , editModel = EditModel.init
-    , mainViewType = AllByTodoContextView
-    , seed = Random.seedFromTime now
-    , maybeRunningTodo = Nothing
-    , projectList = Project.decodeProjectList encodedProjectList
-    }
+    let
+        initialSeed =
+            Random.seedFromTime now
+
+        ( projectList, newSeed ) =
+            Random.step (ProjectList.generator encodedProjectList) initialSeed
+    in
+        { now = now
+        , todoList = TodoList.decodeTodoList encodedTodoList
+        , editModel = EditModel.init
+        , mainViewType = AllByTodoContextView
+        , seed = initialSeed
+        , maybeRunningTodo = Nothing
+        , projectList = projectList
+        }

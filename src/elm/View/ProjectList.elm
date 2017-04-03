@@ -5,7 +5,9 @@ import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
+import Model.Internal as Model
 import Model.ProjectList
+import ProjectList
 import Model.TodoList exposing (TodoContextViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
@@ -33,7 +35,7 @@ projectListView m =
     div []
         [ Keyed.node "paper-material"
             [ class "project-list" ]
-            (m |> Model.ProjectList.getProjectList >> projectItems)
+            (m |> Model.getProjectList >> ProjectList.getList >> projectItems)
         ]
 
 

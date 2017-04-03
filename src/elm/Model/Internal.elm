@@ -1,6 +1,7 @@
 module Model.Internal exposing (..)
 
 import EditModel.Types exposing (..)
+import ProjectList.Types exposing (ProjectList)
 import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -81,16 +82,16 @@ updateMaybeRunningTodo updater model =
     setMaybeRunningTodo (updater model) model
 
 
-getNow : Model -> Time
-getNow =
-    (.now)
+getProjectList : Model -> ProjectList
+getProjectList =
+    (.projectList)
 
 
-setNow : Time -> ModelF
-setNow now model =
-    { model | now = now }
+setProjectList : ProjectList -> ModelF
+setProjectList projectList model =
+    { model | projectList = projectList }
 
 
-updateNow : (Model -> Time) -> ModelF
-updateNow updater model =
-    setNow (updater model) model
+updateProjectList : (Model -> ProjectList) -> ModelF
+updateProjectList updater model =
+    setProjectList (updater model) model

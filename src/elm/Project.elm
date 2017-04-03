@@ -24,10 +24,6 @@ type alias ModelF =
     Model -> Model
 
 
-type alias ProjectList =
-    List Project
-
-
 type alias ProjectName =
     String
 
@@ -127,21 +123,3 @@ decoder =
         |> PouchDB.documentFieldsDecoder
         |> PouchDB.timeStampFieldsDecoder
         |> D.required "name" D.string
-
-
-decodeProjectList : EncodedProjectList -> ProjectList
-decodeProjectList =
-    List.map (D.decodeValue decoder)
-        >> List.filterMap
-            (\result ->
-                case result of
-                    Ok todo ->
-                        Just todo
-
-                    Err x ->
-                        let
-                            _ =
-                                Debug.log "Error while decoding todo"
-                        in
-                            Nothing
-            )

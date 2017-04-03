@@ -5,11 +5,12 @@ import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import EditModel.Types exposing (..)
 import Ext.Return as Return
 import Model.EditModel exposing (getMaybeEditTodoModel)
-import Model.ProjectList as Model exposing (findProjectByName)
+import Model.Internal as Model
 import Model.RunningTodo as Model
 import Model.TodoList as Model
 import Project exposing (Project, ProjectId, ProjectName)
 import Ext.Random as Random
+import ProjectList
 import Random.Pcg as Random exposing (Seed)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
@@ -203,10 +204,15 @@ updateTodoFromEditTodoModel editTodoModel =
 
 findOrCreateProjectByName : ProjectName -> Return -> ReturnTuple Project
 findOrCreateProjectByName projectName =
-    Return.andThenWith (Model.findProjectByName projectName)
+    Return.andThenWith (Model.getProjectList >> ProjectList.findProjectByName projectName)
         (Maybe.unpack
             (\_ ->
-                Model.addNewProject projectName
+                (\model ->
+                    model
+                        |> Model.getProjectList
+                        >> ProjectList.addNewProject projectName (Model.getNow model)
+                        >> Tuple2.mapSecond (Model.setProjectList # model)
+                )
                     >> apply2 ( identity, Tuple.first >> upsertProjectCmd )
             )
             ((,) >>> Return.singleton)

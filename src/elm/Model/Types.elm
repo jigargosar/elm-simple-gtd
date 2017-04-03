@@ -1,7 +1,8 @@
 module Model.Types exposing (..)
 
 import EditModel.Types exposing (..)
-import Project exposing (ProjectList, ProjectName)
+import Project exposing (ProjectName)
+import ProjectList.Types exposing (ProjectList)
 import Random.Pcg exposing (Seed)
 import RunningTodo exposing (RunningTodo)
 import TodoList.Types exposing (..)

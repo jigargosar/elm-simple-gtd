@@ -2,7 +2,7 @@ module Model.EditModel exposing (..)
 
 import EditModel.Types exposing (..)
 import Maybe.Extra as Maybe
-import Model.Internal exposing (..)
+import Model.Internal as Model exposing (..)
 import Model.ProjectList
 import Project exposing (Project, ProjectName)
 import Todo
@@ -13,6 +13,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Msg exposing (..)
 import Model.Types exposing (..)
+import ProjectList
 
 
 activateNewTodoMode : String -> ModelF
@@ -40,7 +41,7 @@ createEditTodoModel todo model =
 getProjectNameOfTodo : Todo -> Model -> ProjectName
 getProjectNameOfTodo todo model =
     Todo.getMaybeProjectId todo
-        ?+> (Model.ProjectList.findProjectById # model)
+        ?+> (\id -> model |> Model.getProjectList >> ProjectList.findProjectById id)
         ?|> Project.getName
         ?= ""
 

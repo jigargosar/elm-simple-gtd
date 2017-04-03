@@ -3,28 +3,15 @@ module Model.ProjectList exposing (..)
 import Json.Encode
 import List.Extra as List
 import Model
+import Model.Internal exposing (..)
+import ProjectList
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
-import Project exposing (Project, ProjectId, ProjectList, ProjectName)
+import Project exposing (Project, ProjectId, ProjectName)
 import Model.Types exposing (..)
-
-
-getEncodedProjectNames =
-    getProjectList >> List.map (Project.getName >> Json.Encode.string) >> Json.Encode.list
-
-
-getProjectIdByName projectName =
-    findProjectByName projectName >> Maybe.map Project.getId
-
-
-findProjectByName projectName =
-    getProjectList >> List.find (Project.nameEquals projectName)
-
-
-findProjectById id =
-    getProjectList >> List.find (Project.getId >> equals id)
+import ProjectList.Types exposing (ProjectList)
 
 
 addNewProject : ProjectName -> Model -> ( Project, Model )
@@ -39,19 +26,4 @@ addProjectFromTuple =
 
 
 addProject project =
-    updateProjectList (getProjectList >> (::) project)
-
-
-getProjectList : Model -> ProjectList
-getProjectList =
-    (.projectList)
-
-
-setProjectList : ProjectList -> ModelF
-setProjectList projectList model =
-    { model | projectList = projectList }
-
-
-updateProjectList : (Model -> ProjectList) -> ModelF
-updateProjectList updater model =
-    setProjectList (updater model) model
+    updateProjectList (getProjectList >> ProjectList.addProject project)

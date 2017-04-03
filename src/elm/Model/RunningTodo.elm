@@ -56,7 +56,7 @@ startTodo id =
 
 shouldBeep : Model -> Bool
 shouldBeep =
-    apply2 ( getNow >> Just, getMaybeRunningTodo )
+    apply2 ( Model.getNow >> Just, getMaybeRunningTodo )
         >> maybe2Tuple
         >>? uncurry RunningTodo.shouldBeep
         >>?= False

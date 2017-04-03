@@ -2,7 +2,7 @@ module ProjectList exposing (..)
 
 import Project exposing (Project, ProjectName)
 import ProjectList.Types exposing (..)
-import ProjectList.Internal exposing (..)
+import ProjectList.Internal as Internal exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -15,8 +15,12 @@ import Random.Pcg as Random
 import Time exposing (Time)
 
 
-decodeProjectList : EncodedProjectList -> List Project
-decodeProjectList =
+generator encodedProjectList =
+    Random.map (\seed -> ProjectListModel seed (decodeList encodedProjectList) |> ProjectList) Random.independentSeed
+
+
+decodeList : EncodedProjectList -> List Project
+decodeList =
     List.map (D.decodeValue Project.decoder)
         >> List.filterMap
             (\result ->
@@ -33,8 +37,12 @@ decodeProjectList =
             )
 
 
+getList =
+    Internal.getList
+
+
 getEncodedProjectNames =
-    List.map (Project.getName >> E.string) >> E.list
+    getList >> List.map (Project.getName >> E.string) >> E.list
 
 
 getProjectIdByName =
@@ -42,11 +50,11 @@ getProjectIdByName =
 
 
 findProjectByName projectName =
-    List.find (Project.nameEquals projectName)
+    getList >> List.find (Project.nameEquals projectName)
 
 
 findProjectById id =
-    List.find (Project.getId >> equals id)
+    getList >> List.find (Project.getId >> equals id)
 
 
 addNewProject : ProjectName -> Time -> ProjectList -> ( Project, ProjectList )

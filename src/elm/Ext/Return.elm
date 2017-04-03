@@ -4,7 +4,7 @@ import Maybe.Extra as Maybe
 import Return exposing (Return, ReturnF)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
+import Ext.Function exposing (..)
 
 
 transformModelTupleWith f =

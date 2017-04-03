@@ -12,12 +12,12 @@ import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
-import FunctionExtra.Operators exposing (..)
+import Ext.Function exposing (..)
+import Ext.Function.Operators exposing (..)
 import Html exposing (div, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import KeyboardExtra exposing (onEscape, onKeyUp)
+import Ext.Keyboard exposing (onEscape, onKeyUp)
 import Polymer.Paper exposing (..)
 
 

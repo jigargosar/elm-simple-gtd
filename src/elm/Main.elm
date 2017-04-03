@@ -8,7 +8,7 @@ import Model.RunningTodo
 import Project exposing (EncodedProjectList)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
-import FunctionExtra exposing (..)
+import Ext.Function exposing (..)
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model

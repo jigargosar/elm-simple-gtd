@@ -3,7 +3,7 @@ port module DomPorts exposing (..)
 import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
+import Ext.Function exposing (..)
 import Types exposing (DomSelector)
 
 

@@ -7,7 +7,7 @@ import RunningTodo exposing (RunningTodo)
 import TodoList.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
+import Ext.Function exposing (..)
 import Time exposing (Time)
 import Todo.Types exposing (..)
 

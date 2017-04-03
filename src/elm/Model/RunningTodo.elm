@@ -10,8 +10,8 @@ import Todo
 import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
-import FunctionExtra.Operators exposing (..)
+import Ext.Function exposing (..)
+import Ext.Function.Operators exposing (..)
 import Model.Types exposing (..)
 
 

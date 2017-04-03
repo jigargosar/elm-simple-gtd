@@ -3,8 +3,8 @@ module RunningTodo exposing (..)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
-import FunctionExtra.Operators exposing (..)
+import Ext.Function exposing (..)
+import Ext.Function.Operators exposing (..)
 import Todo.Types exposing (TodoId)
 
 

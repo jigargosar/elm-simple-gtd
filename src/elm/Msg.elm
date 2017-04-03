@@ -3,7 +3,7 @@ module Msg exposing (..)
 import Dom
 import EditModel.Types exposing (..)
 import Ext.Cmd
-import KeyboardExtra exposing (KeyboardEvent)
+import Ext.Keyboard exposing (KeyboardEvent)
 import Model.Types exposing (..)
 import Project exposing (ProjectName)
 import Return
@@ -14,8 +14,8 @@ import Todo.Types exposing (..)
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
-import FunctionExtra.Operators exposing (..)
+import Ext.Function exposing (..)
+import Ext.Function.Operators exposing (..)
 import Types exposing (..)
 
 

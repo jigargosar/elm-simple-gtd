@@ -4,7 +4,7 @@ import Todo
 import TodoList.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
+import Ext.Function exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E

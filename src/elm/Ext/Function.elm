@@ -1,4 +1,4 @@
-module FunctionExtra exposing (..)
+module Ext.Function exposing (..)
 
 
 apply a f =

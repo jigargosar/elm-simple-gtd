@@ -12,8 +12,8 @@ import Random.Pcg as Random exposing (Seed)
 import Todo.Internal as Internal exposing (..)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
-import FunctionExtra exposing (..)
-import FunctionExtra.Operators exposing (..)
+import Ext.Function exposing (..)
+import Ext.Function.Operators exposing (..)
 import Result.Extra as Result
 import List
 import List.Extra as List

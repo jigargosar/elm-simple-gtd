@@ -6,7 +6,7 @@ import Model
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
+import Ext.Function exposing (..)
 import Project exposing (Project, ProjectId, ProjectList, ProjectName)
 import Model.Types exposing (..)
 

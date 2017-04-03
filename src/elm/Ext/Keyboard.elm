@@ -1,4 +1,4 @@
-module KeyboardExtra exposing (..)
+module Ext.Keyboard exposing (..)
 
 import DecodeExtra exposing (traceDecoder)
 import Html exposing (Attribute)
@@ -6,7 +6,7 @@ import Html.Events as Events
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Keyboard.Extra as KX exposing (Key)
-import FunctionExtra.Operators exposing (..)
+import Ext.Function.Operators exposing (..)
 
 
 onKeyUp : (KeyboardEvent -> msg) -> Attribute msg

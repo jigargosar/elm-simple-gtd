@@ -1,4 +1,4 @@
-module FunctionExtra.Operators exposing (..)
+module Ext.Function.Operators exposing (..)
 
 
 (=>) =

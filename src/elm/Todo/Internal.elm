@@ -5,7 +5,7 @@ import Project exposing (ProjectId)
 import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
+import Ext.Function exposing (..)
 import Time exposing (Time)
 
 

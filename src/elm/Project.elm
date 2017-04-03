@@ -3,8 +3,8 @@ module Project exposing (..)
 import PouchDB
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
-import FunctionExtra.Operators exposing (..)
+import Ext.Function exposing (..)
+import Ext.Function.Operators exposing (..)
 import Random.Pcg as Random exposing (..)
 import RandomIdGenerator
 import Json.Decode as D exposing (Decoder)

@@ -5,7 +5,7 @@ import EditModel.Types exposing (EditTodoModel)
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
-import KeyboardExtra as KeyboardExtra exposing (KeyboardEvent, onEscape, onKeyUp)
+import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditModel
 import Model.ProjectList
 import Model.TodoList exposing (TodoContextViewModel)
@@ -28,7 +28,7 @@ import Todo
 import Todo.Types exposing (..)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
-import FunctionExtra exposing (..)
+import Ext.Function exposing (..)
 import View.Todo
 
 

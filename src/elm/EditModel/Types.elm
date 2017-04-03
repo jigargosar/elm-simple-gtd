@@ -3,7 +3,7 @@ module EditModel.Types exposing (..)
 import Project
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
+import Ext.Function exposing (..)
 import Todo.Types exposing (..)
 
 

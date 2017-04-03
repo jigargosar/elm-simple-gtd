@@ -3,7 +3,7 @@ module Ext.Cmd exposing (..)
 import Task
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import FunctionExtra exposing (..)
+import Ext.Function exposing (..)
 
 
 toCmds : (List msg -> msg) -> List msg -> Cmd msg

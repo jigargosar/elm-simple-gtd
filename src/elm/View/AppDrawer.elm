@@ -5,7 +5,7 @@ import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
-import KeyboardExtra as KeyboardExtra exposing (onEscape, onKeyUp)
+import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model.TodoList
 import Msg exposing (Msg(SetMainViewType))
 import View.TodoList exposing (allTodoListByTodoContextView)
@@ -23,8 +23,8 @@ import Todo
 import Todo.Types exposing (..)
 import Polymer.Paper exposing (..)
 import Polymer.App as App
-import FunctionExtra exposing (..)
-import FunctionExtra.Operators exposing (..)
+import Ext.Function exposing (..)
+import Ext.Function.Operators exposing (..)
 import Model.Types exposing (..)
 
 

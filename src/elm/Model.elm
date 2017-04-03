@@ -5,6 +5,7 @@ import Model.Internal exposing (..)
 import Msg exposing (Return)
 import Project exposing (EncodedProjectList)
 import ProjectList
+import ProjectList.Types exposing (ProjectList)
 import RunningTodo exposing (RunningTodo)
 import Dict
 import Json.Encode as E
@@ -48,3 +49,12 @@ init now encodedTodoList encodedProjectList =
         , maybeRunningTodo = Nothing
         , projectList = projectList
         }
+
+
+updateProjectListFromTuple : (ProjectList -> ( x, ProjectList )) -> Model -> ( x, Model )
+updateProjectListFromTuple f m =
+    let
+        ( x, projectList ) =
+            f (getProjectList m)
+    in
+        ( x, setProjectList projectList m )

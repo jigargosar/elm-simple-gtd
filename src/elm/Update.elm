@@ -209,9 +209,8 @@ findOrCreateProjectByName projectName =
             (\_ ->
                 (\model ->
                     model
-                        |> Model.getProjectList
-                        >> ProjectList.addNewProject projectName (Model.getNow model)
-                        >> Tuple2.mapSecond (Model.setProjectList # model)
+                        |> Model.updateProjectListFromTuple
+                            (ProjectList.addNewProject projectName (Model.getNow model))
                 )
                     >> apply2 ( identity, Tuple.first >> upsertProjectCmd )
             )

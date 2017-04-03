@@ -1,6 +1,6 @@
 module Model.RunningTodo exposing (..)
 
-import Maybe.Extra
+import Maybe.Extra as Maybe
 import Model
 import Model.Internal exposing (..)
 import Model.TodoList
@@ -58,8 +58,7 @@ shouldBeep : Model -> Bool
 shouldBeep =
     apply2 ( getMaybeRunningTodo, Model.getNow >> Just )
         >> maybe2Tuple
-        >>? RunningTodo.shouldBeepHelp
-        >>?= False
+        >> Maybe.unwrap False RunningTodo.shouldBeepHelp
 
 
 setLastBeepedAt : Time -> ModelF

@@ -204,7 +204,6 @@ updateTodoFromEditTodoModel editTodoModel =
 
 findOrCreateProjectByName : ProjectName -> Return -> ReturnTuple Project
 findOrCreateProjectByName projectName =
-
     Return.andThenWith (Model.getProjectList >> ProjectList.findProjectByName projectName)
         (Maybe.unpack
             (\_ ->

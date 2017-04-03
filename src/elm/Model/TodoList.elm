@@ -108,12 +108,12 @@ maybeTuple2With f model =
 addCopyOfTodo : Todo -> Time -> Model -> ( Todo, Model )
 addCopyOfTodo todo now =
     apply2 ( getTodoList >> TodoList.addCopyOfTodoGenerator todo now, identity )
-        >> uncurry (Model.generate)
-        >> (\( ( todo, todoList ), model ) -> ( todo, setTodoList todoList model ))
+        >> uncurry Model.generate
+        >> setTodoListFromTuple
 
 
 addNewTodo : String -> Time -> Model -> ( Todo, Model )
 addNewTodo text now =
     apply2 ( getTodoList >> TodoList.addNewTodoGenerator text now, identity )
-        >> uncurry (Model.generate)
-        >> (\( ( todo, todoList ), model ) -> ( todo, setTodoList todoList model ))
+        >> uncurry Model.generate
+        >> setTodoListFromTuple

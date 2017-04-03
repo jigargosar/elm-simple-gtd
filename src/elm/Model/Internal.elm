@@ -36,6 +36,11 @@ setTodoList todoList model =
     { model | todoList = todoList }
 
 
+setTodoListFromTuple : ( ( x, TodoList ), Model ) -> ( x, Model )
+setTodoListFromTuple ( ( x, todoList ), model ) =
+    ( x, { model | todoList = todoList } )
+
+
 updateTodoList : (TodoList -> TodoList) -> ModelF
 updateTodoList updater model =
     { model | todoList = getTodoList model |> updater }

@@ -47,3 +47,8 @@ maybeTuple2With f model =
 addCopyOfTodoGenerator : Todo -> Time -> TodoList -> Random.Generator ( Todo, TodoList )
 addCopyOfTodoGenerator todo now todoList =
     Random.map (\todo -> ( todo, todo :: todoList )) (Todo.copyGenerator now todo)
+
+
+addNewTodoGenerator : String -> Time -> TodoList -> Random.Generator ( Todo, TodoList )
+addNewTodoGenerator text now todoList =
+    Random.map (\todo -> ( todo, todo :: todoList )) (Todo.todoGenerator now text)

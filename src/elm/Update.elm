@@ -182,10 +182,9 @@ onEditTodoEnterPressed isShiftDown =
 
 
 copyAndEditTodo todoId =
-    Return.transformWith Model.getNow
+    Return.maybeAndThenWith Model.getNow
         (\now ->
-            Return.andThenMaybe
-                (Model.TodoList.copyTodoById todoId now ?>> persistAndEditTodoCmd)
+            Model.TodoList.copyTodoById todoId now ?>> persistAndEditTodoCmd
         )
 
 

@@ -35,10 +35,6 @@ stop =
     Stop
 
 
-markRunningTodoDone =
-    MarkRunningTodoDone
-
-
 startAddingTodo =
     AddTodoClicked
 

@@ -55,7 +55,8 @@ update msg =
                 stopRunningTodo
 
             MarkRunningTodoDone ->
-                markRunningTodoDone
+                Return.maybeTransformWith (Model.getRunningTodoId)
+                    (updateTodo [ Todo.SetDone True ])
                     >> stopRunningTodo
 
             ToggleTodoDone id ->
@@ -217,12 +218,6 @@ createAndPersistProject projectName =
 stopRunningTodo : ReturnF
 stopRunningTodo =
     Return.map (Model.stopRunningTodo)
-
-
-markRunningTodoDone : ReturnF
-markRunningTodoDone =
-    Return.maybeTransformWith (Model.getRunningTodoId)
-        (updateTodo [ Todo.SetDone True ])
 
 
 addNewTodoAt : String -> Time -> Model -> ( Todo, Model )

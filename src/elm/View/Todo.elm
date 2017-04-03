@@ -40,6 +40,7 @@ todoViewEditing vc etm =
         config =
             { onEditTodoKeyUp = Msg.EditTodoKeyUp etm
             , onEditTodoTextChanged = Msg.EditTodoTextChanged etm
+            , onEditTodoProjectNameChanged = Msg.EditTodoProjectNameChanged etm
             }
     in
         item [ class "todo-item" ]
@@ -59,7 +60,7 @@ todoViewEditing vc etm =
                     [ id (todoProjectInputId etm.todoId)
                     , class "project-name-input"
                     , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                    , onInput Msg.EditTodoProjectNameChanged
+                    , onInput config.onEditTodoProjectNameChanged
                     , stringProperty "label" "Project Name"
                     , value etm.projectName
                     ]
@@ -67,7 +68,7 @@ todoViewEditing vc etm =
                 , Html.node "paper-autocomplete-suggestions"
                     [ stringProperty "for" (todoProjectInputId etm.todoId)
                     , property "source" (vc.encodedProjectNames)
-                    , onAutoCompleteSelected Msg.EditTodoProjectNameChanged
+                    , onAutoCompleteSelected config.onEditTodoProjectNameChanged
                     , intProperty "minLength" 0
                     ]
                     []

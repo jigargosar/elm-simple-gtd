@@ -69,9 +69,9 @@ shouldBeepHelp ( details, now ) =
             False
 
 
-updateLastBeepedAt : Time -> ModelF
-updateLastBeepedAt now =
+setLastBeepedAt : Time -> ModelF
+setLastBeepedAt now =
     updateMaybeRunningTodo
         (getMaybeRunningTodo
-            ?>> RunningTodo.updateLastBeepedAt now
+            ?>> RunningTodo.setLastBeepedAt now
         )

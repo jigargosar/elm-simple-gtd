@@ -150,7 +150,7 @@ onUpdateNow now =
                         Model.RunningTodo.shouldBeep m
                 in
                     if shouldBeep then
-                        ( Model.RunningTodo.updateLastBeepedAt now m, startAlarm () )
+                        ( Model.RunningTodo.setLastBeepedAt now m, startAlarm () )
                     else
                         Return.singleton m
             )

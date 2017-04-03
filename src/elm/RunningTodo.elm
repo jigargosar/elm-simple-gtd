@@ -42,13 +42,21 @@ getElapsedTime now runningTodo =
             runningTodo.timeSpent
 
 
-updateLastBeepedAt now runningTodo =
+getMaybeRunningState runningTodo =
     case runningTodo.state of
         Running runningState ->
-            { runningTodo
-                | state =
-                    Running { runningState | lastBeepedAt = now }
-            }
+            Just runningState
 
         _ ->
-            runningTodo
+            Nothing
+
+
+setLastBeepedAt now runningTodo =
+    getMaybeRunningState runningTodo
+        ?|> (\runningState ->
+                { runningTodo
+                    | state =
+                        Running { runningState | lastBeepedAt = now }
+                }
+            )
+        ?= runningTodo

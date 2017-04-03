@@ -72,7 +72,7 @@ type Msg
     | StartEditingTodo Todo
     | FocusPaperInput String
     | EditTodoTextChanged EditTodoModel String
-    | EditTodoProjectNameChanged ProjectName
+    | EditTodoProjectNameChanged EditTodoModel ProjectName
     | EditTodoKeyUp EditTodoModel KeyboardEvent
     | SetMainViewType MainViewType
     | OnNowChanged Time

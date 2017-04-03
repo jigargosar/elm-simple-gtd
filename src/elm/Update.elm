@@ -104,7 +104,7 @@ update msg =
             EditTodoTextChanged editTodoModel text ->
                 Return.map (Model.EditModel.updateEditTodoText text)
 
-            EditTodoProjectNameChanged projectName ->
+            EditTodoProjectNameChanged editTodoModel projectName ->
                 Return.map (Model.EditModel.updateEditTodoProjectName projectName)
 
             EditTodoKeyUp editTodoModel { key, isShiftDown } ->

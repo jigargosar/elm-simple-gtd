@@ -72,7 +72,7 @@ update msg =
 
             Create text ->
                 Return.andThenWith Model.getNow
-                    (\now -> Model.addNewTodoAt text now >> persistTodoFromTuple)
+                    (\now -> Model.createNewTodo text now >> persistTodoFromTuple)
 
             AddTodoClicked ->
                 activateEditNewTodoMode ""
@@ -184,7 +184,7 @@ onEditTodoEnterPressed isShiftDown =
 copyAndEditTodo todoId =
     Return.maybeAndThenWith Model.getNow
         (\now ->
-            Model.copyTodoById todoId now ?>> persistAndEditTodoCmd
+            Model.createCopyOfTodoById todoId now ?>> persistAndEditTodoCmd
         )
 
 

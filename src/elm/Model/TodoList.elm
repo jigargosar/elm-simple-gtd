@@ -51,10 +51,6 @@ findTodoEqualById todo =
     getTodoList >> List.find (Todo.equalById todo)
 
 
-addTodo todo =
-    updateTodoList (getTodoList >> (::) todo)
-
-
 setTodoList : TodoList -> ModelF
 setTodoList todoList model =
     { model | todoList = todoList }
@@ -113,23 +109,28 @@ updateAndGetTodo actions todoId model =
             )
 
 
-copyTodoById : TodoId -> Time -> Model -> Maybe ( Todo, Model )
-copyTodoById todoId now model =
-    findTodoById todoId model
-        ?|> ((copyAndAddTodo now # model))
+createCopyOfTodoById : TodoId -> Time -> Model -> Maybe ( Todo, Model )
+createCopyOfTodoById todoId now =
+    apply2 ( findTodoById todoId, Just )
+        >> maybe2Tuple
+        >>? uncurry (createCopyOfTodo now)
 
 
-generateCopyOfTodo : Time -> Todo -> Model -> ( Todo, Model )
-generateCopyOfTodo =
-    Todo.copyGenerator >>> Model.generate
+createCopyOfTodo : Time -> Todo -> Model -> ( Todo, Model )
+createCopyOfTodo =
+    let
+        generateCopyOfTodo : Time -> Todo -> Model -> ( Todo, Model )
+        generateCopyOfTodo =
+            Todo.copyGenerator >>> Model.generate
+    in
+        generateCopyOfTodo >>>> addTodoFromTuple
 
 
-copyAndAddTodo : Time -> Todo -> Model -> ( Todo, Model )
-copyAndAddTodo =
-    generateCopyOfTodo >>>> apply2 ( Tuple.first, uncurry addTodo )
-
-
-addNewTodoAt : String -> Time -> Model -> ( Todo, Model )
-addNewTodoAt text now =
+createNewTodo : String -> Time -> Model -> ( Todo, Model )
+createNewTodo text now =
     Model.generate (Todo.todoGenerator now text)
-        >> apply2 ( Tuple.first, uncurry addTodo )
+        >> addTodoFromTuple
+
+
+addTodoFromTuple ( todo, model ) =
+    ( todo, updateTodoList (getTodoList >> (::) todo) model )

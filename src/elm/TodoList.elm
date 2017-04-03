@@ -44,6 +44,6 @@ maybeTuple2With f model =
     f model ?|> (,) # model
 
 
-createMaybeCopyGeneratorOfTodoWithId : TodoId -> Time -> TodoList -> Maybe (Random.Generator Todo)
-createMaybeCopyGeneratorOfTodoWithId todoId now =
-    findById todoId >>? Todo.copyGenerator now
+addCopyOfTodoGenerator : Todo -> Time -> TodoList -> Random.Generator ( Todo, TodoList )
+addCopyOfTodoGenerator todo now todoList =
+    Random.map (\todo -> ( todo, todo :: todoList )) (Todo.copyGenerator now todo)

@@ -105,10 +105,11 @@ maybeTuple2With f model =
     f model ?|> (,) # model
 
 
-addCopyOfTodoById : TodoId -> Time -> Model -> Maybe ( Todo, Model )
-addCopyOfTodoById todoId now =
-    maybeTuple2With (getTodoList >> TodoList.createMaybeCopyGeneratorOfTodoWithId todoId now)
-        >>? uncurry (Model.generate >>> addTodoFromTuple)
+addCopyOfTodo : Todo -> Time -> Model -> ( Todo, Model )
+addCopyOfTodo todo now =
+    apply2 ( getTodoList >> TodoList.addCopyOfTodoGenerator todo now, identity )
+        >> uncurry (Model.generate)
+        >> (\( ( todo, todoList ), model ) -> ( todo, setTodoList todoList model ))
 
 
 addNewTodo : String -> Time -> Model -> ( Todo, Model )

@@ -176,15 +176,16 @@ onEditTodoEnterPressed isShiftDown =
         (\editTodoModel ->
             findOrCreateProjectByName editTodoModel.projectName
                 >> updateTodoFromEditTodoModel editTodoModel
-                >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todoId)
+                >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
                 >> deactivateEditingMode
         )
 
 
-copyAndEditTodo todoId =
-    Return.maybeAndThenWith Model.getNow
+copyAndEditTodo : Todo -> ReturnF
+copyAndEditTodo todo =
+    Return.andThenWith Model.getNow
         (\now ->
-            Model.addCopyOfTodoById todoId now ?>> persistAndEditTodoCmd
+            Model.addCopyOfTodo todo now >> persistTodoAndStartEditing
         )
 
 
@@ -222,8 +223,8 @@ withNow msg =
     Task.perform (msg) Time.now |> Return.command
 
 
-persistAndEditTodoCmd : ( Todo, Model ) -> Return
-persistAndEditTodoCmd ( todo, model ) =
+persistTodoAndStartEditing : ( Todo, Model ) -> Return
+persistTodoAndStartEditing ( todo, model ) =
     persistTodoFromTuple ( todo, model )
         |> andThenUpdate (Msg.StartEditingTodo todo)
 

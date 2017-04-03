@@ -3,7 +3,7 @@ module Model.EditModel exposing (..)
 import EditModel.Types exposing (..)
 import Maybe.Extra as Maybe
 import Model.Internal as Model exposing (..)
-import Model.ProjectList
+
 import Project exposing (Project, ProjectName)
 import Todo
 import Todo.Types exposing (..)

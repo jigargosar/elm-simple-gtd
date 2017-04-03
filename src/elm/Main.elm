@@ -3,7 +3,6 @@ port module Main exposing (..)
 import Dom
 import EditModel
 import Model.EditModel
-import Model.ProjectList
 import Model.RunningTodo
 import Project exposing (EncodedProjectList)
 import Ext.Random as Random

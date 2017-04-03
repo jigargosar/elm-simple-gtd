@@ -6,7 +6,7 @@ import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.Internal as Model
-import Model.ProjectList
+
 import ProjectList
 import Model.TodoList exposing (TodoContextViewModel)
 import Msg exposing (..)

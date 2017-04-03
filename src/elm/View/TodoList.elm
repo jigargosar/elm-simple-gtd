@@ -8,7 +8,7 @@ import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditModel
 import Model.Internal as Model
-import Model.ProjectList as Model
+
 import Model.TodoList exposing (TodoContextViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)

@@ -11,6 +11,7 @@ import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import FunctionExtra.Operators exposing (..)
 import Model.Types exposing (..)
 
 
@@ -72,8 +73,7 @@ updateLastBeepedAt : Time -> ModelF
 updateLastBeepedAt now =
     updateMaybeRunningTodo
         (getMaybeRunningTodo
-            >> Maybe.map
-                (\d ->
+            ?>> (\d ->
                     case d.state of
                         RunningTodo.Running runningState ->
                             { d

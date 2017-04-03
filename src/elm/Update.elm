@@ -129,7 +129,7 @@ update msg =
 
 updateTodo actions todoId =
     Return.andThenMaybe
-        (Model.TodoList.updateAndGetTodo actions todoId ?|>> persistTodoFromTuple)
+        (Model.TodoList.updateAndGetTodo actions todoId ?>> persistTodoFromTuple)
 
 
 onMsgList : List Msg -> ReturnF
@@ -185,7 +185,7 @@ copyAndEditTodo todoId =
     Return.transformWith Model.getNow
         (\now ->
             Return.andThenMaybe
-                (Model.TodoList.copyTodoById todoId now ?|>> persistAndEditTodoCmd)
+                (Model.TodoList.copyTodoById todoId now ?>> persistAndEditTodoCmd)
         )
 
 

@@ -54,14 +54,12 @@ type alias TodoView =
 
 todoViewFromModel : Model -> TodoView
 todoViewFromModel =
-    createViewContext >> keyedTodoView
-
-
-keyedTodoView : Context -> TodoView
-keyedTodoView vc todo =
-    ( Todo.getId todo
-    , getTodoView vc todo
-    )
+    createViewContext
+        >> (\vc todo ->
+                ( Todo.getId todo
+                , getTodoView vc todo
+                )
+           )
 
 
 getTodoView vc todo =

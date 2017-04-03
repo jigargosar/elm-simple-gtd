@@ -30,7 +30,6 @@ import Maybe.Extra as Maybe
 import Todo as Todo
 import Todo.Types as Todo exposing (Todo)
 import Tuple2
-import Function exposing ((>>>))
 import Html
 import Msg exposing (..)
 import RunningTodo
@@ -208,9 +207,9 @@ findOrCreateProjectByName projectName =
         (Maybe.unpack
             (\_ ->
                 Model.addNewProject projectName
-                    >> (\( project, model ) -> ( project, model ) ! [ upsertProjectCmd project ])
+                    >> apply2 ( identity, Tuple.first >> upsertProjectCmd )
             )
-            (\project -> (\model -> ( project, model ) ! []))
+            ((,) >>> Return.singleton)
         )
 
 

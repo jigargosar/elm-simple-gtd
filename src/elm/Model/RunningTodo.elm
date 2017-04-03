@@ -58,7 +58,7 @@ shouldBeep : Model -> Bool
 shouldBeep =
     apply2 ( getMaybeRunningTodo, Model.getNow >> Just )
         >> maybe2Tuple
-        ?>> RunningTodo.shouldBeepHelp
+        >>? RunningTodo.shouldBeepHelp
         >>?= False
 
 

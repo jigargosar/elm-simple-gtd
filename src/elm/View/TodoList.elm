@@ -73,7 +73,18 @@ getMaybeEditTodoView vc todo =
 foo : Context -> Todo -> EditTodoModel -> Maybe (Html Msg)
 foo vc todo etm =
     if Todo.equalById etm.todo todo then
-        Just (View.Todo.todoViewEditing vc etm)
+        let
+            viewModel =
+                { todoText = etm.todoText
+                , todoId = etm.todoId
+                , projectName = etm.projectName
+                , onKeyUp = Msg.EditTodoKeyUp etm
+                , onTodoTextChanged = Msg.EditTodoTextChanged etm
+                , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
+                , encodedProjectNames = vc.encodedProjectNames
+                }
+        in
+            Just (View.Todo.todoViewEditing viewModel)
     else
         Nothing
 

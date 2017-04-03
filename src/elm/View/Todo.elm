@@ -35,49 +35,38 @@ getEncodedProjectNames =
     Json.Encode.list [ Json.Encode.string "Foo" ]
 
 
-todoViewEditing vc etm =
-    let
-        viewModel =
-            { todoText = etm.todoText
-            , todoId = etm.todoId
-            , projectName = etm.projectName
-            , onKeyUp = Msg.EditTodoKeyUp etm
-            , onTodoTextChanged = Msg.EditTodoTextChanged etm
-            , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
-            , encodedProjectNames = vc.encodedProjectNames
-            }
-    in
-        item [ class "todo-item" ]
-            [ itemBody []
-                [ input
-                    [ id (todoInputId etm.todoId)
-                    , class "edit-todo-input auto-focus"
-                    , stringProperty "label" "Todo"
-                    , value (etm.todoText)
-                    , onInput viewModel.onTodoTextChanged
-                    , autofocus True
-                    , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                    , onKeyUp viewModel.onKeyUp
-                    ]
-                    []
-                , input
-                    [ id (todoProjectInputId etm.todoId)
-                    , class "project-name-input"
-                    , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                    , onInput viewModel.onProjectNameChanged
-                    , stringProperty "label" "Project Name"
-                    , value etm.projectName
-                    ]
-                    []
-                , Html.node "paper-autocomplete-suggestions"
-                    [ stringProperty "for" (todoProjectInputId etm.todoId)
-                    , property "source" (viewModel.encodedProjectNames)
-                    , onAutoCompleteSelected viewModel.onProjectNameChanged
-                    , intProperty "minLength" 0
-                    ]
-                    []
+todoViewEditing viewModel =
+    item [ class "todo-item" ]
+        [ itemBody []
+            [ input
+                [ id (todoInputId viewModel.todoId)
+                , class "edit-todo-input auto-focus"
+                , stringProperty "label" "Todo"
+                , value (viewModel.todoText)
+                , onInput viewModel.onTodoTextChanged
+                , autofocus True
+                , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
+                , onKeyUp viewModel.onKeyUp
                 ]
+                []
+            , input
+                [ id (todoProjectInputId viewModel.todoId)
+                , class "project-name-input"
+                , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
+                , onInput viewModel.onProjectNameChanged
+                , stringProperty "label" "Project Name"
+                , value viewModel.projectName
+                ]
+                []
+            , Html.node "paper-autocomplete-suggestions"
+                [ stringProperty "for" (todoProjectInputId viewModel.todoId)
+                , property "source" (viewModel.encodedProjectNames)
+                , onAutoCompleteSelected viewModel.onProjectNameChanged
+                , intProperty "minLength" 0
+                ]
+                []
             ]
+        ]
 
 
 todoViewNotEditing vc todo =

@@ -25,10 +25,6 @@ type alias RunningTodo =
     { id : TodoId, state : State, timeSpent : Time, startTime : Time }
 
 
-init =
-    Nothing
-
-
 start id now =
     RunningTodo id (createStartedState now now) 0 now |> Just
 

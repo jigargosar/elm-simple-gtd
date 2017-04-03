@@ -6,6 +6,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Model.Types exposing (..)
+import RunningTodo exposing (RunningTodo)
 
 
 getSeed : Model -> Seed
@@ -36,3 +37,18 @@ setEditModel editModel model =
 updateEditModel : (Model -> EditModel) -> ModelF
 updateEditModel updater model =
     setEditModel (updater model) model
+
+
+getMaybeRunningTodo : Model -> Maybe RunningTodo
+getMaybeRunningTodo =
+    (.maybeRunningTodo)
+
+
+setMaybeRunningTodo : Maybe RunningTodo -> ModelF
+setMaybeRunningTodo maybeRunningTodo model =
+    { model | maybeRunningTodo = maybeRunningTodo }
+
+
+updateMaybeRunningTodo : (Model -> Maybe RunningTodo) -> ModelF
+updateMaybeRunningTodo updater model =
+    setMaybeRunningTodo (updater model) model

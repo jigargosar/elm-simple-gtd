@@ -26,7 +26,7 @@ type alias Model =
     , editModel : EditModel
     , mainViewType : MainViewType
     , seed : Seed
-    , runningTodo : Maybe RunningTodo
+    , maybeRunningTodo : Maybe RunningTodo
     , projectList : ProjectList
     }
 

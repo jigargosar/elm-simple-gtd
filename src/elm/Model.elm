@@ -2,7 +2,8 @@ module Model exposing (..)
 
 import EditModel
 import Model.Internal exposing (..)
-import Project
+import Msg exposing (Return)
+import Project exposing (EncodedProjectList)
 import RunningTodo exposing (RunningTodo)
 import Dict
 import Json.Encode as E
@@ -15,6 +16,7 @@ import Time exposing (Time)
 import TodoList
 import Todo.Types exposing (..)
 import Todo
+import TodoList.Types exposing (EncodedTodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -73,12 +75,13 @@ generate generator m =
         |> Tuple.mapSecond (setSeed # m)
 
 
+init : Time -> EncodedTodoList -> EncodedProjectList -> Model
 init now encodedTodoList encodedProjectList =
     { now = now
     , todoList = TodoList.decodeTodoList encodedTodoList
     , editModel = EditModel.init
     , mainViewType = AllByTodoContextView
     , seed = Random.seedFromTime now
-    , runningTodo = RunningTodo.init
+    , maybeRunningTodo = Nothing
     , projectList = Project.decodeProjectList encodedProjectList
     }

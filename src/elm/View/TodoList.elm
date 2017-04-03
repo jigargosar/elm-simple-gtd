@@ -65,7 +65,13 @@ todoViewFromModel =
 getTodoView vc todo =
     let
         notEditingView =
-            (\_ -> View.Todo.todoViewNotEditing vc todo)
+            (\_ ->
+                let
+                    _ =
+                        1
+                in
+                    View.Todo.todoViewNotEditing vc todo
+            )
     in
         case vc.maybeEditTodoModel of
             Just etm ->
@@ -73,7 +79,11 @@ getTodoView vc todo =
                     let
                         viewModel : EditTodoViewModel
                         viewModel =
-                            { todoText = etm.todoText
+                            { todo =
+                                { text = etm.todoText
+                                , id = etm.todoId
+                                }
+                            , todoText = etm.todoText
                             , todoId = etm.todoId
                             , projectName = etm.projectName
                             , onKeyUp = Msg.EditTodoKeyUp etm

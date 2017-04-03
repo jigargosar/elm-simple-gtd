@@ -34,7 +34,8 @@ onAutoCompleteSelected tagger =
 
 
 type alias EditTodoViewModel =
-    { todoText : TodoText
+    { todo : { text : TodoText, id : TodoId }
+    , todoText : TodoText
     , todoId : TodoId
     , projectName : ProjectName
     , onKeyUp : KeyboardEvent -> Msg

@@ -6,7 +6,7 @@ import EditModel.Types exposing (..)
 import Ext.Return as Return
 import Model.EditModel exposing (getMaybeEditTodoModel)
 import Model.ProjectList as Model exposing (getProjectByName)
-import Model.RunningTodo
+import Model.RunningTodo as Model
 import Model.TodoList
 import Project exposing (Project, ProjectId, ProjectName)
 import RandomIdGenerator as Random
@@ -49,7 +49,7 @@ update msg =
                 focusPaperInputCmd selector
 
             Start id ->
-                Return.map (Model.RunningTodo.startTodo id)
+                Return.map (Model.startTodo id)
 
             Stop ->
                 stopRunningTodo
@@ -147,10 +147,10 @@ onUpdateNow now =
             (\m ->
                 let
                     shouldBeep =
-                        Model.RunningTodo.shouldBeep m
+                        Model.shouldBeep m
                 in
                     if shouldBeep then
-                        ( Model.RunningTodo.setLastBeepedAt now m, startAlarm () )
+                        ( Model.setLastBeepedAt now m, startAlarm () )
                     else
                         Return.singleton m
             )
@@ -216,12 +216,12 @@ createAndPersistProject projectName =
 
 stopRunningTodo : ReturnF
 stopRunningTodo =
-    Return.map (Model.RunningTodo.stopRunningTodo)
+    Return.map (Model.stopRunningTodo)
 
 
 markRunningTodoDone : ReturnF
 markRunningTodoDone =
-    Return.maybeTransformWith (Model.RunningTodo.getRunningTodoId)
+    Return.maybeTransformWith (Model.getRunningTodoId)
         (updateTodo [ Todo.SetDone True ])
 
 

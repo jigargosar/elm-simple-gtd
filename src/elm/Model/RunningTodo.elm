@@ -54,11 +54,15 @@ startTodo id =
     updateMaybeRunningTodo (Model.getNow >> RunningTodo.start id)
 
 
+maybeModelTupleWith f1 model =
+    f1 model ?|> (\val -> ( val, model ))
+
+
 shouldBeep : Model -> Bool
 shouldBeep =
-    apply2 ( getMaybeRunningTodo, Model.getNow >> Just )
-        >> maybe2Tuple
-        >> Maybe.unwrap False RunningTodo.shouldBeepHelp
+    maybeModelTupleWith getMaybeRunningTodo
+        >> Maybe.unwrap False
+            (\( runningTodo, model ) -> RunningTodo.shouldBeep (Model.getNow model) runningTodo)
 
 
 setLastBeepedAt : Time -> ModelF

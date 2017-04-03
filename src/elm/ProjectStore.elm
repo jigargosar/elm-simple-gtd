@@ -25,13 +25,13 @@ decodeListOfEncodedProjects =
         >> List.filterMap
             (\result ->
                 case result of
-                    Ok todo ->
-                        Just todo
+                    Ok project ->
+                        Just project
 
                     Err x ->
                         let
                             _ =
-                                Debug.log "Error while decoding todo"
+                                Debug.log "Error while decoding Project"
                         in
                             Nothing
             )

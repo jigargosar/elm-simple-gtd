@@ -5,7 +5,7 @@ import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import EditModel.Types exposing (..)
 import Ext.Return as Return
 import Model.EditModel exposing (getMaybeEditTodoModel)
-import Model.ProjectList exposing (getProjectByName)
+import Model.ProjectList as Model exposing (getProjectByName)
 import Model.RunningTodo
 import Model.TodoList
 import Project exposing (Project, ProjectId, ProjectName)
@@ -203,14 +203,14 @@ updateTodoFromEditTodoModel editTodoModel =
 
 findOrCreateProjectByName : ProjectName -> Return -> ReturnTuple Project
 findOrCreateProjectByName projectName =
-    Return.transformWith (Model.ProjectList.getProjectByName projectName)
+    Return.transformWith (Model.getProjectByName projectName)
         (Maybe.unpack (\_ -> createAndPersistProject projectName)
             ((,) >> Return.map)
         )
 
 
 createAndPersistProject projectName =
-    Return.map (Model.ProjectList.addNewProject projectName)
+    Return.map (Model.addNewProject projectName)
         >> Return.effect_ (Tuple.first >> upsertProjectCmd)
 
 

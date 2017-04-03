@@ -63,27 +63,31 @@ todoViewFromModel =
 
 
 getTodoView vc todo =
-    vc.maybeEditTodoModel ?+> getMaybeEditTodoView vc todo ?= View.Todo.todoViewNotEditing vc todo
+    let
+        notEditingView =
+            (\_ -> View.Todo.todoViewNotEditing vc todo)
+    in
+        case vc.maybeEditTodoModel of
+            Just etm ->
+                if Todo.equalById etm.todo todo then
+                    let
+                        viewModel : EditTodoViewModel
+                        viewModel =
+                            { todoText = etm.todoText
+                            , todoId = etm.todoId
+                            , projectName = etm.projectName
+                            , onKeyUp = Msg.EditTodoKeyUp etm
+                            , onTodoTextChanged = Msg.EditTodoTextChanged etm
+                            , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
+                            , encodedProjectNames = vc.encodedProjectNames
+                            }
+                    in
+                        (View.Todo.editTodoView viewModel)
+                else
+                    notEditingView ()
 
-
-getMaybeEditTodoView : Context -> Todo -> EditTodoModel -> Maybe (Html Msg)
-getMaybeEditTodoView vc todo etm =
-    if Todo.equalById etm.todo todo then
-        let
-            viewModel : EditTodoViewModel
-            viewModel =
-                { todoText = etm.todoText
-                , todoId = etm.todoId
-                , projectName = etm.projectName
-                , onKeyUp = Msg.EditTodoKeyUp etm
-                , onTodoTextChanged = Msg.EditTodoTextChanged etm
-                , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
-                , encodedProjectNames = vc.encodedProjectNames
-                }
-        in
-            Just (View.Todo.editTodoView viewModel)
-    else
-        Nothing
+            Nothing ->
+                notEditingView ()
 
 
 todoListView : Model -> Html Msg

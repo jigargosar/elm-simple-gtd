@@ -41,9 +41,9 @@ todoViewEditing vc etm =
             { todoText = etm.todoText
             , todoId = etm.todoId
             , projectName = etm.projectName
-            , onEditTodoKeyUp = Msg.EditTodoKeyUp etm
-            , onEditTodoTextChanged = Msg.EditTodoTextChanged etm
-            , onEditTodoProjectNameChanged = Msg.EditTodoProjectNameChanged etm
+            , onKeyUp = Msg.EditTodoKeyUp etm
+            , onTodoTextChanged = Msg.EditTodoTextChanged etm
+            , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
             }
     in
         item [ class "todo-item" ]
@@ -53,17 +53,17 @@ todoViewEditing vc etm =
                     , class "edit-todo-input auto-focus"
                     , stringProperty "label" "Todo"
                     , value (etm.todoText)
-                    , onInput viewModel.onEditTodoTextChanged
+                    , onInput viewModel.onTodoTextChanged
                     , autofocus True
                     , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                    , onKeyUp viewModel.onEditTodoKeyUp
+                    , onKeyUp viewModel.onKeyUp
                     ]
                     []
                 , input
                     [ id (todoProjectInputId etm.todoId)
                     , class "project-name-input"
                     , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                    , onInput viewModel.onEditTodoProjectNameChanged
+                    , onInput viewModel.onProjectNameChanged
                     , stringProperty "label" "Project Name"
                     , value etm.projectName
                     ]
@@ -71,7 +71,7 @@ todoViewEditing vc etm =
                 , Html.node "paper-autocomplete-suggestions"
                     [ stringProperty "for" (todoProjectInputId etm.todoId)
                     , property "source" (vc.encodedProjectNames)
-                    , onAutoCompleteSelected viewModel.onEditTodoProjectNameChanged
+                    , onAutoCompleteSelected viewModel.onProjectNameChanged
                     , intProperty "minLength" 0
                     ]
                     []

@@ -60,3 +60,13 @@ setLastBeepedAt now runningTodo =
                 }
             )
         ?= runningTodo
+
+
+shouldBeepHelp ( runningTodo, now ) =
+    case runningTodo.state of
+        Running { lastBeepedAt } ->
+            now - lastBeepedAt > 10 * Time.minute
+
+        _ ->
+            False
+

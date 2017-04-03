@@ -57,16 +57,7 @@ startTodo id =
 shouldBeep =
     apply2 ( getMaybeRunningTodo, Model.getNow >> Just )
         >> maybe2Tuple
-        >> Maybe.Extra.unwrap False shouldBeepHelp
-
-
-shouldBeepHelp ( details, now ) =
-    case details.state of
-        RunningTodo.Running { lastBeepedAt } ->
-            now - lastBeepedAt > 10 * Time.minute
-
-        _ ->
-            False
+        >> Maybe.Extra.unwrap False RunningTodo.shouldBeepHelp
 
 
 setLastBeepedAt : Time -> ModelF

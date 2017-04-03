@@ -14,7 +14,7 @@ import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import DebugExtra.Debug exposing (tapLog)
-import DecodeExtra exposing (traceDecoder)
+import Ext.Decode exposing (traceDecoder)
 import Json.Decode
 import Json.Encode
 import List.Extra as List

@@ -1,4 +1,4 @@
-module DecodeExtra exposing (..)
+module Ext.Decode exposing (..)
 
 import Json.Decode exposing (..)
 import Json.Decode.Pipeline exposing (..)
@@ -16,6 +16,3 @@ traceDecoder message decoder =
                     Err err ->
                         fail <| Debug.log message <| err
             )
-
-
-

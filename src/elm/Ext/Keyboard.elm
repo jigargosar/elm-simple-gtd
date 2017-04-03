@@ -1,6 +1,6 @@
 module Ext.Keyboard exposing (..)
 
-import DecodeExtra exposing (traceDecoder)
+import Ext.Decode exposing (traceDecoder)
 import Html exposing (Attribute)
 import Html.Events as Events
 import Json.Decode as D exposing (Decoder)

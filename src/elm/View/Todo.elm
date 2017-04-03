@@ -1,7 +1,7 @@
 module View.Todo exposing (..)
 
 import Date.Distance exposing (inWords)
-import DecodeExtra exposing (traceDecoder)
+import Ext.Decode exposing (traceDecoder)
 import Html.Attributes.Extra exposing (intProperty)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode

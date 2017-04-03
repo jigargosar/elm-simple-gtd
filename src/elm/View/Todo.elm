@@ -1,6 +1,7 @@
 module View.Todo exposing (..)
 
 import Date.Distance exposing (inWords)
+import Dom
 import Ext.Decode exposing (traceDecoder)
 import Html.Attributes.Extra exposing (intProperty)
 import Html.Events.Extra exposing (onClickStopPropagation)
@@ -34,7 +35,7 @@ onAutoCompleteSelected tagger =
 
 
 type alias EditTodoViewModel =
-    { todo : { text : TodoText, id : TodoId }
+    { todo : { text : TodoText, id : TodoId, inputId : Dom.Id }
     , projectName : ProjectName
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : TodoText -> Msg

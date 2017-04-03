@@ -79,16 +79,21 @@ getTodoView vc todo =
                     let
                         viewModel : EditTodoViewModel
                         viewModel =
-                            { todo =
-                                { text = etm.todoText
-                                , id = etm.todoId
+                            let
+                                todoId =
+                                    etm.todoId
+                            in
+                                { todo =
+                                    { text = etm.todoText
+                                    , id = todoId
+                                    , inputId = "edit-todo-input-" ++ todoId
+                                    }
+                                , projectName = etm.projectName
+                                , onKeyUp = Msg.EditTodoKeyUp etm
+                                , onTodoTextChanged = Msg.EditTodoTextChanged etm
+                                , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
+                                , encodedProjectNames = vc.encodedProjectNames
                                 }
-                            , projectName = etm.projectName
-                            , onKeyUp = Msg.EditTodoKeyUp etm
-                            , onTodoTextChanged = Msg.EditTodoTextChanged etm
-                            , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
-                            , encodedProjectNames = vc.encodedProjectNames
-                            }
                     in
                         (View.Todo.editTodoView viewModel)
                 else

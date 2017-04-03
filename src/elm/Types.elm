@@ -14,3 +14,7 @@ import Project exposing (Project, ProjectList, ProjectName)
 
 _ =
     1
+
+
+type alias DomSelector =
+    String

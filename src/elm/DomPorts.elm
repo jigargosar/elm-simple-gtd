@@ -4,9 +4,10 @@ import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import Types exposing (DomSelector)
 
 
-port focusPaperInput : String -> Cmd msg
+port focusPaperInput : DomSelector -> Cmd msg
 
 
 autoFocusPaperInputCmd =

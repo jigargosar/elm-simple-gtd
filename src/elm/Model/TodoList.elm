@@ -127,3 +127,9 @@ generateCopyOfTodo =
 copyAndAddTodo : Time -> Todo -> Model -> ( Todo, Model )
 copyAndAddTodo =
     generateCopyOfTodo >>>> apply2 ( Tuple.first, uncurry addTodo )
+
+
+addNewTodoAt : String -> Time -> Model -> ( Todo, Model )
+addNewTodoAt text now =
+    Model.generate (Todo.todoGenerator now text)
+        >> apply2 ( Tuple.first, uncurry addTodo )

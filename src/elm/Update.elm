@@ -7,7 +7,7 @@ import Ext.Return as Return
 import Model.EditModel exposing (getMaybeEditTodoModel)
 import Model.ProjectList as Model exposing (findProjectByName)
 import Model.RunningTodo as Model
-import Model.TodoList
+import Model.TodoList as Model
 import Project exposing (Project, ProjectId, ProjectName)
 import RandomIdGenerator as Random
 import Random.Pcg as Random exposing (Seed)
@@ -72,7 +72,7 @@ update msg =
 
             Create text ->
                 Return.andThenWith Model.getNow
-                    (\now -> addNewTodoAt text now >> persistTodoFromTuple)
+                    (\now -> Model.addNewTodoAt text now >> persistTodoFromTuple)
 
             AddTodoClicked ->
                 activateEditNewTodoMode ""
@@ -129,7 +129,7 @@ update msg =
 
 updateTodo actions todoId =
     Return.andThenMaybe
-        (Model.TodoList.updateAndGetTodo actions todoId ?>> persistTodoFromTuple)
+        (Model.updateAndGetTodo actions todoId ?>> persistTodoFromTuple)
 
 
 onMsgList : List Msg -> ReturnF
@@ -184,7 +184,7 @@ onEditTodoEnterPressed isShiftDown =
 copyAndEditTodo todoId =
     Return.maybeAndThenWith Model.getNow
         (\now ->
-            Model.TodoList.copyTodoById todoId now ?>> persistAndEditTodoCmd
+            Model.copyTodoById todoId now ?>> persistAndEditTodoCmd
         )
 
 
@@ -215,12 +215,6 @@ findOrCreateProjectByName projectName =
 stopRunningTodo : ReturnF
 stopRunningTodo =
     Return.map (Model.stopRunningTodo)
-
-
-addNewTodoAt : String -> Time -> Model -> ( Todo, Model )
-addNewTodoAt text now =
-    Model.generate (Todo.todoGenerator now text)
-        >> apply2 ( Tuple.first, uncurry Model.TodoList.addTodo )
 
 
 withNow : (Time -> Msg) -> ReturnF

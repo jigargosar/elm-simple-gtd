@@ -38,7 +38,7 @@ setTodoList todoList model =
 
 updateTodoList : (TodoList -> TodoList) -> ModelF
 updateTodoList updater model =
-    setTodoList (model |> getTodoList >> updater) model
+    { model | todoList = getTodoList model |> updater }
 
 
 getEditModel : Model -> EditModel

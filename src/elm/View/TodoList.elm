@@ -83,8 +83,6 @@ getTodoView vc todo =
                                 { text = etm.todoText
                                 , id = etm.todoId
                                 }
-                            , todoText = etm.todoText
-                            , todoId = etm.todoId
                             , projectName = etm.projectName
                             , onKeyUp = Msg.EditTodoKeyUp etm
                             , onTodoTextChanged = Msg.EditTodoTextChanged etm

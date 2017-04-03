@@ -35,8 +35,6 @@ onAutoCompleteSelected tagger =
 
 type alias EditTodoViewModel =
     { todo : { text : TodoText, id : TodoId }
-    , todoText : TodoText
-    , todoId : TodoId
     , projectName : ProjectName
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : TodoText -> Msg
@@ -49,10 +47,10 @@ editTodoView viewModel =
     item [ class "todo-item" ]
         [ itemBody []
             [ input
-                [ id (todoInputId viewModel.todoId)
+                [ id (todoInputId viewModel.todo.id)
                 , class "edit-todo-input auto-focus"
                 , stringProperty "label" "Todo"
-                , value (viewModel.todoText)
+                , value (viewModel.todo.text)
                 , onInput viewModel.onTodoTextChanged
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
@@ -60,7 +58,7 @@ editTodoView viewModel =
                 ]
                 []
             , input
-                [ id (todoProjectInputId viewModel.todoId)
+                [ id (todoProjectInputId viewModel.todo.id)
                 , class "project-name-input"
                 , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
                 , onInput viewModel.onProjectNameChanged
@@ -69,7 +67,7 @@ editTodoView viewModel =
                 ]
                 []
             , Html.node "paper-autocomplete-suggestions"
-                [ stringProperty "for" (todoProjectInputId viewModel.todoId)
+                [ stringProperty "for" (todoProjectInputId viewModel.todo.id)
                 , property "source" (viewModel.encodedProjectNames)
                 , onAutoCompleteSelected viewModel.onProjectNameChanged
                 , intProperty "minLength" 0

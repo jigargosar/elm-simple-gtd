@@ -76,7 +76,7 @@ getTodoView vc todo =
         case vc.maybeEditTodoModel of
             Just etm ->
                 if Todo.equalById etm.todo todo then
-                    todoEditingView vc etm
+                    (View.Todo.edit (createEditTodoViewModel vc etm))
                 else
                     notEditingView ()
 
@@ -100,10 +100,6 @@ createEditTodoViewModel vc etm =
         , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
         , encodedProjectNames = vc.encodedProjectNames
         }
-
-
-todoEditingView vc etm =
-    (View.Todo.edit (createEditTodoViewModel vc etm))
 
 
 todoListView : Model -> Html Msg

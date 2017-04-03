@@ -16,10 +16,10 @@ getEncodedProjectNames =
 
 
 getProjectIdByName projectName =
-    getProjectByName projectName >> Maybe.map Project.getId
+    findProjectByName projectName >> Maybe.map Project.getId
 
 
-getProjectByName projectName =
+findProjectByName projectName =
     getProjectList >> List.find (Project.nameEquals projectName)
 
 

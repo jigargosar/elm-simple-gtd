@@ -41,13 +41,14 @@ updateTodoList updater model =
     { model | todoList = getTodoList model |> updater }
 
 
-updateTodoList2 : (TodoList -> ( x, TodoList )) -> Model -> ( x, Model )
-updateTodoList2 updater model =
-    let
-        ( x, todoList ) =
-            getTodoList model |> updater
-    in
-        ( x, { model | todoList = todoList } )
+
+--updateTodoListTuple2 : (TodoList -> ( x, TodoList )) -> Model -> ( x, Model )
+--updateTodoListTuple2 updater model =
+--    let
+--        ( x, todoList ) =
+--            getTodoList model |> updater
+--    in
+--        ( x, { model | todoList = todoList } )
 
 
 getEditModel : Model -> EditModel

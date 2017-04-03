@@ -169,7 +169,7 @@ todoGenerator createdAt text =
 
 
 copyGenerator createdAt todo =
-    Random.map (copyTodo createdAt todo) Random.idGenerator
+    Random.mapWithIdGenerator (copyTodo createdAt todo)
 
 
 getText =

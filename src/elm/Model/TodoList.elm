@@ -6,6 +6,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Project
+import Random.Pcg
 import Time exposing (Time)
 import Todo
 import TodoList
@@ -106,18 +107,8 @@ maybeTuple2With f model =
 
 addCopyOfTodoById : TodoId -> Time -> Model -> Maybe ( Todo, Model )
 addCopyOfTodoById todoId now =
-    maybeTuple2With (findTodoById todoId)
-        >>? uncurry (addCopyOfTodo now)
-
-
-addCopyOfTodo : Time -> Todo -> Model -> ( Todo, Model )
-addCopyOfTodo =
-    let
-        generateCopyOfTodo : Time -> Todo -> Model -> ( Todo, Model )
-        generateCopyOfTodo =
-            Todo.copyGenerator >>> Model.generate
-    in
-        generateCopyOfTodo >>>> addTodoFromTuple
+    maybeTuple2With (getTodoList >> TodoList.createMaybeCopyGeneratorOfTodoWithId todoId now)
+        >>? uncurry (Model.generate >>> addTodoFromTuple)
 
 
 addNewTodo : String -> Time -> Model -> ( Todo, Model )

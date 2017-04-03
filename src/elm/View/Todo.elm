@@ -7,8 +7,9 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
-import Msg
+import Msg exposing (Msg)
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
+import Project exposing (ProjectName)
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -17,8 +18,9 @@ import Ext.Function.Infix exposing (..)
 import Html exposing (div, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Ext.Keyboard exposing (onEscape, onKeyUp)
+import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Polymer.Paper exposing (..)
+import Todo.Types exposing (TodoId, TodoText)
 
 
 textValue : Json.Decode.Decoder String
@@ -31,11 +33,18 @@ onAutoCompleteSelected tagger =
     on "autocomplete-selected" (Json.Decode.map tagger (traceDecoder "selected" textValue))
 
 
-getEncodedProjectNames =
-    Json.Encode.list [ Json.Encode.string "Foo" ]
+type alias EditTodoViewModel =
+    { todoText : TodoText
+    , todoId : TodoId
+    , projectName : ProjectName
+    , onKeyUp : KeyboardEvent -> Msg
+    , onTodoTextChanged : TodoText -> Msg
+    , onProjectNameChanged : ProjectName -> Msg
+    , encodedProjectNames : Json.Encode.Value
+    }
 
 
-todoViewEditing viewModel =
+editTodoView viewModel =
     item [ class "todo-item" ]
         [ itemBody []
             [ input

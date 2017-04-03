@@ -30,7 +30,7 @@ import Todo.Types exposing (..)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
-import View.Todo
+import View.Todo exposing (EditTodoViewModel)
 
 
 type alias Context =
@@ -74,6 +74,7 @@ foo : Context -> Todo -> EditTodoModel -> Maybe (Html Msg)
 foo vc todo etm =
     if Todo.equalById etm.todo todo then
         let
+            viewModel : EditTodoViewModel
             viewModel =
                 { todoText = etm.todoText
                 , todoId = etm.todoId
@@ -84,7 +85,7 @@ foo vc todo etm =
                 , encodedProjectNames = vc.encodedProjectNames
                 }
         in
-            Just (View.Todo.todoViewEditing viewModel)
+            Just (View.Todo.editTodoView viewModel)
     else
         Nothing
 

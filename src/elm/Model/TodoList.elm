@@ -109,13 +109,13 @@ updateAndGetTodo actions todoId model =
             )
 
 
-maybeModelTupleWith f model =
+maybeTuple2With f model =
     f model ?|> (,) # model
 
 
 createCopyOfTodoById : TodoId -> Time -> Model -> Maybe ( Todo, Model )
 createCopyOfTodoById todoId now =
-    maybeModelTupleWith (findTodoById todoId)
+    maybeTuple2With (findTodoById todoId)
         >>? uncurry (createCopyOfTodo now)
 
 

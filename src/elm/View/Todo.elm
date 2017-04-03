@@ -36,37 +36,41 @@ getEncodedProjectNames =
 
 
 todoViewEditing vc etm =
-    item [ class "todo-item" ]
-        [ itemBody []
-            [ input
-                [ id (todoInputId etm.todoId)
-                , class "edit-todo-input auto-focus"
-                , stringProperty "label" "Todo"
-                , value (etm.todoText)
-                , onInput Msg.EditTodoTextChanged
-                , autofocus True
-                , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                , onKeyUp (Msg.EditTodoKeyUp etm)
+    let
+        config =
+            { onEditTodoKeyUp = Msg.EditTodoKeyUp etm }
+    in
+        item [ class "todo-item" ]
+            [ itemBody []
+                [ input
+                    [ id (todoInputId etm.todoId)
+                    , class "edit-todo-input auto-focus"
+                    , stringProperty "label" "Todo"
+                    , value (etm.todoText)
+                    , onInput Msg.EditTodoTextChanged
+                    , autofocus True
+                    , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
+                    , onKeyUp config.onEditTodoKeyUp
+                    ]
+                    []
+                , input
+                    [ id (todoProjectInputId etm.todoId)
+                    , class "project-name-input"
+                    , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
+                    , onInput Msg.EditTodoProjectNameChanged
+                    , stringProperty "label" "Project Name"
+                    , value etm.projectName
+                    ]
+                    []
+                , Html.node "paper-autocomplete-suggestions"
+                    [ stringProperty "for" (todoProjectInputId etm.todoId)
+                    , property "source" (vc.encodedProjectNames)
+                    , onAutoCompleteSelected Msg.EditTodoProjectNameChanged
+                    , intProperty "minLength" 0
+                    ]
+                    []
                 ]
-                []
-            , input
-                [ id (todoProjectInputId etm.todoId)
-                , class "project-name-input"
-                , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                , onInput Msg.EditTodoProjectNameChanged
-                , stringProperty "label" "Project Name"
-                , value etm.projectName
-                ]
-                []
-            , Html.node "paper-autocomplete-suggestions"
-                [ stringProperty "for" (todoProjectInputId etm.todoId)
-                , property "source" (vc.encodedProjectNames)
-                , onAutoCompleteSelected Msg.EditTodoProjectNameChanged
-                , intProperty "minLength" 0
-                ]
-                []
             ]
-        ]
 
 
 todoViewNotEditing vc todo =

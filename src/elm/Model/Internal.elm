@@ -7,6 +7,7 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import Model.Types exposing (..)
 import RunningTodo exposing (RunningTodo)
+import Time exposing (Time)
 
 
 getSeed : Model -> Seed
@@ -52,3 +53,18 @@ setMaybeRunningTodo maybeRunningTodo model =
 updateMaybeRunningTodo : (Model -> Maybe RunningTodo) -> ModelF
 updateMaybeRunningTodo updater model =
     setMaybeRunningTodo (updater model) model
+
+
+getNow : Model -> Time
+getNow =
+    (.now)
+
+
+setNow : Time -> ModelF
+setNow now model =
+    { model | now = now }
+
+
+updateNow : (Model -> Time) -> ModelF
+updateNow updater model =
+    setNow (updater model) model

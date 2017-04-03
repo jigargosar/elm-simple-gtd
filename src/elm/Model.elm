@@ -31,8 +31,8 @@ getMainViewType =
 
 
 setMainViewType : MainViewType -> ModelF
-setMainViewType =
-    MainViewTypeField >> set
+setMainViewType mainViewType model =
+    { model | mainViewType = mainViewType }
 
 
 updateMainViewType : (Model -> MainViewType) -> ModelF
@@ -53,21 +53,6 @@ setNow now model =
 updateNow : (Model -> Time) -> ModelF
 updateNow updater model =
     { model | now = updater model }
-
-
-set : ModelField -> ModelF
-set field model =
-    case field of
-        NowField now ->
-            { model | now = now }
-
-        MainViewTypeField mainViewType ->
-            { model | mainViewType = mainViewType }
-
-
-update : (Model -> ModelField) -> ModelF
-update updater model =
-    set (updater model) model
 
 
 generate : (Model -> Random.Generator a) -> Model -> ( a, Model )

@@ -95,3 +95,33 @@ setProjectList projectList model =
 updateProjectList : (Model -> ProjectList) -> ModelF
 updateProjectList updater model =
     setProjectList (updater model) model
+
+
+getMainViewType : Model -> MainViewType
+getMainViewType =
+    (.mainViewType)
+
+
+setMainViewType : MainViewType -> ModelF
+setMainViewType mainViewType model =
+    { model | mainViewType = mainViewType }
+
+
+updateMainViewType : (Model -> MainViewType) -> ModelF
+updateMainViewType updater model =
+    setMainViewType (updater model) model
+
+
+getNow : Model -> Time
+getNow =
+    (.now)
+
+
+setNow : Time -> ModelF
+setNow now model =
+    { model | now = now }
+
+
+updateNow : (Model -> Time) -> ModelF
+updateNow updater model =
+    { model | now = updater model }

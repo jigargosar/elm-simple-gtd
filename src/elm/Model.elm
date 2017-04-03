@@ -25,36 +25,6 @@ import Model.Types exposing (..)
 import Types exposing (..)
 
 
-getMainViewType : Model -> MainViewType
-getMainViewType =
-    (.mainViewType)
-
-
-setMainViewType : MainViewType -> ModelF
-setMainViewType mainViewType model =
-    { model | mainViewType = mainViewType }
-
-
-updateMainViewType : (Model -> MainViewType) -> ModelF
-updateMainViewType updater model =
-    setMainViewType (updater model) model
-
-
-getNow : Model -> Time
-getNow =
-    (.now)
-
-
-setNow : Time -> ModelF
-setNow now model =
-    { model | now = now }
-
-
-updateNow : (Model -> Time) -> ModelF
-updateNow updater model =
-    { model | now = updater model }
-
-
 generate : (Model -> Random.Generator a) -> Model -> ( a, Model )
 generate generatorFn m =
     Random.step (generatorFn m) (m.seed)

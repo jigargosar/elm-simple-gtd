@@ -115,7 +115,10 @@ updateAndGetTodo actions todoId model =
 copyTodoById : TodoId -> Time -> Model -> Maybe ( Todo, Model )
 copyTodoById todoId now model =
     findTodoById todoId model
-        ?|> (\todo ->
-                Model.generate (Todo.copyGenerator now todo) model
-                    |> apply2 ( Tuple.first, uncurry addTodo )
+        ?|> ((generateCopyOfTodo now # model)
+                >> apply2 ( Tuple.first, uncurry addTodo )
             )
+
+
+generateCopyOfTodo now todo model =
+    Todo.copyGenerator now todo |> Model.generate # model

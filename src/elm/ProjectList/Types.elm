@@ -14,3 +14,7 @@ type ProjectList
 
 type alias Model =
     { seed : Seed, list : List Project }
+
+
+type alias ModelF =
+    Model -> Model

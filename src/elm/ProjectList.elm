@@ -12,9 +12,10 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 import List.Extra as List
 import Random.Pcg as Random
+import Time exposing (Time)
 
 
-decodeProjectList : EncodedProjectList -> ProjectList
+decodeProjectList : EncodedProjectList -> List Project
 decodeProjectList =
     List.map (D.decodeValue Project.decoder)
         >> List.filterMap
@@ -33,7 +34,7 @@ decodeProjectList =
 
 
 getEncodedProjectNames =
-    List.map (Project.getName >> Json.Encode.string) >> Json.Encode.list
+    List.map (Project.getName >> E.string) >> E.list
 
 
 getProjectIdByName =
@@ -48,19 +49,19 @@ findProjectById id =
     List.find (Project.getId >> equals id)
 
 
-addNewProject : ProjectName -> Model -> ( Project, Model )
+addNewProject : ProjectName -> Time -> ProjectList -> ( Project, ProjectList )
 addNewProject projectName now =
     generate (Project.projectGenerator projectName now)
         >> addProjectFromTuple
 
 
-generate : Random.Generator a -> Model -> ( a, Model )
-generate generatorFn m =
-    Random.step (generatorFn m) (getSeed m)
+generate : Random.Generator a -> ProjectList -> ( a, ProjectList )
+generate generator m =
+    Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
 
 
-addProjectFromTuple : ( Project, Model ) -> ( Project, Model )
+addProjectFromTuple : ( Project, ProjectList ) -> ( Project, ProjectList )
 addProjectFromTuple =
     apply2 ( Tuple.first, uncurry addProject )
 

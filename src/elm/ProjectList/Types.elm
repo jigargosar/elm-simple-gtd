@@ -9,11 +9,15 @@ import Ext.Function.Infix exposing (..)
 
 
 type ProjectList
-    = ProjectList Model
+    = ProjectList ProjectListModel
+
+
+type alias ProjectListModel =
+    { seed : Seed, list : List Project }
 
 
 type alias Model =
-    { seed : Seed, list : List Project }
+    ProjectList
 
 
 type alias ModelF =

@@ -9,14 +9,22 @@ import Ext.Function.Infix exposing (..)
 import Random.Pcg exposing (Seed)
 
 
+withModel f (ProjectList model) =
+    f model |> ProjectList
+
+
+get f (ProjectList model) =
+    f model
+
+
 getSeed : Model -> Seed
 getSeed =
-    (.seed)
+    get (.seed)
 
 
 setSeed : Seed -> ModelF
-setSeed seed model =
-    { model | seed = seed }
+setSeed seed =
+    withModel (\model -> { model | seed = seed })
 
 
 updateSeed : (Model -> Seed) -> ModelF
@@ -26,12 +34,12 @@ updateSeed updater model =
 
 getList : Model -> List Project
 getList =
-    (.list)
+    get (.list)
 
 
 setList : List Project -> ModelF
-setList list model =
-    { model | list = list }
+setList list =
+    withModel (\model -> { model | list = list })
 
 
 updateList : (Model -> List Project) -> ModelF

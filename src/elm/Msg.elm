@@ -71,7 +71,7 @@ type Msg
     | NewTodoKeyUp String KeyboardEvent
     | StartEditingTodo Todo
     | FocusPaperInput String
-    | EditTodoTextChanged String
+    | EditTodoTextChanged EditTodoModel String
     | EditTodoProjectNameChanged ProjectName
     | EditTodoKeyUp EditTodoModel KeyboardEvent
     | SetMainViewType MainViewType

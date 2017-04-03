@@ -101,7 +101,7 @@ update msg =
                 Return.map (Model.EditModel.setEditModelToEditTodo todo)
                     >> autoFocusPaperInputCmd
 
-            EditTodoTextChanged text ->
+            EditTodoTextChanged editTodoModel text ->
                 Return.map (Model.EditModel.updateEditTodoText text)
 
             EditTodoProjectNameChanged projectName ->

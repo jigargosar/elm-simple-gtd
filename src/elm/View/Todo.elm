@@ -38,7 +38,9 @@ getEncodedProjectNames =
 todoViewEditing vc etm =
     let
         config =
-            { onEditTodoKeyUp = Msg.EditTodoKeyUp etm }
+            { onEditTodoKeyUp = Msg.EditTodoKeyUp etm
+            , onEditTodoTextChanged = Msg.EditTodoTextChanged etm
+            }
     in
         item [ class "todo-item" ]
             [ itemBody []
@@ -47,7 +49,7 @@ todoViewEditing vc etm =
                     , class "edit-todo-input auto-focus"
                     , stringProperty "label" "Todo"
                     , value (etm.todoText)
-                    , onInput Msg.EditTodoTextChanged
+                    , onInput config.onEditTodoTextChanged
                     , autofocus True
                     , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
                     , onKeyUp config.onEditTodoKeyUp

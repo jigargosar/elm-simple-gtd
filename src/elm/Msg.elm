@@ -51,10 +51,6 @@ onNewTodoKeyUp =
     NewTodoKeyUp
 
 
-onEditTodoKeyUp =
-    EditTodoKeyUp
-
-
 stopAndMarkDone =
     MarkRunningTodoDone
 
@@ -77,7 +73,7 @@ type Msg
     | FocusPaperInput String
     | EditTodoTextChanged String
     | EditTodoProjectNameChanged ProjectName
-    | EditTodoKeyUp KeyboardEvent
+    | EditTodoKeyUp EditTodoModel KeyboardEvent
     | SetMainViewType MainViewType
     | OnNowChanged Time
     | OnMsgList (List Msg)

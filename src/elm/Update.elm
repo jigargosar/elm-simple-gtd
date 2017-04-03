@@ -107,7 +107,7 @@ update msg =
             EditTodoProjectNameChanged projectName ->
                 Return.map (Model.EditModel.updateEditTodoProjectName projectName)
 
-            EditTodoKeyUp { key, isShiftDown } ->
+            EditTodoKeyUp editTodoModel { key, isShiftDown } ->
                 case key of
                     Enter ->
                         onEditTodoEnterPressed isShiftDown

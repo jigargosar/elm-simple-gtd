@@ -33,14 +33,14 @@ import Ext.Function exposing (..)
 import View.Todo
 
 
-type alias ViewContext =
+type alias Context =
     { now : Time
     , encodedProjectNames : Json.Encode.Value
     , maybeEditTodoModel : Maybe EditTodoModel
     }
 
 
-createViewContext : Model -> ViewContext
+createViewContext : Model -> Context
 createViewContext model =
     { now = Model.getNow model
     , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames
@@ -57,20 +57,20 @@ todoViewFromModel =
     createViewContext >> keyedTodoView
 
 
-keyedTodoView : ViewContext -> TodoView
+keyedTodoView : Context -> TodoView
 keyedTodoView vc todo =
     ( Todo.getId todo
     , getMaybeEditTodoView vc todo ?= View.Todo.todoViewNotEditing vc todo
     )
 
 
-getMaybeEditTodoView : ViewContext -> Todo -> Maybe (Html Msg)
+getMaybeEditTodoView : Context -> Todo -> Maybe (Html Msg)
 getMaybeEditTodoView vc todo =
     vc.maybeEditTodoModel
         ?+> foo vc todo
 
 
-foo : ViewContext -> Todo -> EditTodoModel -> Maybe (Html Msg)
+foo : Context -> Todo -> EditTodoModel -> Maybe (Html Msg)
 foo vc todo etm =
     if Todo.equalById etm.todo todo then
         Just (View.Todo.todoViewEditing vc etm)

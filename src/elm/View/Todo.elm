@@ -46,7 +46,7 @@ todoViewEditing vc etm =
                 , onInput Msg.EditTodoTextChanged
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                , onKeyUp Msg.EditTodoKeyUp
+                , onKeyUp (Msg.EditTodoKeyUp etm)
                 ]
                 []
             , input

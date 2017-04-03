@@ -65,11 +65,11 @@ keyedTodoView vc todo =
 
 
 getTodoView vc todo =
-    vc.maybeEditTodoModel ?+> foo vc todo ?= View.Todo.todoViewNotEditing vc todo
+    vc.maybeEditTodoModel ?+> getMaybeEditTodoView vc todo ?= View.Todo.todoViewNotEditing vc todo
 
 
-foo : Context -> Todo -> EditTodoModel -> Maybe (Html Msg)
-foo vc todo etm =
+getMaybeEditTodoView : Context -> Todo -> EditTodoModel -> Maybe (Html Msg)
+getMaybeEditTodoView vc todo etm =
     if Todo.equalById etm.todo todo then
         let
             viewModel : EditTodoViewModel

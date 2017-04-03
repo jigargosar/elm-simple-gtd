@@ -14,6 +14,7 @@ import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
+import FunctionExtra.Operators exposing (..)
 import Model.Types exposing (..)
 import Types exposing (..)
 
@@ -120,5 +121,6 @@ copyTodoById todoId now model =
             )
 
 
-generateCopyOfTodo now todo model =
-    Todo.copyGenerator now todo |> Model.generate # model
+generateCopyOfTodo : Time -> Todo -> Model -> ( Todo, Model )
+generateCopyOfTodo =
+    Todo.copyGenerator >>> Model.generate

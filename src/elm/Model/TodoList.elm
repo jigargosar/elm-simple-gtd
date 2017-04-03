@@ -118,4 +118,4 @@ addNewTodo text now =
 
 
 addTodoFromTuple ( todo, model ) =
-    ( todo, updateTodoList (getTodoList >> (::) todo) model )
+    ( todo, updateTodoList ((::) todo) model )

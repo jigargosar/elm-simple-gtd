@@ -104,14 +104,14 @@ maybeTuple2With f model =
     f model ?|> (,) # model
 
 
-createCopyOfTodoById : TodoId -> Time -> Model -> Maybe ( Todo, Model )
-createCopyOfTodoById todoId now =
+addCopyOfTodoById : TodoId -> Time -> Model -> Maybe ( Todo, Model )
+addCopyOfTodoById todoId now =
     maybeTuple2With (findTodoById todoId)
-        >>? uncurry (createCopyOfTodo now)
+        >>? uncurry (addCopyOfTodo now)
 
 
-createCopyOfTodo : Time -> Todo -> Model -> ( Todo, Model )
-createCopyOfTodo =
+addCopyOfTodo : Time -> Todo -> Model -> ( Todo, Model )
+addCopyOfTodo =
     let
         generateCopyOfTodo : Time -> Todo -> Model -> ( Todo, Model )
         generateCopyOfTodo =
@@ -120,8 +120,8 @@ createCopyOfTodo =
         generateCopyOfTodo >>>> addTodoFromTuple
 
 
-createNewTodo : String -> Time -> Model -> ( Todo, Model )
-createNewTodo text now =
+addNewTodo : String -> Time -> Model -> ( Todo, Model )
+addNewTodo text now =
     Model.generate (Todo.todoGenerator now text)
         >> addTodoFromTuple
 

@@ -69,9 +69,9 @@ update updater model =
     set (updater model) model
 
 
-generate : Random.Generator a -> Model -> ( a, Model )
-generate generator m =
-    Random.step generator (m.seed)
+generate : (Model -> Random.Generator a) -> Model -> ( a, Model )
+generate generatorFn m =
+    Random.step (generatorFn m) (m.seed)
         |> Tuple.mapSecond (setSeed # m)
 
 

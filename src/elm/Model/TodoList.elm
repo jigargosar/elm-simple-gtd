@@ -2,6 +2,7 @@ module Model.TodoList exposing (..)
 
 import Dict exposing (Dict)
 import Dict.Extra
+import Ext.Random
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
@@ -107,13 +108,16 @@ maybeTuple2With f model =
 
 addCopyOfTodo : Todo -> Time -> Model -> ( Todo, Model )
 addCopyOfTodo todo now =
-    apply2 ( getTodoList >> TodoList.addCopyOfTodoGenerator todo now, identity )
-        >> uncurry Model.generate
+    Model.generate (getTodoList >> TodoList.addCopyOfTodoGenerator todo now)
         >> setTodoListFromTuple
 
 
 addNewTodo : String -> Time -> Model -> ( Todo, Model )
 addNewTodo text now =
-    apply2 ( getTodoList >> TodoList.addNewTodoGenerator text now, identity )
-        >> uncurry Model.generate
+    Model.generate (getTodoList >> TodoList.addNewTodoGenerator text now)
         >> setTodoListFromTuple
+
+
+setTodoListFromTuple : ( ( x, TodoList ), Model ) -> ( x, Model )
+setTodoListFromTuple ( ( x, todoList ), model ) =
+    ( x, { model | todoList = todoList } )

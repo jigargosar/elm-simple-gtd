@@ -28,9 +28,8 @@ findProjectById id =
 
 
 addNewProject : ProjectName -> Model -> ( Project, Model )
-addNewProject projectName model =
-    model
-        |> Model.generate (Project.projectGenerator projectName (Model.getNow model))
+addNewProject projectName =
+    Model.generate (Model.getNow >> Project.projectGenerator projectName)
         >> addProjectFromTuple
 
 

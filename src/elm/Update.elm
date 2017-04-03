@@ -205,8 +205,9 @@ updateTodoFromEditTodoModel editTodoModel =
 findOrCreateProjectByName : ProjectName -> Return -> ReturnTuple Project
 findOrCreateProjectByName projectName =
     Return.transformWith (Model.getProjectByName projectName)
-        (Maybe.unpack (\_ -> createAndPersistProject projectName)
-            ((,) >> Return.map)
+        (Maybe.unpack
+            (\_ -> createAndPersistProject projectName)
+            (\project -> Return.map (\model -> ( project, model )))
         )
 
 

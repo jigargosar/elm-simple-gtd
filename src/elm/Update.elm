@@ -12,7 +12,7 @@ import Project exposing (Project, ProjectId, ProjectName)
 import Ext.Random as Random
 import Random.Pcg as Random exposing (Seed)
 import Ext.Function exposing (..)
-import Ext.Function.Operators exposing (..)
+import Ext.Function.Infix exposing (..)
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model

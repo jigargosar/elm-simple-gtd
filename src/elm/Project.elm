@@ -4,7 +4,7 @@ import PouchDB
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
-import Ext.Function.Operators exposing (..)
+import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (..)
 import Ext.Random as Random
 import Json.Decode as D exposing (Decoder)

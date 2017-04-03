@@ -5,7 +5,7 @@ import Msg exposing (Msg)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
-import Ext.Function.Operators exposing (..)
+import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
 
 

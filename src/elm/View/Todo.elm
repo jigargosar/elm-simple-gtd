@@ -13,7 +13,7 @@ import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
-import Ext.Function.Operators exposing (..)
+import Ext.Function.Infix exposing (..)
 import Html exposing (div, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

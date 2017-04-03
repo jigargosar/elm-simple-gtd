@@ -1,4 +1,4 @@
-module Ext.Function.Operators exposing (..)
+module Ext.Function.Infix exposing (..)
 
 
 (=>) =

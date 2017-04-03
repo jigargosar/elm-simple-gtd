@@ -76,3 +76,7 @@ addProjectFromTuple =
 
 addProject project =
     updateList (getList >> (::) project)
+
+
+findProjectNameById id =
+    findProjectById id >> Maybe.map Project.getName

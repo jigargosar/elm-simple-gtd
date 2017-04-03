@@ -2,8 +2,8 @@ module Model.EditModel exposing (..)
 
 import EditModel.Types exposing (..)
 import Maybe.Extra as Maybe
+import Model
 import Model.Internal as Model exposing (..)
-
 import Project exposing (Project, ProjectName)
 import Todo
 import Todo.Types exposing (..)
@@ -33,17 +33,9 @@ createEditTodoModel todo model =
             ( Todo.getId
             , identity
             , Todo.getText
-            , getProjectNameOfTodo # model
+            , Model.getProjectNameOfTodo # model
             )
         >> uncurry4 EditTodoModel
-
-
-getProjectNameOfTodo : Todo -> Model -> ProjectName
-getProjectNameOfTodo todo model =
-    Todo.getMaybeProjectId todo
-        ?+> (\id -> model |> Model.getProjectList >> ProjectList.findProjectById id)
-        ?|> Project.getName
-        ?= ""
 
 
 updateEditTodoText : String -> ModelF

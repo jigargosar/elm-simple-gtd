@@ -3,7 +3,7 @@ module Model exposing (..)
 import EditModel
 import Model.Internal exposing (..)
 import Msg exposing (Return)
-import Project exposing (EncodedProjectList)
+import Project exposing (EncodedProjectList, ProjectName)
 import ProjectList
 import ProjectList.Types exposing (ProjectList)
 import RunningTodo exposing (RunningTodo)
@@ -68,3 +68,12 @@ addNewProject projectName model =
 
 findProjectByName projectName =
     getProjectList >> ProjectList.findProjectByName projectName
+
+
+getProjectNameOfTodo : Todo -> Model -> ProjectName
+getProjectNameOfTodo todo model =
+    Todo.getMaybeProjectId todo
+        ?+> (\id ->
+                model |> getProjectList >> ProjectList.findProjectNameById id
+            )
+        ?= ""

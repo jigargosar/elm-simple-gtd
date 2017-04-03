@@ -8,7 +8,7 @@ import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
-import Ext.Function.Operators exposing (..)
+import Ext.Function.Infix exposing (..)
 import Project exposing (Project, ProjectList, ProjectName)
 
 

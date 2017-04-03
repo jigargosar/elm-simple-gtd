@@ -6,7 +6,7 @@ import Html.Events as Events
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Keyboard.Extra as KX exposing (Key)
-import Ext.Function.Operators exposing (..)
+import Ext.Function.Infix exposing (..)
 
 
 onKeyUp : (KeyboardEvent -> msg) -> Attribute msg

@@ -10,7 +10,7 @@ import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
-import Ext.Function.Operators exposing (..)
+import Ext.Function.Infix exposing (..)
 import Msg exposing (..)
 import Model.Types exposing (..)
 

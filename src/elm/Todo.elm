@@ -13,7 +13,7 @@ import Todo.Internal as Internal exposing (..)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Ext.Function exposing (..)
-import Ext.Function.Operators exposing (..)
+import Ext.Function.Infix exposing (..)
 import Result.Extra as Result
 import List
 import List.Extra as List

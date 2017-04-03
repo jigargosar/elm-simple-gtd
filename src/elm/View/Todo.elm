@@ -36,7 +36,7 @@ onAutoCompleteSelected tagger =
 
 type alias EditTodoViewModel =
     { todo : { text : TodoText, id : TodoId, inputId : Dom.Id }
-    , projectName : ProjectName
+    , project : { name : ProjectName, inputId : Dom.Id }
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : TodoText -> Msg
     , onProjectNameChanged : ProjectName -> Msg
@@ -48,7 +48,7 @@ editTodoView viewModel =
     item [ class "todo-item" ]
         [ itemBody []
             [ input
-                [ id (todoInputId viewModel.todo.id)
+                [ id viewModel.todo.inputId
                 , class "edit-todo-input auto-focus"
                 , stringProperty "label" "Todo"
                 , value (viewModel.todo.text)
@@ -59,16 +59,16 @@ editTodoView viewModel =
                 ]
                 []
             , input
-                [ id (todoProjectInputId viewModel.todo.id)
+                [ id (viewModel.project.inputId)
                 , class "project-name-input"
                 , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
                 , onInput viewModel.onProjectNameChanged
                 , stringProperty "label" "Project Name"
-                , value viewModel.projectName
+                , value viewModel.project.name
                 ]
                 []
             , Html.node "paper-autocomplete-suggestions"
-                [ stringProperty "for" (todoProjectInputId viewModel.todo.id)
+                [ stringProperty "for" (viewModel.project.inputId)
                 , property "source" (viewModel.encodedProjectNames)
                 , onAutoCompleteSelected viewModel.onProjectNameChanged
                 , intProperty "minLength" 0
@@ -108,10 +108,6 @@ checkBoxView =
 
 todoInputId todoId =
     "edit-todo-input-" ++ todoId
-
-
-todoProjectInputId todoId =
-    "edit-todo-project-input-" ++ todoId
 
 
 hoverIcons vc todo =

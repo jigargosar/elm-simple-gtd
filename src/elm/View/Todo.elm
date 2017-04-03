@@ -44,6 +44,7 @@ todoViewEditing vc etm =
             , onKeyUp = Msg.EditTodoKeyUp etm
             , onTodoTextChanged = Msg.EditTodoTextChanged etm
             , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
+            , encodedProjectNames = vc.encodedProjectNames
             }
     in
         item [ class "todo-item" ]
@@ -70,7 +71,7 @@ todoViewEditing vc etm =
                     []
                 , Html.node "paper-autocomplete-suggestions"
                     [ stringProperty "for" (todoProjectInputId etm.todoId)
-                    , property "source" (vc.encodedProjectNames)
+                    , property "source" (viewModel.encodedProjectNames)
                     , onAutoCompleteSelected viewModel.onProjectNameChanged
                     , intProperty "minLength" 0
                     ]

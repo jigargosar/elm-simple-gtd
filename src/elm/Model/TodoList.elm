@@ -114,9 +114,6 @@ addCopyOfTodo todo now =
 
 addNewTodo : String -> Time -> Model -> ( Todo, Model )
 addNewTodo text now =
-    Model.generate (Todo.todoGenerator now text)
-        >> addTodoFromTuple
-
-
-addTodoFromTuple ( todo, model ) =
-    ( todo, updateTodoList ((::) todo) model )
+    apply2 ( getTodoList >> TodoList.addNewTodoGenerator text now, identity )
+        >> uncurry (Model.generate)
+        >> (\( ( todo, todoList ), model ) -> ( todo, setTodoList todoList model ))

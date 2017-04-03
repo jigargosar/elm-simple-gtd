@@ -44,7 +44,7 @@ type alias EditTodoViewModel =
     }
 
 
-editTodoView vm =
+edit vm =
     item [ class "todo-item" ]
         [ itemBody []
             [ input

@@ -76,31 +76,35 @@ getTodoView vc todo =
         case vc.maybeEditTodoModel of
             Just etm ->
                 if Todo.equalById etm.todo todo then
-                    let
-                        viewModel : EditTodoViewModel
-                        viewModel =
-                            let
-                                todoId =
-                                    etm.todoId
-                            in
-                                { todo =
-                                    { text = etm.todoText
-                                    , id = todoId
-                                    , inputId = "edit-todo-input-" ++ todoId
-                                    }
-                                , project = { name = etm.projectName, inputId = "edit-todo-project-input-" ++ todoId }
-                                , onKeyUp = Msg.EditTodoKeyUp etm
-                                , onTodoTextChanged = Msg.EditTodoTextChanged etm
-                                , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
-                                , encodedProjectNames = vc.encodedProjectNames
-                                }
-                    in
-                        (View.Todo.editTodoView viewModel)
+                    todoEditingView
                 else
                     notEditingView ()
 
             Nothing ->
                 notEditingView ()
+
+
+todoEditingView vc etm =
+    let
+        viewModel : EditTodoViewModel
+        viewModel =
+            let
+                todoId =
+                    etm.todoId
+            in
+                { todo =
+                    { text = etm.todoText
+                    , id = todoId
+                    , inputId = "edit-todo-input-" ++ todoId
+                    }
+                , project = { name = etm.projectName, inputId = "edit-todo-project-input-" ++ todoId }
+                , onKeyUp = Msg.EditTodoKeyUp etm
+                , onTodoTextChanged = Msg.EditTodoTextChanged etm
+                , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
+                , encodedProjectNames = vc.encodedProjectNames
+                }
+    in
+        (View.Todo.edit viewModel)
 
 
 todoListView : Model -> Html Msg

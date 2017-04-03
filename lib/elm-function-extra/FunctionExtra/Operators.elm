@@ -11,6 +11,16 @@ infix 9 =>
 infixl 0 ?>>
 
 
+(>>?) f1 f2 =
+    f1 >> Maybe.map f2
+infixl 0 >>?
+
+
+(>>?=) fn val =
+    fn >> Maybe.withDefault val
+infixl 0 >>?=
+
+
 (>>>) : (a -> b -> c) -> (c -> d) -> a -> b -> d
 (>>>) ff f x y =
     ff x y |> f

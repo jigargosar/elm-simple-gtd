@@ -54,10 +54,12 @@ startTodo id =
     updateMaybeRunningTodo (Model.getNow >> RunningTodo.start id)
 
 
+shouldBeep : Model -> Bool
 shouldBeep =
     apply2 ( getMaybeRunningTodo, Model.getNow >> Just )
         >> maybe2Tuple
-        >> Maybe.Extra.unwrap False RunningTodo.shouldBeepHelp
+        ?>> RunningTodo.shouldBeepHelp
+        >>?= False
 
 
 setLastBeepedAt : Time -> ModelF

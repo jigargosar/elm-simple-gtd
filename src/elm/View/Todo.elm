@@ -44,33 +44,33 @@ type alias EditTodoViewModel =
     }
 
 
-editTodoView viewModel =
+editTodoView vm =
     item [ class "todo-item" ]
         [ itemBody []
             [ input
-                [ id viewModel.todo.inputId
+                [ id vm.todo.inputId
                 , class "edit-todo-input auto-focus"
                 , stringProperty "label" "Todo"
-                , value (viewModel.todo.text)
-                , onInput viewModel.onTodoTextChanged
+                , value (vm.todo.text)
+                , onInput vm.onTodoTextChanged
                 , autofocus True
                 , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                , onKeyUp viewModel.onKeyUp
+                , onKeyUp vm.onKeyUp
                 ]
                 []
             , input
-                [ id (viewModel.project.inputId)
+                [ id (vm.project.inputId)
                 , class "project-name-input"
                 , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                , onInput viewModel.onProjectNameChanged
+                , onInput vm.onProjectNameChanged
                 , stringProperty "label" "Project Name"
-                , value viewModel.project.name
+                , value vm.project.name
                 ]
                 []
             , Html.node "paper-autocomplete-suggestions"
-                [ stringProperty "for" (viewModel.project.inputId)
-                , property "source" (viewModel.encodedProjectNames)
-                , onAutoCompleteSelected viewModel.onProjectNameChanged
+                [ stringProperty "for" (vm.project.inputId)
+                , property "source" (vm.encodedProjectNames)
+                , onAutoCompleteSelected vm.onProjectNameChanged
                 , intProperty "minLength" 0
                 ]
                 []

@@ -207,11 +207,7 @@ findOrCreateProjectByName projectName =
     Return.andThenWith (Model.getProjectList >> ProjectList.findProjectByName projectName)
         (Maybe.unpack
             (\_ ->
-                (\model ->
-                    model
-                        |> Model.updateProjectListFromTuple
-                            (ProjectList.addNewProject projectName (Model.getNow model))
-                )
+                Model.addNewProject projectName
                     >> apply2 ( identity, Tuple.first >> upsertProjectCmd )
             )
             ((,) >>> Return.singleton)

@@ -58,3 +58,9 @@ updateProjectListFromTuple f m =
             f (getProjectList m)
     in
         ( x, setProjectList projectList m )
+
+
+addNewProject projectName model =
+    model
+        |> updateProjectListFromTuple
+            (ProjectList.addNewProject projectName (getNow model))

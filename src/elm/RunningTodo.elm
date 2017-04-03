@@ -40,3 +40,15 @@ getElapsedTime now runningTodo =
 
         Stopped ->
             runningTodo.timeSpent
+
+
+updateLastBeepedAt now runningTodo =
+    case runningTodo.state of
+        Running runningState ->
+            { runningTodo
+                | state =
+                    Running { runningState | lastBeepedAt = now }
+            }
+
+        _ ->
+            runningTodo

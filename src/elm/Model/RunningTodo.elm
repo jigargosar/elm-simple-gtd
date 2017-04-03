@@ -73,15 +73,5 @@ updateLastBeepedAt : Time -> ModelF
 updateLastBeepedAt now =
     updateMaybeRunningTodo
         (getMaybeRunningTodo
-            ?>> (\d ->
-                    case d.state of
-                        RunningTodo.Running runningState ->
-                            { d
-                                | state =
-                                    RunningTodo.Running { runningState | lastBeepedAt = now }
-                            }
-
-                        _ ->
-                            d
-                )
+            ?>> RunningTodo.updateLastBeepedAt now
         )

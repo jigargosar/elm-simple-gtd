@@ -76,7 +76,7 @@ getTodoView vc todo =
         case vc.maybeEditTodoModel of
             Just etm ->
                 if Todo.equalById etm.todo todo then
-                    todoEditingView
+                    todoEditingView vc etm
                 else
                     notEditingView ()
 
@@ -84,27 +84,26 @@ getTodoView vc todo =
                 notEditingView ()
 
 
-todoEditingView vc etm =
+createEditTodoViewModel vc etm =
     let
-        viewModel : EditTodoViewModel
-        viewModel =
-            let
-                todoId =
-                    etm.todoId
-            in
-                { todo =
-                    { text = etm.todoText
-                    , id = todoId
-                    , inputId = "edit-todo-input-" ++ todoId
-                    }
-                , project = { name = etm.projectName, inputId = "edit-todo-project-input-" ++ todoId }
-                , onKeyUp = Msg.EditTodoKeyUp etm
-                , onTodoTextChanged = Msg.EditTodoTextChanged etm
-                , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
-                , encodedProjectNames = vc.encodedProjectNames
-                }
+        todoId =
+            etm.todoId
     in
-        (View.Todo.edit viewModel)
+        { todo =
+            { text = etm.todoText
+            , id = todoId
+            , inputId = "edit-todo-input-" ++ todoId
+            }
+        , project = { name = etm.projectName, inputId = "edit-todo-project-input-" ++ todoId }
+        , onKeyUp = Msg.EditTodoKeyUp etm
+        , onTodoTextChanged = Msg.EditTodoTextChanged etm
+        , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
+        , encodedProjectNames = vc.encodedProjectNames
+        }
+
+
+todoEditingView vc etm =
+    (View.Todo.edit (createEditTodoViewModel vc etm))
 
 
 todoListView : Model -> Html Msg

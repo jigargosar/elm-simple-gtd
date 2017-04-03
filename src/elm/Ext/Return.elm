@@ -50,3 +50,10 @@ transformWith f1 f2 =
         (\m ->
             (f2 (f1 m)) (Return.singleton m)
         )
+
+
+andThenWith f1 f2 =
+    Return.andThen
+        (\m ->
+            (f2 (f1 m))  m
+        )

@@ -72,8 +72,8 @@ update msg =
                 updateTodo [ Todo.SetText text ] id
 
             Create text ->
-                Return.transformWith Model.getNow
-                    (\now -> Return.andThen (addNewTodoAt text now >> persistTodoFromTuple))
+                Return.andThenWith Model.getNow
+                    (\now -> addNewTodoAt text now >> persistTodoFromTuple)
 
             AddTodoClicked ->
                 activateEditNewTodoMode ""

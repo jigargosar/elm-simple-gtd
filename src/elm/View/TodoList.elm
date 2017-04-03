@@ -64,24 +64,28 @@ todoViewFromModel =
 
 getTodoView vc todo =
     let
-        notEditingView =
-            (\_ ->
-                let
-                    _ =
-                        1
-                in
-                    View.Todo.todoViewNotEditing vc todo
-            )
+        notEditingView_ =
+            notEditingView vc todo
     in
         case vc.maybeEditTodoModel of
             Just etm ->
                 if Todo.equalById etm.todo todo then
                     (View.Todo.edit (createEditTodoViewModel vc etm))
                 else
-                    notEditingView ()
+                    notEditingView_ ()
 
             Nothing ->
-                notEditingView ()
+                notEditingView_ ()
+
+
+notEditingView vc todo =
+    (\_ ->
+        let
+            _ =
+                1
+        in
+            View.Todo.todoViewNotEditing vc todo
+    )
 
 
 createEditTodoViewModel vc etm =

@@ -8,6 +8,7 @@ import FunctionExtra exposing (..)
 import Model.Types exposing (..)
 import RunningTodo exposing (RunningTodo)
 import Time exposing (Time)
+import TodoList.Types exposing (TodoList)
 
 
 getSeed : Model -> Seed
@@ -23,6 +24,20 @@ setSeed seed model =
 updateSeed : (Model -> Seed) -> ModelF
 updateSeed updater model =
     setSeed (updater model) model
+
+getTodoList : Model -> TodoList
+getTodoList =
+    (.todoList)
+
+
+setTodoList : TodoList -> ModelF
+setTodoList todoList model =
+    { model | todoList = todoList }
+
+
+updateTodoList : (Model -> TodoList) -> ModelF
+updateTodoList updater model =
+    setTodoList (updater model) model
 
 
 getEditModel : Model -> EditModel

@@ -16,6 +16,7 @@ import Toolkit.Operators exposing (..)
 import FunctionExtra exposing (..)
 import FunctionExtra.Operators exposing (..)
 import Model.Types exposing (..)
+import Model.Internal exposing (..)
 import Types exposing (..)
 
 
@@ -49,16 +50,6 @@ findTodoById id =
 
 findTodoEqualById todo =
     getTodoList >> List.find (Todo.equalById todo)
-
-
-setTodoList : TodoList -> ModelF
-setTodoList todoList model =
-    { model | todoList = todoList }
-
-
-updateTodoList : (Model -> TodoList) -> ModelF
-updateTodoList updater model =
-    setTodoList (updater model) model
 
 
 type alias TodoContextViewModel =

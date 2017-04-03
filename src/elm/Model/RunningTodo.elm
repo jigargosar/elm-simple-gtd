@@ -68,8 +68,8 @@ shouldBeepHelp ( details, now ) =
             False
 
 
-updateLastBeepedTo : Time -> ModelF
-updateLastBeepedTo now =
+updateLastBeepedAt : Time -> ModelF
+updateLastBeepedAt now =
     updateMaybeRunningTodo
         (getMaybeRunningTodo
             >> Maybe.map

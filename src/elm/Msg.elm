@@ -7,7 +7,7 @@ import KeyboardExtra exposing (KeyboardEvent)
 import Model.Types exposing (..)
 import Project exposing (ProjectName)
 import Return
-import RunningTodoDetails exposing (RunningTodoDetails)
+import RunningTodo exposing (RunningTodo)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
 import Todo.Types exposing (..)

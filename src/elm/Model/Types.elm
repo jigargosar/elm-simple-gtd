@@ -3,7 +3,7 @@ module Model.Types exposing (..)
 import EditModel.Types exposing (..)
 import Project exposing (ProjectList, ProjectName)
 import Random.Pcg exposing (Seed)
-import RunningTodoDetails exposing (RunningTodoDetails)
+import RunningTodo exposing (RunningTodo)
 import TodoList.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -26,7 +26,7 @@ type alias Model =
     , editModel : EditModel
     , mainViewType : MainViewType
     , seed : Seed
-    , runningTodoDetails : Maybe RunningTodoDetails
+    , runningTodo : Maybe RunningTodo
     , projectList : ProjectList
     }
 

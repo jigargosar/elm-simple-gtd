@@ -1,4 +1,4 @@
-module RunningTodoDetails exposing (..)
+module RunningTodo exposing (..)
 
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -21,7 +21,7 @@ createStartedState =
     RunningState >>> Running
 
 
-type alias RunningTodoDetails =
+type alias RunningTodo =
     { id : TodoId, state : State, timeSpent : Time, startTime : Time }
 
 
@@ -30,17 +30,17 @@ init =
 
 
 start id now =
-    RunningTodoDetails id (createStartedState now now) 0 now |> Just
+    RunningTodo id (createStartedState now now) 0 now |> Just
 
 
 getMaybeId =
     Maybe.map (.id)
 
 
-getElapsedTime now runningTodoDetails =
-    case runningTodoDetails.state of
+getElapsedTime now runningTodo =
+    case runningTodo.state of
         Running { startedAt, lastBeepedAt } ->
-            (now - startedAt) + runningTodoDetails.timeSpent
+            (now - startedAt) + runningTodo.timeSpent
 
         Stopped ->
-            runningTodoDetails.timeSpent
+            runningTodo.timeSpent

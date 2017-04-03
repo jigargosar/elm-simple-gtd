@@ -33,7 +33,7 @@ import Tuple2
 import Function exposing ((>>>))
 import Html
 import Msg exposing (..)
-import RunningTodoDetails
+import RunningTodo
 import Model.Types exposing (..)
 import Types
 

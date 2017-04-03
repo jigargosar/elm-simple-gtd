@@ -2,7 +2,7 @@ module Types exposing (..)
 
 import KeyboardExtra exposing (KeyboardEvent)
 import Model.Types
-import RunningTodoDetails exposing (RunningTodoDetails)
+import RunningTodo exposing (RunningTodo)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)

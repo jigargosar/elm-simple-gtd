@@ -3,7 +3,7 @@ module Model exposing (..)
 import EditModel
 import Model.Internal exposing (..)
 import Project
-import RunningTodoDetails exposing (RunningTodoDetails)
+import RunningTodo exposing (RunningTodo)
 import Dict
 import Json.Encode as E
 import List.Extra as List
@@ -79,6 +79,6 @@ init now encodedTodoList encodedProjectList =
     , editModel = EditModel.init
     , mainViewType = AllByTodoContextView
     , seed = Random.seedFromTime now
-    , runningTodoDetails = RunningTodoDetails.init
+    , runningTodo = RunningTodo.init
     , projectList = Project.decodeProjectList encodedProjectList
     }

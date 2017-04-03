@@ -37,8 +37,11 @@ getEncodedProjectNames =
 
 todoViewEditing vc etm =
     let
-        config =
-            { onEditTodoKeyUp = Msg.EditTodoKeyUp etm
+        viewModel =
+            { todoText = etm.todoText
+            , todoId = etm.todoId
+            , projectName = etm.projectName
+            , onEditTodoKeyUp = Msg.EditTodoKeyUp etm
             , onEditTodoTextChanged = Msg.EditTodoTextChanged etm
             , onEditTodoProjectNameChanged = Msg.EditTodoProjectNameChanged etm
             }
@@ -50,17 +53,17 @@ todoViewEditing vc etm =
                     , class "edit-todo-input auto-focus"
                     , stringProperty "label" "Todo"
                     , value (etm.todoText)
-                    , onInput config.onEditTodoTextChanged
+                    , onInput viewModel.onEditTodoTextChanged
                     , autofocus True
                     , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                    , onKeyUp config.onEditTodoKeyUp
+                    , onKeyUp viewModel.onEditTodoKeyUp
                     ]
                     []
                 , input
                     [ id (todoProjectInputId etm.todoId)
                     , class "project-name-input"
                     , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                    , onInput config.onEditTodoProjectNameChanged
+                    , onInput viewModel.onEditTodoProjectNameChanged
                     , stringProperty "label" "Project Name"
                     , value etm.projectName
                     ]
@@ -68,7 +71,7 @@ todoViewEditing vc etm =
                 , Html.node "paper-autocomplete-suggestions"
                     [ stringProperty "for" (todoProjectInputId etm.todoId)
                     , property "source" (vc.encodedProjectNames)
-                    , onAutoCompleteSelected config.onEditTodoProjectNameChanged
+                    , onAutoCompleteSelected viewModel.onEditTodoProjectNameChanged
                     , intProperty "minLength" 0
                     ]
                     []

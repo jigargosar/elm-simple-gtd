@@ -16,7 +16,7 @@ import Toolkit.Operators exposing (..)
 import Html exposing (Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
-import DebugExtra.Debug exposing (tapLog)
+import Ext.Debug exposing (tapLog)
 import Ext.Decode exposing (traceDecoder)
 import Json.Decode
 import Json.Encode

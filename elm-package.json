@@ -4,8 +4,7 @@
     "repository": "https://github.com/user/project.git",
     "license": "BSD3",
     "source-directories": [
-        "src/elm",
-        "lib/elm-random-id-generator"
+        "src/elm"
     ],
     "exposed-modules": [],
     "dependencies": {
@@ -47,16 +46,8 @@
         "ydschneider/regex-builder": "1.0.0 <= v < 2.0.0" ,
         "rgrempel/elm-route-url":"3.0.0 <= v < 4.0.0",
         "edvail/elm-polymer":"3.0.0 <= v < 4.0.0",
-        "alpacaaa/elm-date-distance":"1.0.0 <= v < 2.0.0",
-        "jigargosar/elm-debug-extra":"3.0.0 <= v < 4.0.0"
-
+        "alpacaaa/elm-date-distance":"1.0.0 <= v < 2.0.0"
     },
 
-    "dependency-sources": {
-        "jigargosar/elm-debug-extra": {
-            "url": "git@github.com:jigargosar/elm-debug-extra",
-            "ref": "3.0.0"
-        }
-    },
     "elm-version": "0.18.0 <= v < 0.19.0"
 }

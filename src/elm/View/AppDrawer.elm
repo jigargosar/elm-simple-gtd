@@ -13,7 +13,7 @@ import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import DebugExtra.Debug exposing (tapLog)
+import Ext.Debug exposing (tapLog)
 import Ext.Decode exposing (traceDecoder)
 import Json.Decode
 import Json.Encode

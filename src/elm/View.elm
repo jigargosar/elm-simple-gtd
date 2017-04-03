@@ -18,7 +18,7 @@ import Time exposing (Time)
 import Ext.Time
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import DebugExtra.Debug exposing (tapLog)
+import Ext.Debug exposing (tapLog)
 import Ext.Decode exposing (traceDecoder)
 import Json.Decode
 import Json.Encode

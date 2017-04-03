@@ -118,6 +118,6 @@ addNewTodo text now =
         >> setTodoListFromTuple
 
 
-setTodoListFromTuple : ( ( x, TodoList ), Model ) -> ( x, Model )
-setTodoListFromTuple ( ( x, todoList ), model ) =
-    ( x, { model | todoList = todoList } )
+setTodoListFromTuple : ( ( Todo, TodoList ), Model ) -> ( Todo, Model )
+setTodoListFromTuple ( ( todo, todoList ), model ) =
+    ( todo, { model | todoList = todoList } )

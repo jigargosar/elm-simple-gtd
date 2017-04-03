@@ -60,14 +60,12 @@ todoViewFromModel =
 keyedTodoView : Context -> TodoView
 keyedTodoView vc todo =
     ( Todo.getId todo
-    , getMaybeEditTodoView vc todo ?= View.Todo.todoViewNotEditing vc todo
+    , getTodoView vc todo
     )
 
 
-getMaybeEditTodoView : Context -> Todo -> Maybe (Html Msg)
-getMaybeEditTodoView vc todo =
-    vc.maybeEditTodoModel
-        ?+> foo vc todo
+getTodoView vc todo =
+    vc.maybeEditTodoModel ?+> foo vc todo ?= View.Todo.todoViewNotEditing vc todo
 
 
 foo : Context -> Todo -> EditTodoModel -> Maybe (Html Msg)

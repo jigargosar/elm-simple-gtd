@@ -137,7 +137,7 @@ updateTodoById actions todoId =
 updateTodo actions todo =
     Return.mapModelWith (Model.getNow)
         (\now -> Model.updateTodo now actions todo)
-        >> Return.maybeEffect (Model.findTodoById (Todo.getId todo) >>? upsertTodoCmd)
+        >> persistTodoById (Todo.getId todo)
 
 
 onMsgList : List Msg -> ReturnF
@@ -251,5 +251,9 @@ upsertProjectCmd project =
 
 
 persistProjectWithName projectName =
-    Return.effect_
-        (Model.findProjectByName projectName >>? upsertProjectCmd >>?= Cmd.none)
+    Return.maybeEffect
+        (Model.findProjectByName projectName >>? upsertProjectCmd)
+
+
+persistTodoById todoId =
+    Return.maybeEffect (Model.findTodoById todoId >>? upsertTodoCmd)

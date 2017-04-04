@@ -84,7 +84,7 @@ createAndAdd projectName now =
 {--CODE_GEN_START--}
 
 
-withModel f (ProjectStore model) =
+update f (ProjectStore model) =
     f model |> ProjectStore
 
 
@@ -99,7 +99,7 @@ getSeed =
 
 setSeed : Seed -> ModelF
 setSeed seed =
-    withModel (\model -> { model | seed = seed })
+    update (\model -> { model | seed = seed })
 
 
 updateSeed : (Model -> Seed) -> ModelF
@@ -114,7 +114,7 @@ getList =
 
 setList : List Project -> ModelF
 setList list =
-    withModel (\model -> { model | list = list })
+    update (\model -> { model | list = list })
 
 
 updateList : (Model -> List Project) -> ModelF
@@ -129,7 +129,7 @@ getToPersistList =
 
 setToPersistList : List ProjectId -> ModelF
 setToPersistList toPersistList =
-    withModel (\model -> { model | toPersistList = toPersistList })
+    update (\model -> { model | toPersistList = toPersistList })
 
 
 updateToPersistList : (Model -> List ProjectId) -> ModelF

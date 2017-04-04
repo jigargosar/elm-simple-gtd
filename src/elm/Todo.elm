@@ -212,10 +212,6 @@ isNotDeleted =
     getDeleted >> not
 
 
-binFilter =
-    toAllPassPredicate [ getDeleted ]
-
-
 filterAllPass =
     toAllPassPredicate >> List.filter
 
@@ -224,8 +220,21 @@ rejectAnyPass =
     toAnyPassPredicate >> List.filterNot
 
 
+binFilter =
+    toAllPassPredicate [ getDeleted ]
+
+
 doneFilter =
     toAllPassPredicate [ isNotDeleted, isDone ]
+
+
+hasProjectId : ProjectId -> Todo -> Bool
+hasProjectId projectId =
+    getMaybeProjectId >>? equals projectId >>?= False
+
+
+projectIdFilter projectId =
+    toAllPassPredicate [ hasProjectId projectId, isNotDeleted, isDone >> not ]
 
 
 toAllPassPredicate predicateList =

@@ -41,6 +41,9 @@ getCurrentTodoListFilter model =
         DoneView ->
             Todo.doneFilter
 
+        ProjectView projectId ->
+            Todo.projectIdFilter projectId
+
         _ ->
             always (True)
 

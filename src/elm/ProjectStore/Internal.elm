@@ -1,5 +1,6 @@
 module ProjectStore.Internal exposing (..)
 
+import Maybe.Extra
 import Project exposing (EncodedProject, Project, ProjectName)
 import ProjectStore.Types exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -78,13 +79,10 @@ findByName projectName =
     findBy (Project.nameEquals projectName)
 
 
-addNewIfDoesNotExist : Random.Generator Project -> ModelF
-addNewIfDoesNotExist gen m =
-    let
-        _ =
-            findByName
-    in
-        m
+addNewIfDoesNotExist : ProjectName -> Time -> ModelF
+addNewIfDoesNotExist projectName now m =
+    findByName projectName m
+        |> Maybe.Extra.unpack (\_ -> createAndAdd projectName now m |> Tuple.second) (\_ -> m)
 
 
 

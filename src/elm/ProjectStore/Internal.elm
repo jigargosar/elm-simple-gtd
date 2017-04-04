@@ -58,7 +58,7 @@ decodeListOfEncodedProjects =
             )
 
 
-init seed list =
+init list seed =
     ProjectStoreModel seed list |> ProjectStore
 
 

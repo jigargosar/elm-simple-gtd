@@ -26,7 +26,7 @@ import Time exposing (Time)
 
 generator listOfEncodedProjects =
     Random.mapWithIndependentSeed
-        (init # (decodeListOfEncodedProjects listOfEncodedProjects))
+        (init (decodeListOfEncodedProjects listOfEncodedProjects))
 
 
 asList =

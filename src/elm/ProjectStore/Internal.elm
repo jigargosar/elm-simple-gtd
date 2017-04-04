@@ -15,10 +15,11 @@ import Ext.Random as Random
 import Time exposing (Time)
 
 
-generate : Random.Generator a -> ProjectStore -> ( a, ProjectStore )
+generate : Random.Generator Project -> ProjectStore -> ( Project, ProjectStore )
 generate generator m =
     Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
+        |> addFromTuple
 
 
 addFromTuple : ( Project, ProjectStore ) -> ( Project, ProjectStore )
@@ -71,7 +72,6 @@ generator =
 createAndAdd : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
 createAndAdd projectName now =
     generate (Project.generator projectName now)
-        >> addFromTuple
 
 
 

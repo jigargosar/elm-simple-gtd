@@ -53,13 +53,15 @@ findByName projectName =
     getList >> List.find (Project.nameEquals projectName)
 
 
-findProjectById id =
+findById id =
     getList >> List.find (Project.getId >> equals id)
 
 
-findProjectNameById id =
-    findProjectById id >> Maybe.map Project.getName
+findtNameById id =
+    findById id >> Maybe.map Project.getName
 
+find predicate =
+    getList >> List.find predicate
 
 addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
 addNewProject projectName now =

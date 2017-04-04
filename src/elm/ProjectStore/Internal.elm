@@ -1,6 +1,6 @@
 module ProjectStore.Internal exposing (..)
 
-import Project exposing (EncodedProject, Project, ProjectId, ProjectName)
+import Project exposing (EncodedProject, Project, ProjectName)
 import ProjectStore.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -15,22 +15,10 @@ import Ext.Random as Random
 import Time exposing (Time)
 
 
-generate : Random.Generator Project -> ModelF
+generate : Random.Generator a -> ProjectStore -> ( a, ProjectStore )
 generate generator m =
     Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
-        |> apply2 ( Tuple.first, uncurry addToPendingPersistence )
-        |> uncurry prepend
-
-
-addToPendingPersistence : Project -> ProjectStore -> ProjectStore
-addToPendingPersistence project =
-    updateToPersistList (getToPersistList >> (::) (Project.getId project))
-
-
-getProjectsToPersist : Model -> List Project
-getProjectsToPersist model =
-    getToPersistList model |> List.map (findById # model) |> List.filterNot (equals Nothing) |> maybeList ?= []
 
 
 addFromTuple : ( Project, ProjectStore ) -> ( Project, ProjectStore )
@@ -73,23 +61,24 @@ decodeListOfEncodedProjects =
 
 
 init list seed =
-    ProjectStoreModel [] seed list |> ProjectStore
+    ProjectStoreModel seed list |> ProjectStore
 
 
 generator =
     decodeListOfEncodedProjects >> init >> Random.mapWithIndependentSeed
 
 
-createAndAdd : ProjectName -> Time -> ModelF
+createAndAdd : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
 createAndAdd projectName now =
     generate (Project.generator projectName now)
+        >> addFromTuple
 
 
 
 {--CODE_GEN_START--}
 
 
-update f (ProjectStore model) =
+withModel f (ProjectStore model) =
     f model |> ProjectStore
 
 
@@ -104,7 +93,7 @@ getSeed =
 
 setSeed : Seed -> ModelF
 setSeed seed =
-    update (\model -> { model | seed = seed })
+    withModel (\model -> { model | seed = seed })
 
 
 updateSeed : (Model -> Seed) -> ModelF
@@ -119,24 +108,9 @@ getList =
 
 setList : List Project -> ModelF
 setList list =
-    update (\model -> { model | list = list })
+    withModel (\model -> { model | list = list })
 
 
 updateList : (Model -> List Project) -> ModelF
 updateList updater model =
     setList (updater model) model
-
-
-getToPersistList : Model -> List ProjectId
-getToPersistList =
-    get (.toPersistList)
-
-
-setToPersistList : List ProjectId -> ModelF
-setToPersistList toPersistList =
-    update (\model -> { model | toPersistList = toPersistList })
-
-
-updateToPersistList : (Model -> List ProjectId) -> ModelF
-updateToPersistList updater model =
-    setToPersistList (updater model) model

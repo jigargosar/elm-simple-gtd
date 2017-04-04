@@ -41,14 +41,6 @@ findByName projectName =
     findBy (Project.nameEquals projectName)
 
 
-addNewProject : ProjectName -> Time -> ProjectStore -> ProjectStore
+addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
 addNewProject =
     Internal.createAndAdd
-
-
-getProjectsToPersist =
-    Internal.getProjectsToPersist
-
-
-persistPending =
-    (,) # Cmd.none

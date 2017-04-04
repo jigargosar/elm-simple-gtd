@@ -1,6 +1,6 @@
 module ProjectStore.Types exposing (..)
 
-import Project exposing (EncodedProject, Project, ProjectId)
+import Project exposing (EncodedProject, Project)
 import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -13,7 +13,7 @@ type ProjectStore
 
 
 type alias ProjectStoreModel =
-    { toPersistList : List ProjectId, seed : Seed, list : List Project }
+    { seed : Seed, list : List Project }
 
 
 type alias Model =

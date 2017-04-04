@@ -61,9 +61,9 @@ updateProjectStoreFromTuple f m =
         ( project, setProjectStore projectStore m )
 
 
-addNewProject : ProjectName -> ModelF
+addNewProject : ProjectName -> Model -> ( Project, Model )
 addNewProject projectName model =
-    updateProjectStore (getProjectStore >> ProjectStore.addNewProject projectName (getNow model)) model
+    updateProjectStoreFromTuple (ProjectStore.addNewProject projectName (getNow model)) model
 
 
 findProjectByName projectName =

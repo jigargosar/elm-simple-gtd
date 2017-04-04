@@ -136,7 +136,7 @@ updateTodoById actions todoId =
 
 updateTodo actions todo =
     Return.mapModelWith (Model.getNow)
-        (\now -> Model.updateTodo now actions todo)
+        (Model.updateTodo actions todo)
         >> persistTodoById (Todo.getId todo)
 
 

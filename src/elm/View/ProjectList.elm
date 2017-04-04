@@ -30,7 +30,7 @@ import Ext.Function exposing (..)
 import View.Todo
 
 
-projectStoreView m =
+projectListView m =
     div []
         [ Keyed.node "paper-material"
             [ class "project-list" ]

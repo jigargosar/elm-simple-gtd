@@ -1,6 +1,7 @@
 module View.Todo exposing (..)
 
 import Date.Distance exposing (inWords)
+import Dict
 import Dom
 import Ext.Decode exposing (traceDecoder)
 import Html.Attributes.Extra exposing (intProperty)
@@ -79,29 +80,33 @@ edit vm =
 
 
 todoViewNotEditing vc todo =
-    item
-        [ class "todo-item"
-        , onClickStopPropagation (Msg.StartEditingTodo todo)
-        ]
-        [ checkBoxView
-        , itemBody []
-            [ span
-                [ classList
-                    [ "ellipsis" => True
-                    , "done" => Todo.isDone todo
+    let
+        projectName =
+            Todo.getMaybeProjectId todo ?+> Dict.get # vc.projectIdToNameDict ?= ""
+    in
+        item
+            [ class "todo-item"
+            , onClickStopPropagation (Msg.StartEditingTodo todo)
+            ]
+            [ checkBoxView
+            , itemBody []
+                [ span
+                    [ classList
+                        [ "ellipsis" => True
+                        , "done" => Todo.isDone todo
+                        ]
+                    ]
+                    [ Todo.getText todo |> text ]
+                , span [ class "small dim" ]
+                    [ text (when (String.trim >> String.isEmpty) (\_ -> "<No Project>") projectName)
+                    , text " : "
+                    , text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
+                    , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
                     ]
                 ]
-                [ Todo.getText todo |> text ]
-            , span [ class "small dim" ]
-                [ text (Todo.getMaybeProjectId todo ?= "<No Project>")
-                , text " : "
-                , text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
-                , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
-                ]
+            , hoverIcons vc todo
+            , nonHoverIcons vc todo
             ]
-        , hoverIcons vc todo
-        , nonHoverIcons vc todo
-        ]
 
 
 checkBoxView =

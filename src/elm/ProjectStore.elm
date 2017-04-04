@@ -1,5 +1,6 @@
 module ProjectStore exposing (..)
 
+import Dict
 import Ext.Random as Random
 import Project exposing (EncodedProject, Project, ProjectName)
 import ProjectStore.Types exposing (..)
@@ -26,6 +27,10 @@ asList =
 
 getEncodedProjectNames =
     map (Project.getName >> E.string) >> E.list
+
+
+getProjectIdToNameDict =
+    map (apply2 ( Project.getId, Project.getName )) >> Dict.fromList
 
 
 findNameById id =

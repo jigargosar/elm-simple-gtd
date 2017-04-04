@@ -1,5 +1,6 @@
 module View.TodoList exposing (..)
 
+import Dict exposing (Dict)
 import Dom
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
@@ -10,6 +11,7 @@ import Model.Internal as Model
 import Model.TodoList exposing (TodoContextViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
+import Project exposing (ProjectId, ProjectName)
 import ProjectStore
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -36,6 +38,7 @@ type alias Context =
     { now : Time
     , encodedProjectNames : Json.Encode.Value
     , maybeEditTodoModel : Maybe EditTodoModel
+    , projectIdToNameDict : Dict ProjectId ProjectName
     }
 
 
@@ -44,6 +47,7 @@ createViewContext model =
     { now = Model.getNow model
     , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames
     , maybeEditTodoModel = Model.EditModel.getMaybeEditTodoModel model
+    , projectIdToNameDict = Model.getProjectStore model |> ProjectStore.getProjectIdToNameDict
     }
 
 

@@ -24,6 +24,10 @@ prepend project =
     updateList (getList >> (::) project)
 
 
+map fn =
+    getList >> List.map fn
+
+
 
 {--CODE_GEN_START--}
 

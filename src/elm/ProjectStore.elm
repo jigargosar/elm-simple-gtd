@@ -41,10 +41,6 @@ getList =
     Internal.getList
 
 
-map fn =
-    getList >> List.map fn
-
-
 getEncodedProjectNames =
     map (Project.getName >> E.string) >> E.list
 

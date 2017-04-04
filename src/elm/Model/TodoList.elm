@@ -91,9 +91,7 @@ toViewModelHelp ( todoContext, name, list ) =
 updateTodo : List TodoUpdateAction -> Todo -> Time -> ModelF
 updateTodo actions todo now model =
     Todo.update actions now todo
-        |> (\todo ->
-                Model.updateTodoList (replaceTodoIfEqualById todo) model
-           )
+        |> (replaceTodoIfEqualById >> Model.updateTodoList # model)
 
 
 updateTodo2 : Time -> List TodoUpdateAction -> TodoId -> ModelF

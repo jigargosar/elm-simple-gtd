@@ -17,7 +17,7 @@ import Time exposing (Time)
 
 
 generator =
-    decodeListOfEncodedProjects >> init >> Random.mapWithIndependentSeed
+    Internal.generator
 
 
 asList =

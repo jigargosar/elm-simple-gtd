@@ -11,6 +11,7 @@ import List.Extra as List
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Ext.Random as Random
 
 
 generate : Random.Generator a -> ProjectStore -> ( a, ProjectStore )
@@ -60,6 +61,10 @@ decodeListOfEncodedProjects =
 
 init list seed =
     ProjectStoreModel seed list |> ProjectStore
+
+
+generator =
+    decodeListOfEncodedProjects >> init >> Random.mapWithIndependentSeed
 
 
 

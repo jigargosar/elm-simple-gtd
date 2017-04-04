@@ -129,8 +129,8 @@ update msg =
 
 
 updateTodo actions todoId =
-    Return.andThenMaybe
-        (Model.updateAndGetTodo actions todoId ?>> persistTodoFromTuple)
+    Return.map (Model.updateTodo actions todoId)
+        >> Return.effect_ (Model.findTodoById todoId >> persistMaybeTodoCmd)
 
 
 onMsgList : List Msg -> ReturnF

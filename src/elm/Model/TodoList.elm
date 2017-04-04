@@ -105,14 +105,15 @@ updateAndGetTodo actions todoId model =
             )
 
 
-updateTodo : Time -> List TodoUpdateAction -> TodoId -> Model -> Maybe Model
-updateTodo now actions todoId model =
+updateTodo : List TodoUpdateAction -> TodoId -> ModelF
+updateTodo actions todoId model =
     model
         |> findTodoById todoId
-        ?|> Todo.update actions now
+        ?|> Todo.update actions (Model.getNow model)
         ?|> (\todo ->
                 Model.updateTodoList (replaceTodoIfEqualById todo) model
             )
+        ?= model
 
 
 replaceTodoIfEqualById todo =

@@ -63,7 +63,7 @@ todoViewFromModel =
 
 getTodoView vc todo =
     let
-        notEditingView =
+        notEditingView _ =
             View.Todo.todoViewNotEditing vc todo
     in
         case vc.maybeEditTodoModel of

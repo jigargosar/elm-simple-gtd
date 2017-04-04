@@ -32,7 +32,7 @@ createEditTodoModel todo model =
             ( Todo.getId
             , identity
             , Todo.getText
-            , Model.getProjectNameOfTodo # model
+            , Model.getMaybeProjectNameOfTodo # model >>?= ""
             )
         >> uncurry4 EditTodoModel
 

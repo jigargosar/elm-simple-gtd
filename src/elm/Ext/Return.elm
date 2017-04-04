@@ -64,3 +64,10 @@ maybeAndThenWith f1 f2 =
         (\m ->
             (f2 (f1 m)) m ?= Return.singleton m
         )
+
+
+mapModelWith f1 f2 =
+    Return.map
+        (\m ->
+            (f2 (f1 m)) m
+        )

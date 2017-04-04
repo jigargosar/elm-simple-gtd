@@ -105,6 +105,22 @@ updateAndGetTodo actions todoId model =
             )
 
 
+updateAndGetTodo2 : now -> List TodoUpdateAction -> TodoId -> Model -> Maybe ( Todo, Model )
+updateAndGetTodo2 now actions todoId model =
+    model
+        |> findTodoById todoId
+        ?|> (Todo.update actions now)
+        ?|> (\todo ->
+                let
+                    newTodoList =
+                        List.replaceIf (Todo.hasId todoId) todo model.todoList
+                in
+                    ( todo
+                    , Model.setTodoList newTodoList model
+                    )
+            )
+
+
 maybeTuple2With f model =
     f model ?|> (,) # model
 

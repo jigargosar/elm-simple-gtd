@@ -8,17 +8,22 @@ infix 9 =>
 
 (?>>) f1 f2 =
     f1 >> Maybe.map f2
-infixl 0 ?>>
+infixl 9 ?>>
 
 
 (>>?) f1 f2 =
     f1 >> Maybe.map f2
-infixl 0 >>?
+infixl 9 >>?
 
 
 (>>?=) fn val =
     fn >> Maybe.withDefault val
-infixl 0 >>?=
+infixl 9 >>?=
+
+
+(>>?+) f1 f2 =
+    f1 >> Maybe.andThen f2
+infixl 9 >>?+
 
 
 (>>>) : (a -> b -> c) -> (c -> d) -> a -> b -> d

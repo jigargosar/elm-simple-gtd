@@ -12,6 +12,8 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Navigation exposing (Location)
 import Ext.Random as Random
+import Ext.Function exposing (..)
+import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import TodoList
@@ -71,7 +73,9 @@ findProjectByName projectName =
 
 getMaybeProjectNameOfTodo : Todo -> Model -> Maybe ProjectName
 getMaybeProjectNameOfTodo todo model =
-    Todo.getMaybeProjectId todo
-        ?+> (\projectId ->
+    todo
+        |> Todo.getMaybeProjectId
+        >>?+
+            (\projectId ->
                 model |> getProjectStore >> ProjectStore.findProjectNameById projectId
             )

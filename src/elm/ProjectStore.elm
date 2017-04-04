@@ -53,10 +53,6 @@ findNameById id =
     findById id >> Maybe.map Project.getName
 
 
-find predicate =
-    getList >> List.find predicate
-
-
 findByName projectName =
     find (Project.nameEquals projectName)
 

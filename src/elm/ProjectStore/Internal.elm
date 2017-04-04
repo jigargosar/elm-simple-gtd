@@ -7,6 +7,7 @@ import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
+import List.Extra as List
 
 
 generate : Random.Generator a -> ProjectStore -> ( a, ProjectStore )
@@ -26,6 +27,10 @@ prepend project =
 
 map fn =
     getList >> List.map fn
+
+
+find predicate =
+    getList >> List.find predicate
 
 
 

@@ -19,7 +19,13 @@ generate : Random.Generator Project -> ProjectStore -> ( Project, ProjectStore )
 generate generator m =
     Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
+        |> apply2 ( Tuple.first, addToPendingPersistence )
         |> addFromTuple
+
+
+addToPendingPersistence : ( Project, ProjectStore ) -> ProjectStore
+addToPendingPersistence ( project, projectStore ) =
+    projectStore
 
 
 addFromTuple : ( Project, ProjectStore ) -> ( Project, ProjectStore )

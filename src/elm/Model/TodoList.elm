@@ -94,17 +94,6 @@ updateTodo actions todo now model =
         |> (replaceTodoIfEqualById >> Model.updateTodoList # model)
 
 
-updateTodo2 : Time -> List TodoUpdateAction -> TodoId -> ModelF
-updateTodo2 now actions todoId model =
-    model
-        |> findTodoById todoId
-        ?|> Todo.update actions (Model.getNow model)
-        ?|> (\todo ->
-                Model.updateTodoList (replaceTodoIfEqualById todo) model
-            )
-        ?= model
-
-
 replaceTodoIfEqualById todo =
     List.replaceIf (Todo.equalById todo) todo
 

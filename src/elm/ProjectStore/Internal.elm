@@ -1,6 +1,6 @@
 module ProjectStore.Internal exposing (..)
 
-import Project exposing (EncodedProject, Project, ProjectName)
+import Project exposing (EncodedProject, Project, ProjectId, ProjectName)
 import ProjectStore.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -19,13 +19,13 @@ generate : Random.Generator Project -> ProjectStore -> ( Project, ProjectStore )
 generate generator m =
     Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
-        |> apply2 ( Tuple.first, addToPendingPersistence )
+        |> apply2 ( Tuple.first, uncurry addToPendingPersistence )
         |> addFromTuple
 
 
-addToPendingPersistence : ( Project, ProjectStore ) -> ProjectStore
-addToPendingPersistence ( project, projectStore ) =
-    projectStore
+addToPendingPersistence : Project -> ProjectStore -> ProjectStore
+addToPendingPersistence project =
+    updateToPersistList (getToPersistList >> (::) (Project.getId project))
 
 
 addFromTuple : ( Project, ProjectStore ) -> ( Project, ProjectStore )
@@ -68,7 +68,7 @@ decodeListOfEncodedProjects =
 
 
 init list seed =
-    ProjectStoreModel seed list |> ProjectStore
+    ProjectStoreModel [] seed list |> ProjectStore
 
 
 generator =
@@ -120,3 +120,18 @@ setList list =
 updateList : (Model -> List Project) -> ModelF
 updateList updater model =
     setList (updater model) model
+
+
+getToPersistList : Model -> List ProjectId
+getToPersistList =
+    get (.toPersistList)
+
+
+setToPersistList : List ProjectId -> ModelF
+setToPersistList toPersistList =
+    withModel (\model -> { model | toPersistList = toPersistList })
+
+
+updateToPersistList : (Model -> List ProjectId) -> ModelF
+updateToPersistList updater model =
+    setToPersistList (updater model) model

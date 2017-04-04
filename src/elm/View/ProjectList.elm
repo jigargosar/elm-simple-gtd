@@ -35,12 +35,8 @@ projectListView m =
     div []
         [ Keyed.node "paper-material"
             [ class "project-list" ]
-            (m |> Model.getProjectStore >> ProjectStore.asList >> projectItems)
+            (m |> Model.getProjectStore >> ProjectStore.asList >> List.map projectItem)
         ]
-
-
-projectItems =
-    List.map (apply2 ( Project.getId, projectItem ))
 
 
 projectItem project =
@@ -48,11 +44,13 @@ projectItem project =
         vm =
             createProjectItemViewModel project
     in
-        item
+        ( vm.key
+        , item
             [ class "project-item"
             , onClickStopPropagation vm.onClick
             ]
             [ itemBody [] [ text vm.name ] ]
+        )
 
 
 createProjectItemViewModel project =
@@ -62,4 +60,5 @@ createProjectItemViewModel project =
     in
         { onClick = projectId |> ProjectView >> Msg.SetMainViewType
         , name = project |> Project.getName
+        , key = projectId
         }

@@ -28,7 +28,7 @@ type EditModel
 
 type MainViewType
     = AllByTodoContextView
-    | TodoContextView TodoContext
+    | TodoContextView String
     | ProjectView ProjectId
     | DoneView
     | BinView

@@ -108,8 +108,11 @@ appMainView m =
             ProjectListView ->
                 projectListView m
 
-            TodoContextView _ ->
-                allTodoListByTodoContextView m
+            ProjectView projectId ->
+                div [] [ "projectView::" ++ projectId |> text ]
+
+            TodoContextView context ->
+                div [] [ "TodoContextView::" ++ context |> text ]
         ]
 
 

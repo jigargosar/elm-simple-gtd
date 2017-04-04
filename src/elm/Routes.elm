@@ -32,8 +32,11 @@ getPathFromModel model =
         ProjectListView ->
             [ "lists", "projects" ]
 
-        ProjectView project ->
-            [ "project", Project.getId project ]
+        ProjectView projectId ->
+            [ "project", projectId ]
+
+        TodoContextView context ->
+            [ "project", context ]
 
 
 delta2hash : Model -> Model -> Maybe UrlChange

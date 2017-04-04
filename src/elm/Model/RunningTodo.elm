@@ -30,7 +30,7 @@ type alias RunningTodoViewModel =
 
 
 getRunningTodoId =
-    Model.getMaybeRunningTodo >> RunningTodo.getMaybeId
+    Model.getMaybeRunningTodo >>? RunningTodo.getId
 
 
 toRunningTodoVM : ( RunningTodo, Todo ) -> Model -> RunningTodoViewModel

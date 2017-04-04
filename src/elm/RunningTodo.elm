@@ -29,8 +29,8 @@ start id now =
     RunningTodo id (createStartedState now now) 0 now |> Just
 
 
-getMaybeId =
-    Maybe.map (.id)
+getId =
+    (.id)
 
 
 getElapsedTime now runningTodo =

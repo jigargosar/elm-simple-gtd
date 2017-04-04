@@ -3,6 +3,7 @@ module ProjectStore.Internal exposing (..)
 import Maybe.Extra
 import Project exposing (EncodedProject, Project, ProjectName)
 import ProjectStore.Types exposing (..)
+import String.Extra
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -76,13 +77,16 @@ createAndAdd projectName now =
 
 
 findByName projectName =
-    findBy (Project.nameEquals projectName)
+    findBy (Project.nameEquals (String.trim projectName))
 
 
 addNewIfDoesNotExist : ProjectName -> Time -> ModelF
 addNewIfDoesNotExist projectName now m =
-    findByName projectName m
-        |> Maybe.Extra.unpack (\_ -> createAndAdd projectName now m |> Tuple.second) (\_ -> m)
+    if (String.Extra.isBlank projectName) then
+        m
+    else
+        findByName projectName m
+            |> Maybe.Extra.unpack (\_ -> createAndAdd projectName now m |> Tuple.second) (\_ -> m)
 
 
 

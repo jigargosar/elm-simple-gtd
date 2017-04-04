@@ -175,7 +175,7 @@ activateEditNewTodoMode text =
 
 onEditTodoEnterPressed : EditTodoModel -> Bool -> ReturnF
 onEditTodoEnterPressed editTodoModel isShiftDown =
-    addNewProjectIfDoesNotExist editTodoModel.projectName
+    insertProjectIfNotExist editTodoModel.projectName
         >> updateTodoFromEditTodoModel editTodoModel
         >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
         >> deactivateEditingMode
@@ -201,12 +201,12 @@ updateTodoFromEditTodoModel { projectName, todoText, todoId } =
         )
 
 
-addNewProjectIfDoesNotExist : ProjectName -> ReturnF
-addNewProjectIfDoesNotExist projectName =
+insertProjectIfNotExist : ProjectName -> ReturnF
+insertProjectIfNotExist projectName =
     Return.map
         (Model.updateProjectStore
             (apply2 ( Model.getNow, Model.getProjectStore )
-                >> uncurry (ProjectStore.addNewIfDoesNotExist projectName)
+                >> uncurry (ProjectStore.insertProjectIfNotExist projectName)
             )
         )
         >> persistProjectWithName projectName

@@ -46,5 +46,5 @@ addNewProject =
     Internal.createAndAdd
 
 
-addNewIfDoesNotExist =
+insertProjectIfNotExist =
     Internal.addNewIfDoesNotExist

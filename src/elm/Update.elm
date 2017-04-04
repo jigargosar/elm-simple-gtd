@@ -41,91 +41,103 @@ import Types
 update : Msg -> Model -> Return
 update msg =
     Return.singleton
-        >> case msg of
-            NoOp ->
-                identity
+        >> (case msg of
+                NoOp ->
+                    identity
 
-            FocusPaperInput selector ->
-                focusPaperInputCmd selector
+                FocusPaperInput selector ->
+                    focusPaperInputCmd selector
 
-            Start id ->
-                Return.map (Model.startTodo id)
+                Start id ->
+                    Return.map (Model.startTodo id)
 
-            Stop ->
-                stopRunningTodo
+                Stop ->
+                    stopRunningTodo
 
-            MarkRunningTodoDone ->
-                Return.maybeTransformWith (Model.getRunningTodoId)
-                    (updateTodo [ Todo.SetDone True ])
-                    >> stopRunningTodo
+                MarkRunningTodoDone ->
+                    Return.maybeTransformWith (Model.getRunningTodoId)
+                        (updateTodo [ Todo.SetDone True ])
+                        >> stopRunningTodo
 
-            ToggleTodoDone id ->
-                updateTodo [ Todo.ToggleDone ] id
+                ToggleTodoDone id ->
+                    updateTodo [ Todo.ToggleDone ] id
 
-            ToggleTodoDeleted id ->
-                updateTodo [ Todo.ToggleDeleted ] id
+                ToggleTodoDeleted id ->
+                    updateTodo [ Todo.ToggleDeleted ] id
 
-            SetTodoContext todoContext id ->
-                updateTodo [ Todo.SetContext todoContext ] id
+                SetTodoContext todoContext id ->
+                    updateTodo [ Todo.SetContext todoContext ] id
 
-            SetTodoText text id ->
-                updateTodo [ Todo.SetText text ] id
+                SetTodoText text id ->
+                    updateTodo [ Todo.SetText text ] id
 
-            Create text ->
-                Return.andThenWith Model.getNow
-                    (\now -> Model.addNewTodo text now >> persistTodoFromTuple)
+                Create text ->
+                    Return.andThenWith Model.getNow
+                        (\now -> Model.addNewTodo text now >> persistTodoFromTuple)
 
-            AddTodoClicked ->
-                activateEditNewTodoMode ""
-                    >> autoFocusPaperInputCmd
+                AddTodoClicked ->
+                    activateEditNewTodoMode ""
+                        >> autoFocusPaperInputCmd
 
-            NewTodoTextChanged text ->
-                activateEditNewTodoMode text
+                NewTodoTextChanged text ->
+                    activateEditNewTodoMode text
 
-            NewTodoBlur ->
-                deactivateEditingMode
+                NewTodoBlur ->
+                    deactivateEditingMode
 
-            NewTodoKeyUp text { key } ->
-                case key of
-                    Enter ->
-                        Return.command (Msg.saveNewTodo text |> Msg.toCmd)
-                            >> activateEditNewTodoMode ""
+                NewTodoKeyUp text { key } ->
+                    case key of
+                        Enter ->
+                            Return.command (Msg.saveNewTodo text |> Msg.toCmd)
+                                >> activateEditNewTodoMode ""
 
-                    Escape ->
-                        deactivateEditingMode
+                        Escape ->
+                            deactivateEditingMode
 
-                    _ ->
-                        identity
+                        _ ->
+                            identity
 
-            StartEditingTodo todo ->
-                Return.map (Model.EditModel.setEditModelToEditTodo todo)
-                    >> autoFocusPaperInputCmd
+                StartEditingTodo todo ->
+                    Return.map (Model.EditModel.setEditModelToEditTodo todo)
+                        >> autoFocusPaperInputCmd
 
-            EditTodoTextChanged editTodoModel text ->
-                Return.map (Model.EditModel.updateEditTodoText text editTodoModel)
+                EditTodoTextChanged editTodoModel text ->
+                    Return.map (Model.EditModel.updateEditTodoText text editTodoModel)
 
-            EditTodoProjectNameChanged editTodoModel projectName ->
-                Return.map (Model.EditModel.updateEditTodoProjectName projectName editTodoModel)
+                EditTodoProjectNameChanged editTodoModel projectName ->
+                    Return.map (Model.EditModel.updateEditTodoProjectName projectName editTodoModel)
 
-            EditTodoKeyUp editTodoModel { key, isShiftDown } ->
-                case key of
-                    Enter ->
-                        onEditTodoEnterPressed editTodoModel isShiftDown
+                EditTodoKeyUp editTodoModel { key, isShiftDown } ->
+                    case key of
+                        Enter ->
+                            onEditTodoEnterPressed editTodoModel isShiftDown
 
-                    Escape ->
-                        deactivateEditingMode
+                        Escape ->
+                            deactivateEditingMode
 
-                    _ ->
-                        identity
+                        _ ->
+                            identity
 
-            SetMainViewType viewType ->
-                Return.map (Model.setMainViewType viewType)
+                SetMainViewType viewType ->
+                    Return.map (Model.setMainViewType viewType)
 
-            OnNowChanged now ->
-                onUpdateNow now
+                OnNowChanged now ->
+                    onUpdateNow now
 
-            OnMsgList messages ->
-                onMsgList messages
+                OnMsgList messages ->
+                    onMsgList messages
+           )
+        >> Return.andThen
+            (\model ->
+                let
+                    projectStore =
+                        Model.getProjectStore model
+
+                    encodedProjects =
+                        1
+                in
+                    model ! []
+            )
 
 
 updateTodo actions todoId =

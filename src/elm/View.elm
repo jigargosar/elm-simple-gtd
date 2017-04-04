@@ -105,7 +105,7 @@ appMainView m =
             DoneView ->
                 todoListView m
 
-            ProjectsView ->
+            ProjectListView ->
                 projectListView m
 
             TodoContextView _ ->

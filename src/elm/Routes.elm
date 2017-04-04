@@ -8,6 +8,7 @@ import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
+import Project
 
 
 delta2builder : Model -> Model -> Maybe Builder
@@ -28,11 +29,11 @@ getPathFromModel model =
         DoneView ->
             [ "lists", "done" ]
 
-        ProjectsView ->
+        ProjectListView ->
             [ "lists", "projects" ]
 
-        _ ->
-            []
+        ProjectView project ->
+            [ "project", Project.getId project ]
 
 
 delta2hash : Model -> Model -> Maybe UrlChange
@@ -47,13 +48,16 @@ builder2messages builder =
             [ Msg.SetMainViewType AllByTodoContextView ]
 
         "lists" :: "projects" :: [] ->
-            [ Msg.SetMainViewType ProjectsView ]
+            [ Msg.SetMainViewType ProjectListView ]
 
         "lists" :: "bin" :: [] ->
             [ Msg.SetMainViewType BinView ]
 
         "lists" :: "done" :: [] ->
             [ Msg.SetMainViewType DoneView ]
+
+        "project" :: projectId :: [] ->
+            [ Msg.SetMainViewType (ProjectView projectId) ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

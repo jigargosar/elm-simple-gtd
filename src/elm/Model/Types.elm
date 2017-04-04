@@ -1,6 +1,6 @@
 module Model.Types exposing (..)
 
-import Project exposing (ProjectName)
+import Project exposing (ProjectId, ProjectName)
 import ProjectStore.Types exposing (ProjectStore)
 import Random.Pcg exposing (Seed)
 import RunningTodo exposing (RunningTodo)
@@ -29,9 +29,10 @@ type EditModel
 type MainViewType
     = AllByTodoContextView
     | TodoContextView TodoContext
+    | ProjectView ProjectId
     | DoneView
     | BinView
-    | ProjectsView
+    | ProjectListView
 
 
 type alias Model =

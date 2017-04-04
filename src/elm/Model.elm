@@ -77,9 +77,4 @@ getMaybeProjectNameOfTodo =
 
 
 findProjectNameByMaybeId maybeProjectId model =
-    Maybe.andThen (findProjectNameById # model) maybeProjectId
-
-
-findProjectNameById : ProjectId -> Model -> Maybe ProjectName
-findProjectNameById =
-    ProjectStore.findProjectNameById >> (\fn model -> fn (getProjectStore model))
+    maybeProjectId ?+> ProjectStore.findProjectNameById # (getProjectStore model)

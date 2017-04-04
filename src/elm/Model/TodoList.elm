@@ -90,7 +90,9 @@ toViewModelHelp ( todoContext, name, list ) =
 
 updateTodo : List TodoUpdateAction -> Time -> Todo -> ModelF
 updateTodo action time todo =
-    Todo.update action time todo |> (replaceTodoIfEqualById >> Model.updateTodoList)
+    apply2 ( Model.getNow, identity )
+        >> Tuple.mapFirst (Todo.update action # todo)
+        >> uncurry (replaceTodoIfEqualById >> Model.updateTodoList)
 
 
 replaceTodoIfEqualById todo =

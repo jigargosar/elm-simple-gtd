@@ -42,3 +42,7 @@ andThenModelWith f1 f2 =
         (\m ->
             (f2 (f1 m)) m
         )
+
+
+maybeEffect f =
+    Return.effect_ (\m -> f m ?= Cmd.none)

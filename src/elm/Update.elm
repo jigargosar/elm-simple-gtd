@@ -132,7 +132,7 @@ update msg =
 updateTodo actions todoId =
     Return.mapModelWith (Model.getNow)
         (\now -> Model.updateTodo now actions todoId)
-        >> Return.effect_ (Model.findTodoById todoId >> persistMaybeTodoCmd)
+        >> Return.maybeEffect (Model.findTodoById todoId >>? upsertTodoCmd)
 
 
 onMsgList : List Msg -> ReturnF
@@ -175,7 +175,7 @@ activateEditNewTodoMode text =
 
 onEditTodoEnterPressed : EditTodoModel -> Bool -> ReturnF
 onEditTodoEnterPressed editTodoModel isShiftDown =
-    findOrCreateProjectByName editTodoModel.projectName
+    addNewProjectIfDoesNotExist editTodoModel.projectName
         >> updateTodoFromEditTodoModel editTodoModel
         >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
         >> deactivateEditingMode
@@ -201,8 +201,8 @@ updateTodoFromEditTodoModel { projectName, todoText, todoId } =
         )
 
 
-findOrCreateProjectByName : ProjectName -> ReturnF
-findOrCreateProjectByName projectName =
+addNewProjectIfDoesNotExist : ProjectName -> ReturnF
+addNewProjectIfDoesNotExist projectName =
     Return.map
         (Model.updateProjectStore
             (apply2 ( Model.getNow, Model.getProjectStore )

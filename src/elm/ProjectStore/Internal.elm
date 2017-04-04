@@ -29,8 +29,12 @@ map fn =
     getList >> List.map fn
 
 
-find predicate =
+findBy predicate =
     getList >> List.find predicate
+
+
+findById id =
+    findBy (Project.idEquals id)
 
 
 

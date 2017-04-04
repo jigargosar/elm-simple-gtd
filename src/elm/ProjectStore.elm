@@ -1,4 +1,12 @@
-module ProjectStore exposing (..)
+module ProjectStore
+    exposing
+        ( generator
+        , addNewProject
+        , asList
+        , getEncodedProjectNames
+        , findByName
+        , findNameById
+        )
 
 import Project exposing (EncodedProject, Project, ProjectName)
 import ProjectStore.Types exposing (..)
@@ -16,7 +24,11 @@ import Time exposing (Time)
 
 
 generator encodedProjectList =
-    Random.map (\seed -> ProjectStoreModel seed (decodeListOfEncodedProjects encodedProjectList) |> ProjectStore) Random.independentSeed
+    Random.map
+        (\seed ->
+            ProjectStoreModel seed (decodeListOfEncodedProjects encodedProjectList) |> ProjectStore
+        )
+        Random.independentSeed
 
 
 decodeListOfEncodedProjects : List EncodedProject -> List Project
@@ -37,7 +49,7 @@ decodeListOfEncodedProjects =
             )
 
 
-getList =
+asList =
     Internal.getList
 
 
@@ -45,20 +57,12 @@ getEncodedProjectNames =
     map (Project.getName >> E.string) >> E.list
 
 
-findIdByName =
-    findByName >>> Maybe.map Project.getId
-
-
 findNameById id =
     findById id >> Maybe.map Project.getName
 
 
 findByName projectName =
-    find (Project.nameEquals projectName)
-
-
-findById id =
-    find (Project.idEquals id)
+    findBy (Project.nameEquals projectName)
 
 
 addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )

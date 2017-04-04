@@ -34,7 +34,7 @@ projectStoreView m =
     div []
         [ Keyed.node "paper-material"
             [ class "project-list" ]
-            (m |> Model.getProjectStore >> ProjectStore.getList >> projectItems)
+            (m |> Model.getProjectStore >> ProjectStore.asList >> projectItems)
         ]
 
 

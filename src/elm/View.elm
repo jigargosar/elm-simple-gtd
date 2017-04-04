@@ -97,7 +97,7 @@ appMainView m =
     div [ id "main-view" ]
         [ case Model.getMainViewType m of
             AllByTodoContextView ->
-                allTodoListByTodoContextView m
+                groupByTodoContext m
 
             BinView ->
                 todoListView m

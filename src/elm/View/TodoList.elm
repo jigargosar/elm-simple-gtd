@@ -107,9 +107,9 @@ todoListView =
            )
 
 
-allTodoListByTodoContextView : Model -> Html Msg
-allTodoListByTodoContextView =
-    apply2 ( todoViewFromModel >> maybeContextView, Model.TodoList.getTodoContextsViewModel )
+groupByTodoContext : Model -> Html Msg
+groupByTodoContext =
+    apply2 ( todoViewFromModel >> maybeContextView, Model.TodoList.groupByTodoContextViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
 

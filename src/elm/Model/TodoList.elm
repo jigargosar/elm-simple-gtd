@@ -88,23 +88,6 @@ toViewModelHelp ( todoContext, name, list ) =
         >> uncurry3 (TodoContextViewModel todoContext name)
 
 
-updateAndGetTodo : List TodoUpdateAction -> TodoId -> Model -> Maybe ( Todo, Model )
-updateAndGetTodo actions todoId model =
-    model
-        |> findTodoById todoId
-        ?|> (Todo.update actions (Model.getNow model)
-                >> (\todo ->
-                        let
-                            newTodoList =
-                                List.replaceIf (Todo.hasId todoId) todo model.todoList
-                        in
-                            ( todo
-                            , Model.setTodoList newTodoList model
-                            )
-                   )
-            )
-
-
 updateTodo : List TodoUpdateAction -> TodoId -> ModelF
 updateTodo actions todoId model =
     model
@@ -118,10 +101,6 @@ updateTodo actions todoId model =
 
 replaceTodoIfEqualById todo =
     List.replaceIf (Todo.equalById todo) todo
-
-
-maybeTuple2With f model =
-    f model ?|> (,) # model
 
 
 addCopyOfTodo : Todo -> Time -> Model -> ( Todo, Model )

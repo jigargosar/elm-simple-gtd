@@ -109,13 +109,13 @@ todoListView =
 
 allTodoListByTodoContextView : Model -> Html Msg
 allTodoListByTodoContextView =
-    apply2 ( todoViewFromModel >> keyedTodoContextView, Model.TodoList.getTodoContextsViewModel )
+    apply2 ( todoViewFromModel >> maybeContextView, Model.TodoList.getTodoContextsViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
 
 
-keyedTodoContextView : TodoView -> TodoContextViewModel -> Maybe ( String, Html Msg )
-keyedTodoContextView todoView vm =
+maybeContextView : TodoView -> TodoContextViewModel -> Maybe ( String, Html Msg )
+maybeContextView todoView vm =
     if vm.isEmpty then
         Nothing
     else

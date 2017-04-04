@@ -67,7 +67,7 @@ addNewProject projectName model =
 
 
 findProjectByName projectName =
-    getProjectStore >> ProjectStore.findProjectByName projectName
+    getProjectStore >> ProjectStore.findByName projectName
 
 
 getMaybeProjectNameOfTodo : Todo -> Model -> Maybe ProjectName

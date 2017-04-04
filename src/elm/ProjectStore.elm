@@ -45,11 +45,11 @@ getEncodedProjectNames =
     getList >> List.map (Project.getName >> E.string) >> E.list
 
 
-getProjectIdByName =
-    findProjectByName >>> Maybe.map Project.getId
+findIdByName =
+    findByName >>> Maybe.map Project.getId
 
 
-findProjectByName projectName =
+findByName projectName =
     getList >> List.find (Project.nameEquals projectName)
 
 
@@ -61,12 +61,6 @@ addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
 addNewProject projectName now =
     generate (Project.generator projectName now)
         >> addProjectFromTuple
-
-
-generate : Random.Generator a -> ProjectStore -> ( a, ProjectStore )
-generate generator m =
-    Random.step generator (getSeed m)
-        |> Tuple.mapSecond (setSeed # m)
 
 
 addProjectFromTuple : ( Project, ProjectStore ) -> ( Project, ProjectStore )

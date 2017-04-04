@@ -6,7 +6,17 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Random.Pcg exposing (Seed)
+import Random.Pcg as Random exposing (Seed)
+
+
+generate : Random.Generator a -> ProjectStore -> ( a, ProjectStore )
+generate generator m =
+    Random.step generator (getSeed m)
+        |> Tuple.mapSecond (setSeed # m)
+
+
+
+{--CODE_GEN_START--}
 
 
 withModel f (ProjectStore model) =

@@ -41,8 +41,12 @@ getList =
     Internal.getList
 
 
+map fn =
+    getList >> List.map fn
+
+
 getEncodedProjectNames =
-    getList >> List.map (Project.getName >> E.string) >> E.list
+    map (Project.getName >> E.string) >> E.list
 
 
 findIdByName =

@@ -1,6 +1,6 @@
 module ProjectStore.Internal exposing (..)
 
-import Project exposing (EncodedProject, Project)
+import Project exposing (EncodedProject, Project, ProjectName)
 import ProjectStore.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -12,6 +12,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Ext.Random as Random
+import Time exposing (Time)
 
 
 generate : Random.Generator a -> ProjectStore -> ( a, ProjectStore )
@@ -65,6 +66,12 @@ init list seed =
 
 generator =
     decodeListOfEncodedProjects >> init >> Random.mapWithIndependentSeed
+
+
+addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
+addNewProject projectName now =
+    generate (Project.generator projectName now)
+        >> addFromTuple
 
 
 

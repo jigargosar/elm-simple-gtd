@@ -37,6 +37,5 @@ findByName projectName =
 
 
 addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
-addNewProject projectName now =
-    generate (Project.generator projectName now)
-        >> addFromTuple
+addNewProject =
+    Internal.addNewProject

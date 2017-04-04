@@ -90,13 +90,13 @@ toViewModelHelp ( todoContext, name, list ) =
 
 updateTodo : List TodoUpdateAction -> Todo -> ModelF
 updateTodo action todo =
-    modelWith (Model.getNow)
+    applyWith Model.getNow
         ((Todo.update action # todo)
             >> (replaceTodoIfEqualById >> Model.updateTodoList)
         )
 
 
-modelWith f1 f2 model =
+applyWith f1 f2 model =
     f2 (f1 model) model
 
 

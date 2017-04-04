@@ -58,6 +58,10 @@ decodeListOfEncodedProjects =
             )
 
 
+init seed list =
+    ProjectStoreModel seed list |> ProjectStore
+
+
 
 {--CODE_GEN_START--}
 

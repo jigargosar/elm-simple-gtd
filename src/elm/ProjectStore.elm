@@ -23,12 +23,9 @@ import Random.Pcg as Random
 import Time exposing (Time)
 
 
-generator encodedProjectList =
-    Random.map
-        (\seed ->
-            ProjectStoreModel seed (decodeListOfEncodedProjects encodedProjectList) |> ProjectStore
-        )
-        Random.independentSeed
+generator listOfEncodedProjects =
+    Random.mapIndependentSeed
+        (init # (decodeListOfEncodedProjects listOfEncodedProjects))
 
 
 asList =

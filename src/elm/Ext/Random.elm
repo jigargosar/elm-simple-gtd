@@ -33,3 +33,7 @@ seedFromTime =
 
 mapWithIdGenerator f =
     Random.map f idGenerator
+
+
+mapWithIndependentSeed f =
+    Random.map f Random.independentSeed

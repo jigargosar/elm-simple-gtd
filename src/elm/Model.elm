@@ -76,4 +76,4 @@ getMaybeProjectNameOfTodo =
 
 
 findProjectNameByMaybeId maybeProjectId model =
-    maybeProjectId ?+> ProjectStore.findtNameById # (getProjectStore model)
+    maybeProjectId ?+> ProjectStore.findNameById # (getProjectStore model)

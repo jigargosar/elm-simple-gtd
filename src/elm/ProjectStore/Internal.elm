@@ -15,6 +15,15 @@ generate generator m =
         |> Tuple.mapSecond (setSeed # m)
 
 
+addFromTuple : ( Project, ProjectStore ) -> ( Project, ProjectStore )
+addFromTuple =
+    apply2 ( Tuple.first, uncurry prepend )
+
+
+prepend project =
+    updateList (getList >> (::) project)
+
+
 
 {--CODE_GEN_START--}
 

@@ -88,8 +88,8 @@ toViewModelHelp ( todoContext, name, list ) =
         >> uncurry3 (TodoContextViewModel todoContext name)
 
 
-updateTodo : List TodoUpdateAction -> Time -> Todo -> ModelF
-updateTodo action time todo =
+updateTodo : List TodoUpdateAction -> Todo -> ModelF
+updateTodo action todo =
     apply2 ( Model.getNow, identity )
         >> Tuple.mapFirst (Todo.update action # todo)
         >> uncurry (replaceTodoIfEqualById >> Model.updateTodoList)

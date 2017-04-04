@@ -188,14 +188,14 @@ copyAndEditTodo todo =
 
 
 updateTodoFromEditTodoModel : EditTodoModel -> ReturnF
-updateTodoFromEditTodoModel editTodoModel =
-    Return.transformWith (Model.findProjectByName editTodoModel.projectName)
+updateTodoFromEditTodoModel { projectName, todoText, todoId } =
+    Return.transformWith (Model.findProjectByName projectName)
         (\maybeProject ->
             updateTodo
-                [ Todo.SetText editTodoModel.todoText
+                [ Todo.SetText todoText
                 , Todo.SetProjectId (maybeProject ?|> Project.getId)
                 ]
-                editTodoModel.todoId
+                todoId
         )
 
 

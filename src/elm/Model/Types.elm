@@ -13,6 +13,20 @@ import Time exposing (Time)
 import Todo.Types exposing (..)
 
 
+type alias EditTodoModel =
+    { todoId : TodoId, todo : Todo, todoText : TodoText, projectName : Project.ProjectName }
+
+
+type alias NewTodoModel =
+    TodoText
+
+
+type EditModel
+    = NewTodo NewTodoModel
+    | EditTodo EditTodoModel
+    | None
+
+
 type MainViewType
     = AllByTodoContextView
     | TodoContextView TodoContext

@@ -57,6 +57,10 @@ findProjectById id =
     getList >> List.find (Project.getId >> equals id)
 
 
+findProjectNameById id =
+    findProjectById id >> Maybe.map Project.getName
+
+
 addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
 addNewProject projectName now =
     generate (Project.generator projectName now)
@@ -70,7 +74,3 @@ addProjectFromTuple =
 
 addProject project =
     updateList (getList >> (::) project)
-
-
-findProjectNameById id =
-    findProjectById id >> Maybe.map Project.getName

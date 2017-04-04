@@ -38,15 +38,9 @@ createEditTodoModel todo model =
         >> uncurry4 EditTodoModel
 
 
-updateEditTodoText : String -> ModelF
-updateEditTodoText text m =
-    m
-        |> case getEditModel m of
-            EditTodo model ->
-                setEditModel (EditTodo ({ model | todoText = text }))
-
-            _ ->
-                identity
+updateEditTodoText : String -> EditTodoModel -> ModelF
+updateEditTodoText text editTodoModel =
+    setEditModel (EditTodo ({ editTodoModel | todoText = text }))
 
 
 getMaybeEditTodoModel model =

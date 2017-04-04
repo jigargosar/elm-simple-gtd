@@ -212,8 +212,7 @@ findOrCreateProjectByName projectName =
                 >> uncurry (ProjectStore.addNewIfDoesNotExist projectName)
             )
         )
-        >> Return.effect_
-            (Model.findProjectByName projectName >>? upsertProjectCmd >>?= Cmd.none)
+        >> persistProjectWithName projectName
 
 
 stopRunningTodo : ReturnF
@@ -247,3 +246,8 @@ upsertTodoCmd todo =
 
 upsertProjectCmd project =
     PouchDB.pouchDBUpsert ( "project-db", Project.getId project, (Project.encode project) )
+
+
+persistProjectWithName projectName =
+    Return.effect_
+        (Model.findProjectByName projectName >>? upsertProjectCmd >>?= Cmd.none)

@@ -52,7 +52,7 @@ transformWith f1 f2 =
         )
 
 
-andThenWith f1 f2 =
+with f1 f2 =
     Return.andThen
         (\m ->
             (f2 (f1 m)) m

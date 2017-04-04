@@ -72,7 +72,7 @@ update msg =
                 updateTodo [ Todo.SetText text ] id
 
             Create text ->
-                Return.andThenWith Model.getNow
+                Return.with Model.getNow
                     (\now -> Model.addNewTodo text now >> persistTodoFromTuple)
 
             AddTodoClicked ->
@@ -182,7 +182,7 @@ onEditTodoEnterPressed editTodoModel isShiftDown =
 
 copyAndEditTodo : Todo -> ReturnF
 copyAndEditTodo todo =
-    Return.andThenWith Model.getNow
+    Return.with Model.getNow
         (\now ->
             Model.addCopyOfTodo todo now >> persistTodoAndStartEditing
         )

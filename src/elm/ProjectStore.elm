@@ -1,12 +1,4 @@
-module ProjectStore
-    exposing
-        ( generator
-        , addNewProject
-        , asList
-        , getEncodedProjectNames
-        , findByName
-        , findNameById
-        )
+module ProjectStore exposing (..)
 
 import Ext.Random as Random
 import Project exposing (EncodedProject, Project, ProjectName)

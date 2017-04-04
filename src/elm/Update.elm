@@ -129,14 +129,8 @@ update msg =
            )
         >> Return.andThen
             (\model ->
-                let
-                    projectStore =
-                        Model.getProjectStore model
-
-                    encodedProjects =
-                        1
-                in
-                    model ! []
+                ProjectStore.persistPending (Model.getProjectStore model)
+                    |> Tuple.mapFirst (Model.setProjectStore # model)
             )
 
 

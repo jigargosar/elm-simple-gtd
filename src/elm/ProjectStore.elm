@@ -44,3 +44,11 @@ findByName projectName =
 addNewProject : ProjectName -> Time -> ProjectStore -> ProjectStore
 addNewProject =
     Internal.createAndAdd
+
+
+getProjectsToPersist =
+    Internal.getProjectsToPersist
+
+
+persistPending =
+    (,) # Cmd.none

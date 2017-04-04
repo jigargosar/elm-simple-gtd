@@ -28,6 +28,11 @@ addToPendingPersistence project =
     updateToPersistList (getToPersistList >> (::) (Project.getId project))
 
 
+getProjectsToPersist : Model -> List Project
+getProjectsToPersist model =
+    getToPersistList model |> List.map (findById # model) |> List.filterNot (equals Nothing) |> maybeList ?= []
+
+
 addFromTuple : ( Project, ProjectStore ) -> ( Project, ProjectStore )
 addFromTuple =
     apply2 ( Tuple.first, uncurry prepend )

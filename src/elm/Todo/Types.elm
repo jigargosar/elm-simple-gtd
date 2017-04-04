@@ -58,6 +58,6 @@ type TodoUpdateAction
     | SetDeleted Bool
     | SetContext TodoContext
     | SetProjectId (Maybe ProjectId)
-    | SetProject Project.Project
+    | SetProject (Maybe Project.Project)
     | ToggleDone
     | ToggleDeleted

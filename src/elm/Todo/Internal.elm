@@ -140,8 +140,8 @@ update field model =
         SetProjectId projectId ->
             setProjectId projectId model
 
-        SetProject project ->
-            setProjectId (project |> Project.getId >> Just) model
+        SetProject maybeProject ->
+            setProjectId (maybeProject ?|> Project.getId) model
 
         ToggleDone ->
             updateDone (getDone >> not) model

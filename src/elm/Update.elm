@@ -17,6 +17,7 @@ import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model
 import Routes
+import String.Extra
 import View exposing (appView)
 import Navigation exposing (Location)
 import Return
@@ -186,28 +187,32 @@ copyAndEditTodo todo =
         )
 
 
-updateTodoFromEditTodoModel : EditTodoModel -> ReturnTuple Project -> Return
+updateTodoFromEditTodoModel : EditTodoModel -> ReturnTuple (Maybe Project) -> Return
 updateTodoFromEditTodoModel editTodoModel =
     Return.transformModelTupleWith
-        (\project ->
+        (\maybeProject ->
             updateTodo
                 [ Todo.SetText editTodoModel.todoText
-                , Todo.SetProject project
+                , Todo.SetProject maybeProject
                 ]
                 editTodoModel.todoId
         )
 
 
-findOrCreateProjectByName : ProjectName -> Return -> ReturnTuple Project
+findOrCreateProjectByName : ProjectName -> Return -> ReturnTuple (Maybe Project)
 findOrCreateProjectByName projectName =
-    Return.andThenWith (Model.findProjectByName projectName)
-        (Maybe.unpack
-            (\_ ->
-                Model.addNewProject projectName
-                    >> apply2 ( identity, Tuple.first >> upsertProjectCmd )
+    if (String.Extra.isBlank projectName) then
+        Return.map (\m -> ( Nothing, m ))
+    else
+        Return.andThenWith (Model.findProjectByName projectName)
+            (Maybe.unpack
+                (\_ ->
+                    Model.addNewProject projectName
+                        >> apply2 ( identity, Tuple.first >> upsertProjectCmd )
+                )
+                ((,) >>> Return.singleton)
             )
-            ((,) >>> Return.singleton)
-        )
+            >> Return.map (Tuple2.mapFirst Just)
 
 
 stopRunningTodo : ReturnF

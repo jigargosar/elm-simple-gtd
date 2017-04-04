@@ -90,8 +90,7 @@ toViewModelHelp ( todoContext, name, list ) =
 
 updateTodo : List TodoUpdateAction -> Time -> Todo -> ModelF
 updateTodo =
-    Todo.update
-        >>>> (replaceTodoIfEqualById >> Model.updateTodoList)
+    Todo.update >>>> (replaceTodoIfEqualById >> Model.updateTodoList)
 
 
 replaceTodoIfEqualById todo =

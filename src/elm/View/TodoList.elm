@@ -87,6 +87,7 @@ notEditingView vc todo =
     )
 
 
+createEditTodoViewModel : Context -> EditTodoModel -> EditTodoViewModel
 createEditTodoViewModel vc etm =
     let
         todoId =
@@ -97,7 +98,10 @@ createEditTodoViewModel vc etm =
             , id = todoId
             , inputId = "edit-todo-input-" ++ todoId
             }
-        , project = { name = etm.projectName, inputId = "edit-todo-project-input-" ++ todoId }
+        , project =
+            { name = etm.projectName
+            , inputId = "edit-todo-project-input-" ++ todoId
+            }
         , onKeyUp = Msg.EditTodoKeyUp etm
         , onTodoTextChanged = Msg.EditTodoTextChanged etm
         , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm

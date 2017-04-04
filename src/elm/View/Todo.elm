@@ -82,7 +82,7 @@ edit vm =
 todoViewNotEditing vc todo =
     let
         projectName =
-            Todo.getMaybeProjectId todo ?+> Dict.get # vc.projectIdToNameDict ?= ""
+            Todo.getMaybeProjectId todo ?+> Dict.get # vc.projectIdToNameDict ?= "<No Project>"
     in
         item
             [ class "todo-item"
@@ -98,7 +98,7 @@ todoViewNotEditing vc todo =
                     ]
                     [ Todo.getText todo |> text ]
                 , span [ class "small dim" ]
-                    [ text (when (String.trim >> String.isEmpty) (\_ -> "<No Project>") projectName)
+                    [ text projectName
                     , text " : "
                     , text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
                     , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")

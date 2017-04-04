@@ -55,7 +55,7 @@ update msg =
                 stopRunningTodo
 
             MarkRunningTodoDone ->
-                Return.maybeTransformWith (Model.getRunningTodoId)
+                Return.withMaybe (Model.getRunningTodoId)
                     (updateTodo [ Todo.SetDone True ])
                     >> stopRunningTodo
 
@@ -72,7 +72,7 @@ update msg =
                 updateTodo [ Todo.SetText text ] id
 
             Create text ->
-                Return.with Model.getNow
+                Return.andThenModelWith Model.getNow
                     (\now -> Model.addNewTodo text now >> persistTodoFromTuple)
 
             AddTodoClicked ->
@@ -182,7 +182,7 @@ onEditTodoEnterPressed editTodoModel isShiftDown =
 
 copyAndEditTodo : Todo -> ReturnF
 copyAndEditTodo todo =
-    Return.with Model.getNow
+    Return.andThenModelWith Model.getNow
         (\now ->
             Model.addCopyOfTodo todo now >> persistTodoAndStartEditing
         )
@@ -190,7 +190,7 @@ copyAndEditTodo todo =
 
 updateTodoFromEditTodoModel : EditTodoModel -> ReturnF
 updateTodoFromEditTodoModel { projectName, todoText, todoId } =
-    Return.transformWith (Model.findProjectByName projectName)
+    Return.with (Model.findProjectByName projectName)
         (\maybeProject ->
             updateTodo
                 [ Todo.SetText todoText

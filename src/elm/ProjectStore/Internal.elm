@@ -68,8 +68,8 @@ generator =
     decodeListOfEncodedProjects >> init >> Random.mapWithIndependentSeed
 
 
-addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
-addNewProject projectName now =
+createAndAdd : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
+createAndAdd projectName now =
     generate (Project.generator projectName now)
         >> addFromTuple
 

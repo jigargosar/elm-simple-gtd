@@ -38,4 +38,4 @@ findByName projectName =
 
 addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
 addNewProject =
-    Internal.addNewProject
+    Internal.createAndAdd

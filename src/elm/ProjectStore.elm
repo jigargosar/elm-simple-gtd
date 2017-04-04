@@ -59,7 +59,7 @@ findProjectById id =
 
 addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
 addNewProject projectName now =
-    generate (Project.projectGenerator projectName now)
+    generate (Project.generator projectName now)
         >> addProjectFromTuple
 
 

@@ -90,7 +90,7 @@ projectConstructor id rev createdAt modifiedAt name =
     }
 
 
-projectGenerator name now =
+generator name now =
     let
         createWithId id =
             projectConstructor id "" now now name

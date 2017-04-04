@@ -2,7 +2,7 @@ module Model exposing (..)
 
 import Model.Internal exposing (..)
 import Msg exposing (Return)
-import Project exposing (EncodedProject, ProjectId, ProjectName)
+import Project exposing (Project, EncodedProject, ProjectId, ProjectName)
 import ProjectStore
 import ProjectStore.Types exposing (ProjectStore)
 import RunningTodo exposing (RunningTodo)

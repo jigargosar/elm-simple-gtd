@@ -1,6 +1,6 @@
 module ProjectStore.Internal exposing (..)
 
-import Project exposing (Project)
+import Project exposing (EncodedProject, Project)
 import ProjectStore.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -8,6 +8,9 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import List.Extra as List
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 
 
 generate : Random.Generator a -> ProjectStore -> ( a, ProjectStore )
@@ -35,6 +38,24 @@ findBy predicate =
 
 findById id =
     findBy (Project.idEquals id)
+
+
+decodeListOfEncodedProjects : List EncodedProject -> List Project
+decodeListOfEncodedProjects =
+    List.map (D.decodeValue Project.decoder)
+        >> List.filterMap
+            (\result ->
+                case result of
+                    Ok project ->
+                        Just project
+
+                    Err x ->
+                        let
+                            _ =
+                                Debug.log "Error while decoding Project"
+                        in
+                            Nothing
+            )
 
 
 

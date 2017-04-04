@@ -8,6 +8,7 @@ module ProjectStore
         , findNameById
         )
 
+import Ext.Random as Random
 import Project exposing (EncodedProject, Project, ProjectName)
 import ProjectStore.Types exposing (..)
 import ProjectStore.Internal as Internal exposing (..)
@@ -24,7 +25,7 @@ import Time exposing (Time)
 
 
 generator listOfEncodedProjects =
-    Random.mapIndependentSeed
+    Random.mapWithIndependentSeed
         (init # (decodeListOfEncodedProjects listOfEncodedProjects))
 
 

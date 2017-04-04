@@ -189,19 +189,16 @@ copyAndEditTodo todo =
 
 updateTodoFromEditTodoModel : EditTodoModel -> ReturnF
 updateTodoFromEditTodoModel editTodoModel =
-    Return.andThen
-        (\m ->
-            let
-                maybeProject =
-                    Model.findProjectByName editTodoModel.projectName m
-            in
+    Return.map (apply2 ( Model.findProjectByName editTodoModel.projectName, Return.singleton ))
+        >> Return.andThen
+            (\( maybeProject, return ) ->
                 updateTodo
                     [ Todo.SetText editTodoModel.todoText
                     , Todo.SetProjectId (maybeProject ?|> Project.getId)
                     ]
                     editTodoModel.todoId
-                    (Return.singleton m)
-        )
+                    return
+            )
 
 
 findOrCreateProjectByName : ProjectName -> ReturnF

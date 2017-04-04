@@ -88,8 +88,8 @@ toViewModelHelp ( todoContext, name, list ) =
         >> uncurry3 (TodoContextViewModel todoContext name)
 
 
-updateTodo : List TodoUpdateAction -> TodoId -> ModelF
-updateTodo actions todoId model =
+updateTodo : Time -> List TodoUpdateAction -> TodoId -> ModelF
+updateTodo now actions todoId model =
     model
         |> findTodoById todoId
         ?|> Todo.update actions (Model.getNow model)

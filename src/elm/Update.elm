@@ -129,7 +129,7 @@ update msg =
 
 
 updateTodo actions todoId =
-    Return.map (Model.updateTodo actions todoId)
+    Return.transformWith (Model.getNow) (\now -> Return.map (Model.updateTodo now actions todoId))
         >> Return.effect_ (Model.findTodoById todoId >> persistMaybeTodoCmd)
 
 

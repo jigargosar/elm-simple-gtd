@@ -24,9 +24,8 @@ import Random.Pcg as Random
 import Time exposing (Time)
 
 
-generator listOfEncodedProjects =
-    Random.mapWithIndependentSeed
-        (init (decodeListOfEncodedProjects listOfEncodedProjects))
+generator =
+    decodeListOfEncodedProjects >> init >> Random.mapWithIndependentSeed
 
 
 asList =

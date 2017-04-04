@@ -56,21 +56,21 @@ update msg =
 
             MarkRunningTodoDone ->
                 Return.withMaybe (Model.getRunningTodoId)
-                    (updateTodo [ Todo.SetDone True ]
+                    (updateTodoById [ Todo.SetDone True ]
                         >>> stopRunningTodo
                     )
 
             ToggleTodoDone id ->
-                updateTodo [ Todo.ToggleDone ] id
+                updateTodoById [ Todo.ToggleDone ] id
 
             ToggleTodoDeleted id ->
-                updateTodo [ Todo.ToggleDeleted ] id
+                updateTodoById [ Todo.ToggleDeleted ] id
 
             SetTodoContext todoContext id ->
-                updateTodo [ Todo.SetContext todoContext ] id
+                updateTodoById [ Todo.SetContext todoContext ] id
 
             SetTodoText text id ->
-                updateTodo [ Todo.SetText text ] id
+                updateTodoById [ Todo.SetText text ] id
 
             Create text ->
                 Return.andThenModelWith Model.getNow
@@ -129,10 +129,15 @@ update msg =
                 onMsgList messages
 
 
-updateTodo actions todoId =
+updateTodoById actions todoId =
+    Return.withMaybe (Model.findTodoById todoId)
+        (updateTodo actions)
+
+
+updateTodo actions todo =
     Return.mapModelWith (Model.getNow)
-        (\now -> Model.updateTodo now actions todoId)
-        >> Return.maybeEffect (Model.findTodoById todoId >>? upsertTodoCmd)
+        (\now -> Model.updateTodo now actions todo)
+        >> Return.maybeEffect (Model.findTodoById (Todo.getId todo) >>? upsertTodoCmd)
 
 
 onMsgList : List Msg -> ReturnF
@@ -193,7 +198,7 @@ updateTodoFromEditTodoModel : EditTodoModel -> ReturnF
 updateTodoFromEditTodoModel { projectName, todoText, todoId } =
     Return.with (Model.findProjectByName projectName)
         (\maybeProject ->
-            updateTodo
+            updateTodoById
                 [ Todo.SetText todoText
                 , Todo.SetProjectId (maybeProject ?|> Project.getId)
                 ]

@@ -1,7 +1,6 @@
 port module Main exposing (..)
 
 import Dom
-import EditModel
 import Model.EditModel
 import Model.RunningTodo
 import Project exposing (EncodedProject)

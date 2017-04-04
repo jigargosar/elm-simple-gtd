@@ -1,6 +1,5 @@
 module Model exposing (..)
 
-import EditModel
 import Model.Internal exposing (..)
 import Msg exposing (Return)
 import Project exposing (EncodedProject, ProjectName)
@@ -43,7 +42,7 @@ init now encodedTodoList encodedProjectStore =
     in
         { now = now
         , todoList = TodoList.decodeTodoList encodedTodoList
-        , editModel = EditModel.init
+        , editModel = NotEditing
         , mainViewType = AllByTodoContextView
         , seed = initialSeed
         , maybeRunningTodo = Nothing

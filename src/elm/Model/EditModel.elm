@@ -1,6 +1,5 @@
 module Model.EditModel exposing (..)
 
-import EditModel.Types exposing (..)
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model exposing (..)
@@ -67,4 +66,4 @@ updateEditTodoProjectName projectName editTodoModel =
 
 
 deactivateEditingMode =
-    setEditModel None
+    setEditModel NotEditing

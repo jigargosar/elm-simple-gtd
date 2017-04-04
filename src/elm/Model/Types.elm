@@ -1,6 +1,5 @@
 module Model.Types exposing (..)
 
-import EditModel.Types exposing (..)
 import Project exposing (ProjectName)
 import ProjectStore.Types exposing (ProjectStore)
 import Random.Pcg exposing (Seed)
@@ -24,7 +23,7 @@ type alias NewTodoModel =
 type EditModel
     = NewTodo NewTodoModel
     | EditTodo EditTodoModel
-    | None
+    | NotEditing
 
 
 type MainViewType

@@ -1,7 +1,6 @@
 module Msg exposing (..)
 
 import Dom
-import EditModel.Types exposing (..)
 import Ext.Cmd
 import Ext.Keyboard exposing (KeyboardEvent)
 import Model.Types exposing (..)

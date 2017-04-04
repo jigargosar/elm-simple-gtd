@@ -2,7 +2,6 @@ port module Update exposing (..)
 
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
-import EditModel.Types exposing (..)
 import Ext.Return as Return
 import Model.EditModel exposing (getMaybeEditTodoModel)
 import Model.Internal as Model

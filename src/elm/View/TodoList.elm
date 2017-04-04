@@ -1,7 +1,6 @@
 module View.TodoList exposing (..)
 
 import Dom
-import EditModel.Types exposing (EditTodoModel)
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)

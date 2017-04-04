@@ -1,6 +1,5 @@
 module Model.Internal exposing (..)
 
-import EditModel.Types exposing (..)
 import ProjectStore.Types exposing (ProjectStore)
 import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)

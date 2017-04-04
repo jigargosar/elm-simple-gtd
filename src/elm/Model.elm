@@ -2,7 +2,7 @@ module Model exposing (..)
 
 import Model.Internal exposing (..)
 import Msg exposing (Return)
-import Project exposing (EncodedProject, ProjectName)
+import Project exposing (EncodedProject, ProjectId, ProjectName)
 import ProjectStore
 import ProjectStore.Types exposing (ProjectStore)
 import RunningTodo exposing (RunningTodo)
@@ -72,9 +72,14 @@ findProjectByName projectName =
 
 
 getMaybeProjectNameOfTodo : Todo -> Model -> Maybe ProjectName
-getMaybeProjectNameOfTodo todo =
-    findProjectNameById (Todo.getMaybeProjectId todo)
+getMaybeProjectNameOfTodo =
+    Todo.getMaybeProjectId >> findProjectNameByMaybeId
 
 
-findProjectNameById maybeProjectId model =
-    maybeProjectId ?+> ProjectStore.findProjectNameById  # (getProjectStore model)
+findProjectNameByMaybeId maybeProjectId model =
+    maybeProjectId ?+> ProjectStore.findProjectNameById # (getProjectStore model)
+
+
+findProjectNameById : ProjectId -> Model -> Maybe ProjectName
+findProjectNameById =
+    ProjectStore.findProjectNameById >> (\fn model -> fn (getProjectStore model))

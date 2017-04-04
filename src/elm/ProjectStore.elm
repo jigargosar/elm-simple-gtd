@@ -58,11 +58,11 @@ find predicate =
 
 
 findByName projectName =
-    getList >> List.find (Project.nameEquals projectName)
+    find (Project.nameEquals projectName)
 
 
 findById id =
-    getList >> List.find (Project.getId >> equals id)
+    find (Project.getId >> equals id)
 
 
 addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )

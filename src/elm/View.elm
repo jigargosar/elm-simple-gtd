@@ -100,16 +100,16 @@ appMainView m =
                 groupByTodoContext m
 
             BinView ->
-                todoListView m
+                filteredTodoListView m
 
             DoneView ->
-                todoListView m
+                filteredTodoListView m
 
             ProjectListView ->
                 projectListView m
 
             ProjectView projectId ->
-                div [] [ "projectView::" ++ projectId |> text ]
+                filteredTodoListView m
 
             TodoContextView context ->
                 div [] [ "TodoContextView::" ++ context |> text ]

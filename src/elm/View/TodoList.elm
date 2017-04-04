@@ -99,8 +99,8 @@ createEditTodoViewModel vc etm =
         }
 
 
-todoListView : Model -> Html Msg
-todoListView =
+filteredTodoListView : Model -> Html Msg
+filteredTodoListView =
     apply2 ( todoViewFromModel, Model.TodoList.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
                 Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)

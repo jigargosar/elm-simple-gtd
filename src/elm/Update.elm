@@ -105,7 +105,7 @@ update msg =
                 Return.map (Model.EditModel.updateEditTodoText text)
 
             EditTodoProjectNameChanged editTodoModel projectName ->
-                Return.map (Model.EditModel.updateEditTodoProjectName projectName)
+                Return.map (Model.EditModel.updateEditTodoProjectName projectName editTodoModel)
 
             EditTodoKeyUp editTodoModel { key, isShiftDown } ->
                 case key of

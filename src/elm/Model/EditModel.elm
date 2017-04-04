@@ -67,15 +67,9 @@ getEditNewTodoModel model =
             Nothing
 
 
-updateEditTodoProjectName : ProjectName -> ModelF
-updateEditTodoProjectName projectName m =
-    m
-        |> case getEditModel m of
-            EditTodo model ->
-                setEditModel (EditTodo ({ model | projectName = projectName }))
-
-            _ ->
-                identity
+updateEditTodoProjectName : ProjectName -> EditTodoModel -> ModelF
+updateEditTodoProjectName projectName editTodoModel =
+    setEditModel (EditTodo ({ editTodoModel | projectName = projectName }))
 
 
 deactivateEditingMode =

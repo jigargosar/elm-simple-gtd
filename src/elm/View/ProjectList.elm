@@ -2,6 +2,7 @@ module View.ProjectList exposing (..)
 
 import Dom
 import Html.Attributes.Extra exposing (..)
+import Html.Events.Extra exposing (onClickStopPropagation)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
@@ -43,4 +44,22 @@ projectItems =
 
 
 projectItem project =
-    item [ class "project-item" ] [ itemBody [] [ project |> Project.getName >> text ] ]
+    let
+        vm =
+            createProjectItemViewModel project
+    in
+        item
+            [ class "project-item"
+            , onClickStopPropagation vm.onClick
+            ]
+            [ itemBody [] [ text vm.name ] ]
+
+
+createProjectItemViewModel project =
+    let
+        projectId =
+            Project.getId project
+    in
+        { onClick = projectId |> ProjectView >> Msg.SetMainViewType
+        , name = project |> Project.getName
+        }

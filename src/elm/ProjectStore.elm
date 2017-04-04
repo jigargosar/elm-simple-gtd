@@ -62,7 +62,7 @@ findByName projectName =
 
 
 findById id =
-    find (Project.getId >> equals id)
+    find (Project.idEquals id)
 
 
 addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )

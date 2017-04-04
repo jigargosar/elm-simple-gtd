@@ -36,6 +36,10 @@ nameEquals name =
     getName >> equals name
 
 
+idEquals id =
+    getId >> equals id
+
+
 getId : Model -> ProjectId
 getId =
     (.id)

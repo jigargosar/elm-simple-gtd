@@ -37,10 +37,14 @@ findNameById id =
     findById id >> Maybe.map Project.getName
 
 
-findByName projectName =
-    findBy (Project.nameEquals projectName)
+findByName =
+    Internal.findByName
 
 
 addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
 addNewProject =
     Internal.createAndAdd
+
+
+addNewIfDoesNotExist =
+    Internal.addNewIfDoesNotExist

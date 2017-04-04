@@ -74,6 +74,19 @@ createAndAdd projectName now =
         >> addFromTuple
 
 
+findByName projectName =
+    findBy (Project.nameEquals projectName)
+
+
+addNewIfDoesNotExist : Random.Generator Project -> ModelF
+addNewIfDoesNotExist gen m =
+    let
+        _ =
+            findByName
+    in
+        m
+
+
 
 {--CODE_GEN_START--}
 

@@ -52,13 +52,13 @@ init now encodedTodoList encodedProjectStore =
         }
 
 
-updateProjectStoreFromTuple : (ProjectStore -> ( x, ProjectStore )) -> Model -> ( x, Model )
+updateProjectStoreFromTuple : (ProjectStore -> ( Project, ProjectStore )) -> Model -> ( Project, Model )
 updateProjectStoreFromTuple f m =
     let
-        ( x, projectStore ) =
+        ( project, projectStore ) =
             f (getProjectStore m)
     in
-        ( x, setProjectStore projectStore m )
+        ( project, setProjectStore projectStore m )
 
 
 addNewProject : ProjectName -> Model -> ( Project, Model )

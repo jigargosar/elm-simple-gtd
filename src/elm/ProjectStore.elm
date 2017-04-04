@@ -41,6 +41,6 @@ findByName projectName =
     findBy (Project.nameEquals projectName)
 
 
-addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
+addNewProject : ProjectName -> Time -> ProjectStore -> ProjectStore
 addNewProject =
     Internal.createAndAdd

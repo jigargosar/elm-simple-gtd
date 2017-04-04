@@ -15,12 +15,12 @@ import Ext.Random as Random
 import Time exposing (Time)
 
 
-generate : Random.Generator Project -> ProjectStore -> ( Project, ProjectStore )
+generate : Random.Generator Project -> ModelF
 generate generator m =
     Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
         |> apply2 ( Tuple.first, uncurry addToPendingPersistence )
-        |> addFromTuple
+        |> uncurry prepend
 
 
 addToPendingPersistence : Project -> ProjectStore -> ProjectStore
@@ -75,7 +75,7 @@ generator =
     decodeListOfEncodedProjects >> init >> Random.mapWithIndependentSeed
 
 
-createAndAdd : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
+createAndAdd : ProjectName -> Time -> ModelF
 createAndAdd projectName now =
     generate (Project.generator projectName now)
 

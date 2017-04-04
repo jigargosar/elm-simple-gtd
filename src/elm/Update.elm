@@ -187,32 +187,33 @@ copyAndEditTodo todo =
         )
 
 
-updateTodoFromEditTodoModel : EditTodoModel -> ReturnTuple (Maybe Project) -> Return
+updateTodoFromEditTodoModel : EditTodoModel -> ReturnF
 updateTodoFromEditTodoModel editTodoModel =
-    Return.transformModelTupleWith
-        (\maybeProject ->
+    Return.andThen
+        (\model ->
             updateTodo
                 [ Todo.SetText editTodoModel.todoText
-                , Todo.SetProject maybeProject
+                , Todo.SetProjectId (model |> Model.findProjectByName editTodoModel.projectName >>? Project.getId)
                 ]
                 editTodoModel.todoId
+                (Return.singleton model)
         )
 
 
-findOrCreateProjectByName : ProjectName -> Return -> ReturnTuple (Maybe Project)
+findOrCreateProjectByName : ProjectName -> ReturnF
 findOrCreateProjectByName projectName =
     if (String.Extra.isBlank projectName) then
-        Return.map (\m -> ( Nothing, m ))
+        identity
     else
-        Return.andThenWith (Model.findProjectByName projectName)
-            (Maybe.unpack
-                (\_ ->
-                    Model.addNewProject projectName
-                        >> apply2 ( identity, Tuple.first >> upsertProjectCmd )
-                )
-                ((,) >>> Return.singleton)
+        Return.map
+            (\model ->
+                Model.findProjectByName projectName model
+                    |> Maybe.unpack
+                        (\_ ->
+                            Model.addNewProject projectName model
+                        )
+                        (\_ -> model)
             )
-            >> Return.map (Tuple2.mapFirst Just)
 
 
 stopRunningTodo : ReturnF

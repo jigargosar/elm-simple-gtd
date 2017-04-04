@@ -73,9 +73,7 @@ findProjectByName projectName =
 
 getMaybeProjectNameOfTodo : Todo -> Model -> Maybe ProjectName
 getMaybeProjectNameOfTodo todo model =
-    todo
-        |> Todo.getMaybeProjectId
-        >>?+
-            (\projectId ->
+    Todo.getMaybeProjectId todo
+        ?+> (\projectId ->
                 model |> getProjectStore >> ProjectStore.findProjectNameById projectId
             )

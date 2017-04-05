@@ -123,6 +123,16 @@ update msg =
                 OnMsgList messages ->
                     onMsgList messages
            )
+        >> persist
+
+
+persist =
+    Return.andThen
+        (\m ->
+            Model.getProjectStore m
+                |> PouchDB.persist
+                |> Tuple.mapFirst (Model.setProjectStore # m)
+        )
 
 
 updateTodoById actions todoId =

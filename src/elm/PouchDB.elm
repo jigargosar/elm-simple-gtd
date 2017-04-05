@@ -100,6 +100,14 @@ generate generator m =
         |> Tuple.mapSecond (setSeed # m)
 
 
+persist m =
+    let
+        _ =
+            getList m
+    in
+        m ! []
+
+
 getSeed =
     (.seed)
 

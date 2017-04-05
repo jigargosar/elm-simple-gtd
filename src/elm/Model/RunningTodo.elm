@@ -19,10 +19,14 @@ getRunningTodoViewModel : Model -> Maybe RunningTodoViewModel
 getRunningTodoViewModel m =
     let
         maybeTodo =
-            getRunningTodoId m ?+> (Model.TodoList.findTodoById # m)
+            getMaybeRunningTodo m
     in
         maybe2Tuple ( Model.getMaybeRunningTodo m, maybeTodo )
             ?|> (toRunningTodoVM # m)
+
+
+getMaybeRunningTodo m =
+    getRunningTodoId m ?+> (Model.TodoList.findTodoById # m)
 
 
 type alias RunningTodoViewModel =

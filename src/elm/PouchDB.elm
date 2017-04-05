@@ -142,6 +142,6 @@ tt =
     createTracker
 
 
-foo : ( TT msg, Cmd msg )
-foo =
-    Port.call { portRequestId = 0 } (\res -> ()) tt
+test : ( TT msg, Cmd msg )
+test =
+    Port.call { portRequestId = 0 } (\res -> Cmd.none) tt

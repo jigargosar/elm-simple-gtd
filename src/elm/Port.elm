@@ -11,7 +11,7 @@ import Maybe.Extra as Maybe
 
 
 type alias Tracker req res msg =
-    { lastId : Int, out : Request req -> Cmd msg, handlers : Dict Int (Response res -> ()) }
+    { lastId : Int, out : Request req -> Cmd msg, handlers : Dict Int (Response res -> Cmd msg) }
 
 
 init out =

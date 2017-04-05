@@ -99,12 +99,8 @@ projectConstructor id rev createdAt modifiedAt name =
     }
 
 
-generator name now =
-    let
-        createWithId id =
-            projectConstructor id "" now now name
-    in
-        Random.mapWithIdGenerator createWithId
+init name now id =
+    projectConstructor id "" now now name
 
 
 type alias EncodedProject =

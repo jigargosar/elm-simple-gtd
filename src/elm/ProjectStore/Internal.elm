@@ -55,4 +55,4 @@ addNewIfDoesNotExist projectName now m =
         m
     else
         findByName projectName m
-            |> Maybe.Extra.unpack (\_ -> PouchDB.insert (Project.generator projectName now) m) (\_ -> m)
+            |> Maybe.Extra.unpack (\_ -> PouchDB.insert (Project.init projectName now) m) (\_ -> m)

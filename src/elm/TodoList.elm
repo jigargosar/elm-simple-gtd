@@ -44,12 +44,12 @@ maybeTuple2With f model =
 
 insertCopy : Todo -> Time -> TodoStore -> TodoStore
 insertCopy todo now =
-    PouchDB.insert (Todo.copyGenerator now todo)
+    PouchDB.insert (Todo.copyTodo now todo)
 
 
 insertNew : String -> Time -> TodoStore -> TodoStore
 insertNew text now =
-    PouchDB.insert (Todo.todoGenerator now text)
+    PouchDB.insert (Todo.init now text)
 
 
 init : List Todo -> Seed -> TodoStore

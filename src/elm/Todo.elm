@@ -151,26 +151,18 @@ encode todo =
         ]
 
 
-todoGenerator createdAt text =
-    let
-        initWith id =
-            todoConstructor
-                id
-                PouchDB.defaultRevision
-                createdAt
-                createdAt
-                defaultDone
-                text
-                defaultDueAt
-                defaultDeleted
-                Inbox
-                Nothing
-    in
-        Random.map initWith Random.idGenerator
-
-
-copyGenerator createdAt todo =
-    Random.mapWithIdGenerator (copyTodo createdAt todo)
+init createdAt text id =
+    todoConstructor
+        id
+        PouchDB.defaultRevision
+        createdAt
+        createdAt
+        defaultDone
+        text
+        defaultDueAt
+        defaultDeleted
+        Inbox
+        Nothing
 
 
 getText =

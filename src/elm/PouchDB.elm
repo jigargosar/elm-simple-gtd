@@ -1,5 +1,6 @@
 port module PouchDB exposing (..)
 
+import Ext.Random as Random
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -97,9 +98,13 @@ addFromTuple =
     apply2 ( Tuple.first, uncurry prepend )
 
 
-insert : Random.Generator (Document x) -> Store x -> Store x
-insert =
-    generate >>> (\( d, s ) -> prepend { d | dirty = True } s)
+insert : (Id -> Document x) -> Store x -> Store x
+insert constructor s=
+    Random.mapWithIdGenerator constructor
+
+            |> generate # s
+
+            |>  (\( d, s ) -> prepend { d | dirty = True } s)
 
 
 update : Document x -> Store x -> Store x

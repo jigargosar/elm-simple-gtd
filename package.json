@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "boot-strap": "elm-package install -y",
+    "bootstrap": "elm-package install -y",
     "dev": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server",
     "hot": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline",
     "prebuild":"rimraf polymer",
@@ -14,7 +14,7 @@
     "polymer-build":"cd polymer &&  polymer build --entrypoint index.html --sources * --shell imports.html && cd ..",
     "postpolymer-build":"mkdir docs ; cp -r ./polymer/build/unbundled/ docs/",
     "polymer-build__":"polymer build --entrypoint polymer/index.html --sources polymer/* --shell polymer/imports.html; ",
-    "travis": "npm run boot-strap build"
+    "travis": "npm run bootstrap; npm run build"
   },
   "devDependencies": {
     "babel-core": "6.23.1",

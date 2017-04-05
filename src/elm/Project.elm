@@ -12,8 +12,12 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 
 
+type alias OtherFields =
+    PouchDB.HasTimeStamps { name : ProjectName }
+
+
 type alias Project =
-    PouchDB.Document (PouchDB.HasTimeStamps { name : ProjectName })
+    PouchDB.Document OtherFields
 
 
 type alias Model =

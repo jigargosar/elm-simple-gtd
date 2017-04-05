@@ -9,6 +9,8 @@ import List.Extra as List
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
+import Ext.Function exposing (..)
+import Ext.Function.Infix exposing (..)
 
 
 --port onPouchDBBulkDocksResponse : (D.Value -> msg) -> Sub msg
@@ -56,15 +58,15 @@ timeStampFieldsDecoder =
         >> D.optional "modifiedAt" (D.float) 0
 
 
-type alias Store model =
-    { seed : Seed, list : List model }
+type alias Store x =
+    { seed : Seed, list : List (Document x) }
 
 
 init list seed =
     { seed = seed, list = list }
 
 
-prepend : model -> Store model -> Store model
+prepend : Document x -> Store x -> Store x
 prepend model =
     updateList (getList >> (::) model)
 
@@ -81,14 +83,14 @@ findById id =
     findBy (.id >> (==) id)
 
 
-addFromTuple : ( model, Store model ) -> ( model, Store model )
+addFromTuple : ( Document x, Store x ) -> ( Document x, Store x )
 addFromTuple =
     apply2 ( Tuple.first, uncurry prepend )
 
 
-createAndAdd : Random.Generator model -> Store model -> ( model, Store model )
-createAndAdd generator =
-    generate generator >> addFromTuple
+createAndAdd : Random.Generator (Document x) -> Store x -> ( Document x, Store x )
+createAndAdd =
+    generate >>> addFromTuple
 
 
 getSeed =
@@ -103,7 +105,7 @@ updateSeed updater model =
     setSeed (updater model) model
 
 
-getList : Store model -> List model
+getList : Store x -> List (Document x)
 getList =
     (.list)
 
@@ -112,12 +114,12 @@ setList list model =
     { model | list = list }
 
 
-updateList : (Store model -> List model) -> Store model -> Store model
+updateList : (Store x -> List (Document x)) -> Store x -> Store x
 updateList updater model =
     setList (updater model) model
 
 
-generate : Random.Generator model -> Store model -> ( model, Store model )
+generate : Random.Generator (Document x) -> Store x -> ( Document x, Store x )
 generate generator m =
     Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)

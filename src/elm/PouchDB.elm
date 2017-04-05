@@ -18,8 +18,9 @@ port onPouchDBBulkDocksResponse : (D.Value -> msg) -> Sub msg
 port pouchDBUpsert : ( String, String, D.Value ) -> Cmd msg
 
 
-upsert =
-    curry3 pouchDBUpsert
+upsert : String -> (Document x -> E.Value) -> Document x -> Cmd msg
+upsert dbName encoder doc =
+    pouchDBUpsert ( dbName, doc.id, encoder doc )
 
 
 type alias Id =

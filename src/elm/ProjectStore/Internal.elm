@@ -59,4 +59,4 @@ addNewIfDoesNotExist projectName now m =
         m
     else
         findByName projectName m
-            |> Maybe.Extra.unpack (\_ -> createAndAdd projectName now m |> Tuple.second) (\_ -> m)
+            |> Maybe.Extra.unpack (\_ -> createAndAdd projectName now m) (\_ -> m)

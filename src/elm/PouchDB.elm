@@ -11,6 +11,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
+import Tuple2
 
 
 --port onPouchDBBulkDocksResponse : (D.Value -> msg) -> Sub msg
@@ -88,9 +89,15 @@ addFromTuple =
     apply2 ( Tuple.first, uncurry prepend )
 
 
-createAndAdd : Random.Generator (Document x) -> Store x -> ( Document x, Store x )
+createAndAdd : Random.Generator (Document x) -> Store x -> Store x
 createAndAdd =
-    generate >>> addFromTuple
+    generate >>> (\( d, s ) -> prepend { d | dirty = True } s)
+
+
+generate : Random.Generator (Document x) -> Store x -> ( Document x, Store x )
+generate generator m =
+    Random.step generator (getSeed m)
+        |> Tuple.mapSecond (setSeed # m)
 
 
 getSeed =
@@ -117,13 +124,6 @@ setList list model =
 updateList : (Store x -> List (Document x)) -> Store x -> Store x
 updateList updater model =
     setList (updater model) model
-
-
-generate : Random.Generator (Document x) -> Store x -> ( Document x, Store x )
-generate generator m =
-    Random.step generator (getSeed m)
-        |> Tuple.mapSecond (setSeed # m)
-        |> Tuple.mapFirst (\d -> { d | dirty = True })
 
 
 type alias TT msg =

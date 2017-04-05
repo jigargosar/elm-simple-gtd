@@ -1,8 +1,18 @@
 module Ext.Function exposing (..)
 
+import Toolkit.Helpers exposing (..)
+
 
 apply a f =
     f a
+
+
+applyWith f1 f2 model =
+    f2 (f1 model) model
+
+
+applyUncurry2 f1 f2 model =
+    (uncurry f2) (apply2 f1 model)
 
 
 ifElse : (a -> Bool) -> (a -> b) -> (a -> b) -> a -> b

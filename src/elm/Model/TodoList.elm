@@ -96,10 +96,6 @@ updateTodo action todo =
         )
 
 
-applyWith f1 f2 model =
-    f2 (f1 model) model
-
-
 replaceTodoIfEqualById todo =
     List.replaceIf (Todo.equalById todo) todo
 

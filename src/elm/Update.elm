@@ -209,8 +209,8 @@ insertProjectIfNotExist : ProjectName -> ReturnF
 insertProjectIfNotExist projectName =
     Return.map
         (Model.updateProjectStore
-            (apply2 ( Model.getNow, Model.getProjectStore )
-                >> uncurry (ProjectStore.insertProjectIfNotExist projectName)
+            (applyUncurry2 ( Model.getNow, Model.getProjectStore )
+                (ProjectStore.insertProjectIfNotExist projectName)
             )
         )
         >> persistProjectWithName projectName

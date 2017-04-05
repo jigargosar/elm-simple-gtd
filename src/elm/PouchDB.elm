@@ -123,6 +123,7 @@ generate : Random.Generator (Document x) -> Store x -> ( Document x, Store x )
 generate generator m =
     Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
+        |> Tuple.mapFirst (\d -> { d | dirty = True })
 
 
 type alias TT msg =

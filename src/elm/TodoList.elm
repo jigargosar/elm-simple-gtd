@@ -22,7 +22,7 @@ import Ext.Random as Random
 
 decodeList : List EncodedTodo -> List Todo
 decodeList =
-    List.map (D.decodeValue Todo.todoDecoder)
+    List.map (D.decodeValue Todo.decoder)
         >> List.filterMap
             (\result ->
                 case result of
@@ -52,11 +52,6 @@ insertNew text now =
     PouchDB.insert (Todo.init now text)
 
 
-init : List Todo -> Seed -> TodoStore
-init =
-    PouchDB.init "todo-db" Todo.encode
-
-
 generator : List EncodedTodo -> Random.Generator TodoStore
 generator =
-    decodeList >> init >> Random.mapWithIndependentSeed
+    PouchDB.generator "todo-db" Todo.encode Todo.decoder

@@ -36,14 +36,9 @@ decodeList =
             )
 
 
-init : List Project -> Seed -> ProjectStore
-init =
-    PouchDB.init "project-db" Project.encode
-
-
 generator : List EncodedProject -> Random.Generator ProjectStore
 generator =
-    decodeList >> init >> Random.mapWithIndependentSeed
+    PouchDB.generator "project-db" Project.encode Project.decoder
 
 
 findByName projectName =

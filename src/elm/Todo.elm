@@ -111,8 +111,8 @@ todoRecordDecoder =
         >> D.optional "projectId" (D.nullable D.string) Nothing
 
 
-todoDecoder : Decoder Todo
-todoDecoder =
+decoder : Decoder Todo
+decoder =
     D.decode todoConstructor
         |> PouchDB.documentFieldsDecoder
         |> PouchDB.timeStampFieldsDecoder

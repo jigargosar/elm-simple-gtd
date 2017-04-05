@@ -64,16 +64,40 @@ type alias Store x =
     { seed : Seed
     , list : List (Document x)
     , encoder : Document x -> E.Value
+    , decoder : Decoder (Document x)
     , name : String
     }
 
 
-init name encoder list seed =
+decodeList : Decoder (Document x) -> List E.Value -> List (Document x)
+decodeList decoder =
+    List.map (D.decodeValue decoder)
+        >> List.filterMap
+            (\result ->
+                case result of
+                    Ok project ->
+                        Just project
+
+                    Err x ->
+                        let
+                            _ =
+                                Debug.log "Error while decoding Project" x
+                        in
+                            Nothing
+            )
+
+
+init name encoder decoder encodedList seed =
     { seed = seed
-    , list = list
+    , list = decodeList decoder encodedList
     , name = name
     , encoder = encoder
+    , decoder = decoder
     }
+
+
+generator name encoder decoder encodedList =
+    init name encoder decoder encodedList |> Random.mapWithIndependentSeed
 
 
 prepend : Document x -> Store x -> Store x

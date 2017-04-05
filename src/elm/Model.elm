@@ -77,3 +77,15 @@ getMaybeProjectNameOfTodo =
 
 findProjectNameByMaybeId maybeProjectId model =
     maybeProjectId ?+> ProjectStore.findNameById # (getProjectStore model)
+
+
+type alias Lens small big =
+    { get : big -> small, set : small -> big -> big }
+
+
+projectStore =
+    { get = .projectStore, set = (\s b -> { b | projectStore = s }) }
+
+
+update smallF lens big =
+    lens.set (smallF (lens.get big)) big

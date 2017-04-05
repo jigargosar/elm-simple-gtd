@@ -94,6 +94,12 @@ updateTodo action todo =
         )
 
 
+updateTodoById actions todoId m =
+    findTodoById todoId m
+        ?|> (updateTodo actions # m)
+        ?= m
+
+
 replaceTodoIfEqualById todo =
     List.replaceIf (Todo.equalById todo) todo
 

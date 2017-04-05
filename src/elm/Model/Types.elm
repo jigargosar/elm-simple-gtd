@@ -41,7 +41,7 @@ type MainViewType
 
 type alias Model =
     { now : Time
-    , todoStor : TodoStore
+    , todoStore : TodoStore
     , editModel : EditModel
     , mainViewType : MainViewType
     , seed : Seed

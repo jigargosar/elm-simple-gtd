@@ -28,17 +28,17 @@ updateSeed updater model =
 
 getTodoList : Model -> TodoStore
 getTodoList =
-    (.todoStor)
+    (.todoStore)
 
 
 setTodoStore : TodoStore -> ModelF
-setTodoStore todoStor model =
-    { model | todoStor = todoStor }
+setTodoStore todoStore model =
+    { model | todoStore = todoStore }
 
 
 updateTodoStore : (TodoStore -> TodoStore) -> ModelF
 updateTodoStore updater model =
-    { model | todoStor = getTodoList model |> updater }
+    { model | todoStore = getTodoList model |> updater }
 
 
 getEditModel : Model -> EditModel

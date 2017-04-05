@@ -45,7 +45,7 @@ init now encodedTodoList encodedProjectStore =
             Random.step (todoStoreGenerator encodedTodoList) newSeed
     in
         { now = now
-        , todoStor = todoStore
+        , todoStore = todoStore
         , editModel = NotEditing
         , mainViewType = AllByTodoContextView
         , seed = initialSeed
@@ -64,12 +64,8 @@ findProjectByName projectName =
 
 
 getMaybeProjectNameOfTodo : Todo -> Model -> Maybe ProjectName
-getMaybeProjectNameOfTodo =
-    Todo.getMaybeProjectId >> findProjectNameByMaybeId
-
-
-findProjectNameByMaybeId maybeProjectId model =
-    maybeProjectId ?+> ProjectStore.findNameById # (getProjectStore model)
+getMaybeProjectNameOfTodo todo model =
+    Todo.getMaybeProjectId todo ?|> ProjectStore.findNameById # (getProjectStore model)
 
 
 type alias Lens small big =

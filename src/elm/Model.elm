@@ -82,6 +82,10 @@ projectStore =
     { get = .projectStore, set = (\s b -> { b | projectStore = s }) }
 
 
+todoStore =
+    { get = .todoStore, set = (\s b -> { b | todoStore = s }) }
+
+
 now =
     { get = .now, set = (\s b -> { b | now = s }) }
 

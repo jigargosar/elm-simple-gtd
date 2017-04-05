@@ -128,12 +128,7 @@ update msg =
 
 persistAll =
     persist Model.projectStore
-        >> Return.andThen
-            (\m ->
-                Model.getTodoStore m
-                    |> PouchDB.persist
-                    |> Tuple.mapFirst (Model.setTodoStore # m)
-            )
+        >> persist Model.todoStore
 
 
 persist lens =

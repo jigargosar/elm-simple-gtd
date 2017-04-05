@@ -68,10 +68,16 @@ getMaybeProjectNameOfTodo todo model =
     Todo.getMaybeProjectId todo ?+> ProjectStore.findNameById # (getProjectStore model)
 
 
-insertProjectIfNotExist : ProjectName -> ModelF
-insertProjectIfNotExist projectName =
+insertProjectIfNotExist2 : ProjectName -> ModelF
+insertProjectIfNotExist2 projectName =
     (update2 projectStore now)
         (ProjectStore.insertProjectIfNotExist projectName)
+
+
+insertProjectIfNotExist : ProjectName -> ModelF
+insertProjectIfNotExist projectName =
+    apply2With ( getNow, getProjectStore )
+        (ProjectStore.insertProjectIfNotExist projectName >>> setProjectStore)
 
 
 type alias Lens small big =

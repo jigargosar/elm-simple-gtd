@@ -132,6 +132,12 @@ persist =
             Model.getProjectStore m
                 |> PouchDB.persist
                 |> Tuple.mapFirst (Model.setProjectStore # m)
+                |> Return.andThen
+                    (\m ->
+                        Model.getTodoList m
+                            |> PouchDB.persist
+                            |> Tuple.mapFirst (Model.setTodoList # m)
+                    )
         )
 
 

@@ -23,13 +23,8 @@ import Model.Internal as Model
 import Types exposing (..)
 
 
-getTodoList : Model -> TodoStore
-getTodoList =
-    (.todoList)
-
-
 getFilteredTodoList =
-    apply2 ( getCurrentTodoListFilter, getTodoList >> PouchDB.asList )
+    apply2 ( getCurrentTodoListFilter, Model.getTodoList >> PouchDB.asList )
         >> uncurry List.filter
         >> List.sortBy (Todo.getModifiedAt >> negate)
 
@@ -51,11 +46,11 @@ getCurrentTodoListFilter model =
 
 findTodoById : TodoId -> Model -> Maybe Todo
 findTodoById id =
-    getTodoList >> PouchDB.findById id
+    Model.getTodoList >> PouchDB.findById id
 
 
 findTodoEqualById todo =
-    getTodoList >> PouchDB.asList >> List.find (Todo.equalById todo)
+    Model.getTodoList >> PouchDB.asList >> List.find (Todo.equalById todo)
 
 
 type alias TodoContextViewModel =
@@ -64,7 +59,7 @@ type alias TodoContextViewModel =
 
 groupByTodoContextViewModel : Model -> List TodoContextViewModel
 groupByTodoContextViewModel =
-    getTodoList
+    Model.getTodoList
         >> PouchDB.asList
         >> Todo.rejectAnyPass [ Todo.getDeleted, Todo.isDone ]
         >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
@@ -107,11 +102,11 @@ replaceTodoIfEqualById todo =
 
 addCopyOfTodo : Todo -> Time -> ModelF
 addCopyOfTodo todo now =
-    applyWith (getTodoList)
+    applyWith (Model.getTodoList)
         (TodoList.insertCopy todo now >> Model.setTodoList)
 
 
 addNewTodo : String -> Time -> ModelF
 addNewTodo text now =
-    applyWith (getTodoList)
+    applyWith (Model.getTodoList)
         (TodoList.insertNew text now >> Model.setTodoList)

@@ -1,5 +1,7 @@
 module Port exposing (..)
 
+import Dict exposing (Dict)
+import Json.Encode
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -12,23 +14,38 @@ _ =
     1
 
 
-type alias Tracker req msg =
-    { lastId : Int, out : Request req -> msg }
+type alias Tracker req res msg =
+    { lastId : Int, out : Request req -> msg, handlers : Dict Int (Response res -> ()) }
 
 
 type alias Request a =
     { a | portRequestId : Int }
 
 
-call value tracker =
+type alias Response a =
+    { portRequestId : Int }
+
+
+call value handler tracker =
     let
         id =
             tracker.lastId
 
         newTracker =
-            { tracker | lastId = id }
+            { tracker | lastId = id, handlers = Dict.insert id handler tracker.handlers }
 
         newValue =
             { value | portRequestId = id }
     in
         ( newTracker, tracker.out newValue )
+
+
+handle res tracker =
+    let
+        handler =
+            Dict.get res.portRequestId tracker.handlers
+
+        _ =
+            handler res
+    in
+        { tracker | handlers = Dict.remove res.portRequestId tracker.handlers }

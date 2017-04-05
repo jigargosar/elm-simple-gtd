@@ -22,7 +22,7 @@ import Types exposing (..)
 
 
 getFilteredTodoList =
-    apply2 ( getCurrentTodoListFilter, Model.getTodoList >> PouchDB.asList )
+    apply2 ( getCurrentTodoListFilter, Model.getTodoStore >> PouchDB.asList )
         >> uncurry List.filter
         >> List.sortBy (Todo.getModifiedAt >> negate)
 
@@ -44,11 +44,11 @@ getCurrentTodoListFilter model =
 
 findTodoById : TodoId -> Model -> Maybe Todo
 findTodoById id =
-    Model.getTodoList >> PouchDB.findById id
+    Model.getTodoStore >> PouchDB.findById id
 
 
 findTodoEqualById todo =
-    Model.getTodoList >> PouchDB.asList >> List.find (Todo.equalById todo)
+    Model.getTodoStore >> PouchDB.asList >> List.find (Todo.equalById todo)
 
 
 type alias TodoContextViewModel =
@@ -57,7 +57,7 @@ type alias TodoContextViewModel =
 
 groupByTodoContextViewModel : Model -> List TodoContextViewModel
 groupByTodoContextViewModel =
-    Model.getTodoList
+    Model.getTodoStore
         >> PouchDB.asList
         >> Todo.rejectAnyPass [ Todo.getDeleted, Todo.isDone ]
         >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
@@ -85,7 +85,7 @@ toViewModelHelp ( todoContext, name, list ) =
 
 updateTodo : List TodoUpdateAction -> Todo -> ModelF
 updateTodo action todo =
-    apply2With ( Model.getNow, Model.getTodoList)
+    apply2With ( Model.getNow, Model.getTodoStore )
         ((Todo.update action # todo)
             >> PouchDB.update
             >>> Model.setTodoStore
@@ -103,11 +103,14 @@ replaceTodoIfEqualById todo =
 
 addCopyOfTodo : Todo -> Time -> ModelF
 addCopyOfTodo todo now =
-    applyWith (Model.getTodoList)
-        (PouchDB.insert (Todo.copyTodo now todo) >> Model.setTodoStore)
+    insertTodoByIdConstructor (Todo.copyTodo now todo)
 
 
 addNewTodo : String -> Time -> ModelF
 addNewTodo text now =
-    applyWith (Model.getTodoList)
-        (PouchDB.insert (Todo.init now text) >> Model.setTodoStore)
+    insertTodoByIdConstructor (Todo.init now text)
+
+
+insertTodoByIdConstructor constructWithId =
+    applyWith (Model.getTodoStore)
+        (PouchDB.insert (constructWithId) >> Model.setTodoStore)

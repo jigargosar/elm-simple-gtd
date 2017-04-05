@@ -10,7 +10,6 @@ import RunningTodo exposing (RunningTodo)
 import Time exposing (Time)
 
 
-
 getSeed : Model -> Seed
 getSeed =
     (.seed)
@@ -26,8 +25,8 @@ updateSeed updater model =
     setSeed (updater model) model
 
 
-getTodoList : Model -> TodoStore
-getTodoList =
+getTodoStore : Model -> TodoStore
+getTodoStore =
     (.todoStore)
 
 
@@ -38,7 +37,7 @@ setTodoStore todoStore model =
 
 updateTodoStore : (TodoStore -> TodoStore) -> ModelF
 updateTodoStore updater model =
-    { model | todoStore = getTodoList model |> updater }
+    { model | todoStore = getTodoStore model |> updater }
 
 
 getEditModel : Model -> EditModel

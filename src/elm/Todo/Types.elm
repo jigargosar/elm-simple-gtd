@@ -41,7 +41,7 @@ type alias TodoRecord =
 
 
 type alias Todo =
-    PouchDB.Document (PouchDB.WithTimeStamps TodoRecord)
+    PouchDB.Document (PouchDB.HasTimeStamps TodoRecord)
 
 
 type alias ViewModel =

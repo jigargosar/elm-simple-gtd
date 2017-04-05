@@ -13,7 +13,7 @@ import Json.Encode as E
 
 
 type alias Project =
-    PouchDB.Document (PouchDB.WithTimeStamps { name : ProjectName })
+    PouchDB.Document (PouchDB.HasTimeStamps { name : ProjectName })
 
 
 type alias Model =

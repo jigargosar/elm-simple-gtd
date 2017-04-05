@@ -39,7 +39,7 @@ type alias Document moreFields =
     { moreFields | id : Id, rev : Revision }
 
 
-type alias WithTimeStamps otherFields =
+type alias HasTimeStamps otherFields =
     { otherFields | createdAt : Time, modifiedAt : Time }
 
 

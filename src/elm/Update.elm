@@ -56,7 +56,7 @@ update msg =
 
             MarkRunningTodoDone ->
                 Return.withMaybe (Model.getMaybeRunningTodo)
-                    (\todo -> updateTodo [] (Todo.markDone todo) >> stopRunningTodo)
+                    (updateTodo [ Todo.SetDone True ] >>> stopRunningTodo)
 
             ToggleTodoDone todo ->
                 updateTodo [ Todo.ToggleDone ] todo
@@ -129,7 +129,7 @@ updateTodoById actions todoId =
         (updateTodo actions)
 
 
-updateTodo : TodoUpdateAction -> Todo -> ReturnF
+updateTodo : List TodoUpdateAction -> Todo -> ReturnF
 updateTodo actions todo =
     Return.map (Model.updateTodo actions todo)
         >> persistTodoById (Todo.getId todo)

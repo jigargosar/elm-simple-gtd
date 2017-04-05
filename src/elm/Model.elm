@@ -1,8 +1,8 @@
 module Model exposing (..)
 
 import Model.Internal exposing (..)
-import Model.TodoList
 import Msg exposing (Return)
+import PouchDB
 import Project exposing (Project, EncodedProject, ProjectId, ProjectName)
 import ProjectStore
 import ProjectStore.Types exposing (ProjectStore)
@@ -17,9 +17,9 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
-import TodoList
 import Todo.Types exposing (..)
 import Todo
+import TodoList.Types exposing (TodoStore)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -43,7 +43,7 @@ init now encodedTodoList encodedProjectStore =
             Random.step (ProjectStore.generator encodedProjectStore) initialSeed
 
         ( todoStore, newSeed2 ) =
-            Random.step (Model.TodoList.generator encodedTodoList) newSeed
+            Random.step (todoStoreGenerator encodedTodoList) newSeed
     in
         { now = now
         , todoList = todoStore
@@ -55,13 +55,9 @@ init now encodedTodoList encodedProjectStore =
         }
 
 
-updateProjectStoreFromTuple : (ProjectStore -> ( Project, ProjectStore )) -> Model -> ( Project, Model )
-updateProjectStoreFromTuple f m =
-    let
-        ( project, projectStore ) =
-            f (getProjectStore m)
-    in
-        ( project, setProjectStore projectStore m )
+todoStoreGenerator : List EncodedTodo -> Random.Generator TodoStore
+todoStoreGenerator =
+    PouchDB.generator "todo-db" Todo.encode Todo.decoder
 
 
 findProjectByName projectName =

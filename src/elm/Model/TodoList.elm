@@ -110,8 +110,3 @@ addNewTodo : String -> Time -> ModelF
 addNewTodo text now =
     applyWith (Model.getTodoList)
         (PouchDB.insert (Todo.init now text) >> Model.setTodoList)
-
-
-generator : List EncodedTodo -> Random.Generator TodoStore
-generator =
-    PouchDB.generator "todo-db" Todo.encode Todo.decoder

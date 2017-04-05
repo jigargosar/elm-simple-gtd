@@ -18,24 +18,6 @@ import Ext.Random as Random
 import Time exposing (Time)
 
 
-decodeList : List EncodedProject -> List Project
-decodeList =
-    List.map (D.decodeValue Project.decoder)
-        >> List.filterMap
-            (\result ->
-                case result of
-                    Ok project ->
-                        Just project
-
-                    Err x ->
-                        let
-                            _ =
-                                Debug.log "Error while decoding Project" x
-                        in
-                            Nothing
-            )
-
-
 generator : List EncodedProject -> Random.Generator ProjectStore
 generator =
     PouchDB.generator "project-db" Project.encode Project.decoder

@@ -1,6 +1,7 @@
 module Model exposing (..)
 
 import Model.Internal exposing (..)
+import Model.TodoList
 import Msg exposing (Return)
 import Project exposing (Project, EncodedProject, ProjectId, ProjectName)
 import ProjectStore
@@ -42,7 +43,7 @@ init now encodedTodoList encodedProjectStore =
             Random.step (ProjectStore.generator encodedProjectStore) initialSeed
 
         ( todoStore, newSeed2 ) =
-            Random.step (TodoList.generator encodedTodoList) newSeed
+            Random.step (Model.TodoList.generator encodedTodoList) newSeed
     in
         { now = now
         , todoList = todoStore

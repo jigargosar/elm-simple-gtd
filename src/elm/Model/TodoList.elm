@@ -8,7 +8,7 @@ import Maybe.Extra as Maybe
 import Model
 import PouchDB
 import Project
-import Random.Pcg
+import Random.Pcg as Random
 import Time exposing (Time)
 import Todo
 import TodoList
@@ -103,10 +103,15 @@ replaceTodoIfEqualById todo =
 addCopyOfTodo : Todo -> Time -> ModelF
 addCopyOfTodo todo now =
     applyWith (Model.getTodoList)
-        (TodoList.insertCopy todo now >> Model.setTodoList)
+        (PouchDB.insert (Todo.copyTodo now todo) >> Model.setTodoList)
 
 
 addNewTodo : String -> Time -> ModelF
 addNewTodo text now =
     applyWith (Model.getTodoList)
-        (TodoList.insertNew text now >> Model.setTodoList)
+        (PouchDB.insert (Todo.init now text) >> Model.setTodoList)
+
+
+generator : List EncodedTodo -> Random.Generator TodoStore
+generator =
+    PouchDB.generator "todo-db" Todo.encode Todo.decoder

@@ -20,28 +20,6 @@ import Todo.Types exposing (EncodedTodo, Todo, TodoId)
 import Ext.Random as Random
 
 
-decodeList : List EncodedTodo -> List Todo
-decodeList =
-    List.map (D.decodeValue Todo.decoder)
-        >> List.filterMap
-            (\result ->
-                case result of
-                    Ok todo ->
-                        Just todo
-
-                    Err x ->
-                        let
-                            _ =
-                                Debug.log "Error while decoding todo" x
-                        in
-                            Nothing
-            )
-
-
-maybeTuple2With f model =
-    f model ?|> (,) # model
-
-
 insertCopy : Todo -> Time -> TodoStore -> TodoStore
 insertCopy todo now =
     PouchDB.insert (Todo.copyTodo now todo)

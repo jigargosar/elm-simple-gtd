@@ -195,14 +195,27 @@ copyAndEditTodo todo =
 
 updateTodoFromEditTodoModel : EditTodoModel -> ReturnF
 updateTodoFromEditTodoModel { projectName, todoText, todoId } =
-    Return.with (Model.findProjectByName projectName)
-        (\maybeProject ->
-            updateTodoById
-                [ Todo.SetText todoText
-                , Todo.SetProjectId (maybeProject ?|> Project.getId)
-                ]
-                todoId
+    Return.andThen
+        (applyUncurry2 ( Model.findProjectByName projectName, Return.singleton )
+            (\maybeProject ->
+                updateTodoById
+                    [ Todo.SetText todoText
+                    , Todo.SetProjectId (maybeProject ?|> Project.getId)
+                    ]
+                    todoId
+            )
         )
+
+
+
+--    Return.with (Model.findProjectByName projectName)
+--        (\maybeProject ->
+--            updateTodoById
+--                [ Todo.SetText todoText
+--                , Todo.SetProjectId (maybeProject ?|> Project.getId)
+--                ]
+--                todoId
+--        )
 
 
 insertProjectIfNotExist : ProjectName -> ReturnF

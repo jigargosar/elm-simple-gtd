@@ -1,6 +1,8 @@
 language: node_js
 node_js:
-  - "7.7.x"
+  - "7"
+
+cache: yarn
 
 script: npm build
 

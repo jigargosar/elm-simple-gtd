@@ -134,7 +134,7 @@ nonHoverIcons vc todo =
 doneIconButton vc todo =
     iconButton
         [ class ("done-" ++ toString (Todo.isDone todo))
-        , onClickStopPropagation (Msg.ToggleTodoDone (Todo.getId todo))
+        , onClickStopPropagation (Msg.ToggleTodoDone todo)
         , icon "check"
         ]
         []
@@ -143,14 +143,14 @@ doneIconButton vc todo =
 deleteIconButton vc todo =
     iconButton
         [ onClickStopPropagation
-            (Msg.ToggleTodoDeleted (Todo.getId todo))
+            (Msg.ToggleTodoDeleted todo)
         , icon "delete"
         ]
         []
 
 
 startIconButton vc todo =
-    iconButton [ onClickStopPropagation (Msg.Start (Todo.getId todo)), icon "av:play-circle-outline" ] []
+    iconButton [ onClickStopPropagation (Msg.Start todo), icon "av:play-circle-outline" ] []
 
 
 optionsIconButton vc todo =
@@ -168,7 +168,7 @@ optionsIconButton vc todo =
                 .|> (\context ->
                         item
                             [ attribute "list-type" (Todo.todoContextToName context)
-                            , onClickStopPropagation (Msg.SetTodoContext context (Todo.getId todo))
+                            , onClickStopPropagation (Msg.SetTodoContext context todo)
                             ]
                             [ text (Todo.todoContextToName context) ]
                     )

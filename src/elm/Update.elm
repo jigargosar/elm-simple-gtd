@@ -48,8 +48,8 @@ update msg =
             FocusPaperInput selector ->
                 focusPaperInputCmd selector
 
-            Start id ->
-                Return.map (Model.startTodo id)
+            Start todo ->
+                Return.map (Model.startTodo todo)
 
             Stop ->
                 stopRunningTodo
@@ -60,17 +60,14 @@ update msg =
                         >>> stopRunningTodo
                     )
 
-            ToggleTodoDone id ->
-                updateTodoById [ Todo.ToggleDone ] id
+            ToggleTodoDone todo ->
+                updateTodo [ Todo.ToggleDone ] todo
 
-            ToggleTodoDeleted id ->
-                updateTodoById [ Todo.ToggleDeleted ] id
+            ToggleTodoDeleted todo ->
+                updateTodo [ Todo.ToggleDeleted ] todo
 
-            SetTodoContext todoContext id ->
-                updateTodoById [ Todo.SetContext todoContext ] id
-
-            SetTodoText text id ->
-                updateTodoById [ Todo.SetText text ] id
+            SetTodoContext todoContext todo ->
+                updateTodo [ Todo.SetContext todoContext ] todo
 
             Create text ->
                 Return.andThenModelWith Model.getNow

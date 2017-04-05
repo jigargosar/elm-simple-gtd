@@ -56,13 +56,12 @@ stopAndMarkDone =
 
 type Msg
     = NoOp
-    | Start TodoId
+    | Start Todo
     | Stop
     | MarkRunningTodoDone
-    | ToggleTodoDone TodoId
-    | ToggleTodoDeleted TodoId
-    | SetTodoContext TodoContext TodoId
-    | SetTodoText String TodoId
+    | ToggleTodoDone Todo
+    | ToggleTodoDeleted Todo
+    | SetTodoContext TodoContext Todo
     | Create String
     | AddTodoClicked
     | NewTodoTextChanged TodoText

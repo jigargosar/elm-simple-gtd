@@ -1,6 +1,7 @@
 module RunningTodo exposing (..)
 
 import Time exposing (Time)
+import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -25,8 +26,8 @@ type alias RunningTodo =
     { id : TodoId, state : State, timeSpent : Time, startTime : Time }
 
 
-start id now =
-    RunningTodo id (createStartedState now now) 0 now |> Just
+start todo now =
+    RunningTodo (Todo.getId todo) (createStartedState now now) 0 now |> Just
 
 
 getId =

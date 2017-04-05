@@ -50,8 +50,8 @@ stopRunningTodo =
     Model.setMaybeRunningTodo Nothing
 
 
-startTodo id =
-    Model.updateMaybeRunningTodo (Model.getNow >> RunningTodo.start id)
+startTodo todo =
+    Model.updateMaybeRunningTodo (Model.getNow >> RunningTodo.start todo)
 
 
 shouldBeep : Model -> Bool

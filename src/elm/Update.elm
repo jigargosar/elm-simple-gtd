@@ -142,8 +142,7 @@ persist =
 
 
 updateTodoById actions todoId =
-    Return.withMaybe (Model.findTodoById todoId)
-        (updateTodo actions)
+    Return.map (Model.updateTodoById actions todoId)
 
 
 updateTodo : List TodoUpdateAction -> Todo -> ReturnF
@@ -207,10 +206,10 @@ copyAndEditTodo todo =
 
 updateTodoFromEditTodoModel : EditTodoModel -> ReturnF
 updateTodoFromEditTodoModel { projectName, todoText, todoId } =
-    Return.andThen
-        (apply2Uncurry ( Model.findProjectByName projectName, Return.singleton )
+    Return.map
+        (apply2Uncurry ( Model.findProjectByName projectName, identity )
             (\maybeProject ->
-                updateTodoById
+                Model.updateTodoById
                     [ Todo.SetText todoText
                     , Todo.SetProjectId (maybeProject ?|> Project.getId)
                     ]

@@ -26,29 +26,22 @@ import Model.Types exposing (..)
 import Types exposing (..)
 
 
-generate : (Model -> Random.Generator a) -> Model -> ( a, Model )
-generate generatorFn m =
-    Random.step (generatorFn m) (m.seed)
-        |> Tuple.mapSecond (setSeed # m)
-
-
 init : Time -> List EncodedTodo -> List EncodedProject -> Model
 init now encodedTodoList encodedProjectStore =
     let
-        initialSeed =
-            Random.seedFromTime now
+        storeGenerator =
+            Random.map2 (,)
+                (todoStoreGenerator encodedTodoList)
+                (ProjectStore.generator encodedProjectStore)
 
-        ( projectStore, newSeed ) =
-            Random.step (ProjectStore.generator encodedProjectStore) initialSeed
-
-        ( todoStore, newSeed2 ) =
-            Random.step (todoStoreGenerator encodedTodoList) newSeed
+        ( ( todoStore, projectStore ), seed ) =
+            Random.step storeGenerator (Random.seedFromTime now)
     in
         { now = now
         , todoStore = todoStore
         , editModel = NotEditing
         , mainViewType = AllByTodoContextView
-        , seed = initialSeed
+        , seed = seed
         , maybeRunningTodo = Nothing
         , projectStore = projectStore
         }

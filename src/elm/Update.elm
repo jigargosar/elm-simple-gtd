@@ -132,13 +132,13 @@ persist =
             Model.getProjectStore m
                 |> PouchDB.persist
                 |> Tuple.mapFirst (Model.setProjectStore # m)
-                |> Return.andThen
-                    (\m ->
-                        Model.getTodoStore m
-                            |> PouchDB.persist
-                            |> Tuple.mapFirst (Model.setTodoStore # m)
-                    )
         )
+        >> Return.andThen
+            (\m ->
+                Model.getTodoStore m
+                    |> PouchDB.persist
+                    |> Tuple.mapFirst (Model.setTodoStore # m)
+            )
 
 
 updateTodoById actions todoId =

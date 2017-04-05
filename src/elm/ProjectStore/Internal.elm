@@ -17,13 +17,13 @@ import Ext.Random as Random
 import Time exposing (Time)
 
 
-generate : Random.Generator a -> ProjectStore -> ( a, ProjectStore )
+generate : Random.Generator a -> Model -> ( a, Model )
 generate generator m =
     Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
 
 
-addFromTuple : ( Project, ProjectStore ) -> ( Project, ProjectStore )
+addFromTuple : ( Project, Model ) -> ( Project, Model )
 addFromTuple =
     apply2 ( Tuple.first, uncurry prepend )
 
@@ -63,14 +63,14 @@ decodeListOfEncodedProjects =
 
 
 init list seed =
-    ProjectStoreModel seed list |> ProjectStore
+    ProjectStore seed list
 
 
 generator =
     decodeListOfEncodedProjects >> init >> Random.mapWithIndependentSeed
 
 
-createAndAdd : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
+createAndAdd : ProjectName -> Time -> Model -> ( Project, Model )
 createAndAdd projectName now =
     generate (Project.generator projectName now)
         >> addFromTuple

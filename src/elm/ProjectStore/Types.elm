@@ -8,11 +8,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 
 
-type ProjectStore
-    = ProjectStoreModel
-
-
-type alias ProjectStoreModel =
+type alias ProjectStore =
     { seed : Seed, list : List Project }
 
 

@@ -8,7 +8,7 @@ cache:
 #  directories:
 #    - elm-stuff/packages
 
-script: npm build
+script: npm travis
 
 deploy:
   provider: pages

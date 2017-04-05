@@ -3,7 +3,7 @@ port module Update exposing (..)
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import Ext.Return as Return
-import Model.EditModel exposing (getMaybeEditTodoModel)
+import Model.EditModel as Model
 import Model.Internal as Model
 import Model.RunningTodo as Model
 import Model.TodoStore as Model
@@ -15,7 +15,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Json.Encode as E
 import Keyboard.Extra exposing (Key(Enter, Escape))
-import Model as Model
+import Model
 import Routes
 import String.Extra
 import View exposing (appView)
@@ -94,14 +94,14 @@ update msg =
                             identity
 
                 StartEditingTodo todo ->
-                    Return.map (Model.EditModel.setEditModelToEditTodo todo)
+                    Return.map (Model.setEditModelToEditTodo todo)
                         >> autoFocusPaperInputCmd
 
                 EditTodoTextChanged editTodoModel text ->
-                    Return.map (Model.EditModel.updateEditTodoText text editTodoModel)
+                    Return.map (Model.updateEditTodoText text editTodoModel)
 
                 EditTodoProjectNameChanged editTodoModel projectName ->
-                    Return.map (Model.EditModel.updateEditTodoProjectName projectName editTodoModel)
+                    Return.map (Model.updateEditTodoProjectName projectName editTodoModel)
 
                 EditTodoKeyUp editTodoModel { key, isShiftDown } ->
                     case key of
@@ -182,11 +182,11 @@ port stopAlarm : () -> Cmd msg
 
 
 deactivateEditingMode =
-    Return.map (Model.EditModel.deactivateEditingMode)
+    Return.map (Model.deactivateEditingMode)
 
 
 activateEditNewTodoMode text =
-    Return.map (Model.EditModel.activateNewTodoMode text)
+    Return.map (Model.activateNewTodoMode text)
 
 
 onEditTodoEnterPressed : EditTodoModel -> Bool -> ReturnF

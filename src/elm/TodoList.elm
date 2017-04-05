@@ -32,7 +32,7 @@ decodeList =
                     Err x ->
                         let
                             _ =
-                                Debug.log "Error while decoding todo"
+                                Debug.log "Error while decoding todo" x
                         in
                             Nothing
             )

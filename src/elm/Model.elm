@@ -42,7 +42,7 @@ init now encodedTodoList encodedProjectStore =
             Random.step (ProjectStore.generator encodedProjectStore) initialSeed
 
         ( todoStore, newSeed2 ) =
-            Random.step (TodoList.generator encodedProjectStore) newSeed
+            Random.step (TodoList.generator encodedTodoList) newSeed
     in
         { now = now
         , todoList = todoStore

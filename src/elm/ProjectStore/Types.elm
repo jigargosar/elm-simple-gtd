@@ -9,7 +9,7 @@ import Ext.Function.Infix exposing (..)
 
 
 type ProjectStore
-    = ProjectStore ProjectStoreModel
+    = ProjectStoreModel
 
 
 type alias ProjectStoreModel =

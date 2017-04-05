@@ -93,22 +93,14 @@ addNewIfDoesNotExist projectName now m =
 {--CODE_GEN_START--}
 
 
-withModel f (ProjectStore model) =
-    f model |> ProjectStore
-
-
-get f (ProjectStore model) =
-    f model
-
-
 getSeed : Model -> Seed
 getSeed =
-    get (.seed)
+    (.seed)
 
 
 setSeed : Seed -> ModelF
-setSeed seed =
-    withModel (\model -> { model | seed = seed })
+setSeed seed model =
+    { model | seed = seed }
 
 
 updateSeed : (Model -> Seed) -> ModelF
@@ -118,12 +110,12 @@ updateSeed updater model =
 
 getList : Model -> List Project
 getList =
-    get (.list)
+    (.list)
 
 
 setList : List Project -> ModelF
-setList list =
-    withModel (\model -> { model | list = list })
+setList list model =
+    { model | list = list }
 
 
 updateList : (Model -> List Project) -> ModelF

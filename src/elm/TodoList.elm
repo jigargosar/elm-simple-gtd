@@ -1,6 +1,7 @@
 module TodoList exposing (..)
 
-import Random.Pcg as Random
+import PouchDB
+import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import Todo
 import TodoList.Types exposing (..)
@@ -15,11 +16,12 @@ import List
 import List.Extra as List
 import Dict
 import Dict.Extra as Dict
-import Todo.Types exposing (Todo, TodoId)
+import Todo.Types exposing (EncodedTodo, Todo, TodoId)
+import Ext.Random as Random
 
 
-decodeTodoList : EncodedTodoList -> TodoList
-decodeTodoList =
+decodeList : List EncodedTodo -> List Todo
+decodeList =
     List.map (D.decodeValue Todo.todoDecoder)
         >> List.filterMap
             (\result ->
@@ -36,19 +38,25 @@ decodeTodoList =
             )
 
 
-findById id =
-    List.find (Todo.hasId id)
-
-
 maybeTuple2With f model =
     f model ?|> (,) # model
 
 
-addCopyOfTodoGenerator : Todo -> Time -> TodoList -> Random.Generator ( Todo, TodoList )
-addCopyOfTodoGenerator todo now todoList =
-    Random.map (\todo -> ( todo, todo :: todoList )) (Todo.copyGenerator now todo)
+insertCopy : Todo -> Time -> TodoStore -> TodoStore
+insertCopy todo now =
+    PouchDB.insert (Todo.copyGenerator now todo)
 
 
-addNewTodoGenerator : String -> Time -> TodoList -> Random.Generator ( Todo, TodoList )
-addNewTodoGenerator text now todoList =
-    Random.map (\todo -> ( todo, todo :: todoList )) (Todo.todoGenerator now text)
+insertNew : String -> Time -> TodoStore -> TodoStore
+insertNew text now =
+    PouchDB.insert (Todo.todoGenerator now text)
+
+
+init : List Todo -> Seed -> TodoStore
+init =
+    PouchDB.init "todo-db" Todo.encode
+
+
+generator : List EncodedTodo -> Random.Generator TodoStore
+generator =
+    decodeList >> init >> Random.mapWithIndependentSeed

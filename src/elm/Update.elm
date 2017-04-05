@@ -68,8 +68,8 @@ update msg =
                     updateTodo [ Todo.SetContext todoContext ] todo
 
                 Create text ->
-                    Return.andThenModelWith Model.getNow
-                        (\now -> Model.addNewTodo text now >> persistTodoFromTuple)
+                    Return.mapModelWith Model.getNow
+                        (\now -> Model.addNewTodo text now)
 
                 AddTodoClicked ->
                     activateEditNewTodoMode ""
@@ -143,7 +143,6 @@ updateTodoById actions todoId =
 updateTodo : List TodoUpdateAction -> Todo -> ReturnF
 updateTodo actions todo =
     Return.map (Model.updateTodo actions todo)
-        >> persistTodoById (Todo.getId todo)
 
 
 onMsgList : List Msg -> ReturnF
@@ -196,14 +195,14 @@ copyAndEditTodo : Todo -> ReturnF
 copyAndEditTodo todo =
     Return.andThenModelWith Model.getNow
         (\now ->
-            Model.addCopyOfTodo todo now >> persistTodoAndStartEditing
+            Model.addCopyOfTodo todo now >> update (Msg.StartEditingTodo todo)
         )
 
 
 updateTodoFromEditTodoModel : EditTodoModel -> ReturnF
 updateTodoFromEditTodoModel { projectName, todoText, todoId } =
     Return.andThen
-        (applyUncurry2 ( Model.findProjectByName projectName, Return.singleton )
+        (apply2Uncurry ( Model.findProjectByName projectName, Return.singleton )
             (\maybeProject ->
                 updateTodoById
                     [ Todo.SetText todoText
@@ -231,26 +230,3 @@ stopRunningTodo =
 withNow : (Time -> Msg) -> ReturnF
 withNow msg =
     Task.perform (msg) Time.now |> Return.command
-
-
-persistTodoAndStartEditing : ( Todo, Model ) -> Return
-persistTodoAndStartEditing ( todo, model ) =
-    persistTodoFromTuple ( todo, model )
-        |> andThenUpdate (Msg.StartEditingTodo todo)
-
-
-persistTodoFromTuple : ( Todo, Model ) -> Return
-persistTodoFromTuple ( todo, model ) =
-    ( model, upsertTodoCmd todo )
-
-
-persistMaybeTodoCmd =
-    Maybe.unwrap Cmd.none upsertTodoCmd
-
-
-upsertTodoCmd todo =
-    PouchDB.upsert "todo-db" Todo.encodeTodo todo
-
-
-persistTodoById todoId =
-    Return.maybeEffect (Model.findTodoById todoId >>? upsertTodoCmd)

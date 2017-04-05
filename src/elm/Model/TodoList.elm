@@ -6,6 +6,7 @@ import Ext.Random
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
+import PouchDB
 import Project
 import Random.Pcg
 import Time exposing (Time)
@@ -22,13 +23,13 @@ import Model.Internal as Model
 import Types exposing (..)
 
 
-getTodoList : Model -> TodoList
+getTodoList : Model -> TodoStore
 getTodoList =
     (.todoList)
 
 
 getFilteredTodoList =
-    apply2 ( getCurrentTodoListFilter, getTodoList )
+    apply2 ( getCurrentTodoListFilter, getTodoList >> PouchDB.asList )
         >> uncurry List.filter
         >> List.sortBy (Todo.getModifiedAt >> negate)
 
@@ -50,20 +51,21 @@ getCurrentTodoListFilter model =
 
 findTodoById : TodoId -> Model -> Maybe Todo
 findTodoById id =
-    getTodoList >> TodoList.findById id
+    getTodoList >> PouchDB.findById id
 
 
 findTodoEqualById todo =
-    getTodoList >> List.find (Todo.equalById todo)
+    getTodoList >> PouchDB.asList >> List.find (Todo.equalById todo)
 
 
 type alias TodoContextViewModel =
-    { todoContext : TodoContext, name : String, todoList : TodoList, count : Int, isEmpty : Bool }
+    { todoContext : TodoContext, name : String, todoList : List Todo, count : Int, isEmpty : Bool }
 
 
 groupByTodoContextViewModel : Model -> List TodoContextViewModel
 groupByTodoContextViewModel =
     getTodoList
+        >> PouchDB.asList
         >> Todo.rejectAnyPass [ Todo.getDeleted, Todo.isDone ]
         >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
         >> (\dict ->
@@ -72,7 +74,7 @@ groupByTodoContextViewModel =
            )
 
 
-toViewModel : Dict String TodoList -> TodoContext -> TodoContextViewModel
+toViewModel : Dict String (List Todo) -> TodoContext -> TodoContextViewModel
 toViewModel dict =
     apply3
         ( identity
@@ -90,9 +92,12 @@ toViewModelHelp ( todoContext, name, list ) =
 
 updateTodo : List TodoUpdateAction -> Todo -> ModelF
 updateTodo action todo =
-    applyWith Model.getNow
-        ((Todo.update action # todo)
-            >> (replaceTodoIfEqualById >> Model.updateTodoList)
+    apply3Uncurry ( Model.getNow, Model.getTodoList, identity )
+        (\now todoList model ->
+            todo
+                |> Todo.update action now
+                >> (PouchDB.update # todoList)
+                >> (Model.setTodoList # model)
         )
 
 
@@ -100,18 +105,13 @@ replaceTodoIfEqualById todo =
     List.replaceIf (Todo.equalById todo) todo
 
 
-addCopyOfTodo : Todo -> Time -> Model -> ( Todo, Model )
+addCopyOfTodo : Todo -> Time -> ModelF
 addCopyOfTodo todo now =
-    Model.generate (getTodoList >> TodoList.addCopyOfTodoGenerator todo now)
-        >> setTodoListFromTuple
+    applyWith (getTodoList)
+        (TodoList.insertCopy todo now >> Model.setTodoList)
 
 
-addNewTodo : String -> Time -> Model -> ( Todo, Model )
+addNewTodo : String -> Time -> ModelF
 addNewTodo text now =
-    Model.generate (getTodoList >> TodoList.addNewTodoGenerator text now)
-        >> setTodoListFromTuple
-
-
-setTodoListFromTuple : ( ( Todo, TodoList ), Model ) -> ( Todo, Model )
-setTodoListFromTuple ( ( todo, todoList ), model ) =
-    ( todo, { model | todoList = todoList } )
+    applyWith (getTodoList)
+        (TodoList.insertNew text now >> Model.setTodoList)

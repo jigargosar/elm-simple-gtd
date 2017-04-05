@@ -135,8 +135,8 @@ copyTodo createdAt todo id =
     { todo | id = id, rev = PouchDB.defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
 
 
-encodeTodo : Todo -> EncodedTodo
-encodeTodo todo =
+encode : Todo -> EncodedTodo
+encode todo =
     E.object
         [ "_id" => E.string (getId todo)
         , "_rev" => E.string (getRev todo)

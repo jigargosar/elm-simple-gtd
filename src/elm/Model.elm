@@ -19,7 +19,6 @@ import Time exposing (Time)
 import TodoList
 import Todo.Types exposing (..)
 import Todo
-import TodoList.Types exposing (EncodedTodoList)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -33,7 +32,7 @@ generate generatorFn m =
         |> Tuple.mapSecond (setSeed # m)
 
 
-init : Time -> EncodedTodoList -> List EncodedProject -> Model
+init : Time -> List EncodedTodo -> List EncodedProject -> Model
 init now encodedTodoList encodedProjectStore =
     let
         initialSeed =
@@ -41,9 +40,12 @@ init now encodedTodoList encodedProjectStore =
 
         ( projectStore, newSeed ) =
             Random.step (ProjectStore.generator encodedProjectStore) initialSeed
+
+        ( todoStore, newSeed2 ) =
+            Random.step (TodoList.generator encodedProjectStore) newSeed
     in
         { now = now
-        , todoList = TodoList.decodeTodoList encodedTodoList
+        , todoList = todoStore
         , editModel = NotEditing
         , mainViewType = AllByTodoContextView
         , seed = initialSeed

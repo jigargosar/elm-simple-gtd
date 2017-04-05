@@ -35,7 +35,7 @@ import Update
 
 type alias Flags =
     { now : Time
-    , encodedTodoList : EncodedTodoList
+    , encodedTodoList : List EncodedTodo
     , encodedProjectList : List EncodedProject
     }
 

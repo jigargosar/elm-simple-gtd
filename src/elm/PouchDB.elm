@@ -77,15 +77,15 @@ init name encoder list seed =
 
 prepend : Document x -> Store x -> Store x
 prepend model =
-    updateList (getList >> (::) model)
+    updateList (asList >> (::) model)
 
 
 map fn =
-    getList >> List.map fn
+    asList >> List.map fn
 
 
 findBy predicate =
-    getList >> List.find predicate
+    asList >> List.find predicate
 
 
 findById id =
@@ -100,6 +100,16 @@ addFromTuple =
 insert : Random.Generator (Document x) -> Store x -> Store x
 insert =
     generate >>> (\( d, s ) -> prepend { d | dirty = True } s)
+
+
+update : Document x -> Store x -> Store x
+update doc s =
+    let
+        newDoc =
+            { doc | dirty = True }
+    in
+        List.replaceIf (\d2 -> d2.id == doc.id) (newDoc) s.list
+            |> (setList # s)
 
 
 generate : Random.Generator (Document x) -> Store x -> ( Document x, Store x )
@@ -135,8 +145,8 @@ updateSeed updater model =
     setSeed (updater model) model
 
 
-getList : Store x -> List (Document x)
-getList =
+asList : Store x -> List (Document x)
+asList =
     (.list)
 
 

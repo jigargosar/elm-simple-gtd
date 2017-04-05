@@ -40,8 +40,12 @@ type alias TodoRecord =
     }
 
 
+type alias OtherFields =
+    PouchDB.HasTimeStamps TodoRecord
+
+
 type alias Todo =
-    PouchDB.Document (PouchDB.HasTimeStamps TodoRecord)
+    PouchDB.Document OtherFields
 
 
 type alias ViewModel =

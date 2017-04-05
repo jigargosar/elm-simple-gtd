@@ -10,10 +10,6 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 
 
-_ =
-    1
-
-
 type alias Tracker req res msg =
     { lastId : Int, out : Request req -> msg, handlers : Dict Int (Response res -> ()) }
 

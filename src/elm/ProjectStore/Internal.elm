@@ -44,8 +44,8 @@ findById id =
     findBy (Project.idEquals id)
 
 
-decodeListOfEncodedProjects : List EncodedProject -> List Project
-decodeListOfEncodedProjects =
+decodeList : List EncodedProject -> List Project
+decodeList =
     List.map (D.decodeValue Project.decoder)
         >> List.filterMap
             (\result ->
@@ -67,7 +67,7 @@ init list seed =
 
 
 generator =
-    decodeListOfEncodedProjects >> init >> Random.mapWithIndependentSeed
+    decodeList >> init >> Random.mapWithIndependentSeed
 
 
 createAndAdd : ProjectName -> Time -> Model -> ( Project, Model )

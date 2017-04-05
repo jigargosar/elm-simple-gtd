@@ -207,17 +207,6 @@ updateTodoFromEditTodoModel { projectName, todoText, todoId } =
         )
 
 
-
---    Return.with (Model.findProjectByName projectName)
---        (\maybeProject ->
---            updateTodoById
---                [ Todo.SetText todoText
---                , Todo.SetProjectId (maybeProject ?|> Project.getId)
---                ]
---                todoId
---        )
-
-
 insertProjectIfNotExist : ProjectName -> ReturnF
 insertProjectIfNotExist projectName =
     Return.map

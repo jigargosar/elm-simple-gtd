@@ -12,7 +12,7 @@ import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model
 import Routes
 import Model.Types exposing (..)
-import TodoStore.Types exposing (..)
+
 import Todo.Types exposing (..)
 import View exposing (appView)
 import Navigation exposing (Location)

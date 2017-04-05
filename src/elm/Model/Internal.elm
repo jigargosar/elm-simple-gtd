@@ -8,7 +8,7 @@ import Ext.Function exposing (..)
 import Model.Types exposing (..)
 import RunningTodo exposing (RunningTodo)
 import Time exposing (Time)
-import TodoStore.Types exposing (TodoStore)
+
 
 
 getSeed : Model -> Seed

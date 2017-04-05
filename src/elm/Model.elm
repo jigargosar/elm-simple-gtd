@@ -19,7 +19,6 @@ import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import Todo.Types exposing (..)
 import Todo
-import TodoStore.Types exposing (TodoStore)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2

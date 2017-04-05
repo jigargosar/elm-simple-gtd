@@ -1,15 +1,19 @@
 module Model.Types exposing (..)
 
+import PouchDB
 import Project exposing (ProjectId, ProjectName)
 import ProjectStore.Types exposing (ProjectStore)
 import Random.Pcg exposing (Seed)
 import RunningTodo exposing (RunningTodo)
-import TodoStore.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Time exposing (Time)
 import Todo.Types exposing (..)
+
+
+type alias TodoStore =
+    PouchDB.Store Todo.Types.OtherFields
 
 
 type alias EditTodoModel =

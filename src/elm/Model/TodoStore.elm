@@ -11,8 +11,6 @@ import Project
 import Random.Pcg as Random
 import Time exposing (Time)
 import Todo
-import TodoStore
-import TodoStore.Types exposing (..)
 import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)

@@ -65,7 +65,7 @@ findProjectByName projectName =
 
 getMaybeProjectNameOfTodo : Todo -> Model -> Maybe ProjectName
 getMaybeProjectNameOfTodo todo model =
-    Todo.getMaybeProjectId todo ?|> ProjectStore.findNameById # (getProjectStore model)
+    Todo.getMaybeProjectId todo ?+> ProjectStore.findNameById # (getProjectStore model)
 
 
 type alias Lens small big =

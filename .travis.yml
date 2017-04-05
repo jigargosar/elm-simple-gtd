@@ -5,6 +5,9 @@ node_js:
 cache:
   yarn: true
 
+#  directories:
+#    - elm-stuff/packages
+
 script: npm build
 
 deploy:

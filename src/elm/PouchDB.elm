@@ -99,12 +99,10 @@ addFromTuple =
 
 
 insert : (Id -> Document x) -> Store x -> Store x
-insert constructor s=
+insert constructor s =
     Random.mapWithIdGenerator constructor
-
-            |> generate # s
-
-            |>  (\( d, s ) -> prepend { d | dirty = True } s)
+        |> (generate # s)
+        |> (\( d, s ) -> prepend { d | dirty = True } s)
 
 
 update : Document x -> Store x -> Store x

@@ -27,7 +27,7 @@ findByName projectName =
     PouchDB.findBy (Project.nameEquals (String.trim projectName))
 
 
-addNewIfDoesNotExist projectName now m =
+insertIfNotExistByName projectName now m =
     if (String.Extra.isBlank projectName) then
         m
     else

@@ -39,4 +39,4 @@ findByName =
 
 
 insertProjectIfNotExist =
-    Internal.addNewIfDoesNotExist
+    Internal.insertIfNotExistByName

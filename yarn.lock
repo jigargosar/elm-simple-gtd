@@ -1445,7 +1445,7 @@ elm-webpack-loader@4.2.0:
     node-elm-compiler "^4.2.1"
     yargs "^6.5.0"
 
-elm@^0.18.0:
+elm@0.18.0, elm@^0.18.0:
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/elm/-/elm-0.18.0.tgz#919b8309cd939dfe2ff9d252d961b6c89509b970"
   dependencies:

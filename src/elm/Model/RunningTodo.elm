@@ -3,7 +3,7 @@ module Model.RunningTodo exposing (..)
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model
-import Model.TodoList
+import Model.TodoStore
 import RunningTodo exposing (RunningTodo)
 import Time exposing (Time)
 import Todo
@@ -26,7 +26,7 @@ getRunningTodoViewModel m =
 
 
 getMaybeRunningTodo m =
-    getRunningTodoId m ?+> (Model.TodoList.findTodoById # m)
+    getRunningTodoId m ?+> (Model.TodoStore.findTodoById # m)
 
 
 type alias RunningTodoViewModel =

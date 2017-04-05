@@ -1,4 +1,4 @@
-module Model.TodoList exposing (..)
+module Model.TodoStore exposing (..)
 
 import Dict exposing (Dict)
 import Dict.Extra
@@ -11,8 +11,8 @@ import Project
 import Random.Pcg as Random
 import Time exposing (Time)
 import Todo
-import TodoList
-import TodoList.Types exposing (..)
+import TodoStore
+import TodoStore.Types exposing (..)
 import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -88,11 +88,11 @@ toViewModelHelp ( todoContext, name, list ) =
 updateTodo : List TodoUpdateAction -> Todo -> ModelF
 updateTodo action todo =
     apply3Uncurry ( Model.getNow, Model.getTodoList, identity )
-        (\now todoList model ->
+        (\now todoStor model ->
             todo
                 |> Todo.update action now
-                >> (PouchDB.update # todoList)
-                >> (Model.setTodoList # model)
+                >> (PouchDB.update # todoStor)
+                >> (Model.setTodoStore # model)
         )
 
 
@@ -103,10 +103,10 @@ replaceTodoIfEqualById todo =
 addCopyOfTodo : Todo -> Time -> ModelF
 addCopyOfTodo todo now =
     applyWith (Model.getTodoList)
-        (PouchDB.insert (Todo.copyTodo now todo) >> Model.setTodoList)
+        (PouchDB.insert (Todo.copyTodo now todo) >> Model.setTodoStore)
 
 
 addNewTodo : String -> Time -> ModelF
 addNewTodo text now =
     applyWith (Model.getTodoList)
-        (PouchDB.insert (Todo.init now text) >> Model.setTodoList)
+        (PouchDB.insert (Todo.init now text) >> Model.setTodoStore)

@@ -6,7 +6,7 @@ import Ext.Return as Return
 import Model.EditModel exposing (getMaybeEditTodoModel)
 import Model.Internal as Model
 import Model.RunningTodo as Model
-import Model.TodoList as Model
+import Model.TodoStore as Model
 import Project exposing (Project, ProjectId, ProjectName)
 import Ext.Random as Random
 import ProjectStore
@@ -136,7 +136,7 @@ persist =
                     (\m ->
                         Model.getTodoList m
                             |> PouchDB.persist
-                            |> Tuple.mapFirst (Model.setTodoList # m)
+                            |> Tuple.mapFirst (Model.setTodoStore # m)
                     )
         )
 

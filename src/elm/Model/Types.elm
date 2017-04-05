@@ -4,7 +4,7 @@ import Project exposing (ProjectId, ProjectName)
 import ProjectStore.Types exposing (ProjectStore)
 import Random.Pcg exposing (Seed)
 import RunningTodo exposing (RunningTodo)
-import TodoList.Types exposing (..)
+import TodoStore.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -37,7 +37,7 @@ type MainViewType
 
 type alias Model =
     { now : Time
-    , todoList : TodoStore
+    , todoStor : TodoStore
     , editModel : EditModel
     , mainViewType : MainViewType
     , seed : Seed

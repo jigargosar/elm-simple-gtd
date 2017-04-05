@@ -6,7 +6,7 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
-import Model.TodoList
+import Model.TodoStore
 import Msg exposing (Msg(SetMainViewType))
 import View.TodoList exposing (groupByTodoContext)
 import Maybe.Extra as Maybe
@@ -68,7 +68,7 @@ doneItemView m =
 
 
 todoContextsMenuItems =
-    Model.TodoList.groupByTodoContextViewModel
+    Model.TodoStore.groupByTodoContextViewModel
         >> List.map contextMenuItem
 
 

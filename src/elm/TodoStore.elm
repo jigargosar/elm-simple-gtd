@@ -1,10 +1,10 @@
-module TodoList exposing (..)
+module TodoStore exposing (..)
 
 import PouchDB
 import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import Todo
-import TodoList.Types exposing (..)
+import TodoStore.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)

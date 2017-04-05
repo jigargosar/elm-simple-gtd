@@ -9,7 +9,7 @@ import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.Internal as Model
 import PouchDB
 import ProjectStore
-import Model.TodoList exposing (TodoContextViewModel)
+import Model.TodoStore exposing (TodoContextViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
 import Project

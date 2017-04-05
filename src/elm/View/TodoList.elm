@@ -8,7 +8,7 @@ import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.EditModel
 import Model.Internal as Model
-import Model.TodoList exposing (TodoContextViewModel)
+import Model.TodoStore exposing (TodoContextViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
 import Project exposing (ProjectId, ProjectName)
@@ -105,7 +105,7 @@ createEditTodoViewModel vc etm =
 
 filteredTodoListView : Model -> Html Msg
 filteredTodoListView =
-    apply2 ( todoViewFromModel, Model.TodoList.getFilteredTodoList )
+    apply2 ( todoViewFromModel, Model.TodoStore.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
                 Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
            )
@@ -113,7 +113,7 @@ filteredTodoListView =
 
 groupByTodoContext : Model -> Html Msg
 groupByTodoContext =
-    apply2 ( todoViewFromModel >> maybeContextView, Model.TodoList.groupByTodoContextViewModel )
+    apply2 ( todoViewFromModel >> maybeContextView, Model.TodoStore.groupByTodoContextViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
 

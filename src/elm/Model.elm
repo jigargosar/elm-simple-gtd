@@ -19,7 +19,7 @@ import Random.Pcg as Random exposing (Seed)
 import Time exposing (Time)
 import Todo.Types exposing (..)
 import Todo
-import TodoList.Types exposing (TodoStore)
+import TodoStore.Types exposing (TodoStore)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -46,7 +46,7 @@ init now encodedTodoList encodedProjectStore =
             Random.step (todoStoreGenerator encodedTodoList) newSeed
     in
         { now = now
-        , todoList = todoStore
+        , todoStor = todoStore
         , editModel = NotEditing
         , mainViewType = AllByTodoContextView
         , seed = initialSeed

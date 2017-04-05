@@ -1,4 +1,4 @@
-module TodoList.Types exposing (..)
+module TodoStore.Types exposing (..)
 
 import PouchDB
 import Todo.Types exposing (EncodedTodo, Todo)

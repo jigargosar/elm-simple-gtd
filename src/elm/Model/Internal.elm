@@ -8,7 +8,7 @@ import Ext.Function exposing (..)
 import Model.Types exposing (..)
 import RunningTodo exposing (RunningTodo)
 import Time exposing (Time)
-import TodoList.Types exposing (TodoStore)
+import TodoStore.Types exposing (TodoStore)
 
 
 getSeed : Model -> Seed
@@ -28,27 +28,17 @@ updateSeed updater model =
 
 getTodoList : Model -> TodoStore
 getTodoList =
-    (.todoList)
+    (.todoStor)
 
 
-setTodoList : TodoStore -> ModelF
-setTodoList todoList model =
-    { model | todoList = todoList }
+setTodoStore : TodoStore -> ModelF
+setTodoStore todoStor model =
+    { model | todoStor = todoStor }
 
 
-updateTodoList : (TodoStore -> TodoStore) -> ModelF
-updateTodoList updater model =
-    { model | todoList = getTodoList model |> updater }
-
-
-
---updateTodoListTuple2 : (TodoList -> ( x, TodoList )) -> Model -> ( x, Model )
---updateTodoListTuple2 updater model =
---    let
---        ( x, todoList ) =
---            getTodoList model |> updater
---    in
---        ( x, { model | todoList = todoList } )
+updateTodoStore : (TodoStore -> TodoStore) -> ModelF
+updateTodoStore updater model =
+    { model | todoStor = getTodoList model |> updater }
 
 
 getEditModel : Model -> EditModel

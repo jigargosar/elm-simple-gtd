@@ -42,10 +42,5 @@ findByName =
     Internal.findByName
 
 
-addNewProject : ProjectName -> Time -> ProjectStore -> ( Project, ProjectStore )
-addNewProject =
-    Internal.createAndAdd
-
-
 insertProjectIfNotExist =
     Internal.addNewIfDoesNotExist

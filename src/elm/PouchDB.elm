@@ -123,7 +123,11 @@ generate generator m =
         |> Tuple.mapSecond (setSeed # m)
 
 
-createTracker : Tracker {} {} msg
+type alias TT msg =
+    Tracker {} {} msg
+
+
+createTracker : TT msg
 createTracker =
     Port.init (\req -> ping req)
 
@@ -132,3 +136,12 @@ port ping : { portRequestId : Int } -> Cmd msg
 
 
 port pong : ({ portRequestId : Int } -> msg) -> Sub msg
+
+
+tt =
+    createTracker
+
+
+foo : ( TT msg, Cmd msg )
+foo =
+    Port.call { portRequestId = 0 } (\res -> ()) tt

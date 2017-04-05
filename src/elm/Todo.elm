@@ -191,7 +191,7 @@ getId =
 
 
 markDone =
-    update [ SetDone True ]
+    Internal.update (SetDone True)
 
 
 getMaybeProjectId : Model -> Maybe ProjectId

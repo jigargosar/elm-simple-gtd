@@ -56,7 +56,7 @@ update msg =
 
             MarkRunningTodoDone ->
                 Return.withMaybe (Model.getMaybeRunningTodo)
-                    (\todo -> updateTodo [ Todo.SetDone True ] todo >> stopRunningTodo)
+                    (\todo -> updateTodo [] (Todo.markDone todo) >> stopRunningTodo)
 
             ToggleTodoDone todo ->
                 updateTodo [ Todo.ToggleDone ] todo

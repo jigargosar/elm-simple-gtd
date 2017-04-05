@@ -10,10 +10,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 
 
-port onPouchDBBulkDocksResponse : (D.Value -> msg) -> Sub msg
-
-
-
+--port onPouchDBBulkDocksResponse : (D.Value -> msg) -> Sub msg
 -- COMMANDS
 --port pouchDBBulkDocks : ( String, List D.Value ) -> Cmd msg
 

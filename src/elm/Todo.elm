@@ -190,6 +190,10 @@ getId =
     (.id)
 
 
+markDone =
+    update [ SetDone True ]
+
+
 getMaybeProjectId : Model -> Maybe ProjectId
 getMaybeProjectId =
     (.projectId)

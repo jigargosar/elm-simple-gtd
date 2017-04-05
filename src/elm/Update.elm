@@ -29,7 +29,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
 import Todo as Todo
-import Todo.Types as Todo exposing (Todo)
+import Todo.Types as Todo exposing (Todo, TodoUpdateAction)
 import Tuple2
 import Html
 import Msg exposing (..)
@@ -56,9 +56,7 @@ update msg =
 
             MarkRunningTodoDone ->
                 Return.withMaybe (Model.getMaybeRunningTodo)
-                    (updateTodo [ Todo.SetDone True ]
-                        >>> stopRunningTodo
-                    )
+                    (\todo -> updateTodo [] (Todo.markDone todo) >> stopRunningTodo)
 
             ToggleTodoDone todo ->
                 updateTodo [ Todo.ToggleDone ] todo
@@ -131,6 +129,7 @@ updateTodoById actions todoId =
         (updateTodo actions)
 
 
+updateTodo : TodoUpdateAction -> Todo -> ReturnF
 updateTodo actions todo =
     Return.map (Model.updateTodo actions todo)
         >> persistTodoById (Todo.getId todo)

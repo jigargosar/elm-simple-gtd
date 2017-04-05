@@ -60,11 +60,19 @@ timeStampFieldsDecoder =
 
 
 type alias Store x =
-    { seed : Seed, list : List (Document x) }
+    { seed : Seed
+    , list : List (Document x)
+    , encoder : Document x -> E.Value
+    , name : String
+    }
 
 
-init list seed =
-    { seed = seed, list = list }
+init name encoder list seed =
+    { seed = seed
+    , list = list
+    , name = name
+    , encoder = encoder
+    }
 
 
 prepend : Document x -> Store x -> Store x
@@ -100,12 +108,19 @@ generate generator m =
         |> Tuple.mapSecond (setSeed # m)
 
 
-persist m =
+persist s =
     let
-        _ =
-            getList m
+        dirtyList =
+            s.list
+                |> List.filter .dirty
+
+        ns =
+            s.list .|> (\d -> { d | dirty = False }) |> setList # s
+
+        cmds =
+            dirtyList .|> upsert s.name s.encoder
     in
-        m ! []
+        ns ! cmds
 
 
 getSeed =

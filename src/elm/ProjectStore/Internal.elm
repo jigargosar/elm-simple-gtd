@@ -38,7 +38,7 @@ decodeList =
 
 init : List Project -> Seed -> ProjectStore
 init =
-    PouchDB.init
+    PouchDB.init "project-db" Project.encode
 
 
 generator : List EncodedProject -> Random.Generator ProjectStore

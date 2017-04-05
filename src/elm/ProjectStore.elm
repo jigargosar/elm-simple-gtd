@@ -2,6 +2,7 @@ module ProjectStore exposing (..)
 
 import Dict
 import Ext.Random as Random
+import PouchDB
 import Project exposing (EncodedProject, Project, ProjectName)
 import ProjectStore.Types exposing (..)
 import ProjectStore.Internal as Internal exposing (..)
@@ -22,19 +23,19 @@ generator =
 
 
 asList =
-    Internal.getList
+    PouchDB.getList
 
 
 getEncodedProjectNames =
-    map (Project.getName >> E.string) >> E.list
+    PouchDB.map (Project.getName >> E.string) >> E.list
 
 
 getProjectIdToNameDict =
-    map (apply2 ( Project.getId, Project.getName )) >> Dict.fromList
+    PouchDB.map (apply2 ( Project.getId, Project.getName )) >> Dict.fromList
 
 
 findNameById id =
-    findById id >> Maybe.map Project.getName
+    PouchDB.findById id >> Maybe.map Project.getName
 
 
 findByName =

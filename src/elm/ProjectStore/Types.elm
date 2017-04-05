@@ -1,5 +1,6 @@
 module ProjectStore.Types exposing (..)
 
+import PouchDB
 import Project exposing (EncodedProject, Project)
 import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
@@ -9,7 +10,7 @@ import Ext.Function.Infix exposing (..)
 
 
 type alias ProjectStore =
-    { seed : Seed, list : List Project }
+    PouchDB.Store Project
 
 
 type alias Model =

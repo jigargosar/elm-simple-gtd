@@ -210,10 +210,9 @@ updateTodoFromEditTodoModel { projectName, todoText, todoId } =
 insertProjectIfNotExist : ProjectName -> ReturnF
 insertProjectIfNotExist projectName =
     Return.map
-        (Model.update Model.projectStore
-            (applyUncurry2 ( Model.getNow, .get Model.projectStore )
-                (ProjectStore.insertProjectIfNotExist projectName)
-            )
+        (Model.update2 Model.projectStore
+            Model.now
+            (ProjectStore.insertProjectIfNotExist projectName)
         )
         >> persistProjectWithName projectName
 

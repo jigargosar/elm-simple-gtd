@@ -94,10 +94,9 @@ updateTodo action todo =
         )
 
 
-updateTodoById actions todoId m =
-    findTodoById todoId m
-        ?|> (updateTodo actions # m)
-        ?= m
+updateTodoById actions todoId =
+    applyMaybeWith (findTodoById todoId)
+        (updateTodo actions)
 
 
 replaceTodoIfEqualById todo =

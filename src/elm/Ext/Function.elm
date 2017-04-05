@@ -1,6 +1,7 @@
 module Ext.Function exposing (..)
 
 import Toolkit.Helpers exposing (..)
+import Toolkit.Operators exposing (..)
 
 
 apply a f =
@@ -9,6 +10,10 @@ apply a f =
 
 applyWith f1 f2 model =
     f2 (f1 model) model
+
+
+applyMaybeWith f1 f2 model =
+    f1 model ?|> f2 # model ?= model
 
 
 apply2Uncurry f1 f2 model =

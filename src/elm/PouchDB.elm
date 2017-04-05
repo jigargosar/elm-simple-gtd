@@ -129,3 +129,6 @@ createTracker =
 
 
 port ping : { portRequestId : Int } -> Cmd msg
+
+
+port pong : ({ portRequestId : Int } -> msg) -> Sub msg

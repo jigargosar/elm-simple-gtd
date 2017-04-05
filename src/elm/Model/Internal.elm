@@ -66,8 +66,8 @@ updateEditModel updater model =
     setEditModel (updater model) model
 
 
-getMaybeRunningTodo : Model -> Maybe RunningTodo
-getMaybeRunningTodo =
+getMaybeRunningTodoInfo : Model -> Maybe RunningTodo
+getMaybeRunningTodoInfo =
     (.maybeRunningTodo)
 
 

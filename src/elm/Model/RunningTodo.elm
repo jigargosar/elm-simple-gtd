@@ -21,7 +21,7 @@ getRunningTodoViewModel m =
         maybeTodo =
             getMaybeRunningTodo m
     in
-        maybe2Tuple ( Model.getMaybeRunningTodo m, maybeTodo )
+        maybe2Tuple ( Model.getMaybeRunningTodoInfo m, maybeTodo )
             ?|> (toRunningTodoVM # m)
 
 
@@ -34,7 +34,7 @@ type alias RunningTodoViewModel =
 
 
 getRunningTodoId =
-    Model.getMaybeRunningTodo >>? RunningTodo.getId
+    Model.getMaybeRunningTodoInfo >>? RunningTodo.getId
 
 
 toRunningTodoVM : ( RunningTodo, Todo ) -> Model -> RunningTodoViewModel
@@ -60,7 +60,7 @@ startTodo todo =
 
 shouldBeep : Model -> Bool
 shouldBeep =
-    apply2 ( Model.getNow >> Just, Model.getMaybeRunningTodo )
+    apply2 ( Model.getNow >> Just, Model.getMaybeRunningTodoInfo )
         >> maybe2Tuple
         >>? uncurry RunningTodo.shouldBeep
         >>?= False
@@ -69,6 +69,6 @@ shouldBeep =
 setLastBeepedAt : Time -> ModelF
 setLastBeepedAt now =
     Model.updateMaybeRunningTodo
-        (Model.getMaybeRunningTodo
+        (Model.getMaybeRunningTodoInfo
             ?>> RunningTodo.setLastBeepedAt now
         )

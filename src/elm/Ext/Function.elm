@@ -12,6 +12,10 @@ applyWith f1 f2 model =
     f2 (f1 model) model
 
 
+apply2With ( f1, f2 ) f model =
+    apply3Uncurry ( f1, f2, identity ) f model
+
+
 applyMaybeWith f1 f2 model =
     f1 model ?|> f2 # model ?= model
 

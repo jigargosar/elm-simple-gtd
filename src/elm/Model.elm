@@ -87,5 +87,5 @@ projectStore =
     { get = .projectStore, set = (\s b -> { b | projectStore = s }) }
 
 
-update smallF lens big =
-    lens.set (smallF (lens.get big)) big
+update lens smallF big =
+    lens.set (smallF (big)) big

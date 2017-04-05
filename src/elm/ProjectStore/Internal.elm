@@ -46,10 +46,6 @@ generator =
     decodeList >> init >> Random.mapWithIndependentSeed
 
 
-createAndAdd projectName now =
-    PouchDB.createAndAdd (Project.generator projectName now)
-
-
 findByName projectName =
     PouchDB.findBy (Project.nameEquals (String.trim projectName))
 
@@ -59,4 +55,4 @@ addNewIfDoesNotExist projectName now m =
         m
     else
         findByName projectName m
-            |> Maybe.Extra.unpack (\_ -> createAndAdd projectName now m) (\_ -> m)
+            |> Maybe.Extra.unpack (\_ -> PouchDB.insert (Project.generator projectName now) m) (\_ -> m)

@@ -22,10 +22,6 @@ generator =
     Internal.generator
 
 
-asList =
-    PouchDB.getList
-
-
 getEncodedProjectNames =
     PouchDB.map (Project.getName >> E.string) >> E.list
 
@@ -35,7 +31,7 @@ getProjectIdToNameDict =
 
 
 findNameById id =
-    PouchDB.findById id >> Maybe.map Project.getName
+    PouchDB.findById id >>? Project.getName
 
 
 findByName =

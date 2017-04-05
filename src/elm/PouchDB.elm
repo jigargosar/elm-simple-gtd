@@ -97,8 +97,8 @@ addFromTuple =
     apply2 ( Tuple.first, uncurry prepend )
 
 
-createAndAdd : Random.Generator (Document x) -> Store x -> Store x
-createAndAdd =
+insert : Random.Generator (Document x) -> Store x -> Store x
+insert =
     generate >>> (\( d, s ) -> prepend { d | dirty = True } s)
 
 

@@ -7,6 +7,7 @@ import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Model.Internal as Model
+import PouchDB
 import ProjectStore
 import Model.TodoList exposing (TodoContextViewModel)
 import Msg exposing (..)
@@ -35,7 +36,7 @@ projectListView m =
     div []
         [ Keyed.node "paper-material"
             [ class "project-list" ]
-            (m |> Model.getProjectStore >> ProjectStore.asList >> List.map projectItem)
+            (m |> Model.getProjectStore >> PouchDB.map projectItem)
         ]
 
 

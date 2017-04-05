@@ -86,11 +86,11 @@ toViewModelHelp ( todoContext, name, list ) =
 updateTodo : List TodoUpdateAction -> Todo -> ModelF
 updateTodo action todo =
     apply3Uncurry ( Model.getNow, Model.getTodoList, identity )
-        (\now todoStore model ->
+        (\now todoStore ->
             todo
                 |> Todo.update action now
                 >> (PouchDB.update # todoStore)
-                >> (Model.setTodoStore # model)
+                >> (Model.setTodoStore)
         )
 
 

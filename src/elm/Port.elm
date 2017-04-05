@@ -11,7 +11,11 @@ import Maybe.Extra as Maybe
 
 
 type alias Tracker req res msg =
-    { lastId : Int, out : Request req -> msg, handlers : Dict Int (Response res -> ()) }
+    { lastId : Int, out : Request req -> Cmd msg, handlers : Dict Int (Response res -> ()) }
+
+
+init out =
+    { lastId = 0, out = out, handlers = Dict.empty }
 
 
 type alias Request a =
@@ -19,7 +23,7 @@ type alias Request a =
 
 
 type alias Response a =
-    { portRequestId : Int }
+    { a | portRequestId : Int }
 
 
 call value handler tracker =
@@ -42,6 +46,6 @@ handle res tracker =
             Dict.get res.portRequestId tracker.handlers
 
         _ =
-            handler res
+            handler ?|> apply res
     in
         { tracker | handlers = Dict.remove res.portRequestId tracker.handlers }

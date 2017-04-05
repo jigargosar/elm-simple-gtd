@@ -3,6 +3,7 @@ port module PouchDB exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Port exposing (Tracker)
 import Random.Pcg as Random exposing (Seed)
 import List.Extra as List
 import Time exposing (Time)
@@ -120,3 +121,11 @@ generate : Random.Generator model -> Store model -> ( model, Store model )
 generate generator m =
     Random.step generator (getSeed m)
         |> Tuple.mapSecond (setSeed # m)
+
+
+createTracker : Tracker {} {} msg
+createTracker =
+    Port.init (\req -> ping req)
+
+
+port ping : { portRequestId : Int } -> Cmd msg

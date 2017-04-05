@@ -4,6 +4,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Time exposing (Time)
+import Toolkit.Helpers exposing (..)
 
 
 port onPouchDBBulkDocksResponse : (D.Value -> msg) -> Sub msg
@@ -17,22 +18,8 @@ port onPouchDBBulkDocksResponse : (D.Value -> msg) -> Sub msg
 port pouchDBUpsert : ( String, String, D.Value ) -> Cmd msg
 
 
-
---pouchDBBulkDocsHelp : String -> List D.Value -> Cmd msg
---pouchDBBulkDocsHelp dbName list =
---    list
---        |> (curry pouchDBBulkDocks) dbName
-
-
-encodeAsSetting key value =
-    E.object
-        [ ( "_id", key |> E.string )
-        , ( "value", value )
-        ]
-
-
-pouchDBPersistSetting key value =
-    pouchDBUpsert ( "settings", key, value )
+upsert =
+    curry3 pouchDBUpsert
 
 
 type alias Id =

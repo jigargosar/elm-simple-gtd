@@ -243,7 +243,7 @@ persistMaybeTodoCmd =
 
 
 upsertTodoCmd todo =
-    PouchDB.pouchDBUpsert ( "todo-db", Todo.getId todo, (Todo.encodeTodo todo) )
+    PouchDB.upsert "todo-db" (Todo.getId todo) (Todo.encodeTodo todo)
 
 
 upsertProjectCmd project =

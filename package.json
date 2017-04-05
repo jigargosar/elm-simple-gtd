@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server",
     "hot": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline",
     "prebuild": "rimraf polymer",
-    "build": "cross-env NODE_ENV=production webpack -p",
+    "build": "cross-env NODE_ENV=production webpack -p --progress",
     "postbuild": "npm run polymer-build",
     "prepolymer-build": "ln -Fs `pwd`/src/web/bower_components polymer/bower_components",
     "polymer-build": "cd polymer &&  polymer build --entrypoint index.html --sources * --shell imports.html && cd ..",

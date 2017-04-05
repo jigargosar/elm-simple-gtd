@@ -15,7 +15,7 @@ module.exports = {
     resolve:{
         alias:{elm:path.resolve(__dirname, 'src/elm/')}
     },
-    devtool: isDevEnv ? "inline" : 'source-map',
+    // devtool: isDevEnv ? "inline" : 'source-map',
     // devtool: "source-map",
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {

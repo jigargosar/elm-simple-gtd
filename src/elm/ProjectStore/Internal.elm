@@ -56,7 +56,7 @@ decodeList =
                     Err x ->
                         let
                             _ =
-                                Debug.log "Error while decoding Project"
+                                Debug.log "Error while decoding Project" x
                         in
                             Nothing
             )

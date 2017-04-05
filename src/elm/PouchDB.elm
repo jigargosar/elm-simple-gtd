@@ -39,7 +39,7 @@ defaultRevision =
 
 
 type alias Document moreFields =
-    { moreFields | id : Id, rev : Revision }
+    { moreFields | id : Id, rev : Revision, dirty : Bool }
 
 
 type alias HasTimeStamps otherFields =

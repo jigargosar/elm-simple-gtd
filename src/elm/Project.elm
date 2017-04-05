@@ -92,6 +92,7 @@ updateName updater model =
 projectConstructor id rev createdAt modifiedAt name =
     { id = id
     , rev = rev
+    , dirty = False
     , name = name
     , createdAt = createdAt
     , modifiedAt = modifiedAt

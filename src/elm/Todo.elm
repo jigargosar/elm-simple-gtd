@@ -90,6 +90,7 @@ todoContextToName todoContext =
 todoConstructor id rev createdAt modifiedAt done text dueAt deleted context projectId =
     { id = id
     , rev = rev
+    , dirty = False
     , done = done
     , text = text
     , dueAt = dueAt

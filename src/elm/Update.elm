@@ -252,14 +252,5 @@ upsertTodoCmd todo =
     PouchDB.upsert "todo-db" Todo.encodeTodo todo
 
 
-upsertProjectCmd project =
-    PouchDB.pouchDBUpsert ( "project-db", Project.getId project, (Project.encode project) )
-
-
-persistProjectWithName projectName =
-    Return.maybeEffect
-        (Model.findProjectByName projectName >>? upsertProjectCmd)
-
-
 persistTodoById todoId =
     Return.maybeEffect (Model.findTodoById todoId >>? upsertTodoCmd)

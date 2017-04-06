@@ -182,12 +182,12 @@ update msg =
                                             Return.command (Navigation.forward 1)
 
                                         Key.CharG ->
-                                            Return.map (Model.setEditMode GotoCommandMode)
+                                            Return.map (Model.setEditMode SwitchViewCommandMode)
 
                                         _ ->
                                             identity
 
-                                GotoCommandMode ->
+                                SwitchViewCommandMode ->
                                     (case key of
                                         Key.CharP ->
                                             andThenUpdate (SetView ProjectListView)
@@ -206,13 +206,13 @@ update msg =
                                     )
                                         >> (case key of
                                                 Key.CharG ->
-                                                    Return.map (Model.setEditMode GotoGroupedViewCommandMode)
+                                                    Return.map (Model.setEditMode SwitchToGroupedViewCommandMode)
 
                                                 _ ->
                                                     andThenUpdate DeactivateEditingMode
                                            )
 
-                                GotoGroupedViewCommandMode ->
+                                SwitchToGroupedViewCommandMode ->
                                     (case key of
                                         Key.CharP ->
                                             andThenUpdate (SetView ProjectListView)

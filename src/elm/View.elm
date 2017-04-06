@@ -141,8 +141,11 @@ headerView m =
                     ]
                     []
 
-            GotoCommandMode ->
-                span [] [ "goto" |> text ]
+            SwitchViewCommandMode ->
+                span [] [ "Switch View: (A)ll, (P)rojects, (D)one, (B)in, (G)roup By." |> text ]
+
+            SwitchToGroupedViewCommandMode ->
+                span [] [ "Group By: (P)rojects, (C)ontexts " |> text ]
 
             _ ->
                 if selectedTodoCount == 0 then

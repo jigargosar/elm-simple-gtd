@@ -30,8 +30,8 @@ type EditMode
     = NewTodoEditMode NewTodoEditModel
     | EditTodo EditTodoModel
     | NotEditing
-    | GotoCommandMode
-    | GotoGroupedViewCommandMode
+    | SwitchViewCommandMode
+    | SwitchToGroupedViewCommandMode
 
 
 type alias Selection =

@@ -77,6 +77,20 @@ insertProjectIfNotExist projectName =
         (ProjectStore.insertIfNotExistByName projectName >>> setProjectStore)
 
 
+toggleSelection todo m =
+    let
+        todoId =
+            Todo.getId todo
+
+        selection =
+            m.selection
+    in
+        if (Set.member todoId selection) then
+            { m | selection = Set.remove todoId selection }
+        else
+            { m | selection = Set.insert todoId selection }
+
+
 type alias Lens small big =
     { get : big -> small, set : small -> big -> big }
 

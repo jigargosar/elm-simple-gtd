@@ -134,20 +134,7 @@ update msg =
                             identity
 
                 TodoCheckBoxClicked todo ->
-                    Return.map
-                        (\m ->
-                            let
-                                todoId =
-                                    Todo.getId todo
-
-                                selection =
-                                    m.selection
-                            in
-                                if (Set.member todoId selection) then
-                                    { m | selection = Set.remove todoId selection }
-                                else
-                                    { m | selection = Set.insert todoId selection }
-                        )
+                    Return.map (Model.toggleSelection todo)
 
                 SetView viewType ->
                     Return.map (Model.setMainViewType viewType)

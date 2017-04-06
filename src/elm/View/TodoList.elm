@@ -34,7 +34,7 @@ import Ext.Function exposing (..)
 import View.Todo exposing (EditTodoViewModel)
 
 
-type alias Context =
+type alias ViewContext =
     { now : Time
     , encodedProjectNames : Json.Encode.Value
     , maybeEditTodoModel : Maybe EditTodoModel
@@ -42,7 +42,7 @@ type alias Context =
     }
 
 
-createViewContext : Model -> Context
+createViewContext : Model -> ViewContext
 createViewContext model =
     { now = Model.getNow model
     , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames
@@ -81,7 +81,7 @@ getTodoView vc todo =
                 notEditingView ()
 
 
-createEditTodoViewModel : Context -> EditTodoModel -> EditTodoViewModel
+createEditTodoViewModel : ViewContext -> EditTodoModel -> EditTodoViewModel
 createEditTodoViewModel vc etm =
     let
         todoId =

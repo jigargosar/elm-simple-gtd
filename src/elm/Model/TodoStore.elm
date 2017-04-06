@@ -11,7 +11,7 @@ import Project
 import Random.Pcg as Random
 import Time exposing (Time)
 import Todo
-import Todo.Types exposing (..)
+import Todo.Types as Todo exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -114,3 +114,15 @@ addNewTodo text now =
 insertTodoByIdConstructor constructWithId =
     applyWith (Model.getTodoStore)
         (PouchDB.insert (constructWithId) >> Model.setTodoStore)
+
+
+updateTodoFromEditTodoModel : EditTodoModel -> ModelF
+updateTodoFromEditTodoModel { projectName, todoText, todoId } =
+    apply2Uncurry ( Model.findProjectByName projectName, identity )
+        (\maybeProject ->
+            updateTodoById
+                [ Todo.SetText todoText
+                , Todo.SetProjectId (maybeProject ?|> Project.getId)
+                ]
+                todoId
+        )

@@ -190,7 +190,7 @@ activateEditNewTodoMode text =
 onEditTodoEnterPressed : EditTodoModel -> Bool -> ReturnF
 onEditTodoEnterPressed editTodoModel isShiftDown =
     Return.map (Model.insertProjectIfNotExist editTodoModel.projectName)
-        >> Return.map (updateTodoFromEditTodoModel editTodoModel)
+        >> Return.map (Model.updateTodoFromEditTodoModel editTodoModel)
         >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
         >> deactivateEditingMode
 
@@ -200,18 +200,6 @@ copyAndEditTodo todo =
     Return.andThenModelWith Model.getNow
         (\now ->
             Model.addCopyOfTodo todo now >> update (Msg.StartEditingTodo todo)
-        )
-
-
-updateTodoFromEditTodoModel : EditTodoModel -> ModelF
-updateTodoFromEditTodoModel { projectName, todoText, todoId } =
-    apply2Uncurry ( Model.findProjectByName projectName, identity )
-        (\maybeProject ->
-            Model.updateTodoById
-                [ Todo.SetText todoText
-                , Todo.SetProjectId (maybeProject ?|> Project.getId)
-                ]
-                todoId
         )
 
 

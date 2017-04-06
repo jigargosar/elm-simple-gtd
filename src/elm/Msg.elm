@@ -34,10 +34,6 @@ stop =
     Stop
 
 
-startAddingTodo =
-    AddTodoClicked
-
-
 onNewTodoInput =
     NewTodoTextChanged
 
@@ -63,7 +59,7 @@ type Msg
     | ToggleTodoDeleted Todo
     | SetTodoContext TodoContext Todo
     | Create String
-    | AddTodoClicked
+    | StartAddingTodo
     | NewTodoTextChanged TodoText
     | NewTodoBlur
     | NewTodoKeyUp String KeyboardEvent

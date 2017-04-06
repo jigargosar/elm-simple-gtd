@@ -144,7 +144,7 @@ addTodoFabView m =
     fab
         [ id "add-fab"
         , attribute "icon" "add"
-        , onClick startAddingTodo
+        , onClick Msg.StartAddingTodo
         ]
         []
 

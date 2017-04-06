@@ -72,7 +72,7 @@ update msg =
                     Return.mapModelWith Model.getNow
                         (\now -> Model.addNewTodo text now >> Tuple.second)
 
-                AddTodoClicked ->
+                StartAddingTodo ->
                     activateEditNewTodoMode ""
                         >> autoFocusPaperInputCmd
 
@@ -130,7 +130,7 @@ update msg =
                 OnKeyUp key ->
                     case key of
                         Key.CharQ ->
-                            identity
+                            andThenUpdate StartAddingTodo
 
                         _ ->
                             identity

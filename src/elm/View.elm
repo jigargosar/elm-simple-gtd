@@ -137,7 +137,7 @@ newTodoInputView maybeNewTodoModel =
                 []
 
         Nothing ->
-            h1 [ id "toolbar-title" ] [ text "SimpleGTD" ]
+            h1 [ id "toolbar-title" ] [ text "SimpleGTD alpha" ]
 
 
 addTodoFabView m =

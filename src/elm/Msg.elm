@@ -57,6 +57,7 @@ type Msg
     | EditTodoTextChanged EditTodoModel String
     | EditTodoProjectNameChanged EditTodoModel ProjectName
     | EditTodoKeyUp EditTodoModel KeyboardEvent
+    | TodoCheckBoxClicked Todo
     | SetView MainViewType
     | OnNowChanged Time
     | OnMsgList (List Msg)

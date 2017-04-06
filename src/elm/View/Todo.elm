@@ -88,7 +88,7 @@ todoViewNotEditing vc todo =
             [ class "todo-item"
             , onClickStopPropagation (Msg.StartEditingTodo todo)
             ]
-            [ checkBoxView
+            [ checkBoxView todo
             , itemBody []
                 [ span
                     [ classList
@@ -110,7 +110,7 @@ todoViewNotEditing vc todo =
 
 
 checkBoxView =
-    checkbox [ checked False, onClickStopPropagation Msg.NoOp ] []
+    checkbox [ checked False, onClickStopPropagation Msg.TodoCheckBoxClicked ] []
 
 
 todoInputId todoId =

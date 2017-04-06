@@ -132,6 +132,9 @@ update msg =
                         _ ->
                             identity
 
+                TodoCheckBoxClicked todo ->
+                    identity
+
                 SetView viewType ->
                     Return.map (Model.setMainViewType viewType)
 

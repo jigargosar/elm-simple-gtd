@@ -213,7 +213,14 @@ update msg =
                                            )
 
                                 GotoGroupedViewCommandMode ->
-                                    identity
+                                    (case key of
+                                        Key.CharG ->
+                                            Return.map (Model.setEditMode GotoGroupedViewCommandMode)
+
+                                        _ ->
+                                            identity
+                                    )
+                                        >> andThenUpdate DeactivateEditingMode
 
                                 _ ->
                                     identity

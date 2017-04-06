@@ -25,7 +25,7 @@ type alias NewTodoModel =
     TodoText
 
 
-type EditModel
+type EditMode
     = NewTodo NewTodoModel
     | EditTodo EditTodoModel
     | NotEditing
@@ -43,7 +43,7 @@ type MainViewType
 type alias Model =
     { now : Time
     , todoStore : TodoStore
-    , editModel : EditModel
+    , editModel : EditMode
     , mainViewType : MainViewType
     , seed : Seed
     , maybeRunningTodo : Maybe RunningTodo

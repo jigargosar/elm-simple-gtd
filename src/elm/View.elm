@@ -148,12 +148,12 @@ headerView m =
                     span []
                         [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
                         , iconButton
-                            [ icon "check"
+                            [ icon "done-all"
                             , onClick Msg.SelectionDoneClicked
                             ]
                             []
                         , iconButton
-                            [ icon "edit"
+                            [ icon "create"
                             , onClick Msg.SelectionEditClicked
                             ]
                             []

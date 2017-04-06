@@ -105,18 +105,21 @@ update msg =
                 EditTodoProjectNameChanged editTodoModel projectName ->
                     Return.map (Model.updateEditTodoProjectName projectName editTodoModel)
 
+                CopyAndEditTodo todo ->
+                    Return.andThenApplyWith Model.getNow
+                        (\now ->
+                            Model.addCopyOfTodo todo now
+                                >> Tuple.mapFirst Msg.StartEditingTodo
+                                >> uncurry update
+                        )
+
                 EditTodoKeyUp editTodoModel { key, isShiftDown } ->
                     case key of
                         Key.Enter ->
                             let
                                 copyAndEditTodo : Todo -> ReturnF
                                 copyAndEditTodo todo =
-                                    Return.andThenApplyWith Model.getNow
-                                        (\now ->
-                                            Model.addCopyOfTodo todo now
-                                                >> Tuple.mapFirst Msg.StartEditingTodo
-                                                >> uncurry update
-                                        )
+                                    andThenUpdate (CopyAndEditTodo todo)
                             in
                                 Return.map
                                     (Model.insertProjectIfNotExist editTodoModel.projectName

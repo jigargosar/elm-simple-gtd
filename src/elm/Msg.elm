@@ -47,6 +47,7 @@ type Msg
     | ToggleTodoDeleted Todo
     | SetTodoContext TodoContext Todo
     | Create String
+    | CopyAndEditTodo Todo
     | StartAddingTodo
     | NewTodoTextChanged TodoText
     | DeactivateEditingMode

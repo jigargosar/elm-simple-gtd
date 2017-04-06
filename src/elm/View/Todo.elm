@@ -12,6 +12,7 @@ import Keyboard.Extra exposing (Key(Enter, Escape))
 import Msg exposing (Msg)
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
 import Project exposing (ProjectName)
+import Set
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -81,12 +82,18 @@ edit vm =
 
 todoViewNotEditing vc todo =
     let
-        projectName =
-            Todo.getMaybeProjectId todo ?+> Dict.get # vc.projectIdToNameDict ?= "<No Project>"
-
         vm =
-            { onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
-            }
+            let
+                todoId =
+                    Todo.getId todo
+            in
+                { onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
+                , isSelected = Set.member todoId vc.selection
+                , projectName =
+                    Todo.getMaybeProjectId todo
+                        ?+> (Dict.get # vc.projectIdToNameDict)
+                        ?= "<No Project>"
+                }
     in
         item
             [ class "todo-item"
@@ -102,7 +109,7 @@ todoViewNotEditing vc todo =
                     ]
                     [ Todo.getText todo |> text ]
                 , span [ class "small dim" ]
-                    [ text projectName
+                    [ text vm.projectName
                     , text " : "
                     , text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
                     , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")

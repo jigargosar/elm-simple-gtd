@@ -31,8 +31,8 @@ type EditMode
     | NotEditing
 
 
-type Selection
-    = List TodoId
+type alias Selection =
+    List TodoId
 
 
 type MainViewType
@@ -53,7 +53,7 @@ type alias Model =
     , maybeRunningTodo : Maybe RunningTodo
     , projectStore : ProjectStore
     , keyboardState : Keyboard.State
-    , selection: Selection
+    , selection : Selection
     }
 
 

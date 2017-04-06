@@ -107,7 +107,12 @@ update msg =
                 EditTodoKeyUp editTodoModel { key, isShiftDown } ->
                     case key of
                         Key.Enter ->
-                            onEditTodoEnterPressed editTodoModel isShiftDown
+                            Return.map
+                                (Model.insertProjectIfNotExist editTodoModel.projectName
+                                    >> Model.updateTodoFromEditTodoModel editTodoModel
+                                )
+                                >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
+                                >> andThenUpdate DeactivateEditingMode
 
                         Key.Escape ->
                             andThenUpdate DeactivateEditingMode
@@ -193,16 +198,6 @@ port stopAlarm : () -> Cmd msg
 
 activateEditNewTodoMode text =
     Return.map (Model.activateNewTodoMode text)
-
-
-onEditTodoEnterPressed : EditTodoModel -> Bool -> ReturnF
-onEditTodoEnterPressed editTodoModel isShiftDown =
-    Return.map
-        (Model.insertProjectIfNotExist editTodoModel.projectName
-            >> Model.updateTodoFromEditTodoModel editTodoModel
-        )
-        >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
-        >> andThenUpdate DeactivateEditingMode
 
 
 copyAndEditTodo : Todo -> ReturnF

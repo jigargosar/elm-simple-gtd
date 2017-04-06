@@ -46,6 +46,7 @@ init now encodedTodoList encodedProjectStore =
         , maybeRunningTodo = Nothing
         , projectStore = projectStore
         , keyboardState = Keyboard.init
+        , selection = []
         }
 
 

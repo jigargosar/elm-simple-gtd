@@ -83,6 +83,10 @@ projectStore =
     { get = .projectStore, set = (\s b -> { b | projectStore = s }) }
 
 
+keyboardState =
+    { get = .keyboardState, set = (\s b -> { b | keyboardState = s }) }
+
+
 todoStore =
     { get = .todoStore, set = (\s b -> { b | todoStore = s }) }
 

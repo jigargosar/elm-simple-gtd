@@ -107,12 +107,22 @@ update msg =
                 EditTodoKeyUp editTodoModel { key, isShiftDown } ->
                     case key of
                         Key.Enter ->
-                            Return.map
-                                (Model.insertProjectIfNotExist editTodoModel.projectName
-                                    >> Model.updateTodoFromEditTodoModel editTodoModel
-                                )
-                                >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
-                                >> andThenUpdate DeactivateEditingMode
+                            let
+                                copyAndEditTodo : Todo -> ReturnF
+                                copyAndEditTodo todo =
+                                    Return.andThenApplyWith Model.getNow
+                                        (\now ->
+                                            Model.addCopyOfTodo todo now
+                                                >> Tuple2.swap
+                                                >> Tuple.mapSecond (Msg.StartEditingTodo >> Msg.toCmd)
+                                        )
+                            in
+                                Return.map
+                                    (Model.insertProjectIfNotExist editTodoModel.projectName
+                                        >> Model.updateTodoFromEditTodoModel editTodoModel
+                                    )
+                                    >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
+                                    >> whenBool (not isShiftDown) (andThenUpdate DeactivateEditingMode)
 
                         Key.Escape ->
                             andThenUpdate DeactivateEditingMode
@@ -198,16 +208,6 @@ port stopAlarm : () -> Cmd msg
 
 activateEditNewTodoMode text =
     Return.map (Model.activateNewTodoMode text)
-
-
-copyAndEditTodo : Todo -> ReturnF
-copyAndEditTodo todo =
-    Return.andThenApplyWith Model.getNow
-        (\now ->
-            Model.addCopyOfTodo todo now
-                >> Tuple2.swap
-                >> Tuple.mapSecond (Msg.StartEditingTodo >> Msg.toCmd)
-        )
 
 
 stopRunningTodo : ReturnF

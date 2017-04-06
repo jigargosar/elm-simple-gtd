@@ -189,8 +189,10 @@ activateEditNewTodoMode text =
 
 onEditTodoEnterPressed : EditTodoModel -> Bool -> ReturnF
 onEditTodoEnterPressed editTodoModel isShiftDown =
-    Return.map (Model.insertProjectIfNotExist editTodoModel.projectName)
-        >> Return.map (Model.updateTodoFromEditTodoModel editTodoModel)
+    Return.map
+        (Model.insertProjectIfNotExist editTodoModel.projectName
+            >> Model.updateTodoFromEditTodoModel editTodoModel
+        )
         >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
         >> deactivateEditingMode
 

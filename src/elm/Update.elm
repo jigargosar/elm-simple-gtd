@@ -175,6 +175,12 @@ update msg =
                                         Key.CharC ->
                                             andThenUpdate ClearSelection
 
+                                        Key.OpenBracket ->
+                                            Return.command (Navigation.back 1)
+
+                                        Key.CloseBracket ->
+                                            Return.command (Navigation.forward 1)
+
                                         Key.CharG ->
                                             Return.map (Model.setEditMode NavigateEditMode)
 

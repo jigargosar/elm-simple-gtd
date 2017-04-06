@@ -63,7 +63,7 @@ appHeaderView m =
         [ App.toolbar
             []
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-            , newTodoInputView (Model.EditMode.getEditNewTodoModel m)
+            , headerView (Model.EditMode.getEditNewTodoModel m)
             ]
 
         --        , runningTodoView m
@@ -120,7 +120,7 @@ newTodoInputId =
     "new-todo-input"
 
 
-newTodoInputView maybeNewTodoModel =
+headerView maybeNewTodoModel =
     case maybeNewTodoModel of
         Just text ->
             input

@@ -85,7 +85,8 @@ update msg =
                 NewTodoKeyUp text { key } ->
                     case key of
                         Key.Enter ->
-                            Return.command (Msg.Create text |> Msg.toCmd)
+                            --                            Return.command (Msg.Create text |> Msg.toCmd)
+                            andThenUpdate (Msg.Create text)
                                 >> activateEditNewTodoMode ""
 
                         Key.Escape ->
@@ -113,8 +114,8 @@ update msg =
                                     Return.andThenApplyWith Model.getNow
                                         (\now ->
                                             Model.addCopyOfTodo todo now
-                                                >> Tuple2.swap
-                                                >> Tuple.mapSecond (Msg.StartEditingTodo >> Msg.toCmd)
+                                                >> Tuple.mapFirst Msg.StartEditingTodo
+                                                >> uncurry update
                                         )
                             in
                                 Return.map

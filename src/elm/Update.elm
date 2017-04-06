@@ -193,6 +193,9 @@ update msg =
                                         _ ->
                                             identity
 
+                                Navigate ->
+                                    identity
+
                                 _ ->
                                     identity
                         )

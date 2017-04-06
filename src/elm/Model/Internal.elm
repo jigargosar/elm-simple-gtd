@@ -40,8 +40,8 @@ updateTodoStore updater model =
     { model | todoStore = getTodoStore model |> updater }
 
 
-getEditModel : Model -> EditMode
-getEditModel =
+getEditMode : Model -> EditMode
+getEditMode =
     (.editModel)
 
 

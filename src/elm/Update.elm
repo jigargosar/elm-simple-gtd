@@ -164,7 +164,7 @@ update msg =
                     Return.map (Model.update Model.keyboardState (Keyboard.update msg))
 
                 OnKeyUp key ->
-                    Return.with (Model.getEditModel)
+                    Return.with (Model.getEditMode)
                         (\editMode ->
                             case editMode of
                                 NotEditing ->

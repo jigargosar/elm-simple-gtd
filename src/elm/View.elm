@@ -123,11 +123,11 @@ newTodoInputId =
 
 headerView m =
     let
-        ( maybeNewTodoModel, selectedTodoCount ) =
-            ( Model.EditMode.getEditNewTodoModel m, Model.getSelectedTodoIdSet m |> Set.size )
+        selectedTodoCount =
+            Model.getSelectedTodoIdSet m |> Set.size
     in
-        case maybeNewTodoModel of
-            Just text ->
+        case Model.getEditMode m of
+            NewTodo text ->
                 input
                     [ id newTodoInputId
                     , class "auto-focus"
@@ -141,7 +141,7 @@ headerView m =
                     ]
                     []
 
-            Nothing ->
+            _ ->
                 if selectedTodoCount == 0 then
                     h1 [ id "toolbar-title" ] [ text "SimpleGTD - alpha" ]
                 else

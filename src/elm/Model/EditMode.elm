@@ -43,7 +43,7 @@ updateEditTodoText text editTodoModel =
 
 
 getMaybeEditTodoModel model =
-    case getEditModel model of
+    case getEditMode model of
         EditTodo model ->
             Just model
 
@@ -52,7 +52,7 @@ getMaybeEditTodoModel model =
 
 
 getEditNewTodoModel model =
-    case getEditModel model of
+    case getEditMode model of
         NewTodo model ->
             Just model
 

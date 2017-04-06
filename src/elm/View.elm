@@ -2,7 +2,7 @@ module View exposing (appView)
 
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
-import Html exposing (Attribute, Html, div, h1, hr, node, span, text)
+import Html exposing (Attribute, Html, div, h1, h2, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
@@ -11,6 +11,7 @@ import Model.Internal as Model
 import Model.EditMode
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (Msg)
+import Set
 import View.TodoList exposing (..)
 import View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
@@ -63,7 +64,7 @@ appHeaderView m =
         [ App.toolbar
             []
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-            , headerView (Model.EditMode.getEditNewTodoModel m)
+            , headerView m
             ]
 
         --        , runningTodoView m
@@ -120,24 +121,31 @@ newTodoInputId =
     "new-todo-input"
 
 
-headerView maybeNewTodoModel =
-    case maybeNewTodoModel of
-        Just text ->
-            input
-                [ id newTodoInputId
-                , class "auto-focus"
-                , onInput Msg.onNewTodoInput
-                , value text
-                , onBlur Msg.DeactivateEditingMode
-                , onKeyUp (Msg.NewTodoKeyUp text)
-                , stringProperty "label" "New Todo"
-                , boolProperty "alwaysFloatLabel" True
-                , style [ ( "width", "100%" ), "color" => "white" ]
-                ]
-                []
+headerView m =
+    let
+        ( maybeNewTodoModel, selectedTodoCount ) =
+            ( Model.EditMode.getEditNewTodoModel m, Model.getSelectedTodoIdSet m |> Set.size )
+    in
+        case maybeNewTodoModel of
+            Just text ->
+                input
+                    [ id newTodoInputId
+                    , class "auto-focus"
+                    , onInput Msg.onNewTodoInput
+                    , value text
+                    , onBlur Msg.DeactivateEditingMode
+                    , onKeyUp (Msg.NewTodoKeyUp text)
+                    , stringProperty "label" "New Todo"
+                    , boolProperty "alwaysFloatLabel" True
+                    , style [ ( "width", "100%" ), "color" => "white" ]
+                    ]
+                    []
 
-        Nothing ->
-            h1 [ id "toolbar-title" ] [ text "SimpleGTD - alpha" ]
+            Nothing ->
+                if selectedTodoCount == 0 then
+                    h1 [ id "toolbar-title" ] [ text "SimpleGTD - alpha" ]
+                else
+                    h2 [] [ "selected todo count = " ++ (toString selectedTodoCount) |> text ]
 
 
 addTodoFabView m =

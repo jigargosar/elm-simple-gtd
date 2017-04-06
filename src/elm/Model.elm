@@ -95,6 +95,17 @@ clearSelection m =
     { m | selection = Set.empty }
 
 
+getMaybeSelectedTodo m =
+    let
+        selection =
+            m.selection
+    in
+        if Set.size selection == 1 then
+            Set.toList selection |> List.head ?+> (PouchDB.findById # m.todoStore)
+        else
+            Nothing
+
+
 getSelectedTodoIdSet =
     (.selection)
 

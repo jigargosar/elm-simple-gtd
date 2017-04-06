@@ -147,7 +147,8 @@ update msg =
                     Return.map (Model.clearSelection)
 
                 SelectionEditClicked ->
-                    Return.map (Model.clearSelection)
+                    Return.withMaybe (Model.getMaybeSelectedTodo)
+                        (StartEditingTodo >> andThenUpdate)
 
                 SelectionTrashClicked ->
                     Return.map (Model.clearSelection)

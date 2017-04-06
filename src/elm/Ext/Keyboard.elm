@@ -67,6 +67,10 @@ type alias Msg =
     KX.Msg
 
 
+type alias State =
+    KX.State
+
+
 subscription : (Msg -> msg) -> Sub msg
 subscription tagger =
     Sub.map tagger KX.subscriptions

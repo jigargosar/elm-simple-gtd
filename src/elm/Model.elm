@@ -1,5 +1,6 @@
 module Model exposing (..)
 
+import Ext.Keyboard as Keyboard
 import Model.Internal exposing (..)
 import Msg exposing (Return)
 import PouchDB
@@ -44,6 +45,7 @@ init now encodedTodoList encodedProjectStore =
         , seed = seed
         , maybeRunningTodo = Nothing
         , projectStore = projectStore
+        , keyboardState = Keyboard.init
         }
 
 

@@ -1,5 +1,6 @@
 module Model.Types exposing (..)
 
+import Ext.Keyboard as Keyboard
 import PouchDB
 import Project exposing (ProjectId, ProjectName)
 import ProjectStore.Types exposing (ProjectStore)
@@ -47,6 +48,7 @@ type alias Model =
     , seed : Seed
     , maybeRunningTodo : Maybe RunningTodo
     , projectStore : ProjectStore
+    , keyboardState : Keyboard.State
     }
 
 

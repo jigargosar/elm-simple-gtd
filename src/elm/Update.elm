@@ -194,7 +194,12 @@ update msg =
                                             identity
 
                                 NavigateEditMode ->
-                                    identity
+                                    case key of
+                                        Key.Escape ->
+                                            andThenUpdate DeactivateEditingMode
+
+                                        _ ->
+                                            identity
 
                                 _ ->
                                     identity

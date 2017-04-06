@@ -80,7 +80,7 @@ update msg =
                     activateEditNewTodoMode text
 
                 DeactivateEditingMode ->
-                    deactivateEditingMode
+                    Return.map (Model.deactivateEditingMode)
 
                 NewTodoKeyUp text { key } ->
                     case key of
@@ -89,7 +89,7 @@ update msg =
                                 >> activateEditNewTodoMode ""
 
                         Key.Escape ->
-                            deactivateEditingMode
+                            andThenUpdate DeactivateEditingMode
 
                         _ ->
                             identity
@@ -110,7 +110,7 @@ update msg =
                             onEditTodoEnterPressed editTodoModel isShiftDown
 
                         Key.Escape ->
-                            deactivateEditingMode
+                            andThenUpdate DeactivateEditingMode
 
                         _ ->
                             identity
@@ -191,10 +191,6 @@ port startAlarm : () -> Cmd msg
 port stopAlarm : () -> Cmd msg
 
 
-deactivateEditingMode =
-    Return.map (Model.deactivateEditingMode)
-
-
 activateEditNewTodoMode text =
     Return.map (Model.activateNewTodoMode text)
 
@@ -206,7 +202,7 @@ onEditTodoEnterPressed editTodoModel isShiftDown =
             >> Model.updateTodoFromEditTodoModel editTodoModel
         )
         >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
-        >> deactivateEditingMode
+        >> andThenUpdate DeactivateEditingMode
 
 
 copyAndEditTodo : Todo -> ReturnF

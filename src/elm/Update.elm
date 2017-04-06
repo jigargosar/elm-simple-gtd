@@ -201,13 +201,17 @@ update msg =
                                         Key.CharD ->
                                             andThenUpdate (SetView DoneView)
 
-                                        Key.CharG ->
-                                            identity
-
                                         _ ->
                                             identity
                                     )
                                         >> andThenUpdate DeactivateEditingMode
+                                        >> (case key of
+                                                Key.CharG ->
+                                                    Return.map (Model.setEditMode GotoGroupedViewCommandMode)
+
+                                                _ ->
+                                                    andThenUpdate DeactivateEditingMode
+                                           )
 
                                 _ ->
                                     identity

@@ -31,6 +31,7 @@ type EditMode
     | EditTodo EditTodoModel
     | NotEditing
     | GotoCommandMode
+    | GotoGroupedViewCommandMode
 
 
 type alias Selection =

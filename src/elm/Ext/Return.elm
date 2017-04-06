@@ -51,7 +51,7 @@ andThenApplyWith f1 f2 =
         )
 
 
-andThenModelWithMaybe f1 f2 =
+andThenApplyWithMaybe f1 f2 =
     Return.andThen
         (\m ->
             f1 m ?|> f2 ?= m

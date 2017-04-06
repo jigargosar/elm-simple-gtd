@@ -145,12 +145,20 @@ update msg =
                     Return.map (Model.update Model.keyboardState (Keyboard.update msg))
 
                 OnKeyUp key ->
-                    case key of
-                        Key.CharQ ->
-                            andThenUpdate StartAddingTodo
+                    Return.with (Model.getEditModel)
+                        (\editMode ->
+                            case editMode of
+                                NotEditing ->
+                                    case key of
+                                        Key.CharQ ->
+                                            andThenUpdate StartAddingTodo
 
-                        _ ->
-                            identity
+                                        _ ->
+                                            identity
+
+                                _ ->
+                                    identity
+                        )
            )
         >> persistAll
 

@@ -121,7 +121,7 @@ todoViewNotEditing vc todo =
 
 
 checkBoxView vm =
-    checkbox [ checked False, onClickStopPropagation vm.onCheckBoxClicked ] []
+    checkbox [ checked vm.isSelected, onClickStopPropagation vm.onCheckBoxClicked ] []
 
 
 todoInputId todoId =

@@ -27,7 +27,7 @@ type alias NewTodoModel =
 
 
 type EditMode
-    = NewTodo NewTodoModel
+    = NewTodoMode NewTodoModel
     | EditTodo EditTodoModel
     | NotEditing
     | Navigate

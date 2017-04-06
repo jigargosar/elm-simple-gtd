@@ -172,18 +172,6 @@ update msg =
                                         Key.CharQ ->
                                             andThenUpdate StartAddingTodo
 
-                                        Key.CharP ->
-                                            andThenUpdate (SetView ProjectListView)
-
-                                        Key.CharA ->
-                                            andThenUpdate (SetView GroupByContextView)
-
-                                        Key.CharB ->
-                                            andThenUpdate (SetView BinView)
-
-                                        Key.CharD ->
-                                            andThenUpdate (SetView DoneView)
-
                                         Key.CharC ->
                                             andThenUpdate ClearSelection
 

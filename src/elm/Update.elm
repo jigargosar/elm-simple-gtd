@@ -212,6 +212,9 @@ update msg =
                                                     andThenUpdate DeactivateEditingMode
                                            )
 
+                                GotoGroupedViewCommandMode ->
+                                    identity
+
                                 _ ->
                                     identity
                         )

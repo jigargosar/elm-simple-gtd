@@ -110,7 +110,7 @@ todoViewNotEditing vc todo =
 
 
 checkBoxView =
-    checkbox [ checked False ] []
+    checkbox [ checked False, onClickStopPropagation Msg.NoOp ] []
 
 
 todoInputId todoId =

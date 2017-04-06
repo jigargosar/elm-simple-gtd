@@ -194,7 +194,7 @@ update msg =
                                             identity
 
                                 NavigateEditMode ->
-                                    case key of
+                                    (case key of
                                         Key.CharP ->
                                             andThenUpdate (SetView ProjectListView)
 
@@ -207,11 +207,10 @@ update msg =
                                         Key.CharD ->
                                             andThenUpdate (SetView DoneView)
 
-                                        Key.Escape ->
-                                            andThenUpdate DeactivateEditingMode
-
                                         _ ->
-                                            andThenUpdate DeactivateEditingMode
+                                            identity
+                                    )
+                                        >> andThenUpdate DeactivateEditingMode
 
                                 _ ->
                                     identity

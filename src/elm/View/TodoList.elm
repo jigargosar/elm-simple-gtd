@@ -13,6 +13,7 @@ import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
 import Project exposing (ProjectId, ProjectName)
 import ProjectStore
+import Set exposing (Set)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -39,6 +40,7 @@ type alias ViewContext =
     , encodedProjectNames : Json.Encode.Value
     , maybeEditTodoModel : Maybe EditTodoModel
     , projectIdToNameDict : Dict ProjectId ProjectName
+    , selection : Set TodoId
     }
 
 
@@ -48,6 +50,7 @@ createViewContext model =
     , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames
     , maybeEditTodoModel = Model.EditMode.getMaybeEditTodoModel model
     , projectIdToNameDict = Model.getProjectStore model |> ProjectStore.getProjectIdToNameDict
+    , selection = Model.getSelectedTodoIdSet model
     }
 
 

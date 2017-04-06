@@ -91,6 +91,10 @@ toggleSelection todo m =
             { m | selection = Set.insert todoId selection }
 
 
+getSelectedTodoIdSet =
+    (.selection)
+
+
 type alias Lens small big =
     { get : big -> small, set : small -> big -> big }
 

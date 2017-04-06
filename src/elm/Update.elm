@@ -202,7 +202,8 @@ copyAndEditTodo todo =
     Return.andThenModelWith Model.getNow
         (\now ->
             Model.addCopyOfTodo todo now
-                >> (\( todo, model ) -> model ! [ Msg.toCmd (Msg.StartEditingTodo todo) ])
+                >> Tuple2.swap
+                >> Tuple.mapSecond (Msg.StartEditingTodo >> Msg.toCmd)
         )
 
 

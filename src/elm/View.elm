@@ -153,7 +153,7 @@ headerView m =
                             ]
                             []
                         , iconButton
-                            [ icon "trash"
+                            [ icon "delete"
                             , onClick Msg.SelectionTrashClicked
                             ]
                             []

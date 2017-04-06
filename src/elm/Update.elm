@@ -214,8 +214,11 @@ update msg =
 
                                 GotoGroupedViewCommandMode ->
                                     (case key of
-                                        Key.CharG ->
-                                            Return.map (Model.setEditMode GotoGroupedViewCommandMode)
+                                        Key.CharP ->
+                                            andThenUpdate (SetView ProjectListView)
+
+                                        Key.CharC ->
+                                            andThenUpdate (SetView GroupByContextView)
 
                                         _ ->
                                             identity

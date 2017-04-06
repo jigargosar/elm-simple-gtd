@@ -76,11 +76,6 @@ subscription tagger =
     Sub.map tagger KX.subscriptions
 
 
-update2 : (KX.State -> model) -> Msg -> State -> model
-update2 setter =
-    KX.update >>> setter
-
-
 update =
     KX.update
 

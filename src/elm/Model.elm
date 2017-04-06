@@ -91,6 +91,10 @@ toggleSelection todo m =
             { m | selection = Set.insert todoId selection }
 
 
+clearSelection m =
+    { m | selection = Set.empty }
+
+
 getSelectedTodoIdSet =
     (.selection)
 

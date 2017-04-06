@@ -137,7 +137,7 @@ update msg =
                     Return.map (Model.toggleSelection todo)
 
                 SetView viewType ->
-                    Return.map (Model.setMainViewType viewType)
+                    Return.map (Model.setMainViewType viewType >> Model.clearSelection)
 
                 OnNowChanged now ->
                     onUpdateNow now

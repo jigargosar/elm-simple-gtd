@@ -17,7 +17,7 @@ import ProjectStore
 
 activateNewTodoMode : String -> ModelF
 activateNewTodoMode text =
-    setEditModel (NewTodo text)
+    setEditMode (NewTodo text)
 
 
 setEditModelToEditTodo : Todo -> ModelF
@@ -39,7 +39,7 @@ createEditTodoModel todo model =
 
 updateEditTodoText : String -> EditTodoModel -> ModelF
 updateEditTodoText text editTodoModel =
-    setEditModel (EditTodo ({ editTodoModel | todoText = text }))
+    setEditMode (EditTodo ({ editTodoModel | todoText = text }))
 
 
 getMaybeEditTodoModel model =
@@ -62,8 +62,8 @@ getEditNewTodoModel model =
 
 updateEditTodoProjectName : ProjectName -> EditTodoModel -> ModelF
 updateEditTodoProjectName projectName editTodoModel =
-    setEditModel (EditTodo ({ editTodoModel | projectName = projectName }))
+    setEditMode (EditTodo ({ editTodoModel | projectName = projectName }))
 
 
 deactivateEditingMode =
-    setEditModel NotEditing
+    setEditMode NotEditing

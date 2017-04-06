@@ -30,6 +30,7 @@ type EditMode
     = NewTodo NewTodoModel
     | EditTodo EditTodoModel
     | NotEditing
+    | Navigate
 
 
 type alias Selection =

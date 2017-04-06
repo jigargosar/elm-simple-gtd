@@ -188,7 +188,7 @@ update msg =
                                             andThenUpdate ClearSelection
 
                                         Key.CharG ->
-                                            andThenUpdate ClearSelection
+                                            Return.map (Model.setEditMode Navigate)
 
                                         _ ->
                                             identity

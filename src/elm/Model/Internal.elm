@@ -45,14 +45,14 @@ getEditModel =
     (.editModel)
 
 
-setEditModel : EditMode -> ModelF
-setEditModel editModel model =
+setEditMode : EditMode -> ModelF
+setEditMode editModel model =
     { model | editModel = editModel }
 
 
 updateEditModel : (Model -> EditMode) -> ModelF
 updateEditModel updater model =
-    setEditModel (updater model) model
+    setEditMode (updater model) model
 
 
 getMaybeRunningTodoInfo : Model -> Maybe RunningTodo

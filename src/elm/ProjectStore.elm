@@ -2,10 +2,11 @@ module ProjectStore exposing (..)
 
 import Dict
 import Ext.Random as Random
+import Maybe.Extra
 import PouchDB
 import Project exposing (EncodedProject, Project, ProjectName)
 import ProjectStore.Types exposing (..)
-import ProjectStore.Internal as Internal exposing (..)
+import String.Extra
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -16,10 +17,6 @@ import Json.Encode as E
 import List.Extra as List
 import Random.Pcg as Random
 import Time exposing (Time)
-
-
-generator =
-    Internal.generator
 
 
 getEncodedProjectNames =
@@ -34,9 +31,18 @@ findNameById id =
     PouchDB.findById id >>? Project.getName
 
 
-findByName =
-    Internal.findByName
+generator : List EncodedProject -> Random.Generator ProjectStore
+generator =
+    PouchDB.generator "project-db" Project.encode Project.decoder
 
 
-insertProjectIfNotExist =
-    Internal.insertIfNotExistByName
+findByName projectName =
+    PouchDB.findBy (Project.nameEquals (String.trim projectName))
+
+
+insertIfNotExistByName projectName now m =
+    if (String.Extra.isBlank projectName) then
+        m
+    else
+        findByName projectName m
+            |> Maybe.Extra.unpack (\_ -> PouchDB.insert (Project.init projectName now) m) (\_ -> m)

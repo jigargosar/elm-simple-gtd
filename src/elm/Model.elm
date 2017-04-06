@@ -64,13 +64,13 @@ getMaybeProjectNameOfTodo todo model =
 insertProjectIfNotExist2 : ProjectName -> ModelF
 insertProjectIfNotExist2 projectName =
     (update2 projectStore now)
-        (ProjectStore.insertProjectIfNotExist projectName)
+        (ProjectStore.insertIfNotExistByName projectName)
 
 
 insertProjectIfNotExist : ProjectName -> ModelF
 insertProjectIfNotExist projectName =
     apply2With ( getNow, getProjectStore )
-        (ProjectStore.insertProjectIfNotExist projectName >>> setProjectStore)
+        (ProjectStore.insertIfNotExistByName projectName >>> setProjectStore)
 
 
 type alias Lens small big =

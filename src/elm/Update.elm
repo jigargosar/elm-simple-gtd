@@ -137,7 +137,17 @@ update msg =
                     Return.map (Model.toggleSelection todo)
 
                 SetView viewType ->
-                    Return.map (Model.setMainViewType viewType >> Model.clearSelection)
+                    Return.map (Model.setMainViewType viewType)
+                        >> andThenUpdate ClearSelection
+
+                ClearSelection ->
+                    Return.map (Model.clearSelection)
+
+                SelectionDoneClicked ->
+                    Return.map (Model.clearSelection)
+
+                SelectionTrashClicked ->
+                    Return.map (Model.clearSelection)
 
                 OnNowChanged now ->
                     onUpdateNow now
@@ -170,7 +180,7 @@ update msg =
                                             andThenUpdate (SetView DoneView)
 
                                         Key.CharC ->
-                                            Return.map (Model.clearSelection)
+                                            andThenUpdate ClearSelection
 
                                         _ ->
                                             identity

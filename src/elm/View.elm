@@ -145,7 +145,24 @@ headerView m =
                 if selectedTodoCount == 0 then
                     h1 [ id "toolbar-title" ] [ text "SimpleGTD - alpha" ]
                 else
-                    h2 [] [ "selected todo count = " ++ (toString selectedTodoCount) |> text ]
+                    span []
+                        [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
+                        , iconButton
+                            [ icon "check"
+                            , onClick Msg.SelectionDoneClicked
+                            ]
+                            []
+                        , iconButton
+                            [ icon "trash"
+                            , onClick Msg.SelectionTrashClicked
+                            ]
+                            []
+                        , iconButton
+                            [ icon "cancel"
+                            , onClick Msg.ClearSelection
+                            ]
+                            []
+                        ]
 
 
 addTodoFabView m =

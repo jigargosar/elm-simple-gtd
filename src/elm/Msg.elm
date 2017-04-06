@@ -58,6 +58,9 @@ type Msg
     | EditTodoProjectNameChanged EditTodoModel ProjectName
     | EditTodoKeyUp EditTodoModel KeyboardEvent
     | TodoCheckBoxClicked Todo
+    | ClearSelection
+    | SelectionDoneClicked
+    | SelectionTrashClicked
     | SetView MainViewType
     | OnNowChanged Time
     | OnMsgList (List Msg)

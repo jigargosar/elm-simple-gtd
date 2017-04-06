@@ -122,6 +122,9 @@ update msg =
 
                 OnMsgList messages ->
                     onMsgList messages
+
+                OnKeyboardMsg msg ->
+                    identity
            )
         >> persistAll
 

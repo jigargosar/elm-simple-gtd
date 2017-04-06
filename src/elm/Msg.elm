@@ -2,7 +2,7 @@ module Msg exposing (..)
 
 import Dom
 import Ext.Cmd
-import Ext.Keyboard exposing (KeyboardEvent)
+import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Model.Types exposing (..)
 import Project exposing (ProjectName)
 import Return
@@ -75,6 +75,7 @@ type Msg
     | SetMainViewType MainViewType
     | OnNowChanged Time
     | OnMsgList (List Msg)
+    | OnKeyboardMsg Keyboard.Msg
 
 
 toCmds : List Msg -> Cmd Msg

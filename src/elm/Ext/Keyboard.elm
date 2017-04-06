@@ -63,6 +63,11 @@ init =
     KX.initialState
 
 
+type alias Msg =
+    KX.Msg
+
+
+subscription : (Msg -> msg) -> Sub msg
 subscription tagger =
     Sub.map tagger KX.subscriptions
 

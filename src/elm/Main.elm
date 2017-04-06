@@ -1,6 +1,7 @@
 port module Main exposing (..)
 
 import Dom
+import Ext.Keyboard as Keyboard
 import Model.EditModel
 import Model.RunningTodo
 import Project exposing (EncodedProject)
@@ -8,7 +9,6 @@ import Ext.Random as Random
 import Random.Pcg as Random exposing (Seed)
 import Ext.Function exposing (..)
 import Json.Encode as E
-import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model
 import Routes
 import Model.Types exposing (..)
@@ -58,4 +58,7 @@ init { now, encodedTodoList, encodedProjectList } =
 
 
 subscriptions m =
-    Sub.batch [ Time.every Time.second (OnNowChanged) ]
+    Sub.batch
+        [ Time.every Time.second (OnNowChanged)
+        , Keyboard.subscription OnKeyboardMsg
+        ]

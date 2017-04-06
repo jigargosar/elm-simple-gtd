@@ -76,6 +76,7 @@ type Msg
     | OnNowChanged Time
     | OnMsgList (List Msg)
     | OnKeyboardMsg Keyboard.Msg
+    | OnKeyUp Keyboard.Key
 
 
 toCmds : List Msg -> Cmd Msg

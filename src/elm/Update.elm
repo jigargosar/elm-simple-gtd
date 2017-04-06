@@ -15,7 +15,7 @@ import Random.Pcg as Random exposing (Seed)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Json.Encode as E
-import Keyboard.Extra exposing (Key(Enter, Escape))
+import Keyboard.Extra as Key
 import Model
 import Routes
 import String.Extra
@@ -84,11 +84,11 @@ update msg =
 
                 NewTodoKeyUp text { key } ->
                     case key of
-                        Enter ->
+                        Key.Enter ->
                             Return.command (Msg.saveNewTodo text |> Msg.toCmd)
                                 >> activateEditNewTodoMode ""
 
-                        Escape ->
+                        Key.Escape ->
                             deactivateEditingMode
 
                         _ ->
@@ -106,10 +106,10 @@ update msg =
 
                 EditTodoKeyUp editTodoModel { key, isShiftDown } ->
                     case key of
-                        Enter ->
+                        Key.Enter ->
                             onEditTodoEnterPressed editTodoModel isShiftDown
 
-                        Escape ->
+                        Key.Escape ->
                             deactivateEditingMode
 
                         _ ->
@@ -126,6 +126,14 @@ update msg =
 
                 OnKeyboardMsg msg ->
                     Return.map (Model.update Model.keyboardState (Keyboard.update msg))
+
+                OnKeyUp key ->
+                    case key of
+                        Key.CharQ ->
+                            identity
+
+                        _ ->
+                            identity
            )
         >> persistAll
 

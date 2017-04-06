@@ -67,6 +67,10 @@ type alias Msg =
     KX.Msg
 
 
+type alias Key =
+    KX.Key
+
+
 type alias State =
     KX.State
 

@@ -61,4 +61,5 @@ subscriptions m =
     Sub.batch
         [ Time.every Time.second (OnNowChanged)
         , Keyboard.subscription OnKeyboardMsg
+        , Keyboard.keyUps OnKeyUp
         ]

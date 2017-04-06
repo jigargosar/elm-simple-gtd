@@ -46,7 +46,7 @@ type Msg
     | ToggleTodoDone Todo
     | ToggleTodoDeleted Todo
     | SetTodoContext TodoContext Todo
-    | Create String
+    | CreateTodo String
     | CopyAndEditTodo Todo
     | StartAddingTodo
     | NewTodoTextChanged TodoText

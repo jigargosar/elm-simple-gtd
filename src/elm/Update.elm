@@ -68,7 +68,7 @@ update msg =
                 SetTodoContext todoContext todo ->
                     updateTodo [ Todo.SetContext todoContext ] todo
 
-                Create text ->
+                CreateTodo text ->
                     Return.mapModelWith Model.getNow
                         (\now -> Model.addNewTodo text now >> Tuple.second)
 
@@ -85,7 +85,7 @@ update msg =
                 NewTodoKeyUp text { key } ->
                     case key of
                         Key.Enter ->
-                            andThenUpdate (Msg.Create text)
+                            andThenUpdate (Msg.CreateTodo text)
                                 >> andThenUpdate StartAddingTodo
 
                         Key.Escape ->

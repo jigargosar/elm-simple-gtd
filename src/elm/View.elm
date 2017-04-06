@@ -141,6 +141,9 @@ headerView m =
                     ]
                     []
 
+            NavigateEditMode ->
+                span [] [ "goto" |> text ]
+
             _ ->
                 if selectedTodoCount == 0 then
                     h1 [ id "toolbar-title" ] [ text "SimpleGTD - alpha" ]

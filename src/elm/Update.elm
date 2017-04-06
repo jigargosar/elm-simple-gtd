@@ -169,6 +169,9 @@ update msg =
                                         Key.CharD ->
                                             andThenUpdate (SetView DoneView)
 
+                                        Key.CharC ->
+                                            Return.map (Model.clearSelection)
+
                                         _ ->
                                             identity
 

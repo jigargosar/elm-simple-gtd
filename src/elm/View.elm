@@ -141,7 +141,7 @@ headerView m =
                     ]
                     []
 
-            NavigateEditMode ->
+            GotoCommandMode ->
                 span [] [ "goto" |> text ]
 
             _ ->

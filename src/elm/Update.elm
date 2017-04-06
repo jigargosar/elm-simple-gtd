@@ -182,12 +182,12 @@ update msg =
                                             Return.command (Navigation.forward 1)
 
                                         Key.CharG ->
-                                            Return.map (Model.setEditMode NavigateEditMode)
+                                            Return.map (Model.setEditMode GotoCommandMode)
 
                                         _ ->
                                             identity
 
-                                NavigateEditMode ->
+                                GotoCommandMode ->
                                     (case key of
                                         Key.CharP ->
                                             andThenUpdate (SetView ProjectListView)

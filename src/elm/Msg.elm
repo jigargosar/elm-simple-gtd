@@ -53,7 +53,7 @@ type Msg
     | Create String
     | StartAddingTodo
     | NewTodoTextChanged TodoText
-    | NewTodoBlur
+    | DeactivateEditingMode
     | NewTodoKeyUp String KeyboardEvent
     | StartEditingTodo Todo
     | FocusPaperInput String

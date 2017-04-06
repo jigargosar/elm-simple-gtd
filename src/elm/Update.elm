@@ -79,7 +79,7 @@ update msg =
                 NewTodoTextChanged text ->
                     activateEditNewTodoMode text
 
-                NewTodoBlur ->
+                DeactivateEditingMode ->
                     deactivateEditingMode
 
                 NewTodoKeyUp text { key } ->

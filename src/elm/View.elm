@@ -128,7 +128,7 @@ newTodoInputView maybeNewTodoModel =
                 , class "auto-focus"
                 , onInput Msg.onNewTodoInput
                 , value text
-                , onBlur Msg.NewTodoBlur
+                , onBlur Msg.DeactivateEditingMode
                 , onKeyUp (Msg.NewTodoKeyUp text)
                 , stringProperty "label" "New Todo"
                 , boolProperty "alwaysFloatLabel" True

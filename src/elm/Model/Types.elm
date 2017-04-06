@@ -6,6 +6,7 @@ import Project exposing (ProjectId, ProjectName)
 import ProjectStore.Types exposing (ProjectStore)
 import Random.Pcg exposing (Seed)
 import RunningTodo exposing (RunningTodo)
+import Set exposing (Set)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -32,7 +33,7 @@ type EditMode
 
 
 type alias Selection =
-    List TodoId
+    Set TodoId
 
 
 type MainViewType

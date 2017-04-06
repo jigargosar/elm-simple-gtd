@@ -17,6 +17,7 @@ import Ext.Random as Random
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
+import Set
 import Time exposing (Time)
 import Todo.Types exposing (..)
 import Todo
@@ -46,7 +47,7 @@ init now encodedTodoList encodedProjectStore =
         , maybeRunningTodo = Nothing
         , projectStore = projectStore
         , keyboardState = Keyboard.init
-        , selection = []
+        , selection = Set.empty
         }
 
 

@@ -45,4 +45,9 @@ insertIfNotExistByName projectName now m =
         m
     else
         findByName projectName m
-            |> Maybe.Extra.unpack (\_ -> PouchDB.insert (Project.init projectName now) m) (\_ -> m)
+            |> Maybe.Extra.unpack
+                (\_ ->
+                    PouchDB.insert (Project.init projectName now) m
+                        |> Tuple.second
+                )
+                (\_ -> m)

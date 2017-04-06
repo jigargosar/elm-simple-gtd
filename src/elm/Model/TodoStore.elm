@@ -101,19 +101,22 @@ replaceTodoIfEqualById todo =
     List.replaceIf (Todo.equalById todo) todo
 
 
-addCopyOfTodo : Todo -> Time -> ModelF
+addCopyOfTodo : Todo -> Time -> Model -> ( Todo, Model )
 addCopyOfTodo todo now =
     insertTodoByIdConstructor (Todo.copyTodo now todo)
 
 
-addNewTodo : String -> Time -> ModelF
+addNewTodo : String -> Time -> Model -> ( Todo, Model )
 addNewTodo text now =
     insertTodoByIdConstructor (Todo.init now text)
 
 
+insertTodoByIdConstructor : (PouchDB.Id -> Todo) -> Model -> ( Todo, Model )
 insertTodoByIdConstructor constructWithId =
     applyWith (Model.getTodoStore)
-        (PouchDB.insert (constructWithId) >> Model.setTodoStore)
+        (PouchDB.insert (constructWithId)
+            >> (\tuple model -> Tuple.mapSecond (Model.setTodoStore # model) tuple)
+        )
 
 
 updateTodoFromEditTodoModel : EditTodoModel -> ModelF

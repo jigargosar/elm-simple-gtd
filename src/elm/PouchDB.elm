@@ -122,11 +122,17 @@ addFromTuple =
     apply2 ( Tuple.first, uncurry prepend )
 
 
-insert : (Id -> Document x) -> Store x -> Store x
+insert : (Id -> Document x) -> Store x -> ( Document x, Store x )
 insert constructor s =
     Random.mapWithIdGenerator constructor
         |> (generate # s)
-        |> (\( d, s ) -> prepend { d | dirty = True } s)
+        |> (\( d, s ) ->
+                let
+                    nd =
+                        { d | dirty = True }
+                in
+                    ( nd, prepend nd s )
+           )
 
 
 update : Document x -> Store x -> Store x

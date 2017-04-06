@@ -69,7 +69,7 @@ update msg =
 
                 Create text ->
                     Return.mapModelWith Model.getNow
-                        (\now -> Model.addNewTodo text now)
+                        (\now -> Model.addNewTodo text now >> Tuple.second)
 
                 AddTodoClicked ->
                     activateEditNewTodoMode ""
@@ -201,7 +201,8 @@ copyAndEditTodo : Todo -> ReturnF
 copyAndEditTodo todo =
     Return.andThenModelWith Model.getNow
         (\now ->
-            Model.addCopyOfTodo todo now >> update (Msg.StartEditingTodo todo)
+            Model.addCopyOfTodo todo now
+                >> (\( todo, model ) -> update (Msg.StartEditingTodo todo) model)
         )
 
 

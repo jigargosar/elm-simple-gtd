@@ -22,12 +22,12 @@ type alias EditTodoModel =
     { todoId : TodoId, todo : Todo, todoText : TodoText, projectName : Project.ProjectName }
 
 
-type alias NewTodoModel =
+type alias NewTodoEditModel =
     TodoText
 
 
 type EditMode
-    = NewTodoMode NewTodoModel
+    = NewTodoEditMode NewTodoEditModel
     | EditTodo EditTodoModel
     | NotEditing
     | Navigate

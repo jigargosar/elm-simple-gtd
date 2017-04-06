@@ -127,7 +127,7 @@ headerView m =
             Model.getSelectedTodoIdSet m |> Set.size
     in
         case Model.getEditMode m of
-            NewTodoMode text ->
+            NewTodoEditMode text ->
                 input
                     [ id newTodoInputId
                     , class "auto-focus"

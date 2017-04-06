@@ -201,6 +201,9 @@ update msg =
                                         Key.CharD ->
                                             andThenUpdate (SetView DoneView)
 
+                                        Key.CharG ->
+                                            identity
+
                                         _ ->
                                             identity
                                     )

@@ -199,7 +199,7 @@ onEditTodoEnterPressed editTodoModel isShiftDown =
 
 copyAndEditTodo : Todo -> ReturnF
 copyAndEditTodo todo =
-    Return.andThenModelWith Model.getNow
+    Return.andThenApplyWith Model.getNow
         (\now ->
             Model.addCopyOfTodo todo now
                 >> Tuple2.swap

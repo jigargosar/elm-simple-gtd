@@ -44,7 +44,7 @@ mapModelWith f1 f2 =
         )
 
 
-andThenModelWith f1 f2 =
+andThenApplyWith f1 f2 =
     Return.andThen
         (\m ->
             (f2 (f1 m)) m

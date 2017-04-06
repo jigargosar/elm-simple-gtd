@@ -10,7 +10,7 @@ import Model
 import Model.Internal as Model
 import Model.EditModel
 import Model.RunningTodo exposing (RunningTodoViewModel)
-import Msg exposing (..)
+import Msg exposing (Msg)
 import View.TodoList exposing (..)
 import View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
@@ -126,10 +126,10 @@ newTodoInputView maybeNewTodoModel =
             input
                 [ id newTodoInputId
                 , class "auto-focus"
-                , onInput onNewTodoInput
+                , onInput Msg.onNewTodoInput
                 , value text
-                , onBlur onNewTodoBlur
-                , onKeyUp (onNewTodoKeyUp text)
+                , onBlur Msg.NewTodoBlur
+                , onKeyUp (Msg.NewTodoKeyUp text)
                 , stringProperty "label" "New Todo"
                 , boolProperty "alwaysFloatLabel" True
                 , style [ ( "width", "100%" ), "color" => "white" ]

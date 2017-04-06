@@ -38,14 +38,6 @@ onNewTodoInput =
     NewTodoTextChanged
 
 
-onNewTodoBlur =
-    NewTodoBlur
-
-
-onNewTodoKeyUp =
-    NewTodoKeyUp
-
-
 stopAndMarkDone =
     MarkRunningTodoDone
 

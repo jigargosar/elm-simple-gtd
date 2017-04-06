@@ -85,9 +85,8 @@ update msg =
                 NewTodoKeyUp text { key } ->
                     case key of
                         Key.Enter ->
-                            --                            Return.command (Msg.Create text |> Msg.toCmd)
                             andThenUpdate (Msg.Create text)
-                                >> activateEditNewTodoMode ""
+                                >> andThenUpdate StartAddingTodo
 
                         Key.Escape ->
                             andThenUpdate DeactivateEditingMode
@@ -116,17 +115,16 @@ update msg =
                 EditTodoKeyUp editTodoModel { key, isShiftDown } ->
                     case key of
                         Key.Enter ->
-                            let
-                                copyAndEditTodo : Todo -> ReturnF
-                                copyAndEditTodo todo =
-                                    andThenUpdate (CopyAndEditTodo todo)
-                            in
-                                Return.map
-                                    (Model.insertProjectIfNotExist editTodoModel.projectName
-                                        >> Model.updateTodoFromEditTodoModel editTodoModel
+                            Return.map
+                                (Model.insertProjectIfNotExist editTodoModel.projectName
+                                    >> Model.updateTodoFromEditTodoModel editTodoModel
+                                )
+                                >> andThenUpdate
+                                    (if isShiftDown then
+                                        CopyAndEditTodo editTodoModel.todo
+                                     else
+                                        DeactivateEditingMode
                                     )
-                                    >> whenBool isShiftDown (copyAndEditTodo editTodoModel.todo)
-                                    >> whenBool (not isShiftDown) (andThenUpdate DeactivateEditingMode)
 
                         Key.Escape ->
                             andThenUpdate DeactivateEditingMode

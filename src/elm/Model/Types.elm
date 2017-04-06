@@ -31,6 +31,11 @@ type EditMode
     | NotEditing
 
 
+type Selection
+    = NotSelected
+    | SelectedTodoIds (List TodoId)
+
+
 type MainViewType
     = GroupByContextView
     | TodoContextView String

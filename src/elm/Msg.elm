@@ -22,10 +22,6 @@ setTodoContext =
     SetTodoContext
 
 
-saveNewTodo =
-    Create
-
-
 start =
     Start
 

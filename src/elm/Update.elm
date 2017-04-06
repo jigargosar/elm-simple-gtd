@@ -85,7 +85,7 @@ update msg =
                 NewTodoKeyUp text { key } ->
                     case key of
                         Key.Enter ->
-                            Return.command (Msg.saveNewTodo text |> Msg.toCmd)
+                            Return.command (Msg.Create text |> Msg.toCmd)
                                 >> activateEditNewTodoMode ""
 
                         Key.Escape ->

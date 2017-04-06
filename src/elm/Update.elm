@@ -153,6 +153,9 @@ update msg =
                                         Key.CharQ ->
                                             andThenUpdate StartAddingTodo
 
+                                        Key.CharP ->
+                                            andThenUpdate (SetMainViewType ProjectListView)
+
                                         _ ->
                                             identity
 

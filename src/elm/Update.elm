@@ -146,6 +146,9 @@ update msg =
                 SelectionDoneClicked ->
                     Return.map (Model.clearSelection)
 
+                SelectionEditClicked ->
+                    Return.map (Model.clearSelection)
+
                 SelectionTrashClicked ->
                     Return.map (Model.clearSelection)
 

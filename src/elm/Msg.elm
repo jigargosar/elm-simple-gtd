@@ -60,6 +60,7 @@ type Msg
     | TodoCheckBoxClicked Todo
     | ClearSelection
     | SelectionDoneClicked
+    | SelectionEditClicked
     | SelectionTrashClicked
     | SetView MainViewType
     | OnNowChanged Time

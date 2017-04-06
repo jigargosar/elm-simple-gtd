@@ -153,6 +153,11 @@ headerView m =
                             ]
                             []
                         , iconButton
+                            [ icon "edit"
+                            , onClick Msg.SelectionEditClicked
+                            ]
+                            []
+                        , iconButton
                             [ icon "delete"
                             , onClick Msg.SelectionTrashClicked
                             ]

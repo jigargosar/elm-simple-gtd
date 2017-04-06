@@ -3,11 +3,11 @@ module View.AppDrawer exposing (..)
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, hr, node, span, text)
-import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
+import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, tabindex, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model.TodoStore
-import Msg exposing (Msg(SetMainViewType))
+import Msg exposing (Msg(SetView))
 import View.TodoList exposing (groupByTodoContext)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -36,7 +36,7 @@ appDrawerView m =
             [ menu
                 [ stringProperty "selected" "0"
                 ]
-                ([ item [ onClick (SetMainViewType AllByTodoContextView) ] [ text "All" ]
+                ([ item [ onClick (SetView GroupByContextView) ] [ text "All" ]
                  , divider
                  , projectsItemView m
                  , divider
@@ -56,15 +56,15 @@ divider =
 
 
 projectsItemView m =
-    item [ onClick (SetMainViewType ProjectListView) ] [ text "Projects" ]
+    item [ onClick (SetView ProjectListView) ] [ text "Projects" ]
 
 
 binItemView m =
-    item [ onClick (SetMainViewType BinView) ] [ text "Bin" ]
+    item [ onClick (SetView BinView) ] [ text "Bin" ]
 
 
 doneItemView m =
-    item [ onClick (SetMainViewType DoneView) ] [ text "Done" ]
+    item [ onClick (SetView DoneView) ] [ text "Done" ]
 
 
 todoContextsMenuItems =

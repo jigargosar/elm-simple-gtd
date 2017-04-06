@@ -20,7 +20,7 @@ delta2builder previous current =
 
 getPathFromModel model =
     case Model.getMainViewType model of
-        AllByTodoContextView ->
+        GroupByContextView ->
             [ "lists", "all" ]
 
         BinView ->
@@ -48,19 +48,19 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "all" :: [] ->
-            [ Msg.SetMainViewType AllByTodoContextView ]
+            [ Msg.SetView GroupByContextView ]
 
         "lists" :: "projects" :: [] ->
-            [ Msg.SetMainViewType ProjectListView ]
+            [ Msg.SetView ProjectListView ]
 
         "lists" :: "bin" :: [] ->
-            [ Msg.SetMainViewType BinView ]
+            [ Msg.SetView BinView ]
 
         "lists" :: "done" :: [] ->
-            [ Msg.SetMainViewType DoneView ]
+            [ Msg.SetView DoneView ]
 
         "project" :: projectId :: [] ->
-            [ Msg.SetMainViewType (ProjectView projectId) ]
+            [ Msg.SetView (ProjectView projectId) ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

@@ -59,7 +59,7 @@ createProjectItemViewModel project =
         projectId =
             Project.getId project
     in
-        { onClick = projectId |> ProjectView >> Msg.SetMainViewType
+        { onClick = projectId |> ProjectView >> Msg.SetView
         , name = project |> Project.getName
         , key = projectId
         }

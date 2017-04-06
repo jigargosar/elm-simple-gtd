@@ -132,7 +132,7 @@ update msg =
                         _ ->
                             identity
 
-                SetMainViewType viewType ->
+                SetView viewType ->
                     Return.map (Model.setMainViewType viewType)
 
                 OnNowChanged now ->
@@ -154,7 +154,10 @@ update msg =
                                             andThenUpdate StartAddingTodo
 
                                         Key.CharP ->
-                                            andThenUpdate (SetMainViewType ProjectListView)
+                                            andThenUpdate (SetView ProjectListView)
+
+                                        Key.CharA ->
+                                            andThenUpdate (SetView GroupByContextView)
 
                                         _ ->
                                             identity

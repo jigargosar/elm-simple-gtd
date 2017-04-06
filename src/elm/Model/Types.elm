@@ -32,7 +32,7 @@ type EditMode
 
 
 type MainViewType
-    = AllByTodoContextView
+    = GroupByContextView
     | TodoContextView String
     | ProjectView ProjectId
     | DoneView

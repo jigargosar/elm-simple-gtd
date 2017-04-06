@@ -57,7 +57,7 @@ type Msg
     | EditTodoTextChanged EditTodoModel String
     | EditTodoProjectNameChanged EditTodoModel ProjectName
     | EditTodoKeyUp EditTodoModel KeyboardEvent
-    | SetMainViewType MainViewType
+    | SetView MainViewType
     | OnNowChanged Time
     | OnMsgList (List Msg)
     | OnKeyboardMsg Keyboard.Msg

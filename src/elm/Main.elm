@@ -12,7 +12,6 @@ import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model as Model
 import Routes
 import Model.Types exposing (..)
-
 import Todo.Types exposing (..)
 import View exposing (appView)
 import Navigation exposing (Location)
@@ -48,7 +47,7 @@ main =
         , init = init
         , update = Update.update
         , view = appView
-        , subscriptions = \m -> Sub.batch [ Time.every Time.second (OnNowChanged) ]
+        , subscriptions = subscriptions
         }
 
 
@@ -56,3 +55,7 @@ init : Flags -> Return
 init { now, encodedTodoList, encodedProjectList } =
     Model.init now encodedTodoList encodedProjectList
         |> Return.singleton
+
+
+subscriptions m =
+    Sub.batch [ Time.every Time.second (OnNowChanged) ]

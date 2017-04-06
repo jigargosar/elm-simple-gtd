@@ -114,9 +114,11 @@ addNewTodo text now =
 insertTodoByIdConstructor : (PouchDB.Id -> Todo) -> Model -> ( Todo, Model )
 insertTodoByIdConstructor constructWithId =
     applyWith (Model.getTodoStore)
-        (PouchDB.insert (constructWithId)
-            >> (\tuple model -> Tuple.mapSecond (Model.setTodoStore # model) tuple)
-        )
+        (PouchDB.insert (constructWithId) >> setTodoStoreFromTuple)
+
+
+setTodoStoreFromTuple tuple model =
+    tuple |> Tuple.mapSecond (Model.setTodoStore # model)
 
 
 updateTodoFromEditTodoModel : EditTodoModel -> ModelF

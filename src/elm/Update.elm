@@ -2,7 +2,7 @@ port module Update exposing (..)
 
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
-import Ext.Keyboard
+import Ext.Keyboard as Keyboard
 import Ext.Return as Return
 import Model.EditModel as Model
 import Model.Internal as Model
@@ -125,7 +125,7 @@ update msg =
                     onMsgList messages
 
                 OnKeyboardMsg msg ->
-                    Return.map (Model.update Model.keyboardState (Ext.Keyboard.update msg))
+                    Return.map (Model.update Model.keyboardState (Keyboard.update msg))
            )
         >> persistAll
 

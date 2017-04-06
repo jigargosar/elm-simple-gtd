@@ -159,6 +159,12 @@ update msg =
                                         Key.CharA ->
                                             andThenUpdate (SetView GroupByContextView)
 
+                                        Key.CharB ->
+                                            andThenUpdate (SetView BinView)
+
+                                        Key.CharD ->
+                                            andThenUpdate (SetView DoneView)
+
                                         _ ->
                                             identity
 

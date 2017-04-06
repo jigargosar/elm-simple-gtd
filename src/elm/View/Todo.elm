@@ -83,12 +83,16 @@ todoViewNotEditing vc todo =
     let
         projectName =
             Todo.getMaybeProjectId todo ?+> Dict.get # vc.projectIdToNameDict ?= "<No Project>"
+
+        vm =
+            { onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
+            }
     in
         item
             [ class "todo-item"
             , onClickStopPropagation (Msg.StartEditingTodo todo)
             ]
-            [ checkBoxView todo
+            [ checkBoxView vm
             , itemBody []
                 [ span
                     [ classList
@@ -109,8 +113,8 @@ todoViewNotEditing vc todo =
             ]
 
 
-checkBoxView =
-    checkbox [ checked False, onClickStopPropagation Msg.TodoCheckBoxClicked ] []
+checkBoxView vm =
+    checkbox [ checked False, onClickStopPropagation vm.onCheckBoxClicked ] []
 
 
 todoInputId todoId =

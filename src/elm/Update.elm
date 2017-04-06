@@ -195,11 +195,23 @@ update msg =
 
                                 NavigateEditMode ->
                                     case key of
+                                        Key.CharP ->
+                                            andThenUpdate (SetView ProjectListView)
+
+                                        Key.CharA ->
+                                            andThenUpdate (SetView GroupByContextView)
+
+                                        Key.CharB ->
+                                            andThenUpdate (SetView BinView)
+
+                                        Key.CharD ->
+                                            andThenUpdate (SetView DoneView)
+
                                         Key.Escape ->
                                             andThenUpdate DeactivateEditingMode
 
                                         _ ->
-                                            identity
+                                            andThenUpdate DeactivateEditingMode
 
                                 _ ->
                                     identity

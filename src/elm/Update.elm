@@ -18,6 +18,7 @@ import Json.Encode as E
 import Keyboard.Extra as Key
 import Model
 import Routes
+import Set
 import String.Extra
 import View exposing (appView)
 import Navigation exposing (Location)
@@ -133,7 +134,20 @@ update msg =
                             identity
 
                 TodoCheckBoxClicked todo ->
-                    identity
+                    Return.map
+                        (\m ->
+                            let
+                                todoId =
+                                    Todo.getId todo
+
+                                selection =
+                                    m.selection
+                            in
+                                if (Set.member todoId selection) then
+                                    { m | selection = Set.remove todoId selection }
+                                else
+                                    { m | selection = Set.insert todoId selection }
+                        )
 
                 SetView viewType ->
                     Return.map (Model.setMainViewType viewType)

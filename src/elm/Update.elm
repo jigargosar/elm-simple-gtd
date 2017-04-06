@@ -187,6 +187,9 @@ update msg =
                                         Key.CharC ->
                                             andThenUpdate ClearSelection
 
+                                        Key.CharG ->
+                                            andThenUpdate ClearSelection
+
                                         _ ->
                                             identity
 

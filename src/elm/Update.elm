@@ -202,7 +202,7 @@ copyAndEditTodo todo =
     Return.andThenModelWith Model.getNow
         (\now ->
             Model.addCopyOfTodo todo now
-                >> (\( todo, model ) -> update (Msg.StartEditingTodo todo) model)
+                >> (\( todo, model ) -> model ! [ Msg.toCmd (Msg.StartEditingTodo todo) ])
         )
 
 

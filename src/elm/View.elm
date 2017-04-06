@@ -8,7 +8,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model
 import Model.Internal as Model
-import Model.EditModel
+import Model.EditMode
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (Msg)
 import View.TodoList exposing (..)
@@ -63,7 +63,7 @@ appHeaderView m =
         [ App.toolbar
             []
             [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
-            , newTodoInputView (Model.EditModel.getEditNewTodoModel m)
+            , newTodoInputView (Model.EditMode.getEditNewTodoModel m)
             ]
 
         --        , runningTodoView m

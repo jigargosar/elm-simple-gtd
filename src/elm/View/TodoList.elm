@@ -6,7 +6,7 @@ import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
-import Model.EditModel
+import Model.EditMode
 import Model.Internal as Model
 import Model.TodoStore exposing (TodoContextViewModel)
 import Msg exposing (..)
@@ -46,7 +46,7 @@ createViewContext : Model -> Context
 createViewContext model =
     { now = Model.getNow model
     , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames
-    , maybeEditTodoModel = Model.EditModel.getMaybeEditTodoModel model
+    , maybeEditTodoModel = Model.EditMode.getMaybeEditTodoModel model
     , projectIdToNameDict = Model.getProjectStore model |> ProjectStore.getProjectIdToNameDict
     }
 

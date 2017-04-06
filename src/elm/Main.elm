@@ -2,7 +2,7 @@ port module Main exposing (..)
 
 import Dom
 import Ext.Keyboard as Keyboard
-import Model.EditModel
+import Model.EditMode
 import Model.RunningTodo
 import Project exposing (EncodedProject)
 import Ext.Random as Random

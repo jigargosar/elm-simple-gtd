@@ -1,4 +1,4 @@
-module Model.EditModel exposing (..)
+module Model.EditMode exposing (..)
 
 import Maybe.Extra as Maybe
 import Model

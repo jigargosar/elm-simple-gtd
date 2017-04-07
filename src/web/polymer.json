@@ -1,0 +1,14 @@
+{
+  "entrypoint": "index.html",
+  "shell": "imports.html",
+  "fragments": [
+  ],
+  "sources": [
+    "*.*",
+    "*"
+
+  ],
+  "includeDependencies": [
+    "common-bundle.js", "main-bundle.js"
+  ]
+}

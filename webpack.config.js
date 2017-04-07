@@ -8,7 +8,7 @@ const isDevEnv = nodeENV === "development"
 console.log("debug:", isDevEnv, nodeENV)
 
 
-const outputDir = isDevEnv ? "dev" : "polymer"
+const outputDir = isDevEnv ? "dev" : "app"
 
 
 module.exports = {
@@ -22,7 +22,11 @@ module.exports = {
         common:["babel-polyfill",
                 "./src/web/bower_components/webcomponentsjs/webcomponents-lite.js",
                 "./src/web/bower_components/web-animations-js/web-animations.min.js",
-                "./src/web/imports.html"
+                "./src/web/imports.html",
+                "./src/web/CNAME",
+                "./src/web/manifest.json",
+                "./src/web/polymer.json",
+                "./src/web/sw-precache-config.js"
         ],
         main: [
             './src/web/main.js',
@@ -54,8 +58,15 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /sw-precache-config.js$/,
+                // exclude: /node_modules|components/,
+                use: 'file-loader?name=[name].[ext]',
+                // use: 'file-loader',
+                // use: 'file-loader?name=[name]',
+            },
+            {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules|bower_components|sw-precache-config.js)/,
                 use: 'babel-loader',
             },
             {
@@ -74,6 +85,13 @@ module.exports = {
                 // exclude: /node_modules|components/,
                 use: 'file-loader?name=[name].[ext]',
                 // use: 'file-loader',
+            },
+            {
+                test: /CNAME$/,
+                // exclude: /node_modules|components/,
+                // use: 'file-loader?name=[name].[ext]',
+                // use: 'file-loader',
+                use: 'file-loader?name=[name]',
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,

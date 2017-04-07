@@ -2,9 +2,13 @@
   <dictionary name="jigargosar">
     <words>
       <w>accesskey</w>
+      <w>cname</w>
+      <w>entrypoint</w>
       <w>github</w>
       <w>goto</w>
       <w>hhmmss</w>
+      <w>minify</w>
+      <w>precache</w>
       <w>tabindex</w>
       <w>vaadin</w>
     </words>

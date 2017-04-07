@@ -9,4 +9,3 @@ tmp/
 config.json
 pouchdb-sqlite/
 src/web/bower_components/
-/polymer

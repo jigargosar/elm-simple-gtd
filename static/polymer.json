@@ -4,11 +4,9 @@
   "fragments": [
   ],
   "sources": [
-    "*.*",
-    "*"
-
+    "common-bundle.js", "main-bundle.js"
   ],
   "includeDependencies": [
-    "common-bundle.js", "main-bundle.js"
+
   ]
 }

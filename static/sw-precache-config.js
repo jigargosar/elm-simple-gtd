@@ -1,6 +1,6 @@
 module.exports = {
     staticFileGlobs: [
-        'manifest.json',
+        "manifest.json",
         "*.ogg",
         "common-bundle.js",
         "main-bundle.js"

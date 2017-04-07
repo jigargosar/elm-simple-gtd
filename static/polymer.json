@@ -4,9 +4,13 @@
   "fragments": [
   ],
   "sources": [
-    "common-bundle.js", "main-bundle.js"
+    "manifest.json",
+    "*.ogg",
+    "common-bundle.js",
+    "main-bundle.js",
+    "CNAME"
+
   ],
   "includeDependencies": [
-
   ]
 }

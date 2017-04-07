@@ -84,4 +84,8 @@ boot().catch(console.error)
 
 
 
-
+//noinspection JSUnresolvedVariable
+if (!WEB_PACK_DEV_SERVER &&'serviceWorker' in navigator) {
+    //noinspection JSUnresolvedVariable
+    navigator.serviceWorker.register('/service-worker.js');
+}

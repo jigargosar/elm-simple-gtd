@@ -26,7 +26,8 @@ module.exports = {
                 "./src/web/CNAME",
                 "./src/web/manifest.json",
                 "./src/web/polymer.json",
-                "./src/web/sw-precache-config.js"
+                "./src/web/sw-precache-config.js",
+                "./src/web/alarm.ogg"
         ],
         main: [
             './src/web/main.js',
@@ -81,7 +82,7 @@ module.exports = {
                 loader: 'style-loader!css-loader?importLoaders=1!postcss-loader'
             },
             {
-                test: /\.(html|json)$/,
+                test: /\.(html|json|ogg)$/,
                 // exclude: /node_modules|components/,
                 use: 'file-loader?name=[name].[ext]',
                 // use: 'file-loader',

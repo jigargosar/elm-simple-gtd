@@ -1,1 +1,5 @@
-module.exports={staticFileGlobs:["/*.*"]};
+module.exports = {
+    staticFileGlobs: [
+        '/*.*'
+    ]
+}

@@ -9,7 +9,7 @@
     "hot": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline",
     "prebuild": "rimraf app; rimraf docs; rimraf build; mkdir app; mkdir docs; ln -Fs `pwd`/src/web/bower_components app/bower_components",
     "build": "cross-env NODE_ENV=production webpack -p --progress; cd app; polymer build; cd ..",
-    "postbuild": "cp -r ./app/build/unbundled/ docs/",
+    "postbuild": "cp -r app/build/unbundled/ static/ docs/",
     "travis": "npm run bootstrap; npm run build"
   },
   "devDependencies": {

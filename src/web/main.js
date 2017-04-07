@@ -2,8 +2,6 @@
 
 import "./pcss/main.pcss"
 
-import "./index.html"
-
 import PouchDB from "./local-pouch-db"
 
 import R from "ramda"

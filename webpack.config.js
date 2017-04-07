@@ -22,7 +22,6 @@ module.exports = {
         common:["babel-polyfill",
                 "./src/web/bower_components/webcomponentsjs/webcomponents-lite.js",
                 "./src/web/bower_components/web-animations-js/web-animations.min.js",
-                "./src/web/imports.html",
         ],
         main: [
             './src/web/main.js',

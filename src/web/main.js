@@ -1,6 +1,5 @@
 "use strict";
 
-require("./common-require")
 
 import PouchDB from "./local-pouch-db"
 

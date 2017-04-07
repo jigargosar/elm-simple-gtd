@@ -68,12 +68,12 @@ module.exports = {
                 test: /\.(pcss|css)$/,
                 loader: 'style-loader!css-loader?importLoaders=1!postcss-loader'
             },
-            {
-                test: /\.(html|json|ogg)$/,
-                // exclude: /node_modules|components/,
-                use: 'file-loader?name=[name].[ext]',
-                // use: 'file-loader',
-            },
+            // {
+            //     test: /\.(html|json|ogg)$/,
+            //     // exclude: /node_modules|components/,
+            //     use: 'file-loader?name=[name].[ext]',
+            //     // use: 'file-loader',
+            // },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: 'url-loader?limit=10000&mimetype=application/font-woff',

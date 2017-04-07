@@ -93,7 +93,7 @@ module.exports = {
         port: 8020,
         // open:true,
         // inline: false,
-        contentBase:["src/web/", "static/"]
+        contentBase:["src/web/", "static/", "./"]
     },
 
 };

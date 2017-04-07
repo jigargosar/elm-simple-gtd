@@ -23,11 +23,6 @@ module.exports = {
                 "./src/web/bower_components/webcomponentsjs/webcomponents-lite.js",
                 "./src/web/bower_components/web-animations-js/web-animations.min.js",
                 "./src/web/imports.html",
-                "./src/web/CNAME",
-                "./src/web/manifest.json",
-                "./src/web/polymer.json",
-                "./src/web/sw-precache-config.js",
-                "./src/web/alarm.ogg"
         ],
         main: [
             './src/web/main.js',
@@ -99,7 +94,7 @@ module.exports = {
         port: 8020,
         // open:true,
         // inline: false,
-        contentBase:"./src/web/"
+        contentBase:["src/web/", "static/"]
     },
 
 };

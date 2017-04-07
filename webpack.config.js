@@ -59,15 +59,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /sw-precache-config.js$/,
-                // exclude: /node_modules|components/,
-                use: 'file-loader?name=[name].[ext]',
-                // use: 'file-loader',
-                // use: 'file-loader?name=[name]',
-            },
-            {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components|sw-precache-config.js)/,
+                exclude: /(node_modules|bower_components)/,
                 use: 'babel-loader',
             },
             {
@@ -86,13 +79,6 @@ module.exports = {
                 // exclude: /node_modules|components/,
                 use: 'file-loader?name=[name].[ext]',
                 // use: 'file-loader',
-            },
-            {
-                test: /CNAME$/,
-                // exclude: /node_modules|components/,
-                // use: 'file-loader?name=[name].[ext]',
-                // use: 'file-loader',
-                use: 'file-loader?name=[name]',
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,

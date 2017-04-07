@@ -1,6 +1,6 @@
 "use strict";
 
-import "./pcss/main.pcss"
+require("./common-require")
 
 import PouchDB from "./local-pouch-db"
 

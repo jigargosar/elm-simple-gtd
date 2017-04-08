@@ -74,7 +74,7 @@ todoViewFromModel =
 getTodoView vc todo =
     let
         notEditingView _ =
-            View.Todo.todoViewNotEditing vc todo
+            View.Todo.default vc todo
     in
         case vc.maybeEditTodoModel of
             Just etm ->

@@ -77,11 +77,27 @@ edit vm =
                 , intProperty "minLength" 0
                 ]
                 []
+            , input
+                [ id (vm.context.inputId)
+                , class "context-name-input"
+                , onClickStopPropagation (Msg.FocusPaperInput ".context-name-input")
+                , onInput vm.onContextNameChanged
+                , stringProperty "label" "Context Name"
+                , value vm.context.name
+                ]
+                []
+            , Html.node "paper-autocomplete-suggestions"
+                [ stringProperty "for" (vm.context.inputId)
+                , property "source" (vm.encodedContextNames)
+                , onAutoCompleteSelected vm.onContextNameChanged
+                , intProperty "minLength" 0
+                ]
+                []
             ]
         ]
 
 
-todoViewNotEditing vc todo =
+default vc todo =
     let
         vm =
             let

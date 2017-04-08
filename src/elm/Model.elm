@@ -1,5 +1,6 @@
 module Model exposing (..)
 
+import Context
 import Ext.Keyboard as Keyboard
 import Model.Internal exposing (..)
 import Msg exposing (Return)
@@ -28,15 +29,16 @@ import Model.Types exposing (..)
 import Types exposing (..)
 
 
-init : Time -> List EncodedTodo -> List EncodedProject -> Model
-init now encodedTodoList encodedProjectStore =
+init : Time -> List EncodedTodo -> List EncodedProject -> List Context.Encoded -> Model
+init now encodedTodoList encodedProjectList encodedContextList =
     let
         storeGenerator =
-            Random.map2 (,)
+            Random.map3 (,,)
                 (todoStoreGenerator encodedTodoList)
-                (ProjectStore.generator encodedProjectStore)
+                (ProjectStore.generator encodedProjectList)
+                (contextStoreGenerator encodedContextList)
 
-        ( ( todoStore, projectStore ), seed ) =
+        ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.step storeGenerator (Random.seedFromTime now)
     in
         { now = now
@@ -54,6 +56,11 @@ init now encodedTodoList encodedProjectStore =
 todoStoreGenerator : List EncodedTodo -> Random.Generator TodoStore
 todoStoreGenerator =
     PouchDB.generator "todo-db" Todo.encode Todo.decoder
+
+
+contextStoreGenerator : List Context.Encoded -> Random.Generator Context.Store
+contextStoreGenerator =
+    PouchDB.generator "context-db" Context.encode Context.decoder
 
 
 findProjectByName projectName =

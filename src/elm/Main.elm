@@ -1,5 +1,6 @@
 port module Main exposing (..)
 
+import Context
 import Dom
 import Ext.Keyboard as Keyboard
 import Model.EditMode
@@ -36,6 +37,7 @@ type alias Flags =
     { now : Time
     , encodedTodoList : List EncodedTodo
     , encodedProjectList : List EncodedProject
+    , encodedContextList : List Context.Encoded
     }
 
 
@@ -52,8 +54,8 @@ main =
 
 
 init : Flags -> Return
-init { now, encodedTodoList, encodedProjectList } =
-    Model.init now encodedTodoList encodedProjectList
+init { now, encodedTodoList, encodedProjectList, encodedContextList } =
+    Model.init now encodedTodoList encodedProjectList encodedContextList
         |> Return.singleton
 
 

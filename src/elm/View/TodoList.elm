@@ -131,37 +131,74 @@ groupByTodoContext2 =
         >> Keyed.node "div" []
 
 
-createContextViewModel context =
-    { id = Context.getId context
-    , name = Context.getName context
-    , todoList = []
-    }
+createContextViewModel todoByContextIdDict context =
+    let
+        id =
+            Context.getId context
+
+        todoList =
+            todoByContextIdDict |> Dict.get id ?= []
+    in
+        { id = id
+        , name = Context.getName context
+        , todoList = todoList
+        , count = List.length todoList
+        }
 
 
-prependInboxContextVM contextVMs =
-    ({ id = "", name = "Inbox", todoList = [] }) :: contextVMs
+prependInboxContextVM todoByContextIdDict contextVMs =
+    let
+        id =
+            ""
+
+        todoList =
+            todoByContextIdDict |> Dict.get id ?= []
+
+        inboxVM =
+            { id = id
+            , name = "Inbox"
+            , todoList = todoList
+            , count = List.length todoList
+            }
+    in
+        inboxVM :: contextVMs
 
 
-groupByContext : Model -> Html Msg
-groupByContext model =
+groupByContextView : Model -> Html Msg
+groupByContextView model =
     let
         vc =
             createViewContext model
 
+        todoByContextIdDict =
+            Model.getActiveTodoList model
+                |> Dict.groupBy (Todo.getMaybeContextId >> Maybe.withDefault "")
+
         contextViewModels =
             vc.contextByIdDict
                 |> Dict.values
-                .|> createContextViewModel
-                |> prependInboxContextVM
-
-        todoList =
-            Model.getActiveTodoList model
-
-        todoByContextIdDict =
-            todoList
-                |> Dict.groupBy (Todo.getMaybeContextId >> Maybe.withDefault "")
+                .|> createContextViewModel todoByContextIdDict
+                |> prependInboxContextVM todoByContextIdDict
     in
-        Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
+        Keyed.node "div" [] (contextViews vc contextViewModels)
+
+
+contextViews vc contextViewModels =
+    let
+        contextView vm =
+            ( vm.name
+            , div [ class "todo-list-container" ]
+                [ div [ class "todo-list-title" ]
+                    [ div [ class "paper-badge-container" ]
+                        [ span [] [ text vm.name ]
+                        , badge [ intProperty "label" (vm.count) ] []
+                        ]
+                    ]
+                , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> todoView vc)
+                ]
+            )
+    in
+        contextViewModels .|> contextView
 
 
 maybeContextView : TodoView -> TodoContextViewModel -> Maybe ( String, Html Msg )

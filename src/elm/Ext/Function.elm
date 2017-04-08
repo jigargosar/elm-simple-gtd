@@ -1,5 +1,6 @@
 module Ext.Function exposing (..)
 
+import List.Extra
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 
@@ -50,8 +51,15 @@ unless pred =
     when (pred >> not)
 
 
-reject pred =
-    List.filter (pred >> not)
+reject pred xs =
+    let
+        conditionalCons front back =
+            if pred front then
+                back
+            else
+                front :: back
+    in
+        List.foldr conditionalCons [] xs
 
 
 gt =
@@ -76,3 +84,11 @@ equals =
 
 notEquals =
     (/=)
+
+
+allPass predicates model =
+    List.all (apply model) predicates
+
+
+anyPass predicates model =
+    List.any (apply model) predicates

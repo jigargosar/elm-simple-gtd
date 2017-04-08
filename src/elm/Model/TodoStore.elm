@@ -6,7 +6,6 @@ import Dict.Extra
 import Ext.Random
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Model
 import PouchDB
 import Project
 import Random.Pcg as Random
@@ -115,16 +114,3 @@ insertTodoByIdConstructor constructWithId =
 
 setTodoStoreFromTuple tuple model =
     tuple |> Tuple.mapSecond (Model.setTodoStore # model)
-
-
-updateTodoFromEditTodoModel : EditTodoModel -> ModelF
-updateTodoFromEditTodoModel { contextName, projectName, todoText, todoId } =
-    apply3Uncurry ( Model.findContextByName contextName, Model.findProjectByName projectName, identity )
-        (\maybeContext maybeProject ->
-            updateTodoById
-                [ Todo.SetText todoText
-                , Todo.SetProjectId (maybeProject ?|> Project.getId)
-                , Todo.SetContextId (maybeContext ?|> Context.getId)
-                ]
-                todoId
-        )

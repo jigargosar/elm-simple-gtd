@@ -10,7 +10,7 @@ import List.Extra as List
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
+import Ext.Function as Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Tuple2
 
@@ -107,6 +107,14 @@ prepend model =
 
 map fn =
     asList >> List.map fn
+
+
+filter fn =
+    asList >> List.filter fn
+
+
+reject fn =
+    asList >> Function.reject fn
 
 
 findBy predicate =

@@ -3,6 +3,7 @@ module Model exposing (..)
 import Context
 import Ext.Keyboard as Keyboard
 import Model.Internal exposing (..)
+import Model.TodoStore
 import Msg exposing (Return)
 import PouchDB
 import Project exposing (Project, EncodedProject, ProjectId, ProjectName)
@@ -20,7 +21,7 @@ import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Set
 import Time exposing (Time)
-import Todo.Types exposing (..)
+import Todo.Types as Todo exposing (..)
 import Todo
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -136,6 +137,23 @@ getMaybeSelectedTodo m =
 
 getSelectedTodoIdSet =
     (.selection)
+
+
+getActiveTodoList =
+    .todoStore >> PouchDB.reject (anyPass [ Todo.isDone, Todo.getDeleted ])
+
+
+updateTodoFromEditTodoModel : EditTodoModel -> ModelF
+updateTodoFromEditTodoModel { contextName, projectName, todoText, todoId } =
+    apply3Uncurry ( findContextByName contextName, findProjectByName projectName, identity )
+        (\maybeContext maybeProject ->
+            Model.TodoStore.updateTodoById
+                [ Todo.SetText todoText
+                , Todo.SetProjectId (maybeProject ?|> Project.getId)
+                , Todo.SetContextId (maybeContext ?|> Context.getId)
+                ]
+                todoId
+        )
 
 
 type alias Lens small big =

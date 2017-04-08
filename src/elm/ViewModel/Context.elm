@@ -2,6 +2,9 @@ module ViewModel.Context exposing (..)
 
 import Context
 import Dict
+import Html exposing (Html)
+import Model.Types
+import Msg exposing (Msg)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -62,6 +65,7 @@ prependInboxContextVM todoByContextIdDict contextVMs =
         inboxVM :: contextVMs
 
 
+list : Model.Types.Model -> List ViewModel
 list model =
     let
         todoByContextIdDict =

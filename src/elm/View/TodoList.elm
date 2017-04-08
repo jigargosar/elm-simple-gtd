@@ -174,31 +174,28 @@ groupByContextView model =
             Model.getActiveTodoList model
                 |> Dict.groupBy (Todo.getMaybeContextId >> Maybe.withDefault "")
 
-        contextViewModels =
+        contextViews =
             vc.contextByIdDict
                 |> Dict.values
                 .|> createContextViewModel todoByContextIdDict
                 |> prependInboxContextVM todoByContextIdDict
+                .|> contextView vc
     in
-        Keyed.node "div" [] (contextViews vc contextViewModels)
+        Keyed.node "div" [] (contextViews)
 
 
-contextViews vc contextViewModels =
-    let
-        contextView vm =
-            ( vm.name
-            , div [ class "todo-list-container" ]
-                [ div [ class "todo-list-title" ]
-                    [ div [ class "paper-badge-container" ]
-                        [ span [] [ text vm.name ]
-                        , badge [ intProperty "label" (vm.count) ] []
-                        ]
-                    ]
-                , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> todoView vc)
+contextView vc vm =
+    ( vm.name
+    , div [ class "todo-list-container" ]
+        [ div [ class "todo-list-title" ]
+            [ div [ class "paper-badge-container" ]
+                [ span [] [ text vm.name ]
+                , badge [ intProperty "label" (vm.count) ] []
                 ]
-            )
-    in
-        contextViewModels .|> contextView
+            ]
+        , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> todoView vc)
+        ]
+    )
 
 
 maybeContextView : TodoView -> TodoContextViewModel -> Maybe ( String, Html Msg )

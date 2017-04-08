@@ -16,6 +16,10 @@ type alias ContextName =
     String
 
 
+type alias Id =
+    PouchDB.Id
+
+
 type alias ContextRecord =
     { name : ContextName }
 

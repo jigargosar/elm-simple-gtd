@@ -87,7 +87,7 @@ todoContextToName todoContext =
             "Reference"
 
 
-todoConstructor id rev createdAt modifiedAt done text dueAt deleted context projectId =
+todoConstructor id rev createdAt modifiedAt done text dueAt deleted context projectId contextId =
     { id = id
     , rev = rev
     , dirty = False
@@ -97,6 +97,7 @@ todoConstructor id rev createdAt modifiedAt done text dueAt deleted context proj
     , deleted = deleted
     , context = context
     , projectId = projectId
+    , contextId = contextId
     , createdAt = createdAt
     , modifiedAt = modifiedAt
     }
@@ -109,6 +110,7 @@ todoRecordDecoder =
         >> D.optional "deleted" D.bool defaultDeleted
         >> D.optional "context" contextDecoder Inbox
         >> D.optional "projectId" (D.nullable D.string) Nothing
+        >> D.optional "contextId" (D.nullable D.string) Nothing
 
 
 decoder : Decoder Todo
@@ -162,6 +164,7 @@ init createdAt text id =
         defaultDueAt
         defaultDeleted
         Inbox
+        Nothing
         Nothing
 
 

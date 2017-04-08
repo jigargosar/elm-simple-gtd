@@ -1,5 +1,6 @@
 module Todo.Types exposing (..)
 
+import Context
 import PouchDB
 import Project exposing (ProjectId)
 import Time exposing (Time)
@@ -37,6 +38,7 @@ type alias TodoRecord =
     , deleted : Bool
     , context : TodoContext
     , projectId : Maybe ProjectId
+    , contextId : Maybe Context.Id
     }
 
 

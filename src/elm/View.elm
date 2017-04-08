@@ -99,10 +99,10 @@ appMainView m =
         [ case Model.getMainViewType m of
             GroupByContextView ->
                 let
-                    _ =
+                    todoList =
                         Model.getActiveTodoList m
                 in
-                    groupByTodoContext m
+                    groupByTodoContext todoList m
 
             BinView ->
                 filteredTodoListView m

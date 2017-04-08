@@ -65,28 +65,26 @@ type alias TodoView =
 
 todoViewFromModel : Model -> TodoView
 todoViewFromModel =
-    createViewContext
-        >> (\vc todo ->
-                ( Todo.getId todo
-                , getTodoView vc todo
-                )
-           )
+    createViewContext >> todoView
 
 
-getTodoView vc todo =
+todoView vc todo =
     let
         notEditingView _ =
             View.Todo.default vc todo
-    in
-        case vc.maybeEditTodoModel of
-            Just etm ->
-                if Todo.equalById etm.todo todo then
-                    (View.Todo.edit (createEditTodoViewModel vc etm))
-                else
-                    notEditingView ()
 
-            Nothing ->
-                notEditingView ()
+        view =
+            case vc.maybeEditTodoModel of
+                Just etm ->
+                    if Todo.equalById etm.todo todo then
+                        (View.Todo.edit (createEditTodoViewModel vc etm))
+                    else
+                        notEditingView ()
+
+                Nothing ->
+                    notEditingView ()
+    in
+        ( Todo.getId todo, view )
 
 
 createEditTodoViewModel : ViewContext -> EditTodoModel -> EditTodoViewModel
@@ -125,11 +123,20 @@ filteredTodoListView =
            )
 
 
-groupByTodoContext : Model -> Html Msg
-groupByTodoContext =
+groupByTodoContext2 : Model -> Html Msg
+groupByTodoContext2 =
     apply2 ( todoViewFromModel >> maybeContextView, Model.TodoStore.groupByTodoContextViewModel )
         >> uncurry List.filterMap
         >> Keyed.node "div" []
+
+
+groupByTodoContext : List Todo -> Model -> Html Msg
+groupByTodoContext todoList model =
+    let
+        vc =
+            createViewContext model
+    in
+        Keyed.node "div" [] (todoList .|> todoView vc)
 
 
 maybeContextView : TodoView -> TodoContextViewModel -> Maybe ( String, Html Msg )

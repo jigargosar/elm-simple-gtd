@@ -122,6 +122,7 @@ update msg =
                         Key.Enter ->
                             Return.map
                                 (Model.insertProjectIfNotExist editTodoModel.projectName
+                                    >> Model.insertContextIfNotExist editTodoModel.contextName
                                     >> Model.updateTodoFromEditTodoModel editTodoModel
                                 )
                                 >> andThenUpdate

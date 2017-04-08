@@ -59,8 +59,12 @@ todoStoreGenerator =
     PouchDB.generator "todo-db" Todo.encode Todo.decoder
 
 
-findProjectByName projectName =
-    getProjectStore >> ProjectStore.findByName projectName
+findProjectByName name =
+    getProjectStore >> ProjectStore.findByName name
+
+
+findContextByName name =
+    .contextStore >> Context.findByName name
 
 
 getContextByIdDict =
@@ -91,6 +95,14 @@ insertProjectIfNotExist : ProjectName -> ModelF
 insertProjectIfNotExist projectName =
     apply2With ( getNow, getProjectStore )
         (ProjectStore.insertIfNotExistByName projectName >>> setProjectStore)
+
+
+insertContextIfNotExist : Context.Name -> ModelF
+insertContextIfNotExist name =
+    apply2With ( getNow, .contextStore )
+        (Context.insertIfNotExistByName name
+            >>> (\contextStore model -> { model | contextStore = contextStore })
+        )
 
 
 toggleSelection todo m =

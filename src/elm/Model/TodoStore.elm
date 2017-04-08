@@ -118,12 +118,13 @@ setTodoStoreFromTuple tuple model =
 
 
 updateTodoFromEditTodoModel : EditTodoModel -> ModelF
-updateTodoFromEditTodoModel { projectName, todoText, todoId } =
-    apply2Uncurry ( Model.findProjectByName projectName, identity )
-        (\maybeProject ->
+updateTodoFromEditTodoModel { contextName, projectName, todoText, todoId } =
+    apply3Uncurry ( Model.findContextByName contextName, Model.findProjectByName projectName, identity )
+        (\maybeContext maybeProject ->
             updateTodoById
                 [ Todo.SetText todoText
                 , Todo.SetProjectId (maybeProject ?|> Project.getId)
+                , Todo.SetContextId (maybeContext ?|> Context.getId)
                 ]
                 todoId
         )

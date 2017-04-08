@@ -89,17 +89,21 @@ storeGenerator =
     PouchDB.generator "context-db" encoder decoder
 
 
-insertIfNotExistByName name now context =
-    if (String.Extra.isBlank name) then
-        context
-    else
-        findByName name context
-            |> Maybe.unpack
-                (\_ ->
-                    PouchDB.insert (init name now) context
-                        |> Tuple.second
-                )
-                (\_ -> context)
+insertIfNotExistByName name_ now context =
+    let
+        name =
+            String.trim name_
+    in
+        if (String.isEmpty name || String.toLower name == "inbox") then
+            context
+        else
+            findByName name context
+                |> Maybe.unpack
+                    (\_ ->
+                        PouchDB.insert (init name now) context
+                            |> Tuple.second
+                    )
+                    (\_ -> context)
 
 
 byIdDict =

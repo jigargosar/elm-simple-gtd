@@ -40,11 +40,11 @@ appDrawerView contextVMs m =
                 ]
                 ([ item [ onClick (SetView GroupByContextView) ] [ text "All" ]
                  , divider
-                 , projectsItemView m
-                 , divider
                  ]
                     ++ List.map contextMenuItem contextVMs
                     ++ [ divider
+                       , projectsItemView m
+                       , divider
                        , binItemView m
                        , doneItemView m
                        ]

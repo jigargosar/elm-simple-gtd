@@ -75,7 +75,7 @@ contextMenuItem vm =
         idForBadge =
             "app-drawer-id-for-badge-" ++ (String.Extra.dasherize vm.name)
     in
-        item [ class "has-hover-items", onClickStopPropagation Msg.NoOp ]
+        item [ class "has-hover-items", onClickStopPropagation (Msg.SetView ContextView) ]
             ([ span [ id idForBadge ] [ text (vm.name) ]
              , itemBody [] []
              , badge

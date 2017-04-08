@@ -46,11 +46,11 @@ type alias Selection =
 
 type MainViewType
     = GroupByContextView
-    | TodoContextView String
     | ProjectView ProjectId
     | DoneView
     | BinView
     | ProjectListView
+    | ContextView Context.Id
 
 
 type alias Model =

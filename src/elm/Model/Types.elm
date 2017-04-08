@@ -44,6 +44,18 @@ type alias Selection =
     Set TodoId
 
 
+type Filter
+    = ActiveFilter
+    | BinFilter
+    | DoneFilter
+
+
+type GroupBy
+    = GroupByContext
+    | GroupByProject
+    | NoGrouping
+
+
 type MainViewType
     = GroupByContextView
     | TodoContextView String
@@ -51,6 +63,7 @@ type MainViewType
     | DoneView
     | BinView
     | ProjectListView
+    | TodoListView Filter GroupBy
 
 
 type alias Model =

@@ -18,10 +18,14 @@ createContextViewModel todoByContextIdDict context =
 
         todoList =
             todoByContextIdDict |> Dict.get id ?= []
+
+        count =
+            List.length todoList
     in
         { id = id
         , name = Context.getName context
         , todoList = todoList
+        , isEmpty = count == 0
         , count = List.length todoList
         }
 
@@ -34,11 +38,15 @@ prependInboxContextVM todoByContextIdDict contextVMs =
         todoList =
             todoByContextIdDict |> Dict.get id ?= []
 
+        count =
+            List.length todoList
+
         inboxVM =
             { id = id
             , name = "Inbox"
             , todoList = todoList
-            , count = List.length todoList
+            , isEmpty = count == 0
+            , count = count
             }
     in
         inboxVM :: contextVMs

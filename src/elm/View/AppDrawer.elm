@@ -26,6 +26,7 @@ import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
+import ViewModel.Context
 
 
 appDrawerView m =
@@ -68,7 +69,7 @@ doneItemView m =
 
 
 todoContextsMenuItems =
-    Model.TodoStore.groupByTodoContextViewModel
+    ViewModel.Context.list
         >> List.map contextMenuItem
 
 

@@ -87,19 +87,4 @@ contextMenuItem vm =
                 ]
                 []
              ]
-             --                ++ addHoverItems vm.todoContext
             )
-
-
-addHoverItems context =
-    case context of
-        --        Inbox ->
-        --            [ iconButton
-        --                [ class "hover-items"
-        --                , icon "vaadin-icons:start-cog"
-        --                , onClick ProcessInbox
-        --                ]
-        --                []
-        --            ]
-        _ ->
-            []

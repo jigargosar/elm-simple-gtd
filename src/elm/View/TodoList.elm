@@ -35,6 +35,7 @@ import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, it
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import View.Todo exposing (EditTodoViewModel)
+import ViewModel.Context
 
 
 type alias ViewContext =
@@ -124,61 +125,14 @@ filteredTodoListView =
            )
 
 
-groupByTodoContext2 : Model -> Html Msg
-groupByTodoContext2 =
-    apply2 ( todoViewFromModel >> maybeContextView, Model.TodoStore.groupByTodoContextViewModel )
-        >> uncurry List.filterMap
-        >> Keyed.node "div" []
-
-
-createContextViewModel todoByContextIdDict context =
-    let
-        id =
-            Context.getId context
-
-        todoList =
-            todoByContextIdDict |> Dict.get id ?= []
-    in
-        { id = id
-        , name = Context.getName context
-        , todoList = todoList
-        , count = List.length todoList
-        }
-
-
-prependInboxContextVM todoByContextIdDict contextVMs =
-    let
-        id =
-            ""
-
-        todoList =
-            todoByContextIdDict |> Dict.get id ?= []
-
-        inboxVM =
-            { id = id
-            , name = "Inbox"
-            , todoList = todoList
-            , count = List.length todoList
-            }
-    in
-        inboxVM :: contextVMs
-
-
 groupByContextView : Model -> Html Msg
 groupByContextView model =
     let
         vc =
             createViewContext model
 
-        todoByContextIdDict =
-            Model.getActiveTodoList model
-                |> Dict.groupBy (Todo.getMaybeContextId >> Maybe.withDefault "")
-
         contextViews =
-            vc.contextByIdDict
-                |> Dict.values
-                .|> createContextViewModel todoByContextIdDict
-                |> prependInboxContextVM todoByContextIdDict
+            ViewModel.Context.list model
                 .|> contextView vc
     in
         Keyed.node "div" [] (contextViews)

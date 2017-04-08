@@ -1,6 +1,7 @@
 module Model exposing (..)
 
 import Context
+import Dict.Extra
 import Ext.Keyboard as Keyboard
 import Model.Internal exposing (..)
 import Model.TodoStore
@@ -72,6 +73,10 @@ getContextByIdDict =
     (.contextStore) >> Context.byIdDict
 
 
+getActiveContexts =
+    (.contextStore) >> PouchDB.asList
+
+
 getEncodedContextNames =
     .contextStore >> Context.getEncodedNames
 
@@ -141,6 +146,10 @@ getSelectedTodoIdSet =
 
 getActiveTodoList =
     .todoStore >> PouchDB.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
+
+
+getActiveTodoListGroupedByContextId =
+    getActiveTodoList >> Dict.Extra.groupBy (Todo.getMaybeContextId >> Maybe.withDefault "")
 
 
 updateTodoFromEditTodoModel : EditTodoModel -> ModelF

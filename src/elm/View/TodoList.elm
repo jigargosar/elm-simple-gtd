@@ -136,7 +136,7 @@ groupByTodoContext todoList model =
         vc =
             createViewContext model
     in
-        Keyed.node "div" [] (todoList .|> todoView vc)
+        Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
 
 
 maybeContextView : TodoView -> TodoContextViewModel -> Maybe ( String, Html Msg )

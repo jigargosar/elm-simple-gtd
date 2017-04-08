@@ -239,6 +239,7 @@ update msg =
 persistAll =
     persist Model.projectStore
         >> persist Model.todoStore
+        >> persist Model.contextStore
 
 
 persist lens =

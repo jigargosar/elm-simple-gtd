@@ -172,6 +172,10 @@ todoStore =
     { get = .todoStore, set = (\s b -> { b | todoStore = s }) }
 
 
+contextStore =
+    { get = .contextStore, set = (\s b -> { b | contextStore = s }) }
+
+
 now =
     { get = .now, set = (\s b -> { b | now = s }) }
 

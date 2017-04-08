@@ -9,6 +9,16 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
+import Todo.Types exposing (Todo)
+
+
+type alias ViewModel =
+    { id : Context.Id
+    , name : Context.Name
+    , todoList : List Todo
+    , isEmpty : Bool
+    , count : Int
+    }
 
 
 createContextViewModel todoByContextIdDict context =

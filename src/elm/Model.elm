@@ -140,7 +140,7 @@ getSelectedTodoIdSet =
 
 
 getActiveTodoList =
-    .todoStore >> PouchDB.reject (anyPass [ Todo.isDone, Todo.isDeleted ])
+    .todoStore >> PouchDB.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 
 
 updateTodoFromEditTodoModel : EditTodoModel -> ModelF

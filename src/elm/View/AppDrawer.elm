@@ -8,7 +8,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model.TodoStore
 import Msg exposing (Msg(SetView))
-import View.TodoList exposing (groupByTodoContext)
+import View.TodoList exposing (groupByContext)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)

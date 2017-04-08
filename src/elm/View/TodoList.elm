@@ -2,6 +2,7 @@ module View.TodoList exposing (..)
 
 import Context
 import Dict exposing (Dict)
+import Dict.Extra as Dict
 import Dom
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
@@ -130,14 +131,18 @@ groupByTodoContext2 =
         >> Keyed.node "div" []
 
 
-groupByTodoContext : Model -> Html Msg
-groupByTodoContext model =
+groupByContext : Model -> Html Msg
+groupByContext model =
     let
         vc =
             createViewContext model
 
         todoList =
             Model.getActiveTodoList model
+
+        groupedByContextName =
+            todoList
+                |> Dict.groupBy (Todo.getMaybeContextId ?+> Dict.get vc.contextByIdDict)
     in
         Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
 

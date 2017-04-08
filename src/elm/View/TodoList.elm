@@ -131,6 +131,10 @@ groupByTodoContext2 =
         >> Keyed.node "div" []
 
 
+getTodoContextName contextByIdDict todo =
+    todo |> Todo.getMaybeContextId ?+> (Dict.get # contextByIdDict) ?|> Context.getName ?= ""
+
+
 groupByContext : Model -> Html Msg
 groupByContext model =
     let
@@ -142,7 +146,7 @@ groupByContext model =
 
         groupedByContextName =
             todoList
-                |> Dict.groupBy (Todo.getMaybeContextId ?+> Dict.get vc.contextByIdDict)
+                |> Dict.groupBy (getTodoContextName vc.contextByIdDict)
     in
         Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
 

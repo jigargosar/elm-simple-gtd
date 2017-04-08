@@ -36,7 +36,10 @@ getPathFromModel model =
             [ "project", projectId ]
 
         ContextView contextId ->
-            [ "context", contextId ]
+            if String.isEmpty contextId then
+                [ "Inbox" ]
+            else
+                [ "context", contextId ]
 
 
 delta2hash : Model -> Model -> Maybe UrlChange
@@ -64,6 +67,9 @@ builder2messages builder =
 
         "context" :: id :: [] ->
             [ Msg.SetView (ContextView id) ]
+
+        "Inbox" :: [] ->
+            [ Msg.SetView (ContextView "") ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

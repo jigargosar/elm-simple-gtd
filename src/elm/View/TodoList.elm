@@ -132,7 +132,7 @@ groupByContextView contextVMs model =
             createViewContext model
 
         contextViews =
-            ViewModel.Context.list model
+            contextVMs
                 .|> contextView vc
     in
         Keyed.node "div" [] (contextViews)

@@ -118,7 +118,11 @@ appMainView contextVMs m =
                 filteredTodoListView m
 
             ContextView contextId ->
-                div [] [ "TodoContextView::" ++ contextId |> text ]
+                let
+                    contextVMSingleton =
+                        contextVMs |> List.find (.id >> equals contextId) |> Maybe.toList
+                in
+                    groupByContextView contextVMSingleton m
         ]
 
 

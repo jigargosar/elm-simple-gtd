@@ -1,5 +1,6 @@
 module Model.EditMode exposing (..)
 
+import Context
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model exposing (..)
@@ -27,14 +28,12 @@ setEditModelToEditTodo todo =
 
 createEditTodoModel : Todo -> Model -> EditTodoModel
 createEditTodoModel todo model =
-    todo
-        |> apply4
-            ( Todo.getId
-            , identity
-            , Todo.getText
-            , Model.getMaybeProjectNameOfTodo # model >>?= ""
-            )
-        >> uncurry4 EditTodoModel
+    { todoId = Todo.getId todo
+    , todo = todo
+    , todoText = Todo.getText todo
+    , projectName = Model.getMaybeProjectNameOfTodo todo model ?= ""
+    , contextName = Model.getContextNameOfTodo todo model ?= ""
+    }
 
 
 updateEditTodoText : String -> EditTodoModel -> ModelF
@@ -63,6 +62,11 @@ getEditNewTodoModel model =
 updateEditTodoProjectName : ProjectName -> EditTodoModel -> ModelF
 updateEditTodoProjectName projectName editTodoModel =
     setEditMode (EditTodo ({ editTodoModel | projectName = projectName }))
+
+
+updateEditTodoContextName : Context.Name -> EditTodoModel -> ModelF
+updateEditTodoContextName contextName editTodoModel =
+    setEditMode (EditTodo ({ editTodoModel | contextName = contextName }))
 
 
 deactivateEditingMode =

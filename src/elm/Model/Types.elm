@@ -20,7 +20,12 @@ type alias TodoStore =
 
 
 type alias EditTodoModel =
-    { todoId : TodoId, todo : Todo, todoText : TodoText, projectName : Project.ProjectName }
+    { todoId : TodoId
+    , todo : Todo
+    , todoText : TodoText
+    , projectName : Project.ProjectName
+    , contextName : Context.Name
+    }
 
 
 type alias NewTodoEditModel =

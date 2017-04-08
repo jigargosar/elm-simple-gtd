@@ -57,6 +57,7 @@ type Msg
     | FocusPaperInput String
     | EditTodoTextChanged EditTodoModel String
     | EditTodoProjectNameChanged EditTodoModel ProjectName
+    | EditTodoContextNameChanged EditTodoModel Context.Name
     | EditTodoKeyUp EditTodoModel KeyboardEvent
     | TodoCheckBoxClicked Todo
     | ClearSelection

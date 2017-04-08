@@ -106,6 +106,9 @@ update msg =
                 EditTodoProjectNameChanged editTodoModel projectName ->
                     Return.map (Model.updateEditTodoProjectName projectName editTodoModel)
 
+                EditTodoContextNameChanged editTodoModel contextName ->
+                    Return.map (Model.updateEditTodoContextName contextName editTodoModel)
+
                 CopyAndEditTodo todo ->
                     Return.andThenApplyWith Model.getNow
                         (\now ->

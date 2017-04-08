@@ -40,10 +40,13 @@ onAutoCompleteSelected tagger =
 type alias EditTodoViewModel =
     { todo : { text : TodoText, id : TodoId, inputId : Dom.Id }
     , project : { name : ProjectName, inputId : Dom.Id }
+    , context : { name : Context.Name, inputId : Dom.Id }
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : TodoText -> Msg
     , onProjectNameChanged : ProjectName -> Msg
+    , onContextNameChanged : Context.Name -> Msg
     , encodedProjectNames : Json.Encode.Value
+    , encodedContextNames : Json.Encode.Value
     }
 
 

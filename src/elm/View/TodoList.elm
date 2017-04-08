@@ -39,6 +39,7 @@ import View.Todo exposing (EditTodoViewModel)
 type alias ViewContext =
     { now : Time
     , encodedProjectNames : Json.Encode.Value
+    , encodedContextNames : Json.Encode.Value
     , maybeEditTodoModel : Maybe EditTodoModel
     , projectIdToNameDict : Dict ProjectId ProjectName
     , contextByIdDict : Dict Context.Id Context.Model
@@ -50,6 +51,7 @@ createViewContext : Model -> ViewContext
 createViewContext model =
     { now = Model.getNow model
     , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames
+    , encodedContextNames = Model.getEncodedContextNames model
     , maybeEditTodoModel = Model.EditMode.getMaybeEditTodoModel model
     , projectIdToNameDict = Model.getProjectStore model |> ProjectStore.getProjectIdToNameDict
     , contextByIdDict = Model.getContextByIdDict model
@@ -102,10 +104,16 @@ createEditTodoViewModel vc etm =
             { name = etm.projectName
             , inputId = "edit-todo-project-input-" ++ todoId
             }
+        , context =
+            { name = etm.contextName
+            , inputId = "edit-todo-context-input-" ++ todoId
+            }
         , onKeyUp = Msg.EditTodoKeyUp etm
         , onTodoTextChanged = Msg.EditTodoTextChanged etm
         , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
+        , onContextNameChanged = Msg.EditTodoContextNameChanged etm
         , encodedProjectNames = vc.encodedProjectNames
+        , encodedContextNames = vc.encodedContextNames
         }
 
 

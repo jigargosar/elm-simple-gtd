@@ -86,3 +86,11 @@ storeGenerator =
 
 byIdDict =
     PouchDB.map (apply2 ( .id, identity )) >> Dict.fromList
+
+
+findNameById id =
+    PouchDB.findById id >>? getName
+
+
+getEncodedNames =
+    PouchDB.map (.name >> E.string) >> E.list

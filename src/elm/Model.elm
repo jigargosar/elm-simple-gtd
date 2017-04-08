@@ -67,9 +67,18 @@ getContextByIdDict =
     (.contextStore) >> Context.byIdDict
 
 
+getEncodedContextNames =
+    .contextStore >> Context.getEncodedNames
+
+
 getMaybeProjectNameOfTodo : Todo -> Model -> Maybe ProjectName
 getMaybeProjectNameOfTodo todo model =
     Todo.getMaybeProjectId todo ?+> ProjectStore.findNameById # (getProjectStore model)
+
+
+getContextNameOfTodo : Todo -> Model -> Maybe Context.Name
+getContextNameOfTodo todo model =
+    Todo.getMaybeContextId todo ?+> Context.findNameById # (model.contextStore)
 
 
 insertProjectIfNotExist2 : ProjectName -> ModelF

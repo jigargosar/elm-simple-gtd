@@ -117,8 +117,8 @@ appMainView contextVMs m =
             ProjectView projectId ->
                 filteredTodoListView m
 
-            TodoContextView context ->
-                div [] [ "TodoContextView::" ++ context |> text ]
+            ContextView contextId ->
+                div [] [ "TodoContextView::" ++ contextId |> text ]
         ]
 
 

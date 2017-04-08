@@ -62,6 +62,9 @@ builder2messages builder =
         "project" :: projectId :: [] ->
             [ Msg.SetView (ProjectView projectId) ]
 
+        "context" :: id :: [] ->
+            [ Msg.SetView (ContextView id) ]
+
         _ ->
             -- If nothing provided for this part of the URL, return empty list
             []

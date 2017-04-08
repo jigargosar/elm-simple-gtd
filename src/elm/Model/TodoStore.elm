@@ -1,5 +1,6 @@
 module Model.TodoStore exposing (..)
 
+import Context
 import Dict exposing (Dict)
 import Dict.Extra
 import Ext.Random
@@ -52,7 +53,7 @@ findTodoEqualById todo =
 
 
 type alias TodoContextViewModel =
-    { todoContext : TodoContext, name : String, todoList : List Todo, count : Int, isEmpty : Bool }
+    { name : String, todoList : List Todo, count : Int, isEmpty : Bool }
 
 
 groupByTodoContextViewModel : Model -> List TodoContextViewModel
@@ -60,27 +61,22 @@ groupByTodoContextViewModel =
     Model.getTodoStore
         >> PouchDB.asList
         >> Todo.rejectAnyPass [ Todo.getDeleted, Todo.isDone ]
-        >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
+        --        >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
+        >> Dict.Extra.groupBy (\_ -> "Inbox")
         >> (\dict ->
-                Todo.getAllTodoContexts
-                    .|> toViewModel dict
+                --                Todo.getAllTodoContexts
+                [ "Inbox" ]
+                    .|> (apply2
+                            ( identity
+                            , (Dict.get # dict >> Maybe.withDefault [])
+                            )
+                            >> (\( name, list ) ->
+                                    list
+                                        |> apply3 ( identity, List.length, List.isEmpty )
+                                        >> uncurry3 (TodoContextViewModel name)
+                               )
+                        )
            )
-
-
-toViewModel : Dict String (List Todo) -> TodoContext -> TodoContextViewModel
-toViewModel dict =
-    apply3
-        ( identity
-        , Todo.todoContextToName
-        , (toString >> Dict.get # dict >> Maybe.withDefault [])
-        )
-        >> toViewModelHelp
-
-
-toViewModelHelp ( todoContext, name, list ) =
-    list
-        |> apply3 ( identity, List.length, List.isEmpty )
-        >> uncurry3 (TodoContextViewModel todoContext name)
 
 
 updateTodo : List TodoUpdateAction -> Todo -> ModelF

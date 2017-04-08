@@ -1,5 +1,6 @@
 module Todo.Internal exposing (..)
 
+import Context
 import PouchDB
 import Project exposing (ProjectId)
 import Todo.Types exposing (..)
@@ -134,11 +135,14 @@ update field model =
         SetText text ->
             { model | text = text }
 
-        SetContext context ->
-            { model | context = context }
+        SetContextId contextId ->
+            { model | contextId = contextId }
 
         SetProjectId projectId ->
             setProjectId projectId model
+
+        SetContext maybeContext ->
+            update (SetContextId (maybeContext ?|> Context.getId)) model
 
         SetProject maybeProject ->
             setProjectId (maybeProject ?|> Project.getId) model

@@ -1,5 +1,6 @@
 module Msg exposing (..)
 
+import Context
 import Dom
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
@@ -45,7 +46,7 @@ type Msg
     | MarkRunningTodoDone
     | ToggleTodoDone Todo
     | ToggleTodoDeleted Todo
-    | SetTodoContext TodoContext Todo
+    | SetTodoContext Context.Model Todo
     | CreateTodo String
     | CopyAndEditTodo Todo
     | StartAddingTodo

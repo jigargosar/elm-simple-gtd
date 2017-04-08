@@ -1,5 +1,6 @@
 module View.TodoList exposing (..)
 
+import Context
 import Dict exposing (Dict)
 import Dom
 import Html.Attributes.Extra exposing (..)
@@ -40,6 +41,7 @@ type alias ViewContext =
     , encodedProjectNames : Json.Encode.Value
     , maybeEditTodoModel : Maybe EditTodoModel
     , projectIdToNameDict : Dict ProjectId ProjectName
+    , contextByIdDict : Dict Context.Id Context.Model
     , selection : Set TodoId
     }
 
@@ -50,6 +52,7 @@ createViewContext model =
     , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames
     , maybeEditTodoModel = Model.EditMode.getMaybeEditTodoModel model
     , projectIdToNameDict = Model.getProjectStore model |> ProjectStore.getProjectIdToNameDict
+    , contextByIdDict = Model.getContextByIdDict model
     , selection = Model.getSelectedTodoIdSet model
     }
 

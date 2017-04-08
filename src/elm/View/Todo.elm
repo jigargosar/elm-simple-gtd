@@ -1,5 +1,6 @@
 module View.Todo exposing (..)
 
+import Context
 import Date.Distance exposing (inWords)
 import Dict
 import Dom
@@ -93,6 +94,10 @@ todoViewNotEditing vc todo =
                     Todo.getMaybeProjectId todo
                         ?+> (Dict.get # vc.projectIdToNameDict)
                         ?= "<No Project>"
+                , contextName =
+                    Todo.getMaybeContextId todo
+                        ?+> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
+                        ?= "Inbox"
                 }
     in
         item
@@ -115,7 +120,7 @@ todoViewNotEditing vc todo =
                     , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
                     ]
                 ]
-            , hoverIcons vc todo
+            , hoverIcons vm vc todo
             , nonHoverIcons vc todo
             ]
 
@@ -128,12 +133,12 @@ todoInputId todoId =
     "edit-todo-input-" ++ todoId
 
 
-hoverIcons vc todo =
+hoverIcons vm vc todo =
     div [ class "show-on-hover" ]
         [ --        startIconButton vc todo
           doneIconButton vc todo
         , deleteIconButton vc todo
-        , optionsIconButton vc todo
+        , moveToContextMenuIcon vm vc todo
         ]
 
 
@@ -164,7 +169,7 @@ startIconButton vc todo =
     iconButton [ onClickStopPropagation (Msg.Start todo), icon "av:play-circle-outline" ] []
 
 
-optionsIconButton vc todo =
+moveToContextMenuIcon vm vc todo =
     menuButton
         [ onClickStopPropagation Msg.NoOp
         , attribute "horizontal-align" "right"
@@ -172,16 +177,17 @@ optionsIconButton vc todo =
         [ iconButton [ icon "more-vert", class "dropdown-trigger" ] []
         , menu
             [ class "dropdown-content"
-            , attribute "attr-for-selected" "list-type"
-            , attribute "selected" (Todo.getContextName todo)
+            , attribute "attr-for-selected" "context-name"
+            , attribute "selected" vm.contextName
             ]
-            (Todo.getAllTodoContexts
+            (vc.contextByIdDict
+                |> Dict.values
                 .|> (\context ->
                         item
-                            [ attribute "list-type" (Todo.todoContextToName context)
+                            [ attribute "context-name" (Context.getName context)
                             , onClickStopPropagation (Msg.SetTodoContext context todo)
                             ]
-                            [ text (Todo.todoContextToName context) ]
+                            [ text (Context.getName context) ]
                     )
             )
         ]

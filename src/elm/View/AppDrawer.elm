@@ -90,7 +90,7 @@ contextMenuItem vm =
                 ]
                 []
              ]
-                ++ addHoverItems vm.todoContext
+             --                ++ addHoverItems vm.todoContext
             )
 
 

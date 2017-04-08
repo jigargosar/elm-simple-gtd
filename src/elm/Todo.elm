@@ -44,50 +44,7 @@ defaultDone =
     False
 
 
-getAllTodoContexts =
-    [ Session
-    , Calender
-    , Inbox
-    , WaitingFor
-    , NextAction
-    , Project
-    , SomeDayMayBe
-    , Reference
-    ]
-
-
-getContextName =
-    getTodoContext >> todoContextToName
-
-
-todoContextToName todoContext =
-    case todoContext of
-        Session ->
-            "Session"
-
-        Inbox ->
-            "Inbox"
-
-        SomeDayMayBe ->
-            "SomeDayMayBe"
-
-        WaitingFor ->
-            "WaitingFor"
-
-        Project ->
-            "Project"
-
-        Calender ->
-            "Calender"
-
-        NextAction ->
-            "NextAction"
-
-        Reference ->
-            "Reference"
-
-
-todoConstructor id rev createdAt modifiedAt done text dueAt deleted context projectId contextId =
+todoConstructor id rev createdAt modifiedAt done text dueAt deleted projectId contextId =
     { id = id
     , rev = rev
     , dirty = False
@@ -95,7 +52,6 @@ todoConstructor id rev createdAt modifiedAt done text dueAt deleted context proj
     , text = text
     , dueAt = dueAt
     , deleted = deleted
-    , context = context
     , projectId = projectId
     , contextId = contextId
     , createdAt = createdAt
@@ -108,7 +64,6 @@ todoRecordDecoder =
         >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         >> D.optional "deleted" D.bool defaultDeleted
-        >> D.optional "context" contextDecoder Inbox
         >> D.optional "projectId" (D.nullable D.string) Nothing
         >> D.optional "contextId" (D.nullable D.string) Nothing
 
@@ -119,18 +74,6 @@ decoder =
         |> PouchDB.documentFieldsDecoder
         |> PouchDB.timeStampFieldsDecoder
         |> todoRecordDecoder
-
-
-contextDecoder : Decoder TodoContext
-contextDecoder =
-    let
-        createContext string =
-            getAllTodoContexts
-                |> Dict.fromListBy toString
-                |> Dict.get string
-                ?= Inbox
-    in
-        D.string |> D.map createContext
 
 
 copyTodo createdAt todo id =
@@ -146,8 +89,8 @@ encode todo =
         , "text" => E.string (getText todo)
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (getDeleted todo)
-        , "context" => E.string (getTodoContext todo |> toString)
         , "projectId" => (todo |> getProjectId >> Maybe.unwrap E.null E.string)
+        , "contextId" => (todo.contextId |> Maybe.unwrap E.null E.string)
         , "createdAt" => E.int (todo.createdAt |> round)
         , "modifiedAt" => E.int (todo.modifiedAt |> round)
         ]
@@ -163,7 +106,6 @@ init createdAt text id =
         text
         defaultDueAt
         defaultDeleted
-        Inbox
         Nothing
         Nothing
 
@@ -195,9 +137,8 @@ getMaybeProjectId =
     (.projectId)
 
 
-getTodoContext : Model -> TodoContext
-getTodoContext =
-    (.context)
+getMaybeContextId =
+    .contextId
 
 
 equalById todo1 todo2 =

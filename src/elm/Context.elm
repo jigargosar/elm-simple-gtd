@@ -1,5 +1,6 @@
 module Context exposing (..)
 
+import Dict
 import PouchDB
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -13,7 +14,7 @@ import Json.Encode as E
 import Random.Pcg as Random
 
 
-type alias ContextName =
+type alias Name =
     String
 
 
@@ -21,15 +22,15 @@ type alias Id =
     PouchDB.Id
 
 
-type alias ContextRecord =
-    { name : ContextName }
+type alias Record =
+    { name : Name }
 
 
 type alias OtherFields =
-    PouchDB.HasTimeStamps ContextRecord
+    PouchDB.HasTimeStamps Record
 
 
-type alias Context =
+type alias Model =
     PouchDB.Document OtherFields
 
 
@@ -51,7 +52,7 @@ constructor id rev createdAt modifiedAt name =
     }
 
 
-encoder : Context -> Encoded
+encoder : Model -> Encoded
 encoder context =
     E.object
         [ "_id" => E.string context.id
@@ -62,7 +63,7 @@ encoder context =
         ]
 
 
-decoder : Decoder Context
+decoder : Decoder Model
 decoder =
     D.decode constructor
         |> PouchDB.documentFieldsDecoder
@@ -70,6 +71,18 @@ decoder =
         |> D.required "name" D.string
 
 
+getName =
+    .name
+
+
+getId =
+    .id
+
+
 storeGenerator : List Encoded -> Random.Generator Store
 storeGenerator =
     PouchDB.generator "context-db" encoder decoder
+
+
+byIdDict =
+    PouchDB.map (apply2 ( .id, identity )) >> Dict.fromList

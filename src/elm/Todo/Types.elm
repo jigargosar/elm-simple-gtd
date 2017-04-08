@@ -20,23 +20,11 @@ type alias TodoText =
     String
 
 
-type TodoContext
-    = Session
-    | Inbox
-    | SomeDayMayBe
-    | WaitingFor
-    | Project
-    | Calender
-    | NextAction
-    | Reference
-
-
 type alias TodoRecord =
     { done : Bool
     , text : TodoText
     , dueAt : Maybe Time
     , deleted : Bool
-    , context : TodoContext
     , projectId : Maybe ProjectId
     , contextId : Maybe Context.Id
     }
@@ -62,7 +50,8 @@ type TodoUpdateAction
     = SetDone Bool
     | SetText TodoText
     | SetDeleted Bool
-    | SetContext TodoContext
+    | SetContextId (Maybe Context.Id)
+    | SetContext (Maybe Context.Model)
     | SetProjectId (Maybe ProjectId)
     | SetProject (Maybe Project.Project)
     | ToggleDone

@@ -63,6 +63,10 @@ findProjectByName projectName =
     getProjectStore >> ProjectStore.findByName projectName
 
 
+getContextByIdDict =
+    (.contextStore) >> Context.byIdDict
+
+
 getMaybeProjectNameOfTodo : Todo -> Model -> Maybe ProjectName
 getMaybeProjectNameOfTodo todo model =
     Todo.getMaybeProjectId todo ?+> ProjectStore.findNameById # (getProjectStore model)

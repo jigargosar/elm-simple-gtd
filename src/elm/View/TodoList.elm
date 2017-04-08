@@ -130,8 +130,8 @@ groupByTodoContext2 =
         >> Keyed.node "div" []
 
 
-groupByTodoContext : List Todo -> Model -> Html Msg
-groupByTodoContext todoList model =
+groupByTodoContext : Model -> Html Msg
+groupByTodoContext model =
     let
         vc =
             createViewContext model

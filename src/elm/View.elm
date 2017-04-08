@@ -34,6 +34,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.ProjectList exposing (projectListView)
 import View.Todo
+import ViewModel.Context
 
 
 appView m =
@@ -44,13 +45,17 @@ appView m =
 
 
 appDrawerLayoutView m =
-    App.drawerLayout []
-        [ appDrawerView m
-        , App.headerLayout []
-            [ appHeaderView m
-            , appMainView m
+    let
+        contextVMs =
+            ViewModel.Context.list m
+    in
+        App.drawerLayout []
+            [ appDrawerView contextVMs m
+            , App.headerLayout []
+                [ appHeaderView m
+                , appMainView contextVMs m
+                ]
             ]
-        ]
 
 
 appHeaderView m =
@@ -94,11 +99,11 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         ]
 
 
-appMainView m =
+appMainView contextVMs m =
     div [ id "main-view" ]
         [ case Model.getMainViewType m of
             GroupByContextView ->
-                groupByContextView m
+                groupByContextView contextVMs m
 
             BinView ->
                 filteredTodoListView m

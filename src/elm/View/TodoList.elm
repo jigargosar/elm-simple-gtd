@@ -125,8 +125,8 @@ filteredTodoListView =
            )
 
 
-groupByContextView : Model -> Html Msg
-groupByContextView model =
+groupByContextView : List ViewModel.Context.ViewModel -> Model -> Html Msg
+groupByContextView contextVMs model =
     let
         vc =
             createViewContext model

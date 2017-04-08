@@ -29,7 +29,7 @@ import Model.Types exposing (..)
 import ViewModel.Context
 
 
-appDrawerView m =
+appDrawerView contextVMs m =
     App.drawer [ attribute "slot" "drawer" ]
         [ div
             [ style [ "height" => "100%", "overflow" => "scroll" ]
@@ -42,7 +42,7 @@ appDrawerView m =
                  , projectsItemView m
                  , divider
                  ]
-                    ++ todoContextsMenuItems m
+                    ++ List.map contextMenuItem contextVMs
                     ++ [ divider
                        , binItemView m
                        , doneItemView m
@@ -66,11 +66,6 @@ binItemView m =
 
 doneItemView m =
     item [ onClick (SetView DoneView) ] [ text "Done" ]
-
-
-todoContextsMenuItems =
-    ViewModel.Context.list
-        >> List.map contextMenuItem
 
 
 contextMenuItem vm =

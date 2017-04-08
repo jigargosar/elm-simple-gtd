@@ -131,16 +131,33 @@ groupByTodoContext2 =
         >> Keyed.node "div" []
 
 
+createContextViewModel context =
+    { id = Context.getId context
+    , name = Context.getName context
+    , todoList = []
+    }
+
+
+prependInboxContextVM contextVMs =
+    ({ id = "", name = "Inbox", todoList = [] }) :: contextVMs
+
+
 groupByContext : Model -> Html Msg
 groupByContext model =
     let
         vc =
             createViewContext model
 
+        contextViewModels =
+            vc.contextByIdDict
+                |> Dict.values
+                .|> createContextViewModel
+                |> prependInboxContextVM
+
         todoList =
             Model.getActiveTodoList model
 
-        groupedByContextId =
+        todoByContextIdDict =
             todoList
                 |> Dict.groupBy (Todo.getMaybeContextId >> Maybe.withDefault "")
     in

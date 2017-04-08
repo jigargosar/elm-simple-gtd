@@ -8,6 +8,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model.TodoStore
 import Msg exposing (Msg(SetView))
+import String.Extra
 import View.TodoList exposing (groupByContextView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -70,11 +71,11 @@ doneItemView m =
 
 contextMenuItem vm =
     let
-        badgeForId =
-            "id-for-badge-" ++ vm.name
+        idForBadge =
+            "app-drawer-id-for-badge-" ++ (String.Extra.dasherize vm.name)
     in
         item [ class "has-hover-items" ]
-            ([ span [ id badgeForId ] [ text (vm.name) ]
+            ([ span [ id idForBadge ] [ text (vm.name) ]
              , itemBody [] []
              , badge
                 [ classList
@@ -82,7 +83,7 @@ contextMenuItem vm =
                     , "drawer-list-type-badge" => True
                     ]
                 , intProperty "label" (vm.count)
-                , attribute "for" badgeForId
+                , attribute "for" idForBadge
                 ]
                 []
              ]

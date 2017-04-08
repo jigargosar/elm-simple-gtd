@@ -135,6 +135,9 @@ groupByTodoContext todoList model =
     let
         vc =
             createViewContext model
+
+        todoList =
+            Model.getActiveTodoList model
     in
         Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView vc)
 

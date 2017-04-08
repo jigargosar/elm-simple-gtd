@@ -38,17 +38,6 @@ getPathFromModel model =
         TodoContextView context ->
             [ "project", context ]
 
-        TodoListView filter ->
-            case filter of
-                ActiveFilter _ ->
-                    [ "lists", "all" ]
-
-                DoneFilter ->
-                    [ "lists", "done" ]
-
-                BinFilter ->
-                    [ "lists", "bin" ]
-
 
 delta2hash : Model -> Model -> Maybe UrlChange
 delta2hash =

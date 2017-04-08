@@ -12,12 +12,14 @@ const _ = R
 async function boot() {
 
     const dbMap = {
-        "todo-db": await PouchDB("todo-db")
-        , "project-db": await PouchDB("project-db")
+        "todo-db": await PouchDB("todo-db"),
+        "project-db": await PouchDB("project-db"),
+        "context-db": await PouchDB("context-db")
     }
 
     const allTodos = await dbMap["todo-db"].find({selector: {"_id": {"$ne": null}}})
     const allProjects = await dbMap["project-db"].find({selector: {"_id": {"$ne": null}}})
+    const contexts = await dbMap["context-db"].find({selector: {"_id": {"$ne": null}}})
     // console.log(allTodos)
 
     const Elm = require("elm/Main.elm")
@@ -25,7 +27,8 @@ async function boot() {
         .embed(document.getElementById("root"), {
             now: Date.now(),
             encodedTodoList: allTodos,
-            encodedProjectList: allProjects
+            encodedProjectList: allProjects,
+            encodedContextList: contexts
         })
 
 

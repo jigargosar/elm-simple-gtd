@@ -10,6 +10,7 @@ import Maybe.Extra as Maybe
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Random.Pcg as Random
 
 
 type alias ContextName =
@@ -50,8 +51,8 @@ constructor id rev createdAt modifiedAt name =
     }
 
 
-encode : Context -> Encoded
-encode context =
+encoder : Context -> Encoded
+encoder context =
     E.object
         [ "_id" => E.string context.id
         , "_rev" => E.string context.rev
@@ -67,3 +68,8 @@ decoder =
         |> PouchDB.documentFieldsDecoder
         |> PouchDB.timeStampFieldsDecoder
         |> D.required "name" D.string
+
+
+storeGenerator : List Encoded -> Random.Generator Store
+storeGenerator =
+    PouchDB.generator "context-db" encoder decoder

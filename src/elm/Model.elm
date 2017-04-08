@@ -36,7 +36,7 @@ init now encodedTodoList encodedProjectList encodedContextList =
             Random.map3 (,,)
                 (todoStoreGenerator encodedTodoList)
                 (ProjectStore.generator encodedProjectList)
-                (contextStoreGenerator encodedContextList)
+                (Context.storeGenerator encodedContextList)
 
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.step storeGenerator (Random.seedFromTime now)
@@ -57,11 +57,6 @@ init now encodedTodoList encodedProjectList encodedContextList =
 todoStoreGenerator : List EncodedTodo -> Random.Generator TodoStore
 todoStoreGenerator =
     PouchDB.generator "todo-db" Todo.encode Todo.decoder
-
-
-contextStoreGenerator : List Context.Encoded -> Random.Generator Context.Store
-contextStoreGenerator =
-    PouchDB.generator "context-db" Context.encode Context.decoder
 
 
 findProjectByName projectName =

@@ -1,5 +1,6 @@
 module Model.Types exposing (..)
 
+import Context
 import Ext.Keyboard as Keyboard
 import PouchDB
 import Project exposing (ProjectId, ProjectName)
@@ -50,11 +51,12 @@ type MainViewType
 type alias Model =
     { now : Time
     , todoStore : TodoStore
+    , projectStore : ProjectStore
+    , contextStore : Context.Store
     , editModel : EditMode
     , mainViewType : MainViewType
     , seed : Seed
     , maybeRunningTodo : Maybe RunningTodo
-    , projectStore : ProjectStore
     , keyboardState : Keyboard.State
     , selection : Selection
     }

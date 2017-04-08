@@ -43,11 +43,12 @@ init now encodedTodoList encodedProjectList encodedContextList =
     in
         { now = now
         , todoStore = todoStore
+        , projectStore = projectStore
+        , contextStore = contextStore
         , editModel = NotEditing
         , mainViewType = GroupByContextView
         , seed = seed
         , maybeRunningTodo = Nothing
-        , projectStore = projectStore
         , keyboardState = Keyboard.init
         , selection = Set.empty
         }

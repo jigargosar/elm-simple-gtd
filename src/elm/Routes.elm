@@ -38,9 +38,9 @@ getPathFromModel model =
         TodoContextView context ->
             [ "project", context ]
 
-        TodoListView filter groupBy ->
+        TodoListView filter ->
             case filter of
-                ActiveFilter ->
+                ActiveFilter _ ->
                     [ "lists", "all" ]
 
                 DoneFilter ->

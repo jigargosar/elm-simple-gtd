@@ -45,7 +45,7 @@ type alias Selection =
 
 
 type Filter
-    = ActiveFilter
+    = ActiveFilter GroupBy
     | BinFilter
     | DoneFilter
 
@@ -63,7 +63,7 @@ type MainViewType
     | DoneView
     | BinView
     | ProjectListView
-    | TodoListView Filter GroupBy
+    | TodoListView Filter
 
 
 type alias Model =

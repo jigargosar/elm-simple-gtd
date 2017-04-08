@@ -115,9 +115,9 @@ appMainView m =
             TodoContextView context ->
                 div [] [ "TodoContextView::" ++ context |> text ]
 
-            TodoListView filter groupBy ->
+            TodoListView filter ->
                 case filter of
-                    ActiveFilter ->
+                    ActiveFilter groupBy ->
                         filteredTodoListView m
 
                     DoneFilter ->

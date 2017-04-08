@@ -24,7 +24,7 @@ import Project exposing (ProjectId)
 import Todo.Types exposing (..)
 
 
-getDeleted =
+isDeleted =
     Internal.getDeleted
 
 

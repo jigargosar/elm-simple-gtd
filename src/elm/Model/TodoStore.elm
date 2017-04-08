@@ -59,7 +59,7 @@ groupByTodoContextViewModel : Model -> List TodoContextViewModel
 groupByTodoContextViewModel =
     Model.getTodoStore
         >> PouchDB.asList
-        >> Todo.rejectAnyPass [ Todo.getDeleted, Todo.isDone ]
+        >> Todo.rejectAnyPass [ Todo.isDeleted, Todo.isDone ]
         --        >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
         >> Dict.Extra.groupBy (\_ -> "Inbox")
         >> (\dict ->

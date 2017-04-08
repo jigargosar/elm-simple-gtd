@@ -1,6 +1,7 @@
 module View.AppDrawer exposing (..)
 
 import Html.Attributes.Extra exposing (..)
+import Html.Events.Extra exposing (onClickStopPropagation)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, tabindex, value)
@@ -74,7 +75,7 @@ contextMenuItem vm =
         idForBadge =
             "app-drawer-id-for-badge-" ++ (String.Extra.dasherize vm.name)
     in
-        item [ class "has-hover-items" ]
+        item [ class "has-hover-items", onClickStopPropagation Msg.NoOp ]
             ([ span [ id idForBadge ] [ text (vm.name) ]
              , itemBody [] []
              , badge

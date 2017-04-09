@@ -104,7 +104,7 @@ edit vm =
             [ input
                 [ id vm.todo.inputId
                 , class "edit-todo-input auto-focus"
-                , stringProperty "label" "FOOBAR"
+                , stringProperty "label" "Todo"
                 , value (vm.todo.text)
                 , onInput vm.onTodoTextChanged
                 , autofocus True

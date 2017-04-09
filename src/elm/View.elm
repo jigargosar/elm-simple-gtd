@@ -151,7 +151,7 @@ headerView m =
                     , value text
                     , onBlur Msg.DeactivateEditingMode
                     , onKeyUp (Msg.NewTodoKeyUp text)
-                    , stringProperty "label" "New FOOBAR"
+                    , stringProperty "label" "New Todo"
                     , boolProperty "alwaysFloatLabel" True
                     , style [ ( "width", "100%" ), "color" => "white" ]
                     ]

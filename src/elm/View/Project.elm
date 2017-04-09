@@ -6,6 +6,7 @@ import Html exposing (Html)
 import Model.Types
 import Msg exposing (Msg)
 import Project exposing (ProjectId, ProjectName)
+import String.Extra
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -35,9 +36,19 @@ createVM todoByGroupIdDict model =
 
         count =
             List.length todoList
+
+        name =
+            let
+                name =
+                    Project.getName model
+            in
+                if String.Extra.isBlank name then
+                    "<Blank Name>"
+                else
+                    name
     in
         { id = id
-        , name = Project.getName model
+        , name = name
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList

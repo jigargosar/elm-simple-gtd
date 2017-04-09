@@ -2,6 +2,7 @@ module Model exposing (..)
 
 import Context
 import Dict.Extra
+import EditMode exposing (EditTodoModel)
 import Ext.Keyboard as Keyboard
 import Model.Internal exposing (..)
 import Model.TodoStore
@@ -46,7 +47,7 @@ init now encodedTodoList encodedProjectList encodedContextList =
         , todoStore = todoStore
         , projectStore = projectStore
         , contextStore = contextStore
-        , editModel = NotEditing
+        , editModel = EditMode.init
         , mainViewType = GroupByContextView
         , seed = seed
         , maybeRunningTodo = Nothing

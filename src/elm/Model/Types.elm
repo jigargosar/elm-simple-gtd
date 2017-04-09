@@ -1,6 +1,7 @@
 module Model.Types exposing (..)
 
 import Context
+import EditMode exposing (EditMode)
 import Ext.Keyboard as Keyboard
 import PouchDB
 import Project
@@ -13,27 +14,6 @@ import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Time exposing (Time)
 import Todo
-
-
-type alias EditTodoModel =
-    { todoId : Todo.Id
-    , todo_ : Todo.Model
-    , todoText : Todo.Text
-    , projectName : Project.Name
-    , contextName : Context.Name
-    }
-
-
-type alias NewTodoEditModel =
-    Todo.Text
-
-
-type EditMode
-    = NewTodoEditMode NewTodoEditModel
-    | EditTodo EditTodoModel
-    | NotEditing
-    | SwitchViewCommandMode
-    | SwitchToGroupedViewCommandMode
 
 
 type alias Selection =

@@ -4,13 +4,13 @@ import Context
 import Date.Distance exposing (inWords)
 import Dict
 import Dom
+import EditMode exposing (EditTodoModel)
 import Ext.Decode exposing (traceDecoder)
 import Html.Attributes.Extra exposing (intProperty)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
-import Model.Types exposing (EditTodoModel)
 import Msg exposing (Msg)
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
 import Project

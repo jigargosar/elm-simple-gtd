@@ -2,6 +2,7 @@ port module Update exposing (..)
 
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
+import EditMode
 import Ext.Keyboard as Keyboard
 import Ext.Return as Return
 import Model.EditMode as Model
@@ -179,7 +180,7 @@ update msg =
                     Return.with (Model.getEditMode)
                         (\editMode ->
                             case editMode of
-                                NotEditing ->
+                                EditMode.NotEditing ->
                                     case key of
                                         Key.CharQ ->
                                             andThenUpdate StartAddingTodo
@@ -194,12 +195,12 @@ update msg =
                                             Return.command (Navigation.forward 1)
 
                                         Key.CharG ->
-                                            Return.map (Model.setEditMode SwitchViewCommandMode)
+                                            Return.map (Model.setEditMode EditMode.SwitchViewCommandMode)
 
                                         _ ->
                                             identity
 
-                                SwitchViewCommandMode ->
+                                EditMode.SwitchViewCommandMode ->
                                     (case key of
                                         Key.CharP ->
                                             andThenUpdate (SetView ProjectListView)
@@ -218,13 +219,13 @@ update msg =
                                     )
                                         >> (case key of
                                                 Key.CharG ->
-                                                    Return.map (Model.setEditMode SwitchToGroupedViewCommandMode)
+                                                    Return.map (Model.setEditMode EditMode.SwitchToGroupedViewCommandMode)
 
                                                 _ ->
                                                     andThenUpdate DeactivateEditingMode
                                            )
 
-                                SwitchToGroupedViewCommandMode ->
+                                EditMode.SwitchToGroupedViewCommandMode ->
                                     (case key of
                                         Key.CharP ->
                                             andThenUpdate (SetView ProjectListView)

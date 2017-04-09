@@ -1,5 +1,6 @@
 module View exposing (appView)
 
+import EditMode
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, h1, h2, hr, node, span, text)
@@ -143,7 +144,7 @@ headerView m =
             Model.getSelectedTodoIdSet m |> Set.size
     in
         case Model.getEditMode m of
-            NewTodoEditMode text ->
+            EditMode.NewTodoEditMode text ->
                 input
                     [ id newTodoInputId
                     , class "auto-focus"
@@ -157,10 +158,10 @@ headerView m =
                     ]
                     []
 
-            SwitchViewCommandMode ->
+            EditMode.SwitchViewCommandMode ->
                 span [] [ "Switch View: (A)ll, (P)rojects, (D)one, (B)in, (G)roup By." |> text ]
 
-            SwitchToGroupedViewCommandMode ->
+            EditMode.SwitchToGroupedViewCommandMode ->
                 span [] [ "Group By: (P)rojects, (C)ontexts " |> text ]
 
             _ ->

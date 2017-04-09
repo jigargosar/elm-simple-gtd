@@ -2,6 +2,7 @@ module View.Shared exposing (..)
 
 import Context
 import Dict exposing (Dict)
+import EditMode exposing (EditTodoModel)
 import Json.Encode
 import Model
 import Model.EditMode
@@ -13,7 +14,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Model.Types exposing (EditTodoModel, Model)
+import Model.Types exposing (Model)
 import Project
 import Model.Internal as Model
 import Project

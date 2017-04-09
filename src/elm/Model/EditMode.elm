@@ -1,6 +1,7 @@
 module Model.EditMode exposing (..)
 
 import Context
+import EditMode exposing (EditMode, EditTodoModel)
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model exposing (..)
@@ -17,56 +18,48 @@ import Project
 
 activateNewTodoMode : String -> ModelF
 activateNewTodoMode text =
-    setEditMode (NewTodoEditMode text)
+    setEditMode (EditMode.newTodo text)
 
 
 setEditModelToEditTodo : Todo.Model -> ModelF
 setEditModelToEditTodo todo =
-    updateEditModel (createEditTodoModel todo >> EditTodo)
+    updateEditModel (createEditTodoModel todo)
 
 
-createEditTodoModel : Todo.Model -> Model -> EditTodoModel
+createEditTodoModel : Todo.Model -> Model -> EditMode
 createEditTodoModel todo model =
-    { todoId = Todo.getId todo
-    , todo_ = todo
-    , todoText = Todo.getText todo
-    , projectName = Model.getMaybeProjectNameOfTodo todo model ?= ""
-    , contextName = Model.getContextNameOfTodo todo model ?= ""
-    }
+    let
+        projectName =
+            Model.getMaybeProjectNameOfTodo todo model ?= ""
+
+        contextName =
+            Model.getContextNameOfTodo todo model ?= ""
+    in
+        EditMode.editTodo todo projectName contextName
 
 
 updateEditTodoText : String -> EditTodoModel -> ModelF
 updateEditTodoText text editTodoModel =
-    setEditMode (EditTodo ({ editTodoModel | todoText = text }))
+    setEditMode (EditMode.updateEditTodoText text editTodoModel)
 
 
-getMaybeEditTodoModel model =
-    case getEditMode model of
-        EditTodo model ->
-            Just model
-
-        _ ->
-            Nothing
+getMaybeEditTodoModel =
+    getEditMode >> EditMode.getMaybeEditTodoModel
 
 
-getEditNewTodoModel model =
-    case getEditMode model of
-        NewTodoEditMode model ->
-            Just model
-
-        _ ->
-            Nothing
+getEditNewTodoModel =
+    getEditMode >> EditMode.getEditNewTodoModel
 
 
 updateEditTodoProjectName : Project.Name -> EditTodoModel -> ModelF
 updateEditTodoProjectName projectName editTodoModel =
-    setEditMode (EditTodo ({ editTodoModel | projectName = projectName }))
+    setEditMode (EditMode.updateEditTodoProjectName projectName editTodoModel)
 
 
 updateEditTodoContextName : Context.Name -> EditTodoModel -> ModelF
 updateEditTodoContextName contextName editTodoModel =
-    setEditMode (EditTodo ({ editTodoModel | contextName = contextName }))
+    setEditMode (EditMode.updateEditTodoProjectName contextName editTodoModel)
 
 
 deactivateEditingMode =
-    setEditMode NotEditing
+    setEditMode EditMode.notEditing

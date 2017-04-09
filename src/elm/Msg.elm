@@ -2,6 +2,7 @@ module Msg exposing (..)
 
 import Context
 import Dom
+import EditMode exposing (EditTodoModel)
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Model.Types exposing (..)

@@ -39,7 +39,7 @@ appDrawerView contextVMs m =
             [ menu
                 [ stringProperty "selected" "0"
                 ]
-                ([ item [ onClick (SetView GroupByContextView) ] [ text "All" ]
+                ([ item [ onClick (SetView GroupByContextView) ] [ text "Contexts" ]
                  , divider
                  ]
                     ++ List.map contextMenuItem contextVMs

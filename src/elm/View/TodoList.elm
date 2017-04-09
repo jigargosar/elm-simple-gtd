@@ -127,16 +127,14 @@ filteredTodoListView =
 
 groupByContextView : List ViewModel.Context.ViewModel -> Model -> Html Msg
 groupByContextView contextVMs model =
-    Keyed.node "div" [] (contextViews contextVMs model)
-
-
-contextViews contextVMs model =
     let
         vc =
             createViewContext model
+
+        contextViewFromVM =
+            contextView vc
     in
-        contextVMs
-            .|> contextView vc
+        Keyed.node "div" [] (contextVMs .|> contextViewFromVM)
 
 
 contextView vc vm =

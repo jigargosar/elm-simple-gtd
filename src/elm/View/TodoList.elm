@@ -36,29 +36,7 @@ import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import View.Todo exposing (EditTodoViewModel)
 import View.Context
-
-
-type alias ViewContext =
-    { now : Time
-    , encodedProjectNames : Json.Encode.Value
-    , encodedContextNames : Json.Encode.Value
-    , maybeEditTodoModel : Maybe EditTodoModel
-    , projectIdToNameDict : Dict ProjectId ProjectName
-    , contextByIdDict : Dict Context.Id Context.Model
-    , selection : Set TodoId
-    }
-
-
-createViewContext : Model -> ViewContext
-createViewContext model =
-    { now = Model.getNow model
-    , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames
-    , encodedContextNames = Model.getEncodedContextNames model
-    , maybeEditTodoModel = Model.EditMode.getMaybeEditTodoModel model
-    , projectIdToNameDict = Model.getProjectStore model |> ProjectStore.getProjectIdToNameDict
-    , contextByIdDict = Model.getContextByIdDict model
-    , selection = Model.getSelectedTodoIdSet model
-    }
+import View.MainViewModel exposing (MainViewModel)
 
 
 type alias TodoView =
@@ -67,7 +45,7 @@ type alias TodoView =
 
 todoViewFromModel : Model -> TodoView
 todoViewFromModel =
-    createViewContext >> todoView
+    View.MainViewModel.create >> todoView
 
 
 todoView vc todo =
@@ -89,7 +67,7 @@ todoView vc todo =
         ( Todo.getId todo, view )
 
 
-createEditTodoViewModel : ViewContext -> EditTodoModel -> EditTodoViewModel
+createEditTodoViewModel : MainViewModel -> EditTodoModel -> EditTodoViewModel
 createEditTodoViewModel vc etm =
     let
         todoId =
@@ -129,7 +107,7 @@ groupByContextView : List View.Context.ViewModel -> Model -> Html Msg
 groupByContextView contextVMs model =
     let
         vc =
-            createViewContext model
+            View.MainViewModel.create model
 
         contextViewFromVM =
             contextView vc

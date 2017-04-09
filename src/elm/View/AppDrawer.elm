@@ -46,9 +46,12 @@ appDrawerView contextVMs projectVMs m =
                     ++ [ divider
                        , projectsItemView m
                        , divider
-                       , binItemView m
-                       , doneItemView m
                        ]
+                    ++ List.map projectMenuItem
+                        projectVMs
+                        [ binItemView m
+                        , doneItemView m
+                        ]
                 )
             ]
         ]
@@ -73,9 +76,30 @@ doneItemView m =
 contextMenuItem vm =
     let
         idForBadge =
-            "app-drawer-id-for-badge-" ++ (String.Extra.dasherize vm.name)
+            "app-drawer-id-for-badge-context-" ++ (String.Extra.dasherize vm.name)
     in
         item [ class "has-hover-items", onClickStopPropagation (Msg.SetView (ContextView vm.id)) ]
+            ([ span [ id idForBadge ] [ text (vm.name) ]
+             , itemBody [] []
+             , badge
+                [ classList
+                    [ "hidden" => (vm.isEmpty)
+                    , "drawer-list-type-badge" => True
+                    ]
+                , intProperty "label" (vm.count)
+                , attribute "for" idForBadge
+                ]
+                []
+             ]
+            )
+
+
+projectMenuItem vm =
+    let
+        idForBadge =
+            "app-drawer-id-for-badge-project-" ++ (String.Extra.dasherize vm.name)
+    in
+        item [ class "has-hover-items", onClickStopPropagation (Msg.SetView (ProjectView vm.id)) ]
             ([ span [ id idForBadge ] [ text (vm.name) ]
              , itemBody [] []
              , badge

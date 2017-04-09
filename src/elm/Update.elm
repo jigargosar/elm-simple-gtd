@@ -116,27 +116,24 @@ update msg =
                                 >> uncurry update
                         )
 
-                EditTodoKeyUp editTodoModel { key, isShiftDown } ->
+                EditTodoKeyUp ({ todoId, contextName, projectName } as etm) { key, isShiftDown } ->
                     case key of
                         Key.Enter ->
                             Return.map
-                                (Model.insertProjectIfNotExist editTodoModel.projectName
-                                    >> Model.insertContextIfNotExist editTodoModel.contextName
-                                    >> Model.updateTodoFromEditTodoModel editTodoModel
+                                (Model.insertProjectIfNotExist projectName
+                                    >> Model.insertContextIfNotExist contextName
+                                    >> Model.updateTodoFromEditTodoModel etm
                                 )
                                 >> Return.andThen
                                     (\model ->
                                         (if isShiftDown then
-                                            let
-                                                maybeTodo =
-                                                    Model.findTodoById editTodoModel.todoId model
-                                            in
-                                                maybeTodo
-                                                    |> Maybe.unpack
-                                                        (\_ ->
-                                                            DeactivateEditingMode
-                                                        )
-                                                        CopyAndEditTodo
+                                            model
+                                                |> Model.findTodoById todoId
+                                                |> Maybe.unpack
+                                                    (\_ ->
+                                                        DeactivateEditingMode
+                                                    )
+                                                    CopyAndEditTodo
                                          else
                                             DeactivateEditingMode
                                         )

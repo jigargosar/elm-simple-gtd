@@ -36,7 +36,7 @@ listItemView vc todo =
         view =
             case vc.maybeEditTodoModel of
                 Just etm ->
-                    if Todo.equalById etm.todo todo then
+                    if Todo.hasId etm.todoId todo then
                         (edit (createEditTodoViewModel vc etm))
                     else
                         notEditingView ()

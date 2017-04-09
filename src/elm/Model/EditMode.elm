@@ -28,7 +28,7 @@ setEditModelToEditTodo todo =
 createEditTodoModel : Todo.Model -> Model -> EditTodoModel
 createEditTodoModel todo model =
     { todoId = Todo.getId todo
-    , todo = todo
+    , todo_ = todo
     , todoText = Todo.getText todo
     , projectName = Model.getMaybeProjectNameOfTodo todo model ?= ""
     , contextName = Model.getContextNameOfTodo todo model ?= ""

@@ -17,7 +17,7 @@ import Todo
 
 type alias EditTodoModel =
     { todoId : Todo.Id
-    , todo : Todo.Model
+    , todo_ : Todo.Model
     , todoText : Todo.Text
     , projectName : Project.Name
     , contextName : Context.Name

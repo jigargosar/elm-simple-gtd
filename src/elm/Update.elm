@@ -124,11 +124,23 @@ update msg =
                                     >> Model.insertContextIfNotExist editTodoModel.contextName
                                     >> Model.updateTodoFromEditTodoModel editTodoModel
                                 )
-                                >> andThenUpdate
-                                    (if isShiftDown then
-                                        CopyAndEditTodo editTodoModel.todo
-                                     else
-                                        DeactivateEditingMode
+                                >> Return.andThen
+                                    (\model ->
+                                        (if isShiftDown then
+                                            let
+                                                maybeTodo =
+                                                    Model.findTodoById editTodoModel.todoId model
+                                            in
+                                                maybeTodo
+                                                    |> Maybe.unpack
+                                                        (\_ ->
+                                                            DeactivateEditingMode
+                                                        )
+                                                        CopyAndEditTodo
+                                         else
+                                            DeactivateEditingMode
+                                        )
+                                            |> (update # model)
                                     )
 
                         Key.Escape ->

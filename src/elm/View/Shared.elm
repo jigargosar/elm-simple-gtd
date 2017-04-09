@@ -1,4 +1,4 @@
-module View.MainViewModel exposing (..)
+module View.Shared exposing (..)
 
 import Context
 import Dict exposing (Dict)
@@ -20,7 +20,7 @@ import Model.Internal as Model
 import ProjectStore
 
 
-type alias MainViewModel =
+type alias SharedViewModel =
     { now : Time
     , encodedProjectNames : Json.Encode.Value
     , encodedContextNames : Json.Encode.Value
@@ -31,7 +31,7 @@ type alias MainViewModel =
     }
 
 
-create : Model -> MainViewModel
+create : Model -> SharedViewModel
 create model =
     { now = Model.getNow model
     , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames

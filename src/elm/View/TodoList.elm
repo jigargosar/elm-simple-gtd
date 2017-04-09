@@ -36,7 +36,7 @@ import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import View.Todo exposing (EditTodoViewModel)
 import View.Context
-import View.MainViewModel exposing (MainViewModel)
+import View.Shared exposing (SharedViewModel)
 
 
 type alias TodoView =
@@ -45,7 +45,7 @@ type alias TodoView =
 
 todoViewFromModel : Model -> TodoView
 todoViewFromModel =
-    View.MainViewModel.create >> todoView
+    View.Shared.create >> todoView
 
 
 todoView vc todo =
@@ -67,7 +67,7 @@ todoView vc todo =
         ( Todo.getId todo, view )
 
 
-createEditTodoViewModel : MainViewModel -> EditTodoModel -> EditTodoViewModel
+createEditTodoViewModel : SharedViewModel -> EditTodoModel -> EditTodoViewModel
 createEditTodoViewModel vc etm =
     let
         todoId =
@@ -107,7 +107,7 @@ groupByContextView : List View.Context.ViewModel -> Model -> Html Msg
 groupByContextView contextVMs model =
     let
         vc =
-            View.MainViewModel.create model
+            View.Shared.create model
 
         contextViewFromVM =
             contextView vc

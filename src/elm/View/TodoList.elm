@@ -151,22 +151,3 @@ contextView vc vm =
         , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> todoView vc)
         ]
     )
-
-
-maybeContextView : TodoView -> TodoContextViewModel -> Maybe ( String, Html Msg )
-maybeContextView todoView vm =
-    if vm.isEmpty then
-        Nothing
-    else
-        Just
-            ( vm.name
-            , div [ class "todo-list-container" ]
-                [ div [ class "todo-list-title" ]
-                    [ div [ class "paper-badge-container" ]
-                        [ span [] [ text vm.name ]
-                        , badge [ intProperty "label" (vm.count) ] []
-                        ]
-                    ]
-                , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> todoView)
-                ]
-            )

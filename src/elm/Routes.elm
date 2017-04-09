@@ -21,7 +21,7 @@ delta2builder previous current =
 getPathFromModel model =
     case Model.getMainViewType model of
         GroupByContextView ->
-            [ "lists", "all" ]
+            [ "lists", "contexts" ]
 
         BinView ->
             [ "lists", "bin" ]
@@ -50,7 +50,7 @@ delta2hash =
 builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
-        "lists" :: "all" :: [] ->
+        "lists" :: "contexts" :: [] ->
             [ Msg.SetView GroupByContextView ]
 
         "lists" :: "projects" :: [] ->

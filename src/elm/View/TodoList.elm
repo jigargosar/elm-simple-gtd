@@ -34,6 +34,7 @@ import Todo.Types exposing (..)
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
+import View.Project
 import View.Todo exposing (EditTodoViewModel)
 import View.Context
 import View.Shared exposing (SharedViewModel)
@@ -60,6 +61,32 @@ groupByContextView contextVMs model =
 
 
 contextView vc vm =
+    ( vm.name
+    , div [ class "todo-list-container" ]
+        [ div [ class "todo-list-title" ]
+            [ div [ class "paper-badge-container" ]
+                [ span [] [ text vm.name ]
+                , badge [ intProperty "label" (vm.count) ] []
+                ]
+            ]
+        , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> View.Todo.listItemView vc)
+        ]
+    )
+
+
+groupByProjectView : List View.Project.ViewModel -> Model -> Html Msg
+groupByProjectView projectVMs model =
+    let
+        vc =
+            View.Shared.create model
+
+        projectViewFromVM =
+            projectView vc
+    in
+        Keyed.node "div" [] (projectVMs .|> projectViewFromVM)
+
+
+projectView vc vm =
     ( vm.name
     , div [ class "todo-list-container" ]
         [ div [ class "todo-list-title" ]

@@ -156,6 +156,10 @@ getActiveTodoListGroupedByContextId =
     getActiveTodoList >> Dict.Extra.groupBy (Todo.getMaybeContextId >> Maybe.withDefault "")
 
 
+getActiveTodoListGroupedByProjectId =
+    getActiveTodoList >> Dict.Extra.groupBy (Todo.getMaybeProjectId >> Maybe.withDefault "")
+
+
 updateTodoFromEditTodoModel : EditTodoModel -> ModelF
 updateTodoFromEditTodoModel { contextName, projectName, todoText, todoId } =
     apply3Uncurry ( findContextByName contextName, findProjectByName projectName, identity )

@@ -70,7 +70,7 @@ vmList : Model.Types.Model -> List ViewModel
 vmList model =
     let
         todoByGroupIdDict =
-            Model.getActiveTodoListGroupedByContextId model
+            Model.getActiveTodoListGroupedByProjectId model
     in
         Model.getActiveProjects model
             .|> createVM todoByGroupIdDict

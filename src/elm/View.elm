@@ -54,10 +54,10 @@ appDrawerLayoutView m =
             View.Project.vmList m
     in
         App.drawerLayout []
-            [ appDrawerView contextVMs m
+            [ appDrawerView contextVMs projectVMs m
             , App.headerLayout []
                 [ appHeaderView m
-                , appMainView contextVMs m
+                , appMainView contextVMs projectVMs m
                 ]
             ]
 
@@ -103,7 +103,7 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         ]
 
 
-appMainView contextVMs m =
+appMainView contextVMs projectVMs m =
     div [ id "main-view" ]
         [ case Model.getMainViewType m of
             GroupByContextView ->
@@ -116,7 +116,7 @@ appMainView contextVMs m =
                 filteredTodoListView m
 
             ProjectListView ->
-                projectListView m
+                groupByProjectView projectVMs m
 
             ProjectView projectId ->
                 filteredTodoListView m

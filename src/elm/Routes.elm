@@ -32,14 +32,17 @@ getPathFromModel model =
         ProjectListView ->
             [ "lists", "projects" ]
 
-        ProjectView projectId ->
-            [ "project", projectId ]
+        ProjectView id ->
+            if String.isEmpty id then
+                [ "project", "NotAssigned" ]
+            else
+                [ "project", id ]
 
-        ContextView contextId ->
-            if String.isEmpty contextId then
+        ContextView id ->
+            if String.isEmpty id then
                 [ "Inbox" ]
             else
-                [ "context", contextId ]
+                [ "context", id ]
 
 
 delta2hash : Model -> Model -> Maybe UrlChange
@@ -62,8 +65,11 @@ builder2messages builder =
         "lists" :: "done" :: [] ->
             [ Msg.SetView DoneView ]
 
-        "project" :: projectId :: [] ->
-            [ Msg.SetView (ProjectView projectId) ]
+        "project" :: "NotAssigned" :: [] ->
+            [ Msg.SetView (ProjectView "") ]
+
+        "project" :: id :: [] ->
+            [ Msg.SetView (ProjectView id) ]
 
         "context" :: id :: [] ->
             [ Msg.SetView (ContextView id) ]

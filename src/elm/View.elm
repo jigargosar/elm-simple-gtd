@@ -118,15 +118,19 @@ appMainView contextVMs projectVMs m =
             ProjectListView ->
                 groupByProjectView projectVMs m
 
-            ProjectView projectId ->
-                filteredTodoListView m
-
-            ContextView contextId ->
+            ProjectView id ->
                 let
-                    contextVMSingleton =
-                        contextVMs |> List.find (.id >> equals contextId) |> Maybe.toList
+                    vmSingleton =
+                        projectVMs |> List.find (.id >> equals id) |> Maybe.toList
                 in
-                    groupByContextView contextVMSingleton m
+                    groupByProjectView vmSingleton m
+
+            ContextView id ->
+                let
+                    vmSingleton =
+                        contextVMs |> List.find (.id >> equals id) |> Maybe.toList
+                in
+                    groupByContextView vmSingleton m
         ]
 
 

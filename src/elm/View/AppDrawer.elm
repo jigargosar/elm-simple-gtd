@@ -75,7 +75,7 @@ doneItemView m =
 contextMenuItem vm =
     let
         idForBadge =
-            "app-drawer-id-for-badge-context-" ++ (String.Extra.dasherize vm.name)
+            "app-drawer-id-for-badge-context-" ++ (vm.id)
     in
         item [ class "has-hover-items", onClickStopPropagation (Msg.SetView (ContextView vm.id)) ]
             ([ span [ id idForBadge ] [ text (vm.name) ]
@@ -96,7 +96,7 @@ contextMenuItem vm =
 projectMenuItem vm =
     let
         idForBadge =
-            "app-drawer-id-for-badge-project-" ++ (String.Extra.dasherize vm.name)
+            "app-drawer-id-for-badge-project-" ++ (String.Extra.dasherize vm.id)
     in
         item [ class "has-hover-items", onClickStopPropagation (Msg.SetView (ProjectView vm.id)) ]
             ([ span [ id idForBadge ] [ text (vm.name) ]

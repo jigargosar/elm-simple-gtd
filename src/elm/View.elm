@@ -144,7 +144,7 @@ headerView m =
             Model.getSelectedTodoIdSet m |> Set.size
     in
         case Model.getEditMode m of
-            EditMode.NewTodoEditMode text ->
+            EditMode.NewTodo text ->
                 input
                     [ id newTodoInputId
                     , class "auto-focus"
@@ -158,10 +158,10 @@ headerView m =
                     ]
                     []
 
-            EditMode.SwitchViewCommandMode ->
+            EditMode.SwitchView ->
                 span [] [ "Switch View: (A)ll, (P)rojects, (D)one, (B)in, (G)roup By." |> text ]
 
-            EditMode.SwitchToGroupedViewCommandMode ->
+            EditMode.SwitchToGroupedView ->
                 span [] [ "Group By: (P)rojects, (C)ontexts " |> text ]
 
             _ ->

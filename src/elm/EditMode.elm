@@ -20,27 +20,27 @@ type alias EditTodoModel =
     }
 
 
-type alias NewTodoEditModel =
+type alias NewTodoModel =
     Todo.Text
 
 
 type EditMode
-    = NewTodoEditMode NewTodoEditModel
+    = NewTodo NewTodoModel
     | EditTodo EditTodoModel
-    | NotEditing
-    | SwitchViewCommandMode
-    | SwitchToGroupedViewCommandMode
+    | None
+    | SwitchView
+    | SwitchToGroupedView
 
 
-init =
-    NotEditing
+none =
+    None
 
 
-newTodo =
-    NewTodoEditMode
+createNewTodoModel =
+    NewTodo
 
 
-editTodo todo projectName contextName =
+createEditTodoModel todo projectName contextName =
     { todoId = Todo.getId todo
     , todo_ = todo
     , todoText = Todo.getText todo
@@ -63,9 +63,9 @@ getMaybeEditTodoModel model =
             Nothing
 
 
-getEditNewTodoModel model =
+getNewTodoModel model =
     case model of
-        NewTodoEditMode model ->
+        NewTodo model ->
             Just model
 
         _ ->
@@ -78,7 +78,3 @@ updateEditTodoProjectName projectName editTodoModel =
 
 updateEditTodoContextName contextName editTodoModel =
     (EditTodo ({ editTodoModel | contextName = contextName }))
-
-
-notEditing =
-    NotEditing

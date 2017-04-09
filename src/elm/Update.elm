@@ -180,7 +180,7 @@ update msg =
                     Return.with (Model.getEditMode)
                         (\editMode ->
                             case editMode of
-                                EditMode.NotEditing ->
+                                EditMode.None ->
                                     case key of
                                         Key.CharQ ->
                                             andThenUpdate StartAddingTodo
@@ -195,12 +195,12 @@ update msg =
                                             Return.command (Navigation.forward 1)
 
                                         Key.CharG ->
-                                            Return.map (Model.setEditMode EditMode.SwitchViewCommandMode)
+                                            Return.map (Model.setEditMode EditMode.SwitchView)
 
                                         _ ->
                                             identity
 
-                                EditMode.SwitchViewCommandMode ->
+                                EditMode.SwitchView ->
                                     (case key of
                                         Key.CharP ->
                                             andThenUpdate (SetView ProjectListView)
@@ -219,13 +219,13 @@ update msg =
                                     )
                                         >> (case key of
                                                 Key.CharG ->
-                                                    Return.map (Model.setEditMode EditMode.SwitchToGroupedViewCommandMode)
+                                                    Return.map (Model.setEditMode EditMode.SwitchToGroupedView)
 
                                                 _ ->
                                                     andThenUpdate DeactivateEditingMode
                                            )
 
-                                EditMode.SwitchToGroupedViewCommandMode ->
+                                EditMode.SwitchToGroupedView ->
                                     (case key of
                                         Key.CharP ->
                                             andThenUpdate (SetView ProjectListView)

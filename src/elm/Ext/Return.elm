@@ -4,7 +4,7 @@ import Maybe.Extra as Maybe
 import Return exposing (Return, ReturnF)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
+import Ext.Function as F exposing (..)
 
 
 withMaybe :
@@ -14,7 +14,7 @@ withMaybe :
 withMaybe f1 f2 =
     Return.andThen
         (\m ->
-            f1 m ?|> f2 ?= identity |> apply (Return.singleton m)
+            f1 m ?|> f2 ?= identity |> F.apply (Return.singleton m)
         )
 
 
@@ -60,3 +60,7 @@ andThenApplyWithMaybe f1 f2 =
 
 maybeEffect f =
     Return.effect_ (\m -> f m ?= Cmd.none)
+
+
+apply =
+    flip Return.andThen

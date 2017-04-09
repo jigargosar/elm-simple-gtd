@@ -39,65 +39,9 @@ import View.Context
 import View.Shared exposing (SharedViewModel)
 
 
-type alias TodoView =
-    Todo -> ( TodoId, Html Msg )
-
-
-todoViewFromModel : Model -> TodoView
-todoViewFromModel =
-    View.Shared.create >> todoView
-
-
-todoView vc todo =
-    let
-        notEditingView _ =
-            View.Todo.default vc todo
-
-        view =
-            case vc.maybeEditTodoModel of
-                Just etm ->
-                    if Todo.equalById etm.todo todo then
-                        (View.Todo.edit (createEditTodoViewModel vc etm))
-                    else
-                        notEditingView ()
-
-                Nothing ->
-                    notEditingView ()
-    in
-        ( Todo.getId todo, view )
-
-
-createEditTodoViewModel : SharedViewModel -> EditTodoModel -> EditTodoViewModel
-createEditTodoViewModel vc etm =
-    let
-        todoId =
-            etm.todoId
-    in
-        { todo =
-            { text = etm.todoText
-            , id = todoId
-            , inputId = "edit-todo-input-" ++ todoId
-            }
-        , project =
-            { name = etm.projectName
-            , inputId = "edit-todo-project-input-" ++ todoId
-            }
-        , context =
-            { name = etm.contextName
-            , inputId = "edit-todo-context-input-" ++ todoId
-            }
-        , onKeyUp = Msg.EditTodoKeyUp etm
-        , onTodoTextChanged = Msg.EditTodoTextChanged etm
-        , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
-        , onContextNameChanged = Msg.EditTodoContextNameChanged etm
-        , encodedProjectNames = vc.encodedProjectNames
-        , encodedContextNames = vc.encodedContextNames
-        }
-
-
 filteredTodoListView : Model -> Html Msg
 filteredTodoListView =
-    apply2 ( todoViewFromModel, Model.TodoStore.getFilteredTodoList )
+    apply2 ( View.Shared.create >> View.Todo.listItemView, Model.TodoStore.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
                 Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
            )
@@ -124,6 +68,6 @@ contextView vc vm =
                 , badge [ intProperty "label" (vm.count) ] []
                 ]
             ]
-        , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> todoView vc)
+        , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> View.Todo.listItemView vc)
         ]
     )

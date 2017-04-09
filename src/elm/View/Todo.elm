@@ -10,6 +10,7 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
+import Model.Types exposing (EditTodoModel)
 import Msg exposing (Msg)
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
 import Project exposing (ProjectName)
@@ -25,6 +26,26 @@ import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Polymer.Paper exposing (..)
 import Todo.Types exposing (TodoId, TodoText)
+import View.Shared exposing (SharedViewModel)
+
+
+listItemView vc todo =
+    let
+        notEditingView _ =
+            default vc todo
+
+        view =
+            case vc.maybeEditTodoModel of
+                Just etm ->
+                    if Todo.equalById etm.todo todo then
+                        (edit (createEditTodoViewModel vc etm))
+                    else
+                        notEditingView ()
+
+                Nothing ->
+                    notEditingView ()
+    in
+        ( Todo.getId todo, view )
 
 
 textValue : Json.Decode.Decoder String
@@ -48,6 +69,34 @@ type alias EditTodoViewModel =
     , encodedProjectNames : Json.Encode.Value
     , encodedContextNames : Json.Encode.Value
     }
+
+
+createEditTodoViewModel : SharedViewModel -> EditTodoModel -> EditTodoViewModel
+createEditTodoViewModel vc etm =
+    let
+        todoId =
+            etm.todoId
+    in
+        { todo =
+            { text = etm.todoText
+            , id = todoId
+            , inputId = "edit-todo-input-" ++ todoId
+            }
+        , project =
+            { name = etm.projectName
+            , inputId = "edit-todo-project-input-" ++ todoId
+            }
+        , context =
+            { name = etm.contextName
+            , inputId = "edit-todo-context-input-" ++ todoId
+            }
+        , onKeyUp = Msg.EditTodoKeyUp etm
+        , onTodoTextChanged = Msg.EditTodoTextChanged etm
+        , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
+        , onContextNameChanged = Msg.EditTodoContextNameChanged etm
+        , encodedProjectNames = vc.encodedProjectNames
+        , encodedContextNames = vc.encodedContextNames
+        }
 
 
 edit vm =

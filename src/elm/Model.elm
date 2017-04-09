@@ -86,12 +86,12 @@ getEncodedContextNames =
 
 getMaybeProjectNameOfTodo : Todo.Model -> Model -> Maybe ProjectName
 getMaybeProjectNameOfTodo todo model =
-    Todo.getMaybeProjectId todo ?+> ProjectStore.findNameById # (getProjectStore model)
+    Todo.getProjectId todo |> ProjectStore.findNameById # (getProjectStore model)
 
 
 getContextNameOfTodo : Todo.Model -> Model -> Maybe Context.Name
 getContextNameOfTodo todo model =
-    Todo.getMaybeContextId todo ?+> Context.findNameById # (model.contextStore)
+    Todo.getContextId todo |> Context.findNameById # (model.contextStore)
 
 
 insertProjectIfNotExist2 : ProjectName -> ModelF
@@ -152,11 +152,11 @@ getActiveTodoList =
 
 
 getActiveTodoListGroupedByContextId =
-    getActiveTodoList >> Dict.Extra.groupBy (Todo.getMaybeContextId >> Maybe.withDefault "")
+    getActiveTodoList >> Dict.Extra.groupBy (Todo.getContextId)
 
 
 getActiveTodoListGroupedByProjectId =
-    getActiveTodoList >> Dict.Extra.groupBy (Todo.getMaybeProjectId >> Maybe.withDefault "")
+    getActiveTodoList >> Dict.Extra.groupBy (Todo.getProjectId)
 
 
 updateTodoFromEditTodoModel : EditTodoModel -> ModelF
@@ -165,8 +165,8 @@ updateTodoFromEditTodoModel { contextName, projectName, todoText, todoId } =
         (\maybeContext maybeProject ->
             Model.TodoStore.updateTodoById
                 [ Todo.SetText todoText
-                , Todo.SetProjectId (maybeProject ?|> Project.getId)
-                , Todo.SetContextId (maybeContext ?|> Context.getId)
+                , Todo.SetProjectId (maybeProject ?|> Project.getId ?= "")
+                , Todo.SetContextId (maybeContext ?|> Context.getId ?= "")
                 ]
                 todoId
         )

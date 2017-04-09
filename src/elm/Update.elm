@@ -66,7 +66,7 @@ update msg =
                     updateTodo [ Todo.ToggleDeleted ] todo
 
                 SetTodoContext todoContext todo ->
-                    updateTodo [ Todo.SetContext (Just todoContext) ] todo
+                    updateTodo [ Todo.SetContext (todoContext) ] todo
 
                 CreateTodo text ->
                     Return.mapModelWith Model.getNow

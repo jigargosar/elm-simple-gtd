@@ -36,8 +36,8 @@ type alias TodoRecord =
     , text : Text
     , dueAt : Maybe Time
     , deleted : Bool
-    , projectId : Maybe ProjectId
-    , contextId : Maybe Context.Id
+    , projectId : ProjectId
+    , contextId : Context.Id
     }
 
 
@@ -61,10 +61,10 @@ type UpdateAction
     = SetDone Bool
     | SetText Text
     | SetDeleted Bool
-    | SetContextId (Maybe Context.Id)
-    | SetContext (Maybe Context.Model)
-    | SetProjectId (Maybe ProjectId)
-    | SetProject (Maybe Project.Project)
+    | SetContextId Context.Id
+    | SetContext Context.Model
+    | SetProjectId ProjectId
+    | SetProject Project.Project
     | ToggleDone
     | ToggleDeleted
 
@@ -133,17 +133,14 @@ updateDeleted updater model =
     setDeleted (updater model) model
 
 
-getProjectId : Model -> Maybe ProjectId
 getProjectId =
     (.projectId)
 
 
-setProjectId : Maybe ProjectId -> ModelF
 setProjectId projectId model =
     { model | projectId = projectId }
 
 
-updateProjectId : (Model -> Maybe ProjectId) -> ModelF
 updateProjectId updater model =
     setProjectId (updater model) model
 
@@ -198,11 +195,11 @@ update actions now =
                 SetProjectId projectId ->
                     setProjectId projectId model
 
-                SetContext maybeContext ->
-                    innerUpdate (SetContextId (maybeContext ?|> Context.getId)) model
+                SetContext context ->
+                    innerUpdate (SetContextId (context |> Context.getId)) model
 
-                SetProject maybeProject ->
-                    setProjectId (maybeProject ?|> Project.getId) model
+                SetProject project ->
+                    setProjectId (Project.getId project) model
 
                 ToggleDone ->
                     updateDone (getDone >> not) model
@@ -250,8 +247,8 @@ todoRecordDecoder =
         >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         >> D.optional "deleted" D.bool defaultDeleted
-        >> D.optional "projectId" (D.nullable D.string) Nothing
-        >> D.optional "contextId" (D.nullable D.string) Nothing
+        >> D.optional "projectId" D.string ""
+        >> D.optional "contextId" D.string ""
 
 
 decoder : Decoder Model
@@ -275,8 +272,8 @@ encode todo =
         , "text" => E.string (getText todo)
         , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
         , "deleted" => E.bool (getDeleted todo)
-        , "projectId" => (todo |> getProjectId >> Maybe.unwrap E.null E.string)
-        , "contextId" => (todo.contextId |> Maybe.unwrap E.null E.string)
+        , "projectId" => (todo.projectId |> E.string)
+        , "contextId" => (todo.contextId |> E.string)
         , "createdAt" => E.int (todo.createdAt |> round)
         , "modifiedAt" => E.int (todo.modifiedAt |> round)
         ]
@@ -292,8 +289,8 @@ init createdAt text id =
         text
         defaultDueAt
         defaultDeleted
-        Nothing
-        Nothing
+        ""
+        ""
 
 
 getText =
@@ -309,12 +306,7 @@ getId =
     (.id)
 
 
-getMaybeProjectId : Model -> Maybe ProjectId
-getMaybeProjectId =
-    (.projectId)
-
-
-getMaybeContextId =
+getContextId =
     .contextId
 
 
@@ -348,7 +340,7 @@ doneFilter =
 
 hasProjectId : ProjectId -> Model -> Bool
 hasProjectId projectId =
-    getMaybeProjectId >>? equals projectId >>?= False
+    getProjectId >> equals projectId
 
 
 projectIdFilter projectId =

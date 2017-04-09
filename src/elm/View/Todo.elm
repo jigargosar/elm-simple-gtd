@@ -158,12 +158,12 @@ default vc todo =
                 { onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
                 , isSelected = Set.member todoId vc.selection
                 , projectName =
-                    Todo.getMaybeProjectId todo
-                        ?+> (Dict.get # vc.projectIdToNameDict)
+                    Todo.getProjectId todo
+                        |> (Dict.get # vc.projectIdToNameDict)
                         ?= "<No Project>"
                 , contextName =
-                    Todo.getMaybeContextId todo
-                        ?+> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
+                    Todo.getContextId todo
+                        |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
                         ?= "Inbox"
                 }
     in

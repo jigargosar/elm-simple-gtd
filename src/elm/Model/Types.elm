@@ -15,10 +15,6 @@ import Time exposing (Time)
 import Todo
 
 
-type alias TodoStore =
-    PouchDB.Store Todo.OtherFields
-
-
 type alias EditTodoModel =
     { todoId : Todo.Id
     , todo : Todo.Model
@@ -55,7 +51,7 @@ type MainViewType
 
 type alias Model =
     { now : Time
-    , todoStore : TodoStore
+    , todoStore : Todo.Store
     , projectStore : Project.Store
     , contextStore : Context.Store
     , editModel : EditMode

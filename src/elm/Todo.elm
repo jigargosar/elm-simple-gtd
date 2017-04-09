@@ -376,3 +376,12 @@ modifiedAtInWords now =
         >> Date.Distance.inWordsWithConfig
             ({ defaultConfig | includeSeconds = True })
             (Date.fromTime now)
+
+
+storeGenerator : List Encoded -> Random.Generator Store
+storeGenerator =
+    PouchDB.generator "todo-db" encode decoder
+
+
+type alias Store =
+    PouchDB.Store OtherFields

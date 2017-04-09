@@ -35,7 +35,7 @@ init now encodedTodoList encodedProjectList encodedContextList =
     let
         storeGenerator =
             Random.map3 (,,)
-                (todoStoreGenerator encodedTodoList)
+                (Todo.storeGenerator encodedTodoList)
                 (Project.storeGenerator encodedProjectList)
                 (Context.storeGenerator encodedContextList)
 
@@ -53,11 +53,6 @@ init now encodedTodoList encodedProjectList encodedContextList =
         , keyboardState = Keyboard.init
         , selection = Set.empty
         }
-
-
-todoStoreGenerator : List Todo.Encoded -> Random.Generator TodoStore
-todoStoreGenerator =
-    PouchDB.generator "todo-db" Todo.encode Todo.decoder
 
 
 findProjectByName name =

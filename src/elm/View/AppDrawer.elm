@@ -47,11 +47,10 @@ appDrawerView contextVMs projectVMs m =
                        , projectsItemView m
                        , divider
                        ]
-                    ++ List.map projectMenuItem
-                        projectVMs
-                        [ binItemView m
-                        , doneItemView m
-                        ]
+                    ++ List.map projectMenuItem projectVMs
+                    ++ [ binItemView m
+                       , doneItemView m
+                       ]
                 )
             ]
         ]

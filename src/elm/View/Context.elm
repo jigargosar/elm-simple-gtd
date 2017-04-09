@@ -12,13 +12,13 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
-import Todo.Types exposing (Todo)
+import Todo
 
 
 type alias ViewModel =
     { id : Context.Id
     , name : Context.Name
-    , todoList : List Todo
+    , todoList : List Todo.Model
     , isEmpty : Bool
     , count : Int
     }

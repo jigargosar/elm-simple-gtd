@@ -12,24 +12,24 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Time exposing (Time)
-import Todo.Types exposing (..)
+import Todo
 
 
 type alias TodoStore =
-    PouchDB.Store Todo.Types.OtherFields
+    PouchDB.Store Todo.OtherFields
 
 
 type alias EditTodoModel =
-    { todoId : TodoId
-    , todo : Todo
-    , todoText : TodoText
+    { todoId : Todo.Id
+    , todo : Todo.Model
+    , todoText : Todo.Text
     , projectName : Project.ProjectName
     , contextName : Context.Name
     }
 
 
 type alias NewTodoEditModel =
-    TodoText
+    Todo.Text
 
 
 type EditMode
@@ -41,7 +41,7 @@ type EditMode
 
 
 type alias Selection =
-    Set TodoId
+    Set Todo.Id
 
 
 type MainViewType

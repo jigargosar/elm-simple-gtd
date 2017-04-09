@@ -11,7 +11,6 @@ import Project
 import Random.Pcg as Random
 import Time exposing (Time)
 import Todo
-import Todo.Types as Todo exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -42,7 +41,7 @@ getCurrentTodoListFilter model =
             always (True)
 
 
-findTodoById : TodoId -> Model -> Maybe Todo
+findTodoById : Todo.Id -> Model -> Maybe Todo.Model
 findTodoById id =
     Model.getTodoStore >> PouchDB.findById id
 
@@ -52,7 +51,7 @@ findTodoEqualById todo =
 
 
 type alias TodoContextViewModel =
-    { name : String, todoList : List Todo, count : Int, isEmpty : Bool }
+    { name : String, todoList : List Todo.Model, count : Int, isEmpty : Bool }
 
 
 groupByTodoContextViewModel : Model -> List TodoContextViewModel
@@ -78,7 +77,7 @@ groupByTodoContextViewModel =
            )
 
 
-updateTodo : List TodoUpdateAction -> Todo -> ModelF
+updateTodo : List Todo.UpdateAction -> Todo.Model -> ModelF
 updateTodo action todo =
     apply2With ( Model.getNow, Model.getTodoStore )
         ((Todo.update action # todo)
@@ -96,17 +95,17 @@ replaceTodoIfEqualById todo =
     List.replaceIf (Todo.equalById todo) todo
 
 
-addCopyOfTodo : Todo -> Time -> Model -> ( Todo, Model )
+addCopyOfTodo : Todo.Model -> Time -> Model -> ( Todo.Model, Model )
 addCopyOfTodo todo now =
     insertTodoByIdConstructor (Todo.copyTodo now todo)
 
 
-addNewTodo : String -> Time -> Model -> ( Todo, Model )
+addNewTodo : String -> Time -> Model -> ( Todo.Model, Model )
 addNewTodo text now =
     insertTodoByIdConstructor (Todo.init now text)
 
 
-insertTodoByIdConstructor : (PouchDB.Id -> Todo) -> Model -> ( Todo, Model )
+insertTodoByIdConstructor : (PouchDB.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodoByIdConstructor constructWithId =
     applyWith (Model.getTodoStore)
         (PouchDB.insert (constructWithId) >> setTodoStoreFromTuple)

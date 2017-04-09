@@ -27,7 +27,6 @@ import Json.Encode
 import List.Extra as List
 import Model.Types exposing (..)
 import Todo
-import Todo.Types exposing (..)
 import Polymer.Paper exposing (..)
 import Polymer.App as App
 import Ext.Function exposing (..)
@@ -152,7 +151,7 @@ headerView m =
                     , value text
                     , onBlur Msg.DeactivateEditingMode
                     , onKeyUp (Msg.NewTodoKeyUp text)
-                    , stringProperty "label" "New Todo"
+                    , stringProperty "label" "New FOOBAR"
                     , boolProperty "alwaysFloatLabel" True
                     , style [ ( "width", "100%" ), "color" => "white" ]
                     ]
@@ -203,4 +202,4 @@ addTodoFabView m =
 
 
 type alias TodoViewModel =
-    Todo
+    Todo.Model

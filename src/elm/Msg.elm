@@ -10,7 +10,6 @@ import Return
 import RunningTodo exposing (RunningTodo)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
-import Todo.Types exposing (..)
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -41,25 +40,25 @@ stopAndMarkDone =
 
 type Msg
     = NoOp
-    | Start Todo
+    | Start Todo.Model
     | Stop
     | MarkRunningTodoDone
-    | ToggleTodoDone Todo
-    | ToggleTodoDeleted Todo
-    | SetTodoContext Context.Model Todo
+    | ToggleTodoDone Todo.Model
+    | ToggleTodoDeleted Todo.Model
+    | SetTodoContext Context.Model Todo.Model
     | CreateTodo String
-    | CopyAndEditTodo Todo
+    | CopyAndEditTodo Todo.Model
     | StartAddingTodo
-    | NewTodoTextChanged TodoText
+    | NewTodoTextChanged Todo.Text
     | DeactivateEditingMode
     | NewTodoKeyUp String KeyboardEvent
-    | StartEditingTodo Todo
+    | StartEditingTodo Todo.Model
     | FocusPaperInput String
     | EditTodoTextChanged EditTodoModel String
     | EditTodoProjectNameChanged EditTodoModel ProjectName
     | EditTodoContextNameChanged EditTodoModel Context.Name
     | EditTodoKeyUp EditTodoModel KeyboardEvent
-    | TodoCheckBoxClicked Todo
+    | TodoCheckBoxClicked Todo.Model
     | ClearSelection
     | SelectionDoneClicked
     | SelectionEditClicked

@@ -22,7 +22,6 @@ import Json.Encode
 import List.Extra as List
 import Model exposing (..)
 import Todo
-import Todo.Types exposing (..)
 import Polymer.Paper exposing (..)
 import Polymer.App as App
 import Ext.Function exposing (..)

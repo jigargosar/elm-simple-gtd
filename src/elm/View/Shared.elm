@@ -15,9 +15,9 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model.Types exposing (EditTodoModel, Model)
 import Project exposing (ProjectId, ProjectName)
-import Todo.Types exposing (TodoId)
 import Model.Internal as Model
 import ProjectStore
+import Todo
 
 
 type alias SharedViewModel =
@@ -27,7 +27,7 @@ type alias SharedViewModel =
     , maybeEditTodoModel : Maybe EditTodoModel
     , projectIdToNameDict : Dict ProjectId ProjectName
     , contextByIdDict : Dict Context.Id Context.Model
-    , selection : Set TodoId
+    , selection : Set Todo.Id
     }
 
 

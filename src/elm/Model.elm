@@ -22,7 +22,6 @@ import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Set
 import Time exposing (Time)
-import Todo.Types as Todo exposing (..)
 import Todo
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -31,7 +30,7 @@ import Model.Types exposing (..)
 import Types exposing (..)
 
 
-init : Time -> List EncodedTodo -> List EncodedProject -> List Context.Encoded -> Model
+init : Time -> List Todo.Encoded -> List EncodedProject -> List Context.Encoded -> Model
 init now encodedTodoList encodedProjectList encodedContextList =
     let
         storeGenerator =
@@ -56,7 +55,7 @@ init now encodedTodoList encodedProjectList encodedContextList =
         }
 
 
-todoStoreGenerator : List EncodedTodo -> Random.Generator TodoStore
+todoStoreGenerator : List Todo.Encoded -> Random.Generator TodoStore
 todoStoreGenerator =
     PouchDB.generator "todo-db" Todo.encode Todo.decoder
 
@@ -85,12 +84,12 @@ getEncodedContextNames =
     .contextStore >> Context.getEncodedNames
 
 
-getMaybeProjectNameOfTodo : Todo -> Model -> Maybe ProjectName
+getMaybeProjectNameOfTodo : Todo.Model -> Model -> Maybe ProjectName
 getMaybeProjectNameOfTodo todo model =
     Todo.getMaybeProjectId todo ?+> ProjectStore.findNameById # (getProjectStore model)
 
 
-getContextNameOfTodo : Todo -> Model -> Maybe Context.Name
+getContextNameOfTodo : Todo.Model -> Model -> Maybe Context.Name
 getContextNameOfTodo todo model =
     Todo.getMaybeContextId todo ?+> Context.findNameById # (model.contextStore)
 

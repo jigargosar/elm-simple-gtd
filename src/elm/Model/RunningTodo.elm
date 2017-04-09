@@ -7,7 +7,6 @@ import Model.TodoStore
 import RunningTodo exposing (RunningTodo)
 import Time exposing (Time)
 import Todo
-import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -30,14 +29,14 @@ getMaybeRunningTodo m =
 
 
 type alias RunningTodoViewModel =
-    { todoVM : ViewModel, now : Time, elapsedTime : Time }
+    { todoVM : Todo.ViewModel, now : Time, elapsedTime : Time }
 
 
 getRunningTodoId =
     Model.getMaybeRunningTodoInfo >>? RunningTodo.getId
 
 
-toRunningTodoVM : ( RunningTodo, Todo ) -> Model -> RunningTodoViewModel
+toRunningTodoVM : ( RunningTodo, Todo.Model ) -> Model -> RunningTodoViewModel
 toRunningTodoVM ( runningTodo, todo ) m =
     let
         now =

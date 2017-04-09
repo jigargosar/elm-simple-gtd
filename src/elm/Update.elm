@@ -20,6 +20,7 @@ import Model
 import Routes
 import Set
 import String.Extra
+import Todo
 import View exposing (appView)
 import Navigation exposing (Location)
 import Return
@@ -30,8 +31,6 @@ import PouchDB
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
-import Todo as Todo
-import Todo.Types as Todo exposing (Todo, TodoUpdateAction)
 import Tuple2
 import Html
 import Msg exposing (..)
@@ -58,7 +57,7 @@ update msg =
 
                 MarkRunningTodoDone ->
                     Return.withMaybe (Model.getMaybeRunningTodo)
-                        (\todo -> updateTodo [] (Todo.markDone todo) >> stopRunningTodo)
+                        (\todo -> updateTodo [ Todo.SetDone True ] todo >> stopRunningTodo)
 
                 ToggleTodoDone todo ->
                     updateTodo [ Todo.ToggleDone ] todo
@@ -255,7 +254,7 @@ updateTodoById actions todoId =
     Return.map (Model.updateTodoById actions todoId)
 
 
-updateTodo : List TodoUpdateAction -> Todo -> ReturnF
+updateTodo : List Todo.UpdateAction -> Todo.Model -> ReturnF
 updateTodo actions todo =
     Return.map (Model.updateTodo actions todo)
 

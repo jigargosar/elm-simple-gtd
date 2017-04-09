@@ -6,7 +6,6 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Todo.Types exposing (TodoId)
 
 
 type alias RunningState =
@@ -23,7 +22,7 @@ createStartedState =
 
 
 type alias RunningTodo =
-    { id : TodoId, state : State, timeSpent : Time, startTime : Time }
+    { id : Todo.Id, state : State, timeSpent : Time, startTime : Time }
 
 
 start todo now =

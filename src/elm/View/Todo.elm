@@ -25,7 +25,6 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Polymer.Paper exposing (..)
-import Todo.Types exposing (TodoId, TodoText)
 import View.Shared exposing (SharedViewModel)
 
 
@@ -59,11 +58,11 @@ onAutoCompleteSelected tagger =
 
 
 type alias EditTodoViewModel =
-    { todo : { text : TodoText, id : TodoId, inputId : Dom.Id }
+    { todo : { text : Todo.Text, id : Todo.Id, inputId : Dom.Id }
     , project : { name : ProjectName, inputId : Dom.Id }
     , context : { name : Context.Name, inputId : Dom.Id }
     , onKeyUp : KeyboardEvent -> Msg
-    , onTodoTextChanged : TodoText -> Msg
+    , onTodoTextChanged : Todo.Text -> Msg
     , onProjectNameChanged : ProjectName -> Msg
     , onContextNameChanged : Context.Name -> Msg
     , encodedProjectNames : Json.Encode.Value
@@ -105,7 +104,7 @@ edit vm =
             [ input
                 [ id vm.todo.inputId
                 , class "edit-todo-input auto-focus"
-                , stringProperty "label" "Todo"
+                , stringProperty "label" "FOOBAR"
                 , value (vm.todo.text)
                 , onInput vm.onTodoTextChanged
                 , autofocus True

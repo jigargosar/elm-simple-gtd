@@ -6,7 +6,6 @@ import Model
 import Model.Internal as Model exposing (..)
 import Project exposing (Project, ProjectName)
 import Todo
-import Todo.Types exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -21,12 +20,12 @@ activateNewTodoMode text =
     setEditMode (NewTodoEditMode text)
 
 
-setEditModelToEditTodo : Todo -> ModelF
+setEditModelToEditTodo : Todo.Model -> ModelF
 setEditModelToEditTodo todo =
     updateEditModel (createEditTodoModel todo >> EditTodo)
 
 
-createEditTodoModel : Todo -> Model -> EditTodoModel
+createEditTodoModel : Todo.Model -> Model -> EditTodoModel
 createEditTodoModel todo model =
     { todoId = Todo.getId todo
     , todo = todo

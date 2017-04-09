@@ -13,7 +13,6 @@ import Json.Encode as E
 import Model as Model
 import Routes
 import Model.Types exposing (..)
-import Todo.Types exposing (..)
 import View exposing (appView)
 import Navigation exposing (Location)
 import Return
@@ -35,7 +34,7 @@ import Update
 
 type alias Flags =
     { now : Time
-    , encodedTodoList : List EncodedTodo
+    , encodedTodoList : List Todo.Encoded
     , encodedProjectList : List EncodedProject
     , encodedContextList : List Context.Encoded
     }

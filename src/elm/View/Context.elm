@@ -1,4 +1,4 @@
-module ViewModel.Context exposing (..)
+module View.Context exposing (..)
 
 import Context
 import Dict
@@ -65,8 +65,8 @@ prependInboxContextVM todoByContextIdDict contextVMs =
         inboxVM :: contextVMs
 
 
-list : Model.Types.Model -> List ViewModel
-list model =
+vmList : Model.Types.Model -> List ViewModel
+vmList model =
     let
         todoByContextIdDict =
             Model.getActiveTodoListGroupedByContextId model

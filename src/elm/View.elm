@@ -34,7 +34,8 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.ProjectList exposing (projectListView)
 import View.Todo
-import ViewModel.Context
+import View.Context
+import View.Project
 
 
 appView m =
@@ -47,7 +48,10 @@ appView m =
 appDrawerLayoutView m =
     let
         contextVMs =
-            ViewModel.Context.list m
+            View.Context.vmList m
+
+        projectVMs =
+            View.Project.vmList m
     in
         App.drawerLayout []
             [ appDrawerView contextVMs m

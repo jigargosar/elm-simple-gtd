@@ -35,7 +35,7 @@ import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, it
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import View.Todo exposing (EditTodoViewModel)
-import ViewModel.Context
+import View.Context
 
 
 type alias ViewContext =
@@ -125,7 +125,7 @@ filteredTodoListView =
            )
 
 
-groupByContextView : List ViewModel.Context.ViewModel -> Model -> Html Msg
+groupByContextView : List View.Context.ViewModel -> Model -> Html Msg
 groupByContextView contextVMs model =
     let
         vc =

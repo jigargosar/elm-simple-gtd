@@ -77,6 +77,10 @@ getActiveContexts =
     (.contextStore) >> PouchDB.asList
 
 
+getActiveProjects =
+    (.projectStore) >> PouchDB.asList
+
+
 getEncodedContextNames =
     .contextStore >> Context.getEncodedNames
 

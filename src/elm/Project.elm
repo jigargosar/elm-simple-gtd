@@ -1,5 +1,7 @@
 module Project exposing (..)
 
+import Dict
+import Maybe.Extra
 import PouchDB
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -10,10 +12,11 @@ import Ext.Random as Random
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import String.Extra
 
 
 type alias OtherFields =
-    PouchDB.HasTimeStamps { name : ProjectName }
+    PouchDB.HasTimeStamps { name : Name }
 
 
 type alias Project =
@@ -28,12 +31,50 @@ type alias ModelF =
     Model -> Model
 
 
-type alias ProjectName =
+type alias Name =
     String
 
 
-type alias ProjectId =
+type alias Id =
     PouchDB.Id
+
+
+type alias Store =
+    PouchDB.Store OtherFields
+
+
+getEncodedProjectNames =
+    PouchDB.map (getName >> E.string) >> E.list
+
+
+getProjectIdToNameDict =
+    PouchDB.map (apply2 ( getId, getName )) >> Dict.fromList
+
+
+findNameById id =
+    PouchDB.findById id >>? getName
+
+
+storeGenerator : List Encoded -> Random.Generator Store
+storeGenerator =
+    PouchDB.generator "project-db" encode decoder
+
+
+findByName projectName =
+    PouchDB.findBy (nameEquals (String.trim projectName))
+
+
+insertIfNotExistByName projectName now m =
+    if (String.Extra.isBlank projectName) then
+        m
+    else
+        findByName projectName m
+            |> Maybe.Extra.unpack
+                (\_ ->
+                    PouchDB.insert (init projectName now) m
+                        |> Tuple.second
+                )
+                (\_ -> m)
 
 
 nameEquals name =
@@ -44,17 +85,17 @@ idEquals id =
     getId >> equals id
 
 
-getId : Model -> ProjectId
+getId : Model -> Id
 getId =
     (.id)
 
 
-setId : ProjectId -> ModelF
+setId : Id -> ModelF
 setId id model =
     { model | id = id }
 
 
-updateId : (Model -> ProjectId) -> ModelF
+updateId : (Model -> Id) -> ModelF
 updateId updater model =
     setId (updater model) model
 
@@ -74,17 +115,17 @@ updateRev updater model =
     setRev (updater model) model
 
 
-getName : Model -> ProjectName
+getName : Model -> Name
 getName =
     (.name)
 
 
-setName : ProjectName -> ModelF
+setName : Name -> ModelF
 setName name model =
     { model | name = name }
 
 
-updateName : (Model -> ProjectName) -> ModelF
+updateName : (Model -> Name) -> ModelF
 updateName updater model =
     setName (updater model) model
 
@@ -103,11 +144,11 @@ init name now id =
     projectConstructor id "" now now name
 
 
-type alias EncodedProject =
+type alias Encoded =
     E.Value
 
 
-encode : Project -> EncodedProject
+encode : Project -> Encoded
 encode project =
     E.object
         [ "_id" => E.string (getId project)

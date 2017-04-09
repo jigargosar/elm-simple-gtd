@@ -7,9 +7,9 @@ import Model.Internal exposing (..)
 import Model.TodoStore
 import Msg exposing (Return)
 import PouchDB
-import Project exposing (Project, EncodedProject, ProjectId, ProjectName)
-import ProjectStore
-import ProjectStore.Types exposing (ProjectStore)
+import Project
+import Project
+import Project
 import RunningTodo exposing (RunningTodo)
 import Dict
 import Json.Encode as E
@@ -30,13 +30,13 @@ import Model.Types exposing (..)
 import Types exposing (..)
 
 
-init : Time -> List Todo.Encoded -> List EncodedProject -> List Context.Encoded -> Model
+init : Time -> List Todo.Encoded -> List Project.Encoded -> List Context.Encoded -> Model
 init now encodedTodoList encodedProjectList encodedContextList =
     let
         storeGenerator =
             Random.map3 (,,)
                 (todoStoreGenerator encodedTodoList)
-                (ProjectStore.generator encodedProjectList)
+                (Project.storeGenerator encodedProjectList)
                 (Context.storeGenerator encodedContextList)
 
         ( ( todoStore, projectStore, contextStore ), seed ) =
@@ -61,7 +61,7 @@ todoStoreGenerator =
 
 
 findProjectByName name =
-    getProjectStore >> ProjectStore.findByName name
+    getProjectStore >> Project.findByName name
 
 
 findContextByName name =
@@ -84,9 +84,9 @@ getEncodedContextNames =
     .contextStore >> Context.getEncodedNames
 
 
-getMaybeProjectNameOfTodo : Todo.Model -> Model -> Maybe ProjectName
+getMaybeProjectNameOfTodo : Todo.Model -> Model -> Maybe Project.Name
 getMaybeProjectNameOfTodo todo model =
-    Todo.getProjectId todo |> ProjectStore.findNameById # (getProjectStore model)
+    Todo.getProjectId todo |> Project.findNameById # (getProjectStore model)
 
 
 getContextNameOfTodo : Todo.Model -> Model -> Maybe Context.Name
@@ -94,16 +94,16 @@ getContextNameOfTodo todo model =
     Todo.getContextId todo |> Context.findNameById # (model.contextStore)
 
 
-insertProjectIfNotExist2 : ProjectName -> ModelF
+insertProjectIfNotExist2 : Project.Name -> ModelF
 insertProjectIfNotExist2 projectName =
     (update2 projectStore now)
-        (ProjectStore.insertIfNotExistByName projectName)
+        (Project.insertIfNotExistByName projectName)
 
 
-insertProjectIfNotExist : ProjectName -> ModelF
+insertProjectIfNotExist : Project.Name -> ModelF
 insertProjectIfNotExist projectName =
     apply2With ( getNow, getProjectStore )
-        (ProjectStore.insertIfNotExistByName projectName >>> setProjectStore)
+        (Project.insertIfNotExistByName projectName >>> setProjectStore)
 
 
 insertContextIfNotExist : Context.Name -> ModelF

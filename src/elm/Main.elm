@@ -5,7 +5,7 @@ import Dom
 import Ext.Keyboard as Keyboard
 import Model.EditMode
 import Model.RunningTodo
-import Project exposing (EncodedProject)
+import Project
 import Ext.Random as Random
 import Random.Pcg as Random exposing (Seed)
 import Ext.Function exposing (..)
@@ -35,7 +35,7 @@ import Update
 type alias Flags =
     { now : Time
     , encodedTodoList : List Todo.Encoded
-    , encodedProjectList : List EncodedProject
+    , encodedProjectList : List Project.Encoded
     , encodedContextList : List Context.Encoded
     }
 

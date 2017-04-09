@@ -14,9 +14,9 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model.Types exposing (EditTodoModel, Model)
-import Project exposing (ProjectId, ProjectName)
+import Project
 import Model.Internal as Model
-import ProjectStore
+import Project
 import Todo
 
 
@@ -25,7 +25,7 @@ type alias SharedViewModel =
     , encodedProjectNames : Json.Encode.Value
     , encodedContextNames : Json.Encode.Value
     , maybeEditTodoModel : Maybe EditTodoModel
-    , projectIdToNameDict : Dict ProjectId ProjectName
+    , projectIdToNameDict : Dict Project.Id Project.Name
     , contextByIdDict : Dict Context.Id Context.Model
     , selection : Set Todo.Id
     }
@@ -34,10 +34,10 @@ type alias SharedViewModel =
 create : Model -> SharedViewModel
 create model =
     { now = Model.getNow model
-    , encodedProjectNames = Model.getProjectStore model |> ProjectStore.getEncodedProjectNames
+    , encodedProjectNames = Model.getProjectStore model |> Project.getEncodedProjectNames
     , encodedContextNames = Model.getEncodedContextNames model
     , maybeEditTodoModel = Model.EditMode.getMaybeEditTodoModel model
-    , projectIdToNameDict = Model.getProjectStore model |> ProjectStore.getProjectIdToNameDict
+    , projectIdToNameDict = Model.getProjectStore model |> Project.getProjectIdToNameDict
     , contextByIdDict = Model.getContextByIdDict model
     , selection = Model.getSelectedTodoIdSet model
     }

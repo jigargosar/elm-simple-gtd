@@ -4,7 +4,7 @@ import Context
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model exposing (..)
-import Project exposing (Project, ProjectName)
+import Project
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -12,7 +12,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Msg exposing (..)
 import Model.Types exposing (..)
-import ProjectStore
+import Project
 
 
 activateNewTodoMode : String -> ModelF
@@ -58,7 +58,7 @@ getEditNewTodoModel model =
             Nothing
 
 
-updateEditTodoProjectName : ProjectName -> EditTodoModel -> ModelF
+updateEditTodoProjectName : Project.Name -> EditTodoModel -> ModelF
 updateEditTodoProjectName projectName editTodoModel =
     setEditMode (EditTodo ({ editTodoModel | projectName = projectName }))
 

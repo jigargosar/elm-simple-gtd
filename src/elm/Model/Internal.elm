@@ -1,6 +1,6 @@
 module Model.Internal exposing (..)
 
-import ProjectStore.Types exposing (ProjectStore)
+import Project
 import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -70,17 +70,17 @@ updateMaybeRunningTodo updater model =
     setMaybeRunningTodo (updater model) model
 
 
-getProjectStore : Model -> ProjectStore
+getProjectStore : Model -> Project.Store
 getProjectStore =
     (.projectStore)
 
 
-setProjectStore : ProjectStore -> ModelF
+setProjectStore : Project.Store -> ModelF
 setProjectStore projectStore model =
     { model | projectStore = projectStore }
 
 
-updateProjectStore : (Model -> ProjectStore) -> ModelF
+updateProjectStore : (Model -> Project.Store) -> ModelF
 updateProjectStore updater model =
     setProjectStore (updater model) model
 

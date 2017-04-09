@@ -13,8 +13,8 @@ import Model.Internal as Model
 import Model.TodoStore exposing (TodoContextViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
-import Project exposing (ProjectId, ProjectName)
-import ProjectStore
+import Project
+import Project
 import Set exposing (Set)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)

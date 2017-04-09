@@ -5,7 +5,7 @@ import Dom
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Model.Types exposing (..)
-import Project exposing (ProjectName)
+import Project
 import Return
 import RunningTodo exposing (RunningTodo)
 import Random.Pcg exposing (Seed)
@@ -55,7 +55,7 @@ type Msg
     | StartEditingTodo Todo.Model
     | FocusPaperInput String
     | EditTodoTextChanged EditTodoModel String
-    | EditTodoProjectNameChanged EditTodoModel ProjectName
+    | EditTodoProjectNameChanged EditTodoModel Project.Name
     | EditTodoContextNameChanged EditTodoModel Context.Name
     | EditTodoKeyUp EditTodoModel KeyboardEvent
     | TodoCheckBoxClicked Todo.Model

@@ -8,9 +8,9 @@ import Model.EditMode as Model
 import Model.Internal as Model
 import Model.RunningTodo as Model
 import Model.TodoStore as Model
-import Project exposing (Project, ProjectId, ProjectName)
+import Project
 import Ext.Random as Random
-import ProjectStore
+import Project
 import Random.Pcg as Random exposing (Seed)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)

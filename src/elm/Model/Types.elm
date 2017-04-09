@@ -3,8 +3,8 @@ module Model.Types exposing (..)
 import Context
 import Ext.Keyboard as Keyboard
 import PouchDB
-import Project exposing (ProjectId, ProjectName)
-import ProjectStore.Types exposing (ProjectStore)
+import Project
+import Project
 import Random.Pcg exposing (Seed)
 import RunningTodo exposing (RunningTodo)
 import Set exposing (Set)
@@ -23,7 +23,7 @@ type alias EditTodoModel =
     { todoId : Todo.Id
     , todo : Todo.Model
     , todoText : Todo.Text
-    , projectName : Project.ProjectName
+    , projectName : Project.Name
     , contextName : Context.Name
     }
 
@@ -46,7 +46,7 @@ type alias Selection =
 
 type MainViewType
     = GroupByContextView
-    | ProjectView ProjectId
+    | ProjectView Project.Id
     | DoneView
     | BinView
     | ProjectListView
@@ -56,7 +56,7 @@ type MainViewType
 type alias Model =
     { now : Time
     , todoStore : TodoStore
-    , projectStore : ProjectStore
+    , projectStore : Project.Store
     , contextStore : Context.Store
     , editModel : EditMode
     , mainViewType : MainViewType

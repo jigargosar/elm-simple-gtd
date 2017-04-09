@@ -9,8 +9,8 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Project exposing (Project, ProjectName)
-import ProjectStore
+import Project
+import Project
 
 
 _ =

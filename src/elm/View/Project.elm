@@ -5,7 +5,7 @@ import Dict
 import Html exposing (Html)
 import Model.Types
 import Msg exposing (Msg)
-import Project exposing (ProjectId, ProjectName)
+import Project
 import String.Extra
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -18,8 +18,8 @@ import Todo
 
 
 type alias ViewModel =
-    { id : ProjectId
-    , name : ProjectName
+    { id : Project.Id
+    , name : Project.Name
     , todoList : List Todo.Model
     , isEmpty : Bool
     , count : Int

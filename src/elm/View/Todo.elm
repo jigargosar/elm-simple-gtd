@@ -13,7 +13,7 @@ import Keyboard.Extra exposing (Key(Enter, Escape))
 import Model.Types exposing (EditTodoModel)
 import Msg exposing (Msg)
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
-import Project exposing (ProjectName)
+import Project
 import Set
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -59,11 +59,11 @@ onAutoCompleteSelected tagger =
 
 type alias EditTodoViewModel =
     { todo : { text : Todo.Text, id : Todo.Id, inputId : Dom.Id }
-    , project : { name : ProjectName, inputId : Dom.Id }
+    , project : { name : Project.Name, inputId : Dom.Id }
     , context : { name : Context.Name, inputId : Dom.Id }
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : Todo.Text -> Msg
-    , onProjectNameChanged : ProjectName -> Msg
+    , onProjectNameChanged : Project.Name -> Msg
     , onContextNameChanged : Context.Name -> Msg
     , encodedProjectNames : Json.Encode.Value
     , encodedContextNames : Json.Encode.Value

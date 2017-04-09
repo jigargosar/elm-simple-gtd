@@ -20,7 +20,7 @@ import List.Extra as List
 import Dict
 import Dict.Extra as Dict
 import Time exposing (Time)
-import Project exposing (ProjectId)
+import Project
 
 
 type alias Id =
@@ -36,7 +36,7 @@ type alias TodoRecord =
     , text : Text
     , dueAt : Maybe Time
     , deleted : Bool
-    , projectId : ProjectId
+    , projectId : Project.Id
     , contextId : Context.Id
     }
 
@@ -63,7 +63,7 @@ type UpdateAction
     | SetDeleted Bool
     | SetContextId Context.Id
     | SetContext Context.Model
-    | SetProjectId ProjectId
+    | SetProjectId Project.Id
     | SetProject Project.Project
     | ToggleDone
     | ToggleDeleted
@@ -338,7 +338,7 @@ doneFilter =
     toAllPassPredicate [ isNotDeleted, isDone ]
 
 
-hasProjectId : ProjectId -> Model -> Bool
+hasProjectId : Project.Id -> Model -> Bool
 hasProjectId projectId =
     getProjectId >> equals projectId
 

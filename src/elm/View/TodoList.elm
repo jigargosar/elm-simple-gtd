@@ -54,25 +54,27 @@ groupByContextView contextVMs model =
             View.Shared.create model
 
         contextViewFromVM =
-            contextView vc
+            projectOrContextView vc
     in
         Keyed.node "div" [] (contextVMs .|> contextViewFromVM)
 
 
-contextView vc vm =
+projectOrContextView vc vm =
     ( vm.name
     , div [ class "todo-list-container" ]
-        [ item []
+        [ item [ class "has-hover-items" ]
             [ div []
                 [ div [ class "todo-list-title" ] [ text vm.name ]
                 , badge [ intProperty "label" (vm.count) ] []
                 ]
             , itemBody [] []
-            , iconButton
-                [ onClick Msg.NoOp
-                , icon "settings"
+            , div [ class "hover-items" ]
+                [ iconButton
+                    [ onClick Msg.NoOp
+                    , icon "settings"
+                    ]
+                    []
                 ]
-                []
             ]
         , Keyed.node "paper-material"
             [ class "todo-list" ]
@@ -88,22 +90,6 @@ groupByProjectView projectVMs model =
             View.Shared.create model
 
         projectViewFromVM =
-            projectView vc
+            projectOrContextView vc
     in
         Keyed.node "div" [] (projectVMs .|> projectViewFromVM)
-
-
-projectView vc vm =
-    ( vm.name
-    , div [ class "todo-list-container" ]
-        [ div [ class "todo-list-title" ]
-            [ div []
-                [ div [] [ text vm.name ]
-                , badge [ intProperty "label" (vm.count) ] []
-                ]
-            ]
-        , Keyed.node "paper-material"
-            [ class "todo-list" ]
-            (vm.todoList .|> View.Todo.listItemView vc)
-        ]
-    )

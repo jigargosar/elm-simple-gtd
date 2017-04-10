@@ -41,12 +41,12 @@ appDrawerView contextVMs projectVMs m =
                 ([ item [ onClick (SetView GroupByContextView) ] [ text "Contexts" ]
                  , divider
                  ]
-                    ++ List.map contextItems contextVMs
+                    ++ List.map contextItem contextVMs
                     ++ [ divider
                        , projectsItemView m
                        , divider
                        ]
-                    ++ List.map projectItems projectVMs
+                    ++ List.map projectItem projectVMs
                     ++ [ divider
                        , binItemView m
                        , doneItemView m
@@ -72,7 +72,7 @@ doneItemView m =
     item [ onClick (SetView DoneView) ] [ text "Done" ]
 
 
-contextItems vm =
+contextItem vm =
     let
         idForBadge =
             "app-drawer-id-for-badge-context-" ++ (vm.id)
@@ -89,35 +89,41 @@ contextItems vm =
                 , attribute "for" idForBadge
                 ]
                 []
-             , hoverIcons
+             , hoverIcons vm
              ]
             )
 
 
-hoverIcons =
-    div [ class "hover-items" ]
-        [ editIconButton
-        , deleteIconButton
-        ]
+hoverIcons vm =
+    let
+        children =
+            if vm.editable then
+                [ editIconButton vm
+                , deleteIconButton vm
+                ]
+            else
+                []
+    in
+        div [ class "hover-items" ] children
 
 
-deleteIconButton =
+deleteIconButton vm =
     iconButton
-        [ onClick (Msg.NoOp)
+        [ onClick vm.onDeleteClicked
         , icon "delete"
         ]
         []
 
 
-editIconButton =
+editIconButton vm =
     iconButton
-        [ onClick (Msg.NoOp)
+        [ onClick vm.onEditClicked
         , icon "create"
         ]
         []
 
 
-projectItems vm =
+projectItem vm =
     let
         idForBadge =
             "app-drawer-id-for-badge-project-" ++ (String.Extra.dasherize vm.id)

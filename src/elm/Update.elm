@@ -176,6 +176,9 @@ update msg =
                 OnKeyboardMsg msg ->
                     Return.map (Model.update Model.keyboardState (Keyboard.update msg))
 
+                OnEntityAction id type_ action ->
+                    identity
+
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)
                         (\editMode ->

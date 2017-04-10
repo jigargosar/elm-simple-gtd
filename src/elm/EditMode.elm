@@ -13,11 +13,14 @@ import Maybe.Extra as Maybe
 
 type alias EditTodoModel =
     { todoId : Todo.Id
-    , todo_ : Todo.Model
     , todoText : Todo.Text
     , projectName : Project.Name
     , contextName : Context.Name
     }
+
+
+type alias EditContextModel =
+    Context.Name
 
 
 type alias NewTodoModel =
@@ -27,6 +30,7 @@ type alias NewTodoModel =
 type EditMode
     = NewTodo NewTodoModel
     | EditTodo EditTodoModel
+    | EditContext EditContextModel
     | None
     | SwitchView
     | SwitchToGroupedView
@@ -42,7 +46,6 @@ createNewTodoModel =
 
 createEditTodoModel todo projectName contextName =
     { todoId = Todo.getId todo
-    , todo_ = todo
     , todoText = Todo.getText todo
     , projectName = projectName
     , contextName = contextName

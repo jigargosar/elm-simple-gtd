@@ -20,11 +20,15 @@ type alias EditTodoModel =
 
 
 type alias EditContextModel =
-    Context.Name
+    { id : Context.Id
+    , name : Context.Name
+    }
 
 
 type alias EditProjectModel =
-    Project.Name
+    { id : Project.Id
+    , name : Project.Name
+    }
 
 
 type alias NewTodoModel =

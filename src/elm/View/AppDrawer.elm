@@ -41,12 +41,12 @@ appDrawerView contextVMs projectVMs m =
                 ([ item [ onClick (SetView GroupByContextView) ] [ text "Contexts" ]
                  , divider
                  ]
-                    ++ List.map contextMenuItem contextVMs
+                    ++ List.map contextItems contextVMs
                     ++ [ divider
                        , projectsItemView m
                        , divider
                        ]
-                    ++ List.map projectMenuItem projectVMs
+                    ++ List.map projectItems projectVMs
                     ++ [ divider
                        , binItemView m
                        , doneItemView m
@@ -72,7 +72,7 @@ doneItemView m =
     item [ onClick (SetView DoneView) ] [ text "Done" ]
 
 
-contextMenuItem vm =
+contextItems vm =
     let
         idForBadge =
             "app-drawer-id-for-badge-context-" ++ (vm.id)
@@ -117,7 +117,7 @@ editIconButton =
         []
 
 
-projectMenuItem vm =
+projectItems vm =
     let
         idForBadge =
             "app-drawer-id-for-badge-project-" ++ (String.Extra.dasherize vm.id)

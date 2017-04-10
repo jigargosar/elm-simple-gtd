@@ -95,16 +95,22 @@ contextItem vm =
 
 
 hoverIcons vm =
-    let
-        children =
-            if vm.isEditable then
-                [ editIconButton vm
-                , deleteIconButton vm
-                ]
-            else
-                []
-    in
-        div [ class "hover-items" ] children
+    --    let
+    --        children =
+    --            if vm.isEditable then
+    --                [ editIconButton vm
+    --                , deleteIconButton vm
+    --                ]
+    --            else
+    --                []
+    --    in
+    div [ class "hover-items" ]
+        [ iconButton
+            [ onClick Msg.NoOp
+            , icon "settings"
+            ]
+            []
+        ]
 
 
 deleteIconButton vm =
@@ -140,5 +146,6 @@ projectItem vm =
                 , attribute "for" idForBadge
                 ]
                 []
+             , hoverIcons vm
              ]
             )

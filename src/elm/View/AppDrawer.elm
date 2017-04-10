@@ -1,7 +1,7 @@
 module View.AppDrawer exposing (..)
 
 import Html.Attributes.Extra exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
+import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, tabindex, value)
@@ -89,8 +89,32 @@ contextMenuItem vm =
                 , attribute "for" idForBadge
                 ]
                 []
+             , hoverIcons
              ]
             )
+
+
+hoverIcons =
+    div [ class "hover-items" ]
+        [ editIconButton
+        , deleteIconButton
+        ]
+
+
+deleteIconButton =
+    iconButton
+        [ onClick (Msg.NoOp)
+        , icon "delete"
+        ]
+        []
+
+
+editIconButton =
+    iconButton
+        [ onClick (Msg.NoOp)
+        , icon "create"
+        ]
+        []
 
 
 projectMenuItem vm =

@@ -50,3 +50,17 @@ type ModelField
 
 type alias ModelF =
     Model -> Model
+
+
+type EntityAction
+    = StartEditing
+    | Delete
+
+
+type EntityType
+    = ProjectEntity
+    | ContextEntity
+
+
+type alias EntityId =
+    PouchDB.Id

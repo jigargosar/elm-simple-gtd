@@ -40,20 +40,6 @@ stopAndMarkDone =
     MarkRunningTodoDone
 
 
-type EntityAction
-    = StartEditing
-    | Delete
-
-
-type EntityType
-    = ProjectEntity
-    | ContextEntity
-
-
-type alias EntityId =
-    PouchDB.Id
-
-
 type Msg
     = NoOp
     | Start Todo.Model

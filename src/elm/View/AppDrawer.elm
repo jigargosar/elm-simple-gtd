@@ -38,6 +38,7 @@ appDrawerView contextVMs projectVMs m =
             ]
             [ menu
                 [ stringProperty "selected" "0"
+                , stringProperty "selectable" "paper-item"
                 ]
                 ([ item [ onClick (SetView GroupByContextView) ] [ text "Contexts" ]
                  , divider

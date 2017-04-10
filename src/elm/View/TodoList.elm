@@ -62,11 +62,17 @@ groupByContextView contextVMs model =
 contextView vc vm =
     ( vm.name
     , div [ class "todo-list-container" ]
-        [ div [ class "todo-list-title" ]
-            [ div [ class "paper-badge-container" ]
-                [ span [] [ text vm.name ]
+        [ item []
+            [ span [ class "paper-badge-container" ]
+                [ span [ class "todo-list-title" ] [ text vm.name ]
                 , badge [ intProperty "label" (vm.count) ] []
                 ]
+            , itemBody [] []
+            , iconButton
+                [ onClick Msg.NoOp
+                , icon "settings"
+                ]
+                []
             ]
         , Keyed.node "paper-material"
             [ class "todo-list" ]

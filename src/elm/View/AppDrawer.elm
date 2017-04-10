@@ -28,6 +28,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
 import View.Context
+import View.Shared
 
 
 appDrawerView contextVMs projectVMs m =
@@ -41,12 +42,12 @@ appDrawerView contextVMs projectVMs m =
                 ([ item [ onClick (SetView GroupByContextView) ] [ text "Contexts" ]
                  , divider
                  ]
-                    ++ List.map contextItem contextVMs
+                    ++ List.map projectOrContextItem contextVMs
                     ++ [ divider
                        , projectsItemView m
                        , divider
                        ]
-                    ++ List.map projectItem projectVMs
+                    ++ List.map projectOrContextItem projectVMs
                     ++ [ divider
                        , binItemView m
                        , doneItemView m
@@ -72,24 +73,9 @@ doneItemView m =
     item [ onClick (SetView DoneView) ] [ text "Done" ]
 
 
-contextItem vm =
+projectOrContextItem vm =
     item [ class "has-hover-items", onClick vm.onClick ]
-        ([ div []
-            [ div [] [ text vm.name ]
-            , badge [ intProperty "label" (vm.count) ] []
-            ]
-         , itemBody [] []
-         , hoverIcons vm
-         ]
-        )
-
-
-projectItem vm =
-    item [ class "has-hover-items", onClick vm.onClick ]
-        ([ div []
-            [ div [] [ text vm.name ]
-            , badge [ intProperty "label" (vm.count) ] []
-            ]
+        ([ View.Shared.defaultBadge vm
          , itemBody [] []
          , hoverIcons vm
          ]

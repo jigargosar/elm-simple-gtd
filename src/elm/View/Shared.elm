@@ -3,9 +3,12 @@ module View.Shared exposing (..)
 import Context
 import Dict exposing (Dict)
 import EditMode exposing (EditTodoModel)
+import Html exposing (Html, div, text)
+import Html.Attributes.Extra exposing (intProperty)
 import Json.Encode
 import Model
 import Model.EditMode
+import Polymer.Paper exposing (badge)
 import Set exposing (Set)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -42,3 +45,11 @@ create model =
     , contextByIdDict = Model.getContextByIdDict model
     , selection = Model.getSelectedTodoIdSet model
     }
+
+
+defaultBadge : { x | name : String, count : Int } -> Html msg
+defaultBadge vm =
+    div []
+        [ div [] [ text vm.name ]
+        , badge [ intProperty "label" (vm.count) ] []
+        ]

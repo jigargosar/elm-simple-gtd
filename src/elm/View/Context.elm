@@ -3,7 +3,7 @@ module View.Context exposing (..)
 import Context
 import Dict
 import Html exposing (Html)
-import Model.Types exposing (EntityAction(Delete, StartEditing), EntityType(ContextEntity))
+import Model.Types exposing (EntityAction(Delete, StartEditing), EntityType(ContextEntity), MainViewType(ContextView))
 import Msg exposing (Msg)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -24,6 +24,7 @@ type alias ViewModel =
     , isEditable : Bool
     , onEditClicked : Msg
     , onDeleteClicked : Msg
+    , onClick : Msg
     }
 
 
@@ -46,6 +47,7 @@ createContextViewModel todoByContextIdDict context =
         , isEditable = True
         , onEditClicked = Msg.OnEntityAction id (ContextEntity context) StartEditing
         , onDeleteClicked = Msg.OnEntityAction id (ContextEntity context) Delete
+        , onClick = Msg.SetView (ContextView id)
         }
 
 
@@ -69,6 +71,7 @@ prependInboxContextVM todoByContextIdDict contextVMs =
             , isEditable = False
             , onEditClicked = Msg.NoOp
             , onDeleteClicked = Msg.NoOp
+            , onClick = Msg.SetView (ContextView id)
             }
     in
         inboxVM :: contextVMs

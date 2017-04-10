@@ -23,6 +23,10 @@ type alias EditContextModel =
     Context.Name
 
 
+type alias EditProjectModel =
+    Project.Name
+
+
 type alias NewTodoModel =
     Todo.Text
 
@@ -31,6 +35,7 @@ type EditMode
     = NewTodo NewTodoModel
     | EditTodo EditTodoModel
     | EditContext EditContextModel
+    | EditProject EditProjectModel
     | None
     | SwitchView
     | SwitchToGroupedView

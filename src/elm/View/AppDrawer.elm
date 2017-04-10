@@ -73,30 +73,15 @@ doneItemView m =
 
 
 contextItem vm =
-    let
-        idForBadge =
-            "app-drawer-id-for-badge-context-" ++ (vm.id)
-    in
-        item [ class "has-hover-items", onClickStopPropagation (Msg.SetView (ContextView vm.id)) ]
-            ([ --            span [ id idForBadge ] [ text (vm.name) ]
-               div [ class "paper-badge-container" ]
-                [ div [ class "_todo-list-title" ] [ text vm.name ]
-                , badge [ intProperty "label" (vm.count) ] []
-                ]
-             , itemBody [] []
-
-             --             , badge
-             --                [ classList
-             --                    [ "hidden" => (vm.isEmpty)
-             --                    , "drawer-list-type-badge" => True
-             --                    ]
-             --                , intProperty "label" (vm.count)
-             --                , attribute "for" idForBadge
-             --                ]
-             --                []
-             , hoverIcons vm
-             ]
-            )
+    item [ class "has-hover-items", onClickStopPropagation (Msg.SetView (ContextView vm.id)) ]
+        ([ div []
+            [ div [] [ text vm.name ]
+            , badge [ intProperty "label" (vm.count) ] []
+            ]
+         , itemBody [] []
+         , hoverIcons vm
+         ]
+        )
 
 
 hoverIcons vm =
@@ -135,22 +120,12 @@ editIconButton vm =
 
 
 projectItem vm =
-    let
-        idForBadge =
-            "app-drawer-id-for-badge-project-" ++ (String.Extra.dasherize vm.id)
-    in
-        item [ class "has-hover-items", onClickStopPropagation (Msg.SetView (ProjectView vm.id)) ]
-            ([ span [ id idForBadge ] [ text (vm.name) ]
-             , itemBody [] []
-             , badge
-                [ classList
-                    [ "hidden" => (vm.isEmpty)
-                    , "drawer-list-type-badge" => True
-                    ]
-                , intProperty "label" (vm.count)
-                , attribute "for" idForBadge
-                ]
-                []
-             , hoverIcons vm
-             ]
-            )
+    item [ class "has-hover-items", onClickStopPropagation (Msg.SetView (ProjectView vm.id)) ]
+        ([ div []
+            [ div [] [ text vm.name ]
+            , badge [ intProperty "label" (vm.count) ] []
+            ]
+         , itemBody [] []
+         , hoverIcons vm
+         ]
+        )

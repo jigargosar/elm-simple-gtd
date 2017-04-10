@@ -63,8 +63,8 @@ contextView vc vm =
     ( vm.name
     , div [ class "todo-list-container" ]
         [ item []
-            [ span [ class "paper-badge-container" ]
-                [ span [ class "todo-list-title" ] [ text vm.name ]
+            [ div []
+                [ div [ class "todo-list-title" ] [ text vm.name ]
                 , badge [ intProperty "label" (vm.count) ] []
                 ]
             , itemBody [] []
@@ -97,8 +97,8 @@ projectView vc vm =
     ( vm.name
     , div [ class "todo-list-container" ]
         [ div [ class "todo-list-title" ]
-            [ div [ class "paper-badge-container" ]
-                [ span [] [ text vm.name ]
+            [ div []
+                [ div [] [ text vm.name ]
                 , badge [ intProperty "label" (vm.count) ] []
                 ]
             ]

@@ -178,7 +178,7 @@ update msg =
 
                 OnEntityAction id type_ action ->
                     case ( type_, action ) of
-                        ( ContextEntity, StartEditing ) ->
+                        ( ContextEntity context, StartEditing ) ->
                             identity
 
                         _ ->

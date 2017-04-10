@@ -58,8 +58,8 @@ type EntityAction
 
 
 type EntityType
-    = ProjectEntity
-    | ContextEntity
+    = ProjectEntity Project.Model
+    | ContextEntity Context.Model
 
 
 type alias EntityId =

@@ -97,7 +97,7 @@ contextItem vm =
 hoverIcons vm =
     let
         children =
-            if vm.editable then
+            if vm.isEditable then
                 [ editIconButton vm
                 , deleteIconButton vm
                 ]

@@ -68,7 +68,9 @@ contextView vc vm =
                 , badge [ intProperty "label" (vm.count) ] []
                 ]
             ]
-        , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> View.Todo.listItemView vc)
+        , Keyed.node "paper-material"
+            [ class "todo-list" ]
+            (vm.todoList .|> View.Todo.listItemView vc)
         ]
     )
 
@@ -94,6 +96,8 @@ projectView vc vm =
                 , badge [ intProperty "label" (vm.count) ] []
                 ]
             ]
-        , Keyed.node "paper-material" [ class "todo-list" ] (vm.todoList .|> View.Todo.listItemView vc)
+        , Keyed.node "paper-material"
+            [ class "todo-list" ]
+            (vm.todoList .|> View.Todo.listItemView vc)
         ]
     )

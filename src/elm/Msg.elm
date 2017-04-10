@@ -6,6 +6,7 @@ import EditMode exposing (EditTodoModel)
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Model.Types exposing (..)
+import PouchDB
 import Project
 import Return
 import RunningTodo exposing (RunningTodo)
@@ -39,6 +40,20 @@ stopAndMarkDone =
     MarkRunningTodoDone
 
 
+type EntityAction
+    = StartEditing
+    | Delete
+
+
+type EntityType
+    = ProjectEntity Project.Id
+    | ContextEntity Context.Id
+
+
+type alias EntityId =
+    PouchDB.Id
+
+
 type Msg
     = NoOp
     | Start Todo.Model
@@ -69,6 +84,7 @@ type Msg
     | OnMsgList (List Msg)
     | OnKeyboardMsg Keyboard.Msg
     | OnKeyUp Keyboard.Key
+    | OnEntityAction EntityId EntityType EntityAction
 
 
 toCmds : List Msg -> Cmd Msg

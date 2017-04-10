@@ -73,7 +73,7 @@ doneItemView m =
 
 
 contextItem vm =
-    item [ class "has-hover-items", onClick (Msg.SetView (ContextView vm.id)) ]
+    item [ class "has-hover-items", onClick vm.onClick ]
         ([ div []
             [ div [] [ text vm.name ]
             , badge [ intProperty "label" (vm.count) ] []
@@ -85,7 +85,7 @@ contextItem vm =
 
 
 projectItem vm =
-    item [ class "has-hover-items", onClick (Msg.SetView (ProjectView vm.id)) ]
+    item [ class "has-hover-items", onClick vm.onClick ]
         ([ div []
             [ div [] [ text vm.name ]
             , badge [ intProperty "label" (vm.count) ] []

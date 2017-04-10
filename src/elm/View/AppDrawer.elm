@@ -73,7 +73,19 @@ doneItemView m =
 
 
 contextItem vm =
-    item [ class "has-hover-items", onClickStopPropagation (Msg.SetView (ContextView vm.id)) ]
+    item [ class "has-hover-items", onClick (Msg.SetView (ContextView vm.id)) ]
+        ([ div []
+            [ div [] [ text vm.name ]
+            , badge [ intProperty "label" (vm.count) ] []
+            ]
+         , itemBody [] []
+         , hoverIcons vm
+         ]
+        )
+
+
+projectItem vm =
+    item [ class "has-hover-items", onClick (Msg.SetView (ProjectView vm.id)) ]
         ([ div []
             [ div [] [ text vm.name ]
             , badge [ intProperty "label" (vm.count) ] []
@@ -85,15 +97,6 @@ contextItem vm =
 
 
 hoverIcons vm =
-    --    let
-    --        children =
-    --            if vm.isEditable then
-    --                [ editIconButton vm
-    --                , deleteIconButton vm
-    --                ]
-    --            else
-    --                []
-    --    in
     div [ class "hover-items" ]
         [ iconButton
             [ onClick Msg.NoOp
@@ -101,31 +104,3 @@ hoverIcons vm =
             ]
             []
         ]
-
-
-deleteIconButton vm =
-    iconButton
-        [ onClick vm.onDeleteClicked
-        , icon "delete"
-        ]
-        []
-
-
-editIconButton vm =
-    iconButton
-        [ onClick vm.onEditClicked
-        , icon "create"
-        ]
-        []
-
-
-projectItem vm =
-    item [ class "has-hover-items", onClickStopPropagation (Msg.SetView (ProjectView vm.id)) ]
-        ([ div []
-            [ div [] [ text vm.name ]
-            , badge [ intProperty "label" (vm.count) ] []
-            ]
-         , itemBody [] []
-         , hoverIcons vm
-         ]
-        )

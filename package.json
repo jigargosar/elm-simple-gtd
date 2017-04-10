@@ -11,7 +11,8 @@
     "build": "cross-env NODE_ENV=production webpack -p --progress; cp -r static/ app/; cd app; polymer build; cd ..",
     "postbuild": "cp -r app/build/unbundled/ docs/",
     "travis": "npm run bootstrap; npm run build",
-    "link":"ln -Fs `pwd`/src/web/bower_components app/bower_components"
+    "link":"ln -Fs `pwd`/src/web/bower_components app/bower_components",
+    "start":"http-server docs"
   },
   "devDependencies": {
     "babel-core": "6.23.1",

@@ -34,7 +34,7 @@ type alias Model =
     , todoStore : Todo.Store
     , projectStore : Project.Store
     , contextStore : Context.Store
-    , editModel : EditMode
+    , editMode : EditMode
     , mainViewType : MainViewType
     , seed : Seed
     , maybeRunningTodo : Maybe RunningTodo

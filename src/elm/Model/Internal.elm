@@ -44,12 +44,12 @@ updateTodoStore updater model =
 
 getEditMode : Model -> EditMode
 getEditMode =
-    (.editModel)
+    (.editMode)
 
 
 setEditMode : EditMode -> ModelF
-setEditMode editModel model =
-    { model | editModel = editModel }
+setEditMode editMode model =
+    { model | editMode = editMode }
 
 
 updateEditMode : (Model -> EditMode) -> ModelF

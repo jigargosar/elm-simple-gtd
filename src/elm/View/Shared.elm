@@ -2,7 +2,7 @@ module View.Shared exposing (..)
 
 import Context
 import Dict exposing (Dict)
-import EditMode exposing (EditTodoModel)
+import EditMode exposing (EditMode, EditTodoModel)
 import Html exposing (Html, div, text)
 import Html.Attributes.Extra exposing (intProperty)
 import Json.Encode
@@ -29,6 +29,7 @@ type alias SharedViewModel =
     , encodedProjectNames : Json.Encode.Value
     , encodedContextNames : Json.Encode.Value
     , maybeEditTodoModel : Maybe EditTodoModel
+    , editMode : EditMode
     , projectIdToNameDict : Dict Project.Id Project.Name
     , contextByIdDict : Dict Context.Id Context.Model
     , selection : Set Todo.Id
@@ -44,6 +45,7 @@ create model =
     , projectIdToNameDict = Model.getProjectStore model |> Project.getProjectIdToNameDict
     , contextByIdDict = Model.getContextByIdDict model
     , selection = Model.getSelectedTodoIdSet model
+    , editMode = Model.getEditMode model
     }
 
 

@@ -250,7 +250,13 @@ update msg =
                                         >> andThenUpdate DeactivateEditingMode
 
                                 _ ->
-                                    identity
+                                    (case key of
+                                        Key.Escape ->
+                                            andThenUpdate DeactivateEditingMode
+
+                                        _ ->
+                                            identity
+                                    )
                         )
            )
         >> persistAll

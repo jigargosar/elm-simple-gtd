@@ -104,6 +104,11 @@ containerHeaderView vc vm =
                             []
                         ]
                     ]
+                , item []
+                    [ button [] [ "Save" |> text ]
+                    , button [ onClick Msg.DeactivateEditingMode ] [ "Cancel" |> text ]
+                    , button [] [ "Delete" |> text ]
+                    ]
                 ]
     in
         if vm.id /= "" then

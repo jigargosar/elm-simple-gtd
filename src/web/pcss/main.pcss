@@ -66,11 +66,11 @@ paper-item {
   }
 
   &> .hide-on-hover{
-    display: block;
+    display: flex;
   }
 
   &:hover > .show-on-hover{
-    display: block;
+    display: flex;
   }
   &:hover > .hide-on-hover{
     display: none;
@@ -114,18 +114,6 @@ paper-item {
     & .done {
       text-decoration: line-through;
       opacity: 0.6;
-    }
-
-    & .show-on-hover {
-      display: none;
-    }
-
-    &:hover .hide-on-hover {
-      display: none;
-    }
-
-    &:hover .show-on-hover {
-      display: flex;
     }
 
     & paper-item-body {

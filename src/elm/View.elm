@@ -32,7 +32,6 @@ import Polymer.Paper exposing (..)
 import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import View.ProjectList exposing (projectListView)
 import View.Todo
 import View.Context
 import View.Project

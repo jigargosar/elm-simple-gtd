@@ -80,38 +80,6 @@ createNullVM todoListByGroupIdDict model =
         }
 
 
-prependNullModelVM todoByContextIdDict vmList =
-    let
-        context =
-            Context.null
-
-        entity =
-            ContextEntity context
-
-        id =
-            Context.getId context
-
-        todoList =
-            todoByContextIdDict |> Dict.get id ?= []
-
-        count =
-            List.length todoList
-
-        nullVM =
-            { id = id
-            , name = Context.getName context
-            , todoList = todoList
-            , isEmpty = count == 0
-            , count = count
-            , isEditable = False
-            , onDeleteClicked = Msg.NoOp
-            , onClick = Msg.SetView (ContextView id)
-            , onSettingsClicked = Msg.OnSettingsClicked entity
-            }
-    in
-        nullVM :: vmList
-
-
 vmList : Model.Types.Model -> List ViewModel
 vmList model =
     let
@@ -120,4 +88,4 @@ vmList model =
     in
         Model.getActiveContexts model
             .|> createVM todoByContextIdDict
-            |> prependNullModelVM todoByContextIdDict
+            |> (::) (createNullVM todoByContextIdDict Context.null)

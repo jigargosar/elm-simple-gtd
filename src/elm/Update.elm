@@ -184,6 +184,14 @@ update msg =
                         _ ->
                             identity
 
+                OnSettingsClicked entity ->
+                    case entity of
+                        ContextEntity context ->
+                            identity
+
+                        ProjectEntity project ->
+                            identity
+
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)
                         (\editMode ->

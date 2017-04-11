@@ -3,7 +3,7 @@ module View.Context exposing (..)
 import Context
 import Dict
 import Html exposing (Html)
-import Model.Types exposing (EntityAction(Delete, StartEditing), EntityType(ContextEntity), MainViewType(ContextView))
+import Model.Types exposing (EntityAction(Delete, StartEditing), Entity(ContextEntity), MainViewType(ContextView))
 import Msg exposing (Msg)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -38,6 +38,9 @@ createContextViewModel todoByContextIdDict context =
 
         count =
             List.length todoList
+
+        contextEntity =
+            (ContextEntity context)
     in
         { id = id
         , name = Context.getName context
@@ -45,9 +48,10 @@ createContextViewModel todoByContextIdDict context =
         , isEmpty = count == 0
         , count = List.length todoList
         , isEditable = True
-        , onEditClicked = Msg.OnEntityAction id (ContextEntity context) StartEditing
-        , onDeleteClicked = Msg.OnEntityAction id (ContextEntity context) Delete
+        , onEditClicked = Msg.OnEntityAction id contextEntity StartEditing
+        , onDeleteClicked = Msg.OnEntityAction id contextEntity Delete
         , onClick = Msg.SetView (ContextView id)
+        , onSettingsClicked = Msg.OnSettingsClicked contextEntity
         }
 
 

@@ -70,7 +70,8 @@ type Msg
     | OnMsgList (List Msg)
     | OnKeyboardMsg Keyboard.Msg
     | OnKeyUp Keyboard.Key
-    | OnEntityAction EntityId EntityType EntityAction
+    | OnEntityAction EntityId Entity EntityAction
+    | OnSettingsClicked Entity
 
 
 toCmds : List Msg -> Cmd Msg

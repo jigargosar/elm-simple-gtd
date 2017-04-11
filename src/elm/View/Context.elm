@@ -40,7 +40,7 @@ createVM todoListByGroupIdDict model =
             List.length todoList
 
         entity =
-            (ContextEntity model)
+            ContextEntity model
     in
         { id = id
         , name = Context.getName model

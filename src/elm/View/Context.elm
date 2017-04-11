@@ -29,7 +29,7 @@ type alias ViewModel =
     }
 
 
-createContextViewModel todoByContextIdDict model =
+createVM todoByContextIdDict model =
     let
         id =
             Context.getId model
@@ -56,7 +56,7 @@ createContextViewModel todoByContextIdDict model =
         }
 
 
-prependInboxContextVM todoByContextIdDict contextVMs =
+prependNullModelVM todoByContextIdDict contextVMs =
     let
         context =
             Context.null
@@ -96,5 +96,5 @@ vmList model =
             Model.getActiveTodoListGroupedByContextId model
     in
         Model.getActiveContexts model
-            .|> createContextViewModel todoByContextIdDict
-            |> prependInboxContextVM todoByContextIdDict
+            .|> createVM todoByContextIdDict
+            |> prependNullModelVM todoByContextIdDict

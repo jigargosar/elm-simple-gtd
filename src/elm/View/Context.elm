@@ -22,7 +22,6 @@ type alias ViewModel =
     , isEmpty : Bool
     , count : Int
     , isEditable : Bool
-    , onEditClicked : Msg
     , onDeleteClicked : Msg
     , onClick : Msg
     , onSettingsClicked : Msg
@@ -49,7 +48,6 @@ createVM todoByContextIdDict model =
         , isEmpty = count == 0
         , count = List.length todoList
         , isEditable = True
-        , onEditClicked = Msg.OnEntityAction id entity StartEditing
         , onDeleteClicked = Msg.OnEntityAction id entity Delete
         , onClick = Msg.SetView (ContextView id)
         , onSettingsClicked = Msg.OnSettingsClicked entity
@@ -80,7 +78,6 @@ prependNullModelVM todoByContextIdDict contextVMs =
             , isEmpty = count == 0
             , count = count
             , isEditable = False
-            , onEditClicked = Msg.NoOp
             , onDeleteClicked = Msg.NoOp
             , onClick = Msg.SetView (ContextView id)
             , onSettingsClicked = Msg.OnSettingsClicked entity

@@ -21,7 +21,6 @@ type alias ViewModel =
     , todoList : List Todo.Model
     , isEmpty : Bool
     , count : Int
-    , isEditable : Bool
     , onDeleteClicked : Msg
     , onClick : Msg
     , onSettingsClicked : Msg
@@ -45,18 +44,17 @@ createVM todoListByGroupIdDict model =
         isNull =
             Context.isNull model
 
-        ( onDeleteClicked, isEditable ) =
+        onDeleteClicked =
             if isNull then
-                ( Msg.NoOp, False )
+                (Msg.NoOp)
             else
-                ( Msg.OnEntityAction id entity Delete, True )
+                (Msg.OnEntityAction id entity Delete)
     in
         { id = id
         , name = Context.getName model
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList
-        , isEditable = isEditable
         , onDeleteClicked = onDeleteClicked
         , onClick = Msg.SetView (ContextView id)
         , onSettingsClicked = Msg.OnSettingsClicked entity

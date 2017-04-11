@@ -30,6 +30,9 @@ type alias ViewModel =
 
 createVM todoListByGroupIdDict model =
     let
+        entity =
+            ContextEntity model
+
         id =
             Context.getId model
 
@@ -38,9 +41,6 @@ createVM todoListByGroupIdDict model =
 
         count =
             List.length todoList
-
-        entity =
-            ContextEntity model
     in
         { id = id
         , name = Context.getName model

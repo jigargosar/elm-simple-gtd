@@ -67,7 +67,7 @@ projectOrContextView vc vm =
             , itemBody [] []
             , div [ class "show-on-hover" ]
                 [ iconButton
-                    [ onClick Msg.NoOp
+                    [ onClick vm.onSettingsClicked
                     , icon "settings"
                     ]
                     []

@@ -185,12 +185,16 @@ update msg =
                             identity
 
                 OnSettingsClicked entity ->
-                    case entity of
-                        ContextEntity context ->
-                            identity
+                    let
+                        _ =
+                            Debug.log "entity" (entity)
+                    in
+                        case entity of
+                            ContextEntity context ->
+                                identity
 
-                        ProjectEntity project ->
-                            identity
+                            ProjectEntity project ->
+                                identity
 
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)

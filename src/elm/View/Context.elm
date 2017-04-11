@@ -29,10 +29,10 @@ type alias ViewModel =
     }
 
 
-createContextViewModel todoByContextIdDict context =
+createContextViewModel todoByContextIdDict model =
     let
         id =
-            Context.getId context
+            Context.getId model
 
         todoList =
             todoByContextIdDict |> Dict.get id ?= []
@@ -40,19 +40,19 @@ createContextViewModel todoByContextIdDict context =
         count =
             List.length todoList
 
-        contextEntity =
-            (ContextEntity context)
+        entity =
+            (ContextEntity model)
     in
         { id = id
-        , name = Context.getName context
+        , name = Context.getName model
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList
         , isEditable = True
-        , onEditClicked = Msg.OnEntityAction id contextEntity StartEditing
-        , onDeleteClicked = Msg.OnEntityAction id contextEntity Delete
+        , onEditClicked = Msg.OnEntityAction id entity StartEditing
+        , onDeleteClicked = Msg.OnEntityAction id entity Delete
         , onClick = Msg.SetView (ContextView id)
-        , onSettingsClicked = Msg.OnSettingsClicked contextEntity
+        , onSettingsClicked = Msg.OnSettingsClicked entity
         }
 
 
@@ -61,7 +61,7 @@ prependInboxContextVM todoByContextIdDict contextVMs =
         context =
             Context.null
 
-        contextEntity =
+        entity =
             ContextEntity context
 
         id =
@@ -83,7 +83,7 @@ prependInboxContextVM todoByContextIdDict contextVMs =
             , onEditClicked = Msg.NoOp
             , onDeleteClicked = Msg.NoOp
             , onClick = Msg.SetView (ContextView id)
-            , onSettingsClicked = Msg.OnSettingsClicked contextEntity
+            , onSettingsClicked = Msg.OnSettingsClicked entity
             }
     in
         inboxVM :: contextVMs

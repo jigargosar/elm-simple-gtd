@@ -86,7 +86,7 @@ projectOrContextItem vm =
 hoverIcons vm =
     div [ class "show-on-hover" ]
         [ iconButton
-            [ onClick Msg.NoOp
+            [ onClick vm.onSettingsClicked
             , icon "settings"
             ]
             []

@@ -3,7 +3,7 @@ module View.Project exposing (..)
 import Context
 import Dict
 import Html exposing (Html)
-import Model.Types exposing (MainViewType(ProjectView))
+import Model.Types exposing (Entity(ProjectEntity), MainViewType(ProjectView))
 import Msg exposing (Msg)
 import Project
 import String.Extra
@@ -24,11 +24,15 @@ type alias ViewModel =
     , isEmpty : Bool
     , count : Int
     , onClick : Msg
+    , onSettingsClicked : Msg
     }
 
 
 createVM todoByGroupIdDict model =
     let
+        entity =
+            ProjectEntity model
+
         id =
             Project.getId model
 
@@ -54,11 +58,18 @@ createVM todoByGroupIdDict model =
         , isEmpty = count == 0
         , count = List.length todoList
         , onClick = Msg.SetView (ProjectView id)
+        , onSettingsClicked = Msg.OnSettingsClicked entity
         }
 
 
 prependDefaultVM todoByGroupIdDict vmList =
     let
+        model =
+            Project.null
+
+        entity =
+            ProjectEntity model
+
         id =
             ""
 
@@ -75,6 +86,7 @@ prependDefaultVM todoByGroupIdDict vmList =
             , isEmpty = count == 0
             , count = count
             , onClick = Msg.SetView (ProjectView id)
+            , onSettingsClicked = Msg.OnSettingsClicked entity
             }
     in
         defaultVM :: vmList

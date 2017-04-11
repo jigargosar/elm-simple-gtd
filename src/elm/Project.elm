@@ -130,7 +130,7 @@ updateName updater model =
     setName (updater model) model
 
 
-projectConstructor id rev createdAt modifiedAt name =
+constructor id rev createdAt modifiedAt name =
     { id = id
     , rev = rev
     , dirty = False
@@ -141,7 +141,12 @@ projectConstructor id rev createdAt modifiedAt name =
 
 
 init name now id =
-    projectConstructor id "" now now name
+    constructor id "" now now name
+
+
+null : Model
+null =
+    constructor "" "" 0 0 "<No Project>"
 
 
 type alias Encoded =
@@ -161,7 +166,7 @@ encode project =
 
 decoder : Decoder Project
 decoder =
-    D.decode projectConstructor
+    D.decode constructor
         |> PouchDB.documentFieldsDecoder
         |> PouchDB.timeStampFieldsDecoder
         |> D.required "name" D.string

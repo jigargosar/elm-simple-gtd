@@ -76,6 +76,11 @@ decoder =
         |> D.required "name" D.string
 
 
+null : Model
+null =
+    constructor "" "" 0 0 "Inbox"
+
+
 getName =
     .name
 

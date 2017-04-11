@@ -25,6 +25,7 @@ type alias ViewModel =
     , onEditClicked : Msg
     , onDeleteClicked : Msg
     , onClick : Msg
+    , onSettingsClicked : Msg
     }
 
 
@@ -57,8 +58,14 @@ createContextViewModel todoByContextIdDict context =
 
 prependInboxContextVM todoByContextIdDict contextVMs =
     let
+        context =
+            Context.null
+
+        contextEntity =
+            ContextEntity context
+
         id =
-            ""
+            Context.getId context
 
         todoList =
             todoByContextIdDict |> Dict.get id ?= []
@@ -68,7 +75,7 @@ prependInboxContextVM todoByContextIdDict contextVMs =
 
         inboxVM =
             { id = id
-            , name = "Inbox"
+            , name = Context.getName context
             , todoList = todoList
             , isEmpty = count == 0
             , count = count
@@ -76,6 +83,7 @@ prependInboxContextVM todoByContextIdDict contextVMs =
             , onEditClicked = Msg.NoOp
             , onDeleteClicked = Msg.NoOp
             , onClick = Msg.SetView (ContextView id)
+            , onSettingsClicked = Msg.OnSettingsClicked contextEntity
             }
     in
         inboxVM :: contextVMs

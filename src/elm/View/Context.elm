@@ -96,5 +96,5 @@ vmList model =
             Model.getActiveTodoListGroupedByContextId model
     in
         Model.getActiveContexts model
+            |> (::) Context.null
             .|> createVM todoByContextIdDict
-            |> (::) (createNullVM todoByContextIdDict Context.null)

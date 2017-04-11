@@ -62,22 +62,26 @@ groupByContextView contextVMs model =
 projectOrContextView vc vm =
     ( vm.name
     , div [ class "todo-list-container" ]
-        [ item []
-            [ View.Shared.defaultBadge vm
-            , itemBody [] []
-            , div [ class "show-on-hover" ]
-                [ iconButton
-                    [ onClick vm.onSettingsClicked
-                    , icon "settings"
-                    ]
-                    []
-                ]
-            ]
+        [ containerHeaderView vm
         , Keyed.node "paper-material"
             [ class "todo-list" ]
             (vm.todoList .|> View.Todo.listItemView vc)
         ]
     )
+
+
+containerHeaderView vm =
+    item []
+        [ View.Shared.defaultBadge vm
+        , itemBody [] []
+        , div [ class "show-on-hover" ]
+            [ iconButton
+                [ onClick vm.onSettingsClicked
+                , icon "settings"
+                ]
+                []
+            ]
+        ]
 
 
 groupByProjectView : List View.Project.ViewModel -> Model -> Html Msg

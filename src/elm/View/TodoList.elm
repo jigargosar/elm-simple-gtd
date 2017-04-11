@@ -4,6 +4,7 @@ import Context
 import Dict exposing (Dict)
 import Dict.Extra as Dict
 import Dom
+import EditMode
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
@@ -71,21 +72,25 @@ projectOrContextView vc vm =
 
 
 containerHeaderView vc vm =
-    let
-        _ =
-            vc.editMode
-    in
-        item []
-            [ View.Shared.defaultBadge vm
-            , itemBody [] []
-            , div [ class "show-on-hover" ]
-                [ iconButton
-                    [ onClick vm.onSettingsClicked
-                    , icon "settings"
+    case vc.editMode of
+        EditMode.EditProject epm ->
+            item [] [ "Editing Project" |> text ]
+
+        EditMode.EditContext etm ->
+            item [] [ "Editing Context" |> text ]
+
+        _ ->
+            item []
+                [ View.Shared.defaultBadge vm
+                , itemBody [] []
+                , div [ class "show-on-hover" ]
+                    [ iconButton
+                        [ onClick vm.onSettingsClicked
+                        , icon "settings"
+                        ]
+                        []
                     ]
-                    []
                 ]
-            ]
 
 
 groupByProjectView : List View.Project.ViewModel -> Model -> Html Msg

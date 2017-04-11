@@ -63,10 +63,7 @@ projectOrContextView vc vm =
     ( vm.name
     , div [ class "todo-list-container" ]
         [ item [ class "has-hover-items" ]
-            [ div []
-                [ div [ class "todo-list-title" ] [ text vm.name ]
-                , badge [ intProperty "label" (vm.count) ] []
-                ]
+            [ View.Shared.defaultBadge vm
             , itemBody [] []
             , div [ class "hover-items" ]
                 [ iconButton

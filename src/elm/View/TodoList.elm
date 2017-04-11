@@ -86,39 +86,23 @@ containerHeaderView vc vm =
                     ]
                 ]
 
-        editProjectView =
-            item []
-                [ itemBody []
-                    [ input
-                        [ --                        id vm.todo.inputId
-                          class "edit-project-name-input auto-focus"
-                        , stringProperty "label" "Project Name"
-                        , value (vm.name)
+        editEntityView =
+            material []
+                [ item []
+                    [ itemBody []
+                        [ input
+                            [ --                        id vm.todo.inputId
+                              class "edit-entity-name-input auto-focus"
+                            , stringProperty "label" "Name"
+                            , value (vm.name)
 
-                        --                        , onInput vm.onTodoTextChanged
-                        --                        , autofocus True
-                        --                        , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                        --                        , onKeyUp vm.onKeyUp
+                            --                        , onInput vm.onTodoTextChanged
+                            --                        , autofocus True
+                            --                        , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
+                            --                        , onKeyUp vm.onKeyUp
+                            ]
+                            []
                         ]
-                        []
-                    ]
-                ]
-
-        editContextView =
-            item []
-                [ itemBody []
-                    [ input
-                        [ --                        id vm.todo.inputId
-                          class "edit-context-name-input auto-focus"
-                        , stringProperty "label" "Context Name"
-                        , value (vm.name)
-
-                        --                        , onInput vm.onTodoTextChanged
-                        --                        , autofocus True
-                        --                        , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                        --                        , onKeyUp vm.onKeyUp
-                        ]
-                        []
                     ]
                 ]
     in
@@ -126,13 +110,13 @@ containerHeaderView vc vm =
             case vc.editMode of
                 EditMode.EditProject epm ->
                     if epm.model.id == vm.id then
-                        editProjectView
+                        editEntityView
                     else
                         defaultView
 
                 EditMode.EditContext etm ->
                     if etm.model.id == vm.id then
-                        editContextView
+                        editEntityView
                     else
                         defaultView
 

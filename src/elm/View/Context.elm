@@ -83,7 +83,7 @@ prependInboxContextVM todoByContextIdDict contextVMs =
             , onEditClicked = Msg.NoOp
             , onDeleteClicked = Msg.NoOp
             , onClick = Msg.SetView (ContextView id)
-            , onSettingsClicked = Msg.NoOp
+            , onSettingsClicked = Msg.OnSettingsClicked entity
             }
     in
         inboxVM :: contextVMs

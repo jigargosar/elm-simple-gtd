@@ -122,21 +122,24 @@ containerHeaderView vc vm =
                     ]
                 ]
     in
-        case vc.editMode of
-            EditMode.EditProject epm ->
-                if epm.model.id == vm.id then
-                    editProjectView
-                else
-                    defaultView
+        if vm.id /= "" then
+            case vc.editMode of
+                EditMode.EditProject epm ->
+                    if epm.model.id == vm.id then
+                        editProjectView
+                    else
+                        defaultView
 
-            EditMode.EditContext etm ->
-                if etm.model.id == vm.id then
-                    editContextView
-                else
-                    defaultView
+                EditMode.EditContext etm ->
+                    if etm.model.id == vm.id then
+                        editContextView
+                    else
+                        defaultView
 
-            _ ->
-                defaultView
+                _ ->
+                    defaultView
+        else
+            defaultView
 
 
 groupByProjectView : List View.Project.ViewModel -> Model -> Html Msg

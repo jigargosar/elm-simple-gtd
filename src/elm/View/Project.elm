@@ -62,7 +62,7 @@ createVM todoByGroupIdDict model =
         }
 
 
-prependNullVM todoByGroupIdDict vmList =
+prependNullModelVM todoByGroupIdDict vmList =
     let
         model =
             Project.null
@@ -100,4 +100,4 @@ vmList model =
     in
         Model.getActiveProjects model
             .|> createVM todoByGroupIdDict
-            |> prependNullVM todoByGroupIdDict
+            |> prependNullModelVM todoByGroupIdDict

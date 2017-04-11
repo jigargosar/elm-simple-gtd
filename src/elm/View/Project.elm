@@ -86,7 +86,7 @@ prependDefaultVM todoByGroupIdDict vmList =
             , isEmpty = count == 0
             , count = count
             , onClick = Msg.SetView (ProjectView id)
-            , onSettingsClicked = Msg.OnSettingsClicked entity
+            , onSettingsClicked = Msg.NoOp
             }
     in
         defaultVM :: vmList

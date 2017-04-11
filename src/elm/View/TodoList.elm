@@ -31,7 +31,7 @@ import List.Extra as List
 import Model as Model
 import Model.Types exposing (..)
 import Todo
-import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, item, itemBody, material, menu, tab, tabs)
+import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, input, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import View.Project
@@ -74,7 +74,22 @@ projectOrContextView vc vm =
 containerHeaderView vc vm =
     case vc.editMode of
         EditMode.EditProject epm ->
-            item [] [ "Editing Project" |> text ]
+            item []
+                [ itemBody []
+                    [ input
+                        [ --                        id vm.todo.inputId
+                          class "edit-project-name-input auto-focus"
+                        , stringProperty "label" "Project Name"
+                        , value (vm.name)
+
+                        --                        , onInput vm.onTodoTextChanged
+                        --                        , autofocus True
+                        --                        , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
+                        --                        , onKeyUp vm.onKeyUp
+                        ]
+                        []
+                    ]
+                ]
 
         EditMode.EditContext etm ->
             item [] [ "Editing Context" |> text ]

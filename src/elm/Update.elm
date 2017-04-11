@@ -186,6 +186,7 @@ update msg =
 
                 OnSettingsClicked entity ->
                     Return.map (Model.setEditModeToEditEntity entity)
+                        >> autoFocusPaperInputCmd
 
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)

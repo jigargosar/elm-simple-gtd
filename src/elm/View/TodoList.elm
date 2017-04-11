@@ -62,10 +62,10 @@ groupByContextView contextVMs model =
 projectOrContextView vc vm =
     ( vm.name
     , div [ class "todo-list-container" ]
-        [ item [ class "has-hover-items" ]
+        [ item []
             [ View.Shared.defaultBadge vm
             , itemBody [] []
-            , div [ class "hover-items" ]
+            , div [ class "show-on-hover" ]
                 [ iconButton
                     [ onClick Msg.NoOp
                     , icon "settings"

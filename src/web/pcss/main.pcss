@@ -60,6 +60,23 @@
   }
 }
 
+paper-item {
+  &> .show-on-hover{
+    display: none;
+  }
+
+  &> .hide-on-hover{
+    display: block;
+  }
+
+  &:hover > .show-on-hover{
+    display: block;
+  }
+  &:hover > .hide-on-hover{
+    display: none;
+  }
+}
+
 .has-hover-items {
   & .hover-items {
     display: none;

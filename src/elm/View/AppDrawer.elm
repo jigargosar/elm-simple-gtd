@@ -75,7 +75,7 @@ doneItemView m =
 
 
 projectOrContextItem vm =
-    item [ class "has-hover-items", onClick vm.onClick ]
+    item [ class "", onClick vm.onClick ]
         ([ View.Shared.defaultBadge vm
          , itemBody [] []
          , hoverIcons vm
@@ -84,7 +84,7 @@ projectOrContextItem vm =
 
 
 hoverIcons vm =
-    div [ class "hover-items" ]
+    div [ class "show-on-hover" ]
         [ iconButton
             [ onClick Msg.NoOp
             , icon "settings"

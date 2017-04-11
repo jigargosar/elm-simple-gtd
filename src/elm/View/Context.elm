@@ -28,13 +28,13 @@ type alias ViewModel =
     }
 
 
-createVM todoByContextIdDict model =
+createVM todoListByGroupIdDict model =
     let
         id =
             Context.getId model
 
         todoList =
-            todoByContextIdDict |> Dict.get id ?= []
+            todoListByGroupIdDict |> Dict.get id ?= []
 
         count =
             List.length todoList
@@ -54,7 +54,7 @@ createVM todoByContextIdDict model =
         }
 
 
-createNullVM todoByGroupIdDict model =
+createNullVM todoListByGroupIdDict model =
     let
         entity =
             ContextEntity model
@@ -63,7 +63,7 @@ createNullVM todoByGroupIdDict model =
             Context.getId model
 
         todoList =
-            todoByGroupIdDict |> Dict.get id ?= []
+            todoListByGroupIdDict |> Dict.get id ?= []
 
         count =
             List.length todoList

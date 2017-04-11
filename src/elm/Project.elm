@@ -149,6 +149,10 @@ null =
     constructor "" "" 0 0 "<No Project>"
 
 
+isNull =
+    equals null
+
+
 type alias Encoded =
     E.Value
 

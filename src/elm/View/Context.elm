@@ -21,8 +21,8 @@ type alias ViewModel =
     , todoList : List Todo.Model
     , isEmpty : Bool
     , count : Int
-    , onDeleteClicked : Msg
     , onClick : Msg
+    , onDeleteClicked : Msg
     , onSettingsClicked : Msg
     }
 

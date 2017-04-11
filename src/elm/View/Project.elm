@@ -3,7 +3,7 @@ module View.Project exposing (..)
 import Context
 import Dict
 import Html exposing (Html)
-import Model.Types exposing (Entity(ProjectEntity), MainViewType(ProjectView))
+import Model.Types exposing (Entity(ProjectEntity), EntityAction(Delete), MainViewType(ProjectView))
 import Msg exposing (Msg)
 import Project
 import String.Extra
@@ -24,11 +24,12 @@ type alias ViewModel =
     , isEmpty : Bool
     , count : Int
     , onClick : Msg
+    , onDeleteClicked : Msg
     , onSettingsClicked : Msg
     }
 
 
-createVM todoByGroupIdDict model =
+createVM todoListByGroupIdDict model =
     let
         entity =
             ProjectEntity model
@@ -37,59 +38,29 @@ createVM todoByGroupIdDict model =
             Project.getId model
 
         todoList =
-            todoByGroupIdDict |> Dict.get id ?= []
+            todoListByGroupIdDict |> Dict.get id ?= []
 
         count =
             List.length todoList
 
-        name =
-            let
-                name =
-                    Project.getName model
-            in
-                if String.Extra.isBlank name then
-                    "<Blank Name>"
-                else
-                    name
+        isNull =
+            Project.isNull model
+
+        onDeleteClicked =
+            if isNull then
+                (Msg.NoOp)
+            else
+                (Msg.OnEntityAction id entity Delete)
     in
         { id = id
-        , name = name
+        , name = Project.getName model
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList
         , onClick = Msg.SetView (ProjectView id)
         , onSettingsClicked = Msg.OnSettingsClicked entity
+        , onDeleteClicked = onDeleteClicked
         }
-
-
-prependNullModelVM todoByGroupIdDict vmList =
-    let
-        model =
-            Project.null
-
-        entity =
-            ProjectEntity model
-
-        id =
-            ""
-
-        todoList =
-            todoByGroupIdDict |> Dict.get id ?= []
-
-        count =
-            List.length todoList
-
-        defaultVM =
-            { id = id
-            , name = "<No Project>"
-            , todoList = todoList
-            , isEmpty = count == 0
-            , count = count
-            , onClick = Msg.SetView (ProjectView id)
-            , onSettingsClicked = Msg.OnSettingsClicked entity
-            }
-    in
-        defaultVM :: vmList
 
 
 vmList : Model.Types.Model -> List ViewModel
@@ -99,5 +70,5 @@ vmList model =
             Model.getActiveTodoListGroupedByProjectId model
     in
         Model.getActiveProjects model
+            |> (::) Context.null
             .|> createVM todoByGroupIdDict
-            |> prependNullModelVM todoByGroupIdDict

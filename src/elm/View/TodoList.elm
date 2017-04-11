@@ -72,8 +72,21 @@ projectOrContextView vc vm =
 
 
 containerHeaderView vc vm =
-    case vc.editMode of
-        EditMode.EditProject epm ->
+    let
+        defaultView =
+            item []
+                [ View.Shared.defaultBadge vm
+                , itemBody [] []
+                , div [ class "show-on-hover" ]
+                    [ iconButton
+                        [ onClick vm.onSettingsClicked
+                        , icon "settings"
+                        ]
+                        []
+                    ]
+                ]
+
+        editProjectView =
             item []
                 [ itemBody []
                     [ input
@@ -91,21 +104,39 @@ containerHeaderView vc vm =
                     ]
                 ]
 
-        EditMode.EditContext etm ->
-            item [] [ "Editing Context" |> text ]
-
-        _ ->
+        editContextView =
             item []
-                [ View.Shared.defaultBadge vm
-                , itemBody [] []
-                , div [ class "show-on-hover" ]
-                    [ iconButton
-                        [ onClick vm.onSettingsClicked
-                        , icon "settings"
+                [ itemBody []
+                    [ input
+                        [ --                        id vm.todo.inputId
+                          class "edit-context-name-input auto-focus"
+                        , stringProperty "label" "Context Name"
+                        , value (vm.name)
+
+                        --                        , onInput vm.onTodoTextChanged
+                        --                        , autofocus True
+                        --                        , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
+                        --                        , onKeyUp vm.onKeyUp
                         ]
                         []
                     ]
                 ]
+    in
+        case vc.editMode of
+            EditMode.EditProject epm ->
+                if epm.model.id == vm.id then
+                    editProjectView
+                else
+                    defaultView
+
+            EditMode.EditContext etm ->
+                if etm.model.id == vm.id then
+                    editContextView
+                else
+                    defaultView
+
+            _ ->
+                defaultView
 
 
 groupByProjectView : List View.Project.ViewModel -> Model -> Html Msg

@@ -20,13 +20,13 @@ type alias EditTodoModel =
 
 
 type alias EditContextModel =
-    { id : Context.Id
+    { model : Context.Model
     , name : Context.Name
     }
 
 
 type alias EditProjectModel =
-    { id : Project.Id
+    { model : Project.Model
     , name : Project.Name
     }
 
@@ -60,6 +60,14 @@ createEditTodoModel todo projectName contextName =
     , contextName = contextName
     }
         |> EditTodo
+
+
+editContextMode model =
+    EditContext { model = model, name = Context.getName model }
+
+
+editProjectMode model =
+    EditProject { model = model, name = Project.getName model }
 
 
 updateEditTodoText text editTodoModel =

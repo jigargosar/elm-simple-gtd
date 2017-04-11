@@ -52,8 +52,8 @@ setEditMode editModel model =
     { model | editModel = editModel }
 
 
-updateEditModel : (Model -> EditMode) -> ModelF
-updateEditModel updater model =
+updateEditMode : (Model -> EditMode) -> ModelF
+updateEditMode updater model =
     setEditMode (updater model) model
 
 

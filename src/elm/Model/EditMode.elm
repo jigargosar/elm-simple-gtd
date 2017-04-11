@@ -23,7 +23,22 @@ activateNewTodoMode text =
 
 setEditModelToEditTodo : Todo.Model -> ModelF
 setEditModelToEditTodo todo =
-    updateEditModel (createEditTodoModel todo)
+    updateEditMode (createEditTodoModel todo)
+
+
+setEditModeToEditEntity : Entity -> ModelF
+setEditModeToEditEntity entity =
+    setEditMode (getEntityEditMode entity)
+
+
+getEntityEditMode : Entity -> EditMode
+getEntityEditMode entity =
+    case entity of
+        ContextEntity model ->
+            EditMode.editContextMode model
+
+        ProjectEntity model ->
+            EditMode.editProjectMode model
 
 
 createEditTodoModel : Todo.Model -> Model -> EditMode

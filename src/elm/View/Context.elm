@@ -41,14 +41,23 @@ createVM todoListByGroupIdDict model =
 
         count =
             List.length todoList
+
+        isNull =
+            Context.isNull model
+
+        ( onDeleteClicked, isEditable ) =
+            if isNull then
+                ( Msg.NoOp, False )
+            else
+                ( Msg.OnEntityAction id entity Delete, True )
     in
         { id = id
         , name = Context.getName model
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList
-        , isEditable = True
-        , onDeleteClicked = Msg.OnEntityAction id entity Delete
+        , isEditable = isEditable
+        , onDeleteClicked = onDeleteClicked
         , onClick = Msg.SetView (ContextView id)
         , onSettingsClicked = Msg.OnSettingsClicked entity
         }

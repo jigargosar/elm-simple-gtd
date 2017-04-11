@@ -81,6 +81,10 @@ null =
     constructor "" "" 0 0 "Inbox"
 
 
+isNull =
+    equals null
+
+
 getName =
     .name
 

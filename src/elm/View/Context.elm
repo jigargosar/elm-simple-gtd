@@ -54,7 +54,33 @@ createVM todoByContextIdDict model =
         }
 
 
-prependNullModelVM todoByContextIdDict contextVMs =
+createNullVM todoByGroupIdDict model =
+    let
+        entity =
+            ContextEntity model
+
+        id =
+            Context.getId model
+
+        todoList =
+            todoByGroupIdDict |> Dict.get id ?= []
+
+        count =
+            List.length todoList
+    in
+        { id = id
+        , name = Context.getName model
+        , todoList = todoList
+        , isEmpty = count == 0
+        , count = count
+        , isEditable = False
+        , onDeleteClicked = Msg.NoOp
+        , onClick = Msg.SetView (ContextView id)
+        , onSettingsClicked = Msg.OnSettingsClicked entity
+        }
+
+
+prependNullModelVM todoByContextIdDict vmList =
     let
         context =
             Context.null
@@ -71,7 +97,7 @@ prependNullModelVM todoByContextIdDict contextVMs =
         count =
             List.length todoList
 
-        inboxVM =
+        nullVM =
             { id = id
             , name = Context.getName context
             , todoList = todoList
@@ -83,7 +109,7 @@ prependNullModelVM todoByContextIdDict contextVMs =
             , onSettingsClicked = Msg.OnSettingsClicked entity
             }
     in
-        inboxVM :: contextVMs
+        nullVM :: vmList
 
 
 vmList : Model.Types.Model -> List ViewModel

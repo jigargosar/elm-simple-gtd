@@ -46,13 +46,13 @@ updateEditModeNameChanged editMode newName entity =
 updateEditModeSave model =
     case getEditMode model of
         EditMode.EditContext ecm ->
-            identity
+            model
 
         EditMode.EditProject epm ->
-            identity
+            model
 
         _ ->
-            identity
+            model
 
 
 createEntityEditMode : Entity -> EditMode

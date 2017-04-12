@@ -176,8 +176,8 @@ update msg =
                 OnKeyboardMsg msg ->
                     Return.map (Model.update Model.keyboardState (Keyboard.update msg))
 
-                OnEntityAction id type_ action ->
-                    case ( type_, action ) of
+                OnEntityAction entity action ->
+                    case ( entity, action ) of
                         ( ContextEntity context, StartEditing ) ->
                             identity
 

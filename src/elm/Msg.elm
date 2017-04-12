@@ -70,7 +70,7 @@ type Msg
     | OnMsgList (List Msg)
     | OnKeyboardMsg Keyboard.Msg
     | OnKeyUp Keyboard.Key
-    | OnEntityAction EntityId Entity EntityAction
+    | OnEntityAction Entity EntityAction
     | OnSettingsClicked Entity
 
 

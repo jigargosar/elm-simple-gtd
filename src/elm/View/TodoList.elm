@@ -58,7 +58,7 @@ groupByEntityView entityVMs model =
         todoListContainer vm =
             ( vm.id
             , div [ class "todo-list-container" ]
-                [ entityView vc vm
+                [ entityListItemView vc vm
                 , Keyed.node "paper-material"
                     [ class "todo-list" ]
                     (vm.todoList .|> View.Todo.listItemView vc)
@@ -76,7 +76,7 @@ singletonEntityView entityVMs id =
         groupByEntityView vmSingleton
 
 
-entityView vc vm =
+entityListItemView vc vm =
     let
         defaultView =
             item []

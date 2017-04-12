@@ -36,7 +36,7 @@ type alias ModelConfig a =
     }
 
 
-createVM todoListByGroupIdDict modelConfig model =
+createVM todoListByEntityId modelConfig model =
     let
         entity =
             modelConfig.createEntity model
@@ -45,7 +45,7 @@ createVM todoListByGroupIdDict modelConfig model =
             modelConfig.getId model
 
         todoList =
-            todoListByGroupIdDict |> Dict.get id ?= []
+            todoListByEntityId |> Dict.get id ?= []
 
         count =
             List.length todoList
@@ -73,12 +73,12 @@ createVM todoListByGroupIdDict modelConfig model =
 createProjectVMs : Model.Types.Model -> List ViewModel
 createProjectVMs model =
     let
-        todoByGroupIdDict =
-            Model.getActiveTodoListGroupedByProjectId model
+        todoListByEntityId =
+            Model.getActiveTodoGroupedBy Todo.getProjectId model
     in
         Model.getActiveProjects model
             |> (::) Project.null
-            .|> createVM todoByGroupIdDict
+            .|> createVM todoListByEntityId
                     { createEntity = ProjectEntity
                     , getId = Project.getId
                     , isNull = Project.isNull
@@ -90,12 +90,12 @@ createProjectVMs model =
 createContextVMS : Model.Types.Model -> List ViewModel
 createContextVMS model =
     let
-        todoByGroupIdDict =
-            Model.getActiveTodoListGroupedByContextId model
+        todoListByEntityId =
+            Model.getActiveTodoGroupedBy Todo.getContextId model
     in
         Model.getActiveContexts model
             |> (::) Context.null
-            .|> createVM todoByGroupIdDict
+            .|> createVM todoListByEntityId
                     { createEntity = ContextEntity
                     , getId = Context.getId
                     , isNull = Context.isNull

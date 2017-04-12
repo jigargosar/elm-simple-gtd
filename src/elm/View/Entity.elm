@@ -2,6 +2,7 @@ module View.Entity exposing (..)
 
 import Context
 import Dict
+import EditMode exposing (EditMode)
 import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(Delete, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), EntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, ProjectView))
 import Msg exposing (Msg)
 import Todo
@@ -25,7 +26,7 @@ type alias ViewModel =
     , onDeleteClicked : Msg
     , onSettingsClicked : Msg
     , onSaveClicked : Msg
-    , onNameChanged : String -> Msg
+    , onNameChanged : EditMode -> String -> Msg
     }
 
 
@@ -70,7 +71,7 @@ createVM todoListByEntityId modelConfig model =
         , onSettingsClicked = (Msg.OnEntityAction entity StartEditing)
         , onDeleteClicked = onDeleteClicked
         , onSaveClicked = (Msg.OnEntityAction entity Save)
-        , onNameChanged = NameChanged >> Msg.OnEntityAction entity
+        , onNameChanged = NameChanged >>> Msg.OnEntityAction entity
         }
 
 

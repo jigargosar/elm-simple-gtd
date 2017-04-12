@@ -95,7 +95,7 @@ entityHeaderView vc vm =
                     ]
                 ]
 
-        editEntityView =
+        editEntityView editMode =
             material []
                 [ item []
                     [ itemBody []
@@ -104,7 +104,7 @@ entityHeaderView vc vm =
                               class "edit-entity-name-input auto-focus"
                             , stringProperty "label" "Name"
                             , value (vm.name)
-                            , onInput vm.onNameChanged
+                            , onInput (vm.onNameChanged editMode)
 
                             --                        , autofocus True
                             , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
@@ -125,13 +125,13 @@ entityHeaderView vc vm =
             case vc.editMode of
                 EditMode.EditProject epm ->
                     if epm.model.id == vm.id then
-                        editEntityView
+                        editEntityView vc.editMode
                     else
                         defaultView
 
                 EditMode.EditContext etm ->
                     if etm.model.id == vm.id then
-                        editEntityView
+                        editEntityView vc.editMode
                     else
                         defaultView
 

@@ -138,10 +138,10 @@ getSelectedTodoIdSet =
 getEntityStore entityStoreType =
     case entityStoreType of
         ProjectEntityStoreType ->
-            .contextStore
+            .projectStore
 
         ContextEntityStoreType ->
-            .projectStore
+            .contextStore
 
 
 getActiveEntityList =

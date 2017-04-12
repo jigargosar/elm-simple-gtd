@@ -2,7 +2,7 @@ module View.Entity exposing (..)
 
 import Context
 import Dict
-import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(Delete), MainViewType(ContextView, ProjectView))
+import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(Delete), EntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, ProjectView))
 import Msg exposing (Msg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -76,7 +76,7 @@ createProjectVMs model =
         todoListByEntityId =
             Model.getActiveTodoGroupedBy Todo.getProjectId model
     in
-        Model.getActiveProjects model
+        Model.getActiveEntityList ProjectEntityType model
             |> (::) Project.null
             .|> createVM todoListByEntityId
                     { createEntity = ProjectEntity
@@ -93,7 +93,7 @@ createContextVMS model =
         todoListByEntityId =
             Model.getActiveTodoGroupedBy Todo.getContextId model
     in
-        Model.getActiveContexts model
+        Model.getActiveEntityList ContextEntityType model
             |> (::) Context.null
             .|> createVM todoListByEntityId
                     { createEntity = ContextEntity

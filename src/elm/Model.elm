@@ -135,12 +135,17 @@ getSelectedTodoIdSet =
     (.selection)
 
 
-getActiveContexts =
-    (.contextStore) >> PouchDB.asList
+getEntityStore entityType =
+    case entityType of
+        ProjectEntityType ->
+            .contextStore
+
+        ContextEntityType ->
+            .projectStore
 
 
-getActiveProjects =
-    (.projectStore) >> PouchDB.asList
+getActiveEntityList =
+    getEntityStore >>> PouchDB.asList
 
 
 getActiveTodoList =

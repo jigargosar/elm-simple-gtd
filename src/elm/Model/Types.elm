@@ -62,5 +62,10 @@ type Entity
     | ContextEntity Context.Model
 
 
+type EntityType
+    = ProjectEntityType
+    | ContextEntityType
+
+
 type alias EntityId =
     PouchDB.Id

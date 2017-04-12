@@ -147,16 +147,8 @@ getActiveTodoList =
     .todoStore >> PouchDB.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 
 
-getActiveTodoListGroupedByContextId =
-    getActiveTodoList >> Dict.Extra.groupBy (Todo.getContextId)
-
-
 getActiveTodoGroupedBy fn =
     getActiveTodoList >> Dict.Extra.groupBy (fn)
-
-
-getActiveTodoListGroupedByProjectId =
-    getActiveTodoList >> Dict.Extra.groupBy (Todo.getProjectId)
 
 
 updateTodoFromEditTodoModel : EditTodoModel -> ModelF

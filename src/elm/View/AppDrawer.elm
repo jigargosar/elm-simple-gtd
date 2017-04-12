@@ -27,7 +27,6 @@ import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
-import View.Context
 import View.Shared
 
 

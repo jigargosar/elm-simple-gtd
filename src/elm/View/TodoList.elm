@@ -36,9 +36,7 @@ import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, input, i
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import View.Entity
-import View.Project
 import View.Todo exposing (EditTodoViewModel)
-import View.Context
 import View.Shared exposing (SharedViewModel)
 
 

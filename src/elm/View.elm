@@ -13,6 +13,7 @@ import Model.EditMode
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (Msg)
 import Set
+import View.Entity
 import View.TodoList exposing (..)
 import View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
@@ -33,8 +34,6 @@ import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.Todo
-import View.Context
-import View.Project
 
 
 appView m =
@@ -47,10 +46,10 @@ appView m =
 appDrawerLayoutView m =
     let
         contextVMs =
-            View.Context.vmList m
+            View.Entity.createContextVMS m
 
         projectVMs =
-            View.Project.vmList m
+            View.Entity.createProjectVMs m
     in
         App.drawerLayout []
             [ appDrawerView contextVMs projectVMs m

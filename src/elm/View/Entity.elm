@@ -1,7 +1,8 @@
 module View.Entity exposing (..)
 
+import Context
 import Dict
-import Model.Types exposing (Entity, EntityAction(Delete), MainViewType)
+import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(Delete), MainViewType(ContextView, ProjectView))
 import Msg exposing (Msg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -10,6 +11,8 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Model
+import Project
 
 
 type alias ViewModel =
@@ -65,3 +68,37 @@ createVM todoListByGroupIdDict modelConfig model =
         , onSettingsClicked = Msg.OnSettingsClicked entity
         , onDeleteClicked = onDeleteClicked
         }
+
+
+createProjectVMs : Model.Types.Model -> List ViewModel
+createProjectVMs model =
+    let
+        todoByGroupIdDict =
+            Model.getActiveTodoListGroupedByProjectId model
+    in
+        Model.getActiveProjects model
+            |> (::) Project.null
+            .|> createVM todoByGroupIdDict
+                    { createEntity = ProjectEntity
+                    , getId = Project.getId
+                    , isNull = Project.isNull
+                    , getName = Project.getName
+                    , getViewType = ProjectView
+                    }
+
+
+createContextVMS : Model.Types.Model -> List ViewModel
+createContextVMS model =
+    let
+        todoByGroupIdDict =
+            Model.getActiveTodoListGroupedByContextId model
+    in
+        Model.getActiveContexts model
+            |> (::) Context.null
+            .|> createVM todoByGroupIdDict
+                    { createEntity = ContextEntity
+                    , getId = Context.getId
+                    , isNull = Context.isNull
+                    , getName = Context.getName
+                    , getViewType = ContextView
+                    }

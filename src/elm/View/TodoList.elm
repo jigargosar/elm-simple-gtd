@@ -77,61 +77,62 @@ singletonEntityView entityVMs id =
 
 
 entityListItemView vc vm =
-    let
-        defaultView =
-            item []
-                [ View.Shared.defaultBadge vm
-                , itemBody [] []
-                , div [ class "show-on-hover" ]
-                    [ iconButton
-                        [ onClick vm.onSettingsClicked
-                        , icon "settings"
-                        ]
-                        []
-                    ]
+    if vm.id /= "" then
+        case vc.editMode of
+            EditMode.EditProject epm ->
+                if epm.model.id == vm.id then
+                    editEntityView epm vm
+                else
+                    defaultView vm
+
+            EditMode.EditContext etm ->
+                if etm.model.id == vm.id then
+                    editEntityView etm vm
+                else
+                    defaultView vm
+
+            _ ->
+                defaultView vm
+    else
+        defaultView vm
+
+
+defaultView vm =
+    item []
+        [ View.Shared.defaultBadge vm
+        , itemBody [] []
+        , div [ class "show-on-hover" ]
+            [ iconButton
+                [ onClick vm.onSettingsClicked
+                , icon "settings"
                 ]
+                []
+            ]
+        ]
 
-        editEntityView editModel =
-            material []
-                [ item []
-                    [ itemBody []
-                        [ input
-                            [ --                        id vm.todo.inputId
-                              class "edit-entity-name-input auto-focus"
-                            , stringProperty "label" "Name"
-                            , value (editModel.name)
-                            , onInput vm.onNameChanged
 
-                            --                        , autofocus True
-                            , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
+editEntityView editModel vm =
+    material []
+        [ item []
+            [ itemBody []
+                [ input
+                    [ --                        id vm.todo.inputId
+                      class "edit-entity-name-input auto-focus"
+                    , stringProperty "label" "Name"
+                    , value (editModel.name)
+                    , onInput vm.onNameChanged
 
-                            --                        , onKeyUp vm.onKeyUp
-                            ]
-                            []
-                        ]
+                    --                        , autofocus True
+                    , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
+
+                    --                        , onKeyUp vm.onKeyUp
                     ]
-                , item []
-                    [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
-                    , button [ onClick Msg.DeactivateEditingMode ] [ "Cancel" |> text ]
-                    , button [ onClick vm.onDeleteClicked ] [ "Delete" |> text ]
-                    ]
+                    []
                 ]
-    in
-        if vm.id /= "" then
-            case vc.editMode of
-                EditMode.EditProject epm ->
-                    if epm.model.id == vm.id then
-                        editEntityView epm
-                    else
-                        defaultView
-
-                EditMode.EditContext etm ->
-                    if etm.model.id == vm.id then
-                        editEntityView etm
-                    else
-                        defaultView
-
-                _ ->
-                    defaultView
-        else
-            defaultView
+            ]
+        , item []
+            [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
+            , button [ onClick Msg.DeactivateEditingMode ] [ "Cancel" |> text ]
+            , button [ onClick vm.onDeleteClicked ] [ "Delete" |> text ]
+            ]
+        ]

@@ -67,5 +67,10 @@ type EntityType
     | ContextEntityType
 
 
+type EntityStoreType
+    = ProjectEntityStoreType
+    | ContextEntityStoreType
+
+
 type alias EntityId =
     PouchDB.Id

@@ -29,7 +29,6 @@ type alias ViewModel =
 
 type alias ModelConfig a =
     { createEntity : Entity
-    , entityType : EntityType
     , getId : a -> String
     , isNull : a -> Bool
     , getName : a -> String
@@ -81,7 +80,6 @@ createProjectVMs model =
             |> (::) Project.null
             .|> createVM todoListByEntityId
                     { createEntity = ProjectEntity
-                    , entityType = ProjectEntityType
                     , getId = Project.getId
                     , isNull = Project.isNull
                     , getName = Project.getName
@@ -99,7 +97,6 @@ createContextVMS model =
             |> (::) Context.null
             .|> createVM todoListByEntityId
                     { createEntity = ContextEntity
-                    , entityType = ContextEntityType
                     , getId = Context.getId
                     , isNull = Context.isNull
                     , getName = Context.getName

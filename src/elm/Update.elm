@@ -188,7 +188,7 @@ update msg =
 
                         ( _, Save ) ->
                             Return.map (Model.updateEditModeSave)
-                                >> autoFocusPaperInputCmd
+                                >> andThenUpdate DeactivateEditingMode
 
                         _ ->
                             identity

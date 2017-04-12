@@ -5,6 +5,7 @@ import EditMode exposing (EditMode, EditTodoModel)
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model exposing (..)
+import PouchDB
 import Project
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -44,15 +45,27 @@ updateEditModeNameChanged editMode newName entity =
 
 
 updateEditModeSave model =
-    case getEditMode model of
+    case model.editMode of
         EditMode.EditContext ecm ->
-            model
+            ecm.model
+                |> Context.setName ecm.name
+                |> Context.setModifiedAt model.now
+                |> (PouchDB.update # model.contextStore)
+                |> (setContextStore # model)
 
         EditMode.EditProject epm ->
-            model
+            epm.model
+                |> Project.setName epm.name
+                |> Project.setModifiedAt model.now
+                |> (PouchDB.update # model.contextStore)
+                |> (setProjectStore # model)
 
         _ ->
             model
+
+
+setContextStore contextStore model =
+    { model | contextStore = contextStore }
 
 
 createEntityEditMode : Entity -> EditMode

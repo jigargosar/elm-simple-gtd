@@ -93,6 +93,14 @@ getId =
     .id
 
 
+setName name model =
+    { model | name = name }
+
+
+setModifiedAt modifiedAt model =
+    { model | modifiedAt = modifiedAt }
+
+
 storeGenerator : List Encoded -> Random.Generator Store
 storeGenerator =
     PouchDB.generator "context-db" encoder decoder

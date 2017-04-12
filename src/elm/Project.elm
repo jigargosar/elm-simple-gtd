@@ -125,6 +125,10 @@ setName name model =
     { model | name = name }
 
 
+setModifiedAt modifiedAt model =
+    { model | modifiedAt = modifiedAt }
+
+
 updateName : (Model -> Name) -> ModelF
 updateName updater model =
     setName (updater model) model

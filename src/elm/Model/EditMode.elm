@@ -43,6 +43,10 @@ updateEditModeNameChanged editMode newName entity =
             identity
 
 
+updateEditModeSave editMode entity =
+    identity
+
+
 createEntityEditMode : Entity -> EditMode
 createEntityEditMode entity =
     case entity of

@@ -49,22 +49,34 @@ filteredTodoListView =
            )
 
 
-groupByContextView : List View.Context.ViewModel -> Model -> Html Msg
+groupByContextView : List View.Entity.ViewModel -> Model -> Html Msg
 groupByContextView contextVMs model =
     let
         vc =
             View.Shared.create model
 
         contextViewFromVM =
-            projectOrContextView vc
+            entityView vc
     in
         Keyed.node "div" [] (contextVMs .|> contextViewFromVM)
 
 
-projectOrContextView vc vm =
+groupByProjectView : List View.Entity.ViewModel -> Model -> Html Msg
+groupByProjectView projectVMs model =
+    let
+        vc =
+            View.Shared.create model
+
+        projectViewFromVM =
+            entityView vc
+    in
+        Keyed.node "div" [] (projectVMs .|> projectViewFromVM)
+
+
+entityView vc vm =
     ( vm.name
     , div [ class "todo-list-container" ]
-        [ containerHeaderView vc vm
+        [ entityHeaderView vc vm
         , Keyed.node "paper-material"
             [ class "todo-list" ]
             (vm.todoList .|> View.Todo.listItemView vc)
@@ -72,7 +84,7 @@ projectOrContextView vc vm =
     )
 
 
-containerHeaderView vc vm =
+entityHeaderView vc vm =
     let
         defaultView =
             item []
@@ -130,15 +142,3 @@ containerHeaderView vc vm =
                     defaultView
         else
             defaultView
-
-
-groupByProjectView : List View.Entity.ViewModel -> Model -> Html Msg
-groupByProjectView projectVMs model =
-    let
-        vc =
-            View.Shared.create model
-
-        projectViewFromVM =
-            projectOrContextView vc
-    in
-        Keyed.node "div" [] (projectVMs .|> projectViewFromVM)

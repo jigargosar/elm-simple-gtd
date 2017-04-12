@@ -57,10 +57,6 @@ type EntityAction
     | Delete
 
 
-type EntityModel otherFields
-    = EntityModel (PouchDB.Document otherFields)
-
-
 type Entity
     = ProjectEntity Project.Model
     | ContextEntity Context.Model

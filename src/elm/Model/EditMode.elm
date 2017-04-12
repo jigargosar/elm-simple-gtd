@@ -28,11 +28,11 @@ setEditModelToEditTodo todo =
 
 setEditModeToEditEntity : Entity -> ModelF
 setEditModeToEditEntity entity =
-    setEditMode (getEntityEditMode entity)
+    setEditMode (createEntityEditMode entity)
 
 
-getEntityEditMode : Entity -> EditMode
-getEntityEditMode entity =
+createEntityEditMode : Entity -> EditMode
+createEntityEditMode entity =
     case entity of
         ContextEntity model ->
             EditMode.editContextMode model

@@ -32,7 +32,16 @@ setEditModeToEditEntity entity =
 
 
 updateEditModeNameChanged editMode newName entity model =
-    model
+    let
+        _ =
+            case editMode of
+                EditMode.EditContext ecm ->
+                    1
+
+                EditMode.EditProject epm ->
+                    1
+    in
+        model
 
 
 createEntityEditMode : Entity -> EditMode

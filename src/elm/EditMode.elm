@@ -66,8 +66,16 @@ editContextMode model =
     EditContext { model = model, name = Context.getName model }
 
 
+editContextSetName name ecm =
+    EditContext { ecm | name = name }
+
+
 editProjectMode model =
     EditProject { model = model, name = Project.getName model }
+
+
+editProjectSetName name epm =
+    EditProject { epm | name = name }
 
 
 updateEditTodoText text editTodoModel =

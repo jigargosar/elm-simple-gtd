@@ -178,8 +178,9 @@ update msg =
 
                 OnEntityAction entity action ->
                     case ( entity, action ) of
-                        ( ContextEntity context, StartEditing ) ->
-                            identity
+                        ( _, StartEditing ) ->
+                            Return.map (Model.setEditModeToEditEntity entity)
+                                >> autoFocusPaperInputCmd
 
                         _ ->
                             identity

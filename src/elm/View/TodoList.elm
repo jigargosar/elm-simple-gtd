@@ -95,7 +95,7 @@ entityHeaderView vc vm =
                     ]
                 ]
 
-        editEntityView editMode =
+        editEntityView editMode editModel =
             material []
                 [ item []
                     [ itemBody []
@@ -103,7 +103,7 @@ entityHeaderView vc vm =
                             [ --                        id vm.todo.inputId
                               class "edit-entity-name-input auto-focus"
                             , stringProperty "label" "Name"
-                            , value (vm.name)
+                            , value (editModel.name)
                             , onInput (vm.onNameChanged editMode)
 
                             --                        , autofocus True
@@ -125,13 +125,13 @@ entityHeaderView vc vm =
             case vc.editMode of
                 EditMode.EditProject epm ->
                     if epm.model.id == vm.id then
-                        editEntityView vc.editMode
+                        editEntityView vc.editMode epm
                     else
                         defaultView
 
                 EditMode.EditContext etm ->
                     if etm.model.id == vm.id then
-                        editEntityView vc.editMode
+                        editEntityView vc.editMode etm
                     else
                         defaultView
 

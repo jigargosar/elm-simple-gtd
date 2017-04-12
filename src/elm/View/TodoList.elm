@@ -34,6 +34,7 @@ import Todo
 import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, input, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
+import View.Entity
 import View.Project
 import View.Todo exposing (EditTodoViewModel)
 import View.Context
@@ -131,7 +132,7 @@ containerHeaderView vc vm =
             defaultView
 
 
-groupByProjectView : List View.Project.ViewModel -> Model -> Html Msg
+groupByProjectView : List View.Entity.ViewModel -> Model -> Html Msg
 groupByProjectView projectVMs model =
     let
         vc =

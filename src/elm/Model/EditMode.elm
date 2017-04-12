@@ -40,6 +40,9 @@ updateEditModeNameChanged editMode newName entity model =
 
                 EditMode.EditProject epm ->
                     1
+
+                _ ->
+                    1
     in
         model
 

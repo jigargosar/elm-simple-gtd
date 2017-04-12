@@ -56,7 +56,7 @@ type EntityAction
     = StartEditing
     | Delete
     | Save
-    | NameChanged
+    | NameChanged String
 
 
 type Entity

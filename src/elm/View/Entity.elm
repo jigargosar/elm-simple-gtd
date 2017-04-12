@@ -70,7 +70,7 @@ createVM todoListByEntityId modelConfig model =
         , onSettingsClicked = (Msg.OnEntityAction entity StartEditing)
         , onDeleteClicked = onDeleteClicked
         , onSaveClicked = (Msg.OnEntityAction entity Save)
-        , onNameChanged = (Msg.OnEntityAction entity NameChanged)
+        , onNameChanged = NameChanged >> Msg.OnEntityAction entity
         }
 
 

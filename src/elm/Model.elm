@@ -68,14 +68,6 @@ getContextByIdDict =
     (.contextStore) >> Context.byIdDict
 
 
-getActiveContexts =
-    (.contextStore) >> PouchDB.asList
-
-
-getActiveProjects =
-    (.projectStore) >> PouchDB.asList
-
-
 getEncodedContextNames =
     .contextStore >> Context.getEncodedNames
 
@@ -141,6 +133,14 @@ getMaybeSelectedTodo m =
 
 getSelectedTodoIdSet =
     (.selection)
+
+
+getActiveContexts =
+    (.contextStore) >> PouchDB.asList
+
+
+getActiveProjects =
+    (.projectStore) >> PouchDB.asList
 
 
 getActiveTodoList =

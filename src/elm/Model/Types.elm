@@ -55,6 +55,7 @@ type alias ModelF =
 type EntityAction
     = StartEditing
     | Delete
+    | Save
 
 
 type Entity

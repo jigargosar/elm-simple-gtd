@@ -10,7 +10,7 @@ import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model.TodoStore
 import Msg exposing (Msg(SetView))
 import String.Extra
-import View.TodoList exposing (groupByContextView)
+import View.TodoList exposing (groupByEntityView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)

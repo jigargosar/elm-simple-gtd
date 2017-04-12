@@ -106,7 +106,7 @@ appMainView contextVMs projectVMs m =
     div [ id "main-view" ]
         [ case Model.getMainViewType m of
             GroupByContextView ->
-                groupByContextView contextVMs m
+                groupByEntityView contextVMs m
 
             BinView ->
                 filteredTodoListView m
@@ -115,21 +115,13 @@ appMainView contextVMs projectVMs m =
                 filteredTodoListView m
 
             ProjectListView ->
-                groupByProjectView projectVMs m
+                groupByEntityView projectVMs m
 
             ProjectView id ->
-                let
-                    vmSingleton =
-                        projectVMs |> List.find (.id >> equals id) |> Maybe.toList
-                in
-                    groupByProjectView vmSingleton m
+                singletonEntityView projectVMs id m
 
             ContextView id ->
-                let
-                    vmSingleton =
-                        contextVMs |> List.find (.id >> equals id) |> Maybe.toList
-                in
-                    groupByContextView vmSingleton m
+                singletonEntityView contextVMs id m
         ]
 
 

@@ -9,6 +9,7 @@ import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
+import Maybe.Extra as Maybe
 import Model.EditMode
 import Model.Internal as Model
 import Model.TodoStore exposing (TodoContextViewModel)
@@ -49,28 +50,24 @@ filteredTodoListView =
            )
 
 
-groupByContextView : List View.Entity.ViewModel -> Model -> Html Msg
-groupByContextView contextVMs model =
+groupByEntityView : List View.Entity.ViewModel -> Model -> Html Msg
+groupByEntityView entityVMs model =
     let
         vc =
             View.Shared.create model
 
-        contextViewFromVM =
+        entityViewFromVM =
             entityView vc
     in
-        Keyed.node "div" [] (contextVMs .|> contextViewFromVM)
+        Keyed.node "div" [] (entityVMs .|> entityViewFromVM)
 
 
-groupByProjectView : List View.Entity.ViewModel -> Model -> Html Msg
-groupByProjectView projectVMs model =
+singletonEntityView entityVMs id =
     let
-        vc =
-            View.Shared.create model
-
-        projectViewFromVM =
-            entityView vc
+        vmSingleton =
+            entityVMs |> List.find (.id >> equals id) |> Maybe.toList
     in
-        Keyed.node "div" [] (projectVMs .|> projectViewFromVM)
+        groupByEntityView vmSingleton
 
 
 entityView vc vm =

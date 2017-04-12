@@ -57,7 +57,7 @@ createVM todoListByEntityId modelConfig model =
             if isNull then
                 (Msg.NoOp)
             else
-                (Msg.OnEntityAction id entity Delete)
+                (Msg.OnEntityAction entity Delete)
     in
         { id = id
         , name = modelConfig.getName model

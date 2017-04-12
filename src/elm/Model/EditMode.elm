@@ -32,7 +32,7 @@ setEditModeToEditEntity entity =
     setEditMode (createEntityEditMode entity)
 
 
-updateEditModeNameChanged editMode newName entity model =
+updateEditModeNameChanged newName entity model =
     case model.editMode of
         EditMode.EditContext ecm ->
             setEditMode (EditMode.editContextSetName newName ecm) model

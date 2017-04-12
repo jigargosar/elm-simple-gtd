@@ -55,8 +55,15 @@ groupByEntityView entityVMs model =
         vc =
             View.Shared.create model
 
-        entityViewFromVM =
-            entityView vc
+        entityViewFromVM vm =
+            ( vm.name
+            , div [ class "todo-list-container" ]
+                [ entityView vc vm
+                , Keyed.node "paper-material"
+                    [ class "todo-list" ]
+                    (vm.todoList .|> View.Todo.listItemView vc)
+                ]
+            )
     in
         Keyed.node "div" [] (entityVMs .|> entityViewFromVM)
 
@@ -70,17 +77,6 @@ singletonEntityView entityVMs id =
 
 
 entityView vc vm =
-    ( vm.name
-    , div [ class "todo-list-container" ]
-        [ entityHeaderView vc vm
-        , Keyed.node "paper-material"
-            [ class "todo-list" ]
-            (vm.todoList .|> View.Todo.listItemView vc)
-        ]
-    )
-
-
-entityHeaderView vc vm =
     let
         defaultView =
             item []
@@ -95,7 +91,7 @@ entityHeaderView vc vm =
                     ]
                 ]
 
-        editEntityView editMode editModel =
+        editEntityView editModel =
             material []
                 [ item []
                     [ itemBody []
@@ -104,7 +100,7 @@ entityHeaderView vc vm =
                               class "edit-entity-name-input auto-focus"
                             , stringProperty "label" "Name"
                             , value (editModel.name)
-                            , onInput (vm.onNameChanged editMode)
+                            , onInput vm.onNameChanged
 
                             --                        , autofocus True
                             , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
@@ -125,13 +121,13 @@ entityHeaderView vc vm =
             case vc.editMode of
                 EditMode.EditProject epm ->
                     if epm.model.id == vm.id then
-                        editEntityView vc.editMode epm
+                        editEntityView epm
                     else
                         defaultView
 
                 EditMode.EditContext etm ->
                     if etm.model.id == vm.id then
-                        editEntityView vc.editMode etm
+                        editEntityView etm
                     else
                         defaultView
 

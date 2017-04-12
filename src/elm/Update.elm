@@ -182,8 +182,8 @@ update msg =
                             Return.map (Model.setEditModeToEditEntity entity)
                                 >> autoFocusPaperInputCmd
 
-                        ( _, NameChanged editMode newName ) ->
-                            Return.map (Model.updateEditModeNameChanged editMode newName entity)
+                        ( _, NameChanged newName ) ->
+                            Return.map (Model.updateEditModeNameChanged newName entity)
                                 >> autoFocusPaperInputCmd
 
                         ( _, Save ) ->

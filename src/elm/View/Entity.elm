@@ -26,7 +26,7 @@ type alias ViewModel =
     , onDeleteClicked : Msg
     , onSettingsClicked : Msg
     , onSaveClicked : Msg
-    , onNameChanged : EditMode -> String -> Msg
+    , onNameChanged : String -> Msg
     }
 
 
@@ -71,7 +71,7 @@ createVM todoListByEntityId modelConfig model =
         , onSettingsClicked = (Msg.OnEntityAction entity StartEditing)
         , onDeleteClicked = onDeleteClicked
         , onSaveClicked = (Msg.OnEntityAction entity Save)
-        , onNameChanged = NameChanged >>> Msg.OnEntityAction entity
+        , onNameChanged = NameChanged >> Msg.OnEntityAction entity
         }
 
 

@@ -108,12 +108,6 @@ appMainView contextVMs projectVMs m =
             GroupByContextView ->
                 groupByEntityView contextVMs m
 
-            BinView ->
-                filteredTodoListView m
-
-            DoneView ->
-                filteredTodoListView m
-
             GroupByProjectView ->
                 groupByEntityView projectVMs m
 
@@ -122,6 +116,12 @@ appMainView contextVMs projectVMs m =
 
             ContextView id ->
                 singletonEntityView contextVMs id m
+
+            BinView ->
+                filteredTodoListView m
+
+            DoneView ->
+                filteredTodoListView m
         ]
 
 

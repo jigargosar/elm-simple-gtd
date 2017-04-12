@@ -57,6 +57,11 @@ type EntityAction
     | Delete
 
 
+type EntityType
+    = ProjectEntityType
+    | ContextEntityType
+
+
 type Entity
     = ProjectEntity Project.Model
     | ContextEntity Context.Model

@@ -215,7 +215,7 @@ update msg =
                                 EditMode.SwitchView ->
                                     (case key of
                                         Key.CharP ->
-                                            andThenUpdate (SetView ProjectListView)
+                                            andThenUpdate (SetView GroupByProjectView)
 
                                         Key.CharA ->
                                             andThenUpdate (SetView GroupByContextView)
@@ -240,7 +240,7 @@ update msg =
                                 EditMode.SwitchToGroupedView ->
                                     (case key of
                                         Key.CharP ->
-                                            andThenUpdate (SetView ProjectListView)
+                                            andThenUpdate (SetView GroupByProjectView)
 
                                         Key.CharC ->
                                             andThenUpdate (SetView GroupByContextView)

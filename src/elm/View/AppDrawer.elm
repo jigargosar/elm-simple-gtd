@@ -63,7 +63,7 @@ divider =
 
 
 projectsItemView m =
-    item [ onClick (SetView ProjectListView) ] [ text "Projects" ]
+    item [ onClick (SetView GroupByProjectView) ] [ text "Projects" ]
 
 
 binItemView m =

@@ -25,7 +25,7 @@ type MainViewType
     | ProjectView Project.Id
     | DoneView
     | BinView
-    | ProjectListView
+    | GroupByProjectView
     | ContextView Context.Id
 
 

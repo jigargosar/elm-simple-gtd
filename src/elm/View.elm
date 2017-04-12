@@ -114,7 +114,7 @@ appMainView contextVMs projectVMs m =
             DoneView ->
                 filteredTodoListView m
 
-            ProjectListView ->
+            GroupByProjectView ->
                 groupByEntityView projectVMs m
 
             ProjectView id ->

@@ -29,7 +29,7 @@ getPathFromModel model =
         DoneView ->
             [ "lists", "done" ]
 
-        ProjectListView ->
+        GroupByProjectView ->
             [ "lists", "projects" ]
 
         ProjectView id ->
@@ -57,7 +57,7 @@ builder2messages builder =
             [ Msg.SetView GroupByContextView ]
 
         "lists" :: "projects" :: [] ->
-            [ Msg.SetView ProjectListView ]
+            [ Msg.SetView GroupByProjectView ]
 
         "lists" :: "bin" :: [] ->
             [ Msg.SetView BinView ]

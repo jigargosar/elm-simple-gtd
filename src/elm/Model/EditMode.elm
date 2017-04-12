@@ -43,8 +43,8 @@ updateEditModeNameChanged editMode newName entity =
             identity
 
 
-updateEditModeSave editMode =
-    case editMode of
+updateEditModeSave model =
+    case getEditMode model of
         EditMode.EditContext ecm ->
             identity
 

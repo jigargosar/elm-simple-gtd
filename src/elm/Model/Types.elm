@@ -61,11 +61,6 @@ type EntityModel otherFields
     = EntityModel (PouchDB.Document otherFields)
 
 
-type EntityType
-    = ProjectEntityType
-    | ContextEntityType
-
-
 type Entity
     = ProjectEntity Project.Model
     | ContextEntity Context.Model

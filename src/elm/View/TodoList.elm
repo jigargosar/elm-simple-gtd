@@ -55,8 +55,8 @@ groupByEntityView entityVMs model =
         vc =
             View.Shared.create model
 
-        entityViewFromVM vm =
-            ( vm.name
+        todoListContainer vm =
+            ( vm.id
             , div [ class "todo-list-container" ]
                 [ entityView vc vm
                 , Keyed.node "paper-material"
@@ -65,7 +65,7 @@ groupByEntityView entityVMs model =
                 ]
             )
     in
-        Keyed.node "div" [] (entityVMs .|> entityViewFromVM)
+        Keyed.node "div" [] (entityVMs .|> todoListContainer)
 
 
 singletonEntityView entityVMs id =

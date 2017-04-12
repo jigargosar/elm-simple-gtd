@@ -6,6 +6,7 @@ import Dict.Extra as Dict
 import Dom
 import EditMode
 import Html.Attributes.Extra exposing (..)
+import Html.Events.Extra exposing (onClickStopPropagation)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
@@ -103,10 +104,11 @@ entityHeaderView vc vm =
                               class "edit-entity-name-input auto-focus"
                             , stringProperty "label" "Name"
                             , value (vm.name)
+                            , onInput vm.onNameChanged
 
-                            --                        , onInput vm.onTodoTextChanged
                             --                        , autofocus True
-                            --                        , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
+                            , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
+
                             --                        , onKeyUp vm.onKeyUp
                             ]
                             []

@@ -31,6 +31,10 @@ setEditModeToEditEntity entity =
     setEditMode (createEntityEditMode entity)
 
 
+updateEditModeNameChanged editMode newName entity model =
+    model
+
+
 createEntityEditMode : Entity -> EditMode
 createEntityEditMode entity =
     case entity of

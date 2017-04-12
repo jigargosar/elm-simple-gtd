@@ -43,8 +43,16 @@ updateEditModeNameChanged editMode newName entity =
             identity
 
 
-updateEditModeSave editMode entity =
-    identity
+updateEditModeSave editMode =
+    case editMode of
+        EditMode.EditContext ecm ->
+            identity
+
+        EditMode.EditProject epm ->
+            identity
+
+        _ ->
+            identity
 
 
 createEntityEditMode : Entity -> EditMode

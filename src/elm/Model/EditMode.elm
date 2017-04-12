@@ -57,7 +57,7 @@ updateEditModeSave model =
             epm.model
                 |> Project.setName epm.name
                 |> Project.setModifiedAt model.now
-                |> (PouchDB.update # model.contextStore)
+                |> (PouchDB.update # model.projectStore)
                 |> (setProjectStore # model)
 
         _ ->

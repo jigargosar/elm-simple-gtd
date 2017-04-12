@@ -115,9 +115,9 @@ entityHeaderView vc vm =
                         ]
                     ]
                 , item []
-                    [ button [] [ "Save" |> text ]
+                    [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
                     , button [ onClick Msg.DeactivateEditingMode ] [ "Cancel" |> text ]
-                    , button [] [ "Delete" |> text ]
+                    , button [ onClick vm.onDeleteClicked ] [ "Delete" |> text ]
                     ]
                 ]
     in

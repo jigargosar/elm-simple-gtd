@@ -14,3 +14,7 @@ getId =
 
 hasId id =
     getId >> equals id
+
+
+equalById doc1 doc2 =
+    getId doc1 == getId doc2

@@ -301,10 +301,6 @@ getContextId =
     .contextId
 
 
-equalById todo1 todo2 =
-    getId todo1 == getId todo2
-
-
 isNotDeleted =
     getDeleted >> not
 

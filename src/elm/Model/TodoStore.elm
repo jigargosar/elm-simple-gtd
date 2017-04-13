@@ -3,6 +3,7 @@ module Model.TodoStore exposing (..)
 import Context
 import Dict exposing (Dict)
 import Dict.Extra
+import Document
 import Ext.Random
 import List.Extra as List
 import Maybe.Extra as Maybe
@@ -47,7 +48,7 @@ findTodoById id =
 
 
 findTodoEqualById todo =
-    Model.getTodoStore >> PouchDB.asList >> List.find (Todo.equalById todo)
+    Model.getTodoStore >> PouchDB.asList >> List.find (Document.equalById todo)
 
 
 type alias TodoContextViewModel =
@@ -92,7 +93,7 @@ updateTodoById actions todoId =
 
 
 replaceTodoIfEqualById todo =
-    List.replaceIf (Todo.equalById todo) todo
+    List.replaceIf (Document.equalById todo) todo
 
 
 addCopyOfTodo : Todo.Model -> Time -> Model -> ( Todo.Model, Model )

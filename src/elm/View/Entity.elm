@@ -45,7 +45,7 @@ createVM todoListByEntityId modelConfig model =
             modelConfig.createEntity model
 
         todoList =
-            todoListByEntityId |> Dict.get model.id ?= []
+            todoListByEntityId model.id
 
         count =
             List.length todoList
@@ -75,25 +75,37 @@ createVM todoListByEntityId modelConfig model =
 createProjectVMs : Model.Types.Model -> List ViewModel
 createProjectVMs model =
     let
-        todoListByEntityId =
-            Model.getActiveTodoGroupedBy Todo.getProjectId model
+        getTodoListByGroupId id =
+            let
+                dict =
+                    Model.getActiveTodoGroupedBy Todo.getProjectId model
+            in
+                dict |> Dict.get id ?= []
+
+        projectVMS =
+            Model.getActiveEntityList ProjectEntityStoreType model
+                |> (::) Project.null
+
+        vmConfig =
+            { createEntity = ProjectEntity
+            , getId = Project.getId
+            , isNull = Project.isNull
+            , getName = Project.getName
+            , getViewType = ProjectView
+            }
     in
-        Model.getActiveEntityList ProjectEntityStoreType model
-            |> (::) Project.null
-            .|> createVM todoListByEntityId
-                    { createEntity = ProjectEntity
-                    , getId = Project.getId
-                    , isNull = Project.isNull
-                    , getName = Project.getName
-                    , getViewType = ProjectView
-                    }
+        projectVMS .|> createVM getTodoListByGroupId vmConfig
 
 
 createContextVMS : Model.Types.Model -> List ViewModel
 createContextVMS model =
     let
-        todoListByEntityId =
-            Model.getActiveTodoGroupedBy Todo.getContextId model
+        todoListByEntityId id =
+            let
+                dict =
+                    Model.getActiveTodoGroupedBy Todo.getContextId model
+            in
+                dict |> Dict.get id ?= []
     in
         Model.getActiveEntityList ContextEntityStoreType model
             |> (::) Context.null

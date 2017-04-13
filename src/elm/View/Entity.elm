@@ -44,11 +44,8 @@ createVM todoListByEntityId modelConfig model =
         entity =
             modelConfig.createEntity model
 
-        id =
-            modelConfig.getId model
-
         todoList =
-            todoListByEntityId |> Dict.get id ?= []
+            todoListByEntityId |> Dict.get model.id ?= []
 
         count =
             List.length todoList
@@ -62,12 +59,12 @@ createVM todoListByEntityId modelConfig model =
             else
                 (Msg.OnEntityAction entity Delete)
     in
-        { id = id
+        { id = model.id
         , name = modelConfig.getName model
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList
-        , onClick = Msg.SetView (modelConfig.getViewType id)
+        , onClick = Msg.SetView (modelConfig.getViewType model.id)
         , onSettingsClicked = (Msg.OnEntityAction entity StartEditing)
         , onDeleteClicked = onDeleteClicked
         , onSaveClicked = (Msg.OnEntityAction entity Save)

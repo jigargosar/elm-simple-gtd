@@ -57,15 +57,12 @@ init name now id =
 
 
 encoder : Model -> Encoded
-encoder model =
+encoder context =
     E.object
-        [ "_id" => E.string model.id
-        , "_rev" => E.string model.rev
-        , "name" => E.string model.name
-        , "deleted" => E.bool model.deleted
-        , "createdAt" => E.int (model.createdAt |> round)
-        , "modifiedAt" => E.int (model.modifiedAt |> round)
-        ]
+        ((PouchDB.encode context)
+            ++ [ "name" => E.string context.name
+               ]
+        )
 
 
 decoder : Decoder Model

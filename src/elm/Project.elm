@@ -16,7 +16,7 @@ import String.Extra
 
 
 type alias OtherFields =
-    PouchDB.HasTimeStamps { name : Name }
+    PouchDB.HasTimeStamps { name : Name, deleted : Bool }
 
 
 type alias Project =
@@ -125,6 +125,10 @@ setName name model =
     { model | name = name }
 
 
+setDeleted deleted model =
+    { model | deleted = deleted }
+
+
 setModifiedAt modifiedAt model =
     { model | modifiedAt = modifiedAt }
 
@@ -134,7 +138,7 @@ updateName updater model =
     setName (updater model) model
 
 
-constructor id rev createdAt modifiedAt name =
+constructor id rev createdAt modifiedAt deleted name =
     { id = id
     , rev = rev
     , dirty = False
@@ -145,7 +149,7 @@ constructor id rev createdAt modifiedAt name =
 
 
 init name now id =
-    constructor id "" now now name
+    constructor id "" now now False name
 
 
 null : Model
@@ -162,13 +166,14 @@ type alias Encoded =
 
 
 encode : Project -> Encoded
-encode project =
+encode model =
     E.object
-        [ "_id" => E.string (getId project)
-        , "_rev" => E.string (getRev project)
-        , "name" => E.string (getName project)
-        , "createdAt" => E.int (project.createdAt |> round)
-        , "modifiedAt" => E.int (project.modifiedAt |> round)
+        [ "_id" => E.string (getId model)
+        , "_rev" => E.string (getRev model)
+        , "name" => E.string (getName model)
+        , "deleted" => E.bool model.deleted
+        , "createdAt" => E.int (model.createdAt |> round)
+        , "modifiedAt" => E.int (model.modifiedAt |> round)
         ]
 
 
@@ -177,4 +182,5 @@ decoder =
     D.decode constructor
         |> PouchDB.documentFieldsDecoder
         |> PouchDB.timeStampFieldsDecoder
+        |> D.optional "deleted" D.bool
         |> D.required "name" D.string

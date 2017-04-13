@@ -105,6 +105,10 @@ setModifiedAt modifiedAt model =
     { model | modifiedAt = modifiedAt }
 
 
+setDeleted deleted model =
+    { model | deleted = deleted }
+
+
 storeGenerator : List Encoded -> Random.Generator Store
 storeGenerator =
     PouchDB.generator "context-db" encoder decoder

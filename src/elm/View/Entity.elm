@@ -31,13 +31,20 @@ type alias ViewModel =
     }
 
 
-type alias ModelConfig a =
-    { createEntity : Entity
-    , getId : a -> String
-    , isNull : a -> Bool
-    , getName : a -> String
-    , getViewType : String -> MainViewType
-    }
+createViewModelList config model =
+    let
+        todoListDict =
+            Model.getActiveTodoListGroupedBy config.groupByFn model
+
+        getTodoListWithGroupId id =
+            todoListDict |> Dict.get id ?= []
+
+        entityList =
+            Model.getActiveEntityList config.storeType model
+                |> (::) config.nullEntity
+    in
+        entityList
+            .|> createViewModel getTodoListWithGroupId config
 
 
 createViewModel todoListByEntityId config model =
@@ -74,44 +81,15 @@ createViewModel todoListByEntityId config model =
 
 
 createProjectViewModelList : Model.Types.Model -> List ViewModel
-createProjectViewModelList model =
-    let
-        todoListDict =
-            Model.getActiveTodoListGroupedBy Todo.getProjectId model
-
-        getTodoListWithGroupId id =
-            todoListDict |> Dict.get id ?= []
-
-        projects =
-            Model.getActiveEntityList ProjectEntityStoreType model
-                |> (::) Project.null
-
-        vmConfig model =
-            { entityWrapper = ProjectEntity
-            , isNull = Project.isNull
-            , getViewType = ProjectView
-            }
-    in
-        projects
-            .|> (\model ->
-                    createViewModel getTodoListWithGroupId (vmConfig model) model
-                )
-
-
-createViewModelList config model =
-    let
-        todoListDict =
-            Model.getActiveTodoListGroupedBy config.groupByFn model
-
-        getTodoListWithGroupId id =
-            todoListDict |> Dict.get id ?= []
-
-        entityList =
-            Model.getActiveEntityList config.storeType model
-                |> (::) config.nullEntity
-    in
-        entityList
-            .|> createViewModel getTodoListWithGroupId config
+createProjectViewModelList =
+    createViewModelList
+        { groupByFn = Todo.getProjectId
+        , storeType = ProjectEntityStoreType
+        , entityWrapper = ProjectEntity
+        , nullEntity = Project.null
+        , isNull = Project.isNull
+        , getViewType = ProjectView
+        }
 
 
 createContextViewModelList : Model.Types.Model -> List ViewModel

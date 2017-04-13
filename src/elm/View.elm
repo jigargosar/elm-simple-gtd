@@ -46,10 +46,10 @@ appView m =
 appDrawerLayoutView m =
     let
         contextVMs =
-            View.Entity.createContextVMS m
+            View.Entity.createContextViewModelList m
 
         projectVMs =
-            View.Entity.createProjectVMs m
+            View.Entity.createProjectViewModelList m
     in
         App.drawerLayout []
             [ appDrawerView contextVMs projectVMs m

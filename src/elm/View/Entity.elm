@@ -40,7 +40,7 @@ type alias ModelConfig a =
     }
 
 
-createVM todoListByEntityId modelConfig model =
+createViewModel todoListByEntityId modelConfig model =
     let
         todoList =
             todoListByEntityId model.id
@@ -70,8 +70,8 @@ createVM todoListByEntityId modelConfig model =
         }
 
 
-createProjectVMs : Model.Types.Model -> List ViewModel
-createProjectVMs model =
+createProjectViewModelList : Model.Types.Model -> List ViewModel
+createProjectViewModelList model =
     let
         dict =
             Model.getActiveTodoListGroupedBy Todo.getProjectId model
@@ -89,11 +89,11 @@ createProjectVMs model =
             , getViewType = ProjectView
             }
     in
-        projectVMS .|> (\model -> createVM getTodoListWithGroupId (vmConfig model) model)
+        projectVMS .|> (\model -> createViewModel getTodoListWithGroupId (vmConfig model) model)
 
 
-createContextVMS : Model.Types.Model -> List ViewModel
-createContextVMS model =
+createContextViewModelList : Model.Types.Model -> List ViewModel
+createContextViewModelList model =
     let
         todoListDict =
             Model.getActiveTodoListGroupedBy Todo.getContextId model
@@ -104,7 +104,7 @@ createContextVMS model =
         Model.getActiveEntityList ContextEntityStoreType model
             |> (::) Context.null
             .|> (\model ->
-                    createVM getTodoListWithGroupId
+                    createViewModel getTodoListWithGroupId
                         { onEntityAction = Msg.OnEntityAction (ContextEntity model)
                         , isNull = Context.isNull
                         , getViewType = ContextView

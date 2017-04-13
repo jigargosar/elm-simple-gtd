@@ -169,15 +169,8 @@ type alias Encoded =
 
 
 encode : Project -> Encoded
-encode model =
-    E.object
-        [ "_id" => E.string (getId model)
-        , "_rev" => E.string (getRev model)
-        , "name" => E.string (getName model)
-        , "deleted" => E.bool model.deleted
-        , "createdAt" => E.int (model.createdAt |> round)
-        , "modifiedAt" => E.int (model.modifiedAt |> round)
-        ]
+encode project =
+    E.object ((PouchDB.encode project) ++ [ "name" => E.string (getName project) ])
 
 
 decoder : Decoder Project

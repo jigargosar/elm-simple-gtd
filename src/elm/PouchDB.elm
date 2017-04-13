@@ -51,6 +51,15 @@ type alias Document moreFields =
     }
 
 
+encode doc =
+    [ "_id" => E.string (doc.id)
+    , "_rev" => E.string (doc.rev)
+    , "createdAt" => E.int (doc.createdAt |> round)
+    , "modifiedAt" => E.int (doc.modifiedAt |> round)
+    , "deleted" => E.bool (doc.deleted)
+    ]
+
+
 documentFieldsDecoder : Decoder (Id -> Revision -> Time -> Time -> Bool -> otherFields) -> Decoder otherFields
 documentFieldsDecoder =
     D.required "_id" D.string

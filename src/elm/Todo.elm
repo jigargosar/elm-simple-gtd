@@ -259,17 +259,14 @@ copyTodo createdAt todo id =
 encode : Model -> Encoded
 encode todo =
     E.object
-        [ "_id" => E.string (getId todo)
-        , "_rev" => E.string (getRev todo)
-        , "done" => E.bool (isDone todo)
-        , "text" => E.string (getText todo)
-        , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
-        , "deleted" => E.bool (getDeleted todo)
-        , "projectId" => (todo.projectId |> E.string)
-        , "contextId" => (todo.contextId |> E.string)
-        , "createdAt" => E.int (todo.createdAt |> round)
-        , "modifiedAt" => E.int (todo.modifiedAt |> round)
-        ]
+        ((PouchDB.encode todo)
+            ++ [ "done" => E.bool (isDone todo)
+               , "text" => E.string (getText todo)
+               , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
+               , "projectId" => (todo.projectId |> E.string)
+               , "contextId" => (todo.contextId |> E.string)
+               ]
+        )
 
 
 init createdAt text id =

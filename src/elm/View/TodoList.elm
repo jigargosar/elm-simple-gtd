@@ -3,6 +3,7 @@ module View.TodoList exposing (..)
 import Context
 import Dict exposing (Dict)
 import Dict.Extra as Dict
+import Document
 import Dom
 import EditMode
 import Html.Attributes.Extra exposing (..)
@@ -86,7 +87,7 @@ entityListItemView vc vm =
                     defaultView vm
 
             EditMode.EditContext etm ->
-                if etm.model.id == vm.id then
+                if Document.hasId vm.id etm.model then
                     editEntityView etm vm
                 else
                     defaultView vm

@@ -1,5 +1,6 @@
 module RunningTodo exposing (..)
 
+import Document
 import Time exposing (Time)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -26,7 +27,7 @@ type alias RunningTodo =
 
 
 start todo now =
-    RunningTodo (Todo.getId todo) (createStartedState now now) 0 now |> Just
+    RunningTodo (Document.getId todo) (createStartedState now now) 0 now |> Just
 
 
 getId =

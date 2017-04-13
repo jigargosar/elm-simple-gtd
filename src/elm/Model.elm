@@ -106,7 +106,7 @@ insertContextIfNotExist name =
 toggleSelection todo m =
     let
         todoId =
-            Todo.getId todo
+            Document.getId todo
 
         selection =
             m.selection

@@ -1,6 +1,7 @@
 module EditMode exposing (..)
 
 import Context
+import Document
 import Project
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -54,7 +55,7 @@ createNewTodoModel =
 
 
 createEditTodoModel todo projectName contextName =
-    { todoId = Todo.getId todo
+    { todoId = Document.getId todo
     , todoText = Todo.getText todo
     , projectName = projectName
     , contextName = contextName

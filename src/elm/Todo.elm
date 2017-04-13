@@ -293,10 +293,6 @@ isDone =
     (.done)
 
 
-getId =
-    (.id)
-
-
 getContextId =
     .contextId
 

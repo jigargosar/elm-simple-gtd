@@ -45,7 +45,7 @@ listItemView vc todo =
                 Nothing ->
                     notEditingView ()
     in
-        ( Todo.getId todo, view )
+        ( Document.getId todo, view )
 
 
 textValue : Json.Decode.Decoder String
@@ -154,7 +154,7 @@ default vc todo =
         vm =
             let
                 todoId =
-                    Todo.getId todo
+                    Document.getId todo
             in
                 { onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
                 , isSelected = Set.member todoId vc.selection

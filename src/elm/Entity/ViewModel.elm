@@ -2,6 +2,7 @@ module Entity.ViewModel exposing (..)
 
 import Context
 import Dict
+import Document
 import EditMode exposing (EditMode)
 import Lazy
 import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(Delete, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), EntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, ProjectView))
@@ -51,7 +52,7 @@ createViewModelList config model =
 createViewModel todoListByEntityId config entity =
     let
         id =
-            entity.id
+            Document.getId entity
 
         onEntityAction =
             Msg.OnEntityAction (config.entityWrapper entity)

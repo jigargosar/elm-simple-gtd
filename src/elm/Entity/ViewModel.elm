@@ -82,8 +82,8 @@ createViewModel todoListByEntityId config model =
         }
 
 
-createProjectViewModelList : Model.Types.Model -> List ViewModel
-createProjectViewModelList =
+projectList : Model.Types.Model -> List ViewModel
+projectList =
     createViewModelList
         { groupByFn = Todo.getProjectId
         , storeType = ProjectEntityStoreType
@@ -94,8 +94,8 @@ createProjectViewModelList =
         }
 
 
-createContextViewModelList : Model.Types.Model -> List ViewModel
-createContextViewModelList =
+contextList : Model.Types.Model -> List ViewModel
+contextList =
     createViewModelList
         { groupByFn = Todo.getContextId
         , storeType = ContextEntityStoreType

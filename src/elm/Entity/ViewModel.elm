@@ -48,19 +48,20 @@ createViewModelList config model =
             .|> createViewModel getTodoListWithGroupId config
 
 
-createViewModel todoListByEntityId config model =
+createViewModel todoListByEntityId config entity =
     let
+        --        _ = case config.editMode of
         onEntityAction =
-            Msg.OnEntityAction (config.entityWrapper model)
+            Msg.OnEntityAction (config.entityWrapper entity)
 
         todoList =
-            todoListByEntityId model.id
+            todoListByEntityId entity.id
 
         count =
             List.length todoList
 
         isNull =
-            config.isNull model
+            config.isNull entity
 
         onDeleteClicked =
             if isNull then
@@ -68,12 +69,12 @@ createViewModel todoListByEntityId config model =
             else
                 (onEntityAction Delete)
     in
-        { id = model.id
-        , name = model.name
+        { id = entity.id
+        , name = entity.name
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList
-        , onClick = Msg.SetView (config.getViewType model.id)
+        , onClick = Msg.SetView (config.getViewType entity.id)
         , onSettingsClicked = onEntityAction StartEditing
         , onDeleteClicked = onDeleteClicked
         , onSaveClicked = onEntityAction Save
@@ -83,19 +84,21 @@ createViewModel todoListByEntityId config model =
 
 
 projectList : Model.Types.Model -> List ViewModel
-projectList =
+projectList model =
     createViewModelList
         { groupByFn = Todo.getProjectId
+        , editMode = model.editMode
         , storeType = ProjectEntityStoreType
         , entityWrapper = ProjectEntity
         , nullEntity = Project.null
         , isNull = Project.isNull
         , getViewType = ProjectView
         }
+        model
 
 
 contextList : Model.Types.Model -> List ViewModel
-contextList =
+contextList model =
     createViewModelList
         { groupByFn = Todo.getContextId
         , storeType = ContextEntityStoreType
@@ -103,4 +106,6 @@ contextList =
         , nullEntity = Context.null
         , isNull = Context.isNull
         , getViewType = ContextView
+        , editMode = model
         }
+        model

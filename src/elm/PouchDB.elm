@@ -41,23 +41,23 @@ defaultRevision =
 
 
 type alias Document moreFields =
-    { moreFields | id : Id, rev : Revision, dirty : Bool }
+    { moreFields
+        | id : Id
+        , rev : Revision
+        , dirty : Bool
+        , deleted : Bool
+        , createdAt : Time
+        , modifiedAt : Time
+    }
 
 
-type alias HasTimeStamps otherFields =
-    { otherFields | createdAt : Time, modifiedAt : Time }
-
-
-documentFieldsDecoder : Decoder (Id -> Revision -> otherFields) -> Decoder otherFields
+documentFieldsDecoder : Decoder (Id -> Revision -> Time -> Time -> Bool -> otherFields) -> Decoder otherFields
 documentFieldsDecoder =
     D.required "_id" D.string
         >> D.required "_rev" D.string
-
-
-timeStampFieldsDecoder : Decoder (Time -> Time -> otherFields) -> Decoder otherFields
-timeStampFieldsDecoder =
-    D.optional "createdAt" (D.float) 0
+        >> D.optional "createdAt" (D.float) 0
         >> D.optional "modifiedAt" (D.float) 0
+        >> D.optional "deleted" D.bool False
 
 
 type alias Store x =

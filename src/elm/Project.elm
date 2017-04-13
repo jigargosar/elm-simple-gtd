@@ -17,15 +17,11 @@ import Time exposing (Time)
 
 
 type alias Record =
-    { name : Name, deleted : Bool }
-
-
-type alias OtherFields =
-    PouchDB.HasTimeStamps Record
+    { name : Name }
 
 
 type alias Project =
-    PouchDB.Document OtherFields
+    PouchDB.Document Record
 
 
 type alias Model =
@@ -45,7 +41,7 @@ type alias Id =
 
 
 type alias Store =
-    PouchDB.Store OtherFields
+    PouchDB.Store Record
 
 
 getEncodedProjectNames =
@@ -188,6 +184,4 @@ decoder : Decoder Project
 decoder =
     D.decode constructor
         |> PouchDB.documentFieldsDecoder
-        |> PouchDB.timeStampFieldsDecoder
-        |> D.optional "deleted" D.bool False
         |> D.required "name" D.string

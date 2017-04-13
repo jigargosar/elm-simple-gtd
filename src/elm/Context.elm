@@ -25,19 +25,15 @@ type alias Id =
 
 
 type alias Record =
-    { name : Name, deleted : Bool }
-
-
-type alias OtherFields =
-    PouchDB.HasTimeStamps Record
+    { name : Name }
 
 
 type alias Model =
-    PouchDB.Document OtherFields
+    PouchDB.Document Record
 
 
 type alias Store =
-    PouchDB.Store OtherFields
+    PouchDB.Store Record
 
 
 type alias Encoded =
@@ -76,8 +72,6 @@ decoder : Decoder Model
 decoder =
     D.decode constructor
         |> PouchDB.documentFieldsDecoder
-        |> PouchDB.timeStampFieldsDecoder
-        |> D.optional "deleted" D.bool False
         |> D.required "name" D.string
 
 

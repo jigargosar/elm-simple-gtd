@@ -31,22 +31,17 @@ type alias Text =
     String
 
 
-type alias TodoRecord =
+type alias Record =
     { done : Bool
     , text : Text
     , dueAt : Maybe Time
-    , deleted : Bool
     , projectId : Project.Id
     , contextId : Context.Id
     }
 
 
-type alias OtherFields =
-    PouchDB.HasTimeStamps TodoRecord
-
-
 type alias Model =
-    PouchDB.Document OtherFields
+    PouchDB.Document Record
 
 
 type alias ViewModel =
@@ -227,7 +222,7 @@ defaultDone =
     False
 
 
-todoConstructor id rev createdAt modifiedAt done text dueAt deleted projectId contextId =
+todoConstructor id rev createdAt modifiedAt deleted done text dueAt projectId contextId =
     { id = id
     , rev = rev
     , dirty = False
@@ -255,7 +250,6 @@ decoder : Decoder Model
 decoder =
     D.decode todoConstructor
         |> PouchDB.documentFieldsDecoder
-        |> PouchDB.timeStampFieldsDecoder
         |> todoRecordDecoder
 
 
@@ -285,10 +279,10 @@ init createdAt text id =
         PouchDB.defaultRevision
         createdAt
         createdAt
+        defaultDeleted
         defaultDone
         text
         defaultDueAt
-        defaultDeleted
         ""
         ""
 
@@ -384,4 +378,4 @@ storeGenerator =
 
 
 type alias Store =
-    PouchDB.Store OtherFields
+    PouchDB.Store Record

@@ -47,10 +47,6 @@ findTodoById id =
     Model.getTodoStore >> PouchDB.findById id
 
 
-findTodoEqualById todo =
-    Model.getTodoStore >> PouchDB.asList >> List.find (Document.equalById todo)
-
-
 type alias TodoContextViewModel =
     { name : String, todoList : List Todo.Model, count : Int, isEmpty : Bool }
 

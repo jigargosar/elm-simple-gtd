@@ -152,7 +152,7 @@ getActiveTodoList =
     .todoStore >> PouchDB.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 
 
-getActiveTodoGroupedBy fn =
+getActiveTodoListGroupedBy fn =
     getActiveTodoList >> Dict.Extra.groupBy (fn)
 
 

@@ -3,6 +3,7 @@ module View.Entity exposing (..)
 import Context
 import Dict
 import EditMode exposing (EditMode)
+import Lazy
 import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(Delete, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), EntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, ProjectView))
 import Msg exposing (Msg)
 import Todo
@@ -72,12 +73,11 @@ createVM todoListByEntityId modelConfig model =
 createProjectVMs : Model.Types.Model -> List ViewModel
 createProjectVMs model =
     let
+        dict =
+            Model.getActiveTodoListGroupedBy Todo.getProjectId model
+
         getTodoListByGroupId id =
-            let
-                dict =
-                    Model.getActiveTodoGroupedBy Todo.getProjectId model
-            in
-                dict |> Dict.get id ?= []
+            dict |> Dict.get id ?= []
 
         projectVMS =
             Model.getActiveEntityList ProjectEntityStoreType model
@@ -95,12 +95,11 @@ createProjectVMs model =
 createContextVMS : Model.Types.Model -> List ViewModel
 createContextVMS model =
     let
+        todoListDict =
+            Model.getActiveTodoListGroupedBy Todo.getContextId model
+
         todoListByGroupId id =
-            let
-                dict =
-                    Model.getActiveTodoGroupedBy Todo.getContextId model
-            in
-                dict |> Dict.get id ?= []
+            todoListDict |> Dict.get id ?= []
     in
         Model.getActiveEntityList ContextEntityStoreType model
             |> (::) Context.null

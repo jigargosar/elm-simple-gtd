@@ -50,17 +50,6 @@ createViewModelList config model =
 
 createViewModel todoListByEntityId config entity =
     let
-        _ =
-            case config.editMode of
-                EditMode.EditContext editModel ->
-                    1
-
-                EditMode.EditProject editModel ->
-                    1
-
-                _ ->
-                    1
-
         onEntityAction =
             Msg.OnEntityAction (config.entityWrapper entity)
 
@@ -102,7 +91,7 @@ projectList model =
         , nullEntity = Project.null
         , isNull = Project.isNull
         , getViewType = ProjectView
-        , editMode = Model.getMaybeEditModelForEntityType ProjectEntityStoreType model
+        , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityStoreType model
         }
         model
 
@@ -116,6 +105,6 @@ contextList model =
         , nullEntity = Context.null
         , isNull = Context.isNull
         , getViewType = ContextView
-        , editMode = Model.getMaybeEditModelForEntityType ContextEntityStoreType model
+        , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityStoreType model
         }
         model

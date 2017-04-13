@@ -41,12 +41,12 @@ appDrawerView contextVMs projectVMs m =
                 ([ item [ onClick (SetView GroupByContextView) ] [ text "Contexts" ]
                  , divider
                  ]
-                    ++ List.map projectOrContextItem contextVMs
+                    ++ List.map entityItem contextVMs
                     ++ [ divider
                        , projectsItemView m
                        , divider
                        ]
-                    ++ List.map projectOrContextItem projectVMs
+                    ++ List.map entityItem projectVMs
                     ++ [ divider
                        , binItemView m
                        , doneItemView m
@@ -72,8 +72,8 @@ doneItemView m =
     item [ onClick (SetView DoneView) ] [ text "Done" ]
 
 
-projectOrContextItem vm =
-    item [ class "", onClick vm.onNavigate ]
+entityItem vm =
+    item [ class "", onClick vm.navigateToEntityMsg ]
         ([ View.Shared.defaultBadge vm
          , itemBody [] []
          , hoverIcons vm

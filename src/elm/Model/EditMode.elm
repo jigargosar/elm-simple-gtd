@@ -27,8 +27,8 @@ setEditModelToEditTodo todo =
     updateEditMode (createEditTodoModel todo)
 
 
-setEditModeToEditEntity : Entity -> ModelF
-setEditModeToEditEntity entity =
+startEditingEntity : Entity -> ModelF
+startEditingEntity entity =
     setEditMode (createEntityEditMode entity)
 
 

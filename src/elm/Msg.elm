@@ -71,7 +71,6 @@ type Msg
     | OnKeyboardMsg Keyboard.Msg
     | OnKeyUp Keyboard.Key
     | OnEntityAction Entity EntityAction
-    | OnSettingsClicked Entity
 
 
 toCmds : List Msg -> Cmd Msg

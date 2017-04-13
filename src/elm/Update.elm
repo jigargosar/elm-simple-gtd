@@ -179,7 +179,7 @@ update msg =
                 OnEntityAction entity action ->
                     case ( entity, action ) of
                         ( _, StartEditing ) ->
-                            Return.map (Model.setEditModeToEditEntity entity)
+                            Return.map (Model.startEditingEntity entity)
                                 >> autoFocusPaperInputCmd
 
                         ( _, NameChanged newName ) ->
@@ -192,10 +192,6 @@ update msg =
 
                         _ ->
                             identity
-
-                OnSettingsClicked entity ->
-                    Return.map (Model.setEditModeToEditEntity entity)
-                        >> autoFocusPaperInputCmd
 
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)

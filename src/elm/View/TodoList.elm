@@ -103,7 +103,7 @@ defaultView vm =
         , itemBody [] []
         , div [ class "show-on-hover" ]
             [ iconButton
-                [ onClick vm.onSettingsClicked
+                [ onClick vm.startEditingMsg
                 , icon "settings"
                 ]
                 []

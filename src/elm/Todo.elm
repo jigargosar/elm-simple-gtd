@@ -8,7 +8,6 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Maybe.Extra as Maybe
-import PouchDB
 import Ext.Random as Random
 import Random.Pcg as Random exposing (Seed)
 import Toolkit.Operators exposing (..)
@@ -42,7 +41,7 @@ type alias Record =
 
 
 type alias Model =
-    PouchDB.Document Record
+    Document.Document Record
 
 
 type alias ViewModel =
@@ -69,17 +68,17 @@ type alias ModelF =
     Model -> Model
 
 
-getRev : Model -> PouchDB.Revision
+getRev : Model -> Revision
 getRev =
     (.rev)
 
 
-setRev : PouchDB.Revision -> ModelF
+setRev : Revision -> ModelF
 setRev rev model =
     { model | rev = rev }
 
 
-updateRev : (Model -> PouchDB.Revision) -> ModelF
+updateRev : (Model -> Revision) -> ModelF
 updateRev updater model =
     setRev (updater model) model
 
@@ -249,18 +248,18 @@ todoRecordDecoder =
 decoder : Decoder Model
 decoder =
     D.decode todoConstructor
-        |> PouchDB.documentFieldsDecoder
+        |> Document.documentFieldsDecoder
         |> todoRecordDecoder
 
 
 copyTodo createdAt todo id =
-    { todo | id = id, rev = PouchDB.defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
+    { todo | id = id, rev = Store.defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
 
 
 encode : Model -> Encoded
 encode todo =
     E.object
-        ((PouchDB.encode todo)
+        ((Document.encode todo)
             ++ [ "done" => E.bool (isDone todo)
                , "text" => E.string (getText todo)
                , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
@@ -273,7 +272,7 @@ encode todo =
 init createdAt text id =
     todoConstructor
         id
-        PouchDB.defaultRevision
+        Store.defaultRevision
         createdAt
         createdAt
         defaultDeleted
@@ -363,8 +362,8 @@ modifiedAtInWords now =
 
 storeGenerator : List Encoded -> Random.Generator Store
 storeGenerator =
-    PouchDB.generator "todo-db" encode decoder
+    Store.generator "todo-db" encode decoder
 
 
 type alias Store =
-    PouchDB.Store Record
+    Store.Store Record

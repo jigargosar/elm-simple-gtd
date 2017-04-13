@@ -7,7 +7,6 @@ import Document
 import Ext.Random
 import List.Extra as List
 import Maybe.Extra as Maybe
-import PouchDB
 import Project
 import Random.Pcg as Random
 import Time exposing (Time)
@@ -22,7 +21,7 @@ import Types exposing (..)
 
 
 getFilteredTodoList =
-    apply2 ( getCurrentTodoListFilter, Model.getTodoStore >> PouchDB.asList )
+    apply2 ( getCurrentTodoListFilter, Model.getTodoStore >> Store.asList )
         >> uncurry List.filter
         >> List.sortBy (Todo.getModifiedAt >> negate)
 
@@ -44,7 +43,7 @@ getCurrentTodoListFilter model =
 
 findTodoById : Todo.Id -> Model -> Maybe Todo.Model
 findTodoById id =
-    Model.getTodoStore >> PouchDB.findById id
+    Model.getTodoStore >> Store.findById id
 
 
 type alias TodoContextViewModel =
@@ -54,7 +53,7 @@ type alias TodoContextViewModel =
 groupByTodoContextViewModel : Model -> List TodoContextViewModel
 groupByTodoContextViewModel =
     Model.getTodoStore
-        >> PouchDB.asList
+        >> Store.asList
         >> Todo.rejectAnyPass [ Todo.isDeleted, Todo.isDone ]
         --        >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
         >> Dict.Extra.groupBy (\_ -> "Inbox")
@@ -78,7 +77,7 @@ updateTodo : List Todo.UpdateAction -> Todo.Model -> ModelF
 updateTodo action todo =
     apply2With ( Model.getNow, Model.getTodoStore )
         ((Todo.update action # todo)
-            >> PouchDB.update
+            >> Store.update
             >>> Model.setTodoStore
         )
 
@@ -102,10 +101,10 @@ addNewTodo text now =
     insertTodoByIdConstructor (Todo.init now text)
 
 
-insertTodoByIdConstructor : (PouchDB.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
+insertTodoByIdConstructor : (Store.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodoByIdConstructor constructWithId =
     applyWith (Model.getTodoStore)
-        (PouchDB.insert (constructWithId) >> setTodoStoreFromTuple)
+        (Store.insert (constructWithId) >> setTodoStoreFromTuple)
 
 
 setTodoStoreFromTuple tuple model =

@@ -28,7 +28,6 @@ import Return
 import RouteUrl exposing (RouteUrlProgram)
 import Task
 import Time exposing (Time)
-import PouchDB
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
@@ -278,7 +277,7 @@ persist lens =
     Return.andThen
         (\m ->
             lens.get m
-                |> PouchDB.persist
+                |> Store.persist
                 |> Tuple.mapFirst (lens.set # m)
         )
 

@@ -1,8 +1,8 @@
 module Context exposing (..)
 
 import Dict
-import Document
-import PouchDB
+import Document exposing (Id, Revision)
+import Store
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -21,27 +21,23 @@ type alias Name =
     String
 
 
-type alias Id =
-    PouchDB.Id
-
-
 type alias Record =
     { name : Name }
 
 
 type alias Model =
-    PouchDB.Document Record
+    Document.Document Record
 
 
 type alias Store =
-    PouchDB.Store Record
+    Store.Store Record
 
 
 type alias Encoded =
     E.Value
 
 
-constructor : Id -> PouchDB.Revision -> Time -> Time -> Bool -> Name -> Model
+constructor : Id -> Revision -> Time -> Time -> Bool -> Name -> Model
 constructor id rev createdAt modifiedAt deleted name =
     { id = id
     , rev = rev
@@ -60,7 +56,7 @@ init name now id =
 encoder : Model -> Encoded
 encoder context =
     E.object
-        ((PouchDB.encode context)
+        ((Document.encode context)
             ++ [ "name" => E.string context.name
                ]
         )
@@ -69,7 +65,7 @@ encoder context =
 decoder : Decoder Model
 decoder =
     D.decode constructor
-        |> PouchDB.documentFieldsDecoder
+        |> Document.documentFieldsDecoder
         |> D.required "name" D.string
 
 
@@ -100,7 +96,7 @@ setDeleted deleted model =
 
 storeGenerator : List Encoded -> Random.Generator Store
 storeGenerator =
-    PouchDB.generator "context-db" encoder decoder
+    Store.generator "context-db" encoder decoder
 
 
 insertIfNotExistByName name_ now context =
@@ -114,23 +110,23 @@ insertIfNotExistByName name_ now context =
             findByName name context
                 |> Maybe.unpack
                     (\_ ->
-                        PouchDB.insert (init name now) context
+                        Store.insert (init name now) context
                             |> Tuple.second
                     )
                     (\_ -> context)
 
 
 byIdDict =
-    PouchDB.map (apply2 ( Document.getId, identity )) >> Dict.fromList
+    Store.map (apply2 ( Document.getId, identity )) >> Dict.fromList
 
 
 findNameById id =
-    PouchDB.findById id >>? getName
+    Store.findById id >>? getName
 
 
 findByName name =
-    PouchDB.findBy (getName >> equals (String.trim name))
+    Store.findBy (getName >> equals (String.trim name))
 
 
 getEncodedNames =
-    PouchDB.map (.name >> E.string) >> E.list
+    Store.map (.name >> E.string) >> E.list

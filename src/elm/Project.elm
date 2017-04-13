@@ -1,9 +1,9 @@
 module Project exposing (..)
 
 import Dict
-import Document
+import Document exposing (Document, Id, Revision)
 import Maybe.Extra
-import PouchDB
+import Store
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -22,7 +22,7 @@ type alias Record =
 
 
 type alias Project =
-    PouchDB.Document Record
+    Document Record
 
 
 type alias Model =
@@ -37,33 +37,29 @@ type alias Name =
     String
 
 
-type alias Id =
-    PouchDB.Id
-
-
 type alias Store =
-    PouchDB.Store Record
+    Store.Store Record
 
 
 getEncodedProjectNames =
-    PouchDB.map (getName >> E.string) >> E.list
+    Store.map (getName >> E.string) >> E.list
 
 
 getProjectIdToNameDict =
-    PouchDB.map (apply2 ( Document.getId, getName )) >> Dict.fromList
+    Store.map (apply2 ( Document.getId, getName )) >> Dict.fromList
 
 
 findNameById id =
-    PouchDB.findById id >>? getName
+    Store.findById id >>? getName
 
 
 storeGenerator : List Encoded -> Random.Generator Store
 storeGenerator =
-    PouchDB.generator "project-db" encode decoder
+    Store.generator "project-db" encode decoder
 
 
 findByName projectName =
-    PouchDB.findBy (nameEquals (String.trim projectName))
+    Store.findBy (nameEquals (String.trim projectName))
 
 
 insertIfNotExistByName projectName now store =
@@ -73,7 +69,7 @@ insertIfNotExistByName projectName now store =
         findByName projectName store
             |> Maybe.Extra.unpack
                 (\_ ->
-                    PouchDB.insert (init projectName now) store
+                    Store.insert (init projectName now) store
                         |> Tuple.second
                 )
                 (\_ -> store)
@@ -93,17 +89,17 @@ updateId updater model =
     setId (updater model) model
 
 
-getRev : Model -> PouchDB.Revision
+getRev : Model -> Revision
 getRev =
     (.rev)
 
 
-setRev : PouchDB.Revision -> ModelF
+setRev : Revision -> ModelF
 setRev rev model =
     { model | rev = rev }
 
 
-updateRev : (Model -> PouchDB.Revision) -> ModelF
+updateRev : (Model -> Revision) -> ModelF
 updateRev updater model =
     setRev (updater model) model
 
@@ -162,11 +158,11 @@ type alias Encoded =
 
 encode : Project -> Encoded
 encode project =
-    E.object ((PouchDB.encode project) ++ [ "name" => E.string (getName project) ])
+    E.object ((Document.encode project) ++ [ "name" => E.string (getName project) ])
 
 
 decoder : Decoder Project
 decoder =
     D.decode constructor
-        |> PouchDB.documentFieldsDecoder
+        |> Document.documentFieldsDecoder
         |> D.required "name" D.string

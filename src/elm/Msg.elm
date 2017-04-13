@@ -6,7 +6,6 @@ import EditMode exposing (EditTodoModel)
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Model.Types exposing (..)
-import PouchDB
 import Project
 import Return
 import RunningTodo exposing (RunningTodo)

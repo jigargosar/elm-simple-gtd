@@ -8,7 +8,6 @@ import Ext.Keyboard as Keyboard
 import Model.Internal exposing (..)
 import Model.TodoStore
 import Msg exposing (Return)
-import PouchDB
 import Project
 import Project
 import Project
@@ -127,7 +126,7 @@ getMaybeSelectedTodo m =
             m.selection
     in
         if Set.size selection == 1 then
-            Set.toList selection |> List.head ?+> (PouchDB.findById # m.todoStore)
+            Set.toList selection |> List.head ?+> (Store.findById # m.todoStore)
         else
             Nothing
 
@@ -158,11 +157,11 @@ getMaybeEditModelForEntityType entityType model =
 
 
 getActiveEntityList =
-    getEntityStore >>> PouchDB.asList
+    getEntityStore >>> Store.asList
 
 
 getActiveTodoList =
-    .todoStore >> PouchDB.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
+    .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 
 
 getActiveTodoListGroupedBy fn =

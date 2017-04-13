@@ -5,7 +5,6 @@ import EditMode exposing (EditMode, EditTodoModel)
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model exposing (..)
-import PouchDB
 import Project
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -50,14 +49,14 @@ deleteEntity entity model =
             project
                 |> Context.setDeleted True
                 |> Context.setModifiedAt model.now
-                |> (PouchDB.update # model.contextStore)
+                |> (Store.update # model.contextStore)
                 |> (setContextStore # model)
 
         ContextEntity context ->
             context
                 |> Project.setDeleted True
                 |> Project.setModifiedAt model.now
-                |> (PouchDB.update # model.projectStore)
+                |> (Store.update # model.projectStore)
                 |> (setProjectStore # model)
 
 
@@ -67,14 +66,14 @@ saveEditModeEntity model =
             ecm.model
                 |> Context.setName ecm.name
                 |> Context.setModifiedAt model.now
-                |> (PouchDB.update # model.contextStore)
+                |> (Store.update # model.contextStore)
                 |> (setContextStore # model)
 
         EditMode.EditProject epm ->
             epm.model
                 |> Project.setName epm.name
                 |> Project.setModifiedAt model.now
-                |> (PouchDB.update # model.projectStore)
+                |> (Store.update # model.projectStore)
                 |> (setProjectStore # model)
 
         _ ->

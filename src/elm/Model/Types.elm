@@ -3,7 +3,6 @@ module Model.Types exposing (..)
 import Context
 import EditMode exposing (EditMode)
 import Ext.Keyboard as Keyboard
-import PouchDB
 import Project
 import Project
 import Random.Pcg exposing (Seed)

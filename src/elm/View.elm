@@ -13,7 +13,7 @@ import Model.EditMode
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (Msg)
 import Set
-import View.Entity
+import Entity.ViewModel
 import View.TodoList exposing (..)
 import View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
@@ -46,10 +46,10 @@ appView m =
 appDrawerLayoutView m =
     let
         contextVMs =
-            View.Entity.createContextViewModelList m
+            Entity.ViewModel.createContextViewModelList m
 
         projectVMs =
-            View.Entity.createProjectViewModelList m
+            Entity.ViewModel.createProjectViewModelList m
     in
         App.drawerLayout []
             [ appDrawerView contextVMs projectVMs m

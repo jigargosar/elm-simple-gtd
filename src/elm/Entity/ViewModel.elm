@@ -1,4 +1,4 @@
-module View.Entity exposing (..)
+module Entity.ViewModel exposing (..)
 
 import Context
 import Dict

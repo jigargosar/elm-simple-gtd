@@ -305,10 +305,6 @@ equalById todo1 todo2 =
     getId todo1 == getId todo2
 
 
-hasId todoId =
-    getId >> equals todoId
-
-
 isNotDeleted =
     getDeleted >> not
 

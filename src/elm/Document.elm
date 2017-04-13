@@ -12,5 +12,5 @@ getId =
     .id
 
 
-idEquals id =
+hasId id =
     getId >> equals id

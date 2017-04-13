@@ -3,6 +3,7 @@ module View.Todo exposing (..)
 import Context
 import Date.Distance exposing (inWords)
 import Dict
+import Document
 import Dom
 import EditMode exposing (EditTodoModel)
 import Ext.Decode exposing (traceDecoder)
@@ -36,7 +37,7 @@ listItemView vc todo =
         view =
             case vc.maybeEditTodoModel of
                 Just etm ->
-                    if Todo.hasId etm.todoId todo then
+                    if Document.hasId etm.todoId todo then
                         (edit (createEditTodoViewModel vc etm))
                     else
                         notEditingView ()

@@ -76,7 +76,7 @@ createProjectVMs model =
         dict =
             Model.getActiveTodoListGroupedBy Todo.getProjectId model
 
-        getTodoListByGroupId id =
+        getTodoListWithGroupId id =
             dict |> Dict.get id ?= []
 
         projectVMS =
@@ -89,7 +89,7 @@ createProjectVMs model =
             , getViewType = ProjectView
             }
     in
-        projectVMS .|> (\model -> createVM getTodoListByGroupId (vmConfig model) model)
+        projectVMS .|> (\model -> createVM getTodoListWithGroupId (vmConfig model) model)
 
 
 createContextVMS : Model.Types.Model -> List ViewModel
@@ -98,13 +98,13 @@ createContextVMS model =
         todoListDict =
             Model.getActiveTodoListGroupedBy Todo.getContextId model
 
-        todoListByGroupId id =
+        getTodoListWithGroupId id =
             todoListDict |> Dict.get id ?= []
     in
         Model.getActiveEntityList ContextEntityStoreType model
             |> (::) Context.null
             .|> (\model ->
-                    createVM todoListByGroupId
+                    createVM getTodoListWithGroupId
                         { onEntityAction = Msg.OnEntityAction (ContextEntity model)
                         , isNull = Context.isNull
                         , getViewType = ContextView

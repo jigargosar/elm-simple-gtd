@@ -13,10 +13,15 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import String.Extra
+import Time exposing (Time)
+
+
+type alias Record =
+    { name : Name, deleted : Bool }
 
 
 type alias OtherFields =
-    PouchDB.HasTimeStamps { name : Name, deleted : Bool }
+    PouchDB.HasTimeStamps Record
 
 
 type alias Project =
@@ -64,17 +69,17 @@ findByName projectName =
     PouchDB.findBy (nameEquals (String.trim projectName))
 
 
-insertIfNotExistByName projectName now m =
+insertIfNotExistByName projectName now store =
     if (String.Extra.isBlank projectName) then
-        m
+        store
     else
-        findByName projectName m
+        findByName projectName store
             |> Maybe.Extra.unpack
                 (\_ ->
-                    PouchDB.insert (init projectName now) m
+                    PouchDB.insert (init projectName now) store
                         |> Tuple.second
                 )
-                (\_ -> m)
+                (\_ -> store)
 
 
 nameEquals name =
@@ -141,20 +146,22 @@ updateName updater model =
 constructor id rev createdAt modifiedAt deleted name =
     { id = id
     , rev = rev
-    , dirty = False
-    , name = name
     , createdAt = createdAt
     , modifiedAt = modifiedAt
+    , deleted = deleted
+    , dirty = False
+    , name = name
     }
 
 
+init : Name -> Time -> Id -> Model
 init name now id =
     constructor id "" now now False name
 
 
 null : Model
 null =
-    constructor "" "" 0 0 "<No Project>"
+    constructor "" "" 0 0 False "<No Project>"
 
 
 isNull =
@@ -182,5 +189,5 @@ decoder =
     D.decode constructor
         |> PouchDB.documentFieldsDecoder
         |> PouchDB.timeStampFieldsDecoder
-        |> D.optional "deleted" D.bool
+        |> D.optional "deleted" D.bool False
         |> D.required "name" D.string

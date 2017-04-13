@@ -61,13 +61,14 @@ init name now id =
 
 
 encoder : Model -> Encoded
-encoder context =
+encoder model =
     E.object
-        [ "_id" => E.string context.id
-        , "_rev" => E.string context.rev
-        , "name" => E.string context.name
-        , "createdAt" => E.int (context.createdAt |> round)
-        , "modifiedAt" => E.int (context.modifiedAt |> round)
+        [ "_id" => E.string model.id
+        , "_rev" => E.string model.rev
+        , "name" => E.string model.name
+        , "deleted" => E.bool model.deleted
+        , "createdAt" => E.int (model.createdAt |> round)
+        , "modifiedAt" => E.int (model.modifiedAt |> round)
         ]
 
 

@@ -74,7 +74,7 @@ createViewModel todoListByEntityId config entity =
         maybeEditModel =
             config.maybeEditModel
                 ?+> (\editModel ->
-                        if editModel.model.id == id then
+                        if editModel.id == id then
                             Just editModel
                         else
                             Nothing

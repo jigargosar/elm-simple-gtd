@@ -193,9 +193,6 @@ update msg =
                             Return.map (Model.deleteEntity entity)
                                 >> andThenUpdate DeactivateEditingMode
 
-                        _ ->
-                            identity
-
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)
                         (\editMode ->

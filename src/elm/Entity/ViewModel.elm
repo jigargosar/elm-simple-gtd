@@ -24,6 +24,7 @@ type alias ViewModel =
     , isEmpty : Bool
     , count : Int
     , navigateToEntityMsg : Msg
+    , startEditingMsg:Msg
     , onDeleteClicked : Msg
     , onSettingsClicked : Msg
     , onSaveClicked : Msg
@@ -86,6 +87,7 @@ createViewModel todoListByEntityId config entity =
         , isEmpty = count == 0
         , count = List.length todoList
         , navigateToEntityMsg = Msg.SetView (config.getViewType id)
+        , startEditingMsg = onEntityAction StartEditing
         , onSettingsClicked = onEntityAction StartEditing
         , onDeleteClicked = onDeleteClicked
         , onSaveClicked = onEntityAction Save

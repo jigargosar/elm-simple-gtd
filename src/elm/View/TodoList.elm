@@ -98,7 +98,7 @@ entityListItemView vc vm =
 
 
 defaultView vm =
-    item []
+    item [ onClick vm.startEditingMsg ]
         [ View.Shared.defaultBadge vm
         , itemBody [] []
         , div [ class "show-on-hover" ]

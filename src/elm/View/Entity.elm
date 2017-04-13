@@ -41,9 +41,6 @@ type alias ModelConfig a =
 
 createVM todoListByEntityId modelConfig model =
     let
-        entity =
-            modelConfig.createEntity model
-
         todoList =
             todoListByEntityId model.id
 
@@ -57,18 +54,18 @@ createVM todoListByEntityId modelConfig model =
             if isNull then
                 (Msg.NoOp)
             else
-                (Msg.OnEntityAction entity Delete)
+                (modelConfig.onEntityAction Delete)
     in
         { id = model.id
-        , name = modelConfig.getName model
+        , name = model.name
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList
         , onClick = Msg.SetView (modelConfig.getViewType model.id)
-        , onSettingsClicked = (Msg.OnEntityAction entity StartEditing)
+        , onSettingsClicked = modelConfig.onEntityAction StartEditing
         , onDeleteClicked = onDeleteClicked
-        , onSaveClicked = (Msg.OnEntityAction entity Save)
-        , onNameChanged = NameChanged >> Msg.OnEntityAction entity
+        , onSaveClicked = modelConfig.onEntityAction Save
+        , onNameChanged = NameChanged >> modelConfig.onEntityAction
         }
 
 
@@ -86,21 +83,19 @@ createProjectVMs model =
             Model.getActiveEntityList ProjectEntityStoreType model
                 |> (::) Project.null
 
-        vmConfig =
-            { createEntity = ProjectEntity
-            , getId = Project.getId
+        vmConfig model =
+            { onEntityAction = Msg.OnEntityAction (ProjectEntity model)
             , isNull = Project.isNull
-            , getName = Project.getName
             , getViewType = ProjectView
             }
     in
-        projectVMS .|> createVM getTodoListByGroupId vmConfig
+        projectVMS .|> (\model -> createVM getTodoListByGroupId (vmConfig model) model)
 
 
 createContextVMS : Model.Types.Model -> List ViewModel
 createContextVMS model =
     let
-        todoListByEntityId id =
+        todoListByGroupId id =
             let
                 dict =
                     Model.getActiveTodoGroupedBy Todo.getContextId model
@@ -109,10 +104,11 @@ createContextVMS model =
     in
         Model.getActiveEntityList ContextEntityStoreType model
             |> (::) Context.null
-            .|> createVM todoListByEntityId
-                    { createEntity = ContextEntity
-                    , getId = Context.getId
-                    , isNull = Context.isNull
-                    , getName = Context.getName
-                    , getViewType = ContextView
-                    }
+            .|> (\model ->
+                    createVM todoListByGroupId
+                        { onEntityAction = Msg.OnEntityAction (ContextEntity model)
+                        , isNull = Context.isNull
+                        , getViewType = ContextView
+                        }
+                        model
+                )

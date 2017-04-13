@@ -79,7 +79,7 @@ createProjectViewModelList model =
         getTodoListWithGroupId id =
             dict |> Dict.get id ?= []
 
-        projectVMS =
+        projects =
             Model.getActiveEntityList ProjectEntityStoreType model
                 |> (::) Project.null
 
@@ -89,7 +89,10 @@ createProjectViewModelList model =
             , getViewType = ProjectView
             }
     in
-        projectVMS .|> (\model -> createViewModel getTodoListWithGroupId (vmConfig model) model)
+        projects
+            .|> (\model ->
+                    createViewModel getTodoListWithGroupId (vmConfig model) model
+                )
 
 
 createContextViewModelList : Model.Types.Model -> List ViewModel
@@ -101,14 +104,17 @@ createContextViewModelList model =
         getTodoListWithGroupId id =
             todoListDict |> Dict.get id ?= []
 
+        contexts =
+            Model.getActiveEntityList ContextEntityStoreType model
+                |> (::) Context.null
+
         vmConfig model =
             { onEntityAction = Msg.OnEntityAction (ContextEntity model)
             , isNull = Context.isNull
             , getViewType = ContextView
             }
     in
-        Model.getActiveEntityList ContextEntityStoreType model
-            |> (::) Context.null
+        contexts
             .|> (\model ->
                     createViewModel getTodoListWithGroupId (vmConfig model) model
                 )

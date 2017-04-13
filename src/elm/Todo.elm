@@ -241,7 +241,6 @@ todoRecordDecoder =
     D.optional "done" D.bool defaultDone
         >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
-        >> D.optional "deleted" D.bool defaultDeleted
         >> D.optional "projectId" D.string ""
         >> D.optional "contextId" D.string ""
 

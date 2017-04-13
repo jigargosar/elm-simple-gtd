@@ -4,6 +4,7 @@ import Context
 import Dict exposing (Dict)
 import EditMode exposing (EditMode, EditTodoModel)
 import Html exposing (Html, div, text)
+import Html.Attributes exposing (tabindex)
 import Html.Attributes.Extra exposing (intProperty)
 import Json.Encode
 import Model
@@ -53,5 +54,5 @@ defaultBadge : { x | name : String, count : Int } -> Html msg
 defaultBadge vm =
     div []
         [ div [] [ text vm.name ]
-        , badge [ intProperty "label" (vm.count) ] []
+        , badge [ tabindex -1, intProperty "label" (vm.count) ] []
         ]

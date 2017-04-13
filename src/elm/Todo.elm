@@ -3,6 +3,7 @@ module Todo exposing (..)
 import Context
 import Date
 import Date.Distance exposing (defaultConfig)
+import Document
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -191,10 +192,10 @@ update actions now =
                     setProjectId projectId model
 
                 SetContext context ->
-                    innerUpdate (SetContextId (context |> Context.getId)) model
+                    innerUpdate (SetContextId (context |> Document.getId)) model
 
                 SetProject project ->
-                    setProjectId (Project.getId project) model
+                    setProjectId (Document.getId project) model
 
                 ToggleDone ->
                     updateDone (getDone >> not) model

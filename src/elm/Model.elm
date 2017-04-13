@@ -2,6 +2,7 @@ module Model exposing (..)
 
 import Context
 import Dict.Extra
+import Document
 import EditMode exposing (EditTodoModel)
 import Ext.Keyboard as Keyboard
 import Model.Internal exposing (..)
@@ -147,10 +148,10 @@ getEntityStore entityType =
 getMaybeEditModelForEntityType entityType model =
     case ( entityType, model.editMode ) of
         ( ProjectEntityType, EditMode.EditProject editModel ) ->
-            Just { id = editModel.model.id, name = editModel.model.name }
+            Just { id = Document.getId editModel.model, name = editModel.model.name }
 
         ( ContextEntityType, EditMode.EditContext editModel ) ->
-            Just { id = editModel.model.id, name = editModel.model.name }
+            Just { id = Document.getId editModel.model, name = editModel.model.name }
 
         _ ->
             Nothing
@@ -174,8 +175,8 @@ updateTodoFromEditTodoModel { contextName, projectName, todoText, todoId } =
         (\maybeContext maybeProject ->
             Model.TodoStore.updateTodoById
                 [ Todo.SetText todoText
-                , Todo.SetProjectId (maybeProject ?|> Project.getId ?= "")
-                , Todo.SetContextId (maybeContext ?|> Context.getId ?= "")
+                , Todo.SetProjectId (maybeProject ?|> Document.getId ?= "")
+                , Todo.SetContextId (maybeContext ?|> Document.getId ?= "")
                 ]
                 todoId
         )

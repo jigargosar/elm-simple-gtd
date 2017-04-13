@@ -1,6 +1,7 @@
 module Project exposing (..)
 
 import Dict
+import Document
 import Maybe.Extra
 import PouchDB
 import Toolkit.Helpers exposing (..)
@@ -49,7 +50,7 @@ getEncodedProjectNames =
 
 
 getProjectIdToNameDict =
-    PouchDB.map (apply2 ( getId, getName )) >> Dict.fromList
+    PouchDB.map (apply2 ( Document.getId, getName )) >> Dict.fromList
 
 
 findNameById id =
@@ -80,15 +81,6 @@ insertIfNotExistByName projectName now store =
 
 nameEquals name =
     getName >> equals name
-
-
-idEquals id =
-    getId >> equals id
-
-
-getId : Model -> Id
-getId =
-    (.id)
 
 
 setId : Id -> ModelF

@@ -1,6 +1,7 @@
 module Context exposing (..)
 
 import Dict
+import Document
 import PouchDB
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -85,10 +86,6 @@ getName =
     .name
 
 
-getId =
-    .id
-
-
 setName name model =
     { model | name = name }
 
@@ -124,7 +121,7 @@ insertIfNotExistByName name_ now context =
 
 
 byIdDict =
-    PouchDB.map (apply2 ( .id, identity )) >> Dict.fromList
+    PouchDB.map (apply2 ( Document.getId, identity )) >> Dict.fromList
 
 
 findNameById id =

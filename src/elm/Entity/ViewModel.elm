@@ -50,11 +50,14 @@ createViewModelList config model =
 
 createViewModel todoListByEntityId config entity =
     let
+        id =
+            entity.id
+
         onEntityAction =
             Msg.OnEntityAction (config.entityWrapper entity)
 
         todoList =
-            todoListByEntityId entity.id
+            todoListByEntityId id
 
         count =
             List.length todoList
@@ -67,13 +70,22 @@ createViewModel todoListByEntityId config entity =
                 (Msg.NoOp)
             else
                 (onEntityAction Delete)
+
+        maybeEditModel =
+            config.maybeEditModel
+                ?+> (\editModel ->
+                        if editModel.model.id == id then
+                            Just editModel
+                        else
+                            Nothing
+                    )
     in
-        { id = entity.id
+        { id = id
         , name = entity.name
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList
-        , onClick = Msg.SetView (config.getViewType entity.id)
+        , onClick = Msg.SetView (config.getViewType id)
         , onSettingsClicked = onEntityAction StartEditing
         , onDeleteClicked = onDeleteClicked
         , onSaveClicked = onEntityAction Save

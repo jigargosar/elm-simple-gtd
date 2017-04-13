@@ -28,6 +28,7 @@ type alias ViewModel =
     , onSettingsClicked : Msg
     , onSaveClicked : Msg
     , onNameChanged : String -> Msg
+    , onCancelClicked : Msg
     }
 
 

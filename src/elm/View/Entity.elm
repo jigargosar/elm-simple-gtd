@@ -100,14 +100,15 @@ createContextViewModelList model =
 
         getTodoListWithGroupId id =
             todoListDict |> Dict.get id ?= []
+
+        vmConfig model =
+            { onEntityAction = Msg.OnEntityAction (ContextEntity model)
+            , isNull = Context.isNull
+            , getViewType = ContextView
+            }
     in
         Model.getActiveEntityList ContextEntityStoreType model
             |> (::) Context.null
             .|> (\model ->
-                    createViewModel getTodoListWithGroupId
-                        { onEntityAction = Msg.OnEntityAction (ContextEntity model)
-                        , isNull = Context.isNull
-                        , getViewType = ContextView
-                        }
-                        model
+                    createViewModel getTodoListWithGroupId (vmConfig model) model
                 )

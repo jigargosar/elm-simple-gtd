@@ -58,7 +58,7 @@ createViewModel todoListByEntityId config model =
             if isNull then
                 (Msg.NoOp)
             else
-                (config.onEntityAction Delete)
+                (onEntityAction Delete)
     in
         { id = model.id
         , name = model.name
@@ -66,10 +66,10 @@ createViewModel todoListByEntityId config model =
         , isEmpty = count == 0
         , count = List.length todoList
         , onClick = Msg.SetView (config.getViewType model.id)
-        , onSettingsClicked = config.onEntityAction StartEditing
+        , onSettingsClicked = onEntityAction StartEditing
         , onDeleteClicked = onDeleteClicked
-        , onSaveClicked = config.onEntityAction Save
-        , onNameChanged = NameChanged >> config.onEntityAction
+        , onSaveClicked = onEntityAction Save
+        , onNameChanged = NameChanged >> onEntityAction
         }
 
 
@@ -88,7 +88,6 @@ createProjectViewModelList model =
 
         vmConfig model =
             { entityWrapper = ProjectEntity
-            , onEntityAction = Msg.OnEntityAction (ProjectEntity model)
             , isNull = Project.isNull
             , getViewType = ProjectView
             }
@@ -99,7 +98,7 @@ createProjectViewModelList model =
                 )
 
 
-getViewModelList config model =
+createViewModelList config model =
     let
         todoListDict =
             Model.getActiveTodoListGroupedBy config.groupByFn model
@@ -110,41 +109,18 @@ getViewModelList config model =
         entityList =
             Model.getActiveEntityList config.storeType model
                 |> (::) config.nullEntity
-
-        vmConfig model =
-            { entityWrapper = config.entityWrapper
-            , onEntityAction = Msg.OnEntityAction (ContextEntity model)
-            , isNull = config.isNull
-            , getViewType = config.viewType
-            }
     in
         entityList
-            .|> (\model ->
-                    createViewModel getTodoListWithGroupId (vmConfig model) model
-                )
+            .|> createViewModel getTodoListWithGroupId config
 
 
 createContextViewModelList : Model.Types.Model -> List ViewModel
-createContextViewModelList model =
-    let
-        todoListDict =
-            Model.getActiveTodoListGroupedBy Todo.getContextId model
-
-        getTodoListWithGroupId id =
-            todoListDict |> Dict.get id ?= []
-
-        contexts =
-            Model.getActiveEntityList ContextEntityStoreType model
-                |> (::) Context.null
-
-        vmConfig model =
-            { entityWrapper = ContextEntity
-            , onEntityAction = Msg.OnEntityAction (ContextEntity model)
-            , isNull = Context.isNull
-            , getViewType = ContextView
-            }
-    in
-        contexts
-            .|> (\model ->
-                    createViewModel getTodoListWithGroupId (vmConfig model) model
-                )
+createContextViewModelList =
+    createViewModelList
+        { groupByFn = Todo.getContextId
+        , storeType = ContextEntityStoreType
+        , entityWrapper = ContextEntity
+        , nullEntity = Context.null
+        , isNull = Context.isNull
+        , getViewType = ContextView
+        }

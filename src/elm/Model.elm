@@ -144,6 +144,18 @@ getEntityStore entityStoreType =
             .contextStore
 
 
+getMaybeEditModelForEntityType entityType model =
+    case ( entityType, model.editMode ) of
+        ( ProjectEntityType, EditMode.EditProject editModel ) ->
+            Just editModel
+
+        ( ContextEntityType, EditMode.EditContext editModel ) ->
+            Just editModel
+
+        _ ->
+            Nothing
+
+
 getActiveEntityList =
     getEntityStore >>> PouchDB.asList
 

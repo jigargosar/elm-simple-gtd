@@ -50,7 +50,17 @@ createViewModelList config model =
 
 createViewModel todoListByEntityId config entity =
     let
-        --        _ = case config.editMode of
+        _ =
+            case config.editMode of
+                EditMode.EditContext editModel ->
+                    1
+
+                EditMode.EditProject editModel ->
+                    1
+
+                _ ->
+                    1
+
         onEntityAction =
             Msg.OnEntityAction (config.entityWrapper entity)
 
@@ -87,12 +97,12 @@ projectList : Model.Types.Model -> List ViewModel
 projectList model =
     createViewModelList
         { groupByFn = Todo.getProjectId
-        , editMode = model.editMode
         , storeType = ProjectEntityStoreType
         , entityWrapper = ProjectEntity
         , nullEntity = Project.null
         , isNull = Project.isNull
         , getViewType = ProjectView
+        , editMode = Model.getMaybeEditModelForEntityType ProjectEntityStoreType model
         }
         model
 
@@ -106,6 +116,6 @@ contextList model =
         , nullEntity = Context.null
         , isNull = Context.isNull
         , getViewType = ContextView
-        , editMode = model
+        , editMode = Model.getMaybeEditModelForEntityType ContextEntityStoreType model
         }
         model

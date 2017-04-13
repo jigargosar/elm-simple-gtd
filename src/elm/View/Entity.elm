@@ -40,8 +40,11 @@ type alias ModelConfig a =
     }
 
 
-createViewModel todoListByEntityId modelConfig model =
+createViewModel todoListByEntityId config model =
     let
+        onEntityAction =
+            Msg.OnEntityAction (config.entityWrapper model)
+
         todoList =
             todoListByEntityId model.id
 
@@ -49,47 +52,73 @@ createViewModel todoListByEntityId modelConfig model =
             List.length todoList
 
         isNull =
-            modelConfig.isNull model
+            config.isNull model
 
         onDeleteClicked =
             if isNull then
                 (Msg.NoOp)
             else
-                (modelConfig.onEntityAction Delete)
+                (config.onEntityAction Delete)
     in
         { id = model.id
         , name = model.name
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList
-        , onClick = Msg.SetView (modelConfig.getViewType model.id)
-        , onSettingsClicked = modelConfig.onEntityAction StartEditing
+        , onClick = Msg.SetView (config.getViewType model.id)
+        , onSettingsClicked = config.onEntityAction StartEditing
         , onDeleteClicked = onDeleteClicked
-        , onSaveClicked = modelConfig.onEntityAction Save
-        , onNameChanged = NameChanged >> modelConfig.onEntityAction
+        , onSaveClicked = config.onEntityAction Save
+        , onNameChanged = NameChanged >> config.onEntityAction
         }
 
 
 createProjectViewModelList : Model.Types.Model -> List ViewModel
 createProjectViewModelList model =
     let
-        dict =
+        todoListDict =
             Model.getActiveTodoListGroupedBy Todo.getProjectId model
 
         getTodoListWithGroupId id =
-            dict |> Dict.get id ?= []
+            todoListDict |> Dict.get id ?= []
 
         projects =
             Model.getActiveEntityList ProjectEntityStoreType model
                 |> (::) Project.null
 
         vmConfig model =
-            { onEntityAction = Msg.OnEntityAction (ProjectEntity model)
+            { entityWrapper = ProjectEntity
+            , onEntityAction = Msg.OnEntityAction (ProjectEntity model)
             , isNull = Project.isNull
             , getViewType = ProjectView
             }
     in
         projects
+            .|> (\model ->
+                    createViewModel getTodoListWithGroupId (vmConfig model) model
+                )
+
+
+getViewModelList config model =
+    let
+        todoListDict =
+            Model.getActiveTodoListGroupedBy config.groupByFn model
+
+        getTodoListWithGroupId id =
+            todoListDict |> Dict.get id ?= []
+
+        entityList =
+            Model.getActiveEntityList config.storeType model
+                |> (::) config.nullEntity
+
+        vmConfig model =
+            { entityWrapper = config.entityWrapper
+            , onEntityAction = Msg.OnEntityAction (ContextEntity model)
+            , isNull = config.isNull
+            , getViewType = config.viewType
+            }
+    in
+        entityList
             .|> (\model ->
                     createViewModel getTodoListWithGroupId (vmConfig model) model
                 )
@@ -109,7 +138,8 @@ createContextViewModelList model =
                 |> (::) Context.null
 
         vmConfig model =
-            { onEntityAction = Msg.OnEntityAction (ContextEntity model)
+            { entityWrapper = ContextEntity
+            , onEntityAction = Msg.OnEntityAction (ContextEntity model)
             , isNull = Context.isNull
             , getViewType = ContextView
             }

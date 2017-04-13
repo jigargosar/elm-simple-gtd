@@ -73,7 +73,7 @@ encode encodeOtherFields doc =
         )
 
 
-documentFieldsDecoder : Decoder (Id -> Revision -> Time -> Time -> Bool -> otherFields) -> Decoder otherFields
+documentFieldsDecoder : Decoder (Id -> Revision -> Time -> Time -> Bool -> x) -> Decoder x
 documentFieldsDecoder =
     D.required "_id" D.string
         >> D.required "_rev" D.string

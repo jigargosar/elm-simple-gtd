@@ -23,7 +23,7 @@ import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (Html, div, hr, node, span, text)
-import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
+import Html.Attributes exposing (attribute, autofocus, class, classList, disabled, id, style, value)
 import Html.Events exposing (..)
 import Ext.Debug exposing (tapLog)
 import Ext.Decode exposing (traceDecoder)
@@ -112,8 +112,8 @@ defaultView vm =
 
 
 editEntityView editModel vm =
-    material []
-        [ item []
+    material [ class "edit-entity-view" ]
+        [ div []
             [ itemBody []
                 [ input
                     [ class "edit-entity-name-input auto-focus"
@@ -127,7 +127,7 @@ editEntityView editModel vm =
                     []
                 ]
             ]
-        , item []
+        , div []
             [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
             , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
             , button [ onClick vm.onDeleteClicked ] [ "Delete" |> text ]

@@ -43,7 +43,7 @@ import View.Shared exposing (SharedViewModel)
 
 filteredTodoListView : Model -> Html Msg
 filteredTodoListView =
-    apply2 ( View.Shared.create >> View.Todo.listItemView, Model.TodoStore.getFilteredTodoList )
+    apply2 ( View.Shared.createSharedViewModel >> View.Todo.listItemView, Model.TodoStore.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
                 Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
            )
@@ -53,7 +53,7 @@ groupByEntityView : List Entity.ViewModel.ViewModel -> Model -> Html Msg
 groupByEntityView entityVMs model =
     let
         vc =
-            View.Shared.create model
+            View.Shared.createSharedViewModel model
 
         todoListContainer vm =
             ( vm.id

@@ -36,8 +36,8 @@ type alias SharedViewModel =
     }
 
 
-create : Model -> SharedViewModel
-create model =
+createSharedViewModel : Model -> SharedViewModel
+createSharedViewModel model =
     { now = Model.getNow model
     , encodedProjectNames = Model.getProjectStore model |> Project.getEncodedProjectNames
     , encodedContextNames = Model.getEncodedContextNames model

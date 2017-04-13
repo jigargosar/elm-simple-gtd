@@ -91,7 +91,7 @@ projectList model =
         , nullEntity = Project.null
         , isNull = Project.isNull
         , getViewType = ProjectView
-        , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityStoreType model
+        , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
         }
         model
 
@@ -105,6 +105,6 @@ contextList model =
         , nullEntity = Context.null
         , isNull = Context.isNull
         , getViewType = ContextView
-        , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityStoreType model
+        , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
         }
         model

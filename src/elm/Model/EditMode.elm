@@ -14,6 +14,7 @@ import Ext.Function.Infix exposing (..)
 import Msg exposing (..)
 import Model.Types exposing (..)
 import Project
+import Store
 
 
 activateNewTodoMode : String -> ModelF

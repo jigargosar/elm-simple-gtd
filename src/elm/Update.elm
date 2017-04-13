@@ -20,6 +20,7 @@ import Keyboard.Extra as Key
 import Model
 import Routes
 import Set
+import Store
 import String.Extra
 import Todo
 import View exposing (appView)

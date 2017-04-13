@@ -3,12 +3,13 @@ module Model.TodoStore exposing (..)
 import Context
 import Dict exposing (Dict)
 import Dict.Extra
-import Document
+import Document exposing (Id)
 import Ext.Random
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Project
 import Random.Pcg as Random
+import Store
 import Time exposing (Time)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -101,7 +102,7 @@ addNewTodo text now =
     insertTodoByIdConstructor (Todo.init now text)
 
 
-insertTodoByIdConstructor : (Store.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
+insertTodoByIdConstructor : (Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodoByIdConstructor constructWithId =
     applyWith (Model.getTodoStore)
         (Store.insert (constructWithId) >> setTodoStoreFromTuple)

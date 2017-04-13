@@ -2,6 +2,7 @@ module View.Shared exposing (..)
 
 import Context
 import Dict exposing (Dict)
+import Document exposing (Id)
 import EditMode exposing (EditMode, EditTodoModel)
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (tabindex)
@@ -31,8 +32,8 @@ type alias SharedViewModel =
     , encodedContextNames : Json.Encode.Value
     , maybeEditTodoModel : Maybe EditTodoModel
     , editMode : EditMode
-    , projectIdToNameDict : Dict Project.Id Project.Name
-    , contextByIdDict : Dict Context.Id Context.Model
+    , projectIdToNameDict : Dict Id Project.Name
+    , contextByIdDict : Dict Id Context.Model
     , selection : Set Todo.Id
     }
 

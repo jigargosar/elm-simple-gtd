@@ -3,7 +3,7 @@ module Todo exposing (..)
 import Context
 import Date
 import Date.Distance exposing (defaultConfig)
-import Document
+import Document exposing (Revision)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -21,6 +21,7 @@ import Dict
 import Dict.Extra as Dict
 import Time exposing (Time)
 import Project
+import Store
 
 
 type alias Id =
@@ -35,8 +36,8 @@ type alias Record =
     { done : Bool
     , text : Text
     , dueAt : Maybe Time
-    , projectId : Project.Id
-    , contextId : Context.Id
+    , projectId : Id
+    , contextId : Id
     }
 
 
@@ -56,9 +57,9 @@ type UpdateAction
     = SetDone Bool
     | SetText Text
     | SetDeleted Bool
-    | SetContextId Context.Id
+    | SetContextId Id
     | SetContext Context.Model
-    | SetProjectId Project.Id
+    | SetProjectId Id
     | SetProject Project.Project
     | ToggleDone
     | ToggleDeleted
@@ -253,7 +254,7 @@ decoder =
 
 
 copyTodo createdAt todo id =
-    { todo | id = id, rev = Store.defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
+    { todo | id = id, rev = Document.defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
 
 
 encode : Model -> Encoded
@@ -272,7 +273,7 @@ encode todo =
 init createdAt text id =
     todoConstructor
         id
-        Store.defaultRevision
+        Document.defaultRevision
         createdAt
         createdAt
         defaultDeleted
@@ -320,7 +321,7 @@ doneFilter =
     toAllPassPredicate [ isNotDeleted, isDone ]
 
 
-hasProjectId : Project.Id -> Model -> Bool
+hasProjectId : Id -> Model -> Bool
 hasProjectId projectId =
     getProjectId >> equals projectId
 

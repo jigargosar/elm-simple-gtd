@@ -1,6 +1,7 @@
 module Model.Types exposing (..)
 
 import Context
+import Document exposing (Id)
 import EditMode exposing (EditMode)
 import Ext.Keyboard as Keyboard
 import Project
@@ -21,11 +22,11 @@ type alias Selection =
 
 type MainViewType
     = GroupByContextView
-    | ProjectView Project.Id
+    | ProjectView Id
     | DoneView
     | BinView
     | GroupByProjectView
-    | ContextView Context.Id
+    | ContextView Id
 
 
 type alias Model =

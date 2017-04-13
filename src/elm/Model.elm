@@ -22,6 +22,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Set
+import Store
 import Time exposing (Time)
 import Todo
 import Toolkit.Operators exposing (..)

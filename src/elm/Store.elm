@@ -1,5 +1,6 @@
 port module Store exposing (..)
 
+import Document exposing (Document, Id)
 import Ext.Random as Random
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)

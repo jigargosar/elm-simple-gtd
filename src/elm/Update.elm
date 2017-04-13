@@ -186,7 +186,11 @@ update msg =
                             Return.map (Model.updateEditModeNameChanged newName entity)
 
                         ( _, Save ) ->
-                            Return.map (Model.updateEditModeSave)
+                            Return.map (Model.saveEditModeEntity)
+                                >> andThenUpdate DeactivateEditingMode
+
+                        ( _, Delete ) ->
+                            Return.map (Model.deleteEntity entity)
                                 >> andThenUpdate DeactivateEditingMode
 
                         _ ->

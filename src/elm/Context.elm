@@ -13,6 +13,7 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Random.Pcg as Random
 import String.Extra
+import Time exposing (Time)
 
 
 type alias Name =
@@ -24,7 +25,7 @@ type alias Id =
 
 
 type alias Record =
-    { name : Name }
+    { name : Name, deleted : Bool }
 
 
 type alias OtherFields =
@@ -43,18 +44,20 @@ type alias Encoded =
     E.Value
 
 
-constructor id rev createdAt modifiedAt name =
+constructor : Id -> PouchDB.Revision -> Time -> Time -> Bool -> Name -> Model
+constructor id rev createdAt modifiedAt deleted name =
     { id = id
     , rev = rev
-    , dirty = False
-    , name = name
     , createdAt = createdAt
     , modifiedAt = modifiedAt
+    , dirty = False
+    , deleted = deleted
+    , name = name
     }
 
 
 init name now id =
-    constructor id "" now now name
+    constructor id "" now now False name
 
 
 encoder : Model -> Encoded
@@ -73,12 +76,13 @@ decoder =
     D.decode constructor
         |> PouchDB.documentFieldsDecoder
         |> PouchDB.timeStampFieldsDecoder
+        |> D.optional "deleted" D.bool False
         |> D.required "name" D.string
 
 
 null : Model
 null =
-    constructor "" "" 0 0 "Inbox"
+    constructor "" "" 0 0 False "Inbox"
 
 
 isNull =

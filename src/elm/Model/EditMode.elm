@@ -44,7 +44,27 @@ updateEditModeNameChanged newName entity model =
             model
 
 
-updateEditModeSave model =
+deleteEntity model =
+    case model.editMode of
+        EditMode.EditContext ecm ->
+            ecm.model
+                |> Context.setDeleted True
+                |> Context.setModifiedAt model.now
+                |> (PouchDB.update # model.contextStore)
+                |> (setContextStore # model)
+
+        EditMode.EditProject epm ->
+            epm.model
+                |> Project.setDeleted True
+                |> Project.setModifiedAt model.now
+                |> (PouchDB.update # model.projectStore)
+                |> (setProjectStore # model)
+
+        _ ->
+            model
+
+
+saveEditModeEntity model =
     case model.editMode of
         EditMode.EditContext ecm ->
             ecm.model

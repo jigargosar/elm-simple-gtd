@@ -74,7 +74,7 @@ update doc s =
         newDoc =
             { doc | dirty = True }
     in
-        List.replaceIf (\d2 -> d2.id == doc.id) (newDoc) s.list
+        List.replaceIf (Document.equalById doc) (newDoc) s.list
             |> (setList # s)
 
 

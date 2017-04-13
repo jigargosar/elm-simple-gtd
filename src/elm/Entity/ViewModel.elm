@@ -41,7 +41,7 @@ createViewModelList config model =
             todoListDict |> Dict.get id ?= []
 
         entityList =
-            Model.getActiveEntityList config.storeType model
+            Model.getActiveEntityList config.entityType model
                 |> (::) config.nullEntity
     in
         entityList
@@ -86,7 +86,7 @@ projectList : Model.Types.Model -> List ViewModel
 projectList model =
     createViewModelList
         { groupByFn = Todo.getProjectId
-        , storeType = ProjectEntityStoreType
+        , entityType = ProjectEntityType
         , entityWrapper = ProjectEntity
         , nullEntity = Project.null
         , isNull = Project.isNull
@@ -100,7 +100,7 @@ contextList : Model.Types.Model -> List ViewModel
 contextList model =
     createViewModelList
         { groupByFn = Todo.getContextId
-        , storeType = ContextEntityStoreType
+        , entityType = ContextEntityType
         , entityWrapper = ContextEntity
         , nullEntity = Context.null
         , isNull = Context.isNull

@@ -135,12 +135,12 @@ getSelectedTodoIdSet =
     (.selection)
 
 
-getEntityStore entityStoreType =
-    case entityStoreType of
-        ProjectEntityStoreType ->
+getEntityStore entityType =
+    case entityType of
+        ProjectEntityType ->
             .projectStore
 
-        ContextEntityStoreType ->
+        ContextEntityType ->
             .contextStore
 
 

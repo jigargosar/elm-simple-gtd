@@ -158,7 +158,7 @@ type alias Encoded =
 
 encode : Project -> Encoded
 encode project =
-    E.object ((Document.encode project) ++ [ "name" => E.string (getName project) ])
+    Document.encode project [ "name" => E.string (getName project) ]
 
 
 decoder : Decoder Project

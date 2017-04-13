@@ -55,11 +55,7 @@ init name now id =
 
 encoder : Model -> Encoded
 encoder context =
-    E.object
-        ((Document.encode context)
-            ++ [ "name" => E.string context.name
-               ]
-        )
+    Document.encode context [ "name" => E.string (getName context) ]
 
 
 decoder : Decoder Model

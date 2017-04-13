@@ -73,7 +73,7 @@ doneItemView m =
 
 
 projectOrContextItem vm =
-    item [ class "", onClick vm.onClick ]
+    item [ class "", onClick vm.onNavigate ]
         ([ View.Shared.defaultBadge vm
          , itemBody [] []
          , hoverIcons vm

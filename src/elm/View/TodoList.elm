@@ -116,13 +116,10 @@ editEntityView editModel vm =
         [ item []
             [ itemBody []
                 [ input
-                    [ --                        id vm.todo.inputId
-                      class "edit-entity-name-input auto-focus"
+                    [ class "edit-entity-name-input auto-focus"
                     , stringProperty "label" "Name"
                     , value (editModel.name)
                     , onInput vm.onNameChanged
-
-                    --                        , autofocus True
                     , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
 
                     --                        , onKeyUp vm.onKeyUp
@@ -132,7 +129,7 @@ editEntityView editModel vm =
             ]
         , item []
             [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
-            , button [ onClick Msg.DeactivateEditingMode ] [ "Cancel" |> text ]
+            , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
             , button [ onClick vm.onDeleteClicked ] [ "Delete" |> text ]
             ]
         ]

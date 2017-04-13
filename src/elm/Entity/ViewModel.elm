@@ -77,6 +77,7 @@ createViewModel todoListByEntityId config model =
         , onDeleteClicked = onDeleteClicked
         , onSaveClicked = onEntityAction Save
         , onNameChanged = NameChanged >> onEntityAction
+        , onCancelClicked = Msg.DeactivateEditingMode
         }
 
 

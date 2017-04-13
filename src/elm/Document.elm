@@ -57,20 +57,18 @@ type alias Document moreFields =
     }
 
 
-encodeMeta meta =
-    E.object
-        [ "_id" => E.string (meta.id)
-        , "_rev" => E.string (meta.rev)
-        , "createdAt" => E.int (meta.createdAt |> round)
-        , "modifiedAt" => E.int (meta.modifiedAt |> round)
-        , "deleted" => E.bool (meta.deleted)
-        ]
+encodeMetaFieldsList doc =
+    [ "_id" => E.string (doc.id)
+    , "_rev" => E.string (doc.rev)
+    , "createdAt" => E.int (doc.createdAt |> round)
+    , "modifiedAt" => E.int (doc.modifiedAt |> round)
+    , "deleted" => E.bool (doc.deleted)
+    ]
 
 
 encode doc otherEncodedFieldList =
     E.object
-        ([ "meta" => encodeMeta doc
-         ]
+        (encodeMetaFieldsList doc
             ++ otherEncodedFieldList
         )
 

@@ -35,22 +35,23 @@ decodeList decoder =
             )
 
 
-init name encoder decoder encodedList seed =
+init name otherFieldsEncoder decoder encodedList seed =
     { seed = seed
     , list = decodeList decoder encodedList
     , name = name
-    , encoder = encoder
+    , otherFieldsEncoder = otherFieldsEncoder
     , decoder = decoder
     }
 
 
-generator name encoder decoder encodedList =
-    init name encoder decoder encodedList |> Random.mapWithIndependentSeed
+generator : String -> (Document x -> List ( String, E.Value )) -> Decoder (Document x) -> List E.Value -> Random.Generator (Store x)
+generator name otherFieldsEncoder decoder encodedList =
+    init name otherFieldsEncoder decoder encodedList |> Random.mapWithIndependentSeed
 
 
-upsert : String -> (Document x -> E.Value) -> Document x -> Cmd msg
-upsert dbName encoder doc =
-    pouchDBUpsert ( dbName, doc.id, encoder doc )
+upsert : String -> (Document x -> List ( String, E.Value )) -> Document x -> Cmd msg
+upsert dbName otherFieldsEncoder doc =
+    pouchDBUpsert ( dbName, doc.id, Document.encode otherFieldsEncoder doc )
 
 
 persist s =
@@ -63,7 +64,7 @@ persist s =
             s.list .|> (\d -> { d | dirty = False }) |> setList # s
 
         cmds =
-            dirtyList .|> upsert s.name s.encoder
+            dirtyList .|> upsert s.name s.otherFieldsEncoder
     in
         ns ! cmds
 
@@ -100,7 +101,7 @@ insert constructor s =
 type alias Store x =
     { seed : Seed
     , list : List (Document x)
-    , encoder : Document x -> E.Value
+    , otherFieldsEncoder : Document x -> List ( String, E.Value )
     , decoder : Decoder (Document x)
     , name : String
     }

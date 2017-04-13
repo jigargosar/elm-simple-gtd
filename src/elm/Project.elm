@@ -55,7 +55,7 @@ findNameById id =
 
 storeGenerator : List Encoded -> Random.Generator Store
 storeGenerator =
-    Store.generator "project-db" encode decoder
+    Store.generator "project-db" otherFieldsEncoder decoder
 
 
 findByName projectName =
@@ -156,9 +156,9 @@ type alias Encoded =
     E.Value
 
 
-encode : Project -> Encoded
-encode project =
-    Document.encode project [ "name" => E.string (getName project) ]
+otherFieldsEncoder : Document Record -> List ( String, E.Value )
+otherFieldsEncoder project =
+    [ "name" => E.string (getName project) ]
 
 
 decoder : Decoder Project

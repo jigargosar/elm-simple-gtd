@@ -1,7 +1,7 @@
 module Context exposing (..)
 
 import Dict
-import Document exposing (Id, Revision)
+import Document exposing (Document, Id, Revision)
 import Store
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -53,9 +53,9 @@ init name now id =
     constructor id "" now now False name
 
 
-encoder : Model -> Encoded
-encoder context =
-    Document.encode context [ "name" => E.string (getName context) ]
+otherFieldsEncoder : Document Record -> List ( String, E.Value )
+otherFieldsEncoder project =
+    [ "name" => E.string (getName project) ]
 
 
 decoder : Decoder Model
@@ -92,7 +92,7 @@ setDeleted deleted model =
 
 storeGenerator : List Encoded -> Random.Generator Store
 storeGenerator =
-    Store.generator "context-db" encoder decoder
+    Store.generator "context-db" otherFieldsEncoder decoder
 
 
 insertIfNotExistByName name_ now context =

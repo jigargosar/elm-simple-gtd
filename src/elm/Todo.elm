@@ -257,15 +257,13 @@ copyTodo createdAt todo id =
     { todo | id = id, rev = Document.defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
 
 
-encode : Model -> Encoded
-encode todo =
-    Document.encode todo
-        [ "done" => E.bool (isDone todo)
-        , "text" => E.string (getText todo)
-        , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
-        , "projectId" => (todo.projectId |> E.string)
-        , "contextId" => (todo.contextId |> E.string)
-        ]
+encodeOtherFields todo =
+    [ "done" => E.bool (isDone todo)
+    , "text" => E.string (getText todo)
+    , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
+    , "projectId" => (todo.projectId |> E.string)
+    , "contextId" => (todo.contextId |> E.string)
+    ]
 
 
 init createdAt text id =
@@ -357,7 +355,7 @@ modifiedAtInWords now =
 
 storeGenerator : List Encoded -> Random.Generator Store
 storeGenerator =
-    Store.generator "todo-db" encode decoder
+    Store.generator "todo-db" encodeOtherFields decoder
 
 
 type alias Store =

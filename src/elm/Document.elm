@@ -57,7 +57,7 @@ type alias Document moreFields =
     }
 
 
-encodeMetaFieldsList doc =
+encodeMetaFields doc =
     [ "_id" => E.string (doc.id)
     , "_rev" => E.string (doc.rev)
     , "createdAt" => E.int (doc.createdAt |> round)
@@ -66,10 +66,10 @@ encodeMetaFieldsList doc =
     ]
 
 
-encode doc otherEncodedFieldList =
+encode encodeOtherFields doc =
     E.object
-        (encodeMetaFieldsList doc
-            ++ otherEncodedFieldList
+        (encodeMetaFields doc
+            ++ encodeOtherFields doc
         )
 
 

@@ -41,16 +41,16 @@ import View.Todo exposing (EditTodoViewModel)
 import View.Shared exposing (SharedViewModel)
 
 
-filteredTodoListView : Model -> Html Msg
-filteredTodoListView =
+filtered : Model -> Html Msg
+filtered =
     apply2 ( View.Shared.createSharedViewModel >> View.Todo.listItemView, Model.TodoStore.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
                 Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
            )
 
 
-groupByEntityView : List Entity.ViewModel.ViewModel -> Model -> Html Msg
-groupByEntityView entityVMs model =
+groupByEntity : List Entity.ViewModel.ViewModel -> Model -> Html Msg
+groupByEntity entityVMs model =
     let
         vc =
             View.Shared.createSharedViewModel model
@@ -68,12 +68,12 @@ groupByEntityView entityVMs model =
         Keyed.node "div" [] (entityVMs .|> todoListContainer)
 
 
-singletonEntityView entityVMs id =
+singletonEntity entityVMs id =
     let
         vmSingleton =
             entityVMs |> List.find (.id >> equals id) |> Maybe.toList
     in
-        groupByEntityView vmSingleton
+        groupByEntity vmSingleton
 
 
 entityListItemView vc vm =

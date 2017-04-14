@@ -21,6 +21,7 @@ import Project
 type alias ViewModel =
     { id : String
     , name : String
+    , isDeleted : Bool
     , todoList : List Todo.Model
     , isEmpty : Bool
     , count : Int
@@ -83,6 +84,7 @@ createViewModel todoListByEntityId config entity =
     in
         { id = id
         , name = entity.name
+        , isDeleted = Document.isDeleted entity
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList

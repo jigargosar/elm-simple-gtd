@@ -81,5 +81,10 @@ showOnHover =
     div [ class "show-on-hover" ]
 
 
-hideOnHover =
+hideOnHover bool children =
     div [ class "hide-on-hover" ]
+        (if bool then
+            children
+         else
+            []
+        )

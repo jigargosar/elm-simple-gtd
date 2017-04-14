@@ -105,7 +105,7 @@ defaultView vm =
         , showOnHover
             [ iconButton "settings" vm.startEditingMsg
             ]
-        , hideOnHover [ trashButton Msg.NoOp ]
+        , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
         ]
 
 

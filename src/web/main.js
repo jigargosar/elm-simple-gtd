@@ -7,45 +7,11 @@ import R from "ramda"
 
 import sound from "./sound"
 
-import Peer from "peerjs"
+import Sync from "./sync"
 
 const _ = R
 
 async function boot() {
-
-    const id = localStorage.getItem("my-peer-id")
-    if(id){
-        const peer = new Peer(id, {secure:true, host: 'sgtd-peer-js.herokuapp.com', port: ''});
-        peer.on("error", e => {
-            console.dir(e)
-            if(e.type === "network"){
-                setTimeout(()=>{
-                    peer.reconnect()
-                },5000)
-            }else{
-                localStorage.removeItem("my-peer-id")
-            }
-        })
-        peer.on('open', function(id) {
-            console.log('My peer ID is: ' + id);
-            localStorage.setItem("my-peer-id", id)
-        });
-        peer.on('connection', function(conn) {
-            conn.on('data', function(data) {
-                console.log('Received', data);
-                conn.send("pong");
-            });
-
-            conn.on("error", e =>{
-                console.dir(e)
-                console.error("sync error", e)
-            })
-            conn.on("close", () =>{
-                console.error("in coming conn closed")
-            })
-        });
-    }
-
 
     const dbMap = {
         "todo-db": await PouchDB("todo-db"),
@@ -67,6 +33,7 @@ async function boot() {
             encodedContextList: contexts
         })
 
+    const sync = Sync(app)
 
     app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
         // console.log("upserting", dbName, doc, id)

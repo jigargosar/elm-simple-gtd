@@ -236,22 +236,6 @@ hoverIcons vm vc =
         ]
 
 
-doneNonHoverIcon : DefaultTodoViewModel -> Maybe (Html Msg)
-doneNonHoverIcon vm =
-    if vm.isDone then
-        Just (doneIconButton vm)
-    else
-        Nothing
-
-
-deleteNonHoverIcon : DefaultTodoViewModel -> Maybe (Html Msg)
-deleteNonHoverIcon vm =
-    if vm.isDeleted then
-        Just (deleteIconButton vm)
-    else
-        Nothing
-
-
 doneIconButton : DefaultTodoViewModel -> Html Msg
 doneIconButton vm =
     iconButton

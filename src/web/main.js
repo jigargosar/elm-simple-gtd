@@ -43,23 +43,6 @@ async function boot() {
         }
     });
 
-    app.ports["startSync"].subscribe((peerId)=>{
-        const conn =  peer.connect(peerId)
-        conn.on('open', function() {
-            conn.send('ping');
-        });
-        conn.on('data', function(data) {
-            console.log('Received', data);
-        });
-        conn.on("error", e =>{
-            console.dir(e)
-            console.error("open error", e)
-        })
-        conn.on("close", e =>{
-            console.dir(e)
-            console.error("closed", e)
-        })
-    })
 
 
     app.ports["focusPaperInput"].subscribe((selector) => {

@@ -151,12 +151,12 @@ edit vm =
 
 
 type alias DefaultTodoViewModel =
-    { text : String
+    { text : Todo.Text
     , isDone : Bool
     , isDeleted : Bool
     , isSelected : Bool
-    , projectName : String
-    , contextName : String
+    , projectName : Project.Name
+    , contextName : Context.Name
     , onCheckBoxClicked : Msg
     , setContextMsg : Context.Model -> Msg
     , startEditingMsg : Msg

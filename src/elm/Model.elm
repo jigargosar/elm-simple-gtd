@@ -54,6 +54,7 @@ init now encodedTodoList encodedProjectList encodedContextList =
         , maybeRunningTodo = Nothing
         , keyboardState = Keyboard.init
         , selection = Set.empty
+        , showDeleted = False
         }
 
 

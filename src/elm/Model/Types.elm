@@ -40,6 +40,7 @@ type alias Model =
     , maybeRunningTodo : Maybe RunningTodo
     , keyboardState : Keyboard.State
     , selection : Selection
+    , showDeleted : Bool
     }
 
 

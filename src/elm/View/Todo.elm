@@ -12,6 +12,7 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
+import Maybe.Extra
 import Msg exposing (Msg)
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
 import Project
@@ -210,13 +211,16 @@ hoverIcons vm vc todo =
         ]
 
 
-nonHoverIcons vc todo =
+nonHoverIcons vc vm =
     div [ class "hide-on-hover" ]
-        ([] ++ (doneNonHoverIcon vc todo))
+        ([] ++ (doneNonHoverIcon vc vm |> Maybe.Extra.toList))
 
 
-doneNonHoverIcon vc todo =
-    ifElse Todo.isDone (doneIconButton >> List.singleton) (\_ -> []) todo
+doneNonHoverIcon vc vm =
+    if vm.done then
+        Just (doneIconButton vm)
+    else
+        Nothing
 
 
 doneIconButton vm =

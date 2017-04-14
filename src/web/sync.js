@@ -6,6 +6,8 @@ export default function (app) {
     app.ports["startSync"].subscribe((myPeerId, remotePeerId)=>{
 
         // const myPeerId = localStorage.getItem("my-peer-id")
+        localStorage.setItem("my-peer-id", myPeerId)
+        localStorage.setItem("remote-peer-id", remotePeerId)
 
         const peer = new Peer(myPeerId, {secure: true, host: 'sgtd-peer-js.herokuapp.com', port: ''});
         peer.on("error", e => {
@@ -20,8 +22,6 @@ export default function (app) {
         })
         peer.on('open', function (id) {
             console.log('My peer ID is: ' + id);
-            localStorage.setItem("my-peer-id", id)
-
             const conn =  peer.connect(remotePeerId)
             conn.on('open', function() {
                 conn.send('ping');
@@ -37,7 +37,6 @@ export default function (app) {
                 console.dir(e)
                 console.error("closed", e)
             })
-
         });
 
         peer.on('connection', function (conn) {

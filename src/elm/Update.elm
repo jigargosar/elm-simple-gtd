@@ -40,7 +40,7 @@ import Model.Types exposing (..)
 import Types
 
 
-port startSync : String -> Cmd msg
+port startSync : ( String, String ) -> Cmd msg
 
 
 update : Msg -> Model -> Return
@@ -57,7 +57,7 @@ update msg =
                     Return.map ((\m -> { m | remotePeerId = id }))
 
                 StartSync ->
-                    Return.effect_ (.remotePeerId >> startSync)
+                    Return.effect_ (\m -> startSync ( m.myPeerId, m.remotePeerId ))
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))

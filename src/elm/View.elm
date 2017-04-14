@@ -69,7 +69,7 @@ appDrawerLayoutView m =
 
 syncView m =
     material []
-        [ input [ value m.myPeerId ] []
+        [ input [ onInput Msg.OnMyPeerIdChanged, value m.myPeerId ] []
         , input [ onInput Msg.OnRemotePeerIdChanged, value m.remotePeerId ] []
         , button [ onClick Msg.StartSync ] [ text "sync" ]
         ]

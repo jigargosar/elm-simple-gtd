@@ -46,15 +46,15 @@ updateEditModeNameChanged newName entity model =
 
 deleteEntity entity model =
     case entity of
-        ProjectEntity project ->
-            project
+        ContextEntity context ->
+            context
                 |> Context.setDeleted True
                 |> Context.setModifiedAt model.now
                 |> (Store.update # model.contextStore)
                 |> (setContextStore # model)
 
-        ContextEntity context ->
-            context
+        ProjectEntity project ->
+            project
                 |> Project.setDeleted True
                 |> Project.setModifiedAt model.now
                 |> (Store.update # model.projectStore)

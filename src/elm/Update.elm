@@ -190,8 +190,12 @@ update msg =
                                 >> andThenUpdate DeactivateEditingMode
 
                         ( _, Delete ) ->
-                            Return.map (Model.deleteEntity entity)
-                                >> andThenUpdate DeactivateEditingMode
+                            let
+                                _ =
+                                    Debug.log "entity" (entity)
+                            in
+                                Return.map (Model.deleteEntity entity)
+                                    >> andThenUpdate DeactivateEditingMode
 
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)

@@ -204,7 +204,7 @@ todoInputId todoId =
 hoverIcons vm vc todo =
     div [ class "show-on-hover" ]
         [ --        startIconButton vc todo
-          doneIconButton vc todo
+          doneIconButton todo
         , deleteIconButton vc todo
         , moveToContextMenuIcon vm vc todo
         ]
@@ -216,10 +216,10 @@ nonHoverIcons vc todo =
 
 
 doneNonHoverIcon vc todo =
-    ifElse Todo.isDone (doneIconButton vc >> List.singleton) (\_ -> []) todo
+    ifElse Todo.isDone (doneIconButton >> List.singleton) (\_ -> []) todo
 
 
-doneIconButton vc todo =
+doneIconButton todo =
     iconButton
         [ class ("done-" ++ toString (Todo.isDone todo))
         , onClickStopPropagation (Msg.ToggleTodoDone todo)

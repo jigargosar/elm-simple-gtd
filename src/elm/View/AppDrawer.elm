@@ -38,9 +38,9 @@ appDrawerView contextVM projectVM m =
                 [ stringProperty "selected" "0"
                 , stringProperty "selectable" "paper-item"
                 ]
-                (groupByEntity contextVM
+                (entityList contextVM
                     ++ [ divider ]
-                    ++ groupByEntity projectVM
+                    ++ entityList projectVM
                     ++ [ divider ]
                     ++ [ binItemView m
                        , doneItemView m
@@ -54,7 +54,7 @@ divider =
     hr [] []
 
 
-groupByEntity { vmList, viewType, title } =
+entityList { vmList, viewType, title } =
     [ item [ onClick (SetView viewType) ]
         [ itemBody [] [ span [ class "ellipsis" ] [ text title ] ]
         , toggleButton [] []

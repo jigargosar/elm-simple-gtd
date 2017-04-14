@@ -219,10 +219,10 @@ doneNonHoverIcon vc todo =
     ifElse Todo.isDone (doneIconButton >> List.singleton) (\_ -> []) todo
 
 
-doneIconButton todo =
+doneIconButton vm =
     iconButton
-        [ class ("done-" ++ toString (Todo.isDone todo))
-        , onClickStopPropagation (Msg.ToggleTodoDone todo)
+        [ class ("done-" ++ toString (vm.done))
+        , onClickStopPropagation (Msg.ToggleTodoDone vm)
         , icon "check"
         ]
         []

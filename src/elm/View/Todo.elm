@@ -238,7 +238,10 @@ hoverIcons vm vc =
 nonHoverIcons : DefaultTodoViewModel -> Html Msg
 nonHoverIcons vm =
     div [ class "hide-on-hover" ]
-        ([] ++ (doneNonHoverIcon vm |> Maybe.Extra.toList) ++ (deleteNonHoverIcon vm |> Maybe.Extra.toList))
+        ([]
+            ++ (doneNonHoverIcon vm |> Maybe.Extra.toList)
+            ++ (deleteNonHoverIcon vm |> Maybe.Extra.toList)
+        )
 
 
 doneNonHoverIcon : DefaultTodoViewModel -> Maybe (Html Msg)

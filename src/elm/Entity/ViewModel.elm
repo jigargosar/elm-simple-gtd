@@ -48,10 +48,16 @@ createViewModelList config model =
             else
                 identity
 
+        --        entityList =
+        --            Model.getActiveEntityList config.entityType model
+        --                |> (::) config.nullEntity
+        --                |> appendDeletedEntityList
         entityList =
-            Model.getActiveEntityList config.entityType model
-                |> (::) config.nullEntity
-                |> appendDeletedEntityList
+            if model.showDeleted then
+                Model.getDeletedEntityList config.entityType model
+            else
+                Model.getActiveEntityList config.entityType model
+                    |> (::) config.nullEntity
     in
         entityList
             .|> createViewModel getTodoListWithGroupId config

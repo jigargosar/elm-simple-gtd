@@ -81,6 +81,10 @@ iconButtonWithClass class_ iconName onClickHandler =
     Polymer.Paper.iconButton [ class class_, icon iconName, onClick onClickHandler ] []
 
 
+trashIcon =
+    Html.node "iron-icon" [ icon "delete" ] []
+
+
 trashButton =
     iconButton "delete"
 

@@ -57,7 +57,7 @@ divider =
 entityList { vmList, viewType, title, showDeleted } =
     [ item [ onClick (SetView viewType) ]
         [ itemBody [] [ span [ class "ellipsis" ] [ text title ] ]
-        , showOnHover [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] [] ]
+        , showOnHover [ trashIcon, toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] [] ]
         ]
     , divider
     ]

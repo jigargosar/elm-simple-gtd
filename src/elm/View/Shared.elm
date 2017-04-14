@@ -69,8 +69,12 @@ expand =
     div [ class "flex11" ]
 
 
-iconButton iconName onClickHandler =
-    Polymer.Paper.iconButton [ icon iconName, onClick onClickHandler ] []
+iconButton =
+    iconButtonWithClass ""
+
+
+iconButtonWithClass class_ iconName onClickHandler =
+    Polymer.Paper.iconButton [ class class_, icon iconName, onClick onClickHandler ] []
 
 
 trashButton =

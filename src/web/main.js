@@ -29,7 +29,20 @@ async function boot() {
         console.log('My peer ID is: ' + id);
         localStorage.setItem("id", id)
     });
-    peer.on('connection', function(conn) { console.log(conn) });
+    peer.on('connection', function(conn) {
+        conn.on('data', function(data) {
+            console.log('Received', data);
+            conn.send("pong");
+        });
+
+        conn.on("error", e =>{
+            console.dir(e)
+            console.error("sync error", e)
+        })
+        conn.on("close", () =>{
+            console.error("in coming conn closed")
+        })
+    });
 
 
     const dbMap = {
@@ -75,18 +88,19 @@ async function boot() {
     app.ports["startSync"].subscribe((id)=>{
         const conn =  peer.connect(id)
         conn.on('open', function() {
-            // Receive messages
-            conn.on('data', function(data) {
-                console.log('Received', data);
-            });
-
-            // Send messages
-            conn.send('Hello!');
-            conn.on("error", e =>{
-                console.dir(e)
-                console.error("sync error", e)
-            })
+            conn.send('ping');
         });
+        conn.on('data', function(data) {
+            console.log('Received', data);
+        });
+        conn.on("error", e =>{
+            console.dir(e)
+            console.error("open error", e)
+        })
+        conn.on("close", e =>{
+            console.dir(e)
+            console.error("closed", e)
+        })
     })
 
 

@@ -102,9 +102,7 @@ defaultView vm =
     item [ onClick vm.startEditingMsg ]
         [ View.Shared.defaultBadge vm
         , itemBody [] []
-        , showOnHover
-            [ settingsButton vm.startEditingMsg
-            ]
+        , showOnHover [ settingsButton vm.startEditingMsg ]
         , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
         ]
 

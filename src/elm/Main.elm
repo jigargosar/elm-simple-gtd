@@ -36,6 +36,8 @@ type alias Flags =
     , encodedTodoList : List Todo.Encoded
     , encodedProjectList : List Project.Encoded
     , encodedContextList : List Context.Encoded
+    , myPeerId : String
+    , remotePeerId : String
     }
 
 
@@ -52,8 +54,8 @@ main =
 
 
 init : Flags -> Return
-init { now, encodedTodoList, encodedProjectList, encodedContextList } =
-    Model.init now encodedTodoList encodedProjectList encodedContextList
+init { now, encodedTodoList, encodedProjectList, encodedContextList, myPeerId, remotePeerId } =
+    Model.init now encodedTodoList encodedProjectList encodedContextList myPeerId remotePeerId
         |> Return.singleton
 
 

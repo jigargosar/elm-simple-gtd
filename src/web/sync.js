@@ -16,9 +16,7 @@ export default function (app) {
                 setTimeout(() => {
                     peer.reconnect()
                 }, 5000)
-            } else {
-                localStorage.removeItem("my-peer-id")
-            }
+            } 
         })
         peer.on('open', function (id) {
             console.log('My peer ID is: ' + id);

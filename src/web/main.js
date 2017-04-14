@@ -31,8 +31,8 @@ async function boot() {
             encodedTodoList: allTodos,
             encodedProjectList: allProjects,
             encodedContextList: contexts,
-            myPeerId : localStorage.getItem("my-peer-id"),
-            remotePeerId : localStorage.getItem("remote-peer-id")
+            myPeerId : localStorage.getItem("my-peer-id") || "",
+            remotePeerId : localStorage.getItem("remote-peer-id") || ""
         })
 
     const sync = Sync(app)

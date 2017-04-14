@@ -32,8 +32,8 @@ import Model.Types exposing (..)
 import Types exposing (..)
 
 
-init : Time -> List Todo.Encoded -> List Project.Encoded -> List Context.Encoded -> Model
-init now encodedTodoList encodedProjectList encodedContextList =
+init : Time -> List Todo.Encoded -> List Project.Encoded -> List Context.Encoded -> String -> String -> Model
+init now encodedTodoList encodedProjectList encodedContextList myPeerId remotePeerId =
     let
         storeGenerator =
             Random.map3 (,,)
@@ -55,8 +55,8 @@ init now encodedTodoList encodedProjectList encodedContextList =
         , keyboardState = Keyboard.init
         , selection = Set.empty
         , showDeleted = False
-        , remotePeerId = ""
-        , myPeerId = ""
+        , remotePeerId = remotePeerId
+        , myPeerId = myPeerId
         }
 
 

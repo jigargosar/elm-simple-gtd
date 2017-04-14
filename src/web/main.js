@@ -13,36 +13,38 @@ const _ = R
 
 async function boot() {
 
-    const id = localStorage.getItem("id")
-    const peer = new Peer(id, {secure:true, host: 'sgtd-peer-js.herokuapp.com', port: ''});
-    peer.on("error", e => {
-        console.dir(e)
-        if(e.type === "network"){
-            setTimeout(()=>{
-                peer.reconnect()
-            },5000)
-        }else{
-            localStorage.removeItem("id")
-        }
-    })
-    peer.on('open', function(id) {
-        console.log('My peer ID is: ' + id);
-        localStorage.setItem("id", id)
-    });
-    peer.on('connection', function(conn) {
-        conn.on('data', function(data) {
-            console.log('Received', data);
-            conn.send("pong");
-        });
-
-        conn.on("error", e =>{
+    const id = localStorage.getItem("my-peer-id")
+    if(id){
+        const peer = new Peer(id, {secure:true, host: 'sgtd-peer-js.herokuapp.com', port: ''});
+        peer.on("error", e => {
             console.dir(e)
-            console.error("sync error", e)
+            if(e.type === "network"){
+                setTimeout(()=>{
+                    peer.reconnect()
+                },5000)
+            }else{
+                localStorage.removeItem("my-peer-id")
+            }
         })
-        conn.on("close", () =>{
-            console.error("in coming conn closed")
-        })
-    });
+        peer.on('open', function(id) {
+            console.log('My peer ID is: ' + id);
+            localStorage.setItem("my-peer-id", id)
+        });
+        peer.on('connection', function(conn) {
+            conn.on('data', function(data) {
+                console.log('Received', data);
+                conn.send("pong");
+            });
+
+            conn.on("error", e =>{
+                console.dir(e)
+                console.error("sync error", e)
+            })
+            conn.on("close", () =>{
+                console.error("in coming conn closed")
+            })
+        });
+    }
 
 
     const dbMap = {
@@ -74,8 +76,8 @@ async function boot() {
         }
     });
 
-    app.ports["startSync"].subscribe((id)=>{
-        const conn =  peer.connect(id)
+    app.ports["startSync"].subscribe((peerId)=>{
+        const conn =  peer.connect(peerId)
         conn.on('open', function() {
             conn.send('ping');
         });

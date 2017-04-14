@@ -55,7 +55,7 @@ init now encodedTodoList encodedProjectList encodedContextList =
         , keyboardState = Keyboard.init
         , selection = Set.empty
         , showDeleted = False
-        , syncId = ""
+        , remotePeerId = ""
         , myPeerId = ""
         }
 

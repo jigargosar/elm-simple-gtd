@@ -41,7 +41,7 @@ stopAndMarkDone =
 
 type Msg
     = NoOp
-    | SyncIdChanged String
+    | OnRemotePeerIdChanged String
     | StartSync
     | OnMyPeerIdChanged String
     | ToggleShowDeletedEntity

@@ -53,11 +53,11 @@ update msg =
                 OnMyPeerIdChanged id ->
                     Return.map ((\m -> { m | myPeerId = id }))
 
-                SyncIdChanged id ->
-                    Return.map ((\m -> { m | syncId = id }))
+                OnRemotePeerIdChanged id ->
+                    Return.map ((\m -> { m | remotePeerId = id }))
 
                 StartSync ->
-                    Return.effect_ (.syncId >> startSync)
+                    Return.effect_ (.remotePeerId >> startSync)
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))

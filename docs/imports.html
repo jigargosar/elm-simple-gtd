@@ -4,6 +4,7 @@
 <link rel="import" href="bower_components/paper-autocomplete/paper-autocomplete.html">
 <link rel="import" href="bower_components/paper-card/paper-card.html">
 <link rel="import" href="bower_components/paper-item/all-imports.html">
+<link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
 
 <link rel="import" href="bower_components/app-layout/app-layout.html">
 <link rel="import" href="bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
@@ -82,42 +83,39 @@
         }
     }
 
-    .todo-list-title {
-        text-transform: capitalize;
-        margin: 0 1rem 0.5rem;
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: rgba(0, 0, 0, 0.44);
-        display: inline-block;
-    }
 
-    .todo-list-container {
-        margin-top: 2rem;
-    }
-
-    .paper-badge-container{
-        position: relative;
-    }
-
-    .paper-badge-container > paper-badge {
+    paper-badge {
         --paper-badge-margin-left: 2rem;
-        --paper-badge-margin-bottom: -0.7rem;
+        /*--paper-badge-margin-bottom: -0.7rem;*/
         --paper-badge-background: var(--paper-blue-grey-300)
     }
 
-    .drawer-list-type-badge{
-        --paper-badge-margin-left: 2rem;
-        --paper-badge-margin-bottom: -0.7rem;
-        --paper-badge-background: var(--paper-blue-grey-300)
-    }
+    /*.drawer-list-type-badge{*/
+        /*--paper-badge-margin-left: 2rem;*/
+        /*--paper-badge-margin-bottom: -0.7rem;*/
+        /*--paper-badge-background: var(--paper-blue-grey-300)*/
+    /*}*/
+
 
     
-
+    paper-item{
+        /*margin:0;*/
+        /*padding: 0 1rem;*/
+        --paper-item-focused: {
+            background-color: var(--paper-blue-50);
+        };
+    }
+    
     paper-icon-button{
-        color: var(--paper-blue-grey-300);
+        color: var(--paper-grey-700);
         --paper-icon-button-hover:{
-            color: var(--paper-blue-grey-500);
+            color: #000;
         }
+    }
+
+
+    paper-icon-button.deleted-True{
+        color: #000;
     }
 
     paper-icon-button.done-False{
@@ -130,9 +128,9 @@
         color: var(--paper-green-500);
     }
 
-    paper-icon-button.done-True:hover{
-        color: var(--paper-blue-grey-500);
-    }
+    /*paper-icon-button.done-True:hover{*/
+        /*color: var(--paper-blue-grey-500);*/
+    /*}*/
 
     paper-menu-button{
         padding: 0;

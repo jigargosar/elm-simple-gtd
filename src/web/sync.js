@@ -20,22 +20,23 @@ export default function (app) {
         })
         peer.on('open', function (id) {
             console.log('My peer ID is: ' + id);
-            const conn =  peer.connect(remotePeerId)
-            conn.on('open', function() {
-                conn.send('ping');
-            });
-            conn.on('data', function(data) {
-                console.log('Received', data);
-            });
-            conn.on("error", e =>{
-                console.dir(e)
-                console.error("open error", e)
-            })
-            conn.on("close", e =>{
-                console.dir(e)
-                console.error("closed", e)
-            })
         });
+
+        const conn =  peer.connect(remotePeerId)
+        conn.on('open', function() {
+            conn.send('ping');
+        });
+        conn.on('data', function(data) {
+            console.log('Received', data);
+        });
+        conn.on("error", e =>{
+            console.dir(e)
+            console.error("open error", e)
+        })
+        conn.on("close", e =>{
+            console.dir(e)
+            console.error("closed", e)
+        })
 
         peer.on('connection', function (conn) {
             conn.on('data', function (data) {

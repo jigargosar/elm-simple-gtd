@@ -4,7 +4,7 @@ import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, hr, node, span, text)
-import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, tabindex, value)
+import Html.Attributes exposing (attribute, autofocus, checked, class, classList, id, style, tabindex, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model.TodoStore
@@ -26,7 +26,7 @@ import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
-import View.Shared
+import View.Shared exposing (showOnHover)
 
 
 appDrawerView contextVM projectVM m =
@@ -54,10 +54,10 @@ divider =
     hr [] []
 
 
-entityList { vmList, viewType, title } =
+entityList { vmList, viewType, title, showDeleted } =
     [ item [ onClick (SetView viewType) ]
         [ itemBody [] [ span [ class "ellipsis" ] [ text title ] ]
-        , toggleButton [] []
+        , showOnHover [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] [] ]
         ]
     , divider
     ]

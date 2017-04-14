@@ -41,6 +41,7 @@ stopAndMarkDone =
 
 type Msg
     = NoOp
+    | ToggleShowDeletedEntity
     | Start Todo.Model
     | Stop
     | MarkRunningTodoDone

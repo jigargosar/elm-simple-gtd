@@ -47,6 +47,9 @@ update msg =
                 NoOp ->
                     identity
 
+                ToggleShowDeletedEntity ->
+                    Return.map ((\m -> { m | showDeleted = not m.showDeleted }))
+
                 FocusPaperInput selector ->
                     focusPaperInputCmd selector
 

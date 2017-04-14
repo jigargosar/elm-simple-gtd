@@ -126,8 +126,16 @@ contextList model =
 
 
 context model =
-    { vmList = contextList model, viewType = GroupByContextView, title = "Contexts" }
+    { vmList = contextList model
+    , viewType = GroupByContextView
+    , title = "Contexts"
+    , showDeleted = model.showDeleted
+    }
 
 
 project model =
-    { vmList = projectList model, viewType = GroupByProjectView, title = "Project" }
+    { vmList = projectList model
+    , viewType = GroupByProjectView
+    , title = "Project"
+    , showDeleted = model.showDeleted
+    }

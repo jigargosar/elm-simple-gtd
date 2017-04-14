@@ -54,11 +54,15 @@ divider =
     hr [] []
 
 
-groupByProjectItem projectVMs m =
-    [ item [ onClick (SetView GroupByProjectView) ] [ text "Projects" ]
+groupByEntity { vmList, viewType, title } =
+    [ item [ onClick (SetView viewType) ] [ itemBody [] [ text title ] ]
     , divider
     ]
-        ++ (List.map entityItem projectVMs)
+        ++ (List.map entityItem vmList)
+
+
+groupByProjectItem projectVMs m =
+    groupByEntity { vmList = projectVMs, viewType = GroupByProjectView, title = "Projects" }
 
 
 contextItems contextVMs m =

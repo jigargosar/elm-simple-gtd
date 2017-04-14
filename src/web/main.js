@@ -7,9 +7,18 @@ import R from "ramda"
 
 import sound from "./sound"
 
+import Peer from "peerjs"
+
 const _ = R
 
 async function boot() {
+
+    var peer = new Peer({host: 'sgtd-peer-js.herokuapp.com', port: ''});
+
+    peer.on('open', function(id) {
+        console.log('My peer ID is: ' + id);
+    });
+
 
     const dbMap = {
         "todo-db": await PouchDB("todo-db"),

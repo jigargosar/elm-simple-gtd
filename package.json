@@ -11,8 +11,8 @@
     "build": "cross-env NODE_ENV=production webpack -p --progress; cp -r static/ app/; cd app; polymer build; cd ..",
     "postbuild": "cp -r app/build/unbundled/ docs/",
     "travis": "npm run bootstrap; npm run build",
-    "link":"ln -Fs `pwd`/src/web/bower_components static/bower_components",
-    "start":"http-server docs"
+    "link": "ln -Fs `pwd`/src/web/bower_components static/bower_components",
+    "start": "http-server docs"
   },
   "devDependencies": {
     "babel-core": "6.23.1",
@@ -45,6 +45,7 @@
     "dateparser": "1.0.6",
     "howler": "2.0.3",
     "parse-messy-time": "2.1.0",
+    "peerjs": "0.3.14",
     "pouchdb-browser": "6.1.2",
     "pouchdb-find": "0.10.5",
     "pouchdb-upsert": "2.1.0",

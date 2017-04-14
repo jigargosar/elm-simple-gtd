@@ -213,7 +213,8 @@ default vc todo =
                     ]
                 ]
             , hoverIcons vm vc
-            , nonHoverIcons vm
+            , hideOnHover vm.isDone [ doneIconButton vm ]
+            , hideOnHover vm.isDeleted [ deleteIconButton vm ]
             ]
 
 
@@ -232,14 +233,6 @@ hoverIcons vm vc =
           doneIconButton vm
         , deleteIconButton vm
         , moveToContextMenuIcon vm vc
-        ]
-
-
-nonHoverIcons : DefaultTodoViewModel -> Html Msg
-nonHoverIcons vm =
-    div []
-        [ hideOnHover vm.isDone [ doneIconButton vm ]
-        , hideOnHover vm.isDeleted [ deleteIconButton vm ]
         ]
 
 

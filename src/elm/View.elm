@@ -14,7 +14,7 @@ import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (Msg)
 import Set
 import Entity.ViewModel
-import View.TodoList
+import View.EntityList
 import View.AppDrawer exposing (appDrawerView)
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -105,22 +105,22 @@ appMainView contextVMs projectVMs m =
     div [ id "main-view" ]
         [ case Model.getMainViewType m of
             GroupByContextView ->
-                View.TodoList.groupByEntity contextVMs m
+                View.EntityList.groupByEntity contextVMs m
 
             GroupByProjectView ->
-                View.TodoList.groupByEntity projectVMs m
+                View.EntityList.groupByEntity projectVMs m
 
             ProjectView id ->
-                View.TodoList.singletonEntity projectVMs id m
+                View.EntityList.singletonEntity projectVMs id m
 
             ContextView id ->
-                View.TodoList.singletonEntity contextVMs id m
+                View.EntityList.singletonEntity contextVMs id m
 
             BinView ->
-                View.TodoList.filtered m
+                View.EntityList.filtered m
 
             DoneView ->
-                View.TodoList.filtered m
+                View.EntityList.filtered m
         ]
 
 

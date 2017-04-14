@@ -1,4 +1,4 @@
-module View.TodoList exposing (..)
+module View.EntityList exposing (..)
 
 import Context
 import Dict exposing (Dict)

@@ -27,7 +27,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Polymer.Paper exposing (..)
-import View.Shared exposing (SharedViewModel)
+import View.Shared exposing (SharedViewModel, hideOnHover)
 
 
 listItemView vc todo =
@@ -238,8 +238,8 @@ hoverIcons vm vc =
 nonHoverIcons : DefaultTodoViewModel -> Html Msg
 nonHoverIcons vm =
     div []
-        [ View.Shared.hideOnHover vm.isDone [ doneIconButton vm ]
-        , View.Shared.hideOnHover vm.isDeleted [ deleteIconButton vm ]
+        [ hideOnHover vm.isDone [ doneIconButton vm ]
+        , hideOnHover vm.isDeleted [ deleteIconButton vm ]
         ]
 
 

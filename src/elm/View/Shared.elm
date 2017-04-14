@@ -77,6 +77,10 @@ trashButton =
     iconButton "delete"
 
 
+settingsButton =
+    iconButton "settings"
+
+
 showOnHover =
     div [ class "show-on-hover" ]
 

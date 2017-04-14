@@ -162,8 +162,12 @@ getEntityList =
     getEntityStore >>> Store.asList
 
 
+getDeletedEntityList =
+    getEntityStore >>> Store.filter Document.isDeleted
+
+
 getActiveEntityList =
-    getEntityStore >>> Store.reject (anyPass [ Document.isDeleted ])
+    getEntityStore >>> Store.reject Document.isDeleted
 
 
 getActiveTodoList =

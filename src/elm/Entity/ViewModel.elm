@@ -42,9 +42,16 @@ createViewModelList config model =
         getTodoListWithGroupId id =
             todoListDict |> Dict.get id ?= []
 
+        appendDeletedEntityList =
+            if model.showDeleted then
+                List.append # (Model.getDeletedEntityList config.entityType model)
+            else
+                identity
+
         entityList =
-            Model.getEntityList config.entityType model
+            Model.getActiveEntityList config.entityType model
                 |> (::) config.nullEntity
+                |> appendDeletedEntityList
     in
         entityList
             .|> createViewModel getTodoListWithGroupId config

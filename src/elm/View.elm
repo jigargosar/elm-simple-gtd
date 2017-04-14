@@ -61,9 +61,17 @@ appDrawerLayoutView m =
             [ appDrawerView contextVM projectVM m
             , App.headerLayout []
                 [ appHeaderView m
+                , syncView m
                 , appMainView contextVMs projectVMs m
                 ]
             ]
+
+
+syncView m =
+    material []
+        [ input [ onInput Msg.SyncIdChanged ] []
+        , button [ onClick Msg.StartSync ] [ text "sync" ]
+        ]
 
 
 appHeaderView m =

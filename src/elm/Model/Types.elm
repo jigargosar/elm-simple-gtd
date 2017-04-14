@@ -41,6 +41,7 @@ type alias Model =
     , keyboardState : Keyboard.State
     , selection : Selection
     , showDeleted : Bool
+    , syncId : String
     }
 
 

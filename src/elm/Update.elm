@@ -40,12 +40,21 @@ import Model.Types exposing (..)
 import Types
 
 
+port startSync : String -> Cmd msg
+
+
 update : Msg -> Model -> Return
 update msg =
     Return.singleton
         >> (case msg of
                 NoOp ->
                     identity
+
+                SyncIdChanged id ->
+                    Return.map ((\m -> { m | syncId = id }))
+
+                StartSync ->
+                    Return.effect_ (.syncId >> startSync)
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))

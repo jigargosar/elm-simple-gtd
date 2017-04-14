@@ -41,6 +41,8 @@ stopAndMarkDone =
 
 type Msg
     = NoOp
+    | SyncIdChanged String
+    | StartSync
     | ToggleShowDeletedEntity
     | Start Todo.Model
     | Stop

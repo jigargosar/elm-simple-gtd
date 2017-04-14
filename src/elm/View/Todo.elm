@@ -213,10 +213,10 @@ hoverIcons vm vc todo =
 
 nonHoverIcons vc vm =
     div [ class "hide-on-hover" ]
-        ([] ++ (doneNonHoverIcon vc vm |> Maybe.Extra.toList))
+        ([] ++ (doneNonHoverIcon vm |> Maybe.Extra.toList))
 
 
-doneNonHoverIcon vc vm =
+doneNonHoverIcon vm =
     if vm.done then
         Just (doneIconButton vm)
     else

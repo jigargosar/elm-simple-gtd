@@ -71,3 +71,7 @@ expand =
 
 iconButton iconName onClickHandler =
     Polymer.Paper.iconButton [ icon iconName, onClick onClickHandler ] []
+
+
+trashButton =
+    iconButton "delete"

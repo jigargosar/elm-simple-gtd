@@ -26,7 +26,7 @@ import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
-import View.Shared exposing (showOnHover)
+import View.Shared exposing (..)
 
 
 appDrawerView contextVM projectVM m =
@@ -76,15 +76,11 @@ entityItem vm =
     item [ class "", onClick vm.navigateToEntityMsg ]
         ([ itemBody [] [ View.Shared.defaultBadge vm ]
          , hoverIcons vm
+         , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
          ]
         )
 
 
 hoverIcons vm =
     div [ class "show-on-hover" ]
-        [ iconButton
-            [ onClick vm.startEditingMsg
-            , icon "settings"
-            ]
-            []
-        ]
+        [ settingsButton vm.startEditingMsg ]

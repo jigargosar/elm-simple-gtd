@@ -30,7 +30,9 @@ async function boot() {
             now: Date.now(),
             encodedTodoList: allTodos,
             encodedProjectList: allProjects,
-            encodedContextList: contexts
+            encodedContextList: contexts,
+            myPeerId : localStorage.getItem("my-peer-id"),
+            remotePeerId : localStorage.getItem("remote-peer-id")
         })
 
     const sync = Sync(app)

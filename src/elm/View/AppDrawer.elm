@@ -56,7 +56,7 @@ divider =
 
 groupByEntity { vmList, viewType, title } =
     [ item [ onClick (SetView viewType) ]
-        [ itemBody [] [ text title ]
+        [ itemBody [] [ span [ class "ellipsis" ] [ text title ] ]
         , toggleButton [] []
         ]
     , divider

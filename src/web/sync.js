@@ -3,7 +3,7 @@ import Peer from "peerjs"
 
 export default function (app) {
 
-    app.ports["startSync"].subscribe((myPeerId, remotePeerId)=>{
+    app.ports["startSync"].subscribe(([myPeerId, remotePeerId])=>{
 
         // const myPeerId = localStorage.getItem("my-peer-id")
         localStorage.setItem("my-peer-id", myPeerId)

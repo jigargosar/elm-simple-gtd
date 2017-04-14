@@ -38,12 +38,12 @@ appDrawerView contextVMs projectVMs m =
                 [ stringProperty "selected" "0"
                 , stringProperty "selectable" "paper-item"
                 ]
-                ([ item [ onClick (SetView GroupByContextView) ] [ text "Contexts" ]
+                ([ groupByContextItem m
                  , divider
                  ]
                     ++ List.map entityItem contextVMs
                     ++ [ divider
-                       , projectsItemView m
+                       , groupByProjectItem m
                        , divider
                        ]
                     ++ List.map entityItem projectVMs
@@ -60,8 +60,12 @@ divider =
     hr [] []
 
 
-projectsItemView m =
+groupByProjectItem m =
     item [ onClick (SetView GroupByProjectView) ] [ text "Projects" ]
+
+
+groupByContextItem m =
+    item [ onClick (SetView GroupByContextView) ] [ text "Contexts" ]
 
 
 binItemView m =

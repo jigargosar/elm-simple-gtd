@@ -14,10 +14,11 @@ const _ = R
 async function boot() {
 
     var peer = new Peer({host: 'sgtd-peer-js.herokuapp.com', port: ''});
-
+    peer.on("error", console.error)
     peer.on('open', function(id) {
         console.log('My peer ID is: ' + id);
     });
+    peer.on('connection', function(conn) { console.log(conn) });
 
 
     const dbMap = {
@@ -59,6 +60,20 @@ async function boot() {
             console.log("upsertResult", upsertResult)
         }
     });
+
+    app.ports["startSync"].subscribe((id)=>{
+        const conn =  peer.connect(id)
+        conn.on('open', function() {
+            // Receive messages
+            conn.on('data', function(data) {
+                console.log('Received', data);
+            });
+
+            // Send messages
+            conn.send('Hello!');
+            conn.on("error", console.error)
+        });
+    })
 
 
     app.ports["focusPaperInput"].subscribe((selector) => {

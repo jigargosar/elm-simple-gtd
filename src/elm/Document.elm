@@ -82,6 +82,10 @@ documentFieldsDecoder =
         >> D.optional "deleted" D.bool False
 
 
+isDeleted =
+    .deleted
+
+
 
 --type alias TT msg =
 --    Tracker {} {} msg

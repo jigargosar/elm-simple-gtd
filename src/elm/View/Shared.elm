@@ -7,10 +7,12 @@ import EditMode exposing (EditMode, EditTodoModel)
 import Html exposing (Html, div, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Attributes.Extra exposing (intProperty)
+import Html.Events exposing (onClick)
 import Json.Encode
 import Model
 import Model.EditMode
-import Polymer.Paper exposing (badge)
+import Polymer.Attributes exposing (icon)
+import Polymer.Paper exposing (badge, iconButton)
 import Set exposing (Set)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -65,3 +67,7 @@ row =
 
 expand =
     div [ class "flex11" ]
+
+
+iconButton iconName onClickHandler =
+    Polymer.Paper.iconButton [ icon iconName, onClick onClickHandler ] []

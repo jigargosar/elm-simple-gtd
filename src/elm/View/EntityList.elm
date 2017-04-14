@@ -34,12 +34,12 @@ import List.Extra as List
 import Model as Model
 import Model.Types exposing (..)
 import Todo
-import Polymer.Paper as Paper exposing (badge, button, fab, iconButton, input, item, itemBody, material, menu, tab, tabs)
+import Polymer.Paper as Paper exposing (badge, button, fab, input, item, itemBody, material, menu, tab, tabs)
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import Entity.ViewModel
 import View.Todo exposing (EditTodoViewModel)
-import View.Shared exposing (SharedViewModel, expand, row)
+import View.Shared exposing (SharedViewModel, expand, iconButton, row)
 
 
 filtered : Model -> Html Msg
@@ -103,11 +103,7 @@ defaultView vm =
         [ View.Shared.defaultBadge vm
         , itemBody [] []
         , div [ class "show-on-hover" ]
-            [ iconButton
-                [ onClick vm.startEditingMsg
-                , icon "settings"
-                ]
-                []
+            [ iconButton "settings" vm.startEditingMsg
             ]
         ]
 
@@ -132,6 +128,6 @@ editEntityView editModel vm =
             [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
             , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
             , expand []
-            , iconButton [ icon "delete", onClick vm.onDeleteClicked ] []
+            , iconButton "delete" vm.onDeleteClicked
             ]
         ]

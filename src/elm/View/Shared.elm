@@ -4,7 +4,7 @@ import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
 import EditMode exposing (EditMode, EditTodoModel)
-import Html exposing (Html, div, text)
+import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Attributes.Extra exposing (intProperty)
 import Html.Events exposing (onClick)
@@ -55,9 +55,13 @@ createSharedViewModel model =
 
 defaultBadge : { x | name : String, count : Int } -> Html msg
 defaultBadge vm =
-    div []
-        [ div [] [ text vm.name ]
-        , badge [ tabindex -1, intProperty "label" (vm.count) ] []
+    --    div [ class "ellipsis" ]
+    --        [ div [] [ text vm.name ]
+    --        , badge [ tabindex -1, intProperty "label" (vm.count) ] []
+    --        ]
+    row
+        [ div [ class "ellipsis" ] [ vm.name |> text ]
+        , div [ style [ "margin-left" => "0.5rem" ] ] [ " (" ++ (vm.count |> toString) ++ ")" |> text ]
         ]
 
 

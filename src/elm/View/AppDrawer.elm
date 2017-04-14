@@ -74,8 +74,7 @@ doneItemView m =
 
 entityItem vm =
     item [ class "", onClick vm.navigateToEntityMsg ]
-        ([ View.Shared.defaultBadge vm
-         , itemBody [] []
+        ([ itemBody [] [ View.Shared.defaultBadge vm ]
          , hoverIcons vm
          ]
         )

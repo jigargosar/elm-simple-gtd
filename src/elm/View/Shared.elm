@@ -75,3 +75,11 @@ iconButton iconName onClickHandler =
 
 trashButton =
     iconButton "delete"
+
+
+showOnHover =
+    div [ class "show-on-hover" ]
+
+
+hideOnHover =
+    div [ class "hide-on-hover" ]

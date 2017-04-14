@@ -20,7 +20,7 @@ async function boot() {
         if(e.type === "network"){
             setTimeout(()=>{
                 peer.reconnect()
-            },1000)
+            },5000)
         }else{
             localStorage.removeItem("id")
         }

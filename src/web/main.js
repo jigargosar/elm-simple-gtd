@@ -13,7 +13,8 @@ const _ = R
 
 async function boot() {
 
-    const peer = new Peer({secure:true, host: 'sgtd-peer-js.herokuapp.com', port: ''});
+    const id = localStorage.getItem("id")
+    const peer = new Peer(id, {secure:true, host: 'sgtd-peer-js.herokuapp.com', port: ''});
     peer.on("error", e => {
         console.dir(e)
         if(e.type === "network"){
@@ -24,6 +25,7 @@ async function boot() {
     })
     peer.on('open', function(id) {
         console.log('My peer ID is: ' + id);
+        localStorage.setItem("id", id)
     });
     peer.on('connection', function(conn) { console.log(conn) });
 
@@ -78,7 +80,10 @@ async function boot() {
 
             // Send messages
             conn.send('Hello!');
-            conn.on("error", console.error)
+            conn.on("error", e =>{
+                console.dir(e)
+                console.error("sync error", e)
+            })
         });
     })
 

@@ -20,7 +20,7 @@ async function boot() {
         if(e.type === "network"){
             setTimeout(()=>{
                 peer.reconnect()
-            },0)
+            },1000)
         }else{
             localStorage.removeItem("id")
         }
@@ -65,17 +65,6 @@ async function boot() {
             encodedContextList: contexts
         })
 
-
-    // app.ports["pouchDBBulkDocks"].subscribe(async([dbName, docs]) => {
-    //     const bulkResult = await dbMap[dbName].bulkDocs(docs)
-    //     // const conflicts =
-    //     //     _.filter(_.compose(_.propEq("name", "conflict"), _.head)
-    //     //     )(_.zip(bulkResult, docs))
-    //     // console.log(conflicts)
-    //     //
-    //     console.log("bulkResult:", dbName, bulkResult, docs)
-    //     app.ports["onPouchDBBulkDocksResponse"].send([dbName, bulkResult, docs])
-    // })
 
     app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
         // console.log("upserting", dbName, doc, id)

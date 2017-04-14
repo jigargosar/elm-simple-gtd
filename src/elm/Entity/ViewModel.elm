@@ -5,7 +5,7 @@ import Dict
 import Document
 import EditMode exposing (EditMode)
 import Lazy
-import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(Delete, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), EntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, ProjectView))
+import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(Delete, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), EntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
 import Msg exposing (Msg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -123,3 +123,11 @@ contextList model =
         , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
         }
         model
+
+
+context model =
+    { vmList = contextList model, viewType = GroupByContextView, title = "Contexts" }
+
+
+project model =
+    { vmList = projectList model, viewType = GroupByProjectView, title = "Project" }

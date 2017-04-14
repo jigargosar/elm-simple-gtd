@@ -29,7 +29,7 @@ import Model.Types exposing (..)
 import View.Shared
 
 
-appDrawerView contextVMs projectVMs m =
+appDrawerView contextVM projectVM m =
     App.drawer [ attribute "slot" "drawer" ]
         [ div
             [ style [ "height" => "100%", "overflow" => "scroll" ]
@@ -38,9 +38,9 @@ appDrawerView contextVMs projectVMs m =
                 [ stringProperty "selected" "0"
                 , stringProperty "selectable" "paper-item"
                 ]
-                (contextItems contextVMs m
+                (groupByEntity contextVM
                     ++ [ divider ]
-                    ++ groupByProjectItem projectVMs m
+                    ++ groupByEntity projectVM
                     ++ [ divider ]
                     ++ [ binItemView m
                        , doneItemView m
@@ -59,17 +59,6 @@ groupByEntity { vmList, viewType, title } =
     , divider
     ]
         ++ (List.map entityItem vmList)
-
-
-groupByProjectItem projectVMs m =
-    groupByEntity { vmList = projectVMs, viewType = GroupByProjectView, title = "Projects" }
-
-
-contextItems contextVMs m =
-    [ item [ onClick (SetView GroupByContextView) ] [ text "Contexts" ]
-    , divider
-    ]
-        ++ (List.map entityItem contextVMs)
 
 
 binItemView m =

@@ -22,7 +22,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Html exposing (div, span, text)
+import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
@@ -150,14 +150,32 @@ edit vm =
         ]
 
 
+type alias DefaultTodoViewModel =
+    { text : String
+    , isDone : Bool
+    , isDeleted : Bool
+    , isSelected : Bool
+    , projectName : String
+    , contextName : String
+    , onCheckBoxClicked : Msg
+    , setContextMsg : Context.Model -> Msg
+    , startEditingMsg : Msg
+    , onDoneClicked : Msg
+    , onDeleteClicked : Msg
+    }
+
+
 default vc todo =
     let
+        vm : DefaultTodoViewModel
         vm =
             let
                 todoId =
                     Document.getId todo
             in
-                { onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
+                { isDone = Todo.getDone todo
+                , isDeleted = Todo.getDeleted todo
+                , text = Todo.getText todo
                 , isSelected = Set.member todoId vc.selection
                 , projectName =
                     Todo.getProjectId todo
@@ -167,11 +185,16 @@ default vc todo =
                     Todo.getContextId todo
                         |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
                         ?= "Inbox"
+                , onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
+                , setContextMsg = Msg.SetTodoContext # todo
+                , startEditingMsg = Msg.StartEditingTodo todo
+                , onDoneClicked = Msg.ToggleTodoDone todo
+                , onDeleteClicked = Msg.ToggleTodoDeleted todo
                 }
     in
         item
             [ class "todo-item"
-            , onClickStopPropagation (Msg.StartEditingTodo todo)
+            , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ checkBoxView vm
             , itemBody []
@@ -189,8 +212,8 @@ default vc todo =
                     , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
                     ]
                 ]
-            , hoverIcons vm vc todo
-            , nonHoverIcons vc todo
+            , hoverIcons vm vc
+            , nonHoverIcons vm
             ]
 
 
@@ -202,40 +225,51 @@ todoInputId todoId =
     "edit-todo-input-" ++ todoId
 
 
-hoverIcons vm vc todo =
+hoverIcons : DefaultTodoViewModel -> SharedViewModel -> Html Msg
+hoverIcons vm vc =
     div [ class "show-on-hover" ]
-        [ --        startIconButton vc todo
-          doneIconButton todo
-        , deleteIconButton vc todo
-        , moveToContextMenuIcon vm vc todo
+        [ --        startIconButton vm
+          doneIconButton vm
+        , deleteIconButton vm
+        , moveToContextMenuIcon vm vc
         ]
 
 
-nonHoverIcons vc vm =
+nonHoverIcons : DefaultTodoViewModel -> Html Msg
+nonHoverIcons vm =
     div [ class "hide-on-hover" ]
-        ([] ++ (doneNonHoverIcon vm |> Maybe.Extra.toList))
+        ([] ++ (doneNonHoverIcon vm |> Maybe.Extra.toList) ++ (deleteNonHoverIcon vm |> Maybe.Extra.toList))
 
 
+doneNonHoverIcon : DefaultTodoViewModel -> Maybe (Html Msg)
 doneNonHoverIcon vm =
-    if vm.done then
+    if vm.isDone then
         Just (doneIconButton vm)
     else
         Nothing
 
 
+deleteNonHoverIcon : DefaultTodoViewModel -> Maybe (Html Msg)
+deleteNonHoverIcon vm =
+    if vm.isDeleted then
+        Just (deleteIconButton vm)
+    else
+        Nothing
+
+
+doneIconButton : DefaultTodoViewModel -> Html Msg
 doneIconButton vm =
     iconButton
-        [ class ("done-" ++ toString (vm.done))
-        , onClickStopPropagation (Msg.ToggleTodoDone vm)
+        [ class ("done-" ++ toString (vm.isDone))
+        , onClickStopPropagation (vm.onDoneClicked)
         , icon "check"
         ]
         []
 
 
-deleteIconButton vc todo =
+deleteIconButton vm =
     iconButton
-        [ onClickStopPropagation
-            (Msg.ToggleTodoDeleted todo)
+        [ onClickStopPropagation vm.onDeleteClicked
         , icon "delete"
         ]
         []
@@ -245,7 +279,7 @@ startIconButton vc todo =
     iconButton [ onClickStopPropagation (Msg.Start todo), icon "av:play-circle-outline" ] []
 
 
-moveToContextMenuIcon vm vc todo =
+moveToContextMenuIcon vm vc =
     menuButton
         [ onClickStopPropagation Msg.NoOp
         , attribute "horizontal-align" "right"
@@ -261,7 +295,7 @@ moveToContextMenuIcon vm vc todo =
                 .|> (\context ->
                         item
                             [ attribute "context-name" (Context.getName context)
-                            , onClickStopPropagation (Msg.SetTodoContext context todo)
+                            , onClickStopPropagation (vm.setContextMsg context)
                             ]
                             [ text (Context.getName context) ]
                     )

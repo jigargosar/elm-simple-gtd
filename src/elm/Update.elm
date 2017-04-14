@@ -50,6 +50,9 @@ update msg =
                 NoOp ->
                     identity
 
+                OnMyPeerIdChanged id ->
+                    Return.map ((\m -> { m | myPeerId = id }))
+
                 SyncIdChanged id ->
                     Return.map ((\m -> { m | syncId = id }))
 

@@ -19,6 +19,7 @@ export default function (app) {
     peer.on('open', function (id) {
         console.log('My peer ID is: ' + id);
         localStorage.setItem("my-peer-id", id)
+        app.ports["peerIdChanged"].send(id)
     });
     peer.on('connection', function (conn) {
         conn.on('data', function (data) {

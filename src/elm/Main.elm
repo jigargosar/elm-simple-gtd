@@ -62,4 +62,8 @@ subscriptions m =
         [ Time.every Time.second (OnNowChanged)
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.keyUps OnKeyUp
+        , peerIdChanged Msg.OnMyPeerIdChanged
         ]
+
+
+port peerIdChanged : (String -> msg) -> Sub msg

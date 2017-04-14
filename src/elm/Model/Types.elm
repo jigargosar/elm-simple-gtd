@@ -42,6 +42,7 @@ type alias Model =
     , selection : Selection
     , showDeleted : Bool
     , syncId : String
+    , myPeerId : String
     }
 
 

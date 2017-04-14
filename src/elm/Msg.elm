@@ -43,6 +43,7 @@ type Msg
     = NoOp
     | SyncIdChanged String
     | StartSync
+    | OnMyPeerIdChanged String
     | ToggleShowDeletedEntity
     | Start Todo.Model
     | Stop

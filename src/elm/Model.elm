@@ -56,6 +56,7 @@ init now encodedTodoList encodedProjectList encodedContextList =
         , selection = Set.empty
         , showDeleted = False
         , syncId = ""
+        , myPeerId = ""
         }
 
 

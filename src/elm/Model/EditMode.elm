@@ -127,7 +127,7 @@ updateEditTodoProjectName projectName editTodoModel =
 
 updateEditTodoContextName : Context.Name -> EditTodoModel -> ModelF
 updateEditTodoContextName contextName editTodoModel =
-    setEditMode (EditMode.updateEditTodoProjectName contextName editTodoModel)
+    setEditMode (EditMode.updateEditTodoContextName contextName editTodoModel)
 
 
 deactivateEditingMode =

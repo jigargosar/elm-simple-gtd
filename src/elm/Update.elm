@@ -103,11 +103,11 @@ update msg =
                 EditTodoTextChanged editTodoModel text ->
                     Return.map (Model.updateEditTodoText text editTodoModel)
 
-                EditTodoProjectNameChanged editTodoModel projectName ->
-                    Return.map (Model.updateEditTodoProjectName projectName editTodoModel)
+                EditTodoProjectNameChanged editModel projectName ->
+                    Return.map (Model.updateEditTodoProjectName projectName editModel)
 
-                EditTodoContextNameChanged editTodoModel contextName ->
-                    Return.map (Model.updateEditTodoContextName contextName editTodoModel)
+                EditTodoContextNameChanged editModel contextName ->
+                    Return.map (Model.updateEditTodoContextName contextName editModel)
 
                 CopyAndEditTodo todo ->
                     Return.andThenApplyWith Model.getNow

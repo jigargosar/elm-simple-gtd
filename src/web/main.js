@@ -14,7 +14,11 @@ const _ = R
 async function boot() {
 
     var peer = new Peer({host: 'sgtd-peer-js.herokuapp.com', port: ''});
-    peer.on("error", console.error)
+    peer.on("error", e => {
+        console.dir(e)
+        if(e.type === "network")
+            peer.reconnect()
+    })
     peer.on('open', function(id) {
         console.log('My peer ID is: ' + id);
     });

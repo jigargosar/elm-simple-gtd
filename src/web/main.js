@@ -21,6 +21,8 @@ async function boot() {
             setTimeout(()=>{
                 peer.reconnect()
             },0)
+        }else{
+            localStorage.removeItem("id")
         }
     })
     peer.on('open', function(id) {

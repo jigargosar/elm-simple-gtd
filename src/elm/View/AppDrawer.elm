@@ -41,7 +41,6 @@ appDrawerView contextVMs projectVMs m =
                 (contextItems contextVMs m
                     ++ [ divider ]
                     ++ groupByProjectItem projectVMs m
-                    ++ List.map entityItem projectVMs
                     ++ [ divider ]
                     ++ [ binItemView m
                        , doneItemView m

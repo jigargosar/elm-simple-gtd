@@ -39,7 +39,7 @@ import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import Entity.ViewModel
 import View.Todo exposing (EditTodoViewModel)
-import View.Shared exposing (SharedViewModel)
+import View.Shared exposing (SharedViewModel, expand, row)
 
 
 filtered : Model -> Html Msg
@@ -128,10 +128,10 @@ editEntityView editModel vm =
                     []
                 ]
             ]
-        , div [ class "row" ]
+        , row
             [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
             , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
-            , div [ class "flex11" ] []
+            , expand []
             , iconButton [ icon "delete", onClick vm.onDeleteClicked ] []
             ]
         ]

@@ -5,7 +5,7 @@ import Dict exposing (Dict)
 import Document exposing (Id)
 import EditMode exposing (EditMode, EditTodoModel)
 import Html exposing (Html, div, text)
-import Html.Attributes exposing (tabindex)
+import Html.Attributes exposing (class, style, tabindex)
 import Html.Attributes.Extra exposing (intProperty)
 import Json.Encode
 import Model
@@ -57,3 +57,11 @@ defaultBadge vm =
         [ div [] [ text vm.name ]
         , badge [ tabindex -1, intProperty "label" (vm.count) ] []
         ]
+
+
+row =
+    div [ class "row" ]
+
+
+expand =
+    div [ class "flex11" ]

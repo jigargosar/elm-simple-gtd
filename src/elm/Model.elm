@@ -158,9 +158,12 @@ getMaybeEditModelForEntityType entityType model =
             Nothing
 
 
-getActiveEntityList =
-    --    getEntityStore >>> Store.reject (anyPass [ Document.isDeleted ])
+getEntityList =
     getEntityStore >>> Store.asList
+
+
+getActiveEntityList =
+    getEntityStore >>> Store.reject (anyPass [ Document.isDeleted ])
 
 
 getActiveTodoList =

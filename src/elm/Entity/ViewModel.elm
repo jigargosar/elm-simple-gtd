@@ -43,7 +43,7 @@ createViewModelList config model =
             todoListDict |> Dict.get id ?= []
 
         entityList =
-            Model.getActiveEntityList config.entityType model
+            Model.getEntityList config.entityType model
                 |> (::) config.nullEntity
     in
         entityList

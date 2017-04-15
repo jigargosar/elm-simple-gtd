@@ -61,7 +61,7 @@ appDrawerLayoutView m =
             [ appDrawerView contextVM projectVM m
             , App.headerLayout []
                 [ appHeaderView m
---                , syncView m
+                , syncView m
                 , appMainView contextVMs projectVMs m
                 ]
             ]

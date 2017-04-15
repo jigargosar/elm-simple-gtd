@@ -35,7 +35,7 @@ async function boot() {
             remotePeerId : localStorage.getItem("remote-peer-id") || ""
         })
 
-    const sync = Sync(app, dbMap)
+    // const sync = Sync(app, dbMap)
 
     app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
         // console.log("upserting", dbName, doc, id)

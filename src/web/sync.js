@@ -38,19 +38,20 @@ export default function (app, dbMap) {
         peer.on('connection', function (conn) {
             const stream = new MemoryStream()
             dbMap["project-db"]
-                .loadFromStream(stream)
+                ._db
+                .load(stream)
                 .then(() => {
                     console.info("inbound replication complete")
                     conn.close()
                 })
-                .error(e => {
+                .catch(e => {
                     console.error("inbound replication error", e)
                     conn.close()
                 })
 
             conn.on('data', function (data) {
                 console.log('Received', data);
-                stream.write(data)
+                stream.write(new Buffer(data))
             });
 
             conn.on("error", e => {
@@ -58,6 +59,7 @@ export default function (app, dbMap) {
                 console.error("sync error", e)
             })
             conn.on("close", () => {
+                stream.end()
                 console.warn("in coming conn closed")
             })
         });

@@ -2,11 +2,16 @@
 
 import PouchDB from "pouchdb-browser"
 const _ = require("ramda")
+const replicationStream = require('pouchdb-replication-stream')
+const MemoryStream = require('memorystream')
 
 // PouchDB.debug.enable("*")
 PouchDB.debug.disable()
 PouchDB.plugin(require('pouchdb-find'))
 PouchDB.plugin(require('pouchdb-upsert'))
+PouchDB.plugin(replicationStream.plugin);
+PouchDB.adapter('writableStream', replicationStream.adapters.writableStream);
+
 
 global.PouchDB = PouchDB
 

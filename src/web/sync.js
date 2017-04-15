@@ -1,7 +1,8 @@
 "use strict";
 import Peer from "peerjs"
+const MemoryStream = require('memorystream')
 
-export default function (app) {
+export default function (app, dbMap) {
     let peer = createPeer()
     let conn = null
 
@@ -67,7 +68,21 @@ export default function (app) {
         conn = peer.connect(remotePeerId)
         conn.on('open', () => {
             if (conn.open) {
-                conn.send('ping');
+                const stream = new MemoryStream()
+                dbMap["project-db"]
+                    .replicateToStream(stream)
+                    .then(() => {
+                        console.info("replication complete")
+                        conn.close()
+                    })
+                    .catch(e => {
+                        console.error("replication error")
+                        conn.close()
+                    })
+
+                stream.on("data", function (data) {
+                    conn.send(data)
+                })
             }
         });
         conn.on('data', (data) => {

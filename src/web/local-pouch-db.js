@@ -67,7 +67,10 @@ export default async(dbName, indices = []) => {
         _db: db,
         upsert,
         deleteIndices,
-        _allDocs: async () => await db.allDocs()
+        _allDocs: async () => await db.allDocs(),
+        replicateToStream:function (stream) {
+            return db.dump(stream)
+        }
     }
 }
 

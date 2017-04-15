@@ -36,9 +36,21 @@ export default function (app, dbMap) {
         });
 
         peer.on('connection', function (conn) {
+            const stream = new MemoryStream()
+            dbMap["project-db"]
+                .loadFromStream(stream)
+                .then(() => {
+                    console.info("inbound replication complete")
+                    conn.close()
+                })
+                .error(e => {
+                    console.error("inbound replication error", e)
+                    conn.close()
+                })
+
             conn.on('data', function (data) {
                 console.log('Received', data);
-                conn.send("pong");
+                stream.write(data)
             });
 
             conn.on("error", e => {

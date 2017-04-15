@@ -3,7 +3,7 @@ import Peer from "peerjs"
 
 export default function (app) {
     let peer = createPeer()
-    let conn=null
+    let conn = null
 
     function createPeer() {
         const myPeerId = localStorage.getItem("my-peer-id")
@@ -45,10 +45,10 @@ export default function (app) {
                 console.error("sync error", e)
             })
             conn.on("close", () => {
-                // console.error("in coming conn closed")
+                console.warn("in coming conn closed")
             })
         });
-        
+
         return peer;
     }
 
@@ -60,16 +60,17 @@ export default function (app) {
 
         peer = createPeer()
 
-        if(oldPeer !== peer)
-        {
+        if (oldPeer !== peer) {
             debugger
         }
-        if(conn && !conn.closed) conn.close()
+        if (conn && conn.open) conn.close()
         conn = peer.connect(remotePeerId)
-        conn.on('open', function () {
-            conn.send('ping');
+        conn.on('open', () => {
+            if (conn.open) {
+                conn.send('ping');
+            }
         });
-        conn.on('data', function (data) {
+        conn.on('data', (data) => {
             console.log('Received', data);
         });
         conn.on("error", e => {
@@ -78,7 +79,7 @@ export default function (app) {
         })
 
         conn.on("close", () => {
-            //console.error("out bound conn closed")
+            console.warn("out bound conn closed")
         })
 
     })

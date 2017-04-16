@@ -290,9 +290,6 @@ persist lens =
         )
 
 
-updateTodoById actions todoId =
-    Return.map (Model.updateTodoById actions todoId)
-
 
 updateTodo : List Todo.UpdateAction -> Todo.Model -> ReturnF
 updateTodo actions todo =

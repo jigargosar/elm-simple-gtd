@@ -5,6 +5,7 @@ import EditMode exposing (EditMode, EditTodoModel)
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model exposing (..)
+import Model.TodoStore
 import Project
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -62,7 +63,7 @@ deleteEntity entity model =
                 |> (setProjectStore # model)
 
         TodoEntity todo ->
-            model
+            Model.TodoStore.updateTodo [ Todo.ToggleDeleted ] todo model
 
 
 saveEditModeEntity model =

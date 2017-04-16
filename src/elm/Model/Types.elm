@@ -65,6 +65,7 @@ type EntityAction
 type Entity
     = ProjectEntity Project.Model
     | ContextEntity Context.Model
+    | TodoEntity Todo.Model
 
 
 type EntityType

@@ -44,6 +44,7 @@ updateEditModeNameChanged newName entity model =
             model
 
 
+deleteEntity : Entity -> ModelF
 deleteEntity entity model =
     case entity of
         ContextEntity context ->
@@ -59,6 +60,9 @@ deleteEntity entity model =
                 |> Project.setModifiedAt model.now
                 |> (Store.update # model.projectStore)
                 |> (setProjectStore # model)
+
+        TodoEntity todo ->
+            model
 
 
 saveEditModeEntity model =
@@ -91,19 +95,17 @@ setContextStore contextStore model =
     { model | contextStore = contextStore }
 
 
-createEntityEditMode : Entity -> model -> EditMode
+createEntityEditMode : Entity -> Model -> EditMode
 createEntityEditMode entity model =
     case entity of
-        ContextEntity entityModel ->
-            EditMode.editContextMode entityModel
+        ContextEntity context ->
+            EditMode.editContextMode context
 
-        ProjectEntity entityModel ->
-            EditMode.editProjectMode entityModel
+        ProjectEntity project ->
+            EditMode.editProjectMode project
 
-
-
---        ProjectEntity entityModel ->
---            createEditTodoMode entityModel model
+        TodoEntity todo ->
+            createEditTodoMode todo model
 
 
 createEditTodoMode : Todo.Model -> Model -> EditMode

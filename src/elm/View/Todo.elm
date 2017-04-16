@@ -39,7 +39,7 @@ listItemView vc todo =
             case vc.maybeEditTodoModel of
                 Just etm ->
                     if Document.hasId etm.todoId todo then
-                        (edit (createEditTodoViewModel vc etm))
+                        edit (createEditTodoViewModel vc etm)
                     else
                         notEditingView ()
 
@@ -67,6 +67,9 @@ type alias EditTodoViewModel =
     , onTodoTextChanged : Todo.Text -> Msg
     , onProjectNameChanged : Project.Name -> Msg
     , onContextNameChanged : Context.Name -> Msg
+    , onSaveClicked : Msg
+    , onCancelClicked : Msg
+    , onDeleteClicked : Msg
     , encodedProjectNames : Json.Encode.Value
     , encodedContextNames : Json.Encode.Value
     }
@@ -97,9 +100,13 @@ createEditTodoViewModel vc etm =
         , onContextNameChanged = Msg.EditTodoContextNameChanged etm
         , encodedProjectNames = vc.encodedProjectNames
         , encodedContextNames = vc.encodedContextNames
+        , onSaveClicked = Msg.NoOp
+        , onCancelClicked = Msg.NoOp
+        , onDeleteClicked = Msg.NoOp
         }
 
 
+edit : EditTodoViewModel -> Html Msg
 edit vm =
     item [ class "todo-item" ]
         [ itemBody []
@@ -147,10 +154,10 @@ edit vm =
                 ]
                 []
             , row
-                [ button [] [ "Save" |> text ]
-                , button [] [ "Cancel" |> text ]
+                [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
+                , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
                 , expand []
-                , trashButton Msg.NoOp
+                , trashButton vm.onCancelClicked
                 ]
             ]
         ]

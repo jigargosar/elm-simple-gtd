@@ -81,13 +81,13 @@ entityListItemView vc vm =
     if vm.id /= "" then
         case vc.editMode of
             EditMode.EditProject epm ->
-                if epm.model.id == vm.id then
+                if epm.id == vm.id then
                     editEntityView epm vm
                 else
                     defaultView vm
 
             EditMode.EditContext etm ->
-                if Document.hasId vm.id etm.model then
+                if vm.id == etm.id then
                     editEntityView etm vm
                 else
                     defaultView vm

@@ -21,13 +21,13 @@ type alias EditTodoModel =
 
 
 type alias EditContextModel =
-    { model : Context.Model
+    { id : Document.Id
     , name : Context.Name
     }
 
 
 type alias EditProjectModel =
-    { model : Project.Model
+    { id : Document.Id
     , name : Project.Name
     }
 
@@ -65,7 +65,7 @@ createEditTodoMode todo projectName contextName =
 
 
 editContextMode model =
-    EditContext { model = model, name = Context.getName model }
+    EditContext { id = Document.getId model, name = Context.getName model }
 
 
 editContextSetName name ecm =
@@ -73,7 +73,7 @@ editContextSetName name ecm =
 
 
 editProjectMode model =
-    EditProject { model = model, name = Project.getName model }
+    EditProject { id = Document.getId model, name = Project.getName model }
 
 
 editProjectSetName name epm =

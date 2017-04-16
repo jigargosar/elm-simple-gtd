@@ -74,14 +74,15 @@ toggleDeletedForEntity entity model =
 saveEditModeEntity model =
     case model.editMode of
         EditMode.EditContext ecm ->
-            ecm.model
-                |> Context.setName ecm.name
-                |> Context.setModifiedAt model.now
-                |> (Store.update # model.contextStore)
-                |> (setContextStore # model)
+            Store.findById ecm.id model.contextStore
+                ?|> Context.setName ecm.name
+                >> Context.setModifiedAt model.now
+                >> (Store.update # model.contextStore)
+                >> (setContextStore # model)
+                ?= model
 
         EditMode.EditProject epm ->
-            Store.findById epm.model.id model.projectStore
+            Store.findById epm.id model.projectStore
                 ?|> Project.setName epm.name
                 >> Project.setModifiedAt model.now
                 >> (Store.update # model.projectStore)

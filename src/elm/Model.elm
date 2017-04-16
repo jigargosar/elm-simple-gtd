@@ -151,10 +151,10 @@ getEntityStore entityType =
 getMaybeEditModelForEntityType entityType model =
     case ( entityType, model.editMode ) of
         ( ProjectEntityType, EditMode.EditProject editModel ) ->
-            Just { id = Document.getId editModel.model, name = editModel.model.name }
+            Just editModel
 
         ( ContextEntityType, EditMode.EditContext editModel ) ->
-            Just { id = Document.getId editModel.model, name = editModel.model.name }
+            Just editModel
 
         _ ->
             Nothing

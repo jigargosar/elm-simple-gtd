@@ -57,7 +57,7 @@ type alias ModelF =
 
 type EntityAction
     = StartEditing
-    | Delete
+    | ToggleDeleted
     | Save
     | NameChanged String
 

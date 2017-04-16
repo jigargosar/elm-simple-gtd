@@ -5,7 +5,7 @@ import Dict
 import Document
 import EditMode exposing (EditMode)
 import Lazy
-import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(Delete, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), EntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
+import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(ToggleDeleted, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), EntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
 import Msg exposing (Msg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -84,7 +84,7 @@ createViewModel todoListByEntityId config entity =
             if isNull then
                 (Msg.NoOp)
             else
-                (onEntityAction Delete)
+                (onEntityAction ToggleDeleted)
 
         maybeEditModel =
             config.maybeEditModel

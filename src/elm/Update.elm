@@ -197,7 +197,7 @@ update msg =
                         Save ->
                             andThenUpdate SaveEditingEntity
 
-                        Delete ->
+                        ToggleDeleted ->
                             Return.map (Model.deleteEntity entity)
 
                 OnKeyUp key ->

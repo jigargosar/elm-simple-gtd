@@ -187,18 +187,18 @@ update msg =
                         >> andThenUpdate DeactivateEditingMode
 
                 OnEntityAction entity action ->
-                    case ( entity, action ) of
-                        ( _, StartEditing ) ->
+                    case (action) of
+                        StartEditing ->
                             Return.map (Model.startEditingEntity entity)
                                 >> autoFocusPaperInputCmd
 
-                        ( _, NameChanged newName ) ->
+                        NameChanged newName ->
                             Return.map (Model.updateEditModeNameChanged newName entity)
 
-                        ( _, Save ) ->
+                        Save ->
                             andThenUpdate SaveEditingEntity
 
-                        ( _, Delete ) ->
+                        Delete ->
                             Return.map (Model.deleteEntity entity)
 
                 OnKeyUp key ->

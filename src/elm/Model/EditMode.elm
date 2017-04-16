@@ -77,6 +77,12 @@ saveEditModeEntity model =
                 |> (Store.update # model.projectStore)
                 |> (setProjectStore # model)
 
+        EditMode.EditTodo etm ->
+            model
+                |> Model.insertProjectIfNotExist etm.projectName
+                >> Model.insertContextIfNotExist etm.contextName
+                >> Model.updateTodoFromEditTodoModel etm
+
         _ ->
             model
 
@@ -104,7 +110,7 @@ createEditTodoModel todo model =
         contextName =
             Model.getContextNameOfTodo todo model ?= ""
     in
-        EditMode.createEditTodoModel todo projectName contextName
+        EditMode.createEditTodoMode todo projectName contextName
 
 
 updateEditTodoText : String -> EditTodoModel -> ModelF

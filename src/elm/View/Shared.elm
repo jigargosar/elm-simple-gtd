@@ -8,6 +8,7 @@ import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Attributes.Extra exposing (intProperty)
 import Html.Events exposing (onClick)
+import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Encode
 import Model
 import Model.EditMode
@@ -74,7 +75,7 @@ expand =
 
 
 sharedIconButton iconName onClickHandler =
-    Polymer.Paper.iconButton [ icon iconName, onClick onClickHandler ] []
+    Polymer.Paper.iconButton [ icon iconName, onClickStopPropagation onClickHandler ] []
 
 
 startIconButton =

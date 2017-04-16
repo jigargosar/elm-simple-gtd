@@ -113,7 +113,6 @@ update msg =
                 StartEditingTodo todo ->
                     Return.map (Model.setEditModelToEditTodo todo)
                         >> autoFocusPaperInputCmd
-                        >> andThenUpdate ClearSelection
 
                 EditTodoTextChanged editTodoModel text ->
                     Return.map (Model.updateEditTodoText text editTodoModel)

@@ -125,13 +125,8 @@ update msg =
                     Return.map (Model.updateEditTodoContextName contextName editModel)
 
                 CopyAndEditTodoById todoId ->
-                    Return.andThen
-                        (\model ->
-                            model
-                                |> Model.findTodoById todoId
-                                ?|> (CopyAndEditTodo >> update # model)
-                                ?= Return.singleton model
-                        )
+                    Return.withMaybe (Model.findTodoById todoId)
+                        (CopyAndEditTodo >> andThenUpdate)
 
                 CopyAndEditTodo todo ->
                     Return.andThenApplyWith Model.getNow
@@ -141,19 +136,15 @@ update msg =
                                 >> uncurry update
                         )
 
-                EditTodoKeyUp ({ todoId, contextName, projectName } as etm) { key, isShiftDown } ->
+                EditTodoKeyUp { todoId } { key, isShiftDown } ->
                     case key of
                         Key.Enter ->
                             andThenUpdate SaveEditModeEntity
-                                >> andThenUpdate DeactivateEditingMode
-                                >> Return.andThen
-                                    (\model ->
-                                        (if isShiftDown then
-                                            CopyAndEditTodoById todoId
-                                         else
-                                            NoOp
-                                        )
-                                            |> (update # model)
+                                >> andThenUpdate
+                                    (if isShiftDown then
+                                        CopyAndEditTodoById todoId
+                                     else
+                                        DeactivateEditingMode
                                     )
 
                         Key.Escape ->

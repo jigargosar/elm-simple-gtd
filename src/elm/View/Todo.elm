@@ -40,7 +40,7 @@ listItemView vc todo =
             case vc.maybeEditTodoModel of
                 Just etm ->
                     if Document.hasId etm.todoId todo then
-                        edit (createEditTodoViewModel vc etm)
+                        edit (createEditTodoViewModel vc todo etm)
                     else
                         notEditingView ()
 
@@ -76,8 +76,8 @@ type alias EditTodoViewModel =
     }
 
 
-createEditTodoViewModel : SharedViewModel -> EditTodoModel -> EditTodoViewModel
-createEditTodoViewModel vc etm =
+createEditTodoViewModel : SharedViewModel -> Todo.Model -> EditTodoModel -> EditTodoViewModel
+createEditTodoViewModel vc todo etm =
     let
         todoId =
             etm.todoId
@@ -103,7 +103,7 @@ createEditTodoViewModel vc etm =
         , encodedContextNames = vc.encodedContextNames
         , onSaveClicked = Msg.SaveEditingEntity
         , onCancelClicked = Msg.DeactivateEditingMode
-        , onDeleteClicked = Msg.OnEntityAction (TodoEntity etm.model) ToggleDeleted
+        , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
         }
 
 

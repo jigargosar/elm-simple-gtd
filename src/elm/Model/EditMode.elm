@@ -1,6 +1,7 @@
 module Model.EditMode exposing (..)
 
 import Context
+import Document
 import EditMode exposing (EditMode, EditTodoModel)
 import Maybe.Extra as Maybe
 import Model
@@ -50,14 +51,14 @@ deleteEntity entity model =
     case entity of
         ContextEntity context ->
             context
-                |> Context.setDeleted True
+                |> Document.toggleDeleted
                 |> Context.setModifiedAt model.now
                 |> (Store.update # model.contextStore)
                 |> (setContextStore # model)
 
         ProjectEntity project ->
             project
-                |> Project.setDeleted True
+                |> Document.toggleDeleted
                 |> Project.setModifiedAt model.now
                 |> (Store.update # model.projectStore)
                 |> (setProjectStore # model)

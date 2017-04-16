@@ -86,6 +86,14 @@ isDeleted =
     .deleted
 
 
+setDeleted deleted model =
+    { model | deleted = deleted }
+
+
+toggleDeleted model =
+    { model | deleted = not model.deleted }
+
+
 
 --type alias TT msg =
 --    Tracker {} {} msg

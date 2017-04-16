@@ -144,7 +144,7 @@ update msg =
                                     (if isShiftDown then
                                         CopyAndEditTodoById todoId
                                      else
-                                        DeactivateEditingMode
+                                        NoOp
                                     )
 
                         Key.Escape ->
@@ -184,6 +184,7 @@ update msg =
 
                 SaveEditingEntity ->
                     Return.map (Model.saveEditModeEntity)
+                        >> andThenUpdate DeactivateEditingMode
 
                 OnEntityAction entity action ->
                     case ( entity, action ) of
@@ -196,11 +197,9 @@ update msg =
 
                         ( _, Save ) ->
                             andThenUpdate SaveEditingEntity
-                                >> andThenUpdate DeactivateEditingMode
 
                         ( _, Delete ) ->
                             Return.map (Model.deleteEntity entity)
-                                >> andThenUpdate DeactivateEditingMode
 
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)

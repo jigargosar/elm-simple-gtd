@@ -13,6 +13,7 @@ import Json.Decode
 import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import Maybe.Extra
+import Model.Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
 import Msg exposing (Msg)
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
 import Project
@@ -102,7 +103,7 @@ createEditTodoViewModel vc etm =
         , encodedContextNames = vc.encodedContextNames
         , onSaveClicked = Msg.SaveEditingEntity
         , onCancelClicked = Msg.DeactivateEditingMode
-        , onDeleteClicked = Msg.NoOp
+        , onDeleteClicked = Msg.OnEntityAction (TodoEntity etm.model) ToggleDeleted
         }
 
 
@@ -157,7 +158,7 @@ edit vm =
                 [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
                 , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
                 , expand []
-                , trashButton vm.onCancelClicked
+                , trashButton vm.onDeleteClicked
                 ]
             ]
         ]
@@ -202,7 +203,7 @@ default vc todo =
                 , setContextMsg = Msg.SetTodoContext # todo
                 , startEditingMsg = Msg.StartEditingTodo todo
                 , onDoneClicked = Msg.ToggleTodoDone todo
-                , onDeleteClicked = Msg.ToggleTodoDeleted todo
+                , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
                 }
     in
         item

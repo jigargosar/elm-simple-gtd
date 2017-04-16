@@ -79,7 +79,7 @@ update msg =
                     updateTodo [ Todo.ToggleDone ] todo
 
                 ToggleTodoDeleted todo ->
-                    updateTodo [ Todo.ToggleDeleted ] todo
+                    andThenUpdate (OnEntityAction (TodoEntity todo) ToggleDeleted)
 
                 SetTodoContext todoContext todo ->
                     updateTodo [ Todo.SetContext (todoContext) ] todo
@@ -288,7 +288,6 @@ persist lens =
                 |> Store.persist
                 |> Tuple.mapFirst (lens.set # m)
         )
-
 
 
 updateTodo : List Todo.UpdateAction -> Todo.Model -> ReturnF

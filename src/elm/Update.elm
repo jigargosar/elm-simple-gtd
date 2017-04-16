@@ -78,9 +78,6 @@ update msg =
                 ToggleTodoDone todo ->
                     updateTodo [ Todo.ToggleDone ] todo
 
-                ToggleTodoDeleted todo ->
-                    andThenUpdate (OnEntityAction (TodoEntity todo) ToggleDeleted)
-
                 SetTodoContext todoContext todo ->
                     updateTodo [ Todo.SetContext (todoContext) ] todo
 

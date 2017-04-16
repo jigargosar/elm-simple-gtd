@@ -49,7 +49,6 @@ type Msg
     | Stop
     | MarkRunningTodoDone
     | ToggleTodoDone Todo.Model
-    | ToggleTodoDeleted Todo.Model
     | SetTodoContext Context.Model Todo.Model
     | CreateTodo String
     | CopyAndEditTodo Todo.Model

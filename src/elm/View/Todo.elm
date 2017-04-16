@@ -100,8 +100,8 @@ createEditTodoViewModel vc etm =
         , onContextNameChanged = Msg.EditTodoContextNameChanged etm
         , encodedProjectNames = vc.encodedProjectNames
         , encodedContextNames = vc.encodedContextNames
-        , onSaveClicked = Msg.NoOp
-        , onCancelClicked = Msg.NoOp
+        , onSaveClicked = Msg.SaveEditingEntity
+        , onCancelClicked = Msg.DeactivateEditingMode
         , onDeleteClicked = Msg.NoOp
         }
 

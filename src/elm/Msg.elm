@@ -58,6 +58,7 @@ type Msg
     | DeactivateEditingMode
     | NewTodoKeyUp String KeyboardEvent
     | StartEditingTodo Todo.Model
+    | SaveEditModeEntity
     | FocusPaperInput String
     | EditTodoTextChanged EditTodoModel String
     | EditTodoProjectNameChanged EditTodoModel Project.Name

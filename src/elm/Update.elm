@@ -191,6 +191,9 @@ update msg =
                 OnKeyboardMsg msg ->
                     Return.map (Model.update Model.keyboardState (Keyboard.update msg))
 
+                SaveEditModeEntity ->
+                    Return.map (Model.saveEditModeEntity)
+
                 OnEntityAction entity action ->
                     case ( entity, action ) of
                         ( _, StartEditing ) ->
@@ -201,7 +204,7 @@ update msg =
                             Return.map (Model.updateEditModeNameChanged newName entity)
 
                         ( _, Save ) ->
-                            Return.map (Model.saveEditModeEntity)
+                            andThenUpdate SaveEditModeEntity
                                 >> andThenUpdate DeactivateEditingMode
 
                         ( _, Delete ) ->

@@ -81,11 +81,12 @@ saveEditModeEntity model =
                 |> (setContextStore # model)
 
         EditMode.EditProject epm ->
-            epm.model
-                |> Project.setName epm.name
-                |> Project.setModifiedAt model.now
-                |> (Store.update # model.projectStore)
-                |> (setProjectStore # model)
+            Store.findById epm.model.id model.projectStore
+                ?|> Project.setName epm.name
+                >> Project.setModifiedAt model.now
+                >> (Store.update # model.projectStore)
+                >> (setProjectStore # model)
+                ?= model
 
         EditMode.EditTodo etm ->
             model

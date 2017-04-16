@@ -12,7 +12,7 @@ import Json.Encode
 import Model
 import Model.EditMode
 import Polymer.Attributes exposing (icon)
-import Polymer.Paper exposing (badge, iconButton)
+import Polymer.Paper exposing (badge)
 import Set exposing (Set)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -73,12 +73,12 @@ expand =
     div [ class "flex11" ]
 
 
-iconButton =
-    iconButtonWithClass ""
+sharedIconButton iconName onClickHandler =
+    Polymer.Paper.iconButton [ icon iconName, onClick onClickHandler ] []
 
 
-iconButtonWithClass class_ iconName onClickHandler =
-    Polymer.Paper.iconButton [ class class_, icon iconName, onClick onClickHandler ] []
+startIconButton =
+    sharedIconButton "av:play-circle-outline"
 
 
 trashIcon =
@@ -86,11 +86,11 @@ trashIcon =
 
 
 trashButton =
-    iconButton "delete"
+    sharedIconButton "delete"
 
 
 settingsButton =
-    iconButton "settings"
+    sharedIconButton "settings"
 
 
 showOnHover =

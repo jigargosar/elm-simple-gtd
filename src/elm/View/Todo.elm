@@ -27,7 +27,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Polymer.Paper exposing (..)
-import View.Shared exposing (SharedViewModel, hideOnHover)
+import View.Shared exposing (..)
 
 
 listItemView vc todo =
@@ -146,6 +146,12 @@ edit vm =
                 , intProperty "minLength" 0
                 ]
                 []
+            , row
+                [ button [] [ "Save" |> text ]
+                , button [] [ "Cancel" |> text ]
+                , expand []
+                , trashButton Msg.NoOp
+                ]
             ]
         ]
 
@@ -247,15 +253,7 @@ doneIconButton vm =
 
 
 deleteIconButton vm =
-    iconButton
-        [ onClickStopPropagation vm.onDeleteClicked
-        , icon "delete"
-        ]
-        []
-
-
-startIconButton vc todo =
-    iconButton [ onClickStopPropagation (Msg.Start todo), icon "av:play-circle-outline" ] []
+    trashButton vm.onDeleteClicked
 
 
 moveToContextMenuIcon vm vc =
@@ -263,7 +261,7 @@ moveToContextMenuIcon vm vc =
         [ onClickStopPropagation Msg.NoOp
         , attribute "horizontal-align" "right"
         ]
-        [ iconButton [ icon "more-vert", class "dropdown-trigger" ] []
+        [ Polymer.Paper.iconButton [ icon "more-vert", class "dropdown-trigger" ] []
         , menu
             [ class "dropdown-content"
             , attribute "attr-for-selected" "context-name"

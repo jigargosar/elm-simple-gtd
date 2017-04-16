@@ -59,7 +59,7 @@ type Msg
     | DeactivateEditingMode
     | NewTodoKeyUp String KeyboardEvent
     | StartEditingTodo Todo.Model
-    | SaveEditModeEntity
+    | SaveEditingEntity
     | FocusPaperInput String
     | EditTodoTextChanged EditTodoModel String
     | EditTodoProjectNameChanged EditTodoModel Project.Name

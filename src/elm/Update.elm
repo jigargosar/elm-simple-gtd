@@ -139,7 +139,7 @@ update msg =
                 EditTodoKeyUp { todoId } { key, isShiftDown } ->
                     case key of
                         Key.Enter ->
-                            andThenUpdate SaveEditModeEntity
+                            andThenUpdate SaveEditingEntity
                                 >> andThenUpdate
                                     (if isShiftDown then
                                         CopyAndEditTodoById todoId
@@ -182,7 +182,7 @@ update msg =
                 OnKeyboardMsg msg ->
                     Return.map (Model.update Model.keyboardState (Keyboard.update msg))
 
-                SaveEditModeEntity ->
+                SaveEditingEntity ->
                     Return.map (Model.saveEditModeEntity)
 
                 OnEntityAction entity action ->
@@ -195,7 +195,7 @@ update msg =
                             Return.map (Model.updateEditModeNameChanged newName entity)
 
                         ( _, Save ) ->
-                            andThenUpdate SaveEditModeEntity
+                            andThenUpdate SaveEditingEntity
                                 >> andThenUpdate DeactivateEditingMode
 
                         ( _, Delete ) ->

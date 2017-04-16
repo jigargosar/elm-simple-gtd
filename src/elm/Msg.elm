@@ -53,6 +53,7 @@ type Msg
     | SetTodoContext Context.Model Todo.Model
     | CreateTodo String
     | CopyAndEditTodo Todo.Model
+    | CopyAndEditTodoById Todo.Id
     | StartAddingTodo
     | NewTodoTextChanged Todo.Text
     | DeactivateEditingMode

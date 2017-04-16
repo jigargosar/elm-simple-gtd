@@ -124,6 +124,15 @@ update msg =
                 EditTodoContextNameChanged editModel contextName ->
                     Return.map (Model.updateEditTodoContextName contextName editModel)
 
+                CopyAndEditTodoById todoId ->
+                    Return.andThen
+                        (\model ->
+                            model
+                                |> Model.findTodoById todoId
+                                ?|> (CopyAndEditTodo >> update # model)
+                                ?= Return.singleton model
+                        )
+
                 CopyAndEditTodo todo ->
                     Return.andThenApplyWith Model.getNow
                         (\now ->
@@ -136,18 +145,13 @@ update msg =
                     case key of
                         Key.Enter ->
                             andThenUpdate SaveEditModeEntity
+                                >> andThenUpdate DeactivateEditingMode
                                 >> Return.andThen
                                     (\model ->
                                         (if isShiftDown then
-                                            model
-                                                |> Model.findTodoById todoId
-                                                |> Maybe.unpack
-                                                    (\_ ->
-                                                        DeactivateEditingMode
-                                                    )
-                                                    CopyAndEditTodo
+                                            CopyAndEditTodoById todoId
                                          else
-                                            DeactivateEditingMode
+                                            NoOp
                                         )
                                             |> (update # model)
                                     )

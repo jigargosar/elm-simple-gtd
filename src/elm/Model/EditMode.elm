@@ -24,12 +24,12 @@ activateNewTodoMode text =
 
 setEditModelToEditTodo : Todo.Model -> ModelF
 setEditModelToEditTodo todo =
-    updateEditMode (createEditTodoModel todo)
+    updateEditMode (createEditTodoMode todo)
 
 
 startEditingEntity : Entity -> ModelF
-startEditingEntity entity =
-    setEditMode (createEntityEditMode entity)
+startEditingEntity entity model =
+    setEditMode (createEntityEditMode entity model) model
 
 
 updateEditModeNameChanged newName entity model =
@@ -91,18 +91,23 @@ setContextStore contextStore model =
     { model | contextStore = contextStore }
 
 
-createEntityEditMode : Entity -> EditMode
-createEntityEditMode entity =
+createEntityEditMode : Entity -> model -> EditMode
+createEntityEditMode entity model =
     case entity of
-        ContextEntity model ->
-            EditMode.editContextMode model
+        ContextEntity entityModel ->
+            EditMode.editContextMode entityModel
 
-        ProjectEntity model ->
-            EditMode.editProjectMode model
+        ProjectEntity entityModel ->
+            EditMode.editProjectMode entityModel
 
 
-createEditTodoModel : Todo.Model -> Model -> EditMode
-createEditTodoModel todo model =
+
+--        ProjectEntity entityModel ->
+--            createEditTodoMode entityModel model
+
+
+createEditTodoMode : Todo.Model -> Model -> EditMode
+createEditTodoMode todo model =
     let
         projectName =
             Model.getMaybeProjectNameOfTodo todo model ?= ""

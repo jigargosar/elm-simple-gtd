@@ -19,6 +19,8 @@ async function boot() {
         "context-db": await PouchDB("context-db")
     }
 
+    // _.mapObjIndexed(db=>db.startRemoteSync(), dbMap)
+
     const allTodos = await dbMap["todo-db"].find({selector: {"_id": {"$ne": null}}})
     const allProjects = await dbMap["project-db"].find({selector: {"_id": {"$ne": null}}})
     const contexts = await dbMap["context-db"].find({selector: {"_id": {"$ne": null}}})

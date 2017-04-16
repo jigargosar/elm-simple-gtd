@@ -36,10 +36,11 @@ export default async(dbName, indices = []) => {
 
     const remove = doc => db.put(_.merge(doc, {_deleted: true}))
 
-    function startRemoteSync(remoteUrl = "http://127.0.0.1:5984", dbName_ = dbName) {
+    function startRemoteSync(remoteUrl = "http://localhost:12321", dbName_ = dbName) {
         console.log(`starting sync for ${dbName_}`)
-        const remoteCouch = `${remoteUrl}/${dbName_}`;
-        db.sync(remoteCouch,
+        const remoteURL = `${remoteUrl}/${dbName_}`;
+        const remoteCouch = new PouchDB(remoteUrl);
+        db.sync(remoteURL,
             {live: true, retry: true},
             e => {
                 console.error(`PLDB: sync err ${dbName_}`, e)
@@ -70,7 +71,8 @@ export default async(dbName, indices = []) => {
         _allDocs: async () => await db.allDocs(),
         replicateToStream:function (stream) {
             return db.dump(stream)
-        }
+        },
+        startRemoteSync
     }
 }
 

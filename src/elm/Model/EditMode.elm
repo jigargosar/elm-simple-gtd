@@ -46,8 +46,8 @@ updateEditModeNameChanged newName entity model =
             model
 
 
-deleteEntity : Entity -> ModelF
-deleteEntity entity model =
+toggleDeletedForEntity : Entity -> ModelF
+toggleDeletedForEntity entity model =
     case entity of
         ContextEntity context ->
             context

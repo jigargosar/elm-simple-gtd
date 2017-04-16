@@ -195,7 +195,7 @@ update msg =
                             andThenUpdate SaveEditingEntity
 
                         ToggleDeleted ->
-                            Return.map (Model.deleteEntity entity)
+                            Return.map (Model.toggleDeletedForEntity entity)
 
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)

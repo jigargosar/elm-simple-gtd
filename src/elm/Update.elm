@@ -135,11 +135,7 @@ update msg =
                 EditTodoKeyUp ({ todoId, contextName, projectName } as etm) { key, isShiftDown } ->
                     case key of
                         Key.Enter ->
-                            Return.map
-                                (Model.insertProjectIfNotExist projectName
-                                    >> Model.insertContextIfNotExist contextName
-                                    >> Model.updateTodoFromEditTodoModel etm
-                                )
+                            andThenUpdate SaveEditModeEntity
                                 >> Return.andThen
                                     (\model ->
                                         (if isShiftDown then

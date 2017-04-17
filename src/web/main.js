@@ -1,43 +1,38 @@
 "use strict";
 
 
-import PouchDB from "./local-pouch-db"
+const DB = require("./local-pouch-db")
 
-import R from "ramda"
+const _ = require("ramda")
 
 import sound from "./sound"
-
-import Sync from "./sync"
-
-const _ = R
 
 async function boot() {
 
     const dbMap = {
-        "todo-db": await PouchDB("todo-db"),
-        "project-db": await PouchDB("project-db"),
-        "context-db": await PouchDB("context-db")
+        "todo-db": await DB("todo-db"),
+        "project-db": await DB("project-db"),
+        "context-db": await DB("context-db")
     }
 
     // _.mapObjIndexed(db=>db.startRemoteSync(), dbMap)
 
-    const allTodos = await dbMap["todo-db"].find({selector: {"_id": {"$ne": null}}})
-    const allProjects = await dbMap["project-db"].find({selector: {"_id": {"$ne": null}}})
+    const todos = await dbMap["todo-db"].find({selector: {"_id": {"$ne": null}}})
+    const projects = await dbMap["project-db"].find({selector: {"_id": {"$ne": null}}})
     const contexts = await dbMap["context-db"].find({selector: {"_id": {"$ne": null}}})
-    // console.log(allTodos)
+
+    const flags = {
+        now: Date.now(),
+            encodedTodoList: todos,
+        encodedProjectList: projects,
+        encodedContextList: contexts,
+        myPeerId: localStorage.getItem("my-peer-id") || "",
+        remotePeerId: localStorage.getItem("remote-peer-id") || ""
+    }
 
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]
-        .embed(document.getElementById("root"), {
-            now: Date.now(),
-            encodedTodoList: allTodos,
-            encodedProjectList: allProjects,
-            encodedContextList: contexts,
-            myPeerId: localStorage.getItem("my-peer-id") || "",
-            remotePeerId: localStorage.getItem("remote-peer-id") || ""
-        })
-
-    // const sync = Sync(app, dbMap)
+        .embed(document.getElementById("root"), flags)
 
     app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
         // console.log("upserting", dbName, doc, id)
@@ -49,6 +44,7 @@ async function boot() {
 
 
     setupNotifications(app)
+        .catch(console.error)
 
     app.ports["focusPaperInput"].subscribe((selector) => {
         setTimeout(() => {

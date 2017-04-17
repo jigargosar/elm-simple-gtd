@@ -12,23 +12,23 @@ const outputDir = isDevEnv ? "dev" : "app"
 
 
 module.exports = {
-    resolve:{
-        alias:{elm:path.resolve(__dirname, 'src/elm/')}
+    resolve: {
+        alias: {elm: path.resolve(__dirname, 'src/elm/')}
     },
     // devtool: isDevEnv ? "inline" : 'source-map',
     // devtool: "source-map",
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
-        common:["./src/web/common-require.js"],
-        "notification-sw":"./src/web/notification-sw.js",
-        main: [
+        common: ["./src/web/common-require.js"],
+        "notification-sw": "./src/web/notification-sw.js",
+        app: [
             './src/web/main.js',
         ]
     },
 
     output: {
         path: path.resolve(__dirname + "/" + outputDir),
-        filename: '[name]-bundle.js',
+        filename: '[name].js',
     },
 
     plugins: [
@@ -43,8 +43,8 @@ module.exports = {
         // new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer ] } })
         // new WriteFilePlugin(),
         new webpack.optimize.CommonsChunkPlugin({
-            name:"common",
-            minChunks:2
+            name: "common",
+            minChunks: 2
         })
     ],
 
@@ -60,7 +60,7 @@ module.exports = {
                 exclude: [/elm-stuff/, /node_modules/],
                 // use: ["elm-hot-loader","elm-webpack-loader?verbose=true&debug=true"],
                 // use: ["elm-hot-loader","elm-webpack-loader?debug=true"],
-                use: ["elm-hot-loader","elm-webpack-loader"],
+                use: ["elm-hot-loader", "elm-webpack-loader"],
             },
             {
                 test: /\.(pcss|css)$/,
@@ -91,7 +91,7 @@ module.exports = {
         port: 8020,
         // open:true,
         // inline: false,
-        contentBase:["src/web/", "static/", "./"]
+        contentBase: ["src/web/", "static/", "./"]
     },
 
 };

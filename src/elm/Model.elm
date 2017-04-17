@@ -32,8 +32,8 @@ import Model.Types exposing (..)
 import Types exposing (..)
 
 
-init : Time -> List Todo.Encoded -> List Project.Encoded -> List Context.Encoded -> String -> String -> Model
-init now encodedTodoList encodedProjectList encodedContextList myPeerId remotePeerId =
+init : Flags -> Model
+init { now, encodedTodoList, encodedProjectList, encodedContextList } =
     let
         storeGenerator =
             Random.map3 (,,)

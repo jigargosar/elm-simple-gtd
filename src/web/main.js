@@ -1,11 +1,11 @@
 "use strict";
 
-
-const DB = require("./local-pouch-db")
-
 const _ = require("ramda")
 
-import sound from "./sound"
+require("./pcss/main.pcss")
+
+const DB = require("./local-pouch-db")
+const sound = require("./sound")
 
 async function boot() {
 
@@ -23,11 +23,9 @@ async function boot() {
 
     const flags = {
         now: Date.now(),
-            encodedTodoList: todos,
+        encodedTodoList: todos,
         encodedProjectList: projects,
-        encodedContextList: contexts,
-        myPeerId: localStorage.getItem("my-peer-id") || "",
-        remotePeerId: localStorage.getItem("remote-peer-id") || ""
+        encodedContextList: contexts
     }
 
     const Elm = require("elm/Main.elm")

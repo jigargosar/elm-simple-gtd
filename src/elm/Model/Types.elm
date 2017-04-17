@@ -74,3 +74,11 @@ type EntityType
 type EntityStoreType
     = ProjectEntityStoreType
     | ContextEntityStoreType
+
+
+type alias Flags =
+    { now : Time
+    , encodedTodoList : List Todo.Encoded
+    , encodedProjectList : List Project.Encoded
+    , encodedContextList : List Context.Encoded
+    }

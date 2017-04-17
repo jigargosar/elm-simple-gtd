@@ -1,12 +1,8 @@
 "use strict";
 
-import R from "ramda"
-const _ = R
-
 import howler from "howler"
 
-
-export default (function () {
+module.exports= (function () {
     const Howl = howler.Howl
 
     const sound = new Howl({

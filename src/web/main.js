@@ -48,34 +48,27 @@ async function boot() {
     });
 
 
-    // if (!WEB_PACK_DEV_SERVER) {
-
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/notification-sw.js')
-                 .then(reg => {
-                     app.ports["showTestNotification"].subscribe((msg) => {
-                             Notification.requestPermission(function (permission) {
-                                 // If the user accepts, let's create a notification
-                                 if (permission === "granted") {
-                                     reg.showNotification("hi there",
-                                         {
-                                             actions: [{title: "foo", name: "bar", action: "adf"}],
-                                             body: "asdf",
-                                             title: "Hi There!!"
-                                         })
-                                     // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
-                                     // notification.addEventListener("click", e=>console.info("notification clicked"))
-                                 }
-                             });
+        const reg = await navigator.serviceWorker.register('/notification-sw.js')
+        app.ports["showTestNotification"].subscribe((msg) => {
+                Notification.requestPermission(function (permission) {
+                    // If the user accepts, let's create a notification
+                    if (permission === "granted") {
+                        reg.showNotification("hi there",
+                            {
+                                actions: [{title: "foo", name: "bar", action: "adf"}],
+                                body: "asdf",
+                                title: "Hi There!!"
+                            })
+                        // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
+                        // notification.addEventListener("click", e=>console.info("notification clicked"))
+                    }
+                });
 
-                             return console.info(msg)
-                         }
-                     )
-
-                 })
-                 .catch();
+                return console.info(msg)
+            }
+        )
     }
-    // }
 
     app.ports["focusPaperInput"].subscribe((selector) => {
         setTimeout(() => {

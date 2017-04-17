@@ -43,7 +43,7 @@ type Msg
     = NoOp
     | OnRemotePeerIdChanged String
     | ToggleNotification
-    | TriggerNotification
+    | TriggerNotification Time
     | StartSync
     | OnMyPeerIdChanged String
     | ToggleShowDeletedEntity

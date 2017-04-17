@@ -43,6 +43,9 @@ import Types
 port startSync : ( String, String ) -> Cmd msg
 
 
+port showTestNotification : String -> Cmd msg
+
+
 update : Msg -> Model -> Return
 update msg =
     Return.singleton
@@ -51,7 +54,13 @@ update msg =
                     identity
 
                 ToggleNotification ->
-                    Return.map (\m -> { m | shouldTriggerNotification = m.now })
+                    Return.map
+                        (\m ->
+                            { m | shouldTriggerNotification = not m.shouldTriggerNotification }
+                        )
+
+                TriggerNotification time ->
+                    Return.command (showTestNotification "Test Notification")
 
                 OnMyPeerIdChanged id ->
                     Return.map ((\m -> { m | myPeerId = id }))

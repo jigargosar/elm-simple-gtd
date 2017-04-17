@@ -15,7 +15,7 @@ import Msg exposing (Msg)
 import Set
 import Entity.ViewModel
 import View.EntityList
-import View.AppDrawer exposing (appDrawerView)
+import View.AppDrawer
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
@@ -58,10 +58,11 @@ appDrawerLayoutView m =
             projectVM.vmList
     in
         App.drawerLayout []
-            [ appDrawerView contextVM projectVM m
+            [ View.AppDrawer.view contextVM projectVM m
             , App.headerLayout []
                 [ appHeaderView m
---                , syncView m
+
+                --                , syncView m
                 , appMainView contextVMs projectVMs m
                 ]
             ]

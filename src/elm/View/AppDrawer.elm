@@ -29,7 +29,7 @@ import Model.Types exposing (..)
 import View.Shared exposing (..)
 
 
-appDrawerView contextVM projectVM m =
+view contextVM projectVM m =
     App.drawer [ attribute "slot" "drawer" ]
         [ div
             [ style [ "height" => "100%", "overflow" => "scroll" ]

@@ -53,27 +53,8 @@ update msg =
                 NoOp ->
                     identity
 
-                ToggleNotification ->
-                    Return.map
-                        (\m ->
-                            { m | shouldTriggerNotification = not m.shouldTriggerNotification }
-                        )
-
-                ShowNotification ->
+                ShowTestNotification ->
                     Return.command (showTestNotification "Test Notification")
-
-                TriggerNotification time ->
-                    identity
-
-                --                    Return.command (showTestNotification "Test Notification")
-                OnMyPeerIdChanged id ->
-                    Return.map ((\m -> { m | myPeerId = id }))
-
-                OnRemotePeerIdChanged id ->
-                    Return.map ((\m -> { m | remotePeerId = id }))
-
-                StartSync ->
-                    Return.effect_ (\m -> startSync ( m.myPeerId, m.remotePeerId ))
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))

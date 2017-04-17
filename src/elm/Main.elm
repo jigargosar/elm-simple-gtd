@@ -64,5 +64,4 @@ subscriptions m =
         [ Time.every Time.second (OnNowChanged)
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.keyUps OnKeyUp
-        , Time.every (Time.second * 30) Msg.TriggerNotification
         ]

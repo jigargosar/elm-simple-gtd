@@ -41,12 +41,7 @@ stopAndMarkDone =
 
 type Msg
     = NoOp
-    | OnRemotePeerIdChanged String
-    | ShowNotification
-    | ToggleNotification
-    | TriggerNotification Time
-    | StartSync
-    | OnMyPeerIdChanged String
+    | ShowTestNotification
     | ToggleShowDeletedEntity
     | Start Todo.Model
     | Stop

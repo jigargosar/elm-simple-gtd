@@ -41,9 +41,6 @@ type alias Model =
     , keyboardState : Keyboard.State
     , selection : Selection
     , showDeleted : Bool
-    , remotePeerId : String
-    , myPeerId : String
-    , shouldTriggerNotification : Bool
     }
 
 

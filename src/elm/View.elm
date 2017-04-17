@@ -69,14 +69,6 @@ appDrawerLayoutView m =
             ]
 
 
-syncView m =
-    material []
-        [ input [ onInput Msg.OnMyPeerIdChanged, value m.myPeerId ] []
-        , input [ onInput Msg.OnRemotePeerIdChanged, value m.remotePeerId ] []
-        , button [ onClick Msg.StartSync ] [ text "sync" ]
-        ]
-
-
 appHeaderView m =
     App.header
         [ attribute "reveals" "true"
@@ -122,7 +114,7 @@ timerView m =
     material []
         [ item []
             [ itemBody []
-                [ row [ button [ onClick Msg.ShowNotification ] [ text "show notification" ] ]
+                [ row [ button [ onClick Msg.ShowTestNotification ] [ text "show notification" ] ]
                 ]
             ]
         ]

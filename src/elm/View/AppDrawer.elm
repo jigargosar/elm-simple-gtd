@@ -1,5 +1,6 @@
 module View.AppDrawer exposing (..)
 
+import Entity.ViewModel
 import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
 import Html.Keyed as Keyed
@@ -76,24 +77,18 @@ decodeBoolPropertyChange =
     Json.Decode.at [ "detail", "value" ] Json.Decode.bool
 
 
-onBoolPropertyChanged propertyName handler =
+onBoolPropertyChanged propertyName tagger =
     on ((String.Extra.dasherize propertyName) ++ "-changed")
-        (Json.Decode.map handler decodeBoolPropertyChange)
+        (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] Json.Decode.bool))
 
 
-foo vm =
-    let
-        listener bool =
-            if bool then
-                vm.onActiveStateChanged
-            else
-                Msg.NoOp
-    in
-        on "focused-changed" (Json.Decode.map listener decodeBoolPropertyChange)
+
+--onPropertyChanged decoder propertyName tagger =
 
 
+entityItem : Entity.ViewModel.ViewModel -> Html Msg
 entityItem vm =
-    item [ class "", foo vm ]
+    item [ class "", onBoolPropertyChanged "focused" vm.onActiveStateChanged ]
         ([ itemBody [] [ View.Shared.defaultBadge vm ]
          , hoverIcons vm
          , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]

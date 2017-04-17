@@ -25,7 +25,7 @@ type alias ViewModel =
     , todoList : List Todo.Model
     , isEmpty : Bool
     , count : Int
-    , onActiveStateChanged : Msg
+    , onActiveStateChanged : Bool -> Msg
     , startEditingMsg : Msg
     , onDeleteClicked : Msg
     , onSaveClicked : Msg
@@ -101,7 +101,13 @@ createViewModel todoListByEntityId config entity =
         , todoList = todoList
         , isEmpty = count == 0
         , count = List.length todoList
-        , onActiveStateChanged = Msg.SetView (config.getViewType id)
+        , onActiveStateChanged =
+            (\bool ->
+                if bool then
+                    Msg.SetView (config.getViewType id)
+                else
+                    Msg.NoOp
+            )
         , startEditingMsg = onEntityAction StartEditing
         , onDeleteClicked = onDeleteClicked
         , onSaveClicked = onEntityAction Save

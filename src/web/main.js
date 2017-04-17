@@ -77,7 +77,8 @@ boot().catch(console.error)
 
 async function setupNotifications(app) {
     if ('serviceWorker' in navigator) {
-        const reg = await navigator.serviceWorker.register('/notification-sw.js')
+        const swScriptPath = WEB_PACK_DEV_SERVER? "/notification-sw.js" : '/service-worker.js'
+        const reg = await navigator.serviceWorker.register(swScriptPath)
         app.ports["showTestNotification"].subscribe(async (msg) => {
             const permission = await Notification.requestPermission()
             if (permission === "granted") {
@@ -95,8 +96,10 @@ async function setupNotifications(app) {
     }
 }
 
+/*
 //noinspection JSUnresolvedVariable
 if (!WEB_PACK_DEV_SERVER && 'serviceWorker' in navigator) {
     //noinspection JSUnresolvedVariable
     navigator.serviceWorker.register('/service-worker.js');
 }
+*/

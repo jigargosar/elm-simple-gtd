@@ -7,5 +7,6 @@ module.exports = {
         "common.js",
         "main.js"
     ],
+    importScripts:["notification-sw.js"]
 
 }

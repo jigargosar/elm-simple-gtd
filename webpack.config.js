@@ -19,9 +19,7 @@ module.exports = {
     // devtool: "source-map",
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
-        common:["./src/web/common-require.js",
-                "./src/web/bower_components/webcomponentsjs/webcomponents-lite.js"
-        ],
+        common:["./src/web/common-require.js"],
         "notification-sw":"./src/web/notification-sw.js",
         main: [
             './src/web/main.js',

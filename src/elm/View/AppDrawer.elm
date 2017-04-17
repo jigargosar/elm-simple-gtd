@@ -73,7 +73,7 @@ doneItemView m =
 
 
 entityItem vm =
-    item [ class "", onClick vm.navigateToEntityMsg ]
+    item [ class "", onClick vm.onActiveStateChanged ]
         ([ itemBody [] [ View.Shared.defaultBadge vm ]
          , hoverIcons vm
          , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]

@@ -59,9 +59,13 @@ update msg =
                             { m | shouldTriggerNotification = not m.shouldTriggerNotification }
                         )
 
-                TriggerNotification time ->
+                ShowNotification ->
                     Return.command (showTestNotification "Test Notification")
 
+                TriggerNotification time ->
+                    identity
+
+                --                    Return.command (showTestNotification "Test Notification")
                 OnMyPeerIdChanged id ->
                     Return.map ((\m -> { m | myPeerId = id }))
 

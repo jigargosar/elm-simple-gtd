@@ -42,6 +42,7 @@ stopAndMarkDone =
 type Msg
     = NoOp
     | OnRemotePeerIdChanged String
+    | ShowNotification
     | ToggleNotification
     | TriggerNotification Time
     | StartSync

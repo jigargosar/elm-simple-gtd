@@ -49,7 +49,18 @@ async function boot() {
 
 
 
-    app.ports["showTestNotification"].subscribe((msg) => console.info( msg))
+    app.ports["showTestNotification"].subscribe((msg) => {
+        Notification.requestPermission(function (permission) {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                var notification = new Notification("Hi there!");
+            }
+        });
+
+            return console.info(msg)
+        }
+
+    )
 
 
     app.ports["focusPaperInput"].subscribe((selector) => {

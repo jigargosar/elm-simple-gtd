@@ -157,8 +157,8 @@ edit vm =
             , row
                 [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
                 , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
---                , expand []
---                , trashButton vm.onDeleteClicked
+                , expand []
+                , trashButton vm.onDeleteClicked
                 ]
             ]
         ]

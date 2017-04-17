@@ -1,1 +1,1 @@
-"use strict";self.addEventListener("install",function(i){console.log("Service Worker installing.")}),self.addEventListener("activate",function(i){console.log("Service Worker activating.")}),self.addEventListener("notificationclick",function(i){console.log("notification click"),i.notification.close()},!1);
+"use strict";self.addEventListener("notificationclick",function(i){console.log("notification click"),i.notification.close()},!1);

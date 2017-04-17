@@ -132,13 +132,13 @@ update msg =
                                 >> uncurry update
                         )
 
-                EditTodoKeyUp { todoId } { key, isShiftDown } ->
+                EditTodoKeyUp { id } { key, isShiftDown } ->
                     case key of
                         Key.Enter ->
                             andThenUpdate SaveEditingEntity
                                 >> andThenUpdate
                                     (if isShiftDown then
-                                        CopyAndEditTodoById todoId
+                                        CopyAndEditTodoById id
                                      else
                                         NoOp
                                     )

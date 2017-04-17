@@ -39,7 +39,7 @@ listItemView vc todo =
         view =
             case vc.maybeEditTodoModel of
                 Just etm ->
-                    if Document.hasId etm.todoId todo then
+                    if Document.hasId etm.id todo then
                         edit (createEditTodoViewModel vc todo etm)
                     else
                         notEditingView ()
@@ -80,7 +80,7 @@ createEditTodoViewModel : SharedViewModel -> Todo.Model -> EditTodoModel -> Edit
 createEditTodoViewModel vc todo etm =
     let
         todoId =
-            etm.todoId
+            etm.id
     in
         { todo =
             { text = etm.todoText

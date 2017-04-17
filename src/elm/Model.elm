@@ -181,7 +181,7 @@ getActiveTodoListGroupedBy fn =
 
 
 updateTodoFromEditTodoModel : EditTodoModel -> ModelF
-updateTodoFromEditTodoModel { contextName, projectName, todoText, todoId } =
+updateTodoFromEditTodoModel { contextName, projectName, todoText, id } =
     apply3Uncurry ( findContextByName contextName, findProjectByName projectName, identity )
         (\maybeContext maybeProject ->
             Model.TodoStore.updateTodoById
@@ -189,7 +189,7 @@ updateTodoFromEditTodoModel { contextName, projectName, todoText, todoId } =
                 , Todo.SetProjectId (maybeProject ?|> Document.getId ?= "")
                 , Todo.SetContextId (maybeContext ?|> Document.getId ?= "")
                 ]
-                todoId
+                id
         )
 
 

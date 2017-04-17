@@ -5,8 +5,7 @@ module.exports = {
         "*.png",
         "*.ico",
         "common.js",
-        "main.js",
-        "notification-sw.js",
+        "main.js"
     ],
 
 }

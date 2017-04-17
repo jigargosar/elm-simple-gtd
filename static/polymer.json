@@ -10,10 +10,10 @@
     "*.ico",
     "common.js",
     "main.js",
-    "notification-sw.js",
     "CNAME"
 
   ],
   "includeDependencies": [
+    "notification-sw.js"
   ]
 }

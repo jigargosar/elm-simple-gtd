@@ -110,7 +110,7 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         ]
 
 
-timerView m =
+testNotification m =
     material []
         [ item []
             [ itemBody []
@@ -122,8 +122,8 @@ timerView m =
 
 appMainView contextVMs projectVMs m =
     div [ id "main-view" ]
-        [ timerView m
-        , case Model.getMainViewType m of
+        [ --        testNotification m
+          case Model.getMainViewType m of
             GroupByContextView ->
                 View.EntityList.groupByEntity contextVMs m
 

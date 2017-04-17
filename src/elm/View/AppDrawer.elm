@@ -72,8 +72,28 @@ doneItemView m =
     item [ onClick (SetView DoneView) ] [ text "Done" ]
 
 
+decodeBoolPropertyChange =
+    Json.Decode.at [ "detail", "value" ] Json.Decode.bool
+
+
+onBoolPropertyChanged propertyName handler =
+    on ((String.Extra.dasherize propertyName) ++ "-changed")
+        (Json.Decode.map handler decodeBoolPropertyChange)
+
+
+foo vm =
+    let
+        listener bool =
+            if bool then
+                vm.onActiveStateChanged
+            else
+                Msg.NoOp
+    in
+        on "focused-changed" (Json.Decode.map listener decodeBoolPropertyChange)
+
+
 entityItem vm =
-    item [ class "", onClick vm.onActiveStateChanged ]
+    item [ class "", foo vm ]
         ([ itemBody [] [ View.Shared.defaultBadge vm ]
          , hoverIcons vm
          , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]

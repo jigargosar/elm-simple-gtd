@@ -19,11 +19,9 @@ module.exports = {
     // devtool: "source-map",
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
-        common: ["./src/web/common-require.js"],
+        common: "./src/web/common-require.js",
         "notification-sw": "./src/web/notification-sw.js",
-        app: [
-            './src/web/main.js',
-        ]
+        main: "./src/web/main.js"
     },
 
     output: {
@@ -91,7 +89,7 @@ module.exports = {
         port: 8020,
         // open:true,
         // inline: false,
-        contentBase: ["src/web/", "static/", "./"]
+        contentBase: ["src/web/", "static/",]
     },
 
 };

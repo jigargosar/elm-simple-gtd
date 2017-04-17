@@ -50,6 +50,9 @@ update msg =
                 NoOp ->
                     identity
 
+                TestNotification ->
+                    identity
+
                 OnMyPeerIdChanged id ->
                     Return.map ((\m -> { m | myPeerId = id }))
 

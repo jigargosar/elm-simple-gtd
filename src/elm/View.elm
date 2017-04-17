@@ -33,6 +33,7 @@ import Polymer.Paper exposing (..)
 import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
+import View.Shared exposing (row)
 import View.Todo
 
 
@@ -117,9 +118,20 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         ]
 
 
+timerView m =
+    material []
+        [ item []
+            [ itemBody []
+                [ row [ button [ onClick Msg.TestNotification ] [ text "start" ] ]
+                ]
+            ]
+        ]
+
+
 appMainView contextVMs projectVMs m =
     div [ id "main-view" ]
-        [ case Model.getMainViewType m of
+        [ timerView m
+        , case Model.getMainViewType m of
             GroupByContextView ->
                 View.EntityList.groupByEntity contextVMs m
 

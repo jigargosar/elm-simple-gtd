@@ -22,6 +22,7 @@ module.exports = {
         common:["./src/web/common-require.js",
                 "./src/web/bower_components/webcomponentsjs/webcomponents-lite.js"
         ],
+        "notification-sw":"./src/web/notification-sw.js",
         main: [
             './src/web/main.js',
         ]

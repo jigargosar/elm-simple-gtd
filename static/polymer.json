@@ -10,6 +10,7 @@
     "*.ico",
     "common-bundle.js",
     "main-bundle.js",
+    "notification-sw-bundle.js",
     "CNAME"
 
   ],

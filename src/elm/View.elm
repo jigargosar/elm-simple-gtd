@@ -122,7 +122,7 @@ timerView m =
     material []
         [ item []
             [ itemBody []
-                [ row [ button [ onClick Msg.TestNotification ] [ text "start" ] ]
+                [ row [ button [ onClick Msg.ToggleNotification ] [ text "start" ] ]
                 ]
             ]
         ]

@@ -50,8 +50,8 @@ update msg =
                 NoOp ->
                     identity
 
-                TestNotification ->
-                    identity
+                ToggleNotification ->
+                    Return.map (\m -> { m | shouldTriggerNotification = m.now })
 
                 OnMyPeerIdChanged id ->
                     Return.map ((\m -> { m | myPeerId = id }))

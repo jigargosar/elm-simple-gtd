@@ -57,6 +57,7 @@ init now encodedTodoList encodedProjectList encodedContextList myPeerId remotePe
         , showDeleted = False
         , remotePeerId = remotePeerId
         , myPeerId = myPeerId
+        , shouldTriggerNotification = False
         }
 
 

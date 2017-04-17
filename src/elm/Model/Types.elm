@@ -43,6 +43,7 @@ type alias Model =
     , showDeleted : Bool
     , remotePeerId : String
     , myPeerId : String
+    , shouldTriggerNotification : Bool
     }
 
 

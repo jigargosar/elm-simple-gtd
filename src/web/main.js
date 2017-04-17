@@ -49,6 +49,9 @@ async function boot() {
 
 
 
+    app.ports["showTestNotification"].subscribe((msg) => console.info( msg))
+
+
     app.ports["focusPaperInput"].subscribe((selector) => {
         setTimeout(() => {
             requestAnimationFrame(() => {

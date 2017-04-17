@@ -33,8 +33,8 @@ async function boot() {
             encodedTodoList: allTodos,
             encodedProjectList: allProjects,
             encodedContextList: contexts,
-            myPeerId : localStorage.getItem("my-peer-id") || "",
-            remotePeerId : localStorage.getItem("remote-peer-id") || ""
+            myPeerId: localStorage.getItem("my-peer-id") || "",
+            remotePeerId: localStorage.getItem("remote-peer-id") || ""
         })
 
     // const sync = Sync(app, dbMap)
@@ -48,20 +48,34 @@ async function boot() {
     });
 
 
+    // if (!WEB_PACK_DEV_SERVER) {
 
-    app.ports["showTestNotification"].subscribe((msg) => {
-        Notification.requestPermission(function (permission) {
-            // If the user accepts, let's create a notification
-            if (permission === "granted") {
-                var notification = new Notification("Hi there!");
-            }
-        });
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/notification-sw.js')
+                 .then(reg => {
+                     app.ports["showTestNotification"].subscribe((msg) => {
+                             Notification.requestPermission(function (permission) {
+                                 // If the user accepts, let's create a notification
+                                 if (permission === "granted") {
+                                     reg.showNotification("hi there",
+                                         {
+                                             actions: [{title: "foo", name: "bar", action: "adf"}],
+                                             body: "asdf",
+                                             title: "Hi There!!"
+                                         })
+                                     // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
+                                     // notification.addEventListener("click", e=>console.info("notification clicked"))
+                                 }
+                             });
 
-            return console.info(msg)
-        }
+                             return console.info(msg)
+                         }
+                     )
 
-    )
-
+                 })
+                 .catch();
+    }
+    // }
 
     app.ports["focusPaperInput"].subscribe((selector) => {
         setTimeout(() => {
@@ -94,7 +108,7 @@ async function boot() {
 boot().catch(console.error)
 
 //noinspection JSUnresolvedVariable
-if (!WEB_PACK_DEV_SERVER &&'serviceWorker' in navigator) {
+if (!WEB_PACK_DEV_SERVER && 'serviceWorker' in navigator) {
     //noinspection JSUnresolvedVariable
     navigator.serviceWorker.register('/service-worker.js');
 }

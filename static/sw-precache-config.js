@@ -4,9 +4,9 @@ module.exports = {
         "*.ogg",
         "*.png",
         "*.ico",
-        "common-bundle.js",
-        "main-bundle.js",
-        "notification-sw-bundle.js",
+        "common.js",
+        "main.js",
+        "notification-sw.js",
     ],
 
 }

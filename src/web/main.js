@@ -48,27 +48,7 @@ async function boot() {
     });
 
 
-    if ('serviceWorker' in navigator) {
-        const reg = await navigator.serviceWorker.register('/notification-sw.js')
-        app.ports["showTestNotification"].subscribe((msg) => {
-                Notification.requestPermission(function (permission) {
-                    // If the user accepts, let's create a notification
-                    if (permission === "granted") {
-                        reg.showNotification("hi there",
-                            {
-                                actions: [{title: "foo", name: "bar", action: "adf"}],
-                                body: "asdf",
-                                title: "Hi There!!"
-                            })
-                        // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
-                        // notification.addEventListener("click", e=>console.info("notification clicked"))
-                    }
-                });
-
-                return console.info(msg)
-            }
-        )
-    }
+    setupNotifications(app)
 
     app.ports["focusPaperInput"].subscribe((selector) => {
         setTimeout(() => {
@@ -99,6 +79,27 @@ async function boot() {
 }
 
 boot().catch(console.error)
+
+
+async function setupNotifications(app) {
+    if ('serviceWorker' in navigator) {
+        const reg = await navigator.serviceWorker.register('/notification-sw.js')
+        app.ports["showTestNotification"].subscribe(async (msg) => {
+            const permission = await Notification.requestPermission()
+            if (permission === "granted") {
+                reg.showNotification("hi there",
+                    {
+                        actions: [{title: "foo", name: "bar", action: "adf"}],
+                        body: "asdf",
+                        title: "Hi There!!"
+                    })
+                // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
+                // notification.addEventListener("click", e=>console.info("notification clicked"))
+            }
+            return console.info(msg)
+        })
+    }
+}
 
 //noinspection JSUnresolvedVariable
 if (!WEB_PACK_DEV_SERVER && 'serviceWorker' in navigator) {

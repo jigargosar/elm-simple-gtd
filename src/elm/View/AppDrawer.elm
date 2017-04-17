@@ -38,6 +38,7 @@ view contextVM projectVM m =
             [ menu
                 [ stringProperty "selected" "0"
                 , stringProperty "selectable" "paper-item"
+                , stringProperty "selectedAttribute" "selected"
                 ]
                 (entityList contextVM
                     ++ [ divider ]

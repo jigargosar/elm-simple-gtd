@@ -20,7 +20,7 @@ self.addEventListener('notificationclick', function (event) {
             .then(function (clientList) {
                 for (var i = 0; i < clientList.length; i++) {
                     var client = clientList[i];
-                    client.postMessage("notification clicked")
+                    client.postMessage("notification clicked: client.postMessage")
                     if (client.focus) {
                         return client.focus();
                     }
@@ -29,7 +29,7 @@ self.addEventListener('notificationclick', function (event) {
                     return clients
                         .openWindow('http://localhost:8020/')
                         .then(windowClient => {
-                            windowClient.postMessage("notification clicked")
+                            windowClient.postMessage("notification clicked:windowClient.postMessage")
                         })
                 }
             })

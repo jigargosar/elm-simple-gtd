@@ -77,30 +77,32 @@ boot().catch(console.error)
 
 async function setupNotifications(app) {
 
-    if ('serviceWorker' in navigator) {
-        const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
-        navigator.serviceWorker.addEventListener('message', function(event){
-            console.info("messsage event received", event)
-            // event.ports[0].postMessage("Client 1 Says 'Hello back!'");
-        });
-        const reg = await navigator.serviceWorker.register(swScriptPath)
-        app.ports["showNotification"].subscribe(async (msg) => {
-            const permission = await Notification.requestPermission()
-            if (permission === "granted") {
-                reg.showNotification(msg,
-                    {
-                        actions: [
-                            {title: "Mark Done", action: "mark-done"},
-                            {title: "Snooze", action: "snooze"}
-                        ],
-                        onclick: e => console.log("click",e)
-                    })
-                // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
-                // notification.addEventListener("click", e=>console.info("notification clicked"))
-            }
-            console.info(msg)
-        })
-    }
+    if (!'serviceWorker' in navigator) return
+    const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
+
+    navigator.serviceWorker.addEventListener('message', function (event) {
+        console.info("messsage event received", event)
+        // event.ports[0].postMessage("Client 1 Says 'Hello back!'");
+    });
+    const reg = await navigator.serviceWorker.register(swScriptPath)
+
+    app.ports["showNotification"].subscribe(async (msg) => {
+        const permission = await Notification.requestPermission()
+        if (permission === "granted") {
+            reg.showNotification(msg,
+                {
+                    actions: [
+                        {title: "Mark Done", action: "mark-done"},
+                        {title: "Snooze", action: "snooze"}
+                    ],
+                    onclick: e => console.log("click", e)
+                })
+            // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
+            // notification.addEventListener("click", e=>console.info("notification clicked"))
+        }
+        console.info(msg)
+    })
+
 }
 
 /*

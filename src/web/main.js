@@ -86,25 +86,21 @@ async function setupNotifications(app) {
     });
     const reg = await navigator.serviceWorker.register(swScriptPath)
 
-    app.ports["showNotification"].subscribe(async (msg) => {
-        const permission = await Notification.requestPermission()
-        if (permission === "granted") {
-            reg.showNotification(msg,
-                {
-                    actions: [
-                        {title: "Mark Done", action: "mark-done"},
-                        {title: "Snooze", action: "snooze"}
-                    ],
-                    onclick: e => console.log("click", e)
-                })
-            // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
-            // notification.addEventListener("click", e=>console.info("notification clicked"))
-        }
-        console.info(msg)
-    })
+    app.ports["showNotification"].subscribe(showNotification(reg))
 
 }
 
+const showNotification = reg => async (msg) => {
+    //console.info(msg)
+    const permission = await Notification.requestPermission()
+    if (permission !== "granted") return
+    reg.showNotification(msg, {
+        actions: [
+            {title: "Mark Done", action: "mark-done"},
+            {title: "Snooze", action: "snooze"}
+        ],
+    })
+}
 /*
  //noinspection JSUnresolvedVariable
  if (!WEB_PACK_DEV_SERVER && 'serviceWorker' in navigator) {

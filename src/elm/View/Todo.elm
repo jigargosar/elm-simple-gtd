@@ -20,6 +20,7 @@ import Project
 import Set
 import Time.Format
 import Todo
+import Todo.Edit
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -68,15 +69,17 @@ type alias EditTodoViewModel =
     , context : { name : Context.Name, inputId : Dom.Id }
     , dateInputValue : String
     , timeInputValue : String
+    , encodedProjectNames : Json.Encode.Value
+    , encodedContextNames : Json.Encode.Value
     , onKeyUp : KeyboardEvent -> Msg
-    , onTodoTextChanged : Todo.Text -> Msg
-    , onProjectNameChanged : Project.Name -> Msg
-    , onContextNameChanged : Context.Name -> Msg
+    , onTodoTextChanged : String -> Msg
+    , onProjectNameChanged : String -> Msg
+    , onContextNameChanged : String -> Msg
+    , onDateChanged : String -> Msg
+    , onTimeChanged : String -> Msg
     , onSaveClicked : Msg
     , onCancelClicked : Msg
     , onDeleteClicked : Msg
-    , encodedProjectNames : Json.Encode.Value
-    , encodedContextNames : Json.Encode.Value
     }
 
 
@@ -88,6 +91,9 @@ createEditTodoViewModel vc todo etm =
 
         dueAt =
             etm.dueAt
+
+        updateTodoForm =
+            Msg.UpdateTodoForm etm
     in
         { todo =
             { text = etm.todoText
@@ -105,9 +111,11 @@ createEditTodoViewModel vc todo etm =
         , dateInputValue = etm.dateInputValue
         , timeInputValue = etm.timeInputValue
         , onKeyUp = Msg.EditTodoKeyUp etm
-        , onTodoTextChanged = Msg.EditTodoTextChanged etm
-        , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
-        , onContextNameChanged = Msg.EditTodoContextNameChanged etm
+        , onTodoTextChanged = updateTodoForm Todo.Edit.Text
+        , onProjectNameChanged = updateTodoForm Todo.Edit.ProjectName
+        , onContextNameChanged = updateTodoForm Todo.Edit.ContextName
+        , onDateChanged = updateTodoForm Todo.Edit.Date
+        , onTimeChanged = updateTodoForm Todo.Edit.Time
         , encodedProjectNames = vc.encodedProjectNames
         , encodedContextNames = vc.encodedContextNames
         , onSaveClicked = Msg.SaveEditingEntity

@@ -162,6 +162,14 @@ defaultDone =
     False
 
 
+defaultProjectId =
+    ""
+
+
+defaultContextId =
+    ""
+
+
 todoConstructor id rev createdAt modifiedAt deleted done text dueAt projectId contextId =
     { id = id
     , rev = rev
@@ -183,8 +191,8 @@ todoRecordDecoder =
     D.optional "done" D.bool defaultDone
         >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
-        >> D.optional "projectId" D.string ""
-        >> D.optional "contextId" D.string ""
+        >> D.optional "projectId" D.string defaultProjectId
+        >> D.optional "contextId" D.string defaultContextId
 
 
 decoder : Decoder Model
@@ -217,8 +225,8 @@ init createdAt text id =
         defaultDone
         text
         defaultDueAt
-        ""
-        ""
+        defaultProjectId
+        defaultContextId
 
 
 getText =

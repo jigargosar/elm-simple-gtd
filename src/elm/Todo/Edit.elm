@@ -25,6 +25,14 @@ type alias Model =
     }
 
 
+type Field
+    = ProjectName
+    | ContextName
+    | Text
+    | Date
+    | Time
+
+
 create : Todo.Model -> Project.Name -> Context.Name -> Model
 create todo projectName contextName =
     let
@@ -39,6 +47,25 @@ create todo projectName contextName =
         , dateInputValue = dueAt ?|> (Time.Format.format "%Y-%m-%d") ?= ""
         , timeInputValue = dueAt ?|> (Time.Format.format "%H:%M") ?= ""
         }
+
+
+set : Field -> String -> Model -> Model
+set field value model =
+    case field of
+        ProjectName ->
+            { model | projectName = value }
+
+        ContextName ->
+            { model | contextName = value }
+
+        Text ->
+            { model | todoText = value }
+
+        Date ->
+            { model | dateInputValue = value }
+
+        Time ->
+            { model | timeInputValue = value }
 
 
 setProjectName projectName editTodoModel =

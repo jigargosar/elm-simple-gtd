@@ -82,11 +82,9 @@ async function setupNotifications(app) {
         app.ports["showNotification"].subscribe(async (msg) => {
             const permission = await Notification.requestPermission()
             if (permission === "granted") {
-                reg.showNotification("hi there",
+                reg.showNotification(msg,
                     {
                         actions: [{title: "foo", name: "bar", action: "adf"}],
-                        body: "asdf",
-                        title: "Hi There!!"
                     })
                 // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
                 // notification.addEventListener("click", e=>console.info("notification clicked"))

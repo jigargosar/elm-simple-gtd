@@ -80,8 +80,8 @@ async function setupNotifications(app) {
     if (!'serviceWorker' in navigator) return
     const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
 
-    navigator.serviceWorker.addEventListener('message', function (event) {
-        console.info("messsage event received", event)
+    navigator.serviceWorker.addEventListener('message', event => {
+        console.info("message event received", event)
         // event.ports[0].postMessage("Client 1 Says 'Hello back!'");
     });
     const reg = await navigator.serviceWorker.register(swScriptPath)

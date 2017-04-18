@@ -154,7 +154,7 @@ update actions now =
                     { model | dueAt = maybeTime, reminder = maybeTimeToReminder maybeTime }
 
                 TurnReminderOff ->
-                    { model | dueAt = Nothing, reminder = None }
+                    { model | reminder = None }
     in
         (List.foldl innerUpdate # actions)
             >> (\model -> { model | modifiedAt = now })

@@ -93,7 +93,7 @@ async function setupNotifications(app) {
                 // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
                 // notification.addEventListener("click", e=>console.info("notification clicked"))
             }
-            return console.info(msg)
+            console.info(msg)
         })
     }
 }

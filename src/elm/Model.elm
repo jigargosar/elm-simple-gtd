@@ -1,6 +1,7 @@
 module Model exposing (..)
 
 import Context
+import Date
 import Date.Extra.Create
 import Dict.Extra
 import Document
@@ -184,6 +185,15 @@ updateTodoFromEditTodoModel { contextName, projectName, todoText, id, date, time
     let
         maybeTime =
             Nothing
+
+        dateTimeString =
+            date ++ " " ++ time
+
+        _ =
+            Date.fromString (dateTimeString)
+                |> Result.map Just
+                |> Result.withDefault Nothing
+                |> Debug.log "final value"
 
         _ =
             Date.Extra.Create.dateFromFields

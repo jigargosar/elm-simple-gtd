@@ -64,15 +64,3 @@ set field value model =
 
         Time ->
             { model | time = value }
-
-
-setProjectName projectName editTodoModel =
-    { editTodoModel | projectName = projectName }
-
-
-setContextName contextName editTodoModel =
-    { editTodoModel | contextName = contextName }
-
-
-setText text editTodoModel =
-    { editTodoModel | todoText = text }

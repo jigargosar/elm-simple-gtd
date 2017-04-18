@@ -143,24 +143,6 @@ update msg =
                             |> Model.setEditTodoModel
                         )
 
-                EditTodoTextChanged editTodoModel text ->
-                    Return.map
-                        (Todo.Edit.setText text editTodoModel
-                            |> Model.setEditTodoModel
-                        )
-
-                EditTodoProjectNameChanged editModel projectName ->
-                    Return.map
-                        (Todo.Edit.setProjectName projectName editModel
-                            |> Model.setEditTodoModel
-                        )
-
-                EditTodoContextNameChanged editModel contextName ->
-                    Return.map
-                        (Todo.Edit.setContextName contextName editModel
-                            |> Model.setEditTodoModel
-                        )
-
                 CopyAndEditTodoById todoId ->
                     Return.withMaybe (Model.findTodoById todoId)
                         (CopyAndEditTodo >> andThenUpdate)

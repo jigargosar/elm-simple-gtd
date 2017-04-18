@@ -60,9 +60,6 @@ type Msg
     | SaveEditingEntity
     | FocusPaperInput String
     | UpdateTodoForm Todo.Edit.Form Todo.Edit.Field String
-    | EditTodoTextChanged TodoForm String
-    | EditTodoProjectNameChanged TodoForm Project.Name
-    | EditTodoContextNameChanged TodoForm Context.Name
     | EditTodoKeyUp TodoForm KeyboardEvent
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection

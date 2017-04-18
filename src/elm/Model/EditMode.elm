@@ -2,7 +2,7 @@ module Model.EditMode exposing (..)
 
 import Context
 import Document
-import EditMode exposing (EditMode, EditTodoModel)
+import EditMode exposing (EditMode, TodoForm)
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model exposing (..)

@@ -15,7 +15,7 @@ import Time.Format
 import Todo.Edit
 
 
-type alias EditTodoModel =
+type alias TodoForm =
     Todo.Edit.Form
 
 
@@ -37,7 +37,7 @@ type alias NewTodoModel =
 
 type EditMode
     = NewTodo NewTodoModel
-    | EditTodo EditTodoModel
+    | EditTodo TodoForm
     | EditContext EditContextModel
     | EditProject EditProjectModel
     | None

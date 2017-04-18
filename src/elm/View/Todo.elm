@@ -5,7 +5,7 @@ import Date.Distance exposing (inWords)
 import Dict
 import Document
 import Dom
-import EditMode exposing (EditTodoModel)
+import EditMode exposing (TodoForm)
 import Ext.Decode exposing (traceDecoder)
 import Html.Attributes.Extra exposing (intProperty)
 import Html.Events.Extra exposing (onClickStopPropagation)
@@ -80,7 +80,7 @@ type alias EditTodoViewModel =
     }
 
 
-createEditTodoViewModel : SharedViewModel -> Todo.Model -> EditTodoModel -> EditTodoViewModel
+createEditTodoViewModel : SharedViewModel -> Todo.Model -> TodoForm -> EditTodoViewModel
 createEditTodoViewModel vc todo etm =
     let
         todoId =

@@ -2,7 +2,7 @@ module Msg exposing (..)
 
 import Context
 import Dom
-import EditMode exposing (EditTodoModel)
+import EditMode exposing (TodoForm)
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Model.Types exposing (..)
@@ -60,10 +60,10 @@ type Msg
     | SaveEditingEntity
     | FocusPaperInput String
     | UpdateTodoForm Todo.Edit.Form Todo.Edit.Field String
-    | EditTodoTextChanged EditTodoModel String
-    | EditTodoProjectNameChanged EditTodoModel Project.Name
-    | EditTodoContextNameChanged EditTodoModel Context.Name
-    | EditTodoKeyUp EditTodoModel KeyboardEvent
+    | EditTodoTextChanged TodoForm String
+    | EditTodoProjectNameChanged TodoForm Project.Name
+    | EditTodoContextNameChanged TodoForm Context.Name
+    | EditTodoKeyUp TodoForm KeyboardEvent
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection
     | SelectionDoneClicked

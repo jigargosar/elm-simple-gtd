@@ -3,7 +3,7 @@ module Model exposing (..)
 import Context
 import Dict.Extra
 import Document
-import EditMode exposing (EditTodoModel)
+import EditMode exposing (TodoForm)
 import Ext.Keyboard as Keyboard
 import Model.Internal exposing (..)
 import Model.TodoStore
@@ -178,7 +178,7 @@ getActiveTodoListGroupedBy fn =
     getActiveTodoList >> Dict.Extra.groupBy (fn)
 
 
-updateTodoFromEditTodoModel : EditTodoModel -> ModelF
+updateTodoFromEditTodoModel : TodoForm -> ModelF
 updateTodoFromEditTodoModel { contextName, projectName, todoText, id } =
     apply3Uncurry ( findContextByName contextName, findProjectByName projectName, identity )
         (\maybeContext maybeProject ->

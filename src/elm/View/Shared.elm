@@ -3,7 +3,7 @@ module View.Shared exposing (..)
 import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
-import EditMode exposing (EditMode, EditTodoModel)
+import EditMode exposing (EditMode, TodoForm)
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Attributes.Extra exposing (intProperty)
@@ -33,7 +33,7 @@ type alias SharedViewModel =
     { now : Time
     , encodedProjectNames : Json.Encode.Value
     , encodedContextNames : Json.Encode.Value
-    , maybeEditTodoModel : Maybe EditTodoModel
+    , maybeEditTodoModel : Maybe TodoForm
     , editMode : EditMode
     , projectIdToNameDict : Dict Id Project.Name
     , contextByIdDict : Dict Id Context.Model

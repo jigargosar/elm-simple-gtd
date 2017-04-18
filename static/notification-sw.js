@@ -28,8 +28,8 @@ self.addEventListener('notificationclick', function (event) {
                 if (clients.openWindow) {
                     return clients
                         .openWindow('http://localhost:8020/')
-                        .then(windowClient => {
-                            windowClient.postMessage("notification clicked:windowClient.postMessage")
+                        .then(client => {
+                            client.postMessage("newWindow notification, this never reaches.")
                         })
                 }
             })

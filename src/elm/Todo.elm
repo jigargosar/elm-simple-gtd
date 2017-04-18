@@ -32,12 +32,22 @@ type alias Text =
     String
 
 
+type Reminder
+    = None
+    | At Time
+
+
+defaultReminder =
+    None
+
+
 type alias Record =
     { done : Bool
     , text : Text
     , dueAt : Maybe Time
     , projectId : Id
     , contextId : Id
+    , reminder : Reminder
     }
 
 
@@ -170,7 +180,7 @@ defaultContextId =
     ""
 
 
-todoConstructor id rev createdAt modifiedAt deleted done text dueAt projectId contextId =
+todoConstructor id rev createdAt modifiedAt deleted done text dueAt projectId contextId reminder =
     { id = id
     , rev = rev
     , dirty = False
@@ -184,6 +194,7 @@ todoConstructor id rev createdAt modifiedAt deleted done text dueAt projectId co
     , dueAt = dueAt
     , projectId = projectId
     , contextId = contextId
+    , reminder = reminder
     }
 
 
@@ -193,6 +204,13 @@ todoRecordDecoder =
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         >> D.optional "projectId" D.string defaultProjectId
         >> D.optional "contextId" D.string defaultContextId
+        >> D.optional "reminder" reminderDecoder defaultReminder
+
+
+reminderDecoder : Decoder Reminder
+reminderDecoder =
+    D.decode (\time -> At time)
+        |> D.required "at" D.float
 
 
 decoder : Decoder Model
@@ -227,6 +245,7 @@ init createdAt text id =
         defaultDueAt
         defaultProjectId
         defaultContextId
+        defaultReminder
 
 
 getText =

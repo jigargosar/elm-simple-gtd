@@ -13,14 +13,14 @@ self.addEventListener('notificationclick', function (event) {
     console.log("notification click", event)
     event.notification.close();
 
-
+    debugger
     event.waitUntil(
         clients
             .matchAll({type: "window"})
             .then(function (clientList) {
                 for (var i = 0; i < clientList.length; i++) {
                     var client = clientList[i];
-                    client.postMessage("notification clicked: client.postMessage")
+                    postMessage(client, event)
                     if (client.focus) {
                         return client.focus();
                     }
@@ -29,10 +29,18 @@ self.addEventListener('notificationclick', function (event) {
                     return clients
                         .openWindow('http://localhost:8020/')
                         .then(client => {
-                            client.postMessage("newWindow notification, this never reaches.")
+                            postMessage(client, event)
                         })
                 }
             })
     );
 
 }, false);
+
+function postMessage(client, event) {
+    client.postMessage({
+        type: "notification-clicked",
+        action: event.action,
+        notification: event.notification
+    })
+}

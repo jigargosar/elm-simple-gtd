@@ -230,7 +230,17 @@ encodeOtherFields todo =
     , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
     , "projectId" => (todo.projectId |> E.string)
     , "contextId" => (todo.contextId |> E.string)
+    , "reminder" => encodeReminder todo.reminder
     ]
+
+
+encodeReminder reminder =
+    case reminder of
+        None ->
+            E.null
+
+        At time ->
+            E.object [ "at" => E.float time ]
 
 
 init createdAt text id =

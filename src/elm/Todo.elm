@@ -58,6 +58,7 @@ type UpdateAction
     | SetText Text
     | SetDeleted Bool
     | SetContextId Id
+    | SetTime (Maybe Time)
     | SetContext Context.Model
     | SetProjectId Id
     | SetProject Project.Project

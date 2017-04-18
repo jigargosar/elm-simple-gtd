@@ -1,6 +1,7 @@
 module Model exposing (..)
 
 import Context
+import Date.Extra.Create
 import Dict.Extra
 import Document
 import EditMode exposing (TodoForm)
@@ -179,16 +180,24 @@ getActiveTodoListGroupedBy fn =
 
 
 updateTodoFromEditTodoModel : TodoForm -> ModelF
-updateTodoFromEditTodoModel { contextName, projectName, todoText, id } =
-    apply3Uncurry ( findContextByName contextName, findProjectByName projectName, identity )
-        (\maybeContext maybeProject ->
-            Model.TodoStore.updateTodoById
-                [ Todo.SetText todoText
-                , Todo.SetProjectId (maybeProject ?|> Document.getId ?= "")
-                , Todo.SetContextId (maybeContext ?|> Document.getId ?= "")
-                ]
-                id
-        )
+updateTodoFromEditTodoModel { contextName, projectName, todoText, id, date, time } =
+    let
+        maybeTime =
+            Nothing
+
+        _ =
+            Date.Extra.Create.dateFromFields
+    in
+        apply3Uncurry ( findContextByName contextName, findProjectByName projectName, identity )
+            (\maybeContext maybeProject ->
+                Model.TodoStore.updateTodoById
+                    [ Todo.SetText todoText
+                    , Todo.SetProjectId (maybeProject ?|> Document.getId ?= "")
+                    , Todo.SetContextId (maybeContext ?|> Document.getId ?= "")
+                    , Todo.SetTime maybeTime
+                    ]
+                    id
+            )
 
 
 type alias Lens small big =

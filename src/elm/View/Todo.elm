@@ -122,22 +122,6 @@ edit vm =
             ]
             []
         , input
-            [ id (vm.project.inputId)
-            , class "project-name-input"
-            , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-            , onInput vm.onProjectNameChanged
-            , stringProperty "label" "Project Name"
-            , value vm.project.name
-            ]
-            []
-        , Html.node "paper-autocomplete-suggestions"
-            [ stringProperty "for" (vm.project.inputId)
-            , property "source" (vm.encodedProjectNames)
-            , onAutoCompleteSelected vm.onProjectNameChanged
-            , intProperty "minLength" 0
-            ]
-            []
-        , input
             [ id (vm.context.inputId)
             , class "context-name-input"
             , onClickStopPropagation (Msg.FocusPaperInput ".context-name-input")
@@ -150,6 +134,22 @@ edit vm =
             [ stringProperty "for" (vm.context.inputId)
             , property "source" (vm.encodedContextNames)
             , onAutoCompleteSelected vm.onContextNameChanged
+            , intProperty "minLength" 0
+            ]
+            []
+        , input
+            [ id (vm.project.inputId)
+            , class "project-name-input"
+            , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
+            , onInput vm.onProjectNameChanged
+            , stringProperty "label" "Project Name"
+            , value vm.project.name
+            ]
+            []
+        , Html.node "paper-autocomplete-suggestions"
+            [ stringProperty "for" (vm.project.inputId)
+            , property "source" (vm.encodedProjectNames)
+            , onAutoCompleteSelected vm.onProjectNameChanged
             , intProperty "minLength" 0
             ]
             []

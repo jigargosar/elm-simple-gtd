@@ -176,8 +176,8 @@ getActiveTodoList =
     .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 
 
-getActiveTodoListWithDueDate =
-    .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone, Todo.getDueAt >> Maybe.isNothing ])
+getActiveTodoListWithReminderTime =
+    .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone, Todo.getMaybeReminderTime >> Maybe.isNothing ])
 
 
 getActiveTodoListGroupedBy fn =

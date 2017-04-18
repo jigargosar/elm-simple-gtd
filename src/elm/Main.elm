@@ -345,10 +345,10 @@ sendAlerts =
         (\m ->
             let
                 ( commands, todoList ) =
-                    Model.getActiveTodoListWithDueDate m
+                    Model.getActiveTodoListWithReminderTime m
                         |> List.filterMap
                             (\todo ->
-                                Todo.getDueAt todo
+                                Todo.getMaybeReminderTime todo
                                     ?+> (\time ->
                                             if time < m.now then
                                                 todo

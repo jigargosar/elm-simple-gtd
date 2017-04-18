@@ -64,6 +64,7 @@ type UpdateAction
     | SetProject Project.Project
     | ToggleDone
     | ToggleDeleted
+    | TurnReminderOff
 
 
 type alias ModelF =
@@ -210,6 +211,9 @@ update actions now =
 
                 SetTime maybeTime ->
                     { model | dueAt = maybeTime }
+
+                TurnReminderOff ->
+                    { model | dueAt = Nothing }
     in
         (List.foldl innerUpdate # actions)
             >> setModifiedAt now

@@ -176,6 +176,10 @@ getActiveTodoList =
     .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 
 
+getActiveTodoListWithDueDate =
+    .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone, Todo.getDueAt >> Maybe.isNothing ])
+
+
 getActiveTodoListGroupedBy fn =
     getActiveTodoList >> Dict.Extra.groupBy (fn)
 

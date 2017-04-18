@@ -337,6 +337,34 @@ onUpdateNow now =
                     else
                         Return.singleton m
             )
+        >> sendAlerts
+
+
+sendAlerts =
+    Return.andThen
+        (\m ->
+            let
+                commands : List ( Cmd Msg, Todo.Model )
+                commands =
+                    Model.getActiveTodoListWithDueDate m
+                        |> List.filterMap
+                            (\todo ->
+                                Todo.getDueAt todo
+                                    ?+> (\time ->
+                                            if time < m.now then
+                                                todo
+                                                    |> apply2 ( Todo.getText >> showTestNotification, identity )
+                                                    >> Just
+                                            else
+                                                Nothing
+                                        )
+                            )
+
+                --                _ =
+                --                    List.foldl (\tuple -> tuple |> Tuple.mapSecond (updateTodo [ Todo.TurnReminderOff ])) m
+            in
+                Return.singleton m
+        )
 
 
 activateEditNewTodoMode text =

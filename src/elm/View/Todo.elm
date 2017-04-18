@@ -42,7 +42,7 @@ createKeyedItem vc todo =
             case vc.maybeEditTodoModel of
                 Just etm ->
                     if Document.hasId etm.id todo then
-                        edit vc (createEditTodoViewModel vc todo etm)
+                        edit (createEditTodoViewModel vc todo etm)
                     else
                         notEditingView ()
 
@@ -85,6 +85,9 @@ createEditTodoViewModel vc todo etm =
     let
         todoId =
             etm.id
+
+        dueAt =
+            etm.dueAt
     in
         { todo =
             { text = etm.todoText
@@ -99,8 +102,8 @@ createEditTodoViewModel vc todo etm =
             { name = etm.contextName
             , inputId = "edit-todo-context-input-" ++ todoId
             }
-        , dateInputValue = (Time.Format.format "%Y-%m-%d" vc.now)
-        , timeInputValue = (Time.Format.format "%H:%M" vc.now)
+        , dateInputValue = etm.dueAt ?|> (Time.Format.format "%Y-%m-%d") ?= ""
+        , timeInputValue = etm.dueAt ?|> (Time.Format.format "%H:%M") ?= ""
         , onKeyUp = Msg.EditTodoKeyUp etm
         , onTodoTextChanged = Msg.EditTodoTextChanged etm
         , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
@@ -113,8 +116,8 @@ createEditTodoViewModel vc todo etm =
         }
 
 
-edit : SharedViewModel -> EditTodoViewModel -> Html Msg
-edit vc vm =
+edit : EditTodoViewModel -> Html Msg
+edit vm =
     item [ class "todo-item editing" ]
         [ Html.node "paper-input"
             --        Html.node "paper-textarea" -- todo: add after trimming newline on enter.
@@ -155,20 +158,22 @@ edit vc vm =
             , intProperty "minLength" 0
             ]
             []
-        , input
-            [ id (vm.project.inputId)
-            , onInput vm.onProjectNameChanged
-            , stringProperty "label" "Project Name"
-            , value vm.project.name
+        , View.Shared.colItemStretched
+            [ input
+                [ id (vm.project.inputId)
+                , onInput vm.onProjectNameChanged
+                , stringProperty "label" "Project Name"
+                , value vm.project.name
+                ]
+                []
+            , Html.node "paper-autocomplete-suggestions"
+                [ stringProperty "for" (vm.project.inputId)
+                , property "source" (vm.encodedProjectNames)
+                , onAutoCompleteSelected vm.onProjectNameChanged
+                , intProperty "minLength" 0
+                ]
+                []
             ]
-            []
-        , Html.node "paper-autocomplete-suggestions"
-            [ stringProperty "for" (vm.project.inputId)
-            , property "source" (vm.encodedProjectNames)
-            , onAutoCompleteSelected vm.onProjectNameChanged
-            , intProperty "minLength" 0
-            ]
-            []
         , row
             [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
             , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]

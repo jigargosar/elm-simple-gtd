@@ -38,6 +38,22 @@
   }
 }
 
+
+.col-item-stretched{
+  display: flex;
+  flex-direction: column;
+  align-items:stretch;
+  justify-content: space-around;
+
+  &> * {
+    flex: 1 1 auto;
+  }
+}
+
+paper-autocomplete-suggestions{
+  //display: none;
+}
+
 .col {
   display: flex;
   flex-direction: column;

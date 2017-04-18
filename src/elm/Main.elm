@@ -155,7 +155,7 @@ update msg =
                                 >> uncurry update
                         )
 
-                EditTodoKeyUp { id } { key, isShiftDown } ->
+                EditTodoFormKeyUp { id } { key, isShiftDown } ->
                     case key of
                         Key.Enter ->
                             andThenUpdate SaveEditingEntity

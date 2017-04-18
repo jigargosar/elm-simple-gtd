@@ -107,7 +107,7 @@ createEditTodoViewModel vc todo etm =
             }
         , dateInputValue = etm.date
         , timeInputValue = etm.time
-        , onKeyUp = Msg.EditTodoKeyUp etm
+        , onKeyUp = Msg.EditTodoFormKeyUp etm
         , onTodoTextChanged = updateTodoForm Todo.Edit.Text
         , onProjectNameChanged = updateTodoForm Todo.Edit.ProjectName
         , onContextNameChanged = updateTodoForm Todo.Edit.ContextName

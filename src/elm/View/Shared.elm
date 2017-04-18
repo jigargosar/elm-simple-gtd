@@ -70,6 +70,10 @@ row =
     div [ class "row" ]
 
 
+rowItemStretched =
+    div [ class "row-item-stretched" ]
+
+
 col =
     div [ class "col" ]
 

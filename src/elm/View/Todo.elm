@@ -127,18 +127,20 @@ edit vc vm =
             , onKeyUp vm.onKeyUp
             ]
             []
-        , input
-            [ stringProperty "label" "Date"
-            , type_ "date"
-            , value vm.dateInputValue
+        , rowItemStretched
+            [ input
+                [ stringProperty "label" "Date"
+                , type_ "date"
+                , value vm.dateInputValue
+                ]
+                []
+            , input
+                [ stringProperty "label" "Time"
+                , type_ "time"
+                , value vm.timeInputValue
+                ]
+                []
             ]
-            []
-        , input
-            [ stringProperty "label" "Time"
-            , type_ "time"
-            , value vm.timeInputValue
-            ]
-            []
         , input
             [ id (vm.context.inputId)
             , onInput vm.onContextNameChanged

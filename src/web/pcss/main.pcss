@@ -27,6 +27,17 @@
   align-items: center;
 }
 
+.row-item-stretched {
+  display: flex;
+  flex-direction: row;
+  align-items:stretch;
+  justify-content: space-around;
+
+  &> * {
+     flex: 1 1 auto;
+  }
+}
+
 .col {
   display: flex;
   flex-direction: column;

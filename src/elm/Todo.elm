@@ -227,14 +227,16 @@ todoConstructor id rev createdAt modifiedAt deleted done text dueAt projectId co
     { id = id
     , rev = rev
     , dirty = False
+    , createdAt = createdAt
+    , modifiedAt = modifiedAt
+    , deleted = deleted
+
+    --
     , done = done
     , text = text
     , dueAt = dueAt
-    , deleted = deleted
     , projectId = projectId
     , contextId = contextId
-    , createdAt = createdAt
-    , modifiedAt = modifiedAt
     }
 
 

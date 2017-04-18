@@ -113,19 +113,16 @@ edit vm =
         [ Html.node "paper-input"
             --        Html.node "paper-textarea" -- todo: add after trimming newline on enter.
             [ id vm.todo.inputId
-            , class "edit-todo-input auto-focus"
+            , class "auto-focus"
             , stringProperty "label" "Todo"
             , value (vm.todo.text)
             , onInput vm.onTodoTextChanged
             , autofocus True
-            , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
             , onKeyUp vm.onKeyUp
             ]
             []
         , input
             [ id (vm.context.inputId)
-            , class "context-name-input"
-            , onClickStopPropagation (Msg.FocusPaperInput ".context-name-input")
             , onInput vm.onContextNameChanged
             , stringProperty "label" "Context Name"
             , value vm.context.name
@@ -140,8 +137,6 @@ edit vm =
             []
         , input
             [ id (vm.project.inputId)
-            , class "project-name-input"
-            , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
             , onInput vm.onProjectNameChanged
             , stringProperty "label" "Project Name"
             , value vm.project.name

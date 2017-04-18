@@ -71,34 +71,9 @@ type alias ModelF =
     Model -> Model
 
 
-getRev : Model -> Revision
-getRev =
-    (.rev)
-
-
-setRev : Revision -> ModelF
-setRev rev model =
-    { model | rev = rev }
-
-
-updateRev : (Model -> Revision) -> ModelF
-updateRev updater model =
-    setRev (updater model) model
-
-
 getDueAt : Model -> Maybe Time
 getDueAt =
     (.dueAt)
-
-
-setDueAt : Maybe Time -> ModelF
-setDueAt dueAt model =
-    { model | dueAt = dueAt }
-
-
-updateDueAt : (Model -> Maybe Time) -> ModelF
-updateDueAt updater model =
-    setDueAt (updater model) model
 
 
 getDone : Model -> Bool

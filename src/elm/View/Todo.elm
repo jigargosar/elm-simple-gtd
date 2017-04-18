@@ -31,7 +31,7 @@ import Polymer.Paper exposing (..)
 import View.Shared exposing (..)
 
 
-listItemView vc todo =
+createKeyedItem vc todo =
     let
         notEditingView _ =
             default vc todo

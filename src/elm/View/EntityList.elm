@@ -44,7 +44,7 @@ import View.Shared exposing (..)
 
 filtered : Model -> Html Msg
 filtered =
-    apply2 ( View.Shared.createSharedViewModel >> View.Todo.listItemView, Model.TodoStore.getFilteredTodoList )
+    apply2 ( View.Shared.createSharedViewModel >> View.Todo.createKeyedItem, Model.TodoStore.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
                 Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
            )
@@ -62,7 +62,7 @@ groupByEntity entityVMs model =
                 [ entityListItemView vc vm
                 , Keyed.node "paper-material"
                     [ class "todo-list" ]
-                    (vm.todoList .|> View.Todo.listItemView vc)
+                    (vm.todoList .|> View.Todo.createKeyedItem vc)
                 ]
             )
     in

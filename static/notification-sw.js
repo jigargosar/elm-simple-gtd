@@ -10,6 +10,7 @@
 
 
 self.addEventListener('notificationclick', function (event) {
-    console.log("notification click")
+    console.log("notification click", event)
+
     event.notification.close();
 }, false);

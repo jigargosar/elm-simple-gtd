@@ -47,3 +47,7 @@ setProjectName projectName editTodoModel =
 
 setContextName contextName editTodoModel =
     { editTodoModel | contextName = contextName }
+
+
+setText text editTodoModel =
+    { editTodoModel | todoText = text }

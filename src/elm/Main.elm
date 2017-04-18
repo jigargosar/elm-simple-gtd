@@ -138,7 +138,10 @@ update msg =
                         >> autoFocusPaperInputCmd
 
                 EditTodoTextChanged editTodoModel text ->
-                    Return.map (Model.updateEditTodoText text editTodoModel)
+                    Return.map
+                        (Todo.Edit.setText text editTodoModel
+                            |> Model.setEditTodoModel
+                        )
 
                 EditTodoProjectNameChanged editModel projectName ->
                     Return.map

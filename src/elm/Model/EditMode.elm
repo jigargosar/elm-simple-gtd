@@ -137,16 +137,6 @@ getEditNewTodoModel =
     getEditMode >> EditMode.getNewTodoModel
 
 
-updateEditTodoContextName : Context.Name -> EditTodoModel -> ModelF
-updateEditTodoContextName contextName editTodoModel =
-    setEditTodoModel (Todo.Edit.setContextName contextName editTodoModel)
-
-
-updateEditTodoText : String -> EditTodoModel -> ModelF
-updateEditTodoText text editTodoModel =
-    setEditMode (EditMode.updateEditTodoText text editTodoModel)
-
-
 setEditTodoModel =
     EditMode.EditTodo >> setEditMode
 

@@ -69,10 +69,6 @@ editProjectSetName name epm =
     EditProject { epm | name = name }
 
 
-updateEditTodoText text editTodoModel =
-    (EditTodo ({ editTodoModel | todoText = text }))
-
-
 getMaybeEditTodoModel model =
     case model of
         EditTodo model ->

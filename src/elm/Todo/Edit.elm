@@ -35,15 +35,15 @@ type Field
 create : Todo.Model -> Project.Name -> Context.Name -> Form
 create todo projectName contextName =
     let
-        dueAt =
-            Todo.getDueAt todo
+        time =
+            Todo.getTime todo
     in
         { id = Document.getId todo
         , todoText = Todo.getText todo
         , projectName = projectName
         , contextName = contextName
-        , date = dueAt ?|> (Time.Format.format "%Y-%m-%d") ?= ""
-        , time = dueAt ?|> (Time.Format.format "%H:%M") ?= ""
+        , date = time |> (Time.Format.format "%Y-%m-%d")
+        , time = time |> (Time.Format.format "%H:%M")
         }
 
 

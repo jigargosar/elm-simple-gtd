@@ -172,6 +172,10 @@ updateModifiedAt updater model =
     setModifiedAt (updater model) model
 
 
+getTime model =
+    model.dueAt ?= model.createdAt
+
+
 update : List UpdateAction -> Time -> ModelF
 update actions now =
     let

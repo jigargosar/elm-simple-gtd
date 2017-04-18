@@ -43,7 +43,7 @@ create todo projectName contextName =
         , projectName = projectName
         , contextName = contextName
         , date = dueAt ?|> (Time.Format.format "%Y-%m-%d") ?= ""
-        , time = dueAt ?|> (Time.Format.format "%H:%M") ?= ""
+        , time = dueAt ?|> (Time.Format.format "%H:%M") ?= "00:00"
         }
 
 

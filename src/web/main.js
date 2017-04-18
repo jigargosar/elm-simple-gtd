@@ -84,7 +84,8 @@ async function setupNotifications(app) {
             if (permission === "granted") {
                 reg.showNotification(msg,
                     {
-                        actions: [{title: "foo", name: "bar", action: "adf"}],
+                        actions: [{title: "Mark Done", action: "mark-done"}
+                        , {title:"Snooze", action:"snooze"}],
                     })
                 // var notification = new Notification("hi there",{actions:[{title:"foo", name:"bar", action:"adf"}],body:"asdf", title:"Hi There!!"});
                 // notification.addEventListener("click", e=>console.info("notification clicked"))

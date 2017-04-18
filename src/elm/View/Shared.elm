@@ -70,6 +70,10 @@ row =
     div [ class "row" ]
 
 
+col =
+    div [ class "col" ]
+
+
 expand =
     div [ class "flex11" ]
 

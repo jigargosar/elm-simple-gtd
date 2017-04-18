@@ -27,6 +27,12 @@
   align-items: center;
 }
 
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .flex11{
   flex: 1 1 auto;
 }
@@ -66,10 +72,6 @@
   width: 100%;
 }
 
-.edit-todo-input {
-  width: 100%;
-}
-
 .flex-expand {
   flex: 1 1 auto;
 }
@@ -103,7 +105,6 @@ paper-item {
   }
 }
 
-
 .todo-list-title {
   text-transform: capitalize;
   //font-size: 0.9rem;
@@ -122,6 +123,11 @@ paper-item {
 
   & .todo-item {
     border-top: 1px solid rgba(179, 179, 179, 0.53);
+
+    &.editing {
+      flex-direction: column;
+      align-items: stretch;
+    }
 
     & .done {
       //text-decoration: line-through;

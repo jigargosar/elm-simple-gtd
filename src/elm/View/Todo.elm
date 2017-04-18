@@ -23,7 +23,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Html exposing (Html, div, span, text)
+import Html exposing (Html, col, div, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
@@ -109,57 +109,55 @@ createEditTodoViewModel vc todo etm =
 
 edit : EditTodoViewModel -> Html Msg
 edit vm =
-    item [ class "todo-item" ]
-        [ itemBody []
-            [ input
-                [ id vm.todo.inputId
-                , class "edit-todo-input auto-focus"
-                , stringProperty "label" "Todo"
-                , value (vm.todo.text)
-                , onInput vm.onTodoTextChanged
-                , autofocus True
-                , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
-                , onKeyUp vm.onKeyUp
-                ]
-                []
-            , input
-                [ id (vm.project.inputId)
-                , class "project-name-input"
-                , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
-                , onInput vm.onProjectNameChanged
-                , stringProperty "label" "Project Name"
-                , value vm.project.name
-                ]
-                []
-            , Html.node "paper-autocomplete-suggestions"
-                [ stringProperty "for" (vm.project.inputId)
-                , property "source" (vm.encodedProjectNames)
-                , onAutoCompleteSelected vm.onProjectNameChanged
-                , intProperty "minLength" 0
-                ]
-                []
-            , input
-                [ id (vm.context.inputId)
-                , class "context-name-input"
-                , onClickStopPropagation (Msg.FocusPaperInput ".context-name-input")
-                , onInput vm.onContextNameChanged
-                , stringProperty "label" "Context Name"
-                , value vm.context.name
-                ]
-                []
-            , Html.node "paper-autocomplete-suggestions"
-                [ stringProperty "for" (vm.context.inputId)
-                , property "source" (vm.encodedContextNames)
-                , onAutoCompleteSelected vm.onContextNameChanged
-                , intProperty "minLength" 0
-                ]
-                []
-            , row
-                [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
-                , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
-                , expand []
-                , trashButton vm.onDeleteClicked
-                ]
+    item [ class "todo-item editing" ]
+        [ Html.node "paper-textarea"
+            [ id vm.todo.inputId
+            , class "edit-todo-input auto-focus"
+            , stringProperty "label" "Todo"
+            , value (vm.todo.text)
+            , onInput vm.onTodoTextChanged
+            , autofocus True
+            , onClickStopPropagation (Msg.FocusPaperInput ".edit-todo-input")
+            , onKeyUp vm.onKeyUp
+            ]
+            []
+        , input
+            [ id (vm.project.inputId)
+            , class "project-name-input"
+            , onClickStopPropagation (Msg.FocusPaperInput ".project-name-input")
+            , onInput vm.onProjectNameChanged
+            , stringProperty "label" "Project Name"
+            , value vm.project.name
+            ]
+            []
+        , Html.node "paper-autocomplete-suggestions"
+            [ stringProperty "for" (vm.project.inputId)
+            , property "source" (vm.encodedProjectNames)
+            , onAutoCompleteSelected vm.onProjectNameChanged
+            , intProperty "minLength" 0
+            ]
+            []
+        , input
+            [ id (vm.context.inputId)
+            , class "context-name-input"
+            , onClickStopPropagation (Msg.FocusPaperInput ".context-name-input")
+            , onInput vm.onContextNameChanged
+            , stringProperty "label" "Context Name"
+            , value vm.context.name
+            ]
+            []
+        , Html.node "paper-autocomplete-suggestions"
+            [ stringProperty "for" (vm.context.inputId)
+            , property "source" (vm.encodedContextNames)
+            , onAutoCompleteSelected vm.onContextNameChanged
+            , intProperty "minLength" 0
+            ]
+            []
+        , row
+            [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
+            , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
+            , expand []
+            , trashButton vm.onDeleteClicked
             ]
         ]
 

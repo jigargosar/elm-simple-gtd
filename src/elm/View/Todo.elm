@@ -122,6 +122,11 @@ edit vm =
             ]
             []
         , input
+            [ stringProperty "label" "Date"
+            , type_ "date"
+            ]
+            []
+        , input
             [ id (vm.context.inputId)
             , onInput vm.onContextNameChanged
             , stringProperty "label" "Context Name"

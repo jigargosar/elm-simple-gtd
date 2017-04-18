@@ -203,6 +203,9 @@ update actions now =
 
                 ToggleDeleted ->
                     updateDeleted (getDeleted >> not) model
+
+                SetTime maybeTime ->
+                    { model | dueAt = maybeTime }
     in
         (List.foldl innerUpdate # actions)
             >> setModifiedAt now

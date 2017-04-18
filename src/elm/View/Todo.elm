@@ -142,6 +142,7 @@ edit vm =
             [ input
                 [ stringProperty "label" "Date"
                 , type_ "date"
+                , onInput vm.onDateChanged
                 , value vm.dateInputValue
                 ]
                 []
@@ -149,6 +150,7 @@ edit vm =
                 [ stringProperty "label" "Time"
                 , type_ "time"
                 , value vm.timeInputValue
+                , onInput vm.onTimeChanged
                 ]
                 []
             ]

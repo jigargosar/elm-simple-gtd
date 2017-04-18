@@ -344,8 +344,7 @@ sendAlerts =
     Return.andThen
         (\m ->
             let
-                commands : List ( Cmd Msg, Todo.Model )
-                commands =
+                ( commands, todoList ) =
                     Model.getActiveTodoListWithDueDate m
                         |> List.filterMap
                             (\todo ->
@@ -359,11 +358,12 @@ sendAlerts =
                                                 Nothing
                                         )
                             )
+                        |> List.unzip
 
-                --                _ =
-                --                    List.foldl (\tuple -> tuple |> Tuple.mapSecond (updateTodo [ Todo.TurnReminderOff ])) m
+                newModel =
+                    todoList |> List.foldl (Model.updateTodo [ Todo.TurnReminderOff ]) m
             in
-                Return.singleton m
+                newModel ! commands
         )
 
 

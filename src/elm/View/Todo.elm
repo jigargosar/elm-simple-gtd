@@ -18,6 +18,7 @@ import Msg exposing (Msg)
 import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
 import Project
 import Set
+import Time.Format
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -65,6 +66,8 @@ type alias EditTodoViewModel =
     { todo : { text : Todo.Text, id : Todo.Id, inputId : Dom.Id }
     , project : { name : Project.Name, inputId : Dom.Id }
     , context : { name : Context.Name, inputId : Dom.Id }
+    , dateInputValue : String
+    , timeInputValue : String
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : Todo.Text -> Msg
     , onProjectNameChanged : Project.Name -> Msg
@@ -96,6 +99,8 @@ createEditTodoViewModel vc todo etm =
             { name = etm.contextName
             , inputId = "edit-todo-context-input-" ++ todoId
             }
+        , dateInputValue = (Time.Format.format "%Y-%m-%d" vc.now)
+        , timeInputValue = (Time.Format.format "%H:%M" vc.now)
         , onKeyUp = Msg.EditTodoKeyUp etm
         , onTodoTextChanged = Msg.EditTodoTextChanged etm
         , onProjectNameChanged = Msg.EditTodoProjectNameChanged etm
@@ -125,13 +130,13 @@ edit vc vm =
         , input
             [ stringProperty "label" "Date"
             , type_ "date"
-            , value (toString vc.now)
+            , value vm.dateInputValue
             ]
             []
         , input
             [ stringProperty "label" "Time"
             , type_ "time"
-            , value (toString vc.now)
+            , value vm.timeInputValue
             ]
             []
         , input

@@ -76,6 +76,9 @@ boot().catch(console.error)
 
 
 async function setupNotifications(app) {
+    window.addEventListener("message", event=>{
+        console.info("messsage event received", event)
+    })
     if ('serviceWorker' in navigator) {
         const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
         const reg = await navigator.serviceWorker.register(swScriptPath)

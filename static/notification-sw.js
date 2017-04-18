@@ -13,7 +13,6 @@ self.addEventListener('notificationclick', function (event) {
     console.log("notification click", event)
     event.notification.close();
 
-    debugger
     event.waitUntil(
         clients
             .matchAll({type: "window"})

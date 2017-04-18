@@ -89,9 +89,6 @@ createEditTodoViewModel vc todo etm =
         todoId =
             etm.id
 
-        dueAt =
-            etm.dueAt
-
         updateTodoForm =
             Msg.UpdateTodoForm etm
     in
@@ -108,8 +105,8 @@ createEditTodoViewModel vc todo etm =
             { name = etm.contextName
             , inputId = "edit-todo-context-input-" ++ todoId
             }
-        , dateInputValue = etm.dateInputValue
-        , timeInputValue = etm.timeInputValue
+        , dateInputValue = etm.date
+        , timeInputValue = etm.time
         , onKeyUp = Msg.EditTodoKeyUp etm
         , onTodoTextChanged = updateTodoForm Todo.Edit.Text
         , onProjectNameChanged = updateTodoForm Todo.Edit.ProjectName

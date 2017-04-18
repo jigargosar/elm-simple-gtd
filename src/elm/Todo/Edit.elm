@@ -19,9 +19,8 @@ type alias Form =
     , todoText : Todo.Text
     , projectName : Project.Name
     , contextName : Context.Name
-    , dueAt : Maybe Time
-    , dateInputValue : String
-    , timeInputValue : String
+    , date : String
+    , time : String
     }
 
 
@@ -41,11 +40,10 @@ create todo projectName contextName =
     in
         { id = Document.getId todo
         , todoText = Todo.getText todo
-        , dueAt = Todo.getDueAt todo
         , projectName = projectName
         , contextName = contextName
-        , dateInputValue = dueAt ?|> (Time.Format.format "%Y-%m-%d") ?= ""
-        , timeInputValue = dueAt ?|> (Time.Format.format "%H:%M") ?= ""
+        , date = dueAt ?|> (Time.Format.format "%Y-%m-%d") ?= ""
+        , time = dueAt ?|> (Time.Format.format "%H:%M") ?= ""
         }
 
 
@@ -62,10 +60,10 @@ set field value model =
             { model | todoText = value }
 
         Date ->
-            { model | dateInputValue = value }
+            { model | date = value }
 
         Time ->
-            { model | timeInputValue = value }
+            { model | time = value }
 
 
 setProjectName projectName editTodoModel =

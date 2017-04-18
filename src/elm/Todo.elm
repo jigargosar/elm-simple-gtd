@@ -86,6 +86,10 @@ getDeleted =
     (.deleted)
 
 
+isDeleted =
+    getDeleted
+
+
 getProjectId =
     (.projectId)
 
@@ -144,10 +148,6 @@ update actions now =
     in
         (List.foldl innerUpdate # actions)
             >> (\model -> { model | modifiedAt = now })
-
-
-isDeleted =
-    getDeleted
 
 
 defaultDueAt =

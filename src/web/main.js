@@ -76,11 +76,13 @@ boot().catch(console.error)
 
 
 async function setupNotifications(app) {
-    window.addEventListener("message", event=>{
-        console.info("messsage event received", event)
-    })
+
     if ('serviceWorker' in navigator) {
         const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
+        navigator.serviceWorker.addEventListener('message', function(event){
+            console.info("messsage event received", event)
+            // event.ports[0].postMessage("Client 1 Says 'Hello back!'");
+        });
         const reg = await navigator.serviceWorker.register(swScriptPath)
         app.ports["showNotification"].subscribe(async (msg) => {
             const permission = await Notification.requestPermission()

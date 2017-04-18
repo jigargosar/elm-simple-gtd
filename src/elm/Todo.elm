@@ -151,13 +151,17 @@ update actions now =
                     innerUpdate (SetDeleted (not model.deleted)) model
 
                 SetTime maybeTime ->
-                    { model | dueAt = maybeTime }
+                    { model | dueAt = maybeTime, reminder = maybeTimeToReminder maybeTime }
 
                 TurnReminderOff ->
-                    { model | dueAt = Nothing }
+                    { model | reminder = None }
     in
         (List.foldl innerUpdate # actions)
             >> (\model -> { model | modifiedAt = now })
+
+
+maybeTimeToReminder maybeTime =
+    maybeTime ?|> At ?= None
 
 
 defaultDueAt =

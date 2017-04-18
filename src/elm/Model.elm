@@ -194,10 +194,6 @@ updateTodoFromEditTodoModel { contextName, projectName, todoText, id, date, time
             Date.fromString (dateTimeString)
                 !|> (Date.toTime >> Just)
                 != Nothing
-                |> Debug.log "final value"
-
-        _ =
-            Date.Extra.Create.dateFromFields
     in
         apply3Uncurry ( findContextByName contextName, findProjectByName projectName, identity )
             (\maybeContext maybeProject ->

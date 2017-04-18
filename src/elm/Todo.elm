@@ -81,41 +81,13 @@ getDone =
     (.done)
 
 
-setDone : Bool -> ModelF
-setDone done model =
-    { model | done = done }
-
-
-updateDone : (Model -> Bool) -> ModelF
-updateDone updater model =
-    setDone (updater model) model
-
-
 getDeleted : Model -> Bool
 getDeleted =
     (.deleted)
 
 
-setDeleted : Bool -> ModelF
-setDeleted deleted model =
-    { model | deleted = deleted }
-
-
-updateDeleted : (Model -> Bool) -> ModelF
-updateDeleted updater model =
-    setDeleted (updater model) model
-
-
 getProjectId =
     (.projectId)
-
-
-setProjectId projectId model =
-    { model | projectId = projectId }
-
-
-updateProjectId updater model =
-    setProjectId (updater model) model
 
 
 getCreatedAt : Model -> Time
@@ -123,29 +95,9 @@ getCreatedAt =
     (.createdAt)
 
 
-setCreatedAt : Time -> ModelF
-setCreatedAt createdAt model =
-    { model | createdAt = createdAt }
-
-
-updateCreatedAt : (Model -> Time) -> ModelF
-updateCreatedAt updater model =
-    setCreatedAt (updater model) model
-
-
 getModifiedAt : Model -> Time
 getModifiedAt =
     (.modifiedAt)
-
-
-setModifiedAt : Time -> ModelF
-setModifiedAt modifiedAt model =
-    { model | modifiedAt = modifiedAt }
-
-
-updateModifiedAt : (Model -> Time) -> ModelF
-updateModifiedAt updater model =
-    setModifiedAt (updater model) model
 
 
 getTime model =
@@ -170,19 +122,19 @@ update actions now =
                     { model | contextId = contextId }
 
                 SetProjectId projectId ->
-                    setProjectId projectId model
+                    { model | projectId = projectId }
 
                 SetContext context ->
-                    innerUpdate (SetContextId (context |> Document.getId)) model
+                    innerUpdate (SetContextId (Document.getId context)) model
 
                 SetProject project ->
-                    setProjectId (Document.getId project) model
+                    innerUpdate (SetProjectId (Document.getId project)) model
 
                 ToggleDone ->
-                    updateDone (getDone >> not) model
+                    innerUpdate (SetDone (not model.done)) model
 
                 ToggleDeleted ->
-                    updateDeleted (getDeleted >> not) model
+                    innerUpdate (SetDeleted (not model.deleted)) model
 
                 SetTime maybeTime ->
                     { model | dueAt = maybeTime }
@@ -191,7 +143,7 @@ update actions now =
                     { model | dueAt = Nothing }
     in
         (List.foldl innerUpdate # actions)
-            >> setModifiedAt now
+            >> (\model -> { model | modifiedAt = now })
 
 
 isDeleted =

@@ -137,6 +137,12 @@ update msg =
                     Return.map (Model.setEditModelToEditTodo todo)
                         >> autoFocusPaperInputCmd
 
+                UpdateTodoForm etm field value ->
+                    Return.map
+                        (Todo.Edit.set field value etm
+                            |> Model.setEditTodoModel
+                        )
+
                 EditTodoTextChanged editTodoModel text ->
                     Return.map
                         (Todo.Edit.setText text editTodoModel

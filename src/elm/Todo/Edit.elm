@@ -14,7 +14,7 @@ import Maybe.Extra as Maybe
 import Todo
 
 
-type alias Model =
+type alias Form =
     { id : Document.Id
     , todoText : Todo.Text
     , projectName : Project.Name
@@ -33,7 +33,7 @@ type Field
     | Time
 
 
-create : Todo.Model -> Project.Name -> Context.Name -> Model
+create : Todo.Model -> Project.Name -> Context.Name -> Form
 create todo projectName contextName =
     let
         dueAt =
@@ -49,7 +49,7 @@ create todo projectName contextName =
         }
 
 
-set : Field -> String -> Model -> Model
+set : Field -> String -> Form -> Form
 set field value model =
     case field of
         ProjectName ->

@@ -12,6 +12,7 @@ import RunningTodo exposing (RunningTodo)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
 import Todo
+import Todo.Edit
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -58,6 +59,7 @@ type Msg
     | StartEditingTodo Todo.Model
     | SaveEditingEntity
     | FocusPaperInput String
+    | UpdateTodoForm Todo.Edit.Form Todo.Edit.Field String
     | EditTodoTextChanged EditTodoModel String
     | EditTodoProjectNameChanged EditTodoModel Project.Name
     | EditTodoContextNameChanged EditTodoModel Context.Name

@@ -41,6 +41,6 @@ function postMessage(client, event) {
     client.postMessage({
         type: "notification-clicked",
         action: event.action,
-        notification: event.notification
+        data: event.notification.data
     })
 }

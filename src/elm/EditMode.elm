@@ -11,6 +11,7 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Time exposing (Time)
+import Time.Format
 
 
 type alias EditTodoModel =
@@ -19,6 +20,8 @@ type alias EditTodoModel =
     , projectName : Project.Name
     , contextName : Context.Name
     , dueAt : Maybe Time
+    , dateInputValue : String
+    , timeInputValue : String
     }
 
 
@@ -58,13 +61,19 @@ createNewTodoModel =
 
 createEditTodoMode : Todo.Model -> Project.Name -> Context.Name -> EditMode
 createEditTodoMode todo projectName contextName =
-    { id = Document.getId todo
-    , todoText = Todo.getText todo
-    , dueAt = Todo.getDueAt todo
-    , projectName = projectName
-    , contextName = contextName
-    }
-        |> EditTodo
+    let
+        dueAt =
+            Todo.getDueAt todo
+    in
+        { id = Document.getId todo
+        , todoText = Todo.getText todo
+        , dueAt = Todo.getDueAt todo
+        , projectName = projectName
+        , contextName = contextName
+        , dateInputValue = dueAt ?|> (Time.Format.format "%Y-%m-%d") ?= ""
+        , timeInputValue = dueAt ?|> (Time.Format.format "%H:%M") ?= ""
+        }
+            |> EditTodo
 
 
 editContextMode model =

@@ -79,7 +79,7 @@ async function setupNotifications(app) {
     if ('serviceWorker' in navigator) {
         const swScriptPath = WEB_PACK_DEV_SERVER? "/notification-sw.js" : '/service-worker.js'
         const reg = await navigator.serviceWorker.register(swScriptPath)
-        app.ports["showTestNotification"].subscribe(async (msg) => {
+        app.ports["showNotification"].subscribe(async (msg) => {
             const permission = await Notification.requestPermission()
             if (permission === "granted") {
                 reg.showNotification("hi there",

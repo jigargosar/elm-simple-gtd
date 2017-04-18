@@ -41,7 +41,7 @@ import Model.Types exposing (..)
 import Types
 
 
-port showTestNotification : String -> Cmd msg
+port showNotification : String -> Cmd msg
 
 
 port startAlarm : () -> Cmd msg
@@ -83,7 +83,7 @@ update msg =
                     identity
 
                 ShowTestNotification ->
-                    Return.command (showTestNotification "Test Notification")
+                    Return.command (showNotification "Test Notification")
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))
@@ -352,7 +352,7 @@ sendAlerts =
                                     ?+> (\time ->
                                             if time < m.now then
                                                 todo
-                                                    |> apply2 ( Todo.getText >> showTestNotification, identity )
+                                                    |> apply2 ( Todo.getText >> showNotification, identity )
                                                     >> Just
                                             else
                                                 Nothing

@@ -31,6 +31,7 @@ import Polymer.Paper exposing (..)
 import View.Shared exposing (..)
 
 
+createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
 createKeyedItem vc todo =
     let
         notEditingView _ =
@@ -40,7 +41,7 @@ createKeyedItem vc todo =
             case vc.maybeEditTodoModel of
                 Just etm ->
                     if Document.hasId etm.id todo then
-                        edit (createEditTodoViewModel vc todo etm)
+                        edit vc (createEditTodoViewModel vc todo etm)
                     else
                         notEditingView ()
 
@@ -107,8 +108,8 @@ createEditTodoViewModel vc todo etm =
         }
 
 
-edit : EditTodoViewModel -> Html Msg
-edit vm =
+edit : SharedViewModel -> EditTodoViewModel -> Html Msg
+edit vc vm =
     item [ class "todo-item editing" ]
         [ Html.node "paper-input"
             --        Html.node "paper-textarea" -- todo: add after trimming newline on enter.
@@ -124,6 +125,13 @@ edit vm =
         , input
             [ stringProperty "label" "Date"
             , type_ "date"
+            , value (toString vc.now)
+            ]
+            []
+        , input
+            [ stringProperty "label" "Time"
+            , type_ "time"
+            , value (toString vc.now)
             ]
             []
         , input

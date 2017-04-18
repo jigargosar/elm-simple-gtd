@@ -17,6 +17,7 @@ import Msg exposing (..)
 import Model.Types exposing (..)
 import Project
 import Store
+import Todo.Edit
 
 
 activateNewTodoMode : String -> ModelF
@@ -125,12 +126,7 @@ createEditTodoMode todo model =
         contextName =
             Model.getContextNameOfTodo todo model ?= ""
     in
-        EditMode.createEditTodoMode todo projectName contextName
-
-
-updateEditTodoText : String -> EditTodoModel -> ModelF
-updateEditTodoText text editTodoModel =
-    setEditMode (EditMode.updateEditTodoText text editTodoModel)
+        Todo.Edit.create todo projectName contextName |> EditMode.EditTodo
 
 
 getMaybeEditTodoModel =
@@ -141,14 +137,18 @@ getEditNewTodoModel =
     getEditMode >> EditMode.getNewTodoModel
 
 
-updateEditTodoProjectName : Project.Name -> EditTodoModel -> ModelF
-updateEditTodoProjectName projectName editTodoModel =
-    setEditMode (EditMode.updateEditTodoProjectName projectName editTodoModel)
-
-
 updateEditTodoContextName : Context.Name -> EditTodoModel -> ModelF
 updateEditTodoContextName contextName editTodoModel =
-    setEditMode (EditMode.updateEditTodoContextName contextName editTodoModel)
+    setEditTodoModel (Todo.Edit.setContextName contextName editTodoModel)
+
+
+updateEditTodoText : String -> EditTodoModel -> ModelF
+updateEditTodoText text editTodoModel =
+    setEditMode (EditMode.updateEditTodoText text editTodoModel)
+
+
+setEditTodoModel =
+    EditMode.EditTodo >> setEditMode
 
 
 deactivateEditingMode =

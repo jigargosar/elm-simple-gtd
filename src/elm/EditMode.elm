@@ -12,17 +12,11 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Time exposing (Time)
 import Time.Format
+import Todo.Edit
 
 
 type alias EditTodoModel =
-    { id : Document.Id
-    , todoText : Todo.Text
-    , projectName : Project.Name
-    , contextName : Context.Name
-    , dueAt : Maybe Time
-    , dateInputValue : String
-    , timeInputValue : String
-    }
+    Todo.Edit.Model
 
 
 type alias EditContextModel =
@@ -57,23 +51,6 @@ none =
 
 createNewTodoModel =
     NewTodo
-
-
-createEditTodoMode : Todo.Model -> Project.Name -> Context.Name -> EditMode
-createEditTodoMode todo projectName contextName =
-    let
-        dueAt =
-            Todo.getDueAt todo
-    in
-        { id = Document.getId todo
-        , todoText = Todo.getText todo
-        , dueAt = Todo.getDueAt todo
-        , projectName = projectName
-        , contextName = contextName
-        , dateInputValue = dueAt ?|> (Time.Format.format "%Y-%m-%d") ?= ""
-        , timeInputValue = dueAt ?|> (Time.Format.format "%H:%M") ?= ""
-        }
-            |> EditTodo
 
 
 editContextMode model =
@@ -112,11 +89,3 @@ getNewTodoModel model =
 
         _ ->
             Nothing
-
-
-updateEditTodoProjectName projectName editTodoModel =
-    (EditTodo ({ editTodoModel | projectName = projectName }))
-
-
-updateEditTodoContextName contextName editTodoModel =
-    (EditTodo ({ editTodoModel | contextName = contextName }))

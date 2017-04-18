@@ -23,6 +23,7 @@ import Set
 import Store
 import String.Extra
 import Todo
+import Todo.Edit
 import View exposing (appView)
 import Navigation exposing (Location)
 import Return
@@ -140,10 +141,16 @@ update msg =
                     Return.map (Model.updateEditTodoText text editTodoModel)
 
                 EditTodoProjectNameChanged editModel projectName ->
-                    Return.map (Model.updateEditTodoProjectName projectName editModel)
+                    Return.map
+                        (Todo.Edit.setProjectName projectName editModel
+                            |> Model.setEditTodoModel
+                        )
 
                 EditTodoContextNameChanged editModel contextName ->
-                    Return.map (Model.updateEditTodoContextName contextName editModel)
+                    Return.map
+                        (Todo.Edit.setContextName contextName editModel
+                            |> Model.setEditTodoModel
+                        )
 
                 CopyAndEditTodoById todoId ->
                     Return.withMaybe (Model.findTodoById todoId)

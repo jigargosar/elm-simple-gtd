@@ -183,16 +183,13 @@ getActiveTodoListGroupedBy fn =
 updateTodoFromEditTodoModel : TodoForm -> ModelF
 updateTodoFromEditTodoModel { contextName, projectName, todoText, id, date, time } =
     let
-        maybeTime =
-            Nothing
-
         dateTimeString =
             date ++ " " ++ time
 
-        _ =
+        maybeTime =
             Date.fromString (dateTimeString)
-                |> Result.map Just
-                |> Result.withDefault Nothing
+                !|> (Date.toTime >> Just)
+                != Nothing
                 |> Debug.log "final value"
 
         _ =

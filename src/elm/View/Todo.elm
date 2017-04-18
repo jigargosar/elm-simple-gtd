@@ -110,7 +110,8 @@ createEditTodoViewModel vc todo etm =
 edit : EditTodoViewModel -> Html Msg
 edit vm =
     item [ class "todo-item editing" ]
-        [ Html.node "paper-textarea"
+        [ Html.node "paper-input"
+            --        Html.node "paper-textarea" -- todo: add after trimming newline on enter.
             [ id vm.todo.inputId
             , class "edit-todo-input auto-focus"
             , stringProperty "label" "Todo"

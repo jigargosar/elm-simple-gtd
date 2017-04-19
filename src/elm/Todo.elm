@@ -151,7 +151,14 @@ update actions now =
                     innerUpdate (SetDeleted (not model.deleted)) model
 
                 SetTime maybeTime ->
-                    { model | dueAt = maybeTime, reminder = maybeTimeToReminder maybeTime }
+                    let
+                        reminder =
+                            if model.dueAt == maybeTime then
+                                model.reminder
+                            else
+                                maybeTimeToReminder maybeTime
+                    in
+                        { model | dueAt = maybeTime, reminder = reminder }
 
                 TurnReminderOff ->
                     { model | reminder = None }

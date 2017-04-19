@@ -119,8 +119,8 @@ getModifiedAt =
     (.modifiedAt)
 
 
-getTime model =
-    model.dueAt ?= model.createdAt
+getMaybeTime model =
+    getMaybeReminderTime model |> Maybe.orElse (getDueAt model)
 
 
 update : List UpdateAction -> Time -> ModelF

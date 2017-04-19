@@ -220,7 +220,7 @@ default vc todo =
             in
                 { isDone = Todo.getDone todo
                 , isDeleted = Todo.getDeleted todo
-                , time = Todo.getDueAt todo ?|> Ext.Time.formatTime ?= "Someday"
+                , time = Todo.getMaybeTime todo ?|> Ext.Time.formatTime ?= "Someday"
                 , text = Todo.getText todo
                 , isSelected = Set.member todoId vc.selection
                 , projectName =

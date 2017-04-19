@@ -234,21 +234,23 @@ default vc todo =
     in
         item
             [ class "todo-item"
+            , attribute "three-line" "true"
             , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ checkBoxView vm
             , itemBody []
-                [ span
+                [ div
                     [ classList
                         [ "ellipsis" => True
                         , "done" => Todo.isDone todo
                         ]
                     ]
                     [ Todo.getText todo |> text ]
-                , span [ class "small dim" ]
+                , div [ attribute "secondary" "true" ]
                     [ text vm.projectName
-                    , text " : "
-                    , text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
+                    ]
+                , div [ attribute "secondary" "true" ]
+                    [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
                     , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
                     ]
                 ]

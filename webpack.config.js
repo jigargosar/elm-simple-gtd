@@ -89,8 +89,7 @@ module.exports = {
         // open:true,
         // inline: false,
         contentBase: ["src/web/", "static/",],
-        host:"0.0.0.0"
-
+        host:"0.0.0.0",
     },
 
 };

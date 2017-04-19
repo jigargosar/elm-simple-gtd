@@ -191,6 +191,14 @@ snoozeTodo todo m =
             todo
 
 
+findAndSnoozeOverDueTodo model =
+    findTodoWithOverDueReminder model
+        ?|> apply2
+                ( snoozeTodo # model
+                , identity
+                )
+
+
 getActiveTodoListGroupedBy fn =
     getActiveTodoList >> Dict.Extra.groupBy (fn)
 

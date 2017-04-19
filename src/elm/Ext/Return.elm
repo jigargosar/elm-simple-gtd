@@ -64,3 +64,10 @@ maybeEffect f =
 
 apply =
     flip Return.andThen
+
+
+andThenMaybe f =
+    Return.andThen
+        (\m ->
+            f m ?= Return.singleton m
+        )

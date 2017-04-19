@@ -343,15 +343,8 @@ onUpdateNow now =
 
 
 sendAlerts =
-    Return.andThen
-        (\m ->
-            Model.findTodoWithOverDueReminder m
-                ?|> apply2
-                        ( Model.snoozeTodo # m
-                        , showTodoNotificationCmd
-                        )
-                ?= Return.singleton m
-        )
+    Return.andThenMaybe
+        (Model.findAndSnoozeOverDueTodo >>? Tuple.mapSecond showTodoNotificationCmd)
 
 
 showTodoNotificationCmd =

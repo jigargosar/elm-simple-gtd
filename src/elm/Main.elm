@@ -1,5 +1,6 @@
 port module Main exposing (..)
 
+import Document
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import EditMode
@@ -41,7 +42,22 @@ import Model.Types exposing (..)
 import Types
 
 
-port showNotification : String -> Cmd msg
+port showNotification : TodoNotification -> Cmd msg
+
+
+type alias TodoNotification =
+    { title : String
+    , tag : String
+    , data : TodoNotificationData
+    }
+
+
+createTodoNotification todo =
+    let
+        id =
+            Document.getId todo
+    in
+        { title = Todo.getText todo, tag = id, data = { id = id } }
 
 
 type alias TodoNotificationData =
@@ -94,9 +110,6 @@ update msg =
         >> (case msg of
                 NoOp ->
                     identity
-
-                ShowTestNotification ->
-                    Return.command (showNotification "Test Notification")
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))
@@ -361,7 +374,7 @@ sendAlerts =
 
 
 showTodoNotificationCmd =
-    Todo.getText >> showNotification
+    createTodoNotification >> showNotification
 
 
 activateEditNewTodoMode text =

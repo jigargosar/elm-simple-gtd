@@ -91,18 +91,17 @@ async function setupNotifications(app) {
 
 }
 
-const showNotification = reg => async (msg) => {
+const showNotification = reg => async ({tag, title, data}) => {
     //console.info(msg)
     const permission = await Notification.requestPermission()
     if (permission !== "granted") return
-    reg.showNotification(msg, {
+    reg.showNotification(title, {
+        tag,
         actions: [
             {title: "Mark Done", action: "mark-done"},
             {title: "Snooze", action: "snooze"},
         ],
-        data:{
-            id:"asdfasdf"
-        }
+        data
     })
 }
 /*

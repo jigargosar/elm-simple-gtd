@@ -110,20 +110,9 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         ]
 
 
-testNotification m =
-    material []
-        [ item []
-            [ itemBody []
-                [ row [ button [ onClick Msg.ShowTestNotification ] [ text "show notification" ] ]
-                ]
-            ]
-        ]
-
-
 appMainView contextVMs projectVMs m =
     div [ id "main-view" ]
-        [ --        testNotification m
-          case Model.getMainViewType m of
+        [ case Model.getMainViewType m of
             GroupByContextView ->
                 View.EntityList.groupByEntity contextVMs m
 

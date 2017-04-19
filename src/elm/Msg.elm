@@ -42,6 +42,7 @@ stopAndMarkDone =
 
 type Msg
     = NoOp
+    | OnNotificationClicked TodoNotificationEvent
     | ToggleShowDeletedEntity
     | Start Todo.Model
     | Stop

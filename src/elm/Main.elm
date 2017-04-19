@@ -45,29 +45,12 @@ import Types
 port showNotification : TodoNotification -> Cmd msg
 
 
-type alias TodoNotification =
-    { title : String
-    , tag : String
-    , data : TodoNotificationData
-    }
-
-
 createTodoNotification todo =
     let
         id =
             Document.getId todo
     in
         { title = Todo.getText todo, tag = id, data = { id = id } }
-
-
-type alias TodoNotificationData =
-    { id : String }
-
-
-type alias TodoNotificationEvent =
-    { action : String
-    , data : TodoNotificationData
-    }
 
 
 port notificationClicked : (TodoNotificationEvent -> msg) -> Sub msg
@@ -101,6 +84,7 @@ subscriptions m =
         [ Time.every Time.second (OnNowChanged)
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.keyUps OnKeyUp
+        , notificationClicked OnNotificationClicked
         ]
 
 
@@ -110,6 +94,13 @@ update msg =
         >> (case msg of
                 NoOp ->
                     identity
+
+                OnNotificationClicked { action, data } ->
+                    let
+                        _ =
+                            Debug.log "action, data" ( action, data )
+                    in
+                        identity
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))

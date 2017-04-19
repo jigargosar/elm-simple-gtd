@@ -82,3 +82,20 @@ type alias Flags =
     , encodedProjectList : List Project.Encoded
     , encodedContextList : List Context.Encoded
     }
+
+
+type alias TodoNotification =
+    { title : String
+    , tag : String
+    , data : TodoNotificationData
+    }
+
+
+type alias TodoNotificationData =
+    { id : String }
+
+
+type alias TodoNotificationEvent =
+    { action : String
+    , data : TodoNotificationData
+    }

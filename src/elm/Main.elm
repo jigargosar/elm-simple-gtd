@@ -351,15 +351,15 @@ sendAlerts =
                         |> List.map (apply2 ( Todo.getText >> showNotification, identity ))
                         |> List.unzip
 
-                --                updateTodoReducer =
-                --                    Model.updateTodo [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
                 updateTodoReducer =
-                    Model.updateTodo [ Todo.TurnReminderOff ]
+                    Model.updateTodo [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
 
+                --                updateTodoReducer =
+                --                    Model.updateTodo [ Todo.TurnReminderOff ]
                 newModel =
                     List.foldl updateTodoReducer m todoList
             in
-                newModel ! []
+                newModel ! commands
         )
 
 

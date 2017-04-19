@@ -252,7 +252,7 @@ default vc todo =
                 , div [ attribute "secondary" "true" ]
                     [ text vm.projectName
                     ]
-                , div [ attribute "secondary" "true" ]
+                , div [ attribute "secondary" "true", hidden vm.showDetails ]
                     [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
                     , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
                     ]

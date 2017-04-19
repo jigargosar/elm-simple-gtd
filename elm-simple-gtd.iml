@@ -10,7 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/web" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lib/elm-keyboard-extra" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/elm-stuff/packages" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/docs" isTestSource="false" generated="true" />
+      <excludeFolder url="file://$MODULE_DIR$/docs" />
       <excludeFolder url="file://$MODULE_DIR$/elm-stuff/build-artifacts" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />

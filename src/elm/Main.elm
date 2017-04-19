@@ -156,23 +156,19 @@ update msg =
                         )
 
                 EditTodoFormKeyUp { id } ke ->
-                    let
-                        _ =
-                            Debug.log "ke" (ke)
-                    in
-                        case ke.key of
-                            Key.Enter ->
-                                andThenUpdateAll
-                                    (if ke.isShiftDown then
-                                        [ SaveEditingEntity, CopyAndEditTodoById id ]
-                                     else if ke.isMetaDown || ke.isControlDown then
-                                        [ SaveEditingEntity ]
-                                     else
-                                        []
-                                    )
+                    case ke.key of
+                        Key.Enter ->
+                            andThenUpdateAll
+                                (if ke.isShiftDown then
+                                    [ SaveEditingEntity, CopyAndEditTodoById id ]
+                                 else if ke.isMetaDown || ke.isControlDown then
+                                    [ SaveEditingEntity ]
+                                 else
+                                    []
+                                )
 
-                            _ ->
-                                identity
+                        _ ->
+                            identity
 
                 TodoCheckBoxClicked todo ->
                     Return.map (Model.toggleSelection todo)

@@ -123,7 +123,7 @@ createEditTodoViewModel vc todo etm =
 
 edit : EditTodoViewModel -> Html Msg
 edit vm =
-    item [ class "todo-item editing" ]
+    item [ class "todo-item editing", onKeyUp vm.onKeyUp ]
         [ Html.node "paper-input"
             --        Html.node "paper-textarea" -- todo: add after trimming newline on enter.
             [ id vm.todo.inputId
@@ -132,7 +132,6 @@ edit vm =
             , value (vm.todo.text)
             , onInput vm.onTodoTextChanged
             , autofocus True
-            , onKeyUp vm.onKeyUp
             ]
             []
         , rowItemStretched

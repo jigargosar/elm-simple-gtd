@@ -254,7 +254,7 @@ default vc todo =
                 , div [ class "todo-details", attribute "secondary" "true" ]
                     [ span [] [ vm.projectName |> text ]
                     , span [] [ "::" |> text ]
-                    , span [] [ vm.time |> text ]
+                    , span [ classList [ "red" => True ] ] [ vm.time |> text ]
                     ]
                 , div [ attribute "secondary" "true", hidden vm.showDetails ]
                     [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")

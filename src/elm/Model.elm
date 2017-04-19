@@ -187,7 +187,7 @@ findTodoWithOverDueReminder model =
 snoozeTodo todo m =
     m
         |> Model.TodoStore.updateTodo
-            [ Todo.SnoozeTill (m.now + (Time.minute * 1)) ]
+            [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
             todo
 
 

@@ -46,7 +46,7 @@ toHHMMSS =
 
 
 formatTime =
-    Time.Format.format "%a %b %e '%y %l:%M%P"
+    Time.Format.format "%b %e at %l:%M%P"
 
 
 toHMSList : Time -> List Int

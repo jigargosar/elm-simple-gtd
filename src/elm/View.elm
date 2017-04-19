@@ -41,6 +41,11 @@ appView m =
     div []
         [ appDrawerLayoutView m
         , addTodoFabView m
+        , material [ style [ "background-color" => "white" ], class "fixed-bottom", attribute "elevation" "5" ]
+            [ item [] [ text "bottom" ]
+            , item [] [ text "bottom" ]
+            , item [] [ text "bottom" ]
+            ]
         ]
 
 
@@ -111,7 +116,7 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
 
 
 appMainView contextVMs projectVMs m =
-    div [ id "main-view" ]
+    div [ id "main-view", class "" ]
         [ case Model.getMainViewType m of
             GroupByContextView ->
                 View.EntityList.groupByEntity contextVMs m

@@ -1,9 +1,11 @@
 module Ext.Time exposing (..)
 
+import Date.Format
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
+import Time.Format
 
 
 --toHHMMSS : Time -> String
@@ -40,14 +42,11 @@ import Ext.Function exposing (..)
 
 toHHMMSS : Time -> String
 toHHMMSS =
-    toHMSList >> List.map (toString >> pad 2 '0') >> String.join ":"
+    toHMSList >> List.map (toString >> String.padLeft 2 '0') >> String.join ":"
 
 
-pad max char string =
-    if max <= String.length string then
-        string
-    else
-        pad max char ((String.fromChar char) ++ string)
+formatTime =
+    Time.Format.format "%a %b %e '%y %l:%M%P"
 
 
 toHMSList : Time -> List Int

@@ -8,6 +8,7 @@ import Document
 import Dom
 import EditMode exposing (TodoForm)
 import Ext.Decode exposing (traceDecoder)
+import Ext.Time
 import Html.Attributes.Extra exposing (intProperty)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
@@ -219,7 +220,7 @@ default vc todo =
             in
                 { isDone = Todo.getDone todo
                 , isDeleted = Todo.getDeleted todo
-                , time = Todo.getDueAt todo ?|> (Date.fromTime >> toString) ?= "Someday"
+                , time = Todo.getDueAt todo ?|> Ext.Time.formatTime ?= "Someday"
                 , text = Todo.getText todo
                 , isSelected = Set.member todoId vc.selection
                 , projectName =

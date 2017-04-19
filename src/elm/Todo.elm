@@ -176,6 +176,10 @@ getMaybeReminderTime model =
             Just time
 
 
+isReminderActive =
+    .reminder >> equals None >> not
+
+
 maybeTimeToReminder maybeTime =
     maybeTime ?|> At ?= None
 

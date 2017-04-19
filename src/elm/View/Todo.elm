@@ -204,6 +204,7 @@ type alias DefaultTodoViewModel =
     , onDoneClicked : Msg
     , onDeleteClicked : Msg
     , showDetails : Bool
+    , isReminderActive : Bool
     }
 
 
@@ -235,6 +236,7 @@ default vc todo =
                 , onDoneClicked = Msg.ToggleTodoDone todo
                 , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
                 , showDetails = vc.showDetails
+                , isReminderActive = Todo.isReminderActive todo
                 }
     in
         item
@@ -254,7 +256,7 @@ default vc todo =
                 , div [ class "todo-details", attribute "secondary" "true" ]
                     [ span [] [ vm.projectName |> text ]
                     , span [] [ "::" |> text ]
-                    , span [ classList [ "red" => True ] ] [ vm.time |> text ]
+                    , span [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
                     ]
                 , div [ attribute "secondary" "true", hidden vm.showDetails ]
                     [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")

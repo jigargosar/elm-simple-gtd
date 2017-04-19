@@ -180,6 +180,10 @@ getActiveTodoListWithReminderTime model =
     model.todoStore |> Store.filter (Todo.isReminderOverdue model.now)
 
 
+findTodoWithOverDueReminder model =
+    model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
+
+
 getActiveTodoListGroupedBy fn =
     getActiveTodoList >> Dict.Extra.groupBy (fn)
 

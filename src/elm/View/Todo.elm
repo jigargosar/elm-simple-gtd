@@ -28,7 +28,7 @@ import Ext.Function.Infix exposing (..)
 import Html exposing (Html, col, div, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
+import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper exposing (..)
 import View.Shared exposing (..)
 
@@ -123,7 +123,7 @@ createEditTodoViewModel vc todo etm =
 
 edit : EditTodoViewModel -> Html Msg
 edit vm =
-    item [ class "todo-item editing", onKeyUp vm.onKeyUp ]
+    item [ class "todo-item editing", onKeyDown vm.onKeyUp ]
         [ Html.node "paper-input"
             --        Html.node "paper-textarea" -- todo: add after trimming newline on enter.
             [ id vm.todo.inputId

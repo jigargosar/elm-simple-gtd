@@ -14,6 +14,11 @@ onKeyUp onKeyMsg =
     Events.on "keyup" (D.map onKeyMsg (traceDecoder "kd" keyboardEventDecoder))
 
 
+onKeyDown : (KeyboardEvent -> msg) -> Attribute msg
+onKeyDown onKeyMsg =
+    Events.on "keydown" (D.map onKeyMsg (traceDecoder "kd" keyboardEventDecoder))
+
+
 targetKeyDecoder : Decoder Key
 targetKeyDecoder =
     D.map KX.fromCode (D.field "keyCode" D.int)
@@ -24,11 +29,12 @@ keyboardEventDecoder =
     D.succeed KeyboardEvent
         |> D.custom targetKeyDecoder
         |> D.required "shiftKey" D.bool
+        |> D.required "metaKey" D.bool
         |> D.required "ctrlKey" D.bool
 
 
 type alias KeyboardEvent =
-    { key : Key, isShiftDown : Bool, isControlDown : Bool }
+    { key : Key, isShiftDown : Bool, isMetaDown : Bool, isControlDown : Bool }
 
 
 succeedIfDecodedKeyEquals key msg =

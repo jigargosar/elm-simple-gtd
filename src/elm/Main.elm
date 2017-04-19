@@ -155,32 +155,20 @@ update msg =
                                 >> uncurry update
                         )
 
-                EditTodoFormKeyUp { id } ({ key } as ke) ->
+                EditTodoFormKeyUp { id } ke ->
                     let
                         _ =
                             Debug.log "ke" (ke)
                     in
-                        case key of
+                        case ke.key of
                             Key.Enter ->
-                                Return.andThen
-                                    (\m ->
-                                        let
-                                            ks =
-                                                m.keyboardState
-
-                                            isMetaDown =
-                                                Keyboard.isMetaDown ks
-                                        in
-                                            m
-                                                |> Return.singleton
-                                                >> andThenUpdateAll
-                                                    (if Keyboard.isShiftDown ks then
-                                                        [ SaveEditingEntity, CopyAndEditTodoById id ]
-                                                     else if Keyboard.isMetaDown ks || Keyboard.isControlDown ks then
-                                                        [ SaveEditingEntity ]
-                                                     else
-                                                        []
-                                                    )
+                                andThenUpdateAll
+                                    (if ke.isShiftDown then
+                                        [ SaveEditingEntity, CopyAndEditTodoById id ]
+                                     else if ke.isMetaDown || ke.isControlDown then
+                                        [ SaveEditingEntity ]
+                                     else
+                                        []
                                     )
 
                             _ ->

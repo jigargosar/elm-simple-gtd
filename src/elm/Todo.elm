@@ -176,12 +176,15 @@ update actions now =
 
 
 getMaybeReminderTime model =
-    case model.reminder of
-        None ->
-            Nothing
+    if Maybe.isNothing model.dueAt then
+        Nothing
+    else
+        case model.reminder of
+            None ->
+                Nothing
 
-        At time ->
-            Just time
+            At time ->
+                Just time
 
 
 isReminderOverdue now =

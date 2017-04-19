@@ -37,6 +37,10 @@ type Reminder
     | At Time
 
 
+
+--    | WaitingForResponseTill Time
+
+
 defaultReminder =
     None
 
@@ -75,6 +79,7 @@ type UpdateAction
     | ToggleDone
     | ToggleDeleted
     | TurnReminderOff
+    | SnoozeTill Time
 
 
 type alias ModelF =
@@ -162,6 +167,9 @@ update actions now =
 
                 TurnReminderOff ->
                     { model | reminder = None }
+
+                SnoozeTill time ->
+                    { model | reminder = At time }
     in
         (List.foldl innerUpdate # actions)
             >> (\model -> { model | modifiedAt = now })

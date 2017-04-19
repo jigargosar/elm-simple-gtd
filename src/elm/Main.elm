@@ -362,10 +362,10 @@ sendAlerts =
                             )
                         |> List.unzip
 
-                newModel =
-                    todoList |> List.foldl (Model.updateTodo [ Todo.TurnReminderOff ]) m
+                updateTodo =
+                    Model.updateTodo [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
             in
-                newModel ! commands
+                List.foldl updateTodo m todoList ! commands
         )
 
 

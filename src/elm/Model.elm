@@ -184,6 +184,13 @@ findTodoWithOverDueReminder model =
     model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
 
 
+snoozeTodo todo m =
+    m
+        |> Model.TodoStore.updateTodo
+            [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
+            todo
+
+
 getActiveTodoListGroupedBy fn =
     getActiveTodoList >> Dict.Extra.groupBy (fn)
 

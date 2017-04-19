@@ -345,22 +345,17 @@ onUpdateNow now =
 sendAlerts =
     Return.andThen
         (\m ->
-            let
-                ( commands, todoList ) =
-                    Model.getActiveTodoListWithReminderTime m
-                        |> List.map (apply2 ( Todo.getText >> showNotification, identity ))
-                        |> List.unzip
-
-                updateTodoReducer =
-                    Model.updateTodo [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
-
-                --                updateTodoReducer =
-                --                    Model.updateTodo [ Todo.TurnReminderOff ]
-                newModel =
-                    List.foldl updateTodoReducer m todoList
-            in
-                newModel ! commands
+            Model.findTodoWithOverDueReminder m
+                ?|> apply2
+                        ( Model.snoozeTodo # m
+                        , showTodoNotificationCmd
+                        )
+                ?= Return.singleton m
         )
+
+
+showTodoNotificationCmd =
+    Todo.getText >> showNotification
 
 
 activateEditNewTodoMode text =

@@ -176,8 +176,10 @@ getActiveTodoList =
     .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 
 
-getActiveTodoListWithReminderTime =
-    .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone, Todo.getMaybeReminderTime >> Maybe.isNothing ])
+getActiveTodoListWithReminderTime model =
+    model
+        |> .todoStore
+        >> Store.filter (Todo.isReminderOverdue model.now)
 
 
 getActiveTodoListGroupedBy fn =

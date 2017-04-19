@@ -348,24 +348,18 @@ sendAlerts =
             let
                 ( commands, todoList ) =
                     Model.getActiveTodoListWithReminderTime m
-                        |> List.filterMap
-                            (\todo ->
-                                Todo.getMaybeReminderTime todo
-                                    ?+> (\time ->
-                                            if time < m.now then
-                                                todo
-                                                    |> apply2 ( Todo.getText >> showNotification, identity )
-                                                    >> Just
-                                            else
-                                                Nothing
-                                        )
-                            )
+                        |> List.map (apply2 ( Todo.getText >> showNotification, identity ))
                         |> List.unzip
 
-                updateTodo =
-                    Model.updateTodo [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
+                --                updateTodoReducer =
+                --                    Model.updateTodo [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
+                updateTodoReducer =
+                    Model.updateTodo [ Todo.TurnReminderOff ]
+
+                newModel =
+                    List.foldl updateTodoReducer m todoList
             in
-                List.foldl updateTodo m todoList ! commands
+                newModel ! []
         )
 
 

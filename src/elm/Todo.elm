@@ -184,6 +184,11 @@ getMaybeReminderTime model =
             Just time
 
 
+isReminderOverdue now =
+    --    getMaybeReminderTime >> Maybe.unwrap False ((<=) now)
+    (\_ -> True)
+
+
 isReminderActive =
     .reminder >> equals None >> not
 

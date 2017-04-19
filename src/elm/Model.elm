@@ -208,7 +208,7 @@ updateTodoFromEditTodoModel { contextName, projectName, todoText, id, date, time
 
 
 isShowDetailsKeyPressed =
-    keyboardState.get >> Keyboard.isAltDown
+    keyboardState.get >> Keyboard.isAltDown >> not
 
 
 type alias Lens small big =

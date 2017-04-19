@@ -129,7 +129,14 @@ update actions now =
         innerUpdate action model =
             case action of
                 SetDone done ->
-                    { model | done = done }
+                    let
+                        reminder =
+                            if done then
+                                None
+                            else
+                                model.reminder
+                    in
+                        { model | done = done, reminder = reminder }
 
                 SetDeleted deleted ->
                     { model | deleted = deleted }

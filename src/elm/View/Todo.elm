@@ -1,6 +1,7 @@
 module View.Todo exposing (..)
 
 import Context
+import Date
 import Date.Distance exposing (inWords)
 import Dict
 import Document
@@ -191,6 +192,7 @@ edit vm =
 
 type alias DefaultTodoViewModel =
     { text : Todo.Text
+    , time : String
     , isDone : Bool
     , isDeleted : Bool
     , isSelected : Bool
@@ -216,6 +218,7 @@ default vc todo =
             in
                 { isDone = Todo.getDone todo
                 , isDeleted = Todo.getDeleted todo
+                , time = Todo.getDueAt todo ?|> (Date.fromTime >> toString) ?= "Someday"
                 , text = Todo.getText todo
                 , isSelected = Set.member todoId vc.selection
                 , projectName =
@@ -248,8 +251,10 @@ default vc todo =
                         ]
                     ]
                     [ Todo.getText todo |> text ]
-                , div [ attribute "secondary" "true" ]
-                    [ text vm.projectName
+                , div [ class "todo-details", attribute "secondary" "true" ]
+                    [ span [] [ vm.projectName |> text ]
+                    , span [] [ "::" |> text ]
+                    , span [] [ vm.time |> text ]
                     ]
                 , div [ attribute "secondary" "true", hidden vm.showDetails ]
                     [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")

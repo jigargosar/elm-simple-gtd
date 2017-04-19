@@ -100,7 +100,12 @@ update msg =
                         _ =
                             Debug.log "action, data" ( action, data )
                     in
-                        identity
+                        case action of
+                            "mark-done" ->
+                                Return.map (Model.updateTodoById [ Todo.SetDone True ] data.id)
+
+                            _ ->
+                                identity
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))

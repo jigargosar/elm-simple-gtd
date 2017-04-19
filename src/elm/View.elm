@@ -41,11 +41,16 @@ appView m =
     div []
         [ appDrawerLayoutView m
         , addTodoFabView m
-        , material [ style [ "background-color" => "white" ], class "fixed-bottom", attribute "elevation" "5" ]
-            [ item [] [ text "bottom" ]
-            , item [] [ text "bottom" ]
-            , item [] [ text "bottom" ]
-            ]
+
+        --        , bottomSheet
+        ]
+
+
+bottomSheet =
+    material [ style [ "background-color" => "white" ], class "fixed-bottom", attribute "elevation" "5" ]
+        [ item [] [ text "bottom" ]
+        , item [] [ text "bottom" ]
+        , item [] [ text "bottom" ]
         ]
 
 

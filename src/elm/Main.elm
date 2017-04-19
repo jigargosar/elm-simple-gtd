@@ -157,15 +157,14 @@ update msg =
 
                 EditTodoFormKeyUp { id } { key, isShiftDown } ->
                     case key of
-                        Key.Enter ->
-                            andThenUpdate SaveEditingEntity
-                                >> andThenUpdate
-                                    (if isShiftDown then
-                                        CopyAndEditTodoById id
-                                     else
-                                        NoOp
-                                    )
-
+                        --                        Key.Enter ->
+                        --                            andThenUpdate SaveEditingEntity
+                        --                                >> andThenUpdate
+                        --                                    (if isShiftDown then
+                        --                                        CopyAndEditTodoById id
+                        --                                     else
+                        --                                        NoOp
+                        --                                    )
                         Key.Escape ->
                             andThenUpdate DeactivateEditingMode
 

@@ -88,7 +88,9 @@ module.exports = {
         port: 8020,
         // open:true,
         // inline: false,
-        contentBase: ["src/web/", "static/",]
+        contentBase: ["src/web/", "static/",],
+        host:"0.0.0.0"
+
     },
 
 };

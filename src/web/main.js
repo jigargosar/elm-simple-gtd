@@ -97,7 +97,7 @@ const showNotification = reg => async (msg) => {
     reg.showNotification(msg, {
         actions: [
             {title: "Mark Done", action: "mark-done"},
-            {title: "Snooze", action: "snooze"}
+            {title: "Snooze", action: "snooze"},
         ],
         data:{
             todoId:"asdfasdf"

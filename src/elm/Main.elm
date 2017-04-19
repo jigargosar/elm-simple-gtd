@@ -155,21 +155,36 @@ update msg =
                                 >> uncurry update
                         )
 
-                EditTodoFormKeyUp { id } { key, isShiftDown } ->
-                    case key of
-                        --                        Key.Enter ->
-                        --                            andThenUpdate SaveEditingEntity
-                        --                                >> andThenUpdate
-                        --                                    (if isShiftDown then
-                        --                                        CopyAndEditTodoById id
-                        --                                     else
-                        --                                        NoOp
-                        --                                    )
-                        Key.Escape ->
-                            andThenUpdate DeactivateEditingMode
+                EditTodoFormKeyUp { id } ({ key } as ke) ->
+                    let
+                        _ =
+                            Debug.log "ke" (ke)
+                    in
+                        case key of
+                            Key.Enter ->
+                                Return.andThen
+                                    (\m ->
+                                        let
+                                            ks =
+                                                m.keyboardState
 
-                        _ ->
-                            identity
+                                            isMetaDown =
+                                                Keyboard.isMetaDown ks
+                                        in
+                                            m
+                                                |> Return.singleton
+                                                >> andThenUpdateAll
+                                                    (if Keyboard.isShiftDown ks then
+                                                        [ SaveEditingEntity, CopyAndEditTodoById id ]
+                                                     else if Keyboard.isMetaDown ks || Keyboard.isControlDown ks then
+                                                        [ SaveEditingEntity ]
+                                                     else
+                                                        []
+                                                    )
+                                    )
+
+                            _ ->
+                                identity
 
                 TodoCheckBoxClicked todo ->
                     Return.map (Model.toggleSelection todo)
@@ -321,6 +336,10 @@ onMsgList =
 
 andThenUpdate =
     update >> Return.andThen
+
+
+andThenUpdateAll =
+    OnMsgList >> andThenUpdate
 
 
 onUpdateNow now =

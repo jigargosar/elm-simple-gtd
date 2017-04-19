@@ -11,7 +11,7 @@ import Ext.Function.Infix exposing (..)
 
 onKeyUp : (KeyboardEvent -> msg) -> Attribute msg
 onKeyUp onKeyMsg =
-    Events.on "keyup" (D.map onKeyMsg keyboardEventDecoder)
+    Events.on "keyup" (D.map onKeyMsg (traceDecoder "kd" keyboardEventDecoder))
 
 
 targetKeyDecoder : Decoder Key
@@ -24,10 +24,11 @@ keyboardEventDecoder =
     D.succeed KeyboardEvent
         |> D.custom targetKeyDecoder
         |> D.required "shiftKey" D.bool
+        |> D.required "ctrlKey" D.bool
 
 
 type alias KeyboardEvent =
-    { key : Key, isShiftDown : Bool }
+    { key : Key, isShiftDown : Bool, isControlDown : Bool }
 
 
 succeedIfDecodedKeyEquals key msg =
@@ -98,3 +99,7 @@ isAltDown =
 
 isMetaDown =
     KX.isPressed KX.Meta
+
+
+isSuperDown =
+    KX.isPressed KX.Super

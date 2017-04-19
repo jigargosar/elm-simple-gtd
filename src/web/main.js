@@ -82,6 +82,7 @@ async function setupNotifications(app) {
 
     navigator.serviceWorker.addEventListener('message', event => {
         console.info("message event received", event.data)
+        app.ports["notificationClicked"].send(event.data)
         // event.ports[0].postMessage("Client 1 Says 'Hello back!'");
     });
     const reg = await navigator.serviceWorker.register(swScriptPath)
@@ -100,7 +101,7 @@ const showNotification = reg => async (msg) => {
             {title: "Snooze", action: "snooze"},
         ],
         data:{
-            todoId:"asdfasdf"
+            id:"asdfasdf"
         }
     })
 }

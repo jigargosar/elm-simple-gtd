@@ -44,6 +44,15 @@ import Types
 port showNotification : String -> Cmd msg
 
 
+type alias TodoNotification =
+    { action : String
+    , data : { id : String }
+    }
+
+
+port notificationClicked : (TodoNotification -> msg) -> Sub msg
+
+
 port startAlarm : () -> Cmd msg
 
 

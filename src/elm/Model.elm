@@ -177,9 +177,7 @@ getActiveTodoList =
 
 
 getActiveTodoListWithReminderTime model =
-    model
-        |> .todoStore
-        >> Store.filter (Todo.isReminderOverdue model.now)
+    model.todoStore |> Store.filter (Todo.isReminderOverdue model.now)
 
 
 getActiveTodoListGroupedBy fn =

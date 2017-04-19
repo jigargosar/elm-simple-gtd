@@ -202,9 +202,11 @@ type alias DefaultTodoViewModel =
     , startEditingMsg : Msg
     , onDoneClicked : Msg
     , onDeleteClicked : Msg
+    , showDetails : Bool
     }
 
 
+default : SharedViewModel -> Todo.Model -> Html Msg
 default vc todo =
     let
         vm : DefaultTodoViewModel
@@ -230,6 +232,7 @@ default vc todo =
                 , startEditingMsg = Msg.StartEditingTodo todo
                 , onDoneClicked = Msg.ToggleTodoDone todo
                 , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
+                , showDetails = vc.showDetails
                 }
     in
         item

@@ -38,6 +38,7 @@ type alias SharedViewModel =
     , projectIdToNameDict : Dict Id Project.Name
     , contextByIdDict : Dict Id Context.Model
     , selection : Set Todo.Id
+    , showDetails : Bool
     }
 
 
@@ -51,6 +52,7 @@ createSharedViewModel model =
     , contextByIdDict = Model.getContextByIdDict model
     , selection = Model.getSelectedTodoIdSet model
     , editMode = Model.getEditMode model
+    , showDetails = Model.isShowDetailsKeyPressed model
     }
 
 

@@ -38,6 +38,7 @@
     "paper-toolbar": "PolymerElements/paper-toolbar#^1.1.7",
     "vaadin-icons": "^2.0.0",
     "paper-autocomplete": "ellipticaljs/paper-autocomplete#^2.5.1",
-    "paper-toggle-button": "PolymerElements/paper-toggle-button#^1.3.0"
+    "paper-toggle-button": "PolymerElements/paper-toggle-button#^1.3.0",
+    "paper-bottom-sheet": "Collaborne/paper-bottom-sheet#^1.1.2"
   }
 }

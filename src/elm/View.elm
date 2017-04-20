@@ -35,6 +35,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.Shared exposing (..)
 import View.Todo
+import WebComponents exposing (ironIcon)
 
 
 appView m =
@@ -152,7 +153,7 @@ appMainView contextVMs projectVMs m =
                                 , snoozeButton Msg.NoOp
                                 , cancelButton Msg.NoOp
                                 , button [ class "icon-text" ]
-                                    [ Html.node "iron-icon" [ class "big", icon "cancel" ] []
+                                    [ ironIcon "cancel" [ class "big" ]
                                     , "dismiss" |> text
                                     ]
                                 ]

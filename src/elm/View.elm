@@ -148,8 +148,8 @@ appMainView contextVMs projectVMs m =
                         , div [ class "card-actions" ]
                             [ div [ class "layout horizontal around-justified" ]
                                 [ iconTextButton "cancel" "dismiss" Msg.NoOp
-                                , snoozeButton Msg.NoOp
-                                , doneButton Msg.NoOp
+                                , iconTextButton "av:snooze" "snooze" Msg.NoOp
+                                , iconTextButton "done" "done!" Msg.NoOp
                                 ]
                             ]
                         ]

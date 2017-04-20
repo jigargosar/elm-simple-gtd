@@ -97,7 +97,7 @@ const showNotification = reg => async ({tag, title, data}) => {
     if (permission !== "granted") return
     reg.showNotification(title, {
         tag,
-        sticky:true,
+        requiresInteraction:true,
         /*actions: [
             {title: "Mark Done", action: "mark-done"},
             {title: "Snooze", action: "snooze"},

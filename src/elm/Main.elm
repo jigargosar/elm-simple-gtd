@@ -108,7 +108,7 @@ update msg =
                                 _ ->
                                     identity
                     in
-                        data.id |> SwitchToNotificationView >> andThenUpdate
+                        data.id |> ShowReminderOverlayForTodoId >> andThenUpdate
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))
@@ -208,9 +208,8 @@ update msg =
                     Return.map (Model.setMainViewType viewType)
                         >> andThenUpdate ClearSelection
 
-                SwitchToNotificationView todoId ->
-                    Return.withMaybe (Model.findTodoById todoId)
-                        (NotificationView >> SetView >> andThenUpdate)
+                ShowReminderOverlayForTodoId todoId ->
+                    Return.map (Model.showReminderOverlayForTodoId todoId)
 
                 ClearSelection ->
                     Return.map (Model.clearSelection)

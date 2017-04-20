@@ -190,6 +190,11 @@ showReminderOverlay todo model =
     { model | reminderOverlay = ReminderOverlay.init todo }
 
 
+showReminderOverlayForTodoId todoId =
+    applyMaybeWith (Model.TodoStore.findTodoById todoId)
+        (showReminderOverlay)
+
+
 snoozeTodo todo m =
     m
         |> Model.TodoStore.updateTodo

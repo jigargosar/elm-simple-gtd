@@ -82,7 +82,7 @@ builder2messages builder =
             [ Msg.SetView (ContextView "") ]
 
         "notification" :: todoId :: [] ->
-            [ Msg.SwitchToNotificationView todoId ]
+            [ Msg.ShowReminderOverlayForTodoId todoId ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

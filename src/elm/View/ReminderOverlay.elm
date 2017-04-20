@@ -41,7 +41,16 @@ reminderOverlayActiveView activeView todoDetails =
                     ]
 
         ReminderOverlay.SnoozeView ->
-            span [] []
+            let
+                vm =
+                    {}
+            in
+                activeViewShell todoDetails
+                    [ iconTextButton "av:snooze" "15 min" Msg.NoOp
+                    , iconTextButton "av:snooze" "1 hour" Msg.NoOp
+                    , iconTextButton "av:snooze" "3 hour" Msg.NoOp
+                    , iconTextButton "av:snooze" "tomorrow" Msg.NoOp
+                    ]
 
 
 activeViewShell todoDetails children =

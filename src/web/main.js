@@ -88,9 +88,16 @@ async function setupNotifications(app) {
     const reg = await navigator.serviceWorker.register(swScriptPath)
 
     app.ports["showNotification"].subscribe(showNotification(reg))
+    app.ports["closeNotification"].subscribe(closeNotification(reg))
 
 }
 
+const closeNotification = reg => async (tag) => {
+    const n = _.find(_.propEq("tag", tag) , await reg.getNotifications())
+    if(n){
+        n.close()
+    }
+}
 const showNotification = reg => async ({tag, title, data}) => {
     //console.info(msg)
     const permission = await Notification.requestPermission()

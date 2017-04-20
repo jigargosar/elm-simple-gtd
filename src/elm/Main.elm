@@ -19,6 +19,7 @@ import Ext.Function.Infix exposing (..)
 import Json.Encode as E
 import Keyboard.Extra as Key
 import Model
+import ReminderOverlay
 import Routes
 import Set
 import Store
@@ -129,9 +130,27 @@ update msg =
                     identity
 
                 ReminderOverlayAction action ->
-                    Return.map (Model.updateReminderOverlay action)
-                        >> Return.withMaybe (Model.getReminderOverlayTodoId)
-                            (closeNotification >> Return.command)
+                    --                    Return.map (Model.updateReminderOverlay action)
+                    --                        >> Return.withMaybe (Model.getReminderOverlayTodoId)
+                    --                            (closeNotification >> Return.command)
+                    Return.andThen
+                        (\model ->
+                            model
+                                |> case model.reminderOverlay of
+                                    ReminderOverlay.Initial todoId _ ->
+                                        case action of
+                                            ReminderOverlay.Dismiss ->
+                                                Model.updateTodoById [ Todo.TurnReminderOff ] todoId
+                                                    >> Model.dismissReminderOverlay
+                                                    >> Return.singleton
+                                                    >> Return.command (closeNotification todoId)
+
+                                            _ ->
+                                                Return.singleton
+
+                                    _ ->
+                                        Return.singleton
+                        )
 
                 MarkRunningTodoDone ->
                     Return.withMaybe (Model.getMaybeRunningTodo)

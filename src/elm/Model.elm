@@ -13,6 +13,7 @@ import Msg exposing (Return)
 import Project
 import Project
 import Project
+import ReminderOverlay
 import RunningTodo exposing (RunningTodo)
 import Dict
 import Json.Encode as E
@@ -57,6 +58,7 @@ init { now, encodedTodoList, encodedProjectList, encodedContextList } =
         , keyboardState = Keyboard.init
         , selection = Set.empty
         , showDeleted = False
+        , reminderOverlay = ReminderOverlay.none
         }
 
 
@@ -184,12 +186,8 @@ findTodoWithOverDueReminder model =
     model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
 
 
-showReminderOverlay todoId model =
-    let
-        _ =
-            Model.TodoStore.findTodoById
-    in
-        model
+showReminderOverlay todo model =
+    { model | reminderOverlay = ReminderOverlay.init todo }
 
 
 snoozeTodo todo m =
@@ -197,12 +195,11 @@ snoozeTodo todo m =
         |> Model.TodoStore.updateTodo
             [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
             todo
-        |> showReminderOverlay (Document.getId todo)
+        |> showReminderOverlay todo
 
 
 isReminderOverlayShown =
-    --    .reminderOverlay >> Maybe.isJust
-    (\_ -> False)
+    .reminderOverlay >> ReminderOverlay.shouldBeVisible
 
 
 findAndSnoozeOverDueTodo model =

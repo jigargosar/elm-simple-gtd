@@ -7,6 +7,7 @@ import Ext.Keyboard as Keyboard
 import Project
 import Project
 import Random.Pcg exposing (Seed)
+import ReminderOverlay
 import RunningTodo exposing (RunningTodo)
 import Set exposing (Set)
 import Toolkit.Helpers exposing (..)
@@ -42,6 +43,7 @@ type alias Model =
     , keyboardState : Keyboard.State
     , selection : Selection
     , showDeleted : Bool
+    , reminderOverlay : ReminderOverlay.Model
     }
 
 

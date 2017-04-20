@@ -4,7 +4,7 @@
 const url = WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/"
 
 self.addEventListener('notificationclick', function (event) {
-    console.log("notification click", event)
+    // console.log("notification click", event)
     // event.notification.close();
 
     event.waitUntil(

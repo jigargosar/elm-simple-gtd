@@ -43,6 +43,12 @@ appView m =
         , addTodoFabView m
 
         --        , bottomSheet
+        , case Model.getMainViewType m of
+            NotificationView todo ->
+                notificationView todo
+
+            _ ->
+                span [] []
         ]
 
 
@@ -142,18 +148,24 @@ appMainView contextVMs projectVMs m =
                 View.EntityList.filtered m
 
             NotificationView todo ->
-                Paper.card [ class "" ]
-                    [ div [ class "card-content" ]
-                        [ Html.h4 [] [ todo |> Todo.getText >> text ]
-                        , div [ class "card-actions" ]
-                            [ div [ class "layout horizontal around-justified" ]
-                                [ iconTextButton "cancel" "dismiss" Msg.NoOp
-                                , iconTextButton "av:snooze" "snooze" Msg.NoOp
-                                , iconTextButton "done" "done!" Msg.NoOp
-                                ]
-                            ]
+                span [] []
+        ]
+
+
+notificationView todo =
+    div [ class "layout vertical" ]
+        [ Paper.card [ class "flex-auto fixed-bottom top-shadow" ]
+            [ div [ class "card-content" ]
+                [ Html.h4 [] [ todo |> Todo.getText >> text ]
+                , div [ class "card-actions" ]
+                    [ div [ class "layout horizontal around-justified" ]
+                        [ iconTextButton "cancel" "dismiss" Msg.NoOp
+                        , iconTextButton "av:snooze" "snooze" Msg.NoOp
+                        , iconTextButton "done" "done!" Msg.NoOp
                         ]
                     ]
+                ]
+            ]
         ]
 
 

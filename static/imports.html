@@ -28,15 +28,17 @@
 <link rel="import" href="bower_components/vaadin-icons/vaadin-icons.html">
 
 
-
-
 <style is="custom-style">
-    :root{
-        --big-size:{
+    :root {
+        --big-size: {
             width: 32px;
             height: 32px;
-        }
+        };
+        --top-shadow: {
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+        };
     }
+
     html, body {
         margin: 0;
         font-family: 'Roboto', 'Noto', sans-serif;
@@ -46,18 +48,18 @@
     }
 
     /*app-toolbar {*/
-        /*background-color: #4285f4;*/
-        /*color: #fff;*/
+    /*background-color: #4285f4;*/
+    /*color: #fff;*/
     /*}*/
 
     /*app-toolbar#foo {*/
-        /*background-color: #4285f4;*/
-        /*color: #fff;*/
+    /*background-color: #4285f4;*/
+    /*color: #fff;*/
     /*}*/
 
     #new-todo-input {
         --paper-input-container-focus-color: var(--paper-blue-grey-100);
-        --paper-input-container-input-color:var(--paper-grey-50);
+        --paper-input-container-input-color: var(--paper-grey-50);
     }
 
     paper-icon-button + [main-title] {
@@ -83,25 +85,30 @@
         };
     }
 
-    app-header paper-icon-button{
+    app-header paper-icon-button {
         color: #fff;
-        --paper-icon-button-hover:{
+        --paper-icon-button-hover: {
             color: #fff;
         }
     }
 
-
-    paper-button.icon-text{
+    paper-button.icon-text {
         @apply(--layout-vertical);
         @apply(--layout-center);
         @apply(--paper-font-caption);
     }
 
+    .top-shadow{
+        @apply(--top-shadow)
+    }
+
+    .elevation-24dp {
+        @apply(--shadow-elevation-24dp);
+    }
 
     iron-icon.big {
         @apply(--big-size);
     }
-
 
     paper-badge {
         --paper-badge-margin-left: 2rem;
@@ -110,57 +117,47 @@
     }
 
     /*.drawer-list-type-badge{*/
-        /*--paper-badge-margin-left: 2rem;*/
-        /*--paper-badge-margin-bottom: -0.7rem;*/
-        /*--paper-badge-background: var(--paper-blue-grey-300)*/
+    /*--paper-badge-margin-left: 2rem;*/
+    /*--paper-badge-margin-bottom: -0.7rem;*/
+    /*--paper-badge-background: var(--paper-blue-grey-300)*/
     /*}*/
 
-
-    
-    paper-item{
+    paper-item {
         /*margin:0;*/
         /*padding: 0 1rem;*/
         --paper-item-focused: {
             background-color: var(--paper-blue-50);
         };
     }
-    
-    paper-icon-button{
+
+    paper-icon-button {
         color: var(--paper-grey-700);
-        --paper-icon-button-hover:{
+        --paper-icon-button-hover: {
             color: #000;
         }
     }
 
-
-    paper-icon-button.deleted-True{
+    paper-icon-button.deleted-True {
         color: #000;
     }
 
-    paper-icon-button.done-False{
-        --paper-icon-button-hover:{
+    paper-icon-button.done-False {
+        --paper-icon-button-hover: {
             color: var(--paper-green-500);
         }
     }
 
-    paper-icon-button.done-True{
+    paper-icon-button.done-True {
         color: var(--paper-green-500);
     }
 
     /*paper-icon-button.done-True:hover{*/
-        /*color: var(--paper-blue-grey-500);*/
+    /*color: var(--paper-blue-grey-500);*/
     /*}*/
 
-    paper-menu-button{
+    paper-menu-button {
         padding: 0;
     }
-
-
-
-
-
-
-
 
     /*app-drawer {*/
     /*--app-drawer-scrim-background: rgba(0, 0, 100, 0.8);*/
@@ -187,30 +184,30 @@
 
 
 <!--<dom-module id="elm-main">-->
-    <!--<template>-->
-        <!--<div id="elmMainContainer">-->
+<!--<template>-->
+<!--<div id="elmMainContainer">-->
 
-            <!--&lt;!&ndash;<paper-checkbox checked>Checked</paper-checkbox>&ndash;&gt;-->
-            <!--&lt;!&ndash;<paper-checkbox class="styled">&ndash;&gt;-->
-                <!--&lt;!&ndash;Checkbox&ndash;&gt;-->
-                <!--&lt;!&ndash;<span class="subtitle">&ndash;&gt;-->
-                <!--&lt;!&ndash;With a longer label&ndash;&gt;-->
-            <!--&lt;!&ndash;</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</paper-checkbox>&ndash;&gt;-->
+<!--&lt;!&ndash;<paper-checkbox checked>Checked</paper-checkbox>&ndash;&gt;-->
+<!--&lt;!&ndash;<paper-checkbox class="styled">&ndash;&gt;-->
+<!--&lt;!&ndash;Checkbox&ndash;&gt;-->
+<!--&lt;!&ndash;<span class="subtitle">&ndash;&gt;-->
+<!--&lt;!&ndash;With a longer label&ndash;&gt;-->
+<!--&lt;!&ndash;</span>&ndash;&gt;-->
+<!--&lt;!&ndash;</paper-checkbox>&ndash;&gt;-->
 
-            <!--&lt;!&ndash;<firebase-app&ndash;&gt;-->
-            <!--&lt;!&ndash;api-key="AIzaSyAve3E-llOy2_ly87mJMSvcWDG6Uqyq8PA"&ndash;&gt;-->
-            <!--&lt;!&ndash;auth-domain="not-now-142808.firebaseapp.com"&ndash;&gt;-->
-            <!--&lt;!&ndash;database-url="https://not-now-142808.firebaseio.com">&ndash;&gt;-->
-            <!--&lt;!&ndash;</firebase-app>&ndash;&gt;-->
+<!--&lt;!&ndash;<firebase-app&ndash;&gt;-->
+<!--&lt;!&ndash;api-key="AIzaSyAve3E-llOy2_ly87mJMSvcWDG6Uqyq8PA"&ndash;&gt;-->
+<!--&lt;!&ndash;auth-domain="not-now-142808.firebaseapp.com"&ndash;&gt;-->
+<!--&lt;!&ndash;database-url="https://not-now-142808.firebaseio.com">&ndash;&gt;-->
+<!--&lt;!&ndash;</firebase-app>&ndash;&gt;-->
 
-            <!--&lt;!&ndash;<paper-checkbox checked="">True</paper-checkbox>&ndash;&gt;-->
+<!--&lt;!&ndash;<paper-checkbox checked="">True</paper-checkbox>&ndash;&gt;-->
 
-            <!--&lt;!&ndash;<paper-checkbox disabled>Disabled</paper-checkbox>&ndash;&gt;-->
+<!--&lt;!&ndash;<paper-checkbox disabled>Disabled</paper-checkbox>&ndash;&gt;-->
 
 
-        <!--</div>-->
-    <!--</template>-->
+<!--</div>-->
+<!--</template>-->
 
 
 <!--</dom-module>-->

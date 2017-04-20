@@ -98,6 +98,7 @@ const closeNotification = reg => async (tag) => {
         n.close()
     }
 }
+
 const showNotification = reg => async ({tag, title, data}) => {
     //console.info(msg)
     const permission = await Notification.requestPermission()

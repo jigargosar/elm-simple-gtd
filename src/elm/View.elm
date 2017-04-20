@@ -28,13 +28,13 @@ import Json.Encode
 import List.Extra as List
 import Model.Types exposing (..)
 import Todo
-import Polymer.Paper exposing (..)
+import Polymer.Paper as Paper
 import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.Shared exposing (..)
 import View.Todo
-import WebComponents exposing (doneAllIconP, icon, iconP, paperIconButton)
+import WebComponents exposing (doneAllIconP, icon, iconP, paperIconButton, iconButton)
 
 
 appView m =
@@ -47,10 +47,10 @@ appView m =
 
 
 bottomSheet =
-    material [ style [ "background-color" => "white" ], class "fixed-bottom", attribute "elevation" "5" ]
-        [ item [] [ text "bottom" ]
-        , item [] [ text "bottom" ]
-        , item [] [ text "bottom" ]
+    Paper.material [ style [ "background-color" => "white" ], class "fixed-bottom", attribute "elevation" "5" ]
+        [ Paper.item [] [ text "bottom" ]
+        , Paper.item [] [ text "bottom" ]
+        , Paper.item [] [ text "bottom" ]
         ]
 
 
@@ -142,7 +142,7 @@ appMainView contextVMs projectVMs m =
                 View.EntityList.filtered m
 
             NotificationView todo ->
-                card [ class "" ]
+                Paper.card [ class "" ]
                     [ div [ class "card-content" ]
                         [ Html.h4 [] [ todo |> Todo.getText >> text ]
                         , div [ class "card-actions" ]
@@ -151,7 +151,7 @@ appMainView contextVMs projectVMs m =
                                 , doneButton Msg.NoOp
                                 , snoozeButton Msg.NoOp
                                 , cancelButton Msg.NoOp
-                                , button [ class "icon-text" ]
+                                , Paper.button [ class "icon-text" ]
                                     [ icon "cancel" [ class "big" ]
                                     , "dismiss" |> text
                                     ]
@@ -173,7 +173,7 @@ headerView m =
     in
         case Model.getEditMode m of
             EditMode.NewTodo text ->
-                input
+                Paper.input
                     [ id newTodoInputId
                     , class "auto-focus"
                     , onInput Msg.onNewTodoInput
@@ -203,9 +203,8 @@ headerView m =
                             , onClick Msg.SelectionDoneClicked
                             ]
                             []
-                        , paperIconButton
-                            [ iconP "create"
-                            , onClick Msg.SelectionEditClicked
+                        , iconButton "create"
+                            [ onClick Msg.SelectionEditClicked
                             ]
                             []
                         , paperIconButton
@@ -222,7 +221,7 @@ headerView m =
 
 
 addTodoFabView m =
-    fab
+    Paper.fab
         [ id "add-fab"
         , attribute "icon" "add"
         , onClick Msg.StartAddingTodo

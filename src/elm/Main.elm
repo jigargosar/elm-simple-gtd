@@ -386,7 +386,7 @@ sendNotifications =
 
 
 showTodoNotificationCmd =
-    createTodoNotification >> showNotification
+    createTodoNotification >> showNotification >> (::) # [ startAlarm () ] >> Cmd.batch
 
 
 activateEditNewTodoMode text =

@@ -2,7 +2,7 @@
 
 self.addEventListener('notificationclick', function (event) {
     console.log("notification click", event)
-    event.notification.close();
+    // event.notification.close();
 
     event.waitUntil(
         clients

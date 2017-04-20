@@ -102,11 +102,10 @@ const showNotification = reg => async ({tag, title, data}) => {
         renotify:true,
         vibrate: [500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500],
         sound:"/alarm.ogg",
-
-        /*actions: [
+        actions: [
             {title: "Mark Done", action: "mark-done"},
             {title: "Snooze", action: "snooze"},
-        ],*/
+        ],
         data
     })
 }

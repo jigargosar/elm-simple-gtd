@@ -104,6 +104,22 @@ trashButton =
     sharedIconButton "delete"
 
 
+doneButton =
+    sharedIconButton "done"
+
+
+cancelButton =
+    sharedIconButton "cancel"
+
+
+dismissButton =
+    sharedIconButton "cancel"
+
+
+snoozeButton =
+    sharedIconButton "av:snooze"
+
+
 settingsButton =
     sharedIconButton "settings"
 

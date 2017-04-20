@@ -33,7 +33,7 @@ import Polymer.Paper exposing (..)
 import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import View.Shared exposing (row)
+import View.Shared exposing (..)
 import View.Todo
 
 
@@ -142,7 +142,19 @@ appMainView contextVMs projectVMs m =
                 View.EntityList.filtered m
 
             NotificationView todo ->
-                div [] []
+                card [ class "" ]
+                    [ div [ class "card-content" ]
+                        [ Html.h4 [] [ todo |> Todo.getText >> text ]
+                        , div [ class "card-actions" ]
+                            [ div [ class "layout horizontal around-justified" ]
+                                [ dismissButton Msg.NoOp
+                                , doneButton Msg.NoOp
+                                , snoozeButton Msg.NoOp
+                                , cancelButton Msg.NoOp
+                                ]
+                            ]
+                        ]
+                    ]
         ]
 
 

@@ -99,13 +99,16 @@ update msg =
                     let
                         _ =
                             Debug.log "action, data" ( action, data )
-                    in
-                        case action of
-                            "mark-done" ->
-                                Return.map (Model.updateTodoById [ Todo.SetDone True ] data.id)
 
-                            _ ->
-                                identity
+                        r =
+                            case action of
+                                "mark-done" ->
+                                    Return.map (Model.updateTodoById [ Todo.SetDone True ] data.id)
+
+                                _ ->
+                                    identity
+                    in
+                        data.id |> SwitchToNotificationView >> andThenUpdate
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))

@@ -147,11 +147,9 @@ appMainView contextVMs projectVMs m =
                         [ Html.h4 [] [ todo |> Todo.getText >> text ]
                         , div [ class "card-actions" ]
                             [ div [ class "layout horizontal around-justified" ]
-                                [ dismissButton Msg.NoOp
-                                , doneButton Msg.NoOp
+                                [ iconTextButton "cancel" "dismiss" Msg.NoOp
                                 , snoozeButton Msg.NoOp
-                                , cancelButton Msg.NoOp
-                                , iconTextButton "cancel" "dismiss" Msg.NoOp
+                                , doneButton Msg.NoOp
                                 ]
                             ]
                         ]

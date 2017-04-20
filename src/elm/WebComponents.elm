@@ -1,8 +1,9 @@
 module WebComponents exposing (..)
 
-import Html exposing (text)
-import Html.Attributes exposing (class)
-import Html.Attributes.Extra exposing (stringProperty)
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Attributes.Extra exposing (..)
+import Html.Events exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -36,8 +37,8 @@ doneAllIconP =
     iconP "done-all"
 
 
-iconTextButton iconName text_ =
-    Polymer.Paper.button [ class "icon-text" ]
+iconTextButton iconName text_ clickHandler =
+    Polymer.Paper.button [ class "icon-text", onClick clickHandler ]
         [ icon iconName [ class "big" ]
-        , text_ |> text
+        , text text_
         ]

@@ -151,7 +151,7 @@ appMainView contextVMs projectVMs m =
                                 , doneButton Msg.NoOp
                                 , snoozeButton Msg.NoOp
                                 , cancelButton Msg.NoOp
-                                , iconTextButton "cancel" "dismiss"
+                                , iconTextButton "cancel" "dismiss" Msg.NoOp
                                 ]
                             ]
                         ]

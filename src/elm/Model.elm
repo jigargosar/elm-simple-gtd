@@ -227,6 +227,10 @@ isReminderOverlayShown =
     .reminderOverlay >> ReminderOverlay.shouldBeVisible
 
 
+getReminderOverlayTodoId =
+    .reminderOverlay >> ReminderOverlay.getMaybeTodoId
+
+
 findAndSnoozeOverDueTodo model =
     findTodoWithOverDueReminder model
         ?|> apply2

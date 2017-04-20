@@ -45,6 +45,9 @@ import Types
 port showNotification : TodoNotification -> Cmd msg
 
 
+port closeNotification : String -> Cmd msg
+
+
 createTodoNotification todo =
     let
         id =
@@ -127,6 +130,8 @@ update msg =
 
                 ReminderOverlayAction action ->
                     Return.map (Model.updateReminderOverlay action)
+                        >> Return.withMaybe (Model.getReminderOverlayTodoId)
+                            (closeNotification >> Return.command)
 
                 MarkRunningTodoDone ->
                     Return.withMaybe (Model.getMaybeRunningTodo)

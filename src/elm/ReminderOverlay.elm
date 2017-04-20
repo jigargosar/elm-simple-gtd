@@ -34,5 +34,14 @@ shouldBeVisible model =
             True
 
 
+getMaybeTodoId model =
+    case model of
+        Initial id _ ->
+            Just id
+
+        _ ->
+            Nothing
+
+
 none =
     None

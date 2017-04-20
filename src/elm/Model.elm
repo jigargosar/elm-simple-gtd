@@ -207,23 +207,6 @@ snoozeTodoWithOffset snoozeOffset todoId model =
     dismissReminderOverlay model
 
 
-
---updateReminderOverlay action model =
---    model
---        |> case model.reminderOverlay of
---            ReminderOverlay.Initial todoId _ ->
---                case action of
---                    ReminderOverlay.Dismiss ->
---                        Model.TodoStore.updateTodoById [ Todo.TurnReminderOff ] todoId
---                            >> dismissReminderOverlay
---
---                    _ ->
---                        identity
---
---            _ ->
---                identity
-
-
 snoozeTodo todo m =
     m
         |> Model.TodoStore.updateTodo

@@ -167,9 +167,6 @@ appMainView contextVMs projectVMs m =
 
             DoneView ->
                 View.EntityList.filtered m
-
-            NotificationView todo ->
-                span [] []
         ]
 
 

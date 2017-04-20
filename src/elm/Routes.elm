@@ -45,9 +45,6 @@ getPathFromModel model =
             else
                 [ "context", id ]
 
-        NotificationView todo ->
-            [ "notification", Document.getId todo ]
-
 
 delta2hash : Model -> Model -> Maybe UrlChange
 delta2hash =

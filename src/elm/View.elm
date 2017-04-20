@@ -198,22 +198,17 @@ headerView m =
                 else
                     span []
                         [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
-                        , paperIconButton
-                            [ doneAllIconP
-                            , onClick Msg.SelectionDoneClicked
+                        , iconButton "done-all"
+                            [ onClick Msg.SelectionDoneClicked
                             ]
-                            []
                         , iconButton "create"
                             [ onClick Msg.SelectionEditClicked
                             ]
-                            []
                         , iconButton "delete"
                             [ onClick Msg.SelectionTrashClicked
                             ]
-                            []
                         , iconButton "cancel"
                             [ onClick Msg.ClearSelection ]
-                            []
                         ]
 
 

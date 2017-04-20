@@ -27,7 +27,7 @@ paperIconButton =
 
 
 iconButton iconName attributes =
-    paperIconButton (attributes ++ [ iconP iconName ])
+    paperIconButton (attributes ++ [ iconP iconName ]) []
 
 
 doneAllIconP =

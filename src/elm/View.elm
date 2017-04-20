@@ -153,7 +153,7 @@ appMainView contextVMs projectVMs m =
 
 
 notificationView todo =
-    Paper.material [ class "fixed-bottom top-shadow bkg-white padding1" ]
+    div [ class "fixed-bottom top-shadow bkg-white static" ]
         [ div [ class "font-headline" ] [ todo |> Todo.getText >> text ]
         , div [ class "layout horizontal flex-auto-children" ]
             [ iconTextButton "cancel" "dismiss" Msg.NoOp

@@ -207,15 +207,12 @@ headerView m =
                             [ onClick Msg.SelectionEditClicked
                             ]
                             []
-                        , paperIconButton
-                            [ iconP "delete"
-                            , onClick Msg.SelectionTrashClicked
+                        , iconButton "delete"
+                            [ onClick Msg.SelectionTrashClicked
                             ]
                             []
-                        , paperIconButton
-                            [ iconP "cancel"
-                            , onClick Msg.ClearSelection
-                            ]
+                        , iconButton "cancel"
+                            [ onClick Msg.ClearSelection ]
                             []
                         ]
 

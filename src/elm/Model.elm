@@ -199,20 +199,25 @@ dismissReminderOverlay model =
     { model | reminderOverlay = ReminderOverlay.none }
 
 
-updateReminderOverlay action model =
-    model
-        |> case model.reminderOverlay of
-            ReminderOverlay.Initial todoId _ ->
-                case action of
-                    ReminderOverlay.Dismiss ->
-                        Model.TodoStore.updateTodoById [ Todo.TurnReminderOff ] todoId
-                            >> dismissReminderOverlay
+setReminderOverlayToSnoozeView details model =
+    { model | reminderOverlay = ReminderOverlay.snoozeView details }
 
-                    _ ->
-                        identity
 
-            _ ->
-                identity
+
+--updateReminderOverlay action model =
+--    model
+--        |> case model.reminderOverlay of
+--            ReminderOverlay.Initial todoId _ ->
+--                case action of
+--                    ReminderOverlay.Dismiss ->
+--                        Model.TodoStore.updateTodoById [ Todo.TurnReminderOff ] todoId
+--                            >> dismissReminderOverlay
+--
+--                    _ ->
+--                        identity
+--
+--            _ ->
+--                identity
 
 
 snoozeTodo todo m =
@@ -221,14 +226,6 @@ snoozeTodo todo m =
             [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
             todo
         |> showReminderOverlay todo
-
-
-isReminderOverlayShown =
-    .reminderOverlay >> ReminderOverlay.shouldBeVisible
-
-
-getReminderOverlayTodoId =
-    .reminderOverlay >> ReminderOverlay.getMaybeTodoId
 
 
 findAndSnoozeOverDueTodo model =

@@ -18,7 +18,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Json.Encode as E
 import Keyboard.Extra as Key
-import Model
+import Model as Model
 import ReminderOverlay
 import Routes
 import Set
@@ -137,16 +137,24 @@ update msg =
                         (\model ->
                             model
                                 |> case model.reminderOverlay of
-                                    ReminderOverlay.Initial todoId _ ->
-                                        case action of
-                                            ReminderOverlay.Dismiss ->
-                                                Model.updateTodoById [ Todo.TurnReminderOff ] todoId
-                                                    >> Model.dismissReminderOverlay
-                                                    >> Return.singleton
-                                                    >> Return.command (closeNotification todoId)
+                                    ReminderOverlay.Active activeView todoDetails ->
+                                        let
+                                            todoId =
+                                                todoDetails.id
+                                        in
+                                            case action of
+                                                ReminderOverlay.Dismiss ->
+                                                    Model.updateTodoById [ Todo.TurnReminderOff ] todoId
+                                                        >> Model.dismissReminderOverlay
+                                                        >> Return.singleton
+                                                        >> Return.command (closeNotification todoId)
 
-                                            _ ->
-                                                Return.singleton
+                                                ReminderOverlay.Snooze ->
+                                                    Model.setReminderOverlayToSnoozeView todoDetails
+                                                        >> Return.singleton
+
+                                                _ ->
+                                                    Return.singleton
 
                                     _ ->
                                         Return.singleton

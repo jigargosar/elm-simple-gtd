@@ -10,9 +10,18 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 
 
+type ActiveView
+    = InitialView
+    | SnoozeView
+
+
+type alias TodoDetails =
+    { id : Todo.Id, text : Todo.Text }
+
+
 type Model
     = None
-    | Initial Todo.Id Todo.Text
+    | Active ActiveView TodoDetails
 
 
 type Action
@@ -21,27 +30,19 @@ type Action
     | Done
 
 
-init todo =
-    Initial (Document.getId todo) (Todo.getText todo)
+init : Todo.Model -> Model
+init =
+    createTodoDetails >> Active InitialView
 
 
-shouldBeVisible model =
-    case model of
-        None ->
-            False
-
-        _ ->
-            True
-
-
-getMaybeTodoId model =
-    case model of
-        Initial id _ ->
-            Just id
-
-        _ ->
-            Nothing
+createTodoDetails todo =
+    TodoDetails (Document.getId todo) (Todo.getText todo)
 
 
 none =
     None
+
+
+snoozeView : TodoDetails -> Model
+snoozeView =
+    Active SnoozeView

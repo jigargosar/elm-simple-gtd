@@ -106,6 +106,7 @@ const showNotification = reg => async ({tag, title, data}) => {
             {title: "Mark Done", action: "mark-done"},
             {title: "Snooze", action: "snooze"},
         ],
+        body:title,
         data
     })
 }

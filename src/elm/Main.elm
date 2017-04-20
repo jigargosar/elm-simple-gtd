@@ -423,7 +423,7 @@ reminderOverlayAction action =
                                         >> Return.singleton
                                         >> Return.command (closeNotification todoId)
 
-                                ReminderOverlay.Snooze ->
+                                ReminderOverlay.ShowSnoozeOptions ->
                                     Model.setReminderOverlayToSnoozeView todoDetails
                                         >> Return.singleton
 

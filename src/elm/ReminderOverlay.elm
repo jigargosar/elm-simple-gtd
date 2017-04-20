@@ -1,5 +1,6 @@
 module ReminderOverlay exposing (..)
 
+import Date.Extra.TimeUnit exposing (TimeUnit)
 import Document
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -8,6 +9,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Time exposing (Time)
 
 
 type ActiveView
@@ -25,9 +27,15 @@ type Model
 
 
 type Action
-    = Snooze
+    = ShowSnoozeOptions
+    | SnoozeTill SnoozeOffset
     | Dismiss
-    | Done
+    | MarkDone
+
+
+type SnoozeOffset
+    = SnoozeForMilli Time
+    | SnoozeTillTomorrow
 
 
 initialView : Todo.Model -> Model

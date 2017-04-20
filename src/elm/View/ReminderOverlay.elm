@@ -6,6 +6,7 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Msg
 import ReminderOverlay
+import Time
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -30,8 +31,8 @@ reminderOverlayActiveView activeView todoDetails =
             let
                 vm =
                     { onDismissClicked = Msg.ReminderOverlayAction ReminderOverlay.Dismiss
-                    , onDoneClicked = Msg.ReminderOverlayAction ReminderOverlay.Done
-                    , onSnoozeClicked = Msg.ReminderOverlayAction ReminderOverlay.Snooze
+                    , onDoneClicked = Msg.ReminderOverlayAction ReminderOverlay.MarkDone
+                    , onSnoozeClicked = Msg.ReminderOverlayAction ReminderOverlay.ShowSnoozeOptions
                     }
             in
                 activeViewShell todoDetails
@@ -42,14 +43,21 @@ reminderOverlayActiveView activeView todoDetails =
 
         ReminderOverlay.SnoozeView ->
             let
+                msg =
+                    ReminderOverlay.SnoozeTill >> Msg.ReminderOverlayAction
+
                 vm =
-                    {}
+                    { snoozeFor15Min = msg (ReminderOverlay.SnoozeForMilli (Time.minute * 15))
+                    , snoozeFor1Hour = msg (ReminderOverlay.SnoozeForMilli (Time.hour))
+                    , snoozeFor3Hours = msg (ReminderOverlay.SnoozeForMilli (Time.hour * 3))
+                    , snoozeTillTomorrow = msg (ReminderOverlay.SnoozeTillTomorrow)
+                    }
             in
                 activeViewShell todoDetails
-                    [ iconTextButton "av:snooze" "15 min" Msg.NoOp
-                    , iconTextButton "av:snooze" "1 hour" Msg.NoOp
-                    , iconTextButton "av:snooze" "3 hour" Msg.NoOp
-                    , iconTextButton "av:snooze" "tomorrow" Msg.NoOp
+                    [ iconTextButton "av:snooze" "15 min" vm.snoozeFor15Min
+                    , iconTextButton "av:snooze" "1 hour" vm.snoozeFor1Hour
+                    , iconTextButton "av:snooze" "3 hour" vm.snoozeFor3Hours
+                    , iconTextButton "av:snooze" "tomorrow" vm.snoozeTillTomorrow
                     ]
 
 

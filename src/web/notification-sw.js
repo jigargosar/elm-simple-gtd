@@ -1,5 +1,8 @@
 "use strict"
 
+//noinspection JSUnresolvedVariable
+const url = WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/"
+
 self.addEventListener('notificationclick', function (event) {
     console.log("notification click", event)
     // event.notification.close();
@@ -8,8 +11,8 @@ self.addEventListener('notificationclick', function (event) {
         clients
             .matchAll({type: "window"})
             .then(function (clientList) {
-                for (var i = 0; i < clientList.length; i++) {
-                    var client = clientList[i];
+                for (let i = 0; i < clientList.length; i++) {
+                    const client = clientList[i]
                     postMessage(client, event)
                     if (client.focus) {
                         return client.focus();
@@ -17,7 +20,7 @@ self.addEventListener('notificationclick', function (event) {
                 }
                 if (clients.openWindow) {
                     return clients
-                        .openWindow('http://localhost:8020/')
+                        .openWindow(url)
                         .then(function(client) {
                             postMessage(client, event)
                         })

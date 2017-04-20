@@ -38,7 +38,7 @@ doneAllIconP =
 
 
 iconTextButton iconName text_ clickHandler =
-    Polymer.Paper.button [ class "icon-text", onClick clickHandler ]
+    Polymer.Paper.button [ class "icon-text font-caption", onClick clickHandler ]
         [ icon iconName [ class "big" ]
         , text text_
         ]

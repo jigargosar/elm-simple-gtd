@@ -30,9 +30,13 @@
 
 <style is="custom-style">
     :root {
-        --big-size: {
+        --32-size: {
             width: 32px;
             height: 32px;
+        };
+        --64-size: {
+            width: 64px;
+            height: 64px;
         };
         --top-shadow: {
             box-shadow: 0 0 100px rgba(0,0,0,0.5);
@@ -95,6 +99,9 @@
     paper-button.icon-text {
         @apply(--layout-vertical);
         @apply(--layout-center);
+    }
+
+    .font-caption{
         @apply(--paper-font-caption);
     }
 
@@ -107,13 +114,21 @@
     }
 
     iron-icon.big {
-        @apply(--big-size);
+        @apply(--64-size);
     }
 
     paper-badge {
         --paper-badge-margin-left: 2rem;
         /*--paper-badge-margin-bottom: -0.7rem;*/
         --paper-badge-background: var(--paper-blue-grey-300)
+    }
+
+    .flex-auto-children > *{
+        @apply(--layout-flex-auto)
+    }
+
+    .bkg-white{
+        background-color: #fff;
     }
 
     /*.drawer-list-type-badge{*/

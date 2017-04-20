@@ -153,18 +153,12 @@ appMainView contextVMs projectVMs m =
 
 
 notificationView todo =
-    div [ class "layout vertical" ]
-        [ Paper.card [ class "flex-auto fixed-bottom top-shadow" ]
-            [ div [ class "card-content" ]
-                [ Html.h4 [] [ todo |> Todo.getText >> text ]
-                , div [ class "card-actions" ]
-                    [ div [ class "layout horizontal around-justified" ]
-                        [ iconTextButton "cancel" "dismiss" Msg.NoOp
-                        , iconTextButton "av:snooze" "snooze" Msg.NoOp
-                        , iconTextButton "done" "done!" Msg.NoOp
-                        ]
-                    ]
-                ]
+    div [ class "fixed-bottom top-shadow bkg-white" ]
+        [ Html.div [ class "title" ] [ todo |> Todo.getText >> text ]
+        , div [ class "layout horizontal flex-auto-children" ]
+            [ iconTextButton "cancel" "dismiss" Msg.NoOp
+            , iconTextButton "av:snooze" "snooze" Msg.NoOp
+            , iconTextButton "done" "done!" Msg.NoOp
             ]
         ]
 

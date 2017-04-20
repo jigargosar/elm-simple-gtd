@@ -30,8 +30,8 @@ type Action
     | Done
 
 
-init : Todo.Model -> Model
-init =
+initialView : Todo.Model -> Model
+initialView =
     createTodoDetails >> Active InitialView
 
 

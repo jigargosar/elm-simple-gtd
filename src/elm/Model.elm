@@ -186,13 +186,13 @@ findTodoWithOverDueReminder model =
     model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
 
 
-showReminderOverlay todo model =
-    { model | reminderOverlay = ReminderOverlay.init todo }
+setReminderOverlayToInitialView todo model =
+    { model | reminderOverlay = ReminderOverlay.initialView todo }
 
 
 showReminderOverlayForTodoId todoId =
     applyMaybeWith (Model.TodoStore.findTodoById todoId)
-        (showReminderOverlay)
+        (setReminderOverlayToInitialView)
 
 
 dismissReminderOverlay model =
@@ -225,7 +225,7 @@ snoozeTodo todo m =
         |> Model.TodoStore.updateTodo
             [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
             todo
-        |> showReminderOverlay todo
+        |> setReminderOverlayToInitialView todo
 
 
 findAndSnoozeOverDueTodo model =

@@ -12,6 +12,7 @@ import Model.Internal as Model
 import Model.EditMode
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (Msg)
+import ReminderOverlay
 import Set
 import Entity.ViewModel
 import View.EntityList
@@ -43,13 +44,24 @@ appView m =
         , addTodoFabView m
 
         --        , bottomSheet
-        , case Model.getMainViewType m of
-            NotificationView todo ->
-                notificationView todo
-
-            _ ->
-                span [] []
+        , showReminderOverlay m
         ]
+
+
+showReminderOverlay m =
+    case m.reminderOverlay of
+        ReminderOverlay.Initial id headline ->
+            div [ class "fixed-bottom top-shadow static" ]
+                [ div [ class "font-headline" ] [ text headline ]
+                , div [ class "layout horizontal flex-auto-children" ]
+                    [ iconTextButton "notification:do-not-disturb" "dismiss" Msg.NoOp
+                    , iconTextButton "av:snooze" "snooze" Msg.NoOp
+                    , iconTextButton "done" "done!" Msg.NoOp
+                    ]
+                ]
+
+        ReminderOverlay.None ->
+            span [] []
 
 
 bottomSheet =
@@ -149,17 +161,6 @@ appMainView contextVMs projectVMs m =
 
             NotificationView todo ->
                 span [] []
-        ]
-
-
-notificationView todo =
-    div [ class "fixed-bottom top-shadow static" ]
-        [ div [ class "font-headline" ] [ todo |> Todo.getText >> text ]
-        , div [ class "layout horizontal flex-auto-children" ]
-            [ iconTextButton "notification:do-not-disturb" "dismiss" Msg.NoOp
-            , iconTextButton "av:snooze" "snooze" Msg.NoOp
-            , iconTextButton "done" "done!" Msg.NoOp
-            ]
         ]
 
 

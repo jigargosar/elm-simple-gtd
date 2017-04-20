@@ -368,10 +368,10 @@ onUpdateNow now =
                     else
                         Return.singleton m
             )
-        >> sendAlerts
+        >> sendNotifications
 
 
-sendAlerts =
+sendNotifications =
     Return.andThenMaybe
         (Model.findAndSnoozeOverDueTodo >>? Tuple.mapSecond showTodoNotificationCmd)
 

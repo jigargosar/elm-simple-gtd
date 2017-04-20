@@ -24,6 +24,7 @@ type MainViewType
     = GroupByContextView
     | ProjectView Id
     | DoneView
+    | NotificationView Todo.Model
     | BinView
     | GroupByProjectView
     | ContextView Id

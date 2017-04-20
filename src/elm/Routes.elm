@@ -1,5 +1,6 @@
 module Routes exposing (..)
 
+import Document
 import Model as Model
 import Model.Internal as Model
 import Msg exposing (Msg)
@@ -44,6 +45,9 @@ getPathFromModel model =
             else
                 [ "context", id ]
 
+        NotificationView todo ->
+            [ "notification", Document.getId todo ]
+
 
 delta2hash : Model -> Model -> Maybe UrlChange
 delta2hash =
@@ -76,6 +80,9 @@ builder2messages builder =
 
         "Inbox" :: [] ->
             [ Msg.SetView (ContextView "") ]
+
+        "notification" :: todoId :: [] ->
+            [ Msg.SwitchToNotificationView todoId ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

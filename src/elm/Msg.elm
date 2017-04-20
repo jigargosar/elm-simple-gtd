@@ -67,6 +67,7 @@ type Msg
     | SelectionEditClicked
     | SelectionTrashClicked
     | SetView MainViewType
+    | SwitchToNotificationView Todo.Id
     | OnNowChanged Time
     | OnMsgList (List Msg)
     | OnKeyboardMsg Keyboard.Msg

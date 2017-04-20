@@ -199,6 +199,10 @@ update msg =
                     Return.map (Model.setMainViewType viewType)
                         >> andThenUpdate ClearSelection
 
+                SwitchToNotificationView todoId ->
+                    Return.withMaybe (Model.findTodoById todoId)
+                        (NotificationView >> SetView >> andThenUpdate)
+
                 ClearSelection ->
                     Return.map (Model.clearSelection)
 

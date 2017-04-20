@@ -130,35 +130,7 @@ update msg =
                     identity
 
                 ReminderOverlayAction action ->
-                    --                    Return.map (Model.updateReminderOverlay action)
-                    --                        >> Return.withMaybe (Model.getReminderOverlayTodoId)
-                    --                            (closeNotification >> Return.command)
-                    Return.andThen
-                        (\model ->
-                            model
-                                |> case model.reminderOverlay of
-                                    ReminderOverlay.Active activeView todoDetails ->
-                                        let
-                                            todoId =
-                                                todoDetails.id
-                                        in
-                                            case action of
-                                                ReminderOverlay.Dismiss ->
-                                                    Model.updateTodoById [ Todo.TurnReminderOff ] todoId
-                                                        >> Model.dismissReminderOverlay
-                                                        >> Return.singleton
-                                                        >> Return.command (closeNotification todoId)
-
-                                                ReminderOverlay.Snooze ->
-                                                    Model.setReminderOverlayToSnoozeView todoDetails
-                                                        >> Return.singleton
-
-                                                _ ->
-                                                    Return.singleton
-
-                                    _ ->
-                                        Return.singleton
-                        )
+                    reminderOverlayAction action
 
                 MarkRunningTodoDone ->
                     Return.withMaybe (Model.getMaybeRunningTodo)
@@ -429,3 +401,35 @@ stopRunningTodo =
 withNow : (Time -> Msg) -> ReturnF
 withNow msg =
     Task.perform (msg) Time.now |> Return.command
+
+
+reminderOverlayAction action =
+    --                    Return.map (Model.updateReminderOverlay action)
+    --                        >> Return.withMaybe (Model.getReminderOverlayTodoId)
+    --                            (closeNotification >> Return.command)
+    Return.andThen
+        (\model ->
+            model
+                |> case model.reminderOverlay of
+                    ReminderOverlay.Active activeView todoDetails ->
+                        let
+                            todoId =
+                                todoDetails.id
+                        in
+                            case action of
+                                ReminderOverlay.Dismiss ->
+                                    Model.updateTodoById [ Todo.TurnReminderOff ] todoId
+                                        >> Model.dismissReminderOverlay
+                                        >> Return.singleton
+                                        >> Return.command (closeNotification todoId)
+
+                                ReminderOverlay.Snooze ->
+                                    Model.setReminderOverlayToSnoozeView todoDetails
+                                        >> Return.singleton
+
+                                _ ->
+                                    Return.singleton
+
+                    _ ->
+                        Return.singleton
+        )

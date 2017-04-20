@@ -98,6 +98,7 @@ const showNotification = reg => async ({tag, title, data}) => {
     reg.showNotification(title, {
         tag,
         requiresInteraction:true,
+        sticky:true,
         /*actions: [
             {title: "Mark Done", action: "mark-done"},
             {title: "Snooze", action: "snooze"},

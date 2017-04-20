@@ -34,7 +34,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.Shared exposing (..)
 import View.Todo
-import WebComponents exposing (doneAllIconP, icon, iconP, paperIconButton, iconButton)
+import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, paperIconButton)
 
 
 appView m =
@@ -151,10 +151,7 @@ appMainView contextVMs projectVMs m =
                                 , doneButton Msg.NoOp
                                 , snoozeButton Msg.NoOp
                                 , cancelButton Msg.NoOp
-                                , Paper.button [ class "icon-text" ]
-                                    [ icon "cancel" [ class "big" ]
-                                    , "dismiss" |> text
-                                    ]
+                                , iconTextButton "cancel" "dismiss"
                                 ]
                             ]
                         ]

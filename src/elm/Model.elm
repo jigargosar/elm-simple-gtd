@@ -204,7 +204,13 @@ setReminderOverlayToSnoozeView details model =
 
 
 snoozeTodoWithOffset snoozeOffset todoId model =
-    dismissReminderOverlay model
+    let
+        time =
+            ReminderOverlay.addSnoozeOffset model.now snoozeOffset
+    in
+        model
+            |> Model.TodoStore.updateTodoById [ time |> Just >> Todo.SetTime ] todoId
+            >> dismissReminderOverlay
 
 
 snoozeTodo todo m =

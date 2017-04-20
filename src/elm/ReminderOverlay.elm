@@ -1,5 +1,7 @@
 module ReminderOverlay exposing (..)
 
+import Date
+import Date.Extra as Date
 import Date.Extra.TimeUnit exposing (TimeUnit)
 import Document
 import Todo
@@ -36,6 +38,15 @@ type Action
 type SnoozeOffset
     = SnoozeForMilli Time
     | SnoozeTillTomorrow
+
+
+addSnoozeOffset time offset =
+    case offset of
+        SnoozeForMilli milli ->
+            time + milli
+
+        SnoozeTillTomorrow ->
+            Date.fromTime time |> Date.ceiling Date.Day |> Date.add Date.Hour 10 |> Date.toTime
 
 
 initialView : Todo.Model -> Model

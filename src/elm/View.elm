@@ -17,7 +17,6 @@ import Entity.ViewModel
 import View.EntityList
 import View.AppDrawer
 import Maybe.Extra as Maybe
-import Polymer.Attributes exposing (icon)
 import Time exposing (Time)
 import Ext.Time
 import Toolkit.Helpers exposing (..)
@@ -35,7 +34,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.Shared exposing (..)
 import View.Todo
-import WebComponents exposing (ironIcon)
+import WebComponents exposing (doneAllIconP, icon, iconP, paperIconButton)
 
 
 appView m =
@@ -90,7 +89,7 @@ appHeaderView m =
         ]
         [ App.toolbar
             []
-            [ iconButton [ icon "menu", attribute "drawer-toggle" "true" ] []
+            [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "true" ] []
             , headerView m
             ]
 
@@ -114,9 +113,9 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         [ div [ class "title" ] [ text todoVM.text ]
         , div [ class "col" ]
             [ div [ class "elapsed-time" ] [ text (Ext.Time.toHHMMSS elapsedTime) ]
-            , iconButton [ icon "av:pause" ] []
-            , iconButton [ icon "av:stop", Msg.stop |> onClick ] []
-            , iconButton [ icon "check", Msg.stopAndMarkDone |> onClick ] []
+            , paperIconButton [ iconP "av:pause" ] []
+            , paperIconButton [ iconP "av:stop", Msg.stop |> onClick ] []
+            , paperIconButton [ iconP "check", Msg.stopAndMarkDone |> onClick ] []
             ]
         ]
 
@@ -153,7 +152,7 @@ appMainView contextVMs projectVMs m =
                                 , snoozeButton Msg.NoOp
                                 , cancelButton Msg.NoOp
                                 , button [ class "icon-text" ]
-                                    [ ironIcon "cancel" [ class "big" ]
+                                    [ icon "cancel" [ class "big" ]
                                     , "dismiss" |> text
                                     ]
                                 ]
@@ -199,23 +198,23 @@ headerView m =
                 else
                     span []
                         [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
-                        , iconButton
-                            [ icon "done-all"
+                        , paperIconButton
+                            [ doneAllIconP
                             , onClick Msg.SelectionDoneClicked
                             ]
                             []
-                        , iconButton
-                            [ icon "create"
+                        , paperIconButton
+                            [ iconP "create"
                             , onClick Msg.SelectionEditClicked
                             ]
                             []
-                        , iconButton
-                            [ icon "delete"
+                        , paperIconButton
+                            [ iconP "delete"
                             , onClick Msg.SelectionTrashClicked
                             ]
                             []
-                        , iconButton
-                            [ icon "cancel"
+                        , paperIconButton
+                            [ iconP "cancel"
                             , onClick Msg.ClearSelection
                             ]
                             []

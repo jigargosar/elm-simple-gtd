@@ -10,9 +10,25 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 
 
-ironIcon_ =
+ironIcon =
     Html.node "iron-icon"
 
 
-ironIcon icon_ attributes =
-    ironIcon_ (attributes ++ [ stringProperty "icon" icon_ ]) []
+iconP =
+    stringProperty "icon"
+
+
+icon iconName attributes =
+    ironIcon (attributes ++ [ iconP iconName ]) []
+
+
+paperIconButton =
+    Html.node "paper-icon-button"
+
+
+iconButton iconName attributes =
+    paperIconButton (attributes ++ [ iconP iconName ])
+
+
+doneAllIconP =
+    iconP "done-all"

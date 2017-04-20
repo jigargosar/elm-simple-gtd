@@ -126,7 +126,7 @@ update msg =
                     identity
 
                 ReminderOverlayAction action ->
-                    identity
+                    Return.map (Model.updateReminderOverlay action)
 
                 MarkRunningTodoDone ->
                     Return.withMaybe (Model.getMaybeRunningTodo)

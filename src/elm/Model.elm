@@ -195,6 +195,26 @@ showReminderOverlayForTodoId todoId =
         (showReminderOverlay)
 
 
+dismissReminderOverlay model =
+    { model | reminderOverlay = ReminderOverlay.none }
+
+
+updateReminderOverlay action model =
+    model
+        |> case model.reminderOverlay of
+            ReminderOverlay.Initial todoId _ ->
+                case action of
+                    ReminderOverlay.Dismiss ->
+                        Model.TodoStore.updateTodoById [ Todo.TurnReminderOff ] todoId
+                            >> dismissReminderOverlay
+
+                    _ ->
+                        identity
+
+            _ ->
+                identity
+
+
 snoozeTodo todo m =
     m
         |> Model.TodoStore.updateTodo
@@ -208,14 +228,11 @@ isReminderOverlayShown =
 
 
 findAndSnoozeOverDueTodo model =
-    if isReminderOverlayShown model then
-        Nothing
-    else
-        findTodoWithOverDueReminder model
-            ?|> apply2
-                    ( snoozeTodo # model
-                    , identity
-                    )
+    findTodoWithOverDueReminder model
+        ?|> apply2
+                ( snoozeTodo # model
+                , identity
+                )
 
 
 getActiveTodoListGroupedBy fn =

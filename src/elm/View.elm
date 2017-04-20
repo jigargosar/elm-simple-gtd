@@ -151,6 +151,10 @@ appMainView contextVMs projectVMs m =
                                 , doneButton Msg.NoOp
                                 , snoozeButton Msg.NoOp
                                 , cancelButton Msg.NoOp
+                                , button [ class "icon-text" ]
+                                    [ Html.node "iron-icon" [ class "big", icon "cancel" ] []
+                                    , "dismiss" |> text
+                                    ]
                                 ]
                             ]
                         ]

@@ -31,6 +31,12 @@
 
 
 <style is="custom-style">
+    :root{
+        --big-size:{
+            width: 32px;
+            height: 32px;
+        }
+    }
     html, body {
         margin: 0;
         font-family: 'Roboto', 'Noto', sans-serif;
@@ -82,6 +88,17 @@
         --paper-icon-button-hover:{
             color: #fff;
         }
+    }
+
+
+    paper-button.icon-text{
+        @apply(--layout-vertical);
+        @apply(--layout-center);
+    }
+
+
+    iron-icon.big {
+        @apply(--big-size);
     }
 
 

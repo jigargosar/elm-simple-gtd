@@ -18,7 +18,7 @@ self.addEventListener('notificationclick', function (event) {
                 if (clients.openWindow) {
                     return clients
                         .openWindow('http://localhost:8020/')
-                        .then(client => {
+                        .then(function(client) {
                             postMessage(client, event)
                         })
                 }

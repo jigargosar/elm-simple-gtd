@@ -184,19 +184,36 @@ findTodoWithOverDueReminder model =
     model.todoStore |> Store.findBy (Todo.isReminderOverdue model.now)
 
 
+showReminderOverlay todoId model =
+    let
+        _ =
+            Model.TodoStore.findTodoById
+    in
+        model
+
+
 snoozeTodo todo m =
     m
         |> Model.TodoStore.updateTodo
             [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
             todo
+        |> showReminderOverlay (Document.getId todo)
+
+
+isReminderOverlayShown =
+    --    .reminderOverlay >> Maybe.isJust
+    (\_ -> False)
 
 
 findAndSnoozeOverDueTodo model =
-    findTodoWithOverDueReminder model
-        ?|> apply2
-                ( snoozeTodo # model
-                , identity
-                )
+    if isReminderOverlayShown model then
+        Nothing
+    else
+        findTodoWithOverDueReminder model
+            ?|> apply2
+                    ( snoozeTodo # model
+                    , identity
+                    )
 
 
 getActiveTodoListGroupedBy fn =

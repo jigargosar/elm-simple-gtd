@@ -51,14 +51,23 @@ appView m =
 showReminderOverlay m =
     case m.reminderOverlay of
         ReminderOverlay.Initial id headline ->
-            div [ class "fixed-bottom top-shadow static" ]
-                [ div [ class "font-headline" ] [ text headline ]
-                , div [ class "layout horizontal flex-auto-children" ]
-                    [ iconTextButton "notification:do-not-disturb" "dismiss" Msg.NoOp
-                    , iconTextButton "av:snooze" "snooze" Msg.NoOp
-                    , iconTextButton "done" "done!" Msg.NoOp
+            let
+                vm =
+                    { --                    onDismissClicked = Msg.TodoAction Todo.TurnReminderOff id
+                      --                    , onDoneClicked = Msg.TodoAction (Todo.SetDone True) id
+                      onDismissClicked = Msg.ReminderOverlayAction ReminderOverlay.Dismiss
+                    , onDoneClicked = Msg.ReminderOverlayAction ReminderOverlay.Done
+                    , onSnoozeClicked = Msg.ReminderOverlayAction ReminderOverlay.Snooze
+                    }
+            in
+                div [ class "fixed-bottom top-shadow static" ]
+                    [ div [ class "font-headline" ] [ text headline ]
+                    , div [ class "layout horizontal flex-auto-children" ]
+                        [ iconTextButton "notification:do-not-disturb" "dismiss" vm.onDismissClicked
+                        , iconTextButton "av:snooze" "snooze" vm.onSnoozeClicked
+                        , iconTextButton "done" "done!" vm.onDoneClicked
+                        ]
                     ]
-                ]
 
         ReminderOverlay.None ->
             span [] []

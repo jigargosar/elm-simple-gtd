@@ -15,6 +15,12 @@ type Model
     | Initial Todo.Id Todo.Text
 
 
+type Action
+    = Snooze
+    | Dismiss
+    | Done
+
+
 init todo =
     Initial (Document.getId todo) (Todo.getText todo)
 

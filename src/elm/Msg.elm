@@ -7,6 +7,7 @@ import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Model.Types exposing (..)
 import Project
+import ReminderOverlay
 import Return
 import RunningTodo exposing (RunningTodo)
 import Random.Pcg exposing (Seed)
@@ -42,6 +43,8 @@ stopAndMarkDone =
 
 type Msg
     = NoOp
+    | TodoAction Todo.UpdateAction Todo.Id
+    | ReminderOverlayAction ReminderOverlay.Action
     | OnNotificationClicked TodoNotificationEvent
     | ToggleShowDeletedEntity
     | Start Todo.Model

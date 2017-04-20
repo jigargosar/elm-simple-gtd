@@ -122,6 +122,12 @@ update msg =
                 Stop ->
                     stopRunningTodo
 
+                TodoAction action id ->
+                    identity
+
+                ReminderOverlayAction action ->
+                    identity
+
                 MarkRunningTodoDone ->
                     Return.withMaybe (Model.getMaybeRunningTodo)
                         (\todo -> updateTodo [ Todo.SetDone True ] todo >> stopRunningTodo)

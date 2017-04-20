@@ -203,6 +203,10 @@ setReminderOverlayToSnoozeView details model =
     { model | reminderOverlay = ReminderOverlay.snoozeView details }
 
 
+snoozeTodoWithOffset snoozeOffset todoId model =
+    dismissReminderOverlay model
+
+
 
 --updateReminderOverlay action model =
 --    model

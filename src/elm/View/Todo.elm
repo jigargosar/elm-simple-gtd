@@ -33,7 +33,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper exposing (button, checkbox, dropdownMenu, input, item, itemBody, listbox, menu, menuButton)
 import View.Shared exposing (..)
-import WebComponents exposing (iconButton, labelA, noLabelFloatP, secondaryA, selectedA)
+import WebComponents exposing (iconButton, iconP, labelA, noLabelFloatP, paperIconButton, secondaryA, selectedA)
 
 
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
@@ -331,26 +331,44 @@ expanded vc todo =
                         ]
                     , iconButton "done" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                     ]
-                , menuButton [] [ button [ class "dropdown-trigger" ] [ text vm.projectName ] ]
                 , div [ class "horizontal layout " ]
-                    [ dropdownMenu [ labelA "Project", stringProperty "horizontalAlign" "left" ]
-                        [ listbox
-                            [ class "dropdown-content"
-                            , selectedA "0"
-                            ]
-                            [ item [] [ text "sd dkjfsakd sdkj flisjdflasjdlkfj lfj ls jdljlkjdlkf jslkldkfjsldfjdlfjldjslkdf" ]
-                            , item [] [ text "vm.projectName" ]
-                            , item [] [ text "dfsg" ]
+                    [ menuButton []
+                        [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
+                        , menu [ class "dropdown-content" ]
+                            [ item [] [ text "Later Today" ]
+                            , item [] [ text "Tomorrow" ]
+                            , item [ onClickStopPropagation Msg.NoOp ]
+                                [ menuButton []
+                                    [ button [ class "dropdown-trigger" ] [ text "Custom..." ]
+                                    , menu [ class "dropdown-content" ]
+                                        [ item [] [ text "fkjzd kjklfjdsl fjlkd j djflsd jfljdflsjdflsfkjslfsjlkfjsdlfjslkdljf klsdj lsjflksjlksdjfklsdjl1" ]
+                                        , item [] [ text "f1" ]
+                                        , item [] [ text "f1" ]
+                                        , item [] [ text "f1" ]
+                                        , item [] [ text "f1" ]
+                                        ]
+                                    ]
+                                ]
                             ]
                         ]
-                    , dropdownMenu [ labelA "Context", stringProperty "horizontalAlign" "left" ]
-                        [ listbox
-                            [ class "dropdown-content"
-                            , selectedA "0"
+                    , menuButton []
+                        [ button [ class "dropdown-trigger" ] [ text vm.projectName ]
+                        , menu [ class "dropdown-content" ]
+                            [ item [] [ text "fkjzd kjklfjdsl fjlkd j djflsd jfljdflsjdflsfkjslfsjlkfjsdlfjslkdljf klsdj lsjflksjlksdjfklsdjl1" ]
+                            , item [] [ text "f1" ]
+                            , item [] [ text "f1" ]
+                            , item [] [ text "f1" ]
+                            , item [] [ text "f1" ]
                             ]
-                            [ item [] [ text vm.contextName ]
-                            , item [] [ text "vm.projectName" ]
-                            , item [] [ text "dfsg" ]
+                        ]
+                    , menuButton []
+                        [ button [ class "dropdown-trigger" ] [ text vm.contextName ]
+                        , menu [ class "dropdown-content" ]
+                            [ item [] [ text "fkjzd kjklfjdsl fjlkd j djflsd jfljdflsjdflsfkjslfsjlkfjsdlfjslkdljf klsdj lsjflksjlksdjfklsdjl1" ]
+                            , item [] [ text "f1" ]
+                            , item [] [ text "f1" ]
+                            , item [] [ text "f1" ]
+                            , item [] [ text "f1" ]
                             ]
                         ]
                     ]

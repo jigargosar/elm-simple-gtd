@@ -24,12 +24,20 @@ type alias Form =
     }
 
 
+type Mode
+    = Expanded Todo.Id
+
+
 type Field
     = ProjectName
     | ContextName
     | Text
     | Date
     | Time
+
+
+expandMode =
+    Document.getId >> Expanded
 
 
 create : Todo.Model -> Project.Name -> Context.Name -> Form

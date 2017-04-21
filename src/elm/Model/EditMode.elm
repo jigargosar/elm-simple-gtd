@@ -30,6 +30,10 @@ setEditModelToEditTodo todo =
     updateEditMode (createEditTodoMode todo)
 
 
+expandTodo todo =
+    setEditMode (todo |> Todo.Edit.expandMode >> EditMode.TodoEM)
+
+
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
     setEditMode (createEntityEditMode entity model) model

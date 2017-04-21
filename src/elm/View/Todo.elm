@@ -258,7 +258,7 @@ default vc todo =
                 [ div [] [ text vm.text ]
                 , div [ secondaryA, class "horizontal-justified" ]
                     [ div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]
-                    , div [] [ text vm.projectName ]
+                    , div [] [ text vm.projectName]
                     ]
                 , debugInfo vc vm todo
                 ]

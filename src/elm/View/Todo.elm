@@ -250,16 +250,16 @@ default vc todo =
     in
         item
             [ class "todo-item"
-            , attribute "three-line" "true"
             , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ checkBoxView vm
             , itemBody []
-                [ div [ class "font-nowrap" ] [ text vm.text ]
+                [ div [] [ text vm.text ]
                 , div [ attribute "secondary" "true", class "layout horizontal justified" ]
                     [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
                     , div [] [ vm.projectName |> text ]
                     ]
+                , debugInfo vc vm todo
                 ]
             ]
 
@@ -310,16 +310,16 @@ expanded vc todo =
     in
         item
             [ class "todo-item"
-            , attribute "three-line" "true"
             , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ checkBoxView vm
             , itemBody []
-                [ div [ class "font-nowrap" ] [ text vm.text ]
-                , div [ attribute "secondary" "true", class "layout horizontal justified" ]
+                [ div [] [ text vm.text ]
+                , div [ attribute "secondary" "true", class "horizontal-justified" ]
                     [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
                     , div [] [ vm.projectName |> text ]
                     ]
+                , debugInfo vc vm todo
                 ]
             ]
 

@@ -254,8 +254,7 @@ default vc todo =
             , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ checkBoxView vm
-                itemBody
-                []
+            , itemBody []
                 [ div [] [ text vm.text ]
                 , div [ secondaryA, class "horizontal-justified" ]
                     [ div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]

@@ -327,6 +327,7 @@ expanded vc todo =
                                 ]
                             ]
                             [ text vm.time ]
+                        , input [ class "secondary-color", type_ "datetime-local" ] []
                         ]
                     , iconButton "done" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                     ]

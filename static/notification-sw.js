@@ -1,7 +1,7 @@
 "use strict"
 
 //noinspection JSUnresolvedVariable
-const url = WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/"
+var url;
 
 self.addEventListener('notificationclick', function (event) {
     // console.log("notification click", event)

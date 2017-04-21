@@ -42,6 +42,13 @@
         --top-shadow: {
             box-shadow: 0 0 100px rgba(0,0,0,0.5);
         };
+        --full-height:{
+            height: 100vh;
+        };
+        --full-width:{
+            width: 100vh;
+        };
+
     }
 
     html, body {
@@ -100,6 +107,11 @@
     paper-button.icon-text {
         @apply(--layout-vertical);
         @apply(--layout-center);
+    }
+
+    .full-view{
+        @apply(--full-height);
+        @apply(--full-width);
     }
 
     .font-caption{

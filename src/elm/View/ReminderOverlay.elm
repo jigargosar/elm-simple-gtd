@@ -62,8 +62,10 @@ reminderOverlayActiveView activeView todoDetails =
 
 
 activeViewShell todoDetails children =
-    div [ class "fixed-bottom top-shadow static" ]
-        [ div [ class "font-headline" ] [ text todoDetails.text ]
-        , div [ class "layout horizontal flex-auto-children" ]
-            children
+    div [ class "full-view" ]
+        [ div [ class "fixed-bottom top-shadow static" ]
+            [ div [ class "font-headline" ] [ text todoDetails.text ]
+            , div [ class "layout horizontal flex-auto-children" ]
+                children
+            ]
         ]

@@ -65,3 +65,7 @@ none =
 snoozeView : TodoDetails -> Model
 snoozeView =
     Active SnoozeView
+
+
+dummy =
+    Active InitialView (TodoDetails "dummy-todo-id" "dummy todo")

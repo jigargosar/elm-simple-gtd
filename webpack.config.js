@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require("path");
 
+const ServiceWorkerPlugin = require('serviceworker-config-webpack-plugin')
+
 const nodeENV = process.env.NODE_ENV || "development"
 
 const isDevEnv = nodeENV === "development"
@@ -20,8 +22,7 @@ module.exports = {
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
         common: "./src/web/common-require.js",
-        main: "./src/web/main.js",
-        "notification-sw":"./src/web/notification-sw.js",
+        main: "./src/web/main.js"
     },
 
     output: {
@@ -33,6 +34,12 @@ module.exports = {
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(nodeENV),
             'WEB_PACK_DEV_SERVER': process.env.WEB_PACK_DEV_SERVER || false
+        }),
+        new ServiceWorkerPlugin({
+            entry: './src/web/notification-sw.js',
+            inject: {
+                url: process.env.WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/",
+            }
         }),
         // new webpack.ProvidePlugin({
         //     firebase:"firebase"

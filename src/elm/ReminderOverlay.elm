@@ -33,6 +33,7 @@ type Action
     | SnoozeTill SnoozeOffset
     | Dismiss
     | MarkDone
+    | Close
 
 
 type SnoozeOffset

@@ -52,7 +52,10 @@ createKeyedItem vc todo =
                 EditMode.TodoMode mode ->
                     case mode of
                         Todo.Edit.ExpandedMode todoId ->
-                            notEditingView ()
+                            if (Document.hasId todoId todo) then
+                                expanded vc todo
+                            else
+                                notEditingView ()
 
                 _ ->
                     notEditingView ()
@@ -216,6 +219,69 @@ type alias DefaultTodoViewModel =
 
 default : SharedViewModel -> Todo.Model -> Html Msg
 default vc todo =
+    let
+        vm : DefaultTodoViewModel
+        vm =
+            let
+                todoId =
+                    Document.getId todo
+            in
+                { isDone = Todo.getDone todo
+                , isDeleted = Todo.getDeleted todo
+                , time = Todo.getMaybeTime todo ?|> Ext.Time.formatTime ?= "Someday"
+                , text = Todo.getText todo
+                , isSelected = Set.member todoId vc.selection
+                , projectName =
+                    Todo.getProjectId todo
+                        |> (Dict.get # vc.projectIdToNameDict)
+                        ?= "<No Project>"
+                , contextName =
+                    Todo.getContextId todo
+                        |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
+                        ?= "Inbox"
+                , onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
+                , setContextMsg = Msg.SetTodoContext # todo
+                , startEditingMsg = Msg.ExpandTodo todo
+                , onDoneClicked = Msg.ToggleTodoDone todo
+                , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
+                , showDetails = vc.showDetails
+                , isReminderActive = Todo.isReminderActive todo
+                }
+    in
+        item
+            [ class "todo-item"
+            , attribute "three-line" "true"
+            , onClickStopPropagation (vm.startEditingMsg)
+            ]
+            [ checkBoxView vm
+            , itemBody []
+                [ div
+                    [ classList
+                        [ "ellipsis" => True
+                        , "done" => Todo.isDone todo
+                        ]
+                    ]
+                    [ Todo.getText todo |> text ]
+                , div [ class "todo-details", attribute "secondary" "true" ]
+                    [ row
+                        [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
+                        , expand []
+                        , div [] [ vm.projectName |> text ]
+                        ]
+                    ]
+                , div [ attribute "secondary" "true", hidden vm.showDetails ]
+                    [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
+                    , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
+                    ]
+                ]
+            , hoverIcons vm vc
+            , hideOnHover vm.isDone [ doneIconButton vm ]
+            , hideOnHover vm.isDeleted [ deleteIconButton vm ]
+            ]
+
+
+expanded : SharedViewModel -> Todo.Model -> Html Msg
+expanded vc todo =
     let
         vm : DefaultTodoViewModel
         vm =

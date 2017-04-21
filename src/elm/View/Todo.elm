@@ -268,7 +268,8 @@ default vc todo =
                     , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
                     ]
                 ]
-            , hoverIcons vm vc
+
+            --            , hoverIcons vm vc
             , hideOnHover vm.isDone [ doneIconButton vm ]
             , hideOnHover vm.isDeleted [ deleteIconButton vm ]
             ]
@@ -325,7 +326,8 @@ expanded vc todo =
                     , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
                     ]
                 ]
-            , hoverIcons vm vc
+
+            --            , hoverIcons vm vc
             , hideOnHover vm.isDone [ doneIconButton vm ]
             , hideOnHover vm.isDeleted [ deleteIconButton vm ]
             ]

@@ -260,16 +260,21 @@ default vc todo =
                     [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
                     , div [] [ vm.projectName |> text ]
                     ]
-                , div [ attribute "secondary" "true", hidden vm.showDetails ]
-                    [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
-                    , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
-                    ]
+
+                --, debugInfo vc vm todo
                 ]
 
-            --            , hoverIcons vm vc
+            --, hoverIcons vm vc
             , hideOnHover vm.isDone [ doneIconButton vm ]
             , hideOnHover vm.isDeleted [ deleteIconButton vm ]
             ]
+
+
+debugInfo vc vm todo =
+    div [ attribute "secondary" "true", hidden vm.showDetails ]
+        [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
+        , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
+        ]
 
 
 expanded : SharedViewModel -> Todo.Model -> Html Msg
@@ -315,13 +320,11 @@ expanded vc todo =
                     [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
                     , div [] [ vm.projectName |> text ]
                     ]
-                , div [ attribute "secondary" "true", hidden vm.showDetails ]
-                    [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
-                    , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
-                    ]
+
+                --, debugInfo vc vm todo
                 ]
 
-            --            , hoverIcons vm vc
+            --, hoverIcons vm vc
             , hideOnHover vm.isDone [ doneIconButton vm ]
             , hideOnHover vm.isDeleted [ deleteIconButton vm ]
             ]

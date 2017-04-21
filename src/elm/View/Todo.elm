@@ -42,14 +42,19 @@ createKeyedItem vc todo =
             default vc todo
 
         view =
-            case vc.maybeEditTodoModel of
-                Just etm ->
+            case vc.editMode of
+                EditMode.EditTodo etm ->
                     if Document.hasId etm.id todo then
                         edit (createEditTodoViewModel vc todo etm)
                     else
                         notEditingView ()
 
-                Nothing ->
+                EditMode.TodoMode mode ->
+                    case mode of
+                        Todo.Edit.ExpandedMode todoId ->
+                            notEditingView ()
+
+                _ ->
                     notEditingView ()
     in
         ( Document.getId todo, view )
@@ -233,7 +238,7 @@ default vc todo =
                         ?= "Inbox"
                 , onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
                 , setContextMsg = Msg.SetTodoContext # todo
-                , startEditingMsg = Msg.StartEditingTodo todo
+                , startEditingMsg = Msg.ExpandTodo todo
                 , onDoneClicked = Msg.ToggleTodoDone todo
                 , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
                 , showDetails = vc.showDetails

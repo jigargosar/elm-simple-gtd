@@ -25,7 +25,7 @@ type alias Form =
 
 
 type Mode
-    = Expanded Todo.Id
+    = ExpandedMode Todo.Id
 
 
 type Field
@@ -37,7 +37,7 @@ type Field
 
 
 expandMode =
-    Document.getId >> Expanded
+    Document.getId >> ExpandedMode
 
 
 create : Todo.Model -> Project.Name -> Context.Name -> Form

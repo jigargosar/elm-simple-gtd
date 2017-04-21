@@ -419,7 +419,7 @@ reminderOverlayAction action =
                             case action of
                                 ReminderOverlay.Dismiss ->
                                     Model.updateTodoById [ Todo.TurnReminderOff ] todoId
-                                        >> Model.dismissReminderOverlay
+                                        >> Model.removeReminderOverlay
                                         >> Return.singleton
                                         >> Return.command (closeNotification todoId)
 

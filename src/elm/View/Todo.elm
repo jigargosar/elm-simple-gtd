@@ -31,9 +31,9 @@ import Html exposing (Html, col, div, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
-import Polymer.Paper exposing (..)
+import Polymer.Paper exposing (button, checkbox, input, item, itemBody, menu, menuButton)
 import View.Shared exposing (..)
-import WebComponents exposing (secondaryA)
+import WebComponents exposing (iconButton, secondaryA)
 
 
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
@@ -258,7 +258,7 @@ default vc todo =
                 [ div [] [ text vm.text ]
                 , div [ secondaryA, class "horizontal-justified" ]
                     [ div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]
-                    , div [] [ text vm.projectName]
+                    , div [] [ text vm.projectName ]
                     ]
                 , debugInfo vc vm todo
                 ]
@@ -313,20 +313,27 @@ expanded vc todo =
             [ class "todo-item"
             , onClickStopPropagation (vm.startEditingMsg)
             ]
-            [ checkBoxView vm
-            , itemBody []
-                [ div [] [ text vm.text ]
-                , div [ secondaryA, class "horizontal-justified" ]
-                    [ div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]
-                    , div [] [ vm.projectName |> text ]
+            [ div [ class "vertical layout flex-auto" ]
+                [ div [ class "layout horizontal center" ]
+                    [ checkBoxView vm
+                    , div [ class "flex-auto" ]
+                        [ text vm.text
+                        , div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]
+                        ]
+                    , iconButton "done" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                     ]
+                , div [] [ vm.projectName |> text ]
                 , debugInfo vc vm todo
                 ]
             ]
 
 
 checkBoxView vm =
-    checkbox [ checked vm.isSelected, onClickStopPropagation vm.onCheckBoxClicked ] []
+    checkbox
+        [ checked vm.isSelected
+        , onClickStopPropagation vm.onCheckBoxClicked
+        ]
+        []
 
 
 todoInputId todoId =
@@ -345,7 +352,7 @@ hoverIcons vm vc =
 
 doneIconButton : DefaultTodoViewModel -> Html Msg
 doneIconButton vm =
-    iconButton
+    Polymer.Paper.iconButton
         [ class ("done-" ++ toString (vm.isDone))
         , onClickStopPropagation (vm.onDoneClicked)
         , icon "check"

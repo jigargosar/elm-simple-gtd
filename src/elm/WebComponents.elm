@@ -46,3 +46,7 @@ iconTextButton iconName text_ clickHandler =
 
 secondaryA =
     attribute "secondary" "true"
+
+
+labelA =
+    attribute "label"

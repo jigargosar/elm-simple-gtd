@@ -260,14 +260,14 @@ default vc todo =
                     [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
                     , div [] [ vm.projectName |> text ]
                     ]
-
-                --, debugInfo vc vm todo
                 ]
-
-            --, hoverIcons vm vc
-            , hideOnHover vm.isDone [ doneIconButton vm ]
-            , hideOnHover vm.isDeleted [ deleteIconButton vm ]
             ]
+
+
+
+--, hoverIcons vm vc
+--            , hideOnHover vm.isDone [ doneIconButton vm ]
+--            , hideOnHover vm.isDeleted [ deleteIconButton vm ]
 
 
 debugInfo vc vm todo =
@@ -320,13 +320,7 @@ expanded vc todo =
                     [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
                     , div [] [ vm.projectName |> text ]
                     ]
-
-                --, debugInfo vc vm todo
                 ]
-
-            --, hoverIcons vm vc
-            , hideOnHover vm.isDone [ doneIconButton vm ]
-            , hideOnHover vm.isDeleted [ deleteIconButton vm ]
             ]
 
 

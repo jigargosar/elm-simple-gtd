@@ -255,14 +255,8 @@ default vc todo =
             ]
             [ checkBoxView vm
             , itemBody []
-                [ div
-                    [ classList
-                        [ "ellipsis" => True
-                        , "done" => Todo.isDone todo
-                        ]
-                    ]
-                    [ Todo.getText todo |> text ]
-                , div [ class "todo-details", attribute "secondary" "true" ]
+                [ div [ class "font-nowrap" ] [ text vm.text ]
+                , div [ attribute "secondary" "true" ]
                     [ row
                         [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
                         , expand []
@@ -318,14 +312,8 @@ expanded vc todo =
             ]
             [ checkBoxView vm
             , itemBody []
-                [ div
-                    [ classList
-                        [ "ellipsis" => True
-                        , "done" => Todo.isDone todo
-                        ]
-                    ]
-                    [ Todo.getText todo |> text ]
-                , div [ class "todo-details", attribute "secondary" "true" ]
+                [ div [ class "font-nowrap" ] [ text vm.text ]
+                , div [ attribute "secondary" "true" ]
                     [ row
                         [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
                         , expand []

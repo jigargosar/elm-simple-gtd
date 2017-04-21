@@ -33,6 +33,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper exposing (..)
 import View.Shared exposing (..)
+import WebComponents exposing (secondaryA)
 
 
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
@@ -253,10 +254,11 @@ default vc todo =
             , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ checkBoxView vm
-            , itemBody []
+                itemBody
+                []
                 [ div [] [ text vm.text ]
-                , div [ attribute "secondary" "true", class "layout horizontal justified" ]
-                    [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
+                , div [ secondaryA, class "horizontal-justified" ]
+                    [ div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]
                     , div [] [ vm.projectName |> text ]
                     ]
                 , debugInfo vc vm todo
@@ -315,8 +317,8 @@ expanded vc todo =
             [ checkBoxView vm
             , itemBody []
                 [ div [] [ text vm.text ]
-                , div [ attribute "secondary" "true", class "horizontal-justified" ]
-                    [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
+                , div [ secondaryA, class "horizontal-justified" ]
+                    [ div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]
                     , div [] [ vm.projectName |> text ]
                     ]
                 , debugInfo vc vm todo

@@ -42,3 +42,7 @@ iconTextButton iconName text_ clickHandler =
         [ icon iconName [ class "big" ]
         , text text_
         ]
+
+
+secondaryA =
+    attribute "secondary" "true"

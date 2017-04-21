@@ -256,12 +256,9 @@ default vc todo =
             [ checkBoxView vm
             , itemBody []
                 [ div [ class "font-nowrap" ] [ text vm.text ]
-                , div [ attribute "secondary" "true" ]
-                    [ row
-                        [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
-                        , expand []
-                        , div [] [ vm.projectName |> text ]
-                        ]
+                , div [ attribute "secondary" "true", class "layout horizontal justified" ]
+                    [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
+                    , div [] [ vm.projectName |> text ]
                     ]
                 , div [ attribute "secondary" "true", hidden vm.showDetails ]
                     [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
@@ -314,12 +311,9 @@ expanded vc todo =
             [ checkBoxView vm
             , itemBody []
                 [ div [ class "font-nowrap" ] [ text vm.text ]
-                , div [ attribute "secondary" "true" ]
-                    [ row
-                        [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
-                        , expand []
-                        , div [] [ vm.projectName |> text ]
-                        ]
+                , div [ attribute "secondary" "true", class "layout horizontal justified" ]
+                    [ div [ classList [ "red" => vm.isReminderActive ] ] [ vm.time |> text ]
+                    , div [] [ vm.projectName |> text ]
                     ]
                 , div [ attribute "secondary" "true", hidden vm.showDetails ]
                     [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")

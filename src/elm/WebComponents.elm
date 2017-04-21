@@ -54,3 +54,7 @@ labelA =
 
 selectedA =
     attribute "selected"
+
+
+noLabelFloatP =
+    boolProperty "noLabelFloatP" True

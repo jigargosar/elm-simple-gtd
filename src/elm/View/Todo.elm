@@ -33,7 +33,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper exposing (button, checkbox, dropdownMenu, input, item, itemBody, listbox, menu, menuButton)
 import View.Shared exposing (..)
-import WebComponents exposing (iconButton, labelA, secondaryA, selectedA)
+import WebComponents exposing (iconButton, labelA, noLabelFloatP, secondaryA, selectedA)
 
 
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
@@ -327,7 +327,10 @@ expanded vc todo =
                                 ]
                             ]
                             [ text vm.time ]
-                        , input [ class "secondary-color", type_ "datetime-local" ] []
+                        , Html.node "paperInputContainer"
+                            [ class "secondary-color", type_ "datetime-local" ]
+                            [ Html.input [ attribute "is" "iron-input", type_ "datetime-local" ] []
+                            ]
                         ]
                     , iconButton "done" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                     ]

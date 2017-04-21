@@ -331,6 +331,7 @@ expanded vc todo =
                         ]
                     , iconButton "done" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                     ]
+                , menuButton [] [ button [ class "dropdown-trigger" ] [ text vm.projectName ] ]
                 , div [ class "horizontal layout " ]
                     [ dropdownMenu [ labelA "Project", stringProperty "horizontalAlign" "left" ]
                         [ listbox

@@ -1,1 +1,39 @@
-webpackJsonp([1],{664:function(t,n,i){"use strict";function o(t,n){t.postMessage({type:"notification-clicked",action:n.action,data:n.notification.data})}self.addEventListener("notificationclick",function(t){t.waitUntil(clients.matchAll({type:"window"}).then(function(n){for(var i=0;i<n.length;i++){var c=n[i];if(o(c,t),c.focus)return c.focus()}if(clients.openWindow)return clients.openWindow("https://simplegtd.com/").then(function(n){o(n,t)})}))},!1)}},[664]);
+"use strict"
+
+//noinspection JSUnresolvedVariable
+var url;
+
+self.addEventListener('notificationclick', function (event) {
+    // console.log("notification click", event)
+    // event.notification.close();
+
+    event.waitUntil(
+        clients
+            .matchAll({type: "window"})
+            .then(function (clientList) {
+                for (let i = 0; i < clientList.length; i++) {
+                    const client = clientList[i]
+                    postMessage(client, event)
+                    if (client.focus) {
+                        return client.focus();
+                    }
+                }
+                if (clients.openWindow) {
+                    return clients
+                        .openWindow(url)
+                        .then(function(client) {
+                            postMessage(client, event)
+                        })
+                }
+            })
+    );
+
+}, false);
+
+function postMessage(client, event) {
+    client.postMessage({
+        type: "notification-clicked",
+        action: event.action,
+        data: event.notification.data
+    })
+}

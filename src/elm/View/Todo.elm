@@ -327,10 +327,7 @@ expanded vc todo =
                                 ]
                             ]
                             [ text vm.time ]
-                        , Html.node "paperInputContainer"
-                            [ class "secondary-color", type_ "datetime-local" ]
-                            [ Html.input [ attribute "is" "iron-input", type_ "datetime-local" ] []
-                            ]
+                        , input [ type_ "datetime-local", labelA "Reminder" ] []
                         ]
                     , iconButton "done" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                     ]

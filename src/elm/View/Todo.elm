@@ -31,7 +31,7 @@ import Html exposing (Html, col, div, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
-import Polymer.Paper exposing (button, checkbox, input, item, itemBody, menu, menuButton)
+import Polymer.Paper exposing (button, checkbox, dropdownMenu, input, item, itemBody, listbox, menu, menuButton)
 import View.Shared exposing (..)
 import WebComponents exposing (iconButton, secondaryA)
 
@@ -256,11 +256,12 @@ default vc todo =
             [ checkBoxView vm
             , itemBody []
                 [ div [] [ text vm.text ]
-                , div [ secondaryA, class "horizontal-justified" ]
-                    [ div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]
-                    , div [] [ text vm.projectName ]
-                    ]
-                , debugInfo vc vm todo
+
+                --                , div [ secondaryA, class "horizontal-justified" ]
+                --                    [ div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]
+                --                    , div [] [ text vm.projectName ]
+                --                    ]
+                --                , debugInfo vc vm todo
                 ]
             ]
 
@@ -317,12 +318,30 @@ expanded vc todo =
                 [ div [ class "layout horizontal center" ]
                     [ checkBoxView vm
                     , div [ class "flex-auto" ]
-                        [ text vm.text
-                        , div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]
+                        [ div [] [ text vm.text ]
+                        , div
+                            [ classList
+                                [ "red" => vm.isReminderActive
+                                , "font-body1" => True
+                                ]
+                            ]
+                            [ text vm.time ]
                         ]
                     , iconButton "done" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                     ]
-                , div [] [ vm.projectName |> text ]
+                , div []
+                    [ dropdownMenu []
+                        [ listbox [ class "dropdown-content" ]
+                            [ item [] [ text vm.projectName ]
+                            , item [] [ text vm.projectName ]
+                            , item [] [ text vm.projectName ]
+                            , item [] [ text vm.projectName ]
+                            , item [] [ text vm.projectName ]
+                            ]
+                        ]
+                    , button [] [ vm.contextName |> text ]
+                    , button [] [ "Alarm" |> text ]
+                    ]
                 , debugInfo vc vm todo
                 ]
             ]

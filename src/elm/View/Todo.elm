@@ -33,7 +33,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper exposing (button, checkbox, dropdownMenu, input, item, itemBody, listbox, menu, menuButton)
 import View.Shared exposing (..)
-import WebComponents exposing (iconButton, secondaryA)
+import WebComponents exposing (iconButton, labelA, secondaryA, selectedA)
 
 
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
@@ -329,18 +329,27 @@ expanded vc todo =
                         ]
                     , iconButton "done" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                     ]
-                , div []
-                    [ dropdownMenu []
-                        [ listbox [ class "dropdown-content" ]
-                            [ item [] [ text vm.projectName ]
-                            , item [] [ text vm.projectName ]
-                            , item [] [ text vm.projectName ]
-                            , item [] [ text vm.projectName ]
-                            , item [] [ text vm.projectName ]
+                , div [ class "horizontal layout " ]
+                    [ dropdownMenu [ labelA "Project", stringProperty "horizontalAlign" "left" ]
+                        [ listbox
+                            [ class "dropdown-content"
+                            , selectedA "0"
+                            ]
+                            [ item [] [ text "sd dkjfsakd sdkj flisjdflasjdlkfj lfj ls jdljlkjdlkf jslkldkfjsldfjdlfjldjslkdf" ]
+                            , item [] [ text "vm.projectName" ]
+                            , item [] [ text "dfsg" ]
                             ]
                         ]
-                    , button [] [ vm.contextName |> text ]
-                    , button [] [ "Alarm" |> text ]
+                    , dropdownMenu [ labelA "Context", stringProperty "horizontalAlign" "left" ]
+                        [ listbox
+                            [ class "dropdown-content"
+                            , selectedA "0"
+                            ]
+                            [ item [] [ text vm.contextName ]
+                            , item [] [ text "vm.projectName" ]
+                            , item [] [ text "dfsg" ]
+                            ]
+                        ]
                     ]
                 , debugInfo vc vm todo
                 ]

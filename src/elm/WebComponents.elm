@@ -50,3 +50,7 @@ secondaryA =
 
 labelA =
     attribute "label"
+
+
+selectedA =
+    attribute "selected"

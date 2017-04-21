@@ -321,7 +321,8 @@ expanded vc todo =
                         [ div [] [ text vm.text ]
                         , div
                             [ classList
-                                [ "red" => vm.isReminderActive
+                                [ "secondary-color" => not vm.isReminderActive
+                                , "accent-color" => vm.isReminderActive
                                 , "font-body1" => True
                                 ]
                             ]

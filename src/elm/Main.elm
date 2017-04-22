@@ -446,3 +446,11 @@ reminderOverlayAction action =
                     _ ->
                         Return.singleton
         )
+
+
+(.=) =
+    identity
+
+
+foo =
+    (\_ -> "f") .= "a"

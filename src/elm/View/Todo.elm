@@ -27,11 +27,11 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Html exposing (Html, col, div, span, text)
+import Html exposing (Html, col, div, h3, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
-import Polymer.Paper exposing (button, checkbox, dropdownMenu, input, item, itemBody, listbox, menu, menuButton)
+import Polymer.Paper exposing (button, checkbox, dropdownMenu, input, item, itemBody, listbox, material, menu, menuButton)
 import View.Shared exposing (..)
 import WebComponents exposing (iconButton, iconP, labelA, noLabelFloatP, paperIconButton, secondaryA, selectedA)
 
@@ -333,8 +333,29 @@ expanded vc todo =
                 , div [ class "horizontal layout " ]
                     [ menuButton []
                         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
-                        , menu [ class "dropdown-content" ]
-                            [ input [ type_ "datetime-local", labelA "Reminder" ] [ text vm.time ]
+                        , div
+                            [ class "dropdown-content"
+                            , attribute "role" "dialog"
+                            , attribute "aria-labelledby" "dialog1Title"
+                            , tabindex 0
+                            ]
+                            [ h3 [ id "dialog1Title" ] [ text "reminder" ]
+                            , input
+                                [ type_ "datetime-local"
+                                , labelA "Reminder"
+                                , boolProperty "stopKeyboardEventPropagation" True
+                                , tabindex 0
+                                , autofocus True
+                                ]
+                                [ text vm.time ]
+                            , input
+                                [ type_ "datetime-local"
+                                , labelA "Reminder"
+                                , boolProperty "stopKeyboardEventPropagation" True
+                                , tabindex 0
+                                ]
+                                [ text vm.time ]
+                            , button [] [ text "Close" ]
                             ]
                         ]
                     , menuButton []

@@ -330,27 +330,27 @@ expanded vc todo =
                         ]
                     , iconButton "done" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                     ]
-                , div [ class "horizontal layout " ]
+                , div [ class "horizontal layout" ]
                     [ menuButton []
                         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
-                        , div
-                            [ class "dropdown-content"
-                            ]
-                            [ div [ class "font-caption" ] [ text "reminder" ]
+                        , div [ class "static dropdown-content" ]
+                            [ div [ class "font-subhead" ] [ text "Select date and time" ]
                             , input
-                                [ type_ "datetime-local"
+                                [ type_ "date"
                                 , labelA "Date"
                                 , boolProperty "stopKeyboardEventPropagation" True
                                 , autofocus True
                                 ]
                                 [ text vm.time ]
                             , input
-                                [ type_ "datetime-local"
+                                [ type_ "time"
                                 , labelA "Time"
                                 , boolProperty "stopKeyboardEventPropagation" True
                                 ]
                                 [ text vm.time ]
-                            , button [] [ text "Save" ]
+                            , div [ class "horizontal layout end-justified" ]
+                                [ button [ attribute "raised" "true" ] [ text "Save" ]
+                                ]
                             ]
                         ]
                     , menuButton []

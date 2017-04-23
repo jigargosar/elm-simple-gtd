@@ -43,15 +43,15 @@ expandMode todo projectName contextName now =
 create : Todo.Model -> Project.Name -> Context.Name -> Time -> Form
 create todo projectName contextName now =
     let
-        dueAt =
-            Todo.getDueAt todo
+        timeInMilli =
+            Todo.getDueAt todo ?= now + Time.hour
     in
         { id = Document.getId todo
         , todoText = Todo.getText todo
         , projectName = projectName
         , contextName = contextName
-        , date = dueAt ?|> (Time.Format.format "%Y-%m-%d") ?= ""
-        , time = dueAt ?|> (Time.Format.format "%H:%M") ?= "00:00"
+        , date = (Time.Format.format "%Y-%m-%d") timeInMilli
+        , time = (Time.Format.format "%H:%M") timeInMilli
         }
 
 

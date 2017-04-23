@@ -253,8 +253,8 @@ default vc todo =
             [ class "todo-item"
             , onClickStopPropagation (vm.startEditingMsg)
             ]
-            [ checkBoxView vm
-            , itemBody []
+            [ --            checkBoxView vm
+              itemBody []
                 [ div [] [ text vm.text ]
 
                 --                , div [ secondaryA, class "horizontal-justified" ]
@@ -316,8 +316,8 @@ expanded vc todo =
             ]
             [ div [ class "vertical layout flex-auto" ]
                 [ div [ class "layout horizontal center" ]
-                    [ checkBoxView vm
-                    , div [ class "flex-auto" ]
+                    [ --checkBoxView vm
+                      div [ class "flex-auto" ]
                         [ div [] [ text vm.text ]
                         , div
                             [ classList

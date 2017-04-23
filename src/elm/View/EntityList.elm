@@ -46,7 +46,13 @@ filtered : Model -> Html Msg
 filtered =
     apply2 ( View.Shared.createSharedViewModel >> View.Todo.createKeyedItem, Model.TodoStore.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
-                Keyed.node "paper-material" [ class "todo-list" ] (todoList .|> todoView)
+                Keyed.node "paper-listbox"
+                    [ class "todo-list"
+                    , stringProperty "selected" "0"
+                    , stringProperty "selectable" "paper-item"
+                    , stringProperty "selectedAttribute" "selected"
+                    ]
+                    (todoList .|> todoView)
            )
 
 
@@ -60,9 +66,15 @@ groupByEntity entityVMs model =
             ( vm.id
             , div [ class "todo-list-container" ]
                 [ entityListItemView vc vm
-                , Keyed.node "paper-material"
-                    [ class "todo-list" ]
-                    (vm.todoList .|> View.Todo.createKeyedItem vc)
+                , Paper.material []
+                    [ Keyed.node "paper-listbox"
+                        [ class "todo-list"
+                        , stringProperty "selected" "0"
+                        , stringProperty "selectable" "paper-item"
+                        , stringProperty "selectedAttribute" "selected"
+                        ]
+                        (vm.todoList .|> View.Todo.createKeyedItem vc)
+                    ]
                 ]
             )
     in

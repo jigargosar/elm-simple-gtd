@@ -211,10 +211,15 @@
 
     paper-listbox.todo-list{
         padding: 0;
+
+
+
     }
 
 
     paper-item.todo-item{
+        --paper-item-selected-weight:normal;
+
         --paper-item:{
             border-left:1px solid transparent;
         };
@@ -227,7 +232,8 @@
         };
         --paper-item-selected:{
             border-left:2px solid var(--primary-color);
-        }
+        };
+
     }
 
     paper-item:not(.todo-item) {

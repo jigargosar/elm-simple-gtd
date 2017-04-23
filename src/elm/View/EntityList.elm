@@ -69,7 +69,6 @@ groupByEntity entityVMs model =
                 , Paper.material []
                     [ Keyed.node "paper-listbox"
                         [ class "todo-list"
-                        , stringProperty "selected" "0"
                         , stringProperty "selectable" "paper-item"
                         , stringProperty "selectedAttribute" "selected"
                         ]

@@ -210,13 +210,19 @@
 
 
     paper-item.todo-item{
-        --paper-item-focused: {
-            opacity: 1;
-            background-color: white;
+        --paper-item:{
+            border-left:1px solid transparent;
         };
+        
         --paper-item-focused-before: {
             opacity: 0;
         };
+        --paper-item-focused:{
+            border-left:2px solid var(--primary-color);
+        };
+        --paper-item-selected:{
+            border-left:2px solid var(--primary-color);
+        }
     }
 
     paper-item:not(.todo-item) {

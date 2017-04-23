@@ -43,7 +43,7 @@ createExpandedTodoMode todo model =
         contextName =
             Model.getContextNameOfTodo todo model ?= ""
     in
-        Todo.Edit.create todo projectName contextName |> Todo.Edit.ExpandedMode
+        Todo.Edit.create todo projectName contextName model.now |> Todo.Edit.ExpandedMode
 
 
 startEditingEntity : Entity -> ModelF
@@ -142,7 +142,7 @@ createEditTodoMode todo model =
         contextName =
             Model.getContextNameOfTodo todo model ?= ""
     in
-        Todo.Edit.create todo projectName contextName |> EditMode.EditTodo
+        Todo.Edit.create todo projectName contextName model.now |> EditMode.EditTodo
 
 
 getMaybeEditTodoModel =

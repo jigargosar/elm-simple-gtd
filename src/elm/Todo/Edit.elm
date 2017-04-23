@@ -36,12 +36,12 @@ type Field
     | Time
 
 
-expandMode =
-    create >>>> ExpandedMode
+expandMode todo projectName contextName now =
+    create todo projectName contextName now |> ExpandedMode
 
 
-create : Todo.Model -> Project.Name -> Context.Name -> Form
-create todo projectName contextName =
+create : Todo.Model -> Project.Name -> Context.Name -> Time -> Form
+create todo projectName contextName now =
     let
         dueAt =
             Todo.getDueAt todo

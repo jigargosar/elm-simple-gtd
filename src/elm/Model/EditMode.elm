@@ -110,7 +110,15 @@ saveEditModeEntity model =
             model
                 |> Model.insertProjectIfNotExist etm.projectName
                 >> Model.insertContextIfNotExist etm.contextName
-                >> Model.updateTodoFromEditTodoModel etm
+                >> Model.updateTodoFromEditTodoForm etm
+
+        EditMode.TodoMode mode ->
+            case mode of
+                Todo.Edit.ExpandedMode form ->
+                    model
+                        |> Model.insertProjectIfNotExist form.projectName
+                        >> Model.insertContextIfNotExist form.contextName
+                        >> Model.updateTodoFromEditTodoForm form
 
         _ ->
             model

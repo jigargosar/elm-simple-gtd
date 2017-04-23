@@ -233,8 +233,8 @@ getActiveTodoListGroupedBy fn =
     getActiveTodoList >> Dict.Extra.groupBy (fn)
 
 
-updateTodoFromEditTodoModel : TodoForm -> ModelF
-updateTodoFromEditTodoModel { contextName, projectName, todoText, id, date, time } =
+updateTodoFromEditTodoForm : TodoForm -> ModelF
+updateTodoFromEditTodoForm { contextName, projectName, todoText, id, date, time } =
     let
         dateTimeString =
             date ++ " " ++ time

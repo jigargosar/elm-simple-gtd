@@ -50,21 +50,9 @@ create todo projectName contextName now =
         , todoText = Todo.getText todo
         , projectName = projectName
         , contextName = contextName
-        , date = getDate todo
-        , time = getTime todo
+        , date = Todo.getDueAt todo ?|> (Time.Format.format "%Y-%m-%d") ?= ""
+        , time = Todo.getDueAt todo ?|> (Time.Format.format "%H:%M") ?= "00:00"
         }
-
-
-getDate todo =
-    Todo.getDueAt todo ?|> (Time.Format.format "%Y-%m-%d") ?= ""
-
-
-getTime todo =
-    Todo.getDueAt todo ?|> (Time.Format.format "%H:%M") ?= "00:00"
-
-
-getDateTime todo =
-    { date = getDate todo, time = getTime todo }
 
 
 set : Field -> String -> Form -> Form

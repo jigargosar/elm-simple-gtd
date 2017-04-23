@@ -327,7 +327,7 @@ expanded vc todo =
                                 ]
                             ]
                             [ text vm.time ]
-                        , input [ type_ "datetime-local", labelA "Reminder" ] []
+--                        , input [ type_ "datetime-local", labelA "Reminder" ] []
                         ]
                     , iconButton "done" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                     ]

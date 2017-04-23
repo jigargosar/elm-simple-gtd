@@ -25,7 +25,7 @@ type alias Form =
 
 
 type Mode
-    = ExpandedMode Todo.Id
+    = ExpandedMode Form
 
 
 type Field
@@ -37,7 +37,7 @@ type Field
 
 
 expandMode =
-    Document.getId >> ExpandedMode
+    create >>>> ExpandedMode
 
 
 create : Todo.Model -> Project.Name -> Context.Name -> Form
@@ -50,9 +50,21 @@ create todo projectName contextName =
         , todoText = Todo.getText todo
         , projectName = projectName
         , contextName = contextName
-        , date = dueAt ?|> (Time.Format.format "%Y-%m-%d") ?= ""
-        , time = dueAt ?|> (Time.Format.format "%H:%M") ?= "00:00"
+        , date = getDate todo
+        , time = getTime todo
         }
+
+
+getDate todo =
+    Todo.getDueAt todo ?|> (Time.Format.format "%Y-%m-%d") ?= ""
+
+
+getTime todo =
+    Todo.getDueAt todo ?|> (Time.Format.format "%H:%M") ?= "00:00"
+
+
+getDateTime todo =
+    { date = getDate todo, time = getTime todo }
 
 
 set : Field -> String -> Form -> Form

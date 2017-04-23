@@ -52,9 +52,9 @@ createKeyedItem vc todo =
 
                 EditMode.TodoMode mode ->
                     case mode of
-                        Todo.Edit.ExpandedMode todoId ->
-                            if (Document.hasId todoId todo) then
-                                expanded vc todo
+                        Todo.Edit.ExpandedMode form ->
+                            if (Document.hasId form.id todo) then
+                                expanded vc form todo
                             else
                                 notEditingView ()
 
@@ -279,8 +279,8 @@ debugInfo vc vm todo =
         ]
 
 
-expanded : SharedViewModel -> Todo.Model -> Html Msg
-expanded vc todo =
+expanded : SharedViewModel -> Todo.Edit.Form -> Todo.Model -> Html Msg
+expanded vc form todo =
     let
         vm : DefaultTodoViewModel
         vm =
@@ -340,14 +340,16 @@ expanded vc todo =
                                 , labelA "Date"
                                 , boolProperty "stopKeyboardEventPropagation" True
                                 , autofocus True
+                                , value form.date
                                 ]
-                                [ text vm.time ]
+                                []
                             , input
                                 [ type_ "time"
                                 , labelA "Time"
                                 , boolProperty "stopKeyboardEventPropagation" True
+                                , value form.time
                                 ]
-                                [ text vm.time ]
+                                []
                             , div [ class "horizontal layout end-justified" ]
                                 [ button [ attribute "raised" "true" ] [ text "Save" ]
                                 ]

@@ -30,8 +30,20 @@ setEditModelToEditTodo todo =
     updateEditMode (createEditTodoMode todo)
 
 
-expandTodo todo =
-    setEditMode (todo |> Todo.Edit.expandMode >> EditMode.TodoMode)
+expandTodo todo model =
+    setEditMode (createExpandedTodoMode todo model |> EditMode.TodoMode) model
+
+
+createExpandedTodoMode : Todo.Model -> Model -> Todo.Edit.Mode
+createExpandedTodoMode todo model =
+    let
+        projectName =
+            Model.getMaybeProjectNameOfTodo todo model ?= ""
+
+        contextName =
+            Model.getContextNameOfTodo todo model ?= ""
+    in
+        Todo.Edit.create todo projectName contextName |> Todo.Edit.ExpandedMode
 
 
 startEditingEntity : Entity -> ModelF

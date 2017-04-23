@@ -208,7 +208,18 @@
     /*--paper-badge-background: var(--paper-blue-grey-300)*/
     /*}*/
 
-    paper-item {
+
+    paper-item.todo-item{
+        --paper-item-focused: {
+            opacity: 1;
+            background-color: white;
+        };
+        --paper-item-focused-before: {
+            opacity: 0;
+        };
+    }
+
+    paper-item:not(.todo-item) {
         /*margin:0;*/
         /*padding: 0 1rem;*/
         --paper-item-focused: {

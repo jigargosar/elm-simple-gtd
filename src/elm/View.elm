@@ -44,7 +44,6 @@ appView m =
         [ appDrawerLayoutView m
         , addTodoFabView m
         , bottomSheet
-        , testDialog
         , showReminderOverlay m
         ]
 

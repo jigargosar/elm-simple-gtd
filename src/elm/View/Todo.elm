@@ -27,7 +27,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Html exposing (Html, col, div, h3, span, text)
+import Html exposing (Html, col, div, h1, h3, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
@@ -192,7 +192,6 @@ editView vm evm =
                         , menu [ class "dropdown-content" ]
                             (projectNames .|> createDropDownItem)
                         ]
-                    , testDialog
                     , menuButton []
                         [ button [ class "dropdown-trigger" ]
                             [ text "@"

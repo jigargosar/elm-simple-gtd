@@ -47,7 +47,6 @@ createKeyedItem vc todo =
                 EditMode.EditTodo form ->
                     if Document.hasId form.id todo then
                         expanded vc form todo
-                        --                        edit (createEditTodoViewModel vc todo etm)
                     else
                         notEditingView ()
 

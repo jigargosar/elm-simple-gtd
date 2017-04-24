@@ -44,19 +44,12 @@ createKeyedItem vc todo =
 
         view =
             case vc.editMode of
-                EditMode.EditTodo etm ->
-                    if Document.hasId etm.id todo then
-                        edit (createEditTodoViewModel vc todo etm)
+                EditMode.EditTodo form ->
+                    if Document.hasId form.id todo then
+                        expanded vc form todo
+                        --                        edit (createEditTodoViewModel vc todo etm)
                     else
                         notEditingView ()
-
-                EditMode.TodoMode mode ->
-                    case mode of
-                        Todo.Edit.ExpandedMode form ->
-                            if (Document.hasId form.id todo) then
-                                expanded vc form todo
-                            else
-                                notEditingView ()
 
                 _ ->
                     notEditingView ()

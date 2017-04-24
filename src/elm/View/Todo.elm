@@ -237,15 +237,10 @@ expanded vc form todo =
     in
         item
             [ class "todo-item"
-
-            --            , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ div [ class "vertical layout flex-auto" ]
                 [ div [ class "flex" ]
-                    [ --                        div [] [ text evm.todo.text ]
-                      --                          Html.node "paper-input"
-                      Html.node "paper-textarea"
-                        -- todo: add after trimming newline on enter.
+                    [ Html.node "paper-textarea"
                         [ id evm.todo.inputId
                         , class "auto-focus"
                         , stringProperty "label" "Todo"

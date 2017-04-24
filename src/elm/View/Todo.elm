@@ -323,32 +323,33 @@ expanded vc form todo =
             --            , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ div [ class "vertical layout flex-auto" ]
-                [ div [ class "layout horizontal center" ]
-                    [ --checkBoxView vm
-                      div [ class "flex-auto" ]
-                        [ --                        div [] [ text evm.todo.text ]
-                          --                          Html.node "paper-input"
-                          Html.node "paper-textarea"
-                            -- todo: add after trimming newline on enter.
-                            [ id evm.todo.inputId
-                            , class "auto-focus"
-                            , stringProperty "label" "Todo"
-                            , value (evm.todo.text)
-                            , boolProperty "stopKeyboardEventPropagation" True
-                            , onInput evm.onTodoTextChanged
-                            , autofocus True
-                            ]
-                            []
-                        , div
-                            [ classList
-                                [ "secondary-color" => not vm.isReminderActive
-                                , "accent-color" => vm.isReminderActive
-                                , "font-body1" => True
-                                ]
-                            ]
-                            [ text vm.time ]
+                [ div [ class "flex" ]
+                    [ --                        div [] [ text evm.todo.text ]
+                      --                          Html.node "paper-input"
+                      Html.node "paper-textarea"
+                        -- todo: add after trimming newline on enter.
+                        [ id evm.todo.inputId
+                        , class "auto-focus"
+                        , stringProperty "label" "Todo"
+                        , value (evm.todo.text)
+                        , boolProperty "stopKeyboardEventPropagation" True
+                        , onInput evm.onTodoTextChanged
+                        , autofocus True
                         ]
-                    , div [ class "horizontal layout wrap" ]
+                        []
+                    , div
+                        [ classList
+                            [ "secondary-color" => not vm.isReminderActive
+                            , "accent-color" => vm.isReminderActive
+                            , "font-body1" => True
+                            ]
+                        ]
+                        [ text vm.time ]
+                    ]
+                , div
+                    [ class "layout horizontal center" ]
+                    [ --checkBoxView vm
+                      div [ class "horizontal layout wrap" ]
                         [ iconButton "create" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
                         , iconButton "done" [ class "flex-none", onClickStopPropagation vm.onDoneClicked ]
                         , iconButton "delete" [ class "flex-none", onClickStopPropagation vm.onDeleteClicked ]

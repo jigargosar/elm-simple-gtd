@@ -181,15 +181,8 @@ default vc todo =
             [ class "todo-item"
             , onClickStopPropagation (vm.startEditingMsg)
             ]
-            [ --            checkBoxView vm
-              itemBody []
+            [ itemBody []
                 [ div [] [ text vm.text ]
-
-                --                , div [ secondaryA, class "horizontal-justified" ]
-                --                    [ div [ classList [ "red" => vm.isReminderActive ] ] [ text vm.time ]
-                --                    , div [] [ text vm.projectName ]
-                --                    ]
-                --                , debugInfo vc vm todo
                 , div [ class "layout horizontal", attribute "secondary" "true" ]
                     [ div
                         [ classList
@@ -205,13 +198,6 @@ default vc todo =
                 ]
             , hoverIcons vm vc
             ]
-
-
-debugInfo vc vm todo =
-    div [ attribute "secondary" "true", hidden vm.showDetails ]
-        [ text ("created " ++ (Todo.createdAtInWords vc.now todo) ++ " ago. ")
-        , text ("modified " ++ (Todo.modifiedAtInWords vc.now todo) ++ " ago")
-        ]
 
 
 expanded : SharedViewModel -> Todo.Edit.Form -> Todo.Model -> Html Msg
@@ -291,7 +277,6 @@ expanded vc form todo =
                             (evm.contextNames .|> createDropDownItem)
                         ]
                     ]
-                , debugInfo vc vm todo
                 ]
             ]
 
@@ -345,12 +330,9 @@ checkBoxView vm =
 hoverIcons : DefaultTodoViewModel -> SharedViewModel -> Html Msg
 hoverIcons vm vc =
     div [ class "show-on-hover" ]
-        [ --        startIconButton vm
-          doneIconButton vm
+        [ doneIconButton vm
         , iconButton "alarm" [ onClickStopPropagation (vm.onReminderButtonClicked) ]
         , deleteIconButton vm
-
-        --        , moveToContextMenuIcon vm vc
         ]
 
 
@@ -366,27 +348,3 @@ doneIconButton vm =
 
 deleteIconButton vm =
     View.Shared.trashButton vm.onDeleteClicked
-
-
-moveToContextMenuIcon vm vc =
-    menuButton
-        [ onClickStopPropagation Msg.NoOp
-        , attribute "horizontal-align" "right"
-        ]
-        [ Polymer.Paper.iconButton [ iconP "more-vert", class "dropdown-trigger" ] []
-        , menu
-            [ class "dropdown-content"
-            , attribute "attr-for-selected" "context-name"
-            , attribute "selected" vm.contextName
-            ]
-            (vc.contextByIdDict
-                |> Dict.values
-                .|> (\context ->
-                        item
-                            [ attribute "context-name" (Context.getName context)
-                            , onClickStopPropagation (vm.setContextMsg context)
-                            ]
-                            [ text (Context.getName context) ]
-                    )
-            )
-        ]

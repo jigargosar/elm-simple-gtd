@@ -21,17 +21,17 @@ type alias Form =
     , contextName : Context.Name
     , date : String
     , time : String
-    , reminderMenuOpen : String
+    , reminderMenuOpen : Bool
     }
 
 
 type Field
-    = ProjectName
-    | ContextName
-    | Text
-    | Date
-    | Time
-    | ReminderMenuOpen
+    = ProjectName String
+    | ContextName String
+    | Text String
+    | Date String
+    | Time String
+    | ReminderMenuOpen Bool
 
 
 create : Todo.Model -> Project.Name -> Context.Name -> Time -> Form
@@ -50,23 +50,23 @@ create todo projectName contextName now =
         }
 
 
-set : Field -> String -> Form -> Form
-set field value model =
+set : Field -> Form -> Form
+set field model =
     case field of
-        ProjectName ->
+        ProjectName value ->
             { model | projectName = value }
 
-        ContextName ->
+        ContextName value ->
             { model | contextName = value }
 
-        Text ->
+        Text value ->
             { model | todoText = value }
 
-        Date ->
+        Date value ->
             { model | date = value }
 
-        Time ->
+        Time value ->
             { model | time = value }
 
-        ReminderMenuOpen ->
+        ReminderMenuOpen value ->
             { model | reminderMenuOpen = value }

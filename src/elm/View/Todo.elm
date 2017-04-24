@@ -266,14 +266,18 @@ default vc todo =
                 --                    , div [] [ text vm.projectName ]
                 --                    ]
                 --                , debugInfo vc vm todo
-                , div
-                    [ classList
-                        [ "secondary-color" => not vm.isReminderActive
-                        , "accent-color" => vm.isReminderActive
-                        , "font-body1" => True
+                , div [ class "layout horizontal", attribute "secondary" "true" ]
+                    [ div
+                        [ classList
+                            [ "secondary-color" => not vm.isReminderActive
+                            , "accent-color" => vm.isReminderActive
+                            , "font-body1" => True
+                            ]
                         ]
+                        [ text vm.time ]
+                    , div [ style [ "margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
+                    , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
                     ]
-                    [ text vm.time ]
                 ]
             , hoverIcons vm vc
 
@@ -344,14 +348,17 @@ expanded vc form todo =
                         , autofocus True
                         ]
                         []
-                    , div
-                        [ classList
-                            [ "secondary-color" => not vm.isReminderActive
-                            , "accent-color" => vm.isReminderActive
-                            , "font-body1" => True
-                            ]
-                        ]
-                        [ text vm.time ]
+
+                    --                    , div
+                    --                        [ classList
+                    --                            [ "secondary-color" => not vm.isReminderActive
+                    --                            , "accent-color" => vm.isReminderActive
+                    --                            , "font-body1 layout horizontal center" => True
+                    --                            ]
+                    --                        ]
+                    --                        [ div [] [ text vm.time ]
+                    --                        , reminderMenuButton form evm
+                    --                        ]
                     ]
                 , div
                     [ class "layout horizontal center" ]
@@ -363,8 +370,7 @@ expanded vc form todo =
                         ]
                     ]
                 , div [ class "horizontal layout" ]
-                    [ reminderMenuButton form evm
-                    , menuButton []
+                    [ menuButton []
                         [ button [ class "dropdown-trigger" ]
                             [ text "#"
                             , text vm.projectName
@@ -386,6 +392,40 @@ expanded vc form todo =
                 , debugInfo vc vm todo
                 ]
             ]
+
+
+reminderMenuButton_ form evm =
+    menuButton
+        [ boolProperty "opened" form.reminderMenuOpen
+        , onBoolPropertyChanged "opened" evm.onReminderMenuOpenChanged
+        ]
+        [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
+        , div [ class "static dropdown-content" ]
+            [ div [ class "font-subhead" ] [ text "Select date and time" ]
+            , input
+                [ type_ "date"
+                , labelA "Date"
+                , autofocus True
+                , value form.date
+                , boolProperty
+                    "stopKeyboardEventPropagation"
+                    True
+                , onInput evm.onDateChanged
+                ]
+                []
+            , input
+                [ type_ "time"
+                , labelA "Time"
+                , value form.time
+                , boolProperty "stopKeyboardEventPropagation" True
+                , onInput evm.onTimeChanged
+                ]
+                []
+            , div [ class "horizontal layout end-justified" ]
+                [ button [ attribute "raised" "true", onClickStopPropagation evm.onSaveClicked ] [ text "Save" ]
+                ]
+            ]
+        ]
 
 
 reminderMenuButton form evm =
@@ -443,6 +483,7 @@ hoverIcons vm vc =
     div [ class "show-on-hover" ]
         [ --        startIconButton vm
           doneIconButton vm
+        , iconButton "alarm" []
         , deleteIconButton vm
 
         --        , moveToContextMenuIcon vm vc

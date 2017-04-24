@@ -112,10 +112,6 @@ insertIfNotExistByName name_ now context =
                     (\_ -> context)
 
 
-byIdDict =
-    Store.map (apply2 ( Document.getId, identity )) >> Dict.fromList
-
-
 findNameById id =
     Store.findById id >>? getName
 

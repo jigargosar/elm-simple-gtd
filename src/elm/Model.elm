@@ -71,7 +71,11 @@ findContextByName name =
 
 
 getContextByIdDict =
-    (.contextStore) >> Context.byIdDict
+    (.contextStore) >> Store.byIdDict
+
+
+getProjectByIdDict =
+    (.projectStore) >> Store.byIdDict
 
 
 getEncodedContextNames =

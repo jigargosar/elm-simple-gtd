@@ -121,7 +121,7 @@ default vc todo =
                 , isSelected = Set.member todoId vc.selection
                 , projectName =
                     Todo.getProjectId todo
-                        |> (Dict.get # vc.projectIdToNameDict)
+                        |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
                         ?= "<No Project>"
                 , contextName =
                     Todo.getContextId todo
@@ -176,7 +176,7 @@ expanded vc form todo =
                 , isSelected = Set.member todoId vc.selection
                 , projectName =
                     Todo.getProjectId todo
-                        |> (Dict.get # vc.projectIdToNameDict)
+                        |> (Dict.get # vc.projectByIdDict)
                         ?= "<No Project>"
                 , contextName =
                     Todo.getContextId todo

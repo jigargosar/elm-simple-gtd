@@ -1,5 +1,6 @@
 port module Store exposing (..)
 
+import Dict
 import Document exposing (Document, Id)
 import Ext.Random as Random
 import Toolkit.Helpers exposing (..)
@@ -147,6 +148,10 @@ updateSeed updater model =
 asList : Store x -> List (Document x)
 asList =
     (.list)
+
+
+byIdDict =
+    map (apply2 ( Document.getId, identity )) >> Dict.fromList
 
 
 setList list model =

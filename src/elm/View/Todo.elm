@@ -46,7 +46,7 @@ createKeyedItem vc todo =
             case vc.editMode of
                 EditMode.EditTodo form ->
                     if Document.hasId form.id todo then
-                        editView vc form todo
+                        editView vm vc form todo
                     else
                         default vm
 
@@ -157,38 +157,9 @@ default vm =
         ]
 
 
-editView : SharedViewModel -> Todo.Edit.Form -> Todo.Model -> Html Msg
-editView vc form todo =
+editView : TodoViewModel -> SharedViewModel -> Todo.Edit.Form -> Todo.Model -> Html Msg
+editView vm vc form todo =
     let
-        vm : TodoViewModel
-        vm =
-            let
-                todoId =
-                    Document.getId todo
-            in
-                { isDone = Todo.getDone todo
-                , isDeleted = Todo.getDeleted todo
-                , time = Todo.getMaybeTime todo ?|> Ext.Time.formatTime ?= "Someday"
-                , text = Todo.getText todo
-                , isSelected = Set.member todoId vc.selection
-                , projectName =
-                    Todo.getProjectId todo
-                        |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
-                        ?= "<No Project>"
-                , contextName =
-                    Todo.getContextId todo
-                        |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
-                        ?= "Inbox"
-                , onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
-                , setContextMsg = Msg.SetTodoContext # todo
-                , startEditingMsg = Msg.StartEditingTodo todo
-                , onDoneClicked = Msg.ToggleTodoDone todo
-                , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
-                , showDetails = vc.showDetails
-                , isReminderActive = Todo.isReminderActive todo
-                , onReminderButtonClicked = Msg.StartEditingReminder todo
-                }
-
         evm =
             createEditTodoViewModel vc todo form
 

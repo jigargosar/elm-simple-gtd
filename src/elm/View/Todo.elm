@@ -75,6 +75,8 @@ type alias EditTodoViewModel =
     , timeInputValue : String
     , encodedProjectNames : Json.Encode.Value
     , encodedContextNames : Json.Encode.Value
+    , projectNames : List String
+    , contextList : List Context.Model
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
     , onProjectNameChanged : String -> Msg
@@ -119,6 +121,8 @@ createEditTodoViewModel vc todo etm =
         , onTimeChanged = updateTodoForm Todo.Edit.Time
         , encodedProjectNames = vc.encodedProjectNames
         , encodedContextNames = vc.encodedContextNames
+        , projectNames = vc.projectIdToNameDict |> Dict.values
+        , contextList = vc.contextByIdDict |> Dict.values
         , onSaveClicked = Msg.SaveEditingEntity
         , onCancelClicked = Msg.DeactivateEditingMode
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted

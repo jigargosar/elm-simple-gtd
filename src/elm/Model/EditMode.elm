@@ -25,9 +25,15 @@ activateNewTodoMode text =
     setEditMode (EditMode.createNewTodoModel text)
 
 
-setEditModelToEditTodo : Todo.Model -> ModelF
-setEditModelToEditTodo todo =
+startEditingTodo : Todo.Model -> ModelF
+startEditingTodo todo =
     updateEditMode (createEditTodoMode todo)
+
+
+startEditingTodoById : Todo.Id -> ModelF
+startEditingTodoById id =
+    applyMaybeWith (Model.TodoStore.findTodoById id)
+        (createEditTodoMode >> updateEditMode)
 
 
 startEditingEntity : Entity -> ModelF

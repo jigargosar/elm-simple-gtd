@@ -169,7 +169,7 @@ update msg =
                             identity
 
                 StartEditingTodo todo ->
-                    Return.map (Model.setEditModelToEditTodo todo)
+                    Return.map (Model.startEditingTodo todo)
                         >> autoFocusPaperInputCmd
 
                 UpdateTodoForm etm field value ->
@@ -239,8 +239,8 @@ update msg =
 
                 SaveEditingEntity ->
                     Return.map (Model.saveEditModeEntity)
---                        >> andThenUpdate DeactivateEditingMode
 
+                --                        >> andThenUpdate DeactivateEditingMode
                 OnEntityAction entity action ->
                     case (action) of
                         StartEditing ->

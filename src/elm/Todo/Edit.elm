@@ -14,13 +14,13 @@ import Maybe.Extra as Maybe
 import Todo
 
 
-type alias Form =
+type alias TextFormModel =
     { id : Document.Id
     , todoText : Todo.Text
     }
 
 
-type alias ReminderForm =
+type alias ReminderFormModel =
     { id : Document.Id
     , date : String
     , time : String
@@ -28,11 +28,22 @@ type alias ReminderForm =
     }
 
 
-type Field
+type Form
+    = TextForm TextFormModel
+    | ReminderForm ReminderFormModel
+
+
+type TextFormField
     = Text String
 
 
-createReminderForm : Todo.Model -> Time -> ReminderForm
+type ReminderFormField
+    = Date String
+    | Time String
+    | ReminderMenuOpen Bool
+
+
+createReminderForm : Todo.Model -> Time -> ReminderFormModel
 createReminderForm todo now =
     let
         timeInMilli =
@@ -45,7 +56,7 @@ createReminderForm todo now =
         }
 
 
-create : Todo.Model -> Project.Name -> Context.Name -> Time -> Form
+create : Todo.Model -> Project.Name -> Context.Name -> Time -> TextFormModel
 create todo projectName contextName now =
     let
         timeInMilli =
@@ -56,7 +67,7 @@ create todo projectName contextName now =
         }
 
 
-set : Field -> Form -> Form
+set : TextFormField -> TextFormModel -> TextFormModel
 set field model =
     case field of
         Text value ->

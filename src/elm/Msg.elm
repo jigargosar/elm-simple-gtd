@@ -63,7 +63,7 @@ type Msg
     | StartEditingReminder Todo.Model
     | SaveEditingEntity
     | FocusPaperInput String
-    | UpdateTodoForm Todo.Edit.Form Todo.Edit.Field
+    | UpdateTodoForm Todo.Edit.TextFormModel Todo.Edit.TextFormField
     | EditTodoFormKeyUp TodoForm KeyboardEvent
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection

@@ -16,7 +16,7 @@ import Todo.Edit
 
 
 type alias TodoForm =
-    Todo.Edit.Form
+    Todo.Edit.TextFormModel
 
 
 type alias EditContextModel =
@@ -38,7 +38,7 @@ type alias NewTodoModel =
 type EditMode
     = NewTodo NewTodoModel
     | EditTodo TodoForm
-    | EditTodoReminder Todo.Edit.ReminderForm
+    | EditTodoReminder Todo.Edit.ReminderFormModel
     | EditContext EditContextModel
     | EditProject EditProjectModel
     | None

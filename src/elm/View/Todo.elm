@@ -334,6 +334,7 @@ expanded vc form todo =
                         , value (evm.todo.text)
                         , boolProperty "stopKeyboardEventPropagation" True
                         , onInput evm.onTodoTextChanged
+                        , onKeyDown evm.onKeyUp
                         , autofocus True
                         ]
                         []

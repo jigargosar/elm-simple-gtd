@@ -75,6 +75,8 @@ onPropertyChanged propertyName tagger =
 testDialog =
     Polymer.Paper.dialog
         [ boolProperty "opened" True
-        , boolProperty "alwaysOnTop" True
+        , boolProperty "alwaysOnTop"
+            True
+        , class "full-view"
         ]
         [ h2 [] [ text "Big Header" ] ]

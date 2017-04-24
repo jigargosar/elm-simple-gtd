@@ -308,13 +308,14 @@ expanded vc form todo =
     in
         item
             [ class "todo-item"
-            , onClickStopPropagation (vm.startEditingMsg)
+
+            --            , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ div [ class "vertical layout flex-auto" ]
                 [ div [ class "layout horizontal center" ]
                     [ --checkBoxView vm
                       div [ class "flex-auto" ]
-                        [ div [] [ text vm.text ]
+                        [ div [] [ text evm.todo.text ]
                         , div
                             [ classList
                                 [ "secondary-color" => not vm.isReminderActive
@@ -337,6 +338,7 @@ expanded vc form todo =
                                 , boolProperty "stopKeyboardEventPropagation" True
                                 , autofocus True
                                 , value form.date
+                                , onInput evm.onDateChanged
                                 ]
                                 []
                             , input
@@ -352,7 +354,7 @@ expanded vc form todo =
                             ]
                         ]
                     , menuButton []
-                        [ button [ class "dropdown-trigger" ] [ text vm.projectName ]
+                        [ button [ class "dropdown-trigger" ] [ text evm.project.name ]
                         , menu [ class "dropdown-content" ]
                             [ item [] [ text "fkjzd kjklfjdsl fjlkd j djflsd jfljdflsjdflsfkjslfsjlkfjsdlfjslkdljf klsdj lsjflksjlksdjfklsdjl1" ]
                             , item [] [ text "f1" ]
@@ -362,7 +364,7 @@ expanded vc form todo =
                             ]
                         ]
                     , menuButton []
-                        [ button [ class "dropdown-trigger" ] [ text vm.contextName ]
+                        [ button [ class "dropdown-trigger" ] [ text evm.context.name ]
                         , menu [ class "dropdown-content" ]
                             [ item [] [ text "fkjzd kjklfjdsl fjlkd j djflsd jfljdflsjdflsfkjslfsjlkfjsdlfjslkdljf klsdj lsjflksjlksdjfklsdjl1" ]
                             , item [] [ text "f1" ]

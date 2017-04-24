@@ -379,7 +379,7 @@ expanded vc form todo =
                     , menuButton []
                         [ button [ class "dropdown-trigger" ]
                             [ text "@"
-                            , text vm.projectName
+                            , text vm.contextName
                             , icon "arrow-drop-down" []
                             ]
                         , menu [ class "dropdown-content" ]

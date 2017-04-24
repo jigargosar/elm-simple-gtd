@@ -302,6 +302,9 @@ expanded vc form todo =
                 , showDetails = vc.showDetails
                 , isReminderActive = Todo.isReminderActive todo
                 }
+
+        evm =
+            createEditTodoViewModel vc todo form
     in
         item
             [ class "todo-item"

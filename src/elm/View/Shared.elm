@@ -31,7 +31,6 @@ import Todo
 
 type alias SharedViewModel =
     { now : Time
-    , maybeEditTodoModel : Maybe TodoForm
     , editMode : EditMode
     , projectIdToNameDict : Dict Id Project.Name
     , contextByIdDict : Dict Id Context.Model
@@ -43,7 +42,6 @@ type alias SharedViewModel =
 createSharedViewModel : Model -> SharedViewModel
 createSharedViewModel model =
     { now = Model.getNow model
-    , maybeEditTodoModel = Model.EditMode.getMaybeEditTodoModel model
     , projectIdToNameDict = Model.getProjectStore model |> Project.getProjectIdToNameDict
     , contextByIdDict = Model.getContextByIdDict model
     , selection = Model.getSelectedTodoIdSet model

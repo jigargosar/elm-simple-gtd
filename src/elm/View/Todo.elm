@@ -46,7 +46,7 @@ createKeyedItem vc todo =
             case vc.editMode of
                 EditMode.EditTodo form ->
                     if Document.hasId form.id todo then
-                        expanded vc form todo
+                        editView vc form todo
                     else
                         notEditingView ()
 
@@ -76,7 +76,6 @@ createEditTodoViewModel vc todo etm =
     in
         { todo =
             { text = etm.todoText
-            , id = todoId
             }
         , onKeyUp = Msg.EditTodoFormKeyUp etm
         , onTodoTextChanged = updateTodoForm << Todo.Edit.Text
@@ -159,8 +158,8 @@ default vc todo =
             ]
 
 
-expanded : SharedViewModel -> Todo.Edit.Form -> Todo.Model -> Html Msg
-expanded vc form todo =
+editView : SharedViewModel -> Todo.Edit.Form -> Todo.Model -> Html Msg
+editView vc form todo =
     let
         vm : DefaultTodoViewModel
         vm =

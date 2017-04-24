@@ -65,19 +65,19 @@ type alias EditTodoViewModel =
     }
 
 
-createEditTodoViewModel : SharedViewModel -> Todo.Model -> TodoForm -> EditTodoViewModel
-createEditTodoViewModel vc todo etm =
+createEditTodoViewModel : Todo.Model -> TodoForm -> EditTodoViewModel
+createEditTodoViewModel todo form =
     let
         todoId =
-            etm.id
+            form.id
 
         updateTodoForm =
-            Msg.UpdateTodoForm etm
+            Msg.UpdateTodoForm form
     in
         { todo =
-            { text = etm.todoText
+            { text = form.todoText
             }
-        , onKeyUp = Msg.EditTodoFormKeyUp etm
+        , onKeyUp = Msg.EditTodoFormKeyUp form
         , onTodoTextChanged = updateTodoForm << Todo.Edit.Text
         , onSaveClicked = Msg.SaveEditingEntity
         , onCancelClicked = Msg.DeactivateEditingMode
@@ -161,7 +161,7 @@ editView : TodoViewModel -> SharedViewModel -> Todo.Edit.Form -> Todo.Model -> H
 editView vm vc form todo =
     let
         evm =
-            createEditTodoViewModel vc todo form
+            createEditTodoViewModel todo form
 
         projectNames =
             [ "fooprj", "barprj" ]

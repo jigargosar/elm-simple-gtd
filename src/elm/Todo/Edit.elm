@@ -21,6 +21,7 @@ type alias Form =
     , contextName : Context.Name
     , date : String
     , time : String
+    , reminderMenuButtonOpened : Bool
     }
 
 
@@ -44,6 +45,7 @@ create todo projectName contextName now =
         , contextName = contextName
         , date = (Time.Format.format "%Y-%m-%d") timeInMilli
         , time = (Time.Format.format "%H:%M") timeInMilli
+        , reminderMenuButtonOpened = False
         }
 
 

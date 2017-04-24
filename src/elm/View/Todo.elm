@@ -346,7 +346,6 @@ expanded vc form todo =
                     [ menuButton
                         [ boolProperty "opened" form.reminderMenuOpen
                         , onBoolPropertyChanged "opened" evm.onReminderMenuOpenChanged
-                        
                         ]
                         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
                         , div [ class "static dropdown-content" ]
@@ -354,7 +353,6 @@ expanded vc form todo =
                             , input
                                 [ type_ "date"
                                 , labelA "Date"
-                                
                                 , autofocus True
                                 , value form.date
                                 , onInput evm.onDateChanged
@@ -363,7 +361,6 @@ expanded vc form todo =
                             , input
                                 [ type_ "time"
                                 , labelA "Time"
-                                
                                 , value form.time
                                 , onInput evm.onTimeChanged
                                 ]
@@ -373,30 +370,22 @@ expanded vc form todo =
                                 ]
                             ]
                         ]
-                    , menuButton
-                        
-                        ]
+                    , menuButton []
                         [ button [ class "dropdown-trigger" ]
                             [ text "#"
                             , text vm.projectName
                             , icon "arrow-drop-down" []
                             ]
-                        , menu
-                            [ class "dropdown-content"
-                            
-                            ]
+                        , menu [ class "dropdown-content" ]
                             (evm.projectNames .|> createDropDownItem)
                         ]
-                    , menuButton  ]
+                    , menuButton []
                         [ button [ class "dropdown-trigger" ]
                             [ text "@"
                             , text vm.contextName
                             , icon "arrow-drop-down" []
                             ]
-                        , menu
-                            [ class "dropdown-content"
-                            
-                            ]
+                        , menu [ class "dropdown-content" ]
                             (evm.contextNames .|> createDropDownItem)
                         ]
                     ]

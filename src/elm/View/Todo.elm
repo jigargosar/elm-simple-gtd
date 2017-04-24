@@ -346,10 +346,11 @@ expanded vc form todo =
                                 , labelA "Time"
                                 , boolProperty "stopKeyboardEventPropagation" True
                                 , value form.time
+                                , onInput evm.onTimeChanged
                                 ]
                                 []
                             , div [ class "horizontal layout end-justified" ]
-                                [ button [ attribute "raised" "true" ] [ text "Save" ]
+                                [ button [ attribute "raised" "true", onClickStopPropagation evm.onSaveClicked ] [ text "Save" ]
                                 ]
                             ]
                         ]

@@ -268,8 +268,9 @@ default vc todo =
                 --                , debugInfo vc vm todo
                 ]
             , hoverIcons vm vc
-            , hideOnHover vm.isDone [ doneIconButton vm ]
-            , hideOnHover vm.isDeleted [ deleteIconButton vm ]
+
+            --            , hideOnHover vm.isDone [ doneIconButton vm ]
+            --            , hideOnHover vm.isDeleted [ deleteIconButton vm ]
             ]
 
 
@@ -348,43 +349,13 @@ expanded vc form todo =
                     [ class "layout horizontal center" ]
                     [ --checkBoxView vm
                       div [ class "horizontal layout wrap" ]
-                        [ iconButton "create" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
-                        , iconButton "done" [ class "flex-none", onClickStopPropagation vm.onDoneClicked ]
-                        , iconButton "delete" [ class "flex-none", onClickStopPropagation vm.onDeleteClicked ]
+                        [--                        iconButton "create" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
+                         --                          iconButton "done" [ class "flex-none", onClickStopPropagation vm.onDoneClicked ]
+                         --                        , iconButton "delete" [ class "flex-none", onClickStopPropagation vm.onDeleteClicked ]
                         ]
                     ]
                 , div [ class "horizontal layout" ]
-                    [ menuButton
-                        [ boolProperty "opened" form.reminderMenuOpen
-                        , onBoolPropertyChanged "opened" evm.onReminderMenuOpenChanged
-                        ]
-                        [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
-                        , div [ class "static dropdown-content" ]
-                            [ div [ class "font-subhead" ] [ text "Select date and time" ]
-                            , input
-                                [ type_ "date"
-                                , labelA "Date"
-                                , autofocus True
-                                , value form.date
-                                , boolProperty
-                                    "stopKeyboardEventPropagation"
-                                    True
-                                , onInput evm.onDateChanged
-                                ]
-                                []
-                            , input
-                                [ type_ "time"
-                                , labelA "Time"
-                                , value form.time
-                                , boolProperty "stopKeyboardEventPropagation" True
-                                , onInput evm.onTimeChanged
-                                ]
-                                []
-                            , div [ class "horizontal layout end-justified" ]
-                                [ button [ attribute "raised" "true", onClickStopPropagation evm.onSaveClicked ] [ text "Save" ]
-                                ]
-                            ]
-                        ]
+                    [ reminderMenuButton form evm
                     , menuButton []
                         [ button [ class "dropdown-trigger" ]
                             [ text "#"
@@ -407,6 +378,40 @@ expanded vc form todo =
                 , debugInfo vc vm todo
                 ]
             ]
+
+
+reminderMenuButton form evm =
+    menuButton
+        [ boolProperty "opened" form.reminderMenuOpen
+        , onBoolPropertyChanged "opened" evm.onReminderMenuOpenChanged
+        ]
+        [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
+        , div [ class "static dropdown-content" ]
+            [ div [ class "font-subhead" ] [ text "Select date and time" ]
+            , input
+                [ type_ "date"
+                , labelA "Date"
+                , autofocus True
+                , value form.date
+                , boolProperty
+                    "stopKeyboardEventPropagation"
+                    True
+                , onInput evm.onDateChanged
+                ]
+                []
+            , input
+                [ type_ "time"
+                , labelA "Time"
+                , value form.time
+                , boolProperty "stopKeyboardEventPropagation" True
+                , onInput evm.onTimeChanged
+                ]
+                []
+            , div [ class "horizontal layout end-justified" ]
+                [ button [ attribute "raised" "true", onClickStopPropagation evm.onSaveClicked ] [ text "Save" ]
+                ]
+            ]
+        ]
 
 
 createDropDownItem title =

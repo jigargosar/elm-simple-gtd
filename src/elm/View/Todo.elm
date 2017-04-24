@@ -39,8 +39,11 @@ import WebComponents exposing (icon, iconButton, iconP, ironIcon, labelA, noLabe
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
 createKeyedItem vc todo =
     let
+        vm =
+            createTodoViewModel vc todo
+
         notEditingView _ =
-            default vc todo
+            default vm
 
         view =
             case vc.editMode of
@@ -57,7 +60,7 @@ createKeyedItem vc todo =
 
 
 type alias EditTodoViewModel =
-    { todo : { text : Todo.Text}
+    { todo : { text : Todo.Text }
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
     , onSaveClicked : Msg
@@ -84,7 +87,7 @@ createEditTodoViewModel vc todo etm =
         }
 
 
-type alias DefaultTodoViewModel =
+type alias TodoViewModel =
     { text : Todo.Text
     , time : String
     , isDone : Bool
@@ -103,65 +106,64 @@ type alias DefaultTodoViewModel =
     }
 
 
-default : SharedViewModel -> Todo.Model -> Html Msg
-default vc todo =
+createTodoViewModel vc todo =
     let
-        vm : DefaultTodoViewModel
-        vm =
-            let
-                todoId =
-                    Document.getId todo
-            in
-                { isDone = Todo.getDone todo
-                , isDeleted = Todo.getDeleted todo
-                , time = Todo.getMaybeTime todo ?|> Ext.Time.formatTime ?= "Someday"
-                , text = Todo.getText todo
-                , isSelected = Set.member todoId vc.selection
-                , projectName =
-                    Todo.getProjectId todo
-                        |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
-                        ?= "<No Project>"
-                , contextName =
-                    Todo.getContextId todo
-                        |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
-                        ?= "Inbox"
-                , onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
-                , setContextMsg = Msg.SetTodoContext # todo
-                , startEditingMsg = Msg.StartEditingTodo todo
-                , onDoneClicked = Msg.ToggleTodoDone todo
-                , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
-                , showDetails = vc.showDetails
-                , isReminderActive = Todo.isReminderActive todo
-                , onReminderButtonClicked = Msg.StartEditingReminder todo
-                }
+        todoId =
+            Document.getId todo
     in
-        item
-            [ class "todo-item"
-            , onClickStopPropagation (vm.startEditingMsg)
-            ]
-            [ itemBody []
-                [ div [] [ text vm.text ]
-                , div [ class "layout horizontal", attribute "secondary" "true" ]
-                    [ div
-                        [ classList
-                            [ "secondary-color" => not vm.isReminderActive
-                            , "accent-color" => vm.isReminderActive
-                            , "font-body1" => True
-                            ]
+        { isDone = Todo.getDone todo
+        , isDeleted = Todo.getDeleted todo
+        , time = Todo.getMaybeTime todo ?|> Ext.Time.formatTime ?= "Someday"
+        , text = Todo.getText todo
+        , isSelected = Set.member todoId vc.selection
+        , projectName =
+            Todo.getProjectId todo
+                |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
+                ?= "<No Project>"
+        , contextName =
+            Todo.getContextId todo
+                |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
+                ?= "Inbox"
+        , onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
+        , setContextMsg = Msg.SetTodoContext # todo
+        , startEditingMsg = Msg.StartEditingTodo todo
+        , onDoneClicked = Msg.ToggleTodoDone todo
+        , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
+        , showDetails = vc.showDetails
+        , isReminderActive = Todo.isReminderActive todo
+        , onReminderButtonClicked = Msg.StartEditingReminder todo
+        }
+
+
+default : TodoViewModel -> Html Msg
+default vm =
+    item
+        [ class "todo-item"
+        , onClickStopPropagation (vm.startEditingMsg)
+        ]
+        [ itemBody []
+            [ div [] [ text vm.text ]
+            , div [ class "layout horizontal", attribute "secondary" "true" ]
+                [ div
+                    [ classList
+                        [ "secondary-color" => not vm.isReminderActive
+                        , "accent-color" => vm.isReminderActive
+                        , "font-body1" => True
                         ]
-                        [ text vm.time ]
-                    , div [ style [ "margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
-                    , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
                     ]
+                    [ text vm.time ]
+                , div [ style [ "margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
+                , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
                 ]
-            , hoverIcons vm vc
             ]
+        , hoverIcons vm
+        ]
 
 
 editView : SharedViewModel -> Todo.Edit.Form -> Todo.Model -> Html Msg
 editView vc form todo =
     let
-        vm : DefaultTodoViewModel
+        vm : TodoViewModel
         vm =
             let
                 todoId =
@@ -285,8 +287,8 @@ checkBoxView vm =
         []
 
 
-hoverIcons : DefaultTodoViewModel -> SharedViewModel -> Html Msg
-hoverIcons vm vc =
+hoverIcons : TodoViewModel -> Html Msg
+hoverIcons vm =
     div [ class "show-on-hover" ]
         [ doneIconButton vm
         , iconButton "alarm" [ onClickStopPropagation (vm.onReminderButtonClicked) ]
@@ -294,7 +296,7 @@ hoverIcons vm vc =
         ]
 
 
-doneIconButton : DefaultTodoViewModel -> Html Msg
+doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
     Polymer.Paper.iconButton
         [ class ("done-" ++ toString (vm.isDone))

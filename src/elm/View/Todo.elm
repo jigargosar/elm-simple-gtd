@@ -58,9 +58,7 @@ createKeyedItem vc todo =
 
 
 type alias EditTodoViewModel =
-    { todo : { text : Todo.Text, id : Todo.Id, inputId : Dom.Id }
-    , project : { name : Project.Name, inputId : Dom.Id }
-    , context : { name : Context.Name, inputId : Dom.Id }
+    { todo : { text : Todo.Text, id : Todo.Id }
     , dateInputValue : String
     , timeInputValue : String
     , encodedProjectNames : Json.Encode.Value
@@ -96,15 +94,6 @@ createEditTodoViewModel vc todo etm =
         { todo =
             { text = etm.todoText
             , id = todoId
-            , inputId = "edit-todo-input-" ++ todoId
-            }
-        , project =
-            { name = etm.projectName
-            , inputId = "edit-todo-project-input-" ++ todoId
-            }
-        , context =
-            { name = etm.contextName
-            , inputId = "edit-todo-context-input-" ++ todoId
             }
         , dateInputValue = etm.date
         , timeInputValue = etm.time
@@ -241,8 +230,7 @@ expanded vc form todo =
             [ div [ class "vertical layout flex-auto" ]
                 [ div [ class "flex" ]
                     [ Html.node "paper-textarea"
-                        [ id evm.todo.inputId
-                        , class "auto-focus"
+                        [ class "auto-focus"
                         , stringProperty "label" "Todo"
                         , value (evm.todo.text)
                         , boolProperty "stopKeyboardEventPropagation" True

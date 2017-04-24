@@ -43,17 +43,18 @@ appView m =
     div []
         [ appDrawerLayoutView m
         , addTodoFabView m
-
-        --        , bottomSheet
+        , bottomSheet
         , showReminderOverlay m
         ]
 
 
 bottomSheet =
-    Paper.material [ style [ "background-color" => "white" ], class "fixed-bottom", attribute "elevation" "5" ]
-        [ Paper.item [] [ text "bottom" ]
-        , Paper.item [] [ text "bottom" ]
-        , Paper.item [] [ text "bottom" ]
+    div [ class "full-view" ]
+        [ Paper.material [ style [ "background-color" => "white" ], class "fixed-bottom", attribute "elevation" "5" ]
+            [ Paper.item [] [ text "bottom" ]
+            , Paper.item [] [ text "bottom" ]
+            , Paper.item [] [ text "bottom" ]
+            ]
         ]
 
 

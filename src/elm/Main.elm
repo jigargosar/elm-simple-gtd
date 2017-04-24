@@ -197,7 +197,7 @@ update msg =
                                 (if ke.isShiftDown then
                                     [ SaveEditingEntity, CopyAndEditTodoById id ]
                                  else if ke.isMetaDown || ke.isControlDown then
-                                    [ SaveEditingEntity ]
+                                    [ SaveEditingEntity, DeactivateEditingMode ]
                                  else
                                     []
                                 )

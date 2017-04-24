@@ -266,6 +266,14 @@ default vc todo =
                 --                    , div [] [ text vm.projectName ]
                 --                    ]
                 --                , debugInfo vc vm todo
+                , div
+                    [ classList
+                        [ "secondary-color" => not vm.isReminderActive
+                        , "accent-color" => vm.isReminderActive
+                        , "font-body1" => True
+                        ]
+                    ]
+                    [ text vm.time ]
                 ]
             , hoverIcons vm vc
 

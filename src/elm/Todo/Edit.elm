@@ -48,7 +48,7 @@ type ReminderFormFieldValue
     | ReminderMenuOpen Bool
 
 
-createReminderForm : Todo.Model -> Time -> ReminderFormModel
+createReminderForm : Todo.Model -> Time -> Form
 createReminderForm todo now =
     let
         timeInMilli =
@@ -59,9 +59,10 @@ createReminderForm todo now =
         , time = (Time.Format.format "%H:%M") timeInMilli
         , reminderMenuOpen = False
         }
+            |> ReminderForm
 
 
-createTextForm : Todo.Model -> Project.Name -> Context.Name -> Time -> TextFormModel
+createTextForm : Todo.Model -> Project.Name -> Context.Name -> Time -> Form
 createTextForm todo projectName contextName now =
     let
         timeInMilli =
@@ -70,6 +71,7 @@ createTextForm todo projectName contextName now =
         { id = Document.getId todo
         , todoText = Todo.getText todo
         }
+            |> TextForm
 
 
 set2 : TextFormFieldValue -> TextFormModel -> TextFormModel
@@ -79,8 +81,13 @@ set2 field model =
             { model | todoText = value }
 
 
-set : TextFormFieldValue -> TextFormModel -> TextFormModel
-set field model =
-    case field of
-        Text value ->
-            { model | todoText = value }
+set : FormField -> Form -> Form
+set field form =
+    case ( form, field ) of
+        ( TextForm form, TextFormField field ) ->
+            case field of
+                Text value ->
+                    TextForm { form | todoText = value }
+
+        _ ->
+            form

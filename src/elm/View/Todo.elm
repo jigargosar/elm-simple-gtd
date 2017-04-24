@@ -45,10 +45,15 @@ createKeyedItem vc todo =
         view =
             case vc.editMode of
                 EditMode.EditTodo form ->
-                    if Document.hasId form.id todo then
-                        editView vm (createEditTodoViewModel form)
-                    else
-                        default vm
+                    case form of
+                        Todo.Edit.TextForm formModel ->
+                            if Document.hasId formModel.id todo then
+                                editView vm (createEditTodoViewModel formModel)
+                            else
+                                default vm
+
+                        _ ->
+                            default vm
 
                 _ ->
                     default vm
@@ -72,13 +77,13 @@ createEditTodoViewModel form =
             form.id
 
         updateTodoForm =
-            Msg.UpdateTodoForm form
+            Msg.UpdateTodoForm (Todo.Edit.TextForm form)
     in
         { todo =
             { text = form.todoText
             }
         , onKeyUp = Msg.EditTodoFormKeyUp form
-        , onTodoTextChanged = updateTodoForm << Todo.Edit.Text
+        , onTodoTextChanged = updateTodoForm << Todo.Edit.TextFormField << Todo.Edit.Text
         , onSaveClicked = Msg.SaveEditingEntity
         , onCancelClicked = Msg.DeactivateEditingMode
         }

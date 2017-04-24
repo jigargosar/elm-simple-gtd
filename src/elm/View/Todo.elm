@@ -57,16 +57,6 @@ createKeyedItem vc todo =
         ( Document.getId todo, view )
 
 
-textValue : Json.Decode.Decoder String
-textValue =
-    Json.Decode.at [ "detail", "text" ] Json.Decode.string
-
-
-onAutoCompleteSelected : (String -> msg) -> Html.Attribute msg
-onAutoCompleteSelected tagger =
-    on "autocomplete-selected" (Json.Decode.map tagger (traceDecoder "selected" textValue))
-
-
 type alias EditTodoViewModel =
     { todo : { text : Todo.Text, id : Todo.Id, inputId : Dom.Id }
     , project : { name : Project.Name, inputId : Dom.Id }
@@ -134,74 +124,6 @@ createEditTodoViewModel vc todo etm =
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
         , onReminderMenuOpenChanged = updateTodoForm << Todo.Edit.ReminderMenuOpen
         }
-
-
-edit : EditTodoViewModel -> Html Msg
-edit vm =
-    item [ class "todo-item editing", onKeyDown vm.onKeyUp ]
-        [ Html.node "paper-input"
-            --        Html.node "paper-textarea" -- todo: add after trimming newline on enter.
-            [ id vm.todo.inputId
-            , class "auto-focus"
-            , stringProperty "label" "Todo"
-            , value (vm.todo.text)
-            , onInput vm.onTodoTextChanged
-            , autofocus True
-            ]
-            []
-        , div [ class "horizontal layout justified" ]
-            [ input
-                [ stringProperty "label" "Date"
-                , type_ "date"
-                , onInput vm.onDateChanged
-                , value vm.dateInputValue
-                ]
-                []
-            , input
-                [ stringProperty "label" "Time"
-                , type_ "time"
-                , value vm.timeInputValue
-                , onInput vm.onTimeChanged
-                ]
-                []
-            ]
-        , input
-            [ id (vm.context.inputId)
-            , onInput vm.onContextNameChanged
-            , stringProperty "label" "Context Name"
-            , value vm.context.name
-            ]
-            []
-        , Html.node "paper-autocomplete-suggestions"
-            [ stringProperty "for" (vm.context.inputId)
-            , property "source" (vm.encodedContextNames)
-            , onAutoCompleteSelected vm.onContextNameChanged
-            , intProperty "minLength" 0
-            ]
-            []
-        , View.Shared.colItemStretched
-            [ input
-                [ id (vm.project.inputId)
-                , onInput vm.onProjectNameChanged
-                , stringProperty "label" "Project Name"
-                , value vm.project.name
-                ]
-                []
-            , Html.node "paper-autocomplete-suggestions"
-                [ stringProperty "for" (vm.project.inputId)
-                , property "source" (vm.encodedProjectNames)
-                , onAutoCompleteSelected vm.onProjectNameChanged
-                , intProperty "minLength" 0
-                ]
-                []
-            ]
-        , div [ class "horizontal layout" ]
-            [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
-            , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
-            , div [ class "self-auto" ] []
-            , deleteIconButton vm
-            ]
-        ]
 
 
 type alias DefaultTodoViewModel =
@@ -282,9 +204,6 @@ default vc todo =
                     ]
                 ]
             , hoverIcons vm vc
-
-            --            , hideOnHover vm.isDone [ doneIconButton vm ]
-            --            , hideOnHover vm.isDeleted [ deleteIconButton vm ]
             ]
 
 
@@ -351,26 +270,6 @@ expanded vc form todo =
                         , autofocus True
                         ]
                         []
-
-                    --                    , div
-                    --                        [ classList
-                    --                            [ "secondary-color" => not vm.isReminderActive
-                    --                            , "accent-color" => vm.isReminderActive
-                    --                            , "font-body1 layout horizontal center" => True
-                    --                            ]
-                    --                        ]
-                    --                        [ div [] [ text vm.time ]
-                    --                        , reminderMenuButton form evm
-                    --                        ]
-                    ]
-                , div
-                    [ class "layout horizontal center" ]
-                    [ --checkBoxView vm
-                      div [ class "horizontal layout wrap" ]
-                        [--                        iconButton "create" [ class "flex-none", onClickStopPropagation Msg.NoOp ]
-                         --                          iconButton "done" [ class "flex-none", onClickStopPropagation vm.onDoneClicked ]
-                         --                        , iconButton "delete" [ class "flex-none", onClickStopPropagation vm.onDeleteClicked ]
-                        ]
                     ]
                 , div [ class "horizontal layout" ]
                     [ menuButton []
@@ -395,40 +294,6 @@ expanded vc form todo =
                 , debugInfo vc vm todo
                 ]
             ]
-
-
-reminderMenuButton_ form evm =
-    menuButton
-        [ boolProperty "opened" form.reminderMenuOpen
-        , onBoolPropertyChanged "opened" evm.onReminderMenuOpenChanged
-        ]
-        [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
-        , div [ class "static dropdown-content" ]
-            [ div [ class "font-subhead" ] [ text "Select date and time" ]
-            , input
-                [ type_ "date"
-                , labelA "Date"
-                , autofocus True
-                , value form.date
-                , boolProperty
-                    "stopKeyboardEventPropagation"
-                    True
-                , onInput evm.onDateChanged
-                ]
-                []
-            , input
-                [ type_ "time"
-                , labelA "Time"
-                , value form.time
-                , boolProperty "stopKeyboardEventPropagation" True
-                , onInput evm.onTimeChanged
-                ]
-                []
-            , div [ class "horizontal layout end-justified" ]
-                [ button [ attribute "raised" "true", onClickStopPropagation evm.onSaveClicked ] [ text "Save" ]
-                ]
-            ]
-        ]
 
 
 reminderMenuButton form evm =
@@ -475,10 +340,6 @@ checkBoxView vm =
         , onClickStopPropagation vm.onCheckBoxClicked
         ]
         []
-
-
-todoInputId todoId =
-    "edit-todo-input-" ++ todoId
 
 
 hoverIcons : DefaultTodoViewModel -> SharedViewModel -> Html Msg

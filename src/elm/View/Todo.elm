@@ -32,7 +32,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper exposing (button, checkbox, dialog, dropdownMenu, input, item, itemBody, listbox, material, menu, menuButton)
-import View.Shared exposing (SharedViewModel)
+import View.Shared exposing (SharedViewModel, hideOnHover)
 import WebComponents exposing (icon, iconButton, iconP, ironIcon, labelA, noLabelFloatP, onBoolPropertyChanged, onPropertyChanged, paperIconButton, secondaryA, selectedA)
 
 
@@ -267,13 +267,10 @@ default vc todo =
                 --                    ]
                 --                , debugInfo vc vm todo
                 ]
+            , hoverIcons vm vc
+            , hideOnHover vm.isDone [ doneIconButton vm ]
+            , hideOnHover vm.isDeleted [ deleteIconButton vm ]
             ]
-
-
-
---, hoverIcons vm vc
---            , hideOnHover vm.isDone [ doneIconButton vm ]
---            , hideOnHover vm.isDeleted [ deleteIconButton vm ]
 
 
 debugInfo vc vm todo =
@@ -434,7 +431,8 @@ hoverIcons vm vc =
         [ --        startIconButton vm
           doneIconButton vm
         , deleteIconButton vm
-        , moveToContextMenuIcon vm vc
+
+        --        , moveToContextMenuIcon vm vc
         ]
 
 

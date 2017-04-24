@@ -70,3 +70,7 @@ onBoolPropertyChanged propertyName tagger =
 onPropertyChanged propertyName tagger =
     on ((String.Extra.dasherize propertyName) ++ "-changed")
         (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] Json.Decode.string))
+
+
+testDialog =
+    Polymer.Paper.dialog [ boolProperty "opened" True ] [ h2 [] [ text "Big Header" ] ]

@@ -29,14 +29,14 @@ import Json.Encode
 import List.Extra as List
 import Model.Types exposing (..)
 import Todo
-import Polymer.Paper as Paper
+import Polymer.Paper as Paper exposing (dialog)
 import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.ReminderOverlay exposing (showReminderOverlay)
 import View.Shared exposing (..)
 import View.Todo
-import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, paperIconButton)
+import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, paperIconButton, testDialog)
 
 
 appView m =
@@ -44,6 +44,7 @@ appView m =
         [ appDrawerLayoutView m
         , addTodoFabView m
         , bottomSheet
+        , testDialog
         , showReminderOverlay m
         ]
 

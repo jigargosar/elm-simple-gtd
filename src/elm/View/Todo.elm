@@ -486,7 +486,7 @@ hoverIcons vm vc =
     div [ class "show-on-hover" ]
         [ --        startIconButton vm
           doneIconButton vm
-        , iconButton "alarm" []
+        , iconButton "alarm" [ onClickStopPropagation (vm.onReminderButtonClicked) ]
         , deleteIconButton vm
 
         --        , moveToContextMenuIcon vm vc

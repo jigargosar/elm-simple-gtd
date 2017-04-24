@@ -87,7 +87,7 @@ type alias EditTodoViewModel =
     , onSaveClicked : Msg
     , onCancelClicked : Msg
     , onDeleteClicked : Msg
-    , onReminderMenuOpenChanged : Bool -> Msg
+    , onReminderMenuOpenChanged : String -> Msg
     }
 
 
@@ -344,7 +344,7 @@ expanded vc form todo =
                     ]
                 , div [ class "horizontal layout" ]
                     [ menuButton
-                        [ stringProperty "opened" form.reminderMenuOpen
+                        [ boolProperty "opened" (toBool form.reminderMenuOpen != False)
                         , onPropertyChanged "opened" evm.onReminderMenuOpenChanged
                         ]
                         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []

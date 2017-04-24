@@ -59,23 +59,10 @@ createKeyedItem vc todo =
 
 type alias EditTodoViewModel =
     { todo : { text : Todo.Text, id : Todo.Id }
-    , dateInputValue : String
-    , timeInputValue : String
-    , encodedProjectNames : Json.Encode.Value
-    , encodedContextNames : Json.Encode.Value
-    , projectNames : List String
-    , contextList : List Context.Model
-    , contextNames : List String
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
-    , onProjectNameChanged : String -> Msg
-    , onContextNameChanged : String -> Msg
-    , onDateChanged : String -> Msg
-    , onTimeChanged : String -> Msg
     , onSaveClicked : Msg
     , onCancelClicked : Msg
-    , onDeleteClicked : Msg
-    , onReminderMenuOpenChanged : Bool -> Msg
     }
 
 
@@ -87,9 +74,6 @@ createEditTodoViewModel vc todo etm =
 
         updateTodoForm =
             Msg.UpdateTodoForm etm
-
-        contextList =
-            vc.contextByIdDict |> Dict.values
     in
         { todo =
             { text = etm.todoText
@@ -99,19 +83,8 @@ createEditTodoViewModel vc todo etm =
         , timeInputValue = etm.time
         , onKeyUp = Msg.EditTodoFormKeyUp etm
         , onTodoTextChanged = updateTodoForm << Todo.Edit.Text
-        , onProjectNameChanged = updateTodoForm << Todo.Edit.ProjectName
-        , onContextNameChanged = updateTodoForm << Todo.Edit.ContextName
-        , onDateChanged = updateTodoForm << Todo.Edit.Date
-        , onTimeChanged = updateTodoForm << Todo.Edit.Time
-        , encodedProjectNames = vc.encodedProjectNames
-        , encodedContextNames = vc.encodedContextNames
-        , projectNames = vc.projectIdToNameDict |> Dict.values
-        , contextList = contextList
-        , contextNames = List.map Context.getName contextList
         , onSaveClicked = Msg.SaveEditingEntity
         , onCancelClicked = Msg.DeactivateEditingMode
-        , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
-        , onReminderMenuOpenChanged = updateTodoForm << Todo.Edit.ReminderMenuOpen
         }
 
 
@@ -223,6 +196,12 @@ expanded vc form todo =
 
         evm =
             createEditTodoViewModel vc todo form
+
+        projectNames =
+            [ "fooprj", "barprj" ]
+
+        contextNames =
+            [ "@fooC", "@barC" ]
     in
         item
             [ class "todo-item"
@@ -248,7 +227,7 @@ expanded vc form todo =
                             , icon "arrow-drop-down" []
                             ]
                         , menu [ class "dropdown-content" ]
-                            (evm.projectNames .|> createDropDownItem)
+                            (projectNames .|> createDropDownItem)
                         ]
                     , menuButton []
                         [ button [ class "dropdown-trigger" ]
@@ -257,7 +236,7 @@ expanded vc form todo =
                             , icon "arrow-drop-down" []
                             ]
                         , menu [ class "dropdown-content" ]
-                            (evm.contextNames .|> createDropDownItem)
+                            (contextNames .|> createDropDownItem)
                         ]
                     ]
                 ]

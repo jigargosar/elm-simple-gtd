@@ -17,7 +17,7 @@ import Keyboard.Extra exposing (Key(Enter, Escape))
 import Maybe.Extra
 import Model.Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
 import Msg exposing (Msg)
-import Polymer.Attributes exposing (boolProperty, icon, stringProperty)
+import Polymer.Attributes exposing (boolProperty, stringProperty)
 import Project
 import Set
 import Time.Format
@@ -32,8 +32,8 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper exposing (button, checkbox, dialog, dropdownMenu, input, item, itemBody, listbox, material, menu, menuButton)
-import View.Shared exposing (..)
-import WebComponents exposing (iconButton, iconP, labelA, noLabelFloatP, paperIconButton, secondaryA, selectedA)
+import View.Shared exposing (SharedViewModel)
+import WebComponents exposing (icon, iconButton, iconP, ironIcon, labelA, noLabelFloatP, paperIconButton, secondaryA, selectedA)
 
 
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
@@ -138,7 +138,7 @@ edit vm =
             , autofocus True
             ]
             []
-        , rowItemStretched
+        , div [ class "horizontal layout justified" ]
             [ input
                 [ stringProperty "label" "Date"
                 , type_ "date"
@@ -184,11 +184,11 @@ edit vm =
                 ]
                 []
             ]
-        , row
+        , div [ class "horizontal layout" ]
             [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
             , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
-            , expand []
-            , trashButton vm.onDeleteClicked
+            , div [ class "self-auto" ] []
+            , deleteIconButton vm
             ]
         ]
 
@@ -325,7 +325,11 @@ expanded vc form todo =
                             ]
                             []
                         ]
-                    , iconButton "done" [ class "flex-none", onClickStopPropagation vm.onDoneClicked ]
+                    , div [ class "horizontal layout wrap" ]
+                        [ iconButton "create" [ class "flex-none", onClickStopPropagation vm.onDoneClicked ]
+                        , iconButton "done" [ class "flex-none", onClickStopPropagation vm.onDoneClicked ]
+                        , iconButton "delete" [ class "flex-none", onClickStopPropagation vm.onDoneClicked ]
+                        ]
                     ]
                 , div [ class "horizontal layout" ]
                     [ menuButton []
@@ -355,7 +359,11 @@ expanded vc form todo =
                             ]
                         ]
                     , menuButton []
-                        [ button [ class "dropdown-trigger" ] [ text vm.projectName ]
+                        [ button [ class "dropdown-trigger" ]
+                            [ text "#"
+                            , text vm.projectName
+                            , icon "arrow-drop-down" []
+                            ]
                         , menu [ class "dropdown-content" ]
                             [ item [] [ text "fkjzd kjklfjdsl fjlkd j djflsd jfljdflsjdflsfkjslfsjlkfjsdlfjslkdljf klsdj lsjflksjlksdjfklsdjl1" ]
                             , item [] [ text "f1" ]
@@ -365,7 +373,7 @@ expanded vc form todo =
                             ]
                         ]
                     , menuButton []
-                        [ button [ class "dropdown-trigger" ] [ text vm.contextName ]
+                        [ button [ class "dropdown-trigger" ] [ text "@", text vm.contextName, icon "arrow-drop-down" [] ]
                         , menu [ class "dropdown-content" ]
                             [ item [] [ text "fkjzd kjklfjdsl fjlkd j djflsd jfljdflsjdflsfkjslfsjlkfjsdlfjslkdljf klsdj lsjflksjlksdjfklsdjl1" ]
                             , item [] [ text "f1" ]
@@ -407,13 +415,13 @@ doneIconButton vm =
     Polymer.Paper.iconButton
         [ class ("done-" ++ toString (vm.isDone))
         , onClickStopPropagation (vm.onDoneClicked)
-        , icon "check"
+        , iconP "check"
         ]
         []
 
 
 deleteIconButton vm =
-    trashButton vm.onDeleteClicked
+    View.Shared.trashButton vm.onDeleteClicked
 
 
 moveToContextMenuIcon vm vc =
@@ -421,7 +429,7 @@ moveToContextMenuIcon vm vc =
         [ onClickStopPropagation Msg.NoOp
         , attribute "horizontal-align" "right"
         ]
-        [ Polymer.Paper.iconButton [ icon "more-vert", class "dropdown-trigger" ] []
+        [ Polymer.Paper.iconButton [ iconP "more-vert", class "dropdown-trigger" ] []
         , menu
             [ class "dropdown-content"
             , attribute "attr-for-selected" "context-name"

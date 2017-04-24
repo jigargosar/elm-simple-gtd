@@ -28,6 +28,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
 import View.Shared exposing (..)
+import WebComponents exposing (onBoolPropertyChanged)
 
 
 view contextVM projectVM m =
@@ -72,11 +73,6 @@ binItemView m =
 
 doneItemView m =
     item [ onClick (SetView DoneView) ] [ text "Done" ]
-
-
-onBoolPropertyChanged propertyName tagger =
-    on ((String.Extra.dasherize propertyName) ++ "-changed")
-        (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] Json.Decode.bool))
 
 
 

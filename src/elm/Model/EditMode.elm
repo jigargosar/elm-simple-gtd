@@ -30,22 +30,6 @@ setEditModelToEditTodo todo =
     updateEditMode (createEditTodoMode todo)
 
 
-expandTodo todo model =
-    setEditMode (createExpandedTodoMode todo model |> EditMode.TodoMode) model
-
-
-createExpandedTodoMode : Todo.Model -> Model -> Todo.Edit.Mode
-createExpandedTodoMode todo model =
-    let
-        projectName =
-            Model.getMaybeProjectNameOfTodo todo model ?= ""
-
-        contextName =
-            Model.getContextNameOfTodo todo model ?= ""
-    in
-        Todo.Edit.create todo projectName contextName model.now |> Todo.Edit.ExpandedMode
-
-
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
     setEditMode (createEntityEditMode entity model) model
@@ -111,14 +95,6 @@ saveEditModeEntity model =
                 |> Model.insertProjectIfNotExist etm.projectName
                 >> Model.insertContextIfNotExist etm.contextName
                 >> Model.updateTodoFromEditTodoForm etm
-
-        EditMode.TodoMode mode ->
-            case mode of
-                Todo.Edit.ExpandedMode form ->
-                    model
-                        |> Model.insertProjectIfNotExist form.projectName
-                        >> Model.insertContextIfNotExist form.contextName
-                        >> Model.updateTodoFromEditTodoForm form
 
         _ ->
             model

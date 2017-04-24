@@ -33,11 +33,16 @@ type Form
     | ReminderForm ReminderFormModel
 
 
-type TextFormField
+type FormField
+    = TextFormField TextFormFieldValue
+    | ReminderFormField ReminderFormFieldValue
+
+
+type TextFormFieldValue
     = Text String
 
 
-type ReminderFormField
+type ReminderFormFieldValue
     = Date String
     | Time String
     | ReminderMenuOpen Bool
@@ -67,7 +72,14 @@ createTextForm todo projectName contextName now =
         }
 
 
-set : TextFormField -> TextFormModel -> TextFormModel
+set2 : TextFormFieldValue -> TextFormModel -> TextFormModel
+set2 field model =
+    case field of
+        Text value ->
+            { model | todoText = value }
+
+
+set : TextFormFieldValue -> TextFormModel -> TextFormModel
 set field model =
     case field of
         Text value ->

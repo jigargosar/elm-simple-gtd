@@ -33,7 +33,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper exposing (button, checkbox, dialog, dropdownMenu, input, item, itemBody, listbox, material, menu, menuButton)
 import View.Shared exposing (SharedViewModel)
-import WebComponents exposing (icon, iconButton, iconP, ironIcon, labelA, noLabelFloatP, paperIconButton, secondaryA, selectedA)
+import WebComponents exposing (icon, iconButton, iconP, ironIcon, labelA, noLabelFloatP, onBoolPropertyChanged, paperIconButton, secondaryA, selectedA)
 
 
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
@@ -87,6 +87,7 @@ type alias EditTodoViewModel =
     , onSaveClicked : Msg
     , onCancelClicked : Msg
     , onDeleteClicked : Msg
+    , onReminderMenuButtonOpenStateChanged : Msg
     }
 
 
@@ -131,6 +132,7 @@ createEditTodoViewModel vc todo etm =
         , onSaveClicked = Msg.SaveEditingEntity
         , onCancelClicked = Msg.DeactivateEditingMode
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
+        , onReminderMenuButtonOpenStateChanged = Msg.NoOp
         }
 
 
@@ -342,7 +344,9 @@ expanded vc form todo =
                     ]
                 , div [ class "horizontal layout" ]
                     [ menuButton
-                        [ boolProperty "opened" form.reminderMenuButtonOpened ]
+                        [ boolProperty "opened" form.reminderMenuButtonOpened
+                        , onBoolPropertyChanged "opened" evm.onReminderMenuButtonOpenStateChanged
+                        ]
                         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
                         , div [ class "static dropdown-content" ]
                             [ div [ class "font-subhead" ] [ text "Select date and time" ]

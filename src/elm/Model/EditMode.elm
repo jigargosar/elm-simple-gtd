@@ -96,11 +96,12 @@ saveEditModeEntity model =
                 >> (setProjectStore # model)
                 ?= model
 
-        EditMode.EditTodo etm ->
+        EditMode.EditTodo form ->
             model
-                |> Model.insertProjectIfNotExist etm.projectName
-                >> Model.insertContextIfNotExist etm.contextName
-                >> Model.updateTodoFromEditTodoForm etm
+                |> Model.insertProjectIfNotExist form.projectName
+                >> Model.insertContextIfNotExist form.contextName
+                >> Model.updateTodoFromEditTodoForm form
+                >> startEditingTodoById form.id
 
         _ ->
             model

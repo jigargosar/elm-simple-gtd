@@ -79,8 +79,6 @@ createEditTodoViewModel vc todo etm =
             { text = etm.todoText
             , id = todoId
             }
-        , dateInputValue = etm.date
-        , timeInputValue = etm.time
         , onKeyUp = Msg.EditTodoFormKeyUp etm
         , onTodoTextChanged = updateTodoForm << Todo.Edit.Text
         , onSaveClicked = Msg.SaveEditingEntity

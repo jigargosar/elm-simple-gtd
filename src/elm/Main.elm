@@ -239,7 +239,7 @@ update msg =
 
                 SaveEditingEntity ->
                     Return.map (Model.saveEditModeEntity)
-                        >> andThenUpdate DeactivateEditingMode
+--                        >> andThenUpdate DeactivateEditingMode
 
                 OnEntityAction entity action ->
                     case (action) of

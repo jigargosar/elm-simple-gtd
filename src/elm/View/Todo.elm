@@ -341,7 +341,8 @@ expanded vc form todo =
                         ]
                     ]
                 , div [ class "horizontal layout" ]
-                    [ menuButton []
+                    [ menuButton
+                        []
                         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
                         , div [ class "static dropdown-content" ]
                             [ div [ class "font-subhead" ] [ text "Select date and time" ]

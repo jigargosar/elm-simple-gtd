@@ -57,7 +57,7 @@ createKeyedItem vc todo =
 
 
 type alias EditTodoViewModel =
-    { todo : { text : Todo.Text, id : Todo.Id }
+    { todo : { text : Todo.Text}
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
     , onSaveClicked : Msg

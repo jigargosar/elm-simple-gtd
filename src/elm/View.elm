@@ -43,7 +43,6 @@ appView m =
     div []
         [ appDrawerLayoutView m
         , addTodoFabView m
-        , bottomSheet
         , showReminderOverlay m
         ]
 

@@ -17,11 +17,6 @@ import Todo
 type alias Form =
     { id : Document.Id
     , todoText : Todo.Text
-    , projectName : Project.Name
-    , contextName : Context.Name
-    , date : String
-    , time : String
-    , reminderMenuOpen : Bool
     }
 
 
@@ -34,12 +29,7 @@ type alias ReminderForm =
 
 
 type Field
-    = ProjectName String
-    | ContextName String
-    | Text String
-    | Date String
-    | Time String
-    | ReminderMenuOpen Bool
+    = Text String
 
 
 createReminderForm : Todo.Model -> Time -> ReminderForm
@@ -63,31 +53,11 @@ create todo projectName contextName now =
     in
         { id = Document.getId todo
         , todoText = Todo.getText todo
-        , projectName = projectName
-        , contextName = contextName
-        , date = (Time.Format.format "%Y-%m-%d") timeInMilli
-        , time = (Time.Format.format "%H:%M") timeInMilli
-        , reminderMenuOpen = False
         }
 
 
 set : Field -> Form -> Form
 set field model =
     case field of
-        ProjectName value ->
-            { model | projectName = value }
-
-        ContextName value ->
-            { model | contextName = value }
-
         Text value ->
             { model | todoText = value }
-
-        Date value ->
-            { model | date = value }
-
-        Time value ->
-            { model | time = value }
-
-        ReminderMenuOpen value ->
-            { model | reminderMenuOpen = value }

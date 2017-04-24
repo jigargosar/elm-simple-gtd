@@ -103,9 +103,9 @@ saveEditModeEntity model =
 
         EditMode.EditTodo form ->
             model
-                |> Model.insertProjectIfNotExist form.projectName
-                >> Model.insertContextIfNotExist form.contextName
-                >> Model.updateTodoFromEditTodoForm form
+                |> --                Model.insertProjectIfNotExist form.projectName
+                   --                >> Model.insertContextIfNotExist form.contextName
+                   Model.updateTodoFromEditTodoForm form
                 >> startEditingTodoById form.id
 
         _ ->

@@ -326,7 +326,19 @@ expanded vc form todo =
                 [ div [ class "layout horizontal center" ]
                     [ --checkBoxView vm
                       div [ class "flex-auto" ]
-                        [ div [] [ text evm.todo.text ]
+                        [ --                        div [] [ text evm.todo.text ]
+                          --                          Html.node "paper-input"
+                          Html.node "paper-textarea"
+                            -- todo: add after trimming newline on enter.
+                            [ id evm.todo.inputId
+                            , class "auto-focus"
+                            , stringProperty "label" "Todo"
+                            , value (evm.todo.text)
+                            , boolProperty "stopKeyboardEventPropagation" True
+                            , onInput evm.onTodoTextChanged
+                            , autofocus True
+                            ]
+                            []
                         , div
                             [ classList
                                 [ "secondary-color" => not vm.isReminderActive
@@ -355,6 +367,9 @@ expanded vc form todo =
                                 , labelA "Date"
                                 , autofocus True
                                 , value form.date
+                                , boolProperty
+                                    "stopKeyboardEventPropagation"
+                                    True
                                 , onInput evm.onDateChanged
                                 ]
                                 []
@@ -362,6 +377,7 @@ expanded vc form todo =
                                 [ type_ "time"
                                 , labelA "Time"
                                 , value form.time
+                                , boolProperty "stopKeyboardEventPropagation" True
                                 , onInput evm.onTimeChanged
                                 ]
                                 []

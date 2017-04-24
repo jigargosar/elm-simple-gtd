@@ -46,7 +46,7 @@ createKeyedItem vc todo =
             case vc.editMode of
                 EditMode.EditTodo form ->
                     if Document.hasId form.id todo then
-                        editView vm vc form todo
+                        editView vm form todo
                     else
                         default vm
 
@@ -65,8 +65,8 @@ type alias EditTodoViewModel =
     }
 
 
-createEditTodoViewModel : Todo.Model -> TodoForm -> EditTodoViewModel
-createEditTodoViewModel todo form =
+createEditTodoViewModel : TodoForm -> EditTodoViewModel
+createEditTodoViewModel form =
     let
         todoId =
             form.id
@@ -157,11 +157,11 @@ default vm =
         ]
 
 
-editView : TodoViewModel -> SharedViewModel -> Todo.Edit.Form -> Todo.Model -> Html Msg
-editView vm vc form todo =
+editView : TodoViewModel -> Todo.Edit.Form -> Todo.Model -> Html Msg
+editView vm form todo =
     let
         evm =
-            createEditTodoViewModel todo form
+            createEditTodoViewModel form
 
         projectNames =
             [ "fooprj", "barprj" ]

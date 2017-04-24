@@ -323,7 +323,7 @@ expanded vc form todo =
                                 , "font-body1" => True
                                 ]
                             ]
-                            []
+                            [ text vm.time ]
                         ]
                     , div [ class "horizontal layout wrap" ]
                         [ iconButton "create" [ class "flex-none", onClickStopPropagation vm.onDoneClicked ]

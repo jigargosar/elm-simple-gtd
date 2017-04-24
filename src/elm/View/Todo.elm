@@ -374,27 +374,25 @@ expanded vc form todo =
                             , icon "arrow-drop-down" []
                             ]
                         , menu [ class "dropdown-content" ]
-                            [ item [] [ text "fkjzd kjklfjdsl fjlkd j djflsd jfljdflsjdflsfkjslfsjlkfjsdlfjslkdljf klsdj lsjflksjlksdjfklsdjl1" ]
-                            , item [] [ text "f1" ]
-                            , item [] [ text "f1" ]
-                            , item [] [ text "f1" ]
-                            , item [] [ text "f1" ]
-                            ]
+                            (evm.projectNames .|> createDropDownItem)
                         ]
                     , menuButton []
-                        [ button [ class "dropdown-trigger" ] [ text "@", text vm.contextName, icon "arrow-drop-down" [] ]
-                        , menu [ class "dropdown-content" ]
-                            [ item [] [ text "fkjzd kjklfjdsl fjlkd j djflsd jfljdflsjdflsfkjslfsjlkfjsdlfjslkdljf klsdj lsjflksjlksdjfklsdjl1" ]
-                            , item [] [ text "f1" ]
-                            , item [] [ text "f1" ]
-                            , item [] [ text "f1" ]
-                            , item [] [ text "f1" ]
+                        [ button [ class "dropdown-trigger" ]
+                            [ text "@"
+                            , text vm.projectName
+                            , icon "arrow-drop-down" []
                             ]
+                        , menu [ class "dropdown-content" ]
+                            (evm.contextNames .|> createDropDownItem)
                         ]
                     ]
                 , debugInfo vc vm todo
                 ]
             ]
+
+
+createDropDownItem title =
+    item [] [ text title ]
 
 
 checkBoxView vm =

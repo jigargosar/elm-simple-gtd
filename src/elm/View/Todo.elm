@@ -46,7 +46,7 @@ createKeyedItem vc todo =
             case vc.editMode of
                 EditMode.EditTodo form ->
                     if Document.hasId form.id todo then
-                        editView vm form todo
+                        editView vm form
                     else
                         default vm
 
@@ -157,8 +157,8 @@ default vm =
         ]
 
 
-editView : TodoViewModel -> Todo.Edit.Form -> Todo.Model -> Html Msg
-editView vm form todo =
+editView : TodoViewModel -> Todo.Edit.Form -> Html Msg
+editView vm form =
     let
         evm =
             createEditTodoViewModel form

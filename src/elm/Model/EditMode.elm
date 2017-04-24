@@ -138,7 +138,7 @@ createEditTodoMode todo model =
         contextName =
             Model.getContextNameOfTodo todo model ?= ""
     in
-        Todo.Edit.create todo projectName contextName model.now |> EditMode.EditTodo
+        Todo.Edit.createTextForm todo projectName contextName model.now |> EditMode.EditTodo
 
 
 createEditReminderTodoMode : Todo.Model -> Model -> EditMode

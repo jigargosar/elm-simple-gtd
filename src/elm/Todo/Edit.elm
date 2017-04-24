@@ -56,8 +56,8 @@ createReminderForm todo now =
         }
 
 
-create : Todo.Model -> Project.Name -> Context.Name -> Time -> TextFormModel
-create todo projectName contextName now =
+createTextForm : Todo.Model -> Project.Name -> Context.Name -> Time -> TextFormModel
+createTextForm todo projectName contextName now =
     let
         timeInMilli =
             Todo.getDueAt todo ?= now + Time.hour

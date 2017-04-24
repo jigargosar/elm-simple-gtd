@@ -346,7 +346,7 @@ expanded vc form todo =
                     [ menuButton
                         [ boolProperty "opened" form.reminderMenuOpen
                         , onBoolPropertyChanged "opened" evm.onReminderMenuOpenChanged
-                        , boolProperty "stopKeyboardEventPropagation" True
+                        
                         ]
                         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
                         , div [ class "static dropdown-content" ]
@@ -354,7 +354,7 @@ expanded vc form todo =
                             , input
                                 [ type_ "date"
                                 , labelA "Date"
-                                , boolProperty "stopKeyboardEventPropagation" True
+                                
                                 , autofocus True
                                 , value form.date
                                 , onInput evm.onDateChanged
@@ -363,7 +363,7 @@ expanded vc form todo =
                             , input
                                 [ type_ "time"
                                 , labelA "Time"
-                                , boolProperty "stopKeyboardEventPropagation" True
+                                
                                 , value form.time
                                 , onInput evm.onTimeChanged
                                 ]
@@ -374,7 +374,7 @@ expanded vc form todo =
                             ]
                         ]
                     , menuButton
-                        [ boolProperty "stopKeyboardEventPropagation" True
+                        
                         ]
                         [ button [ class "dropdown-trigger" ]
                             [ text "#"
@@ -383,11 +383,11 @@ expanded vc form todo =
                             ]
                         , menu
                             [ class "dropdown-content"
-                            , boolProperty "stopKeyboardEventPropagation" True
+                            
                             ]
                             (evm.projectNames .|> createDropDownItem)
                         ]
-                    , menuButton [ boolProperty "stopKeyboardEventPropagation" True ]
+                    , menuButton  ]
                         [ button [ class "dropdown-trigger" ]
                             [ text "@"
                             , text vm.contextName
@@ -395,7 +395,7 @@ expanded vc form todo =
                             ]
                         , menu
                             [ class "dropdown-content"
-                            , boolProperty "stopKeyboardEventPropagation" True
+                            
                             ]
                             (evm.contextNames .|> createDropDownItem)
                         ]

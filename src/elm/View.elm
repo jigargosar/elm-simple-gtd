@@ -71,7 +71,7 @@ appDrawerLayoutView m =
         projectVMs =
             projectVM.vmList
     in
-        App.drawerLayout []
+        App.drawerLayout [ attribute "fullbleed" "true" ]
             [ View.AppDrawer.view contextVM projectVM m
             , App.headerLayout []
                 [ appHeaderView m

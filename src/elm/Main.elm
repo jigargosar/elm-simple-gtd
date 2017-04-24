@@ -172,10 +172,6 @@ update msg =
                     Return.map (Model.setEditModelToEditTodo todo)
                         >> autoFocusPaperInputCmd
 
-                ExpandTodo todo ->
-                    Return.map (Model.expandTodo todo)
-                        >> autoFocusPaperInputCmd
-
                 UpdateTodoForm etm field value ->
                     Return.map
                         (Todo.Edit.set field value etm

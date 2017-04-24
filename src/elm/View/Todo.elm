@@ -176,7 +176,7 @@ expanded vc form todo =
                 , isSelected = Set.member todoId vc.selection
                 , projectName =
                     Todo.getProjectId todo
-                        |> (Dict.get # vc.projectByIdDict)
+                        |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
                         ?= "<No Project>"
                 , contextName =
                     Todo.getContextId todo

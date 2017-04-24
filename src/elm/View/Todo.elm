@@ -119,11 +119,11 @@ createEditTodoViewModel vc todo etm =
         , dateInputValue = etm.date
         , timeInputValue = etm.time
         , onKeyUp = Msg.EditTodoFormKeyUp etm
-        , onTodoTextChanged = updateTodoForm Todo.Edit.Text
-        , onProjectNameChanged = updateTodoForm Todo.Edit.ProjectName
-        , onContextNameChanged = updateTodoForm Todo.Edit.ContextName
-        , onDateChanged = updateTodoForm Todo.Edit.Date
-        , onTimeChanged = updateTodoForm Todo.Edit.Time
+        , onTodoTextChanged = updateTodoForm << Todo.Edit.Text
+        , onProjectNameChanged = updateTodoForm << Todo.Edit.ProjectName
+        , onContextNameChanged = updateTodoForm << Todo.Edit.ContextName
+        , onDateChanged = updateTodoForm << Todo.Edit.Date
+        , onTimeChanged = updateTodoForm << Todo.Edit.Time
         , encodedProjectNames = vc.encodedProjectNames
         , encodedContextNames = vc.encodedContextNames
         , projectNames = vc.projectIdToNameDict |> Dict.values
@@ -132,7 +132,7 @@ createEditTodoViewModel vc todo etm =
         , onSaveClicked = Msg.SaveEditingEntity
         , onCancelClicked = Msg.DeactivateEditingMode
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
-        , onReminderMenuOpenChanged = updateTodoForm Todo.Edit.ReminderMenuOpen
+        , onReminderMenuOpenChanged = updateTodoForm << Todo.Edit.ReminderMenuOpen
         }
 
 
@@ -316,9 +316,6 @@ expanded vc form todo =
 
         evm =
             createEditTodoViewModel vc todo form
-
-        _ =
-            Debug.log "form.reminderMenuOpen" (form.reminderMenuOpen)
     in
         item
             [ class "todo-item"

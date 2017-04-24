@@ -30,6 +30,11 @@ startEditingTodo todo =
     updateEditMode (createEditTodoMode todo)
 
 
+startEditingReminder : Todo.Model -> ModelF
+startEditingReminder todo =
+    updateEditMode (createEditReminderTodoMode todo)
+
+
 startEditingTodoById : Todo.Id -> ModelF
 startEditingTodoById id =
     applyMaybeWith (Model.TodoStore.findTodoById id)
@@ -134,6 +139,11 @@ createEditTodoMode todo model =
             Model.getContextNameOfTodo todo model ?= ""
     in
         Todo.Edit.create todo projectName contextName model.now |> EditMode.EditTodo
+
+
+createEditReminderTodoMode : Todo.Model -> Model -> EditMode
+createEditReminderTodoMode todo model =
+    Todo.Edit.createReminderForm todo model.now |> EditMode.EditTodoReminder
 
 
 getMaybeEditTodoModel =

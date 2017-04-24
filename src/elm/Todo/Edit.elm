@@ -25,6 +25,14 @@ type alias Form =
     }
 
 
+type alias ReminderForm =
+    { id : Document.Id
+    , date : String
+    , time : String
+    , reminderMenuOpen : Bool
+    }
+
+
 type Field
     = ProjectName String
     | ContextName String
@@ -32,6 +40,19 @@ type Field
     | Date String
     | Time String
     | ReminderMenuOpen Bool
+
+
+createReminderForm : Todo.Model -> Time -> ReminderForm
+createReminderForm todo now =
+    let
+        timeInMilli =
+            Todo.getDueAt todo ?= now + Time.hour
+    in
+        { id = Document.getId todo
+        , date = (Time.Format.format "%Y-%m-%d") timeInMilli
+        , time = (Time.Format.format "%H:%M") timeInMilli
+        , reminderMenuOpen = False
+        }
 
 
 create : Todo.Model -> Project.Name -> Context.Name -> Time -> Form

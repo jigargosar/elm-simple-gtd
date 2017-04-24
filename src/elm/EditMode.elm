@@ -38,6 +38,7 @@ type alias NewTodoModel =
 type EditMode
     = NewTodo NewTodoModel
     | EditTodo TodoForm
+    | EditTodoReminder Todo.Edit.ReminderForm
     | EditContext EditContextModel
     | EditProject EditProjectModel
     | None

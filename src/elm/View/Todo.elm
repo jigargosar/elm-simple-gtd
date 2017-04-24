@@ -219,6 +219,7 @@ type alias DefaultTodoViewModel =
     , onDeleteClicked : Msg
     , showDetails : Bool
     , isReminderActive : Bool
+    , onReminderButtonClicked : Msg
     }
 
 
@@ -251,6 +252,7 @@ default vc todo =
                 , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
                 , showDetails = vc.showDetails
                 , isReminderActive = Todo.isReminderActive todo
+                , onReminderButtonClicked = Msg.StartEditingReminder todo
                 }
     in
         item
@@ -322,6 +324,7 @@ expanded vc form todo =
                 , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
                 , showDetails = vc.showDetails
                 , isReminderActive = Todo.isReminderActive todo
+                , onReminderButtonClicked = Msg.StartEditingReminder todo
                 }
 
         evm =

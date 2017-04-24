@@ -60,6 +60,7 @@ type Msg
     | DeactivateEditingMode
     | NewTodoKeyUp String KeyboardEvent
     | StartEditingTodo Todo.Model
+    | StartEditingReminder Todo.Model
     | SaveEditingEntity
     | FocusPaperInput String
     | UpdateTodoForm Todo.Edit.Form Todo.Edit.Field

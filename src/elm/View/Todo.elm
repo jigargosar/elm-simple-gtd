@@ -381,7 +381,10 @@ expanded vc form todo =
                             , text vm.projectName
                             , icon "arrow-drop-down" []
                             ]
-                        , menu [ class "dropdown-content" ]
+                        , menu
+                            [ class "dropdown-content"
+                            , boolProperty "stopKeyboardEventPropagation" True
+                            ]
                             (evm.projectNames .|> createDropDownItem)
                         ]
                     , menuButton [ boolProperty "stopKeyboardEventPropagation" True ]
@@ -392,6 +395,7 @@ expanded vc form todo =
                             ]
                         , menu
                             [ class "dropdown-content"
+                            , boolProperty "stopKeyboardEventPropagation" True
                             ]
                             (evm.contextNames .|> createDropDownItem)
                         ]

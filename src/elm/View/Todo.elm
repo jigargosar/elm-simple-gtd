@@ -42,19 +42,16 @@ createKeyedItem vc todo =
         vm =
             createTodoViewModel vc todo
 
-        notEditingView _ =
-            default vm
-
         view =
             case vc.editMode of
                 EditMode.EditTodo form ->
                     if Document.hasId form.id todo then
                         editView vc form todo
                     else
-                        notEditingView ()
+                        default vm
 
                 _ ->
-                    notEditingView ()
+                    default vm
     in
         ( Document.getId todo, view )
 

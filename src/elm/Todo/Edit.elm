@@ -24,20 +24,12 @@ type alias Form =
     }
 
 
-type Mode
-    = ExpandedMode Form
-
-
 type Field
     = ProjectName
     | ContextName
     | Text
     | Date
     | Time
-
-
-expandMode todo projectName contextName now =
-    create todo projectName contextName now |> ExpandedMode
 
 
 create : Todo.Model -> Project.Name -> Context.Name -> Time -> Form

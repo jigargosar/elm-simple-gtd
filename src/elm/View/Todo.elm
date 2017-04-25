@@ -239,6 +239,7 @@ reminderMenuButton form reminderVM =
         [ boolProperty "opened" form.reminderMenuOpen
         , onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
         , boolProperty "dynamicAlign" True
+        , boolProperty "noOverlap" True
         , onClickStopPropagation Msg.NoOp
         ]
         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []

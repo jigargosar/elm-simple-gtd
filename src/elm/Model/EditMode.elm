@@ -101,17 +101,12 @@ saveEditModeEntity model =
                 >> (setProjectStore # model)
                 ?= model
 
-        EditMode.EditTodo form ->
-            case form of
-                Todo.Form.TextForm formModel ->
-                    model
-                        |> --                Model.insertProjectIfNotExist form.projectName
-                           --                >> Model.insertContextIfNotExist form.contextName
-                           Model.updateTodoFromEditTodoForm formModel
-                        >> startEditingTodoById formModel.id
-
-                _ ->
-                    model
+        EditMode.TodoForm form ->
+            model
+                |> --                Model.insertProjectIfNotExist form.projectName
+                   --                >> Model.insertContextIfNotExist form.contextName
+                   Model.updateTodoFromEditTodoForm form
+                >> startEditingTodoById form.id
 
         _ ->
             model
@@ -143,12 +138,12 @@ createEditTodoMode todo model =
         contextName =
             Model.getContextNameOfTodo todo model ?= ""
     in
-        Todo.Form.createTextForm todo projectName contextName model.now |> EditMode.EditTodo
+        Todo.Form.createTextForm todo projectName contextName model.now |> EditMode.TodoForm
 
 
 createEditReminderTodoMode : Todo.Model -> Model -> EditMode
 createEditReminderTodoMode todo model =
-    Todo.Form.createReminderForm todo model.now |> EditMode.EditTodo
+    Todo.ReminderForm.create todo model.now |> EditMode.TodoReminderForm
 
 
 getMaybeEditTodoModel =
@@ -160,7 +155,7 @@ getEditNewTodoModel =
 
 
 setEditTodoModel =
-    EditMode.EditTodo >> setEditMode
+    EditMode.TodoForm >> setEditMode
 
 
 deactivateEditingMode =

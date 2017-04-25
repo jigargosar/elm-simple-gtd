@@ -20,49 +20,11 @@ type alias Model =
     }
 
 
-type alias ReminderFormModel =
-    { id : Document.Id
-    , date : String
-    , time : String
-    , reminderMenuOpen : Bool
-    }
-
-
-type Form
-    = TextForm Model
-    | ReminderForm ReminderFormModel
-
-
-type FormField
-    = TextFormField Action
-    | ReminderFormField ReminderFormFieldValue
-
-
 type Action
-    = Text String
+    = SetText String
 
 
-type ReminderFormFieldValue
-    = Date String
-    | Time String
-    | ReminderMenuOpen Bool
-
-
-createReminderForm : Todo.Model -> Time -> Form
-createReminderForm todo now =
-    let
-        timeInMilli =
-            Todo.getDueAt todo ?= now + Time.hour
-    in
-        { id = Document.getId todo
-        , date = (Time.Format.format "%Y-%m-%d") timeInMilli
-        , time = (Time.Format.format "%H:%M") timeInMilli
-        , reminderMenuOpen = False
-        }
-            |> ReminderForm
-
-
-createTextForm : Todo.Model -> Project.Name -> Context.Name -> Time -> Form
+createTextForm : Todo.Model -> Project.Name -> Context.Name -> Time -> Model
 createTextForm todo projectName contextName now =
     let
         timeInMilli =
@@ -71,7 +33,6 @@ createTextForm todo projectName contextName now =
         { id = Document.getId todo
         , todoText = Todo.getText todo
         }
-            |> TextForm
 
 
 
@@ -90,5 +51,5 @@ createTextForm todo projectName contextName now =
 set : Action -> Model -> Model
 set action model =
     case action of
-        Text value ->
+        SetText value ->
             { model | todoText = value }

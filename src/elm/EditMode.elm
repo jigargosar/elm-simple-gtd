@@ -37,7 +37,8 @@ type alias NewTodoModel =
 
 type EditMode
     = NewTodo NewTodoModel
-    | EditTodo Todo.Form.Form
+    | TodoForm Todo.Form.Model
+    | TodoReminderForm Todo.ReminderForm.Model
     | EditContext EditContextModel
     | EditProject EditProjectModel
     | None
@@ -71,7 +72,7 @@ editProjectSetName name epm =
 
 getMaybeEditTodoModel model =
     case model of
-        EditTodo model ->
+        TodoForm model ->
             Just model
 
         _ ->

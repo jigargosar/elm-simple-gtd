@@ -28,6 +28,7 @@ import Set
 import Store
 import Time exposing (Time)
 import Todo
+import Todo.Form
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -261,7 +262,7 @@ getActiveTodoListGroupedBy fn =
 --            )
 
 
-updateTodoFromEditTodoForm : TodoForm -> ModelF
+updateTodoFromEditTodoForm : Todo.Form.Model -> ModelF
 updateTodoFromEditTodoForm { todoText, id } =
     Model.TodoStore.updateTodoById
         [ Todo.SetText todoText

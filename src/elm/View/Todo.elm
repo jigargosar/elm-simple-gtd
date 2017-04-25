@@ -10,7 +10,7 @@ import EditMode exposing (TodoForm)
 import Ext.Decode exposing (traceDecoder)
 import Ext.Time
 import Html.Attributes.Extra exposing (intProperty)
-import Html.Events.Extra exposing (onClickStopPropagation)
+import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
 import Json.Decode
 import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
@@ -241,6 +241,7 @@ reminderMenuButton form reminderVM =
         , boolProperty "dynamicAlign" True
         , boolProperty "noOverlap" True
         , onClickStopPropagation Msg.NoOp
+        , boolProperty "stopKeyboardEventPropagation" True
         ]
         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
         , div [ class "static dropdown-content" ]
@@ -263,7 +264,11 @@ reminderMenuButton form reminderVM =
                 ]
                 []
             , div [ class "horizontal layout end-justified" ]
-                [ Paper.button [ attribute "raised" "true", onClickStopPropagation reminderVM.onSaveClicked ]
+                [ Paper.button
+                    [ attribute "raised" "true"
+                    , onClick reminderVM.onSaveClicked
+                    , boolProperty "stopKeyboardEventPropagation" True
+                    ]
                     [ text "Save" ]
                 ]
             ]

@@ -45,6 +45,9 @@ createKeyedItem vc todo =
         maybeForm =
             vc.getMaybeEditTodoFormForTodo todo
 
+        maybeReminderForm =
+            vc.getMaybeTodoReminderFormForTodo todo
+
         view =
             maybeForm |> Maybe.Extra.unpack (\_ -> default vm) (createEditTodoViewModel >> editView vm)
     in

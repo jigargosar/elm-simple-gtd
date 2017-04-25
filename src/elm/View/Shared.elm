@@ -28,11 +28,13 @@ import Model.Internal as Model
 import Project
 import Todo
 import Todo.Form
+import Todo.ReminderForm
 
 
 type alias SharedViewModel =
     { now : Time
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
+    , getMaybeTodoReminderFormForTodo : Todo.Model -> Maybe Todo.ReminderForm.Model
     , getMaybeEditEntityFormForEntityId : Document.Id -> Maybe EditMode.EntityForm
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
@@ -43,63 +45,78 @@ type alias SharedViewModel =
 
 createSharedViewModel : Model -> SharedViewModel
 createSharedViewModel model =
-    { now = Model.getNow model
-    , projectByIdDict = Model.getProjectByIdDict model
-    , contextByIdDict = Model.getContextByIdDict model
-    , selection = Model.getSelectedTodoIdSet model
-    , getMaybeEditTodoFormForTodo =
-        \todo ->
-            case Model.getEditMode model of
-                EditMode.TodoForm form ->
-                    if Document.hasId form.id todo then
-                        Just form
-                    else
+    let
+        editMode =
+            Model.getEditMode model
+    in
+        { now = Model.getNow model
+        , projectByIdDict = Model.getProjectByIdDict model
+        , contextByIdDict = Model.getContextByIdDict model
+        , selection = Model.getSelectedTodoIdSet model
+        , getMaybeEditTodoFormForTodo =
+            \todo ->
+                case editMode of
+                    EditMode.TodoForm form ->
+                        if Document.hasId form.id todo then
+                            Just form
+                        else
+                            Nothing
+
+                    _ ->
+                        Nothing
+        , getMaybeTodoReminderFormForTodo =
+            \todo ->
+                case editMode of
+                    EditMode.TodoReminderForm form ->
+                        if Document.hasId form.id todo then
+                            Just form
+                        else
+                            Nothing
+
+                    _ ->
                         Nothing
 
-                _ ->
-                    Nothing
+        --    , getMaybeEditProjectFormForProject =
+        --        \project ->
+        --            case editMode of
+        --                EditMode.EditProject form ->
+        --                    if Document.hasId form.id project then
+        --                        Just form
+        --                    else
+        --                        Nothing
+        --
+        --                _ ->
+        --                    Nothing
+        --    , getMaybeEditContextFormForContext =
+        --        \context ->
+        --            case editMode of
+        --                EditMode.EditContext form ->
+        --                    if Document.hasId form.id context then
+        --                        Just form
+        --                    else
+        --                        Nothing
+        --
+        --                _ ->
+        --                    Nothing
+        , getMaybeEditEntityFormForEntityId =
+            \entityId ->
+                case editMode of
+                    EditMode.EditContext form ->
+                        if entityId == form.id then
+                            Just form
+                        else
+                            Nothing
 
-    --    , getMaybeEditProjectFormForProject =
-    --        \project ->
-    --            case Model.getEditMode model of
-    --                EditMode.EditProject form ->
-    --                    if Document.hasId form.id project then
-    --                        Just form
-    --                    else
-    --                        Nothing
-    --
-    --                _ ->
-    --                    Nothing
-    --    , getMaybeEditContextFormForContext =
-    --        \context ->
-    --            case Model.getEditMode model of
-    --                EditMode.EditContext form ->
-    --                    if Document.hasId form.id context then
-    --                        Just form
-    --                    else
-    --                        Nothing
-    --
-    --                _ ->
-    --                    Nothing
-    , getMaybeEditEntityFormForEntityId =
-        \entityId ->
-            case Model.getEditMode model of
-                EditMode.EditContext form ->
-                    if entityId == form.id then
-                        Just form
-                    else
+                    EditMode.EditProject form ->
+                        if entityId == form.id then
+                            Just form
+                        else
+                            Nothing
+
+                    _ ->
                         Nothing
-
-                EditMode.EditProject form ->
-                    if entityId == form.id then
-                        Just form
-                    else
-                        Nothing
-
-                _ ->
-                    Nothing
-    , showDetails = Model.isShowDetailsKeyPressed model
-    }
+        , showDetails = Model.isShowDetailsKeyPressed model
+        }
 
 
 defaultBadge : { x | name : String, count : Int } -> Html msg

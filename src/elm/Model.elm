@@ -77,11 +77,11 @@ getContextByIdDict =
 
 
 getActiveProjects =
-    (.projectStore) >> Store.reject Document.isDeleted
+    (.projectStore) >> Store.reject Document.isDeleted >> (::) Project.null
 
 
 getActiveContexts =
-    (.contextStore) >> Store.reject Document.isDeleted
+    (.contextStore) >> Store.reject Document.isDeleted >> (::) Context.null
 
 
 getProjectByIdDict =

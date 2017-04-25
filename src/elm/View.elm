@@ -85,10 +85,10 @@ appDrawerLayoutView m =
 appHeaderView m =
     App.header
         [ attribute "reveals" ""
-
-        --        , attribute "fixed" "true"
         , attribute "condenses" ""
         , attribute "effects" "waterfall"
+
+        --        , attribute "fixed" "true"
         ]
         [ App.toolbar []
             [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "true" ] []

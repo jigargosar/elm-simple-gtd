@@ -16,7 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "iron-icons": "polymerelements/iron-icons#^1.0.0",
+    "iron-icons": "PolymerElements/iron-icons#^1.2.1",
     "paper-button": "polymerelements/paper-button#^1.0.0",
     "paper-fab": "PolymerElements/paper-fab#^1.2.1",
     "paper-checkbox": "^1.4.2",
@@ -24,7 +24,7 @@
     "platinum-sw": "polymerelements/platinum-sw#^1.3.0",
     "web-animations-js": "web-animations/web-animations-js#^2.2.1",
     "polymer": "^1.9.1",
-    "polymerfire": "firebase/polymerfire#^0.10.3",
+    "polymerfire": "firebase/polymerfire#^0.11.1",
     "paper-input": "PolymerElements/paper-input#^1.1.23",
     "paper-card": "PolymerElements/paper-card#^1.1.4",
     "paper-item": "PolymerElements/paper-item#^1.2.1",

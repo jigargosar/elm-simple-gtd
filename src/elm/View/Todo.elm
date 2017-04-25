@@ -150,8 +150,20 @@ default vm reminderForm =
             , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ Paper.itemBody []
-                [ div [] [ text vm.text ]
-                , div [ class "layout horizontal", attribute "secondary" "true" ]
+                [ div [ class "layout horizontal center justified has-hover-elements" ]
+                    [ div [ class "font-nowrap", style [ "padding" => "12px 0" ] ] [ text vm.text ]
+                    , span
+                        [ classList
+                            [ "show-on-hover" => not reminderForm.reminderMenuOpen
+                            , "layout horizontal " => True
+                            ]
+                        ]
+                        [ doneIconButton vm
+                        , reminderMenuButton reminderForm reminderVM
+                        , deleteIconButton vm
+                        ]
+                    ]
+                , div [ class "layout horizontal ", attribute "secondary" "true" ]
                     [ div
                         [ classList
                             [ "secondary-color" => not vm.isReminderActive
@@ -164,11 +176,12 @@ default vm reminderForm =
                     , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
                     ]
                 ]
-            , span [ classList [ "show-on-hover" => not reminderForm.reminderMenuOpen ] ]
-                [ doneIconButton vm
-                , reminderMenuButton reminderForm reminderVM
-                , deleteIconButton vm
-                ]
+
+            --            , span [ classList [ "show-on-hover" => not reminderForm.reminderMenuOpen ] ]
+            --                [ doneIconButton vm
+            --                , reminderMenuButton reminderForm reminderVM
+            --                , deleteIconButton vm
+            --                ]
             ]
 
 

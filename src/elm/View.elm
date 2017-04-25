@@ -71,7 +71,7 @@ appDrawerLayoutView m =
         projectVMs =
             projectVM.vmList
     in
-        App.drawerLayout [ attribute "fullbleed" "true" ]
+        App.drawerLayout []
             [ View.AppDrawer.view contextVM projectVM m
             , App.headerLayout []
                 [ appHeaderView m
@@ -88,7 +88,6 @@ appHeaderView m =
         , attribute "fixed" "true"
         , attribute "condenses" "true"
         , attribute "effects" "waterfall"
-        , attribute "slot" "header"
         ]
         [ App.toolbar
             []

@@ -90,8 +90,7 @@ appHeaderView m =
         --        , attribute "condenses" "true"
         , attribute "effects" "waterfall"
         ]
-        [ App.toolbar
-            []
+        [ App.toolbar []
             [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "true" ] []
             , headerView m
             ]

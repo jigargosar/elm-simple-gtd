@@ -238,8 +238,7 @@ editView vm evm =
 
 reminderMenuButton form reminderVM =
     Paper.menuButton
-        [ --        boolProperty "opened" form.reminderMenuOpen
-          onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
+        [ onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
         , boolProperty "dynamicAlign" True
         , boolProperty "noOverlap" True
         , onClickStopPropagation Msg.NoOp

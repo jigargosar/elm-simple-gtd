@@ -82,11 +82,7 @@ toggleDeletedForEntity entity model =
                 |> (setProjectStore # model)
 
         TodoEntity todo ->
-            let
-                _ =
-                    Debug.log "todo deleted called" (todo)
-            in
-                Model.TodoStore.updateTodo [ Todo.ToggleDeleted ] todo model
+            Model.TodoStore.updateTodo [ Todo.ToggleDeleted ] todo model
 
 
 saveEditModeEntity model =

@@ -48,7 +48,7 @@ async function boot() {
         setTimeout(() => {
             requestAnimationFrame(() => {
                 const toFocus = document.querySelector(selector)
-                console.log("toFocus", toFocus, document.activeElement)
+                // console.log("toFocus", toFocus, document.activeElement)
                 if (toFocus && document.activeElement !== toFocus) {
                     toFocus.focus()
                 } else {

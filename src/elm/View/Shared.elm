@@ -71,7 +71,7 @@ createSharedViewModel model =
         , projectByIdDict = Model.getProjectByIdDict model
         , contextByIdDict = Model.getContextByIdDict model
         , activeProjects = Model.getActiveProjects model
-        , activeContects = Model.getActiveContexts model
+        , activeContexts = Model.getActiveContexts model
         , selection = Model.getSelectedTodoIdSet model
         , getMaybeEditTodoFormForTodo =
             \todo ->

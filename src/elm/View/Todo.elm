@@ -23,6 +23,7 @@ import Set
 import Time.Format
 import Todo
 import Todo.Form
+import Todo.ReminderForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -47,7 +48,9 @@ createKeyedItem vc todo =
 
         view =
             vc.getMaybeEditTodoFormForTodo todo
-                |> Maybe.Extra.unpack (\_ -> default vm) (createEditTodoViewModel >> editView vm)
+                |> Maybe.Extra.unpack
+                    (\_ -> default vm (vc.getTodoReminderForm todo))
+                    (createEditTodoViewModel >> editView vm)
     in
         ( Document.getId todo, view )
 
@@ -128,8 +131,8 @@ createTodoViewModel vc todo =
         }
 
 
-default : TodoViewModel -> Html Msg
-default vm =
+default : TodoViewModel -> Todo.ReminderForm.Model -> Html Msg
+default vm reminderForm =
     item
         [ class "todo-item"
         , onClickStopPropagation (vm.startEditingMsg)
@@ -149,8 +152,17 @@ default vm =
                 , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
                 ]
             ]
-        , hoverIcons vm
+        , div [ class "show-on-hover" ]
+            [ doneIconButton vm
+            , alarmButton vm reminderForm
+            , deleteIconButton vm
+            ]
         ]
+
+
+alarmButton vm reminderForm =
+    paperIconButton [ iconP "alarm", onClickStopPropagation (vm.onReminderButtonClicked) ]
+        []
 
 
 editView : TodoViewModel -> EditTodoViewModel -> Html Msg
@@ -246,16 +258,6 @@ checkBoxView vm =
         , onClickStopPropagation vm.onCheckBoxClicked
         ]
         []
-
-
-hoverIcons : TodoViewModel -> Html Msg
-hoverIcons vm =
-    div [ class "show-on-hover" ]
-        [ doneIconButton vm
-        , paperIconButton [ iconP "alarm", onClickStopPropagation (vm.onReminderButtonClicked) ]
-            []
-        , deleteIconButton vm
-        ]
 
 
 doneIconButton : TodoViewModel -> Html Msg

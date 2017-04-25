@@ -146,7 +146,7 @@ default vm reminderForm =
             }
     in
         Paper.item
-            [ classList [ "todo-item" => True, "editing" => reminderForm.reminderMenuOpen ]
+            [ classList [ "todo-item" => True ]
             , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ Paper.itemBody []
@@ -164,7 +164,7 @@ default vm reminderForm =
                     , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
                     ]
                 ]
-            , div [ class "show-on-hover" ]
+            , span [ classList [ "show-on-hover" => not reminderForm.reminderMenuOpen ] ]
                 [ doneIconButton vm
                 , reminderMenuButton reminderForm reminderVM
                 , deleteIconButton vm

@@ -22,26 +22,6 @@ import Ext.Function.Infix exposing (..)
 import Types exposing (..)
 
 
-setTodoContext =
-    SetTodoContext
-
-
-start =
-    Start
-
-
-stop =
-    Stop
-
-
-onNewTodoInput =
-    NewTodoTextChanged
-
-
-stopAndMarkDone =
-    MarkRunningTodoDone
-
-
 type Msg
     = NoOp
     | TodoAction Todo.UpdateAction Todo.Id

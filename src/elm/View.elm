@@ -114,8 +114,8 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         , div [ class "col" ]
             [ div [ class "elapsed-time" ] [ text (Ext.Time.toHHMMSS elapsedTime) ]
             , paperIconButton [ iconP "av:pause" ] []
-            , paperIconButton [ iconP "av:stop", Msg.stop |> onClick ] []
-            , paperIconButton [ iconP "check", Msg.stopAndMarkDone |> onClick ] []
+            , paperIconButton [ iconP "av:stop", Msg.Stop |> onClick ] []
+            , paperIconButton [ iconP "check", Msg.MarkRunningTodoDone |> onClick ] []
             ]
         ]
 

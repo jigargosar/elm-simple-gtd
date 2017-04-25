@@ -16,7 +16,7 @@ import Todo.Form
 
 
 type alias TodoForm =
-    Todo.Form.TextFormModel
+    Todo.Form.Model
 
 
 type alias EditContextModel =

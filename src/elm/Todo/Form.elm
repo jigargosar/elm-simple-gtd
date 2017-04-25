@@ -14,7 +14,7 @@ import Maybe.Extra as Maybe
 import Todo
 
 
-type alias TextFormModel =
+type alias Model =
     { id : Document.Id
     , todoText : Todo.Text
     }
@@ -29,16 +29,16 @@ type alias ReminderFormModel =
 
 
 type Form
-    = TextForm TextFormModel
+    = TextForm Model
     | ReminderForm ReminderFormModel
 
 
 type FormField
-    = TextFormField TextFormFieldValue
+    = TextFormField Action
     | ReminderFormField ReminderFormFieldValue
 
 
-type TextFormFieldValue
+type Action
     = Text String
 
 
@@ -74,13 +74,21 @@ createTextForm todo projectName contextName now =
             |> TextForm
 
 
-set : FormField -> Form -> Form
-set field form =
-    case ( form, field ) of
-        ( TextForm form, TextFormField field ) ->
-            case field of
-                Text value ->
-                    TextForm { form | todoText = value }
 
-        _ ->
-            form
+--set : FormField -> Form -> Form
+--set field form =
+--    case ( form, field ) of
+--        ( TextForm form, TextFormField field ) ->
+--            case field of
+--                Text value ->
+--                    TextForm { form | todoText = value }
+--
+--        _ ->
+--            form
+
+
+set : Action -> Model -> Model
+set action model =
+    case action of
+        Text value ->
+            { model | todoText = value }

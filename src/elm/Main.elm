@@ -121,6 +121,9 @@ update msg =
                 FocusPaperInput selector ->
                     focusPaperInputCmd selector
 
+                AutoFocusPaperInput ->
+                    autoFocusPaperInputCmd
+
                 Start todo ->
                     Return.map (Model.startTodo todo)
 

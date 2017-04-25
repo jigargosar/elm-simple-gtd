@@ -238,11 +238,11 @@ editView vm evm =
 
 reminderMenuButton form reminderVM =
     Paper.menuButton
-        [ boolProperty "opened" form.reminderMenuOpen
-        , onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
+        [ --        boolProperty "opened" form.reminderMenuOpen
+          onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
         , boolProperty "dynamicAlign" True
         , boolProperty "noOverlap" True
-        , onClickStopPropagation Msg.NoOp
+        , onClickStopPropagation Msg.AutoFocusPaperInput
         , boolProperty "stopKeyboardEventPropagation" True
         ]
         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []

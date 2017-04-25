@@ -55,7 +55,7 @@ async function boot() {
                     // console.log("not focusing")
                 }
                 if (toFocus) {
-                    console.log(toFocus.inputElement, toFocus.$.input)
+                    // console.log(toFocus.inputElement, toFocus.$.input)
                     toFocus.inputElement.focus()
                     // toFocus.$.input.focus()
                 }

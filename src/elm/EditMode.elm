@@ -12,11 +12,11 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Time exposing (Time)
 import Time.Format
-import Todo.Edit
+import Todo.Form
 
 
 type alias TodoForm =
-    Todo.Edit.TextFormModel
+    Todo.Form.TextFormModel
 
 
 type alias EditContextModel =
@@ -37,7 +37,7 @@ type alias NewTodoModel =
 
 type EditMode
     = NewTodo NewTodoModel
-    | EditTodo Todo.Edit.Form
+    | EditTodo Todo.Form.Form
     | EditContext EditContextModel
     | EditProject EditProjectModel
     | None

@@ -17,7 +17,7 @@ import Msg exposing (..)
 import Model.Types exposing (..)
 import Project
 import Store
-import Todo.Edit
+import Todo.Form
 
 
 activateNewTodoMode : String -> ModelF
@@ -103,7 +103,7 @@ saveEditModeEntity model =
 
         EditMode.EditTodo form ->
             case form of
-                Todo.Edit.TextForm formModel ->
+                Todo.Form.TextForm formModel ->
                     model
                         |> --                Model.insertProjectIfNotExist form.projectName
                            --                >> Model.insertContextIfNotExist form.contextName
@@ -143,12 +143,12 @@ createEditTodoMode todo model =
         contextName =
             Model.getContextNameOfTodo todo model ?= ""
     in
-        Todo.Edit.createTextForm todo projectName contextName model.now |> EditMode.EditTodo
+        Todo.Form.createTextForm todo projectName contextName model.now |> EditMode.EditTodo
 
 
 createEditReminderTodoMode : Todo.Model -> Model -> EditMode
 createEditReminderTodoMode todo model =
-    Todo.Edit.createReminderForm todo model.now |> EditMode.EditTodo
+    Todo.Form.createReminderForm todo model.now |> EditMode.EditTodo
 
 
 getMaybeEditTodoModel =

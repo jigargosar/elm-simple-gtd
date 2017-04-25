@@ -13,7 +13,7 @@ import RunningTodo exposing (RunningTodo)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
 import Todo
-import Todo.Edit
+import Todo.Form
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -63,7 +63,7 @@ type Msg
     | StartEditingReminder Todo.Model
     | SaveEditingEntity
     | FocusPaperInput String
-    | UpdateTodoForm Todo.Edit.Form Todo.Edit.FormField
+    | UpdateTodoForm Todo.Form.Form Todo.Form.FormField
     | EditTodoFormKeyUp TodoForm KeyboardEvent
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection

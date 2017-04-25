@@ -25,7 +25,7 @@ import Set
 import Store
 import String.Extra
 import Todo
-import Todo.Edit
+import Todo.Form
 import View exposing (appView)
 import Navigation exposing (Location)
 import Return
@@ -178,7 +178,7 @@ update msg =
 
                 UpdateTodoForm form field ->
                     Return.map
-                        (Todo.Edit.set field form
+                        (Todo.Form.set field form
                             |> Model.setEditTodoModel
                         )
 

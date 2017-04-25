@@ -1,4 +1,4 @@
-module Todo.Edit exposing (..)
+module Todo.Form exposing (..)
 
 import Context
 import Document

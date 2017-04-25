@@ -22,7 +22,7 @@ import Project
 import Set
 import Time.Format
 import Todo
-import Todo.Edit
+import Todo.Form
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -46,7 +46,7 @@ createKeyedItem vc todo =
             case vc.editMode of
                 EditMode.EditTodo form ->
                     case form of
-                        Todo.Edit.TextForm formModel ->
+                        Todo.Form.TextForm formModel ->
                             if Document.hasId formModel.id todo then
                                 editView vm (createEditTodoViewModel formModel)
                             else
@@ -77,13 +77,13 @@ createEditTodoViewModel form =
             form.id
 
         updateTodoForm =
-            Msg.UpdateTodoForm (Todo.Edit.TextForm form)
+            Msg.UpdateTodoForm (Todo.Form.TextForm form)
     in
         { todo =
             { text = form.todoText
             }
         , onKeyUp = Msg.EditTodoFormKeyUp form
-        , onTodoTextChanged = updateTodoForm << Todo.Edit.TextFormField << Todo.Edit.Text
+        , onTodoTextChanged = updateTodoForm << Todo.Form.TextFormField << Todo.Form.Text
         , onSaveClicked = Msg.SaveEditingEntity
         , onCancelClicked = Msg.DeactivateEditingMode
         }

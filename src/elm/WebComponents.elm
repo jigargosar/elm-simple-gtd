@@ -92,12 +92,23 @@ onTap msg =
     Json.Decode.succeed msg |> on "tap"
 
 
-stopPropagation =
+stopPropagationAndPreventDefault =
     { stopPropagation = True
     , preventDefault = True
     }
 
 
+stopPropagation =
+    { stopPropagation = True
+    , preventDefault = False
+    }
+
+
+onTapStopPropagationAndPreventDefault : msg -> Attribute msg
+onTapStopPropagationAndPreventDefault msg =
+    Json.Decode.succeed msg |> onWithOptions "tap" stopPropagationAndPreventDefault
+
+
 onTapStopPropagation : msg -> Attribute msg
 onTapStopPropagation msg =
-    Json.Decode.succeed msg |> onWithOptions "click" stopPropagation
+    Json.Decode.succeed msg |> onWithOptions "tap" stopPropagation

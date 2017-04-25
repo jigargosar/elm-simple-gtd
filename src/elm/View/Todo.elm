@@ -35,7 +35,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper exposing (button, checkbox, dialog, dropdownMenu, input, item, itemBody, listbox, material, menu, menuButton)
 import View.Shared exposing (SharedViewModel, hideOnHover)
-import WebComponents exposing (icon, iconButton, iconP, ironIcon, labelA, noLabelFloatP, onBoolPropertyChanged, onPropertyChanged, onTapStopPropagation, paperIconButton, secondaryA, selectedA, testDialog)
+import WebComponents exposing (icon, iconButton, iconP, ironIcon, labelA, noLabelFloatP, onBoolPropertyChanged, onPropertyChanged, onTapStopPropagation, onTapStopPropagationAndPreventDefault, paperIconButton, secondaryA, selectedA, testDialog)
 
 
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
@@ -225,10 +225,10 @@ reminderMenuButton form reminderVM =
     menuButton
         [ boolProperty "opened" form.reminderMenuOpen
         , onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
-        , onTapStopPropagation Msg.NoOp
+        , boolProperty "dynamicAlign" True
         ]
-        [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
-        , div [ class "static dropdown-content" ]
+        [ paperIconButton [ iconP "alarm", class "dropdown-trigger", onTapStopPropagationAndPreventDefault Msg.NoOp ] []
+        , div [ class "static dropdown-content", onTapStopPropagation Msg.NoOp ]
             [ div [ class "font-subhead" ] [ text "Select date and time" ]
             , input
                 [ type_ "date"

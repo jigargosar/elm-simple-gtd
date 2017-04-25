@@ -33,9 +33,9 @@ import Html exposing (Html, col, div, h1, h3, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
-import Polymer.Paper exposing (button, checkbox, dialog, dropdownMenu, input, item, itemBody, listbox, material, menu, menuButton)
+import Polymer.Paper as Paper
 import View.Shared exposing (SharedViewModel, hideOnHover)
-import WebComponents exposing (icon, iconButton, iconP, ironIcon, labelA, noLabelFloatP, onBoolPropertyChanged, onPropertyChanged, onTapStopPropagation, onTapStopPropagationAndPreventDefault, paperIconButton, secondaryA, selectedA, testDialog)
+import WebComponents exposing (..)
 
 
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
@@ -145,11 +145,11 @@ default vm reminderForm =
             , onSaveClicked = Msg.SaveEditingEntity
             }
     in
-        item
+        Paper.item
             [ class "todo-item"
             , onClickStopPropagation (vm.startEditingMsg)
             ]
-            [ itemBody []
+            [ Paper.itemBody []
                 [ div [] [ text vm.text ]
                 , div [ class "layout horizontal", attribute "secondary" "true" ]
                     [ div
@@ -181,7 +181,7 @@ editView vm evm =
         contextNames =
             [ "@fooC", "@barC" ]
     in
-        item
+        Paper.item
             [ class "todo-item editing"
             ]
             [ div [ class "vertical layout flex-auto" ]
@@ -198,22 +198,22 @@ editView vm evm =
                         []
                     ]
                 , div [ class "horizontal layout" ]
-                    [ menuButton []
-                        [ button [ class "dropdown-trigger" ]
+                    [ Paper.menuButton []
+                        [ Paper.button [ class "dropdown-trigger" ]
                             [ text "#"
                             , text vm.projectName
                             , icon "arrow-drop-down" []
                             ]
-                        , menu [ class "dropdown-content" ]
+                        , Paper.menu [ class "dropdown-content" ]
                             (projectNames .|> createDropDownItem)
                         ]
-                    , menuButton []
-                        [ button [ class "dropdown-trigger" ]
+                    , Paper.menuButton []
+                        [ Paper.button [ class "dropdown-trigger" ]
                             [ text "@"
                             , text vm.contextName
                             , icon "arrow-drop-down" []
                             ]
-                        , menu [ class "dropdown-content" ]
+                        , Paper.menu [ class "dropdown-content" ]
                             (contextNames .|> createDropDownItem)
                         ]
                     ]
@@ -222,15 +222,16 @@ editView vm evm =
 
 
 reminderMenuButton form reminderVM =
-    menuButton
+    Paper.menuButton
         [ boolProperty "opened" form.reminderMenuOpen
         , onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
         , boolProperty "dynamicAlign" True
+        , onClickStopPropagation Msg.NoOp
         ]
-        [ paperIconButton [ iconP "alarm", class "dropdown-trigger", onTapStopPropagationAndPreventDefault Msg.NoOp ] []
-        , div [ class "static dropdown-content", onTapStopPropagation Msg.NoOp ]
+        [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
+        , div [ class "static dropdown-content" ]
             [ div [ class "font-subhead" ] [ text "Select date and time" ]
-            , input
+            , Paper.input
                 [ type_ "date"
                 , labelA "Date"
                 , autofocus True
@@ -239,7 +240,7 @@ reminderMenuButton form reminderVM =
                 , onInput reminderVM.onDateChanged
                 ]
                 []
-            , input
+            , Paper.input
                 [ type_ "time"
                 , labelA "Time"
                 , value form.time
@@ -248,7 +249,7 @@ reminderMenuButton form reminderVM =
                 ]
                 []
             , div [ class "horizontal layout end-justified" ]
-                [ button [ attribute "raised" "true", onClickStopPropagation reminderVM.onSaveClicked ]
+                [ Paper.button [ attribute "raised" "true", onClickStopPropagation reminderVM.onSaveClicked ]
                     [ text "Save" ]
                 ]
             ]
@@ -256,11 +257,11 @@ reminderMenuButton form reminderVM =
 
 
 createDropDownItem title =
-    item [] [ text title ]
+    Paper.item [] [ text title ]
 
 
 checkBoxView vm =
-    checkbox
+    Paper.checkbox
         [ checked vm.isSelected
         , onClickStopPropagation vm.onCheckBoxClicked
         ]
@@ -269,7 +270,7 @@ checkBoxView vm =
 
 doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
-    Polymer.Paper.iconButton
+    Paper.iconButton
         [ class ("done-" ++ toString (vm.isDone))
         , onClickStopPropagation (vm.onDoneClicked)
         , iconP "check"

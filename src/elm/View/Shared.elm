@@ -27,11 +27,13 @@ import Project
 import Model.Internal as Model
 import Project
 import Todo
+import Todo.Form
 
 
 type alias SharedViewModel =
     { now : Time
     , editMode : EditMode
+    , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
     , selection : Set Todo.Id
@@ -46,6 +48,17 @@ createSharedViewModel model =
     , contextByIdDict = Model.getContextByIdDict model
     , selection = Model.getSelectedTodoIdSet model
     , editMode = Model.getEditMode model
+    , getMaybeEditTodoFormForTodo =
+        \todo ->
+            case Model.getEditMode model of
+                EditMode.TodoForm form ->
+                    if Document.hasId form.id todo then
+                        Just form
+                    else
+                        Nothing
+
+                _ ->
+                    Nothing
     , showDetails = Model.isShowDetailsKeyPressed model
     }
 

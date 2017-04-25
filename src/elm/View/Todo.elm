@@ -229,7 +229,7 @@ editView vm evm =
                             , icon "arrow-drop-down" []
                             ]
                         , Paper.menu [ class "dropdown-content" ]
-                            (contextNames .|> createDropDownItem)
+                            (vm.contexts .|> createContextItem # vm)
                         ]
                     ]
                 ]
@@ -286,6 +286,12 @@ reminderMenuButton form reminderVM =
 
 createDropDownItem title =
     Paper.item [] [ text title ]
+
+
+createContextItem context vm =
+    Paper.item
+        [ onClickStopPropagation (vm.setContextMsg context) ]
+        [ context |> Context.getName >> text ]
 
 
 checkBoxView vm =

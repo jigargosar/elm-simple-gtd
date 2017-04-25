@@ -242,7 +242,7 @@ reminderMenuButton form reminderVM =
         , onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
         , boolProperty "dynamicAlign" True
         , boolProperty "noOverlap" True
-        , onClickStopPropagation reminderVM.startEditingMsg
+        , onClickStopPropagation Msg.NoOp
         , boolProperty "stopKeyboardEventPropagation" True
         ]
         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []

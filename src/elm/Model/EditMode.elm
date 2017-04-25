@@ -155,9 +155,5 @@ getEditNewTodoModel =
     getEditMode >> EditMode.getNewTodoModel
 
 
-setEditTodoModel =
-    EditMode.TodoForm >> setEditMode
-
-
 deactivateEditingMode =
     setEditMode EditMode.none

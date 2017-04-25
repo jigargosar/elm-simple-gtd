@@ -14,6 +14,7 @@ import Random.Pcg exposing (Seed)
 import Time exposing (Time)
 import Todo
 import Todo.Form
+import Todo.ReminderForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -64,6 +65,7 @@ type Msg
     | SaveEditingEntity
     | FocusPaperInput String
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
+    | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | EditTodoFormKeyUp TodoForm KeyboardEvent
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection

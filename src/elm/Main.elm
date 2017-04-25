@@ -26,6 +26,7 @@ import Store
 import String.Extra
 import Todo
 import Todo.Form
+import Todo.ReminderForm
 import View exposing (appView)
 import Navigation exposing (Location)
 import Return
@@ -179,7 +180,15 @@ update msg =
                 UpdateTodoForm form action ->
                     Return.map
                         (Todo.Form.set action form
-                            |> Model.setEditTodoModel
+                            |> EditMode.TodoForm
+                            >> Model.setEditMode
+                        )
+
+                UpdateReminderForm form action ->
+                    Return.map
+                        (Todo.ReminderForm.set action form
+                            |> EditMode.TodoReminderForm
+                            >> Model.setEditMode
                         )
 
                 CopyAndEditTodoById todoId ->

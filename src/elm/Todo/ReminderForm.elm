@@ -37,3 +37,16 @@ create todo now =
         , time = (Time.Format.format "%H:%M") timeInMilli
         , reminderMenuOpen = False
         }
+
+
+set : Action -> Model -> Model
+set action model =
+    case action of
+        Date value ->
+            { model | date = value }
+
+        Time value ->
+            { model | time = value }
+
+        ReminderMenuOpen value ->
+            { model | reminderMenuOpen = value }

@@ -133,36 +133,42 @@ createTodoViewModel vc todo =
 
 default : TodoViewModel -> Todo.ReminderForm.Model -> Html Msg
 default vm reminderForm =
-    item
-        [ class "todo-item"
-        , onClickStopPropagation (vm.startEditingMsg)
-        ]
-        [ itemBody []
-            [ div [] [ text vm.text ]
-            , div [ class "layout horizontal", attribute "secondary" "true" ]
-                [ div
-                    [ classList
-                        [ "secondary-color" => not vm.isReminderActive
-                        , "accent-color" => vm.isReminderActive
-                        , "font-body1" => True
+    let
+        updateReminderForm =
+            Msg.UpdateReminderForm reminderForm
+
+        reminderVM =
+            { onDateChanged = updateReminderForm << Todo.ReminderForm.Date
+            , onTimeChanged = updateReminderForm << Todo.ReminderForm.Time
+            , onReminderMenuOpenChanged = updateReminderForm << Todo.ReminderForm.ReminderMenuOpen
+            , onSaveClicked = Msg.SaveEditingEntity
+            }
+    in
+        item
+            [ class "todo-item"
+            , onClickStopPropagation (vm.startEditingMsg)
+            ]
+            [ itemBody []
+                [ div [] [ text vm.text ]
+                , div [ class "layout horizontal", attribute "secondary" "true" ]
+                    [ div
+                        [ classList
+                            [ "secondary-color" => not vm.isReminderActive
+                            , "accent-color" => vm.isReminderActive
+                            , "font-body1" => True
+                            ]
                         ]
+                        [ text vm.time ]
+                    , div [ style [ "margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
+                    , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
                     ]
-                    [ text vm.time ]
-                , div [ style [ "margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
-                , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
+                ]
+            , div [ class "show-on-hover" ]
+                [ doneIconButton vm
+                , reminderMenuButton reminderForm reminderVM
+                , deleteIconButton vm
                 ]
             ]
-        , div [ class "show-on-hover" ]
-            [ doneIconButton vm
-            , alarmButton vm reminderForm
-            , deleteIconButton vm
-            ]
-        ]
-
-
-alarmButton vm reminderForm =
-    paperIconButton [ iconP "alarm", onClickStopPropagation (vm.onReminderButtonClicked) ]
-        []
 
 
 editView : TodoViewModel -> EditTodoViewModel -> Html Msg
@@ -214,10 +220,10 @@ editView vm evm =
             ]
 
 
-reminderMenuButton form evm =
+reminderMenuButton form reminderVM =
     menuButton
         [ boolProperty "opened" form.reminderMenuOpen
-        , onBoolPropertyChanged "opened" evm.onReminderMenuOpenChanged
+        , onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
         ]
         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
         , div [ class "static dropdown-content" ]
@@ -227,10 +233,8 @@ reminderMenuButton form evm =
                 , labelA "Date"
                 , autofocus True
                 , value form.date
-                , boolProperty
-                    "stopKeyboardEventPropagation"
-                    True
-                , onInput evm.onDateChanged
+                , boolProperty "stopKeyboardEventPropagation" True
+                , onInput reminderVM.onDateChanged
                 ]
                 []
             , input
@@ -238,11 +242,12 @@ reminderMenuButton form evm =
                 , labelA "Time"
                 , value form.time
                 , boolProperty "stopKeyboardEventPropagation" True
-                , onInput evm.onTimeChanged
+                , onInput reminderVM.onTimeChanged
                 ]
                 []
             , div [ class "horizontal layout end-justified" ]
-                [ button [ attribute "raised" "true", onClickStopPropagation evm.onSaveClicked ] [ text "Save" ]
+                [ button [ attribute "raised" "true", onClickStopPropagation reminderVM.onSaveClicked ]
+                    [ text "Save" ]
                 ]
             ]
         ]

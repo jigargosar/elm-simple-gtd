@@ -244,7 +244,9 @@ reminderMenuButton form reminderVM =
         , boolProperty "stopKeyboardEventPropagation" True
         ]
         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
-        , div [ class "static dropdown-content" ]
+        , div
+            [ class "static dropdown-content"
+            ]
             [ div [ class "font-subhead" ] [ text "Select date and time" ]
             , Paper.input
                 [ type_ "date"

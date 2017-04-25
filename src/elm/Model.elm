@@ -29,6 +29,7 @@ import Store
 import Time exposing (Time)
 import Todo
 import Todo.Form
+import Todo.ReminderForm
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -262,12 +263,26 @@ getActiveTodoListGroupedBy fn =
 --            )
 
 
-updateTodoFromEditTodoForm : Todo.Form.Model -> ModelF
-updateTodoFromEditTodoForm { todoText, id } =
+updateTodoWithTodoForm : Todo.Form.Model -> ModelF
+updateTodoWithTodoForm { todoText, id } =
     Model.TodoStore.updateTodoById
         [ Todo.SetText todoText
         ]
         id
+
+
+updateTodoWithReminderForm : Todo.ReminderForm.Model -> ModelF
+updateTodoWithReminderForm { id, date, time } =
+    let
+        dateTimeString =
+            date ++ " " ++ time
+
+        maybeTime =
+            Date.fromString (dateTimeString)
+                !|> (Date.toTime >> Just)
+                != Nothing
+    in
+        Model.TodoStore.updateTodoById [ Todo.SetTime maybeTime ] id
 
 
 isShowDetailsKeyPressed =

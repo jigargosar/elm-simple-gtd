@@ -162,7 +162,7 @@ editView vm evm =
             [ "@fooC", "@barC" ]
     in
         item
-            [ class "todo-item"
+            [ class "todo-item editing"
             ]
             [ div [ class "vertical layout flex-auto" ]
                 [ div [ class "flex" ]

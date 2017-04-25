@@ -32,8 +32,8 @@ import Todo.Form
 
 type alias SharedViewModel =
     { now : Time
-    , editMode : EditMode
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
+    , getMaybeEditEntityFormForEntityId : Document.Id -> Maybe EditMode.EntityForm
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
     , selection : Set Todo.Id
@@ -47,12 +47,51 @@ createSharedViewModel model =
     , projectByIdDict = Model.getProjectByIdDict model
     , contextByIdDict = Model.getContextByIdDict model
     , selection = Model.getSelectedTodoIdSet model
-    , editMode = Model.getEditMode model
     , getMaybeEditTodoFormForTodo =
         \todo ->
             case Model.getEditMode model of
                 EditMode.TodoForm form ->
                     if Document.hasId form.id todo then
+                        Just form
+                    else
+                        Nothing
+
+                _ ->
+                    Nothing
+
+    --    , getMaybeEditProjectFormForProject =
+    --        \project ->
+    --            case Model.getEditMode model of
+    --                EditMode.EditProject form ->
+    --                    if Document.hasId form.id project then
+    --                        Just form
+    --                    else
+    --                        Nothing
+    --
+    --                _ ->
+    --                    Nothing
+    --    , getMaybeEditContextFormForContext =
+    --        \context ->
+    --            case Model.getEditMode model of
+    --                EditMode.EditContext form ->
+    --                    if Document.hasId form.id context then
+    --                        Just form
+    --                    else
+    --                        Nothing
+    --
+    --                _ ->
+    --                    Nothing
+    , getMaybeEditEntityFormForEntityId =
+        \entityId ->
+            case Model.getEditMode model of
+                EditMode.EditContext form ->
+                    if entityId == form.id then
+                        Just form
+                    else
+                        Nothing
+
+                EditMode.EditProject form ->
+                    if entityId == form.id then
                         Just form
                     else
                         Nothing

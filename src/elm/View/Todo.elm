@@ -42,16 +42,11 @@ createKeyedItem vc todo =
         vm =
             createTodoViewModel vc todo
 
-        view =
-            case vc.editMode of
-                EditMode.TodoForm form ->
-                    if Document.hasId form.id todo then
-                        editView vm (createEditTodoViewModel form)
-                    else
-                        default vm
+        maybeForm =
+            vc.getMaybeEditTodoFormForTodo todo
 
-                _ ->
-                    default vm
+        view =
+            maybeForm |> Maybe.Extra.unpack (\_ -> default vm) (createEditTodoViewModel >> editView vm)
     in
         ( Document.getId todo, view )
 

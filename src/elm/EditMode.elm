@@ -26,6 +26,10 @@ type alias EditContextModel =
     }
 
 
+type alias EntityForm =
+    EditContextModel
+
+
 type alias EditProjectModel =
     { id : Document.Id
     , name : Project.Name

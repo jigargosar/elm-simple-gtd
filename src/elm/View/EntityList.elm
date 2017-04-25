@@ -90,21 +90,8 @@ singletonEntity entityVMs id =
 
 entityListItemView vc vm =
     if vm.id /= "" then
-        case vc.editMode of
-            EditMode.EditProject epm ->
-                if epm.id == vm.id then
-                    editEntityView epm vm
-                else
-                    defaultView vm
-
-            EditMode.EditContext etm ->
-                if vm.id == etm.id then
-                    editEntityView etm vm
-                else
-                    defaultView vm
-
-            _ ->
-                defaultView vm
+        vc.getMaybeEditEntityFormForEntityId vm.id
+            |> Maybe.unpack (\_ -> defaultView vm) (editEntityView # vm)
     else
         defaultView vm
 

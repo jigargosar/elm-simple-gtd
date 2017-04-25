@@ -18,6 +18,7 @@ import Maybe.Extra
 import Model.Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
 import Msg exposing (Msg)
 import Polymer.Attributes exposing (boolProperty, stringProperty)
+import Polymer.Events exposing (onTap)
 import Project
 import Set
 import Time.Format
@@ -34,7 +35,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper exposing (button, checkbox, dialog, dropdownMenu, input, item, itemBody, listbox, material, menu, menuButton)
 import View.Shared exposing (SharedViewModel, hideOnHover)
-import WebComponents exposing (icon, iconButton, iconP, ironIcon, labelA, noLabelFloatP, onBoolPropertyChanged, onPropertyChanged, paperIconButton, secondaryA, selectedA, testDialog)
+import WebComponents exposing (icon, iconButton, iconP, ironIcon, labelA, noLabelFloatP, onBoolPropertyChanged, onPropertyChanged, onTapStopPropagation, paperIconButton, secondaryA, selectedA, testDialog)
 
 
 createKeyedItem : SharedViewModel -> Todo.Model -> ( String, Html Msg )
@@ -224,6 +225,7 @@ reminderMenuButton form reminderVM =
     menuButton
         [ boolProperty "opened" form.reminderMenuOpen
         , onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
+        , onTapStopPropagation Msg.NoOp
         ]
         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []
         , div [ class "static dropdown-content" ]

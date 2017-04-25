@@ -85,3 +85,19 @@ testDialog =
         --        , class "full-view"
         ]
         [ h2 [] [ text "Big Header" ] ]
+
+
+onTap : msg -> Attribute msg
+onTap msg =
+    Json.Decode.succeed msg |> on "tap"
+
+
+stopPropagation =
+    { stopPropagation = True
+    , preventDefault = True
+    }
+
+
+onTapStopPropagation : msg -> Attribute msg
+onTapStopPropagation msg =
+    Json.Decode.succeed msg |> onWithOptions "click" stopPropagation

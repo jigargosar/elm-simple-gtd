@@ -115,10 +115,7 @@ saveEditModeEntity model =
                 >> startEditingTodoById form.id
 
         EditMode.TodoReminderForm form ->
-            model
-                |> --                Model.insertProjectIfNotExist form.projectName
-                   --                >> Model.insertContextIfNotExist form.contextName
-                   Model.updateTodoWithReminderForm form
+            Model.updateTodoWithReminderForm form model
 
         _ ->
             model

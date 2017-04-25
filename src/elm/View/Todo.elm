@@ -42,14 +42,12 @@ createKeyedItem vc todo =
         vm =
             createTodoViewModel vc todo
 
-        maybeForm =
-            vc.getMaybeEditTodoFormForTodo todo
-
         maybeReminderForm =
             vc.getMaybeTodoReminderFormForTodo todo
 
         view =
-            maybeForm |> Maybe.Extra.unpack (\_ -> default vm) (createEditTodoViewModel >> editView vm)
+            vc.getMaybeEditTodoFormForTodo todo
+                |> Maybe.Extra.unpack (\_ -> default vm) (createEditTodoViewModel >> editView vm)
     in
         ( Document.getId todo, view )
 

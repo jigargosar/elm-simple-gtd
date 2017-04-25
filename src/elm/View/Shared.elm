@@ -35,6 +35,7 @@ type alias SharedViewModel =
     { now : Time
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
     , getMaybeTodoReminderFormForTodo : Todo.Model -> Maybe Todo.ReminderForm.Model
+    , getTodoReminderForm : Todo.Model -> Todo.ReminderForm.Model
     , getMaybeEditEntityFormForEntityId : Document.Id -> Maybe EditMode.EntityForm
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
@@ -48,8 +49,23 @@ createSharedViewModel model =
     let
         editMode =
             Model.getEditMode model
+
+        getMaybeTodoReminderFormForTodo =
+            \todo ->
+                case editMode of
+                    EditMode.TodoReminderForm form ->
+                        if Document.hasId form.id todo then
+                            Just form
+                        else
+                            Nothing
+
+                    _ ->
+                        Nothing
+
+        now =
+            Model.getNow model
     in
-        { now = Model.getNow model
+        { now = now
         , projectByIdDict = Model.getProjectByIdDict model
         , contextByIdDict = Model.getContextByIdDict model
         , selection = Model.getSelectedTodoIdSet model
@@ -64,17 +80,12 @@ createSharedViewModel model =
 
                     _ ->
                         Nothing
-        , getMaybeTodoReminderFormForTodo =
+        , getMaybeTodoReminderFormForTodo = getMaybeTodoReminderFormForTodo
+        , getTodoReminderForm =
             \todo ->
-                case editMode of
-                    EditMode.TodoReminderForm form ->
-                        if Document.hasId form.id todo then
-                            Just form
-                        else
-                            Nothing
-
-                    _ ->
-                        Nothing
+                todo
+                    |> getMaybeTodoReminderFormForTodo
+                    |> Maybe.unpack (\_ -> Todo.ReminderForm.create todo now) identity
 
         --    , getMaybeEditProjectFormForProject =
         --        \project ->

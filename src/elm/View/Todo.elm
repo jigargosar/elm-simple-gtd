@@ -206,7 +206,6 @@ editView vm evm =
                         , boolProperty "stopKeyboardEventPropagation" True
                         , onInput evm.onTodoTextChanged
                         , onKeyDown evm.onKeyUp
-                        , autofocus True
                         ]
                         []
                     ]
@@ -250,8 +249,8 @@ reminderMenuButton form reminderVM =
             [ div [ class "font-subhead" ] [ text "Select date and time" ]
             , Paper.input
                 [ type_ "date"
+                , class "auto-focus"
                 , labelA "Date"
-                , autofocus True
                 , value form.date
                 , boolProperty "stopKeyboardEventPropagation" True
                 , onInput reminderVM.onDateChanged

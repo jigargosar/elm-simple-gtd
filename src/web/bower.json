@@ -28,7 +28,7 @@
     "paper-input": "PolymerElements/paper-input#^1.1.23",
     "paper-card": "PolymerElements/paper-card#^1.1.4",
     "paper-item": "PolymerElements/paper-item#^1.2.1",
-    "app-layout": "PolymerElements/app-layout#^0.10.7",
+    "app-layout": "PolymerElements/app-layout#^1.0.1",
     "paper-tabs": "PolymerElements/paper-tabs#^1.8.0",
     "paper-menu-button": "PolymerElements/paper-menu-button#^1.5.2",
     "paper-menu": "PolymerElements/paper-menu#^1.2.2",

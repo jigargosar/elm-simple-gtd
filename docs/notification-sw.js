@@ -1,8 +1,3 @@
-"use strict"
-
-//noinspection JSUnresolvedVariable
-var url;
-
 self.addEventListener('notificationclick', function (event) {
     // console.log("notification click", event)
     // event.notification.close();

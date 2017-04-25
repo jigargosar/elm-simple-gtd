@@ -6,7 +6,7 @@ self.addEventListener('notificationclick', function (event) {
         clients
             .matchAll({type: "window"})
             .then(function (clientList) {
-                for (let i = 0; i < clientList.length; i++) {
+                for (var i = 0; i < clientList.length; i++) {
                     const client = clientList[i]
                     postMessage(client, event)
                     if (client.focus) {

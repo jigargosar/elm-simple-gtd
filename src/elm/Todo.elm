@@ -75,7 +75,7 @@ type UpdateAction
     | SetTime (Maybe Time)
     | SetContext Context.Model
     | SetProjectId Id
-    | SetProject Project.Project
+    | SetProject Project.Model
     | ToggleDone
     | ToggleDeleted
     | TurnReminderOff

@@ -101,6 +101,7 @@ type alias TodoViewModel =
     , showDetails : Bool
     , isReminderActive : Bool
     , contexts : List Context.Model
+    , projects : List Project.Model
 
     --    , onReminderButtonClicked : Msg
     }
@@ -133,6 +134,7 @@ createTodoViewModel vc todo =
         , showDetails = vc.showDetails
         , isReminderActive = Todo.isReminderActive todo
         , contexts = Dict.values vc.contextByIdDict
+        , projects = Dict.values vc.projectByIdDict
         }
 
 
@@ -240,56 +242,49 @@ reminderMenuButton form reminderVM =
 
 editView : TodoViewModel -> EditTodoViewModel -> Html Msg
 editView vm evm =
-    let
-        projectNames =
-            [ "fooprj", "barprj" ]
-
-        contextNames =
-            [ "@fooC", "@barC" ]
-    in
-        Paper.item
-            [ class "todo-item editing"
-            ]
-            [ div [ class "vertical layout flex-auto" ]
-                [ div [ class "flex" ]
-                    [ Html.node "paper-textarea"
-                        [ class "auto-focus"
-                        , stringProperty "label" "Todo"
-                        , value (evm.todo.text)
-                        , boolProperty "stopKeyboardEventPropagation" True
-                        , onInput evm.onTodoTextChanged
-                        , onKeyDown evm.onKeyUp
-                        ]
-                        []
+    Paper.item
+        [ class "todo-item editing"
+        ]
+        [ div [ class "vertical layout flex-auto" ]
+            [ div [ class "flex" ]
+                [ Html.node "paper-textarea"
+                    [ class "auto-focus"
+                    , stringProperty "label" "Todo"
+                    , value (evm.todo.text)
+                    , boolProperty "stopKeyboardEventPropagation" True
+                    , onInput evm.onTodoTextChanged
+                    , onKeyDown evm.onKeyUp
                     ]
-                , div [ class "horizontal layout" ]
-                    [ Paper.menuButton []
-                        [ Paper.button [ class "dropdown-trigger" ]
-                            [ text "#"
-                            , text vm.projectName
-                            , icon "arrow-drop-down" []
-                            ]
-                        , Paper.menu [ class "dropdown-content" ]
-                            (projectNames .|> createProjectItem)
+                    []
+                ]
+            , div [ class "horizontal layout" ]
+                [ Paper.menuButton []
+                    [ Paper.button [ class "dropdown-trigger" ]
+                        [ text "#"
+                        , text vm.projectName
+                        , icon "arrow-drop-down" []
                         ]
-                    , Paper.menuButton []
-                        [ Paper.button [ class "dropdown-trigger" ]
-                            [ text "@"
-                            , text vm.contextName
-                            , icon "arrow-drop-down" []
-                            ]
-                        , Paper.menu [ class "dropdown-content" ]
-                            (vm.contexts .|> createContextItem # vm)
+                    , Paper.menu [ class "dropdown-content" ]
+                        (vm.projects .|> createProjectItem # vm)
+                    ]
+                , Paper.menuButton []
+                    [ Paper.button [ class "dropdown-trigger" ]
+                        [ text "@"
+                        , text vm.contextName
+                        , icon "arrow-drop-down" []
                         ]
+                    , Paper.menu [ class "dropdown-content" ]
+                        (vm.contexts .|> createContextItem # vm)
                     ]
                 ]
             ]
+        ]
 
 
 createProjectItem project vm =
     Paper.item
         [ onClickStopPropagation (vm.setProjectMsg project) ]
-        [ project |> Context.getName >> text ]
+        [ project |> Project.getName >> text ]
 
 
 createContextItem context vm =

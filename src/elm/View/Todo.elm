@@ -133,8 +133,8 @@ createTodoViewModel vc todo =
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
         , showDetails = vc.showDetails
         , isReminderActive = Todo.isReminderActive todo
-        , contexts = Dict.values vc.contextByIdDict
-        , projects = Dict.values vc.projectByIdDict
+        , contexts = vc.activeContexts
+        , projects = vc.activeProjects
         }
 
 

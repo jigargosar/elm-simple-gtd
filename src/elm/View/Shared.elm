@@ -39,6 +39,8 @@ type alias SharedViewModel =
     , getMaybeEditEntityFormForEntityId : Document.Id -> Maybe EditMode.EntityForm
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
+    , activeProjects : List Project.Model
+    , activeContexts : List Context.Model
     , selection : Set Todo.Id
     , showDetails : Bool
     }
@@ -68,6 +70,8 @@ createSharedViewModel model =
         { now = now
         , projectByIdDict = Model.getProjectByIdDict model
         , contextByIdDict = Model.getContextByIdDict model
+        , activeProjects = Model.getActiveProjects model
+        , activeContects = Model.getActiveContexts model
         , selection = Model.getSelectedTodoIdSet model
         , getMaybeEditTodoFormForTodo =
             \todo ->

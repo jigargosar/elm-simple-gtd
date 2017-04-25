@@ -84,7 +84,7 @@ appDrawerLayoutView m =
 
 appHeaderView m =
     App.header
-        [ attribute "reveals" "true"
+        [ attribute "reveals" ""
 
         --        , attribute "fixed" "true"
         --        , attribute "condenses" "true"

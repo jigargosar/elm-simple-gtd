@@ -42,7 +42,7 @@ import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextBu
 appView m =
     div []
         [ appDrawerLayoutView m
-        , addTodoFabView m
+        , addTodoFab m
         , showReminderOverlay m
         ]
 
@@ -193,14 +193,10 @@ headerView m =
                         ]
 
 
-addTodoFabView m =
+addTodoFab m =
     Paper.fab
         [ id "add-fab"
         , attribute "icon" "add"
         , onClick Msg.StartAddingTodo
         ]
         []
-
-
-type alias TodoViewModel =
-    Todo.Model

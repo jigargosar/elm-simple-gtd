@@ -146,7 +146,7 @@ default vm reminderForm =
             }
     in
         Paper.item
-            [ class "todo-item"
+            [ classList [ "todo-item" => True, "editing" => reminderForm.reminderMenuOpen ]
             , onClickStopPropagation (vm.startEditingMsg)
             ]
             [ Paper.itemBody []

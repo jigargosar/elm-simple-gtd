@@ -217,7 +217,9 @@
 
     }
 
-
+    paper-item.todo-item.iron-selected {
+        border-left:2px solid red;
+    }
     paper-item.todo-item{
         --paper-item-selected-weight:normal;
 
@@ -229,10 +231,6 @@
             opacity: 0;
         };
 
-        --paper-item-selected:{
-            border-left:2px solid var(--primary-color);
-        };
-        
         --paper-item-focused:{
             border-left:2px solid var(--primary-color);
         };

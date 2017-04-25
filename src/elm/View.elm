@@ -85,8 +85,9 @@ appDrawerLayoutView m =
 appHeaderView m =
     App.header
         [ attribute "reveals" "true"
-        , attribute "fixed" "true"
-        , attribute "condenses" "true"
+
+        --        , attribute "fixed" "true"
+        --        , attribute "condenses" "true"
         , attribute "effects" "waterfall"
         ]
         [ App.toolbar

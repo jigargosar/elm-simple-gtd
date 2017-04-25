@@ -32,7 +32,7 @@ import WebComponents exposing (onBoolPropertyChanged)
 
 
 view contextVM projectVM m =
-    App.drawer [ attribute "slot" "drawer" ]
+    App.drawer []
         [ div
             [ style [ "height" => "100%", "overflow" => "scroll" ]
             ]

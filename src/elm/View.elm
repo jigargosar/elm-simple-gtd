@@ -87,7 +87,7 @@ appHeaderView m =
         [ attribute "reveals" ""
 
         --        , attribute "fixed" "true"
-        --        , attribute "condenses" "true"
+        , attribute "condenses" ""
         , attribute "effects" "waterfall"
         ]
         [ App.toolbar []

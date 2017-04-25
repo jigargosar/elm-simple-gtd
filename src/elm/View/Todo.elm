@@ -188,54 +188,6 @@ default vm reminderForm =
             ]
 
 
-editView : TodoViewModel -> EditTodoViewModel -> Html Msg
-editView vm evm =
-    let
-        projectNames =
-            [ "fooprj", "barprj" ]
-
-        contextNames =
-            [ "@fooC", "@barC" ]
-    in
-        Paper.item
-            [ class "todo-item editing"
-            ]
-            [ div [ class "vertical layout flex-auto" ]
-                [ div [ class "flex" ]
-                    [ Html.node "paper-textarea"
-                        [ class "auto-focus"
-                        , stringProperty "label" "Todo"
-                        , value (evm.todo.text)
-                        , boolProperty "stopKeyboardEventPropagation" True
-                        , onInput evm.onTodoTextChanged
-                        , onKeyDown evm.onKeyUp
-                        ]
-                        []
-                    ]
-                , div [ class "horizontal layout" ]
-                    [ Paper.menuButton []
-                        [ Paper.button [ class "dropdown-trigger" ]
-                            [ text "#"
-                            , text vm.projectName
-                            , icon "arrow-drop-down" []
-                            ]
-                        , Paper.menu [ class "dropdown-content" ]
-                            (projectNames .|> createDropDownItem)
-                        ]
-                    , Paper.menuButton []
-                        [ Paper.button [ class "dropdown-trigger" ]
-                            [ text "@"
-                            , text vm.contextName
-                            , icon "arrow-drop-down" []
-                            ]
-                        , Paper.menu [ class "dropdown-content" ]
-                            (vm.contexts .|> createContextItem # vm)
-                        ]
-                    ]
-                ]
-            ]
-
-
 reminderMenuButton form reminderVM =
     Paper.menuButton
         [ boolProperty "opened" form.reminderMenuOpen
@@ -282,6 +234,54 @@ reminderMenuButton form reminderVM =
                 ]
             ]
         ]
+
+
+editView : TodoViewModel -> EditTodoViewModel -> Html Msg
+editView vm evm =
+    let
+        projectNames =
+            [ "fooprj", "barprj" ]
+
+        contextNames =
+            [ "@fooC", "@barC" ]
+    in
+        Paper.item
+            [ class "todo-item editing"
+            ]
+            [ div [ class "vertical layout flex-auto" ]
+                [ div [ class "flex" ]
+                    [ Html.node "paper-textarea"
+                        [ class "auto-focus"
+                        , stringProperty "label" "Todo"
+                        , value (evm.todo.text)
+                        , boolProperty "stopKeyboardEventPropagation" True
+                        , onInput evm.onTodoTextChanged
+                        , onKeyDown evm.onKeyUp
+                        ]
+                        []
+                    ]
+                , div [ class "horizontal layout" ]
+                    [ Paper.menuButton []
+                        [ Paper.button [ class "dropdown-trigger" ]
+                            [ text "#"
+                            , text vm.projectName
+                            , icon "arrow-drop-down" []
+                            ]
+                        , Paper.menu [ class "dropdown-content" ]
+                            (projectNames .|> createDropDownItem)
+                        ]
+                    , Paper.menuButton []
+                        [ Paper.button [ class "dropdown-trigger" ]
+                            [ text "@"
+                            , text vm.contextName
+                            , icon "arrow-drop-down" []
+                            ]
+                        , Paper.menu [ class "dropdown-content" ]
+                            (vm.contexts .|> createContextItem # vm)
+                        ]
+                    ]
+                ]
+            ]
 
 
 createDropDownItem title =

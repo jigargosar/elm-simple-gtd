@@ -33,6 +33,7 @@ type Msg
     | MarkRunningTodoDone
     | ToggleTodoDone Todo.Model
     | SetTodoContext Context.Model Todo.Model
+    | SetTodoProject Project.Model Todo.Model
     | CreateTodo String
     | CopyAndEditTodo Todo.Model
     | CopyAndEditTodoById Todo.Id

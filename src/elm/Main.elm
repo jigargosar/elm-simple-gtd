@@ -144,7 +144,10 @@ update msg =
                     updateTodo [ Todo.ToggleDone ] todo
 
                 SetTodoContext todoContext todo ->
-                    updateTodo [ Todo.SetContext (todoContext) ] todo
+                    updateTodo [ Todo.SetContext todoContext ] todo
+
+                SetTodoProject project todo ->
+                    updateTodo [ Todo.SetProject project ] todo
 
                 CreateTodo text ->
                     Return.mapModelWith Model.getNow

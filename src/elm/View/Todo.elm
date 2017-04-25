@@ -94,6 +94,7 @@ type alias TodoViewModel =
     , contextName : Context.Name
     , onCheckBoxClicked : Msg
     , setContextMsg : Context.Model -> Msg
+    , setProjectMsg : Project.Model -> Msg
     , startEditingMsg : Msg
     , onDoneClicked : Msg
     , onDeleteClicked : Msg
@@ -125,6 +126,7 @@ createTodoViewModel vc todo =
                 ?= "Inbox"
         , onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
         , setContextMsg = Msg.SetTodoContext # todo
+        , setProjectMsg = Msg.SetTodoProject # todo
         , startEditingMsg = Msg.StartEditingTodo todo
         , onDoneClicked = Msg.ToggleTodoDone todo
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
@@ -268,7 +270,7 @@ editView vm evm =
                             , icon "arrow-drop-down" []
                             ]
                         , Paper.menu [ class "dropdown-content" ]
-                            (projectNames .|> createDropDownItem)
+                            (projectNames .|> createProjectItem)
                         ]
                     , Paper.menuButton []
                         [ Paper.button [ class "dropdown-trigger" ]
@@ -284,8 +286,10 @@ editView vm evm =
             ]
 
 
-createDropDownItem title =
-    Paper.item [] [ text title ]
+createProjectItem project vm =
+    Paper.item
+        [ onClickStopPropagation (vm.setProjectMsg project) ]
+        [ project |> Context.getName >> text ]
 
 
 createContextItem context vm =

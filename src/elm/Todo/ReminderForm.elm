@@ -26,7 +26,7 @@ type Action
     | ReminderMenuOpen Bool
 
 
-create : Todo.Model -> Time -> Model
+create : Todo.Model -> Time.Time -> Model
 create todo now =
     let
         timeInMilli =

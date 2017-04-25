@@ -18,6 +18,7 @@ import Model.Types exposing (..)
 import Project
 import Store
 import Todo.Form
+import Todo.ReminderForm
 
 
 activateNewTodoMode : String -> ModelF
@@ -33,6 +34,11 @@ startEditingTodo todo =
 startEditingReminder : Todo.Model -> ModelF
 startEditingReminder todo =
     updateEditMode (createEditReminderTodoMode todo)
+
+
+createEditReminderTodoMode : Todo.Model -> Model -> EditMode
+createEditReminderTodoMode todo model =
+    Todo.ReminderForm.create todo model.now |> EditMode.TodoReminderForm
 
 
 startEditingTodoById : Todo.Id -> ModelF
@@ -139,11 +145,6 @@ createEditTodoMode todo model =
             Model.getContextNameOfTodo todo model ?= ""
     in
         Todo.Form.createTextForm todo projectName contextName model.now |> EditMode.TodoForm
-
-
-createEditReminderTodoMode : Todo.Model -> Model -> EditMode
-createEditReminderTodoMode todo model =
-    Todo.ReminderForm.create todo model.now |> EditMode.TodoReminderForm
 
 
 getMaybeEditTodoModel =

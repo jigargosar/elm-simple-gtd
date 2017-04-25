@@ -45,15 +45,10 @@ createKeyedItem vc todo =
         view =
             case vc.editMode of
                 EditMode.TodoForm form ->
-                    case form of
-                        Todo.Form.TextForm formModel ->
-                            if Document.hasId formModel.id todo then
-                                editView vm (createEditTodoViewModel formModel)
-                            else
-                                default vm
-
-                        _ ->
-                            default vm
+                    if Document.hasId form.id todo then
+                        editView vm (createEditTodoViewModel form)
+                    else
+                        default vm
 
                 _ ->
                     default vm

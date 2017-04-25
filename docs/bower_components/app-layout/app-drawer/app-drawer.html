@@ -53,6 +53,10 @@
         @apply(--app-drawer-content-container);
       }
 
+      :host([persistent]) > #contentContainer {
+        width: 100%;
+      }
+
       :host([position=right]) > #contentContainer {
         right: 0;
         left: auto;

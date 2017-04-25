@@ -1,5 +1,3 @@
-"use strict"
-
 //noinspection JSUnresolvedVariable
 var url;
 

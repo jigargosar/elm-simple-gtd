@@ -23,6 +23,15 @@
         display: none !important;
       }
 
+      input::-webkit-outer-spin-button,                                                                                                     
+      input::-webkit-inner-spin-button {                                                                                                    
+        @apply(--paper-input-container-input-webkit-spinner);                                                                                                                                                                                      
+      }
+      
+      input::-webkit-clear-button {
+        @apply(--paper-input-container-input-webkit-clear);  
+      }
+
       input::-webkit-input-placeholder {
         color: var(--paper-input-container-color, --secondary-text-color);
       }
@@ -33,6 +42,10 @@
 
       input::-moz-placeholder {
         color: var(--paper-input-container-color, --secondary-text-color);
+      }
+
+      input::-ms-clear {
+        @apply(--paper-input-container-ms-clear);
       }
 
       input:-ms-input-placeholder {

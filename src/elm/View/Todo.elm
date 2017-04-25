@@ -143,6 +143,7 @@ default vm reminderForm =
             , onTimeChanged = updateReminderForm << Todo.ReminderForm.Time
             , onReminderMenuOpenChanged = updateReminderForm << Todo.ReminderForm.ReminderMenuOpen
             , onSaveClicked = Msg.SaveEditingEntity
+            , startEditingMsg = Msg.StartEditingReminder reminderForm
             }
     in
         Paper.item
@@ -239,7 +240,7 @@ reminderMenuButton form reminderVM =
         , onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
         , boolProperty "dynamicAlign" True
         , boolProperty "noOverlap" True
-        , onClickStopPropagation Msg.NoOp
+        , onClickStopPropagation reminderVM.startEditingMsg
         , boolProperty "stopKeyboardEventPropagation" True
         ]
         [ paperIconButton [ iconP "alarm", class "dropdown-trigger" ] []

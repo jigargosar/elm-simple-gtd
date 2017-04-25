@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Attributes.Extra exposing (..)
 import Html.Events exposing (..)
+import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -40,7 +41,7 @@ doneAllIconP =
 
 
 iconTextButton iconName text_ clickHandler =
-    Polymer.Paper.button [ class "icon-text font-caption", onClick clickHandler ]
+    Polymer.Paper.button [ class "icon-text font-caption", onClickStopPropagation clickHandler ]
         [ icon iconName [ class "big" ]
         , text text_
         ]

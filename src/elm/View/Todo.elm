@@ -244,7 +244,12 @@ reminderMenuButton form reminderVM =
         , onClickStopPropagation Msg.NoOp
         , boolProperty "stopKeyboardEventPropagation" True
         ]
-        [ paperIconButton [ iconP "alarm", class "dropdown-trigger", onClickStopPropagation Msg.AutoFocusPaperInput ] []
+        [ paperIconButton
+            [ iconP "alarm"
+            , class "dropdown-trigger"
+            , onClickStopPropagation Msg.AutoFocusPaperInput
+            ]
+            []
         , div
             [ class "static dropdown-content"
             ]
@@ -266,7 +271,7 @@ reminderMenuButton form reminderVM =
                 , onInput reminderVM.onTimeChanged
                 ]
                 []
-            , div [ class "horizontal layout end-justified" ]
+            , div [ class "horizontal layout" ]
                 [ Paper.button
                     [ attribute "raised" "true"
                     , onClick reminderVM.onSaveClicked

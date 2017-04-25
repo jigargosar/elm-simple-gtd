@@ -74,13 +74,6 @@ createTextForm todo projectName contextName now =
             |> TextForm
 
 
-set2 : TextFormFieldValue -> TextFormModel -> TextFormModel
-set2 field model =
-    case field of
-        Text value ->
-            { model | todoText = value }
-
-
 set : FormField -> Form -> Form
 set field form =
     case ( form, field ) of

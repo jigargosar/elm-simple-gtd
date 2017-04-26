@@ -35,7 +35,7 @@ async function boot() {
 
 
     app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
-        _.mapObjIndexed(db=>db.startRemoteSync(uri), dbMap)
+        _.mapObjIndexed(db=>db.startRemoteSync(uri, "sgtd2-"), dbMap)
     })
 
 

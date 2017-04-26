@@ -28,7 +28,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
 import View.Shared exposing (..)
-import WebComponents exposing (onBoolPropertyChanged)
+import WebComponents exposing (iconP, onBoolPropertyChanged)
 
 
 view contextVM projectVM m =
@@ -60,9 +60,10 @@ divider =
 entityList { vmList, viewType, title, showDeleted } =
     [ item [ onClick (SetView viewType) ]
         [ itemBody [] [ span [ class "ellipsis" ] [ text title ] ]
-        , showOnHover
+        , div [ class "layout horizontal center show-on-hover" ]
             [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
             , trashIcon
+            , iconButton [ iconP "add", onClickStopPropagation Msg.NoOp ] []
             ]
         ]
     , divider

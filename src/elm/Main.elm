@@ -160,6 +160,10 @@ update msg =
                     Return.map Model.createAndEditNewProject
                         >> autoFocusPaperInputCmd
 
+                NewContext ->
+                    Return.map Model.createAndEditNewContext
+                        >> autoFocusPaperInputCmd
+
                 NewTodoTextChanged text ->
                     activateEditNewTodoMode text
 

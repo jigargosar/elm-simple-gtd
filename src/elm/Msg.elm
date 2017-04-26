@@ -39,7 +39,7 @@ type Msg
     | CopyAndEditTodoById Todo.Id
     | StartAddingTodo
     | NewProject
-      --    | NewContext
+    | NewContext
     | NewTodoTextChanged Todo.Text
     | DeactivateEditingMode
     | NewTodoKeyUp String KeyboardEvent

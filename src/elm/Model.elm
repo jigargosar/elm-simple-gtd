@@ -251,6 +251,12 @@ createAndEditNewProject model =
         |> (\( project, model ) -> startEditingEntity (ProjectEntity project) model)
 
 
+createAndEditNewContext model =
+    Store.insert (Project.init "<New Context>" model.now) model.contextStore
+        |> Tuple2.mapSecond (setContextStore # model)
+        |> (\( context, model ) -> startEditingEntity (ContextEntity context) model)
+
+
 
 --updateTodoFromEditTodoForm : TodoForm -> ModelF
 --updateTodoFromEditTodoForm { contextName, projectName, todoText, id, date, time } =

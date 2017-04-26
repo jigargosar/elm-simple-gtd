@@ -149,6 +149,7 @@ context model =
     , viewType = GroupByContextView
     , title = "Contexts"
     , showDeleted = model.showDeleted
+    , onAddClicked = Msg.NewProject
     }
 
 
@@ -157,4 +158,5 @@ project model =
     , viewType = GroupByProjectView
     , title = "Project"
     , showDeleted = model.showDeleted
+    , onAddClicked = Msg.NewProject
     }

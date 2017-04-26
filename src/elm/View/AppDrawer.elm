@@ -57,11 +57,11 @@ divider =
     hr [] []
 
 
-entityList { vmList, viewType, title, showDeleted } =
+entityList { vmList, viewType, title, showDeleted, onAddClicked } =
     [ item [ class "has-hover-elements", onClick (SetView viewType) ]
         [ itemBody [] [ span [ class "ellipsis" ] [ text title ] ]
         , div [ class "show-on-hover layout horizontal center" ]
-            [ iconButton [ iconP "add", onClickStopPropagation Msg.NoOp ] []
+            [ iconButton [ iconP "add", onClick onAddClicked ] []
             , toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
             , trashIcon
             ]

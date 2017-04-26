@@ -152,7 +152,7 @@ appMainView contextVMs projectVMs m =
                             , onInput (Msg.UpdateRemoteSyncFormUri form)
                             ]
                             []
-                        , Paper.button [ onClick Msg.SaveCurrentForm ] [ text "Sync" ]
+                        , Paper.button [ form |> Msg.RemotePouchSync >> onClick ] [ text "Sync" ]
                         ]
         ]
 

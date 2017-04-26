@@ -102,8 +102,9 @@ update msg =
                 NoOp ->
                     identity
 
-                RemotePouchSync ->
-                    syncWithRemotePouch "http://127.0.0.1:5984/" |> command
+                RemotePouchSync form ->
+                    Return.map Model.deactivateEditingMode
+                        >> (syncWithRemotePouch form.uri |> command)
 
                 OnNotificationClicked { action, data } ->
                     let

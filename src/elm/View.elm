@@ -3,8 +3,8 @@ module View exposing (appView)
 import EditMode
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
-import Html exposing (Attribute, Html, div, h1, h2, hr, node, span, text)
-import Html.Attributes exposing (attribute, autofocus, class, classList, id, style, value)
+import Html exposing (Attribute, Html, div, form, h1, h2, hr, input, node, span, text)
+import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, type_, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model
@@ -141,10 +141,14 @@ appMainView contextVMs projectVMs m =
                 View.EntityList.filtered m
 
             SyncView ->
-                Paper.material [ class "static layout  " ]
-                    [ Paper.input [ attribute "label" "Cloudant URL or any CouchDB URL" ] []
-                    , Paper.button [ onClick Msg.RemotePouchSync ] [ text "Sync" ]
-                    ]
+                let
+                    form =
+                        Model.getRemoteSyncForm m
+                in
+                    Paper.material [ class "static layout  " ]
+                        [ Paper.input [ attribute "label" "Cloudant URL or any CouchDB URL" ] []
+                        , Paper.button [ onClick Msg.RemotePouchSync ] [ text "Sync" ]
+                        ]
         ]
 
 

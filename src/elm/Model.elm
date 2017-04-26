@@ -473,3 +473,21 @@ getEditNewTodoModel =
 
 deactivateEditingMode =
     setEditMode EditMode.none
+
+
+getRemoteSyncForm model =
+    let
+        maybeForm =
+            case model.editMode of
+                EditMode.RemoteSync form ->
+                    Just form
+
+                _ ->
+                    Nothing
+    in
+        maybeForm ?= createRemoteSyncForm model
+
+
+createRemoteSyncForm : Model -> EditMode.RemoteSyncForm
+createRemoteSyncForm model =
+    { uri = model.pouchDBRemoteSyncURI }

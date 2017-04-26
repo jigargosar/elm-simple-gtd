@@ -203,6 +203,13 @@ update msg =
                             >> Model.setEditMode
                         )
 
+                UpdateRemoteSyncFormUri form uri ->
+                    Return.map
+                        ({ form | uri = uri }
+                            |> EditMode.RemoteSync
+                            >> Model.setEditMode
+                        )
+
                 UpdateReminderForm form action ->
                     Return.map
                         (Todo.ReminderForm.set action form

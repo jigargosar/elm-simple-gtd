@@ -49,6 +49,7 @@ type Msg
     | SaveCurrentForm
     | FocusPaperInput String
     | AutoFocusPaperInput
+    | UpdateRemoteSyncFormUri EditMode.RemoteSyncForm String
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | EditTodoFormKeyUp TodoForm KeyboardEvent

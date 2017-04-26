@@ -149,6 +149,7 @@ appMainView contextVMs projectVMs m =
                         [ Paper.input
                             [ attribute "label" "Cloudant URL or any CouchDB URL"
                             , value form.uri
+                            , onInput (Msg.UpdateRemoteSyncFormUri form)
                             ]
                             []
                         , Paper.button [ onClick Msg.SaveCurrentForm ] [ text "Sync" ]

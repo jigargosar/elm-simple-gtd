@@ -258,7 +258,7 @@ editView vm evm =
                     []
                 ]
             , div [ class "horizontal layout" ]
-                [ Paper.menuButton []
+                [ Paper.menuButton [ boolProperty "dynamicAlign" True ]
                     [ Paper.button [ class "dropdown-trigger" ]
                         [ text "#"
                         , text vm.projectName
@@ -267,7 +267,7 @@ editView vm evm =
                     , Paper.menu [ class "dropdown-content" ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
-                , Paper.menuButton []
+                , Paper.menuButton [ boolProperty "dynamicAlign" True ]
                     [ Paper.button [ class "dropdown-trigger" ]
                         [ text "@"
                         , text vm.contextName

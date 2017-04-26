@@ -76,7 +76,7 @@ appDrawerLayoutView m =
                 [ appHeaderView m
                 , Paper.material [ class "static layout  " ]
                     [ Paper.input [ attribute "label" "Cloudant URL or any CouchDB URL" ] []
-                    , Paper.button [] [ text "Sync" ]
+                    , Paper.button [ onClick Msg.RemotePouchSync ] [ text "Sync" ]
                     ]
                 , appMainView contextVMs projectVMs m
                 ]

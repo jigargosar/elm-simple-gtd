@@ -28,9 +28,10 @@ module.exports = async(dbName, indices = []) => {
 
     const remove = doc => db.put(_.merge(doc, {_deleted: true}))
 
-    function startRemoteSync(remoteUrl = "http://localhost:12321", dbName_ = dbName) {
-        console.log(`starting sync for ${dbName_}`)
-        const remoteURL = `${remoteUrl}/${dbName_}`;
+    function startRemoteSync(remoteUrl = "http://localhost:12321", prefix="", dbName_ = dbName) {
+        const dbNameWithPrefix = `${prefix}${dbName_}`
+        console.log(`starting sync for ${dbNameWithPrefix}`)
+        const remoteURL = `${remoteUrl}/${dbNameWithPrefix}`;
         db.sync(remoteURL,
             {live: true, retry: true},
             e => {

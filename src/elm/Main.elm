@@ -60,6 +60,9 @@ createTodoNotification todo =
 port notificationClicked : (TodoNotificationEvent -> msg) -> Sub msg
 
 
+port syncWithRemotePouch : String -> Cmd msg
+
+
 port startAlarm : () -> Cmd msg
 
 
@@ -98,6 +101,9 @@ update msg =
         >> (case msg of
                 NoOp ->
                     identity
+
+                RemotePouchSync ->
+                    syncWithRemotePouch "http://127.0.0.1:5984/" |> command
 
                 OnNotificationClicked { action, data } ->
                     let
@@ -476,3 +482,7 @@ reminderOverlayAction action =
 
 foo =
     (\_ -> "f") .= "a"
+
+
+command =
+    Return.command

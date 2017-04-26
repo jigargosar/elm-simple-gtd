@@ -32,6 +32,13 @@ async function boot() {
     const app = Elm["Main"]
         .embed(document.getElementById("root"), flags)
 
+
+
+    app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
+        _.mapObjIndexed(db=>db.startRemoteSync(uri), dbMap)
+    })
+
+
     app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
         // console.log("upserting", dbName, doc, id)
         const upsertResult = await dbMap[dbName].upsert(id, doc)

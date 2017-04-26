@@ -24,6 +24,7 @@ import Types exposing (..)
 
 type Msg
     = NoOp
+    | RemotePouchSync
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction ReminderOverlay.Action
     | OnNotificationClicked TodoNotificationEvent

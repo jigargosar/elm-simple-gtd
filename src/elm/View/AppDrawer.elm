@@ -47,6 +47,7 @@ view contextVM projectVM m =
                     ++ [ divider ]
                     ++ [ binItemView m
                        , doneItemView m
+                       , syncView m
                        ]
                 )
             ]
@@ -77,6 +78,10 @@ binItemView m =
 
 doneItemView m =
     item [ onClick (SetView DoneView) ] [ text "Done" ]
+
+
+syncView m =
+    item [ onClick (SetView SyncView) ] [ text "Sync Settings" ]
 
 
 

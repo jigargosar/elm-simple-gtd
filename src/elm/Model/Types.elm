@@ -28,6 +28,7 @@ type MainViewType
     | BinView
     | GroupByProjectView
     | ContextView Id
+    | SyncView
 
 
 type alias Model =

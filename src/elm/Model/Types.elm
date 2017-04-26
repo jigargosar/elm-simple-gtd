@@ -83,6 +83,7 @@ type alias Flags =
     , encodedTodoList : List Todo.Encoded
     , encodedProjectList : List Project.Encoded
     , encodedContextList : List Context.Encoded
+    , pouchDBRemoteSyncURI : String
     }
 
 

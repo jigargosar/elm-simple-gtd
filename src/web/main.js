@@ -26,7 +26,7 @@ async function boot() {
         encodedTodoList: todos,
         encodedProjectList: projects,
         encodedContextList: contexts,
-        remoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || ""
+        pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || ""
     }
 
     const Elm = require("elm/Main.elm")

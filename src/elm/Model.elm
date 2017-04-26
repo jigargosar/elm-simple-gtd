@@ -5,13 +5,11 @@ import Date
 import Date.Extra.Create
 import Dict.Extra
 import Document
-import EditMode exposing (TodoForm)
+import EditMode exposing (EditMode, TodoForm)
 import Ext.Keyboard as Keyboard
 import Model.Internal exposing (..)
 import Model.TodoStore
 import Msg exposing (Return)
-import Project
-import Project
 import Project
 import ReminderOverlay
 import RunningTodo exposing (RunningTodo)
@@ -247,7 +245,13 @@ getActiveTodoListGroupedBy fn =
     getActiveTodoList >> Dict.Extra.groupBy (fn)
 
 
+createAndEditNewProject model =
+    Store.insert (Project.init "<New Project>" model.now) model.contextStore
+        |> Tuple2.mapSecond (setProjectStore # model)
 
+
+
+--        |> startEditingEntity
 --updateTodoFromEditTodoForm : TodoForm -> ModelF
 --updateTodoFromEditTodoForm { contextName, projectName, todoText, id, date, time } =
 --    let
@@ -327,3 +331,138 @@ update lens smallF big =
 
 update2 lens l2 smallF big =
     lens.set (smallF (l2.get big) (lens.get big)) big
+
+
+
+---
+
+
+{-| editmode stuff
+-}
+activateNewTodoMode : String -> ModelF
+activateNewTodoMode text =
+    setEditMode (EditMode.createNewTodoModel text)
+
+
+startEditingTodo : Todo.Model -> ModelF
+startEditingTodo todo =
+    updateEditMode (createEditTodoMode todo)
+
+
+startEditingReminder : Todo.Model -> ModelF
+startEditingReminder todo =
+    updateEditMode (createEditReminderTodoMode todo)
+
+
+createEditReminderTodoMode : Todo.Model -> Model -> EditMode
+createEditReminderTodoMode todo model =
+    Todo.ReminderForm.create todo model.now |> EditMode.TodoReminderForm
+
+
+startEditingTodoById : Todo.Id -> ModelF
+startEditingTodoById id =
+    applyMaybeWith (Model.TodoStore.findTodoById id)
+        (createEditTodoMode >> updateEditMode)
+
+
+startEditingEntity : Entity -> ModelF
+startEditingEntity entity model =
+    setEditMode (createEntityEditMode entity model) model
+
+
+updateEditModeNameChanged newName entity model =
+    case model.editMode of
+        EditMode.EditContext ecm ->
+            setEditMode (EditMode.editContextSetName newName ecm) model
+
+        EditMode.EditProject epm ->
+            setEditMode (EditMode.editProjectSetName newName epm) model
+
+        _ ->
+            model
+
+
+toggleDeletedForEntity : Entity -> ModelF
+toggleDeletedForEntity entity model =
+    case entity of
+        ContextEntity context ->
+            context
+                |> Document.toggleDeleted
+                |> Context.setModifiedAt model.now
+                |> (Store.update # model.contextStore)
+                |> (setContextStore # model)
+
+        ProjectEntity project ->
+            project
+                |> Document.toggleDeleted
+                |> Project.setModifiedAt model.now
+                |> (Store.update # model.projectStore)
+                |> (setProjectStore # model)
+
+        TodoEntity todo ->
+            Model.TodoStore.updateTodo [ Todo.ToggleDeleted ] todo model
+
+
+saveEditModeEntity model =
+    case model.editMode of
+        EditMode.EditContext ecm ->
+            Store.findById ecm.id model.contextStore
+                ?|> Context.setName ecm.name
+                >> Context.setModifiedAt model.now
+                >> (Store.update # model.contextStore)
+                >> (setContextStore # model)
+                ?= model
+
+        EditMode.EditProject epm ->
+            Store.findById epm.id model.projectStore
+                ?|> Project.setName epm.name
+                >> Project.setModifiedAt model.now
+                >> (Store.update # model.projectStore)
+                >> (setProjectStore # model)
+                ?= model
+
+        EditMode.TodoForm form ->
+            updateTodoWithTodoForm form model
+
+        EditMode.TodoReminderForm form ->
+            updateTodoWithReminderForm form model
+
+        _ ->
+            model
+
+
+createEntityEditMode : Entity -> Model -> EditMode
+createEntityEditMode entity model =
+    case entity of
+        ContextEntity context ->
+            EditMode.editContextMode context
+
+        ProjectEntity project ->
+            EditMode.editProjectMode project
+
+        TodoEntity todo ->
+            createEditTodoMode todo model
+
+
+createEditTodoMode : Todo.Model -> Model -> EditMode
+createEditTodoMode todo model =
+    let
+        projectName =
+            getMaybeProjectNameOfTodo todo model ?= ""
+
+        contextName =
+            getContextNameOfTodo todo model ?= ""
+    in
+        Todo.Form.createTextForm todo projectName contextName model.now |> EditMode.TodoForm
+
+
+getMaybeEditTodoModel =
+    getEditMode >> EditMode.getMaybeEditTodoModel
+
+
+getEditNewTodoModel =
+    getEditMode >> EditMode.getNewTodoModel
+
+
+deactivateEditingMode =
+    setEditMode EditMode.none

@@ -87,6 +87,10 @@ updateProjectStore updater model =
     setProjectStore (updater model) model
 
 
+setContextStore contextStore model =
+    { model | contextStore = contextStore }
+
+
 getMainViewType : Model -> MainViewType
 getMainViewType =
     (.mainViewType)

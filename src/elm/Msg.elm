@@ -38,6 +38,8 @@ type Msg
     | CopyAndEditTodo Todo.Model
     | CopyAndEditTodoById Todo.Id
     | StartAddingTodo
+    | NewProject
+      --    | NewContext
     | NewTodoTextChanged Todo.Text
     | DeactivateEditingMode
     | NewTodoKeyUp String KeyboardEvent

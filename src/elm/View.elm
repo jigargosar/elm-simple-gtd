@@ -9,7 +9,6 @@ import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model
 import Model.Internal as Model
-import Model.EditMode
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (Msg)
 import ReminderOverlay

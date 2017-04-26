@@ -6,7 +6,6 @@ import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import EditMode
 import Ext.Keyboard as Keyboard
 import Ext.Return as Return
-import Model.EditMode as Model
 import Model.Internal as Model
 import Model.RunningTodo as Model
 import Model.TodoStore as Model
@@ -154,6 +153,10 @@ update msg =
                         (\now -> Model.addNewTodo text now >> Tuple.second)
 
                 StartAddingTodo ->
+                    activateEditNewTodoMode ""
+                        >> autoFocusPaperInputCmd
+
+                NewProject ->
                     activateEditNewTodoMode ""
                         >> autoFocusPaperInputCmd
 

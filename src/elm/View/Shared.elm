@@ -11,7 +11,6 @@ import Html.Events exposing (onClick)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Encode
 import Model
-import Model.EditMode
 import Polymer.Attributes exposing (icon)
 import Polymer.Paper exposing (badge)
 import Set exposing (Set)

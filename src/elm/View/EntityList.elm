@@ -12,7 +12,6 @@ import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Maybe.Extra as Maybe
-import Model.EditMode
 import Model.Internal as Model
 import Model.TodoStore exposing (TodoContextViewModel)
 import Msg exposing (..)
@@ -97,7 +96,7 @@ entityListItemView vc vm =
 
 
 defaultView vm =
-    item [  ]
+    item []
         [ itemBody [] [ View.Shared.defaultBadge vm ]
         , showOnHover [ settingsButton vm.startEditingMsg ]
         , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]

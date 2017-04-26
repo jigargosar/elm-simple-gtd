@@ -156,7 +156,7 @@ context model =
 project model =
     { vmList = projectList model
     , viewType = GroupByProjectView
-    , title = "Project"
+    , title = "Projects"
     , showDeleted = model.showDeleted
     , onAddClicked = Msg.NewProject
     }

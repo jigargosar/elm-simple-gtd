@@ -45,6 +45,9 @@ getPathFromModel model =
             else
                 [ "context", id ]
 
+        SyncView ->
+            [ "sync" ]
+
 
 delta2hash : Model -> Model -> Maybe UrlChange
 delta2hash =
@@ -80,6 +83,9 @@ builder2messages builder =
 
         "notification" :: todoId :: [] ->
             [ Msg.ShowReminderOverlayForTodoId todoId ]
+
+        "sync" :: [] ->
+            [ Msg.SetView SyncView ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

@@ -157,7 +157,7 @@ update msg =
                         >> autoFocusPaperInputCmd
 
                 NewProject ->
-                    activateEditNewTodoMode ""
+                    Return.map Model.createAndEditNewProject
                         >> autoFocusPaperInputCmd
 
                 NewTodoTextChanged text ->

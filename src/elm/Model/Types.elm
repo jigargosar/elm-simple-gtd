@@ -43,6 +43,7 @@ type alias Model =
     , selection : Selection
     , showDeleted : Bool
     , reminderOverlay : ReminderOverlay.Model
+    , pouchDBRemoteSyncURI : String
     }
 
 

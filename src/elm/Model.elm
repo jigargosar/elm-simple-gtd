@@ -36,7 +36,7 @@ import Types exposing (..)
 
 
 init : Flags -> Model
-init { now, encodedTodoList, encodedProjectList, encodedContextList } =
+init { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
     let
         storeGenerator =
             Random.map3 (,,)
@@ -59,6 +59,7 @@ init { now, encodedTodoList, encodedProjectList, encodedContextList } =
         , selection = Set.empty
         , showDeleted = False
         , reminderOverlay = ReminderOverlay.none
+        , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
         }
 
 

@@ -197,6 +197,7 @@ addTodoFab m =
     Paper.fab
         [ id "add-fab"
         , attribute "icon" "add"
+        , attribute "mini" ""
         , onClick Msg.StartAddingTodo
         ]
         []

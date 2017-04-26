@@ -58,9 +58,9 @@ divider =
 
 
 entityList { vmList, viewType, title, showDeleted } =
-    [ item [ onClick (SetView viewType) ]
+    [ item [ class "has-hover-elements", onClick (SetView viewType) ]
         [ itemBody [] [ span [ class "ellipsis" ] [ text title ] ]
-        , div [ class "layout horizontal center show-on-hover" ]
+        , div [ class "show-on-hover layout horizontal center" ]
             [ iconButton [ iconP "add", onClickStopPropagation Msg.NoOp ] []
             , toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
             , trashIcon

@@ -35,8 +35,8 @@ async function boot() {
 
 
     app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
-        _.forEach(sync => sync.cancel())(syncList)
-        syncList = _.mapObjIndexed(db=>db.startRemoteSync(uri, "sgtd2-"), dbMap)
+        await Promise.all(_.map(sync => sync.cancel())(syncList))
+        syncList = _.compose(_.map(db=>db.startRemoteSync(uri, "sgtd2-")), _.values)(dbMap)
     })
 
 

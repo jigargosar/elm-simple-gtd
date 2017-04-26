@@ -8,7 +8,7 @@ PouchDB.debug.disable()
 PouchDB.plugin(require('pouchdb-find'))
 PouchDB.plugin(require('pouchdb-upsert'))
 
-module.exports = async(dbName, indices = []) => {
+module.exports = async (dbName, indices = []) => {
     const db = new PouchDB(dbName)
 
     function createIndex(index) {
@@ -16,10 +16,11 @@ module.exports = async(dbName, indices = []) => {
         // .then(console.log)
     }
 
-    async function deleteIndices(){
+    async function deleteIndices() {
         const existingCustomIndices = _.filter(_.prop("ddoc"), (await db.getIndexes()).indexes)
         return await Promise.all(_.map(_.bind(db.deleteIndex, db), existingCustomIndices))
     }
+
     // await deleteIndices();
 
 
@@ -28,15 +29,21 @@ module.exports = async(dbName, indices = []) => {
 
     const remove = doc => db.put(_.merge(doc, {_deleted: true}))
 
-    function startRemoteSync(remoteUrl = "http://localhost:12321", prefix="", dbName_ = dbName) {
+    function startRemoteSync(remoteUrl = "http://localhost:12321", prefix = "", dbName_ = dbName) {
         const dbNameWithPrefix = `${prefix}${dbName_}`
         console.log(`starting sync for ${dbNameWithPrefix}`)
         const remoteURL = `${remoteUrl}/${dbNameWithPrefix}`;
-        db.sync(remoteURL,
-            {live: true, retry: true},
-            e => {
-                console.error(`PLDB: sync err ${dbName_}`, e)
-            });
+        return db
+            .sync(remoteURL,
+                {live: true, retry: true},
+                (error, result) => {
+                    if(error){
+                        console.error(`PLDB: sync err ${dbName_}`, error)
+                    }else{
+                        console.info("PLDB: sync complete = ", result)
+                    }
+
+                })
     }
 
     const find = async options => (await db.find(options)).docs

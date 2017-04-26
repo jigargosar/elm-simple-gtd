@@ -17,7 +17,11 @@ self.addEventListener('notificationclick', function (event) {
                     return clients
                         .openWindow(url)
                         .then(function(client) {
-                            postMessage(client, event)
+                            console.log(client)
+                            setTimeout(function () {
+                                console.log(client)
+                                postMessage(client, event)
+                            },2000)
                         })
                 }
             })

@@ -248,10 +248,10 @@ getActiveTodoListGroupedBy fn =
 createAndEditNewProject model =
     Store.insert (Project.init "<New Project>" model.now) model.contextStore
         |> Tuple2.mapSecond (setProjectStore # model)
+        |> (\( project, model ) -> startEditingEntity (ProjectEntity project) model)
 
 
 
---        |> startEditingEntity
 --updateTodoFromEditTodoForm : TodoForm -> ModelF
 --updateTodoFromEditTodoForm { contextName, projectName, todoText, id, date, time } =
 --    let

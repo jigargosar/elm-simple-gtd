@@ -213,7 +213,7 @@ reminderMenuButton form reminderVM =
             [ div [ class "font-subhead" ] [ text "Select date and time" ]
             , Paper.input
                 [ type_ "date"
-                , class "auto-focus"
+                , classList [ "auto-focus" => form.reminderMenuOpen ]
                 , labelA "Date"
                 , value form.date
                 , boolProperty "stopKeyboardEventPropagation" True

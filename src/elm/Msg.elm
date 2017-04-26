@@ -46,7 +46,7 @@ type Msg
     | NewTodoKeyUp String KeyboardEvent
     | StartEditingTodo Todo.Model
     | StartEditingReminder Todo.ReminderForm.Model
-    | SaveEditingEntity
+    | SaveCurrentForm
     | FocusPaperInput String
     | AutoFocusPaperInput
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action

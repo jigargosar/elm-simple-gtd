@@ -227,9 +227,9 @@ update msg =
                         Key.Enter ->
                             andThenUpdateAll
                                 (if ke.isShiftDown then
-                                    [ SaveEditingEntity, CopyAndEditTodoById id ]
+                                    [ SaveCurrentForm, CopyAndEditTodoById id ]
                                  else if ke.isMetaDown || ke.isControlDown then
-                                    [ SaveEditingEntity, DeactivateEditingMode ]
+                                    [ SaveCurrentForm, DeactivateEditingMode ]
                                  else
                                     []
                                 )
@@ -269,7 +269,7 @@ update msg =
                 OnKeyboardMsg msg ->
                     Return.map (Model.update Model.keyboardState (Keyboard.update msg))
 
-                SaveEditingEntity ->
+                SaveCurrentForm ->
                     Return.map (Model.saveEditModeEntity)
                         >> andThenUpdate DeactivateEditingMode
 
@@ -283,7 +283,7 @@ update msg =
                             Return.map (Model.updateEditModeNameChanged newName entity)
 
                         Save ->
-                            andThenUpdate SaveEditingEntity
+                            andThenUpdate SaveCurrentForm
 
                         ToggleDeleted ->
                             Return.map (Model.toggleDeletedForEntity entity)

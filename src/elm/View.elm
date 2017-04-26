@@ -145,9 +145,13 @@ appMainView contextVMs projectVMs m =
                     form =
                         Model.getRemoteSyncForm m
                 in
-                    Paper.material [ class "static layout  " ]
-                        [ Paper.input [ attribute "label" "Cloudant URL or any CouchDB URL" ] []
-                        , Paper.button [ onClick Msg.RemotePouchSync ] [ text "Sync" ]
+                    Paper.material [ class "static layout" ]
+                        [ Paper.input
+                            [ attribute "label" "Cloudant URL or any CouchDB URL"
+                            , value form.uri
+                            ]
+                            []
+                        , Paper.button [ onClick Msg.SaveCurrentForm ] [ text "Sync" ]
                         ]
         ]
 

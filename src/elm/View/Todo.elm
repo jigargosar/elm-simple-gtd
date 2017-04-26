@@ -79,7 +79,7 @@ createEditTodoViewModel form =
             }
         , onKeyUp = Msg.EditTodoFormKeyUp form
         , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
-        , onSaveClicked = Msg.SaveEditingEntity
+        , onSaveClicked = Msg.SaveCurrentForm
         , onCancelClicked = Msg.DeactivateEditingMode
         }
 
@@ -148,7 +148,7 @@ default vm reminderForm =
             { onDateChanged = updateReminderForm << Todo.ReminderForm.Date
             , onTimeChanged = updateReminderForm << Todo.ReminderForm.Time
             , onReminderMenuOpenChanged = updateReminderForm << Todo.ReminderForm.ReminderMenuOpen
-            , onSaveClicked = Msg.SaveEditingEntity
+            , onSaveClicked = Msg.SaveCurrentForm
             , startEditingMsg = Msg.StartEditingReminder reminderForm
             }
     in

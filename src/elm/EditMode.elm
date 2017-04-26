@@ -40,12 +40,17 @@ type alias NewTodoModel =
     Todo.Text
 
 
+type alias RemoteSyncForm =
+    { uri : String }
+
+
 type EditMode
     = NewTodo NewTodoModel
     | TodoForm Todo.Form.Model
     | TodoReminderForm Todo.ReminderForm.Model
     | EditContext EditContextModel
     | EditProject EditProjectModel
+    | RemoteSync RemoteSyncForm
     | None
     | SwitchView
     | SwitchToGroupedView

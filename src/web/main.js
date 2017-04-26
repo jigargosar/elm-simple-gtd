@@ -8,7 +8,7 @@ const DB = require("./local-pouch-db")
 const sound = require("./sound")
 
 async function boot() {
-
+    let syncList = []
     const dbMap = {
         "todo-db": await DB("todo-db"),
         "project-db": await DB("project-db"),
@@ -35,7 +35,8 @@ async function boot() {
 
 
     app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
-        _.mapObjIndexed(db=>db.startRemoteSync(uri, "sgtd2-"), dbMap)
+        _.forEach(sync => sync.cancel())(syncList)
+        syncList = _.mapObjIndexed(db=>db.startRemoteSync(uri, "sgtd2-"), dbMap)
     })
 
 

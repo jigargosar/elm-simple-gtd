@@ -103,7 +103,8 @@ update msg =
                     identity
 
                 RemotePouchSync form ->
-                    Return.map Model.deactivateEditingMode
+                    Return.map (\m -> { m | pouchDBRemoteSyncURI = form.uri })
+                        >> Return.map Model.deactivateEditingMode
                         >> (syncWithRemotePouch form.uri |> command)
 
                 OnNotificationClicked { action, data } ->

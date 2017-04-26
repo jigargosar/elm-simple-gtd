@@ -28,7 +28,7 @@ import Json.Encode
 import List.Extra as List
 import Model.Types exposing (..)
 import Todo
-import Polymer.Paper as Paper exposing (dialog)
+import Polymer.Paper as Paper exposing (dialog, material)
 import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
@@ -74,6 +74,10 @@ appDrawerLayoutView m =
             [ View.AppDrawer.view contextVM projectVM m
             , App.headerLayout []
                 [ appHeaderView m
+                , Paper.material [ class "static layout  " ]
+                    [ Paper.input [ attribute "label" "Cloudant URL or any CouchDB URL" ] []
+                    , Paper.button [] [ text "Sync" ]
+                    ]
                 , appMainView contextVMs projectVMs m
                 ]
             ]

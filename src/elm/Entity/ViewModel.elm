@@ -34,7 +34,7 @@ type alias ViewModel =
     }
 
 
-createViewModelList config model =
+createList config model =
     let
         todoListDict =
             Model.getActiveTodoListGroupedBy config.groupByFn model
@@ -60,10 +60,10 @@ createViewModelList config model =
                     |> (::) config.nullEntity
     in
         entityList
-            .|> createViewModel getTodoListWithGroupId config
+            .|> create getTodoListWithGroupId config
 
 
-createViewModel todoListByEntityId config entity =
+create todoListByEntityId config entity =
     let
         id =
             Document.getId entity
@@ -118,7 +118,7 @@ createViewModel todoListByEntityId config entity =
 
 projectList : Model.Types.Model -> List ViewModel
 projectList model =
-    createViewModelList
+    createList
         { groupByFn = Todo.getProjectId
         , entityType = ProjectEntityType
         , entityWrapper = ProjectEntity
@@ -132,7 +132,7 @@ projectList model =
 
 contextList : Model.Types.Model -> List ViewModel
 contextList model =
-    createViewModelList
+    createList
         { groupByFn = Todo.getContextId
         , entityType = ContextEntityType
         , entityWrapper = ContextEntity

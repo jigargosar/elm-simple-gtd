@@ -246,7 +246,7 @@ getActiveTodoListGroupedBy fn =
 
 
 createAndEditNewProject model =
-    Store.insert (Project.init "<New Project>" model.now) model.contextStore
+    Store.insert (Project.init "<New Project>" model.now) model.projectStore
         |> Tuple2.mapSecond (setProjectStore # model)
         |> (\( project, model ) -> startEditingEntity (ProjectEntity project) model)
 

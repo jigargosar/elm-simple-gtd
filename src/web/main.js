@@ -25,7 +25,8 @@ async function boot() {
         now: Date.now(),
         encodedTodoList: todos,
         encodedProjectList: projects,
-        encodedContextList: contexts
+        encodedContextList: contexts,
+        remoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || ""
     }
 
     const Elm = require("elm/Main.elm")
@@ -33,11 +34,10 @@ async function boot() {
         .embed(document.getElementById("root"), flags)
 
 
-
     app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
         localStorage.setItem("pouchdb.remote-sync-uri", uri)
         await Promise.all(_.map(sync => sync.cancel())(syncList))
-        syncList = _.compose(_.map(db=>db.startRemoteSync(uri, "sgtd2-")), _.values)(dbMap)
+        syncList = _.compose(_.map(db => db.startRemoteSync(uri, "sgtd2-")), _.values)(dbMap)
     })
 
 
@@ -104,8 +104,8 @@ async function setupNotifications(app) {
 }
 
 const closeNotification = reg => async (tag) => {
-    const n = _.find(_.propEq("tag", tag) , await reg.getNotifications())
-    if(n){
+    const n = _.find(_.propEq("tag", tag), await reg.getNotifications())
+    if (n) {
         n.close()
     }
 }
@@ -116,16 +116,16 @@ const showNotification = reg => async ({tag, title, data}) => {
     if (permission !== "granted") return
     reg.showNotification(title, {
         tag,
-        requiresInteraction:true,
-        sticky:true,
-        renotify:true,
-        vibrate: [500,110,500,110,450,110,200,110,170,40,450,110,200,110,170,40,500],
-        sound:"/alarm.ogg",
+        requiresInteraction: true,
+        sticky: true,
+        renotify: true,
+        vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
+        sound: "/alarm.ogg",
         actions: [
             {title: "Mark Done", action: "mark-done"},
             {title: "Snooze", action: "snooze"},
         ],
-        body:title,
+        body: title,
         data
     })
 }

@@ -61,9 +61,10 @@ entityList { vmList, viewType, title, showDeleted } =
     [ item [ class "has-hover-elements", onClick (SetView viewType) ]
         [ itemBody [] [ span [ class "ellipsis" ] [ text title ] ]
         , div [ class "show-on-hover layout horizontal center" ]
-            [ iconButton [ iconP "add", onClickStopPropagation Msg.NoOp ] []
-            , toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
+            [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
             , trashIcon
+
+            --            , iconButton [ iconP "add", onClickStopPropagation Msg.NoOp ] []
             ]
         ]
     , divider

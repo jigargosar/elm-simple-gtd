@@ -100,7 +100,7 @@ create todoListByEntityId config entity =
             if isNull then
                 config.nullIcon
             else
-                { name = "av:fiber-manual-record", color = "#ddd", class = "sgtdBlue" }
+                { name = config.defaultIconName, color = "#ddd", class = "sgtdBlue" }
     in
         { id = id
         , name = entity.name
@@ -144,7 +144,8 @@ projectList model =
         , entityWrapper = ProjectEntity
         , nullEntity = Project.null
         , isNull = Project.isNull
-        , nullIcon = { name = "inbox", color = sgtdBlue, class = "sgtdBlue" }
+        , nullIcon = { name = "av:stop", color = sgtdBlue, class = "sgtdBlue" }
+        , defaultIconName = "av:stop"
         , getViewType = ProjectView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
         }
@@ -160,6 +161,7 @@ contextList model =
         , nullEntity = Context.null
         , isNull = Context.isNull
         , nullIcon = { name = "inbox", color = sgtdBlue, class = "sgtdBlue" }
+        , defaultIconName = "av:fiber-manual-record"
         , getViewType = ContextView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
         }
@@ -172,6 +174,7 @@ context model =
     , title = "Contexts"
     , showDeleted = model.showDeleted
     , onAddClicked = Msg.NewContext
+    , icon = { name = "vaadin:records", color = "sgtdBlue" }
     }
 
 
@@ -181,4 +184,5 @@ project model =
     , title = "Projects"
     , showDeleted = model.showDeleted
     , onAddClicked = Msg.NewProject
+    , icon = { name = "vaadin:records", color = "sgtdBlue" }
     }

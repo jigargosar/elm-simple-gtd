@@ -49,7 +49,7 @@ view contextVM projectVM m =
                         , onClick Msg.ToggleDrawer
                         ]
                         []
-                    , headLineText "View Name"
+                    , headLineText (getViewName m.mainViewType projectVM contextVM)
                     ]
                 ]
             , Html.node "paper-listbox"
@@ -69,6 +69,37 @@ view contextVM projectVM m =
                 )
             ]
         ]
+
+
+getViewName mainViewType projectVM contextVM =
+    let
+        contextNameById id =
+            contextVM.vmList |> List.find (.id >> equals id) >>? .name >>? (++) "@" >>?= ""
+
+        projectNameById id =
+            projectVM.vmList |> List.find (.id >> equals id) >>? .name >>? (++) "#" >>?= ""
+    in
+        case mainViewType of
+            GroupByContextView ->
+                contextVM.title
+
+            ContextView id ->
+                contextNameById id
+
+            GroupByProjectView ->
+                projectVM.title
+
+            ProjectView id ->
+                projectNameById id
+
+            BinView ->
+                "Bin"
+
+            DoneView ->
+                "Done"
+
+            SyncView ->
+                "Sync"
 
 
 getSelectedIndex mainViewType projectVM contextVM =

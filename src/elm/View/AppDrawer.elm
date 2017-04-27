@@ -28,7 +28,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
 import View.Shared exposing (..)
-import WebComponents exposing (iconP, onBoolPropertyChanged)
+import WebComponents exposing (iconP, onBoolPropertyChanged, paperIconButton)
 
 
 view contextVM projectVM m =
@@ -37,7 +37,10 @@ view contextVM projectVM m =
             [ attribute "has-scrolling-region" ""
             ]
             [ App.header []
-                [ App.toolbar [] [ headLineText "View Name" ]
+                [ App.toolbar []
+                    [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "true" ] []
+                    , headLineText "View Name"
+                    ]
                 ]
             , menu
                 [ stringProperty "selected" "0"

@@ -36,7 +36,7 @@ view contextVM projectVM m =
         [ App.headerLayout
             [ attribute "has-scrolling-region" ""
             ]
-            [ App.header []
+            [ App.header [ attribute "fixed" "true" ]
                 [ App.toolbar []
                     [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "" ] []
                     , headLineText "View Name"

@@ -49,7 +49,9 @@ view contextVM projectVM m =
                 ]
             , menu
                 [ stringProperty "selectable" "paper-item"
-                , stringProperty "attrForSelected" "draweritemselected"
+                , intProperty "selected" (getSelectedIndex m.mainViewType projectVM contextVM)
+
+                --                , stringProperty "attrForSelected" "draweritemselected"
                 ]
                 (entityList contextVM m.mainViewType
                     ++ [ divider ]
@@ -62,6 +64,22 @@ view contextVM projectVM m =
                 )
             ]
         ]
+
+
+getSelectedIndex mainViewType projectVM contextVM =
+    let
+        lastProjectIndex =
+            1
+    in
+        case mainViewType of
+            GroupByProjectView ->
+                0
+
+            GroupByContextView ->
+                0
+
+            _ ->
+                0
 
 
 divider =

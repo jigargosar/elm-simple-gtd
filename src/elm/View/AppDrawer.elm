@@ -64,7 +64,7 @@ divider =
 
 entityList { vmList, viewType, title, showDeleted, onAddClicked } =
     [ item [ class "has-hover-elements", onClick (SetView viewType) ]
-        [ itemBody [] [ div [ class "font-headline" ] [ text title ] ]
+        [ itemBody [] [ headLineText title ]
         , div [ class "show-on-hover layout horizontal center" ]
             [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
             , trashIcon
@@ -77,16 +77,24 @@ entityList { vmList, viewType, title, showDeleted, onAddClicked } =
         ++ (List.map entityItem vmList)
 
 
+headLineText title =
+    div [ class "font-headline" ] [ text title ]
+
+
 binItemView m =
-    item [ onClick (SetView BinView) ] [ Html.h4 [] [ text "Bin" ] ]
+    switchViewItem BinView "Bin"
 
 
 doneItemView m =
-    item [ onClick (SetView DoneView) ] [ Html.h4 [] [ text "Done" ] ]
+    switchViewItem DoneView "Done"
 
 
 syncView m =
-    item [ onClick (SetView SyncView) ] [ Html.h4 [] [ text "Sync Settings" ] ]
+    switchViewItem SyncView "Sync Settings"
+
+
+switchViewItem viewType title =
+    item [ onClick (SetView viewType) ] [ headLineText title ]
 
 
 

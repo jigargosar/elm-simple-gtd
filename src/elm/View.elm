@@ -72,7 +72,7 @@ appDrawerLayoutView m =
     in
         App.drawerLayout []
             [ View.AppDrawer.view contextVM projectVM m
-            , App.headerLayout []
+            , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ appHeaderView m
                 , appMainView contextVMs projectVMs m
                 ]

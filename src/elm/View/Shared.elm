@@ -141,7 +141,7 @@ defaultBadge vm =
     --        ]
     div [ class "layout horizontal" ]
         [ div [ class "ellipsis" ] [ vm.name |> text ]
-        , div [ class "font-caption secondary-color" ]
+        , div [ class "secondary-color" ]
             [ " (" ++ (vm.count |> toString) ++ ")" |> text ]
         ]
 

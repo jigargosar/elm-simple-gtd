@@ -43,7 +43,12 @@ view contextVM projectVM m =
                 [ boolProperty "fixed" True
                 ]
                 [ App.toolbar []
-                    [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "", onClick Msg.ToggleDrawer ] []
+                    [ paperIconButton
+                        [ iconP "menu"
+                        , attribute "drawer-toggle" ""
+                        , onClick Msg.ToggleDrawer
+                        ]
+                        []
                     , headLineText "View Name"
                     ]
                 ]

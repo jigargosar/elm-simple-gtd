@@ -49,8 +49,7 @@ view contextVM projectVM m =
                 ]
             , menu
                 [ stringProperty "selectable" "paper-item"
-                , stringProperty "selectedAttribute" "selected"
-                , stringProperty "attrForSelected" "selected"
+                , stringProperty "attrForSelected" "draweritemselected"
                 ]
                 (entityList contextVM m.mainViewType
                     ++ [ divider ]
@@ -113,16 +112,30 @@ switchViewItem viewType title =
 
 entityItem : (Document.Id -> Bool) -> Entity.ViewModel.ViewModel -> Html Msg
 entityItem isSelected vm =
-    --    let
-    --        _ =
-    --            Debug.log "isSelected vm.id" (isSelected vm.id)
-    --    in
-    item [ class "", boolProperty "selected" (isSelected vm.id), onBoolPropertyChanged "focused" vm.onActiveStateChanged ]
-        ([ itemBody [] [ View.Shared.defaultBadge vm ]
-         , hoverIcons vm
-         , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
-         ]
-        )
+    let
+        selectedProperty =
+            boolProperty "draweritemselected" (isSelected vm.id)
+
+        selectedAttribute =
+            if isSelected vm.id then
+                attribute "draweritemselected" ""
+            else
+                attribute "dummy-attr" ""
+
+        _ =
+            (if isSelected vm.id then
+                Just vm
+             else
+                Nothing
+            )
+                ?|> Debug.log "selected vm"
+    in
+        item [ selectedAttribute, onClick (vm.onActiveStateChanged True) ]
+            ([ itemBody [] [ View.Shared.defaultBadge vm ]
+             , hoverIcons vm
+             , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
+             ]
+            )
 
 
 hoverIcons vm =

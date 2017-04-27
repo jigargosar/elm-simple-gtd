@@ -31,6 +31,7 @@ type alias ViewModel =
     , onSaveClicked : Msg
     , onNameChanged : String -> Msg
     , onCancelClicked : Msg
+    , icon : { name : String }
     }
 
 
@@ -113,6 +114,7 @@ create todoListByEntityId config entity =
         , onSaveClicked = onEntityAction Save
         , onNameChanged = NameChanged >> onEntityAction
         , onCancelClicked = Msg.DeactivateEditingMode
+        , icon = { name = "circle" }
         }
 
 

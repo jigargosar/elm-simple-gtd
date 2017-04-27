@@ -71,7 +71,7 @@ entityList { vmList, viewType, title, showDeleted, onAddClicked } =
             , trashIcon
             ]
         ]
-    , divider
+--    , divider
     ]
         ++ (List.map entityItem vmList)
 

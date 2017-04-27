@@ -144,8 +144,8 @@ projectList model =
         , entityWrapper = ProjectEntity
         , nullEntity = Project.null
         , isNull = Project.isNull
-        , nullIcon = { name = "vaadin:grid-big-o", color = sgtdBlue }
-        , defaultIconName = "av:stop"
+        , nullIcon = { name = "apps", color = sgtdBlue }
+        , defaultIconName = "apps"
         , getViewType = ProjectView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
         }

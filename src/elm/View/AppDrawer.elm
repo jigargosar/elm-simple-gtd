@@ -66,12 +66,13 @@ entityList { vmList, viewType, title, showDeleted, onAddClicked } =
     [ item [ class "has-hover-elements", onClick (SetView viewType) ]
         [ itemBody [] [ div [ class "font-headline" ] [ text title ] ]
         , div [ class "show-on-hover layout horizontal center" ]
-            [ iconButton [ iconP "add", onClick onAddClicked ] []
-            , toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
+            [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
             , trashIcon
+            , iconButton [ iconP "add", onClick onAddClicked ] []
             ]
         ]
---    , divider
+
+    --    , divider
     ]
         ++ (List.map entityItem vmList)
 

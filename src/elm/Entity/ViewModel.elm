@@ -95,6 +95,12 @@ create todoListByEntityId config entity =
                         else
                             Nothing
                     )
+
+        icon =
+            if isNull then
+                config.nullIcon
+            else
+                { name = "av:fiber-manual-record" }
     in
         { id = id
         , name = entity.name
@@ -114,7 +120,7 @@ create todoListByEntityId config entity =
         , onSaveClicked = onEntityAction Save
         , onNameChanged = NameChanged >> onEntityAction
         , onCancelClicked = Msg.DeactivateEditingMode
-        , icon = { name = "av:fiber-manual-record" }
+        , icon = icon
         }
 
 
@@ -126,6 +132,7 @@ projectList model =
         , entityWrapper = ProjectEntity
         , nullEntity = Project.null
         , isNull = Project.isNull
+        , nullIcon = { name = "inbox" }
         , getViewType = ProjectView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
         }
@@ -140,6 +147,7 @@ contextList model =
         , entityWrapper = ContextEntity
         , nullEntity = Context.null
         , isNull = Context.isNull
+        , nullIcon = { name = "inbox" }
         , getViewType = ContextView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
         }

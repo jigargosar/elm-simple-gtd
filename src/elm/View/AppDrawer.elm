@@ -32,11 +32,15 @@ import WebComponents exposing (iconP, onBoolPropertyChanged, paperIconButton)
 
 
 view contextVM projectVM m =
-    App.drawer []
+    App.drawer
+        [ boolProperty "swipeOpen" True
+        ]
         [ App.headerLayout
             [ attribute "has-scrolling-region" ""
             ]
-            [ App.header [ attribute "fixed" "true" ]
+            [ App.header
+                [ boolProperty "fixed" True
+                ]
                 [ App.toolbar []
                     [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "", onClick Msg.ToggleDrawer ] []
                     , headLineText "View Name"

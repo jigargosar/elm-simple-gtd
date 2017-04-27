@@ -145,9 +145,13 @@ divider =
     div [ class "divider" ] []
 
 
-entityList { vmList, viewType, title, showDeleted, onAddClicked } mainViewType =
-    [ item [ class "has-hover-elements", onClick (SetView viewType) ]
-        [ itemBody [] [ headLineText title ]
+entityList { vmList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
+    [ item
+        [ class "has-hover-elements"
+        , onClick (SetView viewType)
+        ]
+        [ Html.node "iron-icon" [ iconP icon.name, style [ "color" => icon.color ] ] []
+        , itemBody [] [ headLineText title ]
         , div [ class "show-on-hover layout horizontal center" ]
             [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
             , trashIcon

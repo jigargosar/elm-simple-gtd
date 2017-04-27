@@ -55,9 +55,9 @@ view contextVM projectVM m =
                     ++ [ divider ]
                     ++ entityList projectVM
                     ++ [ divider ]
-                    ++ [ binItemView m
-                       , doneItemView m
-                       , syncView m
+                    ++ [ switchViewItem BinView "Bin"
+                       , switchViewItem DoneView "Done"
+                       , switchViewItem SyncView "Sync Settings"
                        ]
                 )
             ]
@@ -85,18 +85,6 @@ entityList { vmList, viewType, title, showDeleted, onAddClicked } =
 
 headLineText title =
     div [ class "font-title" ] [ text title ]
-
-
-binItemView m =
-    switchViewItem BinView "Bin"
-
-
-doneItemView m =
-    switchViewItem DoneView "Done"
-
-
-syncView m =
-    switchViewItem SyncView "Sync Settings"
 
 
 switchViewItem viewType title =

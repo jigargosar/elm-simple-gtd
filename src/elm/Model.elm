@@ -60,7 +60,12 @@ init { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemo
         , showDeleted = False
         , reminderOverlay = ReminderOverlay.none
         , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
+        , appDrawerForceNarrow = False
         }
+
+
+toggleForceNarrow model =
+    { model | appDrawerForceNarrow = not model.appDrawerForceNarrow }
 
 
 findProjectByName name =

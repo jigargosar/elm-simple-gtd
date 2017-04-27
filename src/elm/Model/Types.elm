@@ -45,6 +45,7 @@ type alias Model =
     , showDeleted : Bool
     , reminderOverlay : ReminderOverlay.Model
     , pouchDBRemoteSyncURI : String
+    , appDrawerForceNarrow : Bool
     }
 
 

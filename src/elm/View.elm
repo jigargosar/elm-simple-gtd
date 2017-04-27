@@ -70,7 +70,9 @@ appDrawerLayoutView m =
         projectVMs =
             projectVM.vmList
     in
-        App.drawerLayout [ boolProperty "forceNarrow" True ]
+        App.drawerLayout
+            [ boolProperty "forceNarrow" m.appDrawerForceNarrow
+            ]
             [ View.AppDrawer.view contextVM projectVM m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ appHeaderView m
@@ -88,7 +90,7 @@ appHeaderView m =
         --        , attribute "fixed" "true"
         ]
         [ App.toolbar []
-            [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "" ] []
+            [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "", onClick Msg.ToggleDrawer ] []
             , headerView m
             ]
 

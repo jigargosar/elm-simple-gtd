@@ -103,7 +103,7 @@ update msg =
                     identity
 
                 ToggleDrawer ->
-                    identity
+                    Return.map (Model.toggleForceNarrow)
 
                 RemotePouchSync form ->
                     Return.map (\m -> { m | pouchDBRemoteSyncURI = form.uri })

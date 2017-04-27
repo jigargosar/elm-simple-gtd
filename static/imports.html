@@ -144,6 +144,7 @@
     }
 
     .text-secondary {
+        @apply(--paper-font-common-base);
         color:var(--secondary-text-color);
         font-size: 14px;
         font-weight: 400;
@@ -180,7 +181,17 @@
         @apply(--paper-font-code1);
     }
 
+    .big-paper-item{
+        @apply(--paper-font-common-base);
+        @apply(--paper-font-common-nowrap);
 
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    /*.font-headline.big-item.iron-selected{*/
+        /*font-weight: var(--paper-item-selected-weight);*/
+    /*}*/
 
     .font-headline{
         @apply(--paper-font-headline)

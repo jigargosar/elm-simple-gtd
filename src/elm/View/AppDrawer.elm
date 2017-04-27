@@ -1,5 +1,6 @@
 module View.AppDrawer exposing (..)
 
+import Document
 import Entity.ViewModel
 import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
@@ -51,9 +52,9 @@ view contextVM projectVM m =
                 , stringProperty "selectable" "paper-item"
                 , stringProperty "selectedAttribute" "selected"
                 ]
-                (entityList contextVM
+                (entityList contextVM m.mainViewType
                     ++ [ divider ]
-                    ++ entityList projectVM
+                    ++ entityList projectVM m.mainViewType
                     ++ [ divider ]
                     ++ [ switchViewItem BinView "Bin"
                        , switchViewItem DoneView "Done"
@@ -68,19 +69,34 @@ divider =
     div [ class "divider" ] []
 
 
-entityList { vmList, viewType, title, showDeleted, onAddClicked } =
-    [ item [ class "has-hover-elements", onClick (SetView viewType) ]
-        [ itemBody [] [ headLineText title ]
-        , div [ class "show-on-hover layout horizontal center" ]
-            [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
-            , trashIcon
-            , iconButton [ iconP "add", onClick onAddClicked ] []
-            ]
-        ]
+entityList { vmList, viewType, title, showDeleted, onAddClicked } mainViewType =
+    let
+        maybeSelectedId =
+            case mainViewType of
+                ProjectView id ->
+                    Just id
 
-    --    , divider
-    ]
-        ++ (List.map entityItem vmList)
+                ContextView id ->
+                    Just id
+
+                _ ->
+                    Nothing
+
+        isSelected =
+            maybeSelectedId |> Maybe.unwrap (\id -> False) equals
+    in
+        [ item [ class "has-hover-elements", onClick (SetView viewType) ]
+            [ itemBody [] [ headLineText title ]
+            , div [ class "show-on-hover layout horizontal center" ]
+                [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
+                , trashIcon
+                , iconButton [ iconP "add", onClick onAddClicked ] []
+                ]
+            ]
+
+        --    , divider
+        ]
+            ++ (List.map (entityItem isSelected) vmList)
 
 
 headLineText title =
@@ -95,9 +111,9 @@ switchViewItem viewType title =
 --onPropertyChanged decoder propertyName tagger =
 
 
-entityItem : Entity.ViewModel.ViewModel -> Html Msg
-entityItem vm =
-    item [ class "", onBoolPropertyChanged "focused" vm.onActiveStateChanged ]
+entityItem : (Document.Id -> Bool) -> Entity.ViewModel.ViewModel -> Html Msg
+entityItem isSelected vm =
+    item [ class "", boolProperty "selected" (isSelected vm.id), onBoolPropertyChanged "focused" vm.onActiveStateChanged ]
         ([ itemBody [] [ View.Shared.defaultBadge vm ]
          , hoverIcons vm
          , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]

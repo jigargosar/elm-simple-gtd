@@ -47,7 +47,7 @@ view contextVM projectVM m =
                     , headLineText "View Name"
                     ]
                 ]
-            , menu
+            , Html.node "paper-listbox"
                 [ stringProperty "selectable" "paper-item"
                 , intProperty "selected" (getSelectedIndex m.mainViewType projectVM contextVM)
 

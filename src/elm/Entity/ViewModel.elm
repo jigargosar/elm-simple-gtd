@@ -114,7 +114,7 @@ create todoListByEntityId config entity =
         , onSaveClicked = onEntityAction Save
         , onNameChanged = NameChanged >> onEntityAction
         , onCancelClicked = Msg.DeactivateEditingMode
-        , icon = { name = "circle" }
+        , icon = { name = "av:fiber-manual-record" }
         }
 
 

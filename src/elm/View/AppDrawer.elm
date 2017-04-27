@@ -178,8 +178,8 @@ switchViewItem iconName viewType title =
 entityItem : Entity.ViewModel.ViewModel -> Html Msg
 entityItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
-        ([ --        Html.node "iron-icon" [ iconP "inbox" ] []
-           div [] [ text "#" ]
+        ([ Html.node "iron-icon" [ iconP vm.icon.name ] []
+         , div [] [ text "#" ]
          , itemBody [] [ View.Shared.defaultBadge vm ]
          , hoverIcons vm
          , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]

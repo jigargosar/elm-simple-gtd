@@ -247,6 +247,7 @@
         border-top:1px solid var(--divider-color);
     }
 
+
     paper-item.todo-item.editing {
         border-left:2px solid red;
     }
@@ -269,12 +270,29 @@
 
     }
 
-    paper-item:not(.todo-item) {
-        /*margin:0;*/
-        /*padding: 0 1rem;*/
-        --paper-item-focused: {
-            background-color: var(--paper-blue-50);
+    paper-item {
+        /*--paper-item-focused-before: {*/
+            /*opacity: 0;*/
+        /*};*/
+        /*--paper-item-focused: {*/
+            /*background-color: var(--paper-grey-50);*/
+        /*};*/
+
+        --paper-item-selected-weight:normal;
+
+        --paper-item:{
+            border-left:2px solid transparent;
         };
+
+        --paper-item-focused-before: {
+            opacity: 0;
+        };
+
+        --paper-item-focused:{
+            border-left:2px solid var(--primary-color);
+        };
+
+
     }
 
     paper-icon-button {

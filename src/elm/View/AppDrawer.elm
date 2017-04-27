@@ -152,6 +152,7 @@ switchViewItem viewType title =
 entityItem : (Document.Id -> Bool) -> Entity.ViewModel.ViewModel -> Html Msg
 entityItem isSelected vm =
     let
+        -- todo: might start working some day :) just like it did for header scroll
         selectedProperty =
             boolProperty "draweritemselected" (isSelected vm.id)
 
@@ -167,7 +168,8 @@ entityItem isSelected vm =
              else
                 Nothing
             )
-                ?|> Debug.log "selected vm"
+
+        --                ?|> Debug.log "selected vm"
     in
         item [ selectedAttribute, onClick (vm.onActiveStateChanged True) ]
             ([ itemBody [] [ View.Shared.defaultBadge vm ]

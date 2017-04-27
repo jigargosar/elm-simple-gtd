@@ -141,8 +141,8 @@ defaultBadge vm =
     --        ]
     div [ class "layout horizontal" ]
         [ div [ class "ellipsis" ] [ vm.name |> text ]
-        , div [ class "secondary-color" ]
-            [ " (" ++ (vm.count |> toString) ++ ")" |> text ]
+        , div [ style [ "margin-left" => "0.1rem" ], class "text-secondary" ]
+            [ " " ++ (vm.count |> toString) ++ "" |> text ]
         ]
 
 

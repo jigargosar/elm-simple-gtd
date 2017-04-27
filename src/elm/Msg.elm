@@ -29,6 +29,7 @@ type Msg
     | ReminderOverlayAction ReminderOverlay.Action
     | OnNotificationClicked TodoNotificationEvent
     | ToggleShowDeletedEntity
+    | ToggleDrawer
     | Start Todo.Model
     | Stop
     | MarkRunningTodoDone

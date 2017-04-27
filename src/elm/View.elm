@@ -84,6 +84,8 @@ appHeaderView m =
         [ attribute "reveals" ""
         , attribute "condenses" ""
         , attribute "effects" "material"
+        , boolProperty "swipeOpen" True
+        , boolProperty "opened" False
 
         --        , attribute "fixed" "true"
         ]

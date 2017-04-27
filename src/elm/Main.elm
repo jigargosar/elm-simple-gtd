@@ -102,6 +102,9 @@ update msg =
                 NoOp ->
                     identity
 
+                ToggleDrawer ->
+                    identity
+
                 RemotePouchSync form ->
                     Return.map (\m -> { m | pouchDBRemoteSyncURI = form.uri })
                         >> Return.map Model.deactivateEditingMode

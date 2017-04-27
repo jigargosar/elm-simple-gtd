@@ -46,9 +46,9 @@ view contextVM projectVM m =
                 , stringProperty "selectedAttribute" "selected"
                 ]
                 (entityList contextVM
-                    --                    ++ [ divider ]
+                    ++ [ divider ]
                     ++ entityList projectVM
-                    --                    ++ [ divider ]
+                    ++ [ divider ]
                     ++ [ binItemView m
                        , doneItemView m
                        , syncView m
@@ -71,8 +71,7 @@ entityList { vmList, viewType, title, showDeleted, onAddClicked } =
             , trashIcon
             ]
         ]
-
-    --    , divider
+    , divider
     ]
         ++ (List.map entityItem vmList)
 

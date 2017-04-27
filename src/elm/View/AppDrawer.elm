@@ -73,6 +73,9 @@ getSelectedIndex mainViewType projectVM contextVM =
 
         contextIndexById id =
             contextVM.vmList |> List.findIndex (.id >> equals id) >>?= 0
+
+        projectIndexById id =
+            projectVM.vmList |> List.findIndex (.id >> equals id) >>?= 0
     in
         case mainViewType of
             GroupByContextView ->
@@ -83,6 +86,9 @@ getSelectedIndex mainViewType projectVM contextVM =
 
             GroupByProjectView ->
                 projectsIndex
+
+            ProjectView id ->
+                1 + projectsIndex + (projectIndexById id)
 
             _ ->
                 0

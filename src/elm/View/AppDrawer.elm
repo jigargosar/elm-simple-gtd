@@ -50,6 +50,7 @@ view contextVM projectVM m =
             , menu
                 [ stringProperty "selectable" "paper-item"
                 , stringProperty "selectedAttribute" "selected"
+                , stringProperty "attrForSelected" "selected"
                 ]
                 (entityList contextVM m.mainViewType
                     ++ [ divider ]
@@ -112,6 +113,10 @@ switchViewItem viewType title =
 
 entityItem : (Document.Id -> Bool) -> Entity.ViewModel.ViewModel -> Html Msg
 entityItem isSelected vm =
+    --    let
+    --        _ =
+    --            Debug.log "isSelected vm.id" (isSelected vm.id)
+    --    in
     item [ class "", boolProperty "selected" (isSelected vm.id), onBoolPropertyChanged "focused" vm.onActiveStateChanged ]
         ([ itemBody [] [ View.Shared.defaultBadge vm ]
          , hoverIcons vm

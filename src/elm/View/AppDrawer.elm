@@ -78,7 +78,7 @@ entityList { vmList, viewType, title, showDeleted, onAddClicked } =
 
 
 headLineText title =
-    div [ class "font-headline" ] [ text title ]
+    div [ class "font-title" ] [ text title ]
 
 
 binItemView m =

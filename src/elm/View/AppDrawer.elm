@@ -46,9 +46,9 @@ view contextVM projectVM m =
                 , stringProperty "selectedAttribute" "selected"
                 ]
                 (entityList contextVM
-                    ++ [ divider ]
+                    --                    ++ [ divider ]
                     ++ entityList projectVM
-                    ++ [ divider ]
+                    --                    ++ [ divider ]
                     ++ [ binItemView m
                        , doneItemView m
                        , syncView m
@@ -64,28 +64,29 @@ divider =
 
 entityList { vmList, viewType, title, showDeleted, onAddClicked } =
     [ item [ class "has-hover-elements", onClick (SetView viewType) ]
-        [ itemBody [] [ span [ class "ellipsis" ] [ text title ] ]
+        [ itemBody [] [ Html.h3 [ class "ellipsis" ] [ text title ] ]
         , div [ class "show-on-hover layout horizontal center" ]
             [ iconButton [ iconP "add", onClick onAddClicked ] []
             , toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
             , trashIcon
             ]
         ]
-    , divider
+
+    --    , divider
     ]
         ++ (List.map entityItem vmList)
 
 
 binItemView m =
-    item [ onClick (SetView BinView) ] [ text "Bin" ]
+    item [ onClick (SetView BinView) ] [ Html.h4 [] [ text "Bin" ] ]
 
 
 doneItemView m =
-    item [ onClick (SetView DoneView) ] [ text "Done" ]
+    item [ onClick (SetView DoneView) ] [ Html.h4 [] [ text "Done" ] ]
 
 
 syncView m =
-    item [ onClick (SetView SyncView) ] [ text "Sync Settings" ]
+    item [ onClick (SetView SyncView) ] [ Html.h4 [] [ text "Sync Settings" ] ]
 
 
 

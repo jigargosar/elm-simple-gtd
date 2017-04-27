@@ -38,7 +38,7 @@ view contextVM projectVM m =
             ]
             [ App.header []
                 [ App.toolbar []
-                    [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "true" ] []
+                    [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "" ] []
                     , headLineText "View Name"
                     ]
                 ]

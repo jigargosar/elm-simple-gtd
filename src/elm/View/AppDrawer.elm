@@ -138,7 +138,7 @@ entityList { vmList, viewType, title, showDeleted, onAddClicked } mainViewType =
 
 
 headLineText title =
-    div [ class "font-title" ] [ text title ]
+    div [ class "" ] [ text title ]
 
 
 switchViewItem viewType title =

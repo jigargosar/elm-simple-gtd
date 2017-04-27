@@ -31,7 +31,7 @@ type alias ViewModel =
     , onSaveClicked : Msg
     , onNameChanged : String -> Msg
     , onCancelClicked : Msg
-    , icon : { name : String, color : String }
+    , icon : { name : String, color : String, class : String }
     }
 
 
@@ -100,7 +100,7 @@ create todoListByEntityId config entity =
             if isNull then
                 config.nullIcon
             else
-                { name = "av:fiber-manual-record", color = "#ddd" }
+                { name = "av:fiber-manual-record", color = "#ddd", class = "sgtdBlue" }
     in
         { id = id
         , name = entity.name
@@ -144,7 +144,7 @@ projectList model =
         , entityWrapper = ProjectEntity
         , nullEntity = Project.null
         , isNull = Project.isNull
-        , nullIcon = { name = "inbox", color = sgtdBlue }
+        , nullIcon = { name = "inbox", color = sgtdBlue, class = "sgtdBlue" }
         , getViewType = ProjectView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
         }
@@ -159,7 +159,7 @@ contextList model =
         , entityWrapper = ContextEntity
         , nullEntity = Context.null
         , isNull = Context.isNull
-        , nullIcon = { name = "inbox", color = sgtdBlue }
+        , nullIcon = { name = "inbox", color = sgtdBlue, class = "sgtdBlue" }
         , getViewType = ContextView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
         }

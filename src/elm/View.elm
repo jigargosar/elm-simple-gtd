@@ -85,7 +85,9 @@ appHeaderView m =
     App.header
         [ attribute "reveals" ""
         , attribute "condenses" ""
-        , attribute "effects" "material"
+
+        --        , attribute "effects" "material"
+        , attribute "effects" "waterfall"
 
         --        , attribute "fixed" "true"
         ]

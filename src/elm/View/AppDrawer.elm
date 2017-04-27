@@ -108,33 +108,18 @@ divider =
 
 
 entityList { vmList, viewType, title, showDeleted, onAddClicked } mainViewType =
-    let
-        maybeSelectedId =
-            case mainViewType of
-                ProjectView id ->
-                    Just id
-
-                ContextView id ->
-                    Just id
-
-                _ ->
-                    Nothing
-
-        isSelected =
-            maybeSelectedId |> Maybe.unwrap (\id -> False) equals
-    in
-        [ item [ class "has-hover-elements", onClick (SetView viewType) ]
-            [ itemBody [] [ headLineText title ]
-            , div [ class "show-on-hover layout horizontal center" ]
-                [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
-                , trashIcon
-                , iconButton [ iconP "add", onClick onAddClicked ] []
-                ]
+    [ item [ class "has-hover-elements", onClick (SetView viewType) ]
+        [ itemBody [] [ headLineText title ]
+        , div [ class "show-on-hover layout horizontal center" ]
+            [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
+            , trashIcon
+            , iconButton [ iconP "add", onClick onAddClicked ] []
             ]
-
-        --    , divider
         ]
-            ++ (List.map (entityItem isSelected) vmList)
+
+    --    , divider
+    ]
+        ++ (List.map entityItem vmList)
 
 
 headLineText title =
@@ -149,34 +134,14 @@ switchViewItem viewType title =
 --onPropertyChanged decoder propertyName tagger =
 
 
-entityItem : (Document.Id -> Bool) -> Entity.ViewModel.ViewModel -> Html Msg
-entityItem isSelected vm =
-    let
-        -- todo: might start working some day :) just like it did for header scroll
-        selectedProperty =
-            boolProperty "draweritemselected" (isSelected vm.id)
-
-        selectedAttribute =
-            if isSelected vm.id then
-                attribute "draweritemselected" ""
-            else
-                attribute "dummy-attr" ""
-
-        _ =
-            (if isSelected vm.id then
-                Just vm
-             else
-                Nothing
-            )
-
-        --                ?|> Debug.log "selected vm"
-    in
-        item [ selectedAttribute, onClick (vm.onActiveStateChanged True) ]
-            ([ itemBody [] [ View.Shared.defaultBadge vm ]
-             , hoverIcons vm
-             , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
-             ]
-            )
+entityItem : Entity.ViewModel.ViewModel -> Html Msg
+entityItem vm =
+    item [ onClick (vm.onActiveStateChanged True) ]
+        ([ itemBody [] [ View.Shared.defaultBadge vm ]
+         , hoverIcons vm
+         , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
+         ]
+        )
 
 
 hoverIcons vm =

@@ -64,9 +64,9 @@ view contextVM projectVM m =
                     ++ [ divider ]
                     ++ entityList projectVM m.mainViewType
                     ++ [ divider ]
-                    ++ [ switchViewItem BinView "Bin"
-                       , switchViewItem DoneView "Done"
-                       , switchViewItem SyncView "Sync Settings"
+                    ++ [ switchViewItem "delete" BinView "Bin"
+                       , switchViewItem "done" DoneView "Done"
+                       , switchViewItem "notification:sync" SyncView "Sync Settings"
                        ]
                 )
             ]
@@ -164,8 +164,11 @@ headLineText title =
     div [ class "big-paper-item-text" ] [ text title ]
 
 
-switchViewItem viewType title =
-    item [ onClick (SetView viewType) ] [ headLineText title ]
+switchViewItem iconName viewType title =
+    item [ onClick (SetView viewType) ]
+        [ Html.node "iron-icon" [ iconP iconName ] []
+        , itemBody [] [ text title ]
+        ]
 
 
 
@@ -175,7 +178,9 @@ switchViewItem viewType title =
 entityItem : Entity.ViewModel.ViewModel -> Html Msg
 entityItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
-        ([ itemBody [] [ View.Shared.defaultBadge vm ]
+        ([ --        Html.node "iron-icon" [ iconP "inbox" ] []
+           div [] [ text "#" ]
+         , itemBody [] [ View.Shared.defaultBadge vm ]
          , hoverIcons vm
          , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
          ]

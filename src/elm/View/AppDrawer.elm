@@ -59,7 +59,7 @@ view contextVM projectVM m =
 
 
 divider =
-    hr [] []
+    div [ class "divider" ] []
 
 
 entityList { vmList, viewType, title, showDeleted, onAddClicked } =

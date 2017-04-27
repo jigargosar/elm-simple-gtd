@@ -124,6 +124,18 @@ create todoListByEntityId config entity =
         }
 
 
+sgtdBlue =
+    materialInboxBlue
+
+
+inboxBlue =
+    "rgb(66, 133, 244)"
+
+
+materialInboxBlue =
+    "rgb(68, 138, 255)"
+
+
 projectList : Model.Types.Model -> List ViewModel
 projectList model =
     createList
@@ -132,7 +144,7 @@ projectList model =
         , entityWrapper = ProjectEntity
         , nullEntity = Project.null
         , isNull = Project.isNull
-        , nullIcon = { name = "inbox", color = "#ddd" }
+        , nullIcon = { name = "inbox", color = sgtdBlue }
         , getViewType = ProjectView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
         }
@@ -147,7 +159,7 @@ contextList model =
         , entityWrapper = ContextEntity
         , nullEntity = Context.null
         , isNull = Context.isNull
-        , nullIcon = { name = "inbox", color = "#ddd" }
+        , nullIcon = { name = "inbox", color = sgtdBlue }
         , getViewType = ContextView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
         }

@@ -139,9 +139,10 @@ defaultBadge vm =
     --        [ div [] [ text vm.name ]
     --        , badge [ tabindex -1, intProperty "label" (vm.count) ] []
     --        ]
-    row
+    div [ class "layout horizontal" ]
         [ div [ class "ellipsis" ] [ vm.name |> text ]
-        , div [ style [ "margin-left" => "0.5rem" ] ] [ " (" ++ (vm.count |> toString) ++ ")" |> text ]
+        , div [ class "font-caption secondary-color" ]
+            [ " (" ++ (vm.count |> toString) ++ ")" |> text ]
         ]
 
 

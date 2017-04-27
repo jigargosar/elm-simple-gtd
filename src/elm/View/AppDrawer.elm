@@ -68,15 +68,21 @@ view contextVM projectVM m =
 
 getSelectedIndex mainViewType projectVM contextVM =
     let
-        lastProjectIndex =
-            1
+        projectsIndex =
+            1 + (List.length contextVM.vmList)
+
+        contextIndexById id =
+            contextVM.vmList |> List.findIndex (.id >> equals id) >>?= 0
     in
         case mainViewType of
-            GroupByProjectView ->
-                0
-
             GroupByContextView ->
                 0
+
+            ContextView id ->
+                1 + (contextIndexById id)
+
+            GroupByProjectView ->
+                projectsIndex
 
             _ ->
                 0

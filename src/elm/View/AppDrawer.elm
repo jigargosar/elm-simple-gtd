@@ -34,11 +34,10 @@ import WebComponents exposing (iconP, onBoolPropertyChanged)
 view contextVM projectVM m =
     App.drawer []
         [ App.headerLayout
-            [ --            style [ "height" => "100%", "overflow" => "scroll" ]
-              attribute "has-scrolling-region" ""
+            [ attribute "has-scrolling-region" ""
             ]
             [ App.header []
-                [--            App.toolbar [] [ Html.h2 [] [ text "" ] ]
+                [ App.toolbar [] [ headLineText "View Name" ]
                 ]
             , menu
                 [ stringProperty "selected" "0"

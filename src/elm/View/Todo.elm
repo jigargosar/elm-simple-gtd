@@ -291,13 +291,15 @@ okCancelButtons okMsg cancelMsg =
         [ Paper.button
             [ onClickStopPropagation cancelMsg
             , class "primary-color"
-            , boolProperty "noink" True
+
+            --            , boolProperty "noink" True
             ]
             [ text "Cancel" ]
         , Paper.button
             [ onClickStopPropagation okMsg
             , class "primary-color"
-            , boolProperty "noink" True
+
+            --            , boolProperty "noink" True
             ]
             [ text "Ok" ]
         ]

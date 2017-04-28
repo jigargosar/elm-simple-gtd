@@ -180,7 +180,7 @@ project model =
 
 
 inboxColor =
-    "#64b5f6"
+    "#42a5f5"
 
 
 contextsColor =

@@ -61,19 +61,19 @@ appDrawerLayoutView m =
         contextsVM =
             Entity.ViewModel.contexts m
 
-        projectVM =
+        projectsVM =
             Entity.ViewModel.projects m
 
         contextVMs =
             contextsVM.entityList
 
         projectVMs =
-            projectVM.entityList
+            projectsVM.entityList
     in
         App.drawerLayout
             [ boolProperty "forceNarrow" m.appDrawerForceNarrow
             ]
-            [ View.AppDrawer.view contextsVM projectVM m
+            [ View.AppDrawer.view contextsVM projectsVM m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ appHeaderView m
                 , appMainView contextVMs projectVMs m

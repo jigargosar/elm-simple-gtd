@@ -32,7 +32,7 @@ import View.Shared exposing (..)
 import WebComponents exposing (iconP, onBoolPropertyChanged, paperIconButton)
 
 
-view contextsVM projectVM m =
+view contextsVM projectsVM m =
     App.drawer
         [ boolProperty "swipeOpen" True
         ]
@@ -51,18 +51,18 @@ view contextsVM projectVM m =
                             ]
                             []
                         ]
-                    , headLineText (getViewName m.mainViewType projectVM contextsVM)
+                    , headLineText (getViewName m.mainViewType projectsVM contextsVM)
                     ]
                 ]
             , Html.node "paper-listbox"
                 [ stringProperty "selectable" "paper-item"
-                , intProperty "selected" (getSelectedIndex m.mainViewType projectVM contextsVM)
+                , intProperty "selected" (getSelectedIndex m.mainViewType projectsVM contextsVM)
 
                 --                , stringProperty "attrForSelected" "draweritemselected"
                 ]
                 (entityList contextsVM m.mainViewType
                     ++ [ divider ]
-                    ++ entityList projectVM m.mainViewType
+                    ++ entityList projectsVM m.mainViewType
                     ++ [ divider ]
                     ++ [ switchViewItem "delete" BinView "Bin"
                        , switchViewItem "done" DoneView "Done"
@@ -73,13 +73,13 @@ view contextsVM projectVM m =
         ]
 
 
-getViewName mainViewType projectVM contextsVM =
+getViewName mainViewType projectsVM contextsVM =
     let
         contextNameById id =
             contextsVM.entityList |> List.find (.id >> equals id) >>? .name >>? (++) "@" >>?= ""
 
         projectNameById id =
-            projectVM.entityList |> List.find (.id >> equals id) >>? .name >>? (++) "#" >>?= ""
+            projectsVM.entityList |> List.find (.id >> equals id) >>? .name >>? (++) "#" >>?= ""
     in
         case mainViewType of
             GroupByContextView ->
@@ -89,7 +89,7 @@ getViewName mainViewType projectVM contextsVM =
                 contextNameById id
 
             GroupByProjectView ->
-                projectVM.title
+                projectsVM.title
 
             ProjectView id ->
                 projectNameById id
@@ -104,7 +104,7 @@ getViewName mainViewType projectVM contextsVM =
                 "Sync"
 
 
-getSelectedIndex mainViewType projectVM contextsVM =
+getSelectedIndex mainViewType projectsVM contextsVM =
     let
         projectsIndex =
             1 + (List.length contextsVM.entityList)
@@ -113,10 +113,10 @@ getSelectedIndex mainViewType projectVM contextsVM =
             contextsVM.entityList |> List.findIndex (.id >> equals id) >>?= 0
 
         projectIndexById id =
-            projectVM.entityList |> List.findIndex (.id >> equals id) >>?= 0
+            projectsVM.entityList |> List.findIndex (.id >> equals id) >>?= 0
 
         lastProjectIndex =
-            projectsIndex + (List.length projectVM.entityList)
+            projectsIndex + (List.length projectsVM.entityList)
     in
         case mainViewType of
             GroupByContextView ->

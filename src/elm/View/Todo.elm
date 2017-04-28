@@ -251,6 +251,7 @@ editView vm evm =
                     [ class "auto-focus"
                     , stringProperty "label" "Todo"
                     , value (evm.todo.text)
+                    , property "keyBindings" Json.Encode.null
                     , boolProperty "stopKeyboardEventPropagation" True
                     , onInput evm.onTodoTextChanged
                     , onKeyDown evm.onKeyUp

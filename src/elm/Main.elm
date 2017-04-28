@@ -184,7 +184,7 @@ update msg =
                 NewTodoKeyUp { text } { key } ->
                     case key of
                         Key.Enter ->
-                            andThenUpdate (Msg.CreateTodo text)
+                            andThenUpdate (SaveCurrentForm)
                                 >> andThenUpdate StartAddingTodo
 
                         Key.Escape ->
@@ -282,7 +282,7 @@ update msg =
                     Return.map (Model.update Model.keyboardState (Keyboard.update msg))
 
                 SaveCurrentForm ->
-                    Return.map (Model.saveEditModeEntity)
+                    Return.map (Model.saveCurrentForm)
                         >> andThenUpdate DeactivateEditingMode
 
                 OnEntityAction entity action ->

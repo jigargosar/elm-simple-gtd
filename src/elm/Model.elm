@@ -417,7 +417,7 @@ toggleDeletedForEntity entity model =
             Model.TodoStore.updateTodo [ Todo.ToggleDeleted ] todo model
 
 
-saveEditModeEntity model =
+saveCurrentForm model =
     case model.editMode of
         EditMode.EditContext ecm ->
             Store.findById ecm.id model.contextStore
@@ -440,6 +440,14 @@ saveEditModeEntity model =
 
         EditMode.TodoReminderForm form ->
             updateTodoWithReminderForm form model
+
+        EditMode.NewTodo form ->
+            {- Model.TodoStore.updateTodoById
+               [ Todo.SetText todoText
+               ]
+               id
+            -}
+            model
 
         _ ->
             model

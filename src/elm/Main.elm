@@ -234,12 +234,13 @@ update msg =
                     case ke.key of
                         Key.Enter ->
                             andThenUpdateAll
-                                (if ke.isShiftDown then
-                                    [ SaveCurrentForm, CopyAndEditTodoById id ]
-                                 else if ke.isMetaDown || ke.isControlDown then
-                                    [ SaveCurrentForm, DeactivateEditingMode ]
-                                 else
-                                    []
+                                ({- if ke.isShiftDown then
+                                       [ SaveCurrentForm, CopyAndEditTodoById id ]
+                                    else if ke.isMetaDown || ke.isControlDown then
+                                       []
+                                    else
+                                 -}
+                                 [ SaveCurrentForm, DeactivateEditingMode ]
                                 )
 
                         _ ->

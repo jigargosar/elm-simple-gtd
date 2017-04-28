@@ -254,7 +254,7 @@ editView vm evm =
                     , property "keyBindings" Json.Encode.null
                     , boolProperty "stopKeyboardEventPropagation" True
                     , onInput evm.onTodoTextChanged
-                    , onKeyDown evm.onKeyUp
+                    , onKeyUp evm.onKeyUp
                     ]
                     []
                 ]

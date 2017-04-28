@@ -277,11 +277,19 @@ editView vm evm =
                         (vm.contexts .|> createContextItem # vm)
                     ]
                 ]
-            , div [ class "layout horizontal right" ]
-                [ Paper.button [ class "primary-color" ] [ text "Cancel" ]
-                , Paper.button [ class "primary-color" ] [ text "Ok" ]
-                ]
+            , okCancelButtons
             ]
+        ]
+
+
+okCancelButtonsDefaultMsg =
+    okCancelButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode
+
+
+okCancelButtons okMsg cancelMsg =
+    div [ class "layout horizontal end-justified" ]
+        [ Paper.button [ class "primary-color", boolProperty "noink" True ] [ text "Cancel" ]
+        , Paper.button [ class "primary-color", boolProperty "noink" True ] [ text "Ok" ]
         ]
 
 

@@ -174,7 +174,7 @@ context model =
     , title = "Contexts"
     , showDeleted = model.showDeleted
     , onAddClicked = Msg.NewContext
-    , icon = { name = "vaadin:records", color = "sgtdBlue" }
+    , icon = { name = "group-work", color = sgtdBlue }
     }
 
 
@@ -184,5 +184,5 @@ project model =
     , title = "Projects"
     , showDeleted = model.showDeleted
     , onAddClicked = Msg.NewProject
-    , icon = { name = "vaadin:records", color = "sgtdBlue" }
+    , icon = { name = "group-work", color = sgtdBlue }
     }

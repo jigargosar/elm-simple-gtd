@@ -187,8 +187,11 @@ project model =
     , onAddClicked = Msg.NewProject
     , icon =
         { name = "group-work"
-        , color = "rgb(124, 77, 255)"
-
-        --paper-deep-purple-a200
+        , color = projectsColor
         }
     }
+
+
+projectsColor =
+    --paper-deep-purple-a200
+    "rgb(124, 77, 255)"

@@ -24,8 +24,8 @@ type Action
     = SetText String
 
 
-createTextForm : Todo.Model -> Project.Name -> Context.Name -> Time -> Model
-createTextForm todo projectName contextName now =
+create : Todo.Model -> Project.Name -> Context.Name -> Time -> Model
+create todo projectName contextName now =
     let
         timeInMilli =
             Todo.getDueAt todo ?= now + Time.hour

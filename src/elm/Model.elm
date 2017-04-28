@@ -466,7 +466,7 @@ createEditTodoMode todo model =
         contextName =
             getContextNameOfTodo todo model ?= ""
     in
-        Todo.Form.createTextForm todo projectName contextName model.now |> EditMode.TodoForm
+        Todo.Form.create todo projectName contextName model.now |> EditMode.TodoForm
 
 
 getMaybeEditTodoModel =

@@ -42,33 +42,24 @@ getViewInfo mainViewType projectsVM contextsVM =
         entityById id =
             List.find (.id >> equals id)
 
-        maybeNameById id =
-            entityById id >>? .name
-
-        iconColorById id =
-            entityById id >>? (.icon >> .color) >>?= sgtdBlue
-
         appHeaderInfoById id =
-            entityById id >>? (.icon >> .color) >>?= sgtdBlue
-
-        contextNameById id =
-            contextsVM.entityList |> maybeNameById id >>? (++) "@" >>?= ""
-
-        projectNameById id =
-            projectsVM.entityList |> maybeNameById id >>? (++) "#" >>?= ""
+            entityById id
+                >>? (.appHeader)
+                >>?= { name = "o_O", backgroundColor = sgtdBlue }
+                >> (\{ name, backgroundColor } -> ( name, backgroundColor ))
     in
         case mainViewType of
             GroupByContextView ->
                 ( contextsVM.title, contextsVM.icon.color )
 
             ContextView id ->
-                ( contextNameById id, sgtdBlue )
+                contextsVM.entityList |> appHeaderInfoById id
 
             GroupByProjectView ->
                 ( projectsVM.title, projectsVM.icon.color )
 
             ProjectView id ->
-                ( projectNameById id, sgtdBlue )
+                projectsVM.entityList |> appHeaderInfoById id
 
             BinView ->
                 ( "Bin", sgtdBlue )

@@ -172,6 +172,7 @@ projectList model =
         model
 
 
+context : Model.Types.Model -> Model
 context model =
     { vmList = contextList model
     , viewType = GroupByContextView
@@ -182,6 +183,7 @@ context model =
     }
 
 
+project : Model.Types.Model -> Model
 project model =
     { vmList = projectList model
     , viewType = GroupByProjectView

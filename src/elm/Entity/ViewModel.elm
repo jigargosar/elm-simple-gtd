@@ -252,5 +252,5 @@ sgtdBlue =
 
 
 lightGray =
-    --paper-grey-400
-    "#bdbdbd"
+    --paper-grey-500
+    "#9e9e9e"

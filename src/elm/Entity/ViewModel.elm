@@ -37,6 +37,7 @@ type alias Model =
 type alias EntityItemModel =
     { id : String
     , name : String
+    , appHeader : { name : String, backgroundColor : String }
     , isDeleted : Bool
     , todoList : List Todo.Model
     , isEmpty : Bool
@@ -57,6 +58,7 @@ type alias DocumentWithName =
 
 type alias Config =
     { groupByFn : Todo.Model -> Document.Id
+    , namePrefix : String
     , entityType : EntityType
     , entityWrapper : DocumentWithName -> Entity
     , nullEntity : DocumentWithName
@@ -135,9 +137,15 @@ create todoListByEntityId config entity =
                 config.nullIcon
             else
                 { name = config.defaultIconName, color = "#ddd" }
+
+        name =
+            entity.name
+
+        appHeader =
+            { name = name, backgroundColor = icon.color }
     in
         { id = id
-        , name = entity.name
+        , name = name
         , isDeleted = Document.isDeleted entity
         , todoList = todoList
         , isEmpty = count == 0
@@ -155,6 +163,7 @@ create todoListByEntityId config entity =
         , onNameChanged = NameChanged >> onEntityAction
         , onCancelClicked = Msg.DeactivateEditingMode
         , icon = icon
+        , appHeader = appHeader
         }
 
 
@@ -164,6 +173,7 @@ contexts model =
         config : Config
         config =
             { groupByFn = Todo.getContextId
+            , namePrefix = "@"
             , entityType = ContextEntityType
             , entityWrapper = ContextEntity
             , nullEntity = Context.null
@@ -194,6 +204,7 @@ projects model =
         projectList =
             createList
                 { groupByFn = Todo.getProjectId
+                , namePrefix = "#"
                 , entityType = ProjectEntityType
                 , entityWrapper = ProjectEntity
                 , nullEntity = Project.null

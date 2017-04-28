@@ -168,6 +168,7 @@ getEntityStore entityType =
             .contextStore
 
 
+getMaybeEditModelForEntityType : EntityType -> Model -> Maybe EditMode.EntityForm
 getMaybeEditModelForEntityType entityType model =
     case ( entityType, model.editMode ) of
         ( ProjectEntityType, EditMode.EditProject editModel ) ->

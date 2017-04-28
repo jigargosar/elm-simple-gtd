@@ -51,6 +51,24 @@ type alias ItemModel =
     }
 
 
+type alias DocumentWithName =
+    Document.Document { name : String }
+
+
+type alias Config =
+    { groupByFn : Todo.Model -> Document.Id
+    , entityType : EntityType
+    , entityWrapper : DocumentWithName -> Entity
+    , nullEntity : DocumentWithName
+    , isNull : DocumentWithName -> Bool
+    , nullIcon : IconVM
+    , defaultIconName : String
+    , getViewType : Document.Id -> MainViewType
+    , maybeEditModel : Maybe EditMode.EntityForm
+    }
+
+
+createList : Config -> Model.Types.Model -> List ItemModel
 createList config model =
     let
         todoListDict =
@@ -143,20 +161,22 @@ create todoListByEntityId config entity =
 contexts : Model.Types.Model -> Model
 contexts model =
     let
+        config : Config
+        config =
+            { groupByFn = Todo.getContextId
+            , entityType = ContextEntityType
+            , entityWrapper = ContextEntity
+            , nullEntity = Context.null
+            , isNull = Context.isNull
+            , nullIcon = { name = "inbox", color = inboxColor }
+            , defaultIconName = "av:fiber-manual-record"
+            , getViewType = ContextView
+            , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
+            }
+
         contextList : List ItemModel
         contextList =
-            createList
-                { groupByFn = Todo.getContextId
-                , entityType = ContextEntityType
-                , entityWrapper = ContextEntity
-                , nullEntity = Context.null
-                , isNull = Context.isNull
-                , nullIcon = { name = "inbox", color = inboxColor }
-                , defaultIconName = "av:fiber-manual-record"
-                , getViewType = ContextView
-                , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
-                }
-                model
+            createList config model
     in
         { vmList = contextList
         , viewType = GroupByContextView

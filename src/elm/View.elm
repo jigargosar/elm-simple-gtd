@@ -92,7 +92,9 @@ appHeaderView m =
 
         --        , attribute "fixed" "true"
         ]
-        [ App.toolbar []
+        [ App.toolbar
+            [ style [ "color" => "white", "background-color" => "red" ]
+            ]
             [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "", onClick Msg.ToggleDrawer ] []
             , headerView m
             ]

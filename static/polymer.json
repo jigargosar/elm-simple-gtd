@@ -23,10 +23,10 @@
         "minify": true
       },
       "css": {
-        "minify": true
+        "minify": false
       },
       "html": {
-        "minify": true
+        "minify": false
       },
       "addServiceWorker": true,
       "swPrecacheConfig": "sw-precache-config.js"

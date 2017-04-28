@@ -1,6 +1,53 @@
-<html><head><link rel="import" href="../polymer/polymer.html">
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><html><head><link rel="import" href="../polymer/polymer.html">
 
+<!--
+`iron-meta` is a generic element you can use for sharing information across the DOM tree.
+It uses [monostate pattern](http://c2.com/cgi/wiki?MonostatePattern) such that any
+instance of iron-meta has access to the shared
+information. You can use `iron-meta` to share whatever you want (or create an extension
+[like x-meta] for enhancements).
 
+The `iron-meta` instances containing your actual data can be loaded in an import,
+or constructed in any way you see fit. The only requirement is that you create them
+before you try to access them.
 
-<script>!function(){var e={},t={},i=null;Polymer.IronMeta=Polymer({is:"iron-meta",properties:{type:{type:String,value:"default",observer:"_typeChanged"},key:{type:String,observer:"_keyChanged"},value:{type:Object,notify:!0,observer:"_valueChanged"},self:{type:Boolean,observer:"_selfChanged"},list:{type:Array,notify:!0}},hostAttributes:{hidden:!0},factoryImpl:function(e){if(e)for(var t in e)switch(t){case"type":case"key":case"value":this[t]=e[t]}},created:function(){this._metaDatas=e,this._metaArrays=t},_keyChanged:function(e,t){this._resetRegistration(t)},_valueChanged:function(e){this._resetRegistration(this.key)},_selfChanged:function(e){e&&(this.value=this)},_typeChanged:function(i){this._unregisterKey(this.key),e[i]||(e[i]={}),this._metaData=e[i],t[i]||(t[i]=[]),this.list=t[i],this._registerKeyValue(this.key,this.value)},byKey:function(e){return this._metaData&&this._metaData[e]},_resetRegistration:function(e){this._unregisterKey(e),this._registerKeyValue(this.key,this.value)},_unregisterKey:function(e){this._unregister(e,this._metaData,this.list)},_registerKeyValue:function(e,t){this._register(e,t,this._metaData,this.list)},_register:function(e,t,i,a){e&&i&&void 0!==t&&(i[e]=t,a.push(t))},_unregister:function(e,t,i){if(e&&t&&e in t){var a=t[e];delete t[e],this.arrayDelete(i,a)}}}),Polymer.IronMeta.getIronMeta=function(){return null===i&&(i=new Polymer.IronMeta),i},Polymer.IronMetaQuery=Polymer({is:"iron-meta-query",properties:{type:{type:String,value:"default",observer:"_typeChanged"},key:{type:String,observer:"_keyChanged"},value:{type:Object,notify:!0,readOnly:!0},list:{type:Array,notify:!0}},factoryImpl:function(e){if(e)for(var t in e)switch(t){case"type":case"key":this[t]=e[t]}},created:function(){this._metaDatas=e,this._metaArrays=t},_keyChanged:function(e){this._setValue(this._metaData&&this._metaData[e])},_typeChanged:function(i){this._metaData=e[i],this.list=t[i],this.key&&this._keyChanged(this.key)},byKey:function(e){return this._metaData&&this._metaData[e]}})}();</script>
+Examples:
+
+If I create an instance like this:
+
+    <iron-meta key="info" value="foo/bar"></iron-meta>
+
+Note that value="foo/bar" is the metadata I've defined. I could define more
+attributes or use child nodes to define additional metadata.
+
+Now I can access that element (and it's metadata) from any iron-meta instance
+via the byKey method, e.g.
+
+    meta.byKey('info');
+
+Pure imperative form would be like:
+
+    document.createElement('iron-meta').byKey('info');
+
+Or, in a Polymer element, you can include a meta in your template:
+
+    <iron-meta id="meta"></iron-meta>
+    ...
+    this.$.meta.byKey('info');
+
+@group Iron Elements
+@demo demo/index.html
+@hero hero.svg
+@element iron-meta
+-->
+
+<script>(function(){var a={},b={},c=null;Polymer.IronMeta=Polymer({is:'iron-meta',properties:{type:{type:String,value:'default',observer:'_typeChanged'},key:{type:String,observer:'_keyChanged'},value:{type:Object,notify:!0,observer:'_valueChanged'},self:{type:Boolean,observer:'_selfChanged'},list:{type:Array,notify:!0}},hostAttributes:{hidden:!0},factoryImpl:function(d){if(d)for(var e in d)'type'===e||'key'===e||'value'===e?this[e]=d[e]:void 0},created:function(){this._metaDatas=a,this._metaArrays=b},_keyChanged:function(d,e){this._resetRegistration(e)},_valueChanged:function(){this._resetRegistration(this.key)},_selfChanged:function(d){d&&(this.value=this)},_typeChanged:function(d){this._unregisterKey(this.key),a[d]||(a[d]={}),this._metaData=a[d],b[d]||(b[d]=[]),this.list=b[d],this._registerKeyValue(this.key,this.value)},byKey:function(d){return this._metaData&&this._metaData[d]},_resetRegistration:function(d){this._unregisterKey(d),this._registerKeyValue(this.key,this.value)},_unregisterKey:function(d){this._unregister(d,this._metaData,this.list)},_registerKeyValue:function(d,e){this._register(d,e,this._metaData,this.list)},_register:function(d,e,f,g){d&&f&&e!==void 0&&(f[d]=e,g.push(e))},_unregister:function(d,e,f){if(d&&e&&d in e){var g=e[d];delete e[d],this.arrayDelete(f,g)}}}),Polymer.IronMeta.getIronMeta=function(){return null==c&&(c=new Polymer.IronMeta),c},Polymer.IronMetaQuery=Polymer({is:'iron-meta-query',properties:{type:{type:String,value:'default',observer:'_typeChanged'},key:{type:String,observer:'_keyChanged'},value:{type:Object,notify:!0,readOnly:!0},list:{type:Array,notify:!0}},factoryImpl:function(d){if(d)for(var e in d)'type'===e||'key'===e?this[e]=d[e]:void 0},created:function(){this._metaDatas=a,this._metaArrays=b},_keyChanged:function(d){this._setValue(this._metaData&&this._metaData[d])},_typeChanged:function(d){this._metaData=a[d],this.list=b[d],this.key&&this._keyChanged(this.key)},byKey:function(d){return this._metaData&&this._metaData[d]}})})();</script>
 </head><body></body></html>

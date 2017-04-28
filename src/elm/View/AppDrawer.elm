@@ -41,12 +41,14 @@ view m viewModel =
     in
         App.drawer
             [ boolProperty "swipeOpen" True
+            , attribute "slot" "drawer"
             ]
             [ App.headerLayout
                 [ attribute "has-scrolling-region" ""
                 ]
                 [ App.header
                     [ boolProperty "fixed" True
+                    , attribute "slot" "header"
                     ]
                     [ App.toolbar
                         [ style

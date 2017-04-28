@@ -91,6 +91,7 @@ appHeaderView m viewModel =
         , attribute "effects" "waterfall"
 
         --        , attribute "fixed" "true"
+        , attribute "slot" "header"
         ]
         [ App.toolbar
             [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]

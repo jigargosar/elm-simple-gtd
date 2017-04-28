@@ -14,6 +14,7 @@ import Random.Pcg exposing (Seed)
 import Time exposing (Time)
 import Todo
 import Todo.Form
+import Todo.NewForm
 import Todo.ReminderForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -44,7 +45,7 @@ type Msg
     | NewContext
     | NewTodoTextChanged Todo.Text
     | DeactivateEditingMode
-    | NewTodoKeyUp String KeyboardEvent
+    | NewTodoKeyUp Todo.NewForm.Model KeyboardEvent
     | StartEditingTodo Todo.Model
     | StartEditingReminder Todo.ReminderForm.Model
     | SaveCurrentForm

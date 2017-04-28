@@ -174,14 +174,14 @@ headerView m =
             Model.getSelectedTodoIdSet m |> Set.size
     in
         case Model.getEditMode m of
-            EditMode.NewTodo text ->
+            EditMode.NewTodo form ->
                 Paper.input
                     [ id newTodoInputId
                     , class "auto-focus"
                     , onInput Msg.NewTodoTextChanged
-                    , value text
+                    , value form.text
                     , onBlur Msg.DeactivateEditingMode
-                    , onKeyUp (Msg.NewTodoKeyUp text)
+                    , onKeyUp (Msg.NewTodoKeyUp form)
                     , stringProperty "label" "New Todo"
                     , boolProperty "alwaysFloatLabel" True
                     , style [ ( "width", "100%" ), "color" => "white" ]

@@ -181,7 +181,7 @@ update msg =
                 DeactivateEditingMode ->
                     Return.map (Model.deactivateEditingMode)
 
-                NewTodoKeyUp text { key } ->
+                NewTodoKeyUp { text } { key } ->
                     case key of
                         Key.Enter ->
                             andThenUpdate (Msg.CreateTodo text)

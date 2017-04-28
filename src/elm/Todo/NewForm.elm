@@ -13,8 +13,7 @@ import Todo
 
 
 type alias Model =
-    { id : Document.Id
-    , text : Todo.Text
+    { text : Todo.Text
 
     --    , project : Project.Model
     --    , context : Context.Model
@@ -36,8 +35,8 @@ type Action
 
 
 create : Todo.Text -> Model
-create todo =
-    { text = Todo.getText todo
+create text =
+    { text = text
     }
 
 

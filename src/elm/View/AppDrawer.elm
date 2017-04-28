@@ -145,7 +145,7 @@ divider =
     div [ class "divider" ] []
 
 
-entityList { vmList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
+entityList { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
     [ item
         [ class "has-hover-elements"
         , onClick (SetView viewType)
@@ -161,7 +161,7 @@ entityList { vmList, viewType, title, showDeleted, onAddClicked, icon } mainView
 
     --    , divider
     ]
-        ++ (List.map entityItem vmList)
+        ++ (List.map entityItem entityList)
 
 
 headLineText title =

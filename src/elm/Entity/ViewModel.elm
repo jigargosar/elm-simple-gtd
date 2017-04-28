@@ -25,7 +25,7 @@ type alias IconVM =
 
 
 type alias Model =
-    { vmList : List EntityItemModel
+    { entityList : List EntityItemModel
     , viewType : MainViewType
     , title : String
     , showDeleted : Bool
@@ -178,7 +178,7 @@ contexts model =
         contextList =
             createList config model
     in
-        { vmList = contextList
+        { entityList = contextList
         , viewType = GroupByContextView
         , title = "Contexts"
         , showDeleted = model.showDeleted
@@ -205,7 +205,7 @@ projects model =
                 }
                 model
     in
-        { vmList = projectList
+        { entityList = projectList
         , viewType = GroupByProjectView
         , title = "Projects"
         , showDeleted = model.showDeleted

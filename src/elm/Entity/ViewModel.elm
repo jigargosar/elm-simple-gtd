@@ -156,24 +156,8 @@ contextList model =
         model
 
 
-projectList : Model.Types.Model -> List ItemModel
-projectList model =
-    createList
-        { groupByFn = Todo.getProjectId
-        , entityType = ProjectEntityType
-        , entityWrapper = ProjectEntity
-        , nullEntity = Project.null
-        , isNull = Project.isNull
-        , nullIcon = { name = "apps", color = nullProjectColor }
-        , defaultIconName = "apps"
-        , getViewType = ProjectView
-        , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
-        }
-        model
-
-
-context : Model.Types.Model -> Model
-context model =
+contexts : Model.Types.Model -> Model
+contexts model =
     { vmList = contextList model
     , viewType = GroupByContextView
     , title = "Contexts"
@@ -183,18 +167,34 @@ context model =
     }
 
 
-project : Model.Types.Model -> Model
-project model =
-    { vmList = projectList model
-    , viewType = GroupByProjectView
-    , title = "Projects"
-    , showDeleted = model.showDeleted
-    , onAddClicked = Msg.NewProject
-    , icon =
-        { name = "group-work"
-        , color = projectsColor
+projects : Model.Types.Model -> Model
+projects model =
+    let
+        projectList : List ItemModel
+        projectList =
+            createList
+                { groupByFn = Todo.getProjectId
+                , entityType = ProjectEntityType
+                , entityWrapper = ProjectEntity
+                , nullEntity = Project.null
+                , isNull = Project.isNull
+                , nullIcon = { name = "apps", color = nullProjectColor }
+                , defaultIconName = "apps"
+                , getViewType = ProjectView
+                , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
+                }
+                model
+    in
+        { vmList = projectList
+        , viewType = GroupByProjectView
+        , title = "Projects"
+        , showDeleted = model.showDeleted
+        , onAddClicked = Msg.NewProject
+        , icon =
+            { name = "group-work"
+            , color = projectsColor
+            }
         }
-    }
 
 
 inboxColor =

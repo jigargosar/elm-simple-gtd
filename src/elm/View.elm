@@ -59,10 +59,10 @@ bottomSheet =
 appDrawerLayoutView m =
     let
         contextVM =
-            Entity.ViewModel.context m
+            Entity.ViewModel.contexts m
 
         projectVM =
-            Entity.ViewModel.project m
+            Entity.ViewModel.projects m
 
         contextVMs =
             contextVM.vmList

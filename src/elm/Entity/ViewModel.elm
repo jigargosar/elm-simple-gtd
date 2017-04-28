@@ -148,7 +148,7 @@ projectList model =
         , entityWrapper = ProjectEntity
         , nullEntity = Project.null
         , isNull = Project.isNull
-        , nullIcon = { name = "apps", color = sgtdBlue }
+        , nullIcon = { name = "apps", color = nullProjectColor }
         , defaultIconName = "apps"
         , getViewType = ProjectView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model

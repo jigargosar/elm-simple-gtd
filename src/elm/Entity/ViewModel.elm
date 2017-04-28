@@ -25,7 +25,7 @@ type alias IconVM =
 
 
 type alias Model =
-    { vmList : List ItemModel
+    { vmList : List EntityItemModel
     , viewType : MainViewType
     , title : String
     , showDeleted : Bool
@@ -34,7 +34,7 @@ type alias Model =
     }
 
 
-type alias ItemModel =
+type alias EntityItemModel =
     { id : String
     , name : String
     , isDeleted : Bool
@@ -68,7 +68,7 @@ type alias Config =
     }
 
 
-createList : Config -> Model.Types.Model -> List ItemModel
+createList : Config -> Model.Types.Model -> List EntityItemModel
 createList config model =
     let
         todoListDict =
@@ -174,7 +174,7 @@ contexts model =
             , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
             }
 
-        contextList : List ItemModel
+        contextList : List EntityItemModel
         contextList =
             createList config model
     in
@@ -190,7 +190,7 @@ contexts model =
 projects : Model.Types.Model -> Model
 projects model =
     let
-        projectList : List ItemModel
+        projectList : List EntityItemModel
         projectList =
             createList
                 { groupByFn = Todo.getProjectId

@@ -55,7 +55,7 @@ filtered =
            )
 
 
-groupByEntity : List Entity.ViewModel.ItemModel -> Model -> Html Msg
+groupByEntity : List Entity.ViewModel.EntityItemModel -> Model -> Html Msg
 groupByEntity entityVMs model =
     let
         vc =

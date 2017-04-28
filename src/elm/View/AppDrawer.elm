@@ -179,7 +179,7 @@ switchViewItem iconName viewType title =
 --onPropertyChanged decoder propertyName tagger =
 
 
-entityItem : Entity.ViewModel.ItemModel -> Html Msg
+entityItem : Entity.ViewModel.EntityItemModel -> Html Msg
 entityItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
         ([ Html.node "iron-icon" [ iconP vm.icon.name, style [ "color" => vm.icon.color ] ] []

@@ -32,9 +32,9 @@ module.exports = {
     },
 
     plugins: [
-        new CopyWebpackPlugin(
-            [{from: 'static/'}]
-            , {copyUnmodified: true}),
+        // new CopyWebpackPlugin(
+        //     [{from: 'static/'}]
+        //     , {copyUnmodified: true}),
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(nodeENV),
             'WEB_PACK_DEV_SERVER': process.env.WEB_PACK_DEV_SERVER || false

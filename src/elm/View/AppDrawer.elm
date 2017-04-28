@@ -48,7 +48,12 @@ view m viewModel =
                 [ App.header
                     [ boolProperty "fixed" True
                     ]
-                    [ App.toolbar []
+                    [ App.toolbar
+                        [ style
+                            [ "color" => "white"
+                            , "background-color" => viewModel.header.backgroundColor
+                            ]
+                        ]
                         [ div []
                             [ paperIconButton
                                 [ iconP "menu"

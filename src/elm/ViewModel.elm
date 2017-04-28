@@ -15,9 +15,11 @@ type alias Model =
     , projects : Entity.ViewModel.Model
     , viewName : String
     , mainViewType : MainViewType
+    , header : { backgroundColor : String }
     }
 
 
+create : Model.Types.Model -> Model
 create model =
     let
         contextsVM =
@@ -29,10 +31,10 @@ create model =
         mainViewType =
             model.mainViewType
 
-        ( viewName, _ ) =
+        ( viewName, headerBackgroundColor ) =
             getViewInfo mainViewType projectsVM contextsVM
     in
-        Model contextsVM projectsVM viewName mainViewType
+        Model contextsVM projectsVM viewName mainViewType { backgroundColor = headerBackgroundColor }
 
 
 getViewInfo mainViewType projectsVM contextsVM =

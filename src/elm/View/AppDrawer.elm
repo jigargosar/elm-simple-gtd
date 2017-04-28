@@ -62,7 +62,7 @@ view m viewModel =
                     ]
                 , Html.node "paper-listbox"
                     [ stringProperty "selectable" "paper-item"
-                    , intProperty "selected" (getSelectedIndex m.mainViewType projects contexts)
+                    , intProperty "selected" (getSelectedIndex viewModel)
 
                     --                , stringProperty "attrForSelected" "draweritemselected"
                     ]
@@ -79,19 +79,19 @@ view m viewModel =
             ]
 
 
-getSelectedIndex mainViewType projectsVM contextsVM =
+getSelectedIndex { mainViewType, projects, contexts } =
     let
         projectsIndex =
-            1 + (List.length contextsVM.entityList)
+            1 + (List.length contexts.entityList)
 
         contextIndexById id =
-            contextsVM.entityList |> List.findIndex (.id >> equals id) >>?= 0
+            contexts.entityList |> List.findIndex (.id >> equals id) >>?= 0
 
         projectIndexById id =
-            projectsVM.entityList |> List.findIndex (.id >> equals id) >>?= 0
+            projects.entityList |> List.findIndex (.id >> equals id) >>?= 0
 
         lastProjectIndex =
-            projectsIndex + (List.length projectsVM.entityList)
+            projectsIndex + (List.length projects.entityList)
     in
         case mainViewType of
             GroupByContextView ->

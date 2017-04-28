@@ -14,6 +14,7 @@ type alias Model =
     { contexts : Entity.ViewModel.Model
     , projects : Entity.ViewModel.Model
     , viewName : String
+    , mainViewType : MainViewType
     }
 
 
@@ -31,7 +32,7 @@ create model =
         viewName =
             getViewName mainViewType projectsVM contextsVM
     in
-        Model contextsVM projectsVM viewName
+        Model contextsVM projectsVM viewName mainViewType
 
 
 getViewName mainViewType projectsVM contextsVM =

@@ -39,8 +39,6 @@ create model =
 
 getViewInfo mainViewType projectsVM contextsVM =
     let
-        contextNameById id =
-            contextsVM.entityList |> maybeNameById id >>? (++) "@" >>?= ""
 
         entityById id =
             List.find (.id >> equals id)
@@ -49,7 +47,10 @@ getViewInfo mainViewType projectsVM contextsVM =
             entityById id >>? .name
 
         iconColorById id =
-            entityById id >>? (.icon >> .color) >>?= ""
+            entityById id >>? (.icon >> .color) >>?= sgtdBlue
+
+        contextNameById id =
+            contextsVM.entityList |> maybeNameById id >>? (++) "@" >>?= ""
 
         projectNameById id =
             projectsVM.entityList |> maybeNameById id >>? (++) "#" >>?= ""

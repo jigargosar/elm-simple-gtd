@@ -453,12 +453,14 @@ saveCurrentForm model =
             model
 
 
+createTodo : Todo.NewForm.Model -> Model -> Model
 createTodo { text } model =
     let
         _ =
             1
     in
-        Model.TodoStore.addNewTodo text model.now model
+        Model.TodoStore.insertTodo (Todo.init model.now text) model
+            |> Tuple.second
 
 
 createEntityEditMode : Entity -> Model -> EditMode

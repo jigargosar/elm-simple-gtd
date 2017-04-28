@@ -97,11 +97,6 @@ addCopyOfTodo todo now =
     insertTodo (Todo.copyTodo now todo)
 
 
-addNewTodo : String -> Time -> Model -> ( Todo.Model, Model )
-addNewTodo text now =
-    insertTodo (Todo.init now text)
-
-
 insertTodo : (Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodo constructWithId =
     applyWith (Model.getTodoStore)

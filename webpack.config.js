@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require("path");
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const ServiceWorkerPlugin = require('serviceworker-config-webpack-plugin')
 
@@ -31,6 +32,9 @@ module.exports = {
     },
 
     plugins: [
+        new CopyWebpackPlugin(
+            [{from: 'static/'}]
+            , {copyUnmodified: true}),
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(nodeENV),
             'WEB_PACK_DEV_SERVER': process.env.WEB_PACK_DEV_SERVER || false
@@ -97,7 +101,7 @@ module.exports = {
         // open:true,
         // inline: false,
         contentBase: ["src/web/", "static/",],
-        host:"0.0.0.0",
+        host: "0.0.0.0",
     },
 
 };

@@ -29,48 +29,54 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
 import View.Shared exposing (..)
+import ViewModel
 import WebComponents exposing (iconP, onBoolPropertyChanged, paperIconButton)
 
 
-view contextsVM projectsVM m =
-    App.drawer
-        [ boolProperty "swipeOpen" True
-        ]
-        [ App.headerLayout
-            [ attribute "has-scrolling-region" ""
+view : Model.Types.Model -> ViewModel.Model -> Html Msg
+view m viewModel =
+    let
+        { contexts, projects } =
+            viewModel
+    in
+        App.drawer
+            [ boolProperty "swipeOpen" True
             ]
-            [ App.header
-                [ boolProperty "fixed" True
+            [ App.headerLayout
+                [ attribute "has-scrolling-region" ""
                 ]
-                [ App.toolbar []
-                    [ div []
-                        [ paperIconButton
-                            [ iconP "menu"
-                            , attribute "drawer-toggle" ""
-                            , onClick Msg.ToggleDrawer
-                            ]
-                            []
-                        ]
-                    , headLineText (getViewName m.mainViewType projectsVM contextsVM)
+                [ App.header
+                    [ boolProperty "fixed" True
                     ]
-                ]
-            , Html.node "paper-listbox"
-                [ stringProperty "selectable" "paper-item"
-                , intProperty "selected" (getSelectedIndex m.mainViewType projectsVM contextsVM)
+                    [ App.toolbar []
+                        [ div []
+                            [ paperIconButton
+                                [ iconP "menu"
+                                , attribute "drawer-toggle" ""
+                                , onClick Msg.ToggleDrawer
+                                ]
+                                []
+                            ]
+                        , headLineText (getViewName m.mainViewType projects contexts)
+                        ]
+                    ]
+                , Html.node "paper-listbox"
+                    [ stringProperty "selectable" "paper-item"
+                    , intProperty "selected" (getSelectedIndex m.mainViewType projects contexts)
 
-                --                , stringProperty "attrForSelected" "draweritemselected"
+                    --                , stringProperty "attrForSelected" "draweritemselected"
+                    ]
+                    (entityList contexts m.mainViewType
+                        ++ [ divider ]
+                        ++ entityList projects m.mainViewType
+                        ++ [ divider ]
+                        ++ [ switchViewItem "delete" BinView "Bin"
+                           , switchViewItem "done" DoneView "Done"
+                           , switchViewItem "notification:sync" SyncView "Sync Settings"
+                           ]
+                    )
                 ]
-                (entityList contextsVM m.mainViewType
-                    ++ [ divider ]
-                    ++ entityList projectsVM m.mainViewType
-                    ++ [ divider ]
-                    ++ [ switchViewItem "delete" BinView "Bin"
-                       , switchViewItem "done" DoneView "Done"
-                       , switchViewItem "notification:sync" SyncView "Sync Settings"
-                       ]
-                )
             ]
-        ]
 
 
 getViewName mainViewType projectsVM contextsVM =

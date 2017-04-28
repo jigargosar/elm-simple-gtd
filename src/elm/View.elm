@@ -74,7 +74,7 @@ appDrawerLayoutView m =
         App.drawerLayout
             [ boolProperty "forceNarrow" m.appDrawerForceNarrow
             ]
-            [ View.AppDrawer.view contexts projects m
+            [ View.AppDrawer.view m viewModel
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ appHeaderView m viewModel
                 , appMainView contextVMs projectVMs m

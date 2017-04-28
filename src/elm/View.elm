@@ -58,22 +58,22 @@ bottomSheet =
 
 appDrawerLayoutView m =
     let
-        contextVM =
+        contextsVM =
             Entity.ViewModel.contexts m
 
         projectVM =
             Entity.ViewModel.projects m
 
         contextVMs =
-            contextVM.vmList
+            contextsVM.entityList
 
         projectVMs =
-            projectVM.vmList
+            projectVM.entityList
     in
         App.drawerLayout
             [ boolProperty "forceNarrow" m.appDrawerForceNarrow
             ]
-            [ View.AppDrawer.view contextVM projectVM m
+            [ View.AppDrawer.view contextsVM projectVM m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ appHeaderView m
                 , appMainView contextVMs projectVMs m

@@ -48,6 +48,9 @@ getViewInfo mainViewType projectsVM contextsVM =
         maybeNameById id =
             entityById id >>? .name
 
+        iconColorById id =
+            entityById id >>? (.icon >> .color) >>?= ""
+
         projectNameById id =
             projectsVM.entityList |> maybeNameById id >>? (++) "#" >>?= ""
     in

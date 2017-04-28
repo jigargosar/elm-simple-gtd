@@ -16,16 +16,15 @@ type alias Model =
     }
 
 
-contextsVM m =
-    Entity.ViewModel.contexts m
-
-
-projectsVM m =
-    Entity.ViewModel.projects m
-
-
 create model =
-    Model (contextsVM model) (projectsVM model)
+    let
+        contextsVM =
+            Entity.ViewModel.contexts model
+
+        projectsVM =
+            Entity.ViewModel.projects model
+    in
+        Model contextsVM projectsVM
 
 
 getViewName mainViewType projectsVM contextsVM =

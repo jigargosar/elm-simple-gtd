@@ -13,3 +13,15 @@ type alias Model =
     { contexts : Entity.ViewModel.Model
     , projects : Entity.ViewModel.Model
     }
+
+
+contextsVM m =
+    Entity.ViewModel.contexts m
+
+
+projectsVM m =
+    Entity.ViewModel.projects m
+
+
+create model =
+    Model (contextsVM model) (projectsVM model)

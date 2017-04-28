@@ -35,6 +35,7 @@ import Ext.Function.Infix exposing (..)
 import View.ReminderOverlay exposing (showReminderOverlay)
 import View.Shared exposing (..)
 import View.Todo
+import ViewModel
 import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, paperIconButton, testDialog)
 
 
@@ -58,22 +59,22 @@ bottomSheet =
 
 appDrawerLayoutView m =
     let
-        contextsVM =
-            Entity.ViewModel.contexts m
+        viewModel =
+            ViewModel.create m
 
-        projectsVM =
-            Entity.ViewModel.projects m
+        { contexts, projects } =
+            viewModel
 
         contextVMs =
-            contextsVM.entityList
+            contexts.entityList
 
         projectVMs =
-            projectsVM.entityList
+            projects.entityList
     in
         App.drawerLayout
             [ boolProperty "forceNarrow" m.appDrawerForceNarrow
             ]
-            [ View.AppDrawer.view contextsVM projectsVM m
+            [ View.AppDrawer.view contexts projects m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ appHeaderView m
                 , appMainView contextVMs projectVMs m

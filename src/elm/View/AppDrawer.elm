@@ -139,21 +139,6 @@ entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } 
         ++ (List.map entityListItem entityList)
 
 
-headLineText title =
-    div [ class "big-paper-item-text" ] [ text title ]
-
-
-switchViewItem iconName viewType title =
-    item [ onClick (SetView viewType) ]
-        [ Html.node "iron-icon" [ iconP iconName ] []
-        , itemBody [] [ text title ]
-        ]
-
-
-
---onPropertyChanged decoder propertyName tagger =
-
-
 entityListItem : Entity.ViewModel.EntityItemModel -> Html Msg
 entityListItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
@@ -168,3 +153,14 @@ entityListItem vm =
 hoverIcons vm =
     div [ class "show-on-hover" ]
         [ settingsButton vm.startEditingMsg ]
+
+
+headLineText title =
+    div [ class "big-paper-item-text" ] [ text title ]
+
+
+switchViewItem iconName viewType title =
+    item [ onClick (SetView viewType) ]
+        [ Html.node "iron-icon" [ iconP iconName ] []
+        , itemBody [] [ text title ]
+        ]

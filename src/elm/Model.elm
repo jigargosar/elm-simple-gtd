@@ -442,25 +442,37 @@ saveCurrentForm model =
             updateTodoWithReminderForm form model
 
         EditMode.NewTodo form ->
-            {- Model.TodoStore.updateTodoById
-               [ Todo.SetText todoText
-               ]
-               id
-            -}
-            model
+            createTodoWithNewForm form model
 
         _ ->
             model
 
 
-createTodo : Todo.NewForm.Model -> ModelF
-createTodo { text } model =
+createTodoWithNewForm : Todo.NewForm.Model -> ModelF
+createTodoWithNewForm { text } model =
+    Model.TodoStore.insertTodo (Todo.init model.now text) model
+        |> Tuple.mapFirst Document.getId
+        |> uncurry setTodoContextOrProjectBasedOnCurrentView
+
+
+setTodoContextOrProjectBasedOnCurrentView todoId model =
     let
-        _ =
-            1
+        maybeTodoUpdateAction =
+            case model.mainViewType of
+                ContextView id ->
+                    model.contextStore |> Store.findById id >>? Todo.SetContext
+
+                ProjectView id ->
+                    model.projectStore |> Store.findById id >>? Todo.SetProject
+
+                _ ->
+                    Nothing
+
+        maybeModel =
+            maybeTodoUpdateAction
+                ?|> (List.singleton >> Model.TodoStore.updateTodoById # todoId # model)
     in
-        Model.TodoStore.insertTodo (Todo.init model.now text) model
-            |> Tuple.second
+        maybeModel ?= model
 
 
 createEntityEditMode : Entity -> Model -> EditMode

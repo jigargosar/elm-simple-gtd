@@ -29,7 +29,7 @@ create model =
         mainViewType =
             model.mainViewType
 
-        viewName =
+        ( viewName, _ ) =
             getViewName mainViewType projectsVM contextsVM
     in
         Model contextsVM projectsVM viewName mainViewType
@@ -45,22 +45,22 @@ getViewName mainViewType projectsVM contextsVM =
     in
         case mainViewType of
             GroupByContextView ->
-                contextsVM.title
+                ( contextsVM.title, "" )
 
             ContextView id ->
-                contextNameById id
+                ( contextNameById id, "" )
 
             GroupByProjectView ->
-                projectsVM.title
+                ( projectsVM.title, "" )
 
             ProjectView id ->
-                projectNameById id
+                ( projectNameById id, "" )
 
             BinView ->
-                "Bin"
+                ( "Bin", "" )
 
             DoneView ->
-                "Done"
+                ( "Done", "" )
 
             SyncView ->
-                "Sync"
+                ( "Sync", "" )

@@ -57,7 +57,7 @@ view m viewModel =
                                 ]
                                 []
                             ]
-                        , headLineText (getViewName m.mainViewType projects contexts)
+                        , headLineText viewModel.viewName
                         ]
                     ]
                 , Html.node "paper-listbox"
@@ -77,37 +77,6 @@ view m viewModel =
                     )
                 ]
             ]
-
-
-getViewName mainViewType projectsVM contextsVM =
-    let
-        contextNameById id =
-            contextsVM.entityList |> List.find (.id >> equals id) >>? .name >>? (++) "@" >>?= ""
-
-        projectNameById id =
-            projectsVM.entityList |> List.find (.id >> equals id) >>? .name >>? (++) "#" >>?= ""
-    in
-        case mainViewType of
-            GroupByContextView ->
-                contextsVM.title
-
-            ContextView id ->
-                contextNameById id
-
-            GroupByProjectView ->
-                projectsVM.title
-
-            ProjectView id ->
-                projectNameById id
-
-            BinView ->
-                "Bin"
-
-            DoneView ->
-                "Done"
-
-            SyncView ->
-                "Sync"
 
 
 getSelectedIndex mainViewType projectsVM contextsVM =

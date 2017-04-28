@@ -31,3 +31,10 @@ create todo project context =
     , project = project
     , context = context
     }
+
+
+set : Action -> Model -> Model
+set action model =
+    case action of
+        SetText value ->
+            { model | text = value }

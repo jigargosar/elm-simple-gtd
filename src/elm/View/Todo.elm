@@ -288,8 +288,18 @@ formOkCancelButtons =
 
 okCancelButtons okMsg cancelMsg =
     div [ class "layout horizontal end-justified" ]
-        [ Paper.button [ class "primary-color", boolProperty "noink" True ] [ text "Cancel" ]
-        , Paper.button [ class "primary-color", boolProperty "noink" True ] [ text "Ok" ]
+        [ Paper.button
+            [ onClickStopPropagation cancelMsg
+            , class "primary-color"
+            , boolProperty "noink" True
+            ]
+            [ text "Cancel" ]
+        , Paper.button
+            [ onClickStopPropagation okMsg
+            , class "primary-color"
+            , boolProperty "noink" True
+            ]
+            [ text "Ok" ]
         ]
 
 

@@ -76,13 +76,13 @@ appDrawerLayoutView m =
             ]
             [ View.AppDrawer.view contexts projects m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
-                [ appHeaderView m
+                [ appHeaderView m viewModel
                 , appMainView contextVMs projectVMs m
                 ]
             ]
 
 
-appHeaderView m =
+appHeaderView m viewModel =
     App.header
         [ attribute "reveals" ""
         , attribute "condenses" ""

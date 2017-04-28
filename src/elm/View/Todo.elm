@@ -277,6 +277,10 @@ editView vm evm =
                         (vm.contexts .|> createContextItem # vm)
                     ]
                 ]
+            , div []
+                [ Paper.button [] [ text "Cancel" ]
+                , Paper.button [] [ text "Save" ]
+                ]
             ]
         ]
 

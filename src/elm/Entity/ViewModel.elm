@@ -188,8 +188,8 @@ contextsColor =
 
 
 nullProjectColor =
-    --paper-deep-purple-400
-    "rgb(126, 87, 194)"
+    --paper-deep-purple-200
+    "rgb(179, 157, 219)"
 
 
 projectsColor =

@@ -27,6 +27,7 @@ import Store
 import Time exposing (Time)
 import Todo
 import Todo.Form
+import Todo.NewForm
 import Todo.ReminderForm
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -354,7 +355,7 @@ update2 lens l2 smallF big =
 -}
 activateNewTodoMode : String -> ModelF
 activateNewTodoMode text =
-    setEditMode (EditMode.createNewTodoModel text)
+    setEditMode (Todo.NewForm.create text |> EditMode.NewTodo)
 
 
 startEditingTodo : Todo.Model -> ModelF

@@ -4,6 +4,7 @@ import Context
 import Document
 import Project
 import Todo
+import Todo.NewForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -45,7 +46,7 @@ type alias RemoteSyncForm =
 
 
 type EditMode
-    = NewTodo NewTodoModel
+    = NewTodo Todo.NewForm.Model
     | TodoForm Todo.Form.Model
     | TodoReminderForm Todo.ReminderForm.Model
     | EditContext EditContextModel
@@ -58,10 +59,6 @@ type EditMode
 
 none =
     None
-
-
-createNewTodoModel =
-    NewTodo
 
 
 editContextMode model =

@@ -15,8 +15,9 @@ import Todo
 type alias Model =
     { id : Document.Id
     , text : Todo.Text
-    , project : Project.Model
-    , context : Context.Model
+
+    --    , project : Project.Model
+    --    , context : Context.Model
     }
 
 
@@ -24,12 +25,19 @@ type Action
     = SetText String
 
 
-create : Todo.Model -> Project.Model -> Context.Model -> Model
-create todo project context =
-    { id = Document.getId todo
-    , text = Todo.getText todo
-    , project = project
-    , context = context
+
+--create : Todo.Model -> Project.Model -> Context.Model -> Model
+--create todo project context =
+--    { id = Document.getId todo
+--    , text = Todo.getText todo
+--    , project = project
+--    , context = context
+--    }
+
+
+create : Todo.Text -> Model
+create todo =
+    { text = Todo.getText todo
     }
 
 

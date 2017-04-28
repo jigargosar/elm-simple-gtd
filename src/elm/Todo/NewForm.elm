@@ -24,5 +24,10 @@ type Action
     = SetText String
 
 
-
---create =
+create : Todo.Model -> Project.Model -> Context.Model -> Model
+create todo project context =
+    { id = Document.getId todo
+    , text = Todo.getText todo
+    , project = project
+    , context = context
+    }

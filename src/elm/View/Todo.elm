@@ -287,7 +287,7 @@ formOkCancelButtons =
 
 
 okCancelButtons okMsg cancelMsg =
-    div [ class "layout horizontal end-justified" ]
+    div [ class "layout horizontal end-justified full-divider" ]
         [ Paper.button
             [ onClickStopPropagation cancelMsg
             , class "primary-color"

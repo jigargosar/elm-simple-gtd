@@ -30,12 +30,12 @@ create model =
             model.mainViewType
 
         ( viewName, _ ) =
-            getViewName mainViewType projectsVM contextsVM
+            getViewInfo mainViewType projectsVM contextsVM
     in
         Model contextsVM projectsVM viewName mainViewType
 
 
-getViewName mainViewType projectsVM contextsVM =
+getViewInfo mainViewType projectsVM contextsVM =
     let
         contextNameById id =
             contextsVM.entityList |> List.find (.id >> equals id) >>? .name >>? (++) "@" >>?= ""

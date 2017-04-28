@@ -184,5 +184,9 @@ project model =
     , title = "Projects"
     , showDeleted = model.showDeleted
     , onAddClicked = Msg.NewProject
-    , icon = { name = "group-work", color = sgtdBlue }
+    , icon =
+        { name = "group-work"
+        , color ="rgb(124, 77, 255)"
+        --paper-deep-purple-a200
+        }
     }

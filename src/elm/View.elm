@@ -96,7 +96,12 @@ appHeaderView m viewModel =
         [ App.toolbar
             [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
             ]
-            [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "", onClick Msg.ToggleDrawer ] []
+            [ paperIconButton
+                [ iconP "menu"
+                , attribute "drawer-toggle" ""
+                , onClick Msg.ToggleDrawer
+                ]
+                []
             , headerView m
             ]
 

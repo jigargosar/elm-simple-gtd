@@ -136,7 +136,7 @@ create todoListByEntityId config entity =
             if isNull then
                 config.nullIcon
             else
-                { name = config.defaultIconName, color = "#ddd" }
+                { name = config.defaultIconName, color = lightGray }
 
         name =
             entity.name
@@ -249,3 +249,8 @@ projectsColor =
 sgtdBlue =
     --paper-blue-a200
     "rgb(68, 138, 255)"
+
+
+lightGray =
+    --paper-grey-400
+    "#bdbdbd"

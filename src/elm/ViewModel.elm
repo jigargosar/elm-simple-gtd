@@ -39,7 +39,6 @@ create model =
 
 getViewInfo mainViewType projectsVM contextsVM =
     let
-
         entityById id =
             List.find (.id >> equals id)
 
@@ -47,6 +46,9 @@ getViewInfo mainViewType projectsVM contextsVM =
             entityById id >>? .name
 
         iconColorById id =
+            entityById id >>? (.icon >> .color) >>?= sgtdBlue
+
+        appHeaderInfoById id =
             entityById id >>? (.icon >> .color) >>?= sgtdBlue
 
         contextNameById id =

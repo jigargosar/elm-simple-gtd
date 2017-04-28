@@ -142,7 +142,7 @@ create todoListByEntityId config entity =
             entity.name
 
         appHeader =
-            { name = name, backgroundColor = icon.color }
+            { name = config.namePrefix ++ name, backgroundColor = icon.color }
     in
         { id = id
         , name = name

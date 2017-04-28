@@ -124,22 +124,6 @@ create todoListByEntityId config entity =
         }
 
 
-projectList : Model.Types.Model -> List ViewModel
-projectList model =
-    createList
-        { groupByFn = Todo.getProjectId
-        , entityType = ProjectEntityType
-        , entityWrapper = ProjectEntity
-        , nullEntity = Project.null
-        , isNull = Project.isNull
-        , nullIcon = { name = "apps", color = sgtdBlue }
-        , defaultIconName = "apps"
-        , getViewType = ProjectView
-        , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
-        }
-        model
-
-
 contextList : Model.Types.Model -> List ViewModel
 contextList model =
     createList
@@ -152,6 +136,22 @@ contextList model =
         , defaultIconName = "av:fiber-manual-record"
         , getViewType = ContextView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
+        }
+        model
+
+
+projectList : Model.Types.Model -> List ViewModel
+projectList model =
+    createList
+        { groupByFn = Todo.getProjectId
+        , entityType = ProjectEntityType
+        , entityWrapper = ProjectEntity
+        , nullEntity = Project.null
+        , isNull = Project.isNull
+        , nullIcon = { name = "apps", color = sgtdBlue }
+        , defaultIconName = "apps"
+        , getViewType = ProjectView
+        , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
         }
         model
 
@@ -185,6 +185,11 @@ inboxColor =
 
 contextsColor =
     sgtdBlue
+
+
+nullProjectColor =
+    --paper-deep-purple-400
+    "rgb(126, 87, 194)"
 
 
 projectsColor =

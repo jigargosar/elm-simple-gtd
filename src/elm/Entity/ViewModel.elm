@@ -133,6 +133,7 @@ inboxBlue =
 
 
 materialInboxBlue =
+    --paper-blue-a200
     "rgb(68, 138, 255)"
 
 
@@ -186,7 +187,8 @@ project model =
     , onAddClicked = Msg.NewProject
     , icon =
         { name = "group-work"
-        , color ="rgb(124, 77, 255)"
+        , color = "rgb(124, 77, 255)"
+
         --paper-deep-purple-a200
         }
     }

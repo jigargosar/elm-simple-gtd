@@ -13,6 +13,7 @@ import Model.Types exposing (MainViewType(..))
 type alias Model =
     { contexts : Entity.ViewModel.Model
     , projects : Entity.ViewModel.Model
+    , viewName : String
     }
 
 
@@ -23,8 +24,14 @@ create model =
 
         projectsVM =
             Entity.ViewModel.projects model
+
+        mainViewType =
+            model.mainViewType
+
+        viewName =
+            getViewName mainViewType projectsVM contextsVM
     in
-        Model contextsVM projectsVM
+        Model contextsVM projectsVM viewName
 
 
 getViewName mainViewType projectsVM contextsVM =

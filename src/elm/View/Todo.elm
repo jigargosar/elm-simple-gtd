@@ -277,12 +277,12 @@ editView vm evm =
                         (vm.contexts .|> createContextItem # vm)
                     ]
                 ]
-            , okCancelButtons
+            , formOkCancelButtons
             ]
         ]
 
 
-okCancelButtonsDefaultMsg =
+formOkCancelButtons =
     okCancelButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode
 
 

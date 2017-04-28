@@ -4,6 +4,7 @@ import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
 import EditMode exposing (EditMode, TodoForm)
+import Entity.ViewModel
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Attributes.Extra exposing (intProperty)
@@ -28,6 +29,11 @@ import Project
 import Todo
 import Todo.Form
 import Todo.ReminderForm
+
+
+type alias AppViewModel =
+    { contexts : List Entity.ViewModel.ItemModel
+    }
 
 
 type alias SharedViewModel =

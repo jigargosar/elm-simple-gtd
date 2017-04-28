@@ -18,7 +18,23 @@ import Model
 import Project
 
 
-type alias ViewModel =
+type alias IconVM =
+    { name : String
+    , color : String
+    }
+
+
+type alias Model =
+    { vmList : List ItemModel
+    , viewType : MainViewType
+    , title : String
+    , showDeleted : Bool
+    , onAddClicked : Msg
+    , icon : IconVM
+    }
+
+
+type alias ItemModel =
     { id : String
     , name : String
     , isDeleted : Bool
@@ -31,7 +47,7 @@ type alias ViewModel =
     , onSaveClicked : Msg
     , onNameChanged : String -> Msg
     , onCancelClicked : Msg
-    , icon : { name : String, color : String }
+    , icon : IconVM
     }
 
 
@@ -124,7 +140,7 @@ create todoListByEntityId config entity =
         }
 
 
-contextList : Model.Types.Model -> List ViewModel
+contextList : Model.Types.Model -> List ItemModel
 contextList model =
     createList
         { groupByFn = Todo.getContextId
@@ -140,7 +156,7 @@ contextList model =
         model
 
 
-projectList : Model.Types.Model -> List ViewModel
+projectList : Model.Types.Model -> List ItemModel
 projectList model =
     createList
         { groupByFn = Todo.getProjectId

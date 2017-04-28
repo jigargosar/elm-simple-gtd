@@ -54,19 +54,24 @@ getViewInfo mainViewType projectsVM contextsVM =
                 ( contextsVM.title, contextsVM.icon.color )
 
             ContextView id ->
-                ( contextNameById id, "" )
+                ( contextNameById id, sgtdBlue )
 
             GroupByProjectView ->
-                ( projectsVM.title, "" )
+                ( projectsVM.title, projectsVM.icon.color )
 
             ProjectView id ->
-                ( projectNameById id, "" )
+                ( projectNameById id, sgtdBlue )
 
             BinView ->
-                ( "Bin", "" )
+                ( "Bin", sgtdBlue )
 
             DoneView ->
-                ( "Done", "" )
+                ( "Done", sgtdBlue )
 
             SyncView ->
-                ( "Sync", "" )
+                ( "Sync", sgtdBlue )
+
+
+sgtdBlue =
+    --paper-blue-a200
+    "rgb(68, 138, 255)"

@@ -46,10 +46,6 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="FLOW" />
   </component>
-  <component name="JsBowerSettings">
-    <exe-path>$USER_HOME$/n/bin/bower</exe-path>
-    <config-path />
-  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" default="false">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

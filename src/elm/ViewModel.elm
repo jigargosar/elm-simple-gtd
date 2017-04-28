@@ -7,6 +7,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Model.Types exposing (MainViewType(..))
 
 
 type alias Model =
@@ -25,3 +26,34 @@ projectsVM m =
 
 create model =
     Model (contextsVM model) (projectsVM model)
+
+
+getViewName mainViewType projectsVM contextsVM =
+    let
+        contextNameById id =
+            contextsVM.entityList |> List.find (.id >> equals id) >>? .name >>? (++) "@" >>?= ""
+
+        projectNameById id =
+            projectsVM.entityList |> List.find (.id >> equals id) >>? .name >>? (++) "#" >>?= ""
+    in
+        case mainViewType of
+            GroupByContextView ->
+                contextsVM.title
+
+            ContextView id ->
+                contextNameById id
+
+            GroupByProjectView ->
+                projectsVM.title
+
+            ProjectView id ->
+                projectNameById id
+
+            BinView ->
+                "Bin"
+
+            DoneView ->
+                "Done"
+
+            SyncView ->
+                "Sync"

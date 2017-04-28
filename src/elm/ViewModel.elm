@@ -38,14 +38,20 @@ create model =
 getViewInfo mainViewType projectsVM contextsVM =
     let
         contextNameById id =
-            contextsVM.entityList |> List.find (.id >> equals id) >>? .name >>? (++) "@" >>?= ""
+            contextsVM.entityList |> maybeNameById id >>? (++) "@" >>?= ""
+
+        entityById id =
+            List.find (.id >> equals id)
+
+        maybeNameById id =
+            entityById id >>? .name
 
         projectNameById id =
-            projectsVM.entityList |> List.find (.id >> equals id) >>? .name >>? (++) "#" >>?= ""
+            projectsVM.entityList |> maybeNameById id >>? (++) "#" >>?= ""
     in
         case mainViewType of
             GroupByContextView ->
-                ( contextsVM.title, "" )
+                ( contextsVM.title, contextsVM.icon.color )
 
             ContextView id ->
                 ( contextNameById id, "" )

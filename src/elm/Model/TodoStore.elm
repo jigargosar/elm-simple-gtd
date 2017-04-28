@@ -94,16 +94,16 @@ replaceTodoIfEqualById todo =
 
 addCopyOfTodo : Todo.Model -> Time -> Model -> ( Todo.Model, Model )
 addCopyOfTodo todo now =
-    insertTodoByIdConstructor (Todo.copyTodo now todo)
+    insertTodo (Todo.copyTodo now todo)
 
 
 addNewTodo : String -> Time -> Model -> ( Todo.Model, Model )
 addNewTodo text now =
-    insertTodoByIdConstructor (Todo.init now text)
+    insertTodo (Todo.init now text)
 
 
-insertTodoByIdConstructor : (Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
-insertTodoByIdConstructor constructWithId =
+insertTodo : (Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
+insertTodo constructWithId =
     applyWith (Model.getTodoStore)
         (Store.insert (constructWithId) >> setTodoStoreFromTuple)
 

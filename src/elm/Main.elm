@@ -159,10 +159,6 @@ update msg =
                 SetTodoProject project todo ->
                     updateTodo [ Todo.SetProject project ] todo
 
-                CreateTodo text ->
-                    Return.mapModelWith Model.getNow
-                        (\now -> Model.addNewTodo text now >> Tuple.second)
-
                 StartAddingTodo ->
                     activateEditNewTodoMode ""
                         >> autoFocusPaperInputCmd

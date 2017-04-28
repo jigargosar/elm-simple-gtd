@@ -453,6 +453,14 @@ saveCurrentForm model =
             model
 
 
+createTodo { text } model =
+    let
+        _ =
+            1
+    in
+        Model.TodoStore.addNewTodo text model.now model
+
+
 createEntityEditMode : Entity -> Model -> EditMode
 createEntityEditMode entity model =
     case entity of

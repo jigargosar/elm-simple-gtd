@@ -66,9 +66,9 @@ view m viewModel =
 
                     --                , stringProperty "attrForSelected" "draweritemselected"
                     ]
-                    (entityList contexts m.mainViewType
+                    (entityListView contexts m.mainViewType
                         ++ [ divider ]
-                        ++ entityList projects m.mainViewType
+                        ++ entityListView projects m.mainViewType
                         ++ [ divider ]
                         ++ [ switchViewItem "delete" BinView "Bin"
                            , switchViewItem "done" DoneView "Done"
@@ -120,7 +120,7 @@ divider =
     div [ class "divider" ] []
 
 
-entityList { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
+entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
     [ item
         [ class "has-hover-elements"
         , onClick (SetView viewType)
@@ -136,7 +136,7 @@ entityList { entityList, viewType, title, showDeleted, onAddClicked, icon } main
 
     --    , divider
     ]
-        ++ (List.map entityItem entityList)
+        ++ (List.map entityListItem entityList)
 
 
 headLineText title =
@@ -154,8 +154,8 @@ switchViewItem iconName viewType title =
 --onPropertyChanged decoder propertyName tagger =
 
 
-entityItem : Entity.ViewModel.EntityItemModel -> Html Msg
-entityItem vm =
+entityListItem : Entity.ViewModel.EntityItemModel -> Html Msg
+entityListItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
         ([ Html.node "iron-icon" [ iconP vm.icon.name, style [ "color" => vm.icon.color ] ] []
          , itemBody [] [ View.Shared.defaultBadge vm ]

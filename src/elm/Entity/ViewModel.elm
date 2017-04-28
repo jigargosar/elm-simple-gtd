@@ -124,19 +124,6 @@ create todoListByEntityId config entity =
         }
 
 
-sgtdBlue =
-    materialInboxBlue
-
-
-inboxBlue =
-    "rgb(66, 133, 244)"
-
-
-materialInboxBlue =
-    --paper-blue-a200
-    "rgb(68, 138, 255)"
-
-
 projectList : Model.Types.Model -> List ViewModel
 projectList model =
     createList
@@ -161,7 +148,7 @@ contextList model =
         , entityWrapper = ContextEntity
         , nullEntity = Context.null
         , isNull = Context.isNull
-        , nullIcon = { name = "inbox", color = sgtdBlue }
+        , nullIcon = { name = "inbox", color = inboxColor }
         , defaultIconName = "av:fiber-manual-record"
         , getViewType = ContextView
         , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
@@ -175,7 +162,7 @@ context model =
     , title = "Contexts"
     , showDeleted = model.showDeleted
     , onAddClicked = Msg.NewContext
-    , icon = { name = "group-work", color = sgtdBlue }
+    , icon = { name = "group-work", color = contextsColor }
     }
 
 
@@ -192,6 +179,19 @@ project model =
     }
 
 
+inboxColor =
+    sgtdBlue
+
+
+contextsColor =
+    sgtdBlue
+
+
 projectsColor =
     --paper-deep-purple-a200
     "rgb(124, 77, 255)"
+
+
+sgtdBlue =
+    --paper-blue-a200
+    "rgb(68, 138, 255)"

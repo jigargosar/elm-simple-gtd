@@ -453,7 +453,7 @@ saveCurrentForm model =
             model
 
 
-createTodo : Todo.NewForm.Model -> Model -> Model
+createTodo : Todo.NewForm.Model -> ModelF
 createTodo { text } model =
     let
         _ =

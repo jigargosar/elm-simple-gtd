@@ -140,31 +140,31 @@ create todoListByEntityId config entity =
         }
 
 
-contextList : Model.Types.Model -> List ItemModel
-contextList model =
-    createList
-        { groupByFn = Todo.getContextId
-        , entityType = ContextEntityType
-        , entityWrapper = ContextEntity
-        , nullEntity = Context.null
-        , isNull = Context.isNull
-        , nullIcon = { name = "inbox", color = inboxColor }
-        , defaultIconName = "av:fiber-manual-record"
-        , getViewType = ContextView
-        , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
-        }
-        model
-
-
 contexts : Model.Types.Model -> Model
 contexts model =
-    { vmList = contextList model
-    , viewType = GroupByContextView
-    , title = "Contexts"
-    , showDeleted = model.showDeleted
-    , onAddClicked = Msg.NewContext
-    , icon = { name = "group-work", color = contextsColor }
-    }
+    let
+        contextList : List ItemModel
+        contextList =
+            createList
+                { groupByFn = Todo.getContextId
+                , entityType = ContextEntityType
+                , entityWrapper = ContextEntity
+                , nullEntity = Context.null
+                , isNull = Context.isNull
+                , nullIcon = { name = "inbox", color = inboxColor }
+                , defaultIconName = "av:fiber-manual-record"
+                , getViewType = ContextView
+                , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
+                }
+                model
+    in
+        { vmList = contextList
+        , viewType = GroupByContextView
+        , title = "Contexts"
+        , showDeleted = model.showDeleted
+        , onAddClicked = Msg.NewContext
+        , icon = { name = "group-work", color = contextsColor }
+        }
 
 
 projects : Model.Types.Model -> Model

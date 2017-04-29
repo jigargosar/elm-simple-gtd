@@ -408,7 +408,7 @@ andThenUpdateAll =
 
 onUpdateNow now =
     Return.map (Model.setNow now)
-        >> Return.map (Ext.Debug.tapLog .editMode "editmode")
+--        >> Return.map (Ext.Debug.tapLog .editMode "editmode")
         >> Return.andThen
             (\m ->
                 let

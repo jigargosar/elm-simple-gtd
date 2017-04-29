@@ -49,7 +49,11 @@ getEditMode =
 
 setEditMode : EditMode -> ModelF
 setEditMode editMode model =
-    { model | editMode = editMode }
+    let
+        _ =
+            Debug.log "editMode" (editMode)
+    in
+        { model | editMode = editMode }
 
 
 updateEditMode : (Model -> EditMode) -> ModelF

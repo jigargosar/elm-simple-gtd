@@ -204,11 +204,13 @@ reminderMenuButton form reminderVM =
         [ paperIconButton
             [ iconP "alarm"
             , class "dropdown-trigger"
+            , attribute "slot" "dropdown-trigger"
             , onClickStopPropagation Msg.AutoFocusPaperInput
             ]
             []
         , div
             [ class "static dropdown-content"
+            , attribute "slot" "dropdown-content"
             ]
             [ div [ class "font-subhead" ] [ text "Select date and time" ]
             , Paper.input

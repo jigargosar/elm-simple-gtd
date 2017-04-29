@@ -196,7 +196,7 @@ reminderMenuButton maybeReminderForm form reminderVM =
             , boolProperty "noOverlap" True
             , onClickStopPropagation Msg.NoOp
             , boolProperty "stopKeyboardEventPropagation" True
-            , boolProperty "allowOutsideScroll" True
+            , boolProperty "allowOutsideScroll" False
             ]
             [ paperIconButton
                 [ iconP "alarm"

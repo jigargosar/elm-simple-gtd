@@ -177,7 +177,7 @@ default vm maybeReminderForm reminderForm =
                     (createReminderVM reminderForm vm.onReminderButtonClicked)
                     (vm)
                 , Paper.menuButton
-                    [ style [ "min-width" => "0" ]
+                    [ style [ "min-width" => "0", "max-width" => "10rem" ]
                     , class "flex-auto"
                     , boolProperty "dynamicAlign" True
                     , onClickStopPropagation Msg.NoOp
@@ -195,7 +195,7 @@ default vm maybeReminderForm reminderForm =
                         (vm.projects .|> createProjectItem # vm)
                     ]
                 , Paper.menuButton
-                    [ style [ "min-width" => "0" ]
+                    [ style [ "min-width" => "0", "max-width" => "10rem" ]
                     , class "flex-auto"
                     , boolProperty "dynamicAlign" True
                     , onClickStopPropagation Msg.NoOp
@@ -230,11 +230,10 @@ reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
             , boolProperty "stopKeyboardEventPropagation" True
             , boolProperty "allowOutsideScroll" False
             , class "flex-auto"
+            , style [ "min-width" => "0", "max-width" => "10rem" ]
             ]
             [ Paper.button
                 [ iconP "alarm"
-
-                --                , class "dropdown-trigger"
                 , attribute "slot" "dropdown-trigger"
                 , onClickStopPropagation reminderVM.startEditingMsg
                 , classList
@@ -242,8 +241,11 @@ reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
                     , "accent-color" => vm.isReminderActive
                     , "dropdown-trigger" => True
                     ]
+                , style [ "width" => "100%" ]
                 ]
-                [ text vm.time ]
+                [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
+                    [ text vm.time ]
+                ]
             , div
                 [ class "static dropdown-content"
                 , attribute "slot" "dropdown-content"

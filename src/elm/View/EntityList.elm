@@ -45,13 +45,15 @@ filtered : Model -> Html Msg
 filtered =
     apply2 ( View.Shared.createSharedViewModel >> Todo.View.createKeyedItem, Model.TodoStore.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
-                Keyed.node "paper-listbox"
-                    [ class "todo-list"
-                    , stringProperty "selected" "0"
-                    , stringProperty "selectable" "paper-item"
-                    , stringProperty "selectedAttribute" "selected"
+                Paper.material []
+                    [ Keyed.node "paper-listbox"
+                        [ class "todo-list"
+                        , stringProperty "selected" "0"
+                        , stringProperty "selectable" "paper-item"
+                        , stringProperty "selectedAttribute" "selected"
+                        ]
+                        (todoList .|> todoView)
                     ]
-                    (todoList .|> todoView)
            )
 
 

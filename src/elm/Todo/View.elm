@@ -183,12 +183,6 @@ default vm reminderForm =
                     , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
                     ]
                 ]
-
-            --            , span [ classList [ "show-on-hover" => not reminderForm.reminderMenuOpen ] ]
-            --                [ doneIconButton vm
-            --                , reminderMenuButton reminderForm reminderVM
-            --                , deleteIconButton vm
-            --                ]
             ]
 
 
@@ -205,7 +199,7 @@ reminderMenuButton form reminderVM =
             [ iconP "alarm"
             , class "dropdown-trigger"
             , attribute "slot" "dropdown-trigger"
-            , onClickStopPropagation Msg.AutoFocusPaperInput
+            , onClickStopPropagation reminderVM.startEditingMsg
             ]
             []
         , div

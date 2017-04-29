@@ -4,6 +4,7 @@ import Document
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import EditMode
+import Ext.Debug
 import Ext.Keyboard as Keyboard
 import Ext.Return as Return
 import Model.Internal as Model
@@ -407,6 +408,7 @@ andThenUpdateAll =
 
 onUpdateNow now =
     Return.map (Model.setNow now)
+        >> Return.map (Ext.Debug.tapLog .editMode "editmode")
         >> Return.andThen
             (\m ->
                 let

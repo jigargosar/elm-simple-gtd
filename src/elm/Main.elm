@@ -212,15 +212,11 @@ update msg =
                         )
 
                 UpdateReminderForm form action ->
-                    let
-                        _ =
-                            Debug.log "form,action" ( form, action )
-                    in
-                        Return.map
-                            (Todo.ReminderForm.set action form
-                                |> EditMode.TodoReminderForm
-                                >> Model.setEditMode
-                            )
+                    Return.map
+                        (Todo.ReminderForm.set action form
+                            |> EditMode.TodoReminderForm
+                            >> Model.setEditMode
+                        )
 
                 CopyAndEditTodoById todoId ->
                     Return.withMaybe (Model.findTodoById todoId)

@@ -216,14 +216,16 @@ reminderMenuButton form reminderVM =
                 , onChange reminderVM.onTimeChanged
                 ]
                 []
-            , div [ class "horizontal layout" ]
-                [ Paper.button
-                    [ attribute "raised" "true"
-                    , onClick reminderVM.onSaveClicked
-                    , boolProperty "stopKeyboardEventPropagation" True
-                    ]
-                    [ text "Save" ]
-                ]
+
+            --            , div [ class "horizontal layout" ]
+            --                [ Paper.button
+            --                    [ attribute "raised" "true"
+            --                    , onClick reminderVM.onSaveClicked
+            --                    , boolProperty "stopKeyboardEventPropagation" True
+            --                    ]
+            --                    [ text "Save" ]
+            --                ]
+            , defaultOkCancelButtons
             ]
         ]
 
@@ -273,12 +275,12 @@ editView vm evm =
                         (vm.contexts .|> createContextItem # vm)
                     ]
                 ]
-            , formOkCancelButtons
+            , defaultOkCancelButtons
             ]
         ]
 
 
-formOkCancelButtons =
+defaultOkCancelButtons =
     okCancelButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode
 
 

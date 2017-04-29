@@ -161,8 +161,7 @@ default vm reminderForm =
                     [ div [ class "font-nowrap", style [ "padding" => "12px 0" ] ] [ text vm.text ]
                     , span
                         [ classList
-                            [ "show-on-hover" => not reminderForm.reminderMenuOpen
-                            , "layout horizontal " => True
+                            [ "layout horizontal " => True
                             ]
                         ]
                         [ doneIconButton vm

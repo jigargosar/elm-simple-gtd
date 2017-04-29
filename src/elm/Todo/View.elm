@@ -183,16 +183,11 @@ default vm maybeReminderForm reminderForm =
                         maybeReminderForm
                         reminderForm
                         (createReminderVM reminderForm vm.onReminderButtonClicked)
-                        (vm.time)
+                        (vm)
                     ]
-
-                --                , div [ style [ "_margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
-                --                , div [ style [ "_margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
                 , Paper.menuButton [ class "flex-auto", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
                     [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
-                        [ text "#"
-                        , text vm.projectName
-                        , icon "arrow-drop-down" []
+                        [ text vm.projectName
                         ]
                     , Html.node "paper-listbox"
                         [ class "dropdown-content", attribute "slot" "dropdown-content" ]
@@ -200,9 +195,7 @@ default vm maybeReminderForm reminderForm =
                     ]
                 , Paper.menuButton [ class "flex-auto", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
                     [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
-                        [ text "@"
-                        , text vm.contextName
-                        , icon "arrow-drop-down" []
+                        [ text vm.contextName
                         ]
                     , Html.node "paper-listbox"
                         [ class "dropdown-content", attribute "slot" "dropdown-content" ]
@@ -260,7 +253,7 @@ reminderMenuButton maybeReminderForm form reminderVM =
             ]
 
 
-reminderMenuButtonWithTime maybeReminderForm form reminderVM time =
+reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
     let
         isEditing =
             Maybe.isJust maybeReminderForm
@@ -273,13 +266,19 @@ reminderMenuButtonWithTime maybeReminderForm form reminderVM time =
             , boolProperty "stopKeyboardEventPropagation" True
             , boolProperty "allowOutsideScroll" False
             ]
-            [ Paper.button
+            [ Paper.item
                 [ iconP "alarm"
-                , class "dropdown-trigger"
+
+                --                , class "dropdown-trigger"
                 , attribute "slot" "dropdown-trigger"
                 , onClickStopPropagation reminderVM.startEditingMsg
+                , classList
+                    [ "secondary-color" => not vm.isReminderActive
+                    , "accent-color" => vm.isReminderActive
+                    , "font-body1 flex-auto dropdown-trigger" => True
+                    ]
                 ]
-                [ text time ]
+                [ text vm.time ]
             , div
                 [ class "static dropdown-content"
                 , attribute "slot" "dropdown-content"

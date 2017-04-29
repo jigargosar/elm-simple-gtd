@@ -176,7 +176,7 @@ default vm maybeReminderForm reminderForm =
                     reminderForm
                     (createReminderVM reminderForm vm.onReminderButtonClicked)
                     (vm)
-                , Paper.menuButton [ class "flex-1", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
+                , Paper.menuButton [ class "flex-auto", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
                     [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
                         [ text vm.projectName
                         ]
@@ -184,7 +184,7 @@ default vm maybeReminderForm reminderForm =
                         [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
-                , Paper.menuButton [ class "flex-1", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
+                , Paper.menuButton [ class "flex-auto", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
                     [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
                         [ text vm.contextName
                         ]
@@ -195,8 +195,6 @@ default vm maybeReminderForm reminderForm =
                 ]
             ]
         ]
-
-
 
 
 reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
@@ -211,7 +209,7 @@ reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
             , onClickStopPropagation Msg.NoOp
             , boolProperty "stopKeyboardEventPropagation" True
             , boolProperty "allowOutsideScroll" False
-            , class "flex-1"
+            , class "flex-auto"
             ]
             [ Paper.button
                 [ iconP "alarm"
@@ -361,8 +359,6 @@ doneIconButton vm =
 
 deleteIconButton vm =
     View.Shared.trashButton vm.onDeleteClicked
-
-
 
 
 reminderMenuButton maybeReminderForm form reminderVM =

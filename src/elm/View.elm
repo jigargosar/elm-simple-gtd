@@ -34,7 +34,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.ReminderOverlay exposing (showReminderOverlay)
 import View.Shared exposing (..)
-import View.Todo
+import Todo.View
 import ViewModel
 import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, paperIconButton, testDialog)
 

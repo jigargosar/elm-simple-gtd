@@ -37,13 +37,13 @@ import Polymer.Paper as Paper exposing (badge, button, fab, input, item, itemBod
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import Entity.ViewModel
-import View.Todo exposing (EditTodoViewModel)
+import Todo.View exposing (EditTodoViewModel)
 import View.Shared exposing (..)
 
 
 filtered : Model -> Html Msg
 filtered =
-    apply2 ( View.Shared.createSharedViewModel >> View.Todo.createKeyedItem, Model.TodoStore.getFilteredTodoList )
+    apply2 ( View.Shared.createSharedViewModel >> Todo.View.createKeyedItem, Model.TodoStore.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
                 Keyed.node "paper-listbox"
                     [ class "todo-list"
@@ -71,7 +71,7 @@ groupByEntity entityVMs model =
                         , stringProperty "selectable" "paper-item"
                         , stringProperty "selectedAttribute" "selected"
                         ]
-                        (vm.todoList .|> View.Todo.createKeyedItem vc)
+                        (vm.todoList .|> Todo.View.createKeyedItem vc)
                     ]
                 ]
             )

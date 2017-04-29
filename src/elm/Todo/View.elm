@@ -1,4 +1,4 @@
-module View.Todo exposing (..)
+module Todo.View exposing (..)
 
 import Context
 import Date

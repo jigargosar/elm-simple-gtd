@@ -265,7 +265,7 @@ editView vm evm =
                         , text vm.projectName
                         , icon "arrow-drop-down" []
                         ]
-                    , Paper.menu [ class "dropdown-content" ]
+                    , Paper.menu [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
                 , Paper.menuButton [ boolProperty "dynamicAlign" True ]
@@ -274,7 +274,7 @@ editView vm evm =
                         , text vm.contextName
                         , icon "arrow-drop-down" []
                         ]
-                    , Paper.menu [ class "dropdown-content" ]
+                    , Paper.menu [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                         (vm.contexts .|> createContextItem # vm)
                     ]
                 ]

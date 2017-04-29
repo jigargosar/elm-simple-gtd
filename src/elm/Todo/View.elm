@@ -260,7 +260,7 @@ editView vm evm =
                 ]
             , div [ class "horizontal layout" ]
                 [ Paper.menuButton [ boolProperty "dynamicAlign" True ]
-                    [ Paper.button [ class "dropdown-trigger" ]
+                    [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
                         [ text "#"
                         , text vm.projectName
                         , icon "arrow-drop-down" []
@@ -269,7 +269,7 @@ editView vm evm =
                         (vm.projects .|> createProjectItem # vm)
                     ]
                 , Paper.menuButton [ boolProperty "dynamicAlign" True ]
-                    [ Paper.button [ class "dropdown-trigger" ]
+                    [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
                         [ text "@"
                         , text vm.contextName
                         , icon "arrow-drop-down" []

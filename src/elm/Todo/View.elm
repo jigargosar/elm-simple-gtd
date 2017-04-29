@@ -159,17 +159,19 @@ default vm maybeReminderForm reminderForm =
         ]
         [ Paper.itemBody []
             [ div [ class "layout horizontal center justified has-hover-elements" ]
-                [ div [ class "font-nowrap", style [ "padding" => "12px 0" ] ] [ text vm.text ]
+                [ div [ class "font-nowrap", style [ "_padding" => "12px 0" ] ] [ text vm.text ]
                 , div [ class "layout horizontal" ]
                     [ doneIconButton vm
-                    , reminderMenuButton
-                        maybeReminderForm
-                        reminderForm
-                        (createReminderVM reminderForm vm.onReminderButtonClicked)
+
+                    {- , reminderMenuButton
+                       maybeReminderForm
+                       reminderForm
+                       (createReminderVM reminderForm vm.onReminderButtonClicked)
+                    -}
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "layout horizontal ", attribute "secondary" "true" ]
+            , div [ class "layout horizontal center", attribute "secondary" "true" ]
                 [ div
                     [ classList
                         [ "secondary-color" => not vm.isReminderActive
@@ -177,9 +179,14 @@ default vm maybeReminderForm reminderForm =
                         , "font-body1" => True
                         ]
                     ]
-                    [ text vm.time ]
-                , div [ style [ "margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
-                , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
+                    [ reminderMenuButtonWithTime
+                        maybeReminderForm
+                        reminderForm
+                        (createReminderVM reminderForm vm.onReminderButtonClicked)
+                        (vm.time)
+                    ]
+                , div [ style [ "_margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
+                , div [ style [ "_margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
                 ]
             ]
         ]
@@ -198,13 +205,60 @@ reminderMenuButton maybeReminderForm form reminderVM =
             , boolProperty "stopKeyboardEventPropagation" True
             , boolProperty "allowOutsideScroll" False
             ]
-            [ Paper.button
+            [ Paper.iconButton
                 [ iconP "alarm"
                 , class "dropdown-trigger"
                 , attribute "slot" "dropdown-trigger"
                 , onClickStopPropagation reminderVM.startEditingMsg
                 ]
                 [ text "reminder" ]
+            , div
+                [ class "static dropdown-content"
+                , attribute "slot" "dropdown-content"
+                ]
+                [ div [ class "font-subhead" ] [ text "Select date and time" ]
+                , Paper.input
+                    [ type_ "date"
+                    , classList [ "auto-focus" => isEditing ]
+                    , labelA "Date"
+                    , value form.date
+                    , boolProperty "stopKeyboardEventPropagation" True
+                    , onChange reminderVM.onDateChanged
+                    ]
+                    []
+                , Paper.input
+                    [ type_ "time"
+                    , labelA "Time"
+                    , value form.time
+                    , boolProperty "stopKeyboardEventPropagation" True
+                    , onChange reminderVM.onTimeChanged
+                    ]
+                    []
+                , defaultOkCancelButtons
+                ]
+            ]
+
+
+reminderMenuButtonWithTime maybeReminderForm form reminderVM time =
+    let
+        isEditing =
+            Maybe.isJust maybeReminderForm
+    in
+        Paper.menuButton
+            [ boolProperty "opened" isEditing
+            , boolProperty "dynamicAlign" True
+            , boolProperty "noOverlap" True
+            , onClickStopPropagation Msg.NoOp
+            , boolProperty "stopKeyboardEventPropagation" True
+            , boolProperty "allowOutsideScroll" False
+            ]
+            [ Paper.button
+                [ iconP "alarm"
+                , class "dropdown-trigger"
+                , attribute "slot" "dropdown-trigger"
+                , onClickStopPropagation reminderVM.startEditingMsg
+                ]
+                [ text time ]
             , div
                 [ class "static dropdown-content"
                 , attribute "slot" "dropdown-content"

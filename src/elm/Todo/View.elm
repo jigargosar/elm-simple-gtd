@@ -197,51 +197,6 @@ default vm maybeReminderForm reminderForm =
         ]
 
 
-reminderMenuButton maybeReminderForm form reminderVM =
-    let
-        isEditing =
-            Maybe.isJust maybeReminderForm
-    in
-        Paper.menuButton
-            [ boolProperty "opened" isEditing
-            , boolProperty "dynamicAlign" True
-            , boolProperty "noOverlap" True
-            , onClickStopPropagation Msg.NoOp
-            , boolProperty "stopKeyboardEventPropagation" True
-            , boolProperty "allowOutsideScroll" False
-            ]
-            [ Paper.iconButton
-                [ iconP "alarm"
-                , class "dropdown-trigger"
-                , attribute "slot" "dropdown-trigger"
-                , onClickStopPropagation reminderVM.startEditingMsg
-                ]
-                [ text "reminder" ]
-            , div
-                [ class "static dropdown-content"
-                , attribute "slot" "dropdown-content"
-                ]
-                [ div [ class "font-subhead" ] [ text "Select date and time" ]
-                , Paper.input
-                    [ type_ "date"
-                    , classList [ "auto-focus" => isEditing ]
-                    , labelA "Date"
-                    , value form.date
-                    , boolProperty "stopKeyboardEventPropagation" True
-                    , onChange reminderVM.onDateChanged
-                    ]
-                    []
-                , Paper.input
-                    [ type_ "time"
-                    , labelA "Time"
-                    , value form.time
-                    , boolProperty "stopKeyboardEventPropagation" True
-                    , onChange reminderVM.onTimeChanged
-                    ]
-                    []
-                , defaultOkCancelButtons
-                ]
-            ]
 
 
 reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
@@ -406,3 +361,52 @@ doneIconButton vm =
 
 deleteIconButton vm =
     View.Shared.trashButton vm.onDeleteClicked
+
+
+
+
+reminderMenuButton maybeReminderForm form reminderVM =
+    let
+        isEditing =
+            Maybe.isJust maybeReminderForm
+    in
+        Paper.menuButton
+            [ boolProperty "opened" isEditing
+            , boolProperty "dynamicAlign" True
+            , boolProperty "noOverlap" True
+            , onClickStopPropagation Msg.NoOp
+            , boolProperty "stopKeyboardEventPropagation" True
+            , boolProperty "allowOutsideScroll" False
+            ]
+            [ Paper.iconButton
+                [ iconP "alarm"
+                , class "dropdown-trigger"
+                , attribute "slot" "dropdown-trigger"
+                , onClickStopPropagation reminderVM.startEditingMsg
+                ]
+                [ text "reminder" ]
+            , div
+                [ class "static dropdown-content"
+                , attribute "slot" "dropdown-content"
+                ]
+                [ div [ class "font-subhead" ] [ text "Select date and time" ]
+                , Paper.input
+                    [ type_ "date"
+                    , classList [ "auto-focus" => isEditing ]
+                    , labelA "Date"
+                    , value form.date
+                    , boolProperty "stopKeyboardEventPropagation" True
+                    , onChange reminderVM.onDateChanged
+                    ]
+                    []
+                , Paper.input
+                    [ type_ "time"
+                    , labelA "Time"
+                    , value form.time
+                    , boolProperty "stopKeyboardEventPropagation" True
+                    , onChange reminderVM.onTimeChanged
+                    ]
+                    []
+                , defaultOkCancelButtons
+                ]
+            ]

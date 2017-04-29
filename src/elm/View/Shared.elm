@@ -94,7 +94,7 @@ createSharedViewModel model =
             \todo ->
                 todo
                     |> getMaybeTodoReminderFormForTodo
-                    |> Maybe.unpack (\_ -> Todo.ReminderForm.create todo now) identity
+                    |> Maybe.unpack (\_ -> Todo.ReminderForm.null todo now) identity
 
         --    , getMaybeEditProjectFormForProject =
         --        \project ->

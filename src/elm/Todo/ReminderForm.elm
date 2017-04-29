@@ -25,6 +25,18 @@ type Action
     | SetTime String
 
 
+null todo now =
+    let
+        timeInMilli =
+            Todo.getDueAt todo ?= now + Time.hour
+    in
+        { id = Document.getId todo
+        , date = (Time.Format.format "%Y-%m-%d") timeInMilli
+        , time = (Time.Format.format "%H:%M") timeInMilli
+        , reminderMenuOpen = False
+        }
+
+
 create : Todo.Model -> Time.Time -> Model
 create todo now =
     let

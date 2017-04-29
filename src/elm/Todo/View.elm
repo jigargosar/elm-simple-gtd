@@ -185,7 +185,7 @@ reminderIconButton vm maybeReminderForm =
     --        let
     --            _ = reminderFormPopup reminderVM
     --        in
-    div []
+    div [ onClickStopPropagation Msg.NoOp ]
         [ paperIconButton
             [ iconP "alarm"
             , class "dropdown-trigger"
@@ -193,6 +193,8 @@ reminderIconButton vm maybeReminderForm =
             , onClickStopPropagation vm.onReminderButtonClicked
             ]
             []
+        , div [ class "static" ] [ text " foo bar" ]
+        , Paper.dialog [ attribute "opened" (Maybe.Extra.isJust maybeReminderForm) ] [ h1 [] [ text "dialog" ] ]
         ]
 
 

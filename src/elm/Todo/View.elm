@@ -145,9 +145,8 @@ default vm reminderForm =
             Msg.UpdateReminderForm reminderForm
 
         reminderVM =
-            { onDateChanged = updateReminderForm << Todo.ReminderForm.Date
-            , onTimeChanged = updateReminderForm << Todo.ReminderForm.Time
-            , onReminderMenuOpenChanged = updateReminderForm << Todo.ReminderForm.ReminderMenuOpen
+            { onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
+            , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
             , onSaveClicked = Msg.SaveCurrentForm
             , startEditingMsg = Msg.StartEditingReminder reminderForm
             }
@@ -183,9 +182,7 @@ default vm reminderForm =
 
 reminderMenuButton form reminderVM =
     Paper.menuButton
-        [ boolProperty "opened" form.reminderMenuOpen
-        , onBoolPropertyChanged "opened" reminderVM.onReminderMenuOpenChanged
-        , boolProperty "dynamicAlign" True
+        [ boolProperty "dynamicAlign" True
         , boolProperty "noOverlap" True
         , onClickStopPropagation Msg.NoOp
         , boolProperty "stopKeyboardEventPropagation" True

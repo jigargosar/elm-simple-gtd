@@ -176,7 +176,7 @@ default vm maybeReminderForm reminderForm =
                     [ classList
                         [ "secondary-color" => not vm.isReminderActive
                         , "accent-color" => vm.isReminderActive
-                        , "font-body1" => True
+                        , "font-body1 flex-auto" => True
                         ]
                     ]
                     [ reminderMenuButtonWithTime
@@ -185,8 +185,29 @@ default vm maybeReminderForm reminderForm =
                         (createReminderVM reminderForm vm.onReminderButtonClicked)
                         (vm.time)
                     ]
-                , div [ style [ "_margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
-                , div [ style [ "_margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
+
+                --                , div [ style [ "_margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
+                --                , div [ style [ "_margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
+                , Paper.menuButton [ class "flex-auto", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
+                    [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
+                        [ text "#"
+                        , text vm.projectName
+                        , icon "arrow-drop-down" []
+                        ]
+                    , Html.node "paper-listbox"
+                        [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+                        (vm.projects .|> createProjectItem # vm)
+                    ]
+                , Paper.menuButton [ class "flex-auto", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
+                    [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
+                        [ text "@"
+                        , text vm.contextName
+                        , icon "arrow-drop-down" []
+                        ]
+                    , Html.node "paper-listbox"
+                        [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+                        (vm.contexts .|> createContextItem # vm)
+                    ]
                 ]
             ]
         ]

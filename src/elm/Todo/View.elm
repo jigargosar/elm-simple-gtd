@@ -14,7 +14,7 @@ import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onCl
 import Json.Decode
 import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
-import Maybe.Extra
+import Maybe.Extra as Maybe
 import Model.Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
 import Msg exposing (Msg)
 import Polymer.Attributes exposing (boolProperty, stringProperty)
@@ -49,8 +49,8 @@ createKeyedItem vc todo =
 
         view =
             vc.getMaybeEditTodoFormForTodo todo
-                |> Maybe.Extra.unpack
-                    (\_ -> default vm (vc.getMaybeTodoReminderFormForTodo todo))
+                |> Maybe.unpack
+                    (\_ -> default vm maybeReminderForm (vc.getTodoReminderForm todo))
                     (createEditTodoViewModel >> editView vm)
     in
         ( Document.getId todo, view )
@@ -138,20 +138,21 @@ createTodoViewModel vc todo =
         }
 
 
-createReminderVM reminderForm =
+createReminderVM form startEditingMsg =
     let
         updateReminderForm =
-            Msg.UpdateReminderForm reminderForm
+            Msg.UpdateReminderForm form
     in
-        { form = reminderForm
+        { form = form
         , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
         , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
         , onSaveClicked = Msg.SaveCurrentForm
+        , startEditingMsg = startEditingMsg
         }
 
 
-default : TodoViewModel -> Maybe Todo.ReminderForm.Model -> Html Msg
-default vm maybeReminderForm =
+default : TodoViewModel -> Maybe Todo.ReminderForm.Model -> Todo.ReminderForm.Model -> Html Msg
+default vm maybeReminderForm reminderForm =
     Paper.item
         [ classList [ "todo-item" => True ]
         , onClickStopPropagation (vm.startEditingMsg)
@@ -161,7 +162,10 @@ default vm maybeReminderForm =
                 [ div [ class "font-nowrap", style [ "padding" => "12px 0" ] ] [ text vm.text ]
                 , div [ class "layout horizontal" ]
                     [ doneIconButton vm
-                    , reminderIconButton vm maybeReminderForm
+                    , reminderMenuButton
+                        maybeReminderForm
+                        reminderForm
+                        (createReminderVM reminderForm vm.onReminderButtonClicked)
                     , deleteIconButton vm
                     ]
                 ]
@@ -181,102 +185,51 @@ default vm maybeReminderForm =
         ]
 
 
-reminderIconButton vm maybeReminderForm =
-    --        let
-    --            _ = reminderFormPopup reminderVM
-    --        in
-    div [ onClickStopPropagation Msg.NoOp ]
-        [ paperIconButton
-            [ iconP "alarm"
-            , class "dropdown-trigger"
-            , attribute "slot" "dropdown-trigger"
-            , onClickStopPropagation vm.onReminderButtonClicked
-            ]
-            []
-        , div [ class "static" ] [ text " foo bar" ]
-        , Paper.dialog [ attribute "opened" (Maybe.Extra.isJust maybeReminderForm) ] [ h1 [] [ text "dialog" ] ]
-        ]
-
-
-reminderFormPopup reminderVM =
+reminderMenuButton maybeReminderForm form reminderVM =
     let
-        form =
-            reminderVM.form
+        isEditing =
+            Maybe.isJust maybeReminderForm
     in
-        div
-            [ class "static"
+        Paper.menuButton
+            [ boolProperty "opened" isEditing
+            , boolProperty "dynamicAlign" True
+            , boolProperty "noOverlap" True
+            , onClickStopPropagation Msg.NoOp
+            , boolProperty "stopKeyboardEventPropagation" True
+            , boolProperty "allowOutsideScroll" True
             ]
-            [ div [ class "font-subhead" ] [ text "Select date and time" ]
-            , Paper.input
-                [ type_ "date"
-                , class "auto-focus"
-                , labelA "Date"
-                , value form.date
-                , boolProperty "stopKeyboardEventPropagation" True
-                , onChange reminderVM.onDateChanged
+            [ paperIconButton
+                [ iconP "alarm"
+                , class "dropdown-trigger"
+                , attribute "slot" "dropdown-trigger"
+                , onClickStopPropagation reminderVM.startEditingMsg
                 ]
                 []
-            , Paper.input
-                [ type_ "time"
-                , labelA "Time"
-                , value form.time
-                , boolProperty "stopKeyboardEventPropagation" True
-                , onChange reminderVM.onTimeChanged
+            , div
+                [ class "static dropdown-content"
+                , attribute "slot" "dropdown-content"
                 ]
-                []
-            , defaultOkCancelButtons
+                [ div [ class "font-subhead" ] [ text "Select date and time" ]
+                , Paper.input
+                    [ type_ "date"
+                    , classList [ "auto-focus" => isEditing ]
+                    , labelA "Date"
+                    , value form.date
+                    , boolProperty "stopKeyboardEventPropagation" True
+                    , onChange reminderVM.onDateChanged
+                    ]
+                    []
+                , Paper.input
+                    [ type_ "time"
+                    , labelA "Time"
+                    , value form.time
+                    , boolProperty "stopKeyboardEventPropagation" True
+                    , onChange reminderVM.onTimeChanged
+                    ]
+                    []
+                , defaultOkCancelButtons
+                ]
             ]
-
-
-
---reminderMenuButton form reminderVM =
---    Paper.menuButton
---        [ boolProperty "dynamicAlign" True
---        , boolProperty "noOverlap" True
---        , onClickStopPropagation Msg.NoOp
---        , boolProperty "stopKeyboardEventPropagation" True
---        ]
---        [ paperIconButton
---            [ iconP "alarm"
---            , class "dropdown-trigger"
---            , attribute "slot" "dropdown-trigger"
---            , onClickStopPropagation reminderVM.startEditingMsg
---            ]
---            []
---        , div
---            [ class "static dropdown-content"
---            , attribute "slot" "dropdown-content"
---            ]
---            [ div [ class "font-subhead" ] [ text "Select date and time" ]
---            , Paper.input
---                [ type_ "date"
---                , class "auto-focus"
---                , labelA "Date"
---                , value form.date
---                , boolProperty "stopKeyboardEventPropagation" True
---                , onChange reminderVM.onDateChanged
---                ]
---                []
---            , Paper.input
---                [ type_ "time"
---                , labelA "Time"
---                , value form.time
---                , boolProperty "stopKeyboardEventPropagation" True
---                , onChange reminderVM.onTimeChanged
---                ]
---                []
---
---            --            , div [ class "horizontal layout" ]
---            --                [ Paper.button
---            --                    [ attribute "raised" "true"
---            --                    , onClick reminderVM.onSaveClicked
---            --                    , boolProperty "stopKeyboardEventPropagation" True
---            --                    ]
---            --                    [ text "Save" ]
---            --                ]
---            , defaultOkCancelButtons
---            ]
---        ]
 
 
 onChange : (String -> msg) -> Attribute msg

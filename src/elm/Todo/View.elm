@@ -159,11 +159,7 @@ default vm reminderForm =
             [ Paper.itemBody []
                 [ div [ class "layout horizontal center justified has-hover-elements" ]
                     [ div [ class "font-nowrap", style [ "padding" => "12px 0" ] ] [ text vm.text ]
-                    , span
-                        [ classList
-                            [ "layout horizontal " => True
-                            ]
-                        ]
+                    , div [ class "layout horizontal" ]
                         [ doneIconButton vm
                         , reminderMenuButton reminderForm reminderVM
                         , deleteIconButton vm

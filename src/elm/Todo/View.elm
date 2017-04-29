@@ -29,7 +29,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Html exposing (Html, col, div, h1, h3, span, text)
+import Html exposing (Attribute, Html, col, div, h1, h3, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
@@ -219,7 +219,7 @@ reminderMenuButton form reminderVM =
                 , labelA "Date"
                 , value form.date
                 , boolProperty "stopKeyboardEventPropagation" True
-                , onInput reminderVM.onDateChanged
+                , onChange reminderVM.onDateChanged
                 ]
                 []
             , Paper.input
@@ -227,7 +227,7 @@ reminderMenuButton form reminderVM =
                 , labelA "Time"
                 , value form.time
                 , boolProperty "stopKeyboardEventPropagation" True
-                , onInput reminderVM.onTimeChanged
+                , onChange reminderVM.onTimeChanged
                 ]
                 []
             , div [ class "horizontal layout" ]
@@ -240,6 +240,11 @@ reminderMenuButton form reminderVM =
                 ]
             ]
         ]
+
+
+onChange : (String -> msg) -> Attribute msg
+onChange tagger =
+    on "change" (Json.Decode.map tagger targetValue)
 
 
 editView : TodoViewModel -> EditTodoViewModel -> Html Msg

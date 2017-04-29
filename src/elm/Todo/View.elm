@@ -176,17 +176,37 @@ default vm maybeReminderForm reminderForm =
                     reminderForm
                     (createReminderVM reminderForm vm.onReminderButtonClicked)
                     (vm)
-                , Paper.menuButton [ class "flex-auto", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
-                    [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
-                        [ text vm.projectName
+                , Paper.menuButton
+                    [ style [ "min-width" => "0" ]
+                    , class "flex-auto"
+                    , boolProperty "dynamicAlign" True
+                    , onClickStopPropagation Msg.NoOp
+                    ]
+                    [ Paper.button
+                        [ style [ "width" => "100%" ]
+                        , class "dropdown-trigger"
+                        , attribute "slot" "dropdown-trigger"
+                        ]
+                        [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
+                            [ text vm.projectName ]
                         ]
                     , Html.node "paper-listbox"
                         [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
-                , Paper.menuButton [ class "flex-auto", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
-                    [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
-                        [ text vm.contextName
+                , Paper.menuButton
+                    [ style [ "min-width" => "0" ]
+                    , class "flex-auto"
+                    , boolProperty "dynamicAlign" True
+                    , onClickStopPropagation Msg.NoOp
+                    ]
+                    [ Paper.button
+                        [ style [ "width" => "100%" ]
+                        , class "dropdown-trigger"
+                        , attribute "slot" "dropdown-trigger"
+                        ]
+                        [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
+                            [ text vm.contextName ]
                         ]
                     , Html.node "paper-listbox"
                         [ class "dropdown-content", attribute "slot" "dropdown-content" ]

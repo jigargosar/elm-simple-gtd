@@ -50,7 +50,7 @@ createKeyedItem vc todo =
         view =
             vc.getMaybeEditTodoFormForTodo todo
                 |> Maybe.Extra.unpack
-                    (\_ -> default vm (vc.getTodoReminderForm todo))
+                    (\_ -> default vm (vc.getMaybeTodoReminderFormForTodo todo))
                     (createEditTodoViewModel >> editView vm)
     in
         ( Document.getId todo, view )
@@ -102,8 +102,7 @@ type alias TodoViewModel =
     , isReminderActive : Bool
     , contexts : List Context.Model
     , projects : List Project.Model
-
-    --    , onReminderButtonClicked : Msg
+    , onReminderButtonClicked : Msg
     }
 
 
@@ -135,68 +134,73 @@ createTodoViewModel vc todo =
         , isReminderActive = Todo.isReminderActive todo
         , contexts = vc.activeContexts
         , projects = vc.activeProjects
+        , onReminderButtonClicked = Msg.StartEditingReminder todo
         }
 
 
-default : TodoViewModel -> Todo.ReminderForm.Model -> Html Msg
-default vm reminderForm =
+createReminderVM reminderForm =
     let
         updateReminderForm =
             Msg.UpdateReminderForm reminderForm
-
-        reminderVM =
-            { onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
-            , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
-            , onSaveClicked = Msg.SaveCurrentForm
-            , startEditingMsg = Msg.StartEditingReminder reminderForm
-            }
     in
-        Paper.item
-            [ classList [ "todo-item" => True ]
-            , onClickStopPropagation (vm.startEditingMsg)
-            ]
-            [ Paper.itemBody []
-                [ div [ class "layout horizontal center justified has-hover-elements" ]
-                    [ div [ class "font-nowrap", style [ "padding" => "12px 0" ] ] [ text vm.text ]
-                    , div [ class "layout horizontal" ]
-                        [ doneIconButton vm
-                        , reminderMenuButton reminderForm reminderVM
-                        , deleteIconButton vm
-                        ]
-                    ]
-                , div [ class "layout horizontal ", attribute "secondary" "true" ]
-                    [ div
-                        [ classList
-                            [ "secondary-color" => not vm.isReminderActive
-                            , "accent-color" => vm.isReminderActive
-                            , "font-body1" => True
-                            ]
-                        ]
-                        [ text vm.time ]
-                    , div [ style [ "margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
-                    , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
+        { form = reminderForm
+        , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
+        , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
+        , onSaveClicked = Msg.SaveCurrentForm
+        }
+
+
+default : TodoViewModel -> Maybe Todo.ReminderForm.Model -> Html Msg
+default vm maybeReminderForm =
+    Paper.item
+        [ classList [ "todo-item" => True ]
+        , onClickStopPropagation (vm.startEditingMsg)
+        ]
+        [ Paper.itemBody []
+            [ div [ class "layout horizontal center justified has-hover-elements" ]
+                [ div [ class "font-nowrap", style [ "padding" => "12px 0" ] ] [ text vm.text ]
+                , div [ class "layout horizontal" ]
+                    [ doneIconButton vm
+                    , reminderIconButton vm maybeReminderForm
+                    , deleteIconButton vm
                     ]
                 ]
+            , div [ class "layout horizontal ", attribute "secondary" "true" ]
+                [ div
+                    [ classList
+                        [ "secondary-color" => not vm.isReminderActive
+                        , "accent-color" => vm.isReminderActive
+                        , "font-body1" => True
+                        ]
+                    ]
+                    [ text vm.time ]
+                , div [ style [ "margin-left" => "1rem" ] ] [ text "#", text vm.projectName ]
+                , div [ style [ "margin-left" => "1rem" ] ] [ text "@", text vm.contextName ]
+                ]
             ]
-
-
-reminderMenuButton form reminderVM =
-    Paper.menuButton
-        [ boolProperty "dynamicAlign" True
-        , boolProperty "noOverlap" True
-        , onClickStopPropagation Msg.NoOp
-        , boolProperty "stopKeyboardEventPropagation" True
         ]
-        [ paperIconButton
-            [ iconP "alarm"
-            , class "dropdown-trigger"
-            , attribute "slot" "dropdown-trigger"
-            , onClickStopPropagation reminderVM.startEditingMsg
-            ]
-            []
-        , div
-            [ class "static dropdown-content"
-            , attribute "slot" "dropdown-content"
+
+
+reminderIconButton vm maybeReminderForm =
+    --        let
+    --            _ = reminderFormPopup reminderVM
+    --        in
+    paperIconButton
+        [ iconP "alarm"
+        , class "dropdown-trigger"
+        , attribute "slot" "dropdown-trigger"
+        , onClickStopPropagation vm.onReminderButtonClicked
+        ]
+        []
+
+
+reminderFormPopup reminderVM =
+    let
+        form =
+            reminderVM.form
+    in
+        div
+            [ class "static"
             ]
             [ div [ class "font-subhead" ] [ text "Select date and time" ]
             , Paper.input
@@ -216,18 +220,59 @@ reminderMenuButton form reminderVM =
                 , onChange reminderVM.onTimeChanged
                 ]
                 []
-
-            --            , div [ class "horizontal layout" ]
-            --                [ Paper.button
-            --                    [ attribute "raised" "true"
-            --                    , onClick reminderVM.onSaveClicked
-            --                    , boolProperty "stopKeyboardEventPropagation" True
-            --                    ]
-            --                    [ text "Save" ]
-            --                ]
             , defaultOkCancelButtons
             ]
-        ]
+
+
+
+--reminderMenuButton form reminderVM =
+--    Paper.menuButton
+--        [ boolProperty "dynamicAlign" True
+--        , boolProperty "noOverlap" True
+--        , onClickStopPropagation Msg.NoOp
+--        , boolProperty "stopKeyboardEventPropagation" True
+--        ]
+--        [ paperIconButton
+--            [ iconP "alarm"
+--            , class "dropdown-trigger"
+--            , attribute "slot" "dropdown-trigger"
+--            , onClickStopPropagation reminderVM.startEditingMsg
+--            ]
+--            []
+--        , div
+--            [ class "static dropdown-content"
+--            , attribute "slot" "dropdown-content"
+--            ]
+--            [ div [ class "font-subhead" ] [ text "Select date and time" ]
+--            , Paper.input
+--                [ type_ "date"
+--                , class "auto-focus"
+--                , labelA "Date"
+--                , value form.date
+--                , boolProperty "stopKeyboardEventPropagation" True
+--                , onChange reminderVM.onDateChanged
+--                ]
+--                []
+--            , Paper.input
+--                [ type_ "time"
+--                , labelA "Time"
+--                , value form.time
+--                , boolProperty "stopKeyboardEventPropagation" True
+--                , onChange reminderVM.onTimeChanged
+--                ]
+--                []
+--
+--            --            , div [ class "horizontal layout" ]
+--            --                [ Paper.button
+--            --                    [ attribute "raised" "true"
+--            --                    , onClick reminderVM.onSaveClicked
+--            --                    , boolProperty "stopKeyboardEventPropagation" True
+--            --                    ]
+--            --                    [ text "Save" ]
+--            --                ]
+--            , defaultOkCancelButtons
+--            ]
+--        ]
 
 
 onChange : (String -> msg) -> Attribute msg

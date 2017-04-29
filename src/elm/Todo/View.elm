@@ -155,11 +155,10 @@ default : TodoViewModel -> Maybe Todo.ReminderForm.Model -> Todo.ReminderForm.Mo
 default vm maybeReminderForm reminderForm =
     Paper.item
         [ classList [ "todo-item" => True ]
-        , onClickStopPropagation (vm.startEditingMsg)
         ]
         [ Paper.itemBody []
             [ div [ class "layout horizontal center justified has-hover-elements" ]
-                [ div [ class "font-nowrap", style [ "_padding" => "12px 0" ] ] [ text vm.text ]
+                [ div [ class "font-nowrap flex-auto", style [ "_padding" => "12px 0" ] ] [ text vm.text ]
                 , div [ class "layout horizontal" ]
                     [ doneIconButton vm
 
@@ -172,20 +171,12 @@ default vm maybeReminderForm reminderForm =
                     ]
                 ]
             , div [ class "layout horizontal center", attribute "secondary" "true" ]
-                [ div
-                    [ classList
-                        [ "secondary-color" => not vm.isReminderActive
-                        , "accent-color" => vm.isReminderActive
-                        , "font-body1 flex-auto" => True
-                        ]
-                    ]
-                    [ reminderMenuButtonWithTime
-                        maybeReminderForm
-                        reminderForm
-                        (createReminderVM reminderForm vm.onReminderButtonClicked)
-                        (vm)
-                    ]
-                , Paper.menuButton [ class "flex-auto", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
+                [ reminderMenuButtonWithTime
+                    maybeReminderForm
+                    reminderForm
+                    (createReminderVM reminderForm vm.onReminderButtonClicked)
+                    (vm)
+                , Paper.menuButton [ class "flex-1", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
                     [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
                         [ text vm.projectName
                         ]
@@ -193,7 +184,7 @@ default vm maybeReminderForm reminderForm =
                         [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
-                , Paper.menuButton [ class "flex-auto", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
+                , Paper.menuButton [ class "flex-1", boolProperty "dynamicAlign" True, onClickStopPropagation Msg.NoOp ]
                     [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
                         [ text vm.contextName
                         ]
@@ -265,8 +256,9 @@ reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
             , onClickStopPropagation Msg.NoOp
             , boolProperty "stopKeyboardEventPropagation" True
             , boolProperty "allowOutsideScroll" False
+            , class "flex-1"
             ]
-            [ Paper.item
+            [ Paper.button
                 [ iconP "alarm"
 
                 --                , class "dropdown-trigger"
@@ -275,7 +267,7 @@ reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
                 , classList
                     [ "secondary-color" => not vm.isReminderActive
                     , "accent-color" => vm.isReminderActive
-                    , "font-body1 flex-auto dropdown-trigger" => True
+                    , "flex-auto dropdown-trigger" => True
                     ]
                 ]
                 [ text vm.time ]

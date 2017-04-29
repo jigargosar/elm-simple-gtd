@@ -198,13 +198,13 @@ reminderMenuButton maybeReminderForm form reminderVM =
             , boolProperty "stopKeyboardEventPropagation" True
             , boolProperty "allowOutsideScroll" False
             ]
-            [ paperIconButton
+            [ Paper.button
                 [ iconP "alarm"
                 , class "dropdown-trigger"
                 , attribute "slot" "dropdown-trigger"
                 , onClickStopPropagation reminderVM.startEditingMsg
                 ]
-                []
+                [ text "reminder" ]
             , div
                 [ class "static dropdown-content"
                 , attribute "slot" "dropdown-content"

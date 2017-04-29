@@ -325,32 +325,35 @@ editView vm evm =
                     , property "keyBindings" Json.Encode.null
                     , boolProperty "stopKeyboardEventPropagation" True
                     , onInput evm.onTodoTextChanged
-                    , onKeyUp evm.onKeyUp
+
+                    --, onKeyUp evm.onKeyUp
                     ]
                     []
                 ]
-            , div [ class "horizontal layout" ]
-                [ Paper.menuButton [ boolProperty "dynamicAlign" True ]
-                    [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
-                        [ text "#"
-                        , text vm.projectName
-                        , icon "arrow-drop-down" []
-                        ]
-                    , Html.node "paper-listbox"
-                        [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-                        (vm.projects .|> createProjectItem # vm)
-                    ]
-                , Paper.menuButton [ boolProperty "dynamicAlign" True ]
-                    [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
-                        [ text "@"
-                        , text vm.contextName
-                        , icon "arrow-drop-down" []
-                        ]
-                    , Html.node "paper-listbox"
-                        [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-                        (vm.contexts .|> createContextItem # vm)
-                    ]
-                ]
+
+            {- , div [ class "horizontal layout" ]
+               [ Paper.menuButton [ boolProperty "dynamicAlign" True ]
+                   [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
+                       [ text "#"
+                       , text vm.projectName
+                       , icon "arrow-drop-down" []
+                       ]
+                   , Html.node "paper-listbox"
+                       [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+                       (vm.projects .|> createProjectItem # vm)
+                   ]
+               , Paper.menuButton [ boolProperty "dynamicAlign" True ]
+                   [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
+                       [ text "@"
+                       , text vm.contextName
+                       , icon "arrow-drop-down" []
+                       ]
+                   , Html.node "paper-listbox"
+                       [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+                       (vm.contexts .|> createContextItem # vm)
+                   ]
+               ]
+            -}
             , defaultOkCancelButtons
             ]
         ]

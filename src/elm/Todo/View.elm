@@ -220,7 +220,7 @@ reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
                 , classList
                     [ "secondary-color" => not vm.isReminderActive
                     , "accent-color" => vm.isReminderActive
-                    , "flex-auto dropdown-trigger" => True
+                    , "dropdown-trigger" => True
                     ]
                 ]
                 [ text vm.time ]

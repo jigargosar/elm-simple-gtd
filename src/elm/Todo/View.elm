@@ -185,13 +185,15 @@ reminderIconButton vm maybeReminderForm =
     --        let
     --            _ = reminderFormPopup reminderVM
     --        in
-    paperIconButton
-        [ iconP "alarm"
-        , class "dropdown-trigger"
-        , attribute "slot" "dropdown-trigger"
-        , onClickStopPropagation vm.onReminderButtonClicked
+    div []
+        [ paperIconButton
+            [ iconP "alarm"
+            , class "dropdown-trigger"
+            , attribute "slot" "dropdown-trigger"
+            , onClickStopPropagation vm.onReminderButtonClicked
+            ]
+            []
         ]
-        []
 
 
 reminderFormPopup reminderVM =

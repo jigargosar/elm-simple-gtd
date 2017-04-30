@@ -342,13 +342,21 @@
                 width: 10rem;
             }
 
+            .menu-button-container > paper-menu-button.reminder{
+                @apply(--layout-flex-none)
+            }
+
             .menu-button-container > paper-menu-button > paper-button{
                 width: 100%;
+
             }
+
 
             .menu-button-container > paper-menu-button > paper-button > *{
                 @apply(--paper-font-common-nowrap);
                 text-transform: none;
+                text-align: left;
+                width: 100%;
             }
 
             /*paper-icon-button.done-True:hover{*/

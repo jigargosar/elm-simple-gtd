@@ -238,10 +238,10 @@ reminderView vm =
         [ boolProperty "opened" vm.isEditing
         , boolProperty "dynamicAlign" True
         , boolProperty "stopKeyboardEventPropagation" True
+        , class "reminder"
         ]
         [ Paper.button
-            [ iconP "alarm"
-            , onClickStopPropagation vm.startEditingMsg
+            [ onClickStopPropagation vm.startEditingMsg
             , classList
                 [ "secondary-color" => not vm.isReminderActive
                 , "accent-color" => vm.isReminderActive
@@ -249,7 +249,8 @@ reminderView vm =
             , attribute "slot" "dropdown-trigger"
             , style [ "text-transform" => "none" ]
             ]
-            [ div [ class "font-nowrap" ]
+            [ icon "alarm" []
+            , div [ class "font-nowrap" ]
                 [ text vm.displayText ]
             ]
         , div

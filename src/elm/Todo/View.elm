@@ -267,21 +267,26 @@ default vm maybeReminderForm reminderForm =
             ]
         ]
 
-reminderView: ReminderViewModel -> Html Msg
+
+reminderView : ReminderViewModel -> Html Msg
 reminderView vm =
-    Paper.menuButton
+    Paper.dropdownMenu
         [ boolProperty "opened" vm.isEditing
         , boolProperty "dynamicAlign" True
         , boolProperty "noOverlap" True
-        , onClickStopPropagation Msg.NoOp
+
+        --        , onClickStopPropagation Msg.NoOp
+        , onClickStopPropagation vm.startEditingMsg
         , boolProperty "stopKeyboardEventPropagation" True
         , boolProperty "allowOutsideScroll" False
         , class "flex-auto"
-        , style [ "min-width" => "0", "max-width" => "10rem" ]
+
+        --        , style [ "min-width" => "0", "max-width" => "10rem" ]
+        , labelA vm.displayText
         ]
         [ Paper.button
             [ iconP "alarm"
-            , attribute "slot" "dropdown-trigger"
+            , attribute "slot" "prefix"
             , onClickStopPropagation vm.startEditingMsg
             , classList
                 [ "secondary-color" => not vm.isReminderActive
@@ -355,16 +360,12 @@ okCancelButtons okMsg cancelMsg =
     div [ class "layout horizontal end-justified full-divider" ]
         [ Paper.button
             [ onClickStopPropagation cancelMsg
-            , class "primary-color"
-
-            --            , boolProperty "noink" True
+            , boolProperty "stopKeyboardEventPropagation" True
             ]
             [ text "Cancel" ]
         , Paper.button
             [ onClickStopPropagation okMsg
-            , class "primary-color"
-
-            --            , boolProperty "noink" True
+            , boolProperty "stopKeyboardEventPropagation" True
             ]
             [ text "Ok" ]
         ]

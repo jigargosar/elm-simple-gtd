@@ -248,7 +248,7 @@ reminderView vm =
         [ boolProperty "opened" vm.isEditing
         , boolProperty "dynamicAlign" True
         , boolProperty "stopKeyboardEventPropagation" True
-        , class "reminder"
+        , class "flex-none"
         ]
         [ Paper.button
             [ onClickStopPropagation vm.startEditingMsg
@@ -259,10 +259,9 @@ reminderView vm =
             , attribute "slot" "dropdown-trigger"
             , style [ "text-transform" => "none" ]
             ]
-            [ div [ class "content" ]
+            [ div [ class "layout horizontal" ]
                 [ icon "alarm" []
-                , div [ class "font-nowrap" ]
-                    [ text vm.displayText ]
+                , div [ class "font-nowrap" ] [ text vm.displayText ]
                 ]
             ]
         , div

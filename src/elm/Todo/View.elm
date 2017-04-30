@@ -279,26 +279,28 @@ reminderView vm =
         , onClickStopPropagation vm.startEditingMsg
         , boolProperty "stopKeyboardEventPropagation" True
         , boolProperty "allowOutsideScroll" False
-        , class "flex-auto"
+        , class "red flex-auto"
 
         --        , style [ "min-width" => "0", "max-width" => "10rem" ]
         , labelA vm.displayText
         ]
-        [ Paper.button
-            [ iconP "alarm"
-            , attribute "slot" "prefix"
-            , onClickStopPropagation vm.startEditingMsg
-            , classList
-                [ "secondary-color" => not vm.isReminderActive
-                , "accent-color" => vm.isReminderActive
-                , "dropdown-trigger" => True
-                ]
-            , style [ "width" => "100%" ]
-            ]
-            [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
-                [ text vm.displayText ]
-            ]
-        , div
+        [ {- Paper.button
+                 [ iconP "alarm"
+                 , attribute "slot" "prefix"
+                 , onClickStopPropagation vm.startEditingMsg
+                 , classList
+                     [ "secondary-color" => not vm.isReminderActive
+                     , "accent-color" => vm.isReminderActive
+                     , "dropdown-trigger" => True
+                     ]
+                 , style [ "width" => "100%" ]
+                 ]
+                 [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
+                     [ text vm.displayText ]
+                 ]
+             ,
+          -}
+          div
             [ class "static dropdown-content"
             , attribute "slot" "dropdown-content"
             ]

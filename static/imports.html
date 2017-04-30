@@ -244,7 +244,26 @@
 
             paper-item {
                 --paper-item-min-height: 40px;
+                --paper-item-focused-before: {
+                    opacity: 0.05;
+                };
             }
+
+            paper-button {
+                color: var(--primary-color);
+            }
+
+            paper-icon-button {
+                color: var(--paper-grey-700);
+                --paper-icon-button-hover: {
+                    color: #000;
+                }
+            }
+            paper-menu-button {
+                padding: 0;
+            }
+
+
 
             .divider {
                 width: 80%;
@@ -258,12 +277,6 @@
             }
 
 
-            paper-item {
-                --paper-item-focused-before: {
-                    opacity: 0.05;
-                };
-            }
-
             paper-listbox.todo-list {
                 padding: 0;
             }
@@ -276,18 +289,6 @@
                 };
             }
 
-            paper-button {
-                color: var(--primary-color);
-            }
-
-
-
-            paper-icon-button {
-                color: var(--paper-grey-700);
-                --paper-icon-button-hover: {
-                    color: #000;
-                }
-            }
 
             paper-icon-button.deleted-True {
                 color: #000;
@@ -307,9 +308,6 @@
             /*color: var(--paper-blue-grey-500);*/
             /*}*/
 
-            paper-menu-button {
-                padding: 0;
-            }
 
             /*app-drawer {*/
             /*--app-drawer-scrim-background: rgba(0, 0, 100, 0.8);*/

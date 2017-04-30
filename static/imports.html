@@ -236,9 +236,6 @@
             /*--paper-badge-background: var(--paper-blue-grey-300)*/
             /*}*/
 
-            paper-listbox.todo-list {
-                padding: 0;
-            }
 
             #main-view {
                 margin: 1rem 1rem 5rem 1rem;
@@ -260,55 +257,29 @@
                 border-top: 1px solid var(--divider-color);
             }
 
-            paper-item.todo-item.editing {
-                /*border-left: 2px solid red;*/
+            paper-listbox.todo-list {
+                padding: 0;
+            }
+
+            paper-item {
+                --paper-item-focused-before: {
+                    opacity: 0.05;
+                };
             }
 
             paper-item.todo-item {
                 --paper-item-selected-weight: normal;
-                /*padding-left:0;*/
-
-                /*--paper-item: {*/
-                    /*border-left: 2px solid transparent;*/
-                /*};*/
 
                 --paper-item-focused-before: {
                     opacity: 0.03;
                 };
-
-                /*--paper-item-focused: {*/
-                    /*border-left: 2px solid var(--primary-color);*/
-                /*};*/
-
             }
 
             paper-button {
                 color: var(--primary-color);
             }
 
-            paper-item:not(.todo-item) {
-                /*--paper-item-focused-before: {*/
-                /*opacity: 0;*/
-                /*};*/
-                /*--paper-item-focused: {*/
-                /*background-color: var(--paper-grey-50);*/
-                /*};*/
 
-                /*--paper-item-selected-weight:normal;*/
-
-                /*--paper-item:{*/
-                /*border-left:2px solid transparent;*/
-                /*};*/
-
-                --paper-item-focused-before: {
-                    opacity: 0.05;
-                };
-
-                /*--paper-item-focused:{*/
-                /*border-left:2px solid var(--primary-color);*/
-                /*};*/
-
-            }
 
             paper-icon-button {
                 color: var(--paper-grey-700);

@@ -170,12 +170,6 @@ default vm maybeReminderForm reminderForm =
                 [ div [ class "font-nowrap flex-auto", style [ "_padding" => "12px 0" ] ] [ text vm.text ]
                 , div [ class "layout horizontal" ]
                     [ doneIconButton vm
-
-                    {- , reminderMenuButton
-                       maybeReminderForm
-                       reminderForm
-                       (createReminderVM reminderForm vm.onReminderButtonClicked)
-                    -}
                     , deleteIconButton vm
                     ]
                 ]
@@ -195,7 +189,6 @@ default vm maybeReminderForm reminderForm =
                     ]
                 , reminderMenuButtonWithTime
                     maybeReminderForm
-                    reminderForm
                     (createReminderVM reminderForm vm.onReminderButtonClicked)
                     (vm)
                 , Paper.menuButton
@@ -239,7 +232,7 @@ default vm maybeReminderForm reminderForm =
         ]
 
 
-reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
+reminderMenuButtonWithTime maybeReminderForm reminderVM vm =
     let
         isEditing =
             Maybe.isJust maybeReminderForm
@@ -277,7 +270,7 @@ reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
                     [ type_ "date"
                     , classList [ "auto-focus" => isEditing ]
                     , labelA "Date"
-                    , value form.date
+                    , value reminderVM.form.date
                     , boolProperty "stopKeyboardEventPropagation" True
                     , onChange reminderVM.onDateChanged
                     ]
@@ -285,7 +278,7 @@ reminderMenuButtonWithTime maybeReminderForm form reminderVM vm =
                 , Paper.input
                     [ type_ "time"
                     , labelA "Time"
-                    , value form.time
+                    , value reminderVM.form.time
                     , boolProperty "stopKeyboardEventPropagation" True
                     , onChange reminderVM.onTimeChanged
                     ]

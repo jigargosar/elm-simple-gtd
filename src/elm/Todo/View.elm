@@ -226,7 +226,7 @@ default vm maybeReminderForm reminderForm =
                         ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
-                , reminderView vm
+                , reminderView vm.reminder
                 , Paper.menuButton
                     [ style [ "min-width" => "0", "max-width" => "10rem" ]
                     , class "flex-auto"
@@ -269,59 +269,55 @@ default vm maybeReminderForm reminderForm =
 
 
 reminderView vm =
-    let
-        reminderVM =
-            vm.reminder
-    in
-        Paper.menuButton
-            [ boolProperty "opened" reminderVM.isEditing
-            , boolProperty "dynamicAlign" True
-            , boolProperty "noOverlap" True
-            , onClickStopPropagation Msg.NoOp
-            , boolProperty "stopKeyboardEventPropagation" True
-            , boolProperty "allowOutsideScroll" False
-            , class "flex-auto"
-            , style [ "min-width" => "0", "max-width" => "10rem" ]
+    Paper.menuButton
+        [ boolProperty "opened" vm.isEditing
+        , boolProperty "dynamicAlign" True
+        , boolProperty "noOverlap" True
+        , onClickStopPropagation Msg.NoOp
+        , boolProperty "stopKeyboardEventPropagation" True
+        , boolProperty "allowOutsideScroll" False
+        , class "flex-auto"
+        , style [ "min-width" => "0", "max-width" => "10rem" ]
+        ]
+        [ Paper.button
+            [ iconP "alarm"
+            , attribute "slot" "dropdown-trigger"
+            , onClickStopPropagation vm.startEditingMsg
+            , classList
+                [ "secondary-color" => not vm.isReminderActive
+                , "accent-color" => vm.isReminderActive
+                , "dropdown-trigger" => True
+                ]
+            , style [ "width" => "100%" ]
             ]
-            [ Paper.button
-                [ iconP "alarm"
-                , attribute "slot" "dropdown-trigger"
-                , onClickStopPropagation reminderVM.startEditingMsg
-                , classList
-                    [ "secondary-color" => not vm.isReminderActive
-                    , "accent-color" => vm.isReminderActive
-                    , "dropdown-trigger" => True
-                    ]
-                , style [ "width" => "100%" ]
-                ]
-                [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
-                    [ text reminderVM.displayText ]
-                ]
-            , div
-                [ class "static dropdown-content"
-                , attribute "slot" "dropdown-content"
-                ]
-                [ div [ class "font-subhead" ] [ text "Select date and time" ]
-                , Paper.input
-                    [ type_ "date"
-                    , classList [ "auto-focus" => reminderVM.isEditing ]
-                    , labelA "Date"
-                    , value reminderVM.date
-                    , boolProperty "stopKeyboardEventPropagation" True
-                    , onChange reminderVM.onDateChanged
-                    ]
-                    []
-                , Paper.input
-                    [ type_ "time"
-                    , labelA "Time"
-                    , value reminderVM.time
-                    , boolProperty "stopKeyboardEventPropagation" True
-                    , onChange reminderVM.onTimeChanged
-                    ]
-                    []
-                , defaultOkCancelButtons
-                ]
+            [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
+                [ text vm.displayText ]
             ]
+        , div
+            [ class "static dropdown-content"
+            , attribute "slot" "dropdown-content"
+            ]
+            [ div [ class "font-subhead" ] [ text "Select date and time" ]
+            , Paper.input
+                [ type_ "date"
+                , classList [ "auto-focus" => vm.isEditing ]
+                , labelA "Date"
+                , value vm.date
+                , boolProperty "stopKeyboardEventPropagation" True
+                , onChange vm.onDateChanged
+                ]
+                []
+            , Paper.input
+                [ type_ "time"
+                , labelA "Time"
+                , value vm.time
+                , boolProperty "stopKeyboardEventPropagation" True
+                , onChange vm.onTimeChanged
+                ]
+                []
+            , defaultOkCancelButtons
+            ]
+        ]
 
 
 onChange : (String -> msg) -> Attribute msg

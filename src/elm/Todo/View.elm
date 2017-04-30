@@ -252,10 +252,8 @@ reminderView vm =
     Paper.menuButton
         [ boolProperty "opened" vm.isEditing
         , boolProperty "dynamicAlign" True
-        , boolProperty "noOverlap" True
         , onClickStopPropagation Msg.NoOp
         , boolProperty "stopKeyboardEventPropagation" True
-        , boolProperty "allowOutsideScroll" False
         ]
         [ Paper.button
             [ iconP "alarm"

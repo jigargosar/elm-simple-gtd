@@ -180,7 +180,20 @@ default vm maybeReminderForm reminderForm =
                     ]
                 ]
             , div [ class "menu-button-container layout horizontal center", attribute "secondary" "true" ]
-                [ reminderMenuButtonWithTime
+                [ Paper.dropdownMenu
+                    [ style [ "min-width" => "0", "max-width" => "10rem" ]
+                    , class "flex-auto"
+                    , boolProperty "dynamicAlign" True
+                    , onClickStopPropagation Msg.NoOp
+                    ]
+                    [ Html.node "paper-listbox"
+                        [ class "dropdown-content"
+                        , attribute "slot" "dropdown-content"
+                        , intProperty "selected" vm.selectedProjectIndex
+                        ]
+                        (vm.projects .|> createProjectItem # vm)
+                    ]
+                , reminderMenuButtonWithTime
                     maybeReminderForm
                     reminderForm
                     (createReminderVM reminderForm vm.onReminderButtonClicked)
@@ -201,19 +214,6 @@ default vm maybeReminderForm reminderForm =
                         ]
                     , Html.node "paper-listbox"
                         [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-                        (vm.projects .|> createProjectItem # vm)
-                    ]
-                , Paper.dropdownMenu
-                    [ --                    style [ "min-width" => "0", "max-width" => "10rem" ]
-                      class "flex-auto"
-                    , boolProperty "dynamicAlign" True
-                    , onClickStopPropagation Msg.NoOp
-                    ]
-                    [ Html.node "paper-listbox"
-                        [ class "dropdown-content"
-                        , attribute "slot" "dropdown-content"
-                        , intProperty "selected" vm.selectedProjectIndex
-                        ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
                 , Paper.menuButton

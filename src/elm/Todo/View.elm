@@ -267,7 +267,7 @@ default vm maybeReminderForm reminderForm =
             ]
         ]
 
-
+reminderView: ReminderViewModel -> Html Msg
 reminderView vm =
     Paper.menuButton
         [ boolProperty "opened" vm.isEditing

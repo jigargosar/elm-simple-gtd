@@ -258,7 +258,7 @@ reminderView vm =
                 ]
             , attribute "slot" "dropdown-trigger"
             ]
-            [ div [ class "layout horizontal" ]
+            [ div [ class "layout horizontal text-transform-none font-nowrap" ]
                 [ icon "alarm" []
                 , div [ class "font-nowrap" ] [ text vm.displayText ]
                 ]

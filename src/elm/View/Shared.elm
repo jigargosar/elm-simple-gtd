@@ -7,13 +7,14 @@ import EditMode exposing (EditMode, TodoForm)
 import Entity.ViewModel
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
-import Html.Attributes.Extra exposing (intProperty)
+import Html.Attributes.Extra exposing (boolProperty, intProperty)
 import Html.Events exposing (onClick)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Encode
 import Model
+import Msg
 import Polymer.Attributes exposing (icon)
-import Polymer.Paper exposing (badge)
+import Polymer.Paper as Paper exposing (badge)
 import Set exposing (Set)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -173,7 +174,7 @@ expand =
 
 
 sharedIconButton iconName onClickHandler =
-    Polymer.Paper.iconButton [ icon iconName, onClickStopPropagation onClickHandler ] []
+    Paper.iconButton [ icon iconName, onClickStopPropagation onClickHandler ] []
 
 
 startIconButton =
@@ -219,3 +220,22 @@ hideOnHover bool children =
          else
             []
         )
+
+
+defaultOkCancelButtons =
+    okCancelButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode
+
+
+okCancelButtons okMsg cancelMsg =
+    div [ class "layout horizontal end-justified full-divider" ]
+        [ Paper.button
+            [ onClickStopPropagation cancelMsg
+            , boolProperty "stopKeyboardEventPropagation" True
+            ]
+            [ text "Cancel" ]
+        , Paper.button
+            [ onClickStopPropagation okMsg
+            , boolProperty "stopKeyboardEventPropagation" True
+            ]
+            [ text "Ok" ]
+        ]

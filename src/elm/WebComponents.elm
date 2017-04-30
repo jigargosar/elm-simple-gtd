@@ -86,3 +86,8 @@ testDialog =
         --        , class "full-view"
         ]
         [ h2 [] [ text "Big Header" ] ]
+
+
+onChange : (String -> msg) -> Attribute msg
+onChange tagger =
+    on "change" (Json.Decode.map tagger targetValue)

@@ -35,7 +35,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper as Paper
-import View.Shared exposing (SharedViewModel, hideOnHover)
+import View.Shared exposing (SharedViewModel, defaultOkCancelButtons, hideOnHover)
 import WebComponents exposing (..)
 
 
@@ -308,11 +308,6 @@ reminderView vm =
         ]
 
 
-onChange : (String -> msg) -> Attribute msg
-onChange tagger =
-    on "change" (Json.Decode.map tagger targetValue)
-
-
 editView : TodoViewModel -> EditTodoViewModel -> Html Msg
 editView vm evm =
     Paper.item
@@ -332,25 +327,6 @@ editView vm evm =
                 ]
             , defaultOkCancelButtons
             ]
-        ]
-
-
-defaultOkCancelButtons =
-    okCancelButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode
-
-
-okCancelButtons okMsg cancelMsg =
-    div [ class "layout horizontal end-justified full-divider" ]
-        [ Paper.button
-            [ onClickStopPropagation cancelMsg
-            , boolProperty "stopKeyboardEventPropagation" True
-            ]
-            [ text "Cancel" ]
-        , Paper.button
-            [ onClickStopPropagation okMsg
-            , boolProperty "stopKeyboardEventPropagation" True
-            ]
-            [ text "Ok" ]
         ]
 
 

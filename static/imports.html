@@ -29,6 +29,7 @@
 <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="bower_components/paper-dropdown-menu/paper-dropdown-menu-light.html">
 <link rel="import" href="bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="bower_components/paper-material/paper-material.html">
 
@@ -58,13 +59,32 @@
                     display: none;
                 };
 
+                --ss:{
+                    --paper-input-container-input-color:red;
+                    --paper-input-container-label:{
+                        color:red;
+                    }
+                }
+
             }
 
 
-            .red_{
-                --paper-input-container-input-color:red;
+            paper-dropdown-menu.red_ {
+                /*@apply(--ss);*/
+                --paper-dropdown-menu-input:{
+                    color:red;
+                    height:100px;
+                    --paper-input-container-input-color:red;
+                    --paper-input-container-label:{
+                        color:red;
+                    }
+                };
+
             }
             .blue_{
+                --paper-input-container-label:{
+                    color:red;
+                };
                 --paper-input-container-input-color:blue;
             }
 

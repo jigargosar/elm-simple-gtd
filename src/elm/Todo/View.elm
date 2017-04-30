@@ -213,20 +213,22 @@ default vm maybeReminderForm reminderForm =
                     ]
                 ]
             , div [ class "menu-button-container layout horizontal center", attribute "secondary" "true" ]
-                [ Paper.dropdownMenu
-                    [ style [ "min-width" => "0", "max-width" => "10rem" ]
-                    , class "flex-auto"
-                    , boolProperty "dynamicAlign" True
-                    , onClickStopPropagation Msg.NoOp
-                    ]
-                    [ Html.node "paper-listbox"
-                        [ class "dropdown-content"
-                        , attribute "slot" "dropdown-content"
-                        , intProperty "selected" vm.selectedProjectIndex
-                        ]
-                        (vm.projects .|> createProjectItem # vm)
-                    ]
-                , reminderView vm.reminder
+                [ {- Paper.dropdownMenu
+                         [ style [ "min-width" => "0", "max-width" => "10rem" ]
+                         , class "flex-auto"
+                         , boolProperty "dynamicAlign" True
+                         , onClickStopPropagation Msg.NoOp
+                         ]
+                         [ Html.node "paper-listbox"
+                             [ class "dropdown-content"
+                             , attribute "slot" "dropdown-content"
+                             , intProperty "selected" vm.selectedProjectIndex
+                             ]
+                             (vm.projects .|> createProjectItem # vm)
+                         ]
+                     ,
+                  -}
+                  reminderView vm.reminder
                 , Paper.menuButton
                     [ style [ "min-width" => "0", "max-width" => "10rem" ]
                     , class "flex-auto"
@@ -270,37 +272,31 @@ default vm maybeReminderForm reminderForm =
 
 reminderView : ReminderViewModel -> Html Msg
 reminderView vm =
-    Paper.dropdownMenu
+    Paper.menuButton
         [ boolProperty "opened" vm.isEditing
         , boolProperty "dynamicAlign" True
         , boolProperty "noOverlap" True
-
-        --        , onClickStopPropagation Msg.NoOp
-        , onClickStopPropagation vm.startEditingMsg
+        , onClickStopPropagation Msg.NoOp
         , boolProperty "stopKeyboardEventPropagation" True
         , boolProperty "allowOutsideScroll" False
-        , class "red flex-auto"
-
-        --        , style [ "min-width" => "0", "max-width" => "10rem" ]
-        , labelA vm.displayText
+        , class "flex-auto"
+        , style [ "min-width" => "0", "max-width" => "10rem" ]
         ]
-        [ {- Paper.button
-                 [ iconP "alarm"
-                 , attribute "slot" "prefix"
-                 , onClickStopPropagation vm.startEditingMsg
-                 , classList
-                     [ "secondary-color" => not vm.isReminderActive
-                     , "accent-color" => vm.isReminderActive
-                     , "dropdown-trigger" => True
-                     ]
-                 , style [ "width" => "100%" ]
-                 ]
-                 [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
-                     [ text vm.displayText ]
-                 ]
-             ,
-          -}
-          div
+        [ Paper.button
+            [ iconP "alarm"
+            , onClickStopPropagation vm.startEditingMsg
+            , classList
+                [ "secondary-color" => not vm.isReminderActive
+                , "accent-color" => vm.isReminderActive
+                , "dropdown-trigger" => True
+                ]
+            , attribute "slot" "dropdown-trigger"
+            , style [ "width" => "100%" ]
+            ]
+            [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
+                [ text vm.displayText ]
+            ]
+        , div
             [ class "static dropdown-content"
             , attribute "slot" "dropdown-content"
             ]

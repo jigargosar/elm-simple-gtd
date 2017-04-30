@@ -212,7 +212,7 @@ default vm maybeReminderForm reminderForm =
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "layout horizontal", attribute "secondary" "" ]
+            , div [ class "prj-ctx-container layout horizontal", attribute "secondary" "" ]
                 [ reminderView vm.reminder
                 , div [ class "layout horizontal" ]
                     [ projectView vm
@@ -226,7 +226,7 @@ default vm maybeReminderForm reminderForm =
 contextView vm =
     Paper.menuButton [ boolProperty "dynamicAlign" True ]
         [ Paper.button [ attribute "slot" "dropdown-trigger" ]
-            [ div [] [ text vm.contextName ] ]
+            [ div [ class "content" ] [ text vm.contextName ] ]
         , Paper.listbox [ attribute "slot" "dropdown-content" ]
             (vm.contexts .|> createContextItem # vm)
         ]
@@ -235,7 +235,7 @@ contextView vm =
 projectView vm =
     Paper.menuButton [ boolProperty "dynamicAlign" True ]
         [ Paper.button [ attribute "slot" "dropdown-trigger" ]
-            [ div [] [ text vm.projectName ] ]
+            [ div [ class "content" ] [ text vm.projectName ] ]
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
             (vm.projects .|> createProjectItem # vm)

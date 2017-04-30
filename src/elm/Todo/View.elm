@@ -216,7 +216,6 @@ default vm maybeReminderForm reminderForm =
                 [ reminderView vm.reminder
                 , Paper.menuButton
                     [ boolProperty "dynamicAlign" True
-                    , onClickStopPropagation Msg.NoOp
                     ]
                     [ Paper.button
                         [ attribute "slot" "dropdown-trigger"
@@ -228,7 +227,6 @@ default vm maybeReminderForm reminderForm =
                     ]
                 , Paper.menuButton
                     [ boolProperty "dynamicAlign" True
-                    , onClickStopPropagation Msg.NoOp
                     ]
                     [ Paper.button [ attribute "slot" "dropdown-trigger" ]
                         [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]

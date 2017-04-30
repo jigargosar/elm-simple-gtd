@@ -214,7 +214,7 @@ default vm maybeReminderForm reminderForm =
                 ]
             , div [ class " layout horizontal", attribute "secondary" "" ]
                 [ reminderView vm.reminder
-                , div [ class "prj-ctx-container layout horizontal align-center" ]
+                , div [ class "prj-ctx-container layout horizontal align-center flex-auto" ]
                     [ projectView vm
                     , contextView vm
                     ]

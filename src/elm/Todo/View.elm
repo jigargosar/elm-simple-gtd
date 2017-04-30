@@ -214,23 +214,16 @@ default vm maybeReminderForm reminderForm =
                 ]
             , div [ class "menu-button-container", attribute "secondary" "" ]
                 [ reminderView vm.reminder
-                , Paper.menuButton
-                    [ boolProperty "dynamicAlign" True
-                    ]
-                    [ Paper.button
-                        [ attribute "slot" "dropdown-trigger"
-                        ]
+                , Paper.menuButton [ boolProperty "dynamicAlign" True ]
+                    [ Paper.button [ attribute "slot" "dropdown-trigger" ]
                         [ div [] [ text vm.projectName ] ]
                     , Paper.listbox
                         [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
-                , Paper.menuButton
-                    [ boolProperty "dynamicAlign" True
-                    ]
+                , Paper.menuButton [ boolProperty "dynamicAlign" True ]
                     [ Paper.button [ attribute "slot" "dropdown-trigger" ]
-                        [ div [] [ text vm.contextName ]
-                        ]
+                        [ div [] [ text vm.contextName ] ]
                     , Paper.listbox [ attribute "slot" "dropdown-content" ]
                         (vm.contexts .|> createContextItem # vm)
                     ]

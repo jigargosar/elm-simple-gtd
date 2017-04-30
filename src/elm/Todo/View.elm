@@ -212,7 +212,7 @@ default vm maybeReminderForm reminderForm =
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "menu-button-container" ]
+            , div [ class "menu-button-container", attribute "secondary" "" ]
                 [ reminderView vm.reminder
                 , Paper.menuButton
                     [ boolProperty "dynamicAlign" True
@@ -265,8 +265,9 @@ reminderView vm =
                 , "accent-color" => vm.isReminderActive
                 ]
             , attribute "slot" "dropdown-trigger"
+            , style [ "text-transform" => "none" ]
             ]
-            [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
+            [ div [ class "font-nowrap" ]
                 [ text vm.displayText ]
             ]
         , div

@@ -206,7 +206,7 @@ default vm maybeReminderForm reminderForm =
         ]
         [ Paper.itemBody []
             [ div [ class "layout horizontal center justified has-hover-elements" ]
-                [ div [ class "font-nowrap flex-auto", style [ "_padding" => "12px 0" ] ] [ text vm.text ]
+                [ div [ class "font-nowrap flex-auto", onClick vm.startEditingMsg ] [ text vm.text ]
                 , div [ class "layout horizontal" ]
                     [ doneIconButton vm
                     , deleteIconButton vm
@@ -221,10 +221,8 @@ default vm maybeReminderForm reminderForm =
                     [ Paper.button
                         [ attribute "slot" "dropdown-trigger"
                         ]
-                        [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
-                            [ text vm.projectName ]
-                        ]
-                    , Html.node "paper-listbox"
+                        [ div [] [ text vm.projectName ] ]
+                    , Paper.listbox
                         [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
@@ -232,14 +230,11 @@ default vm maybeReminderForm reminderForm =
                     [ boolProperty "dynamicAlign" True
                     , onClickStopPropagation Msg.NoOp
                     ]
-                    [ Paper.button
-                        [ attribute "slot" "dropdown-trigger"
-                        ]
+                    [ Paper.button [ attribute "slot" "dropdown-trigger" ]
                         [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
                             [ text vm.contextName ]
                         ]
-                    , Html.node "paper-listbox"
-                        [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+                    , Paper.listbox [ attribute "slot" "dropdown-content" ]
                         (vm.contexts .|> createContextItem # vm)
                     ]
                 ]

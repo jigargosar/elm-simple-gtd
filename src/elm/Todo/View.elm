@@ -212,10 +212,10 @@ default vm maybeReminderForm reminderForm =
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "menu-button-container layout horizontal center", attribute "secondary" "true" ]
+            , div [ class "menu-button-container layout horizontal center", attribute "secondary" "" ]
                 [ reminderView vm.reminder
                 , Paper.menuButton
-                    [ style [ "min-width" => "0", "max-width" => "10rem" ]
+                    [ style [ "min-width" => "0", "width" => "10rem" ]
                     , class "flex-auto"
                     , boolProperty "dynamicAlign" True
                     , onClickStopPropagation Msg.NoOp
@@ -233,7 +233,7 @@ default vm maybeReminderForm reminderForm =
                         (vm.projects .|> createProjectItem # vm)
                     ]
                 , Paper.menuButton
-                    [ style [ "min-width" => "0", "max-width" => "10rem" ]
+                    [ style [ "min-width" => "0", "width" => "10rem" ]
                     , class "flex-auto"
                     , boolProperty "dynamicAlign" True
                     , onClickStopPropagation Msg.NoOp
@@ -265,7 +265,7 @@ reminderView vm =
         , boolProperty "stopKeyboardEventPropagation" True
         , boolProperty "allowOutsideScroll" False
         , class "flex-auto"
-        , style [ "min-width" => "0", "max-width" => "10rem" ]
+        , style [ "min-width" => "0", "width" => "10rem" ]
         ]
         [ Paper.button
             [ iconP "alarm"

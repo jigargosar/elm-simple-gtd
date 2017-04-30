@@ -212,23 +212,31 @@ default vm maybeReminderForm reminderForm =
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "menu-button-container", attribute "secondary" "" ]
+            , div [ class "layout horizontal", attribute "secondary" "" ]
                 [ reminderView vm.reminder
-                , Paper.menuButton [ boolProperty "dynamicAlign" True ]
-                    [ Paper.button [ attribute "slot" "dropdown-trigger" ]
-                        [ div [] [ text vm.projectName ] ]
-                    , Paper.listbox
-                        [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-                        (vm.projects .|> createProjectItem # vm)
-                    ]
-                , Paper.menuButton [ boolProperty "dynamicAlign" True ]
-                    [ Paper.button [ attribute "slot" "dropdown-trigger" ]
-                        [ div [] [ text vm.contextName ] ]
-                    , Paper.listbox [ attribute "slot" "dropdown-content" ]
-                        (vm.contexts .|> createContextItem # vm)
-                    ]
+                , projectView vm
+                , contextView vm
                 ]
             ]
+        ]
+
+
+contextView vm =
+    Paper.menuButton [ boolProperty "dynamicAlign" True ]
+        [ Paper.button [ attribute "slot" "dropdown-trigger" ]
+            [ div [] [ text vm.contextName ] ]
+        , Paper.listbox [ attribute "slot" "dropdown-content" ]
+            (vm.contexts .|> createContextItem # vm)
+        ]
+
+
+projectView vm =
+    Paper.menuButton [ boolProperty "dynamicAlign" True ]
+        [ Paper.button [ attribute "slot" "dropdown-trigger" ]
+            [ div [] [ text vm.projectName ] ]
+        , Paper.listbox
+            [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+            (vm.projects .|> createProjectItem # vm)
         ]
 
 
@@ -249,9 +257,11 @@ reminderView vm =
             , attribute "slot" "dropdown-trigger"
             , style [ "text-transform" => "none" ]
             ]
-            [ icon "alarm" []
-            , div [ class "font-nowrap" ]
-                [ text vm.displayText ]
+            [ div [ class "content" ]
+                [ icon "alarm" []
+                , div [ class "font-nowrap" ]
+                    [ text vm.displayText ]
+                ]
             ]
         , div
             [ class "static dropdown-content"

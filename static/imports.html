@@ -331,27 +331,24 @@
             }
 
 
-            .menu-button-container{
-                @apply(--layout-horizontal);
-            }
-
-            .todo-item .line2 > paper-menu-button {
+            paper-menu-button {
                 @apply(--layout-flex-auto);
                 min-width: 0;
                 width: 10rem;
             }
 
-            .todo-item .line2> paper-menu-button.reminder{
-                @apply(--layout-flex-none)
+            .todo-item paper-menu-button.reminder{
+                @apply(--layout-flex-none);
+                width: 15rem;
             }
 
-            .todo-item .line2> paper-menu-button > paper-button{
+            paper-menu-button > paper-button{
                 width: 100%;
-
             }
 
 
-            .todo-item .line2> paper-menu-button > paper-button > *{
+            paper-menu-button > paper-button > .content{
+                @apply(--layout-horizontal);
                 @apply(--paper-font-common-nowrap);
                 text-transform: none;
                 text-align: left;

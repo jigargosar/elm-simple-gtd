@@ -229,8 +229,7 @@ default vm maybeReminderForm reminderForm =
                     [ boolProperty "dynamicAlign" True
                     ]
                     [ Paper.button [ attribute "slot" "dropdown-trigger" ]
-                        [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
-                            [ text vm.contextName ]
+                        [ div [] [ text vm.contextName ]
                         ]
                     , Paper.listbox [ attribute "slot" "dropdown-content" ]
                         (vm.contexts .|> createContextItem # vm)

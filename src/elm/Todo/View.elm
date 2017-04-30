@@ -170,7 +170,7 @@ default vm maybeReminderForm reminderForm =
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "layout horizontal center", attribute "secondary" "true" ]
+            , div [ class "menu-button-container layout horizontal center", attribute "secondary" "true" ]
                 [ reminderMenuButtonWithTime
                     maybeReminderForm
                     reminderForm

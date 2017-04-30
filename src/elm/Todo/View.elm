@@ -14,6 +14,7 @@ import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onCl
 import Json.Decode
 import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
+import List.Extra
 import Maybe.Extra as Maybe
 import Model.Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
 import Msg exposing (Msg)
@@ -91,6 +92,7 @@ type alias TodoViewModel =
     , isDeleted : Bool
     , isSelected : Bool
     , projectName : Project.Name
+    , selectedProjectIndex : Int
     , contextName : Context.Name
     , onCheckBoxClicked : Msg
     , setContextMsg : Context.Model -> Msg
@@ -106,20 +108,27 @@ type alias TodoViewModel =
     }
 
 
+createTodoViewModel : SharedViewModel -> Todo.Model -> TodoViewModel
 createTodoViewModel vc todo =
     let
         todoId =
             Document.getId todo
+
+        projects =
+            vc.activeProjects
+
+        projectName =
+            Todo.getProjectId todo
+                |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
+                ?= "<No Project>"
     in
         { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo
         , time = Todo.getMaybeTime todo ?|> Ext.Time.formatTime ?= "Someday"
         , text = Todo.getText todo
         , isSelected = Set.member todoId vc.selection
-        , projectName =
-            Todo.getProjectId todo
-                |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
-                ?= "<No Project>"
+        , projectName = projectName
+        , selectedProjectIndex = projects |> List.Extra.findIndex (Project.nameEquals projectName) ?= 0
         , contextName =
             Todo.getContextId todo
                 |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
@@ -192,6 +201,19 @@ default vm maybeReminderForm reminderForm =
                         ]
                     , Html.node "paper-listbox"
                         [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+                        (vm.projects .|> createProjectItem # vm)
+                    ]
+                , Paper.dropdownMenu
+                    [ --                    style [ "min-width" => "0", "max-width" => "10rem" ]
+                      class "flex-auto"
+                    , boolProperty "dynamicAlign" True
+                    , onClickStopPropagation Msg.NoOp
+                    ]
+                    [ Html.node "paper-listbox"
+                        [ class "dropdown-content"
+                        , attribute "slot" "dropdown-content"
+                        , intProperty "selected" vm.selectedProjectIndex
+                        ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
                 , Paper.menuButton

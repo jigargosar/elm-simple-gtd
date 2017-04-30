@@ -214,8 +214,10 @@ default vm maybeReminderForm reminderForm =
                 ]
             , div [ class "layout horizontal", attribute "secondary" "" ]
                 [ reminderView vm.reminder
-                , projectView vm
-                , contextView vm
+                , div [ class "layout horizontal" ]
+                    [ projectView vm
+                    , contextView vm
+                    ]
                 ]
             ]
         ]

@@ -212,9 +212,9 @@ default vm maybeReminderForm reminderForm =
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "prj-ctx-container layout horizontal", attribute "secondary" "" ]
+            , div [ class " layout horizontal", attribute "secondary" "" ]
                 [ reminderView vm.reminder
-                , div [ class "layout horizontal" ]
+                , div [ class "prj-ctx-container layout horizontal align-center" ]
                     [ projectView vm
                     , contextView vm
                     ]

@@ -213,22 +213,7 @@ default vm maybeReminderForm reminderForm =
                     ]
                 ]
             , div [ class "menu-button-container layout horizontal center", attribute "secondary" "true" ]
-                [ {- Paper.dropdownMenu
-                         [ style [ "min-width" => "0", "max-width" => "10rem" ]
-                         , class "flex-auto"
-                         , boolProperty "dynamicAlign" True
-                         , onClickStopPropagation Msg.NoOp
-                         ]
-                         [ Html.node "paper-listbox"
-                             [ class "dropdown-content"
-                             , attribute "slot" "dropdown-content"
-                             , intProperty "selected" vm.selectedProjectIndex
-                             ]
-                             (vm.projects .|> createProjectItem # vm)
-                         ]
-                     ,
-                  -}
-                  reminderView vm.reminder
+                [ reminderView vm.reminder
                 , Paper.menuButton
                     [ style [ "min-width" => "0", "max-width" => "10rem" ]
                     , class "flex-auto"

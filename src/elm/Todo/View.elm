@@ -105,6 +105,19 @@ type alias TodoViewModel =
     , contexts : List Context.Model
     , projects : List Project.Model
     , onReminderButtonClicked : Msg
+    , reminder : ReminderViewModel
+    }
+
+
+type alias ReminderViewModel =
+    { isEditing : Bool
+    , date : String
+    , time : String
+    , displayText : String
+    , isReminderActive : Bool
+    , onDateChanged : String -> Msg
+    , onTimeChanged : String -> Msg
+    , startEditingMsg : Msg
     }
 
 
@@ -121,6 +134,31 @@ createTodoViewModel vc todo =
             Todo.getProjectId todo
                 |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
                 ?= "<No Project>"
+
+        createReminderViewModel : ReminderViewModel
+        createReminderViewModel =
+            let
+                form =
+                    vc.getTodoReminderForm todo
+
+                updateReminderForm =
+                    Msg.UpdateReminderForm form
+
+                maybeReminderForm =
+                    vc.getMaybeTodoReminderFormForTodo todo
+
+                isEditing =
+                    Maybe.isJust maybeReminderForm
+            in
+                { isEditing = isEditing
+                , date = form.date
+                , time = form.time
+                , displayText = Todo.getMaybeTime todo ?|> Ext.Time.formatTime ?= "Someday"
+                , isReminderActive = Todo.isReminderActive todo
+                , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
+                , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
+                , startEditingMsg = Msg.StartEditingReminder todo
+                }
     in
         { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo
@@ -144,6 +182,7 @@ createTodoViewModel vc todo =
         , contexts = vc.activeContexts
         , projects = vc.activeProjects
         , onReminderButtonClicked = Msg.StartEditingReminder todo
+        , reminder = createReminderViewModel
         }
 
 
@@ -187,10 +226,7 @@ default vm maybeReminderForm reminderForm =
                         ]
                         (vm.projects .|> createProjectItem # vm)
                     ]
-                , reminderMenuButtonWithTime
-                    maybeReminderForm
-                    (createReminderVM reminderForm vm.onReminderButtonClicked)
-                    (vm)
+                , reminderView vm
                 , Paper.menuButton
                     [ style [ "min-width" => "0", "max-width" => "10rem" ]
                     , class "flex-auto"
@@ -232,13 +268,13 @@ default vm maybeReminderForm reminderForm =
         ]
 
 
-reminderMenuButtonWithTime maybeReminderForm reminderVM vm =
+reminderView vm =
     let
-        isEditing =
-            Maybe.isJust maybeReminderForm
+        reminderVM =
+            vm.reminder
     in
         Paper.menuButton
-            [ boolProperty "opened" isEditing
+            [ boolProperty "opened" reminderVM.isEditing
             , boolProperty "dynamicAlign" True
             , boolProperty "noOverlap" True
             , onClickStopPropagation Msg.NoOp
@@ -259,7 +295,7 @@ reminderMenuButtonWithTime maybeReminderForm reminderVM vm =
                 , style [ "width" => "100%" ]
                 ]
                 [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
-                    [ text vm.time ]
+                    [ text reminderVM.displayText ]
                 ]
             , div
                 [ class "static dropdown-content"
@@ -268,9 +304,9 @@ reminderMenuButtonWithTime maybeReminderForm reminderVM vm =
                 [ div [ class "font-subhead" ] [ text "Select date and time" ]
                 , Paper.input
                     [ type_ "date"
-                    , classList [ "auto-focus" => isEditing ]
+                    , classList [ "auto-focus" => reminderVM.isEditing ]
                     , labelA "Date"
-                    , value reminderVM.form.date
+                    , value reminderVM.date
                     , boolProperty "stopKeyboardEventPropagation" True
                     , onChange reminderVM.onDateChanged
                     ]
@@ -278,7 +314,7 @@ reminderMenuButtonWithTime maybeReminderForm reminderVM vm =
                 , Paper.input
                     [ type_ "time"
                     , labelA "Time"
-                    , value reminderVM.form.time
+                    , value reminderVM.time
                     , boolProperty "stopKeyboardEventPropagation" True
                     , onChange reminderVM.onTimeChanged
                     ]
@@ -307,35 +343,9 @@ editView vm evm =
                     , property "keyBindings" Json.Encode.null
                     , boolProperty "stopKeyboardEventPropagation" True
                     , onInput evm.onTodoTextChanged
-
-                    --, onKeyUp evm.onKeyUp
                     ]
                     []
                 ]
-
-            {- , div [ class "horizontal layout" ]
-               [ Paper.menuButton [ boolProperty "dynamicAlign" True ]
-                   [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
-                       [ text "#"
-                       , text vm.projectName
-                       , icon "arrow-drop-down" []
-                       ]
-                   , Html.node "paper-listbox"
-                       [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-                       (vm.projects .|> createProjectItem # vm)
-                   ]
-               , Paper.menuButton [ boolProperty "dynamicAlign" True ]
-                   [ Paper.button [ class "dropdown-trigger", attribute "slot" "dropdown-trigger" ]
-                       [ text "@"
-                       , text vm.contextName
-                       , icon "arrow-drop-down" []
-                       ]
-                   , Html.node "paper-listbox"
-                       [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-                       (vm.contexts .|> createContextItem # vm)
-                   ]
-               ]
-            -}
             , defaultOkCancelButtons
             ]
         ]
@@ -396,50 +406,3 @@ doneIconButton vm =
 
 deleteIconButton vm =
     View.Shared.trashButton vm.onDeleteClicked
-
-
-reminderMenuButton maybeReminderForm form reminderVM =
-    let
-        isEditing =
-            Maybe.isJust maybeReminderForm
-    in
-        Paper.menuButton
-            [ boolProperty "opened" isEditing
-            , boolProperty "dynamicAlign" True
-            , boolProperty "noOverlap" True
-            , onClickStopPropagation Msg.NoOp
-            , boolProperty "stopKeyboardEventPropagation" True
-            , boolProperty "allowOutsideScroll" False
-            ]
-            [ Paper.iconButton
-                [ iconP "alarm"
-                , class "dropdown-trigger"
-                , attribute "slot" "dropdown-trigger"
-                , onClickStopPropagation reminderVM.startEditingMsg
-                ]
-                [ text "reminder" ]
-            , div
-                [ class "static dropdown-content"
-                , attribute "slot" "dropdown-content"
-                ]
-                [ div [ class "font-subhead" ] [ text "Select date and time" ]
-                , Paper.input
-                    [ type_ "date"
-                    , classList [ "auto-focus" => isEditing ]
-                    , labelA "Date"
-                    , value form.date
-                    , boolProperty "stopKeyboardEventPropagation" True
-                    , onChange reminderVM.onDateChanged
-                    ]
-                    []
-                , Paper.input
-                    [ type_ "time"
-                    , labelA "Time"
-                    , value form.time
-                    , boolProperty "stopKeyboardEventPropagation" True
-                    , onChange reminderVM.onTimeChanged
-                    ]
-                    []
-                , defaultOkCancelButtons
-                ]
-            ]

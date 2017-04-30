@@ -330,6 +330,22 @@
                 color: var(--paper-green-500);
             }
 
+
+            .menu-button-container{
+                @apply(--layout-horizontal);
+                @apply(--layout-center-justified);
+            }
+
+            .menu-button-container > paper-menu-button {
+                @apply(--layout-flex-auto);
+                min-width: 0;
+                width: 10rem;
+            }
+
+            .menu-button-container > paper-menu-button > paper-button{
+                width: 100%;
+            }
+
             /*paper-icon-button.done-True:hover{*/
             /*color: var(--paper-blue-grey-500);*/
             /*}*/

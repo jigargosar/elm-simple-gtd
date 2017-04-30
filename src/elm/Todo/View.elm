@@ -212,18 +212,14 @@ default vm maybeReminderForm reminderForm =
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "menu-button-container layout horizontal center", attribute "secondary" "" ]
+            , div [ class "menu-button-container" ]
                 [ reminderView vm.reminder
                 , Paper.menuButton
-                    [ style [ "min-width" => "0", "width" => "10rem" ]
-                    , class "flex-auto"
-                    , boolProperty "dynamicAlign" True
+                    [ boolProperty "dynamicAlign" True
                     , onClickStopPropagation Msg.NoOp
                     ]
                     [ Paper.button
-                        [ style [ "width" => "100%" ]
-                        , class "dropdown-trigger"
-                        , attribute "slot" "dropdown-trigger"
+                        [ attribute "slot" "dropdown-trigger"
                         ]
                         [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
                             [ text vm.projectName ]
@@ -233,15 +229,11 @@ default vm maybeReminderForm reminderForm =
                         (vm.projects .|> createProjectItem # vm)
                     ]
                 , Paper.menuButton
-                    [ style [ "min-width" => "0", "width" => "10rem" ]
-                    , class "flex-auto"
-                    , boolProperty "dynamicAlign" True
+                    [ boolProperty "dynamicAlign" True
                     , onClickStopPropagation Msg.NoOp
                     ]
                     [ Paper.button
-                        [ style [ "width" => "100%" ]
-                        , class "dropdown-trigger"
-                        , attribute "slot" "dropdown-trigger"
+                        [ attribute "slot" "dropdown-trigger"
                         ]
                         [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
                             [ text vm.contextName ]
@@ -264,8 +256,6 @@ reminderView vm =
         , onClickStopPropagation Msg.NoOp
         , boolProperty "stopKeyboardEventPropagation" True
         , boolProperty "allowOutsideScroll" False
-        , class "flex-auto"
-        , style [ "min-width" => "0", "width" => "10rem" ]
         ]
         [ Paper.button
             [ iconP "alarm"
@@ -273,10 +263,8 @@ reminderView vm =
             , classList
                 [ "secondary-color" => not vm.isReminderActive
                 , "accent-color" => vm.isReminderActive
-                , "dropdown-trigger" => True
                 ]
             , attribute "slot" "dropdown-trigger"
-            , style [ "width" => "100%" ]
             ]
             [ div [ class "font-nowrap", style [ "text-transform" => "none" ] ]
                 [ text vm.displayText ]

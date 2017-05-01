@@ -54,6 +54,7 @@ type Msg
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | EditTodoFormKeyUp TodoForm KeyboardEvent
     | OnTestListKeyDown KeyboardEvent
+    | OnTestListItemFocus Int
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection
     | SelectionDoneClicked

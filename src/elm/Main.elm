@@ -101,6 +101,16 @@ update msg =
                 NoOp ->
                     identity
 
+                OnTestListItemFocus idx ->
+                    Return.map
+                        (\model ->
+                            let
+                                testModel =
+                                    model.testModel
+                            in
+                                { model | testModel = { testModel | selectedIndex = idx } }
+                        )
+
                 OnTestListKeyDown { key } ->
                     case key of
                         Key.ArrowUp ->

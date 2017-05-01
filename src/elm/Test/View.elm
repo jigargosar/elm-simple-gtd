@@ -27,7 +27,11 @@ createItem selectedIndex idx =
             else
                 -1
     in
-        li [ tabindex tabIndexValue ] [ idx |> toString >> String.append "item no: " >> text ]
+        li
+            [ tabindex tabIndexValue
+            , onFocus << Msg.OnTestListItemFocus <| idx
+            ]
+            [ idx |> toString >> String.append "item no: " >> text ]
 
 
 init model =

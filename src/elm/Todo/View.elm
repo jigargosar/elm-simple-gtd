@@ -249,8 +249,7 @@ default vm maybeReminderForm reminderForm =
                 , div [ class "font-nowrap flex-auto", onClick vm.startEditingMsg ]
                     [ text vm.text ]
                 , div [ class "layout horizontal center secondary-color font-body1" ]
-                    [ div []
-                        [ reminderView vm.reminder ]
+                    [ reminderView vm.reminder
                     , div
                         [ classList
                             [ "display-none" => (vm.projectDisplayName == "")

@@ -343,6 +343,7 @@ update msg =
 
                         ToggleDeleted ->
                             Return.map (Model.toggleDeletedForEntity entity)
+                                >> andThenUpdate DeactivateEditingMode
 
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)

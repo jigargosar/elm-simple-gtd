@@ -52,7 +52,7 @@ createKeyedItem vc todo =
             vc.getMaybeEditTodoFormForTodo todo
                 |> Maybe.unpack
                     (\_ -> default vm maybeReminderForm (vc.getTodoReminderForm todo))
-                    (createEditTodoViewModel >> editView vm)
+                    (createEditTodoViewModel todo >> editView vm)
     in
         ( Document.getId todo, view )
 
@@ -61,13 +61,12 @@ type alias EditTodoViewModel =
     { todo : { text : Todo.Text }
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
-    , onSaveClicked : Msg
-    , onCancelClicked : Msg
+    , onDeleteClicked : Msg
     }
 
 
-createEditTodoViewModel : TodoForm -> EditTodoViewModel
-createEditTodoViewModel form =
+createEditTodoViewModel : Todo.Model -> TodoForm -> EditTodoViewModel
+createEditTodoViewModel todo form =
     let
         todoId =
             form.id
@@ -80,8 +79,7 @@ createEditTodoViewModel form =
             }
         , onKeyUp = Msg.EditTodoFormKeyUp form
         , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
-        , onSaveClicked = Msg.SaveCurrentForm
-        , onCancelClicked = Msg.DeactivateEditingMode
+        , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
         }
 
 

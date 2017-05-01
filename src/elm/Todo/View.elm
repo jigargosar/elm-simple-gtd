@@ -250,7 +250,7 @@ default vm maybeReminderForm reminderForm =
                     [ text vm.text ]
                 , div [ class "layout horizontal center secondary-color font-body1 " ]
                     [ div [ class "padding-left-1rem" ]
-                        [ vm.reminder.displayText |> text ]
+                        [ reminderView vm.reminder ]
                     , div [ class "padding-left-1rem" ]
                         [ vm.projectDisplayName |> text ]
                     , div [ class "padding-left-1rem" ]
@@ -299,54 +299,58 @@ projectView vm =
 
 reminderView : ReminderViewModel -> Html Msg
 reminderView vm =
-    Paper.menuButton
-        [ boolProperty "opened" vm.isEditing
-        , boolProperty "dynamicAlign" True
-        , boolProperty "stopKeyboardEventPropagation" True
-        , class "flex-none"
-        ]
-        [ dropdownTrigger
-            (div
-                [ onClick vm.startEditingMsg
-                , classList
-                    [ "secondary-color" => not vm.isReminderActive
-                    , "accent-color" => vm.isReminderActive
-                    ]
-
-                --                , style [ "width" => "9rem" ]
-                ]
-                [ div [ class "layout horizontal center-center" ]
-                    [ icon "alarm" [ class "flex-none" ]
-
-                    --                    , div [ class "flex-auto" ] [ text vm.displayText ]
-                    ]
-                ]
-            )
-        , div
-            [ class "static dropdown-content"
-            , attribute "slot" "dropdown-content"
+    let
+        reminderElement =
+            if vm.displayText == "" then
+                icon "alarm" [ class "flex-none" ]
+            else
+                div [ class "flex-auto" ] [ text vm.displayText ]
+    in
+        Paper.menuButton
+            [ boolProperty "opened" vm.isEditing
+            , boolProperty "dynamicAlign" True
+            , boolProperty "stopKeyboardEventPropagation" True
+            , class "flex-none"
             ]
-            [ div [ class "font-subhead" ] [ text "Select date and time" ]
-            , Paper.input
-                [ type_ "date"
-                , classList [ "auto-focus" => vm.isEditing ]
-                , labelA "Date"
-                , value vm.date
-                , boolProperty "stopKeyboardEventPropagation" True
-                , onChange vm.onDateChanged
+            [ dropdownTrigger
+                (div
+                    [ onClick vm.startEditingMsg
+                    , classList
+                        [ "secondary-color" => not vm.isReminderActive
+                        , "accent-color" => vm.isReminderActive
+                        ]
+                    ]
+                    [ div [ class "layout horizontal center-center" ]
+                        [ icon "alarm" [ class "flex-none" ]
+                        , div [ class "flex-auto" ] [ text vm.displayText ]
+                        ]
+                    ]
+                )
+            , div
+                [ class "static dropdown-content"
+                , attribute "slot" "dropdown-content"
                 ]
-                []
-            , Paper.input
-                [ type_ "time"
-                , labelA "Time"
-                , value vm.time
-                , boolProperty "stopKeyboardEventPropagation" True
-                , onChange vm.onTimeChanged
+                [ div [ class "font-subhead" ] [ text "Select date and time" ]
+                , Paper.input
+                    [ type_ "date"
+                    , classList [ "auto-focus" => vm.isEditing ]
+                    , labelA "Date"
+                    , value vm.date
+                    , boolProperty "stopKeyboardEventPropagation" True
+                    , onChange vm.onDateChanged
+                    ]
+                    []
+                , Paper.input
+                    [ type_ "time"
+                    , labelA "Time"
+                    , value vm.time
+                    , boolProperty "stopKeyboardEventPropagation" True
+                    , onChange vm.onTimeChanged
+                    ]
+                    []
+                , defaultOkCancelButtons
                 ]
-                []
-            , defaultOkCancelButtons
             ]
-        ]
 
 
 editView : TodoViewModel -> EditTodoViewModel -> Html Msg

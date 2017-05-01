@@ -227,8 +227,7 @@ default vm maybeReminderForm reminderForm =
                 , div [ class "font-nowrap flex-auto", onClick vm.startEditingMsg ]
                     [ text vm.text ]
                 , div [ class "layout horizontal center" ]
-                    [ deleteIconButton vm
-                    , div [ class "flex-auto font-body1 secondary-color" ] [ vm.reminder.displayText |> text ]
+                    [ div [ class "flex-auto font-body1 secondary-color" ] [ vm.reminder.displayText |> text ]
                     ]
                 ]
             , div [ class "layout horizontal" ]

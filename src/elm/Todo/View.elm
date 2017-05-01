@@ -148,11 +148,24 @@ createTodoViewModel vc todo =
 
                 isEditing =
                     Maybe.isJust maybeReminderForm
+
+                format time =
+                    let
+                        due =
+                            Date.fromTime time
+
+                        now =
+                            Date.fromTime vc.now
+                    in
+                        Ext.Time.smartFormat vc.now time
+
+                displayText =
+                    Todo.getMaybeTime todo ?|> format ?= "Someday"
             in
                 { isEditing = isEditing
                 , date = form.date
                 , time = form.time
-                , displayText = Todo.getMaybeTime todo ?|> Ext.Time.smartFormat vc.now ?= "Someday"
+                , displayText = displayText
                 , isReminderActive = Todo.isReminderActive todo
                 , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
                 , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime

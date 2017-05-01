@@ -28,17 +28,17 @@ createItem selectedIdx idx =
         li [ tabindex tabIndexValue ] [ idx |> toString >> String.append "item no: " >> text ]
 
 
-init =
-    ul [] (createItems createModel)
+init selectedIndex =
+    let
+        viewModel =
+            { list = List.range 0 10
+            , selectedIdx = selectedIndex
+            }
+    in
+        ul [] (createItems viewModel)
 
 
-createModel =
-    { list = List.range 0 10
-    , selectedIdx = 0
-    }
-
-
-type alias Model =
+type alias ViewModel =
     { list : List Int
     , selectedIdx : Int
     }

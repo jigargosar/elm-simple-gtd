@@ -233,7 +233,7 @@ contextView vm =
 
 dropdownTriggerWithTitle title =
     Html.button [ tabindex -1, style [ "height" => "24px" ], class "layout horizontal no-style", attribute "slot" "dropdown-trigger" ]
-        [ Paper.button [ class "padding-0 shrink" ]
+        [ Paper.button [ class "padding-0 margin-0 shrink" ]
             [ div [ class "text-transform-none secondary-color font-nowrap" ] [ text title ]
             ]
         ]
@@ -266,7 +266,7 @@ reminderView vm =
             , style [ "width" => "8rem" ]
             ]
             [ div [ class "layout horizontal center-center" ]
-                [ icon "alarm" []
+                [ icon "alarm" [ class "flex-none" ]
                 , dropdownTriggerWithTitle vm.displayText
                 ]
             ]

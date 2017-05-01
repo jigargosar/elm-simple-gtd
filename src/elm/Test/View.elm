@@ -10,6 +10,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import String.Extra
 
 
 createItems =
@@ -17,7 +18,7 @@ createItems =
 
 
 createItem idx =
-    li [] [ idx |> toString >> (++) "item no: " >> text ]
+    li [ tabindex 1 ] [ idx |> toString >> String.append "item no: " >> text ]
 
 
 init =

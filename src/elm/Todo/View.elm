@@ -269,7 +269,7 @@ reminderView vm =
                 ]
                 [ div [ class "layout horizontal center-center" ]
                     [ icon "alarm" [ class "flex-none" ]
-                    , div [ class "flex-auto font-code1" ] [ text vm.displayText ]
+                    , div [ class "flex-auto" ] [ text vm.displayText ]
                     ]
                 ]
             )

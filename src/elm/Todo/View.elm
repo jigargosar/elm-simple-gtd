@@ -260,7 +260,7 @@ reminderView vm =
         ]
         [ dropdownTrigger
             (div
-                [ onClickStopPropagation vm.startEditingMsg
+                [ onClick vm.startEditingMsg
                 , classList
                     [ "secondary-color" => not vm.isReminderActive
                     , "accent-color" => vm.isReminderActive

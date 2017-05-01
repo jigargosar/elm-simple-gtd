@@ -1,9 +1,11 @@
 module Test.View exposing (..)
 
+import Ext.Keyboard exposing (onKeyDown)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
+import Msg
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -35,7 +37,7 @@ init selectedIndex =
             , selectedIndex = selectedIndex
             }
     in
-        ul [] (createItems viewModel)
+        ul [ onKeyDown Msg.OnTestListKeyDown ] (createItems viewModel)
 
 
 type alias ViewModel =

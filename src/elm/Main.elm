@@ -101,6 +101,23 @@ update msg =
                 NoOp ->
                     identity
 
+                OnTestListKeyDown { key } ->
+                    case key of
+                        Key.ArrowUp ->
+                            Return.map
+                                (\model ->
+                                    { model | testSelectedIndex = model.testSelectedIndex + 1 }
+                                )
+
+                        Key.ArrowDown ->
+                            Return.map
+                                (\model ->
+                                    { model | testSelectedIndex = model.testSelectedIndex - 1 }
+                                )
+
+                        _ ->
+                            identity
+
                 ToggleDrawer ->
                     Return.map (Model.toggleForceNarrow)
 

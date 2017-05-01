@@ -254,7 +254,7 @@ default vm maybeReminderForm reminderForm =
                     , div
                         [ classList
                             [ "padding-left-1rem" => True
-                            , "display-none" => (vm.projectDisplayName /= "")
+                            , "display-none" => (vm.projectDisplayName == "")
                             ]
                         ]
                         [ vm.projectDisplayName |> text ]

@@ -91,8 +91,9 @@ type alias TodoViewModel =
     , isSelected : Bool
     , projectName : Project.Name
     , projectDisplayName : String
-    , selectedProjectIndex : Int
     , contextName : Context.Name
+    , contextDisplayName : String
+    , selectedProjectIndex : Int
     , onCheckBoxClicked : Msg
     , setContextMsg : Context.Model -> Msg
     , setProjectMsg : Project.Model -> Msg
@@ -130,16 +131,30 @@ createTodoViewModel vc todo =
         projects =
             vc.activeProjects
 
+        contextName =
+            Todo.getContextId todo
+                |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
+                ?= "Inbox"
+
         projectName =
             Todo.getProjectId todo
                 |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
                 ?= "<No Project>"
 
+        truncateString =
+            String.Extra.ellipsis 20
+
         projectDisplayName =
             Todo.getProjectId todo
                 |> (Dict.get # vc.projectByIdDict)
-                ?|> (Project.getName >> String.Extra.ellipsis 20)
+                ?|> (Project.getName >> truncateString)
                 ?= "<No Project>"
+
+        contextDisplayName =
+            Todo.getContextId todo
+                |> (Dict.get # vc.contextByIdDict)
+                ?|> (Context.getName >> truncateString)
+                ?= "Inbox"
 
         createReminderViewModel : ReminderViewModel
         createReminderViewModel =
@@ -192,11 +207,9 @@ createTodoViewModel vc todo =
         , isSelected = Set.member todoId vc.selection
         , projectName = projectName
         , projectDisplayName = projectDisplayName
+        , contextDisplayName = contextDisplayName
         , selectedProjectIndex = projects |> List.Extra.findIndex (Project.nameEquals projectName) ?= 0
-        , contextName =
-            Todo.getContextId todo
-                |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
-                ?= "Inbox"
+        , contextName = contextName
         , onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
         , setContextMsg = Msg.SetTodoContext # todo
         , setProjectMsg = Msg.SetTodoProject # todo

@@ -226,7 +226,7 @@ dropdownTriggerWithTitle title =
 
 
 dropdownTrigger content =
-    Html.button [ tabindex -1, style [ "height" => "24px" ], class "layout horizontal no-style", attribute "slot" "dropdown-trigger" ]
+    div [ style [ "height" => "24px" ], class "layout horizontal font-body1", attribute "slot" "dropdown-trigger" ]
         [ Paper.button [ class "padding-0 margin-0 shrink" ]
             [ div [ class "text-transform-none secondary-color font-nowrap" ] [ content ]
             ]

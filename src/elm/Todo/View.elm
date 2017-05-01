@@ -289,11 +289,13 @@ reminderView vm =
                     [ "secondary-color" => not vm.isReminderActive
                     , "accent-color" => vm.isReminderActive
                     ]
-                , style [ "width" => "9rem" ]
+
+                --                , style [ "width" => "9rem" ]
                 ]
                 [ div [ class "layout horizontal center-center" ]
                     [ icon "alarm" [ class "flex-none" ]
-                    , div [ class "flex-auto" ] [ text vm.displayText ]
+
+                    --                    , div [ class "flex-auto" ] [ text vm.displayText ]
                     ]
                 ]
             )

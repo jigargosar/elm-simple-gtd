@@ -138,7 +138,7 @@ createTodoViewModel vc todo =
         projectDisplayName =
             Todo.getProjectId todo
                 |> (Dict.get # vc.projectByIdDict)
-                ?|> (Project.getName >> String.Extra.ellipsis 10)
+                ?|> (Project.getName >> String.Extra.ellipsis 20)
                 ?= "<No Project>"
 
         createReminderViewModel : ReminderViewModel
@@ -236,7 +236,8 @@ default vm maybeReminderForm reminderForm =
                 , div [ class "font-nowrap flex-auto", onClick vm.startEditingMsg ]
                     [ text vm.text ]
                 , div [ class "layout horizontal center" ]
-                    [ div [ class "flex-auto font-body1 secondary-color" ] [ vm.reminder.displayText |> text ]
+                    [ div [ class "padding-left-1rem font-body1 secondary-color" ] [ vm.reminder.displayText |> text ]
+                    , div [ class "padding-left-1rem font-body1 secondary-color" ] [ vm.projectDisplayName |> text ]
                     ]
                 ]
             , div [ class "layout horizontal" ]
@@ -379,6 +380,7 @@ doneIconButton vm =
         [ class ("done-" ++ toString (vm.isDone))
         , onClickStopPropagation (vm.onDoneClicked)
         , iconP "check"
+        , class "flex-none"
         ]
         []
 

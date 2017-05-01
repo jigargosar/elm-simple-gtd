@@ -214,7 +214,7 @@ default vm maybeReminderForm reminderForm =
                 ]
             , div [ class "layout horizontal", attribute "secondary" "" ]
                 [ reminderView vm.reminder
-                , div [ class "shrink flex-auto layout horizontal align-center" ]
+                , div [ class "shrink flex-auto layout horizontal center-aligned" ]
                     [ projectView vm
                     , contextView vm
                     ]
@@ -225,20 +225,24 @@ default vm maybeReminderForm reminderForm =
 
 contextView vm =
     Paper.menuButton [ class "shrink flex-auto", boolProperty "dynamicAlign" True ]
-        [ Paper.button [ class "width--100", attribute "slot" "dropdown-trigger" ]
-            [ div [ class "text-transform-none font-nowrap" ] [ text vm.contextName ] ]
+        [ dropdownTrigger vm.contextName
         , Paper.listbox [ attribute "slot" "dropdown-content" ]
             (vm.contexts .|> createContextItem # vm)
         ]
 
 
+dropdownTrigger title =
+    Paper.item [ class "padding-0", attribute "slot" "dropdown-trigger" ]
+        [ Paper.itemBody []
+            [ div [ attribute "secondary" "" ]
+                [ text title ]
+            ]
+        ]
+
+
 projectView vm =
     Paper.menuButton [ class "shrink flex-auto", boolProperty "dynamicAlign" True ]
-        [ Paper.item [ class "padding-0", attribute "slot" "dropdown-trigger" ]
-            [ Paper.itemBody []
-                [ div [ attribute "secondary" "", class "text-transform-none font-nowrap" ] [ text vm.contextName ]
-                ]
-            ]
+        [ dropdownTrigger vm.contextName
 
         {- , Paper.button [ class "width--100", attribute "slot" "dropdown-trigger" ]
            [ div [ class "text-transform-none font-nowrap" ] [ text vm.projectName ] ]
@@ -257,7 +261,7 @@ reminderView vm =
         , boolProperty "stopKeyboardEventPropagation" True
         , class "flex-none"
         ]
-        [ Paper.button
+        [ div
             [ onClickStopPropagation vm.startEditingMsg
             , classList
                 [ "secondary-color" => not vm.isReminderActive
@@ -265,11 +269,26 @@ reminderView vm =
                 ]
             , attribute "slot" "dropdown-trigger"
             ]
-            [ div [ class "layout horizontal text-transform-none font-nowrap" ]
+            [ div [ class "layout horizontal center-center" ]
                 [ icon "alarm" []
-                , div [ class "font-nowrap" ] [ text vm.displayText ]
+                , dropdownTrigger vm.displayText
                 ]
             ]
+
+        {- , Paper.button
+           [ onClickStopPropagation vm.startEditingMsg
+           , classList
+               [ "secondary-color" => not vm.isReminderActive
+               , "accent-color" => vm.isReminderActive
+               ]
+           , attribute "slot" "dropdown-trigger"
+           ]
+           [ div [ class "layout horizontal text-transform-none font-nowrap" ]
+               [ icon "alarm" []
+               , div [ class "font-nowrap" ] [ text vm.displayText ]
+               ]
+           ]
+        -}
         , div
             [ class "static dropdown-content"
             , attribute "slot" "dropdown-content"

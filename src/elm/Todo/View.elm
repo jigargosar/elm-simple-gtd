@@ -212,7 +212,7 @@ default vm maybeReminderForm reminderForm =
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "layout horizontal", attribute "_secondary" "" ]
+            , div [ class "layout horizontal"]
                 [ reminderView vm.reminder
                 , div [ class "shrink flex-auto layout horizontal center-aligned" ]
                     [ projectView vm
@@ -232,7 +232,7 @@ contextView vm =
 
 
 dropdownTrigger title =
-    Html.button [ class "font-nowrap no-style", attribute "slot" "dropdown-trigger" ]
+    Html.button [ style [ "height" => "24px" ], class "font-nowrap no-style", attribute "slot" "dropdown-trigger" ]
         [ text title ]
 
 

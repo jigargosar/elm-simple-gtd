@@ -236,7 +236,7 @@ default vm maybeReminderForm reminderForm =
                 , div [ class "font-nowrap flex-auto", onClick vm.startEditingMsg ]
                     [ text vm.text ]
                 , div [ class "layout horizontal center secondary-color font-body1 " ]
-                    [ div [ class "padding-left-1rem " ]
+                    [ div [ class "padding-left-1rem" ]
                         [ vm.reminder.displayText |> text ]
                     , div [ class "padding-left-1rem" ]
                         [ vm.projectDisplayName |> text ]

@@ -113,6 +113,7 @@ type alias ReminderViewModel =
     , date : String
     , time : String
     , displayText : String
+    , isOverDue : Bool
     , isReminderActive : Bool
     , onDateChanged : String -> Msg
     , onTimeChanged : String -> Msg
@@ -149,6 +150,9 @@ createTodoViewModel vc todo =
                 isEditing =
                     Maybe.isJust maybeReminderForm
 
+                overDueText =
+                    "Overdue"
+
                 format time =
                     let
                         due =
@@ -158,7 +162,7 @@ createTodoViewModel vc todo =
                             Date.fromTime vc.now
                     in
                         if time < vc.now then
-                            "Overdue"
+                            overDueText
                         else
                             Ext.Time.smartFormat vc.now time
 
@@ -169,6 +173,7 @@ createTodoViewModel vc todo =
                 , date = form.date
                 , time = form.time
                 , displayText = displayText
+                , isOverDue = displayText == overDueText
                 , isReminderActive = Todo.isReminderActive todo
                 , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
                 , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime

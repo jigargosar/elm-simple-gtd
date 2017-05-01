@@ -6,6 +6,7 @@ require("./pcss/main.pcss")
 
 const DB = require("./local-pouch-db")
 const sound = require("./sound")
+const $ = require("jquery")
 
 async function boot() {
     let syncList = []
@@ -52,6 +53,14 @@ async function boot() {
 
     setupNotifications(app)
         .catch(console.error)
+
+    app.ports["focusSelector"].subscribe((selector) => {
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                $(selector).focus()
+            })
+        }, 0)
+    })
 
     app.ports["focusPaperInput"].subscribe((selector) => {
         setTimeout(() => {

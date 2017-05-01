@@ -108,12 +108,14 @@ update msg =
                                 (\model ->
                                     { model | testSelectedIndex = model.testSelectedIndex + 1 }
                                 )
+                                >> Return.command (DomPorts.focusSelector ".test-list > [tabindex=0]")
 
                         Key.ArrowDown ->
                             Return.map
                                 (\model ->
                                     { model | testSelectedIndex = model.testSelectedIndex - 1 }
                                 )
+                                >> Return.command (DomPorts.focusSelector ".test-list > [tabindex=0]")
 
                         _ ->
                             identity

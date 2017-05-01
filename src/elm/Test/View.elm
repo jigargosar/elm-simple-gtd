@@ -37,7 +37,7 @@ init selectedIndex =
             , selectedIndex = selectedIndex
             }
     in
-        ul [ onKeyDown Msg.OnTestListKeyDown ] (createItems viewModel)
+        ul [ class "test-list", onKeyDown Msg.OnTestListKeyDown ] (createItems viewModel)
 
 
 type alias ViewModel =

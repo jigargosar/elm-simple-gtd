@@ -12,5 +12,13 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 
 
+createItems =
+    List.range 0 10 .|> createItem
+
+
+createItem idx =
+    li [] [ idx |> toString >> (++) "item no: " >> text ]
+
+
 init =
-    div [] [ text "test" ]
+    ul [] createItems

@@ -17,7 +17,7 @@ async function boot() {
 
     setTimeout(() => {
         $(".big-dialog").position({
-            my: "right top", at: "left bottom", of: ".focusable-list"
+            my: "left top", at: "left bottom", of: ".focusable-list"
             // , within: "#main-view > div"
             , collision: "fit"
         })

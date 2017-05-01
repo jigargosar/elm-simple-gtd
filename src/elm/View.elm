@@ -133,31 +133,31 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         ]
 
 
-appMainView contextVMs projectVMs m =
+appMainView contextVMs projectVMs model =
     div [ id "main-view", class "" ]
-        [ case Model.getMainViewType m of
+        [ case Model.getMainViewType model of
             GroupByContextView ->
-                View.EntityList.groupByEntity contextVMs m
+                View.EntityList.groupByEntity contextVMs model
 
             GroupByProjectView ->
-                View.EntityList.groupByEntity projectVMs m
+                View.EntityList.groupByEntity projectVMs model
 
             ProjectView id ->
-                View.EntityList.singletonEntity projectVMs id m
+                View.EntityList.singletonEntity projectVMs id model
 
             ContextView id ->
-                View.EntityList.singletonEntity contextVMs id m
+                View.EntityList.singletonEntity contextVMs id model
 
             BinView ->
-                View.EntityList.filtered m
+                View.EntityList.filtered model
 
             DoneView ->
-                View.EntityList.filtered m
+                View.EntityList.filtered model
 
             SyncView ->
                 let
                     form =
-                        Model.getRemoteSyncForm m
+                        Model.getRemoteSyncForm model
                 in
                     Paper.material [ class "static layout" ]
                         [ Paper.input
@@ -170,7 +170,7 @@ appMainView contextVMs projectVMs m =
                         ]
 
             TestView ->
-                Test.View.init
+                Test.View.init model.testSelectedIndex
         ]
 
 

@@ -158,12 +158,12 @@ createTodoViewModel vc todo =
                             Date.fromTime vc.now
                     in
                         if time < vc.now then
-                            "OverDue"
+                            "Overdue"
                         else
                             Ext.Time.smartFormat vc.now time
 
                 displayText =
-                    Todo.getMaybeTime todo ?|> format ?= "Someday"
+                    Todo.getMaybeTime todo ?|> format ?= ""
             in
                 { isEditing = isEditing
                 , date = form.date

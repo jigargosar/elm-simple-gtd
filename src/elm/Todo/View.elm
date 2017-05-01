@@ -142,7 +142,7 @@ createTodoViewModel vc todo =
                 ?= "<No Project>"
 
         truncateString =
-            String.Extra.ellipsis 20
+            String.Extra.ellipsis 15
 
         projectDisplayName =
             Todo.getProjectId todo
@@ -253,6 +253,8 @@ default vm maybeReminderForm reminderForm =
                         [ vm.reminder.displayText |> text ]
                     , div [ class "padding-left-1rem" ]
                         [ vm.projectDisplayName |> text ]
+                    , div [ class "padding-left-1rem" ]
+                        [ vm.contextDisplayName |> text ]
                     ]
                 ]
             , div [ class "layout horizontal" ]

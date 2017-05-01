@@ -212,7 +212,7 @@ default vm maybeReminderForm reminderForm =
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "layout horizontal"]
+            , div [ class "layout horizontal" ]
                 [ reminderView vm.reminder
                 , div [ class "shrink flex-auto layout horizontal center-aligned" ]
                     [ projectView vm
@@ -267,21 +267,6 @@ reminderView vm =
                 , dropdownTrigger vm.displayText
                 ]
             ]
-
-        {- , Paper.button
-           [ onClickStopPropagation vm.startEditingMsg
-           , classList
-               [ "secondary-color" => not vm.isReminderActive
-               , "accent-color" => vm.isReminderActive
-               ]
-           , attribute "slot" "dropdown-trigger"
-           ]
-           [ div [ class "layout horizontal text-transform-none font-nowrap" ]
-               [ icon "alarm" []
-               , div [ class "font-nowrap" ] [ text vm.displayText ]
-               ]
-           ]
-        -}
         , div
             [ class "static dropdown-content"
             , attribute "slot" "dropdown-content"

@@ -227,15 +227,15 @@ defaultOkCancelButtons =
 
 
 okCancelButtons okMsg cancelMsg =
-    div [ class "layout horizontal-reverse end-justified" ]
+    div [ class "layout horizontal-reverse" ]
         [ Paper.button
-            [ onClickStopPropagation cancelMsg
-            , boolProperty "stopKeyboardEventPropagation" True
-            ]
-            [ text "Cancel" ]
-        , Paper.button
             [ onClickStopPropagation okMsg
             , boolProperty "stopKeyboardEventPropagation" True
             ]
             [ text "Ok" ]
+        , Paper.button
+            [ onClickStopPropagation cancelMsg
+            , boolProperty "stopKeyboardEventPropagation" True
+            ]
+            [ text "Cancel" ]
         ]

@@ -101,6 +101,9 @@ update msg =
                 NoOp ->
                     identity
 
+                OnnCommonMsg msg ->
+                    identity
+
                 OnTestListItemFocus idx ->
                     Return.map
                         (\model ->

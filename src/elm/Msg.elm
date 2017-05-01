@@ -1,5 +1,6 @@
 module Msg exposing (..)
 
+import CommonMsg
 import Context
 import Dom
 import EditMode exposing (TodoForm)
@@ -24,6 +25,7 @@ import Ext.Function.Infix exposing (..)
 
 type Msg
     = NoOp
+    | OnnCommonMsg CommonMsg.Msg
     | RemotePouchSync EditMode.RemoteSyncForm
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction ReminderOverlay.Action

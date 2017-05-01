@@ -14,6 +14,7 @@ import Msg exposing (Msg)
 import ReminderOverlay
 import Set
 import Entity.ViewModel
+import Test.View
 import View.EntityList
 import View.AppDrawer
 import Maybe.Extra as Maybe
@@ -169,7 +170,7 @@ appMainView contextVMs projectVMs m =
                         ]
 
             TestView ->
-                div [] [ text "test" ]
+                Test.View.init
         ]
 
 

@@ -234,8 +234,15 @@ contextView vm =
 
 projectView vm =
     Paper.menuButton [ class "shrink flex-auto", boolProperty "dynamicAlign" True ]
-        [ Paper.button [ class "width--100", attribute "slot" "dropdown-trigger" ]
-            [ div [ class "text-transform-none font-nowrap" ] [ text vm.projectName ] ]
+        [ Paper.item [ class "padding-0", attribute "slot" "dropdown-trigger" ]
+            [ Paper.itemBody []
+                [ div [ attribute "secondary" "", class "text-transform-none font-nowrap" ] [ text vm.contextName ]
+                ]
+            ]
+
+        {- , Paper.button [ class "width--100", attribute "slot" "dropdown-trigger" ]
+           [ div [ class "text-transform-none font-nowrap" ] [ text vm.projectName ] ]
+        -}
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
             (vm.projects .|> createProjectItem # vm)

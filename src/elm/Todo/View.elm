@@ -224,7 +224,7 @@ default vm maybeReminderForm reminderForm =
 
 
 contextView vm =
-    Paper.menuButton [ class "shrink flex-auto", boolProperty "dynamicAlign" True ]
+    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
         [ dropdownTrigger vm.contextName
         , Paper.listbox [ attribute "slot" "dropdown-content" ]
             (vm.contexts .|> createContextItem # vm)
@@ -236,19 +236,8 @@ dropdownTrigger title =
         [ text title ]
 
 
-
---dropdownTrigger title =
---    Paper.item [ class "padding-0", attribute "slot" "dropdown-trigger" ]
---        [ Paper.itemBody []
---            [ div [ attribute "secondary" "" ]
---                [ text title ]
---            ]
---        ]
---
-
-
 projectView vm =
-    Paper.menuButton [ class "shrink flex-auto", boolProperty "dynamicAlign" True ]
+    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
         [ dropdownTrigger vm.projectName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]

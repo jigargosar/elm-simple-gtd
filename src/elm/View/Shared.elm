@@ -222,10 +222,26 @@ defaultOkCancelButtons =
     okCancelButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode
 
 
-okCancelButtons okMsg cancelMsg =
+defaultOkCancelDeleteButtons deleteMsg =
+    okCancelDeleteButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode deleteMsg
+
+
+layoutHorizontalReverse =
     div [ class "layout horizontal-reverse" ]
+
+
+okCancelButtons okMsg cancelMsg =
+    layoutHorizontalReverse
         [ okButton okMsg
         , cancelButton cancelMsg
+        ]
+
+
+okCancelDeleteButtons okMsg cancelMsg deleteMsg =
+    layoutHorizontalReverse
+        [ okButton okMsg
+        , cancelButton cancelMsg
+        , deleteButton deleteMsg
         ]
 
 
@@ -237,9 +253,17 @@ okButton okMsg =
         [ text "Ok" ]
 
 
-cancelButton cancelMsg =
+cancelButton msg =
     Paper.button
-        [ onClickStopPropagation cancelMsg
+        [ onClickStopPropagation msg
         , boolProperty "stopKeyboardEventPropagation" True
         ]
         [ text "Cancel" ]
+
+
+deleteButton msg =
+    Paper.button
+        [ onClickStopPropagation msg
+        , boolProperty "stopKeyboardEventPropagation" True
+        ]
+        [ text "Delete" ]

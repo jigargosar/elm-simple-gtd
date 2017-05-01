@@ -251,7 +251,12 @@ default vm maybeReminderForm reminderForm =
                 , div [ class "layout horizontal center secondary-color font-body1 " ]
                     [ div [ class "padding-left-1rem" ]
                         [ reminderView vm.reminder ]
-                    , div [ class "padding-left-1rem" ]
+                    , div
+                        [ classList
+                            [ "padding-left-1rem" => True
+                            , "display-none" => (vm.projectDisplayName /= "")
+                            ]
+                        ]
                         [ vm.projectDisplayName |> text ]
                     , div [ class "padding-left-1rem" ]
                         [ vm.contextDisplayName |> text ]

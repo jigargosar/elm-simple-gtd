@@ -258,8 +258,10 @@ default vm maybeReminderForm reminderForm =
                     ]
                 ]
             , div [ class "layout horizontal" ]
-                [ reminderView vm.reminder
-                , div [ class "shrink flex-auto layout horizontal center-aligned" ]
+                [ {- reminderView vm.reminder
+                     ,
+                  -}
+                  div [ class "shrink flex-auto layout horizontal center-aligned" ]
                     [ projectView vm
                     , contextView vm
                     ]
@@ -321,8 +323,10 @@ reminderView vm =
                         ]
                     ]
                     [ div [ class "layout horizontal center-center" ]
-                        [ icon "alarm" [ class "flex-none" ]
-                        , div [ class "flex-auto" ] [ text vm.displayText ]
+                        [ {- icon "alarm" [ class "flex-none" ]
+                             , div [ class "flex-auto" ] [ text vm.displayText ]
+                          -}
+                          reminderElement
                         ]
                     ]
                 )

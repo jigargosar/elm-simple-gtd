@@ -232,10 +232,8 @@ contextView vm =
 
 
 dropdownTrigger title =
-    div [ class "layout horizontal center-center", attribute "slot" "dropdown-trigger" ]
-        [ Html.button [ class "font-nowrap flex-auto no-style", attribute "slot" "dropdown-trigger" ]
-            [ text title ]
-        ]
+    Html.button [ class "font-nowrap no-style", attribute "slot" "dropdown-trigger" ]
+        [ text title ]
 
 
 

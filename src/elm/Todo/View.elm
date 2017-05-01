@@ -242,11 +242,7 @@ dropdownTrigger title =
 
 projectView vm =
     Paper.menuButton [ class "shrink flex-auto", boolProperty "dynamicAlign" True ]
-        [ dropdownTrigger vm.contextName
-
-        {- , Paper.button [ class "width--100", attribute "slot" "dropdown-trigger" ]
-           [ div [ class "text-transform-none font-nowrap" ] [ text vm.projectName ] ]
-        -}
+        [ dropdownTrigger vm.projectName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
             (vm.projects .|> createProjectItem # vm)

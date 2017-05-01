@@ -193,10 +193,6 @@ doneButton =
     sharedIconButton "done"
 
 
-cancelButton =
-    sharedIconButton "cancel"
-
-
 dismissButton =
     sharedIconButton "cancel"
 
@@ -228,14 +224,22 @@ defaultOkCancelButtons =
 
 okCancelButtons okMsg cancelMsg =
     div [ class "layout horizontal-reverse" ]
-        [ Paper.button
-            [ onClickStopPropagation okMsg
-            , boolProperty "stopKeyboardEventPropagation" True
-            ]
-            [ text "Ok" ]
-        , Paper.button
-            [ onClickStopPropagation cancelMsg
-            , boolProperty "stopKeyboardEventPropagation" True
-            ]
-            [ text "Cancel" ]
+        [ okButton okMsg
+        , cancelButton cancelMsg
         ]
+
+
+okButton okMsg =
+    Paper.button
+        [ onClickStopPropagation okMsg
+        , boolProperty "stopKeyboardEventPropagation" True
+        ]
+        [ text "Ok" ]
+
+
+cancelButton cancelMsg =
+    Paper.button
+        [ onClickStopPropagation cancelMsg
+        , boolProperty "stopKeyboardEventPropagation" True
+        ]
+        [ text "Cancel" ]

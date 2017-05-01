@@ -165,10 +165,10 @@ update actions now =
                 SetTime maybeTime ->
                     let
                         reminder =
-                            if model.dueAt == maybeTime then
-                                model.reminder
-                            else
-                                maybeTimeToReminder maybeTime
+                            --                            if model.dueAt == maybeTime then
+                            --                                model.reminder
+                            --                            else
+                            maybeTimeToReminder maybeTime
                     in
                         { model | dueAt = maybeTime, reminder = reminder }
 

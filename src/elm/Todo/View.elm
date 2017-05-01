@@ -260,20 +260,21 @@ reminderView vm =
         , boolProperty "stopKeyboardEventPropagation" True
         , class "flex-none"
         ]
-        [ div
-            [ onClickStopPropagation vm.startEditingMsg
-            , classList
-                [ "secondary-color" => not vm.isReminderActive
-                , "accent-color" => vm.isReminderActive
+        [ dropdownTrigger
+            (div
+                [ onClickStopPropagation vm.startEditingMsg
+                , classList
+                    [ "secondary-color" => not vm.isReminderActive
+                    , "accent-color" => vm.isReminderActive
+                    ]
+                , style [ "width" => "9rem" ]
                 ]
-            , attribute "slot" "dropdown-trigger"
-            , style [ "width" => "10rem" ]
-            ]
-            [ div [ class "layout horizontal center-center" ]
-                [ icon "alarm" [ class "flex-none" ]
-                , div [ class "flex-auto" ] [ dropdownTriggerWithTitle vm.displayText ]
+                [ div [ class "layout horizontal center-center" ]
+                    [ icon "alarm" [ class "flex-none" ]
+                    , div [ class "flex-auto" ] [ text vm.displayText ]
+                    ]
                 ]
-            ]
+            )
         , div
             [ class "static dropdown-content"
             , attribute "slot" "dropdown-content"

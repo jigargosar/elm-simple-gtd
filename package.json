@@ -48,6 +48,7 @@
     "dateparser": "1.0.6",
     "howler": "2.0.3",
     "jquery": "3.2.1",
+    "jquery-ui": "1.12.1",
     "memorystream": "0.3.1",
     "parse-messy-time": "2.1.0",
     "peerjs": "0.3.14",

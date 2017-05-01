@@ -9,6 +9,7 @@ const sound = require("./sound")
 const $ = require("jquery")
 window.jQuery = $
 require("./jquery.trap")
+require("jquery-ui/ui/position")
 
 
 async function boot() {

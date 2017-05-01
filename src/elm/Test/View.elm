@@ -21,14 +21,18 @@ createItems model =
 
 createItem selectedIndex idx =
     let
+        isFocused =
+            idx == selectedIndex
+
         tabIndexValue =
-            if idx == selectedIndex then
+            if isFocused then
                 0
             else
                 -1
     in
         li
             [ tabindex tabIndexValue
+            , classList [ "is-focused" => isFocused ]
             , idx |> Msg.OnTestListItemFocus >> onFocus
             ]
             [ idx |> toString >> String.append "item no: " >> text ]
@@ -37,5 +41,5 @@ createItem selectedIndex idx =
 init model =
     div []
         [ div [] [ model.selectedIndex |> toString >> text ]
-        , ul [ class "test-list", onKeyDown Msg.OnTestListKeyDown ] (createItems model)
+        , ul [ class "focusable-list test-list", onKeyDown Msg.OnTestListKeyDown ] (createItems model)
         ]

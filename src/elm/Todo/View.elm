@@ -212,7 +212,7 @@ default vm maybeReminderForm reminderForm =
                     , deleteIconButton vm
                     ]
                 ]
-            , div [ class "layout horizontal", attribute "secondary" "" ]
+            , div [ class "layout horizontal", attribute "_secondary" "" ]
                 [ reminderView vm.reminder
                 , div [ class "shrink flex-auto layout horizontal center-aligned" ]
                     [ projectView vm
@@ -264,6 +264,7 @@ reminderView vm =
                 , "accent-color" => vm.isReminderActive
                 ]
             , attribute "slot" "dropdown-trigger"
+            , style [ "width" => "8rem" ]
             ]
             [ div [ class "layout horizontal center-center" ]
                 [ icon "alarm" []

@@ -263,7 +263,7 @@ reminderView vm =
                 , "accent-color" => vm.isReminderActive
                 ]
             , attribute "slot" "dropdown-trigger"
-            , style [ "width" => "8rem" ]
+            , style [ "width" => "10rem" ]
             ]
             [ div [ class "layout horizontal center-center" ]
                 [ icon "alarm" [ class "flex-none" ]

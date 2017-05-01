@@ -225,7 +225,10 @@ default vm maybeReminderForm reminderForm =
         ]
         [ Paper.itemBody []
             [ div [ class "layout horizontal center justified" ]
-                [ div [ class "font-nowrap flex-auto", onClick vm.startEditingMsg ] [ text vm.text ]
+                [ div [ class "font-nowrap flex-auto", onClick vm.startEditingMsg ]
+                    [ text vm.text
+                    , div [ class "font-body1" ] [ vm.reminder.displayText |> text ]
+                    ]
                 , div [ class "layout horizontal" ]
                     [ doneIconButton vm
                     , deleteIconButton vm

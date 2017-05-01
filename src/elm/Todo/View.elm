@@ -22,6 +22,7 @@ import Polymer.Attributes exposing (boolProperty, stringProperty)
 import Polymer.Events exposing (onTap)
 import Project
 import Set
+import String.Extra
 import Time.Format
 import Todo
 import Todo.Form
@@ -89,6 +90,7 @@ type alias TodoViewModel =
     , isDeleted : Bool
     , isSelected : Bool
     , projectName : Project.Name
+    , projectDisplayName : String
     , selectedProjectIndex : Int
     , contextName : Context.Name
     , onCheckBoxClicked : Msg
@@ -131,6 +133,12 @@ createTodoViewModel vc todo =
         projectName =
             Todo.getProjectId todo
                 |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
+                ?= "<No Project>"
+
+        projectDisplayName =
+            Todo.getProjectId todo
+                |> (Dict.get # vc.projectByIdDict)
+                ?|> (Project.getName >> String.Extra.ellipsis 10)
                 ?= "<No Project>"
 
         createReminderViewModel : ReminderViewModel
@@ -183,6 +191,7 @@ createTodoViewModel vc todo =
         , text = Todo.getText todo
         , isSelected = Set.member todoId vc.selection
         , projectName = projectName
+        , projectDisplayName = projectDisplayName
         , selectedProjectIndex = projects |> List.Extra.findIndex (Project.nameEquals projectName) ?= 0
         , contextName =
             Todo.getContextId todo

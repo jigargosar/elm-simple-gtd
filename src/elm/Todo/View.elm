@@ -248,17 +248,16 @@ default vm maybeReminderForm reminderForm =
                 [ doneIconButton vm
                 , div [ class "font-nowrap flex-auto", onClick vm.startEditingMsg ]
                     [ text vm.text ]
-                , div [ class "layout horizontal center secondary-color font-body1 " ]
-                    [ div [ class "padding-left-1rem" ]
+                , div [ class "layout horizontal center secondary-color font-body1" ]
+                    [ div []
                         [ reminderView vm.reminder ]
                     , div
                         [ classList
-                            [ "padding-left-1rem" => True
-                            , "display-none" => (vm.projectDisplayName == "")
+                            [ "display-none" => (vm.projectDisplayName == "")
                             ]
                         ]
                         [ vm.projectDisplayName |> text ]
-                    , div [ class "padding-left-1rem" ]
+                    , div []
                         [ vm.contextDisplayName |> text ]
                     ]
                 ]
@@ -313,7 +312,7 @@ reminderView vm =
     let
         reminderTrigger =
             if vm.displayText == "" then
-                iconButton "alarm-add" [ style [ "padding-right" => "0" ], slotDropDownTriggerA ]
+                iconButton "alarm-add" [ slotDropDownTriggerA ]
             else
                 dropdownTrigger
                     (div
@@ -323,10 +322,7 @@ reminderView vm =
                             , "accent-color" => vm.isReminderActive
                             ]
                         ]
-                        [ div [ class "layout horizontal center-center" ]
-                            [ div [ class "flex-auto" ] [ text vm.displayText ]
-                            ]
-                        ]
+                        [ text vm.displayText ]
                     )
     in
         Paper.menuButton

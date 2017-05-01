@@ -122,6 +122,9 @@ getSelectedIndex { mainViewType, projects, contexts } =
             SyncView ->
                 lastProjectIndex + 3
 
+            TestView ->
+                lastProjectIndex + 4
+
 
 divider =
     div [ class "divider" ] []

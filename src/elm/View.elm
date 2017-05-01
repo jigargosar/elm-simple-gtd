@@ -167,6 +167,9 @@ appMainView contextVMs projectVMs m =
                             []
                         , Paper.button [ form |> Msg.RemotePouchSync >> onClick ] [ text "Sync" ]
                         ]
+
+            TestView ->
+                div [] [ text "test" ]
         ]
 
 

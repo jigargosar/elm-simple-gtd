@@ -29,6 +29,7 @@ type MainViewType
     | GroupByProjectView
     | ContextView Id
     | SyncView
+    | TestView
 
 
 type alias Model =

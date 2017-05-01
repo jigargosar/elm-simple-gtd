@@ -48,6 +48,9 @@ getPathFromModel model =
         SyncView ->
             [ "sync" ]
 
+        TestView ->
+            [ "test" ]
+
 
 delta2hash : Model -> Model -> Maybe UrlChange
 delta2hash =
@@ -86,6 +89,9 @@ builder2messages builder =
 
         "sync" :: [] ->
             [ Msg.SetView SyncView ]
+
+        "test" :: [] ->
+            [ Msg.SetView TestView ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

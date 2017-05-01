@@ -29,7 +29,7 @@ createItem selectedIndex idx =
     in
         li
             [ tabindex tabIndexValue
-            , onFocus << Msg.OnTestListItemFocus <| idx
+            , idx |> Msg.OnTestListItemFocus >> onFocus
             ]
             [ idx |> toString >> String.append "item no: " >> text ]
 

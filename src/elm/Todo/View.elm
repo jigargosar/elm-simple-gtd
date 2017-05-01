@@ -236,7 +236,7 @@ dropdownTrigger content =
 contextView vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
         [ dropdownTriggerWithTitle vm.contextName
-        , Paper.listbox [ attribute "slot" "dropdown-content" ]
+        , Paper.listbox [ class "dropdown-content", attribute "slot" "dropdown-content" ]
             (vm.contexts .|> createContextItem # vm)
         ]
 

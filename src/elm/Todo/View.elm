@@ -304,14 +304,41 @@ projectView vm =
         ]
 
 
+slotDropDownTriggerA =
+    attribute "slot" "dropdown-trigger"
+
+
 reminderView : ReminderViewModel -> Html Msg
 reminderView vm =
     let
-        reminderElement =
+        reminderTrigger =
             if vm.displayText == "" then
-                icon "alarm" [ class "flex-none" ]
+                --                dropdownTrigger (div
+                --                    [ onClick vm.startEditingMsg
+                --                    , classList
+                --                        [ "secondary-color" => not vm.isReminderActive
+                --                        , "accent-color" => vm.isReminderActive
+                --                        ]
+                --                    ]
+                --                    [ div [ class "layout horizontal center-center" ]
+                --                        [ icon "alarm-add" [ class "flex-none" ]
+                --                        ]
+                --                    ])
+                iconButton "alarm-add" [ style [ "padding-right" => "0" ], slotDropDownTriggerA ]
             else
-                div [ class "flex-auto" ] [ text vm.displayText ]
+                dropdownTrigger
+                    (div
+                        [ onClick vm.startEditingMsg
+                        , classList
+                            [ "secondary-color" => not vm.isReminderActive
+                            , "accent-color" => vm.isReminderActive
+                            ]
+                        ]
+                        [ div [ class "layout horizontal center-center" ]
+                            [ div [ class "flex-auto" ] [ text vm.displayText ]
+                            ]
+                        ]
+                    )
     in
         Paper.menuButton
             [ boolProperty "opened" vm.isEditing
@@ -319,22 +346,7 @@ reminderView vm =
             , boolProperty "stopKeyboardEventPropagation" True
             , class "flex-none"
             ]
-            [ dropdownTrigger
-                (div
-                    [ onClick vm.startEditingMsg
-                    , classList
-                        [ "secondary-color" => not vm.isReminderActive
-                        , "accent-color" => vm.isReminderActive
-                        ]
-                    ]
-                    [ div [ class "layout horizontal center-center" ]
-                        [ {- icon "alarm" [ class "flex-none" ]
-                             , div [ class "flex-auto" ] [ text vm.displayText ]
-                          -}
-                          reminderElement
-                        ]
-                    ]
-                )
+            [ reminderTrigger
             , div
                 [ class "static dropdown-content"
                 , attribute "slot" "dropdown-content"

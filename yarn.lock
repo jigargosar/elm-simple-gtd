@@ -4363,6 +4363,10 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
+tabtrap@1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/tabtrap/-/tabtrap-1.2.6.tgz#9ad32766990170c943afc9f52520229e1e10e3d6"
+
 tapable@^0.1.8, tapable@~0.1.8:
   version "0.1.10"
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-0.1.10.tgz#29c35707c2b70e50d07482b5d202e8ed446dafd4"

@@ -7,8 +7,13 @@ require("./pcss/main.pcss")
 const DB = require("./local-pouch-db")
 const sound = require("./sound")
 const $ = require("jquery")
+window.jQuery = $
+require("./jquery.trap")
+
 
 async function boot() {
+    $("#root").trap();
+
     let syncList = []
     const dbMap = {
         "todo-db": await DB("todo-db"),

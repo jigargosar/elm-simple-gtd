@@ -203,7 +203,7 @@ default vm maybeReminderForm reminderForm =
         [ classList [ "todo-item" => True ]
         ]
         [ Paper.itemBody []
-            [ div [ class "layout horizontal center justified has-hover-elements" ]
+            [ div [ class "layout horizontal center justified" ]
                 [ div [ class "font-nowrap flex-auto", onClick vm.startEditingMsg ] [ text vm.text ]
                 , div [ class "layout horizontal" ]
                     [ doneIconButton vm
@@ -221,14 +221,6 @@ default vm maybeReminderForm reminderForm =
         ]
 
 
-contextView vm =
-    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
-        [ dropdownTriggerWithTitle vm.contextName
-        , Paper.listbox [ attribute "slot" "dropdown-content" ]
-            (vm.contexts .|> createContextItem # vm)
-        ]
-
-
 dropdownTriggerWithTitle title =
     div [ class "font-nowrap" ] [ text title ] |> dropdownTrigger
 
@@ -238,6 +230,14 @@ dropdownTrigger content =
         [ Paper.button [ class "padding-0 margin-0 shrink" ]
             [ div [ class "text-transform-none secondary-color font-nowrap" ] [ content ]
             ]
+        ]
+
+
+contextView vm =
+    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
+        [ dropdownTriggerWithTitle vm.contextName
+        , Paper.listbox [ attribute "slot" "dropdown-content" ]
+            (vm.contexts .|> createContextItem # vm)
         ]
 
 

@@ -1,5 +1,6 @@
 port module Main exposing (..)
 
+import CommonMsg
 import Document
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
@@ -98,10 +99,7 @@ update : Msg -> Model -> Return
 update msg =
     Return.singleton
         >> (case msg of
-                NoOp ->
-                    identity
-
-                OnnCommonMsg msg ->
+                OnCommonMsg msg ->
                     identity
 
                 OnTestListItemFocus idx ->

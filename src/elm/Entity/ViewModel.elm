@@ -6,7 +6,7 @@ import Document
 import EditMode exposing (EditMode)
 import Lazy
 import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(ToggleDeleted, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), EntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
-import Msg exposing (Msg)
+import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -119,7 +119,7 @@ create todoListByEntityId config entity =
 
         onDeleteClicked =
             if isNull then
-                (Msg.NoOp)
+                (commonMsg.noOp)
             else
                 (onEntityAction ToggleDeleted)
 
@@ -155,7 +155,7 @@ create todoListByEntityId config entity =
                 if bool then
                     Msg.SetView (config.getViewType id)
                 else
-                    Msg.NoOp
+                    commonMsg.noOp
             )
         , startEditingMsg = onEntityAction StartEditing
         , onDeleteClicked = onDeleteClicked

@@ -24,8 +24,7 @@ import Ext.Function.Infix exposing (..)
 
 
 type Msg
-    = NoOp
-    | OnnCommonMsg CommonMsg.Msg
+    = OnCommonMsg CommonMsg.Msg
     | RemotePouchSync EditMode.RemoteSyncForm
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction ReminderOverlay.Action
@@ -91,3 +90,8 @@ type alias ReturnTuple a =
 
 type alias ReturnF =
     Return -> Return
+
+
+commonMsg : CommonMsg.Helper Msg
+commonMsg =
+    CommonMsg.createHelper OnCommonMsg

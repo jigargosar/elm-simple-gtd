@@ -9,7 +9,7 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, checked, class, classList, id, style, tabindex, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
-import Msg exposing (Msg(SetView))
+import Msg exposing (Msg(SetView), commonMsg)
 import String.Extra
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -154,7 +154,7 @@ entityListItem vm =
         ([ Html.node "iron-icon" [ iconP vm.icon.name, style [ "color" => vm.icon.color ] ] []
          , itemBody [] [ View.Shared.defaultBadge vm ]
          , hoverIcons vm
-         , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
+         , hideOnHover vm.isDeleted [ trashButton commonMsg.noOp ]
          ]
         )
 

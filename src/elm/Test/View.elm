@@ -14,13 +14,13 @@ import String.Extra as String
 
 
 createItems model =
-    model.list .|> createItem model.selectedIdx
+    model.list .|> createItem model.selectedIndex
 
 
-createItem selectedIdx idx =
+createItem selectedIndex idx =
     let
         tabIndexValue =
-            if idx == selectedIdx then
+            if idx == selectedIndex then
                 0
             else
                 -1
@@ -32,7 +32,7 @@ init selectedIndex =
     let
         viewModel =
             { list = List.range 0 10
-            , selectedIdx = selectedIndex
+            , selectedIndex = selectedIndex
             }
     in
         ul [] (createItems viewModel)
@@ -40,5 +40,5 @@ init selectedIndex =
 
 type alias ViewModel =
     { list : List Int
-    , selectedIdx : Int
+    , selectedIndex : Int
     }

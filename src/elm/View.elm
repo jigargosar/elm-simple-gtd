@@ -4,7 +4,7 @@ import EditMode
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, form, h1, h2, hr, input, node, span, text)
-import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, type_, value)
+import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, tabindex, type_, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model
@@ -99,6 +99,7 @@ appHeaderView m viewModel =
             ]
             [ paperIconButton
                 [ iconP "menu"
+                , tabindex -1
                 , attribute "drawer-toggle" ""
                 , onClick Msg.ToggleDrawer
                 ]

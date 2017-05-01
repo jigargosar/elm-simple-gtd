@@ -58,6 +58,7 @@ view m viewModel =
                         [ div []
                             [ paperIconButton
                                 [ iconP "menu"
+                                , tabindex -1
                                 , attribute "drawer-toggle" ""
                                 , onClick Msg.ToggleDrawer
                                 ]

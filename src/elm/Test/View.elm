@@ -40,7 +40,7 @@ createItem selectedIndex idx =
 
 init model =
     div []
-        [ div [] [ model.selectedIndex |> toString >> text ]
-        , div [ class "_big-dialog" ] [ h1 [] [ text "big-dialog" ] ]
+        [ -- , div [ class "big-dialog" ] [ h1 [] [ text "big-dialog" ] ]
+          div [] [ model.selectedIndex |> toString >> text ]
         , ul [ class "focusable-list test-list", onKeyDown Msg.OnTestListKeyDown ] (createItems model)
         ]

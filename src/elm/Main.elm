@@ -128,7 +128,7 @@ update msg =
                                     in
                                         { model | testModel = { testModel | selectedIndex = selectedIndex } }
                                 )
-                                >> Return.command (DomPorts.focusSelector ".test-list > [tabindex=0]")
+                                >> andThenUpdate (commonMsg.focus ".test-list > [tabindex=0]")
 
                         Key.ArrowDown ->
                             Return.map
@@ -144,7 +144,7 @@ update msg =
                                     in
                                         { model | testModel = { testModel | selectedIndex = selectedIndex } }
                                 )
-                                >> Return.command (DomPorts.focusSelector ".test-list > [tabindex=0]")
+                                >> andThenUpdate (commonMsg.focus ".test-list > [tabindex=0]")
 
                         _ ->
                             identity

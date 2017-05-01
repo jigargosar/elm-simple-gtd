@@ -20,7 +20,6 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Types exposing (..)
 
 
 type Msg

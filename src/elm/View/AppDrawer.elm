@@ -9,7 +9,6 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, checked, class, classList, id, style, tabindex, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
-import Model.TodoStore
 import Msg exposing (Msg(SetView))
 import String.Extra
 import Maybe.Extra as Maybe

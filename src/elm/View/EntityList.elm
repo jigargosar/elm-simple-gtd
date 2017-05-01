@@ -13,7 +13,6 @@ import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Maybe.Extra as Maybe
 import Model.Internal as Model
-import Model.TodoStore exposing (TodoContextViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
 import Project
@@ -43,7 +42,7 @@ import View.Shared exposing (..)
 
 filtered : Model -> Html Msg
 filtered =
-    apply2 ( View.Shared.createSharedViewModel >> Todo.View.createKeyedItem, Model.TodoStore.getFilteredTodoList )
+    apply2 ( View.Shared.createSharedViewModel >> Todo.View.createKeyedItem, Model.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
                 Paper.material []
                     [ Keyed.node "paper-listbox"

@@ -9,7 +9,6 @@ import Ext.Keyboard as Keyboard
 import Ext.Return as Return
 import Model.Internal as Model
 import Model.RunningTodo as Model
-import Model.TodoStore as Model
 import Project
 import Ext.Random as Random
 import Project
@@ -41,7 +40,6 @@ import Html
 import Msg exposing (..)
 import RunningTodo
 import Model.Types exposing (..)
-import Types
 
 
 port showNotification : TodoNotification -> Cmd msg
@@ -408,7 +406,7 @@ andThenUpdateAll =
 
 onUpdateNow now =
     Return.map (Model.setNow now)
---        >> Return.map (Ext.Debug.tapLog .editMode "editmode")
+        --        >> Return.map (Ext.Debug.tapLog .editMode "editmode")
         >> Return.andThen
             (\m ->
                 let

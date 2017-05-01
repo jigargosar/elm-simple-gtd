@@ -15,13 +15,13 @@ require("jquery-ui/ui/position")
 async function boot() {
     $("#root").trap();
 
-    setTimeout(() => {
-        $(".big-dialog").position({
-            my: "left top", at: "left bottom", of: ".focusable-list"
-            // , within: "#main-view > div"
-            , collision: "fit"
-        })
-    }, 2000)
+    // setTimeout(() => {
+    //     $(".big-dialog").position({
+    //         my: "left top", at: "left bottom", of: ".focusable-list"
+    //         // , within: "#main-view > div"
+    //         , collision: "fit"
+    //     })
+    // }, 2000)
 
     let syncList = []
     const dbMap = {

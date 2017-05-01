@@ -232,12 +232,21 @@ contextView vm =
 
 
 dropdownTrigger title =
-    Paper.item [ class "padding-0", attribute "slot" "dropdown-trigger" ]
-        [ Paper.itemBody []
-            [ div [ attribute "secondary" "" ]
-                [ text title ]
-            ]
+    div [ class "layout horizontal center-center", attribute "slot" "dropdown-trigger" ]
+        [ Html.button [ class "font-nowrap flex-auto no-style", attribute "slot" "dropdown-trigger" ]
+            [ text title ]
         ]
+
+
+
+--dropdownTrigger title =
+--    Paper.item [ class "padding-0", attribute "slot" "dropdown-trigger" ]
+--        [ Paper.itemBody []
+--            [ div [ attribute "secondary" "" ]
+--                [ text title ]
+--            ]
+--        ]
+--
 
 
 projectView vm =

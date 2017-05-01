@@ -227,7 +227,7 @@ defaultOkCancelButtons =
 
 
 okCancelButtons okMsg cancelMsg =
-    div [ class "layout horizontal end-justified full-divider" ]
+    div [ class "layout horizontal end-justified" ]
         [ Paper.button
             [ onClickStopPropagation cancelMsg
             , boolProperty "stopKeyboardEventPropagation" True

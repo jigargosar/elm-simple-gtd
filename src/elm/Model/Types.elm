@@ -47,6 +47,7 @@ type alias Model =
     , reminderOverlay : ReminderOverlay.Model
     , pouchDBRemoteSyncURI : String
     , appDrawerForceNarrow : Bool
+    , testSelectedIndex : Int
     }
 
 

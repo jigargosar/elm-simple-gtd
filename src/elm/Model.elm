@@ -60,6 +60,7 @@ init { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemo
         , reminderOverlay = ReminderOverlay.none
         , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
         , appDrawerForceNarrow = False
+        , testSelectedIndex = 0
         }
 
 

@@ -100,7 +100,7 @@ update msg =
     Return.singleton
         >> (case msg of
                 OnCommonMsg msg ->
-                    identity
+                    CommonMsg.update msg
 
                 OnTestListItemFocus idx ->
                     Return.map

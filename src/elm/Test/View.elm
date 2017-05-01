@@ -30,17 +30,8 @@ createItem selectedIndex idx =
         li [ tabindex tabIndexValue ] [ idx |> toString >> String.append "item no: " >> text ]
 
 
-init selectedIndex =
-    let
-        viewModel =
-            { list = List.range 0 10
-            , selectedIndex = selectedIndex
-            }
-    in
-        ul [ class "test-list", onKeyDown Msg.OnTestListKeyDown ] (createItems viewModel)
-
-
-type alias ViewModel =
-    { list : List Int
-    , selectedIndex : Int
-    }
+init model =
+    div []
+        [ div [] [ model.selectedIndex |> toString >> text ]
+        , ul [ class "test-list", onKeyDown Msg.OnTestListKeyDown ] (createItems model)
+        ]

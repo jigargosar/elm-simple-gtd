@@ -106,14 +106,32 @@ update msg =
                         Key.ArrowUp ->
                             Return.map
                                 (\model ->
-                                    { model | testSelectedIndex = model.testSelectedIndex + 1 }
+                                    let
+                                        testModel =
+                                            model.testModel
+
+                                        selectedIndex =
+                                            testModel.selectedIndex
+                                                - 1
+                                                |> clamp 0 (testModel.list |> List.length >> (-) # 1)
+                                    in
+                                        { model | testModel = { testModel | selectedIndex = selectedIndex } }
                                 )
                                 >> Return.command (DomPorts.focusSelector ".test-list > [tabindex=0]")
 
                         Key.ArrowDown ->
                             Return.map
                                 (\model ->
-                                    { model | testSelectedIndex = model.testSelectedIndex - 1 }
+                                    let
+                                        testModel =
+                                            model.testModel
+
+                                        selectedIndex =
+                                            testModel.selectedIndex
+                                                + 1
+                                                |> clamp 0 (testModel.list |> List.length >> (-) # 1)
+                                    in
+                                        { model | testModel = { testModel | selectedIndex = selectedIndex } }
                                 )
                                 >> Return.command (DomPorts.focusSelector ".test-list > [tabindex=0]")
 

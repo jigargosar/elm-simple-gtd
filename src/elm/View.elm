@@ -170,7 +170,7 @@ appMainView contextVMs projectVMs model =
                         ]
 
             TestView ->
-                Test.View.init model.testSelectedIndex
+                Test.View.init model.testModel
         ]
 
 

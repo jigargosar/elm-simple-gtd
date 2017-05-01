@@ -60,7 +60,10 @@ init { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemo
         , reminderOverlay = ReminderOverlay.none
         , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
         , appDrawerForceNarrow = False
-        , testSelectedIndex = 0
+        , testModel =
+            { list = List.range 0 10
+            , selectedIndex = 0
+            }
         }
 
 

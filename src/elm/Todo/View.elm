@@ -313,17 +313,6 @@ reminderView vm =
     let
         reminderTrigger =
             if vm.displayText == "" then
-                --                dropdownTrigger (div
-                --                    [ onClick vm.startEditingMsg
-                --                    , classList
-                --                        [ "secondary-color" => not vm.isReminderActive
-                --                        , "accent-color" => vm.isReminderActive
-                --                        ]
-                --                    ]
-                --                    [ div [ class "layout horizontal center-center" ]
-                --                        [ icon "alarm-add" [ class "flex-none" ]
-                --                        ]
-                --                    ])
                 iconButton "alarm-add" [ style [ "padding-right" => "0" ], slotDropDownTriggerA ]
             else
                 dropdownTrigger

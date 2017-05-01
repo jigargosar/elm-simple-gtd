@@ -35,7 +35,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Polymer.Paper as Paper
-import View.Shared exposing (SharedViewModel, defaultOkCancelButtons, hideOnHover)
+import View.Shared exposing (SharedViewModel, defaultOkCancelButtons, defaultOkCancelDeleteButtons, hideOnHover)
 import WebComponents exposing (..)
 
 
@@ -340,7 +340,7 @@ editView vm evm =
                     ]
                     []
                 ]
-            , defaultOkCancelButtons
+            , defaultOkCancelDeleteButtons evm.onDeleteClicked
             ]
         ]
 

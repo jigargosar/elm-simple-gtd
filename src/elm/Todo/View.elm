@@ -259,7 +259,7 @@ default vm maybeReminderForm reminderForm =
         [ classList [ "todo-item" => True ]
         ]
         [ Paper.itemBody []
-            [ div [ class "layout horizontal center-center " ]
+            [ div [ class "layout horizontal " ]
                 [ div
                     [ style [ "flex" => "1 1 auto" ]
                     , class "text-wrap"

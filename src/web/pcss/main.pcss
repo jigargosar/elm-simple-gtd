@@ -162,21 +162,25 @@ paper-item, .has-hover-elements {
 }
 
 paper-item {
-  //min-height:40px;
+//min-height:40px;
 }
+
 .todo-list {
   background-color: white;
 
   & .todo-item {
+
+    border-top: 1px solid rgba(179, 179, 179, 0.53);
+
     &:first-child {
       border-top: 1px solid transparent;
     }
 
     &:not(.editing) {
-    //padding-left:0;
+      & paper-item-body {
+        padding: 10px 0;
+      }
     }
-
-    border-top: 1px solid rgba(179, 179, 179, 0.53);
 
     &.editing {
       flex-direction: column;
@@ -189,7 +193,7 @@ paper-item {
       padding: 0;
     }
 
-    & .text{
+    & .text {
       padding: 0 8px;
     }
 

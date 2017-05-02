@@ -86,6 +86,7 @@ createEditTodoViewModel todo form =
 
 type alias TodoViewModel =
     { text : Todo.Text
+    , displayText : String
     , isDone : Bool
     , isDeleted : Bool
     , isSelected : Bool
@@ -204,10 +205,20 @@ createTodoViewModel vc todo =
                 , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
                 , startEditingMsg = Msg.StartEditingReminder todo
                 }
+
+        text =
+            Todo.getText todo
+
+        displayText =
+            if String.Extra.isBlank text then
+                "< empty >"
+            else
+                text
     in
         { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo
-        , text = Todo.getText todo
+        , text = text
+        , displayText = displayText
         , isSelected = Set.member todoId vc.selection
         , projectName = projectName
         , projectDisplayName = projectDisplayName
@@ -251,7 +262,7 @@ default vm maybeReminderForm reminderForm =
             [ div [ class "layout horizontal justified wrap" ]
                 [ div [ style [ "flex" => "0 1 auto" ], class "_flex-auto text-wrap", onClick vm.startEditingMsg ]
                     [ doneIconButton vm
-                    , text vm.text
+                    , text vm.displayText
                     ]
                 , div [ style [ "flex" => "0 1 auto" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
                     [ reminderView vm.reminder
@@ -263,15 +274,17 @@ default vm maybeReminderForm reminderForm =
                     -}
                     ]
                 ]
-            {-, div [ class "layout horizontal" ]
-                [ {- reminderView vm.reminder
-                     ,
-                  -}
-                  div [ class "shrink flex-auto layout horizontal center-aligned" ]
-                    [ projectMenuButton vm
-                    , contextMenuButton vm
-                    ]
-                ]-}
+
+            {- , div [ class "layout horizontal" ]
+               [ {- reminderView vm.reminder
+                    ,
+                 -}
+                 div [ class "shrink flex-auto layout horizontal center-aligned" ]
+                   [ projectMenuButton vm
+                   , contextMenuButton vm
+                   ]
+               ]
+            -}
             ]
         ]
 

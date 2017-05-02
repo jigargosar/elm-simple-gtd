@@ -240,19 +240,6 @@ createTodoViewModel vc todo =
         }
 
 
-createReminderVM form startEditingMsg =
-    let
-        updateReminderForm =
-            Msg.UpdateReminderForm form
-    in
-        { form = form
-        , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
-        , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
-        , onSaveClicked = Msg.SaveCurrentForm
-        , startEditingMsg = startEditingMsg
-        }
-
-
 default : TodoViewModel -> Maybe Todo.ReminderForm.Model -> Todo.ReminderForm.Model -> Html Msg
 default vm maybeReminderForm reminderForm =
     Paper.item

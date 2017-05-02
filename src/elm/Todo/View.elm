@@ -313,7 +313,7 @@ reminderView vm =
                             ]
                         , style [ "padding" => "0 8px" ]
                         ]
-                        [ icon "av:snooze" [ classList [ "display-none" => vm.isSnoozed ] ]
+                        [ icon "av:snooze" [ classList [ "display-none" => not vm.isSnoozed ] ]
                         , text vm.displayText
                         ]
                     )

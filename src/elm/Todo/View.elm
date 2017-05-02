@@ -257,8 +257,6 @@ default vm maybeReminderForm reminderForm =
                         [ class "text" ]
                         [ text vm.displayText ]
                     ]
-
-                --                , div [ class "flex-auto" ] []
                 , div
                     [ style [ "flex" => "0 1 auto" ]
                     , class "layout horizontal wrap end-justified end-aligned"

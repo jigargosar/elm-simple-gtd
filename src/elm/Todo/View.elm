@@ -274,7 +274,7 @@ default vm maybeReminderForm reminderForm =
                 --                , div [ class "flex-auto" ] []
                 , div
                     [ style [ "flex" => "0 1 auto" ]
-                    , class "layout horizontal wrap end-justified end-aligned secondary-color"
+                    , class "layout horizontal wrap end-justified end-aligned"
                     ]
                     [ reminderView vm.reminder
                     , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton2 vm ]
@@ -307,7 +307,7 @@ dropdownTriggerWithTitle title =
 dropdownTrigger content =
     div [ style [ "height" => "24px" ], class "layout horizontal font-body1", attribute "slot" "dropdown-trigger" ]
         [ Paper.button [ class "padding-0 margin-0 shrink" ]
-            [ div [ class "text-transform-none secondary-color font-nowrap" ] [ content ]
+            [ div [ class "text-transform-none primary-color font-nowrap" ] [ content ]
             ]
         ]
 
@@ -361,8 +361,8 @@ reminderView vm =
                     (div
                         [ onClick vm.startEditingMsg
                         , classList
-                            [ "secondary-color" => not vm.isReminderActive
-                            , "accent-color" => vm.isReminderActive
+                            [ "reminder-text" => True
+                            , "active" => vm.isReminderActive
                             ]
                         , style [ "padding" => "0 8px" ]
                         ]

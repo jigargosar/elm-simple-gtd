@@ -266,12 +266,16 @@ default vm maybeReminderForm reminderForm =
                     , onClick vm.startEditingMsg
                     ]
                     [ doneIconButton2 vm
-                    , span [ class "text" ] [ text vm.displayText ]
+                    , span
+                        [ style [ "display" => "inline block" ]
+                        , class "text"
+                        ]
+                        [ text vm.displayText ]
                     ]
 
                 --                , div [ class "flex-auto" ] []
                 , div
-                    [ style [ "flex" => "0 1 auto" ]
+                    [ style [ "flex" => "0 2 auto" ]
                     , class "layout horizontal wrap end-justified end-aligned secondary-color"
                     ]
                     [ reminderView vm.reminder

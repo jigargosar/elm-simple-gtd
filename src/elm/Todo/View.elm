@@ -262,7 +262,7 @@ default vm maybeReminderForm reminderForm =
             [ div [ class "layout horizontal justified wrap" ]
                 [ div [ style [ "flex" => "1 1 auto" ], class "_flex-auto text-wrap", onClick vm.startEditingMsg ]
                     [ doneIconButton2 vm
-                    , text vm.displayText
+                    , span [ class "text" ] [ text vm.displayText ]
                     ]
                 , div [ style [ "flex" => "0 1 auto", "height" => "40px" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
                     [ reminderView vm.reminder

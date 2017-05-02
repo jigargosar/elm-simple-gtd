@@ -573,7 +573,7 @@ getCurrentTodoListFilter model =
 getCurrentTodoListSortByFunction model =
     case getMainViewType model of
         BinView ->
-            Todo.getDeletedAtOrModifiedAt >> negate
+            Todo.getDeletedAt >> negate
 
         DoneView ->
             Todo.getModifiedAt >> negate

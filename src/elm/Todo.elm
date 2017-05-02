@@ -102,23 +102,6 @@ getDeleted =
     (.deleted)
 
 
-getDeletedAt : Model -> Time
-getDeletedAt =
-    (.deletedAt)
-
-
-getDeletedAtOrModifiedAt : Model -> Time
-getDeletedAtOrModifiedAt model =
-    let
-        deletedAt =
-            getDeletedAt model
-    in
-        if deletedAt == defaultDeletedAt then
-            getModifiedAt model
-        else
-            deletedAt
-
-
 isDeleted =
     getDeleted
 
@@ -301,8 +284,15 @@ encodeOtherFields todo =
     , "projectId" => (todo.projectId |> E.string)
     , "contextId" => (todo.contextId |> E.string)
     , "reminder" => encodeReminder todo.reminder
-    , "deletedAt" => E.float todo.deletedAt
+    , "deletedAt" => E.float (getDeletedAt todo)
     ]
+
+
+getDeletedAt todo =
+    if getDeleted todo && getDeletedAt todo == defaultDeletedAt then
+        getModifiedAt todo
+    else
+        getDeletedAt todo
 
 
 encodeReminder reminder =

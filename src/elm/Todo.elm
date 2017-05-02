@@ -196,8 +196,11 @@ isReminderOverdue now =
     getMaybeReminderTime >> Maybe.unwrap False (\time -> time <= now)
 
 
-isReminderActive =
-    getMaybeReminderTime >> Maybe.isJust
+isSnoozed todo =
+    ( getMaybeReminderTime todo, getDueAt todo )
+        |> maybe2Tuple
+        ?|> uncurry notEquals
+        ?= False
 
 
 maybeTimeToReminder maybeTime =

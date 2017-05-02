@@ -112,7 +112,7 @@ type alias ReminderViewModel =
     , time : String
     , displayText : String
     , isOverDue : Bool
-    , isReminderActive : Bool
+    , isSnoozed : Bool
     , onDateChanged : String -> Msg
     , onTimeChanged : String -> Msg
     , startEditingMsg : Msg
@@ -196,7 +196,7 @@ createTodoViewModel vc todo =
                 , time = form.time
                 , displayText = displayText
                 , isOverDue = displayText == overDueText
-                , isReminderActive = Todo.isReminderActive todo
+                , isSnoozed = Todo.isSnoozed todo
                 , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
                 , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
                 , startEditingMsg = Msg.StartEditingReminder todo
@@ -308,12 +308,12 @@ reminderView vm =
                         [ onClick vm.startEditingMsg
                         , classList
                             [ "reminder-text" => True
-                            , "active" => vm.isReminderActive
+                            , "active" => vm.isSnoozed
                             , "overdue" => vm.isOverDue
                             ]
                         , style [ "padding" => "0 8px" ]
                         ]
-                        [ icon "av:snooze" [ classList [ "display-none" => not vm.isReminderActive ] ]
+                        [ icon "av:snooze" [ classList [ "display-none" => not vm.isSnoozed ] ]
                         , text vm.displayText
                         ]
                     )

@@ -259,7 +259,7 @@ default vm maybeReminderForm reminderForm =
         [ classList [ "todo-item" => True ]
         ]
         [ Paper.itemBody []
-            [ div [ class "layout horizontal justified wrap" ]
+            [ div [ class "layout horizontal center justified wrap" ]
                 [ div [ style [ "flex" => "1 1 auto" ], class "_flex-auto text-wrap", onClick vm.startEditingMsg ]
                     [ doneIconButton2 vm
                     , span [ class "text" ] [ text vm.displayText ]

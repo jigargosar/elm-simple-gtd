@@ -153,7 +153,7 @@ createTodoViewModel vc todo =
                 |> String.append "#"
 
         contextDisplayName =
-            Todo.getProjectId todo
+            Todo.getContextId todo
                 |> (Dict.get # vc.contextByIdDict)
                 ?|> Context.getName
                 ?= "Inbox"
@@ -248,14 +248,15 @@ default vm maybeReminderForm reminderForm =
         [ classList [ "todo-item" => True ]
         ]
         [ Paper.itemBody []
-            [ div [ class "layout horizontal center justified" ]
-                [ doneIconButton vm
-                , div [ class "flex-auto text-wrap", onClick vm.startEditingMsg ]
-                    [ text vm.text ]
-                , div [ style [ "padding" => "0 8px", "flex" => "0 1 auto" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
+            [ div [ class "layout horizontal justified wrap" ]
+                [ div [ style [ "flex" => "0 1 auto" ], class "_flex-auto text-wrap", onClick vm.startEditingMsg ]
+                    [ doneIconButton vm
+                    , text vm.text
+                    ]
+                , div [ style [ "flex" => "0 1 auto" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
                     [ reminderView vm.reminder
                     , div [ style [ "padding" => "0 8px" ] ] [ vm.contextDisplayName |> text ]
-                    , div [] [ vm.projectDisplayName |> text ]
+                    , div [ style [ "padding" => "0 8px" ] ] [ vm.projectDisplayName |> text ]
                     ]
                 ]
             , div [ class "layout horizontal" ]
@@ -405,7 +406,9 @@ doneIconButton vm =
         [ class ("done-" ++ toString (vm.isDone))
         , onClickStopPropagation (vm.onDoneClicked)
         , iconP "check"
-        , class "flex-none"
+
+        --        , class "flex-none"
+        , style [ "flex" => "0 0 auto" ]
         ]
         []
 

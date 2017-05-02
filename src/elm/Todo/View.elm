@@ -250,8 +250,8 @@ default vm maybeReminderForm reminderForm =
                     [ text vm.text ]
                 , div [ class "layout horizontal center secondary-color font-body1" ]
                     [ reminderView vm.reminder
-                    , div [ ]  [ vm.projectDisplayName |> text ]
-                    , div [] [ vm.contextDisplayName |> text ]
+                    , div [ style [ "padding" => "0 8px" ] ] [ vm.projectDisplayName |> text ]
+                    , div [ style [ "padding" => "0 8px" ] ] [ vm.contextDisplayName |> text ]
                     ]
                 ]
             , div [ class "layout horizontal" ]
@@ -314,6 +314,7 @@ reminderView vm =
                             [ "secondary-color" => not vm.isReminderActive
                             , "accent-color" => vm.isReminderActive
                             ]
+                        , style [ "padding" => "0 8px" ]
                         ]
                         [ text vm.displayText ]
                     )

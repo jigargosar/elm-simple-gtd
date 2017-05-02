@@ -553,6 +553,7 @@ getFilteredTodoList model =
         allTodos
             |> List.filter filter
             |> List.sortBy sortFunction
+            |> List.take 25
 
 
 getCurrentTodoListFilter model =

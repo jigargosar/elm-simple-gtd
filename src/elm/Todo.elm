@@ -289,10 +289,10 @@ encodeOtherFields todo =
 
 
 getDeletedAt todo =
-    if getDeleted todo && getDeletedAt todo == defaultDeletedAt then
+    if getDeleted todo && todo.deletedAt == defaultDeletedAt then
         getModifiedAt todo
     else
-        getDeletedAt todo
+        todo.deletedAt
 
 
 encodeReminder reminder =

@@ -99,7 +99,6 @@ type alias TodoViewModel =
     , onDoneClicked : Msg
     , onDeleteClicked : Msg
     , showDetails : Bool
-    , isReminderActive : Bool
     , contexts : List Context.Model
     , projects : List Project.Model
     , onReminderButtonClicked : Msg
@@ -229,7 +228,6 @@ createTodoViewModel vc todo =
         , onDoneClicked = Msg.ToggleTodoDone todo
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
         , showDetails = vc.showDetails
-        , isReminderActive = Todo.isReminderActive todo
         , contexts = vc.activeContexts
         , projects = vc.activeProjects
         , onReminderButtonClicked = Msg.StartEditingReminder todo

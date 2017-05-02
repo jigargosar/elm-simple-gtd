@@ -248,7 +248,7 @@ default vm maybeReminderForm reminderForm =
                 [ doneIconButton vm
                 , div [ class "font-nowrap flex-auto", onClick vm.startEditingMsg ]
                     [ text vm.text ]
-                , div [ class "layout horizontal center secondary-color font-body1" ]
+                , div [ class "flex-auto layout horizontal center secondary-color font-body1 wrap" ]
                     [ reminderView vm.reminder
                     , div [] [ vm.projectDisplayName |> text ]
                     , div [ style [ "padding-left" => "4px" ] ] [ vm.contextDisplayName |> text ]

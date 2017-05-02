@@ -532,12 +532,6 @@ createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 
 
-getFilteredTodoList2 =
-    apply2 ( getCurrentTodoListFilter, getTodoStore >> Store.asList )
-        >> uncurry List.filter
-        >> List.sortBy (Todo.getModifiedAt >> negate)
-
-
 getFilteredTodoList model =
     let
         filter =

@@ -264,7 +264,7 @@ default vm maybeReminderForm reminderForm =
                     [ doneIconButton2 vm
                     , span [ class "text" ] [ text vm.displayText ]
                     ]
-                , div [ style [ "flex" => "0 1 auto", "height" => "40px" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
+                , div [ style [ "flex" => "0 1 auto", "_height" => "40px" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
                     [ reminderView vm.reminder
                     , div [ style [ "padding" => "0 8px" ] ] [ contextMenuButton2 vm ]
                     , div [ style [ "padding" => "0 8px" ] ] [ projectMenuButton2 vm ]

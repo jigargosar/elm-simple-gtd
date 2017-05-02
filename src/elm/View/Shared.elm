@@ -245,25 +245,13 @@ okCancelDeleteButtons okMsg cancelMsg deleteMsg =
         ]
 
 
-okButton okMsg =
-    Paper.button
-        [ onClickStopPropagation okMsg
-        , boolProperty "stopKeyboardEventPropagation" True
-        ]
-        [ text "Ok" ]
+okButton msg =
+    Paper.button [ onClickStopPropagation msg ] [ text "Ok" ]
 
 
 cancelButton msg =
-    Paper.button
-        [ onClickStopPropagation msg
-        , boolProperty "stopKeyboardEventPropagation" True
-        ]
-        [ text "Cancel" ]
+    Paper.button [ onClickStopPropagation msg ] [ text "Cancel" ]
 
 
 deleteButton msg =
-    Paper.button
-        [ onClickStopPropagation msg
-        , boolProperty "stopKeyboardEventPropagation" True
-        ]
-        [ text "Delete" ]
+    Paper.button [ onClickStopPropagation msg ] [ text "Delete" ]

@@ -363,6 +363,7 @@ reminderView vm =
                         , classList
                             [ "reminder-text" => True
                             , "active" => vm.isReminderActive
+                            , "overdue" => vm.isOverDue
                             ]
                         , style [ "padding" => "0 8px" ]
                         ]

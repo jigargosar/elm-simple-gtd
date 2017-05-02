@@ -264,8 +264,8 @@ default vm maybeReminderForm reminderForm =
                      ,
                   -}
                   div [ class "shrink flex-auto layout horizontal center-aligned" ]
-                    [ projectView vm
-                    , contextView vm
+                    [ projectMenuButton vm
+                    , contextMenuButton vm
                     ]
                 ]
             ]
@@ -284,7 +284,7 @@ dropdownTrigger content =
         ]
 
 
-contextView vm =
+contextMenuButton vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
         [ dropdownTriggerWithTitle vm.contextName
         , Paper.listbox [ class "dropdown-content", attribute "slot" "dropdown-content" ]
@@ -292,7 +292,7 @@ contextView vm =
         ]
 
 
-projectView vm =
+projectMenuButton vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
         [ dropdownTriggerWithTitle vm.projectName
         , Paper.listbox

@@ -264,25 +264,10 @@ default vm maybeReminderForm reminderForm =
                     , class "layout horizontal wrap end-justified end-aligned"
                     ]
                     [ reminderView vm.reminder
-                    , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton2 vm ]
-                    , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton2 vm ]
-
-                    {- , div [ style [ "padding" => "0 8px" ] ] [ vm.contextDisplayName |> text ]
-                       , div [ style [ "padding" => "0 8px" ] ] [ vm.projectDisplayName |> text ]
-                    -}
+                    , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton vm ]
+                    , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
                     ]
                 ]
-
-            {- , div [ class "layout horizontal" ]
-               [ {- reminderView vm.reminder
-                    ,
-                 -}
-                 div [ class "shrink flex-auto layout horizontal center-aligned" ]
-                   [ projectMenuButton vm
-                   , contextMenuButton vm
-                   ]
-               ]
-            -}
             ]
         ]
 
@@ -308,23 +293,6 @@ contextMenuButton vm =
 
 
 projectMenuButton vm =
-    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
-        [ dropdownTriggerWithTitle vm.projectDisplayName
-        , Paper.listbox
-            [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-            (vm.projects .|> createProjectItem # vm)
-        ]
-
-
-contextMenuButton2 vm =
-    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
-        [ dropdownTriggerWithTitle vm.contextDisplayName
-        , Paper.listbox [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-            (vm.contexts .|> createContextItem # vm)
-        ]
-
-
-projectMenuButton2 vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
         [ dropdownTriggerWithTitle vm.projectDisplayName
         , Paper.listbox

@@ -259,23 +259,21 @@ default vm maybeReminderForm reminderForm =
         [ classList [ "todo-item" => True ]
         ]
         [ Paper.itemBody []
-            [ div [ class "layout horizontal " ]
+            [ div [ class "layout horizontal" ]
                 [ div
-                    [ style [ "flex" => "1 1 auto" ]
+                    [ style [ "flex" => "1 1 auto", "min-width" => "8rem" ]
                     , class "text-wrap"
                     , onClick vm.startEditingMsg
                     ]
                     [ doneIconButton2 vm
                     , span
-                        [ style [ "display" => "inline block" ]
-                        , class "text"
-                        ]
+                        [ class "text" ]
                         [ text vm.displayText ]
                     ]
 
                 --                , div [ class "flex-auto" ] []
                 , div
-                    [ style [ "flex" => "0 2 auto" ]
+                    [ style [ "flex" => "0 1 auto" ]
                     , class "layout horizontal wrap end-justified end-aligned secondary-color"
                     ]
                     [ reminderView vm.reminder
@@ -357,7 +355,7 @@ reminderView vm =
     let
         reminderTrigger =
             if vm.displayText == "" then
-                iconButton "alarm-add" [ slotDropDownTriggerA ]
+                iconButton "alarm-add" [ slotDropDownTriggerA, onClick vm.startEditingMsg ]
             else
                 dropdownTrigger
                     (div

@@ -250,12 +250,8 @@ default vm maybeReminderForm reminderForm =
                     [ text vm.text ]
                 , div [ class "layout horizontal center secondary-color font-body1" ]
                     [ reminderView vm.reminder
-                    , div
-                        [ classList [ "display-none" => (vm.projectDisplayName == "") ]
-                        ]
-                        [ vm.projectDisplayName |> text ]
-                    , div []
-                        [ vm.contextDisplayName |> text ]
+                    , div [ ]  [ vm.projectDisplayName |> text ]
+                    , div [] [ vm.contextDisplayName |> text ]
                     ]
                 ]
             , div [ class "layout horizontal" ]

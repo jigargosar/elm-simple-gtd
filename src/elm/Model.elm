@@ -532,10 +532,27 @@ createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 
 
-getFilteredTodoList =
+getFilteredTodoList2 =
     apply2 ( getCurrentTodoListFilter, getTodoStore >> Store.asList )
         >> uncurry List.filter
         >> List.sortBy (Todo.getModifiedAt >> negate)
+
+
+getFilteredTodoList model =
+    let
+        filter =
+            model |> getCurrentTodoListFilter
+
+        allTodos =
+            model |> getTodoStore >> Store.asList
+
+        sortFunction =
+            model
+                |> getCurrentTodoListSortByFunction
+    in
+        allTodos
+            |> List.filter filter
+            |> List.sortBy sortFunction
 
 
 getCurrentTodoListFilter model =
@@ -556,13 +573,13 @@ getCurrentTodoListFilter model =
 getCurrentTodoListSortByFunction model =
     case getMainViewType model of
         BinView ->
-            Todo.getDeletedAt
+            Todo.getDeletedAtOrModifiedAt >> negate
 
         DoneView ->
-            Todo.getModifiedAt
+            Todo.getModifiedAt >> negate
 
         _ ->
-            Todo.getModifiedAt
+            Todo.getModifiedAt >> negate
 
 
 findTodoById : Todo.Id -> Model -> Maybe Todo.Model

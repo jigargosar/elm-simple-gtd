@@ -107,6 +107,18 @@ getDeletedAt =
     (.deletedAt)
 
 
+getDeletedAtOrModifiedAt : Model -> Time
+getDeletedAtOrModifiedAt model =
+    let
+        deletedAt =
+            getDeletedAt model
+    in
+        if deletedAt == defaultDeletedAt then
+            getModifiedAt model
+        else
+            deletedAt
+
+
 isDeleted =
     getDeleted
 

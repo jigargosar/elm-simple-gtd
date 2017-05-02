@@ -450,7 +450,7 @@ doneIconButton vm =
 doneIconButton2 : TodoViewModel -> Html Msg
 doneIconButton2 vm =
     Paper.iconButton
-        [ class ("done-" ++ toString (vm.isDone))
+        [ class ("done-icon done-" ++ toString (vm.isDone))
         , onClickStopPropagation (vm.onDoneClicked)
         , iconP "done"
         ]

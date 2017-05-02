@@ -6,7 +6,7 @@
   visibility: hidden !important;
 }
 
-.display-none{
+.display-none {
   display: none;
 }
 
@@ -154,8 +154,7 @@ paper-item, .has-hover-elements {
 
 .todo-list-title {
   text-transform: capitalize;
-//font-size: 0.9rem; font-weight: 600; color: rgba(0, 0, 0, 0.44);
-  display: inline-block;
+//font-size: 0.9rem; font-weight: 600; color: rgba(0, 0, 0, 0.44); display: inline-block;
 }
 
 .todo-list-container {
@@ -170,10 +169,10 @@ paper-item, .has-hover-elements {
       border-top: 1px solid transparent;
     }
 
-    &:not(.editing){
-      //padding-left:0;
+    &:not(.editing) {
+    //padding-left:0;
     }
-    
+
     border-top: 1px solid rgba(179, 179, 179, 0.53);
 
     &.editing {
@@ -181,8 +180,10 @@ paper-item, .has-hover-elements {
       align-items: stretch;
     }
 
-    & .done {
-    //text-decoration: line-through; //opacity: 0.6;
+    & .done-icon {
+      width: 32px;
+      height: 32px;
+
     }
 
     & paper-item-body {
@@ -198,12 +199,9 @@ paper-item, .has-hover-elements {
   background-color: white;
 }
 
-
-
-
-.big-dialog{
+.big-dialog {
   position: absolute;
-  width:300px;
+  width: 300px;
   height: 300px;
   background-color: rgba(0, 0, 0, 0.64);
   display: flex;
@@ -212,17 +210,18 @@ paper-item, .has-hover-elements {
   z-index: 100000;
 }
 
-.text-left{
+.text-left {
   text-align: left;
 }
 
-.padding-0{
+.padding-0 {
   padding: 0;
 }
 
-.padding-left-1rem{
+.padding-left-1rem {
   padding-left: 1rem;
 }
-.margin-0{
+
+.margin-0 {
   margin: 0;
 }

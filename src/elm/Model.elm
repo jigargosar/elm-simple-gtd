@@ -231,7 +231,7 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             ReminderOverlay.addSnoozeOffset model.now snoozeOffset
     in
         model
-            |> updateTodoById [ time |> Just >> Todo.SetTime ] todoId
+            |> updateTodoById [ time |> Just >> Todo.SnoozeTill ] todoId
             >> removeReminderOverlay
 
 

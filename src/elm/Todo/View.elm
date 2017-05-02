@@ -260,11 +260,11 @@ default vm maybeReminderForm reminderForm =
         ]
         [ Paper.itemBody []
             [ div [ class "layout horizontal justified wrap" ]
-                [ div [ style [ "flex" => "0 1 auto" ], class "_flex-auto text-wrap", onClick vm.startEditingMsg ]
-                    [ doneIconButton vm
+                [ div [ style [ "flex" => "1 1 auto" ], class "_flex-auto text-wrap", onClick vm.startEditingMsg ]
+                    [ doneIconButton2 vm
                     , text vm.displayText
                     ]
-                , div [ style [ "flex" => "0 1 auto" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
+                , div [ style [ "flex" => "0 1 auto", "height" => "40px" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
                     [ reminderView vm.reminder
                     , div [ style [ "padding" => "0 8px" ] ] [ contextMenuButton2 vm ]
                     , div [ style [ "padding" => "0 8px" ] ] [ projectMenuButton2 vm ]
@@ -443,6 +443,16 @@ doneIconButton vm =
 
         --        , class "flex-none"
         , style [ "flex" => "0 0 auto" ]
+        ]
+        []
+
+
+doneIconButton2 : TodoViewModel -> Html Msg
+doneIconButton2 vm =
+    Paper.iconButton
+        [ class ("done-" ++ toString (vm.isDone))
+        , onClickStopPropagation (vm.onDoneClicked)
+        , iconP "done"
         ]
         []
 

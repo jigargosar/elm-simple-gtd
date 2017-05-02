@@ -286,7 +286,7 @@ dropdownTrigger content =
 
 contextMenuButton vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
-        [ dropdownTriggerWithTitle vm.contextName
+        [ dropdownTriggerWithTitle vm.contextDisplayName
         , Paper.listbox [ class "dropdown-content", attribute "slot" "dropdown-content" ]
             (vm.contexts .|> createContextItem # vm)
         ]
@@ -294,7 +294,7 @@ contextMenuButton vm =
 
 projectMenuButton vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
-        [ dropdownTriggerWithTitle vm.projectName
+        [ dropdownTriggerWithTitle vm.projectDisplayName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
             (vm.projects .|> createProjectItem # vm)

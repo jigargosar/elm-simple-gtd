@@ -102,6 +102,11 @@ getDeleted =
     (.deleted)
 
 
+getDeletedAt : Model -> Time
+getDeletedAt =
+    (.deletedAt)
+
+
 isDeleted =
     getDeleted
 

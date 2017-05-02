@@ -553,6 +553,18 @@ getCurrentTodoListFilter model =
             always (True)
 
 
+getCurrentTodoListSortByFunction model =
+    case getMainViewType model of
+        BinView ->
+            Todo.getDeletedAt
+
+        DoneView ->
+            Todo.getModifiedAt
+
+        _ ->
+            Todo.getModifiedAt
+
+
 findTodoById : Todo.Id -> Model -> Maybe Todo.Model
 findTodoById id =
     getTodoStore >> Store.findById id

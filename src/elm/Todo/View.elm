@@ -253,9 +253,7 @@ default vm maybeReminderForm reminderForm =
                     , onClick vm.startEditingMsg
                     ]
                     [ doneIconButton2 vm
-                    , span
-                        [ class "text" ]
-                        [ text vm.displayText ]
+                    , span [ class "text" ] [ text vm.displayText ]
                     ]
                 , div
                     [ style [ "flex" => "0 1 auto" ]

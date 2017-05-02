@@ -165,11 +165,10 @@ paper-item, .has-hover-elements {
 .todo-list {
   background-color: white;
 
-  &:first-child {
-    border-top: none;
-  }
-
   & .todo-item {
+    &:first-child {
+      border-top: 1px solid transparent;
+    }
 
     &:not(.editing){
       //padding-left:0;

@@ -255,8 +255,12 @@ default vm maybeReminderForm reminderForm =
                     ]
                 , div [ style [ "flex" => "0 1 auto" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
                     [ reminderView vm.reminder
-                    , div [ style [ "padding" => "0 8px" ] ] [ vm.contextDisplayName |> text ]
-                    , div [ style [ "padding" => "0 8px" ] ] [ vm.projectDisplayName |> text ]
+                    , div [ style [ "padding" => "0 8px" ] ] [ contextMenuButton2 vm ]
+                    , div [ style [ "padding" => "0 8px" ] ] [ projectMenuButton2 vm ]
+
+                    {- , div [ style [ "padding" => "0 8px" ] ] [ vm.contextDisplayName |> text ]
+                       , div [ style [ "padding" => "0 8px" ] ] [ vm.projectDisplayName |> text ]
+                    -}
                     ]
                 ]
             , div [ class "layout horizontal" ]
@@ -293,6 +297,23 @@ contextMenuButton vm =
 
 
 projectMenuButton vm =
+    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
+        [ dropdownTriggerWithTitle vm.projectDisplayName
+        , Paper.listbox
+            [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+            (vm.projects .|> createProjectItem # vm)
+        ]
+
+
+contextMenuButton2 vm =
+    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
+        [ dropdownTriggerWithTitle vm.contextDisplayName
+        , Paper.listbox [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+            (vm.contexts .|> createContextItem # vm)
+        ]
+
+
+projectMenuButton2 vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
         [ dropdownTriggerWithTitle vm.projectDisplayName
         , Paper.listbox

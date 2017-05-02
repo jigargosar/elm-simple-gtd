@@ -141,19 +141,21 @@ createTodoViewModel vc todo =
                 |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
                 ?= "<No Project>"
 
-        truncateString =
+        truncateName =
             String.Extra.ellipsis 15
 
         projectDisplayName =
             Todo.getProjectId todo
                 |> (Dict.get # vc.projectByIdDict)
-                ?|> (Project.getName >> truncateString)
-                ?= "#"
+                ?|> Project.getName
+                ?= ""
+                |> truncateName
+                |> String.append "#"
 
         contextDisplayName =
             Todo.getContextId todo
                 |> (Dict.get # vc.contextByIdDict)
-                ?|> (Context.getName >> truncateString)
+                ?|> (Context.getName >> truncateName)
                 ?= "Inbox"
 
         createReminderViewModel : ReminderViewModel

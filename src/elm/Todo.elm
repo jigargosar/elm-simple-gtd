@@ -197,7 +197,7 @@ isReminderOverdue now =
 
 
 isReminderActive =
-    .reminder >> equals None >> not
+    getMaybeReminderTime >> Maybe.isJust
 
 
 maybeTimeToReminder maybeTime =

@@ -148,7 +148,7 @@ createTodoViewModel vc todo =
             Todo.getProjectId todo
                 |> (Dict.get # vc.projectByIdDict)
                 ?|> (Project.getName >> truncateString)
-                ?= ""
+                ?= "<No Project>"
 
         contextDisplayName =
             Todo.getContextId todo

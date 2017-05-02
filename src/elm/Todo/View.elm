@@ -156,9 +156,9 @@ createTodoViewModel vc todo =
             Todo.getProjectId todo
                 |> (Dict.get # vc.contextByIdDict)
                 ?|> Context.getName
-                ?= ""
-                |> truncateName
+                ?= "Inbox"
                 |> String.append "@"
+                |> truncateName
 
         createReminderViewModel : ReminderViewModel
         createReminderViewModel =

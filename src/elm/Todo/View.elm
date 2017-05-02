@@ -263,7 +263,7 @@ default vm maybeReminderForm reminderForm =
                     -}
                     ]
                 ]
-            , div [ class "layout horizontal" ]
+            {-, div [ class "layout horizontal" ]
                 [ {- reminderView vm.reminder
                      ,
                   -}
@@ -271,7 +271,7 @@ default vm maybeReminderForm reminderForm =
                     [ projectMenuButton vm
                     , contextMenuButton vm
                     ]
-                ]
+                ]-}
             ]
         ]
 

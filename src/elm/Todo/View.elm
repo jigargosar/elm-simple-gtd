@@ -308,7 +308,6 @@ reminderView vm =
                         [ onClick vm.startEditingMsg
                         , classList
                             [ "reminder-text" => True
-                            , "active" => vm.isSnoozed
                             , "overdue" => vm.isOverDue
                             ]
                         , style [ "padding" => "0 8px" ]

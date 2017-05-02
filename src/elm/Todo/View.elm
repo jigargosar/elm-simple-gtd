@@ -46,13 +46,10 @@ createKeyedItem vc todo =
         vm =
             createTodoViewModel vc todo
 
-        maybeReminderForm =
-            vc.getMaybeTodoReminderFormForTodo todo
-
         view =
             vc.getMaybeEditTodoFormForTodo todo
                 |> Maybe.unpack
-                    (\_ -> default vm maybeReminderForm (vc.getTodoReminderForm todo))
+                    (\_ -> default vm)
                     (createEditTodoViewModel todo >> editView vm)
     in
         ( Document.getId todo, view )
@@ -240,8 +237,8 @@ createTodoViewModel vc todo =
         }
 
 
-default : TodoViewModel -> Maybe Todo.ReminderForm.Model -> Todo.ReminderForm.Model -> Html Msg
-default vm maybeReminderForm reminderForm =
+default : TodoViewModel -> Html Msg
+default vm =
     Paper.item
         [ classList [ "todo-item" => True ]
         ]

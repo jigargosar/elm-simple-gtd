@@ -259,15 +259,24 @@ default vm maybeReminderForm reminderForm =
         [ classList [ "todo-item" => True ]
         ]
         [ Paper.itemBody []
-            [ div [ class "layout horizontal center justified wrap" ]
-                [ div [ style [ "flex" => "1 1 auto" ], class "_flex-auto text-wrap", onClick vm.startEditingMsg ]
+            [ div [ class "layout horizontal center-center " ]
+                [ div
+                    [ style [ "flex" => "1 1 auto" ]
+                    , class "text-wrap"
+                    , onClick vm.startEditingMsg
+                    ]
                     [ doneIconButton2 vm
                     , span [ class "text" ] [ text vm.displayText ]
                     ]
-                , div [ style [ "flex" => "0 1 auto", "_height" => "40px" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
+
+                --                , div [ class "flex-auto" ] []
+                , div
+                    [ style [ "flex" => "0 1 auto" ]
+                    , class "layout horizontal wrap end-justified end-aligned secondary-color"
+                    ]
                     [ reminderView vm.reminder
-                    , div [ style [ "padding" => "0 8px" ] ] [ contextMenuButton2 vm ]
-                    , div [ style [ "padding" => "0 8px" ] ] [ projectMenuButton2 vm ]
+                    , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton2 vm ]
+                    , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton2 vm ]
 
                     {- , div [ style [ "padding" => "0 8px" ] ] [ vm.contextDisplayName |> text ]
                        , div [ style [ "padding" => "0 8px" ] ] [ vm.projectDisplayName |> text ]
@@ -362,7 +371,6 @@ reminderView vm =
             [ boolProperty "opened" vm.isEditing
             , boolProperty "dynamicAlign" True
             , boolProperty "stopKeyboardEventPropagation" True
-            , class "flex-none"
             ]
             [ reminderTrigger
             , div

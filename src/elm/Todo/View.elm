@@ -318,7 +318,9 @@ reminderView vm =
                             ]
                         , style [ "padding" => "0 8px" ]
                         ]
-                        [ text vm.displayText ]
+                        [ icon "av:snooze" [ classList [ "display-none" => not vm.isReminderActive ] ]
+                        , text vm.displayText
+                        ]
                     )
     in
         Paper.menuButton

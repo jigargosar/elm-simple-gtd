@@ -148,7 +148,7 @@ createTodoViewModel vc todo =
             Todo.getProjectId todo
                 |> (Dict.get # vc.projectByIdDict)
                 ?|> (Project.getName >> truncateString)
-                ?= "<No Project>"
+                ?= "#"
 
         contextDisplayName =
             Todo.getContextId todo
@@ -250,8 +250,8 @@ default vm maybeReminderForm reminderForm =
                     [ text vm.text ]
                 , div [ style [ "padding" => "0 4px", "flex" => "0 1 auto" ], class "flex-auto layout horizontal center end-justified secondary-color font-body1 wrap" ]
                     [ reminderView vm.reminder
-                    , div [] [ vm.projectDisplayName |> text ]
                     , div [ style [ "padding" => "0 4px" ] ] [ vm.contextDisplayName |> text ]
+                    , div [] [ vm.projectDisplayName |> text ]
                     ]
                 ]
             , div [ class "layout horizontal" ]

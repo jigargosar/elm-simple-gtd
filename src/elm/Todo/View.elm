@@ -246,7 +246,7 @@ default vm maybeReminderForm reminderForm =
         [ Paper.itemBody []
             [ div [ class "layout horizontal center justified" ]
                 [ doneIconButton vm
-                , div [ class "flex-auto", onClick vm.startEditingMsg ]
+                , div [ class "flex-auto text-wrap", onClick vm.startEditingMsg ]
                     [ text vm.text ]
                 , div [ class "flex-auto layout horizontal center secondary-color font-body1 wrap" ]
                     [ reminderView vm.reminder

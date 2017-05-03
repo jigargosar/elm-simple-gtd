@@ -1,5 +1,7 @@
 module Ext.Time exposing (..)
 
+import Date
+import Date.Extra as Date
 import Date.Format
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -46,7 +48,22 @@ toHHMMSS =
 
 
 formatTime =
-    Time.Format.format "%b %e at %l:%M%P"
+    Time.Format.format "%e %b %l:%M%P"
+
+
+smartFormat : Time -> Time -> String
+smartFormat refTime time =
+    let
+        refDate =
+            Date.fromTime refTime
+
+        date =
+            Date.fromTime time
+    in
+        if Date.equalBy Date.Day refDate date then
+            Date.Format.format "%l:%M%P" date
+        else
+            Date.Format.format "%e %b %l:%M%P" date
 
 
 toHMSList : Time -> List Int

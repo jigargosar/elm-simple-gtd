@@ -21,9 +21,8 @@ type alias Model =
 
 
 type Action
-    = Date String
-    | Time String
-    | ReminderMenuOpen Bool
+    = SetDate String
+    | SetTime String
 
 
 create : Todo.Model -> Time.Time -> Model
@@ -42,11 +41,8 @@ create todo now =
 set : Action -> Model -> Model
 set action model =
     case action of
-        Date value ->
+        SetDate value ->
             { model | date = value }
 
-        Time value ->
+        SetTime value ->
             { model | time = value }
-
-        ReminderMenuOpen value ->
-            { model | reminderMenuOpen = value }

@@ -4,7 +4,7 @@ import EditMode
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, form, h1, h2, hr, input, node, span, text)
-import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, type_, value)
+import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, tabindex, type_, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model
@@ -14,6 +14,7 @@ import Msg exposing (Msg)
 import ReminderOverlay
 import Set
 import Entity.ViewModel
+import Test.View
 import View.EntityList
 import View.AppDrawer
 import Maybe.Extra as Maybe
@@ -34,7 +35,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.ReminderOverlay exposing (showReminderOverlay)
 import View.Shared exposing (..)
-import View.Todo
+import Todo.View
 import ViewModel
 import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, paperIconButton, testDialog)
 
@@ -91,11 +92,19 @@ appHeaderView m viewModel =
         , attribute "effects" "waterfall"
 
         --        , attribute "fixed" "true"
+        , attribute "slot" "header"
         ]
         [ App.toolbar
             [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
             ]
-            [ paperIconButton [ iconP "menu", attribute "drawer-toggle" "", onClick Msg.ToggleDrawer ] []
+            [ paperIconButton
+                [ iconP "menu"
+                , tabindex -1
+                , attribute "drawer-toggle" ""
+                , onClick Msg.ToggleDrawer
+                , class "hide-when-wide"
+                ]
+                []
             , headerView m
             ]
 
@@ -126,31 +135,31 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         ]
 
 
-appMainView contextVMs projectVMs m =
+appMainView contextVMs projectVMs model =
     div [ id "main-view", class "" ]
-        [ case Model.getMainViewType m of
+        [ case Model.getMainViewType model of
             GroupByContextView ->
-                View.EntityList.groupByEntity contextVMs m
+                View.EntityList.groupByEntity contextVMs model
 
             GroupByProjectView ->
-                View.EntityList.groupByEntity projectVMs m
+                View.EntityList.groupByEntity projectVMs model
 
             ProjectView id ->
-                View.EntityList.singletonEntity projectVMs id m
+                View.EntityList.singletonEntity projectVMs id model
 
             ContextView id ->
-                View.EntityList.singletonEntity contextVMs id m
+                View.EntityList.singletonEntity contextVMs id model
 
             BinView ->
-                View.EntityList.filtered m
+                View.EntityList.filtered model
 
             DoneView ->
-                View.EntityList.filtered m
+                View.EntityList.filtered model
 
             SyncView ->
                 let
                     form =
-                        Model.getRemoteSyncForm m
+                        Model.getRemoteSyncForm model
                 in
                     Paper.material [ class "static layout" ]
                         [ Paper.input
@@ -161,6 +170,9 @@ appMainView contextVMs projectVMs m =
                             []
                         , Paper.button [ form |> Msg.RemotePouchSync >> onClick ] [ text "Sync" ]
                         ]
+
+            TestView ->
+                Test.View.init model.testModel
         ]
 
 

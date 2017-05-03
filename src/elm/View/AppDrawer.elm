@@ -9,8 +9,7 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, checked, class, classList, id, style, tabindex, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
-import Model.TodoStore
-import Msg exposing (Msg(SetView))
+import Msg exposing (Msg(SetView), commonMsg)
 import String.Extra
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -41,12 +40,14 @@ view m viewModel =
     in
         App.drawer
             [ boolProperty "swipeOpen" True
+            , attribute "slot" "drawer"
             ]
             [ App.headerLayout
                 [ attribute "has-scrolling-region" ""
                 ]
                 [ App.header
                     [ boolProperty "fixed" True
+                    , attribute "slot" "header"
                     ]
                     [ App.toolbar
                         [ style
@@ -57,6 +58,7 @@ view m viewModel =
                         [ div []
                             [ paperIconButton
                                 [ iconP "menu"
+                                , tabindex -1
                                 , attribute "drawer-toggle" ""
                                 , onClick Msg.ToggleDrawer
                                 ]
@@ -120,6 +122,9 @@ getSelectedIndex { mainViewType, projects, contexts } =
             SyncView ->
                 lastProjectIndex + 3
 
+            TestView ->
+                lastProjectIndex + 4
+
 
 divider =
     div [ class "divider" ] []
@@ -134,7 +139,7 @@ entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } 
         , itemBody [] [ headLineText title ]
         , div [ class "show-on-hover layout horizontal center" ]
             [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
-            , trashIcon
+            , WebComponents.icon "delete" []
             , iconButton [ iconP "add", onClick onAddClicked ] []
             ]
         ]
@@ -147,17 +152,10 @@ entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } 
 entityListItem : Entity.ViewModel.EntityItemModel -> Html Msg
 entityListItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
-        ([ Html.node "iron-icon" [ iconP vm.icon.name, style [ "color" => vm.icon.color ] ] []
-         , itemBody [] [ View.Shared.defaultBadge vm ]
-         , hoverIcons vm
-         , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
-         ]
-        )
-
-
-hoverIcons vm =
-    div [ class "show-on-hover" ]
-        [ settingsButton vm.startEditingMsg ]
+        [ Html.node "iron-icon" [ iconP vm.icon.name, style [ "color" => vm.icon.color ] ] []
+        , itemBody [] [ View.Shared.defaultBadge vm ]
+        , div [ class "show-on-hover" ] [ settingsButton vm.startEditingMsg ]
+        ]
 
 
 headLineText title =

@@ -1,5 +1,6 @@
 module Msg exposing (..)
 
+import CommonMsg
 import Context
 import Dom
 import EditMode exposing (TodoForm)
@@ -20,11 +21,10 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Types exposing (..)
 
 
 type Msg
-    = NoOp
+    = OnCommonMsg CommonMsg.Msg
     | RemotePouchSync EditMode.RemoteSyncForm
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction ReminderOverlay.Action
@@ -46,7 +46,7 @@ type Msg
     | DeactivateEditingMode
     | NewTodoKeyUp Todo.NewForm.Model KeyboardEvent
     | StartEditingTodo Todo.Model
-    | StartEditingReminder Todo.ReminderForm.Model
+    | StartEditingReminder Todo.Model
     | SaveCurrentForm
     | FocusPaperInput String
     | AutoFocusPaperInput
@@ -54,6 +54,8 @@ type Msg
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | EditTodoFormKeyUp TodoForm KeyboardEvent
+    | OnTestListKeyDown KeyboardEvent
+    | OnTestListItemFocus Int
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection
     | SelectionDoneClicked
@@ -88,3 +90,8 @@ type alias ReturnTuple a =
 
 type alias ReturnF =
     Return -> Return
+
+
+commonMsg : CommonMsg.Helper Msg
+commonMsg =
+    CommonMsg.createHelper OnCommonMsg

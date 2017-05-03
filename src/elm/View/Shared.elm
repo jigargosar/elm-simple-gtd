@@ -7,13 +7,14 @@ import EditMode exposing (EditMode, TodoForm)
 import Entity.ViewModel
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
-import Html.Attributes.Extra exposing (intProperty)
+import Html.Attributes.Extra exposing (boolProperty, intProperty)
 import Html.Events exposing (onClick)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Encode
 import Model
+import Msg
 import Polymer.Attributes exposing (icon)
-import Polymer.Paper exposing (badge)
+import Polymer.Paper as Paper exposing (badge)
 import Set exposing (Set)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -173,27 +174,11 @@ expand =
 
 
 sharedIconButton iconName onClickHandler =
-    Polymer.Paper.iconButton [ icon iconName, onClickStopPropagation onClickHandler ] []
-
-
-startIconButton =
-    sharedIconButton "av:play-circle-outline"
-
-
-trashIcon =
-    Html.node "iron-icon" [ icon "delete" ] []
-
-
-trashButton =
-    sharedIconButton "delete"
+    Paper.iconButton [ icon iconName, onClickStopPropagation onClickHandler ] []
 
 
 doneButton =
     sharedIconButton "done"
-
-
-cancelButton =
-    sharedIconButton "cancel"
 
 
 dismissButton =
@@ -219,3 +204,42 @@ hideOnHover bool children =
          else
             []
         )
+
+
+defaultOkCancelButtons =
+    okCancelButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode
+
+
+defaultOkCancelDeleteButtons deleteMsg =
+    okCancelDeleteButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode deleteMsg
+
+
+layoutHorizontalReverse =
+    div [ class "layout horizontal-reverse" ]
+
+
+okCancelButtons okMsg cancelMsg =
+    layoutHorizontalReverse
+        [ okButton okMsg
+        , cancelButton cancelMsg
+        ]
+
+
+okCancelDeleteButtons okMsg cancelMsg deleteMsg =
+    layoutHorizontalReverse
+        [ okButton okMsg
+        , cancelButton cancelMsg
+        , deleteButton deleteMsg
+        ]
+
+
+okButton msg =
+    Paper.button [ onClick msg ] [ text "Ok" ]
+
+
+cancelButton msg =
+    Paper.button [ onClick msg ] [ text "Cancel" ]
+
+
+deleteButton msg =
+    Paper.button [ onClick msg ] [ text "Delete" ]

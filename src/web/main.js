@@ -6,8 +6,23 @@ require("./pcss/main.pcss")
 
 const DB = require("./local-pouch-db")
 const sound = require("./sound")
+const $ = require("jquery")
+window.jQuery = $
+require("./jquery.trap")
+require("jquery-ui/ui/position")
+
 
 async function boot() {
+    $("#root").trap();
+
+    // setTimeout(() => {
+    //     $(".big-dialog").position({
+    //         my: "left top", at: "left bottom", of: ".focusable-list"
+    //         // , within: "#main-view > div"
+    //         , collision: "fit"
+    //     })
+    // }, 2000)
+
     let syncList = []
     const dbMap = {
         "todo-db": await DB("todo-db"),
@@ -53,6 +68,14 @@ async function boot() {
     setupNotifications(app)
         .catch(console.error)
 
+    app.ports["focusSelector"].subscribe((selector) => {
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                $(selector).focus()
+            })
+        }, 0)
+    })
+
     app.ports["focusPaperInput"].subscribe((selector) => {
         setTimeout(() => {
             requestAnimationFrame(() => {
@@ -88,7 +111,11 @@ boot().catch(console.error)
 
 async function setupNotifications(app) {
 
-    if (!'serviceWorker' in navigator) return
+    if (!'serviceWorker' in navigator) {
+        console.warn("servieWorker not found in navigator")
+        return
+    }
+
     const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
 
     navigator.serviceWorker.addEventListener('message', event => {

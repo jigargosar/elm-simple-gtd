@@ -52,6 +52,7 @@ type alias Record =
     , projectId : Id
     , contextId : Id
     , reminder : Reminder
+    , deletedAt : Time
     }
 
 
@@ -139,7 +140,7 @@ update actions now =
                         { model | done = done, reminder = reminder }
 
                 SetDeleted deleted ->
-                    { model | deleted = deleted }
+                    { model | deleted = deleted, deletedAt = now }
 
                 SetText text ->
                     { model | text = text }
@@ -165,10 +166,7 @@ update actions now =
                 SetTime maybeTime ->
                     let
                         reminder =
-                            if model.dueAt == maybeTime then
-                                model.reminder
-                            else
-                                maybeTimeToReminder maybeTime
+                            maybeTimeToReminder maybeTime
                     in
                         { model | dueAt = maybeTime, reminder = reminder }
 
@@ -198,8 +196,11 @@ isReminderOverdue now =
     getMaybeReminderTime >> Maybe.unwrap False (\time -> time <= now)
 
 
-isReminderActive =
-    .reminder >> equals None >> not
+isSnoozed todo =
+    ( getMaybeReminderTime todo, getDueAt todo )
+        |> maybe2Tuple
+        ?|> uncurry notEquals
+        ?= False
 
 
 maybeTimeToReminder maybeTime =
@@ -214,6 +215,10 @@ defaultDeleted =
     False
 
 
+defaultDeletedAt =
+    0
+
+
 defaultDone =
     False
 
@@ -226,7 +231,7 @@ defaultContextId =
     ""
 
 
-todoConstructor id rev createdAt modifiedAt deleted done text dueAt projectId contextId reminder =
+todoConstructor id rev createdAt modifiedAt deleted deletedAt done text dueAt projectId contextId reminder =
     { id = id
     , rev = rev
     , dirty = False
@@ -235,6 +240,7 @@ todoConstructor id rev createdAt modifiedAt deleted done text dueAt projectId co
     , deleted = deleted
 
     --
+    , deletedAt = deletedAt
     , done = done
     , text = text
     , dueAt = dueAt
@@ -245,7 +251,8 @@ todoConstructor id rev createdAt modifiedAt deleted done text dueAt projectId co
 
 
 todoRecordDecoder =
-    D.optional "done" D.bool defaultDone
+    D.optional "deletedAt" D.float defaultDeletedAt
+        >> D.optional "done" D.bool defaultDone
         >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         >> D.optional "projectId" D.string defaultProjectId
@@ -277,7 +284,15 @@ encodeOtherFields todo =
     , "projectId" => (todo.projectId |> E.string)
     , "contextId" => (todo.contextId |> E.string)
     , "reminder" => encodeReminder todo.reminder
+    , "deletedAt" => E.float (getDeletedAt todo)
     ]
+
+
+getDeletedAt todo =
+    if getDeleted todo && todo.deletedAt == defaultDeletedAt then
+        getModifiedAt todo
+    else
+        todo.deletedAt
 
 
 encodeReminder reminder =
@@ -296,6 +311,7 @@ init createdAt text id =
         createdAt
         createdAt
         defaultDeleted
+        defaultDeletedAt
         defaultDone
         text
         defaultDueAt

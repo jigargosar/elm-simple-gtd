@@ -8,7 +8,6 @@ import Document
 import EditMode exposing (EditMode, TodoForm)
 import Ext.Keyboard as Keyboard
 import Model.Internal exposing (..)
-import Model.TodoStore
 import Msg exposing (Return)
 import Project
 import ReminderOverlay
@@ -33,7 +32,6 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
 import Model.Types exposing (..)
-import Types exposing (..)
 
 
 init : Flags -> Model
@@ -62,6 +60,10 @@ init { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemo
         , reminderOverlay = ReminderOverlay.none
         , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
         , appDrawerForceNarrow = False
+        , testModel =
+            { list = List.range 0 10
+            , selectedIndex = 0
+            }
         }
 
 
@@ -211,7 +213,7 @@ setReminderOverlayToInitialView todo model =
 
 
 showReminderOverlayForTodoId todoId =
-    applyMaybeWith (Model.TodoStore.findTodoById todoId)
+    applyMaybeWith (findTodoById todoId)
         (setReminderOverlayToInitialView)
 
 
@@ -229,13 +231,13 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             ReminderOverlay.addSnoozeOffset model.now snoozeOffset
     in
         model
-            |> Model.TodoStore.updateTodoById [ time |> Just >> Todo.SetTime ] todoId
+            |> updateTodoById [ time |> Todo.SnoozeTill ] todoId
             >> removeReminderOverlay
 
 
 snoozeTodo todo m =
     m
-        |> Model.TodoStore.updateTodo
+        |> updateTodo
             [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
             todo
         |> setReminderOverlayToInitialView todo
@@ -279,7 +281,7 @@ createAndEditNewContext model =
 --    in
 --        apply3Uncurry ( findContextByName contextName, findProjectByName projectName, identity )
 --            (\maybeContext maybeProject ->
---                Model.TodoStore.updateTodoById
+--                updateTodoById
 --                    [ Todo.SetText todoText
 --                    , Todo.SetProjectId (maybeProject ?|> Document.getId ?= "")
 --                    , Todo.SetContextId (maybeContext ?|> Document.getId ?= "")
@@ -291,7 +293,7 @@ createAndEditNewContext model =
 
 updateTodoWithTodoForm : Todo.Form.Model -> ModelF
 updateTodoWithTodoForm { todoText, id } =
-    Model.TodoStore.updateTodoById
+    updateTodoById
         [ Todo.SetText todoText
         ]
         id
@@ -308,7 +310,7 @@ updateTodoWithReminderForm { id, date, time } =
                 !|> (Date.toTime >> Just)
                 != Nothing
     in
-        Model.TodoStore.updateTodoById [ Todo.SetTime maybeTime ] id
+        updateTodoById [ Todo.SetTime maybeTime ] id
 
 
 isShowDetailsKeyPressed =
@@ -375,7 +377,7 @@ createEditReminderTodoMode todo model =
 
 startEditingTodoById : Todo.Id -> ModelF
 startEditingTodoById id =
-    applyMaybeWith (Model.TodoStore.findTodoById id)
+    applyMaybeWith (findTodoById id)
         (createEditTodoMode >> updateEditMode)
 
 
@@ -414,7 +416,7 @@ toggleDeletedForEntity entity model =
                 |> (setProjectStore # model)
 
         TodoEntity todo ->
-            Model.TodoStore.updateTodo [ Todo.ToggleDeleted ] todo model
+            updateTodo [ Todo.ToggleDeleted ] todo model
 
 
 saveCurrentForm model =
@@ -450,7 +452,7 @@ saveCurrentForm model =
 
 createTodoWithNewForm : Todo.NewForm.Model -> ModelF
 createTodoWithNewForm { text } model =
-    Model.TodoStore.insertTodo (Todo.init model.now text) model
+    insertTodo (Todo.init model.now text) model
         |> Tuple.mapFirst Document.getId
         |> uncurry setTodoContextOrProjectBasedOnCurrentView
 
@@ -470,7 +472,7 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
 
         maybeModel =
             maybeTodoUpdateAction
-                ?|> (List.singleton >> Model.TodoStore.updateTodoById # todoId # model)
+                ?|> (List.singleton >> updateTodoById # todoId # model)
     in
         maybeModel ?= model
 
@@ -528,3 +530,113 @@ getRemoteSyncForm model =
 createRemoteSyncForm : Model -> EditMode.RemoteSyncForm
 createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
+
+
+getFilteredTodoList model =
+    let
+        filter =
+            model |> getCurrentTodoListFilter
+
+        allTodos =
+            model |> getTodoStore >> Store.asList
+
+        sortFunction =
+            model
+                |> getCurrentTodoListSortByFunction
+    in
+        allTodos
+            |> List.filter filter
+            |> List.sortBy sortFunction
+            |> List.take 25
+
+
+getCurrentTodoListFilter model =
+    case getMainViewType model of
+        BinView ->
+            Todo.binFilter
+
+        DoneView ->
+            Todo.doneFilter
+
+        ProjectView projectId ->
+            Todo.projectIdFilter projectId
+
+        _ ->
+            always (True)
+
+
+getCurrentTodoListSortByFunction model =
+    case getMainViewType model of
+        BinView ->
+            Todo.getDeletedAt >> negate
+
+        DoneView ->
+            Todo.getModifiedAt >> negate
+
+        _ ->
+            Todo.getModifiedAt >> negate
+
+
+findTodoById : Todo.Id -> Model -> Maybe Todo.Model
+findTodoById id =
+    getTodoStore >> Store.findById id
+
+
+type alias TodoContextViewModel =
+    { name : String, todoList : List Todo.Model, count : Int, isEmpty : Bool }
+
+
+groupByTodoContextViewModel : Model -> List TodoContextViewModel
+groupByTodoContextViewModel =
+    getTodoStore
+        >> Store.asList
+        >> Todo.rejectAnyPass [ Todo.isDeleted, Todo.isDone ]
+        --        >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
+        >> Dict.Extra.groupBy (\_ -> "Inbox")
+        >> (\dict ->
+                --                Todo.getAllTodoContexts
+                [ "Inbox" ]
+                    .|> (apply2
+                            ( identity
+                            , (Dict.get # dict >> Maybe.withDefault [])
+                            )
+                            >> (\( name, list ) ->
+                                    list
+                                        |> apply3 ( identity, List.length, List.isEmpty )
+                                        >> uncurry3 (TodoContextViewModel name)
+                               )
+                        )
+           )
+
+
+updateTodo : List Todo.UpdateAction -> Todo.Model -> ModelF
+updateTodo action todo =
+    apply2With ( getNow, getTodoStore )
+        ((Todo.update action # todo)
+            >> Store.update
+            >>> setTodoStore
+        )
+
+
+updateTodoById actions todoId =
+    applyMaybeWith (findTodoById todoId)
+        (updateTodo actions)
+
+
+replaceTodoIfEqualById todo =
+    List.replaceIf (Document.equalById todo) todo
+
+
+addCopyOfTodo : Todo.Model -> Time -> Model -> ( Todo.Model, Model )
+addCopyOfTodo todo now =
+    insertTodo (Todo.copyTodo now todo)
+
+
+insertTodo : (Document.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
+insertTodo constructWithId =
+    applyWith (getTodoStore)
+        (Store.insert (constructWithId) >> setTodoStoreFromTuple)
+
+
+setTodoStoreFromTuple tuple model =
+    tuple |> Tuple.mapSecond (setTodoStore # model)

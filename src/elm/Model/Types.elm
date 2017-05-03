@@ -10,6 +10,7 @@ import Random.Pcg exposing (Seed)
 import ReminderOverlay
 import RunningTodo exposing (RunningTodo)
 import Set exposing (Set)
+import Test.Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -29,6 +30,7 @@ type MainViewType
     | GroupByProjectView
     | ContextView Id
     | SyncView
+    | TestView
 
 
 type alias Model =
@@ -46,6 +48,7 @@ type alias Model =
     , reminderOverlay : ReminderOverlay.Model
     , pouchDBRemoteSyncURI : String
     , appDrawerForceNarrow : Bool
+    , testModel : Test.Model.Model
     }
 
 

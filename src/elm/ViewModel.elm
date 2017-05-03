@@ -70,6 +70,9 @@ getViewInfo mainViewType projectsVM contextsVM =
             SyncView ->
                 ( "Sync", sgtdBlue )
 
+            TestView ->
+                ( "Test", sgtdBlue )
+
 
 sgtdBlue =
     --paper-blue-a200

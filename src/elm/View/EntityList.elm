@@ -13,7 +13,6 @@ import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
 import Maybe.Extra as Maybe
 import Model.Internal as Model
-import Model.TodoStore exposing (TodoContextViewModel)
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
 import Project
@@ -37,21 +36,24 @@ import Polymer.Paper as Paper exposing (badge, button, fab, input, item, itemBod
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import Entity.ViewModel
-import View.Todo exposing (EditTodoViewModel)
+import Todo.View exposing (EditTodoViewModel)
 import View.Shared exposing (..)
+import WebComponents
 
 
 filtered : Model -> Html Msg
 filtered =
-    apply2 ( View.Shared.createSharedViewModel >> View.Todo.createKeyedItem, Model.TodoStore.getFilteredTodoList )
+    apply2 ( View.Shared.createSharedViewModel >> Todo.View.createKeyedItem, Model.getFilteredTodoList )
         >> (\( todoView, todoList ) ->
-                Keyed.node "paper-listbox"
-                    [ class "todo-list"
-                    , stringProperty "selected" "0"
-                    , stringProperty "selectable" "paper-item"
-                    , stringProperty "selectedAttribute" "selected"
+                Paper.material []
+                    [ Keyed.node "paper-listbox"
+                        [ class "todo-list"
+                        , stringProperty "selected" "0"
+                        , stringProperty "selectable" "paper-item"
+                        , stringProperty "selectedAttribute" "selected"
+                        ]
+                        (todoList .|> todoView)
                     ]
-                    (todoList .|> todoView)
            )
 
 
@@ -71,7 +73,7 @@ groupByEntity entityVMs model =
                         , stringProperty "selectable" "paper-item"
                         , stringProperty "selectedAttribute" "selected"
                         ]
-                        (vm.todoList .|> View.Todo.createKeyedItem vc)
+                        (vm.todoList .|> Todo.View.createKeyedItem vc)
                     ]
                 ]
             )
@@ -99,7 +101,6 @@ defaultView vm =
     item []
         [ itemBody [] [ View.Shared.defaultBadge vm ]
         , showOnHover [ settingsButton vm.startEditingMsg ]
-        , hideOnHover vm.isDeleted [ trashButton Msg.NoOp ]
         ]
 
 
@@ -123,6 +124,6 @@ editEntityView editModel vm =
             [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
             , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
             , expand []
-            , trashButton vm.onDeleteClicked
+            , WebComponents.iconButton "delete" [ onClick Msg.SelectionTrashClicked ]
             ]
         ]

@@ -1,14 +1,15 @@
 port module Main exposing (..)
 
+import CommonMsg
 import Document
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
 import EditMode
+import Ext.Debug
 import Ext.Keyboard as Keyboard
 import Ext.Return as Return
 import Model.Internal as Model
 import Model.RunningTodo as Model
-import Model.TodoStore as Model
 import Project
 import Ext.Random as Random
 import Project
@@ -40,7 +41,6 @@ import Html
 import Msg exposing (..)
 import RunningTodo
 import Model.Types exposing (..)
-import Types
 
 
 port showNotification : TodoNotification -> Cmd msg
@@ -88,7 +88,7 @@ init =
 
 subscriptions m =
     Sub.batch
-        [ Time.every Time.hour (OnNowChanged)
+        [ Time.every (Time.second {- * 120 -}) (OnNowChanged)
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.keyUps OnKeyUp
         , notificationClicked OnNotificationClicked
@@ -99,8 +99,55 @@ update : Msg -> Model -> Return
 update msg =
     Return.singleton
         >> (case msg of
-                NoOp ->
-                    identity
+                OnCommonMsg msg ->
+                    CommonMsg.update msg
+
+                OnTestListItemFocus idx ->
+                    Return.map
+                        (\model ->
+                            let
+                                testModel =
+                                    model.testModel
+                            in
+                                { model | testModel = { testModel | selectedIndex = idx } }
+                        )
+
+                OnTestListKeyDown { key } ->
+                    case key of
+                        Key.ArrowUp ->
+                            Return.map
+                                (\model ->
+                                    let
+                                        testModel =
+                                            model.testModel
+
+                                        selectedIndex =
+                                            testModel.selectedIndex
+                                                - 1
+                                                |> clamp 0 (testModel.list |> List.length >> (-) # 1)
+                                    in
+                                        { model | testModel = { testModel | selectedIndex = selectedIndex } }
+                                )
+                                >> andThenUpdate (commonMsg.focus ".test-list > [tabindex=0]")
+
+                        Key.ArrowDown ->
+                            Return.map
+                                (\model ->
+                                    let
+                                        testModel =
+                                            model.testModel
+
+                                        selectedIndex =
+                                            testModel.selectedIndex
+                                                + 1
+                                                |> clamp 0 (testModel.list |> List.length >> (-) # 1)
+                                    in
+                                        { model | testModel = { testModel | selectedIndex = selectedIndex } }
+                                )
+                                >> andThenUpdate (commonMsg.focus ".test-list > [tabindex=0]")
+
+                        _ ->
+                            identity
 
                 ToggleDrawer ->
                     Return.map (Model.toggleForceNarrow)
@@ -193,8 +240,8 @@ update msg =
                     Return.map (Model.startEditingTodo todo)
                         >> autoFocusPaperInputCmd
 
-                StartEditingReminder form ->
-                    Return.map (Model.setEditMode (EditMode.TodoReminderForm form))
+                StartEditingReminder todo ->
+                    Return.map (Model.startEditingReminder todo)
                         >> autoFocusPaperInputCmd
 
                 UpdateTodoForm form action ->
@@ -296,6 +343,7 @@ update msg =
 
                         ToggleDeleted ->
                             Return.map (Model.toggleDeletedForEntity entity)
+                                >> andThenUpdate DeactivateEditingMode
 
                 OnKeyUp key ->
                     Return.with (Model.getEditMode)
@@ -407,6 +455,7 @@ andThenUpdateAll =
 
 onUpdateNow now =
     Return.map (Model.setNow now)
+        --        >> Return.map (Ext.Debug.tapLog .editMode "editmode")
         >> Return.andThen
             (\m ->
                 let

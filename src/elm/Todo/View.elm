@@ -114,6 +114,7 @@ type alias ReminderViewModel =
     , displayText : String
     , isOverDue : Bool
     , isSnoozed : Bool
+    , overDueTooltipText : String
     , onDateChanged : String -> Msg
     , onTimeChanged : String -> Msg
     , startEditingMsg : Msg
@@ -198,6 +199,7 @@ createTodoViewModel vc todo =
                 , displayText = displayText
                 , isOverDue = displayText == overDueText
                 , isSnoozed = Todo.isSnoozed todo
+                , overDueTooltipText = Todo.getDueAt todo ?|> Ext.Time.smartFormat ?= ""
                 , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
                 , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
                 , startEditingMsg = Msg.StartEditingReminder todo
@@ -329,6 +331,8 @@ reminderView vm =
                         ]
                         [ icon "av:snooze" [ classList [ "display-none" => not vm.isSnoozed ] ]
                         , text vm.displayText
+                        , Paper.tooltip [ classList [ "display-none" => not vm.isOverDue ] ]
+                            [ text vm.overDueTooltipText ]
                         ]
                     )
     in

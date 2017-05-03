@@ -139,7 +139,7 @@ entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } 
         , itemBody [] [ headLineText title ]
         , div [ class "show-on-hover layout horizontal center" ]
             [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
-            , trashIcon
+            , WebComponents.icon "delete" []
             , iconButton [ iconP "add", onClick onAddClicked ] []
             ]
         ]

@@ -177,18 +177,6 @@ sharedIconButton iconName onClickHandler =
     Paper.iconButton [ icon iconName, onClickStopPropagation onClickHandler ] []
 
 
-startIconButton =
-    sharedIconButton "av:play-circle-outline"
-
-
-trashIcon =
-    Html.node "iron-icon" [ icon "delete" ] []
-
-
-trashButton =
-    sharedIconButton "delete"
-
-
 doneButton =
     sharedIconButton "done"
 

@@ -268,7 +268,7 @@ default vm =
         [ Paper.itemBody []
             [ div [ class "layout horizontal" ]
                 [ div
-                    [ style [ "flex" => "1 1 auto", "min-width" => "8rem" ]
+                    [ style [ "flex" => "1 1 auto" ]
                     , class "text-wrap"
                     , onClick vm.startEditingMsg
                     ]
@@ -277,7 +277,7 @@ default vm =
                     ]
                 , div
                     [ style [ "flex" => "0 1 auto" ]
-                    , class "layout horizontal-reverse wrap end _around-aligned center-aligned"
+                    , class "layout horizontal-reverse wrap start-aligned"
                     ]
                     [ div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
                     , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton vm ]

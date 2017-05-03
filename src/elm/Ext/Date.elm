@@ -25,8 +25,15 @@ smartFormat refDate date =
 
         formattedDate =
             formatDateWithoutTime date |> String.trim
+
+        dayDiff =
+            Date.diff Date.Day refDate date
+
+        --                |> Debug.log ("day diff" ++ toString ( refDate, date ))
     in
-        if Date.equalBy Date.Day refDate date then
+        if dayDiff == 0 then
             formattedTime
+        else if dayDiff == 1 then
+            "Tommorrow " ++ formattedTime
         else
             formattedDate ++ " " ++ formattedTime

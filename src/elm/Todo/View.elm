@@ -115,6 +115,7 @@ type alias ReminderViewModel =
     , isOverDue : Bool
     , isSnoozed : Bool
     , dueAtToolTipText : String
+    , dayDiffInWords : String
     , onDateChanged : String -> Msg
     , onTimeChanged : String -> Msg
     , startEditingMsg : Msg
@@ -195,6 +196,9 @@ createTodoViewModel vc todo =
 
                 displayText =
                     Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
+
+                dueAt =
+                    Todo.getDueAt todo
             in
                 { isEditing = isEditing
                 , date = form.date
@@ -203,6 +207,7 @@ createTodoViewModel vc todo =
                 , isOverDue = displayText == overDueText
                 , isSnoozed = Todo.isSnoozed todo
                 , dueAtToolTipText = Todo.getDueAt todo ?|> Ext.Time.formatDateTime ?= ""
+                , dayDiffInWords = dueAt ?|> Ext.Time.dayDiffInWords vc.now ?= ""
                 , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
                 , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
                 , startEditingMsg = Msg.StartEditingReminder todo

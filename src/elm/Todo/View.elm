@@ -177,7 +177,7 @@ createTodoViewModel vc todo =
                 overDueText =
                     "Overdue"
 
-                format time =
+                formatReminderTime time =
                     let
                         due =
                             Date.fromTime time
@@ -190,8 +190,11 @@ createTodoViewModel vc todo =
                         else
                             Ext.Time.smartFormat vc.now time
 
+                smartFormat =
+                    Ext.Time.smartFormat vc.now
+
                 displayText =
-                    Todo.getMaybeTime todo ?|> format ?= ""
+                    Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
             in
                 { isEditing = isEditing
                 , date = form.date
@@ -199,7 +202,7 @@ createTodoViewModel vc todo =
                 , displayText = displayText
                 , isOverDue = displayText == overDueText
                 , isSnoozed = Todo.isSnoozed todo
-                , overDueTooltipText = Todo.getDueAt todo ?|> Ext.Time.smartFormat ?= ""
+                , overDueTooltipText = Todo.getDueAt todo ?|> smartFormat ?= ""
                 , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
                 , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
                 , startEditingMsg = Msg.StartEditingReminder todo

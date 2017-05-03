@@ -225,7 +225,7 @@ createTodoViewModel vc todo =
                         ( firstLine, False )
 
                     firstLine :: xs ->
-                        ( firstLine, True )
+                        ( firstLine ++ " ...", True )
     in
         { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo

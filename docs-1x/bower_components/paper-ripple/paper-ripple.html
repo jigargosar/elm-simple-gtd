@@ -1,0 +1,150 @@
+<!--
+@license
+Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><html><head><link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
+
+<!--
+Material design: [Surface reaction](https://www.google.com/design/spec/animation/responsive-interaction.html#responsive-interaction-surface-reaction)
+
+`paper-ripple` provides a visual effect that other paper elements can
+use to simulate a rippling effect emanating from the point of contact.  The
+effect can be visualized as a concentric circle with motion.
+
+Example:
+
+    <div style="position:relative">
+      <paper-ripple></paper-ripple>
+    </div>
+
+Note, it's important that the parent container of the ripple be relative position, otherwise
+the ripple will emanate outside of the desired container.
+
+`paper-ripple` listens to "mousedown" and "mouseup" events so it would display ripple
+effect when touches on it.  You can also defeat the default behavior and
+manually route the down and up actions to the ripple element.  Note that it is
+important if you call `downAction()` you will have to make sure to call
+`upAction()` so that `paper-ripple` would end the animation loop.
+
+Example:
+
+    <paper-ripple id="ripple" style="pointer-events: none;"></paper-ripple>
+    ...
+    downAction: function(e) {
+      this.$.ripple.downAction({detail: {x: e.x, y: e.y}});
+    },
+    upAction: function(e) {
+      this.$.ripple.upAction();
+    }
+
+Styling ripple effect:
+
+  Use CSS color property to style the ripple:
+
+    paper-ripple {
+      color: #4285f4;
+    }
+
+  Note that CSS color property is inherited so it is not required to set it on
+  the `paper-ripple` element directly.
+
+By default, the ripple is centered on the point of contact.  Apply the `recenters`
+attribute to have the ripple grow toward the center of its container.
+
+    <paper-ripple recenters></paper-ripple>
+
+You can also  center the ripple inside its container from the start.
+
+    <paper-ripple center></paper-ripple>
+
+Apply `circle` class to make the rippling effect within a circle.
+
+    <paper-ripple class="circle"></paper-ripple>
+
+@group Paper Elements
+@element paper-ripple
+@hero hero.svg
+@demo demo/index.html
+-->
+
+</head><body><dom-module id="paper-ripple">
+
+  <template>
+    <style>
+      :host {
+        display: block;
+        position: absolute;
+        border-radius: inherit;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        /* See PolymerElements/paper-behaviors/issues/34. On non-Chrome browsers,
+         * creating a node (with a position:absolute) in the middle of an event
+         * handler "interrupts" that event handler (which happens when the
+         * ripple is created on demand) */
+        pointer-events: none;
+      }
+
+      :host([animating]) {
+        /* This resolves a rendering issue in Chrome (as of 40) where the
+           ripple is not properly clipped by its parent (which may have
+           rounded corners). See: http://jsbin.com/temexa/4
+
+           Note: We only apply this style conditionally. Otherwise, the browser
+           will create a new compositing layer for every ripple element on the
+           page, and that would be bad. */
+        -webkit-transform: translate(0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+
+      #background,
+      #waves,
+      .wave-container,
+      .wave {
+        pointer-events: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      #background,
+      .wave {
+        opacity: 0;
+      }
+
+      #waves,
+      .wave {
+        overflow: hidden;
+      }
+
+      .wave-container,
+      .wave {
+        border-radius: 50%;
+      }
+
+      :host(.circle) #background,
+      :host(.circle) #waves {
+        border-radius: 50%;
+      }
+
+      :host(.circle) .wave-container {
+        overflow: hidden;
+      }
+    </style>
+
+    <div id="background"></div>
+    <div id="waves"></div>
+  </template>
+</dom-module>
+<script>(function(){function a(d){this.element=d,this.width=this.boundingRect.width,this.height=this.boundingRect.height,this.size=Math.max(this.width,this.height)}function b(d){this.element=d,this.color=window.getComputedStyle(d).color,this.wave=document.createElement('div'),this.waveContainer=document.createElement('div'),this.wave.style.backgroundColor=this.color,this.wave.classList.add('wave'),this.waveContainer.classList.add('wave-container'),Polymer.dom(this.waveContainer).appendChild(this.wave),this.resetInteractionState()}var c={distance:function(d,e,f,g){var h=d-f,i=e-g;return Math.sqrt(h*h+i*i)},now:window.performance&&window.performance.now?window.performance.now.bind(window.performance):Date.now};a.prototype={get boundingRect(){return this.element.getBoundingClientRect()},furthestCornerDistanceFrom:function(d,e){var f=c.distance(d,e,0,0),g=c.distance(d,e,this.width,0),h=c.distance(d,e,0,this.height),i=c.distance(d,e,this.width,this.height);return Math.max(f,g,h,i)}},b.MAX_RADIUS=300,b.prototype={get recenters(){return this.element.recenters},get center(){return this.element.center},get mouseDownElapsed(){var d;return this.mouseDownStart?(d=c.now()-this.mouseDownStart,this.mouseUpStart&&(d-=this.mouseUpElapsed),d):0},get mouseUpElapsed(){return this.mouseUpStart?c.now()-this.mouseUpStart:0},get mouseDownElapsedSeconds(){return this.mouseDownElapsed/1e3},get mouseUpElapsedSeconds(){return this.mouseUpElapsed/1e3},get mouseInteractionSeconds(){return this.mouseDownElapsedSeconds+this.mouseUpElapsedSeconds},get initialOpacity(){return this.element.initialOpacity},get opacityDecayVelocity(){return this.element.opacityDecayVelocity},get radius(){var d=this.containerMetrics.width*this.containerMetrics.width,e=this.containerMetrics.height*this.containerMetrics.height,f=1.1*Math.min(Math.sqrt(d+e),b.MAX_RADIUS)+5,g=1.1-0.2*(f/b.MAX_RADIUS),h=this.mouseInteractionSeconds/g,i=f*(1-Math.pow(80,-h));return Math.abs(i)},get opacity(){return this.mouseUpStart?Math.max(0,this.initialOpacity-this.mouseUpElapsedSeconds*this.opacityDecayVelocity):this.initialOpacity},get outerOpacity(){var d=0.3*this.mouseUpElapsedSeconds,e=this.opacity;return Math.max(0,Math.min(d,e))},get isOpacityFullyDecayed(){return 0.01>this.opacity&&this.radius>=Math.min(this.maxRadius,b.MAX_RADIUS)},get isRestingAtMaxRadius(){return this.opacity>=this.initialOpacity&&this.radius>=Math.min(this.maxRadius,b.MAX_RADIUS)},get isAnimationComplete(){return this.mouseUpStart?this.isOpacityFullyDecayed:this.isRestingAtMaxRadius},get translationFraction(){return Math.min(1,2*(this.radius/this.containerMetrics.size)/Math.sqrt(2))},get xNow(){return this.xEnd?this.xStart+this.translationFraction*(this.xEnd-this.xStart):this.xStart},get yNow(){return this.yEnd?this.yStart+this.translationFraction*(this.yEnd-this.yStart):this.yStart},get isMouseDown(){return this.mouseDownStart&&!this.mouseUpStart},resetInteractionState:function(){this.maxRadius=0,this.mouseDownStart=0,this.mouseUpStart=0,this.xStart=0,this.yStart=0,this.xEnd=0,this.yEnd=0,this.slideDistance=0,this.containerMetrics=new a(this.element)},draw:function(){var d,f,g;this.wave.style.opacity=this.opacity,d=this.radius/(this.containerMetrics.size/2),f=this.xNow-this.containerMetrics.width/2,g=this.yNow-this.containerMetrics.height/2,this.waveContainer.style.webkitTransform='translate('+f+'px, '+g+'px)',this.waveContainer.style.transform='translate3d('+f+'px, '+g+'px, 0)',this.wave.style.webkitTransform='scale('+d+','+d+')',this.wave.style.transform='scale3d('+d+','+d+',1)'},downAction:function(d){var e=this.containerMetrics.width/2,f=this.containerMetrics.height/2;this.resetInteractionState(),this.mouseDownStart=c.now(),this.center?(this.xStart=e,this.yStart=f,this.slideDistance=c.distance(this.xStart,this.yStart,this.xEnd,this.yEnd)):(this.xStart=d?d.detail.x-this.containerMetrics.boundingRect.left:this.containerMetrics.width/2,this.yStart=d?d.detail.y-this.containerMetrics.boundingRect.top:this.containerMetrics.height/2),this.recenters&&(this.xEnd=e,this.yEnd=f,this.slideDistance=c.distance(this.xStart,this.yStart,this.xEnd,this.yEnd)),this.maxRadius=this.containerMetrics.furthestCornerDistanceFrom(this.xStart,this.yStart),this.waveContainer.style.top=(this.containerMetrics.height-this.containerMetrics.size)/2+'px',this.waveContainer.style.left=(this.containerMetrics.width-this.containerMetrics.size)/2+'px',this.waveContainer.style.width=this.containerMetrics.size+'px',this.waveContainer.style.height=this.containerMetrics.size+'px'},upAction:function(){this.isMouseDown&&(this.mouseUpStart=c.now())},remove:function(){Polymer.dom(this.waveContainer.parentNode).removeChild(this.waveContainer)}},Polymer({is:'paper-ripple',behaviors:[Polymer.IronA11yKeysBehavior],properties:{initialOpacity:{type:Number,value:0.25},opacityDecayVelocity:{type:Number,value:0.8},recenters:{type:Boolean,value:!1},center:{type:Boolean,value:!1},ripples:{type:Array,value:function(){return[]}},animating:{type:Boolean,readOnly:!0,reflectToAttribute:!0,value:!1},holdDown:{type:Boolean,value:!1,observer:'_holdDownChanged'},noink:{type:Boolean,value:!1},_animating:{type:Boolean},_boundAnimate:{type:Function,value:function(){return this.animate.bind(this)}}},get target(){return this.keyEventTarget},keyBindings:{'enter:keydown':'_onEnterKeydown','space:keydown':'_onSpaceKeydown','space:keyup':'_onSpaceKeyup'},attached:function(){this.keyEventTarget=11==this.parentNode.nodeType?Polymer.dom(this).getOwnerRoot().host:this.parentNode;var d=this.keyEventTarget;this.listen(d,'up','uiUpAction'),this.listen(d,'down','uiDownAction')},detached:function(){this.unlisten(this.keyEventTarget,'up','uiUpAction'),this.unlisten(this.keyEventTarget,'down','uiDownAction'),this.keyEventTarget=null},get shouldKeepAnimating(){for(var d=0;d<this.ripples.length;++d)if(!this.ripples[d].isAnimationComplete)return!0;return!1},simulatedRipple:function(){this.downAction(null),this.async(function(){this.upAction()},1)},uiDownAction:function(d){this.noink||this.downAction(d)},downAction:function(d){if(!(this.holdDown&&0<this.ripples.length)){var e=this.addRipple();e.downAction(d),this._animating||(this._animating=!0,this.animate())}},uiUpAction:function(d){this.noink||this.upAction(d)},upAction:function(d){this.holdDown||(this.ripples.forEach(function(e){e.upAction(d)}),this._animating=!0,this.animate())},onAnimationComplete:function(){this._animating=!1,this.$.background.style.backgroundColor=null,this.fire('transitionend')},addRipple:function(){var d=new b(this);return Polymer.dom(this.$.waves).appendChild(d.waveContainer),this.$.background.style.backgroundColor=d.color,this.ripples.push(d),this._setAnimating(!0),d},removeRipple:function(d){var e=this.ripples.indexOf(d);0>e||(this.ripples.splice(e,1),d.remove(),!this.ripples.length&&this._setAnimating(!1))},animate:function(){if(this._animating){var d,e;for(d=0;d<this.ripples.length;++d)e=this.ripples[d],e.draw(),this.$.background.style.opacity=e.outerOpacity,e.isOpacityFullyDecayed&&!e.isRestingAtMaxRadius&&this.removeRipple(e);this.shouldKeepAnimating||0!==this.ripples.length?window.requestAnimationFrame(this._boundAnimate):this.onAnimationComplete()}},_onEnterKeydown:function(){this.uiDownAction(),this.async(this.uiUpAction,1)},_onSpaceKeydown:function(){this.uiDownAction()},_onSpaceKeyup:function(){this.uiUpAction()},_holdDownChanged:function(d,e){void 0===e||(d?this.downAction():this.upAction())}})})();</script>
+</body></html>

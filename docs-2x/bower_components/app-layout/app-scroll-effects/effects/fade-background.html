@@ -1,0 +1,12 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><html><head><link rel="import" href="../app-scroll-effects-behavior.html">
+
+<script>Polymer.AppLayout.registerEffect('fade-background',{setUp:function(b){var c={},d=b.duration||'0.5s';c.backgroundFrontLayer=this._getDOMRef('backgroundFrontLayer'),c.backgroundRearLayer=this._getDOMRef('backgroundRearLayer'),c.backgroundFrontLayer.style.willChange='opacity',c.backgroundFrontLayer.style.webkitTransform='translateZ(0)',c.backgroundFrontLayer.style.transitionProperty='opacity',c.backgroundFrontLayer.style.transitionDuration=d,c.backgroundRearLayer.style.willChange='opacity',c.backgroundRearLayer.style.webkitTransform='translateZ(0)',c.backgroundRearLayer.style.transitionProperty='opacity',c.backgroundRearLayer.style.transitionDuration=d,this._fxFadeBackground=c},run:function(b){var d=this._fxFadeBackground;1<=b?(d.backgroundFrontLayer.style.opacity=0,d.backgroundRearLayer.style.opacity=1):(d.backgroundFrontLayer.style.opacity=1,d.backgroundRearLayer.style.opacity=0)},tearDown:function(){delete this._fxFadeBackground}});</script>
+</head><body></body></html>

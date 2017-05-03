@@ -1,13 +1,12 @@
 <!--
 @license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
 The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 --><html><head><link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 
 <!--
 `iron-image` is an element for displaying an image that provides useful sizing and
@@ -76,8 +75,16 @@ Custom property | Description | Default
         position: relative;
       }
 
+      #baseURIAnchor {
+        display: none;
+      }
+
       #sizedImgDiv {
-        @apply(--layout-fit);
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
 
         display: none;
       }
@@ -97,12 +104,16 @@ Custom property | Description | Default
       }
 
       #placeholder {
-        @apply(--layout-fit);
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
 
         background-color: inherit;
         opacity: 1;
 
-        @apply(--iron-image-placeholder);
+        @apply --iron-image-placeholder;
       }
 
       #placeholder.faded-out {
@@ -111,11 +122,12 @@ Custom property | Description | Default
       }
     </style>
 
+    <a id="baseURIAnchor" href="#"></a>
     <div id="sizedImgDiv" role="img" hidden$="[[_computeImgDivHidden(sizing)]]" aria-hidden$="[[_computeImgDivARIAHidden(alt)]]" aria-label$="[[_computeImgDivARIALabel(alt, src)]]"></div>
-    <img id="img" alt$="[[alt]]" hidden$="[[_computeImgHidden(sizing)]]">
+    <img id="img" alt$="[[alt]]" hidden$="[[_computeImgHidden(sizing)]]" on-load="_imgOnLoad" on-error="_imgOnError">
     <div id="placeholder" hidden$="[[_computePlaceholderHidden(preload, fade, loading, loaded)]]" class$="[[_computePlaceholderClassName(preload, fade, loading, loaded)]]"></div>
   </template>
 
-  <script>Polymer({is:'iron-image',properties:{src:{observer:'_srcChanged',type:String,value:''},alt:{type:String,value:null},preventLoad:{type:Boolean,value:!1,observer:'_preventLoadChanged'},sizing:{type:String,value:null,reflectToAttribute:!0},position:{type:String,value:'center'},preload:{type:Boolean,value:!1},placeholder:{type:String,value:null,observer:'_placeholderChanged'},fade:{type:Boolean,value:!1},loaded:{notify:!0,readOnly:!0,type:Boolean,value:!1},loading:{notify:!0,readOnly:!0,type:Boolean,value:!1},error:{notify:!0,readOnly:!0,type:Boolean,value:!1},width:{observer:'_widthChanged',type:Number,value:null},height:{observer:'_heightChanged',type:Number,value:null}},observers:['_transformChanged(sizing, position)'],ready:function(){var a=this.$.img;a.onload=function(){this.$.img.src!==this._resolveSrc(this.src)||(this._setLoading(!1),this._setLoaded(!0),this._setError(!1))}.bind(this),a.onerror=function(){this.$.img.src!==this._resolveSrc(this.src)||(this._reset(),this._setLoading(!1),this._setLoaded(!1),this._setError(!0))}.bind(this),this._resolvedSrc=''},_load:function(a){a?this.$.img.src=a:this.$.img.removeAttribute('src'),this.$.sizedImgDiv.style.backgroundImage=a?'url("'+a+'")':'',this._setLoading(!!a),this._setLoaded(!1),this._setError(!1)},_reset:function(){this.$.img.removeAttribute('src'),this.$.sizedImgDiv.style.backgroundImage='',this._setLoading(!1),this._setLoaded(!1),this._setError(!1)},_computePlaceholderHidden:function(){return!this.preload||!this.fade&&!this.loading&&this.loaded},_computePlaceholderClassName:function(){return this.preload&&this.fade&&!this.loading&&this.loaded?'faded-out':''},_computeImgDivHidden:function(){return!this.sizing},_computeImgDivARIAHidden:function(){return''===this.alt?'true':void 0},_computeImgDivARIALabel:function(){if(null!==this.alt)return this.alt;if(''===this.src)return'';var a=new URL(this._resolveSrc(this.src)).pathname.split('/');return a[a.length-1]},_computeImgHidden:function(){return!!this.sizing},_widthChanged:function(){this.style.width=isNaN(this.width)?this.width:this.width+'px'},_heightChanged:function(){this.style.height=isNaN(this.height)?this.height:this.height+'px'},_preventLoadChanged:function(){this.preventLoad||this.loaded||(this._reset(),this._load(this.src))},_srcChanged:function(a){var c=this._resolveSrc(a);c===this._resolvedSrc||(this._resolvedSrc=c,this._reset(),!this.preventLoad&&this._load(a))},_placeholderChanged:function(){this.$.placeholder.style.backgroundImage=this.placeholder?'url("'+this.placeholder+'")':''},_transformChanged:function(){var a=this.$.sizedImgDiv.style,b=this.$.placeholder.style;a.backgroundSize=b.backgroundSize=this.sizing,a.backgroundPosition=b.backgroundPosition=this.sizing?this.position:'',a.backgroundRepeat=b.backgroundRepeat=this.sizing?'no-repeat':''},_resolveSrc:function(a){var b=this.ownerDocument.baseURI;return new URL(Polymer.ResolveUrl.resolveUrl(a,b),b).href}});</script>
+  <script>Polymer({is:'iron-image',properties:{src:{type:String,value:''},alt:{type:String,value:null},preventLoad:{type:Boolean,value:!1},sizing:{type:String,value:null,reflectToAttribute:!0},position:{type:String,value:'center'},preload:{type:Boolean,value:!1},placeholder:{type:String,value:null,observer:'_placeholderChanged'},fade:{type:Boolean,value:!1},loaded:{notify:!0,readOnly:!0,type:Boolean,value:!1},loading:{notify:!0,readOnly:!0,type:Boolean,value:!1},error:{notify:!0,readOnly:!0,type:Boolean,value:!1},width:{observer:'_widthChanged',type:Number,value:null},height:{observer:'_heightChanged',type:Number,value:null}},observers:['_transformChanged(sizing, position)','_loadStateObserver(src, preventLoad)'],created:function(){this._resolvedSrc=''},_imgOnLoad:function(){this.$.img.src!==this._resolveSrc(this.src)||(this._setLoading(!1),this._setLoaded(!0),this._setError(!1))},_imgOnError:function(){this.$.img.src!==this._resolveSrc(this.src)||(this.$.img.removeAttribute('src'),this.$.sizedImgDiv.style.backgroundImage='',this._setLoading(!1),this._setLoaded(!1),this._setError(!0))},_computePlaceholderHidden:function(){return!this.preload||!this.fade&&!this.loading&&this.loaded},_computePlaceholderClassName:function(){return this.preload&&this.fade&&!this.loading&&this.loaded?'faded-out':''},_computeImgDivHidden:function(){return!this.sizing},_computeImgDivARIAHidden:function(){return''===this.alt?'true':void 0},_computeImgDivARIALabel:function(){if(null!==this.alt)return this.alt;if(''===this.src)return'';var a=this._resolveSrc(this.src);return a.replace(/[?|#].*/g,'').split('/').pop()},_computeImgHidden:function(){return!!this.sizing},_widthChanged:function(){this.style.width=isNaN(this.width)?this.width:this.width+'px'},_heightChanged:function(){this.style.height=isNaN(this.height)?this.height:this.height+'px'},_loadStateObserver:function(a,b){var c=this._resolveSrc(a);c===this._resolvedSrc||(this._resolvedSrc=c,this.$.img.removeAttribute('src'),this.$.sizedImgDiv.style.backgroundImage='',''===a||b?(this._setLoading(!1),this._setLoaded(!1),this._setError(!1)):(this.$.img.src=this._resolvedSrc,this.$.sizedImgDiv.style.backgroundImage='url("'+this._resolvedSrc+'")',this._setLoading(!0),this._setLoaded(!1),this._setError(!1)))},_placeholderChanged:function(){this.$.placeholder.style.backgroundImage=this.placeholder?'url("'+this.placeholder+'")':''},_transformChanged:function(){var a=this.$.sizedImgDiv.style,b=this.$.placeholder.style;a.backgroundSize=b.backgroundSize=this.sizing,a.backgroundPosition=b.backgroundPosition=this.sizing?this.position:'',a.backgroundRepeat=b.backgroundRepeat=this.sizing?'no-repeat':''},_resolveSrc:function(a){var b=Polymer.ResolveUrl.resolveUrl(a,this.$.baseURIAnchor.href);return'/'===b[0]&&(b=(location.origin||location.protocol+'//'+location.host)+b),b}});</script>
 </dom-module>
 </body></html>

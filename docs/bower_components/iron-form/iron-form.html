@@ -9,5 +9,87 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 --><html><head><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 
-<script>Polymer({is:'iron-form',extends:'form',properties:{disableNativeValidationUi:{type:Boolean,value:!1},withCredentials:{type:Boolean,value:!1},contentType:{type:String,value:'application/x-www-form-urlencoded'},headers:{type:Object,value:function(){return{}}},request:{type:Object}},listeners:{'iron-form-element-register':'_registerElement','iron-form-element-unregister':'_unregisterElement',submit:'_onSubmit',reset:'_onReset'},registered:function(){var a=document.createElement('form'),b=document.createElement('input');b.setAttribute('required','true'),a.appendChild(b);var c=document.createElement('input');c.setAttribute('type','submit'),a.appendChild(c),Polymer.clientSupportsFormValidationUI=!0,a.addEventListener('submit',function(d){Polymer.clientSupportsFormValidationUI=!1,d.preventDefault()}),c.click()},ready:function(){this.request=document.createElement('iron-ajax'),this.request.addEventListener('response',this._handleFormResponse.bind(this)),this.request.addEventListener('error',this._handleFormError.bind(this)),this._customElements=[],this._customElementsInitialValues=[]},submit:function(){if(!this.noValidate&&!this.validate())return Polymer.clientSupportsFormValidationUI&&!this.disableNativeValidationUi&&this._doFakeSubmitForValidation(),void this.fire('iron-form-invalid');var a=this.serialize();this.request.url=this.getAttribute('action'),this.request.method=this.getAttribute('method'),this.request.contentType=this.contentType,this.request.withCredentials=this.withCredentials,this.request.headers=this.headers,'POST'===this.method.toUpperCase()?this.request.body=a:this.request.params=a;var b=this.fire('iron-form-presubmit',{},{cancelable:!0});b.defaultPrevented||(this.request.generateRequest(),this.fire('iron-form-submit',a))},_onSubmit:function(a){return this.submit(),a&&a.preventDefault(),!1},_onReset:function(){this._resetCustomElements()},serialize:function(){function a(g,h){b[g]?(!Array.isArray(b[g])&&(b[g]=[b[g]]),b[g].push(h)):b[g]=h}for(var c,b={},d=0;c=this._customElements[d],d<this._customElements.length;d++)!this._isChildOfRegisteredParent(c,!0)&&this._useValue(c)&&a(c.name,c.value);for(var c,d=0;c=this.elements[d],d<this.elements.length;d++)if(!this._isChildOfRegisteredParent(c,!0)&&this._useValue(c))if('select'===c.tagName.toLowerCase()&&c.multiple)for(var f=0;f<c.options.length;f++)c.options[f].selected&&a(c.name,c.options[f].value);else a(c.name,c.value);return b},_handleFormResponse:function(a){this.fire('iron-form-response',a.detail)},_handleFormError:function(a){this.fire('iron-form-error',a.detail)},_registerElement:function(a){var b=Polymer.dom(a).rootTarget;b._parentForm=this,this._customElements.push(b),this._customElementsInitialValues.push(this._usesCheckedInsteadOfValue(b)?b.checked:b.value)},_unregisterElement:function(a){var b=a.detail.target;if(b){var c=this._customElements.indexOf(b);-1<c&&(this._customElements.splice(c,1),this._customElementsInitialValues.splice(c,1))}},validate:function(){for(var b,c,a=!0,d=0;c=this._customElements[d],d<this._customElements.length;d++)this._isChildOfRegisteredParent(c,!1)||c.disabled||(b=c,b.validate&&(a=!!b.validate()&&a));for(var c,d=0;c=this.elements[d],d<this.elements.length;d++)this._isChildOfRegisteredParent(c,!1)||!c.hasAttribute('is')&&c.willValidate&&c.checkValidity&&(a=c.checkValidity()&&a);return a},_usesCheckedInsteadOfValue:function(a){return'checkbox'==a.type||'radio'==a.type||'checkbox'==a.getAttribute('role')||'radio'==a.getAttribute('role')||a._hasIronCheckedElementBehavior},_useValue:function(a){return a.disabled||!a.name?!1:!this._usesCheckedInsteadOfValue(a)||a.checked},_doFakeSubmitForValidation:function(){var a=document.createElement('input');a.setAttribute('type','submit'),a.style.display='none',this.appendChild(a),a.click(),this.removeChild(a)},_resetCustomElements:function(){this.async(function(){for(var a,b=0;a=this._customElements[b],b<this._customElements.length;b++)if(!a.disabled){if(this._usesCheckedInsteadOfValue(a))a.checked=this._customElementsInitialValues[b];else{var c=this._customElementsInitialValues[b];c===void 0&&(c=null),a.value=c,a.inputElement?a.inputElement.value=a.value:a.textarea&&(a.textarea.value=a.value)}a.invalid=!1}this.fire('iron-form-reset')},1)},_isChildOfRegisteredParent:function(a,b){for(var c=a;c&&c!==document&&c!=this;)if(c=Polymer.dom(c).parentNode||c.host,c&&(!b||c.name)&&c._parentForm===this)return!0;return!1}});</script>
-</head><body></body></html>
+<!--
+`<iron-form>` is a wrapper around the HTML `<form>` element, that can
+validate and submit both custom and native HTML elements.
+
+It has two modes: if `redirect` is true, then after the form submission you
+will be redirected to the server response. Otherwise, if it is false, it will
+use an `iron-ajax` element to submit the form contents to the server.
+
+  Example:
+
+    <iron-form>
+      <form method="get" action="/form/handler">
+        <input type="text" name="name" value="Batman">
+        <input type="checkbox" name="donuts" checked> I like donuts<br>
+        <paper-checkbox name="cheese" value="yes" checked></paper-checkbox>
+      </form>
+    </iron-form>
+
+By default, a native `<button>` element will submit this form. However, if you
+want to submit it from a custom element's click handler, you need to explicitly
+call the `iron-form`'s `submit` method.
+
+  Example:
+
+    <paper-button raised onclick="submitForm()">Submit</paper-button>
+
+    function submitForm() {
+      document.getElementById('iron-form').submit();
+    }
+
+If you are not using the `redirect` mode, then you also have the option of
+customizing the request sent to the server. To do so, you can listen to the `iron-form-presubmit`
+event, and modify the form's[`iron-ajax`](https://elements.polymer-project.org/elements/iron-ajax)
+object. However, If you want to not use `iron-ajax` at all, you can cancel the
+event and do your own custom submission:
+
+  Example of modifying the request, but still using the build-in form submission:
+
+    form.addEventListener('iron-form-presubmit', function() {
+      this.request.method = 'put';
+      this.request.params['extraParam'] = 'someValue';
+    });
+
+  Example of bypassing the build-in form submission:
+
+    form.addEventListener('iron-form-presubmit', function(event) {
+      event.preventDefault();
+      var firebase = new Firebase(form.getAttribute('action'));
+      firebase.set(form.serialize());
+    });
+
+Note that if you're dynamically creating this element, it's mandatory that you
+first create the contained `<form>` element and all its children, and only then
+attach it to the `<iron-form>`:
+
+  var wrapper = document.createElement('iron-form');
+  var form = document.createElement('form');
+  var input = document.createElement('input');
+  form.appendChild(input);
+  wrapper.appendChild(form);
+
+@element iron-form
+@hero hero.svg
+@demo demo/index.html
+-->
+
+</head><body><dom-module id="iron-form">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <!-- This form is used to collect the elements that should be submitted -->
+    <slot id="content"></slot>
+
+    <!-- This form is used for submission -->
+    <form id="helper" action$="[[action]]" method$="[[method]]" enctype$="[[enctype]]"></form>
+  </template>
+
+  <script>Polymer({is:'iron-form',properties:{allowRedirect:{type:Boolean,value:!1}},attached:function(){this._nodeObserver=Polymer.dom(this.$.content).observeNodes(function(a){for(var b=0;b<a.addedNodes.length;b++)'FORM'===a.addedNodes[b].tagName&&(this._form=a.addedNodes[b],this._init())}.bind(this))},detached:function(){this._nodeObserver&&(Polymer.dom(this.$.content).unobserveNodes(this._nodeObserver),this._nodeObserver=null)},_init:function(){this._form.addEventListener('submit',this.submit.bind(this)),this._form.addEventListener('reset',this.reset.bind(this))},validate:function(){if(''===this._form.getAttribute('novalidate'))return!0;for(var c,e,a=this._form.checkValidity(),b=this._getValidatableElements(),d=0;c=b[d],d<b.length;d++)e=c,e.validate&&(a=!!e.validate()&&a);return a},submit:function(a){if(a&&a.preventDefault(),!!this.validate()){for(;0!==this.$.helper.children.length;)this.$.helper.removeChild(this.$.helper.children[0]);var b=this.serializeForm();if(this.allowRedirect){for(element in b)this.$.helper.appendChild(this._createHiddenElement(element,b[element]));this.$.helper.submit(),this.fire('iron-form-submit')}else this._makeAjaxRequest(b)}},reset:function(a){a&&a.preventDefault();for(var b=Polymer.dom(this._form).querySelectorAll('*'),c=0;c<b.length;c++)b[c].defaultValue&&(b[c].value=b[c].defaultValue)},serializeForm:function(){for(var d,a=this._getSubmittableElements(),b={},c=0;c<a.length;c++){d=this._serializeElementValues(a[c]);for(var e=0;e<d.length;e++)this._addSerializedElement(b,a[c].name,d[e])}return b},_handleFormResponse:function(a){this.fire('iron-form-response',a.detail)},_handleFormError:function(a){this.fire('iron-form-error',a.detail)},_makeAjaxRequest:function(a){this.ajax||(this.ajax=document.createElement('iron-ajax'),this.ajax.addEventListener('response',this._handleFormResponse.bind(this)),this.ajax.addEventListener('error',this._handleFormError.bind(this))),this.ajax.url=this._form.getAttribute('action'),this.ajax.method=this._form.getAttribute('method'),this.ajax.contentType=this._form.contentType,'POST'===this._form.method.toUpperCase()?this.ajax.body=a:this.ajax.params=a;var b=this.fire('iron-form-presubmit',{},{cancelable:!0});b.defaultPrevented||(this.ajax.generateRequest(),this.fire('iron-form-submit',a))},_getValidatableElements:function(){for(var d,a=Polymer.dom(this._form).querySelectorAll('*'),b=[],c=0;c<a.length;c++){d=Array.prototype.slice.call(Polymer.dom(a[c]).querySelectorAll('*'))||[],d.push(a[c]);for(var e,f=0;e=d[f],f<d.length;f++)e.disabled||b.push(e)}return b},_getSubmittableElements:function(){for(var d,a=Polymer.dom(this._form).querySelectorAll('*'),b=[],c=0;c<a.length;c++){d=Array.prototype.slice.call(Polymer.dom(a[c]).querySelectorAll('*'))||[],d.push(a[c]);for(var e,f=0;e=d[f],f<d.length;f++)!e.disabled&&e.name&&b.push(e)}return b},_serializeElementValues:function(a){var b=a.tagName.toLowerCase();return'button'===b||'input'===b&&('submit'===a.type||'reset'===a.type)?[]:'select'===b?this._serializeSelectValues(a):'input'===b?this._serializeInputValues(a):a._hasIronCheckedElementBehavior&&!a.checked?[]:[a.value]},_serializeSelectValues:function(a){for(var b=[],c=0;c<a.options.length;c++)a.options[c].selected&&b.push(a.options[c].value);return b},_serializeInputValues:function(a){var b=a.type.toLowerCase();return('checkbox'!==b&&'radio'!==b||a.checked)&&'file'!==b?[a.value]:[]},_createHiddenElement:function(a,b){var c=document.createElement('input');return c.setAttribute('type','hidden'),c.setAttribute('name',a),c.setAttribute('value',b),c},_addSerializedElement:function(a,b,c){a[b]?(!Array.isArray(a[b])&&(a[b]=[a[b]]),a[b].push(c)):a[b]=c}});</script>
+</dom-module>
+</body></html>

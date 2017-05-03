@@ -69,9 +69,9 @@ element.
 </head><body><dom-module id="paper-dialog">
   <template>
     <style include="paper-dialog-shared-styles"></style>
-    <content></content>
+    <slot></slot>
   </template>
 </dom-module>
 
-<script>(function(){Polymer({is:'paper-dialog',behaviors:[Polymer.PaperDialogBehavior,Polymer.NeonAnimationRunnerBehavior],listeners:{'neon-animation-finish':'_onNeonAnimationFinish'},_renderOpened:function(){this.cancelAnimation(),this.playAnimation('entry')},_renderClosed:function(){this.cancelAnimation(),this.playAnimation('exit')},_onNeonAnimationFinish:function(){this.opened?this._finishRenderOpened():this._finishRenderClosed()}})})();</script>
+<script>(function(){'use strict';Polymer({is:'paper-dialog',behaviors:[Polymer.PaperDialogBehavior,Polymer.NeonAnimationRunnerBehavior],listeners:{'neon-animation-finish':'_onNeonAnimationFinish'},_renderOpened:function(){this.cancelAnimation(),this.playAnimation('entry')},_renderClosed:function(){this.cancelAnimation(),this.playAnimation('exit')},_onNeonAnimationFinish:function(){this.opened?this._finishRenderOpened():this._finishRenderClosed()}})})();</script>
 </body></html>

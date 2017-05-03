@@ -8,5 +8,5 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 --><html><head><link rel="import" href="../polymer/polymer.html">
 
-<script>Polymer.PaperInputAddonBehavior={hostAttributes:{'add-on':''},attached:function(){this.fire('addon-attached')},update:function(){}};</script>
+<script>Polymer.PaperInputAddonBehavior={attached:function(){Polymer.dom.flush(),this.fire('addon-attached')},update:function(){}};</script>
 </head><body></body></html>

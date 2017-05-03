@@ -10,7 +10,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../iron-behaviors/iron-control-state.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
-<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
 
 <!--
 `iron-autogrow-textarea` is an element containing a textarea that grows in height as more
@@ -55,7 +54,7 @@ Custom property | Description | Default
       }
 
       .fit {
-        @apply(--layout-fit);
+        @apply --layout-fit;
       }
 
       textarea {
@@ -72,27 +71,23 @@ Custom property | Description | Default
         font-family: inherit;
         line-height: inherit;
         text-align: inherit;
-        @apply(--iron-autogrow-textarea);
-      }
-
-      ::content textarea:invalid {
-        box-shadow: none;
+        @apply --iron-autogrow-textarea;
       }
 
       textarea::-webkit-input-placeholder {
-        @apply(--iron-autogrow-textarea-placeholder);
+        @apply --iron-autogrow-textarea-placeholder;
       }
 
       textarea:-moz-placeholder {
-        @apply(--iron-autogrow-textarea-placeholder);
+        @apply --iron-autogrow-textarea-placeholder;
       }
 
       textarea::-moz-placeholder {
-        @apply(--iron-autogrow-textarea-placeholder);
+        @apply --iron-autogrow-textarea-placeholder;
       }
 
       textarea:-ms-input-placeholder {
-        @apply(--iron-autogrow-textarea-placeholder);
+        @apply --iron-autogrow-textarea-placeholder;
       }
     </style>
 
@@ -107,5 +102,5 @@ Custom property | Description | Default
   </template>
 </dom-module>
 
-<script>Polymer({is:'iron-autogrow-textarea',behaviors:[Polymer.IronFormElementBehavior,Polymer.IronValidatableBehavior,Polymer.IronControlState],properties:{bindValue:{observer:'_bindValueChanged',type:String},rows:{type:Number,value:1,observer:'_updateCached'},maxRows:{type:Number,value:0,observer:'_updateCached'},autocomplete:{type:String,value:'off'},autofocus:{type:Boolean,value:!1},inputmode:{type:String},placeholder:{type:String},readonly:{type:String},required:{type:Boolean},minlength:{type:Number},maxlength:{type:Number}},listeners:{input:'_onInput'},observers:['_onValueChanged(value)'],get textarea(){return this.$.textarea},get selectionStart(){return this.$.textarea.selectionStart},get selectionEnd(){return this.$.textarea.selectionEnd},set selectionStart(a){this.$.textarea.selectionStart=a},set selectionEnd(a){this.$.textarea.selectionEnd=a},attached:function(){var a=navigator.userAgent.match(/iP(?:[oa]d|hone)/);a&&(this.$.textarea.style.marginLeft='-3px')},validate:function(){if(!this.required&&''==this.value)return this.invalid=!1,!0;var a;return this.hasValidator()?a=Polymer.IronValidatableBehavior.validate.call(this,this.value):(a=this.$.textarea.validity.valid,this.invalid=!a),this.fire('iron-input-validate'),a},_bindValueChanged:function(){var a=this.textarea;a&&(a.value!==this.bindValue&&(a.value=this.bindValue||0===this.bindValue?this.bindValue:''),this.value=this.bindValue,this.$.mirror.innerHTML=this._valueForMirror(),this.fire('bind-value-changed',{value:this.bindValue}))},_onInput:function(a){this.bindValue=a.path?a.path[0].value:a.target.value},_constrain:function(a){var b;for(a=a||[''],b=0<this.maxRows&&a.length>this.maxRows?a.slice(0,this.maxRows):a.slice(0);0<this.rows&&b.length<this.rows;)b.push('');return b.join('<br/>')+'&#160;'},_valueForMirror:function(){var a=this.textarea;if(a)return this.tokens=a&&a.value?a.value.replace(/&/gm,'&amp;').replace(/"/gm,'&quot;').replace(/'/gm,'&#39;').replace(/</gm,'&lt;').replace(/>/gm,'&gt;').split('\n'):[''],this._constrain(this.tokens)},_updateCached:function(){this.$.mirror.innerHTML=this._constrain(this.tokens)},_onValueChanged:function(){this.bindValue=this.value}});</script>
+<script>Polymer({is:'iron-autogrow-textarea',behaviors:[Polymer.IronValidatableBehavior,Polymer.IronControlState],properties:{value:{observer:'_valueChanged',type:String,notify:!0},bindValue:{observer:'_bindValueChanged',type:String,notify:!0},rows:{type:Number,value:1,observer:'_updateCached'},maxRows:{type:Number,value:0,observer:'_updateCached'},autocomplete:{type:String,value:'off'},autofocus:{type:Boolean,value:!1},inputmode:{type:String},placeholder:{type:String},readonly:{type:String},required:{type:Boolean},minlength:{type:Number},maxlength:{type:Number}},listeners:{input:'_onInput'},get textarea(){return this.$.textarea},get selectionStart(){return this.$.textarea.selectionStart},get selectionEnd(){return this.$.textarea.selectionEnd},set selectionStart(a){this.$.textarea.selectionStart=a},set selectionEnd(a){this.$.textarea.selectionEnd=a},attached:function(){var a=navigator.userAgent.match(/iP(?:[oa]d|hone)/);a&&(this.$.textarea.style.marginLeft='-3px')},validate:function(){var a=this.$.textarea.validity.valid;return a&&(this.required&&''===this.value?a=!1:this.hasValidator()&&(a=Polymer.IronValidatableBehavior.validate.call(this,this.value))),this.invalid=!a,this.fire('iron-input-validate'),a},_bindValueChanged:function(a){this.value=a},_valueChanged:function(a){var b=this.textarea;b&&(b.value!==a&&(b.value=a||0===a?a:''),this.bindValue=a,this.$.mirror.innerHTML=this._valueForMirror())},_onInput:function(a){var b=Polymer.dom(a).path;this.value=b?b[0].value:a.target.value},_constrain:function(a){var b;for(a=a||[''],b=0<this.maxRows&&a.length>this.maxRows?a.slice(0,this.maxRows):a.slice(0);0<this.rows&&b.length<this.rows;)b.push('');return b.join('<br/>')+'&#160;'},_valueForMirror:function(){var a=this.textarea;if(a)return this.tokens=a&&a.value?a.value.replace(/&/gm,'&amp;').replace(/"/gm,'&quot;').replace(/'/gm,'&#39;').replace(/</gm,'&lt;').replace(/>/gm,'&gt;').split('\n'):[''],this._constrain(this.tokens)},_updateCached:function(){this.$.mirror.innerHTML=this._constrain(this.tokens)}});</script>
 </body></html>

@@ -25,11 +25,14 @@ formatDateTime =
 smartFormat : Time -> Time -> String
 smartFormat refTime time =
     let
+        dateFromTime =
+            Date.fromTime
+
         refDate =
-            Date.fromTime refTime
+            dateFromTime refTime
 
         date =
-            Date.fromTime time
+            dateFromTime time
     in
         Ext.Date.smartFormat refDate date
 

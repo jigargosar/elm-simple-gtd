@@ -206,26 +206,24 @@ createTodoViewModel vc todo =
         text =
             Todo.getText todo
 
-        {- displayText =
-           if String.Extra.isBlank text then
-               "< empty >"
-           else
-               text
-        -}
         ( displayText, isMultiLine ) =
             let
                 lines =
-                    text |> String.trim |> String.lines
+                    text |> String.trim |> String.Extra.nonEmpty ?= "< empty >" |> String.lines
             in
                 case lines of
                     [] ->
                         ( "", False )
 
+                    -- never happens
                     firstLine :: [] ->
                         ( firstLine, False )
 
                     firstLine :: xs ->
                         ( firstLine ++ " ...", True )
+
+        displayText2 =
+            text |> String.trim |> String.Extra.ellipsis 100
     in
         { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo

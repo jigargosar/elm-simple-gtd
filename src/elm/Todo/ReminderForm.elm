@@ -29,7 +29,7 @@ create : Todo.Model -> Time.Time -> Model
 create todo now =
     let
         timeInMilli =
-            Todo.getDueAt todo ?= now + Time.hour
+            Todo.getMaybeReminderTime todo ?= now + Time.hour
     in
         { id = Document.getId todo
         , date = (Time.Format.format "%Y-%m-%d") timeInMilli

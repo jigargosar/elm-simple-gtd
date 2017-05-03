@@ -47,23 +47,35 @@ toHHMMSS =
     toHMSList >> List.map (toString >> String.padLeft 2 '0') >> String.join ":"
 
 
-formatTime =
+formatDateTime =
     Time.Format.format "%e %b %l:%M%P"
 
 
 smartFormat : Time -> Time -> String
 smartFormat refTime time =
     let
+        formatTimeOfDay =
+            Date.Format.format "%l:%M%P"
+
+        formatDateWithoutTime =
+            Date.Format.format "%e %b"
+
         refDate =
             Date.fromTime refTime
 
         date =
             Date.fromTime time
+
+        formattedTime =
+            formatTimeOfDay date |> String.trim
+
+        formattedDate =
+            formatDateWithoutTime date |> String.trim
     in
         if Date.equalBy Date.Day refDate date then
-            Date.Format.format "%l:%M%P" date
+            formattedTime
         else
-            Date.Format.format "%e %b %l:%M%P" date
+            formattedDate ++ " " ++ formattedTime
 
 
 toHMSList : Time -> List Int

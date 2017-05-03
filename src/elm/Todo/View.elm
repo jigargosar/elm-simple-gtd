@@ -211,8 +211,20 @@ createTodoViewModel vc todo =
            else
                text
         -}
-        displayText =
-            text |> String.trimLeft |> String.lines |> List.head ?= ""
+        ( displayText, isMultiLine ) =
+            let
+                lines =
+                    text |> String.trim |> String.lines
+            in
+                case lines of
+                    [] ->
+                        ( "", False )
+
+                    firstLine :: [] ->
+                        ( firstLine, False )
+
+                    firstLine :: xs ->
+                        ( firstLine, True )
     in
         { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo

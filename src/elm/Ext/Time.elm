@@ -23,10 +23,12 @@ formatDateTime =
     Time.Format.format "%a %e %b %Y %l:%M%P"
 
 
+dayDiff : Time -> Time -> Int
 dayDiff refTime time =
     Ext.Date.dayDiff (Date.fromTime refTime) (Date.fromTime time)
 
 
+dayDiffInWords : Time -> Time -> String
 dayDiffInWords =
     let
         intToDaysInWords dayCount =

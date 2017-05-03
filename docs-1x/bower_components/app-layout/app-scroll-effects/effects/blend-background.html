@@ -1,0 +1,12 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><html><head><link rel="import" href="../app-scroll-effects-behavior.html">
+
+<script>Polymer.AppLayout.registerEffect('blend-background',{setUp:function(){var b={};b.backgroundFrontLayer=this._getDOMRef('backgroundFrontLayer'),b.backgroundRearLayer=this._getDOMRef('backgroundRearLayer'),b.backgroundFrontLayer.style.willChange='opacity',b.backgroundFrontLayer.style.transform='translateZ(0)',b.backgroundRearLayer.style.willChange='opacity',b.backgroundRearLayer.style.transform='translateZ(0)',b.backgroundRearLayer.style.opacity=0,this._fxBlendBackground=b},run:function(b){var d=this._fxBlendBackground;d.backgroundFrontLayer.style.opacity=1-b,d.backgroundRearLayer.style.opacity=b},tearDown:function(){delete this._fxBlendBackground}});</script>
+</head><body></body></html>

@@ -1,0 +1,12 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><html><head><link rel="import" href="../app-scroll-effects-behavior.html">
+
+<script>Polymer.AppLayout.registerEffect('resize-snapped-title',{setUp:function(b){var c=this._getDOMRef('mainTitle'),d=this._getDOMRef('condensedTitle'),e=b.duration||'0.2s',f={};return d?c?void(c.style.transitionProperty='opacity',c.style.transitionDuration=e,d.style.transitionProperty='opacity',d.style.transitionDuration=e,f.condensedTitle=d,f.title=c,this._fxResizeSnappedTitle=f):(console.warn('Scroll effect `resize-snapped-title`: undefined `main-title`'),!1):(console.warn('Scroll effect `resize-snapped-title`: undefined `condensed-title`'),!1)},run:function(b){var d=this._fxResizeSnappedTitle;0<b?(d.title.style.opacity=0,d.condensedTitle.style.opacity=1):(d.title.style.opacity=1,d.condensedTitle.style.opacity=0)},tearDown:function(){var b=this._fxResizeSnappedTitle;b.title.style.transition='',b.condensedTitle.style.transition='',delete this._fxResizeSnappedTitle}});</script>
+</head><body></body></html>

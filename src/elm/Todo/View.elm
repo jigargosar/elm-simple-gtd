@@ -205,11 +205,14 @@ createTodoViewModel vc todo =
         text =
             Todo.getText todo
 
+        {- displayText =
+           if String.Extra.isBlank text then
+               "< empty >"
+           else
+               text
+        -}
         displayText =
-            if String.Extra.isBlank text then
-                "< empty >"
-            else
-                text
+            text |> String.trimLeft |> String.lines |> List.head ?= ""
     in
         { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo

@@ -102,6 +102,7 @@ appHeaderView m viewModel =
                 , tabindex -1
                 , attribute "drawer-toggle" ""
                 , onClick Msg.ToggleDrawer
+                , class "hide-when-wide"
                 ]
                 []
             , headerView m

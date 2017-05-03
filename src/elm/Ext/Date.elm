@@ -39,6 +39,6 @@ smartFormat refDate date =
         if dayDiff == 0 then
             formattedTime
         else if dayDiff == 1 then
-            "Tommorrow " ++ formattedTime
+            "Tomorrow " ++ formattedTime
         else
             formattedDate ++ " " ++ formattedTime

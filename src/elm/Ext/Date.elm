@@ -28,8 +28,6 @@ smartFormat refDate date =
 
         dayDiff =
             Date.diff Date.Day refDate date
-
-        --                |> Debug.log ("day diff" ++ toString ( refDate, date ))
     in
         if dayDiff == 0 then
             formattedTime

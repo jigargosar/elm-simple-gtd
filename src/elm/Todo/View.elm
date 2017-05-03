@@ -266,7 +266,7 @@ default vm =
         [ classList [ "todo-item" => True ]
         ]
         [ Paper.itemBody []
-            [ div [ class "layout horizontal" ]
+            [ div [ class "layout vertical" ]
                 [ div
                     [ style [ "flex" => "1 1 auto" ]
                     , class "text-wrap"
@@ -277,11 +277,11 @@ default vm =
                     ]
                 , div
                     [ style [ "flex" => "0 1 auto" ]
-                    , class "layout horizontal-reverse wrap start-aligned"
+                    , class "layout horizontal end-justified"
                     ]
-                    [ div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
+                    [ reminderView vm.reminder
                     , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton vm ]
-                    , reminderView vm.reminder
+                    , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
                     ]
                 ]
             ]

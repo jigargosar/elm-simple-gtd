@@ -384,7 +384,9 @@ timeToolTip vm =
         [ Paper.tooltip
             [ intProperty "offset" 0
             ]
-            [ text vm.dueAtToolTipText ]
+            [ div [] [ text vm.dueAtToolTipText ]
+            , div [] [ text vm.dayDiffInWords ]
+            ]
         ]
     else
         []

@@ -246,12 +246,12 @@ okCancelDeleteButtons okMsg cancelMsg deleteMsg =
 
 
 okButton msg =
-    Paper.button [ onClickStopPropagation msg ] [ text "Ok" ]
+    Paper.button [ onClick msg ] [ text "Ok" ]
 
 
 cancelButton msg =
-    Paper.button [ onClickStopPropagation msg ] [ text "Cancel" ]
+    Paper.button [ onClick msg ] [ text "Cancel" ]
 
 
 deleteButton msg =
-    Paper.button [ onClickStopPropagation msg ] [ text "Delete" ]
+    Paper.button [ onClick msg ] [ text "Delete" ]

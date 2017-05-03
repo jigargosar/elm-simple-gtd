@@ -23,6 +23,10 @@ formatDateTime =
     Time.Format.format "%a %e %b %Y %l:%M%P"
 
 
+dayDiff refTime time =
+    Ext.Date.dayDiff (Date.fromTime refTime) (Date.fromTime time)
+
+
 smartFormat : Time -> Time -> String
 smartFormat refTime time =
     let

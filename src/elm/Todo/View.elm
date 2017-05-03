@@ -84,6 +84,7 @@ createEditTodoViewModel todo form =
 type alias TodoViewModel =
     { text : Todo.Text
     , displayText : String
+    , isMultiLine : Bool
     , isDone : Bool
     , isDeleted : Bool
     , isSelected : Bool
@@ -229,6 +230,7 @@ createTodoViewModel vc todo =
         { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo
         , text = text
+        , isMultiLine = isMultiLine
         , displayText = displayText
         , isSelected = Set.member todoId vc.selection
         , projectName = projectName

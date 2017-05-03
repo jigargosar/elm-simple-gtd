@@ -28,11 +28,6 @@ smartFormat refDate date =
         formattedDate =
             formatDateWithoutTime date |> String.trim
 
-        --        timezoneOffsetMinutes =
-        --            refDate |> getTimezoneOffset
-        --
-        --        adjustForTimeZoneOffset =
-        --            Date.add Date.Minute (timezoneOffsetMinutes * -1)
         dayDiff =
             Date.diff Date.Day (Date.ceiling Date.Day refDate) (Date.ceiling Date.Day date)
     in

@@ -277,11 +277,11 @@ default vm =
                     ]
                 , div
                     [ style [ "flex" => "0 1 auto" ]
-                    , class "layout horizontal wrap end-justified end-aligned"
+                    , class "layout horizontal-reverse wrap end _around-aligned center-aligned"
                     ]
-                    [ reminderView vm.reminder
+                    [ div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
                     , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton vm ]
-                    , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
+                    , reminderView vm.reminder
                     ]
                 ]
             ]

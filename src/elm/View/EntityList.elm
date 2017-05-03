@@ -38,6 +38,7 @@ import Ext.Function exposing (..)
 import Entity.ViewModel
 import Todo.View exposing (EditTodoViewModel)
 import View.Shared exposing (..)
+import WebComponents
 
 
 filtered : Model -> Html Msg
@@ -100,7 +101,6 @@ defaultView vm =
     item []
         [ itemBody [] [ View.Shared.defaultBadge vm ]
         , showOnHover [ settingsButton vm.startEditingMsg ]
-        , hideOnHover vm.isDeleted [ trashButton commonMsg.noOp ]
         ]
 
 
@@ -124,6 +124,6 @@ editEntityView editModel vm =
             [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
             , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
             , expand []
-            , trashButton vm.onDeleteClicked
+            , WebComponents.iconButton "delete" [ onClick Msg.SelectionTrashClicked ]
             ]
         ]

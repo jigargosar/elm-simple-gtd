@@ -413,7 +413,3 @@ doneIconButton2 vm =
         , iconP "done"
         ]
         []
-
-
-deleteIconButton vm =
-    View.Shared.trashButton vm.onDeleteClicked

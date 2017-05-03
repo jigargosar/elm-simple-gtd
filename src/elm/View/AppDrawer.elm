@@ -152,17 +152,10 @@ entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } 
 entityListItem : Entity.ViewModel.EntityItemModel -> Html Msg
 entityListItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
-        ([ Html.node "iron-icon" [ iconP vm.icon.name, style [ "color" => vm.icon.color ] ] []
-         , itemBody [] [ View.Shared.defaultBadge vm ]
-         , hoverIcons vm
-         , hideOnHover vm.isDeleted [ trashButton commonMsg.noOp ]
-         ]
-        )
-
-
-hoverIcons vm =
-    div [ class "show-on-hover" ]
-        [ settingsButton vm.startEditingMsg ]
+        [ Html.node "iron-icon" [ iconP vm.icon.name, style [ "color" => vm.icon.color ] ] []
+        , itemBody [] [ View.Shared.defaultBadge vm ]
+        , div [ class "show-on-hover" ] [ settingsButton vm.startEditingMsg ]
+        ]
 
 
 headLineText title =

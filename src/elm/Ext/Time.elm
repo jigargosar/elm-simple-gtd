@@ -27,6 +27,23 @@ dayDiff refTime time =
     Ext.Date.dayDiff (Date.fromTime refTime) (Date.fromTime time)
 
 
+dayDiffInWords =
+    let
+        intToDaysInWords dayCount =
+            let
+                dayCountAsString =
+                    dayCount |> abs >> toString
+            in
+                if dayCount > 0 then
+                    dayCountAsString ++ " days left"
+                else if dayCount < 0 then
+                    dayCountAsString ++ " days left"
+                else
+                    ""
+    in
+        dayDiff >>> intToDaysInWords
+
+
 smartFormat : Time -> Time -> String
 smartFormat refTime time =
     let

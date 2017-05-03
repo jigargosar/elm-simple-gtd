@@ -40,5 +40,7 @@ smartFormat refDate date =
             formattedTime
         else if dayDiff == 1 then
             "Tomorrow " ++ formattedTime
+        else if dayDiff > 1 && dayDiff < 7 then
+            (Date.format "%A " date) ++ formattedTime
         else
             formattedDate ++ " " ++ formattedTime

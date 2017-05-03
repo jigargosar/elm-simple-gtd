@@ -20,7 +20,7 @@ toHHMMSS =
 
 
 formatDateTime =
-    Time.Format.format "%e %b %l:%M%P"
+    Time.Format.format "%a %e %b %Y %l:%M%P"
 
 
 smartFormat : Time -> Time -> String

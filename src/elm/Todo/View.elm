@@ -114,7 +114,7 @@ type alias ReminderViewModel =
     , displayText : String
     , isOverDue : Bool
     , isSnoozed : Bool
-    , overDueTooltipText : String
+    , dueAtToolTipText : String
     , onDateChanged : String -> Msg
     , onTimeChanged : String -> Msg
     , startEditingMsg : Msg
@@ -202,7 +202,7 @@ createTodoViewModel vc todo =
                 , displayText = displayText
                 , isOverDue = displayText == overDueText
                 , isSnoozed = Todo.isSnoozed todo
-                , overDueTooltipText = Todo.getDueAt todo ?|> smartFormat ?= ""
+                , dueAtToolTipText = Todo.getDueAt todo ?|> Ext.Time.formatDateTime ?= ""
                 , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
                 , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
                 , startEditingMsg = Msg.StartEditingReminder todo
@@ -370,16 +370,16 @@ reminderView vm =
                     ]
                 ]
              ]
-                ++ (overDueToolTip vm)
+                ++ (timeToolTip vm)
             )
 
 
-overDueToolTip vm =
-    if vm.isOverDue then
+timeToolTip vm =
+    if vm.dueAtToolTipText /= "" then
         [ Paper.tooltip
             [ intProperty "offset" 0
             ]
-            [ text vm.overDueTooltipText ]
+            [ text vm.dueAtToolTipText ]
         ]
     else
         []

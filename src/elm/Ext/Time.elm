@@ -3,6 +3,7 @@ module Ext.Time exposing (..)
 import Date
 import Date.Extra as Date
 import Date.Format
+import Ext.Date
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -54,28 +55,13 @@ formatDateTime =
 smartFormat : Time -> Time -> String
 smartFormat refTime time =
     let
-        formatTimeOfDay =
-            Date.Format.format "%l:%M%P"
-
-        formatDateWithoutTime =
-            Date.Format.format "%e %b"
-
         refDate =
             Date.fromTime refTime
 
         date =
             Date.fromTime time
-
-        formattedTime =
-            formatTimeOfDay date |> String.trim
-
-        formattedDate =
-            formatDateWithoutTime date |> String.trim
     in
-        if Date.equalBy Date.Day refDate date then
-            formattedTime
-        else
-            formattedDate ++ " " ++ formattedTime
+        Ext.Date.smartFormat refDate date
 
 
 toHMSList : Time -> List Int

@@ -8,7 +8,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 --><html><head><link rel="import" href="../../polymer/polymer.html">
 <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../../iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../app-layout-behavior/app-layout-behavior.html">
 
 <!--
 app-header-layout is a wrapper element that positions an app-header and other content. This
@@ -18,7 +18,7 @@ Using the document scroll:
 
 ```html
 <app-header-layout>
-  <app-header fixed condenses effects="waterfall">
+  <app-header slot="header" fixed condenses effects="waterfall">
     <app-toolbar>
       <div main-title>App name</div>
     </app-toolbar>
@@ -33,7 +33,7 @@ Using an own scrolling region:
 
 ```html
 <app-header-layout has-scrolling-region style="width: 300px; height: 400px;">
-  <app-header fixed condenses effects="waterfall">
+  <app-header slot="header" fixed condenses effects="waterfall">
     <app-toolbar>
       <div main-title>App name</div>
     </app-toolbar>
@@ -75,33 +75,46 @@ Add the `fullbleed` attribute to app-header-layout to make it fit the size of it
         z-index: 0;
       }
 
-      :host > ::content > app-header {
-        @apply(--layout-fixed-top);
+      #wrapper ::slotted([slot=header]) {
+        @apply --layout-fixed-top;
         z-index: 1;
+      }
+
+      #wrapper.initializing ::slotted([slot=header]) {
+        position: relative;
       }
 
       :host([has-scrolling-region]) {
         height: 100%;
       }
 
-      :host([has-scrolling-region]) > ::content > app-header {
+      :host([has-scrolling-region]) #wrapper ::slotted([slot=header]) {
         position: absolute;
       }
 
-      :host([has-scrolling-region]) > #contentContainer {
-        @apply(--layout-fit);
+      :host([has-scrolling-region]) #wrapper.initializing ::slotted([slot=header]) {
+        position: relative;
+      }
+
+      :host([has-scrolling-region]) #wrapper #contentContainer {
+        @apply --layout-fit;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
       }
 
-      :host([fullbleed]) {
-        @apply(--layout-vertical);
-        @apply(--layout-fit);
+      :host([has-scrolling-region]) #wrapper.initializing #contentContainer {
+        position: relative;
       }
 
-      :host([fullbleed]) > #contentContainer {
-        @apply(--layout-vertical);
-        @apply(--layout-flex);
+      :host([fullbleed]) {
+        @apply --layout-vertical;
+        @apply --layout-fit;
+      }
+
+      :host([fullbleed]) #wrapper,
+      :host([fullbleed]) #wrapper #contentContainer {
+        @apply --layout-vertical;
+        @apply --layout-flex;
       }
 
       #contentContainer {
@@ -112,14 +125,16 @@ Add the `fullbleed` attribute to app-header-layout to make it fit the size of it
 
     </style>
 
-    <content id="header" select="app-header"></content>
+    <div id="wrapper" class="initializing">
+      <slot id="headerSlot" name="header"></slot>
 
-    <div id="contentContainer">
-      <content></content>
+      <div id="contentContainer">
+        <slot></slot>
+      </div>
     </div>
 
   </template>
 
-  <script>Polymer({is:'app-header-layout',behaviors:[Polymer.IronResizableBehavior],properties:{hasScrollingRegion:{type:Boolean,value:!1,reflectToAttribute:!0}},listeners:{'iron-resize':'_resizeHandler','app-header-reset-layout':'_resetLayoutHandler'},observers:['resetLayout(isAttached, hasScrollingRegion)'],get header(){return Polymer.dom(this.$.header).getDistributedNodes()[0]},resetLayout:function(){this._updateScroller(),this.debounce('_resetLayout',this._updateContentPosition)},_updateContentPosition:function(){var a=this.header;if(this.isAttached&&a){var b=a.offsetHeight;if(!this.hasScrollingRegion){var c=this.getBoundingClientRect(),d=document.documentElement.clientWidth-c.right;a.style.left=c.left+'px',a.style.right=d+'px'}else a.style.left='',a.style.right='';var f=this.$.contentContainer.style;a.fixed&&!a.willCondense()&&this.hasScrollingRegion?(f.marginTop=b+'px',f.paddingTop=''):(f.paddingTop=b+'px',f.marginTop='')}},_updateScroller:function(){if(this.isAttached){var a=this.header;a&&(a.scrollTarget=this.hasScrollingRegion?this.$.contentContainer:this.ownerDocument.documentElement)}},_resizeHandler:function(){this.resetLayout()},_resetLayoutHandler:function(a){this.resetLayout(),a.stopPropagation()}});</script>
+  <script>Polymer({is:'app-header-layout',behaviors:[Polymer.AppLayoutBehavior],properties:{hasScrollingRegion:{type:Boolean,value:!1,reflectToAttribute:!0}},observers:['resetLayout(isAttached, hasScrollingRegion)'],get header(){return Polymer.dom(this.$.headerSlot).getDistributedNodes()[0]},_updateLayoutStates:function(){var a=this.header;if(this.isAttached&&a){this.$.wrapper.classList.remove('initializing'),a.scrollTarget=this.hasScrollingRegion?this.$.contentContainer:this.ownerDocument.documentElement;var b=a.offsetHeight;this.hasScrollingRegion?(a.style.left='',a.style.right=''):requestAnimationFrame(function(){var d=this.getBoundingClientRect(),e=document.documentElement.clientWidth-d.right;a.style.left=d.left+'px',a.style.right=e+'px'}.bind(this));var c=this.$.contentContainer.style;a.fixed&&!a.condenses&&this.hasScrollingRegion?(c.marginTop=b+'px',c.paddingTop=''):(c.paddingTop=b+'px',c.marginTop='')}}});</script>
 </dom-module>
 </body></html>

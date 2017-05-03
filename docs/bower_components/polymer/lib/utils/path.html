@@ -1,0 +1,12 @@
+<!--
+@license
+Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><html><head><link rel="import" href="boot.html">
+
+<script>(function(){'use strict';const a={isPath:function(b){return 0<=b.indexOf('.')},root:function(b){let c=b.indexOf('.');return-1===c?b:b.slice(0,c)},isAncestor:function(b,c){return 0===b.indexOf(c+'.')},isDescendant:function(b,c){return 0===c.indexOf(b+'.')},translate:function(b,c,d){return c+d.slice(b.length)},matches:function(b,c){return b===c||this.isAncestor(b,c)||this.isDescendant(b,c)},normalize:function(b){if(Array.isArray(b)){let c=[];for(let e,d=0;d<b.length;d++){e=b[d].toString().split('.');for(let f=0;f<e.length;f++)c.push(e[f])}return c.join('.')}return b},split:function(b){return Array.isArray(b)?this.normalize(b).split('.'):b.toString().split('.')},get:function(b,c,d){let e=b,f=this.split(c);for(let g=0;g<f.length;g++){if(!e)return;let h=f[g];e=e[h]}return d&&(d.path=f.join('.')),e},set:function(b,c,d){let e=b,f=this.split(c),g=f[f.length-1];if(1<f.length){for(let k,h=0;h<f.length-1;h++)if(k=f[h],e=e[k],!e)return;e[g]=d}else e[c]=d;return f.join('.')}};a.isDeep=a.isPath,Polymer.Path=a})();</script>
+</head><body></body></html>

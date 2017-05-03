@@ -1,0 +1,299 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><html><head><link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
+<link rel="import" href="../iron-behaviors/iron-button-state.html">
+<link rel="import" href="../iron-behaviors/iron-control-state.html">
+<link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
+<link rel="import" href="../paper-behaviors/paper-ripple-behavior.html">
+<link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../paper-styles/default-theme.html">
+
+<link rel="import" href="paper-dropdown-menu-icons.html">
+<link rel="import" href="paper-dropdown-menu-shared-styles.html">
+
+<!--
+Material design: [Dropdown menus](https://www.google.com/design/spec/components/buttons.html#buttons-dropdown-buttons)
+
+This is a faster, lighter version of `paper-dropdown-menu`, that does not
+use a `<paper-input>` internally. Use this element if you're concerned about
+the performance of this element, i.e., if you plan on using many dropdowns on
+the same page. Note that this element has a slightly different styling API
+than `paper-dropdown-menu`.
+
+`paper-dropdown-menu-light` is similar to a native browser select element.
+`paper-dropdown-menu-light` works with selectable content. The currently selected
+item is displayed in the control. If no item is selected, the `label` is
+displayed instead.
+
+Example:
+
+    <paper-dropdown-menu-light label="Your favourite pastry">
+      <paper-listbox slot="dropdown-content">
+        <paper-item>Croissant</paper-item>
+        <paper-item>Donut</paper-item>
+        <paper-item>Financier</paper-item>
+        <paper-item>Madeleine</paper-item>
+      </paper-listbox>
+    </paper-dropdown-menu-light>
+
+This example renders a dropdown menu with 4 options.
+
+The child element with the slot `dropdown-content` is used as the dropdown
+menu. This can be a [`paper-listbox`](paper-listbox), or any other or
+element that acts like an [`iron-selector`](iron-selector).
+
+Specifically, the menu child must fire an
+[`iron-select`](iron-selector#event-iron-select) event when one of its
+children is selected, and an [`iron-deselect`](iron-selector#event-iron-deselect)
+event when a child is deselected. The selected or deselected item must
+be passed as the event's `detail.item` property.
+
+Applications can listen for the `iron-select` and `iron-deselect` events
+to react when options are selected and deselected.
+
+### Styling
+
+The following custom properties and mixins are also available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-dropdown-menu` | A mixin that is applied to the element host | `{}`
+`--paper-dropdown-menu-disabled` | A mixin that is applied to the element host when disabled | `{}`
+`--paper-dropdown-menu-ripple` | A mixin that is applied to the internal ripple | `{}`
+`--paper-dropdown-menu-button` | A mixin that is applied to the internal menu button | `{}`
+`--paper-dropdown-menu-icon` | A mixin that is applied to the internal icon | `{}`
+`--paper-dropdown-menu-disabled-opacity` | The opacity of the dropdown when disabled  | `0.33`
+`--paper-dropdown-menu-color` | The color of the input/label/underline when the dropdown is unfocused | `--primary-text-color`
+`--paper-dropdown-menu-focus-color` | The color of the label/underline when the dropdown is focused  | `--primary-color`
+`--paper-dropdown-error-color` | The color of the label/underline when the dropdown is invalid  | `--error-color`
+`--paper-dropdown-menu-label` | Mixin applied to the label | `{}`
+`--paper-dropdown-menu-input` | Mixin appled to the input | `{}`
+
+Note that in this element, the underline is just the bottom border of the "input".
+To style it:
+
+    <style is=custom-style>
+      paper-dropdown-menu-light.custom {
+        --paper-dropdown-menu-input: {
+          border-bottom: 2px dashed lavender;
+        };
+    </style>
+
+@group Paper Elements
+@element paper-dropdown-menu-light
+@hero hero.svg
+@demo demo/index.html
+-->
+
+</head><body><dom-module id="paper-dropdown-menu-light">
+  <template>
+    <style include="paper-dropdown-menu-shared-styles">
+      :host(:focus) {
+        outline: none;
+      }
+
+      :host {
+        width: 200px;  /* Default size of an <input> */
+      }
+
+      /**
+       * All of these styles below are for styling the fake-input display
+       */
+      [slot="dropdown-trigger"] {
+        box-sizing: border-box;
+        position: relative;
+        width: 100%;
+        padding: 16px 0 8px 0;
+      }
+
+      :host([disabled]) [slot="dropdown-trigger"] {
+        pointer-events: none;
+        opacity: var(--paper-dropdown-menu-disabled-opacity, 0.33);
+      }
+
+      :host([no-label-float]) [slot="dropdown-trigger"] {
+        padding-top: 8px;   /* If there's no label, we need less space up top. */
+      }
+
+      #input {
+        @apply --paper-font-subhead;
+        @apply --paper-font-common-nowrap;
+        line-height: 1.5;
+        border-bottom: 1px solid var(--paper-dropdown-menu-color, var(--secondary-text-color));
+        color: var(--paper-dropdown-menu-color, var(--primary-text-color));
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 20px 0 0;   /* Right padding so that text doesn't overlap the icon */
+        outline: none;
+        @apply --paper-dropdown-menu-input;
+      }
+
+      /* Keep :host-context() to make it work where :dir doesn't exist */
+      :host(:dir(rtl)) #input,
+      :host-context([dir="rtl"]) #input {
+        padding-right: 0px;
+        padding-left: 20px;
+      }
+
+      :host([disabled]) #input {
+        border-bottom: 1px dashed var(--paper-dropdown-menu-color, var(--secondary-text-color));
+      }
+
+      :host([invalid]) #input {
+        border-bottom: 2px solid var(--paper-dropdown-error-color, var(--error-color));
+      }
+
+      :host([no-label-float]) #input {
+        padding-top: 0;   /* If there's no label, we need less space up top. */
+      }
+
+      label {
+        @apply --paper-font-subhead;
+        @apply --paper-font-common-nowrap;
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        /**
+         * The container has a 16px top padding, and there's 12px of padding
+         * between the input and the label (from the input's padding-top)
+         */
+        top: 28px;
+        box-sizing: border-box;
+        width: 100%;
+        padding-right: 20px;    /* Right padding so that text doesn't overlap the icon */
+        text-align: left;
+        transition-duration: .2s;
+        transition-timing-function: cubic-bezier(.4,0,.2,1);
+        color: var(--paper-dropdown-menu-color, var(--secondary-text-color));
+        @apply --paper-dropdown-menu-label;
+      }
+
+      /* Keep :host-context() to make it work where :dir doesn't exist */
+      :host(:dir(rtl)) label,
+      :host-context([dir="rtl"]) label {
+        padding-right: 0px;
+        padding-left: 20px;
+      }
+
+      :host([no-label-float]) label {
+        top: 8px;
+        /* Since the label doesn't need to float, remove the animation duration
+        which slows down visibility changes (i.e. when a selection is made) */
+        transition-duration: 0s;
+      }
+
+      label.label-is-floating {
+        font-size: 12px;
+        top: 8px;
+      }
+
+      label.label-is-hidden {
+        visibility: hidden;
+      }
+
+      :host([focused]) label.label-is-floating {
+        color: var(--paper-dropdown-menu-focus-color, var(--primary-color));
+      }
+
+      :host([invalid]) label.label-is-floating {
+        color: var(--paper-dropdown-error-color, var(--error-color));
+      }
+
+      /**
+       * Sets up the focused underline. It's initially hidden, and becomes
+       * visible when it's focused.
+       */
+      label:after {
+        background-color: var(--paper-dropdown-menu-focus-color, var(--primary-color));
+        bottom: 7px;    /* The container has an 8px bottom padding */
+        content: '';
+        height: 2px;
+        left: 45%;
+        position: absolute;
+        transition-duration: .2s;
+        transition-timing-function: cubic-bezier(.4,0,.2,1);
+        visibility: hidden;
+        width: 8px;
+        z-index: 10;
+      }
+
+      :host([invalid]) label:after {
+        background-color: var(--paper-dropdown-error-color, var(--error-color));
+      }
+
+      :host([no-label-float]) label:after {
+        bottom: 7px;    /* The container has a 8px bottom padding */
+      }
+
+      :host([focused]:not([disabled])) label:after {
+        left: 0;
+        visibility: visible;
+        width: 100%;
+      }
+
+      iron-icon {
+        position: absolute;
+        right: 0px;
+        bottom: 8px;    /* The container has an 8px bottom padding */
+        @apply --paper-font-subhead;
+        color: var(--disabled-text-color);
+        @apply --paper-dropdown-menu-icon;
+      }
+
+      /* Keep :host-context() to make it work where :dir doesn't exist */
+      :host(:dir(rtl)) iron-icon,
+      :host-context([dir="rtl"]) iron-icon {
+        left: 0;
+        right: auto;
+      }
+
+      :host([no-label-float]) iron-icon {
+        margin-top: 0px;
+      }
+
+      .error {
+        display: inline-block;
+        visibility: hidden;
+        color: var(--paper-dropdown-error-color, var(--error-color));
+        @apply --paper-font-caption;
+        position: absolute;
+        left:0;
+        right:0;
+        bottom: -12px;
+      }
+
+      :host([invalid]) .error {
+        visibility: visible;
+      }
+    </style>
+
+    <!-- this div fulfills an a11y requirement for combobox, do not remove -->
+    <span role="button"></span>
+    <paper-menu-button id="menuButton" vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]" vertical-offset="[[_computeMenuVerticalOffset(noLabelFloat)]]" disabled="[[disabled]]" no-animations="[[noAnimations]]" on-iron-select="_onIronSelect" on-iron-deselect="_onIronDeselect" opened="{{opened}}" close-on-activate="" allow-outside-scroll="[[allowOutsideScroll]]">
+      <!-- support hybrid mode: user might be using paper-menu-button 1.x which distributes via <content> -->
+      <div class="dropdown-trigger" slot="dropdown-trigger">
+        <label class$="[[_computeLabelClass(noLabelFloat,alwaysFloatLabel,hasContent)]]">
+          [[label]]
+        </label>
+        <div id="input" tabindex="-1">&nbsp;</div>
+        <iron-icon icon="paper-dropdown-menu:arrow-drop-down"></iron-icon>
+        <span class="error">[[errorMessage]]</span>
+      </div>
+      <slot id="content" name="dropdown-content" slot="dropdown-content"></slot>
+    </paper-menu-button>
+  </template>
+
+  <script>(function(){'use strict';Polymer({is:'paper-dropdown-menu-light',behaviors:[Polymer.IronButtonState,Polymer.IronControlState,Polymer.PaperRippleBehavior,Polymer.IronFormElementBehavior,Polymer.IronValidatableBehavior],properties:{selectedItemLabel:{type:String,notify:!0,readOnly:!0},selectedItem:{type:Object,notify:!0,readOnly:!0},value:{type:String,notify:!0,readOnly:!0,observer:'_valueChanged'},label:{type:String},placeholder:{type:String},opened:{type:Boolean,notify:!0,value:!1,observer:'_openedChanged'},allowOutsideScroll:{type:Boolean,value:!1},noLabelFloat:{type:Boolean,value:!1,reflectToAttribute:!0},alwaysFloatLabel:{type:Boolean,value:!1},noAnimations:{type:Boolean,value:!1},horizontalAlign:{type:String,value:'right'},verticalAlign:{type:String,value:'top'},hasContent:{type:Boolean,readOnly:!0}},listeners:{tap:'_onTap'},keyBindings:{'up down':'open',esc:'close'},hostAttributes:{tabindex:0,role:'combobox','aria-autocomplete':'none','aria-haspopup':'true'},observers:['_selectedItemChanged(selectedItem)'],attached:function(){var a=this.contentElement;a&&a.selectedItem&&this._setSelectedItem(a.selectedItem)},get contentElement(){for(var a=Polymer.dom(this.$.content).getDistributedNodes(),b=0,c=a.length;b<c;b++)if(a[b].nodeType===Node.ELEMENT_NODE)return a[b]},open:function(){this.$.menuButton.open()},close:function(){this.$.menuButton.close()},_onIronSelect:function(a){this._setSelectedItem(a.detail.item)},_onIronDeselect:function(){this._setSelectedItem(null)},_onTap:function(a){Polymer.Gestures.findOriginalTarget(a)===this&&this.open()},_selectedItemChanged:function(a){var b='';b=a?a.label||a.getAttribute('label')||a.textContent.trim():'',this._setValue(b),this._setSelectedItemLabel(b)},_computeMenuVerticalOffset:function(a){return a?-4:8},_getValidity:function(){return this.disabled||!this.required||this.required&&!!this.value},_openedChanged:function(){var a=this.opened?'true':'false',b=this.contentElement;b&&b.setAttribute('aria-expanded',a)},_computeLabelClass:function(a,b,c){var d='';return!0===a?c?'label-is-hidden':'':((c||!0===b)&&(d+=' label-is-floating'),d)},_valueChanged:function(){this.$.input&&this.$.input.textContent!==this.value&&(this.$.input.textContent=this.value),this._setHasContent(!!this.value)}})})();</script>
+</dom-module>
+</body></html>

@@ -31,7 +31,6 @@
     "app-layout": "PolymerElements/app-layout#2.0-preview",
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#2.0-preview",
     "paper-menu-button": "PolymerElements/paper-menu-button#2.0-preview",
-    "paper-menu": "PolymerElements/paper-menu#master",
     "paper-toolbar": "PolymerElements/paper-toolbar#2.0-preview",
     "paper-toggle-button": "PolymerElements/paper-toggle-button#2.0-preview",
     "paper-listbox": "PolymerElements/paper-listbox#2.0-preview",

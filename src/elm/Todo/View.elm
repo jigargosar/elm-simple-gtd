@@ -290,7 +290,7 @@ dropdownTriggerWithTitle title =
 dropdownTrigger content =
     div [ style [ "height" => "24px" ], class "layout horizontal font-body1", attribute "slot" "dropdown-trigger" ]
         [ Paper.button [ class "padding-0 margin-0 shrink" ]
-            [ div [ class "text-transform-none primary-text-color font-nowrap" ] [ content ]
+            [ div [ class "text-transform-none primary-text-color" ] [ content ]
             ]
         ]
 
@@ -334,42 +334,55 @@ reminderView vm =
                         ]
                         [ icon "av:snooze" [ classList [ "display-none" => not vm.isSnoozed ] ]
                         , text vm.displayText
-                        , Paper.tooltip [ classList [ "display-none" => not vm.isOverDue ] ]
-                            [ text vm.overDueTooltipText ]
                         ]
                     )
     in
-        Paper.menuButton
-            [ boolProperty "opened" vm.isEditing
-            , boolProperty "dynamicAlign" True
-            , boolProperty "stopKeyboardEventPropagation" True
-            ]
-            [ reminderTrigger
-            , div
-                [ class "static dropdown-content"
-                , attribute "slot" "dropdown-content"
+        div []
+            ([ Paper.menuButton
+                [ boolProperty "opened" vm.isEditing
+                , boolProperty "dynamicAlign" True
+                , boolProperty "stopKeyboardEventPropagation" True
                 ]
-                [ div [ class "font-subhead" ] [ text "Select date and time" ]
-                , Paper.input
-                    [ type_ "date"
-                    , classList [ "auto-focus" => vm.isEditing ]
-                    , labelA "Date"
-                    , value vm.date
-                    , boolProperty "stopKeyboardEventPropagation" True
-                    , onChange vm.onDateChanged
+                [ reminderTrigger
+                , div
+                    [ class "static dropdown-content"
+                    , attribute "slot" "dropdown-content"
                     ]
-                    []
-                , Paper.input
-                    [ type_ "time"
-                    , labelA "Time"
-                    , value vm.time
-                    , boolProperty "stopKeyboardEventPropagation" True
-                    , onChange vm.onTimeChanged
+                    [ div [ class "font-subhead" ] [ text "Select date and time" ]
+                    , Paper.input
+                        [ type_ "date"
+                        , classList [ "auto-focus" => vm.isEditing ]
+                        , labelA "Date"
+                        , value vm.date
+                        , boolProperty "stopKeyboardEventPropagation" True
+                        , onChange vm.onDateChanged
+                        ]
+                        []
+                    , Paper.input
+                        [ type_ "time"
+                        , labelA "Time"
+                        , value vm.time
+                        , boolProperty "stopKeyboardEventPropagation" True
+                        , onChange vm.onTimeChanged
+                        ]
+                        []
+                    , defaultOkCancelButtons
                     ]
-                    []
-                , defaultOkCancelButtons
                 ]
+             ]
+                ++ (overDueToolTip vm)
+            )
+
+
+overDueToolTip vm =
+    if vm.isOverDue then
+        [ Paper.tooltip
+            [ intProperty "offset" 0
             ]
+            [ text vm.overDueTooltipText ]
+        ]
+    else
+        []
 
 
 editView : TodoViewModel -> EditTodoViewModel -> Html Msg

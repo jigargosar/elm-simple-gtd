@@ -213,9 +213,9 @@ createTodoViewModel vc todo =
             in
                 case lines of
                     [] ->
+                        -- never happens
                         ( "", False )
 
-                    -- never happens
                     firstLine :: [] ->
                         ( firstLine, False )
 

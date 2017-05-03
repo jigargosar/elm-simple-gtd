@@ -33,6 +33,8 @@ smartFormat refDate date =
     in
         if dayDiff == 0 then
             formattedTime
+        else if dayDiff == -1 then
+            "Yesterday " ++ formattedTime
         else if dayDiff == 1 then
             "Tomorrow " ++ formattedTime
         else if dayDiff > 1 && dayDiff < 7 then

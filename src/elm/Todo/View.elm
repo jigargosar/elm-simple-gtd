@@ -278,14 +278,13 @@ container { isEditing, id } =
 
 defaultView : TodoViewModel -> Html Msg
 defaultView vm =
-    --    div
-    --        [ class "todo-item"
-    --        , vm.id |> Msg.SetMainViewFocusedDocumentId |> onFocusIn
-    --
-    --        --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))
-    --        --        , onFocusOut (commonMsg.logString ("focusOut: " ++ vm.displayText))
-    --        ]
-    container vm
+    div
+        [ class "todo-item"
+        , vm.id |> Msg.SetMainViewFocusedDocumentId |> onFocusIn
+
+        --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))
+        --        , onFocusOut (commonMsg.logString ("focusOut: " ++ vm.displayText))
+        ]
         [ div [ class "layout vertical" ]
             [ div
                 [ style [ "flex" => "1 1 auto" ]
@@ -415,10 +414,9 @@ timeToolTip vm =
 
 editView : TodoViewModel -> EditTodoViewModel -> Html Msg
 editView vm evm =
-    --    div
-    --        [ class "todo-item editing"
-    --        ]
-    container vm
+    div
+        [ class "todo-item editing"
+        ]
         [ div [ class "vertical layout flex-auto" ]
             [ div [ class "flex" ]
                 [ Html.node "paper-textarea"

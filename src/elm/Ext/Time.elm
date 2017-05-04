@@ -39,7 +39,7 @@ dayDiffInWords =
                 if dayCount > 0 then
                     dayCountAsString ++ " days left"
                 else if dayCount < 0 then
-                    dayCountAsString ++ " days left"
+                    dayCountAsString ++ " days ago"
                 else
                     ""
     in

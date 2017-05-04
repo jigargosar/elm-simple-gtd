@@ -65,7 +65,7 @@ groupByEntity entityVMs model =
 
         todoListContainer vm =
             ( vm.id
-            , div [ class "todo-list-container" ]
+            , div []
                 [ entityListItemView vc vm
                 , Paper.material []
                     [ Keyed.node "paper-listbox"
@@ -98,14 +98,14 @@ entityListItemView vc vm =
 
 
 defaultView vm =
-    Paper.item [class "entity-item"]
+    Paper.item [ class "entity-item" ]
         [ itemBody [] [ View.Shared.defaultBadge vm ]
         , showOnHover [ settingsButton vm.startEditingMsg ]
         ]
 
 
 editEntityView editModel vm =
-    Paper.item [class "entity-item"]
+    Paper.item [ class "entity-item" ]
         [ itemBody []
             [ input
                 [ class "edit-entity-name-input auto-focus"

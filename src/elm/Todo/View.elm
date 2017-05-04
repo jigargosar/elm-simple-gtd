@@ -349,7 +349,7 @@ reminderView tabindexValue vm =
     let
         reminderTrigger =
             if vm.displayText == "" then
-                iconButton "alarm-add" [ slotDropDownTriggerA, onClick vm.startEditingMsg ]
+                iconButton "alarm-add" [ tabindex tabindexValue, slotDropDownTriggerA, onClick vm.startEditingMsg ]
             else
                 dropdownTrigger tabindexValue
                     (div

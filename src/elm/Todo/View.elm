@@ -83,7 +83,8 @@ createEditTodoViewModel todo form =
 
 
 type alias TodoViewModel =
-    { text : Todo.Text
+    { id : Todo.Id
+    , text : Todo.Text
     , displayText : String
     , isMultiLine : Bool
     , isDone : Bool
@@ -236,7 +237,8 @@ createTodoViewModel vc todo =
         displayText2 =
             text |> String.trim |> String.Extra.ellipsis 100
     in
-        { isDone = Todo.getDone todo
+        { id = todoId
+        , isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo
         , text = text
         , isMultiLine = isMultiLine
@@ -265,6 +267,7 @@ defaultView : TodoViewModel -> Html Msg
 defaultView vm =
     div
         [ class "todo-item"
+        , onFocusIn << Msg.SetMainViewFocusedDocumentId << vm.id
 
         --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))
         --        , onFocusOut (commonMsg.logString ("focusOut: " ++ vm.displayText))

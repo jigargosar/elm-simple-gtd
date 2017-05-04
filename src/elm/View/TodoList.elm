@@ -65,6 +65,15 @@ groupByEntity entityVMList model =
         createItemsView vm =
             ( vm.id, entityHeaderView vc vm )
                 :: (vm.todoList .|> Todo.View.initKeyed vc)
+
+        idList =
+            entityVMList
+                |> List.concatMap (\vm -> vm.id :: (vm.todoList .|> Document.getId))
+
+        selectedIndex =
+            idList
+                |> List.findIndex (equals vc.mainViewListFocusedDocumentId)
+                ?= 0
     in
         Keyed.node "div" [] (entityVMList |> List.concatMap createItemsView)
 

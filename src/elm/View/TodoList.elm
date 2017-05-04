@@ -70,7 +70,7 @@ groupByEntity entityVMList model =
         Keyed.node "paper-listbox" [] (entityVMList |> List.concatMap createItemsView)
 
 
-singletonEntity entityVMs id =
+groupByEntityWithId entityVMs id =
     let
         vmSingleton =
             entityVMs |> List.find (.id >> equals id) |> Maybe.toList

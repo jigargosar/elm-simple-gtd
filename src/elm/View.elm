@@ -145,10 +145,10 @@ appMainView contextVMs projectVMs model =
                 View.TodoList.groupByEntity projectVMs model
 
             ProjectView id ->
-                View.TodoList.singletonEntity projectVMs id model
+                View.TodoList.groupByEntityWithId projectVMs id model
 
             ContextView id ->
-                View.TodoList.singletonEntity contextVMs id model
+                View.TodoList.groupByEntityWithId contextVMs id model
 
             BinView ->
                 View.TodoList.filtered model

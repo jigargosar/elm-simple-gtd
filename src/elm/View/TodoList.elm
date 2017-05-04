@@ -37,6 +37,7 @@ import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import Entity.ViewModel exposing (EntityViewModel)
 import Todo.View exposing (EditTodoViewModel)
+import Tuple2
 import View.Shared exposing (..)
 import WebComponents
 
@@ -59,6 +60,17 @@ filtered =
 type EntityView
     = EntityView EntityViewModel
     | TodoView Todo.Model
+
+
+listClampIndex list =
+    let
+        length =
+            List.length list
+
+        lastIndex =
+            max 0 (length - 1)
+    in
+        clamp 0 lastIndex
 
 
 groupByEntity : List EntityViewModel -> Model -> Html Msg
@@ -88,8 +100,8 @@ groupByEntity entityVMList model =
                     TodoView todo ->
                         Todo.View.initKeyed vc todo
 
-        listIndex : Msg.ListIndex
-        listIndex =
+        prevNextIndices : Msg.PrevNextIndices
+        prevNextIndices =
             let
                 idList =
                     entityVMList
@@ -100,10 +112,11 @@ groupByEntity entityVMList model =
                         |> List.findIndex (equals vc.mainViewListFocusedDocumentId)
                         ?= 0
             in
-                { index = focusedIndex, length = List.length idList }
+                ( focusedIndex - 1, focusedIndex + 1 )
+                    |> Tuple2.mapBoth (listClampIndex idList)
     in
         Keyed.node "div"
-            [ listIndex |> Msg.OnTodoListKeyDown |> onKeyDown ]
+            [ prevNextIndices |> Msg.OnTodoListKeyDown |> onKeyDown ]
             (entityViewList)
 
 

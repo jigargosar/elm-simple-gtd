@@ -264,10 +264,8 @@ createTodoViewModel vc todo =
 default : TodoViewModel -> Html Msg
 default vm =
     Paper.item
-        [ classList
-            [ "todo-item" => True
-            , onFocusIn (commonMsg.logString "focusIn event fired")
-            ]
+        [ class "todo-item"
+        , onFocusIn (commonMsg.logString "focusIn event fired")
         ]
         [ Paper.itemBody []
             [ div [ class "layout vertical" ]

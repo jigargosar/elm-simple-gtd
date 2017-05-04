@@ -106,6 +106,7 @@ type alias TodoViewModel =
     , onReminderButtonClicked : Msg
     , reminder : ReminderViewModel
     , onFocusIn : Msg
+    , tabindex : Int
     }
 
 
@@ -236,6 +237,9 @@ createTodoViewModel vc todo =
 
         displayText2 =
             text |> String.trim |> String.Extra.ellipsis 100
+
+        focused =
+            vc.mainViewListFocusedDocumentId == todoId
     in
         { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo
@@ -260,6 +264,11 @@ createTodoViewModel vc todo =
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel
         , onFocusIn = Msg.SetMainViewFocusedDocumentId todoId
+        , tabindex =
+            if focused then
+                0
+            else
+                -1
         }
 
 

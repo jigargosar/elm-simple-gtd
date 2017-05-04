@@ -61,6 +61,8 @@ type alias EditTodoViewModel =
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
     , onDeleteClicked : Msg
+    , isEditing : Bool
+    , id : Todo.Id
     }
 
 
@@ -73,7 +75,9 @@ createEditTodoViewModel todo form =
         updateTodoForm =
             Msg.UpdateTodoForm form
     in
-        { todo =
+        { id = todoId
+        , isEditing = True
+        , todo =
             { text = form.todoText
             }
         , onKeyUp = Msg.EditTodoFormKeyUp form
@@ -106,6 +110,7 @@ type alias TodoViewModel =
     , projects : List Project.Model
     , onReminderButtonClicked : Msg
     , reminder : ReminderViewModel
+    , isEditing : Bool
     }
 
 
@@ -237,7 +242,8 @@ createTodoViewModel vc todo =
         displayText2 =
             text |> String.trim |> String.Extra.ellipsis 100
     in
-        { id = todoId
+        { isEditing = False
+        , id = todoId
         , isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo
         , text = text
@@ -261,6 +267,13 @@ createTodoViewModel vc todo =
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel
         }
+
+
+container { isEditing, id } =
+    div
+        [ classList [ "todo-item" => True, "editing" => isEditing ]
+        , id |> Msg.SetMainViewFocusedDocumentId |> onFocusIn
+        ]
 
 
 defaultView : TodoViewModel -> Html Msg

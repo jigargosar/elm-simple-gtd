@@ -105,6 +105,7 @@ type alias TodoViewModel =
     , projects : List Project.Model
     , onReminderButtonClicked : Msg
     , reminder : ReminderViewModel
+    , onFocusIn : Msg
     }
 
 
@@ -258,6 +259,7 @@ createTodoViewModel vc todo =
         , projects = vc.activeProjects
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel
+        , onFocusIn = Msg.SetMainViewFocusedDocumentId todoId
         }
 
 

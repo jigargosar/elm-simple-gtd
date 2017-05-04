@@ -155,7 +155,7 @@ defaultView tabindexAV vm =
         ]
         [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
         , WebComponents.iconButton "create"
-            [ class "flex-none", onClick vm.startEditingMsg, tabindex -1 ]
+            [ class "flex-none", onClick vm.startEditingMsg, tabindexAV ]
         ]
 
 

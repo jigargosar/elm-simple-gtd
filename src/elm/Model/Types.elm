@@ -49,7 +49,7 @@ type alias Model =
     , pouchDBRemoteSyncURI : String
     , appDrawerForceNarrow : Bool
     , testModel : Test.Model.Model
-    , mainViewListSelectedDocumentId : Document.Id
+    , mainViewListFocusedDocumentId : Document.Id
     }
 
 

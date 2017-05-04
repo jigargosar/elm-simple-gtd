@@ -61,7 +61,6 @@ type alias EditTodoViewModel =
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
     , onDeleteClicked : Msg
-    , id : Todo.Id
     }
 
 
@@ -74,8 +73,7 @@ createEditTodoViewModel todo form =
         updateTodoForm =
             Msg.UpdateTodoForm form
     in
-        { id = todoId
-        , todo =
+        { todo =
             { text = form.todoText
             }
         , onKeyUp = Msg.EditTodoFormKeyUp form
@@ -85,8 +83,7 @@ createEditTodoViewModel todo form =
 
 
 type alias TodoViewModel =
-    { id : Todo.Id
-    , text : Todo.Text
+    { text : Todo.Text
     , displayText : String
     , isMultiLine : Bool
     , isDone : Bool
@@ -239,8 +236,7 @@ createTodoViewModel vc todo =
         displayText2 =
             text |> String.trim |> String.Extra.ellipsis 100
     in
-        { id = todoId
-        , isDone = Todo.getDone todo
+        { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo
         , text = text
         , isMultiLine = isMultiLine
@@ -276,8 +272,8 @@ defaultView : TodoViewModel -> Html Msg
 defaultView vm =
     div
         [ class "todo-item"
-        , vm.id |> Msg.SetMainViewFocusedDocumentId |> onFocusIn
 
+        --        , vm.id |> Msg.SetMainViewFocusedDocumentId |> onFocusIn
         --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))
         --        , onFocusOut (commonMsg.logString ("focusOut: " ++ vm.displayText))
         ]

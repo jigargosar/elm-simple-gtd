@@ -24,8 +24,8 @@ type alias IconVM =
     }
 
 
-type alias Model =
-    { entityList : List EntityItemModel
+type alias ViewModel =
+    { entityList : List EntityViewModel
     , viewType : MainViewType
     , title : String
     , showDeleted : Bool
@@ -34,7 +34,7 @@ type alias Model =
     }
 
 
-type alias EntityItemModel =
+type alias EntityViewModel =
     { id : String
     , name : String
     , appHeader : { name : String, backgroundColor : String }
@@ -70,7 +70,7 @@ type alias Config =
     }
 
 
-createList : Config -> Model.Types.Model -> List EntityItemModel
+createList : Config -> Model.Types.Model -> List EntityViewModel
 createList config model =
     let
         todoListDict =
@@ -167,7 +167,7 @@ create todoListByEntityId config entity =
         }
 
 
-contexts : Model.Types.Model -> Model
+contexts : Model.Types.Model -> ViewModel
 contexts model =
     let
         config : Config
@@ -184,7 +184,7 @@ contexts model =
             , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
             }
 
-        contextList : List EntityItemModel
+        contextList : List EntityViewModel
         contextList =
             createList config model
     in
@@ -197,10 +197,10 @@ contexts model =
         }
 
 
-projects : Model.Types.Model -> Model
+projects : Model.Types.Model -> ViewModel
 projects model =
     let
-        projectList : List EntityItemModel
+        projectList : List EntityViewModel
         projectList =
             createList
                 { groupByFn = Todo.getProjectId

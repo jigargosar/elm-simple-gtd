@@ -44,7 +44,7 @@ import WebComponents
 filtered : Model -> Html Msg
 filtered =
     apply2
-        ( View.Shared.createSharedViewModel >> Todo.View.createKeyedItem
+        ( View.Shared.createSharedViewModel >> Todo.View.initKeyed
         , Model.getFilteredTodoList
         )
         >> (\( todoView, todoList ) ->
@@ -57,7 +57,7 @@ filtered =
            )
 
 
-groupByEntity : List Entity.ViewModel.EntityItemModel -> Model -> Html Msg
+groupByEntity : List Entity.ViewModel.EntityViewModel -> Model -> Html Msg
 groupByEntity viewModelList model =
     let
         vc =
@@ -65,7 +65,7 @@ groupByEntity viewModelList model =
 
         createItemsView vm =
             ( vm.id, entityListItemView vc vm )
-                :: (vm.todoList .|> Todo.View.createKeyedItem vc)
+                :: (vm.todoList .|> Todo.View.initKeyed vc)
     in
         Keyed.node "paper-listbox" [] (viewModelList |> List.concatMap createItemsView)
 

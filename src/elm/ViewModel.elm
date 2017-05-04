@@ -11,8 +11,8 @@ import Model.Types exposing (MainViewType(..))
 
 
 type alias Model =
-    { contexts : Entity.ViewModel.Model
-    , projects : Entity.ViewModel.Model
+    { contexts : Entity.ViewModel.ViewModel
+    , projects : Entity.ViewModel.ViewModel
     , viewName : String
     , mainViewType : MainViewType
     , header : { backgroundColor : String }

@@ -149,7 +149,7 @@ entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } 
         ++ (List.map entityListItem entityList)
 
 
-entityListItem : Entity.ViewModel.EntityItemModel -> Html Msg
+entityListItem : Entity.ViewModel.EntityViewModel -> Html Msg
 entityListItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
         [ Html.node "iron-icon" [ iconP vm.icon.name, style [ "color" => vm.icon.color ] ] []

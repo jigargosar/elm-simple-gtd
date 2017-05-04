@@ -33,7 +33,7 @@ import Todo.ReminderForm
 
 
 type alias AppViewModel =
-    { contexts : List Entity.ViewModel.EntityItemModel
+    { contexts : List Entity.ViewModel.EntityViewModel
     }
 
 

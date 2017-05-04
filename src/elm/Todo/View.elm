@@ -315,18 +315,11 @@ dropdownTriggerWithTitle tabindexValue title =
 
 
 dropdownTrigger tabindexValue content =
-    let
-        _ =
-            if tabindexValue == 0 then
-                Debug.log "tabindexValue" ( tabindexValue, title ) |> Just
-            else
-                Nothing
-    in
-        div [ style [ "height" => "24px" ], class "layout horizontal font-body1", attribute "slot" "dropdown-trigger" ]
-            [ Paper.button [ class "padding-0 margin-0 shrink", tabindex tabindexValue ]
-                [ div [ class "text-transform-none primary-text-color" ] [ content ]
-                ]
+    div [ style [ "height" => "24px" ], class "layout horizontal font-body1", attribute "slot" "dropdown-trigger" ]
+        [ Paper.button [ class "padding-0 margin-0 shrink", tabindex tabindexValue ]
+            [ div [ class "text-transform-none primary-text-color" ] [ content ]
             ]
+        ]
 
 
 contextMenuButton vm =

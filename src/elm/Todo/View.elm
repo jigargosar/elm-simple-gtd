@@ -302,7 +302,7 @@ defaultView vm =
                 [ style [ "flex" => "0 1 auto" ]
                 , class "layout horizontal end-justified"
                 ]
-                [ reminderView vm.reminder
+                [ reminderView vm.tabindex vm.reminder
                 , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton vm ]
                 , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
                 ]
@@ -310,13 +310,13 @@ defaultView vm =
         ]
 
 
-dropdownTriggerWithTitle title =
+dropdownTriggerWithTitle tabindexValue title =
     div [ class "font-nowrap" ] [ text title ] |> dropdownTrigger
 
 
-dropdownTrigger content =
+dropdownTrigger tabindexValue content =
     div [ style [ "height" => "24px" ], class "layout horizontal font-body1", attribute "slot" "dropdown-trigger" ]
-        [ Paper.button [ class "padding-0 margin-0 shrink" ]
+        [ Paper.button [ class "padding-0 margin-0 shrink", tabindex tabindexValue ]
             [ div [ class "text-transform-none primary-text-color" ] [ content ]
             ]
         ]
@@ -324,7 +324,7 @@ dropdownTrigger content =
 
 contextMenuButton vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
-        [ dropdownTriggerWithTitle vm.contextDisplayName
+        [ dropdownTriggerWithTitle vm.tabindex vm.contextDisplayName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
             (vm.contexts .|> createContextItem # vm)
@@ -333,7 +333,7 @@ contextMenuButton vm =
 
 projectMenuButton vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
-        [ dropdownTriggerWithTitle vm.projectDisplayName
+        [ dropdownTriggerWithTitle vm.tabindex vm.projectDisplayName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
             (vm.projects .|> createProjectItem # vm)
@@ -344,14 +344,14 @@ slotDropDownTriggerA =
     attribute "slot" "dropdown-trigger"
 
 
-reminderView : ReminderViewModel -> Html Msg
-reminderView vm =
+reminderView : Int -> ReminderViewModel -> Html Msg
+reminderView tabindexValue vm =
     let
         reminderTrigger =
             if vm.displayText == "" then
                 iconButton "alarm-add" [ slotDropDownTriggerA, onClick vm.startEditingMsg ]
             else
-                dropdownTrigger
+                dropdownTrigger tabindexValue
                     (div
                         [ onClick vm.startEditingMsg
                         , classList
@@ -480,5 +480,6 @@ doneIconButton2 vm =
         [ class ("done-icon done-" ++ toString (vm.isDone))
         , onClickStopPropagation (vm.onDoneClicked)
         , iconP "done"
+        , tabindex vm.tabindex
         ]
         []

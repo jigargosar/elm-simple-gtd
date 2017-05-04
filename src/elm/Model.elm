@@ -64,6 +64,7 @@ init { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemo
             { list = List.range 0 10
             , selectedIndex = 0
             }
+        , mainViewListSelectedDocumentId = ""
         }
 
 

@@ -122,7 +122,7 @@ groupByEntity entityVMList model =
     in
         Keyed.node "div"
             [ prevNextIdPair |> Msg.OnTodoListKeyDown |> onKeyDown ]
-            (entityViewList)
+            entityViewList
 
 
 groupByEntityWithId entityVMs id =

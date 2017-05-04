@@ -87,9 +87,9 @@ entityHeaderView vc vm =
 
 
 defaultView vm =
-    Paper.item [ class "entity-item" ]
-        [ itemBody [] [ View.Shared.defaultBadge vm ]
-        , showOnHover [ settingsButton vm.startEditingMsg ]
+    div [ class "entity-item layout horizontal justified width--100" ]
+        [ div [ class "font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
+        , settingsButton vm.startEditingMsg
         ]
 
 

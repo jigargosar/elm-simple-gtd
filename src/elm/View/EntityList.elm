@@ -105,25 +105,23 @@ defaultView vm =
 
 
 editEntityView editModel vm =
-    material [ class "edit-entity-view" ]
-        [ div []
-            [ itemBody []
-                [ input
-                    [ class "edit-entity-name-input auto-focus"
-                    , stringProperty "label" "Name"
-                    , value (editModel.name)
-                    , onInput vm.onNameChanged
-                    , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
+    Paper.item []
+        [ itemBody []
+            [ input
+                [ class "edit-entity-name-input auto-focus"
+                , stringProperty "label" "Name"
+                , value (editModel.name)
+                , onInput vm.onNameChanged
+                , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
 
-                    --                        , onKeyUp vm.onKeyUp
-                    ]
-                    []
+                --                        , onKeyUp vm.onKeyUp
                 ]
-            ]
-        , row
-            [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
-            , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
-            , expand []
-            , WebComponents.iconButton "delete" [ onClick Msg.SelectionTrashClicked ]
+                []
+            , row
+                [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
+                , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
+                , expand []
+                , WebComponents.iconButton "delete" [ onClick Msg.SelectionTrashClicked ]
+                ]
             ]
         ]

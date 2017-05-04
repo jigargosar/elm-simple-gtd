@@ -34,8 +34,11 @@ createItem selectedIndex idx =
             [ tabindex tabIndexValue
             , classList [ "is-focused" => isFocused ]
             , idx |> Msg.OnTestListItemFocus >> onFocus
+            , idx |> Msg.OnTestListItemFocus >> onClick
             ]
-            [ idx |> toString >> String.append "item no: " >> text ]
+            [ idx |> toString >> String.append "item no: " >> text
+            , input [ tabindex tabIndexValue ] []
+            ]
 
 
 init model =

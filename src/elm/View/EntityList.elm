@@ -58,16 +58,16 @@ filtered =
 
 
 groupByEntity : List EntityViewModel -> Model -> Html Msg
-groupByEntity viewModelList model =
+groupByEntity entityVMList model =
     let
         vc =
             View.Shared.createSharedViewModel model
 
         createItemsView vm =
-            ( vm.id, entityListItemView vc vm )
+            ( vm.id, entityHeaderView vc vm )
                 :: (vm.todoList .|> Todo.View.initKeyed vc)
     in
-        Keyed.node "paper-listbox" [] (viewModelList |> List.concatMap createItemsView)
+        Keyed.node "paper-listbox" [] (entityVMList |> List.concatMap createItemsView)
 
 
 singletonEntity entityVMs id =
@@ -78,7 +78,7 @@ singletonEntity entityVMs id =
         groupByEntity vmSingleton
 
 
-entityListItemView vc vm =
+entityHeaderView vc vm =
     if vm.id /= "" then
         vc.getMaybeEditEntityFormForEntityId vm.id
             |> Maybe.unpack (\_ -> defaultView vm) (editEntityView # vm)

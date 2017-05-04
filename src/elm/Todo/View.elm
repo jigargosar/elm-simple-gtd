@@ -311,7 +311,7 @@ defaultView vm =
 
 
 dropdownTriggerWithTitle tabindexValue title =
-    div [ class "font-nowrap" ] [ text title ] |> dropdownTrigger
+    div [ class "font-nowrap" ] [ text title ] |> dropdownTrigger tabindexValue
 
 
 dropdownTrigger tabindexValue content =

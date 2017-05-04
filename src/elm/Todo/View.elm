@@ -61,7 +61,6 @@ type alias EditTodoViewModel =
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
     , onDeleteClicked : Msg
-    , isEditing : Bool
     , id : Todo.Id
     }
 
@@ -76,7 +75,6 @@ createEditTodoViewModel todo form =
             Msg.UpdateTodoForm form
     in
         { id = todoId
-        , isEditing = True
         , todo =
             { text = form.todoText
             }
@@ -110,7 +108,6 @@ type alias TodoViewModel =
     , projects : List Project.Model
     , onReminderButtonClicked : Msg
     , reminder : ReminderViewModel
-    , isEditing : Bool
     }
 
 
@@ -242,8 +239,7 @@ createTodoViewModel vc todo =
         displayText2 =
             text |> String.trim |> String.Extra.ellipsis 100
     in
-        { isEditing = False
-        , id = todoId
+        { id = todoId
         , isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo
         , text = text

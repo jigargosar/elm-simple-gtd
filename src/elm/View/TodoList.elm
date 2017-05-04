@@ -22,7 +22,7 @@ import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Html exposing (Html, div, hr, node, span, text)
-import Html.Attributes exposing (attribute, autofocus, class, classList, disabled, id, style, value)
+import Html.Attributes exposing (attribute, autofocus, class, classList, disabled, id, style, tabindex, value)
 import Html.Events exposing (..)
 import Ext.Debug exposing (tapLog)
 import Ext.Decode exposing (traceDecoder)
@@ -66,7 +66,7 @@ groupByEntity entityVMList model =
             ( vm.id, entityHeaderView vc vm )
                 :: (vm.todoList .|> Todo.View.initKeyed vc)
     in
-        Keyed.node "paper-listbox" [] (entityVMList |> List.concatMap createItemsView)
+        Keyed.node "paper-listbox" [ tabindex -1 ] (entityVMList |> List.concatMap createItemsView)
 
 
 groupByEntityWithId entityVMs id =

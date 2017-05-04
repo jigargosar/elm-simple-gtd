@@ -232,5 +232,6 @@ addTodoFab m =
         , attribute "icon" "add"
         , attribute "mini" ""
         , onClick Msg.StartAddingTodo
+        , tabindex -1
         ]
         []

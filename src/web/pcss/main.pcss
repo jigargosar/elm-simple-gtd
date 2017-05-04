@@ -163,49 +163,48 @@ paper-item {
 //min-height:40px;
 }
 
-.todo-list {
-  //background-color: white;
+paper-listbox {
+  background-color: transparent;
+}
 
-  & .todo-item {
+.todo-item {
 
-    border-top: 1px solid rgba(179, 179, 179, 0.53);
+  border-top: 1px solid rgba(179, 179, 179, 0.53);
 
-    &:first-child {
-      border-top: 1px solid transparent;
-    }
+  &:first-child {
+    border-top: 1px solid transparent;
+  }
 
-    &:not(.editing) {
-      & paper-item-body {
-        padding: 10px 0;
-      }
-    }
-
-    &.editing {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    & paper-icon-button {
-      width: 24px;
-      height: 24px;
-      padding: 0;
-    }
-
-    & .display-text {
-      padding: 0 8px;
-    }
-
+  &:not(.editing) {
     & paper-item-body {
-      cursor: pointer;
+      padding: 10px 0;
     }
+  }
 
-    & .reminder-text{
-      text-decoration: underline black;
-      &.overdue{
-        text-decoration: underline red;
-      }
+  &.editing {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  & paper-icon-button {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+  }
+
+  & .display-text {
+    padding: 0 8px;
+  }
+
+  & paper-item-body {
+    cursor: pointer;
+  }
+
+  & .reminder-text {
+    text-decoration: underline black;
+    &.overdue {
+      text-decoration: underline red;
     }
-
   }
 
 }
@@ -242,14 +241,13 @@ paper-item {
   margin: 0;
 }
 
-
-
 app-drawer-layout:not([narrow]) .hide-when-wide {
   display: none;
 }
-
 
 .text-wrap {
   white-space: normal;
   word-break: break-all;
 }
+
+

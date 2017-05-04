@@ -77,8 +77,12 @@ groupByEntity entityVMs model =
                     ]
                 ]
             )
+
+        groupItems vm =
+            ( vm.id, entityListItemView vc vm )
+                :: (vm.todoList .|> Todo.View.createKeyedItem vc)
     in
-        Keyed.node "div" [] (entityVMs .|> todoListContainer)
+        Keyed.node "paper-listbox" [] (entityVMs |> List.concatMap groupItems)
 
 
 singletonEntity entityVMs id =

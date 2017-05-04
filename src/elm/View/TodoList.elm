@@ -94,24 +94,23 @@ groupByEntity entityVMList model =
                 TodoView todo ->
                     Todo.View.initKeyed vc todo
 
+        idList =
+            entityVMList
+                |> List.concatMap (\vm -> vm.id :: (vm.todoList .|> Document.getId))
+
+        focusedIndex =
+            idList
+                |> List.findIndex (equals vc.mainViewListFocusedDocumentId)
+                ?= 0
+
         prevNextIdPair : Msg.PrevNextIdPair
         prevNextIdPair =
-            let
-                idList =
-                    entityVMList
-                        |> List.concatMap (\vm -> vm.id :: (vm.todoList .|> Document.getId))
-
-                focusedIndex =
-                    idList
-                        |> List.findIndex (equals vc.mainViewListFocusedDocumentId)
-                        ?= 0
-            in
-                ( focusedIndex - 1, focusedIndex + 1 )
-                    |> Tuple2.mapBoth
-                        (listClampIndex idList
-                            >> (List.getAt # idList)
-                            >>?= vc.mainViewListFocusedDocumentId
-                        )
+            ( focusedIndex - 1, focusedIndex + 1 )
+                |> Tuple2.mapBoth
+                    (listClampIndex idList
+                        >> (List.getAt # idList)
+                        >>?= vc.mainViewListFocusedDocumentId
+                    )
     in
         Keyed.node "div"
             [ class "todo-list"

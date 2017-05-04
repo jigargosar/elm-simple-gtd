@@ -115,6 +115,9 @@ update msg =
                 SetMainViewFocusedDocumentId id ->
                     Return.map (\model -> { model | mainViewListFocusedDocumentId = id })
 
+                OnTodoListKeyDown listSelection { key } ->
+                    identity
+
                 OnTestListKeyDown { key } ->
                     case key of
                         Key.ArrowUp ->

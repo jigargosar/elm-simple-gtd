@@ -10,7 +10,7 @@ import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
-import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyUp)
+import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Maybe.Extra as Maybe
 import Model.Internal as Model
 import Msg exposing (..)
@@ -74,8 +74,12 @@ groupByEntity entityVMList model =
             idList
                 |> List.findIndex (equals vc.mainViewListFocusedDocumentId)
                 ?= 0
+
+        listIndex : Msg.ListIndex
+        listIndex =
+            { index = focusedIndex, length = List.length idList }
     in
-        Keyed.node "div" [] (entityVMList |> List.concatMap createItemsView)
+        Keyed.node "div" [ listIndex |> Msg.OnTodoListKeyDown |> onKeyDown ] (entityVMList |> List.concatMap createItemsView)
 
 
 groupByEntityWithId entityVMs id =

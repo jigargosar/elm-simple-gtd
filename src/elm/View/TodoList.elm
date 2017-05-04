@@ -66,7 +66,7 @@ groupByEntity entityVMList model =
             ( vm.id, entityHeaderView vc vm )
                 :: (vm.todoList .|> Todo.View.initKeyed vc)
     in
-        Keyed.node "paper-listbox" [ tabindex -1 ] (entityVMList |> List.concatMap createItemsView)
+        Keyed.node "div" [] (entityVMList |> List.concatMap createItemsView)
 
 
 groupByEntityWithId entityVMs id =
@@ -89,7 +89,7 @@ defaultView vm =
     div [ class "entity-item layout horizontal justified width--100" ]
         [ div [ class "font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
         , WebComponents.iconButton "create"
-            [ class "flex-none", onClick vm.startEditingMsg , tabindex -1]
+            [ class "flex-none", onClick vm.startEditingMsg, tabindex -1 ]
         ]
 
 

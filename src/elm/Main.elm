@@ -113,7 +113,7 @@ update msg =
                         )
 
                 SetMainViewFocusedDocumentId id ->
-                    identity
+                    Return.map (\model -> { model | mainViewListFocusedDocumentId = id })
 
                 OnTestListKeyDown { key } ->
                     case key of

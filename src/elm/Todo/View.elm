@@ -267,7 +267,7 @@ defaultView : TodoViewModel -> Html Msg
 defaultView vm =
     div
         [ class "todo-item"
-        , onFocusIn << Msg.SetMainViewFocusedDocumentId << vm.id
+        , vm.id |> Msg.SetMainViewFocusedDocumentId |> onFocusIn
 
         --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))
         --        , onFocusOut (commonMsg.logString ("focusOut: " ++ vm.displayText))

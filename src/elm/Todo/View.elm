@@ -410,6 +410,7 @@ editView : TodoViewModel -> EditTodoViewModel -> Html Msg
 editView vm evm =
     div
         [ class "todo-item editing"
+        , onFocusIn vm.onFocusIn
         ]
         [ div [ class "vertical layout flex-auto" ]
             [ div [ class "flex" ]

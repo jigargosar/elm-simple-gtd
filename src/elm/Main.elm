@@ -112,6 +112,9 @@ update msg =
                                 { model | testModel = { testModel | selectedIndex = idx } }
                         )
 
+                SetMainViewFocusedDocumentId id ->
+                    identity
+
                 OnTestListKeyDown { key } ->
                     case key of
                         Key.ArrowUp ->

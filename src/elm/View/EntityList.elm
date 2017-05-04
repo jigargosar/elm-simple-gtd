@@ -63,21 +63,6 @@ groupByEntity entityVMs model =
         vc =
             View.Shared.createSharedViewModel model
 
-        todoListContainer vm =
-            ( vm.id
-            , div []
-                [ entityListItemView vc vm
-                , Paper.material []
-                    [ Keyed.node "paper-listbox"
-                        [ class "todo-list"
-                        , stringProperty "selectable" "paper-item"
-                        , stringProperty "selectedAttribute" "selected"
-                        ]
-                        (vm.todoList .|> Todo.View.createKeyedItem vc)
-                    ]
-                ]
-            )
-
         groupItems vm =
             ( vm.id, entityListItemView vc vm )
                 :: (vm.todoList .|> Todo.View.createKeyedItem vc)

@@ -70,7 +70,7 @@ groupByEntity entityVMList model =
             entityVMList
                 |> List.concatMap (\vm -> vm.id :: (vm.todoList .|> Document.getId))
 
-        selectedIndex =
+        focusedIndex =
             idList
                 |> List.findIndex (equals vc.mainViewListFocusedDocumentId)
                 ?= 0

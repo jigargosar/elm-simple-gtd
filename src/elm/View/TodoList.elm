@@ -94,23 +94,21 @@ defaultView vm =
 
 
 editEntityView editModel vm =
-    Paper.item [ class "entity-item" ]
-        [ itemBody []
-            [ input
-                [ class "edit-entity-name-input auto-focus"
-                , stringProperty "label" "Name"
-                , value (editModel.name)
-                , onInput vm.onNameChanged
-                , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
+    div [ class "entity-item layout vertical" ]
+        [ input
+            [ class "edit-entity-name-input auto-focus"
+            , stringProperty "label" "Name"
+            , value (editModel.name)
+            , onInput vm.onNameChanged
+            , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
 
-                --                        , onKeyUp vm.onKeyUp
-                ]
-                []
-            , row
-                [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
-                , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
-                , expand []
-                , WebComponents.iconButton "delete" [ onClick Msg.SelectionTrashClicked ]
-                ]
+            --                        , onKeyUp vm.onKeyUp
+            ]
+            []
+        , div [ class "layout horizontal" ]
+            [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
+            , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
+            , expand []
+            , WebComponents.iconButton "delete" [ onClick Msg.SelectionTrashClicked ]
             ]
         ]

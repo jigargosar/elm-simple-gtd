@@ -88,7 +88,8 @@ entityHeaderView vc vm =
 defaultView vm =
     div [ class "entity-item layout horizontal justified width--100" ]
         [ div [ class "font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
-        , WebComponents.iconButton "create" [ class "flex-none", onClick vm.startEditingMsg ]
+        , WebComponents.iconButton "create"
+            [ class "flex-none", onClick vm.startEditingMsg , tabindex -1]
         ]
 
 

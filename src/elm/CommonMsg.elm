@@ -13,6 +13,7 @@ import Return
 type Msg
     = NoOp
     | Focus DomSelector
+    | LogString String
 
 
 update msg =
@@ -23,10 +24,18 @@ update msg =
         Focus selector ->
             selector |> DomPorts.focusSelector |> Return.command
 
+        LogString string ->
+            let
+                _ =
+                    Debug.log "CM:LogString" (string)
+            in
+                update NoOp
+
 
 type alias Helper msg =
     { noOp : msg
     , focus : DomSelector -> msg
+    , logString : DomSelector -> msg
     }
 
 
@@ -34,4 +43,5 @@ createHelper : (Msg -> msg) -> Helper msg
 createHelper tagger =
     { noOp = tagger NoOp
     , focus = Focus >> tagger
+    , logString = LogString >> tagger
     }

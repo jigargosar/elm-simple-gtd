@@ -17,12 +17,13 @@ import Keyboard.Extra exposing (Key(Enter, Escape))
 import List.Extra
 import Maybe.Extra as Maybe
 import Model.Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
-import Msg exposing (Msg)
+import Msg exposing (Msg, commonMsg)
 import Polymer.Attributes exposing (boolProperty, stringProperty)
 import Polymer.Events exposing (onTap)
 import Project
 import Set
 import String.Extra
+import Svg.Events exposing (onFocusIn)
 import Time.Format
 import Todo
 import Todo.Form
@@ -263,7 +264,10 @@ createTodoViewModel vc todo =
 default : TodoViewModel -> Html Msg
 default vm =
     Paper.item
-        [ classList [ "todo-item" => True ]
+        [ classList
+            [ "todo-item" => True
+            , onFocusIn (commonMsg.logString "focusIn event fired")
+            ]
         ]
         [ Paper.itemBody []
             [ div [ class "layout vertical" ]

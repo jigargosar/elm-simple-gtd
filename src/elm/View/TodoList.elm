@@ -160,7 +160,10 @@ defaultView tabindexAV vm =
 
 
 editEntityView tabindexAV vm editModel =
-    div [ class "entity-item layout vertical", tabindexAV ]
+    div
+        [ class "entity-item layout vertical"
+        , tabindexAV
+        ]
         [ input
             [ class "edit-entity-name-input auto-focus"
             , stringProperty "label" "Name"

@@ -50,7 +50,7 @@ initKeyed vc todo =
         view =
             vc.getMaybeEditTodoFormForTodo todo
                 |> Maybe.unpack
-                    (\_ -> default vm)
+                    (\_ -> defaultView vm)
                     (createEditTodoViewModel todo >> editView vm)
     in
         ( Document.getId todo, view )
@@ -261,8 +261,8 @@ createTodoViewModel vc todo =
         }
 
 
-default : TodoViewModel -> Html Msg
-default vm =
+defaultView : TodoViewModel -> Html Msg
+defaultView vm =
     Paper.item
         [ class "todo-item"
 

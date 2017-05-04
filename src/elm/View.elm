@@ -15,7 +15,7 @@ import ReminderOverlay
 import Set
 import Entity.ViewModel
 import Test.View
-import View.EntityList
+import View.TodoList
 import View.AppDrawer
 import Maybe.Extra as Maybe
 import Time exposing (Time)
@@ -139,22 +139,22 @@ appMainView contextVMs projectVMs model =
     div [ id "main-view", class "" ]
         [ case Model.getMainViewType model of
             GroupByContextView ->
-                View.EntityList.groupByEntity contextVMs model
+                View.TodoList.groupByEntity contextVMs model
 
             GroupByProjectView ->
-                View.EntityList.groupByEntity projectVMs model
+                View.TodoList.groupByEntity projectVMs model
 
             ProjectView id ->
-                View.EntityList.singletonEntity projectVMs id model
+                View.TodoList.singletonEntity projectVMs id model
 
             ContextView id ->
-                View.EntityList.singletonEntity contextVMs id model
+                View.TodoList.singletonEntity contextVMs id model
 
             BinView ->
-                View.EntityList.filtered model
+                View.TodoList.filtered model
 
             DoneView ->
-                View.EntityList.filtered model
+                View.TodoList.filtered model
 
             SyncView ->
                 let

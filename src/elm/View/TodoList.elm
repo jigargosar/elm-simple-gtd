@@ -50,7 +50,6 @@ filtered =
         >> (\( todoView, todoList ) ->
                 Keyed.node "paper-listbox"
                     [ stringProperty "selected" "0"
-                    , stringProperty "selectable" "paper-item"
                     , stringProperty "selectedAttribute" "selected"
                     ]
                     (todoList .|> todoView)

@@ -35,7 +35,7 @@ import Todo
 import Polymer.Paper as Paper exposing (badge, button, fab, input, item, itemBody, material, tab, tabs)
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
-import Entity.ViewModel
+import Entity.ViewModel exposing (EntityViewModel)
 import Todo.View exposing (EditTodoViewModel)
 import View.Shared exposing (..)
 import WebComponents
@@ -57,7 +57,7 @@ filtered =
            )
 
 
-groupByEntity : List Entity.ViewModel.EntityViewModel -> Model -> Html Msg
+groupByEntity : List EntityViewModel -> Model -> Html Msg
 groupByEntity viewModelList model =
     let
         vc =

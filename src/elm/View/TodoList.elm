@@ -56,30 +56,55 @@ filtered =
            )
 
 
+type EntityView
+    = EntityView EntityViewModel
+    | TodoView Todo.Model
+
+
 groupByEntity : List EntityViewModel -> Model -> Html Msg
 groupByEntity entityVMList model =
     let
         vc =
             View.Shared.createSharedViewModel model
 
-        createItemsView vm =
-            ( vm.id, entityHeaderView vc vm )
-                :: (vm.todoList .|> Todo.View.initKeyed vc)
-
-        idList =
+        entityViewList =
             entityVMList
-                |> List.concatMap (\vm -> vm.id :: (vm.todoList .|> Document.getId))
+                |> List.concatMap
+                    (\vm -> (EntityView vm) :: (vm.todoList .|> TodoView))
+                |> List.indexedMap createListItemView
 
-        focusedIndex =
-            idList
-                |> List.findIndex (equals vc.mainViewListFocusedDocumentId)
-                ?= 0
+        createListItemView index entityView =
+            let
+                selectedIndex =
+                    0
+
+                isSelected =
+                    index == selectedIndex
+            in
+                case entityView of
+                    EntityView vm ->
+                        ( vm.id, entityHeaderView vc vm )
+
+                    TodoView todo ->
+                        Todo.View.initKeyed vc todo
 
         listIndex : Msg.ListIndex
         listIndex =
-            { index = focusedIndex, length = List.length idList }
+            let
+                idList =
+                    entityVMList
+                        |> List.concatMap (\vm -> vm.id :: (vm.todoList .|> Document.getId))
+
+                focusedIndex =
+                    idList
+                        |> List.findIndex (equals vc.mainViewListFocusedDocumentId)
+                        ?= 0
+            in
+                { index = focusedIndex, length = List.length idList }
     in
-        Keyed.node "div" [ listIndex |> Msg.OnTodoListKeyDown |> onKeyDown ] (entityVMList |> List.concatMap createItemsView)
+        Keyed.node "div"
+            [ listIndex |> Msg.OnTodoListKeyDown |> onKeyDown ]
+            (entityViewList)
 
 
 groupByEntityWithId entityVMs id =

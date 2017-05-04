@@ -115,8 +115,24 @@ update msg =
                 SetMainViewFocusedDocumentId id ->
                     Return.map (\model -> { model | mainViewListFocusedDocumentId = id })
 
-                OnTodoListKeyDown ( prevIndex, nextIndex ) { key } ->
-                    identity
+                OnTodoListKeyDown ( prevId, nextId ) { key } ->
+                    case key of
+                        Key.ArrowUp ->
+                            Return.map
+                                (\model ->
+                                    { model | mainViewListFocusedDocumentId = prevId }
+                                )
+                                >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
+
+                        Key.ArrowDown ->
+                            Return.map
+                                (\model ->
+                                    { model | mainViewListFocusedDocumentId = prevId }
+                                )
+                                >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
+
+                        _ ->
+                            identity
 
                 OnTestListKeyDown { key } ->
                     case key of

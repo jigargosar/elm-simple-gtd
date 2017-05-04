@@ -35,6 +35,7 @@ import Todo
 import Polymer.Paper as Paper exposing (badge, button, fab, input, item, itemBody, material, tab, tabs)
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
+import Ext.Function.Infix exposing (..)
 import Entity.ViewModel exposing (EntityViewModel)
 import Todo.View exposing (EditTodoViewModel)
 import Tuple2
@@ -100,8 +101,8 @@ groupByEntity entityVMList model =
                     TodoView todo ->
                         Todo.View.initKeyed vc todo
 
-        prevNextIndices : Msg.PrevNextIndices
-        prevNextIndices =
+        prevNextIdPair : Msg.PrevNextIdPair
+        prevNextIdPair =
             let
                 idList =
                     entityVMList
@@ -113,10 +114,14 @@ groupByEntity entityVMList model =
                         ?= 0
             in
                 ( focusedIndex - 1, focusedIndex + 1 )
-                    |> Tuple2.mapBoth (listClampIndex idList)
+                    |> Tuple2.mapBoth
+                        (listClampIndex idList
+                            >> (List.getAt # idList)
+                            >>?= vc.mainViewListFocusedDocumentId
+                        )
     in
         Keyed.node "div"
-            [ prevNextIndices |> Msg.OnTodoListKeyDown |> onKeyDown ]
+            [ prevNextIdPair |> Msg.OnTodoListKeyDown |> onKeyDown ]
             (entityViewList)
 
 

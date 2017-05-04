@@ -24,8 +24,8 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 
 
-type alias PrevNextIndices =
-    ( Int, Int )
+type alias PrevNextIdPair =
+    ( Document.Id, Document.Id )
 
 
 type Msg
@@ -61,7 +61,7 @@ type Msg
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | EditTodoFormKeyUp TodoForm KeyboardEvent
     | OnTestListKeyDown KeyboardEvent
-    | OnTodoListKeyDown PrevNextIndices KeyboardEvent
+    | OnTodoListKeyDown PrevNextIdPair KeyboardEvent
     | OnTestListItemFocus Int
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection

@@ -23,7 +23,7 @@ import Polymer.Events exposing (onTap)
 import Project
 import Set
 import String.Extra
-import Svg.Events exposing (onFocusIn)
+import Svg.Events exposing (onFocusIn, onFocusOut)
 import Time.Format
 import Todo
 import Todo.Form
@@ -265,7 +265,9 @@ default : TodoViewModel -> Html Msg
 default vm =
     Paper.item
         [ class "todo-item"
-        , onFocusIn (commonMsg.logString "focusIn event fired")
+
+        --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))
+        --        , onFocusOut (commonMsg.logString ("focusOut: " ++ vm.displayText))
         ]
         [ Paper.itemBody []
             [ div [ class "layout vertical" ]

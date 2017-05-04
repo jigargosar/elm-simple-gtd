@@ -127,7 +127,7 @@ update msg =
                         Key.ArrowDown ->
                             Return.map
                                 (\model ->
-                                    { model | mainViewListFocusedDocumentId = prevId }
+                                    { model | mainViewListFocusedDocumentId = nextId }
                                 )
                                 >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
 

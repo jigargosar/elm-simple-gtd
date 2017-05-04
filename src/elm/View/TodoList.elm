@@ -87,19 +87,12 @@ groupByEntity entityVMList model =
                 |> List.indexedMap createListItemView
 
         createListItemView index entityView =
-            let
-                selectedIndex =
-                    0
+            case entityView of
+                EntityView vm ->
+                    ( vm.id, entityHeaderView vc vm )
 
-                isSelected =
-                    index == selectedIndex
-            in
-                case entityView of
-                    EntityView vm ->
-                        ( vm.id, entityHeaderView vc vm )
-
-                    TodoView todo ->
-                        Todo.View.initKeyed vc todo
+                TodoView todo ->
+                    Todo.View.initKeyed vc todo
 
         prevNextIdPair : Msg.PrevNextIdPair
         prevNextIdPair =
@@ -121,7 +114,9 @@ groupByEntity entityVMList model =
                         )
     in
         Keyed.node "div"
-            [ prevNextIdPair |> Msg.OnTodoListKeyDown |> onKeyDown ]
+            [ class "todo-list"
+            , prevNextIdPair |> Msg.OnTodoListKeyDown |> onKeyDown
+            ]
             entityViewList
 
 

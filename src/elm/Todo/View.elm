@@ -284,6 +284,7 @@ defaultView vm =
     div
         [ class "todo-item"
         , onFocusIn vm.onFocusIn
+        , tabindex vm.tabindex
 
         --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))
         --        , onFocusOut (commonMsg.logString ("focusOut: " ++ vm.displayText))
@@ -420,6 +421,7 @@ editView vm evm =
     div
         [ class "todo-item editing"
         , onFocusIn vm.onFocusIn
+        , tabindex vm.tabindex
         ]
         [ div [ class "vertical layout flex-auto" ]
             [ div [ class "flex" ]

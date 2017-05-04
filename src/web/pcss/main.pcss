@@ -168,10 +168,22 @@ paper-listbox {
   padding: 0.5rem;
   outline: none;
   border-left: 2px solid transparent;
-  font-weight: 500;
 }
 
-.todo-item, .entity-item {
+.entity-item {
+  &:focus[tabindex="0"] .title{
+    font-weight: 600;
+    color: rgba(0, 0, 172, 0.77)
+  }
+
+  &[tabindex="0"] .title{
+    font-weight: 600;
+    color: rgba(0, 0, 172, 0.44);
+  }
+}
+
+
+.todo-item/*, .entity-item*/ {
   &:focus[tabindex="0"] {
     border-left: 2px solid rgba(0, 0, 172, 0.77);
   }

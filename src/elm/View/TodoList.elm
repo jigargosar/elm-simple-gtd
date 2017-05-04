@@ -153,7 +153,7 @@ defaultView tabindexAV vm =
         [ class "entity-item layout horizontal justified width--100"
         , tabindexAV
         ]
-        [ div [ class "font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
+        [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
         , WebComponents.iconButton "create"
             [ class "flex-none", onClick vm.startEditingMsg, tabindex -1 ]
         ]

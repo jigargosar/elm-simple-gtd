@@ -98,14 +98,14 @@ entityListItemView vc vm =
 
 
 defaultView vm =
-    Paper.item []
+    Paper.item [class "entity-item"]
         [ itemBody [] [ View.Shared.defaultBadge vm ]
         , showOnHover [ settingsButton vm.startEditingMsg ]
         ]
 
 
 editEntityView editModel vm =
-    Paper.item []
+    Paper.item [class "entity-item"]
         [ itemBody []
             [ input
                 [ class "edit-entity-name-input auto-focus"

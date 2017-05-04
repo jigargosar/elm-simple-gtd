@@ -87,12 +87,25 @@ groupByEntity entityVMList model =
                 |> List.indexedMap createListItemView
 
         createListItemView index entityView =
-            case entityView of
-                EntityView vm ->
-                    ( vm.id, entityHeaderView vc vm )
+            let
+                focused =
+                    index == focusedIndex
 
-                TodoView todo ->
-                    Todo.View.initKeyed vc todo
+                tabindexValue =
+                    if focused then
+                        0
+                    else
+                        -1
+
+                tabindexAV =
+                    tabindex tabindexValue
+            in
+                case entityView of
+                    EntityView vm ->
+                        ( vm.id, entityHeaderView tabindexAV vc vm )
+
+                    TodoView todo ->
+                        Todo.View.initKeyed vc todo
 
         idList =
             entityVMList
@@ -127,24 +140,27 @@ groupByEntityWithId entityVMs id =
         groupByEntity vmSingleton
 
 
-entityHeaderView vc vm =
+entityHeaderView tabindexAV vc vm =
     if vm.id /= "" then
         vc.getMaybeEditEntityFormForEntityId vm.id
-            |> Maybe.unpack (\_ -> defaultView vm) (editEntityView # vm)
+            |> Maybe.unpack (\_ -> defaultView tabindexAV vm) (editEntityView tabindexAV vm)
     else
-        defaultView vm
+        defaultView tabindexAV vm
 
 
-defaultView vm =
-    div [ class "entity-item layout horizontal justified width--100" ]
+defaultView tabindexAV vm =
+    div
+        [ class "entity-item layout horizontal justified width--100"
+        , tabindexAV
+        ]
         [ div [ class "font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
         , WebComponents.iconButton "create"
             [ class "flex-none", onClick vm.startEditingMsg, tabindex -1 ]
         ]
 
 
-editEntityView editModel vm =
-    div [ class "entity-item layout vertical" ]
+editEntityView tabindexAV vm editModel =
+    div [ class "entity-item layout vertical", tabindexAV ]
         [ input
             [ class "edit-entity-name-input auto-focus"
             , stringProperty "label" "Name"

@@ -98,7 +98,7 @@ entityListItemView vc vm =
 
 
 defaultView vm =
-    item []
+    Paper.item []
         [ itemBody [] [ View.Shared.defaultBadge vm ]
         , showOnHover [ settingsButton vm.startEditingMsg ]
         ]

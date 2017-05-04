@@ -263,30 +263,28 @@ createTodoViewModel vc todo =
 
 defaultView : TodoViewModel -> Html Msg
 defaultView vm =
-    Paper.item
+    div
         [ class "todo-item"
 
         --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))
         --        , onFocusOut (commonMsg.logString ("focusOut: " ++ vm.displayText))
         ]
-        [ Paper.itemBody []
-            [ div [ class "layout vertical" ]
-                [ div
-                    [ style [ "flex" => "1 1 auto" ]
-                    , class "text-wrap"
-                    , onClick vm.startEditingMsg
-                    ]
-                    [ doneIconButton2 vm
-                    , span [ class "display-text" ] [ text vm.displayText ]
-                    ]
-                , div
-                    [ style [ "flex" => "0 1 auto" ]
-                    , class "layout horizontal end-justified"
-                    ]
-                    [ reminderView vm.reminder
-                    , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton vm ]
-                    , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
-                    ]
+        [ div [ class "layout vertical" ]
+            [ div
+                [ style [ "flex" => "1 1 auto" ]
+                , class "text-wrap"
+                , onClick vm.startEditingMsg
+                ]
+                [ doneIconButton2 vm
+                , span [ class "display-text" ] [ text vm.displayText ]
+                ]
+            , div
+                [ style [ "flex" => "0 1 auto" ]
+                , class "layout horizontal end-justified"
+                ]
+                [ reminderView vm.reminder
+                , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton vm ]
+                , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
                 ]
             ]
         ]
@@ -400,7 +398,7 @@ timeToolTip vm =
 
 editView : TodoViewModel -> EditTodoViewModel -> Html Msg
 editView vm evm =
-    Paper.item
+    div
         [ class "todo-item editing"
         ]
         [ div [ class "vertical layout flex-auto" ]

@@ -168,10 +168,17 @@ paper-listbox {
   padding: 0.5rem;
   outline: none;
   border-left: 2px solid transparent;
-  &[tabindex="0"] {
+  font-weight: 500;
+}
+
+.todo-item, .entity-item {
+  &:focus[tabindex="0"] {
     border-left: 2px solid rgba(0, 0, 172, 0.77);
   }
-  font-weight: 500;
+
+  &[tabindex="0"] {
+    border-left: 2px solid rgba(0, 0, 172, 0.44);
+  }
 }
 
 .todo-item {
@@ -180,9 +187,6 @@ paper-listbox {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
   outline: none;
   border-left: 2px solid transparent;
-  &[tabindex="0"] {
-    border-left: 2px solid rgba(0, 0, 172, 0.77);
-  }
 
   /*
   &:not(.editing) {

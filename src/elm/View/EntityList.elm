@@ -43,16 +43,17 @@ import WebComponents
 
 filtered : Model -> Html Msg
 filtered =
-    apply2 ( View.Shared.createSharedViewModel >> Todo.View.createKeyedItem, Model.getFilteredTodoList )
+    apply2
+        ( View.Shared.createSharedViewModel >> Todo.View.createKeyedItem
+        , Model.getFilteredTodoList
+        )
         >> (\( todoView, todoList ) ->
-                Paper.material []
-                    [ Keyed.node "paper-listbox"
-                        [ stringProperty "selected" "0"
-                        , stringProperty "selectable" "paper-item"
-                        , stringProperty "selectedAttribute" "selected"
-                        ]
-                        (todoList .|> todoView)
+                Keyed.node "paper-listbox"
+                    [ stringProperty "selected" "0"
+                    , stringProperty "selectable" "paper-item"
+                    , stringProperty "selectedAttribute" "selected"
                     ]
+                    (todoList .|> todoView)
            )
 
 

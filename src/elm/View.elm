@@ -235,12 +235,14 @@ headerView m =
                                 [ Paper.iconButton
                                     [ attribute "src" userPhotoUrl
                                     , class "account"
-                                    , onClick Msg.Login
                                     , tabindex -1
+                                    , attribute "noink" ""
                                     , slotDropdownTrigger
                                     ]
                                     []
-                                , Paper.listbox [ slotDropdownContent ] []
+                                , Paper.listbox [ slotDropdownContent ]
+                                    [ Paper.item [ onClick Msg.Login ] [ text "Login" ]
+                                    ]
                                 ]
                             ]
                         ]

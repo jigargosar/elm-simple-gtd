@@ -11,6 +11,7 @@ import Model
 import Model.Internal as Model
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (Msg)
+import Polymer.Firebase
 import ReminderOverlay
 import Set
 import Entity.ViewModel
@@ -49,7 +50,7 @@ init m =
 
 firebaseView m =
     div [ id "firebase-container" ]
-        []
+        [ Html.node "firebase-auth" [ id "google-auth", attribute "provider" "google" ] [] ]
 
 
 appView2 m =

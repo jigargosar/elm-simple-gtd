@@ -231,12 +231,11 @@ headerView m =
                     div [ class "flex-auto layout horizontal justified center" ]
                         [ h2 [ class "ellipsis" ] [ text "SimpleGTD - alpha" ]
                         , div []
-                            [ Paper.menuButton []
+                            [ Paper.menuButton [ dynamicAlign, boolProperty "noOverlap" True ]
                                 [ icon ""
                                     [ userAccountAttribute
                                     , class "account"
                                     , slotDropdownTrigger
-                                    , dynamicAlign
                                     ]
                                 , Paper.listbox [ slotDropdownContent ]
                                     [ Paper.item [ onClick Msg.Login ] [ text "Login" ]

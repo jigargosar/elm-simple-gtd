@@ -1,6 +1,6 @@
 module Firebase.View exposing (..)
 
-import Firebase exposing (onUserChanged)
+import Firebase exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -23,5 +23,5 @@ init m =
             , onUserChanged Msg.OnFirebaseUserChanged
             ]
             []
-        , Html.node "firebase-messaging" [ onStringPropertyChanged "token" Msg.SetFCMToken ] []
+        , Html.node "firebase-messaging" [ onFCMTokenChanged Msg.SetFCMToken ] []
         ]

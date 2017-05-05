@@ -7,7 +7,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import WebComponents exposing (onPropertyChanged)
+import WebComponents exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -58,6 +58,15 @@ userDecoder =
 
 onUserChanged =
     onPropertyChanged "user" userDecoder
+
+
+fcmTokenDecoder : Decoder FCMToken
+fcmTokenDecoder =
+    D.nullable D.string
+
+
+onFCMTokenChanged =
+    onPropertyChanged "token" fcmTokenDecoder
 
 
 getMaybeUserProfile user =

@@ -81,7 +81,7 @@ async function boot() {
             let googleAuth = document.getElementById('google-auth');
             if(!googleAuth) return
             googleAuth
-                .signInWithPopup()
+                .signInWithRedirect()
                 .then(console.info)
                 .catch(console.error)
             clearTimeout(intervalId);

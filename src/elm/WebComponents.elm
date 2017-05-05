@@ -51,6 +51,14 @@ secondaryA =
     attribute "secondary" "true"
 
 
+slotDropdownTrigger =
+    attribute "slot" "dropdown-trigger"
+
+
+slotDropdownContent =
+    attribute "slot" "dropdown-content"
+
+
 labelA =
     attribute "label"
 
@@ -67,9 +75,11 @@ onBoolPropertyChanged propertyName tagger =
     on ((String.Extra.dasherize propertyName) ++ "-changed")
         (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] Json.Decode.bool))
 
+
 onPropertyChanged propertyName decoder tagger =
     on ((String.Extra.dasherize propertyName) ++ "-changed")
-            (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] decoder))
+        (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] decoder))
+
 
 onStringPropertyChanged propertyName tagger =
     on ((String.Extra.dasherize propertyName) ++ "-changed")

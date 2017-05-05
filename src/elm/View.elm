@@ -40,7 +40,7 @@ import View.ReminderOverlay exposing (showReminderOverlay)
 import View.Shared exposing (..)
 import Todo.View
 import ViewModel
-import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, onPropertyChanged, paperIconButton, testDialog)
+import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, onPropertyChanged, paperIconButton, slotDropdownContent, slotDropdownTrigger, testDialog)
 
 
 init m =
@@ -230,18 +230,18 @@ headerView m =
                 if selectedTodoCount == 0 then
                     div [ class "flex-auto layout horizontal justified center" ]
                         [ h2 [ class "ellipsis" ] [ text "SimpleGTD - alpha" ]
-
-                        --                        , Paper.button
-                        --                            [ class "account", onClick Msg.Login ]
-                        --                            [ icon "account-circle" [ class "account" ] ]
                         , div []
-                            [ Paper.iconButton
-                                [ attribute "src" userPhotoUrl
-                                , class "account"
-                                , onClick Msg.Login
-                                , tabindex -1
+                            [ Paper.menuButton []
+                                [ Paper.iconButton
+                                    [ attribute "src" userPhotoUrl
+                                    , class "account"
+                                    , onClick Msg.Login
+                                    , tabindex -1
+                                    , slotDropdownTrigger
+                                    ]
+                                    []
+                                , Paper.listbox [ slotDropdownContent ] []
                                 ]
-                                []
                             ]
                         ]
                 else

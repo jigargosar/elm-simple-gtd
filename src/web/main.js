@@ -13,14 +13,15 @@ require("jquery-ui/ui/position")
 
 
 window.addEventListener('WebComponentsReady', function() {
-    const timeoutId = setInterval(()=>{
+    const intervalId = setInterval(()=>{
         let googleAuth = document.getElementById('google-auth');
+        debugger
         if(!googleAuth) return
         googleAuth
             .signInWithPopup()
             .then(console.info)
             .catch(console.error)
-        clearTimeout(timeoutId);
+        clearTimeout(intervalId);
     },500)
 })
 

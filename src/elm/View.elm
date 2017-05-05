@@ -199,6 +199,11 @@ headerView m =
 
         userPhotoUrl =
             Model.getMaybeUserProfile m ?|> Firebase.getPhotoURL ?= ""
+
+        userAccountAttribute =
+            Model.getMaybeUserProfile m
+                ?|> (Firebase.getPhotoURL >> attribute "src")
+                ?= iconP "account-circle"
     in
         case Model.getEditMode m of
             EditMode.NewTodo form ->
@@ -230,9 +235,13 @@ headerView m =
                         --                            [ class "account", onClick Msg.Login ]
                         --                            [ icon "account-circle" [ class "account" ] ]
                         , div []
-                            [ iconButton "account-circle"
+                            [ Paper.iconButton
                                 [ attribute "src" userPhotoUrl
-                                , class "account", onClick Msg.Login, tabindex -1 ]
+                                , class "account"
+                                , onClick Msg.Login
+                                , tabindex -1
+                                ]
+                                []
                             ]
                         ]
                 else

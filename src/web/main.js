@@ -15,14 +15,6 @@ require("jquery-ui/ui/position")
 async function boot() {
     $("#root").trap();
 
-    // setTimeout(() => {
-    //     $(".big-dialog").position({
-    //         my: "left top", at: "left bottom", of: ".focusable-list"
-    //         // , within: "#main-view > div"
-    //         , collision: "fit"
-    //     })
-    // }, 2000)
-
     let syncList = []
     const dbMap = {
         "todo-db": await DB("todo-db"),
@@ -75,6 +67,10 @@ async function boot() {
             })
         }, 0)
     })
+
+
+
+
 
     app.ports["login"].subscribe(()=>{
         const intervalId = setInterval(()=>{
@@ -136,6 +132,14 @@ async function setupNotifications(app) {
         // event.ports[0].postMessage("Client 1 Says 'Hello back!'");
     });
     const reg = await navigator.serviceWorker.register(swScriptPath)
+
+    const intervalId = setInterval(()=>{
+        let messaging = document.getElementById('fb-messaging');
+        if(!messaging) return
+        messaging.activate(reg)
+        clearTimeout(intervalId);
+    },500)
+
 
     app.ports["showNotification"].subscribe(showNotification(reg))
     app.ports["closeNotification"].subscribe(closeNotification(reg))

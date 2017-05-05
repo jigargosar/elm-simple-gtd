@@ -46,7 +46,7 @@ async function boot() {
 
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]
-        .embed(document.getElementById("root"), flags)
+        .embed(document.getElementById("elm-app-container"), flags)
 
 
     app.ports["syncWithRemotePouch"].subscribe(async (uri) => {

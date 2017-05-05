@@ -1,4 +1,4 @@
-module View exposing (appView)
+module View exposing (init)
 
 import EditMode
 import Html.Attributes.Extra exposing (..)
@@ -40,8 +40,20 @@ import ViewModel
 import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, paperIconButton, testDialog)
 
 
-appView m =
-    div []
+init m =
+    div [ id "root" ]
+        [ firebaseView m
+        , appView2 m
+        ]
+
+
+firebaseView m =
+    div [ id "firebase-container" ]
+        []
+
+
+appView2 m =
+    div [ id "app-view" ]
         [ appDrawerLayoutView m
         , addTodoFab m
         , showReminderOverlay m

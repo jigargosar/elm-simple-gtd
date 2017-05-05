@@ -27,7 +27,6 @@ import String.Extra
 import Todo
 import Todo.Form
 import Todo.ReminderForm
-import View exposing (appView)
 import Navigation exposing (Location)
 import Return
 import RouteUrl exposing (RouteUrlProgram)
@@ -41,6 +40,7 @@ import Html
 import Msg exposing (..)
 import RunningTodo
 import Model.Types exposing (..)
+import View
 
 
 port showNotification : TodoNotification -> Cmd msg
@@ -76,7 +76,7 @@ main =
         , location2messages = Routes.hash2messages
         , init = init
         , update = update
-        , view = appView
+        , view = View.init
         , subscriptions = subscriptions
         }
 

@@ -1,5 +1,6 @@
 port module Firebase exposing (..)
 
+import Html.Attributes.Extra exposing (boolProperty)
 import Json.Decode
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -84,3 +85,7 @@ getPhotoURL =
 
 type alias FCMToken =
     Maybe String
+
+
+customSw =
+    boolProperty "customSw" True

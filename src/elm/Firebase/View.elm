@@ -23,5 +23,9 @@ init m =
             , onUserChanged Msg.OnFirebaseUserChanged
             ]
             []
-        , Html.node "firebase-messaging" [ onFCMTokenChanged Msg.SetFCMToken ] []
+        , Html.node "firebase-messaging"
+            [ onFCMTokenChanged Msg.SetFCMToken
+            , customSw
+            ]
+            []
         ]

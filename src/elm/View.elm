@@ -232,14 +232,13 @@ headerView m =
                         [ h2 [ class "ellipsis" ] [ text "SimpleGTD - alpha" ]
                         , div []
                             [ Paper.menuButton []
-                                [ Paper.iconButton
-                                    [ attribute "src" userPhotoUrl
+                                [ icon ""
+                                    [ userAccountAttribute
                                     , class "account"
                                     , tabindex -1
                                     , attribute "noink" ""
                                     , slotDropdownTrigger
                                     ]
-                                    []
                                 , Paper.listbox [ slotDropdownContent ]
                                     [ Paper.item [ onClick Msg.Login ] [ text "Login" ]
                                     ]

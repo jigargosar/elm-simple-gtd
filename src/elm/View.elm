@@ -1,6 +1,7 @@
 module View exposing (init)
 
 import EditMode
+import Firebase
 import Firebase.View
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
@@ -196,8 +197,8 @@ headerView m =
         selectedTodoCount =
             Model.getSelectedTodoIdSet m |> Set.size
 
-        userProfileUrl =
-            Model.getMaybeUserProfile m
+        userPhotoUrl =
+            Model.getMaybeUserProfile m ?|> Firebase.getPhotoURL ?= ""
     in
         case Model.getEditMode m of
             EditMode.NewTodo form ->
@@ -230,7 +231,8 @@ headerView m =
                         --                            [ icon "account-circle" [ class "account" ] ]
                         , div []
                             [ iconButton "account-circle"
-                                [ attribute "src" "", class "account", onClick Msg.Login, tabindex -1 ]
+                                [ attribute "src" userPhotoUrl
+                                , class "account", onClick Msg.Login, tabindex -1 ]
                             ]
                         ]
                 else

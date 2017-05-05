@@ -25,7 +25,7 @@ type alias UserModel =
 type alias ProviderData =
     { displayName : String
     , email : String
-    , photoUrl : String
+    , photoURL : String
     , providerId : String
     , uid : String
     }
@@ -67,3 +67,7 @@ getMaybeUserProfile user =
 
         LoggedIn userModel ->
             userModel.providerData |> List.head
+
+
+getPhotoURL =
+    .photoURL

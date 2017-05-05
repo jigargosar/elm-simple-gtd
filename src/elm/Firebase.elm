@@ -1,4 +1,4 @@
-module Firebase exposing (..)
+port module Firebase exposing (..)
 
 import Json.Decode
 import Toolkit.Helpers exposing (..)
@@ -11,6 +11,9 @@ import WebComponents exposing (onPropertyChanged)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+
+
+port login : () -> Cmd msg
 
 
 type alias UserModel =

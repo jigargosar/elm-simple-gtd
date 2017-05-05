@@ -12,6 +12,7 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Msg exposing (commonMsg)
+import WebComponents exposing (..)
 
 
 init m =
@@ -22,4 +23,5 @@ init m =
             , onUserChanged Msg.OnFirebaseUserChanged
             ]
             []
+        , Html.node "firebase-messaging" [ onStringPropertyChanged "token" Msg.SetFCMToken ] []
         ]

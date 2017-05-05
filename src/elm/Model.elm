@@ -67,6 +67,7 @@ init { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemo
             }
         , mainViewListFocusedDocumentId = ""
         , user = Firebase.NotLoggedIn
+        , fcmToken = Nothing
         }
 
 
@@ -76,6 +77,10 @@ getMaybeUserProfile =
 
 setUser user model =
     { model | user = user }
+
+
+setFCMToken fcmToken model =
+    { model | fcmToken = fcmToken }
 
 
 toggleForceNarrow model =

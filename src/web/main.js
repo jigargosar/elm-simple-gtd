@@ -12,20 +12,6 @@ require("./jquery.trap")
 require("jquery-ui/ui/position")
 
 
-window.addEventListener('WebComponentsReady', function() {
-    const intervalId = setInterval(()=>{
-        let googleAuth = document.getElementById('google-auth');
-        debugger
-        if(!googleAuth) return
-        googleAuth
-            .signInWithPopup()
-            .then(console.info)
-            .catch(console.error)
-        clearTimeout(intervalId);
-    },500)
-})
-
-
 async function boot() {
     $("#root").trap();
 
@@ -88,6 +74,19 @@ async function boot() {
                 $(selector).focus()
             })
         }, 0)
+    })
+
+    app.ports["login"].subscribe(()=>{
+        const intervalId = setInterval(()=>{
+            let googleAuth = document.getElementById('google-auth');
+            debugger
+            if(!googleAuth) return
+            googleAuth
+                .signInWithPopup()
+                .then(console.info)
+                .catch(console.error)
+            clearTimeout(intervalId);
+        },500)
     })
 
     app.ports["focusPaperInput"].subscribe((selector) => {

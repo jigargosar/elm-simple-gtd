@@ -112,13 +112,13 @@ update msg =
                             Debug.log "user" (user)
                     in
                         Return.map (Model.setUser user)
-                SetFCMToken token ->
-                                    let
-                                        _ =
-                                            Debug.log "token" (token)
-                                    in
-                                        Return.map (Model.setFCMToken token)
 
+                SetFCMToken token ->
+                    let
+                        _ =
+                            Debug.log "token" (token)
+                    in
+                        Return.map (Model.setFCMToken token)
 
                 OnTestListItemFocus idx ->
                     Return.map

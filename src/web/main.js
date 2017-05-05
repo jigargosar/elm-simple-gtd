@@ -15,7 +15,6 @@ require("jquery-ui/ui/position")
 window.addEventListener('WebComponentsReady', function() {
     const timeoutId = setInterval(()=>{
         let googleAuth = document.getElementById('google-auth');
-        debugger
         if(!googleAuth) return
         googleAuth
             .signInWithPopup()

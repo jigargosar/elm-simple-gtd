@@ -164,26 +164,27 @@ paper-listbox {
 }
 
 .entity-item {
-  margin-top: 1rem;
-  padding: 0.5rem;
+  margin-top: 2rem;
+  //padding: 0.5rem;
   outline: none;
   border-left: 2px solid transparent;
 }
 
 .entity-item {
-  &:focus[tabindex="0"] .title{
-    font-weight: 600;
+  &[tabindex="0"] .title {
+    font-weight: bolder;
+    color: rgba(0, 0, 172, 0.44);
+  }
+
+  &:focus[tabindex="0"] .title {
+    font-weight: bolder;
     color: rgba(0, 0, 172, 0.77)
   }
 
-  &[tabindex="0"] .title{
-    font-weight: 600;
-    color: rgba(0, 0, 172, 0.44);
-  }
 }
 
-
-.todo-item/*, .entity-item*/ {
+.todo-item /*, .entity-item*/
+{
   &:focus[tabindex="0"] {
     border-left: 2px solid rgba(0, 0, 172, 0.77);
   }
@@ -194,7 +195,7 @@ paper-listbox {
 }
 
 .todo-item {
-  padding: 0.2rem;
+  padding: 0.5rem 1rem;
   background-color: white;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
   outline: none;

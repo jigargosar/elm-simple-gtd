@@ -8,6 +8,7 @@ import EditMode
 import Ext.Debug
 import Ext.Keyboard as Keyboard
 import Ext.Return as Return
+import Firebase
 import Model.Internal as Model
 import Model.RunningTodo as Model
 import Project
@@ -101,6 +102,9 @@ update msg =
         >> (case msg of
                 OnCommonMsg msg ->
                     CommonMsg.update msg
+
+                Login ->
+                    Return.command (Firebase.login ())
 
                 OnFirebaseUserChanged user ->
                     let

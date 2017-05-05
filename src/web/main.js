@@ -79,7 +79,6 @@ async function boot() {
     app.ports["login"].subscribe(()=>{
         const intervalId = setInterval(()=>{
             let googleAuth = document.getElementById('google-auth');
-            debugger
             if(!googleAuth) return
             googleAuth
                 .signInWithPopup()

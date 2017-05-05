@@ -219,7 +219,10 @@ headerView m =
 
             _ ->
                 if selectedTodoCount == 0 then
-                    h2 [ class "ellipsis" ] [ text "SimpleGTD - alpha" ]
+                    div [ class "layout horizontal justified center-center" ]
+                        [ h2 [ class "ellipsis" ] [ text "SimpleGTD - alpha" ]
+                        , WebComponents.iconButton "settings" [ onClick Msg.Login ]
+                        ]
                 else
                     span []
                         [ "(" ++ (toString selectedTodoCount) ++ ")" |> text

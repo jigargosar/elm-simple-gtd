@@ -18,7 +18,26 @@ port login : () -> Cmd msg
 
 type alias UserModel =
     { id : String
+    , providerData : List ProviderData
     }
+
+
+type alias ProviderData =
+    { displayName : String
+    , email : String
+    , photoUrl : String
+    , providerId : String
+    , uid : String
+    }
+
+
+providerDataDecoder =
+    D.succeed ProviderData
+        |> D.required "displayName" D.string
+        |> D.required "email" D.string
+        |> D.required "photoURL" D.string
+        |> D.required "providerId" D.string
+        |> D.required "uid" D.string
 
 
 type User
@@ -31,6 +50,7 @@ userDecoder =
     D.oneOf
         [ D.succeed UserModel
             |> D.required "uid" D.string
+            |> D.required "providerData" (D.list providerDataDecoder)
             |> D.map LoggedIn
         , D.succeed NotLoggedIn
         ]

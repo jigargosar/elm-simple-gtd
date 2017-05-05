@@ -71,3 +71,7 @@ getMaybeUserProfile user =
 
 getPhotoURL =
     .photoURL
+
+
+type alias FCMToken =
+    Maybe String

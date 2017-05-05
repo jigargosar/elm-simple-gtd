@@ -32,7 +32,7 @@ type alias PrevNextIdPair =
 type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnFirebaseUserChanged Firebase.User
-    | SetFCMToken String
+    | SetFCMToken Firebase.FCMToken
     | Login
     | RemotePouchSync EditMode.RemoteSyncForm
     | SetMainViewFocusedDocumentId Document.Id

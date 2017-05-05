@@ -52,7 +52,7 @@ type alias Model =
     , testModel : Test.Model.Model
     , mainViewListFocusedDocumentId : Document.Id
     , user : Firebase.User
-    , fcmToken : Maybe String
+    , fcmToken : Firebase.FCMToken
     }
 
 

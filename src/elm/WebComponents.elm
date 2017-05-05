@@ -51,6 +51,10 @@ secondaryA =
     attribute "secondary" "true"
 
 
+dynamicAlign =
+    boolProperty "dynamicAlign" True
+
+
 slotDropdownTrigger =
     attribute "slot" "dropdown-trigger"
 

@@ -40,7 +40,7 @@ import View.ReminderOverlay exposing (showReminderOverlay)
 import View.Shared exposing (..)
 import Todo.View
 import ViewModel
-import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, onPropertyChanged, paperIconButton, slotDropdownContent, slotDropdownTrigger, testDialog)
+import WebComponents exposing (doneAllIconP, dynamicAlign, icon, iconButton, iconP, iconTextButton, onPropertyChanged, paperIconButton, slotDropdownContent, slotDropdownTrigger, testDialog)
 
 
 init m =
@@ -235,9 +235,8 @@ headerView m =
                                 [ icon ""
                                     [ userAccountAttribute
                                     , class "account"
-                                    , tabindex -1
-                                    , attribute "noink" ""
                                     , slotDropdownTrigger
+                                    , dynamicAlign
                                     ]
                                 , Paper.listbox [ slotDropdownContent ]
                                     [ Paper.item [ onClick Msg.Login ] [ text "Login" ]

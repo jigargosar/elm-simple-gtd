@@ -323,7 +323,7 @@ dropdownTrigger tabindexValue content =
 
 
 contextMenuButton vm =
-    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
+    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
         [ dropdownTriggerWithTitle vm.tabindex vm.contextDisplayName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
@@ -332,7 +332,7 @@ contextMenuButton vm =
 
 
 projectMenuButton vm =
-    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", boolProperty "dynamicAlign" True ]
+    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
         [ dropdownTriggerWithTitle vm.tabindex vm.projectDisplayName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]

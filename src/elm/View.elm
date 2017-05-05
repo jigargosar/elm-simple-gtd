@@ -1,6 +1,7 @@
 module View exposing (init)
 
 import EditMode
+import Firebase.View
 import Html.Attributes.Extra exposing (..)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, form, h1, h2, hr, input, node, span, text)
@@ -38,19 +39,14 @@ import View.ReminderOverlay exposing (showReminderOverlay)
 import View.Shared exposing (..)
 import Todo.View
 import ViewModel
-import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, paperIconButton, testDialog)
+import WebComponents exposing (doneAllIconP, icon, iconButton, iconP, iconTextButton, onPropertyChanged, paperIconButton, testDialog)
 
 
 init m =
     div [ id "root" ]
-        [ firebaseView m
+        [ Firebase.View.init m
         , appView2 m
         ]
-
-
-firebaseView m =
-    div [ id "firebase-container" ]
-        [ Html.node "firebase-auth" [ id "google-auth", attribute "provider" "google" ] [] ]
 
 
 appView2 m =

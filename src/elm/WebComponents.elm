@@ -67,8 +67,11 @@ onBoolPropertyChanged propertyName tagger =
     on ((String.Extra.dasherize propertyName) ++ "-changed")
         (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] Json.Decode.bool))
 
+onPropertyChanged propertyName decoder tagger =
+    on ((String.Extra.dasherize propertyName) ++ "-changed")
+            (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] decoder))
 
-onPropertyChanged propertyName tagger =
+onStringPropertyChanged propertyName tagger =
     on ((String.Extra.dasherize propertyName) ++ "-changed")
         (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] Json.Decode.string))
 

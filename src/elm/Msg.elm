@@ -22,6 +22,7 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
+import Firebase
 
 
 type alias PrevNextIdPair =
@@ -30,6 +31,7 @@ type alias PrevNextIdPair =
 
 type Msg
     = OnCommonMsg CommonMsg.Msg
+    | OnFirebaseUserChanged Firebase.User
     | RemotePouchSync EditMode.RemoteSyncForm
     | SetMainViewFocusedDocumentId Document.Id
     | TodoAction Todo.UpdateAction Todo.Id

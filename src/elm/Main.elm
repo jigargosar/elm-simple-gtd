@@ -102,6 +102,13 @@ update msg =
                 OnCommonMsg msg ->
                     CommonMsg.update msg
 
+                OnFirebaseUserChanged user ->
+                    let
+                        _ =
+                            Debug.log "user" (user)
+                    in
+                        identity
+
                 OnTestListItemFocus idx ->
                     Return.map
                         (\model ->

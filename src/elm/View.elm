@@ -195,6 +195,9 @@ headerView m =
     let
         selectedTodoCount =
             Model.getSelectedTodoIdSet m |> Set.size
+
+        userProfileUrl =
+            Model.getMaybeUserProfile m
     in
         case Model.getEditMode m of
             EditMode.NewTodo form ->
@@ -219,9 +222,16 @@ headerView m =
 
             _ ->
                 if selectedTodoCount == 0 then
-                    div [ class "layout horizontal justified center-center" ]
+                    div [ class "flex-auto layout horizontal justified center" ]
                         [ h2 [ class "ellipsis" ] [ text "SimpleGTD - alpha" ]
-                        , WebComponents.iconButton "settings" [ onClick Msg.Login ]
+
+                        --                        , Paper.button
+                        --                            [ class "account", onClick Msg.Login ]
+                        --                            [ icon "account-circle" [ class "account" ] ]
+                        , div []
+                            [ iconButton "account-circle"
+                                [ attribute "src" "", class "account", onClick Msg.Login, tabindex -1 ]
+                            ]
                         ]
                 else
                     span []

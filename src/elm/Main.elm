@@ -111,7 +111,7 @@ update msg =
                         _ =
                             Debug.log "user" (user)
                     in
-                        identity
+                        Return.map (Model.setUser user)
 
                 OnTestListItemFocus idx ->
                     Return.map

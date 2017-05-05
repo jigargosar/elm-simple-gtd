@@ -4,6 +4,7 @@ import Context
 import Document exposing (Id)
 import EditMode exposing (EditMode)
 import Ext.Keyboard as Keyboard
+import Firebase
 import Project
 import Project
 import Random.Pcg exposing (Seed)
@@ -50,6 +51,7 @@ type alias Model =
     , appDrawerForceNarrow : Bool
     , testModel : Test.Model.Model
     , mainViewListFocusedDocumentId : Document.Id
+    , user : Firebase.User
     }
 
 

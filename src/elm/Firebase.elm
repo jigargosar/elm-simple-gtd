@@ -58,3 +58,12 @@ userDecoder =
 
 onUserChanged =
     onPropertyChanged "user" userDecoder
+
+
+getMaybeUserProfile user =
+    case user of
+        NotLoggedIn ->
+            Nothing
+
+        LoggedIn userModel ->
+            userModel.providerData |> List.head

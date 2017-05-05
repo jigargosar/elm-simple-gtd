@@ -7,6 +7,7 @@ import Dict.Extra
 import Document
 import EditMode exposing (EditMode, TodoForm)
 import Ext.Keyboard as Keyboard
+import Firebase
 import Model.Internal exposing (..)
 import Msg exposing (Return)
 import Project
@@ -65,7 +66,16 @@ init { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemo
             , selectedIndex = 0
             }
         , mainViewListFocusedDocumentId = ""
+        , user = Firebase.NotLoggedIn
         }
+
+
+getMaybeUserProfile =
+    .user >> Firebase.getMaybeUserProfile
+
+
+setUser user model =
+    { model | user = user }
 
 
 toggleForceNarrow model =

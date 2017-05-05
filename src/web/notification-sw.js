@@ -50,7 +50,7 @@ firebase.initializeApp({
 
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
-// const messaging = firebase.messaging();
+const messaging = firebase.messaging();
 
 // Handle incoming messages. Called when:
 // - a message is received while the app has focus
@@ -58,7 +58,7 @@ firebase.initializeApp({
 //   `messaging.setBackgroundMessageHandler` handler.
 // messaging.onMessage(function(payload) {
 //     console.log("Message received. ", payload);
-//     ...
+//     // ...
 // });
 
 

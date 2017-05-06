@@ -235,38 +235,45 @@ headerView m =
                 span [] [ "Group By: (P)rojects, (C)ontexts " |> text ]
 
             _ ->
-                if selectedTodoCount == 0 then
-                    div [ class "flex-auto layout horizontal justified center" ]
-                        [ h2 [ class "ellipsis" ] [ text "SimpleGTD - alpha" ]
-                        , div []
-                            [ Paper.menuButton [ dynamicAlign, boolProperty "noOverlap" True ]
-                                [ Html.node "iron-icon"
-                                    [ userAccountAttribute
-                                    , class "account"
-                                    , slotDropdownTrigger
-                                    ]
-                                    []
-                                , Paper.listbox [ slotDropdownContent ]
-                                    [ userSignInLink
+                let
+                    devModeString =
+                        if m.developmentMode then
+                            "dev"
+                        else
+                            "alpha"
+                in
+                    if selectedTodoCount == 0 then
+                        div [ class "flex-auto layout horizontal justified center" ]
+                            [ h2 [ class "ellipsis" ] [ "SimpleGTD - " ++ devModeString |> text ]
+                            , div []
+                                [ Paper.menuButton [ dynamicAlign, boolProperty "noOverlap" True ]
+                                    [ Html.node "iron-icon"
+                                        [ userAccountAttribute
+                                        , class "account"
+                                        , slotDropdownTrigger
+                                        ]
+                                        []
+                                    , Paper.listbox [ slotDropdownContent ]
+                                        [ userSignInLink
+                                        ]
                                     ]
                                 ]
                             ]
-                        ]
-                else
-                    span []
-                        [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
-                        , iconButton "done-all"
-                            [ onClick Msg.SelectionDoneClicked
+                    else
+                        span []
+                            [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
+                            , iconButton "done-all"
+                                [ onClick Msg.SelectionDoneClicked
+                                ]
+                            , iconButton "create"
+                                [ onClick Msg.SelectionEditClicked
+                                ]
+                            , iconButton "delete"
+                                [ onClick Msg.SelectionTrashClicked
+                                ]
+                            , iconButton "cancel"
+                                [ onClick Msg.ClearSelection ]
                             ]
-                        , iconButton "create"
-                            [ onClick Msg.SelectionEditClicked
-                            ]
-                        , iconButton "delete"
-                            [ onClick Msg.SelectionTrashClicked
-                            ]
-                        , iconButton "cancel"
-                            [ onClick Msg.ClearSelection ]
-                        ]
 
 
 addTodoFab m =

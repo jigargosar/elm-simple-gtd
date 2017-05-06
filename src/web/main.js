@@ -14,8 +14,9 @@ const Notifications = require("./notifications")
 const DB = require("./pouchdb-wrapper")
 
 //noinspection JSUnresolvedVariable
+const developmentMode = NODE_ENV !== "production"
 const firebaseConfig =
-    NODE_ENV === "production" ? require("./config/prod/firebase")
+    developmentMode ? require("./config/prod/firebase")
         : require("./config/dev/firebase")
 
 boot().catch(console.error)
@@ -42,8 +43,8 @@ async function boot() {
         encodedProjectList: projects,
         encodedContextList: contexts,
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
-        firebaseAppAttributes: firebaseConfig.appAttributes
-
+        firebaseAppAttributes: firebaseConfig.appAttributes,
+        developmentMode: developmentMode
     }
 
     const Elm = require("elm/Main.elm")

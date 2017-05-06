@@ -23,6 +23,7 @@ module.exports = {
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
         common: "./src/web/common-require.js",
+        swrequire:["pouchdb-browser"],
         main: "./src/web/main.js"
     },
 

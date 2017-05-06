@@ -95,6 +95,7 @@ type alias Flags =
     , encodedProjectList : List Project.Encoded
     , encodedContextList : List Context.Encoded
     , pouchDBRemoteSyncURI : String
+    , firebaseAppAttributes : Firebase.AppAttributes
     }
 
 

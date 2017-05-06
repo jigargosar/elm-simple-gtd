@@ -36,7 +36,14 @@ async function boot() {
         encodedTodoList: todos,
         encodedProjectList: projects,
         encodedContextList: contexts,
-        pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || ""
+        pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
+        firebaseAppAttributes: [
+            ["database-url", "https://rational-mote-664.firebaseio.com"]
+            , ["api-key", "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc"]
+            , ["messaging-sender-id", "49437522774"]
+            , ["auth-domain", "rational-mote-664.firebaseapp.com"]
+        ]
+
     }
 
     const Elm = require("elm/Main.elm")

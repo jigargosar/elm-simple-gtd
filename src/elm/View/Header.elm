@@ -1,14 +1,14 @@
 module View.Header exposing (..)
 
 import EditMode
-import Ext.Keyboard exposing (..)
+import Ext.Keyboard as Keyboard
 import Ext.Time
 import Firebase
 import Html.Attributes.Extra exposing (..)
 import Model
 import Model.RunningTodo exposing (RunningTodoViewModel)
 import Model.Types exposing (Model)
-import Msg
+import Msg exposing (Msg)
 import Polymer.App as App
 import Polymer.Paper as Paper
 import Html exposing (..)
@@ -94,7 +94,7 @@ headerView m =
                     , onInput Msg.NewTodoTextChanged
                     , value form.text
                     , onBlur Msg.DeactivateEditingMode
-                    , onKeyUp (Msg.NewTodoKeyUp form)
+                    , Keyboard.onKeyUp (Msg.NewTodoKeyUp form)
                     , stringProperty "label" "New Todo"
                     , boolProperty "alwaysFloatLabel" True
                     , style [ ( "width", "100%" ), "color" => "white" ]

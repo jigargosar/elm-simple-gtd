@@ -13,7 +13,7 @@ require("jquery-ui/ui/position")
 const Notifications = require("./notifications")
 const DB = require("./db")
 
-    boot().catch(console.error)
+boot().catch(console.error)
 
 async function boot() {
     $("#root").trap();
@@ -60,7 +60,7 @@ async function boot() {
     });
 
 
-    Notifications.setup(app) .catch(console.error)
+    Notifications.setup(app).catch(console.error)
 
     app.ports["focusSelector"].subscribe((selector) => {
         setTimeout(() => {
@@ -70,16 +70,16 @@ async function boot() {
         }, 0)
     })
 
-    app.ports["login"].subscribe(()=>{
-        const intervalId = setInterval(()=>{
+    app.ports["login"].subscribe(() => {
+        const intervalId = setInterval(() => {
             let googleAuth = document.getElementById('google-auth');
-            if(!googleAuth) return
+            if (!googleAuth) return
             googleAuth
                 .signInWithRedirect()
                 .then(console.info)
                 .catch(console.error)
             clearTimeout(intervalId);
-        },500)
+        }, 500)
     })
 
     app.ports["focusPaperInput"].subscribe((selector) => {

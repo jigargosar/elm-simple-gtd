@@ -2,10 +2,14 @@ module View.Header exposing (..)
 
 import EditMode
 import Ext.Keyboard exposing (..)
+import Ext.Time
 import Firebase
 import Html.Attributes.Extra exposing (..)
 import Model
+import Model.RunningTodo exposing (RunningTodoViewModel)
+import Model.Types exposing (Model)
 import Msg
+import Polymer.App as App
 import Polymer.Paper as Paper
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -25,7 +29,59 @@ newTodoInputId =
     "new-todo-input"
 
 
-init m =
+init m viewModel =
+    App.header
+        [ attribute "reveals" ""
+        , attribute "condenses" ""
+
+        --        , attribute "effects" "material"
+        , attribute "effects" "waterfall"
+
+        --        , attribute "fixed" "true"
+        , attribute "slot" "header"
+        ]
+        [ App.toolbar
+            [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
+            ]
+            [ paperIconButton
+                [ iconA "menu"
+                , tabindex -1
+                , attribute "drawer-toggle" ""
+                , onClick Msg.ToggleDrawer
+                , class "hide-when-wide"
+                ]
+                []
+            , headerView m
+            ]
+
+        --        , runningTodoView m
+        ]
+
+
+runningTodoView : Model -> Html Msg
+runningTodoView m =
+    case Model.RunningTodo.getRunningTodoViewModel m of
+        Just taskVm ->
+            div [ class "active-task-view", attribute "sticky" "true" ] [ runningTodoViewHelp taskVm m ]
+
+        Nothing ->
+            div [ class "active-task-view", attribute "sticky" "true" ] []
+
+
+runningTodoViewHelp : RunningTodoViewModel -> Model -> Html Msg
+runningTodoViewHelp { todoVM, elapsedTime } m =
+    div []
+        [ div [ class "title" ] [ text todoVM.text ]
+        , div [ class "col" ]
+            [ div [ class "elapsed-time" ] [ text (Ext.Time.toHHMMSS elapsedTime) ]
+            , paperIconButton [ iconA "av:pause" ] []
+            , paperIconButton [ iconA "av:stop", Msg.Stop |> onClick ] []
+            , paperIconButton [ iconA "check", Msg.MarkRunningTodoDone |> onClick ] []
+            ]
+        ]
+
+
+headerView m =
     let
         selectedTodoCount =
             Model.getSelectedTodoIdSet m |> Set.size

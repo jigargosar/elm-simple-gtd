@@ -47,11 +47,11 @@ import WebComponents exposing (doneAllIconP, dynamicAlign, icon, iconButton, ico
 init m =
     div [ id "root" ]
         [ Firebase.View.init m
-        , appView2 m
+        , appView m
         ]
 
 
-appView2 m =
+appView m =
     div [ id "app-view" ]
         [ appDrawerLayoutView m
         , addTodoFab m
@@ -88,62 +88,10 @@ appDrawerLayoutView m =
             ]
             [ View.AppDrawer.view m viewModel
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
-                [ appHeaderView m viewModel
+                [ View.Header.init m viewModel
                 , appMainView contextVMs projectVMs m
                 ]
             ]
-
-
-appHeaderView m viewModel =
-    App.header
-        [ attribute "reveals" ""
-        , attribute "condenses" ""
-
-        --        , attribute "effects" "material"
-        , attribute "effects" "waterfall"
-
-        --        , attribute "fixed" "true"
-        , attribute "slot" "header"
-        ]
-        [ App.toolbar
-            [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
-            ]
-            [ paperIconButton
-                [ iconA "menu"
-                , tabindex -1
-                , attribute "drawer-toggle" ""
-                , onClick Msg.ToggleDrawer
-                , class "hide-when-wide"
-                ]
-                []
-            , View.Header.init m
-            ]
-
-        --        , runningTodoView m
-        ]
-
-
-runningTodoView : Model -> Html Msg
-runningTodoView m =
-    case Model.RunningTodo.getRunningTodoViewModel m of
-        Just taskVm ->
-            div [ class "active-task-view", attribute "sticky" "true" ] [ runningTodoViewHelp taskVm m ]
-
-        Nothing ->
-            div [ class "active-task-view", attribute "sticky" "true" ] []
-
-
-runningTodoViewHelp : RunningTodoViewModel -> Model -> Html Msg
-runningTodoViewHelp { todoVM, elapsedTime } m =
-    div []
-        [ div [ class "title" ] [ text todoVM.text ]
-        , div [ class "col" ]
-            [ div [ class "elapsed-time" ] [ text (Ext.Time.toHHMMSS elapsedTime) ]
-            , paperIconButton [ iconA "av:pause" ] []
-            , paperIconButton [ iconA "av:stop", Msg.Stop |> onClick ] []
-            , paperIconButton [ iconA "check", Msg.MarkRunningTodoDone |> onClick ] []
-            ]
-        ]
 
 
 appMainView contextVMs projectVMs model =

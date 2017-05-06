@@ -127,9 +127,13 @@ async function setupNotifications(app) {
     const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
 
     navigator.serviceWorker.addEventListener('message', event => {
-        console.info("message event received", event.data)
-        app.ports["notificationClicked"].send(event.data)
-        // event.ports[0].postMessage("Client 1 Says 'Hello back!'");
+        const data = event.data;
+        console.log("MJS: serviceWorker.onMessage", event.data, event)
+        if(data["firebase-messaging-msg-type"]){
+            console.info("FBJS: ignoring message event received", data, event)
+        }else{
+            app.ports["notificationClicked"].send(data)
+        }
     });
     const reg = await navigator.serviceWorker.register(swScriptPath)
 

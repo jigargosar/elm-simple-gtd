@@ -15,9 +15,22 @@ import Msg exposing (commonMsg)
 import WebComponents exposing (..)
 
 
+attributes =
+    List.map (uncurry attribute)
+
+
 init m =
     div [ id "firebase-container" ]
-        [ Html.node "firebase-auth"
+        [ Html.node "firebase-app"
+            (attributes
+                [ "database-url" => "https://rational-mote-664.firebaseio.com"
+                , "api-key" => "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc"
+                , "messaging-sender-id" => "49437522774"
+                , "auth-domain" => "rational-mote-664.firebaseapp.com"
+                ]
+            )
+            []
+        , Html.node "firebase-auth"
             [ id "google-auth"
             , attribute "provider" "google"
             , onUserChanged Msg.OnFirebaseUserChanged

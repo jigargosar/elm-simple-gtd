@@ -10,9 +10,10 @@ const $ = require("jquery")
 window.jQuery = $
 require("./jquery.trap")
 require("jquery-ui/ui/position")
+const Notifications = require("notifications")
 
 
-boot().catch(console.error)
+    boot().catch(console.error)
 
 async function boot() {
     $("#root").trap();
@@ -59,8 +60,7 @@ async function boot() {
     });
 
 
-    setupNotifications(app)
-        .catch(console.error)
+    Notifications.setup(app) .catch(console.error)
 
     app.ports["focusSelector"].subscribe((selector) => {
         setTimeout(() => {

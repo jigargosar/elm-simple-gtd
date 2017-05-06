@@ -1,5 +1,6 @@
 "use strict";
 
+export const setup = setupNotifications
 
 async function setupNotifications(app) {
 

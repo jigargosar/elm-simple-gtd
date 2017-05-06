@@ -1,8 +1,8 @@
 const webpack = require('webpack');
 const path = require("path");
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-
-const ServiceWorkerPlugin = require('serviceworker-config-webpack-plugin')
+const ServiceWorkerWebpackPlugin  = require('serviceworker-webpack-plugin');
+// const ServiceWorkerPlugin = require('serviceworker-config-webpack-plugin')
 
 const nodeENV = process.env.NODE_ENV || "development"
 
@@ -12,7 +12,6 @@ console.log("debug:", isDevEnv, nodeENV)
 
 
 const outputDir = isDevEnv ? "dev" : "app"
-
 
 module.exports = {
     resolve: {
@@ -39,8 +38,19 @@ module.exports = {
             'NODE_ENV': JSON.stringify(nodeENV),
             'WEB_PACK_DEV_SERVER': process.env.WEB_PACK_DEV_SERVER || false
         }),
-        new ServiceWorkerPlugin({
+        // new ServiceWorkerPlugin({
+        //     entry: './src/web/notification-sw.js',
+        //     inject: {
+        //         url: process.env.WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/",
+        //     }
+        // }),
+        new ServiceWorkerWebpackPlugin({
+            options:{"foo":"bar"},
             entry: './src/web/notification-sw.js',
+            filename:"notification-sw.js",
+            template:function () {
+                return Promise.resolve("const url = ", process.env.WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/");
+            },
             inject: {
                 url: process.env.WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/",
             }

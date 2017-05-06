@@ -1,0 +1,12 @@
+<!--
+@license
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file or at
+https://github.com/firebase/polymerfire/blob/master/LICENSE
+--><html><head><link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../app-storage/app-storage-behavior.html">
+<link rel="import" href="firebase-common-behavior.html">
+<link rel="import" href="firebase-database-script.html">
+<script>(function(){'use strict';Polymer.FirebaseDatabaseBehaviorImpl={properties:{db:{type:Object,computed:'__computeDb(app)'},ref:{type:Object,computed:'__computeRef(db, path, disabled)',observer:'__refChanged'},path:{type:String,value:null,observer:'__pathChanged'},disabled:{type:Boolean,value:!1}},observers:['__onlineChanged(online)'],_setFirebaseValue:function(a,b){this._log('Setting Firebase value at',a,'to',b);var c=b&&b.$key,d=b&&b.hasOwnProperty('$val');c&&(b.$key=null);var e=this.db.ref(a).set(d?b.$val:b);return c&&(b.$key=c),e},__computeDb:function(a){return a?a.database():null},__computeRef:function(a,b){return null==a||null==b||!this.__pathReady(b)||this.disabled?null:a.ref(b)},__refChanged:function(){},__pathChanged:function(){this.disabled||this.valueIsEmpty(this.data)||this.syncToMemory(function(){this.data=this.zeroValue,this.__needSetData=!0})},__pathReady:function(a){return a&&0>a.split('/').slice(1).indexOf('')},__onlineChanged:function(a){this.ref&&(a?this.db.goOnline():this.db.goOffline())}},Polymer.FirebaseDatabaseBehavior=[Polymer.AppStorageBehavior,Polymer.FirebaseCommonBehavior,Polymer.FirebaseDatabaseBehaviorImpl]})();</script>
+</head><body></body></html>

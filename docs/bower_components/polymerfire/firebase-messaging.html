@@ -1,0 +1,67 @@
+<!--
+@license
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file or at
+https://github.com/firebase/polymerfire/blob/master/LICENSE
+--><html><head><link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="firebase-common-behavior.html">
+<link rel="import" href="firebase-messaging-script.html">
+
+<!--
+`firebase-messaging` is a wrapper around the Firebase Cloud Messaging API. It
+allows you to receive Web Push messages in your application, including when
+your site isn't in an open tab.
+
+Example Usage:
+```html
+<firebase-messaging id="messaging"
+  token="{{token}}"
+  on-message="handleMessage">
+</firebase-messaging>
+```
+
+Before you can start receiving push messages, you'll need to request permission
+to use notifications:
+
+```js
+this.$.messaging.requestPermission().then(function() {
+  // permission was granted
+}, function(err) {
+  // permission was denied
+});
+```
+
+You'll also need to persist your token somewhere that a server can access it so
+you can actually send push messsages:
+
+```html
+<firebase-messaging token="{{token}}"></firebase-messaging>
+<firebase-document path="/users/[[user.uid]]/token" value="[[token]]"></firebase-document>
+```
+
+You'll also need a [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
+for your site. It must contain the following:
+
+```json
+{
+  "gcm_sender_id": "103953800507"
+}
+```
+
+**Note:** You must use the **exact line specified above**. Do *not* change the sender
+id to your project's individual sender id.
+
+Finally, Firebase Cloud Messaging requires a service worker to handle push messages.
+The easiest way is using a service worker called `firebase-messaging-sw.js` in your
+app's root directory. See [the FCM docs](https://firebase.google.com/docs/cloud-messaging/js/receive#handle_messages_when_your_web_app_is_in_the_foreground)
+for more information.
+
+To use a different service worker than the default, you will need to add the
+`custom-sw` attribute to your `<firebase-messaging>` element, and then explicitly
+call `.activate()` on the element once you've
+-->
+</head><body><dom-module id="firebase-messaging">
+  <script>(function(){function a(e,f){var h=Array.prototype.slice.call(arguments,2);d[e.name].instances.forEach(function(i){i[f].apply(i,h)})}function b(e){d[e.name];e.messaging().getToken().then(function(g){return a(e,'_setToken',g),a(e,'_setStatusKnown',!0),g},function(g){throw a(e,'_setToken',null),a(e,'_setStatusKnown',!0),a(e,'fire','error',g),g})}function c(e,f){var g=f.name;d[g]=d[g]||{messaging:f.messaging()};var h=d[g];return h.instances=h.instances||[],0>h.instances.indexOf(e)&&h.instances.push(e),h.listener||(h.listener=f.messaging().onMessage(function(i){h.instances.forEach(function(j){j._setLastMessage(i),j.fire('message',{message:i})})})),h.tokenListener||(h.tokenListener=f.messaging().onTokenRefresh(function(){b(f)})),b(f)}var d={};Polymer({is:'firebase-messaging',behaviors:[Polymer.FirebaseCommonBehavior],properties:{token:{type:String,value:null,notify:!0,readOnly:!0},active:{type:Boolean,notify:!0,computed:'_computeActive(statusKnown, token)'},statusKnown:{type:Boolean,value:!1,notify:!0,readOnly:!0},lastMessage:{type:Object,value:null,notify:!0,readOnly:!0},customSw:{type:Boolean,value:!1},pushSupported:{type:Boolean,value:function(){return'serviceWorker'in navigator&&'PushManager'in window},notify:!0,readOnly:!0}},observers:['_bootstrapApp(app, customSw)'],requestPermission:function(){if(!this.messaging)throw new Error('firebase-messaging: No app configured!');return this.messaging.requestPermission().then(function(){return b(this.app)}.bind(this))},activate:function(e){return this.statusKnown=!1,this.active=!1,this.token=null,this.app?void(this.messaging=this.app.messaging(),e&&this.messaging.useServiceWorker(e),c(this,this.app)):(this.messaging=null,this.statusKnown=!1,this.active=!1,void(this.token=null))},_computeActive:function(e,f){return!!(e&&f)},_bootstrapApp:function(e,f){e&&!f&&this.activate()}})})();</script>
+</dom-module>
+</body></html>

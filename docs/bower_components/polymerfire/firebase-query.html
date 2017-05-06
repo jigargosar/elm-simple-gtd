@@ -1,0 +1,54 @@
+<!--
+@license
+Copyright 2016 Google Inc. All Rights Reserved.
+Use of this source code is governed by a BSD-style
+license that can be found in the LICENSE file or at
+https://github.com/firebase/polymerfire/blob/master/LICENSE
+--><html><head><link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="firebase-database-behavior.html">
+
+
+<!--
+`firebase-query` combines the given properties into query options that generate
+a query, a request for a filtered, ordered, immutable set of Firebase data. The
+results of this Firebase query are then synchronized into the `data` parameter.
+
+If the child nodes of the query are objects (most cases), `data` will be an array
+of those objects with an extra `$key` field added to represent the key. If the
+child nodes are non-object leaf values, `data` will be an array of objects of
+the structure `{$key: key, $val: val}`.
+
+Example usage:
+```html
+<firebase-query
+    id="query"
+    app-name="notes"
+    path="/notes/[[uid]]"
+    data="{{data}}">
+</firebase-query>
+
+<template is="dom-repeat" items="{{data}}" as="note">
+  <sticky-note note-data="{{note}}"></sticky-note>
+</template>
+
+<script>
+Polymer({
+  properties: {
+    uid: String,
+    data: {
+      type: Object,
+      observer: 'dataChanged'
+    }
+  },
+
+  dataChanged: function (newData, oldData) {
+    // do something when the query returns values
+  }
+});
+</script>
+```
+-->
+</head><body><dom-module id="firebase-query">
+  <script>(function(){'use strict';Polymer({is:'firebase-query',behaviors:[Polymer.FirebaseDatabaseBehavior],properties:{query:{type:Object,computed:'__computeQuery(ref, orderByChild, orderByValue, limitToFirst, limitToLast, startAt, endAt, equalTo)',observer:'__queryChanged'},orderByChild:{type:String,value:''},orderByValue:{type:Boolean,value:!1},startAt:{type:String,value:''},endAt:{type:String,value:''},equalTo:{type:Object,value:null},limitToFirst:{type:Number,value:0},limitToLast:{type:Number,value:0}},created:function(){this.__map={}},attached:function(){this.__queryChanged(this.query,this.query)},detached:function(){null==this.query||this.__queryChanged(null,this.query)},child:function(a){return this.__map[a]},get isNew(){return this.disabled||!this.__pathReady(this.path)},get zeroValue(){return[]},memoryPathToStoragePath:function(a){var b=this.path;if('data'!==a){var c=a.split('.'),d=window.parseInt(c[1],10);null==d||isNaN(d)||(c[1]=null!=this.data[d]&&this.data[d].$key),b+=c.join('/').replace(/^data\.?/,'')}return b},storagePathToMemoryPath:function(a){var b='data';if(a!==this.path){var c=a.replace(this.path+'/','').split('/'),d=c[0],e=this.__map[d];e&&(c[0]=this.__indexFromKey(d)),b+='.'+c.join('.')}return b},setStoredValue:function(a,b){return a===this.path||/\$key$/.test(a)?Promise.resolve():/\/\$val$/.test(a)?this._setFirebaseValue(a.replace(/\/\$val$/,''),b):this._setFirebaseValue(a,b)},_propertyToKey:function(a){var b=window.parseInt(a,10);if(null!=b&&!isNaN(b))return this.data[b].$key},__computeQuery:function(a,b,c,d,e,f,g,h){if(null==a)return null;var j;return j=b?a.orderByChild(b):c?a.orderByValue():a.orderByKey(),d?j=j.limitToFirst(d):e&&(j=j.limitToLast(e)),f&&(j=j.startAt(f)),g&&(j=j.endAt(g)),null!==h&&(j=j.equalTo(h)),j},__pathChanged:function(a){null==a&&this.syncToMemory(function(){this.data=this.zeroValue})},__queryChanged:function(a,b){b&&(b.off('child_added',this.__onFirebaseChildAdded,this),b.off('child_removed',this.__onFirebaseChildRemoved,this),b.off('child_changed',this.__onFirebaseChildChanged,this),b.off('child_moved',this.__onFirebaseChildMoved,this),this.syncToMemory(function(){this.set('data',this.zeroValue)})),a&&(this._onOnce&&(a.off('child_added',this.__onFirebaseChildAdded,this),a.off('child_removed',this.__onFirebaseChildRemoved,this),a.off('child_changed',this.__onFirebaseChildChanged,this),a.off('child_moved',this.__onFirebaseChildMoved,this)),this._onOnce=!0,a.on('child_added',this.__onFirebaseChildAdded,this.__onError,this),a.on('child_removed',this.__onFirebaseChildRemoved,this.__onError,this),a.on('child_changed',this.__onFirebaseChildChanged,this.__onError,this),a.on('child_moved',this.__onFirebaseChildMoved,this.__onError,this))},__indexFromKey:function(a){if(null!=a)for(var b=0;b<this.data.length;b++)if(this.data[b].$key===a)return b;return-1},__onFirebaseChildAdded:function(a,b){var c=a.key,d=a.val(),e=this.__indexFromKey(b);this._log('Firebase child_added:',c,d),d=this.__snapshotToValue(a),this.__map[c]=d,this.splice('data',e+1,0,d)},__onFirebaseChildRemoved:function(a){var b=a.key,c=this.__map[b];this._log('Firebase child_removed:',b,c),c&&(this.__map[b]=null,this.async(function(){this.syncToMemory(function(){this.splice('data',this.__indexFromKey(b),1)})}))},__onFirebaseChildChanged:function(a){var b=a.key,c=this.__map[b];this._log('Firebase child_changed:',b,c),c&&this.async(function(){var d=this.__indexFromKey(b),e=this.__snapshotToValue(a);this.__map[b]=e,this.syncToMemory(function(){if(e instanceof Object){for(var f in e)this.set(['data',d,f],e[f]);for(var f in c)e.hasOwnProperty(f)||this.set(['data',d,f],void 0)}else this.set(['data',d],e)})})},__onFirebaseChildMoved:function(a,b){var c=a.key,d=this.__map[c],e=b?this.__indexFromKey(b):0;if(this._log('Firebase child_moved:',c,d,'to index',e),d){var f=this.__indexFromKey(c);d=this.__snapshotToValue(a),this.__map[c]=d,this.async(function(){this.syncToMemory(function(){this.splice('data',f,1),this.splice('data',e,0,d)})})}},__snapshotToValue:function(a){var b=a.key,c=a.val(),d='object'!=typeof c;return d?c={$key:b,$val:c}:c.$key=b,c}})})();</script>
+</dom-module>
+</body></html>

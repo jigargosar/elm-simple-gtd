@@ -13,6 +13,11 @@ require("jquery-ui/ui/position")
 const Notifications = require("./notifications")
 const DB = require("./db")
 
+//noinspection JSUnresolvedVariable
+const firebaseConfig =
+    NODE_ENV === "production" ? require("./config/prod/firebase")
+        : require("./config/dev/firebase")
+
 boot().catch(console.error)
 
 async function boot() {
@@ -37,12 +42,7 @@ async function boot() {
         encodedProjectList: projects,
         encodedContextList: contexts,
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
-        firebaseAppAttributes: [
-            ["database-url", "https://rational-mote-664.firebaseio.com"]
-            , ["api-key", "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc"]
-            , ["messaging-sender-id", "49437522774"]
-            , ["auth-domain", "rational-mote-664.firebaseapp.com"]
-        ]
+        firebaseAppAttributes: firebaseConfig.appAttributes
 
     }
 

@@ -18,6 +18,7 @@ import ReminderOverlay
 import Set
 import Entity.ViewModel
 import Test.View
+import View.Header
 import View.TodoList
 import View.AppDrawer
 import Maybe.Extra as Maybe
@@ -115,7 +116,7 @@ appHeaderView m viewModel =
                 , class "hide-when-wide"
                 ]
                 []
-            , headerView m
+            , View.Header.init m
             ]
 
         --        , runningTodoView m
@@ -185,102 +186,6 @@ appMainView contextVMs projectVMs model =
 
             TestView ->
                 Test.View.init model.testModel
-        ]
-
-
-newTodoInputId =
-    "new-todo-input"
-
-
-headerView m =
-    let
-        selectedTodoCount =
-            Model.getSelectedTodoIdSet m |> Set.size
-    in
-        case Model.getEditMode m of
-            EditMode.NewTodo form ->
-                Paper.input
-                    [ id newTodoInputId
-                    , class "auto-focus"
-                    , onInput Msg.NewTodoTextChanged
-                    , value form.text
-                    , onBlur Msg.DeactivateEditingMode
-                    , onKeyUp (Msg.NewTodoKeyUp form)
-                    , stringProperty "label" "New Todo"
-                    , boolProperty "alwaysFloatLabel" True
-                    , style [ ( "width", "100%" ), "color" => "white" ]
-                    ]
-                    []
-
-            EditMode.SwitchView ->
-                span [] [ "Switch View: (A)ll, (P)rojects, (D)one, (B)in, (G)roup By." |> text ]
-
-            EditMode.SwitchToGroupedView ->
-                span [] [ "Group By: (P)rojects, (C)ontexts " |> text ]
-
-            _ ->
-                if selectedTodoCount == 0 then
-                    defaultHeader m
-                else
-                    selectionHeader selectedTodoCount
-
-
-defaultHeader m =
-    let
-        title =
-            if m.developmentMode then
-                "DEVELOPMENT MODE"
-            else
-                "SimpleGTD - alpha"
-
-        maybeUserProfile =
-            Model.getMaybeUserProfile m
-
-        userPhotoUrl =
-            Model.getMaybeUserProfile m ?|> Firebase.getPhotoURL ?= ""
-
-        userAccountAttribute =
-            Model.getMaybeUserProfile m
-                ?|> (Firebase.getPhotoURL >> attribute "src")
-                ?= iconA "account-circle"
-
-        userSignInLink =
-            maybeUserProfile
-                ?|> (\_ -> Paper.item [ onClick Msg.SignOut ] [ text "SignOut" ])
-                ?= Paper.item [ onClick Msg.SignIn ] [ text "SignIn" ]
-    in
-        div [ class "flex-auto layout horizontal justified center" ]
-            [ h2 [ class "ellipsis" ] [ title |> text ]
-            , div []
-                [ Paper.menuButton [ dynamicAlign, boolProperty "noOverlap" True ]
-                    [ Html.node "iron-icon"
-                        [ userAccountAttribute
-                        , class "account"
-                        , slotDropdownTrigger
-                        ]
-                        []
-                    , Paper.listbox [ slotDropdownContent ]
-                        [ userSignInLink
-                        ]
-                    ]
-                ]
-            ]
-
-
-selectionHeader selectedTodoCount =
-    span []
-        [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
-        , iconButton "done-all"
-            [ onClick Msg.SelectionDoneClicked
-            ]
-        , iconButton "create"
-            [ onClick Msg.SelectionEditClicked
-            ]
-        , iconButton "delete"
-            [ onClick Msg.SelectionTrashClicked
-            ]
-        , iconButton "cancel"
-            [ onClick Msg.ClearSelection ]
         ]
 
 

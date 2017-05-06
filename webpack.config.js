@@ -52,10 +52,12 @@ module.exports = {
         // new HtmlWebpackPlugin({ title: 'Example', template: './index.html' }),
         // new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer ] } })
         // new WriteFilePlugin(),
-        new webpack.optimize.CommonsChunkPlugin({
+        new webpack.optimize.CommonsChunkPlugin([{
             name: "common",
             minChunks: 2
-        })
+        }, {
+            name: "swrequire",
+        }])
     ],
 
     module: {

@@ -10,7 +10,7 @@ const $ = require("jquery")
 window.jQuery = $
 require("./jquery.trap")
 require("jquery-ui/ui/position")
-const Notifications = require("notifications")
+const Notifications = require("./notifications")
 const DB = require("./db")
 
     boot().catch(console.error)

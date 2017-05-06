@@ -11,7 +11,7 @@ window.jQuery = $
 require("./jquery.trap")
 require("jquery-ui/ui/position")
 const Notifications = require("./notifications")
-const DB = require("./db")
+const DB = require("./pouchdb-wrapper")
 
 //noinspection JSUnresolvedVariable
 const firebaseConfig =

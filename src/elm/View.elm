@@ -204,8 +204,6 @@ headerView m =
             Model.getMaybeUserProfile m
                 ?|> (Firebase.getPhotoURL >> attribute "src")
                 ?= iconA "account-circle"
-
-        --            iconA "done"
     in
         case Model.getEditMode m of
             EditMode.NewTodo form ->

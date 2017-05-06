@@ -70,10 +70,6 @@ async function boot() {
         }, 0)
     })
 
-
-
-
-
     app.ports["login"].subscribe(()=>{
         const intervalId = setInterval(()=>{
             let googleAuth = document.getElementById('google-auth');

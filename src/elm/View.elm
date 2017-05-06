@@ -227,11 +227,11 @@ headerView m =
 
 defaultHeader m =
     let
-        devModeString =
+        title =
             if m.developmentMode then
-                "dev"
+                "DEVELOPMENT MODE"
             else
-                "alpha"
+                "SimpleGTD - alpha"
 
         maybeUserProfile =
             Model.getMaybeUserProfile m
@@ -250,7 +250,7 @@ defaultHeader m =
                 ?= Paper.item [ onClick Msg.SignIn ] [ text "SignIn" ]
     in
         div [ class "flex-auto layout horizontal justified center" ]
-            [ h2 [ class "ellipsis" ] [ "SimpleGTD - " ++ devModeString |> text ]
+            [ h2 [ class "ellipsis" ] [ title |> text ]
             , div []
                 [ Paper.menuButton [ dynamicAlign, boolProperty "noOverlap" True ]
                     [ Html.node "iron-icon"

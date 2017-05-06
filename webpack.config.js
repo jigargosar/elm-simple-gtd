@@ -1,14 +1,12 @@
 const webpack = require('webpack');
 const path = require("path");
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const nodeENV = process.env.NODE_ENV || "development"
 
 const isDevEnv = nodeENV === "development"
 
-console.log("debug:", isDevEnv, nodeENV)
-
+console.log("process.env.NODE_ENV: ", isDevEnv, nodeENV)
 
 const outputDir = isDevEnv ? "dev" : "app"
 
@@ -30,9 +28,6 @@ module.exports = {
     },
 
     plugins: [
-        // new CopyWebpackPlugin(
-        //     [{from: 'static/'}]
-        //     , {copyUnmodified: true}),
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(nodeENV),
             'WEB_PACK_DEV_SERVER': process.env.WEB_PACK_DEV_SERVER || false
@@ -46,9 +41,6 @@ module.exports = {
                         process.env.WEB_PACK_DEV_SERVER
                             ? "http://localhost:8020/" : "https://simplegtd.com/"
                     ) + "\";\n");
-            },
-            inject: {
-                url: process.env.WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/",
             }
         }),
         // new webpack.ProvidePlugin({
@@ -81,12 +73,6 @@ module.exports = {
                 test: /\.(pcss|css)$/,
                 loader: 'style-loader!css-loader?importLoaders=1!postcss-loader'
             },
-            // {
-            //     test: /\.(html|json|ogg)$/,
-            //     // exclude: /node_modules|components/,
-            //     use: 'file-loader?name=[name].[ext]',
-            //     // use: 'file-loader',
-            // },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use: 'url-loader?limit=10000&mimetype=application/font-woff',

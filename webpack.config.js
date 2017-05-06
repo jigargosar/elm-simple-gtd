@@ -37,12 +37,6 @@ module.exports = {
             'NODE_ENV': JSON.stringify(nodeENV),
             'WEB_PACK_DEV_SERVER': process.env.WEB_PACK_DEV_SERVER || false
         }),
-        // new ServiceWorkerPlugin({
-        //     entry: './src/web/notification-sw.js',
-        //     inject: {
-        //         url: process.env.WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/",
-        //     }
-        // }),
         new ServiceWorkerWebpackPlugin({
             options: {"foo": "bar"},
             entry: './src/web/notification-sw.js',

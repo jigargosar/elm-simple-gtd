@@ -196,22 +196,6 @@ headerView m =
     let
         selectedTodoCount =
             Model.getSelectedTodoIdSet m |> Set.size
-
-        maybeUserProfile =
-            Model.getMaybeUserProfile m
-
-        userPhotoUrl =
-            Model.getMaybeUserProfile m ?|> Firebase.getPhotoURL ?= ""
-
-        userAccountAttribute =
-            Model.getMaybeUserProfile m
-                ?|> (Firebase.getPhotoURL >> attribute "src")
-                ?= iconA "account-circle"
-
-        userSignInLink =
-            maybeUserProfile
-                ?|> (\_ -> Paper.item [ onClick Msg.SignOut ] [ text "SignOut" ])
-                ?= Paper.item [ onClick Msg.SignIn ] [ text "SignIn" ]
     in
         case Model.getEditMode m of
             EditMode.NewTodo form ->
@@ -235,45 +219,65 @@ headerView m =
                 span [] [ "Group By: (P)rojects, (C)ontexts " |> text ]
 
             _ ->
-                let
-                    devModeString =
-                        if m.developmentMode then
-                            "dev"
-                        else
-                            "alpha"
-                in
-                    if selectedTodoCount == 0 then
-                        div [ class "flex-auto layout horizontal justified center" ]
-                            [ h2 [ class "ellipsis" ] [ "SimpleGTD - " ++ devModeString |> text ]
-                            , div []
-                                [ Paper.menuButton [ dynamicAlign, boolProperty "noOverlap" True ]
-                                    [ Html.node "iron-icon"
-                                        [ userAccountAttribute
-                                        , class "account"
-                                        , slotDropdownTrigger
-                                        ]
-                                        []
-                                    , Paper.listbox [ slotDropdownContent ]
-                                        [ userSignInLink
-                                        ]
-                                    ]
-                                ]
+                if selectedTodoCount == 0 then
+                    defaultHeader m
+                else
+                    span []
+                        [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
+                        , iconButton "done-all"
+                            [ onClick Msg.SelectionDoneClicked
                             ]
-                    else
-                        span []
-                            [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
-                            , iconButton "done-all"
-                                [ onClick Msg.SelectionDoneClicked
-                                ]
-                            , iconButton "create"
-                                [ onClick Msg.SelectionEditClicked
-                                ]
-                            , iconButton "delete"
-                                [ onClick Msg.SelectionTrashClicked
-                                ]
-                            , iconButton "cancel"
-                                [ onClick Msg.ClearSelection ]
+                        , iconButton "create"
+                            [ onClick Msg.SelectionEditClicked
                             ]
+                        , iconButton "delete"
+                            [ onClick Msg.SelectionTrashClicked
+                            ]
+                        , iconButton "cancel"
+                            [ onClick Msg.ClearSelection ]
+                        ]
+
+
+defaultHeader m =
+    let
+        devModeString =
+            if m.developmentMode then
+                "dev"
+            else
+                "alpha"
+
+        maybeUserProfile =
+            Model.getMaybeUserProfile m
+
+        userPhotoUrl =
+            Model.getMaybeUserProfile m ?|> Firebase.getPhotoURL ?= ""
+
+        userAccountAttribute =
+            Model.getMaybeUserProfile m
+                ?|> (Firebase.getPhotoURL >> attribute "src")
+                ?= iconA "account-circle"
+
+        userSignInLink =
+            maybeUserProfile
+                ?|> (\_ -> Paper.item [ onClick Msg.SignOut ] [ text "SignOut" ])
+                ?= Paper.item [ onClick Msg.SignIn ] [ text "SignIn" ]
+    in
+        div [ class "flex-auto layout horizontal justified center" ]
+            [ h2 [ class "ellipsis" ] [ "SimpleGTD - " ++ devModeString |> text ]
+            , div []
+                [ Paper.menuButton [ dynamicAlign, boolProperty "noOverlap" True ]
+                    [ Html.node "iron-icon"
+                        [ userAccountAttribute
+                        , class "account"
+                        , slotDropdownTrigger
+                        ]
+                        []
+                    , Paper.listbox [ slotDropdownContent ]
+                        [ userSignInLink
+                        ]
+                    ]
+                ]
+            ]
 
 
 addTodoFab m =

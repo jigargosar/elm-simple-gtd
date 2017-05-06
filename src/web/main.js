@@ -71,15 +71,11 @@ async function boot() {
     })
 
     app.ports["signIn"].subscribe(() => {
-        // const intervalId = setInterval(() => {
         let googleAuth = document.getElementById('google-auth');
-        // if (!googleAuth) return
         googleAuth
             .signInWithRedirect()
             .then(console.info)
             .catch(console.error)
-        // clearTimeout(intervalId);
-        // }, 500)
     })
 
     app.ports["signOut"].subscribe(() => {

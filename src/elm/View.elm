@@ -197,6 +197,9 @@ headerView m =
         selectedTodoCount =
             Model.getSelectedTodoIdSet m |> Set.size
 
+        maybeUserProfile =
+            Model.getMaybeUserProfile m
+
         userPhotoUrl =
             Model.getMaybeUserProfile m ?|> Firebase.getPhotoURL ?= ""
 
@@ -204,6 +207,11 @@ headerView m =
             Model.getMaybeUserProfile m
                 ?|> (Firebase.getPhotoURL >> attribute "src")
                 ?= iconA "account-circle"
+
+        userSignInLink =
+            maybeUserProfile
+                ?|> (\_ -> Paper.item [ onClick Msg.SignOut ] [ text "SignOut" ])
+                ?= Paper.item [ onClick Msg.SignIn ] [ text "SignIn" ]
     in
         case Model.getEditMode m of
             EditMode.NewTodo form ->
@@ -239,8 +247,7 @@ headerView m =
                                     ]
                                     []
                                 , Paper.listbox [ slotDropdownContent ]
-                                    [ Paper.item [ onClick Msg.SignIn ] [ text "SignIn" ]
-                                    , Paper.item [ onClick Msg.SignOut ] [ text "SignOut" ]
+                                    [ userSignInLink
                                     ]
                                 ]
                             ]

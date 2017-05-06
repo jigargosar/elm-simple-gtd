@@ -1,4 +1,8 @@
-importScripts('./common.js');
+"use strict"
+
+self.addEventListener('fetch', function (event) {
+    console.log("sw:fetch listener event",event)
+})
 
 self.addEventListener('notificationclick', function (event) {
     // console.log("notification click", event)
@@ -17,7 +21,8 @@ self.addEventListener('notificationclick', function (event) {
                 }
                 if (clients.openWindow) {
                     return clients
-                        .openWindow(url)
+                        // .openWindow(url)
+                        .openWindow("/")
                         .then(function(client) {
                             setTimeout(function () {
                                 postMessage(client, event)

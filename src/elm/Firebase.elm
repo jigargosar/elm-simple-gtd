@@ -92,3 +92,7 @@ type alias FCMToken =
 
 customSw =
     boolProperty "customSw" True
+
+
+type alias AppAttributes =
+    List ( String, String )

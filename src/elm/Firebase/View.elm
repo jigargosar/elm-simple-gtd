@@ -19,17 +19,18 @@ attributes =
     List.map (uncurry attribute)
 
 
+createAppAttributes =
+    attributes
+        [ "database-url" => "https://rational-mote-664.firebaseio.com"
+        , "api-key" => "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc"
+        , "messaging-sender-id" => "49437522774"
+        , "auth-domain" => "rational-mote-664.firebaseapp.com"
+        ]
+
+
 init m =
     div [ id "firebase-container" ]
-        [ Html.node "firebase-app"
-            (attributes
-                [ "database-url" => "https://rational-mote-664.firebaseio.com"
-                , "api-key" => "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc"
-                , "messaging-sender-id" => "49437522774"
-                , "auth-domain" => "rational-mote-664.firebaseapp.com"
-                ]
-            )
-            []
+        [ Html.node "firebase-app" createAppAttributes []
         , Html.node "firebase-auth"
             [ id "google-auth"
             , attribute "provider" "google"

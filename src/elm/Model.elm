@@ -72,6 +72,7 @@ init flags =
         , user = Firebase.NotLoggedIn
         , fcmToken = Nothing
         , firebaseAppAttributes = flags.firebaseAppAttributes
+        , developmentMode = flags.developmentMode
         }
 
 

@@ -54,6 +54,7 @@ type alias Model =
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken
     , firebaseAppAttributes : Firebase.AppAttributes
+    , developmentMode : Bool
     }
 
 
@@ -96,6 +97,7 @@ type alias Flags =
     , encodedContextList : List Context.Encoded
     , pouchDBRemoteSyncURI : String
     , firebaseAppAttributes : Firebase.AppAttributes
+    , developmentMode : Bool
     }
 
 

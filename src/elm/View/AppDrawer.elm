@@ -29,7 +29,7 @@ import Ext.Function.Infix exposing (..)
 import Model.Types exposing (..)
 import View.Shared exposing (..)
 import ViewModel
-import WebComponents exposing (iconP, onBoolPropertyChanged, paperIconButton)
+import WebComponents exposing (iconA, onBoolPropertyChanged, paperIconButton)
 
 
 view : Model.Types.Model -> ViewModel.Model -> Html Msg
@@ -57,7 +57,7 @@ view m viewModel =
                         ]
                         [ div []
                             [ paperIconButton
-                                [ iconP "menu"
+                                [ iconA "menu"
                                 , tabindex -1
                                 , attribute "drawer-toggle" ""
                                 , onClick Msg.ToggleDrawer
@@ -135,12 +135,12 @@ entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } 
         [ class "has-hover-elements"
         , onClick (SetView viewType)
         ]
-        [ Html.node "iron-icon" [ iconP icon.name, style [ "color" => icon.color ] ] []
+        [ Html.node "iron-icon" [ iconA icon.name, style [ "color" => icon.color ] ] []
         , itemBody [] [ headLineText title ]
         , div [ class "show-on-hover layout horizontal center" ]
             [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
             , WebComponents.icon "delete" []
-            , iconButton [ iconP "add", onClick onAddClicked ] []
+            , iconButton [ iconA "add", onClick onAddClicked ] []
             ]
         ]
 
@@ -152,7 +152,7 @@ entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } 
 entityListItem : Entity.ViewModel.EntityViewModel -> Html Msg
 entityListItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
-        [ Html.node "iron-icon" [ iconP vm.icon.name, style [ "color" => vm.icon.color ] ] []
+        [ Html.node "iron-icon" [ iconA vm.icon.name, style [ "color" => vm.icon.color ] ] []
         , itemBody [] [ View.Shared.defaultBadge vm ]
         , div [ class "show-on-hover" ] [ settingsButton vm.startEditingMsg ]
         ]
@@ -164,6 +164,6 @@ headLineText title =
 
 switchViewItem iconName viewType title =
     item [ onClick (SetView viewType) ]
-        [ Html.node "iron-icon" [ iconP iconName ] []
+        [ Html.node "iron-icon" [ iconA iconName ] []
         , itemBody [] [ text title ]
         ]

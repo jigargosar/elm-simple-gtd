@@ -40,7 +40,7 @@ import View.ReminderOverlay exposing (showReminderOverlay)
 import View.Shared exposing (..)
 import Todo.View
 import ViewModel
-import WebComponents exposing (doneAllIconP, dynamicAlign, icon, iconButton, iconP, iconTextButton, onPropertyChanged, paperIconButton, slotDropdownContent, slotDropdownTrigger, testDialog)
+import WebComponents exposing (doneAllIconP, dynamicAlign, icon, iconButton, iconA, iconTextButton, onPropertyChanged, paperIconButton, slotDropdownContent, slotDropdownTrigger, testDialog)
 
 
 init m =
@@ -108,7 +108,7 @@ appHeaderView m viewModel =
             [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
             ]
             [ paperIconButton
-                [ iconP "menu"
+                [ iconA "menu"
                 , tabindex -1
                 , attribute "drawer-toggle" ""
                 , onClick Msg.ToggleDrawer
@@ -138,9 +138,9 @@ runningTodoViewHelp { todoVM, elapsedTime } m =
         [ div [ class "title" ] [ text todoVM.text ]
         , div [ class "col" ]
             [ div [ class "elapsed-time" ] [ text (Ext.Time.toHHMMSS elapsedTime) ]
-            , paperIconButton [ iconP "av:pause" ] []
-            , paperIconButton [ iconP "av:stop", Msg.Stop |> onClick ] []
-            , paperIconButton [ iconP "check", Msg.MarkRunningTodoDone |> onClick ] []
+            , paperIconButton [ iconA "av:pause" ] []
+            , paperIconButton [ iconA "av:stop", Msg.Stop |> onClick ] []
+            , paperIconButton [ iconA "check", Msg.MarkRunningTodoDone |> onClick ] []
             ]
         ]
 
@@ -203,7 +203,9 @@ headerView m =
         userAccountAttribute =
             Model.getMaybeUserProfile m
                 ?|> (Firebase.getPhotoURL >> attribute "src")
-                ?= iconP "account-circle"
+                ?= iconA "account-circle"
+
+        --            iconA "done"
     in
         case Model.getEditMode m of
             EditMode.NewTodo form ->
@@ -232,11 +234,12 @@ headerView m =
                         [ h2 [ class "ellipsis" ] [ text "SimpleGTD - alpha" ]
                         , div []
                             [ Paper.menuButton [ dynamicAlign, boolProperty "noOverlap" True ]
-                                [ icon ""
+                                [ Html.node "iron-icon"
                                     [ userAccountAttribute
                                     , class "account"
                                     , slotDropdownTrigger
                                     ]
+                                    []
                                 , Paper.listbox [ slotDropdownContent ]
                                     [ Paper.item [ onClick Msg.Login ] [ text "Login" ]
                                     ]

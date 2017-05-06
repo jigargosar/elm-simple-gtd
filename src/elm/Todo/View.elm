@@ -466,7 +466,7 @@ doneIconButton vm =
     Paper.iconButton
         [ class ("done-" ++ toString (vm.isDone))
         , onClickStopPropagation (vm.onDoneClicked)
-        , iconP "check"
+        , iconA "check"
 
         --        , class "flex-none"
         , style [ "flex" => "0 0 auto" ]
@@ -479,7 +479,7 @@ doneIconButton2 vm =
     Paper.iconButton
         [ class ("done-icon done-" ++ toString (vm.isDone))
         , onClickStopPropagation (vm.onDoneClicked)
-        , iconP "done"
+        , iconA "done"
         , tabindex vm.tabindex
         ]
         []

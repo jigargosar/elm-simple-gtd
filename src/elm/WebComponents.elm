@@ -20,12 +20,12 @@ ironIcon =
     Html.node "iron-icon"
 
 
-iconP =
-    stringProperty "icon"
+iconA =
+    attribute "icon"
 
 
 icon iconName attributes =
-    ironIcon (attributes ++ [ iconP iconName ]) []
+    ironIcon (attributes ++ [ iconA iconName ]) []
 
 
 paperIconButton =
@@ -33,11 +33,11 @@ paperIconButton =
 
 
 iconButton iconName attributes =
-    paperIconButton (attributes ++ [ iconP iconName ]) []
+    paperIconButton (attributes ++ [ iconA iconName ]) []
 
 
 doneAllIconP =
-    iconP "done-all"
+    iconA "done-all"
 
 
 iconTextButton iconName text_ clickHandler =

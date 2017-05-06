@@ -53,6 +53,7 @@ type alias Model =
     , mainViewListFocusedDocumentId : Document.Id
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken
+    , firebaseAppAttributes : Firebase.AppAttributes
     }
 
 

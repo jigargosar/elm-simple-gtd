@@ -151,9 +151,9 @@ async function setupNotifications(app) {
 }
 
 const closeNotification = reg => async (tag) => {
-    const n = _.find(_.propEq("tag", tag), await reg.getNotifications())
-    if (n) {
-        n.close()
+    const notification = _.find(_.propEq("tag", tag), await reg.getNotifications())
+    if (notification) {
+        notification.close()
     }
 }
 

@@ -222,20 +222,7 @@ headerView m =
                 if selectedTodoCount == 0 then
                     defaultHeader m
                 else
-                    span []
-                        [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
-                        , iconButton "done-all"
-                            [ onClick Msg.SelectionDoneClicked
-                            ]
-                        , iconButton "create"
-                            [ onClick Msg.SelectionEditClicked
-                            ]
-                        , iconButton "delete"
-                            [ onClick Msg.SelectionTrashClicked
-                            ]
-                        , iconButton "cancel"
-                            [ onClick Msg.ClearSelection ]
-                        ]
+                    selectionHeader selectedTodoCount
 
 
 defaultHeader m =
@@ -278,6 +265,23 @@ defaultHeader m =
                     ]
                 ]
             ]
+
+
+selectionHeader selectedTodoCount =
+    span []
+        [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
+        , iconButton "done-all"
+            [ onClick Msg.SelectionDoneClicked
+            ]
+        , iconButton "create"
+            [ onClick Msg.SelectionEditClicked
+            ]
+        , iconButton "delete"
+            [ onClick Msg.SelectionTrashClicked
+            ]
+        , iconButton "cancel"
+            [ onClick Msg.ClearSelection ]
+        ]
 
 
 addTodoFab m =

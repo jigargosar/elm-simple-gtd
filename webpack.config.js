@@ -55,8 +55,6 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin([{
             name: "common",
             minChunks: 2
-        }, {
-            name: "swrequire",
         }])
     ],
 

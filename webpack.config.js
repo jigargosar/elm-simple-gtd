@@ -1,8 +1,7 @@
 const webpack = require('webpack');
 const path = require("path");
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const ServiceWorkerWebpackPlugin  = require('serviceworker-webpack-plugin');
-// const ServiceWorkerPlugin = require('serviceworker-config-webpack-plugin')
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const nodeENV = process.env.NODE_ENV || "development"
 
@@ -45,11 +44,14 @@ module.exports = {
         //     }
         // }),
         new ServiceWorkerWebpackPlugin({
-            options:{"foo":"bar"},
+            options: {"foo": "bar"},
             entry: './src/web/notification-sw.js',
-            filename:"notification-sw.js",
-            template:function () {
-                return Promise.resolve("const url = ", process.env.WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/");
+            filename: "notification-sw.js",
+            template: function () {
+                return Promise.resolve("var url = \"" + (
+                        process.env.WEB_PACK_DEV_SERVER
+                            ? "http://localhost:8020/" : "https://simplegtd.com/"
+                    ) + "\";\n");
             },
             inject: {
                 url: process.env.WEB_PACK_DEV_SERVER ? "http://localhost:8020/" : "https://simplegtd.com/",

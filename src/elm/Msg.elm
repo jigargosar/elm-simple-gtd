@@ -33,8 +33,8 @@ type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnFirebaseUserChanged Firebase.User
     | SetFCMToken Firebase.FCMToken
-    | Login
-    | Logout
+    | SignIn
+    | SignOut
     | RemotePouchSync EditMode.RemoteSyncForm
     | SetMainViewFocusedDocumentId Document.Id
     | TodoAction Todo.UpdateAction Todo.Id

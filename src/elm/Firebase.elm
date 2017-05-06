@@ -14,10 +14,10 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 
 
-port login : () -> Cmd msg
+port signIn : () -> Cmd msg
 
 
-port logout : () -> Cmd msg
+port signOut : () -> Cmd msg
 
 
 type alias UserModel =

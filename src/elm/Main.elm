@@ -103,11 +103,11 @@ update msg =
                 OnCommonMsg msg ->
                     CommonMsg.update msg
 
-                Login ->
-                    Return.command (Firebase.login ())
+                SignIn ->
+                    Return.command (Firebase.signIn ())
 
-                Logout ->
-                    Return.command (Firebase.logout ())
+                SignOut ->
+                    Return.command (Firebase.signOut ())
 
                 OnFirebaseUserChanged user ->
                     let

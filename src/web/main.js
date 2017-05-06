@@ -70,16 +70,24 @@ async function boot() {
         }, 0)
     })
 
-    app.ports["login"].subscribe(() => {
-        const intervalId = setInterval(() => {
-            let googleAuth = document.getElementById('google-auth');
-            if (!googleAuth) return
-            googleAuth
-                .signInWithRedirect()
-                .then(console.info)
-                .catch(console.error)
-            clearTimeout(intervalId);
-        }, 500)
+    app.ports["signIn"].subscribe(() => {
+        // const intervalId = setInterval(() => {
+        let googleAuth = document.getElementById('google-auth');
+        // if (!googleAuth) return
+        googleAuth
+            .signInWithRedirect()
+            .then(console.info)
+            .catch(console.error)
+        // clearTimeout(intervalId);
+        // }, 500)
+    })
+
+    app.ports["signOut"].subscribe(() => {
+        let googleAuth = document.getElementById('google-auth');
+        googleAuth
+            .signOut()
+            .then(console.info)
+            .catch(console.error)
     })
 
     app.ports["focusPaperInput"].subscribe((selector) => {

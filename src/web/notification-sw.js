@@ -1,7 +1,7 @@
-"use strict"
+// self.importScripts("./common.js")
 
 self.addEventListener('fetch', function (event) {
-    console.log("sw:fetch listener event",event)
+    // console.log("sw:fetch listener event",event, event.request.url)
 })
 
 self.addEventListener('notificationclick', function (event) {

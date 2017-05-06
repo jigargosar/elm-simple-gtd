@@ -34,6 +34,7 @@ type Msg
     | OnFirebaseUserChanged Firebase.User
     | SetFCMToken Firebase.FCMToken
     | Login
+    | Logout
     | RemotePouchSync EditMode.RemoteSyncForm
     | SetMainViewFocusedDocumentId Document.Id
     | TodoAction Todo.UpdateAction Todo.Id

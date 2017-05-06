@@ -17,6 +17,9 @@ import Json.Encode as E
 port login : () -> Cmd msg
 
 
+port logout : () -> Cmd msg
+
+
 type alias UserModel =
     { id : String
     , providerData : List ProviderData

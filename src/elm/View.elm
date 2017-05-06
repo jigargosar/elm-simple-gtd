@@ -240,6 +240,7 @@ headerView m =
                                     []
                                 , Paper.listbox [ slotDropdownContent ]
                                     [ Paper.item [ onClick Msg.Login ] [ text "Login" ]
+                                    , Paper.item [ onClick Msg.Logout ] [ text "Logout" ]
                                     ]
                                 ]
                             ]

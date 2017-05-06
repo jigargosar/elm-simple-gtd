@@ -106,6 +106,9 @@ update msg =
                 Login ->
                     Return.command (Firebase.login ())
 
+                Logout ->
+                    Return.command (Firebase.logout ())
+
                 OnFirebaseUserChanged user ->
                     let
                         _ =

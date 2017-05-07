@@ -15,6 +15,7 @@ import Json.Decode
 import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import List.Extra
+import ListSelection
 import Maybe.Extra as Maybe
 import Model.Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
 import Msg exposing (Msg, commonMsg)
@@ -239,7 +240,7 @@ createTodoViewModel vc todo =
             text |> String.trim |> String.Extra.ellipsis 100
 
         focused =
-            vc.mainViewListFocusedDocumentId == todoId
+            ListSelection.getSelectedOrDefault "" vc.listSelection == todoId
     in
         { isDone = Todo.getDone todo
         , isDeleted = Todo.getDeleted todo

@@ -35,6 +35,11 @@ getMaybeSelected { list, selectedIndex } =
     list |> List.getAt selectedIndex
 
 
+getSelectedOrDefault : a -> Model a -> a
+getSelectedOrDefault default { list, selectedIndex } =
+    list |> List.getAt selectedIndex ?= default
+
+
 selectItem : a -> ModelF a
 selectItem item ({ list, selectedIndex } as model) =
     list |> List.findIndex (equals item) ?|> setSelectedIndex_ # model ?= model

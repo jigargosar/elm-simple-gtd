@@ -24,7 +24,6 @@ boot().catch(console.error)
 async function boot() {
     $("#root").trap();
 
-    let syncList = []
     const dbMap = {
         "todo-db": await DB("todo-db"),
         "project-db": await DB("project-db"),
@@ -54,8 +53,7 @@ async function boot() {
 
     app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
         localStorage.setItem("pouchdb.remote-sync-uri", uri)
-        await Promise.all(_.map(sync => sync.cancel())(syncList))
-        syncList = _.compose(_.map(db => db.startRemoteSync(uri, "sgtd2-")), _.values)(dbMap)
+        _.map(db => db.startRemoteSync(uri, "sgtd2-"))(dbMap)
     })
 
 

@@ -10,6 +10,7 @@ PouchDB.plugin(require('pouchdb-upsert'))
 
 module.exports = async (dbName, indices = []) => {
     const db = new PouchDB(dbName)
+    let syncTracker = null;
 
     function createIndex(index) {
         return db.createIndex(index)
@@ -33,7 +34,10 @@ module.exports = async (dbName, indices = []) => {
         const dbNameWithPrefix = `${prefix}${dbName_}`
         console.log(`starting sync for ${dbNameWithPrefix}`)
         const remoteURL = `${remoteUrl}/${dbNameWithPrefix}`;
-        return db
+        if(syncTracker){
+            syncTracker.cancel()
+        }
+        const tracker = db
             .sync(remoteURL,
                 {live: true, retry: true},
                 (error, result) => {
@@ -44,6 +48,8 @@ module.exports = async (dbName, indices = []) => {
                     }
 
                 })
+        syncTracker = tracker
+        return tracker
     }
 
     const find = async options => (await db.find(options)).docs

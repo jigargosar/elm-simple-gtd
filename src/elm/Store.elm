@@ -2,6 +2,7 @@ port module Store exposing (..)
 
 import Dict
 import Document exposing (Document, Id)
+import Ext.Debug
 import Ext.Random as Random
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -89,15 +90,40 @@ update doc s =
 
 decode encodedDoc store =
     D.decodeValue store.decoder encodedDoc
+        |> Result.mapError (Debug.log "Store")
+        |> Result.toMaybe
 
 
 updateExternal : D.Value -> Store x -> Store x
 updateExternal encodedDoc store =
+    decode encodedDoc store ?|> insertExternal # store ?= store
+
+
+insertExternal doc store =
+    byIdDict store
+        |> Dict.insert (Document.getId doc) doc
+        |> Dict.values
+        |> (setList # store)
+
+
+updateExternalHelp newDoc store =
     let
-        newDoc =
-            decode encodedDoc store
+        id =
+            Document.getId newDoc
+
+        merge oldDoc =
+            let
+                mergedDoc =
+                    1
+            in
+                store
+
+        add =
+            prepend newDoc store
     in
-        store
+        findById id store
+            ?|> merge
+            ?= add
 
 
 generate : Random.Generator (Document x) -> Store x -> ( Document x, Store x )

@@ -20,7 +20,6 @@ const firebaseConfig =
         : require("./config/dev/firebase")
 
 boot().catch(console.error)
-
 async function boot() {
     $("#root").trap();
 
@@ -29,24 +28,19 @@ async function boot() {
         "project-db": await DB("project-db"),
         "context-db": await DB("context-db")
     }
-
     // _.mapObjIndexed(db=>db.startRemoteSync(), dbMap)
-    _.map(db => db.findAll())(dbMap)
+    const allDocsMap = _.map(db => db.findAll())(dbMap)
 
-    const todos = await dbMap["todo-db"].find({selector: {"_id": {"$ne": null}}})
-    const projects = await dbMap["project-db"].find({selector: {"_id": {"$ne": null}}})
-    const contexts = await dbMap["context-db"].find({selector: {"_id": {"$ne": null}}})
 
     const flags = {
         now: Date.now(),
-        encodedTodoList: todos,
-        encodedProjectList: projects,
-        encodedContextList: contexts,
+        encodedTodoList: await allDocsMap["todo-db"],
+        encodedProjectList: await allDocsMap["project-db"],
+        encodedContextList: await allDocsMap["context-db"],
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
         firebaseAppAttributes: firebaseConfig.appAttributes,
         developmentMode: developmentMode
     }
-
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]
         .embed(document.getElementById("elm-app-container"), flags)

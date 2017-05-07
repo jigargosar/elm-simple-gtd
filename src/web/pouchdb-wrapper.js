@@ -4,9 +4,9 @@ const PouchDB = require("pouchdb-browser")
 const _ = require("ramda")
 
 // PouchDB.debug.enable("*")
-PouchDB.debug.disable()
+// PouchDB.debug.disable()
 PouchDB.plugin(require('pouchdb-find'))
-PouchDB.plugin(require('pouchdb-upsert'))
+// PouchDB.plugin(require('pouchdb-upsert'))
 
 module.exports = async (dbName, indices = []) => {
     const db = new PouchDB(dbName)
@@ -76,6 +76,6 @@ module.exports = async (dbName, indices = []) => {
         deleteIndices,
         allDocs,
         startRemoteSync,
-        findAll:()=>find({selector: {"_id": "$exists"}})
+        findAll:()=>find({selector: {"_id": {"$ne": null}}})
     }
 }

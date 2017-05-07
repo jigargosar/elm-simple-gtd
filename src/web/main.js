@@ -32,12 +32,12 @@ async function boot() {
 
     const flags = {
         now: Date.now(),
-        // encodedTodoList: await allDocsMap["todo-db"],
-        // encodedProjectList: await allDocsMap["project-db"],
-        // encodedContextList: await allDocsMap["context-db"],
-        encodedTodoList: [],
-        encodedProjectList: [],
-        encodedContextList: [],
+        encodedTodoList: await allDocsMap["todo-db"],
+        encodedProjectList: await allDocsMap["project-db"],
+        encodedContextList: await allDocsMap["context-db"],
+        // encodedTodoList: [],
+        // encodedProjectList: [],
+        // encodedContextList: [],
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
         firebaseAppAttributes: firebaseConfig.appAttributes,
         developmentMode: developmentMode

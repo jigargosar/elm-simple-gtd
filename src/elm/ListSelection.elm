@@ -19,6 +19,14 @@ type alias ModelF a =
     Model a -> Model a
 
 
+setSelectedIndex_ selectedIndex model =
+    { model | selectedIndex = selectedIndex }
+
+
+setList_ list model =
+    { model | list = list }
+
+
 empty =
     Model [] 0
 
@@ -29,15 +37,7 @@ getMaybeSelected { list, selectedIndex } =
 
 selectItem : a -> ModelF a
 selectItem item ({ list, selectedIndex } as model) =
-    list |> List.findIndex (equals item) ?|> setSelectedIndex # model ?= model
-
-
-setSelectedIndex selectedIndex model =
-    { model | selectedIndex = selectedIndex }
-
-
-setList_ list model =
-    { model | list = list }
+    list |> List.findIndex (equals item) ?|> setSelectedIndex_ # model ?= model
 
 
 updateList list model =
@@ -52,7 +52,7 @@ selectMaybeItem maybeItem model =
 
 
 clampAndSetSelectedIndex index model =
-    List.clampIndex index model.list |> setSelectedIndex # model
+    List.clampIndex index model.list |> setSelectedIndex_ # model
 
 
 selectNext : ModelF a

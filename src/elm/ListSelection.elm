@@ -57,11 +57,24 @@ clampIndex index =
     .list >> listLastIndex >> clamp 0 # index
 
 
+increment num =
+    num + 1
+
+
+decrement num =
+    num - 1
+
+
 selectNext : ModelF a
-selectNext model =
-    model.selectedIndex + 1 |> clampAndSetSelectedIndex # model
+selectNext =
+    updateAndClampSelectedIndex increment
 
 
 selectPrev : ModelF a
-selectPrev model =
-    model.selectedIndex - 1 |> clampAndSetSelectedIndex # model
+selectPrev =
+    updateAndClampSelectedIndex decrement
+
+
+updateAndClampSelectedIndex : (Int -> Int) -> ModelF a
+updateAndClampSelectedIndex fn model =
+    fn model.selectedIndex |> clampAndSetSelectedIndex # model

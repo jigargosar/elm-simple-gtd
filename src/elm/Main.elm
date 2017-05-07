@@ -164,6 +164,15 @@ update msg =
                                 (\model ->
                                     { model | mainViewListFocusedDocumentId = nextId }
                                 )
+                                >> Return.map
+                                    (\model ->
+                                        { model
+                                            | listSelection =
+                                                model.listSelection
+                                                    |> ListSelection.updateList idList
+                                                    |> ListSelection.selectPrev
+                                        }
+                                    )
                                 >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
 
                         _ ->

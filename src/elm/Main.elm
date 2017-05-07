@@ -9,6 +9,7 @@ import Ext.Debug
 import Ext.Keyboard as Keyboard
 import Ext.Return as Return
 import Firebase
+import ListSelection
 import Model.Internal as Model
 import Model.RunningTodo as Model
 import Project
@@ -147,6 +148,15 @@ update msg =
                                 (\model ->
                                     { model | mainViewListFocusedDocumentId = prevId }
                                 )
+                                >> Return.map
+                                    (\model ->
+                                        { model
+                                            | listSelection =
+                                                model.listSelection
+                                                    |> ListSelection.updateList idList
+                                                    |> ListSelection.selectNext
+                                        }
+                                    )
                                 >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
 
                         Key.ArrowDown ->

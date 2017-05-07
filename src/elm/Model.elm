@@ -661,3 +661,12 @@ insertTodo constructWithId =
 
 setTodoStoreFromTuple tuple model =
     tuple |> Tuple.mapSecond (setTodoStore # model)
+
+
+onExternalEntityChange dbName encodedEntity model =
+    case dbName of
+        "todo-db" ->
+            Store.updateExternal encodedEntity
+
+        _ ->
+            model

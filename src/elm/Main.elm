@@ -105,7 +105,7 @@ update msg =
                     CommonMsg.update msg
 
                 OnStoreDocChanged dbName encodedDoc ->
-                    identity
+                    Return.map(Model.onExternalEntityChange dbName encodedDoc)
 
                 SignIn ->
                     Return.command (Firebase.signIn ())

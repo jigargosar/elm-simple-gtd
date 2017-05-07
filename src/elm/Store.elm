@@ -87,6 +87,19 @@ update doc s =
             |> (setList # s)
 
 
+decode encodedDoc store =
+    D.decodeValue store.decoder encodedDoc
+
+
+updateExternal : D.Value -> Store x -> Store x
+updateExternal encodedDoc store =
+    let
+        newDoc =
+            decode encodedDoc store
+    in
+        store
+
+
 generate : Random.Generator (Document x) -> Store x -> ( Document x, Store x )
 generate generator m =
     Random.step generator (getSeed m)

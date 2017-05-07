@@ -36,8 +36,14 @@ setSelectedIndex selectedIndex model =
     { model | selectedIndex = selectedIndex }
 
 
-setList list model =
-    { model | list = list }
+updateList list model =
+    let
+        newModel =
+            { model | list = list }
+    in
+        getMaybeSelected model
+            ?|> (selectItem # newModel)
+            ?= newModel
 
 
 clampAndSetSelectedIndex index model =

@@ -8,6 +8,7 @@ import Document
 import EditMode exposing (EditMode, TodoForm)
 import Ext.Keyboard as Keyboard
 import Firebase
+import ListSelection
 import Model.Internal exposing (..)
 import Msg exposing (Return)
 import Project
@@ -69,6 +70,7 @@ init flags =
             , selectedIndex = 0
             }
         , mainViewListFocusedDocumentId = ""
+        , listSelection = ListSelection.empty
         , user = Firebase.NotLoggedIn
         , fcmToken = Nothing
         , firebaseAppAttributes = flags.firebaseAppAttributes

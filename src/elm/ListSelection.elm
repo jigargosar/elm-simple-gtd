@@ -14,5 +14,22 @@ type alias Model a =
     }
 
 
+type alias ModelF a =
+    Model a -> Model a
+
+
 empty =
     Model [] 0
+
+
+getMaybeSelected { list, selectedIndex } =
+    list |> List.getAt selectedIndex
+
+
+selectItem : a -> ModelF a
+selectItem item ({ list, selectedIndex } as model) =
+    list |> List.findIndex (equals item) ?|> setSelectedIndex # model ?= model
+
+
+setSelectedIndex selectedIndex model =
+    { model | selectedIndex = selectedIndex }

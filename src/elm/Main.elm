@@ -105,7 +105,7 @@ update msg =
                     CommonMsg.update msg
 
                 OnStoreDocChanged dbName encodedDoc ->
-                    Return.map(Model.onExternalEntityChange dbName encodedDoc)
+                    Return.map (Model.onExternalEntityChange dbName encodedDoc)
 
                 SignIn ->
                     Return.command (Firebase.signIn ())
@@ -140,7 +140,7 @@ update msg =
                 SetMainViewFocusedDocumentId id ->
                     Return.map (\model -> { model | mainViewListFocusedDocumentId = id })
 
-                OnTodoListKeyDown ( prevId, nextId ) { key } ->
+                OnTodoListKeyDown idList ( prevId, nextId ) { key } ->
                     case key of
                         Key.ArrowUp ->
                             Return.map

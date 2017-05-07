@@ -127,7 +127,7 @@ groupByEntity entityVMList model =
     in
         Keyed.node "div"
             [ class "todo-list"
-            , prevNextIdPair |> Msg.OnTodoListKeyDown |> onKeyDown
+            , prevNextIdPair |> Msg.OnTodoListKeyDown idList |> onKeyDown
             ]
             entityViewList
 

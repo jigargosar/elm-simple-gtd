@@ -40,7 +40,6 @@ type Msg
     | SignIn
     | SignOut
     | RemotePouchSync EditMode.RemoteSyncForm
-    | SetMainViewFocusedDocumentId Document.Id
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction ReminderOverlay.Action
     | OnNotificationClicked TodoNotificationEvent

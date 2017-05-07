@@ -89,7 +89,7 @@ groupByEntity entityVMList model =
         createListItemView index entityView =
             let
                 focused =
-                    index == focusedIndex
+                    index == model.listSelection.selectedIndex
 
                 tabindexValue =
                     if focused then

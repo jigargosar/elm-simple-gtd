@@ -138,9 +138,6 @@ update msg =
                                 { model | testModel = { testModel | selectedIndex = idx } }
                         )
 
-                SetMainViewFocusedDocumentId id ->
-                    Return.map (\model -> { model | mainViewListFocusedDocumentId = id })
-
                 OnTodoListKeyDown idList { key } ->
                     case key of
                         Key.ArrowUp ->

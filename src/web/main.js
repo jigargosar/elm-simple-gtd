@@ -32,9 +32,12 @@ async function boot() {
 
     const flags = {
         now: Date.now(),
-        encodedTodoList: await allDocsMap["todo-db"],
-        encodedProjectList: await allDocsMap["project-db"],
-        encodedContextList: await allDocsMap["context-db"],
+        // encodedTodoList: await allDocsMap["todo-db"],
+        // encodedProjectList: await allDocsMap["project-db"],
+        // encodedContextList: await allDocsMap["context-db"],
+        encodedTodoList: [],
+        encodedProjectList: [],
+        encodedContextList: [],
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
         firebaseAppAttributes: firebaseConfig.appAttributes,
         developmentMode: developmentMode
@@ -47,7 +50,7 @@ async function boot() {
     _.mapObjIndexed((db, name) => db.onChange(
         (doc) =>
             // console.log(name, ":", doc.name || doc.text)
-            null
+            app.ports["pouchDBChanges"].send([name, doc])
     ))(dbMap)
 
     app.ports["syncWithRemotePouch"].subscribe(async (uri) => {

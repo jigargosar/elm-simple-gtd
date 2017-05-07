@@ -36,13 +36,13 @@ setSelectedIndex selectedIndex model =
     { model | selectedIndex = selectedIndex }
 
 
-setList list model =
+setList_ list model =
     { model | list = list }
 
 
 updateList list model =
     getMaybeSelected model
-        |> (selectMaybeItem # (setList list model))
+        |> (selectMaybeItem # (setList_ list model))
 
 
 selectMaybeItem maybeItem model =

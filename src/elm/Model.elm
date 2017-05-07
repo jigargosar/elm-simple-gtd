@@ -663,14 +663,16 @@ setTodoStoreFromTuple tuple model =
     tuple |> Tuple.mapSecond (setTodoStore # model)
 
 
-onExternalEntityChange dbName encodedEntity model =
+onExternalEntityChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            let
-                _ =
-                    Store.updateExternal encodedEntity
-            in
-                model
+            updateTodoStore (Store.updateExternal encodedEntity)
+
+        "project-db" ->
+            updateProjectStore (getProjectStore >> Store.updateExternal encodedEntity)
+
+        "context-db" ->
+            updateContextStore (getContextStore >> Store.updateExternal encodedEntity)
 
         _ ->
-            model
+            identity

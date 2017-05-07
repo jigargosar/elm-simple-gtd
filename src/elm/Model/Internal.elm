@@ -1,5 +1,6 @@
 module Model.Internal exposing (..)
 
+import Context
 import EditMode exposing (EditMode)
 import Project
 import Random.Pcg exposing (Seed)
@@ -87,8 +88,19 @@ updateProjectStore updater model =
     setProjectStore (updater model) model
 
 
+getContextStore : Model -> Context.Store
+getContextStore =
+    (.contextStore)
+
+
+setContextStore : Context.Store -> ModelF
 setContextStore contextStore model =
     { model | contextStore = contextStore }
+
+
+updateContextStore : (Model -> Context.Store) -> ModelF
+updateContextStore updater model =
+    setContextStore (updater model) model
 
 
 getMainViewType : Model -> MainViewType

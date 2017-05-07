@@ -76,6 +76,6 @@ module.exports = async (dbName, indices = []) => {
         deleteIndices,
         allDocs,
         startRemoteSync,
-        findAll:()=>find({selector: {"_id": {"$ne": null}}})
+        findAll:()=>find({selector: {"_id": "$exists"}})
     }
 }

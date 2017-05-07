@@ -28,9 +28,7 @@ async function boot() {
         "project-db": await DB("project-db"),
         "context-db": await DB("context-db")
     }
-    // _.mapObjIndexed(db=>db.startRemoteSync(), dbMap)
     const allDocsMap = _.map(db => db.findAll())(dbMap)
-
 
     const flags = {
         now: Date.now(),

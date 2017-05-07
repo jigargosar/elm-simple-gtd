@@ -666,7 +666,11 @@ setTodoStoreFromTuple tuple model =
 onExternalEntityChange dbName encodedEntity model =
     case dbName of
         "todo-db" ->
-            Store.updateExternal encodedEntity
+            let
+                _ =
+                    Store.updateExternal encodedEntity
+            in
+                model
 
         _ ->
             model

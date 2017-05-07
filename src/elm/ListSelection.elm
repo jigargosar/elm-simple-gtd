@@ -33,3 +33,35 @@ selectItem item ({ list, selectedIndex } as model) =
 
 setSelectedIndex selectedIndex model =
     { model | selectedIndex = selectedIndex }
+
+
+setList list model =
+    { model | list = list }
+
+
+clampAndSetSelectedIndex index model =
+    clampIndex index model |> setSelectedIndex # model
+
+
+listLastIndex list =
+    case list of
+        [] ->
+            0
+
+        _ ->
+            (List.length list) - 1
+
+
+clampIndex : Int -> Model a -> Int
+clampIndex index =
+    .list >> listLastIndex >> clamp 0 # index
+
+
+selectNext : ModelF a
+selectNext model =
+    model.selectedIndex + 1 |> clampAndSetSelectedIndex # model
+
+
+selectPrev : ModelF a
+selectPrev model =
+    model.selectedIndex - 1 |> clampAndSetSelectedIndex # model

@@ -1,5 +1,6 @@
 module ListSelection exposing (..)
 
+import Ext.List as List
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -40,22 +41,7 @@ setList list model =
 
 
 clampAndSetSelectedIndex index model =
-    clampIndex index model |> setSelectedIndex # model
-
-
-listLastIndex list =
-    case list of
-        [] ->
-            0
-
-        _ ->
-            (List.length list) - 1
-
-
-clampIndex : Int -> Model a -> Int
-clampIndex index =
-    .list >> listLastIndex >> clamp 0 # index
-
+    List.clampIndex index model.list |> setSelectedIndex # model
 
 
 selectNext : ModelF a

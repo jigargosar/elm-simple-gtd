@@ -44,7 +44,7 @@ async function boot() {
         .embed(document.getElementById("elm-app-container"), flags)
 
 
-    _.mapObjIndexed((db, name) => db.onChange((doc)=>console.log(name, ":", doc)))(dbMap)
+    _.mapObjIndexed((db, name) => db.onChange((doc)=>console.log(name, ":", doc.name || doc.text)))(dbMap)
 
     app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
         localStorage.setItem("pouchdb.remote-sync-uri", uri)

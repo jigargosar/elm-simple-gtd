@@ -75,7 +75,8 @@ export default async (dbName, indices = []) => {
         return db.changes({
             // since: 'now',
             live: true,
-            include_docs: true
+            include_docs: true,
+            limit:1
         }).on('change', function (change) {
             // console.log("change", change)
             callback(change.doc)

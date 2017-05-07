@@ -146,33 +146,25 @@ update msg =
                         Key.ArrowUp ->
                             Return.map
                                 (\model ->
-                                    { model | mainViewListFocusedDocumentId = prevId }
+                                    { model
+                                        | listSelection =
+                                            model.listSelection
+                                                |> ListSelection.updateList idList
+                                                |> ListSelection.selectNext
+                                    }
                                 )
-                                >> Return.map
-                                    (\model ->
-                                        { model
-                                            | listSelection =
-                                                model.listSelection
-                                                    |> ListSelection.updateList idList
-                                                    |> ListSelection.selectNext
-                                        }
-                                    )
                                 >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
 
                         Key.ArrowDown ->
                             Return.map
                                 (\model ->
-                                    { model | mainViewListFocusedDocumentId = nextId }
+                                    { model
+                                        | listSelection =
+                                            model.listSelection
+                                                |> ListSelection.updateList idList
+                                                |> ListSelection.selectPrev
+                                    }
                                 )
-                                >> Return.map
-                                    (\model ->
-                                        { model
-                                            | listSelection =
-                                                model.listSelection
-                                                    |> ListSelection.updateList idList
-                                                    |> ListSelection.selectPrev
-                                        }
-                                    )
                                 >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
 
                         _ ->

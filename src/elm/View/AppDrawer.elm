@@ -67,23 +67,31 @@ view m viewModel =
                         , headLineText viewModel.viewName
                         ]
                     ]
-                , Html.node "paper-listbox"
-                    [ stringProperty "selectable" "paper-item"
-                    , intProperty "selected" (getSelectedIndex viewModel)
-
-                    --                , stringProperty "attrForSelected" "draweritemselected"
-                    ]
-                    (entityListView contexts m.mainViewType
-                        ++ [ divider ]
-                        ++ entityListView projects m.mainViewType
-                        ++ [ divider ]
-                        ++ [ switchViewItem "delete" BinView "Bin"
-                           , switchViewItem "done" DoneView "Done"
-                           , switchViewItem "notification:sync" SyncView "Sync Settings"
-                           ]
-                    )
+                , navList viewModel m
                 ]
             ]
+
+
+navList viewModel m =
+    let
+        { contexts, projects } =
+            viewModel
+    in
+        Html.node "paper-listbox"
+            [ stringProperty "selectable" "paper-item"
+            , intProperty "selected" (getSelectedIndex viewModel)
+
+            --                , stringProperty "attrForSelected" "draweritemselected"
+            ]
+            (entityListView contexts m.mainViewType
+                ++ [ divider ]
+                ++ entityListView projects m.mainViewType
+                ++ [ divider ]
+                ++ [ switchViewItem "delete" BinView "Bin"
+                   , switchViewItem "done" DoneView "Done"
+                   , switchViewItem "notification:sync" SyncView "Sync Settings"
+                   ]
+            )
 
 
 getSelectedIndex { mainViewType, projects, contexts } =

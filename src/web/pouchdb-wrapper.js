@@ -8,7 +8,9 @@ const _ = require("ramda")
 PouchDB.plugin(require('pouchdb-find'))
 // PouchDB.plugin(require('pouchdb-upsert'))
 
-module.exports = async (dbName, indices = []) => {
+
+
+export default async (dbName, indices = []) => {
     const db = new PouchDB(dbName)
     let syncTracker = null;
 
@@ -79,3 +81,4 @@ module.exports = async (dbName, indices = []) => {
         findAll:()=>find({selector: {"_id": {"$ne": null}}})
     }
 }
+

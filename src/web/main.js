@@ -11,7 +11,7 @@ window.jQuery = $
 require("./jquery.trap")
 require("jquery-ui/ui/position")
 const Notifications = require("./notifications")
-const DB = require("./pouchdb-wrapper")
+import DB from "./pouchdb-wrapper"
 
 //noinspection JSUnresolvedVariable
 const developmentMode = NODE_ENV !== "production"

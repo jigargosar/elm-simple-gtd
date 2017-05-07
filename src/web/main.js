@@ -16,8 +16,9 @@ import DB from "./pouchdb-wrapper"
 //noinspection JSUnresolvedVariable
 const developmentMode = NODE_ENV !== "production"
 const firebaseConfig =
-    developmentMode ? require("./config/prod/firebase")
-        : require("./config/dev/firebase")
+    developmentMode ?
+        require("./config/dev/firebase") :
+        require("./config/prod/firebase")
 
 boot().catch(console.error)
 async function boot() {

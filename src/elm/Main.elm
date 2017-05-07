@@ -93,6 +93,7 @@ subscriptions m =
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.keyUps OnKeyUp
         , notificationClicked OnNotificationClicked
+        , Store.onChange OnStoreDocChanged
         ]
 
 
@@ -102,6 +103,9 @@ update msg =
         >> (case msg of
                 OnCommonMsg msg ->
                     CommonMsg.update msg
+
+                OnStoreDocChanged dbName encodedDoc ->
+                    identity
 
                 SignIn ->
                     Return.command (Firebase.signIn ())

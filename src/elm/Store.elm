@@ -18,6 +18,13 @@ import Random.Pcg as Random exposing (Seed)
 port pouchDBUpsert : ( String, String, D.Value ) -> Cmd msg
 
 
+port pouchDBChanges : (( String, D.Value ) -> msg) -> Sub msg
+
+
+onChange =
+    uncurry >> pouchDBChanges
+
+
 decodeList : Decoder (Document x) -> List E.Value -> List (Document x)
 decodeList decoder =
     List.map (D.decodeValue decoder)

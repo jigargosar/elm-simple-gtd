@@ -23,6 +23,9 @@ import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Firebase
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 
 
 type alias PrevNextIdPair =
@@ -31,6 +34,7 @@ type alias PrevNextIdPair =
 
 type Msg
     = OnCommonMsg CommonMsg.Msg
+    | OnStoreDocChanged String D.Value
     | OnFirebaseUserChanged Firebase.User
     | SetFCMToken Firebase.FCMToken
     | SignIn

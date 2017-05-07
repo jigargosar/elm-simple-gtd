@@ -5,6 +5,14 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 
 
+increment num =
+    num + 1
+
+
+decrement num =
+    num - 1
+
+
 apply a f =
     f a
 

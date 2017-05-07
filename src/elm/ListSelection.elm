@@ -57,13 +57,6 @@ clampIndex index =
     .list >> listLastIndex >> clamp 0 # index
 
 
-increment num =
-    num + 1
-
-
-decrement num =
-    num - 1
-
 
 selectNext : ModelF a
 selectNext =

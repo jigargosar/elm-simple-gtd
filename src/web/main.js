@@ -31,6 +31,7 @@ async function boot() {
     }
 
     // _.mapObjIndexed(db=>db.startRemoteSync(), dbMap)
+    _.map(db => db.findAll())(dbMap)
 
     const todos = await dbMap["todo-db"].find({selector: {"_id": {"$ne": null}}})
     const projects = await dbMap["project-db"].find({selector: {"_id": {"$ne": null}}})

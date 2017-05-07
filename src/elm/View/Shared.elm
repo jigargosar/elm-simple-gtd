@@ -50,7 +50,6 @@ type alias SharedViewModel =
     , activeContexts : List Context.Model
     , selection : Set Todo.Id
     , showDetails : Bool
-    , mainViewListFocusedDocumentId : Document.Id
     , listSelection : ListSelection.Model Document.Id
     }
 
@@ -77,7 +76,6 @@ createSharedViewModel model =
             Model.getNow model
     in
         { now = now
-        , mainViewListFocusedDocumentId = model.mainViewListFocusedDocumentId
         , listSelection = model.listSelection
         , projectByIdDict = Model.getProjectByIdDict model
         , contextByIdDict = Model.getContextByIdDict model

@@ -69,7 +69,6 @@ init flags =
             { list = List.range 0 10
             , selectedIndex = 0
             }
-        , mainViewListFocusedDocumentId = ""
         , listSelection = ListSelection.empty
         , user = Firebase.NotLoggedIn
         , fcmToken = Nothing

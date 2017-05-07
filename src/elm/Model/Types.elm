@@ -51,7 +51,6 @@ type alias Model =
     , pouchDBRemoteSyncURI : String
     , appDrawerForceNarrow : Bool
     , testModel : Test.Model.Model
-    , mainViewListFocusedDocumentId : Document.Id
     , listSelection : ListSelection.Model Document.Id
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken

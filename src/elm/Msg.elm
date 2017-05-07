@@ -70,7 +70,7 @@ type Msg
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | EditTodoFormKeyUp TodoForm KeyboardEvent
     | OnTestListKeyDown KeyboardEvent
-    | OnTodoListKeyDown (List Document.Id) PrevNextIdPair KeyboardEvent
+    | OnTodoListKeyDown (List Document.Id) KeyboardEvent
     | OnTestListItemFocus Int
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection

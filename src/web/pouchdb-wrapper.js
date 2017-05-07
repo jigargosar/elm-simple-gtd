@@ -4,10 +4,9 @@ const PouchDB = require("pouchdb-browser")
 const _ = require("ramda")
 
 // PouchDB.debug.enable("*")
-// PouchDB.debug.disable()
+PouchDB.debug.disable()
 PouchDB.plugin(require('pouchdb-find'))
-// PouchDB.plugin(require('pouchdb-upsert'))
-
+PouchDB.plugin(require('pouchdb-upsert'))
 
 
 export default async (dbName, indices = []) => {
@@ -27,6 +26,7 @@ export default async (dbName, indices = []) => {
     function bulkDocs(docs) {
         return db.bulkDocs(docs)
     }
+
     function upsert(id, doc) {
         return db.upsert(id, _.always(doc))
     }
@@ -63,11 +63,30 @@ export default async (dbName, indices = []) => {
         function remove(doc) {
             return db.put(_.merge(doc, {_deleted: true}))
         }
+
         return Promise.all(_.map(remove, await allDocs()))
     }
 
     // await deleteIndices();
     await Promise.all(_.map(createIndex, indices))
+
+
+    function onChange(callback) {
+        return db.changes({
+            // since: 'now',
+            live: true,
+            include_docs: true
+        }).on('change', function (change) {
+            // console.log("change", change)
+            callback(change.doc)
+        }).on('complete', function (info) {
+            // changes() was canceled
+        }).on('error', function (err) {
+            console.log(err);
+        });
+    }
+
+
 
     return {
         find,
@@ -78,7 +97,8 @@ export default async (dbName, indices = []) => {
         deleteIndices,
         allDocs,
         startRemoteSync,
-        findAll:()=>find({selector: {"_id": {"$ne": null}}})
+        findAll: () => find({selector: {"_id": {"$ne": null}}}),
+        onChange
     }
 }
 

@@ -17,17 +17,17 @@ import Todo.Form
 import Todo.ReminderForm
 
 
-type alias EditContextModel =
+type alias EditContextForm =
     { id : Document.Id
     , name : Context.Name
     }
 
 
 type alias EntityForm =
-    EditContextModel
+    EditContextForm
 
 
-type alias EditProjectModel =
+type alias EditProjectForm =
     { id : Document.Id
     , name : Project.Name
     }
@@ -45,8 +45,8 @@ type EditMode
     = NewTodo Todo.NewForm.Model
     | EditTodo Todo.Form.Model
     | EditTodoReminder Todo.ReminderForm.Model
-    | EditContext EditContextModel
-    | EditProject EditProjectModel
+    | EditContext EditContextForm
+    | EditProject EditProjectForm
     | EditSyncSettings SyncForm
     | None
 

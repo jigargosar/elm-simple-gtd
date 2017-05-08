@@ -90,7 +90,7 @@ init =
 
 subscriptions m =
     Sub.batch
-        [ Time.every (Time.second 10) (OnNowChanged)
+        [ Time.every (Time.second * 10) OnNowChanged
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.keyUps OnKeyUp
         , notificationClicked OnNotificationClicked

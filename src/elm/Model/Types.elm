@@ -39,7 +39,6 @@ type alias Model =
     , contextStore : Context.Store
     , editMode : EditMode
     , mainViewType : MainViewType
-    , seed : Seed
     , keyboardState : Keyboard.State
     , showDeleted : Bool
     , reminderOverlay : ReminderOverlay.Model

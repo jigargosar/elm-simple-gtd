@@ -56,7 +56,6 @@ init flags =
         , contextStore = contextStore
         , editMode = EditMode.none
         , mainViewType = GroupByContextView
-        , seed = seed
         , keyboardState = Keyboard.init
         , showDeleted = False
         , reminderOverlay = ReminderOverlay.none

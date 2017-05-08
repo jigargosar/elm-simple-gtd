@@ -14,20 +14,6 @@ import Time exposing (Time)
 import Todo
 
 
-getSeed : Model -> Seed
-getSeed =
-    (.seed)
-
-
-setSeed : Seed -> ModelF
-setSeed seed model =
-    { model | seed = seed }
-
-
-updateSeedM : (Model -> Seed) -> ModelF
-updateSeedM updater model =
-    setSeed (updater model) model
-
 
 getTodoStore : Model -> Todo.Store
 getTodoStore =

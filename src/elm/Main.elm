@@ -480,9 +480,6 @@ withNow msg =
 
 
 reminderOverlayAction action =
-    --                    Return.map (Model.updateReminderOverlay action)
-    --                        >> Return.withMaybe (Model.getReminderOverlayTodoId)
-    --                            (closeNotification >> Return.command)
     Return.andThen
         (\model ->
             model

@@ -57,7 +57,7 @@ initKeyed vc todo =
         ( Document.getId todo, view )
 
 
-type alias EditTodoViewModel =
+type alias EditViewModel =
     { todo : { text : Todo.Text }
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
@@ -65,7 +65,7 @@ type alias EditTodoViewModel =
     }
 
 
-createEditTodoViewModel : Todo.Model -> TodoForm -> EditTodoViewModel
+createEditTodoViewModel : Todo.Model -> TodoForm -> EditViewModel
 createEditTodoViewModel todo form =
     let
         todoId =
@@ -418,7 +418,7 @@ timeToolTip vm =
         []
 
 
-editView : TodoViewModel -> EditTodoViewModel -> Html Msg
+editView : TodoViewModel -> EditViewModel -> Html Msg
 editView vm evm =
     div
         [ class "todo-item editing"

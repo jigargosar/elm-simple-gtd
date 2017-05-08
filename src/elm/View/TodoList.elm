@@ -37,7 +37,7 @@ import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Entity.ViewModel exposing (EntityViewModel)
-import Todo.View exposing (EditTodoViewModel)
+import Todo.View exposing (EditViewModel)
 import Tuple2
 import View.Shared exposing (..)
 import WebComponents

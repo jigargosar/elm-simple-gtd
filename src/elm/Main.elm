@@ -561,7 +561,7 @@ onGlobalKeyUp key =
                         Key.CharP ->
                             andThenUpdate (SetView GroupByProjectView)
 
-                        Key.CharA ->
+                        Key.CharC ->
                             andThenUpdate (SetView GroupByContextView)
 
                         Key.CharB ->

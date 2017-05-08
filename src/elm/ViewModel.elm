@@ -13,7 +13,7 @@ import View.Shared exposing (SharedViewModel)
 
 
 type EntityView
-    = EntityView EntityViewModel
+    = GroupByEntity EntityViewModel
     | TodoView Todo.Model
 
 

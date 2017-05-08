@@ -79,7 +79,7 @@ groupByEntity viewModel entityVMList model =
         entityViewList =
             entityVMList
                 |> List.concatMap
-                    (\vm -> (EntityView vm) :: (vm.todoList .|> TodoView))
+                    (\vm -> (GroupByEntity vm) :: (vm.todoList .|> TodoView))
                 |> List.indexedMap createListItemView
 
         createListItemView index entityView =
@@ -97,7 +97,7 @@ groupByEntity viewModel entityVMList model =
                     tabindex tabindexValue
             in
                 case entityView of
-                    EntityView vm ->
+                    GroupByEntity vm ->
                         ( vm.id, entityHeaderView tabindexAV vc vm )
 
                     TodoView todo ->

@@ -63,17 +63,6 @@ filtered viewModel model =
                 ]
 
 
-listClampIndex list =
-    let
-        length =
-            List.length list
-
-        lastIndex =
-            max 0 (length - 1)
-    in
-        clamp 0 lastIndex
-
-
 groupByEntity : ViewModel.Model -> List EntityViewModel -> Model -> Html Msg
 groupByEntity viewModel entityVMList model =
     let

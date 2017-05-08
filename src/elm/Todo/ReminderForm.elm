@@ -16,7 +16,6 @@ type alias Model =
     { id : Document.Id
     , date : String
     , time : String
-    , reminderMenuOpen : Bool
     }
 
 
@@ -34,7 +33,6 @@ create todo now =
         { id = Document.getId todo
         , date = (Time.Format.format "%Y-%m-%d") timeInMilli
         , time = (Time.Format.format "%H:%M") timeInMilli
-        , reminderMenuOpen = False
         }
 
 

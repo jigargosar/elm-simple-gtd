@@ -15,7 +15,7 @@ import View.Shared exposing (SharedViewModel)
 
 type EntityView
     = GroupByEntity EntityViewModel
-    | TodoView Todo.View.TodoViewModel
+    | TodoView Todo.Model
 
 
 type alias Model =

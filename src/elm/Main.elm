@@ -159,9 +159,6 @@ update msg =
 
                 OnNotificationClicked { action, data } ->
                     let
-                        _ =
-                            Debug.log "action, data" ( action, data )
-
                         r =
                             case action of
                                 "mark-done" ->

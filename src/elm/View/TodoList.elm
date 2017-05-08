@@ -74,48 +74,8 @@ groupByEntity viewModel entityVMList model =
                         (EntityView vm)
                             :: (vm.todoList .|> TodoView)
                     )
-
-        findIndexOfId id =
-            entityViewList
-                |> List.findIndex (ViewModel.getIdOfEntityView >> equals id)
-
-        focusedIndex =
-            ListSelection.getMaybeSelected model.listSelection
-                ?+> findIndexOfId
-                ?= 0
-
-        createEntityView index entityViewType =
-            let
-                focused =
-                    index == focusedIndex
-
-                tabindexValue =
-                    if focused then
-                        0
-                    else
-                        -1
-
-                tabindexAV =
-                    tabindex tabindexValue
-            in
-                case entityViewType of
-                    EntityView vm ->
-                        Entity.View.initKeyed tabindexAV viewModel vm
-
-                    TodoView todo ->
-                        Todo.View.initKeyed tabindexAV (viewModel.createTodoViewModel todo)
-
-        idList =
-            entityVMList
-                |> List.concatMap (\vm -> vm.id :: (vm.todoList .|> Document.getId))
     in
-        Keyed.node "div"
-            [ class "entity-list"
-            , Msg.OnTodoListKeyDown idList |> onKeyDown
-            ]
-            (entityViewList
-                |> List.indexedMap createEntityView
-            )
+        listView entityViewList viewModel model
 
 
 listView entityViewList viewModel model =

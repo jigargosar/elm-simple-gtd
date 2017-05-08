@@ -28,7 +28,7 @@ init viewModel model =
         contextVMs =
             viewModel.contexts.entityList
     in
-        div [ id "main-view", class "" ]
+        div [ id "main-view" ]
             [ case Model.getMainViewType model of
                 GroupByContextView ->
                     View.TodoList.groupByContext viewModel model

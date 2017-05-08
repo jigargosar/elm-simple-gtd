@@ -52,7 +52,7 @@ initKeyed vc todo =
             vc.getMaybeEditTodoFormForTodo todo
                 |> Maybe.unpack
                     (\_ -> defaultView vm)
-                    (createEditTodoViewModel todo >> editView vm)
+                    (createEditTodoViewModel todo vc >> editView vm)
     in
         ( Document.getId todo, view )
 
@@ -66,8 +66,8 @@ type alias EditViewModel =
     }
 
 
-createEditTodoViewModel : Todo.Model -> TodoForm -> EditViewModel
-createEditTodoViewModel todo form =
+createEditTodoViewModel : Todo.Model -> SharedViewModel -> TodoForm -> EditViewModel
+createEditTodoViewModel todo vc form =
     let
         todoId =
             form.id
@@ -108,6 +108,7 @@ type alias TodoViewModel =
     , projects : List Project.Model
     , onReminderButtonClicked : Msg
     , reminder : ReminderViewModel
+    , edit : EditViewModel
     , onFocusIn : Msg
     , tabindex : Int
     }
@@ -267,6 +268,7 @@ createTodoViewModel vc todo =
         , projects = vc.activeProjects
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
+        , edit = createEditTodoViewModel todo vc (vc.getEditTodoForm todo)
         , onFocusIn = Msg.SetMainViewFocusedDocumentId todoId
         , tabindex =
             if focused then

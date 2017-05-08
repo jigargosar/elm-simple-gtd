@@ -43,6 +43,7 @@ type alias SharedViewModel =
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
     , getMaybeTodoReminderFormForTodo : Todo.Model -> Maybe Todo.ReminderForm.Model
     , getTodoReminderForm : Todo.Model -> Todo.ReminderForm.Model
+    , getEditTodoForm : Todo.Model -> Todo.Form.Model
     , getMaybeEditEntityFormForEntityId : Document.Id -> Maybe EditMode.EntityForm
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
@@ -74,15 +75,8 @@ createSharedViewModel model =
 
         now =
             Model.getNow model
-    in
-        { now = now
-        , listSelection = model.listSelection
-        , projectByIdDict = Model.getProjectByIdDict model
-        , contextByIdDict = Model.getContextByIdDict model
-        , activeProjects = Model.getActiveProjects model
-        , activeContexts = Model.getActiveContexts model
-        , selection = Model.getSelectedTodoIdSet model
-        , getMaybeEditTodoFormForTodo =
+
+        getMaybeEditTodoFormForTodo =
             \todo ->
                 case editMode of
                     EditMode.TodoForm form ->
@@ -93,12 +87,26 @@ createSharedViewModel model =
 
                     _ ->
                         Nothing
+    in
+        { now = now
+        , listSelection = model.listSelection
+        , projectByIdDict = Model.getProjectByIdDict model
+        , contextByIdDict = Model.getContextByIdDict model
+        , activeProjects = Model.getActiveProjects model
+        , activeContexts = Model.getActiveContexts model
+        , selection = Model.getSelectedTodoIdSet model
+        , getMaybeEditTodoFormForTodo = getMaybeEditTodoFormForTodo
         , getMaybeTodoReminderFormForTodo = getMaybeTodoReminderFormForTodo
         , getTodoReminderForm =
             \todo ->
                 todo
                     |> getMaybeTodoReminderFormForTodo
                     |> Maybe.unpack (\_ -> Todo.ReminderForm.create todo now) identity
+        , getEditTodoForm =
+            \todo ->
+                todo
+                    |> getMaybeEditTodoFormForTodo
+                    |> Maybe.unpack (\_ -> Todo.Form.create todo) identity
 
         --    , getMaybeEditProjectFormForProject =
         --        \project ->

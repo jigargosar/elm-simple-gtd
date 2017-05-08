@@ -24,15 +24,11 @@ type Action
     = SetText String
 
 
-create : Todo.Model -> Project.Name -> Context.Name -> Time -> Model
-create todo projectName contextName now =
-    let
-        timeInMilli =
-            Todo.getDueAt todo ?= now + Time.hour
-    in
-        { id = Document.getId todo
-        , todoText = Todo.getText todo
-        }
+create : Todo.Model -> Model
+create todo =
+    { id = Document.getId todo
+    , todoText = Todo.getText todo
+    }
 
 
 

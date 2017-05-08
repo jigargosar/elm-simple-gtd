@@ -1,6 +1,7 @@
 module ViewModel exposing (..)
 
-import Entity.ViewModel
+import Entity.ViewModel exposing (EntityViewModel)
+import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -9,6 +10,11 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model.Types exposing (MainViewType(..))
 import View.Shared exposing (SharedViewModel)
+
+
+type EntityView
+    = EntityView EntityViewModel
+    | TodoView Todo.Model
 
 
 type alias Model =

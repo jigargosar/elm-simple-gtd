@@ -40,7 +40,7 @@ import Entity.ViewModel exposing (EntityViewModel)
 import Todo.View exposing (EditViewModel)
 import Tuple2
 import View.Shared exposing (..)
-import ViewModel
+import ViewModel exposing (EntityView(..))
 import WebComponents
 
 
@@ -57,11 +57,6 @@ filtered =
                     ]
                     (todoList .|> todoView)
            )
-
-
-type EntityView
-    = EntityView EntityViewModel
-    | TodoView Todo.Model
 
 
 listClampIndex list =

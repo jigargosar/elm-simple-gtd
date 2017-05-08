@@ -158,16 +158,7 @@ update msg =
                         >> (syncWithRemotePouch form.uri |> command)
 
                 OnNotificationClicked { action, data } ->
-                    let
-                        r =
-                            case action of
-                                "mark-done" ->
-                                    Return.map (Model.updateTodoById [ Todo.SetDone True ] data.id)
-
-                                _ ->
-                                    identity
-                    in
-                        data.id |> ShowReminderOverlayForTodoId >> andThenUpdate
+                    data.id |> ShowReminderOverlayForTodoId >> andThenUpdate
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))

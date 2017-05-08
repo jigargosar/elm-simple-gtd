@@ -80,4 +80,4 @@ updateAndSelectNext =
 
 
 updateAndSelectPrev =
-    updateList >>> selectNext
+    updateList >>> selectPrev

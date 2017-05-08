@@ -47,14 +47,15 @@ initKeyed vc todo =
     let
         vm =
             createTodoViewModel vc todo
-
-        view =
-            if vm.edit.isEditing then
-                editView
-            else
-                defaultView
     in
-        ( Document.getId todo, view vm )
+        ( vm.key, init vm )
+
+
+init vm =
+    if vm.edit.isEditing then
+        editView vm
+    else
+        defaultView vm
 
 
 type alias EditViewModel =
@@ -96,6 +97,7 @@ createEditTodoViewModel vc todo =
 
 type alias TodoViewModel =
     { text : Todo.Text
+    , key : String
     , displayText : String
     , isMultiLine : Bool
     , isDone : Bool
@@ -256,6 +258,7 @@ createTodoViewModel vc todo =
             ListSelection.getSelectedOrDefault "" vc.listSelection == todoId
     in
         { isDone = Todo.getDone todo
+        , key = todoId
         , isDeleted = Todo.getDeleted todo
         , text = text
         , isMultiLine = isMultiLine

@@ -25,6 +25,7 @@ type alias Model =
     , mainViewType : MainViewType
     , header : { backgroundColor : String }
     , shared : SharedViewModel
+    , createTodoViewModel : Todo.Model -> Todo.View.TodoViewModel
     }
 
 
@@ -42,6 +43,9 @@ create model =
 
         ( viewName, headerBackgroundColor ) =
             getViewInfo mainViewType projectsVM contextsVM
+
+        sharedViewModel =
+            View.Shared.createSharedViewModel model
     in
         Model
             contextsVM
@@ -49,7 +53,8 @@ create model =
             viewName
             mainViewType
             { backgroundColor = headerBackgroundColor }
-            (View.Shared.createSharedViewModel model)
+            sharedViewModel
+            (Todo.View.createTodoViewModel sharedViewModel)
 
 
 getViewInfo mainViewType projectsVM contextsVM =

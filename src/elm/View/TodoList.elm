@@ -74,7 +74,7 @@ groupByEntity viewModel entityVMList model =
                 |> List.concatMap
                     (\vm ->
                         ( vm.id, GroupByEntity vm )
-                            :: (vm.todoList .|> apply2 ( .id, Todo.View.createTodoViewModel vc >> TodoView ))
+                            :: (vm.todoList .|> apply2 ( .id, viewModel.createTodoViewModel >> TodoView ))
                     )
 
         findIndexOfId id =

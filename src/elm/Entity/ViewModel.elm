@@ -5,7 +5,7 @@ import Dict
 import Document
 import EditMode exposing (EditMode)
 import Lazy
-import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(ToggleDeleted, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), EntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
+import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(ToggleDeleted, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), GroupByEntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -59,7 +59,7 @@ type alias DocumentWithName =
 type alias Config =
     { groupByFn : Todo.Model -> Document.Id
     , namePrefix : String
-    , entityType : EntityType
+    , entityType : GroupByEntityType
     , entityWrapper : DocumentWithName -> Entity
     , nullEntity : DocumentWithName
     , isNull : DocumentWithName -> Bool

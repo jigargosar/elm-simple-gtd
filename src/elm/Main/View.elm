@@ -37,10 +37,10 @@ init viewModel model =
                     View.TodoList.groupByProject viewModel model
 
                 ProjectView id ->
-                    View.TodoList.groupByEntityWithId projectVMs id model
+                    View.TodoList.groupByEntityWithId viewModel projectVMs id model
 
                 ContextView id ->
-                    View.TodoList.groupByEntityWithId contextVMs id model
+                    View.TodoList.groupByEntityWithId viewModel contextVMs id model
 
                 BinView ->
                     View.TodoList.filtered model

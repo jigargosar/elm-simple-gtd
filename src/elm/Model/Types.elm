@@ -81,7 +81,7 @@ type Entity
     | TodoEntity Todo.Model
 
 
-type EntityType
+type GroupByEntityType
     = ProjectEntityType
     | ContextEntityType
 

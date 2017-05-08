@@ -77,16 +77,16 @@ listClampIndex list =
 
 groupByContext : ViewModel.Model -> Model -> Html Msg
 groupByContext viewModel model =
-    groupByEntity viewModel.contexts.entityList model
+    groupByEntity viewModel viewModel.contexts.entityList model
 
 
 groupByProject : ViewModel.Model -> Model -> Html Msg
 groupByProject viewModel model =
-    groupByEntity viewModel.projects.entityList model
+    groupByEntity viewModel viewModel.projects.entityList model
 
 
-groupByEntity : List EntityViewModel -> Model -> Html Msg
-groupByEntity entityVMList model =
+groupByEntity : ViewModel.Model -> List EntityViewModel -> Model -> Html Msg
+groupByEntity viewModel entityVMList model =
     let
         vc =
             View.Shared.createSharedViewModel model
@@ -129,12 +129,12 @@ groupByEntity entityVMList model =
             entityViewList
 
 
-groupByEntityWithId entityVMs id =
+groupByEntityWithId viewModel entityVMs id =
     let
         vmSingleton =
             entityVMs |> List.find (.id >> equals id) |> Maybe.toList
     in
-        groupByEntity vmSingleton
+        groupByEntity viewModel vmSingleton
 
 
 entityHeaderView tabindexAV vc vm =

@@ -54,7 +54,6 @@ type EditMode
     | RemoteSync RemoteSyncForm
     | None
     | SwitchView
-    | SwitchToGroupedView
 
 
 none =

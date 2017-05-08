@@ -102,10 +102,7 @@ headerView m =
                     []
 
             EditMode.SwitchView ->
-                span [] [ "Switch View: (A)ll, (P)rojects, (D)one, (B)in, (G)roup By." |> text ]
-
-            EditMode.SwitchToGroupedView ->
-                span [] [ "Group By: (P)rojects, (C)ontexts " |> text ]
+                span [] [ "Switch View: (C)ontexts, (P)rojects, (D)one, (B)in." |> text ]
 
             _ ->
                 if selectedTodoCount == 0 then

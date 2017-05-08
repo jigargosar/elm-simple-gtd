@@ -112,7 +112,7 @@ groupByEntity entityVMList model =
                 |> List.concatMap (\vm -> vm.id :: (vm.todoList .|> Document.getId))
     in
         Keyed.node "div"
-            [ class "todo-list"
+            [ class "entity-list"
             , Msg.OnTodoListKeyDown idList |> onKeyDown
             ]
             entityViewList

@@ -155,14 +155,14 @@ update msg =
                                 (ListSelection.updateAndSelectPrev idList
                                     |> Model.updateListSelection
                                 )
-                                >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
+                                >> andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
 
                         Key.ArrowDown ->
                             Return.map
                                 (ListSelection.updateAndSelectNext idList
                                     |> Model.updateListSelection
                                 )
-                                >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
+                                >> andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
 
                         _ ->
                             identity

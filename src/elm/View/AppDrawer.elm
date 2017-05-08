@@ -32,8 +32,8 @@ import ViewModel
 import WebComponents exposing (iconA, onBoolPropertyChanged, paperIconButton)
 
 
-view : Model.Types.Model -> ViewModel.Model -> Html Msg
-view m viewModel =
+view : ViewModel.Model -> Model.Types.Model -> Html Msg
+view viewModel m =
     let
         { contexts, projects } =
             viewModel

@@ -29,7 +29,7 @@ newTodoInputId =
     "new-todo-input"
 
 
-init m viewModel =
+init viewModel m =
     App.header
         [ attribute "reveals" ""
         , attribute "condenses" ""

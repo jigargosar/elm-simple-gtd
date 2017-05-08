@@ -74,23 +74,14 @@ appDrawerLayoutView m =
     let
         viewModel =
             ViewModel.create m
-
-        { contexts, projects } =
-            viewModel
-
-        contextVMs =
-            contexts.entityList
-
-        projectVMs =
-            projects.entityList
     in
         App.drawerLayout
             [ boolProperty "forceNarrow" m.appDrawerForceNarrow
             ]
-            [ View.AppDrawer.view m viewModel
+            [ View.AppDrawer.view viewModel m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
-                [ View.Header.init m viewModel
-                , View.Main.init viewModel contextVMs projectVMs m
+                [ View.Header.init viewModel m
+                , View.Main.init viewModel m
                 ]
             ]
 

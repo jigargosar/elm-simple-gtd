@@ -20,44 +20,51 @@ import Model.Types exposing (MainViewType(..))
 import View.TodoList
 
 
-init viewModel contextVMs projectVMs model =
-    div [ id "main-view", class "" ]
-        [ case Model.getMainViewType model of
-            GroupByContextView ->
-                View.TodoList.groupByContext viewModel model
+init viewModel model =
+    let
+        projectVMs =
+            viewModel.projects.entityList
 
-            GroupByProjectView ->
-                View.TodoList.groupByProject viewModel model
+        contextVMs =
+            viewModel.contexts.entityList
+    in
+        div [ id "main-view", class "" ]
+            [ case Model.getMainViewType model of
+                GroupByContextView ->
+                    View.TodoList.groupByContext viewModel model
 
-            ProjectView id ->
-                View.TodoList.groupByEntityWithId projectVMs id model
+                GroupByProjectView ->
+                    View.TodoList.groupByProject viewModel model
 
-            ContextView id ->
-                View.TodoList.groupByEntityWithId contextVMs id model
+                ProjectView id ->
+                    View.TodoList.groupByEntityWithId projectVMs id model
 
-            BinView ->
-                View.TodoList.filtered model
+                ContextView id ->
+                    View.TodoList.groupByEntityWithId contextVMs id model
 
-            DoneView ->
-                View.TodoList.filtered model
+                BinView ->
+                    View.TodoList.filtered model
 
-            SyncView ->
-                let
-                    form =
-                        Model.getRemoteSyncForm model
-                in
-                    Paper.material [ class "static layout vertical" ]
-                        [ Paper.input
-                            [ attribute "label" "Cloudant URL or any CouchDB URL"
-                            , value form.uri
-                            , onInput (Msg.UpdateRemoteSyncFormUri form)
+                DoneView ->
+                    View.TodoList.filtered model
+
+                SyncView ->
+                    let
+                        form =
+                            Model.getRemoteSyncForm model
+                    in
+                        Paper.material [ class "static layout vertical" ]
+                            [ Paper.input
+                                [ attribute "label" "Cloudant URL or any CouchDB URL"
+                                , value form.uri
+                                , onInput (Msg.UpdateRemoteSyncFormUri form)
+                                ]
+                                []
+                            , div []
+                                [ Paper.button [ form |> Msg.RemotePouchSync >> onClick ] [ text "Sync" ]
+                                ]
                             ]
-                            []
-                        , div []
-                            [ Paper.button [ form |> Msg.RemotePouchSync >> onClick ] [ text "Sync" ]
-                            ]
-                        ]
 
-            TestView ->
-                Test.View.init model.testModel
-        ]
+                TestView ->
+                    Test.View.init model.testModel
+            ]

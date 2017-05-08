@@ -2,7 +2,7 @@ module Model.Types exposing (..)
 
 import Context
 import Document exposing (Id)
-import EditMode exposing (EditMode)
+import EditMode exposing (EditForm)
 import Ext.Keyboard as Keyboard
 import Firebase
 import ListSelection
@@ -37,7 +37,7 @@ type alias Model =
     , todoStore : Todo.Store
     , projectStore : Project.Store
     , contextStore : Context.Store
-    , editMode : EditMode
+    , editMode : EditForm
     , mainViewType : MainViewType
     , keyboardState : Keyboard.State
     , showDeleted : Bool

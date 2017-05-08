@@ -5,7 +5,7 @@ import Date
 import Date.Extra.Create
 import Dict.Extra
 import Document
-import EditMode exposing (EditMode)
+import EditMode exposing (EditForm)
 import Ext.Keyboard as Keyboard
 import Firebase
 import ListSelection
@@ -319,7 +319,7 @@ startEditingReminder todo =
     updateEditModeM (createEditReminderTodoMode todo)
 
 
-createEditReminderTodoMode : Todo.Model -> Model -> EditMode
+createEditReminderTodoMode : Todo.Model -> Model -> EditForm
 createEditReminderTodoMode todo model =
     Todo.ReminderForm.create todo model.now |> EditMode.EditTodoReminder
 
@@ -424,7 +424,7 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
         maybeModel ?= model
 
 
-createEntityEditMode : Entity -> Model -> EditMode
+createEntityEditMode : Entity -> Model -> EditForm
 createEntityEditMode entity model =
     case entity of
         ContextEntity context ->
@@ -437,7 +437,7 @@ createEntityEditMode entity model =
             createEditTodoMode todo model
 
 
-createEditTodoMode : Todo.Model -> Model -> EditMode
+createEditTodoMode : Todo.Model -> Model -> EditForm
 createEditTodoMode todo model =
     let
         projectName =

@@ -41,7 +41,7 @@ type alias SyncForm =
     { uri : String }
 
 
-type EditMode
+type EditForm
     = NewTodo Todo.NewForm.Model
     | EditTodo Todo.Form.Model
     | EditTodoReminder Todo.ReminderForm.Model

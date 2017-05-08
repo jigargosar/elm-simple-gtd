@@ -2,7 +2,7 @@ module Model.Internal exposing (..)
 
 import Context
 import Document
-import EditMode exposing (EditMode)
+import EditMode exposing (EditForm)
 import Ext.Keyboard as Keyboard
 import ListSelection
 import Project
@@ -30,17 +30,17 @@ updateTodoStore updater model =
     { model | todoStore = getTodoStore model |> updater }
 
 
-getEditMode : Model -> EditMode
+getEditMode : Model -> EditForm
 getEditMode =
     (.editMode)
 
 
-setEditMode : EditMode -> ModelF
+setEditMode : EditForm -> ModelF
 setEditMode editMode model =
     { model | editMode = editMode }
 
 
-updateEditModeM : (Model -> EditMode) -> ModelF
+updateEditModeM : (Model -> EditForm) -> ModelF
 updateEditModeM updater model =
     setEditMode (updater model) model
 

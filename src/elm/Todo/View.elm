@@ -59,6 +59,7 @@ initKeyed vc todo =
 
 type alias EditViewModel =
     { todo : { text : Todo.Text }
+    , isEditing : Bool
     , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
     , onDeleteClicked : Msg
@@ -77,6 +78,7 @@ createEditTodoViewModel todo form =
         { todo =
             { text = form.todoText
             }
+        , isEditing = True
         , onKeyUp = Msg.EditTodoFormKeyUp form
         , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
@@ -126,6 +128,60 @@ type alias ReminderViewModel =
     }
 
 
+createReminderViewModel : SharedViewModel -> Todo.Model -> ReminderViewModel
+createReminderViewModel vc todo =
+    let
+        form =
+            vc.getTodoReminderForm todo
+
+        updateReminderForm =
+            Msg.UpdateReminderForm form
+
+        maybeReminderForm =
+            vc.getMaybeTodoReminderFormForTodo todo
+
+        isEditing =
+            Maybe.isJust maybeReminderForm
+
+        overDueText =
+            "Overdue"
+
+        formatReminderTime time =
+            let
+                due =
+                    Date.fromTime time
+
+                now =
+                    Date.fromTime vc.now
+            in
+                if time < vc.now then
+                    overDueText
+                else
+                    Ext.Time.smartFormat vc.now time
+
+        smartFormat =
+            Ext.Time.smartFormat vc.now
+
+        displayText =
+            Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
+
+        dueAt =
+            Todo.getDueAt todo
+    in
+        { isEditing = isEditing
+        , date = form.date
+        , time = form.time
+        , displayText = displayText
+        , isOverDue = displayText == overDueText
+        , isSnoozed = Todo.isSnoozed todo
+        , dueAtToolTipText = Todo.getDueAt todo ?|> Ext.Time.formatDateTime ?= ""
+        , dayDiffInWords = dueAt ?|> Ext.Time.dayDiffInWords vc.now ?= ""
+        , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
+        , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
+        , startEditingMsg = Msg.StartEditingReminder todo
+        }
+
+
 createTodoViewModel : SharedViewModel -> Todo.Model -> TodoViewModel
 createTodoViewModel vc todo =
     let
@@ -163,59 +219,6 @@ createTodoViewModel vc todo =
                 ?= "Inbox"
                 |> String.append "@"
                 |> truncateName
-
-        createReminderViewModel : ReminderViewModel
-        createReminderViewModel =
-            let
-                form =
-                    vc.getTodoReminderForm todo
-
-                updateReminderForm =
-                    Msg.UpdateReminderForm form
-
-                maybeReminderForm =
-                    vc.getMaybeTodoReminderFormForTodo todo
-
-                isEditing =
-                    Maybe.isJust maybeReminderForm
-
-                overDueText =
-                    "Overdue"
-
-                formatReminderTime time =
-                    let
-                        due =
-                            Date.fromTime time
-
-                        now =
-                            Date.fromTime vc.now
-                    in
-                        if time < vc.now then
-                            overDueText
-                        else
-                            Ext.Time.smartFormat vc.now time
-
-                smartFormat =
-                    Ext.Time.smartFormat vc.now
-
-                displayText =
-                    Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
-
-                dueAt =
-                    Todo.getDueAt todo
-            in
-                { isEditing = isEditing
-                , date = form.date
-                , time = form.time
-                , displayText = displayText
-                , isOverDue = displayText == overDueText
-                , isSnoozed = Todo.isSnoozed todo
-                , dueAtToolTipText = Todo.getDueAt todo ?|> Ext.Time.formatDateTime ?= ""
-                , dayDiffInWords = dueAt ?|> Ext.Time.dayDiffInWords vc.now ?= ""
-                , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
-                , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
-                , startEditingMsg = Msg.StartEditingReminder todo
-                }
 
         text =
             Todo.getText todo
@@ -263,7 +266,7 @@ createTodoViewModel vc todo =
         , contexts = vc.activeContexts
         , projects = vc.activeProjects
         , onReminderButtonClicked = Msg.StartEditingReminder todo
-        , reminder = createReminderViewModel
+        , reminder = createReminderViewModel vc todo
         , onFocusIn = Msg.SetMainViewFocusedDocumentId todoId
         , tabindex =
             if focused then

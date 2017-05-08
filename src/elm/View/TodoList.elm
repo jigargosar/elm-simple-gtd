@@ -53,7 +53,7 @@ filtered viewModel model =
             viewModel.shared
 
         createTodoView todo =
-            Todo.View.initKeyed (Todo.View.createTodoViewModel vc todo)
+            Todo.View.initKeyed (tabindex -1) (Todo.View.createTodoViewModel vc todo)
     in
         model
             |> Model.getFilteredTodoList
@@ -110,7 +110,7 @@ groupByEntity viewModel entityVMList model =
                         Entity.View.initKeyed tabindexAV vc vm
 
                     TodoView todo ->
-                        Todo.View.initKeyed (viewModel.createTodoViewModel todo)
+                        Todo.View.initKeyed tabindexAV (viewModel.createTodoViewModel todo)
 
         idList =
             entityVMList

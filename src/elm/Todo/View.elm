@@ -42,16 +42,20 @@ import View.Shared exposing (SharedViewModel, defaultOkCancelButtons, defaultOkC
 import WebComponents exposing (..)
 
 
-initKeyed : TodoViewModel -> ( String, Html Msg )
-initKeyed vm =
-    ( vm.key, init vm )
+initKeyed : Attribute Msg -> TodoViewModel -> ( String, Html Msg )
+initKeyed tabindexAV vm =
+    ( vm.key, init tabindexAV vm )
 
 
-init vm =
-    if vm.edit.isEditing then
-        editView vm
-    else
-        defaultView vm
+init tabindexAV vm_ =
+    let
+        vm =
+            { vm_ | tabindexAV = tabindexAV }
+    in
+        if vm.edit.isEditing then
+            editView vm
+        else
+            defaultView vm
 
 
 type alias EditViewModel =
@@ -117,7 +121,7 @@ type alias TodoViewModel =
     , reminder : ReminderViewModel
     , edit : EditViewModel
     , onFocusIn : Msg
-    , tabindex : Int
+    , tabindexAV : Attribute Msg
     }
 
 
@@ -278,11 +282,7 @@ createTodoViewModel vc todo =
         , reminder = createReminderViewModel vc todo
         , edit = createEditTodoViewModel vc todo
         , onFocusIn = Msg.SetMainViewFocusedDocumentId todoId
-        , tabindex =
-            if focused then
-                0
-            else
-                -1
+        , tabindexAV = tabindex -1
         }
 
 
@@ -298,7 +298,7 @@ defaultView vm =
     div
         [ class "todo-item"
         , onFocusIn vm.onFocusIn
-        , tabindex vm.tabindex
+        , vm.tabindexAV
 
         --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))
         --        , onFocusOut (commonMsg.logString ("focusOut: " ++ vm.displayText))
@@ -309,14 +309,14 @@ defaultView vm =
                 , class "text-wrap"
                 , onClick vm.startEditingMsg
                 ]
-                [ doneIconButton2 vm
+                [ doneIconButton vm
                 , span [ class "display-text" ] [ text vm.displayText ]
                 ]
             , div
                 [ style [ "flex" => "0 1 auto" ]
                 , class "layout horizontal end-justified"
                 ]
-                [ reminderView vm.tabindex vm.reminder
+                [ reminderView vm
                 , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton vm ]
                 , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
                 ]
@@ -324,13 +324,13 @@ defaultView vm =
         ]
 
 
-dropdownTriggerWithTitle tabindexValue title =
-    div [ class "font-nowrap" ] [ text title ] |> dropdownTrigger tabindexValue
+dropdownTriggerWithTitle tabindexAV title =
+    div [ class "font-nowrap" ] [ text title ] |> dropdownTrigger tabindexAV
 
 
-dropdownTrigger tabindexValue content =
+dropdownTrigger tabindexAV content =
     div [ style [ "height" => "24px" ], class "layout horizontal font-body1", attribute "slot" "dropdown-trigger" ]
-        [ Paper.button [ class "padding-0 margin-0 shrink", tabindex tabindexValue ]
+        [ Paper.button [ class "padding-0 margin-0 shrink", tabindexAV ]
             [ div [ class "text-transform-none primary-text-color" ] [ content ]
             ]
         ]
@@ -338,7 +338,7 @@ dropdownTrigger tabindexValue content =
 
 contextMenuButton vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
-        [ dropdownTriggerWithTitle vm.tabindex vm.contextDisplayName
+        [ dropdownTriggerWithTitle vm.tabindexAV vm.contextDisplayName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
             (vm.contexts .|> createContextItem # vm)
@@ -347,7 +347,7 @@ contextMenuButton vm =
 
 projectMenuButton vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
-        [ dropdownTriggerWithTitle vm.tabindex vm.projectDisplayName
+        [ dropdownTriggerWithTitle vm.tabindexAV vm.projectDisplayName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
             (vm.projects .|> createProjectItem # vm)
@@ -358,30 +358,33 @@ slotDropDownTriggerA =
     attribute "slot" "dropdown-trigger"
 
 
-reminderView : Int -> ReminderViewModel -> Html Msg
-reminderView tabindexValue vm =
+reminderView : TodoViewModel -> Html Msg
+reminderView vm =
     let
+        reminderVM =
+            vm.reminder
+
         reminderTrigger =
-            if vm.displayText == "" then
-                iconButton "alarm-add" [ tabindex tabindexValue, slotDropDownTriggerA, onClick vm.startEditingMsg ]
+            if reminderVM.displayText == "" then
+                iconButton "alarm-add" [ vm.tabindexAV, slotDropDownTriggerA, onClick reminderVM.startEditingMsg ]
             else
-                dropdownTrigger tabindexValue
+                dropdownTrigger vm.tabindexAV
                     (div
-                        [ onClick vm.startEditingMsg
+                        [ onClick reminderVM.startEditingMsg
                         , classList
                             [ "reminder-text" => True
-                            , "overdue" => vm.isOverDue
+                            , "overdue" => reminderVM.isOverDue
                             ]
                         , style [ "padding" => "0 8px" ]
                         ]
-                        [ icon "av:snooze" [ classList [ "display-none" => not vm.isSnoozed ] ]
-                        , text vm.displayText
+                        [ icon "av:snooze" [ classList [ "display-none" => not reminderVM.isSnoozed ] ]
+                        , text reminderVM.displayText
                         ]
                     )
     in
         div []
             ([ Paper.menuButton
-                [ boolProperty "opened" vm.isEditing
+                [ boolProperty "opened" reminderVM.isEditing
                 , boolProperty "dynamicAlign" True
                 , boolProperty "stopKeyboardEventPropagation" True
                 ]
@@ -393,26 +396,26 @@ reminderView tabindexValue vm =
                     [ div [ class "font-subhead" ] [ text "Select date and time" ]
                     , Paper.input
                         [ type_ "date"
-                        , classList [ "auto-focus" => vm.isEditing ]
+                        , classList [ "auto-focus" => reminderVM.isEditing ]
                         , labelA "Date"
-                        , value vm.date
+                        , value reminderVM.date
                         , boolProperty "stopKeyboardEventPropagation" True
-                        , onChange vm.onDateChanged
+                        , onChange reminderVM.onDateChanged
                         ]
                         []
                     , Paper.input
                         [ type_ "time"
                         , labelA "Time"
-                        , value vm.time
+                        , value reminderVM.time
                         , boolProperty "stopKeyboardEventPropagation" True
-                        , onChange vm.onTimeChanged
+                        , onChange reminderVM.onTimeChanged
                         ]
                         []
                     , defaultOkCancelButtons
                     ]
                 ]
              ]
-                ++ (timeToolTip vm)
+                ++ (timeToolTip reminderVM)
             )
 
 
@@ -436,7 +439,7 @@ editView vm =
     div
         [ class "todo-item editing"
         , onFocusIn vm.onFocusIn
-        , tabindex vm.tabindex
+        , vm.tabindexAV
         ]
         [ div [ class "vertical layout flex-auto" ]
             [ div [ class "flex" ]
@@ -478,22 +481,9 @@ checkBoxView vm =
 doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
     Paper.iconButton
-        [ class ("done-" ++ toString (vm.isDone))
-        , onClickStopPropagation (vm.onDoneClicked)
-        , iconA "check"
-
-        --        , class "flex-none"
-        , style [ "flex" => "0 0 auto" ]
-        ]
-        []
-
-
-doneIconButton2 : TodoViewModel -> Html Msg
-doneIconButton2 vm =
-    Paper.iconButton
         [ class ("done-icon done-" ++ toString (vm.isDone))
         , onClickStopPropagation (vm.onDoneClicked)
         , iconA "done"
-        , tabindex vm.tabindex
+        , vm.tabindexAV
         ]
         []

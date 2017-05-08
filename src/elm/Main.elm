@@ -130,7 +130,7 @@ update msg =
                             }
                         )
 
-                OnTodoListKeyDown idList { key } ->
+                OnEntityListKeyDown idList { key } ->
                     case key of
                         Key.ArrowUp ->
                             Return.map

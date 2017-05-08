@@ -116,7 +116,7 @@ listView entityViewList viewModel model =
     in
         Keyed.node "div"
             [ class "entity-list"
-            , Msg.OnTodoListKeyDown idList |> onKeyDown
+            , Msg.OnEntityListKeyDown idList |> onKeyDown
             ]
             (entityViewList
                 |> List.indexedMap createEntityView

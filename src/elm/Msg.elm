@@ -69,7 +69,7 @@ type Msg
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | EditTodoFormKeyUp TodoForm KeyboardEvent
-    | OnTodoListKeyDown (List Document.Id) KeyboardEvent
+    | OnEntityListKeyDown (List Document.Id) KeyboardEvent
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection
     | SelectionDoneClicked

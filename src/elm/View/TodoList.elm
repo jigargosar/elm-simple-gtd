@@ -149,7 +149,7 @@ defaultView tabindexAV vm =
         ]
 
 
-editEntityView tabindexAV vm editModel =
+editEntityView tabindexAV vm form =
     div
         [ class "entity-item layout vertical"
         , tabindexAV
@@ -157,7 +157,7 @@ editEntityView tabindexAV vm editModel =
         [ input
             [ class "edit-entity-name-input auto-focus"
             , stringProperty "label" "Name"
-            , value (editModel.name)
+            , value (form.name)
             , onInput vm.onNameChanged
             , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
 

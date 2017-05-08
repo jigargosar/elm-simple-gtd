@@ -123,12 +123,6 @@ getContextNameOfTodo todo model =
     Todo.getContextId todo |> Context.findNameById # (model.contextStore)
 
 
-insertProjectIfNotExist2 : Project.Name -> ModelF
-insertProjectIfNotExist2 projectName =
-    (update2 projectStore now)
-        (Project.insertIfNotExistByName projectName)
-
-
 insertProjectIfNotExist : Project.Name -> ModelF
 insertProjectIfNotExist projectName =
     apply2With ( getNow, getProjectStore )
@@ -300,12 +294,14 @@ now =
     { get = .now, set = (\s b -> { b | now = s }) }
 
 
-update lens smallF big =
-    lens.set (smallF (lens.get big)) big
 
-
-update2 lens l2 smallF big =
-    lens.set (smallF (l2.get big) (lens.get big)) big
+--update lens smallF big =
+--    lens.set (smallF (lens.get big)) big
+--
+--
+--update2 lens l2 smallF big =
+--    lens.set (smallF (l2.get big) (lens.get big)) big
+--
 
 
 activateNewTodoMode : String -> ModelF

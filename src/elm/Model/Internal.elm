@@ -3,6 +3,7 @@ module Model.Internal exposing (..)
 import Context
 import Document
 import EditMode exposing (EditMode)
+import Ext.Keyboard as Keyboard
 import ListSelection
 import Project
 import Random.Pcg exposing (Seed)
@@ -12,7 +13,6 @@ import Ext.Function exposing (..)
 import Model.Types exposing (..)
 import Time exposing (Time)
 import Todo
-
 
 
 getTodoStore : Model -> Todo.Store
@@ -123,3 +123,23 @@ updateListSelectionM updater model =
 updateListSelection : (ListSelection.Model Document.Id -> ListSelection.Model Document.Id) -> ModelF
 updateListSelection updater model =
     setListSelection (updater (getListSelection model)) model
+
+
+getKeyboardState : Model -> Keyboard.State
+getKeyboardState =
+    (.keyboardState)
+
+
+setKeyboardState : Keyboard.State -> ModelF
+setKeyboardState keyboardState model =
+    { model | keyboardState = keyboardState }
+
+
+updateKeyboardStateM : (Model -> Keyboard.State) -> ModelF
+updateKeyboardStateM updater model =
+    setKeyboardState (updater model) model
+
+
+updateKeyboardState : (Keyboard.State -> Keyboard.State) -> ModelF
+updateKeyboardState updater model =
+    setKeyboardState (updater (getKeyboardState model)) model

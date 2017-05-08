@@ -151,10 +151,6 @@ update msg =
                     Return.map (Model.toggleForceNarrow)
 
                 RemotePouchSync form ->
-                    {- Return.map (\m -> { m | pouchDBRemoteSyncURI = form.uri })
-                       >> Return.map Model.deactivateEditingMode
-                       >> (syncWithRemotePouch form.uri |> command)
-                    -}
                     andThenUpdate SaveCurrentForm
                         >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
@@ -266,7 +262,7 @@ update msg =
                     onMsgList messages
 
                 OnKeyboardMsg msg ->
-                    Return.map (Model.update Model.keyboardState (Keyboard.update msg))
+                    Return.map (Model.updateKeyboardState (Keyboard.update msg))
 
                 SaveCurrentForm ->
                     Return.map (Model.saveCurrentForm)

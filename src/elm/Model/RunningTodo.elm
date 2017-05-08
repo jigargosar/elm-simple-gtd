@@ -53,7 +53,7 @@ stopRunningTodo =
 
 
 startTodo todo =
-    Model.updateMaybeRunningTodo (Model.getNow >> RunningTodo.start todo)
+    Model.updateMaybeRunningTodoM (Model.getNow >> RunningTodo.start todo)
 
 
 shouldBeep : Model -> Bool
@@ -66,7 +66,7 @@ shouldBeep =
 
 setLastBeepedAt : Time -> ModelF
 setLastBeepedAt now =
-    Model.updateMaybeRunningTodo
+    Model.updateMaybeRunningTodoM
         (Model.getMaybeRunningTodoInfo
             ?>> RunningTodo.setLastBeepedAt now
         )

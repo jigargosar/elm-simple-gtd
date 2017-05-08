@@ -384,12 +384,12 @@ activateNewTodoMode text =
 
 startEditingTodo : Todo.Model -> ModelF
 startEditingTodo todo =
-    updateEditMode (createEditTodoMode todo)
+    updateEditModeM (createEditTodoMode todo)
 
 
 startEditingReminder : Todo.Model -> ModelF
 startEditingReminder todo =
-    updateEditMode (createEditReminderTodoMode todo)
+    updateEditModeM (createEditReminderTodoMode todo)
 
 
 createEditReminderTodoMode : Todo.Model -> Model -> EditMode
@@ -400,7 +400,7 @@ createEditReminderTodoMode todo model =
 startEditingTodoById : Todo.Id -> ModelF
 startEditingTodoById id =
     applyMaybeWith (findTodoById id)
-        (createEditTodoMode >> updateEditMode)
+        (createEditTodoMode >> updateEditModeM)
 
 
 startEditingEntity : Entity -> ModelF
@@ -670,10 +670,10 @@ onExternalEntityChange dbName encodedEntity =
             updateTodoStore (Store.updateExternal encodedEntity)
 
         "project-db" ->
-            updateProjectStore (getProjectStore >> Store.updateExternal encodedEntity)
+            updateProjectStoreM (getProjectStore >> Store.updateExternal encodedEntity)
 
         "context-db" ->
-            updateContextStore (getContextStore >> Store.updateExternal encodedEntity)
+            updateContextStoreM (getContextStore >> Store.updateExternal encodedEntity)
 
         _ ->
             identity

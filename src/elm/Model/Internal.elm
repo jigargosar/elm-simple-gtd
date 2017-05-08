@@ -1,7 +1,9 @@
 module Model.Internal exposing (..)
 
 import Context
+import Document
 import EditMode exposing (EditMode)
+import ListSelection
 import Project
 import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
@@ -23,8 +25,8 @@ setSeed seed model =
     { model | seed = seed }
 
 
-updateSeed : (Model -> Seed) -> ModelF
-updateSeed updater model =
+updateSeedM : (Model -> Seed) -> ModelF
+updateSeedM updater model =
     setSeed (updater model) model
 
 
@@ -53,8 +55,8 @@ setEditMode editMode model =
     { model | editMode = editMode }
 
 
-updateEditMode : (Model -> EditMode) -> ModelF
-updateEditMode updater model =
+updateEditModeM : (Model -> EditMode) -> ModelF
+updateEditModeM updater model =
     setEditMode (updater model) model
 
 
@@ -68,8 +70,8 @@ setMaybeRunningTodo maybeRunningTodo model =
     { model | maybeRunningTodo = maybeRunningTodo }
 
 
-updateMaybeRunningTodo : (Model -> Maybe RunningTodo) -> ModelF
-updateMaybeRunningTodo updater model =
+updateMaybeRunningTodoM : (Model -> Maybe RunningTodo) -> ModelF
+updateMaybeRunningTodoM updater model =
     setMaybeRunningTodo (updater model) model
 
 
@@ -83,8 +85,8 @@ setProjectStore projectStore model =
     { model | projectStore = projectStore }
 
 
-updateProjectStore : (Model -> Project.Store) -> ModelF
-updateProjectStore updater model =
+updateProjectStoreM : (Model -> Project.Store) -> ModelF
+updateProjectStoreM updater model =
     setProjectStore (updater model) model
 
 
@@ -98,8 +100,8 @@ setContextStore contextStore model =
     { model | contextStore = contextStore }
 
 
-updateContextStore : (Model -> Context.Store) -> ModelF
-updateContextStore updater model =
+updateContextStoreM : (Model -> Context.Store) -> ModelF
+updateContextStoreM updater model =
     setContextStore (updater model) model
 
 
@@ -113,8 +115,8 @@ setMainViewType mainViewType model =
     { model | mainViewType = mainViewType }
 
 
-updateMainViewType : (Model -> MainViewType) -> ModelF
-updateMainViewType updater model =
+updateMainViewTypeM : (Model -> MainViewType) -> ModelF
+updateMainViewTypeM updater model =
     setMainViewType (updater model) model
 
 
@@ -128,6 +130,21 @@ setNow now model =
     { model | now = now }
 
 
-updateNow : (Model -> Time) -> ModelF
-updateNow updater model =
+updateNowM : (Model -> Time) -> ModelF
+updateNowM updater model =
     { model | now = updater model }
+
+
+getSelection : Model -> ListSelection.Model Document.Id
+getSelection =
+    (.selection)
+
+
+setSelection : ListSelection.Model Document.Id -> ModelF
+setSelection selection model =
+    { model | selection = selection }
+
+
+updateSelectionM : (Model -> ListSelection.Model Document.Id) -> ModelF
+updateSelectionM updater model =
+    setSelection (updater model) model

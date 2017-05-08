@@ -2,6 +2,7 @@ module ViewModel exposing (..)
 
 import Entity.ViewModel exposing (EntityViewModel)
 import Todo
+import Todo.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -14,7 +15,7 @@ import View.Shared exposing (SharedViewModel)
 
 type EntityView
     = GroupByEntity EntityViewModel
-    | TodoView Todo.Model
+    | TodoView Todo.View.TodoViewModel
 
 
 type alias Model =

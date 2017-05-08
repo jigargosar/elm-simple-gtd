@@ -73,3 +73,11 @@ selectPrev =
 updateAndClampSelectedIndex : (Int -> Int) -> ModelF a
 updateAndClampSelectedIndex fn model =
     fn model.selectedIndex |> clampAndSetSelectedIndex # model
+
+
+updateAndSelectNext =
+    updateList >>> selectNext
+
+
+updateAndSelectPrev =
+    updateList >>> selectNext

@@ -156,8 +156,7 @@ update msg =
                                     { model
                                         | listSelection =
                                             model.listSelection
-                                                |> ListSelection.updateList idList
-                                                |> ListSelection.selectPrev
+                                                |> ListSelection.updateAndSelectPrev idList
                                     }
                                 )
                                 >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
@@ -168,8 +167,7 @@ update msg =
                                     { model
                                         | listSelection =
                                             model.listSelection
-                                                |> ListSelection.updateList idList
-                                                |> ListSelection.selectNext
+                                                |> ListSelection.updateAndSelectNext idList
                                     }
                                 )
                                 >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")

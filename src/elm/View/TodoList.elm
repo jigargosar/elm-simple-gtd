@@ -11,6 +11,7 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
+import ListSelection
 import Maybe.Extra as Maybe
 import Model.Internal as Model
 import Msg exposing (..)
@@ -76,16 +77,28 @@ groupByEntity viewModel entityVMList model =
         vc =
             viewModel.shared
 
-        entityViewList =
+        entityIdViewPairList =
             entityVMList
                 |> List.concatMap
-                    (\vm -> (GroupByEntity vm) :: (vm.todoList .|> TodoView))
+                    (\vm -> ( vm.id, GroupByEntity vm ) :: (vm.todoList .|> apply2 ( .id, TodoView )))
+
+        findIndexOfId id =
+            entityIdViewPairList
+                |> List.findIndex (Tuple.first >> equals id)
+
+        focusedIndex =
+            ListSelection.getMaybeSelected model.listSelection
+                ?+> findIndexOfId
+                ?= 0
+
+        entityViewList =
+            entityIdViewPairList
                 |> List.indexedMap createListItemView
 
-        createListItemView index entityView =
+        createListItemView index ( id, entityView ) =
             let
                 focused =
-                    index == model.listSelection.selectedIndex
+                    index == focusedIndex
 
                 tabindexValue =
                     if focused then

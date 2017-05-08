@@ -1,5 +1,6 @@
 module ViewModel exposing (..)
 
+import Document
 import Entity.ViewModel exposing (EntityViewModel)
 import Todo
 import Todo.View
@@ -14,8 +15,17 @@ import View.Shared exposing (SharedViewModel)
 
 
 type EntityView
-    = GroupByEntity EntityViewModel
+    = EntityView EntityViewModel
     | TodoView Todo.Model
+
+
+getIdOfEntityView entityView =
+    case entityView of
+        TodoView todo ->
+            Document.getId todo
+
+        EntityView vm ->
+            vm.id
 
 
 type alias Model =

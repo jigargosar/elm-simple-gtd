@@ -70,28 +70,24 @@ groupByEntity viewModel entityVMList model =
         vc =
             viewModel.shared
 
-        entityIdViewPairList =
+        typedEntityViewList =
             entityVMList
                 |> List.concatMap
                     (\vm ->
-                        ( vm.id, GroupByEntity vm )
-                            :: (vm.todoList .|> apply2 ( .id, TodoView ))
+                        (EntityView vm)
+                            :: (vm.todoList .|> TodoView)
                     )
 
         findIndexOfId id =
-            entityIdViewPairList
-                |> List.findIndex (Tuple.first >> equals id)
+            typedEntityViewList
+                |> List.findIndex (ViewModel.getIdOfEntityView >> equals id)
 
         focusedIndex =
             ListSelection.getMaybeSelected model.listSelection
                 ?+> findIndexOfId
                 ?= 0
 
-        entityViewList =
-            entityIdViewPairList
-                |> List.indexedMap createListItemView
-
-        createListItemView index ( id, entityView ) =
+        createEntityView index entityViewType =
             let
                 focused =
                     index == focusedIndex
@@ -105,8 +101,8 @@ groupByEntity viewModel entityVMList model =
                 tabindexAV =
                     tabindex tabindexValue
             in
-                case entityView of
-                    GroupByEntity vm ->
+                case entityViewType of
+                    EntityView vm ->
                         Entity.View.initKeyed tabindexAV vc vm
 
                     TodoView todo ->
@@ -120,7 +116,9 @@ groupByEntity viewModel entityVMList model =
             [ class "entity-list"
             , Msg.OnTodoListKeyDown idList |> onKeyDown
             ]
-            entityViewList
+            (typedEntityViewList
+                |> List.indexedMap createEntityView
+            )
 
 
 groupByEntityWithId viewModel entityVMs id =

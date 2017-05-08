@@ -66,9 +66,12 @@ type alias EditViewModel =
     }
 
 
-createEditTodoViewModel : Todo.Model -> SharedViewModel -> TodoForm -> EditViewModel
-createEditTodoViewModel todo vc form =
+createEditTodoViewModel : SharedViewModel -> Todo.Model -> EditViewModel
+createEditTodoViewModel vc todo =
     let
+        form =
+            vc.getEditTodoForm todo
+
         todoId =
             form.id
 
@@ -274,7 +277,7 @@ createTodoViewModel vc todo =
         , projects = vc.activeProjects
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
-        , edit = createEditTodoViewModel todo vc (vc.getEditTodoForm todo)
+        , edit = createEditTodoViewModel vc todo
         , onFocusIn = Msg.SetMainViewFocusedDocumentId todoId
         , tabindex =
             if focused then

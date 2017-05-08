@@ -152,23 +152,15 @@ update msg =
                     case key of
                         Key.ArrowUp ->
                             Return.map
-                                (\model ->
-                                    { model
-                                        | listSelection =
-                                            model.listSelection
-                                                |> ListSelection.updateAndSelectPrev idList
-                                    }
+                                (ListSelection.updateAndSelectPrev idList
+                                    |> Model.updateListSelection
                                 )
                                 >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
 
                         Key.ArrowDown ->
                             Return.map
-                                (\model ->
-                                    { model
-                                        | listSelection =
-                                            model.listSelection
-                                                |> ListSelection.updateAndSelectNext idList
-                                    }
+                                (ListSelection.updateAndSelectNext idList
+                                    |> Model.updateListSelection
                                 )
                                 >> andThenUpdate (commonMsg.focus ".todo-list > [tabindex=0]")
 

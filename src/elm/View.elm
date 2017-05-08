@@ -19,7 +19,7 @@ import Set
 import Entity.ViewModel
 import Test.View
 import View.Header
-import View.Main
+import Main.View
 import View.TodoList
 import View.AppDrawer
 import Maybe.Extra as Maybe
@@ -81,7 +81,7 @@ appDrawerLayoutView m =
             [ View.AppDrawer.view viewModel m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ View.Header.init viewModel m
-                , View.Main.init viewModel m
+                , Main.View.init viewModel m
                 ]
             ]
 

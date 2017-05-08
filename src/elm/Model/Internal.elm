@@ -135,16 +135,21 @@ updateNowM updater model =
     { model | now = updater model }
 
 
-getSelection : Model -> ListSelection.Model Document.Id
-getSelection =
-    (.selection)
+getListSelection : Model -> ListSelection.Model Document.Id
+getListSelection =
+    (.listSelection)
 
 
-setSelection : ListSelection.Model Document.Id -> ModelF
-setSelection selection model =
-    { model | selection = selection }
+setListSelection : ListSelection.Model Document.Id -> ModelF
+setListSelection listSelection model =
+    { model | listSelection = listSelection }
 
 
-updateSelectionM : (Model -> ListSelection.Model Document.Id) -> ModelF
-updateSelectionM updater model =
-    setSelection (updater model) model
+updateListSelectionM : (Model -> ListSelection.Model Document.Id) -> ModelF
+updateListSelectionM updater model =
+    setListSelection (updater model) model
+
+
+updateListSelection : (ListSelection.Model Document.Id -> ListSelection.Model Document.Id) -> ModelF
+updateListSelection updater model =
+    setListSelection (updater (getListSelection model)) model

@@ -118,6 +118,51 @@ groupByEntity viewModel entityVMList model =
             )
 
 
+listView entityViewList viewModel model =
+    let
+        findIndexOfId id =
+            entityViewList
+                |> List.findIndex (ViewModel.getIdOfEntityView >> equals id)
+
+        focusedIndex =
+            ListSelection.getMaybeSelected model.listSelection
+                ?+> findIndexOfId
+                ?= 0
+
+        createEntityView index entityViewType =
+            let
+                focused =
+                    index == focusedIndex
+
+                tabindexValue =
+                    if focused then
+                        0
+                    else
+                        -1
+
+                tabindexAV =
+                    tabindex tabindexValue
+            in
+                case entityViewType of
+                    EntityView vm ->
+                        Entity.View.initKeyed tabindexAV viewModel vm
+
+                    TodoView todo ->
+                        Todo.View.initKeyed tabindexAV (viewModel.createTodoViewModel todo)
+
+        idList =
+            entityViewList
+                .|> ViewModel.getIdOfEntityView
+    in
+        Keyed.node "div"
+            [ class "entity-list"
+            , Msg.OnTodoListKeyDown idList |> onKeyDown
+            ]
+            (entityViewList
+                |> List.indexedMap createEntityView
+            )
+
+
 groupByEntityWithId viewModel entityVMs id =
     let
         vmSingleton =

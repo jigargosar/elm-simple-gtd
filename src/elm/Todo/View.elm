@@ -74,11 +74,17 @@ createEditTodoViewModel todo vc form =
 
         updateTodoForm =
             Msg.UpdateTodoForm form
+
+        maybeEditTodoForm =
+            vc.getMaybeEditTodoFormForTodo todo
+
+        isEditing =
+            Maybe.isJust maybeEditTodoForm
     in
         { todo =
             { text = form.todoText
             }
-        , isEditing = True
+        , isEditing = isEditing
         , onKeyUp = Msg.EditTodoFormKeyUp form
         , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted

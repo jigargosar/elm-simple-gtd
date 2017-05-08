@@ -401,7 +401,10 @@ saveCurrentForm model =
                 |> Tuple.mapFirst Document.getId
                 |> uncurry setTodoContextOrProjectBasedOnCurrentView
 
-        _ ->
+        EditMode.EditSyncSettings form ->
+            { model | pouchDBRemoteSyncURI = form.uri }
+
+        EditMode.None ->
             model
 
 

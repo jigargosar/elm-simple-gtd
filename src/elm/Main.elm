@@ -151,9 +151,12 @@ update msg =
                     Return.map (Model.toggleForceNarrow)
 
                 RemotePouchSync form ->
-                    Return.map (\m -> { m | pouchDBRemoteSyncURI = form.uri })
-                        >> Return.map Model.deactivateEditingMode
-                        >> (syncWithRemotePouch form.uri |> command)
+                    {- Return.map (\m -> { m | pouchDBRemoteSyncURI = form.uri })
+                       >> Return.map Model.deactivateEditingMode
+                       >> (syncWithRemotePouch form.uri |> command)
+                    -}
+                    andThenUpdate SaveCurrentForm
+                        >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
                 OnNotificationClicked { action, data } ->
                     data.id |> ShowReminderOverlayForTodoId >> andThenUpdate

@@ -49,12 +49,12 @@ initKeyed vc todo =
             createTodoViewModel vc todo
 
         view =
-            vc.getMaybeEditTodoFormForTodo todo
-                |> Maybe.unpack
-                    (\_ -> defaultView vm)
-                    (createEditTodoViewModel todo vc >> editView vm)
+            if vm.edit.isEditing then
+                editView
+            else
+                defaultView
     in
-        ( Document.getId todo, view )
+        ( Document.getId todo, view vm )
 
 
 type alias EditViewModel =
@@ -429,8 +429,8 @@ timeToolTip vm =
         []
 
 
-editView : TodoViewModel -> EditViewModel -> Html Msg
-editView vm evm =
+editView : TodoViewModel -> Html Msg
+editView vm =
     div
         [ class "todo-item editing"
         , onFocusIn vm.onFocusIn
@@ -441,14 +441,14 @@ editView vm evm =
                 [ Html.node "paper-textarea"
                     [ class "auto-focus"
                     , stringProperty "label" "Todo"
-                    , value (evm.todo.text)
+                    , value (vm.edit.todo.text)
                     , property "keyBindings" Json.Encode.null
                     , boolProperty "stopKeyboardEventPropagation" True
-                    , onInput evm.onTodoTextChanged
+                    , onInput vm.edit.onTodoTextChanged
                     ]
                     []
                 ]
-            , defaultOkCancelDeleteButtons evm.onDeleteClicked
+            , defaultOkCancelDeleteButtons vm.edit.onDeleteClicked
             ]
         ]
 

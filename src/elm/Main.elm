@@ -520,14 +520,6 @@ reminderOverlayAction action =
         )
 
 
-(.=) =
-    identity
-
-
-foo =
-    (\_ -> "f") .= "a"
-
-
 command =
     Return.command
 

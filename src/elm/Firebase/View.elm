@@ -25,12 +25,12 @@ init m =
         , Html.node "firebase-auth"
             [ id "google-auth"
             , attribute "provider" "google"
-            , onUserChanged Msg.OnFirebaseUserChanged
+            , onUserChanged Msg.OnUserChanged
             ]
             []
         , Html.node "firebase-messaging"
             [ id "fb-messaging"
-            , onFCMTokenChanged Msg.SetFCMToken
+            , onFCMTokenChanged Msg.OnFCMTokenChanged
             , customSw
             ]
             []

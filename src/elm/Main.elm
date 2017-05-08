@@ -94,7 +94,7 @@ subscriptions m =
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.keyUps OnKeyUp
         , notificationClicked OnNotificationClicked
-        , Store.onChange OnStoreDocChanged
+        , Store.onChange OnExternalEntityChanged
         ]
 
 
@@ -105,7 +105,7 @@ update msg =
                 OnCommonMsg msg ->
                     CommonMsg.update msg
 
-                OnStoreDocChanged dbName encodedDoc ->
+                OnExternalEntityChanged dbName encodedDoc ->
                     Return.map (Model.onExternalEntityChange dbName encodedDoc)
 
                 SignIn ->
@@ -114,29 +114,11 @@ update msg =
                 SignOut ->
                     Return.command (Firebase.signOut ())
 
-                OnFirebaseUserChanged user ->
-                    let
-                        _ =
-                            Debug.log "user" (user)
-                    in
-                        Return.map (Model.setUser user)
+                OnUserChanged user ->
+                    Return.map (Model.setUser user)
 
-                SetFCMToken token ->
-                    let
-                        _ =
-                            Debug.log "token" (token)
-                    in
-                        Return.map (Model.setFCMToken token)
-
-                OnTestListItemFocus idx ->
-                    Return.map
-                        (\model ->
-                            let
-                                testModel =
-                                    model.testModel
-                            in
-                                { model | testModel = { testModel | selectedIndex = idx } }
-                        )
+                OnFCMTokenChanged token ->
+                    Return.map (Model.setFCMToken token)
 
                 SetMainViewFocusedDocumentId id ->
                     Return.map
@@ -163,43 +145,6 @@ update msg =
                                     |> Model.updateListSelection
                                 )
                                 >> andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
-
-                        _ ->
-                            identity
-
-                OnTestListKeyDown { key } ->
-                    case key of
-                        Key.ArrowUp ->
-                            Return.map
-                                (\model ->
-                                    let
-                                        testModel =
-                                            model.testModel
-
-                                        selectedIndex =
-                                            testModel.selectedIndex
-                                                - 1
-                                                |> clamp 0 (testModel.list |> List.length >> (-) # 1)
-                                    in
-                                        { model | testModel = { testModel | selectedIndex = selectedIndex } }
-                                )
-                                >> andThenUpdate (commonMsg.focus ".test-list > [tabindex=0]")
-
-                        Key.ArrowDown ->
-                            Return.map
-                                (\model ->
-                                    let
-                                        testModel =
-                                            model.testModel
-
-                                        selectedIndex =
-                                            testModel.selectedIndex
-                                                + 1
-                                                |> clamp 0 (testModel.list |> List.length >> (-) # 1)
-                                    in
-                                        { model | testModel = { testModel | selectedIndex = selectedIndex } }
-                                )
-                                >> andThenUpdate (commonMsg.focus ".test-list > [tabindex=0]")
 
                         _ ->
                             identity

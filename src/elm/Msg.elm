@@ -34,9 +34,9 @@ type alias PrevNextIdPair =
 
 type Msg
     = OnCommonMsg CommonMsg.Msg
-    | OnStoreDocChanged String D.Value
-    | OnFirebaseUserChanged Firebase.User
-    | SetFCMToken Firebase.FCMToken
+    | OnExternalEntityChanged String D.Value
+    | OnUserChanged Firebase.User
+    | OnFCMTokenChanged Firebase.FCMToken
     | SignIn
     | SignOut
     | RemotePouchSync EditMode.RemoteSyncForm
@@ -69,9 +69,7 @@ type Msg
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | EditTodoFormKeyUp TodoForm KeyboardEvent
-    | OnTestListKeyDown KeyboardEvent
     | OnTodoListKeyDown (List Document.Id) KeyboardEvent
-    | OnTestListItemFocus Int
     | TodoCheckBoxClicked Todo.Model
     | ClearSelection
     | SelectionDoneClicked

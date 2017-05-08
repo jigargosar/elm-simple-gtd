@@ -65,10 +65,6 @@ init flags =
         , reminderOverlay = ReminderOverlay.none
         , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
         , appDrawerForceNarrow = False
-        , testModel =
-            { list = List.range 0 10
-            , selectedIndex = 0
-            }
         , listSelection = ListSelection.empty
         , user = Firebase.NotLoggedIn
         , fcmToken = Nothing

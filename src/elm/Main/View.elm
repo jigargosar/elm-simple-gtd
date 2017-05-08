@@ -7,7 +7,6 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Msg
 import Polymer.Paper as Paper
 import Polymer.App as App
-import Test.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -64,7 +63,4 @@ init viewModel model =
                                 [ Paper.button [ form |> Msg.RemotePouchSync >> onClick ] [ text "Sync" ]
                                 ]
                             ]
-
-                TestView ->
-                    Test.View.init model.testModel
             ]

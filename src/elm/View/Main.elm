@@ -20,14 +20,14 @@ import Model.Types exposing (MainViewType(..))
 import View.TodoList
 
 
-init contextVMs projectVMs model =
+init viewModel contextVMs projectVMs model =
     div [ id "main-view", class "" ]
         [ case Model.getMainViewType model of
             GroupByContextView ->
-                View.TodoList.groupByEntity contextVMs model
+                View.TodoList.groupByContext viewModel model
 
             GroupByProjectView ->
-                View.TodoList.groupByEntity projectVMs model
+                View.TodoList.groupByProject viewModel model
 
             ProjectView id ->
                 View.TodoList.groupByEntityWithId projectVMs id model

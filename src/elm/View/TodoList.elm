@@ -40,6 +40,7 @@ import Entity.ViewModel exposing (EntityViewModel)
 import Todo.View exposing (EditViewModel)
 import Tuple2
 import View.Shared exposing (..)
+import ViewModel
 import WebComponents
 
 
@@ -72,6 +73,16 @@ listClampIndex list =
             max 0 (length - 1)
     in
         clamp 0 lastIndex
+
+
+groupByContext : ViewModel.Model -> Model -> Html Msg
+groupByContext viewModel model =
+    groupByEntity viewModel.contexts.entityList model
+
+
+groupByProject : ViewModel.Model -> Model -> Html Msg
+groupByProject viewModel model =
+    groupByEntity viewModel.projects.entityList model
 
 
 groupByEntity : List EntityViewModel -> Model -> Html Msg

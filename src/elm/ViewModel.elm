@@ -8,6 +8,7 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model.Types exposing (MainViewType(..))
+import View.Shared exposing (SharedViewModel)
 
 
 type alias Model =
@@ -16,6 +17,7 @@ type alias Model =
     , viewName : String
     , mainViewType : MainViewType
     , header : { backgroundColor : String }
+    , shared : SharedViewModel
     }
 
 
@@ -34,7 +36,13 @@ create model =
         ( viewName, headerBackgroundColor ) =
             getViewInfo mainViewType projectsVM contextsVM
     in
-        Model contextsVM projectsVM viewName mainViewType { backgroundColor = headerBackgroundColor }
+        Model
+            contextsVM
+            projectsVM
+            viewName
+            mainViewType
+            { backgroundColor = headerBackgroundColor }
+            (View.Shared.createSharedViewModel model)
 
 
 getViewInfo mainViewType projectsVM contextsVM =

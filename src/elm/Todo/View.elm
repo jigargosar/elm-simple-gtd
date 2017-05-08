@@ -42,13 +42,9 @@ import View.Shared exposing (SharedViewModel, defaultOkCancelButtons, defaultOkC
 import WebComponents exposing (..)
 
 
-initKeyed : SharedViewModel -> Todo.Model -> ( String, Html Msg )
-initKeyed vc todo =
-    let
-        vm =
-            createTodoViewModel vc todo
-    in
-        ( vm.key, init vm )
+initKeyed : TodoViewModel -> ( String, Html Msg )
+initKeyed vm =
+    ( vm.key, init vm )
 
 
 init vm =

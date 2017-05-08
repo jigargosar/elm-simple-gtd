@@ -45,19 +45,22 @@ import ViewModel exposing (EntityView(..))
 import WebComponents
 
 
-filtered : Model -> Html Msg
-filtered =
-    apply2
-        ( View.Shared.createSharedViewModel >> Todo.View.initKeyed
-        , Model.getFilteredTodoList
-        )
-        >> (\( todoView, todoList ) ->
-                Keyed.node "paper-listbox"
-                    [ stringProperty "selected" "0"
-                    , stringProperty "selectedAttribute" "selected"
-                    ]
-                    (todoList .|> todoView)
-           )
+filtered : ViewModel.Model -> Model -> Html Msg
+filtered viewModel model =
+    let
+        vc =
+            viewModel.shared
+
+        createTodoView todo =
+            Todo.View.initKeyed (Todo.View.createTodoViewModel vc todo)
+    in
+        model
+            |> Model.getFilteredTodoList
+            .|> createTodoView
+            |> Keyed.node "paper-listbox"
+                [ stringProperty "selected" "0"
+                , stringProperty "selectedAttribute" "selected"
+                ]
 
 
 listClampIndex list =
@@ -114,7 +117,7 @@ groupByEntity viewModel entityVMList model =
                         ( vm.id, entityHeaderView tabindexAV vc vm )
 
                     TodoView todo ->
-                        Todo.View.initKeyed vc todo
+                        Todo.View.initKeyed (Todo.View.createTodoViewModel vc todo)
 
         idList =
             entityVMList

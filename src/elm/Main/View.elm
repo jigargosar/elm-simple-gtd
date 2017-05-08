@@ -43,10 +43,10 @@ init viewModel model =
                     View.TodoList.groupByEntityWithId viewModel contextVMs id model
 
                 BinView ->
-                    View.TodoList.filtered model
+                    View.TodoList.filtered viewModel model
 
                 DoneView ->
-                    View.TodoList.filtered model
+                    View.TodoList.filtered viewModel model
 
                 SyncView ->
                     let

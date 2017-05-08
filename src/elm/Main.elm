@@ -533,54 +533,9 @@ command =
 
 
 onGlobalKeyUp key =
-    Return.with (Model.getEditMode)
-        (\editMode ->
-            case editMode of
-                EditMode.None ->
-                    case key of
-                        Key.CharQ ->
-                            andThenUpdate StartAddingTodo
+    case key of
+        Key.Escape ->
+            andThenUpdate DeactivateEditingMode
 
-                        Key.CharC ->
-                            andThenUpdate ClearSelection
-
-                        Key.OpenBracket ->
-                            Return.command (Navigation.back 1)
-
-                        Key.CloseBracket ->
-                            Return.command (Navigation.forward 1)
-
-                        Key.CharG ->
-                            Return.map (Model.setEditMode EditMode.SwitchView)
-
-                        _ ->
-                            identity
-
-                EditMode.SwitchView ->
-                    (case key of
-                        Key.CharP ->
-                            andThenUpdate (SetView GroupByProjectView)
-
-                        Key.CharC ->
-                            andThenUpdate (SetView GroupByContextView)
-
-                        Key.CharB ->
-                            andThenUpdate (SetView BinView)
-
-                        Key.CharD ->
-                            andThenUpdate (SetView DoneView)
-
-                        _ ->
-                            identity
-                    )
-                        >> andThenUpdate DeactivateEditingMode
-
-                _ ->
-                    (case key of
-                        Key.Escape ->
-                            andThenUpdate DeactivateEditingMode
-
-                        _ ->
-                            identity
-                    )
-        )
+        _ ->
+            identity

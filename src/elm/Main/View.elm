@@ -31,10 +31,10 @@ init viewModel model =
         div [ id "main-view" ]
             [ case Model.getMainViewType model of
                 GroupByContextView ->
-                    View.TodoList.groupByContext viewModel model
+                    View.TodoList.groupByEntity viewModel viewModel.contexts.entityList model
 
                 GroupByProjectView ->
-                    View.TodoList.groupByProject viewModel model
+                    View.TodoList.groupByEntity viewModel viewModel.projects.entityList model
 
                 ProjectView id ->
                     View.TodoList.groupByEntityWithId viewModel projectVMs id model

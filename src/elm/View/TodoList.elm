@@ -75,16 +75,6 @@ listClampIndex list =
         clamp 0 lastIndex
 
 
-groupByContext : ViewModel.Model -> Model -> Html Msg
-groupByContext viewModel model =
-    groupByEntity viewModel viewModel.contexts.entityList model
-
-
-groupByProject : ViewModel.Model -> Model -> Html Msg
-groupByProject viewModel model =
-    groupByEntity viewModel viewModel.projects.entityList model
-
-
 groupByEntity : ViewModel.Model -> List EntityViewModel -> Model -> Html Msg
 groupByEntity viewModel entityVMList model =
     let

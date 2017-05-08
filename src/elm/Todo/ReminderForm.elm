@@ -1,7 +1,8 @@
 module Todo.ReminderForm exposing (..)
 
+import Date
 import Document
-import Time
+import Time exposing (Time)
 import Time.Format
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -44,3 +45,14 @@ set action model =
 
         SetTime value ->
             { model | time = value }
+
+
+getMaybeTime : Model -> Maybe Time
+getMaybeTime { id, date, time } =
+    let
+        dateTimeString =
+            date ++ " " ++ time
+    in
+        Date.fromString (dateTimeString)
+            !|> (Date.toTime >> Just)
+            != Nothing

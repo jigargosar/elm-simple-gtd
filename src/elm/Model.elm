@@ -272,20 +272,6 @@ createAndEditNewContext model =
 --            )
 
 
-updateTodoWithReminderForm : Todo.ReminderForm.Model -> ModelF
-updateTodoWithReminderForm { id, date, time } =
-    let
-        dateTimeString =
-            date ++ " " ++ time
-
-        maybeTime =
-            Date.fromString (dateTimeString)
-                !|> (Date.toTime >> Just)
-                != Nothing
-    in
-        updateTodoById [ Todo.SetTime maybeTime ] id
-
-
 isShowDetailsKeyPressed =
     keyboardState.get >> Keyboard.isAltDown >> not
 
@@ -405,23 +391,18 @@ saveCurrentForm model =
                 ?= model
 
         EditMode.EditTodo form ->
-            updateTodoById [ Todo.SetText form.todoText ] form.id
+            model |> updateTodoById [ Todo.SetText form.todoText ] form.id
 
         EditMode.EditTodoReminder form ->
-            updateTodoWithReminderForm form model
+            model |> updateTodoById [ Todo.SetTime (Todo.ReminderForm.getMaybeTime form) ] form.id
 
-        EditMode.NewTodo form ->
-            createTodoWithNewForm form model
+        EditMode.NewTodo text ->
+            insertTodo (Todo.init model.now text) model
+                |> Tuple.mapFirst Document.getId
+                |> uncurry setTodoContextOrProjectBasedOnCurrentView
 
         _ ->
             model
-
-
-createTodoWithNewForm : Todo.NewForm.Model -> ModelF
-createTodoWithNewForm { text } model =
-    insertTodo (Todo.init model.now text) model
-        |> Tuple.mapFirst Document.getId
-        |> uncurry setTodoContextOrProjectBasedOnCurrentView
 
 
 setTodoContextOrProjectBasedOnCurrentView todoId model =

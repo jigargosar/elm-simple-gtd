@@ -6,6 +6,7 @@ import Dict.Extra as Dict
 import Document
 import Dom
 import EditMode
+import Entity.View
 import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Html.Keyed as Keyed
@@ -106,7 +107,7 @@ groupByEntity viewModel entityVMList model =
             in
                 case entityView of
                     GroupByEntity vm ->
-                        ( vm.id, entityHeaderView tabindexAV vc vm )
+                        Entity.View.initKeyed tabindexAV vc vm
 
                     TodoView todo ->
                         Todo.View.initKeyed (viewModel.createTodoViewModel todo)
@@ -128,46 +129,3 @@ groupByEntityWithId viewModel entityVMs id =
             entityVMs |> List.find (.id >> equals id) |> Maybe.toList
     in
         groupByEntity viewModel vmSingleton
-
-
-entityHeaderView tabindexAV vc vm =
-    if vm.id /= "" then
-        vc.getMaybeEditEntityFormForEntityId vm.id
-            |> Maybe.unpack (\_ -> defaultView tabindexAV vm) (editEntityView tabindexAV vm)
-    else
-        defaultView tabindexAV vm
-
-
-defaultView tabindexAV vm =
-    div
-        [ class "entity-item layout horizontal justified width--100"
-        , tabindexAV
-        ]
-        [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
-        , WebComponents.iconButton "create"
-            [ class "flex-none", onClick vm.startEditingMsg, tabindexAV ]
-        ]
-
-
-editEntityView tabindexAV vm form =
-    div
-        [ class "entity-item layout vertical"
-        , tabindexAV
-        ]
-        [ input
-            [ class "edit-entity-name-input auto-focus"
-            , stringProperty "label" "Name"
-            , value (form.name)
-            , onInput vm.onNameChanged
-            , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
-
-            --                        , onKeyUp vm.onKeyUp
-            ]
-            []
-        , div [ class "layout horizontal" ]
-            [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
-            , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
-            , expand []
-            , WebComponents.iconButton "delete" [ onClick Msg.SelectionTrashClicked ]
-            ]
-        ]

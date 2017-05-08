@@ -223,21 +223,21 @@ update msg =
                 UpdateTodoForm form action ->
                     Return.map
                         (Todo.Form.set action form
-                            |> EditMode.TodoForm
+                            |> EditMode.EditTodo
                             >> Model.setEditMode
                         )
 
                 UpdateRemoteSyncFormUri form uri ->
                     Return.map
                         ({ form | uri = uri }
-                            |> EditMode.RemoteSync
+                            |> EditMode.EditSyncSettings
                             >> Model.setEditMode
                         )
 
                 UpdateReminderForm form action ->
                     Return.map
                         (Todo.ReminderForm.set action form
-                            |> EditMode.TodoReminderForm
+                            |> EditMode.EditTodoReminder
                             >> Model.setEditMode
                         )
 

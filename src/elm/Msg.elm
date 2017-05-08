@@ -4,7 +4,7 @@ import CommonMsg
 import Context
 import Document
 import Dom
-import EditMode exposing (TodoForm)
+import EditMode
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Model.Types exposing (..)
@@ -38,7 +38,7 @@ type Msg
     | OnFCMTokenChanged Firebase.FCMToken
     | SignIn
     | SignOut
-    | RemotePouchSync EditMode.RemoteSyncForm
+    | RemotePouchSync EditMode.SyncForm
     | SetMainViewFocusedDocumentId Document.Id
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction ReminderOverlay.Action
@@ -59,10 +59,10 @@ type Msg
     | SaveCurrentForm
     | FocusPaperInput String
     | AutoFocusPaperInput
-    | UpdateRemoteSyncFormUri EditMode.RemoteSyncForm String
+    | UpdateRemoteSyncFormUri EditMode.SyncForm String
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
-    | EditTodoFormKeyUp TodoForm KeyboardEvent
+    | EditTodoFormKeyUp Todo.Form.Model KeyboardEvent
     | OnEntityListKeyDown (List Document.Id) KeyboardEvent
     | SetView MainViewType
     | ShowReminderOverlayForTodoId Todo.Id

@@ -17,10 +17,6 @@ import Todo.Form
 import Todo.ReminderForm
 
 
-type alias TodoForm =
-    Todo.Form.Model
-
-
 type alias EditContextModel =
     { id : Document.Id
     , name : Context.Name
@@ -41,17 +37,17 @@ type alias NewTodoModel =
     Todo.Text
 
 
-type alias RemoteSyncForm =
+type alias SyncForm =
     { uri : String }
 
 
 type EditMode
     = NewTodo Todo.NewForm.Model
-    | TodoForm Todo.Form.Model
-    | TodoReminderForm Todo.ReminderForm.Model
+    | EditTodo Todo.Form.Model
+    | EditTodoReminder Todo.ReminderForm.Model
     | EditContext EditContextModel
     | EditProject EditProjectModel
-    | RemoteSync RemoteSyncForm
+    | EditSyncSettings SyncForm
     | None
 
 
@@ -77,7 +73,7 @@ editProjectSetName name epm =
 
 getMaybeEditTodoModel model =
     case model of
-        TodoForm model ->
+        EditTodo model ->
             Just model
 
         _ ->

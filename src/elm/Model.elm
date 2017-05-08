@@ -5,7 +5,7 @@ import Date
 import Date.Extra.Create
 import Dict.Extra
 import Document
-import EditMode exposing (EditMode, TodoForm)
+import EditMode exposing (EditMode)
 import Ext.Keyboard as Keyboard
 import Firebase
 import ListSelection
@@ -347,7 +347,7 @@ startEditingReminder todo =
 
 createEditReminderTodoMode : Todo.Model -> Model -> EditMode
 createEditReminderTodoMode todo model =
-    Todo.ReminderForm.create todo model.now |> EditMode.TodoReminderForm
+    Todo.ReminderForm.create todo model.now |> EditMode.EditTodoReminder
 
 
 startEditingTodoById : Todo.Id -> ModelF
@@ -412,10 +412,10 @@ saveCurrentForm model =
                 >> (setProjectStore # model)
                 ?= model
 
-        EditMode.TodoForm form ->
+        EditMode.EditTodo form ->
             updateTodoWithTodoForm form model
 
-        EditMode.TodoReminderForm form ->
+        EditMode.EditTodoReminder form ->
             updateTodoWithReminderForm form model
 
         EditMode.NewTodo form ->
@@ -474,7 +474,7 @@ createEditTodoMode todo model =
         contextName =
             getContextNameOfTodo todo model ?= ""
     in
-        Todo.Form.create todo |> EditMode.TodoForm
+        Todo.Form.create todo |> EditMode.EditTodo
 
 
 getMaybeEditTodoModel =
@@ -493,7 +493,7 @@ getRemoteSyncForm model =
     let
         maybeForm =
             case model.editMode of
-                EditMode.RemoteSync form ->
+                EditMode.EditSyncSettings form ->
                     Just form
 
                 _ ->
@@ -502,7 +502,7 @@ getRemoteSyncForm model =
         maybeForm ?= createRemoteSyncForm model
 
 
-createRemoteSyncForm : Model -> EditMode.RemoteSyncForm
+createRemoteSyncForm : Model -> EditMode.SyncForm
 createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 

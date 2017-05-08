@@ -3,7 +3,7 @@ module View.Shared exposing (..)
 import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
-import EditMode exposing (EditMode, TodoForm)
+import EditMode exposing (EditMode)
 import Entity.ViewModel
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
@@ -63,7 +63,7 @@ createSharedViewModel model =
         getMaybeTodoReminderFormForTodo =
             \todo ->
                 case editMode of
-                    EditMode.TodoReminderForm form ->
+                    EditMode.EditTodoReminder form ->
                         if Document.hasId form.id todo then
                             Just form
                         else
@@ -78,7 +78,7 @@ createSharedViewModel model =
         getMaybeEditTodoFormForTodo =
             \todo ->
                 case editMode of
-                    EditMode.TodoForm form ->
+                    EditMode.EditTodo form ->
                         if Document.hasId form.id todo then
                             Just form
                         else

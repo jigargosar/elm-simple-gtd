@@ -6,7 +6,7 @@ import Date.Distance exposing (inWords)
 import Dict
 import Document
 import Dom
-import EditMode exposing (TodoForm)
+import EditMode
 import Ext.Decode exposing (traceDecoder)
 import Ext.Time
 import Html.Attributes.Extra exposing (intProperty)

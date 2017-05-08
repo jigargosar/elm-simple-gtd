@@ -53,7 +53,6 @@ type EditMode
     | EditProject EditProjectModel
     | RemoteSync RemoteSyncForm
     | None
-    | SwitchView
 
 
 none =

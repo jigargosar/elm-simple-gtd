@@ -10,7 +10,6 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Model.Types exposing (..)
-import RunningTodo exposing (RunningTodo)
 import Time exposing (Time)
 import Todo
 
@@ -58,21 +57,6 @@ setEditMode editMode model =
 updateEditModeM : (Model -> EditMode) -> ModelF
 updateEditModeM updater model =
     setEditMode (updater model) model
-
-
-getMaybeRunningTodoInfo : Model -> Maybe RunningTodo
-getMaybeRunningTodoInfo =
-    (.maybeRunningTodo)
-
-
-setMaybeRunningTodo : Maybe RunningTodo -> ModelF
-setMaybeRunningTodo maybeRunningTodo model =
-    { model | maybeRunningTodo = maybeRunningTodo }
-
-
-updateMaybeRunningTodoM : (Model -> Maybe RunningTodo) -> ModelF
-updateMaybeRunningTodoM updater model =
-    setMaybeRunningTodo (updater model) model
 
 
 getProjectStore : Model -> Project.Store

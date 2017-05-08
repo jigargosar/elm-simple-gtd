@@ -10,7 +10,6 @@ import Project
 import Project
 import Random.Pcg exposing (Seed)
 import ReminderOverlay
-import RunningTodo exposing (RunningTodo)
 import Set exposing (Set)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -41,9 +40,7 @@ type alias Model =
     , editMode : EditMode
     , mainViewType : MainViewType
     , seed : Seed
-    , maybeRunningTodo : Maybe RunningTodo
     , keyboardState : Keyboard.State
-    , selection : Selection
     , showDeleted : Bool
     , reminderOverlay : ReminderOverlay.Model
     , pouchDBRemoteSyncURI : String

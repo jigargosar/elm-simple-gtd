@@ -13,7 +13,6 @@ import Model.Internal exposing (..)
 import Msg exposing (Return)
 import Project
 import ReminderOverlay
-import RunningTodo exposing (RunningTodo)
 import Dict
 import Json.Encode as E
 import List.Extra as List
@@ -58,9 +57,7 @@ init flags =
         , editMode = EditMode.none
         , mainViewType = GroupByContextView
         , seed = seed
-        , maybeRunningTodo = Nothing
         , keyboardState = Keyboard.init
-        , selection = Set.empty
         , showDeleted = False
         , reminderOverlay = ReminderOverlay.none
         , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
@@ -145,39 +142,6 @@ insertContextIfNotExist name =
         (Context.insertIfNotExistByName name
             >>> (\contextStore model -> { model | contextStore = contextStore })
         )
-
-
-toggleSelection todo m =
-    let
-        todoId =
-            Document.getId todo
-
-        selection =
-            m.selection
-    in
-        if (Set.member todoId selection) then
-            { m | selection = Set.remove todoId selection }
-        else
-            { m | selection = Set.insert todoId selection }
-
-
-clearSelection m =
-    { m | selection = Set.empty }
-
-
-getMaybeSelectedTodo m =
-    let
-        selection =
-            m.selection
-    in
-        if Set.size selection == 1 then
-            Set.toList selection |> List.head ?+> (Store.findById # m.todoStore)
-        else
-            Nothing
-
-
-getSelectedTodoIdSet =
-    (.selection)
 
 
 getEntityStore entityType =
@@ -367,12 +331,6 @@ update2 lens l2 smallF big =
     lens.set (smallF (l2.get big) (lens.get big)) big
 
 
-
----
-
-
-{-| editmode stuff
--}
 activateNewTodoMode : String -> ModelF
 activateNewTodoMode text =
     setEditMode (Todo.NewForm.create text |> EditMode.NewTodo)
@@ -643,11 +601,6 @@ updateTodoById actions todoId =
 
 replaceTodoIfEqualById todo =
     List.replaceIf (Document.equalById todo) todo
-
-
-addCopyOfTodo : Todo.Model -> Time -> Model -> ( Todo.Model, Model )
-addCopyOfTodo todo now =
-    insertTodo (Todo.copyTodo now todo)
 
 
 insertTodo : (Document.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )

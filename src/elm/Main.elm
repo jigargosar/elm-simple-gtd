@@ -11,7 +11,6 @@ import Ext.Return as Return
 import Firebase
 import ListSelection
 import Model.Internal as Model
-import Model.RunningTodo as Model
 import Project
 import Ext.Random as Random
 import Project
@@ -40,7 +39,6 @@ import Maybe.Extra as Maybe
 import Tuple2
 import Html
 import Msg exposing (..)
-import RunningTodo
 import Model.Types exposing (..)
 import View
 
@@ -169,21 +167,11 @@ update msg =
                 AutoFocusPaperInput ->
                     autoFocusPaperInputCmd
 
-                Start todo ->
-                    Return.map (Model.startTodo todo)
-
-                Stop ->
-                    stopRunningTodo
-
                 TodoAction action id ->
                     identity
 
                 ReminderOverlayAction action ->
                     reminderOverlayAction action
-
-                MarkRunningTodoDone ->
-                    Return.withMaybe (Model.getMaybeRunningTodo)
-                        (\todo -> updateTodo [ Todo.SetDone True ] todo >> stopRunningTodo)
 
                 ToggleTodoDone todo ->
                     updateTodo [ Todo.ToggleDone ] todo
@@ -253,56 +241,20 @@ update msg =
                             >> Model.setEditMode
                         )
 
-                CopyAndEditTodoById todoId ->
-                    Return.withMaybe (Model.findTodoById todoId)
-                        (CopyAndEditTodo >> andThenUpdate)
-
-                CopyAndEditTodo todo ->
-                    Return.andThenApplyWith Model.getNow
-                        (\now ->
-                            Model.addCopyOfTodo todo now
-                                >> Tuple.mapFirst Msg.StartEditingTodo
-                                >> uncurry update
-                        )
-
                 EditTodoFormKeyUp { id } ke ->
                     case ke.key of
                         Key.Enter ->
                             andThenUpdateAll
-                                ({- if ke.isShiftDown then
-                                       [ SaveCurrentForm, CopyAndEditTodoById id ]
-                                    else if ke.isMetaDown || ke.isControlDown then
-                                       []
-                                    else
-                                 -}
-                                 [ SaveCurrentForm, DeactivateEditingMode ]
-                                )
+                                ([ SaveCurrentForm, DeactivateEditingMode ])
 
                         _ ->
                             identity
 
-                TodoCheckBoxClicked todo ->
-                    Return.map (Model.toggleSelection todo)
-
                 SetView viewType ->
                     Return.map (Model.setMainViewType viewType)
-                        >> andThenUpdate ClearSelection
 
                 ShowReminderOverlayForTodoId todoId ->
                     Return.map (Model.showReminderOverlayForTodoId todoId)
-
-                ClearSelection ->
-                    Return.map (Model.clearSelection)
-
-                SelectionDoneClicked ->
-                    Return.map (Model.clearSelection)
-
-                SelectionEditClicked ->
-                    Return.withMaybe (Model.getMaybeSelectedTodo)
-                        (StartEditingTodo >> andThenUpdate)
-
-                SelectionTrashClicked ->
-                    Return.map (Model.clearSelection)
 
                 OnNowChanged now ->
                     onUpdateNow now
@@ -374,18 +326,6 @@ andThenUpdateAll =
 
 onUpdateNow now =
     Return.map (Model.setNow now)
-        --        >> Return.map (Ext.Debug.tapLog .editMode "editmode")
-        >> Return.andThen
-            (\m ->
-                let
-                    shouldBeep =
-                        Model.shouldBeep m
-                in
-                    if shouldBeep then
-                        ( Model.setLastBeepedAt now m, startAlarm () )
-                    else
-                        Return.singleton m
-            )
         >> sendNotifications
 
 
@@ -400,11 +340,6 @@ showTodoNotificationCmd =
 
 activateEditNewTodoMode text =
     Return.map (Model.activateNewTodoMode text)
-
-
-stopRunningTodo : ReturnF
-stopRunningTodo =
-    Return.map (Model.stopRunningTodo)
 
 
 withNow : (Time -> Msg) -> ReturnF

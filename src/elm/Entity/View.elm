@@ -58,6 +58,6 @@ editEntityView tabindexAV vm form =
             [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
             , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
             , expand []
-            , WebComponents.iconButton "delete" [ onClick Msg.SelectionTrashClicked ]
+            , WebComponents.iconButton "delete" []
             ]
         ]

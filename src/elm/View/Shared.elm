@@ -49,7 +49,6 @@ type alias SharedViewModel =
     , contextByIdDict : Dict Id Context.Model
     , activeProjects : List Project.Model
     , activeContexts : List Context.Model
-    , selection : Set Todo.Id
     , showDetails : Bool
     , listSelection : ListSelection.Model Document.Id
     }
@@ -94,7 +93,6 @@ createSharedViewModel model =
         , contextByIdDict = Model.getContextByIdDict model
         , activeProjects = Model.getActiveProjects model
         , activeContexts = Model.getActiveContexts model
-        , selection = Model.getSelectedTodoIdSet model
         , getMaybeEditTodoFormForTodo = getMaybeEditTodoFormForTodo
         , getMaybeTodoReminderFormForTodo = getMaybeTodoReminderFormForTodo
         , getTodoReminderForm =

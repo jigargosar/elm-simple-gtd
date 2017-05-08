@@ -11,7 +11,6 @@ import Model.Types exposing (..)
 import Project
 import ReminderOverlay
 import Return
-import RunningTodo exposing (RunningTodo)
 import Random.Pcg exposing (Seed)
 import Time exposing (Time)
 import Todo
@@ -46,14 +45,9 @@ type Msg
     | OnNotificationClicked TodoNotificationEvent
     | ToggleShowDeletedEntity
     | ToggleDrawer
-    | Start Todo.Model
-    | Stop
-    | MarkRunningTodoDone
     | ToggleTodoDone Todo.Model
     | SetTodoContext Context.Model Todo.Model
     | SetTodoProject Project.Model Todo.Model
-    | CopyAndEditTodo Todo.Model
-    | CopyAndEditTodoById Todo.Id
     | StartAddingTodo
     | NewProject
     | NewContext
@@ -70,11 +64,6 @@ type Msg
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | EditTodoFormKeyUp TodoForm KeyboardEvent
     | OnEntityListKeyDown (List Document.Id) KeyboardEvent
-    | TodoCheckBoxClicked Todo.Model
-    | ClearSelection
-    | SelectionDoneClicked
-    | SelectionEditClicked
-    | SelectionTrashClicked
     | SetView MainViewType
     | ShowReminderOverlayForTodoId Todo.Id
     | OnNowChanged Time

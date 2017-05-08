@@ -11,7 +11,6 @@ import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model
 import Model.Internal as Model
-import Model.RunningTodo exposing (RunningTodoViewModel)
 import Msg exposing (Msg)
 import Polymer.Firebase
 import ReminderOverlay

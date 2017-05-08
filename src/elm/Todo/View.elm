@@ -102,13 +102,11 @@ type alias TodoViewModel =
     , isMultiLine : Bool
     , isDone : Bool
     , isDeleted : Bool
-    , isSelected : Bool
     , projectName : Project.Name
     , projectDisplayName : String
     , contextName : Context.Name
     , contextDisplayName : String
     , selectedProjectIndex : Int
-    , onCheckBoxClicked : Msg
     , setContextMsg : Context.Model -> Msg
     , setProjectMsg : Project.Model -> Msg
     , startEditingMsg : Msg
@@ -263,13 +261,11 @@ createTodoViewModel vc todo =
         , text = text
         , isMultiLine = isMultiLine
         , displayText = displayText
-        , isSelected = Set.member todoId vc.selection
         , projectName = projectName
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
         , selectedProjectIndex = projects |> List.Extra.findIndex (Project.nameEquals projectName) ?= 0
         , contextName = contextName
-        , onCheckBoxClicked = Msg.TodoCheckBoxClicked todo
         , setContextMsg = Msg.SetTodoContext # todo
         , setProjectMsg = Msg.SetTodoProject # todo
         , startEditingMsg = Msg.StartEditingTodo todo
@@ -468,14 +464,6 @@ createContextItem context vm =
     Paper.item
         [ onClickStopPropagation (vm.setContextMsg context) ]
         [ context |> Context.getName >> text ]
-
-
-checkBoxView vm =
-    Paper.checkbox
-        [ checked vm.isSelected
-        , onClickStopPropagation vm.onCheckBoxClicked
-        ]
-        []
 
 
 doneIconButton : TodoViewModel -> Html Msg

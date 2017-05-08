@@ -6,7 +6,6 @@ import Ext.Time
 import Firebase
 import Html.Attributes.Extra exposing (..)
 import Model
-import Model.RunningTodo exposing (RunningTodoViewModel)
 import Model.Types exposing (Model)
 import Msg exposing (Msg)
 import Polymer.App as App
@@ -53,62 +52,27 @@ init viewModel m =
                 []
             , headerView m
             ]
-
-        --        , runningTodoView m
-        ]
-
-
-runningTodoView : Model -> Html Msg
-runningTodoView m =
-    case Model.RunningTodo.getRunningTodoViewModel m of
-        Just taskVm ->
-            div [ class "active-task-view", attribute "sticky" "true" ] [ runningTodoViewHelp taskVm m ]
-
-        Nothing ->
-            div [ class "active-task-view", attribute "sticky" "true" ] []
-
-
-runningTodoViewHelp : RunningTodoViewModel -> Model -> Html Msg
-runningTodoViewHelp { todoVM, elapsedTime } m =
-    div []
-        [ div [ class "title" ] [ text todoVM.text ]
-        , div [ class "col" ]
-            [ div [ class "elapsed-time" ] [ text (Ext.Time.toHHMMSS elapsedTime) ]
-            , paperIconButton [ iconA "av:pause" ] []
-            , paperIconButton [ iconA "av:stop", Msg.Stop |> onClick ] []
-            , paperIconButton [ iconA "check", Msg.MarkRunningTodoDone |> onClick ] []
-            ]
         ]
 
 
 headerView m =
-    let
-        selectedTodoCount =
-            Model.getSelectedTodoIdSet m |> Set.size
-    in
-        case m.editMode of
-            EditMode.NewTodo form ->
-                Paper.input
-                    [ id newTodoInputId
-                    , class "auto-focus"
-                    , onInput Msg.NewTodoTextChanged
-                    , value form.text
-                    , onBlur Msg.DeactivateEditingMode
-                    , Keyboard.onKeyUp (Msg.NewTodoKeyUp form)
-                    , stringProperty "label" "New Todo"
-                    , boolProperty "alwaysFloatLabel" True
-                    , style [ ( "width", "100%" ), "color" => "white" ]
-                    ]
-                    []
+    case m.editMode of
+        EditMode.NewTodo form ->
+            Paper.input
+                [ id newTodoInputId
+                , class "auto-focus"
+                , onInput Msg.NewTodoTextChanged
+                , value form.text
+                , onBlur Msg.DeactivateEditingMode
+                , Keyboard.onKeyUp (Msg.NewTodoKeyUp form)
+                , stringProperty "label" "New Todo"
+                , boolProperty "alwaysFloatLabel" True
+                , style [ ( "width", "100%" ), "color" => "white" ]
+                ]
+                []
 
-            EditMode.SwitchView ->
-                span [] [ "Switch View: (C)ontexts, (P)rojects, (D)one, (B)in." |> text ]
-
-            _ ->
-                if selectedTodoCount == 0 then
-                    defaultHeader m
-                else
-                    selectionHeader selectedTodoCount
+        _ ->
+            defaultHeader m
 
 
 defaultHeader m =
@@ -151,20 +115,3 @@ defaultHeader m =
                     ]
                 ]
             ]
-
-
-selectionHeader selectedTodoCount =
-    span []
-        [ "(" ++ (toString selectedTodoCount) ++ ")" |> text
-        , iconButton "done-all"
-            [ onClick Msg.SelectionDoneClicked
-            ]
-        , iconButton "create"
-            [ onClick Msg.SelectionEditClicked
-            ]
-        , iconButton "delete"
-            [ onClick Msg.SelectionTrashClicked
-            ]
-        , iconButton "cancel"
-            [ onClick Msg.ClearSelection ]
-        ]

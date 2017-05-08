@@ -16,8 +16,8 @@ import View.Shared exposing (expand)
 import WebComponents
 
 
-initKeyed tabindexAV vc vm =
-    ( vm.id, init tabindexAV vc vm )
+initKeyed tabindexAV mainViewModel vm =
+    ( vm.id, init tabindexAV mainViewModel.shared vm )
 
 
 init tabindexAV vc vm =

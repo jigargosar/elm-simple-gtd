@@ -67,10 +67,7 @@ filtered viewModel model =
 groupByEntity : ViewModel.Model -> List EntityViewModel -> Model -> Html Msg
 groupByEntity viewModel entityVMList model =
     let
-        vc =
-            viewModel.shared
-
-        typedEntityViewList =
+        entityViewList =
             entityVMList
                 |> List.concatMap
                     (\vm ->
@@ -79,7 +76,7 @@ groupByEntity viewModel entityVMList model =
                     )
 
         findIndexOfId id =
-            typedEntityViewList
+            entityViewList
                 |> List.findIndex (ViewModel.getIdOfEntityView >> equals id)
 
         focusedIndex =
@@ -103,7 +100,7 @@ groupByEntity viewModel entityVMList model =
             in
                 case entityViewType of
                     EntityView vm ->
-                        Entity.View.initKeyed tabindexAV vc vm
+                        Entity.View.initKeyed tabindexAV viewModel vm
 
                     TodoView todo ->
                         Todo.View.initKeyed tabindexAV (viewModel.createTodoViewModel todo)
@@ -116,7 +113,7 @@ groupByEntity viewModel entityVMList model =
             [ class "entity-list"
             , Msg.OnTodoListKeyDown idList |> onKeyDown
             ]
-            (typedEntityViewList
+            (entityViewList
                 |> List.indexedMap createEntityView
             )
 

@@ -74,7 +74,7 @@ groupByEntity : ViewModel.Model -> List EntityViewModel -> Model -> Html Msg
 groupByEntity viewModel entityVMList model =
     let
         vc =
-            View.Shared.createSharedViewModel model
+            viewModel.shared
 
         entityViewList =
             entityVMList

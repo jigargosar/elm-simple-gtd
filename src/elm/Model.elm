@@ -272,14 +272,6 @@ createAndEditNewContext model =
 --            )
 
 
-updateTodoWithTodoForm : Todo.Form.Model -> ModelF
-updateTodoWithTodoForm { todoText, id } =
-    updateTodoById
-        [ Todo.SetText todoText
-        ]
-        id
-
-
 updateTodoWithReminderForm : Todo.ReminderForm.Model -> ModelF
 updateTodoWithReminderForm { id, date, time } =
     let
@@ -396,24 +388,24 @@ toggleDeletedForEntity entity model =
 
 saveCurrentForm model =
     case model.editMode of
-        EditMode.EditContext ecm ->
-            Store.findById ecm.id model.contextStore
-                ?|> Context.setName ecm.name
+        EditMode.EditContext form ->
+            Store.findById form.id model.contextStore
+                ?|> Context.setName form.name
                 >> Context.setModifiedAt model.now
                 >> (Store.update # model.contextStore)
                 >> (setContextStore # model)
                 ?= model
 
-        EditMode.EditProject epm ->
-            Store.findById epm.id model.projectStore
-                ?|> Project.setName epm.name
+        EditMode.EditProject form ->
+            Store.findById form.id model.projectStore
+                ?|> Project.setName form.name
                 >> Project.setModifiedAt model.now
                 >> (Store.update # model.projectStore)
                 >> (setProjectStore # model)
                 ?= model
 
         EditMode.EditTodo form ->
-            updateTodoWithTodoForm form model
+            updateTodoById [ Todo.SetText form.todoText ] form.id
 
         EditMode.EditTodoReminder form ->
             updateTodoWithReminderForm form model

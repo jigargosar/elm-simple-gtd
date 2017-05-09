@@ -80,11 +80,6 @@ type GroupByEntity
     | GroupByContext
 
 
-type EntityStoreType
-    = ProjectEntityStoreType
-    | ContextEntityStoreType
-
-
 type alias Flags =
     { now : Time
     , encodedTodoList : List Todo.Encoded

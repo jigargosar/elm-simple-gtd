@@ -699,8 +699,29 @@ focusEntityById id model =
         { model | focusedEntityInfo = focusedEntityInfo }
 
 
-focusPrevEntity : ModelF
-focusPrevEntity model =
+toggleSetMember item set =
+    if Set.member item set then
+        Set.remove item set
+    else
+        Set.insert item set
+
+
+createSelectedEntitySet focusedEntityId expandSelection model =
+    if expandSelection then
+        if model.selectedEntityIdSet |> Set.member model.focusedEntityInfo.id then
+            model.selectedEntityIdSet
+                |> toggleSetMember model.focusedEntityInfo.id
+                >> toggleSetMember focusedEntityId
+        else
+            model.selectedEntityIdSet
+                |> toggleSetMember model.focusedEntityInfo.id
+                >> toggleSetMember focusedEntityId
+    else
+        Set.empty
+
+
+focusPrevEntity : Bool -> ModelF
+focusPrevEntity expandSelection model =
     let
         focusedEntityIndex =
             (model.focusedEntityInfo.index - 1)
@@ -716,9 +737,7 @@ focusPrevEntity model =
             { id = focusedEntityId, index = focusedEntityIndex }
 
         selectedEntityIdSet =
-            model.selectedEntityIdSet
-                |> Set.insert model.focusedEntityInfo.id
-                |> Set.insert focusedEntityId
+            createSelectedEntitySet focusedEntityId expandSelection model
     in
         { model | focusedEntityInfo = focusedEntityInfo, selectedEntityIdSet = selectedEntityIdSet }
 
@@ -740,9 +759,7 @@ focusNextEntity expandSelection model =
             { id = focusedEntityId, index = focusedEntityIndex }
 
         selectedEntityIdSet =
-            model.selectedEntityIdSet
-                |> Set.insert model.focusedEntityInfo.id
-                |> Set.insert focusedEntityId
+            createSelectedEntitySet focusedEntityId expandSelection model
     in
         { model | focusedEntityInfo = focusedEntityInfo, selectedEntityIdSet = selectedEntityIdSet }
 

@@ -123,7 +123,7 @@ update msg =
                 OnEntityListKeyDown idList { key, isShiftDown } ->
                     case key of
                         Key.ArrowUp ->
-                            Return.map Model.focusPrevEntity
+                            Return.map (Model.focusPrevEntity isShiftDown)
                                 >> andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
 
                         Key.ArrowDown ->

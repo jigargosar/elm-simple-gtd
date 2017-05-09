@@ -654,21 +654,18 @@ setMainViewType mainViewType model =
                 projectList =
                     getCurrentProjectList model
 
-                todoListByProjectId =
-                    getActiveTodoListGroupedBy Todo.getProjectId model
+                entityList =
+                    getProjectsViewEntityList projectList model
+            in
+                setViewEntityList entityList model
 
-                todoEntitiesForProject project =
-                    todoListByProjectId
-                        |> Dict.get (Document.getId project)
-                        ?= []
-                        .|> TodoEntity
+        ProjectView id ->
+            let
+                projectList =
+                    model.projectStore |> Store.findById id ?= Project.null |> List.singleton
 
                 entityList =
-                    projectList
-                        |> List.concatMap
-                            (\project ->
-                                (ProjectEntity project) :: (todoEntitiesForProject project)
-                            )
+                    getProjectsViewEntityList projectList model
             in
                 setViewEntityList entityList model
 
@@ -694,6 +691,25 @@ getContextsViewEntityList contextList model =
             |> List.concatMap
                 (\context ->
                     (ContextEntity context) :: (todoEntitiesForContext context)
+                )
+
+
+getProjectsViewEntityList projectList model =
+    let
+        -- todo : use getFiltered todo list
+        todoListByProjectId =
+            getActiveTodoListGroupedBy Todo.getProjectId model
+
+        todoEntitiesForProject project =
+            todoListByProjectId
+                |> Dict.get (Document.getId project)
+                ?= []
+                .|> TodoEntity
+    in
+        projectList
+            |> List.concatMap
+                (\project ->
+                    (ProjectEntity project) :: (todoEntitiesForProject project)
                 )
 
 

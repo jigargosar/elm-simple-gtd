@@ -24,10 +24,6 @@ import Project
 import Store
 
 
-type alias Id =
-    String
-
-
 type alias Text =
     String
 
@@ -35,6 +31,10 @@ type alias Text =
 type Reminder
     = None
     | At Time
+
+
+type alias Id =
+    Document.Id
 
 
 
@@ -49,8 +49,8 @@ type alias Record =
     { done : Bool
     , text : Text
     , dueAt : Maybe Time
-    , projectId : Id
-    , contextId : Id
+    , projectId : Document.Id
+    , contextId : Document.Id
     , reminder : Reminder
     , deletedAt : Time
     }
@@ -353,7 +353,7 @@ doneFilter =
     toAllPassPredicate [ isNotDeleted, isDone ]
 
 
-hasProjectId : Id -> Model -> Bool
+hasProjectId : Document.Id -> Model -> Bool
 hasProjectId projectId =
     getProjectId >> equals projectId
 

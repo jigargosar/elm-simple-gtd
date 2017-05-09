@@ -4,7 +4,7 @@ import Context
 import Date
 import Date.Extra.Create
 import Dict.Extra
-import Document
+import Document exposing (Document)
 import EditMode exposing (EditForm)
 import Ext.Keyboard as Keyboard
 import Firebase
@@ -13,7 +13,7 @@ import Model.Internal exposing (..)
 import Msg exposing (Return)
 import Project
 import ReminderOverlay
-import Dict
+import Dict exposing (Dict)
 import Json.Encode as E
 import List.Extra as List
 import Maybe.Extra as Maybe
@@ -170,6 +170,13 @@ getDeletedEntityList =
 
 getActiveEntityList =
     getEntityStore >>> Store.reject Document.isDeleted
+
+
+getCurrentContextList entityType model =
+    if model.showDeleted then
+        getActiveEntityList entityType model
+    else
+        getDeletedEntityList entityType model
 
 
 getActiveTodoList =
@@ -614,9 +621,49 @@ setMainViewType : MainViewType -> ModelF
 setMainViewType mainViewType model =
     (case getMainViewType model of
         GroupByContextView ->
-            model
+            let
+                contextList =
+                    getActiveEntityList ContextEntityType model
+
+                todoListByContextId =
+                    getActiveTodoListGroupedBy Todo.getContextId model
+
+                todoEntitiesForContext context =
+                    todoListByContextId
+                        |> Dict.get (Document.getId context)
+                        ?= []
+                        .|> TodoEntity
+
+                entityList =
+                    contextList
+                        |> List.concatMap
+                            (\context ->
+                                (ContextEntity context) :: (todoEntitiesForContext context)
+                            )
+            in
+                model
 
         _ ->
             model
     )
         |> setMainViewType_ mainViewType
+
+
+getViewEntityList : Model -> List Entity
+getViewEntityList =
+    (.viewEntityList)
+
+
+setViewEntityList : List Entity -> ModelF
+setViewEntityList viewEntityList model =
+    { model | viewEntityList = viewEntityList }
+
+
+updateViewEntityListM : (Model -> List Entity) -> ModelF
+updateViewEntityListM updater model =
+    setViewEntityList (updater model) model
+
+
+updateViewEntityList : (List Entity -> List Entity) -> ModelF
+updateViewEntityList updater model =
+    setViewEntityList (updater (getViewEntityList model)) model

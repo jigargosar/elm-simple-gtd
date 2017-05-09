@@ -3,7 +3,7 @@ port module Main exposing (..)
 import CommonMsg
 import Document
 import Dom
-import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd)
+import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd, focusSelectorIfNoFocusCmd)
 import EditMode
 import Ext.Debug
 import Ext.Keyboard as Keyboard
@@ -249,6 +249,7 @@ update msg =
 
                 OnKeyboardMsg msg ->
                     Return.map (Model.updateKeyboardState (Keyboard.update msg))
+                        >> focusSelectorIfNoFocusCmd ".entity-list > [tabindex=0]"
 
                 SaveCurrentForm ->
                     Return.map (Model.saveCurrentForm)

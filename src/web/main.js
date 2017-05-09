@@ -79,6 +79,10 @@ async function boot() {
         }, 0)
     })
 
+    app.ports["focusSelectorIfNoFocus"].subscribe((selector) => {
+        $(selector).focus()
+    })
+
     app.ports["signIn"].subscribe(() => {
         let googleAuth = document.getElementById('google-auth');
         googleAuth

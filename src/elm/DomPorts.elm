@@ -16,9 +16,16 @@ port focusPaperInput : DomSelector -> Cmd msg
 port focusSelector : DomSelector -> Cmd msg
 
 
+port focusSelectorIfNoFocus : DomSelector -> Cmd msg
+
+
 autoFocusPaperInputCmd =
     focusPaperInputCmd ".auto-focus"
 
 
 focusPaperInputCmd =
     focusPaperInput >> Return.command
+
+
+focusSelectorIfNoFocusCmd =
+    focusSelectorIfNoFocus >> Return.command

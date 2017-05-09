@@ -708,14 +708,17 @@ toggleSetMember item set =
 
 createSelectedEntitySet focusedEntityId expandSelection model =
     if expandSelection then
-        if model.selectedEntityIdSet |> Set.member model.focusedEntityInfo.id then
-            model.selectedEntityIdSet
-                |> toggleSetMember model.focusedEntityInfo.id
-                >> toggleSetMember focusedEntityId
-        else
-            model.selectedEntityIdSet
-                |> toggleSetMember model.focusedEntityInfo.id
-                >> toggleSetMember focusedEntityId
+        --        if model.selectedEntityIdSet |> Set.member model.focusedEntityInfo.id then
+        --            model.selectedEntityIdSet
+        --                |> toggleSetMember model.focusedEntityInfo.id
+        --                >> toggleSetMember focusedEntityId
+        --        else
+        --            model.selectedEntityIdSet
+        --                |> toggleSetMember model.focusedEntityInfo.id
+        --                >> toggleSetMember focusedEntityId
+        model.selectedEntityIdSet
+            |> Set.insert model.focusedEntityInfo.id
+            >> Set.insert focusedEntityId
     else
         Set.empty
 

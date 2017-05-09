@@ -172,11 +172,18 @@ getActiveEntityList =
     getEntityStore >>> Store.reject Document.isDeleted
 
 
-getCurrentContextList entityType model =
+getCurrentContextList model =
     if model.showDeleted then
-        getActiveEntityList entityType model
+        getDeletedEntityList ContextEntityType model
     else
-        getDeletedEntityList entityType model
+        getActiveEntityList ContextEntityType model
+
+
+getCurrentProjectList model =
+    if model.showDeleted then
+        getDeletedEntityList ProjectEntityType model
+    else
+        getActiveEntityList ProjectEntityType model
 
 
 getActiveTodoList =
@@ -623,7 +630,7 @@ setMainViewType mainViewType model =
         GroupByContextView ->
             let
                 contextList =
-                    getActiveEntityList ContextEntityType model
+                    getCurrentContextList model
 
                 todoListByContextId =
                     getActiveTodoListGroupedBy Todo.getContextId model
@@ -639,6 +646,29 @@ setMainViewType mainViewType model =
                         |> List.concatMap
                             (\context ->
                                 (ContextEntity context) :: (todoEntitiesForContext context)
+                            )
+            in
+                setViewEntityList entityList model
+
+        GroupByProjectView ->
+            let
+                projectList =
+                    getCurrentProjectList model
+
+                todoListByProjectId =
+                    getActiveTodoListGroupedBy Todo.getProjectId model
+
+                todoEntitiesForProject project =
+                    todoListByProjectId
+                        |> Dict.get (Document.getId project)
+                        ?= []
+                        .|> TodoEntity
+
+                entityList =
+                    projectList
+                        |> List.concatMap
+                            (\project ->
+                                (ProjectEntity project) :: (todoEntitiesForProject project)
                             )
             in
                 setViewEntityList entityList model

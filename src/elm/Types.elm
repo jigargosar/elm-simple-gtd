@@ -49,7 +49,7 @@ type alias Model =
     , developmentMode : Bool
     , viewEntityList : List Entity
     , focusedEntityInfo : FocusedEntityInfo
-    , selectedEntitySet : Set Document.Id
+    , selectedEntityIdSet : Set Document.Id
     }
 
 

@@ -68,7 +68,7 @@ init flags =
             , developmentMode = flags.developmentMode
             , viewEntityList = []
             , focusedEntityInfo = { index = 0, id = "" }
-            , selectedEntitySet = Set.empty
+            , selectedEntityIdSet = Set.empty
             }
     in
         refreshViewEntityList model
@@ -715,12 +715,12 @@ focusPrevEntity model =
         focusedEntityInfo =
             { id = focusedEntityId, index = focusedEntityIndex }
 
-        selectedEntitySet =
-            model.selectedEntitySet
+        selectedEntityIdSet =
+            model.selectedEntityIdSet
                 |> Set.insert model.focusedEntityInfo.id
                 |> Set.insert focusedEntityId
     in
-        { model | focusedEntityInfo = focusedEntityInfo, selectedEntitySet = selectedEntitySet }
+        { model | focusedEntityInfo = focusedEntityInfo, selectedEntityIdSet = selectedEntityIdSet }
 
 
 focusNextEntity : Bool -> ModelF
@@ -739,12 +739,12 @@ focusNextEntity expandSelection model =
         focusedEntityInfo =
             { id = focusedEntityId, index = focusedEntityIndex }
 
-        selectedEntitySet =
-            model.selectedEntitySet
+        selectedEntityIdSet =
+            model.selectedEntityIdSet
                 |> Set.insert model.focusedEntityInfo.id
                 |> Set.insert focusedEntityId
     in
-        { model | focusedEntityInfo = focusedEntityInfo, selectedEntitySet = selectedEntitySet }
+        { model | focusedEntityInfo = focusedEntityInfo, selectedEntityIdSet = selectedEntityIdSet }
 
 
 createViewEntityList viewType model =

@@ -51,7 +51,7 @@ init tabindexAV vm_ =
         vm =
             { vm_ | tabindexAV = tabindexAV }
     in
-        if vm.edit.isEditing then
+        if vm.edit.isEditing && not vm.isSelected then
             editView vm
         else
             defaultView vm
@@ -119,6 +119,7 @@ type alias TodoViewModel =
     , edit : EditViewModel
     , onFocusIn : Msg
     , tabindexAV : Attribute Msg
+    , isSelected : Bool
     }
 
 
@@ -275,6 +276,7 @@ createTodoViewModel vc todo =
         , edit = createEditTodoViewModel vc todo
         , onFocusIn = Msg.FocusEntityById todoId
         , tabindexAV = tabindex -1
+        , isSelected = vc.selectedEntityIdSet |> Set.member todoId
         }
 
 
@@ -288,7 +290,7 @@ container { isEditing, id } =
 defaultView : TodoViewModel -> Html Msg
 defaultView vm =
     div
-        [ class "todo-item"
+        [ classList [ "todo-item" => True, "selected" => vm.isSelected ]
         , onFocusIn vm.onFocusIn
         , vm.tabindexAV
 

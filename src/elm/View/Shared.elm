@@ -49,6 +49,7 @@ type alias SharedViewModel =
     , activeProjects : List Project.Model
     , activeContexts : List Context.Model
     , showDetails : Bool
+    , selectedEntityIdSet : Set Document.Id
     }
 
 
@@ -86,6 +87,7 @@ createSharedViewModel model =
                         Nothing
     in
         { now = now
+        , selectedEntityIdSet = model.selectedEntityIdSet
         , projectByIdDict = Model.getProjectByIdDict model
         , contextByIdDict = Model.getContextByIdDict model
         , activeProjects = Model.getActiveProjects model

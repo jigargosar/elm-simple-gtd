@@ -21,7 +21,7 @@ delta2builder previous current =
 
 getPathFromModel model =
     case Model.getMainViewType model of
-        TodoListView viewType ->
+        EntityListView viewType ->
             case viewType of
                 GroupByContextView ->
                     [ "lists", "contexts" ]
@@ -60,10 +60,10 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "contexts" :: [] ->
-            [ Msg.SetView (TodoListView GroupByContextView) ]
+            [ Msg.SetView (EntityListView GroupByContextView) ]
 
         "lists" :: "projects" :: [] ->
-            [ Msg.SetView (TodoListView GroupByProjectView) ]
+            [ Msg.SetView (EntityListView GroupByProjectView) ]
 
         "lists" :: "bin" :: [] ->
             [ Msg.SetView BinView ]
@@ -72,16 +72,16 @@ builder2messages builder =
             [ Msg.SetView DoneView ]
 
         "project" :: "NotAssigned" :: [] ->
-            [ Msg.SetView (ProjectView "" |> TodoListView) ]
+            [ Msg.SetView (ProjectView "" |> EntityListView) ]
 
         "project" :: id :: [] ->
-            [ Msg.SetView (ProjectView id |> TodoListView) ]
+            [ Msg.SetView (ProjectView id |> EntityListView) ]
 
         "context" :: id :: [] ->
-            [ Msg.SetView (ContextView id |> TodoListView) ]
+            [ Msg.SetView (ContextView id |> EntityListView) ]
 
         "Inbox" :: [] ->
-            [ Msg.SetView (ContextView "" |> TodoListView) ]
+            [ Msg.SetView (ContextView "" |> EntityListView) ]
 
         "notification" :: todoId :: [] ->
             [ Msg.ShowReminderOverlayForTodoId todoId ]

@@ -55,7 +55,7 @@ init flags =
         , projectStore = projectStore
         , contextStore = contextStore
         , editMode = EditMode.none
-        , mainViewType = TodoListView GroupByContextView
+        , mainViewType = EntityListView GroupByContextView
         , keyboardState = Keyboard.init
         , showDeleted = False
         , reminderOverlay = ReminderOverlay.none
@@ -425,9 +425,8 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
     let
         maybeTodoUpdateAction =
             case model.mainViewType of
-                TodoListView viewType ->
+                EntityListView viewType ->
                     case viewType of
-                        
                         ContextView id ->
                             model.contextStore |> Store.findById id >>? Todo.SetContext
 
@@ -436,7 +435,9 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
 
                         _ ->
                             Nothing
-                _ -> Nothing
+
+                _ ->
+                    Nothing
 
         maybeModel =
             maybeTodoUpdateAction
@@ -630,7 +631,7 @@ setMainViewType_ mainViewType model =
 setMainViewType : MainViewType -> ModelF
 setMainViewType mainViewType model =
     (case mainViewType of
-        TodoListView viewType ->
+        EntityListView viewType ->
             case viewType of
                 GroupByContextView ->
                     let

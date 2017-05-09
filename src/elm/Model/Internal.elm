@@ -4,7 +4,6 @@ import Context
 import Document
 import EditMode exposing (EditForm)
 import Ext.Keyboard as Keyboard
-import ListSelection
 import Project
 import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
@@ -88,26 +87,6 @@ setNow now model =
 updateNowM : (Model -> Time) -> ModelF
 updateNowM updater model =
     { model | now = updater model }
-
-
-getListSelection : Model -> ListSelection.Model Document.Id
-getListSelection =
-    (.listSelection)
-
-
-setListSelection : ListSelection.Model Document.Id -> ModelF
-setListSelection listSelection model =
-    { model | listSelection = listSelection }
-
-
-updateListSelectionM : (Model -> ListSelection.Model Document.Id) -> ModelF
-updateListSelectionM updater model =
-    setListSelection (updater model) model
-
-
-updateListSelection : (ListSelection.Model Document.Id -> ListSelection.Model Document.Id) -> ModelF
-updateListSelection updater model =
-    setListSelection (updater (getListSelection model)) model
 
 
 getKeyboardState : Model -> Keyboard.State

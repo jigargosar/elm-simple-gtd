@@ -12,7 +12,6 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
-import ListSelection
 import Maybe.Extra as Maybe
 import Model.Internal as Model
 import Msg exposing (..)

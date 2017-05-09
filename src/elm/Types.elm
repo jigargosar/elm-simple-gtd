@@ -5,7 +5,6 @@ import Document exposing (Id)
 import EditMode exposing (EditForm)
 import Ext.Keyboard as Keyboard
 import Firebase
-import ListSelection
 import Project
 import Project
 import Random.Pcg exposing (Seed)
@@ -44,7 +43,6 @@ type alias Model =
     , reminderOverlay : ReminderOverlay.Model
     , pouchDBRemoteSyncURI : String
     , appDrawerForceNarrow : Bool
-    , listSelection : ListSelection.Model Document.Id
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken
     , firebaseAppAttributes : Firebase.AppAttributes
@@ -53,7 +51,10 @@ type alias Model =
     , focusedEntityInfo : FocusedEntityInfo
     }
 
-type alias FocusedEntityInfo = { id : Document.Id, index : Int }
+
+type alias FocusedEntityInfo =
+    { id : Document.Id, index : Int }
+
 
 type ModelField
     = NowField Time

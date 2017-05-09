@@ -9,7 +9,6 @@ import EditMode exposing (EditForm)
 import Ext.Keyboard as Keyboard
 import Ext.List as List
 import Firebase
-import ListSelection
 import Model.Internal exposing (..)
 import Msg exposing (Return)
 import Project
@@ -63,7 +62,6 @@ init flags =
             , reminderOverlay = ReminderOverlay.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , appDrawerForceNarrow = False
-            , listSelection = ListSelection.empty
             , user = Firebase.NotLoggedIn
             , fcmToken = Nothing
             , firebaseAppAttributes = flags.firebaseAppAttributes
@@ -667,6 +665,25 @@ updateFocusedEntityInfo model =
         focusedEntityIndex =
             model.viewEntityList
                 |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
+                ?= 0
+
+        focusedEntityId =
+            focusedEntityIndex
+                |> (List.getAt # model.viewEntityList)
+                ?|> getEntityId
+                ?= ""
+
+        focusedEntityInfo =
+            { id = focusedEntityId, index = focusedEntityIndex }
+    in
+        { model | focusedEntityInfo = focusedEntityInfo }
+
+
+focusEntityById id model =
+    let
+        focusedEntityIndex =
+            model.viewEntityList
+                |> List.findIndex (getEntityId >> equals id)
                 ?= 0
 
         focusedEntityId =

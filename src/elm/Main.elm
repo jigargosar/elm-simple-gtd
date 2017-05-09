@@ -9,7 +9,6 @@ import Ext.Debug
 import Ext.Keyboard as Keyboard
 import Ext.Return as Return
 import Firebase
-import ListSelection
 import Model.Internal as Model
 import Project
 import Ext.Random as Random
@@ -119,31 +118,16 @@ update msg =
                     Return.map (Model.setFCMToken token)
 
                 SetMainViewFocusedDocumentId id ->
-                    Return.map
-                        (\model ->
-                            { model
-                                | listSelection =
-                                    model.listSelection
-                                        |> ListSelection.selectItem id
-                            }
-                        )
+                    Return.map (Model.focusEntityById id)
 
                 OnEntityListKeyDown idList { key } ->
                     case key of
                         Key.ArrowUp ->
-                            Return.map
-                                (ListSelection.updateAndSelectPrev idList
-                                    |> Model.updateListSelection
-                                )
-                                >> Return.map Model.focusPrevEntity
+                            Return.map Model.focusPrevEntity
                                 >> andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
 
                         Key.ArrowDown ->
-                            Return.map
-                                (ListSelection.updateAndSelectNext idList
-                                    |> Model.updateListSelection
-                                )
-                                >> Return.map Model.focusNextEntity
+                            Return.map Model.focusNextEntity
                                 >> andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
 
                         _ ->

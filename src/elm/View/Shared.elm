@@ -11,7 +11,6 @@ import Html.Attributes.Extra exposing (boolProperty, intProperty)
 import Html.Events exposing (onClick)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Encode
-import ListSelection
 import Model
 import Msg
 import Polymer.Attributes exposing (icon)
@@ -50,7 +49,6 @@ type alias SharedViewModel =
     , activeProjects : List Project.Model
     , activeContexts : List Context.Model
     , showDetails : Bool
-    , listSelection : ListSelection.Model Document.Id
     }
 
 
@@ -88,7 +86,6 @@ createSharedViewModel model =
                         Nothing
     in
         { now = now
-        , listSelection = model.listSelection
         , projectByIdDict = Model.getProjectByIdDict model
         , contextByIdDict = Model.getContextByIdDict model
         , activeProjects = Model.getActiveProjects model

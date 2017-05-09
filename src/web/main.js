@@ -72,11 +72,12 @@ async function boot() {
     Notifications.setup(app).catch(console.error)
 
     app.ports["focusSelector"].subscribe((selector) => {
-        setTimeout(() => {
+        // setTimeout(() => {
             requestAnimationFrame(() => {
-                $(selector).focus()
+                // note - we blur here so that view scrolls to element if it already had focus
+                $(selector).blur().focus()
             })
-        }, 0)
+        // }, 0)
     })
 
     app.ports["focusSelectorIfNoFocus"].subscribe((selector) => {

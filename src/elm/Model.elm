@@ -68,6 +68,7 @@ init flags =
             , developmentMode = flags.developmentMode
             , viewEntityList = []
             , focusedEntityInfo = { index = 0, id = "" }
+            , selectedEntitySet = Set.empty
             }
     in
         refreshViewEntityList model

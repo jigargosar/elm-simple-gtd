@@ -639,6 +639,16 @@ setMainViewType mainViewType model =
             in
                 setViewEntityList entityList model
 
+        ContextView id ->
+            let
+                contextList =
+                    model.contextStore |> Store.findById id ?= Context.null |> List.singleton
+
+                entityList =
+                    getContextsViewEntityList contextList model
+            in
+                setViewEntityList entityList model
+
         GroupByProjectView ->
             let
                 projectList =

@@ -7,6 +7,7 @@ import Dict.Extra
 import Document exposing (Document)
 import EditMode exposing (EditForm)
 import Ext.Keyboard as Keyboard
+import Ext.List as List
 import Firebase
 import ListSelection
 import Model.Internal exposing (..)
@@ -667,6 +668,44 @@ updateFocusedEntityInfo model =
             model.viewEntityList
                 |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
                 ?= 0
+
+        focusedEntityId =
+            focusedEntityIndex
+                |> (List.getAt # model.viewEntityList)
+                ?|> getEntityId
+                ?= ""
+
+        focusedEntityInfo =
+            { id = focusedEntityId, index = focusedEntityIndex }
+    in
+        { model | focusedEntityInfo = focusedEntityInfo }
+
+
+focusPrevEntity : ModelF
+focusPrevEntity model =
+    let
+        focusedEntityIndex =
+            (model.focusedEntityInfo.index - 1)
+                |> (List.clampIndex # model.viewEntityList)
+
+        focusedEntityId =
+            focusedEntityIndex
+                |> (List.getAt # model.viewEntityList)
+                ?|> getEntityId
+                ?= ""
+
+        focusedEntityInfo =
+            { id = focusedEntityId, index = focusedEntityIndex }
+    in
+        { model | focusedEntityInfo = focusedEntityInfo }
+
+
+focusNextEntity : ModelF
+focusNextEntity model =
+    let
+        focusedEntityIndex =
+            (model.focusedEntityInfo.index + 1)
+                |> (List.clampIndex # model.viewEntityList)
 
         focusedEntityId =
             focusedEntityIndex

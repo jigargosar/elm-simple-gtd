@@ -135,6 +135,7 @@ update msg =
                                 (ListSelection.updateAndSelectPrev idList
                                     |> Model.updateListSelection
                                 )
+                                >> Return.map Model.focusPrevEntity
                                 >> andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
 
                         Key.ArrowDown ->
@@ -142,6 +143,7 @@ update msg =
                                 (ListSelection.updateAndSelectNext idList
                                     |> Model.updateListSelection
                                 )
+                                >> Return.map Model.focusNextEntity
                                 >> andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
 
                         _ ->

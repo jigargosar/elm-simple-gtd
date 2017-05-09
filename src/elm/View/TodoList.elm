@@ -64,20 +64,6 @@ filtered viewModel model =
                 ]
 
 
-groupByEntity : ViewModel.Model -> List EntityViewModel -> Model -> Html Msg
-groupByEntity viewModel entityVMList model =
-    let
-        entityViewList =
-            entityVMList
-                |> List.concatMap
-                    (\vm ->
-                        (EntityView vm)
-                            :: (vm.todoList .|> TodoView)
-                    )
-    in
-        listView entityViewList viewModel model
-
-
 listView entityViewList viewModel model =
     let
         findIndexOfId id =
@@ -121,11 +107,3 @@ listView entityViewList viewModel model =
             (entityViewList
                 |> List.indexedMap createEntityView
             )
-
-
-groupByEntityWithId viewModel entityVMs id =
-    let
-        vmSingleton =
-            entityVMs |> List.find (.id >> equals id) |> Maybe.toList
-    in
-        groupByEntity viewModel vmSingleton

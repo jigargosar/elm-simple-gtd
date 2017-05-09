@@ -68,6 +68,7 @@ init flags =
             , firebaseAppAttributes = flags.firebaseAppAttributes
             , developmentMode = flags.developmentMode
             , viewEntityList = []
+            , focusedEntityInfo = { index = 0, id = "" }
             }
     in
         refreshViewEntityList model
@@ -642,9 +643,41 @@ refreshViewEntityList model =
         EntityListView viewType ->
             createViewEntityList viewType model
                 |> (setViewEntityList # model)
+                |> updateFocusedEntityInfo
 
         _ ->
             model
+
+
+getEntityId entity =
+    case entity of
+        TodoEntity doc ->
+            Document.getId doc
+
+        ProjectEntity doc ->
+            Document.getId doc
+
+        ContextEntity doc ->
+            Document.getId doc
+
+
+updateFocusedEntityInfo model =
+    let
+        focusedEntityIndex =
+            model.viewEntityList
+                |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
+                ?= 0
+
+        focusedEntityId =
+            focusedEntityIndex
+                |> (List.getAt # model.viewEntityList)
+                ?|> getEntityId
+                ?= ""
+
+        focusedEntityInfo =
+            { id = focusedEntityId, index = focusedEntityIndex }
+    in
+        { model | focusedEntityInfo = focusedEntityInfo }
 
 
 createViewEntityList viewType model =

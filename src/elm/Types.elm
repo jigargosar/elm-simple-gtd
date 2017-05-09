@@ -50,6 +50,7 @@ type alias Model =
     , firebaseAppAttributes : Firebase.AppAttributes
     , developmentMode : Bool
     , viewEntityList : List Entity
+    , focusedEntityInfo : { id : Document.Id, index : Int }
     }
 
 

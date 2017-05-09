@@ -66,6 +66,7 @@ init flags =
         , fcmToken = Nothing
         , firebaseAppAttributes = flags.firebaseAppAttributes
         , developmentMode = flags.developmentMode
+        , viewEntityList = []
         }
 
 

@@ -49,6 +49,7 @@ type alias Model =
     , fcmToken : Firebase.FCMToken
     , firebaseAppAttributes : Firebase.AppAttributes
     , developmentMode : Bool
+    , viewEntityList : List Entity
     }
 
 

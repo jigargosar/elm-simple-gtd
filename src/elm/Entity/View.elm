@@ -6,6 +6,7 @@ import Html.Attributes.Extra exposing (stringProperty)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Msg
+import Polymer.Paper as Paper
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -44,7 +45,7 @@ editEntityView tabindexAV vm form =
         [ class "entity-item layout vertical"
         , tabindexAV
         ]
-        [ input
+        [ Paper.input
             [ class "edit-entity-name-input auto-focus"
             , stringProperty "label" "Name"
             , value (form.name)
@@ -55,8 +56,8 @@ editEntityView tabindexAV vm form =
             ]
             []
         , div [ class "layout horizontal" ]
-            [ button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
-            , button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
+            [ Paper.button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
+            , Paper.button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
             , expand []
             , WebComponents.iconButton "delete" []
             ]

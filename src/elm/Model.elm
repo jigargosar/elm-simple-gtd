@@ -172,7 +172,7 @@ getActiveEntityList =
     getEntityStore >>> Store.reject Document.isDeleted
 
 
-getCurrentContextList model =
+getFilteredContextList model =
     Context.null
         :: if model.showDeleted then
             getDeletedEntityList GroupByContext model
@@ -180,7 +180,7 @@ getCurrentContextList model =
             getActiveEntityList GroupByContext model
 
 
-getCurrentProjectList model =
+getFilteredProjectList model =
     Project.null
         :: if model.showDeleted then
             getDeletedEntityList GroupByProject model
@@ -632,7 +632,7 @@ setMainViewType mainViewType model =
         GroupByContextView ->
             let
                 contextList =
-                    getCurrentContextList model
+                    getFilteredContextList model
 
                 entityList =
                     getContextsViewEntityList contextList model
@@ -652,7 +652,7 @@ setMainViewType mainViewType model =
         GroupByProjectView ->
             let
                 projectList =
-                    getCurrentProjectList model
+                    getFilteredProjectList model
 
                 entityList =
                     getProjectsViewEntityList projectList model

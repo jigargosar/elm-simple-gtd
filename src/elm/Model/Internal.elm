@@ -75,21 +75,6 @@ updateContextStoreM updater model =
     setContextStore (updater model) model
 
 
-getMainViewType : Model -> MainViewType
-getMainViewType =
-    (.mainViewType)
-
-
-setMainViewType : MainViewType -> ModelF
-setMainViewType mainViewType model =
-    { model | mainViewType = mainViewType }
-
-
-updateMainViewTypeM : (Model -> MainViewType) -> ModelF
-updateMainViewTypeM updater model =
-    setMainViewType (updater model) model
-
-
 getNow : Model -> Time
 getNow =
     (.now)

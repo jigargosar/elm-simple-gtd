@@ -598,3 +598,13 @@ onExternalEntityChange dbName encodedEntity =
 
         _ ->
             identity
+
+
+getMainViewType : Model -> MainViewType
+getMainViewType =
+    (.mainViewType)
+
+
+setMainViewType : MainViewType -> ModelF
+setMainViewType mainViewType model =
+    { model | mainViewType = mainViewType }

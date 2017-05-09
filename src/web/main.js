@@ -80,7 +80,9 @@ async function boot() {
     })
 
     app.ports["focusSelectorIfNoFocus"].subscribe((selector) => {
-        $(selector).focus()
+        if($(":focus").length === 0){
+            $(selector).focus()
+        }
     })
 
     app.ports["signIn"].subscribe(() => {

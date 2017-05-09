@@ -120,14 +120,14 @@ update msg =
                 FocusEntityById id ->
                     Return.map (Model.focusEntityById id)
 
-                OnEntityListKeyDown idList { key } ->
+                OnEntityListKeyDown idList { key, isShiftDown } ->
                     case key of
                         Key.ArrowUp ->
                             Return.map Model.focusPrevEntity
                                 >> andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
 
                         Key.ArrowDown ->
-                            Return.map Model.focusNextEntity
+                            Return.map (Model.focusNextEntity isShiftDown)
                                 >> andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
 
                         _ ->

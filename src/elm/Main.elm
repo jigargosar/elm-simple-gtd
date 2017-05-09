@@ -117,7 +117,7 @@ update msg =
                 OnFCMTokenChanged token ->
                     Return.map (Model.setFCMToken token)
 
-                SetMainViewFocusedDocumentId id ->
+                FocusEntityById id ->
                     Return.map (Model.focusEntityById id)
 
                 OnEntityListKeyDown idList { key } ->

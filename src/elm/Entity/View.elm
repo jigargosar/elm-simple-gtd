@@ -7,6 +7,7 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Msg
 import Polymer.Paper as Paper
+import Svg.Events exposing (onFocusIn)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -33,6 +34,7 @@ defaultView tabindexAV vm =
     div
         [ class "entity-item layout horizontal justified width--100"
         , tabindexAV
+        , onFocusIn vm.onFocusIn
         ]
         [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
         , WebComponents.iconButton "create"
@@ -44,6 +46,7 @@ editEntityView tabindexAV vm form =
     div
         [ class "entity-item layout vertical"
         , tabindexAV
+        , onFocusIn vm.onFocusIn
         ]
         [ Paper.input
             [ class "edit-entity-name-input auto-focus"

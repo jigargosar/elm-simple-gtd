@@ -49,6 +49,7 @@ type alias EntityViewModel =
     , onNameChanged : String -> Msg
     , onCancelClicked : Msg
     , icon : IconVM
+    , onFocusIn : Msg
     }
 
 
@@ -164,6 +165,7 @@ create todoListByEntityId config entity =
         , onCancelClicked = Msg.DeactivateEditingMode
         , icon = icon
         , appHeader = appHeader
+        , onFocusIn = Msg.FocusEntityById id
         }
 
 

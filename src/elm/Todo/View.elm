@@ -273,7 +273,7 @@ createTodoViewModel vc todo =
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
         , edit = createEditTodoViewModel vc todo
-        , onFocusIn = Msg.SetMainViewFocusedDocumentId todoId
+        , onFocusIn = Msg.FocusEntityById todoId
         , tabindexAV = tabindex -1
         }
 
@@ -281,7 +281,7 @@ createTodoViewModel vc todo =
 container { isEditing, id } =
     div
         [ classList [ "todo-item" => True, "editing" => isEditing ]
-        , id |> Msg.SetMainViewFocusedDocumentId |> onFocusIn
+        , id |> Msg.FocusEntityById |> onFocusIn
         ]
 
 

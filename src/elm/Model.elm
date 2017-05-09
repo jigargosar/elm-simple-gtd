@@ -49,25 +49,28 @@ init flags =
 
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.step storeGenerator (Random.seedFromTime now)
+
+        model =
+            { now = now
+            , todoStore = todoStore
+            , projectStore = projectStore
+            , contextStore = contextStore
+            , editMode = EditMode.none
+            , mainViewType = EntityListView GroupByContextView
+            , keyboardState = Keyboard.init
+            , showDeleted = False
+            , reminderOverlay = ReminderOverlay.none
+            , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
+            , appDrawerForceNarrow = False
+            , listSelection = ListSelection.empty
+            , user = Firebase.NotLoggedIn
+            , fcmToken = Nothing
+            , firebaseAppAttributes = flags.firebaseAppAttributes
+            , developmentMode = flags.developmentMode
+            , viewEntityList = []
+            }
     in
-        { now = now
-        , todoStore = todoStore
-        , projectStore = projectStore
-        , contextStore = contextStore
-        , editMode = EditMode.none
-        , mainViewType = EntityListView GroupByContextView
-        , keyboardState = Keyboard.init
-        , showDeleted = False
-        , reminderOverlay = ReminderOverlay.none
-        , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
-        , appDrawerForceNarrow = False
-        , listSelection = ListSelection.empty
-        , user = Firebase.NotLoggedIn
-        , fcmToken = Nothing
-        , firebaseAppAttributes = flags.firebaseAppAttributes
-        , developmentMode = flags.developmentMode
-        , viewEntityList = []
-        }
+        refreshViewEntityList model
 
 
 getMaybeUserProfile =
@@ -629,16 +632,19 @@ setMainViewType_ mainViewType model =
 
 
 setMainViewType : MainViewType -> ModelF
-setMainViewType mainViewType model =
-    (case mainViewType of
+setMainViewType mainViewType =
+    setMainViewType_ mainViewType
+        >> refreshViewEntityList
+
+
+refreshViewEntityList model =
+    case model.mainViewType of
         EntityListView viewType ->
             createViewEntityList viewType model
                 |> (setViewEntityList # model)
 
         _ ->
             model
-    )
-        |> setMainViewType_ mainViewType
 
 
 createViewEntityList viewType model =

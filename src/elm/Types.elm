@@ -50,9 +50,10 @@ type alias Model =
     , firebaseAppAttributes : Firebase.AppAttributes
     , developmentMode : Bool
     , viewEntityList : List Entity
-    , focusedEntityInfo : { id : Document.Id, index : Int }
+    , focusedEntityInfo : FocusedEntityInfo
     }
 
+type alias FocusedEntityInfo = { id : Document.Id, index : Int }
 
 type ModelField
     = NowField Time

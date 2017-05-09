@@ -18,17 +18,13 @@ import Time exposing (Time)
 import Todo
 
 
-type alias Selection =
-    Set Todo.Id
-
-
 type MainViewType
     = GroupByContextView
+    | ContextView Id
+    | GroupByProjectView
     | ProjectView Id
     | DoneView
     | BinView
-    | GroupByProjectView
-    | ContextView Id
     | SyncView
 
 

@@ -641,7 +641,7 @@ setMainViewType mainViewType model =
                                 (ContextEntity context) :: (todoEntitiesForContext context)
                             )
             in
-                model
+                setViewEntityList entityList model
 
         _ ->
             model

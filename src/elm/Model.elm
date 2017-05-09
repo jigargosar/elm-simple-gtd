@@ -605,6 +605,18 @@ getMainViewType =
     (.mainViewType)
 
 
+setMainViewType_ : MainViewType -> ModelF
+setMainViewType_ mainViewType model =
+    { model | mainViewType = mainViewType }
+
+
 setMainViewType : MainViewType -> ModelF
 setMainViewType mainViewType model =
-    { model | mainViewType = mainViewType }
+    (case getMainViewType model of
+        GroupByContextView ->
+            model
+
+        _ ->
+            model
+    )
+        |> setMainViewType_ mainViewType

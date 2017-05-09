@@ -10,7 +10,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Model.Types exposing (MainViewType(..))
+import Types exposing (MainViewType(..))
 import View.Shared exposing (SharedViewModel)
 
 
@@ -39,7 +39,7 @@ type alias Model =
     }
 
 
-create : Model.Types.Model -> Model
+create : Types.Model -> Model
 create model =
     let
         contextsVM =

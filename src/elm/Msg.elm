@@ -7,7 +7,7 @@ import Dom
 import EditMode
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
-import Model.Types exposing (..)
+import Types exposing (..)
 import Project
 import ReminderOverlay
 import Return

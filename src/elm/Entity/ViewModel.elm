@@ -5,7 +5,7 @@ import Dict
 import Document
 import EditMode exposing (EditForm)
 import Lazy
-import Model.Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(ToggleDeleted, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), GroupByEntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
+import Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(ToggleDeleted, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), GroupByEntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -70,7 +70,7 @@ type alias Config =
     }
 
 
-createList : Config -> Model.Types.Model -> List EntityViewModel
+createList : Config -> Types.Model -> List EntityViewModel
 createList config model =
     let
         todoListDict =
@@ -167,7 +167,7 @@ create todoListByEntityId config entity =
         }
 
 
-contexts : Model.Types.Model -> ViewModel
+contexts : Types.Model -> ViewModel
 contexts model =
     let
         config : Config
@@ -197,7 +197,7 @@ contexts model =
         }
 
 
-projects : Model.Types.Model -> ViewModel
+projects : Types.Model -> ViewModel
 projects model =
     let
         projectList : List EntityViewModel

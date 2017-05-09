@@ -39,7 +39,7 @@ import Maybe.Extra as Maybe
 import Tuple2
 import Html
 import Msg exposing (..)
-import Model.Types exposing (..)
+import Types exposing (..)
 import View
 
 

@@ -6,7 +6,7 @@ import Ext.Time
 import Firebase
 import Html.Attributes.Extra exposing (..)
 import Model
-import Model.Types exposing (Model)
+import Types exposing (Model)
 import Msg exposing (Msg)
 import Polymer.App as App
 import Polymer.Paper as Paper

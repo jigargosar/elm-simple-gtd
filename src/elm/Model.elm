@@ -32,7 +32,7 @@ import Todo.ReminderForm
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-import Model.Types exposing (..)
+import Types exposing (..)
 
 
 init : Flags -> Model

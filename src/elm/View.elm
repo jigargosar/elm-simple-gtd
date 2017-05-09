@@ -30,7 +30,7 @@ import Ext.Decode exposing (traceDecoder)
 import Json.Decode
 import Json.Encode
 import List.Extra as List
-import Model.Types exposing (..)
+import Types exposing (..)
 import Todo
 import Polymer.Paper as Paper exposing (dialog, material)
 import Polymer.App as App

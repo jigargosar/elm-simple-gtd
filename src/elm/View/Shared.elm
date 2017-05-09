@@ -24,7 +24,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Model.Types exposing (Model)
+import Types exposing (Model)
 import Project
 import Model.Internal as Model
 import Project

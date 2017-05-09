@@ -17,7 +17,7 @@ import Keyboard.Extra exposing (Key(Enter, Escape))
 import List.Extra
 import ListSelection
 import Maybe.Extra as Maybe
-import Model.Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
+import Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
 import Msg exposing (Msg, commonMsg)
 import Polymer.Attributes exposing (boolProperty, stringProperty)
 import Polymer.Events exposing (onTap)

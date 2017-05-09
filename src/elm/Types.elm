@@ -1,4 +1,4 @@
-module Model.Types exposing (..)
+module Types exposing (..)
 
 import Context
 import Document exposing (Id)

@@ -4,6 +4,10 @@ self.addEventListener('fetch', function (event) {
     // console.log("sw:fetch listener event",event, event.request.url)
 })
 
+self.addEventListener('install', function(event) {
+    event.waitUntil(self.skipWaiting())
+})
+
 self.addEventListener('notificationclick', function (event) {
     // console.log("notification click", event)
     // event.notification.close();

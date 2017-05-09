@@ -10,7 +10,7 @@ import Random.Pcg exposing (Seed)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
-import Model.Types exposing (..)
+import Types exposing (..)
 import Time exposing (Time)
 import Todo
 

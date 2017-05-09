@@ -32,7 +32,7 @@ import Json.Decode
 import Json.Encode
 import List.Extra as List
 import Model as Model
-import Model.Types exposing (..)
+import Types exposing (..)
 import Todo
 import Polymer.Paper as Paper exposing (badge, button, fab, input, item, itemBody, material, tab, tabs)
 import Polymer.App exposing (..)

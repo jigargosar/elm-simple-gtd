@@ -165,9 +165,7 @@ paper-listbox {
 
 .entity-item {
   margin-top: 2rem;
-  //padding: 0.5rem;
-  outline: none;
-  border-left: 2px solid transparent;
+//padding: 0.5rem; outline: none; border-left: 2px solid transparent;
 }
 
 .entity-item {
@@ -200,6 +198,10 @@ paper-listbox {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
   outline: none;
   border-left: 2px solid transparent;
+
+  &.selected{
+    background-color: rgba(255, 255, 0, 0.52);
+  }
 
   /*
   &:not(.editing) {

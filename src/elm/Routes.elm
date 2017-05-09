@@ -21,29 +21,31 @@ delta2builder previous current =
 
 getPathFromModel model =
     case Model.getMainViewType model of
-        GroupByContextView ->
-            [ "lists", "contexts" ]
+        TodoListView viewType ->
+            case viewType of
+                GroupByContextView ->
+                    [ "lists", "contexts" ]
+
+                GroupByProjectView ->
+                    [ "lists", "projects" ]
+
+                ProjectView id ->
+                    if String.isEmpty id then
+                        [ "project", "NotAssigned" ]
+                    else
+                        [ "project", id ]
+
+                ContextView id ->
+                    if String.isEmpty id then
+                        [ "Inbox" ]
+                    else
+                        [ "context", id ]
 
         BinView ->
             [ "lists", "bin" ]
 
         DoneView ->
             [ "lists", "done" ]
-
-        GroupByProjectView ->
-            [ "lists", "projects" ]
-
-        ProjectView id ->
-            if String.isEmpty id then
-                [ "project", "NotAssigned" ]
-            else
-                [ "project", id ]
-
-        ContextView id ->
-            if String.isEmpty id then
-                [ "Inbox" ]
-            else
-                [ "context", id ]
 
         SyncView ->
             [ "sync" ]
@@ -58,10 +60,10 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "contexts" :: [] ->
-            [ Msg.SetView GroupByContextView ]
+            [ Msg.SetView (TodoListView GroupByContextView) ]
 
         "lists" :: "projects" :: [] ->
-            [ Msg.SetView GroupByProjectView ]
+            [ Msg.SetView (TodoListView GroupByProjectView) ]
 
         "lists" :: "bin" :: [] ->
             [ Msg.SetView BinView ]
@@ -70,16 +72,16 @@ builder2messages builder =
             [ Msg.SetView DoneView ]
 
         "project" :: "NotAssigned" :: [] ->
-            [ Msg.SetView (ProjectView "") ]
+            [ Msg.SetView (ProjectView "" |> TodoListView) ]
 
         "project" :: id :: [] ->
-            [ Msg.SetView (ProjectView id) ]
+            [ Msg.SetView (ProjectView id |> TodoListView) ]
 
         "context" :: id :: [] ->
-            [ Msg.SetView (ContextView id) ]
+            [ Msg.SetView (ContextView id |> TodoListView) ]
 
         "Inbox" :: [] ->
-            [ Msg.SetView (ContextView "") ]
+            [ Msg.SetView (ContextView "" |> TodoListView) ]
 
         "notification" :: todoId :: [] ->
             [ Msg.ShowReminderOverlayForTodoId todoId ]

@@ -17,7 +17,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model
-import Types exposing (Entity(..), MainViewType(..))
+import Types exposing (Entity(..), MainViewType(..), TodoListViewType(..))
 import View.TodoList
 import ViewModel exposing (EntityView(..))
 
@@ -57,17 +57,19 @@ init viewModel model =
     in
         div [ id "main-view" ]
             [ case Model.getMainViewType model of
-                GroupByContextView ->
-                    View.TodoList.listView entityViewList viewModel model
+                TodoListView viewType ->
+                    case viewType of
+                        GroupByContextView ->
+                            View.TodoList.listView entityViewList viewModel model
 
-                GroupByProjectView ->
-                    View.TodoList.listView entityViewList viewModel model
+                        GroupByProjectView ->
+                            View.TodoList.listView entityViewList viewModel model
 
-                ContextView id ->
-                    View.TodoList.listView entityViewList viewModel model
+                        ContextView id ->
+                            View.TodoList.listView entityViewList viewModel model
 
-                ProjectView id ->
-                    View.TodoList.listView entityViewList viewModel model
+                        ProjectView id ->
+                            View.TodoList.listView entityViewList viewModel model
 
                 BinView ->
                     View.TodoList.filtered viewModel model

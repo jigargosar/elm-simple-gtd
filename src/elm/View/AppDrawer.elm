@@ -109,17 +109,19 @@ getSelectedIndex { mainViewType, projects, contexts } =
             projectsIndex + (List.length projects.entityList)
     in
         case mainViewType of
-            GroupByContextView ->
-                0
+            TodoListView viewType ->
+                case viewType of
+                    GroupByContextView ->
+                        0
 
-            ContextView id ->
-                1 + (contextIndexById id)
+                    ContextView id ->
+                        1 + (contextIndexById id)
 
-            GroupByProjectView ->
-                projectsIndex
+                    GroupByProjectView ->
+                        projectsIndex
 
-            ProjectView id ->
-                1 + projectsIndex + (projectIndexById id)
+                    ProjectView id ->
+                        1 + projectsIndex + (projectIndexById id)
 
             BinView ->
                 lastProjectIndex + 1
@@ -138,7 +140,7 @@ divider =
 entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
     [ item
         [ class "has-hover-elements"
-        , onClick (SetView viewType)
+        , onClick (SetView (TodoListView viewType))
         ]
         [ Html.node "iron-icon" [ iconA icon.name, style [ "color" => icon.color ] ] []
         , itemBody [] [ headLineText title ]

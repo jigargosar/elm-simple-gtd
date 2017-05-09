@@ -55,7 +55,7 @@ init flags =
         , projectStore = projectStore
         , contextStore = contextStore
         , editMode = EditMode.none
-        , mainViewType = GroupByContextView
+        , mainViewType = TodoListView GroupByContextView
         , keyboardState = Keyboard.init
         , showDeleted = False
         , reminderOverlay = ReminderOverlay.none
@@ -425,14 +425,18 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
     let
         maybeTodoUpdateAction =
             case model.mainViewType of
-                ContextView id ->
-                    model.contextStore |> Store.findById id >>? Todo.SetContext
+                TodoListView viewType ->
+                    case viewType of
+                        
+                        ContextView id ->
+                            model.contextStore |> Store.findById id >>? Todo.SetContext
 
-                ProjectView id ->
-                    model.projectStore |> Store.findById id >>? Todo.SetProject
+                        ProjectView id ->
+                            model.projectStore |> Store.findById id >>? Todo.SetProject
 
-                _ ->
-                    Nothing
+                        _ ->
+                            Nothing
+                _ -> Nothing
 
         maybeModel =
             maybeTodoUpdateAction
@@ -521,9 +525,6 @@ getCurrentTodoListFilter model =
 
         DoneView ->
             Todo.doneFilter
-
-        ProjectView projectId ->
-            Todo.projectIdFilter projectId
 
         _ ->
             always (True)
@@ -629,45 +630,47 @@ setMainViewType_ mainViewType model =
 setMainViewType : MainViewType -> ModelF
 setMainViewType mainViewType model =
     (case mainViewType of
-        GroupByContextView ->
-            let
-                contextList =
-                    getFilteredContextList model
+        TodoListView viewType ->
+            case viewType of
+                GroupByContextView ->
+                    let
+                        contextList =
+                            getFilteredContextList model
 
-                entityList =
-                    getContextsViewEntityList contextList model
-            in
-                setViewEntityList entityList model
+                        entityList =
+                            getContextsViewEntityList contextList model
+                    in
+                        setViewEntityList entityList model
 
-        ContextView id ->
-            let
-                contextList =
-                    model.contextStore |> Store.findById id ?= Context.null |> List.singleton
+                ContextView id ->
+                    let
+                        contextList =
+                            model.contextStore |> Store.findById id ?= Context.null |> List.singleton
 
-                entityList =
-                    getContextsViewEntityList contextList model
-            in
-                setViewEntityList entityList model
+                        entityList =
+                            getContextsViewEntityList contextList model
+                    in
+                        setViewEntityList entityList model
 
-        GroupByProjectView ->
-            let
-                projectList =
-                    getFilteredProjectList model
+                GroupByProjectView ->
+                    let
+                        projectList =
+                            getFilteredProjectList model
 
-                entityList =
-                    getProjectsViewEntityList projectList model
-            in
-                setViewEntityList entityList model
+                        entityList =
+                            getProjectsViewEntityList projectList model
+                    in
+                        setViewEntityList entityList model
 
-        ProjectView id ->
-            let
-                projectList =
-                    model.projectStore |> Store.findById id ?= Project.null |> List.singleton
+                ProjectView id ->
+                    let
+                        projectList =
+                            model.projectStore |> Store.findById id ?= Project.null |> List.singleton
 
-                entityList =
-                    getProjectsViewEntityList projectList model
-            in
-                setViewEntityList entityList model
+                        entityList =
+                            getProjectsViewEntityList projectList model
+                    in
+                        setViewEntityList entityList model
 
         _ ->
             model

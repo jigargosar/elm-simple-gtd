@@ -18,11 +18,15 @@ import Time exposing (Time)
 import Todo
 
 
-type MainViewType
+type TodoListViewType
     = GroupByContextView
     | ContextView Id
     | GroupByProjectView
     | ProjectView Id
+
+
+type MainViewType
+    = TodoListView TodoListViewType
     | DoneView
     | BinView
     | SyncView

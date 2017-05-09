@@ -5,7 +5,7 @@ import Dict
 import Document
 import EditMode exposing (EditForm)
 import Lazy
-import Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(ToggleDeleted, NameChanged, Save, StartEditing), GroupByEntity(GroupByContext, GroupByProject), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
+import Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupByEntity(GroupByContext, GroupByProject), MainViewType(..), TodoListViewType(..))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -26,7 +26,7 @@ type alias IconVM =
 
 type alias ViewModel =
     { entityList : List EntityViewModel
-    , viewType : MainViewType
+    , viewType : TodoListViewType
     , title : String
     , showDeleted : Bool
     , onAddClicked : Msg
@@ -65,7 +65,7 @@ type alias Config =
     , isNull : DocumentWithName -> Bool
     , nullIcon : IconVM
     , defaultIconName : String
-    , getViewType : Document.Id -> MainViewType
+    , getViewType : Document.Id -> TodoListViewType
     , maybeEditModel : Maybe EditMode.EntityForm
     }
 
@@ -153,7 +153,7 @@ create todoListByEntityId config entity =
         , onActiveStateChanged =
             (\bool ->
                 if bool then
-                    Msg.SetView (config.getViewType id)
+                    Msg.SetView (config.getViewType id |> TodoListView)
                 else
                     commonMsg.noOp
             )

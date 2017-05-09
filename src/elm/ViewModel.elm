@@ -10,7 +10,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Types exposing (MainViewType(..))
+import Types exposing (MainViewType(..), TodoListViewType(..))
 import View.Shared exposing (SharedViewModel)
 
 
@@ -79,17 +79,19 @@ getViewInfo mainViewType projectsVM contextsVM =
                 >> (\{ name, backgroundColor } -> ( name, backgroundColor ))
     in
         case mainViewType of
-            GroupByContextView ->
-                ( contextsVM.title, contextsVM.icon.color )
+            TodoListView viewType ->
+                case viewType of
+                    GroupByContextView ->
+                        ( contextsVM.title, contextsVM.icon.color )
 
-            ContextView id ->
-                contextsVM.entityList |> appHeaderInfoById id
+                    ContextView id ->
+                        contextsVM.entityList |> appHeaderInfoById id
 
-            GroupByProjectView ->
-                ( projectsVM.title, projectsVM.icon.color )
+                    GroupByProjectView ->
+                        ( projectsVM.title, projectsVM.icon.color )
 
-            ProjectView id ->
-                projectsVM.entityList |> appHeaderInfoById id
+                    ProjectView id ->
+                        projectsVM.entityList |> appHeaderInfoById id
 
             BinView ->
                 ( "Bin", sgtdBlue )

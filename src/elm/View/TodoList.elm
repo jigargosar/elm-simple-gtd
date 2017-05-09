@@ -64,37 +64,36 @@ filtered viewModel model =
                 ]
 
 
+tabindexAV focused =
+    let
+        tabindexValue =
+            if focused then
+                0
+            else
+                -1
+    in
+        tabindex tabindexValue
+
+
 listView entityViewList viewModel model =
     let
-        findIndexOfId id =
-            entityViewList
-                |> List.findIndex (ViewModel.getIdOfEntityView >> equals id)
-
         focusedIndex =
-            ListSelection.getMaybeSelected model.listSelection
-                ?+> findIndexOfId
-                ?= 0
+            model.focusedEntityInfo.index
 
         createEntityView index entityViewType =
             let
                 focused =
                     index == focusedIndex
 
-                tabindexValue =
-                    if focused then
-                        0
-                    else
-                        -1
-
-                tabindexAV =
-                    tabindex tabindexValue
+                tabIndexAV_ =
+                    tabindexAV focused
             in
                 case entityViewType of
                     EntityView vm ->
-                        Entity.View.initKeyed tabindexAV viewModel vm
+                        Entity.View.initKeyed tabIndexAV_ viewModel vm
 
                     TodoView todo ->
-                        Todo.View.initKeyed tabindexAV (viewModel.createTodoViewModel todo)
+                        Todo.View.initKeyed tabIndexAV_ (viewModel.createTodoViewModel todo)
 
         idList =
             entityViewList

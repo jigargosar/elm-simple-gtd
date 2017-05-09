@@ -173,17 +173,19 @@ getActiveEntityList =
 
 
 getCurrentContextList model =
-    if model.showDeleted then
-        getDeletedEntityList ContextEntityType model
-    else
-        getActiveEntityList ContextEntityType model
+    Context.null
+        :: if model.showDeleted then
+            getDeletedEntityList ContextEntityType model
+           else
+            getActiveEntityList ContextEntityType model
 
 
 getCurrentProjectList model =
-    if model.showDeleted then
-        getDeletedEntityList ProjectEntityType model
-    else
-        getActiveEntityList ProjectEntityType model
+    Project.null
+        :: if model.showDeleted then
+            getDeletedEntityList ProjectEntityType model
+           else
+            getActiveEntityList ProjectEntityType model
 
 
 getActiveTodoList =
@@ -626,7 +628,7 @@ setMainViewType_ mainViewType model =
 
 setMainViewType : MainViewType -> ModelF
 setMainViewType mainViewType model =
-    (case getMainViewType model of
+    (case mainViewType of
         GroupByContextView ->
             let
                 contextList =

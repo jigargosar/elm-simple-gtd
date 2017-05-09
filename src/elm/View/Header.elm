@@ -38,6 +38,7 @@ init viewModel m =
 
         --        , attribute "fixed" "true"
         , attribute "slot" "header"
+        , id "main-header"
         ]
         [ App.toolbar
             [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]

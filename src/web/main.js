@@ -81,7 +81,7 @@ async function boot() {
 
     app.ports["focusSelectorIfNoFocus"].subscribe((selector) => {
         const $focus = $(":focus, [focused]")
-        console.log($focus, $focus.length)
+        // console.log($focus, $focus.length)
         if ($focus.length === 0) {
             $(selector).focus()
         }

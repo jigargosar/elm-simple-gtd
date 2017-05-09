@@ -632,51 +632,44 @@ setMainViewType : MainViewType -> ModelF
 setMainViewType mainViewType model =
     (case mainViewType of
         EntityListView viewType ->
-            case viewType of
-                GroupByContextView ->
-                    let
-                        contextList =
-                            getFilteredContextList model
-
-                        entityList =
-                            getContextsViewEntityList contextList model
-                    in
-                        setViewEntityList entityList model
-
-                ContextView id ->
-                    let
-                        contextList =
-                            model.contextStore |> Store.findById id ?= Context.null |> List.singleton
-
-                        entityList =
-                            getContextsViewEntityList contextList model
-                    in
-                        setViewEntityList entityList model
-
-                GroupByProjectView ->
-                    let
-                        projectList =
-                            getFilteredProjectList model
-
-                        entityList =
-                            getProjectsViewEntityList projectList model
-                    in
-                        setViewEntityList entityList model
-
-                ProjectView id ->
-                    let
-                        projectList =
-                            model.projectStore |> Store.findById id ?= Project.null |> List.singleton
-
-                        entityList =
-                            getProjectsViewEntityList projectList model
-                    in
-                        setViewEntityList entityList model
+            createViewEntityList viewType model
+                |> (setViewEntityList # model)
 
         _ ->
             model
     )
         |> setMainViewType_ mainViewType
+
+
+createViewEntityList viewType model =
+    case viewType of
+        GroupByContextView ->
+            let
+                contextList =
+                    getFilteredContextList model
+            in
+                getContextsViewEntityList contextList model
+
+        ContextView id ->
+            let
+                contextList =
+                    model.contextStore |> Store.findById id ?= Context.null |> List.singleton
+            in
+                getContextsViewEntityList contextList model
+
+        GroupByProjectView ->
+            let
+                projectList =
+                    getFilteredProjectList model
+            in
+                getProjectsViewEntityList projectList model
+
+        ProjectView id ->
+            let
+                projectList =
+                    model.projectStore |> Store.findById id ?= Project.null |> List.singleton
+            in
+                getProjectsViewEntityList projectList model
 
 
 getContextsViewEntityList contextList model =

@@ -634,21 +634,8 @@ setMainViewType mainViewType model =
                 contextList =
                     getCurrentContextList model
 
-                todoListByContextId =
-                    getActiveTodoListGroupedBy Todo.getContextId model
-
-                todoEntitiesForContext context =
-                    todoListByContextId
-                        |> Dict.get (Document.getId context)
-                        ?= []
-                        .|> TodoEntity
-
                 entityList =
-                    contextList
-                        |> List.concatMap
-                            (\context ->
-                                (ContextEntity context) :: (todoEntitiesForContext context)
-                            )
+                    getContextsViewEntityList contextList model
             in
                 setViewEntityList entityList model
 
@@ -679,6 +666,25 @@ setMainViewType mainViewType model =
             model
     )
         |> setMainViewType_ mainViewType
+
+
+getContextsViewEntityList contextList model =
+    let
+        -- todo : use getFiltered todo list
+        todoListByContextId =
+            getActiveTodoListGroupedBy Todo.getContextId model
+
+        todoEntitiesForContext context =
+            todoListByContextId
+                |> Dict.get (Document.getId context)
+                ?= []
+                .|> TodoEntity
+    in
+        contextList
+            |> List.concatMap
+                (\context ->
+                    (ContextEntity context) :: (todoEntitiesForContext context)
+                )
 
 
 getViewEntityList : Model -> List Entity

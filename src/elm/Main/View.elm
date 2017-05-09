@@ -61,13 +61,13 @@ init viewModel model =
                     View.TodoList.listView entityViewList viewModel model
 
                 GroupByProjectView ->
-                    View.TodoList.groupByEntity viewModel viewModel.projects.entityList model
-
-                ProjectView id ->
                     View.TodoList.listView entityViewList viewModel model
 
                 ContextView id ->
                     View.TodoList.groupByEntityWithId viewModel contextVMs id model
+
+                ProjectView id ->
+                    View.TodoList.groupByEntityWithId viewModel projectVMs id model
 
                 BinView ->
                     View.TodoList.filtered viewModel model

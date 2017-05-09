@@ -140,20 +140,20 @@ insertContextIfNotExist name =
 
 getEntityStore entityType =
     case entityType of
-        ProjectEntityType ->
+        GroupByProject ->
             .projectStore
 
-        ContextEntityType ->
+        GroupByContext ->
             .contextStore
 
 
-getMaybeEditModelForEntityType : GroupByEntityType -> Model -> Maybe EditMode.EntityForm
+getMaybeEditModelForEntityType : GroupByEntity -> Model -> Maybe EditMode.EntityForm
 getMaybeEditModelForEntityType entityType model =
     case ( entityType, model.editMode ) of
-        ( ProjectEntityType, EditMode.EditProject editModel ) ->
+        ( GroupByProject, EditMode.EditProject editModel ) ->
             Just editModel
 
-        ( ContextEntityType, EditMode.EditContext editModel ) ->
+        ( GroupByContext, EditMode.EditContext editModel ) ->
             Just editModel
 
         _ ->
@@ -175,17 +175,17 @@ getActiveEntityList =
 getCurrentContextList model =
     Context.null
         :: if model.showDeleted then
-            getDeletedEntityList ContextEntityType model
+            getDeletedEntityList GroupByContext model
            else
-            getActiveEntityList ContextEntityType model
+            getActiveEntityList GroupByContext model
 
 
 getCurrentProjectList model =
     Project.null
         :: if model.showDeleted then
-            getDeletedEntityList ProjectEntityType model
+            getDeletedEntityList GroupByProject model
            else
-            getActiveEntityList ProjectEntityType model
+            getActiveEntityList GroupByProject model
 
 
 getActiveTodoList =

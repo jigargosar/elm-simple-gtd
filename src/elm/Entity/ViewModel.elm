@@ -5,7 +5,7 @@ import Dict
 import Document
 import EditMode exposing (EditForm)
 import Lazy
-import Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(ToggleDeleted, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), GroupByEntityType(ContextEntityType, ProjectEntityType), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
+import Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(ToggleDeleted, NameChanged, Save, StartEditing), EntityStoreType(ContextEntityStoreType, ProjectEntityStoreType), GroupByEntity(GroupByContext, GroupByProject), MainViewType(ContextView, GroupByContextView, GroupByProjectView, ProjectView))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -59,7 +59,7 @@ type alias DocumentWithName =
 type alias Config =
     { groupByFn : Todo.Model -> Document.Id
     , namePrefix : String
-    , entityType : GroupByEntityType
+    , entityType : GroupByEntity
     , entityWrapper : DocumentWithName -> Entity
     , nullEntity : DocumentWithName
     , isNull : DocumentWithName -> Bool
@@ -174,14 +174,14 @@ contexts model =
         config =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
-            , entityType = ContextEntityType
+            , entityType = GroupByContext
             , entityWrapper = ContextEntity
             , nullEntity = Context.null
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = ContextView
-            , maybeEditModel = Model.getMaybeEditModelForEntityType ContextEntityType model
+            , maybeEditModel = Model.getMaybeEditModelForEntityType GroupByContext model
             }
 
         contextList : List EntityViewModel
@@ -205,14 +205,14 @@ projects model =
             createList
                 { groupByFn = Todo.getProjectId
                 , namePrefix = "#"
-                , entityType = ProjectEntityType
+                , entityType = GroupByProject
                 , entityWrapper = ProjectEntity
                 , nullEntity = Project.null
                 , isNull = Project.isNull
                 , nullIcon = { name = "apps", color = nullProjectColor }
                 , defaultIconName = "apps"
                 , getViewType = ProjectView
-                , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectEntityType model
+                , maybeEditModel = Model.getMaybeEditModelForEntityType GroupByProject model
                 }
                 model
     in

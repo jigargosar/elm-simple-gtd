@@ -75,9 +75,9 @@ type Entity
     | TodoEntity Todo.Model
 
 
-type GroupByEntityType
-    = ProjectEntityType
-    | ContextEntityType
+type GroupByEntity
+    = GroupByProject
+    | GroupByContext
 
 
 type EntityStoreType

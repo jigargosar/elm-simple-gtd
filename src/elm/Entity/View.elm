@@ -13,7 +13,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import View.Shared exposing (expand)
+import View.Shared exposing (defaultOkCancelDeleteButtons, expand)
 import WebComponents
 
 
@@ -55,10 +55,5 @@ editEntityView tabindexAV vm form =
             --                        , onKeyUp vm.onKeyUp
             ]
             []
-        , div [ class "layout horizontal" ]
-            [ Paper.button [ onClick vm.onSaveClicked ] [ "Save" |> text ]
-            , Paper.button [ onClick vm.onCancelClicked ] [ "Cancel" |> text ]
-            , expand []
-            , WebComponents.iconButton "delete" []
-            ]
+        , defaultOkCancelDeleteButtons vm.onDeleteClicked
         ]

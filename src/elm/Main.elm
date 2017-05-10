@@ -187,6 +187,7 @@ update msg =
 
                 DeactivateEditingMode ->
                     Return.map (Model.deactivateEditingMode)
+                        >> andThenUpdate setDomFocusToFocusedEntityCmd
 
                 NewTodoKeyUp { text } { key } ->
                     case key of

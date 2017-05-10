@@ -85,9 +85,6 @@ listView entityList viewModel =
         getMaybeProjectVM project =
             projectVMs |> List.find (.id >> equals (Document.getId project))
 
-        focusedIndex =
-            viewModel.focusedEntityInfo.index
-
         focusedId =
             entityList
                 |> List.find (Model.getEntityId >> equals viewModel.focusedEntityInfo.id)

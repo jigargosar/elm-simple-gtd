@@ -56,7 +56,7 @@ init flags =
             , projectStore = projectStore
             , contextStore = contextStore
             , editMode = EditMode.none
-            , mainViewType = EntityListView GroupByContextView
+            , mainViewType = EntityListView ContextsView
             , keyboardState = Keyboard.init
             , showDeleted = False
             , reminderOverlay = ReminderOverlay.none
@@ -726,7 +726,7 @@ focusNextEntity entityList model =
 
 createViewEntityList viewType model =
     case viewType of
-        GroupByContextView ->
+        ContextsView ->
             let
                 contextList =
                     getFilteredContextList model
@@ -740,7 +740,7 @@ createViewEntityList viewType model =
             in
                 getContextsViewEntityList contextList model
 
-        GroupByProjectView ->
+        ProjectsView ->
             let
                 projectList =
                     getFilteredProjectList model

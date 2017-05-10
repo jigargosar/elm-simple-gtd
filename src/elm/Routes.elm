@@ -23,10 +23,10 @@ getPathFromModel model =
     case Model.getMainViewType model of
         EntityListView viewType ->
             case viewType of
-                GroupByContextView ->
+                ContextsView ->
                     [ "lists", "contexts" ]
 
-                GroupByProjectView ->
+                ProjectsView ->
                     [ "lists", "projects" ]
 
                 ProjectView id ->
@@ -60,10 +60,10 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "contexts" :: [] ->
-            [ Msg.SetEntityListView GroupByContextView ]
+            [ Msg.SetGroupByView ContextsView ]
 
         "lists" :: "projects" :: [] ->
-            [ Msg.SetEntityListView GroupByProjectView ]
+            [ Msg.SetGroupByView ProjectsView ]
 
         "lists" :: "bin" :: [] ->
             [ Msg.SetView BinView ]
@@ -72,16 +72,16 @@ builder2messages builder =
             [ Msg.SetView DoneView ]
 
         "Inbox" :: [] ->
-            [ Msg.SetEntityListView (ContextView "") ]
+            [ Msg.SetGroupByView (ContextView "") ]
 
         "context" :: id :: [] ->
-            [ Msg.SetEntityListView (ContextView id) ]
+            [ Msg.SetGroupByView (ContextView id) ]
 
         "project" :: "NotAssigned" :: [] ->
-            [ Msg.SetEntityListView (ProjectView "") ]
+            [ Msg.SetGroupByView (ProjectView "") ]
 
         "project" :: id :: [] ->
-            [ Msg.SetEntityListView (ProjectView id) ]
+            [ Msg.SetGroupByView (ProjectView id) ]
 
         "notification" :: todoId :: [] ->
             [ Msg.ShowReminderOverlayForTodoId todoId ]

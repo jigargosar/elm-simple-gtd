@@ -12,7 +12,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Types exposing (EntityListViewType(..), EntityFocus, MainViewType(..))
+import Types exposing (GroupByViewType(..), EntityFocus, MainViewType(..))
 import View.Shared exposing (SharedViewModel)
 
 
@@ -85,13 +85,13 @@ getViewInfo mainViewType projectsVM contextsVM =
         case mainViewType of
             EntityListView viewType ->
                 case viewType of
-                    GroupByContextView ->
+                    ContextsView ->
                         ( contextsVM.title, contextsVM.icon.color )
 
                     ContextView id ->
                         contextsVM.entityList |> appHeaderInfoById id
 
-                    GroupByProjectView ->
+                    ProjectsView ->
                         ( projectsVM.title, projectsVM.icon.color )
 
                     ProjectView id ->

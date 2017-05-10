@@ -5,7 +5,7 @@ import Dict
 import Document
 import EditMode exposing (EditForm)
 import Lazy
-import Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupByEntity(GroupByContext, GroupByProject), MainViewType(..), EntityListViewType(..))
+import Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupByEntity(GroupByContext, GroupByProject), MainViewType(..), GroupByViewType(..))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -26,7 +26,7 @@ type alias IconVM =
 
 type alias ViewModel =
     { entityList : List EntityViewModel
-    , viewType : EntityListViewType
+    , viewType : GroupByViewType
     , title : String
     , showDeleted : Bool
     , onAddClicked : Msg
@@ -68,7 +68,7 @@ type alias Config =
     , isNull : DocumentWithName -> Bool
     , nullIcon : IconVM
     , defaultIconName : String
-    , getViewType : Document.Id -> EntityListViewType
+    , getViewType : Document.Id -> GroupByViewType
     , maybeEditModel : Maybe EditMode.EntityForm
     }
 
@@ -195,7 +195,7 @@ contexts model =
             createList config model
     in
         { entityList = contextList
-        , viewType = GroupByContextView
+        , viewType = ContextsView
         , title = "Contexts"
         , showDeleted = model.showDeleted
         , onAddClicked = Msg.NewContext
@@ -223,7 +223,7 @@ projects model =
                 model
     in
         { entityList = projectList
-        , viewType = GroupByProjectView
+        , viewType = ProjectsView
         , title = "Projects"
         , showDeleted = model.showDeleted
         , onAddClicked = Msg.NewProject

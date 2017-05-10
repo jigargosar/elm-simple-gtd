@@ -111,13 +111,13 @@ getSelectedIndex { mainViewType, projects, contexts } =
         case mainViewType of
             EntityListView viewType ->
                 case viewType of
-                    GroupByContextView ->
+                    ContextsView ->
                         0
 
                     ContextView id ->
                         1 + (contextIndexById id)
 
-                    GroupByProjectView ->
+                    ProjectsView ->
                         projectsIndex
 
                     ProjectView id ->

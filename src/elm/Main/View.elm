@@ -17,7 +17,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model
-import Types exposing (Entity(..), MainViewType(..), EntityListViewType(..))
+import Types exposing (Entity(..), MainViewType(..), GroupByViewType(..))
 import View.TodoList
 import ViewModel exposing (EntityView(..))
 

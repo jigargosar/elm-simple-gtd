@@ -226,7 +226,7 @@ update msg =
                 SetView viewType ->
                     Return.map (Model.setMainViewType viewType)
 
-                SetEntityListView viewType ->
+                SetGroupByView viewType ->
                     Return.map (Model.setEntityListViewType viewType)
 
                 ShowReminderOverlayForTodoId todoId ->

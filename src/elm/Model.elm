@@ -713,40 +713,14 @@ toggleSetMember item set =
 
 focusPrevEntity : Bool -> ModelF
 focusPrevEntity expandSelection model =
-    let
-        focusedEntityIndex =
-            (model.focusedEntityInfo.index - 1)
-                |> (List.clampIndex # model.viewEntityList)
-
-        focusedEntityId =
-            focusedEntityIndex
-                |> (List.getAt # model.viewEntityList)
-                ?|> getEntityId
-                ?= ""
-
-        focusedEntityInfo =
-            { id = focusedEntityId, index = focusedEntityIndex }
-    in
-        { model | focusedEntityInfo = focusedEntityInfo }
+    (model.focusedEntityInfo.index - 1)
+        |> (focusEntityByIndex # model)
 
 
 focusNextEntity : Bool -> ModelF
 focusNextEntity expandSelection model =
-    let
-        focusedEntityIndex =
-            (model.focusedEntityInfo.index + 1)
-                |> (List.clampIndex # model.viewEntityList)
-
-        focusedEntityId =
-            focusedEntityIndex
-                |> (List.getAt # model.viewEntityList)
-                ?|> getEntityId
-                ?= ""
-
-        focusedEntityInfo =
-            { id = focusedEntityId, index = focusedEntityIndex }
-    in
-        { model | focusedEntityInfo = focusedEntityInfo }
+    (model.focusedEntityInfo.index + 1)
+        |> (focusEntityByIndex # model)
 
 
 createViewEntityList viewType model =

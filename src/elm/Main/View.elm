@@ -23,74 +23,32 @@ import ViewModel exposing (EntityView(..))
 
 
 init viewModel model =
-    let
-        projectVMs =
-            viewModel.projects.entityList
+    div [ id "main-view" ]
+        [ case Model.getMainViewType model of
+            EntityListView viewType ->
+                Model.createViewEntityList viewType model
+                    |> (View.TodoList.listView # viewModel)
 
-        contextVMs =
-            viewModel.contexts.entityList
+            BinView ->
+                View.TodoList.filtered viewModel model
 
-        getMaybeContextVM context =
-            contextVMs |> List.find (.id >> equals (Document.getId context))
+            DoneView ->
+                View.TodoList.filtered viewModel model
 
-        getMaybeProjectVM project =
-            projectVMs |> List.find (.id >> equals (Document.getId project))
-
-        entityList =
-            Model.getViewEntityList model
-
-        entityViewList : List EntityView
-        entityViewList =
-            entityList
-                .|> (\entity ->
-                        case entity of
-                            ContextEntity context ->
-                                getMaybeContextVM context ?|> EntityView
-
-                            ProjectEntity project ->
-                                getMaybeProjectVM project ?|> EntityView
-
-                            TodoEntity todo ->
-                                TodoView todo |> Just
-                    )
-                |> List.filterMap identity
-    in
-        div [ id "main-view" ]
-            [ case Model.getMainViewType model of
-                EntityListView viewType ->
-                    case viewType of
-                        GroupByContextView ->
-                            View.TodoList.listView entityViewList viewModel model
-
-                        GroupByProjectView ->
-                            View.TodoList.listView entityViewList viewModel model
-
-                        ContextView id ->
-                            View.TodoList.listView entityViewList viewModel model
-
-                        ProjectView id ->
-                            View.TodoList.listView entityViewList viewModel model
-
-                BinView ->
-                    View.TodoList.filtered viewModel model
-
-                DoneView ->
-                    View.TodoList.filtered viewModel model
-
-                SyncView ->
-                    let
-                        form =
-                            Model.getRemoteSyncForm model
-                    in
-                        Paper.material [ class "static layout vertical" ]
-                            [ Paper.input
-                                [ attribute "label" "Cloudant URL or any CouchDB URL"
-                                , value form.uri
-                                , onInput (Msg.UpdateRemoteSyncFormUri form)
-                                ]
-                                []
-                            , div []
-                                [ Paper.button [ form |> Msg.RemotePouchSync >> onClick ] [ text "Sync" ]
-                                ]
+            SyncView ->
+                let
+                    form =
+                        Model.getRemoteSyncForm model
+                in
+                    Paper.material [ class "static layout vertical" ]
+                        [ Paper.input
+                            [ attribute "label" "Cloudant URL or any CouchDB URL"
+                            , value form.uri
+                            , onInput (Msg.UpdateRemoteSyncFormUri form)
                             ]
-            ]
+                            []
+                        , div []
+                            [ Paper.button [ form |> Msg.RemotePouchSync >> onClick ] [ text "Sync" ]
+                            ]
+                        ]
+        ]

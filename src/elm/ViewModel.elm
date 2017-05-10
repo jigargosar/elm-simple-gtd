@@ -12,7 +12,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Types exposing (MainViewType(..), EntityListViewType(..))
+import Types exposing (EntityListViewType(..), FocusedEntityInfo, MainViewType(..))
 import View.Shared exposing (SharedViewModel)
 
 
@@ -38,6 +38,7 @@ type alias Model =
     , header : { backgroundColor : String }
     , shared : SharedViewModel
     , createTodoViewModel : Attribute Msg -> Todo.Model -> Todo.View.TodoViewModel
+    , focusedEntityInfo : FocusedEntityInfo
     }
 
 
@@ -67,6 +68,7 @@ create model =
             { backgroundColor = headerBackgroundColor }
             sharedViewModel
             (Todo.View.createTodoViewModel sharedViewModel)
+            model.focusedEntityInfo
 
 
 getViewInfo mainViewType projectsVM contextsVM =

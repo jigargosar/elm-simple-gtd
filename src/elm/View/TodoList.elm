@@ -71,10 +71,41 @@ getTabindexAV focused =
         tabindex tabindexValue
 
 
-listView entityViewList viewModel model =
+listView entityList viewModel =
     let
+        projectVMs =
+            viewModel.projects.entityList
+
+        contextVMs =
+            viewModel.contexts.entityList
+
+        getMaybeContextVM context =
+            contextVMs |> List.find (.id >> equals (Document.getId context))
+
+        getMaybeProjectVM project =
+            projectVMs |> List.find (.id >> equals (Document.getId project))
+
+        entityListToViewEntityList : List Entity -> List EntityView
+        entityListToViewEntityList entityList =
+            entityList
+                .|> (\entity ->
+                        case entity of
+                            ContextEntity context ->
+                                getMaybeContextVM context ?|> EntityView
+
+                            ProjectEntity project ->
+                                getMaybeProjectVM project ?|> EntityView
+
+                            TodoEntity todo ->
+                                TodoView todo |> Just
+                    )
+                |> List.filterMap identity
+
+        entityViewList =
+            entityListToViewEntityList entityList
+
         focusedIndex =
-            model.focusedEntityInfo.index
+            viewModel.focusedEntityInfo.index
 
         createEntityView index entityViewType =
             let

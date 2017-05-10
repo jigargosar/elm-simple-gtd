@@ -85,29 +85,10 @@ listView entityList viewModel =
         getMaybeProjectVM project =
             projectVMs |> List.find (.id >> equals (Document.getId project))
 
-        entityListToViewEntityList : List Entity -> List EntityView
-        entityListToViewEntityList entityList =
-            entityList
-                .|> (\entity ->
-                        case entity of
-                            ContextEntity context ->
-                                getMaybeContextVM context ?|> EntityView
-
-                            ProjectEntity project ->
-                                getMaybeProjectVM project ?|> EntityView
-
-                            TodoEntity todo ->
-                                TodoView todo |> Just
-                    )
-                |> List.filterMap identity
-
-        entityViewList =
-            entityListToViewEntityList entityList
-
         focusedIndex =
             viewModel.focusedEntityInfo.index
 
-        createEntityView index entityViewType =
+        createEntityView index entity =
             let
                 focused =
                     index == focusedIndex
@@ -115,21 +96,25 @@ listView entityList viewModel =
                 tabIndexAV =
                     getTabindexAV focused
             in
-                case entityViewType of
-                    EntityView vm ->
-                        Entity.View.initKeyed tabIndexAV viewModel vm
+                case entity of
+                    ContextEntity context ->
+                        getMaybeContextVM context ?|> (Entity.View.initKeyed tabIndexAV viewModel)
 
-                    TodoView todo ->
-                        Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo)
+                    ProjectEntity project ->
+                        getMaybeProjectVM project ?|> (Entity.View.initKeyed tabIndexAV viewModel)
+
+                    TodoEntity todo ->
+                        Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo) |> Just
 
         idList =
-            entityViewList
-                .|> ViewModel.getIdOfEntityView
+            entityList
+                .|> Model.getEntityId
     in
         Keyed.node "div"
             [ class "entity-list"
             , Msg.OnEntityListKeyDown idList |> onKeyDown
             ]
-            (entityViewList
+            (entityList
                 |> List.indexedMap createEntityView
+                |> List.filterMap identity
             )

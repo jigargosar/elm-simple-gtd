@@ -2,6 +2,8 @@ module ViewModel exposing (..)
 
 import Document
 import Entity.ViewModel exposing (EntityViewModel)
+import Html exposing (Attribute)
+import Msg exposing (Msg)
 import Todo
 import Todo.View
 import Toolkit.Helpers exposing (..)
@@ -35,7 +37,7 @@ type alias Model =
     , mainViewType : MainViewType
     , header : { backgroundColor : String }
     , shared : SharedViewModel
-    , createTodoViewModel : Todo.Model -> Todo.View.TodoViewModel
+    , createTodoViewModel : Attribute Msg -> Todo.Model -> Todo.View.TodoViewModel
     }
 
 

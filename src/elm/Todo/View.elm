@@ -41,20 +41,16 @@ import View.Shared exposing (SharedViewModel, defaultOkCancelButtons, defaultOkC
 import WebComponents exposing (..)
 
 
-initKeyed : Attribute Msg -> TodoViewModel -> ( String, Html Msg )
-initKeyed tabindexAV vm =
-    ( vm.key, init tabindexAV vm )
+initKeyed : TodoViewModel -> ( String, Html Msg )
+initKeyed vm =
+    ( vm.key, init vm )
 
 
-init tabindexAV vm_ =
-    let
-        vm =
-            { vm_ | tabindexAV = tabindexAV }
-    in
-        if vm.edit.isEditing && not vm.isSelected then
-            editView vm
-        else
-            defaultView vm
+init vm =
+    if vm.edit.isEditing && not vm.isSelected then
+        editView vm
+    else
+        defaultView vm
 
 
 type alias EditViewModel =
@@ -192,8 +188,8 @@ createReminderViewModel vc todo =
         }
 
 
-createTodoViewModel : SharedViewModel -> Todo.Model -> TodoViewModel
-createTodoViewModel vc todo =
+createTodoViewModel : SharedViewModel -> Attribute Msg -> Todo.Model -> TodoViewModel
+createTodoViewModel vc tabindexAV todo =
     let
         todoId =
             Document.getId todo
@@ -275,7 +271,7 @@ createTodoViewModel vc todo =
         , reminder = createReminderViewModel vc todo
         , edit = createEditTodoViewModel vc todo
         , onFocusIn = Msg.FocusEntityById todoId
-        , tabindexAV = tabindex -1
+        , tabindexAV = tabindexAV
         , isSelected = vc.selectedEntityIdSet |> Set.member todoId
         }
 

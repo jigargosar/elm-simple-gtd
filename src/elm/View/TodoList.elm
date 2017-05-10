@@ -48,11 +48,8 @@ import WebComponents
 filtered : ViewModel.Model -> Model -> Html Msg
 filtered viewModel model =
     let
-        vc =
-            viewModel.shared
-
         createTodoView todo =
-            Todo.View.initKeyed (tabindex -1) (Todo.View.createTodoViewModel vc todo)
+            Todo.View.initKeyed (viewModel.createTodoViewModel (tabindex -1) todo)
     in
         model
             |> Model.getFilteredTodoList
@@ -63,7 +60,7 @@ filtered viewModel model =
                 ]
 
 
-tabindexAV focused =
+getTabindexAV focused =
     let
         tabindexValue =
             if focused then
@@ -84,15 +81,15 @@ listView entityViewList viewModel model =
                 focused =
                     index == focusedIndex
 
-                tabIndexAV_ =
-                    tabindexAV focused
+                tabIndexAV =
+                    getTabindexAV focused
             in
                 case entityViewType of
                     EntityView vm ->
-                        Entity.View.initKeyed tabIndexAV_ viewModel vm
+                        Entity.View.initKeyed tabIndexAV viewModel vm
 
                     TodoView todo ->
-                        Todo.View.initKeyed tabIndexAV_ (viewModel.createTodoViewModel todo)
+                        Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo)
 
         idList =
             entityViewList

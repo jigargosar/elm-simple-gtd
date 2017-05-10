@@ -11,7 +11,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model
 import Model.Internal as Model
-import Msg exposing (Msg)
+import Msg exposing (Msg, commonMsg)
 import Polymer.Firebase
 import ReminderOverlay
 import Set
@@ -40,7 +40,7 @@ import View.ReminderOverlay exposing (showReminderOverlay)
 import View.Shared exposing (..)
 import Todo.View
 import ViewModel
-import WebComponents exposing (doneAllIconP, dynamicAlign, icon, iconButton, iconA, iconTextButton, onPropertyChanged, paperIconButton, slotDropdownContent, slotDropdownTrigger, testDialog)
+import WebComponents exposing (doneAllIconP, dynamicAlign, icon, iconA, iconButton, iconTextButton, onBoolPropertyChanged, onPropertyChanged, paperIconButton, slotDropdownContent, slotDropdownTrigger, testDialog)
 
 
 init m =
@@ -75,6 +75,7 @@ appDrawerLayoutView m =
     in
         App.drawerLayout
             [ boolProperty "forceNarrow" m.appDrawerForceNarrow
+            , onBoolPropertyChanged "narrow" Msg.OnLayoutNarrowChanged
             ]
             [ View.AppDrawer.view viewModel m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]

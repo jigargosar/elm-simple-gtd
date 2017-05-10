@@ -29,31 +29,38 @@ newTodoInputId =
 
 
 init viewModel m =
-    App.header
-        [ attribute "reveals" ""
-        , attribute "condenses" ""
-
-        --        , attribute "effects" "material"
-        , attribute "effects" "waterfall"
-
-        --        , attribute "fixed" "true"
-        , attribute "slot" "header"
-        , id "main-header"
-        ]
-        [ App.toolbar
-            [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
-            ]
-            [ paperIconButton
-                [ iconA "menu"
-                , tabindex -1
-                , attribute "drawer-toggle" ""
-                , onClick Msg.ToggleDrawer
-                , class "hide-when-wide"
+    let
+        fixedAttributeAsList =
+            if Model.isLayoutUnForcedNarrow m then
+                [ attribute "condenses" ""
+                , attribute "reveals" ""
                 ]
-                []
-            , headerView m
+            else
+                [ attribute "fixed" "" ]
+    in
+        App.header
+            ([ id "main-header"
+             , attribute "slot" "header"
+             , attribute "effects" "waterfall"
+
+             --             , attribute "effects" "material"
+             ]
+                ++ fixedAttributeAsList
+            )
+            [ App.toolbar
+                [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
+                ]
+                [ paperIconButton
+                    [ iconA "menu"
+                    , tabindex -1
+                    , attribute "drawer-toggle" ""
+                    , onClick Msg.ToggleDrawer
+                    , class "hide-when-wide"
+                    ]
+                    []
+                , headerView m
+                ]
             ]
-        ]
 
 
 headerView m =

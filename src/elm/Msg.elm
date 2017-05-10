@@ -46,6 +46,7 @@ type Msg
     | OnNotificationClicked TodoNotificationEvent
     | ToggleShowDeletedEntity
     | ToggleDrawer
+    | OnLayoutNarrowChanged Bool
     | ToggleTodoDone Todo.Model
     | SetTodoContext Context.Model Todo.Model
     | SetTodoProject Project.Model Todo.Model

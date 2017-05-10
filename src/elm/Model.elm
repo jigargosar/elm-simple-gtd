@@ -68,6 +68,7 @@ init flags =
             , developmentMode = flags.developmentMode
             , focusedEntityInfo = { id = "" }
             , selectedEntityIdSet = Set.empty
+            , layout = { narrow = False }
             }
     in
         model
@@ -87,6 +88,16 @@ setFCMToken fcmToken model =
 
 toggleForceNarrow model =
     { model | appDrawerForceNarrow = not model.appDrawerForceNarrow }
+
+
+setLayoutNarrow narrow =
+    updateLayout (\layout -> { layout | narrow = narrow })
+
+
+isLayoutUnForcedNarrow : Model -> Bool
+isLayoutUnForcedNarrow =
+    apply2 ( .appDrawerForceNarrow >> not, getLayout >> .narrow )
+        >> uncurry and
 
 
 findProjectByName name =
@@ -772,3 +783,23 @@ getProjectsViewEntityList projectList model =
                 (\project ->
                     (ProjectEntity project) :: (todoEntitiesForProject project)
                 )
+
+
+getLayout : Model -> Layout
+getLayout =
+    (.layout)
+
+
+setLayout : Layout -> ModelF
+setLayout layout model =
+    { model | layout = layout }
+
+
+updateLayoutM : (Model -> Layout) -> ModelF
+updateLayoutM updater model =
+    setLayout (updater model) model
+
+
+updateLayout : (Layout -> Layout) -> ModelF
+updateLayout updater model =
+    setLayout (updater (getLayout model)) model

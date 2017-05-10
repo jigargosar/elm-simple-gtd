@@ -139,6 +139,9 @@ update msg =
                 ToggleDrawer ->
                     Return.map (Model.toggleForceNarrow)
 
+                OnLayoutNarrowChanged bool ->
+                    Return.map (Model.setLayoutNarrow bool)
+
                 RemotePouchSync form ->
                     andThenUpdate SaveCurrentForm
                         >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
@@ -193,8 +196,8 @@ update msg =
                     case key of
                         Key.Enter ->
                             andThenUpdate (SaveCurrentForm)
-                                >> andThenUpdate StartAddingTodo
 
+                        --                                >> andThenUpdate StartAddingTodo
                         --                        Key.Escape ->
                         --                            andThenUpdate DeactivateEditingMode
                         _ ->
@@ -388,6 +391,9 @@ onGlobalKeyUp key =
 
                 ( Key.CharQ, EditMode.None ) ->
                     andThenUpdate StartAddingTodo
+
+                ( _, EditMode.None ) ->
+                    andThenUpdate setDomFocusToFocusedEntityCmd
 
                 _ ->
                     identity

@@ -49,6 +49,12 @@ type alias Model =
     , developmentMode : Bool
     , focusedEntityInfo : FocusedEntityInfo
     , selectedEntityIdSet : Set Document.Id
+    , layout : Layout
+    }
+
+
+type alias Layout =
+    { narrow : Bool
     }
 
 

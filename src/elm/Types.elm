@@ -79,6 +79,7 @@ type EntityAction
     | NameChanged String
     | Focus
     | Blur
+    | FocusIn
 
 
 type Entity

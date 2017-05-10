@@ -696,6 +696,17 @@ focusEntityById focusInside id model =
         { model | focusedEntityInfo = { focusedEntityInfo | id = id } }
 
 
+setFocusInEntity entity model =
+    let
+        id =
+            getEntityId entity
+
+        focusedEntityInfo =
+            model.focusedEntityInfo
+    in
+        { model | focusedEntityInfo = { focusedEntityInfo | id = id } }
+
+
 setMaybeFocusedEntity maybeEntity model =
     { model | maybeFocusedEntity = maybeEntity }
 

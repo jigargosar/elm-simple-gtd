@@ -117,17 +117,6 @@ update msg =
                 OnFCMTokenChanged token ->
                     Return.map (Model.setFCMToken token)
 
-                OnFocusInEntityWithId id ->
-                    Return.map (Model.focusEntityById True id)
-
-                OnEntityBlur entity ->
-                    Return.map (Model.setMaybeFocusedEntity Nothing)
-                        >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
-
-                OnEntityFocus entity ->
-                    Return.map (Model.setMaybeFocusedEntity (Just entity))
-                        >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
-
                 OnEntityListKeyDown entityList { key, isShiftDown } ->
                     case key of
                         Key.ArrowUp ->
@@ -285,6 +274,9 @@ update msg =
                         Focus ->
                             Return.map (Model.setMaybeFocusedEntity (Just entity))
                                 >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
+
+                        FocusIn ->
+                            Return.map (Model.setFocusInEntity entity)
 
                         Blur ->
                             Return.map (Model.setMaybeFocusedEntity Nothing)

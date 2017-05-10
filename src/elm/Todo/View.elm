@@ -275,19 +275,12 @@ createTodoViewModel vc tabindexAV todo =
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
         , edit = createEditTodoViewModel vc todo
-        , onFocusIn = Msg.OnFocusInEntityWithId todoId
+        , onFocusIn = onEntityAction Types.FocusIn
         , onFocus = onEntityAction Types.Focus
         , onBlur = onEntityAction Types.Blur
         , tabindexAV = tabindexAV
         , isSelected = vc.selectedEntityIdSet |> Set.member todoId
         }
-
-
-container { isEditing, id } =
-    div
-        [ classList [ "todo-item" => True, "editing" => isEditing ]
-        , id |> Msg.OnFocusInEntityWithId |> onFocusIn
-        ]
 
 
 defaultView : TodoViewModel -> Html Msg

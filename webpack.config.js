@@ -66,8 +66,9 @@ module.exports = {
                 test: /\.elm$/,
                 exclude: [/elm-stuff/, /node_modules/],
                 // use: ["elm-hot-loader","elm-webpack-loader?verbose=true&debug=true"],
+                use: ["elm-hot-loader","elm-webpack-loader?verbose=true"],
                 // use: ["elm-hot-loader","elm-webpack-loader?debug=true"],
-                use: ["elm-hot-loader", "elm-webpack-loader"],
+                // use: ["elm-hot-loader", "elm-webpack-loader"],
             },
             {
                 test: /\.(pcss|css)$/,

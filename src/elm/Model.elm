@@ -71,7 +71,7 @@ init flags =
             , selectedEntityIdSet = Set.empty
             }
     in
-        refreshViewEntityList model
+        model
 
 
 getMaybeUserProfile =
@@ -177,19 +177,17 @@ getActiveEntityList =
 
 
 getFilteredContextList model =
-    Context.null
-        :: if model.showDeleted then
-            getDeletedEntityList GroupByContext model
-           else
-            getActiveEntityList GroupByContext model
+    if model.showDeleted then
+        getDeletedEntityList GroupByContext model
+    else
+        Context.null :: getActiveEntityList GroupByContext model
 
 
 getFilteredProjectList model =
-    Project.null
-        :: if model.showDeleted then
-            getDeletedEntityList GroupByProject model
-           else
-            getActiveEntityList GroupByProject model
+    if model.showDeleted then
+        getDeletedEntityList GroupByProject model
+    else
+        Project.null :: getActiveEntityList GroupByProject model
 
 
 getActiveTodoList =
@@ -635,18 +633,6 @@ setMainViewType_ mainViewType model =
 setMainViewType : MainViewType -> ModelF
 setMainViewType mainViewType =
     setMainViewType_ mainViewType
-        >> refreshViewEntityList
-
-
-refreshViewEntityList model =
-    case model.mainViewType of
-        EntityListView viewType ->
-            createViewEntityList viewType model
-                |> (setViewEntityList # model)
-                |> updateFocusedEntityInfo
-
-        _ ->
-            model
 
 
 getEntityId entity =
@@ -665,25 +651,6 @@ getFocusedEntityIndex entityList model =
     entityList
         |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
         ?= 0
-
-
-updateFocusedEntityInfo model =
-    let
-        focusedEntityIndex =
-            model.viewEntityList
-                |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
-                ?= 0
-
-        focusedEntityId =
-            focusedEntityIndex
-                |> (List.getAt # model.viewEntityList)
-                ?|> getEntityId
-                ?= ""
-
-        focusedEntityInfo =
-            { id = focusedEntityId, index = focusedEntityIndex }
-    in
-        { model | focusedEntityInfo = focusedEntityInfo }
 
 
 focusEntityByIndex entityList index model =

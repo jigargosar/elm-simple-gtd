@@ -89,7 +89,7 @@ subscriptions m =
     Sub.batch
         [ Time.every (Time.second * 10) OnNowChanged
         , Keyboard.subscription OnKeyboardMsg
-        , Keyboard.keyUps OnKeyUp
+        , Keyboard.keyUps OnGlobalKeyUp
         , notificationClicked OnNotificationClicked
         , Store.onChange OnExternalEntityChanged
         ]
@@ -226,15 +226,6 @@ update msg =
                             >> Model.setEditMode
                         )
 
-                EditTodoFormKeyUp { id } ke ->
-                    case ke.key of
-                        Key.Enter ->
-                            andThenUpdateAll
-                                ([ SaveCurrentForm, DeactivateEditingMode ])
-
-                        _ ->
-                            identity
-
                 SetView viewType ->
                     Return.map (Model.setMainViewType viewType)
 
@@ -286,7 +277,7 @@ update msg =
                     Return.withMaybe (.maybeFocusedEntity)
                         (OnEntityAction # action >> andThenUpdate)
 
-                OnKeyUp key ->
+                OnGlobalKeyUp key ->
                     onGlobalKeyUp key
            )
         >> persistAll

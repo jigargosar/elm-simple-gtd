@@ -62,14 +62,13 @@ type Msg
     | UpdateRemoteSyncFormUri EditMode.SyncForm String
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
-    | EditTodoFormKeyUp Todo.Form.Model KeyboardEvent
     | OnEntityListKeyDown (List Entity) KeyboardEvent
     | SetView MainViewType
     | ShowReminderOverlayForTodoId Todo.Id
     | OnNowChanged Time
     | OnMsgList (List Msg)
     | OnKeyboardMsg Keyboard.Msg
-    | OnKeyUp Keyboard.Key
+    | OnGlobalKeyUp Keyboard.Key
     | OnEntityAction Entity EntityAction
     | OnFocusedEntityAction EntityAction
 

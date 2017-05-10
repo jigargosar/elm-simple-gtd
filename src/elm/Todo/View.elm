@@ -56,7 +56,6 @@ init vm =
 type alias EditViewModel =
     { todo : { text : Todo.Text }
     , isEditing : Bool
-    , onKeyUp : KeyboardEvent -> Msg
     , onTodoTextChanged : String -> Msg
     , onDeleteClicked : Msg
     }
@@ -84,7 +83,6 @@ createEditTodoViewModel vc todo =
             { text = form.todoText
             }
         , isEditing = isEditing
-        , onKeyUp = Msg.EditTodoFormKeyUp form
         , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
         }

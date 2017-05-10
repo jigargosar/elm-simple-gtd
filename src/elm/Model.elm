@@ -276,30 +276,6 @@ createAndEditNewContext model =
         |> (\( context, model ) -> startEditingEntity (ContextEntity context) model)
 
 
-
---updateTodoFromEditTodoForm : TodoForm -> ModelF
---updateTodoFromEditTodoForm { contextName, projectName, todoText, id, date, time } =
---    let
---        dateTimeString =
---            date ++ " " ++ time
---
---        maybeTime =
---            Date.fromString (dateTimeString)
---                !|> (Date.toTime >> Just)
---                != Nothing
---    in
---        apply3Uncurry ( findContextByName contextName, findProjectByName projectName, identity )
---            (\maybeContext maybeProject ->
---                updateTodoById
---                    [ Todo.SetText todoText
---                    , Todo.SetProjectId (maybeProject ?|> Document.getId ?= "")
---                    , Todo.SetContextId (maybeContext ?|> Document.getId ?= "")
---                    , Todo.SetTime maybeTime
---                    ]
---                    id
---            )
-
-
 isShowDetailsKeyPressed =
     keyboardState.get >> Keyboard.isAltDown >> not
 

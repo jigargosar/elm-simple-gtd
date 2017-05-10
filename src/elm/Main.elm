@@ -159,13 +159,13 @@ update msg =
                     reminderOverlayAction action
 
                 ToggleTodoDone todo ->
-                    updateTodo [ Todo.ToggleDone ] todo
+                    updateTodo Todo.ToggleDone todo
 
                 SetTodoContext todoContext todo ->
-                    updateTodo [ Todo.SetContext todoContext ] todo
+                    updateTodo (Todo.SetContext todoContext) todo
 
                 SetTodoProject project todo ->
-                    updateTodo [ Todo.SetProject project ] todo
+                    updateTodo (Todo.SetProject project) todo
 
                 StartAddingTodo ->
                     Return.map (Model.activateNewTodoMode)
@@ -298,9 +298,9 @@ persist lens =
         )
 
 
-updateTodo : List Todo.UpdateAction -> Todo.Model -> ReturnF
-updateTodo actions todo =
-    Return.map (Model.updateTodo actions todo)
+updateTodo : Todo.UpdateAction -> Todo.Model -> ReturnF
+updateTodo action todo =
+    Return.map (Model.updateTodo [ action ] todo)
 
 
 onMsgList : List Msg -> ReturnF

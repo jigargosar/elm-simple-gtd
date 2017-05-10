@@ -50,6 +50,8 @@ type alias EntityViewModel =
     , onCancelClicked : Msg
     , icon : IconVM
     , onFocusIn : Msg
+    , onFocus : Msg
+    , onBlur : Msg
     }
 
 
@@ -166,6 +168,8 @@ create todoListByEntityId config entity =
         , icon = icon
         , appHeader = appHeader
         , onFocusIn = Msg.OnFocusInEntityWithId id
+        , onFocus = onEntityAction Types.Focus
+        , onBlur = onEntityAction Types.Blur
         }
 
 

@@ -282,6 +282,14 @@ update msg =
                             Return.map (Model.toggleDeletedForEntity entity)
                                 >> andThenUpdate DeactivateEditingMode
 
+                        Focus ->
+                            Return.map (Model.setMaybeFocusedEntity (Just entity))
+                                >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
+
+                        Blur ->
+                            Return.map (Model.setMaybeFocusedEntity Nothing)
+                                >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
+
                 OnFocusedEntityAction action ->
                     Return.withMaybe (.maybeFocusedEntity)
                         (OnEntityAction # action >> andThenUpdate)

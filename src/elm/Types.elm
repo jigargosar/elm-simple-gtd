@@ -77,6 +77,8 @@ type EntityAction
     | ToggleDeleted
     | Save
     | NameChanged String
+    | Focus
+    | Blur
 
 
 type Entity

@@ -35,6 +35,8 @@ defaultView tabindexAV vm =
         [ class "entity-item layout horizontal justified width--100"
         , tabindexAV
         , onFocusIn vm.onFocusIn
+        , onFocus vm.onFocus
+        , onBlur vm.onBlur
         ]
         [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
         , WebComponents.iconButton "create"
@@ -47,6 +49,8 @@ editEntityView tabindexAV vm form =
         [ class "entity-item layout vertical"
         , tabindexAV
         , onFocusIn vm.onFocusIn
+        , onFocus vm.onFocus
+        , onBlur vm.onBlur
         ]
         [ Paper.input
             [ class "edit-entity-name-input auto-focus"

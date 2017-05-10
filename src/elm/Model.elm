@@ -651,6 +651,10 @@ setMainViewType mainViewType model =
     { model | mainViewType = mainViewType }
 
 
+setEntityListViewType =
+    EntityListView >> setMainViewType
+
+
 getEntityId entity =
     case entity of
         TodoEntity doc ->

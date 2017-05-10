@@ -661,6 +661,12 @@ getEntityId entity =
             Document.getId doc
 
 
+getFocusedEntityIndex entityList model =
+    entityList
+        |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
+        ?= 0
+
+
 updateFocusedEntityInfo model =
     let
         focusedEntityIndex =
@@ -680,14 +686,14 @@ updateFocusedEntityInfo model =
         { model | focusedEntityInfo = focusedEntityInfo }
 
 
-focusEntityByIndex index model =
+focusEntityByIndex entityList index model =
     let
         focusedEntityIndex =
-            List.clampIndex index model.viewEntityList
+            List.clampIndex index entityList
 
         focusedEntityId =
             focusedEntityIndex
-                |> (List.getAt # model.viewEntityList)
+                |> (List.getAt # entityList)
                 ?|> getEntityId
                 ?= ""
 
@@ -698,10 +704,11 @@ focusEntityByIndex index model =
 
 
 focusEntityById focusInside id model =
-    model.viewEntityList
-        |> List.findIndex (getEntityId >> equals id)
-        ?= 0
-        |> (focusEntityByIndex # model)
+    let
+        focusedEntityInfo =
+            model.focusedEntityInfo
+    in
+        { model | focusedEntityInfo = { focusedEntityInfo | id = id } }
 
 
 toggleSetMember item set =
@@ -713,14 +720,16 @@ toggleSetMember item set =
 
 focusPrevEntity : List Entity -> ModelF
 focusPrevEntity entityList model =
-    (model.focusedEntityInfo.index - 1)
-        |> (focusEntityByIndex # model)
+    getFocusedEntityIndex entityList model
+        |> andThenSubtract 1
+        |> (focusEntityByIndex entityList # model)
 
 
 focusNextEntity : List Entity -> ModelF
 focusNextEntity entityList model =
-    (model.focusedEntityInfo.index + 1)
-        |> (focusEntityByIndex # model)
+    getFocusedEntityIndex entityList model
+        |> add 1
+        |> (focusEntityByIndex entityList # model)
 
 
 createViewEntityList viewType model =

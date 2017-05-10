@@ -100,3 +100,15 @@ allPass predicates model =
 
 anyPass predicates model =
     List.any (apply model) predicates
+
+
+subtract =
+    (-)
+
+
+andThenSubtract =
+    flip subtract
+
+
+add =
+    (+)

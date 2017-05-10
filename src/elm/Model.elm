@@ -361,25 +361,29 @@ updateEditModeNameChanged newName entity model =
             model
 
 
-toggleDeletedForEntity : Entity -> ModelF
-toggleDeletedForEntity entity model =
-    case entity of
-        ContextEntity context ->
-            context
-                |> Document.toggleDeleted
-                |> Context.setModifiedAt model.now
-                |> (Store.update # model.contextStore)
-                |> (setContextStore # model)
+toggleEntityDeleted : Entity -> ModelF
+toggleEntityDeleted entity model =
+    let
+        entityId =
+            getEntityId entity
+    in
+        case entity of
+            ContextEntity context ->
+                context
+                    |> Document.toggleDeleted
+                    |> Context.setModifiedAt model.now
+                    |> (Store.update # model.contextStore)
+                    |> (setContextStore # model)
 
-        ProjectEntity project ->
-            project
-                |> Document.toggleDeleted
-                |> Project.setModifiedAt model.now
-                |> (Store.update # model.projectStore)
-                |> (setProjectStore # model)
+            ProjectEntity project ->
+                project
+                    |> Document.toggleDeleted
+                    |> Project.setModifiedAt model.now
+                    |> (Store.update # model.projectStore)
+                    |> (setProjectStore # model)
 
-        TodoEntity todo ->
-            updateTodo Todo.ToggleDeleted todo model
+            TodoEntity todo ->
+                updateTodoById Todo.ToggleDeleted entityId model
 
 
 saveCurrentForm model =

@@ -131,7 +131,7 @@ update msg =
                             identity
 
                 ToggleDrawer ->
-                    Return.map (Model.toggleForceNarrow)
+                    Return.map (Model.toggleLayoutForceNarrow)
 
                 OnLayoutNarrowChanged bool ->
                     Return.map (Model.setLayoutNarrow bool)

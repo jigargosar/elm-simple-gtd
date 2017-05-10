@@ -61,14 +61,13 @@ init flags =
             , showDeleted = False
             , reminderOverlay = ReminderOverlay.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
-            , appDrawerForceNarrow = False
             , user = Firebase.NotLoggedIn
             , fcmToken = Nothing
             , firebaseAppAttributes = flags.firebaseAppAttributes
             , developmentMode = flags.developmentMode
             , focusedEntityInfo = { id = "" }
             , selectedEntityIdSet = Set.empty
-            , layout = { narrow = False }
+            , layout = { narrow = False, forceNarrow = False }
             , maybeFocusedEntity = Nothing
             }
     in
@@ -87,17 +86,22 @@ setFCMToken fcmToken model =
     { model | fcmToken = fcmToken }
 
 
-toggleForceNarrow model =
-    { model | appDrawerForceNarrow = not model.appDrawerForceNarrow }
+toggleLayoutForceNarrow =
+    updateLayout (\layout -> { layout | forceNarrow = not layout.forceNarrow })
 
 
 setLayoutNarrow narrow =
     updateLayout (\layout -> { layout | narrow = narrow })
 
 
-isLayoutUnForcedNarrow : Model -> Bool
-isLayoutUnForcedNarrow =
-    apply2 ( .appDrawerForceNarrow >> not, getLayout >> .narrow )
+getLayoutForceNarrow =
+    .layout >> .forceNarrow
+
+
+isLayoutAutoNarrow : Model -> Bool
+isLayoutAutoNarrow =
+    getLayout
+        >> apply2 ( .forceNarrow >> not, .narrow )
         >> uncurry and
 
 

@@ -31,7 +31,7 @@ newTodoInputId =
 init viewModel m =
     let
         fixedAttributeAsList =
-            if Model.isLayoutUnForcedNarrow m then
+            if Model.isLayoutAutoNarrow m then
                 [ attribute "condenses" ""
                 , attribute "reveals" ""
                 ]

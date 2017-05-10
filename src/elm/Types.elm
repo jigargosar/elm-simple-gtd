@@ -42,7 +42,6 @@ type alias Model =
     , showDeleted : Bool
     , reminderOverlay : ReminderOverlay.Model
     , pouchDBRemoteSyncURI : String
-    , appDrawerForceNarrow : Bool
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken
     , firebaseAppAttributes : Firebase.AppAttributes
@@ -56,6 +55,7 @@ type alias Model =
 
 type alias Layout =
     { narrow : Bool
+    , forceNarrow : Bool
     }
 
 

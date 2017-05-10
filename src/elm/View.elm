@@ -72,9 +72,12 @@ appDrawerLayoutView m =
     let
         viewModel =
             ViewModel.create m
+
+        forceNarrow =
+            Model.getLayoutForceNarrow m
     in
         App.drawerLayout
-            [ boolProperty "forceNarrow" m.appDrawerForceNarrow
+            [ boolProperty "forceNarrow" forceNarrow
             , onBoolPropertyChanged "narrow" Msg.OnLayoutNarrowChanged
             ]
             [ View.AppDrawer.view viewModel m

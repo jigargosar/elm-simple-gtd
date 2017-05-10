@@ -53,7 +53,7 @@ type alias Model =
 
 
 type alias FocusedEntityInfo =
-    { id : Document.Id, index : Int }
+    { id : Document.Id }
 
 
 type ModelField

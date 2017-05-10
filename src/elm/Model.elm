@@ -66,7 +66,7 @@ init flags =
             , fcmToken = Nothing
             , firebaseAppAttributes = flags.firebaseAppAttributes
             , developmentMode = flags.developmentMode
-            , focusedEntityInfo = { index = 0, id = "" }
+            , focusedEntityInfo = { id = "" }
             , selectedEntityIdSet = Set.empty
             }
     in
@@ -654,17 +654,14 @@ getFocusedEntityIndex entityList model =
 
 focusEntityByIndex entityList index model =
     let
-        focusedEntityIndex =
-            List.clampIndex index entityList
-
         focusedEntityId =
-            focusedEntityIndex
+            List.clampIndex index entityList
                 |> (List.getAt # entityList)
                 ?|> getEntityId
                 ?= ""
 
         focusedEntityInfo =
-            { id = focusedEntityId, index = focusedEntityIndex }
+            { id = focusedEntityId }
     in
         { model | focusedEntityInfo = focusedEntityInfo }
 

@@ -680,12 +680,10 @@ updateFocusedEntityInfo model =
         { model | focusedEntityInfo = focusedEntityInfo }
 
 
-focusEntityById id model =
+focusEntityByIndex index model =
     let
         focusedEntityIndex =
-            model.viewEntityList
-                |> List.findIndex (getEntityId >> equals id)
-                ?= 0
+            List.clampIndex index model.viewEntityList
 
         focusedEntityId =
             focusedEntityIndex
@@ -699,28 +697,18 @@ focusEntityById id model =
         { model | focusedEntityInfo = focusedEntityInfo }
 
 
+focusEntityById focusInside id model =
+    model.viewEntityList
+        |> List.findIndex (getEntityId >> equals id)
+        ?= 0
+        |> (focusEntityByIndex # model)
+
+
 toggleSetMember item set =
     if Set.member item set then
         Set.remove item set
     else
         Set.insert item set
-
-
-createSelectedEntitySet focusedEntityId expandSelection model =
-    if expandSelection then
-        --        if model.selectedEntityIdSet |> Set.member model.focusedEntityInfo.id then
-        --            model.selectedEntityIdSet
-        --                |> toggleSetMember model.focusedEntityInfo.id
-        --                >> toggleSetMember focusedEntityId
-        --        else
-        --            model.selectedEntityIdSet
-        --                |> toggleSetMember model.focusedEntityInfo.id
-        --                >> toggleSetMember focusedEntityId
-        model.selectedEntityIdSet
-            |> Set.insert model.focusedEntityInfo.id
-            >> Set.insert focusedEntityId
-    else
-        Set.empty
 
 
 focusPrevEntity : Bool -> ModelF
@@ -738,11 +726,7 @@ focusPrevEntity expandSelection model =
 
         focusedEntityInfo =
             { id = focusedEntityId, index = focusedEntityIndex }
-
-        --        selectedEntityIdSet =
-        --            createSelectedEntitySet focusedEntityId expandSelection model
     in
-        --        { model | focusedEntityInfo = focusedEntityInfo, selectedEntityIdSet = selectedEntityIdSet }
         { model | focusedEntityInfo = focusedEntityInfo }
 
 
@@ -761,11 +745,7 @@ focusNextEntity expandSelection model =
 
         focusedEntityInfo =
             { id = focusedEntityId, index = focusedEntityIndex }
-
-        --        selectedEntityIdSet =
-        --            createSelectedEntitySet focusedEntityId expandSelection model
     in
-        --        { model | focusedEntityInfo = focusedEntityInfo, selectedEntityIdSet = selectedEntityIdSet }
         { model | focusedEntityInfo = focusedEntityInfo }
 
 

@@ -114,6 +114,7 @@ type alias TodoViewModel =
     , reminder : ReminderViewModel
     , edit : EditViewModel
     , onFocusIn : Msg
+    , onFocus : Msg
     , tabindexAV : Attribute Msg
     , isSelected : Bool
     }
@@ -270,7 +271,8 @@ createTodoViewModel vc tabindexAV todo =
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
         , edit = createEditTodoViewModel vc todo
-        , onFocusIn = Msg.FocusEntityById todoId
+        , onFocusIn = Msg.OnFocusInEntityWithId todoId
+        , onFocus = Msg.OnFocusInEntityWithId todoId
         , tabindexAV = tabindexAV
         , isSelected = vc.selectedEntityIdSet |> Set.member todoId
         }
@@ -279,7 +281,7 @@ createTodoViewModel vc tabindexAV todo =
 container { isEditing, id } =
     div
         [ classList [ "todo-item" => True, "editing" => isEditing ]
-        , id |> Msg.FocusEntityById |> onFocusIn
+        , id |> Msg.OnFocusInEntityWithId |> onFocusIn
         ]
 
 
@@ -288,6 +290,7 @@ defaultView vm =
     div
         [ classList [ "todo-item" => True, "selected" => vm.isSelected ]
         , onFocusIn vm.onFocusIn
+        , onFocus vm.onFocus
         , vm.tabindexAV
 
         --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))

@@ -117,8 +117,11 @@ update msg =
                 OnFCMTokenChanged token ->
                     Return.map (Model.setFCMToken token)
 
-                FocusEntityById id ->
-                    Return.map (Model.focusEntityById id)
+                OnFocusInEntityWithId id ->
+                    Return.map (Model.focusEntityById True id)
+
+                OnFocusEntityWithId id ->
+                    Return.map (Model.focusEntityById False id)
 
                 OnEntityListKeyDown idList { key, isShiftDown } ->
                     case key of

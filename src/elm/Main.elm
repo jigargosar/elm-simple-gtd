@@ -277,6 +277,9 @@ update msg =
                             Return.map (Model.toggleDeletedForEntity entity)
                                 >> andThenUpdate DeactivateEditingMode
 
+                DeleteFocusedEntity ->
+                    identity
+
                 OnKeyUp key ->
                     onGlobalKeyUp key
            )
@@ -392,7 +395,10 @@ onGlobalKeyUp key =
                 ( Key.CharQ, EditMode.None ) ->
                     andThenUpdate StartAddingTodo
 
-                ( _, EditMode.None ) ->
+                ( Key.CharD, EditMode.None ) ->
+                    andThenUpdate DeleteFocusedEntity
+
+                ( key, EditMode.None ) ->
                     andThenUpdate setDomFocusToFocusedEntityCmd
 
                 _ ->

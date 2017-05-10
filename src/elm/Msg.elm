@@ -73,6 +73,7 @@ type Msg
     | OnKeyboardMsg Keyboard.Msg
     | OnKeyUp Keyboard.Key
     | OnEntityAction Entity EntityAction
+    | DeleteFocusedEntity
 
 
 toCmds : List Msg -> Cmd Msg

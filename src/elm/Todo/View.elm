@@ -249,6 +249,9 @@ createTodoViewModel vc tabindexAV todo =
 
         displayText2 =
             text |> String.trim |> String.Extra.ellipsis 100
+
+        onEntityAction =
+            Msg.OnEntityAction (TodoEntity todo)
     in
         { isDone = Todo.getDone todo
         , key = todoId
@@ -265,7 +268,7 @@ createTodoViewModel vc tabindexAV todo =
         , setProjectMsg = Msg.SetTodoProject # todo
         , startEditingMsg = Msg.StartEditingTodo todo
         , onDoneClicked = Msg.ToggleTodoDone todo
-        , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
+        , onDeleteClicked = onEntityAction ToggleDeleted
         , showDetails = vc.showDetails
         , contexts = vc.activeContexts
         , projects = vc.activeProjects
@@ -273,8 +276,8 @@ createTodoViewModel vc tabindexAV todo =
         , reminder = createReminderViewModel vc todo
         , edit = createEditTodoViewModel vc todo
         , onFocusIn = Msg.OnFocusInEntityWithId todoId
-        , onFocus = TodoEntity todo |> Msg.OnEntityFocus
-        , onBlur = TodoEntity todo |> Msg.OnEntityBlur
+        , onFocus = onEntityAction Types.Focus
+        , onBlur = onEntityAction Types.Blur
         , tabindexAV = tabindexAV
         , isSelected = vc.selectedEntityIdSet |> Set.member todoId
         }

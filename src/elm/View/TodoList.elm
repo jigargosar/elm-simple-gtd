@@ -88,10 +88,20 @@ listView entityList viewModel =
         focusedIndex =
             viewModel.focusedEntityInfo.index
 
+        focusedId =
+            entityList
+                |> List.find (Model.getEntityId >> equals viewModel.focusedEntityInfo.id)
+                |> Maybe.orElse (List.head entityList)
+                ?|> Model.getEntityId
+                ?= ""
+
+        isEntityFocused =
+            Model.getEntityId >> equals focusedId
+
         createEntityView index entity =
             let
                 focused =
-                    index == focusedIndex
+                    isEntityFocused entity
 
                 tabIndexAV =
                     getTabindexAV focused

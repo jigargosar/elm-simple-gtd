@@ -119,7 +119,7 @@ listView entityList viewModel =
     in
         Keyed.node "div"
             [ class "entity-list"
-            , Msg.OnEntityListKeyDown idList |> onKeyDown
+            , Msg.OnEntityListKeyDown entityList |> onKeyDown
             ]
             (entityList
                 |> List.indexedMap createEntityView

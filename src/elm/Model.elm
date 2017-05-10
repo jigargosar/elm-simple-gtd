@@ -711,14 +711,14 @@ toggleSetMember item set =
         Set.insert item set
 
 
-focusPrevEntity : ModelF
-focusPrevEntity model =
+focusPrevEntity : List Entity -> ModelF
+focusPrevEntity entityList model =
     (model.focusedEntityInfo.index - 1)
         |> (focusEntityByIndex # model)
 
 
-focusNextEntity : ModelF
-focusNextEntity model =
+focusNextEntity : List Entity -> ModelF
+focusNextEntity entityList model =
     (model.focusedEntityInfo.index + 1)
         |> (focusEntityByIndex # model)
 

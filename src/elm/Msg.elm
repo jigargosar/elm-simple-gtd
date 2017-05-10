@@ -64,7 +64,7 @@ type Msg
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | EditTodoFormKeyUp Todo.Form.Model KeyboardEvent
-    | OnEntityListKeyDown (List Document.Id) KeyboardEvent
+    | OnEntityListKeyDown (List Entity) KeyboardEvent
     | SetView MainViewType
     | ShowReminderOverlayForTodoId Todo.Id
     | OnNowChanged Time

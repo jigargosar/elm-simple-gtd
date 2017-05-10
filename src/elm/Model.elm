@@ -739,10 +739,11 @@ focusPrevEntity expandSelection model =
         focusedEntityInfo =
             { id = focusedEntityId, index = focusedEntityIndex }
 
-        selectedEntityIdSet =
-            createSelectedEntitySet focusedEntityId expandSelection model
+        --        selectedEntityIdSet =
+        --            createSelectedEntitySet focusedEntityId expandSelection model
     in
-        { model | focusedEntityInfo = focusedEntityInfo, selectedEntityIdSet = selectedEntityIdSet }
+        --        { model | focusedEntityInfo = focusedEntityInfo, selectedEntityIdSet = selectedEntityIdSet }
+        { model | focusedEntityInfo = focusedEntityInfo }
 
 
 focusNextEntity : Bool -> ModelF
@@ -761,10 +762,11 @@ focusNextEntity expandSelection model =
         focusedEntityInfo =
             { id = focusedEntityId, index = focusedEntityIndex }
 
-        selectedEntityIdSet =
-            createSelectedEntitySet focusedEntityId expandSelection model
+        --        selectedEntityIdSet =
+        --            createSelectedEntitySet focusedEntityId expandSelection model
     in
-        { model | focusedEntityInfo = focusedEntityInfo, selectedEntityIdSet = selectedEntityIdSet }
+        --        { model | focusedEntityInfo = focusedEntityInfo, selectedEntityIdSet = selectedEntityIdSet }
+        { model | focusedEntityInfo = focusedEntityInfo }
 
 
 createViewEntityList viewType model =

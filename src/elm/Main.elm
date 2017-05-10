@@ -283,9 +283,8 @@ update msg =
                                 >> andThenUpdate DeactivateEditingMode
 
                 OnFocusedEntityAction action ->
-                    Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
-                        >> Return.withMaybe (.maybeFocusedEntity)
-                            (OnEntityAction # action >> andThenUpdate)
+                    Return.withMaybe (.maybeFocusedEntity)
+                        (OnEntityAction # action >> andThenUpdate)
 
                 OnKeyUp key ->
                     onGlobalKeyUp key

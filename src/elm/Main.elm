@@ -124,21 +124,17 @@ update msg =
                     Return.map (Model.focusEntityById False id)
 
                 OnEntityListKeyDown idList { key, isShiftDown } ->
-                    let
-                        andThenSetDomFocusToFocusedEntity =
-                            andThenUpdate (commonMsg.focus ".entity-list > [tabindex=0]")
-                    in
-                        case key of
-                            Key.ArrowUp ->
-                                Return.map (Model.focusPrevEntity)
-                                    >> andThenSetDomFocusToFocusedEntity
+                    case key of
+                        Key.ArrowUp ->
+                            Return.map (Model.focusPrevEntity)
+                                >> andThenUpdate setDomFocusToFocusedEntityCmd
 
-                            Key.ArrowDown ->
-                                Return.map (Model.focusNextEntity)
-                                    >> andThenSetDomFocusToFocusedEntity
+                        Key.ArrowDown ->
+                            Return.map (Model.focusNextEntity)
+                                >> andThenUpdate setDomFocusToFocusedEntityCmd
 
-                            _ ->
-                                identity
+                        _ ->
+                            identity
 
                 ToggleDrawer ->
                     Return.map (Model.toggleForceNarrow)
@@ -315,6 +311,10 @@ andThenUpdate =
 
 andThenUpdateAll =
     OnMsgList >> andThenUpdate
+
+
+setDomFocusToFocusedEntityCmd =
+    (commonMsg.focus ".entity-list > [tabindex=0]")
 
 
 onUpdateNow now =

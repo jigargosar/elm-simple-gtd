@@ -113,8 +113,8 @@ findContextByName name =
     .contextStore >> Context.findByName name
 
 
-getContextByIdDict =
-    (.contextStore) >> Store.byIdDict
+getContextsIdDict =
+    (.contextStore) >> Store.asIdDict
 
 
 getActiveProjects =
@@ -125,8 +125,8 @@ getActiveContexts =
     (.contextStore) >> Store.reject Document.isDeleted >> (::) Context.null
 
 
-getProjectByIdDict =
-    (.projectStore) >> Store.byIdDict
+getProjectsIdDict =
+    (.projectStore) >> Store.asIdDict
 
 
 getEncodedContextNames =

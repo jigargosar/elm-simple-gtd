@@ -100,7 +100,7 @@ updateExternal encodedDoc store =
 
 
 insertExternal doc store =
-    byIdDict store
+    asIdDict store
         |> Dict.insert (Document.getId doc) doc
         |> Dict.values
         |> (setList # store)
@@ -196,7 +196,7 @@ asList =
     (.list)
 
 
-byIdDict =
+asIdDict =
     map (apply2 ( Document.getId, identity )) >> Dict.fromList
 
 

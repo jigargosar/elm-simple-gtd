@@ -88,8 +88,8 @@ createSharedViewModel model =
     in
         { now = now
         , selectedEntityIdSet = model.selectedEntityIdSet
-        , projectByIdDict = Model.getProjectByIdDict model
-        , contextByIdDict = Model.getContextByIdDict model
+        , projectByIdDict = Model.getProjectsIdDict model
+        , contextByIdDict = Model.getContextsIdDict model
         , activeProjects = Model.getActiveProjects model
         , activeContexts = Model.getActiveContexts model
         , getMaybeEditTodoFormForTodo = getMaybeEditTodoFormForTodo

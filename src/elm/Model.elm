@@ -66,7 +66,6 @@ init flags =
             , fcmToken = Nothing
             , firebaseAppAttributes = flags.firebaseAppAttributes
             , developmentMode = flags.developmentMode
-            , viewEntityList = []
             , focusedEntityInfo = { index = 0, id = "" }
             , selectedEntityIdSet = Set.empty
             }
@@ -766,23 +765,3 @@ getProjectsViewEntityList projectList model =
                 (\project ->
                     (ProjectEntity project) :: (todoEntitiesForProject project)
                 )
-
-
-getViewEntityList : Model -> List Entity
-getViewEntityList =
-    (.viewEntityList)
-
-
-setViewEntityList : List Entity -> ModelF
-setViewEntityList viewEntityList model =
-    { model | viewEntityList = viewEntityList }
-
-
-updateViewEntityListM : (Model -> List Entity) -> ModelF
-updateViewEntityListM updater model =
-    setViewEntityList (updater model) model
-
-
-updateViewEntityList : (List Entity -> List Entity) -> ModelF
-updateViewEntityList updater model =
-    setViewEntityList (updater (getViewEntityList model)) model

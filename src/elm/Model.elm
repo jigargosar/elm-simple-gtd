@@ -240,24 +240,24 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             ReminderOverlay.addSnoozeOffset model.now snoozeOffset
     in
         model
-            |> updateTodoById [ time |> Todo.SnoozeTill ] todoId
+            |> updateTodoById (time |> Todo.SnoozeTill) todoId
             >> removeReminderOverlay
 
 
-snoozeTodo todo m =
-    m
-        |> updateTodo
-            [ Todo.SnoozeTill (m.now + (Time.minute * 10)) ]
-            todo
-        |> setReminderOverlayToInitialView todo
-
-
 findAndSnoozeOverDueTodo model =
-    findTodoWithOverDueReminder model
-        ?|> apply2
-                ( snoozeTodo # model
-                , identity
-                )
+    let
+        snoozeTodo todo m =
+            m
+                |> updateTodo
+                    (Todo.SnoozeTill (m.now + (Time.minute * 10)))
+                    todo
+                |> setReminderOverlayToInitialView todo
+    in
+        findTodoWithOverDueReminder model
+            ?|> apply2
+                    ( snoozeTodo # model
+                    , identity
+                    )
 
 
 getActiveTodoListGroupedBy fn =
@@ -379,7 +379,7 @@ toggleDeletedForEntity entity model =
                 |> (setProjectStore # model)
 
         TodoEntity todo ->
-            updateTodo [ Todo.ToggleDeleted ] todo model
+            updateTodo Todo.ToggleDeleted todo model
 
 
 saveCurrentForm model =
@@ -404,12 +404,12 @@ saveCurrentForm model =
 
         EditMode.EditTodo form ->
             model
-                |> updateTodoById [ Todo.SetText form.todoText ] form.id
+                |> updateTodoById (Todo.SetText form.todoText) form.id
                 |> setFocusInEntityWithId form.id
 
         EditMode.EditTodoReminder form ->
             model
-                |> updateTodoById [ Todo.SetTime (Todo.ReminderForm.getMaybeTime form) ] form.id
+                |> updateTodoById (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
                 |> setFocusInEntityWithId form.id
 
         EditMode.NewTodo form ->
@@ -444,7 +444,7 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
 
         maybeModel =
             maybeTodoUpdateAction
-                ?|> (List.singleton >> updateTodoById # todoId # model)
+                ?|> (updateTodoById # todoId # model)
     in
         maybeModel ?= model |> setFocusInEntityWithId todoId
 
@@ -578,18 +578,18 @@ groupByTodoContextViewModel =
            )
 
 
-updateTodo : List Todo.UpdateAction -> Todo.Model -> ModelF
+updateTodo : Todo.UpdateAction -> Todo.Model -> ModelF
 updateTodo action todo =
     apply2With ( getNow, getTodoStore )
-        ((Todo.update action # todo)
+        ((Todo.update [ action ] # todo)
             >> Store.update
             >>> setTodoStore
         )
 
 
-updateTodoById actions todoId =
+updateTodoById action todoId =
     applyMaybeWith (findTodoById todoId)
-        (updateTodo actions)
+        (updateTodo action)
 
 
 replaceTodoIfEqualById todo =

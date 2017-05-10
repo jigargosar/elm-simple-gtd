@@ -171,8 +171,11 @@ update msg =
                     updateTodo [ Todo.SetProject project ] todo
 
                 StartAddingTodo ->
-                    activateEditNewTodoMode ""
+                    Return.map (Model.activateNewTodoMode)
                         >> autoFocusPaperInputCmd
+
+                NewTodoTextChanged text ->
+                    Return.map (Model.updateNewTodoText text)
 
                 NewProject ->
                     Return.map Model.createAndEditNewProject
@@ -181,9 +184,6 @@ update msg =
                 NewContext ->
                     Return.map Model.createAndEditNewContext
                         >> autoFocusPaperInputCmd
-
-                NewTodoTextChanged text ->
-                    activateEditNewTodoMode text
 
                 DeactivateEditingMode ->
                     Return.map (Model.deactivateEditingMode)
@@ -194,9 +194,8 @@ update msg =
                             andThenUpdate (SaveCurrentForm)
                                 >> andThenUpdate StartAddingTodo
 
-                        Key.Escape ->
-                            andThenUpdate DeactivateEditingMode
-
+                        --                        Key.Escape ->
+                        --                            andThenUpdate DeactivateEditingMode
                         _ ->
                             identity
 
@@ -331,10 +330,6 @@ showTodoNotificationCmd =
     createTodoNotification >> showNotification >> (::) # [ startAlarm () ] >> Cmd.batch
 
 
-activateEditNewTodoMode text =
-    Return.map (Model.activateNewTodoMode text)
-
-
 withNow : (Time -> Msg) -> ReturnF
 withNow msg =
     Task.perform (msg) Time.now |> Return.command
@@ -386,6 +381,9 @@ onGlobalKeyUp key =
     case key of
         Key.Escape ->
             andThenUpdate DeactivateEditingMode
+
+        Key.CharQ ->
+            andThenUpdate StartAddingTodo
 
         _ ->
             identity

@@ -322,8 +322,17 @@ now =
 --
 
 
-activateNewTodoMode : String -> ModelF
-activateNewTodoMode text =
+activateNewTodoMode : ModelF
+activateNewTodoMode model =
+    case model.editMode of
+        EditMode.None ->
+            setEditMode (Todo.NewForm.create "" |> EditMode.NewTodo) model
+
+        _ ->
+            model
+
+
+updateNewTodoText text =
     setEditMode (Todo.NewForm.create text |> EditMode.NewTodo)
 
 

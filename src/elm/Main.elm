@@ -191,9 +191,6 @@ update msg =
                         Key.Enter ->
                             andThenUpdate (SaveCurrentForm)
 
-                        --                                >> andThenUpdate StartAddingTodo
-                        --                        Key.Escape ->
-                        --                            andThenUpdate DeactivateEditingMode
                         _ ->
                             identity
 

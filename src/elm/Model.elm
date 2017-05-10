@@ -248,7 +248,7 @@ findAndSnoozeOverDueTodo model =
     let
         snoozeTodo todo m =
             m
-                |> updateTodo
+                |> updateTodo__
                     (Todo.SnoozeTill (m.now + (Time.minute * 10)))
                     todo
                 |> setReminderOverlayToInitialView todo
@@ -582,8 +582,8 @@ groupByTodoContextViewModel =
            )
 
 
-updateTodo : Todo.UpdateAction -> Todo.Model -> ModelF
-updateTodo action todo =
+updateTodo__ : Todo.UpdateAction -> Todo.Model -> ModelF
+updateTodo__ action todo =
     apply2With ( getNow, getTodoStore )
         ((Todo.update [ action ] # todo)
             >> Store.update
@@ -593,7 +593,7 @@ updateTodo action todo =
 
 updateTodoById action todoId =
     applyMaybeWith (findTodoById todoId)
-        (updateTodo action)
+        (updateTodo__ action)
 
 
 replaceTodoIfEqualById todo =

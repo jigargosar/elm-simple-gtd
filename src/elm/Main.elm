@@ -120,8 +120,11 @@ update msg =
                 OnFocusInEntityWithId id ->
                     Return.map (Model.focusEntityById True id)
 
-                OnFocusEntityWithId id ->
-                    Return.map (Model.focusEntityById False id)
+                OnEntityFocus entity ->
+                    identity
+
+                OnEntityBlur entity ->
+                    identity
 
                 OnEntityListKeyDown entityList { key, isShiftDown } ->
                     case key of
@@ -278,7 +281,11 @@ update msg =
                                 >> andThenUpdate DeactivateEditingMode
 
                 DeleteFocusedEntity ->
-                    identity
+                    let
+                        _ =
+                            1
+                    in
+                        identity
 
                 OnKeyUp key ->
                     onGlobalKeyUp key

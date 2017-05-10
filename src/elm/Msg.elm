@@ -40,7 +40,8 @@ type Msg
     | SignOut
     | RemotePouchSync EditMode.SyncForm
     | OnFocusInEntityWithId Document.Id
-    | OnFocusEntityWithId Document.Id
+    | OnEntityFocus Entity
+    | OnEntityBlur Entity
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction ReminderOverlay.Action
     | OnNotificationClicked TodoNotificationEvent

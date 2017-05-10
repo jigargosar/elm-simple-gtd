@@ -324,12 +324,7 @@ now =
 
 activateNewTodoMode : ModelF
 activateNewTodoMode model =
-    case model.editMode of
-        EditMode.None ->
-            setEditMode (Todo.NewForm.create "" |> EditMode.NewTodo) model
-
-        _ ->
-            model
+    setEditMode (Todo.NewForm.create "" |> EditMode.NewTodo) model
 
 
 updateNewTodoText text =

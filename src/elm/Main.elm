@@ -6,7 +6,7 @@ import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd, focusSelectorIfNoFocusCmd)
 import EditMode
 import Ext.Debug
-import Ext.Keyboard as Keyboard
+import Ext.Keyboard as Keyboard exposing (Key)
 import Ext.Return as Return
 import Firebase
 import Model.Internal as Model
@@ -377,13 +377,17 @@ command =
     Return.command
 
 
+onGlobalKeyUp : Key -> ReturnF
 onGlobalKeyUp key =
-    case key of
-        Key.Escape ->
-            andThenUpdate DeactivateEditingMode
+    Return.with (Model.getEditMode)
+        (\editMode ->
+            case ( key, editMode ) of
+                ( Key.Escape, _ ) ->
+                    andThenUpdate DeactivateEditingMode
 
-        Key.CharQ ->
-            andThenUpdate StartAddingTodo
+                ( Key.CharQ, EditMode.None ) ->
+                    andThenUpdate StartAddingTodo
 
-        _ ->
-            identity
+                _ ->
+                    identity
+        )

@@ -646,14 +646,9 @@ getMainViewType =
     (.mainViewType)
 
 
-setMainViewType_ : MainViewType -> ModelF
-setMainViewType_ mainViewType model =
-    { model | mainViewType = mainViewType }
-
-
 setMainViewType : MainViewType -> ModelF
-setMainViewType mainViewType =
-    setMainViewType_ mainViewType
+setMainViewType mainViewType model =
+    { model | mainViewType = mainViewType }
 
 
 getEntityId entity =

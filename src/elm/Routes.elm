@@ -60,10 +60,10 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "contexts" :: [] ->
-            [ Msg.SetView (EntityListView GroupByContextView) ]
+            [ Msg.SetEntityListView GroupByContextView ]
 
         "lists" :: "projects" :: [] ->
-            [ Msg.SetView (EntityListView GroupByProjectView) ]
+            [ Msg.SetEntityListView GroupByProjectView ]
 
         "lists" :: "bin" :: [] ->
             [ Msg.SetView BinView ]
@@ -71,17 +71,17 @@ builder2messages builder =
         "lists" :: "done" :: [] ->
             [ Msg.SetView DoneView ]
 
-        "project" :: "NotAssigned" :: [] ->
-            [ Msg.SetView (ProjectView "" |> EntityListView) ]
-
-        "project" :: id :: [] ->
-            [ Msg.SetView (ProjectView id |> EntityListView) ]
+        "Inbox" :: [] ->
+            [ Msg.SetEntityListView (ContextView "") ]
 
         "context" :: id :: [] ->
-            [ Msg.SetView (ContextView id |> EntityListView) ]
+            [ Msg.SetEntityListView (ContextView id) ]
 
-        "Inbox" :: [] ->
-            [ Msg.SetView (ContextView "" |> EntityListView) ]
+        "project" :: "NotAssigned" :: [] ->
+            [ Msg.SetEntityListView (ProjectView "") ]
+
+        "project" :: id :: [] ->
+            [ Msg.SetEntityListView (ProjectView id) ]
 
         "notification" :: todoId :: [] ->
             [ Msg.ShowReminderOverlayForTodoId todoId ]

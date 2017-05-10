@@ -168,8 +168,8 @@ create todoListByEntityId config entity =
         , icon = icon
         , appHeader = appHeader
         , onFocusIn = onEntityAction Types.FocusIn
-        , onFocus = onEntityAction Types.Focus
-        , onBlur = onEntityAction Types.Blur
+        , onFocus = onEntityAction Types.SetFocused
+        , onBlur = onEntityAction Types.SetBlurred
         }
 
 

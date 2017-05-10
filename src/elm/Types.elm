@@ -47,7 +47,7 @@ type alias Model =
     , fcmToken : Firebase.FCMToken
     , firebaseAppAttributes : Firebase.AppAttributes
     , developmentMode : Bool
-    , focusedEntityInfo : FocusedEntityInfo
+    , focusedEntityInfo : EntityFocus
     , selectedEntityIdSet : Set Document.Id
     , layout : Layout
     , maybeFocusedEntity : Maybe Entity
@@ -59,7 +59,7 @@ type alias Layout =
     }
 
 
-type alias FocusedEntityInfo =
+type alias EntityFocus =
     { id : Document.Id }
 
 

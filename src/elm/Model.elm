@@ -399,6 +399,7 @@ saveCurrentForm model =
                 >> (Store.update # model.contextStore)
                 >> (setContextStore # model)
                 ?= model
+                |> focusEntityById False form.id
 
         EditMode.EditProject form ->
             Store.findById form.id model.projectStore
@@ -407,12 +408,17 @@ saveCurrentForm model =
                 >> (Store.update # model.projectStore)
                 >> (setProjectStore # model)
                 ?= model
+                |> focusEntityById False form.id
 
         EditMode.EditTodo form ->
-            model |> updateTodoById [ Todo.SetText form.todoText ] form.id
+            model
+                |> updateTodoById [ Todo.SetText form.todoText ] form.id
+                |> focusEntityById False form.id
 
         EditMode.EditTodoReminder form ->
-            model |> updateTodoById [ Todo.SetTime (Todo.ReminderForm.getMaybeTime form) ] form.id
+            model
+                |> updateTodoById [ Todo.SetTime (Todo.ReminderForm.getMaybeTime form) ] form.id
+                |> focusEntityById False form.id
 
         EditMode.NewTodo form ->
             insertTodo (Todo.init model.now form.text) model
@@ -448,7 +454,7 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
             maybeTodoUpdateAction
                 ?|> (List.singleton >> updateTodoById # todoId # model)
     in
-        maybeModel ?= model
+        maybeModel ?= model |> focusEntityById False todoId
 
 
 createEntityEditMode : Entity -> Model -> EditForm

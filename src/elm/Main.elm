@@ -120,11 +120,13 @@ update msg =
                 OnFocusInEntityWithId id ->
                     Return.map (Model.focusEntityById True id)
 
-                OnEntityFocus entity ->
-                    identity
-
                 OnEntityBlur entity ->
-                    identity
+                    Return.map (Model.setMaybeFocusedEntity Nothing)
+                        >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
+
+                OnEntityFocus entity ->
+                    Return.map (Model.setMaybeFocusedEntity (Just entity))
+                        >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
 
                 OnEntityListKeyDown entityList { key, isShiftDown } ->
                     case key of
@@ -280,12 +282,10 @@ update msg =
                             Return.map (Model.toggleDeletedForEntity entity)
                                 >> andThenUpdate DeactivateEditingMode
 
-                DeleteFocusedEntity ->
-                    let
-                        _ =
-                            1
-                    in
-                        identity
+                OnFocusedEntityAction action ->
+                    Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
+                        >> Return.withMaybe (.maybeFocusedEntity)
+                            (OnEntityAction # action >> andThenUpdate)
 
                 OnKeyUp key ->
                     onGlobalKeyUp key
@@ -403,11 +403,13 @@ onGlobalKeyUp key =
                     andThenUpdate StartAddingTodo
 
                 ( Key.CharD, EditMode.None ) ->
-                    andThenUpdate DeleteFocusedEntity
+                    andThenUpdate (OnFocusedEntityAction ToggleDeleted)
 
-                ( key, EditMode.None ) ->
-                    andThenUpdate setDomFocusToFocusedEntityCmd
+                ( Key.CharE, EditMode.None ) ->
+                    andThenUpdate (OnFocusedEntityAction StartEditing)
 
+                --                ( key, EditMode.None ) ->
+                --                    andThenUpdate setDomFocusToFocusedEntityCmd
                 _ ->
                     identity
         )

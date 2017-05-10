@@ -69,6 +69,7 @@ init flags =
             , focusedEntityInfo = { id = "" }
             , selectedEntityIdSet = Set.empty
             , layout = { narrow = False }
+            , maybeFocusedEntity = Nothing
             }
     in
         model
@@ -693,6 +694,10 @@ focusEntityById focusInside id model =
             model.focusedEntityInfo
     in
         { model | focusedEntityInfo = { focusedEntityInfo | id = id } }
+
+
+setMaybeFocusedEntity maybeEntity model =
+    { model | maybeFocusedEntity = maybeEntity }
 
 
 toggleSetMember item set =

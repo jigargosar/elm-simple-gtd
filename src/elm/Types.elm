@@ -50,6 +50,7 @@ type alias Model =
     , focusedEntityInfo : FocusedEntityInfo
     , selectedEntityIdSet : Set Document.Id
     , layout : Layout
+    , maybeFocusedEntity : Maybe Entity
     }
 
 

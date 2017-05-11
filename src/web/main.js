@@ -22,7 +22,15 @@ const firebaseConfig =
 
 boot().catch(console.error)
 async function boot() {
-    $("#root").trap();
+    const $elm = $("#elm-app-container")
+    $elm.trap();
+
+    $elm.on("keydown", `.todo-item, .entity-item`, e =>{
+        console.log(e.keyCode, e.key, e);
+        if (e.key === " "/*space: 32*/){
+            e.preventDefault()
+        }
+    })
 
     const dbMap = {
         "todo-db": await DB("todo-db"),

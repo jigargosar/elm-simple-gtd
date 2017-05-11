@@ -123,7 +123,7 @@ type alias TodoViewModel =
 
 
 type alias ReminderViewModel =
-    { isEditing : Bool
+    { isDropdownOpen : Bool
     , date : String
     , time : String
     , displayText : String
@@ -146,11 +146,8 @@ createReminderViewModel vc todo =
         updateReminderForm =
             Msg.UpdateReminderForm form
 
-        maybeReminderForm =
-            vc.getMaybeTodoReminderFormForTodo todo
-
-        isEditing =
-            Maybe.isJust maybeReminderForm
+        isDropdownOpen =
+            Maybe.isJust (vc.getMaybeTodoReminderFormForTodo todo)
 
         overDueText =
             "Overdue"
@@ -177,7 +174,7 @@ createReminderViewModel vc todo =
         dueAt =
             Todo.getDueAt todo
     in
-        { isEditing = isEditing
+        { isDropdownOpen = isDropdownOpen
         , date = form.date
         , time = form.time
         , displayText = displayText
@@ -376,7 +373,7 @@ reminderView vm =
     in
         div []
             ([ Paper.menuButton
-                [ boolProperty "opened" reminderVM.isEditing
+                [ boolProperty "opened" reminderVM.isDropdownOpen
                 , boolProperty "dynamicAlign" True
                 , boolProperty "stopKeyboardEventPropagation" True
                 ]
@@ -388,7 +385,7 @@ reminderView vm =
                     [ div [ class "font-subhead" ] [ text "Select date and time" ]
                     , Paper.input
                         [ type_ "date"
-                        , classList [ "auto-focus" => reminderVM.isEditing ]
+                        , classList [ "auto-focus" => reminderVM.isDropdownOpen ]
                         , labelA "Date"
                         , value reminderVM.date
                         , boolProperty "stopKeyboardEventPropagation" True

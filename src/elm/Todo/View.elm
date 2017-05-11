@@ -69,28 +69,15 @@ init vm =
             (maybeEditVM |> Maybe.unpack (\_ -> defaultView vm) editView)
 
 
-type alias EditViewModel =
-    { todo : { text : Todo.Text }
-    , onTodoTextChanged : String -> Msg
-    , onDeleteClicked : Msg
-    }
-
-
-createEditTodoViewModel : Todo.Form.Model -> Todo.Model -> EditViewModel
-createEditTodoViewModel form todo =
-    let
-        todoId =
-            form.id
-
-        updateTodoForm =
-            Msg.UpdateTodoForm form
-    in
-        { todo =
-            { text = form.todoText
-            }
-        , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
-        , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
-        }
+dropdownTrigger { tabindexAV } content =
+    Paper.button
+        [ style [ "height" => "24px" ]
+        , slotDropdownTrigger
+        , class "padding-0 margin-0 shrink"
+        , tabindexAV
+        ]
+        [ div [ class "text-transform-none primary-text-color font-body1" ] [ content ]
+        ]
 
 
 type alias TodoViewModel =
@@ -120,72 +107,6 @@ type alias TodoViewModel =
     , tabindexAV : Attribute Msg
     , isSelected : Bool
     }
-
-
-type alias ReminderViewModel =
-    { isDropdownOpen : Bool
-    , date : String
-    , time : String
-    , displayText : String
-    , isOverDue : Bool
-    , isSnoozed : Bool
-    , dueAtToolTipText : String
-    , dayDiffInWords : String
-    , onDateChanged : String -> Msg
-    , onTimeChanged : String -> Msg
-    , startEditingMsg : Msg
-    }
-
-
-createReminderViewModel : SharedViewModel -> Todo.Model -> ReminderViewModel
-createReminderViewModel vc todo =
-    let
-        form =
-            vc.getTodoReminderForm todo
-
-        updateReminderForm =
-            Msg.UpdateReminderForm form
-
-        isDropdownOpen =
-            Maybe.isJust (vc.getMaybeTodoReminderFormForTodo todo)
-
-        overDueText =
-            "Overdue"
-
-        formatReminderTime time =
-            let
-                due =
-                    Date.fromTime time
-
-                now =
-                    Date.fromTime vc.now
-            in
-                if time < vc.now then
-                    overDueText
-                else
-                    Ext.Time.smartFormat vc.now time
-
-        smartFormat =
-            Ext.Time.smartFormat vc.now
-
-        displayText =
-            Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
-
-        dueAt =
-            Todo.getDueAt todo
-    in
-        { isDropdownOpen = isDropdownOpen
-        , date = form.date
-        , time = form.time
-        , displayText = displayText
-        , isOverDue = displayText == overDueText
-        , isSnoozed = Todo.isSnoozed todo
-        , dueAtToolTipText = Todo.getDueAt todo ?|> Ext.Time.formatDateTime ?= ""
-        , dayDiffInWords = dueAt ?|> Ext.Time.dayDiffInWords vc.now ?= ""
-        , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
-        , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
-        , startEditingMsg = Msg.StartEditingReminder todo
-        }
 
 
 createTodoViewModel : SharedViewModel -> Attribute Msg -> Todo.Model -> TodoViewModel
@@ -336,15 +257,70 @@ projectDropdownMenu vm =
             ]
 
 
-dropdownTrigger { tabindexAV } content =
-    Paper.button
-        [ style [ "height" => "24px" ]
-        , slotDropdownTrigger
-        , class "padding-0 margin-0 shrink"
-        , tabindexAV
-        ]
-        [ div [ class "text-transform-none primary-text-color font-body1" ] [ content ]
-        ]
+type alias ReminderViewModel =
+    { isDropdownOpen : Bool
+    , date : String
+    , time : String
+    , displayText : String
+    , isOverDue : Bool
+    , isSnoozed : Bool
+    , dueAtToolTipText : String
+    , dayDiffInWords : String
+    , onDateChanged : String -> Msg
+    , onTimeChanged : String -> Msg
+    , startEditingMsg : Msg
+    }
+
+
+createReminderViewModel : SharedViewModel -> Todo.Model -> ReminderViewModel
+createReminderViewModel vc todo =
+    let
+        form =
+            vc.getTodoReminderForm todo
+
+        updateReminderForm =
+            Msg.UpdateReminderForm form
+
+        isDropdownOpen =
+            Maybe.isJust (vc.getMaybeTodoReminderFormForTodo todo)
+
+        overDueText =
+            "Overdue"
+
+        formatReminderTime time =
+            let
+                due =
+                    Date.fromTime time
+
+                now =
+                    Date.fromTime vc.now
+            in
+                if time < vc.now then
+                    overDueText
+                else
+                    Ext.Time.smartFormat vc.now time
+
+        smartFormat =
+            Ext.Time.smartFormat vc.now
+
+        displayText =
+            Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
+
+        dueAt =
+            Todo.getDueAt todo
+    in
+        { isDropdownOpen = isDropdownOpen
+        , date = form.date
+        , time = form.time
+        , displayText = displayText
+        , isOverDue = displayText == overDueText
+        , isSnoozed = Todo.isSnoozed todo
+        , dueAtToolTipText = Todo.getDueAt todo ?|> Ext.Time.formatDateTime ?= ""
+        , dayDiffInWords = dueAt ?|> Ext.Time.dayDiffInWords vc.now ?= ""
+        , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
+        , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
+        , startEditingMsg = Msg.StartEditingReminder todo
+        }
 
 
 reminderView : TodoViewModel -> Html Msg
@@ -417,6 +393,30 @@ reminderView vm =
     in
         div [ style [ "position" => "relative" ] ]
             [ menuButton, timeToolTip ]
+
+
+type alias EditViewModel =
+    { todo : { text : Todo.Text }
+    , onTodoTextChanged : String -> Msg
+    , onDeleteClicked : Msg
+    }
+
+
+createEditTodoViewModel : Todo.Form.Model -> Todo.Model -> EditViewModel
+createEditTodoViewModel form todo =
+    let
+        todoId =
+            form.id
+
+        updateTodoForm =
+            Msg.UpdateTodoForm form
+    in
+        { todo =
+            { text = form.todoText
+            }
+        , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
+        , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
+        }
 
 
 editView : EditViewModel -> List (Html Msg)

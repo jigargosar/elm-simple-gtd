@@ -79,7 +79,8 @@ type EntityAction
     | NameChanged String
     | SetFocused
     | SetBlurred
-    | FocusIn
+    | SetFocusedIn
+    | ToggleSelected
 
 
 type Entity

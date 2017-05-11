@@ -167,7 +167,7 @@ create todoListByEntityId config entity =
         , onCancelClicked = Msg.DeactivateEditingMode
         , icon = icon
         , appHeader = appHeader
-        , onFocusIn = onEntityAction Types.FocusIn
+        , onFocusIn = onEntityAction Types.SetFocusedIn
         , onFocus = onEntityAction Types.SetFocused
         , onBlur = onEntityAction Types.SetBlurred
         }

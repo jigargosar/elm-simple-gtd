@@ -266,12 +266,15 @@ update msg =
                             Return.map (Model.setMaybeFocusedEntity (Just entity))
                                 >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
 
-                        FocusIn ->
+                        SetFocusedIn ->
                             Return.map (Model.setFocusInEntity entity)
 
                         SetBlurred ->
                             Return.map (Model.setMaybeFocusedEntity Nothing)
                                 >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
+
+                        ToggleSelected ->
+                            Return.map (Model.setMaybeFocusedEntity Nothing)
 
                 OnFocusedEntityAction action ->
                     Return.withMaybe (.maybeFocusedEntity)
@@ -397,6 +400,9 @@ onGlobalKeyUp key =
 
                 ( Key.CharE, EditMode.None ) ->
                     andThenUpdate (OnFocusedEntityAction StartEditing)
+
+                ( Key.Space, EditMode.None ) ->
+                    andThenUpdate (OnFocusedEntityAction ToggleSelected)
 
                 --                ( key, EditMode.None ) ->
                 --                    andThenUpdate setDomFocusToFocusedEntityCmd

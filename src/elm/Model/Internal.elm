@@ -29,21 +29,6 @@ updateTodoStore updater model =
     { model | todoStore = getTodoStore model |> updater }
 
 
-getEditMode : Model -> EditForm
-getEditMode =
-    (.editMode)
-
-
-setEditMode : EditForm -> ModelF
-setEditMode editMode model =
-    { model | editMode = editMode }
-
-
-updateEditModeM : (Model -> EditForm) -> ModelF
-updateEditModeM updater model =
-    setEditMode (updater model) model
-
-
 getProjectStore : Model -> Project.Store
 getProjectStore =
     (.projectStore)

@@ -369,9 +369,9 @@ reminderView vm =
                         , text reminderVM.displayText
                         ]
                     )
-    in
-        div []
-            ([ Paper.menuButton
+
+        menuButton =
+            Paper.menuButton
                 [ boolProperty "opened" reminderVM.isDropdownOpen
                 , boolProperty "dynamicAlign" True
                 , boolProperty "stopKeyboardEventPropagation" True
@@ -402,24 +402,22 @@ reminderView vm =
                     , defaultOkCancelButtons
                     ]
                 ]
-             ]
-                ++ (timeToolTip reminderVM)
-            )
+    in
+        div [ style [ "position" => "relative" ] ]
+            [ menuButton, timeToolTip reminderVM ]
 
 
 timeToolTip vm =
-    if vm.dueAtToolTipText /= "" then
-        [ Paper.tooltip
-            [ intProperty "offset" 0
-            ]
+    Paper.tooltip [ intProperty "offset" 0 ]
+        (if vm.dueAtToolTipText /= "" then
             [ div [ class "tooltip" ]
-                [ div [ class "font-body1" ] [ text vm.dueAtToolTipText ]
+                [ div [ class "font-body1 font-nowrap" ] [ text vm.dueAtToolTipText ]
                 , div [ class "font-caption" ] [ text vm.dayDiffInWords ]
                 ]
             ]
-        ]
-    else
-        []
+         else
+            []
+        )
 
 
 editView : EditViewModel -> List (Html Msg)

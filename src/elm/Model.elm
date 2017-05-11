@@ -490,6 +490,31 @@ deactivateEditingMode =
     setEditMode EditMode.none
 
 
+getEditMode : Model -> EditForm
+getEditMode =
+    (.editMode)
+
+
+setEditMode : EditForm -> ModelF
+setEditMode editMode =
+    clearSelectionIfEditModeNone
+        >> (\model -> { model | editMode = editMode })
+
+
+updateEditModeM : (Model -> EditForm) -> ModelF
+updateEditModeM updater model =
+    setEditMode (updater model) model
+
+
+clearSelectionIfEditModeNone model =
+    case model.editMode of
+        EditMode.None ->
+            setSelectedEntityIdSet Set.empty model
+
+        _ ->
+            model
+
+
 getRemoteSyncForm model =
     let
         maybeForm =

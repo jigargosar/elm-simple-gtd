@@ -323,19 +323,9 @@ updateNewTodoText text =
     setEditMode (Todo.NewForm.create text |> EditMode.NewTodo)
 
 
-startEditingTodo : Todo.Model -> ModelF
-startEditingTodo todo =
-    updateEditModeM (createEditTodoMode todo)
-
-
 startEditingReminder : Todo.Model -> ModelF
 startEditingReminder todo =
-    updateEditModeM (createEditReminderTodoMode todo)
-
-
-createEditReminderTodoMode : Todo.Model -> Model -> EditForm
-createEditReminderTodoMode todo model =
-    Todo.ReminderForm.create todo model.now |> EditMode.EditTodoReminder
+    updateEditModeM (.now >> Todo.ReminderForm.create todo >> EditMode.EditTodoReminder)
 
 
 startEditingEntity : Entity -> ModelF

@@ -194,10 +194,6 @@ update msg =
                         _ ->
                             identity
 
-                StartEditingTodo todo ->
-                    Return.map (Model.startEditingTodo todo)
-                        >> autoFocusPaperInputCmd
-
                 StartEditingReminder todo ->
                     Return.map (Model.startEditingReminder todo)
                         >> autoFocusPaperInputCmd

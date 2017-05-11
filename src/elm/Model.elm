@@ -615,6 +615,20 @@ updateTodoById action todoId =
         (updateTodo__ action)
 
 
+updateAllSelectedTodoIfTodoIdInSelection action todoId model =
+    let
+        isSelected =
+            model.selectedEntityIdSet
+                |> Set.member todoId
+    in
+        if isSelected then
+            model.todoStore
+                |> Store.findAllByIdSet model.selectedEntityIdSet
+                |> List.foldl (updateTodo__ action) model
+        else
+            updateTodoById action todoId model
+
+
 replaceTodoIfEqualById todo =
     List.replaceIf (Document.equalById todo) todo
 

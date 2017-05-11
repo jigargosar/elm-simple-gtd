@@ -162,10 +162,10 @@ update msg =
                     updateTodo Todo.ToggleDone todo
 
                 SetTodoContext todoContext todo ->
-                    updateTodo (Todo.SetContext todoContext) todo
+                    updateAllSelectedTodoIfTodoIdInSelection (Todo.SetContext todoContext) todo
 
                 SetTodoProject project todo ->
-                    updateTodo (Todo.SetProject project) todo
+                    updateAllSelectedTodoIfTodoIdInSelection (Todo.SetProject project) todo
 
                 NewTodoTextChanged text ->
                     Return.map (Model.updateNewTodoText text)
@@ -300,6 +300,10 @@ persist lens =
 updateTodo : Todo.UpdateAction -> Todo.Model -> ReturnF
 updateTodo action todo =
     Return.map (Model.updateTodoById action (Document.getId todo))
+
+
+updateAllSelectedTodoIfTodoIdInSelection action todo =
+    Return.map (Model.updateAllSelectedTodoIfTodoIdInSelection action (Document.getId todo))
 
 
 onMsgList : List Msg -> ReturnF

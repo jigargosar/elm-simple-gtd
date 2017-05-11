@@ -14,6 +14,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Random.Pcg as Random exposing (Seed)
+import Set
 
 
 port pouchDBUpsert : ( String, String, D.Value ) -> Cmd msg
@@ -165,6 +166,14 @@ map fn =
 
 filter fn =
     asList >> List.filter fn
+
+
+findAllByIdSet idSet store =
+    let
+        idDict =
+            asIdDict store
+    in
+        idSet |> Set.toList .|> Dict.get # idDict |> List.filterMap identity
 
 
 reject fn =

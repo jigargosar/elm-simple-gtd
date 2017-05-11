@@ -97,7 +97,7 @@ type alias TodoViewModel =
     , setContextMsg : Context.Model -> Msg
     , setProjectMsg : Project.Model -> Msg
     , startEditingMsg : Msg
-    , onDoneClicked : Msg
+    , toggleDoneMsg : Msg
     , onDeleteClicked : Msg
     , showDetails : Bool
     , activeContexts : List Context.Model
@@ -164,7 +164,7 @@ createTodoViewModel vc tabindexAV todo =
         displayText2 =
             text |> String.trim |> String.ellipsis 100
 
-        onEntityAction =
+        createEntityActionMsg =
             Msg.OnEntityAction (TodoEntity todo)
 
         maybeEditTodoForm =
@@ -176,13 +176,19 @@ createTodoViewModel vc tabindexAV todo =
         onKeyDownMsg { key } =
             case key of
                 Key.Space ->
-                    onEntityAction Types.ToggleSelected
+                    createEntityActionMsg Types.ToggleSelected
 
                 Key.CharE ->
-                    onEntityAction Types.StartEditing
+                    startEditingMsg
 
                 _ ->
                     commonMsg.noOp
+
+        startEditingMsg =
+            createEntityActionMsg Types.StartEditing
+
+        toggleDoneMsg =
+            Msg.ToggleTodoDone todo
     in
         { isDone = Todo.getDone todo
         , key = todoId
@@ -197,18 +203,18 @@ createTodoViewModel vc tabindexAV todo =
         , selectedProjectIndex = vc.activeProjects |> List.findIndex (Document.hasId projectId) ?= 0
         , setContextMsg = Msg.SetTodoContext # todo
         , setProjectMsg = Msg.SetTodoProject # todo
-        , startEditingMsg = onEntityAction Types.StartEditing
-        , onDoneClicked = Msg.ToggleTodoDone todo
+        , startEditingMsg = startEditingMsg
+        , toggleDoneMsg = toggleDoneMsg
         , showDetails = vc.showDetails
         , activeContexts = vc.activeContexts
         , activeProjects = vc.activeProjects
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
         , edit = maybeEditTodoForm ?|> createEditTodoViewModel # todo
-        , onDeleteClicked = onEntityAction ToggleDeleted
-        , onFocusIn = onEntityAction Types.SetFocusedIn
-        , onFocus = onEntityAction Types.SetFocused
-        , onBlur = onEntityAction Types.SetBlurred
+        , onDeleteClicked = createEntityActionMsg ToggleDeleted
+        , onFocusIn = createEntityActionMsg Types.SetFocusedIn
+        , onFocus = createEntityActionMsg Types.SetFocused
+        , onBlur = createEntityActionMsg Types.SetBlurred
         , tabindexAV = tabindexAV
         , isSelected = vc.selectedEntityIdSet |> Set.member todoId
         }
@@ -239,7 +245,7 @@ doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
     Paper.iconButton
         [ class ("done-icon done-" ++ toString (vm.isDone))
-        , onClickStopPropagation (vm.onDoneClicked)
+        , onClickStopPropagation (vm.toggleDoneMsg)
         , iconA "done"
         , vm.tabindexAV
         ]

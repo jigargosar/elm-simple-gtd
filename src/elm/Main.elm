@@ -262,19 +262,20 @@ update msg =
                             Return.map (Model.toggleEntityDeleted entity)
                                 >> andThenUpdate DeactivateEditingMode
 
-                        SetFocused ->
-                            Return.map (Model.setMaybeFocusedEntity (Just entity))
-                                >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
-
                         SetFocusedIn ->
                             Return.map (Model.setFocusInEntity entity)
 
+                        SetFocused ->
+                            Return.map (Model.setMaybeFocusedEntity (Just entity))
+
+                        --                                >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
                         SetBlurred ->
                             Return.map (Model.setMaybeFocusedEntity Nothing)
-                                >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
 
+                        --                                >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
                         ToggleSelected ->
-                            Return.map (Model.setMaybeFocusedEntity Nothing)
+                            Return.map (Model.toggleEntitySelection entity)
+                                >> Return.map (Ext.Debug.tapLog (.selectedEntityIdSet) "selectedEntityIdSet")
 
                 OnFocusedEntityAction action ->
                     Return.withMaybe (.maybeFocusedEntity)
@@ -401,7 +402,7 @@ onGlobalKeyUp key =
                 ( Key.CharE, EditMode.None ) ->
                     andThenUpdate (OnFocusedEntityAction StartEditing)
 
-                ( Key.Space, EditMode.None ) ->
+                ( Key.CharS, EditMode.None ) ->
                     andThenUpdate (OnFocusedEntityAction ToggleSelected)
 
                 --                ( key, EditMode.None ) ->

@@ -22,7 +22,7 @@ import Ext.Random as Random
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
-import Set
+import Set exposing (Set)
 import Store
 import Time exposing (Time)
 import Todo
@@ -697,13 +697,6 @@ setMaybeFocusedEntity maybeEntity model =
     { model | maybeFocusedEntity = maybeEntity }
 
 
-toggleSetMember item set =
-    if Set.member item set then
-        Set.remove item set
-    else
-        Set.insert item set
-
-
 focusPrevEntity : List Entity -> ModelF
 focusPrevEntity entityList model =
     getFocusedEntityIndex entityList model
@@ -805,3 +798,34 @@ updateLayoutM updater model =
 updateLayout : (Layout -> Layout) -> ModelF
 updateLayout updater model =
     setLayout (updater (getLayout model)) model
+
+
+toggleEntitySelection entity =
+    updateSelectedEntityIdSet (toggleSetMember (getEntityId entity))
+
+
+toggleSetMember item set =
+    if Set.member item set then
+        Set.remove item set
+    else
+        Set.insert item set
+
+
+getSelectedEntityIdSet : Model -> Set Document.Id
+getSelectedEntityIdSet =
+    (.selectedEntityIdSet)
+
+
+setSelectedEntityIdSet : Set Document.Id -> ModelF
+setSelectedEntityIdSet selectedEntityIdSet model =
+    { model | selectedEntityIdSet = selectedEntityIdSet }
+
+
+updateSelectedEntityIdSetM : (Model -> Set Document.Id) -> ModelF
+updateSelectedEntityIdSetM updater model =
+    setSelectedEntityIdSet (updater model) model
+
+
+updateSelectedEntityIdSet : (Set Document.Id -> Set Document.Id) -> ModelF
+updateSelectedEntityIdSet updater model =
+    setSelectedEntityIdSet (updater (getSelectedEntityIdSet model)) model

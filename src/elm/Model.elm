@@ -113,10 +113,6 @@ findContextByName name =
     .contextStore >> Context.findByName name
 
 
-getContextsIdDict =
-    (.contextStore) >> Store.asIdDict
-
-
 getActiveProjects =
     (.projectStore) >> Store.reject Document.isDeleted >> (::) Project.null
 
@@ -125,7 +121,11 @@ getActiveContexts =
     (.contextStore) >> Store.reject Document.isDeleted >> (::) Context.null
 
 
-getProjectsIdDict =
+getContextsAsIdDict =
+    (.contextStore) >> Store.asIdDict 
+
+
+getProjectsAsIdDict =
     (.projectStore) >> Store.asIdDict
 
 

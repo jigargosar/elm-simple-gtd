@@ -279,20 +279,18 @@ defaultView vm =
         ]
         [ div [ class "layout vertical" ]
             [ div
-                [ style [ "flex" => "1 1 auto" ]
-                , class "text-wrap"
+                [ class "text-wrap"
                 , onClick vm.startEditingMsg
                 ]
                 [ doneIconButton vm
                 , span [ class "display-text" ] [ text vm.displayText ]
                 ]
             , div
-                [ style [ "flex" => "0 1 auto" ]
-                , class "layout horizontal end-justified"
+                [ class "layout horizontal end-justified"
                 ]
                 [ reminderView vm
-                , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextDropdownMenu vm ]
-                , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectDropdownMenu vm ]
+                , div [ style [ "padding" => "0 8px" ] ] [ contextDropdownMenu vm ]
+                , div [ style [ "padding" => "0 8px" ] ] [ projectDropdownMenu vm ]
                 ]
             ]
         ]
@@ -316,7 +314,7 @@ contextDropdownMenu vm =
                 [ onClickStopPropagation (vm.setContextMsg context) ]
                 [ context |> Context.getName >> text ]
     in
-        Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
+        Paper.menuButton [ dynamicAlign ]
             [ div [ class "font-nowrap" ] [ text vm.contextDisplayName ]
                 |> dropdownTrigger vm
             , Paper.listbox
@@ -332,7 +330,7 @@ projectDropdownMenu vm =
                 [ onClickStopPropagation (vm.setProjectMsg project) ]
                 [ project |> Project.getName >> text ]
     in
-        Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
+        Paper.menuButton [ dynamicAlign ]
             [ dropdownTrigger vm (text vm.projectDisplayName)
             , Paper.listbox
                 [ class "dropdown-content", attribute "slot" "dropdown-content" ]
@@ -368,7 +366,6 @@ reminderView vm =
                             [ "reminder-text" => True
                             , "overdue" => reminderVM.isOverDue
                             ]
-                        , style [ "padding" => "0 8px" ]
                         ]
                         [ icon "av:snooze" [ classList [ "display-none" => not reminderVM.isSnoozed ] ]
                         , text reminderVM.displayText

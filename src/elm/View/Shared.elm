@@ -41,7 +41,7 @@ type alias SharedViewModel =
     { now : Time
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
     , getMaybeTodoReminderFormForTodo : Todo.Model -> Maybe Todo.ReminderForm.Model
-    , getEditTodoForm : Todo.Model -> Todo.Form.Model
+    , getTodoReminderForm : Todo.Model -> Todo.ReminderForm.Model
     , getMaybeEditEntityFormForEntityId : Document.Id -> Maybe EditMode.EntityForm
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model

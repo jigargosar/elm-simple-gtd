@@ -277,7 +277,7 @@ defaultView vm =
         , onBlur vm.onBlur
         , vm.tabindexAV
         ]
-        [ div [ class "layout vertical" ]
+        [ div [ class "" ]
             [ div
                 [ class "text-wrap"
                 , onClick vm.startEditingMsg

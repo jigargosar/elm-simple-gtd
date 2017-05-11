@@ -493,10 +493,14 @@ updateEditModeM updater model =
 clearSelectionIfEditModeNone model =
     case model.editMode of
         EditMode.None ->
-            setSelectedEntityIdSet Set.empty model
+            clearSelection model
 
         _ ->
             model
+
+
+clearSelection =
+    setSelectedEntityIdSet Set.empty
 
 
 getRemoteSyncForm model =
@@ -666,6 +670,7 @@ getMainViewType =
 setMainViewType : MainViewType -> ModelF
 setMainViewType mainViewType model =
     { model | mainViewType = mainViewType }
+        |> clearSelection
 
 
 setEntityListViewType =

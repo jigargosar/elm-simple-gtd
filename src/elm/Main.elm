@@ -402,11 +402,6 @@ onGlobalKeyUp key =
                 ( Key.CharE, EditMode.None ) ->
                     andThenUpdate (OnFocusedEntityAction StartEditing)
 
-                ( Key.CharS, EditMode.None ) ->
-                    andThenUpdate (OnFocusedEntityAction ToggleSelected)
-
-                --                ( key, EditMode.None ) ->
-                --                    andThenUpdate setDomFocusToFocusedEntityCmd
                 _ ->
                     identity
         )

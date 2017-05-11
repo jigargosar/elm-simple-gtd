@@ -396,12 +396,6 @@ onGlobalKeyUp key =
                 ( Key.CharQ, EditMode.None ) ->
                     andThenUpdate StartAddingTodo
 
-                ( Key.CharD, EditMode.None ) ->
-                    andThenUpdate (OnFocusedEntityAction ToggleDeleted)
-
-                ( Key.CharE, EditMode.None ) ->
-                    andThenUpdate (OnFocusedEntityAction StartEditing)
-
                 _ ->
                     identity
         )

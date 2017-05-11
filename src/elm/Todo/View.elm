@@ -318,7 +318,7 @@ contextDropdownMenu vm =
     in
         Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
             [ div [ class "font-nowrap" ] [ text vm.contextDisplayName ]
-                |> dropdownTrigger vm.tabindexAV
+                |> dropdownTrigger vm
             , Paper.listbox
                 [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                 (vm.activeContexts .|> createContextItem)
@@ -333,19 +333,21 @@ projectDropdownMenu vm =
                 [ project |> Project.getName >> text ]
     in
         Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
-            [ div [ class "font-nowrap" ] [ text vm.projectDisplayName ]
-                |> dropdownTrigger vm.tabindexAV
+            [ dropdownTrigger vm (text vm.projectDisplayName)
             , Paper.listbox
                 [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                 (vm.activeProjects .|> createProjectItem)
             ]
 
 
-dropdownTrigger tabindexAV content =
-    div [ style [ "height" => "24px" ], class "layout horizontal font-body1", slotDropdownTrigger ]
-        [ Paper.button [ class "padding-0 margin-0 shrink", tabindexAV ]
-            [ div [ class "text-transform-none primary-text-color" ] [ content ]
-            ]
+dropdownTrigger { tabindexAV } content =
+    Paper.button
+        [ style [ "height" => "24px" ]
+        , slotDropdownTrigger
+        , class "padding-0 margin-0 shrink"
+        , tabindexAV
+        ]
+        [ div [ class "text-transform-none primary-text-color font-body1" ] [ content ]
         ]
 
 
@@ -359,7 +361,7 @@ reminderView vm =
             if reminderVM.displayText == "" then
                 iconButton "alarm-add" [ vm.tabindexAV, slotDropdownTrigger, onClick reminderVM.startEditingMsg ]
             else
-                dropdownTrigger vm.tabindexAV
+                dropdownTrigger vm
                     (div
                         [ onClick reminderVM.startEditingMsg
                         , classList

@@ -338,12 +338,6 @@ createEditReminderTodoMode todo model =
     Todo.ReminderForm.create todo model.now |> EditMode.EditTodoReminder
 
 
-startEditingTodoById : Todo.Id -> ModelF
-startEditingTodoById id =
-    applyMaybeWith (findTodoById id)
-        (createEditTodoMode >> updateEditModeM)
-
-
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
     setEditMode (createEntityEditMode entity model) model

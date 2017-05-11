@@ -13,7 +13,7 @@ import Html.Attributes.Extra exposing (intProperty)
 import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
 import Json.Decode
 import Json.Encode
-import Keyboard.Extra exposing (Key(Enter, Escape))
+import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
@@ -175,8 +175,11 @@ createTodoViewModel vc tabindexAV todo =
 
         onKeyDownMsg { key } =
             case key of
-                Keyboard.Extra.Space ->
+                Key.Space ->
                     onEntityAction Types.ToggleSelected
+
+                Key.CharE ->
+                    onEntityAction Types.StartEditing
 
                 _ ->
                     commonMsg.noOp
@@ -194,7 +197,7 @@ createTodoViewModel vc tabindexAV todo =
         , selectedProjectIndex = vc.activeProjects |> List.findIndex (Document.hasId projectId) ?= 0
         , setContextMsg = Msg.SetTodoContext # todo
         , setProjectMsg = Msg.SetTodoProject # todo
-        , startEditingMsg = Msg.StartEditingTodo todo
+        , startEditingMsg = onEntityAction Types.StartEditing
         , onDoneClicked = Msg.ToggleTodoDone todo
         , showDetails = vc.showDetails
         , activeContexts = vc.activeContexts
@@ -215,7 +218,7 @@ defaultView : TodoViewModel -> List (Html Msg)
 defaultView vm =
     [ div [ class "" ]
         [ div
-            [ class "text-wrap"
+            [ class "text-break-all"
             , onClick vm.startEditingMsg
             ]
             [ doneIconButton vm

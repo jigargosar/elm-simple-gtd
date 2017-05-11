@@ -70,7 +70,7 @@ type Msg
     | OnKeyboardMsg Keyboard.Msg
     | OnGlobalKeyUp Keyboard.Key
     | OnEntityAction Entity EntityAction
-    | OnFocusedEntityAction EntityAction
+    | StartAddingNewEntity
 
 
 toCmds : List Msg -> Cmd Msg

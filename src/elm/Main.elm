@@ -242,6 +242,9 @@ update msg =
                     Return.map (Model.saveCurrentForm)
                         >> andThenUpdate DeactivateEditingMode
 
+                StartAddingNewEntity entityType ->
+                    identity
+
                 OnEntityAction entity action ->
                     case (action) of
                         StartEditing ->
@@ -272,10 +275,6 @@ update msg =
                         ToggleSelected ->
                             Return.map (Model.toggleEntitySelection entity)
                                 >> Return.map (Ext.Debug.tapLog (.selectedEntityIdSet) "selectedEntityIdSet")
-
-                OnFocusedEntityAction action ->
-                    Return.withMaybe (.maybeFocusedEntity)
-                        (OnEntityAction # action >> andThenUpdate)
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key

@@ -19,6 +19,34 @@ onKeyDown onKeyMsg =
     Events.on "keydown" (D.map onKeyMsg (traceDecoder "kd" keyboardEventDecoder))
 
 
+stopPropagation =
+    { stopPropagation = True
+    , preventDefault = False
+    }
+
+
+preventDefault =
+    { stopPropagation = False
+    , preventDefault = True
+    }
+
+
+preventDefaultAndStopPropagation =
+    { stopPropagation = True
+    , preventDefault = True
+    }
+
+
+onKeyDownPreventDefault : (KeyboardEvent -> msg) -> Attribute msg
+onKeyDownPreventDefault onKeyMsg =
+    Events.onWithOptions "keydown" preventDefault (D.map onKeyMsg (traceDecoder "kd" keyboardEventDecoder))
+
+
+onKeyDownStopPropagation : (KeyboardEvent -> msg) -> Attribute msg
+onKeyDownStopPropagation onKeyMsg =
+    Events.onWithOptions "keydown" stopPropagation (D.map onKeyMsg (traceDecoder "kd" keyboardEventDecoder))
+
+
 targetKeyDecoder : Decoder Key
 targetKeyDecoder =
     D.map KX.fromCode (D.field "keyCode" D.int)

@@ -36,7 +36,7 @@ import Ext.Function.Infix exposing (..)
 import Html exposing (Attribute, Html, col, div, h1, h3, span, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
+import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import Polymer.Paper as Paper
 import View.Shared exposing (SharedViewModel, defaultOkCancelButtons, defaultOkCancelDeleteButtons, hideOnHover)
 import WebComponents exposing (..)
@@ -66,6 +66,7 @@ init vm =
             , onFocus vm.onFocus
             , onBlur vm.onBlur
             , vm.tabindexAV
+            , onKeyDown vm.onKeyDownMsg
             ]
             (maybeEditVM |> Maybe.unpack (\_ -> defaultView vm) editView)
 
@@ -89,6 +90,7 @@ type alias TodoViewModel =
     , isDone : Bool
     , isDeleted : Bool
     , isFocused : Bool
+    , onKeyDownMsg : KeyboardEvent -> Msg
     , projectDisplayName : String
     , contextDisplayName : String
     , selectedProjectIndex : Int
@@ -170,11 +172,20 @@ createTodoViewModel vc tabindexAV todo =
 
         isFocused =
             vc.maybeFocusedEntity ?|> (Model.getEntityId >> equals todoId) ?= False
+
+        onKeyDownMsg { key } =
+            case key of
+                Keyboard.Extra.Space ->
+                    onEntityAction Types.ToggleSelected
+
+                _ ->
+                    commonMsg.noOp
     in
         { isDone = Todo.getDone todo
         , key = todoId
         , isDeleted = Todo.getDeleted todo
         , isFocused = isFocused
+        , onKeyDownMsg = onKeyDownMsg
         , text = text
         , isMultiLine = isMultiLine
         , displayText = displayText

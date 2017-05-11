@@ -14,7 +14,7 @@ import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onCl
 import Json.Decode
 import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
-import List.Extra
+import List.Extra as List
 import Maybe.Extra as Maybe
 import Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
 import Msg exposing (Msg, commonMsg)
@@ -22,7 +22,7 @@ import Polymer.Attributes exposing (boolProperty, stringProperty)
 import Polymer.Events exposing (onTap)
 import Project
 import Set
-import String.Extra
+import String.Extra as String
 import Svg.Events exposing (onFocusIn, onFocusOut)
 import Time.Format
 import Todo
@@ -95,9 +95,7 @@ type alias TodoViewModel =
     , isMultiLine : Bool
     , isDone : Bool
     , isDeleted : Bool
-    , projectName : Project.Name
     , projectDisplayName : String
-    , contextName : Context.Name
     , contextDisplayName : String
     , selectedProjectIndex : Int
     , setContextMsg : Context.Model -> Msg
@@ -106,7 +104,7 @@ type alias TodoViewModel =
     , onDoneClicked : Msg
     , onDeleteClicked : Msg
     , showDetails : Bool
-    , contexts : List Context.Model
+    , activeContexts : List Context.Model
     , activeProjects : List Project.Model
     , onReminderButtonClicked : Msg
     , reminder : ReminderViewModel
@@ -194,31 +192,25 @@ createTodoViewModel vc tabindexAV todo =
         todoId =
             Document.getId todo
 
-        contextName =
-            Todo.getContextId todo
-                |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
-                ?= "Inbox"
-
-        projectName =
-            Todo.getProjectId todo
-                |> (Dict.get # vc.projectByIdDict >> Maybe.map Project.getName)
-                ?= "<No Project>"
-
         truncateName =
-            String.Extra.ellipsis 15
+            String.ellipsis 15
+
+        projectId =
+            Todo.getProjectId todo
 
         projectDisplayName =
-            Todo.getProjectId todo
-                |> (Dict.get # vc.projectByIdDict)
-                ?|> Project.getName
+            projectId
+                |> (Dict.get # vc.projectByIdDict >>? Project.getName)
                 ?= ""
                 |> truncateName
                 |> String.append "#"
 
-        contextDisplayName =
+        contextId =
             Todo.getContextId todo
-                |> (Dict.get # vc.contextByIdDict)
-                ?|> Context.getName
+
+        contextDisplayName =
+            contextId
+                |> (Dict.get # vc.contextByIdDict >>? Context.getName)
                 ?= "Inbox"
                 |> String.append "@"
                 |> truncateName
@@ -229,7 +221,7 @@ createTodoViewModel vc tabindexAV todo =
         ( displayText, isMultiLine ) =
             let
                 lines =
-                    text |> String.trim |> String.Extra.nonEmpty ?= "< empty >" |> String.lines
+                    text |> String.trim |> String.nonEmpty ?= "< empty >" |> String.lines
             in
                 case lines of
                     [] ->
@@ -243,7 +235,7 @@ createTodoViewModel vc tabindexAV todo =
                         ( firstLine ++ " ...", True )
 
         displayText2 =
-            text |> String.trim |> String.Extra.ellipsis 100
+            text |> String.trim |> String.ellipsis 100
 
         onEntityAction =
             Msg.OnEntityAction (TodoEntity todo)
@@ -254,17 +246,15 @@ createTodoViewModel vc tabindexAV todo =
         , text = text
         , isMultiLine = isMultiLine
         , displayText = displayText
-        , projectName = projectName
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
-        , selectedProjectIndex = vc.activeProjects |> List.Extra.findIndex (Project.nameEquals projectName) ?= 0
-        , contextName = contextName
+        , selectedProjectIndex = vc.activeProjects |> List.findIndex (Document.hasId projectId) ?= 0
         , setContextMsg = Msg.SetTodoContext # todo
         , setProjectMsg = Msg.SetTodoProject # todo
         , startEditingMsg = Msg.StartEditingTodo todo
         , onDoneClicked = Msg.ToggleTodoDone todo
         , showDetails = vc.showDetails
-        , contexts = vc.activeContexts
+        , activeContexts = vc.activeContexts
         , activeProjects = vc.activeProjects
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
@@ -304,8 +294,8 @@ defaultView vm =
                 , class "layout horizontal end-justified"
                 ]
                 [ reminderView vm
-                , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextMenuButton vm ]
-                , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectMenuButton vm ]
+                , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ contextDropdownMenu vm ]
+                , div [ class "_flex-auto", style [ "padding" => "0 8px" ] ] [ projectDropdownMenu vm ]
                 ]
             ]
         ]
@@ -316,23 +306,23 @@ dropdownTriggerWithTitle tabindexAV title =
 
 
 dropdownTrigger tabindexAV content =
-    div [ style [ "height" => "24px" ], class "layout horizontal font-body1", attribute "slot" "dropdown-trigger" ]
+    div [ style [ "height" => "24px" ], class "layout horizontal font-body1", slotDropdownTrigger ]
         [ Paper.button [ class "padding-0 margin-0 shrink", tabindexAV ]
             [ div [ class "text-transform-none primary-text-color" ] [ content ]
             ]
         ]
 
 
-contextMenuButton vm =
+contextDropdownMenu vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
         [ dropdownTriggerWithTitle vm.tabindexAV vm.contextDisplayName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-            (vm.contexts .|> createContextItem # vm)
+            (vm.activeContexts .|> createContextItem # vm)
         ]
 
 
-projectMenuButton vm =
+projectDropdownMenu vm =
     Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
         [ dropdownTriggerWithTitle vm.tabindexAV vm.projectDisplayName
         , Paper.listbox
@@ -341,8 +331,27 @@ projectMenuButton vm =
         ]
 
 
-slotDropDownTriggerA =
-    attribute "slot" "dropdown-trigger"
+createProjectItem project vm =
+    Paper.item
+        [ onClickStopPropagation (vm.setProjectMsg project) ]
+        [ project |> Project.getName >> text ]
+
+
+createContextItem context vm =
+    Paper.item
+        [ onClickStopPropagation (vm.setContextMsg context) ]
+        [ context |> Context.getName >> text ]
+
+
+doneIconButton : TodoViewModel -> Html Msg
+doneIconButton vm =
+    Paper.iconButton
+        [ class ("done-icon done-" ++ toString (vm.isDone))
+        , onClickStopPropagation (vm.onDoneClicked)
+        , iconA "done"
+        , vm.tabindexAV
+        ]
+        []
 
 
 reminderView : TodoViewModel -> Html Msg
@@ -353,7 +362,7 @@ reminderView vm =
 
         reminderTrigger =
             if reminderVM.displayText == "" then
-                iconButton "alarm-add" [ vm.tabindexAV, slotDropDownTriggerA, onClick reminderVM.startEditingMsg ]
+                iconButton "alarm-add" [ vm.tabindexAV, slotDropdownTrigger, onClick reminderVM.startEditingMsg ]
             else
                 dropdownTrigger vm.tabindexAV
                     (div
@@ -445,26 +454,3 @@ editView vm =
             , defaultOkCancelDeleteButtons vm.edit.onDeleteClicked
             ]
         ]
-
-
-createProjectItem project vm =
-    Paper.item
-        [ onClickStopPropagation (vm.setProjectMsg project) ]
-        [ project |> Project.getName >> text ]
-
-
-createContextItem context vm =
-    Paper.item
-        [ onClickStopPropagation (vm.setContextMsg context) ]
-        [ context |> Context.getName >> text ]
-
-
-doneIconButton : TodoViewModel -> Html Msg
-doneIconButton vm =
-    Paper.iconButton
-        [ class ("done-icon done-" ++ toString (vm.isDone))
-        , onClickStopPropagation (vm.onDoneClicked)
-        , iconA "done"
-        , vm.tabindexAV
-        ]
-        []

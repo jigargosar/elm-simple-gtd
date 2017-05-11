@@ -41,7 +41,6 @@ type alias SharedViewModel =
     { now : Time
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
     , getMaybeTodoReminderFormForTodo : Todo.Model -> Maybe Todo.ReminderForm.Model
-    , getTodoReminderForm : Todo.Model -> Todo.ReminderForm.Model
     , getEditTodoForm : Todo.Model -> Todo.Form.Model
     , getMaybeEditEntityFormForEntityId : Document.Id -> Maybe EditMode.EntityForm
     , projectByIdDict : Dict Id Project.Model
@@ -99,11 +98,6 @@ createSharedViewModel model =
                 todo
                     |> getMaybeTodoReminderFormForTodo
                     |> Maybe.unpack (\_ -> Todo.ReminderForm.create todo now) identity
-        , getEditTodoForm =
-            \todo ->
-                todo
-                    |> getMaybeEditTodoFormForTodo
-                    |> Maybe.unpack (\_ -> Todo.Form.create todo) identity
 
         --    , getMaybeEditProjectFormForProject =
         --        \project ->

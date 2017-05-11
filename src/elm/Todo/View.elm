@@ -402,22 +402,21 @@ reminderView vm =
                     , defaultOkCancelButtons
                     ]
                 ]
+
+        timeToolTip =
+            Paper.tooltip [ intProperty "offset" 0 ]
+                (if reminderVM.dueAtToolTipText /= "" then
+                    [ div [ class "tooltip" ]
+                        [ div [ class "font-body1 font-nowrap" ] [ text reminderVM.dueAtToolTipText ]
+                        , div [ class "font-caption" ] [ text reminderVM.dayDiffInWords ]
+                        ]
+                    ]
+                 else
+                    []
+                )
     in
         div [ style [ "position" => "relative" ] ]
-            [ menuButton, timeToolTip reminderVM ]
-
-
-timeToolTip vm =
-    Paper.tooltip [ intProperty "offset" 0 ]
-        (if vm.dueAtToolTipText /= "" then
-            [ div [ class "tooltip" ]
-                [ div [ class "font-body1 font-nowrap" ] [ text vm.dueAtToolTipText ]
-                , div [ class "font-caption" ] [ text vm.dayDiffInWords ]
-                ]
-            ]
-         else
-            []
-        )
+            [ menuButton, timeToolTip ]
 
 
 editView : EditViewModel -> List (Html Msg)

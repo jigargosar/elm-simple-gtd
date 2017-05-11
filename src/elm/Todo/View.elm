@@ -47,10 +47,22 @@ initKeyed vm =
 
 
 init vm =
-    if vm.edit.isEditing && not vm.isSelected then
-        editView vm
-    else
-        defaultView vm
+    let
+        showEditView =
+            vm.edit.isEditing && not vm.isSelected
+    in
+        div
+            [ classList [ "todo-item" => True, "selected" => vm.isSelected, "editing" => showEditView ]
+            , onFocusIn vm.onFocusIn
+            , onFocus vm.onFocus
+            , onBlur vm.onBlur
+            , vm.tabindexAV
+            ]
+            (if showEditView then
+                editView vm
+             else
+                defaultView vm
+            )
 
 
 type alias EditViewModel =
@@ -268,32 +280,25 @@ createTodoViewModel vc tabindexAV todo =
         }
 
 
-defaultView : TodoViewModel -> Html Msg
+defaultView : TodoViewModel -> List (Html Msg)
 defaultView vm =
-    div
-        [ classList [ "todo-item" => True, "selected" => vm.isSelected ]
-        , onFocusIn vm.onFocusIn
-        , onFocus vm.onFocus
-        , onBlur vm.onBlur
-        , vm.tabindexAV
-        ]
-        [ div [ class "" ]
-            [ div
-                [ class "text-wrap"
-                , onClick vm.startEditingMsg
-                ]
-                [ doneIconButton vm
-                , span [ class "display-text" ] [ text vm.displayText ]
-                ]
-            , div
-                [ class "layout horizontal end-justified"
-                ]
-                [ reminderView vm
-                , div [ style [ "padding" => "0 8px" ] ] [ contextDropdownMenu vm ]
-                , div [ style [ "padding" => "0 8px" ] ] [ projectDropdownMenu vm ]
-                ]
+    [ div [ class "" ]
+        [ div
+            [ class "text-wrap"
+            , onClick vm.startEditingMsg
+            ]
+            [ doneIconButton vm
+            , span [ class "display-text" ] [ text vm.displayText ]
+            ]
+        , div
+            [ class "layout horizontal end-justified"
+            ]
+            [ reminderView vm
+            , div [ style [ "padding" => "0 8px" ] ] [ contextDropdownMenu vm ]
+            , div [ style [ "padding" => "0 8px" ] ] [ projectDropdownMenu vm ]
             ]
         ]
+    ]
 
 
 doneIconButton : TodoViewModel -> Html Msg
@@ -424,27 +429,20 @@ timeToolTip vm =
         []
 
 
-editView : TodoViewModel -> Html Msg
+editView : TodoViewModel -> List (Html Msg)
 editView vm =
-    div
-        [ class "todo-item editing"
-        , onFocusIn vm.onFocusIn
-        , onFocus vm.onFocus
-        , onBlur vm.onBlur
-        , vm.tabindexAV
-        ]
-        [ div [ class "vertical layout flex-auto" ]
-            [ div [ class "flex" ]
-                [ Html.node "paper-textarea"
-                    [ class "auto-focus"
-                    , stringProperty "label" "Todo"
-                    , value (vm.edit.todo.text)
-                    , property "keyBindings" Json.Encode.null
-                    , boolProperty "stopKeyboardEventPropagation" True
-                    , onInput vm.edit.onTodoTextChanged
-                    ]
-                    []
+    [ div [ class "vertical layout flex-auto" ]
+        [ div [ class "flex" ]
+            [ Html.node "paper-textarea"
+                [ class "auto-focus"
+                , stringProperty "label" "Todo"
+                , value (vm.edit.todo.text)
+                , property "keyBindings" Json.Encode.null
+                , boolProperty "stopKeyboardEventPropagation" True
+                , onInput vm.edit.onTodoTextChanged
                 ]
-            , defaultOkCancelDeleteButtons vm.edit.onDeleteClicked
+                []
             ]
+        , defaultOkCancelDeleteButtons vm.edit.onDeleteClicked
         ]
+    ]

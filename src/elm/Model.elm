@@ -122,7 +122,7 @@ getActiveContexts =
 
 
 getContextsAsIdDict =
-    (.contextStore) >> Store.asIdDict 
+    (.contextStore) >> Store.asIdDict
 
 
 getProjectsAsIdDict =
@@ -550,9 +550,19 @@ getCurrentTodoListSortByFunction model =
             Todo.getModifiedAt >> negate
 
 
-findTodoById : Todo.Id -> Model -> Maybe Todo.Model
+findTodoById : Document.Id -> Model -> Maybe Todo.Model
 findTodoById id =
     getTodoStore >> Store.findById id
+
+
+findProjectById : Document.Id -> Model -> Maybe Project.Model
+findProjectById id =
+    .projectStore >> Store.findById id
+
+
+findContextById : Document.Id -> Model -> Maybe Context.Model
+findContextById id =
+    .contextStore >> Store.findById id
 
 
 type alias TodoContextViewModel =

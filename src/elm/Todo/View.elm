@@ -16,6 +16,7 @@ import Json.Encode
 import Keyboard.Extra exposing (Key(Enter, Escape))
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Model
 import Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
 import Msg exposing (Msg, commonMsg)
 import Polymer.Attributes exposing (boolProperty, stringProperty)
@@ -87,6 +88,7 @@ type alias TodoViewModel =
     , isMultiLine : Bool
     , isDone : Bool
     , isDeleted : Bool
+    , isFocused : Bool
     , projectDisplayName : String
     , contextDisplayName : String
     , selectedProjectIndex : Int
@@ -165,10 +167,14 @@ createTodoViewModel vc tabindexAV todo =
 
         maybeEditTodoForm =
             vc.getMaybeEditTodoFormForTodo todo
+
+        isFocused =
+            vc.maybeFocusedEntity ?|> (Model.getEntityId >> equals todoId) ?= False
     in
         { isDone = Todo.getDone todo
         , key = todoId
         , isDeleted = Todo.getDeleted todo
+        , isFocused = isFocused
         , text = text
         , isMultiLine = isMultiLine
         , displayText = displayText

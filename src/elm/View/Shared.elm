@@ -23,7 +23,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Types exposing (Model)
+import Types exposing (Entity, Model)
 import Project
 import Model.Internal as Model
 import Project
@@ -49,6 +49,7 @@ type alias SharedViewModel =
     , activeContexts : List Context.Model
     , showDetails : Bool
     , selectedEntityIdSet : Set Document.Id
+    , maybeFocusedEntity : Maybe Entity
     }
 
 
@@ -86,6 +87,7 @@ createSharedViewModel model =
                         Nothing
     in
         { now = now
+        , maybeFocusedEntity = model.maybeFocusedEntity
         , selectedEntityIdSet = model.selectedEntityIdSet
         , projectByIdDict = Model.getProjectsAsIdDict model
         , contextByIdDict = Model.getContextsAsIdDict model

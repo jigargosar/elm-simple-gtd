@@ -321,7 +321,8 @@ contextDropdownMenu vm =
                 [ context |> Context.getName >> text ]
     in
         Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
-            [ dropdownTriggerWithTitle vm.tabindexAV vm.contextDisplayName
+            [ div [ class "font-nowrap" ] [ text vm.contextDisplayName ]
+                |> dropdownTrigger vm.tabindexAV
             , Paper.listbox
                 [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                 (vm.activeContexts .|> createContextItem)
@@ -336,7 +337,8 @@ projectDropdownMenu vm =
                 [ project |> Project.getName >> text ]
     in
         Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
-            [ dropdownTriggerWithTitle vm.tabindexAV vm.projectDisplayName
+            [ div [ class "font-nowrap" ] [ text vm.projectDisplayName ]
+                |> dropdownTrigger vm.tabindexAV
             , Paper.listbox
                 [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                 (vm.activeProjects .|> createProjectItem)

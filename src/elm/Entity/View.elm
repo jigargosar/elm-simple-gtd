@@ -23,46 +23,43 @@ initKeyed tabindexAV mainViewModel vm =
 
 
 init tabindexAV vc vm =
-    if vm.id /= "" then
-        vc.getMaybeEditEntityFormForEntityId vm.id
-            |> Maybe.unpack (\_ -> defaultView tabindexAV vm) (editEntityView tabindexAV vm)
-    else
-        defaultView tabindexAV vm
+    let
+        maybeForm =
+            if vm.id /= "" then
+                vc.getMaybeEditEntityFormForEntityId vm.id
+            else
+                Nothing
+    in
+        div
+            [ class "entity-item"
+            , tabindexAV
+            , onFocusIn vm.onFocusIn
+            , onFocus vm.onFocus
+            , onBlur vm.onBlur
+            ]
+            (maybeForm
+                |> Maybe.unpack (\_ -> defaultView tabindexAV vm) (editEntityView tabindexAV vm)
+            )
 
 
 defaultView tabindexAV vm =
-    div
-        [ class "entity-item"
-        , tabindexAV
-        , onFocusIn vm.onFocusIn
-        , onFocus vm.onFocus
-        , onBlur vm.onBlur
+    [ div [ class "layout horizontal justified" ]
+        [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
+        , WebComponents.iconButton "create"
+            [ class "flex-none", onClick vm.startEditingMsg, tabindexAV ]
         ]
-        [ div [ class "layout horizontal justified" ]
-            [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
-            , WebComponents.iconButton "create"
-                [ class "flex-none", onClick vm.startEditingMsg, tabindexAV ]
-            ]
-        ]
+    ]
 
 
 editEntityView tabindexAV vm form =
-    div
-        [ class "entity-item"
-        , tabindexAV
-        , onFocusIn vm.onFocusIn
-        , onFocus vm.onFocus
-        , onBlur vm.onBlur
-        ]
-        [ div [ class "layout vertical" ]
-            [ Paper.input
-                [ class "edit-entity-name-input auto-focus"
-                , stringProperty "label" "Name"
-                , value (form.name)
-                , onInput vm.onNameChanged
-                , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
-                ]
-                []
-            , defaultOkCancelDeleteButtons vm.onDeleteClicked
+    [ div [ class "layout vertical" ]
+        [ Paper.input
+            [ class "auto-focus"
+            , stringProperty "label" "Name"
+            , value (form.name)
+            , onInput vm.onNameChanged
             ]
+            []
+        , defaultOkCancelDeleteButtons vm.onDeleteClicked
         ]
+    ]

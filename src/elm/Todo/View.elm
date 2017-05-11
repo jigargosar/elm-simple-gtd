@@ -59,7 +59,7 @@ init vm =
             , vm.tabindexAV
             ]
             (if showEditView then
-                editView vm
+                editView vm.edit
              else
                 defaultView vm
             )
@@ -423,20 +423,20 @@ timeToolTip vm =
         []
 
 
-editView : TodoViewModel -> List (Html Msg)
-editView vm =
+editView : EditViewModel -> List (Html Msg)
+editView edit =
     [ div [ class "vertical layout flex-auto" ]
         [ div [ class "flex" ]
             [ Html.node "paper-textarea"
                 [ class "auto-focus"
                 , stringProperty "label" "Todo"
-                , value (vm.edit.todo.text)
+                , value (edit.todo.text)
                 , property "keyBindings" Json.Encode.null
                 , boolProperty "stopKeyboardEventPropagation" True
-                , onInput vm.edit.onTodoTextChanged
+                , onInput edit.onTodoTextChanged
                 ]
                 []
             ]
-        , defaultOkCancelDeleteButtons vm.edit.onDeleteClicked
+        , defaultOkCancelDeleteButtons edit.onDeleteClicked
         ]
     ]

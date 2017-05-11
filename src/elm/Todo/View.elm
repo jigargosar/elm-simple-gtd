@@ -58,10 +58,6 @@ init vm =
 
         isEditing =
             Maybe.isJust maybeEditVM
-
-        children : List (Html Msg)
-        children =
-            (maybeEditVM |> Maybe.unpack (\_ -> defaultView vm) editView)
     in
         div
             [ classList [ "todo-item" => True, "selected" => vm.isSelected, "editing" => isEditing ]
@@ -70,7 +66,7 @@ init vm =
             , onBlur vm.onBlur
             , vm.tabindexAV
             ]
-            children
+            (maybeEditVM |> Maybe.unpack (\_ -> defaultView vm) editView)
 
 
 type alias EditViewModel =

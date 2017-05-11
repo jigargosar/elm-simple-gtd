@@ -93,7 +93,7 @@ addTodoFab m =
         [ id "add-fab"
         , attribute "icon" "add"
         , attribute "mini" ""
-        , onClick Msg.StartAddingTodo
+        , onClick Msg.NewTodo
         , tabindex -1
         ]
         []

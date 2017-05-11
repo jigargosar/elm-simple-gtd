@@ -48,7 +48,7 @@ type Msg
     | ToggleTodoDone Todo.Model
     | SetTodoContext Context.Model Todo.Model
     | SetTodoProject Project.Model Todo.Model
-    | StartAddingTodo
+    | NewTodo
     | NewProject
     | NewContext
     | NewTodoTextChanged Todo.Text

@@ -167,7 +167,7 @@ update msg =
                 SetTodoProject project todo ->
                     updateTodo (Todo.SetProject project) todo
 
-                StartAddingTodo ->
+                NewTodo ->
                     Return.map (Model.activateNewTodoMode)
                         >> autoFocusPaperInputCmd
 
@@ -390,7 +390,7 @@ onGlobalKeyUp key =
                     andThenUpdate DeactivateEditingMode
 
                 ( Key.CharQ, EditMode.None ) ->
-                    andThenUpdate StartAddingTodo
+                    andThenUpdate NewTodo
 
                 _ ->
                     identity

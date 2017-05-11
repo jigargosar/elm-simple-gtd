@@ -32,35 +32,37 @@ init tabindexAV vc vm =
 
 defaultView tabindexAV vm =
     div
-        [ class "entity-item layout horizontal justified width--100"
+        [ class "entity-item"
         , tabindexAV
         , onFocusIn vm.onFocusIn
         , onFocus vm.onFocus
         , onBlur vm.onBlur
         ]
-        [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
-        , WebComponents.iconButton "create"
-            [ class "flex-none", onClick vm.startEditingMsg, tabindexAV ]
+        [ div [ class "layout horizontal justified" ]
+            [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
+            , WebComponents.iconButton "create"
+                [ class "flex-none", onClick vm.startEditingMsg, tabindexAV ]
+            ]
         ]
 
 
 editEntityView tabindexAV vm form =
     div
-        [ class "entity-item layout vertical"
+        [ class "entity-item"
         , tabindexAV
         , onFocusIn vm.onFocusIn
         , onFocus vm.onFocus
         , onBlur vm.onBlur
         ]
-        [ Paper.input
-            [ class "edit-entity-name-input auto-focus"
-            , stringProperty "label" "Name"
-            , value (form.name)
-            , onInput vm.onNameChanged
-            , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
-
-            --                        , onKeyUp vm.onKeyUp
+        [ div [ class "layout vertical" ]
+            [ Paper.input
+                [ class "edit-entity-name-input auto-focus"
+                , stringProperty "label" "Name"
+                , value (form.name)
+                , onInput vm.onNameChanged
+                , onClickStopPropagation (Msg.FocusPaperInput ".edit-entity-name-input")
+                ]
+                []
+            , defaultOkCancelDeleteButtons vm.onDeleteClicked
             ]
-            []
-        , defaultOkCancelDeleteButtons vm.onDeleteClicked
         ]

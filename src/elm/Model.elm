@@ -345,8 +345,8 @@ updateEditModeNameChanged newName entity model =
             model
 
 
-toggleEntityDeleted : Entity -> ModelF
-toggleEntityDeleted entity model =
+toggleDeleteEntity : Entity -> ModelF
+toggleDeleteEntity entity model =
     let
         entityId =
             getEntityId entity

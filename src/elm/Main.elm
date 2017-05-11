@@ -258,7 +258,7 @@ update msg =
                             andThenUpdate SaveCurrentForm
 
                         ToggleDeleted ->
-                            Return.map (Model.toggleEntityDeleted entity)
+                            Return.map (Model.toggleDeleteEntity entity)
                                 >> andThenUpdate DeactivateEditingMode
 
                         SetFocusedIn ->

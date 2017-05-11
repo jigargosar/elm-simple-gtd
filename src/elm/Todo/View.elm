@@ -107,7 +107,7 @@ type alias TodoViewModel =
     , onDeleteClicked : Msg
     , showDetails : Bool
     , contexts : List Context.Model
-    , projects : List Project.Model
+    , activeProjects : List Project.Model
     , onReminderButtonClicked : Msg
     , reminder : ReminderViewModel
     , edit : EditViewModel
@@ -194,9 +194,6 @@ createTodoViewModel vc tabindexAV todo =
         todoId =
             Document.getId todo
 
-        projects =
-            vc.activeProjects
-
         contextName =
             Todo.getContextId todo
                 |> (Dict.get # vc.contextByIdDict >> Maybe.map Context.getName)
@@ -260,7 +257,7 @@ createTodoViewModel vc tabindexAV todo =
         , projectName = projectName
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
-        , selectedProjectIndex = projects |> List.Extra.findIndex (Project.nameEquals projectName) ?= 0
+        , selectedProjectIndex = vc.activeProjects |> List.Extra.findIndex (Project.nameEquals projectName) ?= 0
         , contextName = contextName
         , setContextMsg = Msg.SetTodoContext # todo
         , setProjectMsg = Msg.SetTodoProject # todo
@@ -268,7 +265,7 @@ createTodoViewModel vc tabindexAV todo =
         , onDoneClicked = Msg.ToggleTodoDone todo
         , showDetails = vc.showDetails
         , contexts = vc.activeContexts
-        , projects = vc.activeProjects
+        , activeProjects = vc.activeProjects
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
         , edit = createEditTodoViewModel vc todo
@@ -340,7 +337,7 @@ projectMenuButton vm =
         [ dropdownTriggerWithTitle vm.tabindexAV vm.projectDisplayName
         , Paper.listbox
             [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-            (vm.projects .|> createProjectItem # vm)
+            (vm.activeProjects .|> createProjectItem # vm)
         ]
 
 

@@ -49,7 +49,7 @@ initKeyed vm =
 init vm =
     let
         showEditView =
-            vm.edit.isEditing && not vm.isSelected
+            vm.isEditing && not vm.isSelected
     in
         div
             [ classList [ "todo-item" => True, "selected" => vm.isSelected, "editing" => showEditView ]
@@ -67,7 +67,6 @@ init vm =
 
 type alias EditViewModel =
     { todo : { text : Todo.Text }
-    , isEditing : Bool
     , onTodoTextChanged : String -> Msg
     , onDeleteClicked : Msg
     }
@@ -84,17 +83,10 @@ createEditTodoViewModel vc todo =
 
         updateTodoForm =
             Msg.UpdateTodoForm form
-
-        maybeEditTodoForm =
-            vc.getMaybeEditTodoFormForTodo todo
-
-        isEditing =
-            Maybe.isJust maybeEditTodoForm
     in
         { todo =
             { text = form.todoText
             }
-        , isEditing = isEditing
         , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
         , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
         }
@@ -121,6 +113,7 @@ type alias TodoViewModel =
     , onReminderButtonClicked : Msg
     , reminder : ReminderViewModel
     , edit : EditViewModel
+    , isEditing : Bool
     , onFocusIn : Msg
     , onFocus : Msg
     , onBlur : Msg
@@ -251,6 +244,9 @@ createTodoViewModel vc tabindexAV todo =
 
         onEntityAction =
             Msg.OnEntityAction (TodoEntity todo)
+
+        isEditing =
+            Maybe.isJust (vc.getMaybeEditTodoFormForTodo todo)
     in
         { isDone = Todo.getDone todo
         , key = todoId
@@ -271,6 +267,7 @@ createTodoViewModel vc tabindexAV todo =
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
         , edit = createEditTodoViewModel vc todo
+        , isEditing = isEditing
         , onDeleteClicked = onEntityAction ToggleDeleted
         , onFocusIn = onEntityAction Types.SetFocusedIn
         , onFocus = onEntityAction Types.SetFocused

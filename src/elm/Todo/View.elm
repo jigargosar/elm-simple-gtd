@@ -46,23 +46,31 @@ initKeyed vm =
     ( vm.key, init vm )
 
 
+init : TodoViewModel -> Html Msg
 init vm =
     let
-        showEditView =
-            vm.isEditing && not vm.isSelected
+        maybeEditVM : Maybe EditViewModel
+        maybeEditVM =
+            if vm.isSelected then
+                Nothing
+            else
+                vm.edit
+
+        isEditing =
+            Maybe.isJust maybeEditVM
+
+        children : List (Html Msg)
+        children =
+            (maybeEditVM |> Maybe.unpack (\_ -> defaultView vm) editView)
     in
         div
-            [ classList [ "todo-item" => True, "selected" => vm.isSelected, "editing" => showEditView ]
+            [ classList [ "todo-item" => True, "selected" => vm.isSelected, "editing" => isEditing ]
             , onFocusIn vm.onFocusIn
             , onFocus vm.onFocus
             , onBlur vm.onBlur
             , vm.tabindexAV
             ]
-            (if showEditView then
-                editView vm.edit
-             else
-                defaultView vm
-            )
+            children
 
 
 type alias EditViewModel =
@@ -72,12 +80,9 @@ type alias EditViewModel =
     }
 
 
-createEditTodoViewModel : SharedViewModel -> Todo.Model -> EditViewModel
-createEditTodoViewModel vc todo =
+createEditTodoViewModel : Todo.Form.Model -> Todo.Model -> EditViewModel
+createEditTodoViewModel form todo =
     let
-        form =
-            vc.getEditTodoForm todo
-
         todoId =
             form.id
 
@@ -112,8 +117,7 @@ type alias TodoViewModel =
     , activeProjects : List Project.Model
     , onReminderButtonClicked : Msg
     , reminder : ReminderViewModel
-    , edit : EditViewModel
-    , isEditing : Bool
+    , edit : Maybe EditViewModel
     , onFocusIn : Msg
     , onFocus : Msg
     , onBlur : Msg
@@ -242,8 +246,8 @@ createTodoViewModel vc tabindexAV todo =
         onEntityAction =
             Msg.OnEntityAction (TodoEntity todo)
 
-        isEditing =
-            Maybe.isJust (vc.getMaybeEditTodoFormForTodo todo)
+        maybeEditTodoForm =
+            vc.getMaybeEditTodoFormForTodo todo
     in
         { isDone = Todo.getDone todo
         , key = todoId
@@ -263,8 +267,7 @@ createTodoViewModel vc tabindexAV todo =
         , activeProjects = vc.activeProjects
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
-        , edit = createEditTodoViewModel vc todo
-        , isEditing = isEditing
+        , edit = maybeEditTodoForm ?|> createEditTodoViewModel # todo
         , onDeleteClicked = onEntityAction ToggleDeleted
         , onFocusIn = onEntityAction Types.SetFocusedIn
         , onFocus = onEntityAction Types.SetFocused

@@ -276,9 +276,6 @@ defaultView vm =
         , onFocus vm.onFocus
         , onBlur vm.onBlur
         , vm.tabindexAV
-
-        --        , onFocusIn (commonMsg.logString ("focusIn: " ++ vm.displayText))
-        --        , onFocusOut (commonMsg.logString ("focusOut: " ++ vm.displayText))
         ]
         [ div [ class "layout vertical" ]
             [ div
@@ -301,16 +298,15 @@ defaultView vm =
         ]
 
 
-dropdownTriggerWithTitle tabindexAV title =
-    div [ class "font-nowrap" ] [ text title ] |> dropdownTrigger tabindexAV
-
-
-dropdownTrigger tabindexAV content =
-    div [ style [ "height" => "24px" ], class "layout horizontal font-body1", slotDropdownTrigger ]
-        [ Paper.button [ class "padding-0 margin-0 shrink", tabindexAV ]
-            [ div [ class "text-transform-none primary-text-color" ] [ content ]
-            ]
+doneIconButton : TodoViewModel -> Html Msg
+doneIconButton vm =
+    Paper.iconButton
+        [ class ("done-icon done-" ++ toString (vm.isDone))
+        , onClickStopPropagation (vm.onDoneClicked)
+        , iconA "done"
+        , vm.tabindexAV
         ]
+        []
 
 
 contextDropdownMenu vm =
@@ -345,15 +341,12 @@ projectDropdownMenu vm =
             ]
 
 
-doneIconButton : TodoViewModel -> Html Msg
-doneIconButton vm =
-    Paper.iconButton
-        [ class ("done-icon done-" ++ toString (vm.isDone))
-        , onClickStopPropagation (vm.onDoneClicked)
-        , iconA "done"
-        , vm.tabindexAV
+dropdownTrigger tabindexAV content =
+    div [ style [ "height" => "24px" ], class "layout horizontal font-body1", slotDropdownTrigger ]
+        [ Paper.button [ class "padding-0 margin-0 shrink", tabindexAV ]
+            [ div [ class "text-transform-none primary-text-color" ] [ content ]
+            ]
         ]
-        []
 
 
 reminderView : TodoViewModel -> Html Msg

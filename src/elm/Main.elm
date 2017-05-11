@@ -167,20 +167,8 @@ update msg =
                 SetTodoProject project todo ->
                     updateTodo (Todo.SetProject project) todo
 
-                NewTodo ->
-                    Return.map (Model.activateNewTodoMode)
-                        >> autoFocusPaperInputCmd
-
                 NewTodoTextChanged text ->
                     Return.map (Model.updateNewTodoText text)
-
-                NewProject ->
-                    Return.map Model.createAndEditNewProject
-                        >> autoFocusPaperInputCmd
-
-                NewContext ->
-                    Return.map Model.createAndEditNewContext
-                        >> autoFocusPaperInputCmd
 
                 DeactivateEditingMode ->
                     Return.map (Model.deactivateEditingMode)
@@ -241,6 +229,18 @@ update msg =
                 SaveCurrentForm ->
                     Return.map (Model.saveCurrentForm)
                         >> andThenUpdate DeactivateEditingMode
+
+                NewTodo ->
+                    Return.map (Model.activateNewTodoMode)
+                        >> autoFocusPaperInputCmd
+
+                NewProject ->
+                    Return.map Model.createAndEditNewProject
+                        >> autoFocusPaperInputCmd
+
+                NewContext ->
+                    Return.map Model.createAndEditNewContext
+                        >> autoFocusPaperInputCmd
 
                 StartAddingNewEntity entityType ->
                     identity

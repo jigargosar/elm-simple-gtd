@@ -181,11 +181,20 @@ createTodoViewModel vc tabindexAV todo =
                 Key.CharE ->
                     startEditingMsg
 
+                Key.CharD ->
+                    toggleDoneMsg
+
+                Key.Delete ->
+                    toggleDeleteMsg
+
                 _ ->
                     commonMsg.noOp
 
         startEditingMsg =
             createEntityActionMsg Types.StartEditing
+
+        toggleDeleteMsg =
+            createEntityActionMsg Types.ToggleDeleted
 
         toggleDoneMsg =
             Msg.ToggleTodoDone todo
@@ -211,7 +220,7 @@ createTodoViewModel vc tabindexAV todo =
         , onReminderButtonClicked = Msg.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
         , edit = maybeEditTodoForm ?|> createEditTodoViewModel # todo
-        , onDeleteClicked = createEntityActionMsg ToggleDeleted
+        , onDeleteClicked = toggleDeleteMsg
         , onFocusIn = createEntityActionMsg Types.SetFocusedIn
         , onFocus = createEntityActionMsg Types.SetFocused
         , onBlur = createEntityActionMsg Types.SetBlurred

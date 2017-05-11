@@ -330,7 +330,7 @@ startEditingReminder todo =
 
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
-    setEditMode (createEntityEditMode entity model) model
+    setEditMode (createEntityEditForm entity model) model
 
 
 updateEditModeNameChanged newName entity model =
@@ -437,8 +437,8 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
         maybeModel ?= model |> setFocusInEntityWithId todoId
 
 
-createEntityEditMode : Entity -> Model -> EditForm
-createEntityEditMode entity model =
+createEntityEditForm : Entity -> Model -> EditForm
+createEntityEditForm entity model =
     case entity of
         ContextEntity context ->
             EditMode.editContextMode context

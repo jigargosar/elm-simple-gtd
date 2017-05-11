@@ -314,33 +314,33 @@ dropdownTrigger tabindexAV content =
 
 
 contextDropdownMenu vm =
-    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
-        [ dropdownTriggerWithTitle vm.tabindexAV vm.contextDisplayName
-        , Paper.listbox
-            [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-            (vm.activeContexts .|> createContextItem # vm)
-        ]
+    let
+        createContextItem context =
+            Paper.item
+                [ onClickStopPropagation (vm.setContextMsg context) ]
+                [ context |> Context.getName >> text ]
+    in
+        Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
+            [ dropdownTriggerWithTitle vm.tabindexAV vm.contextDisplayName
+            , Paper.listbox
+                [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+                (vm.activeContexts .|> createContextItem)
+            ]
 
 
 projectDropdownMenu vm =
-    Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
-        [ dropdownTriggerWithTitle vm.tabindexAV vm.projectDisplayName
-        , Paper.listbox
-            [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-            (vm.activeProjects .|> createProjectItem # vm)
-        ]
-
-
-createProjectItem project vm =
-    Paper.item
-        [ onClickStopPropagation (vm.setProjectMsg project) ]
-        [ project |> Project.getName >> text ]
-
-
-createContextItem context vm =
-    Paper.item
-        [ onClickStopPropagation (vm.setContextMsg context) ]
-        [ context |> Context.getName >> text ]
+    let
+        createProjectItem project =
+            Paper.item
+                [ onClickStopPropagation (vm.setProjectMsg project) ]
+                [ project |> Project.getName >> text ]
+    in
+        Paper.menuButton [ style [ "min-width" => "50%" ], class "flex-auto", dynamicAlign ]
+            [ dropdownTriggerWithTitle vm.tabindexAV vm.projectDisplayName
+            , Paper.listbox
+                [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+                (vm.activeProjects .|> createProjectItem)
+            ]
 
 
 doneIconButton : TodoViewModel -> Html Msg

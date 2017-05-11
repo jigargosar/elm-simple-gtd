@@ -4,6 +4,7 @@ import Context
 import Dict
 import Document
 import EditMode exposing (EditForm)
+import Ext.Keyboard exposing (KeyboardEvent)
 import Lazy
 import Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupByEntity(GroupByContext, GroupByProject), MainViewType(..), GroupByViewType(..))
 import Msg exposing (Msg, commonMsg)
@@ -16,6 +17,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Project
+import Keyboard.Extra as Key exposing (Key)
 
 
 type alias IconVM =
@@ -52,6 +54,7 @@ type alias EntityViewModel =
     , onFocusIn : Msg
     , onFocus : Msg
     , onBlur : Msg
+    , onKeyDownMsg : KeyboardEvent -> Msg
     }
 
 
@@ -108,7 +111,7 @@ create todoListByEntityId config entity =
         id =
             Document.getId entity
 
-        onEntityAction =
+        createEntityActionMsg =
             Msg.OnEntityAction (config.entityWrapper entity)
 
         todoList =
@@ -120,11 +123,11 @@ create todoListByEntityId config entity =
         isNull =
             config.isNull entity
 
-        onDeleteClicked =
+        toggleDeleteMsg =
             if isNull then
                 (commonMsg.noOp)
             else
-                (onEntityAction ToggleDeleted)
+                (createEntityActionMsg ToggleDeleted)
 
         maybeEditModel =
             config.maybeEditModel
@@ -146,6 +149,23 @@ create todoListByEntityId config entity =
 
         appHeader =
             { name = config.namePrefix ++ name, backgroundColor = icon.color }
+
+        onKeyDownMsg { key } =
+            case key of
+                {- Key.Space ->
+                   createEntityActionMsg Types.ToggleSelected
+                -}
+                Key.CharE ->
+                    startEditingMsg
+
+                Key.Delete ->
+                    toggleDeleteMsg
+
+                _ ->
+                    commonMsg.noOp
+
+        startEditingMsg =
+            createEntityActionMsg StartEditing
     in
         { id = id
         , name = name
@@ -160,16 +180,17 @@ create todoListByEntityId config entity =
                 else
                     commonMsg.noOp
             )
-        , startEditingMsg = onEntityAction StartEditing
-        , onDeleteClicked = onDeleteClicked
-        , onSaveClicked = onEntityAction Save
-        , onNameChanged = NameChanged >> onEntityAction
+        , startEditingMsg = startEditingMsg
+        , onDeleteClicked = toggleDeleteMsg
+        , onSaveClicked = createEntityActionMsg Save
+        , onNameChanged = NameChanged >> createEntityActionMsg
         , onCancelClicked = Msg.DeactivateEditingMode
         , icon = icon
         , appHeader = appHeader
-        , onFocusIn = onEntityAction Types.SetFocusedIn
-        , onFocus = onEntityAction Types.SetFocused
-        , onBlur = onEntityAction Types.SetBlurred
+        , onFocusIn = createEntityActionMsg Types.SetFocusedIn
+        , onFocus = createEntityActionMsg Types.SetFocused
+        , onBlur = createEntityActionMsg Types.SetBlurred
+        , onKeyDownMsg = onKeyDownMsg
         }
 
 

@@ -1,5 +1,6 @@
 module Entity.View exposing (..)
 
+import Ext.Keyboard exposing (onKeyDown)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Attributes.Extra exposing (stringProperty)
@@ -36,6 +37,7 @@ init tabindexAV vc vm =
             , onFocusIn vm.onFocusIn
             , onFocus vm.onFocus
             , onBlur vm.onBlur
+            , onKeyDown vm.onKeyDownMsg
             ]
             (maybeForm
                 |> Maybe.unpack (\_ -> defaultView tabindexAV vm) (editEntityView tabindexAV vm)

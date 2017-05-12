@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "bootstrap": "which -a elm ; elm-package install -y",
-    "postinstall": "bash -c \"elm-package install -y && bower install \"",
+    "install-elm": "which -a elm ; elm-package install -y",
+    "postinstall": "bash -c \"which -a elm && elm-package install -y && bower install \"",
     "dev": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server",
     "hot": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline",
     "hot-hot": "nodemon --watch webpack.config.js --exec \"npm run hot\"",
@@ -29,6 +29,7 @@
     "elm-hot-loader": "0.5.4",
     "elm-webpack-loader": "4.3.1",
     "file-loader": "0.11.1",
+    "polymer-cli": "0.18.2",
     "postcss": "5.2.17",
     "postcss-browser-reporter": "0.5.0",
     "postcss-cssnext": "2.10.0",

@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-a11y-announcer/iron-a11y-announcer.html">
 <link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
 
@@ -88,7 +88,7 @@ is separate from validation, and `allowed-pattern` does not affect how the input
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="iron-input">
+<dom-module id="iron-input">
   <template>
     <style>
       :host {
@@ -99,4 +99,3 @@ is separate from validation, and `allowed-pattern` does not affect how the input
   </template>
   <script>Polymer({is:'iron-input',behaviors:[Polymer.IronValidatableBehavior],properties:{bindValue:{type:String},value:{computed:'_computeValue(bindValue)'},allowedPattern:{type:String},autoValidate:{type:Boolean,value:!1}},observers:['_bindValueChanged(bindValue, _inputElement)'],listeners:{input:'_onInput',keypress:'_onKeypress'},created:function(){Polymer.IronA11yAnnouncer.requestAvailability(),this._previousValidInput='',this._patternAlreadyChecked=!1},attached:function(){this._observer=Polymer.dom(this).observeNodes(function(){this._initSlottedInput()}.bind(this))},detached:function(){this._observer&&(Polymer.dom(this).unobserveNodes(this._observer),this._observer=null)},get inputElement(){return this._inputElement},_initSlottedInput:function(){this._inputElement=this.getEffectiveChildren()[0],this.inputElement&&this.inputElement.value&&(this.bindValue=this.inputElement.value),this.fire('iron-input-ready')},get _patternRegExp(){var a;if(this.allowedPattern)a=new RegExp(this.allowedPattern);else switch(this.type){case'number':a=/[0-9.,e-]/;}return a},_bindValueChanged:function(a,b){b&&(a===void 0?b.value=null:a!==b.value&&(this.inputElement.value=a),this.autoValidate&&this.validate(),this.fire('bind-value-changed',{value:a}))},_onInput:function(){if(this.allowedPattern&&!this._patternAlreadyChecked){var a=this._checkPatternValidity();a||(this._announceInvalidCharacter('Invalid string of characters not entered.'),this.inputElement.value=this._previousValidInput)}this.bindValue=this._previousValidInput=this.inputElement.value,this._patternAlreadyChecked=!1},_isPrintable:function(a){var b=8==a.keyCode||9==a.keyCode||13==a.keyCode||27==a.keyCode,c=19==a.keyCode||20==a.keyCode||45==a.keyCode||46==a.keyCode||144==a.keyCode||145==a.keyCode||32<a.keyCode&&41>a.keyCode||111<a.keyCode&&124>a.keyCode;return!b&&!(0==a.charCode&&c)},_onKeypress:function(a){if(this.allowedPattern||'number'===this.type){var b=this._patternRegExp;if(b&&!(a.metaKey||a.ctrlKey||a.altKey)){this._patternAlreadyChecked=!0;var c=String.fromCharCode(a.charCode);this._isPrintable(a)&&!b.test(c)&&(a.preventDefault(),this._announceInvalidCharacter('Invalid character '+c+' not entered.'))}}},_checkPatternValidity:function(){var a=this._patternRegExp;if(!a)return!0;for(var b=0;b<this.inputElement.value.length;b++)if(!a.test(this.inputElement.value[b]))return!1;return!0},validate:function(){if(!this.inputElement)return this.invalid=!1,!0;var a=this.inputElement.checkValidity();return a&&(this.required&&''===this.bindValue?a=!1:this.hasValidator()&&(a=Polymer.IronValidatableBehavior.validate.call(this,this.bindValue))),this.invalid=!a,this.fire('iron-input-validate'),a},_announceInvalidCharacter:function(a){this.fire('iron-announce',{text:a})},_computeValue:function(a){return a}});</script>
 </dom-module>
-</body></html>

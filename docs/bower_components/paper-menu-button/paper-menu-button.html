@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
 <link rel="import" href="../iron-behaviors/iron-control-state.html">
 <link rel="import" href="../iron-dropdown/iron-dropdown.html">
@@ -58,7 +58,7 @@ Custom property | Description | Default
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="paper-menu-button">
+<dom-module id="paper-menu-button">
   <template>
     <style>
       :host {
@@ -121,4 +121,3 @@ Custom property | Description | Default
 
   <script>(function(){'use strict';var a={ANIMATION_CUBIC_BEZIER:'cubic-bezier(.3,.95,.5,1)',MAX_ANIMATION_TIME_MS:400},b=Polymer({is:'paper-menu-button',behaviors:[Polymer.IronA11yKeysBehavior,Polymer.IronControlState],properties:{opened:{type:Boolean,value:!1,notify:!0,observer:'_openedChanged'},horizontalAlign:{type:String,value:'left',reflectToAttribute:!0},verticalAlign:{type:String,value:'top',reflectToAttribute:!0},dynamicAlign:{type:Boolean},horizontalOffset:{type:Number,value:0,notify:!0},verticalOffset:{type:Number,value:0,notify:!0},noOverlap:{type:Boolean},noAnimations:{type:Boolean,value:!1},ignoreSelect:{type:Boolean,value:!1},closeOnActivate:{type:Boolean,value:!1},openAnimationConfig:{type:Object,value:function(){return[{name:'fade-in-animation',timing:{delay:100,duration:200}},{name:'paper-menu-grow-width-animation',timing:{delay:100,duration:150,easing:a.ANIMATION_CUBIC_BEZIER}},{name:'paper-menu-grow-height-animation',timing:{delay:100,duration:275,easing:a.ANIMATION_CUBIC_BEZIER}}]}},closeAnimationConfig:{type:Object,value:function(){return[{name:'fade-out-animation',timing:{duration:150}},{name:'paper-menu-shrink-width-animation',timing:{delay:100,duration:50,easing:a.ANIMATION_CUBIC_BEZIER}},{name:'paper-menu-shrink-height-animation',timing:{duration:200,easing:'ease-in'}}]}},allowOutsideScroll:{type:Boolean,value:!1},restoreFocusOnClose:{type:Boolean,value:!0},_dropdownContent:{type:Object}},hostAttributes:{role:'group','aria-haspopup':'true'},listeners:{'iron-activate':'_onIronActivate','iron-select':'_onIronSelect'},get contentElement(){for(var c=Polymer.dom(this.$.content).getDistributedNodes(),d=0,e=c.length;d<e;d++)if(c[d].nodeType===Node.ELEMENT_NODE)return c[d]},toggle:function(){this.opened?this.close():this.open()},open:function(){this.disabled||this.$.dropdown.open()},close:function(){this.$.dropdown.close()},_onIronSelect:function(){this.ignoreSelect||this.close()},_onIronActivate:function(){this.closeOnActivate&&this.close()},_openedChanged:function(c,d){c?(this._dropdownContent=this.contentElement,this.fire('paper-dropdown-open')):null!=d&&this.fire('paper-dropdown-close')},_disabledChanged:function(c){Polymer.IronControlState._disabledChanged.apply(this,arguments),c&&this.opened&&this.close()},__onIronOverlayCanceled:function(c){var d=c.detail,e=Polymer.dom(d).rootTarget,f=this.$.trigger,g=Polymer.dom(d).path;-1<g.indexOf(f)&&c.preventDefault()}});Object.keys(a).forEach(function(c){b[c]=a[c]}),Polymer.PaperMenuButton=b})();</script>
 </dom-module>
-</body></html>

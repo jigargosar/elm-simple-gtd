@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-autogrow-textarea/iron-autogrow-textarea.html">
 <link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
 <link rel="import" href="paper-input-behavior.html">
@@ -31,7 +31,7 @@ See `Polymer.PaperInputContainer` for a list of custom properties used to
 style this element.
 -->
 
-</head><body><dom-module id="paper-textarea">
+<dom-module id="paper-textarea">
   <template>
     <style>
       :host {
@@ -66,4 +66,3 @@ style this element.
 </dom-module>
 
 <script>Polymer({is:'paper-textarea',behaviors:[Polymer.PaperInputBehavior,Polymer.IronFormElementBehavior],properties:{_ariaLabelledBy:{observer:'_ariaLabelledByChanged',type:String},_ariaDescribedBy:{observer:'_ariaDescribedByChanged',type:String},rows:{type:Number,value:1},maxRows:{type:Number,value:0}},_ariaLabelledByChanged:function(a){this.$.input.textarea.setAttribute('aria-labelledby',a)},_ariaDescribedByChanged:function(a){this.$.input.textarea.setAttribute('aria-describedby',a)},get _focusableElement(){return this.$.input.textarea}});</script>
-</body></html>

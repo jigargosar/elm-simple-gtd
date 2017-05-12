@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="../paper-styles/element-styles/paper-material.html">
@@ -57,7 +57,7 @@ Custom property | Description | Default
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="paper-card">
+<dom-module id="paper-card">
   <template>
     <style include="paper-material">
       :host {
@@ -154,6 +154,5 @@ Custom property | Description | Default
     <slot></slot>
   </template>
 
-  <script>Polymer({is:'paper-card',properties:{heading:{type:String,value:'',observer:'_headingChanged'},image:{type:String,value:''},alt:{type:String},preloadImage:{type:Boolean,value:!1},fadeImage:{type:Boolean,value:!1},placeholderImage:{type:String,value:null},elevation:{type:Number,value:1,reflectToAttribute:!0},animatedShadow:{type:Boolean,value:!1},animated:{type:Boolean,reflectToAttribute:!0,readOnly:!0,computed:'_computeAnimated(animatedShadow)'}},_isHidden:function(a){return a?'false':'true'},_headingChanged:function(a){var b=this.getAttribute('heading'),c=this.getAttribute('aria-label');('string'!=typeof c||c===b)&&this.setAttribute('aria-label',a)},_computeHeadingClass:function(a){return a?' over-image':''},_computeAnimated:function(a){return a}});</script>
+  <script>Polymer({is:'paper-card',properties:{heading:{type:String,value:'',observer:'_headingChanged'},image:{type:String,value:''},alt:{type:String},preloadImage:{type:Boolean,value:!1},fadeImage:{type:Boolean,value:!1},placeholderImage:{type:String,value:null},elevation:{type:Number,value:1,reflectToAttribute:!0},animatedShadow:{type:Boolean,value:!1},animated:{type:Boolean,reflectToAttribute:!0,readOnly:!0,computed:'_computeAnimated(animatedShadow)'}},_isHidden:function(a){return a?'false':'true'},_headingChanged:function(a){var b=this.getAttribute('heading'),c=this.getAttribute('aria-label');('string'!==typeof c||c===b)&&this.setAttribute('aria-label',a)},_computeHeadingClass:function(a){return a?' over-image':''},_computeAnimated:function(a){return a}});</script>
 </dom-module>
-</body></html>

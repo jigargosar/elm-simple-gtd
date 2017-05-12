@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-icon/iron-icon.html">
 <link rel="import" href="../paper-behaviors/paper-inky-focus-behavior.html">
 <link rel="import" href="../paper-styles/default-theme.html">
@@ -66,7 +66,7 @@ Custom property | Description | Default
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="paper-icon-button">
+<dom-module id="paper-icon-button">
   <template strip-whitespace="">
     <style>
       :host {
@@ -123,4 +123,3 @@ Custom property | Description | Default
 
   <script>Polymer({is:'paper-icon-button',hostAttributes:{role:'button',tabindex:'0'},behaviors:[Polymer.PaperInkyFocusBehavior],properties:{src:{type:String},icon:{type:String},alt:{type:String,observer:'_altChanged'}},_altChanged:function(a,b){var c=this.getAttribute('aria-label');c&&b!=c||this.setAttribute('aria-label',a)}});</script>
 </dom-module>
-</body></html>

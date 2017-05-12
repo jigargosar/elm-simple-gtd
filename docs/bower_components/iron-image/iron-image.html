@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 
 <!--
 `iron-image` is an element for displaying an image that provides useful sizing and
@@ -66,7 +66,7 @@ Custom property | Description | Default
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="iron-image">
+<dom-module id="iron-image">
   <template>
     <style>
       :host {
@@ -130,4 +130,3 @@ Custom property | Description | Default
 
   <script>Polymer({is:'iron-image',properties:{src:{type:String,value:''},alt:{type:String,value:null},preventLoad:{type:Boolean,value:!1},sizing:{type:String,value:null,reflectToAttribute:!0},position:{type:String,value:'center'},preload:{type:Boolean,value:!1},placeholder:{type:String,value:null,observer:'_placeholderChanged'},fade:{type:Boolean,value:!1},loaded:{notify:!0,readOnly:!0,type:Boolean,value:!1},loading:{notify:!0,readOnly:!0,type:Boolean,value:!1},error:{notify:!0,readOnly:!0,type:Boolean,value:!1},width:{observer:'_widthChanged',type:Number,value:null},height:{observer:'_heightChanged',type:Number,value:null}},observers:['_transformChanged(sizing, position)','_loadStateObserver(src, preventLoad)'],created:function(){this._resolvedSrc=''},_imgOnLoad:function(){this.$.img.src!==this._resolveSrc(this.src)||(this._setLoading(!1),this._setLoaded(!0),this._setError(!1))},_imgOnError:function(){this.$.img.src!==this._resolveSrc(this.src)||(this.$.img.removeAttribute('src'),this.$.sizedImgDiv.style.backgroundImage='',this._setLoading(!1),this._setLoaded(!1),this._setError(!0))},_computePlaceholderHidden:function(){return!this.preload||!this.fade&&!this.loading&&this.loaded},_computePlaceholderClassName:function(){return this.preload&&this.fade&&!this.loading&&this.loaded?'faded-out':''},_computeImgDivHidden:function(){return!this.sizing},_computeImgDivARIAHidden:function(){return''===this.alt?'true':void 0},_computeImgDivARIALabel:function(){if(null!==this.alt)return this.alt;if(''===this.src)return'';var a=this._resolveSrc(this.src);return a.replace(/[?|#].*/g,'').split('/').pop()},_computeImgHidden:function(){return!!this.sizing},_widthChanged:function(){this.style.width=isNaN(this.width)?this.width:this.width+'px'},_heightChanged:function(){this.style.height=isNaN(this.height)?this.height:this.height+'px'},_loadStateObserver:function(a,b){var c=this._resolveSrc(a);c===this._resolvedSrc||(this._resolvedSrc=c,this.$.img.removeAttribute('src'),this.$.sizedImgDiv.style.backgroundImage='',''===a||b?(this._setLoading(!1),this._setLoaded(!1),this._setError(!1)):(this.$.img.src=this._resolvedSrc,this.$.sizedImgDiv.style.backgroundImage='url("'+this._resolvedSrc+'")',this._setLoading(!0),this._setLoaded(!1),this._setError(!1)))},_placeholderChanged:function(){this.$.placeholder.style.backgroundImage=this.placeholder?'url("'+this.placeholder+'")':''},_transformChanged:function(){var a=this.$.sizedImgDiv.style,b=this.$.placeholder.style;a.backgroundSize=b.backgroundSize=this.sizing,a.backgroundPosition=b.backgroundPosition=this.sizing?this.position:'',a.backgroundRepeat=b.backgroundRepeat=this.sizing?'no-repeat':''},_resolveSrc:function(a){var b=Polymer.ResolveUrl.resolveUrl(a,this.$.baseURIAnchor.href);return'/'===b[0]&&(b=(location.origin||location.protocol+'//'+location.host)+b),b}});</script>
 </dom-module>
-</body></html>

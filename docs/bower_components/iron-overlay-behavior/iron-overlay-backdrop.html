@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 
 <!--
 `iron-overlay-backdrop` is a backdrop used by `Polymer.IronOverlayBehavior`. It should be a
@@ -24,7 +24,7 @@ Custom property | Description | Default
 `--iron-overlay-backdrop-opened`           | Mixin applied to `iron-overlay-backdrop` when it is displayed | {}
 -->
 
-</head><body><dom-module id="iron-overlay-backdrop">
+<dom-module id="iron-overlay-backdrop">
 
   <template>
     <style>
@@ -54,4 +54,3 @@ Custom property | Description | Default
 </dom-module>
 
 <script>(function(){'use strict';Polymer({is:'iron-overlay-backdrop',properties:{opened:{reflectToAttribute:!0,type:Boolean,value:!1,observer:'_openedChanged'}},listeners:{transitionend:'_onTransitionend'},created:function(){this.__openedRaf=null},attached:function(){this.opened&&this._openedChanged(this.opened)},prepare:function(){this.opened&&!this.parentNode&&Polymer.dom(document.body).appendChild(this)},open:function(){this.opened=!0},close:function(){this.opened=!1},complete:function(){this.opened||this.parentNode!==document.body||Polymer.dom(this.parentNode).removeChild(this)},_onTransitionend:function(a){a&&a.target===this&&this.complete()},_openedChanged:function(a){if(a)this.prepare();else{var b=window.getComputedStyle(this);('0s'===b.transitionDuration||0==b.opacity)&&this.complete()}this.isAttached&&(this.__openedRaf&&(window.cancelAnimationFrame(this.__openedRaf),this.__openedRaf=null),this.scrollTop=this.scrollTop,this.__openedRaf=window.requestAnimationFrame(function(){this.__openedRaf=null,this.toggleClass('opened',this.opened)}.bind(this)))}})})();</script>
-</body></html>

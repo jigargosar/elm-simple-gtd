@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-styles/default-theme.html">
 <link rel="import" href="../paper-behaviors/paper-checked-element-behavior.html">
 
@@ -54,7 +54,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="paper-checkbox">
+<dom-module id="paper-checkbox">
   <template strip-whitespace="">
     <style>
       :host {
@@ -233,6 +233,5 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
     <div id="checkboxLabel"><slot></slot></div>
   </template>
 
-  <script>Polymer({is:'paper-checkbox',behaviors:[Polymer.PaperCheckedElementBehavior],hostAttributes:{role:'checkbox','aria-checked':!1,tabindex:0},properties:{ariaActiveAttribute:{type:String,value:'aria-checked'}},attached:function(){Polymer.RenderStatus.afterNextRender(this,function(){var a=this.getComputedStyleValue('--calculated-paper-checkbox-ink-size').trim();if('-1px'===a){var b=parseFloat(this.getComputedStyleValue('--calculated-paper-checkbox-size').trim()),c=Math.floor(8/3*b);c%2!=b%2&&c++,this.updateStyles({'--paper-checkbox-ink-size':c+'px'})}})},_computeCheckboxClass:function(a,b){var c='';return a&&(c+='checked '),b&&(c+='invalid'),c},_computeCheckmarkClass:function(a){return a?'':'hidden'},_createRipple:function(){return this._rippleContainer=this.$.checkboxContainer,Polymer.PaperInkyFocusBehaviorImpl._createRipple.call(this)}});</script>
+  <script>Polymer({is:'paper-checkbox',behaviors:[Polymer.PaperCheckedElementBehavior],hostAttributes:{role:'checkbox','aria-checked':!1,tabindex:0},properties:{ariaActiveAttribute:{type:String,value:'aria-checked'}},attached:function(){Polymer.RenderStatus.afterNextRender(this,function(){var a=this.getComputedStyleValue('--calculated-paper-checkbox-ink-size').trim();if('-1px'===a){var b=parseFloat(this.getComputedStyleValue('--calculated-paper-checkbox-size').trim()),c=Math.floor(8/3*b);c%2!==b%2&&c++,this.updateStyles({'--paper-checkbox-ink-size':c+'px'})}})},_computeCheckboxClass:function(a,b){var c='';return a&&(c+='checked '),b&&(c+='invalid'),c},_computeCheckmarkClass:function(a){return a?'':'hidden'},_createRipple:function(){return this._rippleContainer=this.$.checkboxContainer,Polymer.PaperInkyFocusBehaviorImpl._createRipple.call(this)}});</script>
 </dom-module>
-</body></html>

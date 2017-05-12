@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-behaviors/iron-control-state.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../iron-validatable-behavior/iron-validatable-behavior.html">
@@ -34,7 +34,7 @@ Custom property | Description | Default
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="iron-autogrow-textarea">
+<dom-module id="iron-autogrow-textarea">
   <template>
     <style>
       :host {
@@ -103,4 +103,3 @@ Custom property | Description | Default
 </dom-module>
 
 <script>Polymer({is:'iron-autogrow-textarea',behaviors:[Polymer.IronValidatableBehavior,Polymer.IronControlState],properties:{value:{observer:'_valueChanged',type:String,notify:!0},bindValue:{observer:'_bindValueChanged',type:String,notify:!0},rows:{type:Number,value:1,observer:'_updateCached'},maxRows:{type:Number,value:0,observer:'_updateCached'},autocomplete:{type:String,value:'off'},autofocus:{type:Boolean,value:!1},inputmode:{type:String},placeholder:{type:String},readonly:{type:String},required:{type:Boolean},minlength:{type:Number},maxlength:{type:Number}},listeners:{input:'_onInput'},get textarea(){return this.$.textarea},get selectionStart(){return this.$.textarea.selectionStart},get selectionEnd(){return this.$.textarea.selectionEnd},set selectionStart(a){this.$.textarea.selectionStart=a},set selectionEnd(a){this.$.textarea.selectionEnd=a},attached:function(){var a=navigator.userAgent.match(/iP(?:[oa]d|hone)/);a&&(this.$.textarea.style.marginLeft='-3px')},validate:function(){var a=this.$.textarea.validity.valid;return a&&(this.required&&''===this.value?a=!1:this.hasValidator()&&(a=Polymer.IronValidatableBehavior.validate.call(this,this.value))),this.invalid=!a,this.fire('iron-input-validate'),a},_bindValueChanged:function(a){this.value=a},_valueChanged:function(a){var b=this.textarea;b&&(b.value!==a&&(b.value=a||0===a?a:''),this.bindValue=a,this.$.mirror.innerHTML=this._valueForMirror())},_onInput:function(a){var b=Polymer.dom(a).path;this.value=b?b[0].value:a.target.value},_constrain:function(a){var b;for(a=a||[''],b=0<this.maxRows&&a.length>this.maxRows?a.slice(0,this.maxRows):a.slice(0);0<this.rows&&b.length<this.rows;)b.push('');return b.join('<br/>')+'&#160;'},_valueForMirror:function(){var a=this.textarea;if(a)return this.tokens=a&&a.value?a.value.replace(/&/gm,'&amp;').replace(/"/gm,'&quot;').replace(/'/gm,'&#39;').replace(/</gm,'&lt;').replace(/>/gm,'&gt;').split('\n'):[''],this._constrain(this.tokens)},_updateCached:function(){this.$.mirror.innerHTML=this._constrain(this.tokens)}});</script>
-</body></html>

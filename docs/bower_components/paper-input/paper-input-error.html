@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../paper-styles/default-theme.html">
 <link rel="import" href="../paper-styles/typography.html">
 <link rel="import" href="paper-input-addon-behavior.html">
@@ -30,7 +30,7 @@ Custom property | Description | Default
 `--paper-input-error`                   | Mixin applied to the error        | `{}`
 -->
 
-</head><body><dom-module id="paper-input-error">
+<dom-module id="paper-input-error">
   <template>
     <style>
       :host {
@@ -56,4 +56,3 @@ Custom property | Description | Default
 </dom-module>
 
 <script>Polymer({is:'paper-input-error',behaviors:[Polymer.PaperInputAddonBehavior],properties:{invalid:{readOnly:!0,reflectToAttribute:!0,type:Boolean}},update:function(a){this._setInvalid(a.invalid)}});</script>
-</body></html>

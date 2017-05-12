@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../paper-dialog-behavior/paper-dialog-behavior.html">
 <link rel="import" href="../paper-dialog-behavior/paper-dialog-shared-styles.html">
@@ -66,7 +66,7 @@ element.
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="paper-dialog">
+<dom-module id="paper-dialog">
   <template>
     <style include="paper-dialog-shared-styles"></style>
     <slot></slot>
@@ -74,4 +74,3 @@ element.
 </dom-module>
 
 <script>(function(){'use strict';Polymer({is:'paper-dialog',behaviors:[Polymer.PaperDialogBehavior,Polymer.NeonAnimationRunnerBehavior],listeners:{'neon-animation-finish':'_onNeonAnimationFinish'},_renderOpened:function(){this.cancelAnimation(),this.playAnimation('entry')},_renderClosed:function(){this.cancelAnimation(),this.playAnimation('exit')},_onNeonAnimationFinish:function(){this.opened?this._finishRenderOpened():this._finishRenderClosed()}})})();</script>
-</body></html>

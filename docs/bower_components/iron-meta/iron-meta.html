@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 
 <!--
 `iron-meta` is a generic element you can use for sharing information across the DOM tree.
@@ -50,4 +50,3 @@ Or, in a Polymer element, you can include a meta in your template:
 -->
 
 <script>(function(){function a(c){this.type=c&&c.type||'default',this.key=c&&c.key,'value'in c&&(this.value=c.value)}a.types={},a.prototype={get value(){var c=this.type,d=this.key;if(c&&d)return a.types[c]&&a.types[c][d]},set value(c){var d=this.type,e=this.key;if(d&&e){var d=a.types[d]=a.types[d]||{};null==c?delete d[e]:d[e]=c}},get list(){var c=this.type;if(c)return Object.keys(a.types[this.type]).map(function(d){return b[this.type][d]},this)},byKey(c){return this.key=c,this.value}},Polymer.IronMeta=a;var b=Polymer.IronMeta.types;Polymer({is:'iron-meta',properties:{type:{type:String,value:'default'},key:{type:String},value:{type:String,notify:!0},self:{type:Boolean,observer:'_selfChanged'},__meta:{type:Boolean,computed:'__computeMeta(type, key, value)'}},hostAttributes:{hidden:!0},__computeMeta:function(c,d,e){let f=new Polymer.IronMeta({type:c,key:d});return void 0!==e&&e!==f.value?f.value=e:this.value!==f.value&&(this.value=f.value),f},get list(){return this.__meta&&this.__meta.list},_selfChanged:function(c){c&&(this.value=this)},byKey:function(c){return new Polymer.IronMeta({type:this.type,key:c}).value}})})();</script>
-</head><body></body></html>

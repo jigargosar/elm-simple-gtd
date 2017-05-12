@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-styles/default-theme.html">
 <link rel="import" href="../paper-styles/typography.html">
@@ -112,7 +112,7 @@ This element is `display:block` by default, but you can set the `inline` attribu
 `display:inline-block`.
 -->
 
-</head><body><dom-module id="paper-input-container">
+<dom-module id="paper-input-container">
   <template>
     <style>
       :host {
@@ -374,4 +374,3 @@ This element is `display:block` by default, but you can set the `inline` attribu
 </dom-module>
 
 <script>Polymer({is:'paper-input-container',properties:{noLabelFloat:{type:Boolean,value:!1},alwaysFloatLabel:{type:Boolean,value:!1},attrForValue:{type:String,value:'bind-value'},autoValidate:{type:Boolean,value:!1},invalid:{observer:'_invalidChanged',type:Boolean,value:!1},focused:{readOnly:!0,type:Boolean,value:!1,notify:!0},_addons:{type:Array},_inputHasContent:{type:Boolean,value:!1},_inputSelector:{type:String,value:'input,iron-input,textarea,.paper-input-input'},_boundOnFocus:{type:Function,value:function(){return this._onFocus.bind(this)}},_boundOnBlur:{type:Function,value:function(){return this._onBlur.bind(this)}},_boundOnInput:{type:Function,value:function(){return this._onInput.bind(this)}},_boundValueChanged:{type:Function,value:function(){return this._onValueChanged.bind(this)}}},listeners:{'addon-attached':'_onAddonAttached','iron-input-validate':'_onIronInputValidate'},get _valueChangedEvent(){return this.attrForValue+'-changed'},get _propertyForValue(){return Polymer.CaseMap.dashToCamelCase(this.attrForValue)},get _inputElement(){return Polymer.dom(this).querySelector(this._inputSelector)},get _inputElementValue(){return this._inputElement[this._propertyForValue]||this._inputElement.value},ready:function(){this._addons||(this._addons=[]),this.addEventListener('focus',this._boundOnFocus,!0),this.addEventListener('blur',this._boundOnBlur,!0)},attached:function(){this.attrForValue?this._inputElement.addEventListener(this._valueChangedEvent,this._boundValueChanged):this.addEventListener('input',this._onInput),this._inputElementValue&&''!=this._inputElementValue?this._handleValueAndAutoValidate(this._inputElement):this._handleValue(this._inputElement)},_onAddonAttached:function(a){this._addons||(this._addons=[]);var b=a.target;-1===this._addons.indexOf(b)&&(this._addons.push(b),this.isAttached&&this._handleValue(this._inputElement))},_onFocus:function(){this._setFocused(!0)},_onBlur:function(){this._setFocused(!1),this._handleValueAndAutoValidate(this._inputElement)},_onInput:function(a){this._handleValueAndAutoValidate(a.target)},_onValueChanged:function(a){var b=a.target;void 0===b.value||this._handleValueAndAutoValidate(a.target)},_handleValue:function(a){var b=this._inputElementValue;this._inputHasContent=b||0===b||'number'===a.type&&!a.checkValidity(),this.updateAddons({inputElement:a,value:b,invalid:this.invalid})},_handleValueAndAutoValidate:function(a){if(this.autoValidate&&a){var b;b=a.validate?a.validate(this._inputElementValue):a.checkValidity(),this.invalid=!b}this._handleValue(a)},_onIronInputValidate:function(){this.invalid=this._inputElement.invalid},_invalidChanged:function(){this._addons&&this.updateAddons({invalid:this.invalid})},updateAddons:function(a){for(var b,c=0;b=this._addons[c];c++)b.update(a)},_computeInputContentClass:function(a,b,c,d,e){var f='input-content';if(!a){var g=this.querySelector('label');b||e?(f+=' label-is-floating',this.$.labelAndInputContainer.style.position='static',d?f+=' is-invalid':c&&(f+=' label-is-highlighted')):(g&&(this.$.labelAndInputContainer.style.position='relative'),d&&(f+=' is-invalid'))}else e&&(f+=' label-is-hidden'),d&&(f+=' is-invalid');return c&&(f+=' focused'),f},_computeUnderlineClass:function(a,b){var c='underline';return b?c+=' is-invalid':a&&(c+=' is-highlighted'),c},_computeAddOnContentClass:function(a,b){var c='add-on-content';return b?c+=' is-invalid':a&&(c+=' is-highlighted'),c}});</script>
-</body></html>

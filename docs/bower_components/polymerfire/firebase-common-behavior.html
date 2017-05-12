@@ -4,8 +4,7 @@ Copyright 2016 Google Inc. All Rights Reserved.
 Use of this source code is governed by a BSD-style
 license that can be found in the LICENSE file or at
 https://github.com/firebase/polymerfire/blob/master/LICENSE
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../app-storage/app-network-status-behavior.html">
 <link rel="import" href="firebase-app-script.html">
 <script>(function(){'use strict';Polymer.FirebaseCommonBehaviorImpl={properties:{app:{type:Object,notify:!0,observer:'__appChanged'},appName:{type:String,notify:!0,value:'',observer:'__appNameChanged'}},__appNameChanged:function(a){if(!(this.app&&this.app.name===a))try{this.app=null==a?firebase.app():firebase.app(a)}catch(c){var b=this;window.addEventListener('firebase-app-initialized',function d(){window.removeEventListener('firebase-app-initialized',d),b.__appNameChanged(b.appName)})}},__appChanged:function(a){a&&a.name===this.appName||(this.appName=a?a.name:'')},__onError:function(a){this.fire('error',a)}},Polymer.FirebaseCommonBehavior=[Polymer.AppNetworkStatusBehavior,Polymer.FirebaseCommonBehaviorImpl]})();</script>
-</head><body></body></html>

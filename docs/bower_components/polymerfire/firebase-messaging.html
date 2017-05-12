@@ -4,7 +4,7 @@ Copyright 2016 Google Inc. All Rights Reserved.
 Use of this source code is governed by a BSD-style
 license that can be found in the LICENSE file or at
 https://github.com/firebase/polymerfire/blob/master/LICENSE
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="firebase-common-behavior.html">
 <link rel="import" href="firebase-messaging-script.html">
 
@@ -61,7 +61,6 @@ To use a different service worker than the default, you will need to add the
 `custom-sw` attribute to your `<firebase-messaging>` element, and then explicitly
 call `.activate()` on the element once you've
 -->
-</head><body><dom-module id="firebase-messaging">
+<dom-module id="firebase-messaging">
   <script>(function(){function a(e,f){var h=Array.prototype.slice.call(arguments,2);d[e.name].instances.forEach(function(i){i[f].apply(i,h)})}function b(e){d[e.name];e.messaging().getToken().then(function(g){return a(e,'_setToken',g),a(e,'_setStatusKnown',!0),g},function(g){throw a(e,'_setToken',null),a(e,'_setStatusKnown',!0),a(e,'fire','error',g),g})}function c(e,f){var g=f.name;d[g]=d[g]||{messaging:f.messaging()};var h=d[g];return h.instances=h.instances||[],0>h.instances.indexOf(e)&&h.instances.push(e),h.listener||(h.listener=f.messaging().onMessage(function(i){h.instances.forEach(function(j){j._setLastMessage(i),j.fire('message',{message:i})})})),h.tokenListener||(h.tokenListener=f.messaging().onTokenRefresh(function(){b(f)})),b(f)}var d={};Polymer({is:'firebase-messaging',behaviors:[Polymer.FirebaseCommonBehavior],properties:{token:{type:String,value:null,notify:!0,readOnly:!0},active:{type:Boolean,notify:!0,computed:'_computeActive(statusKnown, token)'},statusKnown:{type:Boolean,value:!1,notify:!0,readOnly:!0},lastMessage:{type:Object,value:null,notify:!0,readOnly:!0},customSw:{type:Boolean,value:!1},pushSupported:{type:Boolean,value:function(){return'serviceWorker'in navigator&&'PushManager'in window},notify:!0,readOnly:!0}},observers:['_bootstrapApp(app, customSw)'],requestPermission:function(){if(!this.messaging)throw new Error('firebase-messaging: No app configured!');return this.messaging.requestPermission().then(function(){return b(this.app)}.bind(this))},activate:function(e){return this.statusKnown=!1,this.active=!1,this.token=null,this.app?void(this.messaging=this.app.messaging(),e&&this.messaging.useServiceWorker(e),c(this,this.app)):(this.messaging=null,this.statusKnown=!1,this.active=!1,void(this.token=null))},_computeActive:function(e,f){return!!(e&&f)},_bootstrapApp:function(e,f){e&&!f&&this.activate()}})})();</script>
 </dom-module>
-</body></html>

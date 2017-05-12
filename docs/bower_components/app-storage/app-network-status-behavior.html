@@ -6,6 +6,5 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <script>(function(){'use strict';function a(){for(var c=0;c<b.length;++c)b[c].refreshNetworkStatus()}var b=[];window.addEventListener('online',a),window.addEventListener('offline',a),Polymer.AppNetworkStatusBehavior={properties:{online:{type:Boolean,readOnly:!0,notify:!0,value:function(){return window.navigator.onLine}}},attached:function(){b.push(this),this.refreshNetworkStatus()},detached:function(){var c=b.indexOf(this);0>c||b.splice(c,1)},refreshNetworkStatus:function(){this._setOnline(window.navigator.onLine)}}})();</script>
-</head><body></body></html>

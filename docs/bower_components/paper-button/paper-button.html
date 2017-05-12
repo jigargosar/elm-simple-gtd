@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-behaviors/paper-button-behavior.html">
 <link rel="import" href="../paper-styles/element-styles/paper-material.html">
@@ -79,7 +79,7 @@ Custom property | Description | Default
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="paper-button">
+<dom-module id="paper-button">
   <template strip-whitespace="">
     <style include="paper-material">
       /* Need to specify the same specificity as the styles imported from paper-material. */
@@ -166,4 +166,3 @@ Custom property | Description | Default
 
   <script>Polymer({is:'paper-button',behaviors:[Polymer.PaperButtonBehavior],properties:{raised:{type:Boolean,reflectToAttribute:!0,value:!1,observer:'_calculateElevation'}},_calculateElevation:function(){this.raised?Polymer.PaperButtonBehaviorImpl._calculateElevation.apply(this):this._setElevation(0)}});</script>
 </dom-module>
-</body></html>

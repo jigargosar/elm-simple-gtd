@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../../polymer/polymer.html">
+--><link rel="import" href="../../polymer/polymer.html">
 <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../app-layout-behavior/app-layout-behavior.html">
 
@@ -60,7 +60,7 @@ Add the `fullbleed` attribute to app-header-layout to make it fit the size of it
 @demo app-header-layout/demo/footer.html Footer Demo
 -->
 
-</head><body><dom-module id="app-header-layout">
+<dom-module id="app-header-layout">
   <template>
     <style>
       :host {
@@ -137,4 +137,3 @@ Add the `fullbleed` attribute to app-header-layout to make it fit the size of it
 
   <script>Polymer({is:'app-header-layout',behaviors:[Polymer.AppLayoutBehavior],properties:{hasScrollingRegion:{type:Boolean,value:!1,reflectToAttribute:!0}},observers:['resetLayout(isAttached, hasScrollingRegion)'],get header(){return Polymer.dom(this.$.headerSlot).getDistributedNodes()[0]},_updateLayoutStates:function(){var a=this.header;if(this.isAttached&&a){this.$.wrapper.classList.remove('initializing'),a.scrollTarget=this.hasScrollingRegion?this.$.contentContainer:this.ownerDocument.documentElement;var b=a.offsetHeight;this.hasScrollingRegion?(a.style.left='',a.style.right=''):requestAnimationFrame(function(){var d=this.getBoundingClientRect(),e=document.documentElement.clientWidth-d.right;a.style.left=d.left+'px',a.style.right=e+'px'}.bind(this));var c=this.$.contentContainer.style;a.fixed&&!a.condenses&&this.hasScrollingRegion?(c.marginTop=b+'px',c.paddingTop=''):(c.paddingTop=b+'px',c.marginTop='')}}});</script>
 </dom-module>
-</body></html>

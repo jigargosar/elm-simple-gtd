@@ -6,7 +6,6 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../utils/boot.html">
+--><link rel="import" href="../utils/boot.html">
 <link rel="import" href="../utils/resolve-url.html">
 <script>(function(){'use strict';function a(f){return c[f]||d[f.toLowerCase()]}function b(f){f.querySelector('style')&&console.warn('dom-module %s has style outside template',f.id)}let c={},d={};class e extends HTMLElement{static get observedAttributes(){return['id']}static import(f,g){if(f){let h=a(f);return h&&g?h.querySelector(g):h}return null}attributeChangedCallback(f,g,h){g!==h&&this.register()}get assetpath(){if(!this.__assetpath){const f=window.HTMLImports&&HTMLImports.importForElement?HTMLImports.importForElement(this)||document:this.ownerDocument,g=Polymer.ResolveUrl.resolveUrl(this.getAttribute('assetpath')||'',f.baseURI);this.__assetpath=Polymer.ResolveUrl.pathFromUrl(g)}return this.__assetpath}register(f){f=f||this.id,f&&(this.id=f,c[f]=this,d[f.toLowerCase()]=this,b(this))}}e.prototype.modules=c,customElements.define('dom-module',e),Polymer.DomModule=e})();</script>
-</head><body></body></html>

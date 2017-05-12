@@ -4,7 +4,7 @@ Copyright 2016 Google Inc. All Rights Reserved.
 Use of this source code is governed by a BSD-style
 license that can be found in the LICENSE file or at
 https://github.com/firebase/polymerfire/blob/master/LICENSE
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="firebase-app-script.html">
 <!-- TODO(cdata): Remove all of the imports below this line when it is possible
      to lazy load Firebase scripts alongside Custom Elements v1 upgrade order -->
@@ -12,7 +12,6 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
 <link rel="import" href="firebase-auth-script.html">
 <link rel="import" href="firebase-storage-script.html">
 <link rel="import" href="firebase-messaging-script.html">
-</head><body><dom-module id="firebase-app">
+<dom-module id="firebase-app">
   <script>(function(){'use strict';Polymer({is:'firebase-app',properties:{name:{type:String,value:''},apiKey:{type:String},authDomain:{type:String},databaseUrl:{type:String},storageBucket:{type:String,value:null},messagingSenderId:{type:String,value:null},app:{type:Object,notify:!0,computed:'__computeApp(name, apiKey, authDomain, databaseUrl, storageBucket, messagingSenderId)'}},__computeApp:function(a,b,c,d,e,f){if(b&&c&&d){var g=[{apiKey:b,authDomain:c,databaseURL:d,storageBucket:e,messagingSenderId:f}];a&&g.push(a),firebase.initializeApp.apply(firebase,g),this.fire('firebase-app-initialized')}else return null;return firebase.app(a)}})})();</script>
 </dom-module>
-</body></html>

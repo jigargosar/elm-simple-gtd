@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../../polymer/polymer.html">
+--><link rel="import" href="../../polymer/polymer.html">
 <link rel="import" href="../../iron-media-query/iron-media-query.html">
 <link rel="import" href="../app-layout-behavior/app-layout-behavior.html">
 
@@ -118,7 +118,7 @@ Custom property                          | Description                          
 @demo app-drawer-layout/demo/two-drawers.html Two drawers
 -->
 
-</head><body><dom-module id="app-drawer-layout">
+<dom-module id="app-drawer-layout">
   <template>
     <style>
       :host {
@@ -159,4 +159,3 @@ Custom property                          | Description                          
 
   <script>Polymer({is:'app-drawer-layout',behaviors:[Polymer.AppLayoutBehavior],properties:{forceNarrow:{type:Boolean,value:!1},responsiveWidth:{type:String,value:'640px'},narrow:{type:Boolean,reflectToAttribute:!0,readOnly:!0,notify:!0},openedWhenNarrow:{type:Boolean,value:!1}},listeners:{click:'_clickHandler'},observers:['_configChanged(narrow, isAttached)'],get drawer(){return Polymer.dom(this.$.drawerSlot).getDistributedNodes()[0]},attached:function(){var a=this.drawer;a&&(this._savedDrawerTransitionDuration=a.transitionDuration,a.transitionDuration=0)},_clickHandler:function(a){var b=Polymer.dom(a).localTarget;if(b&&b.hasAttribute('drawer-toggle')){var c=this.drawer;c&&!c.persistent&&c.toggle()}},_updateLayoutStates:function(){var a=this.drawer,b=this.$.contentContainer;if(this.narrow||!a||!a.getWidth)b.style.marginLeft='',b.style.marginRight='';else{var c=a.getWidth();'right'==a.position?(b.style.marginLeft='',b.style.marginRight=c+'px'):(b.style.marginLeft=c+'px',b.style.marginRight='')}a&&this._drawerNeedsReset&&(this.narrow?(a.opened=this.openedWhenNarrow,a.persistent=!1):a.opened=a.persistent=!0,this._savedDrawerTransitionDuration&&Polymer.RenderStatus.afterNextRender(this,function(){a.transitionDuration=this._savedDrawerTransitionDuration,this._savedDrawerTransitionDuration=0}),this._drawerNeedsReset=!1)},_configChanged:function(){this._drawerNeedsReset=!0,this.resetLayout()},_onQueryMatchesChanged:function(a){this._setNarrow(a.detail.value)},_computeMediaQuery:function(a,b){return a?'(min-width: 0px)':'(max-width: '+b+')'}});</script>
 </dom-module>
-</body></html>

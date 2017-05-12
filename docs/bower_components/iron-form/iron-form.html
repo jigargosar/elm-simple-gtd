@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 
 <!--
@@ -75,7 +75,7 @@ attach it to the `<iron-form>`:
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="iron-form">
+<dom-module id="iron-form">
   <template>
     <style>
       :host {
@@ -92,4 +92,3 @@ attach it to the `<iron-form>`:
 
   <script>Polymer({is:'iron-form',properties:{allowRedirect:{type:Boolean,value:!1}},attached:function(){this._nodeObserver=Polymer.dom(this.$.content).observeNodes(function(a){for(var b=0;b<a.addedNodes.length;b++)'FORM'===a.addedNodes[b].tagName&&(this._form=a.addedNodes[b],this._init())}.bind(this))},detached:function(){this._nodeObserver&&(Polymer.dom(this.$.content).unobserveNodes(this._nodeObserver),this._nodeObserver=null)},_init:function(){this._form.addEventListener('submit',this.submit.bind(this)),this._form.addEventListener('reset',this.reset.bind(this))},validate:function(){if(''===this._form.getAttribute('novalidate'))return!0;for(var c,e,a=this._form.checkValidity(),b=this._getValidatableElements(),d=0;c=b[d],d<b.length;d++)e=c,e.validate&&(a=!!e.validate()&&a);return a},submit:function(a){if(a&&a.preventDefault(),!!this.validate()){for(;0!==this.$.helper.children.length;)this.$.helper.removeChild(this.$.helper.children[0]);var b=this.serializeForm();if(this.allowRedirect){for(element in b)this.$.helper.appendChild(this._createHiddenElement(element,b[element]));this.$.helper.submit(),this.fire('iron-form-submit')}else this._makeAjaxRequest(b)}},reset:function(a){a&&a.preventDefault();for(var b=Polymer.dom(this._form).querySelectorAll('*'),c=0;c<b.length;c++)b[c].defaultValue&&(b[c].value=b[c].defaultValue)},serializeForm:function(){for(var d,a=this._getSubmittableElements(),b={},c=0;c<a.length;c++){d=this._serializeElementValues(a[c]);for(var e=0;e<d.length;e++)this._addSerializedElement(b,a[c].name,d[e])}return b},_handleFormResponse:function(a){this.fire('iron-form-response',a.detail)},_handleFormError:function(a){this.fire('iron-form-error',a.detail)},_makeAjaxRequest:function(a){this.ajax||(this.ajax=document.createElement('iron-ajax'),this.ajax.addEventListener('response',this._handleFormResponse.bind(this)),this.ajax.addEventListener('error',this._handleFormError.bind(this))),this.ajax.url=this._form.getAttribute('action'),this.ajax.method=this._form.getAttribute('method'),this.ajax.contentType=this._form.contentType,'POST'===this._form.method.toUpperCase()?this.ajax.body=a:this.ajax.params=a;var b=this.fire('iron-form-presubmit',{},{cancelable:!0});b.defaultPrevented||(this.ajax.generateRequest(),this.fire('iron-form-submit',a))},_getValidatableElements:function(){for(var d,a=Polymer.dom(this._form).querySelectorAll('*'),b=[],c=0;c<a.length;c++){d=Array.prototype.slice.call(Polymer.dom(a[c]).querySelectorAll('*'))||[],d.push(a[c]);for(var e,f=0;e=d[f],f<d.length;f++)e.disabled||b.push(e)}return b},_getSubmittableElements:function(){for(var d,a=Polymer.dom(this._form).querySelectorAll('*'),b=[],c=0;c<a.length;c++){d=Array.prototype.slice.call(Polymer.dom(a[c]).querySelectorAll('*'))||[],d.push(a[c]);for(var e,f=0;e=d[f],f<d.length;f++)!e.disabled&&e.name&&b.push(e)}return b},_serializeElementValues:function(a){var b=a.tagName.toLowerCase();return'button'===b||'input'===b&&('submit'===a.type||'reset'===a.type)?[]:'select'===b?this._serializeSelectValues(a):'input'===b?this._serializeInputValues(a):a._hasIronCheckedElementBehavior&&!a.checked?[]:[a.value]},_serializeSelectValues:function(a){for(var b=[],c=0;c<a.options.length;c++)a.options[c].selected&&b.push(a.options[c].value);return b},_serializeInputValues:function(a){var b=a.type.toLowerCase();return('checkbox'!==b&&'radio'!==b||a.checked)&&'file'!==b?[a.value]:[]},_createHiddenElement:function(a,b){var c=document.createElement('input');return c.setAttribute('type','hidden'),c.setAttribute('name',a),c.setAttribute('value',b),c},_addSerializedElement:function(a,b,c){a[b]?(!Array.isArray(a[b])&&(a[b]=[a[b]]),a[b].push(c)):a[b]=c}});</script>
 </dom-module>
-</body></html>

@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../../polymer/polymer.html">
+--><link rel="import" href="../../polymer/polymer.html">
 <link rel="import" href="../../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="../app-scroll-effects/app-scroll-effects-behavior.html">
@@ -86,7 +86,7 @@ Mixin | Description | Default
 @demo app-box/demo/scrolling-region.html Scrolling Region
 -->
 
-</head><body><dom-module id="app-box">
+<dom-module id="app-box">
   <template>
     <style>
       :host {
@@ -131,4 +131,3 @@ Mixin | Description | Default
 
   <script>Polymer({is:'app-box',behaviors:[Polymer.AppScrollEffectsBehavior,Polymer.IronResizableBehavior],listeners:{'iron-resize':'_resizeHandler'},_progress:0,attached:function(){this.resetLayout()},_debounceRaf:function(a){var b=this;this._raf&&window.cancelAnimationFrame(this._raf),this._raf=window.requestAnimationFrame(function(){b._raf=null,a.call(b)})},resetLayout:function(){this._debounceRaf(function(){if(0!==this.offsetWidth||0!==this.offsetHeight){var a=this._clampedScrollTop,b=this.disabled;this.disabled=!0,this._elementTop=this._getElementTop(),this._elementHeight=this.offsetHeight,this._cachedScrollTargetHeight=this._scrollTargetHeight,this._setUpEffect(),this._updateScrollState(a),this.disabled=b}})},_getElementTop:function(){for(var a=this,b=0;a&&a!==this.scrollTarget;)b+=a.offsetTop,a=a.offsetParent;return b},_updateScrollState:function(a){if(this.isOnScreen()){var b=this._elementTop-a;this._progress=1-(b+this._elementHeight)/this._cachedScrollTargetHeight,this._runEffects(this._progress,a)}},isOnScreen:function(){return this._elementTop<this._scrollTop+this._cachedScrollTargetHeight&&this._elementTop+this._elementHeight>this._scrollTop},_resizeHandler:function(){this.resetLayout()},_getDOMRef:function(a){return'background'===a?this.$.background:'backgroundFrontLayer'===a?this.$.backgroundFrontLayer:void 0},getScrollState:function(){return{progress:this._progress}}});</script>
 </dom-module>
-</body></html>

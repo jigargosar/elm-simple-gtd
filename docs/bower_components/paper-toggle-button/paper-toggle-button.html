@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-styles/color.html">
 <link rel="import" href="../paper-styles/default-theme.html">
@@ -55,7 +55,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
 @demo demo/index.html
 -->
 
-</head><body><dom-module id="paper-toggle-button">
+<dom-module id="paper-toggle-button">
   <template strip-whitespace="">
 
     <style>
@@ -201,4 +201,3 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
 
   <script>Polymer({is:'paper-toggle-button',behaviors:[Polymer.PaperCheckedElementBehavior],hostAttributes:{role:'button','aria-pressed':'false',tabindex:0},properties:{},listeners:{track:'_ontrack'},attached:function(){Polymer.RenderStatus.afterNextRender(this,function(){Polymer.Gestures.setTouchAction(this,'pan-y')})},_ontrack:function(a){var b=a.detail;'start'===b.state?this._trackStart(b):'track'===b.state?this._trackMove(b):'end'===b.state&&this._trackEnd(b)},_trackStart:function(){this._width=this.$.toggleBar.offsetWidth/2,this._trackChecked=this.checked,this.$.toggleButton.classList.add('dragging')},_trackMove:function(a){var b=a.dx;this._x=Math.min(this._width,Math.max(0,this._trackChecked?this._width+b:b)),this.translate3d(this._x+'px',0,0,this.$.toggleButton),this._userActivate(this._x>this._width/2)},_trackEnd:function(){this.$.toggleButton.classList.remove('dragging'),this.transform('',this.$.toggleButton)},_createRipple:function(){this._rippleContainer=this.$.toggleButton;var a=Polymer.PaperRippleBehavior._createRipple();return a.id='ink',a.setAttribute('recenters',''),a.classList.add('circle','toggle-ink'),a}});</script>
 </dom-module>
-</body></html>

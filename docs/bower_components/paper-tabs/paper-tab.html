@@ -6,7 +6,7 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><html><head><link rel="import" href="../polymer/polymer.html">
+--><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-behaviors/iron-button-state.html">
 <link rel="import" href="../iron-behaviors/iron-control-state.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
@@ -40,7 +40,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
 
 -->
 
-</head><body><dom-module id="paper-tab">
+<dom-module id="paper-tab">
   <template>
     <style>
       :host {
@@ -107,4 +107,3 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
 
   <script>Polymer({is:'paper-tab',behaviors:[Polymer.IronControlState,Polymer.IronButtonState,Polymer.PaperRippleBehavior],properties:{link:{type:Boolean,value:!1,reflectToAttribute:!0}},hostAttributes:{role:'tab'},listeners:{down:'_updateNoink',tap:'_onTap'},attached:function(){this._updateNoink()},get _parentNoink(){var a=Polymer.dom(this).parentNode;return!!a&&!!a.noink},_updateNoink:function(){this.noink=!!this.noink||!!this._parentNoink},_onTap:function(a){if(this.link){var b=this.queryEffectiveChildren('a');if(!b)return;if(a.target===b)return;b.click()}}});</script>
 </dom-module>
-</body></html>

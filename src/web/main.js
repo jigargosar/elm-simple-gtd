@@ -26,7 +26,7 @@ async function boot() {
     $elm.trap();
 
     $elm.on("keydown", `.todo-item, .entity-item`, e =>{
-        console.log(e.keyCode, e.key, e);
+        // console.log(e.keyCode, e.key, e);
         if (e.key === " "/*space: 32*/){
             e.preventDefault()
         }

@@ -115,7 +115,11 @@ update msg =
                     Return.map (Model.setUser user)
 
                 OnFCMTokenChanged token ->
-                    Return.map (Model.setFCMToken token)
+                    let
+                        _ =
+                            Debug.log "fcm: token" (token)
+                    in
+                        Return.map (Model.setFCMToken token)
 
                 OnEntityListKeyDown entityList { key, isShiftDown } ->
                     case key of

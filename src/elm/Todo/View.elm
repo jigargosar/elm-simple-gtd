@@ -78,7 +78,7 @@ dropdownTrigger { tabindexAV } content =
         , class "padding-0 margin-0 shrink"
         , tabindexAV
         ]
-        [ div [ class "text-transform-none primary-text-color font-body1" ] [ content ]
+        [ div [ class "title primary-text-color" ] [ content ]
         ]
 
 
@@ -269,8 +269,7 @@ contextDropdownMenu vm =
                 [ context |> Context.getName >> text ]
     in
         Paper.menuButton [ dynamicAlign ]
-            [ div [ class "font-nowrap" ] [ text vm.contextDisplayName ]
-                |> dropdownTrigger vm
+            [ dropdownTrigger vm (text vm.contextDisplayName)
             , Paper.listbox
                 [ class "dropdown-content", attribute "slot" "dropdown-content" ]
                 (vm.activeContexts .|> createContextItem)

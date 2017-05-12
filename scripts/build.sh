@@ -5,4 +5,5 @@ cp -Rvf static/ app &&
 cd app &&
 polymer --version &&
 polymer build
+cd .. &&
 cp -Rvf app/build/unbundled/ docs

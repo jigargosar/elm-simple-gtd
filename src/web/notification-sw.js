@@ -74,6 +74,21 @@ const messaging = firebase.messaging();
 // });
 
 
+// self.addEventListener('push', function(event) {
+//     console.log('[Service Worker] Push Received.');
+//     console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+//
+//     const title = 'Push Codelab';
+//     const options = {
+//         body: 'Yay it works.',
+//         sound: "/alarm.ogg",
+//         timestamp:0
+//     };
+//
+//     event.waitUntil(self.registration.showNotification(title, options));
+// });
+
+
 messaging.setBackgroundMessageHandler(function (payload) {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
     // Customize notification here
@@ -96,4 +111,3 @@ messaging.setBackgroundMessageHandler(function (payload) {
     return self.registration.showNotification(notificationTitle,
         notificationOptions);
 });
-,

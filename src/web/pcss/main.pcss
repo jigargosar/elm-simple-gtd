@@ -34,14 +34,14 @@
   &[tabindex="0"] {
     &:before {
       background-color: black;
-      opacity: 0.02;
+      opacity: 0.1;
     }
   }
 
   &.selected {
     &:before {
       background-color: rgb(255, 255, 0);
-      opacity: 0.06;
+      opacity: 0.1;
     }
   }
 }
@@ -203,12 +203,16 @@ paper-listbox {
   }
 }
 
-.todo-item {
+.focusable-list > .todo-item {
   padding: 0.5rem 1rem;
   background-color: white;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
   outline: none;
   border-left: 2px solid transparent;
+
+  &:not(.selected):before{
+    background-color: transparent;
+  }
 
   /*&.selected{
     background-color: rgba(255, 255, 0, 0.52);

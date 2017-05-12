@@ -12,8 +12,7 @@
     "hot-dev": "nodemon --watch webpack.config.js --exec \"npm run dev\"",
     "prebuild": "bash -c \"rimraf app && rimraf docs && rimraf build && mkdir app && mkdir docs; \"",
     "watch": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack --watch",
-    "build": "bash -c \"cross-env NODE_ENV=production webpack -p --progress && cp -rv static/** app/ && cd app && polymer build && cd ..\"",
-    "postbuild": "cp -rv app/build/unbundled/** docs/",
+    "build": "bash scripts/build.sh",
     "link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
     "start": "http-server docs"
   },

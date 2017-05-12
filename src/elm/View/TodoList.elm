@@ -118,7 +118,7 @@ listView entityList viewModel =
                 .|> Model.getEntityId
     in
         Keyed.node "div"
-            [ class "entity-list"
+            [ class "entity-list focusable-list"
             , Msg.OnEntityListKeyDown entityList |> onKeyDown
             ]
             (entityList

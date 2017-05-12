@@ -4,7 +4,7 @@ self.addEventListener('fetch', function (event) {
     // console.log("sw:fetch listener event",event, event.request.url)
 })
 
-self.addEventListener('install', function(event) {
+self.addEventListener('install', function (event) {
     event.waitUntil(self.skipWaiting())
 })
 
@@ -25,12 +25,12 @@ self.addEventListener('notificationclick', function (event) {
                 }
                 if (clients.openWindow) {
                     return clients
-                        // .openWindow(url)
+                    // .openWindow(url)
                         .openWindow("/")
-                        .then(function(client) {
+                        .then(function (client) {
                             setTimeout(function () {
                                 postMessage(client, event)
-                            },2000)
+                            }, 2000)
                         })
                 }
             })
@@ -39,6 +39,7 @@ self.addEventListener('notificationclick', function (event) {
 }, false);
 
 function postMessage(client, event) {
+    console.log("posting notification-clicked from event", event)
     client.postMessage({
         type: "notification-clicked",
         action: event.action,
@@ -73,15 +74,26 @@ const messaging = firebase.messaging();
 // });
 
 
-messaging.setBackgroundMessageHandler(function(payload) {
+messaging.setBackgroundMessageHandler(function (payload) {
     console.log('[firebase-messaging-sw.js] Received background message ', payload);
     // Customize notification here
-    const notificationTitle = 'Background Message Title';
+    const notificationTitle = 'Hurray Custom notification';
     const notificationOptions = {
-        body: 'Background Message body.',
-        icon: '/firebase-logo.png'
+        requiresInteraction: true,
+        sticky: true,
+        renotify: true,
+        tag: payload.data.id,
+        vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
+        sound: "/alarm.ogg",
+        actions: [
+            {title: "Mark Done", action: "mark-done"},
+            {title: "Snooze", action: "snooze"},
+        ],
+        body: 'setting body: received data: ' + JSON.stringify(payload.data),
+        data: payload.data
     };
 
     return self.registration.showNotification(notificationTitle,
         notificationOptions);
 });
+,

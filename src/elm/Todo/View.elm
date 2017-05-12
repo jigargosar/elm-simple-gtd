@@ -67,6 +67,7 @@ init vm =
             , onBlur vm.onBlur
             , vm.tabindexAV
             , onKeyDown vm.onKeyDownMsg
+            , attribute "data-key" vm.key
             ]
             (maybeEditVM |> Maybe.unpack (\_ -> defaultView vm) editView)
 

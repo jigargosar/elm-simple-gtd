@@ -28,25 +28,7 @@ install:
 
 # Build
 script:
-  - cp -rfv static/ app
-  - rm -rfv app/bower_components
-  - ls -al app &&
-  - cp -rvf src/web/bower_components app/bower_components
-  - echo "content of app/bower_components"
-  - ls -al app/bower_components
-  - echo "content of app/bower_components/paper-styles/element-styles/"
-  - ls -al app/bower_components/paper-styles/element-styles/
-#  - cross-env NODE_ENV=production webpack -p --progress &&
-  - cd app
-  - pwd
-  - polymer --version
-  - echo "polymer build in"
-  - pwd
-  - ../node_modules/.bin/polymer build
-  - echo "content of bower_components/paper-styles/element-styles/"
-  - ls -al bower_components/paper-styles/element-styles/
-  - exit 1
-#  - sysconfcpus -n 2 yarn build
+  - sysconfcpus -n 2 yarn build
 
 deploy:
   provider: pages

@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require("path");
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+const pkg=require("./package.json");
+console.log(pkg)
 
 const nodeENV = process.env.NODE_ENV || "development"
 
@@ -31,7 +33,8 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'NODE_ENV': JSON.stringify(nodeENV),
-            'WEB_PACK_DEV_SERVER': process.env.WEB_PACK_DEV_SERVER || false
+            'WEB_PACK_DEV_SERVER': process.env.WEB_PACK_DEV_SERVER || false,
+            "process.env.app-version":"0.1.0"
         }),
         new ServiceWorkerWebpackPlugin({
             options: {"foo": "bar"},

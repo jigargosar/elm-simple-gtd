@@ -19,6 +19,7 @@
     "hot-hot": "nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"",
     "prebuild": "bash -c \"rimraf app && rimraf docs && rimraf build \"",
     "watch": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack --watch",
+    "watch-prod": "cross-env NODE_ENV=production webpack -p --progress --watch",
     "build": "bash scripts/build.sh",
     "link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
     "start": "http-server docs"

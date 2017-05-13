@@ -11,7 +11,6 @@
       <sourceFolder url="file://$MODULE_DIR$/lib/elm-keyboard-extra" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/elm-stuff/packages" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/static" isTestSource="false" />
-      <excludeFolder url="file://$MODULE_DIR$/app" />
       <excludeFolder url="file://$MODULE_DIR$/dev" />
       <excludeFolder url="file://$MODULE_DIR$/docs" />
       <excludeFolder url="file://$MODULE_DIR$/docs-1x" />

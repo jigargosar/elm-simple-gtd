@@ -19,7 +19,7 @@ module.exports = {
     },
     // devtool: isDevEnv ? "inline" : 'source-map',
     // devtool: isDevEnv? "eval": "source-map",
-    devtool: 'source-map', // not much useful for elm, and slows down dev-server
+    // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
         common: "./src/web/common-require.js",
         main: "./src/web/main.js"

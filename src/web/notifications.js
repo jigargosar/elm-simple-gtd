@@ -3,13 +3,14 @@ import _ from "ramda"
 export const setup = setupNotifications
 
 async function setupNotifications(app) {
-
+    console.log("ssssss")
     if (!'serviceWorker' in navigator) {
         console.warn("servieWorker not found in navigator")
         return
     }
 
-    const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
+    // const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
+    const swScriptPath = "/notification-sw.js"
 
     navigator.serviceWorker.addEventListener('message', event => {
         const data = event.data;
@@ -24,7 +25,11 @@ async function setupNotifications(app) {
 
     const intervalId = setInterval(()=>{
         let messaging = document.getElementById('fb-messaging');
-        if(!messaging) return
+        if(!messaging) {
+            console.log("messaging not found")
+            return
+        }
+        console.log("activating sw")
         messaging.activate(reg)
         clearTimeout(intervalId);
     },2000)

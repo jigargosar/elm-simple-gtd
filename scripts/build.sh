@@ -10,8 +10,9 @@ ls -al app/bower_components &&
 cross-env NODE_ENV=production webpack -p --progress &&
 cd app &&
 ls -al . &&
+ls -al bower_components &&
 polymer --version &&
 polymer build &&
 cd .. &&
-cp -Rvf app/build/unbundled/ docs
+cp -Rvf app/build/unbundled/ docs &&
 true

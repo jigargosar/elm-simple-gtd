@@ -1,4 +1,4 @@
-## Upcoming
+## v0.6.0 - 2017-05-13
 * debug: FCM not working on prod. 
 
 ## v0.5.1 - 2017-05-13

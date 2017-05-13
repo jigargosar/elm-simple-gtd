@@ -15,6 +15,6 @@ pwd &&
 ls -al . &&
 ls -al bower_components &&
 polymer --version &&
-polymer build &&
+polymer build || ( ls -al bower_components && pwd && false )
 cd .. &&
 cp -Rvf app/build/unbundled/ docs

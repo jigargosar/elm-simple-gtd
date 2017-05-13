@@ -24,7 +24,7 @@ before_install:
 
 # Install dependencies
 install:
-  - yarn install
+  - sysconfcpus -n 2 yarn install
 
 # Build
 script:

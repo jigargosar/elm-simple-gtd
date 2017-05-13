@@ -1,0 +1,31 @@
+{
+    "authors": "Asana <https://asana.com>, Joe Skeen <http://github.com/joeskeen>",
+    "definitionFilename": "index.d.ts",
+    "libraryDependencies": [
+        "node",
+        "vinyl"
+    ],
+    "moduleDependencies": [
+        "fs",
+        "vinyl"
+    ],
+    "libraryMajorVersion": "0",
+    "libraryMinorVersion": "0",
+    "libraryName": "gulp-if",
+    "typingsPackageName": "gulp-if",
+    "projectName": "https://github.com/robrich/gulp-if",
+    "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+    "sourceBranch": "types-2.0",
+    "kind": "ProperModule",
+    "globals": [
+        "gulpIf"
+    ],
+    "declaredModules": [
+        "gulp-if"
+    ],
+    "files": [
+        "index.d.ts"
+    ],
+    "hasPackageJson": false,
+    "contentHash": "83ef9973706454802efeb33fc3f1bf85256179cdaa54bb87d6e4e535e44cffcd"
+}

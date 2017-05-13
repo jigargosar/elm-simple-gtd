@@ -1,0 +1,27 @@
+{
+    "authors": "Bart van der Schoor <https://github.com/Bartvds>, Nathan Brown <https://github.com/ngbrown>",
+    "definitionFilename": "index.d.ts",
+    "libraryDependencies": [],
+    "moduleDependencies": [
+        "minimatch"
+    ],
+    "libraryMajorVersion": "0",
+    "libraryMinorVersion": "3",
+    "libraryName": "findup-sync v0.3.0",
+    "typingsPackageName": "findup-sync",
+    "projectName": "https://github.com/cowboy/node-findup-sync",
+    "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+    "sourceBranch": "types-2.0",
+    "kind": "ProperModule",
+    "globals": [
+        "mod"
+    ],
+    "declaredModules": [
+        "findup-sync"
+    ],
+    "files": [
+        "index.d.ts"
+    ],
+    "hasPackageJson": false,
+    "contentHash": "ff12354a84a235f455a655782c37718dd53bd806c2851305db813fcae9fa39c6"
+}

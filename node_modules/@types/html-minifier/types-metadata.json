@@ -1,0 +1,31 @@
+{
+    "authors": "Tanguy Krotoff <https://github.com/tkrotoff>",
+    "definitionFilename": "index.d.ts",
+    "libraryDependencies": [
+        "uglify-js"
+    ],
+    "moduleDependencies": [
+        "clean-css",
+        "relateurl",
+        "uglify-js"
+    ],
+    "libraryMajorVersion": "1",
+    "libraryMinorVersion": "1",
+    "libraryName": "HTMLMinifier v1.1.1",
+    "typingsPackageName": "html-minifier",
+    "projectName": "https://github.com/kangax/html-minifier",
+    "sourceRepoURL": "https://www.github.com/DefinitelyTyped/DefinitelyTyped",
+    "sourceBranch": "types-2.0",
+    "kind": "ProperModule",
+    "globals": [
+        "HTMLMinifier"
+    ],
+    "declaredModules": [
+        "html-minifier"
+    ],
+    "files": [
+        "index.d.ts"
+    ],
+    "hasPackageJson": false,
+    "contentHash": "50db8622037d6de03042360e38a3f7e4dbda7ca261c0c5126644ce0dcc4bdffc"
+}

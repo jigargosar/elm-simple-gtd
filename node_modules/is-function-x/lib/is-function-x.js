@@ -1,0 +1,374 @@
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.returnExports = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+/**
+ * @file
+ * <a href="https://travis-ci.org/Xotic750/is-function-x"
+ * title="Travis status">
+ * <img
+ * src="https://travis-ci.org/Xotic750/is-function-x.svg?branch=master"
+ * alt="Travis status" height="18">
+ * </a>
+ * <a href="https://david-dm.org/Xotic750/is-function-x"
+ * title="Dependency status">
+ * <img src="https://david-dm.org/Xotic750/is-function-x.svg"
+ * alt="Dependency status" height="18"/>
+ * </a>
+ * <a
+ * href="https://david-dm.org/Xotic750/is-function-x#info=devDependencies"
+ * title="devDependency status">
+ * <img src="https://david-dm.org/Xotic750/is-function-x/dev-status.svg"
+ * alt="devDependency status" height="18"/>
+ * </a>
+ * <a href="https://badge.fury.io/js/is-function-x" title="npm version">
+ * <img src="https://badge.fury.io/js/is-function-x.svg"
+ * alt="npm version" height="18">
+ * </a>
+ *
+ * Determine whether a given value is a function object.
+ *
+ * @version 1.2.0
+ * @author Xotic750 <Xotic750@gmail.com>
+ * @copyright  Xotic750
+ * @license {@link <https://opensource.org/licenses/MIT> MIT}
+ * @module is-function-x
+ */
+
+/* eslint strict: 1 */
+
+/* global module */
+
+;(function () { // eslint-disable-line no-extra-semi
+
+  'use strict';
+
+  var fToString = Function.prototype.toString;
+  var toStringTag = _dereq_('to-string-tag-x');
+  var hasToStringTag = _dereq_('has-to-string-tag-x');
+  var isPrimitive = _dereq_('is-primitive');
+  var funcTag = '[object Function]';
+  var genTag = '[object GeneratorFunction]';
+  var asyncTag = '[object AsyncFunction]';
+
+  /**
+   * Checks if `value` is classified as a `Function` object.
+   *
+   * @private
+   * @param {*} value The value to check.
+   * @return {boolean} Returns `true` if `value` is correctly classified,
+   * else `false`.
+   */
+  var tryFuncToString = function funcToString(value) {
+    try {
+      fToString.call(value);
+      return true;
+    } catch (ignore) {}
+    return false;
+  };
+
+  /**
+   * Checks if `value` is classified as a `Function` object.
+   *
+   * @param {*} value The value to check.
+   * @return {boolean} Returns `true` if `value` is correctly classified,
+   * else `false`.
+   * @example
+   * var isFunction = require('is-function-x');
+   *
+   * isFunction(); // false
+   * isFunction(Number.MIN_VALUE); // false
+   * isFunction('abc'); // false
+   * isFunction(true); // false
+   * isFunction({ name: 'abc' }); // false
+   * isFunction(function () {}); // true
+   * isFunction(new Function ()); // true
+   * isFunction(function* test1() {}); // true
+   * isFunction(function test2(a, b) {}); // true
+   * isFunction(class Test {}); // true
+   * isFunction((x, y) => {return this;}); // true
+   */
+  module.exports = function isFunction(value) {
+    if (isPrimitive(value)) {
+      return false;
+    }
+    if (hasToStringTag) {
+      return tryFuncToString(value);
+    }
+    var strTag = toStringTag(value);
+    return strTag === funcTag || strTag === genTag || strTag === asyncTag;
+  };
+}());
+
+},{"has-to-string-tag-x":3,"is-primitive":4,"to-string-tag-x":6}],2:[function(_dereq_,module,exports){
+/**
+ * @file
+ * <a href="https://travis-ci.org/Xotic750/has-symbol-support-x"
+ * title="Travis status">
+ * <img
+ * src="https://travis-ci.org/Xotic750/has-symbol-support-x.svg?branch=master"
+ * alt="Travis status" height="18">
+ * </a>
+ * <a href="https://david-dm.org/Xotic750/has-symbol-support-x"
+ * title="Dependency status">
+ * <img src="https://david-dm.org/Xotic750/has-symbol-support-x.svg"
+ * alt="Dependency status" height="18"/>
+ * </a>
+ * <a
+ * href="https://david-dm.org/Xotic750/has-symbol-support-x#info=devDependencies"
+ * title="devDependency status">
+ * <img src="https://david-dm.org/Xotic750/has-symbol-support-x/dev-status.svg"
+ * alt="devDependency status" height="18"/>
+ * </a>
+ * <a href="https://badge.fury.io/js/has-symbol-support-x" title="npm version">
+ * <img src="https://badge.fury.io/js/has-symbol-support-x.svg"
+ * alt="npm version" height="18">
+ * </a>
+ *
+ * Tests if `Symbol` exists and creates the correct type.
+ *
+ * Requires ES3 or above.
+ *
+ * @version 1.2.0
+ * @author Xotic750 <Xotic750@gmail.com>
+ * @copyright  Xotic750
+ * @license {@link <https://opensource.org/licenses/MIT> MIT}
+ * @module has-symbol-support-x
+ */
+
+/* eslint strict: 1, symbol-description: 1 */
+
+/* global module */
+
+;(function () { // eslint-disable-line no-extra-semi
+
+  'use strict';
+
+  /**
+   * Indicates if `Symbol`exists and creates the correct type.
+   * `true`, if it exists and creates the correct type, otherwise `false`.
+   *
+   * @type boolean
+   */
+  module.exports = typeof Symbol === 'function' && typeof Symbol() === 'symbol';
+}());
+
+},{}],3:[function(_dereq_,module,exports){
+/**
+ * @file
+ * <a href="https://travis-ci.org/Xotic750/has-to-string-tag-x"
+ * title="Travis status">
+ * <img
+ * src="https://travis-ci.org/Xotic750/has-to-string-tag-x.svg?branch=master"
+ * alt="Travis status" height="18">
+ * </a>
+ * <a href="https://david-dm.org/Xotic750/has-to-string-tag-x"
+ * title="Dependency status">
+ * <img src="https://david-dm.org/Xotic750/has-to-string-tag-x.svg"
+ * alt="Dependency status" height="18"/>
+ * </a>
+ * <a
+ * href="https://david-dm.org/Xotic750/has-to-string-tag-x#info=devDependencies"
+ * title="devDependency status">
+ * <img src="https://david-dm.org/Xotic750/has-to-string-tag-x/dev-status.svg"
+ * alt="devDependency status" height="18"/>
+ * </a>
+ * <a href="https://badge.fury.io/js/has-to-string-tag-x" title="npm version">
+ * <img src="https://badge.fury.io/js/has-to-string-tag-x.svg"
+ * alt="npm version" height="18">
+ * </a>
+ *
+ * Tests if ES6 @@toStringTag is supported.
+ *
+ * Requires ES3 or above.
+ *
+ * @see {@link http://www.ecma-international.org/ecma-262/6.0/#sec-@@tostringtag|26.3.1 @@toStringTag}
+ *
+ * @version 1.2.0
+ * @author Xotic750 <Xotic750@gmail.com>
+ * @copyright  Xotic750
+ * @license {@link <https://opensource.org/licenses/MIT> MIT}
+ * @module has-to-string-tag-x
+ */
+
+/* eslint strict: 1 */
+
+/* global module */
+
+;(function () { // eslint-disable-line no-extra-semi
+
+  'use strict';
+
+  /**
+   * Indicates if `Symbol.toStringTag`exists and is the correct type.
+   * `true`, if it exists and is the correct type, otherwise `false`.
+   *
+   * @type boolean
+   */
+  module.exports = _dereq_('has-symbol-support-x') && typeof Symbol.toStringTag === 'symbol';
+}());
+
+},{"has-symbol-support-x":2}],4:[function(_dereq_,module,exports){
+/*!
+ * is-primitive <https://github.com/jonschlinkert/is-primitive>
+ *
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+
+'use strict';
+
+// see http://jsperf.com/testing-value-is-primitive/7
+module.exports = function isPrimitive(value) {
+  return value == null || (typeof value !== 'function' && typeof value !== 'object');
+};
+
+},{}],5:[function(_dereq_,module,exports){
+/**
+ * lodash 3.0.0 (Custom Build) <https://lodash.com/>
+ * Build: `lodash modern modularize exports="npm" -o ./`
+ * Copyright 2012-2015 The Dojo Foundation <http://dojofoundation.org/>
+ * Based on Underscore.js 1.7.0 <http://underscorejs.org/LICENSE>
+ * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ * Available under MIT license <https://lodash.com/license>
+ */
+
+/**
+ * Checks if `value` is `null`.
+ *
+ * @static
+ * @memberOf _
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is `null`, else `false`.
+ * @example
+ *
+ * _.isNull(null);
+ * // => true
+ *
+ * _.isNull(void 0);
+ * // => false
+ */
+function isNull(value) {
+  return value === null;
+}
+
+module.exports = isNull;
+
+},{}],6:[function(_dereq_,module,exports){
+/**
+ * @file
+ * <a href="https://travis-ci.org/Xotic750/to-string-tag-x"
+ * title="Travis status">
+ * <img src="https://travis-ci.org/Xotic750/to-string-tag-x.svg?branch=master"
+ * alt="Travis status" height="18">
+ * </a>
+ * <a href="https://david-dm.org/Xotic750/to-string-tag-x"
+ * title="Dependency status">
+ * <img src="https://david-dm.org/Xotic750/to-string-tag-x.svg"
+ * alt="Dependency status" height="18"/>
+ * </a>
+ * <a href="https://david-dm.org/Xotic750/to-string-tag-x#info=devDependencies"
+ * title="devDependency status">
+ * <img src="https://david-dm.org/Xotic750/to-string-tag-x/dev-status.svg"
+ * alt="devDependency status" height="18"/>
+ * </a>
+ * <a href="https://badge.fury.io/js/to-string-tag-x" title="npm version">
+ * <img src="https://badge.fury.io/js/to-string-tag-x.svg"
+ * alt="npm version" height="18">
+ * </a>
+ *
+ * Get an object's ES6 @@toStringTag.
+ *
+ * Requires ES3 or above.
+ *
+ * @see {@link http://www.ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring|19.1.3.6 Object.prototype.toString ( )}
+ *
+ * @version 1.1.1
+ * @author Xotic750 <Xotic750@gmail.com>
+ * @copyright  Xotic750
+ * @license {@link <https://opensource.org/licenses/MIT> MIT}
+ * @module to-string-tag-x
+ */
+
+/* eslint strict: 1 */
+
+/* global module */
+
+;(function () { // eslint-disable-line no-extra-semi
+
+  'use strict';
+
+  var isNull = _dereq_('lodash.isnull');
+  var isUndefined = _dereq_('validate.io-undefined');
+  var nullTag = '[object Null]';
+  var undefTag = '[object Undefined]';
+
+  /**
+   * The `toStringTag` method returns "[object type]", where type is the
+   * object type.
+   *
+   * @param {*} value The object of which to get the object type string.
+   * @return {string} The object type string.
+   * @example
+   * var o = new Object();
+   *
+   * toStringTag(o); // returns '[object Object]'
+   */
+  module.exports = function toStringTag(value) {
+    if (isNull(value)) {
+      return nullTag;
+    }
+    if (isUndefined(value)) {
+      return undefTag;
+    }
+    return Object.prototype.toString.call(value);
+  };
+}());
+
+},{"lodash.isnull":5,"validate.io-undefined":7}],7:[function(_dereq_,module,exports){
+/**
+*
+*	VALIDATE: undefined
+*
+*
+*	DESCRIPTION:
+*		- Validates if a value is undefined.
+*
+*
+*	NOTES:
+*		[1]
+*
+*
+*	TODO:
+*		[1]
+*
+*
+*	LICENSE:
+*		MIT
+*
+*	Copyright (c) 2014. Athan Reines.
+*
+*
+*	AUTHOR:
+*		Athan Reines. kgryte@gmail.com. 2014.
+*
+*/
+
+'use strict';
+
+/**
+* FUNCTION: isUndefined( value )
+*	Validates if a value is undefined.
+*
+* @param {*} value - value to be validated
+* @returns {Boolean} boolean indicating whether value is undefined
+*/
+function isUndefined( value ) {
+	return value === void 0;
+} // end FUNCTION isUndefined()
+
+
+// EXPORTS //
+
+module.exports = isUndefined;
+
+},{}]},{},[1])(1)
+});

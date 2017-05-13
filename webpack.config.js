@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require("path");
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 const pkg=require("./package.json");
-console.log(pkg)
 
 const nodeENV = process.env.NODE_ENV || "development"
 

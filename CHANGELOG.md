@@ -1,3 +1,6 @@
+## Upcoming
+* debug: FCM not working on prod. 
+
 ## v0.5.1 - 2017-05-13
 * fixed travis build
 * storing dependencies in repo. 

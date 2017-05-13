@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+      "node":"v7.7.1"
+  },
+  "private":true,
+  "repository":{
+    "url": "https://github.com/jigargosar/elm-simple-gtd"
+  },
   "scripts": {
     "install-elm": "which -a elm ; elm-package install -y",
     "postinstall": "bash -c \"which -a elm && elm-package install -y && bower install \"",

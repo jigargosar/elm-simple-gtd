@@ -86,10 +86,12 @@ headerView m =
 defaultHeader m =
     let
         title =
-            if m.developmentMode then
-                "DEVELOPMENT MODE"
-            else
-                "SimpleGTD - alpha"
+            (if m.developmentMode then
+                "DEV_ENV"
+             else
+                "SimpleGTD"
+            )
+                ++ " 1.0.0"
 
         maybeUserProfile =
             Model.getMaybeUserProfile m

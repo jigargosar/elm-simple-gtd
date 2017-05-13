@@ -8,6 +8,7 @@ const nodeENV = process.env.NODE_ENV || "development"
 
 const isDevEnv = nodeENV === "development"
 
+console.log("isDevEnv: ", isDevEnv, nodeENV)
 console.log("process.env.NODE_ENV: ", isDevEnv, nodeENV)
 
 const outputDir = isDevEnv ? "dev" : "app"
@@ -32,9 +33,9 @@ module.exports = {
 
     plugins: [
         new webpack.DefinePlugin({
-            'NODE_ENV': JSON.stringify(nodeENV),
+            'IS_DEVELOPMENT_ENV': isDevEnv,
             'WEB_PACK_DEV_SERVER': process.env.WEB_PACK_DEV_SERVER || false,
-            "process.env.app-version":"0.1.0"
+            "packageJSON": JSON.stringify(pkg)
         }),
         new ServiceWorkerWebpackPlugin({
             options: {"foo": "bar"},

@@ -14,11 +14,13 @@ const Notifications = require("./notifications")
 import DB from "./pouchdb-wrapper"
 
 //noinspection JSUnresolvedVariable
-const developmentMode = NODE_ENV !== "production"
 const firebaseConfig =
-    developmentMode ?
+    IS_DEVELOPMENT_ENV ?
         require("./config/dev/firebase") :
         require("./config/prod/firebase")
+
+const developmentMode =  IS_DEVELOPMENT_ENV
+const pkg = packageJSON
 
 boot().catch(console.error)
 async function boot() {
@@ -49,7 +51,8 @@ async function boot() {
         // encodedContextList: [],
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
         firebaseAppAttributes: firebaseConfig.appAttributes,
-        developmentMode: developmentMode
+        developmentMode: developmentMode,
+        appVersion:pkg.version
     }
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]

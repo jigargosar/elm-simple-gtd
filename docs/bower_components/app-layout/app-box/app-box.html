@@ -129,5 +129,119 @@ Mixin | Description | Default
     </div>
   </template>
 
-  <script>Polymer({is:'app-box',behaviors:[Polymer.AppScrollEffectsBehavior,Polymer.IronResizableBehavior],listeners:{'iron-resize':'_resizeHandler'},_progress:0,attached:function(){this.resetLayout()},_debounceRaf:function(a){var b=this;this._raf&&window.cancelAnimationFrame(this._raf),this._raf=window.requestAnimationFrame(function(){b._raf=null,a.call(b)})},resetLayout:function(){this._debounceRaf(function(){if(0!==this.offsetWidth||0!==this.offsetHeight){var a=this._clampedScrollTop,b=this.disabled;this.disabled=!0,this._elementTop=this._getElementTop(),this._elementHeight=this.offsetHeight,this._cachedScrollTargetHeight=this._scrollTargetHeight,this._setUpEffect(),this._updateScrollState(a),this.disabled=b}})},_getElementTop:function(){for(var a=this,b=0;a&&a!==this.scrollTarget;)b+=a.offsetTop,a=a.offsetParent;return b},_updateScrollState:function(a){if(this.isOnScreen()){var b=this._elementTop-a;this._progress=1-(b+this._elementHeight)/this._cachedScrollTargetHeight,this._runEffects(this._progress,a)}},isOnScreen:function(){return this._elementTop<this._scrollTop+this._cachedScrollTargetHeight&&this._elementTop+this._elementHeight>this._scrollTop},_resizeHandler:function(){this.resetLayout()},_getDOMRef:function(a){return'background'===a?this.$.background:'backgroundFrontLayer'===a?this.$.backgroundFrontLayer:void 0},getScrollState:function(){return{progress:this._progress}}});</script>
+  <script>
+    Polymer({
+      is: 'app-box',
+
+      behaviors: [
+        Polymer.AppScrollEffectsBehavior,
+        Polymer.IronResizableBehavior
+      ],
+
+      listeners: {
+        'iron-resize': '_resizeHandler'
+      },
+
+      /**
+       * The current scroll progress.
+       *
+       * @type {number}
+       */
+      _progress: 0,
+
+      attached: function() {
+        this.resetLayout();
+      },
+
+      _debounceRaf: function(fn) {
+        var self = this;
+        if (this._raf) {
+          window.cancelAnimationFrame(this._raf);
+        }
+        this._raf = window.requestAnimationFrame(function() {
+          self._raf = null;
+          fn.call(self);
+        });
+      },
+
+      /**
+       * Resets the layout. This method is automatically called when the element is attached to the DOM.
+       *
+       * @method resetLayout
+       */
+      resetLayout: function() {
+        this._debounceRaf(function() {
+          // noop if the box isn't in the rendered tree
+          if (this.offsetWidth === 0 && this.offsetHeight === 0) {
+            return;
+          }
+
+          var scrollTop = this._clampedScrollTop;
+          var savedDisabled = this.disabled;
+
+          this.disabled = true;
+          this._elementTop = this._getElementTop();
+          this._elementHeight = this.offsetHeight;
+          this._cachedScrollTargetHeight = this._scrollTargetHeight;
+          this._setUpEffect();
+          this._updateScrollState(scrollTop);
+          this.disabled = savedDisabled;
+        });
+      },
+
+      _getElementTop: function() {
+        var currentNode = this;
+        var top = 0;
+
+        while (currentNode && currentNode !== this.scrollTarget) {
+          top += currentNode.offsetTop;
+          currentNode = currentNode.offsetParent;
+        }
+        return top;
+      },
+
+      _updateScrollState: function(scrollTop) {
+        if (this.isOnScreen()) {
+          var viewportTop = this._elementTop - scrollTop;
+          this._progress = 1 - (viewportTop + this._elementHeight) / this._cachedScrollTargetHeight;
+          this._runEffects(this._progress, scrollTop);
+        }
+      },
+
+      /**
+       * Returns true if this app-box is on the screen.
+       * That is, visible in the current viewport.
+       *
+       * @method isOnScreen
+       * @return {boolean}
+       */
+      isOnScreen: function() {
+        return this._elementTop < this._scrollTop + this._cachedScrollTargetHeight
+            && this._elementTop + this._elementHeight > this._scrollTop;
+      },
+
+      _resizeHandler: function() {
+        this.resetLayout();
+      },
+
+      _getDOMRef: function(id) {
+        if (id === 'background') {
+          return this.$.background;
+        }
+        if (id === 'backgroundFrontLayer') {
+          return this.$.backgroundFrontLayer;
+        }
+      },
+
+      /**
+       * Returns an object containing the progress value of the scroll effects.
+       *
+       * @method getScrollState
+       * @return {Object}
+       */
+      getScrollState: function() {
+        return { progress: this._progress };
+      }
+    });
+  </script>
 </dom-module>

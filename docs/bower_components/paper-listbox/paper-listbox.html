@@ -76,5 +76,19 @@ of a listbox item will also focus it.
     <slot></slot>
   </template>
 
-  <script>(function(){Polymer({is:'paper-listbox',behaviors:[Polymer.IronMenuBehavior],hostAttributes:{role:'listbox'}})})();</script>
+  <script>
+    (function() {
+      Polymer({
+        is: 'paper-listbox',
+
+        behaviors: [
+          Polymer.IronMenuBehavior
+        ],
+
+        hostAttributes: {
+          role: 'listbox'
+        }
+      });
+    })();
+  </script>
 </dom-module>

@@ -49,4 +49,150 @@ Or, in a Polymer element, you can include a meta in your template:
 @element iron-meta
 -->
 
-<script>(function(){function a(c){this.type=c&&c.type||'default',this.key=c&&c.key,'value'in c&&(this.value=c.value)}a.types={},a.prototype={get value(){var c=this.type,d=this.key;if(c&&d)return a.types[c]&&a.types[c][d]},set value(c){var d=this.type,e=this.key;if(d&&e){var d=a.types[d]=a.types[d]||{};null==c?delete d[e]:d[e]=c}},get list(){var c=this.type;if(c)return Object.keys(a.types[this.type]).map(function(d){return b[this.type][d]},this)},byKey(c){return this.key=c,this.value}},Polymer.IronMeta=a;var b=Polymer.IronMeta.types;Polymer({is:'iron-meta',properties:{type:{type:String,value:'default'},key:{type:String},value:{type:String,notify:!0},self:{type:Boolean,observer:'_selfChanged'},__meta:{type:Boolean,computed:'__computeMeta(type, key, value)'}},hostAttributes:{hidden:!0},__computeMeta:function(c,d,e){let f=new Polymer.IronMeta({type:c,key:d});return void 0!==e&&e!==f.value?f.value=e:this.value!==f.value&&(this.value=f.value),f},get list(){return this.__meta&&this.__meta.list},_selfChanged:function(c){c&&(this.value=this)},byKey:function(c){return new Polymer.IronMeta({type:this.type,key:c}).value}})})();</script>
+<script>
+
+  (function() {
+
+    function IronMeta(options) {
+      this.type = (options && options.type) || 'default';
+      this.key = options && options.key;
+      if ('value' in options) {
+        this.value = options.value;
+      }
+    }
+
+    IronMeta.types = {};
+
+    IronMeta.prototype = {
+      get value() {
+        var type = this.type;
+        var key = this.key;
+
+        if (type && key) {
+          return IronMeta.types[type] && IronMeta.types[type][key];
+        }
+      },
+
+      set value(value) {
+        var type = this.type;
+        var key = this.key;
+
+        if (type && key) {
+          var type = IronMeta.types[type] = IronMeta.types[type] || {};
+          if (value == null) {
+            delete type[key];
+          } else {
+            type[key] = value;
+          }
+        }
+      },
+
+      get list() {
+        var type = this.type;
+
+        if (type) {
+          return Object.keys(IronMeta.types[this.type]).map(function(key) {
+            return metaDatas[this.type][key];
+          }, this);
+        }
+      },
+
+      byKey(key) {
+        this.key = key;
+        return this.value;
+      }
+    };
+
+    Polymer.IronMeta = IronMeta;
+
+    var metaDatas = Polymer.IronMeta.types;
+
+    Polymer({
+
+      is: 'iron-meta',
+
+      properties: {
+
+        /**
+         * The type of meta-data.  All meta-data of the same type is stored
+         * together.
+         */
+        type: {
+          type: String,
+          value: 'default',
+        },
+
+        /**
+         * The key used to store `value` under the `type` namespace.
+         */
+        key: {
+          type: String,
+        },
+
+        /**
+         * The meta-data to store or retrieve.
+         */
+        value: {
+          type: String,
+          notify: true,
+        },
+
+        /**
+         * If true, `value` is set to the iron-meta instance itself.
+         */
+         self: {
+          type: Boolean,
+          observer: '_selfChanged'
+        },
+
+        __meta: {
+          type: Boolean,
+          computed: '__computeMeta(type, key, value)'
+        }
+      },
+
+      hostAttributes: {
+        hidden: true
+      },
+
+      __computeMeta: function(type, key, value) {
+        let meta = new Polymer.IronMeta({
+          type: type,
+          key: key
+        });
+
+        if (value !== undefined && value !== meta.value) {
+          meta.value = value;
+        } else if (this.value !== meta.value) {
+          this.value = meta.value;
+        }
+
+        return meta;
+      },
+
+      get list() {
+        return this.__meta && this.__meta.list;
+      },
+
+      _selfChanged: function(self) {
+        if (self) {
+          this.value = this;
+        }
+      },
+
+      /**
+       * Retrieves meta data value by key.
+       *
+       * @method byKey
+       * @param {string} key The key of the meta-data to be returned.
+       * @return {*}
+       */
+      byKey: function(key) {
+        return new Polymer.IronMeta({
+          type: this.type,
+          key: key
+        }).value;
+      }
+    });
+  })();
+</script>

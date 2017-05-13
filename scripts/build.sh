@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 cp -R static/ app &&
-cross-env NODE_ENV=production webpack -p --progress &&
+cross-env NODE_ENV=production webpack --progress &&
 cd app &&
 polymer --version &&
 polymer build &&

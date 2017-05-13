@@ -8,4 +8,39 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 --><link rel="import" href="class.html">
 
-<script>(function(){'use strict';window.Polymer._polymerFn=function(a){let b;return b='function'===typeof a?a:Polymer.Class(a),customElements.define(b.is,b),b}})();</script>
+<script>
+
+  (function() {
+    'use strict';
+
+    /**
+     * Legacy class factory and registration helper for defining Polymer
+     * elements.
+     *
+     * This method is equivalent to
+     * `customElements.define(info.is, Polymer.Class(info));`
+     *
+     * See `Polymer.Class` for details on valid legacy metadata format for `info`.
+     *
+     * @override
+     * @function Polymer
+     * @param {Object} info Object containing Polymer metadata and functions
+     *   to become class methods.
+     * @return {Polymer.LegacyElement} Generated class
+     */
+    window.Polymer._polymerFn = function(info) {
+      // if input is a `class` (aka a function with a prototype), use the prototype
+      // remember that the `constructor` will never be called
+      let klass;
+      if (typeof info === 'function') {
+        klass = info;
+      } else {
+        klass = Polymer.Class(info);
+      }
+      customElements.define(klass.is, klass);
+      return klass;
+    };
+
+  })();
+
+</script>

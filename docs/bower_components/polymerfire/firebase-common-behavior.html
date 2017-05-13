@@ -7,4 +7,72 @@ https://github.com/firebase/polymerfire/blob/master/LICENSE
 --><link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../app-storage/app-network-status-behavior.html">
 <link rel="import" href="firebase-app-script.html">
-<script>(function(){'use strict';Polymer.FirebaseCommonBehaviorImpl={properties:{app:{type:Object,notify:!0,observer:'__appChanged'},appName:{type:String,notify:!0,value:'',observer:'__appNameChanged'}},__appNameChanged:function(a){if(!(this.app&&this.app.name===a))try{this.app=null==a?firebase.app():firebase.app(a)}catch(c){var b=this;window.addEventListener('firebase-app-initialized',function d(){window.removeEventListener('firebase-app-initialized',d),b.__appNameChanged(b.appName)})}},__appChanged:function(a){a&&a.name===this.appName||(this.appName=a?a.name:'')},__onError:function(a){this.fire('error',a)}},Polymer.FirebaseCommonBehavior=[Polymer.AppNetworkStatusBehavior,Polymer.FirebaseCommonBehaviorImpl]})();</script>
+<script>
+  (function() {
+    'use strict';
+
+    /** @polymerBehavior Polymer.FirebaseCommonBehavior */
+    Polymer.FirebaseCommonBehaviorImpl = {
+      properties: {
+
+
+        /**
+        * @type {!firebase.app.App|undefined}
+        */
+        app: {
+          type: Object,
+          notify: true,
+          observer: '__appChanged'
+        },
+
+        appName: {
+          type: String,
+          notify: true,
+          value: '',
+          observer: '__appNameChanged'
+        }
+      },
+
+      __appNameChanged: function(appName) {
+        if (this.app && this.app.name === appName) {
+          return;
+        }
+
+        try {
+          if (appName == null) {
+            this.app = firebase.app();
+          } else {
+            this.app = firebase.app(appName);
+          }
+        } catch (e) {
+          // appropriate app hasn't been initialized yet
+          var self = this;
+          window.addEventListener('firebase-app-initialized',
+              function onFirebaseAppInitialized(event) {
+                window.removeEventListener(
+                    'firebase-app-initialized', onFirebaseAppInitialized);
+                self.__appNameChanged(self.appName);
+              });
+        }
+      },
+
+      __appChanged: function(app) {
+        if (app && app.name === this.appName) {
+          return;
+        }
+
+        this.appName = app ? app.name : '';
+      },
+
+      __onError: function(err) {
+        this.fire('error', err);
+      }
+    };
+
+    /** @polymerBehavior */
+    Polymer.FirebaseCommonBehavior = [
+      Polymer.AppNetworkStatusBehavior,
+      Polymer.FirebaseCommonBehaviorImpl
+    ];
+  })();
+</script>

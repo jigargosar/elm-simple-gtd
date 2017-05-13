@@ -177,5 +177,129 @@ a shadow root):
     <iron-media-query query="[[_computeMediaQuery(forceNarrow, responsiveWidth)]]" on-query-matches-changed="_onQueryMatchesChanged"></iron-media-query>
   </template>
 
-  <script>Polymer({is:'app-drawer-layout',behaviors:[Polymer.AppLayoutBehavior],properties:{forceNarrow:{type:Boolean,value:!1},responsiveWidth:{type:String,value:'640px'},narrow:{type:Boolean,reflectToAttribute:!0,readOnly:!0,notify:!0},openedWhenNarrow:{type:Boolean,value:!1},_drawerPosition:{type:String}},listeners:{click:'_clickHandler'},observers:['_narrowChanged(narrow)'],get drawer(){return Polymer.dom(this.$.drawerSlot).getDistributedNodes()[0]},attached:function(){var a=this.drawer;a&&(this._savedDrawerTransitionDuration=a.transitionDuration,a.transitionDuration=0)},_clickHandler:function(a){var b=Polymer.dom(a).localTarget;if(b&&b.hasAttribute('drawer-toggle')){var c=this.drawer;c&&!c.persistent&&c.toggle()}},_updateLayoutStates:function(){var a=this.drawer;a&&(this._drawerPosition=this.narrow?null:a.position,this._drawerNeedsReset&&(this.narrow?(a.opened=this.openedWhenNarrow,a.persistent=!1):a.opened=a.persistent=!0,this._savedDrawerTransitionDuration&&Polymer.RenderStatus.afterNextRender(this,function(){a.transitionDuration=this._savedDrawerTransitionDuration,this._savedDrawerTransitionDuration=0}),this._drawerNeedsReset=!1))},_narrowChanged:function(){this._drawerNeedsReset=!0,this.resetLayout()},_onQueryMatchesChanged:function(a){this._setNarrow(a.detail.value)},_computeMediaQuery:function(a,b){return a?'(min-width: 0px)':'(max-width: '+b+')'}});</script>
+  <script>
+    Polymer({
+      is: 'app-drawer-layout',
+
+      behaviors: [
+        Polymer.AppLayoutBehavior
+      ],
+
+      properties: {
+        /**
+         * If true, ignore `responsiveWidth` setting and force the narrow layout.
+         */
+        forceNarrow: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * If the viewport's width is smaller than this value, the panel will change to narrow
+         * layout. In the mode the drawer will be closed.
+         */
+        responsiveWidth: {
+          type: String,
+          value: '640px'
+        },
+
+        /**
+         * Returns true if it is in narrow layout. This is useful if you need to show/hide
+         * elements based on the layout.
+         */
+        narrow: {
+          type: Boolean,
+          reflectToAttribute: true,
+          readOnly: true,
+          notify: true
+        },
+
+        /**
+         * If true, the drawer will initially be opened when in narrow layout mode.
+         */
+        openedWhenNarrow: {
+          type: Boolean,
+          value: false
+        },
+
+        _drawerPosition: {
+          type: String
+        }
+      },
+
+      listeners: {
+        'click': '_clickHandler'
+      },
+
+      observers: [
+        '_narrowChanged(narrow)'
+      ],
+
+      /**
+       * A reference to the app-drawer element.
+       *
+       * @property drawer
+       */
+      get drawer() {
+        return Polymer.dom(this.$.drawerSlot).getDistributedNodes()[0];
+      },
+
+      attached: function() {
+        // Disable drawer transitions until after app-drawer-layout sets the initial opened state.
+        var drawer = this.drawer;
+        if (drawer) {
+          this._savedDrawerTransitionDuration = drawer.transitionDuration;
+          drawer.transitionDuration = 0;
+        }
+      },
+
+      _clickHandler: function(e) {
+        var target = Polymer.dom(e).localTarget;
+        if (target && target.hasAttribute('drawer-toggle')) {
+          var drawer = this.drawer;
+          if (drawer && !drawer.persistent) {
+            drawer.toggle();
+          }
+        }
+      },
+
+      _updateLayoutStates: function() {
+        var drawer = this.drawer;
+        if (!drawer) {
+          return;
+        }
+
+        this._drawerPosition = this.narrow ? null : drawer.position;
+        if (this._drawerNeedsReset) {
+          if (this.narrow) {
+            drawer.opened = this.openedWhenNarrow;
+            drawer.persistent = false;
+          } else {
+            drawer.opened = drawer.persistent = true;
+          }
+          if (this._savedDrawerTransitionDuration) {
+            // Enable drawer transitions after app-drawer-layout sets the initial opened state.
+            Polymer.RenderStatus.afterNextRender(this, function() {
+              drawer.transitionDuration = this._savedDrawerTransitionDuration;
+              this._savedDrawerTransitionDuration = 0;
+            });
+          }
+          this._drawerNeedsReset = false;
+        }
+      },
+
+      _narrowChanged: function() {
+        this._drawerNeedsReset = true;
+        this.resetLayout();
+      },
+
+      _onQueryMatchesChanged: function(event) {
+        this._setNarrow(event.detail.value);
+      },
+
+      _computeMediaQuery: function(forceNarrow, responsiveWidth) {
+        return forceNarrow ? '(min-width: 0px)' : '(max-width: ' + responsiveWidth + ')';
+      }
+    });
+  </script>
 </dom-module>

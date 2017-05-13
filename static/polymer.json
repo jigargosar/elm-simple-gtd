@@ -10,6 +10,7 @@
     "*.ico",
     "common.js",
     "main.js",
+    "*.js.map",
     "CNAME"
   ],
   "extraDependencies": [
@@ -20,7 +21,7 @@
       "name": "unbundled",
       "bundle": false,
       "js": {
-        "minify": true
+        "minify": false
       },
       "css": {
         "minify": false

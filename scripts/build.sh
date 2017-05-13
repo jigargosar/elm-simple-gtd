@@ -7,6 +7,8 @@ cp -rf src/web/bower_components app/bower_components &&
 ls -al app &&
 echo "content of app/bower_components" &&
 ls -al app/bower_components &&
+echo "content of app/bower_components/paper-styles/element-styles/" &&
+ls -al app/bower_components/paper-styles/element-styles/ &&
 cross-env NODE_ENV=production webpack -p --progress &&
 cd app &&
 pwd &&

@@ -91,7 +91,8 @@ defaultHeader m =
              else
                 "SimpleGTD"
             )
-                ++ " 1.0.0"
+                ++ " "
+                ++ m.appVersion
 
         maybeUserProfile =
             Model.getMaybeUserProfile m

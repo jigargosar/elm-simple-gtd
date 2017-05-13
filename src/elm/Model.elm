@@ -69,6 +69,7 @@ init flags =
             , selectedEntityIdSet = Set.empty
             , layout = { narrow = False, forceNarrow = False }
             , maybeFocusedEntity = Nothing
+            , appVersion = flags.appVersion
             }
     in
         model

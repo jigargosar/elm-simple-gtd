@@ -50,6 +50,7 @@ type alias Model =
     , selectedEntityIdSet : Set Document.Id
     , layout : Layout
     , maybeFocusedEntity : Maybe Entity
+    , appVersion : String
     }
 
 
@@ -108,6 +109,7 @@ type alias Flags =
     , pouchDBRemoteSyncURI : String
     , firebaseAppAttributes : Firebase.AppAttributes
     , developmentMode : Bool
+    , appVersion : String
     }
 
 

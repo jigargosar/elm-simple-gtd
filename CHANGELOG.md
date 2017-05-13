@@ -1,3 +1,6 @@
+## Upcoming
+* deploy docs: by letting firebase messaging use/discover its default sw name.
+
 ## v0.6.0 - 2017-05-13
 * debug: FCM not working on prod. 
 

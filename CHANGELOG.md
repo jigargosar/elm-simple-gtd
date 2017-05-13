@@ -1,4 +1,4 @@
-## Upcoming
+## v0.9.0 - 2017-05-13
 * deploy docs: by letting firebase messaging use/discover its default sw name.
 
 ## v0.6.0 - 2017-05-13

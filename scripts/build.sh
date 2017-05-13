@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 pwd &&
 cp -rf static/ app &&
-rm -f app/bower_components &&
+rm -rf app/bower_components &&
 ls -al app &&
 cp -rf src/web/bower_components app/bower_components &&
 ls -al app &&
@@ -15,6 +15,6 @@ pwd &&
 ls -al . &&
 ls -al bower_components &&
 polymer --version &&
-polymer build || ( ls -al bower_components && pwd && false )
+(polymer build || ( ls -al bower_components && pwd && false ))
 cd .. &&
 cp -Rvf app/build/unbundled/ docs

@@ -1,4 +1,9 @@
 ## Upcoming
+* fixed travis build
+* storing dependencies in repo. 
+  To avoid sudden changes on build server and ensure availability 
+
+## v0.5.0 - 2017-05-13
 * debug travis build 
 
 ## v0.4.0 - 2017-05-13

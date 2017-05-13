@@ -71,6 +71,9 @@ init flags =
             , maybeFocusedEntity = Nothing
             , appVersion = flags.appVersion
             }
+
+        _ =
+            Debug.log "flags.firebaseAppAttributes" (flags.firebaseAppAttributes)
     in
         model
 

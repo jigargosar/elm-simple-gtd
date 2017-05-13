@@ -15,5 +15,4 @@ ls -al bower_components &&
 polymer --version &&
 polymer build &&
 cd .. &&
-cp -Rvf app/build/unbundled/ docs &&
-true
+cp -Rvf app/build/unbundled/ docs

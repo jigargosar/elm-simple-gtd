@@ -18,7 +18,7 @@ module.exports = {
         alias: {elm: path.resolve(__dirname, 'src/elm/')}
     },
     // devtool: isDevEnv ? "inline" : 'source-map',
-    devtool: isDevEnv? "eval": "source-map",
+    // devtool: isDevEnv? "": "source-map",
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
         common: "./src/web/common-require.js",

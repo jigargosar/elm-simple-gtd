@@ -31,7 +31,8 @@ init m =
         , Html.node "firebase-messaging"
             [ id "fb-messaging"
             , onFCMTokenChanged Msg.OnFCMTokenChanged
-            , customSw
+
+            {- , customSw -}
             ]
             []
         ]

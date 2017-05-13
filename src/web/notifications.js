@@ -21,22 +21,22 @@ async function setupNotifications(app) {
             app.ports["notificationClicked"].send(data)
         }
     });
-    const reg = await navigator.serviceWorker.register(swScriptPath)
+    // const reg = await navigator.serviceWorker.register(swScriptPath)
 
-    const intervalId = setInterval(()=>{
-        let messaging = document.getElementById('fb-messaging');
-        if(!messaging) {
-            console.log("messaging not found")
-            return
-        }
-        console.log("activating sw")
-        messaging.activate(reg)
-        clearTimeout(intervalId);
-    },2000)
+    // const intervalId = setInterval(()=>{
+    //     let messaging = document.getElementById('fb-messaging');
+    //     if(!messaging) {
+    //         console.log("messaging not found")
+    //         return
+    //     }
+    //     console.log("activating sw")
+    //     messaging.activate(reg)
+    //     clearTimeout(intervalId);
+    // },2000)
 
 
-    app.ports["showNotification"].subscribe(showNotification(reg))
-    app.ports["closeNotification"].subscribe(closeNotification(reg))
+    // app.ports["showNotification"].subscribe(showNotification(reg))
+    // app.ports["closeNotification"].subscribe(closeNotification(reg))
 
 }
 

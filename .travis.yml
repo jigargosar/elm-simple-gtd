@@ -11,9 +11,9 @@ cache:
 #    - elm-stuff/packages
 
 before_install:
-  # Install yarn
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH=$HOME/.yarn/bin:$PATH
+#  # Install yarn
+#  - curl -o- -L https://yarnpkg.com/install.sh | bash
+#  - export PATH=$HOME/.yarn/bin:$PATH
 
   # Install sysconfcpus
   # Reference: https://github.com/elm-lang/elm-compiler/issues/1473#issuecomment-245704142

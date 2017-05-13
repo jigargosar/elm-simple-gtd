@@ -110,7 +110,19 @@ Add the `fullbleed` attribute to app-drawer-layout to make it fit the size of it
 
 Custom property                          | Description                          | Default
 -----------------------------------------|--------------------------------------|---------
+`--app-drawer-width`                     | Width of the drawer                  | 256px
 `--app-drawer-layout-content-transition` | Transition for the content container | none
+
+**NOTE:** If you use <app-drawer> with <app-drawer-layout> and specify a value for
+`--app-drawer-width`, that value must be accessible by both elements. This can be done by
+defining the value on the `:host` that contains <app-drawer-layout> (or `html` if outside
+a shadow root):
+
+```css
+:host {
+  --app-drawer-width: 300px;
+}
+```
 
 @group App Elements
 @element app-drawer-layout
@@ -146,16 +158,24 @@ Custom property                          | Description                          
         height: 100%;
         transition: var(--app-drawer-layout-content-transition, none);
       }
+
+      #contentContainer[drawer-position=left] {
+        margin-left: var(--app-drawer-width, 256px);
+      }
+
+      #contentContainer[drawer-position=right] {
+        margin-right: var(--app-drawer-width, 256px);
+      }
     </style>
 
     <slot id="drawerSlot" name="drawer"></slot>
 
-    <div id="contentContainer">
+    <div id="contentContainer" drawer-position$="[[_drawerPosition]]">
       <slot></slot>
     </div>
 
     <iron-media-query query="[[_computeMediaQuery(forceNarrow, responsiveWidth)]]" on-query-matches-changed="_onQueryMatchesChanged"></iron-media-query>
   </template>
 
-  <script>Polymer({is:'app-drawer-layout',behaviors:[Polymer.AppLayoutBehavior],properties:{forceNarrow:{type:Boolean,value:!1},responsiveWidth:{type:String,value:'640px'},narrow:{type:Boolean,reflectToAttribute:!0,readOnly:!0,notify:!0},openedWhenNarrow:{type:Boolean,value:!1}},listeners:{click:'_clickHandler'},observers:['_configChanged(narrow, isAttached)'],get drawer(){return Polymer.dom(this.$.drawerSlot).getDistributedNodes()[0]},attached:function(){var a=this.drawer;a&&(this._savedDrawerTransitionDuration=a.transitionDuration,a.transitionDuration=0)},_clickHandler:function(a){var b=Polymer.dom(a).localTarget;if(b&&b.hasAttribute('drawer-toggle')){var c=this.drawer;c&&!c.persistent&&c.toggle()}},_updateLayoutStates:function(){var a=this.drawer,b=this.$.contentContainer;if(this.narrow||!a||!a.getWidth)b.style.marginLeft='',b.style.marginRight='';else{var c=a.getWidth();'right'==a.position?(b.style.marginLeft='',b.style.marginRight=c+'px'):(b.style.marginLeft=c+'px',b.style.marginRight='')}a&&this._drawerNeedsReset&&(this.narrow?(a.opened=this.openedWhenNarrow,a.persistent=!1):a.opened=a.persistent=!0,this._savedDrawerTransitionDuration&&Polymer.RenderStatus.afterNextRender(this,function(){a.transitionDuration=this._savedDrawerTransitionDuration,this._savedDrawerTransitionDuration=0}),this._drawerNeedsReset=!1)},_configChanged:function(){this._drawerNeedsReset=!0,this.resetLayout()},_onQueryMatchesChanged:function(a){this._setNarrow(a.detail.value)},_computeMediaQuery:function(a,b){return a?'(min-width: 0px)':'(max-width: '+b+')'}});</script>
+  <script>Polymer({is:'app-drawer-layout',behaviors:[Polymer.AppLayoutBehavior],properties:{forceNarrow:{type:Boolean,value:!1},responsiveWidth:{type:String,value:'640px'},narrow:{type:Boolean,reflectToAttribute:!0,readOnly:!0,notify:!0},openedWhenNarrow:{type:Boolean,value:!1},_drawerPosition:{type:String}},listeners:{click:'_clickHandler'},observers:['_narrowChanged(narrow)'],get drawer(){return Polymer.dom(this.$.drawerSlot).getDistributedNodes()[0]},attached:function(){var a=this.drawer;a&&(this._savedDrawerTransitionDuration=a.transitionDuration,a.transitionDuration=0)},_clickHandler:function(a){var b=Polymer.dom(a).localTarget;if(b&&b.hasAttribute('drawer-toggle')){var c=this.drawer;c&&!c.persistent&&c.toggle()}},_updateLayoutStates:function(){var a=this.drawer;a&&(this._drawerPosition=this.narrow?null:a.position,this._drawerNeedsReset&&(this.narrow?(a.opened=this.openedWhenNarrow,a.persistent=!1):a.opened=a.persistent=!0,this._savedDrawerTransitionDuration&&Polymer.RenderStatus.afterNextRender(this,function(){a.transitionDuration=this._savedDrawerTransitionDuration,this._savedDrawerTransitionDuration=0}),this._drawerNeedsReset=!1))},_narrowChanged:function(){this._drawerNeedsReset=!0,this.resetLayout()},_onQueryMatchesChanged:function(a){this._setNarrow(a.detail.value)},_computeMediaQuery:function(a,b){return a?'(min-width: 0px)':'(max-width: '+b+')'}});</script>
 </dom-module>

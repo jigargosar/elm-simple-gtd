@@ -43,6 +43,17 @@ Custom property                  | Description                            | Defa
 `--app-drawer-content-container` | Mixin for the drawer content container | {}
 `--app-drawer-scrim-background`  | Background for the scrim               | rgba(0, 0, 0, 0.5)
 
+**NOTE:** If you use <app-drawer> with <app-drawer-layout> and specify a value for
+`--app-drawer-width`, that value must be accessible by both elements. This can be done by
+defining the value on the `:host` that contains <app-drawer-layout> (or `html` if outside
+a shadow root):
+
+```css
+:host {
+  --app-drawer-width: 300px;
+}
+```
+
 @group App Elements
 @element app-drawer
 @demo app-drawer/demo/left-drawer.html Simple Left Drawer
@@ -99,11 +110,11 @@ Custom property                  | Description                            | Defa
         @apply --app-drawer-content-container;
       }
 
-      :host([persistent]) > #contentContainer {
+      #contentContainer[persistent] {
         width: 100%;
       }
 
-      :host([position=right]) > #contentContainer {
+      #contentContainer[position=right] {
         right: 0;
         left: auto;
 
@@ -111,7 +122,7 @@ Custom property                  | Description                            | Defa
         transform: translate3d(100%, 0, 0);
       }
 
-      :host([swipe-open]) > #contentContainer::after {
+      #contentContainer[swipe-open]::after {
         position: fixed;
         top: 0;
         bottom: 0;
@@ -124,12 +135,12 @@ Custom property                  | Description                            | Defa
         content: '';
       }
 
-      :host([swipe-open][position=right]) > #contentContainer::after {
+      #contentContainer[swipe-open][position=right]::after {
         right: 100%;
         left: auto;
       }
 
-      :host([opened]) > #contentContainer {
+      #contentContainer[opened] {
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
       }
@@ -149,27 +160,19 @@ Custom property                  | Description                            | Defa
         background: var(--app-drawer-scrim-background, rgba(0, 0, 0, 0.5));
       }
 
-      :host([opened]) > #scrim {
+      #scrim.visible {
         opacity: 1;
-      }
-
-      :host([opened][persistent]) > #scrim {
-        visibility: hidden;
-        /**
-         * NOTE(keanulee): Keep both opacity: 0 and visibility: hidden to prevent the
-         * scrim from showing when toggling between closed and opened/persistent.
-         */
-
-        opacity: 0;
       }
     </style>
 
     <div id="scrim" on-click="close"></div>
 
-    <div id="contentContainer">
+    <!-- HACK(keanulee): Bind attributes here (in addition to :host) for styling to workaround Safari
+    bug. https://bugs.webkit.org/show_bug.cgi?id=170762 -->
+    <div id="contentContainer" opened$="[[opened]]" persistent$="[[persistent]]" position$="[[position]]" swipe-open$="[[swipeOpen]]">
       <slot></slot>
     </div>
   </template>
 
-  <script>Polymer({is:'app-drawer',properties:{opened:{type:Boolean,value:!1,notify:!0,reflectToAttribute:!0},persistent:{type:Boolean,value:!1,reflectToAttribute:!0},transitionDuration:{type:Number,value:200},align:{type:String,value:'left'},position:{type:String,readOnly:!0,reflectToAttribute:!0},swipeOpen:{type:Boolean,value:!1,reflectToAttribute:!0},noFocusTrap:{type:Boolean,value:!1},disableSwipe:{type:Boolean,value:!1}},observers:['resetLayout(position, isAttached)','_resetPosition(align, isAttached)','_styleTransitionDuration(transitionDuration)','_openedPersistentChanged(opened, persistent)'],_translateOffset:0,_trackDetails:null,_drawerState:0,_boundEscKeydownHandler:null,_firstTabStop:null,_lastTabStop:null,attached:function(){Polymer.RenderStatus.afterNextRender(this,function(){this._boundEscKeydownHandler=this._escKeydownHandler.bind(this),this.addEventListener('keydown',this._tabKeydownHandler.bind(this)),this.listen(this,'track','_track'),this.setScrollDirection('y')}),this.fire('app-reset-layout')},detached:function(){document.removeEventListener('keydown',this._boundEscKeydownHandler)},open:function(){this.opened=!0},close:function(){this.opened=!1},toggle:function(){this.opened=!this.opened},getWidth:function(){return this.$.contentContainer.offsetWidth},_isRTL:function(){return'rtl'===window.getComputedStyle(this).direction},_resetPosition:function(){switch(this.align){case'start':return void this._setPosition(this._isRTL()?'right':'left');case'end':return void this._setPosition(this._isRTL()?'left':'right');}this._setPosition(this.align)},_escKeydownHandler:function(a){a.keyCode===27&&(a.preventDefault(),this.close())},_track:function(a){if(!(this.persistent||this.disableSwipe))switch(a.preventDefault(),a.detail.state){case'start':this._trackStart(a);break;case'track':this._trackMove(a);break;case'end':this._trackEnd(a);}},_trackStart:function(){this._drawerState=this._DRAWER_STATE.TRACKING,this._styleTransitionDuration(0),this.style.visibility='visible';var b=this.$.contentContainer.getBoundingClientRect();this._translateOffset='left'===this.position?b.left:b.right-window.innerWidth,this._trackDetails=[]},_trackMove:function(a){this._translateDrawer(a.detail.dx+this._translateOffset),this._trackDetails.push({dx:a.detail.dx,timeStamp:Date.now()})},_trackEnd:function(a){var b=a.detail.dx+this._translateOffset,c=this.getWidth(),e='left'===this.position,f=e?0<=b||b<=-c:0>=b||b>=c;if(!f){var g=this._trackDetails;if(this._trackDetails=null,this._flingDrawer(a,g),this._drawerState===this._DRAWER_STATE.FLINGING)return}var h=c/2;a.detail.dx<-h?this.opened='right'===this.position:a.detail.dx>h&&(this.opened='left'===this.position),f?this.debounce('_resetDrawerState',this._resetDrawerState):this.debounce('_resetDrawerState',this._resetDrawerState,this.transitionDuration),this._styleTransitionDuration(this.transitionDuration),this._resetDrawerTranslate(),this.style.visibility=''},_calculateVelocity:function(a,b){for(var f,c=Date.now(),g=0,h=b.length-1;g<=h;){var i=g+h>>1,j=b[i];j.timeStamp>=c-100?(f=j,h=i-1):g=i+1}if(f){var k=a.detail.dx-f.dx,l=c-f.timeStamp||1;return k/l}return 0},_flingDrawer:function(a,b){var c=this._calculateVelocity(a,b);if(!(Math.abs(c)<this._MIN_FLING_THRESHOLD)){this._drawerState=this._DRAWER_STATE.FLINGING;var k,e=a.detail.dx+this._translateOffset,f=this.getWidth(),g='left'===this.position,h=0<c;k=!h&&g?-(e+f):h&&!g?f-e:-e,h?(c=Math.max(c,this._MIN_TRANSITION_VELOCITY),this.opened='left'===this.position):(c=Math.min(c,-this._MIN_TRANSITION_VELOCITY),this.opened='right'===this.position);var l=this._FLING_INITIAL_SLOPE*k/c;this._styleTransitionDuration(l),this._styleTransitionTimingFunction(this._FLING_TIMING_FUNCTION),this._resetDrawerTranslate(),this.debounce('_resetDrawerState',this._resetDrawerState,l)}},_styleTransitionDuration:function(a){this.style.transitionDuration=a+'ms',this.$.contentContainer.style.transitionDuration=a+'ms',this.$.scrim.style.transitionDuration=a+'ms'},_styleTransitionTimingFunction:function(a){this.$.contentContainer.style.transitionTimingFunction=a,this.$.scrim.style.transitionTimingFunction=a},_translateDrawer:function(a){var b=this.getWidth();'left'===this.position?(a=Math.max(-b,Math.min(a,0)),this.$.scrim.style.opacity=1+a/b):(a=Math.max(0,Math.min(a,b)),this.$.scrim.style.opacity=1-a/b),this.translate3d(a+'px','0','0',this.$.contentContainer)},_resetDrawerTranslate:function(){this.$.scrim.style.opacity='',this.transform('',this.$.contentContainer)},_resetDrawerState:function(){var a=this._drawerState;a===this._DRAWER_STATE.FLINGING&&(this._styleTransitionDuration(this.transitionDuration),this._styleTransitionTimingFunction(''),this.style.visibility=''),this._drawerState=this.opened?this.persistent?this._DRAWER_STATE.OPENED_PERSISTENT:this._DRAWER_STATE.OPENED:this._DRAWER_STATE.CLOSED,a!==this._drawerState&&(this._drawerState===this._DRAWER_STATE.OPENED?(this._setKeyboardFocusTrap(),document.addEventListener('keydown',this._boundEscKeydownHandler),document.body.style.overflow='hidden'):(document.removeEventListener('keydown',this._boundEscKeydownHandler),document.body.style.overflow=''),a!==this._DRAWER_STATE.INIT&&this.fire('app-drawer-transitioned'))},resetLayout:function(){this.fire('app-reset-layout')},_setKeyboardFocusTrap:function(){if(!this.noFocusTrap){var a=['a[href]:not([tabindex="-1"])','area[href]:not([tabindex="-1"])','input:not([disabled]):not([tabindex="-1"])','select:not([disabled]):not([tabindex="-1"])','textarea:not([disabled]):not([tabindex="-1"])','button:not([disabled]):not([tabindex="-1"])','iframe:not([tabindex="-1"])','[tabindex]:not([tabindex="-1"])','[contentEditable=true]:not([tabindex="-1"])'].join(','),b=Polymer.dom(this).querySelectorAll(a);0<b.length?(this._firstTabStop=b[0],this._lastTabStop=b[b.length-1]):(this._firstTabStop=null,this._lastTabStop=null);var c=this.getAttribute('tabindex');c&&-1<parseInt(c,10)?this.focus():this._firstTabStop&&this._firstTabStop.focus()}},_tabKeydownHandler:function(a){if(!this.noFocusTrap){this._drawerState===this._DRAWER_STATE.OPENED&&a.keyCode===9&&(a.shiftKey?this._firstTabStop&&Polymer.dom(a).localTarget===this._firstTabStop&&(a.preventDefault(),this._lastTabStop.focus()):this._lastTabStop&&Polymer.dom(a).localTarget===this._lastTabStop&&(a.preventDefault(),this._firstTabStop.focus()))}},_openedPersistentChanged:function(){this.debounce('_resetDrawerState',this._resetDrawerState,this.transitionDuration)},_MIN_FLING_THRESHOLD:0.2,_MIN_TRANSITION_VELOCITY:1.2,_FLING_TIMING_FUNCTION:'cubic-bezier(0.667, 1, 0.667, 1)',_FLING_INITIAL_SLOPE:1.5,_DRAWER_STATE:{INIT:0,OPENED:1,OPENED_PERSISTENT:2,CLOSED:3,TRACKING:4,FLINGING:5}});</script>
+  <script>Polymer({is:'app-drawer',properties:{opened:{type:Boolean,value:!1,notify:!0,reflectToAttribute:!0},persistent:{type:Boolean,value:!1,reflectToAttribute:!0},transitionDuration:{type:Number,value:200},align:{type:String,value:'left'},position:{type:String,readOnly:!0,reflectToAttribute:!0},swipeOpen:{type:Boolean,value:!1,reflectToAttribute:!0},noFocusTrap:{type:Boolean,value:!1},disableSwipe:{type:Boolean,value:!1}},observers:['resetLayout(position, isAttached)','_resetPosition(align, isAttached)','_styleTransitionDuration(transitionDuration)','_openedPersistentChanged(opened, persistent)'],_translateOffset:0,_trackDetails:null,_drawerState:0,_boundEscKeydownHandler:null,_firstTabStop:null,_lastTabStop:null,attached:function(){Polymer.RenderStatus.afterNextRender(this,function(){this._boundEscKeydownHandler=this._escKeydownHandler.bind(this),this.addEventListener('keydown',this._tabKeydownHandler.bind(this)),this.listen(this,'track','_track'),this.setScrollDirection('y')}),this.fire('app-reset-layout')},detached:function(){document.removeEventListener('keydown',this._boundEscKeydownHandler)},open:function(){this.opened=!0},close:function(){this.opened=!1},toggle:function(){this.opened=!this.opened},getWidth:function(){return this.$.contentContainer.offsetWidth},_isRTL:function(){return'rtl'===window.getComputedStyle(this).direction},_resetPosition:function(){switch(this.align){case'start':return void this._setPosition(this._isRTL()?'right':'left');case'end':return void this._setPosition(this._isRTL()?'left':'right');}this._setPosition(this.align)},_escKeydownHandler:function(a){a.keyCode===27&&(a.preventDefault(),this.close())},_track:function(a){if(!(this.persistent||this.disableSwipe))switch(a.preventDefault(),a.detail.state){case'start':this._trackStart(a);break;case'track':this._trackMove(a);break;case'end':this._trackEnd(a);}},_trackStart:function(){this._drawerState=this._DRAWER_STATE.TRACKING,this._styleTransitionDuration(0),this.style.visibility='visible';var b=this.$.contentContainer.getBoundingClientRect();this._translateOffset='left'===this.position?b.left:b.right-window.innerWidth,this._trackDetails=[]},_trackMove:function(a){this._translateDrawer(a.detail.dx+this._translateOffset),this._trackDetails.push({dx:a.detail.dx,timeStamp:Date.now()})},_trackEnd:function(a){var b=a.detail.dx+this._translateOffset,c=this.getWidth(),e='left'===this.position,f=e?0<=b||b<=-c:0>=b||b>=c;if(!f){var g=this._trackDetails;if(this._trackDetails=null,this._flingDrawer(a,g),this._drawerState===this._DRAWER_STATE.FLINGING)return}var h=c/2;a.detail.dx<-h?this.opened='right'===this.position:a.detail.dx>h&&(this.opened='left'===this.position),f?this.debounce('_resetDrawerState',this._resetDrawerState):this.debounce('_resetDrawerState',this._resetDrawerState,this.transitionDuration),this._styleTransitionDuration(this.transitionDuration),this._resetDrawerTranslate(),this.style.visibility=''},_calculateVelocity:function(a,b){for(var f,c=Date.now(),g=0,h=b.length-1;g<=h;){var i=g+h>>1,j=b[i];j.timeStamp>=c-100?(f=j,h=i-1):g=i+1}if(f){var k=a.detail.dx-f.dx,l=c-f.timeStamp||1;return k/l}return 0},_flingDrawer:function(a,b){var c=this._calculateVelocity(a,b);if(!(Math.abs(c)<this._MIN_FLING_THRESHOLD)){this._drawerState=this._DRAWER_STATE.FLINGING;var k,e=a.detail.dx+this._translateOffset,f=this.getWidth(),g='left'===this.position,h=0<c;k=!h&&g?-(e+f):h&&!g?f-e:-e,h?(c=Math.max(c,this._MIN_TRANSITION_VELOCITY),this.opened='left'===this.position):(c=Math.min(c,-this._MIN_TRANSITION_VELOCITY),this.opened='right'===this.position);var l=this._FLING_INITIAL_SLOPE*k/c;this._styleTransitionDuration(l),this._styleTransitionTimingFunction(this._FLING_TIMING_FUNCTION),this._resetDrawerTranslate(),this.debounce('_resetDrawerState',this._resetDrawerState,l)}},_styleTransitionDuration:function(a){this.style.transitionDuration=a+'ms',this.$.contentContainer.style.transitionDuration=a+'ms',this.$.scrim.style.transitionDuration=a+'ms'},_styleTransitionTimingFunction:function(a){this.$.contentContainer.style.transitionTimingFunction=a,this.$.scrim.style.transitionTimingFunction=a},_translateDrawer:function(a){var b=this.getWidth();'left'===this.position?(a=Math.max(-b,Math.min(a,0)),this.$.scrim.style.opacity=1+a/b):(a=Math.max(0,Math.min(a,b)),this.$.scrim.style.opacity=1-a/b),this.translate3d(a+'px','0','0',this.$.contentContainer)},_resetDrawerTranslate:function(){this.$.scrim.style.opacity='',this.transform('',this.$.contentContainer)},_resetDrawerState:function(){var a=this._drawerState;a===this._DRAWER_STATE.FLINGING&&(this._styleTransitionDuration(this.transitionDuration),this._styleTransitionTimingFunction(''),this.style.visibility=''),this._drawerState=this.opened?this.persistent?this._DRAWER_STATE.OPENED_PERSISTENT:this._DRAWER_STATE.OPENED:this._DRAWER_STATE.CLOSED,a!==this._drawerState&&(this._drawerState===this._DRAWER_STATE.OPENED?(this._setKeyboardFocusTrap(),document.addEventListener('keydown',this._boundEscKeydownHandler),document.body.style.overflow='hidden'):(document.removeEventListener('keydown',this._boundEscKeydownHandler),document.body.style.overflow=''),a!==this._DRAWER_STATE.INIT&&this.fire('app-drawer-transitioned'))},resetLayout:function(){this.fire('app-reset-layout')},_setKeyboardFocusTrap:function(){if(!this.noFocusTrap){var a=['a[href]:not([tabindex="-1"])','area[href]:not([tabindex="-1"])','input:not([disabled]):not([tabindex="-1"])','select:not([disabled]):not([tabindex="-1"])','textarea:not([disabled]):not([tabindex="-1"])','button:not([disabled]):not([tabindex="-1"])','iframe:not([tabindex="-1"])','[tabindex]:not([tabindex="-1"])','[contentEditable=true]:not([tabindex="-1"])'].join(','),b=Polymer.dom(this).querySelectorAll(a);0<b.length?(this._firstTabStop=b[0],this._lastTabStop=b[b.length-1]):(this._firstTabStop=null,this._lastTabStop=null);var c=this.getAttribute('tabindex');c&&-1<parseInt(c,10)?this.focus():this._firstTabStop&&this._firstTabStop.focus()}},_tabKeydownHandler:function(a){if(!this.noFocusTrap){this._drawerState===this._DRAWER_STATE.OPENED&&a.keyCode===9&&(a.shiftKey?this._firstTabStop&&Polymer.dom(a).localTarget===this._firstTabStop&&(a.preventDefault(),this._lastTabStop.focus()):this._lastTabStop&&Polymer.dom(a).localTarget===this._lastTabStop&&(a.preventDefault(),this._firstTabStop.focus()))}},_openedPersistentChanged:function(a,b){this.toggleClass('visible',a&&!b,this.$.scrim),this.debounce('_resetDrawerState',this._resetDrawerState,this.transitionDuration)},_MIN_FLING_THRESHOLD:0.2,_MIN_TRANSITION_VELOCITY:1.2,_FLING_TIMING_FUNCTION:'cubic-bezier(0.667, 1, 0.667, 1)',_FLING_INITIAL_SLOPE:1.5,_DRAWER_STATE:{INIT:0,OPENED:1,OPENED_PERSISTENT:2,CLOSED:3,TRACKING:4,FLINGING:5}});</script>
 </dom-module>

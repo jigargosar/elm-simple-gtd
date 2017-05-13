@@ -42,9 +42,9 @@ script:
   - polymer --version
   - echo "polymer build in"
   - pwd
-  - polymer build
-  - echo "content of app/bower_components/paper-styles/element-styles/"
-  - ls -al app/bower_components/paper-styles/element-styles/
+  - ../node_modules/.bin/polymer build
+  - echo "content of bower_components/paper-styles/element-styles/"
+  - ls -al bower_components/paper-styles/element-styles/
   - exit 1
 #  - sysconfcpus -n 2 yarn build
 

@@ -9,6 +9,7 @@ echo "content of app/bower_components" &&
 ls -al app/bower_components &&
 cross-env NODE_ENV=production webpack -p --progress &&
 cd app &&
+pwd &&
 ls -al . &&
 ls -al bower_components &&
 polymer --version &&

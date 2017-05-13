@@ -10,6 +10,7 @@
     "*.ico",
     "common.js",
     "main.js",
+    "firebase-messaging-sw.js",
     "*.js.map",
     "CNAME"
   ],

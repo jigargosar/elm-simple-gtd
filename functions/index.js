@@ -49,7 +49,7 @@ exports.monitorPushRequests =
             if (hasReminder) {
                 return createAdminNotificationRef.set({uid: uid, todo: todo, time: todo.reminder.at})
             } else {
-                return Promise.all([event.data.ref.set(null), createAdminNotificationRef.set(null)])
+                return Promise.all([event.data.ref.set(null), createAdminNotificationRef().set(null)])
             }
         })
 

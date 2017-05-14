@@ -12,12 +12,16 @@ import WebComponents exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Json.Encode.Extra as E
 
 
 port signIn : () -> Cmd msg
 
 
 port signOut : () -> Cmd msg
+
+
+port fireDataWrite : ( String, E.Value ) -> Cmd msg
 
 
 type alias UserModel =
@@ -99,6 +103,10 @@ type alias FCMToken =
     Maybe String
 
 
+encodeFCMToken =
+    E.maybe E.string
+
+
 customSw =
     boolProperty "customSw" True
 
@@ -107,5 +115,5 @@ type alias AppAttributes =
     List ( String, String )
 
 
-setTokenCmd userId fcmToken =
-    Cmd.none
+setTokenCmd uid fcmToken =
+    fireDataWrite ( "/users/" ++ uid ++ "/token", encodeFCMToken fcmToken )

@@ -35,20 +35,21 @@ exports.testPush = functions.https.onRequest((req, res) => {
 
 
 function sendPushToAllUsersWithRegistrationToken (userMap) {
-    return Promise.all(userMap.map(function (userEntry) {
+    const promiseList = []
+    userMap.forEach(function (userEntry) {
         const userId = userEntry.key
         const userData = userEntry.val()
         if (userData.token) {
-            return admin
+            const promise = admin
                 .messaging()
                 .sendToDevice(
                     userData.token,
                     {data: {id: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"}},
                     {timeToLive: (10 * minute), priority: "high"}
                 )
-        } else {
-            return Promise.resolve("no token found")
+            promiseList.push(promise)
         }
-    }))
+    })
+    return Promise.all(promiseList)
 
 }

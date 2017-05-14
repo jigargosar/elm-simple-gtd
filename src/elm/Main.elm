@@ -233,21 +233,26 @@ update msg =
                         >> focusSelectorIfNoFocusCmd ".entity-list > [tabindex=0]"
 
                 SaveCurrentForm ->
-                    Return.andThen
-                        (\model ->
-                            let
-                                cmd =
-                                    Model.getMaybeEditTodoReminderForm model
-                                        ?|> (.id)
-                                        ?+> (Model.findTodoById # newModel)
-                                        ?|> (scheduleReminderPush # newModel)
-                                        ?= Cmd.none
-
-                                newModel =
-                                    Model.saveCurrentForm model
-                            in
-                                ( newModel, cmd )
+                    Return.map
+                        (apply2
+                            ( Model.getMaybeEditTodoReminderForm >>? .id
+                            , Model.saveCurrentForm
+                            )
                         )
+                        >> Return.andThen
+                            (\( maybeTodoReminderFormId, model ) ->
+                                let
+                                    scheduleReminderPush2 maybeTodoId model =
+                                        maybeTodoId
+                                            ?+> (Model.findTodoById # model)
+                                            ?|> (scheduleReminderPush # model)
+                                            ?= Cmd.none
+
+                                    cmd =
+                                        scheduleReminderPush2 maybeTodoReminderFormId model
+                                in
+                                    ( model, cmd )
+                            )
                         >> andThenUpdate DeactivateEditingMode
 
                 NewTodo ->

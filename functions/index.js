@@ -24,13 +24,6 @@ exports.testPush = functions.https.onRequest((req, res) => {
                 .then(sendTestPushToAllUsersWithRegistrationToken)
                 .then(arr => res.send(arr))
 
-    /*return admin.messaging()
-     .sendToDevice(
-     "fs_Fhp9WAGc:APA91bH9WAT9nfgn1XJhrkZtxojLOlX3o6fdA6oJ0U2ZMPaOFrDzfzy7VVuwOpUeT2YGrHf2eN63arSVwkDpZeXywP5bpgYT-ntJfyf1bcwiErmF72Uh2Bi__nlO61L0oOXxSDEsLRWs",
-     {data: {id: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"}},
-     {timeToLive: (10 * minute), priority: "high"}
-     )
-     .then(() => res.send("push sent"))*/
 });
 
 function sendTestPushToAllUsersWithRegistrationToken(userMap) {
@@ -56,25 +49,6 @@ function sendTestPushToAllUsersWithRegistrationToken(userMap) {
 function createNotificationRef(uid, todoId) {
     return admin.database().ref("/notifications/" + uid + "---" + todoId)
 }
-
-// exports.monitorPushRequests =
-//     functions
-//         .database.ref('/users/{uid}/notifications/{todoId}')
-//         .onWrite(event => {
-//             const todo = event.data.val()
-//             if (!todo) return;
-//             const uid = event.params.uid
-//             const todoId = event.params.todoId
-//             const hasReminder = todo.reminder && todo.reminder.at
-//             const adminNotificationRef = createNotificationRef(uid, todoId)
-//             if (hasReminder) {
-//                 return adminNotificationRef.set({uid: uid, todo: todo, time: todo.reminder.at})
-//             } else {
-//                 return Promise.all([event.data.ref.set(null), adminNotificationRef.set(null)])
-//             }
-//         })
-
-
 
 exports.notificationCorn = functions.https.onRequest((req, res) => {
     return admin

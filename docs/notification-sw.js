@@ -127,8 +127,7 @@ function postMessage(client, event) {
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here, other Firebase libraries
 // are not available in the service worker.
-importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js', 'https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js', 'bower_components/pouchdb/dist/pouchdb.js');
 
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
@@ -154,14 +153,42 @@ self.addEventListener('push', function (event) {
     console.log('[Service Worker] Push Received.');
     console.log("[Service Worker] Push had this data: \"" + event.data.text() + "\"");
 
-    var title = 'Push Codelab';
-    var options = {
-        body: 'Yay it works.',
-        sound: "/alarm.ogg",
-        timestamp: 0
-    };
+    try {
+        var data = event.data.json().data;
+        console.log("[Service Worker] Push had this json: ", data);
+        var todoId = data.todoId;
+        data.id = todoId;
 
-    event.waitUntil(self.registration.showNotification(title, options));
+        var todoDB = new PouchDB("todo-db");
+
+        event.waitUntil(todoDB.get(todoId).then(function (todo) {
+            console.log("pdb found todo", todo);
+
+            var title = todoId;
+            var notificationOptions = {
+                requiresInteraction: true,
+                sticky: true,
+                renotify: true,
+                tag: data.todoId,
+                vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
+                sound: "/alarm.ogg",
+                actions: [{ title: "Mark Done", action: "mark-done" }, { title: "Snooze", action: "snooze" }],
+                body: todo.text,
+                data: data,
+                timestamp: data.timestamp
+            };
+            return self.registration.showNotification(title, notificationOptions);
+        }));
+    } catch (e) {
+        console.warn(e);
+        var title = 'Push Codelab';
+        var options = {
+            body: 'Yay it works.',
+            sound: "/alarm.ogg",
+            timestamp: 0
+        };
+        event.waitUntil(self.registration.showNotification(title, options));
+    }
 });
 
 // messaging.setBackgroundMessageHandler(function (payload) {

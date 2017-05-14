@@ -56,7 +56,7 @@ function postMessage(client, event) {
 importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js',
     'https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js',
     'bower_components/pouchdb/dist/pouchdb.js',
-    'bower_components/pouchdb/dist/pouchdb.find.js',
+    // 'bower_components/pouchdb/dist/pouchdb.find.js',
 );
 
 // Initialize the Firebase app in the service worker by passing in the

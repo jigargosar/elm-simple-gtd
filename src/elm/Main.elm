@@ -241,17 +241,7 @@ update msg =
                         )
                         >> Return.andThen
                             (\( maybeTodoReminderFormId, model ) ->
-                                let
-                                    scheduleReminderPush2 maybeTodoId model =
-                                        maybeTodoId
-                                            ?+> (Model.findTodoById # model)
-                                            ?|> (scheduleReminderPush # model)
-                                            ?= Cmd.none
-
-                                    cmd =
-                                        scheduleReminderPush2 maybeTodoReminderFormId model
-                                in
-                                    ( model, cmd )
+                                ( model, scheduleReminderPushCmd maybeTodoReminderFormId model )
                             )
                         >> andThenUpdate DeactivateEditingMode
 
@@ -429,8 +419,8 @@ firebaseUpdateTokenCmd model =
     Model.getMaybeUserId model ?|> Firebase.setTokenCmd # model.fcmToken ?= Cmd.none
 
 
-scheduleReminderPush : Todo.Model -> Model -> Cmd msg
-scheduleReminderPush todo model =
+scheduleReminderPushHelp : Todo.Model -> Model -> Cmd msg
+scheduleReminderPushHelp todo model =
     Model.getMaybeUserId model
         ?|> (\uid ->
                 Firebase.schedulePushCmd
@@ -438,4 +428,11 @@ scheduleReminderPush todo model =
                     (Document.getId todo)
                     (Store.encodeDoc todo model.todoStore)
             )
+        ?= Cmd.none
+
+
+scheduleReminderPushCmd maybeTodoId model =
+    maybeTodoId
+        ?+> (Model.findTodoById # model)
+        ?|> (scheduleReminderPushHelp # model)
         ?= Cmd.none

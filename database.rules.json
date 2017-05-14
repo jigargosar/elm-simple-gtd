@@ -5,6 +5,11 @@
         ".read": "$uid === auth.uid",
         ".write": "$uid === auth.uid"
       }
+    },
+    "notifications": {
+      ".indexOn": [
+        "time"
+      ]
     }
   }
 }

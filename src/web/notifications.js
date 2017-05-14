@@ -3,14 +3,14 @@ import _ from "ramda"
 export const setup = setupNotifications
 
 async function setupNotifications(app) {
-    console.log("ssssss")
+    console.info("Setting up notification ports and sw registration")
     if (!'serviceWorker' in navigator) {
-        console.warn("servieWorker not found in navigator")
+        console.warn("serviceWorker not found in navigator")
         return
     }
 
-    // const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
-    const swScriptPath = "/notification-sw.js"
+    const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
+    // const swScriptPath = "/notification-sw.js"
 
     navigator.serviceWorker.addEventListener('message', event => {
         const data = event.data;
@@ -21,18 +21,20 @@ async function setupNotifications(app) {
             app.ports["notificationClicked"].send(data)
         }
     });
+
+    console.info("navigator.serviceWorker.register: ", swScriptPath)
     const reg = await navigator.serviceWorker.register(swScriptPath)
 
     const intervalId = setInterval(()=>{
-        let messaging = document.getElementById('fb-messaging');
+        let messaging = document.getElementById("fb-messaging");
         if(!messaging) {
-            console.log("messaging not found")
+            console.warn(`document.getElementById("fb-messaging")`, messaging)
             return
         }
-        console.log("activating sw")
+        console.debug("messaging.activate(reg)")
         messaging.activate(reg)
         clearTimeout(intervalId);
-    },2000)
+    },0)
 
 
     app.ports["showNotification"].subscribe(showNotification(reg))

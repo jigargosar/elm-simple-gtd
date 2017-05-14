@@ -15,8 +15,8 @@ import DB from "./pouchdb-wrapper"
 
 //noinspection JSUnresolvedVariable
 const firebaseConfig =
-    // IS_DEVELOPMENT_ENV ?
-    //     require("./config/dev/firebase") :
+    IS_DEVELOPMENT_ENV ?
+        require("./config/dev/firebase") :
         require("./config/prod/firebase")
 
 const developmentMode =  IS_DEVELOPMENT_ENV

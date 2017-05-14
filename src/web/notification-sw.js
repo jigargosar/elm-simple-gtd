@@ -1,3 +1,5 @@
+"use strict"
+
 // self.importScripts("./common.js")
 
 // self.addEventListener('fetch', function (event) {
@@ -84,18 +86,29 @@ self.addEventListener('push', function (event) {
     try {
         const data = event.data.json()
         console.log(`[Service Worker] Push had this json: `, data)
+        const todoId = data.todoId
+        // const todoId = "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"
+
 
         const todoDB = new PouchDB("todo-db")
-        const todo = todoDB.find({selector: {"_id": {"$eq": data.todoId}}})
-        console.log("pdb found todo",todo)
 
-        const title = '';
-        const options = {
-            body: todo.text,
-            sound: "/alarm.ogg",
-            timestamp: data.timestamp
-        };
-        event.waitUntil(self.registration.showNotification(title, options));
+        event.waitUntil(
+            todoDB
+                // .find({selector: {"_id": {"$eq": todoId}}})
+                .get(todoId)
+                .then(todo => {
+                    console.log("pdb found todo", todo)
+
+                    const title = todoId;
+                    const options = {
+                        body: todo.text,
+                        sound: "/alarm.ogg",
+                        timestamp: data.timestamp
+                        // timestamp: 0
+                    };
+                    return self.registration.showNotification(title, options);
+                }))
+
 
     } catch (e) {
         console.warn(e);

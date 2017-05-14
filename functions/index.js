@@ -20,9 +20,9 @@ exports.testPush = functions.https.onRequest((req, res) => {
     //     // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
     //     res.redirect(303, snapshot.ref);
     // });
-    admin.database().ref("/users").once("value")
-         .then(sendPushToAllUsersWithRegistrationToken)
-         .then(arr => res.send(arr))
+    return admin.database().ref("/users").once("value")
+                .then(sendPushToAllUsersWithRegistrationToken)
+                .then(arr => res.send(arr))
 
     /*return admin.messaging()
      .sendToDevice(
@@ -34,17 +34,13 @@ exports.testPush = functions.https.onRequest((req, res) => {
 });
 
 exports.monitorPushRequests =
-    functions.database.ref('/users/${uid}/notifications/${timestamp}')
-             .onWrite(event => {
-                 // Grab the current value of what was written to the Realtime Database.
-                 const original = event.data.val();
-                 console.log('Uppercasing', event.params.pushId, original);
-                 const uppercase = original.toUpperCase();
-                 // You must return a Promise when performing asynchronous tasks inside a Functions such as
-                 // writing to the Firebase Realtime Database.
-                 // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
-                 return event.data.ref.parent.child('uppercase').set(uppercase);
-             })
+    functions
+        .database.ref('/users/${uid}/notifications/${todoId}')
+        .onWrite(event => {
+            const todo = event.data.val()
+            const val = todo && todo.reminder && todo.reminder.at ? todo : null
+            return event.data.ref.set(val)
+        })
 
 function sendPushToAllUsersWithRegistrationToken(userMap) {
     const promiseList = []

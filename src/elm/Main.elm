@@ -233,7 +233,44 @@ update msg =
                         >> focusSelectorIfNoFocusCmd ".entity-list > [tabindex=0]"
 
                 SaveCurrentForm ->
-                    Return.map (Model.saveCurrentForm)
+                    Return.andThen
+                        (\model ->
+                            let
+                                maybeTodoId =
+                                    Model.getMaybeEditTodoReminderForm model
+                                        ?|> (.id)
+
+                                _ =
+                                    Model.getMaybeEditTodoReminderForm model
+                                        ?+> (.id >> Model.findTodoById # model)
+                                        ?+> Todo.getMaybeReminderTime
+
+                                maybeOldNewTodoPair : Maybe ( Todo.Model, Todo.Model )
+                                maybeOldNewTodoPair =
+                                    maybeTodoId
+                                        ?|> apply2 ( Model.findTodoById # model, Model.findTodoById # newModel )
+                                        ?+> maybe2Tuple
+
+                                todoPairToSchedulePushNotificationCmd todoPair =
+                                    todoPair
+                                        |> Tuple2.mapBoth (Todo.getMaybeReminderTime)
+                                        |> (\( oldTime, newTime ) ->
+                                                if oldTime /= newTime then
+                                                    todoPair |> Tuple.second |> schedulePushCmd
+                                                else
+                                                    Cmd.none
+                                           )
+
+                                cmd =
+                                    maybeOldNewTodoPair
+                                        ?|> todoPairToSchedulePushNotificationCmd
+                                        ?= Cmd.none
+
+                                newModel =
+                                    Model.saveCurrentForm model
+                            in
+                                ( newModel, cmd )
+                        )
                         >> andThenUpdate DeactivateEditingMode
 
                 NewTodo ->
@@ -408,3 +445,7 @@ onGlobalKeyUp key =
 
 firebaseUpdateTokenCmd model =
     Model.getMaybeUserId model ?|> Firebase.setTokenCmd # model.fcmToken ?= Cmd.none
+
+
+schedulePushCmd todo =
+    Cmd.none

@@ -420,6 +420,15 @@ saveCurrentForm model =
             model
 
 
+getMaybeEditTodoReminderForm model =
+    case model.editMode of
+        EditMode.EditTodoReminder form ->
+            Just form
+
+        _ ->
+            Nothing
+
+
 setTodoContextOrProjectBasedOnCurrentView todoId model =
     let
         maybeTodoUpdateAction =

@@ -20,11 +20,35 @@ exports.testPush = functions.https.onRequest((request, response) => {
     //     // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
     //     res.redirect(303, snapshot.ref);
     // });
-    return admin.messaging()
-         .sendToDevice(
-             "fs_Fhp9WAGc:APA91bH9WAT9nfgn1XJhrkZtxojLOlX3o6fdA6oJ0U2ZMPaOFrDzfzy7VVuwOpUeT2YGrHf2eN63arSVwkDpZeXywP5bpgYT-ntJfyf1bcwiErmF72Uh2Bi__nlO61L0oOXxSDEsLRWs",
-             {data: {id: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"}},
-             {timeToLive: (10 * minute), priority:"high"}
-         )
-        .then(()=>response.send("push sent"))
+    admin.database().ref("/users").once("value")
+         .then(sendPushToAllUsersWithRegistrationToken)
+         .then(arr => response.send(arr))
+
+    /*return admin.messaging()
+     .sendToDevice(
+     "fs_Fhp9WAGc:APA91bH9WAT9nfgn1XJhrkZtxojLOlX3o6fdA6oJ0U2ZMPaOFrDzfzy7VVuwOpUeT2YGrHf2eN63arSVwkDpZeXywP5bpgYT-ntJfyf1bcwiErmF72Uh2Bi__nlO61L0oOXxSDEsLRWs",
+     {data: {id: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"}},
+     {timeToLive: (10 * minute), priority: "high"}
+     )
+     .then(() => response.send("push sent"))*/
 });
+
+
+function sendPushToAllUsersWithRegistrationToken (userMap) {
+    return Promise.all(userMap.map(function (userEntry) {
+        const userId = userEntry.key
+        const userData = userEntry.val()
+        if (userData.token) {
+            return admin
+                .messaging()
+                .sendToDevice(
+                    userData.token,
+                    {data: {id: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"}},
+                    {timeToLive: (10 * minute), priority: "high"}
+                )
+        } else {
+            return Promise.resolve("no token found")
+        }
+    }))
+
+}

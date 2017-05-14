@@ -15,7 +15,8 @@
     "CNAME"
   ],
   "extraDependencies": [
-    "notification-sw.js"
+    "notification-sw.js",
+    "bower_components/pouchdb/dist/pouchdb.js"
   ],
   "builds": [
     {

@@ -1,3 +1,6 @@
+## v0.9.4 - 2017-05-14
+* add firebase functions to send push notifications 
+
 ## v0.9.2 - 2017-05-14
 * fixed fcm connection error issue by clearing cloudflare cache. 
   * We should consider hosting on firebase itself.   

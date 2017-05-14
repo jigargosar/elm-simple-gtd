@@ -35,7 +35,7 @@ exports.testPush = functions.https.onRequest((req, res) => {
 
 exports.monitorPushRequests =
     functions
-        .database.ref('/users/${uid}/notifications/${todoId}')
+        .database.ref('/users/{uid}/notifications/{todoId}')
         .onWrite(event => {
             const todo = event.data.val()
             if(!todo) return;

@@ -107,6 +107,12 @@ async function boot() {
             .catch(console.error)
     })
 
+    app.ports["fireDataWrite"].subscribe(([path, value]) => {
+        console.log(`app.database().ref(path).set(value)`, {path, value})
+        const ref = $("firebase-app")[0].app.database().ref(path);
+        ref.set(value)
+    })
+
     app.ports["signOut"].subscribe(() => {
         let googleAuth = document.getElementById('google-auth');
         googleAuth

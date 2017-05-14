@@ -82,6 +82,15 @@ getMaybeUserProfile user =
             userModel.providerData |> List.head
 
 
+getMaybeUserId user =
+    case user of
+        NotLoggedIn ->
+            Nothing
+
+        LoggedIn userModel ->
+            userModel.id |> Just
+
+
 getPhotoURL =
     .photoURL
 

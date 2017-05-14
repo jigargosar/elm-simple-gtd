@@ -82,6 +82,10 @@ getMaybeUserProfile =
     .user >> Firebase.getMaybeUserProfile
 
 
+getMaybeUserId =
+    .user >> Firebase.getMaybeUserId
+
+
 setUser user model =
     { model | user = user }
 

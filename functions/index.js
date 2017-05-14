@@ -33,26 +33,6 @@ exports.testPush = functions.https.onRequest((req, res) => {
      .then(() => res.send("push sent"))*/
 });
 
-function createNotificationRef(uid, todoId) {
-    return admin.database().ref("/notifications/" + uid + "---" + todoId)
-}
-// exports.monitorPushRequests =
-//     functions
-//         .database.ref('/users/{uid}/notifications/{todoId}')
-//         .onWrite(event => {
-//             const todo = event.data.val()
-//             if (!todo) return;
-//             const uid = event.params.uid
-//             const todoId = event.params.todoId
-//             const hasReminder = todo.reminder && todo.reminder.at
-//             const adminNotificationRef = createNotificationRef(uid, todoId)
-//             if (hasReminder) {
-//                 return adminNotificationRef.set({uid: uid, todo: todo, time: todo.reminder.at})
-//             } else {
-//                 return Promise.all([event.data.ref.set(null), adminNotificationRef.set(null)])
-//             }
-//         })
-
 function sendTestPushToAllUsersWithRegistrationToken(userMap) {
     const promiseList = []
     userMap.forEach(function (userEntry) {
@@ -73,6 +53,29 @@ function sendTestPushToAllUsersWithRegistrationToken(userMap) {
 }
 
 
+function createNotificationRef(uid, todoId) {
+    return admin.database().ref("/notifications/" + uid + "---" + todoId)
+}
+
+// exports.monitorPushRequests =
+//     functions
+//         .database.ref('/users/{uid}/notifications/{todoId}')
+//         .onWrite(event => {
+//             const todo = event.data.val()
+//             if (!todo) return;
+//             const uid = event.params.uid
+//             const todoId = event.params.todoId
+//             const hasReminder = todo.reminder && todo.reminder.at
+//             const adminNotificationRef = createNotificationRef(uid, todoId)
+//             if (hasReminder) {
+//                 return adminNotificationRef.set({uid: uid, todo: todo, time: todo.reminder.at})
+//             } else {
+//                 return Promise.all([event.data.ref.set(null), adminNotificationRef.set(null)])
+//             }
+//         })
+
+
+
 exports.notificationCorn = functions.https.onRequest((req, res) => {
     return admin
         .database().ref("/notifications")
@@ -83,7 +86,6 @@ exports.notificationCorn = functions.https.onRequest((req, res) => {
         .then(arr => res.send(arr))
 
 })
-
 
 function sendPushNotifications(notificationMap) {
     const promiseList = []

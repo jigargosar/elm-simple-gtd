@@ -38,7 +38,8 @@ exports.monitorPushRequests =
         .database.ref('/users/${uid}/notifications/${todoId}')
         .onWrite(event => {
             const todo = event.data.val()
-            const hasReminder = todo && todo.reminder && todo.reminder.at
+            if(!todo) return;
+            const hasReminder = todo.reminder && todo.reminder.at
             if(!hasReminder) return event.data.ref.set(null)
         })
 

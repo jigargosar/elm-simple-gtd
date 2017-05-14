@@ -74,15 +74,19 @@ firebase.initializeApp({
 // });
 
 
-self.addEventListener('push', function(event) {
+self.addEventListener('push', function (event) {
     console.log('[Service Worker] Push Received.');
-    console.log(`[Service Worker] Push had this data: "${event.data.text()}"`, event.data);
+    console.log(`[Service Worker] Push had this data: "${event.data.text()}"`)
+
+    try {
+        console.log(`[Service Worker] Push had this json: `, event.data.json())
+    } catch (e) {console.warn(e) }
 
     const title = 'Push Codelab';
     const options = {
         body: 'Yay it works.',
         sound: "/alarm.ogg",
-        timestamp:0
+        timestamp: 0
     };
 
     event.waitUntil(self.registration.showNotification(title, options));

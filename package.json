@@ -1,6 +1,6 @@
 {
   "name": "simplegtd.com",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "main": "index.js",
   "license": "MIT",
   "engines": {
@@ -14,7 +14,7 @@
     "install-elm": "which -a elm ; elm-package install -y",
     "postinstall": "bash -c \"which -a elm && elm-package install -y && bower install \"",
     "bump": "npm_bump --auto --auto-fallback patch --skip-push",
-    "postbump":"npm run build",
+    "postbump": "npm run build",
     "dev": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server",
     "hot": "cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline",
     "hot-hot": "nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"",

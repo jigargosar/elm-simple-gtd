@@ -33,25 +33,25 @@ exports.testPush = functions.https.onRequest((req, res) => {
      .then(() => res.send("push sent"))*/
 });
 
-function createAdminNotificationRef(uid, todoId) {
+function createNotificationRef(uid, todoId) {
     return admin.database().ref("/notifications/" + uid + "---" + todoId)
 }
-exports.monitorPushRequests =
-    functions
-        .database.ref('/users/{uid}/notifications/{todoId}')
-        .onWrite(event => {
-            const todo = event.data.val()
-            if (!todo) return;
-            const uid = event.params.uid
-            const todoId = event.params.todoId
-            const hasReminder = todo.reminder && todo.reminder.at
-            const adminNotificationRef = createAdminNotificationRef(uid, todoId)
-            if (hasReminder) {
-                return adminNotificationRef.set({uid: uid, todo: todo, time: todo.reminder.at})
-            } else {
-                return Promise.all([event.data.ref.set(null), adminNotificationRef.set(null)])
-            }
-        })
+// exports.monitorPushRequests =
+//     functions
+//         .database.ref('/users/{uid}/notifications/{todoId}')
+//         .onWrite(event => {
+//             const todo = event.data.val()
+//             if (!todo) return;
+//             const uid = event.params.uid
+//             const todoId = event.params.todoId
+//             const hasReminder = todo.reminder && todo.reminder.at
+//             const adminNotificationRef = createNotificationRef(uid, todoId)
+//             if (hasReminder) {
+//                 return adminNotificationRef.set({uid: uid, todo: todo, time: todo.reminder.at})
+//             } else {
+//                 return Promise.all([event.data.ref.set(null), adminNotificationRef.set(null)])
+//             }
+//         })
 
 function sendTestPushToAllUsersWithRegistrationToken(userMap) {
     const promiseList = []
@@ -76,8 +76,8 @@ function sendTestPushToAllUsersWithRegistrationToken(userMap) {
 exports.notificationCorn = functions.https.onRequest((req, res) => {
     return admin
         .database().ref("/notifications")
-        .orderByChild("time")
-        .endAt(Date.now() + (10 * minute))
+        .orderByChild("timestamp")
+        .endAt(Date.now() + (5 * minute))
         .once("value")
         .then(sendPushNotifications)
         .then(arr => res.send(arr))
@@ -101,13 +101,13 @@ function sendPushNotifications(notificationMap) {
 const sendPush = notificationData => tokenSnapshot => {
     const token = tokenSnapshot.val()
     let promise = null
+    const {todoId, timestamp, uid} = notificationData
     if (token) {
-        const {_id, text} = notificationData.todo
         promise =admin
             .messaging()
             .sendToDevice(
                 token,
-                {data: {_id, text}},
+                {data: {todoId, timestamp:""+timestamp, uid}},
                 {timeToLive: (10 * minute), priority: "high"}
             )
     } else {
@@ -116,12 +116,6 @@ const sendPush = notificationData => tokenSnapshot => {
             notificationData: notificationData
         })
     }
-    return Promise.all([promise, removeNotification(notificationData)])
+    return Promise.all([promise, createNotificationRef(uid, todoId).set(null)])
 }
 
-const removeNotification = ({uid, todo:{_id}})=>{
-    const todoId = _id
-    return Promise.all([admin.database().ref(`/users/${uid}/notifications/${todoId}`).set(null)
-    , createAdminNotificationRef(uid, todoId).set(null)])
-
-}

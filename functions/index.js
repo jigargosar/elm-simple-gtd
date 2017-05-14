@@ -38,8 +38,8 @@ exports.monitorPushRequests =
         .database.ref('/users/${uid}/notifications/${todoId}')
         .onWrite(event => {
             const todo = event.data.val()
-            const val = todo && todo.reminder && todo.reminder.at ? todo : null
-            return event.data.ref.set(val)
+            const hasReminder = todo && todo.reminder && todo.reminder.at
+            if(!hasReminder) return event.data.ref.set(null)
         })
 
 function sendPushToAllUsersWithRegistrationToken(userMap) {

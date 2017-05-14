@@ -113,6 +113,11 @@ async function boot() {
         ref.set(value)
     })
 
+    app.ports["fireDataPush"].subscribe(([path, value]) => {
+        console.log(`app.database().ref(path).push(value)`, {path, value})
+        $("firebase-app")[0].app.database().ref(path).push(value)
+    })
+
     app.ports["signOut"].subscribe(() => {
         let googleAuth = document.getElementById('google-auth');
         googleAuth

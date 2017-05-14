@@ -427,13 +427,14 @@ scheduleReminderPushCmd maybeTodoId model =
         maybeTodo =
             maybeTodoId
                 ?+> (Model.findTodoById # model)
+
+        maybeReminderTime =
+            maybeTodo ?+> Todo.getMaybeReminderTime
+
+        _ =
+            Maybe.andThen
     in
-        ( maybeUserId, maybeTodo )
-            |> maybe2Tuple
-            ?|> (\( uid, todo ) ->
-                    Firebase.schedulePushCmd
-                        uid
-                        (Document.getId todo)
-                        (Store.encodeDoc todo model.todoStore)
-                )
+        ( maybeUserId, maybeTodoId, maybeReminderTime )
+            |> maybe3Tuple
+            ?|> uncurry3 Firebase.schedulePushCmd
             ?= Cmd.none

@@ -13,6 +13,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Json.Encode.Extra as E
+import Time exposing (Time)
 
 
 port signIn : () -> Cmd msg
@@ -22,6 +23,9 @@ port signOut : () -> Cmd msg
 
 
 port fireDataWrite : ( String, E.Value ) -> Cmd msg
+
+
+port fireDataPush : ( String, E.Value ) -> Cmd msg
 
 
 type alias UserModel =
@@ -119,6 +123,13 @@ setTokenCmd uid fcmToken =
     fireDataWrite ( "/users/" ++ uid ++ "/token", encodeFCMToken fcmToken )
 
 
-schedulePushCmd : String -> String -> E.Value -> Cmd msg
-schedulePushCmd uid todoId encodedTodo =
-    fireDataWrite ( "/users/" ++ uid ++ "/notifications/" ++ todoId, encodedTodo )
+schedulePushCmd : String -> String -> Time -> Cmd msg
+schedulePushCmd uid todoId time =
+    fireDataWrite
+        ( "/notifications/" ++ uid ++ "---" ++ todoId
+        , E.object
+            [ "todoId" => E.string todoId
+            , "uid" => E.string uid
+            , "timestamp" => E.float time
+            ]
+        )

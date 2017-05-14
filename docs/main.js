@@ -18281,21 +18281,19 @@ var setupNotifications = function () {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        console.log("ssssss");
+                        console.info("Setting up notification ports and sw registration");
 
                         if (!(!'serviceWorker' in navigator)) {
                             _context.next = 4;
                             break;
                         }
 
-                        console.warn("servieWorker not found in navigator");
+                        console.warn("serviceWorker not found in navigator");
                         return _context.abrupt("return");
 
                     case 4:
-
-                        // const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
-                        swScriptPath = "/notification-sw.js";
-
+                        swScriptPath =  false ? "/notification-sw.js" : '/service-worker.js';
+                        // const swScriptPath = "/notification-sw.js"
 
                         navigator.serviceWorker.addEventListener('message', function (event) {
                             var data = event.data;
@@ -18306,27 +18304,29 @@ var setupNotifications = function () {
                                 app.ports["notificationClicked"].send(data);
                             }
                         });
-                        _context.next = 8;
+
+                        console.info("navigator.serviceWorker.register: ", swScriptPath);
+                        _context.next = 9;
                         return navigator.serviceWorker.register(swScriptPath);
 
-                    case 8:
+                    case 9:
                         reg = _context.sent;
                         intervalId = setInterval(function () {
-                            var messaging = document.getElementById('fb-messaging');
+                            var messaging = document.getElementById("fb-messaging");
                             if (!messaging) {
-                                console.log("messaging not found");
+                                console.warn("document.getElementById(\"fb-messaging\")", messaging);
                                 return;
                             }
-                            console.log("activating sw");
+                            console.debug("messaging.activate(reg)");
                             messaging.activate(reg);
                             clearTimeout(intervalId);
-                        }, 2000);
+                        }, 0);
 
 
                         app.ports["showNotification"].subscribe(showNotification(reg));
                         app.ports["closeNotification"].subscribe(closeNotification(reg));
 
-                    case 12:
+                    case 13:
                     case "end":
                         return _context.stop();
                 }
@@ -47796,13 +47796,10 @@ var Notifications = __webpack_require__(245);
 
 
 //noinspection JSUnresolvedVariable
-var firebaseConfig =
-// IS_DEVELOPMENT_ENV ?
-//     require("./config/dev/firebase") :
-__webpack_require__(243);
+var firebaseConfig =  false ? require("./config/dev/firebase") : __webpack_require__(243);
 
 var developmentMode = false;
-var pkg = {"name":"simplegtd.com","version":"0.9.0","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","release":"npm_bump --auto --auto-fallback minor","dev":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server","hot":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","watch":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack --watch","watch-prod":"cross-env NODE_ENV=production webpack -p --progress --watch","build":"bash scripts/build.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"alien-date":"0.2.2","babel-polyfill":"6.23.0","chrono":"1.0.5","chrono-node":"1.3.1","dateparser":"1.0.6","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","memorystream":"0.3.1","parse-messy-time":"2.1.0","peerjs":"0.3.14","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-replication-stream":"1.2.9","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
+var pkg = {"name":"simplegtd.com","version":"0.9.3","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","bump":"npm_bump --auto --auto-fallback patch --skip-push","postbump":"npm run build","dev":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server","hot":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","watch":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack --watch","watch-prod":"cross-env NODE_ENV=production webpack -p --progress --watch","build":"bash scripts/build.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"alien-date":"0.2.2","babel-polyfill":"6.23.0","chrono":"1.0.5","chrono-node":"1.3.1","dateparser":"1.0.6","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","memorystream":"0.3.1","parse-messy-time":"2.1.0","peerjs":"0.3.14","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-replication-stream":"1.2.9","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
 
 boot().catch(console.error);
 

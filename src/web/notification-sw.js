@@ -84,29 +84,37 @@ self.addEventListener('push', function (event) {
     console.log(`[Service Worker] Push had this data: "${event.data.text()}"`)
 
     try {
-        const data = event.data.json()
+        const data = event.data.json().data
         console.log(`[Service Worker] Push had this json: `, data)
         const todoId = data.todoId
-        // const todoId = "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"
+        data.id = todoId
 
 
         const todoDB = new PouchDB("todo-db")
 
         event.waitUntil(
             todoDB
-                // .find({selector: {"_id": {"$eq": todoId}}})
                 .get(todoId)
                 .then(todo => {
                     console.log("pdb found todo", todo)
 
                     const title = todoId;
-                    const options = {
-                        body: todo.text,
+                    const notificationOptions = {
+                        requiresInteraction: true,
+                        sticky: true,
+                        renotify: true,
+                        tag: data.todoId,
+                        vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
                         sound: "/alarm.ogg",
+                        actions: [
+                            {title: "Mark Done", action: "mark-done"},
+                            {title: "Snooze", action: "snooze"},
+                        ],
+                        body: todo.text,
+                        data,
                         timestamp: data.timestamp
-                        // timestamp: 0
                     };
-                    return self.registration.showNotification(title, options);
+                    return self.registration.showNotification(title, notificationOptions);
                 }))
 
 

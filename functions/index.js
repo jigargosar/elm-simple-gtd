@@ -21,7 +21,7 @@ exports.testPush = functions.https.onRequest((req, res) => {
     //     res.redirect(303, snapshot.ref);
     // });
     return admin.database().ref("/users").once("value")
-                .then(sendPushToAllUsersWithRegistrationToken)
+                .then(sendTestPushToAllUsersWithRegistrationToken)
                 .then(arr => res.send(arr))
 
     /*return admin.messaging()
@@ -50,7 +50,7 @@ exports.monitorPushRequests =
             }
         })
 
-function sendPushToAllUsersWithRegistrationToken(userMap) {
+function sendTestPushToAllUsersWithRegistrationToken(userMap) {
     const promiseList = []
     userMap.forEach(function (userEntry) {
         const userId = userEntry.key
@@ -67,5 +67,48 @@ function sendPushToAllUsersWithRegistrationToken(userMap) {
         }
     })
     return Promise.all(promiseList)
+}
 
+
+exports.notificationCorn = functions.https.onRequest((req, res) => {
+    return admin
+        .database().ref("/notifications")
+        .orderByChild("time")
+        .endAt(Date.now() + (10 * minute))
+        .once("value")
+        .then(sendPushNotifications)
+        .then(arr => res.send(arr))
+
+})
+
+
+function sendPushNotifications(notificationMap) {
+    const promiseList = []
+    notificationMap.forEach(notificationEntry => {
+        const notificationData = notificationEntry.val()
+        const uid = notificationData.uid
+        promiseList.push(
+            admin.database().ref("/users/" + uid + "/token").once("value")
+                 .then(sendPush(notificationData))
+        )
+    })
+    return Promise.all(promiseList)
+}
+
+const sendPush = notificationData => tokenSnapshot => {
+    const token = tokenSnapshot.val()
+    if (token) {
+        return admin
+            .messaging()
+            .sendToDevice(
+                token,
+                {data: notificationData.todo},
+                {timeToLive: (10 * minute), priority: "high"}
+            )
+    } else {
+        return Promise.resolve({
+            error: "Cannot send notification: token not found: ",
+            notificationData: notificationData
+        })
+    }
 }

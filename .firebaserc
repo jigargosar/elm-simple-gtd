@@ -1,6 +1,6 @@
 {
   "projects": {
-    "master": "rational-mote-664",
-    "local": "not-now-142808"
+    "dev": "rational-mote-664",
+    "prod": "simple-gtd-prod"
   }
 }

@@ -53,7 +53,8 @@ function postMessage(client, event) {
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here, other Firebase libraries
 // are not available in the service worker.
-importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js',
+importScripts(
+    'https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js',
     'https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js',
     'bower_components/pouchdb/dist/pouchdb.js',
     // 'bower_components/pouchdb/dist/pouchdb.find.js',

@@ -33,6 +33,9 @@ exports.testPush = functions.https.onRequest((req, res) => {
      .then(() => res.send("push sent"))*/
 });
 
+function createNotificationRef(uid, todoId) {
+    return admin.database().ref("/notifications/" + uid + "---" + todoId)
+}
 exports.monitorPushRequests =
     functions
         .database.ref('/users/{uid}/notifications/{todoId}')
@@ -42,11 +45,11 @@ exports.monitorPushRequests =
             const uid = event.params.uid
             const todoId = event.params.todoId
             const hasReminder = todo.reminder && todo.reminder.at
-            const notificationRef = admin.database().ref("/notifications/" + uid + "---" + todoId)
+            const notificationRef = createNotificationRef(uid, todoId)
             if (hasReminder) {
-                return notificationRef.set({uid: uid, todo: todo, time: todo.reminder.at})
+                return createNotificationRef.set({uid: uid, todo: todo, time: todo.reminder.at})
             } else {
-                return Promise.all([event.data.ref.set(null), notificationRef.set(null)])
+                return Promise.all([event.data.ref.set(null), createNotificationRef.set(null)])
             }
         })
 
@@ -97,9 +100,10 @@ function sendPushNotifications(notificationMap) {
 
 const sendPush = notificationData => tokenSnapshot => {
     const token = tokenSnapshot.val()
-    const {_id, text} = notificationData.todo
+    let promise = null
     if (token) {
-        return admin
+        const {_id, text} = notificationData.todo
+        promise =admin
             .messaging()
             .sendToDevice(
                 token,
@@ -107,9 +111,17 @@ const sendPush = notificationData => tokenSnapshot => {
                 {timeToLive: (10 * minute), priority: "high"}
             )
     } else {
-        return Promise.resolve({
+        promise = Promise.resolve({
             error: "Cannot send notification: token not found: ",
             notificationData: notificationData
         })
     }
+    return Promise.all([promise, removeNotification(notificationData)])
+}
+
+const removeNotification = ({uid, todo:{_id}})=>{
+    const todoId = _id
+    return Promise.all(admin.database().ref(`/notifications/${uid}---${todoId}`).set(null)
+    , createNotificationRef(uid, todoId).set(null))
+
 }

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.9.2 - 2017-05-14
 * fixed fcm connection error issue by clearing cloudflare cache. 
   * We should consider hosting on firebase itself.   
 

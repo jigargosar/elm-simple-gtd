@@ -1,3 +1,7 @@
+## Upcoming
+* fixed fcm connection error issue by clearing cloudflare cache. 
+  * We should consider hosting on firebase itself.   
+
 ## v0.9.0 - 2017-05-13
 * deploy docs: by letting firebase messaging use/discover its default sw name.
 

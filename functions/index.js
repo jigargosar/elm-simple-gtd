@@ -97,12 +97,13 @@ function sendPushNotifications(notificationMap) {
 
 const sendPush = notificationData => tokenSnapshot => {
     const token = tokenSnapshot.val()
+    const {id, text} = notificationData.todo
     if (token) {
         return admin
             .messaging()
             .sendToDevice(
                 token,
-                {data: notificationData.todo},
+                {data: {id, text}},
                 {timeToLive: (10 * minute), priority: "high"}
             )
     } else {

@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "rational-mote-664"
+    "master": "rational-mote-664",
+    "local": "not-now-142808"
   }
 }

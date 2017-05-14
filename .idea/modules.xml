@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/elm-simple-gtd.iml" filepath="$PROJECT_DIR$/elm-simple-gtd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/functions/functions.iml" filepath="$PROJECT_DIR$/functions/functions.iml" />
     </modules>
   </component>
 </project>

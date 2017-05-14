@@ -41,6 +41,7 @@
     "web-animations-js": "^2.2.5",
     "paper-material": "PolymerElements/paper-material#2.0-preview",
     "paper-tooltip": "PolymerElements/paper-tooltip#2.0-preview",
-    "polymerfire": "firebase/polymerfire#2.0-preview"
+    "polymerfire": "firebase/polymerfire#2.0-preview",
+    "pouchdb": "^6.2.0"
   }
 }

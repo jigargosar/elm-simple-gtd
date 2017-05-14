@@ -51,8 +51,11 @@ function postMessage(client, event) {
 // Give the service worker access to Firebase Messaging.
 // Note that you can only use Firebase Messaging here, other Firebase libraries
 // are not available in the service worker.
-importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js',
+    'https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js',
+    'bower_components/pouchdb/dist/pouchdb.js',
+    'bower_components/pouchdb/dist/pouchdb.find.js',
+);
 
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
@@ -79,17 +82,32 @@ self.addEventListener('push', function (event) {
     console.log(`[Service Worker] Push had this data: "${event.data.text()}"`)
 
     try {
-        console.log(`[Service Worker] Push had this json: `, event.data.json())
-    } catch (e) {console.warn(e) }
+        const data = event.data.json()
+        console.log(`[Service Worker] Push had this json: `, data)
 
-    const title = 'Push Codelab';
-    const options = {
-        body: 'Yay it works.',
-        sound: "/alarm.ogg",
-        timestamp: 0
-    };
+        const todoDB = new PouchDB("todo-db")
+        const todo = todoDB.find({selector: {"_id": {"$eq": data.todoId}}})
+        console.log("pdb found todo",todo)
 
-    event.waitUntil(self.registration.showNotification(title, options));
+        const title = '';
+        const options = {
+            body: todo.text,
+            sound: "/alarm.ogg",
+            timestamp: data.timestamp
+        };
+        event.waitUntil(self.registration.showNotification(title, options));
+
+    } catch (e) {
+        console.warn(e);
+        const title = 'Push Codelab';
+        const options = {
+            body: 'Yay it works.',
+            sound: "/alarm.ogg",
+            timestamp: 0
+        };
+        event.waitUntil(self.registration.showNotification(title, options));
+    }
+
 });
 
 

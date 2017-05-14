@@ -236,36 +236,11 @@ update msg =
                     Return.andThen
                         (\model ->
                             let
-                                maybeTodoId =
+                                cmd =
                                     Model.getMaybeEditTodoReminderForm model
                                         ?|> (.id)
-
-                                _ =
-                                    Model.getMaybeEditTodoReminderForm model
-                                        ?+> (.id >> Model.findTodoById # model)
-                                        ?+> Todo.getMaybeReminderTime
-
-                                maybeOldNewTodoPair : Maybe ( Todo.Model, Todo.Model )
-                                maybeOldNewTodoPair =
-                                    maybeTodoId
-                                        ?|> apply2 ( Model.findTodoById # model, Model.findTodoById # newModel )
-                                        ?+> maybe2Tuple
-
-                                todoPairToSchedulePushNotificationCmd todoPair =
-                                    todoPair
-                                        |> Tuple2.mapBoth (Todo.getMaybeReminderTime)
-                                        |> (\( oldTime, newTime ) ->
-                                                if oldTime /= newTime then
-                                                    todoPair
-                                                        |> Tuple.second
-                                                        |> (scheduleReminderPush # newModel)
-                                                else
-                                                    Cmd.none
-                                           )
-
-                                cmd =
-                                    maybeOldNewTodoPair
-                                        ?|> todoPairToSchedulePushNotificationCmd
+                                        ?+> (Model.findTodoById # newModel)
+                                        ?|> (scheduleReminderPush # newModel)
                                         ?= Cmd.none
 
                                 newModel =

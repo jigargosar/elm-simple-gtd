@@ -113,6 +113,7 @@ update msg =
 
                 OnUserChanged user ->
                     Return.map (Model.setUser user)
+                        >> Return.effect_ firebaseUpdateTokenCmd
 
                 OnFCMTokenChanged token ->
                     let
@@ -120,6 +121,7 @@ update msg =
                             Debug.log "fcm: token" (token)
                     in
                         Return.map (Model.setFCMToken token)
+                            >> Return.effect_ firebaseUpdateTokenCmd
 
                 OnEntityListKeyDown entityList { key, isShiftDown } ->
                     case key of
@@ -402,3 +404,7 @@ onGlobalKeyUp key =
                 _ ->
                     identity
         )
+
+
+firebaseUpdateTokenCmd model =
+    Model.getMaybeUserId model ?|> Firebase.setTokenCmd # model.fcmToken ?= Cmd.none

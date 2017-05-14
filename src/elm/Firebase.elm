@@ -105,3 +105,7 @@ customSw =
 
 type alias AppAttributes =
     List ( String, String )
+
+
+setTokenCmd userId fcmToken =
+    Cmd.none

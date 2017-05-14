@@ -419,13 +419,6 @@ firebaseUpdateTokenCmd model =
     Model.getMaybeUserId model ?|> Firebase.setTokenCmd # model.fcmToken ?= Cmd.none
 
 
-scheduleReminderPushHelp uid todo todoStore =
-    Firebase.schedulePushCmd
-        uid
-        (Document.getId todo)
-        (Store.encodeDoc todo todoStore)
-
-
 scheduleReminderPushCmd maybeTodoId model =
     let
         maybeUserId =
@@ -435,7 +428,12 @@ scheduleReminderPushCmd maybeTodoId model =
             maybeTodoId
                 ?+> (Model.findTodoById # model)
     in
-        ( maybeUserId, maybeTodo, Just model.todoStore )
-            |> maybe3Tuple
-            ?|> (uncurry3 scheduleReminderPushHelp)
+        ( maybeUserId, maybeTodo )
+            |> maybe2Tuple
+            ?|> (\( uid, todo ) ->
+                    Firebase.schedulePushCmd
+                        uid
+                        (Document.getId todo)
+                        (Store.encodeDoc todo model.todoStore)
+                )
             ?= Cmd.none

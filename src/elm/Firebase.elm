@@ -117,3 +117,8 @@ type alias AppAttributes =
 
 setTokenCmd uid fcmToken =
     fireDataWrite ( "/users/" ++ uid ++ "/token", encodeFCMToken fcmToken )
+
+
+schedulePushCmd : String -> String -> E.Value -> Cmd msg
+schedulePushCmd uid todoId encodedTodo =
+    fireDataWrite ( "/users/" ++ uid ++ "/notifications/" ++ todoId, encodedTodo )

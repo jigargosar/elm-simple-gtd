@@ -256,7 +256,9 @@ update msg =
                                         |> Tuple2.mapBoth (Todo.getMaybeReminderTime)
                                         |> (\( oldTime, newTime ) ->
                                                 if oldTime /= newTime then
-                                                    todoPair |> Tuple.second |> scheduleReminderPush
+                                                    todoPair
+                                                        |> Tuple.second
+                                                        |> (scheduleReminderPush # newModel)
                                                 else
                                                     Cmd.none
                                            )
@@ -447,5 +449,13 @@ firebaseUpdateTokenCmd model =
     Model.getMaybeUserId model ?|> Firebase.setTokenCmd # model.fcmToken ?= Cmd.none
 
 
-scheduleReminderPush todo =
-    Cmd.none
+scheduleReminderPush : Todo.Model -> Model -> Cmd msg
+scheduleReminderPush todo model =
+    Model.getMaybeUserId model
+        ?|> (\uid ->
+                Firebase.schedulePushCmd
+                    uid
+                    (Document.getId todo)
+                    (Store.encodeDoc todo model.todoStore)
+            )
+        ?= Cmd.none

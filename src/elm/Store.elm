@@ -64,6 +64,11 @@ upsert dbName otherFieldsEncoder doc =
     pouchDBUpsert ( dbName, doc.id, Document.encode otherFieldsEncoder doc )
 
 
+encodeDoc : Document x -> Store x -> E.Value
+encodeDoc doc s =
+    Document.encode s.otherFieldsEncoder doc
+
+
 persist s =
     let
         dirtyList =

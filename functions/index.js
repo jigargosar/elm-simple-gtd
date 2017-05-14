@@ -8,21 +8,21 @@ admin.initializeApp(functions.config().firebase);
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
-exports.helloWorld = functions.https.onRequest((request, response) => {
-    response.send("Hello from Firebase!");
+exports.helloWorld = functions.https.onRequest((req, res) => {
+    res.send("Hello from Firebase!");
 });
 
 const second = 1000
 const minute = 60 * second
 
-exports.testPush = functions.https.onRequest((request, response) => {
+exports.testPush = functions.https.onRequest((req, res) => {
     // admin.database().ref('/messages').push({original: original}).then(snapshot => {
     //     // Redirect with 303 SEE OTHER to the URL of the pushed object in the Firebase console.
     //     res.redirect(303, snapshot.ref);
     // });
     admin.database().ref("/users").once("value")
          .then(sendPushToAllUsersWithRegistrationToken)
-         .then(arr => response.send(arr))
+         .then(arr => res.send(arr))
 
     /*return admin.messaging()
      .sendToDevice(
@@ -30,7 +30,7 @@ exports.testPush = functions.https.onRequest((request, response) => {
      {data: {id: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"}},
      {timeToLive: (10 * minute), priority: "high"}
      )
-     .then(() => response.send("push sent"))*/
+     .then(() => res.send("push sent"))*/
 });
 
 

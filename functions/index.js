@@ -94,6 +94,12 @@ const sendPush = notificationData => tokenSnapshot => {
             notificationData: notificationData
         })
     }
-    return Promise.all([promise, createNotificationRef(uid, todoId).set(null)])
+    return Promise.all([
+        promise, createNotificationRef(uid, todoId).set({
+            todoId,
+            timestamp: timestamp + (15 * minute)
+            , uid
+        })
+    ])
 }
 

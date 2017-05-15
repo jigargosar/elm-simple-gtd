@@ -38,7 +38,13 @@ function sendTestPushToAllUsersWithRegistrationToken(userMap) {
                 .messaging()
                 .sendToDevice(
                     userData.token,
-                    {data: {todoId: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"}},
+                    {
+                        data: {
+                            todoId: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt",
+                            uid: userId,
+                            timestamp: Date.now()
+                        }
+                    },
                     {timeToLive: tenMinutes, priority: "high"}
                 )
             promiseList.push(promise)
@@ -46,7 +52,6 @@ function sendTestPushToAllUsersWithRegistrationToken(userMap) {
     })
     return Promise.all(promiseList)
 }
-
 
 
 exports.notificationCorn = functions.https.onRequest((req, res) => {
@@ -85,11 +90,11 @@ const sendPush = notificationData => tokenSnapshot => {
                 {data: {todoId, timestamp: "" + timestamp, uid}},
                 {timeToLive: tenMinutes, priority: "high"}
             )
-            .then(mdRes =>{
-                const tokenUnregistered = mdRes.results.find(mdResult =>{
+            .then(mdRes => {
+                const tokenUnregistered = mdRes.results.find(mdResult => {
                     return mdResult.error && mdResult.error.code === "messaging/registration-token-not-registered"
                 })
-                if(tokenUnregistered){
+                if (tokenUnregistered) {
                     // return deleteToken res and mdRes
                 }
                 return mdRes

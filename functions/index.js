@@ -48,9 +48,6 @@ function sendTestPushToAllUsersWithRegistrationToken(userMap) {
 }
 
 
-function createNotificationRef(uid, todoId) {
-    return admin.database().ref("/notifications/" + uid + "---" + todoId)
-}
 
 exports.notificationCorn = functions.https.onRequest((req, res) => {
     return admin
@@ -114,3 +111,6 @@ const sendPush = notificationData => tokenSnapshot => {
     return promise
 }
 
+function createNotificationRef(uid, todoId) {
+    return admin.database().ref("/notifications/" + uid + "---" + todoId)
+}

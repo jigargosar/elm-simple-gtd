@@ -119,8 +119,8 @@ type alias AppAttributes =
     List ( String, String )
 
 
-setTokenCmd uid fcmToken =
-    fireDataWrite ( "/users/" ++ uid ++ "/token", encodeFCMToken fcmToken )
+setTokenCmd deviceId uid fcmToken =
+    fireDataWrite ( "/users/" ++ uid ++ "/tokens/" ++ deviceId, encodeFCMToken fcmToken )
 
 
 scheduledReminderNotificationCmd : Maybe Time -> String -> String -> Cmd msg

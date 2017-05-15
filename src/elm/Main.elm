@@ -418,7 +418,7 @@ onGlobalKeyUp key =
 
 
 firebaseUpdateTokenCmd model =
-    Model.getMaybeUserId model ?|> Firebase.setTokenCmd # model.fcmToken ?= Cmd.none
+    Model.getMaybeUserId model ?|> Firebase.setTokenCmd model.deviceId # model.fcmToken ?= Cmd.none
 
 
 scheduleReminderNotificationForMaybeTodoIdCmd : Maybe Todo.Id -> Model -> Cmd msg

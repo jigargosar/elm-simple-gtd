@@ -11,7 +11,7 @@
         "timestamp"
       ],
       "$uidTodoId":{
-        ".write":"newData.child('uid').val() === auth.uid && $uidTodoId === auth.uid + '---' + newData.child('todoId').val() && newData.child('timestamp').isNumber()"
+        ".write":"(newData.child('uid').val() === auth.uid && $uidTodoId === auth.uid + '---' + newData.child('todoId').val() && newData.child('timestamp').isNumber()) || (data.child('uid').val() === auth.uid && newData.val() === null)"
       }
     }
   }

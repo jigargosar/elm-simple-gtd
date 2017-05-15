@@ -257,7 +257,7 @@ findAndSnoozeOverDueTodo model =
         snoozeTodo todo m =
             m
                 |> updateTodo__
-                    (Todo.SnoozeTill (m.now + (Time.minute * 10)))
+                    (Todo.SnoozeTill (m.now + (Time.minute * 15)))
                     todo
                 |> setReminderOverlayToInitialView todo
     in

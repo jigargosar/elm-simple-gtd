@@ -14,6 +14,8 @@ exports.helloWorld = functions.https.onRequest((req, res) => {
 
 const second = 1000
 const minute = 60 * second
+const tenMinutes = 10 * minute
+const fiveMinutes = 5 * minute
 
 exports.testPush = functions.https.onRequest((req, res) => {
     // admin.database().ref('/messages').push({original: original}).then(snapshot => {
@@ -37,7 +39,7 @@ function sendTestPushToAllUsersWithRegistrationToken(userMap) {
                 .sendToDevice(
                     userData.token,
                     {data: {id: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"}},
-                    {timeToLive: (10 * minute), priority: "high"}
+                    {timeToLive: tenMinutes, priority: "high"}
                 )
             promiseList.push(promise)
         }
@@ -54,7 +56,7 @@ exports.notificationCorn = functions.https.onRequest((req, res) => {
     return admin
         .database().ref("/notifications")
         .orderByChild("timestamp")
-        .endAt(Date.now() + (5 * minute))
+        .endAt(Date.now() + fiveMinutes)
         .once("value")
         .then(sendPushNotifications)
         .then(arr => res.send(arr))
@@ -79,12 +81,12 @@ const sendPush = notificationData => tokenSnapshot => {
     let promise = null
     const {todoId, timestamp, uid} = notificationData
     if (token) {
-        promise =admin
+        promise = admin
             .messaging()
             .sendToDevice(
                 token,
-                {data: {todoId, timestamp:""+timestamp, uid}},
-                {timeToLive: (10 * minute), priority: "high"}
+                {data: {todoId, timestamp: "" + timestamp, uid}},
+                {timeToLive: tenMinutes, priority: "high"}
             )
     } else {
         promise = Promise.resolve({

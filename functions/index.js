@@ -94,10 +94,11 @@ const sendPush = notificationData => tokenSnapshot => {
             notificationData: notificationData
         })
     }
+    const newTimestamp = max(Date.now(), timestamp) + (15 * minute)
     return Promise.all([
         promise, createNotificationRef(uid, todoId).set({
             todoId,
-            timestamp: timestamp + (15 * minute)
+            timestamp: newTimestamp
             , uid
         })
     ])

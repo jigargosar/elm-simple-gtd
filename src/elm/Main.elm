@@ -373,7 +373,7 @@ reminderOverlayAction action =
                                         >> Model.removeReminderOverlay
                                         >> Return.singleton
                                         >> Return.command (closeNotification todoId)
-                                        >> Return.command (scheduleReminderNotificationCmd todoId model)
+                                        >> Return.effect_ (scheduleReminderNotificationCmd todoId)
 
                                 ReminderOverlay.ShowSnoozeOptions ->
                                     Model.setReminderOverlayToSnoozeView todoDetails
@@ -383,7 +383,7 @@ reminderOverlayAction action =
                                     Return.singleton
                                         >> Return.map (Model.snoozeTodoWithOffset snoozeOffset todoId)
                                         >> Return.command (closeNotification todoId)
-                                        >> Return.command (scheduleReminderNotificationCmd todoId model)
+                                        >> Return.effect_ (scheduleReminderNotificationCmd todoId)
 
                                 ReminderOverlay.Close ->
                                     Model.removeReminderOverlay

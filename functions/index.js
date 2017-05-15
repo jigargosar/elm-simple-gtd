@@ -88,19 +88,29 @@ const sendPush = notificationData => tokenSnapshot => {
                 {data: {todoId, timestamp: "" + timestamp, uid}},
                 {timeToLive: tenMinutes, priority: "high"}
             )
+            .then(mdRes =>{
+                const tokenUnregistered = mdRes.results.find(mdResult =>{
+                    return mdResult.error && mdResult.error.code === "messaging/registration-token-not-registered"
+                })
+                if(tokenUnregistered){
+                    // return deleteToken res and mdRes
+                }
+                return mdRes
+            })
     } else {
         promise = Promise.resolve({
             error: "Cannot send notification: token not found: ",
             notificationData: notificationData
         })
     }
-    const newTimestamp = max(Date.now(), timestamp) + (15 * minute)
-    return Promise.all([
-        promise, createNotificationRef(uid, todoId).set({
-            todoId,
-            timestamp: newTimestamp
-            , uid
-        })
-    ])
+    // const newTimestamp = max(Date.now(), timestamp) + (15 * minute)
+    // return Promise.all([
+    //     promise, createNotificationRef(uid, todoId).set({
+    //         todoId,
+    //         timestamp: newTimestamp
+    //         , uid
+    //     })
+    // ])
+    return promise
 }
 

@@ -38,7 +38,7 @@ function sendTestPushToAllUsersWithRegistrationToken(userMap) {
                 .messaging()
                 .sendToDevice(
                     userData.token,
-                    {data: {id: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"}},
+                    {data: {todoId: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt"}},
                     {timeToLive: tenMinutes, priority: "high"}
                 )
             promiseList.push(promise)

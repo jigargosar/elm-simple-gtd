@@ -57,8 +57,17 @@ importScripts(
     'https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js',
     'https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js',
     'bower_components/pouchdb/dist/pouchdb.js',
+    // 'browser-detect.min.js',
     // 'bower_components/pouchdb/dist/pouchdb.find.js',
 );
+
+
+function isMobile() {
+    return self.navigator.userAgent.match(/.*Mobi.*/i)
+    // const result = browser(self.navigator.userAgent)
+    // console.log(result);
+    // return result.mobile
+}
 
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
@@ -87,35 +96,31 @@ function displayNotification(event) {
         const todoId = data.todoId
         data.id = todoId
 
-
         const todoDB = new PouchDB("todo-db")
 
-        event.waitUntil(
-            todoDB
-                .get(todoId)
-                .then(todo => {
-                    console.log("pdb found todo", todo)
+        return todoDB
+            .get(todoId)
+            .then(todo => {
+                console.log("pdb found todo", todo)
 
-                    const title = todoId;
-                    const notificationOptions = {
-                        requiresInteraction: true,
-                        sticky: true,
-                        renotify: true,
-                        tag: data.todoId,
-                        vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
-                        sound: "/alarm.ogg",
-                        actions: [
-                            {title: "Mark Done", action: "mark-done"},
-                            {title: "Snooze", action: "snooze"},
-                        ],
-                        body: todo.text,
-                        data,
-                        timestamp: data.timestamp
-                    };
-                    return self.registration.showNotification(title, notificationOptions);
-                }))
-
-
+                const title = todoId;
+                const notificationOptions = {
+                    requiresInteraction: true,
+                    sticky: true,
+                    renotify: true,
+                    tag: data.todoId,
+                    vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
+                    sound: "/alarm.ogg",
+                    actions: [
+                        {title: "Mark Done", action: "mark-done"},
+                        {title: "Snooze", action: "snooze"},
+                    ],
+                    body: todo.text,
+                    data,
+                    timestamp: data.timestamp
+                };
+                return self.registration.showNotification(title, notificationOptions);
+            })
     } catch (e) {
         console.warn(e);
         const title = 'Push Codelab';
@@ -124,7 +129,7 @@ function displayNotification(event) {
             sound: "/alarm.ogg",
             timestamp: 0
         };
-        event.waitUntil(self.registration.showNotification(title, options));
+        return self.registration.showNotification(title, options);
     }
 }
 
@@ -132,15 +137,16 @@ self.addEventListener('push', function (event) {
     console.log('[Service Worker] Push Received.');
     console.log(`[Service Worker] Push had this data: "${event.data.text()}"`)
 
-    clients
+    event.waitUntil(clients
         .matchAll({type: "window"})
         .then(function (clientList) {
-            if(clientList.length === 0){
-
-            } else{
-                displayNotification(event)
+            if (clientList.length === 0 || isMobile()) {
+                return displayNotification(event)
+            } else {
+                console.warn(
+                    "not displaying notification since we detected an controlled browser window and non-mobile browser")
             }
-        })
+        }))
 });
 
 

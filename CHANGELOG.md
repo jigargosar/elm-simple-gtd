@@ -1,3 +1,6 @@
+## Upcoming
+* push notifications always shown for mobile, and for desktop only when no window is open. 
+
 ## v0.9.4 - 2017-05-14
 * add firebase functions to send push notifications 
 

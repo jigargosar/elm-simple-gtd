@@ -51,6 +51,7 @@ type alias Model =
     , layout : Layout
     , maybeFocusedEntity : Maybe Entity
     , appVersion : String
+    , deviceId : String
     }
 
 
@@ -110,6 +111,7 @@ type alias Flags =
     , firebaseAppAttributes : Firebase.AppAttributes
     , developmentMode : Bool
     , appVersion : String
+    , deviceId : String
     }
 
 

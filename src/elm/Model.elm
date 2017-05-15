@@ -70,6 +70,7 @@ init flags =
             , layout = { narrow = False, forceNarrow = False }
             , maybeFocusedEntity = Nothing
             , appVersion = flags.appVersion
+            , deviceId = flags.deviceId
             }
 
         _ =

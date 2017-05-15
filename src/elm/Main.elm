@@ -240,9 +240,7 @@ update msg =
                             )
                         )
                         >> Return.andThen
-                            (\( maybeTodoReminderFormId, model ) ->
-                                ( model, scheduleReminderNotificationForMaybeTodoIdCmd maybeTodoReminderFormId model )
-                            )
+                            (apply2 ( Tuple.second, uncurry scheduleReminderNotificationForMaybeTodoIdCmd ))
                         >> andThenUpdate DeactivateEditingMode
 
                 NewTodo ->

@@ -340,12 +340,14 @@ setDomFocusToFocusedEntityCmd =
 
 onUpdateNow now =
     Return.map (Model.setNow now)
-        >> sendNotifications
+        >> Return.andThenMaybe
+            (Model.findAndSnoozeOverDueTodo
+                >>? scheduleReminderNotifications
+            )
 
 
-sendNotifications =
-    Return.andThenMaybe
-        (Model.findAndSnoozeOverDueTodo >>? Tuple.mapSecond showTodoNotificationCmd)
+scheduleReminderNotifications ( model, todo ) =
+    model ! [ showTodoNotificationCmd todo, scheduleReminderNotification2 todo model ]
 
 
 showTodoNotificationCmd =
@@ -431,3 +433,18 @@ scheduleReminderNotificationCmd maybeTodoId model =
                 Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
     in
         ( Model.getMaybeUserId model, maybeTodoId ) |> maybe2Tuple ?|> scheduleHelp ?= Cmd.none
+
+
+scheduleReminderNotification2 todo model =
+    let
+        scheduleHelp uid =
+            let
+                maybeTime =
+                    Todo.getMaybeReminderTime todo
+
+                todoId =
+                    Document.getId todo
+            in
+                Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
+    in
+        (Model.getMaybeUserId model) ?|> scheduleHelp ?= Cmd.none

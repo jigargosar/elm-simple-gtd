@@ -241,11 +241,7 @@ update msg =
                         )
                         >> Return.andThen
                             (\( maybeTodoReminderFormId, model ) ->
-                                ( model
-                                , maybeTodoReminderFormId
-                                    ?|> (scheduleReminderNotificationCmd # model)
-                                    ?= Cmd.none
-                                )
+                                ( model, scheduleReminderNotificationForMaybeTodoIdCmd maybeTodoReminderFormId model )
                             )
                         >> andThenUpdate DeactivateEditingMode
 

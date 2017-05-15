@@ -123,13 +123,18 @@ setTokenCmd uid fcmToken =
     fireDataWrite ( "/users/" ++ uid ++ "/token", encodeFCMToken fcmToken )
 
 
-schedulePushCmd : String -> String -> Time -> Cmd msg
-schedulePushCmd uid todoId time =
-    fireDataWrite
-        ( "/notifications/" ++ uid ++ "---" ++ todoId
-        , E.object
-            [ "todoId" => E.string todoId
-            , "uid" => E.string uid
-            , "timestamp" => E.float time
-            ]
-        )
+scheduledReminderNotificationCmd : Maybe Time -> String -> String -> Cmd msg
+scheduledReminderNotificationCmd maybeTime uid todoId =
+    let
+        value =
+            maybeTime
+                ?|> (\time ->
+                        E.object
+                            [ "todoId" => E.string todoId
+                            , "uid" => E.string uid
+                            , "timestamp" => E.float time
+                            ]
+                    )
+                ?= E.null
+    in
+        fireDataWrite ( "/notifications/" ++ uid ++ "---" ++ todoId, value )

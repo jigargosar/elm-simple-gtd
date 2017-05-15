@@ -54,7 +54,7 @@ const showNotification = reg => async ({tag, title, data}) => {
     //console.info(msg)
     const permission = await Notification.requestPermission()
     if (permission !== "granted") return
-    reg.showNotification(title, {
+    reg.showNotification("", {
         tag,
         requiresInteraction: true,
         sticky: true,

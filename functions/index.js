@@ -42,7 +42,7 @@ function sendTestPushToAllUsersWithRegistrationToken(userMap) {
                         data: {
                             todoId: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt",
                             uid: userId,
-                            timestamp: Date.now()
+                            timestamp: Date.now()+""
                         }
                     },
                     {timeToLive: tenMinutes, priority: "high"}

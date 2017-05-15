@@ -24,6 +24,7 @@ const pkg = packageJSON
 
 boot().catch(console.error)
 async function boot() {
+    const deviceId = getOrCreateDeviceId()
     const $elm = $("#elm-app-container")
     $elm.trap();
 
@@ -52,7 +53,8 @@ async function boot() {
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
         firebaseAppAttributes: firebaseConfig.appAttributes,
         developmentMode: developmentMode,
-        appVersion:pkg.version
+        appVersion:pkg.version,
+        deviceId
     }
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]
@@ -156,6 +158,14 @@ async function boot() {
     })
 }
 
+function getOrCreateDeviceId() {
+    let deviceId = localStorage.getItem("device-id")
+    if(!deviceId){
+        deviceId = "random string"
+        localStorage.setItem("device-id", deviceId)
+    }
+    return deviceId
+}
 /*
  //noinspection JSUnresolvedVariable
  if (!WEB_PACK_DEV_SERVER && 'serviceWorker' in navigator) {

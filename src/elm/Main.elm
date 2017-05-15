@@ -421,12 +421,13 @@ firebaseUpdateTokenCmd model =
 
 scheduleReminderNotificationCmd maybeTodoId model =
     let
-        maybeReminderTime =
-            maybeTodoId
-                ?+> (Model.findTodoById # model)
-                ?+> Todo.getMaybeReminderTime
+        scheduleHelp ( uid, todoId ) =
+            let
+                maybeTime =
+                    maybeTodoId
+                        ?+> (Model.findTodoById # model)
+                        ?+> Todo.getMaybeReminderTime
+            in
+                Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
     in
-        ( Model.getMaybeUserId model, maybeTodoId )
-            |> maybe2Tuple
-            ?|> uncurry (Firebase.scheduledReminderNotificationCmd maybeReminderTime)
-            ?= Cmd.none
+        ( Model.getMaybeUserId model, maybeTodoId ) |> maybe2Tuple ?|> scheduleHelp ?= Cmd.none

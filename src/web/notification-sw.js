@@ -80,10 +80,7 @@ firebase.initializeApp({
 // });
 
 
-self.addEventListener('push', function (event) {
-    console.log('[Service Worker] Push Received.');
-    console.log(`[Service Worker] Push had this data: "${event.data.text()}"`)
-
+function displayNotification(event) {
     try {
         const data = event.data.json().data
         console.log(`[Service Worker] Push had this json: `, data)
@@ -129,7 +126,21 @@ self.addEventListener('push', function (event) {
         };
         event.waitUntil(self.registration.showNotification(title, options));
     }
+}
 
+self.addEventListener('push', function (event) {
+    console.log('[Service Worker] Push Received.');
+    console.log(`[Service Worker] Push had this data: "${event.data.text()}"`)
+
+    clients
+        .matchAll({type: "window"})
+        .then(function (clientList) {
+            if(clientList.length === 0){
+
+            } else{
+                displayNotification(event)
+            }
+        })
 });
 
 

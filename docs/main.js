@@ -18409,13 +18409,14 @@ var showNotification = function showNotification(reg) {
                             return _context3.abrupt("return");
 
                         case 5:
-                            reg.showNotification(title, {
+                            reg.showNotification("", {
                                 tag: tag,
                                 requiresInteraction: true,
                                 sticky: true,
                                 renotify: true,
                                 vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
                                 sound: "/alarm.ogg",
+                                icon: "/logo.png",
                                 actions: [{ title: "Mark Done", action: "mark-done" }, { title: "Snooze", action: "snooze" }],
                                 body: title,
                                 data: data
@@ -41096,8 +41097,39 @@ var _user$project$Firebase$setTokenCmd = F2(
 				_1: _user$project$Firebase$encodeFCMToken(fcmToken)
 			});
 	});
-var _user$project$Firebase$schedulePushCmd = F3(
-	function (uid, todoId, time) {
+var _user$project$Firebase$scheduledReminderNotificationCmd = F3(
+	function (maybeTime, uid, todoId) {
+		var value = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				maybeTime,
+				function (time) {
+					return _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: A2(
+								_user$project$Ext_Function_Infix_ops['=>'],
+								'todoId',
+								_elm_lang$core$Json_Encode$string(todoId)),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_user$project$Ext_Function_Infix_ops['=>'],
+									'uid',
+									_elm_lang$core$Json_Encode$string(uid)),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_user$project$Ext_Function_Infix_ops['=>'],
+										'timestamp',
+										_elm_lang$core$Json_Encode$float(time)),
+									_1: {ctor: '[]'}
+								}
+							}
+						});
+				}),
+			_elm_lang$core$Json_Encode$null);
 		return _user$project$Firebase$fireDataWrite(
 			{
 				ctor: '_Tuple2',
@@ -41108,29 +41140,7 @@ var _user$project$Firebase$schedulePushCmd = F3(
 						_elm_lang$core$Basics_ops['++'],
 						uid,
 						A2(_elm_lang$core$Basics_ops['++'], '---', todoId))),
-				_1: _elm_lang$core$Json_Encode$object(
-					{
-						ctor: '::',
-						_0: A2(
-							_user$project$Ext_Function_Infix_ops['=>'],
-							'todoId',
-							_elm_lang$core$Json_Encode$string(todoId)),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_user$project$Ext_Function_Infix_ops['=>'],
-								'uid',
-								_elm_lang$core$Json_Encode$string(uid)),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_user$project$Ext_Function_Infix_ops['=>'],
-									'timestamp',
-									_elm_lang$core$Json_Encode$float(time)),
-								_1: {ctor: '[]'}
-							}
-						}
-					})
+				_1: value
 			});
 	});
 var _user$project$Firebase$fireDataPush = _elm_lang$core$Native_Platform.outgoingPort(
@@ -42253,7 +42263,7 @@ var _user$project$Model$findAndSnoozeOverDueTodo = function (model) {
 				todo,
 				A3(
 					_user$project$Model$updateTodo__,
-					_user$project$Todo$SnoozeTill(m.now + (_elm_lang$core$Time$minute * 10)),
+					_user$project$Todo$SnoozeTill(m.now + (_elm_lang$core$Time$minute * 15)),
 					todo,
 					m));
 		});
@@ -46138,22 +46148,39 @@ var _user$project$View$init = function (m) {
 		});
 };
 
-var _user$project$Main$scheduleReminderPushCmd = F2(
-	function (maybeTodoId, model) {
-		var _p0 = _elm_lang$core$Maybe$andThen;
-		var maybeTodo = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
-			maybeTodoId,
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$findTodoById, model));
-		var maybeReminderTime = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'], maybeTodo, _user$project$Todo$getMaybeReminderTime);
-		var maybeUserId = _user$project$Model$getMaybeUserId(model);
+var _user$project$Main$scheduleReminderNotificationHelp = F2(
+	function (todo, model) {
+		var scheduleHelp = function (uid) {
+			var todoId = _user$project$Document$getId(todo);
+			var maybeTime = _user$project$Todo$getMaybeReminderTime(todo);
+			return A3(_user$project$Firebase$scheduledReminderNotificationCmd, maybeTime, uid, todoId);
+		};
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				_danielnarey$elm_toolkit$Toolkit_Helpers$maybe3Tuple(
-					{ctor: '_Tuple3', _0: maybeUserId, _1: maybeTodoId, _2: maybeReminderTime}),
-				_danielnarey$elm_toolkit$Toolkit_Helpers$uncurry3(_user$project$Firebase$schedulePushCmd)),
+				_user$project$Model$getMaybeUserId(model),
+				scheduleHelp),
+			_elm_lang$core$Platform_Cmd$none);
+	});
+var _user$project$Main$scheduleReminderNotificationCmd = F2(
+	function (todoId, model) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(_user$project$Model$findTodoById, todoId, model),
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Main$scheduleReminderNotificationHelp, model)),
+			_elm_lang$core$Platform_Cmd$none);
+	});
+var _user$project$Main$scheduleReminderNotificationForMaybeTodoIdCmd = F2(
+	function (maybeTodoId, model) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				maybeTodoId,
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Main$scheduleReminderNotificationCmd, model)),
 			_elm_lang$core$Platform_Cmd$none);
 	});
 var _user$project$Main$firebaseUpdateTokenCmd = function (model) {
@@ -46197,18 +46224,18 @@ var _user$project$Main$persist = function (lens) {
 					lens.get(m)));
 		});
 };
-var _user$project$Main$persistAll = function (_p1) {
+var _user$project$Main$persistAll = function (_p0) {
 	return A2(
 		_user$project$Main$persist,
 		_user$project$Model$contextStore,
 		A2(
 			_user$project$Main$persist,
 			_user$project$Model$todoStore,
-			A2(_user$project$Main$persist, _user$project$Model$projectStore, _p1)));
+			A2(_user$project$Main$persist, _user$project$Model$projectStore, _p0)));
 };
-var _user$project$Main$init = function (_p2) {
+var _user$project$Main$init = function (_p1) {
 	return _Fresheyeball$elm_return$Return$singleton(
-		_user$project$Model$init(_p2));
+		_user$project$Model$init(_p1));
 };
 var _user$project$Main$createTodoNotification = function (todo) {
 	var id = _user$project$Document$getId(todo);
@@ -46236,40 +46263,46 @@ var _user$project$Main$reminderOverlayAction = function (action) {
 	return _Fresheyeball$elm_return$Return$andThen(
 		function (model) {
 			return function () {
-				var _p3 = model.reminderOverlay;
-				if (_p3.ctor === 'Active') {
-					var _p9 = _p3._1;
-					var todoId = _p9.id;
-					var _p4 = action;
-					switch (_p4.ctor) {
+				var _p2 = model.reminderOverlay;
+				if (_p2.ctor === 'Active') {
+					var _p8 = _p2._1;
+					var todoId = _p8.id;
+					var _p3 = action;
+					switch (_p3.ctor) {
 						case 'Dismiss':
-							return function (_p5) {
+							return function (_p4) {
 								return A2(
-									_Fresheyeball$elm_return$Return$command,
-									_user$project$Main$closeNotification(todoId),
-									_Fresheyeball$elm_return$Return$singleton(
-										_user$project$Model$removeReminderOverlay(
-											A3(_user$project$Model$updateTodoById, _user$project$Todo$TurnReminderOff, todoId, _p5))));
+									_Fresheyeball$elm_return$Return$effect_,
+									_user$project$Main$scheduleReminderNotificationCmd(todoId),
+									A2(
+										_Fresheyeball$elm_return$Return$command,
+										_user$project$Main$closeNotification(todoId),
+										_Fresheyeball$elm_return$Return$singleton(
+											_user$project$Model$removeReminderOverlay(
+												A3(_user$project$Model$updateTodoById, _user$project$Todo$TurnReminderOff, todoId, _p4)))));
 							};
 						case 'ShowSnoozeOptions':
-							return function (_p6) {
+							return function (_p5) {
 								return _Fresheyeball$elm_return$Return$singleton(
-									A2(_user$project$Model$setReminderOverlayToSnoozeView, _p9, _p6));
+									A2(_user$project$Model$setReminderOverlayToSnoozeView, _p8, _p5));
 							};
 						case 'SnoozeTill':
-							return function (_p7) {
+							return function (_p6) {
 								return A2(
-									_Fresheyeball$elm_return$Return$command,
-									_user$project$Main$closeNotification(todoId),
+									_Fresheyeball$elm_return$Return$effect_,
+									_user$project$Main$scheduleReminderNotificationCmd(todoId),
 									A2(
-										_Fresheyeball$elm_return$Return$map,
-										A2(_user$project$Model$snoozeTodoWithOffset, _p4._0, todoId),
-										_Fresheyeball$elm_return$Return$singleton(_p7)));
+										_Fresheyeball$elm_return$Return$command,
+										_user$project$Main$closeNotification(todoId),
+										A2(
+											_Fresheyeball$elm_return$Return$map,
+											A2(_user$project$Model$snoozeTodoWithOffset, _p3._0, todoId),
+											_Fresheyeball$elm_return$Return$singleton(_p6))));
 							};
 						case 'Close':
-							return function (_p8) {
+							return function (_p7) {
 								return _Fresheyeball$elm_return$Return$singleton(
-									_user$project$Model$removeReminderOverlay(_p8));
+									_user$project$Model$removeReminderOverlay(_p7));
 							};
 						default:
 							return _Fresheyeball$elm_return$Return$singleton;
@@ -46307,7 +46340,7 @@ var _user$project$Main$subscriptions = function (m) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
 			ctor: '::',
-			_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 10, _user$project$Msg$OnNowChanged),
+			_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 1, _user$project$Msg$OnNowChanged),
 			_1: {
 				ctor: '::',
 				_0: _user$project$Ext_Keyboard$subscription(_user$project$Msg$OnKeyboardMsg),
@@ -46337,50 +46370,64 @@ var _user$project$Main$startAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	function (v) {
 		return null;
 	});
-var _user$project$Main$showTodoNotificationCmd = function (_p10) {
+var _user$project$Main$showTodoNotificationCmd = function (_p9) {
 	return _elm_lang$core$Platform_Cmd$batch(
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-			function (_p11) {
+			function (_p10) {
 				return F2(
 					function (x, y) {
 						return {ctor: '::', _0: x, _1: y};
 					})(
 					_user$project$Main$showNotification(
-						_user$project$Main$createTodoNotification(_p11)));
+						_user$project$Main$createTodoNotification(_p10)));
 			},
 			{
 				ctor: '::',
 				_0: _user$project$Main$startAlarm(
 					{ctor: '_Tuple0'}),
 				_1: {ctor: '[]'}
-			})(_p10));
+			})(_p9));
 };
-var _user$project$Main$sendNotifications = _user$project$Ext_Return$andThenMaybe(
-	A2(
-		_user$project$Ext_Function_Infix_ops['>>?'],
-		_user$project$Model$findAndSnoozeOverDueTodo,
-		_elm_lang$core$Tuple$mapSecond(_user$project$Main$showTodoNotificationCmd)));
+var _user$project$Main$scheduleReminderNotifications = function (_p11) {
+	var _p12 = _p11;
+	var _p14 = _p12._1;
+	var _p13 = _p12._0;
+	return A2(
+		_elm_lang$core$Platform_Cmd_ops['!'],
+		_p13,
+		{
+			ctor: '::',
+			_0: _user$project$Main$showTodoNotificationCmd(_p14),
+			_1: {
+				ctor: '::',
+				_0: A2(_user$project$Main$scheduleReminderNotificationHelp, _p14, _p13),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _user$project$Main$onUpdateNow = function (now) {
-	return function (_p12) {
-		return _user$project$Main$sendNotifications(
+	return function (_p15) {
+		return A2(
+			_user$project$Ext_Return$andThenMaybe,
+			A2(_user$project$Ext_Function_Infix_ops['>>?'], _user$project$Model$findAndSnoozeOverDueTodo, _user$project$Main$scheduleReminderNotifications),
 			A2(
 				_Fresheyeball$elm_return$Return$map,
 				_user$project$Model_Internal$setNow(now),
-				_p12));
+				_p15));
 	};
 };
 var _user$project$Main$update = function (msg) {
-	return function (_p13) {
+	return function (_p16) {
 		return _user$project$Main$persistAll(
 			function () {
-				var _p14 = msg;
-				switch (_p14.ctor) {
+				var _p17 = msg;
+				switch (_p17.ctor) {
 					case 'OnCommonMsg':
-						return _user$project$CommonMsg$update(_p14._0);
+						return _user$project$CommonMsg$update(_p17._0);
 					case 'OnExternalEntityChanged':
 						return _Fresheyeball$elm_return$Return$map(
-							A2(_user$project$Model$onExternalEntityChange, _p14._0, _p14._1));
+							A2(_user$project$Model$onExternalEntityChange, _p17._0, _p17._1));
 					case 'SignIn':
 						return _Fresheyeball$elm_return$Return$command(
 							_user$project$Firebase$signIn(
@@ -46390,50 +46437,50 @@ var _user$project$Main$update = function (msg) {
 							_user$project$Firebase$signOut(
 								{ctor: '_Tuple0'}));
 					case 'OnUserChanged':
-						return function (_p15) {
+						return function (_p18) {
 							return A2(
 								_Fresheyeball$elm_return$Return$effect_,
 								_user$project$Main$firebaseUpdateTokenCmd,
 								A2(
 									_Fresheyeball$elm_return$Return$map,
-									_user$project$Model$setUser(_p14._0),
-									_p15));
+									_user$project$Model$setUser(_p17._0),
+									_p18));
 						};
 					case 'OnFCMTokenChanged':
-						var _p18 = _p14._0;
-						var _p16 = A2(_elm_lang$core$Debug$log, 'fcm: token', _p18);
-						return function (_p17) {
+						var _p21 = _p17._0;
+						var _p19 = A2(_elm_lang$core$Debug$log, 'fcm: token', _p21);
+						return function (_p20) {
 							return A2(
 								_Fresheyeball$elm_return$Return$effect_,
 								_user$project$Main$firebaseUpdateTokenCmd,
 								A2(
 									_Fresheyeball$elm_return$Return$map,
-									_user$project$Model$setFCMToken(_p18),
-									_p17));
+									_user$project$Model$setFCMToken(_p21),
+									_p20));
 						};
 					case 'OnEntityListKeyDown':
-						var _p22 = _p14._0;
-						var _p19 = _p14._1.key;
-						switch (_p19.ctor) {
+						var _p25 = _p17._0;
+						var _p22 = _p17._1.key;
+						switch (_p22.ctor) {
 							case 'ArrowUp':
-								return function (_p20) {
+								return function (_p23) {
 									return A2(
 										_user$project$Main$andThenUpdate,
 										_user$project$Main$setDomFocusToFocusedEntityCmd,
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$focusPrevEntity(_p22),
-											_p20));
+											_user$project$Model$focusPrevEntity(_p25),
+											_p23));
 								};
 							case 'ArrowDown':
-								return function (_p21) {
+								return function (_p24) {
 									return A2(
 										_user$project$Main$andThenUpdate,
 										_user$project$Main$setDomFocusToFocusedEntityCmd,
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$focusNextEntity(_p22),
-											_p21));
+											_user$project$Model$focusNextEntity(_p25),
+											_p24));
 								};
 							default:
 								return _elm_lang$core$Basics$identity;
@@ -46442,24 +46489,24 @@ var _user$project$Main$update = function (msg) {
 						return _Fresheyeball$elm_return$Return$map(_user$project$Model$toggleLayoutForceNarrow);
 					case 'OnLayoutNarrowChanged':
 						return _Fresheyeball$elm_return$Return$map(
-							_user$project$Model$setLayoutNarrow(_p14._0));
+							_user$project$Model$setLayoutNarrow(_p17._0));
 					case 'RemotePouchSync':
-						return function (_p23) {
+						return function (_p26) {
 							return A2(
 								_Fresheyeball$elm_return$Return$effect_,
-								function (_p24) {
+								function (_p27) {
 									return _user$project$Main$syncWithRemotePouch(
 										function (_) {
 											return _.pouchDBRemoteSyncURI;
-										}(_p24));
+										}(_p27));
 								},
-								A2(_user$project$Main$andThenUpdate, _user$project$Msg$SaveCurrentForm, _p23));
+								A2(_user$project$Main$andThenUpdate, _user$project$Msg$SaveCurrentForm, _p26));
 						};
 					case 'OnNotificationClicked':
-						return function (_p25) {
+						return function (_p28) {
 							return _user$project$Main$andThenUpdate(
-								_user$project$Msg$ShowReminderOverlayForTodoId(_p25));
-						}(_p14._0.data.id);
+								_user$project$Msg$ShowReminderOverlayForTodoId(_p28));
+						}(_p17._0.data.id);
 					case 'ToggleShowDeletedEntity':
 						return _Fresheyeball$elm_return$Return$map(
 							function (m) {
@@ -46468,113 +46515,110 @@ var _user$project$Main$update = function (msg) {
 									{showDeleted: !m.showDeleted});
 							});
 					case 'FocusPaperInput':
-						return _user$project$DomPorts$focusPaperInputCmd(_p14._0);
+						return _user$project$DomPorts$focusPaperInputCmd(_p17._0);
 					case 'AutoFocusPaperInput':
 						return _user$project$DomPorts$autoFocusPaperInputCmd;
 					case 'TodoAction':
 						return _elm_lang$core$Basics$identity;
 					case 'ReminderOverlayAction':
-						return _user$project$Main$reminderOverlayAction(_p14._0);
+						return _user$project$Main$reminderOverlayAction(_p17._0);
 					case 'ToggleTodoDone':
-						return A2(_user$project$Main$updateTodo, _user$project$Todo$ToggleDone, _p14._0);
+						return A2(_user$project$Main$updateTodo, _user$project$Todo$ToggleDone, _p17._0);
 					case 'SetTodoContext':
 						return A2(
 							_user$project$Main$updateAllSelectedTodoIfTodoIdInSelection,
-							_user$project$Todo$SetContext(_p14._0),
-							_p14._1);
+							_user$project$Todo$SetContext(_p17._0),
+							_p17._1);
 					case 'SetTodoProject':
 						return A2(
 							_user$project$Main$updateAllSelectedTodoIfTodoIdInSelection,
-							_user$project$Todo$SetProject(_p14._0),
-							_p14._1);
+							_user$project$Todo$SetProject(_p17._0),
+							_p17._1);
 					case 'NewTodoTextChanged':
 						return _Fresheyeball$elm_return$Return$map(
-							_user$project$Model$updateNewTodoText(_p14._0));
+							_user$project$Model$updateNewTodoText(_p17._0));
 					case 'DeactivateEditingMode':
-						return function (_p26) {
+						return function (_p29) {
 							return A2(
 								_user$project$Main$andThenUpdate,
 								_user$project$Main$setDomFocusToFocusedEntityCmd,
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$deactivateEditingMode, _p26));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$deactivateEditingMode, _p29));
 						};
 					case 'NewTodoKeyUp':
-						var _p27 = _p14._1.key;
-						if (_p27.ctor === 'Enter') {
+						var _p30 = _p17._1.key;
+						if (_p30.ctor === 'Enter') {
 							return _user$project$Main$andThenUpdate(_user$project$Msg$SaveCurrentForm);
 						} else {
 							return _elm_lang$core$Basics$identity;
 						}
 					case 'StartEditingReminder':
-						return function (_p28) {
+						return function (_p31) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
 								A2(
 									_Fresheyeball$elm_return$Return$map,
-									_user$project$Model$startEditingReminder(_p14._0),
-									_p28));
+									_user$project$Model$startEditingReminder(_p17._0),
+									_p31));
 						};
 					case 'UpdateTodoForm':
 						return _Fresheyeball$elm_return$Return$map(
-							function (_p29) {
+							function (_p32) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditTodo(_p29));
+									_user$project$EditMode$EditTodo(_p32));
 							}(
-								A2(_user$project$Todo_Form$set, _p14._1, _p14._0)));
+								A2(_user$project$Todo_Form$set, _p17._1, _p17._0)));
 					case 'UpdateRemoteSyncFormUri':
 						return _Fresheyeball$elm_return$Return$map(
-							function (_p30) {
+							function (_p33) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditSyncSettings(_p30));
+									_user$project$EditMode$EditSyncSettings(_p33));
 							}(
 								_elm_lang$core$Native_Utils.update(
-									_p14._0,
-									{uri: _p14._1})));
+									_p17._0,
+									{uri: _p17._1})));
 					case 'UpdateReminderForm':
 						return _Fresheyeball$elm_return$Return$map(
-							function (_p31) {
+							function (_p34) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditTodoReminder(_p31));
+									_user$project$EditMode$EditTodoReminder(_p34));
 							}(
-								A2(_user$project$Todo_ReminderForm$set, _p14._1, _p14._0)));
+								A2(_user$project$Todo_ReminderForm$set, _p17._1, _p17._0)));
 					case 'SetView':
 						return _Fresheyeball$elm_return$Return$map(
-							_user$project$Model$setMainViewType(_p14._0));
+							_user$project$Model$setMainViewType(_p17._0));
 					case 'SetGroupByView':
 						return _Fresheyeball$elm_return$Return$map(
-							_user$project$Model$setEntityListViewType(_p14._0));
+							_user$project$Model$setEntityListViewType(_p17._0));
 					case 'ShowReminderOverlayForTodoId':
 						return _Fresheyeball$elm_return$Return$map(
-							_user$project$Model$showReminderOverlayForTodoId(_p14._0));
+							_user$project$Model$showReminderOverlayForTodoId(_p17._0));
 					case 'OnNowChanged':
-						return _user$project$Main$onUpdateNow(_p14._0);
+						return _user$project$Main$onUpdateNow(_p17._0);
 					case 'OnMsgList':
-						return _user$project$Main$onMsgList(_p14._0);
+						return _user$project$Main$onMsgList(_p17._0);
 					case 'OnKeyboardMsg':
-						return function (_p32) {
+						return function (_p35) {
 							return A2(
 								_user$project$DomPorts$focusSelectorIfNoFocusCmd,
 								'.entity-list > [tabindex=0]',
 								A2(
 									_Fresheyeball$elm_return$Return$map,
 									_user$project$Model_Internal$updateKeyboardState(
-										_user$project$Ext_Keyboard$update(_p14._0)),
-									_p32));
+										_user$project$Ext_Keyboard$update(_p17._0)),
+									_p35));
 						};
 					case 'SaveCurrentForm':
-						return function (_p33) {
+						return function (_p36) {
 							return A2(
 								_user$project$Main$andThenUpdate,
 								_user$project$Msg$DeactivateEditingMode,
 								A2(
 									_Fresheyeball$elm_return$Return$andThen,
-									function (_p34) {
-										var _p35 = _p34;
-										var _p36 = _p35._1;
-										return {
+									_danielnarey$elm_toolkit$Toolkit_Helpers$apply2(
+										{
 											ctor: '_Tuple2',
-											_0: _p36,
-											_1: A2(_user$project$Main$scheduleReminderPushCmd, _p35._0, _p36)
-										};
-									},
+											_0: _elm_lang$core$Tuple$second,
+											_1: _elm_lang$core$Basics$uncurry(_user$project$Main$scheduleReminderNotificationForMaybeTodoIdCmd)
+										}),
 									A2(
 										_Fresheyeball$elm_return$Return$map,
 										_danielnarey$elm_toolkit$Toolkit_Helpers$apply2(
@@ -46588,7 +46632,7 @@ var _user$project$Main$update = function (msg) {
 													}),
 												_1: _user$project$Model$saveCurrentForm
 											}),
-										_p33)));
+										_p36)));
 						};
 					case 'NewTodo':
 						return function (_p37) {
@@ -46608,8 +46652,8 @@ var _user$project$Main$update = function (msg) {
 					case 'StartAddingNewEntity':
 						return _elm_lang$core$Basics$identity;
 					case 'OnEntityAction':
-						var _p44 = _p14._0;
-						var _p40 = _p14._1;
+						var _p44 = _p17._0;
+						var _p40 = _p17._1;
 						switch (_p40.ctor) {
 							case 'StartEditing':
 								return function (_p41) {
@@ -46661,10 +46705,10 @@ var _user$project$Main$update = function (msg) {
 								};
 						}
 					default:
-						return _user$project$Main$onGlobalKeyUp(_p14._0);
+						return _user$project$Main$onGlobalKeyUp(_p17._0);
 				}
 			}()(
-				_Fresheyeball$elm_return$Return$singleton(_p13)));
+				_Fresheyeball$elm_return$Return$singleton(_p16)));
 	};
 };
 var _user$project$Main$andThenUpdate = function (_p45) {
@@ -48015,7 +48059,7 @@ var Notifications = __webpack_require__(245);
 var firebaseConfig =  false ? require("./config/dev/firebase") : __webpack_require__(243);
 
 var developmentMode = false;
-var pkg = {"name":"simplegtd.com","version":"0.9.5","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","bump":"npm_bump --auto --auto-fallback patch --skip-push","postbump":"npm run build","deploy":"git push && firebase deploy --project prod --except 'functions'","f:deploy:db":"firebase deploy --only database","f:deploy:fun":"firebase deploy --only functions","f:deploy:files":"firebase deploy --only hosting","dev":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server","hot":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","watch":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack --watch","watch-prod":"cross-env NODE_ENV=production webpack -p --progress --watch","build":"bash scripts/build.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"alien-date":"0.2.2","babel-polyfill":"6.23.0","chrono":"1.0.5","chrono-node":"1.3.1","dateparser":"1.0.6","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","memorystream":"0.3.1","parse-messy-time":"2.1.0","peerjs":"0.3.14","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-replication-stream":"1.2.9","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
+var pkg = {"name":"simplegtd.com","version":"0.10.0","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","bump":"npm_bump --auto --auto-fallback patch --skip-push","postbump":"npm run build","deploy":"git push && firebase deploy --project prod --except 'functions'","f:deploy:db":"firebase deploy --only database","f:deploy:fun":"firebase deploy --only functions","f:deploy:files":"firebase deploy --only hosting","dev":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server","hot":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","watch":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack --watch","watch-prod":"cross-env NODE_ENV=production webpack -p --progress --watch","build":"bash scripts/build.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"alien-date":"0.2.2","babel-polyfill":"6.23.0","chrono":"1.0.5","chrono-node":"1.3.1","dateparser":"1.0.6","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","memorystream":"0.3.1","parse-messy-time":"2.1.0","peerjs":"0.3.14","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-replication-stream":"1.2.9","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
 
 boot().catch(console.error);
 

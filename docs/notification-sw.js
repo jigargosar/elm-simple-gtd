@@ -129,6 +129,13 @@ function postMessage(client, event) {
 // are not available in the service worker.
 importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js', 'https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js', 'bower_components/pouchdb/dist/pouchdb.js');
 
+function isMobile() {
+    return self.navigator.userAgent.match(/.*Mobi.*/i);
+    // const result = browser(self.navigator.userAgent)
+    // console.log(result);
+    // return result.mobile
+}
+
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
 firebase.initializeApp({
@@ -149,10 +156,7 @@ firebase.initializeApp({
 // });
 
 
-self.addEventListener('push', function (event) {
-    console.log('[Service Worker] Push Received.');
-    console.log("[Service Worker] Push had this data: \"" + event.data.text() + "\"");
-
+function displayNotification(event) {
     try {
         var data = event.data.json().data;
         console.log("[Service Worker] Push had this json: ", data);
@@ -161,10 +165,10 @@ self.addEventListener('push', function (event) {
 
         var todoDB = new PouchDB("todo-db");
 
-        event.waitUntil(todoDB.get(todoId).then(function (todo) {
+        return todoDB.get(todoId).then(function (todo) {
             console.log("pdb found todo", todo);
 
-            var title = todoId;
+            var title = "";
             var notificationOptions = {
                 requiresInteraction: true,
                 sticky: true,
@@ -172,13 +176,14 @@ self.addEventListener('push', function (event) {
                 tag: data.todoId,
                 vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
                 sound: "/alarm.ogg",
+                icon: "/logo.png",
                 actions: [{ title: "Mark Done", action: "mark-done" }, { title: "Snooze", action: "snooze" }],
                 body: todo.text,
                 data: data,
                 timestamp: data.timestamp
             };
             return self.registration.showNotification(title, notificationOptions);
-        }));
+        });
     } catch (e) {
         console.warn(e);
         var title = 'Push Codelab';
@@ -187,8 +192,21 @@ self.addEventListener('push', function (event) {
             sound: "/alarm.ogg",
             timestamp: 0
         };
-        event.waitUntil(self.registration.showNotification(title, options));
+        return self.registration.showNotification(title, options);
     }
+}
+
+self.addEventListener('push', function (event) {
+    console.log('[Service Worker] Push Received.');
+    console.log("[Service Worker] Push had this data: \"" + event.data.text() + "\"");
+
+    event.waitUntil(clients.matchAll({ type: "window" }).then(function (clientList) {
+        if (clientList.length === 0 || isMobile()) {
+            return displayNotification(event);
+        } else {
+            console.warn("not displaying notification since we detected an controlled browser window and non-mobile browser");
+        }
+    }));
 });
 
 // messaging.setBackgroundMessageHandler(function (payload) {

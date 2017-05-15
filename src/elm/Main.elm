@@ -241,7 +241,11 @@ update msg =
                         )
                         >> Return.andThen
                             (\( maybeTodoReminderFormId, model ) ->
-                                ( model, scheduleReminderNotificationCmd maybeTodoReminderFormId model )
+                                ( model
+                                , maybeTodoReminderFormId
+                                    ?|> (scheduleReminderNotificationCmd # model)
+                                    ?= Cmd.none
+                                )
                             )
                         >> andThenUpdate DeactivateEditingMode
 
@@ -347,7 +351,7 @@ onUpdateNow now =
 
 
 scheduleReminderNotifications ( model, todo ) =
-    model ! [ showTodoNotificationCmd todo, scheduleReminderNotification2 todo model ]
+    model ! [ showTodoNotificationCmd todo, scheduleReminderNotificationHelp todo model ]
 
 
 showTodoNotificationCmd =
@@ -421,21 +425,21 @@ firebaseUpdateTokenCmd model =
     Model.getMaybeUserId model ?|> Firebase.setTokenCmd # model.fcmToken ?= Cmd.none
 
 
-scheduleReminderNotificationCmd maybeTodoId model =
-    let
-        scheduleHelp ( uid, todoId ) =
-            let
-                maybeTime =
-                    maybeTodoId
-                        ?+> (Model.findTodoById # model)
-                        ?+> Todo.getMaybeReminderTime
-            in
-                Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
-    in
-        ( Model.getMaybeUserId model, maybeTodoId ) |> maybe2Tuple ?|> scheduleHelp ?= Cmd.none
+scheduleReminderNotificationForMaybeTodoIdCmd : Maybe Todo.Id -> Model -> Cmd msg
+scheduleReminderNotificationForMaybeTodoIdCmd maybeTodoId model =
+    maybeTodoId
+        ?|> (scheduleReminderNotificationCmd # model)
+        ?= Cmd.none
 
 
-scheduleReminderNotification2 todo model =
+scheduleReminderNotificationCmd todoId model =
+    Model.findTodoById todoId model
+        ?|> (scheduleReminderNotificationHelp # model)
+        ?= Cmd.none
+
+
+scheduleReminderNotificationHelp : Todo.Model -> Model -> Cmd msg
+scheduleReminderNotificationHelp todo model =
     let
         scheduleHelp uid =
             let

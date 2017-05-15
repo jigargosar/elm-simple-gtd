@@ -103,7 +103,7 @@ function displayNotification(event) {
             .then(todo => {
                 console.log("pdb found todo", todo)
 
-                const title = todoId;
+                const title = "";
                 const notificationOptions = {
                     requiresInteraction: true,
                     sticky: true,

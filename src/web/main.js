@@ -1,6 +1,7 @@
 "use strict";
 
 const _ = require("ramda")
+const cryptoRandomString = require('crypto-random-string');
 
 require("./pcss/main.pcss")
 
@@ -161,7 +162,7 @@ async function boot() {
 function getOrCreateDeviceId() {
     let deviceId = localStorage.getItem("device-id")
     if(!deviceId){
-        deviceId = "random string"
+        deviceId = cryptoRandomString(64)
         localStorage.setItem("device-id", deviceId)
     }
     return deviceId

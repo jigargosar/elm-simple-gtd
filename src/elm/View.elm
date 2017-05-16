@@ -18,6 +18,7 @@ import Polymer.Firebase
 import ReminderOverlay
 import Set
 import Entity.ViewModel
+import Todo.ContextForm
 import View.Header
 import Main.View
 import View.TodoList
@@ -47,20 +48,34 @@ import WebComponents exposing (doneAllIconP, dynamicAlign, icon, iconA, iconButt
 
 init m =
     div [ id "root" ]
-        [ Firebase.View.init m
-        , appView m
-        , overlayViews m
-        ]
+        ([ Firebase.View.init m
+         , appView m
+         ]
+            ++ (overlayViews m)
+        )
 
 
 overlayViews m =
+    contextDropdown m
+
+
+contextDropdown : Model -> List (Html Msg)
+contextDropdown model =
     let
-        createContextItem context =
+        createContextItem onItemClick context =
             Paper.item
-                [{- onClickStopPropagation (Msg.SetTodoContext context todo) -}]
+                [ onClick (onItemClick context) ]
                 [ context |> Context.getName >> text ]
+
+        view form =
+            let
+                onItemClick =
+                    Msg.SetTodoContext # form.todo
+            in
+                Paper.listbox [ id "context-dropdown" ]
+                    (Model.getActiveContexts model .|> createContextItem onItemClick)
     in
-        Paper.listbox [ id "context-dropdown" ] (Model.getActiveContexts m .|> createContextItem)
+        model |> Model.getMaybeEditTodoContextForm ?|> view |> Maybe.toList
 
 
 appView m =

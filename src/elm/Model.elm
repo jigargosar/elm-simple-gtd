@@ -441,6 +441,15 @@ getMaybeEditTodoReminderForm model =
             Nothing
 
 
+getMaybeEditTodoContextForm model =
+    case model.editMode of
+        EditMode.EditTodoContext form ->
+            Just form
+
+        _ ->
+            Nothing
+
+
 setTodoContextOrProjectBasedOnCurrentView todoId model =
     let
         maybeTodoUpdateAction =

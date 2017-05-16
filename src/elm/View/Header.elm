@@ -6,6 +6,7 @@ import Ext.Time
 import Firebase
 import Html.Attributes.Extra exposing (..)
 import Model
+import Todo.NewForm
 import Types exposing (Model)
 import Msg exposing (Msg)
 import Polymer.App as App
@@ -70,9 +71,9 @@ headerView m =
                 [ id newTodoInputId
                 , class "auto-focus"
                 , onInput Msg.NewTodoTextChanged
-                , value form.text
+                , form |> Todo.NewForm.getText |> value
                 , onBlur Msg.DeactivateEditingMode
-                , Keyboard.onKeyUp (Msg.NewTodoKeyUp form)
+                , Keyboard.onKeyUp Msg.NewTodoKeyUp
                 , stringProperty "label" "New Todo"
                 , boolProperty "alwaysFloatLabel" True
                 , style [ ( "width", "100%" ), "color" => "white" ]

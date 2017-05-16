@@ -421,7 +421,7 @@ saveCurrentForm model =
         --                |> updateTodoById (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
         --                |> setFocusInEntityWithId form.id
         EditMode.NewTodo form ->
-            insertTodo (Todo.init model.now form.text) model
+            insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model
                 |> Tuple.mapFirst Document.getId
                 |> uncurry setTodoContextOrProjectBasedOnCurrentView
 

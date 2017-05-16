@@ -2,6 +2,7 @@ module Todo.NewForm exposing (..)
 
 import Context
 import Document
+import Form
 import Project
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -13,35 +14,25 @@ import Todo
 
 
 type alias Model =
-    { text : Todo.Text
-
-    --    , project : Project.Model
-    --    , context : Context.Model
-    }
+    Form.Model
 
 
-type Action
-    = SetText String
+type Field
+    = Text
 
 
-
---create : Todo.Model -> Project.Model -> Context.Model -> Model
---create todo project context =
---    { id = Document.getId todo
---    , text = Todo.getText todo
---    , project = project
---    , context = context
---    }
-
-
-create : Todo.Text -> Model
+create : Todo.Text -> Form.Model
 create text =
-    { text = text
-    }
+    Form.init
+        |> Form.set "text" text
 
 
-set : Action -> Model -> Model
-set action model =
-    case action of
-        SetText value ->
-            { model | text = value }
+set : Field -> String -> Form.ModelF
+set field value =
+    case field of
+        Text ->
+            Form.set "text" value
+
+
+getText =
+    Form.get "text"

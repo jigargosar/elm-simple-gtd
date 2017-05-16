@@ -182,7 +182,7 @@ update msg =
                     Return.map (Model.deactivateEditingMode)
                         >> andThenUpdate setDomFocusToFocusedEntityCmd
 
-                NewTodoKeyUp { text } { key } ->
+                NewTodoKeyUp { key } ->
                     case key of
                         Key.Enter ->
                             andThenUpdate (SaveCurrentForm)

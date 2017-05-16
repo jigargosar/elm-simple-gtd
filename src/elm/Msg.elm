@@ -53,7 +53,7 @@ type Msg
     | NewContext
     | NewTodoTextChanged Todo.Text
     | DeactivateEditingMode
-    | NewTodoKeyUp Todo.NewForm.Model KeyboardEvent
+    | NewTodoKeyUp KeyboardEvent
     | StartEditingReminder Todo.Model
     | StartEditingContext Todo.Model
     | SaveCurrentForm

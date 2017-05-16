@@ -93,12 +93,11 @@ function sendPushNotifications(notificationMap) {
     return Promise.all(promiseList)
 }
 
-const sendPush = notificationData => tokenSnapshot => {
+const sendPush = notificationData => tokenMap => {
     const token = tokenSnapshot.val()
-    let promise = null
     const {todoId, timestamp, uid} = notificationData
     if (token) {
-        promise = admin
+        return admin
             .messaging()
             .sendToDevice(
                 token,
@@ -116,20 +115,11 @@ const sendPush = notificationData => tokenSnapshot => {
                 return mdRes
             })
     } else {
-        promise = Promise.resolve({
+        return Promise.resolve({
             error: "Cannot send notification: token not found: ",
             notificationData: notificationData
         })
     }
-    // const newTimestamp = max(Date.now(), timestamp) + (15 * minute)
-    // return Promise.all([
-    //     promise, createNotificationRef(uid, todoId).set({
-    //         todoId,
-    //         timestamp: newTimestamp
-    //         , uid
-    //     })
-    // ])
-    return promise
 }
 
 function createNotificationRef(uid, todoId) {

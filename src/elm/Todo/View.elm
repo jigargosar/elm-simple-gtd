@@ -275,7 +275,13 @@ contextDropdownMenu vm =
                 [ onClickStopPropagation (vm.setContextMsg context) ]
                 [ context |> Context.getName >> text ]
     in
-        dropdownTrigger vm (text vm.contextDisplayName)
+        Paper.button
+            [ style [ "height" => "24px" ]
+            , class "small padding-0 margin-0 shrink"
+            , vm.tabindexAV
+            ]
+            [ div [ class "title primary-text-color" ] [ text vm.contextDisplayName ]
+            ]
 
 
 

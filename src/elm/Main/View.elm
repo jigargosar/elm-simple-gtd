@@ -74,7 +74,9 @@ contextDropdown model =
                 onItemClick =
                     Msg.SetTodoContext # form.todo
             in
-                Paper.listbox [ id "context-dropdown" ]
-                    (Model.getActiveContexts model .|> createContextItem onItemClick)
+                Paper.material [ id "context-dropdown" ]
+                    [ Paper.listbox []
+                        (Model.getActiveContexts model .|> createContextItem onItemClick)
+                    ]
     in
         model |> Model.getMaybeEditTodoContextForm ?|> view |> Maybe.toList

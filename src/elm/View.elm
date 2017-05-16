@@ -1,9 +1,11 @@
 module View exposing (init)
 
+import Context
 import EditMode
 import Firebase
 import Firebase.View
 import Html.Attributes.Extra exposing (..)
+import Html.Events.Extra exposing (onClickStopPropagation)
 import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, form, h1, h2, hr, input, node, span, text)
 import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, tabindex, type_, value)
@@ -47,7 +49,18 @@ init m =
     div [ id "root" ]
         [ Firebase.View.init m
         , appView m
+        , overlayViews m
         ]
+
+
+overlayViews m =
+    let
+        createContextItem context =
+            Paper.item
+                [{- onClickStopPropagation (Msg.SetTodoContext context todo) -}]
+                [ context |> Context.getName >> text ]
+    in
+        Paper.listbox [ id "context-dropdown" ] (Model.getActiveContexts m .|> createContextItem)
 
 
 appView m =

@@ -31,19 +31,6 @@ create todo =
     }
 
 
-
---set : FormField -> Form -> Form
---set field form =
---    case ( form, field ) of
---        ( TextForm form, TextFormField field ) ->
---            case field of
---                Text value ->
---                    TextForm { form | todoText = value }
---
---        _ ->
---            form
-
-
 set : Action -> Model -> Model
 set action model =
     case action of

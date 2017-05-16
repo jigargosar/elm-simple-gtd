@@ -2,6 +2,7 @@ module EditMode exposing (..)
 
 import Context
 import Document
+import Form
 import Project
 import Todo
 import Todo.ContextForm
@@ -43,7 +44,7 @@ type alias SyncForm =
 
 
 type EditForm
-    = NewTodo Todo.NewForm.Model
+    = NewTodo Form.Model
     | EditTodo Todo.Form.Model
     | EditTodoReminder Todo.ReminderForm.Model
     | EditTodoContext Todo.ContextForm.Model

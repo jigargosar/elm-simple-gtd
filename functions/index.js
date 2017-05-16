@@ -87,7 +87,7 @@ function sendPushNotifications(notificationMap) {
 }
 
 const sendPush = notificationData => tokenMap => {
-    console.debug("tokenMap", tokenMap)
+    console.log("tokenMap", tokenMap)
     const {todoId, timestamp, uid} = notificationData
     const sendPushForDevice = (token, deviceId)=>{
         return admin

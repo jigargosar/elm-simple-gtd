@@ -109,7 +109,7 @@ async function boot() {
             at: "right top",
             of:"#"+domId,
             within:"#main-view",
-            collision:"flipfit"
+            collision:"fit"
         })
     })
 

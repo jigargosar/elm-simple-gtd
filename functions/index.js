@@ -126,5 +126,5 @@ function createNotificationRef(uid, todoId) {
 
 
 function deleteToken(uid, token) {
-    return admin.database().ref("/users/" + token).set(null)
+    return admin.database().ref(`/users/${uid}/token/`).set(null)
 }

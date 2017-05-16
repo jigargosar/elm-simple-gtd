@@ -278,7 +278,7 @@ contextDropdownMenu vm =
                 [ context |> Context.getName >> text ]
     in
         Paper.button
-            [ id ("context-dropdown-" + vm.key)
+            [ id ("context-dropdown-" ++ vm.key)
             , style [ "height" => "24px" ]
             , class "small padding-0 margin-0 shrink"
             , vm.tabindexAV

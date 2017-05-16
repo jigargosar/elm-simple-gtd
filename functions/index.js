@@ -95,7 +95,8 @@ const sendPush = notificationData => tokenSnapshot => {
                     return mdResult.error && mdResult.error.code === "messaging/registration-token-not-registered"
                 })
                 if (tokenUnregistered) {
-                    // return deleteToken res and mdRes
+                    return deleteToken(uid, token)
+                        .then(res => ({error:{mdRes, deleteTokenRes:res}}))
                 }
                 return mdRes
             })
@@ -118,4 +119,9 @@ const sendPush = notificationData => tokenSnapshot => {
 
 function createNotificationRef(uid, todoId) {
     return admin.database().ref("/notifications/" + uid + "---" + todoId)
+}
+
+
+function deleteToken(uid, token){
+    return admin.database().ref("/users/"+token).set(null)
 }

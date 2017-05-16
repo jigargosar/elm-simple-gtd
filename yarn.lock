@@ -2705,9 +2705,9 @@ dateparser@1.0.6:
   dependencies:
     moment "^2.10.6"
 
-debug@2, debug@2.6.1, debug@^2.0.0, debug@^2.1.0, debug@^2.1.1, debug@^2.2.0:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
+debug@2, debug@2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.3.tgz#0f7eb8c30965ec08c72accfa0130c8b79984141d"
   dependencies:
     ms "0.7.2"
 
@@ -2729,9 +2729,9 @@ debug@2.6.0:
   dependencies:
     ms "0.7.2"
 
-debug@2.6.3:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.3.tgz#0f7eb8c30965ec08c72accfa0130c8b79984141d"
+debug@2.6.1, debug@^2.0.0, debug@^2.1.0, debug@^2.1.1, debug@^2.2.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
     ms "0.7.2"
 
@@ -5419,11 +5419,11 @@ ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
 
-ms@0.7.2:
+ms@0.7.2, ms@^0.7.1:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.2.tgz#ae25cf2512b3885a1d95d7f037868d8431124765"
 
-ms@0.7.3, ms@^0.7.1:
+ms@0.7.3:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.3.tgz#708155a5e44e33f5fd0fc53e81d0d40a91be1fff"
 
@@ -7492,7 +7492,7 @@ replace-ext@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-1.0.0.tgz#de63128373fcbf7c3ccfa4de5a480c45a67958eb"
 
-request@2.74.0, request@^2.72.0:
+request@2.74.0, request@2.x, request@^2.58.0, request@^2.72.0:
   version "2.74.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.74.0.tgz#7693ca768bbb0ea5c8ce08c084a45efa05b892ab"
   dependencies:
@@ -7543,7 +7543,7 @@ request@2.76.0:
     tough-cookie "~2.3.0"
     tunnel-agent "~0.4.1"
 
-request@2.79.0, request@^2.53.0:
+request@2.79.0, request@^2.53.0, request@^2.61.0, request@^2.74.0, request@^2.79.0:
   version "2.79.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:
@@ -7568,7 +7568,7 @@ request@2.79.0, request@^2.53.0:
     tunnel-agent "~0.4.1"
     uuid "^3.0.0"
 
-request@2.x, request@^2.58.0, request@^2.61.0, request@^2.74.0, request@^2.79.0, request@^2.81.0:
+request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
@@ -8443,18 +8443,18 @@ tar-stream@1.5.2:
     readable-stream "^2.0.0"
     xtend "^4.0.0"
 
-tar-stream@^1.1.2, tar-stream@^1.5.0:
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/tar-stream/-/tar-stream-1.5.4.tgz#36549cf04ed1aee9b2a30c0143252238daf94016"
+tar-stream@^1.1.2, tar-stream@~1.2.1:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/tar-stream/-/tar-stream-1.2.2.tgz#9632f23d98fd33d41661bbdec05489120dec6028"
   dependencies:
     bl "^1.0.0"
     end-of-stream "^1.0.0"
     readable-stream "^2.0.0"
     xtend "^4.0.0"
 
-tar-stream@~1.2.1:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/tar-stream/-/tar-stream-1.2.2.tgz#9632f23d98fd33d41661bbdec05489120dec6028"
+tar-stream@^1.5.0:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/tar-stream/-/tar-stream-1.5.4.tgz#36549cf04ed1aee9b2a30c0143252238daf94016"
   dependencies:
     bl "^1.0.0"
     end-of-stream "^1.0.0"

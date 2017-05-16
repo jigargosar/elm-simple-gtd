@@ -7,7 +7,10 @@
 // })
 
 self.addEventListener('install', function (event) {
-    event.waitUntil(self.skipWaiting())
+    //noinspection JSUnresolvedVariable
+    if(isDevEnv){
+        event.waitUntil(self.skipWaiting())
+    }
 })
 
 self.addEventListener('notificationclick', function (event) {

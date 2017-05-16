@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require("path");
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
-const pkg=require("./package.json");
+const pkg = require("./package.json");
 
 const nodeENV = process.env.NODE_ENV || "development"
 
@@ -41,10 +41,11 @@ module.exports = {
             entry: './src/web/notification-sw.js',
             filename: "notification-sw.js",
             template: function () {
-                return Promise.resolve("var url = \"" + (
-                        process.env.WEB_PACK_DEV_SERVER
-                            ? "http://localhost:8020/" : "https://simplegtd.com/"
-                    ) + "\";\n");
+                return Promise.resolve(
+                    serviceWorkerTemplate(
+                        isDevEnv ? "http://localhost:8020/" : "https://simplegtd.com/"
+                    )
+                )
             }
         }),
         // new webpack.ProvidePlugin({
@@ -102,3 +103,12 @@ module.exports = {
     },
 
 };
+
+
+const serviceWorkerTemplate = (url) =>
+    `
+        const url = "${url}";
+        
+        const isDevEnv = ${isDevEnv};
+    
+    `

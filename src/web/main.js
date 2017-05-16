@@ -1,6 +1,18 @@
 "use strict";
 
 const _ = require("ramda")
+
+const config = {
+    apiKey: "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc",
+    authDomain: "rational-mote-664.firebaseapp.com",
+    databaseURL: "https://rational-mote-664.firebaseio.com",
+    projectId: "rational-mote-664",
+    storageBucket: "rational-mote-664.appspot.com",
+    messagingSenderId: "49437522774"
+}
+
+const firebaseApp = firebase.initializeApp(config);
+
 const cryptoRandomString = require('crypto-random-string');
 
 require("./pcss/main.pcss")
@@ -20,7 +32,7 @@ const firebaseConfig =
         require("./config/dev/firebase") :
         require("./config/prod/firebase")
 
-const developmentMode =  IS_DEVELOPMENT_ENV
+const developmentMode = IS_DEVELOPMENT_ENV
 const pkg = packageJSON
 
 boot().catch(console.error)
@@ -29,9 +41,9 @@ async function boot() {
     const $elm = $("#elm-app-container")
     $elm.trap();
 
-    $elm.on("keydown", `.todo-item, .entity-item`, e =>{
+    $elm.on("keydown", `.todo-item, .entity-item`, e => {
         // console.log(e.keyCode, e.key, e);
-        if (e.key === " "/*space: 32*/){
+        if (e.key === " "/*space: 32*/) {
             e.preventDefault()
         }
     })
@@ -54,7 +66,7 @@ async function boot() {
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
         firebaseAppAttributes: firebaseConfig.appAttributes,
         developmentMode: developmentMode,
-        appVersion:pkg.version,
+        appVersion: pkg.version,
         deviceId
     }
     const Elm = require("elm/Main.elm")
@@ -87,10 +99,10 @@ async function boot() {
 
     app.ports["focusSelector"].subscribe((selector) => {
         // setTimeout(() => {
-            requestAnimationFrame(() => {
-                // note - we blur here so that view scrolls to element if it already had focus
-                $(selector).blur().focus()
-            })
+        requestAnimationFrame(() => {
+            // note - we blur here so that view scrolls to element if it already had focus
+            $(selector).blur().focus()
+        })
         // }, 0)
     })
 
@@ -103,13 +115,13 @@ async function boot() {
     })
 
     app.ports["positionContextDropdown"].subscribe((domId) => {
-        requestAnimationFrame(()=>{
+        requestAnimationFrame(() => {
             $("#context-dropdown").position({
-                my:"right top",
+                my: "right top",
                 at: "right top",
-                of:"#"+domId,
-                within:"#main-view",
-                collision:"flipfit"
+                of: "#" + domId,
+                within: "#main-view",
+                collision: "flipfit"
             }).find(`[tabindex="0"]`).focus()
         })
     })
@@ -122,15 +134,16 @@ async function boot() {
             .catch(console.error)
     })
 
+
     app.ports["fireDataWrite"].subscribe(([path, value]) => {
-        console.log(`app.database().ref(path).set(value)`, {path, value})
-        const ref = $("firebase-app")[0].app.database().ref(path);
+        console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
+        const ref = firebaseApp.database().ref(path);
         ref.set(value)
     })
 
     app.ports["fireDataPush"].subscribe(([path, value]) => {
-        console.log(`app.database().ref(path).push(value)`, {path, value})
-        $("firebase-app")[0].app.database().ref(path).push(value)
+        console.log(`firebaseApp.database().ref(path).push(value)`, {path, value})
+        firebaseApp.database().ref(path).push(value)
     })
 
     app.ports["signOut"].subscribe(() => {
@@ -173,7 +186,7 @@ async function boot() {
 
 function getOrCreateDeviceId() {
     let deviceId = localStorage.getItem("device-id")
-    if(!deviceId){
+    if (!deviceId) {
         deviceId = cryptoRandomString(64)
         localStorage.setItem("device-id", deviceId)
     }

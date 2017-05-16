@@ -45,8 +45,10 @@ init m =
                 ?= []
     in
         div [ id "firebase-container" ]
-            ([ Html.node "firebase-app" (attributes m.firebaseAppAttributes) []
-             , Html.node "firebase-auth"
+            ([ {- Html.node "firebase-app" (attributes m.firebaseAppAttributes) []
+                  ,
+               -}
+               Html.node "firebase-auth"
                 [ id "google-auth"
                 , attribute "provider" "google"
                 , onUserChanged Msg.OnUserChanged

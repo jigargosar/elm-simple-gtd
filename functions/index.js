@@ -117,11 +117,6 @@ const sendPush = notificationData => tokenMap => {
     return _.compose(Promise.all,_.values, _.mapObjIndexed(sendPushForDevice))(tokenMap)
 }
 
-function createNotificationRef(uid, todoId) {
-    return admin.database().ref("/notifications/" + uid + "---" + todoId)
-}
-
-
 function deleteToken(uid, deviceId) {
     return admin.database().ref(`/users/${uid}/token/${deviceId}`).set(null)
 }

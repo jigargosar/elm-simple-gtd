@@ -42,7 +42,7 @@ function sendTestPushToAllUsersWithRegistrationToken(userMap) {
                         data: {
                             todoId: "7aIPoEclCGfR6lPUXb71hGXdoETwthsaETqSK98Bne2qyw2uWJcTgKDj03lpPCDt",
                             uid: userId,
-                            timestamp: Date.now()+""
+                            timestamp: Date.now() + ""
                         }
                     },
                     {timeToLive: tenMinutes, priority: "high"}
@@ -61,7 +61,10 @@ exports.notificationCorn = functions.https.onRequest((req, res) => {
         .endAt(Date.now() + fiveMinutes)
         .once("value")
         .then(sendPushNotifications)
-        .then(arr => res.send(arr))
+        .then(arr => {
+            console.log(arr)
+            return res.send(arr)
+        })
 
 })
 
@@ -96,7 +99,7 @@ const sendPush = notificationData => tokenSnapshot => {
                 })
                 if (tokenUnregistered) {
                     return deleteToken(uid, token)
-                        .then(res => ({error:{mdRes, deleteTokenRes:res}}))
+                        .then(res => ({error: {mdRes, deleteTokenRes: res}}))
                 }
                 return mdRes
             })
@@ -122,6 +125,6 @@ function createNotificationRef(uid, todoId) {
 }
 
 
-function deleteToken(uid, token){
-    return admin.database().ref("/users/"+token).set(null)
+function deleteToken(uid, token) {
+    return admin.database().ref("/users/" + token).set(null)
 }

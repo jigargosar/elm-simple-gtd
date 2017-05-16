@@ -105,11 +105,11 @@ async function boot() {
     app.ports["positionContextDropdown"].subscribe((domId) => {
         console.log("#" + domId)
         $("#context-dropdown").position({
-            my:"top right",
-            at: "top right",
+            my:"right top",
+            at: "right top",
             of:"#"+domId,
             within:"#main-view",
-            collision:"flip"
+            collision:"flipfit"
         })
     })
 

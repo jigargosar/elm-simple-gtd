@@ -94,9 +94,8 @@ function sendPushNotifications(notificationMap) {
 }
 
 const sendPush = notificationData => tokenMap => {
-    const token = tokenSnapshot.val()
     const {todoId, timestamp, uid} = notificationData
-    if (token) {
+    const sendPushForDevice = (token, deviceId)=>{
         return admin
             .messaging()
             .sendToDevice(
@@ -109,17 +108,13 @@ const sendPush = notificationData => tokenMap => {
                     return mdResult.error && mdResult.error.code === "messaging/registration-token-not-registered"
                 })
                 if (tokenUnregistered) {
-                    return deleteToken(uid, token)
+                    return deleteToken(uid, deviceId)
                         .then(res => ({error: {mdRes, deleteTokenRes: res}}))
                 }
                 return mdRes
             })
-    } else {
-        return Promise.resolve({
-            error: "Cannot send notification: token not found: ",
-            notificationData: notificationData
-        })
     }
+    return _.compose(Promise.all,_.values, _.mapObjIndexed(sendPushForDevice))(tokenMap)
 }
 
 function createNotificationRef(uid, todoId) {
@@ -127,6 +122,6 @@ function createNotificationRef(uid, todoId) {
 }
 
 
-function deleteToken(uid, token) {
-    return admin.database().ref(`/users/${uid}/token/`).set(null)
+function deleteToken(uid, deviceId) {
+    return admin.database().ref(`/users/${uid}/token/${deviceId}`).set(null)
 }

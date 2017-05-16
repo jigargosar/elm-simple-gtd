@@ -188,6 +188,12 @@ createTodoViewModel vc tabindexAV todo =
                 Key.Delete ->
                     toggleDeleteMsg
 
+                Key.CharP ->
+                    commonMsg.noOp
+
+                Key.CharC ->
+                    commonMsg.noOp
+
                 _ ->
                     commonMsg.noOp
 

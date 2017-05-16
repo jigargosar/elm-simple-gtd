@@ -169,6 +169,7 @@ update msg =
 
                 SetTodoContext todoContext todo ->
                     updateAllSelectedTodoIfTodoIdInSelection (Todo.SetContext todoContext) todo
+                        >> andThenUpdate DeactivateEditingMode
 
                 SetTodoProject project todo ->
                     updateAllSelectedTodoIfTodoIdInSelection (Todo.SetProject project) todo

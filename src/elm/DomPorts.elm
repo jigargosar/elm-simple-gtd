@@ -1,5 +1,6 @@
 port module DomPorts exposing (..)
 
+import Dom
 import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -29,3 +30,6 @@ focusPaperInputCmd =
 
 focusSelectorIfNoFocusCmd =
     focusSelectorIfNoFocus >> Return.command
+
+
+port positionContextDropdown : Dom.Id -> Cmd msg

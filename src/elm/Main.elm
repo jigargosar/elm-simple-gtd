@@ -456,4 +456,4 @@ scheduleReminderNotificationHelp todo model =
 
 
 positionContextDropdownCmd todo =
-    Cmd.none
+    DomPorts.positionContextDropdown ("context-dropdown-" ++ Document.getId todo)

@@ -4,6 +4,7 @@ import Context
 import Document
 import Project
 import Todo
+import Todo.ContextForm
 import Todo.NewForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -45,6 +46,7 @@ type EditForm
     = NewTodo Todo.NewForm.Model
     | EditTodo Todo.Form.Model
     | EditTodoReminder Todo.ReminderForm.Model
+    | EditTodoContext Todo.ContextForm.Model
     | EditContext EditContextForm
     | EditProject EditProjectForm
     | EditSyncSettings SyncForm

@@ -26,6 +26,7 @@ import Set exposing (Set)
 import Store
 import Time exposing (Time)
 import Todo
+import Todo.ContextForm
 import Todo.Form
 import Todo.NewForm
 import Todo.ReminderForm
@@ -337,6 +338,11 @@ startEditingReminder todo =
     updateEditModeM (.now >> Todo.ReminderForm.create todo >> EditMode.EditTodoReminder)
 
 
+startEditingContext : Todo.Model -> ModelF
+startEditingContext todo =
+    setEditMode (Todo.ContextForm.create todo |> EditMode.EditTodoContext)
+
+
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
     setEditMode (createEntityEditForm entity model) model
@@ -409,6 +415,11 @@ saveCurrentForm model =
                 |> updateTodoById (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
                 |> setFocusInEntityWithId form.id
 
+        EditMode.EditTodoContext form ->
+            model
+
+        --                |> updateTodoById (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
+        --                |> setFocusInEntityWithId form.id
         EditMode.NewTodo form ->
             insertTodo (Todo.init model.now form.text) model
                 |> Tuple.mapFirst Document.getId

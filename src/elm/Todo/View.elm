@@ -104,6 +104,7 @@ type alias TodoViewModel =
     , activeContexts : List Context.Model
     , activeProjects : List Project.Model
     , onReminderButtonClicked : Msg
+    , showContextDropdownMsg : Msg
     , reminder : ReminderViewModel
     , edit : Maybe EditViewModel
     , onFocusIn : Msg
@@ -219,6 +220,7 @@ createTodoViewModel vc tabindexAV todo =
         , selectedProjectIndex = vc.activeProjects |> List.findIndex (Document.hasId projectId) ?= 0
         , setContextMsg = Msg.SetTodoContext # todo
         , setProjectMsg = Msg.SetTodoProject # todo
+        , showContextDropdownMsg = Msg.StartEditingContext todo
         , startEditingMsg = startEditingMsg
         , toggleDoneMsg = toggleDoneMsg
         , showDetails = vc.showDetails
@@ -279,6 +281,7 @@ contextDropdownMenu vm =
             [ style [ "height" => "24px" ]
             , class "small padding-0 margin-0 shrink"
             , vm.tabindexAV
+            , onClick vm.showContextDropdownMsg
             ]
             [ div [ class "title primary-text-color" ] [ text vm.contextDisplayName ]
             ]

@@ -192,6 +192,9 @@ update msg =
                     Return.map (Model.startEditingReminder todo)
                         >> autoFocusPaperInputCmd
 
+                StartEditingContext todo ->
+                    Return.map (Model.startEditingContext todo)
+
                 UpdateTodoForm form action ->
                     Return.map
                         (Todo.Form.set action form

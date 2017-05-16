@@ -76,7 +76,7 @@ dropdownTrigger { tabindexAV } content =
     Paper.button
         [ style [ "height" => "24px" ]
         , slotDropdownTrigger
-        , class "padding-0 margin-0 shrink"
+        , class "small padding-0 margin-0 shrink"
         , tabindexAV
         ]
         [ div [ class "title primary-text-color" ] [ content ]
@@ -275,12 +275,16 @@ contextDropdownMenu vm =
                 [ onClickStopPropagation (vm.setContextMsg context) ]
                 [ context |> Context.getName >> text ]
     in
-        Paper.menuButton [ dynamicAlign ]
-            [ dropdownTrigger vm (text vm.contextDisplayName)
-            , Paper.listbox
-                [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-                (vm.activeContexts .|> createContextItem)
-            ]
+        dropdownTrigger vm (text vm.contextDisplayName)
+
+
+
+--        Paper.menuButton [ dynamicAlign ]
+--            [ dropdownTrigger vm (text vm.contextDisplayName)
+--            , Paper.listbox
+--                [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+--                (vm.activeContexts .|> createContextItem)
+--            ]
 
 
 projectDropdownMenu vm =

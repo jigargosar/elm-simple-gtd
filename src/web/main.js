@@ -102,6 +102,17 @@ async function boot() {
         }
     })
 
+    app.ports["positionContextDropdown"].subscribe((domId) => {
+        console.log("#" + domId)
+        $("#context-dropdown").position({
+            my:"top right",
+            at: "top right",
+            of:"#"+domId,
+            within:"#main-view",
+            collision:"flip"
+        })
+    })
+
     app.ports["signIn"].subscribe(() => {
         let googleAuth = document.getElementById('google-auth');
         googleAuth

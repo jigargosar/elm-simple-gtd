@@ -1,3 +1,7 @@
+## Upcoming
+* storing push token per device id
+* send push to all registered token
+
 ## v0.10.0 - 2017-05-15
 * push notifications always shown for mobile, and for desktop only when no window is open. 
 * add new logo

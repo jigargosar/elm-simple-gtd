@@ -111,7 +111,7 @@ async function boot() {
                 of:"#"+domId,
                 within:"#main-view",
                 collision:"flipfit"
-            })
+            }).find(`[tabindex="0"]`).focus()
         })
     })
 

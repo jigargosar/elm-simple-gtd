@@ -44,7 +44,6 @@ type alias Model =
     , pouchDBRemoteSyncURI : String
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken
-    , firebaseAppAttributes : Firebase.AppAttributes
     , developmentMode : Bool
     , focusedEntityInfo : EntityFocus
     , selectedEntityIdSet : Set Document.Id
@@ -108,7 +107,6 @@ type alias Flags =
     , encodedProjectList : List Project.Encoded
     , encodedContextList : List Context.Encoded
     , pouchDBRemoteSyncURI : String
-    , firebaseAppAttributes : Firebase.AppAttributes
     , developmentMode : Bool
     , appVersion : String
     , deviceId : String

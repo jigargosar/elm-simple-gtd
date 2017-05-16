@@ -25,41 +25,18 @@ attributes =
 
 
 init m =
-    let
-        encodedUserId =
-            Model.getMaybeUserId m |> E.maybe E.string
-
-        encodedToken =
-            E.maybe E.string m.fcmToken
-
-        updateTokenHelp uid =
-            Html.node "firebase-document"
-                [ attribute "path" ("/users/" ++ uid ++ "/token")
-                , property "value" encodedToken
-                ]
-                []
-
-        updateToken =
-            Model.getMaybeUserId m
-                ?|> (updateTokenHelp >> List.singleton)
-                ?= []
-    in
-        div [ id "firebase-container" ]
-            ([ {- Html.node "firebase-app" (attributes m.firebaseAppAttributes) []
-                  ,
-               -}
-               Html.node "firebase-auth"
-                [ id "google-auth"
-                , attribute "provider" "google"
-                , onUserChanged Msg.OnUserChanged
-                ]
-                []
-             , Html.node "firebase-messaging"
-                [ id "fb-messaging"
-                , onFCMTokenChanged Msg.OnFCMTokenChanged
-                , customSw
-                ]
-                []
-             ]
-             --                ++ updateToken
-            )
+    div [ id "firebase-container" ]
+        ([ Html.node "firebase-auth"
+            [ id "google-auth"
+            , attribute "provider" "google"
+            , onUserChanged Msg.OnUserChanged
+            ]
+            []
+         , Html.node "firebase-messaging"
+            [ id "fb-messaging"
+            , onFCMTokenChanged Msg.OnFCMTokenChanged
+            , customSw
+            ]
+            []
+         ]
+        )

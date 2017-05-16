@@ -2,7 +2,7 @@
 
 const _ = require("ramda")
 
-const config = {
+const firebaseDevConfig = {
     apiKey: "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc",
     authDomain: "rational-mote-664.firebaseapp.com",
     databaseURL: "https://rational-mote-664.firebaseio.com",
@@ -11,7 +11,21 @@ const config = {
     messagingSenderId: "49437522774"
 }
 
-const firebaseApp = firebase.initializeApp(config);
+const firebaseProdConfig = {
+    apiKey: "AIzaSyDgqOiOMuTvK3PdzJ0Oz6ctEg-devcgZYc",
+    authDomain: "simple-gtd-prod.firebaseapp.com",
+    databaseURL: "https://simple-gtd-prod.firebaseio.com",
+    projectId: "simple-gtd-prod",
+    storageBucket: "simple-gtd-prod.appspot.com",
+    messagingSenderId: "1061254169900"
+}
+
+//noinspection JSUnresolvedVariable
+const firebaseConfig =
+    IS_DEVELOPMENT_ENV ? firebaseDevConfig : firebaseProdConfig
+
+
+const firebaseApp = firebase.initializeApp(firebaseDevConfig);
 
 const cryptoRandomString = require('crypto-random-string');
 
@@ -26,11 +40,6 @@ require("jquery-ui/ui/position")
 const Notifications = require("./notifications")
 import DB from "./pouchdb-wrapper"
 
-//noinspection JSUnresolvedVariable
-const firebaseConfig =
-    IS_DEVELOPMENT_ENV ?
-        require("./config/dev/firebase") :
-        require("./config/prod/firebase")
 
 const developmentMode = IS_DEVELOPMENT_ENV
 const pkg = packageJSON
@@ -64,7 +73,6 @@ async function boot() {
         // encodedProjectList: [],
         // encodedContextList: [],
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
-        firebaseAppAttributes: firebaseConfig.appAttributes,
         developmentMode: developmentMode,
         appVersion: pkg.version,
         deviceId

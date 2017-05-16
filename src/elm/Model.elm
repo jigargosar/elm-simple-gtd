@@ -64,7 +64,6 @@ init flags =
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , user = Firebase.NotLoggedIn
             , fcmToken = Nothing
-            , firebaseAppAttributes = flags.firebaseAppAttributes
             , developmentMode = flags.developmentMode
             , focusedEntityInfo = { id = "" }
             , selectedEntityIdSet = Set.empty
@@ -73,9 +72,6 @@ init flags =
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
             }
-
-        _ =
-            Debug.log "flags.firebaseAppAttributes" (flags.firebaseAppAttributes)
     in
         model
 

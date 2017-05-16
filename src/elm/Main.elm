@@ -195,6 +195,7 @@ update msg =
 
                 StartEditingContext todo ->
                     Return.map (Model.startEditingContext todo)
+                        >> Return.command (positionContextDropdownCmd todo)
 
                 UpdateTodoForm form action ->
                     Return.map
@@ -452,3 +453,7 @@ scheduleReminderNotificationHelp todo model =
                 Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
     in
         (Model.getMaybeUserId model) ?|> scheduleHelp ?= Cmd.none
+
+
+positionContextDropdownCmd todo =
+    Cmd.none

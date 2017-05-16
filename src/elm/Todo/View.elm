@@ -278,7 +278,8 @@ contextDropdownMenu vm =
                 [ context |> Context.getName >> text ]
     in
         Paper.button
-            [ style [ "height" => "24px" ]
+            [ id ("context-dropdown-" + vm.key)
+            , style [ "height" => "24px" ]
             , class "small padding-0 margin-0 shrink"
             , vm.tabindexAV
             , onClick vm.showContextDropdownMsg

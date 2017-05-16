@@ -25,7 +25,7 @@ exports.testPush = functions.https.onRequest((req, res) => {
     // });
     return admin.database().ref("/users").once("value")
                 .then(sendTestPushToAllUsersWithRegistrationToken)
-                .then(arr => res.send(arr))
+                .then(arr => res.json(arr))
 
 });
 
@@ -64,9 +64,8 @@ exports.notificationCorn = functions.https.onRequest((req, res) => {
         .then(sendPushNotifications)
         .then(arr => {
             console.log(arr)
-            return res.send(arr)
+            return res.json(arr)
         })
-
 })
 
 

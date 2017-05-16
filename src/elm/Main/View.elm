@@ -1,12 +1,13 @@
 module Main.View exposing (..)
 
+import Context
 import Document
 import Entity.ViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Msg
+import Msg exposing (Msg)
 import Polymer.Paper as Paper
 import Polymer.App as App
 import Toolkit.Helpers exposing (..)
@@ -17,14 +18,14 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Model.Internal as Model
-import Types exposing (Entity(..), MainViewType(..), GroupByViewType(..))
+import Types exposing (Entity(..), GroupByViewType(..), MainViewType(..), Model)
 import View.TodoList
 import ViewModel exposing (EntityView(..))
 
 
 init viewModel model =
     div [ id "main-view" ]
-        [ case Model.getMainViewType model of
+        ([ case Model.getMainViewType model of
             EntityListView viewType ->
                 Model.createViewEntityList viewType model
                     |> (View.TodoList.listView # viewModel)
@@ -51,4 +52,29 @@ init viewModel model =
                             [ Paper.button [ form |> Msg.RemotePouchSync >> onClick ] [ text "Sync" ]
                             ]
                         ]
-        ]
+         ]
+            ++ (overlayViews model)
+        )
+
+
+overlayViews m =
+    contextDropdown m
+
+
+contextDropdown : Model -> List (Html Msg)
+contextDropdown model =
+    let
+        createContextItem onItemClick context =
+            Paper.item
+                [ onClick (onItemClick context) ]
+                [ context |> Context.getName >> text ]
+
+        view form =
+            let
+                onItemClick =
+                    Msg.SetTodoContext # form.todo
+            in
+                Paper.listbox [ id "context-dropdown" ]
+                    (Model.getActiveContexts model .|> createContextItem onItemClick)
+    in
+        model |> Model.getMaybeEditTodoContextForm ?|> view |> Maybe.toList

@@ -51,31 +51,7 @@ init m =
         ([ Firebase.View.init m
          , appView m
          ]
-            ++ (overlayViews m)
         )
-
-
-overlayViews m =
-    contextDropdown m
-
-
-contextDropdown : Model -> List (Html Msg)
-contextDropdown model =
-    let
-        createContextItem onItemClick context =
-            Paper.item
-                [ onClick (onItemClick context) ]
-                [ context |> Context.getName >> text ]
-
-        view form =
-            let
-                onItemClick =
-                    Msg.SetTodoContext # form.todo
-            in
-                Paper.listbox [ id "context-dropdown" ]
-                    (Model.getActiveContexts model .|> createContextItem onItemClick)
-    in
-        model |> Model.getMaybeEditTodoContextForm ?|> view |> Maybe.toList
 
 
 appView m =

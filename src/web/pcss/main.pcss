@@ -193,17 +193,6 @@ paper-listbox {
 
 }
 
-.todo-item /*, .entity-item*/
-{
-  &:focus[tabindex="0"] {
-    border-left: 2px solid rgba(0, 0, 172, 0.77);
-  }
-
-  &[tabindex="0"] {
-    border-left: 2px solid rgba(0, 0, 172, 0.44);
-  }
-}
-
 .focusable-list > .todo-item {
   padding: 0.5rem 1rem;
   background-color: white;
@@ -219,17 +208,14 @@ paper-listbox {
     font-size: 14px;
     line-height: 20px;
   }
-  /*&.selected{
-    background-color: rgba(255, 255, 0, 0.52);
-  }*/
 
-  /*
-  &:not(.editing) {
-    & paper-item-body {
-      padding: 10px 0;
-    }
+  &[tabindex="0"] {
+    border-left: 2px solid rgba(0, 0, 172, 0.44);
   }
-  */
+
+  &:focus[tabindex="0"] {
+    border-left: 2px solid rgba(0, 0, 172, 0.77);
+  }
 
   &.editing {
     flex-direction: column;

@@ -89,7 +89,7 @@ function sendPushNotifications(notificationMap) {
 const sendPush = notificationData => tokenMap => {
     console.log("tokenMap", tokenMap)
     const {todoId, timestamp, uid} = notificationData
-    const sendPushForDevice = (token, deviceId)=>{
+    function sendPushForDevice(token, deviceId){
         return admin
             .messaging()
             .sendToDevice(
@@ -108,7 +108,9 @@ const sendPush = notificationData => tokenMap => {
                 return mdRes
             })
     }
-    return _.compose(Promise.all,_.values, _.mapObjIndexed(sendPushForDevice))(tokenMap)
+    return Promise.all(
+        _.compose(_.values, _.mapObjIndexed(sendPushForDevice))(tokenMap)
+    )
 }
 
 function deleteToken(uid, deviceId) {

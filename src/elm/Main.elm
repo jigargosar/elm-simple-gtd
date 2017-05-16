@@ -173,6 +173,7 @@ update msg =
 
                 SetTodoProject project todo ->
                     updateAllSelectedTodoIfTodoIdInSelection (Todo.SetProject project) todo
+                        >> andThenUpdate DeactivateEditingMode
 
                 NewTodoTextChanged text ->
                     Return.map (Model.updateNewTodoText text)

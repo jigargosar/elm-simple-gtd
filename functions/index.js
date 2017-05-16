@@ -2,6 +2,7 @@
 
 const functions = require('firebase-functions')
 const admin = require("firebase-admin")
+const _ = require("ramda")
 
 admin.initializeApp(functions.config().firebase);
 
@@ -68,15 +69,27 @@ exports.notificationCorn = functions.https.onRequest((req, res) => {
 
 })
 
+
+function getUserTokenMap(uid) {
+    return admin.database().ref("/users/" + uid + "/tokens").once("value")
+                .then(getMapFromSnapshot)
+}
+
+function getMapFromSnapshot(snapshot) {
+    const map = {}
+    snapshot.forEach(entry => {
+        map[entry.key] = entry.val()
+    })
+    return map;
+}
+
 function sendPushNotifications(notificationMap) {
+    const getUserTokenMapMemo = _.memoize(getUserTokenMap)
     const promiseList = []
     notificationMap.forEach(notificationEntry => {
         const notificationData = notificationEntry.val()
         const uid = notificationData.uid
-        promiseList.push(
-            admin.database().ref("/users/" + uid + "/token").once("value")
-                 .then(sendPush(notificationData))
-        )
+        promiseList.push(getUserTokenMapMemo(uid).then(sendPush(notificationData)))
     })
     return Promise.all(promiseList)
 }

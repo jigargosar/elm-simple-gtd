@@ -1,3 +1,6 @@
+## Upcoming
+* [fix] last selected todo border now displays correctly 
+
 ## v0.10.1 - 2017-05-16
 * storing push token per device id
 * send push to all registered token

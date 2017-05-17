@@ -82,6 +82,7 @@ appDrawerLayoutView m =
         App.drawerLayout
             [ boolProperty "forceNarrow" forceNarrow
             , onBoolPropertyChanged "narrow" Msg.OnLayoutNarrowChanged
+            , onClick Msg.OnMainAppClick
             ]
             [ View.AppDrawer.view viewModel m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]

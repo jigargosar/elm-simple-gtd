@@ -70,6 +70,7 @@ type Msg
     | OnMsgList (List Msg)
     | OnKeyboardMsg Keyboard.Msg
     | OnGlobalKeyUp Keyboard.Key
+    | OnMainAppClick
     | OnEntityAction Entity EntityAction
     | StartAddingNewEntity EntityType
 

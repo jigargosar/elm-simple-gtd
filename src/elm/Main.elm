@@ -197,6 +197,7 @@ update msg =
                 StartEditingContext todo ->
                     Return.map (Model.startEditingContext todo)
                         >> Return.command (positionContextDropdownCmd todo)
+                        >> modelTapLog Model.getEditMode "StartEditingContext"
 
                 UpdateTodoForm form action ->
                     Return.map
@@ -286,19 +287,25 @@ update msg =
                         SetFocused ->
                             Return.map (Model.setMaybeFocusedEntity (Just entity))
 
-                        --                                >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
                         SetBlurred ->
                             Return.map (Model.setMaybeFocusedEntity Nothing)
 
-                        --                                >> Return.map (Ext.Debug.tapLog (.maybeFocusedEntity) "maybe entity:")
                         ToggleSelected ->
                             Return.map (Model.toggleEntitySelection entity)
-                                >> Return.map (Ext.Debug.tapLog (.selectedEntityIdSet) "selectedEntityIdSet")
+                                >> modelTapLog (.selectedEntityIdSet) "selectedEntityIdSet"
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key
+
+                OnMainAppClick ->
+                    modelTapLog (Model.getEditMode) "OnMainAppClick"
+                        >> andThenUpdate DeactivateEditingMode
            )
         >> persistAll
+
+
+modelTapLog =
+    Ext.Debug.tapLog >>> Return.map
 
 
 persistAll =

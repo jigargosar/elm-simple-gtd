@@ -100,27 +100,32 @@ onClickAllParentIds toMsg =
     Html.Events.on "click" (D.map toMsg targetAncestorIds)
 
 
-targetHasAncestorWithId : Dom.Id -> msg -> Decoder msg
-targetHasAncestorWithId =
-    targetHasAncestorWithIdHelp domIdDecoder 0
+targetHasAncestorWithIds : List Dom.Id -> msg -> Decoder msg
+targetHasAncestorWithIds =
+    targetHasAncestorWithIdsHelp domIdDecoder 0
 
 
-targetHasAncestorWithIdHelp : Decoder Dom.Id -> Int -> Dom.Id -> msg -> Decoder msg
-targetHasAncestorWithIdHelp target count ancestorId msg =
+targetHasAncestorWithIdsHelp : Decoder Dom.Id -> Int -> List Dom.Id -> msg -> Decoder msg
+targetHasAncestorWithIdsHelp target count ancestorIds msg =
     target
         |> D.andThen
             (\domId ->
-                if domId == ancestorId then
+                if List.member domId ancestorIds then
                     D.succeed msg
                 else
-                    targetHasAncestorWithIdHelp
+                    targetHasAncestorWithIdsHelp
                         (nthParent count domIdDecoder)
                         (count + 1)
-                        ancestorId
+                        ancestorIds
                         msg
             )
 
 
 onClickContainingAncestorId : Dom.Id -> msg -> Html.Attribute msg
-onClickContainingAncestorId =
-    targetHasAncestorWithId >>> Html.Events.on "click"
+onClickContainingAncestorId domId =
+    List.singleton domId |> targetHasAncestorWithIds >>> Html.Events.on "click"
+
+
+onClickContainingAncestorIds : List Dom.Id -> msg -> Html.Attribute msg
+onClickContainingAncestorIds =
+    targetHasAncestorWithIds >>> Html.Events.on "click"

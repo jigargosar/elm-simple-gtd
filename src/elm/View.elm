@@ -97,10 +97,10 @@ appDrawerLayoutView m =
         onClickAttributeList =
             case m.editMode of
                 EditMode.EditTodoContext _ ->
-                    [ Ext.Html.onClickWithAllParentIds onClickHandler ]
+                    [ Ext.Html.onClickAllParentIds onClickHandler ]
 
                 EditMode.EditTodoProject _ ->
-                    [ Ext.Html.onClickWithAllParentIds onClickHandler ]
+                    [ Ext.Html.onClickAllParentIds onClickHandler ]
 
                 _ ->
                     []

@@ -93,5 +93,9 @@ recursivelyApplyParentElement count =
         |> DOM.target
 
 
-onClickWithAllParentIds toMsg =
+onClickAllParentIds toMsg =
+    Html.Events.on "click" (D.map toMsg targetParentIds)
+
+
+onClickContainingAncestorId ancestorId toMsg =
     Html.Events.on "click" (D.map toMsg targetParentIds)

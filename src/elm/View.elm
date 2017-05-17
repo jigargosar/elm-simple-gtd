@@ -94,7 +94,12 @@ appDrawerLayoutView m =
                     commonMsg.noOp
 
         onClickAttributeList =
-            [ Ext.Html.onClickWithAllParentIds onClickHandler ]
+            case m.editMode of
+                EditMode.EditTodoContext _ ->
+                    [ Ext.Html.onClickWithAllParentIds onClickHandler ]
+
+                _ ->
+                    []
     in
         App.drawerLayout
             ([ boolProperty "forceNarrow" forceNarrow

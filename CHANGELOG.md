@@ -3,6 +3,7 @@
 * [fix] serviceWorker skip waiting in dev mode 
 * [refactoring] manually control opening and closing of todo dropdowns
 * [fix] last selected todo border now displays correctly
+* [fix] todo dropdown done close sometimes: manually control opening and closing of todo dropdowns
 
 ## v0.10.1 - 2017-05-16
 * storing push token per device id

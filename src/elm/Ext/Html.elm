@@ -2,6 +2,7 @@ module Ext.Html exposing (..)
 
 import DOM
 import Dom
+import Html
 import Html.Attributes exposing (..)
 import Html.Attributes.Extra exposing (..)
 import Html.Events
@@ -97,12 +98,12 @@ onClickAllParentIds toMsg =
 
 
 targetHasAncestorWithId : Dom.Id -> msg -> Decoder msg
-targetHasAncestorWithId ancestorId msg =
-    targetHasAncestorWithIdHelp ancestorId msg (DOM.target domIdDecoder) []
+targetHasAncestorWithId =
+    targetHasAncestorWithIdHelp (DOM.target domIdDecoder) []
 
 
-targetHasAncestorWithIdHelp : Dom.Id -> msg -> Decoder Dom.Id -> List Dom.Id -> Decoder msg
-targetHasAncestorWithIdHelp ancestorId msg target ids =
+targetHasAncestorWithIdHelp : Decoder Dom.Id -> List Dom.Id -> Dom.Id -> msg -> Decoder msg
+targetHasAncestorWithIdHelp target ids ancestorId msg =
     target
         |> D.andThen
             (\domId ->
@@ -114,12 +115,13 @@ targetHasAncestorWithIdHelp ancestorId msg target ids =
                             (List.length ids) + 1
                     in
                         targetHasAncestorWithIdHelp
-                            ancestorId
-                            msg
                             (nthParent parentIndex domIdDecoder)
                             (domId :: ids)
+                            ancestorId
+                            msg
             )
 
 
-onClickContainingAncestorId ancestorId toMsg =
-    Html.Events.on "click" (D.map toMsg targetAncestorIds)
+onClickContainingAncestorId : Dom.Id -> msg -> Html.Attribute msg
+onClickContainingAncestorId =
+    targetHasAncestorWithId >>> Html.Events.on "click"

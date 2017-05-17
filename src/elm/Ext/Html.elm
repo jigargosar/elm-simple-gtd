@@ -96,5 +96,30 @@ onClickAllParentIds toMsg =
     Html.Events.on "click" (D.map toMsg targetAncestorIds)
 
 
+targetHasAncestorWithId : Dom.Id -> msg -> Decoder msg
+targetHasAncestorWithId ancestorId msg =
+    targetHasAncestorWithIdHelp ancestorId msg (DOM.target domIdDecoder) []
+
+
+targetHasAncestorWithIdHelp : Dom.Id -> msg -> Decoder Dom.Id -> List Dom.Id -> Decoder msg
+targetHasAncestorWithIdHelp ancestorId msg target ids =
+    target
+        |> D.andThen
+            (\domId ->
+                if domId == ancestorId then
+                    D.succeed msg
+                else
+                    let
+                        parentIndex =
+                            (List.length ids) + 1
+                    in
+                        targetHasAncestorWithIdHelp
+                            ancestorId
+                            msg
+                            (nthParent parentIndex domIdDecoder)
+                            (domId :: ids)
+            )
+
+
 onClickContainingAncestorId ancestorId toMsg =
     Html.Events.on "click" (D.map toMsg targetAncestorIds)

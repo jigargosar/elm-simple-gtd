@@ -122,12 +122,12 @@ async function boot() {
         }
     })
 
-    app.ports["positionDropdown"].subscribe((domId) => {
+    app.ports["positionDropdown"].subscribe(([myId, ofId]) => {
         requestAnimationFrame(() => {
-            $("#context-dropdown").position({
+            $("#"+myId).position({
                 my: "right top",
                 at: "right top",
-                of: "#" + domId,
+                of: "#" + ofId,
                 within: "#main-view",
                 collision: "flipfit"
             }).find(`[tabindex="0"]`).focus()

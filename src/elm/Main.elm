@@ -197,12 +197,10 @@ update msg =
                 StartEditingContext todo ->
                     Return.map (Model.startEditingContext todo)
                         >> Return.command (positionContextDropdownCmd todo)
-                        >> modelTapLog Model.getEditMode "StartEditingContext"
 
                 StartEditingProject todo ->
                     Return.map (Model.startEditingProject todo)
                         >> Return.command (positionProjectDropdownCmd todo)
-                        >> modelTapLog Model.getEditMode "StartEditingProject"
 
                 UpdateTodoForm form action ->
                     Return.map

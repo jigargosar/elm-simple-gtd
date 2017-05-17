@@ -10,6 +10,7 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Msg exposing (Msg)
 import Polymer.Paper as Paper
 import Polymer.App as App
+import Project
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -64,7 +65,7 @@ overlayViews m =
 contextDropdown : Model -> List (Html Msg)
 contextDropdown model =
     let
-        createContextItem onItemClick context =
+        createListItem onItemClick context =
             Paper.item
                 [ onClick (onItemClick context) ]
                 [ context |> Context.getName >> text ]
@@ -76,7 +77,28 @@ contextDropdown model =
             in
                 Paper.material [ id "context-dropdown" ]
                     [ Paper.listbox []
-                        (Model.getActiveContexts model .|> createContextItem onItemClick)
+                        (Model.getActiveContexts model .|> createListItem onItemClick)
                     ]
     in
         model |> Model.getMaybeEditTodoContextForm ?|> view |> Maybe.toList
+
+
+projectDropdown : Model -> List (Html Msg)
+projectDropdown model =
+    let
+        createListItem onItemClick project =
+            Paper.item
+                [ onClick (onItemClick project) ]
+                [ project |> Project.getName >> text ]
+
+        view todo =
+            let
+                onItemClick =
+                    Msg.SetTodoProject # todo
+            in
+                Paper.material [ id "project-dropdown" ]
+                    [ Paper.listbox []
+                        (Model.getActiveProjects model .|> createListItem onItemClick)
+                    ]
+    in
+        model |> Model.getMaybeEditTodoProjectForm ?|> view |> Maybe.toList

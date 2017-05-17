@@ -413,8 +413,9 @@ saveCurrentForm model =
         EditMode.EditTodoContext form ->
             model
 
-        --                |> updateTodoById (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
-        --                |> setFocusInEntityWithId form.id
+        EditMode.EditTodoProject form ->
+            model
+
         EditMode.NewTodo form ->
             insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model
                 |> Tuple.mapFirst Document.getId
@@ -439,6 +440,15 @@ getMaybeEditTodoReminderForm model =
 getMaybeEditTodoContextForm model =
     case model.editMode of
         EditMode.EditTodoContext form ->
+            Just form
+
+        _ ->
+            Nothing
+
+
+getMaybeEditTodoProjectForm model =
+    case model.editMode of
+        EditMode.EditTodoProject form ->
             Just form
 
         _ ->

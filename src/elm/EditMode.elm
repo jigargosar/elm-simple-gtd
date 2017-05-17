@@ -47,6 +47,7 @@ type EditMode
     | EditTodo Todo.Form.Model
     | EditTodoReminder Todo.ReminderForm.Model
     | EditTodoContext Todo.Model
+    | EditTodoProject Todo.Model
     | EditContext EditContextForm
     | EditProject EditProjectForm
     | EditSyncSettings SyncForm

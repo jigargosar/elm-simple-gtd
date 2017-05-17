@@ -2,7 +2,7 @@ module Model.Internal exposing (..)
 
 import Context
 import Document
-import EditMode exposing (EditForm)
+import EditMode exposing (EditMode)
 import Ext.Keyboard as Keyboard
 import Project
 import Random.Pcg exposing (Seed)

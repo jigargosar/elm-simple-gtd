@@ -3,7 +3,7 @@ module Entity.ViewModel exposing (..)
 import Context
 import Dict
 import Document
-import EditMode exposing (EditForm)
+import EditMode exposing (EditMode)
 import Ext.Keyboard exposing (KeyboardEvent)
 import Lazy
 import Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupByEntity(GroupByContext, GroupByProject), MainViewType(..), GroupByViewType(..))

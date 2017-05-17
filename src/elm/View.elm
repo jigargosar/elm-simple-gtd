@@ -18,7 +18,6 @@ import Polymer.Firebase
 import ReminderOverlay
 import Set
 import Entity.ViewModel
-import Todo.ContextForm
 import View.Header
 import Main.View
 import View.TodoList

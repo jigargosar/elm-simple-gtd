@@ -5,7 +5,6 @@ import Document
 import Form
 import Project
 import Todo
-import Todo.ContextForm
 import Todo.NewForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -43,11 +42,11 @@ type alias SyncForm =
     { uri : String }
 
 
-type EditForm
+type EditMode
     = NewTodo Form.Model
     | EditTodo Todo.Form.Model
     | EditTodoReminder Todo.ReminderForm.Model
-    | EditTodoContext Todo.ContextForm.Model
+    | EditTodoContext Todo.Model
     | EditContext EditContextForm
     | EditProject EditProjectForm
     | EditSyncSettings SyncForm

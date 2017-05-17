@@ -5,7 +5,7 @@ import Date
 import Date.Extra.Create
 import Dict.Extra
 import Document exposing (Document)
-import EditMode exposing (EditForm)
+import EditMode exposing (EditMode)
 import Ext.Keyboard as Keyboard
 import Ext.List as List
 import Firebase
@@ -26,7 +26,6 @@ import Set exposing (Set)
 import Store
 import Time exposing (Time)
 import Todo
-import Todo.ContextForm
 import Todo.Form
 import Todo.NewForm
 import Todo.ReminderForm
@@ -336,7 +335,7 @@ startEditingReminder todo =
 
 startEditingContext : Todo.Model -> ModelF
 startEditingContext todo =
-    setEditMode (Todo.ContextForm.create todo |> EditMode.EditTodoContext)
+    setEditMode (EditMode.EditTodoContext todo)
 
 
 startEditingEntity : Entity -> ModelF
@@ -471,7 +470,7 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
         maybeModel ?= model |> setFocusInEntityWithId todoId
 
 
-createEntityEditForm : Entity -> Model -> EditForm
+createEntityEditForm : Entity -> Model -> EditMode
 createEntityEditForm entity model =
     case entity of
         ContextEntity context ->
@@ -484,7 +483,7 @@ createEntityEditForm entity model =
             createEditTodoMode todo model
 
 
-createEditTodoMode : Todo.Model -> Model -> EditForm
+createEditTodoMode : Todo.Model -> Model -> EditMode
 createEditTodoMode todo model =
     let
         projectName =
@@ -508,18 +507,18 @@ deactivateEditingMode =
     setEditMode EditMode.none
 
 
-getEditMode : Model -> EditForm
+getEditMode : Model -> EditMode
 getEditMode =
     (.editMode)
 
 
-setEditMode : EditForm -> ModelF
+setEditMode : EditMode -> ModelF
 setEditMode editMode =
     clearSelectionIfEditModeNone
         >> (\model -> { model | editMode = editMode })
 
 
-updateEditModeM : (Model -> EditForm) -> ModelF
+updateEditModeM : (Model -> EditMode) -> ModelF
 updateEditModeM updater model =
     setEditMode (updater model) model
 

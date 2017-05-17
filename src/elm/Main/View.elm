@@ -69,10 +69,10 @@ contextDropdown model =
                 [ onClick (onItemClick context) ]
                 [ context |> Context.getName >> text ]
 
-        view form =
+        view todo =
             let
                 onItemClick =
-                    Msg.SetTodoContext # form.todo
+                    Msg.SetTodoContext # todo
             in
                 Paper.material [ id "context-dropdown" ]
                     [ Paper.listbox []

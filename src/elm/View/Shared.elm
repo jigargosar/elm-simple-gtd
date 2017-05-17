@@ -3,7 +3,7 @@ module View.Shared exposing (..)
 import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
-import EditMode exposing (EditForm)
+import EditMode exposing (EditMode)
 import Entity.ViewModel
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)

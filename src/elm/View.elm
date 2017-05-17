@@ -88,18 +88,13 @@ appDrawerLayoutView m =
                 _ =
                     Debug.log "pathIdList" (pathIdList)
             in
-                --                            commonMsg.noOp
                 if List.find (equals "context-dropdown") pathIdList |> Maybe.isNothing then
                     Msg.DeactivateEditingMode
                 else
-                    --            let
-                    --                _ =
-                    --                    Debug.log "pathIdList" (pathIdList)
-                    --            in
                     commonMsg.noOp
 
         onClickAttributeList =
-            [ on "click" (D.map onClickHandler Ext.Html.targetParentIds) ]
+            [ Ext.Html.onClickWithAllParentIds onClickHandler ]
     in
         App.drawerLayout
             ([ boolProperty "forceNarrow" forceNarrow

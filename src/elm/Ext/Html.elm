@@ -4,6 +4,7 @@ import DOM
 import Dom
 import Html.Attributes exposing (..)
 import Html.Attributes.Extra exposing (..)
+import Html.Events
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -90,3 +91,7 @@ recursivelyApplyParentElement : Int -> Decoder Dom.Id
 recursivelyApplyParentElement count =
     List.foldl (\_ acc -> DOM.parentElement acc) domIdDecoder (List.range 0 count)
         |> DOM.target
+
+
+onClickWithAllParentIds toMsg =
+    Html.Events.on "click" (D.map toMsg targetParentIds)

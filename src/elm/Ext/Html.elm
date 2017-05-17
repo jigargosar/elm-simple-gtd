@@ -44,30 +44,32 @@ domIdDecoder =
     D.field "id" D.string
 
 
+
+--targetParentIds : Decoder (List Dom.Id)
+--targetParentIds =
+--    domIdDecoder
+--        |> DOM.parentElement
+--        |> DOM.parentElement
+--        |> DOM.parentElement
+--        |> DOM.parentElement
+--        |> DOM.parentElement
+--        |> DOM.parentElement
+--        |> DOM.parentElement
+--        |> DOM.parentElement
+--        |> DOM.target
+--        |> D.map List.singleton
+--
+
+
 targetParentIds : Decoder (List Dom.Id)
 targetParentIds =
-    domIdDecoder
-        |> DOM.parentElement
-        |> DOM.parentElement
-        |> DOM.parentElement
-        |> DOM.parentElement
-        |> DOM.parentElement
-        |> DOM.parentElement
-        |> DOM.parentElement
-        |> DOM.parentElement
-        |> DOM.target
-        |> D.map List.singleton
+    targetParentIdsHelp (D.field "target") []
 
 
-targetParentIds2 : Decoder (List Dom.Id)
-targetParentIds2 =
-    recursion (D.field "target") []
-
-
-recursion : (Decoder Dom.Id -> Decoder Dom.Id) -> List Dom.Id -> Decoder (List Dom.Id)
-recursion target ids =
+targetParentIdsHelp : (Decoder Dom.Id -> Decoder Dom.Id) -> List Dom.Id -> Decoder (List Dom.Id)
+targetParentIdsHelp target ids =
     D.oneOf
         [ target domIdDecoder
-            |> D.andThen (\domId -> recursion (D.field "parentElement") (domId :: ids))
+            |> D.andThen (\domId -> targetParentIdsHelp (D.field "parentElement") (domId :: ids))
         , D.succeed ids
         ]

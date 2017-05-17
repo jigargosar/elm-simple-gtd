@@ -62,14 +62,14 @@ domIdDecoder =
 --
 
 
-targetParentIds : Decoder (List Dom.Id)
-targetParentIds =
-    targetParentIdsHelp (DOM.target domIdDecoder) []
+targetAncestorIds : Decoder (List Dom.Id)
+targetAncestorIds =
+    targetAncestorIdsHelp (DOM.target domIdDecoder) []
         |> D.map (reject String.isEmpty)
 
 
-targetParentIdsHelp : Decoder Dom.Id -> List Dom.Id -> Decoder (List Dom.Id)
-targetParentIdsHelp target ids =
+targetAncestorIdsHelp : Decoder Dom.Id -> List Dom.Id -> Decoder (List Dom.Id)
+targetAncestorIdsHelp target ids =
     D.oneOf
         [ target
             |> D.andThen
@@ -81,7 +81,7 @@ targetParentIdsHelp target ids =
                         parentElementCount =
                             (List.length ids) + 1
                     in
-                        targetParentIdsHelp (recursivelyApplyParentElement parentElementCount) newDomIds
+                        targetAncestorIdsHelp (recursivelyApplyParentElement parentElementCount) newDomIds
                 )
         , D.succeed ids
         ]
@@ -94,8 +94,8 @@ recursivelyApplyParentElement count =
 
 
 onClickAllParentIds toMsg =
-    Html.Events.on "click" (D.map toMsg targetParentIds)
+    Html.Events.on "click" (D.map toMsg targetAncestorIds)
 
 
 onClickContainingAncestorId ancestorId toMsg =
-    Html.Events.on "click" (D.map toMsg targetParentIds)
+    Html.Events.on "click" (D.map toMsg targetAncestorIds)

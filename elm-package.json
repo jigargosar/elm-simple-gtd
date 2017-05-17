@@ -16,6 +16,7 @@
         "alpacaaa/elm-date-distance": "1.0.3 <= v < 2.0.0",
         "ccapndave/elm-update-extra": "2.3.1 <= v < 3.0.0",
         "danielnarey/elm-toolkit": "5.1.0 <= v < 6.0.0",
+        "debois/elm-dom": "1.2.3 <= v < 2.0.0",
         "edvail/elm-polymer": "3.0.0 <= v < 4.0.0",
         "elm-community/dict-extra": "1.4.0 <= v < 2.0.0",
         "elm-community/html-extra": "2.2.0 <= v < 3.0.0",

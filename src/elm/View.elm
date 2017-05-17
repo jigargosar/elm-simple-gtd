@@ -1,6 +1,7 @@
 module View exposing (init)
 
 import Context
+import Dom
 import EditMode
 import Firebase
 import Firebase.View
@@ -29,8 +30,6 @@ import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Debug exposing (tapLog)
 import Ext.Decode exposing (traceDecoder)
-import Json.Decode
-import Json.Encode
 import List.Extra as List
 import Types exposing (..)
 import Todo
@@ -43,6 +42,10 @@ import View.Shared exposing (..)
 import Todo.View
 import ViewModel
 import WebComponents exposing (doneAllIconP, dynamicAlign, icon, iconA, iconButton, iconTextButton, onBoolPropertyChanged, onPropertyChanged, paperIconButton, slotDropdownContent, slotDropdownTrigger, testDialog)
+import Ext.Html
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 
 
 init m =
@@ -78,11 +81,22 @@ appDrawerLayoutView m =
 
         forceNarrow =
             Model.getLayoutForceNarrow m
+
+        onClickHandler : List Dom.Id -> Msg
+        onClickHandler pathIdList =
+            --            if List.find (equals "context-dropdown") pathIdList |> Maybe.isJust then
+            --                Msg.DeactivateEditingMode
+            --            else
+            let
+                _ =
+                    Debug.log "pathIdList" (pathIdList)
+            in
+                commonMsg.noOp
     in
         App.drawerLayout
             [ boolProperty "forceNarrow" forceNarrow
             , onBoolPropertyChanged "narrow" Msg.OnLayoutNarrowChanged
-            , onClick Msg.OnMainAppClick
+            , on "click" (D.map onClickHandler Ext.Html.targetParentIds)
             ]
             [ View.AppDrawer.view viewModel m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]

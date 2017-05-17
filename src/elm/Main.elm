@@ -299,7 +299,7 @@ update msg =
 
                 OnMainAppClick ->
                     modelTapLog (Model.getEditMode) "OnMainAppClick"
-                        >> andThenUpdate DeactivateEditingMode
+--                        >> andThenUpdate DeactivateEditingMode
            )
         >> persistAll
 

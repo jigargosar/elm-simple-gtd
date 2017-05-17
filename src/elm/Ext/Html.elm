@@ -75,20 +75,20 @@ targetAncestorIdsHelp target ids =
             |> D.andThen
                 (\domId ->
                     let
-                        parentElementCount =
+                        parentIndex =
                             (List.length ids) + 1
                     in
                         targetAncestorIdsHelp
-                            (nthParent parentElementCount)
+                            (nthParent parentIndex domIdDecoder)
                             (domId :: ids)
                 )
         , D.succeed ids
         ]
 
 
-nthParent : Int -> Decoder Dom.Id
-nthParent count =
-    List.foldl (\_ acc -> DOM.parentElement acc) domIdDecoder (List.range 0 count)
+nthParent : Int -> Decoder a -> Decoder a
+nthParent count decoder =
+    List.foldl (\_ acc -> DOM.parentElement acc) decoder (List.range 0 count)
         |> DOM.target
 
 

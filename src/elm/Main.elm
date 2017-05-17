@@ -199,6 +199,11 @@ update msg =
                         >> Return.command (positionContextDropdownCmd todo)
                         >> modelTapLog Model.getEditMode "StartEditingContext"
 
+                StartEditingProject todo ->
+                    Return.map (Model.startEditingProject todo)
+                        >> Return.command (positionProjectDropdownCmd todo)
+                        >> modelTapLog Model.getEditMode "StartEditingProject"
+
                 UpdateTodoForm form action ->
                     Return.map
                         (Todo.Form.set action form
@@ -299,7 +304,7 @@ update msg =
 
                 OnMainAppClick ->
                     modelTapLog (Model.getEditMode) "OnMainAppClick"
---                        >> andThenUpdate DeactivateEditingMode
+            --                        >> andThenUpdate DeactivateEditingMode
            )
         >> persistAll
 
@@ -464,4 +469,8 @@ scheduleReminderNotificationHelp todo model =
 
 
 positionContextDropdownCmd todo =
-    DomPorts.positionContextDropdown ("context-dropdown-" ++ Document.getId todo)
+    DomPorts.positionDropdown ( "context-dropdown", "context-dropdown-" ++ Document.getId todo )
+
+
+positionProjectDropdownCmd todo =
+    DomPorts.positionDropdown ( "project-dropdown", "project-dropdown-" ++ Document.getId todo )

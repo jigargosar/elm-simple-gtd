@@ -59,7 +59,7 @@ init viewModel model =
 
 
 overlayViews m =
-    contextDropdown m
+    contextDropdown m ++ projectDropdown m
 
 
 contextDropdown : Model -> List (Html Msg)

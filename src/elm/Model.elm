@@ -338,6 +338,11 @@ startEditingContext todo =
     setEditMode (EditMode.EditTodoContext todo)
 
 
+startEditingProject : Todo.Model -> ModelF
+startEditingProject todo =
+    setEditMode (EditMode.EditTodoProject todo)
+
+
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
     setEditMode (createEntityEditForm entity model) model

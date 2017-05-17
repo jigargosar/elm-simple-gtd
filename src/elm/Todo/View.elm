@@ -105,6 +105,7 @@ type alias TodoViewModel =
     , activeProjects : List Project.Model
     , onReminderButtonClicked : Msg
     , showContextDropdownMsg : Msg
+    , showProjectDropdownMsg : Msg
     , reminder : ReminderViewModel
     , edit : Maybe EditViewModel
     , onFocusIn : Msg
@@ -221,6 +222,7 @@ createTodoViewModel vc tabindexAV todo =
         , setContextMsg = Msg.SetTodoContext # todo
         , setProjectMsg = Msg.SetTodoProject # todo
         , showContextDropdownMsg = Msg.StartEditingContext todo
+        , showProjectDropdownMsg = Msg.StartEditingProject todo
         , startEditingMsg = startEditingMsg
         , toggleDoneMsg = toggleDoneMsg
         , showDetails = vc.showDetails
@@ -304,12 +306,24 @@ projectDropdownMenu vm =
                 [ onClickStopPropagation (vm.setProjectMsg project) ]
                 [ project |> Project.getName >> text ]
     in
-        Paper.menuButton [ dynamicAlign ]
-            [ dropdownTrigger vm (text vm.projectDisplayName)
-            , Paper.listbox
-                [ class "dropdown-content", attribute "slot" "dropdown-content" ]
-                (vm.activeProjects .|> createProjectItem)
+        Paper.button
+            [ id ("project-dropdown-" ++ vm.key)
+            , style [ "height" => "24px" ]
+            , class "small padding-0 margin-0 shrink"
+            , vm.tabindexAV
+            , onClick vm.showProjectDropdownMsg
             ]
+            [ div [ class "title primary-text-color" ] [ text vm.projectDisplayName ]
+            ]
+
+
+
+--        Paper.menuButton [ dynamicAlign ]
+--            [ dropdownTrigger vm (text vm.projectDisplayName)
+--            , Paper.listbox
+--                [ class "dropdown-content", attribute "slot" "dropdown-content" ]
+--                (vm.activeProjects .|> createProjectItem)
+--            ]
 
 
 type alias ReminderViewModel =

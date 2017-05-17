@@ -84,20 +84,29 @@ appDrawerLayoutView m =
 
         onClickHandler : List Dom.Id -> Msg
         onClickHandler pathIdList =
-            --            if List.find (equals "context-dropdown") pathIdList |> Maybe.isJust then
-            --                Msg.DeactivateEditingMode
-            --            else
             let
                 _ =
                     Debug.log "pathIdList" (pathIdList)
             in
-                commonMsg.noOp
+                --                            commonMsg.noOp
+                if List.find (equals "context-dropdown") pathIdList |> Maybe.isNothing then
+                    Msg.DeactivateEditingMode
+                else
+                    --            let
+                    --                _ =
+                    --                    Debug.log "pathIdList" (pathIdList)
+                    --            in
+                    commonMsg.noOp
+
+        onClickAttributeList =
+            [ on "click" (D.map onClickHandler Ext.Html.targetParentIds) ]
     in
         App.drawerLayout
-            [ boolProperty "forceNarrow" forceNarrow
-            , onBoolPropertyChanged "narrow" Msg.OnLayoutNarrowChanged
-            , on "click" (D.map onClickHandler Ext.Html.targetParentIds)
-            ]
+            ([ boolProperty "forceNarrow" forceNarrow
+             , onBoolPropertyChanged "narrow" Msg.OnLayoutNarrowChanged
+             ]
+                ++ onClickAttributeList
+            )
             [ View.AppDrawer.view viewModel m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ View.Header.init viewModel m

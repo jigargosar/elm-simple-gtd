@@ -66,7 +66,10 @@ domIdDecoder =
 targetAncestorIds : Decoder (List Dom.Id)
 targetAncestorIds =
     targetAncestorIdsHelp (DOM.target domIdDecoder) []
-        |> D.map (reject String.isEmpty)
+
+
+
+--        |> D.map (reject String.isEmpty)
 
 
 targetAncestorIdsHelp : Decoder Dom.Id -> List Dom.Id -> Decoder (List Dom.Id)
@@ -99,26 +102,22 @@ onClickAllParentIds toMsg =
 
 targetHasAncestorWithId : Dom.Id -> msg -> Decoder msg
 targetHasAncestorWithId =
-    targetHasAncestorWithIdHelp (DOM.target domIdDecoder) []
+    targetHasAncestorWithIdHelp domIdDecoder 0
 
 
-targetHasAncestorWithIdHelp : Decoder Dom.Id -> List Dom.Id -> Dom.Id -> msg -> Decoder msg
-targetHasAncestorWithIdHelp target ids ancestorId msg =
+targetHasAncestorWithIdHelp : Decoder Dom.Id -> Int -> Dom.Id -> msg -> Decoder msg
+targetHasAncestorWithIdHelp target count ancestorId msg =
     target
         |> D.andThen
             (\domId ->
                 if domId == ancestorId then
                     D.succeed msg
                 else
-                    let
-                        parentIndex =
-                            (List.length ids) + 1
-                    in
-                        targetHasAncestorWithIdHelp
-                            (nthParent parentIndex domIdDecoder)
-                            (domId :: ids)
-                            ancestorId
-                            msg
+                    targetHasAncestorWithIdHelp
+                        (nthParent count domIdDecoder)
+                        (count + 1)
+                        ancestorId
+                        msg
             )
 
 

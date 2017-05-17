@@ -84,11 +84,10 @@ appDrawerLayoutView m =
 
         onClickHandler : List Dom.Id -> Msg
         onClickHandler pathIdList =
-            {- let
+             let
                    _ =
                        Debug.log "pathIdList" (pathIdList)
                in
-            -}
             if List.find (List.member # [ "context-dropdown", "project-dropdown" ]) pathIdList |> Maybe.isNothing then
                 Msg.DeactivateEditingMode
             else

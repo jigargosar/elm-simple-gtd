@@ -63,13 +63,30 @@ domIdDecoder =
 
 targetParentIds : Decoder (List Dom.Id)
 targetParentIds =
-    targetParentIdsHelp (D.field "target") []
+    targetParentIdsHelp (DOM.target domIdDecoder) []
+        |> D.map (reject String.isEmpty)
 
 
-targetParentIdsHelp : (Decoder Dom.Id -> Decoder Dom.Id) -> List Dom.Id -> Decoder (List Dom.Id)
+targetParentIdsHelp : Decoder Dom.Id -> List Dom.Id -> Decoder (List Dom.Id)
 targetParentIdsHelp target ids =
     D.oneOf
-        [ target domIdDecoder
-            |> D.andThen (\domId -> targetParentIdsHelp (D.field "parentElement") (domId :: ids))
+        [ target
+            |> D.andThen
+                (\domId ->
+                    let
+                        newDomIds =
+                            (domId :: ids)
+
+                        parentElementCount =
+                            (List.length ids) + 1
+                    in
+                        targetParentIdsHelp (recursivelyApplyParentElement parentElementCount) newDomIds
+                )
         , D.succeed ids
         ]
+
+
+recursivelyApplyParentElement : Int -> Decoder Dom.Id
+recursivelyApplyParentElement count =
+    List.foldl (\_ acc -> DOM.parentElement acc) domIdDecoder (List.range 0 count)
+        |> DOM.target

@@ -25,7 +25,7 @@ const firebaseConfig =
     IS_DEVELOPMENT_ENV ? firebaseDevConfig : firebaseProdConfig
 
 
-const firebaseApp = firebase.initializeApp(firebaseDevConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const cryptoRandomString = require('crypto-random-string');
 

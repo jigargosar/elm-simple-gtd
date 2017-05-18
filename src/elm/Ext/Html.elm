@@ -75,8 +75,23 @@ nthParent count decoder =
         |> DOM.target
 
 
-onClickAllParentIds toMsg =
+onClickPathIds toMsg =
     Html.Events.on "click" (D.map toMsg targetAncestorIds)
+
+
+onClickWithTargetPathIds domIds toMsg =
+    let
+        failFn =
+            (\_ -> D.fail ("domIds not found in event target path: " ++ (toString domIds)))
+
+        successFn =
+            (\_ -> D.succeed toMsg)
+    in
+        Html.Events.on "click"
+            (targetAncestorIds
+                |> D.andThen
+                    (List.find (List.member # domIds) >> Maybe.unpack failFn successFn)
+            )
 
 
 targetHasAncestorWithIds : List Dom.Id -> msg -> Decoder msg

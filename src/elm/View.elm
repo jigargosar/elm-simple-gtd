@@ -91,14 +91,14 @@ appDrawerLayoutView m =
         onClickAttributeList =
             let
                 _ =
-                    [ Ext.Html.onClickAllParentIds onClickHandler ]
+                    [ Ext.Html.onClickPathIds onClickHandler ]
             in
                 case m.editMode of
                     EditMode.EditTodoContext _ ->
-                        [ Ext.Html.onClickAllParentIds onClickHandler ]
+                        [ Ext.Html.onClickPathIds onClickHandler ]
 
                     EditMode.EditTodoProject _ ->
-                        [ Ext.Html.onClickAllParentIds onClickHandler ]
+                        [ Ext.Html.onClickPathIds onClickHandler ]
 
                     _ ->
                         []

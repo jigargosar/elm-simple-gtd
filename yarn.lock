@@ -3496,9 +3496,9 @@ findup-sync@^0.4.2, findup-sync@^0.4.3:
     micromatch "^2.3.7"
     resolve-dir "^0.1.0"
 
-firebase-tools@3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-3.8.0.tgz#6920f050598130a9a8c779fac91a2903c09f14c7"
+firebase-tools@3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-3.9.0.tgz#15dbab08a2056714e0a6e7c7bc8c990bfded173a"
   dependencies:
     JSONStream "^1.2.1"
     archiver "^0.16.0"
@@ -3527,7 +3527,7 @@ firebase-tools@3.8.0:
     request "^2.58.0"
     rsvp "^3.0.18"
     semver "^5.0.3"
-    superstatic "^4.0"
+    superstatic "^4.1"
     tar "^2.2.0"
     tmp "0.0.27"
     universal-analytics "^0.3.9"
@@ -7492,7 +7492,7 @@ replace-ext@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-1.0.0.tgz#de63128373fcbf7c3ccfa4de5a480c45a67958eb"
 
-request@2.74.0, request@2.x, request@^2.58.0, request@^2.72.0:
+request@2.74.0:
   version "2.74.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.74.0.tgz#7693ca768bbb0ea5c8ce08c084a45efa05b892ab"
   dependencies:
@@ -7543,7 +7543,7 @@ request@2.76.0:
     tough-cookie "~2.3.0"
     tunnel-agent "~0.4.1"
 
-request@2.79.0, request@^2.53.0, request@^2.61.0, request@^2.74.0, request@^2.79.0:
+request@2.79.0:
   version "2.79.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:
@@ -7568,7 +7568,7 @@ request@2.79.0, request@^2.53.0, request@^2.61.0, request@^2.74.0, request@^2.79
     tunnel-agent "~0.4.1"
     uuid "^3.0.0"
 
-request@^2.81.0:
+request@2.x, request@^2.53.0, request@^2.58.0, request@^2.61.0, request@^2.72.0, request@^2.74.0, request@^2.79.0, request@^2.81.0:
   version "2.81.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.81.0.tgz#c6928946a0e06c5f8d6f8a9333469ffda46298a0"
   dependencies:
@@ -8301,7 +8301,7 @@ superagent@^3.0.0:
     qs "^6.1.0"
     readable-stream "^2.0.5"
 
-superstatic@^4.0:
+superstatic@^4.1:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/superstatic/-/superstatic-4.1.0.tgz#e7f977ac70193ad80e154fd136a54b4d45110b01"
   dependencies:

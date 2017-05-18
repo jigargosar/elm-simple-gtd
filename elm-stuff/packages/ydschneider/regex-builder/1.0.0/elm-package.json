@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "summary": "Build a Regex from composable Patterns",
+    "repository": "https://github.com/ydschneider/regex-builder.git",
+    "license": "BSD3",
+    "source-directories": [
+        "src"
+    ],
+    "exposed-modules": [
+        "RegexBuilder",
+        "RegexBuilder.Extra"
+    ],
+    "dependencies": {
+        "elm-lang/core": "5.0.0 <= v < 6.0.0"
+    },
+    "elm-version": "0.18.0 <= v < 0.19.0"
+}

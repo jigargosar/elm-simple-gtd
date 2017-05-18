@@ -67,6 +67,11 @@ setContextStoreIn =
     flip setContextStore
 
 
+updateContextStore : (Context.Store -> Context.Store) -> ModelF
+updateContextStore updater model =
+    setContextStore (updater (getContextStore model)) model
+
+
 updateContextStoreM : (Model -> Context.Store) -> ModelF
 updateContextStoreM updater model =
     setContextStore (updater model) model

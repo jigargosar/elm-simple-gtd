@@ -313,6 +313,10 @@ update lens smallF big =
     lens.set (smallF (lens.get big)) big
 
 
+updateWith smallF lens big =
+    update lens smallF big
+
+
 
 --
 --
@@ -387,26 +391,31 @@ toggleDeleteEntity entity model =
                 updateTodoById Todo.ToggleDeleted entityId model
 
 
+updateDocWithId id updateFn store model =
+    let
+        updateAndSetModifiedAt =
+            updateFn >> Document.setModifiedAt model.now
+    in
+        update store (Store.updateDocWithId id updateFn) model
+
+
+updateDocAndSetFocusInEntityWithId id =
+    updateDocWithId id >>>> setFocusInEntityWithId id
+
+
 saveCurrentForm model =
     case model.editMode of
         EditMode.EditContext form ->
-            Store.findById form.id model.contextStore
-                ?|> Context.setName form.name
-                >> Context.setModifiedAt model.now
-                >> Store.replaceDocIn model.contextStore
-                >> setContextStoreIn model
-                ?= model
-                |> setFocusInEntityWithId form.id
+            model
+                |> updateDocAndSetFocusInEntityWithId form.id
+                    (Context.setName form.name)
+                    contextStore
 
         EditMode.EditProject form ->
-            let
-                updateProject =
-                    Project.setName form.name
-                        >> Project.setModifiedAt model.now
-            in
-                model
-                    |> updateProjectStore (Store.updateDocWithId form.id updateProject)
-                    |> setFocusInEntityWithId form.id
+            model
+                |> updateDocAndSetFocusInEntityWithId form.id
+                    (Project.setName form.name)
+                    projectStore
 
         EditMode.EditTodo form ->
             model

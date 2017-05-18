@@ -90,6 +90,10 @@ setDeleted deleted model =
     { model | deleted = deleted }
 
 
+setModifiedAt modifiedAt model =
+    { model | modifiedAt = modifiedAt }
+
+
 toggleDeleted model =
     { model | deleted = not model.deleted }
 

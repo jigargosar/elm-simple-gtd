@@ -1,3 +1,8 @@
+## Upcoming
+* update read me to show build status
+* travis - add build dev script 
+* remove WEB_PACK_DEV_SERVER flag
+
 ## v0.11.1 - 2017-05-18
 * travis: deploy to firebase dev and prod
 * [fix] use env specific firebase config

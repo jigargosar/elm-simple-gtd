@@ -45,3 +45,11 @@ deploy:
   project: "dev"
   on:
       branch: master
+
+deploy:
+  provider: firebase
+  skip_cleanup: true
+  token: $FIREBASE_TOKEN_PROD
+  project: "prod"
+  on:
+      branch: master

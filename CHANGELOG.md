@@ -1,4 +1,4 @@
-## Upcoming
+## v0.11.1 - 2017-05-18
 * travis: deploy to firebase dev and prod
 * [fix] use env specific firebase config
 

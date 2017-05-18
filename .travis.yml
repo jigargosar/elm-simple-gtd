@@ -44,7 +44,7 @@ deploy:
   token: $FIREBASE_TOKEN_DEV
   project: "dev"
   on:
-      branch: master
+    branch: master
 
 deploy:
   provider: firebase
@@ -52,4 +52,4 @@ deploy:
   token: $FIREBASE_TOKEN_PROD
   project: "prod"
   on:
-      branch: master
+    branch: master

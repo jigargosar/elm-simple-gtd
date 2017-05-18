@@ -90,7 +90,7 @@ onClickWithTargetPathIds domIds toMsg =
         Html.Events.on "click"
             (targetAncestorIds
                 |> D.andThen
-                    (List.find (List.member # domIds) >> Maybe.unpack failFn successFn)
+                    (List.find (List.member # domIds) >> Maybe.unpack successFn failFn)
             )
 
 

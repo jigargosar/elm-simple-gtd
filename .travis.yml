@@ -37,3 +37,8 @@ deploy:
   local_dir: docs
   on:
     branch: master
+
+deploy:
+  provider: firebase
+  token: $FIREBASE_TOKEN_DEV
+  project: "dev"

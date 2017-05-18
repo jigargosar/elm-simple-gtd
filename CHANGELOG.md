@@ -1,4 +1,4 @@
-## Upcoming
+## v0.11.0 - 2017-05-18
 * [fix] last selected todo border now displays correctly
 * [fix] serviceWorker skip waiting in dev mode 
 * [refactoring] manually control opening and closing of todo dropdowns

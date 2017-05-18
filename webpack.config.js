@@ -33,7 +33,6 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'IS_DEVELOPMENT_ENV': isDevEnv,
-            'WEB_PACK_DEV_SERVER': process.env.WEB_PACK_DEV_SERVER || false,
             "packageJSON": JSON.stringify(pkg)
         }),
         new ServiceWorkerWebpackPlugin({

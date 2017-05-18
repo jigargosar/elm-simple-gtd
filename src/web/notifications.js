@@ -9,7 +9,7 @@ async function setupNotifications(app) {
         return
     }
 
-    const swScriptPath = WEB_PACK_DEV_SERVER ? "/notification-sw.js" : '/service-worker.js'
+    const swScriptPath = IS_DEVELOPMENT_ENV ? "/notification-sw.js" : '/service-worker.js'
     // const swScriptPath = "/notification-sw.js"
 
     navigator.serviceWorker.addEventListener('message', event => {

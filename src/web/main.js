@@ -57,6 +57,18 @@ async function boot() {
         }
     })
 
+    $elm.get(0).addEventListener("keydown", e => {
+        const $closest = $(e.target).closest("[data-prevent-default-keys]")
+        if($closest.length===0)return
+        const preventDefaultKeys =
+            $closest.data("prevent-default-keys").split(",")
+        // console.log(e.keyCode, e.key, e, preventDefaultKey);
+
+        if (_.contains(e.key)(preventDefaultKeys)) {
+            e.preventDefault()
+        }
+    }, true)
+
     const dbMap = {
         "todo-db": await DB("todo-db"),
         "project-db": await DB("project-db"),

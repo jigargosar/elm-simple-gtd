@@ -96,7 +96,7 @@ projectDropdown model =
                 onItemClick =
                     Msg.SetTodoProject # todo
             in
-                Paper.material [ id "project-dropdown" ]
+                Paper.material [ id "project-dropdown", attribute "data-prevent-default-keys" "Tab" ]
                     [ Paper.listbox []
                         (Model.getActiveProjects model .|> createListItem onItemClick)
                     ]

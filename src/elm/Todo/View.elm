@@ -191,10 +191,10 @@ createTodoViewModel vc tabindexAV todo =
                     toggleDeleteMsg
 
                 Key.CharP ->
-                    commonMsg.noOp
+                    Msg.StartEditingProject todo
 
                 Key.CharC ->
-                    commonMsg.noOp
+                    Msg.StartEditingContext todo
 
                 _ ->
                     commonMsg.noOp

@@ -59,6 +59,10 @@ updateContextStoreM updater model =
     setContextStore (updater model) model
 
 
+setContextStoreIn =
+    flip setContextStore
+
+
 getNow : Model -> Time
 getNow =
     (.now)

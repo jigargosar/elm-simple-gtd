@@ -371,14 +371,14 @@ toggleDeleteEntity entity model =
                 context
                     |> Document.toggleDeleted
                     |> Context.setModifiedAt model.now
-                    |> (Store.update # model.contextStore)
+                    |> (Store.replaceDoc # model.contextStore)
                     |> (setContextStore # model)
 
             ProjectEntity project ->
                 project
                     |> Document.toggleDeleted
                     |> Project.setModifiedAt model.now
-                    |> (Store.update # model.projectStore)
+                    |> (Store.replaceDoc # model.projectStore)
                     |> (setProjectStore # model)
 
             TodoEntity todo ->
@@ -391,8 +391,8 @@ saveCurrentForm model =
             Store.findById form.id model.contextStore
                 ?|> Context.setName form.name
                 >> Context.setModifiedAt model.now
-                >> (Store.update # model.contextStore)
-                >> (setContextStore # model)
+                >> Store.replaceDocIn model.contextStore
+                >> setContextStoreIn model
                 ?= model
                 |> setFocusInEntityWithId form.id
 
@@ -400,7 +400,7 @@ saveCurrentForm model =
             Store.findById form.id model.projectStore
                 ?|> Project.setName form.name
                 >> Project.setModifiedAt model.now
-                >> (Store.update # model.projectStore)
+                >> (Store.replaceDoc # model.projectStore)
                 >> (setProjectStore # model)
                 ?= model
                 |> setFocusInEntityWithId form.id
@@ -657,7 +657,7 @@ updateTodo__ : Todo.UpdateAction -> Todo.Model -> ModelF
 updateTodo__ action todo =
     apply2With ( getNow, getTodoStore )
         ((Todo.update [ action ] # todo)
-            >> Store.update
+            >> Store.replaceDoc
             >>> setTodoStore
         )
 

@@ -84,14 +84,18 @@ persist s =
         ns ! cmds
 
 
-update : Document x -> Store x -> Store x
-update doc s =
+replaceDoc : Document x -> Store x -> Store x
+replaceDoc doc s =
     let
         newDoc =
             { doc | dirty = True }
     in
         List.replaceIf (Document.equalById doc) (newDoc) s.list
             |> (setList # s)
+
+
+replaceDocIn =
+    flip replaceDoc
 
 
 decode encodedDoc store =

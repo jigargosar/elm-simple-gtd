@@ -1,3 +1,7 @@
+## Upcoming
+* travis: deploy to firebase dev and prod
+* [fix] use env specific firebase config
+
 ## v0.11.0 - 2017-05-18
 * [fix] last selected todo border now displays correctly
 * [fix] serviceWorker skip waiting in dev mode 

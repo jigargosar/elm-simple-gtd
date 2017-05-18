@@ -91,7 +91,7 @@ appDrawerLayoutView m =
         onClickAttributeList =
             let
                 return =
-                    [ Ext.Html.onClickWithTargetPathIds [ "context-dropdown", "project-dropdown" ] Msg.DeactivateEditingMode
+                    [ Ext.Html.onClickTargetPathHavingIds [ "context-dropdown", "project-dropdown" ] Msg.DeactivateEditingMode
                     ]
             in
                 case m.editMode of

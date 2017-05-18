@@ -79,7 +79,11 @@ onClickPathIds toMsg =
     Html.Events.on "click" (D.map toMsg targetAncestorIds)
 
 
-onClickWithTargetPathIds domIds toMsg =
+onClickTargetPathHavingIds =
+    targetPathHavingIds >>> Html.Events.on "click"
+
+
+targetPathHavingIds domIds toMsg =
     let
         failFn =
             (\_ -> D.fail ("domIds not found in event target path: " ++ (toString domIds)))
@@ -87,39 +91,7 @@ onClickWithTargetPathIds domIds toMsg =
         successFn =
             (\_ -> D.succeed toMsg)
     in
-        Html.Events.on "click"
-            (targetAncestorIds
-                |> D.andThen
-                    (List.find (List.member # domIds) >> Maybe.unpack successFn failFn)
-            )
-
-
-targetHasAncestorWithIds : List Dom.Id -> msg -> Decoder msg
-targetHasAncestorWithIds =
-    targetHasAncestorWithIdsHelp domIdDecoder 0
-
-
-targetHasAncestorWithIdsHelp : Decoder Dom.Id -> Int -> List Dom.Id -> msg -> Decoder msg
-targetHasAncestorWithIdsHelp decoder count ancestorIds msg =
-    decoder
-        |> D.andThen
-            (\domId ->
-                if List.member domId ancestorIds then
-                    D.succeed msg
-                else
-                    targetHasAncestorWithIdsHelp
-                        (nthParent count domIdDecoder)
-                        (count + 1)
-                        ancestorIds
-                        msg
-            )
-
-
-onClickContainingAncestorId : Dom.Id -> msg -> Html.Attribute msg
-onClickContainingAncestorId =
-    List.singleton >> onClickContainingAncestorIds
-
-
-onClickContainingAncestorIds : List Dom.Id -> msg -> Html.Attribute msg
-onClickContainingAncestorIds =
-    targetHasAncestorWithIds >>> Html.Events.on "click"
+        (targetAncestorIds
+            |> D.andThen
+                (List.find (List.member # domIds) >> Maybe.unpack successFn failFn)
+        )

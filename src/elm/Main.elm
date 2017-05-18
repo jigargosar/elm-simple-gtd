@@ -295,14 +295,9 @@ update msg =
 
                         ToggleSelected ->
                             Return.map (Model.toggleEntitySelection entity)
-                                >> modelTapLog (.selectedEntityIdSet) "selectedEntityIdSet"
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key
-
-                OnMainAppClick ->
-                    modelTapLog (Model.getEditMode) "OnMainAppClick"
-            --                        >> andThenUpdate DeactivateEditingMode
            )
         >> persistAll
 

@@ -98,6 +98,13 @@ replaceDocIn =
     flip replaceDoc
 
 
+updateDocWithId id updateDocFn store =
+    findById id store
+        ?|> updateDocFn
+        >> replaceDocIn store
+        ?= store
+
+
 decode encodedDoc store =
     D.decodeValue store.decoder encodedDoc
         |> Result.mapError (Debug.log "Store")

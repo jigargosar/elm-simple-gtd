@@ -43,6 +43,11 @@ setProjectStoreIn =
     flip setProjectStore
 
 
+updateProjectStore : (Project.Store -> Project.Store) -> ModelF
+updateProjectStore updater model =
+    setProjectStore (updater (getProjectStore model)) model
+
+
 updateProjectStoreM : (Model -> Project.Store) -> ModelF
 updateProjectStoreM updater model =
     setProjectStore (updater model) model

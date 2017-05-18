@@ -309,9 +309,11 @@ now =
     { get = .now, set = (\s b -> { b | now = s }) }
 
 
+update lens smallF big =
+    lens.set (smallF (lens.get big)) big
 
---update lens smallF big =
---    lens.set (smallF (lens.get big)) big
+
+
 --
 --
 --update2 lens l2 smallF big =
@@ -402,11 +404,8 @@ saveCurrentForm model =
                     Project.setName form.name
                         >> Project.setModifiedAt model.now
             in
-                Store.findById form.id model.projectStore
-                    ?|> updateProject
-                    >> Store.replaceDocIn model.projectStore
-                    ?= model.projectStore
-                    |> setProjectStoreIn model
+                model
+                    |> updateProjectStore (Store.updateDocWithId form.id updateProject)
                     |> setFocusInEntityWithId form.id
 
         EditMode.EditTodo form ->

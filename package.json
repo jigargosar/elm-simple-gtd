@@ -1,6 +1,6 @@
 {
   "name": "simplegtd.com",
-  "version": "0.11.1",
+  "version": "0.11.2",
   "main": "index.js",
   "license": "MIT",
   "engines": {
@@ -25,7 +25,7 @@
     "prebuild": "bash -c \"rimraf app && rimraf docs && rimraf build \"",
     "build": "bash scripts/build.sh",
     "prebuild-dev": "rimraf dev",
-    "build-dev":"bash scripts/build-dev.sh",
+    "build-dev": "bash scripts/build-dev.sh",
     "link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
     "start": "http-server docs"
   },

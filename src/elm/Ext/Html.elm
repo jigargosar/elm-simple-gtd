@@ -46,30 +46,9 @@ domIdDecoder =
     D.field "id" D.string
 
 
-
---targetParentIds : Decoder (List Dom.Id)
---targetParentIds =
---    domIdDecoder
---        |> DOM.parentElement
---        |> DOM.parentElement
---        |> DOM.parentElement
---        |> DOM.parentElement
---        |> DOM.parentElement
---        |> DOM.parentElement
---        |> DOM.parentElement
---        |> DOM.parentElement
---        |> DOM.target
---        |> D.map List.singleton
---
-
-
 targetAncestorIds : Decoder (List Dom.Id)
 targetAncestorIds =
     targetAncestorIdsHelp (DOM.target domIdDecoder) []
-
-
-
---        |> D.map (reject String.isEmpty)
 
 
 targetAncestorIdsHelp : Decoder Dom.Id -> List Dom.Id -> Decoder (List Dom.Id)
@@ -80,7 +59,7 @@ targetAncestorIdsHelp target ids =
                 (\domId ->
                     let
                         parentIndex =
-                            (List.length ids) + 1
+                            (List.length ids)
                     in
                         targetAncestorIdsHelp
                             (nthParent parentIndex domIdDecoder)
@@ -106,8 +85,8 @@ targetHasAncestorWithIds =
 
 
 targetHasAncestorWithIdsHelp : Decoder Dom.Id -> Int -> List Dom.Id -> msg -> Decoder msg
-targetHasAncestorWithIdsHelp target count ancestorIds msg =
-    target
+targetHasAncestorWithIdsHelp decoder count ancestorIds msg =
+    decoder
         |> D.andThen
             (\domId ->
                 if List.member domId ancestorIds then

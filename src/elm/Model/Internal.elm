@@ -39,6 +39,10 @@ setProjectStore projectStore model =
     { model | projectStore = projectStore }
 
 
+setProjectStoreIn =
+    flip setProjectStore
+
+
 updateProjectStoreM : (Model -> Project.Store) -> ModelF
 updateProjectStoreM updater model =
     setProjectStore (updater model) model
@@ -54,13 +58,13 @@ setContextStore contextStore model =
     { model | contextStore = contextStore }
 
 
+setContextStoreIn =
+    flip setContextStore
+
+
 updateContextStoreM : (Model -> Context.Store) -> ModelF
 updateContextStoreM updater model =
     setContextStore (updater model) model
-
-
-setContextStoreIn =
-    flip setContextStore
 
 
 getNow : Model -> Time

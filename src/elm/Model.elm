@@ -397,13 +397,17 @@ saveCurrentForm model =
                 |> setFocusInEntityWithId form.id
 
         EditMode.EditProject form ->
-            Store.findById form.id model.projectStore
-                ?|> Project.setName form.name
-                >> Project.setModifiedAt model.now
-                >> (Store.replaceDoc # model.projectStore)
-                >> (setProjectStore # model)
-                ?= model
-                |> setFocusInEntityWithId form.id
+            let
+                updateProject =
+                    Project.setName form.name
+                        >> Project.setModifiedAt model.now
+            in
+                Store.findById form.id model.projectStore
+                    ?|> updateProject
+                    >> Store.replaceDocIn model.projectStore
+                    ?= model.projectStore
+                    |> setProjectStoreIn model
+                    |> setFocusInEntityWithId form.id
 
         EditMode.EditTodo form ->
             model

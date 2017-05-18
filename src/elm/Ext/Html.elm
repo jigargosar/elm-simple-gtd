@@ -101,8 +101,8 @@ targetHasAncestorWithIdsHelp decoder count ancestorIds msg =
 
 
 onClickContainingAncestorId : Dom.Id -> msg -> Html.Attribute msg
-onClickContainingAncestorId domId =
-    List.singleton domId |> targetHasAncestorWithIds >>> Html.Events.on "click"
+onClickContainingAncestorId =
+    List.singleton >> onClickContainingAncestorIds
 
 
 onClickContainingAncestorIds : List Dom.Id -> msg -> Html.Attribute msg

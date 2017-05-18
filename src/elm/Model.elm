@@ -313,10 +313,6 @@ update lens smallF big =
     lens.set (smallF (lens.get big)) big
 
 
-updateWith smallF lens big =
-    update lens smallF big
-
-
 
 --
 --

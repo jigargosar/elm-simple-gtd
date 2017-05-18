@@ -57,6 +57,14 @@ async function boot() {
         }
     })
 
+    $elm.on("keydown", `[data-prevent-default-key]`, e => {
+        console.log(e.keyCode, e.key, e);
+        const preventDefaultKey = $(e).data("prevent-default-key")
+        if (e.key === preventDefaultKey) {
+            e.preventDefault()
+        }
+    })
+
     const dbMap = {
         "todo-db": await DB("todo-db"),
         "project-db": await DB("project-db"),

@@ -4,8 +4,12 @@ var serviceWorkerOption = {
     "/common.js"
   ]
 };
-        var url = "https://simplegtd.com/";
-
+        
+        const url = "https://simplegtd.com/";
+        
+        const isDevEnv = false;
+    
+    
         /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -87,9 +91,12 @@ var serviceWorkerOption = {
 //     // console.log("sw:fetch listener event",event, event.request.url)
 // })
 
-// self.addEventListener('install', function (event) {
-//     // event.waitUntil(self.skipWaiting())
-// })
+self.addEventListener('install', function (event) {
+    //noinspection JSUnresolvedVariable
+    if (isDevEnv) {
+        event.waitUntil(self.skipWaiting());
+    }
+});
 
 self.addEventListener('notificationclick', function (event) {
     // console.log("notification click", event)
@@ -159,7 +166,7 @@ firebase.initializeApp({
 function displayNotification(event) {
     try {
         var data = event.data.json().data;
-        console.log("[Service Worker] Push had this json: ", data);
+        console.log('[Service Worker] Push had this json: ', data);
         var todoId = data.todoId;
         data.id = todoId;
 
@@ -198,7 +205,7 @@ function displayNotification(event) {
 
 self.addEventListener('push', function (event) {
     console.log('[Service Worker] Push Received.');
-    console.log("[Service Worker] Push had this data: \"" + event.data.text() + "\"");
+    console.log('[Service Worker] Push had this data: "' + event.data.text() + '"');
 
     event.waitUntil(clients.matchAll({ type: "window" }).then(function (clientList) {
         if (clientList.length === 0 || isMobile()) {

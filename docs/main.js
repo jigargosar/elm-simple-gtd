@@ -74,9 +74,9 @@ module.exports = function _curry1(fn) {
 
 
 
-var base64 = __webpack_require__(322)
-var ieee754 = __webpack_require__(551)
-var isArray = __webpack_require__(333)
+var base64 = __webpack_require__(321)
+var ieee754 = __webpack_require__(550)
+var isArray = __webpack_require__(332)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -5368,7 +5368,7 @@ if (typeof Object.create === 'function') {
   };
 })(typeof module === 'undefined' || module, this);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(785)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(784)(module)))
 
 /***/ }),
 /* 14 */
@@ -5503,15 +5503,15 @@ module.exports = _curry2(function curryN(length, fn) {
 
 var elliptic = exports;
 
-elliptic.version = __webpack_require__(543).version;
-elliptic.utils = __webpack_require__(542);
+elliptic.version = __webpack_require__(542).version;
+elliptic.utils = __webpack_require__(541);
 elliptic.rand = __webpack_require__(188);
 elliptic.curve = __webpack_require__(107);
-elliptic.curves = __webpack_require__(534);
+elliptic.curves = __webpack_require__(533);
 
 // Protocols
-elliptic.ec = __webpack_require__(535);
-elliptic.eddsa = __webpack_require__(538);
+elliptic.ec = __webpack_require__(534);
+elliptic.eddsa = __webpack_require__(537);
 
 
 /***/ }),
@@ -5536,7 +5536,7 @@ var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
 var _map = __webpack_require__(120);
 var _reduce = __webpack_require__(30);
-var _xmap = __webpack_require__(657);
+var _xmap = __webpack_require__(656);
 var curryN = __webpack_require__(18);
 var keys = __webpack_require__(41);
 
@@ -5707,7 +5707,7 @@ module.exports = function _concat(set1, set2) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var _equals = __webpack_require__(632);
+var _equals = __webpack_require__(631);
 
 
 /**
@@ -6144,11 +6144,11 @@ module.exports = function _reduced(x) {
 
 var hash = exports;
 
-hash.utils = __webpack_require__(548);
-hash.common = __webpack_require__(544);
-hash.sha = __webpack_require__(547);
-hash.ripemd = __webpack_require__(546);
-hash.hmac = __webpack_require__(545);
+hash.utils = __webpack_require__(547);
+hash.common = __webpack_require__(543);
+hash.sha = __webpack_require__(546);
+hash.ripemd = __webpack_require__(545);
+hash.hmac = __webpack_require__(544);
 
 // Proxy hash functions to the main object
 hash.sha1 = hash.sha.sha1;
@@ -6416,8 +6416,8 @@ CipherBase.prototype._toString = function (value, enc, fin) {
 /* WEBPACK VAR INJECTION */(function(Buffer) {
 var inherits = __webpack_require__(5)
 var md5 = __webpack_require__(227)
-var rmd160 = __webpack_require__(772)
-var sha = __webpack_require__(774)
+var rmd160 = __webpack_require__(771)
+var sha = __webpack_require__(773)
 
 var Base = __webpack_require__(67)
 
@@ -6612,11 +6612,11 @@ var asn1 = exports;
 
 asn1.bignum = __webpack_require__(13);
 
-asn1.define = __webpack_require__(312).define;
+asn1.define = __webpack_require__(311).define;
 asn1.base = __webpack_require__(78);
 asn1.constants = __webpack_require__(185);
-asn1.decoders = __webpack_require__(316);
-asn1.encoders = __webpack_require__(318);
+asn1.decoders = __webpack_require__(315);
+asn1.encoders = __webpack_require__(317);
 
 
 /***/ }),
@@ -6625,10 +6625,10 @@ asn1.encoders = __webpack_require__(318);
 
 var base = exports;
 
-base.Reporter = __webpack_require__(314).Reporter;
+base.Reporter = __webpack_require__(313).Reporter;
 base.DecoderBuffer = __webpack_require__(184).DecoderBuffer;
 base.EncoderBuffer = __webpack_require__(184).EncoderBuffer;
-base.Node = __webpack_require__(313);
+base.Node = __webpack_require__(312);
 
 
 /***/ }),
@@ -7312,7 +7312,7 @@ module.exports = _curry2(function pluck(p, list) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var _toString = __webpack_require__(644);
+var _toString = __webpack_require__(643);
 
 
 /**
@@ -7817,10 +7817,10 @@ exports.encrypt = function (self, chunk) {
 
 var curve = exports;
 
-curve.base = __webpack_require__(530);
-curve.short = __webpack_require__(533);
-curve.mont = __webpack_require__(532);
-curve.edwards = __webpack_require__(531);
+curve.base = __webpack_require__(529);
+curve.short = __webpack_require__(532);
+curve.mont = __webpack_require__(531);
+curve.edwards = __webpack_require__(530);
 
 
 /***/ }),
@@ -7902,9 +7902,9 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 /* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(556)
-var aesid = __webpack_require__(555)
-var fixProc = __webpack_require__(558)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(555)
+var aesid = __webpack_require__(554)
+var fixProc = __webpack_require__(557)
 var ciphers = __webpack_require__(130)
 var compat = __webpack_require__(232)
 module.exports = parseKeys
@@ -8045,7 +8045,7 @@ var pouchdbCollections = __webpack_require__(163);
 var events = __webpack_require__(84);
 var inherits = _interopDefault(__webpack_require__(5));
 var immediate = _interopDefault(__webpack_require__(161));
-var pouchdbErrors = __webpack_require__(562);
+var pouchdbErrors = __webpack_require__(561);
 
 function isBinaryObject(object) {
   return (typeof ArrayBuffer !== 'undefined' && object instanceof ArrayBuffer) ||
@@ -9336,7 +9336,7 @@ var _curryN = __webpack_require__(116);
 var _dispatchable = __webpack_require__(14);
 var _has = __webpack_require__(21);
 var _reduce = __webpack_require__(30);
-var _xreduceBy = __webpack_require__(658);
+var _xreduceBy = __webpack_require__(657);
 
 
 /**
@@ -19732,244 +19732,244 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
-  F: __webpack_require__(570),
-  T: __webpack_require__(571),
-  __: __webpack_require__(572),
+  F: __webpack_require__(569),
+  T: __webpack_require__(570),
+  __: __webpack_require__(571),
   add: __webpack_require__(112),
-  addIndex: __webpack_require__(573),
+  addIndex: __webpack_require__(572),
   adjust: __webpack_require__(238),
-  all: __webpack_require__(574),
-  allPass: __webpack_require__(575),
+  all: __webpack_require__(573),
+  allPass: __webpack_require__(574),
   always: __webpack_require__(74),
   and: __webpack_require__(239),
   any: __webpack_require__(240),
-  anyPass: __webpack_require__(576),
+  anyPass: __webpack_require__(575),
   ap: __webpack_require__(165),
-  aperture: __webpack_require__(577),
-  append: __webpack_require__(578),
+  aperture: __webpack_require__(576),
+  append: __webpack_require__(577),
   apply: __webpack_require__(241),
-  applySpec: __webpack_require__(579),
-  ascend: __webpack_require__(580),
+  applySpec: __webpack_require__(578),
+  ascend: __webpack_require__(579),
   assoc: __webpack_require__(113),
   assocPath: __webpack_require__(242),
-  binary: __webpack_require__(581),
+  binary: __webpack_require__(580),
   bind: __webpack_require__(243),
-  both: __webpack_require__(582),
-  call: __webpack_require__(583),
+  both: __webpack_require__(581),
+  call: __webpack_require__(582),
   chain: __webpack_require__(166),
-  clamp: __webpack_require__(584),
-  clone: __webpack_require__(585),
-  comparator: __webpack_require__(586),
-  complement: __webpack_require__(587),
+  clamp: __webpack_require__(583),
+  clone: __webpack_require__(584),
+  comparator: __webpack_require__(585),
+  complement: __webpack_require__(586),
   compose: __webpack_require__(167),
   composeK: __webpack_require__(244),
-  composeP: __webpack_require__(588),
+  composeP: __webpack_require__(587),
   concat: __webpack_require__(168),
-  cond: __webpack_require__(589),
-  construct: __webpack_require__(590),
+  cond: __webpack_require__(588),
+  construct: __webpack_require__(589),
   constructN: __webpack_require__(245),
-  contains: __webpack_require__(591),
+  contains: __webpack_require__(590),
   converge: __webpack_require__(246),
-  countBy: __webpack_require__(592),
+  countBy: __webpack_require__(591),
   curry: __webpack_require__(114),
   curryN: __webpack_require__(18),
-  dec: __webpack_require__(593),
-  descend: __webpack_require__(594),
+  dec: __webpack_require__(592),
+  descend: __webpack_require__(593),
   defaultTo: __webpack_require__(247),
   difference: __webpack_require__(248),
   differenceWith: __webpack_require__(249),
   dissoc: __webpack_require__(250),
-  dissocPath: __webpack_require__(595),
-  divide: __webpack_require__(596),
+  dissocPath: __webpack_require__(594),
+  divide: __webpack_require__(595),
   drop: __webpack_require__(251),
-  dropLast: __webpack_require__(597),
-  dropLastWhile: __webpack_require__(598),
-  dropRepeats: __webpack_require__(599),
+  dropLast: __webpack_require__(596),
+  dropLastWhile: __webpack_require__(597),
+  dropRepeats: __webpack_require__(598),
   dropRepeatsWith: __webpack_require__(252),
-  dropWhile: __webpack_require__(600),
-  either: __webpack_require__(601),
+  dropWhile: __webpack_require__(599),
+  either: __webpack_require__(600),
   empty: __webpack_require__(253),
-  eqBy: __webpack_require__(602),
-  eqProps: __webpack_require__(603),
+  eqBy: __webpack_require__(601),
+  eqProps: __webpack_require__(602),
   equals: __webpack_require__(39),
-  evolve: __webpack_require__(604),
+  evolve: __webpack_require__(603),
   filter: __webpack_require__(169),
-  find: __webpack_require__(605),
-  findIndex: __webpack_require__(606),
-  findLast: __webpack_require__(607),
-  findLastIndex: __webpack_require__(608),
-  flatten: __webpack_require__(609),
+  find: __webpack_require__(604),
+  findIndex: __webpack_require__(605),
+  findLast: __webpack_require__(606),
+  findLastIndex: __webpack_require__(607),
+  flatten: __webpack_require__(608),
   flip: __webpack_require__(115),
-  forEach: __webpack_require__(610),
-  forEachObjIndexed: __webpack_require__(611),
-  fromPairs: __webpack_require__(612),
-  groupBy: __webpack_require__(613),
-  groupWith: __webpack_require__(614),
-  gt: __webpack_require__(615),
-  gte: __webpack_require__(616),
-  has: __webpack_require__(617),
-  hasIn: __webpack_require__(618),
-  head: __webpack_require__(619),
+  forEach: __webpack_require__(609),
+  forEachObjIndexed: __webpack_require__(610),
+  fromPairs: __webpack_require__(611),
+  groupBy: __webpack_require__(612),
+  groupWith: __webpack_require__(613),
+  gt: __webpack_require__(614),
+  gte: __webpack_require__(615),
+  has: __webpack_require__(616),
+  hasIn: __webpack_require__(617),
+  head: __webpack_require__(618),
   identical: __webpack_require__(254),
   identity: __webpack_require__(170),
-  ifElse: __webpack_require__(620),
-  inc: __webpack_require__(621),
-  indexBy: __webpack_require__(622),
-  indexOf: __webpack_require__(623),
-  init: __webpack_require__(624),
-  insert: __webpack_require__(625),
-  insertAll: __webpack_require__(626),
-  intersection: __webpack_require__(661),
-  intersectionWith: __webpack_require__(662),
-  intersperse: __webpack_require__(663),
-  into: __webpack_require__(664),
-  invert: __webpack_require__(665),
-  invertObj: __webpack_require__(666),
+  ifElse: __webpack_require__(619),
+  inc: __webpack_require__(620),
+  indexBy: __webpack_require__(621),
+  indexOf: __webpack_require__(622),
+  init: __webpack_require__(623),
+  insert: __webpack_require__(624),
+  insertAll: __webpack_require__(625),
+  intersection: __webpack_require__(660),
+  intersectionWith: __webpack_require__(661),
+  intersperse: __webpack_require__(662),
+  into: __webpack_require__(663),
+  invert: __webpack_require__(664),
+  invertObj: __webpack_require__(665),
   invoker: __webpack_require__(86),
   is: __webpack_require__(269),
   isArrayLike: __webpack_require__(87),
-  isEmpty: __webpack_require__(667),
-  isNil: __webpack_require__(668),
-  join: __webpack_require__(669),
+  isEmpty: __webpack_require__(666),
+  isNil: __webpack_require__(667),
+  join: __webpack_require__(668),
   juxt: __webpack_require__(270),
   keys: __webpack_require__(41),
-  keysIn: __webpack_require__(670),
+  keysIn: __webpack_require__(669),
   last: __webpack_require__(271),
-  lastIndexOf: __webpack_require__(671),
+  lastIndexOf: __webpack_require__(670),
   length: __webpack_require__(272),
   lens: __webpack_require__(121),
-  lensIndex: __webpack_require__(672),
-  lensPath: __webpack_require__(673),
-  lensProp: __webpack_require__(674),
+  lensIndex: __webpack_require__(671),
+  lensPath: __webpack_require__(672),
+  lensProp: __webpack_require__(673),
   lift: __webpack_require__(122),
   liftN: __webpack_require__(273),
-  lt: __webpack_require__(675),
-  lte: __webpack_require__(676),
+  lt: __webpack_require__(674),
+  lte: __webpack_require__(675),
   map: __webpack_require__(27),
-  mapAccum: __webpack_require__(677),
-  mapAccumRight: __webpack_require__(678),
-  mapObjIndexed: __webpack_require__(679),
-  match: __webpack_require__(680),
-  mathMod: __webpack_require__(681),
+  mapAccum: __webpack_require__(676),
+  mapAccumRight: __webpack_require__(677),
+  mapObjIndexed: __webpack_require__(678),
+  match: __webpack_require__(679),
+  mathMod: __webpack_require__(680),
   max: __webpack_require__(75),
-  maxBy: __webpack_require__(682),
+  maxBy: __webpack_require__(681),
   mean: __webpack_require__(274),
-  median: __webpack_require__(683),
-  memoize: __webpack_require__(684),
-  merge: __webpack_require__(685),
-  mergeAll: __webpack_require__(686),
-  mergeWith: __webpack_require__(687),
+  median: __webpack_require__(682),
+  memoize: __webpack_require__(683),
+  merge: __webpack_require__(684),
+  mergeAll: __webpack_require__(685),
+  mergeWith: __webpack_require__(686),
   mergeWithKey: __webpack_require__(275),
-  min: __webpack_require__(688),
-  minBy: __webpack_require__(689),
-  modulo: __webpack_require__(690),
+  min: __webpack_require__(687),
+  minBy: __webpack_require__(688),
+  modulo: __webpack_require__(689),
   multiply: __webpack_require__(276),
   nAry: __webpack_require__(123),
-  negate: __webpack_require__(691),
-  none: __webpack_require__(692),
+  negate: __webpack_require__(690),
+  none: __webpack_require__(691),
   not: __webpack_require__(277),
   nth: __webpack_require__(88),
-  nthArg: __webpack_require__(693),
+  nthArg: __webpack_require__(692),
   objOf: __webpack_require__(278),
-  of: __webpack_require__(694),
-  omit: __webpack_require__(695),
-  once: __webpack_require__(696),
+  of: __webpack_require__(693),
+  omit: __webpack_require__(694),
+  once: __webpack_require__(695),
   or: __webpack_require__(279),
   over: __webpack_require__(280),
-  pair: __webpack_require__(697),
-  partial: __webpack_require__(698),
-  partialRight: __webpack_require__(699),
-  partition: __webpack_require__(700),
+  pair: __webpack_require__(696),
+  partial: __webpack_require__(697),
+  partialRight: __webpack_require__(698),
+  partition: __webpack_require__(699),
   path: __webpack_require__(89),
-  pathEq: __webpack_require__(701),
-  pathOr: __webpack_require__(702),
-  pathSatisfies: __webpack_require__(703),
-  pick: __webpack_require__(704),
+  pathEq: __webpack_require__(700),
+  pathOr: __webpack_require__(701),
+  pathSatisfies: __webpack_require__(702),
+  pick: __webpack_require__(703),
   pickAll: __webpack_require__(281),
-  pickBy: __webpack_require__(705),
+  pickBy: __webpack_require__(704),
   pipe: __webpack_require__(282),
-  pipeK: __webpack_require__(706),
+  pipeK: __webpack_require__(705),
   pipeP: __webpack_require__(283),
   pluck: __webpack_require__(90),
   prepend: __webpack_require__(284),
-  product: __webpack_require__(707),
-  project: __webpack_require__(708),
+  product: __webpack_require__(706),
+  project: __webpack_require__(707),
   prop: __webpack_require__(175),
-  propEq: __webpack_require__(709),
-  propIs: __webpack_require__(710),
-  propOr: __webpack_require__(711),
-  propSatisfies: __webpack_require__(712),
-  props: __webpack_require__(713),
-  range: __webpack_require__(714),
+  propEq: __webpack_require__(708),
+  propIs: __webpack_require__(709),
+  propOr: __webpack_require__(710),
+  propSatisfies: __webpack_require__(711),
+  props: __webpack_require__(712),
+  range: __webpack_require__(713),
   reduce: __webpack_require__(42),
   reduceBy: __webpack_require__(124),
   reduceRight: __webpack_require__(285),
-  reduceWhile: __webpack_require__(715),
-  reduced: __webpack_require__(716),
+  reduceWhile: __webpack_require__(714),
+  reduced: __webpack_require__(715),
   reject: __webpack_require__(125),
-  remove: __webpack_require__(717),
-  repeat: __webpack_require__(718),
-  replace: __webpack_require__(719),
+  remove: __webpack_require__(716),
+  repeat: __webpack_require__(717),
+  replace: __webpack_require__(718),
   reverse: __webpack_require__(126),
-  scan: __webpack_require__(720),
+  scan: __webpack_require__(719),
   sequence: __webpack_require__(286),
-  set: __webpack_require__(721),
+  set: __webpack_require__(720),
   slice: __webpack_require__(65),
-  sort: __webpack_require__(722),
-  sortBy: __webpack_require__(723),
-  sortWith: __webpack_require__(724),
-  split: __webpack_require__(725),
-  splitAt: __webpack_require__(726),
-  splitEvery: __webpack_require__(727),
-  splitWhen: __webpack_require__(728),
-  subtract: __webpack_require__(729),
+  sort: __webpack_require__(721),
+  sortBy: __webpack_require__(722),
+  sortWith: __webpack_require__(723),
+  split: __webpack_require__(724),
+  splitAt: __webpack_require__(725),
+  splitEvery: __webpack_require__(726),
+  splitWhen: __webpack_require__(727),
+  subtract: __webpack_require__(728),
   sum: __webpack_require__(287),
-  symmetricDifference: __webpack_require__(730),
-  symmetricDifferenceWith: __webpack_require__(731),
+  symmetricDifference: __webpack_require__(729),
+  symmetricDifferenceWith: __webpack_require__(730),
   tail: __webpack_require__(176),
   take: __webpack_require__(288),
-  takeLast: __webpack_require__(732),
-  takeLastWhile: __webpack_require__(733),
-  takeWhile: __webpack_require__(734),
-  tap: __webpack_require__(735),
-  test: __webpack_require__(736),
+  takeLast: __webpack_require__(731),
+  takeLastWhile: __webpack_require__(732),
+  takeWhile: __webpack_require__(733),
+  tap: __webpack_require__(734),
+  test: __webpack_require__(735),
   times: __webpack_require__(289),
-  toLower: __webpack_require__(737),
-  toPairs: __webpack_require__(738),
-  toPairsIn: __webpack_require__(739),
+  toLower: __webpack_require__(736),
+  toPairs: __webpack_require__(737),
+  toPairsIn: __webpack_require__(738),
   toString: __webpack_require__(91),
-  toUpper: __webpack_require__(740),
-  transduce: __webpack_require__(741),
-  transpose: __webpack_require__(742),
-  traverse: __webpack_require__(743),
-  trim: __webpack_require__(744),
-  tryCatch: __webpack_require__(745),
+  toUpper: __webpack_require__(739),
+  transduce: __webpack_require__(740),
+  transpose: __webpack_require__(741),
+  traverse: __webpack_require__(742),
+  trim: __webpack_require__(743),
+  tryCatch: __webpack_require__(744),
   type: __webpack_require__(177),
-  unapply: __webpack_require__(746),
-  unary: __webpack_require__(747),
-  uncurryN: __webpack_require__(748),
-  unfold: __webpack_require__(749),
-  union: __webpack_require__(750),
-  unionWith: __webpack_require__(751),
+  unapply: __webpack_require__(745),
+  unary: __webpack_require__(746),
+  uncurryN: __webpack_require__(747),
+  unfold: __webpack_require__(748),
+  union: __webpack_require__(749),
+  unionWith: __webpack_require__(750),
   uniq: __webpack_require__(178),
   uniqBy: __webpack_require__(290),
   uniqWith: __webpack_require__(179),
-  unless: __webpack_require__(752),
-  unnest: __webpack_require__(753),
-  until: __webpack_require__(754),
+  unless: __webpack_require__(751),
+  unnest: __webpack_require__(752),
+  until: __webpack_require__(753),
   update: __webpack_require__(291),
   useWith: __webpack_require__(292),
   values: __webpack_require__(293),
-  valuesIn: __webpack_require__(755),
-  view: __webpack_require__(756),
-  when: __webpack_require__(757),
+  valuesIn: __webpack_require__(754),
+  view: __webpack_require__(755),
+  when: __webpack_require__(756),
   where: __webpack_require__(294),
-  whereEq: __webpack_require__(758),
-  without: __webpack_require__(759),
-  xprod: __webpack_require__(760),
-  zip: __webpack_require__(761),
-  zipObj: __webpack_require__(762),
-  zipWith: __webpack_require__(763)
+  whereEq: __webpack_require__(757),
+  without: __webpack_require__(758),
+  xprod: __webpack_require__(759),
+  zip: __webpack_require__(760),
+  zipObj: __webpack_require__(761),
+  zipWith: __webpack_require__(762)
 };
 
 
@@ -20002,10 +20002,10 @@ function argsArray(fun) {
 /* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ciphers = __webpack_require__(324)
+var ciphers = __webpack_require__(323)
 exports.createCipher = exports.Cipher = ciphers.createCipher
 exports.createCipheriv = exports.Cipheriv = ciphers.createCipheriv
-var deciphers = __webpack_require__(323)
+var deciphers = __webpack_require__(322)
 exports.createDecipher = exports.Decipher = deciphers.createDecipher
 exports.createDecipheriv = exports.Decipheriv = deciphers.createDecipheriv
 var modes = __webpack_require__(94)
@@ -20287,11 +20287,11 @@ module.exports = function createHmac(alg, key) {
 "use strict";
 
 
-exports.utils = __webpack_require__(526);
-exports.Cipher = __webpack_require__(523);
-exports.DES = __webpack_require__(524);
-exports.CBC = __webpack_require__(522);
-exports.EDE = __webpack_require__(525);
+exports.utils = __webpack_require__(525);
+exports.Cipher = __webpack_require__(522);
+exports.DES = __webpack_require__(523);
+exports.CBC = __webpack_require__(521);
+exports.EDE = __webpack_require__(524);
 
 
 /***/ }),
@@ -20965,7 +20965,7 @@ module.exports = _curry2(function ap(applicative, fn) {
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
 var _makeFlat = __webpack_require__(265);
-var _xchain = __webpack_require__(647);
+var _xchain = __webpack_require__(646);
 var map = __webpack_require__(27);
 
 
@@ -21095,7 +21095,7 @@ var _dispatchable = __webpack_require__(14);
 var _filter = __webpack_require__(259);
 var _isObject = __webpack_require__(264);
 var _reduce = __webpack_require__(30);
-var _xfilter = __webpack_require__(652);
+var _xfilter = __webpack_require__(651);
 var keys = __webpack_require__(41);
 
 
@@ -21174,7 +21174,7 @@ module.exports = _curry1(_identity);
 /* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _objectAssign = __webpack_require__(637);
+var _objectAssign = __webpack_require__(636);
 
 module.exports =
   typeof Object.assign === 'function' ? Object.assign : _objectAssign;
@@ -21426,7 +21426,7 @@ util.inherits = __webpack_require__(5);
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(782)
+  deprecate: __webpack_require__(781)
 };
 /*</replacement>*/
 
@@ -21941,7 +21941,7 @@ function CorkedRequest(state) {
     }
   };
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50), __webpack_require__(781).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50), __webpack_require__(780).setImmediate))
 
 /***/ }),
 /* 181 */
@@ -21953,7 +21953,7 @@ exports.Readable = exports;
 exports.Writable = __webpack_require__(180);
 exports.Duplex = __webpack_require__(66);
 exports.Transform = __webpack_require__(296);
-exports.PassThrough = __webpack_require__(765);
+exports.PassThrough = __webpack_require__(764);
 
 
 /***/ }),
@@ -21988,10 +21988,10 @@ var inherits = __webpack_require__(5);
 
 inherits(Stream, EE);
 Stream.Readable = __webpack_require__(181);
-Stream.Writable = __webpack_require__(770);
-Stream.Duplex = __webpack_require__(764);
-Stream.Transform = __webpack_require__(769);
-Stream.PassThrough = __webpack_require__(768);
+Stream.Writable = __webpack_require__(769);
+Stream.Duplex = __webpack_require__(763);
+Stream.Transform = __webpack_require__(768);
+Stream.PassThrough = __webpack_require__(767);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -22460,7 +22460,7 @@ constants._reverse = function reverse(map) {
   return res;
 };
 
-constants.der = __webpack_require__(315);
+constants.der = __webpack_require__(314);
 
 
 /***/ }),
@@ -23153,7 +23153,7 @@ if (typeof self === 'object') {
 } else {
   // Node.js or Web worker with no crypto support
   try {
-    var crypto = __webpack_require__(786);
+    var crypto = __webpack_require__(785);
     if (typeof crypto.randomBytes !== 'function')
       throw new Error('Not supported');
 
@@ -23172,7 +23172,7 @@ if (typeof self === 'object') {
 /* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(93)
 var Transform = __webpack_require__(67)
 var inherits = __webpack_require__(5)
-var GHASH = __webpack_require__(325)
+var GHASH = __webpack_require__(324)
 var xor = __webpack_require__(79)
 inherits(StreamCipher, Transform)
 module.exports = StreamCipher
@@ -23673,7 +23673,7 @@ module.exports = {
  * See http://pajhome.org.uk/crypt/md5 for more info.
  */
 
-var helpers = __webpack_require__(516);
+var helpers = __webpack_require__(515);
 
 /*
  * Calculate the MD5 of an array of little-endian words, and a bit length
@@ -24380,7 +24380,7 @@ utils.encode = function encode(arr, enc) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, Buffer) {var createHmac = __webpack_require__(159)
-var checkParameters = __webpack_require__(559)
+var checkParameters = __webpack_require__(558)
 
 exports.pbkdf2 = function (password, salt, iterations, keylen, digest, callback) {
   if (typeof digest === 'function') {
@@ -25309,7 +25309,7 @@ module.exports = _curry2(function dissoc(prop, obj) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xdrop = __webpack_require__(648);
+var _xdrop = __webpack_require__(647);
 var slice = __webpack_require__(65);
 
 
@@ -26288,7 +26288,7 @@ module.exports = _curry2(function pickAll(names, obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
-var _pipe = __webpack_require__(639);
+var _pipe = __webpack_require__(638);
 var reduce = __webpack_require__(42);
 var tail = __webpack_require__(176);
 
@@ -26330,7 +26330,7 @@ module.exports = function pipe() {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
-var _pipeP = __webpack_require__(640);
+var _pipeP = __webpack_require__(639);
 var reduce = __webpack_require__(42);
 var tail = __webpack_require__(176);
 
@@ -26527,7 +26527,7 @@ module.exports = reduce(add, 0);
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xtake = __webpack_require__(659);
+var _xtake = __webpack_require__(658);
 var slice = __webpack_require__(65);
 
 
@@ -26629,7 +26629,7 @@ module.exports = _curry2(function times(fn, n) {
 /* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _Set = __webpack_require__(627);
+var _Set = __webpack_require__(626);
 var _curry2 = __webpack_require__(0);
 
 
@@ -26858,7 +26858,7 @@ var processNextTick = __webpack_require__(164);
 /*</replacement>*/
 
 /*<replacement>*/
-var isArray = __webpack_require__(767);
+var isArray = __webpack_require__(766);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -26890,7 +26890,7 @@ util.inherits = __webpack_require__(5);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(787);
+var debugUtil = __webpack_require__(786);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -26899,7 +26899,7 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(766);
+var BufferList = __webpack_require__(765);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -29152,18 +29152,6 @@ module.exports = Sha512
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var appAttributes = exports.appAttributes = [["api-key", "AIzaSyDgqOiOMuTvK3PdzJ0Oz6ctEg-devcgZYc"], ["auth-domain", "simple-gtd-prod.firebaseapp.com"], ["database-url", "https://simple-gtd-prod.firebaseio.com"], ["messaging-sender-id", "1061254169900"]];
-
-/***/ }),
-/* 302 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
 /*!
 Copyright (c) 2011, 2012 Julien Wajsberg <felash@gmail.com>
 All rights reserved.
@@ -29356,7 +29344,7 @@ This is version 1.2.0.
 })(jQuery);
 
 /***/ }),
-/* 303 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29530,7 +29518,7 @@ var showNotification = function showNotification(reg) {
 };
 
 /***/ }),
-/* 304 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29542,13 +29530,13 @@ Object.defineProperty(exports, "__esModule", {
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var PouchDB = __webpack_require__(561);
+var PouchDB = __webpack_require__(560);
 var _ = __webpack_require__(128);
 
 // PouchDB.debug.enable("*")
 PouchDB.debug.disable();
-PouchDB.plugin(__webpack_require__(563));
-PouchDB.plugin(__webpack_require__(566));
+PouchDB.plugin(__webpack_require__(562));
+PouchDB.plugin(__webpack_require__(565));
 
 exports.default = function () {
     var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(dbName) {
@@ -29745,13 +29733,13 @@ exports.default = function () {
 }();
 
 /***/ }),
-/* 305 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _howler = __webpack_require__(550);
+var _howler = __webpack_require__(549);
 
 var _howler2 = _interopRequireDefault(_howler);
 
@@ -29783,13 +29771,13 @@ module.exports = function () {
 }();
 
 /***/ }),
-/* 306 */,
-/* 307 */
+/* 305 */,
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-const crypto = __webpack_require__(517);
+const crypto = __webpack_require__(516);
 
 module.exports = len => {
 	if (!Number.isFinite(len)) {
@@ -29801,7 +29789,7 @@ module.exports = len => {
 
 
 /***/ }),
-/* 308 */
+/* 307 */
 /***/ (function(module, exports) {
 
 
@@ -39336,6 +39324,135 @@ var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$To
 _danielnarey$elm_toolkit$Toolkit_Operators_ops['|++'] = F2(
 	function (a, b) {
 		return A2(_elm_lang$core$Basics_ops['++'], a, b);
+	});
+
+var _debois$elm_dom$DOM$className = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'className',
+		_1: {ctor: '[]'}
+	},
+	_elm_lang$core$Json_Decode$string);
+var _debois$elm_dom$DOM$scrollTop = A2(_elm_lang$core$Json_Decode$field, 'scrollTop', _elm_lang$core$Json_Decode$float);
+var _debois$elm_dom$DOM$scrollLeft = A2(_elm_lang$core$Json_Decode$field, 'scrollLeft', _elm_lang$core$Json_Decode$float);
+var _debois$elm_dom$DOM$offsetTop = A2(_elm_lang$core$Json_Decode$field, 'offsetTop', _elm_lang$core$Json_Decode$float);
+var _debois$elm_dom$DOM$offsetLeft = A2(_elm_lang$core$Json_Decode$field, 'offsetLeft', _elm_lang$core$Json_Decode$float);
+var _debois$elm_dom$DOM$offsetHeight = A2(_elm_lang$core$Json_Decode$field, 'offsetHeight', _elm_lang$core$Json_Decode$float);
+var _debois$elm_dom$DOM$offsetWidth = A2(_elm_lang$core$Json_Decode$field, 'offsetWidth', _elm_lang$core$Json_Decode$float);
+var _debois$elm_dom$DOM$childNodes = function (decoder) {
+	var loop = F2(
+		function (idx, xs) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (_p0) {
+					return A2(
+						_elm_lang$core$Maybe$withDefault,
+						_elm_lang$core$Json_Decode$succeed(xs),
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (x) {
+								return A2(
+									loop,
+									idx + 1,
+									{ctor: '::', _0: x, _1: xs});
+							},
+							_p0));
+				},
+				_elm_lang$core$Json_Decode$maybe(
+					A2(
+						_elm_lang$core$Json_Decode$field,
+						_elm_lang$core$Basics$toString(idx),
+						decoder)));
+		});
+	return A2(
+		_elm_lang$core$Json_Decode$map,
+		_elm_lang$core$List$reverse,
+		A2(
+			_elm_lang$core$Json_Decode$field,
+			'childNodes',
+			A2(
+				loop,
+				0,
+				{ctor: '[]'})));
+};
+var _debois$elm_dom$DOM$childNode = function (idx) {
+	return _elm_lang$core$Json_Decode$at(
+		{
+			ctor: '::',
+			_0: 'childNodes',
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$core$Basics$toString(idx),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _debois$elm_dom$DOM$parentElement = function (decoder) {
+	return A2(_elm_lang$core$Json_Decode$field, 'parentElement', decoder);
+};
+var _debois$elm_dom$DOM$previousSibling = function (decoder) {
+	return A2(_elm_lang$core$Json_Decode$field, 'previousSibling', decoder);
+};
+var _debois$elm_dom$DOM$nextSibling = function (decoder) {
+	return A2(_elm_lang$core$Json_Decode$field, 'nextSibling', decoder);
+};
+var _debois$elm_dom$DOM$offsetParent = F2(
+	function (x, decoder) {
+		return _elm_lang$core$Json_Decode$oneOf(
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Json_Decode$field,
+					'offsetParent',
+					_elm_lang$core$Json_Decode$null(x)),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$core$Json_Decode$field, 'offsetParent', decoder),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _debois$elm_dom$DOM$position = F2(
+	function (x, y) {
+		return A2(
+			_elm_lang$core$Json_Decode$andThen,
+			function (_p1) {
+				var _p2 = _p1;
+				var _p4 = _p2._1;
+				var _p3 = _p2._0;
+				return A2(
+					_debois$elm_dom$DOM$offsetParent,
+					{ctor: '_Tuple2', _0: _p3, _1: _p4},
+					A2(_debois$elm_dom$DOM$position, _p3, _p4));
+			},
+			A5(
+				_elm_lang$core$Json_Decode$map4,
+				F4(
+					function (scrollLeft, scrollTop, offsetLeft, offsetTop) {
+						return {ctor: '_Tuple2', _0: (x + offsetLeft) - scrollLeft, _1: (y + offsetTop) - scrollTop};
+					}),
+				_debois$elm_dom$DOM$scrollLeft,
+				_debois$elm_dom$DOM$scrollTop,
+				_debois$elm_dom$DOM$offsetLeft,
+				_debois$elm_dom$DOM$offsetTop));
+	});
+var _debois$elm_dom$DOM$boundingClientRect = A4(
+	_elm_lang$core$Json_Decode$map3,
+	F3(
+		function (_p5, width, height) {
+			var _p6 = _p5;
+			return {top: _p6._1, left: _p6._0, width: width, height: height};
+		}),
+	A2(_debois$elm_dom$DOM$position, 0, 0),
+	_debois$elm_dom$DOM$offsetWidth,
+	_debois$elm_dom$DOM$offsetHeight);
+var _debois$elm_dom$DOM$target = function (decoder) {
+	return A2(_elm_lang$core$Json_Decode$field, 'target', decoder);
+};
+var _debois$elm_dom$DOM$Rectangle = F4(
+	function (a, b, c, d) {
+		return {top: a, left: b, width: c, height: d};
 	});
 
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrap;
@@ -50386,6 +50503,11 @@ var _user$project$DomPorts$focusSelectorIfNoFocusCmd = function (_p1) {
 	return _Fresheyeball$elm_return$Return$command(
 		_user$project$DomPorts$focusSelectorIfNoFocus(_p1));
 };
+var _user$project$DomPorts$positionDropdown = _elm_lang$core$Native_Platform.outgoingPort(
+	'positionDropdown',
+	function (v) {
+		return [v._0, v._1];
+	});
 
 var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
 _user$project$Ext_Function_Infix_ops['>>>>'] = F5(
@@ -50505,6 +50627,12 @@ var _user$project$Document$toggleDeleted = function (model) {
 		model,
 		{deleted: !model.deleted});
 };
+var _user$project$Document$setModifiedAt = F2(
+	function (modifiedAt, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{modifiedAt: modifiedAt});
+	});
 var _user$project$Document$setDeleted = F2(
 	function (deleted, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -50849,7 +50977,7 @@ var _user$project$Store$updateExternal = F2(
 				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$insertExternal, store)),
 			store);
 	});
-var _user$project$Store$update = F2(
+var _user$project$Store$replaceDoc = F2(
 	function (doc, s) {
 		var newDoc = _elm_lang$core$Native_Utils.update(
 			doc,
@@ -50861,27 +50989,43 @@ var _user$project$Store$update = F2(
 				newDoc,
 				s.list));
 	});
+var _user$project$Store$replaceDocIn = _elm_lang$core$Basics$flip(_user$project$Store$replaceDoc);
+var _user$project$Store$updateDocWithId = F3(
+	function (id, updateDocFn, store) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(_user$project$Store$findById, id, store),
+				function (_p9) {
+					return A2(
+						_user$project$Store$replaceDocIn,
+						store,
+						updateDocFn(_p9));
+				}),
+			store);
+	});
 var _user$project$Store$encodeDoc = F2(
 	function (doc, s) {
 		return A2(_user$project$Document$encode, s.otherFieldsEncoder, doc);
 	});
 var _user$project$Store$decodeList = function (decoder) {
-	return function (_p9) {
+	return function (_p10) {
 		return A2(
 			_elm_lang$core$List$filterMap,
 			function (result) {
-				var _p10 = result;
-				if (_p10.ctor === 'Ok') {
-					return _elm_lang$core$Maybe$Just(_p10._0);
+				var _p11 = result;
+				if (_p11.ctor === 'Ok') {
+					return _elm_lang$core$Maybe$Just(_p11._0);
 				} else {
-					var _p11 = A2(_elm_lang$core$Debug$log, 'Error while decoding Project', _p10._0);
+					var _p12 = A2(_elm_lang$core$Debug$log, 'Error while decoding Project', _p11._0);
 					return _elm_lang$core$Maybe$Nothing;
 				}
 			},
 			A2(
 				_elm_lang$core$List$map,
 				_elm_lang$core$Json_Decode$decodeValue(decoder),
-				_p9));
+				_p10));
 	};
 };
 var _user$project$Store$init = F5(
@@ -50950,9 +51094,9 @@ var _user$project$Store$pouchDBChanges = _elm_lang$core$Native_Platform.incoming
 				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
 		},
 		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
-var _user$project$Store$onChange = function (_p12) {
+var _user$project$Store$onChange = function (_p13) {
 	return _user$project$Store$pouchDBChanges(
-		_elm_lang$core$Basics$uncurry(_p12));
+		_elm_lang$core$Basics$uncurry(_p13));
 };
 var _user$project$Store$Store = F5(
 	function (a, b, c, d, e) {
@@ -51056,6 +51200,51 @@ var _user$project$Context$null = A6(_user$project$Context$constructor, '', '', 0
 var _user$project$Context$isNull = _user$project$Ext_Function$equals(_user$project$Context$null);
 var _user$project$Context$Record = function (a) {
 	return {name: a};
+};
+
+var _user$project$Form$setFields = F2(
+	function (fields, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{fields: fields});
+	});
+var _user$project$Form$updateFieldsM = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Form$setFields,
+			updater(model),
+			model);
+	});
+var _user$project$Form$getFields = function (_) {
+	return _.fields;
+};
+var _user$project$Form$updateFields = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Form$setFields,
+			updater(
+				_user$project$Form$getFields(model)),
+			model);
+	});
+var _user$project$Form$get = function (name) {
+	return A2(
+		_user$project$Ext_Function_Infix_ops['>>?='],
+		function (_p0) {
+			return A2(
+				_elm_lang$core$Dict$get,
+				name,
+				_user$project$Form$getFields(_p0));
+		},
+		'');
+};
+var _user$project$Form$set = F2(
+	function (name, value) {
+		return _user$project$Form$updateFields(
+			A2(_elm_lang$core$Dict$insert, name, value));
+	});
+var _user$project$Form$init = {fields: _elm_lang$core$Dict$empty};
+var _user$project$Form$Model = function (a) {
+	return {fields: a};
 };
 
 var _user$project$Project$constructor = F6(
@@ -51663,22 +51852,16 @@ var _user$project$Todo$update = F2(
 		};
 	});
 
+var _user$project$Todo_NewForm$getText = _user$project$Form$get('text');
 var _user$project$Todo_NewForm$set = F2(
-	function (action, model) {
-		var _p0 = action;
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{text: _p0._0});
+	function (field, value) {
+		var _p0 = field;
+		return A2(_user$project$Form$set, 'text', value);
 	});
 var _user$project$Todo_NewForm$create = function (text) {
-	return {text: text};
+	return A3(_user$project$Form$set, 'text', text, _user$project$Form$init);
 };
-var _user$project$Todo_NewForm$Model = function (a) {
-	return {text: a};
-};
-var _user$project$Todo_NewForm$SetText = function (a) {
-	return {ctor: 'SetText', _0: a};
-};
+var _user$project$Todo_NewForm$Text = {ctor: 'Text'};
 
 var _user$project$Todo_Form$set = F2(
 	function (action, model) {
@@ -51820,6 +52003,12 @@ var _user$project$EditMode$editContextSetName = F2(
 				ecm,
 				{name: name}));
 	});
+var _user$project$EditMode$EditTodoProject = function (a) {
+	return {ctor: 'EditTodoProject', _0: a};
+};
+var _user$project$EditMode$EditTodoContext = function (a) {
+	return {ctor: 'EditTodoContext', _0: a};
+};
 var _user$project$EditMode$EditTodoReminder = function (a) {
 	return {ctor: 'EditTodoReminder', _0: a};
 };
@@ -52394,9 +52583,7 @@ var _user$project$Types$Model = function (a) {
 																return function (q) {
 																	return function (r) {
 																		return function (s) {
-																			return function (t) {
-																				return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, firebaseAppAttributes: m, developmentMode: n, focusedEntityInfo: o, selectedEntityIdSet: p, layout: q, maybeFocusedEntity: r, appVersion: s, deviceId: t};
-																			};
+																			return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, focusedEntityInfo: n, selectedEntityIdSet: o, layout: p, maybeFocusedEntity: q, appVersion: r, deviceId: s};
 																		};
 																	};
 																};
@@ -52423,9 +52610,9 @@ var _user$project$Types$Layout = F2(
 var _user$project$Types$EntityFocus = function (a) {
 	return {id: a};
 };
-var _user$project$Types$Flags = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {now: a, encodedTodoList: b, encodedProjectList: c, encodedContextList: d, pouchDBRemoteSyncURI: e, firebaseAppAttributes: f, developmentMode: g, appVersion: h, deviceId: i};
+var _user$project$Types$Flags = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {now: a, encodedTodoList: b, encodedProjectList: c, encodedContextList: d, pouchDBRemoteSyncURI: e, developmentMode: f, appVersion: g, deviceId: h};
 	});
 var _user$project$Types$TodoNotification = F3(
 	function (a, b, c) {
@@ -52534,13 +52721,18 @@ var _user$project$Msg$FocusPaperInput = function (a) {
 	return {ctor: 'FocusPaperInput', _0: a};
 };
 var _user$project$Msg$SaveCurrentForm = {ctor: 'SaveCurrentForm'};
+var _user$project$Msg$StartEditingProject = function (a) {
+	return {ctor: 'StartEditingProject', _0: a};
+};
+var _user$project$Msg$StartEditingContext = function (a) {
+	return {ctor: 'StartEditingContext', _0: a};
+};
 var _user$project$Msg$StartEditingReminder = function (a) {
 	return {ctor: 'StartEditingReminder', _0: a};
 };
-var _user$project$Msg$NewTodoKeyUp = F2(
-	function (a, b) {
-		return {ctor: 'NewTodoKeyUp', _0: a, _1: b};
-	});
+var _user$project$Msg$NewTodoKeyUp = function (a) {
+	return {ctor: 'NewTodoKeyUp', _0: a};
+};
 var _user$project$Msg$DeactivateEditingMode = {ctor: 'DeactivateEditingMode'};
 var _user$project$Msg$NewTodoTextChanged = function (a) {
 	return {ctor: 'NewTodoTextChanged', _0: a};
@@ -52661,6 +52853,7 @@ var _user$project$Model_Internal$setContextStore = F2(
 			model,
 			{contextStore: contextStore});
 	});
+var _user$project$Model_Internal$setContextStoreIn = _elm_lang$core$Basics$flip(_user$project$Model_Internal$setContextStore);
 var _user$project$Model_Internal$updateContextStoreM = F2(
 	function (updater, model) {
 		return A2(
@@ -52671,12 +52864,21 @@ var _user$project$Model_Internal$updateContextStoreM = F2(
 var _user$project$Model_Internal$getContextStore = function (_) {
 	return _.contextStore;
 };
+var _user$project$Model_Internal$updateContextStore = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Model_Internal$setContextStore,
+			updater(
+				_user$project$Model_Internal$getContextStore(model)),
+			model);
+	});
 var _user$project$Model_Internal$setProjectStore = F2(
 	function (projectStore, model) {
 		return _elm_lang$core$Native_Utils.update(
 			model,
 			{projectStore: projectStore});
 	});
+var _user$project$Model_Internal$setProjectStoreIn = _elm_lang$core$Basics$flip(_user$project$Model_Internal$setProjectStore);
 var _user$project$Model_Internal$updateProjectStoreM = F2(
 	function (updater, model) {
 		return A2(
@@ -52687,6 +52889,14 @@ var _user$project$Model_Internal$updateProjectStoreM = F2(
 var _user$project$Model_Internal$getProjectStore = function (_) {
 	return _.projectStore;
 };
+var _user$project$Model_Internal$updateProjectStore = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Model_Internal$setProjectStore,
+			updater(
+				_user$project$Model_Internal$getProjectStore(model)),
+			model);
+	});
 var _user$project$Model_Internal$setTodoStore = F2(
 	function (todoStore, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -52907,7 +53117,7 @@ var _user$project$Model$updateTodo__ = F2(
 			A2(
 				_user$project$Ext_Function_Infix_ops['>>>'],
 				function (_p6) {
-					return _user$project$Store$update(
+					return _user$project$Store$replaceDoc(
 						A2(
 							_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
 							_user$project$Todo$update(
@@ -53112,146 +53322,89 @@ var _user$project$Model$setTodoContextOrProjectBasedOnCurrentView = F2(
 			todoId,
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='], maybeModel, model));
 	});
-var _user$project$Model$getMaybeEditTodoReminderForm = function (model) {
+var _user$project$Model$getMaybeEditTodoProjectForm = function (model) {
 	var _p24 = model.editMode;
-	if (_p24.ctor === 'EditTodoReminder') {
+	if (_p24.ctor === 'EditTodoProject') {
 		return _elm_lang$core$Maybe$Just(_p24._0);
 	} else {
 		return _elm_lang$core$Maybe$Nothing;
 	}
 };
-var _user$project$Model$saveCurrentForm = function (model) {
+var _user$project$Model$getMaybeEditTodoContextForm = function (model) {
 	var _p25 = model.editMode;
-	switch (_p25.ctor) {
-		case 'EditContext':
-			var _p27 = _p25._0;
-			return A2(
-				_user$project$Model$setFocusInEntityWithId,
-				_p27.id,
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-						A2(_user$project$Store$findById, _p27.id, model.contextStore),
-						function (_p26) {
-							return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model_Internal$setContextStore, model)(
-								A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$update, model.contextStore)(
-									A2(
-										_user$project$Context$setModifiedAt,
-										model.now,
-										A2(_user$project$Context$setName, _p27.name, _p26))));
-						}),
-					model));
-		case 'EditProject':
-			var _p29 = _p25._0;
-			return A2(
-				_user$project$Model$setFocusInEntityWithId,
-				_p29.id,
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-						A2(_user$project$Store$findById, _p29.id, model.projectStore),
-						function (_p28) {
-							return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model_Internal$setProjectStore, model)(
-								A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$update, model.projectStore)(
-									A2(
-										_user$project$Project$setModifiedAt,
-										model.now,
-										A2(_user$project$Project$setName, _p29.name, _p28))));
-						}),
-					model));
-		case 'EditTodo':
-			var _p30 = _p25._0;
-			return A2(
-				_user$project$Model$setFocusInEntityWithId,
-				_p30.id,
-				A3(
-					_user$project$Model$updateTodoById,
-					_user$project$Todo$SetText(_p30.todoText),
-					_p30.id,
-					model));
-		case 'EditTodoReminder':
-			var _p31 = _p25._0;
-			return A2(
-				_user$project$Model$setFocusInEntityWithId,
-				_p31.id,
-				A3(
-					_user$project$Model$updateTodoById,
-					_user$project$Todo$SetTime(
-						_user$project$Todo_ReminderForm$getMaybeTime(_p31)),
-					_p31.id,
-					model));
-		case 'NewTodo':
-			return A2(
-				_elm_lang$core$Basics$uncurry,
-				_user$project$Model$setTodoContextOrProjectBasedOnCurrentView,
-				A2(
-					_elm_lang$core$Tuple$mapFirst,
-					_user$project$Document$getId,
-					A2(
-						_user$project$Model$insertTodo,
-						A2(_user$project$Todo$init, model.now, _p25._0.text),
-						model)));
-		case 'EditSyncSettings':
-			return _elm_lang$core$Native_Utils.update(
-				model,
-				{pouchDBRemoteSyncURI: _p25._0.uri});
-		default:
-			return model;
+	if (_p25.ctor === 'EditTodoContext') {
+		return _elm_lang$core$Maybe$Just(_p25._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _user$project$Model$getMaybeEditTodoReminderForm = function (model) {
+	var _p26 = model.editMode;
+	if (_p26.ctor === 'EditTodoReminder') {
+		return _elm_lang$core$Maybe$Just(_p26._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
 	}
 };
 var _user$project$Model$toggleDeleteEntity = F2(
 	function (entity, model) {
 		var entityId = _user$project$Model$getEntityId(entity);
-		var _p32 = entity;
-		switch (_p32.ctor) {
+		var _p27 = entity;
+		switch (_p27.ctor) {
 			case 'ContextEntity':
 				return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model_Internal$setContextStore, model)(
-					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$update, model.contextStore)(
+					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$replaceDoc, model.contextStore)(
 						A2(
 							_user$project$Context$setModifiedAt,
 							model.now,
-							_user$project$Document$toggleDeleted(_p32._0))));
+							_user$project$Document$toggleDeleted(_p27._0))));
 			case 'ProjectEntity':
 				return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model_Internal$setProjectStore, model)(
-					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$update, model.projectStore)(
+					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$replaceDoc, model.projectStore)(
 						A2(
 							_user$project$Project$setModifiedAt,
 							model.now,
-							_user$project$Document$toggleDeleted(_p32._0))));
+							_user$project$Document$toggleDeleted(_p27._0))));
 			default:
 				return A3(_user$project$Model$updateTodoById, _user$project$Todo$ToggleDeleted, entityId, model);
 		}
 	});
 var _user$project$Model$updateEditModeNameChanged = F3(
 	function (newName, entity, model) {
-		var _p33 = model.editMode;
-		switch (_p33.ctor) {
+		var _p28 = model.editMode;
+		switch (_p28.ctor) {
 			case 'EditContext':
 				return A2(
 					_user$project$Model$setEditMode,
-					A2(_user$project$EditMode$editContextSetName, newName, _p33._0),
+					A2(_user$project$EditMode$editContextSetName, newName, _p28._0),
 					model);
 			case 'EditProject':
 				return A2(
 					_user$project$Model$setEditMode,
-					A2(_user$project$EditMode$editProjectSetName, newName, _p33._0),
+					A2(_user$project$EditMode$editProjectSetName, newName, _p28._0),
 					model);
 			default:
 				return model;
 		}
 	});
+var _user$project$Model$startEditingProject = function (todo) {
+	return _user$project$Model$setEditMode(
+		_user$project$EditMode$EditTodoProject(todo));
+};
+var _user$project$Model$startEditingContext = function (todo) {
+	return _user$project$Model$setEditMode(
+		_user$project$EditMode$EditTodoContext(todo));
+};
 var _user$project$Model$startEditingReminder = function (todo) {
 	return _user$project$Model$updateEditModeM(
-		function (_p34) {
+		function (_p29) {
 			return _user$project$EditMode$EditTodoReminder(
 				A2(
 					_user$project$Todo_ReminderForm$create,
 					todo,
 					function (_) {
 						return _.now;
-					}(_p34)));
+					}(_p29)));
 		});
 };
 var _user$project$Model$updateNewTodoText = function (text) {
@@ -53265,6 +53418,34 @@ var _user$project$Model$activateNewTodoMode = function (model) {
 		_user$project$EditMode$NewTodo(
 			_user$project$Todo_NewForm$create('')),
 		model);
+};
+var _user$project$Model$update = F3(
+	function (lens, smallF, big) {
+		return A2(
+			lens.set,
+			smallF(
+				lens.get(big)),
+			big);
+	});
+var _user$project$Model$updateDocWithId = F4(
+	function (id, updateFn, store, model) {
+		var updateAndSetModifiedAt = function (_p30) {
+			return A2(
+				_user$project$Document$setModifiedAt,
+				model.now,
+				updateFn(_p30));
+		};
+		return A3(
+			_user$project$Model$update,
+			store,
+			A2(_user$project$Store$updateDocWithId, id, updateFn),
+			model);
+	});
+var _user$project$Model$updateDocAndSetFocusInEntityWithId = function (id) {
+	return A2(
+		_user$project$Ext_Function_Infix_ops['>>>>'],
+		_user$project$Model$updateDocWithId(id),
+		_user$project$Model$setFocusInEntityWithId(id));
 };
 var _user$project$Model$now = {
 	get: function (_) {
@@ -53321,9 +53502,75 @@ var _user$project$Model$projectStore = {
 				{projectStore: s});
 		})
 };
-var _user$project$Model$isShowDetailsKeyPressed = function (_p35) {
+var _user$project$Model$saveCurrentForm = function (model) {
+	var _p31 = model.editMode;
+	switch (_p31.ctor) {
+		case 'EditContext':
+			var _p32 = _p31._0;
+			return A4(
+				_user$project$Model$updateDocAndSetFocusInEntityWithId,
+				_p32.id,
+				_user$project$Context$setName(_p32.name),
+				_user$project$Model$contextStore,
+				model);
+		case 'EditProject':
+			var _p33 = _p31._0;
+			return A4(
+				_user$project$Model$updateDocAndSetFocusInEntityWithId,
+				_p33.id,
+				_user$project$Project$setName(_p33.name),
+				_user$project$Model$projectStore,
+				model);
+		case 'EditTodo':
+			var _p34 = _p31._0;
+			return A2(
+				_user$project$Model$setFocusInEntityWithId,
+				_p34.id,
+				A3(
+					_user$project$Model$updateTodoById,
+					_user$project$Todo$SetText(_p34.todoText),
+					_p34.id,
+					model));
+		case 'EditTodoReminder':
+			var _p35 = _p31._0;
+			return A2(
+				_user$project$Model$setFocusInEntityWithId,
+				_p35.id,
+				A3(
+					_user$project$Model$updateTodoById,
+					_user$project$Todo$SetTime(
+						_user$project$Todo_ReminderForm$getMaybeTime(_p35)),
+					_p35.id,
+					model));
+		case 'EditTodoContext':
+			return model;
+		case 'EditTodoProject':
+			return model;
+		case 'NewTodo':
+			return A2(
+				_elm_lang$core$Basics$uncurry,
+				_user$project$Model$setTodoContextOrProjectBasedOnCurrentView,
+				A2(
+					_elm_lang$core$Tuple$mapFirst,
+					_user$project$Document$getId,
+					A2(
+						_user$project$Model$insertTodo,
+						A2(
+							_user$project$Todo$init,
+							model.now,
+							_user$project$Todo_NewForm$getText(_p31._0)),
+						model)));
+		case 'EditSyncSettings':
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{pouchDBRemoteSyncURI: _p31._0.uri});
+		default:
+			return model;
+	}
+};
+var _user$project$Model$isShowDetailsKeyPressed = function (_p36) {
 	return !_user$project$Ext_Keyboard$isAltDown(
-		_user$project$Model$keyboardState.get(_p35));
+		_user$project$Model$keyboardState.get(_p36));
 };
 var _user$project$Model$setReminderOverlayToSnoozeView = F2(
 	function (details, model) {
@@ -53341,13 +53588,13 @@ var _user$project$Model$removeReminderOverlay = function (model) {
 var _user$project$Model$snoozeTodoWithOffset = F3(
 	function (snoozeOffset, todoId, model) {
 		var time = A2(_user$project$ReminderOverlay$addSnoozeOffset, model.now, snoozeOffset);
-		return function (_p36) {
+		return function (_p37) {
 			return _user$project$Model$removeReminderOverlay(
 				A3(
 					_user$project$Model$updateTodoById,
 					_user$project$Todo$SnoozeTill(time),
 					todoId,
-					_p36));
+					_p37));
 		}(model);
 	});
 var _user$project$Model$setReminderOverlayToInitialView = F2(
@@ -53398,7 +53645,7 @@ var _user$project$Model$getActiveTodoListWithReminderTime = function (model) {
 		_user$project$Todo$isReminderOverdue(model.now),
 		model.todoStore);
 };
-var _user$project$Model$getActiveTodoList = function (_p37) {
+var _user$project$Model$getActiveTodoList = function (_p38) {
 	return A2(
 		_user$project$Store$reject,
 		_user$project$Ext_Function$anyPass(
@@ -53413,14 +53660,14 @@ var _user$project$Model$getActiveTodoList = function (_p37) {
 			}),
 		function (_) {
 			return _.todoStore;
-		}(_p37));
+		}(_p38));
 };
 var _user$project$Model$getActiveTodoListGroupedBy = function (fn) {
-	return function (_p38) {
+	return function (_p39) {
 		return A2(
 			_elm_community$dict_extra$Dict_Extra$groupBy,
 			fn,
-			_user$project$Model$getActiveTodoList(_p38));
+			_user$project$Model$getActiveTodoList(_p39));
 	};
 };
 var _user$project$Model$getContextsViewEntityList = F2(
@@ -53477,32 +53724,32 @@ var _user$project$Model$getProjectsViewEntityList = F2(
 	});
 var _user$project$Model$getMaybeEditModelForEntityType = F2(
 	function (entityType, model) {
-		var _p39 = {ctor: '_Tuple2', _0: entityType, _1: model.editMode};
-		_v12_2:
+		var _p40 = {ctor: '_Tuple2', _0: entityType, _1: model.editMode};
+		_v14_2:
 		do {
-			if (_p39.ctor === '_Tuple2') {
-				if (_p39._0.ctor === 'GroupByProject') {
-					if (_p39._1.ctor === 'EditProject') {
-						return _elm_lang$core$Maybe$Just(_p39._1._0);
+			if (_p40.ctor === '_Tuple2') {
+				if (_p40._0.ctor === 'GroupByProject') {
+					if (_p40._1.ctor === 'EditProject') {
+						return _elm_lang$core$Maybe$Just(_p40._1._0);
 					} else {
-						break _v12_2;
+						break _v14_2;
 					}
 				} else {
-					if (_p39._1.ctor === 'EditContext') {
-						return _elm_lang$core$Maybe$Just(_p39._1._0);
+					if (_p40._1.ctor === 'EditContext') {
+						return _elm_lang$core$Maybe$Just(_p40._1._0);
 					} else {
-						break _v12_2;
+						break _v14_2;
 					}
 				}
 			} else {
-				break _v12_2;
+				break _v14_2;
 			}
 		} while(false);
 		return _elm_lang$core$Maybe$Nothing;
 	});
 var _user$project$Model$getEntityStore = function (entityType) {
-	var _p40 = entityType;
-	if (_p40.ctor === 'GroupByProject') {
+	var _p41 = entityType;
+	if (_p41.ctor === 'GroupByProject') {
 		return function (_) {
 			return _.projectStore;
 		};
@@ -53537,8 +53784,8 @@ var _user$project$Model$getFilteredProjectList = function (model) {
 };
 var _user$project$Model$createViewEntityList = F2(
 	function (viewType, model) {
-		var _p41 = viewType;
-		switch (_p41.ctor) {
+		var _p42 = viewType;
+		switch (_p42.ctor) {
 			case 'ContextsView':
 				var contextList = _user$project$Model$getFilteredContextList(model);
 				return A2(_user$project$Model$getContextsViewEntityList, contextList, model);
@@ -53546,7 +53793,7 @@ var _user$project$Model$createViewEntityList = F2(
 				var contextList = _elm_lang$core$List$singleton(
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(_user$project$Store$findById, _p41._0, model.contextStore),
+						A2(_user$project$Store$findById, _p42._0, model.contextStore),
 						_user$project$Context$null));
 				return A2(_user$project$Model$getContextsViewEntityList, contextList, model);
 			case 'ProjectsView':
@@ -53556,7 +53803,7 @@ var _user$project$Model$createViewEntityList = F2(
 				var projectList = _elm_lang$core$List$singleton(
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(_user$project$Store$findById, _p41._0, model.projectStore),
+						A2(_user$project$Store$findById, _p42._0, model.projectStore),
 						_user$project$Project$null));
 				return A2(_user$project$Model$getProjectsViewEntityList, projectList, model);
 		}
@@ -53618,14 +53865,14 @@ var _user$project$Model$createEditTodoMode = F2(
 	});
 var _user$project$Model$createEntityEditForm = F2(
 	function (entity, model) {
-		var _p42 = entity;
-		switch (_p42.ctor) {
+		var _p43 = entity;
+		switch (_p43.ctor) {
 			case 'ContextEntity':
-				return _user$project$EditMode$editContextMode(_p42._0);
+				return _user$project$EditMode$editContextMode(_p43._0);
 			case 'ProjectEntity':
-				return _user$project$EditMode$editProjectMode(_p42._0);
+				return _user$project$EditMode$editProjectMode(_p43._0);
 			default:
-				return A2(_user$project$Model$createEditTodoMode, _p42._0, model);
+				return A2(_user$project$Model$createEditTodoMode, _p43._0, model);
 		}
 	});
 var _user$project$Model$startEditingEntity = F2(
@@ -53636,12 +53883,12 @@ var _user$project$Model$startEditingEntity = F2(
 			model);
 	});
 var _user$project$Model$createAndEditNewProject = function (model) {
-	return function (_p43) {
-		var _p44 = _p43;
+	return function (_p44) {
+		var _p45 = _p44;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Types$ProjectEntity(_p44._0),
-			_p44._1);
+			_user$project$Types$ProjectEntity(_p45._0),
+			_p45._1);
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -53652,12 +53899,12 @@ var _user$project$Model$createAndEditNewProject = function (model) {
 				model.projectStore)));
 };
 var _user$project$Model$createAndEditNewContext = function (model) {
-	return function (_p45) {
-		var _p46 = _p45;
+	return function (_p46) {
+		var _p47 = _p46;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Types$ContextEntity(_p46._0),
-			_p46._1);
+			_user$project$Types$ContextEntity(_p47._0),
+			_p47._1);
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -53667,25 +53914,25 @@ var _user$project$Model$createAndEditNewContext = function (model) {
 				A2(_user$project$Project$init, '<New Context>', model.now),
 				model.contextStore)));
 };
-var _user$project$Model$getEncodedContextNames = function (_p47) {
+var _user$project$Model$getEncodedContextNames = function (_p48) {
 	return _user$project$Context$getEncodedNames(
 		function (_) {
 			return _.contextStore;
-		}(_p47));
+		}(_p48));
 };
-var _user$project$Model$getProjectsAsIdDict = function (_p48) {
+var _user$project$Model$getProjectsAsIdDict = function (_p49) {
 	return _user$project$Store$asIdDict(
 		function (_) {
 			return _.projectStore;
-		}(_p48));
+		}(_p49));
 };
-var _user$project$Model$getContextsAsIdDict = function (_p49) {
+var _user$project$Model$getContextsAsIdDict = function (_p50) {
 	return _user$project$Store$asIdDict(
 		function (_) {
 			return _.contextStore;
-		}(_p49));
+		}(_p50));
 };
-var _user$project$Model$getActiveContexts = function (_p50) {
+var _user$project$Model$getActiveContexts = function (_p51) {
 	return A2(
 		F2(
 			function (x, y) {
@@ -53697,9 +53944,9 @@ var _user$project$Model$getActiveContexts = function (_p50) {
 			_user$project$Document$isDeleted,
 			function (_) {
 				return _.contextStore;
-			}(_p50)));
+			}(_p51)));
 };
-var _user$project$Model$getActiveProjects = function (_p51) {
+var _user$project$Model$getActiveProjects = function (_p52) {
 	return A2(
 		F2(
 			function (x, y) {
@@ -53711,27 +53958,27 @@ var _user$project$Model$getActiveProjects = function (_p51) {
 			_user$project$Document$isDeleted,
 			function (_) {
 				return _.projectStore;
-			}(_p51)));
+			}(_p52)));
 };
 var _user$project$Model$findContextByName = function (name) {
-	return function (_p52) {
+	return function (_p53) {
 		return A2(
 			_user$project$Context$findByName,
 			name,
 			function (_) {
 				return _.contextStore;
-			}(_p52));
+			}(_p53));
 	};
 };
 var _user$project$Model$findProjectByName = function (name) {
-	return function (_p53) {
+	return function (_p54) {
 		return A2(
 			_user$project$Project$findByName,
 			name,
-			_user$project$Model_Internal$getProjectStore(_p53));
+			_user$project$Model_Internal$getProjectStore(_p54));
 	};
 };
-var _user$project$Model$isLayoutAutoNarrow = function (_p54) {
+var _user$project$Model$isLayoutAutoNarrow = function (_p55) {
 	return A2(
 		_elm_lang$core$Basics$uncurry,
 		_user$project$Ext_Function$and,
@@ -53739,24 +53986,24 @@ var _user$project$Model$isLayoutAutoNarrow = function (_p54) {
 			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
 			{
 				ctor: '_Tuple2',
-				_0: function (_p55) {
+				_0: function (_p56) {
 					return !function (_) {
 						return _.forceNarrow;
-					}(_p55);
+					}(_p56);
 				},
 				_1: function (_) {
 					return _.narrow;
 				}
 			},
-			_user$project$Model$getLayout(_p54)));
+			_user$project$Model$getLayout(_p55)));
 };
-var _user$project$Model$getLayoutForceNarrow = function (_p56) {
+var _user$project$Model$getLayoutForceNarrow = function (_p57) {
 	return function (_) {
 		return _.forceNarrow;
 	}(
 		function (_) {
 			return _.layout;
-		}(_p56));
+		}(_p57));
 };
 var _user$project$Model$setLayoutNarrow = function (narrow) {
 	return _user$project$Model$updateLayout(
@@ -53784,20 +54031,19 @@ var _user$project$Model$setUser = F2(
 			model,
 			{user: user});
 	});
-var _user$project$Model$getMaybeUserId = function (_p57) {
+var _user$project$Model$getMaybeUserId = function (_p58) {
 	return _user$project$Firebase$getMaybeUserId(
-		function (_) {
-			return _.user;
-		}(_p57));
-};
-var _user$project$Model$getMaybeUserProfile = function (_p58) {
-	return _user$project$Firebase$getMaybeUserProfile(
 		function (_) {
 			return _.user;
 		}(_p58));
 };
+var _user$project$Model$getMaybeUserProfile = function (_p59) {
+	return _user$project$Firebase$getMaybeUserProfile(
+		function (_) {
+			return _.user;
+		}(_p59));
+};
 var _user$project$Model$init = function (flags) {
-	var _p59 = A2(_elm_lang$core$Debug$log, 'flags.firebaseAppAttributes', flags.firebaseAppAttributes);
 	var _p60 = flags;
 	var now = _p60.now;
 	var encodedTodoList = _p60.encodedTodoList;
@@ -53834,7 +54080,6 @@ var _user$project$Model$init = function (flags) {
 		pouchDBRemoteSyncURI: pouchDBRemoteSyncURI,
 		user: _user$project$Firebase$NotLoggedIn,
 		fcmToken: _elm_lang$core$Maybe$Nothing,
-		firebaseAppAttributes: flags.firebaseAppAttributes,
 		developmentMode: flags.developmentMode,
 		focusedEntityInfo: {id: ''},
 		selectedEntityIdSet: _elm_lang$core$Set$empty,
@@ -54571,6 +54816,88 @@ var _user$project$Ext_Date$smartFormat = F2(
 			A2(_elm_lang$core$Basics_ops['++'], ' ', formattedTime)))));
 	});
 
+var _user$project$Ext_Html$nthParent = F2(
+	function (count, decoder) {
+		return _debois$elm_dom$DOM$target(
+			A3(
+				_elm_lang$core$List$foldl,
+				F2(
+					function (_p0, acc) {
+						return _debois$elm_dom$DOM$parentElement(acc);
+					}),
+				decoder,
+				A2(_elm_lang$core$List$range, 0, count)));
+	});
+var _user$project$Ext_Html$domIdDecoder = A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string);
+var _user$project$Ext_Html$targetAncestorIdsHelp = F2(
+	function (target, ids) {
+		return _elm_lang$core$Json_Decode$oneOf(
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Json_Decode$andThen,
+					function (domId) {
+						var parentIndex = _elm_lang$core$List$length(ids);
+						return A2(
+							_user$project$Ext_Html$targetAncestorIdsHelp,
+							A2(_user$project$Ext_Html$nthParent, parentIndex, _user$project$Ext_Html$domIdDecoder),
+							{ctor: '::', _0: domId, _1: ids});
+					},
+					target),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$Json_Decode$succeed(ids),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$Ext_Html$targetAncestorIds = A2(
+	_user$project$Ext_Html$targetAncestorIdsHelp,
+	_debois$elm_dom$DOM$target(_user$project$Ext_Html$domIdDecoder),
+	{ctor: '[]'});
+var _user$project$Ext_Html$onClickPathIds = function (toMsg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		A2(_elm_lang$core$Json_Decode$map, toMsg, _user$project$Ext_Html$targetAncestorIds));
+};
+var _user$project$Ext_Html$targetPathHavingIds = F2(
+	function (domIds, toMsg) {
+		var successFn = function (_p1) {
+			return _elm_lang$core$Json_Decode$succeed(toMsg);
+		};
+		var failFn = function (_p2) {
+			return _elm_lang$core$Json_Decode$fail(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'domIds not found in event target path: ',
+					_elm_lang$core$Basics$toString(domIds)));
+		};
+		return A2(
+			_elm_lang$core$Json_Decode$andThen,
+			function (_p3) {
+				return A3(
+					_elm_community$maybe_extra$Maybe_Extra$unpack,
+					successFn,
+					failFn,
+					A2(
+						_elm_community$list_extra$List_Extra$find,
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$List$member, domIds),
+						_p3));
+			},
+			_user$project$Ext_Html$targetAncestorIds);
+	});
+var _user$project$Ext_Html$onClickTargetPathHavingIds = A2(
+	_user$project$Ext_Function_Infix_ops['>>>'],
+	_user$project$Ext_Html$targetPathHavingIds,
+	_elm_lang$html$Html_Events$on('click'));
+var _user$project$Ext_Html$floatProp = _elm_community$html_extra$Html_Attributes_Extra$floatProperty;
+var _user$project$Ext_Html$boolProp = _elm_community$html_extra$Html_Attributes_Extra$boolProperty;
+var _user$project$Ext_Html$intProp = _elm_community$html_extra$Html_Attributes_Extra$intProperty;
+var _user$project$Ext_Html$prop = _elm_community$html_extra$Html_Attributes_Extra$stringProperty;
+var _user$project$Ext_Html$attr = _elm_lang$html$Html_Attributes$attribute;
+var _user$project$Ext_Html$_p4 = 1;
+
 var _user$project$Ext_Return$andThenMaybe = function (f) {
 	return _Fresheyeball$elm_return$Return$andThen(
 		function (m) {
@@ -54724,45 +55051,7 @@ var _user$project$Ext_Time$toHHMMSS = function (_p1) {
 			_user$project$Ext_Time$toHMSList(_p1)));
 };
 
-var _user$project$Firebase_View$attributes = _elm_lang$core$List$map(
-	_elm_lang$core$Basics$uncurry(_elm_lang$html$Html_Attributes$attribute));
 var _user$project$Firebase_View$init = function (m) {
-	var encodedToken = A2(_elm_community$json_extra$Json_Encode_Extra$maybe, _elm_lang$core$Json_Encode$string, m.fcmToken);
-	var updateTokenHelp = function (uid) {
-		return A3(
-			_elm_lang$html$Html$node,
-			'firebase-document',
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html_Attributes$attribute,
-					'path',
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						'/users/',
-						A2(_elm_lang$core$Basics_ops['++'], uid, '/token'))),
-				_1: {
-					ctor: '::',
-					_0: A2(_elm_lang$html$Html_Attributes$property, 'value', encodedToken),
-					_1: {ctor: '[]'}
-				}
-			},
-			{ctor: '[]'});
-	};
-	var updateToken = A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			_user$project$Model$getMaybeUserId(m),
-			function (_p0) {
-				return _elm_lang$core$List$singleton(
-					updateTokenHelp(_p0));
-			}),
-		{ctor: '[]'});
-	var encodedUserId = A2(
-		_elm_community$json_extra$Json_Encode_Extra$maybe,
-		_elm_lang$core$Json_Encode$string,
-		_user$project$Model$getMaybeUserId(m));
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -54774,52 +55063,46 @@ var _user$project$Firebase_View$init = function (m) {
 			ctor: '::',
 			_0: A3(
 				_elm_lang$html$Html$node,
-				'firebase-app',
-				_user$project$Firebase_View$attributes(m.firebaseAppAttributes),
+				'firebase-auth',
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('google-auth'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'provider', 'google'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Firebase$onUserChanged(_user$project$Msg$OnUserChanged),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
 				{ctor: '[]'}),
 			_1: {
 				ctor: '::',
 				_0: A3(
 					_elm_lang$html$Html$node,
-					'firebase-auth',
+					'firebase-messaging',
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$id('google-auth'),
+						_0: _elm_lang$html$Html_Attributes$id('fb-messaging'),
 						_1: {
 							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'provider', 'google'),
+							_0: _user$project$Firebase$onFCMTokenChanged(_user$project$Msg$OnFCMTokenChanged),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Firebase$onUserChanged(_user$project$Msg$OnUserChanged),
+								_0: _user$project$Firebase$customSw,
 								_1: {ctor: '[]'}
 							}
 						}
 					},
 					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A3(
-						_elm_lang$html$Html$node,
-						'firebase-messaging',
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$id('fb-messaging'),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Firebase$onFCMTokenChanged(_user$project$Msg$OnFCMTokenChanged),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Firebase$customSw,
-									_1: {ctor: '[]'}
-								}
-							}
-						},
-						{ctor: '[]'}),
-					_1: {ctor: '[]'}
-				}
+				_1: {ctor: '[]'}
 			}
 		});
 };
+var _user$project$Firebase_View$attributes = _elm_lang$core$List$map(
+	_elm_lang$core$Basics$uncurry(_elm_lang$html$Html_Attributes$attribute));
 
 var _user$project$Routes$builder2messages = function (builder) {
 	var _p0 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
@@ -55165,7 +55448,6 @@ var _user$project$View_Header$newTodoInputId = 'new-todo-input';
 var _user$project$View_Header$headerView = function (m) {
 	var _p2 = m.editMode;
 	if (_p2.ctor === 'NewTodo') {
-		var _p3 = _p2._0;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$input,
 			{
@@ -55179,14 +55461,14 @@ var _user$project$View_Header$headerView = function (m) {
 						_0: _elm_lang$html$Html_Events$onInput(_user$project$Msg$NewTodoTextChanged),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$value(_p3.text),
+							_0: _elm_lang$html$Html_Attributes$value(
+								_user$project$Todo_NewForm$getText(_p2._0)),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$html$Html_Events$onBlur(_user$project$Msg$DeactivateEditingMode),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Ext_Keyboard$onKeyUp(
-										_user$project$Msg$NewTodoKeyUp(_p3)),
+									_0: _user$project$Ext_Keyboard$onKeyUp(_user$project$Msg$NewTodoKeyUp),
 									_1: {
 										ctor: '::',
 										_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'label', 'New Todo'),
@@ -55437,6 +55719,136 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 			startEditingMsg: _user$project$Msg$StartEditingReminder(todo)
 		};
 	});
+var _user$project$Todo_View$projectDropdownMenu = function (vm) {
+	var createProjectItem = function (project) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{
+				ctor: '::',
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(
+					vm.setProjectMsg(project)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: function (_p3) {
+					return _elm_lang$html$Html$text(
+						_user$project$Project$getName(_p3));
+				}(project),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'project-dropdown-', vm.key)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'height', '24px'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(vm.showProjectDropdownMsg),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('title primary-text-color'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(vm.projectDisplayName),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Todo_View$contextDropdownMenu = function (vm) {
+	var createContextItem = function (context) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{
+				ctor: '::',
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(
+					vm.setContextMsg(context)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: function (_p4) {
+					return _elm_lang$html$Html$text(
+						_user$project$Context$getName(_p4));
+				}(context),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'context-dropdown-', vm.key)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'height', '24px'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(vm.showContextDropdownMsg),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('title primary-text-color'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(vm.contextDisplayName),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Todo_View$doneIconButton = function (vm) {
 	return A2(
 		_edvail$elm_polymer$Polymer_Paper$iconButton,
@@ -55471,10 +55883,10 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			_user$project$Types$TodoEntity(todo));
 		var startEditingMsg = createEntityActionMsg(_user$project$Types$StartEditing);
 		var toggleDeleteMsg = createEntityActionMsg(_user$project$Types$ToggleDeleted);
-		var onKeyDownMsg = function (_p3) {
-			var _p4 = _p3;
-			var _p5 = _p4.key;
-			switch (_p5.ctor) {
+		var onKeyDownMsg = function (_p5) {
+			var _p6 = _p5;
+			var _p7 = _p6.key;
+			switch (_p7.ctor) {
 				case 'Space':
 					return createEntityActionMsg(_user$project$Types$ToggleSelected);
 				case 'CharE':
@@ -55483,35 +55895,39 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					return toggleDoneMsg;
 				case 'Delete':
 					return toggleDeleteMsg;
+				case 'CharP':
+					return _user$project$Msg$StartEditingProject(todo);
+				case 'CharC':
+					return _user$project$Msg$StartEditingContext(todo);
 				default:
 					return _user$project$Msg$commonMsg.noOp;
 			}
 		};
 		var text = _user$project$Todo$getText(todo);
-		var _p6 = function () {
+		var _p8 = function () {
 			var lines = _elm_lang$core$String$lines(
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 					_elm_community$string_extra$String_Extra$nonEmpty(
 						_elm_lang$core$String$trim(text)),
 					'< empty >'));
-			var _p7 = lines;
-			if (_p7.ctor === '[]') {
+			var _p9 = lines;
+			if (_p9.ctor === '[]') {
 				return {ctor: '_Tuple2', _0: '', _1: false};
 			} else {
-				if (_p7._1.ctor === '[]') {
-					return {ctor: '_Tuple2', _0: _p7._0, _1: false};
+				if (_p9._1.ctor === '[]') {
+					return {ctor: '_Tuple2', _0: _p9._0, _1: false};
 				} else {
 					return {
 						ctor: '_Tuple2',
-						_0: A2(_elm_lang$core$Basics_ops['++'], _p7._0, ' ...'),
+						_0: A2(_elm_lang$core$Basics_ops['++'], _p9._0, ' ...'),
 						_1: true
 					};
 				}
 			}
 		}();
-		var displayText = _p6._0;
-		var isMultiLine = _p6._1;
+		var displayText = _p8._0;
+		var isMultiLine = _p8._1;
 		var displayText2 = A2(
 			_elm_community$string_extra$String_Extra$ellipsis,
 			100,
@@ -55547,11 +55963,11 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 				vc.maybeFocusedEntity,
-				function (_p8) {
+				function (_p10) {
 					return A2(
 						_user$project$Ext_Function$equals,
 						todoId,
-						_user$project$Model$getEntityId(_p8));
+						_user$project$Model$getEntityId(_p10));
 				}),
 			false);
 		return {
@@ -55574,6 +55990,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 				0),
 			setContextMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Msg$SetTodoContext, todo),
 			setProjectMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Msg$SetTodoProject, todo),
+			showContextDropdownMsg: _user$project$Msg$StartEditingContext(todo),
+			showProjectDropdownMsg: _user$project$Msg$StartEditingProject(todo),
 			startEditingMsg: startEditingMsg,
 			toggleDoneMsg: toggleDoneMsg,
 			showDetails: vc.showDetails,
@@ -55594,8 +56012,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p9, content) {
-		var _p10 = _p9;
+	function (_p11, content) {
+		var _p12 = _p11;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$button,
 			{
@@ -55611,10 +56029,10 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 					_0: _user$project$WebComponents$slotDropdownTrigger,
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('padding-0 margin-0 shrink'),
+						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
 						_1: {
 							ctor: '::',
-							_0: _p10.tabindexAV,
+							_0: _p12.tabindexAV,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -55637,106 +56055,6 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _user$project$Todo_View$contextDropdownMenu = function (vm) {
-	var createContextItem = function (context) {
-		return A2(
-			_edvail$elm_polymer$Polymer_Paper$item,
-			{
-				ctor: '::',
-				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(
-					vm.setContextMsg(context)),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: function (_p11) {
-					return _elm_lang$html$Html$text(
-						_user$project$Context$getName(_p11));
-				}(context),
-				_1: {ctor: '[]'}
-			});
-	};
-	return A2(
-		_edvail$elm_polymer$Polymer_Paper$menuButton,
-		{
-			ctor: '::',
-			_0: _user$project$WebComponents$dynamicAlign,
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_user$project$Todo_View$dropdownTrigger,
-				vm,
-				_elm_lang$html$Html$text(vm.contextDisplayName)),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_Paper$listbox,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('dropdown-content'),
-						_1: {
-							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-content'),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.activeContexts, createContextItem)),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Todo_View$projectDropdownMenu = function (vm) {
-	var createProjectItem = function (project) {
-		return A2(
-			_edvail$elm_polymer$Polymer_Paper$item,
-			{
-				ctor: '::',
-				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(
-					vm.setProjectMsg(project)),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: function (_p12) {
-					return _elm_lang$html$Html$text(
-						_user$project$Project$getName(_p12));
-				}(project),
-				_1: {ctor: '[]'}
-			});
-	};
-	return A2(
-		_edvail$elm_polymer$Polymer_Paper$menuButton,
-		{
-			ctor: '::',
-			_0: _user$project$WebComponents$dynamicAlign,
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_user$project$Todo_View$dropdownTrigger,
-				vm,
-				_elm_lang$html$Html$text(vm.projectDisplayName)),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_Paper$listbox,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('dropdown-content'),
-						_1: {
-							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-content'),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.activeProjects, createProjectItem)),
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _user$project$Todo_View$reminderView = function (vm) {
 	var reminderVM = vm.reminder;
 	var reminderTrigger = _elm_lang$core$Native_Utils.eq(reminderVM.displayText, '') ? A2(
@@ -56178,7 +56496,11 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 																								return function (y) {
 																									return function (z) {
 																										return function (_1) {
-																											return {text: a, key: b, displayText: c, isMultiLine: d, isDone: e, isDeleted: f, isFocused: g, onKeyDownMsg: h, projectDisplayName: i, contextDisplayName: j, selectedProjectIndex: k, setContextMsg: l, setProjectMsg: m, startEditingMsg: n, toggleDoneMsg: o, onDeleteClicked: p, showDetails: q, activeContexts: r, activeProjects: s, onReminderButtonClicked: t, reminder: u, edit: v, onFocusIn: w, onFocus: x, onBlur: y, tabindexAV: z, isSelected: _1};
+																											return function (_2) {
+																												return function (_3) {
+																													return {text: a, key: b, displayText: c, isMultiLine: d, isDone: e, isDeleted: f, isFocused: g, onKeyDownMsg: h, projectDisplayName: i, contextDisplayName: j, selectedProjectIndex: k, setContextMsg: l, setProjectMsg: m, startEditingMsg: n, toggleDoneMsg: o, onDeleteClicked: p, showDetails: q, activeContexts: r, activeProjects: s, onReminderButtonClicked: t, showContextDropdownMsg: u, showProjectDropdownMsg: v, reminder: w, edit: x, onFocusIn: y, onFocus: z, onBlur: _1, tabindexAV: _2, isSelected: _3};
+																												};
+																											};
 																										};
 																									};
 																								};
@@ -56451,6 +56773,110 @@ var _user$project$View_TodoList$filtered = F2(
 				createTodoView));
 	});
 
+var _user$project$Main_View$projectDropdown = function (model) {
+	var createListItem = F2(
+		function (onItemClick, project) {
+			return A2(
+				_edvail$elm_polymer$Polymer_Paper$item,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						onItemClick(project)),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: function (_p0) {
+						return _elm_lang$html$Html$text(
+							_user$project$Project$getName(_p0));
+					}(project),
+					_1: {ctor: '[]'}
+				});
+		});
+	var view = function (todo) {
+		var onItemClick = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Msg$SetTodoProject, todo);
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$material,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id('project-dropdown'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_Paper$listbox,
+					{ctor: '[]'},
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+						_user$project$Model$getActiveProjects(model),
+						createListItem(onItemClick))),
+				_1: {ctor: '[]'}
+			});
+	};
+	return _elm_community$maybe_extra$Maybe_Extra$toList(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_user$project$Model$getMaybeEditTodoProjectForm(model),
+			view));
+};
+var _user$project$Main_View$contextDropdown = function (model) {
+	var createListItem = F2(
+		function (onItemClick, context) {
+			return A2(
+				_edvail$elm_polymer$Polymer_Paper$item,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						onItemClick(context)),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: function (_p1) {
+						return _elm_lang$html$Html$text(
+							_user$project$Context$getName(_p1));
+					}(context),
+					_1: {ctor: '[]'}
+				});
+		});
+	var view = function (todo) {
+		var onItemClick = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Msg$SetTodoContext, todo);
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$material,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id('context-dropdown'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_Paper$listbox,
+					{ctor: '[]'},
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+						_user$project$Model$getActiveContexts(model),
+						createListItem(onItemClick))),
+				_1: {ctor: '[]'}
+			});
+	};
+	return _elm_community$maybe_extra$Maybe_Extra$toList(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_user$project$Model$getMaybeEditTodoContextForm(model),
+			view));
+};
+var _user$project$Main_View$overlayViews = function (m) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_user$project$Main_View$contextDropdown(m),
+		_user$project$Main_View$projectDropdown(m));
+};
 var _user$project$Main_View$init = F2(
 	function (viewModel, model) {
 		return A2(
@@ -56460,77 +56886,80 @@ var _user$project$Main_View$init = F2(
 				_0: _elm_lang$html$Html_Attributes$id('main-view'),
 				_1: {ctor: '[]'}
 			},
-			{
-				ctor: '::',
-				_0: function () {
-					var _p0 = _user$project$Model$getMainViewType(model);
-					switch (_p0.ctor) {
-						case 'EntityListView':
-							return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$View_TodoList$listView, viewModel)(
-								A2(_user$project$Model$createViewEntityList, _p0._0, model));
-						case 'BinView':
-							return A2(_user$project$View_TodoList$filtered, viewModel, model);
-						case 'DoneView':
-							return A2(_user$project$View_TodoList$filtered, viewModel, model);
-						default:
-							var form = _user$project$Model$getRemoteSyncForm(model);
-							return A2(
-								_edvail$elm_polymer$Polymer_Paper$material,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('static layout vertical'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_edvail$elm_polymer$Polymer_Paper$input,
-										{
-											ctor: '::',
-											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'label', 'Cloudant URL or any CouchDB URL'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$value(form.uri),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onInput(
-														_user$project$Msg$UpdateRemoteSyncFormUri(form)),
-													_1: {ctor: '[]'}
-												}
-											}
-										},
-										{ctor: '[]'}),
-									_1: {
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: function () {
+						var _p2 = _user$project$Model$getMainViewType(model);
+						switch (_p2.ctor) {
+							case 'EntityListView':
+								return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$View_TodoList$listView, viewModel)(
+									A2(_user$project$Model$createViewEntityList, _p2._0, model));
+							case 'BinView':
+								return A2(_user$project$View_TodoList$filtered, viewModel, model);
+							case 'DoneView':
+								return A2(_user$project$View_TodoList$filtered, viewModel, model);
+							default:
+								var form = _user$project$Model$getRemoteSyncForm(model);
+								return A2(
+									_edvail$elm_polymer$Polymer_Paper$material,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('static layout vertical'),
+										_1: {ctor: '[]'}
+									},
+									{
 										ctor: '::',
 										_0: A2(
-											_elm_lang$html$Html$div,
-											{ctor: '[]'},
+											_edvail$elm_polymer$Polymer_Paper$input,
 											{
 												ctor: '::',
-												_0: A2(
-													_edvail$elm_polymer$Polymer_Paper$button,
-													{
+												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'label', 'Cloudant URL or any CouchDB URL'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$value(form.uri),
+													_1: {
 														ctor: '::',
-														_0: function (_p1) {
-															return _elm_lang$html$Html_Events$onClick(
-																_user$project$Msg$RemotePouchSync(_p1));
-														}(form),
+														_0: _elm_lang$html$Html_Events$onInput(
+															_user$project$Msg$UpdateRemoteSyncFormUri(form)),
 														_1: {ctor: '[]'}
-													},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('Sync'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								});
-					}
-				}(),
-				_1: {ctor: '[]'}
-			});
+													}
+												}
+											},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: A2(
+														_edvail$elm_polymer$Polymer_Paper$button,
+														{
+															ctor: '::',
+															_0: function (_p3) {
+																return _elm_lang$html$Html_Events$onClick(
+																	_user$project$Msg$RemotePouchSync(_p3));
+															}(form),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Sync'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									});
+						}
+					}(),
+					_1: {ctor: '[]'}
+				},
+				_user$project$Main_View$overlayViews(model)));
 	});
 
 var _user$project$View_AppDrawer$switchViewItem = F3(
@@ -57120,19 +57549,74 @@ var _user$project$View$addTodoFab = function (m) {
 		{ctor: '[]'});
 };
 var _user$project$View$appDrawerLayoutView = function (m) {
+	var onClickAttributeList = function () {
+		var $return = {
+			ctor: '::',
+			_0: A2(
+				_user$project$Ext_Html$onClickTargetPathHavingIds,
+				{
+					ctor: '::',
+					_0: 'context-dropdown',
+					_1: {
+						ctor: '::',
+						_0: 'project-dropdown',
+						_1: {ctor: '[]'}
+					}
+				},
+				_user$project$Msg$DeactivateEditingMode),
+			_1: {ctor: '[]'}
+		};
+		var _p0 = m.editMode;
+		switch (_p0.ctor) {
+			case 'EditTodoContext':
+				return $return;
+			case 'EditTodoProject':
+				return $return;
+			default:
+				return {ctor: '[]'};
+		}
+	}();
+	var onClickHandler = function (pathIdList) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(
+					_elm_community$list_extra$List_Extra$find,
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
+						_elm_lang$core$List$member,
+						{
+							ctor: '::',
+							_0: 'context-dropdown',
+							_1: {
+								ctor: '::',
+								_0: 'project-dropdown',
+								_1: {ctor: '[]'}
+							}
+						}),
+					pathIdList),
+				function (_p1) {
+					return _user$project$Msg$DeactivateEditingMode;
+				}),
+			_user$project$Msg$commonMsg.noOp);
+	};
 	var forceNarrow = _user$project$Model$getLayoutForceNarrow(m);
 	var viewModel = _user$project$ViewModel$create(m);
 	return A2(
 		_edvail$elm_polymer$Polymer_App$drawerLayout,
-		{
-			ctor: '::',
-			_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'forceNarrow', forceNarrow),
-			_1: {
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
 				ctor: '::',
-				_0: A2(_user$project$WebComponents$onBoolPropertyChanged, 'narrow', _user$project$Msg$OnLayoutNarrowChanged),
-				_1: {ctor: '[]'}
-			}
-		},
+				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'forceNarrow', forceNarrow),
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$WebComponents$onBoolPropertyChanged, 'narrow', _user$project$Msg$OnLayoutNarrowChanged),
+					_1: {ctor: '[]'}
+				}
+			},
+			onClickAttributeList),
 		{
 			ctor: '::',
 			_0: A2(_user$project$View_AppDrawer$view, viewModel, m),
@@ -57264,6 +57748,28 @@ var _user$project$View$init = function (m) {
 		});
 };
 
+var _user$project$Main$positionProjectDropdownCmd = function (todo) {
+	return _user$project$DomPorts$positionDropdown(
+		{
+			ctor: '_Tuple2',
+			_0: 'project-dropdown',
+			_1: A2(
+				_elm_lang$core$Basics_ops['++'],
+				'project-dropdown-',
+				_user$project$Document$getId(todo))
+		});
+};
+var _user$project$Main$positionContextDropdownCmd = function (todo) {
+	return _user$project$DomPorts$positionDropdown(
+		{
+			ctor: '_Tuple2',
+			_0: 'context-dropdown',
+			_1: A2(
+				_elm_lang$core$Basics_ops['++'],
+				'context-dropdown-',
+				_user$project$Document$getId(todo))
+		});
+};
 var _user$project$Main$scheduleReminderNotificationHelp = F2(
 	function (todo, model) {
 		var scheduleHelp = function (uid) {
@@ -57352,6 +57858,7 @@ var _user$project$Main$persistAll = function (_p0) {
 			_user$project$Model$todoStore,
 			A2(_user$project$Main$persist, _user$project$Model$projectStore, _p0)));
 };
+var _user$project$Main$modelTapLog = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Debug$tapLog, _Fresheyeball$elm_return$Return$map);
 var _user$project$Main$init = function (_p1) {
 	return _Fresheyeball$elm_return$Return$singleton(
 		_user$project$Model$init(_p1));
@@ -57644,61 +58151,95 @@ var _user$project$Main$update = function (msg) {
 					case 'ToggleTodoDone':
 						return A2(_user$project$Main$updateTodo, _user$project$Todo$ToggleDone, _p17._0);
 					case 'SetTodoContext':
-						return A2(
-							_user$project$Main$updateAllSelectedTodoIfTodoIdInSelection,
-							_user$project$Todo$SetContext(_p17._0),
-							_p17._1);
+						return function (_p29) {
+							return A2(
+								_user$project$Main$andThenUpdate,
+								_user$project$Msg$DeactivateEditingMode,
+								A3(
+									_user$project$Main$updateAllSelectedTodoIfTodoIdInSelection,
+									_user$project$Todo$SetContext(_p17._0),
+									_p17._1,
+									_p29));
+						};
 					case 'SetTodoProject':
-						return A2(
-							_user$project$Main$updateAllSelectedTodoIfTodoIdInSelection,
-							_user$project$Todo$SetProject(_p17._0),
-							_p17._1);
+						return function (_p30) {
+							return A2(
+								_user$project$Main$andThenUpdate,
+								_user$project$Msg$DeactivateEditingMode,
+								A3(
+									_user$project$Main$updateAllSelectedTodoIfTodoIdInSelection,
+									_user$project$Todo$SetProject(_p17._0),
+									_p17._1,
+									_p30));
+						};
 					case 'NewTodoTextChanged':
 						return _Fresheyeball$elm_return$Return$map(
 							_user$project$Model$updateNewTodoText(_p17._0));
 					case 'DeactivateEditingMode':
-						return function (_p29) {
+						return function (_p31) {
 							return A2(
 								_user$project$Main$andThenUpdate,
 								_user$project$Main$setDomFocusToFocusedEntityCmd,
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$deactivateEditingMode, _p29));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$deactivateEditingMode, _p31));
 						};
 					case 'NewTodoKeyUp':
-						var _p30 = _p17._1.key;
-						if (_p30.ctor === 'Enter') {
+						var _p32 = _p17._0.key;
+						if (_p32.ctor === 'Enter') {
 							return _user$project$Main$andThenUpdate(_user$project$Msg$SaveCurrentForm);
 						} else {
 							return _elm_lang$core$Basics$identity;
 						}
 					case 'StartEditingReminder':
-						return function (_p31) {
+						return function (_p33) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
 								A2(
 									_Fresheyeball$elm_return$Return$map,
 									_user$project$Model$startEditingReminder(_p17._0),
-									_p31));
+									_p33));
+						};
+					case 'StartEditingContext':
+						var _p35 = _p17._0;
+						return function (_p34) {
+							return A2(
+								_Fresheyeball$elm_return$Return$command,
+								_user$project$Main$positionContextDropdownCmd(_p35),
+								A2(
+									_Fresheyeball$elm_return$Return$map,
+									_user$project$Model$startEditingContext(_p35),
+									_p34));
+						};
+					case 'StartEditingProject':
+						var _p37 = _p17._0;
+						return function (_p36) {
+							return A2(
+								_Fresheyeball$elm_return$Return$command,
+								_user$project$Main$positionProjectDropdownCmd(_p37),
+								A2(
+									_Fresheyeball$elm_return$Return$map,
+									_user$project$Model$startEditingProject(_p37),
+									_p36));
 						};
 					case 'UpdateTodoForm':
 						return _Fresheyeball$elm_return$Return$map(
-							function (_p32) {
+							function (_p38) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditTodo(_p32));
+									_user$project$EditMode$EditTodo(_p38));
 							}(
 								A2(_user$project$Todo_Form$set, _p17._1, _p17._0)));
 					case 'UpdateRemoteSyncFormUri':
 						return _Fresheyeball$elm_return$Return$map(
-							function (_p33) {
+							function (_p39) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditSyncSettings(_p33));
+									_user$project$EditMode$EditSyncSettings(_p39));
 							}(
 								_elm_lang$core$Native_Utils.update(
 									_p17._0,
 									{uri: _p17._1})));
 					case 'UpdateReminderForm':
 						return _Fresheyeball$elm_return$Return$map(
-							function (_p34) {
+							function (_p40) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditTodoReminder(_p34));
+									_user$project$EditMode$EditTodoReminder(_p40));
 							}(
 								A2(_user$project$Todo_ReminderForm$set, _p17._1, _p17._0)));
 					case 'SetView':
@@ -57715,7 +58256,7 @@ var _user$project$Main$update = function (msg) {
 					case 'OnMsgList':
 						return _user$project$Main$onMsgList(_p17._0);
 					case 'OnKeyboardMsg':
-						return function (_p35) {
+						return function (_p41) {
 							return A2(
 								_user$project$DomPorts$focusSelectorIfNoFocusCmd,
 								'.entity-list > [tabindex=0]',
@@ -57723,10 +58264,10 @@ var _user$project$Main$update = function (msg) {
 									_Fresheyeball$elm_return$Return$map,
 									_user$project$Model_Internal$updateKeyboardState(
 										_user$project$Ext_Keyboard$update(_p17._0)),
-									_p35));
+									_p41));
 						};
 					case 'SaveCurrentForm':
-						return function (_p36) {
+						return function (_p42) {
 							return A2(
 								_user$project$Main$andThenUpdate,
 								_user$project$Msg$DeactivateEditingMode,
@@ -57751,77 +58292,65 @@ var _user$project$Main$update = function (msg) {
 													}),
 												_1: _user$project$Model$saveCurrentForm
 											}),
-										_p36)));
+										_p42)));
 						};
 					case 'NewTodo':
-						return function (_p37) {
+						return function (_p43) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoMode, _p37));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoMode, _p43));
 						};
 					case 'NewProject':
-						return function (_p38) {
+						return function (_p44) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewProject, _p38));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewProject, _p44));
 						};
 					case 'NewContext':
-						return function (_p39) {
+						return function (_p45) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewContext, _p39));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewContext, _p45));
 						};
 					case 'StartAddingNewEntity':
 						return _elm_lang$core$Basics$identity;
 					case 'OnEntityAction':
-						var _p44 = _p17._0;
-						var _p40 = _p17._1;
-						switch (_p40.ctor) {
+						var _p49 = _p17._0;
+						var _p46 = _p17._1;
+						switch (_p46.ctor) {
 							case 'StartEditing':
-								return function (_p41) {
+								return function (_p47) {
 									return _user$project$DomPorts$autoFocusPaperInputCmd(
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$startEditingEntity(_p44),
-											_p41));
+											_user$project$Model$startEditingEntity(_p49),
+											_p47));
 								};
 							case 'NameChanged':
 								return _Fresheyeball$elm_return$Return$map(
-									A2(_user$project$Model$updateEditModeNameChanged, _p40._0, _p44));
+									A2(_user$project$Model$updateEditModeNameChanged, _p46._0, _p49));
 							case 'Save':
 								return _user$project$Main$andThenUpdate(_user$project$Msg$SaveCurrentForm);
 							case 'ToggleDeleted':
-								return function (_p42) {
+								return function (_p48) {
 									return A2(
 										_user$project$Main$andThenUpdate,
 										_user$project$Msg$DeactivateEditingMode,
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$toggleDeleteEntity(_p44),
-											_p42));
+											_user$project$Model$toggleDeleteEntity(_p49),
+											_p48));
 								};
 							case 'SetFocusedIn':
 								return _Fresheyeball$elm_return$Return$map(
-									_user$project$Model$setFocusInEntity(_p44));
+									_user$project$Model$setFocusInEntity(_p49));
 							case 'SetFocused':
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$setMaybeFocusedEntity(
-										_elm_lang$core$Maybe$Just(_p44)));
+										_elm_lang$core$Maybe$Just(_p49)));
 							case 'SetBlurred':
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$setMaybeFocusedEntity(_elm_lang$core$Maybe$Nothing));
 							default:
-								return function (_p43) {
-									return A2(
-										_Fresheyeball$elm_return$Return$map,
-										A2(
-											_user$project$Ext_Debug$tapLog,
-											function (_) {
-												return _.selectedEntityIdSet;
-											},
-											'selectedEntityIdSet'),
-										A2(
-											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$toggleEntitySelection(_p44),
-											_p43));
-								};
+								return _Fresheyeball$elm_return$Return$map(
+									_user$project$Model$toggleEntitySelection(_p49));
 						}
 					default:
 						return _user$project$Main$onGlobalKeyUp(_p17._0);
@@ -57830,24 +58359,24 @@ var _user$project$Main$update = function (msg) {
 				_Fresheyeball$elm_return$Return$singleton(_p16)));
 	};
 };
-var _user$project$Main$andThenUpdate = function (_p45) {
+var _user$project$Main$andThenUpdate = function (_p50) {
 	return _Fresheyeball$elm_return$Return$andThen(
-		_user$project$Main$update(_p45));
+		_user$project$Main$update(_p50));
 };
 var _user$project$Main$onGlobalKeyUp = function (key) {
 	return A2(
 		_user$project$Ext_Return$with,
 		_user$project$Model$getEditMode,
 		function (editMode) {
-			var _p46 = {ctor: '_Tuple2', _0: key, _1: editMode};
+			var _p51 = {ctor: '_Tuple2', _0: key, _1: editMode};
 			_v7_2:
 			do {
-				if (_p46.ctor === '_Tuple2') {
-					switch (_p46._0.ctor) {
+				if (_p51.ctor === '_Tuple2') {
+					switch (_p51._0.ctor) {
 						case 'Escape':
 							return _user$project$Main$andThenUpdate(_user$project$Msg$DeactivateEditingMode);
 						case 'CharQ':
-							if (_p46._1.ctor === 'None') {
+							if (_p51._1.ctor === 'None') {
 								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodo);
 							} else {
 								break _v7_2;
@@ -57864,9 +58393,9 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 };
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p47) {
+		function (_p52) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p47));
+				_user$project$Main$update(_p52));
 		}));
 var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 	{delta2url: _user$project$Routes$delta2hash, location2messages: _user$project$Routes$hash2messages, init: _user$project$Main$init, update: _user$project$Main$update, view: _user$project$View$init, subscriptions: _user$project$Main$subscriptions})(
@@ -57890,36 +58419,16 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 												function (encodedTodoList) {
 													return A2(
 														_elm_lang$core$Json_Decode$andThen,
-														function (firebaseAppAttributes) {
+														function (now) {
 															return A2(
 																_elm_lang$core$Json_Decode$andThen,
-																function (now) {
-																	return A2(
-																		_elm_lang$core$Json_Decode$andThen,
-																		function (pouchDBRemoteSyncURI) {
-																			return _elm_lang$core$Json_Decode$succeed(
-																				{appVersion: appVersion, developmentMode: developmentMode, deviceId: deviceId, encodedContextList: encodedContextList, encodedProjectList: encodedProjectList, encodedTodoList: encodedTodoList, firebaseAppAttributes: firebaseAppAttributes, now: now, pouchDBRemoteSyncURI: pouchDBRemoteSyncURI});
-																		},
-																		A2(_elm_lang$core$Json_Decode$field, 'pouchDBRemoteSyncURI', _elm_lang$core$Json_Decode$string));
+																function (pouchDBRemoteSyncURI) {
+																	return _elm_lang$core$Json_Decode$succeed(
+																		{appVersion: appVersion, developmentMode: developmentMode, deviceId: deviceId, encodedContextList: encodedContextList, encodedProjectList: encodedProjectList, encodedTodoList: encodedTodoList, now: now, pouchDBRemoteSyncURI: pouchDBRemoteSyncURI});
 																},
-																A2(_elm_lang$core$Json_Decode$field, 'now', _elm_lang$core$Json_Decode$float));
+																A2(_elm_lang$core$Json_Decode$field, 'pouchDBRemoteSyncURI', _elm_lang$core$Json_Decode$string));
 														},
-														A2(
-															_elm_lang$core$Json_Decode$field,
-															'firebaseAppAttributes',
-															_elm_lang$core$Json_Decode$list(
-																A2(
-																	_elm_lang$core$Json_Decode$andThen,
-																	function (x0) {
-																		return A2(
-																			_elm_lang$core$Json_Decode$andThen,
-																			function (x1) {
-																				return _elm_lang$core$Json_Decode$succeed(
-																					{ctor: '_Tuple2', _0: x0, _1: x1});
-																			},
-																			A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$string));
-																	},
-																	A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)))));
+														A2(_elm_lang$core$Json_Decode$field, 'now', _elm_lang$core$Json_Decode$float));
 												},
 												A2(
 													_elm_lang$core$Json_Decode$field,
@@ -57941,9 +58450,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 				A2(_elm_lang$core$Json_Decode$field, 'developmentMode', _elm_lang$core$Json_Decode$bool));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$andThenUpdateAll = function (_p48) {
+var _user$project$Main$andThenUpdateAll = function (_p53) {
 	return _user$project$Main$andThenUpdate(
-		_user$project$Msg$OnMsgList(_p48));
+		_user$project$Msg$OnMsgList(_p53));
 };
 var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',
@@ -58369,7 +58878,7 @@ for (var publicModule in Elm)
 
 
 /***/ }),
-/* 309 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -58393,7 +58902,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(127), __webpack_require__(553) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(127), __webpack_require__(552) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -58876,13 +59385,13 @@ return $.ui.position;
 
 
 /***/ }),
-/* 310 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(518);
+var content = __webpack_require__(517);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -58890,7 +59399,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(779)(content, options);
+var update = __webpack_require__(778)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -58907,8 +59416,8 @@ if(false) {
 }
 
 /***/ }),
-/* 311 */,
-/* 312 */
+/* 310 */,
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var asn1 = __webpack_require__(77);
@@ -58931,7 +59440,7 @@ function Entity(name, body) {
 Entity.prototype._createNamed = function createNamed(base) {
   var named;
   try {
-    named = __webpack_require__(783).runInThisContext(
+    named = __webpack_require__(782).runInThisContext(
       '(function ' + this.name + '(entity) {\n' +
       '  this._initNamed(entity);\n' +
       '})'
@@ -58975,7 +59484,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
 
 
 /***/ }),
-/* 313 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Reporter = __webpack_require__(78).Reporter;
@@ -59615,7 +60124,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
 
 
 /***/ }),
-/* 314 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(5);
@@ -59742,7 +60251,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 
 
 /***/ }),
-/* 315 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var constants = __webpack_require__(185);
@@ -59790,17 +60299,17 @@ exports.tagByName = constants._reverse(exports.tag);
 
 
 /***/ }),
-/* 316 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var decoders = exports;
 
 decoders.der = __webpack_require__(186);
-decoders.pem = __webpack_require__(317);
+decoders.pem = __webpack_require__(316);
 
 
 /***/ }),
-/* 317 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(5);
@@ -59855,17 +60364,17 @@ PEMDecoder.prototype.decode = function decode(data, options) {
 
 
 /***/ }),
-/* 318 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var encoders = exports;
 
 encoders.der = __webpack_require__(187);
-encoders.pem = __webpack_require__(319);
+encoders.pem = __webpack_require__(318);
 
 
 /***/ }),
-/* 319 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(5);
@@ -59892,8 +60401,8 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 
 /***/ }),
-/* 320 */,
-/* 321 */
+/* 319 */,
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59922,20 +60431,31 @@ var boot = function () {
                                 }
                         });
 
-                        _context3.next = 6;
+                        $elm.get(0).addEventListener("keydown", function (e) {
+                            var $closest = $(e.target).closest("[data-prevent-default-keys]");
+                            if ($closest.length === 0) return;
+                            var preventDefaultKeys = $closest.data("prevent-default-keys").split(",");
+                            // console.log(e.keyCode, e.key, e, preventDefaultKey);
+
+                            if (_.contains(e.key)(preventDefaultKeys)) {
+                                e.preventDefault();
+                            }
+                        }, true);
+
+                        _context3.next = 7;
                         return (0, _pouchdbWrapper2.default)("todo-db");
 
-                    case 6:
+                    case 7:
                         _context3.t0 = _context3.sent;
-                        _context3.next = 9;
+                        _context3.next = 10;
                         return (0, _pouchdbWrapper2.default)("project-db");
 
-                    case 9:
+                    case 10:
                         _context3.t1 = _context3.sent;
-                        _context3.next = 12;
+                        _context3.next = 13;
                         return (0, _pouchdbWrapper2.default)("context-db");
 
-                    case 12:
+                    case 13:
                         _context3.t2 = _context3.sent;
                         dbMap = {
                             "todo-db": _context3.t0,
@@ -59946,38 +60466,36 @@ var boot = function () {
                             return db.findAll();
                         })(dbMap);
                         _context3.t3 = Date.now();
-                        _context3.next = 18;
+                        _context3.next = 19;
                         return allDocsMap["todo-db"];
 
-                    case 18:
+                    case 19:
                         _context3.t4 = _context3.sent;
-                        _context3.next = 21;
+                        _context3.next = 22;
                         return allDocsMap["project-db"];
 
-                    case 21:
+                    case 22:
                         _context3.t5 = _context3.sent;
-                        _context3.next = 24;
+                        _context3.next = 25;
                         return allDocsMap["context-db"];
 
-                    case 24:
+                    case 25:
                         _context3.t6 = _context3.sent;
                         _context3.t7 = localStorage.getItem("pouchdb.remote-sync-uri") || "";
-                        _context3.t8 = firebaseConfig.appAttributes;
-                        _context3.t9 = developmentMode;
-                        _context3.t10 = pkg.version;
-                        _context3.t11 = deviceId;
+                        _context3.t8 = developmentMode;
+                        _context3.t9 = pkg.version;
+                        _context3.t10 = deviceId;
                         flags = {
                             now: _context3.t3,
                             encodedTodoList: _context3.t4,
                             encodedProjectList: _context3.t5,
                             encodedContextList: _context3.t6,
                             pouchDBRemoteSyncURI: _context3.t7,
-                            firebaseAppAttributes: _context3.t8,
-                            developmentMode: _context3.t9,
-                            appVersion: _context3.t10,
-                            deviceId: _context3.t11
+                            developmentMode: _context3.t8,
+                            appVersion: _context3.t9,
+                            deviceId: _context3.t10
                         };
-                        Elm = __webpack_require__(308);
+                        Elm = __webpack_require__(307);
                         app = Elm["Main"].embed(document.getElementById("elm-app-container"), flags);
 
 
@@ -60068,28 +60586,44 @@ var boot = function () {
                             }
                         });
 
+                        app.ports["positionDropdown"].subscribe(function (_ref6) {
+                            var _ref7 = _slicedToArray(_ref6, 2),
+                                myId = _ref7[0],
+                                ofId = _ref7[1];
+
+                            requestAnimationFrame(function () {
+                                $("#" + myId).position({
+                                    my: "right top",
+                                    at: "right top",
+                                    of: "#" + ofId,
+                                    within: "#main-view",
+                                    collision: "flipfit"
+                                }).find("[tabindex=\"0\"]").focus();
+                            });
+                        });
+
                         app.ports["signIn"].subscribe(function () {
                             var googleAuth = document.getElementById('google-auth');
                             googleAuth.signInWithRedirect().then(console.info).catch(console.error);
                         });
 
-                        app.ports["fireDataWrite"].subscribe(function (_ref6) {
-                            var _ref7 = _slicedToArray(_ref6, 2),
-                                path = _ref7[0],
-                                value = _ref7[1];
-
-                            console.log("app.database().ref(path).set(value)", { path: path, value: value });
-                            var ref = $("firebase-app")[0].app.database().ref(path);
-                            ref.set(value);
-                        });
-
-                        app.ports["fireDataPush"].subscribe(function (_ref8) {
+                        app.ports["fireDataWrite"].subscribe(function (_ref8) {
                             var _ref9 = _slicedToArray(_ref8, 2),
                                 path = _ref9[0],
                                 value = _ref9[1];
 
-                            console.log("app.database().ref(path).push(value)", { path: path, value: value });
-                            $("firebase-app")[0].app.database().ref(path).push(value);
+                            console.log("firebaseApp.database().ref(path).set(value)", { path: path, value: value });
+                            var ref = firebaseApp.database().ref(path);
+                            ref.set(value);
+                        });
+
+                        app.ports["fireDataPush"].subscribe(function (_ref10) {
+                            var _ref11 = _slicedToArray(_ref10, 2),
+                                path = _ref11[0],
+                                value = _ref11[1];
+
+                            console.log("firebaseApp.database().ref(path).push(value)", { path: path, value: value });
+                            firebaseApp.database().ref(path).push(value);
                         });
 
                         app.ports["signOut"].subscribe(function () {
@@ -60124,7 +60658,7 @@ var boot = function () {
                             sound.stop();
                         });
 
-                    case 46:
+                    case 47:
                     case "end":
                         return _context3.stop();
                 }
@@ -60137,7 +60671,7 @@ var boot = function () {
     };
 }();
 
-var _pouchdbWrapper = __webpack_require__(304);
+var _pouchdbWrapper = __webpack_require__(303);
 
 var _pouchdbWrapper2 = _interopRequireDefault(_pouchdbWrapper);
 
@@ -60146,23 +60680,44 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 var _ = __webpack_require__(128);
-var cryptoRandomString = __webpack_require__(307);
 
-__webpack_require__(310);
+var firebaseDevConfig = {
+    apiKey: "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc",
+    authDomain: "rational-mote-664.firebaseapp.com",
+    databaseURL: "https://rational-mote-664.firebaseio.com",
+    projectId: "rational-mote-664",
+    storageBucket: "rational-mote-664.appspot.com",
+    messagingSenderId: "49437522774"
+};
 
-var sound = __webpack_require__(305);
-var $ = __webpack_require__(127);
-window.jQuery = $;
-__webpack_require__(302);
-__webpack_require__(309);
-var Notifications = __webpack_require__(303);
-
+var firebaseProdConfig = {
+    apiKey: "AIzaSyDgqOiOMuTvK3PdzJ0Oz6ctEg-devcgZYc",
+    authDomain: "simple-gtd-prod.firebaseapp.com",
+    databaseURL: "https://simple-gtd-prod.firebaseio.com",
+    projectId: "simple-gtd-prod",
+    storageBucket: "simple-gtd-prod.appspot.com",
+    messagingSenderId: "1061254169900"
+};
 
 //noinspection JSUnresolvedVariable
-var firebaseConfig =  false ? require("./config/dev/firebase") : __webpack_require__(301);
+var firebaseConfig =  false ? firebaseDevConfig : firebaseProdConfig;
+
+var firebaseApp = firebase.initializeApp(firebaseDevConfig);
+
+var cryptoRandomString = __webpack_require__(306);
+
+__webpack_require__(309);
+
+var sound = __webpack_require__(304);
+var $ = __webpack_require__(127);
+window.jQuery = $;
+__webpack_require__(301);
+__webpack_require__(308);
+var Notifications = __webpack_require__(302);
+
 
 var developmentMode = false;
-var pkg = {"name":"simplegtd.com","version":"0.10.1","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","bump":"npm_bump --auto --auto-fallback patch --skip-push","postbump":"npm run build","deploy":"git push && firebase deploy --project prod --except 'functions'","f:deploy:db":"firebase deploy --only database","f:deploy:fun":"firebase deploy --only functions","f:deploy:files":"firebase deploy --only hosting","dev":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server","hot":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","watch":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack --watch","watch-prod":"cross-env NODE_ENV=production webpack -p --progress --watch","build":"bash scripts/build.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","firebase-tools":"3.8.0","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"alien-date":"0.2.2","babel-polyfill":"6.23.0","chrono":"1.0.5","chrono-node":"1.3.1","crypto-random-string":"1.0.0","dateparser":"1.0.6","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","memorystream":"0.3.1","parse-messy-time":"2.1.0","peerjs":"0.3.14","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-replication-stream":"1.2.9","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
+var pkg = {"name":"simplegtd.com","version":"0.11.0","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","bump":"npm_bump --auto --auto-fallback patch --skip-push","postbump":"npm run build","deploy":"git push && firebase deploy --project prod --except 'functions'","f:deploy:db":"firebase deploy --only database","f:deploy:fun":"firebase deploy --only functions","f:deploy:files":"firebase deploy --only hosting","dev":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server","hot":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","watch":"cross-env NODE_ENV=development WEB_PACK_DEV_SERVER=true webpack --watch","watch-prod":"cross-env NODE_ENV=production webpack -p --progress --watch","build":"bash scripts/build.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","firebase-tools":"3.8.0","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"alien-date":"0.2.2","babel-polyfill":"6.23.0","chrono":"1.0.5","chrono-node":"1.3.1","crypto-random-string":"1.0.0","dateparser":"1.0.6","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","memorystream":"0.3.1","parse-messy-time":"2.1.0","peerjs":"0.3.14","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-replication-stream":"1.2.9","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
 
 boot().catch(console.error);
 
@@ -60184,7 +60739,7 @@ function getOrCreateDeviceId() {
  */
 
 /***/ }),
-/* 322 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60305,7 +60860,7 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 323 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(93)
@@ -60449,7 +61004,7 @@ exports.createDecipheriv = createDecipheriv
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 324 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(93)
@@ -60578,7 +61133,7 @@ exports.createCipher = createCipher
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 325 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var zeros = new Buffer(16)
@@ -60683,13 +61238,13 @@ function xor (a, b) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 326 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ebtk = __webpack_require__(108)
 var aes = __webpack_require__(130)
-var DES = __webpack_require__(327)
-var desModes = __webpack_require__(328)
+var DES = __webpack_require__(326)
+var desModes = __webpack_require__(327)
 var aesModes = __webpack_require__(94)
 function createCipher (suite, password) {
   var keyLen, ivLen
@@ -60762,7 +61317,7 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 327 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var CipherBase = __webpack_require__(67)
@@ -60812,7 +61367,7 @@ DES.prototype._final = function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 328 */
+/* 327 */
 /***/ (function(module, exports) {
 
 exports['des-ecb'] = {
@@ -60842,21 +61397,21 @@ exports['des-ede'] = {
 
 
 /***/ }),
-/* 329 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(197)
 
 
 /***/ }),
-/* 330 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(73)
 var stream = __webpack_require__(182)
 var inherits = __webpack_require__(5)
-var sign = __webpack_require__(331)
-var verify = __webpack_require__(332)
+var sign = __webpack_require__(330)
+var verify = __webpack_require__(331)
 
 var algorithms = __webpack_require__(197)
 Object.keys(algorithms).forEach(function (key) {
@@ -60947,7 +61502,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 331 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
@@ -61099,7 +61654,7 @@ module.exports.makeKey = makeKey
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 332 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
@@ -61189,7 +61744,7 @@ module.exports = verify
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 333 */
+/* 332 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -61200,6 +61755,7 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
+/* 333 */,
 /* 334 */,
 /* 335 */,
 /* 336 */,
@@ -61380,8 +61936,7 @@ module.exports = Array.isArray || function (arr) {
 /* 511 */,
 /* 512 */,
 /* 513 */,
-/* 514 */,
-/* 515 */
+/* 514 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(20);
@@ -61510,7 +62065,7 @@ function formatReturnValue(bn, enc, len) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 516 */
+/* 515 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61551,7 +62106,7 @@ exports.hash = hash;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 517 */
+/* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -61561,7 +62116,7 @@ exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = _
 exports.createHash = exports.Hash = __webpack_require__(73)
 exports.createHmac = exports.Hmac = __webpack_require__(159)
 
-var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(Object.keys(__webpack_require__(329)))
+var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(Object.keys(__webpack_require__(328)))
 exports.getHashes = function () {
   return hashes
 }
@@ -61570,7 +62125,7 @@ var p = __webpack_require__(232)
 exports.pbkdf2 = p.pbkdf2
 exports.pbkdf2Sync = p.pbkdf2Sync
 
-var aes = __webpack_require__(326)
+var aes = __webpack_require__(325)
 ;[
   'Cipher',
   'createCipher',
@@ -61586,7 +62141,7 @@ var aes = __webpack_require__(326)
   exports[key] = aes[key]
 })
 
-var dh = __webpack_require__(527)
+var dh = __webpack_require__(526)
 ;[
   'DiffieHellmanGroup',
   'createDiffieHellmanGroup',
@@ -61597,7 +62152,7 @@ var dh = __webpack_require__(527)
   exports[key] = dh[key]
 })
 
-var sign = __webpack_require__(330)
+var sign = __webpack_require__(329)
 ;[
   'createSign',
   'Sign',
@@ -61607,9 +62162,9 @@ var sign = __webpack_require__(330)
   exports[key] = sign[key]
 })
 
-exports.createECDH = __webpack_require__(515)
+exports.createECDH = __webpack_require__(514)
 
-var publicEncrypt = __webpack_require__(567)
+var publicEncrypt = __webpack_require__(566)
 
 ;[
   'publicEncrypt',
@@ -61635,21 +62190,21 @@ var publicEncrypt = __webpack_require__(567)
 
 
 /***/ }),
-/* 518 */
+/* 517 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(519)(undefined);
+exports = module.exports = __webpack_require__(518)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, "paper-textarea:focus {\n  outline: none;\n}\n\n* {\n  box-sizing: border-box;\n}\n\n.hidden {\n  visibility: hidden !important;\n}\n\n.display-none {\n  display: none;\n}\n\n.focusable-list > * {\n  outline: none;\n  position: relative\n}\n\n.focusable-list > *:before {\n  position: absolute;\n  left: 0;\n  top: 0;\n  content: \"\";\n  width: 100%;\n  height: 100%;\n  background-color: transparent;\n  pointer-events: none;\n}\n\n.focusable-list > *:focus {\n\n}\n\n.focusable-list > *:focus:before {\n  opacity: 0.15;\n}\n\n.focusable-list > *[tabindex=\"0\"] {\n\n}\n\n.focusable-list > *[tabindex=\"0\"]:before {\n  background-color: black;\n  opacity: 0.1;\n}\n\n.focusable-list > *.selected {\n\n}\n\n.focusable-list > *.selected:before {\n  background-color: rgb(255, 255, 0);\n  opacity: 0.1;\n}\n\n.ellipsis {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n\n.small {\n  font-size: 11.2px;\n  font-size: 0.7rem;\n  line-height: 1.2em;\n}\n\n.col {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.row-item-stretched {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n//align-items:stretch; //justify-content: space-around\n}\n\n.row-item-stretched > * {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.col-item-stretched {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -ms-flex-pack: distribute;\n      justify-content: space-around\n}\n\n.col-item-stretched > * {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.col {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.flex11 {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.dim {\n  opacity: 0.5;\n}\n\n.active-task-view {\n  padding: 16px 16px 0\n}\n\n.active-task-view .title {\n\n}\n\n.active-task-view .elapsed-time {\n  display: inline-block;\n}\n\n#add-fab {\n  position: fixed;\n  right: 10px;\n  bottom: 10px;\n}\n\n.w100 {\n  width: 100%;\n}\n\n.flex-expand {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\npaper-item, .has-hover-elements {\n\n  /*\n  &[selected] > .show-on-hover{\n    display: flex;\n  }\n  */\n}\n\npaper-item > .show-on-hover, .has-hover-elements > .show-on-hover {\n  display: none;\n}\n\npaper-item > .hide-on-hover, .has-hover-elements > .hide-on-hover {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\npaper-item:hover > .show-on-hover, .has-hover-elements:hover > .show-on-hover {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\npaper-item:hover > .hide-on-hover, .has-hover-elements:hover > .hide-on-hover {\n  display: none;\n}\n\n.project-list {\n  background-color: white\n}\n\n.project-list .project-item {\n  border-top: 1px solid rgba(179, 179, 179, .53);\n}\n\n.entity-list-title {\n  text-transform: capitalize;\n//font-size: 14.4px;\n//font-size: 0.9rem; font-weight: 600; color: rgba(0, 0, 0, .44); display: inline-block;\n}\n\npaper-item {\n//min-height:40px;\n}\n\npaper-listbox {\n  background-color: transparent;\n}\n\n.entity-item {\n  margin-top: 32px;\n  margin-top: 2rem;\n//padding: 8px;\n//padding: 0.5rem; outline: none; border-left: 2px solid transparent;\n}\n\n.entity-item {\n\n}\n\n.entity-item[tabindex=\"0\"] .title {\n  font-weight: bolder;\n  color: rgba(0, 0, 172, .44);\n}\n\n.entity-item:focus[tabindex=\"0\"] .title {\n  font-weight: bolder;\n  color: rgba(0, 0, 172, .77);\n}\n\n.todo-item /*, .entity-item*/\n{\n}\n\n.todo-item:focus[tabindex=\"0\"] {\n  border-left: 2px solid rgba(0, 0, 172, .77);\n}\n\n.todo-item[tabindex=\"0\"] {\n  border-left: 2px solid rgba(0, 0, 172, .44);\n}\n\n.focusable-list > .todo-item {\n  padding: 8px 16px;\n  padding: 0.5rem 1rem;\n  background-color: white;\n  box-shadow: 2px 2px 5px rgba(0, 0, 0, .4);\n  outline: none;\n  border-left: 2px solid transparent\n  /*&.selected{\n    background-color: rgba(255, 255, 0, 0.52);\n  }*/\n\n  /*\n  &:not(.editing) {\n    & paper-item-body {\n      padding: 10px 0;\n    }\n  }\n  */\n\n}\n\n.focusable-list > .todo-item:not(.selected):before {\n  background-color: transparent;\n}\n\n.focusable-list > .todo-item paper-menu-button .title {\n  text-transform: none;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n.focusable-list > .todo-item.editing {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n}\n\n.focusable-list > .todo-item paper-icon-button {\n  width: 24px;\n  height: 24px;\n  padding: 2px;\n\n  /*transform: scale(0.7);*/\n}\n\n.focusable-list > .todo-item .display-text {\n  padding: 0 8px;\n}\n\n.focusable-list > .todo-item paper-item-body {\n  cursor: pointer;\n}\n\n.focusable-list > .todo-item .reminder-text {\n  text-decoration: underline black;\n}\n\n.focusable-list > .todo-item .reminder-text.overdue {\n  text-decoration: underline red;\n}\n\n#in-basket-flow-container {\n  padding: 16px;\n  padding: 1rem;\n  background-color: white;\n}\n\n.big-dialog {\n  position: absolute;\n  width: 300px;\n  height: 300px;\n  background-color: rgba(0, 0, 0, .64);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  z-index: 100000;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.padding-0 {\n  padding: 0;\n}\n\n.padding-left-1rem {\n  padding-left: 16px;\n  padding-left: 1rem;\n}\n\n.margin-0 {\n  margin: 0;\n}\n\napp-drawer-layout:not([narrow]) .hide-when-wide {\n  display: none;\n}\n\n.text-break-all {\n  white-space: normal;\n  word-break: break-all;\n}\n\n\n", ""]);
+exports.push([module.i, "paper-textarea:focus {\n  outline: none;\n}\n\n* {\n  box-sizing: border-box;\n}\n\n.hidden {\n  visibility: hidden !important;\n}\n\n.display-none {\n  display: none;\n}\n\n.focusable-list > * {\n  outline: none;\n  position: relative\n}\n\n.focusable-list > *:before {\n  position: absolute;\n  left: 0;\n  top: 0;\n  content: \"\";\n  width: 100%;\n  height: 100%;\n  background-color: transparent;\n  pointer-events: none;\n}\n\n.focusable-list > *:focus {\n\n}\n\n.focusable-list > *:focus:before {\n  opacity: 0.15;\n}\n\n.focusable-list > *[tabindex=\"0\"] {\n\n}\n\n.focusable-list > *[tabindex=\"0\"]:before {\n  background-color: black;\n  opacity: 0.1;\n}\n\n.focusable-list > *.selected {\n\n}\n\n.focusable-list > *.selected:before {\n  background-color: rgb(255, 255, 0);\n  opacity: 0.1;\n}\n\n.ellipsis {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n\n.small {\n  font-size: 11.2px;\n  font-size: 0.7rem;\n  line-height: 1.2em;\n}\n\n.col {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.row-item-stretched {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n//align-items:stretch; //justify-content: space-around\n}\n\n.row-item-stretched > * {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.col-item-stretched {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -ms-flex-pack: distribute;\n      justify-content: space-around\n}\n\n.col-item-stretched > * {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.col {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.flex11 {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.dim {\n  opacity: 0.5;\n}\n\n.active-task-view {\n  padding: 16px 16px 0\n}\n\n.active-task-view .title {\n\n}\n\n.active-task-view .elapsed-time {\n  display: inline-block;\n}\n\n#add-fab {\n  position: fixed;\n  right: 10px;\n  bottom: 10px;\n}\n\n.w100 {\n  width: 100%;\n}\n\n.flex-expand {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\npaper-item, .has-hover-elements {\n\n  /*\n  &[selected] > .show-on-hover{\n    display: flex;\n  }\n  */\n}\n\npaper-item > .show-on-hover, .has-hover-elements > .show-on-hover {\n  display: none;\n}\n\npaper-item > .hide-on-hover, .has-hover-elements > .hide-on-hover {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\npaper-item:hover > .show-on-hover, .has-hover-elements:hover > .show-on-hover {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\npaper-item:hover > .hide-on-hover, .has-hover-elements:hover > .hide-on-hover {\n  display: none;\n}\n\n.project-list {\n  background-color: white\n}\n\n.project-list .project-item {\n  border-top: 1px solid rgba(179, 179, 179, .53);\n}\n\n.entity-list-title {\n  text-transform: capitalize;\n//font-size: 14.4px;\n//font-size: 0.9rem; font-weight: 600; color: rgba(0, 0, 0, .44); display: inline-block;\n}\n\npaper-item {\n//min-height:40px;\n}\n\npaper-listbox {\n  background-color: transparent;\n}\n\n.entity-item {\n  margin-top: 32px;\n  margin-top: 2rem;\n//padding: 8px;\n//padding: 0.5rem; outline: none; border-left: 2px solid transparent;\n}\n\n.entity-item {\n\n}\n\n.entity-item[tabindex=\"0\"] .title {\n  font-weight: bolder;\n  color: rgba(0, 0, 172, .44);\n}\n\n.entity-item:focus[tabindex=\"0\"] .title {\n  font-weight: bolder;\n  color: rgba(0, 0, 172, .77);\n}\n\n#context-dropdown, #project-dropdown{\n  position: absolute;\n  //left: 100px;\n  //top: 100px;\n  background-color: white;\n  width:200px;\n  overflow: hidden;\n}\n\n.focusable-list > .todo-item {\n  padding: 8px 16px;\n  padding: 0.5rem 1rem;\n  background-color: white;\n  box-shadow: 2px 2px 5px rgba(0, 0, 0, .4);\n  outline: none;\n  border-left: 2px solid transparent\n\n}\n\n.focusable-list > .todo-item:not(.selected):before {\n  background-color: transparent;\n}\n\n.focusable-list > .todo-item paper-button.small .title {\n  text-transform: none;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n.focusable-list > .todo-item[tabindex=\"0\"] {\n  border-left: 2px solid rgba(0, 0, 172, .44);\n}\n\n.focusable-list > .todo-item:focus[tabindex=\"0\"] {\n  border-left: 2px solid rgba(0, 0, 172, .77);\n}\n\n.focusable-list > .todo-item.editing {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n}\n\n.focusable-list > .todo-item paper-icon-button {\n  width: 24px;\n  height: 24px;\n  padding: 2px;\n\n  /*transform: scale(0.7);*/\n}\n\n.focusable-list > .todo-item .display-text {\n  padding: 0 8px;\n}\n\n.focusable-list > .todo-item paper-item-body {\n  cursor: pointer;\n}\n\n.focusable-list > .todo-item .reminder-text {\n  text-decoration: underline black;\n}\n\n.focusable-list > .todo-item .reminder-text.overdue {\n  text-decoration: underline red;\n}\n\n#in-basket-flow-container {\n  padding: 16px;\n  padding: 1rem;\n  background-color: white;\n}\n\n.big-dialog {\n  position: absolute;\n  width: 300px;\n  height: 300px;\n  background-color: rgba(0, 0, 0, .64);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  z-index: 100000;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.padding-0 {\n  padding: 0;\n}\n\n.padding-left-1rem {\n  padding-left: 16px;\n  padding-left: 1rem;\n}\n\n.margin-0 {\n  margin: 0;\n}\n\napp-drawer-layout:not([narrow]) .hide-when-wide {\n  display: none;\n}\n\n.text-break-all {\n  white-space: normal;\n  word-break: break-all;\n}\n\n#main-view{\n  position: relative;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 519 */
+/* 518 */
 /***/ (function(module, exports) {
 
 /*
@@ -61731,7 +62286,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 520 */
+/* 519 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -61740,7 +62295,7 @@ function toComment(sourceMap) {
  * Expose `debug()` as the module.
  */
 
-exports = module.exports = __webpack_require__(521);
+exports = module.exports = __webpack_require__(520);
 exports.log = log;
 exports.formatArgs = formatArgs;
 exports.save = save;
@@ -61920,7 +62475,7 @@ function localstorage() {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50)))
 
 /***/ }),
-/* 521 */
+/* 520 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -61936,7 +62491,7 @@ exports.coerce = coerce;
 exports.disable = disable;
 exports.enable = enable;
 exports.enabled = enabled;
-exports.humanize = __webpack_require__(554);
+exports.humanize = __webpack_require__(553);
 
 /**
  * The currently active debug mode names, and names to skip.
@@ -62128,7 +62683,7 @@ function coerce(val) {
 
 
 /***/ }),
-/* 522 */
+/* 521 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62200,7 +62755,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
 
 
 /***/ }),
-/* 523 */
+/* 522 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62348,7 +62903,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 
 
 /***/ }),
-/* 524 */
+/* 523 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62498,7 +63053,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 
 
 /***/ }),
-/* 525 */
+/* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62560,7 +63115,7 @@ EDE.prototype._unpad = DES.prototype._unpad;
 
 
 /***/ }),
-/* 526 */
+/* 525 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62823,13 +63378,13 @@ exports.padSplit = function padSplit(num, size, group) {
 
 
 /***/ }),
-/* 527 */
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(228)
-var primes = __webpack_require__(529)
+var primes = __webpack_require__(528)
 
-var DH = __webpack_require__(528)
+var DH = __webpack_require__(527)
 
 function getDiffieHellman (mod) {
   var prime = new Buffer(primes[mod].prime, 'hex')
@@ -62872,7 +63427,7 @@ exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 528 */
+/* 527 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(13);
@@ -63043,7 +63598,7 @@ function formatReturnValue(bn, enc) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 529 */
+/* 528 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -63082,7 +63637,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 530 */
+/* 529 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63464,7 +64019,7 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 531 */
+/* 530 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63904,7 +64459,7 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 
 /***/ }),
-/* 532 */
+/* 531 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64091,7 +64646,7 @@ Point.prototype.getX = function getX() {
 
 
 /***/ }),
-/* 533 */
+/* 532 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65036,7 +65591,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 
 /***/ }),
-/* 534 */
+/* 533 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65209,7 +65764,7 @@ defineCurve('ed25519', {
 
 var pre;
 try {
-  pre = __webpack_require__(541);
+  pre = __webpack_require__(540);
 } catch (e) {
   pre = undefined;
 }
@@ -65248,20 +65803,20 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 535 */
+/* 534 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var BN = __webpack_require__(13);
-var HmacDRBG = __webpack_require__(549);
+var HmacDRBG = __webpack_require__(548);
 var elliptic = __webpack_require__(20);
 var utils = elliptic.utils;
 var assert = utils.assert;
 
-var KeyPair = __webpack_require__(536);
-var Signature = __webpack_require__(537);
+var KeyPair = __webpack_require__(535);
+var Signature = __webpack_require__(536);
 
 function EC(options) {
   if (!(this instanceof EC))
@@ -65495,7 +66050,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 
 /***/ }),
-/* 536 */
+/* 535 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65621,7 +66176,7 @@ KeyPair.prototype.inspect = function inspect() {
 
 
 /***/ }),
-/* 537 */
+/* 536 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65763,7 +66318,7 @@ Signature.prototype.toDER = function toDER(enc) {
 
 
 /***/ }),
-/* 538 */
+/* 537 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65774,8 +66329,8 @@ var elliptic = __webpack_require__(20);
 var utils = elliptic.utils;
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
-var KeyPair = __webpack_require__(539);
-var Signature = __webpack_require__(540);
+var KeyPair = __webpack_require__(538);
+var Signature = __webpack_require__(539);
 
 function EDDSA(curve) {
   assert(curve === 'ed25519', 'only tested with ed25519 so far');
@@ -65888,7 +66443,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 
 
 /***/ }),
-/* 539 */
+/* 538 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65991,7 +66546,7 @@ module.exports = KeyPair;
 
 
 /***/ }),
-/* 540 */
+/* 539 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66064,7 +66619,7 @@ module.exports = Signature;
 
 
 /***/ }),
-/* 541 */
+/* 540 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -66850,7 +67405,7 @@ module.exports = {
 
 
 /***/ }),
-/* 542 */
+/* 541 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66977,7 +67532,7 @@ utils.intFromLE = intFromLE;
 
 
 /***/ }),
-/* 543 */
+/* 542 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -67040,7 +67595,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 544 */
+/* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = __webpack_require__(62);
@@ -67137,7 +67692,7 @@ BlockHash.prototype._pad = function pad() {
 
 
 /***/ }),
-/* 545 */
+/* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hmac = exports;
@@ -67191,7 +67746,7 @@ Hmac.prototype.digest = function digest(enc) {
 
 
 /***/ }),
-/* 546 */
+/* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = __webpack_require__(62);
@@ -67341,7 +67896,7 @@ var sh = [
 
 
 /***/ }),
-/* 547 */
+/* 546 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = __webpack_require__(62);
@@ -67911,7 +68466,7 @@ function g1_512_lo(xh, xl) {
 
 
 /***/ }),
-/* 548 */
+/* 547 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var utils = exports;
@@ -68174,7 +68729,7 @@ exports.shr64_lo = shr64_lo;
 
 
 /***/ }),
-/* 549 */
+/* 548 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68294,7 +68849,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 
 
 /***/ }),
-/* 550 */
+/* 549 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -71077,7 +71632,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
 
 /***/ }),
-/* 551 */
+/* 550 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -71167,7 +71722,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 552 */
+/* 551 */
 /***/ (function(module, exports) {
 
 
@@ -71182,7 +71737,7 @@ module.exports = function(arr, obj){
 };
 
 /***/ }),
-/* 553 */
+/* 552 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
@@ -71208,7 +71763,7 @@ return $.ui.version = "1.12.1";
 
 
 /***/ }),
-/* 554 */
+/* 553 */
 /***/ (function(module, exports) {
 
 /**
@@ -71363,7 +71918,7 @@ function plural(ms, n, name) {
 
 
 /***/ }),
-/* 555 */
+/* 554 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -71382,7 +71937,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 556 */
+/* 555 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71392,7 +71947,7 @@ module.exports = {
 
 var asn1 = __webpack_require__(77)
 
-exports.certificate = __webpack_require__(557)
+exports.certificate = __webpack_require__(556)
 
 var RSAPrivateKey = asn1.define('RSAPrivateKey', function () {
   this.seq().obj(
@@ -71511,7 +72066,7 @@ exports.signature = asn1.define('signature', function () {
 
 
 /***/ }),
-/* 557 */
+/* 556 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71606,7 +72161,7 @@ module.exports = X509Certificate
 
 
 /***/ }),
-/* 558 */
+/* 557 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// adapted from https://github.com/apatil/pemstrip
@@ -71643,7 +72198,7 @@ module.exports = function (okey, password) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 559 */
+/* 558 */
 /***/ (function(module, exports) {
 
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
@@ -71667,7 +72222,7 @@ module.exports = function (iterations, keylen) {
 
 
 /***/ }),
-/* 560 */
+/* 559 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71681,7 +72236,7 @@ var pouchdbUtils = __webpack_require__(111);
 var pouchdbBinaryUtils = __webpack_require__(233);
 var pouchdbCollate = __webpack_require__(162);
 var pouchdbMd5 = __webpack_require__(234);
-var pouchdbMapreduceUtils = __webpack_require__(564);
+var pouchdbMapreduceUtils = __webpack_require__(563);
 
 /*
  * Simple task queue to sequentialize actions. Assumes
@@ -72693,7 +73248,7 @@ module.exports = createAbstractMapReduce;
 
 
 /***/ }),
-/* 561 */
+/* 560 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72706,9 +73261,9 @@ var getArguments = _interopDefault(__webpack_require__(129));
 var events = __webpack_require__(84);
 var inherits = _interopDefault(__webpack_require__(5));
 var nextTick = _interopDefault(__webpack_require__(161));
-var debug = _interopDefault(__webpack_require__(520));
+var debug = _interopDefault(__webpack_require__(519));
 var Md5 = _interopDefault(__webpack_require__(300));
-var vuvuzela = _interopDefault(__webpack_require__(784));
+var vuvuzela = _interopDefault(__webpack_require__(783));
 
 /* istanbul ignore next */
 var PouchPromise$1 = typeof Promise === 'function' ? Promise : lie;
@@ -84822,7 +85377,7 @@ module.exports = PouchDB$3;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
 
 /***/ }),
-/* 562 */
+/* 561 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84954,7 +85509,7 @@ exports.generateErrorFromResponse = generateErrorFromResponse;
 
 
 /***/ }),
-/* 563 */
+/* 562 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -84964,8 +85519,8 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var pouchdbUtils = __webpack_require__(111);
 var Promise = _interopDefault(__webpack_require__(110));
-var pouchdbSelectorCore = __webpack_require__(565);
-var abstractMapReduce = _interopDefault(__webpack_require__(560));
+var pouchdbSelectorCore = __webpack_require__(564);
+var abstractMapReduce = _interopDefault(__webpack_require__(559));
 var pouchdbCollate = __webpack_require__(162);
 var pouchdbMd5 = __webpack_require__(234);
 
@@ -86251,7 +86806,7 @@ module.exports = plugin;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50)))
 
 /***/ }),
-/* 564 */
+/* 563 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -86384,7 +86939,7 @@ exports.BuiltInError = BuiltInError;
 
 
 /***/ }),
-/* 565 */
+/* 564 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -86949,7 +87504,7 @@ exports.parseField = parseField;
 
 
 /***/ }),
-/* 566 */
+/* 565 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -87050,11 +87605,11 @@ if (typeof window !== 'undefined' && window.PouchDB) {
 
 
 /***/ }),
-/* 567 */
+/* 566 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.publicEncrypt = __webpack_require__(569);
-exports.privateDecrypt = __webpack_require__(568);
+exports.publicEncrypt = __webpack_require__(568);
+exports.privateDecrypt = __webpack_require__(567);
 
 exports.privateEncrypt = function privateEncrypt(key, buf) {
   return exports.publicEncrypt(key, buf, true);
@@ -87065,7 +87620,7 @@ exports.publicDecrypt = function publicDecrypt(key, buf) {
 };
 
 /***/ }),
-/* 568 */
+/* 567 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(109);
@@ -87179,7 +87734,7 @@ function compare(a, b){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 569 */
+/* 568 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(109);
@@ -87280,7 +87835,7 @@ function nonZero(len, crypto) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 570 */
+/* 569 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var always = __webpack_require__(74);
@@ -87305,7 +87860,7 @@ module.exports = always(false);
 
 
 /***/ }),
-/* 571 */
+/* 570 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var always = __webpack_require__(74);
@@ -87330,7 +87885,7 @@ module.exports = always(true);
 
 
 /***/ }),
-/* 572 */
+/* 571 */
 /***/ (function(module, exports) {
 
 /**
@@ -87363,7 +87918,7 @@ module.exports = {'@@functional/placeholder': true};
 
 
 /***/ }),
-/* 573 */
+/* 572 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _concat = __webpack_require__(34);
@@ -87412,12 +87967,12 @@ module.exports = _curry1(function addIndex(fn) {
 
 
 /***/ }),
-/* 574 */
+/* 573 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xall = __webpack_require__(645);
+var _xall = __webpack_require__(644);
 
 
 /**
@@ -87457,7 +88012,7 @@ module.exports = _curry2(_dispatchable(['all'], _xall, function all(fn, list) {
 
 
 /***/ }),
-/* 575 */
+/* 574 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -87508,7 +88063,7 @@ module.exports = _curry1(function allPass(preds) {
 
 
 /***/ }),
-/* 576 */
+/* 575 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -87560,13 +88115,13 @@ module.exports = _curry1(function anyPass(preds) {
 
 
 /***/ }),
-/* 577 */
+/* 576 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _aperture = __webpack_require__(628);
+var _aperture = __webpack_require__(627);
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xaperture = __webpack_require__(646);
+var _xaperture = __webpack_require__(645);
 
 
 /**
@@ -87594,7 +88149,7 @@ module.exports = _curry2(_dispatchable([], _xaperture, _aperture));
 
 
 /***/ }),
-/* 578 */
+/* 577 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _concat = __webpack_require__(34);
@@ -87627,7 +88182,7 @@ module.exports = _curry2(function append(el, list) {
 
 
 /***/ }),
-/* 579 */
+/* 578 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -87677,7 +88232,7 @@ module.exports = _curry1(function applySpec(spec) {
 
 
 /***/ }),
-/* 580 */
+/* 579 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -87712,7 +88267,7 @@ module.exports = _curry3(function ascend(fn, a, b) {
 
 
 /***/ }),
-/* 581 */
+/* 580 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -87752,7 +88307,7 @@ module.exports = _curry1(function binary(fn) {
 
 
 /***/ }),
-/* 582 */
+/* 581 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -87799,7 +88354,7 @@ module.exports = _curry2(function both(f, g) {
 
 
 /***/ }),
-/* 583 */
+/* 582 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var curry = __webpack_require__(114);
@@ -87842,7 +88397,7 @@ module.exports = curry(function call(fn) {
 
 
 /***/ }),
-/* 584 */
+/* 583 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -87878,7 +88433,7 @@ module.exports = _curry3(function clamp(min, max, value) {
 
 
 /***/ }),
-/* 585 */
+/* 584 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _clone = __webpack_require__(255);
@@ -87914,7 +88469,7 @@ module.exports = _curry1(function clone(value) {
 
 
 /***/ }),
-/* 586 */
+/* 585 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -87948,7 +88503,7 @@ module.exports = _curry1(function comparator(pred) {
 
 
 /***/ }),
-/* 587 */
+/* 586 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var lift = __webpack_require__(122);
@@ -87981,7 +88536,7 @@ module.exports = lift(not);
 
 
 /***/ }),
-/* 588 */
+/* 587 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pipeP = __webpack_require__(283);
@@ -88031,7 +88586,7 @@ module.exports = function composeP() {
 
 
 /***/ }),
-/* 589 */
+/* 588 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
@@ -88084,7 +88639,7 @@ module.exports = _curry1(function cond(pairs) {
 
 
 /***/ }),
-/* 590 */
+/* 589 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -88128,7 +88683,7 @@ module.exports = _curry1(function construct(Fn) {
 
 
 /***/ }),
-/* 591 */
+/* 590 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
@@ -88159,7 +88714,7 @@ module.exports = _curry2(_contains);
 
 
 /***/ }),
-/* 592 */
+/* 591 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var reduceBy = __webpack_require__(124);
@@ -88193,7 +88748,7 @@ module.exports = reduceBy(function(acc, elem) { return acc + 1; }, 0);
 
 
 /***/ }),
-/* 593 */
+/* 592 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var add = __webpack_require__(112);
@@ -88218,7 +88773,7 @@ module.exports = add(-1);
 
 
 /***/ }),
-/* 594 */
+/* 593 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -88253,7 +88808,7 @@ module.exports = _curry3(function descend(fn, a, b) {
 
 
 /***/ }),
-/* 595 */
+/* 594 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -88294,7 +88849,7 @@ module.exports = _curry2(function dissocPath(path, obj) {
 
 
 /***/ }),
-/* 596 */
+/* 595 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -88326,13 +88881,13 @@ module.exports = _curry2(function divide(a, b) { return a / b; });
 
 
 /***/ }),
-/* 597 */
+/* 596 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _dropLast = __webpack_require__(630);
-var _xdropLast = __webpack_require__(649);
+var _dropLast = __webpack_require__(629);
+var _xdropLast = __webpack_require__(648);
 
 
 /**
@@ -88360,13 +88915,13 @@ module.exports = _curry2(_dispatchable([], _xdropLast, _dropLast));
 
 
 /***/ }),
-/* 598 */
+/* 597 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _dropLastWhile = __webpack_require__(631);
-var _xdropLastWhile = __webpack_require__(650);
+var _dropLastWhile = __webpack_require__(630);
+var _xdropLastWhile = __webpack_require__(649);
 
 
 /**
@@ -88395,7 +88950,7 @@ module.exports = _curry2(_dispatchable([], _xdropLastWhile, _dropLastWhile));
 
 
 /***/ }),
-/* 599 */
+/* 598 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -88427,12 +88982,12 @@ module.exports = _curry1(_dispatchable([], _xdropRepeatsWith(equals), dropRepeat
 
 
 /***/ }),
-/* 600 */
+/* 599 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xdropWhile = __webpack_require__(651);
+var _xdropWhile = __webpack_require__(650);
 
 
 /**
@@ -88471,7 +89026,7 @@ module.exports = _curry2(_dispatchable(['dropWhile'], _xdropWhile, function drop
 
 
 /***/ }),
-/* 601 */
+/* 600 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -88517,7 +89072,7 @@ module.exports = _curry2(function either(f, g) {
 
 
 /***/ }),
-/* 602 */
+/* 601 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -88547,7 +89102,7 @@ module.exports = _curry3(function eqBy(f, x, y) {
 
 
 /***/ }),
-/* 603 */
+/* 602 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -88581,7 +89136,7 @@ module.exports = _curry3(function eqProps(prop, obj1, obj2) {
 
 
 /***/ }),
-/* 604 */
+/* 603 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -88629,12 +89184,12 @@ module.exports = _curry2(function evolve(transformations, object) {
 
 
 /***/ }),
-/* 605 */
+/* 604 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xfind = __webpack_require__(653);
+var _xfind = __webpack_require__(652);
 
 
 /**
@@ -88674,12 +89229,12 @@ module.exports = _curry2(_dispatchable(['find'], _xfind, function find(fn, list)
 
 
 /***/ }),
-/* 606 */
+/* 605 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xfindIndex = __webpack_require__(654);
+var _xfindIndex = __webpack_require__(653);
 
 
 /**
@@ -88718,12 +89273,12 @@ module.exports = _curry2(_dispatchable([], _xfindIndex, function findIndex(fn, l
 
 
 /***/ }),
-/* 607 */
+/* 606 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xfindLast = __webpack_require__(655);
+var _xfindLast = __webpack_require__(654);
 
 
 /**
@@ -88760,12 +89315,12 @@ module.exports = _curry2(_dispatchable([], _xfindLast, function findLast(fn, lis
 
 
 /***/ }),
-/* 608 */
+/* 607 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xfindLastIndex = __webpack_require__(656);
+var _xfindLastIndex = __webpack_require__(655);
 
 
 /**
@@ -88803,7 +89358,7 @@ module.exports = _curry2(_dispatchable([], _xfindLastIndex, function findLastInd
 
 
 /***/ }),
-/* 609 */
+/* 608 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -88831,7 +89386,7 @@ module.exports = _curry1(_makeFlat(true));
 
 
 /***/ }),
-/* 610 */
+/* 609 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _checkForMethod = __webpack_require__(85);
@@ -88884,7 +89439,7 @@ module.exports = _curry2(_checkForMethod('forEach', function forEach(fn, list) {
 
 
 /***/ }),
-/* 611 */
+/* 610 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -88926,7 +89481,7 @@ module.exports = _curry2(function forEachObjIndexed(fn, obj) {
 
 
 /***/ }),
-/* 612 */
+/* 611 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -88960,7 +89515,7 @@ module.exports = _curry1(function fromPairs(pairs) {
 
 
 /***/ }),
-/* 613 */
+/* 612 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _checkForMethod = __webpack_require__(85);
@@ -89017,7 +89572,7 @@ module.exports = _curry2(_checkForMethod('groupBy', reduceBy(function(acc, item)
 
 
 /***/ }),
-/* 614 */
+/* 613 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89065,7 +89620,7 @@ module.exports = _curry2(function(fn, list) {
 
 
 /***/ }),
-/* 615 */
+/* 614 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89096,7 +89651,7 @@ module.exports = _curry2(function gt(a, b) { return a > b; });
 
 
 /***/ }),
-/* 616 */
+/* 615 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89127,7 +89682,7 @@ module.exports = _curry2(function gte(a, b) { return a >= b; });
 
 
 /***/ }),
-/* 617 */
+/* 616 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89162,7 +89717,7 @@ module.exports = _curry2(_has);
 
 
 /***/ }),
-/* 618 */
+/* 617 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89200,7 +89755,7 @@ module.exports = _curry2(function hasIn(prop, obj) {
 
 
 /***/ }),
-/* 619 */
+/* 618 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nth = __webpack_require__(88);
@@ -89231,7 +89786,7 @@ module.exports = nth(0);
 
 
 /***/ }),
-/* 620 */
+/* 619 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -89273,7 +89828,7 @@ module.exports = _curry3(function ifElse(condition, onTrue, onFalse) {
 
 
 /***/ }),
-/* 621 */
+/* 620 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var add = __webpack_require__(112);
@@ -89298,7 +89853,7 @@ module.exports = add(1);
 
 
 /***/ }),
-/* 622 */
+/* 621 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var reduceBy = __webpack_require__(124);
@@ -89330,7 +89885,7 @@ module.exports = reduceBy(function(acc, elem) { return elem; }, null);
 
 
 /***/ }),
-/* 623 */
+/* 622 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89365,7 +89920,7 @@ module.exports = _curry2(function indexOf(target, xs) {
 
 
 /***/ }),
-/* 624 */
+/* 623 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var slice = __webpack_require__(65);
@@ -89399,7 +89954,7 @@ module.exports = slice(0, -1);
 
 
 /***/ }),
-/* 625 */
+/* 624 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -89432,7 +89987,7 @@ module.exports = _curry3(function insert(idx, elt, list) {
 
 
 /***/ }),
-/* 626 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -89465,7 +90020,7 @@ module.exports = _curry3(function insertAll(idx, elts, list) {
 
 
 /***/ }),
-/* 627 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
@@ -89642,7 +90197,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 628 */
+/* 627 */
 /***/ (function(module, exports) {
 
 module.exports = function _aperture(n, list) {
@@ -89658,7 +90213,7 @@ module.exports = function _aperture(n, list) {
 
 
 /***/ }),
-/* 629 */
+/* 628 */
 /***/ (function(module, exports) {
 
 module.exports = function _arrayFromIterator(iter) {
@@ -89672,7 +90227,7 @@ module.exports = function _arrayFromIterator(iter) {
 
 
 /***/ }),
-/* 630 */
+/* 629 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var take = __webpack_require__(288);
@@ -89683,7 +90238,7 @@ module.exports = function dropLast(n, xs) {
 
 
 /***/ }),
-/* 631 */
+/* 630 */
 /***/ (function(module, exports) {
 
 module.exports = function dropLastWhile(pred, list) {
@@ -89696,11 +90251,11 @@ module.exports = function dropLastWhile(pred, list) {
 
 
 /***/ }),
-/* 632 */
+/* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _arrayFromIterator = __webpack_require__(629);
-var _functionName = __webpack_require__(635);
+var _arrayFromIterator = __webpack_require__(628);
+var _functionName = __webpack_require__(634);
 var _has = __webpack_require__(21);
 var identical = __webpack_require__(254);
 var keys = __webpack_require__(41);
@@ -89811,10 +90366,10 @@ module.exports = function _equals(a, b, stackA, stackB) {
 
 
 /***/ }),
-/* 633 */
+/* 632 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _forceReduced = __webpack_require__(634);
+var _forceReduced = __webpack_require__(633);
 var _reduce = __webpack_require__(30);
 var _xfBase = __webpack_require__(15);
 var isArrayLike = __webpack_require__(87);
@@ -89849,7 +90404,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 634 */
+/* 633 */
 /***/ (function(module, exports) {
 
 module.exports = function _forceReduced(x) {
@@ -89861,7 +90416,7 @@ module.exports = function _forceReduced(x) {
 
 
 /***/ }),
-/* 635 */
+/* 634 */
 /***/ (function(module, exports) {
 
 module.exports = function _functionName(f) {
@@ -89872,7 +90427,7 @@ module.exports = function _functionName(f) {
 
 
 /***/ }),
-/* 636 */
+/* 635 */
 /***/ (function(module, exports) {
 
 module.exports = function _isRegExp(x) {
@@ -89881,7 +90436,7 @@ module.exports = function _isRegExp(x) {
 
 
 /***/ }),
-/* 637 */
+/* 636 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _has = __webpack_require__(21);
@@ -89911,14 +90466,14 @@ module.exports = function _objectAssign(target) {
 
 
 /***/ }),
-/* 638 */
+/* 637 */
 /***/ (function(module, exports) {
 
 module.exports = function _of(x) { return [x]; };
 
 
 /***/ }),
-/* 639 */
+/* 638 */
 /***/ (function(module, exports) {
 
 module.exports = function _pipe(f, g) {
@@ -89929,7 +90484,7 @@ module.exports = function _pipe(f, g) {
 
 
 /***/ }),
-/* 640 */
+/* 639 */
 /***/ (function(module, exports) {
 
 module.exports = function _pipeP(f, g) {
@@ -89943,7 +90498,7 @@ module.exports = function _pipeP(f, g) {
 
 
 /***/ }),
-/* 641 */
+/* 640 */
 /***/ (function(module, exports) {
 
 module.exports = function _quote(s) {
@@ -89962,7 +90517,7 @@ module.exports = function _quote(s) {
 
 
 /***/ }),
-/* 642 */
+/* 641 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _assign = __webpack_require__(171);
@@ -90016,7 +90571,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 643 */
+/* 642 */
 /***/ (function(module, exports) {
 
 /**
@@ -90044,13 +90599,13 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 644 */
+/* 643 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
 var _map = __webpack_require__(120);
-var _quote = __webpack_require__(641);
-var _toISOString = __webpack_require__(643);
+var _quote = __webpack_require__(640);
+var _toISOString = __webpack_require__(642);
 var keys = __webpack_require__(41);
 var reject = __webpack_require__(125);
 
@@ -90096,7 +90651,7 @@ module.exports = function _toString(x, seen) {
 
 
 /***/ }),
-/* 645 */
+/* 644 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90130,7 +90685,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 646 */
+/* 645 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _concat = __webpack_require__(34);
@@ -90172,11 +90727,11 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 647 */
+/* 646 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var _flatCat = __webpack_require__(633);
+var _flatCat = __webpack_require__(632);
 var map = __webpack_require__(27);
 
 
@@ -90186,7 +90741,7 @@ module.exports = _curry2(function _xchain(f, xf) {
 
 
 /***/ }),
-/* 648 */
+/* 647 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90213,7 +90768,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 649 */
+/* 648 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90253,7 +90808,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 650 */
+/* 649 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90294,7 +90849,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 651 */
+/* 650 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90323,7 +90878,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 652 */
+/* 651 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90346,7 +90901,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 653 */
+/* 652 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90380,7 +90935,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 654 */
+/* 653 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90416,7 +90971,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 655 */
+/* 654 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90444,7 +90999,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 656 */
+/* 655 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90475,7 +91030,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 657 */
+/* 656 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90498,7 +91053,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 658 */
+/* 657 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curryN = __webpack_require__(116);
@@ -90544,7 +91099,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 659 */
+/* 658 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90570,7 +91125,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 660 */
+/* 659 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90594,7 +91149,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 661 */
+/* 660 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
@@ -90635,7 +91190,7 @@ module.exports = _curry2(function intersection(list1, list2) {
 
 
 /***/ }),
-/* 662 */
+/* 661 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _containsWith = __webpack_require__(172);
@@ -90700,7 +91255,7 @@ module.exports = _curry3(function intersectionWith(pred, list1, list2) {
 
 
 /***/ }),
-/* 663 */
+/* 662 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _checkForMethod = __webpack_require__(85);
@@ -90741,14 +91296,14 @@ module.exports = _curry2(_checkForMethod('intersperse', function intersperse(sep
 
 
 /***/ }),
-/* 664 */
+/* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _clone = __webpack_require__(255);
 var _curry3 = __webpack_require__(4);
 var _isTransformer = __webpack_require__(174);
 var _reduce = __webpack_require__(30);
-var _stepCat = __webpack_require__(642);
+var _stepCat = __webpack_require__(641);
 
 
 /**
@@ -90796,7 +91351,7 @@ module.exports = _curry3(function into(acc, xf, list) {
 
 
 /***/ }),
-/* 665 */
+/* 664 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -90844,7 +91399,7 @@ module.exports = _curry1(function invert(obj) {
 
 
 /***/ }),
-/* 666 */
+/* 665 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -90893,7 +91448,7 @@ module.exports = _curry1(function invertObj(obj) {
 
 
 /***/ }),
-/* 667 */
+/* 666 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -90928,7 +91483,7 @@ module.exports = _curry1(function isEmpty(x) {
 
 
 /***/ }),
-/* 668 */
+/* 667 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -90955,7 +91510,7 @@ module.exports = _curry1(function isNil(x) { return x == null; });
 
 
 /***/ }),
-/* 669 */
+/* 668 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var invoker = __webpack_require__(86);
@@ -90984,7 +91539,7 @@ module.exports = invoker(1, 'join');
 
 
 /***/ }),
-/* 670 */
+/* 669 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91021,7 +91576,7 @@ module.exports = _curry1(function keysIn(obj) {
 
 
 /***/ }),
-/* 671 */
+/* 670 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91065,7 +91620,7 @@ module.exports = _curry2(function lastIndexOf(target, xs) {
 
 
 /***/ }),
-/* 672 */
+/* 671 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91100,7 +91655,7 @@ module.exports = _curry1(function lensIndex(n) {
 
 
 /***/ }),
-/* 673 */
+/* 672 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91139,7 +91694,7 @@ module.exports = _curry1(function lensPath(p) {
 
 
 /***/ }),
-/* 674 */
+/* 673 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91174,7 +91729,7 @@ module.exports = _curry1(function lensProp(k) {
 
 
 /***/ }),
-/* 675 */
+/* 674 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91205,7 +91760,7 @@ module.exports = _curry2(function lt(a, b) { return a < b; });
 
 
 /***/ }),
-/* 676 */
+/* 675 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91236,7 +91791,7 @@ module.exports = _curry2(function lte(a, b) { return a <= b; });
 
 
 /***/ }),
-/* 677 */
+/* 676 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -91291,7 +91846,7 @@ module.exports = _curry3(function mapAccum(fn, acc, list) {
 
 
 /***/ }),
-/* 678 */
+/* 677 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -91348,7 +91903,7 @@ module.exports = _curry3(function mapAccumRight(fn, acc, list) {
 
 
 /***/ }),
-/* 679 */
+/* 678 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91386,7 +91941,7 @@ module.exports = _curry2(function mapObjIndexed(fn, obj) {
 
 
 /***/ }),
-/* 680 */
+/* 679 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91419,7 +91974,7 @@ module.exports = _curry2(function match(rx, str) {
 
 
 /***/ }),
-/* 681 */
+/* 680 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91466,7 +92021,7 @@ module.exports = _curry2(function mathMod(m, p) {
 
 
 /***/ }),
-/* 682 */
+/* 681 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -91502,7 +92057,7 @@ module.exports = _curry3(function maxBy(f, a, b) {
 
 
 /***/ }),
-/* 683 */
+/* 682 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91539,7 +92094,7 @@ module.exports = _curry1(function median(list) {
 
 
 /***/ }),
-/* 684 */
+/* 683 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
@@ -91587,7 +92142,7 @@ module.exports = _curry1(function memoize(fn) {
 
 
 /***/ }),
-/* 685 */
+/* 684 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _assign = __webpack_require__(171);
@@ -91623,7 +92178,7 @@ module.exports = _curry2(function merge(l, r) {
 
 
 /***/ }),
-/* 686 */
+/* 685 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _assign = __webpack_require__(171);
@@ -91653,7 +92208,7 @@ module.exports = _curry1(function mergeAll(list) {
 
 
 /***/ }),
-/* 687 */
+/* 686 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -91692,7 +92247,7 @@ module.exports = _curry3(function mergeWith(fn, l, r) {
 
 
 /***/ }),
-/* 688 */
+/* 687 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91719,7 +92274,7 @@ module.exports = _curry2(function min(a, b) { return b < a ? b : a; });
 
 
 /***/ }),
-/* 689 */
+/* 688 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -91755,7 +92310,7 @@ module.exports = _curry3(function minBy(f, a, b) {
 
 
 /***/ }),
-/* 690 */
+/* 689 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91790,7 +92345,7 @@ module.exports = _curry2(function modulo(a, b) { return a % b; });
 
 
 /***/ }),
-/* 691 */
+/* 690 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91814,7 +92369,7 @@ module.exports = _curry1(function negate(n) { return -n; });
 
 
 /***/ }),
-/* 692 */
+/* 691 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _complement = __webpack_require__(257);
@@ -91850,7 +92405,7 @@ module.exports = _curry2(_complement(_dispatchable(['any'], _xany, any)));
 
 
 /***/ }),
-/* 693 */
+/* 692 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91885,11 +92440,11 @@ module.exports = _curry1(function nthArg(n) {
 
 
 /***/ }),
-/* 694 */
+/* 693 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var _of = __webpack_require__(638);
+var _of = __webpack_require__(637);
 
 
 /**
@@ -91914,7 +92469,7 @@ module.exports = _curry1(_of);
 
 
 /***/ }),
-/* 695 */
+/* 694 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
@@ -91949,7 +92504,7 @@ module.exports = _curry2(function omit(names, obj) {
 
 
 /***/ }),
-/* 696 */
+/* 695 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
@@ -91990,7 +92545,7 @@ module.exports = _curry1(function once(fn) {
 
 
 /***/ }),
-/* 697 */
+/* 696 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92016,7 +92571,7 @@ module.exports = _curry2(function pair(fst, snd) { return [fst, snd]; });
 
 
 /***/ }),
-/* 698 */
+/* 697 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _concat = __webpack_require__(34);
@@ -92055,7 +92610,7 @@ module.exports = _createPartialApplicator(_concat);
 
 
 /***/ }),
-/* 699 */
+/* 698 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _concat = __webpack_require__(34);
@@ -92091,7 +92646,7 @@ module.exports = _createPartialApplicator(flip(_concat));
 
 
 /***/ }),
-/* 700 */
+/* 699 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var filter = __webpack_require__(169);
@@ -92126,7 +92681,7 @@ module.exports = juxt([filter, reject]);
 
 
 /***/ }),
-/* 701 */
+/* 700 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92164,7 +92719,7 @@ module.exports = _curry3(function pathEq(_path, val, obj) {
 
 
 /***/ }),
-/* 702 */
+/* 701 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92197,7 +92752,7 @@ module.exports = _curry3(function pathOr(d, p, obj) {
 
 
 /***/ }),
-/* 703 */
+/* 702 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92229,7 +92784,7 @@ module.exports = _curry3(function pathSatisfies(pred, propPath, obj) {
 
 
 /***/ }),
-/* 704 */
+/* 703 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92267,7 +92822,7 @@ module.exports = _curry2(function pick(names, obj) {
 
 
 /***/ }),
-/* 705 */
+/* 704 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92305,7 +92860,7 @@ module.exports = _curry2(function pickBy(test, obj) {
 
 
 /***/ }),
-/* 706 */
+/* 705 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var composeK = __webpack_require__(244);
@@ -92354,7 +92909,7 @@ module.exports = function pipeK() {
 
 
 /***/ }),
-/* 707 */
+/* 706 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var multiply = __webpack_require__(276);
@@ -92380,7 +92935,7 @@ module.exports = reduce(multiply, 1);
 
 
 /***/ }),
-/* 708 */
+/* 707 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _map = __webpack_require__(120);
@@ -92412,7 +92967,7 @@ module.exports = useWith(_map, [pickAll, identity]); // passing `identity` gives
 
 
 /***/ }),
-/* 709 */
+/* 708 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92449,7 +93004,7 @@ module.exports = _curry3(function propEq(name, val, obj) {
 
 
 /***/ }),
-/* 710 */
+/* 709 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92482,7 +93037,7 @@ module.exports = _curry3(function propIs(type, name, obj) {
 
 
 /***/ }),
-/* 711 */
+/* 710 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92521,7 +93076,7 @@ module.exports = _curry3(function propOr(val, p, obj) {
 
 
 /***/ }),
-/* 712 */
+/* 711 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92551,7 +93106,7 @@ module.exports = _curry3(function propSatisfies(pred, name, obj) {
 
 
 /***/ }),
-/* 713 */
+/* 712 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92592,7 +93147,7 @@ module.exports = _curry2(function props(ps, obj) {
 
 
 /***/ }),
-/* 714 */
+/* 713 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92630,7 +93185,7 @@ module.exports = _curry2(function range(from, to) {
 
 
 /***/ }),
-/* 715 */
+/* 714 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curryN = __webpack_require__(116);
@@ -92675,7 +93230,7 @@ module.exports = _curryN(4, [], function _reduceWhile(pred, fn, a, list) {
 
 
 /***/ }),
-/* 716 */
+/* 715 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -92709,7 +93264,7 @@ module.exports = _curry1(_reduced);
 
 
 /***/ }),
-/* 717 */
+/* 716 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92742,7 +93297,7 @@ module.exports = _curry3(function remove(start, count, list) {
 
 
 /***/ }),
-/* 718 */
+/* 717 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92778,7 +93333,7 @@ module.exports = _curry2(function repeat(value, n) {
 
 
 /***/ }),
-/* 719 */
+/* 718 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92810,7 +93365,7 @@ module.exports = _curry3(function replace(regex, replacement, str) {
 
 
 /***/ }),
-/* 720 */
+/* 719 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92850,7 +93405,7 @@ module.exports = _curry3(function scan(fn, acc, list) {
 
 
 /***/ }),
-/* 721 */
+/* 720 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92886,7 +93441,7 @@ module.exports = _curry3(function set(lens, v, x) {
 
 
 /***/ }),
-/* 722 */
+/* 721 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92918,7 +93473,7 @@ module.exports = _curry2(function sort(comparator, list) {
 
 
 /***/ }),
-/* 723 */
+/* 722 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92966,7 +93521,7 @@ module.exports = _curry2(function sortBy(fn, list) {
 
 
 /***/ }),
-/* 724 */
+/* 723 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93018,7 +93573,7 @@ module.exports = _curry2(function sortWith(fns, list) {
 
 
 /***/ }),
-/* 725 */
+/* 724 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var invoker = __webpack_require__(86);
@@ -93048,7 +93603,7 @@ module.exports = invoker(1, 'split');
 
 
 /***/ }),
-/* 726 */
+/* 725 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93080,7 +93635,7 @@ module.exports = _curry2(function splitAt(index, array) {
 
 
 /***/ }),
-/* 727 */
+/* 726 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93118,7 +93673,7 @@ module.exports = _curry2(function splitEvery(n, list) {
 
 
 /***/ }),
-/* 728 */
+/* 727 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93158,7 +93713,7 @@ module.exports = _curry2(function splitWhen(pred, list) {
 
 
 /***/ }),
-/* 729 */
+/* 728 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93193,7 +93748,7 @@ module.exports = _curry2(function subtract(a, b) {
 
 
 /***/ }),
-/* 730 */
+/* 729 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93225,7 +93780,7 @@ module.exports = _curry2(function symmetricDifference(list1, list2) {
 
 
 /***/ }),
-/* 731 */
+/* 730 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93261,7 +93816,7 @@ module.exports = _curry3(function symmetricDifferenceWith(pred, list1, list2) {
 
 
 /***/ }),
-/* 732 */
+/* 731 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93296,7 +93851,7 @@ module.exports = _curry2(function takeLast(n, xs) {
 
 
 /***/ }),
-/* 733 */
+/* 732 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93334,12 +93889,12 @@ module.exports = _curry2(function takeLastWhile(fn, list) {
 
 
 /***/ }),
-/* 734 */
+/* 733 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xtakeWhile = __webpack_require__(660);
+var _xtakeWhile = __webpack_require__(659);
 
 
 /**
@@ -93379,7 +93934,7 @@ module.exports = _curry2(_dispatchable(['takeWhile'], _xtakeWhile, function take
 
 
 /***/ }),
-/* 735 */
+/* 734 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93410,12 +93965,12 @@ module.exports = _curry2(function tap(fn, x) {
 
 
 /***/ }),
-/* 736 */
+/* 735 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _cloneRegExp = __webpack_require__(256);
 var _curry2 = __webpack_require__(0);
-var _isRegExp = __webpack_require__(636);
+var _isRegExp = __webpack_require__(635);
 var toString = __webpack_require__(91);
 
 
@@ -93445,7 +94000,7 @@ module.exports = _curry2(function test(pattern, str) {
 
 
 /***/ }),
-/* 737 */
+/* 736 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var invoker = __webpack_require__(86);
@@ -93470,7 +94025,7 @@ module.exports = invoker(0, 'toLowerCase');
 
 
 /***/ }),
-/* 738 */
+/* 737 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -93507,7 +94062,7 @@ module.exports = _curry1(function toPairs(obj) {
 
 
 /***/ }),
-/* 739 */
+/* 738 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -93544,7 +94099,7 @@ module.exports = _curry1(function toPairsIn(obj) {
 
 
 /***/ }),
-/* 740 */
+/* 739 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var invoker = __webpack_require__(86);
@@ -93569,7 +94124,7 @@ module.exports = invoker(0, 'toUpperCase');
 
 
 /***/ }),
-/* 741 */
+/* 740 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _reduce = __webpack_require__(30);
@@ -93627,7 +94182,7 @@ module.exports = curryN(4, function transduce(xf, fn, acc, list) {
 
 
 /***/ }),
-/* 742 */
+/* 741 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -93678,7 +94233,7 @@ module.exports = _curry1(function transpose(outerlist) {
 
 
 /***/ }),
-/* 743 */
+/* 742 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93718,7 +94273,7 @@ module.exports = _curry3(function traverse(of, f, traversable) {
 
 
 /***/ }),
-/* 744 */
+/* 743 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -93760,7 +94315,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 745 */
+/* 744 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
@@ -93801,7 +94356,7 @@ module.exports = _curry2(function _tryCatch(tryer, catcher) {
 
 
 /***/ }),
-/* 746 */
+/* 745 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -93839,7 +94394,7 @@ module.exports = _curry1(function unapply(fn) {
 
 
 /***/ }),
-/* 747 */
+/* 746 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -93879,7 +94434,7 @@ module.exports = _curry1(function unary(fn) {
 
 
 /***/ }),
-/* 748 */
+/* 747 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93923,7 +94478,7 @@ module.exports = _curry2(function uncurryN(depth, fn) {
 
 
 /***/ }),
-/* 749 */
+/* 748 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93966,7 +94521,7 @@ module.exports = _curry2(function unfold(fn, seed) {
 
 
 /***/ }),
-/* 750 */
+/* 749 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _concat = __webpack_require__(34);
@@ -93996,7 +94551,7 @@ module.exports = _curry2(compose(uniq, _concat));
 
 
 /***/ }),
-/* 751 */
+/* 750 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _concat = __webpack_require__(34);
@@ -94032,7 +94587,7 @@ module.exports = _curry3(function unionWith(pred, list1, list2) {
 
 
 /***/ }),
-/* 752 */
+/* 751 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -94069,7 +94624,7 @@ module.exports = _curry3(function unless(pred, whenFalseFn, x) {
 
 
 /***/ }),
-/* 753 */
+/* 752 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _identity = __webpack_require__(173);
@@ -94097,7 +94652,7 @@ module.exports = chain(_identity);
 
 
 /***/ }),
-/* 754 */
+/* 753 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -94132,7 +94687,7 @@ module.exports = _curry3(function until(pred, fn, init) {
 
 
 /***/ }),
-/* 755 */
+/* 754 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -94169,7 +94724,7 @@ module.exports = _curry1(function valuesIn(obj) {
 
 
 /***/ }),
-/* 756 */
+/* 755 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94211,7 +94766,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 757 */
+/* 756 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -94251,7 +94806,7 @@ module.exports = _curry3(function when(pred, whenTrueFn, x) {
 
 
 /***/ }),
-/* 758 */
+/* 757 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94293,7 +94848,7 @@ module.exports = _curry2(function whereEq(spec, testObj) {
 
 
 /***/ }),
-/* 759 */
+/* 758 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
@@ -94327,7 +94882,7 @@ module.exports = _curry2(function(xs, list) {
 
 
 /***/ }),
-/* 760 */
+/* 759 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94370,7 +94925,7 @@ module.exports = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes 
 
 
 /***/ }),
-/* 761 */
+/* 760 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94408,7 +94963,7 @@ module.exports = _curry2(function zip(a, b) {
 
 
 /***/ }),
-/* 762 */
+/* 761 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94444,7 +94999,7 @@ module.exports = _curry2(function zipObj(keys, values) {
 
 
 /***/ }),
-/* 763 */
+/* 762 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -94487,14 +95042,14 @@ module.exports = _curry3(function zipWith(fn, a, b) {
 
 
 /***/ }),
-/* 764 */
+/* 763 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(66);
 
 
 /***/ }),
-/* 765 */
+/* 764 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -94526,7 +95081,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 766 */
+/* 765 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -94596,7 +95151,7 @@ BufferList.prototype.concat = function (n) {
 };
 
 /***/ }),
-/* 767 */
+/* 766 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -94607,29 +95162,29 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 768 */
+/* 767 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(181).PassThrough
 
 
 /***/ }),
-/* 769 */
+/* 768 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(181).Transform
 
 
 /***/ }),
-/* 770 */
+/* 769 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(180);
 
 
 /***/ }),
-/* 771 */,
-/* 772 */
+/* 770 */,
+/* 771 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -94846,7 +95401,7 @@ module.exports = ripemd160
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 773 */
+/* 772 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -95039,7 +95594,7 @@ module.exports = ripemd160
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35), __webpack_require__(50)))
 
 /***/ }),
-/* 774 */
+/* 773 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var exports = module.exports = function SHA (algorithm) {
@@ -95051,16 +95606,16 @@ var exports = module.exports = function SHA (algorithm) {
   return new Algorithm()
 }
 
-exports.sha = __webpack_require__(775)
-exports.sha1 = __webpack_require__(776)
-exports.sha224 = __webpack_require__(777)
+exports.sha = __webpack_require__(774)
+exports.sha1 = __webpack_require__(775)
+exports.sha224 = __webpack_require__(776)
 exports.sha256 = __webpack_require__(298)
-exports.sha384 = __webpack_require__(778)
+exports.sha384 = __webpack_require__(777)
 exports.sha512 = __webpack_require__(299)
 
 
 /***/ }),
-/* 775 */
+/* 774 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -95160,7 +95715,7 @@ module.exports = Sha
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 776 */
+/* 775 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -95265,7 +95820,7 @@ module.exports = Sha1
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 777 */
+/* 776 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/**
@@ -95324,7 +95879,7 @@ module.exports = Sha224
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 778 */
+/* 777 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var inherits = __webpack_require__(5)
@@ -95387,7 +95942,7 @@ module.exports = Sha384
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 779 */
+/* 778 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -95424,7 +95979,7 @@ var stylesInDom = {},
 	singletonElement = null,
 	singletonCounter = 0,
 	styleElementsInsertedAtTop = [],
-	fixUrls = __webpack_require__(780);
+	fixUrls = __webpack_require__(779);
 
 module.exports = function(list, options) {
 	if(typeof DEBUG !== "undefined" && DEBUG) {
@@ -95700,7 +96255,7 @@ function updateLink(linkElement, options, obj) {
 
 
 /***/ }),
-/* 780 */
+/* 779 */
 /***/ (function(module, exports) {
 
 
@@ -95795,7 +96350,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 781 */
+/* 780 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -95848,13 +96403,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(773);
+__webpack_require__(772);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 782 */
+/* 781 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -95928,10 +96483,10 @@ function config (name) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
 
 /***/ }),
-/* 783 */
+/* 782 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var indexOf = __webpack_require__(552);
+var indexOf = __webpack_require__(551);
 
 var Object_keys = function (obj) {
     if (Object.keys) return Object.keys(obj)
@@ -96072,7 +96627,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 784 */
+/* 783 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -96252,7 +96807,7 @@ exports.parse = function (str) {
 
 
 /***/ }),
-/* 785 */
+/* 784 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -96280,16 +96835,16 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 786 */
+/* 785 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 787 */
+/* 786 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
-],[321]);
+],[320]);

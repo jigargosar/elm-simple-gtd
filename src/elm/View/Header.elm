@@ -114,7 +114,11 @@ defaultHeader m =
         div [ class "flex-auto layout horizontal justified center" ]
             [ h2 [ class "ellipsis" ] [ title |> text ]
             , div []
-                [ Paper.menuButton [ dynamicAlign, boolProperty "noOverlap" True ]
+                [ Paper.menuButton
+                    [ dynamicAlign
+                    , boolProperty "noOverlap" True
+                    , boolProperty "closeOnActivate" True
+                    ]
                     [ Html.node "iron-icon"
                         [ userAccountAttribute
                         , class "account"

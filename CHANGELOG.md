@@ -1,3 +1,6 @@
+## Upcoming
+* sync pouch dbs to firebase 
+
 ## v0.11.2 - 2017-05-18
 * update read me to show build status
 * travis - add build dev script 

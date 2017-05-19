@@ -74,7 +74,7 @@ contextDropdown model =
                 onItemClick =
                     Msg.SetTodoContext # todo
             in
-                Paper.material [ id "context-dropdown" ]
+                Paper.material [ id "context-dropdown", attribute "data-prevent-default-keys" "Tab" ]
                     [ Paper.listbox []
                         (Model.getActiveContexts model .|> createListItem onItemClick)
                     ]

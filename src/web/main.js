@@ -24,10 +24,6 @@ const firebaseProdConfig = {
 const firebaseConfig =
     IS_DEVELOPMENT_ENV ? firebaseDevConfig : firebaseProdConfig
 
-
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-
 const cryptoRandomString = require('crypto-random-string');
 
 require("./pcss/main.pcss")
@@ -50,8 +46,8 @@ const pkg = packageJSON
 //            .then(boot)
 //            .catch(console.error)
 boot().catch(console.error)
-async function boot(user) {
-    console.log("firebase user", user)
+async function boot() {
+    const firebaseApp = firebase.initializeApp(firebaseConfig);
     const deviceId = getOrCreateDeviceId()
     const $elm = $("#elm-app-container")
     $elm.trap();

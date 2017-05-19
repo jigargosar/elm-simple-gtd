@@ -51,9 +51,8 @@ deploy:
     on:
       branch: master
 
-  - provider: firebase
+  - provider: script
     skip_cleanup: true
-    token: $FIREBASE_TOKEN_PROD
-    project: "prod"
+    script: ./node_modules/.bin/firebase deploy --project prod --public docs --token $FIREBASE_TOKEN_PROD
     on:
       branch: master

@@ -6,7 +6,7 @@ import Document
 import EditMode exposing (EditMode)
 import Ext.Keyboard exposing (KeyboardEvent)
 import Lazy
-import Model exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupByEntity(GroupByContext, GroupByProject), MainViewType(..), GroupByViewType(..))
+import Model exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupByEntity(GroupByContext, GroupByProject), ViewType(..), GroupByViewType(..))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)

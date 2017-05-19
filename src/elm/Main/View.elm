@@ -18,8 +18,7 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
-
-import Model exposing (Entity(..), GroupByViewType(..), MainViewType(..), Model)
+import Model exposing (Entity(..), GroupByViewType(..), ViewType(..), Model)
 import View.TodoList
 import ViewModel exposing (EntityView(..))
 

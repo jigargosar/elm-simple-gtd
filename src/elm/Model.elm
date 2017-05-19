@@ -39,7 +39,7 @@ type GroupByViewType
     | ProjectView Document.Id
 
 
-type MainViewType
+type ViewType
     = EntityListView GroupByViewType
     | DoneView
     | BinView
@@ -52,7 +52,7 @@ type alias Model =
     , projectStore : Project.Store
     , contextStore : Context.Store
     , editMode : EditMode
-    , mainViewType : MainViewType
+    , mainViewType : ViewType
     , keyboardState : Keyboard.State
     , showDeleted : Bool
     , reminderOverlay : ReminderOverlay.Model
@@ -81,7 +81,7 @@ type alias EntityFocus =
 
 type ModelField
     = NowField Time
-    | MainViewTypeField MainViewType
+    | MainViewTypeField ViewType
 
 
 type alias ModelF =
@@ -830,12 +830,12 @@ onExternalEntityChange dbName encodedEntity =
             identity
 
 
-getMainViewType : Model -> MainViewType
+getMainViewType : Model -> ViewType
 getMainViewType =
     (.mainViewType)
 
 
-setMainViewType : MainViewType -> ModelF
+setMainViewType : ViewType -> ModelF
 setMainViewType mainViewType model =
     { model | mainViewType = mainViewType }
         |> clearSelection

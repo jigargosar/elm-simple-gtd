@@ -117,10 +117,14 @@ updateExternal encodedDoc store =
 
 
 insertExternal doc store =
-    asIdDict store
-        |> Dict.insert (Document.getId doc) doc
-        |> Dict.values
-        |> (setList # store)
+    let
+        _ =
+            Debug.log "exter doc change adding to store" (doc)
+    in
+        asIdDict store
+            |> Dict.insert (Document.getId doc) doc
+            |> Dict.values
+            |> (setList # store)
 
 
 updateExternalHelp newDoc store =

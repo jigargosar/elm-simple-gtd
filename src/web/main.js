@@ -105,9 +105,10 @@ async function boot() {
 
 
     _.mapObjIndexed((db, name) => db.onChange(
-        (doc) =>
-            // console.log(name, ":", doc.name || doc.text)
-            app.ports["pouchDBChanges"].send([name, doc])
+        (doc) => {
+            console.log(`app.ports["pouchDBChanges"]:`,name, ":", doc.name || doc.text)
+            return app.ports["pouchDBChanges"].send([name, doc])
+        }
     ))(dbMap)
 
     app.ports["syncWithRemotePouch"].subscribe(async (uri) => {
@@ -117,11 +118,7 @@ async function boot() {
 
 
     app.ports["pouchDBUpsert"].subscribe(async ([dbName, id, doc]) => {
-        // console.log("upserting", dbName, doc, id)
-        const upsertResult = await dbMap[dbName].upsert(id, doc)
-        if (_.F()) {
-            console.log("upsertResult", upsertResult)
-        }
+        dbMap[dbName].upsert(id, doc).catch(console.error)
     });
 
 
@@ -190,7 +187,7 @@ async function boot() {
         const changeStream = Kefir.fromEvents(changes, "change")
 
         Kefir.merge([changeStream, errorStream])
-             .log()
+             // .log()
              .map((change) => {
                  return firebaseApp
                      .database().ref(`/users/${uid}/todo-db/${change.id}`)
@@ -201,8 +198,24 @@ async function boot() {
                      })
              })
              .flatMap(Kefir.fromPromise)
-             .onValue(val => console.log("onValue", val))
+             .onValue(val => console.log("fireSyncSuccess:", val))
              .onError(e => console.error("fireSyncError: ", e))
+
+        const todoDbRef = firebaseApp
+            .database()
+            .ref(`/users/${uid}/todo-db`)
+            .orderByChild("modifiedAt")
+            .startAt(Date.now())
+
+        todoDbRef.on("child_added", (snap) => {
+            db.upsert(snap.key, snap.val())
+              .catch(console.error)
+        })
+
+        todoDbRef.on("child_changed", (snap) => {
+            db.upsert(snap.key, snap.val())
+              .catch(console.error)
+        })
     })
 
     app.ports["fireDataPush"].subscribe(([path, value]) => {

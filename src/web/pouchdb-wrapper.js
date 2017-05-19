@@ -27,8 +27,23 @@ export default async (dbName, indices = []) => {
         return db.bulkDocs(docs)
     }
 
-    function upsert(id, doc) {
-        return db.upsert(id, _.always(doc))
+    async function upsert(id, doc) {
+        console.log("upsert: doc", dbName, doc, id)
+        const upsertResult = await db.upsert(id, oldDoc => {
+            console.log("upsert: oldDoc ", dbName, oldDoc, id)
+            // const isDocModified = oldDoc.modifiedAt !== doc.modifiedAt
+            // console.log("isDocModified", isDocModified)
+            const areDocsSame = _.equals(_.merge(doc, oldDoc), _.merge(oldDoc, doc))
+
+            if (areDocsSame) {
+                console.log("upsert: ignoring update since docs are same: ", areDocsSame)
+            } else {
+                console.log("upsert: adding new doc since docs are not same", areDocsSame)
+                return doc
+            }
+        })
+        console.log("upsertResult", upsertResult)
+        return upsertResult
     }
 
     function startRemoteSync(remoteUrl = "http://localhost:12321", prefix = "", dbName_ = dbName) {
@@ -87,9 +102,6 @@ export default async (dbName, indices = []) => {
     }
 
 
-
-
-
     return {
         find,
         deleteAllDocs,
@@ -101,7 +113,7 @@ export default async (dbName, indices = []) => {
         startRemoteSync,
         findAll: () => find({selector: {"_id": {"$ne": null}}}),
         onChange,
-        changes:_.bind(db.changes, db)
+        changes: _.bind(db.changes, db)
     }
 }
 

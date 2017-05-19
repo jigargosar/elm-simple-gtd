@@ -111,9 +111,9 @@ type EntityType
     | ProjectEntityType
 
 
-type GroupByEntity
-    = GroupByProject
-    | GroupByContext
+type GroupEntityType
+    = ProjectGroup
+    | ContextGroup
 
 
 type alias Flags =
@@ -274,20 +274,20 @@ insertContextIfNotExist name =
 
 getEntityStore entityType =
     case entityType of
-        GroupByProject ->
+        ProjectGroup ->
             .projectStore
 
-        GroupByContext ->
+        ContextGroup ->
             .contextStore
 
 
-getMaybeEditModelForEntityType : GroupByEntity -> Model -> Maybe EditMode.EntityForm
+getMaybeEditModelForEntityType : GroupEntityType -> Model -> Maybe EditMode.EntityForm
 getMaybeEditModelForEntityType entityType model =
     case ( entityType, model.editMode ) of
-        ( GroupByProject, EditMode.EditProject editModel ) ->
+        ( ProjectGroup, EditMode.EditProject editModel ) ->
             Just editModel
 
-        ( GroupByContext, EditMode.EditContext editModel ) ->
+        ( ContextGroup, EditMode.EditContext editModel ) ->
             Just editModel
 
         _ ->
@@ -308,16 +308,16 @@ getActiveEntityList =
 
 getFilteredContextList model =
     if model.showDeleted then
-        getDeletedEntityList GroupByContext model
+        getDeletedEntityList ContextGroup model
     else
-        Context.null :: getActiveEntityList GroupByContext model
+        Context.null :: getActiveEntityList ContextGroup model
 
 
 getFilteredProjectList model =
     if model.showDeleted then
-        getDeletedEntityList GroupByProject model
+        getDeletedEntityList ProjectGroup model
     else
-        Project.null :: getActiveEntityList GroupByProject model
+        Project.null :: getActiveEntityList ProjectGroup model
 
 
 getActiveTodoList =

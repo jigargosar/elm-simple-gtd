@@ -1,5 +1,9 @@
 ## Later
 * sync pouch dbs to firebase
+* [fix] todo selection clearing when dropdowns open
+
+## Upcoming
+* [fix] index.html reverting async code  
  
 ## v0.11.3 - 2017-05-19
 * [fix] add min main-view height so that dropdowns can open downwards

@@ -8,7 +8,7 @@ import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
 import Ext.Function.Infix exposing (..)
-import Types exposing (..)
+import Model exposing (..)
 import Project
 
 

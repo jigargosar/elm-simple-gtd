@@ -26,13 +26,13 @@ import Polymer.Paper exposing (..)
 import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Types exposing (..)
+import Model exposing (..)
 import View.Shared exposing (..)
 import ViewModel
 import WebComponents exposing (iconA, onBoolPropertyChanged, paperIconButton)
 
 
-view : ViewModel.Model -> Types.Model -> Html Msg
+view : ViewModel.Model -> Model.Model -> Html Msg
 view viewModel m =
     let
         { contexts, projects } =

@@ -23,7 +23,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Types exposing (Entity, Model)
+import Model exposing (Entity, Model)
 import Project
 
 import Project

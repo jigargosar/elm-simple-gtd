@@ -6,7 +6,7 @@ import Document
 import EditMode exposing (EditMode)
 import Ext.Keyboard exposing (KeyboardEvent)
 import Lazy
-import Types exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupByEntity(GroupByContext, GroupByProject), MainViewType(..), GroupByViewType(..))
+import Model exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupByEntity(GroupByContext, GroupByProject), MainViewType(..), GroupByViewType(..))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -76,7 +76,7 @@ type alias Config =
     }
 
 
-createList : Config -> Types.Model -> List EntityViewModel
+createList : Config -> Model.Model -> List EntityViewModel
 createList config model =
     let
         todoListDict =
@@ -153,7 +153,7 @@ create todoListByEntityId config entity =
         onKeyDownMsg { key } =
             case key of
                 {- Key.Space ->
-                   createEntityActionMsg Types.ToggleSelected
+                   createEntityActionMsg Model.ToggleSelected
                 -}
                 Key.CharE ->
                     startEditingMsg
@@ -187,14 +187,14 @@ create todoListByEntityId config entity =
         , onCancelClicked = Msg.DeactivateEditingMode
         , icon = icon
         , appHeader = appHeader
-        , onFocusIn = createEntityActionMsg Types.SetFocusedIn
-        , onFocus = createEntityActionMsg Types.SetFocused
-        , onBlur = createEntityActionMsg Types.SetBlurred
+        , onFocusIn = createEntityActionMsg Model.SetFocusedIn
+        , onFocus = createEntityActionMsg Model.SetFocused
+        , onBlur = createEntityActionMsg Model.SetBlurred
         , onKeyDownMsg = onKeyDownMsg
         }
 
 
-contexts : Types.Model -> ViewModel
+contexts : Model.Model -> ViewModel
 contexts model =
     let
         config : Config
@@ -224,7 +224,7 @@ contexts model =
         }
 
 
-projects : Types.Model -> ViewModel
+projects : Model.Model -> ViewModel
 projects model =
     let
         projectList : List EntityViewModel

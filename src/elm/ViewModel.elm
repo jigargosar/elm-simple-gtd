@@ -12,7 +12,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Types exposing (GroupByViewType(..), EntityFocus, MainViewType(..))
+import Model exposing (GroupByViewType(..), EntityFocus, MainViewType(..))
 import View.Shared exposing (SharedViewModel)
 
 
@@ -42,7 +42,7 @@ type alias Model =
     }
 
 
-create : Types.Model -> Model
+create : Model.Model -> Model
 create model =
     let
         contextsVM =

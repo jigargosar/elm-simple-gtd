@@ -7,7 +7,7 @@ import Dom
 import EditMode
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
-import Types exposing (..)
+import Model exposing (..)
 import Project
 import ReminderOverlay
 import Return
@@ -83,18 +83,6 @@ toCmds =
 toCmd : msg -> Cmd msg
 toCmd =
     Ext.Cmd.toCmd
-
-
-type alias Return =
-    Return.Return Msg Model
-
-
-type alias ReturnTuple a =
-    Return.Return Msg ( a, Model )
-
-
-type alias ReturnF =
-    Return -> Return
 
 
 commonMsg : CommonMsg.Helper Msg

@@ -9,7 +9,6 @@ import EditMode exposing (EditMode)
 import Ext.Keyboard as Keyboard
 import Ext.List as List
 import Firebase
-import Msg exposing (Return)
 import Project
 import ReminderOverlay
 import Dict exposing (Dict)
@@ -31,7 +30,119 @@ import Todo.ReminderForm
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
-import Types exposing (..)
+
+
+type GroupByViewType
+    = ContextsView
+    | ContextView Document.Id
+    | ProjectsView
+    | ProjectView Document.Id
+
+
+type MainViewType
+    = EntityListView GroupByViewType
+    | DoneView
+    | BinView
+    | SyncView
+
+
+type alias Model =
+    { now : Time
+    , todoStore : Todo.Store
+    , projectStore : Project.Store
+    , contextStore : Context.Store
+    , editMode : EditMode
+    , mainViewType : MainViewType
+    , keyboardState : Keyboard.State
+    , showDeleted : Bool
+    , reminderOverlay : ReminderOverlay.Model
+    , pouchDBRemoteSyncURI : String
+    , user : Firebase.User
+    , fcmToken : Firebase.FCMToken
+    , developmentMode : Bool
+    , focusedEntityInfo : EntityFocus
+    , selectedEntityIdSet : Set Document.Id
+    , layout : Layout
+    , maybeFocusedEntity : Maybe Entity
+    , appVersion : String
+    , deviceId : String
+    }
+
+
+type alias Layout =
+    { narrow : Bool
+    , forceNarrow : Bool
+    }
+
+
+type alias EntityFocus =
+    { id : Document.Id }
+
+
+type ModelField
+    = NowField Time
+    | MainViewTypeField MainViewType
+
+
+type alias ModelF =
+    Model -> Model
+
+
+type EntityAction
+    = StartEditing
+    | ToggleDeleted
+    | Save
+    | NameChanged String
+    | SetFocused
+    | SetBlurred
+    | SetFocusedIn
+    | ToggleSelected
+
+
+type Entity
+    = ProjectEntity Project.Model
+    | ContextEntity Context.Model
+    | TodoEntity Todo.Model
+
+
+type EntityType
+    = TodoEntityType
+    | ContextEntityType
+    | ProjectEntityType
+
+
+type GroupByEntity
+    = GroupByProject
+    | GroupByContext
+
+
+type alias Flags =
+    { now : Time
+    , encodedTodoList : List Todo.Encoded
+    , encodedProjectList : List Project.Encoded
+    , encodedContextList : List Context.Encoded
+    , pouchDBRemoteSyncURI : String
+    , developmentMode : Bool
+    , appVersion : String
+    , deviceId : String
+    }
+
+
+type alias TodoNotification =
+    { title : String
+    , tag : String
+    , data : TodoNotificationData
+    }
+
+
+type alias TodoNotificationData =
+    { id : String }
+
+
+type alias TodoNotificationEvent =
+    { action : String
+    , data : TodoNotificationData
+    }
 
 
 init : Flags -> Model

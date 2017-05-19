@@ -9,7 +9,6 @@ import Ext.Debug
 import Ext.Keyboard as Keyboard exposing (Key)
 import Ext.Return as Return
 import Firebase
-
 import Project
 import Ext.Random as Random
 import Project
@@ -38,7 +37,7 @@ import Maybe.Extra as Maybe
 import Tuple2
 import Html
 import Msg exposing (..)
-import Types exposing (..)
+import Model exposing (..)
 import View
 
 
@@ -78,6 +77,18 @@ main =
         , view = View.init
         , subscriptions = subscriptions
         }
+
+
+type alias Return =
+    Return.Return Msg Model
+
+
+type alias ReturnTuple a =
+    Return.Return Msg ( a, Model )
+
+
+type alias ReturnF =
+    Return -> Return
 
 
 init : Flags -> Return

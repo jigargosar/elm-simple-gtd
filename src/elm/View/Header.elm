@@ -7,7 +7,7 @@ import Firebase
 import Html.Attributes.Extra exposing (..)
 import Model
 import Todo.NewForm
-import Types exposing (Model)
+import Model exposing (Model)
 import Msg exposing (Msg)
 import Polymer.App as App
 import Polymer.Paper as Paper

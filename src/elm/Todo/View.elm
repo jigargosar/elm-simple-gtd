@@ -17,7 +17,7 @@ import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
-import Types exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
+import Model exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
 import Msg exposing (Msg, commonMsg)
 import Polymer.Attributes exposing (boolProperty, stringProperty)
 import Polymer.Events exposing (onTap)
@@ -179,7 +179,7 @@ createTodoViewModel vc tabindexAV todo =
         onKeyDownMsg { key } =
             case key of
                 Key.Space ->
-                    createEntityActionMsg Types.ToggleSelected
+                    createEntityActionMsg Model.ToggleSelected
 
                 Key.CharE ->
                     startEditingMsg
@@ -200,10 +200,10 @@ createTodoViewModel vc tabindexAV todo =
                     commonMsg.noOp
 
         startEditingMsg =
-            createEntityActionMsg Types.StartEditing
+            createEntityActionMsg Model.StartEditing
 
         toggleDeleteMsg =
-            createEntityActionMsg Types.ToggleDeleted
+            createEntityActionMsg Model.ToggleDeleted
 
         toggleDoneMsg =
             Msg.ToggleTodoDone todo
@@ -232,9 +232,9 @@ createTodoViewModel vc tabindexAV todo =
         , reminder = createReminderViewModel vc todo
         , edit = maybeEditTodoForm ?|> createEditTodoViewModel # todo
         , onDeleteClicked = toggleDeleteMsg
-        , onFocusIn = createEntityActionMsg Types.SetFocusedIn
-        , onFocus = createEntityActionMsg Types.SetFocused
-        , onBlur = createEntityActionMsg Types.SetBlurred
+        , onFocusIn = createEntityActionMsg Model.SetFocusedIn
+        , onFocus = createEntityActionMsg Model.SetFocused
+        , onBlur = createEntityActionMsg Model.SetBlurred
         , tabindexAV = tabindexAV
         , isSelected = vc.selectedEntityIdSet |> Set.member todoId
         }

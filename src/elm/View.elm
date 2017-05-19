@@ -31,7 +31,7 @@ import Toolkit.Operators exposing (..)
 import Ext.Debug exposing (tapLog)
 import Ext.Decode exposing (traceDecoder)
 import List.Extra as List
-import Types exposing (..)
+import Model exposing (..)
 import Todo
 import Polymer.Paper as Paper exposing (dialog, material)
 import Polymer.App as App

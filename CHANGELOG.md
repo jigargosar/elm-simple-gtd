@@ -4,6 +4,11 @@
 ## v0.11.3 - 2017-05-19
 * [fix] add min main-view height so that dropdowns can open downwards
 * [fix] add max height to dropdowns and make them scrollable
+* making scripts async and booting app on WebComponentsReady 
+* [fix] moving scripts at end, so page renders faster 
+* [fix] moving scripts at end, so page renders faster 
+* [fix] close header menu on item click 
+* use sign in with popup and custom google provider to prompt for account selection. 
 
 ## v0.11.2 - 2017-05-18
 * update read me to show build status

@@ -27,8 +27,7 @@ attributes =
 init m =
     div [ id "firebase-container" ]
         ([ Html.node "firebase-auth"
-            [ id "google-auth"
-            , attribute "provider" "google"
+            [ id "firebase-auth"
             , onUserChanged Msg.OnUserChanged
             ]
             []

@@ -27,6 +27,7 @@ const firebaseConfig =
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
+
 const cryptoRandomString = require('crypto-random-string');
 
 require("./pcss/main.pcss")
@@ -44,8 +45,13 @@ import DB from "./pouchdb-wrapper"
 const developmentMode = IS_DEVELOPMENT_ENV
 const pkg = packageJSON
 
+// firebaseApp.auth()
+//            .getRedirectResult()
+//            .then(boot)
+//            .catch(console.error)
 boot().catch(console.error)
-async function boot() {
+async function boot(user) {
+    console.log("firebase user", user)
     const deviceId = getOrCreateDeviceId()
     const $elm = $("#elm-app-container")
     $elm.trap();
@@ -59,7 +65,7 @@ async function boot() {
 
     $elm.get(0).addEventListener("keydown", e => {
         const $closest = $(e.target).closest("[data-prevent-default-keys]")
-        if($closest.length===0)return
+        if ($closest.length === 0)return
         const preventDefaultKeys =
             $closest.data("prevent-default-keys").split(",")
         // console.log(e.keyCode, e.key, e, preventDefaultKey);
@@ -147,10 +153,14 @@ async function boot() {
     })
 
     app.ports["signIn"].subscribe(() => {
-        let googleAuth = document.getElementById('google-auth');
-        googleAuth
-            .signInWithRedirect()
-            .then(console.info)
+        let provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({
+            prompt: 'select_account',
+            // prompt: 'consent'
+        })
+
+        document.getElementById('firebase-auth')
+            .signInWithPopup(provider)
             .catch(console.error)
     })
 
@@ -167,7 +177,7 @@ async function boot() {
     })
 
     app.ports["signOut"].subscribe(() => {
-        let googleAuth = document.getElementById('google-auth');
+        let googleAuth = document.getElementById('firebase-auth');
         googleAuth
             .signOut()
             .then(console.info)

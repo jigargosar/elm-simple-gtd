@@ -28,6 +28,13 @@ port fireDataWrite : ( String, E.Value ) -> Cmd msg
 port fireDataPush : ( String, E.Value ) -> Cmd msg
 
 
+port fireStartSync : String -> Cmd msg
+
+
+startSyncCmd =
+    fireStartSync
+
+
 type alias UserModel =
     { id : String
     , providerData : List ProviderData

@@ -125,6 +125,7 @@ update msg =
                 OnUserChanged user ->
                     Return.map (Model.setUser user)
                         >> Return.effect_ firebaseUpdateTokenCmd
+                        >> startSyncWithFirebase user
 
                 OnFCMTokenChanged token ->
                     let
@@ -481,3 +482,7 @@ positionContextDropdownCmd todo =
 
 positionProjectDropdownCmd todo =
     DomPorts.positionDropdown ( "project-dropdown", "project-dropdown-" ++ Document.getId todo )
+
+
+startSyncWithFirebase user =
+    Return.maybeEffect (Model.getMaybeUserId >>? Firebase.startSyncCmd)

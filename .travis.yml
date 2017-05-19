@@ -29,7 +29,8 @@ before_install:
 # Install dependencies
 install:
   #  - sysconfcpus -n 2 yarn install
-  - yarn run install-elm
+  - npm install elm@0.18.0
+  - npm run install-elm
 
 # Build
 script:

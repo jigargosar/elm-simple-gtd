@@ -182,7 +182,7 @@ async function boot() {
         db.changes({
               include_docs: true,
               live: true,
-              since: (lastSeq && parseInt(lastSeq, 10) || 0)
+              since: (parseInt(lastSeq, 10) || 0)
           })
           .on("change", change => {
               console.log("change", change)
@@ -191,9 +191,9 @@ async function boot() {
           .catch(console.error)
 
 
-        const todoList = await db.findAll()
-        const todoMap = _.reduceBy((_, todo) => todo, null, _.prop("_id"))(todoList);
-        console.log(todoMap)
+        // const todoList = await db.findAll()
+        // const todoMap = _.reduceBy((_, todo) => todo, null, _.prop("_id"))(todoList);
+        // console.log(todoMap)
         // const ref = firebaseApp.database().ref(`/users/${uid}/todo-db`)
         // ref.set(todoMap)
         //    .catch(console.error)

@@ -171,17 +171,16 @@ async function boot() {
     app.ports["fireDataWrite"].subscribe(([path, value]) => {
         console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
         const ref = firebaseApp.database().ref(path);
-        ref.set(value)
+        ref.set(value).catch(console.error)
     })
 
     app.ports["fireStartSync"].subscribe(async (uid) => {
         const todoList = await dbMap["todo-db"].findAll()
         const todoMap = _.reduceBy((_, todo) => todo, null, _.prop("_id"))(todoList);
         console.log(todoMap)
-        const ref = firebaseApp.database().ref(`/users/${uid}/todo-db`)
-        ref.set(todoMap)
-           .then(console.log)
-           .catch(console.error)
+        // const ref = firebaseApp.database().ref(`/users/${uid}/todo-db`)
+        // ref.set(todoMap)
+        //    .catch(console.error)
     })
 
     app.ports["fireDataPush"].subscribe(([path, value]) => {
@@ -193,7 +192,6 @@ async function boot() {
         let googleAuth = document.getElementById('firebase-auth');
         googleAuth
             .signOut()
-            .then(console.info)
             .catch(console.error)
     })
 

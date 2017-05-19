@@ -55066,15 +55066,11 @@ var _user$project$Firebase_View$init = function (m) {
 				'firebase-auth',
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('google-auth'),
+					_0: _elm_lang$html$Html_Attributes$id('firebase-auth'),
 					_1: {
 						ctor: '::',
-						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'provider', 'google'),
-						_1: {
-							ctor: '::',
-							_0: _user$project$Firebase$onUserChanged(_user$project$Msg$OnUserChanged),
-							_1: {ctor: '[]'}
-						}
+						_0: _user$project$Firebase$onUserChanged(_user$project$Msg$OnUserChanged),
+						_1: {ctor: '[]'}
 					}
 				},
 				{ctor: '[]'}),
@@ -55399,7 +55395,11 @@ var _user$project$View_Header$defaultHeader = function (m) {
 								_1: {
 									ctor: '::',
 									_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'noOverlap', true),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'closeOnActivate', true),
+										_1: {ctor: '[]'}
+									}
 								}
 							},
 							{
@@ -60414,11 +60414,12 @@ var boot = function () {
     var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
         var _this = this;
 
-        var deviceId, $elm, dbMap, allDocsMap, flags, Elm, app;
+        var firebaseApp, deviceId, $elm, dbMap, allDocsMap, flags, Elm, app;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
+                        firebaseApp = firebase.initializeApp(firebaseConfig);
                         deviceId = getOrCreateDeviceId();
                         $elm = $("#elm-app-container");
 
@@ -60442,20 +60443,20 @@ var boot = function () {
                             }
                         }, true);
 
-                        _context3.next = 7;
+                        _context3.next = 8;
                         return (0, _pouchdbWrapper2.default)("todo-db");
 
-                    case 7:
+                    case 8:
                         _context3.t0 = _context3.sent;
-                        _context3.next = 10;
+                        _context3.next = 11;
                         return (0, _pouchdbWrapper2.default)("project-db");
 
-                    case 10:
+                    case 11:
                         _context3.t1 = _context3.sent;
-                        _context3.next = 13;
+                        _context3.next = 14;
                         return (0, _pouchdbWrapper2.default)("context-db");
 
-                    case 13:
+                    case 14:
                         _context3.t2 = _context3.sent;
                         dbMap = {
                             "todo-db": _context3.t0,
@@ -60466,20 +60467,20 @@ var boot = function () {
                             return db.findAll();
                         })(dbMap);
                         _context3.t3 = Date.now();
-                        _context3.next = 19;
+                        _context3.next = 20;
                         return allDocsMap["todo-db"];
 
-                    case 19:
+                    case 20:
                         _context3.t4 = _context3.sent;
-                        _context3.next = 22;
+                        _context3.next = 23;
                         return allDocsMap["project-db"];
 
-                    case 22:
+                    case 23:
                         _context3.t5 = _context3.sent;
-                        _context3.next = 25;
+                        _context3.next = 26;
                         return allDocsMap["context-db"];
 
-                    case 25:
+                    case 26:
                         _context3.t6 = _context3.sent;
                         _context3.t7 = localStorage.getItem("pouchdb.remote-sync-uri") || "";
                         _context3.t8 = developmentMode;
@@ -60603,8 +60604,12 @@ var boot = function () {
                         });
 
                         app.ports["signIn"].subscribe(function () {
-                            var googleAuth = document.getElementById('google-auth');
-                            googleAuth.signInWithRedirect().then(console.info).catch(console.error);
+                            var provider = new firebase.auth.GoogleAuthProvider();
+                            provider.setCustomParameters({
+                                prompt: 'select_account'
+                            });
+
+                            document.getElementById('firebase-auth').signInWithPopup(provider).catch(console.error);
                         });
 
                         app.ports["fireDataWrite"].subscribe(function (_ref8) {
@@ -60627,7 +60632,7 @@ var boot = function () {
                         });
 
                         app.ports["signOut"].subscribe(function () {
-                            var googleAuth = document.getElementById('google-auth');
+                            var googleAuth = document.getElementById('firebase-auth');
                             googleAuth.signOut().then(console.info).catch(console.error);
                         });
 
@@ -60658,7 +60663,7 @@ var boot = function () {
                             sound.stop();
                         });
 
-                    case 47:
+                    case 48:
                     case "end":
                         return _context3.stop();
                 }
@@ -60702,8 +60707,6 @@ var firebaseProdConfig = {
 //noinspection JSUnresolvedVariable
 var firebaseConfig =  false ? firebaseDevConfig : firebaseProdConfig;
 
-var firebaseApp = firebase.initializeApp(firebaseConfig);
-
 var cryptoRandomString = __webpack_require__(306);
 
 __webpack_require__(309);
@@ -60717,10 +60720,11 @@ var Notifications = __webpack_require__(302);
 
 
 var developmentMode = false;
-var pkg = {"name":"simplegtd.com","version":"0.11.2","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","bump":"npm_bump --auto --auto-fallback patch --skip-push","postbump":"npm run build","deploy":"git push && firebase deploy --project prod --except 'functions'","f:deploy:db":"firebase deploy --only database","f:deploy:fun":"firebase deploy --only functions","f:deploy:files":"firebase deploy --only hosting","dev":"cross-env NODE_ENV=development webpack-dev-server","hot":"cross-env NODE_ENV=development webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","build":"bash scripts/build.sh","prebuild-dev":"rimraf dev","build-dev":"bash scripts/build-dev.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","firebase-tools":"3.9.0","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"alien-date":"0.2.2","babel-polyfill":"6.23.0","chrono":"1.0.5","chrono-node":"1.3.1","crypto-random-string":"1.0.0","dateparser":"1.0.6","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","memorystream":"0.3.1","parse-messy-time":"2.1.0","peerjs":"0.3.14","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-replication-stream":"1.2.9","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
+var pkg = {"name":"simplegtd.com","version":"0.11.5","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","bump":"npm_bump --auto --auto-fallback patch --skip-push","postbump":"npm run build","deploy":"git push && firebase deploy --project prod --except 'functions'","f:deploy:db":"firebase deploy --only database","f:deploy:fun":"firebase deploy --only functions","f:deploy:files":"firebase deploy --only hosting","dev":"cross-env NODE_ENV=development webpack-dev-server","hot":"cross-env NODE_ENV=development webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","build":"bash scripts/build.sh","prebuild-dev":"rimraf dev","build-dev":"bash scripts/build-dev.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","firebase-tools":"3.9.0","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"alien-date":"0.2.2","babel-polyfill":"6.23.0","chrono":"1.0.5","chrono-node":"1.3.1","crypto-random-string":"1.0.0","dateparser":"1.0.6","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","memorystream":"0.3.1","parse-messy-time":"2.1.0","peerjs":"0.3.14","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-replication-stream":"1.2.9","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
 
-boot().catch(console.error);
-
+window.addEventListener('WebComponentsReady', function () {
+    boot().catch(console.error);
+});
 
 function getOrCreateDeviceId() {
     var deviceId = localStorage.getItem("device-id");
@@ -62191,7 +62195,7 @@ exports = module.exports = __webpack_require__(518)(undefined);
 
 
 // module
-exports.push([module.i, "paper-textarea:focus {\n  outline: none;\n}\n\n* {\n  box-sizing: border-box;\n}\n\n.hidden {\n  visibility: hidden !important;\n}\n\n.display-none {\n  display: none;\n}\n\n.focusable-list > * {\n  outline: none;\n  position: relative\n}\n\n.focusable-list > *:before {\n  position: absolute;\n  left: 0;\n  top: 0;\n  content: \"\";\n  width: 100%;\n  height: 100%;\n  background-color: transparent;\n  pointer-events: none;\n}\n\n.focusable-list > *:focus {\n\n}\n\n.focusable-list > *:focus:before {\n  opacity: 0.15;\n}\n\n.focusable-list > *[tabindex=\"0\"] {\n\n}\n\n.focusable-list > *[tabindex=\"0\"]:before {\n  background-color: black;\n  opacity: 0.1;\n}\n\n.focusable-list > *.selected {\n\n}\n\n.focusable-list > *.selected:before {\n  background-color: rgb(255, 255, 0);\n  opacity: 0.1;\n}\n\n.ellipsis {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n\n.small {\n  font-size: 11.2px;\n  font-size: 0.7rem;\n  line-height: 1.2em;\n}\n\n.col {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.row-item-stretched {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n//align-items:stretch; //justify-content: space-around\n}\n\n.row-item-stretched > * {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.col-item-stretched {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -ms-flex-pack: distribute;\n      justify-content: space-around\n}\n\n.col-item-stretched > * {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.col {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.flex11 {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.dim {\n  opacity: 0.5;\n}\n\n.active-task-view {\n  padding: 16px 16px 0\n}\n\n.active-task-view .title {\n\n}\n\n.active-task-view .elapsed-time {\n  display: inline-block;\n}\n\n#add-fab {\n  position: fixed;\n  right: 10px;\n  bottom: 10px;\n}\n\n.w100 {\n  width: 100%;\n}\n\n.flex-expand {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\npaper-item, .has-hover-elements {\n\n  /*\n  &[selected] > .show-on-hover{\n    display: flex;\n  }\n  */\n}\n\npaper-item > .show-on-hover, .has-hover-elements > .show-on-hover {\n  display: none;\n}\n\npaper-item > .hide-on-hover, .has-hover-elements > .hide-on-hover {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\npaper-item:hover > .show-on-hover, .has-hover-elements:hover > .show-on-hover {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\npaper-item:hover > .hide-on-hover, .has-hover-elements:hover > .hide-on-hover {\n  display: none;\n}\n\n.project-list {\n  background-color: white\n}\n\n.project-list .project-item {\n  border-top: 1px solid rgba(179, 179, 179, .53);\n}\n\n.entity-list-title {\n  text-transform: capitalize;\n//font-size: 14.4px;\n//font-size: 0.9rem; font-weight: 600; color: rgba(0, 0, 0, .44); display: inline-block;\n}\n\npaper-item {\n//min-height:40px;\n}\n\npaper-listbox {\n  background-color: transparent;\n}\n\n.entity-item {\n  margin-top: 32px;\n  margin-top: 2rem;\n//padding: 8px;\n//padding: 0.5rem; outline: none; border-left: 2px solid transparent;\n}\n\n.entity-item {\n\n}\n\n.entity-item[tabindex=\"0\"] .title {\n  font-weight: bolder;\n  color: rgba(0, 0, 172, .44);\n}\n\n.entity-item:focus[tabindex=\"0\"] .title {\n  font-weight: bolder;\n  color: rgba(0, 0, 172, .77);\n}\n\n#context-dropdown, #project-dropdown{\n  position: absolute;\n  //left: 100px;\n  //top: 100px;\n  background-color: white;\n  width:200px;\n  overflow: hidden;\n}\n\n.focusable-list > .todo-item {\n  padding: 8px 16px;\n  padding: 0.5rem 1rem;\n  background-color: white;\n  box-shadow: 2px 2px 5px rgba(0, 0, 0, .4);\n  outline: none;\n  border-left: 2px solid transparent\n\n}\n\n.focusable-list > .todo-item:not(.selected):before {\n  background-color: transparent;\n}\n\n.focusable-list > .todo-item paper-button.small .title {\n  text-transform: none;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n.focusable-list > .todo-item[tabindex=\"0\"] {\n  border-left: 2px solid rgba(0, 0, 172, .44);\n}\n\n.focusable-list > .todo-item:focus[tabindex=\"0\"] {\n  border-left: 2px solid rgba(0, 0, 172, .77);\n}\n\n.focusable-list > .todo-item.editing {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n}\n\n.focusable-list > .todo-item paper-icon-button {\n  width: 24px;\n  height: 24px;\n  padding: 2px;\n\n  /*transform: scale(0.7);*/\n}\n\n.focusable-list > .todo-item .display-text {\n  padding: 0 8px;\n}\n\n.focusable-list > .todo-item paper-item-body {\n  cursor: pointer;\n}\n\n.focusable-list > .todo-item .reminder-text {\n  text-decoration: underline black;\n}\n\n.focusable-list > .todo-item .reminder-text.overdue {\n  text-decoration: underline red;\n}\n\n#in-basket-flow-container {\n  padding: 16px;\n  padding: 1rem;\n  background-color: white;\n}\n\n.big-dialog {\n  position: absolute;\n  width: 300px;\n  height: 300px;\n  background-color: rgba(0, 0, 0, .64);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  z-index: 100000;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.padding-0 {\n  padding: 0;\n}\n\n.padding-left-1rem {\n  padding-left: 16px;\n  padding-left: 1rem;\n}\n\n.margin-0 {\n  margin: 0;\n}\n\napp-drawer-layout:not([narrow]) .hide-when-wide {\n  display: none;\n}\n\n.text-break-all {\n  white-space: normal;\n  word-break: break-all;\n}\n\n#main-view{\n  position: relative;\n}\n", ""]);
+exports.push([module.i, "paper-textarea:focus {\n  outline: none;\n}\n\n* {\n  box-sizing: border-box;\n}\n\n.hidden {\n  visibility: hidden !important;\n}\n\n.display-none {\n  display: none;\n}\n\n.focusable-list > * {\n  outline: none;\n  position: relative\n}\n\n.focusable-list > *:before {\n  position: absolute;\n  left: 0;\n  top: 0;\n  content: \"\";\n  width: 100%;\n  height: 100%;\n  background-color: transparent;\n  pointer-events: none;\n}\n\n.focusable-list > *:focus {\n\n}\n\n.focusable-list > *:focus:before {\n  opacity: 0.15;\n}\n\n.focusable-list > *[tabindex=\"0\"] {\n\n}\n\n.focusable-list > *[tabindex=\"0\"]:before {\n  background-color: black;\n  opacity: 0.1;\n}\n\n.focusable-list > *.selected {\n\n}\n\n.focusable-list > *.selected:before {\n  background-color: rgb(255, 255, 0);\n  opacity: 0.1;\n}\n\n.ellipsis {\n  overflow: hidden;\n  white-space: nowrap;\n  text-overflow: ellipsis;\n}\n\n.small {\n  font-size: 11.2px;\n  font-size: 0.7rem;\n  line-height: 1.2em;\n}\n\n.col {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.row {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.row-item-stretched {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n//align-items:stretch; //justify-content: space-around\n}\n\n.row-item-stretched > * {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.col-item-stretched {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n  -ms-flex-pack: distribute;\n      justify-content: space-around\n}\n\n.col-item-stretched > * {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.col {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n}\n\n.flex11 {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\n.dim {\n  opacity: 0.5;\n}\n\n.active-task-view {\n  padding: 16px 16px 0\n}\n\n.active-task-view .title {\n\n}\n\n.active-task-view .elapsed-time {\n  display: inline-block;\n}\n\n#add-fab {\n  position: fixed;\n  right: 10px;\n  bottom: 10px;\n}\n\n.w100 {\n  width: 100%;\n}\n\n.flex-expand {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto;\n}\n\npaper-item, .has-hover-elements {\n\n  /*\n  &[selected] > .show-on-hover{\n    display: flex;\n  }\n  */\n}\n\npaper-item > .show-on-hover, .has-hover-elements > .show-on-hover {\n  display: none;\n}\n\npaper-item > .hide-on-hover, .has-hover-elements > .hide-on-hover {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\npaper-item:hover > .show-on-hover, .has-hover-elements:hover > .show-on-hover {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n\npaper-item:hover > .hide-on-hover, .has-hover-elements:hover > .hide-on-hover {\n  display: none;\n}\n\n.project-list {\n  background-color: white\n}\n\n.project-list .project-item {\n  border-top: 1px solid rgba(179, 179, 179, .53);\n}\n\n.entity-list-title {\n  text-transform: capitalize;\n//font-size: 14.4px;\n//font-size: 0.9rem; font-weight: 600; color: rgba(0, 0, 0, .44); display: inline-block;\n}\n\npaper-item {\n//min-height:40px;\n}\n\npaper-listbox {\n  background-color: transparent;\n}\n\n.entity-item {\n  margin-top: 32px;\n  margin-top: 2rem;\n//padding: 8px;\n//padding: 0.5rem; outline: none; border-left: 2px solid transparent;\n}\n\n.entity-item {\n\n}\n\n.entity-item[tabindex=\"0\"] .title {\n  font-weight: bolder;\n  color: rgba(0, 0, 172, .44);\n}\n\n.entity-item:focus[tabindex=\"0\"] .title {\n  font-weight: bolder;\n  color: rgba(0, 0, 172, .77);\n}\n\n#context-dropdown, #project-dropdown{\n  position: absolute;\n  //left: 100px;\n  //top: 100px;\n  background-color: white;\n  overflow-y: scroll;\n  overflow-x: hidden;\n  width:200px;\n  max-height: 80vh;\n}\n\n.focusable-list > .todo-item {\n  padding: 8px 16px;\n  padding: 0.5rem 1rem;\n  background-color: white;\n  box-shadow: 2px 2px 5px rgba(0, 0, 0, .4);\n  outline: none;\n  border-left: 2px solid transparent\n\n}\n\n.focusable-list > .todo-item:not(.selected):before {\n  background-color: transparent;\n}\n\n.focusable-list > .todo-item paper-button.small .title {\n  text-transform: none;\n  font-size: 14px;\n  line-height: 20px;\n}\n\n.focusable-list > .todo-item[tabindex=\"0\"] {\n  border-left: 2px solid rgba(0, 0, 172, .44);\n}\n\n.focusable-list > .todo-item:focus[tabindex=\"0\"] {\n  border-left: 2px solid rgba(0, 0, 172, .77);\n}\n\n.focusable-list > .todo-item.editing {\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: stretch;\n      -ms-flex-align: stretch;\n          align-items: stretch;\n}\n\n.focusable-list > .todo-item paper-icon-button {\n  width: 24px;\n  height: 24px;\n  padding: 2px;\n\n  /*transform: scale(0.7);*/\n}\n\n.focusable-list > .todo-item .display-text {\n  padding: 0 8px;\n}\n\n.focusable-list > .todo-item paper-item-body {\n  cursor: pointer;\n}\n\n.focusable-list > .todo-item .reminder-text {\n  text-decoration: underline black;\n}\n\n.focusable-list > .todo-item .reminder-text.overdue {\n  text-decoration: underline red;\n}\n\n#in-basket-flow-container {\n  padding: 16px;\n  padding: 1rem;\n  background-color: white;\n}\n\n.big-dialog {\n  position: absolute;\n  width: 300px;\n  height: 300px;\n  background-color: rgba(0, 0, 0, .64);\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  z-index: 100000;\n}\n\n.text-left {\n  text-align: left;\n}\n\n.padding-0 {\n  padding: 0;\n}\n\n.padding-left-1rem {\n  padding-left: 16px;\n  padding-left: 1rem;\n}\n\n.margin-0 {\n  margin: 0;\n}\n\napp-drawer-layout:not([narrow]) .hide-when-wide {\n  display: none;\n}\n\n.text-break-all {\n  white-space: normal;\n  word-break: break-all;\n}\n\n#main-view {\n  margin: 16px 16px 80px 16px;\n  margin: 1rem 1rem 5rem 1rem;\n  max-width: 600px;\n  position: relative;\n  min-height: 70vh;\n}\n", ""]);
 
 // exports
 

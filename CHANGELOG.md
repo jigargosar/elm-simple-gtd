@@ -1,6 +1,10 @@
 ## Later
 * sync pouch dbs to firebase
+
+## Upcoming
 * [fix] todo selection clearing when dropdowns open
+* [fix] clear selection on esc only when edit mode is none
+* [fix] in paper-input space key should not preventDefault. pD was intended only to stop scrolling on space key
 
 ## v0.11.6 - 2017-05-19
 * [fix] index.html reverting async code  

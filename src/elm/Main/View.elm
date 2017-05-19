@@ -2,7 +2,7 @@ module Main.View exposing (..)
 
 import Context
 import Document
-import Entity.ViewModel
+import GroupEntity.ViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

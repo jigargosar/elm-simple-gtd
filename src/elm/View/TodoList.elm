@@ -6,14 +6,13 @@ import Dict.Extra as Dict
 import Document
 import Dom
 import EditMode
-import Entity.View
+import GroupEntity.View
 import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Maybe.Extra as Maybe
-
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
 import Project
@@ -37,7 +36,7 @@ import Polymer.Paper as Paper exposing (badge, button, fab, input, item, itemBod
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Entity.ViewModel exposing (EntityViewModel)
+import GroupEntity.ViewModel exposing (EntityViewModel)
 import Todo.View exposing (EditViewModel)
 import Tuple2
 import View.Shared exposing (..)
@@ -105,10 +104,10 @@ listView entityList viewModel =
             in
                 case entity of
                     ContextEntity context ->
-                        getMaybeContextVM context ?|> (Entity.View.initKeyed tabIndexAV viewModel)
+                        getMaybeContextVM context ?|> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     ProjectEntity project ->
-                        getMaybeProjectVM project ?|> (Entity.View.initKeyed tabIndexAV viewModel)
+                        getMaybeProjectVM project ?|> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     TodoEntity todo ->
                         Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo) |> Just

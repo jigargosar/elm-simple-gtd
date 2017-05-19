@@ -13,12 +13,11 @@ import Html.Attributes exposing (action, attribute, autofocus, class, classList,
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model
-
 import Msg exposing (Msg, commonMsg)
 import Polymer.Firebase
 import ReminderOverlay
 import Set
-import Entity.ViewModel
+import GroupEntity.ViewModel
 import View.Header
 import Main.View
 import View.TodoList

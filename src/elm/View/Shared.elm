@@ -4,7 +4,7 @@ import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
 import EditMode exposing (EditMode)
-import Entity.ViewModel
+import GroupEntity.ViewModel
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Attributes.Extra exposing (boolProperty, intProperty)
@@ -25,7 +25,6 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model exposing (Entity, Model)
 import Project
-
 import Project
 import Todo
 import Todo.Form
@@ -33,7 +32,7 @@ import Todo.ReminderForm
 
 
 type alias AppViewModel =
-    { contexts : List Entity.ViewModel.EntityViewModel
+    { contexts : List GroupEntity.ViewModel.EntityViewModel
     }
 
 

@@ -1,7 +1,7 @@
 module ViewModel exposing (..)
 
 import Document
-import Entity.ViewModel exposing (EntityViewModel)
+import GroupEntity.ViewModel exposing (EntityViewModel)
 import Html exposing (Attribute)
 import Msg exposing (Msg)
 import Todo
@@ -31,8 +31,8 @@ getIdOfEntityView entityView =
 
 
 type alias Model =
-    { contexts : Entity.ViewModel.ViewModel
-    , projects : Entity.ViewModel.ViewModel
+    { contexts : GroupEntity.ViewModel.ViewModel
+    , projects : GroupEntity.ViewModel.ViewModel
     , viewName : String
     , mainViewType : ViewType
     , header : { backgroundColor : String }
@@ -46,10 +46,10 @@ create : Model.Model -> Model
 create model =
     let
         contextsVM =
-            Entity.ViewModel.contexts model
+            GroupEntity.ViewModel.contexts model
 
         projectsVM =
-            Entity.ViewModel.projects model
+            GroupEntity.ViewModel.projects model
 
         mainViewType =
             model.mainViewType

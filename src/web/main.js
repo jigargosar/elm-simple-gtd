@@ -41,11 +41,10 @@ import DB from "./pouchdb-wrapper"
 const developmentMode = IS_DEVELOPMENT_ENV
 const pkg = packageJSON
 
-// firebaseApp.auth()
-//            .getRedirectResult()
-//            .then(boot)
-//            .catch(console.error)
-boot().catch(console.error)
+window.addEventListener('WebComponentsReady', ()=>{
+    boot().catch(console.error)
+});
+
 async function boot() {
     const firebaseApp = firebase.initializeApp(firebaseConfig);
     const deviceId = getOrCreateDeviceId()

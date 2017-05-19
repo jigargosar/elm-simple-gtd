@@ -537,8 +537,8 @@ getEditMode =
 
 setEditMode : EditMode -> ModelF
 setEditMode editMode =
-    clearSelectionIfEditModeNone
-        >> (\model -> { model | editMode = editMode })
+    {-clearSelectionIfEditModeNone
+        >> -}(\model -> { model | editMode = editMode })
 
 
 updateEditModeM : (Model -> EditMode) -> ModelF

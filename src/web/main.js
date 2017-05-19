@@ -41,7 +41,7 @@ import DB from "./pouchdb-wrapper"
 const developmentMode = IS_DEVELOPMENT_ENV
 const pkg = packageJSON
 
-window.addEventListener('WebComponentsReady', ()=>{
+window.addEventListener('WebComponentsReady', () => {
     boot().catch(console.error)
 });
 
@@ -54,12 +54,12 @@ async function boot() {
     $elm.on("keydown", `.entity-list`, e => {
         // console.log(e.keyCode, e.key, e.target, e);
 
-        if(e.target.tagName !== "PAPER-INPUT"){
+        if (e.target.tagName !== "PAPER-INPUT") {
             // prevent document scrolling
             if (e.key === " "/*space: 32*/ && e.target.tagName !== "PAPER-INPUT") {
                 e.preventDefault()
             }
-            else if (e.key === "ArrowUp" || e.key === "ArrowDown" ) {
+            else if (e.key === "ArrowUp" || e.key === "ArrowDown") {
                 e.preventDefault()
             }
         }
@@ -163,8 +163,8 @@ async function boot() {
         })
 
         document.getElementById('firebase-auth')
-            .signInWithPopup(provider)
-            .catch(console.error)
+                .signInWithPopup(provider)
+                .catch(console.error)
     })
 
 
@@ -172,6 +172,16 @@ async function boot() {
         console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
         const ref = firebaseApp.database().ref(path);
         ref.set(value)
+    })
+
+    app.ports["fireStartSync"].subscribe(async (uid) => {
+        const todoList = await dbMap["todo-db"].findAll()
+        const todoMap = _.reduceBy((_, todo) => todo, null, _.prop("_id"))(todoList);
+        console.log(todoMap)
+        const ref = firebaseApp.database().ref(`/users/${uid}/todo-db`)
+        ref.set(todoMap)
+           .then(console.log)
+           .catch(console.error)
     })
 
     app.ports["fireDataPush"].subscribe(([path, value]) => {

@@ -496,6 +496,7 @@ editView edit =
                 [ class "auto-focus"
                 , stringProperty "label" "Todo"
                 , value (edit.todo.text)
+
                 -- for when we need custom handling for enter key
                 , property "keyBindings" Json.Encode.null
 

@@ -9,7 +9,7 @@ import Ext.Debug
 import Ext.Keyboard as Keyboard exposing (Key)
 import Ext.Return as Return
 import Firebase
-import Model.Internal as Model
+
 import Project
 import Ext.Random as Random
 import Project

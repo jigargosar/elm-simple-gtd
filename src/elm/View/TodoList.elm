@@ -13,7 +13,7 @@ import Html.Keyed as Keyed
 import Keyboard.Extra exposing (Key)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyUp)
 import Maybe.Extra as Maybe
-import Model.Internal as Model
+
 import Msg exposing (..)
 import Polymer.Attributes exposing (icon)
 import Project

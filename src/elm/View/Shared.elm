@@ -25,7 +25,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Types exposing (Entity, Model)
 import Project
-import Model.Internal as Model
+
 import Project
 import Todo
 import Todo.Form

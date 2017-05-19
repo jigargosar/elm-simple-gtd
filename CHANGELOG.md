@@ -2,7 +2,7 @@
 * sync pouch dbs to firebase
 * [fix] todo selection clearing when dropdowns open
 
-## Upcoming
+## v0.11.6 - 2017-05-19
 * [fix] index.html reverting async code  
  
 ## v0.11.3 - 2017-05-19

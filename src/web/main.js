@@ -51,7 +51,7 @@ async function boot() {
     const $elm = $("#elm-app-container")
     $elm.trap();
 
-    $elm.on("keydown", `.todo-item, .entity-item`, e => {
+    $elm.on("keydown", `.entity-list`, e => {
         console.log(e.keyCode, e.key, e.target, e);
         if (e.key === " "/*space: 32*/ && e.target.tagName !== "PAPER-INPUT") {
             e.preventDefault()

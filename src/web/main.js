@@ -52,7 +52,7 @@ async function boot() {
     $elm.trap();
 
     $elm.on("keydown", `.entity-list`, e => {
-        console.log(e.keyCode, e.key, e.target, e);
+        // console.log(e.keyCode, e.key, e.target, e);
 
         if(e.target.tagName !== "PAPER-INPUT"){
             // prevent document scrolling

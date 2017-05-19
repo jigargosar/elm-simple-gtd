@@ -88,6 +88,8 @@ export default async (dbName, indices = []) => {
 
 
 
+
+
     return {
         find,
         deleteAllDocs,
@@ -98,7 +100,8 @@ export default async (dbName, indices = []) => {
         allDocs,
         startRemoteSync,
         findAll: () => find({selector: {"_id": {"$ne": null}}}),
-        onChange
+        onChange,
+        changes:_.bind(db.changes, db)
     }
 }
 

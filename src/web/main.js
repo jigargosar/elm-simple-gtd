@@ -171,11 +171,27 @@ async function boot() {
     app.ports["fireDataWrite"].subscribe(([path, value]) => {
         console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
         const ref = firebaseApp.database().ref(path);
-        ref.set(value).catch(console.error)
+        ref.set(value)
+           .catch(console.error)
     })
 
     app.ports["fireStartSync"].subscribe(async (uid) => {
-        const todoList = await dbMap["todo-db"].findAll()
+
+        const db = dbMap["todo-db"]
+        const lastSeq = localStorage.getItem("pouch.todo-db.fire-sync.last_seq")
+        db.changes({
+              include_docs: true,
+              live: true,
+              since: (lastSeq && parseInt(lastSeq, 10) || 0)
+          })
+          .on("change", change => {
+              console.log("change", change)
+              // localStorage.setItem("pouch.todo-db.fire-sync.last_seq", change.seq)
+          })
+          .catch(console.error)
+
+
+        const todoList = await db.findAll()
         const todoMap = _.reduceBy((_, todo) => todo, null, _.prop("_id"))(todoList);
         console.log(todoMap)
         // const ref = firebaseApp.database().ref(`/users/${uid}/todo-db`)

@@ -53,9 +53,17 @@ async function boot() {
 
     $elm.on("keydown", `.entity-list`, e => {
         console.log(e.keyCode, e.key, e.target, e);
-        if (e.key === " "/*space: 32*/ && e.target.tagName !== "PAPER-INPUT") {
-            e.preventDefault()
+
+        if(e.target.tagName !== "PAPER-INPUT"){
+            // prevent document scrolling
+            if (e.key === " "/*space: 32*/ && e.target.tagName !== "PAPER-INPUT") {
+                e.preventDefault()
+            }
+            else if (e.key === "ArrowUp" || e.key === "ArrowDown" ) {
+                e.preventDefault()
+            }
         }
+
     })
 
     $elm.get(0).addEventListener("keydown", e => {

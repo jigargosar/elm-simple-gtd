@@ -1,5 +1,9 @@
+## Later
+* sync pouch dbs to firebase
+ 
 ## Upcoming
-* sync pouch dbs to firebase 
+* [fix] add min main-view height so that dropdowns can open downwards
+* [fix] add max height to dropdowns and make them scrollable
 
 ## v0.11.2 - 2017-05-18
 * update read me to show build status

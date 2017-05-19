@@ -4,7 +4,11 @@ cache:
   yarn: true
   directories:
     - $HOME/.cpus
-  
+
+branches:
+  only:
+    - master
+
 #  directories:
 #    - elm-stuff/packages
 
@@ -24,7 +28,7 @@ before_install:
 
 # Install dependencies
 install:
-  - sysconfcpus -n 2 yarn install
+  #  - sysconfcpus -n 2 yarn install
 
 # Build
 script:

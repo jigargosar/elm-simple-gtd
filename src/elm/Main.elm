@@ -417,6 +417,9 @@ onGlobalKeyUp key =
     Return.with (Model.getEditMode)
         (\editMode ->
             case ( key, editMode ) of
+                ( Key.Escape, EditMode.None ) ->
+                    Return.map (Model.clearSelection)
+
                 ( Key.Escape, _ ) ->
                     andThenUpdate DeactivateEditingMode
 

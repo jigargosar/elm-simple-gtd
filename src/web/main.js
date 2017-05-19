@@ -183,12 +183,13 @@ async function boot() {
         const changes = db.changes({
             include_docs: true,
             live: true,
-            since: (parseInt(lastSeq, 10)  || 0)
-        }).on('error', function (err) {
-            console.log(err);
-        });
+            since: (parseInt(lastSeq, 10) || 0)
+        })
 
-        Kefir.fromEvents(changes, "change")
+        const errorStream = Kefir.fromEvents(changes, "error")
+        const changeStream = Kefir.fromEvents(changes, "change")
+
+        Kefir.merge([changeStream, errorStream])
              .log()
              .map((change) => {
                  return firebaseApp
@@ -201,6 +202,7 @@ async function boot() {
              })
              .flatMap(Kefir.fromPromise)
              .onValue(val => console.log("onValue", val))
+             .onError(e => console.error("fireSyncError: ", e))
     })
 
     app.ports["fireDataPush"].subscribe(([path, value]) => {

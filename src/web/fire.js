@@ -63,6 +63,7 @@ export const setup = (app, dbList) => {
 
         const onChange = change => {
             // console.log("sending pouchdb change to firebase: ", change)
+            console.log("sending pouchdb change to firebase: ", change.id)
             const fireDoc = _.compose(_.omit("_rev"), _.merge(change.doc))
                              ({"firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP})
             return firebaseApp

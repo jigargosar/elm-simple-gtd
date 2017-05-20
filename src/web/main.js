@@ -208,13 +208,15 @@ async function boot() {
             .startAt(Date.now())
 
         todoDbRef.on("child_added", (snap) => {
-            db.upsert(snap.key, snap.val())
-              .catch(console.error)
+            app.ports["onFirebaseChange"].send("todo-db", snap.key, snap.val())
+            // db.upsert(snap.key, snap.val())
+            //   .catch(console.error)
         })
 
         todoDbRef.on("child_changed", (snap) => {
-            db.upsert(snap.key, snap.val())
-              .catch(console.error)
+            app.ports["onFirebaseChange"].send("todo-db", snap.key, snap.val())
+            // db.upsert(snap.key, snap.val())
+            //   .catch(console.error)
         })
     })
 

@@ -59,9 +59,12 @@ generator name otherFieldsEncoder decoder encodedList =
     init name otherFieldsEncoder decoder encodedList |> Random.mapWithIndependentSeed
 
 
-upsert : String -> (Document x -> List ( String, E.Value )) -> Document x -> Cmd msg
-upsert dbName otherFieldsEncoder doc =
-    pouchDBUpsert ( dbName, doc.id, Document.encode otherFieldsEncoder doc )
+
+--upsert : String -> (Document x -> List ( String, E.Value )) -> Document x -> Cmd msg
+
+
+upsertIn store doc =
+    pouchDBUpsert ( store.name, doc.id, Document.encode store.otherFieldsEncoder doc )
 
 
 encodeDoc : Document x -> Store x -> E.Value
@@ -79,7 +82,7 @@ persist s =
             s.list .|> (\d -> { d | dirty = False }) |> setList # s
 
         cmds =
-            dirtyList .|> upsert s.name s.otherFieldsEncoder
+            dirtyList .|> upsertIn s
     in
         ns ! cmds
 
@@ -109,6 +112,15 @@ decode encodedDoc store =
     D.decodeValue store.decoder encodedDoc
         |> Result.mapError (Debug.log "Store")
         |> Result.toMaybe
+
+
+reEncodeAndUpsertCmd : D.Value -> Store x -> Cmd msg
+reEncodeAndUpsertCmd encodedDoc store =
+    {- decode encodeDoc store
+       ?|> upsertIn store
+       ?=
+    -}
+    Cmd.none
 
 
 updateExternal : D.Value -> Store x -> Store x

@@ -33,7 +33,8 @@ type alias PrevNextIdPair =
 
 type Msg
     = OnCommonMsg CommonMsg.Msg
-    | OnExternalEntityChanged String D.Value
+    | OnPouchDBChange String D.Value
+    | OnFirebaseChange String D.Value
     | OnUserChanged Firebase.User
     | OnFCMTokenChanged Firebase.FCMToken
     | SignIn

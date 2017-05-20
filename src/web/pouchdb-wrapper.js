@@ -35,6 +35,7 @@ export default async (dbName, indices = []) => {
             // console.log("isDocModified", isDocModified)
             const areDocsSame = _.equals(_.merge(doc, oldDoc), _.merge(oldDoc, doc))
 
+
             if (areDocsSame) {
                 console.log("upsert: ignoring update since docs are same: ", areDocsSame)
             } else {

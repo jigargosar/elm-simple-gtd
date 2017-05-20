@@ -31,6 +31,13 @@ port fireDataPush : ( String, E.Value ) -> Cmd msg
 port fireStartSync : String -> Cmd msg
 
 
+port onFirebaseChange : (( String, E.Value ) -> msg) -> Sub msg
+
+
+onChange tagger =
+    onFirebaseChange (uncurry tagger)
+
+
 startSyncCmd =
     fireStartSync
 

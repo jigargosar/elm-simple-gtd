@@ -102,7 +102,8 @@ subscriptions m =
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.keyUps OnGlobalKeyUp
         , notificationClicked OnNotificationClicked
-        , Store.onChange OnExternalEntityChanged
+        , Store.onChange OnPouchDBChange
+        , Firebase.onChange OnFirebaseChange
         ]
 
 
@@ -113,8 +114,11 @@ update msg =
                 OnCommonMsg msg ->
                     CommonMsg.update msg
 
-                OnExternalEntityChanged dbName encodedDoc ->
-                    Return.map (Model.onExternalEntityChange dbName encodedDoc)
+                OnPouchDBChange dbName encodedDoc ->
+                    Return.map (Model.onPouchDBChange dbName encodedDoc)
+
+                OnFirebaseChange dbName encodedDoc ->
+                    Return.effect_ (Model.reEncodeAndUpsertEntityCmd dbName encodedDoc)
 
                 SignIn ->
                     Return.command (Firebase.signIn ())

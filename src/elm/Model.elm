@@ -820,7 +820,7 @@ setTodoStoreFromTuple tuple model =
     tuple |> Tuple.mapSecond (setTodoStore # model)
 
 
-onExternalEntityChange dbName encodedEntity =
+onPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
             updateTodoStore (Store.updateExternal encodedEntity)
@@ -833,6 +833,22 @@ onExternalEntityChange dbName encodedEntity =
 
         _ ->
             identity
+
+
+reEncodeAndUpsertEntityCmd : String -> E.Value -> Model -> Cmd msg
+reEncodeAndUpsertEntityCmd dbName encodedEntity =
+    case dbName of
+        "todo-db" ->
+            getTodoStore >> (Store.reEncodeAndUpsertCmd encodedEntity)
+
+        "project-db" ->
+            getProjectStore >> (Store.reEncodeAndUpsertCmd encodedEntity)
+
+        "context-db" ->
+            getContextStore >> (Store.reEncodeAndUpsertCmd encodedEntity)
+
+        _ ->
+            (\_ -> Cmd.none)
 
 
 getMainViewType : Model -> ViewType

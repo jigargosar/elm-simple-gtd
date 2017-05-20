@@ -13,16 +13,16 @@
   "scripts": {
     "install-elm": "which -a elm ; elm-package install -y",
     "postinstall": "bash -c \"which -a elm && elm-package install -y && bower install \"",
-    "postbump": "npm run build",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "hot": "cross-env NODE_ENV=development webpack-dev-server --hot --inline",
     "hot-hot": "nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"",
     "prebuild": "bash -c \"rimraf app && rimraf docs && rimraf build \"",
+    "postbump": "npm run build",
     "bump": "npm_bump --auto --auto-fallback patch --skip-push",
     "build": "bash scripts/build.sh",
     "prebuild-dev": "rimraf dev",
     "predeploy-dev": "npm run build-dev",
     "deploy-dev": "firebase deploy --project dev --public dev --except functions",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "build-dev": "bash scripts/build-dev.sh",
     "link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
     "start": "http-server docs"

@@ -29219,7 +29219,10 @@ var setup = exports.setup = function setup(app, dbList) {
         });
 
         var onChange = function onChange(change) {
-            return firebaseApp.database().ref("/users/" + uid + "/" + db.name + "/" + change.id).set(_.merge(change.doc, { "firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP })).then(function () {
+            // console.log("sending pouchdb change to firebase: ", change)
+            console.log("sending pouchdb change to firebase: ", change.id);
+            var fireDoc = _.compose(_.omit("_rev"), _.merge(change.doc))({ "firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP });
+            return firebaseApp.database().ref("/users/" + uid + "/" + db.name + "/" + change.id).set(fireDoc).then(function () {
                 localStorage.setItem(lasSeqKey, change.seq);
                 return change.seq;
             });
@@ -29238,14 +29241,17 @@ var setup = exports.setup = function setup(app, dbList) {
         return changes;
     }
 
-    function startReplicationFromFirebase(uid, dbName) {
+    function startReplicationFromFirebase(uid, db) {
+        var dbName = db.name;
         var lastPersistedAtKey = "pouch-fire-sync." + dbName + ".in.lastPersistedAt";
-        var onFirebaseChange = function onFirebaseChange(dbName) {
-            return function (snap) {
-                var doc = snap.val();
-                app.ports["onFirebaseChange"].send([dbName, doc]);
-                localStorage.setItem(lastPersistedAtKey, Math.min(doc.firebaseServerPersistedAt, Date.now()));
-            };
+
+        function updateKey(doc) {
+            localStorage.setItem(lastPersistedAtKey, Math.min(doc.firebaseServerPersistedAt, Date.now()));
+        }
+
+        var onFirebaseChange = function onFirebaseChange(doc) {
+            app.ports["onFirebaseChange"].send([dbName, doc]);
+            updateKey(doc);
         };
 
         var lastPersistedAtString = localStorage.getItem(lastPersistedAtKey);
@@ -29253,8 +29259,31 @@ var setup = exports.setup = function setup(app, dbList) {
 
         var todoDbRef = firebaseApp.database().ref("/users/" + uid + "/" + dbName).orderByChild("firebaseServerPersistedAt").startAt(lastPersistedAt + 1);
 
-        todoDbRef.on("child_added", onFirebaseChange(dbName));
-        todoDbRef.on("child_changed", onFirebaseChange(dbName));
+        // todoDbRef.on("child_added", onFirebaseChange(dbName))
+        // todoDbRef.on("child_changed", onFirebaseChange(dbName))
+
+        var changeStream = Kefir.merge([Kefir.fromEvents(todoDbRef, "child_changed"), Kefir.fromEvents(todoDbRef, "child_added")]);
+        changeStream.map(_.invoker(0, "val")).map(function (doc) {
+            return db.getClean(doc._id).then(_.omit(["_rev"])).then(_.equals(_.omit(["firebaseServerPersistedAt"], doc))).then(function (docsSame) {
+                if (docsSame) {
+                    updateKey(doc);
+                    return "firebase changes: docs same ignoring update";
+                } else {
+                    onFirebaseChange(doc);
+                    return "firebase changes: docs not same, sending to elm";
+                }
+            }).catch(function (e) {
+                console.error("fal: ", e);
+                if (e.status === 404) {
+                    onFirebaseChange(doc);
+                    return "firebase changes: docs not found locally, sending to elm";
+                }
+            });
+        }).flatMap(Kefir.fromPromise).onValue(function (val) {
+            return console.log("scc: ", val);
+        }).onError(function (e) {
+            console.error("fal: ", e);
+        });
     }
 
     app.ports["fireStartSync"].subscribe(function () {
@@ -29267,7 +29296,7 @@ var setup = exports.setup = function setup(app, dbList) {
                                 return changes.cancel();
                             })(changesEmitters);
                             changesEmitters = _.map(function (db) {
-                                startReplicationFromFirebase(uid, db.name);
+                                startReplicationFromFirebase(uid, db);
                                 return startReplicationToFirebase(uid, db);
                             })(dbList);
 
@@ -29531,7 +29560,7 @@ var setupNotifications = function () {
                         return _context.abrupt("return");
 
                     case 4:
-                        swScriptPath =  false ? "/notification-sw.js" : '/service-worker.js';
+                        swScriptPath =  false ? "notification-sw.js" : 'service-worker.js';
                         // const swScriptPath = "/notification-sw.js"
 
                         navigator.serviceWorker.addEventListener('message', function (event) {
@@ -29559,7 +29588,7 @@ var setupNotifications = function () {
                             console.debug("messaging.activate(reg)");
                             messaging.activate(reg);
                             clearTimeout(intervalId);
-                        }, 0);
+                        }, 100);
 
 
                         app.ports["showNotification"].subscribe(showNotification(reg));
@@ -29701,7 +29730,7 @@ var removeNilValuedKeys = function removeNilValuedKeys(value) {
 };
 
 exports.default = function () {
-    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee5(dbName) {
+    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(dbName) {
         var deleteIndices = function () {
             var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
                 var existingCustomIndices;
@@ -29736,76 +29765,38 @@ exports.default = function () {
             };
         }();
 
-        var upsert = function () {
-            var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(id, doc) {
-                var upsertResult;
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                _context2.next = 2;
-                                return db.upsert(id, function (oldDoc) {
-                                    // console.log("upsert: oldDoc ", dbName, oldDoc, id)
-
-                                    var areDocsSame = _.equals(removeNilValuedKeys(oldDoc), removeNilValuedKeys(doc));
-
-                                    if (areDocsSame) {
-                                        console.log("upsert: ignoring update since docs are same: ", areDocsSame);
-                                    } else {
-                                        console.log("upsert: adding new doc since docs are not same", areDocsSame);
-                                        return doc;
-                                    }
-                                });
-
-                            case 2:
-                                upsertResult = _context2.sent;
-                                return _context2.abrupt("return", upsertResult);
-
-                            case 4:
-                            case "end":
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this);
-            }));
-
-            return function upsert(_x3, _x4) {
-                return _ref3.apply(this, arguments);
-            };
-        }();
-
         var deleteAllDocs = function () {
-            var _ref5 = _asyncToGenerator(regeneratorRuntime.mark(function _callee4() {
+            var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
                 var remove;
-                return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                return regeneratorRuntime.wrap(function _callee3$(_context3) {
                     while (1) {
-                        switch (_context4.prev = _context4.next) {
+                        switch (_context3.prev = _context3.next) {
                             case 0:
                                 remove = function remove(doc) {
                                     return db.put(_.merge(doc, { _deleted: true }));
                                 };
 
-                                _context4.t0 = Promise;
-                                _context4.t1 = _;
-                                _context4.t2 = remove;
-                                _context4.next = 6;
+                                _context3.t0 = Promise;
+                                _context3.t1 = _;
+                                _context3.t2 = remove;
+                                _context3.next = 6;
                                 return allDocs();
 
                             case 6:
-                                _context4.t3 = _context4.sent;
-                                _context4.t4 = _context4.t1.map.call(_context4.t1, _context4.t2, _context4.t3);
-                                return _context4.abrupt("return", _context4.t0.all.call(_context4.t0, _context4.t4));
+                                _context3.t3 = _context3.sent;
+                                _context3.t4 = _context3.t1.map.call(_context3.t1, _context3.t2, _context3.t3);
+                                return _context3.abrupt("return", _context3.t0.all.call(_context3.t0, _context3.t4));
 
                             case 9:
                             case "end":
-                                return _context4.stop();
+                                return _context3.stop();
                         }
                     }
-                }, _callee4, this);
+                }, _callee3, this);
             }));
 
             return function deleteAllDocs() {
-                return _ref5.apply(this, arguments);
+                return _ref4.apply(this, arguments);
             };
         }();
 
@@ -29813,10 +29804,10 @@ exports.default = function () {
 
 
         var indices = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-        var db, syncTracker, createIndex, bulkDocs, startRemoteSync, find, allDocs, onChange;
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        var db, syncTracker, createIndex, bulkDocs, upsert, startRemoteSync, find, allDocs, onChange;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
             while (1) {
-                switch (_context5.prev = _context5.next) {
+                switch (_context4.prev = _context4.next) {
                     case 0:
                         onChange = function onChange(callback) {
                             return db.changes({
@@ -29859,6 +29850,32 @@ exports.default = function () {
                             return tracker;
                         };
 
+                        upsert = function upsert(id, doc) {
+                            return db.upsert(id, function (oldDoc) {
+
+                                var cleanNewDoc = function (doc, oldDoc) {
+                                    var mergeOldDocRev = _.merge(_.__, { _rev: oldDoc._rev });
+                                    var isRevEmpty = _.propSatisfies(_.isEmpty, "_rev");
+                                    return _.compose(_.when(isRevEmpty, mergeOldDocRev), removeNilValuedKeys)(doc);
+                                }(doc, oldDoc);
+
+                                var cleanOldDoc = removeNilValuedKeys(oldDoc);
+                                var areDocsSame = _.equals(cleanNewDoc, cleanOldDoc);
+
+                                if (areDocsSame) {
+                                    // console.log("upsert: ignoring update since docs are same: ", areDocsSame)
+                                    return;
+                                }
+                                /*console.log("upsert: adding new doc since docs are *not* same: immutable diff: ",
+                                 _.merge(cleanOldDoc, {})
+                                 , _.merge(cleanNewDoc, {})
+                                 )*/
+                                return cleanNewDoc;
+                            }).then(_.tap(function (res) {
+                                return console.log("upsert results: ", res);
+                            }));
+                        };
+
                         bulkDocs = function bulkDocs(docs) {
                             return db.bulkDocs(docs);
                         };
@@ -29872,35 +29889,35 @@ exports.default = function () {
                         syncTracker = null;
 
                         find = function () {
-                            var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(options) {
-                                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                            var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(options) {
+                                return regeneratorRuntime.wrap(function _callee2$(_context2) {
                                     while (1) {
-                                        switch (_context3.prev = _context3.next) {
+                                        switch (_context2.prev = _context2.next) {
                                             case 0:
-                                                _context3.next = 2;
+                                                _context2.next = 2;
                                                 return db.find(options);
 
                                             case 2:
-                                                return _context3.abrupt("return", _context3.sent.docs);
+                                                return _context2.abrupt("return", _context2.sent.docs);
 
                                             case 3:
                                             case "end":
-                                                return _context3.stop();
+                                                return _context2.stop();
                                         }
                                     }
-                                }, _callee3, undefined);
+                                }, _callee2, undefined);
                             }));
 
-                            return function find(_x8) {
-                                return _ref4.apply(this, arguments);
+                            return function find(_x6) {
+                                return _ref3.apply(this, arguments);
                             };
                         }();
 
-                        _context5.next = 10;
+                        _context4.next = 11;
                         return Promise.all(_.map(createIndex, indices));
 
-                    case 10:
-                        return _context5.abrupt("return", {
+                    case 11:
+                        return _context4.abrupt("return", {
                             find: find,
                             deleteAllDocs: deleteAllDocs,
                             bulkDocs: bulkDocs,
@@ -29914,15 +29931,18 @@ exports.default = function () {
                             },
                             onChange: onChange,
                             changes: _.bind(db.changes, db),
-                            name: dbName
+                            name: dbName,
+                            getClean: function getClean(id) {
+                                return db.get(id).then(removeNilValuedKeys);
+                            }
                         });
 
-                    case 11:
+                    case 12:
                     case "end":
-                        return _context5.stop();
+                        return _context4.stop();
                 }
             }
-        }, _callee5, undefined);
+        }, _callee4, undefined);
     }));
 
     return function (_x2) {
@@ -50840,28 +50860,6 @@ var _user$project$Document$setDeleted = F2(
 var _user$project$Document$isDeleted = function (_) {
 	return _.deleted;
 };
-var _user$project$Document$documentFieldsDecoder = function (_p0) {
-	return A4(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-		'deleted',
-		_elm_lang$core$Json_Decode$bool,
-		false,
-		A4(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-			'modifiedAt',
-			_elm_lang$core$Json_Decode$float,
-			0,
-			A4(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-				'createdAt',
-				_elm_lang$core$Json_Decode$float,
-				0,
-				A3(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-					'_rev',
-					_elm_lang$core$Json_Decode$string,
-					A3(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required, '_id', _elm_lang$core$Json_Decode$string, _p0)))));
-};
 var _user$project$Document$encodeMetaFields = function (doc) {
 	return {
 		ctor: '::',
@@ -50911,6 +50909,29 @@ var _user$project$Document$encode = F2(
 				encodeOtherFields(doc)));
 	});
 var _user$project$Document$defaultRevision = '';
+var _user$project$Document$documentFieldsDecoder = function (_p0) {
+	return A4(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+		'deleted',
+		_elm_lang$core$Json_Decode$bool,
+		false,
+		A4(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+			'modifiedAt',
+			_elm_lang$core$Json_Decode$float,
+			0,
+			A4(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+				'createdAt',
+				_elm_lang$core$Json_Decode$float,
+				0,
+				A4(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+					'_rev',
+					_elm_lang$core$Json_Decode$string,
+					_user$project$Document$defaultRevision,
+					A3(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required, '_id', _elm_lang$core$Json_Decode$string, _p0)))));
+};
 var _user$project$Document$getId = function (_) {
 	return _.id;
 };
@@ -60957,7 +60978,7 @@ var Notifications = __webpack_require__(303);
 
 
 var developmentMode = false;
-var pkg = {"name":"simplegtd.com","version":"0.12.0","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","bump":"npm_bump --auto --auto-fallback patch --skip-push","postbump":"npm run build","predeploy-dev":"npm run build-dev","deploy-dev":"firebase deploy --project dev --public dev --except functions","dev":"cross-env NODE_ENV=development webpack-dev-server","hot":"cross-env NODE_ENV=development webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","build":"bash scripts/build.sh","prebuild-dev":"rimraf dev","build-dev":"bash scripts/build-dev.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","firebase-tools":"3.9.0","kefir":"3.7.1","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"babel-polyfill":"6.23.0","crypto-random-string":"1.0.0","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
+var pkg = {"name":"simplegtd.com","version":"0.12.1","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","dev":"cross-env NODE_ENV=development webpack-dev-server","hot":"cross-env NODE_ENV=development webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","postbump":"npm run build","bump":"npm_bump --auto --auto-fallback patch --skip-push","build":"bash scripts/build.sh","prebuild-dev":"rimraf dev","predeploy-dev":"npm run build-dev","deploy-dev":"firebase deploy --project dev --public dev --except functions","build-dev":"bash scripts/build-dev.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","firebase-tools":"3.9.0","kefir":"3.7.1","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"babel-polyfill":"6.23.0","crypto-random-string":"1.0.0","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
 
 window.addEventListener('WebComponentsReady', function () {
     boot().catch(console.error);

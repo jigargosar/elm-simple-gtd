@@ -835,17 +835,17 @@ onPouchDBChange dbName encodedEntity =
             identity
 
 
-upsertEncodedDocFromFirebaseCmd : String -> E.Value -> Model -> Cmd msg
-upsertEncodedDocFromFirebaseCmd dbName encodedEntity =
+upsertEncodedDocCmd : String -> E.Value -> Model -> Cmd msg
+upsertEncodedDocCmd dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            getTodoStore >> (Store.upsertEncodedDocFromFirebase encodedEntity)
+            getTodoStore >> (Store.upsertEncoded encodedEntity)
 
         "project-db" ->
-            getProjectStore >> (Store.upsertEncodedDocFromFirebase encodedEntity)
+            getProjectStore >> (Store.upsertEncoded encodedEntity)
 
         "context-db" ->
-            getContextStore >> (Store.upsertEncodedDocFromFirebase encodedEntity)
+            getContextStore >> (Store.upsertEncoded encodedEntity)
 
         _ ->
             (\_ -> Cmd.none)

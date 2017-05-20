@@ -99,11 +99,6 @@ async function boot() {
         dbMap[dbName].upsert(id, doc).catch(console.error)
     });
 
-    app.ports["pouchDBFirebaseUpsert"].subscribe(async ([dbName, id, doc]) => {
-        dbMap[dbName].upsert(id, doc).catch(console.error)
-    });
-
-
     Notifications.setup(app).catch(console.error)
 
     app.ports["focusSelector"].subscribe((selector) => {

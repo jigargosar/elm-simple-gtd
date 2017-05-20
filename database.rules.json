@@ -6,17 +6,17 @@
         ".write": "$uid === auth.uid",
         "todo-db": {
           ".indexOn": [
-            "modifiedAt"
+            "firebaseServerPersistedAt"
           ]
         },
         "context-db": {
           ".indexOn": [
-            "modifiedAt"
+            "firebaseServerPersistedAt"
           ]
         },
         "project-db": {
           ".indexOn": [
-            "modifiedAt"
+            "firebaseServerPersistedAt"
           ]
         }
       }

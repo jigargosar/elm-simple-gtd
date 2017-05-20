@@ -9,6 +9,12 @@ PouchDB.plugin(require('pouchdb-find'))
 PouchDB.plugin(require('pouchdb-upsert'))
 
 
+const removeNilValuedKeys = value =>
+    _.when(_.is(Object),
+        _.compose(_.map(removeNilValuedKeys), _.reject(_.isNil))
+    )(value)
+
+
 export default async (dbName, indices = []) => {
     const db = new PouchDB(dbName)
     let syncTracker = null;
@@ -31,10 +37,11 @@ export default async (dbName, indices = []) => {
         console.log("upsert: doc", dbName, doc, id)
         const upsertResult = await db.upsert(id, oldDoc => {
             console.log("upsert: oldDoc ", dbName, oldDoc, id)
-            // const isDocModified = oldDoc.modifiedAt !== doc.modifiedAt
-            // console.log("isDocModified", isDocModified)
-            const areDocsSame = _.equals(_.merge(doc, oldDoc), _.merge(oldDoc, doc))
 
+            const areDocsSame = _.equals(
+                removeNilValuedKeys(oldDoc),
+                removeNilValuedKeys(doc),
+            )
 
             if (areDocsSame) {
                 console.log("upsert: ignoring update since docs are same: ", areDocsSame)
@@ -43,7 +50,7 @@ export default async (dbName, indices = []) => {
                 return doc
             }
         })
-        console.log("upsertResult", upsertResult)
+        console.log("upsert: result", upsertResult)
         return upsertResult
     }
 

@@ -34,7 +34,7 @@ export const setup =  (app, dbList) => {
     app.ports["signIn"].subscribe(() => {
         let provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({
-            // prompt: 'select_account',
+            prompt: 'select_account',
             // prompt: 'consent'
         })
 

@@ -118,7 +118,7 @@ update msg =
                     Return.map (Model.onPouchDBChange dbName encodedDoc)
 
                 OnFirebaseChange dbName encodedDoc ->
-                    Return.effect_ (Model.upsertEncodedDocCmd dbName encodedDoc)
+                    Return.effect_ (Model.upsertEncodedDocFromFirebaseCmd dbName encodedDoc)
 
                 SignIn ->
                     Return.command (Firebase.signIn ())

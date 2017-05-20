@@ -118,8 +118,8 @@ decode encodedDoc store =
         |> Result.toMaybe
 
 
-upsertEncoded : D.Value -> Store x -> Cmd msg
-upsertEncoded jsonValue store =
+upsertEncodedDocFromFirebase : D.Value -> Store x -> Cmd msg
+upsertEncodedDocFromFirebase jsonValue store =
     decode jsonValue store
         ?|> upsertIn store
         ?= Cmd.none
@@ -131,14 +131,15 @@ updateExternal encodedDoc store =
 
 
 insertExternal doc store =
-    {-let
-        _ =
-            Debug.log "exter doc change adding to store" (doc)
-    in-}
-        asIdDict store
-            |> Dict.insert (Document.getId doc) doc
-            |> Dict.values
-            |> (setList # store)
+    {- let
+           _ =
+               Debug.log "exter doc change adding to store" (doc)
+       in
+    -}
+    asIdDict store
+        |> Dict.insert (Document.getId doc) doc
+        |> Dict.values
+        |> (setList # store)
 
 
 updateExternalHelp newDoc store =

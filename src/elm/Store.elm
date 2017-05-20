@@ -23,6 +23,9 @@ import Set
 port pouchDBUpsert : ( String, String, D.Value ) -> Cmd msg
 
 
+port pouchDBFirebaseUpsert : ( String, String, D.Value ) -> Cmd msg
+
+
 port pouchDBChanges : (( String, D.Value ) -> msg) -> Sub msg
 
 
@@ -68,6 +71,10 @@ generator name otherFieldsEncoder decoder encodedList =
 
 upsertIn store doc =
     pouchDBUpsert ( store.name, doc.id, Document.encode store.otherFieldsEncoder doc )
+
+
+upsertDocFromFirebaseIn store doc =
+    pouchDBFirebaseUpsert ( store.name, doc.id, Document.encode store.otherFieldsEncoder doc )
 
 
 encode : Document x -> Store x -> E.Value
@@ -121,7 +128,7 @@ decode encodedDoc store =
 upsertEncodedDocFromFirebase : D.Value -> Store x -> Cmd msg
 upsertEncodedDocFromFirebase jsonValue store =
     decode jsonValue store
-        ?|> upsertIn store
+        ?|> upsertDocFromFirebaseIn store
         ?= Cmd.none
 
 

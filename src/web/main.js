@@ -100,7 +100,7 @@ async function boot() {
     });
 
     app.ports["pouchDBFirebaseUpsert"].subscribe(async ([dbName, id, doc]) => {
-        dbMap[dbName].upsert(id, _.merge(doc, {receivedFromFirebase:true})).catch(console.error)
+        dbMap[dbName].upsert(id, doc).catch(console.error)
     });
 
 

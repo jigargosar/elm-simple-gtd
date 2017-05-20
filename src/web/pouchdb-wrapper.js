@@ -34,35 +34,35 @@ export default async (dbName, indices = []) => {
     }
 
     async function upsert(id, doc) {
-        //noinspection UnnecessaryLocalVariableJS
-        const upsertResult = await db.upsert(id, oldDoc => {
+        return db
+            .upsert(id, oldDoc => {
 
-            const cleanNewDoc = ((doc, oldDoc) => {
-                const mergeOldDocRev = _.merge(_.__, {_rev: oldDoc._rev})
-                const isRevEmpty = _.propSatisfies(_.isEmpty, "_rev")
-                return _
-                    .compose(
-                        _.when(isRevEmpty, mergeOldDocRev),
-                        removeNilValuedKeys
-                    )(doc)
+                const cleanNewDoc = ((doc, oldDoc) => {
+                    const mergeOldDocRev = _.merge(_.__, {_rev: oldDoc._rev})
+                    const isRevEmpty = _.propSatisfies(_.isEmpty, "_rev")
+                    return _
+                        .compose(
+                            _.when(isRevEmpty, mergeOldDocRev),
+                            removeNilValuedKeys
+                        )(doc)
 
-            })(doc, oldDoc)
+                })(doc, oldDoc)
 
-            const cleanOldDoc = removeNilValuedKeys(oldDoc)
-            const areDocsSame = _.equals(cleanNewDoc, cleanOldDoc)
+                const cleanOldDoc = removeNilValuedKeys(oldDoc)
+                const areDocsSame = _.equals(cleanNewDoc, cleanOldDoc)
 
-            if (areDocsSame) {
-                console.log("upsert: ignoring update since docs are same: ", areDocsSame)
-                return
-            }
-            /*console.log("upsert: adding new doc since docs are *not* same: immutable diff: ",
-                _.merge(cleanOldDoc, {})
-                , _.merge(cleanNewDoc, {})
-            )*/
-            return cleanNewDoc
-        })
-        console.log("upsert: result", upsertResult)
-        return upsertResult
+                if (areDocsSame) {
+                    console.log("upsert: ignoring update since docs are same: ", areDocsSame)
+                    return
+                }
+                /*console.log("upsert: adding new doc since docs are *not* same: immutable diff: ",
+                 _.merge(cleanOldDoc, {})
+                 , _.merge(cleanNewDoc, {})
+                 )*/
+                return cleanNewDoc
+            })
+            .then(_.tap(res => console.log("upsert results: ")))
+
     }
 
     function startRemoteSync(remoteUrl = "http://localhost:12321", prefix = "", dbName_ = dbName) {

@@ -89,7 +89,7 @@ export const setup = (app, dbList) => {
         const lastPersistedAtKey = `pouch-fire-sync.${dbName}.in.lastPersistedAt`
         const onFirebaseChange = dbName => snap => {
             const doc = snap.val()
-            console.log("fire: doc received: ", doc)
+            // console.log("fire: doc received: ", doc)
             app.ports["onFirebaseChange"].send([dbName, doc])
             localStorage.setItem(lastPersistedAtKey, Math.min(doc.firebaseServerPersistedAt, Date.now()))
         }

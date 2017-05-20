@@ -1,4 +1,4 @@
-## Upcoming
+## v0.12.1 - 2017-05-20
 * [fix] process changed docs from firebase separately so that dont end up sending them back to firebase.
 * [fix] fcm token activation
 * [fix] firebase sync infinite upsert bug 

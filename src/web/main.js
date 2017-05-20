@@ -1,29 +1,6 @@
 "use strict";
 
 const _ = require("ramda")
-const Kefir = require("kefir")
-
-const firebaseDevConfig = {
-    apiKey: "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc",
-    authDomain: "rational-mote-664.firebaseapp.com",
-    databaseURL: "https://rational-mote-664.firebaseio.com",
-    projectId: "rational-mote-664",
-    storageBucket: "rational-mote-664.appspot.com",
-    messagingSenderId: "49437522774"
-}
-
-const firebaseProdConfig = {
-    apiKey: "AIzaSyDgqOiOMuTvK3PdzJ0Oz6ctEg-devcgZYc",
-    authDomain: "simple-gtd-prod.firebaseapp.com",
-    databaseURL: "https://simple-gtd-prod.firebaseio.com",
-    projectId: "simple-gtd-prod",
-    storageBucket: "simple-gtd-prod.appspot.com",
-    messagingSenderId: "1061254169900"
-}
-
-//noinspection JSUnresolvedVariable
-const firebaseConfig =
-    IS_DEVELOPMENT_ENV ? firebaseDevConfig : firebaseProdConfig
 
 const cryptoRandomString = require('crypto-random-string');
 
@@ -36,6 +13,7 @@ window.jQuery = $
 require("./jquery.trap")
 require("jquery-ui/ui/position")
 const Notifications = require("./notifications")
+import Fire from "./fire"
 import DB from "./pouchdb-wrapper"
 
 
@@ -47,7 +25,6 @@ window.addEventListener('WebComponentsReady', () => {
 });
 
 async function boot() {
-    const firebaseApp = firebase.initializeApp(firebaseConfig);
     const deviceId = getOrCreateDeviceId()
     const $elm = $("#elm-app-container")
     $elm.trap();
@@ -103,6 +80,7 @@ async function boot() {
     const app = Elm["Main"]
         .embed(document.getElementById("elm-app-container"), flags)
 
+    Fire.setup(app, _.values(dbMap))
 
     _.mapObjIndexed((db, name) => db.onChange(
         (doc) => {
@@ -151,99 +129,6 @@ async function boot() {
                 collision: "flipfit"
             }).find(`[tabindex="0"]`).focus()
         })
-    })
-
-    app.ports["signIn"].subscribe(() => {
-        let provider = new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({
-            prompt: 'select_account',
-            // prompt: 'consent'
-        })
-
-        document.getElementById('firebase-auth')
-                .signInWithPopup(provider)
-                .catch(console.error)
-    })
-
-
-    app.ports["fireDataWrite"].subscribe(([path, value]) => {
-        // console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
-        const ref = firebaseApp.database().ref(path);
-        ref.set(value)
-           .catch(console.error)
-    })
-
-    function startReplicationToFirebase(uid, db) {
-        const lasSeqKey = `pouch.${db.name}.fire-sync.last_seq`
-        const lastSeqString = localStorage.getItem(lasSeqKey)
-        const lastSeq = parseInt(lastSeqString, 10) || 0
-
-        const changes = db.changes({
-            include_docs: true,
-            live: true,
-            since: lastSeq
-        })
-
-        const onChange = change =>
-            firebaseApp
-                .database().ref(`/users/${uid}/${db.name}/${change.id}`)
-                .set(change.doc)
-                .then(() => {
-                    localStorage.setItem(lasSeqKey, change.seq)
-                    return change.seq
-                })
-
-        const errorStream = Kefir.fromEvents(changes, "error")
-        const changeStream = Kefir.fromEvents(changes, "change")
-
-        Kefir.merge([changeStream, errorStream])
-             // .log()
-             .map(onChange)
-             .flatMap(Kefir.fromPromise)
-             .onValue(val => console.log("fireSyncSuccess: ", val))
-             .onError(e => console.error("fireSyncError: ", e))
-    }
-
-    function startReplicationFromFirebase(uid, dbName) {
-        const lastModifiedAtKey = `pouch-fire-sync.${dbName}.in.lastModifiedAt`
-        const onFirebaseChange = dbName => snap => {
-            const doc = snap.val()
-            app.ports["onFirebaseChange"].send([dbName, doc])
-            localStorage.setItem(lastModifiedAtKey, Math.min(doc.modifiedAt, Date.now()))
-        }
-
-        const lastModifiedAtString = localStorage.getItem(lastModifiedAtKey)
-        const lastModifiedAt = parseInt(lastModifiedAtString, 10) || 0
-
-        const todoDbRef = firebaseApp
-            .database()
-            .ref(`/users/${uid}/${dbName}`)
-            .orderByChild("modifiedAt")
-            .startAt(lastModifiedAt + 1)
-
-        todoDbRef.on("child_added", onFirebaseChange(dbName))
-        todoDbRef.on("child_changed", onFirebaseChange(dbName))
-    }
-
-
-    app.ports["fireStartSync"].subscribe(async (uid) => {
-        _.map((db) => {
-            startReplicationToFirebase(uid, db)
-            startReplicationFromFirebase(uid, db.name)
-        })(dbMap)
-    })
-
-
-    app.ports["fireDataPush"].subscribe(([path, value]) => {
-        console.log(`firebaseApp.database().ref(path).push(value)`, {path, value})
-        firebaseApp.database().ref(path).push(value)
-    })
-
-    app.ports["signOut"].subscribe(() => {
-        let googleAuth = document.getElementById('firebase-auth');
-        googleAuth
-            .signOut()
-            .catch(console.error)
     })
 
     app.ports["focusPaperInput"].subscribe((selector) => {

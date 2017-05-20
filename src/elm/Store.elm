@@ -131,10 +131,10 @@ updateExternal encodedDoc store =
 
 
 insertExternal doc store =
-    let
+    {-let
         _ =
             Debug.log "exter doc change adding to store" (doc)
-    in
+    in-}
         asIdDict store
             |> Dict.insert (Document.getId doc) doc
             |> Dict.values

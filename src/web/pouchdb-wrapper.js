@@ -34,9 +34,10 @@ export default async (dbName, indices = []) => {
     }
 
     async function upsert(id, doc) {
-        console.log("upsert: doc", dbName, doc, id)
+        // console.log("upsert: doc", dbName, doc, id)
+        //noinspection UnnecessaryLocalVariableJS
         const upsertResult = await db.upsert(id, oldDoc => {
-            console.log("upsert: oldDoc ", dbName, oldDoc, id)
+            // console.log("upsert: oldDoc ", dbName, oldDoc, id)
 
             const areDocsSame = _.equals(
                 removeNilValuedKeys(oldDoc),
@@ -50,7 +51,7 @@ export default async (dbName, indices = []) => {
                 return doc
             }
         })
-        console.log("upsert: result", upsertResult)
+        // console.log("upsert: result", upsertResult)
         return upsertResult
     }
 

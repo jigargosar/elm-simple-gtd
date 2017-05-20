@@ -26,8 +26,7 @@ const firebaseConfig =
     IS_DEVELOPMENT_ENV ? firebaseDevConfig : firebaseProdConfig
 
 
-export const setup =  (app, dbList) => {
-
+export const setup = (app, dbList) => {
     const firebaseApp = firebase.initializeApp(firebaseConfig);
     let changesEmitters = []
 
@@ -52,7 +51,7 @@ export const setup =  (app, dbList) => {
     })
 
     function startReplicationToFirebase(uid, db) {
-        const lasSeqKey = `pouch.${db.name}.fire-sync.last_seq`
+        const lasSeqKey = `pouch-fire-sync.${db.name}.out.lastSeq`
         const lastSeqString = localStorage.getItem(lasSeqKey)
         const lastSeq = parseInt(lastSeqString, 10) || 0
 
@@ -65,7 +64,9 @@ export const setup =  (app, dbList) => {
         const onChange = change =>
             firebaseApp
                 .database().ref(`/users/${uid}/${db.name}/${change.id}`)
-                .set(change.doc)
+                .set(_.merge(change.doc,
+                    {"firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP})
+                )
                 .then(() => {
                     localStorage.setItem(lasSeqKey, change.seq)
                     return change.seq
@@ -84,21 +85,21 @@ export const setup =  (app, dbList) => {
     }
 
     function startReplicationFromFirebase(uid, dbName) {
-        const lastModifiedAtKey = `pouch-fire-sync.${dbName}.in.lastModifiedAt`
+        const lastPersistedAtKey = `pouch-fire-sync.${dbName}.in.lastPersistedAt`
         const onFirebaseChange = dbName => snap => {
             const doc = snap.val()
             app.ports["onFirebaseChange"].send([dbName, doc])
-            localStorage.setItem(lastModifiedAtKey, Math.min(doc.modifiedAt, Date.now()))
+            localStorage.setItem(lastPersistedAtKey, Math.min(doc.firebaseServerPersistedAt, Date.now()))
         }
 
-        const lastModifiedAtString = localStorage.getItem(lastModifiedAtKey)
-        const lastModifiedAt = parseInt(lastModifiedAtString, 10) || 0
+        const lastPersistedAtString = localStorage.getItem(lastPersistedAtKey)
+        const lastPersistedAt = parseInt(lastPersistedAtString, 10) || 0
 
         const todoDbRef = firebaseApp
             .database()
             .ref(`/users/${uid}/${dbName}`)
-            .orderByChild("modifiedAt")
-            .startAt(lastModifiedAt + 1)
+            .orderByChild("firebaseServerPersistedAt")
+            .startAt(lastPersistedAt + 1)
 
         todoDbRef.on("child_added", onFirebaseChange(dbName))
         todoDbRef.on("child_changed", onFirebaseChange(dbName))

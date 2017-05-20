@@ -39,9 +39,7 @@ export default async (dbName, indices = []) => {
 
             const cleanNewDoc = ((doc, oldDoc) => {
                 const mergeOldDocRev = _.merge(_.__, {_rev: oldDoc._rev})
-
                 const isRevEmpty = _.propSatisfies(_.isEmpty, "_rev")
-
                 return _
                     .compose(
                         _.when(isRevEmpty, mergeOldDocRev),
@@ -51,16 +49,16 @@ export default async (dbName, indices = []) => {
             })(doc, oldDoc)
 
             const cleanOldDoc = removeNilValuedKeys(oldDoc)
-
             const areDocsSame = _.equals(cleanNewDoc, cleanOldDoc)
-
-            console.log("doc diff", _.merge(cleanOldDoc, {}), _.merge(cleanNewDoc, {}))
 
             if (areDocsSame) {
                 console.log("upsert: ignoring update since docs are same: ", areDocsSame)
                 return
             }
-            console.log("upsert: adding new doc since docs are *not* same", cleanNewDoc, cleanOldDoc)
+            /*console.log("upsert: adding new doc since docs are *not* same: immutable diff: ",
+                _.merge(cleanOldDoc, {})
+                , _.merge(cleanNewDoc, {})
+            )*/
             return cleanNewDoc
         })
         console.log("upsert: result", upsertResult)

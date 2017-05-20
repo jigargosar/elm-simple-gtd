@@ -33,7 +33,7 @@ export default async (dbName, indices = []) => {
         return db.bulkDocs(docs)
     }
 
-    async function upsert(id, doc) {
+    function upsert(id, doc) {
         return db
             .upsert(id, oldDoc => {
 

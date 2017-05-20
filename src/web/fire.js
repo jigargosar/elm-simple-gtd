@@ -61,16 +61,17 @@ export const setup = (app, dbList) => {
             since: lastSeq
         })
 
-        const onChange = change =>
-            firebaseApp
+        const onChange = change => {
+            const fireDoc = _.compose(_.omit("_rev"), _.merge(change.doc))
+                             ({"firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP})
+            return firebaseApp
                 .database().ref(`/users/${uid}/${db.name}/${change.id}`)
-                .set(_.merge(change.doc,
-                    {"firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP})
-                )
+                .set(fireDoc)
                 .then(() => {
                     localStorage.setItem(lasSeqKey, change.seq)
                     return change.seq
                 })
+        }
 
         const errorStream = Kefir.fromEvents(changes, "error")
         const changeStream = Kefir.fromEvents(changes, "change")
@@ -88,6 +89,7 @@ export const setup = (app, dbList) => {
         const lastPersistedAtKey = `pouch-fire-sync.${dbName}.in.lastPersistedAt`
         const onFirebaseChange = dbName => snap => {
             const doc = snap.val()
+            console.log("fire: doc received: ", doc)
             app.ports["onFirebaseChange"].send([dbName, doc])
             localStorage.setItem(lastPersistedAtKey, Math.min(doc.firebaseServerPersistedAt, Date.now()))
         }

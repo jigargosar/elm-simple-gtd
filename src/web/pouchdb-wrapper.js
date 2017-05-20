@@ -38,18 +38,19 @@ export default async (dbName, indices = []) => {
         //noinspection UnnecessaryLocalVariableJS
         const upsertResult = await db.upsert(id, oldDoc => {
             // console.log("upsert: oldDoc ", dbName, oldDoc, id)
+            const newDoc = _.merge({_rev: oldDoc._rev}, doc)
 
             const areDocsSame = _.equals(
+                removeNilValuedKeys(newDoc),
                 removeNilValuedKeys(oldDoc),
-                removeNilValuedKeys(doc),
             )
 
             if (areDocsSame) {
                 console.log("upsert: ignoring update since docs are same: ", areDocsSame)
-            } else {
-                console.log("upsert: adding new doc since docs are not same", areDocsSame)
-                return doc
+                return
             }
+            console.log("upsert: adding new doc since docs are not same", areDocsSame)
+            return doc
         })
         // console.log("upsert: result", upsertResult)
         return upsertResult
@@ -123,7 +124,7 @@ export default async (dbName, indices = []) => {
         findAll: () => find({selector: {"_id": {"$ne": null}}}),
         onChange,
         changes: _.bind(db.changes, db),
-        name:dbName
+        name: dbName
     }
 }
 

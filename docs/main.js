@@ -3,7 +3,7 @@ webpackJsonp([0],[
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var _isPlaceholder = __webpack_require__(118);
+var _isPlaceholder = __webpack_require__(119);
 
 
 /**
@@ -37,7 +37,7 @@ module.exports = function _curry2(fn) {
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _isPlaceholder = __webpack_require__(118);
+var _isPlaceholder = __webpack_require__(119);
 
 
 /**
@@ -74,9 +74,9 @@ module.exports = function _curry1(fn) {
 
 
 
-var base64 = __webpack_require__(321)
-var ieee754 = __webpack_require__(550)
-var isArray = __webpack_require__(332)
+var base64 = __webpack_require__(322)
+var ieee754 = __webpack_require__(551)
+var isArray = __webpack_require__(333)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -1854,7 +1854,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
 
 /***/ }),
 /* 4 */
@@ -1862,7 +1862,7 @@ function isnan (val) {
 
 var _curry1 = __webpack_require__(2);
 var _curry2 = __webpack_require__(0);
-var _isPlaceholder = __webpack_require__(118);
+var _isPlaceholder = __webpack_require__(119);
 
 
 /**
@@ -5368,7 +5368,7 @@ if (typeof Object.create === 'function') {
   };
 })(typeof module === 'undefined' || module, this);
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(784)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(786)(module)))
 
 /***/ }),
 /* 14 */
@@ -5440,7 +5440,7 @@ module.exports = {
 var _arity = __webpack_require__(40);
 var _curry1 = __webpack_require__(2);
 var _curry2 = __webpack_require__(0);
-var _curryN = __webpack_require__(116);
+var _curryN = __webpack_require__(117);
 
 
 /**
@@ -5503,15 +5503,15 @@ module.exports = _curry2(function curryN(length, fn) {
 
 var elliptic = exports;
 
-elliptic.version = __webpack_require__(542).version;
-elliptic.utils = __webpack_require__(541);
+elliptic.version = __webpack_require__(543).version;
+elliptic.utils = __webpack_require__(542);
 elliptic.rand = __webpack_require__(188);
-elliptic.curve = __webpack_require__(107);
-elliptic.curves = __webpack_require__(533);
+elliptic.curve = __webpack_require__(108);
+elliptic.curves = __webpack_require__(534);
 
 // Protocols
-elliptic.ec = __webpack_require__(534);
-elliptic.eddsa = __webpack_require__(537);
+elliptic.ec = __webpack_require__(535);
+elliptic.eddsa = __webpack_require__(538);
 
 
 /***/ }),
@@ -5534,9 +5534,9 @@ module.exports = function _has(prop, obj) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _map = __webpack_require__(120);
+var _map = __webpack_require__(121);
 var _reduce = __webpack_require__(30);
-var _xmap = __webpack_require__(656);
+var _xmap = __webpack_require__(658);
 var curryN = __webpack_require__(18);
 var keys = __webpack_require__(41);
 
@@ -5662,7 +5662,8 @@ module.exports = (function() {
 /* 31 */,
 /* 32 */,
 /* 33 */,
-/* 34 */
+/* 34 */,
+/* 35 */
 /***/ (function(module, exports) {
 
 /**
@@ -5699,7 +5700,6 @@ module.exports = function _concat(set1, set2) {
 
 
 /***/ }),
-/* 35 */,
 /* 36 */,
 /* 37 */,
 /* 38 */,
@@ -5707,7 +5707,7 @@ module.exports = function _concat(set1, set2) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var _equals = __webpack_require__(631);
+var _equals = __webpack_require__(633);
 
 
 /**
@@ -6144,11 +6144,11 @@ module.exports = function _reduced(x) {
 
 var hash = exports;
 
-hash.utils = __webpack_require__(547);
-hash.common = __webpack_require__(543);
-hash.sha = __webpack_require__(546);
-hash.ripemd = __webpack_require__(545);
-hash.hmac = __webpack_require__(544);
+hash.utils = __webpack_require__(548);
+hash.common = __webpack_require__(544);
+hash.sha = __webpack_require__(547);
+hash.ripemd = __webpack_require__(546);
+hash.hmac = __webpack_require__(545);
 
 // Proxy hash functions to the main object
 hash.sha1 = hash.sha.sha1;
@@ -6416,8 +6416,8 @@ CipherBase.prototype._toString = function (value, enc, fin) {
 /* WEBPACK VAR INJECTION */(function(Buffer) {
 var inherits = __webpack_require__(5)
 var md5 = __webpack_require__(227)
-var rmd160 = __webpack_require__(771)
-var sha = __webpack_require__(773)
+var rmd160 = __webpack_require__(773)
+var sha = __webpack_require__(775)
 
 var Base = __webpack_require__(67)
 
@@ -6612,11 +6612,11 @@ var asn1 = exports;
 
 asn1.bignum = __webpack_require__(13);
 
-asn1.define = __webpack_require__(311).define;
+asn1.define = __webpack_require__(312).define;
 asn1.base = __webpack_require__(78);
 asn1.constants = __webpack_require__(185);
-asn1.decoders = __webpack_require__(315);
-asn1.encoders = __webpack_require__(317);
+asn1.decoders = __webpack_require__(316);
+asn1.encoders = __webpack_require__(318);
 
 
 /***/ }),
@@ -6625,10 +6625,10 @@ asn1.encoders = __webpack_require__(317);
 
 var base = exports;
 
-base.Reporter = __webpack_require__(313).Reporter;
+base.Reporter = __webpack_require__(314).Reporter;
 base.DecoderBuffer = __webpack_require__(184).DecoderBuffer;
 base.EncoderBuffer = __webpack_require__(184).EncoderBuffer;
-base.Node = __webpack_require__(312);
+base.Node = __webpack_require__(313);
 
 
 /***/ }),
@@ -7109,7 +7109,7 @@ module.exports = function _checkForMethod(methodname, fn) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var _isFunction = __webpack_require__(117);
+var _isFunction = __webpack_require__(118);
 var curryN = __webpack_require__(18);
 var toString = __webpack_require__(91);
 
@@ -7157,7 +7157,7 @@ module.exports = _curry2(function invoker(arity, method) {
 
 var _curry1 = __webpack_require__(2);
 var _isArray = __webpack_require__(51);
-var _isString = __webpack_require__(119);
+var _isString = __webpack_require__(120);
 
 
 /**
@@ -7199,7 +7199,7 @@ module.exports = _curry1(function isArrayLike(x) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var _isString = __webpack_require__(119);
+var _isString = __webpack_require__(120);
 
 
 /**
@@ -7312,7 +7312,7 @@ module.exports = _curry2(function pluck(p, list) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var _toString = __webpack_require__(643);
+var _toString = __webpack_require__(645);
 
 
 /**
@@ -7396,10 +7396,256 @@ function randomBytes (size, cb) {
   return bytes
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35), __webpack_require__(3).Buffer, __webpack_require__(50)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31), __webpack_require__(3).Buffer, __webpack_require__(50)))
 
 /***/ }),
 /* 93 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = {
+  F: __webpack_require__(571),
+  T: __webpack_require__(572),
+  __: __webpack_require__(573),
+  add: __webpack_require__(113),
+  addIndex: __webpack_require__(574),
+  adjust: __webpack_require__(238),
+  all: __webpack_require__(575),
+  allPass: __webpack_require__(576),
+  always: __webpack_require__(74),
+  and: __webpack_require__(239),
+  any: __webpack_require__(240),
+  anyPass: __webpack_require__(577),
+  ap: __webpack_require__(165),
+  aperture: __webpack_require__(578),
+  append: __webpack_require__(579),
+  apply: __webpack_require__(241),
+  applySpec: __webpack_require__(580),
+  ascend: __webpack_require__(581),
+  assoc: __webpack_require__(114),
+  assocPath: __webpack_require__(242),
+  binary: __webpack_require__(582),
+  bind: __webpack_require__(243),
+  both: __webpack_require__(583),
+  call: __webpack_require__(584),
+  chain: __webpack_require__(166),
+  clamp: __webpack_require__(585),
+  clone: __webpack_require__(586),
+  comparator: __webpack_require__(587),
+  complement: __webpack_require__(588),
+  compose: __webpack_require__(167),
+  composeK: __webpack_require__(244),
+  composeP: __webpack_require__(589),
+  concat: __webpack_require__(168),
+  cond: __webpack_require__(590),
+  construct: __webpack_require__(591),
+  constructN: __webpack_require__(245),
+  contains: __webpack_require__(592),
+  converge: __webpack_require__(246),
+  countBy: __webpack_require__(593),
+  curry: __webpack_require__(115),
+  curryN: __webpack_require__(18),
+  dec: __webpack_require__(594),
+  descend: __webpack_require__(595),
+  defaultTo: __webpack_require__(247),
+  difference: __webpack_require__(248),
+  differenceWith: __webpack_require__(249),
+  dissoc: __webpack_require__(250),
+  dissocPath: __webpack_require__(596),
+  divide: __webpack_require__(597),
+  drop: __webpack_require__(251),
+  dropLast: __webpack_require__(598),
+  dropLastWhile: __webpack_require__(599),
+  dropRepeats: __webpack_require__(600),
+  dropRepeatsWith: __webpack_require__(252),
+  dropWhile: __webpack_require__(601),
+  either: __webpack_require__(602),
+  empty: __webpack_require__(253),
+  eqBy: __webpack_require__(603),
+  eqProps: __webpack_require__(604),
+  equals: __webpack_require__(39),
+  evolve: __webpack_require__(605),
+  filter: __webpack_require__(169),
+  find: __webpack_require__(606),
+  findIndex: __webpack_require__(607),
+  findLast: __webpack_require__(608),
+  findLastIndex: __webpack_require__(609),
+  flatten: __webpack_require__(610),
+  flip: __webpack_require__(116),
+  forEach: __webpack_require__(611),
+  forEachObjIndexed: __webpack_require__(612),
+  fromPairs: __webpack_require__(613),
+  groupBy: __webpack_require__(614),
+  groupWith: __webpack_require__(615),
+  gt: __webpack_require__(616),
+  gte: __webpack_require__(617),
+  has: __webpack_require__(618),
+  hasIn: __webpack_require__(619),
+  head: __webpack_require__(620),
+  identical: __webpack_require__(254),
+  identity: __webpack_require__(170),
+  ifElse: __webpack_require__(621),
+  inc: __webpack_require__(622),
+  indexBy: __webpack_require__(623),
+  indexOf: __webpack_require__(624),
+  init: __webpack_require__(625),
+  insert: __webpack_require__(626),
+  insertAll: __webpack_require__(627),
+  intersection: __webpack_require__(662),
+  intersectionWith: __webpack_require__(663),
+  intersperse: __webpack_require__(664),
+  into: __webpack_require__(665),
+  invert: __webpack_require__(666),
+  invertObj: __webpack_require__(667),
+  invoker: __webpack_require__(86),
+  is: __webpack_require__(269),
+  isArrayLike: __webpack_require__(87),
+  isEmpty: __webpack_require__(668),
+  isNil: __webpack_require__(669),
+  join: __webpack_require__(670),
+  juxt: __webpack_require__(270),
+  keys: __webpack_require__(41),
+  keysIn: __webpack_require__(671),
+  last: __webpack_require__(271),
+  lastIndexOf: __webpack_require__(672),
+  length: __webpack_require__(272),
+  lens: __webpack_require__(122),
+  lensIndex: __webpack_require__(673),
+  lensPath: __webpack_require__(674),
+  lensProp: __webpack_require__(675),
+  lift: __webpack_require__(123),
+  liftN: __webpack_require__(273),
+  lt: __webpack_require__(676),
+  lte: __webpack_require__(677),
+  map: __webpack_require__(27),
+  mapAccum: __webpack_require__(678),
+  mapAccumRight: __webpack_require__(679),
+  mapObjIndexed: __webpack_require__(680),
+  match: __webpack_require__(681),
+  mathMod: __webpack_require__(682),
+  max: __webpack_require__(75),
+  maxBy: __webpack_require__(683),
+  mean: __webpack_require__(274),
+  median: __webpack_require__(684),
+  memoize: __webpack_require__(685),
+  merge: __webpack_require__(686),
+  mergeAll: __webpack_require__(687),
+  mergeWith: __webpack_require__(688),
+  mergeWithKey: __webpack_require__(275),
+  min: __webpack_require__(689),
+  minBy: __webpack_require__(690),
+  modulo: __webpack_require__(691),
+  multiply: __webpack_require__(276),
+  nAry: __webpack_require__(124),
+  negate: __webpack_require__(692),
+  none: __webpack_require__(693),
+  not: __webpack_require__(277),
+  nth: __webpack_require__(88),
+  nthArg: __webpack_require__(694),
+  objOf: __webpack_require__(278),
+  of: __webpack_require__(695),
+  omit: __webpack_require__(696),
+  once: __webpack_require__(697),
+  or: __webpack_require__(279),
+  over: __webpack_require__(280),
+  pair: __webpack_require__(698),
+  partial: __webpack_require__(699),
+  partialRight: __webpack_require__(700),
+  partition: __webpack_require__(701),
+  path: __webpack_require__(89),
+  pathEq: __webpack_require__(702),
+  pathOr: __webpack_require__(703),
+  pathSatisfies: __webpack_require__(704),
+  pick: __webpack_require__(705),
+  pickAll: __webpack_require__(281),
+  pickBy: __webpack_require__(706),
+  pipe: __webpack_require__(282),
+  pipeK: __webpack_require__(707),
+  pipeP: __webpack_require__(283),
+  pluck: __webpack_require__(90),
+  prepend: __webpack_require__(284),
+  product: __webpack_require__(708),
+  project: __webpack_require__(709),
+  prop: __webpack_require__(175),
+  propEq: __webpack_require__(710),
+  propIs: __webpack_require__(711),
+  propOr: __webpack_require__(712),
+  propSatisfies: __webpack_require__(713),
+  props: __webpack_require__(714),
+  range: __webpack_require__(715),
+  reduce: __webpack_require__(42),
+  reduceBy: __webpack_require__(125),
+  reduceRight: __webpack_require__(285),
+  reduceWhile: __webpack_require__(716),
+  reduced: __webpack_require__(717),
+  reject: __webpack_require__(126),
+  remove: __webpack_require__(718),
+  repeat: __webpack_require__(719),
+  replace: __webpack_require__(720),
+  reverse: __webpack_require__(127),
+  scan: __webpack_require__(721),
+  sequence: __webpack_require__(286),
+  set: __webpack_require__(722),
+  slice: __webpack_require__(65),
+  sort: __webpack_require__(723),
+  sortBy: __webpack_require__(724),
+  sortWith: __webpack_require__(725),
+  split: __webpack_require__(726),
+  splitAt: __webpack_require__(727),
+  splitEvery: __webpack_require__(728),
+  splitWhen: __webpack_require__(729),
+  subtract: __webpack_require__(730),
+  sum: __webpack_require__(287),
+  symmetricDifference: __webpack_require__(731),
+  symmetricDifferenceWith: __webpack_require__(732),
+  tail: __webpack_require__(176),
+  take: __webpack_require__(288),
+  takeLast: __webpack_require__(733),
+  takeLastWhile: __webpack_require__(734),
+  takeWhile: __webpack_require__(735),
+  tap: __webpack_require__(736),
+  test: __webpack_require__(737),
+  times: __webpack_require__(289),
+  toLower: __webpack_require__(738),
+  toPairs: __webpack_require__(739),
+  toPairsIn: __webpack_require__(740),
+  toString: __webpack_require__(91),
+  toUpper: __webpack_require__(741),
+  transduce: __webpack_require__(742),
+  transpose: __webpack_require__(743),
+  traverse: __webpack_require__(744),
+  trim: __webpack_require__(745),
+  tryCatch: __webpack_require__(746),
+  type: __webpack_require__(177),
+  unapply: __webpack_require__(747),
+  unary: __webpack_require__(748),
+  uncurryN: __webpack_require__(749),
+  unfold: __webpack_require__(750),
+  union: __webpack_require__(751),
+  unionWith: __webpack_require__(752),
+  uniq: __webpack_require__(178),
+  uniqBy: __webpack_require__(290),
+  uniqWith: __webpack_require__(179),
+  unless: __webpack_require__(753),
+  unnest: __webpack_require__(754),
+  until: __webpack_require__(755),
+  update: __webpack_require__(291),
+  useWith: __webpack_require__(292),
+  values: __webpack_require__(293),
+  valuesIn: __webpack_require__(756),
+  view: __webpack_require__(757),
+  when: __webpack_require__(758),
+  where: __webpack_require__(294),
+  whereEq: __webpack_require__(759),
+  without: __webpack_require__(760),
+  xprod: __webpack_require__(761),
+  zip: __webpack_require__(762),
+  zipObj: __webpack_require__(763),
+  zipWith: __webpack_require__(764)
+};
+
+
+/***/ }),
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// based on the aes implimentation in triple sec
@@ -7583,7 +7829,7 @@ exports.AES = AES
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports) {
 
 exports['aes-128-ecb'] = {
@@ -7760,7 +8006,7 @@ exports['aes-256-gcm'] = {
 
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var xor = __webpack_require__(79)
@@ -7798,7 +8044,6 @@ exports.encrypt = function (self, chunk) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 96 */,
 /* 97 */,
 /* 98 */,
 /* 99 */,
@@ -7809,7 +8054,8 @@ exports.encrypt = function (self, chunk) {
 /* 104 */,
 /* 105 */,
 /* 106 */,
-/* 107 */
+/* 107 */,
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7817,14 +8063,14 @@ exports.encrypt = function (self, chunk) {
 
 var curve = exports;
 
-curve.base = __webpack_require__(529);
-curve.short = __webpack_require__(532);
-curve.mont = __webpack_require__(531);
-curve.edwards = __webpack_require__(530);
+curve.base = __webpack_require__(530);
+curve.short = __webpack_require__(533);
+curve.mont = __webpack_require__(532);
+curve.edwards = __webpack_require__(531);
 
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var md5 = __webpack_require__(227)
@@ -7899,12 +8145,12 @@ function EVP_BytesToKey (password, salt, keyLen, ivLen) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(555)
-var aesid = __webpack_require__(554)
-var fixProc = __webpack_require__(557)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var asn1 = __webpack_require__(557)
+var aesid = __webpack_require__(556)
+var fixProc = __webpack_require__(559)
 var ciphers = __webpack_require__(130)
 var compat = __webpack_require__(232)
 module.exports = parseKeys
@@ -8012,7 +8258,7 @@ function decrypt (data, password) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8029,7 +8275,7 @@ module.exports = PouchPromise;
 
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -8039,13 +8285,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var Promise = _interopDefault(__webpack_require__(110));
+var Promise = _interopDefault(__webpack_require__(111));
 var getArguments = _interopDefault(__webpack_require__(129));
 var pouchdbCollections = __webpack_require__(163);
 var events = __webpack_require__(84);
 var inherits = _interopDefault(__webpack_require__(5));
 var immediate = _interopDefault(__webpack_require__(161));
-var pouchdbErrors = __webpack_require__(561);
+var pouchdbErrors = __webpack_require__(563);
 
 function isBinaryObject(object) {
   return (typeof ArrayBuffer !== 'undefined' && object instanceof ArrayBuffer) ||
@@ -8946,7 +9192,7 @@ exports.uuid = uuid;
 
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -8975,7 +9221,7 @@ module.exports = _curry2(function add(a, b) {
 
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -9012,7 +9258,7 @@ module.exports = _curry3(function assoc(prop, val, obj) {
 
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -9066,11 +9312,11 @@ module.exports = _curry1(function curry(fn) {
 
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var curry = __webpack_require__(114);
+var curry = __webpack_require__(115);
 
 
 /**
@@ -9104,11 +9350,11 @@ module.exports = _curry1(function flip(fn) {
 
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
-var _isPlaceholder = __webpack_require__(118);
+var _isPlaceholder = __webpack_require__(119);
 
 
 /**
@@ -9150,7 +9396,7 @@ module.exports = function _curryN(length, received, fn) {
 
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports) {
 
 module.exports = function _isFunction(x) {
@@ -9159,7 +9405,7 @@ module.exports = function _isFunction(x) {
 
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports) {
 
 module.exports = function _isPlaceholder(a) {
@@ -9170,7 +9416,7 @@ module.exports = function _isPlaceholder(a) {
 
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports) {
 
 module.exports = function _isString(x) {
@@ -9179,7 +9425,7 @@ module.exports = function _isString(x) {
 
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports) {
 
 module.exports = function _map(fn, functor) {
@@ -9195,7 +9441,7 @@ module.exports = function _map(fn, functor) {
 
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -9240,7 +9486,7 @@ module.exports = _curry2(function lens(getter, setter) {
 
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -9275,7 +9521,7 @@ module.exports = _curry1(function lift(fn) {
 
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -9329,14 +9575,14 @@ module.exports = _curry2(function nAry(n, fn) {
 
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _curryN = __webpack_require__(116);
+var _curryN = __webpack_require__(117);
 var _dispatchable = __webpack_require__(14);
 var _has = __webpack_require__(21);
 var _reduce = __webpack_require__(30);
-var _xreduceBy = __webpack_require__(657);
+var _xreduceBy = __webpack_require__(659);
 
 
 /**
@@ -9394,7 +9640,7 @@ module.exports = _curryN(4, [], _dispatchable([], _xreduceBy,
 
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _complement = __webpack_require__(257);
@@ -9430,11 +9676,11 @@ module.exports = _curry2(function reject(pred, filterable) {
 
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var _isString = __webpack_require__(119);
+var _isString = __webpack_require__(120);
 
 
 /**
@@ -9468,7 +9714,7 @@ module.exports = _curry1(function reverse(list) {
 
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -19728,252 +19974,6 @@ return jQuery;
 
 
 /***/ }),
-/* 128 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = {
-  F: __webpack_require__(569),
-  T: __webpack_require__(570),
-  __: __webpack_require__(571),
-  add: __webpack_require__(112),
-  addIndex: __webpack_require__(572),
-  adjust: __webpack_require__(238),
-  all: __webpack_require__(573),
-  allPass: __webpack_require__(574),
-  always: __webpack_require__(74),
-  and: __webpack_require__(239),
-  any: __webpack_require__(240),
-  anyPass: __webpack_require__(575),
-  ap: __webpack_require__(165),
-  aperture: __webpack_require__(576),
-  append: __webpack_require__(577),
-  apply: __webpack_require__(241),
-  applySpec: __webpack_require__(578),
-  ascend: __webpack_require__(579),
-  assoc: __webpack_require__(113),
-  assocPath: __webpack_require__(242),
-  binary: __webpack_require__(580),
-  bind: __webpack_require__(243),
-  both: __webpack_require__(581),
-  call: __webpack_require__(582),
-  chain: __webpack_require__(166),
-  clamp: __webpack_require__(583),
-  clone: __webpack_require__(584),
-  comparator: __webpack_require__(585),
-  complement: __webpack_require__(586),
-  compose: __webpack_require__(167),
-  composeK: __webpack_require__(244),
-  composeP: __webpack_require__(587),
-  concat: __webpack_require__(168),
-  cond: __webpack_require__(588),
-  construct: __webpack_require__(589),
-  constructN: __webpack_require__(245),
-  contains: __webpack_require__(590),
-  converge: __webpack_require__(246),
-  countBy: __webpack_require__(591),
-  curry: __webpack_require__(114),
-  curryN: __webpack_require__(18),
-  dec: __webpack_require__(592),
-  descend: __webpack_require__(593),
-  defaultTo: __webpack_require__(247),
-  difference: __webpack_require__(248),
-  differenceWith: __webpack_require__(249),
-  dissoc: __webpack_require__(250),
-  dissocPath: __webpack_require__(594),
-  divide: __webpack_require__(595),
-  drop: __webpack_require__(251),
-  dropLast: __webpack_require__(596),
-  dropLastWhile: __webpack_require__(597),
-  dropRepeats: __webpack_require__(598),
-  dropRepeatsWith: __webpack_require__(252),
-  dropWhile: __webpack_require__(599),
-  either: __webpack_require__(600),
-  empty: __webpack_require__(253),
-  eqBy: __webpack_require__(601),
-  eqProps: __webpack_require__(602),
-  equals: __webpack_require__(39),
-  evolve: __webpack_require__(603),
-  filter: __webpack_require__(169),
-  find: __webpack_require__(604),
-  findIndex: __webpack_require__(605),
-  findLast: __webpack_require__(606),
-  findLastIndex: __webpack_require__(607),
-  flatten: __webpack_require__(608),
-  flip: __webpack_require__(115),
-  forEach: __webpack_require__(609),
-  forEachObjIndexed: __webpack_require__(610),
-  fromPairs: __webpack_require__(611),
-  groupBy: __webpack_require__(612),
-  groupWith: __webpack_require__(613),
-  gt: __webpack_require__(614),
-  gte: __webpack_require__(615),
-  has: __webpack_require__(616),
-  hasIn: __webpack_require__(617),
-  head: __webpack_require__(618),
-  identical: __webpack_require__(254),
-  identity: __webpack_require__(170),
-  ifElse: __webpack_require__(619),
-  inc: __webpack_require__(620),
-  indexBy: __webpack_require__(621),
-  indexOf: __webpack_require__(622),
-  init: __webpack_require__(623),
-  insert: __webpack_require__(624),
-  insertAll: __webpack_require__(625),
-  intersection: __webpack_require__(660),
-  intersectionWith: __webpack_require__(661),
-  intersperse: __webpack_require__(662),
-  into: __webpack_require__(663),
-  invert: __webpack_require__(664),
-  invertObj: __webpack_require__(665),
-  invoker: __webpack_require__(86),
-  is: __webpack_require__(269),
-  isArrayLike: __webpack_require__(87),
-  isEmpty: __webpack_require__(666),
-  isNil: __webpack_require__(667),
-  join: __webpack_require__(668),
-  juxt: __webpack_require__(270),
-  keys: __webpack_require__(41),
-  keysIn: __webpack_require__(669),
-  last: __webpack_require__(271),
-  lastIndexOf: __webpack_require__(670),
-  length: __webpack_require__(272),
-  lens: __webpack_require__(121),
-  lensIndex: __webpack_require__(671),
-  lensPath: __webpack_require__(672),
-  lensProp: __webpack_require__(673),
-  lift: __webpack_require__(122),
-  liftN: __webpack_require__(273),
-  lt: __webpack_require__(674),
-  lte: __webpack_require__(675),
-  map: __webpack_require__(27),
-  mapAccum: __webpack_require__(676),
-  mapAccumRight: __webpack_require__(677),
-  mapObjIndexed: __webpack_require__(678),
-  match: __webpack_require__(679),
-  mathMod: __webpack_require__(680),
-  max: __webpack_require__(75),
-  maxBy: __webpack_require__(681),
-  mean: __webpack_require__(274),
-  median: __webpack_require__(682),
-  memoize: __webpack_require__(683),
-  merge: __webpack_require__(684),
-  mergeAll: __webpack_require__(685),
-  mergeWith: __webpack_require__(686),
-  mergeWithKey: __webpack_require__(275),
-  min: __webpack_require__(687),
-  minBy: __webpack_require__(688),
-  modulo: __webpack_require__(689),
-  multiply: __webpack_require__(276),
-  nAry: __webpack_require__(123),
-  negate: __webpack_require__(690),
-  none: __webpack_require__(691),
-  not: __webpack_require__(277),
-  nth: __webpack_require__(88),
-  nthArg: __webpack_require__(692),
-  objOf: __webpack_require__(278),
-  of: __webpack_require__(693),
-  omit: __webpack_require__(694),
-  once: __webpack_require__(695),
-  or: __webpack_require__(279),
-  over: __webpack_require__(280),
-  pair: __webpack_require__(696),
-  partial: __webpack_require__(697),
-  partialRight: __webpack_require__(698),
-  partition: __webpack_require__(699),
-  path: __webpack_require__(89),
-  pathEq: __webpack_require__(700),
-  pathOr: __webpack_require__(701),
-  pathSatisfies: __webpack_require__(702),
-  pick: __webpack_require__(703),
-  pickAll: __webpack_require__(281),
-  pickBy: __webpack_require__(704),
-  pipe: __webpack_require__(282),
-  pipeK: __webpack_require__(705),
-  pipeP: __webpack_require__(283),
-  pluck: __webpack_require__(90),
-  prepend: __webpack_require__(284),
-  product: __webpack_require__(706),
-  project: __webpack_require__(707),
-  prop: __webpack_require__(175),
-  propEq: __webpack_require__(708),
-  propIs: __webpack_require__(709),
-  propOr: __webpack_require__(710),
-  propSatisfies: __webpack_require__(711),
-  props: __webpack_require__(712),
-  range: __webpack_require__(713),
-  reduce: __webpack_require__(42),
-  reduceBy: __webpack_require__(124),
-  reduceRight: __webpack_require__(285),
-  reduceWhile: __webpack_require__(714),
-  reduced: __webpack_require__(715),
-  reject: __webpack_require__(125),
-  remove: __webpack_require__(716),
-  repeat: __webpack_require__(717),
-  replace: __webpack_require__(718),
-  reverse: __webpack_require__(126),
-  scan: __webpack_require__(719),
-  sequence: __webpack_require__(286),
-  set: __webpack_require__(720),
-  slice: __webpack_require__(65),
-  sort: __webpack_require__(721),
-  sortBy: __webpack_require__(722),
-  sortWith: __webpack_require__(723),
-  split: __webpack_require__(724),
-  splitAt: __webpack_require__(725),
-  splitEvery: __webpack_require__(726),
-  splitWhen: __webpack_require__(727),
-  subtract: __webpack_require__(728),
-  sum: __webpack_require__(287),
-  symmetricDifference: __webpack_require__(729),
-  symmetricDifferenceWith: __webpack_require__(730),
-  tail: __webpack_require__(176),
-  take: __webpack_require__(288),
-  takeLast: __webpack_require__(731),
-  takeLastWhile: __webpack_require__(732),
-  takeWhile: __webpack_require__(733),
-  tap: __webpack_require__(734),
-  test: __webpack_require__(735),
-  times: __webpack_require__(289),
-  toLower: __webpack_require__(736),
-  toPairs: __webpack_require__(737),
-  toPairsIn: __webpack_require__(738),
-  toString: __webpack_require__(91),
-  toUpper: __webpack_require__(739),
-  transduce: __webpack_require__(740),
-  transpose: __webpack_require__(741),
-  traverse: __webpack_require__(742),
-  trim: __webpack_require__(743),
-  tryCatch: __webpack_require__(744),
-  type: __webpack_require__(177),
-  unapply: __webpack_require__(745),
-  unary: __webpack_require__(746),
-  uncurryN: __webpack_require__(747),
-  unfold: __webpack_require__(748),
-  union: __webpack_require__(749),
-  unionWith: __webpack_require__(750),
-  uniq: __webpack_require__(178),
-  uniqBy: __webpack_require__(290),
-  uniqWith: __webpack_require__(179),
-  unless: __webpack_require__(751),
-  unnest: __webpack_require__(752),
-  until: __webpack_require__(753),
-  update: __webpack_require__(291),
-  useWith: __webpack_require__(292),
-  values: __webpack_require__(293),
-  valuesIn: __webpack_require__(754),
-  view: __webpack_require__(755),
-  when: __webpack_require__(756),
-  where: __webpack_require__(294),
-  whereEq: __webpack_require__(757),
-  without: __webpack_require__(758),
-  xprod: __webpack_require__(759),
-  zip: __webpack_require__(760),
-  zipObj: __webpack_require__(761),
-  zipWith: __webpack_require__(762)
-};
-
-
-/***/ }),
 /* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -20002,13 +20002,13 @@ function argsArray(fun) {
 /* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ciphers = __webpack_require__(323)
+var ciphers = __webpack_require__(324)
 exports.createCipher = exports.Cipher = ciphers.createCipher
 exports.createCipheriv = exports.Cipheriv = ciphers.createCipheriv
-var deciphers = __webpack_require__(322)
+var deciphers = __webpack_require__(323)
 exports.createDecipher = exports.Decipher = deciphers.createDecipher
 exports.createDecipheriv = exports.Decipheriv = deciphers.createDecipheriv
-var modes = __webpack_require__(94)
+var modes = __webpack_require__(95)
 function getCiphers () {
   return Object.keys(modes)
 }
@@ -20176,7 +20176,7 @@ exports.allocUnsafeSlow = function allocUnsafeSlow(size) {
   return new SlowBuffer(size);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
 
 /***/ }),
 /* 133 */,
@@ -20287,11 +20287,11 @@ module.exports = function createHmac(alg, key) {
 "use strict";
 
 
-exports.utils = __webpack_require__(525);
-exports.Cipher = __webpack_require__(522);
-exports.DES = __webpack_require__(523);
-exports.CBC = __webpack_require__(521);
-exports.EDE = __webpack_require__(524);
+exports.utils = __webpack_require__(526);
+exports.Cipher = __webpack_require__(523);
+exports.DES = __webpack_require__(524);
+exports.CBC = __webpack_require__(522);
+exports.EDE = __webpack_require__(525);
 
 
 /***/ }),
@@ -20369,7 +20369,7 @@ function immediate(task) {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
 
 /***/ }),
 /* 162 */
@@ -20919,7 +20919,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 /* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _curry2 = __webpack_require__(0);
 var _reduce = __webpack_require__(30);
 var map = __webpack_require__(27);
@@ -20965,7 +20965,7 @@ module.exports = _curry2(function ap(applicative, fn) {
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
 var _makeFlat = __webpack_require__(265);
-var _xchain = __webpack_require__(646);
+var _xchain = __webpack_require__(648);
 var map = __webpack_require__(27);
 
 
@@ -21004,7 +21004,7 @@ module.exports = _curry2(_dispatchable(['chain'], _xchain, function chain(fn, mo
 /***/ (function(module, exports, __webpack_require__) {
 
 var pipe = __webpack_require__(282);
-var reverse = __webpack_require__(126);
+var reverse = __webpack_require__(127);
 
 
 /**
@@ -21045,7 +21045,7 @@ module.exports = function compose() {
 
 var _curry2 = __webpack_require__(0);
 var _isArray = __webpack_require__(51);
-var _isFunction = __webpack_require__(117);
+var _isFunction = __webpack_require__(118);
 var toString = __webpack_require__(91);
 
 
@@ -21095,7 +21095,7 @@ var _dispatchable = __webpack_require__(14);
 var _filter = __webpack_require__(259);
 var _isObject = __webpack_require__(264);
 var _reduce = __webpack_require__(30);
-var _xfilter = __webpack_require__(651);
+var _xfilter = __webpack_require__(653);
 var keys = __webpack_require__(41);
 
 
@@ -21174,7 +21174,7 @@ module.exports = _curry1(_identity);
 /* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _objectAssign = __webpack_require__(636);
+var _objectAssign = __webpack_require__(638);
 
 module.exports =
   typeof Object.assign === 'function' ? Object.assign : _objectAssign;
@@ -21426,7 +21426,7 @@ util.inherits = __webpack_require__(5);
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(781)
+  deprecate: __webpack_require__(783)
 };
 /*</replacement>*/
 
@@ -21941,7 +21941,7 @@ function CorkedRequest(state) {
     }
   };
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50), __webpack_require__(780).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50), __webpack_require__(782).setImmediate))
 
 /***/ }),
 /* 181 */
@@ -21953,7 +21953,7 @@ exports.Readable = exports;
 exports.Writable = __webpack_require__(180);
 exports.Duplex = __webpack_require__(66);
 exports.Transform = __webpack_require__(296);
-exports.PassThrough = __webpack_require__(764);
+exports.PassThrough = __webpack_require__(766);
 
 
 /***/ }),
@@ -21988,10 +21988,10 @@ var inherits = __webpack_require__(5);
 
 inherits(Stream, EE);
 Stream.Readable = __webpack_require__(181);
-Stream.Writable = __webpack_require__(769);
-Stream.Duplex = __webpack_require__(763);
-Stream.Transform = __webpack_require__(768);
-Stream.PassThrough = __webpack_require__(767);
+Stream.Writable = __webpack_require__(771);
+Stream.Duplex = __webpack_require__(765);
+Stream.Transform = __webpack_require__(770);
+Stream.PassThrough = __webpack_require__(769);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -22460,7 +22460,7 @@ constants._reverse = function reverse(map) {
   return res;
 };
 
-constants.der = __webpack_require__(314);
+constants.der = __webpack_require__(315);
 
 
 /***/ }),
@@ -23153,7 +23153,7 @@ if (typeof self === 'object') {
 } else {
   // Node.js or Web worker with no crypto support
   try {
-    var crypto = __webpack_require__(785);
+    var crypto = __webpack_require__(787);
     if (typeof crypto.randomBytes !== 'function')
       throw new Error('Not supported');
 
@@ -23169,10 +23169,10 @@ if (typeof self === 'object') {
 /* 189 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(93)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(94)
 var Transform = __webpack_require__(67)
 var inherits = __webpack_require__(5)
-var GHASH = __webpack_require__(324)
+var GHASH = __webpack_require__(325)
 var xor = __webpack_require__(79)
 inherits(StreamCipher, Transform)
 module.exports = StreamCipher
@@ -23432,7 +23432,7 @@ exports.encrypt = function (self, chunk) {
 /* 196 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(93)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(94)
 var Transform = __webpack_require__(67)
 var inherits = __webpack_require__(5)
 
@@ -23673,7 +23673,7 @@ module.exports = {
  * See http://pajhome.org.uk/crypt/md5 for more info.
  */
 
-var helpers = __webpack_require__(515);
+var helpers = __webpack_require__(516);
 
 /*
  * Calculate the MD5 of an array of little-endian words, and a bit length
@@ -24380,7 +24380,7 @@ utils.encode = function encode(arr, enc) {
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process, Buffer) {var createHmac = __webpack_require__(159)
-var checkParameters = __webpack_require__(558)
+var checkParameters = __webpack_require__(560)
 
 exports.pbkdf2 = function (password, salt, iterations, keylen, digest, callback) {
   if (typeof digest === 'function') {
@@ -24684,7 +24684,7 @@ function stringMd5(string) {
 exports.binaryMd5 = binaryMd5;
 exports.stringMd5 = stringMd5;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
 
 /***/ }),
 /* 235 */
@@ -24741,7 +24741,7 @@ module.exports = function xor(a, b) {
 /* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _curry3 = __webpack_require__(4);
 
 
@@ -24899,7 +24899,7 @@ var _curry3 = __webpack_require__(4);
 var _has = __webpack_require__(21);
 var _isArray = __webpack_require__(51);
 var _isInteger = __webpack_require__(262);
-var assoc = __webpack_require__(113);
+var assoc = __webpack_require__(114);
 
 
 /**
@@ -25036,8 +25036,8 @@ module.exports = function composeK() {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var curry = __webpack_require__(114);
-var nAry = __webpack_require__(123);
+var curry = __webpack_require__(115);
+var nAry = __webpack_require__(124);
 
 
 /**
@@ -25104,7 +25104,7 @@ module.exports = _curry2(function constructN(n, Fn) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var _map = __webpack_require__(120);
+var _map = __webpack_require__(121);
 var curryN = __webpack_require__(18);
 var max = __webpack_require__(75);
 var pluck = __webpack_require__(90);
@@ -25309,7 +25309,7 @@ module.exports = _curry2(function dissoc(prop, obj) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xdrop = __webpack_require__(647);
+var _xdrop = __webpack_require__(649);
 var slice = __webpack_require__(65);
 
 
@@ -25399,7 +25399,7 @@ var _curry1 = __webpack_require__(2);
 var _isArguments = __webpack_require__(261);
 var _isArray = __webpack_require__(51);
 var _isObject = __webpack_require__(264);
-var _isString = __webpack_require__(119);
+var _isString = __webpack_require__(120);
 
 
 /**
@@ -26288,7 +26288,7 @@ module.exports = _curry2(function pickAll(names, obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
-var _pipe = __webpack_require__(638);
+var _pipe = __webpack_require__(640);
 var reduce = __webpack_require__(42);
 var tail = __webpack_require__(176);
 
@@ -26330,7 +26330,7 @@ module.exports = function pipe() {
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
-var _pipeP = __webpack_require__(639);
+var _pipeP = __webpack_require__(641);
 var reduce = __webpack_require__(42);
 var tail = __webpack_require__(176);
 
@@ -26366,7 +26366,7 @@ module.exports = function pipeP() {
 /* 284 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _curry2 = __webpack_require__(0);
 
 
@@ -26499,7 +26499,7 @@ module.exports = _curry2(function sequence(of, traversable) {
 /* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var add = __webpack_require__(112);
+var add = __webpack_require__(113);
 var reduce = __webpack_require__(42);
 
 
@@ -26527,7 +26527,7 @@ module.exports = reduce(add, 0);
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xtake = __webpack_require__(658);
+var _xtake = __webpack_require__(660);
 var slice = __webpack_require__(65);
 
 
@@ -26629,7 +26629,7 @@ module.exports = _curry2(function times(fn, n) {
 /* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _Set = __webpack_require__(626);
+var _Set = __webpack_require__(628);
 var _curry2 = __webpack_require__(0);
 
 
@@ -26858,7 +26858,7 @@ var processNextTick = __webpack_require__(164);
 /*</replacement>*/
 
 /*<replacement>*/
-var isArray = __webpack_require__(766);
+var isArray = __webpack_require__(768);
 /*</replacement>*/
 
 /*<replacement>*/
@@ -26890,7 +26890,7 @@ util.inherits = __webpack_require__(5);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(786);
+var debugUtil = __webpack_require__(788);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -26899,7 +26899,7 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(765);
+var BufferList = __webpack_require__(767);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -29152,6 +29152,164 @@ module.exports = Sha512
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var _ = __webpack_require__(93);
+var Kefir = __webpack_require__(554);
+
+var firebaseDevConfig = {
+    apiKey: "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc",
+    authDomain: "rational-mote-664.firebaseapp.com",
+    databaseURL: "https://rational-mote-664.firebaseio.com",
+    projectId: "rational-mote-664",
+    storageBucket: "rational-mote-664.appspot.com",
+    messagingSenderId: "49437522774"
+};
+
+var firebaseProdConfig = {
+    apiKey: "AIzaSyDgqOiOMuTvK3PdzJ0Oz6ctEg-devcgZYc",
+    authDomain: "simple-gtd-prod.firebaseapp.com",
+    databaseURL: "https://simple-gtd-prod.firebaseio.com",
+    projectId: "simple-gtd-prod",
+    storageBucket: "simple-gtd-prod.appspot.com",
+    messagingSenderId: "1061254169900"
+};
+
+//noinspection JSUnresolvedVariable
+var firebaseConfig =  false ? firebaseDevConfig : firebaseProdConfig;
+
+var setup = exports.setup = function setup(app, dbList) {
+    var firebaseApp = firebase.initializeApp(firebaseConfig);
+    var changesEmitters = [];
+
+    app.ports["signIn"].subscribe(function () {
+        var provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({
+            prompt: 'select_account'
+        });
+
+        document.getElementById('firebase-auth').signInWithPopup(provider).catch(console.error);
+    });
+
+    app.ports["fireDataWrite"].subscribe(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            path = _ref2[0],
+            value = _ref2[1];
+
+        // console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
+        var ref = firebaseApp.database().ref(path);
+        ref.set(value).catch(console.error);
+    });
+
+    function startReplicationToFirebase(uid, db) {
+        var lasSeqKey = "pouch-fire-sync." + db.name + ".out.lastSeq";
+        var lastSeqString = localStorage.getItem(lasSeqKey);
+        var lastSeq = parseInt(lastSeqString, 10) || 0;
+
+        var changes = db.changes({
+            include_docs: true,
+            live: true,
+            since: lastSeq
+        });
+
+        var onChange = function onChange(change) {
+            return firebaseApp.database().ref("/users/" + uid + "/" + db.name + "/" + change.id).set(_.merge(change.doc, { "firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP })).then(function () {
+                localStorage.setItem(lasSeqKey, change.seq);
+                return change.seq;
+            });
+        };
+
+        var errorStream = Kefir.fromEvents(changes, "error");
+        var changeStream = Kefir.fromEvents(changes, "change");
+
+        Kefir.merge([changeStream, errorStream])
+        // .log()
+        .map(onChange).flatMap(Kefir.fromPromise).onValue(function (val) {
+            return console.log("fireSyncSuccess: ", val);
+        }).onError(function (e) {
+            return console.error("fireSyncError: ", e);
+        });
+        return changes;
+    }
+
+    function startReplicationFromFirebase(uid, dbName) {
+        var lastPersistedAtKey = "pouch-fire-sync." + dbName + ".in.lastPersistedAt";
+        var onFirebaseChange = function onFirebaseChange(dbName) {
+            return function (snap) {
+                var doc = snap.val();
+                app.ports["onFirebaseChange"].send([dbName, doc]);
+                localStorage.setItem(lastPersistedAtKey, Math.min(doc.firebaseServerPersistedAt, Date.now()));
+            };
+        };
+
+        var lastPersistedAtString = localStorage.getItem(lastPersistedAtKey);
+        var lastPersistedAt = parseInt(lastPersistedAtString, 10) || 0;
+
+        var todoDbRef = firebaseApp.database().ref("/users/" + uid + "/" + dbName).orderByChild("firebaseServerPersistedAt").startAt(lastPersistedAt + 1);
+
+        todoDbRef.on("child_added", onFirebaseChange(dbName));
+        todoDbRef.on("child_changed", onFirebaseChange(dbName));
+    }
+
+    app.ports["fireStartSync"].subscribe(function () {
+        var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee(uid) {
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _.map(function (changes) {
+                                return changes.cancel();
+                            })(changesEmitters);
+                            changesEmitters = _.map(function (db) {
+                                startReplicationFromFirebase(uid, db.name);
+                                return startReplicationToFirebase(uid, db);
+                            })(dbList);
+
+                        case 2:
+                        case "end":
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined);
+        }));
+
+        return function (_x) {
+            return _ref3.apply(this, arguments);
+        };
+    }());
+
+    app.ports["fireDataPush"].subscribe(function (_ref4) {
+        var _ref5 = _slicedToArray(_ref4, 2),
+            path = _ref5[0],
+            value = _ref5[1];
+
+        console.log("firebaseApp.database().ref(path).push(value)", { path: path, value: value });
+        firebaseApp.database().ref(path).push(value);
+    });
+
+    app.ports["signOut"].subscribe(function () {
+        var googleAuth = document.getElementById('firebase-auth');
+        googleAuth.signOut().catch(console.error);
+    });
+};
+
+exports.default = {
+    setup: setup
+};
+
+/***/ }),
+/* 302 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 /*!
 Copyright (c) 2011, 2012 Julien Wajsberg <felash@gmail.com>
 All rights reserved.
@@ -29344,7 +29502,7 @@ This is version 1.2.0.
 })(jQuery);
 
 /***/ }),
-/* 302 */
+/* 303 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29420,7 +29578,7 @@ var setupNotifications = function () {
     };
 }();
 
-var _ramda = __webpack_require__(128);
+var _ramda = __webpack_require__(93);
 
 var _ramda2 = _interopRequireDefault(_ramda);
 
@@ -29518,7 +29676,7 @@ var showNotification = function showNotification(reg) {
 };
 
 /***/ }),
-/* 303 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29530,16 +29688,20 @@ Object.defineProperty(exports, "__esModule", {
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var PouchDB = __webpack_require__(560);
-var _ = __webpack_require__(128);
+var PouchDB = __webpack_require__(562);
+var _ = __webpack_require__(93);
 
 // PouchDB.debug.enable("*")
 PouchDB.debug.disable();
-PouchDB.plugin(__webpack_require__(562));
-PouchDB.plugin(__webpack_require__(565));
+PouchDB.plugin(__webpack_require__(564));
+PouchDB.plugin(__webpack_require__(567));
+
+var removeNilValuedKeys = function removeNilValuedKeys(value) {
+    return _.when(_.is(Object), _.compose(_.map(removeNilValuedKeys), _.reject(_.isNil)))(value);
+};
 
 exports.default = function () {
-    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee4(dbName) {
+    var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee5(dbName) {
         var deleteIndices = function () {
             var _ref2 = _asyncToGenerator(regeneratorRuntime.mark(function _callee() {
                 var existingCustomIndices;
@@ -29574,38 +29736,76 @@ exports.default = function () {
             };
         }();
 
-        var deleteAllDocs = function () {
-            var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
-                var remove;
-                return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        var upsert = function () {
+            var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(id, doc) {
+                var upsertResult;
+                return regeneratorRuntime.wrap(function _callee2$(_context2) {
                     while (1) {
-                        switch (_context3.prev = _context3.next) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.next = 2;
+                                return db.upsert(id, function (oldDoc) {
+                                    // console.log("upsert: oldDoc ", dbName, oldDoc, id)
+
+                                    var areDocsSame = _.equals(removeNilValuedKeys(oldDoc), removeNilValuedKeys(doc));
+
+                                    if (areDocsSame) {
+                                        console.log("upsert: ignoring update since docs are same: ", areDocsSame);
+                                    } else {
+                                        console.log("upsert: adding new doc since docs are not same", areDocsSame);
+                                        return doc;
+                                    }
+                                });
+
+                            case 2:
+                                upsertResult = _context2.sent;
+                                return _context2.abrupt("return", upsertResult);
+
+                            case 4:
+                            case "end":
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            return function upsert(_x3, _x4) {
+                return _ref3.apply(this, arguments);
+            };
+        }();
+
+        var deleteAllDocs = function () {
+            var _ref5 = _asyncToGenerator(regeneratorRuntime.mark(function _callee4() {
+                var remove;
+                return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                    while (1) {
+                        switch (_context4.prev = _context4.next) {
                             case 0:
                                 remove = function remove(doc) {
                                     return db.put(_.merge(doc, { _deleted: true }));
                                 };
 
-                                _context3.t0 = Promise;
-                                _context3.t1 = _;
-                                _context3.t2 = remove;
-                                _context3.next = 6;
+                                _context4.t0 = Promise;
+                                _context4.t1 = _;
+                                _context4.t2 = remove;
+                                _context4.next = 6;
                                 return allDocs();
 
                             case 6:
-                                _context3.t3 = _context3.sent;
-                                _context3.t4 = _context3.t1.map.call(_context3.t1, _context3.t2, _context3.t3);
-                                return _context3.abrupt("return", _context3.t0.all.call(_context3.t0, _context3.t4));
+                                _context4.t3 = _context4.sent;
+                                _context4.t4 = _context4.t1.map.call(_context4.t1, _context4.t2, _context4.t3);
+                                return _context4.abrupt("return", _context4.t0.all.call(_context4.t0, _context4.t4));
 
                             case 9:
                             case "end":
-                                return _context3.stop();
+                                return _context4.stop();
                         }
                     }
-                }, _callee3, this);
+                }, _callee4, this);
             }));
 
             return function deleteAllDocs() {
-                return _ref4.apply(this, arguments);
+                return _ref5.apply(this, arguments);
             };
         }();
 
@@ -29613,10 +29813,10 @@ exports.default = function () {
 
 
         var indices = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-        var db, syncTracker, createIndex, bulkDocs, upsert, startRemoteSync, find, allDocs, onChange;
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        var db, syncTracker, createIndex, bulkDocs, startRemoteSync, find, allDocs, onChange;
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
             while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context5.prev = _context5.next) {
                     case 0:
                         onChange = function onChange(callback) {
                             return db.changes({
@@ -29659,10 +29859,6 @@ exports.default = function () {
                             return tracker;
                         };
 
-                        upsert = function upsert(id, doc) {
-                            return db.upsert(id, _.always(doc));
-                        };
-
                         bulkDocs = function bulkDocs(docs) {
                             return db.bulkDocs(docs);
                         };
@@ -29676,35 +29872,35 @@ exports.default = function () {
                         syncTracker = null;
 
                         find = function () {
-                            var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(options) {
-                                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                            var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(options) {
+                                return regeneratorRuntime.wrap(function _callee3$(_context3) {
                                     while (1) {
-                                        switch (_context2.prev = _context2.next) {
+                                        switch (_context3.prev = _context3.next) {
                                             case 0:
-                                                _context2.next = 2;
+                                                _context3.next = 2;
                                                 return db.find(options);
 
                                             case 2:
-                                                return _context2.abrupt("return", _context2.sent.docs);
+                                                return _context3.abrupt("return", _context3.sent.docs);
 
                                             case 3:
                                             case "end":
-                                                return _context2.stop();
+                                                return _context3.stop();
                                         }
                                     }
-                                }, _callee2, undefined);
+                                }, _callee3, undefined);
                             }));
 
-                            return function find(_x6) {
-                                return _ref3.apply(this, arguments);
+                            return function find(_x8) {
+                                return _ref4.apply(this, arguments);
                             };
                         }();
 
-                        _context4.next = 11;
+                        _context5.next = 10;
                         return Promise.all(_.map(createIndex, indices));
 
-                    case 11:
-                        return _context4.abrupt("return", {
+                    case 10:
+                        return _context5.abrupt("return", {
                             find: find,
                             deleteAllDocs: deleteAllDocs,
                             bulkDocs: bulkDocs,
@@ -29716,15 +29912,17 @@ exports.default = function () {
                             findAll: function findAll() {
                                 return find({ selector: { "_id": { "$ne": null } } });
                             },
-                            onChange: onChange
+                            onChange: onChange,
+                            changes: _.bind(db.changes, db),
+                            name: dbName
                         });
 
-                    case 12:
+                    case 11:
                     case "end":
-                        return _context4.stop();
+                        return _context5.stop();
                 }
             }
-        }, _callee4, undefined);
+        }, _callee5, undefined);
     }));
 
     return function (_x2) {
@@ -29733,13 +29931,13 @@ exports.default = function () {
 }();
 
 /***/ }),
-/* 304 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _howler = __webpack_require__(549);
+var _howler = __webpack_require__(550);
 
 var _howler2 = _interopRequireDefault(_howler);
 
@@ -29771,13 +29969,13 @@ module.exports = function () {
 }();
 
 /***/ }),
-/* 305 */,
-/* 306 */
+/* 306 */,
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-const crypto = __webpack_require__(516);
+const crypto = __webpack_require__(517);
 
 module.exports = len => {
 	if (!Number.isFinite(len)) {
@@ -29789,7 +29987,7 @@ module.exports = len => {
 
 
 /***/ }),
-/* 307 */
+/* 308 */
 /***/ (function(module, exports) {
 
 
@@ -50964,7 +51162,8 @@ var _user$project$Store$decode = F2(
 		return _elm_lang$core$Result$toMaybe(
 			A2(
 				_elm_lang$core$Result$mapError,
-				_elm_lang$core$Debug$log('Store'),
+				_elm_lang$core$Debug$log(
+					A2(_elm_lang$core$Basics_ops['++'], 'Store ', store.name)),
 				A2(_elm_lang$core$Json_Decode$decodeValue, store.decoder, encodedDoc)));
 	});
 var _user$project$Store$updateExternal = F2(
@@ -51005,7 +51204,7 @@ var _user$project$Store$updateDocWithId = F3(
 				}),
 			store);
 	});
-var _user$project$Store$encodeDoc = F2(
+var _user$project$Store$encode = F2(
 	function (doc, s) {
 		return A2(_user$project$Document$encode, s.otherFieldsEncoder, doc);
 	});
@@ -51048,14 +51247,14 @@ var _user$project$Store$pouchDBUpsert = _elm_lang$core$Native_Platform.outgoingP
 	function (v) {
 		return [v._0, v._1, v._2];
 	});
-var _user$project$Store$upsert = F3(
-	function (dbName, otherFieldsEncoder, doc) {
+var _user$project$Store$upsertIn = F2(
+	function (store, doc) {
 		return _user$project$Store$pouchDBUpsert(
 			{
 				ctor: '_Tuple3',
-				_0: dbName,
+				_0: store.name,
 				_1: doc.id,
-				_2: A2(_user$project$Document$encode, otherFieldsEncoder, doc)
+				_2: A2(_user$project$Document$encode, store.otherFieldsEncoder, doc)
 			});
 	});
 var _user$project$Store$persist = function (s) {
@@ -51077,9 +51276,19 @@ var _user$project$Store$persist = function (s) {
 	var cmds = A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 		dirtyList,
-		A2(_user$project$Store$upsert, s.name, s.otherFieldsEncoder));
+		_user$project$Store$upsertIn(s));
 	return A2(_elm_lang$core$Platform_Cmd_ops['!'], ns, cmds);
 };
+var _user$project$Store$upsertEncoded = F2(
+	function (jsonValue, store) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(_user$project$Store$decode, jsonValue, store),
+				_user$project$Store$upsertIn(store)),
+			_elm_lang$core$Platform_Cmd$none);
+	});
 var _user$project$Store$pouchDBChanges = _elm_lang$core$Native_Platform.incomingPort(
 	'pouchDBChanges',
 	A2(
@@ -52731,6 +52940,30 @@ var _user$project$Firebase$fireDataPush = _elm_lang$core$Native_Platform.outgoin
 	function (v) {
 		return [v._0, v._1];
 	});
+var _user$project$Firebase$fireStartSync = _elm_lang$core$Native_Platform.outgoingPort(
+	'fireStartSync',
+	function (v) {
+		return v;
+	});
+var _user$project$Firebase$startSyncCmd = _user$project$Firebase$fireStartSync;
+var _user$project$Firebase$onFirebaseChange = _elm_lang$core$Native_Platform.incomingPort(
+	'onFirebaseChange',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (x0) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (x1) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{ctor: '_Tuple2', _0: x0, _1: x1});
+				},
+				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
+		},
+		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
+var _user$project$Firebase$onChange = function (tagger) {
+	return _user$project$Firebase$onFirebaseChange(
+		_elm_lang$core$Basics$uncurry(tagger));
+};
 var _user$project$Firebase$UserModel = F2(
 	function (a, b) {
 		return {id: a, providerData: b};
@@ -53098,28 +53331,59 @@ var _user$project$Model$toggleEntitySelection = function (entity) {
 var _user$project$Model$getMainViewType = function (_) {
 	return _.mainViewType;
 };
-var _user$project$Model$onExternalEntityChange = F2(
+var _user$project$Model$upsertEncodedDocCmd = F2(
 	function (dbName, encodedEntity) {
 		var _p2 = dbName;
 		switch (_p2) {
+			case 'todo-db':
+				return function (_p3) {
+					return A2(
+						_user$project$Store$upsertEncoded,
+						encodedEntity,
+						_user$project$Model$getTodoStore(_p3));
+				};
+			case 'project-db':
+				return function (_p4) {
+					return A2(
+						_user$project$Store$upsertEncoded,
+						encodedEntity,
+						_user$project$Model$getProjectStore(_p4));
+				};
+			case 'context-db':
+				return function (_p5) {
+					return A2(
+						_user$project$Store$upsertEncoded,
+						encodedEntity,
+						_user$project$Model$getContextStore(_p5));
+				};
+			default:
+				return function (_p6) {
+					return _elm_lang$core$Platform_Cmd$none;
+				};
+		}
+	});
+var _user$project$Model$onPouchDBChange = F2(
+	function (dbName, encodedEntity) {
+		var _p7 = dbName;
+		switch (_p7) {
 			case 'todo-db':
 				return _user$project$Model$updateTodoStore(
 					_user$project$Store$updateExternal(encodedEntity));
 			case 'project-db':
 				return _user$project$Model$updateProjectStoreM(
-					function (_p3) {
+					function (_p8) {
 						return A2(
 							_user$project$Store$updateExternal,
 							encodedEntity,
-							_user$project$Model$getProjectStore(_p3));
+							_user$project$Model$getProjectStore(_p8));
 					});
 			case 'context-db':
 				return _user$project$Model$updateContextStoreM(
-					function (_p4) {
+					function (_p9) {
 						return A2(
 							_user$project$Store$updateExternal,
 							encodedEntity,
-							_user$project$Model$getContextStore(_p4));
+							_user$project$Model$getContextStore(_p9));
 					});
 			default:
 				return _elm_lang$core$Basics$identity;
@@ -53136,9 +53400,9 @@ var _user$project$Model$insertTodo = function (constructWithId) {
 	return A2(
 		_user$project$Ext_Function$applyWith,
 		_user$project$Model$getTodoStore,
-		function (_p5) {
+		function (_p10) {
 			return _user$project$Model$setTodoStoreFromTuple(
-				A2(_user$project$Store$insert, constructWithId, _p5));
+				A2(_user$project$Store$insert, constructWithId, _p10));
 		});
 };
 var _user$project$Model$replaceTodoIfEqualById = function (todo) {
@@ -53154,7 +53418,7 @@ var _user$project$Model$updateTodo__ = F2(
 			{ctor: '_Tuple2', _0: _user$project$Model$getNow, _1: _user$project$Model$getTodoStore},
 			A2(
 				_user$project$Ext_Function_Infix_ops['>>>'],
-				function (_p6) {
+				function (_p11) {
 					return _user$project$Store$replaceDoc(
 						A2(
 							_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
@@ -53164,36 +53428,36 @@ var _user$project$Model$updateTodo__ = F2(
 									_0: action,
 									_1: {ctor: '[]'}
 								}),
-							todo)(_p6));
+							todo)(_p11));
 				},
 				_user$project$Model$setTodoStore));
 	});
 var _user$project$Model$findContextById = function (id) {
-	return function (_p7) {
+	return function (_p12) {
 		return A2(
 			_user$project$Store$findById,
 			id,
 			function (_) {
 				return _.contextStore;
-			}(_p7));
+			}(_p12));
 	};
 };
 var _user$project$Model$findProjectById = function (id) {
-	return function (_p8) {
+	return function (_p13) {
 		return A2(
 			_user$project$Store$findById,
 			id,
 			function (_) {
 				return _.projectStore;
-			}(_p8));
+			}(_p13));
 	};
 };
 var _user$project$Model$findTodoById = function (id) {
-	return function (_p9) {
+	return function (_p14) {
 		return A2(
 			_user$project$Store$findById,
 			id,
-			_user$project$Model$getTodoStore(_p9));
+			_user$project$Model$getTodoStore(_p14));
 	};
 };
 var _user$project$Model$updateTodoById = F2(
@@ -53213,28 +53477,28 @@ var _user$project$Model$updateAllSelectedTodoIfTodoIdInSelection = F3(
 			A2(_user$project$Store$findAllByIdSet, model.selectedEntityIdSet, model.todoStore)) : A3(_user$project$Model$updateTodoById, action, todoId, model);
 	});
 var _user$project$Model$getCurrentTodoListSortByFunction = function (model) {
-	var _p10 = _user$project$Model$getMainViewType(model);
-	switch (_p10.ctor) {
+	var _p15 = _user$project$Model$getMainViewType(model);
+	switch (_p15.ctor) {
 		case 'BinView':
-			return function (_p11) {
+			return function (_p16) {
 				return _elm_lang$core$Basics$negate(
-					_user$project$Todo$getDeletedAt(_p11));
+					_user$project$Todo$getDeletedAt(_p16));
 			};
 		case 'DoneView':
-			return function (_p12) {
+			return function (_p17) {
 				return _elm_lang$core$Basics$negate(
-					_user$project$Todo$getModifiedAt(_p12));
+					_user$project$Todo$getModifiedAt(_p17));
 			};
 		default:
-			return function (_p13) {
+			return function (_p18) {
 				return _elm_lang$core$Basics$negate(
-					_user$project$Todo$getModifiedAt(_p13));
+					_user$project$Todo$getModifiedAt(_p18));
 			};
 	}
 };
 var _user$project$Model$getCurrentTodoListFilter = function (model) {
-	var _p14 = _user$project$Model$getMainViewType(model);
-	switch (_p14.ctor) {
+	var _p19 = _user$project$Model$getMainViewType(model);
+	switch (_p19.ctor) {
 		case 'BinView':
 			return _user$project$Todo$binFilter;
 		case 'DoneView':
@@ -53245,9 +53509,9 @@ var _user$project$Model$getCurrentTodoListFilter = function (model) {
 };
 var _user$project$Model$getFilteredTodoList = function (model) {
 	var sortFunction = _user$project$Model$getCurrentTodoListSortByFunction(model);
-	var allTodos = function (_p15) {
+	var allTodos = function (_p20) {
 		return _user$project$Store$asList(
-			_user$project$Model$getTodoStore(_p15));
+			_user$project$Model$getTodoStore(_p20));
 	}(model);
 	var filter = _user$project$Model$getCurrentTodoListFilter(model);
 	return A2(
@@ -53263,9 +53527,9 @@ var _user$project$Model$createRemoteSyncForm = function (model) {
 };
 var _user$project$Model$getRemoteSyncForm = function (model) {
 	var maybeForm = function () {
-		var _p16 = model.editMode;
-		if (_p16.ctor === 'EditSyncSettings') {
-			return _elm_lang$core$Maybe$Just(_p16._0);
+		var _p21 = model.editMode;
+		if (_p21.ctor === 'EditSyncSettings') {
+			return _elm_lang$core$Maybe$Just(_p21._0);
 		} else {
 			return _elm_lang$core$Maybe$Nothing;
 		}
@@ -53284,8 +53548,8 @@ var _user$project$Model$setMainViewType = F2(
 				{mainViewType: mainViewType}));
 	});
 var _user$project$Model$clearSelectionIfEditModeNone = function (model) {
-	var _p17 = model.editMode;
-	if (_p17.ctor === 'None') {
+	var _p22 = model.editMode;
+	if (_p22.ctor === 'None') {
 		return _user$project$Model$clearSelection(model);
 	} else {
 		return model;
@@ -53308,30 +53572,30 @@ var _user$project$Model$getEditMode = function (_) {
 	return _.editMode;
 };
 var _user$project$Model$deactivateEditingMode = _user$project$Model$setEditMode(_user$project$EditMode$none);
-var _user$project$Model$getEditNewTodoModel = function (_p18) {
+var _user$project$Model$getEditNewTodoModel = function (_p23) {
 	return _user$project$EditMode$getNewTodoModel(
-		_user$project$Model$getEditMode(_p18));
+		_user$project$Model$getEditMode(_p23));
 };
-var _user$project$Model$getMaybeEditTodoModel = function (_p19) {
+var _user$project$Model$getMaybeEditTodoModel = function (_p24) {
 	return _user$project$EditMode$getMaybeEditTodoModel(
-		_user$project$Model$getEditMode(_p19));
+		_user$project$Model$getEditMode(_p24));
 };
 var _user$project$Model$setTodoContextOrProjectBasedOnCurrentView = F2(
 	function (todoId, model) {
 		var maybeTodoUpdateAction = function () {
-			var _p20 = model.mainViewType;
-			if (_p20.ctor === 'EntityListView') {
-				var _p21 = _p20._0;
-				switch (_p21.ctor) {
+			var _p25 = model.mainViewType;
+			if (_p25.ctor === 'EntityListView') {
+				var _p26 = _p25._0;
+				switch (_p26.ctor) {
 					case 'ContextView':
 						return A2(
 							_user$project$Ext_Function_Infix_ops['>>?'],
-							_user$project$Store$findById(_p21._0),
+							_user$project$Store$findById(_p26._0),
 							_user$project$Todo$SetContext)(model.contextStore);
 					case 'ProjectView':
 						return A2(
 							_user$project$Ext_Function_Infix_ops['>>?'],
-							_user$project$Store$findById(_p21._0),
+							_user$project$Store$findById(_p26._0),
 							_user$project$Todo$SetProject)(model.projectStore);
 					default:
 						return _elm_lang$core$Maybe$Nothing;
@@ -53353,25 +53617,25 @@ var _user$project$Model$setTodoContextOrProjectBasedOnCurrentView = F2(
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='], maybeModel, model));
 	});
 var _user$project$Model$getMaybeEditTodoProjectForm = function (model) {
-	var _p22 = model.editMode;
-	if (_p22.ctor === 'EditTodoProject') {
-		return _elm_lang$core$Maybe$Just(_p22._0);
+	var _p27 = model.editMode;
+	if (_p27.ctor === 'EditTodoProject') {
+		return _elm_lang$core$Maybe$Just(_p27._0);
 	} else {
 		return _elm_lang$core$Maybe$Nothing;
 	}
 };
 var _user$project$Model$getMaybeEditTodoContextForm = function (model) {
-	var _p23 = model.editMode;
-	if (_p23.ctor === 'EditTodoContext') {
-		return _elm_lang$core$Maybe$Just(_p23._0);
+	var _p28 = model.editMode;
+	if (_p28.ctor === 'EditTodoContext') {
+		return _elm_lang$core$Maybe$Just(_p28._0);
 	} else {
 		return _elm_lang$core$Maybe$Nothing;
 	}
 };
 var _user$project$Model$getMaybeEditTodoReminderForm = function (model) {
-	var _p24 = model.editMode;
-	if (_p24.ctor === 'EditTodoReminder') {
-		return _elm_lang$core$Maybe$Just(_p24._0);
+	var _p29 = model.editMode;
+	if (_p29.ctor === 'EditTodoReminder') {
+		return _elm_lang$core$Maybe$Just(_p29._0);
 	} else {
 		return _elm_lang$core$Maybe$Nothing;
 	}
@@ -53379,39 +53643,39 @@ var _user$project$Model$getMaybeEditTodoReminderForm = function (model) {
 var _user$project$Model$toggleDeleteEntity = F2(
 	function (entity, model) {
 		var entityId = _user$project$Model$getEntityId(entity);
-		var _p25 = entity;
-		switch (_p25.ctor) {
+		var _p30 = entity;
+		switch (_p30.ctor) {
 			case 'ContextEntity':
 				return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$setContextStore, model)(
 					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$replaceDoc, model.contextStore)(
 						A2(
 							_user$project$Context$setModifiedAt,
 							model.now,
-							_user$project$Document$toggleDeleted(_p25._0))));
+							_user$project$Document$toggleDeleted(_p30._0))));
 			case 'ProjectEntity':
 				return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$setProjectStore, model)(
 					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$replaceDoc, model.projectStore)(
 						A2(
 							_user$project$Project$setModifiedAt,
 							model.now,
-							_user$project$Document$toggleDeleted(_p25._0))));
+							_user$project$Document$toggleDeleted(_p30._0))));
 			default:
 				return A3(_user$project$Model$updateTodoById, _user$project$Todo$ToggleDeleted, entityId, model);
 		}
 	});
 var _user$project$Model$updateEditModeNameChanged = F3(
 	function (newName, entity, model) {
-		var _p26 = model.editMode;
-		switch (_p26.ctor) {
+		var _p31 = model.editMode;
+		switch (_p31.ctor) {
 			case 'EditContext':
 				return A2(
 					_user$project$Model$setEditMode,
-					A2(_user$project$EditMode$editContextSetName, newName, _p26._0),
+					A2(_user$project$EditMode$editContextSetName, newName, _p31._0),
 					model);
 			case 'EditProject':
 				return A2(
 					_user$project$Model$setEditMode,
-					A2(_user$project$EditMode$editProjectSetName, newName, _p26._0),
+					A2(_user$project$EditMode$editProjectSetName, newName, _p31._0),
 					model);
 			default:
 				return model;
@@ -53427,14 +53691,14 @@ var _user$project$Model$startEditingContext = function (todo) {
 };
 var _user$project$Model$startEditingReminder = function (todo) {
 	return _user$project$Model$updateEditModeM(
-		function (_p27) {
+		function (_p32) {
 			return _user$project$EditMode$EditTodoReminder(
 				A2(
 					_user$project$Todo_ReminderForm$create,
 					todo,
 					function (_) {
 						return _.now;
-					}(_p27)));
+					}(_p32)));
 		});
 };
 var _user$project$Model$updateNewTodoText = function (text) {
@@ -53459,11 +53723,11 @@ var _user$project$Model$update = F3(
 	});
 var _user$project$Model$updateDocWithId = F4(
 	function (id, updateFn, store, model) {
-		var updateAndSetModifiedAt = function (_p28) {
+		var updateAndSetModifiedAt = function (_p33) {
 			return A2(
 				_user$project$Document$setModifiedAt,
 				model.now,
-				updateFn(_p28));
+				updateFn(_p33));
 		};
 		return A3(
 			_user$project$Model$update,
@@ -53533,44 +53797,44 @@ var _user$project$Model$projectStore = {
 		})
 };
 var _user$project$Model$saveCurrentForm = function (model) {
-	var _p29 = model.editMode;
-	switch (_p29.ctor) {
+	var _p34 = model.editMode;
+	switch (_p34.ctor) {
 		case 'EditContext':
-			var _p30 = _p29._0;
+			var _p35 = _p34._0;
 			return A4(
 				_user$project$Model$updateDocAndSetFocusInEntityWithId,
-				_p30.id,
-				_user$project$Context$setName(_p30.name),
+				_p35.id,
+				_user$project$Context$setName(_p35.name),
 				_user$project$Model$contextStore,
 				model);
 		case 'EditProject':
-			var _p31 = _p29._0;
+			var _p36 = _p34._0;
 			return A4(
 				_user$project$Model$updateDocAndSetFocusInEntityWithId,
-				_p31.id,
-				_user$project$Project$setName(_p31.name),
+				_p36.id,
+				_user$project$Project$setName(_p36.name),
 				_user$project$Model$projectStore,
 				model);
 		case 'EditTodo':
-			var _p32 = _p29._0;
+			var _p37 = _p34._0;
 			return A2(
 				_user$project$Model$setFocusInEntityWithId,
-				_p32.id,
+				_p37.id,
 				A3(
 					_user$project$Model$updateTodoById,
-					_user$project$Todo$SetText(_p32.todoText),
-					_p32.id,
+					_user$project$Todo$SetText(_p37.todoText),
+					_p37.id,
 					model));
 		case 'EditTodoReminder':
-			var _p33 = _p29._0;
+			var _p38 = _p34._0;
 			return A2(
 				_user$project$Model$setFocusInEntityWithId,
-				_p33.id,
+				_p38.id,
 				A3(
 					_user$project$Model$updateTodoById,
 					_user$project$Todo$SetTime(
-						_user$project$Todo_ReminderForm$getMaybeTime(_p33)),
-					_p33.id,
+						_user$project$Todo_ReminderForm$getMaybeTime(_p38)),
+					_p38.id,
 					model));
 		case 'EditTodoContext':
 			return model;
@@ -53588,19 +53852,19 @@ var _user$project$Model$saveCurrentForm = function (model) {
 						A2(
 							_user$project$Todo$init,
 							model.now,
-							_user$project$Todo_NewForm$getText(_p29._0)),
+							_user$project$Todo_NewForm$getText(_p34._0)),
 						model)));
 		case 'EditSyncSettings':
 			return _elm_lang$core$Native_Utils.update(
 				model,
-				{pouchDBRemoteSyncURI: _p29._0.uri});
+				{pouchDBRemoteSyncURI: _p34._0.uri});
 		default:
 			return model;
 	}
 };
-var _user$project$Model$isShowDetailsKeyPressed = function (_p34) {
+var _user$project$Model$isShowDetailsKeyPressed = function (_p39) {
 	return !_user$project$Ext_Keyboard$isAltDown(
-		_user$project$Model$keyboardState.get(_p34));
+		_user$project$Model$keyboardState.get(_p39));
 };
 var _user$project$Model$setReminderOverlayToSnoozeView = F2(
 	function (details, model) {
@@ -53618,13 +53882,13 @@ var _user$project$Model$removeReminderOverlay = function (model) {
 var _user$project$Model$snoozeTodoWithOffset = F3(
 	function (snoozeOffset, todoId, model) {
 		var time = A2(_user$project$ReminderOverlay$addSnoozeOffset, model.now, snoozeOffset);
-		return function (_p35) {
+		return function (_p40) {
 			return _user$project$Model$removeReminderOverlay(
 				A3(
 					_user$project$Model$updateTodoById,
 					_user$project$Todo$SnoozeTill(time),
 					todoId,
-					_p35));
+					_p40));
 		}(model);
 	});
 var _user$project$Model$setReminderOverlayToInitialView = F2(
@@ -53675,7 +53939,7 @@ var _user$project$Model$getActiveTodoListWithReminderTime = function (model) {
 		_user$project$Todo$isReminderOverdue(model.now),
 		model.todoStore);
 };
-var _user$project$Model$getActiveTodoList = function (_p36) {
+var _user$project$Model$getActiveTodoList = function (_p41) {
 	return A2(
 		_user$project$Store$reject,
 		_user$project$Ext_Function$anyPass(
@@ -53690,44 +53954,44 @@ var _user$project$Model$getActiveTodoList = function (_p36) {
 			}),
 		function (_) {
 			return _.todoStore;
-		}(_p36));
+		}(_p41));
 };
 var _user$project$Model$getActiveTodoListGroupedBy = function (fn) {
-	return function (_p37) {
+	return function (_p42) {
 		return A2(
 			_elm_community$dict_extra$Dict_Extra$groupBy,
 			fn,
-			_user$project$Model$getActiveTodoList(_p37));
+			_user$project$Model$getActiveTodoList(_p42));
 	};
 };
 var _user$project$Model$getMaybeEditModelForEntityType = F2(
 	function (entityType, model) {
-		var _p38 = {ctor: '_Tuple2', _0: entityType, _1: model.editMode};
-		_v14_2:
+		var _p43 = {ctor: '_Tuple2', _0: entityType, _1: model.editMode};
+		_v15_2:
 		do {
-			if (_p38.ctor === '_Tuple2') {
-				if (_p38._0.ctor === 'ProjectGroup') {
-					if (_p38._1.ctor === 'EditProject') {
-						return _elm_lang$core$Maybe$Just(_p38._1._0);
+			if (_p43.ctor === '_Tuple2') {
+				if (_p43._0.ctor === 'ProjectGroup') {
+					if (_p43._1.ctor === 'EditProject') {
+						return _elm_lang$core$Maybe$Just(_p43._1._0);
 					} else {
-						break _v14_2;
+						break _v15_2;
 					}
 				} else {
-					if (_p38._1.ctor === 'EditContext') {
-						return _elm_lang$core$Maybe$Just(_p38._1._0);
+					if (_p43._1.ctor === 'EditContext') {
+						return _elm_lang$core$Maybe$Just(_p43._1._0);
 					} else {
-						break _v14_2;
+						break _v15_2;
 					}
 				}
 			} else {
-				break _v14_2;
+				break _v15_2;
 			}
 		} while(false);
 		return _elm_lang$core$Maybe$Nothing;
 	});
 var _user$project$Model$getEntityStore = function (entityType) {
-	var _p39 = entityType;
-	if (_p39.ctor === 'ProjectGroup') {
+	var _p44 = entityType;
+	if (_p44.ctor === 'ProjectGroup') {
 		return function (_) {
 			return _.projectStore;
 		};
@@ -53803,14 +54067,14 @@ var _user$project$Model$createEditTodoMode = F2(
 	});
 var _user$project$Model$createEntityEditForm = F2(
 	function (entity, model) {
-		var _p40 = entity;
-		switch (_p40.ctor) {
+		var _p45 = entity;
+		switch (_p45.ctor) {
 			case 'ContextEntity':
-				return _user$project$EditMode$editContextMode(_p40._0);
+				return _user$project$EditMode$editContextMode(_p45._0);
 			case 'ProjectEntity':
-				return _user$project$EditMode$editProjectMode(_p40._0);
+				return _user$project$EditMode$editProjectMode(_p45._0);
 			default:
-				return A2(_user$project$Model$createEditTodoMode, _p40._0, model);
+				return A2(_user$project$Model$createEditTodoMode, _p45._0, model);
 		}
 	});
 var _user$project$Model$startEditingEntity = F2(
@@ -53820,25 +54084,25 @@ var _user$project$Model$startEditingEntity = F2(
 			A2(_user$project$Model$createEntityEditForm, entity, model),
 			model);
 	});
-var _user$project$Model$getEncodedContextNames = function (_p41) {
+var _user$project$Model$getEncodedContextNames = function (_p46) {
 	return _user$project$Context$getEncodedNames(
 		function (_) {
 			return _.contextStore;
-		}(_p41));
+		}(_p46));
 };
-var _user$project$Model$getProjectsAsIdDict = function (_p42) {
+var _user$project$Model$getProjectsAsIdDict = function (_p47) {
 	return _user$project$Store$asIdDict(
 		function (_) {
 			return _.projectStore;
-		}(_p42));
+		}(_p47));
 };
-var _user$project$Model$getContextsAsIdDict = function (_p43) {
+var _user$project$Model$getContextsAsIdDict = function (_p48) {
 	return _user$project$Store$asIdDict(
 		function (_) {
 			return _.contextStore;
-		}(_p43));
+		}(_p48));
 };
-var _user$project$Model$getActiveContexts = function (_p44) {
+var _user$project$Model$getActiveContexts = function (_p49) {
 	return A2(
 		F2(
 			function (x, y) {
@@ -53850,9 +54114,9 @@ var _user$project$Model$getActiveContexts = function (_p44) {
 			_user$project$Document$isDeleted,
 			function (_) {
 				return _.contextStore;
-			}(_p44)));
+			}(_p49)));
 };
-var _user$project$Model$getActiveProjects = function (_p45) {
+var _user$project$Model$getActiveProjects = function (_p50) {
 	return A2(
 		F2(
 			function (x, y) {
@@ -53864,27 +54128,27 @@ var _user$project$Model$getActiveProjects = function (_p45) {
 			_user$project$Document$isDeleted,
 			function (_) {
 				return _.projectStore;
-			}(_p45)));
+			}(_p50)));
 };
 var _user$project$Model$findContextByName = function (name) {
-	return function (_p46) {
+	return function (_p51) {
 		return A2(
 			_user$project$Context$findByName,
 			name,
 			function (_) {
 				return _.contextStore;
-			}(_p46));
+			}(_p51));
 	};
 };
 var _user$project$Model$findProjectByName = function (name) {
-	return function (_p47) {
+	return function (_p52) {
 		return A2(
 			_user$project$Project$findByName,
 			name,
-			_user$project$Model$getProjectStore(_p47));
+			_user$project$Model$getProjectStore(_p52));
 	};
 };
-var _user$project$Model$isLayoutAutoNarrow = function (_p48) {
+var _user$project$Model$isLayoutAutoNarrow = function (_p53) {
 	return A2(
 		_elm_lang$core$Basics$uncurry,
 		_user$project$Ext_Function$and,
@@ -53892,24 +54156,24 @@ var _user$project$Model$isLayoutAutoNarrow = function (_p48) {
 			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
 			{
 				ctor: '_Tuple2',
-				_0: function (_p49) {
+				_0: function (_p54) {
 					return !function (_) {
 						return _.forceNarrow;
-					}(_p49);
+					}(_p54);
 				},
 				_1: function (_) {
 					return _.narrow;
 				}
 			},
-			_user$project$Model$getLayout(_p48)));
+			_user$project$Model$getLayout(_p53)));
 };
-var _user$project$Model$getLayoutForceNarrow = function (_p50) {
+var _user$project$Model$getLayoutForceNarrow = function (_p55) {
 	return function (_) {
 		return _.forceNarrow;
 	}(
 		function (_) {
 			return _.layout;
-		}(_p50));
+		}(_p55));
 };
 var _user$project$Model$setLayoutNarrow = function (narrow) {
 	return _user$project$Model$updateLayout(
@@ -53937,17 +54201,17 @@ var _user$project$Model$setUser = F2(
 			model,
 			{user: user});
 	});
-var _user$project$Model$getMaybeUserId = function (_p51) {
+var _user$project$Model$getMaybeUserId = function (_p56) {
 	return _user$project$Firebase$getMaybeUserId(
 		function (_) {
 			return _.user;
-		}(_p51));
+		}(_p56));
 };
-var _user$project$Model$getMaybeUserProfile = function (_p52) {
+var _user$project$Model$getMaybeUserProfile = function (_p57) {
 	return _user$project$Firebase$getMaybeUserProfile(
 		function (_) {
 			return _.user;
-		}(_p52));
+		}(_p57));
 };
 var _user$project$Model$Model = function (a) {
 	return function (b) {
@@ -54018,7 +54282,7 @@ var _user$project$Model$TodoContextViewModel = F4(
 	function (a, b, c, d) {
 		return {name: a, todoList: b, count: c, isEmpty: d};
 	});
-var _user$project$Model$groupByTodoContextViewModel = function (_p53) {
+var _user$project$Model$groupByTodoContextViewModel = function (_p58) {
 	return function (dict) {
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
@@ -54027,37 +54291,37 @@ var _user$project$Model$groupByTodoContextViewModel = function (_p53) {
 				_0: 'Inbox',
 				_1: {ctor: '[]'}
 			},
-			function (_p54) {
-				return function (_p55) {
-					var _p56 = _p55;
-					return function (_p57) {
+			function (_p59) {
+				return function (_p60) {
+					var _p61 = _p60;
+					return function (_p62) {
 						return A2(
 							_danielnarey$elm_toolkit$Toolkit_Helpers$uncurry3,
-							_user$project$Model$TodoContextViewModel(_p56._0),
+							_user$project$Model$TodoContextViewModel(_p61._0),
 							A2(
 								_danielnarey$elm_toolkit$Toolkit_Helpers$apply3,
 								{ctor: '_Tuple3', _0: _elm_lang$core$Basics$identity, _1: _elm_lang$core$List$length, _2: _elm_lang$core$List$isEmpty},
-								_p57));
-					}(_p56._1);
+								_p62));
+					}(_p61._1);
 				}(
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
 						{
 							ctor: '_Tuple2',
 							_0: _elm_lang$core$Basics$identity,
-							_1: function (_p58) {
+							_1: function (_p63) {
 								return A2(
 									_elm_lang$core$Maybe$withDefault,
 									{ctor: '[]'},
-									A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, dict)(_p58));
+									A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, dict)(_p63));
 							}
 						},
-						_p54));
+						_p59));
 			});
 	}(
 		A2(
 			_elm_community$dict_extra$Dict_Extra$groupBy,
-			function (_p59) {
+			function (_p64) {
 				return 'Inbox';
 			},
 			A2(
@@ -54072,7 +54336,7 @@ var _user$project$Model$groupByTodoContextViewModel = function (_p53) {
 					}
 				},
 				_user$project$Store$asList(
-					_user$project$Model$getTodoStore(_p53)))));
+					_user$project$Model$getTodoStore(_p58)))));
 };
 var _user$project$Model$ProjectView = function (a) {
 	return {ctor: 'ProjectView', _0: a};
@@ -54089,12 +54353,12 @@ var _user$project$Model$EntityListView = function (a) {
 	return {ctor: 'EntityListView', _0: a};
 };
 var _user$project$Model$init = function (flags) {
-	var _p60 = flags;
-	var now = _p60.now;
-	var encodedTodoList = _p60.encodedTodoList;
-	var encodedProjectList = _p60.encodedProjectList;
-	var encodedContextList = _p60.encodedContextList;
-	var pouchDBRemoteSyncURI = _p60.pouchDBRemoteSyncURI;
+	var _p65 = flags;
+	var now = _p65.now;
+	var encodedTodoList = _p65.encodedTodoList;
+	var encodedProjectList = _p65.encodedProjectList;
+	var encodedContextList = _p65.encodedContextList;
+	var pouchDBRemoteSyncURI = _p65.pouchDBRemoteSyncURI;
 	var storeGenerator = A4(
 		_mgold$elm_random_pcg$Random_Pcg$map3,
 		F3(
@@ -54104,14 +54368,14 @@ var _user$project$Model$init = function (flags) {
 		_user$project$Todo$storeGenerator(encodedTodoList),
 		_user$project$Project$storeGenerator(encodedProjectList),
 		_user$project$Context$storeGenerator(encodedContextList));
-	var _p61 = A2(
+	var _p66 = A2(
 		_mgold$elm_random_pcg$Random_Pcg$step,
 		storeGenerator,
 		_user$project$Ext_Random$seedFromTime(now));
-	var todoStore = _p61._0._0;
-	var projectStore = _p61._0._1;
-	var contextStore = _p61._0._2;
-	var seed = _p61._1;
+	var todoStore = _p66._0._0;
+	var projectStore = _p66._0._1;
+	var contextStore = _p66._0._2;
+	var seed = _p66._1;
 	var model = {
 		now: now,
 		todoStore: todoStore,
@@ -54135,9 +54399,9 @@ var _user$project$Model$init = function (flags) {
 	};
 	return model;
 };
-var _user$project$Model$setEntityListViewType = function (_p62) {
+var _user$project$Model$setEntityListViewType = function (_p67) {
 	return _user$project$Model$setMainViewType(
-		_user$project$Model$EntityListView(_p62));
+		_user$project$Model$EntityListView(_p67));
 };
 var _user$project$Model$MainViewTypeField = function (a) {
 	return {ctor: 'MainViewTypeField', _0: a};
@@ -54162,12 +54426,12 @@ var _user$project$Model$ContextEntity = function (a) {
 	return {ctor: 'ContextEntity', _0: a};
 };
 var _user$project$Model$createAndEditNewContext = function (model) {
-	return function (_p63) {
-		var _p64 = _p63;
+	return function (_p68) {
+		var _p69 = _p68;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Model$ContextEntity(_p64._0),
-			_p64._1);
+			_user$project$Model$ContextEntity(_p69._0),
+			_p69._1);
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -54207,12 +54471,12 @@ var _user$project$Model$ProjectEntity = function (a) {
 	return {ctor: 'ProjectEntity', _0: a};
 };
 var _user$project$Model$createAndEditNewProject = function (model) {
-	return function (_p65) {
-		var _p66 = _p65;
+	return function (_p70) {
+		var _p71 = _p70;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Model$ProjectEntity(_p66._0),
-			_p66._1);
+			_user$project$Model$ProjectEntity(_p71._0),
+			_p71._1);
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -54269,8 +54533,8 @@ var _user$project$Model$getFilteredProjectList = function (model) {
 };
 var _user$project$Model$createViewEntityList = F2(
 	function (viewType, model) {
-		var _p67 = viewType;
-		switch (_p67.ctor) {
+		var _p72 = viewType;
+		switch (_p72.ctor) {
 			case 'ContextsView':
 				var contextList = _user$project$Model$getFilteredContextList(model);
 				return A2(_user$project$Model$getContextsViewEntityList, contextList, model);
@@ -54278,7 +54542,7 @@ var _user$project$Model$createViewEntityList = F2(
 				var contextList = _elm_lang$core$List$singleton(
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(_user$project$Store$findById, _p67._0, model.contextStore),
+						A2(_user$project$Store$findById, _p72._0, model.contextStore),
 						_user$project$Context$null));
 				return A2(_user$project$Model$getContextsViewEntityList, contextList, model);
 			case 'ProjectsView':
@@ -54288,7 +54552,7 @@ var _user$project$Model$createViewEntityList = F2(
 				var projectList = _elm_lang$core$List$singleton(
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(_user$project$Store$findById, _p67._0, model.projectStore),
+						A2(_user$project$Store$findById, _p72._0, model.projectStore),
 						_user$project$Project$null));
 				return A2(_user$project$Model$getProjectsViewEntityList, projectList, model);
 		}
@@ -54407,9 +54671,13 @@ var _user$project$Msg$OnFCMTokenChanged = function (a) {
 var _user$project$Msg$OnUserChanged = function (a) {
 	return {ctor: 'OnUserChanged', _0: a};
 };
-var _user$project$Msg$OnExternalEntityChanged = F2(
+var _user$project$Msg$OnFirebaseChange = F2(
 	function (a, b) {
-		return {ctor: 'OnExternalEntityChanged', _0: a, _1: b};
+		return {ctor: 'OnFirebaseChange', _0: a, _1: b};
+	});
+var _user$project$Msg$OnPouchDBChange = F2(
+	function (a, b) {
+		return {ctor: 'OnPouchDBChange', _0: a, _1: b};
 	});
 var _user$project$Msg$OnCommonMsg = function (a) {
 	return {ctor: 'OnCommonMsg', _0: a};
@@ -55181,7 +55449,7 @@ var _user$project$Routes$builder2messages = function (builder) {
 								_user$project$Model$ContextView('')),
 							_1: {ctor: '[]'}
 						};
-					case 'sync':
+					case 'custom-sync':
 						return {
 							ctor: '::',
 							_0: _user$project$Msg$SetView(_user$project$Model$SyncView),
@@ -55285,7 +55553,7 @@ var _user$project$Routes$getPathFromModel = function (model) {
 		default:
 			return {
 				ctor: '::',
-				_0: 'sync',
+				_0: 'custom-sync',
 				_1: {ctor: '[]'}
 			};
 	}
@@ -56606,7 +56874,7 @@ var _user$project$ViewModel$getViewInfo = F3(
 			case 'DoneView':
 				return {ctor: '_Tuple2', _0: 'Done', _1: _user$project$ViewModel$sgtdBlue};
 			default:
-				return {ctor: '_Tuple2', _0: 'Sync', _1: _user$project$ViewModel$sgtdBlue};
+				return {ctor: '_Tuple2', _0: 'Custom Sync', _1: _user$project$ViewModel$sgtdBlue};
 		}
 	});
 var _user$project$ViewModel$getIdOfEntityView = function (entityView) {
@@ -56951,7 +57219,7 @@ var _user$project$Main_View$init = F2(
 														},
 														{
 															ctor: '::',
-															_0: _elm_lang$html$Html$text('Sync'),
+															_0: _elm_lang$html$Html$text('Start Sync'),
 															_1: {ctor: '[]'}
 														}),
 													_1: {ctor: '[]'}
@@ -57291,7 +57559,7 @@ var _user$project$View_AppDrawer$navList = F2(
 									_0: A3(_user$project$View_AppDrawer$switchViewItem, 'done', _user$project$Model$DoneView, 'Done'),
 									_1: {
 										ctor: '::',
-										_0: A3(_user$project$View_AppDrawer$switchViewItem, 'notification:sync', _user$project$Model$SyncView, 'Sync Settings'),
+										_0: A3(_user$project$View_AppDrawer$switchViewItem, 'notification:sync', _user$project$Model$SyncView, 'Custom Sync'),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -57752,6 +58020,10 @@ var _user$project$View$init = function (m) {
 		});
 };
 
+var _user$project$Main$startSyncWithFirebase = function (user) {
+	return _user$project$Ext_Return$maybeEffect(
+		A2(_user$project$Ext_Function_Infix_ops['>>?'], _user$project$Model$getMaybeUserId, _user$project$Firebase$startSyncCmd));
+};
 var _user$project$Main$positionProjectDropdownCmd = function (todo) {
 	return _user$project$DomPorts$positionDropdown(
 		{
@@ -57982,8 +58254,12 @@ var _user$project$Main$subscriptions = function (m) {
 						_0: _user$project$Main$notificationClicked(_user$project$Msg$OnNotificationClicked),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Store$onChange(_user$project$Msg$OnExternalEntityChanged),
-							_1: {ctor: '[]'}
+							_0: _user$project$Store$onChange(_user$project$Msg$OnPouchDBChange),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Firebase$onChange(_user$project$Msg$OnFirebaseChange),
+								_1: {ctor: '[]'}
+							}
 						}
 					}
 				}
@@ -58055,9 +58331,12 @@ var _user$project$Main$update = function (msg) {
 				switch (_p17.ctor) {
 					case 'OnCommonMsg':
 						return _user$project$CommonMsg$update(_p17._0);
-					case 'OnExternalEntityChanged':
+					case 'OnPouchDBChange':
 						return _Fresheyeball$elm_return$Return$map(
-							A2(_user$project$Model$onExternalEntityChange, _p17._0, _p17._1));
+							A2(_user$project$Model$onPouchDBChange, _p17._0, _p17._1));
+					case 'OnFirebaseChange':
+						return _Fresheyeball$elm_return$Return$effect_(
+							A2(_user$project$Model$upsertEncodedDocCmd, _p17._0, _p17._1));
 					case 'SignIn':
 						return _Fresheyeball$elm_return$Return$command(
 							_user$project$Firebase$signIn(
@@ -58067,50 +58346,54 @@ var _user$project$Main$update = function (msg) {
 							_user$project$Firebase$signOut(
 								{ctor: '_Tuple0'}));
 					case 'OnUserChanged':
+						var _p19 = _p17._0;
 						return function (_p18) {
 							return A2(
-								_Fresheyeball$elm_return$Return$effect_,
-								_user$project$Main$firebaseUpdateTokenCmd,
+								_user$project$Main$startSyncWithFirebase,
+								_p19,
 								A2(
-									_Fresheyeball$elm_return$Return$map,
-									_user$project$Model$setUser(_p17._0),
-									_p18));
+									_Fresheyeball$elm_return$Return$effect_,
+									_user$project$Main$firebaseUpdateTokenCmd,
+									A2(
+										_Fresheyeball$elm_return$Return$map,
+										_user$project$Model$setUser(_p19),
+										_p18)));
 						};
 					case 'OnFCMTokenChanged':
-						var _p21 = _p17._0;
-						var _p19 = A2(_elm_lang$core$Debug$log, 'fcm: token', _p21);
-						return function (_p20) {
+						var _p22 = _p17._0;
+						var _p20 = A2(_elm_lang$core$Debug$log, 'fcm: token', _p22);
+						return function (_p21) {
 							return A2(
 								_Fresheyeball$elm_return$Return$effect_,
 								_user$project$Main$firebaseUpdateTokenCmd,
 								A2(
 									_Fresheyeball$elm_return$Return$map,
-									_user$project$Model$setFCMToken(_p21),
-									_p20));
+									_user$project$Model$setFCMToken(_p22),
+									_p21));
 						};
 					case 'OnEntityListKeyDown':
-						var _p25 = _p17._0;
-						var _p22 = _p17._1.key;
-						switch (_p22.ctor) {
+						var _p26 = _p17._0;
+						var _p23 = _p17._1.key;
+						switch (_p23.ctor) {
 							case 'ArrowUp':
-								return function (_p23) {
-									return A2(
-										_user$project$Main$andThenUpdate,
-										_user$project$Main$setDomFocusToFocusedEntityCmd,
-										A2(
-											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$focusPrevEntity(_p25),
-											_p23));
-								};
-							case 'ArrowDown':
 								return function (_p24) {
 									return A2(
 										_user$project$Main$andThenUpdate,
 										_user$project$Main$setDomFocusToFocusedEntityCmd,
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$focusNextEntity(_p25),
+											_user$project$Model$focusPrevEntity(_p26),
 											_p24));
+								};
+							case 'ArrowDown':
+								return function (_p25) {
+									return A2(
+										_user$project$Main$andThenUpdate,
+										_user$project$Main$setDomFocusToFocusedEntityCmd,
+										A2(
+											_Fresheyeball$elm_return$Return$map,
+											_user$project$Model$focusNextEntity(_p26),
+											_p25));
 								};
 							default:
 								return _elm_lang$core$Basics$identity;
@@ -58121,21 +58404,21 @@ var _user$project$Main$update = function (msg) {
 						return _Fresheyeball$elm_return$Return$map(
 							_user$project$Model$setLayoutNarrow(_p17._0));
 					case 'RemotePouchSync':
-						return function (_p26) {
+						return function (_p27) {
 							return A2(
 								_Fresheyeball$elm_return$Return$effect_,
-								function (_p27) {
+								function (_p28) {
 									return _user$project$Main$syncWithRemotePouch(
 										function (_) {
 											return _.pouchDBRemoteSyncURI;
-										}(_p27));
+										}(_p28));
 								},
-								A2(_user$project$Main$andThenUpdate, _user$project$Msg$SaveCurrentForm, _p26));
+								A2(_user$project$Main$andThenUpdate, _user$project$Msg$SaveCurrentForm, _p27));
 						};
 					case 'OnNotificationClicked':
-						return function (_p28) {
+						return function (_p29) {
 							return _user$project$Main$andThenUpdate(
-								_user$project$Msg$ShowReminderOverlayForTodoId(_p28));
+								_user$project$Msg$ShowReminderOverlayForTodoId(_p29));
 						}(_p17._0.data.id);
 					case 'ToggleShowDeletedEntity':
 						return _Fresheyeball$elm_return$Return$map(
@@ -58155,7 +58438,7 @@ var _user$project$Main$update = function (msg) {
 					case 'ToggleTodoDone':
 						return A2(_user$project$Main$updateTodo, _user$project$Todo$ToggleDone, _p17._0);
 					case 'SetTodoContext':
-						return function (_p29) {
+						return function (_p30) {
 							return A2(
 								_user$project$Main$andThenUpdate,
 								_user$project$Msg$DeactivateEditingMode,
@@ -58163,10 +58446,10 @@ var _user$project$Main$update = function (msg) {
 									_user$project$Main$updateAllSelectedTodoIfTodoIdInSelection,
 									_user$project$Todo$SetContext(_p17._0),
 									_p17._1,
-									_p29));
+									_p30));
 						};
 					case 'SetTodoProject':
-						return function (_p30) {
+						return function (_p31) {
 							return A2(
 								_user$project$Main$andThenUpdate,
 								_user$project$Msg$DeactivateEditingMode,
@@ -58174,76 +58457,76 @@ var _user$project$Main$update = function (msg) {
 									_user$project$Main$updateAllSelectedTodoIfTodoIdInSelection,
 									_user$project$Todo$SetProject(_p17._0),
 									_p17._1,
-									_p30));
+									_p31));
 						};
 					case 'NewTodoTextChanged':
 						return _Fresheyeball$elm_return$Return$map(
 							_user$project$Model$updateNewTodoText(_p17._0));
 					case 'DeactivateEditingMode':
-						return function (_p31) {
+						return function (_p32) {
 							return A2(
 								_user$project$Main$andThenUpdate,
 								_user$project$Main$setDomFocusToFocusedEntityCmd,
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$deactivateEditingMode, _p31));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$deactivateEditingMode, _p32));
 						};
 					case 'NewTodoKeyUp':
-						var _p32 = _p17._0.key;
-						if (_p32.ctor === 'Enter') {
+						var _p33 = _p17._0.key;
+						if (_p33.ctor === 'Enter') {
 							return _user$project$Main$andThenUpdate(_user$project$Msg$SaveCurrentForm);
 						} else {
 							return _elm_lang$core$Basics$identity;
 						}
 					case 'StartEditingReminder':
-						return function (_p33) {
+						return function (_p34) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
 								A2(
 									_Fresheyeball$elm_return$Return$map,
 									_user$project$Model$startEditingReminder(_p17._0),
-									_p33));
-						};
-					case 'StartEditingContext':
-						var _p35 = _p17._0;
-						return function (_p34) {
-							return A2(
-								_Fresheyeball$elm_return$Return$command,
-								_user$project$Main$positionContextDropdownCmd(_p35),
-								A2(
-									_Fresheyeball$elm_return$Return$map,
-									_user$project$Model$startEditingContext(_p35),
 									_p34));
 						};
-					case 'StartEditingProject':
-						var _p37 = _p17._0;
-						return function (_p36) {
+					case 'StartEditingContext':
+						var _p36 = _p17._0;
+						return function (_p35) {
 							return A2(
 								_Fresheyeball$elm_return$Return$command,
-								_user$project$Main$positionProjectDropdownCmd(_p37),
+								_user$project$Main$positionContextDropdownCmd(_p36),
 								A2(
 									_Fresheyeball$elm_return$Return$map,
-									_user$project$Model$startEditingProject(_p37),
-									_p36));
+									_user$project$Model$startEditingContext(_p36),
+									_p35));
+						};
+					case 'StartEditingProject':
+						var _p38 = _p17._0;
+						return function (_p37) {
+							return A2(
+								_Fresheyeball$elm_return$Return$command,
+								_user$project$Main$positionProjectDropdownCmd(_p38),
+								A2(
+									_Fresheyeball$elm_return$Return$map,
+									_user$project$Model$startEditingProject(_p38),
+									_p37));
 						};
 					case 'UpdateTodoForm':
 						return _Fresheyeball$elm_return$Return$map(
-							function (_p38) {
+							function (_p39) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditTodo(_p38));
+									_user$project$EditMode$EditTodo(_p39));
 							}(
 								A2(_user$project$Todo_Form$set, _p17._1, _p17._0)));
 					case 'UpdateRemoteSyncFormUri':
 						return _Fresheyeball$elm_return$Return$map(
-							function (_p39) {
+							function (_p40) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditSyncSettings(_p39));
+									_user$project$EditMode$EditSyncSettings(_p40));
 							}(
 								_elm_lang$core$Native_Utils.update(
 									_p17._0,
 									{uri: _p17._1})));
 					case 'UpdateReminderForm':
 						return _Fresheyeball$elm_return$Return$map(
-							function (_p40) {
+							function (_p41) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditTodoReminder(_p40));
+									_user$project$EditMode$EditTodoReminder(_p41));
 							}(
 								A2(_user$project$Todo_ReminderForm$set, _p17._1, _p17._0)));
 					case 'SetView':
@@ -58260,7 +58543,7 @@ var _user$project$Main$update = function (msg) {
 					case 'OnMsgList':
 						return _user$project$Main$onMsgList(_p17._0);
 					case 'OnKeyboardMsg':
-						return function (_p41) {
+						return function (_p42) {
 							return A2(
 								_user$project$DomPorts$focusSelectorIfNoFocusCmd,
 								'.entity-list > [tabindex=0]',
@@ -58268,10 +58551,10 @@ var _user$project$Main$update = function (msg) {
 									_Fresheyeball$elm_return$Return$map,
 									_user$project$Model$updateKeyboardState(
 										_user$project$Ext_Keyboard$update(_p17._0)),
-									_p41));
+									_p42));
 						};
 					case 'SaveCurrentForm':
-						return function (_p42) {
+						return function (_p43) {
 							return A2(
 								_user$project$Main$andThenUpdate,
 								_user$project$Msg$DeactivateEditingMode,
@@ -58296,65 +58579,65 @@ var _user$project$Main$update = function (msg) {
 													}),
 												_1: _user$project$Model$saveCurrentForm
 											}),
-										_p42)));
+										_p43)));
 						};
 					case 'NewTodo':
-						return function (_p43) {
-							return _user$project$DomPorts$autoFocusPaperInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoMode, _p43));
-						};
-					case 'NewProject':
 						return function (_p44) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewProject, _p44));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoMode, _p44));
 						};
-					case 'NewContext':
+					case 'NewProject':
 						return function (_p45) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewContext, _p45));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewProject, _p45));
+						};
+					case 'NewContext':
+						return function (_p46) {
+							return _user$project$DomPorts$autoFocusPaperInputCmd(
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewContext, _p46));
 						};
 					case 'StartAddingNewEntity':
 						return _elm_lang$core$Basics$identity;
 					case 'OnEntityAction':
-						var _p49 = _p17._0;
-						var _p46 = _p17._1;
-						switch (_p46.ctor) {
+						var _p50 = _p17._0;
+						var _p47 = _p17._1;
+						switch (_p47.ctor) {
 							case 'StartEditing':
-								return function (_p47) {
+								return function (_p48) {
 									return _user$project$DomPorts$autoFocusPaperInputCmd(
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$startEditingEntity(_p49),
-											_p47));
+											_user$project$Model$startEditingEntity(_p50),
+											_p48));
 								};
 							case 'NameChanged':
 								return _Fresheyeball$elm_return$Return$map(
-									A2(_user$project$Model$updateEditModeNameChanged, _p46._0, _p49));
+									A2(_user$project$Model$updateEditModeNameChanged, _p47._0, _p50));
 							case 'Save':
 								return _user$project$Main$andThenUpdate(_user$project$Msg$SaveCurrentForm);
 							case 'ToggleDeleted':
-								return function (_p48) {
+								return function (_p49) {
 									return A2(
 										_user$project$Main$andThenUpdate,
 										_user$project$Msg$DeactivateEditingMode,
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$toggleDeleteEntity(_p49),
-											_p48));
+											_user$project$Model$toggleDeleteEntity(_p50),
+											_p49));
 								};
 							case 'SetFocusedIn':
 								return _Fresheyeball$elm_return$Return$map(
-									_user$project$Model$setFocusInEntity(_p49));
+									_user$project$Model$setFocusInEntity(_p50));
 							case 'SetFocused':
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$setMaybeFocusedEntity(
-										_elm_lang$core$Maybe$Just(_p49)));
+										_elm_lang$core$Maybe$Just(_p50)));
 							case 'SetBlurred':
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$setMaybeFocusedEntity(_elm_lang$core$Maybe$Nothing));
 							default:
 								return _Fresheyeball$elm_return$Return$map(
-									_user$project$Model$toggleEntitySelection(_p49));
+									_user$project$Model$toggleEntitySelection(_p50));
 						}
 					default:
 						return _user$project$Main$onGlobalKeyUp(_p17._0);
@@ -58363,28 +58646,28 @@ var _user$project$Main$update = function (msg) {
 				_Fresheyeball$elm_return$Return$singleton(_p16)));
 	};
 };
-var _user$project$Main$andThenUpdate = function (_p50) {
+var _user$project$Main$andThenUpdate = function (_p51) {
 	return _Fresheyeball$elm_return$Return$andThen(
-		_user$project$Main$update(_p50));
+		_user$project$Main$update(_p51));
 };
 var _user$project$Main$onGlobalKeyUp = function (key) {
 	return A2(
 		_user$project$Ext_Return$with,
 		_user$project$Model$getEditMode,
 		function (editMode) {
-			var _p51 = {ctor: '_Tuple2', _0: key, _1: editMode};
+			var _p52 = {ctor: '_Tuple2', _0: key, _1: editMode};
 			_v7_3:
 			do {
-				if (_p51.ctor === '_Tuple2') {
-					switch (_p51._0.ctor) {
+				if (_p52.ctor === '_Tuple2') {
+					switch (_p52._0.ctor) {
 						case 'Escape':
-							if (_p51._1.ctor === 'None') {
+							if (_p52._1.ctor === 'None') {
 								return _Fresheyeball$elm_return$Return$map(_user$project$Model$clearSelection);
 							} else {
 								return _user$project$Main$andThenUpdate(_user$project$Msg$DeactivateEditingMode);
 							}
 						case 'CharQ':
-							if (_p51._1.ctor === 'None') {
+							if (_p52._1.ctor === 'None') {
 								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodo);
 							} else {
 								break _v7_3;
@@ -58401,9 +58684,9 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 };
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p52) {
+		function (_p53) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p52));
+				_user$project$Main$update(_p53));
 		}));
 var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 	{delta2url: _user$project$Routes$delta2hash, location2messages: _user$project$Routes$hash2messages, init: _user$project$Main$init, update: _user$project$Main$update, view: _user$project$View$init, subscriptions: _user$project$Main$subscriptions})(
@@ -58458,9 +58741,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 				A2(_elm_lang$core$Json_Decode$field, 'developmentMode', _elm_lang$core$Json_Decode$bool));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$andThenUpdateAll = function (_p53) {
+var _user$project$Main$andThenUpdateAll = function (_p54) {
 	return _user$project$Main$andThenUpdate(
-		_user$project$Msg$OnMsgList(_p53));
+		_user$project$Msg$OnMsgList(_p54));
 };
 var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',
@@ -58886,7 +59169,7 @@ for (var publicModule in Elm)
 
 
 /***/ }),
-/* 308 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -58910,7 +59193,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(127), __webpack_require__(552) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(128), __webpack_require__(553) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -59393,13 +59676,13 @@ return $.ui.position;
 
 
 /***/ }),
-/* 309 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(517);
+var content = __webpack_require__(518);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -59407,7 +59690,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(778)(content, options);
+var update = __webpack_require__(780)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -59424,8 +59707,8 @@ if(false) {
 }
 
 /***/ }),
-/* 310 */,
-/* 311 */
+/* 311 */,
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var asn1 = __webpack_require__(77);
@@ -59448,7 +59731,7 @@ function Entity(name, body) {
 Entity.prototype._createNamed = function createNamed(base) {
   var named;
   try {
-    named = __webpack_require__(782).runInThisContext(
+    named = __webpack_require__(784).runInThisContext(
       '(function ' + this.name + '(entity) {\n' +
       '  this._initNamed(entity);\n' +
       '})'
@@ -59492,7 +59775,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
 
 
 /***/ }),
-/* 312 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var Reporter = __webpack_require__(78).Reporter;
@@ -60132,7 +60415,7 @@ Node.prototype._isPrintstr = function isPrintstr(str) {
 
 
 /***/ }),
-/* 313 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(5);
@@ -60259,7 +60542,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
 
 
 /***/ }),
-/* 314 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var constants = __webpack_require__(185);
@@ -60307,17 +60590,17 @@ exports.tagByName = constants._reverse(exports.tag);
 
 
 /***/ }),
-/* 315 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var decoders = exports;
 
 decoders.der = __webpack_require__(186);
-decoders.pem = __webpack_require__(316);
+decoders.pem = __webpack_require__(317);
 
 
 /***/ }),
-/* 316 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(5);
@@ -60372,17 +60655,17 @@ PEMDecoder.prototype.decode = function decode(data, options) {
 
 
 /***/ }),
-/* 317 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var encoders = exports;
 
 encoders.der = __webpack_require__(187);
-encoders.pem = __webpack_require__(318);
+encoders.pem = __webpack_require__(319);
 
 
 /***/ }),
-/* 318 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inherits = __webpack_require__(5);
@@ -60409,8 +60692,8 @@ PEMEncoder.prototype.encode = function encode(data, options) {
 
 
 /***/ }),
-/* 319 */,
-/* 320 */
+/* 320 */,
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60422,19 +60705,18 @@ var boot = function () {
     var _ref = _asyncToGenerator(regeneratorRuntime.mark(function _callee3() {
         var _this = this;
 
-        var firebaseApp, deviceId, $elm, dbMap, allDocsMap, flags, Elm, app;
+        var deviceId, $elm, dbMap, allDocsMap, flags, Elm, app;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
             while (1) {
                 switch (_context3.prev = _context3.next) {
                     case 0:
-                        firebaseApp = firebase.initializeApp(firebaseConfig);
                         deviceId = getOrCreateDeviceId();
                         $elm = $("#elm-app-container");
 
                         $elm.trap();
 
                         $elm.on("keydown", ".entity-list", function (e) {
-                            console.log(e.keyCode, e.key, e.target, e);
+                            // console.log(e.keyCode, e.key, e.target, e);
 
                             if (e.target.tagName !== "PAPER-INPUT") {
                                 // prevent document scrolling
@@ -60457,20 +60739,20 @@ var boot = function () {
                             }
                         }, true);
 
-                        _context3.next = 8;
+                        _context3.next = 7;
                         return (0, _pouchdbWrapper2.default)("todo-db");
 
-                    case 8:
+                    case 7:
                         _context3.t0 = _context3.sent;
-                        _context3.next = 11;
+                        _context3.next = 10;
                         return (0, _pouchdbWrapper2.default)("project-db");
 
-                    case 11:
+                    case 10:
                         _context3.t1 = _context3.sent;
-                        _context3.next = 14;
+                        _context3.next = 13;
                         return (0, _pouchdbWrapper2.default)("context-db");
 
-                    case 14:
+                    case 13:
                         _context3.t2 = _context3.sent;
                         dbMap = {
                             "todo-db": _context3.t0,
@@ -60481,20 +60763,20 @@ var boot = function () {
                             return db.findAll();
                         })(dbMap);
                         _context3.t3 = Date.now();
-                        _context3.next = 20;
+                        _context3.next = 19;
                         return allDocsMap["todo-db"];
 
-                    case 20:
+                    case 19:
                         _context3.t4 = _context3.sent;
-                        _context3.next = 23;
+                        _context3.next = 22;
                         return allDocsMap["project-db"];
 
-                    case 23:
+                    case 22:
                         _context3.t5 = _context3.sent;
-                        _context3.next = 26;
+                        _context3.next = 25;
                         return allDocsMap["context-db"];
 
-                    case 26:
+                    case 25:
                         _context3.t6 = _context3.sent;
                         _context3.t7 = localStorage.getItem("pouchdb.remote-sync-uri") || "";
                         _context3.t8 = developmentMode;
@@ -60510,16 +60792,16 @@ var boot = function () {
                             appVersion: _context3.t9,
                             deviceId: _context3.t10
                         };
-                        Elm = __webpack_require__(307);
+                        Elm = __webpack_require__(308);
                         app = Elm["Main"].embed(document.getElementById("elm-app-container"), flags);
 
 
+                        _fire2.default.setup(app, _.values(dbMap));
+
                         _.mapObjIndexed(function (db, name) {
                             return db.onChange(function (doc) {
-                                return (
-                                    // console.log(name, ":", doc.name || doc.text)
-                                    app.ports["pouchDBChanges"].send([name, doc])
-                                );
+                                // console.log(`app.ports["pouchDBChanges"]:`,name, ":", doc.name || doc.text)
+                                return app.ports["pouchDBChanges"].send([name, doc]);
                             });
                         })(dbMap);
 
@@ -60554,22 +60836,13 @@ var boot = function () {
                                     id = _ref5[1],
                                     doc = _ref5[2];
 
-                                var upsertResult;
                                 return regeneratorRuntime.wrap(function _callee2$(_context2) {
                                     while (1) {
                                         switch (_context2.prev = _context2.next) {
                                             case 0:
-                                                _context2.next = 2;
-                                                return dbMap[dbName].upsert(id, doc);
+                                                dbMap[dbName].upsert(id, doc).catch(console.error);
 
-                                            case 2:
-                                                upsertResult = _context2.sent;
-
-                                                if (_.F()) {
-                                                    console.log("upsertResult", upsertResult);
-                                                }
-
-                                            case 4:
+                                            case 1:
                                             case "end":
                                                 return _context2.stop();
                                         }
@@ -60617,39 +60890,6 @@ var boot = function () {
                             });
                         });
 
-                        app.ports["signIn"].subscribe(function () {
-                            var provider = new firebase.auth.GoogleAuthProvider();
-                            provider.setCustomParameters({
-                                prompt: 'select_account'
-                            });
-
-                            document.getElementById('firebase-auth').signInWithPopup(provider).catch(console.error);
-                        });
-
-                        app.ports["fireDataWrite"].subscribe(function (_ref8) {
-                            var _ref9 = _slicedToArray(_ref8, 2),
-                                path = _ref9[0],
-                                value = _ref9[1];
-
-                            console.log("firebaseApp.database().ref(path).set(value)", { path: path, value: value });
-                            var ref = firebaseApp.database().ref(path);
-                            ref.set(value);
-                        });
-
-                        app.ports["fireDataPush"].subscribe(function (_ref10) {
-                            var _ref11 = _slicedToArray(_ref10, 2),
-                                path = _ref11[0],
-                                value = _ref11[1];
-
-                            console.log("firebaseApp.database().ref(path).push(value)", { path: path, value: value });
-                            firebaseApp.database().ref(path).push(value);
-                        });
-
-                        app.ports["signOut"].subscribe(function () {
-                            var googleAuth = document.getElementById('firebase-auth');
-                            googleAuth.signOut().then(console.info).catch(console.error);
-                        });
-
                         app.ports["focusPaperInput"].subscribe(function (selector) {
                             setTimeout(function () {
                                 requestAnimationFrame(function () {
@@ -60677,7 +60917,7 @@ var boot = function () {
                             sound.stop();
                         });
 
-                    case 48:
+                    case 44:
                     case "end":
                         return _context3.stop();
                 }
@@ -60690,7 +60930,11 @@ var boot = function () {
     };
 }();
 
-var _pouchdbWrapper = __webpack_require__(303);
+var _fire = __webpack_require__(301);
+
+var _fire2 = _interopRequireDefault(_fire);
+
+var _pouchdbWrapper = __webpack_require__(304);
 
 var _pouchdbWrapper2 = _interopRequireDefault(_pouchdbWrapper);
 
@@ -60698,43 +60942,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-var _ = __webpack_require__(128);
+var _ = __webpack_require__(93);
 
-var firebaseDevConfig = {
-    apiKey: "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc",
-    authDomain: "rational-mote-664.firebaseapp.com",
-    databaseURL: "https://rational-mote-664.firebaseio.com",
-    projectId: "rational-mote-664",
-    storageBucket: "rational-mote-664.appspot.com",
-    messagingSenderId: "49437522774"
-};
+var cryptoRandomString = __webpack_require__(307);
 
-var firebaseProdConfig = {
-    apiKey: "AIzaSyDgqOiOMuTvK3PdzJ0Oz6ctEg-devcgZYc",
-    authDomain: "simple-gtd-prod.firebaseapp.com",
-    databaseURL: "https://simple-gtd-prod.firebaseio.com",
-    projectId: "simple-gtd-prod",
-    storageBucket: "simple-gtd-prod.appspot.com",
-    messagingSenderId: "1061254169900"
-};
+__webpack_require__(310);
 
-//noinspection JSUnresolvedVariable
-var firebaseConfig =  false ? firebaseDevConfig : firebaseProdConfig;
-
-var cryptoRandomString = __webpack_require__(306);
-
-__webpack_require__(309);
-
-var sound = __webpack_require__(304);
-var $ = __webpack_require__(127);
+var sound = __webpack_require__(305);
+var $ = __webpack_require__(128);
 window.jQuery = $;
-__webpack_require__(301);
-__webpack_require__(308);
-var Notifications = __webpack_require__(302);
+__webpack_require__(302);
+__webpack_require__(309);
+var Notifications = __webpack_require__(303);
 
 
 var developmentMode = false;
-var pkg = {"name":"simplegtd.com","version":"0.11.7","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","bump":"npm_bump --auto --auto-fallback patch --skip-push","postbump":"npm run build","deploy":"git push && firebase deploy --project prod --except 'functions'","f:deploy:db":"firebase deploy --only database","f:deploy:fun":"firebase deploy --only functions","f:deploy:files":"firebase deploy --only hosting","dev":"cross-env NODE_ENV=development webpack-dev-server","hot":"cross-env NODE_ENV=development webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","build":"bash scripts/build.sh","prebuild-dev":"rimraf dev","build-dev":"bash scripts/build-dev.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","firebase-tools":"3.9.0","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"alien-date":"0.2.2","babel-polyfill":"6.23.0","chrono":"1.0.5","chrono-node":"1.3.1","crypto-random-string":"1.0.0","dateparser":"1.0.6","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","memorystream":"0.3.1","parse-messy-time":"2.1.0","peerjs":"0.3.14","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-replication-stream":"1.2.9","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
+var pkg = {"name":"simplegtd.com","version":"0.12.0","main":"index.js","license":"MIT","engines":{"node":"v7.7.1"},"private":true,"repository":{"url":"https://github.com/jigargosar/elm-simple-gtd"},"scripts":{"install-elm":"which -a elm ; elm-package install -y","postinstall":"bash -c \"which -a elm && elm-package install -y && bower install \"","bump":"npm_bump --auto --auto-fallback patch --skip-push","postbump":"npm run build","predeploy-dev":"npm run build-dev","deploy-dev":"firebase deploy --project dev --public dev --except functions","dev":"cross-env NODE_ENV=development webpack-dev-server","hot":"cross-env NODE_ENV=development webpack-dev-server --hot --inline","hot-hot":"nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"","prebuild":"bash -c \"rimraf app && rimraf docs && rimraf build \"","build":"bash scripts/build.sh","prebuild-dev":"rimraf dev","build-dev":"bash scripts/build-dev.sh","link":"ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components","start":"http-server docs"},"devDependencies":{"babel-core":"6.24.1","babel-loader":"7.0.0","babel-preset-env":"1.4.0","bower":"1.8.0","copy-webpack-plugin":"4.0.1","cross-env":"4.0.0","css-loader":"0.28.1","elm":"0.18.0","elm-hot-loader":"0.5.4","elm-webpack-loader":"4.3.1","file-loader":"0.11.1","firebase-tools":"3.9.0","kefir":"3.7.1","polymer-cli":"0.18.2","postcss":"5.2.17","postcss-browser-reporter":"0.5.0","postcss-cssnext":"2.10.0","postcss-import":"9.1.0","postcss-loader":"1.3.3","postcss-reporter":"3.0.0","postcss-url":"6.0.4","release-tools":"2.5.2","rimraf":"2.6.1","serviceworker-webpack-plugin":"0.2.1","style-loader":"0.17.0","url-loader":"0.5.8","webpack":"2.5.0","webpack-dev-server":"2.4.5"},"dependencies":{"babel-polyfill":"6.23.0","crypto-random-string":"1.0.0","howler":"2.0.3","jquery":"3.2.1","jquery-ui":"1.12.1","pouchdb-browser":"6.2.0","pouchdb-find":"6.2.0","pouchdb-upsert":"2.2.0","ramda":"0.23.0","tabtrap":"1.2.6"}};
 
 window.addEventListener('WebComponentsReady', function () {
     boot().catch(console.error);
@@ -60750,7 +60973,7 @@ function getOrCreateDeviceId() {
 }
 
 /***/ }),
-/* 321 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60871,16 +61094,16 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 322 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(93)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(94)
 var Transform = __webpack_require__(67)
 var inherits = __webpack_require__(5)
-var modes = __webpack_require__(94)
+var modes = __webpack_require__(95)
 var StreamCipher = __webpack_require__(196)
 var AuthCipher = __webpack_require__(189)
-var ebtk = __webpack_require__(108)
+var ebtk = __webpack_require__(109)
 
 inherits(Decipher, Transform)
 function Decipher (mode, key, iv) {
@@ -60972,8 +61195,8 @@ var modelist = {
   CFB8: __webpack_require__(193),
   CFB1: __webpack_require__(192),
   OFB: __webpack_require__(195),
-  CTR: __webpack_require__(95),
-  GCM: __webpack_require__(95)
+  CTR: __webpack_require__(96),
+  GCM: __webpack_require__(96)
 }
 
 function createDecipheriv (suite, password, iv) {
@@ -61015,14 +61238,14 @@ exports.createDecipheriv = createDecipheriv
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 323 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(93)
+/* WEBPACK VAR INJECTION */(function(Buffer) {var aes = __webpack_require__(94)
 var Transform = __webpack_require__(67)
 var inherits = __webpack_require__(5)
-var modes = __webpack_require__(94)
-var ebtk = __webpack_require__(108)
+var modes = __webpack_require__(95)
+var ebtk = __webpack_require__(109)
 var StreamCipher = __webpack_require__(196)
 var AuthCipher = __webpack_require__(189)
 inherits(Cipher, Transform)
@@ -61101,8 +61324,8 @@ var modelist = {
   CFB8: __webpack_require__(193),
   CFB1: __webpack_require__(192),
   OFB: __webpack_require__(195),
-  CTR: __webpack_require__(95),
-  GCM: __webpack_require__(95)
+  CTR: __webpack_require__(96),
+  GCM: __webpack_require__(96)
 }
 
 function createCipheriv (suite, password, iv) {
@@ -61144,7 +61367,7 @@ exports.createCipher = createCipher
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 324 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var zeros = new Buffer(16)
@@ -61249,14 +61472,14 @@ function xor (a, b) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 325 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var ebtk = __webpack_require__(108)
+var ebtk = __webpack_require__(109)
 var aes = __webpack_require__(130)
-var DES = __webpack_require__(326)
-var desModes = __webpack_require__(327)
-var aesModes = __webpack_require__(94)
+var DES = __webpack_require__(327)
+var desModes = __webpack_require__(328)
+var aesModes = __webpack_require__(95)
 function createCipher (suite, password) {
   var keyLen, ivLen
   suite = suite.toLowerCase()
@@ -61328,7 +61551,7 @@ exports.listCiphers = exports.getCiphers = getCiphers
 
 
 /***/ }),
-/* 326 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var CipherBase = __webpack_require__(67)
@@ -61378,7 +61601,7 @@ DES.prototype._final = function () {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 327 */
+/* 328 */
 /***/ (function(module, exports) {
 
 exports['des-ecb'] = {
@@ -61408,21 +61631,21 @@ exports['des-ede'] = {
 
 
 /***/ }),
-/* 328 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(197)
 
 
 /***/ }),
-/* 329 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var createHash = __webpack_require__(73)
 var stream = __webpack_require__(182)
 var inherits = __webpack_require__(5)
-var sign = __webpack_require__(330)
-var verify = __webpack_require__(331)
+var sign = __webpack_require__(331)
+var verify = __webpack_require__(332)
 
 var algorithms = __webpack_require__(197)
 Object.keys(algorithms).forEach(function (key) {
@@ -61513,7 +61736,7 @@ module.exports = {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 330 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
@@ -61521,7 +61744,7 @@ var createHmac = __webpack_require__(159)
 var crt = __webpack_require__(131)
 var EC = __webpack_require__(20).ec
 var BN = __webpack_require__(13)
-var parseKeys = __webpack_require__(109)
+var parseKeys = __webpack_require__(110)
 var curves = __webpack_require__(198)
 
 function sign (hash, key, hashType, signType, tag) {
@@ -61665,13 +61888,13 @@ module.exports.makeKey = makeKey
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 331 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var BN = __webpack_require__(13)
 var EC = __webpack_require__(20).ec
-var parseKeys = __webpack_require__(109)
+var parseKeys = __webpack_require__(110)
 var curves = __webpack_require__(198)
 
 function verify (sig, hash, key, signType, tag) {
@@ -61755,7 +61978,7 @@ module.exports = verify
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 332 */
+/* 333 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -61766,7 +61989,6 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 333 */,
 /* 334 */,
 /* 335 */,
 /* 336 */,
@@ -61947,7 +62169,8 @@ module.exports = Array.isArray || function (arr) {
 /* 511 */,
 /* 512 */,
 /* 513 */,
-/* 514 */
+/* 514 */,
+/* 515 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var elliptic = __webpack_require__(20);
@@ -62076,7 +62299,7 @@ function formatReturnValue(bn, enc, len) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 515 */
+/* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62117,7 +62340,7 @@ exports.hash = hash;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 516 */
+/* 517 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62127,7 +62350,7 @@ exports.randomBytes = exports.rng = exports.pseudoRandomBytes = exports.prng = _
 exports.createHash = exports.Hash = __webpack_require__(73)
 exports.createHmac = exports.Hmac = __webpack_require__(159)
 
-var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(Object.keys(__webpack_require__(328)))
+var hashes = ['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'md5', 'rmd160'].concat(Object.keys(__webpack_require__(329)))
 exports.getHashes = function () {
   return hashes
 }
@@ -62136,7 +62359,7 @@ var p = __webpack_require__(232)
 exports.pbkdf2 = p.pbkdf2
 exports.pbkdf2Sync = p.pbkdf2Sync
 
-var aes = __webpack_require__(325)
+var aes = __webpack_require__(326)
 ;[
   'Cipher',
   'createCipher',
@@ -62152,7 +62375,7 @@ var aes = __webpack_require__(325)
   exports[key] = aes[key]
 })
 
-var dh = __webpack_require__(526)
+var dh = __webpack_require__(527)
 ;[
   'DiffieHellmanGroup',
   'createDiffieHellmanGroup',
@@ -62163,7 +62386,7 @@ var dh = __webpack_require__(526)
   exports[key] = dh[key]
 })
 
-var sign = __webpack_require__(329)
+var sign = __webpack_require__(330)
 ;[
   'createSign',
   'Sign',
@@ -62173,9 +62396,9 @@ var sign = __webpack_require__(329)
   exports[key] = sign[key]
 })
 
-exports.createECDH = __webpack_require__(514)
+exports.createECDH = __webpack_require__(515)
 
-var publicEncrypt = __webpack_require__(566)
+var publicEncrypt = __webpack_require__(568)
 
 ;[
   'publicEncrypt',
@@ -62201,10 +62424,10 @@ var publicEncrypt = __webpack_require__(566)
 
 
 /***/ }),
-/* 517 */
+/* 518 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(518)(undefined);
+exports = module.exports = __webpack_require__(519)(undefined);
 // imports
 
 
@@ -62215,7 +62438,7 @@ exports.push([module.i, "paper-textarea:focus {\n  outline: none;\n}\n\n* {\n  b
 
 
 /***/ }),
-/* 518 */
+/* 519 */
 /***/ (function(module, exports) {
 
 /*
@@ -62297,7 +62520,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 519 */
+/* 520 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {/**
@@ -62306,7 +62529,7 @@ function toComment(sourceMap) {
  * Expose `debug()` as the module.
  */
 
-exports = module.exports = __webpack_require__(520);
+exports = module.exports = __webpack_require__(521);
 exports.log = log;
 exports.formatArgs = formatArgs;
 exports.save = save;
@@ -62486,7 +62709,7 @@ function localstorage() {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50)))
 
 /***/ }),
-/* 520 */
+/* 521 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -62502,7 +62725,7 @@ exports.coerce = coerce;
 exports.disable = disable;
 exports.enable = enable;
 exports.enabled = enabled;
-exports.humanize = __webpack_require__(553);
+exports.humanize = __webpack_require__(555);
 
 /**
  * The currently active debug mode names, and names to skip.
@@ -62694,7 +62917,7 @@ function coerce(val) {
 
 
 /***/ }),
-/* 521 */
+/* 522 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62766,7 +62989,7 @@ proto._update = function _update(inp, inOff, out, outOff) {
 
 
 /***/ }),
-/* 522 */
+/* 523 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62914,7 +63137,7 @@ Cipher.prototype._finalDecrypt = function _finalDecrypt() {
 
 
 /***/ }),
-/* 523 */
+/* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63064,7 +63287,7 @@ DES.prototype._decrypt = function _decrypt(state, lStart, rStart, out, off) {
 
 
 /***/ }),
-/* 524 */
+/* 525 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63126,7 +63349,7 @@ EDE.prototype._unpad = DES.prototype._unpad;
 
 
 /***/ }),
-/* 525 */
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -63389,13 +63612,13 @@ exports.padSplit = function padSplit(num, size, group) {
 
 
 /***/ }),
-/* 526 */
+/* 527 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var generatePrime = __webpack_require__(228)
-var primes = __webpack_require__(528)
+var primes = __webpack_require__(529)
 
-var DH = __webpack_require__(527)
+var DH = __webpack_require__(528)
 
 function getDiffieHellman (mod) {
   var prime = new Buffer(primes[mod].prime, 'hex')
@@ -63438,7 +63661,7 @@ exports.createDiffieHellman = exports.DiffieHellman = createDiffieHellman
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 527 */
+/* 528 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var BN = __webpack_require__(13);
@@ -63609,7 +63832,7 @@ function formatReturnValue(bn, enc) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 528 */
+/* 529 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -63648,7 +63871,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 529 */
+/* 530 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -64030,13 +64253,13 @@ BasePoint.prototype.dblp = function dblp(k) {
 
 
 /***/ }),
-/* 530 */
+/* 531 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(107);
+var curve = __webpack_require__(108);
 var elliptic = __webpack_require__(20);
 var BN = __webpack_require__(13);
 var inherits = __webpack_require__(5);
@@ -64470,13 +64693,13 @@ Point.prototype.mixedAdd = Point.prototype.add;
 
 
 /***/ }),
-/* 531 */
+/* 532 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(107);
+var curve = __webpack_require__(108);
 var BN = __webpack_require__(13);
 var inherits = __webpack_require__(5);
 var Base = curve.base;
@@ -64657,13 +64880,13 @@ Point.prototype.getX = function getX() {
 
 
 /***/ }),
-/* 532 */
+/* 533 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var curve = __webpack_require__(107);
+var curve = __webpack_require__(108);
 var elliptic = __webpack_require__(20);
 var BN = __webpack_require__(13);
 var inherits = __webpack_require__(5);
@@ -65602,7 +65825,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
 
 
 /***/ }),
-/* 533 */
+/* 534 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -65775,7 +65998,7 @@ defineCurve('ed25519', {
 
 var pre;
 try {
-  pre = __webpack_require__(540);
+  pre = __webpack_require__(541);
 } catch (e) {
   pre = undefined;
 }
@@ -65814,20 +66037,20 @@ defineCurve('secp256k1', {
 
 
 /***/ }),
-/* 534 */
+/* 535 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var BN = __webpack_require__(13);
-var HmacDRBG = __webpack_require__(548);
+var HmacDRBG = __webpack_require__(549);
 var elliptic = __webpack_require__(20);
 var utils = elliptic.utils;
 var assert = utils.assert;
 
-var KeyPair = __webpack_require__(535);
-var Signature = __webpack_require__(536);
+var KeyPair = __webpack_require__(536);
+var Signature = __webpack_require__(537);
 
 function EC(options) {
   if (!(this instanceof EC))
@@ -66061,7 +66284,7 @@ EC.prototype.getKeyRecoveryParam = function(e, signature, Q, enc) {
 
 
 /***/ }),
-/* 535 */
+/* 536 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66187,7 +66410,7 @@ KeyPair.prototype.inspect = function inspect() {
 
 
 /***/ }),
-/* 536 */
+/* 537 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66329,7 +66552,7 @@ Signature.prototype.toDER = function toDER(enc) {
 
 
 /***/ }),
-/* 537 */
+/* 538 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66340,8 +66563,8 @@ var elliptic = __webpack_require__(20);
 var utils = elliptic.utils;
 var assert = utils.assert;
 var parseBytes = utils.parseBytes;
-var KeyPair = __webpack_require__(538);
-var Signature = __webpack_require__(539);
+var KeyPair = __webpack_require__(539);
+var Signature = __webpack_require__(540);
 
 function EDDSA(curve) {
   assert(curve === 'ed25519', 'only tested with ed25519 so far');
@@ -66454,7 +66677,7 @@ EDDSA.prototype.isPoint = function isPoint(val) {
 
 
 /***/ }),
-/* 538 */
+/* 539 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66557,7 +66780,7 @@ module.exports = KeyPair;
 
 
 /***/ }),
-/* 539 */
+/* 540 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -66630,7 +66853,7 @@ module.exports = Signature;
 
 
 /***/ }),
-/* 540 */
+/* 541 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -67416,7 +67639,7 @@ module.exports = {
 
 
 /***/ }),
-/* 541 */
+/* 542 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -67543,7 +67766,7 @@ utils.intFromLE = intFromLE;
 
 
 /***/ }),
-/* 542 */
+/* 543 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -67606,7 +67829,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 543 */
+/* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = __webpack_require__(62);
@@ -67703,7 +67926,7 @@ BlockHash.prototype._pad = function pad() {
 
 
 /***/ }),
-/* 544 */
+/* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hmac = exports;
@@ -67757,7 +67980,7 @@ Hmac.prototype.digest = function digest(enc) {
 
 
 /***/ }),
-/* 545 */
+/* 546 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = __webpack_require__(62);
@@ -67907,7 +68130,7 @@ var sh = [
 
 
 /***/ }),
-/* 546 */
+/* 547 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var hash = __webpack_require__(62);
@@ -68477,7 +68700,7 @@ function g1_512_lo(xh, xl) {
 
 
 /***/ }),
-/* 547 */
+/* 548 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var utils = exports;
@@ -68740,7 +68963,7 @@ exports.shr64_lo = shr64_lo;
 
 
 /***/ }),
-/* 548 */
+/* 549 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -68860,7 +69083,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
 
 
 /***/ }),
-/* 549 */
+/* 550 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -71640,10 +71863,10 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
   };
 })();
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
 
 /***/ }),
-/* 550 */
+/* 551 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -71733,7 +71956,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 551 */
+/* 552 */
 /***/ (function(module, exports) {
 
 
@@ -71748,14 +71971,14 @@ module.exports = function(arr, obj){
 };
 
 /***/ }),
-/* 552 */
+/* 553 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
 	if ( true ) {
 
 		// AMD. Register as an anonymous module.
-		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(127) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [ __webpack_require__(128) ], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -71774,7 +71997,3582 @@ return $.ui.version = "1.12.1";
 
 
 /***/ }),
-/* 553 */
+/* 554 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/*! Kefir.js v3.7.1
+ *  https://github.com/rpominov/kefir
+ */
+
+(function (global, factory) {
+	 true ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.Kefir = global.Kefir || {})));
+}(this, function (exports) { 'use strict';
+
+	function createObj(proto) {
+	  var F = function () {};
+	  F.prototype = proto;
+	  return new F();
+	}
+
+	function extend(target /*, mixin1, mixin2...*/) {
+	  var length = arguments.length,
+	      i = void 0,
+	      prop = void 0;
+	  for (i = 1; i < length; i++) {
+	    for (prop in arguments[i]) {
+	      target[prop] = arguments[i][prop];
+	    }
+	  }
+	  return target;
+	}
+
+	function inherit(Child, Parent /*, mixin1, mixin2...*/) {
+	  var length = arguments.length,
+	      i = void 0;
+	  Child.prototype = createObj(Parent.prototype);
+	  Child.prototype.constructor = Child;
+	  for (i = 2; i < length; i++) {
+	    extend(Child.prototype, arguments[i]);
+	  }
+	  return Child;
+	}
+
+	var NOTHING = ['<nothing>'];
+	var END = 'end';
+	var VALUE = 'value';
+	var ERROR = 'error';
+	var ANY = 'any';
+
+	function concat(a, b) {
+	  var result = void 0,
+	      length = void 0,
+	      i = void 0,
+	      j = void 0;
+	  if (a.length === 0) {
+	    return b;
+	  }
+	  if (b.length === 0) {
+	    return a;
+	  }
+	  j = 0;
+	  result = new Array(a.length + b.length);
+	  length = a.length;
+	  for (i = 0; i < length; i++, j++) {
+	    result[j] = a[i];
+	  }
+	  length = b.length;
+	  for (i = 0; i < length; i++, j++) {
+	    result[j] = b[i];
+	  }
+	  return result;
+	}
+
+	function find(arr, value) {
+	  var length = arr.length,
+	      i = void 0;
+	  for (i = 0; i < length; i++) {
+	    if (arr[i] === value) {
+	      return i;
+	    }
+	  }
+	  return -1;
+	}
+
+	function findByPred(arr, pred) {
+	  var length = arr.length,
+	      i = void 0;
+	  for (i = 0; i < length; i++) {
+	    if (pred(arr[i])) {
+	      return i;
+	    }
+	  }
+	  return -1;
+	}
+
+	function cloneArray(input) {
+	  var length = input.length,
+	      result = new Array(length),
+	      i = void 0;
+	  for (i = 0; i < length; i++) {
+	    result[i] = input[i];
+	  }
+	  return result;
+	}
+
+	function remove(input, index) {
+	  var length = input.length,
+	      result = void 0,
+	      i = void 0,
+	      j = void 0;
+	  if (index >= 0 && index < length) {
+	    if (length === 1) {
+	      return [];
+	    } else {
+	      result = new Array(length - 1);
+	      for (i = 0, j = 0; i < length; i++) {
+	        if (i !== index) {
+	          result[j] = input[i];
+	          j++;
+	        }
+	      }
+	      return result;
+	    }
+	  } else {
+	    return input;
+	  }
+	}
+
+	function map(input, fn) {
+	  var length = input.length,
+	      result = new Array(length),
+	      i = void 0;
+	  for (i = 0; i < length; i++) {
+	    result[i] = fn(input[i]);
+	  }
+	  return result;
+	}
+
+	function forEach(arr, fn) {
+	  var length = arr.length,
+	      i = void 0;
+	  for (i = 0; i < length; i++) {
+	    fn(arr[i]);
+	  }
+	}
+
+	function fillArray(arr, value) {
+	  var length = arr.length,
+	      i = void 0;
+	  for (i = 0; i < length; i++) {
+	    arr[i] = value;
+	  }
+	}
+
+	function contains(arr, value) {
+	  return find(arr, value) !== -1;
+	}
+
+	function slide(cur, next, max) {
+	  var length = Math.min(max, cur.length + 1),
+	      offset = cur.length - length + 1,
+	      result = new Array(length),
+	      i = void 0;
+	  for (i = offset; i < length; i++) {
+	    result[i - offset] = cur[i];
+	  }
+	  result[length - 1] = next;
+	  return result;
+	}
+
+	function callSubscriber(type, fn, event) {
+	  if (type === ANY) {
+	    fn(event);
+	  } else if (type === event.type) {
+	    if (type === VALUE || type === ERROR) {
+	      fn(event.value);
+	    } else {
+	      fn();
+	    }
+	  }
+	}
+
+	function Dispatcher() {
+	  this._items = [];
+	  this._spies = [];
+	  this._inLoop = 0;
+	  this._removedItems = null;
+	}
+
+	extend(Dispatcher.prototype, {
+	  add: function (type, fn) {
+	    this._items = concat(this._items, [{ type: type, fn: fn }]);
+	    return this._items.length;
+	  },
+	  remove: function (type, fn) {
+	    var index = findByPred(this._items, function (x) {
+	      return x.type === type && x.fn === fn;
+	    });
+
+	    // if we're currently in a notification loop,
+	    // remember this subscriber was removed
+	    if (this._inLoop !== 0 && index !== -1) {
+	      if (this._removedItems === null) {
+	        this._removedItems = [];
+	      }
+	      this._removedItems.push(this._items[index]);
+	    }
+
+	    this._items = remove(this._items, index);
+	    return this._items.length;
+	  },
+	  addSpy: function (fn) {
+	    this._spies = concat(this._spies, [fn]);
+	    return this._spies.length;
+	  },
+
+
+	  // Because spies are only ever a function that perform logging as
+	  // their only side effect, we don't need the same complicated
+	  // removal logic like in remove()
+	  removeSpy: function (fn) {
+	    this._spies = remove(this._spies, this._spies.indexOf(fn));
+	    return this._spies.length;
+	  },
+	  dispatch: function (event) {
+	    this._inLoop++;
+	    for (var i = 0, spies = this._spies; this._spies !== null && i < spies.length; i++) {
+	      spies[i](event);
+	    }
+
+	    for (var _i = 0, items = this._items; _i < items.length; _i++) {
+
+	      // cleanup was called
+	      if (this._items === null) {
+	        break;
+	      }
+
+	      // this subscriber was removed
+	      if (this._removedItems !== null && contains(this._removedItems, items[_i])) {
+	        continue;
+	      }
+
+	      callSubscriber(items[_i].type, items[_i].fn, event);
+	    }
+	    this._inLoop--;
+	    if (this._inLoop === 0) {
+	      this._removedItems = null;
+	    }
+	  },
+	  cleanup: function () {
+	    this._items = null;
+	    this._spies = null;
+	  }
+	});
+
+	function Observable() {
+	  this._dispatcher = new Dispatcher();
+	  this._active = false;
+	  this._alive = true;
+	  this._activating = false;
+	  this._logHandlers = null;
+	  this._spyHandlers = null;
+	}
+
+	extend(Observable.prototype, {
+
+	  _name: 'observable',
+
+	  _onActivation: function () {},
+	  _onDeactivation: function () {},
+	  _setActive: function (active) {
+	    if (this._active !== active) {
+	      this._active = active;
+	      if (active) {
+	        this._activating = true;
+	        this._onActivation();
+	        this._activating = false;
+	      } else {
+	        this._onDeactivation();
+	      }
+	    }
+	  },
+	  _clear: function () {
+	    this._setActive(false);
+	    this._dispatcher.cleanup();
+	    this._dispatcher = null;
+	    this._logHandlers = null;
+	  },
+	  _emit: function (type, x) {
+	    switch (type) {
+	      case VALUE:
+	        return this._emitValue(x);
+	      case ERROR:
+	        return this._emitError(x);
+	      case END:
+	        return this._emitEnd();
+	    }
+	  },
+	  _emitValue: function (value) {
+	    if (this._alive) {
+	      this._dispatcher.dispatch({ type: VALUE, value: value });
+	    }
+	  },
+	  _emitError: function (value) {
+	    if (this._alive) {
+	      this._dispatcher.dispatch({ type: ERROR, value: value });
+	    }
+	  },
+	  _emitEnd: function () {
+	    if (this._alive) {
+	      this._alive = false;
+	      this._dispatcher.dispatch({ type: END });
+	      this._clear();
+	    }
+	  },
+	  _on: function (type, fn) {
+	    if (this._alive) {
+	      this._dispatcher.add(type, fn);
+	      this._setActive(true);
+	    } else {
+	      callSubscriber(type, fn, { type: END });
+	    }
+	    return this;
+	  },
+	  _off: function (type, fn) {
+	    if (this._alive) {
+	      var count = this._dispatcher.remove(type, fn);
+	      if (count === 0) {
+	        this._setActive(false);
+	      }
+	    }
+	    return this;
+	  },
+	  onValue: function (fn) {
+	    return this._on(VALUE, fn);
+	  },
+	  onError: function (fn) {
+	    return this._on(ERROR, fn);
+	  },
+	  onEnd: function (fn) {
+	    return this._on(END, fn);
+	  },
+	  onAny: function (fn) {
+	    return this._on(ANY, fn);
+	  },
+	  offValue: function (fn) {
+	    return this._off(VALUE, fn);
+	  },
+	  offError: function (fn) {
+	    return this._off(ERROR, fn);
+	  },
+	  offEnd: function (fn) {
+	    return this._off(END, fn);
+	  },
+	  offAny: function (fn) {
+	    return this._off(ANY, fn);
+	  },
+	  observe: function (observerOrOnValue, onError, onEnd) {
+	    var _this = this;
+	    var closed = false;
+
+	    var observer = !observerOrOnValue || typeof observerOrOnValue === 'function' ? { value: observerOrOnValue, error: onError, end: onEnd } : observerOrOnValue;
+
+	    var handler = function (event) {
+	      if (event.type === END) {
+	        closed = true;
+	      }
+	      if (event.type === VALUE && observer.value) {
+	        observer.value(event.value);
+	      } else if (event.type === ERROR && observer.error) {
+	        observer.error(event.value);
+	      } else if (event.type === END && observer.end) {
+	        observer.end(event.value);
+	      }
+	    };
+
+	    this.onAny(handler);
+
+	    return {
+	      unsubscribe: function () {
+	        if (!closed) {
+	          _this.offAny(handler);
+	          closed = true;
+	        }
+	      },
+
+	      get closed() {
+	        return closed;
+	      }
+	    };
+	  },
+
+
+	  // A and B must be subclasses of Stream and Property (order doesn't matter)
+	  _ofSameType: function (A, B) {
+	    return A.prototype.getType() === this.getType() ? A : B;
+	  },
+	  setName: function (sourceObs /* optional */, selfName) {
+	    this._name = selfName ? sourceObs._name + '.' + selfName : sourceObs;
+	    return this;
+	  },
+	  log: function () {
+	    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.toString();
+
+
+	    var isCurrent = void 0;
+	    var handler = function (event) {
+	      var type = '<' + event.type + (isCurrent ? ':current' : '') + '>';
+	      if (event.type === END) {
+	        console.log(name, type);
+	      } else {
+	        console.log(name, type, event.value);
+	      }
+	    };
+
+	    if (this._alive) {
+	      if (!this._logHandlers) {
+	        this._logHandlers = [];
+	      }
+	      this._logHandlers.push({ name: name, handler: handler });
+	    }
+
+	    isCurrent = true;
+	    this.onAny(handler);
+	    isCurrent = false;
+
+	    return this;
+	  },
+	  offLog: function () {
+	    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.toString();
+
+
+	    if (this._logHandlers) {
+	      var handlerIndex = findByPred(this._logHandlers, function (obj) {
+	        return obj.name === name;
+	      });
+	      if (handlerIndex !== -1) {
+	        this.offAny(this._logHandlers[handlerIndex].handler);
+	        this._logHandlers.splice(handlerIndex, 1);
+	      }
+	    }
+
+	    return this;
+	  },
+	  spy: function () {
+	    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.toString();
+
+	    var handler = function (event) {
+	      var type = '<' + event.type + '>';
+	      if (event.type === END) {
+	        console.log(name, type);
+	      } else {
+	        console.log(name, type, event.value);
+	      }
+	    };
+	    if (this._alive) {
+	      if (!this._spyHandlers) {
+	        this._spyHandlers = [];
+	      }
+	      this._spyHandlers.push({ name: name, handler: handler });
+	      this._dispatcher.addSpy(handler);
+	    }
+	    return this;
+	  },
+	  offSpy: function () {
+	    var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.toString();
+
+	    if (this._spyHandlers) {
+	      var handlerIndex = findByPred(this._spyHandlers, function (obj) {
+	        return obj.name === name;
+	      });
+	      if (handlerIndex !== -1) {
+	        this._dispatcher.removeSpy(this._spyHandlers[handlerIndex].handler);
+	        this._spyHandlers.splice(handlerIndex, 1);
+	      }
+	    }
+	    return this;
+	  }
+	});
+
+	// extend() can't handle `toString` in IE8
+	Observable.prototype.toString = function () {
+	  return '[' + this._name + ']';
+	};
+
+	function Stream() {
+	  Observable.call(this);
+	}
+
+	inherit(Stream, Observable, {
+
+	  _name: 'stream',
+
+	  getType: function () {
+	    return 'stream';
+	  }
+	});
+
+	function Property() {
+	  Observable.call(this);
+	  this._currentEvent = null;
+	}
+
+	inherit(Property, Observable, {
+
+	  _name: 'property',
+
+	  _emitValue: function (value) {
+	    if (this._alive) {
+	      this._currentEvent = { type: VALUE, value: value };
+	      if (!this._activating) {
+	        this._dispatcher.dispatch({ type: VALUE, value: value });
+	      }
+	    }
+	  },
+	  _emitError: function (value) {
+	    if (this._alive) {
+	      this._currentEvent = { type: ERROR, value: value };
+	      if (!this._activating) {
+	        this._dispatcher.dispatch({ type: ERROR, value: value });
+	      }
+	    }
+	  },
+	  _emitEnd: function () {
+	    if (this._alive) {
+	      this._alive = false;
+	      if (!this._activating) {
+	        this._dispatcher.dispatch({ type: END });
+	      }
+	      this._clear();
+	    }
+	  },
+	  _on: function (type, fn) {
+	    if (this._alive) {
+	      this._dispatcher.add(type, fn);
+	      this._setActive(true);
+	    }
+	    if (this._currentEvent !== null) {
+	      callSubscriber(type, fn, this._currentEvent);
+	    }
+	    if (!this._alive) {
+	      callSubscriber(type, fn, { type: END });
+	    }
+	    return this;
+	  },
+	  getType: function () {
+	    return 'property';
+	  }
+	});
+
+	var neverS = new Stream();
+	neverS._emitEnd();
+	neverS._name = 'never';
+
+	function never() {
+	  return neverS;
+	}
+
+	function timeBased(mixin) {
+
+	  function AnonymousStream(wait, options) {
+	    var _this = this;
+
+	    Stream.call(this);
+	    this._wait = wait;
+	    this._intervalId = null;
+	    this._$onTick = function () {
+	      return _this._onTick();
+	    };
+	    this._init(options);
+	  }
+
+	  inherit(AnonymousStream, Stream, {
+	    _init: function () {},
+	    _free: function () {},
+	    _onTick: function () {},
+	    _onActivation: function () {
+	      this._intervalId = setInterval(this._$onTick, this._wait);
+	    },
+	    _onDeactivation: function () {
+	      if (this._intervalId !== null) {
+	        clearInterval(this._intervalId);
+	        this._intervalId = null;
+	      }
+	    },
+	    _clear: function () {
+	      Stream.prototype._clear.call(this);
+	      this._$onTick = null;
+	      this._free();
+	    }
+	  }, mixin);
+
+	  return AnonymousStream;
+	}
+
+	var S = timeBased({
+
+	  _name: 'later',
+
+	  _init: function (_ref) {
+	    var x = _ref.x;
+
+	    this._x = x;
+	  },
+	  _free: function () {
+	    this._x = null;
+	  },
+	  _onTick: function () {
+	    this._emitValue(this._x);
+	    this._emitEnd();
+	  }
+	});
+
+	function later(wait, x) {
+	  return new S(wait, { x: x });
+	}
+
+	var S$1 = timeBased({
+
+	  _name: 'interval',
+
+	  _init: function (_ref) {
+	    var x = _ref.x;
+
+	    this._x = x;
+	  },
+	  _free: function () {
+	    this._x = null;
+	  },
+	  _onTick: function () {
+	    this._emitValue(this._x);
+	  }
+	});
+
+	function interval(wait, x) {
+	  return new S$1(wait, { x: x });
+	}
+
+	var S$2 = timeBased({
+
+	  _name: 'sequentially',
+
+	  _init: function (_ref) {
+	    var xs = _ref.xs;
+
+	    this._xs = cloneArray(xs);
+	  },
+	  _free: function () {
+	    this._xs = null;
+	  },
+	  _onTick: function () {
+	    if (this._xs.length === 1) {
+	      this._emitValue(this._xs[0]);
+	      this._emitEnd();
+	    } else {
+	      this._emitValue(this._xs.shift());
+	    }
+	  }
+	});
+
+	function sequentially(wait, xs) {
+	  return xs.length === 0 ? never() : new S$2(wait, { xs: xs });
+	}
+
+	var S$3 = timeBased({
+
+	  _name: 'fromPoll',
+
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _onTick: function () {
+	    var fn = this._fn;
+	    this._emitValue(fn());
+	  }
+	});
+
+	function fromPoll(wait, fn) {
+	  return new S$3(wait, { fn: fn });
+	}
+
+	function emitter(obs) {
+
+	  function value(x) {
+	    obs._emitValue(x);
+	    return obs._active;
+	  }
+
+	  function error(x) {
+	    obs._emitError(x);
+	    return obs._active;
+	  }
+
+	  function end() {
+	    obs._emitEnd();
+	    return obs._active;
+	  }
+
+	  function event(e) {
+	    obs._emit(e.type, e.value);
+	    return obs._active;
+	  }
+
+	  return {
+	    value: value,
+	    error: error,
+	    end: end,
+	    event: event,
+
+	    // legacy
+	    emit: value,
+	    emitEvent: event
+	  };
+	}
+
+	var S$4 = timeBased({
+
+	  _name: 'withInterval',
+
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	    this._emitter = emitter(this);
+	  },
+	  _free: function () {
+	    this._fn = null;
+	    this._emitter = null;
+	  },
+	  _onTick: function () {
+	    var fn = this._fn;
+	    fn(this._emitter);
+	  }
+	});
+
+	function withInterval(wait, fn) {
+	  return new S$4(wait, { fn: fn });
+	}
+
+	function S$5(fn) {
+	  Stream.call(this);
+	  this._fn = fn;
+	  this._unsubscribe = null;
+	}
+
+	inherit(S$5, Stream, {
+
+	  _name: 'stream',
+
+	  _onActivation: function () {
+	    var fn = this._fn;
+	    var unsubscribe = fn(emitter(this));
+	    this._unsubscribe = typeof unsubscribe === 'function' ? unsubscribe : null;
+
+	    // fix https://github.com/rpominov/kefir/issues/35
+	    if (!this._active) {
+	      this._callUnsubscribe();
+	    }
+	  },
+	  _callUnsubscribe: function () {
+	    if (this._unsubscribe !== null) {
+	      this._unsubscribe();
+	      this._unsubscribe = null;
+	    }
+	  },
+	  _onDeactivation: function () {
+	    this._callUnsubscribe();
+	  },
+	  _clear: function () {
+	    Stream.prototype._clear.call(this);
+	    this._fn = null;
+	  }
+	});
+
+	function stream(fn) {
+	  return new S$5(fn);
+	}
+
+	function fromCallback(callbackConsumer) {
+
+	  var called = false;
+
+	  return stream(function (emitter) {
+
+	    if (!called) {
+	      callbackConsumer(function (x) {
+	        emitter.emit(x);
+	        emitter.end();
+	      });
+	      called = true;
+	    }
+	  }).setName('fromCallback');
+	}
+
+	function fromNodeCallback(callbackConsumer) {
+
+	  var called = false;
+
+	  return stream(function (emitter) {
+
+	    if (!called) {
+	      callbackConsumer(function (error, x) {
+	        if (error) {
+	          emitter.error(error);
+	        } else {
+	          emitter.emit(x);
+	        }
+	        emitter.end();
+	      });
+	      called = true;
+	    }
+	  }).setName('fromNodeCallback');
+	}
+
+	function spread(fn, length) {
+	  switch (length) {
+	    case 0:
+	      return function () {
+	        return fn();
+	      };
+	    case 1:
+	      return function (a) {
+	        return fn(a[0]);
+	      };
+	    case 2:
+	      return function (a) {
+	        return fn(a[0], a[1]);
+	      };
+	    case 3:
+	      return function (a) {
+	        return fn(a[0], a[1], a[2]);
+	      };
+	    case 4:
+	      return function (a) {
+	        return fn(a[0], a[1], a[2], a[3]);
+	      };
+	    default:
+	      return function (a) {
+	        return fn.apply(null, a);
+	      };
+	  }
+	}
+
+	function apply(fn, c, a) {
+	  var aLength = a ? a.length : 0;
+	  if (c == null) {
+	    switch (aLength) {
+	      case 0:
+	        return fn();
+	      case 1:
+	        return fn(a[0]);
+	      case 2:
+	        return fn(a[0], a[1]);
+	      case 3:
+	        return fn(a[0], a[1], a[2]);
+	      case 4:
+	        return fn(a[0], a[1], a[2], a[3]);
+	      default:
+	        return fn.apply(null, a);
+	    }
+	  } else {
+	    switch (aLength) {
+	      case 0:
+	        return fn.call(c);
+	      default:
+	        return fn.apply(c, a);
+	    }
+	  }
+	}
+
+	function fromSubUnsub(sub, unsub, transformer /* Function | falsey */) {
+	  return stream(function (emitter) {
+
+	    var handler = transformer ? function () {
+	      emitter.emit(apply(transformer, this, arguments));
+	    } : function (x) {
+	      emitter.emit(x);
+	    };
+
+	    sub(handler);
+	    return function () {
+	      return unsub(handler);
+	    };
+	  }).setName('fromSubUnsub');
+	}
+
+	var pairs = [['addEventListener', 'removeEventListener'], ['addListener', 'removeListener'], ['on', 'off']];
+
+	function fromEvents(target, eventName, transformer) {
+	  var sub = void 0,
+	      unsub = void 0;
+
+	  for (var i = 0; i < pairs.length; i++) {
+	    if (typeof target[pairs[i][0]] === 'function' && typeof target[pairs[i][1]] === 'function') {
+	      sub = pairs[i][0];
+	      unsub = pairs[i][1];
+	      break;
+	    }
+	  }
+
+	  if (sub === undefined) {
+	    throw new Error('target don\'t support any of ' + 'addEventListener/removeEventListener, addListener/removeListener, on/off method pair');
+	  }
+
+	  return fromSubUnsub(function (handler) {
+	    return target[sub](eventName, handler);
+	  }, function (handler) {
+	    return target[unsub](eventName, handler);
+	  }, transformer).setName('fromEvents');
+	}
+
+	// HACK:
+	//   We don't call parent Class constructor, but instead putting all necessary
+	//   properties into prototype to simulate ended Property
+	//   (see Propperty and Observable classes).
+
+	function P(value) {
+	  this._currentEvent = { type: 'value', value: value, current: true };
+	}
+
+	inherit(P, Property, {
+	  _name: 'constant',
+	  _active: false,
+	  _activating: false,
+	  _alive: false,
+	  _dispatcher: null,
+	  _logHandlers: null
+	});
+
+	function constant(x) {
+	  return new P(x);
+	}
+
+	// HACK:
+	//   We don't call parent Class constructor, but instead putting all necessary
+	//   properties into prototype to simulate ended Property
+	//   (see Propperty and Observable classes).
+
+	function P$1(value) {
+	  this._currentEvent = { type: 'error', value: value, current: true };
+	}
+
+	inherit(P$1, Property, {
+	  _name: 'constantError',
+	  _active: false,
+	  _activating: false,
+	  _alive: false,
+	  _dispatcher: null,
+	  _logHandlers: null
+	});
+
+	function constantError(x) {
+	  return new P$1(x);
+	}
+
+	function createConstructor(BaseClass, name) {
+	  return function AnonymousObservable(source, options) {
+	    var _this = this;
+
+	    BaseClass.call(this);
+	    this._source = source;
+	    this._name = source._name + '.' + name;
+	    this._init(options);
+	    this._$handleAny = function (event) {
+	      return _this._handleAny(event);
+	    };
+	  };
+	}
+
+	function createClassMethods(BaseClass) {
+	  return {
+	    _init: function () {},
+	    _free: function () {},
+	    _handleValue: function (x) {
+	      this._emitValue(x);
+	    },
+	    _handleError: function (x) {
+	      this._emitError(x);
+	    },
+	    _handleEnd: function () {
+	      this._emitEnd();
+	    },
+	    _handleAny: function (event) {
+	      switch (event.type) {
+	        case VALUE:
+	          return this._handleValue(event.value);
+	        case ERROR:
+	          return this._handleError(event.value);
+	        case END:
+	          return this._handleEnd();
+	      }
+	    },
+	    _onActivation: function () {
+	      this._source.onAny(this._$handleAny);
+	    },
+	    _onDeactivation: function () {
+	      this._source.offAny(this._$handleAny);
+	    },
+	    _clear: function () {
+	      BaseClass.prototype._clear.call(this);
+	      this._source = null;
+	      this._$handleAny = null;
+	      this._free();
+	    }
+	  };
+	}
+
+	function createStream(name, mixin) {
+	  var S = createConstructor(Stream, name);
+	  inherit(S, Stream, createClassMethods(Stream), mixin);
+	  return S;
+	}
+
+	function createProperty(name, mixin) {
+	  var P = createConstructor(Property, name);
+	  inherit(P, Property, createClassMethods(Property), mixin);
+	  return P;
+	}
+
+	var P$2 = createProperty('toProperty', {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._getInitialCurrent = fn;
+	  },
+	  _onActivation: function () {
+	    if (this._getInitialCurrent !== null) {
+	      var getInitial = this._getInitialCurrent;
+	      this._emitValue(getInitial());
+	    }
+	    this._source.onAny(this._$handleAny); // copied from patterns/one-source
+	  }
+	});
+
+	function toProperty(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+	  if (fn !== null && typeof fn !== 'function') {
+	    throw new Error('You should call toProperty() with a function or no arguments.');
+	  }
+	  return new P$2(obs, { fn: fn });
+	}
+
+	var S$6 = createStream('changes', {
+	  _handleValue: function (x) {
+	    if (!this._activating) {
+	      this._emitValue(x);
+	    }
+	  },
+	  _handleError: function (x) {
+	    if (!this._activating) {
+	      this._emitError(x);
+	    }
+	  }
+	});
+
+	function changes(obs) {
+	  return new S$6(obs);
+	}
+
+	function fromPromise(promise) {
+
+	  var called = false;
+
+	  var result = stream(function (emitter) {
+	    if (!called) {
+	      var onValue = function (x) {
+	        emitter.emit(x);
+	        emitter.end();
+	      };
+	      var onError = function (x) {
+	        emitter.error(x);
+	        emitter.end();
+	      };
+	      var _promise = promise.then(onValue, onError);
+
+	      // prevent libraries like 'Q' or 'when' from swallowing exceptions
+	      if (_promise && typeof _promise.done === 'function') {
+	        _promise.done();
+	      }
+
+	      called = true;
+	    }
+	  });
+
+	  return toProperty(result, null).setName('fromPromise');
+	}
+
+	function getGlodalPromise() {
+	  if (typeof Promise === 'function') {
+	    return Promise;
+	  } else {
+	    throw new Error('There isn\'t default Promise, use shim or parameter');
+	  }
+	}
+
+	function toPromise (obs) {
+	  var Promise = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : getGlodalPromise();
+
+	  var last = null;
+	  return new Promise(function (resolve, reject) {
+	    obs.onAny(function (event) {
+	      if (event.type === END && last !== null) {
+	        (last.type === VALUE ? resolve : reject)(last.value);
+	        last = null;
+	      } else {
+	        last = event;
+	      }
+	    });
+	  });
+	}
+
+	var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {}
+
+	function createCommonjsModule(fn, module) {
+		return module = { exports: {} }, fn(module, module.exports), module.exports;
+	}
+
+	var ponyfill = createCommonjsModule(function (module, exports) {
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports['default'] = symbolObservablePonyfill;
+	function symbolObservablePonyfill(root) {
+		var result;
+		var _Symbol = root.Symbol;
+
+		if (typeof _Symbol === 'function') {
+			if (_Symbol.observable) {
+				result = _Symbol.observable;
+			} else {
+				result = _Symbol('observable');
+				_Symbol.observable = result;
+			}
+		} else {
+			result = '@@observable';
+		}
+
+		return result;
+	};
+	});
+
+	var require$$0$1 = (ponyfill && typeof ponyfill === 'object' && 'default' in ponyfill ? ponyfill['default'] : ponyfill);
+
+	var index$1 = createCommonjsModule(function (module, exports) {
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _ponyfill = require$$0$1;
+
+	var _ponyfill2 = _interopRequireDefault(_ponyfill);
+
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { 'default': obj };
+	}
+
+	var root; /* global window */
+
+	if (typeof self !== 'undefined') {
+	  root = self;
+	} else if (typeof window !== 'undefined') {
+	  root = window;
+	} else if (typeof commonjsGlobal !== 'undefined') {
+	  root = commonjsGlobal;
+	} else if (typeof module !== 'undefined') {
+	  root = module;
+	} else {
+	  root = Function('return this')();
+	}
+
+	var result = (0, _ponyfill2['default'])(root);
+	exports['default'] = result;
+	});
+
+	var require$$0 = (index$1 && typeof index$1 === 'object' && 'default' in index$1 ? index$1['default'] : index$1);
+
+	var index = createCommonjsModule(function (module) {
+	module.exports = require$$0;
+	});
+
+	var $$observable = (index && typeof index === 'object' && 'default' in index ? index['default'] : index);
+
+	function fromESObservable(_observable) {
+	  var observable = _observable[$$observable] ? _observable[$$observable]() : _observable;
+	  return stream(function (emitter) {
+	    var unsub = observable.subscribe({
+	      error: function (error) {
+	        emitter.error(error);
+	        emitter.end();
+	      },
+	      next: function (value) {
+	        emitter.emit(value);
+	      },
+	      complete: function () {
+	        emitter.end();
+	      }
+	    });
+
+	    if (unsub.unsubscribe) {
+	      return function () {
+	        unsub.unsubscribe();
+	      };
+	    } else {
+	      return unsub;
+	    }
+	  }).setName('fromESObservable');
+	}
+
+	function ESObservable(observable) {
+	  this._observable = observable.takeErrors(1);
+	}
+
+	extend(ESObservable.prototype, {
+	  subscribe: function (observerOrOnNext, onError, onComplete) {
+	    var _this = this;
+
+	    var observer = typeof observerOrOnNext === 'function' ? { next: observerOrOnNext, error: onError, complete: onComplete } : observerOrOnNext;
+
+	    var fn = function (event) {
+	      if (event.type === END) {
+	        closed = true;
+	      }
+
+	      if (event.type === VALUE && observer.next) {
+	        observer.next(event.value);
+	      } else if (event.type === ERROR && observer.error) {
+	        observer.error(event.value);
+	      } else if (event.type === END && observer.complete) {
+	        observer.complete(event.value);
+	      }
+	    };
+
+	    this._observable.onAny(fn);
+	    var closed = false;
+
+	    var subscription = {
+	      unsubscribe: function () {
+	        closed = true;
+	        _this._observable.offAny(fn);
+	      },
+	      get closed() {
+	        return closed;
+	      }
+	    };
+	    return subscription;
+	  }
+	});
+
+	// Need to assign directly b/c Symbols aren't enumerable.
+	ESObservable.prototype[$$observable] = function () {
+	  return this;
+	};
+
+	function toESObservable() {
+	  return new ESObservable(this);
+	}
+
+	function collect(source, keys, values) {
+	  for (var prop in source) {
+	    if (source.hasOwnProperty(prop)) {
+	      keys.push(prop);
+	      values.push(source[prop]);
+	    }
+	  }
+	}
+
+	function defaultErrorsCombinator(errors) {
+	  var latestError = void 0;
+	  for (var i = 0; i < errors.length; i++) {
+	    if (errors[i] !== undefined) {
+	      if (latestError === undefined || latestError.index < errors[i].index) {
+	        latestError = errors[i];
+	      }
+	    }
+	  }
+	  return latestError.error;
+	}
+
+	function Combine(active, passive, combinator) {
+	  var _this = this;
+
+	  Stream.call(this);
+	  this._activeCount = active.length;
+	  this._sources = concat(active, passive);
+	  this._combinator = combinator;
+	  this._aliveCount = 0;
+	  this._latestValues = new Array(this._sources.length);
+	  this._latestErrors = new Array(this._sources.length);
+	  fillArray(this._latestValues, NOTHING);
+	  this._emitAfterActivation = false;
+	  this._endAfterActivation = false;
+	  this._latestErrorIndex = 0;
+
+	  this._$handlers = [];
+
+	  var _loop = function (i) {
+	    _this._$handlers.push(function (event) {
+	      return _this._handleAny(i, event);
+	    });
+	  };
+
+	  for (var i = 0; i < this._sources.length; i++) {
+	    _loop(i);
+	  }
+	}
+
+	inherit(Combine, Stream, {
+
+	  _name: 'combine',
+
+	  _onActivation: function () {
+	    this._aliveCount = this._activeCount;
+
+	    // we need to suscribe to _passive_ sources before _active_
+	    // (see https://github.com/rpominov/kefir/issues/98)
+	    for (var i = this._activeCount; i < this._sources.length; i++) {
+	      this._sources[i].onAny(this._$handlers[i]);
+	    }
+	    for (var _i = 0; _i < this._activeCount; _i++) {
+	      this._sources[_i].onAny(this._$handlers[_i]);
+	    }
+
+	    if (this._emitAfterActivation) {
+	      this._emitAfterActivation = false;
+	      this._emitIfFull();
+	    }
+	    if (this._endAfterActivation) {
+	      this._emitEnd();
+	    }
+	  },
+	  _onDeactivation: function () {
+	    var length = this._sources.length,
+	        i = void 0;
+	    for (i = 0; i < length; i++) {
+	      this._sources[i].offAny(this._$handlers[i]);
+	    }
+	  },
+	  _emitIfFull: function () {
+	    var hasAllValues = true;
+	    var hasErrors = false;
+	    var length = this._latestValues.length;
+	    var valuesCopy = new Array(length);
+	    var errorsCopy = new Array(length);
+
+	    for (var i = 0; i < length; i++) {
+	      valuesCopy[i] = this._latestValues[i];
+	      errorsCopy[i] = this._latestErrors[i];
+
+	      if (valuesCopy[i] === NOTHING) {
+	        hasAllValues = false;
+	      }
+
+	      if (errorsCopy[i] !== undefined) {
+	        hasErrors = true;
+	      }
+	    }
+
+	    if (hasAllValues) {
+	      var combinator = this._combinator;
+	      this._emitValue(combinator(valuesCopy));
+	    }
+	    if (hasErrors) {
+	      this._emitError(defaultErrorsCombinator(errorsCopy));
+	    }
+	  },
+	  _handleAny: function (i, event) {
+
+	    if (event.type === VALUE || event.type === ERROR) {
+
+	      if (event.type === VALUE) {
+	        this._latestValues[i] = event.value;
+	        this._latestErrors[i] = undefined;
+	      }
+	      if (event.type === ERROR) {
+	        this._latestValues[i] = NOTHING;
+	        this._latestErrors[i] = {
+	          index: this._latestErrorIndex++,
+	          error: event.value
+	        };
+	      }
+
+	      if (i < this._activeCount) {
+	        if (this._activating) {
+	          this._emitAfterActivation = true;
+	        } else {
+	          this._emitIfFull();
+	        }
+	      }
+	    } else {
+	      // END
+
+	      if (i < this._activeCount) {
+	        this._aliveCount--;
+	        if (this._aliveCount === 0) {
+	          if (this._activating) {
+	            this._endAfterActivation = true;
+	          } else {
+	            this._emitEnd();
+	          }
+	        }
+	      }
+	    }
+	  },
+	  _clear: function () {
+	    Stream.prototype._clear.call(this);
+	    this._sources = null;
+	    this._latestValues = null;
+	    this._latestErrors = null;
+	    this._combinator = null;
+	    this._$handlers = null;
+	  }
+	});
+
+	function combineAsArray(active) {
+	  var passive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+	  var combinator = arguments[2];
+
+	  if (!Array.isArray(passive)) {
+	    throw new Error('Combine can only combine active and passive collections of the same type.');
+	  }
+
+	  combinator = combinator ? spread(combinator, active.length + passive.length) : function (x) {
+	    return x;
+	  };
+	  return active.length === 0 ? never() : new Combine(active, passive, combinator);
+	}
+
+	function combineAsObject(active) {
+	  var passive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	  var combinator = arguments[2];
+
+	  if (typeof passive !== 'object' || Array.isArray(passive)) {
+	    throw new Error('Combine can only combine active and passive collections of the same type.');
+	  }
+
+	  var keys = [],
+	      activeObservables = [],
+	      passiveObservables = [];
+
+	  collect(active, keys, activeObservables);
+	  collect(passive, keys, passiveObservables);
+
+	  var objectify = function (values) {
+	    var event = {};
+	    for (var i = values.length - 1; 0 <= i; i--) {
+	      event[keys[i]] = values[i];
+	    }
+	    return combinator ? combinator(event) : event;
+	  };
+
+	  return activeObservables.length === 0 ? never() : new Combine(activeObservables, passiveObservables, objectify);
+	}
+
+	function combine(active, passive, combinator) {
+	  if (typeof passive === 'function') {
+	    combinator = passive;
+	    passive = undefined;
+	  }
+
+	  return Array.isArray(active) ? combineAsArray(active, passive, combinator) : combineAsObject(active, passive, combinator);
+	}
+
+	var Observable$1 = {
+	  empty: function () {
+	    return never();
+	  },
+
+
+	  // Monoid based on merge() seems more useful than one based on concat().
+	  concat: function (a, b) {
+	    return a.merge(b);
+	  },
+	  of: function (x) {
+	    return constant(x);
+	  },
+	  map: function (fn, obs) {
+	    return obs.map(fn);
+	  },
+	  bimap: function (fnErr, fnVal, obs) {
+	    return obs.mapErrors(fnErr).map(fnVal);
+	  },
+
+
+	  // This ap strictly speaking incompatible with chain. If we derive ap from chain we get
+	  // different (not very useful) behavior. But spec requires that if method can be derived
+	  // it must have the same behavior as hand-written method. We intentionally violate the spec
+	  // in hope that it won't cause many troubles in practice. And in return we have more useful type.
+	  ap: function (obsFn, obsVal) {
+	    return combine([obsFn, obsVal], function (fn, val) {
+	      return fn(val);
+	    });
+	  },
+	  chain: function (fn, obs) {
+	    return obs.flatMap(fn);
+	  }
+	};
+
+
+
+	var staticLand = Object.freeze({
+	  Observable: Observable$1
+	});
+
+	var mixin = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _handleValue: function (x) {
+	    var fn = this._fn;
+	    this._emitValue(fn(x));
+	  }
+	};
+
+	var S$7 = createStream('map', mixin);
+	var P$3 = createProperty('map', mixin);
+
+	var id = function (x) {
+	  return x;
+	};
+
+	function map$1(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : id;
+
+	  return new (obs._ofSameType(S$7, P$3))(obs, { fn: fn });
+	}
+
+	var mixin$1 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _handleValue: function (x) {
+	    var fn = this._fn;
+	    if (fn(x)) {
+	      this._emitValue(x);
+	    }
+	  }
+	};
+
+	var S$8 = createStream('filter', mixin$1);
+	var P$4 = createProperty('filter', mixin$1);
+
+	var id$1 = function (x) {
+	  return x;
+	};
+
+	function filter(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : id$1;
+
+	  return new (obs._ofSameType(S$8, P$4))(obs, { fn: fn });
+	}
+
+	var mixin$2 = {
+	  _init: function (_ref) {
+	    var n = _ref.n;
+
+	    this._n = n;
+	    if (n <= 0) {
+	      this._emitEnd();
+	    }
+	  },
+	  _handleValue: function (x) {
+	    this._n--;
+	    this._emitValue(x);
+	    if (this._n === 0) {
+	      this._emitEnd();
+	    }
+	  }
+	};
+
+	var S$9 = createStream('take', mixin$2);
+	var P$5 = createProperty('take', mixin$2);
+
+	function take(obs, n) {
+	  return new (obs._ofSameType(S$9, P$5))(obs, { n: n });
+	}
+
+	var mixin$3 = {
+	  _init: function (_ref) {
+	    var n = _ref.n;
+
+	    this._n = n;
+	    if (n <= 0) {
+	      this._emitEnd();
+	    }
+	  },
+	  _handleError: function (x) {
+	    this._n--;
+	    this._emitError(x);
+	    if (this._n === 0) {
+	      this._emitEnd();
+	    }
+	  }
+	};
+
+	var S$10 = createStream('takeErrors', mixin$3);
+	var P$6 = createProperty('takeErrors', mixin$3);
+
+	function takeErrors(obs, n) {
+	  return new (obs._ofSameType(S$10, P$6))(obs, { n: n });
+	}
+
+	var mixin$4 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _handleValue: function (x) {
+	    var fn = this._fn;
+	    if (fn(x)) {
+	      this._emitValue(x);
+	    } else {
+	      this._emitEnd();
+	    }
+	  }
+	};
+
+	var S$11 = createStream('takeWhile', mixin$4);
+	var P$7 = createProperty('takeWhile', mixin$4);
+
+	var id$2 = function (x) {
+	  return x;
+	};
+
+	function takeWhile(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : id$2;
+
+	  return new (obs._ofSameType(S$11, P$7))(obs, { fn: fn });
+	}
+
+	var mixin$5 = {
+	  _init: function () {
+	    this._lastValue = NOTHING;
+	  },
+	  _free: function () {
+	    this._lastValue = null;
+	  },
+	  _handleValue: function (x) {
+	    this._lastValue = x;
+	  },
+	  _handleEnd: function () {
+	    if (this._lastValue !== NOTHING) {
+	      this._emitValue(this._lastValue);
+	    }
+	    this._emitEnd();
+	  }
+	};
+
+	var S$12 = createStream('last', mixin$5);
+	var P$8 = createProperty('last', mixin$5);
+
+	function last(obs) {
+	  return new (obs._ofSameType(S$12, P$8))(obs);
+	}
+
+	var mixin$6 = {
+	  _init: function (_ref) {
+	    var n = _ref.n;
+
+	    this._n = Math.max(0, n);
+	  },
+	  _handleValue: function (x) {
+	    if (this._n === 0) {
+	      this._emitValue(x);
+	    } else {
+	      this._n--;
+	    }
+	  }
+	};
+
+	var S$13 = createStream('skip', mixin$6);
+	var P$9 = createProperty('skip', mixin$6);
+
+	function skip(obs, n) {
+	  return new (obs._ofSameType(S$13, P$9))(obs, { n: n });
+	}
+
+	var mixin$7 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _handleValue: function (x) {
+	    var fn = this._fn;
+	    if (this._fn !== null && !fn(x)) {
+	      this._fn = null;
+	    }
+	    if (this._fn === null) {
+	      this._emitValue(x);
+	    }
+	  }
+	};
+
+	var S$14 = createStream('skipWhile', mixin$7);
+	var P$10 = createProperty('skipWhile', mixin$7);
+
+	var id$3 = function (x) {
+	  return x;
+	};
+
+	function skipWhile(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : id$3;
+
+	  return new (obs._ofSameType(S$14, P$10))(obs, { fn: fn });
+	}
+
+	var mixin$8 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	    this._prev = NOTHING;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	    this._prev = null;
+	  },
+	  _handleValue: function (x) {
+	    var fn = this._fn;
+	    if (this._prev === NOTHING || !fn(this._prev, x)) {
+	      this._prev = x;
+	      this._emitValue(x);
+	    }
+	  }
+	};
+
+	var S$15 = createStream('skipDuplicates', mixin$8);
+	var P$11 = createProperty('skipDuplicates', mixin$8);
+
+	var eq = function (a, b) {
+	  return a === b;
+	};
+
+	function skipDuplicates(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : eq;
+
+	  return new (obs._ofSameType(S$15, P$11))(obs, { fn: fn });
+	}
+
+	var mixin$9 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn,
+	        seed = _ref.seed;
+
+	    this._fn = fn;
+	    this._prev = seed;
+	  },
+	  _free: function () {
+	    this._prev = null;
+	    this._fn = null;
+	  },
+	  _handleValue: function (x) {
+	    if (this._prev !== NOTHING) {
+	      var fn = this._fn;
+	      this._emitValue(fn(this._prev, x));
+	    }
+	    this._prev = x;
+	  }
+	};
+
+	var S$16 = createStream('diff', mixin$9);
+	var P$12 = createProperty('diff', mixin$9);
+
+	function defaultFn(a, b) {
+	  return [a, b];
+	}
+
+	function diff(obs, fn) {
+	  var seed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : NOTHING;
+
+	  return new (obs._ofSameType(S$16, P$12))(obs, { fn: fn || defaultFn, seed: seed });
+	}
+
+	var P$13 = createProperty('scan', {
+	  _init: function (_ref) {
+	    var fn = _ref.fn,
+	        seed = _ref.seed;
+
+	    this._fn = fn;
+	    this._seed = seed;
+	    if (seed !== NOTHING) {
+	      this._emitValue(seed);
+	    }
+	  },
+	  _free: function () {
+	    this._fn = null;
+	    this._seed = null;
+	  },
+	  _handleValue: function (x) {
+	    var fn = this._fn;
+	    if (this._currentEvent === null || this._currentEvent.type === ERROR) {
+	      this._emitValue(this._seed === NOTHING ? x : fn(this._seed, x));
+	    } else {
+	      this._emitValue(fn(this._currentEvent.value, x));
+	    }
+	  }
+	});
+
+	function scan(obs, fn) {
+	  var seed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : NOTHING;
+
+	  return new P$13(obs, { fn: fn, seed: seed });
+	}
+
+	var mixin$10 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _handleValue: function (x) {
+	    var fn = this._fn;
+	    var xs = fn(x);
+	    for (var i = 0; i < xs.length; i++) {
+	      this._emitValue(xs[i]);
+	    }
+	  }
+	};
+
+	var S$17 = createStream('flatten', mixin$10);
+
+	var id$4 = function (x) {
+	  return x;
+	};
+
+	function flatten(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : id$4;
+
+	  return new S$17(obs, { fn: fn });
+	}
+
+	var END_MARKER = {};
+
+	var mixin$11 = {
+	  _init: function (_ref) {
+	    var _this = this;
+
+	    var wait = _ref.wait;
+
+	    this._wait = Math.max(0, wait);
+	    this._buff = [];
+	    this._$shiftBuff = function () {
+	      var value = _this._buff.shift();
+	      if (value === END_MARKER) {
+	        _this._emitEnd();
+	      } else {
+	        _this._emitValue(value);
+	      }
+	    };
+	  },
+	  _free: function () {
+	    this._buff = null;
+	    this._$shiftBuff = null;
+	  },
+	  _handleValue: function (x) {
+	    if (this._activating) {
+	      this._emitValue(x);
+	    } else {
+	      this._buff.push(x);
+	      setTimeout(this._$shiftBuff, this._wait);
+	    }
+	  },
+	  _handleEnd: function () {
+	    if (this._activating) {
+	      this._emitEnd();
+	    } else {
+	      this._buff.push(END_MARKER);
+	      setTimeout(this._$shiftBuff, this._wait);
+	    }
+	  }
+	};
+
+	var S$18 = createStream('delay', mixin$11);
+	var P$14 = createProperty('delay', mixin$11);
+
+	function delay(obs, wait) {
+	  return new (obs._ofSameType(S$18, P$14))(obs, { wait: wait });
+	}
+
+	var now = Date.now ? function () {
+	  return Date.now();
+	} : function () {
+	  return new Date().getTime();
+	};
+
+	var mixin$12 = {
+	  _init: function (_ref) {
+	    var _this = this;
+
+	    var wait = _ref.wait,
+	        leading = _ref.leading,
+	        trailing = _ref.trailing;
+
+	    this._wait = Math.max(0, wait);
+	    this._leading = leading;
+	    this._trailing = trailing;
+	    this._trailingValue = null;
+	    this._timeoutId = null;
+	    this._endLater = false;
+	    this._lastCallTime = 0;
+	    this._$trailingCall = function () {
+	      return _this._trailingCall();
+	    };
+	  },
+	  _free: function () {
+	    this._trailingValue = null;
+	    this._$trailingCall = null;
+	  },
+	  _handleValue: function (x) {
+	    if (this._activating) {
+	      this._emitValue(x);
+	    } else {
+	      var curTime = now();
+	      if (this._lastCallTime === 0 && !this._leading) {
+	        this._lastCallTime = curTime;
+	      }
+	      var remaining = this._wait - (curTime - this._lastCallTime);
+	      if (remaining <= 0) {
+	        this._cancelTrailing();
+	        this._lastCallTime = curTime;
+	        this._emitValue(x);
+	      } else if (this._trailing) {
+	        this._cancelTrailing();
+	        this._trailingValue = x;
+	        this._timeoutId = setTimeout(this._$trailingCall, remaining);
+	      }
+	    }
+	  },
+	  _handleEnd: function () {
+	    if (this._activating) {
+	      this._emitEnd();
+	    } else {
+	      if (this._timeoutId) {
+	        this._endLater = true;
+	      } else {
+	        this._emitEnd();
+	      }
+	    }
+	  },
+	  _cancelTrailing: function () {
+	    if (this._timeoutId !== null) {
+	      clearTimeout(this._timeoutId);
+	      this._timeoutId = null;
+	    }
+	  },
+	  _trailingCall: function () {
+	    this._emitValue(this._trailingValue);
+	    this._timeoutId = null;
+	    this._trailingValue = null;
+	    this._lastCallTime = !this._leading ? 0 : now();
+	    if (this._endLater) {
+	      this._emitEnd();
+	    }
+	  }
+	};
+
+	var S$19 = createStream('throttle', mixin$12);
+	var P$15 = createProperty('throttle', mixin$12);
+
+	function throttle(obs, wait) {
+	  var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	      _ref2$leading = _ref2.leading,
+	      leading = _ref2$leading === undefined ? true : _ref2$leading,
+	      _ref2$trailing = _ref2.trailing,
+	      trailing = _ref2$trailing === undefined ? true : _ref2$trailing;
+
+	  return new (obs._ofSameType(S$19, P$15))(obs, { wait: wait, leading: leading, trailing: trailing });
+	}
+
+	var mixin$13 = {
+	  _init: function (_ref) {
+	    var _this = this;
+
+	    var wait = _ref.wait,
+	        immediate = _ref.immediate;
+
+	    this._wait = Math.max(0, wait);
+	    this._immediate = immediate;
+	    this._lastAttempt = 0;
+	    this._timeoutId = null;
+	    this._laterValue = null;
+	    this._endLater = false;
+	    this._$later = function () {
+	      return _this._later();
+	    };
+	  },
+	  _free: function () {
+	    this._laterValue = null;
+	    this._$later = null;
+	  },
+	  _handleValue: function (x) {
+	    if (this._activating) {
+	      this._emitValue(x);
+	    } else {
+	      this._lastAttempt = now();
+	      if (this._immediate && !this._timeoutId) {
+	        this._emitValue(x);
+	      }
+	      if (!this._timeoutId) {
+	        this._timeoutId = setTimeout(this._$later, this._wait);
+	      }
+	      if (!this._immediate) {
+	        this._laterValue = x;
+	      }
+	    }
+	  },
+	  _handleEnd: function () {
+	    if (this._activating) {
+	      this._emitEnd();
+	    } else {
+	      if (this._timeoutId && !this._immediate) {
+	        this._endLater = true;
+	      } else {
+	        this._emitEnd();
+	      }
+	    }
+	  },
+	  _later: function () {
+	    var last = now() - this._lastAttempt;
+	    if (last < this._wait && last >= 0) {
+	      this._timeoutId = setTimeout(this._$later, this._wait - last);
+	    } else {
+	      this._timeoutId = null;
+	      if (!this._immediate) {
+	        this._emitValue(this._laterValue);
+	        this._laterValue = null;
+	      }
+	      if (this._endLater) {
+	        this._emitEnd();
+	      }
+	    }
+	  }
+	};
+
+	var S$20 = createStream('debounce', mixin$13);
+	var P$16 = createProperty('debounce', mixin$13);
+
+	function debounce(obs, wait) {
+	  var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	      _ref2$immediate = _ref2.immediate,
+	      immediate = _ref2$immediate === undefined ? false : _ref2$immediate;
+
+	  return new (obs._ofSameType(S$20, P$16))(obs, { wait: wait, immediate: immediate });
+	}
+
+	var mixin$14 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _handleError: function (x) {
+	    var fn = this._fn;
+	    this._emitError(fn(x));
+	  }
+	};
+
+	var S$21 = createStream('mapErrors', mixin$14);
+	var P$17 = createProperty('mapErrors', mixin$14);
+
+	var id$5 = function (x) {
+	  return x;
+	};
+
+	function mapErrors(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : id$5;
+
+	  return new (obs._ofSameType(S$21, P$17))(obs, { fn: fn });
+	}
+
+	var mixin$15 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _handleError: function (x) {
+	    var fn = this._fn;
+	    if (fn(x)) {
+	      this._emitError(x);
+	    }
+	  }
+	};
+
+	var S$22 = createStream('filterErrors', mixin$15);
+	var P$18 = createProperty('filterErrors', mixin$15);
+
+	var id$6 = function (x) {
+	  return x;
+	};
+
+	function filterErrors(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : id$6;
+
+	  return new (obs._ofSameType(S$22, P$18))(obs, { fn: fn });
+	}
+
+	var mixin$16 = {
+	  _handleValue: function () {}
+	};
+
+	var S$23 = createStream('ignoreValues', mixin$16);
+	var P$19 = createProperty('ignoreValues', mixin$16);
+
+	function ignoreValues(obs) {
+	  return new (obs._ofSameType(S$23, P$19))(obs);
+	}
+
+	var mixin$17 = {
+	  _handleError: function () {}
+	};
+
+	var S$24 = createStream('ignoreErrors', mixin$17);
+	var P$20 = createProperty('ignoreErrors', mixin$17);
+
+	function ignoreErrors(obs) {
+	  return new (obs._ofSameType(S$24, P$20))(obs);
+	}
+
+	var mixin$18 = {
+	  _handleEnd: function () {}
+	};
+
+	var S$25 = createStream('ignoreEnd', mixin$18);
+	var P$21 = createProperty('ignoreEnd', mixin$18);
+
+	function ignoreEnd(obs) {
+	  return new (obs._ofSameType(S$25, P$21))(obs);
+	}
+
+	var mixin$19 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _handleEnd: function () {
+	    var fn = this._fn;
+	    this._emitValue(fn());
+	    this._emitEnd();
+	  }
+	};
+
+	var S$26 = createStream('beforeEnd', mixin$19);
+	var P$22 = createProperty('beforeEnd', mixin$19);
+
+	function beforeEnd(obs, fn) {
+	  return new (obs._ofSameType(S$26, P$22))(obs, { fn: fn });
+	}
+
+	var mixin$20 = {
+	  _init: function (_ref) {
+	    var min = _ref.min,
+	        max = _ref.max;
+
+	    this._max = max;
+	    this._min = min;
+	    this._buff = [];
+	  },
+	  _free: function () {
+	    this._buff = null;
+	  },
+	  _handleValue: function (x) {
+	    this._buff = slide(this._buff, x, this._max);
+	    if (this._buff.length >= this._min) {
+	      this._emitValue(this._buff);
+	    }
+	  }
+	};
+
+	var S$27 = createStream('slidingWindow', mixin$20);
+	var P$23 = createProperty('slidingWindow', mixin$20);
+
+	function slidingWindow(obs, max) {
+	  var min = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+
+	  return new (obs._ofSameType(S$27, P$23))(obs, { min: min, max: max });
+	}
+
+	var mixin$21 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn,
+	        flushOnEnd = _ref.flushOnEnd;
+
+	    this._fn = fn;
+	    this._flushOnEnd = flushOnEnd;
+	    this._buff = [];
+	  },
+	  _free: function () {
+	    this._buff = null;
+	  },
+	  _flush: function () {
+	    if (this._buff !== null && this._buff.length !== 0) {
+	      this._emitValue(this._buff);
+	      this._buff = [];
+	    }
+	  },
+	  _handleValue: function (x) {
+	    this._buff.push(x);
+	    var fn = this._fn;
+	    if (!fn(x)) {
+	      this._flush();
+	    }
+	  },
+	  _handleEnd: function () {
+	    if (this._flushOnEnd) {
+	      this._flush();
+	    }
+	    this._emitEnd();
+	  }
+	};
+
+	var S$28 = createStream('bufferWhile', mixin$21);
+	var P$24 = createProperty('bufferWhile', mixin$21);
+
+	var id$7 = function (x) {
+	  return x;
+	};
+
+	function bufferWhile(obs, fn) {
+	  var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	      _ref2$flushOnEnd = _ref2.flushOnEnd,
+	      flushOnEnd = _ref2$flushOnEnd === undefined ? true : _ref2$flushOnEnd;
+
+	  return new (obs._ofSameType(S$28, P$24))(obs, { fn: fn || id$7, flushOnEnd: flushOnEnd });
+	}
+
+	var mixin$22 = {
+	  _init: function (_ref) {
+	    var count = _ref.count,
+	        flushOnEnd = _ref.flushOnEnd;
+
+	    this._count = count;
+	    this._flushOnEnd = flushOnEnd;
+	    this._buff = [];
+	  },
+	  _free: function () {
+	    this._buff = null;
+	  },
+	  _flush: function () {
+	    if (this._buff !== null && this._buff.length !== 0) {
+	      this._emitValue(this._buff);
+	      this._buff = [];
+	    }
+	  },
+	  _handleValue: function (x) {
+	    this._buff.push(x);
+	    if (this._buff.length >= this._count) {
+	      this._flush();
+	    }
+	  },
+	  _handleEnd: function () {
+	    if (this._flushOnEnd) {
+	      this._flush();
+	    }
+	    this._emitEnd();
+	  }
+	};
+
+	var S$29 = createStream('bufferWithCount', mixin$22);
+	var P$25 = createProperty('bufferWithCount', mixin$22);
+
+	function bufferWhile$1(obs, count) {
+	  var _ref2 = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {},
+	      _ref2$flushOnEnd = _ref2.flushOnEnd,
+	      flushOnEnd = _ref2$flushOnEnd === undefined ? true : _ref2$flushOnEnd;
+
+	  return new (obs._ofSameType(S$29, P$25))(obs, { count: count, flushOnEnd: flushOnEnd });
+	}
+
+	var mixin$23 = {
+	  _init: function (_ref) {
+	    var _this = this;
+
+	    var wait = _ref.wait,
+	        count = _ref.count,
+	        flushOnEnd = _ref.flushOnEnd;
+
+	    this._wait = wait;
+	    this._count = count;
+	    this._flushOnEnd = flushOnEnd;
+	    this._intervalId = null;
+	    this._$onTick = function () {
+	      return _this._flush();
+	    };
+	    this._buff = [];
+	  },
+	  _free: function () {
+	    this._$onTick = null;
+	    this._buff = null;
+	  },
+	  _flush: function () {
+	    if (this._buff !== null) {
+	      this._emitValue(this._buff);
+	      this._buff = [];
+	    }
+	  },
+	  _handleValue: function (x) {
+	    this._buff.push(x);
+	    if (this._buff.length >= this._count) {
+	      clearInterval(this._intervalId);
+	      this._flush();
+	      this._intervalId = setInterval(this._$onTick, this._wait);
+	    }
+	  },
+	  _handleEnd: function () {
+	    if (this._flushOnEnd && this._buff.length !== 0) {
+	      this._flush();
+	    }
+	    this._emitEnd();
+	  },
+	  _onActivation: function () {
+	    this._intervalId = setInterval(this._$onTick, this._wait);
+	    this._source.onAny(this._$handleAny); // copied from patterns/one-source
+	  },
+	  _onDeactivation: function () {
+	    if (this._intervalId !== null) {
+	      clearInterval(this._intervalId);
+	      this._intervalId = null;
+	    }
+	    this._source.offAny(this._$handleAny); // copied from patterns/one-source
+	  }
+	};
+
+	var S$30 = createStream('bufferWithTimeOrCount', mixin$23);
+	var P$26 = createProperty('bufferWithTimeOrCount', mixin$23);
+
+	function bufferWithTimeOrCount(obs, wait, count) {
+	  var _ref2 = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {},
+	      _ref2$flushOnEnd = _ref2.flushOnEnd,
+	      flushOnEnd = _ref2$flushOnEnd === undefined ? true : _ref2$flushOnEnd;
+
+	  return new (obs._ofSameType(S$30, P$26))(obs, { wait: wait, count: count, flushOnEnd: flushOnEnd });
+	}
+
+	function xformForObs(obs) {
+	  return {
+	    '@@transducer/step': function (res, input) {
+	      obs._emitValue(input);
+	      return null;
+	    },
+	    '@@transducer/result': function () {
+	      obs._emitEnd();
+	      return null;
+	    }
+	  };
+	}
+
+	var mixin$24 = {
+	  _init: function (_ref) {
+	    var transducer = _ref.transducer;
+
+	    this._xform = transducer(xformForObs(this));
+	  },
+	  _free: function () {
+	    this._xform = null;
+	  },
+	  _handleValue: function (x) {
+	    if (this._xform['@@transducer/step'](null, x) !== null) {
+	      this._xform['@@transducer/result'](null);
+	    }
+	  },
+	  _handleEnd: function () {
+	    this._xform['@@transducer/result'](null);
+	  }
+	};
+
+	var S$31 = createStream('transduce', mixin$24);
+	var P$27 = createProperty('transduce', mixin$24);
+
+	function transduce(obs, transducer) {
+	  return new (obs._ofSameType(S$31, P$27))(obs, { transducer: transducer });
+	}
+
+	var mixin$25 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._handler = fn;
+	    this._emitter = emitter(this);
+	  },
+	  _free: function () {
+	    this._handler = null;
+	    this._emitter = null;
+	  },
+	  _handleAny: function (event) {
+	    this._handler(this._emitter, event);
+	  }
+	};
+
+	var S$32 = createStream('withHandler', mixin$25);
+	var P$28 = createProperty('withHandler', mixin$25);
+
+	function withHandler(obs, fn) {
+	  return new (obs._ofSameType(S$32, P$28))(obs, { fn: fn });
+	}
+
+	var isArray = Array.isArray || function (xs) {
+	  return Object.prototype.toString.call(xs) === '[object Array]';
+	};
+
+	function Zip(sources, combinator) {
+	  var _this = this;
+
+	  Stream.call(this);
+
+	  this._buffers = map(sources, function (source) {
+	    return isArray(source) ? cloneArray(source) : [];
+	  });
+	  this._sources = map(sources, function (source) {
+	    return isArray(source) ? never() : source;
+	  });
+
+	  this._combinator = combinator ? spread(combinator, this._sources.length) : function (x) {
+	    return x;
+	  };
+	  this._aliveCount = 0;
+
+	  this._$handlers = [];
+
+	  var _loop = function (i) {
+	    _this._$handlers.push(function (event) {
+	      return _this._handleAny(i, event);
+	    });
+	  };
+
+	  for (var i = 0; i < this._sources.length; i++) {
+	    _loop(i);
+	  }
+	}
+
+	inherit(Zip, Stream, {
+
+	  _name: 'zip',
+
+	  _onActivation: function () {
+
+	    // if all sources are arrays
+	    while (this._isFull()) {
+	      this._emit();
+	    }
+
+	    var length = this._sources.length;
+	    this._aliveCount = length;
+	    for (var i = 0; i < length && this._active; i++) {
+	      this._sources[i].onAny(this._$handlers[i]);
+	    }
+	  },
+	  _onDeactivation: function () {
+	    for (var i = 0; i < this._sources.length; i++) {
+	      this._sources[i].offAny(this._$handlers[i]);
+	    }
+	  },
+	  _emit: function () {
+	    var values = new Array(this._buffers.length);
+	    for (var i = 0; i < this._buffers.length; i++) {
+	      values[i] = this._buffers[i].shift();
+	    }
+	    var combinator = this._combinator;
+	    this._emitValue(combinator(values));
+	  },
+	  _isFull: function () {
+	    for (var i = 0; i < this._buffers.length; i++) {
+	      if (this._buffers[i].length === 0) {
+	        return false;
+	      }
+	    }
+	    return true;
+	  },
+	  _handleAny: function (i, event) {
+	    if (event.type === VALUE) {
+	      this._buffers[i].push(event.value);
+	      if (this._isFull()) {
+	        this._emit();
+	      }
+	    }
+	    if (event.type === ERROR) {
+	      this._emitError(event.value);
+	    }
+	    if (event.type === END) {
+	      this._aliveCount--;
+	      if (this._aliveCount === 0) {
+	        this._emitEnd();
+	      }
+	    }
+	  },
+	  _clear: function () {
+	    Stream.prototype._clear.call(this);
+	    this._sources = null;
+	    this._buffers = null;
+	    this._combinator = null;
+	    this._$handlers = null;
+	  }
+	});
+
+	function zip(observables, combinator /* Function | falsey */) {
+	  return observables.length === 0 ? never() : new Zip(observables, combinator);
+	}
+
+	var id$8 = function (x) {
+	  return x;
+	};
+
+	function AbstractPool() {
+	  var _this = this;
+
+	  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+	      _ref$queueLim = _ref.queueLim,
+	      queueLim = _ref$queueLim === undefined ? 0 : _ref$queueLim,
+	      _ref$concurLim = _ref.concurLim,
+	      concurLim = _ref$concurLim === undefined ? -1 : _ref$concurLim,
+	      _ref$drop = _ref.drop,
+	      drop = _ref$drop === undefined ? 'new' : _ref$drop;
+
+	  Stream.call(this);
+
+	  this._queueLim = queueLim < 0 ? -1 : queueLim;
+	  this._concurLim = concurLim < 0 ? -1 : concurLim;
+	  this._drop = drop;
+	  this._queue = [];
+	  this._curSources = [];
+	  this._$handleSubAny = function (event) {
+	    return _this._handleSubAny(event);
+	  };
+	  this._$endHandlers = [];
+	  this._currentlyAdding = null;
+
+	  if (this._concurLim === 0) {
+	    this._emitEnd();
+	  }
+	}
+
+	inherit(AbstractPool, Stream, {
+
+	  _name: 'abstractPool',
+
+	  _add: function (obj, toObs /* Function | falsey */) {
+	    toObs = toObs || id$8;
+	    if (this._concurLim === -1 || this._curSources.length < this._concurLim) {
+	      this._addToCur(toObs(obj));
+	    } else {
+	      if (this._queueLim === -1 || this._queue.length < this._queueLim) {
+	        this._addToQueue(toObs(obj));
+	      } else if (this._drop === 'old') {
+	        this._removeOldest();
+	        this._add(obj, toObs);
+	      }
+	    }
+	  },
+	  _addAll: function (obss) {
+	    var _this2 = this;
+
+	    forEach(obss, function (obs) {
+	      return _this2._add(obs);
+	    });
+	  },
+	  _remove: function (obs) {
+	    if (this._removeCur(obs) === -1) {
+	      this._removeQueue(obs);
+	    }
+	  },
+	  _addToQueue: function (obs) {
+	    this._queue = concat(this._queue, [obs]);
+	  },
+	  _addToCur: function (obs) {
+	    if (this._active) {
+
+	      // HACK:
+	      //
+	      // We have two optimizations for cases when `obs` is ended. We don't want
+	      // to add such observable to the list, but only want to emit events
+	      // from it (if it has some).
+	      //
+	      // Instead of this hacks, we could just did following,
+	      // but it would be 5-8 times slower:
+	      //
+	      //     this._curSources = concat(this._curSources, [obs]);
+	      //     this._subscribe(obs);
+	      //
+
+	      // #1
+	      // This one for cases when `obs` already ended
+	      // e.g., Kefir.constant() or Kefir.never()
+	      if (!obs._alive) {
+	        if (obs._currentEvent) {
+	          this._emit(obs._currentEvent.type, obs._currentEvent.value);
+	        }
+	        return;
+	      }
+
+	      // #2
+	      // This one is for cases when `obs` going to end synchronously on
+	      // first subscriber e.g., Kefir.stream(em => {em.emit(1); em.end()})
+	      this._currentlyAdding = obs;
+	      obs.onAny(this._$handleSubAny);
+	      this._currentlyAdding = null;
+	      if (obs._alive) {
+	        this._curSources = concat(this._curSources, [obs]);
+	        if (this._active) {
+	          this._subToEnd(obs);
+	        }
+	      }
+	    } else {
+	      this._curSources = concat(this._curSources, [obs]);
+	    }
+	  },
+	  _subToEnd: function (obs) {
+	    var _this3 = this;
+
+	    var onEnd = function () {
+	      return _this3._removeCur(obs);
+	    };
+	    this._$endHandlers.push({ obs: obs, handler: onEnd });
+	    obs.onEnd(onEnd);
+	  },
+	  _subscribe: function (obs) {
+	    obs.onAny(this._$handleSubAny);
+
+	    // it can become inactive in responce of subscribing to `obs.onAny` above
+	    if (this._active) {
+	      this._subToEnd(obs);
+	    }
+	  },
+	  _unsubscribe: function (obs) {
+	    obs.offAny(this._$handleSubAny);
+
+	    var onEndI = findByPred(this._$endHandlers, function (obj) {
+	      return obj.obs === obs;
+	    });
+	    if (onEndI !== -1) {
+	      obs.offEnd(this._$endHandlers[onEndI].handler);
+	      this._$endHandlers.splice(onEndI, 1);
+	    }
+	  },
+	  _handleSubAny: function (event) {
+	    if (event.type === VALUE) {
+	      this._emitValue(event.value);
+	    } else if (event.type === ERROR) {
+	      this._emitError(event.value);
+	    }
+	  },
+	  _removeQueue: function (obs) {
+	    var index = find(this._queue, obs);
+	    this._queue = remove(this._queue, index);
+	    return index;
+	  },
+	  _removeCur: function (obs) {
+	    if (this._active) {
+	      this._unsubscribe(obs);
+	    }
+	    var index = find(this._curSources, obs);
+	    this._curSources = remove(this._curSources, index);
+	    if (index !== -1) {
+	      if (this._queue.length !== 0) {
+	        this._pullQueue();
+	      } else if (this._curSources.length === 0) {
+	        this._onEmpty();
+	      }
+	    }
+	    return index;
+	  },
+	  _removeOldest: function () {
+	    this._removeCur(this._curSources[0]);
+	  },
+	  _pullQueue: function () {
+	    if (this._queue.length !== 0) {
+	      this._queue = cloneArray(this._queue);
+	      this._addToCur(this._queue.shift());
+	    }
+	  },
+	  _onActivation: function () {
+	    for (var i = 0, sources = this._curSources; i < sources.length && this._active; i++) {
+	      this._subscribe(sources[i]);
+	    }
+	  },
+	  _onDeactivation: function () {
+	    for (var i = 0, sources = this._curSources; i < sources.length; i++) {
+	      this._unsubscribe(sources[i]);
+	    }
+	    if (this._currentlyAdding !== null) {
+	      this._unsubscribe(this._currentlyAdding);
+	    }
+	  },
+	  _isEmpty: function () {
+	    return this._curSources.length === 0;
+	  },
+	  _onEmpty: function () {},
+	  _clear: function () {
+	    Stream.prototype._clear.call(this);
+	    this._queue = null;
+	    this._curSources = null;
+	    this._$handleSubAny = null;
+	    this._$endHandlers = null;
+	  }
+	});
+
+	function Merge(sources) {
+	  AbstractPool.call(this);
+	  this._addAll(sources);
+	  this._initialised = true;
+	}
+
+	inherit(Merge, AbstractPool, {
+
+	  _name: 'merge',
+
+	  _onEmpty: function () {
+	    if (this._initialised) {
+	      this._emitEnd();
+	    }
+	  }
+	});
+
+	function merge(observables) {
+	  return observables.length === 0 ? never() : new Merge(observables);
+	}
+
+	function S$33(generator) {
+	  var _this = this;
+
+	  Stream.call(this);
+	  this._generator = generator;
+	  this._source = null;
+	  this._inLoop = false;
+	  this._iteration = 0;
+	  this._$handleAny = function (event) {
+	    return _this._handleAny(event);
+	  };
+	}
+
+	inherit(S$33, Stream, {
+
+	  _name: 'repeat',
+
+	  _handleAny: function (event) {
+	    if (event.type === END) {
+	      this._source = null;
+	      this._getSource();
+	    } else {
+	      this._emit(event.type, event.value);
+	    }
+	  },
+	  _getSource: function () {
+	    if (!this._inLoop) {
+	      this._inLoop = true;
+	      var generator = this._generator;
+	      while (this._source === null && this._alive && this._active) {
+	        this._source = generator(this._iteration++);
+	        if (this._source) {
+	          this._source.onAny(this._$handleAny);
+	        } else {
+	          this._emitEnd();
+	        }
+	      }
+	      this._inLoop = false;
+	    }
+	  },
+	  _onActivation: function () {
+	    if (this._source) {
+	      this._source.onAny(this._$handleAny);
+	    } else {
+	      this._getSource();
+	    }
+	  },
+	  _onDeactivation: function () {
+	    if (this._source) {
+	      this._source.offAny(this._$handleAny);
+	    }
+	  },
+	  _clear: function () {
+	    Stream.prototype._clear.call(this);
+	    this._generator = null;
+	    this._source = null;
+	    this._$handleAny = null;
+	  }
+	});
+
+	function repeat (generator) {
+	  return new S$33(generator);
+	}
+
+	function concat$1(observables) {
+	  return repeat(function (index) {
+	    return observables.length > index ? observables[index] : false;
+	  }).setName('concat');
+	}
+
+	function Pool() {
+	  AbstractPool.call(this);
+	}
+
+	inherit(Pool, AbstractPool, {
+
+	  _name: 'pool',
+
+	  plug: function (obs) {
+	    this._add(obs);
+	    return this;
+	  },
+	  unplug: function (obs) {
+	    this._remove(obs);
+	    return this;
+	  }
+	});
+
+	function FlatMap(source, fn, options) {
+	  var _this = this;
+
+	  AbstractPool.call(this, options);
+	  this._source = source;
+	  this._fn = fn;
+	  this._mainEnded = false;
+	  this._lastCurrent = null;
+	  this._$handleMain = function (event) {
+	    return _this._handleMain(event);
+	  };
+	}
+
+	inherit(FlatMap, AbstractPool, {
+	  _onActivation: function () {
+	    AbstractPool.prototype._onActivation.call(this);
+	    if (this._active) {
+	      this._source.onAny(this._$handleMain);
+	    }
+	  },
+	  _onDeactivation: function () {
+	    AbstractPool.prototype._onDeactivation.call(this);
+	    this._source.offAny(this._$handleMain);
+	    this._hadNoEvSinceDeact = true;
+	  },
+	  _handleMain: function (event) {
+
+	    if (event.type === VALUE) {
+	      // Is latest value before deactivation survived, and now is 'current' on this activation?
+	      // We don't want to handle such values, to prevent to constantly add
+	      // same observale on each activation/deactivation when our main source
+	      // is a `Kefir.conatant()` for example.
+	      var sameCurr = this._activating && this._hadNoEvSinceDeact && this._lastCurrent === event.value;
+	      if (!sameCurr) {
+	        this._add(event.value, this._fn);
+	      }
+	      this._lastCurrent = event.value;
+	      this._hadNoEvSinceDeact = false;
+	    }
+
+	    if (event.type === ERROR) {
+	      this._emitError(event.value);
+	    }
+
+	    if (event.type === END) {
+	      if (this._isEmpty()) {
+	        this._emitEnd();
+	      } else {
+	        this._mainEnded = true;
+	      }
+	    }
+	  },
+	  _onEmpty: function () {
+	    if (this._mainEnded) {
+	      this._emitEnd();
+	    }
+	  },
+	  _clear: function () {
+	    AbstractPool.prototype._clear.call(this);
+	    this._source = null;
+	    this._lastCurrent = null;
+	    this._$handleMain = null;
+	  }
+	});
+
+	function FlatMapErrors(source, fn) {
+	  FlatMap.call(this, source, fn);
+	}
+
+	inherit(FlatMapErrors, FlatMap, {
+
+	  // Same as in FlatMap, only VALUE/ERROR flipped
+	  _handleMain: function (event) {
+
+	    if (event.type === ERROR) {
+	      var sameCurr = this._activating && this._hadNoEvSinceDeact && this._lastCurrent === event.value;
+	      if (!sameCurr) {
+	        this._add(event.value, this._fn);
+	      }
+	      this._lastCurrent = event.value;
+	      this._hadNoEvSinceDeact = false;
+	    }
+
+	    if (event.type === VALUE) {
+	      this._emitValue(event.value);
+	    }
+
+	    if (event.type === END) {
+	      if (this._isEmpty()) {
+	        this._emitEnd();
+	      } else {
+	        this._mainEnded = true;
+	      }
+	    }
+	  }
+	});
+
+	function createConstructor$1(BaseClass, name) {
+	  return function AnonymousObservable(primary, secondary, options) {
+	    var _this = this;
+
+	    BaseClass.call(this);
+	    this._primary = primary;
+	    this._secondary = secondary;
+	    this._name = primary._name + '.' + name;
+	    this._lastSecondary = NOTHING;
+	    this._$handleSecondaryAny = function (event) {
+	      return _this._handleSecondaryAny(event);
+	    };
+	    this._$handlePrimaryAny = function (event) {
+	      return _this._handlePrimaryAny(event);
+	    };
+	    this._init(options);
+	  };
+	}
+
+	function createClassMethods$1(BaseClass) {
+	  return {
+	    _init: function () {},
+	    _free: function () {},
+	    _handlePrimaryValue: function (x) {
+	      this._emitValue(x);
+	    },
+	    _handlePrimaryError: function (x) {
+	      this._emitError(x);
+	    },
+	    _handlePrimaryEnd: function () {
+	      this._emitEnd();
+	    },
+	    _handleSecondaryValue: function (x) {
+	      this._lastSecondary = x;
+	    },
+	    _handleSecondaryError: function (x) {
+	      this._emitError(x);
+	    },
+	    _handleSecondaryEnd: function () {},
+	    _handlePrimaryAny: function (event) {
+	      switch (event.type) {
+	        case VALUE:
+	          return this._handlePrimaryValue(event.value);
+	        case ERROR:
+	          return this._handlePrimaryError(event.value);
+	        case END:
+	          return this._handlePrimaryEnd(event.value);
+	      }
+	    },
+	    _handleSecondaryAny: function (event) {
+	      switch (event.type) {
+	        case VALUE:
+	          return this._handleSecondaryValue(event.value);
+	        case ERROR:
+	          return this._handleSecondaryError(event.value);
+	        case END:
+	          this._handleSecondaryEnd(event.value);
+	          this._removeSecondary();
+	      }
+	    },
+	    _removeSecondary: function () {
+	      if (this._secondary !== null) {
+	        this._secondary.offAny(this._$handleSecondaryAny);
+	        this._$handleSecondaryAny = null;
+	        this._secondary = null;
+	      }
+	    },
+	    _onActivation: function () {
+	      if (this._secondary !== null) {
+	        this._secondary.onAny(this._$handleSecondaryAny);
+	      }
+	      if (this._active) {
+	        this._primary.onAny(this._$handlePrimaryAny);
+	      }
+	    },
+	    _onDeactivation: function () {
+	      if (this._secondary !== null) {
+	        this._secondary.offAny(this._$handleSecondaryAny);
+	      }
+	      this._primary.offAny(this._$handlePrimaryAny);
+	    },
+	    _clear: function () {
+	      BaseClass.prototype._clear.call(this);
+	      this._primary = null;
+	      this._secondary = null;
+	      this._lastSecondary = null;
+	      this._$handleSecondaryAny = null;
+	      this._$handlePrimaryAny = null;
+	      this._free();
+	    }
+	  };
+	}
+
+	function createStream$1(name, mixin) {
+	  var S = createConstructor$1(Stream, name);
+	  inherit(S, Stream, createClassMethods$1(Stream), mixin);
+	  return S;
+	}
+
+	function createProperty$1(name, mixin) {
+	  var P = createConstructor$1(Property, name);
+	  inherit(P, Property, createClassMethods$1(Property), mixin);
+	  return P;
+	}
+
+	var mixin$26 = {
+	  _handlePrimaryValue: function (x) {
+	    if (this._lastSecondary !== NOTHING && this._lastSecondary) {
+	      this._emitValue(x);
+	    }
+	  },
+	  _handleSecondaryEnd: function () {
+	    if (this._lastSecondary === NOTHING || !this._lastSecondary) {
+	      this._emitEnd();
+	    }
+	  }
+	};
+
+	var S$34 = createStream$1('filterBy', mixin$26);
+	var P$29 = createProperty$1('filterBy', mixin$26);
+
+	function filterBy(primary, secondary) {
+	  return new (primary._ofSameType(S$34, P$29))(primary, secondary);
+	}
+
+	var id2 = function (_, x) {
+	  return x;
+	};
+
+	function sampledBy(passive, active, combinator) {
+	  var _combinator = combinator ? function (a, b) {
+	    return combinator(b, a);
+	  } : id2;
+	  return combine([active], [passive], _combinator).setName(passive, 'sampledBy');
+	}
+
+	var mixin$27 = {
+	  _handlePrimaryValue: function (x) {
+	    if (this._lastSecondary !== NOTHING) {
+	      this._emitValue(x);
+	    }
+	  },
+	  _handleSecondaryEnd: function () {
+	    if (this._lastSecondary === NOTHING) {
+	      this._emitEnd();
+	    }
+	  }
+	};
+
+	var S$35 = createStream$1('skipUntilBy', mixin$27);
+	var P$30 = createProperty$1('skipUntilBy', mixin$27);
+
+	function skipUntilBy(primary, secondary) {
+	  return new (primary._ofSameType(S$35, P$30))(primary, secondary);
+	}
+
+	var mixin$28 = {
+	  _handleSecondaryValue: function () {
+	    this._emitEnd();
+	  }
+	};
+
+	var S$36 = createStream$1('takeUntilBy', mixin$28);
+	var P$31 = createProperty$1('takeUntilBy', mixin$28);
+
+	function takeUntilBy(primary, secondary) {
+	  return new (primary._ofSameType(S$36, P$31))(primary, secondary);
+	}
+
+	var mixin$29 = {
+	  _init: function () {
+	    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+	        _ref$flushOnEnd = _ref.flushOnEnd,
+	        flushOnEnd = _ref$flushOnEnd === undefined ? true : _ref$flushOnEnd;
+
+	    this._buff = [];
+	    this._flushOnEnd = flushOnEnd;
+	  },
+	  _free: function () {
+	    this._buff = null;
+	  },
+	  _flush: function () {
+	    if (this._buff !== null) {
+	      this._emitValue(this._buff);
+	      this._buff = [];
+	    }
+	  },
+	  _handlePrimaryEnd: function () {
+	    if (this._flushOnEnd) {
+	      this._flush();
+	    }
+	    this._emitEnd();
+	  },
+	  _onActivation: function () {
+	    this._primary.onAny(this._$handlePrimaryAny);
+	    if (this._alive && this._secondary !== null) {
+	      this._secondary.onAny(this._$handleSecondaryAny);
+	    }
+	  },
+	  _handlePrimaryValue: function (x) {
+	    this._buff.push(x);
+	  },
+	  _handleSecondaryValue: function () {
+	    this._flush();
+	  },
+	  _handleSecondaryEnd: function () {
+	    if (!this._flushOnEnd) {
+	      this._emitEnd();
+	    }
+	  }
+	};
+
+	var S$37 = createStream$1('bufferBy', mixin$29);
+	var P$32 = createProperty$1('bufferBy', mixin$29);
+
+	function bufferBy(primary, secondary, options /* optional */) {
+	  return new (primary._ofSameType(S$37, P$32))(primary, secondary, options);
+	}
+
+	var mixin$30 = {
+	  _init: function () {
+	    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+	        _ref$flushOnEnd = _ref.flushOnEnd,
+	        flushOnEnd = _ref$flushOnEnd === undefined ? true : _ref$flushOnEnd,
+	        _ref$flushOnChange = _ref.flushOnChange,
+	        flushOnChange = _ref$flushOnChange === undefined ? false : _ref$flushOnChange;
+
+	    this._buff = [];
+	    this._flushOnEnd = flushOnEnd;
+	    this._flushOnChange = flushOnChange;
+	  },
+	  _free: function () {
+	    this._buff = null;
+	  },
+	  _flush: function () {
+	    if (this._buff !== null) {
+	      this._emitValue(this._buff);
+	      this._buff = [];
+	    }
+	  },
+	  _handlePrimaryEnd: function () {
+	    if (this._flushOnEnd) {
+	      this._flush();
+	    }
+	    this._emitEnd();
+	  },
+	  _handlePrimaryValue: function (x) {
+	    this._buff.push(x);
+	    if (this._lastSecondary !== NOTHING && !this._lastSecondary) {
+	      this._flush();
+	    }
+	  },
+	  _handleSecondaryEnd: function () {
+	    if (!this._flushOnEnd && (this._lastSecondary === NOTHING || this._lastSecondary)) {
+	      this._emitEnd();
+	    }
+	  },
+	  _handleSecondaryValue: function (x) {
+	    if (this._flushOnChange && !x) {
+	      this._flush();
+	    }
+
+	    // from default _handleSecondaryValue
+	    this._lastSecondary = x;
+	  }
+	};
+
+	var S$38 = createStream$1('bufferWhileBy', mixin$30);
+	var P$33 = createProperty$1('bufferWhileBy', mixin$30);
+
+	function bufferWhileBy(primary, secondary, options /* optional */) {
+	  return new (primary._ofSameType(S$38, P$33))(primary, secondary, options);
+	}
+
+	var f = function () {
+	  return false;
+	};
+	var t = function () {
+	  return true;
+	};
+
+	function awaiting(a, b) {
+	  var result = merge([map$1(a, t), map$1(b, f)]);
+	  result = skipDuplicates(result);
+	  result = toProperty(result, f);
+	  return result.setName(a, 'awaiting');
+	}
+
+	var mixin$31 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _handleValue: function (x) {
+	    var fn = this._fn;
+	    var result = fn(x);
+	    if (result.convert) {
+	      this._emitError(result.error);
+	    } else {
+	      this._emitValue(x);
+	    }
+	  }
+	};
+
+	var S$39 = createStream('valuesToErrors', mixin$31);
+	var P$34 = createProperty('valuesToErrors', mixin$31);
+
+	var defFn = function (x) {
+	  return { convert: true, error: x };
+	};
+
+	function valuesToErrors(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defFn;
+
+	  return new (obs._ofSameType(S$39, P$34))(obs, { fn: fn });
+	}
+
+	var mixin$32 = {
+	  _init: function (_ref) {
+	    var fn = _ref.fn;
+
+	    this._fn = fn;
+	  },
+	  _free: function () {
+	    this._fn = null;
+	  },
+	  _handleError: function (x) {
+	    var fn = this._fn;
+	    var result = fn(x);
+	    if (result.convert) {
+	      this._emitValue(result.value);
+	    } else {
+	      this._emitError(x);
+	    }
+	  }
+	};
+
+	var S$40 = createStream('errorsToValues', mixin$32);
+	var P$35 = createProperty('errorsToValues', mixin$32);
+
+	var defFn$1 = function (x) {
+	  return { convert: true, value: x };
+	};
+
+	function errorsToValues(obs) {
+	  var fn = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : defFn$1;
+
+	  return new (obs._ofSameType(S$40, P$35))(obs, { fn: fn });
+	}
+
+	var mixin$33 = {
+	  _handleError: function (x) {
+	    this._emitError(x);
+	    this._emitEnd();
+	  }
+	};
+
+	var S$41 = createStream('endOnError', mixin$33);
+	var P$36 = createProperty('endOnError', mixin$33);
+
+	function endOnError(obs) {
+	  return new (obs._ofSameType(S$41, P$36))(obs);
+	}
+
+	Observable.prototype.toProperty = function (fn) {
+	  return toProperty(this, fn);
+	};
+
+	Observable.prototype.changes = function () {
+	  return changes(this);
+	};
+
+	Observable.prototype.toPromise = function (Promise) {
+	  return toPromise(this, Promise);
+	};
+
+	Observable.prototype.toESObservable = toESObservable;
+	Observable.prototype[$$observable] = toESObservable;
+
+	Observable.prototype.map = function (fn) {
+	  return map$1(this, fn);
+	};
+
+	Observable.prototype.filter = function (fn) {
+	  return filter(this, fn);
+	};
+
+	Observable.prototype.take = function (n) {
+	  return take(this, n);
+	};
+
+	Observable.prototype.takeErrors = function (n) {
+	  return takeErrors(this, n);
+	};
+
+	Observable.prototype.takeWhile = function (fn) {
+	  return takeWhile(this, fn);
+	};
+
+	Observable.prototype.last = function () {
+	  return last(this);
+	};
+
+	Observable.prototype.skip = function (n) {
+	  return skip(this, n);
+	};
+
+	Observable.prototype.skipWhile = function (fn) {
+	  return skipWhile(this, fn);
+	};
+
+	Observable.prototype.skipDuplicates = function (fn) {
+	  return skipDuplicates(this, fn);
+	};
+
+	Observable.prototype.diff = function (fn, seed) {
+	  return diff(this, fn, seed);
+	};
+
+	Observable.prototype.scan = function (fn, seed) {
+	  return scan(this, fn, seed);
+	};
+
+	Observable.prototype.flatten = function (fn) {
+	  return flatten(this, fn);
+	};
+
+	Observable.prototype.delay = function (wait) {
+	  return delay(this, wait);
+	};
+
+	Observable.prototype.throttle = function (wait, options) {
+	  return throttle(this, wait, options);
+	};
+
+	Observable.prototype.debounce = function (wait, options) {
+	  return debounce(this, wait, options);
+	};
+
+	Observable.prototype.mapErrors = function (fn) {
+	  return mapErrors(this, fn);
+	};
+
+	Observable.prototype.filterErrors = function (fn) {
+	  return filterErrors(this, fn);
+	};
+
+	Observable.prototype.ignoreValues = function () {
+	  return ignoreValues(this);
+	};
+
+	Observable.prototype.ignoreErrors = function () {
+	  return ignoreErrors(this);
+	};
+
+	Observable.prototype.ignoreEnd = function () {
+	  return ignoreEnd(this);
+	};
+
+	Observable.prototype.beforeEnd = function (fn) {
+	  return beforeEnd(this, fn);
+	};
+
+	Observable.prototype.slidingWindow = function (max, min) {
+	  return slidingWindow(this, max, min);
+	};
+
+	Observable.prototype.bufferWhile = function (fn, options) {
+	  return bufferWhile(this, fn, options);
+	};
+
+	Observable.prototype.bufferWithCount = function (count, options) {
+	  return bufferWhile$1(this, count, options);
+	};
+
+	Observable.prototype.bufferWithTimeOrCount = function (wait, count, options) {
+	  return bufferWithTimeOrCount(this, wait, count, options);
+	};
+
+	Observable.prototype.transduce = function (transducer) {
+	  return transduce(this, transducer);
+	};
+
+	Observable.prototype.withHandler = function (fn) {
+	  return withHandler(this, fn);
+	};
+
+	Observable.prototype.combine = function (other, combinator) {
+	  return combine([this, other], combinator);
+	};
+
+	Observable.prototype.zip = function (other, combinator) {
+	  return zip([this, other], combinator);
+	};
+
+	Observable.prototype.merge = function (other) {
+	  return merge([this, other]);
+	};
+
+	Observable.prototype.concat = function (other) {
+	  return concat$1([this, other]);
+	};
+
+	var pool = function () {
+	  return new Pool();
+	};
+
+	Observable.prototype.flatMap = function (fn) {
+	  return new FlatMap(this, fn).setName(this, 'flatMap');
+	};
+	Observable.prototype.flatMapLatest = function (fn) {
+	  return new FlatMap(this, fn, { concurLim: 1, drop: 'old' }).setName(this, 'flatMapLatest');
+	};
+	Observable.prototype.flatMapFirst = function (fn) {
+	  return new FlatMap(this, fn, { concurLim: 1 }).setName(this, 'flatMapFirst');
+	};
+	Observable.prototype.flatMapConcat = function (fn) {
+	  return new FlatMap(this, fn, { queueLim: -1, concurLim: 1 }).setName(this, 'flatMapConcat');
+	};
+	Observable.prototype.flatMapConcurLimit = function (fn, limit) {
+	  return new FlatMap(this, fn, { queueLim: -1, concurLim: limit }).setName(this, 'flatMapConcurLimit');
+	};
+
+	Observable.prototype.flatMapErrors = function (fn) {
+	  return new FlatMapErrors(this, fn).setName(this, 'flatMapErrors');
+	};
+
+	Observable.prototype.filterBy = function (other) {
+	  return filterBy(this, other);
+	};
+
+	Observable.prototype.sampledBy = function (other, combinator) {
+	  return sampledBy(this, other, combinator);
+	};
+
+	Observable.prototype.skipUntilBy = function (other) {
+	  return skipUntilBy(this, other);
+	};
+
+	Observable.prototype.takeUntilBy = function (other) {
+	  return takeUntilBy(this, other);
+	};
+
+	Observable.prototype.bufferBy = function (other, options) {
+	  return bufferBy(this, other, options);
+	};
+
+	Observable.prototype.bufferWhileBy = function (other, options) {
+	  return bufferWhileBy(this, other, options);
+	};
+
+	// Deprecated
+	// -----------------------------------------------------------------------------
+
+	var DEPRECATION_WARNINGS = true;
+	function dissableDeprecationWarnings() {
+	  DEPRECATION_WARNINGS = false;
+	}
+
+	function warn(msg) {
+	  if (DEPRECATION_WARNINGS && console && typeof console.warn === 'function') {
+	    var msg2 = '\nHere is an Error object for you containing the call stack:';
+	    console.warn(msg, msg2, new Error());
+	  }
+	}
+
+	Observable.prototype.awaiting = function (other) {
+	  warn('You are using deprecated .awaiting() method, see https://github.com/rpominov/kefir/issues/145');
+	  return awaiting(this, other);
+	};
+
+	Observable.prototype.valuesToErrors = function (fn) {
+	  warn('You are using deprecated .valuesToErrors() method, see https://github.com/rpominov/kefir/issues/149');
+	  return valuesToErrors(this, fn);
+	};
+
+	Observable.prototype.errorsToValues = function (fn) {
+	  warn('You are using deprecated .errorsToValues() method, see https://github.com/rpominov/kefir/issues/149');
+	  return errorsToValues(this, fn);
+	};
+
+	Observable.prototype.endOnError = function () {
+	  warn('You are using deprecated .endOnError() method, see https://github.com/rpominov/kefir/issues/150');
+	  return endOnError(this);
+	};
+
+	// Exports
+	// --------------------------------------------------------------------------
+
+	var Kefir = { Observable: Observable, Stream: Stream, Property: Property, never: never, later: later, interval: interval, sequentially: sequentially,
+	  fromPoll: fromPoll, withInterval: withInterval, fromCallback: fromCallback, fromNodeCallback: fromNodeCallback, fromEvents: fromEvents, stream: stream,
+	  constant: constant, constantError: constantError, fromPromise: fromPromise, fromESObservable: fromESObservable, combine: combine, zip: zip, merge: merge,
+	  concat: concat$1, Pool: Pool, pool: pool, repeat: repeat, staticLand: staticLand };
+
+	Kefir.Kefir = Kefir;
+
+	exports.dissableDeprecationWarnings = dissableDeprecationWarnings;
+	exports.Kefir = Kefir;
+	exports.Observable = Observable;
+	exports.Stream = Stream;
+	exports.Property = Property;
+	exports.never = never;
+	exports.later = later;
+	exports.interval = interval;
+	exports.sequentially = sequentially;
+	exports.fromPoll = fromPoll;
+	exports.withInterval = withInterval;
+	exports.fromCallback = fromCallback;
+	exports.fromNodeCallback = fromNodeCallback;
+	exports.fromEvents = fromEvents;
+	exports.stream = stream;
+	exports.constant = constant;
+	exports.constantError = constantError;
+	exports.fromPromise = fromPromise;
+	exports.fromESObservable = fromESObservable;
+	exports.combine = combine;
+	exports.zip = zip;
+	exports.merge = merge;
+	exports.concat = concat$1;
+	exports.Pool = Pool;
+	exports.pool = pool;
+	exports.repeat = repeat;
+	exports.staticLand = staticLand;
+	exports['default'] = Kefir;
+
+	Object.defineProperty(exports, '__esModule', { value: true });
+
+}));
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
+
+/***/ }),
+/* 555 */
 /***/ (function(module, exports) {
 
 /**
@@ -71929,7 +75727,7 @@ function plural(ms, n, name) {
 
 
 /***/ }),
-/* 554 */
+/* 556 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -71948,7 +75746,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 555 */
+/* 557 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -71958,7 +75756,7 @@ module.exports = {
 
 var asn1 = __webpack_require__(77)
 
-exports.certificate = __webpack_require__(556)
+exports.certificate = __webpack_require__(558)
 
 var RSAPrivateKey = asn1.define('RSAPrivateKey', function () {
   this.seq().obj(
@@ -72077,7 +75875,7 @@ exports.signature = asn1.define('signature', function () {
 
 
 /***/ }),
-/* 556 */
+/* 558 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72172,14 +75970,14 @@ module.exports = X509Certificate
 
 
 /***/ }),
-/* 557 */
+/* 559 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {// adapted from https://github.com/apatil/pemstrip
 var findProc = /Proc-Type: 4,ENCRYPTED\n\r?DEK-Info: AES-((?:128)|(?:192)|(?:256))-CBC,([0-9A-H]+)\n\r?\n\r?([0-9A-z\n\r\+\/\=]+)\n\r?/m
 var startRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----\n/m
 var fullRegex = /^-----BEGIN ((?:.* KEY)|CERTIFICATE)-----\n\r?([0-9A-z\n\r\+\/\=]+)\n\r?-----END \1-----$/m
-var evp = __webpack_require__(108)
+var evp = __webpack_require__(109)
 var ciphers = __webpack_require__(130)
 module.exports = function (okey, password) {
   var key = okey.toString()
@@ -72209,7 +76007,7 @@ module.exports = function (okey, password) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 558 */
+/* 560 */
 /***/ (function(module, exports) {
 
 var MAX_ALLOC = Math.pow(2, 30) - 1 // default in iojs
@@ -72233,7 +76031,7 @@ module.exports = function (iterations, keylen) {
 
 
 /***/ }),
-/* 559 */
+/* 561 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -72241,13 +76039,13 @@ module.exports = function (iterations, keylen) {
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var Promise = _interopDefault(__webpack_require__(110));
+var Promise = _interopDefault(__webpack_require__(111));
 var pouchdbCollections = __webpack_require__(163);
-var pouchdbUtils = __webpack_require__(111);
+var pouchdbUtils = __webpack_require__(112);
 var pouchdbBinaryUtils = __webpack_require__(233);
 var pouchdbCollate = __webpack_require__(162);
 var pouchdbMd5 = __webpack_require__(234);
-var pouchdbMapreduceUtils = __webpack_require__(563);
+var pouchdbMapreduceUtils = __webpack_require__(565);
 
 /*
  * Simple task queue to sequentialize actions. Assumes
@@ -73259,7 +77057,7 @@ module.exports = createAbstractMapReduce;
 
 
 /***/ }),
-/* 560 */
+/* 562 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -73272,9 +77070,9 @@ var getArguments = _interopDefault(__webpack_require__(129));
 var events = __webpack_require__(84);
 var inherits = _interopDefault(__webpack_require__(5));
 var nextTick = _interopDefault(__webpack_require__(161));
-var debug = _interopDefault(__webpack_require__(519));
+var debug = _interopDefault(__webpack_require__(520));
 var Md5 = _interopDefault(__webpack_require__(300));
-var vuvuzela = _interopDefault(__webpack_require__(783));
+var vuvuzela = _interopDefault(__webpack_require__(785));
 
 /* istanbul ignore next */
 var PouchPromise$1 = typeof Promise === 'function' ? Promise : lie;
@@ -85385,10 +89183,10 @@ PouchDB$3.plugin(IDBPouch)
 
 module.exports = PouchDB$3;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
 
 /***/ }),
-/* 561 */
+/* 563 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -85520,7 +89318,7 @@ exports.generateErrorFromResponse = generateErrorFromResponse;
 
 
 /***/ }),
-/* 562 */
+/* 564 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -85528,10 +89326,10 @@ exports.generateErrorFromResponse = generateErrorFromResponse;
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
-var pouchdbUtils = __webpack_require__(111);
-var Promise = _interopDefault(__webpack_require__(110));
-var pouchdbSelectorCore = __webpack_require__(564);
-var abstractMapReduce = _interopDefault(__webpack_require__(559));
+var pouchdbUtils = __webpack_require__(112);
+var Promise = _interopDefault(__webpack_require__(111));
+var pouchdbSelectorCore = __webpack_require__(566);
+var abstractMapReduce = _interopDefault(__webpack_require__(561));
 var pouchdbCollate = __webpack_require__(162);
 var pouchdbMd5 = __webpack_require__(234);
 
@@ -86817,7 +90615,7 @@ module.exports = plugin;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(50)))
 
 /***/ }),
-/* 563 */
+/* 565 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -86829,7 +90627,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var pouchdbCollections = __webpack_require__(163);
 var argsarray = _interopDefault(__webpack_require__(129));
-var pouchdbUtils = __webpack_require__(111);
+var pouchdbUtils = __webpack_require__(112);
 var inherits = _interopDefault(__webpack_require__(5));
 
 function QueryParseError(message) {
@@ -86950,7 +90748,7 @@ exports.BuiltInError = BuiltInError;
 
 
 /***/ }),
-/* 564 */
+/* 566 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -86958,7 +90756,7 @@ exports.BuiltInError = BuiltInError;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var pouchdbUtils = __webpack_require__(111);
+var pouchdbUtils = __webpack_require__(112);
 var pouchdbCollate = __webpack_require__(162);
 
 // this would just be "return doc[field]", but fields
@@ -87515,13 +91313,13 @@ exports.parseField = parseField;
 
 
 /***/ }),
-/* 565 */
+/* 567 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var PouchPromise = __webpack_require__(110);
+var PouchPromise = __webpack_require__(111);
 
 // this is essentially the "update sugar" function from daleharvey/pouchdb#1388
 // the diffFun tells us what delta to apply to the doc.  it either returns
@@ -87616,11 +91414,11 @@ if (typeof window !== 'undefined' && window.PouchDB) {
 
 
 /***/ }),
-/* 566 */
+/* 568 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.publicEncrypt = __webpack_require__(568);
-exports.privateDecrypt = __webpack_require__(567);
+exports.publicEncrypt = __webpack_require__(570);
+exports.privateDecrypt = __webpack_require__(569);
 
 exports.privateEncrypt = function privateEncrypt(key, buf) {
   return exports.publicEncrypt(key, buf, true);
@@ -87631,10 +91429,10 @@ exports.publicDecrypt = function publicDecrypt(key, buf) {
 };
 
 /***/ }),
-/* 567 */
+/* 569 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(109);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(110);
 var mgf = __webpack_require__(235);
 var xor = __webpack_require__(237);
 var bn = __webpack_require__(13);
@@ -87745,10 +91543,10 @@ function compare(a, b){
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 568 */
+/* 570 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(109);
+/* WEBPACK VAR INJECTION */(function(Buffer) {var parseKeys = __webpack_require__(110);
 var randomBytes = __webpack_require__(92);
 var createHash = __webpack_require__(73);
 var mgf = __webpack_require__(235);
@@ -87846,7 +91644,7 @@ function nonZero(len, crypto) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 569 */
+/* 571 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var always = __webpack_require__(74);
@@ -87871,7 +91669,7 @@ module.exports = always(false);
 
 
 /***/ }),
-/* 570 */
+/* 572 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var always = __webpack_require__(74);
@@ -87896,7 +91694,7 @@ module.exports = always(true);
 
 
 /***/ }),
-/* 571 */
+/* 573 */
 /***/ (function(module, exports) {
 
 /**
@@ -87929,10 +91727,10 @@ module.exports = {'@@functional/placeholder': true};
 
 
 /***/ }),
-/* 572 */
+/* 574 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _curry1 = __webpack_require__(2);
 var curryN = __webpack_require__(18);
 
@@ -87978,12 +91776,12 @@ module.exports = _curry1(function addIndex(fn) {
 
 
 /***/ }),
-/* 573 */
+/* 575 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xall = __webpack_require__(644);
+var _xall = __webpack_require__(646);
 
 
 /**
@@ -88023,7 +91821,7 @@ module.exports = _curry2(_dispatchable(['all'], _xall, function all(fn, list) {
 
 
 /***/ }),
-/* 574 */
+/* 576 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -88074,7 +91872,7 @@ module.exports = _curry1(function allPass(preds) {
 
 
 /***/ }),
-/* 575 */
+/* 577 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -88126,13 +91924,13 @@ module.exports = _curry1(function anyPass(preds) {
 
 
 /***/ }),
-/* 576 */
+/* 578 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _aperture = __webpack_require__(627);
+var _aperture = __webpack_require__(629);
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xaperture = __webpack_require__(645);
+var _xaperture = __webpack_require__(647);
 
 
 /**
@@ -88160,10 +91958,10 @@ module.exports = _curry2(_dispatchable([], _xaperture, _aperture));
 
 
 /***/ }),
-/* 577 */
+/* 579 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _curry2 = __webpack_require__(0);
 
 
@@ -88193,7 +91991,7 @@ module.exports = _curry2(function append(el, list) {
 
 
 /***/ }),
-/* 578 */
+/* 580 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -88243,7 +92041,7 @@ module.exports = _curry1(function applySpec(spec) {
 
 
 /***/ }),
-/* 579 */
+/* 581 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -88278,11 +92076,11 @@ module.exports = _curry3(function ascend(fn, a, b) {
 
 
 /***/ }),
-/* 580 */
+/* 582 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var nAry = __webpack_require__(123);
+var nAry = __webpack_require__(124);
 
 
 /**
@@ -88318,13 +92116,13 @@ module.exports = _curry1(function binary(fn) {
 
 
 /***/ }),
-/* 581 */
+/* 583 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var _isFunction = __webpack_require__(117);
+var _isFunction = __webpack_require__(118);
 var and = __webpack_require__(239);
-var lift = __webpack_require__(122);
+var lift = __webpack_require__(123);
 
 
 /**
@@ -88365,10 +92163,10 @@ module.exports = _curry2(function both(f, g) {
 
 
 /***/ }),
-/* 582 */
+/* 584 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var curry = __webpack_require__(114);
+var curry = __webpack_require__(115);
 
 
 /**
@@ -88408,7 +92206,7 @@ module.exports = curry(function call(fn) {
 
 
 /***/ }),
-/* 583 */
+/* 585 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -88444,7 +92242,7 @@ module.exports = _curry3(function clamp(min, max, value) {
 
 
 /***/ }),
-/* 584 */
+/* 586 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _clone = __webpack_require__(255);
@@ -88480,7 +92278,7 @@ module.exports = _curry1(function clone(value) {
 
 
 /***/ }),
-/* 585 */
+/* 587 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -88514,10 +92312,10 @@ module.exports = _curry1(function comparator(pred) {
 
 
 /***/ }),
-/* 586 */
+/* 588 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var lift = __webpack_require__(122);
+var lift = __webpack_require__(123);
 var not = __webpack_require__(277);
 
 
@@ -88547,11 +92345,11 @@ module.exports = lift(not);
 
 
 /***/ }),
-/* 587 */
+/* 589 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var pipeP = __webpack_require__(283);
-var reverse = __webpack_require__(126);
+var reverse = __webpack_require__(127);
 
 
 /**
@@ -88597,7 +92395,7 @@ module.exports = function composeP() {
 
 
 /***/ }),
-/* 588 */
+/* 590 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
@@ -88650,7 +92448,7 @@ module.exports = _curry1(function cond(pairs) {
 
 
 /***/ }),
-/* 589 */
+/* 591 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -88694,7 +92492,7 @@ module.exports = _curry1(function construct(Fn) {
 
 
 /***/ }),
-/* 590 */
+/* 592 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
@@ -88725,10 +92523,10 @@ module.exports = _curry2(_contains);
 
 
 /***/ }),
-/* 591 */
+/* 593 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var reduceBy = __webpack_require__(124);
+var reduceBy = __webpack_require__(125);
 
 
 /**
@@ -88759,10 +92557,10 @@ module.exports = reduceBy(function(acc, elem) { return acc + 1; }, 0);
 
 
 /***/ }),
-/* 592 */
+/* 594 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var add = __webpack_require__(112);
+var add = __webpack_require__(113);
 
 
 /**
@@ -88784,7 +92582,7 @@ module.exports = add(-1);
 
 
 /***/ }),
-/* 593 */
+/* 595 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -88819,11 +92617,11 @@ module.exports = _curry3(function descend(fn, a, b) {
 
 
 /***/ }),
-/* 594 */
+/* 596 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var assoc = __webpack_require__(113);
+var assoc = __webpack_require__(114);
 var dissoc = __webpack_require__(250);
 
 
@@ -88860,7 +92658,7 @@ module.exports = _curry2(function dissocPath(path, obj) {
 
 
 /***/ }),
-/* 595 */
+/* 597 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -88892,13 +92690,13 @@ module.exports = _curry2(function divide(a, b) { return a / b; });
 
 
 /***/ }),
-/* 596 */
+/* 598 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _dropLast = __webpack_require__(629);
-var _xdropLast = __webpack_require__(648);
+var _dropLast = __webpack_require__(631);
+var _xdropLast = __webpack_require__(650);
 
 
 /**
@@ -88926,13 +92724,13 @@ module.exports = _curry2(_dispatchable([], _xdropLast, _dropLast));
 
 
 /***/ }),
-/* 597 */
+/* 599 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _dropLastWhile = __webpack_require__(630);
-var _xdropLastWhile = __webpack_require__(649);
+var _dropLastWhile = __webpack_require__(632);
+var _xdropLastWhile = __webpack_require__(651);
 
 
 /**
@@ -88961,7 +92759,7 @@ module.exports = _curry2(_dispatchable([], _xdropLastWhile, _dropLastWhile));
 
 
 /***/ }),
-/* 598 */
+/* 600 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -88993,12 +92791,12 @@ module.exports = _curry1(_dispatchable([], _xdropRepeatsWith(equals), dropRepeat
 
 
 /***/ }),
-/* 599 */
+/* 601 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xdropWhile = __webpack_require__(650);
+var _xdropWhile = __webpack_require__(652);
 
 
 /**
@@ -89037,12 +92835,12 @@ module.exports = _curry2(_dispatchable(['dropWhile'], _xdropWhile, function drop
 
 
 /***/ }),
-/* 600 */
+/* 602 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var _isFunction = __webpack_require__(117);
-var lift = __webpack_require__(122);
+var _isFunction = __webpack_require__(118);
+var lift = __webpack_require__(123);
 var or = __webpack_require__(279);
 
 
@@ -89083,7 +92881,7 @@ module.exports = _curry2(function either(f, g) {
 
 
 /***/ }),
-/* 601 */
+/* 603 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -89113,7 +92911,7 @@ module.exports = _curry3(function eqBy(f, x, y) {
 
 
 /***/ }),
-/* 602 */
+/* 604 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -89147,7 +92945,7 @@ module.exports = _curry3(function eqProps(prop, obj1, obj2) {
 
 
 /***/ }),
-/* 603 */
+/* 605 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89195,12 +92993,12 @@ module.exports = _curry2(function evolve(transformations, object) {
 
 
 /***/ }),
-/* 604 */
+/* 606 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xfind = __webpack_require__(652);
+var _xfind = __webpack_require__(654);
 
 
 /**
@@ -89240,12 +93038,12 @@ module.exports = _curry2(_dispatchable(['find'], _xfind, function find(fn, list)
 
 
 /***/ }),
-/* 605 */
+/* 607 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xfindIndex = __webpack_require__(653);
+var _xfindIndex = __webpack_require__(655);
 
 
 /**
@@ -89284,12 +93082,12 @@ module.exports = _curry2(_dispatchable([], _xfindIndex, function findIndex(fn, l
 
 
 /***/ }),
-/* 606 */
+/* 608 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xfindLast = __webpack_require__(654);
+var _xfindLast = __webpack_require__(656);
 
 
 /**
@@ -89326,12 +93124,12 @@ module.exports = _curry2(_dispatchable([], _xfindLast, function findLast(fn, lis
 
 
 /***/ }),
-/* 607 */
+/* 609 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xfindLastIndex = __webpack_require__(655);
+var _xfindLastIndex = __webpack_require__(657);
 
 
 /**
@@ -89369,7 +93167,7 @@ module.exports = _curry2(_dispatchable([], _xfindLastIndex, function findLastInd
 
 
 /***/ }),
-/* 608 */
+/* 610 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -89397,7 +93195,7 @@ module.exports = _curry1(_makeFlat(true));
 
 
 /***/ }),
-/* 609 */
+/* 611 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _checkForMethod = __webpack_require__(85);
@@ -89450,7 +93248,7 @@ module.exports = _curry2(_checkForMethod('forEach', function forEach(fn, list) {
 
 
 /***/ }),
-/* 610 */
+/* 612 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89492,7 +93290,7 @@ module.exports = _curry2(function forEachObjIndexed(fn, obj) {
 
 
 /***/ }),
-/* 611 */
+/* 613 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -89526,12 +93324,12 @@ module.exports = _curry1(function fromPairs(pairs) {
 
 
 /***/ }),
-/* 612 */
+/* 614 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _checkForMethod = __webpack_require__(85);
 var _curry2 = __webpack_require__(0);
-var reduceBy = __webpack_require__(124);
+var reduceBy = __webpack_require__(125);
 
 /**
  * Splits a list into sub-lists stored in an object, based on the result of
@@ -89583,7 +93381,7 @@ module.exports = _curry2(_checkForMethod('groupBy', reduceBy(function(acc, item)
 
 
 /***/ }),
-/* 613 */
+/* 615 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89631,7 +93429,7 @@ module.exports = _curry2(function(fn, list) {
 
 
 /***/ }),
-/* 614 */
+/* 616 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89662,7 +93460,7 @@ module.exports = _curry2(function gt(a, b) { return a > b; });
 
 
 /***/ }),
-/* 615 */
+/* 617 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89693,7 +93491,7 @@ module.exports = _curry2(function gte(a, b) { return a >= b; });
 
 
 /***/ }),
-/* 616 */
+/* 618 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89728,7 +93526,7 @@ module.exports = _curry2(_has);
 
 
 /***/ }),
-/* 617 */
+/* 619 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89766,7 +93564,7 @@ module.exports = _curry2(function hasIn(prop, obj) {
 
 
 /***/ }),
-/* 618 */
+/* 620 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var nth = __webpack_require__(88);
@@ -89797,7 +93595,7 @@ module.exports = nth(0);
 
 
 /***/ }),
-/* 619 */
+/* 621 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -89839,10 +93637,10 @@ module.exports = _curry3(function ifElse(condition, onTrue, onFalse) {
 
 
 /***/ }),
-/* 620 */
+/* 622 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var add = __webpack_require__(112);
+var add = __webpack_require__(113);
 
 
 /**
@@ -89864,10 +93662,10 @@ module.exports = add(1);
 
 
 /***/ }),
-/* 621 */
+/* 623 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var reduceBy = __webpack_require__(124);
+var reduceBy = __webpack_require__(125);
 
 
 /**
@@ -89896,7 +93694,7 @@ module.exports = reduceBy(function(acc, elem) { return elem; }, null);
 
 
 /***/ }),
-/* 622 */
+/* 624 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -89931,7 +93729,7 @@ module.exports = _curry2(function indexOf(target, xs) {
 
 
 /***/ }),
-/* 623 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var slice = __webpack_require__(65);
@@ -89965,7 +93763,7 @@ module.exports = slice(0, -1);
 
 
 /***/ }),
-/* 624 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -89998,7 +93796,7 @@ module.exports = _curry3(function insert(idx, elt, list) {
 
 
 /***/ }),
-/* 625 */
+/* 627 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -90031,7 +93829,7 @@ module.exports = _curry3(function insertAll(idx, elts, list) {
 
 
 /***/ }),
-/* 626 */
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
@@ -90208,7 +94006,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 627 */
+/* 629 */
 /***/ (function(module, exports) {
 
 module.exports = function _aperture(n, list) {
@@ -90224,7 +94022,7 @@ module.exports = function _aperture(n, list) {
 
 
 /***/ }),
-/* 628 */
+/* 630 */
 /***/ (function(module, exports) {
 
 module.exports = function _arrayFromIterator(iter) {
@@ -90238,7 +94036,7 @@ module.exports = function _arrayFromIterator(iter) {
 
 
 /***/ }),
-/* 629 */
+/* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var take = __webpack_require__(288);
@@ -90249,7 +94047,7 @@ module.exports = function dropLast(n, xs) {
 
 
 /***/ }),
-/* 630 */
+/* 632 */
 /***/ (function(module, exports) {
 
 module.exports = function dropLastWhile(pred, list) {
@@ -90262,11 +94060,11 @@ module.exports = function dropLastWhile(pred, list) {
 
 
 /***/ }),
-/* 631 */
+/* 633 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _arrayFromIterator = __webpack_require__(628);
-var _functionName = __webpack_require__(634);
+var _arrayFromIterator = __webpack_require__(630);
+var _functionName = __webpack_require__(636);
 var _has = __webpack_require__(21);
 var identical = __webpack_require__(254);
 var keys = __webpack_require__(41);
@@ -90377,10 +94175,10 @@ module.exports = function _equals(a, b, stackA, stackB) {
 
 
 /***/ }),
-/* 632 */
+/* 634 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _forceReduced = __webpack_require__(633);
+var _forceReduced = __webpack_require__(635);
 var _reduce = __webpack_require__(30);
 var _xfBase = __webpack_require__(15);
 var isArrayLike = __webpack_require__(87);
@@ -90415,7 +94213,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 633 */
+/* 635 */
 /***/ (function(module, exports) {
 
 module.exports = function _forceReduced(x) {
@@ -90427,7 +94225,7 @@ module.exports = function _forceReduced(x) {
 
 
 /***/ }),
-/* 634 */
+/* 636 */
 /***/ (function(module, exports) {
 
 module.exports = function _functionName(f) {
@@ -90438,7 +94236,7 @@ module.exports = function _functionName(f) {
 
 
 /***/ }),
-/* 635 */
+/* 637 */
 /***/ (function(module, exports) {
 
 module.exports = function _isRegExp(x) {
@@ -90447,7 +94245,7 @@ module.exports = function _isRegExp(x) {
 
 
 /***/ }),
-/* 636 */
+/* 638 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _has = __webpack_require__(21);
@@ -90477,14 +94275,14 @@ module.exports = function _objectAssign(target) {
 
 
 /***/ }),
-/* 637 */
+/* 639 */
 /***/ (function(module, exports) {
 
 module.exports = function _of(x) { return [x]; };
 
 
 /***/ }),
-/* 638 */
+/* 640 */
 /***/ (function(module, exports) {
 
 module.exports = function _pipe(f, g) {
@@ -90495,7 +94293,7 @@ module.exports = function _pipe(f, g) {
 
 
 /***/ }),
-/* 639 */
+/* 641 */
 /***/ (function(module, exports) {
 
 module.exports = function _pipeP(f, g) {
@@ -90509,7 +94307,7 @@ module.exports = function _pipeP(f, g) {
 
 
 /***/ }),
-/* 640 */
+/* 642 */
 /***/ (function(module, exports) {
 
 module.exports = function _quote(s) {
@@ -90528,7 +94326,7 @@ module.exports = function _quote(s) {
 
 
 /***/ }),
-/* 641 */
+/* 643 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _assign = __webpack_require__(171);
@@ -90582,7 +94380,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 642 */
+/* 644 */
 /***/ (function(module, exports) {
 
 /**
@@ -90610,15 +94408,15 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 643 */
+/* 645 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
-var _map = __webpack_require__(120);
-var _quote = __webpack_require__(640);
-var _toISOString = __webpack_require__(642);
+var _map = __webpack_require__(121);
+var _quote = __webpack_require__(642);
+var _toISOString = __webpack_require__(644);
 var keys = __webpack_require__(41);
-var reject = __webpack_require__(125);
+var reject = __webpack_require__(126);
 
 
 module.exports = function _toString(x, seen) {
@@ -90662,7 +94460,7 @@ module.exports = function _toString(x, seen) {
 
 
 /***/ }),
-/* 644 */
+/* 646 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90696,10 +94494,10 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 645 */
+/* 647 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _curry2 = __webpack_require__(0);
 var _xfBase = __webpack_require__(15);
 
@@ -90738,11 +94536,11 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 646 */
+/* 648 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
-var _flatCat = __webpack_require__(632);
+var _flatCat = __webpack_require__(634);
 var map = __webpack_require__(27);
 
 
@@ -90752,7 +94550,7 @@ module.exports = _curry2(function _xchain(f, xf) {
 
 
 /***/ }),
-/* 647 */
+/* 649 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90779,7 +94577,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 648 */
+/* 650 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90819,7 +94617,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 649 */
+/* 651 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90860,7 +94658,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 650 */
+/* 652 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90889,7 +94687,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 651 */
+/* 653 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90912,7 +94710,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 652 */
+/* 654 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90946,7 +94744,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 653 */
+/* 655 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -90982,7 +94780,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 654 */
+/* 656 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91010,7 +94808,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 655 */
+/* 657 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91041,7 +94839,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 656 */
+/* 658 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91064,10 +94862,10 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 657 */
+/* 659 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _curryN = __webpack_require__(116);
+var _curryN = __webpack_require__(117);
 var _has = __webpack_require__(21);
 var _xfBase = __webpack_require__(15);
 
@@ -91110,7 +94908,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 658 */
+/* 660 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91136,7 +94934,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 659 */
+/* 661 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91160,13 +94958,13 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 660 */
+/* 662 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
 var _curry2 = __webpack_require__(0);
 var _filter = __webpack_require__(259);
-var flip = __webpack_require__(115);
+var flip = __webpack_require__(116);
 var uniq = __webpack_require__(178);
 
 
@@ -91201,7 +94999,7 @@ module.exports = _curry2(function intersection(list1, list2) {
 
 
 /***/ }),
-/* 661 */
+/* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _containsWith = __webpack_require__(172);
@@ -91266,7 +95064,7 @@ module.exports = _curry3(function intersectionWith(pred, list1, list2) {
 
 
 /***/ }),
-/* 662 */
+/* 664 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _checkForMethod = __webpack_require__(85);
@@ -91307,14 +95105,14 @@ module.exports = _curry2(_checkForMethod('intersperse', function intersperse(sep
 
 
 /***/ }),
-/* 663 */
+/* 665 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _clone = __webpack_require__(255);
 var _curry3 = __webpack_require__(4);
 var _isTransformer = __webpack_require__(174);
 var _reduce = __webpack_require__(30);
-var _stepCat = __webpack_require__(641);
+var _stepCat = __webpack_require__(643);
 
 
 /**
@@ -91362,7 +95160,7 @@ module.exports = _curry3(function into(acc, xf, list) {
 
 
 /***/ }),
-/* 664 */
+/* 666 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91410,7 +95208,7 @@ module.exports = _curry1(function invert(obj) {
 
 
 /***/ }),
-/* 665 */
+/* 667 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91459,7 +95257,7 @@ module.exports = _curry1(function invertObj(obj) {
 
 
 /***/ }),
-/* 666 */
+/* 668 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91494,7 +95292,7 @@ module.exports = _curry1(function isEmpty(x) {
 
 
 /***/ }),
-/* 667 */
+/* 669 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91521,7 +95319,7 @@ module.exports = _curry1(function isNil(x) { return x == null; });
 
 
 /***/ }),
-/* 668 */
+/* 670 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var invoker = __webpack_require__(86);
@@ -91550,7 +95348,7 @@ module.exports = invoker(1, 'join');
 
 
 /***/ }),
-/* 669 */
+/* 671 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -91587,7 +95385,7 @@ module.exports = _curry1(function keysIn(obj) {
 
 
 /***/ }),
-/* 670 */
+/* 672 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91631,11 +95429,11 @@ module.exports = _curry2(function lastIndexOf(target, xs) {
 
 
 /***/ }),
-/* 671 */
+/* 673 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var lens = __webpack_require__(121);
+var lens = __webpack_require__(122);
 var nth = __webpack_require__(88);
 var update = __webpack_require__(291);
 
@@ -91666,12 +95464,12 @@ module.exports = _curry1(function lensIndex(n) {
 
 
 /***/ }),
-/* 672 */
+/* 674 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
 var assocPath = __webpack_require__(242);
-var lens = __webpack_require__(121);
+var lens = __webpack_require__(122);
 var path = __webpack_require__(89);
 
 
@@ -91705,12 +95503,12 @@ module.exports = _curry1(function lensPath(p) {
 
 
 /***/ }),
-/* 673 */
+/* 675 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var assoc = __webpack_require__(113);
-var lens = __webpack_require__(121);
+var assoc = __webpack_require__(114);
+var lens = __webpack_require__(122);
 var prop = __webpack_require__(175);
 
 
@@ -91740,7 +95538,7 @@ module.exports = _curry1(function lensProp(k) {
 
 
 /***/ }),
-/* 674 */
+/* 676 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91771,7 +95569,7 @@ module.exports = _curry2(function lt(a, b) { return a < b; });
 
 
 /***/ }),
-/* 675 */
+/* 677 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91802,7 +95600,7 @@ module.exports = _curry2(function lte(a, b) { return a <= b; });
 
 
 /***/ }),
-/* 676 */
+/* 678 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -91857,7 +95655,7 @@ module.exports = _curry3(function mapAccum(fn, acc, list) {
 
 
 /***/ }),
-/* 677 */
+/* 679 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -91914,7 +95712,7 @@ module.exports = _curry3(function mapAccumRight(fn, acc, list) {
 
 
 /***/ }),
-/* 678 */
+/* 680 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91952,7 +95750,7 @@ module.exports = _curry2(function mapObjIndexed(fn, obj) {
 
 
 /***/ }),
-/* 679 */
+/* 681 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -91985,7 +95783,7 @@ module.exports = _curry2(function match(rx, str) {
 
 
 /***/ }),
-/* 680 */
+/* 682 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92032,7 +95830,7 @@ module.exports = _curry2(function mathMod(m, p) {
 
 
 /***/ }),
-/* 681 */
+/* 683 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92068,7 +95866,7 @@ module.exports = _curry3(function maxBy(f, a, b) {
 
 
 /***/ }),
-/* 682 */
+/* 684 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -92105,7 +95903,7 @@ module.exports = _curry1(function median(list) {
 
 
 /***/ }),
-/* 683 */
+/* 685 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
@@ -92153,7 +95951,7 @@ module.exports = _curry1(function memoize(fn) {
 
 
 /***/ }),
-/* 684 */
+/* 686 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _assign = __webpack_require__(171);
@@ -92189,7 +95987,7 @@ module.exports = _curry2(function merge(l, r) {
 
 
 /***/ }),
-/* 685 */
+/* 687 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _assign = __webpack_require__(171);
@@ -92219,7 +96017,7 @@ module.exports = _curry1(function mergeAll(list) {
 
 
 /***/ }),
-/* 686 */
+/* 688 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92258,7 +96056,7 @@ module.exports = _curry3(function mergeWith(fn, l, r) {
 
 
 /***/ }),
-/* 687 */
+/* 689 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92285,7 +96083,7 @@ module.exports = _curry2(function min(a, b) { return b < a ? b : a; });
 
 
 /***/ }),
-/* 688 */
+/* 690 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92321,7 +96119,7 @@ module.exports = _curry3(function minBy(f, a, b) {
 
 
 /***/ }),
-/* 689 */
+/* 691 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92356,7 +96154,7 @@ module.exports = _curry2(function modulo(a, b) { return a % b; });
 
 
 /***/ }),
-/* 690 */
+/* 692 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -92380,7 +96178,7 @@ module.exports = _curry1(function negate(n) { return -n; });
 
 
 /***/ }),
-/* 691 */
+/* 693 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _complement = __webpack_require__(257);
@@ -92416,7 +96214,7 @@ module.exports = _curry2(_complement(_dispatchable(['any'], _xany, any)));
 
 
 /***/ }),
-/* 692 */
+/* 694 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -92451,11 +96249,11 @@ module.exports = _curry1(function nthArg(n) {
 
 
 /***/ }),
-/* 693 */
+/* 695 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var _of = __webpack_require__(637);
+var _of = __webpack_require__(639);
 
 
 /**
@@ -92480,7 +96278,7 @@ module.exports = _curry1(_of);
 
 
 /***/ }),
-/* 694 */
+/* 696 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
@@ -92515,7 +96313,7 @@ module.exports = _curry2(function omit(names, obj) {
 
 
 /***/ }),
-/* 695 */
+/* 697 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
@@ -92556,7 +96354,7 @@ module.exports = _curry1(function once(fn) {
 
 
 /***/ }),
-/* 696 */
+/* 698 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92582,10 +96380,10 @@ module.exports = _curry2(function pair(fst, snd) { return [fst, snd]; });
 
 
 /***/ }),
-/* 697 */
+/* 699 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _createPartialApplicator = __webpack_require__(258);
 
 
@@ -92621,12 +96419,12 @@ module.exports = _createPartialApplicator(_concat);
 
 
 /***/ }),
-/* 698 */
+/* 700 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _createPartialApplicator = __webpack_require__(258);
-var flip = __webpack_require__(115);
+var flip = __webpack_require__(116);
 
 
 /**
@@ -92657,12 +96455,12 @@ module.exports = _createPartialApplicator(flip(_concat));
 
 
 /***/ }),
-/* 699 */
+/* 701 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var filter = __webpack_require__(169);
 var juxt = __webpack_require__(270);
-var reject = __webpack_require__(125);
+var reject = __webpack_require__(126);
 
 
 /**
@@ -92692,7 +96490,7 @@ module.exports = juxt([filter, reject]);
 
 
 /***/ }),
-/* 700 */
+/* 702 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92730,7 +96528,7 @@ module.exports = _curry3(function pathEq(_path, val, obj) {
 
 
 /***/ }),
-/* 701 */
+/* 703 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92763,7 +96561,7 @@ module.exports = _curry3(function pathOr(d, p, obj) {
 
 
 /***/ }),
-/* 702 */
+/* 704 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -92795,7 +96593,7 @@ module.exports = _curry3(function pathSatisfies(pred, propPath, obj) {
 
 
 /***/ }),
-/* 703 */
+/* 705 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92833,7 +96631,7 @@ module.exports = _curry2(function pick(names, obj) {
 
 
 /***/ }),
-/* 704 */
+/* 706 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -92871,11 +96669,11 @@ module.exports = _curry2(function pickBy(test, obj) {
 
 
 /***/ }),
-/* 705 */
+/* 707 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var composeK = __webpack_require__(244);
-var reverse = __webpack_require__(126);
+var reverse = __webpack_require__(127);
 
 /**
  * Returns the left-to-right Kleisli composition of the provided functions,
@@ -92920,7 +96718,7 @@ module.exports = function pipeK() {
 
 
 /***/ }),
-/* 706 */
+/* 708 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var multiply = __webpack_require__(276);
@@ -92946,10 +96744,10 @@ module.exports = reduce(multiply, 1);
 
 
 /***/ }),
-/* 707 */
+/* 709 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _map = __webpack_require__(120);
+var _map = __webpack_require__(121);
 var identity = __webpack_require__(170);
 var pickAll = __webpack_require__(281);
 var useWith = __webpack_require__(292);
@@ -92978,7 +96776,7 @@ module.exports = useWith(_map, [pickAll, identity]); // passing `identity` gives
 
 
 /***/ }),
-/* 708 */
+/* 710 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93015,7 +96813,7 @@ module.exports = _curry3(function propEq(name, val, obj) {
 
 
 /***/ }),
-/* 709 */
+/* 711 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93048,7 +96846,7 @@ module.exports = _curry3(function propIs(type, name, obj) {
 
 
 /***/ }),
-/* 710 */
+/* 712 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93087,7 +96885,7 @@ module.exports = _curry3(function propOr(val, p, obj) {
 
 
 /***/ }),
-/* 711 */
+/* 713 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93117,7 +96915,7 @@ module.exports = _curry3(function propSatisfies(pred, name, obj) {
 
 
 /***/ }),
-/* 712 */
+/* 714 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93158,7 +96956,7 @@ module.exports = _curry2(function props(ps, obj) {
 
 
 /***/ }),
-/* 713 */
+/* 715 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93196,10 +96994,10 @@ module.exports = _curry2(function range(from, to) {
 
 
 /***/ }),
-/* 714 */
+/* 716 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _curryN = __webpack_require__(116);
+var _curryN = __webpack_require__(117);
 var _reduce = __webpack_require__(30);
 var _reduced = __webpack_require__(52);
 
@@ -93241,7 +97039,7 @@ module.exports = _curryN(4, [], function _reduceWhile(pred, fn, a, list) {
 
 
 /***/ }),
-/* 715 */
+/* 717 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -93275,7 +97073,7 @@ module.exports = _curry1(_reduced);
 
 
 /***/ }),
-/* 716 */
+/* 718 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93308,7 +97106,7 @@ module.exports = _curry3(function remove(start, count, list) {
 
 
 /***/ }),
-/* 717 */
+/* 719 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93344,7 +97142,7 @@ module.exports = _curry2(function repeat(value, n) {
 
 
 /***/ }),
-/* 718 */
+/* 720 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93376,7 +97174,7 @@ module.exports = _curry3(function replace(regex, replacement, str) {
 
 
 /***/ }),
-/* 719 */
+/* 721 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93416,7 +97214,7 @@ module.exports = _curry3(function scan(fn, acc, list) {
 
 
 /***/ }),
-/* 720 */
+/* 722 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93452,7 +97250,7 @@ module.exports = _curry3(function set(lens, v, x) {
 
 
 /***/ }),
-/* 721 */
+/* 723 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93484,7 +97282,7 @@ module.exports = _curry2(function sort(comparator, list) {
 
 
 /***/ }),
-/* 722 */
+/* 724 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93532,7 +97330,7 @@ module.exports = _curry2(function sortBy(fn, list) {
 
 
 /***/ }),
-/* 723 */
+/* 725 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93584,7 +97382,7 @@ module.exports = _curry2(function sortWith(fns, list) {
 
 
 /***/ }),
-/* 724 */
+/* 726 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var invoker = __webpack_require__(86);
@@ -93614,7 +97412,7 @@ module.exports = invoker(1, 'split');
 
 
 /***/ }),
-/* 725 */
+/* 727 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93646,7 +97444,7 @@ module.exports = _curry2(function splitAt(index, array) {
 
 
 /***/ }),
-/* 726 */
+/* 728 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93684,7 +97482,7 @@ module.exports = _curry2(function splitEvery(n, list) {
 
 
 /***/ }),
-/* 727 */
+/* 729 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93724,7 +97522,7 @@ module.exports = _curry2(function splitWhen(pred, list) {
 
 
 /***/ }),
-/* 728 */
+/* 730 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93759,7 +97557,7 @@ module.exports = _curry2(function subtract(a, b) {
 
 
 /***/ }),
-/* 729 */
+/* 731 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93791,7 +97589,7 @@ module.exports = _curry2(function symmetricDifference(list1, list2) {
 
 
 /***/ }),
-/* 730 */
+/* 732 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -93827,7 +97625,7 @@ module.exports = _curry3(function symmetricDifferenceWith(pred, list1, list2) {
 
 
 /***/ }),
-/* 731 */
+/* 733 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93862,7 +97660,7 @@ module.exports = _curry2(function takeLast(n, xs) {
 
 
 /***/ }),
-/* 732 */
+/* 734 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93900,12 +97698,12 @@ module.exports = _curry2(function takeLastWhile(fn, list) {
 
 
 /***/ }),
-/* 733 */
+/* 735 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
 var _dispatchable = __webpack_require__(14);
-var _xtakeWhile = __webpack_require__(659);
+var _xtakeWhile = __webpack_require__(661);
 
 
 /**
@@ -93945,7 +97743,7 @@ module.exports = _curry2(_dispatchable(['takeWhile'], _xtakeWhile, function take
 
 
 /***/ }),
-/* 734 */
+/* 736 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -93976,12 +97774,12 @@ module.exports = _curry2(function tap(fn, x) {
 
 
 /***/ }),
-/* 735 */
+/* 737 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _cloneRegExp = __webpack_require__(256);
 var _curry2 = __webpack_require__(0);
-var _isRegExp = __webpack_require__(635);
+var _isRegExp = __webpack_require__(637);
 var toString = __webpack_require__(91);
 
 
@@ -94011,7 +97809,7 @@ module.exports = _curry2(function test(pattern, str) {
 
 
 /***/ }),
-/* 736 */
+/* 738 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var invoker = __webpack_require__(86);
@@ -94036,7 +97834,7 @@ module.exports = invoker(0, 'toLowerCase');
 
 
 /***/ }),
-/* 737 */
+/* 739 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -94073,7 +97871,7 @@ module.exports = _curry1(function toPairs(obj) {
 
 
 /***/ }),
-/* 738 */
+/* 740 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -94110,7 +97908,7 @@ module.exports = _curry1(function toPairsIn(obj) {
 
 
 /***/ }),
-/* 739 */
+/* 741 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var invoker = __webpack_require__(86);
@@ -94135,7 +97933,7 @@ module.exports = invoker(0, 'toUpperCase');
 
 
 /***/ }),
-/* 740 */
+/* 742 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _reduce = __webpack_require__(30);
@@ -94193,7 +97991,7 @@ module.exports = curryN(4, function transduce(xf, fn, acc, list) {
 
 
 /***/ }),
-/* 741 */
+/* 743 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -94244,7 +98042,7 @@ module.exports = _curry1(function transpose(outerlist) {
 
 
 /***/ }),
-/* 742 */
+/* 744 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -94284,7 +98082,7 @@ module.exports = _curry3(function traverse(of, f, traversable) {
 
 
 /***/ }),
-/* 743 */
+/* 745 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -94326,11 +98124,11 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 744 */
+/* 746 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _arity = __webpack_require__(40);
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _curry2 = __webpack_require__(0);
 
 
@@ -94367,7 +98165,7 @@ module.exports = _curry2(function _tryCatch(tryer, catcher) {
 
 
 /***/ }),
-/* 745 */
+/* 747 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -94405,11 +98203,11 @@ module.exports = _curry1(function unapply(fn) {
 
 
 /***/ }),
-/* 746 */
+/* 748 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
-var nAry = __webpack_require__(123);
+var nAry = __webpack_require__(124);
 
 
 /**
@@ -94445,7 +98243,7 @@ module.exports = _curry1(function unary(fn) {
 
 
 /***/ }),
-/* 747 */
+/* 749 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94489,7 +98287,7 @@ module.exports = _curry2(function uncurryN(depth, fn) {
 
 
 /***/ }),
-/* 748 */
+/* 750 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94532,10 +98330,10 @@ module.exports = _curry2(function unfold(fn, seed) {
 
 
 /***/ }),
-/* 749 */
+/* 751 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _curry2 = __webpack_require__(0);
 var compose = __webpack_require__(167);
 var uniq = __webpack_require__(178);
@@ -94562,10 +98360,10 @@ module.exports = _curry2(compose(uniq, _concat));
 
 
 /***/ }),
-/* 750 */
+/* 752 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _concat = __webpack_require__(34);
+var _concat = __webpack_require__(35);
 var _curry3 = __webpack_require__(4);
 var uniqWith = __webpack_require__(179);
 
@@ -94598,7 +98396,7 @@ module.exports = _curry3(function unionWith(pred, list1, list2) {
 
 
 /***/ }),
-/* 751 */
+/* 753 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -94635,7 +98433,7 @@ module.exports = _curry3(function unless(pred, whenFalseFn, x) {
 
 
 /***/ }),
-/* 752 */
+/* 754 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _identity = __webpack_require__(173);
@@ -94663,7 +98461,7 @@ module.exports = chain(_identity);
 
 
 /***/ }),
-/* 753 */
+/* 755 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -94698,7 +98496,7 @@ module.exports = _curry3(function until(pred, fn, init) {
 
 
 /***/ }),
-/* 754 */
+/* 756 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry1 = __webpack_require__(2);
@@ -94735,7 +98533,7 @@ module.exports = _curry1(function valuesIn(obj) {
 
 
 /***/ }),
-/* 755 */
+/* 757 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94777,7 +98575,7 @@ module.exports = (function() {
 
 
 /***/ }),
-/* 756 */
+/* 758 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -94817,7 +98615,7 @@ module.exports = _curry3(function when(pred, whenTrueFn, x) {
 
 
 /***/ }),
-/* 757 */
+/* 759 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94859,13 +98657,13 @@ module.exports = _curry2(function whereEq(spec, testObj) {
 
 
 /***/ }),
-/* 758 */
+/* 760 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _contains = __webpack_require__(64);
 var _curry2 = __webpack_require__(0);
-var flip = __webpack_require__(115);
-var reject = __webpack_require__(125);
+var flip = __webpack_require__(116);
+var reject = __webpack_require__(126);
 
 
 /**
@@ -94893,7 +98691,7 @@ module.exports = _curry2(function(xs, list) {
 
 
 /***/ }),
-/* 759 */
+/* 761 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94936,7 +98734,7 @@ module.exports = _curry2(function xprod(a, b) { // = xprodWith(prepend); (takes 
 
 
 /***/ }),
-/* 760 */
+/* 762 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -94974,7 +98772,7 @@ module.exports = _curry2(function zip(a, b) {
 
 
 /***/ }),
-/* 761 */
+/* 763 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry2 = __webpack_require__(0);
@@ -95010,7 +98808,7 @@ module.exports = _curry2(function zipObj(keys, values) {
 
 
 /***/ }),
-/* 762 */
+/* 764 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var _curry3 = __webpack_require__(4);
@@ -95053,14 +98851,14 @@ module.exports = _curry3(function zipWith(fn, a, b) {
 
 
 /***/ }),
-/* 763 */
+/* 765 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(66);
 
 
 /***/ }),
-/* 764 */
+/* 766 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -95092,7 +98890,7 @@ PassThrough.prototype._transform = function (chunk, encoding, cb) {
 };
 
 /***/ }),
-/* 765 */
+/* 767 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -95162,7 +98960,7 @@ BufferList.prototype.concat = function (n) {
 };
 
 /***/ }),
-/* 766 */
+/* 768 */
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -95173,29 +98971,29 @@ module.exports = Array.isArray || function (arr) {
 
 
 /***/ }),
-/* 767 */
+/* 769 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(181).PassThrough
 
 
 /***/ }),
-/* 768 */
+/* 770 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(181).Transform
 
 
 /***/ }),
-/* 769 */
+/* 771 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(180);
 
 
 /***/ }),
-/* 770 */,
-/* 771 */
+/* 772 */,
+/* 773 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -95412,7 +99210,7 @@ module.exports = ripemd160
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 772 */
+/* 774 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -95602,10 +99400,10 @@ module.exports = ripemd160
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35), __webpack_require__(50)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31), __webpack_require__(50)))
 
 /***/ }),
-/* 773 */
+/* 775 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var exports = module.exports = function SHA (algorithm) {
@@ -95617,16 +99415,16 @@ var exports = module.exports = function SHA (algorithm) {
   return new Algorithm()
 }
 
-exports.sha = __webpack_require__(774)
-exports.sha1 = __webpack_require__(775)
-exports.sha224 = __webpack_require__(776)
+exports.sha = __webpack_require__(776)
+exports.sha1 = __webpack_require__(777)
+exports.sha224 = __webpack_require__(778)
 exports.sha256 = __webpack_require__(298)
-exports.sha384 = __webpack_require__(777)
+exports.sha384 = __webpack_require__(779)
 exports.sha512 = __webpack_require__(299)
 
 
 /***/ }),
-/* 774 */
+/* 776 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -95726,7 +99524,7 @@ module.exports = Sha
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 775 */
+/* 777 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/*
@@ -95831,7 +99629,7 @@ module.exports = Sha1
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 776 */
+/* 778 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/**
@@ -95890,7 +99688,7 @@ module.exports = Sha224
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 777 */
+/* 779 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {var inherits = __webpack_require__(5)
@@ -95953,7 +99751,7 @@ module.exports = Sha384
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3).Buffer))
 
 /***/ }),
-/* 778 */
+/* 780 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -95990,7 +99788,7 @@ var stylesInDom = {},
 	singletonElement = null,
 	singletonCounter = 0,
 	styleElementsInsertedAtTop = [],
-	fixUrls = __webpack_require__(779);
+	fixUrls = __webpack_require__(781);
 
 module.exports = function(list, options) {
 	if(typeof DEBUG !== "undefined" && DEBUG) {
@@ -96266,7 +100064,7 @@ function updateLink(linkElement, options, obj) {
 
 
 /***/ }),
-/* 779 */
+/* 781 */
 /***/ (function(module, exports) {
 
 
@@ -96361,7 +100159,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 780 */
+/* 782 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -96414,13 +100212,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(772);
+__webpack_require__(774);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 781 */
+/* 783 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -96491,13 +100289,13 @@ function config (name) {
   return String(val).toLowerCase() === 'true';
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(35)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(31)))
 
 /***/ }),
-/* 782 */
+/* 784 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var indexOf = __webpack_require__(551);
+var indexOf = __webpack_require__(552);
 
 var Object_keys = function (obj) {
     if (Object.keys) return Object.keys(obj)
@@ -96638,7 +100436,7 @@ exports.createContext = Script.createContext = function (context) {
 
 
 /***/ }),
-/* 783 */
+/* 785 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -96818,7 +100616,7 @@ exports.parse = function (str) {
 
 
 /***/ }),
-/* 784 */
+/* 786 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -96846,16 +100644,16 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 785 */
+/* 787 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 786 */
+/* 788 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ })
-],[320]);
+],[321]);

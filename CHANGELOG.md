@@ -1,3 +1,8 @@
+## Upcoming
+* [fix] process changed docs from firebase separately so that dont end up sending them back to firebase.
+* [fix] fcm token activation
+* [fix] firebase sync infinite upsert bug 
+
 ## v0.12.0 - 2017-05-20
 * [feature] sync local pouch dbs to firebase on sign in
 

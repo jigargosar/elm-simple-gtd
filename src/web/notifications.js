@@ -15,9 +15,9 @@ async function setupNotifications(app) {
     navigator.serviceWorker.addEventListener('message', event => {
         const data = event.data;
         console.log("MJS: serviceWorker.onMessage", event.data, event)
-        if(data["firebase-messaging-msg-type"]){
+        if (data["firebase-messaging-msg-type"]) {
             console.info("FBJS: ignoring message event received", data, event)
-        }else{
+        } else {
             app.ports["notificationClicked"].send(data)
         }
     });
@@ -25,16 +25,16 @@ async function setupNotifications(app) {
     console.info("navigator.serviceWorker.register: ", swScriptPath)
     const reg = await navigator.serviceWorker.register(swScriptPath)
 
-    const intervalId = setInterval(()=>{
+    const intervalId = setInterval(() => {
         let messaging = document.getElementById("fb-messaging");
-        if(!messaging) {
+        if (!messaging) {
             console.warn(`document.getElementById("fb-messaging")`, messaging)
             return
         }
         console.debug("messaging.activate(reg)")
         messaging.activate(reg)
         clearTimeout(intervalId);
-    },100)
+    }, 100)
 
 
     app.ports["showNotification"].subscribe(showNotification(reg))
@@ -61,7 +61,7 @@ const showNotification = reg => async ({tag, title, data}) => {
         renotify: true,
         vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
         sound: "/alarm.ogg",
-        icon:"/logo.png",
+        icon: "/logo.png",
         actions: [
             {title: "Mark Done", action: "mark-done"},
             {title: "Snooze", action: "snooze"},

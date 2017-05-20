@@ -205,21 +205,25 @@ async function boot() {
     }
 
     function startReplicationFromFirebase(uid, dbName) {
-
+        const lastModifiedAtKey = `pouch-fire-sync.${dbName}.in.lastModifiedAt`
         const onFirebaseChange = dbName => snap => {
-            app.ports["onFirebaseChange"].send([dbName, snap.val()])
+            const doc = snap.val()
+            app.ports["onFirebaseChange"].send([dbName, doc])
+            localStorage.setItem(lastModifiedAtKey, Math.min(doc.modifiedAt, Date.now()))
         }
+
+        const lastModifiedAtString = localStorage.getItem(lastModifiedAtKey)
+        const lastModifiedAt = parseInt(lastModifiedAtString, 10) || 0
 
         const todoDbRef = firebaseApp
             .database()
             .ref(`/users/${uid}/${dbName}`)
             .orderByChild("modifiedAt")
-            .startAt(Date.now())
+            .startAt(lastModifiedAt + 1)
 
         todoDbRef.on("child_added", onFirebaseChange(dbName))
         todoDbRef.on("child_changed", onFirebaseChange(dbName))
     }
-
 
 
     app.ports["fireStartSync"].subscribe(async (uid) => {

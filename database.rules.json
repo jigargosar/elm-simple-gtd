@@ -3,7 +3,22 @@
     "users": {
       "$uid": {
         ".read": "$uid === auth.uid",
-        ".write": "$uid === auth.uid"
+        ".write": "$uid === auth.uid",
+        "todo-db": {
+          ".indexOn": [
+            "modifiedAt"
+          ]
+        },
+        "context-db": {
+          ".indexOn": [
+            "modifiedAt"
+          ]
+        },
+        "project-db": {
+          ".indexOn": [
+            "modifiedAt"
+          ]
+        }
       }
     },
     "notifications": {

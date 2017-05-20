@@ -835,8 +835,8 @@ onPouchDBChange dbName encodedEntity =
             identity
 
 
-upsertEncodedDoc : String -> E.Value -> Model -> Cmd msg
-upsertEncodedDoc dbName encodedEntity =
+upsertEncodedDocCmd : String -> E.Value -> Model -> Cmd msg
+upsertEncodedDocCmd dbName encodedEntity =
     case dbName of
         "todo-db" ->
             getTodoStore >> (Store.upsertEncoded encodedEntity)

@@ -106,7 +106,7 @@ async function boot() {
 
     _.mapObjIndexed((db, name) => db.onChange(
         (doc) => {
-            console.log(`app.ports["pouchDBChanges"]:`,name, ":", doc.name || doc.text)
+            // console.log(`app.ports["pouchDBChanges"]:`,name, ":", doc.name || doc.text)
             return app.ports["pouchDBChanges"].send([name, doc])
         }
     ))(dbMap)
@@ -173,6 +173,34 @@ async function boot() {
            .catch(console.error)
     })
 
+    function startReplicationToFirebase(uid, db) {
+        const lastSeq = localStorage.getItem(`pouch.${db.name}.fire-sync.last_seq`)
+
+        const changes = db.changes({
+            include_docs: true,
+            live: true,
+            since: (parseInt(lastSeq, 10) || 0)
+        })
+
+        const errorStream = Kefir.fromEvents(changes, "error")
+        const changeStream = Kefir.fromEvents(changes, "change")
+
+        Kefir.merge([changeStream, errorStream])
+             // .log()
+             .map((change) => {
+                 return firebaseApp
+                     .database().ref(`/users/${uid}/${db.name}/${change.id}`)
+                     .set(change.doc)
+                     .then(() => {
+                         localStorage.setItem(`pouch.${db.name}.fire-sync.last_seq`, change.seq)
+                         return change.seq
+                     })
+             })
+             .flatMap(Kefir.fromPromise)
+             .onValue(val => console.log("fireSyncSuccess: ", val))
+             .onError(e => console.error("fireSyncError: ", e))
+    }
+
     function startReplicationFromFirebase(uid, dbName) {
         const todoDbRef = firebaseApp
             .database()
@@ -189,34 +217,10 @@ async function boot() {
     }
 
     app.ports["fireStartSync"].subscribe(async (uid) => {
-        const db = dbMap["todo-db"]
-        const lastSeq = localStorage.getItem("pouch.todo-db.fire-sync.last_seq")
-
-        const changes = db.changes({
-            include_docs: true,
-            live: true,
-            since: (parseInt(lastSeq, 10) || 0)
-        })
-
-        const errorStream = Kefir.fromEvents(changes, "error")
-        const changeStream = Kefir.fromEvents(changes, "change")
-
-        Kefir.merge([changeStream, errorStream])
-             // .log()
-             .map((change) => {
-                 return firebaseApp
-                     .database().ref(`/users/${uid}/todo-db/${change.id}`)
-                     .set(change.doc)
-                     .then(() => {
-                         localStorage.setItem("pouch.todo-db.fire-sync.last_seq", change.seq)
-                         return change.seq
-                     })
-             })
-             .flatMap(Kefir.fromPromise)
-             .onValue(val => console.log("fireSyncSuccess:", val))
-             .onError(e => console.error("fireSyncError: ", e))
-
-        startReplicationFromFirebase(uid, "todo-db")
+        _.map((db)=>{
+            startReplicationToFirebase(uid, db)
+            startReplicationFromFirebase(uid, db.name)
+        })(dbMap)
     })
 
 

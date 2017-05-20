@@ -121,7 +121,8 @@ export default async (dbName, indices = []) => {
         startRemoteSync,
         findAll: () => find({selector: {"_id": {"$ne": null}}}),
         onChange,
-        changes: _.bind(db.changes, db)
+        changes: _.bind(db.changes, db),
+        name:dbName
     }
 }
 

@@ -173,6 +173,21 @@ async function boot() {
            .catch(console.error)
     })
 
+    function startReplicationFromFirebase(uid, dbName) {
+        const todoDbRef = firebaseApp
+            .database()
+            .ref(`/users/${uid}/${dbName}`)
+            .orderByChild("modifiedAt")
+            .startAt(Date.now())
+
+        todoDbRef.on("child_added", onFirebaseChange(dbName))
+        todoDbRef.on("child_changed", onFirebaseChange(dbName))
+    }
+
+    const onFirebaseChange = dbName => snap => {
+        app.ports["onFirebaseChange"].send([dbName, snap.val()])
+    }
+
     app.ports["fireStartSync"].subscribe(async (uid) => {
         const db = dbMap["todo-db"]
         const lastSeq = localStorage.getItem("pouch.todo-db.fire-sync.last_seq")
@@ -201,24 +216,9 @@ async function boot() {
              .onValue(val => console.log("fireSyncSuccess:", val))
              .onError(e => console.error("fireSyncError: ", e))
 
-        const todoDbRef = firebaseApp
-            .database()
-            .ref(`/users/${uid}/todo-db`)
-            .orderByChild("modifiedAt")
-            .startAt(Date.now())
-
-        todoDbRef.on("child_added", (snap) => {
-            app.ports["onFirebaseChange"].send(["todo-db", snap.val()])
-            // db.upsert(snap.key, snap.val())
-            //   .catch(console.error)
-        })
-
-        todoDbRef.on("child_changed", (snap) => {
-            app.ports["onFirebaseChange"].send(["todo-db", snap.val()])
-            // db.upsert(snap.key, snap.val())
-            //   .catch(console.error)
-        })
+        startReplicationFromFirebase(uid, "todo-db")
     })
+
 
     app.ports["fireDataPush"].subscribe(([path, value]) => {
         console.log(`firebaseApp.database().ref(path).push(value)`, {path, value})

@@ -34,7 +34,7 @@ async function setupNotifications(app) {
         console.debug("messaging.activate(reg)")
         messaging.activate(reg)
         clearTimeout(intervalId);
-    },0)
+    },100)
 
 
     app.ports["showNotification"].subscribe(showNotification(reg))

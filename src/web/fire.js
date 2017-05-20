@@ -86,20 +86,19 @@ export const setup = (app, dbList) => {
         return changes
     }
 
-    function startReplicationFromFirebase(uid, dbName) {
+    function startReplicationFromFirebase(uid, db) {
+        const dbName = db.name
         const lastPersistedAtKey = `pouch-fire-sync.${dbName}.in.lastPersistedAt`
-        const onFirebaseChange = dbName => snap => {
-            const doc = snap.val()
 
-            // const equalsOmittingPersistedAt = _.equals(_.omit(["firebaseServerPersistedAt"],doc))
-            // console.log("fire: ignoring local firebase change")
-
-            app.ports["onFirebaseChange"].send([dbName, doc])
-
+        function updateKey(doc) {
             localStorage.setItem(lastPersistedAtKey,
                 Math.min(doc.firebaseServerPersistedAt, Date.now())
             )
+        }
 
+        const onFirebaseChange = doc => {
+            app.ports["onFirebaseChange"].send([dbName, doc])
+            updateKey(doc)
         }
 
         const lastPersistedAtString = localStorage.getItem(lastPersistedAtKey)
@@ -111,15 +110,49 @@ export const setup = (app, dbList) => {
             .orderByChild("firebaseServerPersistedAt")
             .startAt(lastPersistedAt + 1)
 
-        todoDbRef.on("child_added", onFirebaseChange(dbName))
-        todoDbRef.on("child_changed", onFirebaseChange(dbName))
+        // todoDbRef.on("child_added", onFirebaseChange(dbName))
+        // todoDbRef.on("child_changed", onFirebaseChange(dbName))
+
+        const changeStream = Kefir.merge([
+            Kefir.fromEvents(todoDbRef, "child_changed"),
+            Kefir.fromEvents(todoDbRef, "child_added")
+        ])
+        changeStream
+            .map(_.invoker(0, "val"))
+            .log()
+            .map(doc =>
+                db.getClean(doc._id)
+                  .then(_.omit(["_rev"]))
+                  .then(_.equals(_.omit(["firebaseServerPersistedAt"],doc)))
+                  .then((docsSame) => {
+                      if (docsSame) {
+                          updateKey(doc)
+                          return "firebase changes: docs same ignoring update"
+                      } else {
+                          onFirebaseChange(doc)
+                          return "firebase changes: docs not same, sending to elm"
+                      }
+                  })
+                  .catch(e => {
+                      console.error("fal: ", e)
+                      if (e.status === 404) {
+                          onFirebaseChange(doc)
+                          return "firebase changes: docs not found locally, sending to elm"
+                      }
+                  })
+            )
+            .flatMap(Kefir.fromPromise)
+            .onValue(val => console.log("scc: ", val))
+            .onError(e => {
+                console.error("fal: ", e)
+            })
     }
 
 
     app.ports["fireStartSync"].subscribe(async (uid) => {
         _.map(changes => changes.cancel())(changesEmitters)
         changesEmitters = _.map((db) => {
-            startReplicationFromFirebase(uid, db.name)
+            startReplicationFromFirebase(uid, db)
             return startReplicationToFirebase(uid, db)
         })(dbList)
     })

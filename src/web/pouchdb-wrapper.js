@@ -133,7 +133,9 @@ export default async (dbName, indices = []) => {
         findAll: () => find({selector: {"_id": {"$ne": null}}}),
         onChange,
         changes: _.bind(db.changes, db),
-        name: dbName
+        name: dbName,
+        getClean:(id)=> db.get(id)
+                          .then(removeNilValuedKeys)
     }
 }
 

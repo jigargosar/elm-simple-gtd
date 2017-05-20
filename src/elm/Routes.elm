@@ -2,7 +2,6 @@ module Routes exposing (..)
 
 import Document
 import Model as Model
-
 import Msg exposing (Msg)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
@@ -48,7 +47,7 @@ getPathFromModel model =
             [ "lists", "done" ]
 
         SyncView ->
-            [ "sync" ]
+            [ "custom-sync" ]
 
 
 delta2hash : Model -> Model -> Maybe UrlChange
@@ -86,7 +85,7 @@ builder2messages builder =
         "notification" :: todoId :: [] ->
             [ Msg.ShowReminderOverlayForTodoId todoId ]
 
-        "sync" :: [] ->
+        "custom-sync" :: [] ->
             [ Msg.SetView SyncView ]
 
         _ ->

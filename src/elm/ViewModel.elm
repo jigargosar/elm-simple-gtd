@@ -104,7 +104,7 @@ getViewInfo mainViewType projectsVM contextsVM =
                 ( "Done", sgtdBlue )
 
             SyncView ->
-                ( "Sync", sgtdBlue )
+                ( "Custom Sync", sgtdBlue )
 
 
 sgtdBlue =

@@ -89,7 +89,7 @@ navList viewModel m =
                 ++ [ divider ]
                 ++ [ switchViewItem "delete" BinView "Bin"
                    , switchViewItem "done" DoneView "Done"
-                   , switchViewItem "notification:sync" SyncView "Sync Settings"
+                   , switchViewItem "notification:sync" SyncView "Custom Sync"
                    ]
             )
 

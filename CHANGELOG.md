@@ -1,4 +1,4 @@
-## Upcoming
+## v0.12.0 - 2017-05-20
 * [feature] sync local pouch dbs to firebase on sign in
 
 ## v0.11.7 - 2017-05-19

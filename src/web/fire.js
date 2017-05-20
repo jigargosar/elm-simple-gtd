@@ -119,7 +119,6 @@ export const setup = (app, dbList) => {
         ])
         changeStream
             .map(_.invoker(0, "val"))
-            .log()
             .map(doc =>
                 db.getClean(doc._id)
                   .then(_.omit(["_rev"]))

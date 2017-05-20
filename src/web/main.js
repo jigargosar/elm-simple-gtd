@@ -174,34 +174,42 @@ async function boot() {
     })
 
     function startReplicationToFirebase(uid, db) {
-        const lastSeq = localStorage.getItem(`pouch.${db.name}.fire-sync.last_seq`)
+        const lasSeqKey = `pouch.${db.name}.fire-sync.last_seq`
+        const lastSeqString = localStorage.getItem(lasSeqKey)
+        const lastSeq = parseInt(lastSeqString, 10) || 0
 
         const changes = db.changes({
             include_docs: true,
             live: true,
-            since: (parseInt(lastSeq, 10) || 0)
+            since: lastSeq
         })
+
+        const onChange = change =>
+            firebaseApp
+                .database().ref(`/users/${uid}/${db.name}/${change.id}`)
+                .set(change.doc)
+                .then(() => {
+                    localStorage.setItem(lasSeqKey, change.seq)
+                    return change.seq
+                })
 
         const errorStream = Kefir.fromEvents(changes, "error")
         const changeStream = Kefir.fromEvents(changes, "change")
 
         Kefir.merge([changeStream, errorStream])
              // .log()
-             .map((change) => {
-                 return firebaseApp
-                     .database().ref(`/users/${uid}/${db.name}/${change.id}`)
-                     .set(change.doc)
-                     .then(() => {
-                         localStorage.setItem(`pouch.${db.name}.fire-sync.last_seq`, change.seq)
-                         return change.seq
-                     })
-             })
+             .map(onChange)
              .flatMap(Kefir.fromPromise)
              .onValue(val => console.log("fireSyncSuccess: ", val))
              .onError(e => console.error("fireSyncError: ", e))
     }
 
     function startReplicationFromFirebase(uid, dbName) {
+
+        const onFirebaseChange = dbName => snap => {
+            app.ports["onFirebaseChange"].send([dbName, snap.val()])
+        }
+
         const todoDbRef = firebaseApp
             .database()
             .ref(`/users/${uid}/${dbName}`)
@@ -212,12 +220,10 @@ async function boot() {
         todoDbRef.on("child_changed", onFirebaseChange(dbName))
     }
 
-    const onFirebaseChange = dbName => snap => {
-        app.ports["onFirebaseChange"].send([dbName, snap.val()])
-    }
+
 
     app.ports["fireStartSync"].subscribe(async (uid) => {
-        _.map((db)=>{
+        _.map((db) => {
             startReplicationToFirebase(uid, db)
             startReplicationFromFirebase(uid, db.name)
         })(dbMap)

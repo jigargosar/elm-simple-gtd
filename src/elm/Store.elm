@@ -13,6 +13,9 @@ import Maybe.Extra as Maybe
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Json.Decode as J exposing (Decoder)
+import Json.Decode.Pipeline as J
+import Json.Encode as J
 import Random.Pcg as Random exposing (Seed)
 import Set
 
@@ -67,8 +70,8 @@ upsertIn store doc =
     pouchDBUpsert ( store.name, doc.id, Document.encode store.otherFieldsEncoder doc )
 
 
-encodeDoc : Document x -> Store x -> E.Value
-encodeDoc doc s =
+encode : Document x -> Store x -> E.Value
+encode doc s =
     Document.encode s.otherFieldsEncoder doc
 
 
@@ -108,19 +111,18 @@ updateDocWithId id updateDocFn store =
         ?= store
 
 
+decode : D.Value -> Store x -> Maybe (Document x)
 decode encodedDoc store =
     D.decodeValue store.decoder encodedDoc
-        |> Result.mapError (Debug.log "Store")
+        |> Result.mapError (Debug.log ("Store " ++ store.name))
         |> Result.toMaybe
 
 
-reEncodeAndUpsertCmd : D.Value -> Store x -> Cmd msg
-reEncodeAndUpsertCmd encodedDoc store =
-    {- decode encodeDoc store
-       ?|> upsertIn store
-       ?=
-    -}
-    Cmd.none
+upsertEncoded : D.Value -> Store x -> Cmd msg
+upsertEncoded jsonValue store =
+    decode jsonValue store
+        ?|> upsertIn store
+        ?= Cmd.none
 
 
 updateExternal : D.Value -> Store x -> Store x

@@ -1,5 +1,5 @@
-## Later
-* sync pouch dbs to firebase
+## Upcoming
+* [feature] sync local pouch dbs to firebase on sign in
 
 ## v0.11.7 - 2017-05-19
 * [fix] todo selection clearing when dropdowns open

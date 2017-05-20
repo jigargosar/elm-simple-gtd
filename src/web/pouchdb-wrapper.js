@@ -52,7 +52,7 @@ export default async (dbName, indices = []) => {
                 const areDocsSame = _.equals(cleanNewDoc, cleanOldDoc)
 
                 if (areDocsSame) {
-                    console.log("upsert: ignoring update since docs are same: ", areDocsSame)
+                    // console.log("upsert: ignoring update since docs are same: ", areDocsSame)
                     return
                 }
                 /*console.log("upsert: adding new doc since docs are *not* same: immutable diff: ",
@@ -61,7 +61,7 @@ export default async (dbName, indices = []) => {
                  )*/
                 return cleanNewDoc
             })
-            .then(_.tap(res => console.log("upsert results: ")))
+            .then(_.tap(res => console.log("upsert results: ", res)))
 
     }
 

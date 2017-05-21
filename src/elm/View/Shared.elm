@@ -31,11 +31,6 @@ import Todo.Form
 import Todo.ReminderForm
 
 
-type alias AppViewModel =
-    { contexts : List GroupEntity.ViewModel.EntityViewModel
-    }
-
-
 type alias SharedViewModel =
     { now : Time
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
@@ -99,29 +94,6 @@ createSharedViewModel model =
                 todo
                     |> getMaybeTodoReminderFormForTodo
                     |> Maybe.unpack (\_ -> Todo.ReminderForm.create todo now) identity
-
-        --    , getMaybeEditProjectFormForProject =
-        --        \project ->
-        --            case editMode of
-        --                EditMode.EditProject form ->
-        --                    if Document.hasId form.id project then
-        --                        Just form
-        --                    else
-        --                        Nothing
-        --
-        --                _ ->
-        --                    Nothing
-        --    , getMaybeEditContextFormForContext =
-        --        \context ->
-        --            case editMode of
-        --                EditMode.EditContext form ->
-        --                    if Document.hasId form.id context then
-        --                        Just form
-        --                    else
-        --                        Nothing
-        --
-        --                _ ->
-        --                    Nothing
         , getMaybeEditEntityFormForEntityId =
             \entityId ->
                 case editMode of

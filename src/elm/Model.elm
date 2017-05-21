@@ -780,14 +780,9 @@ updateTodo__ action todo =
 
 updateTodoById action todoId model =
     updateDocWithId todoId
-        (updateTodo (action) model)
+        (Todo.update [ action ] model.now)
         todoStore
         model
-
-
-updateTodo : Todo.UpdateAction -> Model -> (Todo.Model -> Todo.Model)
-updateTodo action model =
-    Todo.update [ action ] model.now
 
 
 updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =

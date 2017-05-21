@@ -554,7 +554,10 @@ toggleDeleteEntity entity model =
                         projectStore
 
             TodoEntity todo ->
-                updateTodoById Todo.ToggleDeleted entityId model
+                model
+                    |> updateDocWithId entityId
+                        (updateTodo (Todo.ToggleDeleted) model)
+                        todoStore
 
 
 getMaybeEditTodoReminderForm model =

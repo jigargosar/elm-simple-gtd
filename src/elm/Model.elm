@@ -991,12 +991,6 @@ updateKeyboardState updater model =
 -- Focus Functions
 
 
-getFocusedEntityIndex entityList model =
-    entityList
-        |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
-        ?= 0
-
-
 focusEntityByIndex entityList index model =
     let
         focusedEntityId =
@@ -1025,6 +1019,12 @@ setFocusInEntity entity =
 
 setMaybeFocusedEntity maybeEntity model =
     { model | maybeFocusedEntity = maybeEntity }
+
+
+getFocusedEntityIndex entityList model =
+    entityList
+        |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
+        ?= 0
 
 
 focusPrevEntity : List Entity -> ModelF

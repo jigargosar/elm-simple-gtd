@@ -477,31 +477,6 @@ updateEditModeNameChanged newName entity model =
             model
 
 
-toggleDeleteEntity : Entity -> ModelF
-toggleDeleteEntity entity model =
-    let
-        entityId =
-            getEntityId entity
-    in
-        case entity of
-            ContextEntity context ->
-                context
-                    |> Document.toggleDeleted
-                    |> Context.setModifiedAt model.now
-                    |> (Store.replaceDoc # model.contextStore)
-                    |> (setContextStore # model)
-
-            ProjectEntity project ->
-                project
-                    |> Document.toggleDeleted
-                    |> Project.setModifiedAt model.now
-                    |> (Store.replaceDoc # model.projectStore)
-                    |> (setProjectStore # model)
-
-            TodoEntity todo ->
-                updateTodoById Todo.ToggleDeleted entityId model
-
-
 updateDocWithId id updateFn store model =
     let
         updateAndSetModifiedAt =
@@ -554,6 +529,31 @@ saveCurrentForm model =
 
         EditMode.None ->
             model
+
+
+toggleDeleteEntity : Entity -> ModelF
+toggleDeleteEntity entity model =
+    let
+        entityId =
+            getEntityId entity
+    in
+        case entity of
+            ContextEntity context ->
+                context
+                    |> Document.toggleDeleted
+                    |> Context.setModifiedAt model.now
+                    |> (Store.replaceDoc # model.contextStore)
+                    |> (setContextStore # model)
+
+            ProjectEntity project ->
+                project
+                    |> Document.toggleDeleted
+                    |> Project.setModifiedAt model.now
+                    |> (Store.replaceDoc # model.projectStore)
+                    |> (setProjectStore # model)
+
+            TodoEntity todo ->
+                updateTodoById Todo.ToggleDeleted entityId model
 
 
 getMaybeEditTodoReminderForm model =

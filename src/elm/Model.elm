@@ -485,11 +485,6 @@ updateDocWithId id updateFn store model =
         update store (Store.updateDocWithId id updateFn) model
 
 
-updateTodo : Todo.UpdateAction -> Model -> (Todo.Model -> Todo.Model)
-updateTodo action model =
-    Todo.update [ action ] model.now
-
-
 saveCurrentForm model =
     case model.editMode of
         EditMode.EditContext form ->
@@ -506,15 +501,11 @@ saveCurrentForm model =
 
         EditMode.EditTodo form ->
             model
-                |> updateDocWithId form.id
-                    (updateTodo (Todo.SetText form.todoText) model)
-                    todoStore
+                |> updateTodoById (Todo.SetText form.todoText) form.id
 
         EditMode.EditTodoReminder form ->
             model
-                |> updateDocWithId form.id
-                    (updateTodo (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) model)
-                    todoStore
+                |> updateTodoById (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
 
         EditMode.EditTodoContext form ->
             model
@@ -553,9 +544,7 @@ toggleDeleteEntity entity model =
                         projectStore
 
                 TodoEntity todo ->
-                    updateDocWithId entityId
-                        (updateTodo (Todo.ToggleDeleted) model)
-                        todoStore
+                    updateTodoById Todo.ToggleDeleted entityId
 
 
 getMaybeEditTodoReminderForm model =
@@ -789,9 +778,16 @@ updateTodo__ action todo =
         )
 
 
-updateTodoById action todoId =
-    applyMaybeWith (findTodoById todoId)
-        (updateTodo__ action)
+updateTodoById action todoId model =
+    updateDocWithId todoId
+        (updateTodo (action) model)
+        todoStore
+        model
+
+
+updateTodo : Todo.UpdateAction -> Model -> (Todo.Model -> Todo.Model)
+updateTodo action model =
+    Todo.update [ action ] model.now
 
 
 updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =

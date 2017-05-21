@@ -425,11 +425,22 @@ now =
 
 
 update lens smallF big =
-    lens.set (smallF (lens.get big)) big
+    setIn big lens (smallF (lens.get big))
 
 
 setIn big lens small =
     lens.set small big
+
+
+updateMaybeT lens smallToMaybeSmallTF big =
+    let
+        maybeSmallT =
+            smallToMaybeSmallTF (lens.get big)
+
+        maybeBigT =
+            maybeSmallT ?|> Tuple2.mapSecond (setIn big lens)
+    in
+        maybeBigT
 
 
 

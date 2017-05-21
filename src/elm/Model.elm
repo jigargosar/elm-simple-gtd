@@ -698,12 +698,8 @@ groupByTodoContextViewModel =
 
 updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
     let
-        isSelected =
-            model.selectedEntityIdSet
-                |> Set.member todoId
-
         idSet =
-            if isSelected then
+            if model.selectedEntityIdSet |> Set.member todoId then
                 model.selectedEntityIdSet
             else
                 Set.singleton todoId

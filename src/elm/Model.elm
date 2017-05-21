@@ -783,29 +783,6 @@ groupByTodoContextViewModel =
            )
 
 
-updateTodo__ : Todo.UpdateAction -> Todo.Model -> ModelF
-updateTodo__ action todo =
-    apply2With ( getNow, getTodoStore )
-        ((Todo.update [ action ] # todo)
-            >> Store.replaceDoc__
-            >>> setTodoStore
-        )
-
-
-updateTodoById action todoId model =
-    updateDocWithId todoId
-        (Todo.update [ action ] model.now)
-        todoStore
-        model
-
-
-updateAllTodoById action todoIdSet model =
-    updateAllDocsWithId todoIdSet
-        (Todo.update [ action ] model.now)
-        todoStore
-        model
-
-
 updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
     let
         isSelected =
@@ -1159,3 +1136,30 @@ updateKeyboardStateM updater model =
 updateKeyboardState : (Keyboard.State -> Keyboard.State) -> ModelF
 updateKeyboardState updater model =
     setKeyboardState (updater (getKeyboardState model)) model
+
+
+
+-- Document Update Helpers
+
+
+updateTodo__ : Todo.UpdateAction -> Todo.Model -> ModelF
+updateTodo__ action todo =
+    apply2With ( getNow, getTodoStore )
+        ((Todo.update [ action ] # todo)
+            >> Store.replaceDoc__
+            >>> setTodoStore
+        )
+
+
+updateTodoById action todoId model =
+    updateDocWithId todoId
+        (Todo.update [ action ] model.now)
+        todoStore
+        model
+
+
+updateAllTodoById action todoIdSet model =
+    updateAllDocsWithId todoIdSet
+        (Todo.update [ action ] model.now)
+        todoStore
+        model

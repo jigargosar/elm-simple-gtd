@@ -477,66 +477,49 @@ updateEditModeNameChanged newName entity model =
             model
 
 
-toggleDeleteEntity : Entity -> ModelF
-toggleDeleteEntity entity model =
-    let
-        entityId =
-            getEntityId entity
-    in
-        case entity of
-            ContextEntity context ->
-                context
-                    |> Document.toggleDeleted
-                    |> Context.setModifiedAt model.now
-                    |> (Store.replaceDoc # model.contextStore)
-                    |> (setContextStore # model)
-
-            ProjectEntity project ->
-                project
-                    |> Document.toggleDeleted
-                    |> Project.setModifiedAt model.now
-                    |> (Store.replaceDoc # model.projectStore)
-                    |> (setProjectStore # model)
-
-            TodoEntity todo ->
-                updateTodoById Todo.ToggleDeleted entityId model
+updateDocWithId id =
+    {- let
+           updateAndSetModifiedAt =
+               updateFn >> Document.setModifiedAt model.now
+       in
+           update store (Store.updateDocWithId id updateFn) model
+    -}
+    updateAllDocsWithId (Set.singleton id)
 
 
-updateDocWithId id updateFn store model =
+updateAllDocsWithId idSet updateFn store model =
     let
         updateAndSetModifiedAt =
             updateFn >> Document.setModifiedAt model.now
+
+        storeF store =
+            idSet
+                |> Set.foldl (Store.updateDocWithId # updateFn) store
     in
-        update store (Store.updateDocWithId id updateFn) model
-
-
-updateDocAndSetFocusInEntityWithId id =
-    updateDocWithId id >>>> setFocusInEntityWithId id
+        update store (storeF) model
 
 
 saveCurrentForm model =
     case model.editMode of
         EditMode.EditContext form ->
             model
-                |> updateDocAndSetFocusInEntityWithId form.id
+                |> updateDocWithId form.id
                     (Context.setName form.name)
                     contextStore
 
         EditMode.EditProject form ->
             model
-                |> updateDocAndSetFocusInEntityWithId form.id
+                |> updateDocWithId form.id
                     (Project.setName form.name)
                     projectStore
 
         EditMode.EditTodo form ->
             model
                 |> updateTodoById (Todo.SetText form.todoText) form.id
-                |> setFocusInEntityWithId form.id
 
         EditMode.EditTodoReminder form ->
             model
                 |> updateTodoById (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
-                |> setFocusInEntityWithId form.id
 
         EditMode.EditTodoContext form ->
             model
@@ -554,6 +537,28 @@ saveCurrentForm model =
 
         EditMode.None ->
             model
+
+
+toggleDeleteEntity : Entity -> ModelF
+toggleDeleteEntity entity model =
+    let
+        entityId =
+            getEntityId entity
+    in
+        model
+            |> case entity of
+                ContextEntity context ->
+                    updateDocWithId entityId
+                        (Document.toggleDeleted)
+                        contextStore
+
+                ProjectEntity project ->
+                    updateDocWithId entityId
+                        (Document.toggleDeleted)
+                        projectStore
+
+                TodoEntity todo ->
+                    updateTodoById Todo.ToggleDeleted entityId
 
 
 getMaybeEditTodoReminderForm model =
@@ -782,28 +787,38 @@ updateTodo__ : Todo.UpdateAction -> Todo.Model -> ModelF
 updateTodo__ action todo =
     apply2With ( getNow, getTodoStore )
         ((Todo.update [ action ] # todo)
-            >> Store.replaceDoc
+            >> Store.replaceDoc__
             >>> setTodoStore
         )
 
 
-updateTodoById action todoId =
-    applyMaybeWith (findTodoById todoId)
-        (updateTodo__ action)
+updateTodoById action todoId model =
+    updateDocWithId todoId
+        (Todo.update [ action ] model.now)
+        todoStore
+        model
 
 
-updateAllSelectedTodoIfTodoIdInSelection action todoId model =
+updateAllTodoById action todoIdSet model =
+    updateAllDocsWithId todoIdSet
+        (Todo.update [ action ] model.now)
+        todoStore
+        model
+
+
+updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
     let
         isSelected =
             model.selectedEntityIdSet
                 |> Set.member todoId
+
+        idSet =
+            if isSelected then
+                model.selectedEntityIdSet
+            else
+                Set.singleton todoId
     in
-        if isSelected then
-            model.todoStore
-                |> Store.findAllByIdSet model.selectedEntityIdSet
-                |> List.foldl (updateTodo__ action) model
-        else
-            updateTodoById action todoId model
+        model |> updateAllTodoById action idSet
 
 
 replaceTodoIfEqualById todo =
@@ -823,13 +838,13 @@ setTodoStoreFromTuple tuple model =
 onPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            updateTodoStore (Store.updateExternal encodedEntity)
+            updateTodoStore (Store.updateExternal__ encodedEntity)
 
         "project-db" ->
-            updateProjectStoreM (getProjectStore >> Store.updateExternal encodedEntity)
+            updateProjectStoreM (getProjectStore >> Store.updateExternal__ encodedEntity)
 
         "context-db" ->
-            updateContextStoreM (getContextStore >> Store.updateExternal encodedEntity)
+            updateContextStoreM (getContextStore >> Store.updateExternal__ encodedEntity)
 
         _ ->
             identity
@@ -839,13 +854,13 @@ upsertEncodedDocCmd : String -> E.Value -> Model -> Cmd msg
 upsertEncodedDocCmd dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            getTodoStore >> (Store.upsertEncoded encodedEntity)
+            getTodoStore >> (Store.upsertEncoded__ encodedEntity)
 
         "project-db" ->
-            getProjectStore >> (Store.upsertEncoded encodedEntity)
+            getProjectStore >> (Store.upsertEncoded__ encodedEntity)
 
         "context-db" ->
-            getContextStore >> (Store.upsertEncoded encodedEntity)
+            getContextStore >> (Store.upsertEncoded__ encodedEntity)
 
         _ ->
             (\_ -> Cmd.none)

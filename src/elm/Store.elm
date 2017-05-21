@@ -1,4 +1,23 @@
-port module Store exposing (..)
+port module Store
+    exposing
+        ( onChange
+        , Store
+        , generator
+        , insert
+        , findById
+        , findBy
+        , map
+        , reject
+        , asIdDict
+        , asList
+        , filter
+        , updateDocWithId
+        , replaceDoc__
+        , findAllByIdSet__
+        , updateExternal__
+        , upsertEncoded__
+        , persist
+        )
 
 import Dict
 import Document exposing (Document, Id)
@@ -90,8 +109,8 @@ persist s =
         ns ! cmds
 
 
-replaceDoc : Document x -> Store x -> Store x
-replaceDoc doc s =
+replaceDoc__ : Document x -> Store x -> Store x
+replaceDoc__ doc s =
     let
         newDoc =
             { doc | dirty = True }
@@ -101,7 +120,7 @@ replaceDoc doc s =
 
 
 replaceDocIn =
-    flip replaceDoc
+    flip replaceDoc__
 
 
 updateDocWithId id updateDocFn store =
@@ -118,27 +137,28 @@ decode encodedDoc store =
         |> Result.toMaybe
 
 
-upsertEncoded : D.Value -> Store x -> Cmd msg
-upsertEncoded jsonValue store =
+upsertEncoded__ : D.Value -> Store x -> Cmd msg
+upsertEncoded__ jsonValue store =
     decode jsonValue store
         ?|> upsertIn store
         ?= Cmd.none
 
 
-updateExternal : D.Value -> Store x -> Store x
-updateExternal encodedDoc store =
+updateExternal__ : D.Value -> Store x -> Store x
+updateExternal__ encodedDoc store =
     decode encodedDoc store ?|> insertExternal # store ?= store
 
 
 insertExternal doc store =
-    {-let
-        _ =
-            Debug.log "exter doc change adding to store" (doc)
-    in-}
-        asIdDict store
-            |> Dict.insert (Document.getId doc) doc
-            |> Dict.values
-            |> (setList # store)
+    {- let
+           _ =
+               Debug.log "exter doc change adding to store" (doc)
+       in
+    -}
+    asIdDict store
+        |> Dict.insert (Document.getId doc) doc
+        |> Dict.values
+        |> (setList # store)
 
 
 updateExternalHelp newDoc store =
@@ -202,7 +222,7 @@ filter fn =
     asList >> List.filter fn
 
 
-findAllByIdSet idSet store =
+findAllByIdSet__ idSet store =
     let
         idDict =
             asIdDict store

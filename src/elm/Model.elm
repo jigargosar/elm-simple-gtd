@@ -792,7 +792,7 @@ updateTodoById action todoId =
         (updateTodo__ action)
 
 
-updateAllSelectedTodoIfTodoIdInSelection action todoId model =
+updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
     let
         isSelected =
             model.selectedEntityIdSet

@@ -184,11 +184,11 @@ update msg =
                     updateTodo Todo.ToggleDone todo
 
                 SetTodoContext todoContext todo ->
-                    updateAllSelectedTodoIfTodoIdInSelection (Todo.SetContext todoContext) todo
+                    updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected (Todo.SetContext todoContext) todo
                         >> andThenUpdate DeactivateEditingMode
 
                 SetTodoProject project todo ->
-                    updateAllSelectedTodoIfTodoIdInSelection (Todo.SetProject project) todo
+                    updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected (Todo.SetProject project) todo
                         >> andThenUpdate DeactivateEditingMode
 
                 NewTodoTextChanged text ->
@@ -343,7 +343,7 @@ updateTodo action todo =
 
 
 updateAllSelectedTodoIfTodoIdInSelection action todo =
-    Return.map (Model.updateAllSelectedTodoIfTodoIdInSelection action (Document.getId todo))
+    Return.map (Model.updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action (Document.getId todo))
 
 
 onMsgList : List Msg -> ReturnF

@@ -371,7 +371,7 @@ onUpdateNow now =
             )
 
 
-scheduleReminderNotifications ( model, todo ) =
+scheduleReminderNotifications ( todo, model ) =
     model ! [ showTodoNotificationCmd todo, scheduleReminderNotificationHelp todo model ]
 
 

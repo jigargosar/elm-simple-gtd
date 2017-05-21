@@ -364,8 +364,19 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             >> removeReminderOverlay
 
 
+findAndSnoozeOverDueTodo : Model -> Maybe ( Todo.Model, Model )
 findAndSnoozeOverDueTodo model =
     let
+        maybeTodoAndStore =
+            Store.findAndUpdate
+                (Todo.isReminderOverdue model.now)
+                model.now
+                (Todo.update [ Todo.SnoozeTill (model.now + (Time.minute * 15)) ] model.now)
+                model.todoStore
+
+        maybeTodoAndModel =
+            maybeTodoAndStore ?|> Tuple.mapSecond (todoStore.set # model)
+
         snoozeTodo todo m =
             m
                 |> updateTodo__
@@ -373,11 +384,12 @@ findAndSnoozeOverDueTodo model =
                     todo
                 |> setReminderOverlayToInitialView todo
     in
-        findTodoWithOverDueReminder model
-            ?|> apply2
-                    ( snoozeTodo # model
-                    , identity
-                    )
+        --        findTodoWithOverDueReminder model
+        --            ?|> apply2
+        --                    ( snoozeTodo # model
+        --                    , identity
+        --                    )
+        maybeTodoAndModel
 
 
 getActiveTodoListGroupedBy fn =

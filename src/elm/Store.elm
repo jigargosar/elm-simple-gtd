@@ -1,4 +1,23 @@
-port module Store exposing (..)
+port module Store
+    exposing
+        ( onChange
+        , Store
+        , generator
+        , insert
+        , findById
+        , findBy
+        , map
+        , reject
+        , asIdDict
+        , asList
+        , filter
+        , updateDocWithId
+        , replaceDoc
+        , findAllByIdSet
+        , updateExternal
+        , upsertEncoded
+        , persist
+        )
 
 import Dict
 import Document exposing (Document, Id)
@@ -131,14 +150,15 @@ updateExternal encodedDoc store =
 
 
 insertExternal doc store =
-    {-let
-        _ =
-            Debug.log "exter doc change adding to store" (doc)
-    in-}
-        asIdDict store
-            |> Dict.insert (Document.getId doc) doc
-            |> Dict.values
-            |> (setList # store)
+    {- let
+           _ =
+               Debug.log "exter doc change adding to store" (doc)
+       in
+    -}
+    asIdDict store
+        |> Dict.insert (Document.getId doc) doc
+        |> Dict.values
+        |> (setList # store)
 
 
 updateExternalHelp newDoc store =

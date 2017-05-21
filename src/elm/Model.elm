@@ -485,33 +485,29 @@ updateDocWithId id updateFn store model =
         update store (Store.updateDocWithId id updateFn) model
 
 
-updateDocAndSetFocusInEntityWithId id =
-    updateDocWithId id >>>> setFocusInEntityWithId id
-
-
 saveCurrentForm model =
     case model.editMode of
         EditMode.EditContext form ->
             model
-                |> updateDocAndSetFocusInEntityWithId form.id
+                |> updateDocWithId form.id
                     (Context.setName form.name)
                     contextStore
 
         EditMode.EditProject form ->
             model
-                |> updateDocAndSetFocusInEntityWithId form.id
+                |> updateDocWithId form.id
                     (Project.setName form.name)
                     projectStore
 
         EditMode.EditTodo form ->
             model
-                |> updateDocAndSetFocusInEntityWithId form.id
+                |> updateDocWithId form.id
                     (Todo.update [ Todo.SetText form.todoText ] model.now)
                     todoStore
 
         EditMode.EditTodoReminder form ->
             model
-                |> updateDocAndSetFocusInEntityWithId form.id
+                |> updateDocWithId form.id
                     (Todo.update [ Todo.SetTime (Todo.ReminderForm.getMaybeTime form) ] model.now)
                     todoStore
 

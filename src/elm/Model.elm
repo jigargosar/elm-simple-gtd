@@ -375,7 +375,7 @@ findAndSnoozeOverDueTodo model =
                 model.todoStore
 
         maybeTodoAndModel =
-            maybeTodoAndStore ?|> Tuple.mapSecond (todoStore.set # model)
+            maybeTodoAndStore ?|> Tuple.mapSecond (setIn model todoStore)
 
         snoozeTodo todo m =
             m
@@ -438,6 +438,10 @@ now =
 
 update lens smallF big =
     lens.set (smallF (lens.get big)) big
+
+
+setIn big lens small =
+    lens.set small big
 
 
 

@@ -540,22 +540,20 @@ toggleDeleteEntity entity model =
         entityId =
             getEntityId entity
     in
-        case entity of
-            ContextEntity context ->
-                model
-                    |> updateDocWithId entityId
+        model
+            |> case entity of
+                ContextEntity context ->
+                    updateDocWithId entityId
                         (Document.toggleDeleted)
                         contextStore
 
-            ProjectEntity project ->
-                model
-                    |> updateDocWithId entityId
+                ProjectEntity project ->
+                    updateDocWithId entityId
                         (Document.toggleDeleted)
                         projectStore
 
-            TodoEntity todo ->
-                model
-                    |> updateDocWithId entityId
+                TodoEntity todo ->
+                    updateDocWithId entityId
                         (updateTodo (Todo.ToggleDeleted) model)
                         todoStore
 

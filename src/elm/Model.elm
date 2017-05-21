@@ -1121,25 +1121,15 @@ updateKeyboardState updater model =
 
 
 updateDocWithId id =
-    {- let
-           updateAndSetModifiedAt =
-               updateFn >> Document.setModifiedAt model.now
-       in
-           update store (Store.updateDocWithId id updateFn) model
-    -}
     updateAllDocWithIds (Set.singleton id)
-
-
-
---updateAllDocWithIds: Set (Document)
 
 
 updateAllDocWithIds idSet updateFn store model =
     let
-        storeF store =
-            Store.updateAllDocAndSetModifiedAt idSet model.now updateFn store
+        storeF =
+            Store.updateAllDocAndSetModifiedAt idSet model.now updateFn
     in
-        update store (storeF) model
+        update store storeF model
 
 
 updateTodo__ : Todo.UpdateAction -> Todo.Model -> ModelF

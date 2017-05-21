@@ -511,8 +511,9 @@ saveCurrentForm model =
 
         EditMode.EditTodoReminder form ->
             model
-                |> updateTodoById (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
-                |> setFocusInEntityWithId form.id
+                |> updateDocAndSetFocusInEntityWithId form.id
+                    (Todo.update [ Todo.SetTime (Todo.ReminderForm.getMaybeTime form) ] model.now)
+                    todoStore
 
         EditMode.EditTodoContext form ->
             model

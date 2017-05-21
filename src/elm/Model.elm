@@ -360,7 +360,7 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             ReminderOverlay.addSnoozeOffset model.now snoozeOffset
     in
         model
-            |> updateTodoById (time |> Todo.SnoozeTill) todoId
+            |> updateTodoWithId (time |> Todo.SnoozeTill) todoId
             >> removeReminderOverlay
 
 
@@ -493,11 +493,11 @@ saveCurrentForm model =
 
         EditMode.EditTodo form ->
             model
-                |> updateTodoById (Todo.SetText form.todoText) form.id
+                |> updateTodoWithId (Todo.SetText form.todoText) form.id
 
         EditMode.EditTodoReminder form ->
             model
-                |> updateTodoById (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
+                |> updateTodoWithId (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
 
         EditMode.EditTodoContext form ->
             model
@@ -536,7 +536,7 @@ toggleDeleteEntity entity model =
                         projectStore
 
                 TodoEntity todo ->
-                    updateTodoById Todo.ToggleDeleted entityId
+                    updateTodoWithId Todo.ToggleDeleted entityId
 
 
 getMaybeEditTodoReminderForm model =
@@ -586,7 +586,7 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
 
         maybeModel =
             maybeTodoUpdateAction
-                ?|> (updateTodoById # todoId # model)
+                ?|> (updateTodoWithId # todoId # model)
     in
         maybeModel ?= model |> setFocusInEntityWithId todoId
 
@@ -773,7 +773,7 @@ updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
             else
                 Set.singleton todoId
     in
-        model |> updateAllTodoById action idSet
+        model |> updateAllTodoWithIds action idSet
 
 
 replaceTodoIfEqualById todo =
@@ -1127,10 +1127,10 @@ updateDocWithId id =
        in
            update store (Store.updateDocWithId id updateFn) model
     -}
-    updateAllDocsWithId (Set.singleton id)
+    updateAllDocWithIds (Set.singleton id)
 
 
-updateAllDocsWithId idSet updateFn store model =
+updateAllDocWithIds idSet updateFn store model =
     let
         updateAndSetModifiedAt =
             updateFn >> Document.setModifiedAt model.now
@@ -1150,15 +1150,15 @@ updateTodo__ action todo =
         )
 
 
-updateTodoById action todoId model =
+updateTodoWithId action todoId model =
     updateDocWithId todoId
         (Todo.update [ action ] model.now)
         todoStore
         model
 
 
-updateAllTodoById action todoIdSet model =
-    updateAllDocsWithId todoIdSet
+updateAllTodoWithIds action todoIdSet model =
+    updateAllDocWithIds todoIdSet
         (Todo.update [ action ] model.now)
         todoStore
         model

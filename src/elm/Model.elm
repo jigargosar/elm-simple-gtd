@@ -485,6 +485,11 @@ updateDocWithId id updateFn store model =
         update store (Store.updateDocWithId id updateFn) model
 
 
+updateTodo : Todo.UpdateAction -> Model -> (Todo.Model -> Todo.Model)
+updateTodo action model =
+    Todo.update [ action ] model.now
+
+
 saveCurrentForm model =
     case model.editMode of
         EditMode.EditContext form ->
@@ -502,13 +507,13 @@ saveCurrentForm model =
         EditMode.EditTodo form ->
             model
                 |> updateDocWithId form.id
-                    (Todo.update [ Todo.SetText form.todoText ] model.now)
+                    (updateTodo (Todo.SetText form.todoText) model)
                     todoStore
 
         EditMode.EditTodoReminder form ->
             model
                 |> updateDocWithId form.id
-                    (Todo.update [ Todo.SetTime (Todo.ReminderForm.getMaybeTime form) ] model.now)
+                    (updateTodo (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) model)
                     todoStore
 
         EditMode.EditTodoContext form ->

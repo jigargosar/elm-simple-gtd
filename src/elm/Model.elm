@@ -366,10 +366,9 @@ snoozeTodoWithOffset snoozeOffset todoId model =
 
 findAndSnoozeOverDueTodo : Model -> Maybe ( Todo.Model, Model )
 findAndSnoozeOverDueTodo model =
-    findAndUpdateDocMaybeT
+    findAndUpdateTodoT2
         (Todo.isReminderOverdue model.now)
-        (Todo.update [ Todo.SnoozeTill (model.now + (Time.minute * 15)) ] model.now)
-        todoStore
+        (Todo.SnoozeTill (model.now + (Time.minute * 15)))
         model
 
 
@@ -409,6 +408,10 @@ todoStore =
     { get = .todoStore, set = (\s b -> { b | todoStore = s }) }
 
 
+todoStoreT2 =
+    { get = .todoStore, set = (\( x, s ) b -> ( x, { b | todoStore = s } )) }
+
+
 contextStore =
     { get = .contextStore, set = (\s b -> { b | contextStore = s }) }
 
@@ -432,6 +435,17 @@ updateTMaybe lens smallToMaybeSmallTF big =
 
         maybeBigT =
             maybeSmallT ?|> Tuple2.mapSecond (setIn big lens)
+    in
+        maybeBigT
+
+
+updateMaybe lens smallMaybeF big =
+    let
+        maybeSmallT =
+            smallMaybeF (lens.get big)
+
+        maybeBigT =
+            maybeSmallT ?|> setIn big lens
     in
         maybeBigT
 
@@ -1128,15 +1142,15 @@ updateKeyboardState updater model =
 -- Document Update Helpers
 
 
-findAndUpdateDocMaybeT findFn updateMaybeTFn store model =
+findAndUpdateDoc findFn updateFn store model =
     let
         updateMaybeF =
             Store.findAndUpdateT
                 findFn
                 model.now
-                updateMaybeTFn
+                updateFn
     in
-        updateTMaybe store updateMaybeF model
+        updateMaybe store updateMaybeF model
 
 
 updateDocWithId id =
@@ -1160,15 +1174,23 @@ updateTodo__ action todo =
         )
 
 
+todoUpdater action model =
+    Todo.update [ action ] model.now
+
+
 updateTodoWithId action todoId model =
     updateDocWithId todoId
-        (Todo.update [ action ] model.now)
+        (todoUpdater action model)
         todoStore
         model
 
 
 updateAllTodoWithIds action todoIdSet model =
     updateAllDocWithIds todoIdSet
-        (Todo.update [ action ] model.now)
+        (todoUpdater action model)
         todoStore
         model
+
+
+findAndUpdateTodoT2 findFn action model =
+    findAndUpdateDoc findFn (todoUpdater action model) todoStoreT2 model

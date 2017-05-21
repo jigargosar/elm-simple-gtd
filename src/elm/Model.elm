@@ -249,10 +249,6 @@ getProjectsAsIdDict =
     (.projectStore) >> Store.asIdDict
 
 
-getEncodedContextNames =
-    .contextStore >> Context.getEncodedNames
-
-
 getMaybeProjectNameOfTodo : Todo.Model -> Model -> Maybe Project.Name
 getMaybeProjectNameOfTodo todo model =
     Todo.getProjectId todo |> Project.findNameById # (getProjectStore model)

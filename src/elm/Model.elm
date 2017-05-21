@@ -774,56 +774,6 @@ getEntityId entity =
             Document.getId doc
 
 
-getFocusedEntityIndex entityList model =
-    entityList
-        |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
-        ?= 0
-
-
-focusEntityByIndex entityList index model =
-    let
-        focusedEntityId =
-            List.clampIndex index entityList
-                |> (List.getAt # entityList)
-                ?|> getEntityId
-                ?= ""
-
-        focusedEntityInfo =
-            { id = focusedEntityId }
-    in
-        { model | focusedEntityInfo = focusedEntityInfo }
-
-
-setFocusInEntityWithId id model =
-    let
-        focusedEntityInfo =
-            model.focusedEntityInfo
-    in
-        { model | focusedEntityInfo = { focusedEntityInfo | id = id } }
-
-
-setFocusInEntity entity =
-    setFocusInEntityWithId (getEntityId entity)
-
-
-setMaybeFocusedEntity maybeEntity model =
-    { model | maybeFocusedEntity = maybeEntity }
-
-
-focusPrevEntity : List Entity -> ModelF
-focusPrevEntity entityList model =
-    getFocusedEntityIndex entityList model
-        |> andThenSubtract 1
-        |> (focusEntityByIndex entityList # model)
-
-
-focusNextEntity : List Entity -> ModelF
-focusNextEntity entityList model =
-    getFocusedEntityIndex entityList model
-        |> add 1
-        |> (focusEntityByIndex entityList # model)
-
-
 createViewEntityList viewType model =
     case viewType of
         ContextsView ->
@@ -1035,6 +985,60 @@ updateKeyboardStateM updater model =
 updateKeyboardState : (Keyboard.State -> Keyboard.State) -> ModelF
 updateKeyboardState updater model =
     setKeyboardState (updater (getKeyboardState model)) model
+
+
+
+-- Focus Functions
+
+
+getFocusedEntityIndex entityList model =
+    entityList
+        |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
+        ?= 0
+
+
+focusEntityByIndex entityList index model =
+    let
+        focusedEntityId =
+            List.clampIndex index entityList
+                |> (List.getAt # entityList)
+                ?|> getEntityId
+                ?= ""
+
+        focusedEntityInfo =
+            { id = focusedEntityId }
+    in
+        { model | focusedEntityInfo = focusedEntityInfo }
+
+
+setFocusInEntityWithId id model =
+    let
+        focusedEntityInfo =
+            model.focusedEntityInfo
+    in
+        { model | focusedEntityInfo = { focusedEntityInfo | id = id } }
+
+
+setFocusInEntity entity =
+    setFocusInEntityWithId (getEntityId entity)
+
+
+setMaybeFocusedEntity maybeEntity model =
+    { model | maybeFocusedEntity = maybeEntity }
+
+
+focusPrevEntity : List Entity -> ModelF
+focusPrevEntity entityList model =
+    getFocusedEntityIndex entityList model
+        |> andThenSubtract 1
+        |> (focusEntityByIndex entityList # model)
+
+
+focusNextEntity : List Entity -> ModelF
+focusNextEntity entityList model =
+    getFocusedEntityIndex entityList model
+        |> add 1
+        |> (focusEntityByIndex entityList # model)
 
 
 

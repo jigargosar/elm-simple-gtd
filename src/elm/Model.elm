@@ -477,12 +477,26 @@ updateEditModeNameChanged newName entity model =
             model
 
 
-updateDocWithId id updateFn store model =
+updateDocWithId id =
+    {- let
+           updateAndSetModifiedAt =
+               updateFn >> Document.setModifiedAt model.now
+       in
+           update store (Store.updateDocWithId id updateFn) model
+    -}
+    updateAllDocsWithId (Set.singleton id)
+
+
+updateAllDocsWithId idSet updateFn store model =
     let
         updateAndSetModifiedAt =
             updateFn >> Document.setModifiedAt model.now
+
+        storeF store =
+            idSet
+                |> Set.foldl (Store.updateDocWithId # updateFn) store
     in
-        update store (Store.updateDocWithId id updateFn) model
+        update store (storeF) model
 
 
 saveCurrentForm model =
@@ -785,11 +799,11 @@ updateTodoById action todoId model =
         model
 
 
-updateAllTodoById action todoId model =
-    updateDocWithId todoId
-        (Todo.update [ action ] model.now)
-        todoStore
-        model
+
+--updateAllTodoById action todoIdSet model =
+--    todoIdSet
+--        |> Set.foldl
+--    updateDocWithId action model
 
 
 updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =

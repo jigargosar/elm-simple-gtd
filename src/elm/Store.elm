@@ -12,7 +12,7 @@ port module Store
         , asList
         , filter
         , updateAllDocs
-        , findAndUpdate
+        , findAndUpdateT
         , replaceDoc__
         , findAllByIdSet__
         , updateExternal__
@@ -125,7 +125,7 @@ replaceDocIn =
     flip replaceDoc__
 
 
-findAndUpdate findFn now updateFn store =
+findAndUpdateT findFn now updateFn store =
     findBy findFn store
         ?|> (\doc -> updateFn doc |> replaceDocIn store |> (,) doc)
 

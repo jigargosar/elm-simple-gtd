@@ -368,12 +368,12 @@ findAndSnoozeOverDueTodo : Model -> Maybe ( Todo.Model, Model )
 findAndSnoozeOverDueTodo model =
     let
         updateMaybeF =
-            Store.findAndUpdate
+            Store.findAndUpdateT
                 (Todo.isReminderOverdue model.now)
                 model.now
                 (Todo.update [ Todo.SnoozeTill (model.now + (Time.minute * 15)) ] model.now)
     in
-        updateMaybeT todoStore updateMaybeF model
+        updateTMaybe todoStore updateMaybeF model
 
 
 getActiveTodoListGroupedBy fn =
@@ -428,7 +428,7 @@ setIn big lens small =
     lens.set small big
 
 
-updateMaybeT lens smallToMaybeSmallTF big =
+updateTMaybe lens smallToMaybeSmallTF big =
     let
         maybeSmallT =
             smallToMaybeSmallTF (lens.get big)
@@ -1129,6 +1129,17 @@ updateKeyboardState updater model =
 
 
 -- Document Update Helpers
+
+
+findAndUpdateDocMaybeT findFn updateMaybeTFn store model =
+    let
+        updateMaybeF =
+            Store.findAndUpdateT
+                findFn
+                model.now
+                updateMaybeTFn
+    in
+        updateTMaybe store updateMaybeF model
 
 
 updateDocWithId id =

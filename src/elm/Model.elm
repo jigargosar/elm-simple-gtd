@@ -249,16 +249,6 @@ getProjectsAsIdDict =
     (.projectStore) >> Store.asIdDict
 
 
-getMaybeProjectNameOfTodo : Todo.Model -> Model -> Maybe Project.Name
-getMaybeProjectNameOfTodo todo model =
-    Todo.getProjectId todo |> Project.findNameById # (getProjectStore model)
-
-
-getContextNameOfTodo : Todo.Model -> Model -> Maybe Context.Name
-getContextNameOfTodo todo model =
-    Todo.getContextId todo |> Context.findNameById # (model.contextStore)
-
-
 insertProjectIfNotExist : Project.Name -> ModelF
 insertProjectIfNotExist projectName =
     apply2With ( getNow, getProjectStore )
@@ -624,14 +614,7 @@ createEntityEditForm entity model =
 
 createEditTodoMode : Todo.Model -> Model -> EditMode
 createEditTodoMode todo model =
-    let
-        projectName =
-            getMaybeProjectNameOfTodo todo model ?= ""
-
-        contextName =
-            getContextNameOfTodo todo model ?= ""
-    in
-        Todo.Form.create todo |> EditMode.EditTodo
+    Todo.Form.create todo |> EditMode.EditTodo
 
 
 getMaybeEditTodoModel =

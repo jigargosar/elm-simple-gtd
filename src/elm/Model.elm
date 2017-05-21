@@ -785,6 +785,13 @@ updateTodoById action todoId model =
         model
 
 
+updateAllTodoById action todoId model =
+    updateDocWithId todoId
+        (Todo.update [ action ] model.now)
+        todoStore
+        model
+
+
 updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
     let
         isSelected =

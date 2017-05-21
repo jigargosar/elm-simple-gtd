@@ -728,13 +728,13 @@ setTodoStoreFromTuple tuple model =
 onPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            updateTodoStore (Store.updateExternal__ encodedEntity)
+            update todoStore (Store.onPouchDbChange encodedEntity)
 
         "project-db" ->
-            updateProjectStoreM (getProjectStore >> Store.updateExternal__ encodedEntity)
+            update projectStore (Store.onPouchDbChange encodedEntity)
 
         "context-db" ->
-            updateContextStoreM (getContextStore >> Store.updateExternal__ encodedEntity)
+            update contextStore (Store.onPouchDbChange encodedEntity)
 
         _ ->
             identity
@@ -1006,11 +1006,6 @@ setContextStoreIn =
     flip setContextStore
 
 
-updateContextStore : (Context.Store -> Context.Store) -> ModelF
-updateContextStore updater model =
-    setContextStore (updater (getContextStore model)) model
-
-
 updateContextStoreM : (Model -> Context.Store) -> ModelF
 updateContextStoreM updater model =
     setContextStore (updater model) model
@@ -1069,6 +1064,7 @@ getContextsAsIdDict =
 
 getProjectsAsIdDict =
     (.projectStore) >> Store.asIdDict
+
 
 
 -- Document Update Helpers

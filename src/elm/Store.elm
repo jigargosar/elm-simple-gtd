@@ -15,7 +15,7 @@ port module Store
         , findAndUpdateT
         , replaceDoc__
         , findAllByIdSet__
-        , updateExternal__
+        , onPouchDbChange
         , upsertEncoded__
         , persist
         )
@@ -169,8 +169,8 @@ upsertEncoded__ jsonValue store =
         ?= Cmd.none
 
 
-updateExternal__ : D.Value -> Store x -> Store x
-updateExternal__ encodedDoc store =
+onPouchDbChange : D.Value -> Store x -> Store x
+onPouchDbChange encodedDoc store =
     decode encodedDoc store ?|> insertExternal # store ?= store
 
 

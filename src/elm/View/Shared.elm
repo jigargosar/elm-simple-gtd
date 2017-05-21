@@ -117,10 +117,6 @@ createSharedViewModel model =
 
 defaultBadge : { x | name : String, count : Int } -> Html msg
 defaultBadge vm =
-    --    div [ class "ellipsis" ]
-    --        [ div [] [ text vm.name ]
-    --        , badge [ tabindex -1, intProperty "label" (vm.count) ] []
-    --        ]
     div [ class "layout horizontal center" ]
         [ div [ class "ellipsis" ] [ vm.name |> text ]
         , div [ style [ "padding" => "0 0 1rem 0.1rem " ], class "text-secondary" ]

@@ -367,17 +367,13 @@ snoozeTodoWithOffset snoozeOffset todoId model =
 findAndSnoozeOverDueTodo : Model -> Maybe ( Todo.Model, Model )
 findAndSnoozeOverDueTodo model =
     let
-        maybeTodoAndStore =
+        updateMaybeF =
             Store.findAndUpdate
                 (Todo.isReminderOverdue model.now)
                 model.now
                 (Todo.update [ Todo.SnoozeTill (model.now + (Time.minute * 15)) ] model.now)
-                model.todoStore
-
-        maybeTodoAndModel =
-            maybeTodoAndStore ?|> Tuple.mapSecond (setIn model todoStore)
     in
-        maybeTodoAndModel
+        updateMaybeT todoStore updateMaybeF model
 
 
 getActiveTodoListGroupedBy fn =

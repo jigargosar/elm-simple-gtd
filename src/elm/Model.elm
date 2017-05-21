@@ -32,7 +32,7 @@ import Toolkit.Helpers exposing (..)
 import Tuple2
 
 
-type GroupByViewType
+type EntityListViewType
     = ContextsView
     | ContextView Document.Id
     | ProjectsView
@@ -40,7 +40,7 @@ type GroupByViewType
 
 
 type ViewType
-    = EntityListView GroupByViewType
+    = EntityListView EntityListViewType
     | DoneView
     | BinView
     | SyncView
@@ -703,6 +703,9 @@ updateTodoAndMaybeAlsoSelected action todoId model =
                 model.selectedEntityIdSet
             else
                 Set.singleton todoId
+
+        _ =
+            getFocusInEntityIndex
     in
         model |> updateAllTodos action idSet
 
@@ -772,6 +775,15 @@ getEntityId entity =
 
         ContextEntity doc ->
             Document.getId doc
+
+
+getCurrentEntityViewList model =
+    case model.mainViewType of
+        EntityListView viewType ->
+            createViewEntityList viewType model
+
+        _ ->
+            []
 
 
 createViewEntityList viewType model =
@@ -1021,7 +1033,11 @@ setMaybeFocusedEntity maybeEntity model =
     { model | maybeFocusedEntity = maybeEntity }
 
 
-getFocusedEntityIndex entityList model =
+getFocusInEntityId model =
+    model.focusedEntityInfo.id
+
+
+getFocusInEntityIndex entityList model =
     entityList
         |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
         ?= 0
@@ -1029,14 +1045,14 @@ getFocusedEntityIndex entityList model =
 
 focusPrevEntity : List Entity -> ModelF
 focusPrevEntity entityList model =
-    getFocusedEntityIndex entityList model
+    getFocusInEntityIndex entityList model
         |> andThenSubtract 1
         |> (focusEntityByIndex entityList # model)
 
 
 focusNextEntity : List Entity -> ModelF
 focusNextEntity entityList model =
-    getFocusedEntityIndex entityList model
+    getFocusInEntityIndex entityList model
         |> add 1
         |> (focusEntityByIndex entityList # model)
 

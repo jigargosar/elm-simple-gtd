@@ -6,7 +6,7 @@ import Document
 import EditMode exposing (EditMode)
 import Ext.Keyboard exposing (KeyboardEvent)
 import Lazy
-import Model exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupEntityType(ContextGroup, ProjectGroup), ViewType(..), GroupByViewType(..))
+import Model exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupEntityType(ContextGroup, ProjectGroup), ViewType(..), EntityListViewType(..))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -28,7 +28,7 @@ type alias IconVM =
 
 type alias ViewModel =
     { entityList : List EntityViewModel
-    , viewType : GroupByViewType
+    , viewType : EntityListViewType
     , title : String
     , showDeleted : Bool
     , onAddClicked : Msg
@@ -71,7 +71,7 @@ type alias Config =
     , isNull : DocumentWithName -> Bool
     , nullIcon : IconVM
     , defaultIconName : String
-    , getViewType : Document.Id -> GroupByViewType
+    , getViewType : Document.Id -> EntityListViewType
     , maybeEditModel : Maybe EditMode.EntityForm
     }
 

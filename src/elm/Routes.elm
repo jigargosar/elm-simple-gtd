@@ -65,10 +65,10 @@ builder2messages builder =
             [ Msg.SetGroupByView ProjectsView ]
 
         "lists" :: "bin" :: [] ->
-            [ Msg.SetView BinView ]
+            [ Msg.SwitchView BinView ]
 
         "lists" :: "done" :: [] ->
-            [ Msg.SetView DoneView ]
+            [ Msg.SwitchView DoneView ]
 
         "Inbox" :: [] ->
             [ Msg.SetGroupByView (ContextView "") ]
@@ -86,7 +86,7 @@ builder2messages builder =
             [ Msg.ShowReminderOverlayForTodoId todoId ]
 
         "custom-sync" :: [] ->
-            [ Msg.SetView SyncView ]
+            [ Msg.SwitchView SyncView ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

@@ -150,6 +150,57 @@ type alias TodoNotificationEvent =
     }
 
 
+
+-- Model Lens
+
+
+type alias Lens small big =
+    { get : big -> small, set : small -> big -> big }
+
+
+projectStore =
+    { get = .projectStore, set = (\s b -> { b | projectStore = s }) }
+
+
+keyboardState =
+    { get = .keyboardState, set = (\s b -> { b | keyboardState = s }) }
+
+
+todoStore =
+    { get = .todoStore, set = (\s b -> { b | todoStore = s }) }
+
+
+todoStoreT2 =
+    { get = .todoStore, set = (\( x, s ) b -> ( x, { b | todoStore = s } )) }
+
+
+contextStore =
+    { get = .contextStore, set = (\s b -> { b | contextStore = s }) }
+
+
+now =
+    { get = .now, set = (\s b -> { b | now = s }) }
+
+
+update lens smallF big =
+    setIn big lens (smallF (lens.get big))
+
+
+setIn big lens small =
+    lens.set small big
+
+
+updateMaybe lens smallMaybeF big =
+    let
+        maybeSmallT =
+            smallMaybeF (lens.get big)
+
+        maybeBigT =
+            maybeSmallT ?|> setIn big lens
+    in
+        maybeBigT
+
+
 init : Flags -> Model
 init flags =
     let
@@ -376,64 +427,6 @@ createAndEditNewContext model =
 
 isShowDetailsKeyPressed =
     keyboardState.get >> Keyboard.isAltDown >> not
-
-
-type alias Lens small big =
-    { get : big -> small, set : small -> big -> big }
-
-
-projectStore =
-    { get = .projectStore, set = (\s b -> { b | projectStore = s }) }
-
-
-keyboardState =
-    { get = .keyboardState, set = (\s b -> { b | keyboardState = s }) }
-
-
-todoStore =
-    { get = .todoStore, set = (\s b -> { b | todoStore = s }) }
-
-
-todoStoreT2 =
-    { get = .todoStore, set = (\( x, s ) b -> ( x, { b | todoStore = s } )) }
-
-
-contextStore =
-    { get = .contextStore, set = (\s b -> { b | contextStore = s }) }
-
-
-now =
-    { get = .now, set = (\s b -> { b | now = s }) }
-
-
-update lens smallF big =
-    setIn big lens (smallF (lens.get big))
-
-
-setIn big lens small =
-    lens.set small big
-
-
-updateTMaybe lens smallToMaybeSmallTF big =
-    let
-        maybeSmallT =
-            smallToMaybeSmallTF (lens.get big)
-
-        maybeBigT =
-            maybeSmallT ?|> Tuple2.mapSecond (setIn big lens)
-    in
-        maybeBigT
-
-
-updateMaybe lens smallMaybeF big =
-    let
-        maybeSmallT =
-            smallMaybeF (lens.get big)
-
-        maybeBigT =
-            maybeSmallT ?|> setIn big lens
-    in
-        maybeBigT
 
 
 
@@ -802,14 +795,14 @@ getMainViewType =
     (.mainViewType)
 
 
-setMainViewType : ViewType -> ModelF
-setMainViewType mainViewType model =
+switchView : ViewType -> ModelF
+switchView mainViewType model =
     { model | mainViewType = mainViewType }
         |> clearSelection
 
 
 setEntityListViewType =
-    EntityListView >> setMainViewType
+    EntityListView >> switchView
 
 
 getEntityId entity =

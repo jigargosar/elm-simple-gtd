@@ -9,7 +9,7 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, checked, class, classList, id, style, tabindex, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
-import Msg exposing (Msg(SetView), commonMsg)
+import Msg exposing (Msg(SwitchView), commonMsg)
 import String.Extra
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -140,7 +140,7 @@ divider =
 entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
     [ item
         [ class "has-hover-elements"
-        , onClick (SetView (EntityListView viewType))
+        , onClick (SwitchView (EntityListView viewType))
         ]
         [ Html.node "iron-icon" [ iconA icon.name, style [ "color" => icon.color ] ] []
         , itemBody [] [ headLineText title ]
@@ -170,7 +170,7 @@ headLineText title =
 
 
 switchViewItem iconName viewType title =
-    item [ onClick (SetView viewType) ]
+    item [ onClick (SwitchView viewType) ]
         [ Html.node "iron-icon" [ iconA iconName ] []
         , itemBody [] [ text title ]
         ]

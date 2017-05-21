@@ -239,8 +239,8 @@ update msg =
                             >> Model.setEditMode
                         )
 
-                SetView viewType ->
-                    Return.map (Model.setMainViewType viewType)
+                SwitchView viewType ->
+                    Return.map (Model.switchView viewType)
 
                 SetGroupByView viewType ->
                     Return.map (Model.setEntityListViewType viewType)

@@ -542,18 +542,16 @@ toggleDeleteEntity entity model =
     in
         case entity of
             ContextEntity context ->
-                context
-                    |> Document.toggleDeleted
-                    |> Context.setModifiedAt model.now
-                    |> (Store.replaceDoc__ # model.contextStore)
-                    |> (setContextStore # model)
+                model
+                    |> updateDocWithId entityId
+                        (Document.toggleDeleted)
+                        contextStore
 
             ProjectEntity project ->
-                project
-                    |> Document.toggleDeleted
-                    |> Project.setModifiedAt model.now
-                    |> (Store.replaceDoc__ # model.projectStore)
-                    |> (setProjectStore # model)
+                model
+                    |> updateDocWithId entityId
+                        (Document.toggleDeleted)
+                        projectStore
 
             TodoEntity todo ->
                 updateTodoById Todo.ToggleDeleted entityId model

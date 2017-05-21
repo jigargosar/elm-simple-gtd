@@ -631,15 +631,6 @@ updateEditModeM updater model =
     setEditMode (updater model) model
 
 
-clearSelectionIfEditModeNone model =
-    case model.editMode of
-        EditMode.None ->
-            clearSelection model
-
-        _ ->
-            model
-
-
 clearSelection =
     setSelectedEntityIdSet Set.empty
 

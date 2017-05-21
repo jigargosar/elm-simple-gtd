@@ -72,21 +72,3 @@ editProjectMode model =
 
 editProjectSetName name epm =
     EditProject { epm | name = name }
-
-
-getMaybeEditTodoModel model =
-    case model of
-        EditTodo model ->
-            Just model
-
-        _ ->
-            Nothing
-
-
-getNewTodoModel model =
-    case model of
-        NewTodo model ->
-            Just model
-
-        _ ->
-            Nothing

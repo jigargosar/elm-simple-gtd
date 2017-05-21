@@ -609,20 +609,7 @@ createEntityEditForm entity model =
             EditMode.editProjectMode project
 
         TodoEntity todo ->
-            createEditTodoMode todo model
-
-
-createEditTodoMode : Todo.Model -> Model -> EditMode
-createEditTodoMode todo model =
-    Todo.Form.create todo |> EditMode.EditTodo
-
-
-getMaybeEditTodoModel =
-    getEditMode >> EditMode.getMaybeEditTodoModel
-
-
-getEditNewTodoModel =
-    getEditMode >> EditMode.getNewTodoModel
+            Todo.Form.create todo |> EditMode.EditTodo
 
 
 deactivateEditingMode =
@@ -636,9 +623,6 @@ getEditMode =
 
 setEditMode : EditMode -> ModelF
 setEditMode editMode =
-    {- clearSelectionIfEditModeNone
-       >>
-    -}
     (\model -> { model | editMode = editMode })
 
 

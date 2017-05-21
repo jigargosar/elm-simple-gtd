@@ -711,10 +711,6 @@ updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
         model |> updateAllTodos action idSet
 
 
-replaceTodoIfEqualById todo =
-    List.replaceIf (Document.equalById todo) todo
-
-
 insertTodo : (Document.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodo constructWithId =
     applyWith (getTodoStore)

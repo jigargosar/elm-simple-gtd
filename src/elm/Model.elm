@@ -1130,13 +1130,14 @@ updateDocWithId id =
     updateAllDocWithIds (Set.singleton id)
 
 
+
+--updateAllDocWithIds: Set (Document)
+
+
 updateAllDocWithIds idSet updateFn store model =
     let
-        updateAndSetModifiedAt =
-            updateFn >> Document.setModifiedAt model.now
-
         storeF store =
-            idSet |> Set.foldl (Store.updateDocWithId # updateFn) store
+            Store.updateAllDocAndSetModifiedAt idSet model.now updateFn store
     in
         update store (storeF) model
 

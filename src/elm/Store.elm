@@ -11,7 +11,7 @@ port module Store
         , asIdDict
         , asList
         , filter
-        , updateDocWithId
+        , updateAllDocAndSetModifiedAt
         , replaceDoc__
         , findAllByIdSet__
         , updateExternal__
@@ -36,7 +36,8 @@ import Json.Decode as J exposing (Decoder)
 import Json.Decode.Pipeline as J
 import Json.Encode as J
 import Random.Pcg as Random exposing (Seed)
-import Set
+import Set exposing (Set)
+import Time exposing (Time)
 
 
 port pouchDBUpsert : ( String, String, D.Value ) -> Cmd msg
@@ -121,6 +122,24 @@ replaceDoc__ doc s =
 
 replaceDocIn =
     flip replaceDoc__
+
+
+updateDocWithIdAndSetModifiedAt id =
+    updateAllDocAndSetModifiedAt (Set.singleton id)
+
+
+updateAllDocAndSetModifiedAt :
+    Set Document.Id
+    -> Time
+    -> (Document x -> Document x)
+    -> Store x
+    -> Store x
+updateAllDocAndSetModifiedAt idSet now updateFn store =
+    let
+        updateAndSetModifiedAt =
+            updateFn >> Document.setModifiedAt now
+    in
+        idSet |> Set.foldl (updateDocWithId # updateFn) store
 
 
 updateDocWithId id updateDocFn store =

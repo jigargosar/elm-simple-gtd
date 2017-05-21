@@ -1,3 +1,6 @@
+## Upcoming
+* [fix] focus on next entity if todos project/context change caused it to move in current view. 
+
 ## v0.12.1 - 2017-05-20
 * [fix] process changed docs from firebase separately so that dont end up sending them back to firebase.
 * [fix] fcm token activation

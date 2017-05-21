@@ -342,7 +342,7 @@ updateTodo action todo =
     Return.map (Model.updateTodo action (Document.getId todo))
 
 
-updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todo =
+updateTodoAndMaybeAlsoSelected action todo =
     Return.map (Model.updateTodoAndMaybeAlsoSelected action (Document.getId todo))
 
 

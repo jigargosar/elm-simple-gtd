@@ -1127,7 +1127,7 @@ updateDocWithId id =
 updateAllDocWithIds idSet updateFn store model =
     let
         storeF =
-            Store.updateAllDocAndSetModifiedAt idSet model.now updateFn
+            Store.updateAllDocs idSet model.now updateFn
     in
         update store storeF model
 

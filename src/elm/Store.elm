@@ -11,7 +11,7 @@ port module Store
         , asIdDict
         , asList
         , filter
-        , updateAllDocAndSetModifiedAt
+        , updateAllDocs
         , replaceDoc__
         , findAllByIdSet__
         , updateExternal__
@@ -124,17 +124,17 @@ replaceDocIn =
     flip replaceDoc__
 
 
-updateDocWithIdAndSetModifiedAt id =
-    updateAllDocAndSetModifiedAt (Set.singleton id)
+updateDoc id =
+    updateAllDocs (Set.singleton id)
 
 
-updateAllDocAndSetModifiedAt :
+updateAllDocs :
     Set Document.Id
     -> Time
     -> (Document x -> Document x)
     -> Store x
     -> Store x
-updateAllDocAndSetModifiedAt idSet now updateFn store =
+updateAllDocs idSet now updateFn store =
     let
         updateAndSetModifiedAt =
             updateFn >> Document.setModifiedAt now

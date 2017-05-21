@@ -533,6 +533,24 @@ getMaybeEditTodoProjectForm model =
             Nothing
 
 
+getRemoteSyncForm model =
+    let
+        maybeForm =
+            case model.editMode of
+                EditMode.EditSyncSettings form ->
+                    Just form
+
+                _ ->
+                    Nothing
+    in
+        maybeForm ?= createRemoteSyncForm model
+
+
+createRemoteSyncForm : Model -> EditMode.SyncForm
+createRemoteSyncForm model =
+    { uri = model.pouchDBRemoteSyncURI }
+
+
 setTodoContextOrProjectBasedOnCurrentView todoId model =
     let
         maybeTodoUpdateAction =
@@ -592,24 +610,6 @@ updateEditModeM updater model =
 
 clearSelection =
     setSelectedEntityIdSet Set.empty
-
-
-getRemoteSyncForm model =
-    let
-        maybeForm =
-            case model.editMode of
-                EditMode.EditSyncSettings form ->
-                    Just form
-
-                _ ->
-                    Nothing
-    in
-        maybeForm ?= createRemoteSyncForm model
-
-
-createRemoteSyncForm : Model -> EditMode.SyncForm
-createRemoteSyncForm model =
-    { uri = model.pouchDBRemoteSyncURI }
 
 
 getFilteredTodoList model =
@@ -709,8 +709,7 @@ updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
 
 insertTodo : (Document.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodo constructWithId =
-    applyWith (getTodoStore)
-        (Store.insert (constructWithId) >> setTodoStoreFromTuple)
+    update todoStoreT2 (Store.insert (constructWithId))
 
 
 setTodoStoreFromTuple tuple model =

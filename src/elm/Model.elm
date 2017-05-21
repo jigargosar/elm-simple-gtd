@@ -376,19 +376,7 @@ findAndSnoozeOverDueTodo model =
 
         maybeTodoAndModel =
             maybeTodoAndStore ?|> Tuple.mapSecond (setIn model todoStore)
-
-        snoozeTodo todo m =
-            m
-                |> updateTodo__
-                    (Todo.SnoozeTill (m.now + (Time.minute * 15)))
-                    todo
-                |> setReminderOverlayToInitialView todo
     in
-        --        findTodoWithOverDueReminder model
-        --            ?|> apply2
-        --                    ( snoozeTodo # model
-        --                    , identity
-        --                    )
         maybeTodoAndModel
 
 

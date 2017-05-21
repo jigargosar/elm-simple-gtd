@@ -339,7 +339,7 @@ persist lens =
 
 updateTodo : Todo.UpdateAction -> Todo.Model -> ReturnF
 updateTodo action todo =
-    Return.map (Model.updateTodoWithId action (Document.getId todo))
+    Return.map (Model.updateTodo action (Document.getId todo))
 
 
 updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todo =
@@ -396,7 +396,7 @@ reminderOverlayAction action =
                         in
                             case action of
                                 ReminderOverlay.Dismiss ->
-                                    Model.updateTodoWithId (Todo.TurnReminderOff) todoId
+                                    Model.updateTodo (Todo.TurnReminderOff) todoId
                                         >> Model.removeReminderOverlay
                                         >> Return.singleton
                                         >> Return.command (closeNotification todoId)

@@ -360,7 +360,7 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             ReminderOverlay.addSnoozeOffset model.now snoozeOffset
     in
         model
-            |> updateTodoWithId (time |> Todo.SnoozeTill) todoId
+            |> updateTodo (time |> Todo.SnoozeTill) todoId
             >> removeReminderOverlay
 
 
@@ -503,23 +503,23 @@ saveCurrentForm model =
     case model.editMode of
         EditMode.EditContext form ->
             model
-                |> updateDocWithId form.id
+                |> updateDoc form.id
                     (Context.setName form.name)
                     contextStore
 
         EditMode.EditProject form ->
             model
-                |> updateDocWithId form.id
+                |> updateDoc form.id
                     (Project.setName form.name)
                     projectStore
 
         EditMode.EditTodo form ->
             model
-                |> updateTodoWithId (Todo.SetText form.todoText) form.id
+                |> updateTodo (Todo.SetText form.todoText) form.id
 
         EditMode.EditTodoReminder form ->
             model
-                |> updateTodoWithId (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
+                |> updateTodo (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
 
         EditMode.EditTodoContext form ->
             model
@@ -548,17 +548,17 @@ toggleDeleteEntity entity model =
         model
             |> case entity of
                 ContextEntity context ->
-                    updateDocWithId entityId
+                    updateDoc entityId
                         (Document.toggleDeleted)
                         contextStore
 
                 ProjectEntity project ->
-                    updateDocWithId entityId
+                    updateDoc entityId
                         (Document.toggleDeleted)
                         projectStore
 
                 TodoEntity todo ->
-                    updateTodoWithId Todo.ToggleDeleted entityId
+                    updateTodo Todo.ToggleDeleted entityId
 
 
 getMaybeEditTodoReminderForm model =
@@ -608,7 +608,7 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
 
         maybeModel =
             maybeTodoUpdateAction
-                ?|> (updateTodoWithId # todoId # model)
+                ?|> (updateTodo # todoId # model)
     in
         maybeModel ?= model |> setFocusInEntityWithId todoId
 
@@ -795,7 +795,7 @@ updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
             else
                 Set.singleton todoId
     in
-        model |> updateAllTodoWithIds action idSet
+        model |> updateAllTodos action idSet
 
 
 replaceTodoIfEqualById todo =
@@ -1153,11 +1153,11 @@ findAndUpdateDoc findFn updateFn store model =
         updateMaybe store updateMaybeF model
 
 
-updateDocWithId id =
-    updateAllDocWithIds (Set.singleton id)
+updateDoc id =
+    updateAllDocs (Set.singleton id)
 
 
-updateAllDocWithIds idSet updateFn store model =
+updateAllDocs idSet updateFn store model =
     let
         storeF =
             Store.updateAllDocs idSet model.now updateFn
@@ -1166,22 +1166,22 @@ updateAllDocWithIds idSet updateFn store model =
 
 
 findAndUpdateTodoT2 findFn action model =
-    findAndUpdateDoc findFn (todoUpdater action model) todoStoreT2 model
+    findAndUpdateDoc findFn (todoUpdateF action model) todoStoreT2 model
 
 
-updateTodoWithId action todoId model =
-    updateDocWithId todoId
-        (todoUpdater action model)
+updateTodo action todoId model =
+    updateDoc todoId
+        (todoUpdateF action model)
         todoStore
         model
 
 
-updateAllTodoWithIds action todoIdSet model =
-    updateAllDocWithIds todoIdSet
-        (todoUpdater action model)
+updateAllTodos action todoIdSet model =
+    updateAllDocs todoIdSet
+        (todoUpdateF action model)
         todoStore
         model
 
 
-todoUpdater action model =
+todoUpdateF action model =
     Todo.update [ action ] model.now

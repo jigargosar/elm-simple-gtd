@@ -1165,17 +1165,8 @@ updateAllDocWithIds idSet updateFn store model =
         update store storeF model
 
 
-updateTodo__ : Todo.UpdateAction -> Todo.Model -> ModelF
-updateTodo__ action todo =
-    apply2With ( getNow, getTodoStore )
-        ((Todo.update [ action ] # todo)
-            >> Store.replaceDoc__
-            >>> setTodoStore
-        )
-
-
-todoUpdater action model =
-    Todo.update [ action ] model.now
+findAndUpdateTodoT2 findFn action model =
+    findAndUpdateDoc findFn (todoUpdater action model) todoStoreT2 model
 
 
 updateTodoWithId action todoId model =
@@ -1192,5 +1183,5 @@ updateAllTodoWithIds action todoIdSet model =
         model
 
 
-findAndUpdateTodoT2 findFn action model =
-    findAndUpdateDoc findFn (todoUpdater action model) todoStoreT2 model
+todoUpdater action model =
+    Todo.update [ action ] model.now

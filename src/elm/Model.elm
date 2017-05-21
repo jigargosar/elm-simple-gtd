@@ -540,14 +540,14 @@ toggleDeleteEntity entity model =
                 context
                     |> Document.toggleDeleted
                     |> Context.setModifiedAt model.now
-                    |> (Store.replaceDoc # model.contextStore)
+                    |> (Store.replaceDoc__ # model.contextStore)
                     |> (setContextStore # model)
 
             ProjectEntity project ->
                 project
                     |> Document.toggleDeleted
                     |> Project.setModifiedAt model.now
-                    |> (Store.replaceDoc # model.projectStore)
+                    |> (Store.replaceDoc__ # model.projectStore)
                     |> (setProjectStore # model)
 
             TodoEntity todo ->
@@ -780,7 +780,7 @@ updateTodo__ : Todo.UpdateAction -> Todo.Model -> ModelF
 updateTodo__ action todo =
     apply2With ( getNow, getTodoStore )
         ((Todo.update [ action ] # todo)
-            >> Store.replaceDoc
+            >> Store.replaceDoc__
             >>> setTodoStore
         )
 
@@ -798,7 +798,7 @@ updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
     in
         if isSelected then
             model.todoStore
-                |> Store.findAllByIdSet model.selectedEntityIdSet
+                |> Store.findAllByIdSet__ model.selectedEntityIdSet
                 |> List.foldl (updateTodo__ action) model
         else
             updateTodoById action todoId model
@@ -821,13 +821,13 @@ setTodoStoreFromTuple tuple model =
 onPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            updateTodoStore (Store.updateExternal encodedEntity)
+            updateTodoStore (Store.updateExternal__ encodedEntity)
 
         "project-db" ->
-            updateProjectStoreM (getProjectStore >> Store.updateExternal encodedEntity)
+            updateProjectStoreM (getProjectStore >> Store.updateExternal__ encodedEntity)
 
         "context-db" ->
-            updateContextStoreM (getContextStore >> Store.updateExternal encodedEntity)
+            updateContextStoreM (getContextStore >> Store.updateExternal__ encodedEntity)
 
         _ ->
             identity
@@ -837,13 +837,13 @@ upsertEncodedDocCmd : String -> E.Value -> Model -> Cmd msg
 upsertEncodedDocCmd dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            getTodoStore >> (Store.upsertEncoded encodedEntity)
+            getTodoStore >> (Store.upsertEncoded__ encodedEntity)
 
         "project-db" ->
-            getProjectStore >> (Store.upsertEncoded encodedEntity)
+            getProjectStore >> (Store.upsertEncoded__ encodedEntity)
 
         "context-db" ->
-            getContextStore >> (Store.upsertEncoded encodedEntity)
+            getContextStore >> (Store.upsertEncoded__ encodedEntity)
 
         _ ->
             (\_ -> Cmd.none)

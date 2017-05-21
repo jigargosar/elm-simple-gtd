@@ -158,12 +158,12 @@ type alias Lens small big =
     { get : big -> small, set : small -> big -> big }
 
 
+contextStore =
+    { get = .contextStore, set = (\s b -> { b | contextStore = s }) }
+
+
 projectStore =
     { get = .projectStore, set = (\s b -> { b | projectStore = s }) }
-
-
-keyboardState =
-    { get = .keyboardState, set = (\s b -> { b | keyboardState = s }) }
 
 
 todoStore =
@@ -174,12 +174,16 @@ todoStoreT2 =
     { get = .todoStore, set = (\( x, s ) b -> ( x, { b | todoStore = s } )) }
 
 
-contextStore =
-    { get = .contextStore, set = (\s b -> { b | contextStore = s }) }
+keyboardState =
+    { get = .keyboardState, set = (\s b -> { b | keyboardState = s }) }
 
 
 now =
     { get = .now, set = (\s b -> { b | now = s }) }
+
+
+user =
+    { get = .user, set = (\s b -> { b | user = s }) }
 
 
 update lens smallF big =
@@ -242,15 +246,15 @@ init flags =
 
 
 getMaybeUserProfile =
-    .user >> Firebase.getMaybeUserProfile
+    user.get >> Firebase.getMaybeUserProfile
 
 
 getMaybeUserId =
-    .user >> Firebase.getMaybeUserId
+    user.get >> Firebase.getMaybeUserId
 
 
-setUser user model =
-    { model | user = user }
+setUser =
+    user.set
 
 
 setFCMToken fcmToken model =
@@ -274,44 +278,6 @@ isLayoutAutoNarrow =
     getLayout
         >> apply2 ( .forceNarrow >> not, .narrow )
         >> uncurry and
-
-
-findProjectByName name =
-    getProjectStore >> Project.findByName name
-
-
-findContextByName name =
-    .contextStore >> Context.findByName name
-
-
-getActiveProjects =
-    (.projectStore) >> Store.reject Document.isDeleted >> (::) Project.null
-
-
-getActiveContexts =
-    (.contextStore) >> Store.reject Document.isDeleted >> (::) Context.null
-
-
-getContextsAsIdDict =
-    (.contextStore) >> Store.asIdDict
-
-
-getProjectsAsIdDict =
-    (.projectStore) >> Store.asIdDict
-
-
-insertProjectIfNotExist : Project.Name -> ModelF
-insertProjectIfNotExist projectName =
-    apply2With ( getNow, getProjectStore )
-        (Project.insertIfNotExistByName projectName >>> setProjectStore)
-
-
-insertContextIfNotExist : Context.Name -> ModelF
-insertContextIfNotExist name =
-    apply2With ( getNow, .contextStore )
-        (Context.insertIfNotExistByName name
-            >>> (\contextStore model -> { model | contextStore = contextStore })
-        )
 
 
 getEntityStore entityType =
@@ -1084,6 +1050,25 @@ updateKeyboardState : (Keyboard.State -> Keyboard.State) -> ModelF
 updateKeyboardState updater model =
     setKeyboardState (updater (getKeyboardState model)) model
 
+
+
+-- Document Query Helpers
+
+
+getActiveProjects =
+    (.projectStore) >> Store.reject Document.isDeleted >> (::) Project.null
+
+
+getActiveContexts =
+    (.contextStore) >> Store.reject Document.isDeleted >> (::) Context.null
+
+
+getContextsAsIdDict =
+    (.contextStore) >> Store.asIdDict
+
+
+getProjectsAsIdDict =
+    (.projectStore) >> Store.asIdDict
 
 
 -- Document Update Helpers

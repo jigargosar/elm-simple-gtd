@@ -477,28 +477,6 @@ updateEditModeNameChanged newName entity model =
             model
 
 
-updateDocWithId id =
-    {- let
-           updateAndSetModifiedAt =
-               updateFn >> Document.setModifiedAt model.now
-       in
-           update store (Store.updateDocWithId id updateFn) model
-    -}
-    updateAllDocsWithId (Set.singleton id)
-
-
-updateAllDocsWithId idSet updateFn store model =
-    let
-        updateAndSetModifiedAt =
-            updateFn >> Document.setModifiedAt model.now
-
-        storeF store =
-            idSet
-                |> Set.foldl (Store.updateDocWithId # updateFn) store
-    in
-        update store (storeF) model
-
-
 saveCurrentForm model =
     case model.editMode of
         EditMode.EditContext form ->
@@ -1140,6 +1118,27 @@ updateKeyboardState updater model =
 
 
 -- Document Update Helpers
+
+
+updateDocWithId id =
+    {- let
+           updateAndSetModifiedAt =
+               updateFn >> Document.setModifiedAt model.now
+       in
+           update store (Store.updateDocWithId id updateFn) model
+    -}
+    updateAllDocsWithId (Set.singleton id)
+
+
+updateAllDocsWithId idSet updateFn store model =
+    let
+        updateAndSetModifiedAt =
+            updateFn >> Document.setModifiedAt model.now
+
+        storeF store =
+            idSet |> Set.foldl (Store.updateDocWithId # updateFn) store
+    in
+        update store (storeF) model
 
 
 updateTodo__ : Todo.UpdateAction -> Todo.Model -> ModelF

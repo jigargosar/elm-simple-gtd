@@ -15,7 +15,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import View.Shared exposing (defaultOkCancelDeleteButtons, expand)
+import View.Shared exposing (defaultOkCancelDeleteButtons)
 import WebComponents
 
 

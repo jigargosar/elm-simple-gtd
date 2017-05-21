@@ -124,26 +124,6 @@ defaultBadge vm =
         ]
 
 
-row =
-    div [ class "row" ]
-
-
-rowItemStretched =
-    div [ class "row-item-stretched" ]
-
-
-colItemStretched =
-    div [ class "col-item-stretched" ]
-
-
-col =
-    div [ class "col" ]
-
-
-expand =
-    div [ class "flex11" ]
-
-
 sharedIconButton iconName onClickHandler =
     Paper.iconButton [ icon iconName, onClickStopPropagation onClickHandler ] []
 

@@ -799,11 +799,11 @@ updateTodoById action todoId model =
         model
 
 
-
---updateAllTodoById action todoIdSet model =
---    todoIdSet
---        |> Set.foldl
---    updateDocWithId action model
+updateAllTodoById action todoIdSet model =
+    updateAllDocsWithId todoIdSet
+        (Todo.update [ action ] model.now)
+        todoStore
+        model
 
 
 updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
@@ -811,13 +811,14 @@ updateTodoAndMaybeAllSelectedTodosIfTodoIsSelected action todoId model =
         isSelected =
             model.selectedEntityIdSet
                 |> Set.member todoId
+
+        idSet =
+            if isSelected then
+                model.selectedEntityIdSet
+            else
+                Set.singleton todoId
     in
-        if isSelected then
-            model.todoStore
-                |> Store.findAllByIdSet__ model.selectedEntityIdSet
-                |> List.foldl (updateTodo__ action) model
-        else
-            updateTodoById action todoId model
+        model |> updateAllTodoById action idSet
 
 
 replaceTodoIfEqualById todo =

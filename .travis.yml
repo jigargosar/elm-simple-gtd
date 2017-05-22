@@ -8,9 +8,10 @@ cache:
   directories:
     - $HOME/.cpus
 
-branches:
-  only:
-    - master
+# this applies to tags too
+#branches:
+#  only:
+#    - master
 
 #  directories:
 #    - elm-stuff/packages
@@ -31,37 +32,36 @@ before_install:
 
 # Install dependencies
 install:
-#    - sysconfcpus -n 2 yarn install
-    - echo "skip install"
-    - echo $TRAVIS_TAG
+    - sysconfcpus -n 2 yarn install
+#    - echo "skip install"
+#    - echo $TRAVIS_TAG
 
 # Build
 script:
-#  - sysconfcpus -n 2 yarn build
-#  - sysconfcpus -n 2 yarn build-dev
-  - echo "skip build"
+  - sysconfcpus -n 2 yarn build
+  - sysconfcpus -n 2 yarn build-dev
+#  - echo "skip build"
 
 deploy:
   - provider: pages
     skip_cleanup: true
-    github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+    github_token: $GITHUB_TOKEN 
     local_dir: docs
     on:
       condition: "$TRAVIS_TAG =~ $RELEASE_TAG_REGEX && $TRAVIS_PULL_REQUEST = 'false'"
       tags: true
 
-#  - provider: script
-#    skip_cleanup: true
-#    script: ./node_modules/.bin/run travis:deploy:prod
-#    on:
-#      condition: "$TRAVIS_TAG =~ $RELEASE_TAG_REGEX && $TRAVIS_PULL_REQUEST = 'false'"
-#      tags: true
-#
-#  - provider: script
-#    skip_cleanup: true
-#    script: ./node_modules/.bin/run travis:deploy:dev
-#    on:
-#      branch: master
-#      tags: false
+  - provider: script
+    skip_cleanup: true
+    script: ./node_modules/.bin/run travis:deploy:prod
+    on:
+      condition: "$TRAVIS_TAG =~ $RELEASE_TAG_REGEX && $TRAVIS_PULL_REQUEST = 'false'"
+      tags: true
+
+  - provider: script
+    skip_cleanup: true
+    script: ./node_modules/.bin/run travis:deploy:dev
+    on:
+      branch: master
 
 

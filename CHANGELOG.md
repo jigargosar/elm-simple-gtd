@@ -1,4 +1,4 @@
-## Upcoming
+## v0.12.2 - 2017-05-22
 * [fix] focus on next entity if todos project/context change caused it to move in current view. 
 
 ## v0.12.1 - 2017-05-20

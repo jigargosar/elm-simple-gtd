@@ -1,3 +1,6 @@
+## Upcoming
+* [fix] travis detect release tag only then deploy to prod 
+
 ## v0.12.5 - 2017-05-22
 * [fix] node version 
 

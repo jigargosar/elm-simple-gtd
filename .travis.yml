@@ -1,5 +1,9 @@
 language: node_js
 
+env:
+  - DB=postgres
+  - RELEASE_TAG_REGEX="^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$"
+
 cache:
   yarn: true
   directories:
@@ -43,7 +47,7 @@ deploy:
     github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
     local_dir: docs
     on:
-      branch: master
+      branch: "[[ $TRAVIS_PULL_REQUEST == 'false' ]] && [[ $TRAVIS_TAG =~ $RELEASE_TAG_REGEX ]]"
 
   - provider: script
     skip_cleanup: true
@@ -55,4 +59,4 @@ deploy:
     skip_cleanup: true
     script: ./node_modules/.bin/firebase deploy --project prod --public docs --token $FIREBASE_TOKEN_PROD
     on:
-      branch: /v[0-1.]*/
+      condition: "[[ $TRAVIS_PULL_REQUEST == 'false' ]] && [[ $TRAVIS_TAG =~ $RELEASE_TAG_REGEX ]]"

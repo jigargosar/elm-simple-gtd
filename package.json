@@ -22,9 +22,9 @@
     "git:commit-docs": "run build:commitDocs",
     "build": "bash scripts/build.sh",
     "prebuild-dev": "rimraf dev",
+    "build-dev": "bash scripts/build-dev.sh",
     "predeploy-dev": "npm run build-dev",
     "deploy-dev": "firebase deploy --except functions --project dev --public dev",
-    "build-dev": "bash scripts/build-dev.sh",
     "link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
     "start": "http-server docs"
   },

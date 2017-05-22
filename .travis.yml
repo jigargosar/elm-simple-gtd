@@ -8,9 +8,9 @@ cache:
   directories:
     - $HOME/.cpus
 
-#branches:
-#  only:
-#    - master
+branches:
+  only:
+    - master
 
 #  directories:
 #    - elm-stuff/packages

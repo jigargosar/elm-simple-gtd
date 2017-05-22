@@ -49,7 +49,6 @@ deploy:
     on:
       branch: master
       condition: "$TRAVIS_TAG =~ $RELEASE_TAG_REGEX && $TRAVIS_PULL_REQUEST = 'false'"
-      tags: true
 
 #  - provider: script
 #    skip_cleanup: true

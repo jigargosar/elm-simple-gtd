@@ -59,4 +59,5 @@ deploy:
     script: ./node_modules/.bin/firebase deploy --project prod --public docs --token $FIREBASE_TOKEN_PROD
     on:
       branch: master
-      condition: "[[ $TRAVIS_PULL_REQUEST == 'false' ]] && [[ $TRAVIS_TAG =~ $RELEASE_TAG_REGEX ]]"
+      condition: "$TRAVIS_TAG =~ $RELEASE_TAG_REGEX && $TRAVIS_PULL_REQUEST = 'false' "
+

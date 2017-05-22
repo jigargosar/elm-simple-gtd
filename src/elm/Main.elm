@@ -188,47 +188,8 @@ update msg =
                         >> andThenUpdate DeactivateEditingMode
 
                 SetTodoProject project todo ->
-                    Return.andThen
-                        ((\model ->
-                            let
-                                entityViewList =
-                                    Model.getCurrentEntityViewList model
-
-                                prevFocusInEntityIndex =
-                                    Model.getFocusInEntityIndex entityViewList model
-
-                                prevModel =
-                                    focusEntityByIndex
-                                        entityViewList
-                                        prevFocusInEntityIndex
-                                        model
-
-                                prevFocusInEntityId =
-                                    prevModel
-                                        |> Model.getFocusInEntityId
-                            in
-                                model
-                                    |> Return.singleton
-                                    >> updateTodoAndMaybeAlsoSelected (Todo.SetProject project) todo
-                                    >> andThenUpdate DeactivateEditingMode
-                                    >> Return.andThen
-                                        (\model ->
-                                            let
-                                                newFocusInEntityIndex =
-                                                    Model.getFocusInEntityIndex entityViewList model
-
-                                                newModel =
-                                                    focusEntityByIndex entityViewList
-                                                        newFocusInEntityIndex
-                                                        model
-
-                                                newFocusInEntityId =
-                                                    newModel |> Model.getFocusInEntityId
-                                            in
-                                                model ! []
-                                        )
-                         )
-                        )
+                    updateTodoAndMaybeAlsoSelected (Todo.SetProject project) todo
+                        >> andThenUpdate DeactivateEditingMode
 
                 NewTodoTextChanged text ->
                     Return.map (Model.updateNewTodoText text)

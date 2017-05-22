@@ -1,5 +1,6 @@
 "use strict"
 import {run} from 'runjs'
+import * as _ from "ramda"
 
 const runF = cmd=>()=>run(cmd)
 
@@ -18,6 +19,17 @@ export const travis = {
     deploy:{
         dev:runF("firebase deploy --project dev --public dev --token $FIREBASE_TOKEN_DEV"),
         prod:runF("firebase deploy --project prod --public docs --token $FIREBASE_TOKEN_PROD")
+    },
+    build(tagName, pullRequest){
+        if(arguments.length !== 2) {
+            throw new Error(
+                "cannot build without tagName and pullRequest arguments")
+        }
+        if(_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, tagName) && pullRequest !== "false"){
+            run("npm run build")
+        }else{
+            run("npm run build-dev")
+        }
     }
 }
 

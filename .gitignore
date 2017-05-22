@@ -2,3 +2,4 @@
 app/
 elm-stuff/build-artifacts/
 dev/
+npm-debug.log

@@ -1096,21 +1096,18 @@ updateDoc id =
     updateAllDocs (Set.singleton id)
 
 
-updateEntityListViewCursor oldModel newModel =
+updateEntityListCursor oldModel newModel =
     let
         modelTuple =
             ( oldModel, newModel )
 
-        entityListTuple =
+        ( oldEntityList, newEntityList ) =
             modelTuple |> Tuple2.mapBoth getCurrentEntityViewList
 
-        cursorEntityId =
-            oldModel.focusedEntityInfo.id
-
         isEntityAtCursor entity =
-            equals (getEntityId entity) cursorEntityId
+            equals (getEntityId entity) oldModel.focusedEntityInfo.id
     in
-        entityListTuple
+        ( oldEntityList, newEntityList )
             |> Tuple2.mapBoth (List.findIndex isEntityAtCursor)
             |> (\tuple ->
                     case tuple of
@@ -1119,7 +1116,7 @@ updateEntityListViewCursor oldModel newModel =
                                 modelTuple
                                     |> Tuple.second
                                     |> setFocusInEntityByIndex
-                                        (entityListTuple |> Tuple.second)
+                                        newEntityList
                                         (oldIndex + 1)
                             else
                                 modelTuple |> Tuple.second
@@ -1128,7 +1125,7 @@ updateEntityListViewCursor oldModel newModel =
                             modelTuple
                                 |> Tuple.second
                                 |> setFocusInEntityByIndex
-                                    (entityListTuple |> Tuple.second)
+                                    newEntityList
                                     oldIndex
 
                         _ ->
@@ -1142,7 +1139,7 @@ updateAllDocs idSet updateFn store model =
             Store.updateAllDocs idSet model.now updateFn
     in
         update store storeF model
-            |> updateEntityListViewCursor model
+            |> updateEntityListCursor model
 
 
 findAndUpdateTodoT2 findFn action model =

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.12.6 - 2017-05-22
 * [fix] travis detect release tag only then deploy to prod 
 
 ## v0.12.5 - 2017-05-22

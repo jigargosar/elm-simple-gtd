@@ -1098,38 +1098,35 @@ updateDoc id =
 
 updateEntityListCursor oldModel newModel =
     let
-        modelTuple =
-            ( oldModel, newModel )
-
-        ( oldEntityList, newEntityList ) =
-            modelTuple |> Tuple2.mapBoth getCurrentViewEntityList
-
         isEntityAtCursor entity =
             equals (getEntityId entity) oldModel.focusedEntityInfo.id
     in
-        ( oldEntityList, newEntityList )
-            |> Tuple2.mapBoth (List.findIndex isEntityAtCursor)
-            |> (\tuple ->
-                    let
-                        setFocusInIndex index =
-                            setFocusInEntityByIndex
-                                newEntityList
-                                index
-                    in
-                        newModel
-                            |> case tuple of
-                                ( Just oldIndex, Just newIndex ) ->
-                                    if oldIndex /= newIndex then
-                                        setFocusInIndex (oldIndex + 1)
-                                    else
-                                        identity
+        ( oldModel, newModel )
+            |> Tuple2.mapBoth
+                (getCurrentViewEntityList >> (List.findIndex isEntityAtCursor))
+            |> updateEntityListCursorFromEntityIndexTuple newModel
 
-                                ( Just oldIndex, Nothing ) ->
-                                    setFocusInIndex oldIndex
 
-                                _ ->
-                                    identity
-               )
+updateEntityListCursorFromEntityIndexTuple model indexTuple =
+    let
+        setFocusInIndex index =
+            setFocusInEntityByIndex
+                (getCurrentViewEntityList model)
+                index
+    in
+        model
+            |> case indexTuple of
+                ( Just oldIndex, Just newIndex ) ->
+                    if oldIndex /= newIndex then
+                        setFocusInIndex (oldIndex + 1)
+                    else
+                        identity
+
+                ( Just oldIndex, Nothing ) ->
+                    setFocusInIndex oldIndex
+
+                _ ->
+                    identity
 
 
 updateAllDocs idSet updateFn store model =

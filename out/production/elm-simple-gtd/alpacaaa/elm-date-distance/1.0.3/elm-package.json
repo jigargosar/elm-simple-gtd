@@ -1,0 +1,19 @@
+{
+    "version": "1.0.3",
+    "summary": "Date/Time distance helpers: time ago, less than 5 minutes, about 1 month...",
+    "repository": "https://github.com/alpacaaa/elm-date-distance.git",
+    "license": "BSD3",
+    "source-directories": [
+        "src/"
+    ],
+    "exposed-modules": [
+        "Date.Distance",
+        "Date.Distance.Types",
+        "Date.Distance.I18n.En"
+    ],
+    "dependencies": {
+        "elm-lang/core": "5.0.0 <= v < 6.0.0",
+        "justinmimbs/elm-date-extra": "2.0.2 <= v < 3.0.0"
+    },
+    "elm-version": "0.18.0 <= v < 0.19.0"
+}

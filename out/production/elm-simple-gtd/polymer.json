@@ -1,0 +1,38 @@
+{
+  "entrypoint": "index.html",
+  "shell": "imports.html",
+  "fragments": [
+  ],
+  "sources": [
+    "manifest.json",
+    "*.ogg",
+    "*.png",
+    "*.ico",
+    "common.js",
+    "main.js",
+    "firebase-messaging-sw.js",
+    "*.js.map",
+    "CNAME"
+  ],
+  "extraDependencies": [
+    "notification-sw.js",
+    "bower_components/pouchdb/dist/pouchdb.js"
+  ],
+  "builds": [
+    {
+      "name": "unbundled",
+      "bundle": false,
+      "js": {
+        "minify": false
+      },
+      "css": {
+        "minify": false
+      },
+      "html": {
+        "minify": false
+      },
+      "addServiceWorker": true,
+      "swPrecacheConfig": "sw-precache-config.js"
+    }
+  ]
+}

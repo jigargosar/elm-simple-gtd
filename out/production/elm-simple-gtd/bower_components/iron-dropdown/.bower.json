@@ -1,0 +1,64 @@
+{
+  "name": "iron-dropdown",
+  "description": "An unstyled element that works similarly to a native browser select",
+  "authors": [
+    "The Polymer Authors"
+  ],
+  "keywords": [
+    "web-components",
+    "web-component",
+    "polymer"
+  ],
+  "main": "iron-dropdown.html",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/iron-dropdown"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/PolymerElements/iron-dropdown",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0-rc.1",
+    "iron-behaviors": "PolymerElements/iron-behaviors#2.0-preview",
+    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#2.0-preview",
+    "neon-animation": "PolymerElements/neon-animation#2.0-preview"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#2.0-preview",
+    "web-animations-js": "web-animations/web-animations-js#^2.2.0",
+    "iron-image": "PolymerElements/iron-image#2.0-preview",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.6",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "Polymer/polymer#^1.7.0",
+        "iron-behaviors": "PolymerElements/iron-behaviors#^1.0.0",
+        "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#^1.8.6",
+        "neon-animation": "PolymerElements/neon-animation#^1.0.0"
+      },
+      "devDependencies": {
+        "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+        "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
+        "web-animations-js": "web-animations/web-animations-js#^2.2.0",
+        "iron-image": "PolymerElements/iron-image#^1.0.0",
+        "web-component-tester": "^4.0.0",
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      }
+    }
+  },
+  "ignore": [],
+  "_release": "9531ee06cc",
+  "_resolution": {
+    "type": "branch",
+    "branch": "2.0-preview",
+    "commit": "9531ee06cc117d1aefc824ddf3c888eb322debf0"
+  },
+  "_source": "https://github.com/PolymerElements/iron-dropdown.git",
+  "_target": "2.0-preview",
+  "_originalSource": "PolymerElements/iron-dropdown"
+}

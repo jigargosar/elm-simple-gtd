@@ -1,0 +1,16 @@
+{
+    "version": "1.0.3",
+    "summary": "Stemmer is an Elm language implementation of Porter Stemmer",
+    "repository": "https://github.com/rluiten/stemmer.git",
+    "license": "BSD3",
+    "source-directories": [
+        "src"
+    ],
+    "exposed-modules": [
+        "Stemmer"
+    ],
+    "dependencies": {
+        "elm-lang/core": "5.0.0 <= v < 6.0.0"
+    },
+    "elm-version": "0.18.0 <= v < 0.19.0"
+}

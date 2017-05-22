@@ -1,0 +1,3 @@
+examples/**/*.js
+elm-stuff/
+node_modules/

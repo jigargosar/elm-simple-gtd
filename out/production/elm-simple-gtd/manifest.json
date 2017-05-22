@@ -1,0 +1,15 @@
+{
+  "short_name": "SimpleGTD",
+  "name": "SimpleGTD - Simply get personal things done ",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "640x640",
+      "type": "image/png"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "gcm_sender_id": "103953800507"
+}

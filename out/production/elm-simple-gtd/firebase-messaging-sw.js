@@ -1,0 +1,1 @@
+importScripts("notification-sw.js")

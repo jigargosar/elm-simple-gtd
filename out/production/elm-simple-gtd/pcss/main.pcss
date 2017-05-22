@@ -1,0 +1,267 @@
+@import "polymer.pcss";
+
+* {
+  box-sizing: border-box;
+}
+
+.hidden {
+  visibility: hidden !important;
+}
+
+.display-none {
+  display: none;
+}
+
+.focusable-list > * {
+  outline: none;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    pointer-events:none;
+  }
+  &:focus {
+    &:before {
+      opacity: 0.15;
+    }
+  }
+
+  &[tabindex="0"] {
+    &:before {
+      background-color: black;
+      opacity: 0.1;
+    }
+  }
+
+  &.selected {
+    &:before {
+      background-color: rgb(255, 255, 0);
+      opacity: 0.1;
+    }
+  }
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.small {
+  font-size: 0.7rem;
+  line-height: 1.2em;
+}
+
+.flex11 {
+  flex: 1 1 auto;
+}
+
+.dim {
+  opacity: 0.5;
+}
+
+.active-task-view {
+  padding: 16px 16px 0;
+  & .title {
+
+  }
+
+  & .elapsed-time {
+    display: inline-block;
+
+  }
+}
+
+#add-fab {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.flex-expand {
+  flex: 1 1 auto;
+}
+
+paper-item, .has-hover-elements {
+  & > .show-on-hover {
+    display: none;
+  }
+
+  /*
+  &[selected] > .show-on-hover{
+    display: flex;
+  }
+  */
+
+  & > .hide-on-hover {
+    display: flex;
+  }
+
+  &:hover > .show-on-hover {
+    display: flex;
+  }
+  &:hover > .hide-on-hover {
+    display: none;
+  }
+}
+
+.project-list {
+  background-color: white;
+
+  & .project-item {
+    border-top: 1px solid rgba(179, 179, 179, 0.53);
+  }
+}
+
+.entity-list-title {
+  text-transform: capitalize;
+//font-size: 0.9rem; font-weight: 600; color: rgba(0, 0, 0, 0.44); display: inline-block;
+}
+
+paper-item {
+//min-height:40px;
+}
+
+paper-listbox {
+  background-color: transparent;
+}
+
+.entity-item {
+  margin-top: 2rem;
+//padding: 0.5rem; outline: none; border-left: 2px solid transparent;
+}
+
+.entity-item {
+  &[tabindex="0"] .title {
+    font-weight: bolder;
+    color: rgba(0, 0, 172, 0.44);
+  }
+
+  &:focus[tabindex="0"] .title {
+    font-weight: bolder;
+    color: rgba(0, 0, 172, 0.77)
+  }
+
+}
+
+#context-dropdown, #project-dropdown{
+  position: absolute;
+  //left: 100px;
+  //top: 100px;
+  background-color: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width:200px;
+  max-height: 80vh;
+}
+
+.focusable-list > .todo-item {
+  padding: 0.5rem 1rem;
+  background-color: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  outline: none;
+  border-left: 2px solid transparent;
+
+  &:not(.selected):before{
+    background-color: transparent;
+  }
+  & paper-button.small .title{
+    text-transform: none;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  &[tabindex="0"] {
+    border-left: 2px solid rgba(0, 0, 172, 0.44);
+  }
+
+  &:focus[tabindex="0"] {
+    border-left: 2px solid rgba(0, 0, 172, 0.77);
+  }
+
+  &.editing {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  & paper-icon-button {
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    /*transform: scale(0.7);*/
+  }
+
+  & .display-text {
+    padding: 0 8px;
+  }
+
+  & paper-item-body {
+    cursor: pointer;
+  }
+
+  & .reminder-text {
+    text-decoration: underline black;
+    &.overdue {
+      text-decoration: underline red;
+    }
+  }
+
+}
+
+#in-basket-flow-container {
+  padding: 1rem;
+  background-color: white;
+}
+
+.big-dialog {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background-color: rgba(0, 0, 0, 0.64);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.padding-0 {
+  padding: 0;
+}
+
+.padding-left-1rem {
+  padding-left: 1rem;
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+app-drawer-layout:not([narrow]) .hide-when-wide {
+  display: none;
+}
+
+.text-break-all {
+  white-space: normal;
+  word-break: break-all;
+}
+
+#main-view {
+  margin: 1rem 1rem 5rem 1rem;
+  max-width: 600px;
+  position: relative;
+  min-height: 70vh;
+}

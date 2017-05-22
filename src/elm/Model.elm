@@ -1038,9 +1038,13 @@ getFocusInEntityId model =
 
 
 getFocusInEntityIndex entityList model =
+    getMaybeFocusInEntityIndex entityList model
+        ?= 0
+
+
+getMaybeFocusInEntityIndex entityList model =
     entityList
         |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
-        ?= 0
 
 
 focusPrevEntity : List Entity -> ModelF
@@ -1097,14 +1101,10 @@ updateDoc id =
 
 
 updateEntityListCursor oldModel newModel =
-    let
-        isEntityAtCursor entity =
-            equals (getEntityId entity) oldModel.focusedEntityInfo.id
-    in
-        ( oldModel, newModel )
-            |> Tuple2.mapBoth
-                (getCurrentViewEntityList >> (List.findIndex isEntityAtCursor))
-            |> updateEntityListCursorFromEntityIndexTuple newModel
+    ( oldModel, newModel )
+        |> Tuple2.mapBoth
+            (getCurrentViewEntityList >> (getMaybeFocusInEntityIndex # oldModel))
+        |> updateEntityListCursorFromEntityIndexTuple newModel
 
 
 updateEntityListCursorFromEntityIndexTuple model indexTuple =

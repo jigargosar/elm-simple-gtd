@@ -1,0 +1,19 @@
+var _edvail$elm_polymer$Polymer_Attributes$stringProperty = F2(
+	function (name, value) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$string(value));
+	});
+var _edvail$elm_polymer$Polymer_Attributes$selected = _edvail$elm_polymer$Polymer_Attributes$stringProperty('selected');
+var _edvail$elm_polymer$Polymer_Attributes$path = _edvail$elm_polymer$Polymer_Attributes$stringProperty('path');
+var _edvail$elm_polymer$Polymer_Attributes$label = _edvail$elm_polymer$Polymer_Attributes$stringProperty('label');
+var _edvail$elm_polymer$Polymer_Attributes$icon = _edvail$elm_polymer$Polymer_Attributes$stringProperty('icon');
+var _edvail$elm_polymer$Polymer_Attributes$boolProperty = F2(
+	function (name, value) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$bool(value));
+	});
+var _edvail$elm_polymer$Polymer_Attributes$attrForSelected = _edvail$elm_polymer$Polymer_Attributes$stringProperty('attrForSelected');

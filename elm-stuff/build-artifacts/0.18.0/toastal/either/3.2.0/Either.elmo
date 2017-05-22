@@ -1,0 +1,336 @@
+var _toastal$either$Either$unwrap = F3(
+	function (d, f, e) {
+		var _p0 = e;
+		if (_p0.ctor === 'Right') {
+			return f(_p0._0);
+		} else {
+			return d;
+		}
+	});
+var _toastal$either$Either$unpack = F3(
+	function (f, g, e) {
+		var _p1 = e;
+		if (_p1.ctor === 'Left') {
+			return f(_p1._0);
+		} else {
+			return g(_p1._0);
+		}
+	});
+var _toastal$either$Either$fromRight = F2(
+	function (d, e) {
+		var _p2 = e;
+		if (_p2.ctor === 'Right') {
+			return _p2._0;
+		} else {
+			return d;
+		}
+	});
+var _toastal$either$Either$withDefault = _toastal$either$Either$fromRight;
+var _toastal$either$Either$fromLeft = F2(
+	function (d, e) {
+		var _p3 = e;
+		if (_p3.ctor === 'Left') {
+			return _p3._0;
+		} else {
+			return d;
+		}
+	});
+var _toastal$either$Either$isRight = function (e) {
+	var _p4 = e;
+	if (_p4.ctor === 'Right') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _toastal$either$Either$isLeft = function (e) {
+	var _p5 = e;
+	if (_p5.ctor === 'Left') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _toastal$either$Either$toResult = function (e) {
+	var _p6 = e;
+	if (_p6.ctor === 'Left') {
+		return _elm_lang$core$Result$Err(_p6._0);
+	} else {
+		return _elm_lang$core$Result$Ok(_p6._0);
+	}
+};
+var _toastal$either$Either$leftToMaybe = function (e) {
+	var _p7 = e;
+	if (_p7.ctor === 'Left') {
+		return _elm_lang$core$Maybe$Just(_p7._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _toastal$either$Either$toMaybe = function (e) {
+	var _p8 = e;
+	if (_p8.ctor === 'Right') {
+		return _elm_lang$core$Maybe$Just(_p8._0);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _toastal$either$Either$rightToMaybe = _toastal$either$Either$toMaybe;
+var _toastal$either$Either$biList = A2(_toastal$either$Either$unpack, _elm_lang$core$List$singleton, _elm_lang$core$List$singleton);
+var _toastal$either$Either$partition = function () {
+	var fun = F2(
+		function (e, _p9) {
+			var _p10 = _p9;
+			var _p13 = _p10._1;
+			var _p12 = _p10._0;
+			var _p11 = e;
+			if (_p11.ctor === 'Left') {
+				return {
+					ctor: '_Tuple2',
+					_0: {ctor: '::', _0: _p11._0, _1: _p12},
+					_1: _p13
+				};
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: _p12,
+					_1: {ctor: '::', _0: _p11._0, _1: _p13}
+				};
+			}
+		});
+	return A2(
+		_elm_lang$core$List$foldr,
+		fun,
+		{
+			ctor: '_Tuple2',
+			_0: {ctor: '[]'},
+			_1: {ctor: '[]'}
+		});
+}();
+var _toastal$either$Either$rights = A2(
+	_elm_lang$core$List$foldr,
+	F2(
+		function (e, acc) {
+			var _p14 = e;
+			if (_p14.ctor === 'Right') {
+				return {ctor: '::', _0: _p14._0, _1: acc};
+			} else {
+				return acc;
+			}
+		}),
+	{ctor: '[]'});
+var _toastal$either$Either$lefts = A2(
+	_elm_lang$core$List$foldr,
+	F2(
+		function (e, acc) {
+			var _p15 = e;
+			if (_p15.ctor === 'Left') {
+				return {ctor: '::', _0: _p15._0, _1: acc};
+			} else {
+				return acc;
+			}
+		}),
+	{ctor: '[]'});
+var _toastal$either$Either$foldr = F3(
+	function (f, acc, e) {
+		var _p16 = e;
+		if (_p16.ctor === 'Left') {
+			return acc;
+		} else {
+			return A2(f, _p16._0, acc);
+		}
+	});
+var _toastal$either$Either$foldl = F3(
+	function (f, acc, e) {
+		var _p17 = e;
+		if (_p17.ctor === 'Right') {
+			return acc;
+		} else {
+			return A2(f, _p17._0, acc);
+		}
+	});
+var _toastal$either$Either$length = function (e) {
+	var _p18 = e;
+	if (_p18.ctor === 'Left') {
+		return 0;
+	} else {
+		return 1;
+	}
+};
+var _toastal$either$Either$Right = function (a) {
+	return {ctor: 'Right', _0: a};
+};
+var _toastal$either$Either$singleton = _toastal$either$Either$Right;
+var _toastal$either$Either$andThenLeft = F2(
+	function (f, e) {
+		var _p19 = e;
+		if (_p19.ctor === 'Left') {
+			return f(_p19._0);
+		} else {
+			return _toastal$either$Either$Right(_p19._0);
+		}
+	});
+var _toastal$either$Either$Left = function (a) {
+	return {ctor: 'Left', _0: a};
+};
+var _toastal$either$Either$map = F2(
+	function (f, e) {
+		var _p20 = e;
+		if (_p20.ctor === 'Right') {
+			return _toastal$either$Either$Right(
+				f(_p20._0));
+		} else {
+			return _toastal$either$Either$Left(_p20._0);
+		}
+	});
+var _toastal$either$Either$mapRight = _toastal$either$Either$map;
+var _toastal$either$Either$mapLeft = F2(
+	function (f, e) {
+		var _p21 = e;
+		if (_p21.ctor === 'Left') {
+			return _toastal$either$Either$Left(
+				f(_p21._0));
+		} else {
+			return _toastal$either$Either$Right(_p21._0);
+		}
+	});
+var _toastal$either$Either$andMapLeft = F2(
+	function (e, e1) {
+		var _p22 = {ctor: '_Tuple2', _0: e, _1: e1};
+		if (_p22._1.ctor === 'Right') {
+			return _toastal$either$Either$Right(_p22._1._0);
+		} else {
+			return A2(_toastal$either$Either$mapLeft, _p22._1._0, _p22._0);
+		}
+	});
+var _toastal$either$Either$mapBoth = F3(
+	function (f, g, e) {
+		var _p23 = e;
+		if (_p23.ctor === 'Left') {
+			return _toastal$either$Either$Left(
+				f(_p23._0));
+		} else {
+			return _toastal$either$Either$Right(
+				g(_p23._0));
+		}
+	});
+var _toastal$either$Either$mapEach = F2(
+	function (f, e) {
+		var _p24 = e;
+		if (_p24.ctor === 'Left') {
+			return _toastal$either$Either$Left(
+				f(_p24._0));
+		} else {
+			return _toastal$either$Either$Right(
+				f(_p24._0));
+		}
+	});
+var _toastal$either$Either$andMap = F2(
+	function (e, e1) {
+		var _p25 = {ctor: '_Tuple2', _0: e, _1: e1};
+		if (_p25._1.ctor === 'Left') {
+			return _toastal$either$Either$Left(_p25._1._0);
+		} else {
+			return A2(_toastal$either$Either$map, _p25._1._0, _p25._0);
+		}
+	});
+var _toastal$either$Either$andMapRight = _toastal$either$Either$andMap;
+var _toastal$either$Either$map2 = F3(
+	function (f, e, e1) {
+		var _p26 = {ctor: '_Tuple2', _0: e, _1: e1};
+		if (_p26._0.ctor === 'Right') {
+			if (_p26._1.ctor === 'Right') {
+				return _toastal$either$Either$Right(
+					A2(f, _p26._0._0, _p26._1._0));
+			} else {
+				return _toastal$either$Either$Left(_p26._1._0);
+			}
+		} else {
+			return _toastal$either$Either$Left(_p26._0._0);
+		}
+	});
+var _toastal$either$Either$map3 = F4(
+	function (f, e, e1, e2) {
+		var _p27 = {ctor: '_Tuple3', _0: e, _1: e1, _2: e2};
+		if (_p27._0.ctor === 'Right') {
+			if (_p27._1.ctor === 'Right') {
+				if (_p27._2.ctor === 'Right') {
+					return _toastal$either$Either$Right(
+						A3(f, _p27._0._0, _p27._1._0, _p27._2._0));
+				} else {
+					return _toastal$either$Either$Left(_p27._2._0);
+				}
+			} else {
+				return _toastal$either$Either$Left(_p27._1._0);
+			}
+		} else {
+			return _toastal$either$Either$Left(_p27._0._0);
+		}
+	});
+var _toastal$either$Either$map4 = F5(
+	function (f, e, e1, e2, e3) {
+		var _p28 = {ctor: '_Tuple4', _0: e, _1: e1, _2: e2, _3: e3};
+		if (_p28._0.ctor === 'Right') {
+			if (_p28._1.ctor === 'Right') {
+				if (_p28._2.ctor === 'Right') {
+					if (_p28._3.ctor === 'Right') {
+						return _toastal$either$Either$Right(
+							A4(f, _p28._0._0, _p28._1._0, _p28._2._0, _p28._3._0));
+					} else {
+						return _toastal$either$Either$Left(_p28._3._0);
+					}
+				} else {
+					return _toastal$either$Either$Left(_p28._2._0);
+				}
+			} else {
+				return _toastal$either$Either$Left(_p28._1._0);
+			}
+		} else {
+			return _toastal$either$Either$Left(_p28._0._0);
+		}
+	});
+var _toastal$either$Either$andThen = F2(
+	function (f, e) {
+		var _p29 = e;
+		if (_p29.ctor === 'Right') {
+			return f(_p29._0);
+		} else {
+			return _toastal$either$Either$Left(_p29._0);
+		}
+	});
+var _toastal$either$Either$andThenRight = _toastal$either$Either$andThen;
+var _toastal$either$Either$fromMaybe = F2(
+	function (d, m) {
+		var _p30 = m;
+		if (_p30.ctor === 'Just') {
+			return _toastal$either$Either$Right(_p30._0);
+		} else {
+			return _toastal$either$Either$Left(d);
+		}
+	});
+var _toastal$either$Either$rightFromMaybe = _toastal$either$Either$fromMaybe;
+var _toastal$either$Either$leftFromMaybe = F2(
+	function (d, m) {
+		var _p31 = m;
+		if (_p31.ctor === 'Just') {
+			return _toastal$either$Either$Left(_p31._0);
+		} else {
+			return _toastal$either$Either$Right(d);
+		}
+	});
+var _toastal$either$Either$fromResult = function (r) {
+	var _p32 = r;
+	if (_p32.ctor === 'Err') {
+		return _toastal$either$Either$Left(_p32._0);
+	} else {
+		return _toastal$either$Either$Right(_p32._0);
+	}
+};
+var _toastal$either$Either$swap = function (e) {
+	var _p33 = e;
+	if (_p33.ctor === 'Left') {
+		return _toastal$either$Either$Right(_p33._0);
+	} else {
+		return _toastal$either$Either$Left(_p33._0);
+	}
+};

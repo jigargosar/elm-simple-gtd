@@ -1,0 +1,241 @@
+var _rluiten$elm_text_search$Index_Utils$buildOrderIndex = function (tokenSet) {
+	var withIndex = A2(
+		_elm_lang$core$List$indexedMap,
+		F2(
+			function (v0, v1) {
+				return {ctor: '_Tuple2', _0: v0, _1: v1};
+			}),
+		_elm_lang$core$Set$toList(tokenSet));
+	return A3(
+		_elm_lang$core$List$foldr,
+		F2(
+			function (_p0, d) {
+				var _p1 = _p0;
+				return A3(_elm_lang$core$Dict$insert, _p1._1, _p1._0, d);
+			}),
+		_elm_lang$core$Dict$empty,
+		withIndex);
+};
+var _rluiten$elm_text_search$Index_Utils$refExists = F2(
+	function (docRef, _p2) {
+		var _p3 = _p2;
+		return A2(_elm_lang$core$Dict$member, docRef, _p3._0.documentStore);
+	});
+var _rluiten$elm_text_search$Index_Utils$calcIdf = F2(
+	function (_p4, token) {
+		var _p5 = _p4;
+		var _p6 = _p5._0;
+		var docFrequency = _elm_lang$core$Basics$toFloat(
+			A2(_rluiten$trie$Trie$valueCount, token, _p6.tokenStore));
+		var idf = (_elm_lang$core$Native_Utils.cmp(docFrequency, 0) > 0) ? (1 + A2(
+			_elm_lang$core$Basics$logBase,
+			10,
+			_elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Dict$size(_p6.documentStore)) / docFrequency)) : _elm_lang$core$Basics$toFloat(1);
+		var updatedIdfCache = A3(_elm_lang$core$Dict$insert, token, idf, _p6.idfCache);
+		var u1index = _rluiten$elm_text_search$Index_Model$Index(
+			_elm_lang$core$Native_Utils.update(
+				_p6,
+				{idfCache: updatedIdfCache}));
+		return {ctor: '_Tuple2', _0: u1index, _1: idf};
+	});
+var _rluiten$elm_text_search$Index_Utils$idf = F2(
+	function (_p7, token) {
+		var _p8 = _p7;
+		var _p10 = _p8;
+		var _p9 = A2(_elm_lang$core$Dict$get, token, _p8._0.idfCache);
+		if (_p9.ctor === 'Nothing') {
+			return A2(_rluiten$elm_text_search$Index_Utils$calcIdf, _p10, token);
+		} else {
+			return {ctor: '_Tuple2', _0: _p10, _1: _p9._0};
+		}
+	});
+var _rluiten$elm_text_search$Index_Utils$runFactories = F2(
+	function (factoryList, index) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (factory, _p11) {
+					var _p12 = _p11;
+					var _p13 = factory(_p12._0);
+					var u2index = _p13._0;
+					var newFunc = _p13._1;
+					return {
+						ctor: '_Tuple2',
+						_0: u2index,
+						_1: {ctor: '::', _0: newFunc, _1: _p12._1}
+					};
+				}),
+			{
+				ctor: '_Tuple2',
+				_0: index,
+				_1: {ctor: '[]'}
+			},
+			factoryList);
+	});
+var _rluiten$elm_text_search$Index_Utils$getOrSetIndexFuncList = F4(
+	function (getFuncs, getFactoryFuncs, setFuncs, index) {
+		var _p14 = getFuncs(index);
+		if (_p14.ctor === 'Just') {
+			return {ctor: '_Tuple2', _0: index, _1: _p14._0};
+		} else {
+			var _p15 = A2(
+				_rluiten$elm_text_search$Index_Utils$runFactories,
+				getFactoryFuncs(index),
+				index);
+			var u1index = _p15._0;
+			var newFuncList = _p15._1;
+			var u2index = A2(setFuncs, u1index, newFuncList);
+			return {ctor: '_Tuple2', _0: u2index, _1: newFuncList};
+		}
+	});
+var _rluiten$elm_text_search$Index_Utils$applyFilterList = F2(
+	function (filters, token) {
+		applyFilterList:
+		while (true) {
+			var _p16 = filters;
+			if (_p16.ctor === '[]') {
+				return true;
+			} else {
+				var _p17 = token;
+				if (_p17 === '') {
+					return false;
+				} else {
+					var _p18 = _p16._0(token);
+					if (_p18 === false) {
+						return false;
+					} else {
+						var _v10 = _p16._1,
+							_v11 = token;
+						filters = _v10;
+						token = _v11;
+						continue applyFilterList;
+					}
+				}
+			}
+		}
+	});
+var _rluiten$elm_text_search$Index_Utils$setIndexFilters = F2(
+	function (_p19, listFuncs) {
+		var _p20 = _p19;
+		return _rluiten$elm_text_search$Index_Model$Index(
+			_elm_lang$core$Native_Utils.update(
+				_p20._0,
+				{
+					filters: _elm_lang$core$Maybe$Just(listFuncs)
+				}));
+	});
+var _rluiten$elm_text_search$Index_Utils$getOrSetFilterList = function (index) {
+	return A4(
+		_rluiten$elm_text_search$Index_Utils$getOrSetIndexFuncList,
+		function (_p21) {
+			var _p22 = _p21;
+			return _p22._0.filters;
+		},
+		function (_p23) {
+			var _p24 = _p23;
+			return _p24._0.filterFactories;
+		},
+		_rluiten$elm_text_search$Index_Utils$setIndexFilters,
+		index);
+};
+var _rluiten$elm_text_search$Index_Utils$applyFilter = F2(
+	function (index, strings) {
+		var _p25 = _rluiten$elm_text_search$Index_Utils$getOrSetFilterList(index);
+		var u1index = _p25._0;
+		var filterList = _p25._1;
+		return {
+			ctor: '_Tuple2',
+			_0: u1index,
+			_1: A2(
+				_elm_lang$core$List$filter,
+				_rluiten$elm_text_search$Index_Utils$applyFilterList(filterList),
+				strings)
+		};
+	});
+var _rluiten$elm_text_search$Index_Utils$applyTransformList = F2(
+	function (transforms, token) {
+		applyTransformList:
+		while (true) {
+			var _p26 = transforms;
+			if (_p26.ctor === '[]') {
+				return token;
+			} else {
+				var _p28 = _p26._0;
+				var newToken = _p28(token);
+				var _p27 = newToken;
+				if (_p27 === '') {
+					return '';
+				} else {
+					var _v17 = _p26._1,
+						_v18 = _p28(token);
+					transforms = _v17;
+					token = _v18;
+					continue applyTransformList;
+				}
+			}
+		}
+	});
+var _rluiten$elm_text_search$Index_Utils$setIndexTransforms = F2(
+	function (_p29, listFuncs) {
+		var _p30 = _p29;
+		return _rluiten$elm_text_search$Index_Model$Index(
+			_elm_lang$core$Native_Utils.update(
+				_p30._0,
+				{
+					transforms: _elm_lang$core$Maybe$Just(listFuncs)
+				}));
+	});
+var _rluiten$elm_text_search$Index_Utils$getOrSetTransformList = function (index) {
+	return A4(
+		_rluiten$elm_text_search$Index_Utils$getOrSetIndexFuncList,
+		function (_p31) {
+			var _p32 = _p31;
+			return _p32._0.transforms;
+		},
+		function (_p33) {
+			var _p34 = _p33;
+			return _p34._0.transformFactories;
+		},
+		_rluiten$elm_text_search$Index_Utils$setIndexTransforms,
+		index);
+};
+var _rluiten$elm_text_search$Index_Utils$applyTransform = F2(
+	function (index, strings) {
+		var _p35 = _rluiten$elm_text_search$Index_Utils$getOrSetTransformList(index);
+		var u1index = _p35._0;
+		var transformList = _p35._1;
+		return {
+			ctor: '_Tuple2',
+			_0: u1index,
+			_1: A2(
+				_elm_lang$core$List$map,
+				_rluiten$elm_text_search$Index_Utils$applyTransformList(transformList),
+				strings)
+		};
+	});
+var _rluiten$elm_text_search$Index_Utils$processTokens = F2(
+	function (index, rawTokens) {
+		var _p36 = A2(_rluiten$elm_text_search$Index_Utils$applyTransform, index, rawTokens);
+		var u1index = _p36._0;
+		var u1tokens = _p36._1;
+		return A2(_rluiten$elm_text_search$Index_Utils$applyFilter, index, u1tokens);
+	});
+var _rluiten$elm_text_search$Index_Utils$getTokensList = F2(
+	function (index, listString) {
+		return A2(
+			_rluiten$elm_text_search$Index_Utils$processTokens,
+			index,
+			_rluiten$elm_text_search$TokenProcessors$tokenizerList(listString));
+	});
+var _rluiten$elm_text_search$Index_Utils$getTokens = F2(
+	function (index, string) {
+		return A2(
+			_rluiten$elm_text_search$Index_Utils$processTokens,
+			index,
+			_rluiten$elm_text_search$TokenProcessors$tokenizer(string));
+	});
+var _rluiten$elm_text_search$Index_Utils$createFuncCreator = F2(
+	function (func, index) {
+		return {ctor: '_Tuple2', _0: index, _1: func};
+	});

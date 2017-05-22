@@ -1,0 +1,754 @@
+var _rluiten$stemmer$Stemmer$isVowelCore = F2(
+	function (includeY, c) {
+		var _p0 = c;
+		switch (_p0.valueOf()) {
+			case 'a':
+				return true;
+			case 'e':
+				return true;
+			case 'i':
+				return true;
+			case 'o':
+				return true;
+			case 'u':
+				return true;
+			case 'y':
+				return includeY ? true : false;
+			default:
+				return false;
+		}
+	});
+var _rluiten$stemmer$Stemmer$isVowelWithY = _rluiten$stemmer$Stemmer$isVowelCore(true);
+var _rluiten$stemmer$Stemmer$hasVowel2X = function (word) {
+	hasVowel2X:
+	while (true) {
+		var _p1 = _elm_lang$core$String$uncons(word);
+		if (_p1.ctor === 'Just') {
+			var _p2 = _rluiten$stemmer$Stemmer$isVowelWithY(_p1._0._0);
+			if (_p2 === true) {
+				return true;
+			} else {
+				var _v3 = _p1._0._1;
+				word = _v3;
+				continue hasVowel2X;
+			}
+		} else {
+			return false;
+		}
+	}
+};
+var _rluiten$stemmer$Stemmer$endsWithDoubleConsX = function (drow) {
+	var _p3 = _elm_lang$core$String$uncons(drow);
+	if (_p3.ctor === 'Just') {
+		var _p5 = _p3._0._0;
+		if (!_rluiten$stemmer$Stemmer$isVowelWithY(_p5)) {
+			var _p4 = _elm_lang$core$String$uncons(_p3._0._1);
+			if (_p4.ctor === 'Just') {
+				return _elm_lang$core$Native_Utils.eq(_p5, _p4._0._0);
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
+};
+var _rluiten$stemmer$Stemmer$isVowel = _rluiten$stemmer$Stemmer$isVowelCore(false);
+var _rluiten$stemmer$Stemmer$foundVowelX = F2(
+	function (word, m) {
+		foundVowelX:
+		while (true) {
+			var _p6 = _elm_lang$core$String$uncons(word);
+			if (_p6.ctor === 'Just') {
+				var _p8 = _p6._0._1;
+				var _p7 = _rluiten$stemmer$Stemmer$isVowel(_p6._0._0);
+				if (_p7 === true) {
+					var _v8 = _p8,
+						_v9 = m;
+					word = _v8;
+					m = _v9;
+					continue foundVowelX;
+				} else {
+					return A2(_rluiten$stemmer$Stemmer$foundConsonantX, _p8, m + 1);
+				}
+			} else {
+				return m;
+			}
+		}
+	});
+var _rluiten$stemmer$Stemmer$foundConsonantX = F2(
+	function (word, m) {
+		foundConsonantX:
+		while (true) {
+			var _p9 = _elm_lang$core$String$uncons(word);
+			if (_p9.ctor === 'Just') {
+				var _p11 = _p9._0._1;
+				var _p10 = _rluiten$stemmer$Stemmer$isVowelWithY(_p9._0._0);
+				if (_p10 === true) {
+					return A2(_rluiten$stemmer$Stemmer$foundVowelX, _p11, m);
+				} else {
+					var _v12 = _p11,
+						_v13 = m;
+					word = _v12;
+					m = _v13;
+					continue foundConsonantX;
+				}
+			} else {
+				return m;
+			}
+		}
+	});
+var _rluiten$stemmer$Stemmer$foundLeadingConsonantX = function (word) {
+	foundLeadingConsonantX:
+	while (true) {
+		var _p12 = _elm_lang$core$String$uncons(word);
+		if (_p12.ctor === 'Just') {
+			var _p14 = _p12._0._1;
+			var _p13 = _rluiten$stemmer$Stemmer$isVowelWithY(_p12._0._0);
+			if (_p13 === true) {
+				return A2(_rluiten$stemmer$Stemmer$foundVowelX, _p14, 0);
+			} else {
+				var _v16 = _p14;
+				word = _v16;
+				continue foundLeadingConsonantX;
+			}
+		} else {
+			return 0;
+		}
+	}
+};
+var _rluiten$stemmer$Stemmer$measureX = function (drow) {
+	var word = _elm_lang$core$String$reverse(drow);
+	var _p15 = _elm_lang$core$String$uncons(word);
+	if (_p15.ctor === 'Just') {
+		var _p17 = _p15._0._1;
+		var _p16 = _rluiten$stemmer$Stemmer$isVowel(_p15._0._0);
+		if (_p16 === true) {
+			return A2(_rluiten$stemmer$Stemmer$foundVowelX, _p17, 0);
+		} else {
+			return _rluiten$stemmer$Stemmer$foundLeadingConsonantX(_p17);
+		}
+	} else {
+		return 0;
+	}
+};
+var _rluiten$stemmer$Stemmer$hasVowelX = function (drow) {
+	var _p18 = _elm_lang$core$String$uncons(
+		_elm_lang$core$String$reverse(drow));
+	if (_p18.ctor === 'Just') {
+		var _p19 = _rluiten$stemmer$Stemmer$isVowel(_p18._0._0);
+		if (_p19 === true) {
+			return true;
+		} else {
+			return _rluiten$stemmer$Stemmer$hasVowel2X(_p18._0._1);
+		}
+	} else {
+		return false;
+	}
+};
+var _rluiten$stemmer$Stemmer$endsWithCVCX = function (drow) {
+	var _p20 = _elm_lang$core$String$uncons(drow);
+	if (_p20.ctor === 'Just') {
+		var _p23 = _p20._0._0;
+		if (!(_rluiten$stemmer$Stemmer$isVowel(_p23) || (_elm_lang$core$Native_Utils.eq(
+			_p23,
+			_elm_lang$core$Native_Utils.chr('w')) || (_elm_lang$core$Native_Utils.eq(
+			_p23,
+			_elm_lang$core$Native_Utils.chr('x')) || _elm_lang$core$Native_Utils.eq(
+			_p23,
+			_elm_lang$core$Native_Utils.chr('y')))))) {
+			var _p21 = _elm_lang$core$String$uncons(_p20._0._1);
+			if (_p21.ctor === 'Just') {
+				if (_rluiten$stemmer$Stemmer$isVowelWithY(_p21._0._0)) {
+					var _p22 = _elm_lang$core$String$uncons(_p21._0._1);
+					if (_p22.ctor === 'Just') {
+						return !_rluiten$stemmer$Stemmer$isVowel(_p22._0._0);
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
+};
+var _rluiten$stemmer$Stemmer$replaceStartX = F3(
+	function (measureThreshold, _p24, drow) {
+		var _p25 = _p24;
+		var _p26 = _p25._0;
+		var startLen = _elm_lang$core$String$length(_p26);
+		var drowStart = A2(_elm_lang$core$String$left, startLen, drow);
+		if (_elm_lang$core$Native_Utils.eq(drowStart, _p26)) {
+			var drowEnd = A2(_elm_lang$core$String$dropLeft, startLen, drow);
+			return (_elm_lang$core$Native_Utils.cmp(
+				_rluiten$stemmer$Stemmer$measureX(drowEnd),
+				measureThreshold) > 0) ? {
+				ctor: '_Tuple2',
+				_0: true,
+				_1: A2(_elm_lang$core$String$append, _p25._1, drowEnd)
+			} : {ctor: '_Tuple2', _0: true, _1: drow};
+		} else {
+			return {ctor: '_Tuple2', _0: false, _1: drow};
+		}
+	});
+var _rluiten$stemmer$Stemmer$replaceStartsX = F3(
+	function (measureThreshold, rules, drow) {
+		replaceStartsX:
+		while (true) {
+			var _p27 = rules;
+			if (_p27.ctor === '::') {
+				var _p28 = A3(_rluiten$stemmer$Stemmer$replaceStartX, measureThreshold, _p27._0, drow);
+				var patternMatched = _p28._0;
+				var newDrow = _p28._1;
+				if (patternMatched) {
+					return newDrow;
+				} else {
+					var _v26 = measureThreshold,
+						_v27 = _p27._1,
+						_v28 = drow;
+					measureThreshold = _v26;
+					rules = _v27;
+					drow = _v28;
+					continue replaceStartsX;
+				}
+			} else {
+				return drow;
+			}
+		}
+	});
+var _rluiten$stemmer$Stemmer$step5bX = function (drow) {
+	var _p29 = _elm_lang$core$String$uncons(drow);
+	if (_p29.ctor === 'Just') {
+		var _p30 = _p29._0._1;
+		return (_elm_lang$core$Native_Utils.eq(
+			_p29._0._0,
+			_elm_lang$core$Native_Utils.chr('l')) && ((_elm_lang$core$Native_Utils.cmp(
+			_rluiten$stemmer$Stemmer$measureX(_p30),
+			1) > 0) && _rluiten$stemmer$Stemmer$endsWithDoubleConsX(drow))) ? _p30 : drow;
+	} else {
+		return drow;
+	}
+};
+var _rluiten$stemmer$Stemmer$step5aX = function (drow) {
+	var _p31 = _elm_lang$core$String$uncons(drow);
+	if (_p31.ctor === 'Just') {
+		var _p32 = _p31._0._1;
+		if (_elm_lang$core$Native_Utils.eq(
+			_p31._0._0,
+			_elm_lang$core$Native_Utils.chr('e'))) {
+			var m = _rluiten$stemmer$Stemmer$measureX(_p32);
+			return (_elm_lang$core$Native_Utils.cmp(m, 1) > 0) ? _p32 : ((_elm_lang$core$Native_Utils.eq(m, 1) && (!_rluiten$stemmer$Stemmer$endsWithCVCX(_p32))) ? _p32 : drow);
+		} else {
+			return drow;
+		}
+	} else {
+		return drow;
+	}
+};
+var _rluiten$stemmer$Stemmer$step5X = function (_p33) {
+	return _rluiten$stemmer$Stemmer$step5bX(
+		_rluiten$stemmer$Stemmer$step5aX(_p33));
+};
+var _rluiten$stemmer$Stemmer$step4IonX = F3(
+	function (mThreshold, startLen, drow) {
+		var afterNoi = A2(_elm_lang$core$String$dropLeft, startLen, drow);
+		var _p34 = _elm_lang$core$String$uncons(afterNoi);
+		if (_p34.ctor === 'Just') {
+			var _p35 = _p34._0._0;
+			return ((_elm_lang$core$Native_Utils.eq(
+				_p35,
+				_elm_lang$core$Native_Utils.chr('t')) || _elm_lang$core$Native_Utils.eq(
+				_p35,
+				_elm_lang$core$Native_Utils.chr('s'))) && (_elm_lang$core$Native_Utils.cmp(
+				_rluiten$stemmer$Stemmer$measureX(afterNoi),
+				mThreshold) > 0)) ? afterNoi : drow;
+		} else {
+			return drow;
+		}
+	});
+var _rluiten$stemmer$Stemmer$toR = _elm_lang$core$String$reverse;
+var _rluiten$stemmer$Stemmer$step2RulesX = {
+	ctor: '::',
+	_0: {
+		ctor: '_Tuple2',
+		_0: _rluiten$stemmer$Stemmer$toR('ational'),
+		_1: _rluiten$stemmer$Stemmer$toR('ate')
+	},
+	_1: {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: _rluiten$stemmer$Stemmer$toR('tional'),
+			_1: _rluiten$stemmer$Stemmer$toR('tion')
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: _rluiten$stemmer$Stemmer$toR('enci'),
+				_1: _rluiten$stemmer$Stemmer$toR('ence')
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: _rluiten$stemmer$Stemmer$toR('anci'),
+					_1: _rluiten$stemmer$Stemmer$toR('ance')
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: _rluiten$stemmer$Stemmer$toR('izer'),
+						_1: _rluiten$stemmer$Stemmer$toR('ize')
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _rluiten$stemmer$Stemmer$toR('bli'),
+							_1: _rluiten$stemmer$Stemmer$toR('ble')
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: _rluiten$stemmer$Stemmer$toR('alli'),
+								_1: _rluiten$stemmer$Stemmer$toR('al')
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: _rluiten$stemmer$Stemmer$toR('entli'),
+									_1: _rluiten$stemmer$Stemmer$toR('ent')
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: _rluiten$stemmer$Stemmer$toR('eli'),
+										_1: _rluiten$stemmer$Stemmer$toR('e')
+									},
+									_1: {
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: _rluiten$stemmer$Stemmer$toR('ousli'),
+											_1: _rluiten$stemmer$Stemmer$toR('ous')
+										},
+										_1: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: _rluiten$stemmer$Stemmer$toR('ization'),
+												_1: _rluiten$stemmer$Stemmer$toR('ize')
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: _rluiten$stemmer$Stemmer$toR('ation'),
+													_1: _rluiten$stemmer$Stemmer$toR('ate')
+												},
+												_1: {
+													ctor: '::',
+													_0: {
+														ctor: '_Tuple2',
+														_0: _rluiten$stemmer$Stemmer$toR('ator'),
+														_1: _rluiten$stemmer$Stemmer$toR('ate')
+													},
+													_1: {
+														ctor: '::',
+														_0: {
+															ctor: '_Tuple2',
+															_0: _rluiten$stemmer$Stemmer$toR('alism'),
+															_1: _rluiten$stemmer$Stemmer$toR('al')
+														},
+														_1: {
+															ctor: '::',
+															_0: {
+																ctor: '_Tuple2',
+																_0: _rluiten$stemmer$Stemmer$toR('iveness'),
+																_1: _rluiten$stemmer$Stemmer$toR('ive')
+															},
+															_1: {
+																ctor: '::',
+																_0: {
+																	ctor: '_Tuple2',
+																	_0: _rluiten$stemmer$Stemmer$toR('fulness'),
+																	_1: _rluiten$stemmer$Stemmer$toR('ful')
+																},
+																_1: {
+																	ctor: '::',
+																	_0: {
+																		ctor: '_Tuple2',
+																		_0: _rluiten$stemmer$Stemmer$toR('ousness'),
+																		_1: _rluiten$stemmer$Stemmer$toR('ous')
+																	},
+																	_1: {
+																		ctor: '::',
+																		_0: {
+																			ctor: '_Tuple2',
+																			_0: _rluiten$stemmer$Stemmer$toR('aliti'),
+																			_1: _rluiten$stemmer$Stemmer$toR('al')
+																		},
+																		_1: {
+																			ctor: '::',
+																			_0: {
+																				ctor: '_Tuple2',
+																				_0: _rluiten$stemmer$Stemmer$toR('iviti'),
+																				_1: _rluiten$stemmer$Stemmer$toR('ive')
+																			},
+																			_1: {
+																				ctor: '::',
+																				_0: {
+																					ctor: '_Tuple2',
+																					_0: _rluiten$stemmer$Stemmer$toR('biliti'),
+																					_1: _rluiten$stemmer$Stemmer$toR('ble')
+																				},
+																				_1: {
+																					ctor: '::',
+																					_0: {
+																						ctor: '_Tuple2',
+																						_0: _rluiten$stemmer$Stemmer$toR('logi'),
+																						_1: _rluiten$stemmer$Stemmer$toR('log')
+																					},
+																					_1: {ctor: '[]'}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _rluiten$stemmer$Stemmer$step2X = function (drow) {
+	return A3(_rluiten$stemmer$Stemmer$replaceStartsX, 0, _rluiten$stemmer$Stemmer$step2RulesX, drow);
+};
+var _rluiten$stemmer$Stemmer$step3RulesX = {
+	ctor: '::',
+	_0: {
+		ctor: '_Tuple2',
+		_0: _rluiten$stemmer$Stemmer$toR('icate'),
+		_1: _rluiten$stemmer$Stemmer$toR('ic')
+	},
+	_1: {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: _rluiten$stemmer$Stemmer$toR('ative'),
+			_1: ''
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: _rluiten$stemmer$Stemmer$toR('alize'),
+				_1: _rluiten$stemmer$Stemmer$toR('al')
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: _rluiten$stemmer$Stemmer$toR('iciti'),
+					_1: _rluiten$stemmer$Stemmer$toR('ic')
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: _rluiten$stemmer$Stemmer$toR('ical'),
+						_1: _rluiten$stemmer$Stemmer$toR('ic')
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _rluiten$stemmer$Stemmer$toR('ful'),
+							_1: ''
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: _rluiten$stemmer$Stemmer$toR('ness'),
+								_1: ''
+							},
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _rluiten$stemmer$Stemmer$step3X = function (drow) {
+	return A3(_rluiten$stemmer$Stemmer$replaceStartsX, 0, _rluiten$stemmer$Stemmer$step3RulesX, drow);
+};
+var _rluiten$stemmer$Stemmer$step4RulesX = {
+	ctor: '::',
+	_0: {
+		ctor: '_Tuple2',
+		_0: _rluiten$stemmer$Stemmer$toR('al'),
+		_1: ''
+	},
+	_1: {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple2',
+			_0: _rluiten$stemmer$Stemmer$toR('ance'),
+			_1: ''
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: _rluiten$stemmer$Stemmer$toR('ence'),
+				_1: ''
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: _rluiten$stemmer$Stemmer$toR('er'),
+					_1: ''
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: _rluiten$stemmer$Stemmer$toR('ic'),
+						_1: ''
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: _rluiten$stemmer$Stemmer$toR('able'),
+							_1: ''
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: _rluiten$stemmer$Stemmer$toR('ible'),
+								_1: ''
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: _rluiten$stemmer$Stemmer$toR('ant'),
+									_1: ''
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: _rluiten$stemmer$Stemmer$toR('ement'),
+										_1: ''
+									},
+									_1: {
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: _rluiten$stemmer$Stemmer$toR('ment'),
+											_1: ''
+										},
+										_1: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: _rluiten$stemmer$Stemmer$toR('ent'),
+												_1: ''
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: _rluiten$stemmer$Stemmer$toR('ou'),
+													_1: ''
+												},
+												_1: {
+													ctor: '::',
+													_0: {
+														ctor: '_Tuple2',
+														_0: _rluiten$stemmer$Stemmer$toR('ism'),
+														_1: ''
+													},
+													_1: {
+														ctor: '::',
+														_0: {
+															ctor: '_Tuple2',
+															_0: _rluiten$stemmer$Stemmer$toR('ate'),
+															_1: ''
+														},
+														_1: {
+															ctor: '::',
+															_0: {
+																ctor: '_Tuple2',
+																_0: _rluiten$stemmer$Stemmer$toR('iti'),
+																_1: ''
+															},
+															_1: {
+																ctor: '::',
+																_0: {
+																	ctor: '_Tuple2',
+																	_0: _rluiten$stemmer$Stemmer$toR('ous'),
+																	_1: ''
+																},
+																_1: {
+																	ctor: '::',
+																	_0: {
+																		ctor: '_Tuple2',
+																		_0: _rluiten$stemmer$Stemmer$toR('ive'),
+																		_1: ''
+																	},
+																	_1: {
+																		ctor: '::',
+																		_0: {
+																			ctor: '_Tuple2',
+																			_0: _rluiten$stemmer$Stemmer$toR('ize'),
+																			_1: ''
+																		},
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _rluiten$stemmer$Stemmer$step4X = function (drow) {
+	var ionCase = 'noi';
+	var ionLen = _elm_lang$core$String$length(ionCase);
+	var drowStart = A2(_elm_lang$core$String$left, ionLen, drow);
+	var mThreshold = 1;
+	return _elm_lang$core$Native_Utils.eq(drowStart, ionCase) ? A3(_rluiten$stemmer$Stemmer$step4IonX, mThreshold, ionLen, drow) : A3(_rluiten$stemmer$Stemmer$replaceStartsX, mThreshold, _rluiten$stemmer$Stemmer$step4RulesX, drow);
+};
+var _rluiten$stemmer$Stemmer$step1cX = function (drow) {
+	var _p36 = _elm_lang$core$String$uncons(drow);
+	if (_p36.ctor === 'Just') {
+		var _p37 = _p36._0._1;
+		return (_elm_lang$core$Native_Utils.eq(
+			_p36._0._0,
+			_elm_lang$core$Native_Utils.chr('y')) && _rluiten$stemmer$Stemmer$hasVowelX(_p37)) ? A2(
+			_elm_lang$core$String$cons,
+			_elm_lang$core$Native_Utils.chr('i'),
+			_p37) : drow;
+	} else {
+		return drow;
+	}
+};
+var _rluiten$stemmer$Stemmer$step1b2X = function (drow) {
+	if (A2(_elm_lang$core$String$startsWith, 'ta', drow) || (A2(_elm_lang$core$String$startsWith, 'lb', drow) || A2(_elm_lang$core$String$startsWith, 'zi', drow))) {
+		return A2(
+			_elm_lang$core$String$cons,
+			_elm_lang$core$Native_Utils.chr('e'),
+			drow);
+	} else {
+		var _p38 = _elm_lang$core$String$uncons(drow);
+		if (_p38.ctor === 'Just') {
+			var _p39 = _p38._0._0;
+			return (_rluiten$stemmer$Stemmer$endsWithDoubleConsX(drow) && (!(_elm_lang$core$Native_Utils.eq(
+				_p39,
+				_elm_lang$core$Native_Utils.chr('l')) || (_elm_lang$core$Native_Utils.eq(
+				_p39,
+				_elm_lang$core$Native_Utils.chr('s')) || _elm_lang$core$Native_Utils.eq(
+				_p39,
+				_elm_lang$core$Native_Utils.chr('z')))))) ? _p38._0._1 : ((_elm_lang$core$Native_Utils.eq(
+				_rluiten$stemmer$Stemmer$measureX(drow),
+				1) && _rluiten$stemmer$Stemmer$endsWithCVCX(drow)) ? A2(
+				_elm_lang$core$String$cons,
+				_elm_lang$core$Native_Utils.chr('e'),
+				drow) : drow);
+		} else {
+			return drow;
+		}
+	}
+};
+var _rluiten$stemmer$Stemmer$step1bX = function (drow) {
+	if (A2(_elm_lang$core$String$startsWith, 'dee', drow)) {
+		return (_elm_lang$core$Native_Utils.cmp(
+			_rluiten$stemmer$Stemmer$measureX(
+				A2(_elm_lang$core$String$dropLeft, 3, drow)),
+			0) > 0) ? A2(_elm_lang$core$String$dropLeft, 1, drow) : drow;
+	} else {
+		if (A2(_elm_lang$core$String$startsWith, 'de', drow)) {
+			var mets = A2(_elm_lang$core$String$dropLeft, 2, drow);
+			return _rluiten$stemmer$Stemmer$hasVowelX(mets) ? _rluiten$stemmer$Stemmer$step1b2X(mets) : drow;
+		} else {
+			if (A2(_elm_lang$core$String$startsWith, 'gni', drow)) {
+				var mets = A2(_elm_lang$core$String$dropLeft, 3, drow);
+				return _rluiten$stemmer$Stemmer$hasVowelX(mets) ? _rluiten$stemmer$Stemmer$step1b2X(mets) : drow;
+			} else {
+				return drow;
+			}
+		}
+	}
+};
+var _rluiten$stemmer$Stemmer$step1aX = function (drow) {
+	return A2(_elm_lang$core$String$startsWith, 'sess', drow) ? A2(_elm_lang$core$String$dropLeft, 2, drow) : (A2(_elm_lang$core$String$startsWith, 'sei', drow) ? A2(_elm_lang$core$String$dropLeft, 2, drow) : (A2(_elm_lang$core$String$startsWith, 'ss', drow) ? drow : (A2(_elm_lang$core$String$startsWith, 's', drow) ? A2(_elm_lang$core$String$dropLeft, 1, drow) : drow)));
+};
+var _rluiten$stemmer$Stemmer$step1X = function (_p40) {
+	return _rluiten$stemmer$Stemmer$step1cX(
+		_rluiten$stemmer$Stemmer$step1bX(
+			_rluiten$stemmer$Stemmer$step1aX(_p40)));
+};
+var _rluiten$stemmer$Stemmer$viewParamsX = F2(
+	function (context, drow) {
+		var s = _elm_lang$core$String$reverse(drow);
+		var _p41 = A2(
+			_elm_lang$core$Debug$log,
+			'viewParams',
+			{ctor: '_Tuple3', _0: context, _1: s, _2: drow});
+		return drow;
+	});
+var _rluiten$stemmer$Stemmer$allStepsX = function (_p42) {
+	return _elm_lang$core$String$reverse(
+		_rluiten$stemmer$Stemmer$step5X(
+			_rluiten$stemmer$Stemmer$step4X(
+				_rluiten$stemmer$Stemmer$step3X(
+					_rluiten$stemmer$Stemmer$step2X(
+						_rluiten$stemmer$Stemmer$step1X(
+							_elm_lang$core$String$reverse(_p42)))))));
+};
+var _rluiten$stemmer$Stemmer$stem = function (word) {
+	return (_elm_lang$core$Native_Utils.cmp(
+		_elm_lang$core$String$length(word),
+		3) < 0) ? word : _rluiten$stemmer$Stemmer$allStepsX(word);
+};

@@ -1,0 +1,92 @@
+var _rluiten$elm_date_extra$Date_Extra_Utils$unsafeFromString = function (dateStr) {
+	var _p0 = _elm_lang$core$Date$fromString(dateStr);
+	if (_p0.ctor === 'Ok') {
+		return _p0._0;
+	} else {
+		return _elm_lang$core$Native_Utils.crashCase(
+			'Date.Extra.Utils',
+			{
+				start: {line: 145, column: 5},
+				end: {line: 150, column: 45}
+			},
+			_p0)('unsafeFromString');
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_Utils$isoDayofWeekMonday = _rluiten$elm_date_extra$Date_Extra_Core$isoDayOfWeek(_elm_lang$core$Date$Mon);
+var _rluiten$elm_date_extra$Date_Extra_Utils$isoWeekOne = function (year) {
+	var dateJan4 = A7(_rluiten$elm_date_extra$Date_Extra_Create$dateFromFields, year, _elm_lang$core$Date$Jan, 4, 0, 0, 0, 0);
+	return A3(
+		_rluiten$elm_date_extra$Date_Extra_Duration$add,
+		_rluiten$elm_date_extra$Date_Extra_Duration$Day,
+		_rluiten$elm_date_extra$Date_Extra_Utils$isoDayofWeekMonday - _rluiten$elm_date_extra$Date_Extra_Core$isoDayOfWeek(
+			_elm_lang$core$Date$dayOfWeek(dateJan4)),
+		dateJan4);
+};
+var _rluiten$elm_date_extra$Date_Extra_Utils$getYearIsoWeekDate = function (date) {
+	var inputYear = _elm_lang$core$Date$year(date);
+	var maxIsoWeekDateInYear = A7(_rluiten$elm_date_extra$Date_Extra_Create$dateFromFields, inputYear, _elm_lang$core$Date$Dec, 29, 0, 0, 0, 0);
+	if (A3(_rluiten$elm_date_extra$Date_Extra_Compare$is, _rluiten$elm_date_extra$Date_Extra_Compare$SameOrAfter, date, maxIsoWeekDateInYear)) {
+		var nextYearIsoWeek1Date = _rluiten$elm_date_extra$Date_Extra_Utils$isoWeekOne(inputYear + 1);
+		return A3(_rluiten$elm_date_extra$Date_Extra_Compare$is, _rluiten$elm_date_extra$Date_Extra_Compare$Before, date, nextYearIsoWeek1Date) ? {
+			ctor: '_Tuple2',
+			_0: inputYear,
+			_1: _rluiten$elm_date_extra$Date_Extra_Utils$isoWeekOne(inputYear)
+		} : {ctor: '_Tuple2', _0: inputYear + 1, _1: nextYearIsoWeek1Date};
+	} else {
+		var thisYearIsoWeek1Date = _rluiten$elm_date_extra$Date_Extra_Utils$isoWeekOne(inputYear);
+		return A3(_rluiten$elm_date_extra$Date_Extra_Compare$is, _rluiten$elm_date_extra$Date_Extra_Compare$Before, date, thisYearIsoWeek1Date) ? {
+			ctor: '_Tuple2',
+			_0: inputYear - 1,
+			_1: _rluiten$elm_date_extra$Date_Extra_Utils$isoWeekOne(inputYear - 1)
+		} : {ctor: '_Tuple2', _0: inputYear, _1: thisYearIsoWeek1Date};
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_Utils$isoWeek = function (date) {
+	var _p2 = _rluiten$elm_date_extra$Date_Extra_Utils$getYearIsoWeekDate(date);
+	var year = _p2._0;
+	var isoWeek1Date = _p2._1;
+	var daysSinceIsoWeek1 = A2(_rluiten$elm_date_extra$Date_Extra_Duration$diffDays, date, isoWeek1Date);
+	return {
+		ctor: '_Tuple3',
+		_0: year,
+		_1: ((daysSinceIsoWeek1 / 7) | 0) + 1,
+		_2: _rluiten$elm_date_extra$Date_Extra_Core$isoDayOfWeek(
+			_elm_lang$core$Date$dayOfWeek(date))
+	};
+};
+var _rluiten$elm_date_extra$Date_Extra_Utils$dayList_ = F3(
+	function (dayCount, date, list) {
+		dayList_:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.eq(dayCount, 0)) {
+				return list;
+			} else {
+				if (_elm_lang$core$Native_Utils.cmp(dayCount, 0) > 0) {
+					var _v1 = dayCount - 1,
+						_v2 = A3(_rluiten$elm_date_extra$Date_Extra_Duration$add, _rluiten$elm_date_extra$Date_Extra_Duration$Day, 1, date),
+						_v3 = {ctor: '::', _0: date, _1: list};
+					dayCount = _v1;
+					date = _v2;
+					list = _v3;
+					continue dayList_;
+				} else {
+					var _v4 = dayCount + 1,
+						_v5 = A3(_rluiten$elm_date_extra$Date_Extra_Duration$add, _rluiten$elm_date_extra$Date_Extra_Duration$Day, -1, date),
+						_v6 = {ctor: '::', _0: date, _1: list};
+					dayCount = _v4;
+					date = _v5;
+					list = _v6;
+					continue dayList_;
+				}
+			}
+		}
+	});
+var _rluiten$elm_date_extra$Date_Extra_Utils$dayList = F2(
+	function (dayCount, startDate) {
+		return _elm_lang$core$List$reverse(
+			A3(
+				_rluiten$elm_date_extra$Date_Extra_Utils$dayList_,
+				dayCount,
+				startDate,
+				{ctor: '[]'}));
+	});

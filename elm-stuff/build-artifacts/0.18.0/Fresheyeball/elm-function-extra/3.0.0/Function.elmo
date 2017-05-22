@@ -1,0 +1,130 @@
+var _Fresheyeball$elm_function_extra$Function$flip3 = F4(
+	function (f, c, b, a) {
+		return A3(f, a, b, c);
+	});
+var _Fresheyeball$elm_function_extra$Function$swirll = F4(
+	function (f, b, c, a) {
+		return A3(f, a, b, c);
+	});
+var _Fresheyeball$elm_function_extra$Function$swirlr = F4(
+	function (f, c, a, b) {
+		return A3(f, a, b, c);
+	});
+var _Fresheyeball$elm_function_extra$Function$on = F4(
+	function (g, f, x, y) {
+		return A2(
+			g,
+			f(x),
+			f(y));
+	});
+var _Fresheyeball$elm_function_extra$Function$singleton = _elm_lang$core$Basics$always;
+var _Fresheyeball$elm_function_extra$Function$andThen = F3(
+	function (k, f, x) {
+		return A2(
+			k,
+			f(x),
+			x);
+	});
+var _Fresheyeball$elm_function_extra$Function$andMap = F3(
+	function (f, ff, x) {
+		return A2(
+			ff,
+			x,
+			f(x));
+	});
+var _Fresheyeball$elm_function_extra$Function$map = F2(
+	function (x, y) {
+		return function (_p0) {
+			return x(
+				y(_p0));
+		};
+	});
+var _Fresheyeball$elm_function_extra$Function$map2 = F3(
+	function (f, a, b) {
+		return A2(
+			_Fresheyeball$elm_function_extra$Function$andMap,
+			b,
+			A2(_Fresheyeball$elm_function_extra$Function$map, f, a));
+	});
+var _Fresheyeball$elm_function_extra$Function$map3 = F4(
+	function (f, a, b, c) {
+		return A2(
+			_Fresheyeball$elm_function_extra$Function$andMap,
+			c,
+			A2(
+				_Fresheyeball$elm_function_extra$Function$andMap,
+				b,
+				A2(_Fresheyeball$elm_function_extra$Function$map, f, a)));
+	});
+var _Fresheyeball$elm_function_extra$Function$map4 = F5(
+	function (f, a, b, c, d) {
+		return A2(
+			_Fresheyeball$elm_function_extra$Function$andMap,
+			d,
+			A2(
+				_Fresheyeball$elm_function_extra$Function$andMap,
+				c,
+				A2(
+					_Fresheyeball$elm_function_extra$Function$andMap,
+					b,
+					A2(_Fresheyeball$elm_function_extra$Function$map, f, a))));
+	});
+var _Fresheyeball$elm_function_extra$Function$map5 = F6(
+	function (f, a, b, c, d, e) {
+		return A2(
+			_Fresheyeball$elm_function_extra$Function$andMap,
+			e,
+			A2(
+				_Fresheyeball$elm_function_extra$Function$andMap,
+				d,
+				A2(
+					_Fresheyeball$elm_function_extra$Function$andMap,
+					c,
+					A2(
+						_Fresheyeball$elm_function_extra$Function$andMap,
+						b,
+						A2(_Fresheyeball$elm_function_extra$Function$map, f, a)))));
+	});
+var _Fresheyeball$elm_function_extra$Function$map6 = F7(
+	function (f, a, b, c, d, e, g) {
+		return A2(
+			_Fresheyeball$elm_function_extra$Function$andMap,
+			g,
+			A2(
+				_Fresheyeball$elm_function_extra$Function$andMap,
+				e,
+				A2(
+					_Fresheyeball$elm_function_extra$Function$andMap,
+					d,
+					A2(
+						_Fresheyeball$elm_function_extra$Function$andMap,
+						c,
+						A2(
+							_Fresheyeball$elm_function_extra$Function$andMap,
+							b,
+							A2(_Fresheyeball$elm_function_extra$Function$map, f, a))))));
+	});
+var _Fresheyeball$elm_function_extra$Function_ops = _Fresheyeball$elm_function_extra$Function_ops || {};
+_Fresheyeball$elm_function_extra$Function_ops['>>>>'] = F5(
+	function (fff, f, x, y, z) {
+		return f(
+			A3(fff, x, y, z));
+	});
+var _Fresheyeball$elm_function_extra$Function_ops = _Fresheyeball$elm_function_extra$Function_ops || {};
+_Fresheyeball$elm_function_extra$Function_ops['<<<<'] = _elm_lang$core$Basics$flip(
+	F2(
+		function (x, y) {
+			return A2(_Fresheyeball$elm_function_extra$Function_ops['>>>>'], x, y);
+		}));
+var _Fresheyeball$elm_function_extra$Function_ops = _Fresheyeball$elm_function_extra$Function_ops || {};
+_Fresheyeball$elm_function_extra$Function_ops['>>>'] = F4(
+	function (ff, f, x, y) {
+		return f(
+			A2(ff, x, y));
+	});
+var _Fresheyeball$elm_function_extra$Function_ops = _Fresheyeball$elm_function_extra$Function_ops || {};
+_Fresheyeball$elm_function_extra$Function_ops['<<<'] = _elm_lang$core$Basics$flip(
+	F2(
+		function (x, y) {
+			return A2(_Fresheyeball$elm_function_extra$Function_ops['>>>'], x, y);
+		}));

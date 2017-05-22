@@ -1,0 +1,615 @@
+var _gampleman$elm_visualization$Visualization_Path$mod = F2(
+	function (a, b) {
+		var frac = a / b;
+		return (frac - _elm_lang$core$Basics$toFloat(
+			_elm_lang$core$Basics$truncate(frac))) * b;
+	});
+var _gampleman$elm_visualization$Visualization_Path$stringify = F2(
+	function (item, _p0) {
+		var _p1 = _p0;
+		var _p19 = _p1._4;
+		var _p18 = _p1._2;
+		var _p17 = _p1._3;
+		var _p16 = _p1._1;
+		var _p15 = _p1._0;
+		var _p14 = _p1._5;
+		var boolToFloat = function (b) {
+			return b ? 1 : 0;
+		};
+		var epsilon = 1.0e-6;
+		var append = F3(
+			function (cmd, values, str) {
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					str,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						cmd,
+						A2(
+							_elm_lang$core$String$join,
+							',',
+							A2(_elm_lang$core$List$map, _elm_lang$core$Basics$toString, values))));
+			});
+		var stringifyArc = F5(
+			function (x1_, y1_, x2_, y2_, radius) {
+				var y21 = y2_ - y1_;
+				var x21 = x2_ - x1_;
+				var l21_2 = Math.pow(x21, 2) + Math.pow(y21, 2);
+				var l21 = _elm_lang$core$Basics$sqrt(l21_2);
+				var y0_ = _p19;
+				var y01 = y0_ - y1_;
+				var y20 = y2_ - y0_;
+				var x0_ = _p17;
+				var x01 = x0_ - x1_;
+				var l01_2 = Math.pow(x01, 2) + Math.pow(y01, 2);
+				var l01 = _elm_lang$core$Basics$sqrt(l01_2);
+				var x20 = x2_ - x0_;
+				var l20_2 = Math.pow(x20, 2) + Math.pow(y20, 2);
+				var r = _elm_lang$core$Basics$abs(radius);
+				var l = r * _elm_lang$core$Basics$tan(
+					(_elm_lang$core$Basics$pi - _elm_lang$core$Basics$acos(((l21_2 + l01_2) - l20_2) / ((2 * l21) * l01))) / 2);
+				var t01 = l / l01;
+				var str_ = (_elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$Basics$abs(t01 - 1),
+					epsilon) > 0) ? A3(
+					append,
+					'L',
+					{
+						ctor: '::',
+						_0: x1_ + (t01 * x01),
+						_1: {
+							ctor: '::',
+							_0: y1_ + (t01 * y01),
+							_1: {ctor: '[]'}
+						}
+					},
+					_p15) : _p15;
+				var t21 = l / l21;
+				return _p14 ? {
+					ctor: '_Tuple6',
+					_0: A3(
+						append,
+						'M',
+						{
+							ctor: '::',
+							_0: x1_,
+							_1: {
+								ctor: '::',
+								_0: y1_,
+								_1: {ctor: '[]'}
+							}
+						},
+						_p15),
+					_1: _p16,
+					_2: _p18,
+					_3: x1_,
+					_4: y1_,
+					_5: false
+				} : ((_elm_lang$core$Native_Utils.cmp(l01_2, epsilon) < 0) ? {ctor: '_Tuple6', _0: _p15, _1: _p16, _2: _p18, _3: _p17, _4: _p19, _5: _p14} : (((!(_elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$Basics$abs((y01 * x21) - (y21 * x01)),
+					epsilon) > 0)) || _elm_lang$core$Native_Utils.eq(r, 0)) ? {
+					ctor: '_Tuple6',
+					_0: A3(
+						append,
+						'L',
+						{
+							ctor: '::',
+							_0: x1_,
+							_1: {
+								ctor: '::',
+								_0: y1_,
+								_1: {ctor: '[]'}
+							}
+						},
+						_p15),
+					_1: _p16,
+					_2: _p18,
+					_3: x1_,
+					_4: y1_,
+					_5: false
+				} : {
+					ctor: '_Tuple6',
+					_0: A3(
+						append,
+						'A',
+						{
+							ctor: '::',
+							_0: r,
+							_1: {
+								ctor: '::',
+								_0: r,
+								_1: {
+									ctor: '::',
+									_0: 0,
+									_1: {
+										ctor: '::',
+										_0: 0,
+										_1: {
+											ctor: '::',
+											_0: (_elm_lang$core$Native_Utils.cmp(y01 * x20, x01 * y20) > 0) ? 1 : 0,
+											_1: {
+												ctor: '::',
+												_0: x1_ + (t21 * x21),
+												_1: {
+													ctor: '::',
+													_0: y1_ + (t21 * y21),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						},
+						str_),
+					_1: _p16,
+					_2: _p18,
+					_3: x1_ + (t21 * x21),
+					_4: y1_ + (t21 * y21),
+					_5: false
+				}));
+			});
+		var stringifyArcCustom = F6(
+			function (x, y, radius, a0, a1, ccw) {
+				var da = ccw ? (a0 - a1) : (a1 - a0);
+				var tau = 2 * _elm_lang$core$Basics$pi;
+				var cw = boolToFloat(!ccw);
+				var r = _elm_lang$core$Basics$abs(radius);
+				var dx = r * _elm_lang$core$Basics$cos(a0);
+				var x0_ = x + dx;
+				var dy = r * _elm_lang$core$Basics$sin(a0);
+				var y0_ = y + dy;
+				var str_ = _p14 ? A3(
+					append,
+					'M',
+					{
+						ctor: '::',
+						_0: x0_,
+						_1: {
+							ctor: '::',
+							_0: y0_,
+							_1: {ctor: '[]'}
+						}
+					},
+					_p15) : (((_elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$Basics$abs(_p17 - x0_),
+					epsilon) > 0) || (_elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$Basics$abs(_p19 - y0_),
+					epsilon) > 0)) ? A3(
+					append,
+					'L',
+					{
+						ctor: '::',
+						_0: x0_,
+						_1: {
+							ctor: '::',
+							_0: y0_,
+							_1: {ctor: '[]'}
+						}
+					},
+					_p15) : _p15);
+				if (_elm_lang$core$Native_Utils.eq(r, 0)) {
+					return {ctor: '_Tuple6', _0: str_, _1: _p16, _2: _p18, _3: _p17, _4: _p19, _5: _p14};
+				} else {
+					if (_elm_lang$core$Native_Utils.cmp(da, tau - epsilon) > 0) {
+						return {
+							ctor: '_Tuple6',
+							_0: A3(
+								append,
+								'A',
+								{
+									ctor: '::',
+									_0: r,
+									_1: {
+										ctor: '::',
+										_0: r,
+										_1: {
+											ctor: '::',
+											_0: 0,
+											_1: {
+												ctor: '::',
+												_0: 1,
+												_1: {
+													ctor: '::',
+													_0: cw,
+													_1: {
+														ctor: '::',
+														_0: x0_,
+														_1: {
+															ctor: '::',
+															_0: y0_,
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}
+								},
+								A3(
+									append,
+									'A',
+									{
+										ctor: '::',
+										_0: r,
+										_1: {
+											ctor: '::',
+											_0: r,
+											_1: {
+												ctor: '::',
+												_0: 0,
+												_1: {
+													ctor: '::',
+													_0: 1,
+													_1: {
+														ctor: '::',
+														_0: cw,
+														_1: {
+															ctor: '::',
+															_0: x - dx,
+															_1: {
+																ctor: '::',
+																_0: y - dy,
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}
+											}
+										}
+									},
+									str_)),
+							_1: _p16,
+							_2: _p18,
+							_3: x0_,
+							_4: y0_,
+							_5: false
+						};
+					} else {
+						var da_ = (_elm_lang$core$Native_Utils.cmp(da, 0) < 0) ? (A2(_gampleman$elm_visualization$Visualization_Path$mod, da, tau) + tau) : da;
+						return {
+							ctor: '_Tuple6',
+							_0: A3(
+								append,
+								'A',
+								{
+									ctor: '::',
+									_0: r,
+									_1: {
+										ctor: '::',
+										_0: r,
+										_1: {
+											ctor: '::',
+											_0: 0,
+											_1: {
+												ctor: '::',
+												_0: boolToFloat(
+													_elm_lang$core$Native_Utils.cmp(da_, _elm_lang$core$Basics$pi) > -1),
+												_1: {
+													ctor: '::',
+													_0: cw,
+													_1: {
+														ctor: '::',
+														_0: x + (r * _elm_lang$core$Basics$cos(a1)),
+														_1: {
+															ctor: '::',
+															_0: y + (r * _elm_lang$core$Basics$sin(a1)),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}
+								},
+								str_),
+							_1: _p16,
+							_2: _p18,
+							_3: x + (r * _elm_lang$core$Basics$cos(a1)),
+							_4: y + (r * _elm_lang$core$Basics$sin(a1)),
+							_5: false
+						};
+					}
+				}
+			});
+		var _p2 = item;
+		switch (_p2.ctor) {
+			case 'Move':
+				var _p4 = _p2._0._1;
+				var _p3 = _p2._0._0;
+				return {
+					ctor: '_Tuple6',
+					_0: A3(
+						append,
+						'M',
+						{
+							ctor: '::',
+							_0: _p3,
+							_1: {
+								ctor: '::',
+								_0: _p4,
+								_1: {ctor: '[]'}
+							}
+						},
+						_p15),
+					_1: _p3,
+					_2: _p4,
+					_3: _p3,
+					_4: _p4,
+					_5: false
+				};
+			case 'Close':
+				return _p14 ? {ctor: '_Tuple6', _0: _p15, _1: _p16, _2: _p18, _3: _p17, _4: _p19, _5: _p14} : {
+					ctor: '_Tuple6',
+					_0: A3(
+						append,
+						'Z',
+						{ctor: '[]'},
+						_p15),
+					_1: _p16,
+					_2: _p18,
+					_3: _p16,
+					_4: _p18,
+					_5: false
+				};
+			case 'Line':
+				var _p6 = _p2._0._1;
+				var _p5 = _p2._0._0;
+				return {
+					ctor: '_Tuple6',
+					_0: A3(
+						append,
+						'L',
+						{
+							ctor: '::',
+							_0: _p5,
+							_1: {
+								ctor: '::',
+								_0: _p6,
+								_1: {ctor: '[]'}
+							}
+						},
+						_p15),
+					_1: _p16,
+					_2: _p18,
+					_3: _p5,
+					_4: _p6,
+					_5: false
+				};
+			case 'QuadraticCurve':
+				var _p8 = _p2._1._1;
+				var _p7 = _p2._1._0;
+				return {
+					ctor: '_Tuple6',
+					_0: A3(
+						append,
+						'Q',
+						{
+							ctor: '::',
+							_0: _p2._0._0,
+							_1: {
+								ctor: '::',
+								_0: _p2._0._1,
+								_1: {
+									ctor: '::',
+									_0: _p7,
+									_1: {
+										ctor: '::',
+										_0: _p8,
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						_p15),
+					_1: _p16,
+					_2: _p18,
+					_3: _p7,
+					_4: _p8,
+					_5: false
+				};
+			case 'BezierCurve':
+				var _p10 = _p2._2._1;
+				var _p9 = _p2._2._0;
+				return {
+					ctor: '_Tuple6',
+					_0: A3(
+						append,
+						'C',
+						{
+							ctor: '::',
+							_0: _p2._0._0,
+							_1: {
+								ctor: '::',
+								_0: _p2._0._1,
+								_1: {
+									ctor: '::',
+									_0: _p2._1._0,
+									_1: {
+										ctor: '::',
+										_0: _p2._1._1,
+										_1: {
+											ctor: '::',
+											_0: _p9,
+											_1: {
+												ctor: '::',
+												_0: _p10,
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						},
+						_p15),
+					_1: _p16,
+					_2: _p18,
+					_3: _p9,
+					_4: _p10,
+					_5: false
+				};
+			case 'Arc':
+				return A5(stringifyArc, _p2._0._0, _p2._0._1, _p2._1._0, _p2._1._1, _p2._2);
+			case 'ArcCustom':
+				return A6(stringifyArcCustom, _p2._0._0, _p2._0._1, _p2._1, _p2._2, _p2._3, _p2._4);
+			default:
+				var _p13 = _p2._0._1;
+				var _p12 = _p2._0._0;
+				var _p11 = _p2._1._0;
+				return {
+					ctor: '_Tuple6',
+					_0: A3(
+						append,
+						'Z',
+						{ctor: '[]'},
+						A3(
+							append,
+							'h',
+							{
+								ctor: '::',
+								_0: 0 - _p11,
+								_1: {ctor: '[]'}
+							},
+							A3(
+								append,
+								'v',
+								{
+									ctor: '::',
+									_0: _p2._1._1,
+									_1: {ctor: '[]'}
+								},
+								A3(
+									append,
+									'h',
+									{
+										ctor: '::',
+										_0: _p11,
+										_1: {ctor: '[]'}
+									},
+									A3(
+										append,
+										'M',
+										{
+											ctor: '::',
+											_0: _p12,
+											_1: {
+												ctor: '::',
+												_0: _p13,
+												_1: {ctor: '[]'}
+											}
+										},
+										_p15))))),
+					_1: _p12,
+					_2: _p13,
+					_3: _p12,
+					_4: _p13,
+					_5: false
+				};
+		}
+	});
+var _gampleman$elm_visualization$Visualization_Path$toAttrString = function (path) {
+	var _p20 = A3(
+		_elm_lang$core$List$foldl,
+		_gampleman$elm_visualization$Visualization_Path$stringify,
+		{ctor: '_Tuple6', _0: '', _1: 0, _2: 0, _3: 0, _4: 0, _5: true},
+		path);
+	var result = _p20._0;
+	return result;
+};
+var _gampleman$elm_visualization$Visualization_Path$begin = {ctor: '[]'};
+var _gampleman$elm_visualization$Visualization_Path$push = F2(
+	function (el, list) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			list,
+			{
+				ctor: '::',
+				_0: el,
+				_1: {ctor: '[]'}
+			});
+	});
+var _gampleman$elm_visualization$Visualization_Path$Rect = F2(
+	function (a, b) {
+		return {ctor: 'Rect', _0: a, _1: b};
+	});
+var _gampleman$elm_visualization$Visualization_Path$rect = F4(
+	function (x, y, w, h) {
+		return _gampleman$elm_visualization$Visualization_Path$push(
+			A2(
+				_gampleman$elm_visualization$Visualization_Path$Rect,
+				{ctor: '_Tuple2', _0: x, _1: y},
+				{ctor: '_Tuple2', _0: w, _1: h}));
+	});
+var _gampleman$elm_visualization$Visualization_Path$ArcCustom = F5(
+	function (a, b, c, d, e) {
+		return {ctor: 'ArcCustom', _0: a, _1: b, _2: c, _3: d, _4: e};
+	});
+var _gampleman$elm_visualization$Visualization_Path$arc = F6(
+	function (x, y, radius, startAngle, endAngle, anticlockwise) {
+		return _gampleman$elm_visualization$Visualization_Path$push(
+			A5(
+				_gampleman$elm_visualization$Visualization_Path$ArcCustom,
+				{ctor: '_Tuple2', _0: x, _1: y},
+				radius,
+				startAngle,
+				endAngle,
+				anticlockwise));
+	});
+var _gampleman$elm_visualization$Visualization_Path$Arc = F3(
+	function (a, b, c) {
+		return {ctor: 'Arc', _0: a, _1: b, _2: c};
+	});
+var _gampleman$elm_visualization$Visualization_Path$arcTo = F5(
+	function (x1, y1, x2, y2, radius) {
+		return _gampleman$elm_visualization$Visualization_Path$push(
+			A3(
+				_gampleman$elm_visualization$Visualization_Path$Arc,
+				{ctor: '_Tuple2', _0: x1, _1: y1},
+				{ctor: '_Tuple2', _0: x2, _1: y2},
+				radius));
+	});
+var _gampleman$elm_visualization$Visualization_Path$BezierCurve = F3(
+	function (a, b, c) {
+		return {ctor: 'BezierCurve', _0: a, _1: b, _2: c};
+	});
+var _gampleman$elm_visualization$Visualization_Path$bezierCurveTo = F6(
+	function (cpx1, cpy1, cpx2, cpy2, x, y) {
+		return _gampleman$elm_visualization$Visualization_Path$push(
+			A3(
+				_gampleman$elm_visualization$Visualization_Path$BezierCurve,
+				{ctor: '_Tuple2', _0: cpx1, _1: cpy1},
+				{ctor: '_Tuple2', _0: cpx2, _1: cpy2},
+				{ctor: '_Tuple2', _0: x, _1: y}));
+	});
+var _gampleman$elm_visualization$Visualization_Path$QuadraticCurve = F2(
+	function (a, b) {
+		return {ctor: 'QuadraticCurve', _0: a, _1: b};
+	});
+var _gampleman$elm_visualization$Visualization_Path$quadraticCurveTo = F4(
+	function (cpx, cpy, x, y) {
+		return _gampleman$elm_visualization$Visualization_Path$push(
+			A2(
+				_gampleman$elm_visualization$Visualization_Path$QuadraticCurve,
+				{ctor: '_Tuple2', _0: cpx, _1: cpy},
+				{ctor: '_Tuple2', _0: x, _1: y}));
+	});
+var _gampleman$elm_visualization$Visualization_Path$Line = function (a) {
+	return {ctor: 'Line', _0: a};
+};
+var _gampleman$elm_visualization$Visualization_Path$lineTo = F2(
+	function (x, y) {
+		return _gampleman$elm_visualization$Visualization_Path$push(
+			_gampleman$elm_visualization$Visualization_Path$Line(
+				{ctor: '_Tuple2', _0: x, _1: y}));
+	});
+var _gampleman$elm_visualization$Visualization_Path$Close = {ctor: 'Close'};
+var _gampleman$elm_visualization$Visualization_Path$close = _gampleman$elm_visualization$Visualization_Path$push(_gampleman$elm_visualization$Visualization_Path$Close);
+var _gampleman$elm_visualization$Visualization_Path$Move = function (a) {
+	return {ctor: 'Move', _0: a};
+};
+var _gampleman$elm_visualization$Visualization_Path$moveTo = F2(
+	function (x, y) {
+		return _gampleman$elm_visualization$Visualization_Path$push(
+			_gampleman$elm_visualization$Visualization_Path$Move(
+				{ctor: '_Tuple2', _0: x, _1: y}));
+	});

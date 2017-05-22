@@ -1,0 +1,73 @@
+var _ydschneider$regex_builder$RegexBuilder_Extra$betweenLazy = F3(
+	function (i, j, f) {
+		return ((_elm_lang$core$Native_Utils.cmp(i, j) > 0) || ((_elm_lang$core$Native_Utils.cmp(i, 0) < 0) || (_elm_lang$core$Native_Utils.cmp(j, 0) < 0))) ? _elm_lang$core$Basics$identity : (_elm_lang$core$Native_Utils.eq(i, j) ? A2(
+			_ydschneider$regex_builder$Internal$Postfix,
+			_ydschneider$regex_builder$Internal$Exactly(i),
+			f(_ydschneider$regex_builder$Internal$Empty)) : A2(
+			_ydschneider$regex_builder$Internal$Postfix,
+			A2(_ydschneider$regex_builder$Internal$LazyBetween, i, j),
+			f(_ydschneider$regex_builder$Internal$Empty)));
+	});
+var _ydschneider$regex_builder$RegexBuilder_Extra$manyLazy = function (f) {
+	return A2(
+		_ydschneider$regex_builder$Internal$Postfix,
+		_ydschneider$regex_builder$Internal$LazyOnePlus,
+		f(_ydschneider$regex_builder$Internal$Empty));
+};
+var _ydschneider$regex_builder$RegexBuilder_Extra$maybeLazy = function (f) {
+	return A2(
+		_ydschneider$regex_builder$Internal$Postfix,
+		_ydschneider$regex_builder$Internal$LazyZeroOrOne,
+		f(_ydschneider$regex_builder$Internal$Empty));
+};
+var _ydschneider$regex_builder$RegexBuilder_Extra$between = F3(
+	function (i, j, f) {
+		return ((_elm_lang$core$Native_Utils.cmp(i, j) > 0) || ((_elm_lang$core$Native_Utils.cmp(i, 0) < 0) || (_elm_lang$core$Native_Utils.cmp(j, 0) < 0))) ? _elm_lang$core$Basics$identity : (_elm_lang$core$Native_Utils.eq(i, j) ? A2(
+			_ydschneider$regex_builder$Internal$Postfix,
+			_ydschneider$regex_builder$Internal$Exactly(i),
+			f(_ydschneider$regex_builder$Internal$Empty)) : A2(
+			_ydschneider$regex_builder$Internal$Postfix,
+			A2(_ydschneider$regex_builder$Internal$Between, i, j),
+			f(_ydschneider$regex_builder$Internal$Empty)));
+	});
+var _ydschneider$regex_builder$RegexBuilder_Extra$repeat = F2(
+	function (i, f) {
+		return (_elm_lang$core$Native_Utils.cmp(i, 0) < 1) ? _elm_lang$core$Basics$identity : A2(
+			_ydschneider$regex_builder$Internal$Postfix,
+			_ydschneider$regex_builder$Internal$Exactly(i),
+			f(_ydschneider$regex_builder$Internal$Empty));
+	});
+var _ydschneider$regex_builder$RegexBuilder_Extra$noWordBoundary = _ydschneider$regex_builder$Internal$Raw('\\B');
+var _ydschneider$regex_builder$RegexBuilder_Extra$wordBoundary = _ydschneider$regex_builder$Internal$Raw('\\b');
+var _ydschneider$regex_builder$RegexBuilder_Extra$ifNotFollowedBy = function (f) {
+	return _ydschneider$regex_builder$Internal$NegativeLookahead(
+		f(_ydschneider$regex_builder$Internal$Empty));
+};
+var _ydschneider$regex_builder$RegexBuilder_Extra$ifFollowedBy = function (f) {
+	return _ydschneider$regex_builder$Internal$Lookahead(
+		f(_ydschneider$regex_builder$Internal$Empty));
+};
+var _ydschneider$regex_builder$RegexBuilder_Extra$toRegexString = F2(
+	function (_p0, f) {
+		var _p1 = _p0;
+		var end = _p1.alignEnd ? '$' : '';
+		var begin = _p1.alignBeginning ? '^' : '';
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			begin,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_ydschneider$regex_builder$RegexBuilder$toRegexString(f),
+				end));
+	});
+var _ydschneider$regex_builder$RegexBuilder_Extra$toRegex = function (o) {
+	return function (_p2) {
+		return _elm_lang$core$Regex$regex(
+			A2(_ydschneider$regex_builder$RegexBuilder_Extra$toRegexString, o, _p2));
+	};
+};
+var _ydschneider$regex_builder$RegexBuilder_Extra$defaultOptions = {alignBeginning: false, alignEnd: false};
+var _ydschneider$regex_builder$RegexBuilder_Extra$Options = F2(
+	function (a, b) {
+		return {alignBeginning: a, alignEnd: b};
+	});

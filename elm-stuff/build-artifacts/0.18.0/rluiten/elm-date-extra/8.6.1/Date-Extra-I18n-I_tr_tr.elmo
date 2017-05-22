@@ -1,0 +1,103 @@
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_tr_tr$dayOfMonthWithSuffix = F2(
+	function (pad, day) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(day),
+			'.');
+	});
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_tr_tr$monthName = function (month) {
+	var _p0 = month;
+	switch (_p0.ctor) {
+		case 'Jan':
+			return 'Ocak';
+		case 'Feb':
+			return 'Şubat';
+		case 'Mar':
+			return 'Mart';
+		case 'Apr':
+			return 'Nisan';
+		case 'May':
+			return 'Mayıs';
+		case 'Jun':
+			return 'Haziran';
+		case 'Jul':
+			return 'Temmuz';
+		case 'Aug':
+			return 'Ağustos';
+		case 'Sep':
+			return 'Eylül';
+		case 'Oct':
+			return 'Ekim';
+		case 'Nov':
+			return 'Kasım';
+		default:
+			return 'Aralık';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_tr_tr$monthShort = function (month) {
+	var _p1 = month;
+	switch (_p1.ctor) {
+		case 'Jan':
+			return 'Oca';
+		case 'Feb':
+			return 'Şub';
+		case 'Mar':
+			return 'Mar';
+		case 'Apr':
+			return 'Nis';
+		case 'May':
+			return 'May';
+		case 'Jun':
+			return 'Haz';
+		case 'Jul':
+			return 'Tem';
+		case 'Aug':
+			return 'Ağu';
+		case 'Sep':
+			return 'Eyl';
+		case 'Oct':
+			return 'Eki';
+		case 'Nov':
+			return 'Kas';
+		default:
+			return 'Ara';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_tr_tr$dayName = function (day) {
+	var _p2 = day;
+	switch (_p2.ctor) {
+		case 'Mon':
+			return 'Pazartesi';
+		case 'Tue':
+			return 'Salı';
+		case 'Wed':
+			return 'Çarşamba';
+		case 'Thu':
+			return 'Perşembe';
+		case 'Fri':
+			return 'Cuma';
+		case 'Sat':
+			return 'Cumartesi';
+		default:
+			return 'Pazar';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_tr_tr$dayShort = function (day) {
+	var _p3 = day;
+	switch (_p3.ctor) {
+		case 'Mon':
+			return 'Pzt';
+		case 'Tue':
+			return 'Sal';
+		case 'Wed':
+			return 'Çar';
+		case 'Thu':
+			return 'Per';
+		case 'Fri':
+			return 'Cum';
+		case 'Sat':
+			return 'Cmt';
+		default:
+			return 'Paz';
+	}
+};

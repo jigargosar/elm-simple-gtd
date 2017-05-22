@@ -1,0 +1,501 @@
+var _rluiten$elm_text_search$StopWordFilter$createFilterFunc = F2(
+	function (tokens, index) {
+		var _p0 = A2(_rluiten$elm_text_search$Index_Utils$applyTransform, index, tokens);
+		var u1index = _p0._0;
+		var tokensU1 = _p0._1;
+		var tokenSet = _elm_lang$core$Set$fromList(tokensU1);
+		return {
+			ctor: '_Tuple2',
+			_0: u1index,
+			_1: function (word) {
+				return !A2(_elm_lang$core$Set$member, word, tokenSet);
+			}
+		};
+	});
+var _rluiten$elm_text_search$StopWordFilter$stopEnglishWordList = {
+	ctor: '::',
+	_0: 'a',
+	_1: {
+		ctor: '::',
+		_0: 'able',
+		_1: {
+			ctor: '::',
+			_0: 'about',
+			_1: {
+				ctor: '::',
+				_0: 'across',
+				_1: {
+					ctor: '::',
+					_0: 'after',
+					_1: {
+						ctor: '::',
+						_0: 'all',
+						_1: {
+							ctor: '::',
+							_0: 'almost',
+							_1: {
+								ctor: '::',
+								_0: 'also',
+								_1: {
+									ctor: '::',
+									_0: 'am',
+									_1: {
+										ctor: '::',
+										_0: 'among',
+										_1: {
+											ctor: '::',
+											_0: 'an',
+											_1: {
+												ctor: '::',
+												_0: 'and',
+												_1: {
+													ctor: '::',
+													_0: 'any',
+													_1: {
+														ctor: '::',
+														_0: 'are',
+														_1: {
+															ctor: '::',
+															_0: 'as',
+															_1: {
+																ctor: '::',
+																_0: 'at',
+																_1: {
+																	ctor: '::',
+																	_0: 'be',
+																	_1: {
+																		ctor: '::',
+																		_0: 'because',
+																		_1: {
+																			ctor: '::',
+																			_0: 'been',
+																			_1: {
+																				ctor: '::',
+																				_0: 'but',
+																				_1: {
+																					ctor: '::',
+																					_0: 'by',
+																					_1: {
+																						ctor: '::',
+																						_0: 'can',
+																						_1: {
+																							ctor: '::',
+																							_0: 'cannot',
+																							_1: {
+																								ctor: '::',
+																								_0: 'could',
+																								_1: {
+																									ctor: '::',
+																									_0: 'dear',
+																									_1: {
+																										ctor: '::',
+																										_0: 'did',
+																										_1: {
+																											ctor: '::',
+																											_0: 'do',
+																											_1: {
+																												ctor: '::',
+																												_0: 'does',
+																												_1: {
+																													ctor: '::',
+																													_0: 'either',
+																													_1: {
+																														ctor: '::',
+																														_0: 'else',
+																														_1: {
+																															ctor: '::',
+																															_0: 'ever',
+																															_1: {
+																																ctor: '::',
+																																_0: 'every',
+																																_1: {
+																																	ctor: '::',
+																																	_0: 'for',
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 'from',
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 'get',
+																																			_1: {
+																																				ctor: '::',
+																																				_0: 'got',
+																																				_1: {
+																																					ctor: '::',
+																																					_0: 'had',
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 'has',
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 'have',
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 'he',
+																																								_1: {
+																																									ctor: '::',
+																																									_0: 'her',
+																																									_1: {
+																																										ctor: '::',
+																																										_0: 'hers',
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 'him',
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 'his',
+																																												_1: {
+																																													ctor: '::',
+																																													_0: 'how',
+																																													_1: {
+																																														ctor: '::',
+																																														_0: 'however',
+																																														_1: {
+																																															ctor: '::',
+																																															_0: 'i',
+																																															_1: {
+																																																ctor: '::',
+																																																_0: 'if',
+																																																_1: {
+																																																	ctor: '::',
+																																																	_0: 'in',
+																																																	_1: {
+																																																		ctor: '::',
+																																																		_0: 'into',
+																																																		_1: {
+																																																			ctor: '::',
+																																																			_0: 'is',
+																																																			_1: {
+																																																				ctor: '::',
+																																																				_0: 'it',
+																																																				_1: {
+																																																					ctor: '::',
+																																																					_0: 'its',
+																																																					_1: {
+																																																						ctor: '::',
+																																																						_0: 'just',
+																																																						_1: {
+																																																							ctor: '::',
+																																																							_0: 'least',
+																																																							_1: {
+																																																								ctor: '::',
+																																																								_0: 'let',
+																																																								_1: {
+																																																									ctor: '::',
+																																																									_0: 'like',
+																																																									_1: {
+																																																										ctor: '::',
+																																																										_0: 'likely',
+																																																										_1: {
+																																																											ctor: '::',
+																																																											_0: 'may',
+																																																											_1: {
+																																																												ctor: '::',
+																																																												_0: 'me',
+																																																												_1: {
+																																																													ctor: '::',
+																																																													_0: 'might',
+																																																													_1: {
+																																																														ctor: '::',
+																																																														_0: 'most',
+																																																														_1: {
+																																																															ctor: '::',
+																																																															_0: 'must',
+																																																															_1: {
+																																																																ctor: '::',
+																																																																_0: 'my',
+																																																																_1: {
+																																																																	ctor: '::',
+																																																																	_0: 'neither',
+																																																																	_1: {
+																																																																		ctor: '::',
+																																																																		_0: 'no',
+																																																																		_1: {
+																																																																			ctor: '::',
+																																																																			_0: 'nor',
+																																																																			_1: {
+																																																																				ctor: '::',
+																																																																				_0: 'not',
+																																																																				_1: {
+																																																																					ctor: '::',
+																																																																					_0: 'of',
+																																																																					_1: {
+																																																																						ctor: '::',
+																																																																						_0: 'off',
+																																																																						_1: {
+																																																																							ctor: '::',
+																																																																							_0: 'often',
+																																																																							_1: {
+																																																																								ctor: '::',
+																																																																								_0: 'on',
+																																																																								_1: {
+																																																																									ctor: '::',
+																																																																									_0: 'only',
+																																																																									_1: {
+																																																																										ctor: '::',
+																																																																										_0: 'or',
+																																																																										_1: {
+																																																																											ctor: '::',
+																																																																											_0: 'other',
+																																																																											_1: {
+																																																																												ctor: '::',
+																																																																												_0: 'our',
+																																																																												_1: {
+																																																																													ctor: '::',
+																																																																													_0: 'own',
+																																																																													_1: {
+																																																																														ctor: '::',
+																																																																														_0: 'rather',
+																																																																														_1: {
+																																																																															ctor: '::',
+																																																																															_0: 'said',
+																																																																															_1: {
+																																																																																ctor: '::',
+																																																																																_0: 'say',
+																																																																																_1: {
+																																																																																	ctor: '::',
+																																																																																	_0: 'says',
+																																																																																	_1: {
+																																																																																		ctor: '::',
+																																																																																		_0: 'she',
+																																																																																		_1: {
+																																																																																			ctor: '::',
+																																																																																			_0: 'should',
+																																																																																			_1: {
+																																																																																				ctor: '::',
+																																																																																				_0: 'since',
+																																																																																				_1: {
+																																																																																					ctor: '::',
+																																																																																					_0: 'so',
+																																																																																					_1: {
+																																																																																						ctor: '::',
+																																																																																						_0: 'some',
+																																																																																						_1: {
+																																																																																							ctor: '::',
+																																																																																							_0: 'than',
+																																																																																							_1: {
+																																																																																								ctor: '::',
+																																																																																								_0: 'that',
+																																																																																								_1: {
+																																																																																									ctor: '::',
+																																																																																									_0: 'the',
+																																																																																									_1: {
+																																																																																										ctor: '::',
+																																																																																										_0: 'their',
+																																																																																										_1: {
+																																																																																											ctor: '::',
+																																																																																											_0: 'them',
+																																																																																											_1: {
+																																																																																												ctor: '::',
+																																																																																												_0: 'then',
+																																																																																												_1: {
+																																																																																													ctor: '::',
+																																																																																													_0: 'there',
+																																																																																													_1: {
+																																																																																														ctor: '::',
+																																																																																														_0: 'these',
+																																																																																														_1: {
+																																																																																															ctor: '::',
+																																																																																															_0: 'they',
+																																																																																															_1: {
+																																																																																																ctor: '::',
+																																																																																																_0: 'this',
+																																																																																																_1: {
+																																																																																																	ctor: '::',
+																																																																																																	_0: 'tis',
+																																																																																																	_1: {
+																																																																																																		ctor: '::',
+																																																																																																		_0: 'to',
+																																																																																																		_1: {
+																																																																																																			ctor: '::',
+																																																																																																			_0: 'too',
+																																																																																																			_1: {
+																																																																																																				ctor: '::',
+																																																																																																				_0: 'twas',
+																																																																																																				_1: {
+																																																																																																					ctor: '::',
+																																																																																																					_0: 'us',
+																																																																																																					_1: {
+																																																																																																						ctor: '::',
+																																																																																																						_0: 'wants',
+																																																																																																						_1: {
+																																																																																																							ctor: '::',
+																																																																																																							_0: 'was',
+																																																																																																							_1: {
+																																																																																																								ctor: '::',
+																																																																																																								_0: 'we',
+																																																																																																								_1: {
+																																																																																																									ctor: '::',
+																																																																																																									_0: 'were',
+																																																																																																									_1: {
+																																																																																																										ctor: '::',
+																																																																																																										_0: 'what',
+																																																																																																										_1: {
+																																																																																																											ctor: '::',
+																																																																																																											_0: 'when',
+																																																																																																											_1: {
+																																																																																																												ctor: '::',
+																																																																																																												_0: 'where',
+																																																																																																												_1: {
+																																																																																																													ctor: '::',
+																																																																																																													_0: 'which',
+																																																																																																													_1: {
+																																																																																																														ctor: '::',
+																																																																																																														_0: 'while',
+																																																																																																														_1: {
+																																																																																																															ctor: '::',
+																																																																																																															_0: 'who',
+																																																																																																															_1: {
+																																																																																																																ctor: '::',
+																																																																																																																_0: 'whom',
+																																																																																																																_1: {
+																																																																																																																	ctor: '::',
+																																																																																																																	_0: 'why',
+																																																																																																																	_1: {
+																																																																																																																		ctor: '::',
+																																																																																																																		_0: 'will',
+																																																																																																																		_1: {
+																																																																																																																			ctor: '::',
+																																																																																																																			_0: 'with',
+																																																																																																																			_1: {
+																																																																																																																				ctor: '::',
+																																																																																																																				_0: 'would',
+																																																																																																																				_1: {
+																																																																																																																					ctor: '::',
+																																																																																																																					_0: 'yet',
+																																																																																																																					_1: {
+																																																																																																																						ctor: '::',
+																																																																																																																						_0: 'you',
+																																																																																																																						_1: {
+																																																																																																																							ctor: '::',
+																																																																																																																							_0: 'your',
+																																																																																																																							_1: {ctor: '[]'}
+																																																																																																																						}
+																																																																																																																					}
+																																																																																																																				}
+																																																																																																																			}
+																																																																																																																		}
+																																																																																																																	}
+																																																																																																																}
+																																																																																																															}
+																																																																																																														}
+																																																																																																													}
+																																																																																																												}
+																																																																																																											}
+																																																																																																										}
+																																																																																																									}
+																																																																																																								}
+																																																																																																							}
+																																																																																																						}
+																																																																																																					}
+																																																																																																				}
+																																																																																																			}
+																																																																																																		}
+																																																																																																	}
+																																																																																																}
+																																																																																															}
+																																																																																														}
+																																																																																													}
+																																																																																												}
+																																																																																											}
+																																																																																										}
+																																																																																									}
+																																																																																								}
+																																																																																							}
+																																																																																						}
+																																																																																					}
+																																																																																				}
+																																																																																			}
+																																																																																		}
+																																																																																	}
+																																																																																}
+																																																																															}
+																																																																														}
+																																																																													}
+																																																																												}
+																																																																											}
+																																																																										}
+																																																																									}
+																																																																								}
+																																																																							}
+																																																																						}
+																																																																					}
+																																																																				}
+																																																																			}
+																																																																		}
+																																																																	}
+																																																																}
+																																																															}
+																																																														}
+																																																													}
+																																																												}
+																																																											}
+																																																										}
+																																																									}
+																																																								}
+																																																							}
+																																																						}
+																																																					}
+																																																				}
+																																																			}
+																																																		}
+																																																	}
+																																																}
+																																															}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _rluiten$elm_text_search$StopWordFilter$createDefaultFilterFunc = function (index) {
+	return A2(_rluiten$elm_text_search$StopWordFilter$createFilterFunc, _rluiten$elm_text_search$StopWordFilter$stopEnglishWordList, index);
+};
+var _rluiten$elm_text_search$StopWordFilter$createFilterFuncWith = F2(
+	function (extraWords, index) {
+		return A2(
+			_rluiten$elm_text_search$StopWordFilter$createFilterFunc,
+			A2(_elm_lang$core$List$append, extraWords, _rluiten$elm_text_search$StopWordFilter$stopEnglishWordList),
+			index);
+	});

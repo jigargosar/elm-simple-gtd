@@ -1,0 +1,103 @@
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_de_de$dayOfMonthWithSuffix = F2(
+	function (pad, day) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(day),
+			'.');
+	});
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_de_de$monthName = function (month) {
+	var _p0 = month;
+	switch (_p0.ctor) {
+		case 'Jan':
+			return 'Januar';
+		case 'Feb':
+			return 'Februar';
+		case 'Mar':
+			return 'März';
+		case 'Apr':
+			return 'April';
+		case 'May':
+			return 'Mai';
+		case 'Jun':
+			return 'Juni';
+		case 'Jul':
+			return 'Juli';
+		case 'Aug':
+			return 'August';
+		case 'Sep':
+			return 'September';
+		case 'Oct':
+			return 'Oktober';
+		case 'Nov':
+			return 'November';
+		default:
+			return 'Dezember';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_de_de$monthShort = function (month) {
+	var _p1 = month;
+	switch (_p1.ctor) {
+		case 'Jan':
+			return 'Jan';
+		case 'Feb':
+			return 'Feb';
+		case 'Mar':
+			return 'Mär';
+		case 'Apr':
+			return 'Apr';
+		case 'May':
+			return 'Mai';
+		case 'Jun':
+			return 'Jun';
+		case 'Jul':
+			return 'Jul';
+		case 'Aug':
+			return 'Aug';
+		case 'Sep':
+			return 'Sep';
+		case 'Oct':
+			return 'Okt';
+		case 'Nov':
+			return 'Nov';
+		default:
+			return 'Dez';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_de_de$dayName = function (day) {
+	var _p2 = day;
+	switch (_p2.ctor) {
+		case 'Mon':
+			return 'Montag';
+		case 'Tue':
+			return 'Dienstag';
+		case 'Wed':
+			return 'Mittwoch';
+		case 'Thu':
+			return 'Donnerstag';
+		case 'Fri':
+			return 'Freitag';
+		case 'Sat':
+			return 'Samstag';
+		default:
+			return 'Sonntag';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_de_de$dayShort = function (day) {
+	var _p3 = day;
+	switch (_p3.ctor) {
+		case 'Mon':
+			return 'Mo';
+		case 'Tue':
+			return 'Di';
+		case 'Wed':
+			return 'Mi';
+		case 'Thu':
+			return 'Do';
+		case 'Fri':
+			return 'Fr';
+		case 'Sat':
+			return 'Sa';
+		default:
+			return 'So';
+	}
+};

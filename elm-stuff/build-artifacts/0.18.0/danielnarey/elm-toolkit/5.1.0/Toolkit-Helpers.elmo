@@ -1,0 +1,477 @@
+var _danielnarey$elm_toolkit$Toolkit_Helpers$applyList = F2(
+	function (fList, data) {
+		var getNextResult = function (_p0) {
+			var _p1 = _p0;
+			var _p2 = _elm_lang$core$List$head(_p1._1);
+			if (_p2.ctor === 'Just') {
+				return {
+					ctor: '::',
+					_0: _p2._0(_p1._0),
+					_1: {ctor: '[]'}
+				};
+			} else {
+				return {ctor: '[]'};
+			}
+		};
+		var applyNextFun = F2(
+			function (_p3, resultList) {
+				applyNextFun:
+				while (true) {
+					var _p4 = _p3;
+					var _p7 = _p4._0;
+					var _p5 = _p4._1;
+					if (_p5.ctor === 'Just') {
+						var _p6 = _p5._0;
+						var _v4 = {
+							ctor: '_Tuple2',
+							_0: _p7,
+							_1: _elm_lang$core$List$tail(_p6)
+						},
+							_v5 = A2(
+							F2(
+								function (x, y) {
+									return A2(_elm_lang$core$Basics_ops['++'], x, y);
+								}),
+							resultList,
+							getNextResult(
+								{ctor: '_Tuple2', _0: _p7, _1: _p6}));
+						_p3 = _v4;
+						resultList = _v5;
+						continue applyNextFun;
+					} else {
+						return resultList;
+					}
+				}
+			});
+		return A2(
+			applyNextFun,
+			{
+				ctor: '_Tuple2',
+				_0: data,
+				_1: _elm_lang$core$Maybe$Just(fList)
+			},
+			{ctor: '[]'});
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$apply4 = F2(
+	function (_p8, a) {
+		var _p9 = _p8;
+		return {
+			ctor: '_Tuple4',
+			_0: _p9._0(a),
+			_1: _p9._1(a),
+			_2: _p9._2(a),
+			_3: _p9._3(a)
+		};
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$apply3 = F2(
+	function (_p10, a) {
+		var _p11 = _p10;
+		return {
+			ctor: '_Tuple3',
+			_0: _p11._0(a),
+			_1: _p11._1(a),
+			_2: _p11._2(a)
+		};
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$apply2 = F2(
+	function (_p12, a) {
+		var _p13 = _p12;
+		return {
+			ctor: '_Tuple2',
+			_0: _p13._0(a),
+			_1: _p13._1(a)
+		};
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$uncurry4 = F2(
+	function (f, _p14) {
+		var _p15 = _p14;
+		return A4(f, _p15._0, _p15._1, _p15._2, _p15._3);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$uncurry3 = F2(
+	function (f, _p16) {
+		var _p17 = _p16;
+		return A3(f, _p17._0, _p17._1, _p17._2);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$curry4 = F5(
+	function (f, a, b, c, d) {
+		return f(
+			{ctor: '_Tuple4', _0: a, _1: b, _2: c, _3: d});
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$curry3 = F4(
+	function (f, a, b, c) {
+		return f(
+			{ctor: '_Tuple3', _0: a, _1: b, _2: c});
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$map4Tuple = F2(
+	function (f, _p18) {
+		var _p19 = _p18;
+		return {
+			ctor: '_Tuple4',
+			_0: f(_p19._0),
+			_1: f(_p19._1),
+			_2: f(_p19._2),
+			_3: f(_p19._3)
+		};
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$map3Tuple = F2(
+	function (f, _p20) {
+		var _p21 = _p20;
+		return {
+			ctor: '_Tuple3',
+			_0: f(_p21._0),
+			_1: f(_p21._1),
+			_2: f(_p21._2)
+		};
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$map2Tuple = F2(
+	function (f, _p22) {
+		var _p23 = _p22;
+		return {
+			ctor: '_Tuple2',
+			_0: f(_p23._0),
+			_1: f(_p23._1)
+		};
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$fourth4 = function (_p24) {
+	var _p25 = _p24;
+	return _p25._3;
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$third4 = function (_p26) {
+	var _p27 = _p26;
+	return _p27._2;
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$second4 = function (_p28) {
+	var _p29 = _p28;
+	return _p29._1;
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$first4 = function (_p30) {
+	var _p31 = _p30;
+	return _p31._0;
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$third3 = function (_p32) {
+	var _p33 = _p32;
+	return _p33._2;
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$second3 = function (_p34) {
+	var _p35 = _p34;
+	return _p35._1;
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$first3 = function (_p36) {
+	var _p37 = _p36;
+	return _p37._0;
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$zip4 = function (_p38) {
+	var _p39 = _p38;
+	return A5(
+		_elm_lang$core$List$map4,
+		F4(
+			function (a, b, c, d) {
+				return {ctor: '_Tuple4', _0: a, _1: b, _2: c, _3: d};
+			}),
+		_p39._0,
+		_p39._1,
+		_p39._2,
+		_p39._3);
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$zip3 = function (_p40) {
+	var _p41 = _p40;
+	return A4(
+		_elm_lang$core$List$map3,
+		F3(
+			function (a, b, c) {
+				return {ctor: '_Tuple3', _0: a, _1: b, _2: c};
+			}),
+		_p41._0,
+		_p41._1,
+		_p41._2);
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$zip = function (_p42) {
+	var _p43 = _p42;
+	return A3(
+		_elm_lang$core$List$map2,
+		F2(
+			function (v0, v1) {
+				return {ctor: '_Tuple2', _0: v0, _1: v1};
+			}),
+		_p43._0,
+		_p43._1);
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$unzip4 = function (_p44) {
+	var _p45 = _p44;
+	return A5(
+		_elm_lang$core$List$map4,
+		F4(
+			function (a, b, c, d) {
+				return {ctor: '_Tuple4', _0: a, _1: b, _2: c, _3: d};
+			}),
+		_p45._0,
+		_p45._1,
+		_p45._2,
+		_p45._3);
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$unzip3 = function (_p46) {
+	var _p47 = _p46;
+	return A4(
+		_elm_lang$core$List$map3,
+		F3(
+			function (a, b, c) {
+				return {ctor: '_Tuple3', _0: a, _1: b, _2: c};
+			}),
+		_p47._0,
+		_p47._1,
+		_p47._2);
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$list4Tuple = function (_p48) {
+	var _p49 = _p48;
+	return {
+		ctor: '::',
+		_0: _p49._0,
+		_1: {
+			ctor: '::',
+			_0: _p49._1,
+			_1: {
+				ctor: '::',
+				_0: _p49._2,
+				_1: {
+					ctor: '::',
+					_0: _p49._3,
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	};
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$list3Tuple = function (_p50) {
+	var _p51 = _p50;
+	return {
+		ctor: '::',
+		_0: _p51._0,
+		_1: {
+			ctor: '::',
+			_0: _p51._1,
+			_1: {
+				ctor: '::',
+				_0: _p51._2,
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$list2Tuple = function (_p52) {
+	var _p53 = _p52;
+	return {
+		ctor: '::',
+		_0: _p53._0,
+		_1: {
+			ctor: '::',
+			_0: _p53._1,
+			_1: {ctor: '[]'}
+		}
+	};
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$unique = function (list) {
+	return _elm_lang$core$Set$toList(
+		_elm_lang$core$Set$fromList(list));
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$getNth = F2(
+	function (n, list) {
+		return (_elm_lang$core$Native_Utils.cmp(n, 0) < 0) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$List$head(
+			A2(_elm_lang$core$List$drop, n, list));
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$resultList = F2(
+	function (errorMsg, list) {
+		var _p54 = A2(_elm_lang$core$List$take, 1, list);
+		if (_p54.ctor === '::') {
+			if ((_p54._0.ctor === 'Ok') && (_p54._1.ctor === '[]')) {
+				return A2(
+					_elm_lang$core$Result$map,
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						})(_p54._0._0),
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Helpers$resultList,
+						errorMsg,
+						A2(_elm_lang$core$List$drop, 1, list)));
+			} else {
+				return _elm_lang$core$Result$Err(errorMsg);
+			}
+		} else {
+			return _elm_lang$core$Result$Ok(
+				{ctor: '[]'});
+		}
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$result4Tuple = F2(
+	function (error, tuple) {
+		var _p55 = tuple;
+		if (((((_p55.ctor === '_Tuple4') && (_p55._0.ctor === 'Ok')) && (_p55._1.ctor === 'Ok')) && (_p55._2.ctor === 'Ok')) && (_p55._3.ctor === 'Ok')) {
+			return _elm_lang$core$Result$Ok(
+				{ctor: '_Tuple4', _0: _p55._0._0, _1: _p55._1._0, _2: _p55._2._0, _3: _p55._3._0});
+		} else {
+			return _elm_lang$core$Result$Err(error);
+		}
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$result3Tuple = F2(
+	function (error, tuple) {
+		var _p56 = tuple;
+		if ((((_p56.ctor === '_Tuple3') && (_p56._0.ctor === 'Ok')) && (_p56._1.ctor === 'Ok')) && (_p56._2.ctor === 'Ok')) {
+			return _elm_lang$core$Result$Ok(
+				{ctor: '_Tuple3', _0: _p56._0._0, _1: _p56._1._0, _2: _p56._2._0});
+		} else {
+			return _elm_lang$core$Result$Err(error);
+		}
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$result2Tuple = F2(
+	function (error, tuple) {
+		var _p57 = tuple;
+		if (((_p57.ctor === '_Tuple2') && (_p57._0.ctor === 'Ok')) && (_p57._1.ctor === 'Ok')) {
+			return _elm_lang$core$Result$Ok(
+				{ctor: '_Tuple2', _0: _p57._0._0, _1: _p57._1._0});
+		} else {
+			return _elm_lang$core$Result$Err(error);
+		}
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$maybeList = function (list) {
+	var _p58 = A2(_elm_lang$core$List$take, 1, list);
+	if (_p58.ctor === '::') {
+		if ((_p58._0.ctor === 'Just') && (_p58._1.ctor === '[]')) {
+			return A2(
+				_elm_lang$core$Maybe$map,
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					})(_p58._0._0),
+				_danielnarey$elm_toolkit$Toolkit_Helpers$maybeList(
+					A2(_elm_lang$core$List$drop, 1, list)));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	} else {
+		return _elm_lang$core$Maybe$Just(
+			{ctor: '[]'});
+	}
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$maybe4Tuple = function (tuple) {
+	var _p59 = tuple;
+	if (((((_p59.ctor === '_Tuple4') && (_p59._0.ctor === 'Just')) && (_p59._1.ctor === 'Just')) && (_p59._2.ctor === 'Just')) && (_p59._3.ctor === 'Just')) {
+		return _elm_lang$core$Maybe$Just(
+			{ctor: '_Tuple4', _0: _p59._0._0, _1: _p59._1._0, _2: _p59._2._0, _3: _p59._3._0});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$take4Tuple = function (list) {
+	return _danielnarey$elm_toolkit$Toolkit_Helpers$maybe4Tuple(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Helpers$apply4,
+			{
+				ctor: '_Tuple4',
+				_0: _danielnarey$elm_toolkit$Toolkit_Helpers$getNth(0),
+				_1: _danielnarey$elm_toolkit$Toolkit_Helpers$getNth(1),
+				_2: _danielnarey$elm_toolkit$Toolkit_Helpers$getNth(2),
+				_3: _danielnarey$elm_toolkit$Toolkit_Helpers$getNth(3)
+			},
+			list));
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$maybe3Tuple = function (tuple) {
+	var _p60 = tuple;
+	if ((((_p60.ctor === '_Tuple3') && (_p60._0.ctor === 'Just')) && (_p60._1.ctor === 'Just')) && (_p60._2.ctor === 'Just')) {
+		return _elm_lang$core$Maybe$Just(
+			{ctor: '_Tuple3', _0: _p60._0._0, _1: _p60._1._0, _2: _p60._2._0});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$take3Tuple = function (list) {
+	return _danielnarey$elm_toolkit$Toolkit_Helpers$maybe3Tuple(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Helpers$apply3,
+			{
+				ctor: '_Tuple3',
+				_0: _danielnarey$elm_toolkit$Toolkit_Helpers$getNth(0),
+				_1: _danielnarey$elm_toolkit$Toolkit_Helpers$getNth(1),
+				_2: _danielnarey$elm_toolkit$Toolkit_Helpers$getNth(2)
+			},
+			list));
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$maybe2Tuple = function (tuple) {
+	var _p61 = tuple;
+	if (((_p61.ctor === '_Tuple2') && (_p61._0.ctor === 'Just')) && (_p61._1.ctor === 'Just')) {
+		return _elm_lang$core$Maybe$Just(
+			{ctor: '_Tuple2', _0: _p61._0._0, _1: _p61._1._0});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$take2Tuple = function (list) {
+	return _danielnarey$elm_toolkit$Toolkit_Helpers$maybe2Tuple(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
+			{
+				ctor: '_Tuple2',
+				_0: _danielnarey$elm_toolkit$Toolkit_Helpers$getNth(0),
+				_1: _danielnarey$elm_toolkit$Toolkit_Helpers$getNth(1)
+			},
+			list));
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$try = F2(
+	function (resultFunction, initialValue) {
+		var _p62 = resultFunction(initialValue);
+		if (_p62.ctor === 'Ok') {
+			return _p62._0;
+		} else {
+			return initialValue;
+		}
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$isBetween = F2(
+	function (_p63, value) {
+		var _p64 = _p63;
+		return (_elm_lang$core$Native_Utils.cmp(value, _p64._0) > 0) && (_elm_lang$core$Native_Utils.cmp(value, _p64._1) < 0);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$isInRange = F2(
+	function (_p65, value) {
+		var _p66 = _p65;
+		return (_elm_lang$core$Native_Utils.cmp(value, _p66._0) > -1) && (_elm_lang$core$Native_Utils.cmp(value, _p66._1) < 1);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$isOneOf = F2(
+	function (list, value) {
+		return A2(_elm_lang$core$List$member, value, list);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Helpers$toBool = function (boolString) {
+	var _p67 = _elm_lang$core$String$toLower(boolString);
+	switch (_p67) {
+		case 'true':
+			return _elm_lang$core$Result$Ok(true);
+		case 'false':
+			return _elm_lang$core$Result$Ok(false);
+		default:
+			return _elm_lang$core$Result$Err('String argument must be \'true\' or \'false\' (case ignored)');
+	}
+};
+var _danielnarey$elm_toolkit$Toolkit_Helpers$roundTo = F2(
+	function (place, number) {
+		var multiplier = _elm_lang$core$Basics$toFloat(
+			A2(
+				F2(
+					function (x, y) {
+						return Math.pow(x, y);
+					}),
+				10,
+				place));
+		return A3(
+			_elm_lang$core$Basics$flip,
+			F2(
+				function (x, y) {
+					return x / y;
+				}),
+			multiplier,
+			_elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$round(
+					A2(
+						F2(
+							function (x, y) {
+								return x * y;
+							}),
+						multiplier,
+						number))));
+	});

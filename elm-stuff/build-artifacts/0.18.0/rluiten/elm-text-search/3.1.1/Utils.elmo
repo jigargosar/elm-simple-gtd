@@ -1,0 +1,15 @@
+var _rluiten$elm_text_search$Utils$intersectSets = function (sets) {
+	var _p0 = sets;
+	if (_p0.ctor === '[]') {
+		return _elm_lang$core$Set$empty;
+	} else {
+		return A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (set, agg) {
+					return A2(_elm_lang$core$Set$intersect, set, agg);
+				}),
+			_p0._0,
+			_p0._1);
+	}
+};

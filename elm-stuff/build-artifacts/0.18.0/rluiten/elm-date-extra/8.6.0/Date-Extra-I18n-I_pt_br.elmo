@@ -1,0 +1,112 @@
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_pt_br$dayOfMonthWithSuffix = F2(
+	function (pad, day) {
+		var value = function () {
+			var _p0 = day;
+			if (_p0 === 1) {
+				return '1º';
+			} else {
+				return _elm_lang$core$Basics$toString(day);
+			}
+		}();
+		return pad ? A3(
+			_elm_lang$core$String$padLeft,
+			2,
+			_elm_lang$core$Native_Utils.chr(' '),
+			value) : value;
+	});
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_pt_br$monthName = function (month) {
+	var _p1 = month;
+	switch (_p1.ctor) {
+		case 'Jan':
+			return 'Janeiro';
+		case 'Feb':
+			return 'Fevereiro';
+		case 'Mar':
+			return 'Março';
+		case 'Apr':
+			return 'Abril';
+		case 'May':
+			return 'Maio';
+		case 'Jun':
+			return 'Junho';
+		case 'Jul':
+			return 'Julho';
+		case 'Aug':
+			return 'Agosto';
+		case 'Sep':
+			return 'Setembro';
+		case 'Oct':
+			return 'Outubro';
+		case 'Nov':
+			return 'Novembro';
+		default:
+			return 'Dezembro';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_pt_br$monthShort = function (month) {
+	var _p2 = month;
+	switch (_p2.ctor) {
+		case 'Jan':
+			return 'Jan';
+		case 'Feb':
+			return 'Fev';
+		case 'Mar':
+			return 'Mar';
+		case 'Apr':
+			return 'Abr';
+		case 'May':
+			return 'Mai';
+		case 'Jun':
+			return 'Jun';
+		case 'Jul':
+			return 'Jul';
+		case 'Aug':
+			return 'Ago';
+		case 'Sep':
+			return 'Set';
+		case 'Oct':
+			return 'Out';
+		case 'Nov':
+			return 'Nov';
+		default:
+			return 'Dez';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_pt_br$dayName = function (day) {
+	var _p3 = day;
+	switch (_p3.ctor) {
+		case 'Mon':
+			return 'Segunda-feira';
+		case 'Tue':
+			return 'Terça-feira';
+		case 'Wed':
+			return 'Quarta-feira';
+		case 'Thu':
+			return 'Quinta-feira';
+		case 'Fri':
+			return 'Sexta-feira';
+		case 'Sat':
+			return 'Sábado';
+		default:
+			return 'Domingo';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_pt_br$dayShort = function (day) {
+	var _p4 = day;
+	switch (_p4.ctor) {
+		case 'Mon':
+			return 'Seg';
+		case 'Tue':
+			return 'Ter';
+		case 'Wed':
+			return 'Qua';
+		case 'Thu':
+			return 'Qui';
+		case 'Fri':
+			return 'Sex';
+		case 'Sat':
+			return 'Sáb';
+		default:
+			return 'Dom';
+	}
+};

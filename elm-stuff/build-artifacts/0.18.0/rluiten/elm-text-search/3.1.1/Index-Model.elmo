@@ -1,0 +1,44 @@
+var _rluiten$elm_text_search$Index_Model$IndexRecord = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return {indexVersion: a, indexType: b, ref: c, fields: d, listFields: e, transformFactories: f, filterFactories: g, documentStore: h, corpusTokens: i, tokenStore: j, corpusTokensIndex: k, transforms: l, filters: m, idfCache: n};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _rluiten$elm_text_search$Index_Model$SimpleConfig = F4(
+	function (a, b, c, d) {
+		return {indexType: a, ref: b, fields: c, listFields: d};
+	});
+var _rluiten$elm_text_search$Index_Model$Config = F6(
+	function (a, b, c, d, e, f) {
+		return {indexType: a, ref: b, fields: c, listFields: d, transformFactories: e, filterFactories: f};
+	});
+var _rluiten$elm_text_search$Index_Model$CodecIndexRecord = F5(
+	function (a, b, c, d, e) {
+		return {indexVersion: a, indexType: b, documentStore: c, corpusTokens: d, tokenStore: e};
+	});
+var _rluiten$elm_text_search$Index_Model$Index = function (a) {
+	return {ctor: 'Index', _0: a};
+};

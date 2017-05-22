@@ -1,0 +1,46 @@
+var _Fresheyeball$elm_function_extra$Function_Pro$mapWithLeft = _toastal$either$Either$mapLeft;
+var _Fresheyeball$elm_function_extra$Function_Pro$mapWithRight = _toastal$either$Either$map;
+var _Fresheyeball$elm_function_extra$Function_Pro$second = F2(
+	function (f, _p0) {
+		var _p1 = _p0;
+		return {
+			ctor: '_Tuple2',
+			_0: _p1._0,
+			_1: f(_p1._1)
+		};
+	});
+var _Fresheyeball$elm_function_extra$Function_Pro$first = F2(
+	function (f, _p2) {
+		var _p3 = _p2;
+		return {
+			ctor: '_Tuple2',
+			_0: f(_p3._0),
+			_1: _p3._1
+		};
+	});
+var _Fresheyeball$elm_function_extra$Function_Pro$mapBoth = F3(
+	function (f, g, x) {
+		return function (_p4) {
+			return g(
+				x(
+					f(_p4)));
+		};
+	});
+var _Fresheyeball$elm_function_extra$Function_Pro$mapBefore = F2(
+	function (g, f) {
+		return function (_p5) {
+			return f(
+				g(_p5));
+		};
+	});
+var _Fresheyeball$elm_function_extra$Function_Pro$mapAfter = _Fresheyeball$elm_function_extra$Function$map;
+var _Fresheyeball$elm_function_extra$Function_Pro$sproodle = function (_p6) {
+	return A2(
+		_Fresheyeball$elm_function_extra$Function_Pro$mapAfter,
+		_elm_lang$core$Basics$uncurry(
+			F2(
+				function (x, y) {
+					return x(y);
+				})),
+		_Fresheyeball$elm_function_extra$Function_Pro$first(_p6));
+};

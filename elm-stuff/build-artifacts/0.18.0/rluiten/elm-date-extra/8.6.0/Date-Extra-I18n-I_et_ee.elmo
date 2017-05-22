@@ -1,0 +1,103 @@
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_et_ee$dayOfMonthWithSuffix = F2(
+	function (pad, day) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(day),
+			'.');
+	});
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_et_ee$monthName = function (month) {
+	var _p0 = month;
+	switch (_p0.ctor) {
+		case 'Jan':
+			return 'jaanuar';
+		case 'Feb':
+			return 'veebruar';
+		case 'Mar':
+			return 'märts';
+		case 'Apr':
+			return 'aprill';
+		case 'May':
+			return 'mai';
+		case 'Jun':
+			return 'juuni';
+		case 'Jul':
+			return 'juuli';
+		case 'Aug':
+			return 'august';
+		case 'Sep':
+			return 'september';
+		case 'Oct':
+			return 'oktoober';
+		case 'Nov':
+			return 'november';
+		default:
+			return 'detsember';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_et_ee$monthShort = function (month) {
+	var _p1 = month;
+	switch (_p1.ctor) {
+		case 'Jan':
+			return 'jaan';
+		case 'Feb':
+			return 'veebr';
+		case 'Mar':
+			return 'märts';
+		case 'Apr':
+			return 'apr';
+		case 'May':
+			return 'mai';
+		case 'Jun':
+			return 'juuni';
+		case 'Jul':
+			return 'juuli';
+		case 'Aug':
+			return 'aug';
+		case 'Sep':
+			return 'sept';
+		case 'Oct':
+			return 'okt';
+		case 'Nov':
+			return 'nov';
+		default:
+			return 'dets';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_et_ee$dayName = function (day) {
+	var _p2 = day;
+	switch (_p2.ctor) {
+		case 'Mon':
+			return 'esmaspäev';
+		case 'Tue':
+			return 'teisipäev';
+		case 'Wed':
+			return 'kolmapäev';
+		case 'Thu':
+			return 'neljapäev';
+		case 'Fri':
+			return 'reede';
+		case 'Sat':
+			return 'laupäev';
+		default:
+			return 'pühapäev';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_et_ee$dayShort = function (day) {
+	var _p3 = day;
+	switch (_p3.ctor) {
+		case 'Mon':
+			return 'E';
+		case 'Tue':
+			return 'T';
+		case 'Wed':
+			return 'K';
+		case 'Thu':
+			return 'N';
+		case 'Fri':
+			return 'R';
+		case 'Sat':
+			return 'L';
+		default:
+			return 'P';
+	}
+};

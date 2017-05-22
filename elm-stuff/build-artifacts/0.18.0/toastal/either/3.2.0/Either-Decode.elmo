@@ -1,0 +1,13 @@
+var _toastal$either$Either_Decode$either = F2(
+	function (a, b) {
+		return _elm_lang$core$Json_Decode$oneOf(
+			{
+				ctor: '::',
+				_0: A2(_elm_lang$core$Json_Decode$map, _toastal$either$Either$Left, a),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$core$Json_Decode$map, _toastal$either$Either$Right, b),
+					_1: {ctor: '[]'}
+				}
+			});
+	});

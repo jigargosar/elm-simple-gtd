@@ -1,0 +1,7 @@
+var _mgold$elm_date_format$Time_Format$format = F2(
+	function (s, t) {
+		return A2(
+			_mgold$elm_date_format$Date_Format$format,
+			s,
+			_elm_lang$core$Date$fromTime(t));
+	});

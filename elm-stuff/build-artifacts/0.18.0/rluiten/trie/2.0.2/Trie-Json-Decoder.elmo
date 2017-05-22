@@ -1,0 +1,68 @@
+var _rluiten$trie$Trie_Json_Decoder$decoderValDict = _elm_lang$core$Json_Decode$dict;
+var _rluiten$trie$Trie_Json_Decoder$decoder = function (valDec) {
+	return _elm_lang$core$Json_Decode$oneOf(
+		{
+			ctor: '::',
+			_0: _elm_lang$core$Json_Decode$null(_rluiten$trie$TrieModel$EmptyTrie),
+			_1: {
+				ctor: '::',
+				_0: _rluiten$trie$Trie_Json_Decoder$decoderTrie(valDec),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _rluiten$trie$Trie_Json_Decoder$decoderTrie = function (valDec) {
+	return _elm_lang$core$Json_Decode$oneOf(
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$core$Json_Decode$map,
+				_rluiten$trie$TrieModel$ValNode,
+				_rluiten$trie$Trie_Json_Decoder$decoderValDict(valDec)),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Json_Decode$map,
+					_rluiten$trie$TrieModel$TrieNode,
+					_elm_lang$core$Json_Decode$lazy(
+						function (_p0) {
+							return _rluiten$trie$Trie_Json_Decoder$decoderTrieDict(valDec);
+						})),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$core$Json_Decode$map,
+						_rluiten$trie$TrieModel$ValTrieNode,
+						_elm_lang$core$Json_Decode$lazy(
+							function (_p1) {
+								return _rluiten$trie$Trie_Json_Decoder$decoderValTrieNode(valDec);
+							})),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Json_Decode$fail('Invalid Trie Structure found.'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _rluiten$trie$Trie_Json_Decoder$decoderTrieDict = function (valDec) {
+	return _elm_lang$core$Json_Decode$dict(
+		_rluiten$trie$Trie_Json_Decoder$decoder(valDec));
+};
+var _rluiten$trie$Trie_Json_Decoder$decoderValTrieNode = function (valDec) {
+	return A3(
+		_elm_lang$core$Json_Decode$map2,
+		F2(
+			function (v0, v1) {
+				return {ctor: '_Tuple2', _0: v0, _1: v1};
+			}),
+		A2(
+			_elm_lang$core$Json_Decode$index,
+			0,
+			_rluiten$trie$Trie_Json_Decoder$decoderValDict(valDec)),
+		A2(
+			_elm_lang$core$Json_Decode$index,
+			1,
+			_rluiten$trie$Trie_Json_Decoder$decoderTrieDict(valDec)));
+};

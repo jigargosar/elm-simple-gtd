@@ -1,0 +1,31 @@
+var _Fresheyeball$elm_return$Respond$comap = F2(
+	function (x, y) {
+		return function (_p0) {
+			return y(
+				x(_p0));
+		};
+	});
+var _Fresheyeball$elm_return$Respond$zero = _elm_lang$core$Basics$always(_elm_lang$core$Platform_Cmd$none);
+var _Fresheyeball$elm_return$Respond$sum = F2(
+	function (rs, a) {
+		return _elm_lang$core$Platform_Cmd$batch(
+			A2(
+				_elm_lang$core$List$map,
+				function (r) {
+					return r(a);
+				},
+				rs));
+	});
+var _Fresheyeball$elm_return$Respond$append = F3(
+	function (f, g, a) {
+		return _elm_lang$core$Platform_Cmd$batch(
+			{
+				ctor: '::',
+				_0: f(a),
+				_1: {
+					ctor: '::',
+					_0: g(a),
+					_1: {ctor: '[]'}
+				}
+			});
+	});

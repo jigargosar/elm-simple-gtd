@@ -1,0 +1,105 @@
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['!+>'] = F2(
+	function (firstResult, nextFunction) {
+		return A2(_elm_lang$core$Result$andThen, nextFunction, firstResult);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'] = F2(
+	function (firstResult, nextFunction) {
+		return A2(_elm_lang$core$Maybe$andThen, nextFunction, firstResult);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['!|>'] = F2(
+	function (resultValue, f) {
+		return A2(_elm_lang$core$Result$map, f, resultValue);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'] = F2(
+	function (maybeValue, f) {
+		return A2(_elm_lang$core$Maybe$map, f, maybeValue);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='] = F2(
+	function (resultValue, defaultValue) {
+		return A2(_elm_lang$core$Result$withDefault, defaultValue, resultValue);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='] = F2(
+	function (maybeValue, defaultValue) {
+		return A2(_elm_lang$core$Maybe$withDefault, defaultValue, maybeValue);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['@@|>'] = F2(
+	function (params, f) {
+		return A2(_elm_lang$core$Basics$uncurry, f, params);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['..|>'] = F2(
+	function (_p0, f) {
+		var _p1 = _p0;
+		return {
+			ctor: '_Tuple2',
+			_0: f(_p1._0),
+			_1: f(_p1._1)
+		};
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops[':|>'] = F2(
+	function (a, f) {
+		return f(
+			{
+				ctor: '::',
+				_0: a,
+				_1: {ctor: '[]'}
+			});
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'] = F2(
+	function (list, f) {
+		return A2(_elm_lang$core$List$map, f, list);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['||>'] = F2(
+	function (a, f) {
+		return f(a);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'] = F2(
+	function (f, b) {
+		return A2(_elm_lang$core$Basics$flip, f, b);
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops[':|::'] = F2(
+	function (a, b) {
+		return {
+			ctor: '::',
+			_0: a,
+			_1: {
+				ctor: '::',
+				_0: b,
+				_1: {ctor: '[]'}
+			}
+		};
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops[':|++'] = F2(
+	function (a, list) {
+		return {ctor: '::', _0: a, _1: list};
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['|::'] = F2(
+	function (list, a) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			list,
+			{
+				ctor: '::',
+				_0: a,
+				_1: {ctor: '[]'}
+			});
+	});
+var _danielnarey$elm_toolkit$Toolkit_Operators_ops = _danielnarey$elm_toolkit$Toolkit_Operators_ops || {};
+_danielnarey$elm_toolkit$Toolkit_Operators_ops['|++'] = F2(
+	function (a, b) {
+		return A2(_elm_lang$core$Basics_ops['++'], a, b);
+	});

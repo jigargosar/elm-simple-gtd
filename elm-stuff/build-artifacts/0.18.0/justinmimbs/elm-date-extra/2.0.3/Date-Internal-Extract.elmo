@@ -1,0 +1,62 @@
+var _justinmimbs$elm_date_extra$Date_Internal_Extract$msOffsetFromUtc = function (date) {
+	var utcTime = _elm_lang$core$Date$toTime(date);
+	var localTime = _elm_lang$core$Basics$toFloat(
+		A7(
+			_justinmimbs$elm_date_extra$Date_Internal_Core$unixTimeFromParts,
+			_elm_lang$core$Date$year(date),
+			_elm_lang$core$Date$month(date),
+			_elm_lang$core$Date$day(date),
+			_elm_lang$core$Date$hour(date),
+			_elm_lang$core$Date$minute(date),
+			_elm_lang$core$Date$second(date),
+			_elm_lang$core$Date$millisecond(date)));
+	return _elm_lang$core$Basics$floor(localTime - utcTime);
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Extract$offsetFromUtc = function (date) {
+	return (_justinmimbs$elm_date_extra$Date_Internal_Extract$msOffsetFromUtc(date) / _justinmimbs$elm_date_extra$Date_Extra_Facts$msPerMinute) | 0;
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Extract$weekYear = function (date) {
+	return A3(
+		_justinmimbs$elm_date_extra$Date_Internal_Core$weekYearFromCalendarDate,
+		_elm_lang$core$Date$year(date),
+		_elm_lang$core$Date$month(date),
+		_elm_lang$core$Date$day(date));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Extract$weekNumber = function (date) {
+	return A3(
+		_justinmimbs$elm_date_extra$Date_Internal_Core$weekNumberFromCalendarDate,
+		_elm_lang$core$Date$year(date),
+		_elm_lang$core$Date$month(date),
+		_elm_lang$core$Date$day(date));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Extract$weekdayNumber = function (_p0) {
+	return _justinmimbs$elm_date_extra$Date_Extra_Facts$weekdayNumberFromDayOfWeek(
+		_elm_lang$core$Date$dayOfWeek(_p0));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Extract$fractionalDay = function (date) {
+	var timeOfDayMS = A4(
+		_justinmimbs$elm_date_extra$Date_Internal_Core$msFromTimeParts,
+		_elm_lang$core$Date$hour(date),
+		_elm_lang$core$Date$minute(date),
+		_elm_lang$core$Date$second(date),
+		_elm_lang$core$Date$millisecond(date));
+	return _elm_lang$core$Basics$toFloat(timeOfDayMS) / _elm_lang$core$Basics$toFloat(_justinmimbs$elm_date_extra$Date_Extra_Facts$msPerDay);
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Extract$ordinalDay = function (date) {
+	return A2(
+		_justinmimbs$elm_date_extra$Date_Extra_Facts$daysBeforeStartOfMonth,
+		_elm_lang$core$Date$year(date),
+		_elm_lang$core$Date$month(date)) + _elm_lang$core$Date$day(date);
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Extract$monthNumber = function (_p1) {
+	return _justinmimbs$elm_date_extra$Date_Extra_Facts$monthNumberFromMonth(
+		_elm_lang$core$Date$month(_p1));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Extract$quarter = function (date) {
+	return _elm_lang$core$Basics$ceiling(
+		function (n) {
+			return n / 3;
+		}(
+			_elm_lang$core$Basics$toFloat(
+				_justinmimbs$elm_date_extra$Date_Internal_Extract$monthNumber(date))));
+};

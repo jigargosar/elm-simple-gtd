@@ -1,0 +1,55 @@
+var _rluiten$trie$Trie_Json_Encoder$encoderValDict = F2(
+	function (valEnc, refValues) {
+		return _elm_lang$core$Json_Encode$object(
+			A2(
+				_elm_lang$core$List$map,
+				function (_p0) {
+					var _p1 = _p0;
+					return {
+						ctor: '_Tuple2',
+						_0: _p1._0,
+						_1: valEnc(_p1._1)
+					};
+				},
+				_elm_lang$core$Dict$toList(refValues)));
+	});
+var _rluiten$trie$Trie_Json_Encoder$encoder = F2(
+	function (valEnc, trie) {
+		var _p2 = trie;
+		switch (_p2.ctor) {
+			case 'EmptyTrie':
+				return _elm_lang$core$Json_Encode$null;
+			case 'ValNode':
+				return A2(_rluiten$trie$Trie_Json_Encoder$encoderValDict, valEnc, _p2._0);
+			case 'TrieNode':
+				return A2(_rluiten$trie$Trie_Json_Encoder$encoderTrieDict, valEnc, _p2._0);
+			default:
+				var encodedDict = A2(_rluiten$trie$Trie_Json_Encoder$encoderTrieDict, valEnc, _p2._0._1);
+				var encodedValues = A2(_rluiten$trie$Trie_Json_Encoder$encoderValDict, valEnc, _p2._0._0);
+				return _elm_lang$core$Json_Encode$list(
+					{
+						ctor: '::',
+						_0: encodedValues,
+						_1: {
+							ctor: '::',
+							_0: encodedDict,
+							_1: {ctor: '[]'}
+						}
+					});
+		}
+	});
+var _rluiten$trie$Trie_Json_Encoder$encoderTrieDict = F2(
+	function (valEnc, trieDict) {
+		return _elm_lang$core$Json_Encode$object(
+			A2(
+				_elm_lang$core$List$map,
+				function (_p3) {
+					var _p4 = _p3;
+					return {
+						ctor: '_Tuple2',
+						_0: _p4._0,
+						_1: A2(_rluiten$trie$Trie_Json_Encoder$encoder, valEnc, _p4._1)
+					};
+				},
+				_elm_lang$core$Dict$toList(trieDict)));
+	});

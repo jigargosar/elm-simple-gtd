@@ -1,0 +1,111 @@
+var _rluiten$elm_text_search$Index_Load$loadIndexFull = function (_p0) {
+	var _p1 = _p0;
+	var _p3 = _p1._1;
+	var _p2 = _p1._0;
+	return _elm_lang$core$Result$Ok(
+		_rluiten$elm_text_search$Index_Model$Index(
+			{
+				indexVersion: _p3.indexVersion,
+				indexType: _p3.indexType,
+				ref: _p2.ref,
+				fields: _p2.fields,
+				listFields: _p2.listFields,
+				transformFactories: _p2.transformFactories,
+				filterFactories: _p2.filterFactories,
+				documentStore: _p3.documentStore,
+				corpusTokens: _p3.corpusTokens,
+				tokenStore: _p3.tokenStore,
+				corpusTokensIndex: _rluiten$elm_text_search$Index_Utils$buildOrderIndex(_p3.corpusTokens),
+				transforms: _elm_lang$core$Maybe$Nothing,
+				filters: _elm_lang$core$Maybe$Nothing,
+				idfCache: _elm_lang$core$Dict$empty
+			}));
+};
+var _rluiten$elm_text_search$Index_Load$errorPrefix = 'Error cannot load Index.';
+var _rluiten$elm_text_search$Index_Load$checkIndexVersion = function (decodedIndex) {
+	return _elm_lang$core$Native_Utils.eq(_rluiten$elm_text_search$Index_Defaults$indexVersion, decodedIndex.indexVersion) ? _elm_lang$core$Result$Ok(decodedIndex) : _elm_lang$core$Result$Err(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_rluiten$elm_text_search$Index_Load$errorPrefix,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				' Version supported is ',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_rluiten$elm_text_search$Index_Defaults$indexVersion,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'. Version tried to load is ',
+						A2(_elm_lang$core$Basics_ops['++'], decodedIndex.indexVersion, '.'))))));
+};
+var _rluiten$elm_text_search$Index_Load$checkIndexType = F2(
+	function (supportedIndexConfigs, decodedIndex) {
+		var config = A2(
+			_elm_lang$core$List$filter,
+			function (cfg) {
+				return _elm_lang$core$Native_Utils.eq(cfg.indexType, decodedIndex.indexType);
+			},
+			supportedIndexConfigs);
+		var _p4 = config;
+		if (_p4.ctor === '[]') {
+			return _elm_lang$core$Result$Err(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_rluiten$elm_text_search$Index_Load$errorPrefix,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						' Tried to load index of type \"',
+						A2(_elm_lang$core$Basics_ops['++'], decodedIndex.indexType, '\". It is not in supported index configurations.'))));
+		} else {
+			return _elm_lang$core$Result$Ok(
+				{ctor: '_Tuple2', _0: _p4._0, _1: decodedIndex});
+		}
+	});
+var _rluiten$elm_text_search$Index_Load$loadIndexWith = F2(
+	function (supportedIndexConfigs, inputString) {
+		return A2(
+			_elm_lang$core$Result$andThen,
+			_rluiten$elm_text_search$Index_Load$loadIndexFull,
+			A2(
+				_elm_lang$core$Result$andThen,
+				_rluiten$elm_text_search$Index_Load$checkIndexType(supportedIndexConfigs),
+				A2(
+					_elm_lang$core$Result$andThen,
+					_rluiten$elm_text_search$Index_Load$checkIndexVersion,
+					A2(_elm_lang$core$Json_Decode$decodeString, _rluiten$elm_text_search$ElmTextSearch_Json_Decoder$decoder, inputString))));
+	});
+var _rluiten$elm_text_search$Index_Load$loadIndex = F2(
+	function (simpleConfig, inputString) {
+		return A2(
+			_rluiten$elm_text_search$Index_Load$loadIndexWith,
+			{
+				ctor: '::',
+				_0: _rluiten$elm_text_search$Index_Defaults$getDefaultIndexConfig(simpleConfig),
+				_1: {ctor: '[]'}
+			},
+			inputString);
+	});
+var _rluiten$elm_text_search$Index_Load$loadIndexValueWith = F2(
+	function (supportedIndexConfigs, inputValue) {
+		return A2(
+			_elm_lang$core$Result$andThen,
+			_rluiten$elm_text_search$Index_Load$loadIndexFull,
+			A2(
+				_elm_lang$core$Result$andThen,
+				_rluiten$elm_text_search$Index_Load$checkIndexType(supportedIndexConfigs),
+				A2(
+					_elm_lang$core$Result$andThen,
+					_rluiten$elm_text_search$Index_Load$checkIndexVersion,
+					A2(_elm_lang$core$Json_Decode$decodeValue, _rluiten$elm_text_search$ElmTextSearch_Json_Decoder$decoder, inputValue))));
+	});
+var _rluiten$elm_text_search$Index_Load$loadIndexValue = F2(
+	function (simpleConfig, inputValue) {
+		return A2(
+			_rluiten$elm_text_search$Index_Load$loadIndexValueWith,
+			{
+				ctor: '::',
+				_0: _rluiten$elm_text_search$Index_Defaults$getDefaultIndexConfig(simpleConfig),
+				_1: {ctor: '[]'}
+			},
+			inputValue);
+	});

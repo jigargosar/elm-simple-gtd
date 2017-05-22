@@ -1,0 +1,119 @@
+var _elm_community$result_extra$Result_Extra$merge = function (r) {
+	var _p0 = r;
+	if (_p0.ctor === 'Ok') {
+		return _p0._0;
+	} else {
+		return _p0._0;
+	}
+};
+var _elm_community$result_extra$Result_Extra$orElse = F2(
+	function (ra, rb) {
+		var _p1 = rb;
+		if (_p1.ctor === 'Err') {
+			return ra;
+		} else {
+			return rb;
+		}
+	});
+var _elm_community$result_extra$Result_Extra$orElseLazy = F2(
+	function (fra, rb) {
+		var _p2 = rb;
+		if (_p2.ctor === 'Err') {
+			return fra(
+				{ctor: '_Tuple0'});
+		} else {
+			return rb;
+		}
+	});
+var _elm_community$result_extra$Result_Extra$orLazy = F2(
+	function (ra, frb) {
+		var _p3 = ra;
+		if (_p3.ctor === 'Err') {
+			return frb(
+				{ctor: '_Tuple0'});
+		} else {
+			return ra;
+		}
+	});
+var _elm_community$result_extra$Result_Extra$or = F2(
+	function (ra, rb) {
+		var _p4 = ra;
+		if (_p4.ctor === 'Err') {
+			return rb;
+		} else {
+			return ra;
+		}
+	});
+var _elm_community$result_extra$Result_Extra$andMap = F2(
+	function (ra, rb) {
+		var _p5 = {ctor: '_Tuple2', _0: ra, _1: rb};
+		if (_p5._1.ctor === 'Err') {
+			return _elm_lang$core$Result$Err(_p5._1._0);
+		} else {
+			return A2(_elm_lang$core$Result$map, _p5._1._0, _p5._0);
+		}
+	});
+var _elm_community$result_extra$Result_Extra$singleton = _elm_lang$core$Result$Ok;
+var _elm_community$result_extra$Result_Extra$combine = A2(
+	_elm_lang$core$List$foldr,
+	_elm_lang$core$Result$map2(
+		F2(
+			function (x, y) {
+				return {ctor: '::', _0: x, _1: y};
+			})),
+	_elm_lang$core$Result$Ok(
+		{ctor: '[]'}));
+var _elm_community$result_extra$Result_Extra$mapBoth = F3(
+	function (errFunc, okFunc, result) {
+		var _p6 = result;
+		if (_p6.ctor === 'Ok') {
+			return _elm_lang$core$Result$Ok(
+				okFunc(_p6._0));
+		} else {
+			return _elm_lang$core$Result$Err(
+				errFunc(_p6._0));
+		}
+	});
+var _elm_community$result_extra$Result_Extra$unpack = F3(
+	function (errFunc, okFunc, result) {
+		var _p7 = result;
+		if (_p7.ctor === 'Ok') {
+			return okFunc(_p7._0);
+		} else {
+			return errFunc(_p7._0);
+		}
+	});
+var _elm_community$result_extra$Result_Extra$unwrap = F3(
+	function (defaultValue, okFunc, result) {
+		var _p8 = result;
+		if (_p8.ctor === 'Ok') {
+			return okFunc(_p8._0);
+		} else {
+			return defaultValue;
+		}
+	});
+var _elm_community$result_extra$Result_Extra$extract = F2(
+	function (f, x) {
+		var _p9 = x;
+		if (_p9.ctor === 'Ok') {
+			return _p9._0;
+		} else {
+			return f(_p9._0);
+		}
+	});
+var _elm_community$result_extra$Result_Extra$isErr = function (x) {
+	var _p10 = x;
+	if (_p10.ctor === 'Ok') {
+		return false;
+	} else {
+		return true;
+	}
+};
+var _elm_community$result_extra$Result_Extra$isOk = function (x) {
+	var _p11 = x;
+	if (_p11.ctor === 'Ok') {
+		return true;
+	} else {
+		return false;
+	}
+};

@@ -1,0 +1,4 @@
+var _rluiten$elm_date_extra$Date_Extra_Config_Config_lt_lt$config = {
+	i18n: {dayShort: _rluiten$elm_date_extra$Date_Extra_I18n_I_lt_lt$dayShort, dayName: _rluiten$elm_date_extra$Date_Extra_I18n_I_lt_lt$dayName, monthShort: _rluiten$elm_date_extra$Date_Extra_I18n_I_lt_lt$monthShort, monthName: _rluiten$elm_date_extra$Date_Extra_I18n_I_lt_lt$monthName, dayOfMonthWithSuffix: _rluiten$elm_date_extra$Date_Extra_I18n_I_lt_lt$dayOfMonthWithSuffix},
+	format: {date: '%Y-%m-%d', longDate: '%A, %Y, %B %-d', time: '%H:%M', longTime: '%H:%M:%S', dateTime: '%a, %-d. %b %Y. %-H:%M', firstDayOfWeek: _elm_lang$core$Date$Mon}
+};

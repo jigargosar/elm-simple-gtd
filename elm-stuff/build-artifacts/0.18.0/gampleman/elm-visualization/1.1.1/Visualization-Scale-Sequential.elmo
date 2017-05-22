@@ -1,0 +1,6 @@
+var _gampleman$elm_visualization$Visualization_Scale_Sequential$convert = F3(
+	function (_p0, interpolator, x) {
+		var _p1 = _p0;
+		var _p2 = _p1._0;
+		return interpolator((x - _p2) / (_p1._1 - _p2));
+	});

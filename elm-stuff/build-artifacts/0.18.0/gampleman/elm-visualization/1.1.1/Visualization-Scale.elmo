@@ -1,0 +1,115 @@
+var _gampleman$elm_visualization$Visualization_Scale$tickFormat = function (_p0) {
+	var _p1 = _p0;
+	var _p2 = _p1._0;
+	return _p2.tickFormat(_p2.domain);
+};
+var _gampleman$elm_visualization$Visualization_Scale$ticks = F2(
+	function (_p3, count) {
+		var _p4 = _p3;
+		var _p5 = _p4._0;
+		return A2(_p5.ticks, _p5.domain, count);
+	});
+var _gampleman$elm_visualization$Visualization_Scale$rangeExtent = function (_p6) {
+	var _p7 = _p6;
+	var _p8 = _p7._0;
+	return A2(_p8.rangeExtent, _p8.domain, _p8.range);
+};
+var _gampleman$elm_visualization$Visualization_Scale$range = function (_p9) {
+	var _p10 = _p9;
+	return _p10._0.range;
+};
+var _gampleman$elm_visualization$Visualization_Scale$domain = function (_p11) {
+	var _p12 = _p11;
+	return _p12._0.domain;
+};
+var _gampleman$elm_visualization$Visualization_Scale$invertExtent = F2(
+	function (_p13, value) {
+		var _p14 = _p13;
+		var _p15 = _p14._0;
+		return A3(_p15.invertExtent, _p15.domain, _p15.range, value);
+	});
+var _gampleman$elm_visualization$Visualization_Scale$invert = F2(
+	function (_p16, value) {
+		var _p17 = _p16;
+		var _p18 = _p17._0;
+		return A3(_p18.invert, _p18.domain, _p18.range, value);
+	});
+var _gampleman$elm_visualization$Visualization_Scale$convert = F2(
+	function (_p19, value) {
+		var _p20 = _p19;
+		var _p21 = _p20._0;
+		return A3(_p21.convert, _p21.domain, _p21.range, value);
+	});
+var _gampleman$elm_visualization$Visualization_Scale$Scale = function (a) {
+	return {ctor: 'Scale', _0: a};
+};
+var _gampleman$elm_visualization$Visualization_Scale$linear = F2(
+	function (domain, range) {
+		return _gampleman$elm_visualization$Visualization_Scale$Scale(
+			{domain: domain, range: range, convert: _gampleman$elm_visualization$Visualization_Scale_Linear$convert, invert: _gampleman$elm_visualization$Visualization_Scale_Linear$invert, ticks: _gampleman$elm_visualization$Visualization_Scale_Linear$ticks, tickFormat: _gampleman$elm_visualization$Visualization_Scale_Linear$tickFormat, nice: _gampleman$elm_visualization$Visualization_Scale_Linear$nice, rangeExtent: _gampleman$elm_visualization$Visualization_Scale_Linear$rangeExtent});
+	});
+var _gampleman$elm_visualization$Visualization_Scale$identity = A2(
+	_gampleman$elm_visualization$Visualization_Scale$linear,
+	{ctor: '_Tuple2', _0: 0, _1: 1},
+	{ctor: '_Tuple2', _0: 0, _1: 1});
+var _gampleman$elm_visualization$Visualization_Scale$log = F3(
+	function (base, domain, range) {
+		return _gampleman$elm_visualization$Visualization_Scale$Scale(
+			{
+				domain: domain,
+				range: range,
+				convert: _gampleman$elm_visualization$Visualization_Scale_Log$convert,
+				invert: _gampleman$elm_visualization$Visualization_Scale_Log$invert,
+				ticks: _gampleman$elm_visualization$Visualization_Scale_Log$ticks(base),
+				tickFormat: _gampleman$elm_visualization$Visualization_Scale_Log$tickFormat,
+				nice: _gampleman$elm_visualization$Visualization_Scale_Log$nice(base),
+				rangeExtent: _gampleman$elm_visualization$Visualization_Scale_Log$rangeExtent
+			});
+	});
+var _gampleman$elm_visualization$Visualization_Scale$time = F2(
+	function (domain, range) {
+		return _gampleman$elm_visualization$Visualization_Scale$Scale(
+			{domain: domain, range: range, convert: _gampleman$elm_visualization$Visualization_Scale_Time$convert, invert: _gampleman$elm_visualization$Visualization_Scale_Time$invert, ticks: _gampleman$elm_visualization$Visualization_Scale_Time$ticks, tickFormat: _gampleman$elm_visualization$Visualization_Scale_Time$tickFormat, nice: _gampleman$elm_visualization$Visualization_Scale_Time$nice, rangeExtent: _gampleman$elm_visualization$Visualization_Scale_Time$rangeExtent});
+	});
+var _gampleman$elm_visualization$Visualization_Scale$sequential = F2(
+	function (domain, interpolator) {
+		return _gampleman$elm_visualization$Visualization_Scale$Scale(
+			{domain: domain, range: interpolator, convert: _gampleman$elm_visualization$Visualization_Scale_Sequential$convert});
+	});
+var _gampleman$elm_visualization$Visualization_Scale$quantize = F2(
+	function (domain, range) {
+		return _gampleman$elm_visualization$Visualization_Scale$Scale(
+			{domain: domain, range: range, convert: _gampleman$elm_visualization$Visualization_Scale_Quantize$convert, invertExtent: _gampleman$elm_visualization$Visualization_Scale_Quantize$invertExtent, ticks: _gampleman$elm_visualization$Visualization_Scale_Quantize$ticks, tickFormat: _gampleman$elm_visualization$Visualization_Scale_Quantize$tickFormat, nice: _gampleman$elm_visualization$Visualization_Scale_Quantize$nice, rangeExtent: _gampleman$elm_visualization$Visualization_Scale_Quantize$rangeExtent});
+	});
+var _gampleman$elm_visualization$Visualization_Scale$clamp = function (_p22) {
+	var _p23 = _p22;
+	var convert_ = F3(
+		function (_p24, range, value) {
+			var _p25 = _p24;
+			var _p27 = _p25._0;
+			var _p26 = _p25._1;
+			return A3(
+				_p23._0.convert,
+				{ctor: '_Tuple2', _0: _p27, _1: _p26},
+				range,
+				A3(
+					_elm_lang$core$Basics$clamp,
+					A2(_elm_lang$core$Basics$min, _p27, _p26),
+					A2(_elm_lang$core$Basics$max, _p27, _p26),
+					value));
+		});
+	return _gampleman$elm_visualization$Visualization_Scale$Scale(
+		_elm_lang$core$Native_Utils.update(
+			_p23._0,
+			{convert: convert_}));
+};
+var _gampleman$elm_visualization$Visualization_Scale$nice = F2(
+	function (_p28, count) {
+		var _p29 = _p28;
+		return _gampleman$elm_visualization$Visualization_Scale$Scale(
+			_elm_lang$core$Native_Utils.update(
+				_p29._0,
+				{
+					domain: A2(_p29._0.nice, _p29._0.domain, count)
+				}));
+	});

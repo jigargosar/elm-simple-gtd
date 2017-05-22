@@ -1,0 +1,76 @@
+var _rluiten$elm_text_search$ElmTextSearch_Json_Encoder$tokenStore = _rluiten$trie$Trie_Json_Encoder$encoder(_elm_lang$core$Json_Encode$float);
+var _rluiten$elm_text_search$ElmTextSearch_Json_Encoder$corpusTokensEncoder = function (setVal) {
+	return _elm_lang$core$Json_Encode$list(
+		A2(
+			_elm_lang$core$List$map,
+			_elm_lang$core$Json_Encode$string,
+			_elm_lang$core$Set$toList(setVal)));
+};
+var _rluiten$elm_text_search$ElmTextSearch_Json_Encoder$documentStoreEncoder = function (dict) {
+	return _elm_lang$core$Json_Encode$object(
+		A2(
+			_elm_lang$core$List$map,
+			function (_p0) {
+				var _p1 = _p0;
+				return {
+					ctor: '_Tuple2',
+					_0: _p1._0,
+					_1: _elm_lang$core$Json_Encode$list(
+						A2(
+							_elm_lang$core$List$map,
+							_elm_lang$core$Json_Encode$string,
+							_elm_lang$core$Set$toList(_p1._1)))
+				};
+			},
+			_elm_lang$core$Dict$toList(dict)));
+};
+var _rluiten$elm_text_search$ElmTextSearch_Json_Encoder$codecIndexRecordEncoder = function (rec) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: 'indexVersion',
+				_1: _elm_lang$core$Json_Encode$string(rec.indexVersion)
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: 'indexType',
+					_1: _elm_lang$core$Json_Encode$string(rec.indexType)
+				},
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'documentStore',
+						_1: _rluiten$elm_text_search$ElmTextSearch_Json_Encoder$documentStoreEncoder(rec.documentStore)
+					},
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 'corpusTokens',
+							_1: _rluiten$elm_text_search$ElmTextSearch_Json_Encoder$corpusTokensEncoder(rec.corpusTokens)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 'tokenStore',
+								_1: _rluiten$elm_text_search$ElmTextSearch_Json_Encoder$tokenStore(rec.tokenStore)
+							},
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};
+var _rluiten$elm_text_search$ElmTextSearch_Json_Encoder$encoder = function (_p2) {
+	var _p3 = _p2;
+	var _p4 = _p3._0;
+	return _rluiten$elm_text_search$ElmTextSearch_Json_Encoder$codecIndexRecordEncoder(
+		{indexVersion: _p4.indexVersion, indexType: _p4.indexType, documentStore: _p4.documentStore, corpusTokens: _p4.corpusTokens, tokenStore: _p4.tokenStore});
+};

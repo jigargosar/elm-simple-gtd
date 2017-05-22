@@ -1,0 +1,55 @@
+var _NoRedInk$elm_simple_fuzzy$Simple_Fuzzy$isJust = function (maybeThing) {
+	var _p0 = maybeThing;
+	if (_p0.ctor === 'Just') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var _NoRedInk$elm_simple_fuzzy$Simple_Fuzzy$searchHelper = F2(
+	function (letter, restOfWord) {
+		var _p1 = restOfWord;
+		if (_p1.ctor === 'Just') {
+			var _p3 = _p1._0;
+			var _p2 = A2(
+				_elm_lang$core$String$indexes,
+				_elm_lang$core$String$fromChar(letter),
+				_p3);
+			if (_p2.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				return _elm_lang$core$Maybe$Just(
+					A2(_elm_lang$core$String$dropLeft, _p2._0 + 1, _p3));
+			}
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _NoRedInk$elm_simple_fuzzy$Simple_Fuzzy$root = function (string) {
+	return A2(
+		_elm_lang$core$String$filter,
+		_elm_lang$core$Char$isLower,
+		_elm_lang$core$String$toLower(string));
+};
+var _NoRedInk$elm_simple_fuzzy$Simple_Fuzzy$match = F2(
+	function (needle, haystack) {
+		return _NoRedInk$elm_simple_fuzzy$Simple_Fuzzy$isJust(
+			A3(
+				_elm_lang$core$String$foldl,
+				_NoRedInk$elm_simple_fuzzy$Simple_Fuzzy$searchHelper,
+				_elm_lang$core$Maybe$Just(
+					_NoRedInk$elm_simple_fuzzy$Simple_Fuzzy$root(haystack)),
+				_NoRedInk$elm_simple_fuzzy$Simple_Fuzzy$root(needle)));
+	});
+var _NoRedInk$elm_simple_fuzzy$Simple_Fuzzy$filter = F3(
+	function (map, needle, records) {
+		return A2(
+			_elm_lang$core$List$filter,
+			function (_p4) {
+				return A2(
+					_NoRedInk$elm_simple_fuzzy$Simple_Fuzzy$match,
+					needle,
+					map(_p4));
+			},
+			records);
+	});

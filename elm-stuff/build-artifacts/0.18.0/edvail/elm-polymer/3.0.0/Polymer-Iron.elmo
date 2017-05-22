@@ -1,0 +1,5 @@
+var _edvail$elm_polymer$Polymer_Iron$iron = function (name) {
+	return _elm_lang$html$Html$node(
+		A2(_elm_lang$core$Basics_ops['++'], 'iron-', name));
+};
+var _edvail$elm_polymer$Polymer_Iron$selector = _edvail$elm_polymer$Polymer_Iron$iron('selector');

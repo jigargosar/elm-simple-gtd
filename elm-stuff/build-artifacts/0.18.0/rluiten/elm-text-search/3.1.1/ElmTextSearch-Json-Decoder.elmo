@@ -1,0 +1,26 @@
+var _rluiten$elm_text_search$ElmTextSearch_Json_Decoder$setDecoder = A2(
+	_elm_lang$core$Json_Decode$map,
+	_elm_lang$core$Set$fromList,
+	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string));
+var _rluiten$elm_text_search$ElmTextSearch_Json_Decoder$documentStoreDecoder = _elm_lang$core$Json_Decode$dict(_rluiten$elm_text_search$ElmTextSearch_Json_Decoder$setDecoder);
+var _rluiten$elm_text_search$ElmTextSearch_Json_Decoder$decoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'tokenStore',
+	_rluiten$trie$Trie_Json_Decoder$decoder(_elm_lang$core$Json_Decode$float),
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'corpusTokens',
+		_rluiten$elm_text_search$ElmTextSearch_Json_Decoder$setDecoder,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'documentStore',
+			_rluiten$elm_text_search$ElmTextSearch_Json_Decoder$documentStoreDecoder,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'indexType',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'indexVersion',
+					_elm_lang$core$Json_Decode$string,
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_rluiten$elm_text_search$Index_Model$CodecIndexRecord))))));

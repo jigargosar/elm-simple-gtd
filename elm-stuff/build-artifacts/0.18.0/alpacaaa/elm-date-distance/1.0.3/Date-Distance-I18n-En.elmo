@@ -1,0 +1,105 @@
+var _alpacaaa$elm_date_distance$Date_Distance_I18n_En$formatInterval = function (_p0) {
+	return _elm_lang$core$String$toLower(
+		_elm_lang$core$Basics$toString(_p0));
+};
+var _alpacaaa$elm_date_distance$Date_Distance_I18n_En$singular = function (interval) {
+	var _p1 = interval;
+	if (_p1.ctor === 'Minute') {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			'a ',
+			_alpacaaa$elm_date_distance$Date_Distance_I18n_En$formatInterval(interval));
+	} else {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			'1 ',
+			_alpacaaa$elm_date_distance$Date_Distance_I18n_En$formatInterval(interval));
+	}
+};
+var _alpacaaa$elm_date_distance$Date_Distance_I18n_En$circa = F3(
+	function (prefix, interval, i) {
+		var _p2 = i;
+		if (_p2 === 1) {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				prefix,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					' ',
+					_alpacaaa$elm_date_distance$Date_Distance_I18n_En$singular(interval)));
+		} else {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				prefix,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					' ',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(i),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							' ',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_alpacaaa$elm_date_distance$Date_Distance_I18n_En$formatInterval(interval),
+								's')))));
+		}
+	});
+var _alpacaaa$elm_date_distance$Date_Distance_I18n_En$exact = F2(
+	function (interval, i) {
+		var _p3 = i;
+		if (_p3 === 1) {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'1 ',
+				_alpacaaa$elm_date_distance$Date_Distance_I18n_En$formatInterval(interval));
+		} else {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(i),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					' ',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_alpacaaa$elm_date_distance$Date_Distance_I18n_En$formatInterval(interval),
+						's')));
+		}
+	});
+var _alpacaaa$elm_date_distance$Date_Distance_I18n_En$locale_ = function (distance) {
+	var _p4 = distance;
+	switch (_p4.ctor) {
+		case 'LessThanXSeconds':
+			return A3(_alpacaaa$elm_date_distance$Date_Distance_I18n_En$circa, 'less than', _justinmimbs$elm_date_extra$Date_Extra$Second, _p4._0);
+		case 'HalfAMinute':
+			return 'half a minute';
+		case 'LessThanXMinutes':
+			return A3(_alpacaaa$elm_date_distance$Date_Distance_I18n_En$circa, 'less than', _justinmimbs$elm_date_extra$Date_Extra$Minute, _p4._0);
+		case 'XMinutes':
+			return A2(_alpacaaa$elm_date_distance$Date_Distance_I18n_En$exact, _justinmimbs$elm_date_extra$Date_Extra$Minute, _p4._0);
+		case 'AboutXHours':
+			return A3(_alpacaaa$elm_date_distance$Date_Distance_I18n_En$circa, 'about', _justinmimbs$elm_date_extra$Date_Extra$Hour, _p4._0);
+		case 'XDays':
+			return A2(_alpacaaa$elm_date_distance$Date_Distance_I18n_En$exact, _justinmimbs$elm_date_extra$Date_Extra$Day, _p4._0);
+		case 'AboutXMonths':
+			return A3(_alpacaaa$elm_date_distance$Date_Distance_I18n_En$circa, 'about', _justinmimbs$elm_date_extra$Date_Extra$Month, _p4._0);
+		case 'XMonths':
+			return A2(_alpacaaa$elm_date_distance$Date_Distance_I18n_En$exact, _justinmimbs$elm_date_extra$Date_Extra$Month, _p4._0);
+		case 'AboutXYears':
+			return A3(_alpacaaa$elm_date_distance$Date_Distance_I18n_En$circa, 'about', _justinmimbs$elm_date_extra$Date_Extra$Year, _p4._0);
+		case 'OverXYears':
+			return A3(_alpacaaa$elm_date_distance$Date_Distance_I18n_En$circa, 'over', _justinmimbs$elm_date_extra$Date_Extra$Year, _p4._0);
+		default:
+			return A3(_alpacaaa$elm_date_distance$Date_Distance_I18n_En$circa, 'almost', _justinmimbs$elm_date_extra$Date_Extra$Year, _p4._0);
+	}
+};
+var _alpacaaa$elm_date_distance$Date_Distance_I18n_En$locale = F3(
+	function (_p5, order, distance) {
+		var _p6 = _p5;
+		var result = _alpacaaa$elm_date_distance$Date_Distance_I18n_En$locale_(distance);
+		return _p6.addSuffix ? (_elm_lang$core$Native_Utils.eq(order, _elm_lang$core$Basics$LT) ? A2(_elm_lang$core$Basics_ops['++'], 'in ', result) : A2(_elm_lang$core$Basics_ops['++'], result, ' ago')) : result;
+	});
+var _alpacaaa$elm_date_distance$Date_Distance_I18n_En$LocaleConfig = function (a) {
+	return {addSuffix: a};
+};

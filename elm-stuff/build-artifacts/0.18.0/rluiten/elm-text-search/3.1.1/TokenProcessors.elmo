@@ -1,0 +1,67 @@
+var _rluiten$elm_text_search$TokenProcessors$trimmer = A3(
+	_elm_lang$core$Regex$replace,
+	_elm_lang$core$Regex$All,
+	_elm_lang$core$Regex$regex('^\\W+|\\W+$'),
+	function (_p0) {
+		return '';
+	});
+var _rluiten$elm_text_search$TokenProcessors$tokenizerWithRegexList = F2(
+	function (seperatorRegex, listData) {
+		var splitter = function (_p1) {
+			return A3(
+				_elm_lang$core$Regex$split,
+				_elm_lang$core$Regex$All,
+				seperatorRegex,
+				_elm_lang$core$String$toLower(
+					_elm_lang$core$String$trim(_p1)));
+		};
+		var tokens = A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (str, agg) {
+					return A2(
+						_elm_lang$core$List$append,
+						agg,
+						splitter(str));
+				}),
+			{ctor: '[]'},
+			listData);
+		return A2(
+			_elm_lang$core$List$filter,
+			function (token) {
+				return _elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$String$length(token),
+					0) > 0;
+			},
+			tokens);
+	});
+var _rluiten$elm_text_search$TokenProcessors$tokenizerWithList = function (seperatorPattern) {
+	return _rluiten$elm_text_search$TokenProcessors$tokenizerWithRegexList(
+		_elm_lang$core$Regex$regex(seperatorPattern));
+};
+var _rluiten$elm_text_search$TokenProcessors$tokenizerWithRegex = F2(
+	function (seperatorRegex, data) {
+		var splitter = function (_p2) {
+			return A3(
+				_elm_lang$core$Regex$split,
+				_elm_lang$core$Regex$All,
+				seperatorRegex,
+				_elm_lang$core$String$toLower(
+					_elm_lang$core$String$trim(_p2)));
+		};
+		return A2(
+			_elm_lang$core$List$filter,
+			function (token) {
+				return _elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$String$length(token),
+					0) > 0;
+			},
+			splitter(data));
+	});
+var _rluiten$elm_text_search$TokenProcessors$tokenizerWith = function (seperatorPattern) {
+	return _rluiten$elm_text_search$TokenProcessors$tokenizerWithRegex(
+		_elm_lang$core$Regex$regex(seperatorPattern));
+};
+var _rluiten$elm_text_search$TokenProcessors$defaultSeparator = _elm_lang$core$Regex$regex('[\\s\\-]+');
+var _rluiten$elm_text_search$TokenProcessors$tokenizer = _rluiten$elm_text_search$TokenProcessors$tokenizerWithRegex(_rluiten$elm_text_search$TokenProcessors$defaultSeparator);
+var _rluiten$elm_text_search$TokenProcessors$tokenizerList = _rluiten$elm_text_search$TokenProcessors$tokenizerWithRegexList(_rluiten$elm_text_search$TokenProcessors$defaultSeparator);

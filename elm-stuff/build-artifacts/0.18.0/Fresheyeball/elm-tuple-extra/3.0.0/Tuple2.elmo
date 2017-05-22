@@ -1,0 +1,85 @@
+var _Fresheyeball$elm_tuple_extra$Tuple2$toList = function (_p0) {
+	var _p1 = _p0;
+	return {
+		ctor: '::',
+		_0: _p1._0,
+		_1: {
+			ctor: '::',
+			_0: _p1._1,
+			_1: {ctor: '[]'}
+		}
+	};
+};
+var _Fresheyeball$elm_tuple_extra$Tuple2$sortWith = F2(
+	function (cmp, _p2) {
+		var _p3 = _p2;
+		var _p6 = _p3._1;
+		var _p5 = _p3._0;
+		var _p4 = A2(cmp, _p5, _p6);
+		if (_p4.ctor === 'GT') {
+			return {ctor: '_Tuple2', _0: _p6, _1: _p5};
+		} else {
+			return {ctor: '_Tuple2', _0: _p5, _1: _p6};
+		}
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple2$sortBy = F2(
+	function (f, _p7) {
+		var _p8 = _p7;
+		var _p10 = _p8._1;
+		var _p9 = _p8._0;
+		return (_elm_lang$core$Native_Utils.cmp(
+			f(_p9),
+			f(_p10)) > 0) ? {ctor: '_Tuple2', _0: _p10, _1: _p9} : {ctor: '_Tuple2', _0: _p9, _1: _p10};
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple2$sort = function (_p11) {
+	var _p12 = _p11;
+	var _p14 = _p12._1;
+	var _p13 = _p12._0;
+	return (_elm_lang$core$Native_Utils.cmp(_p13, _p14) > 0) ? {ctor: '_Tuple2', _0: _p14, _1: _p13} : {ctor: '_Tuple2', _0: _p13, _1: _p14};
+};
+var _Fresheyeball$elm_tuple_extra$Tuple2$swap = function (_p15) {
+	var _p16 = _p15;
+	return {ctor: '_Tuple2', _0: _p16._1, _1: _p16._0};
+};
+var _Fresheyeball$elm_tuple_extra$Tuple2$mapBoth = F2(
+	function (f, _p17) {
+		var _p18 = _p17;
+		return {
+			ctor: '_Tuple2',
+			_0: f(_p18._0),
+			_1: f(_p18._1)
+		};
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple2$mapEach = F3(
+	function (f, f_, _p19) {
+		var _p20 = _p19;
+		return {
+			ctor: '_Tuple2',
+			_0: f(_p20._0),
+			_1: f_(_p20._1)
+		};
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple2$mapSecond = F2(
+	function (f, _p21) {
+		var _p22 = _p21;
+		return {
+			ctor: '_Tuple2',
+			_0: _p22._0,
+			_1: f(_p22._1)
+		};
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple2$map = _Fresheyeball$elm_tuple_extra$Tuple2$mapSecond;
+var _Fresheyeball$elm_tuple_extra$Tuple2$mapFirst = F2(
+	function (f, _p23) {
+		var _p24 = _p23;
+		return {
+			ctor: '_Tuple2',
+			_0: f(_p24._0),
+			_1: _p24._1
+		};
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple2_ops = _Fresheyeball$elm_tuple_extra$Tuple2_ops || {};
+_Fresheyeball$elm_tuple_extra$Tuple2_ops['=>'] = F2(
+	function (a, b) {
+		return {ctor: '_Tuple2', _0: a, _1: b};
+	});

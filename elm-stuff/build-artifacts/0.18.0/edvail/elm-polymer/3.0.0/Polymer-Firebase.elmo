@@ -1,0 +1,5 @@
+var _edvail$elm_polymer$Polymer_Firebase$firebase = function (name) {
+	return _elm_lang$html$Html$node(
+		A2(_elm_lang$core$Basics_ops['++'], 'firebase-', name));
+};
+var _edvail$elm_polymer$Polymer_Firebase$app = _edvail$elm_polymer$Polymer_Firebase$firebase('app');

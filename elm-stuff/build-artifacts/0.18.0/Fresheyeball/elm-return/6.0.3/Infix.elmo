@@ -1,0 +1,6 @@
+var _Fresheyeball$elm_return$Infix_ops = _Fresheyeball$elm_return$Infix_ops || {};
+_Fresheyeball$elm_return$Infix_ops['>>='] = _elm_lang$core$Basics$flip(_Fresheyeball$elm_return$Return$andThen);
+var _Fresheyeball$elm_return$Infix_ops = _Fresheyeball$elm_return$Infix_ops || {};
+_Fresheyeball$elm_return$Infix_ops['<*>'] = _elm_lang$core$Basics$flip(_Fresheyeball$elm_return$Return$andMap);
+var _Fresheyeball$elm_return$Infix_ops = _Fresheyeball$elm_return$Infix_ops || {};
+_Fresheyeball$elm_return$Infix_ops['<$>'] = _Fresheyeball$elm_return$Return$map;

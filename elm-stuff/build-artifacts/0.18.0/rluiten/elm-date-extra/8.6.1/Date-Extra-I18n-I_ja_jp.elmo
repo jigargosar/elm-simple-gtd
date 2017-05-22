@@ -1,0 +1,101 @@
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_ja_jp$dayOfMonthWithSuffix = F2(
+	function (pad, day) {
+		var _p0 = day;
+		return _elm_lang$core$Basics$toString(day);
+	});
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_ja_jp$monthName = function (month) {
+	var _p1 = month;
+	switch (_p1.ctor) {
+		case 'Jan':
+			return '1月';
+		case 'Feb':
+			return '2月';
+		case 'Mar':
+			return '3月';
+		case 'Apr':
+			return '4月';
+		case 'May':
+			return '5月';
+		case 'Jun':
+			return '6月';
+		case 'Jul':
+			return '7月';
+		case 'Aug':
+			return '8月';
+		case 'Sep':
+			return '9月';
+		case 'Oct':
+			return '10月';
+		case 'Nov':
+			return '11月';
+		default:
+			return '12月';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_ja_jp$monthShort = function (month) {
+	var _p2 = month;
+	switch (_p2.ctor) {
+		case 'Jan':
+			return '1';
+		case 'Feb':
+			return '2';
+		case 'Mar':
+			return '3';
+		case 'Apr':
+			return '4';
+		case 'May':
+			return '5';
+		case 'Jun':
+			return '6';
+		case 'Jul':
+			return '7';
+		case 'Aug':
+			return '8';
+		case 'Sep':
+			return '9';
+		case 'Oct':
+			return '10';
+		case 'Nov':
+			return '11';
+		default:
+			return '12';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_ja_jp$dayName = function (day) {
+	var _p3 = day;
+	switch (_p3.ctor) {
+		case 'Mon':
+			return '月曜日';
+		case 'Tue':
+			return '火曜日';
+		case 'Wed':
+			return '水曜日';
+		case 'Thu':
+			return '木曜日';
+		case 'Fri':
+			return '金曜日';
+		case 'Sat':
+			return '土曜日';
+		default:
+			return '日曜日';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_ja_jp$dayShort = function (day) {
+	var _p4 = day;
+	switch (_p4.ctor) {
+		case 'Mon':
+			return '月';
+		case 'Tue':
+			return '火';
+		case 'Wed':
+			return '水';
+		case 'Thu':
+			return '木';
+		case 'Fri':
+			return '金';
+		case 'Sat':
+			return '土';
+		default:
+			return '日';
+	}
+};

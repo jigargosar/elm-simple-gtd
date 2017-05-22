@@ -1,0 +1,33 @@
+var _edvail$elm_polymer$Polymer_Events$detailValue = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'detail',
+		_1: {
+			ctor: '::',
+			_0: 'value',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
+var _edvail$elm_polymer$Polymer_Events$onChanged = F2(
+	function (property, tagger) {
+		return A2(
+			_elm_lang$html$Html_Events$on,
+			A2(_elm_lang$core$Basics_ops['++'], property, '-changed'),
+			A2(_elm_lang$core$Json_Decode$map, tagger, _edvail$elm_polymer$Polymer_Events$detailValue));
+	});
+var _edvail$elm_polymer$Polymer_Events$onValueChanged = _edvail$elm_polymer$Polymer_Events$onChanged('value');
+var _edvail$elm_polymer$Polymer_Events$onSelectedChanged = _edvail$elm_polymer$Polymer_Events$onChanged('selected');
+var _edvail$elm_polymer$Polymer_Events$onTap = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'tap',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _edvail$elm_polymer$Polymer_Events$onIronSelect = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'iron-select',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _edvail$elm_polymer$Polymer_Events$detailValue));
+};

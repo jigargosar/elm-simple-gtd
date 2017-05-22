@@ -1,0 +1,228 @@
+var _justinmimbs$elm_date_extra$Date_Internal_Parse$isoDateRegex = function () {
+	var time = 'T(\\d{2})(?:(\\:)?(\\d{2})(?:\\10(\\d{2}))?)?(\\.\\d+)?(?:(Z)|(?:([+\\-])(\\d{2})(?:\\:?(\\d{2}))?))?';
+	var ord = '\\-?(\\d{3})';
+	var week = '(\\-)?W(\\d{2})(?:\\5(\\d))?';
+	var cal = '(\\-)?(\\d{2})(?:\\2(\\d{2}))?';
+	var year = '(\\d{4})';
+	return _elm_lang$core$Regex$regex(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'^',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				year,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'(?:',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						cal,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'|',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								week,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'|',
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										ord,
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											')?',
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												'(?:',
+												A2(_elm_lang$core$Basics_ops['++'], time, ')?$'))))))))))));
+}();
+var _justinmimbs$elm_date_extra$Date_Internal_Parse$stringToFloat = function (_p0) {
+	return _elm_lang$core$Result$toMaybe(
+		_elm_lang$core$String$toFloat(_p0));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Parse$msFromMatches = F4(
+	function (timeHH, timeMM, timeSS, timeF) {
+		var fractional = A2(
+			_elm_lang$core$Maybe$withDefault,
+			0.0,
+			A2(_elm_lang$core$Maybe$andThen, _justinmimbs$elm_date_extra$Date_Internal_Parse$stringToFloat, timeF));
+		var _p1 = function () {
+			var _p2 = A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$Maybe$andThen(_justinmimbs$elm_date_extra$Date_Internal_Parse$stringToFloat),
+				{
+					ctor: '::',
+					_0: timeHH,
+					_1: {
+						ctor: '::',
+						_0: timeMM,
+						_1: {
+							ctor: '::',
+							_0: timeSS,
+							_1: {ctor: '[]'}
+						}
+					}
+				});
+			_v0_3:
+			do {
+				if (((_p2.ctor === '::') && (_p2._0.ctor === 'Just')) && (_p2._1.ctor === '::')) {
+					if (_p2._1._0.ctor === 'Just') {
+						if (_p2._1._1.ctor === '::') {
+							if (_p2._1._1._0.ctor === 'Just') {
+								if (_p2._1._1._1.ctor === '[]') {
+									return {ctor: '_Tuple3', _0: _p2._0._0, _1: _p2._1._0._0, _2: _p2._1._1._0._0 + fractional};
+								} else {
+									break _v0_3;
+								}
+							} else {
+								if (_p2._1._1._1.ctor === '[]') {
+									return {ctor: '_Tuple3', _0: _p2._0._0, _1: _p2._1._0._0 + fractional, _2: 0.0};
+								} else {
+									break _v0_3;
+								}
+							}
+						} else {
+							break _v0_3;
+						}
+					} else {
+						if (((_p2._1._1.ctor === '::') && (_p2._1._1._0.ctor === 'Nothing')) && (_p2._1._1._1.ctor === '[]')) {
+							return {ctor: '_Tuple3', _0: _p2._0._0 + fractional, _1: 0.0, _2: 0.0};
+						} else {
+							break _v0_3;
+						}
+					}
+				} else {
+					break _v0_3;
+				}
+			} while(false);
+			return {ctor: '_Tuple3', _0: 0.0, _1: 0.0, _2: 0.0};
+		}();
+		var hh = _p1._0;
+		var mm = _p1._1;
+		var ss = _p1._2;
+		return _elm_lang$core$Basics$round(
+			((hh * _elm_lang$core$Basics$toFloat(_justinmimbs$elm_date_extra$Date_Extra_Facts$msPerHour)) + (mm * _elm_lang$core$Basics$toFloat(_justinmimbs$elm_date_extra$Date_Extra_Facts$msPerMinute))) + (ss * _elm_lang$core$Basics$toFloat(_justinmimbs$elm_date_extra$Date_Extra_Facts$msPerSecond)));
+	});
+var _justinmimbs$elm_date_extra$Date_Internal_Parse$stringToInt = function (_p3) {
+	return _elm_lang$core$Result$toMaybe(
+		_elm_lang$core$String$toInt(_p3));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Parse$unixTimeFromMatches = F6(
+	function (yyyy, calMM, calDD, weekWW, weekD, ordDDD) {
+		var y = A2(
+			_elm_lang$core$Maybe$withDefault,
+			1,
+			_justinmimbs$elm_date_extra$Date_Internal_Parse$stringToInt(yyyy));
+		var _p4 = {ctor: '_Tuple2', _0: calMM, _1: weekWW};
+		_v1_2:
+		do {
+			if (_p4.ctor === '_Tuple2') {
+				if (_p4._0.ctor === 'Just') {
+					if (_p4._1.ctor === 'Nothing') {
+						return A3(
+							_justinmimbs$elm_date_extra$Date_Internal_Core$unixTimeFromCalendarDate,
+							y,
+							_justinmimbs$elm_date_extra$Date_Extra_Facts$monthFromMonthNumber(
+								A2(
+									_elm_lang$core$Maybe$withDefault,
+									1,
+									A2(_elm_lang$core$Maybe$andThen, _justinmimbs$elm_date_extra$Date_Internal_Parse$stringToInt, calMM))),
+							A2(
+								_elm_lang$core$Maybe$withDefault,
+								1,
+								A2(_elm_lang$core$Maybe$andThen, _justinmimbs$elm_date_extra$Date_Internal_Parse$stringToInt, calDD)));
+					} else {
+						break _v1_2;
+					}
+				} else {
+					if (_p4._1.ctor === 'Just') {
+						return A3(
+							_justinmimbs$elm_date_extra$Date_Internal_Core$unixTimeFromWeekDate,
+							y,
+							A2(
+								_elm_lang$core$Maybe$withDefault,
+								1,
+								A2(_elm_lang$core$Maybe$andThen, _justinmimbs$elm_date_extra$Date_Internal_Parse$stringToInt, weekWW)),
+							A2(
+								_elm_lang$core$Maybe$withDefault,
+								1,
+								A2(_elm_lang$core$Maybe$andThen, _justinmimbs$elm_date_extra$Date_Internal_Parse$stringToInt, weekD)));
+					} else {
+						break _v1_2;
+					}
+				}
+			} else {
+				break _v1_2;
+			}
+		} while(false);
+		return A2(
+			_justinmimbs$elm_date_extra$Date_Internal_Core$unixTimeFromOrdinalDate,
+			y,
+			A2(
+				_elm_lang$core$Maybe$withDefault,
+				1,
+				A2(_elm_lang$core$Maybe$andThen, _justinmimbs$elm_date_extra$Date_Internal_Parse$stringToInt, ordDDD)));
+	});
+var _justinmimbs$elm_date_extra$Date_Internal_Parse$offsetFromMatches = F4(
+	function (tzZ, tzSign, tzHH, tzMM) {
+		var _p5 = {ctor: '_Tuple2', _0: tzZ, _1: tzSign};
+		_v2_2:
+		do {
+			if (_p5.ctor === '_Tuple2') {
+				if (_p5._0.ctor === 'Just') {
+					if ((_p5._0._0 === 'Z') && (_p5._1.ctor === 'Nothing')) {
+						return _elm_lang$core$Maybe$Just(0);
+					} else {
+						break _v2_2;
+					}
+				} else {
+					if (_p5._1.ctor === 'Just') {
+						var mm = A2(
+							_elm_lang$core$Maybe$withDefault,
+							0,
+							A2(_elm_lang$core$Maybe$andThen, _justinmimbs$elm_date_extra$Date_Internal_Parse$stringToInt, tzMM));
+						var hh = A2(
+							_elm_lang$core$Maybe$withDefault,
+							0,
+							A2(_elm_lang$core$Maybe$andThen, _justinmimbs$elm_date_extra$Date_Internal_Parse$stringToInt, tzHH));
+						return _elm_lang$core$Maybe$Just(
+							(_elm_lang$core$Native_Utils.eq(_p5._1._0, '+') ? 1 : -1) * ((hh * 60) + mm));
+					} else {
+						break _v2_2;
+					}
+				}
+			} else {
+				break _v2_2;
+			}
+		} while(false);
+		return _elm_lang$core$Maybe$Nothing;
+	});
+var _justinmimbs$elm_date_extra$Date_Internal_Parse$offsetTimeFromMatches = function (matches) {
+	var _p6 = matches;
+	if (((((((((((((((((((_p6.ctor === '::') && (_p6._0.ctor === 'Just')) && (_p6._1.ctor === '::')) && (_p6._1._1.ctor === '::')) && (_p6._1._1._1.ctor === '::')) && (_p6._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1._1._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1._1._1._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1._1._1._1._1._1._1._1._1._1.ctor === '::')) && (_p6._1._1._1._1._1._1._1._1._1._1._1._1._1._1._1._1._1.ctor === '[]')) {
+		var offset = A4(_justinmimbs$elm_date_extra$Date_Internal_Parse$offsetFromMatches, _p6._1._1._1._1._1._1._1._1._1._1._1._1._1._0, _p6._1._1._1._1._1._1._1._1._1._1._1._1._1._1._0, _p6._1._1._1._1._1._1._1._1._1._1._1._1._1._1._1._0, _p6._1._1._1._1._1._1._1._1._1._1._1._1._1._1._1._1._0);
+		var timeMS = A4(_justinmimbs$elm_date_extra$Date_Internal_Parse$msFromMatches, _p6._1._1._1._1._1._1._1._1._0, _p6._1._1._1._1._1._1._1._1._1._1._0, _p6._1._1._1._1._1._1._1._1._1._1._1._0, _p6._1._1._1._1._1._1._1._1._1._1._1._1._0);
+		var dateMS = A6(_justinmimbs$elm_date_extra$Date_Internal_Parse$unixTimeFromMatches, _p6._0._0, _p6._1._1._0, _p6._1._1._1._0, _p6._1._1._1._1._1._0, _p6._1._1._1._1._1._1._0, _p6._1._1._1._1._1._1._1._0);
+		return _elm_lang$core$Maybe$Just(
+			{ctor: '_Tuple2', _0: offset, _1: dateMS + timeMS});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Parse$offsetTimeFromIsoString = function (s) {
+	return A2(
+		_elm_lang$core$Maybe$andThen,
+		_justinmimbs$elm_date_extra$Date_Internal_Parse$offsetTimeFromMatches,
+		A2(
+			_elm_lang$core$Maybe$map,
+			function (_) {
+				return _.submatches;
+			},
+			_elm_lang$core$List$head(
+				A3(
+					_elm_lang$core$Regex$find,
+					_elm_lang$core$Regex$AtMost(1),
+					_justinmimbs$elm_date_extra$Date_Internal_Parse$isoDateRegex,
+					s))));
+};

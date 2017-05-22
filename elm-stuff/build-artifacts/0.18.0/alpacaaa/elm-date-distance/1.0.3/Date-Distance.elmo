@@ -1,0 +1,64 @@
+var _alpacaaa$elm_date_distance$Date_Distance$upToOneDay = function (minutes) {
+	var hours = _elm_lang$core$Basics$round(
+		_elm_lang$core$Basics$toFloat(minutes) / 60);
+	return _alpacaaa$elm_date_distance$Date_Distance_Types$AboutXHours(hours);
+};
+var _alpacaaa$elm_date_distance$Date_Distance$upToOneMinute = function (seconds) {
+	return (_elm_lang$core$Native_Utils.cmp(seconds, 5) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$LessThanXSeconds(5) : ((_elm_lang$core$Native_Utils.cmp(seconds, 10) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$LessThanXSeconds(10) : ((_elm_lang$core$Native_Utils.cmp(seconds, 20) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$LessThanXSeconds(20) : ((_elm_lang$core$Native_Utils.cmp(seconds, 40) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$HalfAMinute : ((_elm_lang$core$Native_Utils.cmp(seconds, 60) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$LessThanXMinutes(1) : _alpacaaa$elm_date_distance$Date_Distance_Types$XMinutes(1)))));
+};
+var _alpacaaa$elm_date_distance$Date_Distance$defaultConfig = {
+	locale: _alpacaaa$elm_date_distance$Date_Distance_I18n_En$locale(
+		{addSuffix: false}),
+	includeSeconds: false
+};
+var _alpacaaa$elm_date_distance$Date_Distance$minutes_in_two_months = 86400;
+var _alpacaaa$elm_date_distance$Date_Distance$minutes_in_month = 43200;
+var _alpacaaa$elm_date_distance$Date_Distance$upToTwoMonths = function (minutes) {
+	var months = _elm_lang$core$Basics$round(
+		_elm_lang$core$Basics$toFloat(minutes) / _alpacaaa$elm_date_distance$Date_Distance$minutes_in_month);
+	return _alpacaaa$elm_date_distance$Date_Distance_Types$AboutXMonths(months);
+};
+var _alpacaaa$elm_date_distance$Date_Distance$upToOneYear = function (minutes) {
+	var nearestMonth = _elm_lang$core$Basics$round(
+		_elm_lang$core$Basics$toFloat(minutes) / _alpacaaa$elm_date_distance$Date_Distance$minutes_in_month);
+	return _alpacaaa$elm_date_distance$Date_Distance_Types$XMonths(nearestMonth);
+};
+var _alpacaaa$elm_date_distance$Date_Distance$moreThanTwoMonths = F3(
+	function (minutes, d1, d2) {
+		var months = A3(_justinmimbs$elm_date_extra$Date_Extra$diff, _justinmimbs$elm_date_extra$Date_Extra$Month, d1, d2);
+		if (_elm_lang$core$Native_Utils.cmp(months, 12) < 0) {
+			return _alpacaaa$elm_date_distance$Date_Distance$upToOneYear(minutes);
+		} else {
+			var years = _elm_lang$core$Basics$floor(
+				_elm_lang$core$Basics$toFloat(months) / 12);
+			var monthsSinceStartOfYear = A2(_elm_lang$core$Basics_ops['%'], months, 12);
+			return (_elm_lang$core$Native_Utils.cmp(monthsSinceStartOfYear, 3) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$AboutXYears(years) : ((_elm_lang$core$Native_Utils.cmp(monthsSinceStartOfYear, 9) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$OverXYears(years) : _alpacaaa$elm_date_distance$Date_Distance_Types$AlmostXYears(years + 1));
+		}
+	});
+var _alpacaaa$elm_date_distance$Date_Distance$minutes_in_almost_two_days = 2520;
+var _alpacaaa$elm_date_distance$Date_Distance$minutes_in_day = 1440;
+var _alpacaaa$elm_date_distance$Date_Distance$upToOneMonth = function (minutes) {
+	var days = _elm_lang$core$Basics$round(
+		_elm_lang$core$Basics$toFloat(minutes) / _alpacaaa$elm_date_distance$Date_Distance$minutes_in_day);
+	return _alpacaaa$elm_date_distance$Date_Distance_Types$XDays(days);
+};
+var _alpacaaa$elm_date_distance$Date_Distance$calculateDistance = F3(
+	function (includeSeconds, d1, d2) {
+		var offset = _justinmimbs$elm_date_extra$Date_Extra$offsetFromUtc(d1) - _justinmimbs$elm_date_extra$Date_Extra$offsetFromUtc(d2);
+		var seconds = A3(_justinmimbs$elm_date_extra$Date_Extra$diff, _justinmimbs$elm_date_extra$Date_Extra$Second, d1, d2);
+		var minutes = _elm_lang$core$Basics$round(
+			_elm_lang$core$Basics$toFloat(seconds) / 60) - offset;
+		return (includeSeconds && (_elm_lang$core$Native_Utils.cmp(minutes, 2) < 0)) ? _alpacaaa$elm_date_distance$Date_Distance$upToOneMinute(seconds) : (_elm_lang$core$Native_Utils.eq(minutes, 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$LessThanXMinutes(1) : ((_elm_lang$core$Native_Utils.cmp(minutes, 2) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$XMinutes(minutes) : ((_elm_lang$core$Native_Utils.cmp(minutes, 45) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$XMinutes(minutes) : ((_elm_lang$core$Native_Utils.cmp(minutes, 90) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$AboutXHours(1) : ((_elm_lang$core$Native_Utils.cmp(minutes, _alpacaaa$elm_date_distance$Date_Distance$minutes_in_day) < 0) ? _alpacaaa$elm_date_distance$Date_Distance$upToOneDay(minutes) : ((_elm_lang$core$Native_Utils.cmp(minutes, _alpacaaa$elm_date_distance$Date_Distance$minutes_in_almost_two_days) < 0) ? _alpacaaa$elm_date_distance$Date_Distance_Types$XDays(1) : ((_elm_lang$core$Native_Utils.cmp(minutes, _alpacaaa$elm_date_distance$Date_Distance$minutes_in_month) < 0) ? _alpacaaa$elm_date_distance$Date_Distance$upToOneMonth(minutes) : ((_elm_lang$core$Native_Utils.cmp(minutes, _alpacaaa$elm_date_distance$Date_Distance$minutes_in_two_months) < 0) ? _alpacaaa$elm_date_distance$Date_Distance$upToTwoMonths(minutes) : A3(_alpacaaa$elm_date_distance$Date_Distance$moreThanTwoMonths, minutes, d1, d2)))))))));
+	});
+var _alpacaaa$elm_date_distance$Date_Distance$inWordsWithConfig = F3(
+	function (_p0, d1, d2) {
+		var _p1 = _p0;
+		var order = A2(_justinmimbs$elm_date_extra$Date_Extra$compare, d1, d2);
+		var _p2 = _elm_lang$core$Native_Utils.eq(order, _elm_lang$core$Basics$LT) ? {ctor: '_Tuple2', _0: d1, _1: d2} : {ctor: '_Tuple2', _0: d2, _1: d1};
+		var fst = _p2._0;
+		var snd = _p2._1;
+		var distance = A3(_alpacaaa$elm_date_distance$Date_Distance$calculateDistance, _p1.includeSeconds, fst, snd);
+		var localize = _p1.locale(order);
+		return localize(distance);
+	});
+var _alpacaaa$elm_date_distance$Date_Distance$inWords = _alpacaaa$elm_date_distance$Date_Distance$inWordsWithConfig(_alpacaaa$elm_date_distance$Date_Distance$defaultConfig);

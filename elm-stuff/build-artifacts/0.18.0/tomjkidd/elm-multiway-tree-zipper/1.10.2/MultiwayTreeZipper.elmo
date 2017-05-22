@@ -1,0 +1,296 @@
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$datum = function (_p0) {
+	var _p1 = _p0;
+	return _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$datum(_p1._0);
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$maybeDatum = function (zipper) {
+	return _elm_lang$core$Maybe$Just(
+		_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$datum(zipper));
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$appendChild = F2(
+	function (child, _p2) {
+		var _p3 = _p2;
+		return _elm_lang$core$Maybe$Just(
+			{
+				ctor: '_Tuple2',
+				_0: A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$appendChild, child, _p3._0),
+				_1: _p3._1
+			});
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$insertChild = F2(
+	function (child, _p4) {
+		var _p5 = _p4;
+		return _elm_lang$core$Maybe$Just(
+			{
+				ctor: '_Tuple2',
+				_0: A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$insertChild, child, _p5._0),
+				_1: _p5._1
+			});
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$updateChildren = F2(
+	function (newChildren, _p6) {
+		var _p7 = _p6;
+		return _elm_lang$core$Maybe$Just(
+			{
+				ctor: '_Tuple2',
+				_0: A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree, _p7._0._0, newChildren),
+				_1: _p7._1
+			});
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$updateDatum = F2(
+	function (fn, _p8) {
+		var _p9 = _p8;
+		return _elm_lang$core$Maybe$Just(
+			{
+				ctor: '_Tuple2',
+				_0: A2(
+					_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree,
+					fn(_p9._0._0),
+					_p9._0._1),
+				_1: _p9._1
+			});
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$replaceDatum = function (newDatum) {
+	return _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$updateDatum(
+		function (_p10) {
+			return newDatum;
+		});
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goUp = function (_p11) {
+	var _p12 = _p11;
+	var _p13 = _p12._1;
+	if (_p13.ctor === '::') {
+		return _elm_lang$core$Maybe$Just(
+			{
+				ctor: '_Tuple2',
+				_0: A2(
+					_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree,
+					_p13._0._0,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_p13._0._1,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							{
+								ctor: '::',
+								_0: _p12._0,
+								_1: {ctor: '[]'}
+							},
+							_p13._0._2))),
+				_1: _p13._1
+			});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToRoot = function (_p14) {
+	var _p15 = _p14;
+	var _p18 = _p15._0;
+	var _p17 = _p15._1;
+	var _p16 = _p17;
+	if (_p16.ctor === '[]') {
+		return _elm_lang$core$Maybe$Just(
+			{ctor: '_Tuple2', _0: _p18, _1: _p17});
+	} else {
+		return A2(
+			_elm_lang$core$Maybe$andThen,
+			_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToRoot,
+			_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goUp(
+				{ctor: '_Tuple2', _0: _p18, _1: _p17}));
+	}
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$splitOnIndex = F2(
+	function (n, xs) {
+		var after = A2(_elm_lang$core$List$drop, n + 1, xs);
+		var focus = _elm_lang$core$List$head(
+			A2(_elm_lang$core$List$drop, n, xs));
+		var before = A2(_elm_lang$core$List$take, n, xs);
+		var _p19 = focus;
+		if (_p19.ctor === 'Nothing') {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			return _elm_lang$core$Maybe$Just(
+				{ctor: '_Tuple3', _0: before, _1: _p19._0, _2: after});
+		}
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$Context = F3(
+	function (a, b, c) {
+		return {ctor: 'Context', _0: a, _1: b, _2: c};
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToChild = F2(
+	function (n, _p20) {
+		var _p21 = _p20;
+		var maybeSplit = A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$splitOnIndex, n, _p21._0._1);
+		var _p22 = maybeSplit;
+		if (_p22.ctor === 'Nothing') {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			return _elm_lang$core$Maybe$Just(
+				{
+					ctor: '_Tuple2',
+					_0: _p22._0._1,
+					_1: {
+						ctor: '::',
+						_0: A3(_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$Context, _p21._0._0, _p22._0._0, _p22._0._2),
+						_1: _p21._1
+					}
+				});
+		}
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToRightMostChild = function (_p23) {
+	var _p24 = _p23;
+	var _p25 = _p24._0._1;
+	return A2(
+		_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToChild,
+		_elm_lang$core$List$length(_p25) - 1,
+		{
+			ctor: '_Tuple2',
+			_0: A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree, _p24._0._0, _p25),
+			_1: _p24._1
+		});
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goLeft = function (_p26) {
+	var _p27 = _p26;
+	var _p28 = _p27._1;
+	if (_p28.ctor === '[]') {
+		return _elm_lang$core$Maybe$Nothing;
+	} else {
+		var _p29 = _elm_lang$core$List$reverse(_p28._0._1);
+		if (_p29.ctor === '[]') {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			return _elm_lang$core$Maybe$Just(
+				{
+					ctor: '_Tuple2',
+					_0: _p29._0,
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$Context,
+							_p28._0._0,
+							_elm_lang$core$List$reverse(_p29._1),
+							{ctor: '::', _0: _p27._0, _1: _p28._0._2}),
+						_1: _p28._1
+					}
+				});
+		}
+	}
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToPrevious = function (zipper) {
+	var recurseDownAndRight = function (zipper_) {
+		recurseDownAndRight:
+		while (true) {
+			var _p30 = _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToRightMostChild(zipper_);
+			if (_p30.ctor === 'Just') {
+				var _v17 = _p30._0;
+				zipper_ = _v17;
+				continue recurseDownAndRight;
+			} else {
+				return _elm_lang$core$Maybe$Just(zipper_);
+			}
+		}
+	};
+	var _p31 = _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goLeft(zipper);
+	if (_p31.ctor === 'Just') {
+		return recurseDownAndRight(_p31._0);
+	} else {
+		return _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goUp(zipper);
+	}
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goRight = function (_p32) {
+	var _p33 = _p32;
+	var _p34 = _p33._1;
+	if (_p34.ctor === '::') {
+		var _p35 = _p34._0._2;
+		if (_p35.ctor === '[]') {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			return _elm_lang$core$Maybe$Just(
+				{
+					ctor: '_Tuple2',
+					_0: A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree, _p35._0._0, _p35._0._1),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$Context,
+							_p34._0._0,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_p34._0._1,
+								{
+									ctor: '::',
+									_0: _p33._0,
+									_1: {ctor: '[]'}
+								}),
+							_p35._1),
+						_1: _p34._1
+					}
+				});
+		}
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToNext = function (zipper) {
+	var upAndOver = function (zipper) {
+		upAndOver:
+		while (true) {
+			var _p36 = _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goUp(zipper);
+			if (_p36.ctor === 'Nothing') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p38 = _p36._0;
+				var _p37 = _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goRight(_p38);
+				if (_p37.ctor === 'Nothing') {
+					var _v24 = _p38;
+					zipper = _v24;
+					continue upAndOver;
+				} else {
+					return _p37;
+				}
+			}
+		}
+	};
+	var _p39 = A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToChild, 0, zipper);
+	if (_p39.ctor === 'Just') {
+		return _elm_lang$core$Maybe$Just(_p39._0);
+	} else {
+		var _p40 = _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goRight(zipper);
+		if (_p40.ctor === 'Just') {
+			return _elm_lang$core$Maybe$Just(_p40._0);
+		} else {
+			var _p41 = upAndOver(zipper);
+			if (_p41.ctor === 'Nothing') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				return _p41;
+			}
+		}
+	}
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goTo = F2(
+	function (predicate, zipper) {
+		var goToElementOrNext = function (_p42) {
+			var _p43 = _p42;
+			var _p46 = _p43._0._0;
+			var _p45 = _p43._0._1;
+			var _p44 = _p43._1;
+			return predicate(_p46) ? _elm_lang$core$Maybe$Just(
+				{
+					ctor: '_Tuple2',
+					_0: A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree, _p46, _p45),
+					_1: _p44
+				}) : A2(
+				_elm_lang$core$Maybe$andThen,
+				goToElementOrNext,
+				_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToNext(
+					{
+						ctor: '_Tuple2',
+						_0: A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree, _p46, _p45),
+						_1: _p44
+					}));
+		};
+		return A2(
+			_elm_lang$core$Maybe$andThen,
+			goToElementOrNext,
+			_tomjkidd$elm_multiway_tree_zipper$MultiwayTreeZipper$goToRoot(zipper));
+	});

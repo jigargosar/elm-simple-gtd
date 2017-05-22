@@ -1,0 +1,23 @@
+var _rluiten$elm_text_search$Index_Defaults$defaultStopWordFilterFuncCreator = _rluiten$elm_text_search$StopWordFilter$createDefaultFilterFunc;
+var _rluiten$elm_text_search$Index_Defaults$defaultStemmerFuncCreator = _rluiten$elm_text_search$Index_Utils$createFuncCreator(_rluiten$stemmer$Stemmer$stem);
+var _rluiten$elm_text_search$Index_Defaults$defaultTokenTrimmerFuncCreator = _rluiten$elm_text_search$Index_Utils$createFuncCreator(_rluiten$elm_text_search$TokenProcessors$trimmer);
+var _rluiten$elm_text_search$Index_Defaults$defaultFilterFactories = {
+	ctor: '::',
+	_0: _rluiten$elm_text_search$Index_Defaults$defaultStopWordFilterFuncCreator,
+	_1: {ctor: '[]'}
+};
+var _rluiten$elm_text_search$Index_Defaults$defaultTransformFactories = {
+	ctor: '::',
+	_0: _rluiten$elm_text_search$Index_Defaults$defaultTokenTrimmerFuncCreator,
+	_1: {
+		ctor: '::',
+		_0: _rluiten$elm_text_search$Index_Defaults$defaultStemmerFuncCreator,
+		_1: {ctor: '[]'}
+	}
+};
+var _rluiten$elm_text_search$Index_Defaults$getDefaultIndexConfig = function (_p0) {
+	var _p1 = _p0;
+	return {indexType: _p1.indexType, ref: _p1.ref, fields: _p1.fields, listFields: _p1.listFields, transformFactories: _rluiten$elm_text_search$Index_Defaults$defaultTransformFactories, filterFactories: _rluiten$elm_text_search$Index_Defaults$defaultFilterFactories};
+};
+var _rluiten$elm_text_search$Index_Defaults$elmTextSearchIndexType = '-= ElmTextSearch Index Type 1 =-';
+var _rluiten$elm_text_search$Index_Defaults$indexVersion = '1.0.0';

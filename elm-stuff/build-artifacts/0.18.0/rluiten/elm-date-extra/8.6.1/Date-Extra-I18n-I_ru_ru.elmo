@@ -1,0 +1,101 @@
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_ru_ru$dayOfMonthWithSuffix = F2(
+	function (pad, day) {
+		var _p0 = day;
+		return _elm_lang$core$Basics$toString(day);
+	});
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_ru_ru$monthName = function (month) {
+	var _p1 = month;
+	switch (_p1.ctor) {
+		case 'Jan':
+			return 'Январь';
+		case 'Feb':
+			return 'Февраль';
+		case 'Mar':
+			return 'Март';
+		case 'Apr':
+			return 'Апрель';
+		case 'May':
+			return 'Май';
+		case 'Jun':
+			return 'Июнь';
+		case 'Jul':
+			return 'Июль';
+		case 'Aug':
+			return 'Август';
+		case 'Sep':
+			return 'Сентябрь';
+		case 'Oct':
+			return 'Октябрь';
+		case 'Nov':
+			return 'Ноябрь';
+		default:
+			return 'Декабрь';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_ru_ru$monthShort = function (month) {
+	var _p2 = month;
+	switch (_p2.ctor) {
+		case 'Jan':
+			return 'Янв';
+		case 'Feb':
+			return 'Фев';
+		case 'Mar':
+			return 'Мар';
+		case 'Apr':
+			return 'Апр';
+		case 'May':
+			return 'Май';
+		case 'Jun':
+			return 'Июн';
+		case 'Jul':
+			return 'Июл';
+		case 'Aug':
+			return 'Авг';
+		case 'Sep':
+			return 'Сен';
+		case 'Oct':
+			return 'Окт';
+		case 'Nov':
+			return 'Ноя';
+		default:
+			return 'Дек';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_ru_ru$dayName = function (day) {
+	var _p3 = day;
+	switch (_p3.ctor) {
+		case 'Mon':
+			return 'Понедельник';
+		case 'Tue':
+			return 'Вторник';
+		case 'Wed':
+			return 'Среда';
+		case 'Thu':
+			return 'Четверг';
+		case 'Fri':
+			return 'Пятница';
+		case 'Sat':
+			return 'Суббота';
+		default:
+			return 'Воскресенье';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_ru_ru$dayShort = function (day) {
+	var _p4 = day;
+	switch (_p4.ctor) {
+		case 'Mon':
+			return 'Пн';
+		case 'Tue':
+			return 'Вт';
+		case 'Wed':
+			return 'Ср';
+		case 'Thu':
+			return 'Чт';
+		case 'Fri':
+			return 'Пт';
+		case 'Sat':
+			return 'Сб';
+		default:
+			return 'Вс';
+	}
+};

@@ -1,0 +1,14 @@
+var _Fresheyeball$elm_function_extra$Function_Infix_ops = _Fresheyeball$elm_function_extra$Function_Infix_ops || {};
+_Fresheyeball$elm_function_extra$Function_Infix_ops['<.>'] = _Fresheyeball$elm_function_extra$Function_Pro$mapBoth;
+var _Fresheyeball$elm_function_extra$Function_Infix_ops = _Fresheyeball$elm_function_extra$Function_Infix_ops || {};
+_Fresheyeball$elm_function_extra$Function_Infix_ops['>>='] = _elm_lang$core$Basics$flip(_Fresheyeball$elm_function_extra$Function$andThen);
+var _Fresheyeball$elm_function_extra$Function_Infix_ops = _Fresheyeball$elm_function_extra$Function_Infix_ops || {};
+_Fresheyeball$elm_function_extra$Function_Infix_ops['<*>'] = _elm_lang$core$Basics$flip(_Fresheyeball$elm_function_extra$Function$andMap);
+var _Fresheyeball$elm_function_extra$Function_Infix_ops = _Fresheyeball$elm_function_extra$Function_Infix_ops || {};
+_Fresheyeball$elm_function_extra$Function_Infix_ops['<$>'] = F2(
+	function (x, y) {
+		return function (_p0) {
+			return x(
+				y(_p0));
+		};
+	});

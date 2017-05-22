@@ -1,0 +1,35 @@
+var _alpacaaa$elm_date_distance$Date_Distance_Types$Config = F2(
+	function (a, b) {
+		return {locale: a, includeSeconds: b};
+	});
+var _alpacaaa$elm_date_distance$Date_Distance_Types$AlmostXYears = function (a) {
+	return {ctor: 'AlmostXYears', _0: a};
+};
+var _alpacaaa$elm_date_distance$Date_Distance_Types$OverXYears = function (a) {
+	return {ctor: 'OverXYears', _0: a};
+};
+var _alpacaaa$elm_date_distance$Date_Distance_Types$AboutXYears = function (a) {
+	return {ctor: 'AboutXYears', _0: a};
+};
+var _alpacaaa$elm_date_distance$Date_Distance_Types$XMonths = function (a) {
+	return {ctor: 'XMonths', _0: a};
+};
+var _alpacaaa$elm_date_distance$Date_Distance_Types$AboutXMonths = function (a) {
+	return {ctor: 'AboutXMonths', _0: a};
+};
+var _alpacaaa$elm_date_distance$Date_Distance_Types$XDays = function (a) {
+	return {ctor: 'XDays', _0: a};
+};
+var _alpacaaa$elm_date_distance$Date_Distance_Types$AboutXHours = function (a) {
+	return {ctor: 'AboutXHours', _0: a};
+};
+var _alpacaaa$elm_date_distance$Date_Distance_Types$XMinutes = function (a) {
+	return {ctor: 'XMinutes', _0: a};
+};
+var _alpacaaa$elm_date_distance$Date_Distance_Types$LessThanXMinutes = function (a) {
+	return {ctor: 'LessThanXMinutes', _0: a};
+};
+var _alpacaaa$elm_date_distance$Date_Distance_Types$HalfAMinute = {ctor: 'HalfAMinute'};
+var _alpacaaa$elm_date_distance$Date_Distance_Types$LessThanXSeconds = function (a) {
+	return {ctor: 'LessThanXSeconds', _0: a};
+};

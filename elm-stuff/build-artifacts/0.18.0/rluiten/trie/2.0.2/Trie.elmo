@@ -1,0 +1,20 @@
+var _rluiten$trie$Trie$expand = _rluiten$trie$TrieModel$expand;
+var _rluiten$trie$Trie$valueCount = _rluiten$trie$TrieModel$valueCount;
+var _rluiten$trie$Trie$getValues = _rluiten$trie$TrieModel$getValues;
+var _rluiten$trie$Trie$get = _rluiten$trie$TrieModel$get;
+var _rluiten$trie$Trie$has = _rluiten$trie$TrieModel$has;
+var _rluiten$trie$Trie$getNode = _rluiten$trie$TrieModel$getNode;
+var _rluiten$trie$Trie$remove = _rluiten$trie$TrieModel$remove;
+var _rluiten$trie$Trie$toListString = function (str) {
+	return A2(
+		_elm_lang$core$List$map,
+		function (c) {
+			return _elm_lang$core$String$fromChar(c);
+		},
+		_elm_lang$core$String$toList(str));
+};
+var _rluiten$trie$Trie$add = _rluiten$trie$TrieModel$add;
+var _rluiten$trie$Trie$empty = _rluiten$trie$TrieModel$empty;
+var _rluiten$trie$Trie$isEmpty = function (trie) {
+	return _elm_lang$core$Native_Utils.eq(trie, _rluiten$trie$Trie$empty);
+};

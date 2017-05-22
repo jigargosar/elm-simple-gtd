@@ -1,0 +1,288 @@
+var _rluiten$elm_text_search$Index$searchTokens = F2(
+	function (tokens, _p0) {
+		var _p1 = _p0;
+		var fieldBoosts = _elm_lang$core$List$sum(
+			A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$second, _p1._0.fields));
+		var _p2 = A3(_rluiten$elm_text_search$Index_Vector$getQueryVector, fieldBoosts, tokens, _p1);
+		var tokenDocSets = _p2._0;
+		var queryVector = _p2._1;
+		var u1index = _p2._2;
+		var _p3 = A3(
+			_elm_lang$core$List$foldr,
+			_rluiten$elm_text_search$Index_Vector$scoreAndCompare(queryVector),
+			{
+				ctor: '_Tuple2',
+				_0: u1index,
+				_1: {ctor: '[]'}
+			},
+			_elm_lang$core$Set$toList(
+				_rluiten$elm_text_search$Utils$intersectSets(tokenDocSets)));
+		var u2index = _p3._0;
+		var matchedDocs = _p3._1;
+		return {
+			ctor: '_Tuple2',
+			_0: u2index,
+			_1: _elm_lang$core$List$reverse(
+				A2(_elm_lang$core$List$sortBy, _elm_lang$core$Tuple$second, matchedDocs))
+		};
+	});
+var _rluiten$elm_text_search$Index$search = F2(
+	function (query, index) {
+		var _p4 = A2(_rluiten$elm_text_search$Index_Utils$getTokens, index, query);
+		var i1index = _p4._0;
+		var i1irec = _p4._0._0;
+		var tokens = _p4._1;
+		var tokenInStore = function (token) {
+			return !_elm_lang$core$Native_Utils.eq(
+				A2(_rluiten$trie$Trie$getNode, token, i1irec.tokenStore),
+				_elm_lang$core$Maybe$Nothing);
+		};
+		return _elm_lang$core$Dict$isEmpty(i1irec.documentStore) ? _elm_lang$core$Result$Err('Error there are no documents in index to search.') : (_elm_lang$core$String$isEmpty(
+			_elm_lang$core$String$trim(query)) ? _elm_lang$core$Result$Err('Error query is empty.') : (_elm_lang$core$List$isEmpty(tokens) ? _elm_lang$core$Result$Err('Error after tokenisation there are no terms to search for.') : ((_elm_lang$core$List$isEmpty(tokens) || (!A2(_elm_lang$core$List$any, tokenInStore, tokens))) ? _elm_lang$core$Result$Ok(
+			{
+				ctor: '_Tuple2',
+				_0: i1index,
+				_1: {ctor: '[]'}
+			}) : _elm_lang$core$Result$Ok(
+			A2(_rluiten$elm_text_search$Index$searchTokens, tokens, i1index)))));
+	});
+var _rluiten$elm_text_search$Index$removeDoc = F3(
+	function (docRef, _p5, docTokens) {
+		var _p6 = _p5;
+		var _p7 = _p6._0;
+		var updatedDocumentStore = A2(_elm_lang$core$Dict$remove, docRef, _p7.documentStore);
+		var removeToken = F2(
+			function (token, trie) {
+				return A3(_rluiten$trie$Trie$remove, token, docRef, trie);
+			});
+		var updatedTokenStore = A3(
+			_elm_lang$core$List$foldr,
+			removeToken,
+			_p7.tokenStore,
+			_elm_lang$core$Set$toList(docTokens));
+		return _rluiten$elm_text_search$Index_Model$Index(
+			_elm_lang$core$Native_Utils.update(
+				_p7,
+				{documentStore: updatedDocumentStore, tokenStore: updatedTokenStore, idfCache: _elm_lang$core$Dict$empty}));
+	});
+var _rluiten$elm_text_search$Index$errorMessageNotIndex = 'Error document is not in index.';
+var _rluiten$elm_text_search$Index$remove = F2(
+	function (doc, _p8) {
+		var _p9 = _p8;
+		var _p11 = _p9._0;
+		var _p10 = _p9;
+		var docRef = _p11.ref(doc);
+		return _elm_lang$core$String$isEmpty(docRef) ? _elm_lang$core$Result$Err('Error document has an empty unique id (ref).') : ((!A2(_rluiten$elm_text_search$Index_Utils$refExists, docRef, _p10)) ? _elm_lang$core$Result$Err(_rluiten$elm_text_search$Index$errorMessageNotIndex) : _elm_lang$core$Result$Ok(
+			A2(
+				_elm_lang$core$Maybe$withDefault,
+				_p10,
+				A2(
+					_elm_lang$core$Maybe$map,
+					A2(_rluiten$elm_text_search$Index$removeDoc, docRef, _p10),
+					A2(_elm_lang$core$Dict$get, docRef, _p11.documentStore)))));
+	});
+var _rluiten$elm_text_search$Index$scoreToken = F2(
+	function (fieldTokensAndBoost, token) {
+		var score = F2(
+			function (_p12, scoreSum) {
+				var _p13 = _p12;
+				var _p14 = _p13._0;
+				if (_elm_lang$core$Set$isEmpty(_p14)) {
+					return scoreSum;
+				} else {
+					var tokenBoost = A2(_elm_lang$core$Set$member, token, _p14) ? (_p13._1 / _elm_lang$core$Basics$toFloat(
+						_elm_lang$core$Set$size(_p14))) : 0;
+					return scoreSum + tokenBoost;
+				}
+			});
+		return {
+			ctor: '_Tuple2',
+			_0: token,
+			_1: A3(_elm_lang$core$List$foldr, score, 0, fieldTokensAndBoost)
+		};
+	});
+var _rluiten$elm_text_search$Index$addDoc = F4(
+	function (docRef, fieldsTokens, docTokens, _p15) {
+		var _p16 = _p15;
+		var _p19 = _p16._0;
+		var updatedCorpusTokens = A2(_elm_lang$core$Set$union, _p19.corpusTokens, docTokens);
+		var updatedCorpusTokensIndex = _rluiten$elm_text_search$Index_Utils$buildOrderIndex(updatedCorpusTokens);
+		var updatedDocumentStore = A3(_elm_lang$core$Dict$insert, docRef, docTokens, _p19.documentStore);
+		var allBoosts = A2(
+			_elm_lang$core$List$append,
+			A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$second, _p19.listFields),
+			A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$second, _p19.fields));
+		var fieldTokensAndBoosts = A3(
+			_elm_lang$core$List$map2,
+			F2(
+				function (v0, v1) {
+					return {ctor: '_Tuple2', _0: v0, _1: v1};
+				}),
+			fieldsTokens,
+			allBoosts);
+		var tokenAndScores = A2(
+			_elm_lang$core$List$map,
+			_rluiten$elm_text_search$Index$scoreToken(fieldTokensAndBoosts),
+			_elm_lang$core$Set$toList(docTokens));
+		var addTokenScore = F2(
+			function (_p17, trie) {
+				var _p18 = _p17;
+				return A3(
+					_rluiten$trie$Trie$add,
+					{ctor: '_Tuple2', _0: docRef, _1: _p18._1},
+					_p18._0,
+					trie);
+			});
+		var updatedTokenStore = A3(_elm_lang$core$List$foldr, addTokenScore, _p19.tokenStore, tokenAndScores);
+		return _rluiten$elm_text_search$Index_Model$Index(
+			_elm_lang$core$Native_Utils.update(
+				_p19,
+				{documentStore: updatedDocumentStore, corpusTokens: updatedCorpusTokens, corpusTokensIndex: updatedCorpusTokensIndex, tokenStore: updatedTokenStore, idfCache: _elm_lang$core$Dict$empty}));
+	});
+var _rluiten$elm_text_search$Index$getWordsForFieldList = F3(
+	function (doc, getFieldList, _p20) {
+		var _p21 = _p20;
+		var _p22 = A2(
+			_rluiten$elm_text_search$Index_Utils$getTokensList,
+			_p21._0,
+			getFieldList(doc));
+		var u1index = _p22._0;
+		var tokens = _p22._1;
+		return {
+			ctor: '_Tuple2',
+			_0: u1index,
+			_1: {ctor: '::', _0: tokens, _1: _p21._1}
+		};
+	});
+var _rluiten$elm_text_search$Index$getWordsForField = F3(
+	function (doc, getField, _p23) {
+		var _p24 = _p23;
+		var _p25 = A2(
+			_rluiten$elm_text_search$Index_Utils$getTokens,
+			_p24._0,
+			getField(doc));
+		var u1index = _p25._0;
+		var tokens = _p25._1;
+		return {
+			ctor: '_Tuple2',
+			_0: u1index,
+			_1: {ctor: '::', _0: tokens, _1: _p24._1}
+		};
+	});
+var _rluiten$elm_text_search$Index$add = F2(
+	function (doc, _p26) {
+		var _p27 = _p26;
+		var _p31 = _p27._0;
+		var _p30 = _p27;
+		var docRef = _p31.ref(doc);
+		if (_elm_lang$core$String$isEmpty(docRef)) {
+			return _elm_lang$core$Result$Err('Error document has an empty unique id (ref).');
+		} else {
+			if (A2(_rluiten$elm_text_search$Index_Utils$refExists, docRef, _p30)) {
+				return _elm_lang$core$Result$Err('Error adding document that allready exists.');
+			} else {
+				var _p28 = A3(
+					_elm_lang$core$List$foldr,
+					_rluiten$elm_text_search$Index$getWordsForField(doc),
+					{
+						ctor: '_Tuple2',
+						_0: _p30,
+						_1: {ctor: '[]'}
+					},
+					A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$first, _p31.fields));
+				var u1index = _p28._0;
+				var fieldsWordList = _p28._1;
+				var _p29 = A3(
+					_elm_lang$core$List$foldr,
+					_rluiten$elm_text_search$Index$getWordsForFieldList(doc),
+					{ctor: '_Tuple2', _0: u1index, _1: fieldsWordList},
+					A2(_elm_lang$core$List$map, _elm_lang$core$Tuple$first, _p31.listFields));
+				var u2index = _p29._0;
+				var u2fieldsWordList = _p29._1;
+				var fieldsTokens = A2(_elm_lang$core$List$map, _elm_lang$core$Set$fromList, u2fieldsWordList);
+				var docTokens = A3(_elm_lang$core$List$foldr, _elm_lang$core$Set$union, _elm_lang$core$Set$empty, fieldsTokens);
+				return _elm_lang$core$Set$isEmpty(docTokens) ? _elm_lang$core$Result$Err('Error after tokenisation there are no terms to index.') : _elm_lang$core$Result$Ok(
+					A4(_rluiten$elm_text_search$Index$addDoc, docRef, fieldsTokens, docTokens, u2index));
+			}
+		}
+	});
+var _rluiten$elm_text_search$Index$addDocsCore = F4(
+	function (docsI, docs, _p32, errors) {
+		addDocsCore:
+		while (true) {
+			var _p33 = _p32;
+			var _p37 = _p33;
+			var _p34 = docs;
+			if (_p34.ctor === '[]') {
+				return {ctor: '_Tuple2', _0: _p37, _1: errors};
+			} else {
+				var _p36 = _p34._1;
+				var _p35 = A2(_rluiten$elm_text_search$Index$add, _p34._0, _p37);
+				if (_p35.ctor === 'Ok') {
+					var _v12 = docsI + 1,
+						_v13 = _p36,
+						_v14 = _p35._0,
+						_v15 = errors;
+					docsI = _v12;
+					docs = _v13;
+					_p32 = _v14;
+					errors = _v15;
+					continue addDocsCore;
+				} else {
+					var _v16 = docsI + 1,
+						_v17 = _p36,
+						_v18 = _p37,
+						_v19 = A2(
+						_elm_lang$core$Basics_ops['++'],
+						errors,
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: docsI, _1: _p35._0},
+							_1: {ctor: '[]'}
+						});
+					docsI = _v16;
+					docs = _v17;
+					_p32 = _v18;
+					errors = _v19;
+					continue addDocsCore;
+				}
+			}
+		}
+	});
+var _rluiten$elm_text_search$Index$addDocs = F2(
+	function (docs, index) {
+		return A4(
+			_rluiten$elm_text_search$Index$addDocsCore,
+			0,
+			docs,
+			index,
+			{ctor: '[]'});
+	});
+var _rluiten$elm_text_search$Index$update = F2(
+	function (doc, index) {
+		return A2(
+			_elm_lang$core$Result$andThen,
+			function (u1index) {
+				return A2(_rluiten$elm_text_search$Index$add, doc, index);
+			},
+			A2(_rluiten$elm_text_search$Index$remove, doc, index));
+	});
+var _rluiten$elm_text_search$Index$addOrUpdate = F2(
+	function (doc, index) {
+		var _p38 = A2(_rluiten$elm_text_search$Index$remove, doc, index);
+		if (_p38.ctor === 'Ok') {
+			return A2(_rluiten$elm_text_search$Index$add, doc, _p38._0);
+		} else {
+			var _p39 = _p38._0;
+			return _elm_lang$core$Native_Utils.eq(_p39, _rluiten$elm_text_search$Index$errorMessageNotIndex) ? A2(_rluiten$elm_text_search$Index$add, doc, index) : _elm_lang$core$Result$Err(_p39);
+		}
+	});
+var _rluiten$elm_text_search$Index$newWith = function (_p40) {
+	var _p41 = _p40;
+	return _rluiten$elm_text_search$Index_Model$Index(
+		{indexVersion: _rluiten$elm_text_search$Index_Defaults$indexVersion, indexType: _p41.indexType, ref: _p41.ref, fields: _p41.fields, listFields: _p41.listFields, transformFactories: _p41.transformFactories, filterFactories: _p41.filterFactories, transforms: _elm_lang$core$Maybe$Nothing, filters: _elm_lang$core$Maybe$Nothing, corpusTokens: _elm_lang$core$Set$empty, corpusTokensIndex: _elm_lang$core$Dict$empty, documentStore: _elm_lang$core$Dict$empty, tokenStore: _rluiten$trie$Trie$empty, idfCache: _elm_lang$core$Dict$empty});
+};
+var _rluiten$elm_text_search$Index$new = function (simpleConfig) {
+	return _rluiten$elm_text_search$Index$newWith(
+		_rluiten$elm_text_search$Index_Defaults$getDefaultIndexConfig(simpleConfig));
+};

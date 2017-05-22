@@ -1,0 +1,554 @@
+var _justinmimbs$elm_date_extra$Date_Internal_Format$toUtc = function (date) {
+	return _elm_lang$core$Date$fromTime(
+		_elm_lang$core$Date$toTime(date) - _elm_lang$core$Basics$toFloat(
+			_justinmimbs$elm_date_extra$Date_Internal_Extract$offsetFromUtc(date) * _justinmimbs$elm_date_extra$Date_Extra_Facts$msPerMinute));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$nameForm = function (length) {
+	var _p0 = length;
+	switch (_p0) {
+		case 1:
+			return 'abbreviated';
+		case 2:
+			return 'abbreviated';
+		case 3:
+			return 'abbreviated';
+		case 4:
+			return 'full';
+		case 5:
+			return 'narrow';
+		case 6:
+			return 'short';
+		default:
+			return 'invalid';
+	}
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$patternMatches = _elm_lang$core$Regex$regex('([yYQMwdDEeabhHmsSXx])\\1*|\'(?:[^\']|\'\')*?\'(?!\')');
+var _justinmimbs$elm_date_extra$Date_Internal_Format$formatTimeOffset = F3(
+	function (separator, minutesOptional, offset) {
+		var mm = A3(
+			_elm_lang$core$String$padLeft,
+			2,
+			_elm_lang$core$Native_Utils.chr('0'),
+			_elm_lang$core$Basics$toString(
+				A2(
+					_elm_lang$core$Basics_ops['%'],
+					_elm_lang$core$Basics$abs(offset),
+					60)));
+		var hh = A3(
+			_elm_lang$core$String$padLeft,
+			2,
+			_elm_lang$core$Native_Utils.chr('0'),
+			_elm_lang$core$Basics$toString(
+				(_elm_lang$core$Basics$abs(offset) / 60) | 0));
+		var sign = (_elm_lang$core$Native_Utils.cmp(offset, 0) > -1) ? '+' : '-';
+		return (minutesOptional && _elm_lang$core$Native_Utils.eq(mm, '00')) ? A2(_elm_lang$core$Basics_ops['++'], sign, hh) : A2(
+			_elm_lang$core$Basics_ops['++'],
+			sign,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				hh,
+				A2(_elm_lang$core$Basics_ops['++'], separator, mm)));
+	});
+var _justinmimbs$elm_date_extra$Date_Internal_Format$ordinalSuffix = function (n) {
+	var nn = A2(_elm_lang$core$Basics_ops['%'], n, 100);
+	var _p1 = A2(
+		_elm_lang$core$Basics$min,
+		(_elm_lang$core$Native_Utils.cmp(nn, 20) < 0) ? nn : A2(_elm_lang$core$Basics_ops['%'], nn, 10),
+		4);
+	switch (_p1) {
+		case 0:
+			return 'th';
+		case 1:
+			return 'st';
+		case 2:
+			return 'nd';
+		case 3:
+			return 'rd';
+		case 4:
+			return 'th';
+		default:
+			return '';
+	}
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$withOrdinalSuffix = function (n) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(n),
+		_justinmimbs$elm_date_extra$Date_Internal_Format$ordinalSuffix(n));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$hour12 = function (date) {
+	var _p2 = A2(
+		_elm_lang$core$Basics_ops['%'],
+		_elm_lang$core$Date$hour(date),
+		12);
+	if (_p2 === 0) {
+		return 12;
+	} else {
+		return _p2;
+	}
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$dayOfWeekName = function (d) {
+	var _p3 = d;
+	switch (_p3.ctor) {
+		case 'Mon':
+			return 'Monday';
+		case 'Tue':
+			return 'Tuesday';
+		case 'Wed':
+			return 'Wednesday';
+		case 'Thu':
+			return 'Thursday';
+		case 'Fri':
+			return 'Friday';
+		case 'Sat':
+			return 'Saturday';
+		default:
+			return 'Sunday';
+	}
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$monthName = function (m) {
+	var _p4 = m;
+	switch (_p4.ctor) {
+		case 'Jan':
+			return 'January';
+		case 'Feb':
+			return 'February';
+		case 'Mar':
+			return 'March';
+		case 'Apr':
+			return 'April';
+		case 'May':
+			return 'May';
+		case 'Jun':
+			return 'June';
+		case 'Jul':
+			return 'July';
+		case 'Aug':
+			return 'August';
+		case 'Sep':
+			return 'September';
+		case 'Oct':
+			return 'October';
+		case 'Nov':
+			return 'November';
+		default:
+			return 'December';
+	}
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$PM = {ctor: 'PM'};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$Noon = {ctor: 'Noon'};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$AM = {ctor: 'AM'};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$Midnight = {ctor: 'Midnight'};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$dayPeriod = function (date) {
+	var onTheHour = _elm_lang$core$Native_Utils.eq(
+		_elm_lang$core$Date$minute(date),
+		0) && (_elm_lang$core$Native_Utils.eq(
+		_elm_lang$core$Date$second(date),
+		0) && _elm_lang$core$Native_Utils.eq(
+		_elm_lang$core$Date$millisecond(date),
+		0));
+	var hh = _elm_lang$core$Date$hour(date);
+	return (_elm_lang$core$Native_Utils.eq(hh, 0) && onTheHour) ? _justinmimbs$elm_date_extra$Date_Internal_Format$Midnight : ((_elm_lang$core$Native_Utils.cmp(hh, 12) < 0) ? _justinmimbs$elm_date_extra$Date_Internal_Format$AM : ((_elm_lang$core$Native_Utils.eq(hh, 12) && onTheHour) ? _justinmimbs$elm_date_extra$Date_Internal_Format$Noon : _justinmimbs$elm_date_extra$Date_Internal_Format$PM));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_Format$format = F3(
+	function (asUtc, date, match) {
+		format:
+		while (true) {
+			var length = _elm_lang$core$String$length(match);
+			var $char = A2(_elm_lang$core$String$left, 1, match);
+			var _p5 = $char;
+			switch (_p5) {
+				case 'y':
+					var _p6 = length;
+					if (_p6 === 2) {
+						return A2(
+							_elm_lang$core$String$right,
+							2,
+							A3(
+								_elm_lang$core$String$padLeft,
+								length,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Date$year(date))));
+					} else {
+						return A3(
+							_elm_lang$core$String$padLeft,
+							length,
+							_elm_lang$core$Native_Utils.chr('0'),
+							_elm_lang$core$Basics$toString(
+								_elm_lang$core$Date$year(date)));
+					}
+				case 'Y':
+					var _p7 = length;
+					if (_p7 === 2) {
+						return A2(
+							_elm_lang$core$String$right,
+							2,
+							A3(
+								_elm_lang$core$String$padLeft,
+								length,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_justinmimbs$elm_date_extra$Date_Internal_Extract$weekYear(date))));
+					} else {
+						return A3(
+							_elm_lang$core$String$padLeft,
+							length,
+							_elm_lang$core$Native_Utils.chr('0'),
+							_elm_lang$core$Basics$toString(
+								_justinmimbs$elm_date_extra$Date_Internal_Extract$weekYear(date)));
+					}
+				case 'Q':
+					var _p8 = length;
+					switch (_p8) {
+						case 1:
+							return _elm_lang$core$Basics$toString(
+								_justinmimbs$elm_date_extra$Date_Internal_Extract$quarter(date));
+						case 2:
+							return _elm_lang$core$Basics$toString(
+								_justinmimbs$elm_date_extra$Date_Internal_Extract$quarter(date));
+						case 3:
+							return A2(
+								F2(
+									function (x, y) {
+										return A2(_elm_lang$core$Basics_ops['++'], x, y);
+									}),
+								'Q',
+								_elm_lang$core$Basics$toString(
+									_justinmimbs$elm_date_extra$Date_Internal_Extract$quarter(date)));
+						case 4:
+							return _justinmimbs$elm_date_extra$Date_Internal_Format$withOrdinalSuffix(
+								_justinmimbs$elm_date_extra$Date_Internal_Extract$quarter(date));
+						case 5:
+							return _elm_lang$core$Basics$toString(
+								_justinmimbs$elm_date_extra$Date_Internal_Extract$quarter(date));
+						default:
+							return '';
+					}
+				case 'M':
+					var _p9 = length;
+					switch (_p9) {
+						case 1:
+							return _elm_lang$core$Basics$toString(
+								_justinmimbs$elm_date_extra$Date_Internal_Extract$monthNumber(date));
+						case 2:
+							return A3(
+								_elm_lang$core$String$padLeft,
+								2,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_justinmimbs$elm_date_extra$Date_Internal_Extract$monthNumber(date)));
+						case 3:
+							return A2(
+								_elm_lang$core$String$left,
+								3,
+								_justinmimbs$elm_date_extra$Date_Internal_Format$monthName(
+									_elm_lang$core$Date$month(date)));
+						case 4:
+							return _justinmimbs$elm_date_extra$Date_Internal_Format$monthName(
+								_elm_lang$core$Date$month(date));
+						case 5:
+							return A2(
+								_elm_lang$core$String$left,
+								1,
+								_justinmimbs$elm_date_extra$Date_Internal_Format$monthName(
+									_elm_lang$core$Date$month(date)));
+						default:
+							return '';
+					}
+				case 'w':
+					var _p10 = length;
+					switch (_p10) {
+						case 1:
+							return _elm_lang$core$Basics$toString(
+								_justinmimbs$elm_date_extra$Date_Internal_Extract$weekNumber(date));
+						case 2:
+							return A3(
+								_elm_lang$core$String$padLeft,
+								2,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_justinmimbs$elm_date_extra$Date_Internal_Extract$weekNumber(date)));
+						default:
+							return '';
+					}
+				case 'd':
+					var _p11 = length;
+					switch (_p11) {
+						case 1:
+							return _elm_lang$core$Basics$toString(
+								_elm_lang$core$Date$day(date));
+						case 2:
+							return A3(
+								_elm_lang$core$String$padLeft,
+								2,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Date$day(date)));
+						case 3:
+							return _justinmimbs$elm_date_extra$Date_Internal_Format$withOrdinalSuffix(
+								_elm_lang$core$Date$day(date));
+						default:
+							return '';
+					}
+				case 'D':
+					var _p12 = length;
+					switch (_p12) {
+						case 1:
+							return _elm_lang$core$Basics$toString(
+								_justinmimbs$elm_date_extra$Date_Internal_Extract$ordinalDay(date));
+						case 2:
+							return A3(
+								_elm_lang$core$String$padLeft,
+								2,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_justinmimbs$elm_date_extra$Date_Internal_Extract$ordinalDay(date)));
+						case 3:
+							return A3(
+								_elm_lang$core$String$padLeft,
+								3,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_justinmimbs$elm_date_extra$Date_Internal_Extract$ordinalDay(date)));
+						default:
+							return '';
+					}
+				case 'E':
+					var _p13 = _justinmimbs$elm_date_extra$Date_Internal_Format$nameForm(length);
+					switch (_p13) {
+						case 'abbreviated':
+							return A2(
+								_elm_lang$core$String$left,
+								3,
+								_justinmimbs$elm_date_extra$Date_Internal_Format$dayOfWeekName(
+									_elm_lang$core$Date$dayOfWeek(date)));
+						case 'full':
+							return _justinmimbs$elm_date_extra$Date_Internal_Format$dayOfWeekName(
+								_elm_lang$core$Date$dayOfWeek(date));
+						case 'narrow':
+							return A2(
+								_elm_lang$core$String$left,
+								1,
+								_justinmimbs$elm_date_extra$Date_Internal_Format$dayOfWeekName(
+									_elm_lang$core$Date$dayOfWeek(date)));
+						case 'short':
+							return A2(
+								_elm_lang$core$String$left,
+								2,
+								_justinmimbs$elm_date_extra$Date_Internal_Format$dayOfWeekName(
+									_elm_lang$core$Date$dayOfWeek(date)));
+						default:
+							return '';
+					}
+				case 'e':
+					var _p14 = length;
+					switch (_p14) {
+						case 1:
+							return _elm_lang$core$Basics$toString(
+								_justinmimbs$elm_date_extra$Date_Internal_Extract$weekdayNumber(date));
+						case 2:
+							return _elm_lang$core$Basics$toString(
+								_justinmimbs$elm_date_extra$Date_Internal_Extract$weekdayNumber(date));
+						default:
+							var _v15 = asUtc,
+								_v16 = date,
+								_v17 = _elm_lang$core$String$toUpper(match);
+							asUtc = _v15;
+							date = _v16;
+							match = _v17;
+							continue format;
+					}
+				case 'a':
+					var p = _justinmimbs$elm_date_extra$Date_Internal_Format$dayPeriod(date);
+					var m = (_elm_lang$core$Native_Utils.eq(p, _justinmimbs$elm_date_extra$Date_Internal_Format$Midnight) || _elm_lang$core$Native_Utils.eq(p, _justinmimbs$elm_date_extra$Date_Internal_Format$AM)) ? 'A' : 'P';
+					var _p15 = _justinmimbs$elm_date_extra$Date_Internal_Format$nameForm(length);
+					switch (_p15) {
+						case 'abbreviated':
+							return A2(_elm_lang$core$Basics_ops['++'], m, 'M');
+						case 'full':
+							return A2(_elm_lang$core$Basics_ops['++'], m, '.M.');
+						case 'narrow':
+							return m;
+						default:
+							return '';
+					}
+				case 'b':
+					var _p16 = _justinmimbs$elm_date_extra$Date_Internal_Format$nameForm(length);
+					switch (_p16) {
+						case 'abbreviated':
+							var _p17 = _justinmimbs$elm_date_extra$Date_Internal_Format$dayPeriod(date);
+							switch (_p17.ctor) {
+								case 'Midnight':
+									return 'mid.';
+								case 'AM':
+									return 'am';
+								case 'Noon':
+									return 'noon';
+								default:
+									return 'pm';
+							}
+						case 'full':
+							var _p18 = _justinmimbs$elm_date_extra$Date_Internal_Format$dayPeriod(date);
+							switch (_p18.ctor) {
+								case 'Midnight':
+									return 'midnight';
+								case 'AM':
+									return 'a.m.';
+								case 'Noon':
+									return 'noon';
+								default:
+									return 'p.m.';
+							}
+						case 'narrow':
+							var _p19 = _justinmimbs$elm_date_extra$Date_Internal_Format$dayPeriod(date);
+							switch (_p19.ctor) {
+								case 'Midnight':
+									return 'md';
+								case 'AM':
+									return 'a';
+								case 'Noon':
+									return 'nn';
+								default:
+									return 'p';
+							}
+						default:
+							return '';
+					}
+				case 'h':
+					var _p20 = length;
+					switch (_p20) {
+						case 1:
+							return _elm_lang$core$Basics$toString(
+								_justinmimbs$elm_date_extra$Date_Internal_Format$hour12(date));
+						case 2:
+							return A3(
+								_elm_lang$core$String$padLeft,
+								2,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_justinmimbs$elm_date_extra$Date_Internal_Format$hour12(date)));
+						default:
+							return '';
+					}
+				case 'H':
+					var _p21 = length;
+					switch (_p21) {
+						case 1:
+							return _elm_lang$core$Basics$toString(
+								_elm_lang$core$Date$hour(date));
+						case 2:
+							return A3(
+								_elm_lang$core$String$padLeft,
+								2,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Date$hour(date)));
+						default:
+							return '';
+					}
+				case 'm':
+					var _p22 = length;
+					switch (_p22) {
+						case 1:
+							return _elm_lang$core$Basics$toString(
+								_elm_lang$core$Date$minute(date));
+						case 2:
+							return A3(
+								_elm_lang$core$String$padLeft,
+								2,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Date$minute(date)));
+						default:
+							return '';
+					}
+				case 's':
+					var _p23 = length;
+					switch (_p23) {
+						case 1:
+							return _elm_lang$core$Basics$toString(
+								_elm_lang$core$Date$second(date));
+						case 2:
+							return A3(
+								_elm_lang$core$String$padLeft,
+								2,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Date$second(date)));
+						default:
+							return '';
+					}
+				case 'S':
+					return A3(
+						_elm_lang$core$String$padRight,
+						length,
+						_elm_lang$core$Native_Utils.chr('0'),
+						A2(
+							_elm_lang$core$String$left,
+							length,
+							A3(
+								_elm_lang$core$String$padLeft,
+								3,
+								_elm_lang$core$Native_Utils.chr('0'),
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Date$millisecond(date)))));
+				case 'X':
+					if ((_elm_lang$core$Native_Utils.cmp(length, 4) < 0) && (asUtc || _elm_lang$core$Native_Utils.eq(
+						_justinmimbs$elm_date_extra$Date_Internal_Extract$offsetFromUtc(date),
+						0))) {
+						return 'Z';
+					} else {
+						var _v27 = asUtc,
+							_v28 = date,
+							_v29 = _elm_lang$core$String$toLower(match);
+						asUtc = _v27;
+						date = _v28;
+						match = _v29;
+						continue format;
+					}
+				case 'x':
+					var offset = asUtc ? 0 : _justinmimbs$elm_date_extra$Date_Internal_Extract$offsetFromUtc(date);
+					var _p24 = length;
+					switch (_p24) {
+						case 1:
+							return A3(_justinmimbs$elm_date_extra$Date_Internal_Format$formatTimeOffset, '', true, offset);
+						case 2:
+							return A3(_justinmimbs$elm_date_extra$Date_Internal_Format$formatTimeOffset, '', false, offset);
+						case 3:
+							return A3(_justinmimbs$elm_date_extra$Date_Internal_Format$formatTimeOffset, ':', false, offset);
+						default:
+							return '';
+					}
+				case '\'':
+					return _elm_lang$core$Native_Utils.eq(match, '\'\'') ? '\'' : A4(
+						_elm_lang$core$Regex$replace,
+						_elm_lang$core$Regex$All,
+						_elm_lang$core$Regex$regex('\'\''),
+						function (_p25) {
+							return '\'';
+						},
+						A3(_elm_lang$core$String$slice, 1, -1, match));
+				default:
+					return '';
+			}
+		}
+	});
+var _justinmimbs$elm_date_extra$Date_Internal_Format$toFormattedString = F3(
+	function (asUtc, pattern, date) {
+		var date_ = asUtc ? _justinmimbs$elm_date_extra$Date_Internal_Format$toUtc(date) : date;
+		return A4(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$All,
+			_justinmimbs$elm_date_extra$Date_Internal_Format$patternMatches,
+			function (_p26) {
+				return A3(
+					_justinmimbs$elm_date_extra$Date_Internal_Format$format,
+					asUtc,
+					date_,
+					function (_) {
+						return _.match;
+					}(_p26));
+			},
+			pattern);
+	});

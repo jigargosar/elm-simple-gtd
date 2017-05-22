@@ -1,0 +1,96 @@
+var _jystic$elm_font_awesome$FontAwesome_Internal$fromColor = function (color) {
+	var c = _elm_lang$core$Color$toRgb(color);
+	var r = _elm_lang$core$Basics$toString(c.red);
+	var g = _elm_lang$core$Basics$toString(c.green);
+	var b = _elm_lang$core$Basics$toString(c.blue);
+	var a = _elm_lang$core$Basics$toString(c.alpha);
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'rgba(',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			r,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				',',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					g,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						',',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							b,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								',',
+								A2(_elm_lang$core$Basics_ops['++'], a, ')'))))))));
+};
+var _jystic$elm_font_awesome$FontAwesome_Internal$fromPath = F5(
+	function (color, w, h, _p0, pathStr) {
+		var _p1 = _p0;
+		var viewBoxStr = A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(_p1._0),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				' ',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p1._1),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						' ',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(_p1._2),
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								' ',
+								_elm_lang$core$Basics$toString(_p1._3)))))));
+		var colorStr = _jystic$elm_font_awesome$FontAwesome_Internal$fromColor(color);
+		var heightStr = _elm_lang$core$Basics$toString(h);
+		var widthStr = _elm_lang$core$Basics$toString(w);
+		return A2(
+			_elm_lang$svg$Svg$svg,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$width(widthStr),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$height(heightStr),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$viewBox(viewBoxStr),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$path,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$fill(colorStr),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$d(pathStr),
+							_1: {ctor: '[]'}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _jystic$elm_font_awesome$FontAwesome_Internal$icon = F3(
+	function (path, color, size) {
+		return A5(
+			_jystic$elm_font_awesome$FontAwesome_Internal$fromPath,
+			color,
+			size,
+			size,
+			{ctor: '_Tuple4', _0: 0, _1: 0, _2: 1792, _3: 1792},
+			path);
+	});

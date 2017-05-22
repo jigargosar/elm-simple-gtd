@@ -1,0 +1,10 @@
+var _edvail$elm_polymer$Polymer_App$app = function (name) {
+	return _elm_lang$html$Html$node(
+		A2(_elm_lang$core$Basics_ops['++'], 'app-', name));
+};
+var _edvail$elm_polymer$Polymer_App$drawer = _edvail$elm_polymer$Polymer_App$app('drawer');
+var _edvail$elm_polymer$Polymer_App$drawerLayout = _edvail$elm_polymer$Polymer_App$app('drawer-layout');
+var _edvail$elm_polymer$Polymer_App$header = _edvail$elm_polymer$Polymer_App$app('header');
+var _edvail$elm_polymer$Polymer_App$headerLayout = _edvail$elm_polymer$Polymer_App$app('header-layout');
+var _edvail$elm_polymer$Polymer_App$route = _edvail$elm_polymer$Polymer_App$app('route');
+var _edvail$elm_polymer$Polymer_App$toolbar = _edvail$elm_polymer$Polymer_App$app('toolbar');

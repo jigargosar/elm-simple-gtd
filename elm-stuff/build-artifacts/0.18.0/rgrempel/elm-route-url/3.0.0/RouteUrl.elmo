@@ -1,0 +1,303 @@
+var _rgrempel$elm_route_url$RouteUrl$url2path = function (url) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'/',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(_elm_lang$core$String$join, '/', url.path),
+			(url.hasTrailingSlash && (!_elm_lang$core$List$isEmpty(url.path))) ? '/' : ''));
+};
+var _rgrempel$elm_route_url$RouteUrl$eqUrl = F2(
+	function (u1, u2) {
+		return _elm_lang$core$Native_Utils.eq(u1.path, u2.path) && (_elm_lang$core$Native_Utils.eq(u1.hasTrailingSlash, u2.hasTrailingSlash) && (_elm_lang$core$Native_Utils.eq(u1.hash, u2.hash) && _elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$Dict$toList(u1.query),
+			_elm_lang$core$Dict$toList(u2.query))));
+	});
+var _rgrempel$elm_route_url$RouteUrl$checkDistinctUrl = F2(
+	function (old, $new) {
+		return A2(
+			_rgrempel$elm_route_url$RouteUrl$eqUrl,
+			_sporto$erl$Erl$parse($new.url),
+			old) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just($new);
+	});
+var _rgrempel$elm_route_url$RouteUrl$mapUrl = F2(
+	function (func, c1) {
+		return _elm_lang$core$Native_Utils.update(
+			c1,
+			{
+				url: func(c1.url)
+			});
+	});
+var _rgrempel$elm_route_url$RouteUrl$normalizeUrl = F2(
+	function (old, change) {
+		return A2(
+			_rgrempel$elm_route_url$RouteUrl$mapUrl,
+			A2(_elm_lang$core$String$startsWith, '?', change.url) ? function (url) {
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					_rgrempel$elm_route_url$RouteUrl$url2path(old),
+					url);
+			} : (A2(_elm_lang$core$String$startsWith, '#', change.url) ? function (url) {
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					_rgrempel$elm_route_url$RouteUrl$url2path(old),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_sporto$erl$Erl$queryToString(old),
+						url));
+			} : function (url) {
+				return url;
+			}),
+			change);
+	});
+var _rgrempel$elm_route_url$RouteUrl$urlChange2Cmd = function (change) {
+	return function () {
+		var _p0 = change.entry;
+		if (_p0.ctor === 'NewEntry') {
+			return _elm_lang$navigation$Navigation$newUrl;
+		} else {
+			return _elm_lang$navigation$Navigation$modifyUrl;
+		}
+	}()(change.url);
+};
+var _rgrempel$elm_route_url$RouteUrl$runNavigationAppWithFlags = function (app) {
+	return A2(
+		_elm_lang$navigation$Navigation$programWithFlags,
+		app.locationToMessage,
+		{init: app.init, update: app.update, view: app.view, subscriptions: app.subscriptions});
+};
+var _rgrempel$elm_route_url$RouteUrl$runNavigationApp = function (app) {
+	return A2(
+		_elm_lang$navigation$Navigation$program,
+		app.locationToMessage,
+		{init: app.init, update: app.update, view: app.view, subscriptions: app.subscriptions});
+};
+var _rgrempel$elm_route_url$RouteUrl$unwrapMsg = F3(
+	function (handleLocation, handleUserMsg, wrapped) {
+		var _p1 = wrapped;
+		if (_p1.ctor === 'RouterMsg') {
+			return handleLocation(_p1._0);
+		} else {
+			return handleUserMsg(_p1._0);
+		}
+	});
+var _rgrempel$elm_route_url$RouteUrl$unwrapModel = function (_p2) {
+	var _p3 = _p2;
+	return _p3._0;
+};
+var _rgrempel$elm_route_url$RouteUrl$appWithFlags2Common = function (app) {
+	return {delta2url: app.delta2url, location2messages: app.location2messages, update: app.update, subscriptions: app.subscriptions, view: app.view};
+};
+var _rgrempel$elm_route_url$RouteUrl$app2Common = function (app) {
+	return {delta2url: app.delta2url, location2messages: app.location2messages, update: app.update, subscriptions: app.subscriptions, view: app.view};
+};
+var _rgrempel$elm_route_url$RouteUrl$App = F6(
+	function (a, b, c, d, e, f) {
+		return {delta2url: a, location2messages: b, init: c, update: d, subscriptions: e, view: f};
+	});
+var _rgrempel$elm_route_url$RouteUrl$AppWithFlags = F6(
+	function (a, b, c, d, e, f) {
+		return {delta2url: a, location2messages: b, init: c, update: d, subscriptions: e, view: f};
+	});
+var _rgrempel$elm_route_url$RouteUrl$AppCommon = F5(
+	function (a, b, c, d, e) {
+		return {delta2url: a, location2messages: b, update: c, subscriptions: d, view: e};
+	});
+var _rgrempel$elm_route_url$RouteUrl$UrlChange = F2(
+	function (a, b) {
+		return {entry: a, url: b};
+	});
+var _rgrempel$elm_route_url$RouteUrl$RouterModel = F2(
+	function (a, b) {
+		return {reportedUrl: a, expectedUrlChanges: b};
+	});
+var _rgrempel$elm_route_url$RouteUrl$NavigationApp = F5(
+	function (a, b, c, d, e) {
+		return {locationToMessage: a, init: b, update: c, view: d, subscriptions: e};
+	});
+var _rgrempel$elm_route_url$RouteUrl$NavigationAppWithFlags = F5(
+	function (a, b, c, d, e) {
+		return {locationToMessage: a, init: b, update: c, view: d, subscriptions: e};
+	});
+var _rgrempel$elm_route_url$RouteUrl$ModifyEntry = {ctor: 'ModifyEntry'};
+var _rgrempel$elm_route_url$RouteUrl$NewEntry = {ctor: 'NewEntry'};
+var _rgrempel$elm_route_url$RouteUrl$WrappedModel = F2(
+	function (a, b) {
+		return {ctor: 'WrappedModel', _0: a, _1: b};
+	});
+var _rgrempel$elm_route_url$RouteUrl$mapModel = F2(
+	function (mapper, _p4) {
+		var _p5 = _p4;
+		return A2(
+			_rgrempel$elm_route_url$RouteUrl$WrappedModel,
+			mapper(_p5._0),
+			_p5._1);
+	});
+var _rgrempel$elm_route_url$RouteUrl$UserMsg = function (a) {
+	return {ctor: 'UserMsg', _0: a};
+};
+var _rgrempel$elm_route_url$RouteUrl$wrapUserMsg = _rgrempel$elm_route_url$RouteUrl$UserMsg;
+var _rgrempel$elm_route_url$RouteUrl$view = F2(
+	function (app, _p6) {
+		var _p7 = _p6;
+		return A2(
+			_elm_lang$html$Html$map,
+			_rgrempel$elm_route_url$RouteUrl$UserMsg,
+			app.view(_p7._0));
+	});
+var _rgrempel$elm_route_url$RouteUrl$subscriptions = F2(
+	function (app, _p8) {
+		var _p9 = _p8;
+		return A2(
+			_elm_lang$core$Platform_Sub$map,
+			_rgrempel$elm_route_url$RouteUrl$UserMsg,
+			app.subscriptions(_p9._0));
+	});
+var _rgrempel$elm_route_url$RouteUrl$initWithFlags = F4(
+	function (appInit, app, flags, location) {
+		var routerModel = {
+			expectedUrlChanges: 0,
+			reportedUrl: _sporto$erl$Erl$parse(location.href)
+		};
+		var _p10 = A3(
+			_ccapndave$elm_update_extra$Update_Extra$sequence,
+			app.update,
+			app.location2messages(location),
+			appInit(flags));
+		var userModel = _p10._0;
+		var command = _p10._1;
+		return {
+			ctor: '_Tuple2',
+			_0: A2(_rgrempel$elm_route_url$RouteUrl$WrappedModel, userModel, routerModel),
+			_1: A2(_elm_lang$core$Platform_Cmd$map, _rgrempel$elm_route_url$RouteUrl$UserMsg, command)
+		};
+	});
+var _rgrempel$elm_route_url$RouteUrl$init = F3(
+	function (appInit, app, location) {
+		var routerModel = {
+			expectedUrlChanges: 0,
+			reportedUrl: _sporto$erl$Erl$parse(location.href)
+		};
+		var _p11 = A3(
+			_ccapndave$elm_update_extra$Update_Extra$sequence,
+			app.update,
+			app.location2messages(location),
+			appInit);
+		var userModel = _p11._0;
+		var command = _p11._1;
+		return {
+			ctor: '_Tuple2',
+			_0: A2(_rgrempel$elm_route_url$RouteUrl$WrappedModel, userModel, routerModel),
+			_1: A2(_elm_lang$core$Platform_Cmd$map, _rgrempel$elm_route_url$RouteUrl$UserMsg, command)
+		};
+	});
+var _rgrempel$elm_route_url$RouteUrl$update = F3(
+	function (app, msg, _p12) {
+		var _p13 = _p12;
+		var _p21 = _p13._0;
+		var _p20 = _p13._1;
+		var _p14 = msg;
+		if (_p14.ctor === 'RouterMsg') {
+			var _p16 = _p14._0;
+			var newRouterModel = {
+				reportedUrl: _sporto$erl$Erl$parse(_p16.href),
+				expectedUrlChanges: (_elm_lang$core$Native_Utils.cmp(_p20.expectedUrlChanges, 0) > 0) ? (_p20.expectedUrlChanges - 1) : 0
+			};
+			if (_elm_lang$core$Native_Utils.cmp(_p20.expectedUrlChanges, 0) > 0) {
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_rgrempel$elm_route_url$RouteUrl$WrappedModel, _p21, newRouterModel),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			} else {
+				var _p15 = A3(
+					_ccapndave$elm_update_extra$Update_Extra$sequence,
+					app.update,
+					app.location2messages(_p16),
+					{ctor: '_Tuple2', _0: _p21, _1: _elm_lang$core$Platform_Cmd$none});
+				var newUserModel = _p15._0;
+				var commands = _p15._1;
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_rgrempel$elm_route_url$RouteUrl$WrappedModel, newUserModel, newRouterModel),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _rgrempel$elm_route_url$RouteUrl$UserMsg, commands)
+				};
+			}
+		} else {
+			var _p17 = A2(app.update, _p14._0, _p21);
+			var newUserModel = _p17._0;
+			var userCommand = _p17._1;
+			var maybeUrlChange = A2(
+				_elm_lang$core$Maybe$andThen,
+				_rgrempel$elm_route_url$RouteUrl$checkDistinctUrl(_p20.reportedUrl),
+				A2(
+					_elm_lang$core$Maybe$map,
+					_rgrempel$elm_route_url$RouteUrl$normalizeUrl(_p20.reportedUrl),
+					A2(app.delta2url, _p21, newUserModel)));
+			var _p18 = maybeUrlChange;
+			if (_p18.ctor === 'Just') {
+				var _p19 = _p18._0;
+				return {
+					ctor: '_Tuple2',
+					_0: A2(
+						_rgrempel$elm_route_url$RouteUrl$WrappedModel,
+						newUserModel,
+						{
+							reportedUrl: _sporto$erl$Erl$parse(_p19.url),
+							expectedUrlChanges: _p20.expectedUrlChanges + 1
+						}),
+					_1: A2(
+						_elm_lang$core$Platform_Cmd$map,
+						_rgrempel$elm_route_url$RouteUrl$UserMsg,
+						_elm_lang$core$Platform_Cmd$batch(
+							{
+								ctor: '::',
+								_0: _rgrempel$elm_route_url$RouteUrl$urlChange2Cmd(_p19),
+								_1: {
+									ctor: '::',
+									_0: userCommand,
+									_1: {ctor: '[]'}
+								}
+							}))
+				};
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_rgrempel$elm_route_url$RouteUrl$WrappedModel, newUserModel, _p20),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _rgrempel$elm_route_url$RouteUrl$UserMsg, userCommand)
+				};
+			}
+		}
+	});
+var _rgrempel$elm_route_url$RouteUrl$RouterMsg = function (a) {
+	return {ctor: 'RouterMsg', _0: a};
+};
+var _rgrempel$elm_route_url$RouteUrl$wrapLocation = _rgrempel$elm_route_url$RouteUrl$RouterMsg;
+var _rgrempel$elm_route_url$RouteUrl$navigationApp = function (app) {
+	var common = _rgrempel$elm_route_url$RouteUrl$app2Common(app);
+	return {
+		locationToMessage: _rgrempel$elm_route_url$RouteUrl$RouterMsg,
+		init: A2(_rgrempel$elm_route_url$RouteUrl$init, app.init, common),
+		update: _rgrempel$elm_route_url$RouteUrl$update(common),
+		view: _rgrempel$elm_route_url$RouteUrl$view(common),
+		subscriptions: _rgrempel$elm_route_url$RouteUrl$subscriptions(common)
+	};
+};
+var _rgrempel$elm_route_url$RouteUrl$program = function (_p22) {
+	return _rgrempel$elm_route_url$RouteUrl$runNavigationApp(
+		_rgrempel$elm_route_url$RouteUrl$navigationApp(_p22));
+};
+var _rgrempel$elm_route_url$RouteUrl$navigationAppWithFlags = function (app) {
+	var common = _rgrempel$elm_route_url$RouteUrl$appWithFlags2Common(app);
+	return {
+		locationToMessage: _rgrempel$elm_route_url$RouteUrl$RouterMsg,
+		init: A2(_rgrempel$elm_route_url$RouteUrl$initWithFlags, app.init, common),
+		update: _rgrempel$elm_route_url$RouteUrl$update(common),
+		view: _rgrempel$elm_route_url$RouteUrl$view(common),
+		subscriptions: _rgrempel$elm_route_url$RouteUrl$subscriptions(common)
+	};
+};
+var _rgrempel$elm_route_url$RouteUrl$programWithFlags = function (_p23) {
+	return _rgrempel$elm_route_url$RouteUrl$runNavigationAppWithFlags(
+		_rgrempel$elm_route_url$RouteUrl$navigationAppWithFlags(_p23));
+};

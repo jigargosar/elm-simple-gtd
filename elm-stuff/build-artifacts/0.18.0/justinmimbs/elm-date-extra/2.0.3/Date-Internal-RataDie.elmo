@@ -1,0 +1,115 @@
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$toUnixTime = function (rd) {
+	return (rd - 719163) * _justinmimbs$elm_date_extra$Date_Extra_Facts$msPerDay;
+};
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$weekdayNumber = function (rd) {
+	var _p0 = A2(_elm_lang$core$Basics_ops['%'], rd, 7);
+	if (_p0 === 0) {
+		return 7;
+	} else {
+		return _p0;
+	}
+};
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$leapYearsInCommonEra = function (y) {
+	return (((y / 4) | 0) - ((y / 100) | 0)) + ((y / 400) | 0);
+};
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$rataDieBeforeStartOfYear = function (y) {
+	return (365 * (y - 1)) + _justinmimbs$elm_date_extra$Date_Internal_RataDie$leapYearsInCommonEra(y - 1);
+};
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$fromOrdinalDate = F2(
+	function (y, d) {
+		return _justinmimbs$elm_date_extra$Date_Internal_RataDie$rataDieBeforeStartOfYear(y) + d;
+	});
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$week1Day1OfWeekYear = function (y) {
+	var jan4RD = A2(_justinmimbs$elm_date_extra$Date_Internal_RataDie$fromOrdinalDate, y, 4);
+	return (jan4RD - _justinmimbs$elm_date_extra$Date_Internal_RataDie$weekdayNumber(jan4RD)) + 1;
+};
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$fromWeekDate = F3(
+	function (y, w, d) {
+		var week1Day0RD = _justinmimbs$elm_date_extra$Date_Internal_RataDie$week1Day1OfWeekYear(y) - 1;
+		return (week1Day0RD + ((w - 1) * 7)) + d;
+	});
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$fromCalendarDate = F3(
+	function (y, m, d) {
+		var md = A2(_justinmimbs$elm_date_extra$Date_Extra_Facts$daysBeforeStartOfMonth, y, m);
+		var yd = _justinmimbs$elm_date_extra$Date_Internal_RataDie$rataDieBeforeStartOfYear(y);
+		return (yd + md) + d;
+	});
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$divideInt = F2(
+	function (a, b) {
+		return {
+			ctor: '_Tuple2',
+			_0: (a / b) | 0,
+			_1: A2(_elm_lang$core$Basics$rem, a, b)
+		};
+	});
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$year = function (rd) {
+	var _p1 = A2(_justinmimbs$elm_date_extra$Date_Internal_RataDie$divideInt, rd, 146097);
+	var q400 = _p1._0;
+	var r400 = _p1._1;
+	var _p2 = A2(_justinmimbs$elm_date_extra$Date_Internal_RataDie$divideInt, r400, 36524);
+	var q100 = _p2._0;
+	var r100 = _p2._1;
+	var _p3 = A2(_justinmimbs$elm_date_extra$Date_Internal_RataDie$divideInt, r100, 1461);
+	var q4 = _p3._0;
+	var r4 = _p3._1;
+	var _p4 = A2(_justinmimbs$elm_date_extra$Date_Internal_RataDie$divideInt, r4, 365);
+	var q1 = _p4._0;
+	var r1 = _p4._1;
+	var n = _elm_lang$core$Native_Utils.eq(r1, 0) ? 0 : 1;
+	return ((((q400 * 400) + (q100 * 100)) + (q4 * 4)) + q1) + n;
+};
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$ordinalDay = function (rd) {
+	return rd - _justinmimbs$elm_date_extra$Date_Internal_RataDie$rataDieBeforeStartOfYear(
+		_justinmimbs$elm_date_extra$Date_Internal_RataDie$year(rd));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$weekYear = function (rd) {
+	var daysToThursday = 4 - _justinmimbs$elm_date_extra$Date_Internal_RataDie$weekdayNumber(rd);
+	return _justinmimbs$elm_date_extra$Date_Internal_RataDie$year(rd + daysToThursday);
+};
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$weekNumber = function (rd) {
+	var week1Day1RD = _justinmimbs$elm_date_extra$Date_Internal_RataDie$week1Day1OfWeekYear(
+		_justinmimbs$elm_date_extra$Date_Internal_RataDie$weekYear(rd));
+	return (((rd - week1Day1RD) / 7) | 0) + 1;
+};
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$find = F2(
+	function (pred, list) {
+		find:
+		while (true) {
+			var _p5 = list;
+			if (_p5.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p6 = _p5._0;
+				if (pred(_p6)) {
+					return _elm_lang$core$Maybe$Just(_p6);
+				} else {
+					var _v2 = pred,
+						_v3 = _p5._1;
+					pred = _v2;
+					list = _v3;
+					continue find;
+				}
+			}
+		}
+	});
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$month = function (rd) {
+	var od = _justinmimbs$elm_date_extra$Date_Internal_RataDie$ordinalDay(rd);
+	var y = _justinmimbs$elm_date_extra$Date_Internal_RataDie$year(rd);
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		_elm_lang$core$Date$Jan,
+		A2(
+			_justinmimbs$elm_date_extra$Date_Internal_RataDie$find,
+			function (m) {
+				return _elm_lang$core$Native_Utils.cmp(
+					A2(_justinmimbs$elm_date_extra$Date_Extra_Facts$daysBeforeStartOfMonth, y, m),
+					od) < 0;
+			},
+			_elm_lang$core$List$reverse(_justinmimbs$elm_date_extra$Date_Extra_Facts$months)));
+};
+var _justinmimbs$elm_date_extra$Date_Internal_RataDie$day = function (rd) {
+	var od = _justinmimbs$elm_date_extra$Date_Internal_RataDie$ordinalDay(rd);
+	var m = _justinmimbs$elm_date_extra$Date_Internal_RataDie$month(rd);
+	var y = _justinmimbs$elm_date_extra$Date_Internal_RataDie$year(rd);
+	return od - A2(_justinmimbs$elm_date_extra$Date_Extra_Facts$daysBeforeStartOfMonth, y, m);
+};

@@ -1,0 +1,66 @@
+var _rluiten$sparsevector$SparseVector$dot = F2(
+	function (vec1, vec2) {
+		var common = A2(
+			_elm_lang$core$Set$intersect,
+			_elm_lang$core$Set$fromList(
+				_elm_lang$core$Dict$keys(vec1)),
+			_elm_lang$core$Set$fromList(
+				_elm_lang$core$Dict$keys(vec2)));
+		var d1 = A2(
+			_elm_lang$core$Dict$filter,
+			F2(
+				function (k, v) {
+					return A2(_elm_lang$core$Set$member, k, common);
+				}),
+			vec1);
+		var d2 = A2(
+			_elm_lang$core$Dict$filter,
+			F2(
+				function (k, v) {
+					return A2(_elm_lang$core$Set$member, k, common);
+				}),
+			vec2);
+		return _elm_lang$core$List$sum(
+			A3(
+				_elm_lang$core$List$map2,
+				F2(
+					function (v1, v2) {
+						return v1 * v2;
+					}),
+				_elm_lang$core$Dict$values(d1),
+				_elm_lang$core$Dict$values(d2)));
+	});
+var _rluiten$sparsevector$SparseVector$magnitude = function (svector) {
+	return _elm_lang$core$Basics$sqrt(
+		_elm_lang$core$List$sum(
+			A2(
+				_elm_lang$core$List$map,
+				function (x) {
+					return x * x;
+				},
+				_elm_lang$core$Dict$values(svector))));
+};
+var _rluiten$sparsevector$SparseVector$cosineSimilarity = F2(
+	function (vec1, vec2) {
+		return A2(_rluiten$sparsevector$SparseVector$dot, vec1, vec2) / (_rluiten$sparsevector$SparseVector$magnitude(vec1) * _rluiten$sparsevector$SparseVector$magnitude(vec2));
+	});
+var _rluiten$sparsevector$SparseVector$insert = F3(
+	function (index, value, svector) {
+		return A3(_elm_lang$core$Dict$insert, index, value, svector);
+	});
+var _rluiten$sparsevector$SparseVector$insertList = F2(
+	function (values, svector) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (_p0, svec) {
+					var _p1 = _p0;
+					return A3(_rluiten$sparsevector$SparseVector$insert, _p1._0, _p1._1, svec);
+				}),
+			svector,
+			values);
+	});
+var _rluiten$sparsevector$SparseVector$isEmpty = function (svector) {
+	return _elm_lang$core$Dict$isEmpty(svector);
+};
+var _rluiten$sparsevector$SparseVector$empty = _elm_lang$core$Dict$empty;

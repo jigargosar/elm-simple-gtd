@@ -1,0 +1,103 @@
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_lt_lt$dayOfMonthWithSuffix = F2(
+	function (pad, day) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(day),
+			'.');
+	});
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_lt_lt$monthName = function (month) {
+	var _p0 = month;
+	switch (_p0.ctor) {
+		case 'Jan':
+			return 'Sausio';
+		case 'Feb':
+			return 'Vasario';
+		case 'Mar':
+			return 'Kovo';
+		case 'Apr':
+			return 'Balandžio';
+		case 'May':
+			return 'Gegužės';
+		case 'Jun':
+			return 'Birželio';
+		case 'Jul':
+			return 'Liepos';
+		case 'Aug':
+			return 'Rugpjūčio';
+		case 'Sep':
+			return 'Rugsėjo';
+		case 'Oct':
+			return 'Spalio';
+		case 'Nov':
+			return 'Lapkričio';
+		default:
+			return 'Gruodžio';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_lt_lt$monthShort = function (month) {
+	var _p1 = month;
+	switch (_p1.ctor) {
+		case 'Jan':
+			return 'Sau';
+		case 'Feb':
+			return 'Vas';
+		case 'Mar':
+			return 'Kov';
+		case 'Apr':
+			return 'Bal';
+		case 'May':
+			return 'Geg';
+		case 'Jun':
+			return 'Bir';
+		case 'Jul':
+			return 'Lie';
+		case 'Aug':
+			return 'Rgp';
+		case 'Sep':
+			return 'Rgs';
+		case 'Oct':
+			return 'Spa';
+		case 'Nov':
+			return 'Lap';
+		default:
+			return 'Grd';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_lt_lt$dayName = function (day) {
+	var _p2 = day;
+	switch (_p2.ctor) {
+		case 'Mon':
+			return 'Pirmadienis';
+		case 'Tue':
+			return 'Antradienis';
+		case 'Wed':
+			return 'Trečiadienis';
+		case 'Thu':
+			return 'Ketvirtadienis';
+		case 'Fri':
+			return 'Penktadienis';
+		case 'Sat':
+			return 'Šeštadienis';
+		default:
+			return 'Sekmadienis';
+	}
+};
+var _rluiten$elm_date_extra$Date_Extra_I18n_I_lt_lt$dayShort = function (day) {
+	var _p3 = day;
+	switch (_p3.ctor) {
+		case 'Mon':
+			return 'Pr';
+		case 'Tue':
+			return 'An';
+		case 'Wed':
+			return 'Tr';
+		case 'Thu':
+			return 'Kt';
+		case 'Fri':
+			return 'Pn';
+		case 'Sat':
+			return 'Št';
+		default:
+			return 'Sk';
+	}
+};

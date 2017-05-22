@@ -1,0 +1,42 @@
+var _rluiten$elm_text_search$ElmTextSearch$fromValueWith = _rluiten$elm_text_search$Index_Load$loadIndexValueWith;
+var _rluiten$elm_text_search$ElmTextSearch$fromStringWith = _rluiten$elm_text_search$Index_Load$loadIndexWith;
+var _rluiten$elm_text_search$ElmTextSearch$storeToString = function (index) {
+	return A2(
+		_elm_lang$core$Json_Encode$encode,
+		0,
+		_rluiten$elm_text_search$ElmTextSearch_Json_Encoder$encoder(index));
+};
+var _rluiten$elm_text_search$ElmTextSearch$storeToValue = _rluiten$elm_text_search$ElmTextSearch_Json_Encoder$encoder;
+var _rluiten$elm_text_search$ElmTextSearch$search = _rluiten$elm_text_search$Index$search;
+var _rluiten$elm_text_search$ElmTextSearch$addOrUpdate = _rluiten$elm_text_search$Index$addOrUpdate;
+var _rluiten$elm_text_search$ElmTextSearch$update = _rluiten$elm_text_search$Index$update;
+var _rluiten$elm_text_search$ElmTextSearch$remove = _rluiten$elm_text_search$Index$remove;
+var _rluiten$elm_text_search$ElmTextSearch$addDocs = _rluiten$elm_text_search$Index$addDocs;
+var _rluiten$elm_text_search$ElmTextSearch$add = _rluiten$elm_text_search$Index$add;
+var _rluiten$elm_text_search$ElmTextSearch$newWith = _rluiten$elm_text_search$Index$newWith;
+var _rluiten$elm_text_search$ElmTextSearch$getIndexSimpleConfig = function (_p0) {
+	var _p1 = _p0;
+	return {indexType: _rluiten$elm_text_search$Index_Defaults$elmTextSearchIndexType, ref: _p1.ref, fields: _p1.fields, listFields: _p1.listFields};
+};
+var _rluiten$elm_text_search$ElmTextSearch$new = function (simpleConfig) {
+	return _rluiten$elm_text_search$Index$new(
+		_rluiten$elm_text_search$ElmTextSearch$getIndexSimpleConfig(simpleConfig));
+};
+var _rluiten$elm_text_search$ElmTextSearch$fromString = F2(
+	function (simpleConfig, inputString) {
+		return A2(
+			_rluiten$elm_text_search$Index_Load$loadIndex,
+			_rluiten$elm_text_search$ElmTextSearch$getIndexSimpleConfig(simpleConfig),
+			inputString);
+	});
+var _rluiten$elm_text_search$ElmTextSearch$fromValue = F2(
+	function (simpleConfig, inputValue) {
+		return A2(
+			_rluiten$elm_text_search$Index_Load$loadIndexValue,
+			_rluiten$elm_text_search$ElmTextSearch$getIndexSimpleConfig(simpleConfig),
+			inputValue);
+	});
+var _rluiten$elm_text_search$ElmTextSearch$SimpleConfig = F3(
+	function (a, b, c) {
+		return {ref: a, fields: b, listFields: c};
+	});

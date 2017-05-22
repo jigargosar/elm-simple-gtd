@@ -1,0 +1,266 @@
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$splitByLength_ = F3(
+	function (listOflengths, list, accu) {
+		splitByLength_:
+		while (true) {
+			var _p0 = listOflengths;
+			if (_p0.ctor === '[]') {
+				return _elm_lang$core$List$reverse(accu);
+			} else {
+				var _p2 = _p0._0;
+				var _p1 = list;
+				if (_p1.ctor === '[]') {
+					return _elm_lang$core$List$reverse(accu);
+				} else {
+					var _v2 = _p0._1,
+						_v3 = A2(_elm_lang$core$List$drop, _p2, list),
+						_v4 = {
+						ctor: '::',
+						_0: A2(_elm_lang$core$List$take, _p2, list),
+						_1: accu
+					};
+					listOflengths = _v2;
+					list = _v3;
+					accu = _v4;
+					continue splitByLength_;
+				}
+			}
+		}
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$splitByLength = F2(
+	function (listOflengths, list) {
+		return A3(
+			_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$splitByLength_,
+			listOflengths,
+			list,
+			{ctor: '[]'});
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$foldr = F3(
+	function (f, accu, _p3) {
+		var _p4 = _p3;
+		var treeUnwrap = F2(
+			function (_p5, accu_) {
+				var _p6 = _p5;
+				return A2(
+					f,
+					_p6._0,
+					A3(_elm_lang$core$List$foldr, treeUnwrap, accu_, _p6._1));
+			});
+		return A2(
+			f,
+			_p4._0,
+			A3(_elm_lang$core$List$foldr, treeUnwrap, accu, _p4._1));
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$flatten = function (tree) {
+	return A3(
+		_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$foldr,
+		F2(
+			function (x, y) {
+				return {ctor: '::', _0: x, _1: y};
+			}),
+		{ctor: '[]'},
+		tree);
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$tuplesOfDatumAndFlatChildren = function (_p7) {
+	var _p8 = _p7;
+	var _p9 = _p8._1;
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		{
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: _p8._0,
+				_1: A2(_elm_lang$core$List$concatMap, _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$flatten, _p9)
+			},
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$List$concatMap, _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$tuplesOfDatumAndFlatChildren, _p9));
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$length = function (tree) {
+	return A3(
+		_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$foldr,
+		F2(
+			function (_p10, accu) {
+				return accu + 1;
+			}),
+		0,
+		tree);
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$foldl = F3(
+	function (f, accu, _p11) {
+		var _p12 = _p11;
+		var treeUnwrap = F2(
+			function (_p13, accu_) {
+				var _p14 = _p13;
+				return A3(
+					_elm_lang$core$List$foldl,
+					treeUnwrap,
+					A2(f, _p14._0, accu_),
+					_p14._1);
+			});
+		return A3(
+			_elm_lang$core$List$foldl,
+			treeUnwrap,
+			A2(f, _p12._0, accu),
+			_p12._1);
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$children = function (_p15) {
+	var _p16 = _p15;
+	return _p16._1;
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$datum = function (_p17) {
+	var _p18 = _p17;
+	return _p18._0;
+};
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree = F2(
+	function (a, b) {
+		return {ctor: 'Tree', _0: a, _1: b};
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$insertChild = F2(
+	function (childTree, _p19) {
+		var _p20 = _p19;
+		return A2(
+			_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree,
+			_p20._0,
+			{ctor: '::', _0: childTree, _1: _p20._1});
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$appendChild = F2(
+	function (childTree, _p21) {
+		var _p22 = _p21;
+		return A2(
+			_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree,
+			_p22._0,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_p22._1,
+				{
+					ctor: '::',
+					_0: childTree,
+					_1: {ctor: '[]'}
+				}));
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$map = F2(
+	function (fn, _p23) {
+		var _p24 = _p23;
+		var mappedChildren = A2(
+			_elm_lang$core$List$map,
+			function (child) {
+				return A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$map, fn, child);
+			},
+			_p24._1);
+		var mappedDatum = fn(_p24._0);
+		return A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree, mappedDatum, mappedChildren);
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$mapListOverTree = F3(
+	function (fn, list, _p25) {
+		var _p26 = _p25;
+		var _p29 = _p26._0;
+		var _p28 = _p26._1;
+		var _p27 = list;
+		if (_p27.ctor === '[]') {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			if (_p27._1.ctor === '[]') {
+				var mappedDatum = A2(fn, _p27._0, _p29);
+				return _elm_lang$core$Maybe$Just(
+					A2(
+						_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree,
+						mappedDatum,
+						{ctor: '[]'}));
+			} else {
+				var listGroupedByLengthOfChildren = A2(
+					_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$splitByLength,
+					A2(_elm_lang$core$List$map, _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$length, _p28),
+					_p27._1);
+				var mappedChildren = A2(
+					_elm_lang$core$List$filterMap,
+					_elm_lang$core$Basics$identity,
+					A3(
+						_elm_lang$core$List$map2,
+						F2(
+							function (l, child) {
+								return A3(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$mapListOverTree, fn, l, child);
+							}),
+						listGroupedByLengthOfChildren,
+						_p28));
+				var mappedDatum = A2(fn, _p27._0, _p29);
+				return _elm_lang$core$Maybe$Just(
+					A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree, mappedDatum, mappedChildren));
+			}
+		}
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$indexedMap = F2(
+	function (f, tree) {
+		return A3(
+			_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$mapListOverTree,
+			f,
+			A2(
+				_elm_lang$core$List$range,
+				0,
+				_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$length(tree) - 1),
+			tree);
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$filter = F2(
+	function (predicate, _p30) {
+		var _p31 = _p30;
+		var _p32 = _p31._0;
+		return predicate(_p32) ? _elm_lang$core$Maybe$Just(
+			A2(
+				_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree,
+				_p32,
+				A2(
+					_elm_lang$core$List$filterMap,
+					_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$filter(predicate),
+					_p31._1))) : _elm_lang$core$Maybe$Nothing;
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$filterWithChildPrecedence = F2(
+	function (predicate, _p33) {
+		var _p34 = _p33;
+		var _p36 = _p34._0;
+		var _p35 = A2(
+			_elm_lang$core$List$filterMap,
+			_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$filterWithChildPrecedence(predicate),
+			_p34._1);
+		if (_p35.ctor === '[]') {
+			return predicate(_p36) ? _elm_lang$core$Maybe$Just(
+				A2(
+					_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree,
+					_p36,
+					{ctor: '[]'})) : _elm_lang$core$Maybe$Nothing;
+		} else {
+			return _elm_lang$core$Maybe$Just(
+				A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree, _p36, _p35));
+		}
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$sortBy = F2(
+	function (fn, _p37) {
+		var _p38 = _p37;
+		var sortedChildren = A2(
+			_elm_lang$core$List$map,
+			_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$sortBy(fn),
+			A2(
+				_elm_lang$core$List$sortBy,
+				function (_p39) {
+					var _p40 = _p39;
+					return fn(_p40._0);
+				},
+				_p38._1));
+		return A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree, _p38._0, sortedChildren);
+	});
+var _tomjkidd$elm_multiway_tree_zipper$MultiwayTree$sortWith = F2(
+	function (comperator, _p41) {
+		var _p42 = _p41;
+		var sortedChildren = A2(
+			_elm_lang$core$List$map,
+			_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$sortWith(comperator),
+			A2(
+				_elm_lang$core$List$sortWith,
+				F2(
+					function (_p44, _p43) {
+						var _p45 = _p44;
+						var _p46 = _p43;
+						return A2(comperator, _p45._0, _p46._0);
+					}),
+				_p42._1));
+		return A2(_tomjkidd$elm_multiway_tree_zipper$MultiwayTree$Tree, _p42._0, sortedChildren);
+	});

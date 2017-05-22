@@ -1,0 +1,150 @@
+var _rluiten$elm_text_search$Index_Vector$updateDocVector = F3(
+	function (docRef, token, _p0) {
+		var _p1 = _p0;
+		var _p3 = _p1._0._0;
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			_p1,
+			A2(
+				_elm_lang$core$Maybe$andThen,
+				function (pos) {
+					return A2(
+						_elm_lang$core$Maybe$andThen,
+						function (refs) {
+							return A2(
+								_elm_lang$core$Maybe$andThen,
+								function (tf) {
+									var _p2 = A2(_rluiten$elm_text_search$Index_Utils$idf, _p1._0, token);
+									var u1index = _p2._0;
+									var idfScore = _p2._1;
+									return _elm_lang$core$Maybe$Just(
+										{
+											ctor: '_Tuple2',
+											_0: u1index,
+											_1: A3(_rluiten$sparsevector$SparseVector$insert, pos, tf * idfScore, _p1._1)
+										});
+								},
+								A2(_elm_lang$core$Dict$get, docRef, refs));
+						},
+						A2(_rluiten$trie$Trie$get, token, _p3.tokenStore));
+				},
+				A2(_elm_lang$core$Dict$get, token, _p3.corpusTokensIndex)));
+	});
+var _rluiten$elm_text_search$Index_Vector$getDocVector = F2(
+	function (_p4, docRef) {
+		var _p5 = _p4;
+		var _p6 = _p5;
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			{ctor: '_Tuple2', _0: _p6, _1: _rluiten$sparsevector$SparseVector$empty},
+			A2(
+				_elm_lang$core$Maybe$map,
+				function (tokenSet) {
+					return A3(
+						_elm_lang$core$List$foldr,
+						_rluiten$elm_text_search$Index_Vector$updateDocVector(docRef),
+						{ctor: '_Tuple2', _0: _p6, _1: _rluiten$sparsevector$SparseVector$empty},
+						_elm_lang$core$Set$toList(tokenSet));
+				},
+				A2(_elm_lang$core$Dict$get, docRef, _p5._0.documentStore)));
+	});
+var _rluiten$elm_text_search$Index_Vector$scoreAndCompare = F3(
+	function (queryVector, ref, _p7) {
+		var _p8 = _p7;
+		var _p9 = A2(_rluiten$elm_text_search$Index_Vector$getDocVector, _p8._0, ref);
+		var u1index = _p9._0;
+		var docVector = _p9._1;
+		return {
+			ctor: '_Tuple2',
+			_0: u1index,
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple2',
+					_0: ref,
+					_1: A2(_rluiten$sparsevector$SparseVector$cosineSimilarity, queryVector, docVector)
+				},
+				_1: _p8._1
+			}
+		};
+	});
+var _rluiten$elm_text_search$Index_Vector$similarityBoost = F2(
+	function (token, expandedToken) {
+		return _elm_lang$core$Native_Utils.eq(expandedToken, token) ? 1 : (1 / A2(
+			_elm_lang$core$Basics$logBase,
+			10,
+			_elm_lang$core$Basics$toFloat(
+				A2(
+					_elm_lang$core$Basics$max,
+					3,
+					_elm_lang$core$String$length(expandedToken) - _elm_lang$core$String$length(token)))));
+	});
+var _rluiten$elm_text_search$Index_Vector$updateSetAndVec = F4(
+	function (tf, token, expandedToken, _p10) {
+		var _p11 = _p10;
+		var _p13 = _p11._1;
+		var _p12 = A2(_rluiten$elm_text_search$Index_Utils$idf, _p11._2, expandedToken);
+		var u1index = _p12._0;
+		var u1irec = _p12._0._0;
+		var keyIdf = _p12._1;
+		var tfidf = (tf * keyIdf) * A2(_rluiten$elm_text_search$Index_Vector$similarityBoost, token, expandedToken);
+		var u1vec = A2(
+			_elm_lang$core$Maybe$withDefault,
+			_p13,
+			A2(
+				_elm_lang$core$Maybe$map,
+				function (pos) {
+					return A3(_rluiten$sparsevector$SparseVector$insert, pos, tfidf, _p13);
+				},
+				A2(_elm_lang$core$Dict$get, expandedToken, _p11._2._0.corpusTokensIndex)));
+		var expandedTokenDocSet = A2(
+			_elm_lang$core$Maybe$withDefault,
+			_elm_lang$core$Set$empty,
+			A2(
+				_elm_lang$core$Maybe$map,
+				function (dict) {
+					return _elm_lang$core$Set$fromList(
+						_elm_lang$core$Dict$keys(dict));
+				},
+				A2(_rluiten$trie$Trie$get, expandedToken, u1irec.tokenStore)));
+		var u1docSets = A2(_elm_lang$core$Set$union, expandedTokenDocSet, _p11._0);
+		return {ctor: '_Tuple3', _0: u1docSets, _1: u1vec, _2: u1index};
+	});
+var _rluiten$elm_text_search$Index_Vector$buildDocVector = F4(
+	function (tokensLength, fieldBoosts, baseToken, _p14) {
+		var _p15 = _p14;
+		var _p17 = _p15._2._0;
+		var expandedTokens = A2(_rluiten$trie$Trie$expand, baseToken, _p17.tokenStore);
+		var termFrequency = ((1 / _elm_lang$core$Basics$toFloat(tokensLength)) * _elm_lang$core$Basics$toFloat(
+			_elm_lang$core$List$length(_p17.fields))) * fieldBoosts;
+		var _p16 = A3(
+			_elm_lang$core$List$foldr,
+			A2(_rluiten$elm_text_search$Index_Vector$updateSetAndVec, termFrequency, baseToken),
+			{ctor: '_Tuple3', _0: _elm_lang$core$Set$empty, _1: _p15._1, _2: _p15._2},
+			expandedTokens);
+		var docs = _p16._0;
+		var vecU1 = _p16._1;
+		var indexU1 = _p16._2;
+		return {
+			ctor: '_Tuple3',
+			_0: {ctor: '::', _0: docs, _1: _p15._0},
+			_1: vecU1,
+			_2: indexU1
+		};
+	});
+var _rluiten$elm_text_search$Index_Vector$getQueryVector = F3(
+	function (fieldBoosts, tokens, index) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			A2(
+				_rluiten$elm_text_search$Index_Vector$buildDocVector,
+				_elm_lang$core$List$length(tokens),
+				fieldBoosts),
+			{
+				ctor: '_Tuple3',
+				_0: {ctor: '[]'},
+				_1: _rluiten$sparsevector$SparseVector$empty,
+				_2: index
+			},
+			tokens);
+	});

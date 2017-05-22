@@ -1,0 +1,183 @@
+var _elm_community$html_extra$Html_Events_Extra$onEnter = function (onEnterAction) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'keyup',
+		A2(
+			_elm_lang$core$Json_Decode$andThen,
+			function (keyCode) {
+				return _elm_lang$core$Native_Utils.eq(keyCode, 13) ? _elm_lang$core$Json_Decode$succeed(onEnterAction) : _elm_lang$core$Json_Decode$fail(
+					_elm_lang$core$Basics$toString(keyCode));
+			},
+			_elm_lang$html$Html_Events$keyCode));
+};
+var _elm_community$html_extra$Html_Events_Extra$onClickPreventDefaultAndStopPropagation = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'click',
+		_elm_lang$core$Native_Utils.update(
+			_elm_lang$html$Html_Events$defaultOptions,
+			{stopPropagation: true, preventDefault: true}),
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'click',
+		_elm_lang$core$Native_Utils.update(
+			_elm_lang$html$Html_Events$defaultOptions,
+			{stopPropagation: true}),
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_community$html_extra$Html_Events_Extra$onClickPreventDefault = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'click',
+		_elm_lang$core$Native_Utils.update(
+			_elm_lang$html$Html_Events$defaultOptions,
+			{preventDefault: true}),
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_community$html_extra$Html_Events_Extra$targetSelectedIndex = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'selectedIndex',
+			_1: {ctor: '[]'}
+		}
+	},
+	A2(
+		_elm_lang$core$Json_Decode$map,
+		function ($int) {
+			return _elm_lang$core$Native_Utils.eq($int, -1) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just($int);
+		},
+		_elm_lang$core$Json_Decode$int));
+var _elm_community$html_extra$Html_Events_Extra$targetValueInt = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'valueAsNumber',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$int);
+var _elm_community$html_extra$Html_Events_Extra$customDecoder = F2(
+	function (d, f) {
+		var resultDecoder = function (x) {
+			var _p0 = x;
+			if (_p0.ctor === 'Ok') {
+				return _elm_lang$core$Json_Decode$succeed(_p0._0);
+			} else {
+				return _elm_lang$core$Json_Decode$fail(_p0._0);
+			}
+		};
+		return A2(
+			_elm_lang$core$Json_Decode$andThen,
+			resultDecoder,
+			A2(_elm_lang$core$Json_Decode$map, f, d));
+	});
+var _elm_community$html_extra$Html_Events_Extra$targetValueFloat = A2(
+	_elm_community$html_extra$Html_Events_Extra$customDecoder,
+	A2(
+		_elm_lang$core$Json_Decode$at,
+		{
+			ctor: '::',
+			_0: 'target',
+			_1: {
+				ctor: '::',
+				_0: 'valueAsNumber',
+				_1: {ctor: '[]'}
+			}
+		},
+		_elm_lang$core$Json_Decode$float),
+	function (v) {
+		return _elm_lang$core$Basics$isNaN(v) ? _elm_lang$core$Result$Err('Not a number') : _elm_lang$core$Result$Ok(v);
+	});
+var _elm_community$html_extra$Html_Events_Extra$targetValueMaybe = A2(
+	_elm_community$html_extra$Html_Events_Extra$customDecoder,
+	_elm_lang$html$Html_Events$targetValue,
+	function (s) {
+		return _elm_lang$core$Result$Ok(
+			_elm_lang$core$Native_Utils.eq(s, '') ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(s));
+	});
+var _elm_community$html_extra$Html_Events_Extra$targetValueMaybeFloat = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	function (mval) {
+		var _p1 = mval;
+		if (_p1.ctor === 'Nothing') {
+			return _elm_lang$core$Json_Decode$succeed(_elm_lang$core$Maybe$Nothing);
+		} else {
+			return A2(_elm_lang$core$Json_Decode$map, _elm_lang$core$Maybe$Just, _elm_community$html_extra$Html_Events_Extra$targetValueFloat);
+		}
+	},
+	_elm_community$html_extra$Html_Events_Extra$targetValueMaybe);
+var _elm_community$html_extra$Html_Events_Extra$targetValueMaybeInt = function () {
+	var traverse = F2(
+		function (f, mx) {
+			var _p2 = mx;
+			if (_p2.ctor === 'Nothing') {
+				return _elm_lang$core$Result$Ok(_elm_lang$core$Maybe$Nothing);
+			} else {
+				return A2(
+					_elm_lang$core$Result$map,
+					_elm_lang$core$Maybe$Just,
+					f(_p2._0));
+			}
+		});
+	return A2(
+		_elm_community$html_extra$Html_Events_Extra$customDecoder,
+		_elm_community$html_extra$Html_Events_Extra$targetValueMaybe,
+		traverse(_elm_lang$core$String$toInt));
+}();
+var _elm_community$html_extra$Html_Events_Extra$targetValueFloatParse = A2(_elm_community$html_extra$Html_Events_Extra$customDecoder, _elm_lang$html$Html_Events$targetValue, _elm_lang$core$String$toFloat);
+var _elm_community$html_extra$Html_Events_Extra$targetValueIntParse = A2(_elm_community$html_extra$Html_Events_Extra$customDecoder, _elm_lang$html$Html_Events$targetValue, _elm_lang$core$String$toInt);
+var _elm_community$html_extra$Html_Events_Extra$targetValueMaybeFloatParse = function () {
+	var traverse = F2(
+		function (f, mx) {
+			var _p3 = mx;
+			if (_p3.ctor === 'Nothing') {
+				return _elm_lang$core$Result$Ok(_elm_lang$core$Maybe$Nothing);
+			} else {
+				return A2(
+					_elm_lang$core$Result$map,
+					_elm_lang$core$Maybe$Just,
+					f(_p3._0));
+			}
+		});
+	return A2(
+		_elm_community$html_extra$Html_Events_Extra$customDecoder,
+		_elm_community$html_extra$Html_Events_Extra$targetValueMaybe,
+		traverse(_elm_lang$core$String$toFloat));
+}();
+var _elm_community$html_extra$Html_Events_Extra$targetValueMaybeIntParse = function () {
+	var traverse = F2(
+		function (f, mx) {
+			var _p4 = mx;
+			if (_p4.ctor === 'Nothing') {
+				return _elm_lang$core$Result$Ok(_elm_lang$core$Maybe$Nothing);
+			} else {
+				return A2(
+					_elm_lang$core$Result$map,
+					_elm_lang$core$Maybe$Just,
+					f(_p4._0));
+			}
+		});
+	return A2(
+		_elm_community$html_extra$Html_Events_Extra$customDecoder,
+		_elm_community$html_extra$Html_Events_Extra$targetValueMaybe,
+		traverse(_elm_lang$core$String$toInt));
+}();
+var _elm_community$html_extra$Html_Events_Extra$charCode = A2(
+	_elm_lang$core$Json_Decode$map,
+	function (_p5) {
+		return A2(
+			_elm_lang$core$Maybe$map,
+			_elm_lang$core$Tuple$first,
+			_elm_lang$core$String$uncons(_p5));
+	},
+	A2(_elm_lang$core$Json_Decode$field, 'charCode', _elm_lang$core$Json_Decode$string));

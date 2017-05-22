@@ -1,0 +1,124 @@
+var _Fresheyeball$elm_tuple_extra$Tuple3$toList = function (_p0) {
+	var _p1 = _p0;
+	return {
+		ctor: '::',
+		_0: _p1._0,
+		_1: {
+			ctor: '::',
+			_0: _p1._1,
+			_1: {
+				ctor: '::',
+				_0: _p1._2,
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+};
+var _Fresheyeball$elm_tuple_extra$Tuple3$swirll = function (_p2) {
+	var _p3 = _p2;
+	return {ctor: '_Tuple3', _0: _p3._2, _1: _p3._0, _2: _p3._1};
+};
+var _Fresheyeball$elm_tuple_extra$Tuple3$swirlr = function (_p4) {
+	var _p5 = _p4;
+	return {ctor: '_Tuple3', _0: _p5._1, _1: _p5._2, _2: _p5._0};
+};
+var _Fresheyeball$elm_tuple_extra$Tuple3$sortWith = F2(
+	function (cmp, _p6) {
+		var _p7 = _p6;
+		var _p9 = _p7._2;
+		var _p8 = A2(
+			_Fresheyeball$elm_tuple_extra$Tuple2$sortWith,
+			cmp,
+			{ctor: '_Tuple2', _0: _p7._0, _1: _p7._1});
+		var a_ = _p8._0;
+		var b_ = _p8._1;
+		var goesBefore = F2(
+			function (x, y) {
+				return !_elm_lang$core$Native_Utils.eq(
+					A2(cmp, x, y),
+					_elm_lang$core$Basics$GT);
+			});
+		return A2(goesBefore, _p9, a_) ? {ctor: '_Tuple3', _0: _p9, _1: a_, _2: b_} : (A2(goesBefore, _p9, b_) ? {ctor: '_Tuple3', _0: a_, _1: _p9, _2: b_} : {ctor: '_Tuple3', _0: a_, _1: b_, _2: _p9});
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple3$sortBy = function (conv) {
+	return _Fresheyeball$elm_tuple_extra$Tuple3$sortWith(
+		F2(
+			function (x, y) {
+				return A2(
+					_elm_lang$core$Basics$compare,
+					conv(x),
+					conv(y));
+			}));
+};
+var _Fresheyeball$elm_tuple_extra$Tuple3$sort = _Fresheyeball$elm_tuple_extra$Tuple3$sortWith(_elm_lang$core$Basics$compare);
+var _Fresheyeball$elm_tuple_extra$Tuple3$mapAll = F2(
+	function (f, _p10) {
+		var _p11 = _p10;
+		return {
+			ctor: '_Tuple3',
+			_0: f(_p11._0),
+			_1: f(_p11._1),
+			_2: f(_p11._2)
+		};
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple3$mapEach = F4(
+	function (f, f_, f__, _p12) {
+		var _p13 = _p12;
+		return {
+			ctor: '_Tuple3',
+			_0: f(_p13._0),
+			_1: f_(_p13._1),
+			_2: f__(_p13._2)
+		};
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple3$mapThird = F2(
+	function (f, _p14) {
+		var _p15 = _p14;
+		return {
+			ctor: '_Tuple3',
+			_0: _p15._0,
+			_1: _p15._1,
+			_2: f(_p15._2)
+		};
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple3$map = _Fresheyeball$elm_tuple_extra$Tuple3$mapThird;
+var _Fresheyeball$elm_tuple_extra$Tuple3$mapSecond = F2(
+	function (f, _p16) {
+		var _p17 = _p16;
+		return {
+			ctor: '_Tuple3',
+			_0: _p17._0,
+			_1: f(_p17._1),
+			_2: _p17._2
+		};
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple3$mapFirst = F2(
+	function (f, _p18) {
+		var _p19 = _p18;
+		return {
+			ctor: '_Tuple3',
+			_0: f(_p19._0),
+			_1: _p19._1,
+			_2: _p19._2
+		};
+	});
+var _Fresheyeball$elm_tuple_extra$Tuple3$init = function (_p20) {
+	var _p21 = _p20;
+	return {ctor: '_Tuple2', _0: _p21._0, _1: _p21._1};
+};
+var _Fresheyeball$elm_tuple_extra$Tuple3$tail = function (_p22) {
+	var _p23 = _p22;
+	return {ctor: '_Tuple2', _0: _p23._1, _1: _p23._2};
+};
+var _Fresheyeball$elm_tuple_extra$Tuple3$third = function (_p24) {
+	var _p25 = _p24;
+	return _p25._2;
+};
+var _Fresheyeball$elm_tuple_extra$Tuple3$second = function (_p26) {
+	var _p27 = _p26;
+	return _p27._1;
+};
+var _Fresheyeball$elm_tuple_extra$Tuple3$first = function (_p28) {
+	var _p29 = _p28;
+	return _p29._0;
+};

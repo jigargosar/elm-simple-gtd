@@ -1,0 +1,120 @@
+var _gampleman$elm_visualization$Visualization_List$extentWith = F2(
+	function (fn, list) {
+		var max = F2(
+			function (a, b) {
+				return (_elm_lang$core$Native_Utils.cmp(
+					fn(a),
+					fn(b)) > 0) ? a : b;
+			});
+		var min = F2(
+			function (a, b) {
+				return (_elm_lang$core$Native_Utils.cmp(
+					fn(a),
+					fn(b)) < 0) ? a : b;
+			});
+		var helper = F2(
+			function (list, _p0) {
+				helper:
+				while (true) {
+					var _p1 = _p0;
+					var _p5 = _p1._0;
+					var _p4 = _p1._1;
+					var _p2 = list;
+					if (_p2.ctor === '[]') {
+						return {ctor: '_Tuple2', _0: _p5, _1: _p4};
+					} else {
+						var _p3 = _p2._0;
+						var _v2 = _p2._1,
+							_v3 = {
+							ctor: '_Tuple2',
+							_0: A2(min, _p5, _p3),
+							_1: A2(max, _p4, _p3)
+						};
+						list = _v2;
+						_p0 = _v3;
+						continue helper;
+					}
+				}
+			});
+		var _p6 = list;
+		if (_p6.ctor === '[]') {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			var _p7 = _p6._0;
+			return _elm_lang$core$Maybe$Just(
+				A2(
+					helper,
+					_p6._1,
+					{ctor: '_Tuple2', _0: _p7, _1: _p7}));
+		}
+	});
+var _gampleman$elm_visualization$Visualization_List$extent = _gampleman$elm_visualization$Visualization_List$extentWith(_elm_lang$core$Basics$identity);
+var _gampleman$elm_visualization$Visualization_List$tickStep = F3(
+	function (start, stop, count) {
+		var step0 = _elm_lang$core$Basics$abs(stop - start) / A2(
+			_elm_lang$core$Basics$max,
+			0,
+			_elm_lang$core$Basics$toFloat(count));
+		var step1 = _elm_lang$core$Basics$toFloat(
+			Math.pow(
+				10,
+				_elm_lang$core$Basics$floor(
+					A2(_elm_lang$core$Basics$logBase, _elm_lang$core$Basics$e, step0) / A2(_elm_lang$core$Basics$logBase, _elm_lang$core$Basics$e, 10))));
+		var error = step0 / step1;
+		var step2 = (_elm_lang$core$Native_Utils.cmp(
+			error,
+			_elm_lang$core$Basics$sqrt(50)) > -1) ? (step1 * 10) : ((_elm_lang$core$Native_Utils.cmp(
+			error,
+			_elm_lang$core$Basics$sqrt(10)) > -1) ? (step1 * 5) : ((_elm_lang$core$Native_Utils.cmp(
+			error,
+			_elm_lang$core$Basics$sqrt(2)) > -1) ? (step1 * 2) : step1));
+		return (_elm_lang$core$Native_Utils.cmp(stop, start) < 0) ? (0 - step2) : step2;
+	});
+var _gampleman$elm_visualization$Visualization_List$range = F3(
+	function (start, stop, step) {
+		var helper = F2(
+			function (s, list) {
+				helper:
+				while (true) {
+					var gt = function (n) {
+						return _elm_lang$core$Native_Utils.cmp(n, 0) > 0;
+					};
+					if (gt((s + step) - stop)) {
+						return A2(
+							_elm_lang$core$Basics_ops['++'],
+							list,
+							{
+								ctor: '::',
+								_0: s,
+								_1: {ctor: '[]'}
+							});
+					} else {
+						var _v5 = s + step,
+							_v6 = A2(
+							_elm_lang$core$Basics_ops['++'],
+							list,
+							{
+								ctor: '::',
+								_0: s,
+								_1: {ctor: '[]'}
+							});
+						s = _v5;
+						list = _v6;
+						continue helper;
+					}
+				}
+			});
+		return A2(
+			helper,
+			start,
+			{ctor: '[]'});
+	});
+var _gampleman$elm_visualization$Visualization_List$ticks = F3(
+	function (start, stop, count) {
+		var step = A3(_gampleman$elm_visualization$Visualization_List$tickStep, start, stop, count);
+		var beg = _elm_lang$core$Basics$toFloat(
+			_elm_lang$core$Basics$ceiling(start / step)) * step;
+		var end = (_elm_lang$core$Basics$toFloat(
+			_elm_lang$core$Basics$floor(stop / step)) * step) + (step / 2);
+		return A3(_gampleman$elm_visualization$Visualization_List$range, beg, end, step);
+	});

@@ -1,0 +1,72 @@
+var _ccapndave$elm_update_extra$Update_Extra$identity = function (model) {
+	return A2(
+		_elm_lang$core$Platform_Cmd_ops['!'],
+		model,
+		{ctor: '[]'});
+};
+var _ccapndave$elm_update_extra$Update_Extra$mapCmd = F2(
+	function (tagger, _p0) {
+		var _p1 = _p0;
+		return {
+			ctor: '_Tuple2',
+			_0: _p1._0,
+			_1: A2(_elm_lang$core$Platform_Cmd$map, tagger, _p1._1)
+		};
+	});
+var _ccapndave$elm_update_extra$Update_Extra$addCmd = F2(
+	function (cmd_, _p2) {
+		var _p3 = _p2;
+		return {
+			ctor: '_Tuple2',
+			_0: _p3._0,
+			_1: _elm_lang$core$Platform_Cmd$batch(
+				{
+					ctor: '::',
+					_0: _p3._1,
+					_1: {
+						ctor: '::',
+						_0: cmd_,
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	});
+var _ccapndave$elm_update_extra$Update_Extra$updateModel = F2(
+	function (f, _p4) {
+		var _p5 = _p4;
+		return {
+			ctor: '_Tuple2',
+			_0: f(_p5._0),
+			_1: _p5._1
+		};
+	});
+var _ccapndave$elm_update_extra$Update_Extra$filter = F2(
+	function (pred, f) {
+		return pred ? f : _elm_lang$core$Basics$identity;
+	});
+var _ccapndave$elm_update_extra$Update_Extra$andThen = F3(
+	function (update, msg, _p6) {
+		var _p7 = _p6;
+		var _p8 = A2(update, msg, _p7._0);
+		var model_ = _p8._0;
+		var cmd_ = _p8._1;
+		return {
+			ctor: '_Tuple2',
+			_0: model_,
+			_1: _elm_lang$core$Platform_Cmd$batch(
+				{
+					ctor: '::',
+					_0: _p7._1,
+					_1: {
+						ctor: '::',
+						_0: cmd_,
+						_1: {ctor: '[]'}
+					}
+				})
+		};
+	});
+var _ccapndave$elm_update_extra$Update_Extra$sequence = F3(
+	function (update, msgs, init) {
+		var foldUpdate = _ccapndave$elm_update_extra$Update_Extra$andThen(update);
+		return A3(_elm_lang$core$List$foldl, foldUpdate, init, msgs);
+	});

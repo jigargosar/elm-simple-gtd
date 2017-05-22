@@ -1,0 +1,26 @@
+var _ohanhi$keyboard_extra$Keyboard_Arrows$boolToInt = function (bool) {
+	return bool ? 1 : 0;
+};
+var _ohanhi$keyboard_extra$Keyboard_Arrows$determineArrows = function (keys) {
+	var toInt = function (key) {
+		return _ohanhi$keyboard_extra$Keyboard_Arrows$boolToInt(
+			A2(_elm_lang$core$List$member, key, keys));
+	};
+	var x = toInt(39) - toInt(37);
+	var y = toInt(38) - toInt(40);
+	return {x: x, y: y};
+};
+var _ohanhi$keyboard_extra$Keyboard_Arrows$determineWasd = function (keys) {
+	var toInt = function (key) {
+		return _ohanhi$keyboard_extra$Keyboard_Arrows$boolToInt(
+			A2(_elm_lang$core$List$member, key, keys));
+	};
+	var x = toInt(68) - toInt(65);
+	var y = toInt(87) - toInt(83);
+	return {x: x, y: y};
+};
+var _ohanhi$keyboard_extra$Keyboard_Arrows$init = {x: 0, y: 0};
+var _ohanhi$keyboard_extra$Keyboard_Arrows$Arrows = F2(
+	function (a, b) {
+		return {x: a, y: b};
+	});

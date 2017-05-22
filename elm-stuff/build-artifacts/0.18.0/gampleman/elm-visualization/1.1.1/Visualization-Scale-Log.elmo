@@ -1,0 +1,141 @@
+var _gampleman$elm_visualization$Visualization_Scale_Log$nice = F3(
+	function (base, _p1, _p0) {
+		var _p2 = _p1;
+		var c = function (_p3) {
+			return function (a) {
+				return Math.pow(a, base);
+			}(
+				_elm_lang$core$Basics$toFloat(
+					_elm_lang$core$Basics$ceiling(
+						A2(_elm_lang$core$Basics$logBase, base, _p3))));
+		};
+		var f = function (_p4) {
+			return function (a) {
+				return Math.pow(a, base);
+			}(
+				_elm_lang$core$Basics$toFloat(
+					_elm_lang$core$Basics$floor(
+						A2(_elm_lang$core$Basics$logBase, base, _p4))));
+		};
+		return {
+			ctor: '_Tuple2',
+			_0: f(_p2._0),
+			_1: c(_p2._1)
+		};
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Log$tickFormat = F2(
+	function (_p6, _p5) {
+		return _elm_lang$core$Basics$toString;
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Log$ticks = F3(
+	function (base, _p7, count) {
+		var _p8 = _p7;
+		var _p10 = _p8._0;
+		var _p9 = _p8._1;
+		var ticksHelper = F5(
+			function (inc, st, i, j, k) {
+				ticksHelper:
+				while (true) {
+					var p = Math.pow(i, base);
+					var t = p * k;
+					if (st(k)) {
+						if (_elm_lang$core$Native_Utils.cmp(t, _p10) < 0) {
+							var _v2 = inc,
+								_v3 = st,
+								_v4 = i,
+								_v5 = j,
+								_v6 = inc(k);
+							inc = _v2;
+							st = _v3;
+							i = _v4;
+							j = _v5;
+							k = _v6;
+							continue ticksHelper;
+						} else {
+							if (_elm_lang$core$Native_Utils.cmp(t, _p9) > 0) {
+								return {ctor: '[]'};
+							} else {
+								return A2(
+									_elm_lang$core$Basics_ops['++'],
+									A5(
+										ticksHelper,
+										inc,
+										st,
+										i,
+										j,
+										inc(k)),
+									{
+										ctor: '::',
+										_0: t,
+										_1: {ctor: '[]'}
+									});
+							}
+						}
+					} else {
+						return {ctor: '[]'};
+					}
+				}
+			});
+		var n = _elm_lang$core$Basics$toFloat(count);
+		var j = A2(_elm_lang$core$Basics$logBase, base, _p9);
+		var i = A2(_elm_lang$core$Basics$logBase, base, _p10);
+		return ((!_elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$round(base)),
+			base)) && (_elm_lang$core$Native_Utils.cmp(j - i, n) < 0)) ? ((_elm_lang$core$Native_Utils.cmp(_p10, 0) > 0) ? A5(
+			ticksHelper,
+			function (k) {
+				return k + 1;
+			},
+			function (k) {
+				return _elm_lang$core$Native_Utils.cmp(k, base) < 0;
+			},
+			_elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$round(i) - 1),
+			_elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$round(j) + 1),
+			1) : A5(
+			ticksHelper,
+			function (k) {
+				return k - 1;
+			},
+			function (k) {
+				return _elm_lang$core$Native_Utils.cmp(k, 1) > -1;
+			},
+			_elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$round(i) - 1),
+			_elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$round(j) + 1),
+			base - 1)) : A2(
+			_elm_lang$core$List$map,
+			function (a) {
+				return Math.pow(a, base);
+			},
+			A3(
+				_gampleman$elm_visualization$Visualization_List$ticks,
+				i,
+				j,
+				_elm_lang$core$Basics$round(
+					A2(_elm_lang$core$Basics$min, j - i, n))));
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Log$interpolate = F3(
+	function (a, b, x) {
+		return (_elm_lang$core$Native_Utils.cmp(a, 0) < 0) ? (Math.pow(0 - b, x) * Math.pow(0 - a, 1 - x)) : (Math.pow(b, x) * Math.pow(a, 1 - x));
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Log$log = _elm_lang$core$Basics$logBase(_elm_lang$core$Basics$e);
+var _gampleman$elm_visualization$Visualization_Scale_Log$deinterpolate = F3(
+	function (a, b, x) {
+		return _gampleman$elm_visualization$Visualization_Scale_Log$log(x / a) / _gampleman$elm_visualization$Visualization_Scale_Log$log(b / a);
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Log$convert = F2(
+	function (domain, range) {
+		return A4(_gampleman$elm_visualization$Visualization_Scale_Internal$bimap, domain, range, _gampleman$elm_visualization$Visualization_Scale_Log$deinterpolate, _gampleman$elm_visualization$Visualization_Interpolate$interpolateFloat);
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Log$invert = F2(
+	function (domain, range) {
+		return A4(_gampleman$elm_visualization$Visualization_Scale_Internal$bimap, range, domain, _gampleman$elm_visualization$Visualization_Scale_Log$deinterpolate, _gampleman$elm_visualization$Visualization_Scale_Log$interpolate);
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Log$rangeExtent = F2(
+	function (d, r) {
+		return r;
+	});

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.12.8 - 2017-05-22
 * travis: fix release deployment syntax error 
 
 ## v0.12.6 - 2017-05-22

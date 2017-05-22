@@ -1129,7 +1129,7 @@ updateAllDocs idSet updateFn store model =
                                 |> Tuple.second
                                 |> setFocusInEntityByIndex
                                     (entityListTuple |> Tuple.second)
-                                    (oldIndex + 1)
+                                    oldIndex
 
                         _ ->
                             modelTuple |> Tuple.second

@@ -1110,26 +1110,25 @@ updateEntityListCursor oldModel newModel =
         ( oldEntityList, newEntityList )
             |> Tuple2.mapBoth (List.findIndex isEntityAtCursor)
             |> (\tuple ->
-                    case tuple of
-                        ( Just oldIndex, Just newIndex ) ->
-                            if oldIndex /= newIndex then
-                                modelTuple
-                                    |> Tuple.second
-                                    |> setFocusInEntityByIndex
-                                        newEntityList
-                                        (oldIndex + 1)
-                            else
-                                modelTuple |> Tuple.second
+                    let
+                        setFocusInIndex index =
+                            setFocusInEntityByIndex
+                                newEntityList
+                                index
+                    in
+                        newModel
+                            |> case tuple of
+                                ( Just oldIndex, Just newIndex ) ->
+                                    if oldIndex /= newIndex then
+                                        setFocusInIndex (oldIndex + 1)
+                                    else
+                                        identity
 
-                        ( Just oldIndex, Nothing ) ->
-                            modelTuple
-                                |> Tuple.second
-                                |> setFocusInEntityByIndex
-                                    newEntityList
-                                    oldIndex
+                                ( Just oldIndex, Nothing ) ->
+                                    setFocusInIndex oldIndex
 
-                        _ ->
-                            modelTuple |> Tuple.second
+                                _ ->
+                                    identity
                )
 
 

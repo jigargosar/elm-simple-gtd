@@ -1,3 +1,6 @@
+## Upcoming
+* [fix] npm_bump command exit code based on output containing Error string. since npm_bump does't handle exit status for some reason. and post_bump script starts execution   
+
 ## v0.12.2 - 2017-05-22
 * [fix] focus on next entity if todos project/context change caused it to move in current view. 
 

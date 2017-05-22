@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "engines": {
-    "node": "v7.7.10"
+    "node": "v7.10.0"
   },
   "private": true,
   "repository": {

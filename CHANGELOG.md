@@ -1,3 +1,6 @@
+## Upcoming
+* [fix] node version 
+
 ## v0.12.4 - 2017-05-22
 * travis checking : deploy to firebase prod on when we tag a release 
 

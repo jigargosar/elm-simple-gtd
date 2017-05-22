@@ -5,9 +5,9 @@ cache:
   directories:
     - $HOME/.cpus
 
-branches:
-  only:
-    - master
+#branches:
+#  only:
+#    - master
 
 #  directories:
 #    - elm-stuff/packages
@@ -55,4 +55,4 @@ deploy:
     skip_cleanup: true
     script: ./node_modules/.bin/firebase deploy --project prod --public docs --token $FIREBASE_TOKEN_PROD
     on:
-      branch: master
+      branch: /v[0-1.]*/

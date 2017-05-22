@@ -1003,7 +1003,7 @@ updateKeyboardState updater model =
 -- Focus Functions
 
 
-focusEntityByIndex entityList index model =
+setFocusInEntityByIndex entityList index model =
     let
         focusedEntityId =
             List.clampIndex index entityList
@@ -1047,14 +1047,14 @@ focusPrevEntity : List Entity -> ModelF
 focusPrevEntity entityList model =
     getFocusInEntityIndex entityList model
         |> andThenSubtract 1
-        |> (focusEntityByIndex entityList # model)
+        |> (setFocusInEntityByIndex entityList # model)
 
 
 focusNextEntity : List Entity -> ModelF
 focusNextEntity entityList model =
     getFocusInEntityIndex entityList model
         |> add 1
-        |> (focusEntityByIndex entityList # model)
+        |> (setFocusInEntityByIndex entityList # model)
 
 
 
@@ -1098,10 +1098,50 @@ updateDoc id =
 
 updateAllDocs idSet updateFn store model =
     let
+        modelTuple =
+            updateAllDocsHelp idSet updateFn store model
+
+        entityListTuple =
+            modelTuple |> Tuple2.mapBoth getCurrentEntityViewList
+
+        cursorEntityId =
+            model.focusedEntityInfo.id
+
+        isEntityAtCursor entity =
+            equals (getEntityId entity) cursorEntityId
+    in
+        entityListTuple
+            |> Tuple2.mapBoth (List.findIndex isEntityAtCursor)
+            |> (\tuple ->
+                    case tuple of
+                        ( Just oldIndex, Just newIndex ) ->
+                            if oldIndex /= newIndex then
+                                modelTuple
+                                    |> Tuple.second
+                                    |> setFocusInEntityByIndex
+                                        (entityListTuple |> Tuple.second)
+                                        (oldIndex + 1)
+                            else
+                                modelTuple |> Tuple.second
+
+                        ( Just oldIndex, Nothing ) ->
+                            modelTuple
+                                |> Tuple.second
+                                |> setFocusInEntityByIndex
+                                    (entityListTuple |> Tuple.second)
+                                    (oldIndex + 1)
+
+                        _ ->
+                            modelTuple |> Tuple.second
+               )
+
+
+updateAllDocsHelp idSet updateFn store model =
+    let
         storeF =
             Store.updateAllDocs idSet model.now updateFn
     in
-        update store storeF model
+        ( model, update store storeF model )
 
 
 findAndUpdateTodoT2 findFn action model =

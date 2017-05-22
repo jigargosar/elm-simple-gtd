@@ -1,6 +1,6 @@
 {
   "name": "simplegtd.com",
-  "version": "0.12.2",
+  "version": "0.12.3",
   "main": "index.js",
   "license": "MIT",
   "engines": {
@@ -19,7 +19,7 @@
     "prebuild": "bash -c \"rimraf app && rimraf docs && rimraf build \"",
     "bump": "npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'",
     "postbump": "npm run build && npm run git:commit-docs && npm run deploy-dev",
-    "git:commit-docs":"git status docs && git unstage . && git add docs/** && git commit -m '[npm-auto-commit] deploy docs' && git status docs",
+    "git:commit-docs": "git status docs && git unstage . && git add docs/** && git commit -m '[npm-auto-commit] deploy docs' && git status docs",
     "build": "bash scripts/build.sh",
     "prebuild-dev": "rimraf dev",
     "predeploy-dev": "npm run build-dev",

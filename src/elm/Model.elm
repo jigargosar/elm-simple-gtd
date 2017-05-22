@@ -777,7 +777,7 @@ getEntityId entity =
             Document.getId doc
 
 
-getCurrentEntityViewList model =
+getCurrentViewEntityList model =
     case model.mainViewType of
         EntityListView viewType ->
             createViewEntityList viewType model
@@ -1102,7 +1102,7 @@ updateEntityListCursor oldModel newModel =
             ( oldModel, newModel )
 
         ( oldEntityList, newEntityList ) =
-            modelTuple |> Tuple2.mapBoth getCurrentEntityViewList
+            modelTuple |> Tuple2.mapBoth getCurrentViewEntityList
 
         isEntityAtCursor entity =
             equals (getEntityId entity) oldModel.focusedEntityInfo.id

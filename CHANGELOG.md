@@ -1,3 +1,6 @@
+## Upcoming
+* travis: fix release deployment syntax error 
+
 ## v0.12.6 - 2017-05-22
 * [fix] travis detect release tag only then deploy to prod 
 

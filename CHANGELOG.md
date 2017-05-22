@@ -1,4 +1,4 @@
-## Upcoming
+## v0.12.3 - 2017-05-22
 * [fix] npm_bump command exit code based on output containing Error string. since npm_bump does't handle exit status for some reason. and post_bump script starts execution
 * npm script to commit docs postbump and deploy to firebase dev.    
 

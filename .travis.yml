@@ -1,7 +1,6 @@
 language: node_js
 
 env:
-  - DB=postgres
   - RELEASE_TAG_REGEX="^v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$"
 
 cache:

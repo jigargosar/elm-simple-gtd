@@ -39,7 +39,7 @@ install:
 
 # Build
 script:
-  - sysconfcpus -n 2 run travis:build $TRAVIS_TAG $TRAVIS_PULL_REQUEST
+  - sysconfcpus -n 2 run travis:build ${TRAVIS_TAG:-''} $TRAVIS_PULL_REQUEST
 #  - sysconfcpus -n 2 yarn build
 #  - sysconfcpus -n 2 yarn build-dev
 #  - echo "skip build"

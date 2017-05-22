@@ -2,7 +2,7 @@
 import {run} from 'runjs'
 import * as _ from "ramda"
 
-const runF = cmd=>()=>run(cmd)
+const runF = cmd => () => run(cmd)
 
 export const docs = {
     gitStatus(){
@@ -16,18 +16,25 @@ export const docs = {
 }
 
 export const travis = {
-    deploy:{
-        dev:runF("firebase deploy --project dev --public dev --token $FIREBASE_TOKEN_DEV"),
-        prod:runF("firebase deploy --project prod --public docs --token $FIREBASE_TOKEN_PROD")
+    deploy: {
+        dev: runF("firebase deploy --project dev --public dev --token $FIREBASE_TOKEN_DEV"),
+        prod: runF("firebase deploy --project prod --public docs --token $FIREBASE_TOKEN_PROD")
     },
     build(tagName, pullRequest){
-        if(arguments.length !== 2) {
+        if (arguments.length !== 2) {
             throw new Error(
-                "cannot build without tagName and pullRequest arguments")
+                `cannot build without tagName and pullRequest arguments
+                tagName = ${tagName} pullRequest = ${pullRequest}
+                `)
         }
-        if(_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, tagName) && pullRequest !== "false"){
+
+        if (pullRequest !== "false") {
+            throw new Error("wont build for pull request !== 'false'")
+        }
+
+        if (_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, tagName) && pullRequest !== "false") {
             run("npm run build")
-        }else{
+        } else {
             run("npm run build-dev")
         }
     }

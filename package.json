@@ -13,7 +13,7 @@
   "scripts": {
     "install-elm": "which -a elm ; elm-package install -y",
     "_postinstall": "which -a elm && elm-package install -y && bower install",
-    "__postinstall": "yarn global add elm@0.18.0 elm-hot-loader@0.5.4 elm-webpack-loader@4.3.1",
+    "postinstall": "yarn global add elm@0.18.0",
     "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "hot": "cross-env NODE_ENV=development webpack-dev-server --hot --inline",
     "hot-hot": "nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"",

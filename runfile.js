@@ -1,6 +1,8 @@
 "use strict"
 import {run} from 'runjs'
 
+const runF = cmd=>()=>run(cmd)
+
 export const docs = {
     gitStatus(){
         run("git status docs")
@@ -11,6 +13,14 @@ export const docs = {
         run("git commit -m '[npm-auto-commit] deploy docs'")
     }
 }
+
+export const travis = {
+    deploy:{
+        dev:runF("firebase deploy --project dev --public dev --token $FIREBASE_TOKEN_DEV"),
+        prod:runF("firebase deploy --project prod --public docs --token $FIREBASE_TOKEN_PROD")
+    }
+}
+
 export const build = {
     commitDocs(){
         docs.gitStatus()

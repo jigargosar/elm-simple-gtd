@@ -1096,16 +1096,16 @@ updateDoc id =
     updateAllDocs (Set.singleton id)
 
 
-updateAllDocs idSet updateFn store model =
+updateEntityListViewCursor oldModel newModel =
     let
         modelTuple =
-            updateAllDocsHelp idSet updateFn store model
+            ( oldModel, newModel )
 
         entityListTuple =
             modelTuple |> Tuple2.mapBoth getCurrentEntityViewList
 
         cursorEntityId =
-            model.focusedEntityInfo.id
+            oldModel.focusedEntityInfo.id
 
         isEntityAtCursor entity =
             equals (getEntityId entity) cursorEntityId
@@ -1136,12 +1136,13 @@ updateAllDocs idSet updateFn store model =
                )
 
 
-updateAllDocsHelp idSet updateFn store model =
+updateAllDocs idSet updateFn store model =
     let
         storeF =
             Store.updateAllDocs idSet model.now updateFn
     in
-        ( model, update store storeF model )
+        update store storeF model
+            |> updateEntityListViewCursor model
 
 
 findAndUpdateTodoT2 findFn action model =

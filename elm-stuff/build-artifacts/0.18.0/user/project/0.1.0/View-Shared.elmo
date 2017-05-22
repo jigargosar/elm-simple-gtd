@@ -1,0 +1,255 @@
+var _user$project$View_Shared$deleteButton = function (msg) {
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(msg),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('Delete'),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$View_Shared$cancelButton = function (msg) {
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(msg),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('Cancel'),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$View_Shared$okButton = function (msg) {
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(msg),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('Ok'),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$View_Shared$layoutHorizontalReverse = _elm_lang$html$Html$div(
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('layout horizontal-reverse'),
+		_1: {ctor: '[]'}
+	});
+var _user$project$View_Shared$okCancelButtons = F2(
+	function (okMsg, cancelMsg) {
+		return _user$project$View_Shared$layoutHorizontalReverse(
+			{
+				ctor: '::',
+				_0: _user$project$View_Shared$okButton(okMsg),
+				_1: {
+					ctor: '::',
+					_0: _user$project$View_Shared$cancelButton(cancelMsg),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$View_Shared$okCancelDeleteButtons = F3(
+	function (okMsg, cancelMsg, deleteMsg) {
+		return _user$project$View_Shared$layoutHorizontalReverse(
+			{
+				ctor: '::',
+				_0: _user$project$View_Shared$okButton(okMsg),
+				_1: {
+					ctor: '::',
+					_0: _user$project$View_Shared$cancelButton(cancelMsg),
+					_1: {
+						ctor: '::',
+						_0: _user$project$View_Shared$deleteButton(deleteMsg),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _user$project$View_Shared$defaultOkCancelDeleteButtons = function (deleteMsg) {
+	return A3(_user$project$View_Shared$okCancelDeleteButtons, _user$project$Msg$SaveCurrentForm, _user$project$Msg$DeactivateEditingMode, deleteMsg);
+};
+var _user$project$View_Shared$defaultOkCancelButtons = A2(_user$project$View_Shared$okCancelButtons, _user$project$Msg$SaveCurrentForm, _user$project$Msg$DeactivateEditingMode);
+var _user$project$View_Shared$hideOnHover = F2(
+	function (bool, children) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('hide-on-hover'),
+				_1: {ctor: '[]'}
+			},
+			bool ? children : {ctor: '[]'});
+	});
+var _user$project$View_Shared$showOnHover = _elm_lang$html$Html$div(
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('show-on-hover'),
+		_1: {ctor: '[]'}
+	});
+var _user$project$View_Shared$sharedIconButton = F2(
+	function (iconName, onClickHandler) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$iconButton,
+			{
+				ctor: '::',
+				_0: _edvail$elm_polymer$Polymer_Attributes$icon(iconName),
+				_1: {
+					ctor: '::',
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(onClickHandler),
+					_1: {ctor: '[]'}
+				}
+			},
+			{ctor: '[]'});
+	});
+var _user$project$View_Shared$doneButton = _user$project$View_Shared$sharedIconButton('done');
+var _user$project$View_Shared$dismissButton = _user$project$View_Shared$sharedIconButton('cancel');
+var _user$project$View_Shared$snoozeButton = _user$project$View_Shared$sharedIconButton('av:snooze');
+var _user$project$View_Shared$settingsButton = _user$project$View_Shared$sharedIconButton('settings');
+var _user$project$View_Shared$defaultBadge = function (vm) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('layout horizontal center'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('ellipsis'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(vm.name),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 0 1rem 0.1rem '),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('text-secondary'),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								' ',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_elm_lang$core$Basics$toString(vm.count),
+									''))),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$View_Shared$createSharedViewModel = function (model) {
+	var now = _user$project$Model$getNow(model);
+	var editMode = _user$project$Model$getEditMode(model);
+	var getMaybeTodoReminderFormForTodo = function (todo) {
+		var _p0 = editMode;
+		if (_p0.ctor === 'EditTodoReminder') {
+			var _p1 = _p0._0;
+			return A2(_user$project$Document$hasId, _p1.id, todo) ? _elm_lang$core$Maybe$Just(_p1) : _elm_lang$core$Maybe$Nothing;
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	};
+	var getMaybeEditTodoFormForTodo = function (todo) {
+		var _p2 = editMode;
+		if (_p2.ctor === 'EditTodo') {
+			var _p3 = _p2._0;
+			return A2(_user$project$Document$hasId, _p3.id, todo) ? _elm_lang$core$Maybe$Just(_p3) : _elm_lang$core$Maybe$Nothing;
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	};
+	return {
+		now: now,
+		maybeFocusedEntity: model.maybeFocusedEntity,
+		selectedEntityIdSet: model.selectedEntityIdSet,
+		projectByIdDict: _user$project$Model$getProjectsAsIdDict(model),
+		contextByIdDict: _user$project$Model$getContextsAsIdDict(model),
+		activeProjects: _user$project$Model$getActiveProjects(model),
+		activeContexts: _user$project$Model$getActiveContexts(model),
+		getMaybeEditTodoFormForTodo: getMaybeEditTodoFormForTodo,
+		getMaybeTodoReminderFormForTodo: getMaybeTodoReminderFormForTodo,
+		getTodoReminderForm: function (todo) {
+			return A3(
+				_elm_community$maybe_extra$Maybe_Extra$unpack,
+				function (_p4) {
+					return A2(_user$project$Todo_ReminderForm$create, todo, now);
+				},
+				_elm_lang$core$Basics$identity,
+				getMaybeTodoReminderFormForTodo(todo));
+		},
+		getMaybeEditEntityFormForEntityId: function (entityId) {
+			var _p5 = editMode;
+			switch (_p5.ctor) {
+				case 'EditContext':
+					var _p6 = _p5._0;
+					return _elm_lang$core$Native_Utils.eq(entityId, _p6.id) ? _elm_lang$core$Maybe$Just(_p6) : _elm_lang$core$Maybe$Nothing;
+				case 'EditProject':
+					var _p7 = _p5._0;
+					return _elm_lang$core$Native_Utils.eq(entityId, _p7.id) ? _elm_lang$core$Maybe$Just(_p7) : _elm_lang$core$Maybe$Nothing;
+				default:
+					return _elm_lang$core$Maybe$Nothing;
+			}
+		},
+		showDetails: _user$project$Model$isShowDetailsKeyPressed(model)
+	};
+};
+var _user$project$View_Shared$SharedViewModel = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return {now: a, getMaybeEditTodoFormForTodo: b, getMaybeTodoReminderFormForTodo: c, getTodoReminderForm: d, getMaybeEditEntityFormForEntityId: e, projectByIdDict: f, contextByIdDict: g, activeProjects: h, activeContexts: i, showDetails: j, selectedEntityIdSet: k, maybeFocusedEntity: l};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};

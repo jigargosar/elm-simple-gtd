@@ -1,0 +1,351 @@
+var _user$project$Store$setList = F2(
+	function (list, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{list: list});
+	});
+var _user$project$Store$updateList = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Store$setList,
+			updater(model),
+			model);
+	});
+var _user$project$Store$asList = function (_) {
+	return _.list;
+};
+var _user$project$Store$setSeed = F2(
+	function (seed, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{seed: seed});
+	});
+var _user$project$Store$updateSeed = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Store$setSeed,
+			updater(model),
+			model);
+	});
+var _user$project$Store$getSeed = function (_) {
+	return _.seed;
+};
+var _user$project$Store$findBy = function (predicate) {
+	return function (_p0) {
+		return A2(
+			_elm_community$list_extra$List_Extra$find,
+			predicate,
+			_user$project$Store$asList(_p0));
+	};
+};
+var _user$project$Store$findById = function (id) {
+	return _user$project$Store$findBy(
+		function (_p1) {
+			return A2(
+				F2(
+					function (x, y) {
+						return _elm_lang$core$Native_Utils.eq(x, y);
+					}),
+				id,
+				function (_) {
+					return _.id;
+				}(_p1));
+		});
+};
+var _user$project$Store$reject = function (fn) {
+	return function (_p2) {
+		return A2(
+			_user$project$Ext_Function$reject,
+			fn,
+			_user$project$Store$asList(_p2));
+	};
+};
+var _user$project$Store$filter = function (fn) {
+	return function (_p3) {
+		return A2(
+			_elm_lang$core$List$filter,
+			fn,
+			_user$project$Store$asList(_p3));
+	};
+};
+var _user$project$Store$map = function (fn) {
+	return function (_p4) {
+		return A2(
+			_elm_lang$core$List$map,
+			fn,
+			_user$project$Store$asList(_p4));
+	};
+};
+var _user$project$Store$asIdDict = function (_p5) {
+	return _elm_lang$core$Dict$fromList(
+		A2(
+			_user$project$Store$map,
+			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2(
+				{ctor: '_Tuple2', _0: _user$project$Document$getId, _1: _elm_lang$core$Basics$identity}),
+			_p5));
+};
+var _user$project$Store$findAllByIdSet__ = F2(
+	function (idSet, store) {
+		var idDict = _user$project$Store$asIdDict(store);
+		return A2(
+			_elm_lang$core$List$filterMap,
+			_elm_lang$core$Basics$identity,
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				_elm_lang$core$Set$toList(idSet),
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, idDict)));
+	});
+var _user$project$Store$prepend = function (model) {
+	return _user$project$Store$updateList(
+		function (_p6) {
+			return A2(
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					}),
+				model,
+				_user$project$Store$asList(_p6));
+		});
+};
+var _user$project$Store$generate = F2(
+	function (generator, m) {
+		return A2(
+			_elm_lang$core$Tuple$mapSecond,
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$setSeed, m),
+			A2(
+				_mgold$elm_random_pcg$Random_Pcg$step,
+				generator,
+				_user$project$Store$getSeed(m)));
+	});
+var _user$project$Store$insert = F2(
+	function (constructor, s) {
+		return function (_p7) {
+			var _p8 = _p7;
+			var nd = _elm_lang$core$Native_Utils.update(
+				_p8._0,
+				{dirty: true});
+			return {
+				ctor: '_Tuple2',
+				_0: nd,
+				_1: A2(_user$project$Store$prepend, nd, _p8._1)
+			};
+		}(
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$generate, s)(
+				_user$project$Ext_Random$mapWithIdGenerator(constructor)));
+	});
+var _user$project$Store$updateExternalHelp = F2(
+	function (newDoc, store) {
+		var add = A2(_user$project$Store$prepend, newDoc, store);
+		var merge = function (oldDoc) {
+			var mergedDoc = 1;
+			return store;
+		};
+		var id = _user$project$Document$getId(newDoc);
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(_user$project$Store$findById, id, store),
+				merge),
+			add);
+	});
+var _user$project$Store$insertExternal = F2(
+	function (doc, store) {
+		return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$setList, store)(
+			_elm_lang$core$Dict$values(
+				A3(
+					_elm_lang$core$Dict$insert,
+					_user$project$Document$getId(doc),
+					doc,
+					_user$project$Store$asIdDict(store))));
+	});
+var _user$project$Store$decode = F2(
+	function (encodedDoc, store) {
+		return _elm_lang$core$Result$toMaybe(
+			A2(
+				_elm_lang$core$Result$mapError,
+				_elm_lang$core$Debug$log(
+					A2(_elm_lang$core$Basics_ops['++'], 'Store ', store.name)),
+				A2(_elm_lang$core$Json_Decode$decodeValue, store.decoder, encodedDoc)));
+	});
+var _user$project$Store$onPouchDbChange = F2(
+	function (encodedDoc, store) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(_user$project$Store$decode, encodedDoc, store),
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$insertExternal, store)),
+			store);
+	});
+var _user$project$Store$replaceDoc__ = F2(
+	function (doc, s) {
+		var newDoc = _elm_lang$core$Native_Utils.update(
+			doc,
+			{dirty: true});
+		return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$setList, s)(
+			A3(
+				_elm_community$list_extra$List_Extra$replaceIf,
+				_user$project$Document$equalById(doc),
+				newDoc,
+				s.list));
+	});
+var _user$project$Store$replaceDocIn = _elm_lang$core$Basics$flip(_user$project$Store$replaceDoc__);
+var _user$project$Store$findAndUpdateT = F4(
+	function (findFn, now, updateFn, store) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			A2(_user$project$Store$findBy, findFn, store),
+			function (doc) {
+				return A2(
+					F2(
+						function (v0, v1) {
+							return {ctor: '_Tuple2', _0: v0, _1: v1};
+						}),
+					doc,
+					A2(
+						_user$project$Store$replaceDocIn,
+						store,
+						updateFn(doc)));
+			});
+	});
+var _user$project$Store$updateDocWithId = F3(
+	function (id, updateDocFn, store) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(_user$project$Store$findById, id, store),
+				function (_p9) {
+					return A2(
+						_user$project$Store$replaceDocIn,
+						store,
+						updateDocFn(_p9));
+				}),
+			store);
+	});
+var _user$project$Store$updateAllDocs = F4(
+	function (idSet, now, updateFn, store) {
+		var updateAndSetModifiedAt = function (_p10) {
+			return A2(
+				_user$project$Document$setModifiedAt,
+				now,
+				updateFn(_p10));
+		};
+		return A3(
+			_elm_lang$core$Set$foldl,
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$updateDocWithId, updateFn),
+			store,
+			idSet);
+	});
+var _user$project$Store$updateDoc = function (id) {
+	return _user$project$Store$updateAllDocs(
+		_elm_lang$core$Set$singleton(id));
+};
+var _user$project$Store$encode = F2(
+	function (doc, s) {
+		return A2(_user$project$Document$encode, s.otherFieldsEncoder, doc);
+	});
+var _user$project$Store$decodeList = function (decoder) {
+	return function (_p11) {
+		return A2(
+			_elm_lang$core$List$filterMap,
+			function (result) {
+				var _p12 = result;
+				if (_p12.ctor === 'Ok') {
+					return _elm_lang$core$Maybe$Just(_p12._0);
+				} else {
+					var _p13 = A2(_elm_lang$core$Debug$log, 'Error while decoding Project', _p12._0);
+					return _elm_lang$core$Maybe$Nothing;
+				}
+			},
+			A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$Json_Decode$decodeValue(decoder),
+				_p11));
+	};
+};
+var _user$project$Store$init = F5(
+	function (name, otherFieldsEncoder, decoder, encodedList, seed) {
+		return {
+			seed: seed,
+			list: A2(_user$project$Store$decodeList, decoder, encodedList),
+			name: name,
+			otherFieldsEncoder: otherFieldsEncoder,
+			decoder: decoder
+		};
+	});
+var _user$project$Store$generator = F4(
+	function (name, otherFieldsEncoder, decoder, encodedList) {
+		return _user$project$Ext_Random$mapWithIndependentSeed(
+			A4(_user$project$Store$init, name, otherFieldsEncoder, decoder, encodedList));
+	});
+var _user$project$Store$pouchDBUpsert = _elm_lang$core$Native_Platform.outgoingPort(
+	'pouchDBUpsert',
+	function (v) {
+		return [v._0, v._1, v._2];
+	});
+var _user$project$Store$upsertIn = F2(
+	function (store, doc) {
+		return _user$project$Store$pouchDBUpsert(
+			{
+				ctor: '_Tuple3',
+				_0: store.name,
+				_1: doc.id,
+				_2: A2(_user$project$Document$encode, store.otherFieldsEncoder, doc)
+			});
+	});
+var _user$project$Store$persist = function (s) {
+	var ns = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$setList, s)(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+			s.list,
+			function (d) {
+				return _elm_lang$core$Native_Utils.update(
+					d,
+					{dirty: false});
+			}));
+	var dirtyList = A2(
+		_elm_lang$core$List$filter,
+		function (_) {
+			return _.dirty;
+		},
+		s.list);
+	var cmds = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+		dirtyList,
+		_user$project$Store$upsertIn(s));
+	return A2(_elm_lang$core$Platform_Cmd_ops['!'], ns, cmds);
+};
+var _user$project$Store$upsertEncoded__ = F2(
+	function (jsonValue, store) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(_user$project$Store$decode, jsonValue, store),
+				_user$project$Store$upsertIn(store)),
+			_elm_lang$core$Platform_Cmd$none);
+	});
+var _user$project$Store$pouchDBChanges = _elm_lang$core$Native_Platform.incomingPort(
+	'pouchDBChanges',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (x0) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (x1) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{ctor: '_Tuple2', _0: x0, _1: x1});
+				},
+				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
+		},
+		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
+var _user$project$Store$onChange = function (_p14) {
+	return _user$project$Store$pouchDBChanges(
+		_elm_lang$core$Basics$uncurry(_p14));
+};
+var _user$project$Store$Store = F5(
+	function (a, b, c, d, e) {
+		return {seed: a, list: b, otherFieldsEncoder: c, decoder: d, name: e};
+	});

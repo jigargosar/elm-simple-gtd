@@ -1,0 +1,90 @@
+var _user$project$ViewModel$sgtdBlue = 'rgb(68, 138, 255)';
+var _user$project$ViewModel$getViewInfo = F3(
+	function (mainViewType, projectsVM, contextsVM) {
+		var entityById = function (id) {
+			return _elm_community$list_extra$List_Extra$find(
+				function (_p0) {
+					return A2(
+						_user$project$Ext_Function$equals,
+						id,
+						function (_) {
+							return _.id;
+						}(_p0));
+				});
+		};
+		var appHeaderInfoById = function (id) {
+			return function (_p1) {
+				return function (_p2) {
+					var _p3 = _p2;
+					return {ctor: '_Tuple2', _0: _p3.name, _1: _p3.backgroundColor};
+				}(
+					A2(
+						_user$project$Ext_Function_Infix_ops['>>?='],
+						A2(
+							_user$project$Ext_Function_Infix_ops['>>?'],
+							entityById(id),
+							function (_) {
+								return _.appHeader;
+							}),
+						{name: 'o_O', backgroundColor: _user$project$ViewModel$sgtdBlue})(_p1));
+			};
+		};
+		var _p4 = mainViewType;
+		switch (_p4.ctor) {
+			case 'EntityListView':
+				var _p5 = _p4._0;
+				switch (_p5.ctor) {
+					case 'ContextsView':
+						return {ctor: '_Tuple2', _0: contextsVM.title, _1: contextsVM.icon.color};
+					case 'ContextView':
+						return A2(appHeaderInfoById, _p5._0, contextsVM.entityList);
+					case 'ProjectsView':
+						return {ctor: '_Tuple2', _0: projectsVM.title, _1: projectsVM.icon.color};
+					default:
+						return A2(appHeaderInfoById, _p5._0, projectsVM.entityList);
+				}
+			case 'BinView':
+				return {ctor: '_Tuple2', _0: 'Bin', _1: _user$project$ViewModel$sgtdBlue};
+			case 'DoneView':
+				return {ctor: '_Tuple2', _0: 'Done', _1: _user$project$ViewModel$sgtdBlue};
+			default:
+				return {ctor: '_Tuple2', _0: 'Custom Sync', _1: _user$project$ViewModel$sgtdBlue};
+		}
+	});
+var _user$project$ViewModel$getIdOfEntityView = function (entityView) {
+	var _p6 = entityView;
+	if (_p6.ctor === 'TodoView') {
+		return _user$project$Document$getId(_p6._0);
+	} else {
+		return _p6._0.id;
+	}
+};
+var _user$project$ViewModel$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {contexts: a, projects: b, viewName: c, mainViewType: d, header: e, shared: f, createTodoViewModel: g, focusedEntityInfo: h};
+	});
+var _user$project$ViewModel$create = function (model) {
+	var sharedViewModel = _user$project$View_Shared$createSharedViewModel(model);
+	var mainViewType = model.mainViewType;
+	var projectsVM = _user$project$GroupEntity_ViewModel$projects(model);
+	var contextsVM = _user$project$GroupEntity_ViewModel$contexts(model);
+	var _p7 = A3(_user$project$ViewModel$getViewInfo, mainViewType, projectsVM, contextsVM);
+	var viewName = _p7._0;
+	var headerBackgroundColor = _p7._1;
+	return A8(
+		_user$project$ViewModel$Model,
+		contextsVM,
+		projectsVM,
+		viewName,
+		mainViewType,
+		{backgroundColor: headerBackgroundColor},
+		sharedViewModel,
+		_user$project$Todo_View$createTodoViewModel(sharedViewModel),
+		model.focusedEntityInfo);
+};
+var _user$project$ViewModel$TodoView = function (a) {
+	return {ctor: 'TodoView', _0: a};
+};
+var _user$project$ViewModel$EntityView = function (a) {
+	return {ctor: 'EntityView', _0: a};
+};

@@ -1,0 +1,52 @@
+var _user$project$Todo_ReminderForm$getMaybeTime = function (_p0) {
+	var _p1 = _p0;
+	var dateTimeString = A2(
+		_elm_lang$core$Basics_ops['++'],
+		_p1.date,
+		A2(_elm_lang$core$Basics_ops['++'], ' ', _p1.time));
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['!|>'],
+			_elm_lang$core$Date$fromString(dateTimeString),
+			function (_p2) {
+				return _elm_lang$core$Maybe$Just(
+					_elm_lang$core$Date$toTime(_p2));
+			}),
+		_elm_lang$core$Maybe$Nothing);
+};
+var _user$project$Todo_ReminderForm$set = F2(
+	function (action, model) {
+		var _p3 = action;
+		if (_p3.ctor === 'SetDate') {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{date: _p3._0});
+		} else {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{time: _p3._0});
+		}
+	});
+var _user$project$Todo_ReminderForm$create = F2(
+	function (todo, now) {
+		var timeInMilli = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			_user$project$Todo$getMaybeReminderTime(todo),
+			now + _elm_lang$core$Time$hour);
+		return {
+			id: _user$project$Document$getId(todo),
+			date: A2(_mgold$elm_date_format$Time_Format$format, '%Y-%m-%d', timeInMilli),
+			time: A2(_mgold$elm_date_format$Time_Format$format, '%H:%M', timeInMilli)
+		};
+	});
+var _user$project$Todo_ReminderForm$Model = F3(
+	function (a, b, c) {
+		return {id: a, date: b, time: c};
+	});
+var _user$project$Todo_ReminderForm$SetTime = function (a) {
+	return {ctor: 'SetTime', _0: a};
+};
+var _user$project$Todo_ReminderForm$SetDate = function (a) {
+	return {ctor: 'SetDate', _0: a};
+};

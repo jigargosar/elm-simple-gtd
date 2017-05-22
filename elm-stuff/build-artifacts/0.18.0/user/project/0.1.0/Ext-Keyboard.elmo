@@ -1,0 +1,101 @@
+var _user$project$Ext_Keyboard$isSuperDown = _ohanhi$keyboard_extra$Keyboard_Extra$isPressed(_ohanhi$keyboard_extra$Keyboard_Extra$Super);
+var _user$project$Ext_Keyboard$isMetaDown = _ohanhi$keyboard_extra$Keyboard_Extra$isPressed(_ohanhi$keyboard_extra$Keyboard_Extra$Meta);
+var _user$project$Ext_Keyboard$isAltDown = _ohanhi$keyboard_extra$Keyboard_Extra$isPressed(_ohanhi$keyboard_extra$Keyboard_Extra$Alt);
+var _user$project$Ext_Keyboard$isControlDown = _ohanhi$keyboard_extra$Keyboard_Extra$isPressed(_ohanhi$keyboard_extra$Keyboard_Extra$Control);
+var _user$project$Ext_Keyboard$isShiftDown = _ohanhi$keyboard_extra$Keyboard_Extra$isPressed(_ohanhi$keyboard_extra$Keyboard_Extra$Shift);
+var _user$project$Ext_Keyboard$update = _ohanhi$keyboard_extra$Keyboard_Extra$update;
+var _user$project$Ext_Keyboard$subscription = function (tagger) {
+	return A2(_elm_lang$core$Platform_Sub$map, tagger, _ohanhi$keyboard_extra$Keyboard_Extra$subscriptions);
+};
+var _user$project$Ext_Keyboard$init = _ohanhi$keyboard_extra$Keyboard_Extra$initialState;
+var _user$project$Ext_Keyboard$keyUps = _ohanhi$keyboard_extra$Keyboard_Extra$ups;
+var _user$project$Ext_Keyboard$succeedIfDecodedKeyEquals = F2(
+	function (key, msg) {
+		return A2(
+			_elm_lang$core$Json_Decode$andThen,
+			function (actualKey) {
+				var _p0 = A2(
+					_elm_lang$core$Debug$log,
+					'actualKey, expectedKey',
+					{ctor: '_Tuple2', _0: actualKey, _1: key});
+				return _elm_lang$core$Native_Utils.eq(key, actualKey) ? _elm_lang$core$Json_Decode$succeed(msg) : _elm_lang$core$Json_Decode$fail('Not intrested');
+			},
+			_ohanhi$keyboard_extra$Keyboard_Extra$targetKey);
+	});
+var _user$project$Ext_Keyboard$onEscape = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'keyup',
+		A2(_user$project$Ext_Keyboard$succeedIfDecodedKeyEquals, _ohanhi$keyboard_extra$Keyboard_Extra$Escape, msg));
+};
+var _user$project$Ext_Keyboard$onEnter = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'keyup',
+		A2(_user$project$Ext_Keyboard$succeedIfDecodedKeyEquals, _ohanhi$keyboard_extra$Keyboard_Extra$Enter, msg));
+};
+var _user$project$Ext_Keyboard$targetKeyDecoder = A2(
+	_elm_lang$core$Json_Decode$map,
+	_ohanhi$keyboard_extra$Keyboard_Extra$fromCode,
+	A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int));
+var _user$project$Ext_Keyboard$preventDefaultAndStopPropagation = {stopPropagation: true, preventDefault: true};
+var _user$project$Ext_Keyboard$preventDefault = {stopPropagation: false, preventDefault: true};
+var _user$project$Ext_Keyboard$stopPropagation = {stopPropagation: true, preventDefault: false};
+var _user$project$Ext_Keyboard$KeyboardEvent = F4(
+	function (a, b, c, d) {
+		return {key: a, isShiftDown: b, isMetaDown: c, isControlDown: d};
+	});
+var _user$project$Ext_Keyboard$keyboardEventDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'ctrlKey',
+	_elm_lang$core$Json_Decode$bool,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'metaKey',
+		_elm_lang$core$Json_Decode$bool,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'shiftKey',
+			_elm_lang$core$Json_Decode$bool,
+			A2(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
+				_user$project$Ext_Keyboard$targetKeyDecoder,
+				_elm_lang$core$Json_Decode$succeed(_user$project$Ext_Keyboard$KeyboardEvent)))));
+var _user$project$Ext_Keyboard$onKeyUp = function (onKeyMsg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'keyup',
+		A2(
+			_elm_lang$core$Json_Decode$map,
+			onKeyMsg,
+			A2(_user$project$Ext_Decode$traceDecoder, 'kd', _user$project$Ext_Keyboard$keyboardEventDecoder)));
+};
+var _user$project$Ext_Keyboard$onKeyDown = function (onKeyMsg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'keydown',
+		A2(
+			_elm_lang$core$Json_Decode$map,
+			onKeyMsg,
+			A2(_user$project$Ext_Decode$traceDecoder, 'kd', _user$project$Ext_Keyboard$keyboardEventDecoder)));
+};
+var _user$project$Ext_Keyboard$onKeyDownPreventDefault = function (onKeyMsg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'keydown',
+		_user$project$Ext_Keyboard$preventDefault,
+		A2(
+			_elm_lang$core$Json_Decode$map,
+			onKeyMsg,
+			A2(_user$project$Ext_Decode$traceDecoder, 'kd', _user$project$Ext_Keyboard$keyboardEventDecoder)));
+};
+var _user$project$Ext_Keyboard$onKeyDownStopPropagation = function (onKeyMsg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'keydown',
+		_user$project$Ext_Keyboard$stopPropagation,
+		A2(
+			_elm_lang$core$Json_Decode$map,
+			onKeyMsg,
+			A2(_user$project$Ext_Decode$traceDecoder, 'kd', _user$project$Ext_Keyboard$keyboardEventDecoder)));
+};

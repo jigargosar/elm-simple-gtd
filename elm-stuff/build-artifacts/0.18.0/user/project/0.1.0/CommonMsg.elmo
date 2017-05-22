@@ -1,0 +1,42 @@
+var _user$project$CommonMsg$Helper = F3(
+	function (a, b, c) {
+		return {noOp: a, focus: b, logString: c};
+	});
+var _user$project$CommonMsg$LogString = function (a) {
+	return {ctor: 'LogString', _0: a};
+};
+var _user$project$CommonMsg$Focus = function (a) {
+	return {ctor: 'Focus', _0: a};
+};
+var _user$project$CommonMsg$NoOp = {ctor: 'NoOp'};
+var _user$project$CommonMsg$update = function (msg) {
+	update:
+	while (true) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'NoOp':
+				return _Fresheyeball$elm_return$Return$command(_elm_lang$core$Platform_Cmd$none);
+			case 'Focus':
+				return _Fresheyeball$elm_return$Return$command(
+					_user$project$DomPorts$focusSelector(_p0._0));
+			default:
+				var _p1 = A2(_elm_lang$core$Debug$log, 'CM:LogString', _p0._0);
+				var _v1 = _user$project$CommonMsg$NoOp;
+				msg = _v1;
+				continue update;
+		}
+	}
+};
+var _user$project$CommonMsg$createHelper = function (tagger) {
+	return {
+		noOp: tagger(_user$project$CommonMsg$NoOp),
+		focus: function (_p2) {
+			return tagger(
+				_user$project$CommonMsg$Focus(_p2));
+		},
+		logString: function (_p3) {
+			return tagger(
+				_user$project$CommonMsg$LogString(_p3));
+		}
+	};
+};

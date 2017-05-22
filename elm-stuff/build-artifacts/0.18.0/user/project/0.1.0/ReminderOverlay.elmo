@@ -1,0 +1,57 @@
+var _user$project$ReminderOverlay$addSnoozeOffset = F2(
+	function (time, offset) {
+		var _p0 = offset;
+		if (_p0.ctor === 'SnoozeForMilli') {
+			return time + _p0._0;
+		} else {
+			return _elm_lang$core$Date$toTime(
+				A3(
+					_justinmimbs$elm_date_extra$Date_Extra$add,
+					_justinmimbs$elm_date_extra$Date_Extra$Hour,
+					10,
+					A2(
+						_justinmimbs$elm_date_extra$Date_Extra$ceiling,
+						_justinmimbs$elm_date_extra$Date_Extra$Day,
+						_elm_lang$core$Date$fromTime(time))));
+		}
+	});
+var _user$project$ReminderOverlay$TodoDetails = F2(
+	function (a, b) {
+		return {id: a, text: b};
+	});
+var _user$project$ReminderOverlay$createTodoDetails = function (todo) {
+	return A2(
+		_user$project$ReminderOverlay$TodoDetails,
+		_user$project$Document$getId(todo),
+		_user$project$Todo$getText(todo));
+};
+var _user$project$ReminderOverlay$SnoozeView = {ctor: 'SnoozeView'};
+var _user$project$ReminderOverlay$InitialView = {ctor: 'InitialView'};
+var _user$project$ReminderOverlay$Active = F2(
+	function (a, b) {
+		return {ctor: 'Active', _0: a, _1: b};
+	});
+var _user$project$ReminderOverlay$initialView = function (_p1) {
+	return A2(
+		_user$project$ReminderOverlay$Active,
+		_user$project$ReminderOverlay$InitialView,
+		_user$project$ReminderOverlay$createTodoDetails(_p1));
+};
+var _user$project$ReminderOverlay$snoozeView = _user$project$ReminderOverlay$Active(_user$project$ReminderOverlay$SnoozeView);
+var _user$project$ReminderOverlay$dummy = A2(
+	_user$project$ReminderOverlay$Active,
+	_user$project$ReminderOverlay$InitialView,
+	A2(_user$project$ReminderOverlay$TodoDetails, 'dummy-todo-id', 'dummy todo'));
+var _user$project$ReminderOverlay$None = {ctor: 'None'};
+var _user$project$ReminderOverlay$none = _user$project$ReminderOverlay$None;
+var _user$project$ReminderOverlay$Close = {ctor: 'Close'};
+var _user$project$ReminderOverlay$MarkDone = {ctor: 'MarkDone'};
+var _user$project$ReminderOverlay$Dismiss = {ctor: 'Dismiss'};
+var _user$project$ReminderOverlay$SnoozeTill = function (a) {
+	return {ctor: 'SnoozeTill', _0: a};
+};
+var _user$project$ReminderOverlay$ShowSnoozeOptions = {ctor: 'ShowSnoozeOptions'};
+var _user$project$ReminderOverlay$SnoozeTillTomorrow = {ctor: 'SnoozeTillTomorrow'};
+var _user$project$ReminderOverlay$SnoozeForMilli = function (a) {
+	return {ctor: 'SnoozeForMilli', _0: a};
+};

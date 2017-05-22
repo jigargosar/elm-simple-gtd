@@ -1,0 +1,125 @@
+var _user$project$View_ReminderOverlay$activeViewShell = F2(
+	function (todoDetails, children) {
+		var onOutsideClick = _user$project$Msg$ReminderOverlayAction(_user$project$ReminderOverlay$Close);
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('full-view fixed-top'),
+				_1: {
+					ctor: '::',
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(onOutsideClick),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('fixed-bottom top-shadow static'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('font-headline'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(todoDetails.text),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('layout horizontal flex-auto-children'),
+									_1: {ctor: '[]'}
+								},
+								children),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$View_ReminderOverlay$reminderOverlayActiveView = F2(
+	function (activeView, todoDetails) {
+		var _p0 = activeView;
+		if (_p0.ctor === 'InitialView') {
+			var vm = {
+				onDismissClicked: _user$project$Msg$ReminderOverlayAction(_user$project$ReminderOverlay$Dismiss),
+				onDoneClicked: _user$project$Msg$ReminderOverlayAction(_user$project$ReminderOverlay$MarkDone),
+				onSnoozeClicked: _user$project$Msg$ReminderOverlayAction(_user$project$ReminderOverlay$ShowSnoozeOptions)
+			};
+			return A2(
+				_user$project$View_ReminderOverlay$activeViewShell,
+				todoDetails,
+				{
+					ctor: '::',
+					_0: A3(_user$project$WebComponents$iconTextButton, 'notification:do-not-disturb', 'dismiss', vm.onDismissClicked),
+					_1: {
+						ctor: '::',
+						_0: A3(_user$project$WebComponents$iconTextButton, 'av:snooze', 'snooze', vm.onSnoozeClicked),
+						_1: {
+							ctor: '::',
+							_0: A3(_user$project$WebComponents$iconTextButton, 'done', 'done!', vm.onDoneClicked),
+							_1: {ctor: '[]'}
+						}
+					}
+				});
+		} else {
+			var msg = function (_p1) {
+				return _user$project$Msg$ReminderOverlayAction(
+					_user$project$ReminderOverlay$SnoozeTill(_p1));
+			};
+			var vm = {
+				snoozeFor15Min: msg(
+					_user$project$ReminderOverlay$SnoozeForMilli(_elm_lang$core$Time$minute * 15)),
+				snoozeFor1Hour: msg(
+					_user$project$ReminderOverlay$SnoozeForMilli(_elm_lang$core$Time$hour)),
+				snoozeFor3Hours: msg(
+					_user$project$ReminderOverlay$SnoozeForMilli(_elm_lang$core$Time$hour * 3)),
+				snoozeTillTomorrow: msg(_user$project$ReminderOverlay$SnoozeTillTomorrow)
+			};
+			return A2(
+				_user$project$View_ReminderOverlay$activeViewShell,
+				todoDetails,
+				{
+					ctor: '::',
+					_0: A3(_user$project$WebComponents$iconTextButton, 'av:snooze', '15 min', vm.snoozeFor15Min),
+					_1: {
+						ctor: '::',
+						_0: A3(_user$project$WebComponents$iconTextButton, 'av:snooze', '1 hour', vm.snoozeFor1Hour),
+						_1: {
+							ctor: '::',
+							_0: A3(_user$project$WebComponents$iconTextButton, 'av:snooze', '3 hour', vm.snoozeFor3Hours),
+							_1: {
+								ctor: '::',
+								_0: A3(_user$project$WebComponents$iconTextButton, 'av:snooze', 'tomorrow', vm.snoozeTillTomorrow),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				});
+		}
+	});
+var _user$project$View_ReminderOverlay$showReminderOverlay = function (m) {
+	var _p2 = m.reminderOverlay;
+	if (_p2.ctor === 'Active') {
+		return A2(_user$project$View_ReminderOverlay$reminderOverlayActiveView, _p2._0, _p2._1);
+	} else {
+		return A2(
+			_elm_lang$html$Html$span,
+			{ctor: '[]'},
+			{ctor: '[]'});
+	}
+};

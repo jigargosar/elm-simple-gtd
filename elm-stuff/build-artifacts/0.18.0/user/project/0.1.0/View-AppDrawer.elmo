@@ -1,0 +1,433 @@
+var _user$project$View_AppDrawer$switchViewItem = F3(
+	function (iconName, viewType, title) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Msg$SwitchView(viewType)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A3(
+					_elm_lang$html$Html$node,
+					'iron-icon',
+					{
+						ctor: '::',
+						_0: _user$project$WebComponents$iconA(iconName),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_edvail$elm_polymer$Polymer_Paper$itemBody,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(title),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$View_AppDrawer$headLineText = function (title) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('big-paper-item-text'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(title),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$View_AppDrawer$entityListItem = function (vm) {
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$item,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(
+				vm.onActiveStateChanged(true)),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'iron-icon',
+				{
+					ctor: '::',
+					_0: _user$project$WebComponents$iconA(vm.icon.name),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', vm.icon.color),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_Paper$itemBody,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _user$project$View_Shared$defaultBadge(vm),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('show-on-hover'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$View_Shared$settingsButton(vm.startEditingMsg),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$View_AppDrawer$entityListView = F2(
+	function (_p0, mainViewType) {
+		var _p1 = _p0;
+		var _p2 = _p1.icon;
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_Paper$item,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('has-hover-elements'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$Msg$SwitchView(
+									_user$project$Model$EntityListView(_p1.viewType))),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A3(
+							_elm_lang$html$Html$node,
+							'iron-icon',
+							{
+								ctor: '::',
+								_0: _user$project$WebComponents$iconA(_p2.name),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
+											ctor: '::',
+											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', _p2.color),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_edvail$elm_polymer$Polymer_Paper$itemBody,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _user$project$View_AppDrawer$headLineText(_p1.title),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('show-on-hover layout horizontal center'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_edvail$elm_polymer$Polymer_Paper$toggleButton,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$checked(_p1.showDeleted),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$ToggleShowDeletedEntity),
+													_1: {ctor: '[]'}
+												}
+											},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_user$project$WebComponents$icon,
+												'delete',
+												{ctor: '[]'}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_edvail$elm_polymer$Polymer_Paper$iconButton,
+													{
+														ctor: '::',
+														_0: _user$project$WebComponents$iconA('add'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Events$onClick(_p1.onAddClicked),
+															_1: {ctor: '[]'}
+														}
+													},
+													{ctor: '[]'}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			A2(_elm_lang$core$List$map, _user$project$View_AppDrawer$entityListItem, _p1.entityList));
+	});
+var _user$project$View_AppDrawer$divider = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('divider'),
+		_1: {ctor: '[]'}
+	},
+	{ctor: '[]'});
+var _user$project$View_AppDrawer$getSelectedIndex = function (_p3) {
+	var _p4 = _p3;
+	var _p10 = _p4.projects;
+	var _p9 = _p4.contexts;
+	var projectIndexById = function (id) {
+		return A2(
+			_user$project$Ext_Function_Infix_ops['>>?='],
+			_elm_community$list_extra$List_Extra$findIndex(
+				function (_p5) {
+					return A2(
+						_user$project$Ext_Function$equals,
+						id,
+						function (_) {
+							return _.id;
+						}(_p5));
+				}),
+			0)(_p10.entityList);
+	};
+	var contextIndexById = function (id) {
+		return A2(
+			_user$project$Ext_Function_Infix_ops['>>?='],
+			_elm_community$list_extra$List_Extra$findIndex(
+				function (_p6) {
+					return A2(
+						_user$project$Ext_Function$equals,
+						id,
+						function (_) {
+							return _.id;
+						}(_p6));
+				}),
+			0)(_p9.entityList);
+	};
+	var projectsIndex = 1 + _elm_lang$core$List$length(_p9.entityList);
+	var lastProjectIndex = projectsIndex + _elm_lang$core$List$length(_p10.entityList);
+	var _p7 = _p4.mainViewType;
+	switch (_p7.ctor) {
+		case 'EntityListView':
+			var _p8 = _p7._0;
+			switch (_p8.ctor) {
+				case 'ContextsView':
+					return 0;
+				case 'ContextView':
+					return 1 + contextIndexById(_p8._0);
+				case 'ProjectsView':
+					return projectsIndex;
+				default:
+					return (1 + projectsIndex) + projectIndexById(_p8._0);
+			}
+		case 'BinView':
+			return lastProjectIndex + 1;
+		case 'DoneView':
+			return lastProjectIndex + 2;
+		default:
+			return lastProjectIndex + 3;
+	}
+};
+var _user$project$View_AppDrawer$navList = F2(
+	function (viewModel, m) {
+		var _p11 = viewModel;
+		var contexts = _p11.contexts;
+		var projects = _p11.projects;
+		return A3(
+			_elm_lang$html$Html$node,
+			'paper-listbox',
+			{
+				ctor: '::',
+				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'selectable', 'paper-item'),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_community$html_extra$Html_Attributes_Extra$intProperty,
+						'selected',
+						_user$project$View_AppDrawer$getSelectedIndex(viewModel)),
+					_1: {ctor: '[]'}
+				}
+			},
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				A2(_user$project$View_AppDrawer$entityListView, contexts, m.mainViewType),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					{
+						ctor: '::',
+						_0: _user$project$View_AppDrawer$divider,
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A2(_user$project$View_AppDrawer$entityListView, projects, m.mainViewType),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							{
+								ctor: '::',
+								_0: _user$project$View_AppDrawer$divider,
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A3(_user$project$View_AppDrawer$switchViewItem, 'delete', _user$project$Model$BinView, 'Bin'),
+								_1: {
+									ctor: '::',
+									_0: A3(_user$project$View_AppDrawer$switchViewItem, 'done', _user$project$Model$DoneView, 'Done'),
+									_1: {
+										ctor: '::',
+										_0: A3(_user$project$View_AppDrawer$switchViewItem, 'notification:sync', _user$project$Model$SyncView, 'Custom Sync'),
+										_1: {ctor: '[]'}
+									}
+								}
+							})))));
+	});
+var _user$project$View_AppDrawer$view = F2(
+	function (viewModel, m) {
+		var _p12 = viewModel;
+		var contexts = _p12.contexts;
+		var projects = _p12.projects;
+		return A2(
+			_edvail$elm_polymer$Polymer_App$drawer,
+			{
+				ctor: '::',
+				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'swipeOpen', true),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'drawer'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_App$headerLayout,
+					{
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'has-scrolling-region', ''),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_edvail$elm_polymer$Polymer_App$header,
+							{
+								ctor: '::',
+								_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'fixed', true),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'header'),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_edvail$elm_polymer$Polymer_App$toolbar,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(
+											{
+												ctor: '::',
+												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', 'white'),
+												_1: {
+													ctor: '::',
+													_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'background-color', viewModel.header.backgroundColor),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_user$project$WebComponents$paperIconButton,
+													{
+														ctor: '::',
+														_0: _user$project$WebComponents$iconA('menu'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+															_1: {
+																ctor: '::',
+																_0: A2(_elm_lang$html$Html_Attributes$attribute, 'drawer-toggle', ''),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$ToggleDrawer),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													},
+													{ctor: '[]'}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$View_AppDrawer$headLineText(viewModel.viewName),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$View_AppDrawer$navList, viewModel, m),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});

@@ -1,0 +1,15 @@
+var _user$project$Ext_Debug$tap = F2(
+	function (tapperFunction, value) {
+		var _p0 = tapperFunction(value);
+		return value;
+	});
+var _user$project$Ext_Debug$tapLog = F2(
+	function (transformerFunction, logString) {
+		return _user$project$Ext_Debug$tap(
+			function (_p1) {
+				return A2(
+					_elm_lang$core$Debug$log,
+					logString,
+					transformerFunction(_p1));
+			});
+	});

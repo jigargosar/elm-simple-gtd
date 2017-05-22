@@ -1,0 +1,125 @@
+var _user$project$View_TodoList$getTabindexAV = function (focused) {
+	var tabindexValue = focused ? 0 : -1;
+	return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
+};
+var _user$project$View_TodoList$listView = F2(
+	function (entityList, viewModel) {
+		var idList = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], entityList, _user$project$Model$getEntityId);
+		var focusedId = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(
+					_elm_community$maybe_extra$Maybe_Extra$orElse,
+					_elm_lang$core$List$head(entityList),
+					A2(
+						_elm_community$list_extra$List_Extra$find,
+						function (_p0) {
+							return A2(
+								_user$project$Ext_Function$equals,
+								viewModel.focusedEntityInfo.id,
+								_user$project$Model$getEntityId(_p0));
+						},
+						entityList)),
+				_user$project$Model$getEntityId),
+			'');
+		var isEntityFocused = function (_p1) {
+			return A2(
+				_user$project$Ext_Function$equals,
+				focusedId,
+				_user$project$Model$getEntityId(_p1));
+		};
+		var contextVMs = viewModel.contexts.entityList;
+		var getMaybeContextVM = function (context) {
+			return A2(
+				_elm_community$list_extra$List_Extra$find,
+				function (_p2) {
+					return A2(
+						_user$project$Ext_Function$equals,
+						_user$project$Document$getId(context),
+						function (_) {
+							return _.id;
+						}(_p2));
+				},
+				contextVMs);
+		};
+		var projectVMs = viewModel.projects.entityList;
+		var getMaybeProjectVM = function (project) {
+			return A2(
+				_elm_community$list_extra$List_Extra$find,
+				function (_p3) {
+					return A2(
+						_user$project$Ext_Function$equals,
+						_user$project$Document$getId(project),
+						function (_) {
+							return _.id;
+						}(_p3));
+				},
+				projectVMs);
+		};
+		var createEntityView = F2(
+			function (index, entity) {
+				var focused = isEntityFocused(entity);
+				var tabIndexAV = _user$project$View_TodoList$getTabindexAV(focused);
+				var _p4 = entity;
+				switch (_p4.ctor) {
+					case 'ContextEntity':
+						return A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+							getMaybeContextVM(_p4._0),
+							A2(_user$project$GroupEntity_View$initKeyed, tabIndexAV, viewModel));
+					case 'ProjectEntity':
+						return A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+							getMaybeProjectVM(_p4._0),
+							A2(_user$project$GroupEntity_View$initKeyed, tabIndexAV, viewModel));
+					default:
+						return _elm_lang$core$Maybe$Just(
+							_user$project$Todo_View$initKeyed(
+								A2(viewModel.createTodoViewModel, tabIndexAV, _p4._0)));
+				}
+			});
+		return A3(
+			_elm_lang$html$Html_Keyed$node,
+			'div',
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('entity-list focusable-list'),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Ext_Keyboard$onKeyDown(
+						_user$project$Msg$OnEntityListKeyDown(entityList)),
+					_1: {ctor: '[]'}
+				}
+			},
+			A2(
+				_elm_lang$core$List$filterMap,
+				_elm_lang$core$Basics$identity,
+				A2(_elm_lang$core$List$indexedMap, createEntityView, entityList)));
+	});
+var _user$project$View_TodoList$filtered = F2(
+	function (viewModel, model) {
+		var createTodoView = function (todo) {
+			return _user$project$Todo_View$initKeyed(
+				A2(
+					viewModel.createTodoViewModel,
+					_elm_lang$html$Html_Attributes$tabindex(-1),
+					todo));
+		};
+		return A3(
+			_elm_lang$html$Html_Keyed$node,
+			'paper-listbox',
+			{
+				ctor: '::',
+				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'selected', '0'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'selectedAttribute', 'selected'),
+					_1: {ctor: '[]'}
+				}
+			},
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				_user$project$Model$getFilteredTodoList(model),
+				createTodoView));
+	});

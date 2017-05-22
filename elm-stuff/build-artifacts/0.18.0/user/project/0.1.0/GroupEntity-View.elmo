@@ -1,0 +1,137 @@
+var _user$project$GroupEntity_View$editEntityView = F3(
+	function (tabindexAV, vm, form) {
+		return {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('layout vertical'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_edvail$elm_polymer$Polymer_Paper$input,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+							_1: {
+								ctor: '::',
+								_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'label', 'Name'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$value(form.name),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Events$onInput(vm.onNameChanged),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _user$project$View_Shared$defaultOkCancelDeleteButtons(vm.onDeleteClicked),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		};
+	});
+var _user$project$GroupEntity_View$defaultView = F2(
+	function (tabindexAV, vm) {
+		return {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('layout horizontal justified'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('title font-nowrap flex-auto'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$View_Shared$defaultBadge(vm),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$WebComponents$iconButton,
+							'create',
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('flex-none'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+									_1: {
+										ctor: '::',
+										_0: tabindexAV,
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		};
+	});
+var _user$project$GroupEntity_View$init = F3(
+	function (tabindexAV, vc, vm) {
+		var maybeForm = (!_elm_lang$core$Native_Utils.eq(vm.id, '')) ? vc.getMaybeEditEntityFormForEntityId(vm.id) : _elm_lang$core$Maybe$Nothing;
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('entity-item'),
+				_1: {
+					ctor: '::',
+					_0: tabindexAV,
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onFocus(vm.onFocus),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onBlur(vm.onBlur),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			},
+			A3(
+				_elm_community$maybe_extra$Maybe_Extra$unpack,
+				function (_p0) {
+					return A2(_user$project$GroupEntity_View$defaultView, tabindexAV, vm);
+				},
+				A2(_user$project$GroupEntity_View$editEntityView, tabindexAV, vm),
+				maybeForm));
+	});
+var _user$project$GroupEntity_View$initKeyed = F3(
+	function (tabindexAV, mainViewModel, vm) {
+		return {
+			ctor: '_Tuple2',
+			_0: vm.id,
+			_1: A3(_user$project$GroupEntity_View$init, tabindexAV, mainViewModel.shared, vm)
+		};
+	});

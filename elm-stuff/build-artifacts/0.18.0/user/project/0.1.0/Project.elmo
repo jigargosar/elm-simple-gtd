@@ -1,0 +1,141 @@
+var _user$project$Project$constructor = F6(
+	function (id, rev, createdAt, modifiedAt, deleted, name) {
+		return {id: id, rev: rev, createdAt: createdAt, modifiedAt: modifiedAt, deleted: deleted, dirty: false, name: name};
+	});
+var _user$project$Project$init = F3(
+	function (name, now, id) {
+		return A6(_user$project$Project$constructor, id, '', now, now, false, name);
+	});
+var _user$project$Project$null = A6(_user$project$Project$constructor, '', '', 0, 0, false, '<No Project>');
+var _user$project$Project$isNull = _user$project$Ext_Function$equals(_user$project$Project$null);
+var _user$project$Project$decoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'name',
+	_elm_lang$core$Json_Decode$string,
+	_user$project$Document$documentFieldsDecoder(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Project$constructor)));
+var _user$project$Project$setModifiedAt = F2(
+	function (modifiedAt, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{modifiedAt: modifiedAt});
+	});
+var _user$project$Project$setDeleted = F2(
+	function (deleted, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{deleted: deleted});
+	});
+var _user$project$Project$setName = F2(
+	function (name, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{name: name});
+	});
+var _user$project$Project$updateName = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Project$setName,
+			updater(model),
+			model);
+	});
+var _user$project$Project$getName = function (_) {
+	return _.name;
+};
+var _user$project$Project$otherFieldsEncoder = function (project) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_user$project$Ext_Function_Infix_ops['=>'],
+			'name',
+			_elm_lang$core$Json_Encode$string(
+				_user$project$Project$getName(project))),
+		_1: {ctor: '[]'}
+	};
+};
+var _user$project$Project$setRev = F2(
+	function (rev, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{rev: rev});
+	});
+var _user$project$Project$updateRev = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Project$setRev,
+			updater(model),
+			model);
+	});
+var _user$project$Project$getRev = function (_) {
+	return _.rev;
+};
+var _user$project$Project$setId = F2(
+	function (id, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{id: id});
+	});
+var _user$project$Project$updateId = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Project$setId,
+			updater(model),
+			model);
+	});
+var _user$project$Project$nameEquals = function (name) {
+	return function (_p0) {
+		return A2(
+			_user$project$Ext_Function$equals,
+			name,
+			_user$project$Project$getName(_p0));
+	};
+};
+var _user$project$Project$findByName = function (projectName) {
+	return _user$project$Store$findBy(
+		_user$project$Project$nameEquals(
+			_elm_lang$core$String$trim(projectName)));
+};
+var _user$project$Project$insertIfNotExistByName = F3(
+	function (projectName, now, store) {
+		return _elm_community$string_extra$String_Extra$isBlank(projectName) ? store : A3(
+			_elm_community$maybe_extra$Maybe_Extra$unpack,
+			function (_p1) {
+				return _elm_lang$core$Tuple$second(
+					A2(
+						_user$project$Store$insert,
+						A2(_user$project$Project$init, projectName, now),
+						store));
+			},
+			function (_p2) {
+				return store;
+			},
+			A2(_user$project$Project$findByName, projectName, store));
+	});
+var _user$project$Project$storeGenerator = A3(_user$project$Store$generator, 'project-db', _user$project$Project$otherFieldsEncoder, _user$project$Project$decoder);
+var _user$project$Project$findNameById = function (id) {
+	return A2(
+		_user$project$Ext_Function_Infix_ops['>>?'],
+		_user$project$Store$findById(id),
+		_user$project$Project$getName);
+};
+var _user$project$Project$getProjectIdToNameDict = function (_p3) {
+	return _elm_lang$core$Dict$fromList(
+		A2(
+			_user$project$Store$map,
+			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2(
+				{ctor: '_Tuple2', _0: _user$project$Document$getId, _1: _user$project$Project$getName}),
+			_p3));
+};
+var _user$project$Project$getEncodedProjectNames = function (_p4) {
+	return _elm_lang$core$Json_Encode$list(
+		A2(
+			_user$project$Store$map,
+			function (_p5) {
+				return _elm_lang$core$Json_Encode$string(
+					_user$project$Project$getName(_p5));
+			},
+			_p4));
+};
+var _user$project$Project$Record = function (a) {
+	return {name: a};
+};

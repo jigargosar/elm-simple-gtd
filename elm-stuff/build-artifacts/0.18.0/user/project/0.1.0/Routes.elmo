@@ -1,0 +1,202 @@
+var _user$project$Routes$builder2messages = function (builder) {
+	var _p0 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
+	_v0_10:
+	do {
+		if (_p0.ctor === '::') {
+			if (_p0._1.ctor === '::') {
+				if (_p0._1._1.ctor === '[]') {
+					switch (_p0._0) {
+						case 'lists':
+							switch (_p0._1._0) {
+								case 'contexts':
+									return {
+										ctor: '::',
+										_0: _user$project$Msg$SetGroupByView(_user$project$Model$ContextsView),
+										_1: {ctor: '[]'}
+									};
+								case 'projects':
+									return {
+										ctor: '::',
+										_0: _user$project$Msg$SetGroupByView(_user$project$Model$ProjectsView),
+										_1: {ctor: '[]'}
+									};
+								case 'bin':
+									return {
+										ctor: '::',
+										_0: _user$project$Msg$SwitchView(_user$project$Model$BinView),
+										_1: {ctor: '[]'}
+									};
+								case 'done':
+									return {
+										ctor: '::',
+										_0: _user$project$Msg$SwitchView(_user$project$Model$DoneView),
+										_1: {ctor: '[]'}
+									};
+								default:
+									break _v0_10;
+							}
+						case 'context':
+							return {
+								ctor: '::',
+								_0: _user$project$Msg$SetGroupByView(
+									_user$project$Model$ContextView(_p0._1._0)),
+								_1: {ctor: '[]'}
+							};
+						case 'project':
+							if (_p0._1._0 === 'NotAssigned') {
+								return {
+									ctor: '::',
+									_0: _user$project$Msg$SetGroupByView(
+										_user$project$Model$ProjectView('')),
+									_1: {ctor: '[]'}
+								};
+							} else {
+								return {
+									ctor: '::',
+									_0: _user$project$Msg$SetGroupByView(
+										_user$project$Model$ProjectView(_p0._1._0)),
+									_1: {ctor: '[]'}
+								};
+							}
+						case 'notification':
+							return {
+								ctor: '::',
+								_0: _user$project$Msg$ShowReminderOverlayForTodoId(_p0._1._0),
+								_1: {ctor: '[]'}
+							};
+						default:
+							break _v0_10;
+					}
+				} else {
+					break _v0_10;
+				}
+			} else {
+				switch (_p0._0) {
+					case 'Inbox':
+						return {
+							ctor: '::',
+							_0: _user$project$Msg$SetGroupByView(
+								_user$project$Model$ContextView('')),
+							_1: {ctor: '[]'}
+						};
+					case 'custom-sync':
+						return {
+							ctor: '::',
+							_0: _user$project$Msg$SwitchView(_user$project$Model$SyncView),
+							_1: {ctor: '[]'}
+						};
+					default:
+						break _v0_10;
+				}
+			}
+		} else {
+			break _v0_10;
+		}
+	} while(false);
+	return {ctor: '[]'};
+};
+var _user$project$Routes$hash2messages = function (location) {
+	return _user$project$Routes$builder2messages(
+		_rgrempel$elm_route_url$RouteUrl_Builder$fromHash(location.href));
+};
+var _user$project$Routes$getPathFromModel = function (model) {
+	var _p1 = _user$project$Model$getMainViewType(model);
+	switch (_p1.ctor) {
+		case 'EntityListView':
+			var _p2 = _p1._0;
+			switch (_p2.ctor) {
+				case 'ContextsView':
+					return {
+						ctor: '::',
+						_0: 'lists',
+						_1: {
+							ctor: '::',
+							_0: 'contexts',
+							_1: {ctor: '[]'}
+						}
+					};
+				case 'ProjectsView':
+					return {
+						ctor: '::',
+						_0: 'lists',
+						_1: {
+							ctor: '::',
+							_0: 'projects',
+							_1: {ctor: '[]'}
+						}
+					};
+				case 'ProjectView':
+					var _p3 = _p2._0;
+					return _elm_lang$core$String$isEmpty(_p3) ? {
+						ctor: '::',
+						_0: 'project',
+						_1: {
+							ctor: '::',
+							_0: 'NotAssigned',
+							_1: {ctor: '[]'}
+						}
+					} : {
+						ctor: '::',
+						_0: 'project',
+						_1: {
+							ctor: '::',
+							_0: _p3,
+							_1: {ctor: '[]'}
+						}
+					};
+				default:
+					var _p4 = _p2._0;
+					return _elm_lang$core$String$isEmpty(_p4) ? {
+						ctor: '::',
+						_0: 'Inbox',
+						_1: {ctor: '[]'}
+					} : {
+						ctor: '::',
+						_0: 'context',
+						_1: {
+							ctor: '::',
+							_0: _p4,
+							_1: {ctor: '[]'}
+						}
+					};
+			}
+		case 'BinView':
+			return {
+				ctor: '::',
+				_0: 'lists',
+				_1: {
+					ctor: '::',
+					_0: 'bin',
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'DoneView':
+			return {
+				ctor: '::',
+				_0: 'lists',
+				_1: {
+					ctor: '::',
+					_0: 'done',
+					_1: {ctor: '[]'}
+				}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: 'custom-sync',
+				_1: {ctor: '[]'}
+			};
+	}
+};
+var _user$project$Routes$delta2builder = F2(
+	function (previous, current) {
+		return _elm_lang$core$Maybe$Just(
+			A2(
+				_rgrempel$elm_route_url$RouteUrl_Builder$replacePath,
+				_user$project$Routes$getPathFromModel(current),
+				_rgrempel$elm_route_url$RouteUrl_Builder$builder));
+	});
+var _user$project$Routes$delta2hash = A2(
+	_user$project$Ext_Function_Infix_ops['>>>'],
+	_user$project$Routes$delta2builder,
+	_elm_lang$core$Maybe$map(_rgrempel$elm_route_url$RouteUrl_Builder$toHashChange));

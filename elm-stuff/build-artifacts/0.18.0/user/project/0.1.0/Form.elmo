@@ -1,0 +1,44 @@
+var _user$project$Form$setFields = F2(
+	function (fields, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{fields: fields});
+	});
+var _user$project$Form$updateFieldsM = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Form$setFields,
+			updater(model),
+			model);
+	});
+var _user$project$Form$getFields = function (_) {
+	return _.fields;
+};
+var _user$project$Form$updateFields = F2(
+	function (updater, model) {
+		return A2(
+			_user$project$Form$setFields,
+			updater(
+				_user$project$Form$getFields(model)),
+			model);
+	});
+var _user$project$Form$get = function (name) {
+	return A2(
+		_user$project$Ext_Function_Infix_ops['>>?='],
+		function (_p0) {
+			return A2(
+				_elm_lang$core$Dict$get,
+				name,
+				_user$project$Form$getFields(_p0));
+		},
+		'');
+};
+var _user$project$Form$set = F2(
+	function (name, value) {
+		return _user$project$Form$updateFields(
+			A2(_elm_lang$core$Dict$insert, name, value));
+	});
+var _user$project$Form$init = {fields: _elm_lang$core$Dict$empty};
+var _user$project$Form$Model = function (a) {
+	return {fields: a};
+};

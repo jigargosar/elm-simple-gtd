@@ -1,0 +1,15 @@
+var _user$project$Ext_Decode$traceDecoder = F2(
+	function (message, decoder) {
+		return A2(
+			_elm_lang$core$Json_Decode$andThen,
+			function (value) {
+				var _p0 = A2(_elm_lang$core$Json_Decode$decodeValue, decoder, value);
+				if (_p0.ctor === 'Ok') {
+					return _elm_lang$core$Json_Decode$succeed(_p0._0);
+				} else {
+					return _elm_lang$core$Json_Decode$fail(
+						A2(_elm_lang$core$Debug$log, message, _p0._0));
+				}
+			},
+			_elm_lang$core$Json_Decode$value);
+	});

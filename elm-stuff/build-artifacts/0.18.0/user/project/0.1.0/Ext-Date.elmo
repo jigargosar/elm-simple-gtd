@@ -1,0 +1,25 @@
+var _user$project$Ext_Date$dayDiff = F2(
+	function (refDate, date) {
+		return A3(
+			_justinmimbs$elm_date_extra$Date_Extra$diff,
+			_justinmimbs$elm_date_extra$Date_Extra$Day,
+			A2(_justinmimbs$elm_date_extra$Date_Extra$ceiling, _justinmimbs$elm_date_extra$Date_Extra$Day, refDate),
+			A2(_justinmimbs$elm_date_extra$Date_Extra$ceiling, _justinmimbs$elm_date_extra$Date_Extra$Day, date));
+	});
+var _user$project$Ext_Date$smartFormat = F2(
+	function (refDate, date) {
+		var diffInDays = A2(_user$project$Ext_Date$dayDiff, refDate, date);
+		var formatDateWithoutTime = _mgold$elm_date_format$Date_Format$format('%e %b');
+		var formattedDate = _elm_lang$core$String$trim(
+			formatDateWithoutTime(date));
+		var formatTimeOfDay = _mgold$elm_date_format$Date_Format$format('%l:%M%P');
+		var formattedTime = _elm_lang$core$String$trim(
+			formatTimeOfDay(date));
+		return _elm_lang$core$Native_Utils.eq(diffInDays, 0) ? formattedTime : (_elm_lang$core$Native_Utils.eq(diffInDays, -1) ? A2(_elm_lang$core$Basics_ops['++'], 'Yesterday ', formattedTime) : (_elm_lang$core$Native_Utils.eq(diffInDays, 1) ? A2(_elm_lang$core$Basics_ops['++'], 'Tomorrow ', formattedTime) : (((_elm_lang$core$Native_Utils.cmp(diffInDays, 1) > 0) && (_elm_lang$core$Native_Utils.cmp(diffInDays, 7) < 0)) ? A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(_mgold$elm_date_format$Date_Format$format, '%A ', date),
+			formattedTime) : A2(
+			_elm_lang$core$Basics_ops['++'],
+			formattedDate,
+			A2(_elm_lang$core$Basics_ops['++'], ' ', formattedTime)))));
+	});

@@ -1,0 +1,225 @@
+var _user$project$View$addTodoFab = function (m) {
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$fab,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('add-fab'),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'icon', 'add'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'mini', ''),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$NewTodo),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		},
+		{ctor: '[]'});
+};
+var _user$project$View$appDrawerLayoutView = function (m) {
+	var onClickAttributeList = function () {
+		var $return = {
+			ctor: '::',
+			_0: A2(
+				_user$project$Ext_Html$onClickTargetPathHavingIds,
+				{
+					ctor: '::',
+					_0: 'context-dropdown',
+					_1: {
+						ctor: '::',
+						_0: 'project-dropdown',
+						_1: {ctor: '[]'}
+					}
+				},
+				_user$project$Msg$DeactivateEditingMode),
+			_1: {ctor: '[]'}
+		};
+		var _p0 = m.editMode;
+		switch (_p0.ctor) {
+			case 'EditTodoContext':
+				return $return;
+			case 'EditTodoProject':
+				return $return;
+			default:
+				return {ctor: '[]'};
+		}
+	}();
+	var onClickHandler = function (pathIdList) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(
+					_elm_community$list_extra$List_Extra$find,
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
+						_elm_lang$core$List$member,
+						{
+							ctor: '::',
+							_0: 'context-dropdown',
+							_1: {
+								ctor: '::',
+								_0: 'project-dropdown',
+								_1: {ctor: '[]'}
+							}
+						}),
+					pathIdList),
+				function (_p1) {
+					return _user$project$Msg$DeactivateEditingMode;
+				}),
+			_user$project$Msg$commonMsg.noOp);
+	};
+	var forceNarrow = _user$project$Model$getLayoutForceNarrow(m);
+	var viewModel = _user$project$ViewModel$create(m);
+	return A2(
+		_edvail$elm_polymer$Polymer_App$drawerLayout,
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'forceNarrow', forceNarrow),
+				_1: {
+					ctor: '::',
+					_0: A2(_user$project$WebComponents$onBoolPropertyChanged, 'narrow', _user$project$Msg$OnLayoutNarrowChanged),
+					_1: {ctor: '[]'}
+				}
+			},
+			onClickAttributeList),
+		{
+			ctor: '::',
+			_0: A2(_user$project$View_AppDrawer$view, viewModel, m),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_App$headerLayout,
+					{
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'has-scrolling-region', ''),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(_user$project$View_Header$init, viewModel, m),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$Main_View$init, viewModel, m),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$View$bottomSheet = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('full-view'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_edvail$elm_polymer$Polymer_Paper$material,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'background-color', 'white'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('fixed-bottom'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'elevation', '5'),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_Paper$item,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('bottom'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_edvail$elm_polymer$Polymer_Paper$item,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('bottom'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_edvail$elm_polymer$Polymer_Paper$item,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('bottom'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$View$appView = function (m) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('app-view'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$View$appDrawerLayoutView(m),
+			_1: {
+				ctor: '::',
+				_0: _user$project$View$addTodoFab(m),
+				_1: {
+					ctor: '::',
+					_0: _user$project$View_ReminderOverlay$showReminderOverlay(m),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$View$init = function (m) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('root'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$Firebase_View$init(m),
+			_1: {
+				ctor: '::',
+				_0: _user$project$View$appView(m),
+				_1: {ctor: '[]'}
+			}
+		});
+};

@@ -1,0 +1,91 @@
+var _user$project$Ext_Return$andThenMaybe = function (f) {
+	return _Fresheyeball$elm_return$Return$andThen(
+		function (m) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				f(m),
+				_Fresheyeball$elm_return$Return$singleton(m));
+		});
+};
+var _user$project$Ext_Return$apply = _elm_lang$core$Basics$flip(_Fresheyeball$elm_return$Return$andThen);
+var _user$project$Ext_Return$maybeEffect = function (f) {
+	return _Fresheyeball$elm_return$Return$effect_(
+		function (m) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				f(m),
+				_elm_lang$core$Platform_Cmd$none);
+		});
+};
+var _user$project$Ext_Return$andThenApplyWithMaybe = F2(
+	function (f1, f2) {
+		return _Fresheyeball$elm_return$Return$andThen(
+			function (m) {
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						f1(m),
+						f2),
+					m);
+			});
+	});
+var _user$project$Ext_Return$andThenApplyWith = F2(
+	function (f1, f2) {
+		return _Fresheyeball$elm_return$Return$andThen(
+			function (m) {
+				return A2(
+					f2,
+					f1(m),
+					m);
+			});
+	});
+var _user$project$Ext_Return$mapModelWith = F2(
+	function (f1, f2) {
+		return _Fresheyeball$elm_return$Return$map(
+			function (m) {
+				return A2(
+					f2,
+					f1(m),
+					m);
+			});
+	});
+var _user$project$Ext_Return$mapModelWithMaybe = F2(
+	function (f1, f2) {
+		return _Fresheyeball$elm_return$Return$map(
+			function (m) {
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						f1(m),
+						f2),
+					m);
+			});
+	});
+var _user$project$Ext_Return$with = F2(
+	function (f1, f2) {
+		return _Fresheyeball$elm_return$Return$andThen(
+			function (m) {
+				return A2(
+					f2,
+					f1(m),
+					_Fresheyeball$elm_return$Return$singleton(m));
+			});
+	});
+var _user$project$Ext_Return$withMaybe = F2(
+	function (f1, f2) {
+		return _Fresheyeball$elm_return$Return$andThen(
+			function (m) {
+				return A2(
+					_user$project$Ext_Function$apply,
+					_Fresheyeball$elm_return$Return$singleton(m),
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+						A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+							f1(m),
+							f2),
+						_elm_lang$core$Basics$identity));
+			});
+	});

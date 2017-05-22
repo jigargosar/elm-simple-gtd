@@ -1,0 +1,183 @@
+var _user$project$Firebase$customSw = A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'customSw', true);
+var _user$project$Firebase$encodeFCMToken = _elm_community$json_extra$Json_Encode_Extra$maybe(_elm_lang$core$Json_Encode$string);
+var _user$project$Firebase$getPhotoURL = function (_) {
+	return _.photoURL;
+};
+var _user$project$Firebase$getMaybeUserId = function (user) {
+	var _p0 = user;
+	if (_p0.ctor === 'NotLoggedIn') {
+		return _elm_lang$core$Maybe$Nothing;
+	} else {
+		return _elm_lang$core$Maybe$Just(_p0._0.id);
+	}
+};
+var _user$project$Firebase$getMaybeUserProfile = function (user) {
+	var _p1 = user;
+	if (_p1.ctor === 'NotLoggedIn') {
+		return _elm_lang$core$Maybe$Nothing;
+	} else {
+		return _elm_lang$core$List$head(_p1._0.providerData);
+	}
+};
+var _user$project$Firebase$fcmTokenDecoder = _elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string);
+var _user$project$Firebase$onFCMTokenChanged = A2(_user$project$WebComponents$onPropertyChanged, 'token', _user$project$Firebase$fcmTokenDecoder);
+var _user$project$Firebase$signIn = _elm_lang$core$Native_Platform.outgoingPort(
+	'signIn',
+	function (v) {
+		return null;
+	});
+var _user$project$Firebase$signOut = _elm_lang$core$Native_Platform.outgoingPort(
+	'signOut',
+	function (v) {
+		return null;
+	});
+var _user$project$Firebase$fireDataWrite = _elm_lang$core$Native_Platform.outgoingPort(
+	'fireDataWrite',
+	function (v) {
+		return [v._0, v._1];
+	});
+var _user$project$Firebase$setTokenCmd = F3(
+	function (deviceId, uid, fcmToken) {
+		return _user$project$Firebase$fireDataWrite(
+			{
+				ctor: '_Tuple2',
+				_0: A2(
+					_elm_lang$core$Basics_ops['++'],
+					'/users/',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						uid,
+						A2(_elm_lang$core$Basics_ops['++'], '/tokens/', deviceId))),
+				_1: _user$project$Firebase$encodeFCMToken(fcmToken)
+			});
+	});
+var _user$project$Firebase$scheduledReminderNotificationCmd = F3(
+	function (maybeTime, uid, todoId) {
+		var value = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				maybeTime,
+				function (time) {
+					return _elm_lang$core$Json_Encode$object(
+						{
+							ctor: '::',
+							_0: A2(
+								_user$project$Ext_Function_Infix_ops['=>'],
+								'todoId',
+								_elm_lang$core$Json_Encode$string(todoId)),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_user$project$Ext_Function_Infix_ops['=>'],
+									'uid',
+									_elm_lang$core$Json_Encode$string(uid)),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_user$project$Ext_Function_Infix_ops['=>'],
+										'timestamp',
+										_elm_lang$core$Json_Encode$float(time)),
+									_1: {ctor: '[]'}
+								}
+							}
+						});
+				}),
+			_elm_lang$core$Json_Encode$null);
+		return _user$project$Firebase$fireDataWrite(
+			{
+				ctor: '_Tuple2',
+				_0: A2(
+					_elm_lang$core$Basics_ops['++'],
+					'/notifications/',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						uid,
+						A2(_elm_lang$core$Basics_ops['++'], '---', todoId))),
+				_1: value
+			});
+	});
+var _user$project$Firebase$fireDataPush = _elm_lang$core$Native_Platform.outgoingPort(
+	'fireDataPush',
+	function (v) {
+		return [v._0, v._1];
+	});
+var _user$project$Firebase$fireStartSync = _elm_lang$core$Native_Platform.outgoingPort(
+	'fireStartSync',
+	function (v) {
+		return v;
+	});
+var _user$project$Firebase$startSyncCmd = _user$project$Firebase$fireStartSync;
+var _user$project$Firebase$onFirebaseChange = _elm_lang$core$Native_Platform.incomingPort(
+	'onFirebaseChange',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (x0) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (x1) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{ctor: '_Tuple2', _0: x0, _1: x1});
+				},
+				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
+		},
+		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
+var _user$project$Firebase$onChange = function (tagger) {
+	return _user$project$Firebase$onFirebaseChange(
+		_elm_lang$core$Basics$uncurry(tagger));
+};
+var _user$project$Firebase$UserModel = F2(
+	function (a, b) {
+		return {id: a, providerData: b};
+	});
+var _user$project$Firebase$ProviderData = F5(
+	function (a, b, c, d, e) {
+		return {displayName: a, email: b, photoURL: c, providerId: d, uid: e};
+	});
+var _user$project$Firebase$providerDataDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'uid',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'providerId',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'photoURL',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'email',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'displayName',
+					_elm_lang$core$Json_Decode$string,
+					_elm_lang$core$Json_Decode$succeed(_user$project$Firebase$ProviderData))))));
+var _user$project$Firebase$LoggedIn = function (a) {
+	return {ctor: 'LoggedIn', _0: a};
+};
+var _user$project$Firebase$NotLoggedIn = {ctor: 'NotLoggedIn'};
+var _user$project$Firebase$userDecoder = _elm_lang$core$Json_Decode$oneOf(
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$core$Json_Decode$map,
+			_user$project$Firebase$LoggedIn,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'providerData',
+				_elm_lang$core$Json_Decode$list(_user$project$Firebase$providerDataDecoder),
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'uid',
+					_elm_lang$core$Json_Decode$string,
+					_elm_lang$core$Json_Decode$succeed(_user$project$Firebase$UserModel)))),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$core$Json_Decode$succeed(_user$project$Firebase$NotLoggedIn),
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Firebase$onUserChanged = A2(_user$project$WebComponents$onPropertyChanged, 'user', _user$project$Firebase$userDecoder);

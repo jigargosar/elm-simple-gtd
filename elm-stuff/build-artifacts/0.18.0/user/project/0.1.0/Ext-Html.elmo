@@ -1,0 +1,81 @@
+var _user$project$Ext_Html$nthParent = F2(
+	function (count, decoder) {
+		return _debois$elm_dom$DOM$target(
+			A3(
+				_elm_lang$core$List$foldl,
+				F2(
+					function (_p0, acc) {
+						return _debois$elm_dom$DOM$parentElement(acc);
+					}),
+				decoder,
+				A2(_elm_lang$core$List$range, 0, count)));
+	});
+var _user$project$Ext_Html$domIdDecoder = A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string);
+var _user$project$Ext_Html$targetAncestorIdsHelp = F2(
+	function (target, ids) {
+		return _elm_lang$core$Json_Decode$oneOf(
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Json_Decode$andThen,
+					function (domId) {
+						var parentIndex = _elm_lang$core$List$length(ids);
+						return A2(
+							_user$project$Ext_Html$targetAncestorIdsHelp,
+							A2(_user$project$Ext_Html$nthParent, parentIndex, _user$project$Ext_Html$domIdDecoder),
+							{ctor: '::', _0: domId, _1: ids});
+					},
+					target),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$Json_Decode$succeed(ids),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$Ext_Html$targetAncestorIds = A2(
+	_user$project$Ext_Html$targetAncestorIdsHelp,
+	_debois$elm_dom$DOM$target(_user$project$Ext_Html$domIdDecoder),
+	{ctor: '[]'});
+var _user$project$Ext_Html$onClickPathIds = function (toMsg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		A2(_elm_lang$core$Json_Decode$map, toMsg, _user$project$Ext_Html$targetAncestorIds));
+};
+var _user$project$Ext_Html$targetPathHavingIds = F2(
+	function (domIds, toMsg) {
+		var successFn = function (_p1) {
+			return _elm_lang$core$Json_Decode$succeed(toMsg);
+		};
+		var failFn = function (_p2) {
+			return _elm_lang$core$Json_Decode$fail(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'domIds not found in event target path: ',
+					_elm_lang$core$Basics$toString(domIds)));
+		};
+		return A2(
+			_elm_lang$core$Json_Decode$andThen,
+			function (_p3) {
+				return A3(
+					_elm_community$maybe_extra$Maybe_Extra$unpack,
+					successFn,
+					failFn,
+					A2(
+						_elm_community$list_extra$List_Extra$find,
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$List$member, domIds),
+						_p3));
+			},
+			_user$project$Ext_Html$targetAncestorIds);
+	});
+var _user$project$Ext_Html$onClickTargetPathHavingIds = A2(
+	_user$project$Ext_Function_Infix_ops['>>>'],
+	_user$project$Ext_Html$targetPathHavingIds,
+	_elm_lang$html$Html_Events$on('click'));
+var _user$project$Ext_Html$floatProp = _elm_community$html_extra$Html_Attributes_Extra$floatProperty;
+var _user$project$Ext_Html$boolProp = _elm_community$html_extra$Html_Attributes_Extra$boolProperty;
+var _user$project$Ext_Html$intProp = _elm_community$html_extra$Html_Attributes_Extra$intProperty;
+var _user$project$Ext_Html$prop = _elm_community$html_extra$Html_Attributes_Extra$stringProperty;
+var _user$project$Ext_Html$attr = _elm_lang$html$Html_Attributes$attribute;
+var _user$project$Ext_Html$_p4 = 1;

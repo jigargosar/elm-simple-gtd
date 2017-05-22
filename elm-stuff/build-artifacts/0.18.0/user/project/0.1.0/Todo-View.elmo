@@ -1,0 +1,966 @@
+var _user$project$Todo_View$editView = function (edit) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('vertical layout flex-auto'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('flex'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A3(
+							_elm_lang$html$Html$node,
+							'paper-textarea',
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+								_1: {
+									ctor: '::',
+									_0: A2(_edvail$elm_polymer$Polymer_Attributes$stringProperty, 'label', 'Todo'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$value(edit.todo.text),
+										_1: {
+											ctor: '::',
+											_0: A2(_elm_lang$html$Html_Attributes$property, 'keyBindings', _elm_lang$core$Json_Encode$null),
+											_1: {
+												ctor: '::',
+												_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onInput(edit.onTodoTextChanged),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$View_Shared$defaultOkCancelDeleteButtons(edit.onDeleteClicked),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {ctor: '[]'}
+	};
+};
+var _user$project$Todo_View$createEditTodoViewModel = F2(
+	function (form, todo) {
+		var updateTodoForm = _user$project$Msg$UpdateTodoForm(form);
+		var todoId = form.id;
+		return {
+			todo: {text: form.todoText},
+			onTodoTextChanged: function (_p0) {
+				return updateTodoForm(
+					_user$project$Todo_Form$SetText(_p0));
+			},
+			onDeleteClicked: A2(
+				_user$project$Msg$OnEntityAction,
+				_user$project$Model$TodoEntity(todo),
+				_user$project$Model$ToggleDeleted)
+		};
+	});
+var _user$project$Todo_View$createReminderViewModel = F2(
+	function (vc, todo) {
+		var dueAt = _user$project$Todo$getDueAt(todo);
+		var smartFormat = _user$project$Ext_Time$smartFormat(vc.now);
+		var overDueText = 'Overdue';
+		var formatReminderTime = function (time) {
+			var now = _elm_lang$core$Date$fromTime(vc.now);
+			var due = _elm_lang$core$Date$fromTime(time);
+			return (_elm_lang$core$Native_Utils.cmp(time, vc.now) < 0) ? overDueText : A2(_user$project$Ext_Time$smartFormat, vc.now, time);
+		};
+		var displayText = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				_user$project$Todo$getMaybeTime(todo),
+				formatReminderTime),
+			'');
+		var isDropdownOpen = _elm_community$maybe_extra$Maybe_Extra$isJust(
+			vc.getMaybeTodoReminderFormForTodo(todo));
+		var form = vc.getTodoReminderForm(todo);
+		var updateReminderForm = _user$project$Msg$UpdateReminderForm(form);
+		return {
+			isDropdownOpen: isDropdownOpen,
+			date: form.date,
+			time: form.time,
+			displayText: displayText,
+			isOverDue: _elm_lang$core$Native_Utils.eq(displayText, overDueText),
+			isSnoozed: _user$project$Todo$isSnoozed(todo),
+			dueAtToolTipText: A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					_user$project$Todo$getDueAt(todo),
+					_user$project$Ext_Time$formatDateTime),
+				''),
+			dayDiffInWords: A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					dueAt,
+					_user$project$Ext_Time$dayDiffInWords(vc.now)),
+				''),
+			onDateChanged: function (_p1) {
+				return updateReminderForm(
+					_user$project$Todo_ReminderForm$SetDate(_p1));
+			},
+			onTimeChanged: function (_p2) {
+				return updateReminderForm(
+					_user$project$Todo_ReminderForm$SetTime(_p2));
+			},
+			startEditingMsg: _user$project$Msg$StartEditingReminder(todo)
+		};
+	});
+var _user$project$Todo_View$projectDropdownMenu = function (vm) {
+	var createProjectItem = function (project) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{
+				ctor: '::',
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(
+					vm.setProjectMsg(project)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: function (_p3) {
+					return _elm_lang$html$Html$text(
+						_user$project$Project$getName(_p3));
+				}(project),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'project-dropdown-', vm.key)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'height', '24px'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(vm.showProjectDropdownMsg),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('title primary-text-color'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(vm.projectDisplayName),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Todo_View$contextDropdownMenu = function (vm) {
+	var createContextItem = function (context) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{
+				ctor: '::',
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(
+					vm.setContextMsg(context)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: function (_p4) {
+					return _elm_lang$html$Html$text(
+						_user$project$Context$getName(_p4));
+				}(context),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'context-dropdown-', vm.key)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'height', '24px'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(vm.showContextDropdownMsg),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('title primary-text-color'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(vm.contextDisplayName),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Todo_View$doneIconButton = function (vm) {
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$iconButton,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'done-icon done-',
+					_elm_lang$core$Basics$toString(vm.isDone))),
+			_1: {
+				ctor: '::',
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.toggleDoneMsg),
+				_1: {
+					ctor: '::',
+					_0: _user$project$WebComponents$iconA('done'),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{ctor: '[]'});
+};
+var _user$project$Todo_View$createTodoViewModel = F3(
+	function (vc, tabindexAV, todo) {
+		var toggleDoneMsg = _user$project$Msg$ToggleTodoDone(todo);
+		var maybeEditTodoForm = vc.getMaybeEditTodoFormForTodo(todo);
+		var createEntityActionMsg = _user$project$Msg$OnEntityAction(
+			_user$project$Model$TodoEntity(todo));
+		var startEditingMsg = createEntityActionMsg(_user$project$Model$StartEditing);
+		var toggleDeleteMsg = createEntityActionMsg(_user$project$Model$ToggleDeleted);
+		var onKeyDownMsg = function (_p5) {
+			var _p6 = _p5;
+			var _p7 = _p6.key;
+			switch (_p7.ctor) {
+				case 'Space':
+					return createEntityActionMsg(_user$project$Model$ToggleSelected);
+				case 'CharE':
+					return startEditingMsg;
+				case 'CharD':
+					return toggleDoneMsg;
+				case 'Delete':
+					return toggleDeleteMsg;
+				case 'CharP':
+					return _user$project$Msg$StartEditingProject(todo);
+				case 'CharC':
+					return _user$project$Msg$StartEditingContext(todo);
+				default:
+					return _user$project$Msg$commonMsg.noOp;
+			}
+		};
+		var text = _user$project$Todo$getText(todo);
+		var _p8 = function () {
+			var lines = _elm_lang$core$String$lines(
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					_elm_community$string_extra$String_Extra$nonEmpty(
+						_elm_lang$core$String$trim(text)),
+					'< empty >'));
+			var _p9 = lines;
+			if (_p9.ctor === '[]') {
+				return {ctor: '_Tuple2', _0: '', _1: false};
+			} else {
+				if (_p9._1.ctor === '[]') {
+					return {ctor: '_Tuple2', _0: _p9._0, _1: false};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: A2(_elm_lang$core$Basics_ops['++'], _p9._0, ' ...'),
+						_1: true
+					};
+				}
+			}
+		}();
+		var displayText = _p8._0;
+		var isMultiLine = _p8._1;
+		var displayText2 = A2(
+			_elm_community$string_extra$String_Extra$ellipsis,
+			100,
+			_elm_lang$core$String$trim(text));
+		var contextId = _user$project$Todo$getContextId(todo);
+		var projectId = _user$project$Todo$getProjectId(todo);
+		var truncateName = _elm_community$string_extra$String_Extra$ellipsis(15);
+		var projectDisplayName = A2(
+			_elm_lang$core$String$append,
+			'#',
+			truncateName(
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_user$project$Ext_Function_Infix_ops['>>?'],
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, vc.projectByIdDict),
+						_user$project$Project$getName)(projectId),
+					'')));
+		var contextDisplayName = truncateName(
+			A2(
+				_elm_lang$core$String$append,
+				'@',
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_user$project$Ext_Function_Infix_ops['>>?'],
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, vc.contextByIdDict),
+						_user$project$Context$getName)(contextId),
+					'Inbox')));
+		var todoId = _user$project$Document$getId(todo);
+		var isFocused = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				vc.maybeFocusedEntity,
+				function (_p10) {
+					return A2(
+						_user$project$Ext_Function$equals,
+						todoId,
+						_user$project$Model$getEntityId(_p10));
+				}),
+			false);
+		return {
+			isDone: _user$project$Todo$getDone(todo),
+			key: todoId,
+			isDeleted: _user$project$Todo$getDeleted(todo),
+			isFocused: isFocused,
+			onKeyDownMsg: onKeyDownMsg,
+			text: text,
+			isMultiLine: isMultiLine,
+			displayText: displayText,
+			projectDisplayName: projectDisplayName,
+			contextDisplayName: contextDisplayName,
+			selectedProjectIndex: A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				A2(
+					_elm_community$list_extra$List_Extra$findIndex,
+					_user$project$Document$hasId(projectId),
+					vc.activeProjects),
+				0),
+			setContextMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Msg$SetTodoContext, todo),
+			setProjectMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Msg$SetTodoProject, todo),
+			showContextDropdownMsg: _user$project$Msg$StartEditingContext(todo),
+			showProjectDropdownMsg: _user$project$Msg$StartEditingProject(todo),
+			startEditingMsg: startEditingMsg,
+			toggleDoneMsg: toggleDoneMsg,
+			showDetails: vc.showDetails,
+			activeContexts: vc.activeContexts,
+			activeProjects: vc.activeProjects,
+			onReminderButtonClicked: _user$project$Msg$StartEditingReminder(todo),
+			reminder: A2(_user$project$Todo_View$createReminderViewModel, vc, todo),
+			edit: A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				maybeEditTodoForm,
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Todo_View$createEditTodoViewModel, todo)),
+			onDeleteClicked: toggleDeleteMsg,
+			onFocusIn: createEntityActionMsg(_user$project$Model$SetFocusedIn),
+			onFocus: createEntityActionMsg(_user$project$Model$SetFocused),
+			onBlur: createEntityActionMsg(_user$project$Model$SetBlurred),
+			tabindexAV: tabindexAV,
+			isSelected: A2(_elm_lang$core$Set$member, todoId, vc.selectedEntityIdSet)
+		};
+	});
+var _user$project$Todo_View$dropdownTrigger = F2(
+	function (_p11, content) {
+		var _p12 = _p11;
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'height', '24px'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$WebComponents$slotDropdownTrigger,
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
+						_1: {
+							ctor: '::',
+							_0: _p12.tabindexAV,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('title primary-text-color'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: content,
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Todo_View$reminderView = function (vm) {
+	var reminderVM = vm.reminder;
+	var reminderTrigger = _elm_lang$core$Native_Utils.eq(reminderVM.displayText, '') ? A2(
+		_user$project$WebComponents$iconButton,
+		'alarm-add',
+		{
+			ctor: '::',
+			_0: vm.tabindexAV,
+			_1: {
+				ctor: '::',
+				_0: _user$project$WebComponents$slotDropdownTrigger,
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(reminderVM.startEditingMsg),
+					_1: {ctor: '[]'}
+				}
+			}
+		}) : A2(
+		_user$project$Todo_View$dropdownTrigger,
+		vm,
+		A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(reminderVM.startEditingMsg),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$classList(
+						{
+							ctor: '::',
+							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'reminder-text', true),
+							_1: {
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'overdue', reminderVM.isOverDue),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_user$project$WebComponents$icon,
+					'av:snooze',
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'display-none', !reminderVM.isSnoozed),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(reminderVM.displayText),
+					_1: {ctor: '[]'}
+				}
+			}));
+	var menuButton = A2(
+		_edvail$elm_polymer$Polymer_Paper$menuButton,
+		{
+			ctor: '::',
+			_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'opened', reminderVM.isDropdownOpen),
+			_1: {
+				ctor: '::',
+				_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'dynamicAlign', true),
+				_1: {
+					ctor: '::',
+					_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: reminderTrigger,
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('static dropdown-content'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-content'),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('font-subhead'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Select date and time'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_edvail$elm_polymer$Polymer_Paper$input,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$type_('date'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$classList(
+											{
+												ctor: '::',
+												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', reminderVM.isDropdownOpen),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$WebComponents$labelA('Date'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$value(reminderVM.date),
+												_1: {
+													ctor: '::',
+													_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
+													_1: {
+														ctor: '::',
+														_0: _user$project$WebComponents$onChange(reminderVM.onDateChanged),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_edvail$elm_polymer$Polymer_Paper$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$type_('time'),
+										_1: {
+											ctor: '::',
+											_0: _user$project$WebComponents$labelA('Time'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$value(reminderVM.time),
+												_1: {
+													ctor: '::',
+													_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
+													_1: {
+														ctor: '::',
+														_0: _user$project$WebComponents$onChange(reminderVM.onTimeChanged),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$View_Shared$defaultOkCancelButtons,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var timeToolTip = A2(
+		_edvail$elm_polymer$Polymer_Paper$tooltip,
+		{
+			ctor: '::',
+			_0: A2(_elm_community$html_extra$Html_Attributes_Extra$intProperty, 'offset', 0),
+			_1: {ctor: '[]'}
+		},
+		(!_elm_lang$core$Native_Utils.eq(reminderVM.dueAtToolTipText, '')) ? {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('tooltip'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('font-body1 font-nowrap'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(reminderVM.dueAtToolTipText),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('font-caption'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(reminderVM.dayDiffInWords),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		} : {ctor: '[]'});
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$style(
+				{
+					ctor: '::',
+					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'position', 'relative'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: menuButton,
+			_1: {
+				ctor: '::',
+				_0: timeToolTip,
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Todo_View$defaultView = function (vm) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class(''),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('text-break-all'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _user$project$Todo_View$doneIconButton(vm),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$span,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('display-text'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(vm.displayText),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('layout horizontal end-justified'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$Todo_View$reminderView(vm),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(
+											{
+												ctor: '::',
+												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _user$project$Todo_View$contextDropdownMenu(vm),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(
+												{
+													ctor: '::',
+													_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _user$project$Todo_View$projectDropdownMenu(vm),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {ctor: '[]'}
+	};
+};
+var _user$project$Todo_View$init = function (vm) {
+	var maybeEditVM = vm.isSelected ? _elm_lang$core$Maybe$Nothing : vm.edit;
+	var isEditing = _elm_community$maybe_extra$Maybe_Extra$isJust(maybeEditVM);
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$classList(
+				{
+					ctor: '::',
+					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'todo-item', true),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'selected', vm.isSelected),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'editing', isEditing),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onFocus(vm.onFocus),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onBlur(vm.onBlur),
+						_1: {
+							ctor: '::',
+							_0: vm.tabindexAV,
+							_1: {
+								ctor: '::',
+								_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-key', vm.key),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		A3(
+			_elm_community$maybe_extra$Maybe_Extra$unpack,
+			function (_p13) {
+				return _user$project$Todo_View$defaultView(vm);
+			},
+			_user$project$Todo_View$editView,
+			maybeEditVM));
+};
+var _user$project$Todo_View$initKeyed = function (vm) {
+	return {
+		ctor: '_Tuple2',
+		_0: vm.key,
+		_1: _user$project$Todo_View$init(vm)
+	};
+};
+var _user$project$Todo_View$TodoViewModel = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return function (r) {
+																		return function (s) {
+																			return function (t) {
+																				return function (u) {
+																					return function (v) {
+																						return function (w) {
+																							return function (x) {
+																								return function (y) {
+																									return function (z) {
+																										return function (_1) {
+																											return function (_2) {
+																												return function (_3) {
+																													return {text: a, key: b, displayText: c, isMultiLine: d, isDone: e, isDeleted: f, isFocused: g, onKeyDownMsg: h, projectDisplayName: i, contextDisplayName: j, selectedProjectIndex: k, setContextMsg: l, setProjectMsg: m, startEditingMsg: n, toggleDoneMsg: o, onDeleteClicked: p, showDetails: q, activeContexts: r, activeProjects: s, onReminderButtonClicked: t, showContextDropdownMsg: u, showProjectDropdownMsg: v, reminder: w, edit: x, onFocusIn: y, onFocus: z, onBlur: _1, tabindexAV: _2, isSelected: _3};
+																												};
+																											};
+																										};
+																									};
+																								};
+																							};
+																						};
+																					};
+																				};
+																			};
+																		};
+																	};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Todo_View$ReminderViewModel = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return {isDropdownOpen: a, date: b, time: c, displayText: d, isOverDue: e, isSnoozed: f, dueAtToolTipText: g, dayDiffInWords: h, onDateChanged: i, onTimeChanged: j, startEditingMsg: k};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Todo_View$EditViewModel = F3(
+	function (a, b, c) {
+		return {todo: a, onTodoTextChanged: b, onDeleteClicked: c};
+	});

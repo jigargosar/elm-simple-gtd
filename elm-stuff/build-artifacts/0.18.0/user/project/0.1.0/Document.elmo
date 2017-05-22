@@ -1,0 +1,113 @@
+var _user$project$Document$toggleDeleted = function (model) {
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{deleted: !model.deleted});
+};
+var _user$project$Document$setModifiedAt = F2(
+	function (modifiedAt, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{modifiedAt: modifiedAt});
+	});
+var _user$project$Document$setDeleted = F2(
+	function (deleted, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{deleted: deleted});
+	});
+var _user$project$Document$isDeleted = function (_) {
+	return _.deleted;
+};
+var _user$project$Document$encodeMetaFields = function (doc) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_user$project$Ext_Function_Infix_ops['=>'],
+			'_id',
+			_elm_lang$core$Json_Encode$string(doc.id)),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_user$project$Ext_Function_Infix_ops['=>'],
+				'_rev',
+				_elm_lang$core$Json_Encode$string(doc.rev)),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Ext_Function_Infix_ops['=>'],
+					'createdAt',
+					_elm_lang$core$Json_Encode$int(
+						_elm_lang$core$Basics$round(doc.createdAt))),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Ext_Function_Infix_ops['=>'],
+						'modifiedAt',
+						_elm_lang$core$Json_Encode$int(
+							_elm_lang$core$Basics$round(doc.modifiedAt))),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$Ext_Function_Infix_ops['=>'],
+							'deleted',
+							_elm_lang$core$Json_Encode$bool(doc.deleted)),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	};
+};
+var _user$project$Document$encode = F2(
+	function (encodeOtherFields, doc) {
+		return _elm_lang$core$Json_Encode$object(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_user$project$Document$encodeMetaFields(doc),
+				encodeOtherFields(doc)));
+	});
+var _user$project$Document$defaultRevision = '';
+var _user$project$Document$documentFieldsDecoder = function (_p0) {
+	return A4(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+		'deleted',
+		_elm_lang$core$Json_Decode$bool,
+		false,
+		A4(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+			'modifiedAt',
+			_elm_lang$core$Json_Decode$float,
+			0,
+			A4(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+				'createdAt',
+				_elm_lang$core$Json_Decode$float,
+				0,
+				A4(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+					'_rev',
+					_elm_lang$core$Json_Decode$string,
+					_user$project$Document$defaultRevision,
+					A3(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required, '_id', _elm_lang$core$Json_Decode$string, _p0)))));
+};
+var _user$project$Document$getId = function (_) {
+	return _.id;
+};
+var _user$project$Document$hasId = function (id) {
+	return function (_p1) {
+		return A2(
+			_user$project$Ext_Function$equals,
+			id,
+			_user$project$Document$getId(_p1));
+	};
+};
+var _user$project$Document$equalById = F2(
+	function (doc1, doc2) {
+		return _elm_lang$core$Native_Utils.eq(
+			_user$project$Document$getId(doc1),
+			_user$project$Document$getId(doc2));
+	});
+var _user$project$Document$Meta = F6(
+	function (a, b, c, d, e, f) {
+		return {id: a, rev: b, dirty: c, deleted: d, createdAt: e, modifiedAt: f};
+	});

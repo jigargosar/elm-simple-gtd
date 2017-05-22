@@ -1,0 +1,98 @@
+var _user$project$Context$getEncodedNames = function (_p0) {
+	return _elm_lang$core$Json_Encode$list(
+		A2(
+			_user$project$Store$map,
+			function (_p1) {
+				return _elm_lang$core$Json_Encode$string(
+					function (_) {
+						return _.name;
+					}(_p1));
+			},
+			_p0));
+};
+var _user$project$Context$setDeleted = F2(
+	function (deleted, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{deleted: deleted});
+	});
+var _user$project$Context$setModifiedAt = F2(
+	function (modifiedAt, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{modifiedAt: modifiedAt});
+	});
+var _user$project$Context$setName = F2(
+	function (name, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{name: name});
+	});
+var _user$project$Context$getName = function (_) {
+	return _.name;
+};
+var _user$project$Context$findNameById = function (id) {
+	return A2(
+		_user$project$Ext_Function_Infix_ops['>>?'],
+		_user$project$Store$findById(id),
+		_user$project$Context$getName);
+};
+var _user$project$Context$findByName = function (name) {
+	return _user$project$Store$findBy(
+		function (_p2) {
+			return A2(
+				_user$project$Ext_Function$equals,
+				_elm_lang$core$String$trim(name),
+				_user$project$Context$getName(_p2));
+		});
+};
+var _user$project$Context$otherFieldsEncoder = function (project) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_user$project$Ext_Function_Infix_ops['=>'],
+			'name',
+			_elm_lang$core$Json_Encode$string(
+				_user$project$Context$getName(project))),
+		_1: {ctor: '[]'}
+	};
+};
+var _user$project$Context$constructor = F6(
+	function (id, rev, createdAt, modifiedAt, deleted, name) {
+		return {id: id, rev: rev, createdAt: createdAt, modifiedAt: modifiedAt, dirty: false, deleted: deleted, name: name};
+	});
+var _user$project$Context$init = F3(
+	function (name, now, id) {
+		return A6(_user$project$Context$constructor, id, '', now, now, false, name);
+	});
+var _user$project$Context$insertIfNotExistByName = F3(
+	function (name_, now, context) {
+		var name = _elm_lang$core$String$trim(name_);
+		return (_elm_lang$core$String$isEmpty(name) || _elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$String$toLower(name),
+			'inbox')) ? context : A3(
+			_elm_community$maybe_extra$Maybe_Extra$unpack,
+			function (_p3) {
+				return _elm_lang$core$Tuple$second(
+					A2(
+						_user$project$Store$insert,
+						A2(_user$project$Context$init, name, now),
+						context));
+			},
+			function (_p4) {
+				return context;
+			},
+			A2(_user$project$Context$findByName, name, context));
+	});
+var _user$project$Context$decoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'name',
+	_elm_lang$core$Json_Decode$string,
+	_user$project$Document$documentFieldsDecoder(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Context$constructor)));
+var _user$project$Context$storeGenerator = A3(_user$project$Store$generator, 'context-db', _user$project$Context$otherFieldsEncoder, _user$project$Context$decoder);
+var _user$project$Context$null = A6(_user$project$Context$constructor, '', '', 0, 0, false, 'Inbox');
+var _user$project$Context$isNull = _user$project$Ext_Function$equals(_user$project$Context$null);
+var _user$project$Context$Record = function (a) {
+	return {name: a};
+};

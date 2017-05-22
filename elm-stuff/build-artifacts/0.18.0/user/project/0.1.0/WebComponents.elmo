@@ -1,0 +1,191 @@
+var _user$project$WebComponents$onChange = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _user$project$WebComponents$testDialog = A2(
+	_edvail$elm_polymer$Polymer_Paper$dialog,
+	{
+		ctor: '::',
+		_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'opened', true),
+		_1: {
+			ctor: '::',
+			_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'alwaysOnTop', true),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'verticalAlign', 'top'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'horizontalAlign', 'left'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'margin', '0'),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'position', 'absolute'),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$h2,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Big Header'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
+var _user$project$WebComponents$onStringPropertyChanged = F2(
+	function (propertyName, tagger) {
+		return A2(
+			_elm_lang$html$Html_Events$on,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_community$string_extra$String_Extra$dasherize(propertyName),
+				'-changed'),
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				tagger,
+				A2(
+					_elm_lang$core$Json_Decode$at,
+					{
+						ctor: '::',
+						_0: 'detail',
+						_1: {
+							ctor: '::',
+							_0: 'value',
+							_1: {ctor: '[]'}
+						}
+					},
+					_elm_lang$core$Json_Decode$string)));
+	});
+var _user$project$WebComponents$onPropertyChanged = F3(
+	function (propertyName, decoder, tagger) {
+		return A2(
+			_elm_lang$html$Html_Events$on,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_community$string_extra$String_Extra$dasherize(propertyName),
+				'-changed'),
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				tagger,
+				A2(
+					_elm_lang$core$Json_Decode$at,
+					{
+						ctor: '::',
+						_0: 'detail',
+						_1: {
+							ctor: '::',
+							_0: 'value',
+							_1: {ctor: '[]'}
+						}
+					},
+					decoder)));
+	});
+var _user$project$WebComponents$onBoolPropertyChanged = F2(
+	function (propertyName, tagger) {
+		return A2(
+			_elm_lang$html$Html_Events$on,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_community$string_extra$String_Extra$dasherize(propertyName),
+				'-changed'),
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				tagger,
+				A2(
+					_elm_lang$core$Json_Decode$at,
+					{
+						ctor: '::',
+						_0: 'detail',
+						_1: {
+							ctor: '::',
+							_0: 'value',
+							_1: {ctor: '[]'}
+						}
+					},
+					_elm_lang$core$Json_Decode$bool)));
+	});
+var _user$project$WebComponents$noLabelFloatP = A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'noLabelFloatP', true);
+var _user$project$WebComponents$selectedA = _elm_lang$html$Html_Attributes$attribute('selected');
+var _user$project$WebComponents$labelA = _elm_lang$html$Html_Attributes$attribute('label');
+var _user$project$WebComponents$slotDropdownContent = A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-content');
+var _user$project$WebComponents$slotDropdownTrigger = A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-trigger');
+var _user$project$WebComponents$dynamicAlign = A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'dynamicAlign', true);
+var _user$project$WebComponents$secondaryA = A2(_elm_lang$html$Html_Attributes$attribute, 'secondary', 'true');
+var _user$project$WebComponents$paperIconButton = _elm_lang$html$Html$node('paper-icon-button');
+var _user$project$WebComponents$iconA = _elm_lang$html$Html_Attributes$attribute('icon');
+var _user$project$WebComponents$iconButton = F2(
+	function (iconName, attributes) {
+		return A2(
+			_user$project$WebComponents$paperIconButton,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				attributes,
+				{
+					ctor: '::',
+					_0: _user$project$WebComponents$iconA(iconName),
+					_1: {ctor: '[]'}
+				}),
+			{ctor: '[]'});
+	});
+var _user$project$WebComponents$doneAllIconP = _user$project$WebComponents$iconA('done-all');
+var _user$project$WebComponents$ironIcon = _elm_lang$html$Html$node('iron-icon');
+var _user$project$WebComponents$icon = F2(
+	function (iconName, attributes) {
+		return A2(
+			_user$project$WebComponents$ironIcon,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				attributes,
+				{
+					ctor: '::',
+					_0: _user$project$WebComponents$iconA(iconName),
+					_1: {ctor: '[]'}
+				}),
+			{ctor: '[]'});
+	});
+var _user$project$WebComponents$iconTextButton = F3(
+	function (iconName, text_, clickHandler) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('icon-text font-caption'),
+				_1: {
+					ctor: '::',
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(clickHandler),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_user$project$WebComponents$icon,
+					iconName,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('big'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(text_),
+					_1: {ctor: '[]'}
+				}
+			});
+	});

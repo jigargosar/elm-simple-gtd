@@ -1,0 +1,69 @@
+var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
+_user$project$Ext_Function_Infix_ops['>>>>'] = F5(
+	function (fff, f, x, y, z) {
+		return f(
+			A3(fff, x, y, z));
+	});
+var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
+_user$project$Ext_Function_Infix_ops['<<<<'] = _elm_lang$core$Basics$flip(
+	F2(
+		function (x, y) {
+			return A2(_user$project$Ext_Function_Infix_ops['>>>>'], x, y);
+		}));
+var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
+_user$project$Ext_Function_Infix_ops['>>>'] = F4(
+	function (ff, f, x, y) {
+		return f(
+			A2(ff, x, y));
+	});
+var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
+_user$project$Ext_Function_Infix_ops['<<<'] = _elm_lang$core$Basics$flip(
+	F2(
+		function (x, y) {
+			return A2(_user$project$Ext_Function_Infix_ops['>>>'], x, y);
+		}));
+var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
+_user$project$Ext_Function_Infix_ops['>>?+'] = F2(
+	function (f1, f2) {
+		return function (_p0) {
+			return A2(
+				_elm_lang$core$Maybe$andThen,
+				f2,
+				f1(_p0));
+		};
+	});
+var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
+_user$project$Ext_Function_Infix_ops['>>?='] = F2(
+	function (fn, val) {
+		return function (_p1) {
+			return A2(
+				_elm_lang$core$Maybe$withDefault,
+				val,
+				fn(_p1));
+		};
+	});
+var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
+_user$project$Ext_Function_Infix_ops['>>?'] = F2(
+	function (f1, f2) {
+		return function (_p2) {
+			return A2(
+				_elm_lang$core$Maybe$map,
+				f2,
+				f1(_p2));
+		};
+	});
+var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
+_user$project$Ext_Function_Infix_ops['?>>'] = F2(
+	function (f1, f2) {
+		return function (_p3) {
+			return A2(
+				_elm_lang$core$Maybe$map,
+				f2,
+				f1(_p3));
+		};
+	});
+var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
+_user$project$Ext_Function_Infix_ops['=>'] = F2(
+	function (v0, v1) {
+		return {ctor: '_Tuple2', _0: v0, _1: v1};
+	});

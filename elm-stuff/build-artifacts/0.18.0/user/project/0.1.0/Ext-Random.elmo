@@ -1,0 +1,46 @@
+var _user$project$Ext_Random$mapWithIndependentSeed = function (f) {
+	return A2(_mgold$elm_random_pcg$Random_Pcg$map, f, _mgold$elm_random_pcg$Random_Pcg$independentSeed);
+};
+var _user$project$Ext_Random$seedFromTime = function (_p0) {
+	return _mgold$elm_random_pcg$Random_Pcg$initialSeed(
+		_elm_lang$core$Basics$round(_p0));
+};
+var _user$project$Ext_Random$digit = A2(
+	_mgold$elm_random_pcg$Random_Pcg$map,
+	function (n) {
+		return _elm_lang$core$Char$fromCode(n + 48);
+	},
+	A2(_mgold$elm_random_pcg$Random_Pcg$int, 0, 9));
+var _user$project$Ext_Random$uppercaseLetter = A2(
+	_mgold$elm_random_pcg$Random_Pcg$map,
+	function (n) {
+		return _elm_lang$core$Char$fromCode(n + 65);
+	},
+	A2(_mgold$elm_random_pcg$Random_Pcg$int, 0, 25));
+var _user$project$Ext_Random$lowercaseLetter = A2(
+	_mgold$elm_random_pcg$Random_Pcg$map,
+	function (n) {
+		return _elm_lang$core$Char$fromCode(n + 97);
+	},
+	A2(_mgold$elm_random_pcg$Random_Pcg$int, 0, 25));
+var _user$project$Ext_Random$alphaNumericChar = _mgold$elm_random_pcg$Random_Pcg$frequency(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 26, _1: _user$project$Ext_Random$lowercaseLetter},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 26, _1: _user$project$Ext_Random$uppercaseLetter},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 10, _1: _user$project$Ext_Random$digit},
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _user$project$Ext_Random$idGenerator = A2(
+	_mgold$elm_random_pcg$Random_Pcg$map,
+	_elm_lang$core$String$fromList,
+	A2(_mgold$elm_random_pcg$Random_Pcg$list, 64, _user$project$Ext_Random$alphaNumericChar));
+var _user$project$Ext_Random$mapWithIdGenerator = function (f) {
+	return A2(_mgold$elm_random_pcg$Random_Pcg$map, f, _user$project$Ext_Random$idGenerator);
+};

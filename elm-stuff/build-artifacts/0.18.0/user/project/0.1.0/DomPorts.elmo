@@ -1,0 +1,29 @@
+var _user$project$DomPorts$focusPaperInput = _elm_lang$core$Native_Platform.outgoingPort(
+	'focusPaperInput',
+	function (v) {
+		return v;
+	});
+var _user$project$DomPorts$focusPaperInputCmd = function (_p0) {
+	return _Fresheyeball$elm_return$Return$command(
+		_user$project$DomPorts$focusPaperInput(_p0));
+};
+var _user$project$DomPorts$autoFocusPaperInputCmd = _user$project$DomPorts$focusPaperInputCmd('.auto-focus');
+var _user$project$DomPorts$focusSelector = _elm_lang$core$Native_Platform.outgoingPort(
+	'focusSelector',
+	function (v) {
+		return v;
+	});
+var _user$project$DomPorts$focusSelectorIfNoFocus = _elm_lang$core$Native_Platform.outgoingPort(
+	'focusSelectorIfNoFocus',
+	function (v) {
+		return v;
+	});
+var _user$project$DomPorts$focusSelectorIfNoFocusCmd = function (_p1) {
+	return _Fresheyeball$elm_return$Return$command(
+		_user$project$DomPorts$focusSelectorIfNoFocus(_p1));
+};
+var _user$project$DomPorts$positionDropdown = _elm_lang$core$Native_Platform.outgoingPort(
+	'positionDropdown',
+	function (v) {
+		return [v._0, v._1];
+	});

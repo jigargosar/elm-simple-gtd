@@ -1,0 +1,10 @@
+var _user$project$Todo_NewForm$getText = _user$project$Form$get('text');
+var _user$project$Todo_NewForm$set = F2(
+	function (field, value) {
+		var _p0 = field;
+		return A2(_user$project$Form$set, 'text', value);
+	});
+var _user$project$Todo_NewForm$create = function (text) {
+	return A3(_user$project$Form$set, 'text', text, _user$project$Form$init);
+};
+var _user$project$Todo_NewForm$Text = {ctor: 'Text'};

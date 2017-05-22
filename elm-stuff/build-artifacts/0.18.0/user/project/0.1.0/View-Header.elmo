@@ -1,0 +1,285 @@
+var _user$project$View_Header$defaultHeader = function (m) {
+	var userAccountAttribute = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_user$project$Model$getMaybeUserProfile(m),
+			function (_p0) {
+				return A2(
+					_elm_lang$html$Html_Attributes$attribute,
+					'src',
+					_user$project$Firebase$getPhotoURL(_p0));
+			}),
+		_user$project$WebComponents$iconA('account-circle'));
+	var userPhotoUrl = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_user$project$Model$getMaybeUserProfile(m),
+			_user$project$Firebase$getPhotoURL),
+		'');
+	var maybeUserProfile = _user$project$Model$getMaybeUserProfile(m);
+	var userSignInLink = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			maybeUserProfile,
+			function (_p1) {
+				return A2(
+					_edvail$elm_polymer$Polymer_Paper$item,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$SignOut),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('SignOut'),
+						_1: {ctor: '[]'}
+					});
+			}),
+		A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$SignIn),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('SignIn'),
+				_1: {ctor: '[]'}
+			}));
+	var title = A2(
+		_elm_lang$core$Basics_ops['++'],
+		m.developmentMode ? 'DEV_ENV' : 'SimpleGTD',
+		A2(_elm_lang$core$Basics_ops['++'], ' ', m.appVersion));
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('flex-auto layout horizontal justified center'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h2,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('ellipsis'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(title),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_edvail$elm_polymer$Polymer_Paper$menuButton,
+							{
+								ctor: '::',
+								_0: _user$project$WebComponents$dynamicAlign,
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'noOverlap', true),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'closeOnActivate', true),
+										_1: {ctor: '[]'}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A3(
+									_elm_lang$html$Html$node,
+									'iron-icon',
+									{
+										ctor: '::',
+										_0: userAccountAttribute,
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('account'),
+											_1: {
+												ctor: '::',
+												_0: _user$project$WebComponents$slotDropdownTrigger,
+												_1: {ctor: '[]'}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_edvail$elm_polymer$Polymer_Paper$listbox,
+										{
+											ctor: '::',
+											_0: _user$project$WebComponents$slotDropdownContent,
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: userSignInLink,
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$View_Header$newTodoInputId = 'new-todo-input';
+var _user$project$View_Header$headerView = function (m) {
+	var _p2 = m.editMode;
+	if (_p2.ctor === 'NewTodo') {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$input,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id(_user$project$View_Header$newTodoInputId),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onInput(_user$project$Msg$NewTodoTextChanged),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$value(
+								_user$project$Todo_NewForm$getText(_p2._0)),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onBlur(_user$project$Msg$DeactivateEditingMode),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Ext_Keyboard$onKeyUp(_user$project$Msg$NewTodoKeyUp),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'label', 'New Todo'),
+										_1: {
+											ctor: '::',
+											_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'alwaysFloatLabel', true),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$style(
+													{
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
+														_1: {
+															ctor: '::',
+															_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', 'white'),
+															_1: {ctor: '[]'}
+														}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			{ctor: '[]'});
+	} else {
+		return _user$project$View_Header$defaultHeader(m);
+	}
+};
+var _user$project$View_Header$init = F2(
+	function (viewModel, m) {
+		var fixedAttributeAsList = _user$project$Model$isLayoutAutoNarrow(m) ? {
+			ctor: '::',
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'condenses', ''),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'reveals', ''),
+				_1: {ctor: '[]'}
+			}
+		} : {
+			ctor: '::',
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'fixed', ''),
+			_1: {ctor: '[]'}
+		};
+		return A2(
+			_edvail$elm_polymer$Polymer_App$header,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('main-header'),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'header'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'effects', 'waterfall'),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				fixedAttributeAsList),
+			{
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_App$toolbar,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', 'white'),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'background-color', viewModel.header.backgroundColor),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_user$project$WebComponents$paperIconButton,
+							{
+								ctor: '::',
+								_0: _user$project$WebComponents$iconA('menu'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'drawer-toggle', ''),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$ToggleDrawer),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('hide-when-wide'),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: _user$project$View_Header$headerView(m),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});

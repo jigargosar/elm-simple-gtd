@@ -1,0 +1,48 @@
+var _user$project$Firebase_View$init = function (m) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('firebase-container'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'firebase-auth',
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('firebase-auth'),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Firebase$onUserChanged(_user$project$Msg$OnUserChanged),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_elm_lang$html$Html$node,
+					'firebase-messaging',
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$id('fb-messaging'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Firebase$onFCMTokenChanged(_user$project$Msg$OnFCMTokenChanged),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Firebase$customSw,
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Firebase_View$attributes = _elm_lang$core$List$map(
+	_elm_lang$core$Basics$uncurry(_elm_lang$html$Html_Attributes$attribute));

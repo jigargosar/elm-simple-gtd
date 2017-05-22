@@ -1,0 +1,60 @@
+var _user$project$Ext_Time$toHMSList = function (time) {
+	var elapsedMilli = _elm_lang$core$Basics$round(time);
+	var millis = A2(_elm_lang$core$Basics_ops['%'], elapsedMilli, 1000);
+	var seconds = A2(_elm_lang$core$Basics_ops['%'], (elapsedMilli / 1000) | 0, 60);
+	var minutes = A2(_elm_lang$core$Basics_ops['%'], (elapsedMilli / (1000 * 60)) | 0, 60);
+	var hours = (elapsedMilli / ((1000 * 60) * 60)) | 0;
+	return {
+		ctor: '::',
+		_0: hours,
+		_1: {
+			ctor: '::',
+			_0: minutes,
+			_1: {
+				ctor: '::',
+				_0: seconds,
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+};
+var _user$project$Ext_Time$smartFormat = F2(
+	function (refTime, time) {
+		var dateFromTime = _elm_lang$core$Date$fromTime;
+		var refDate = dateFromTime(refTime);
+		var date = dateFromTime(time);
+		return A2(_user$project$Ext_Date$smartFormat, refDate, date);
+	});
+var _user$project$Ext_Time$dayDiff = F2(
+	function (refTime, time) {
+		return A2(
+			_user$project$Ext_Date$dayDiff,
+			_elm_lang$core$Date$fromTime(refTime),
+			_elm_lang$core$Date$fromTime(time));
+	});
+var _user$project$Ext_Time$dayDiffInWords = function () {
+	var intToDaysInWords = function (dayCount) {
+		var dayCountAsString = function (_p0) {
+			return _elm_lang$core$Basics$toString(
+				_elm_lang$core$Basics$abs(_p0));
+		}(dayCount);
+		return (_elm_lang$core$Native_Utils.cmp(dayCount, 0) > 0) ? A2(_elm_lang$core$Basics_ops['++'], dayCountAsString, ' days left') : ((_elm_lang$core$Native_Utils.cmp(dayCount, 0) < 0) ? A2(_elm_lang$core$Basics_ops['++'], dayCountAsString, ' days ago') : '');
+	};
+	return A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Time$dayDiff, intToDaysInWords);
+}();
+var _user$project$Ext_Time$formatDateTime = _mgold$elm_date_format$Time_Format$format('%a %e %b %Y %l:%M%P');
+var _user$project$Ext_Time$toHHMMSS = function (_p1) {
+	return A2(
+		_elm_lang$core$String$join,
+		':',
+		A2(
+			_elm_lang$core$List$map,
+			function (_p2) {
+				return A3(
+					_elm_lang$core$String$padLeft,
+					2,
+					_elm_lang$core$Native_Utils.chr('0'),
+					_elm_lang$core$Basics$toString(_p2));
+			},
+			_user$project$Ext_Time$toHMSList(_p1)));
+};

@@ -25,6 +25,23 @@ type ListViewType
     | ProjectView Document.Id
 
 
+type Action
+    = StartEditing
+    | ToggleDeleted
+    | Save
+    | NameChanged String
+    | SetFocused
+    | SetBlurred
+    | SetFocusedIn
+    | ToggleSelected
+
+
+type Type
+    = TodoEntityType
+    | ContextEntityType
+    | ProjectEntityType
+
+
 defaultListView =
     ContextsView
 

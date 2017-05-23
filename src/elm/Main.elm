@@ -5,6 +5,7 @@ import Document
 import Dom
 import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd, focusSelectorIfNoFocusCmd)
 import EditMode
+import Entity
 import Ext.Debug
 import Ext.Keyboard as Keyboard exposing (Key)
 import Ext.Return as Return
@@ -286,30 +287,30 @@ update msg =
 
                 OnEntityAction entity action ->
                     case (action) of
-                        StartEditing ->
+                        Entity.StartEditing ->
                             Return.map (Model.startEditingEntity entity)
                                 >> autoFocusPaperInputCmd
 
-                        NameChanged newName ->
+                        Entity.NameChanged newName ->
                             Return.map (Model.updateEditModeNameChanged newName entity)
 
-                        Save ->
+                        Entity.Save ->
                             andThenUpdate SaveCurrentForm
 
-                        ToggleDeleted ->
+                        Entity.ToggleDeleted ->
                             Return.map (Model.toggleDeleteEntity entity)
                                 >> andThenUpdate DeactivateEditingMode
 
-                        SetFocusedIn ->
+                        Entity.SetFocusedIn ->
                             Return.map (Model.setFocusInEntity entity)
 
-                        SetFocused ->
+                        Entity.SetFocused ->
                             Return.map (Model.setMaybeFocusedEntity (Just entity))
 
-                        SetBlurred ->
+                        Entity.SetBlurred ->
                             Return.map (Model.setMaybeFocusedEntity Nothing)
 
-                        ToggleSelected ->
+                        Entity.ToggleSelected ->
                             Return.map (Model.toggleEntitySelection entity)
 
                 OnGlobalKeyUp key ->

@@ -7,7 +7,7 @@ import EditMode exposing (EditMode)
 import Entity exposing (Entity)
 import Ext.Keyboard exposing (KeyboardEvent)
 import Lazy
-import Model exposing (EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), EntityListViewType, GroupEntityType(ContextGroup, ProjectGroup), ViewType(..))
+import Model exposing (EntityListViewType, GroupEntityType(ContextGroup, ProjectGroup), ViewType(..))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -118,7 +118,7 @@ create todoListByEntityId config entity =
             if isNull then
                 (commonMsg.noOp)
             else
-                (createEntityActionMsg ToggleDeleted)
+                (createEntityActionMsg Entity.ToggleDeleted)
 
         maybeEditModel =
             config.maybeEditModel
@@ -156,7 +156,7 @@ create todoListByEntityId config entity =
                     commonMsg.noOp
 
         startEditingMsg =
-            createEntityActionMsg StartEditing
+            createEntityActionMsg Entity.StartEditing
     in
         { id = id
         , name = name
@@ -173,14 +173,14 @@ create todoListByEntityId config entity =
             )
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg
-        , onSaveClicked = createEntityActionMsg Save
-        , onNameChanged = NameChanged >> createEntityActionMsg
+        , onSaveClicked = createEntityActionMsg Entity.Save
+        , onNameChanged = Entity.NameChanged >> createEntityActionMsg
         , onCancelClicked = Msg.DeactivateEditingMode
         , icon = icon
         , appHeader = appHeader
-        , onFocusIn = createEntityActionMsg Model.SetFocusedIn
-        , onFocus = createEntityActionMsg Model.SetFocused
-        , onBlur = createEntityActionMsg Model.SetBlurred
+        , onFocusIn = createEntityActionMsg Entity.SetFocusedIn
+        , onFocus = createEntityActionMsg Entity.SetFocused
+        , onBlur = createEntityActionMsg Entity.SetBlurred
         , onKeyDownMsg = onKeyDownMsg
         }
 

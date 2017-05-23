@@ -81,23 +81,6 @@ type alias ModelF =
     Model -> Model
 
 
-type EntityAction
-    = StartEditing
-    | ToggleDeleted
-    | Save
-    | NameChanged String
-    | SetFocused
-    | SetBlurred
-    | SetFocusedIn
-    | ToggleSelected
-
-
-type EntityType
-    = TodoEntityType
-    | ContextEntityType
-    | ProjectEntityType
-
-
 type GroupEntityType
     = ProjectGroup
     | ContextGroup

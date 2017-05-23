@@ -1140,25 +1140,6 @@ var _user$project$Model$setEntityListViewType = function (_p53) {
 	return _user$project$Model$switchView(
 		_user$project$Model$EntityListView(_p53));
 };
-var _user$project$Model$MainViewTypeField = function (a) {
-	return {ctor: 'MainViewTypeField', _0: a};
-};
-var _user$project$Model$NowField = function (a) {
-	return {ctor: 'NowField', _0: a};
-};
-var _user$project$Model$ToggleSelected = {ctor: 'ToggleSelected'};
-var _user$project$Model$SetFocusedIn = {ctor: 'SetFocusedIn'};
-var _user$project$Model$SetBlurred = {ctor: 'SetBlurred'};
-var _user$project$Model$SetFocused = {ctor: 'SetFocused'};
-var _user$project$Model$NameChanged = function (a) {
-	return {ctor: 'NameChanged', _0: a};
-};
-var _user$project$Model$Save = {ctor: 'Save'};
-var _user$project$Model$ToggleDeleted = {ctor: 'ToggleDeleted'};
-var _user$project$Model$StartEditing = {ctor: 'StartEditing'};
-var _user$project$Model$ProjectEntityType = {ctor: 'ProjectEntityType'};
-var _user$project$Model$ContextEntityType = {ctor: 'ContextEntityType'};
-var _user$project$Model$TodoEntityType = {ctor: 'TodoEntityType'};
 var _user$project$Model$ContextGroup = {ctor: 'ContextGroup'};
 var _user$project$Model$getFilteredContextList = function (model) {
 	return model.showDeleted ? A2(_user$project$Model$getDeletedEntityList, _user$project$Model$ContextGroup, model) : {

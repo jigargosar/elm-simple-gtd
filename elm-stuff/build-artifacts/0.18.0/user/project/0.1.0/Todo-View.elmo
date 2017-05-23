@@ -72,7 +72,7 @@ var _user$project$Todo_View$createEditTodoViewModel = F2(
 			onDeleteClicked: A2(
 				_user$project$Msg$OnEntityAction,
 				_user$project$Entity$TodoEntity(todo),
-				_user$project$Model$ToggleDeleted)
+				_user$project$Entity$ToggleDeleted)
 		};
 	});
 var _user$project$Todo_View$createReminderViewModel = F2(
@@ -290,14 +290,14 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		var maybeEditTodoForm = vc.getMaybeEditTodoFormForTodo(todo);
 		var createEntityActionMsg = _user$project$Msg$OnEntityAction(
 			_user$project$Entity$TodoEntity(todo));
-		var startEditingMsg = createEntityActionMsg(_user$project$Model$StartEditing);
-		var toggleDeleteMsg = createEntityActionMsg(_user$project$Model$ToggleDeleted);
+		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
+		var toggleDeleteMsg = createEntityActionMsg(_user$project$Entity$ToggleDeleted);
 		var onKeyDownMsg = function (_p5) {
 			var _p6 = _p5;
 			var _p7 = _p6.key;
 			switch (_p7.ctor) {
 				case 'Space':
-					return createEntityActionMsg(_user$project$Model$ToggleSelected);
+					return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 				case 'CharE':
 					return startEditingMsg;
 				case 'CharD':
@@ -413,9 +413,9 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 				maybeEditTodoForm,
 				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Todo_View$createEditTodoViewModel, todo)),
 			onDeleteClicked: toggleDeleteMsg,
-			onFocusIn: createEntityActionMsg(_user$project$Model$SetFocusedIn),
-			onFocus: createEntityActionMsg(_user$project$Model$SetFocused),
-			onBlur: createEntityActionMsg(_user$project$Model$SetBlurred),
+			onFocusIn: createEntityActionMsg(_user$project$Entity$SetFocusedIn),
+			onFocus: createEntityActionMsg(_user$project$Entity$SetFocused),
+			onBlur: createEntityActionMsg(_user$project$Entity$SetBlurred),
 			tabindexAV: tabindexAV,
 			isSelected: A2(_elm_lang$core$Set$member, todoId, vc.selectedEntityIdSet)
 		};

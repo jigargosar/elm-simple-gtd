@@ -75,3 +75,16 @@ var _user$project$Entity$ContextView = function (a) {
 };
 var _user$project$Entity$ContextsView = {ctor: 'ContextsView'};
 var _user$project$Entity$defaultListView = _user$project$Entity$ContextsView;
+var _user$project$Entity$ToggleSelected = {ctor: 'ToggleSelected'};
+var _user$project$Entity$SetFocusedIn = {ctor: 'SetFocusedIn'};
+var _user$project$Entity$SetBlurred = {ctor: 'SetBlurred'};
+var _user$project$Entity$SetFocused = {ctor: 'SetFocused'};
+var _user$project$Entity$NameChanged = function (a) {
+	return {ctor: 'NameChanged', _0: a};
+};
+var _user$project$Entity$Save = {ctor: 'Save'};
+var _user$project$Entity$ToggleDeleted = {ctor: 'ToggleDeleted'};
+var _user$project$Entity$StartEditing = {ctor: 'StartEditing'};
+var _user$project$Entity$ProjectEntityType = {ctor: 'ProjectEntityType'};
+var _user$project$Entity$ContextEntityType = {ctor: 'ContextEntityType'};
+var _user$project$Entity$TodoEntityType = {ctor: 'TodoEntityType'};

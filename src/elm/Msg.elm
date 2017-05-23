@@ -73,8 +73,8 @@ type Msg
     | OnMsgList (List Msg)
     | OnKeyboardMsg Keyboard.Msg
     | OnGlobalKeyUp Keyboard.Key
-    | OnEntityAction Entity EntityAction
-    | StartAddingNewEntity EntityType
+    | OnEntityAction Entity Entity.Action
+    | StartAddingNewEntity Entity.Type
 
 
 toCmds : List Msg -> Cmd Msg

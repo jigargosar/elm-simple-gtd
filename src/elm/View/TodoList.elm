@@ -86,11 +86,8 @@ listView entityList viewModel =
 
         createEntityView index entity =
             let
-                focused =
-                    isEntityFocused entity
-
                 tabIndexAV =
-                    getTabindexAV focused
+                    getTabindexAV (isEntityFocused entity)
             in
                 case entity of
                     Entity.ContextEntity context ->

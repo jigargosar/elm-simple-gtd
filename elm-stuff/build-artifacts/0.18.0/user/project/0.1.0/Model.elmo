@@ -440,7 +440,7 @@ var _user$project$Model$getCurrentTodoListSortByFunction = function (model) {
 	}
 };
 var _user$project$Model$getTodoListFilterForCurrentView = function (model) {
-	var isActive = _user$project$Todo$toAllPassPredicate(
+	var $default = _user$project$Todo$toAllPassPredicate(
 		{
 			ctor: '::',
 			_0: function (_p18) {
@@ -449,7 +449,10 @@ var _user$project$Model$getTodoListFilterForCurrentView = function (model) {
 			_1: {
 				ctor: '::',
 				_0: function (_p19) {
-					return !_user$project$Todo$isDeleted(_p19);
+					return A2(
+						_user$project$Ext_Function$equals,
+						model.showDeleted,
+						_user$project$Todo$isDeleted(_p19));
 				},
 				_1: {ctor: '[]'}
 			}
@@ -464,38 +467,38 @@ var _user$project$Model$getTodoListFilterForCurrentView = function (model) {
 			var _p21 = _p20._0;
 			switch (_p21.ctor) {
 				case 'ContextsView':
-					return isActive;
+					return $default;
 				case 'ContextView':
 					return _user$project$Todo$toAllPassPredicate(
 						{
 							ctor: '::',
-							_0: isActive,
+							_0: function (_p22) {
+								return A2(
+									_user$project$Ext_Function$equals,
+									_p21._0,
+									_user$project$Todo$getContextId(_p22));
+							},
 							_1: {
 								ctor: '::',
-								_0: function (_p22) {
-									return A2(
-										_user$project$Ext_Function$equals,
-										_p21._0,
-										_user$project$Todo$getContextId(_p22));
-								},
+								_0: $default,
 								_1: {ctor: '[]'}
 							}
 						});
 				case 'ProjectsView':
-					return isActive;
+					return $default;
 				default:
 					return _user$project$Todo$toAllPassPredicate(
 						{
 							ctor: '::',
-							_0: isActive,
+							_0: function (_p23) {
+								return A2(
+									_user$project$Ext_Function$equals,
+									_p21._0,
+									_user$project$Todo$getProjectId(_p23));
+							},
 							_1: {
 								ctor: '::',
-								_0: function (_p23) {
-									return A2(
-										_user$project$Ext_Function$equals,
-										_p21._0,
-										_user$project$Todo$getProjectId(_p23));
-								},
+								_0: $default,
 								_1: {ctor: '[]'}
 							}
 						});
@@ -522,16 +525,34 @@ var _user$project$Model$getTodoListForCurrentView = function (model) {
 var _user$project$Model$createViewEntityList = F2(
 	function (viewType, model) {
 		var todoList = _user$project$Model$getTodoListForCurrentView(model);
-		var contextList = A2(
-			_user$project$Store$findAllByIdSetIn,
-			model.contextStore,
-			_elm_lang$core$Set$fromList(
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], todoList, _user$project$Todo$getContextId)));
-		var projectList = A2(
-			_user$project$Store$findAllByIdSetIn,
-			model.projectStore,
-			_elm_lang$core$Set$fromList(
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], todoList, _user$project$Todo$getProjectId)));
+		var contextList = function () {
+			var contextIdSet = _elm_lang$core$Set$fromList(
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], todoList, _user$project$Todo$getContextId));
+			var includeNull = A2(_elm_lang$core$Set$member, '', contextIdSet);
+			var nullContextAsList = (model.showDeleted || (!includeNull)) ? {ctor: '[]'} : {
+				ctor: '::',
+				_0: _user$project$Context$null,
+				_1: {ctor: '[]'}
+			};
+			return A2(
+				_elm_lang$core$List$append,
+				nullContextAsList,
+				A2(_user$project$Store$findAllByIdSetIn, model.contextStore, contextIdSet));
+		}();
+		var projectList = function () {
+			var projectIdSet = _elm_lang$core$Set$fromList(
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], todoList, _user$project$Todo$getProjectId));
+			var includeNull = A2(_elm_lang$core$Set$member, '', projectIdSet);
+			var nullProjectAsList = (model.showDeleted || (!includeNull)) ? {ctor: '[]'} : {
+				ctor: '::',
+				_0: _user$project$Project$null,
+				_1: {ctor: '[]'}
+			};
+			return A2(
+				_elm_lang$core$List$append,
+				nullProjectAsList,
+				A2(_user$project$Store$findAllByIdSetIn, model.projectStore, projectIdSet));
+		}();
 		var _p25 = viewType;
 		switch (_p25.ctor) {
 			case 'ContextsView':

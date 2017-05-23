@@ -602,8 +602,8 @@ getTodoListForCurrentView model =
 
 getTodoListFilterForCurrentView model =
     let
-        isActive =
-            Todo.toAllPassPredicate [ Todo.isDone >> not, Todo.isDeleted >> not ]
+        default =
+            Todo.toAllPassPredicate [ Todo.isDone >> not, Todo.isDeleted >> equals model.showDeleted ]
     in
         case getMainViewType model of
             BinView ->
@@ -615,16 +615,16 @@ getTodoListFilterForCurrentView model =
             EntityListView viewType ->
                 case viewType of
                     Entity.ContextsView ->
-                        isActive
+                        default
 
                     Entity.ContextView id ->
-                        Todo.toAllPassPredicate [ isActive, Todo.getContextId >> equals id ]
+                        Todo.toAllPassPredicate [ Todo.getContextId >> equals id, default ]
 
                     Entity.ProjectsView ->
-                        isActive
+                        default
 
                     Entity.ProjectView id ->
-                        Todo.toAllPassPredicate [ isActive, Todo.getProjectId >> equals id ]
+                        Todo.toAllPassPredicate [ Todo.getProjectId >> equals id, default ]
 
             _ ->
                 always (True)
@@ -785,16 +785,44 @@ createViewEntityList viewType model =
             getTodoListForCurrentView model
 
         contextList =
-            todoList
-                .|> Todo.getContextId
-                |> Set.fromList
-                |> Store.findAllByIdSetIn model.contextStore
+            let
+                contextIdSet =
+                    todoList
+                        .|> Todo.getContextId
+                        |> Set.fromList
+
+                includeNull =
+                    Set.member "" contextIdSet
+
+                nullContextAsList =
+                    if model.showDeleted || not includeNull then
+                        []
+                    else
+                        [ Context.null ]
+            in
+                contextIdSet
+                    |> Store.findAllByIdSetIn model.contextStore
+                    |> List.append nullContextAsList
 
         projectList =
-            todoList
-                .|> Todo.getProjectId
-                |> Set.fromList
-                |> Store.findAllByIdSetIn model.projectStore
+            let
+                projectIdSet =
+                    todoList
+                        .|> Todo.getProjectId
+                        |> Set.fromList
+
+                includeNull =
+                    Set.member "" projectIdSet
+
+                nullProjectAsList =
+                    if model.showDeleted || not includeNull then
+                        []
+                    else
+                        [ Project.null ]
+            in
+                projectIdSet
+                    |> Store.findAllByIdSetIn model.projectStore
+                    |> List.append nullProjectAsList
     in
         case viewType of
             Entity.ContextsView ->

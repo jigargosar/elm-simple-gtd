@@ -758,11 +758,11 @@ getCurrentViewEntityList model =
 
 createViewEntityList viewType model =
     let
-        _ =
-            { project = getFilteredContextList model
-            , context = getFilteredProjectList model
-            }
-
+        {- _ =
+           { project = getFilteredContextList model
+           , context = getFilteredProjectList model
+           }
+        -}
         activeTodoList =
             getActiveTodoList model
     in
@@ -786,14 +786,14 @@ createViewEntityList viewType model =
                     projectList =
                         getFilteredProjectList model
                 in
-                    getProjectsViewEntityList projectList model
+                    getProjectsViewEntityList projectList activeTodoList False
 
             Entity.ProjectView id ->
                 let
                     projectList =
                         model.projectStore |> Store.findById id ?= Project.null |> List.singleton
                 in
-                    getProjectsViewEntityList projectList model
+                    getProjectsViewEntityList projectList activeTodoList True
 
 
 type alias GroupedTodoList =
@@ -821,11 +821,11 @@ getContextsViewEntityList contextList activeTodoList enableSubgroup =
                 )
 
 
-getProjectsViewEntityList projectList model =
+getProjectsViewEntityList projectList activeTodoList enableSubgroup =
     let
         -- todo : use getFiltered todo list
         todoListByProjectId =
-            getActiveTodoListGroupedBy Todo.getProjectId model
+            activeTodoList |> Dict.Extra.groupBy Todo.getProjectId
 
         todoEntitiesForProject project =
             todoListByProjectId

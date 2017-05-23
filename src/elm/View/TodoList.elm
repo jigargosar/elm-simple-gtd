@@ -72,7 +72,7 @@ getTabindexAV focused =
         tabindex tabindexValue
 
 
-listView entityList viewModel =
+isEntityFocusedInEntityList entityList viewModel =
     let
         focusedId =
             entityList
@@ -80,9 +80,14 @@ listView entityList viewModel =
                 |> Maybe.orElse (List.head entityList)
                 ?|> Model.getEntityId
                 ?= ""
+    in
+        Model.getEntityId >> equals focusedId
 
+
+listView entityList viewModel =
+    let
         isEntityFocused =
-            Model.getEntityId >> equals focusedId
+            isEntityFocusedInEntityList entityList viewModel
 
         createEntityView index entity =
             let

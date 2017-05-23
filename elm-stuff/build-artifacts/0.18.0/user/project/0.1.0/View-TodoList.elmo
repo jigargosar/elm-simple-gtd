@@ -31,7 +31,6 @@ var _user$project$View_TodoList$getTabindexAV = function (focused) {
 };
 var _user$project$View_TodoList$listView = F2(
 	function (entityList, viewModel) {
-		var idList = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], entityList, _user$project$Model$getEntityId);
 		var isEntityFocused = A2(_user$project$View_TodoList$isEntityFocusedInEntityList, entityList, viewModel);
 		var createEntityView = F2(
 			function (index, entity) {

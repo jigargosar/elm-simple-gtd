@@ -104,10 +104,6 @@ listView entityList viewModel =
 
                     Entity.TodoEntity todo ->
                         Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo)
-
-        idList =
-            entityList
-                .|> Model.getEntityId
     in
         Keyed.node "div"
             [ class "entity-list focusable-list"

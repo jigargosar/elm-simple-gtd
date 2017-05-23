@@ -56,6 +56,7 @@ var _user$project$EntityList_View$listView = F3(
 							A2(mainViewModel.createTodoViewModel, tabIndexAV, _p2._0));
 				}
 			});
+		var vm = A2(_user$project$EntityList_ViewModel$create, viewType, model);
 		return A3(
 			_elm_lang$html$Html_Keyed$node,
 			'div',

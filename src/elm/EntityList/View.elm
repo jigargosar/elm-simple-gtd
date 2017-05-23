@@ -2,6 +2,7 @@ module EntityList.View exposing (..)
 
 import Entity
 import EntityList
+import EntityList.ViewModel
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -42,6 +43,9 @@ isEntityFocusedInEntityList entityList viewModel =
 
 listView viewType model mainViewModel =
     let
+        vm =
+            EntityList.ViewModel.create viewType model
+
         entityList =
             Model.createViewEntityList viewType model
 

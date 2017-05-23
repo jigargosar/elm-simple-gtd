@@ -1,0 +1,6 @@
+var _user$project$EntityList_ViewModel$create = F2(
+	function (viewType, model) {
+		return {
+			entityList: A2(_user$project$Model$createViewEntityList, viewType, model)
+		};
+	});

@@ -74,18 +74,6 @@ getTabindexAV focused =
 
 listView entityList viewModel =
     let
-        projectVMs =
-            viewModel.projects.entityList
-
-        contextVMs =
-            viewModel.contexts.entityList
-
-        getMaybeContextVM context =
-            contextVMs |> List.find (.id >> equals (Document.getId context))
-
-        getMaybeProjectVM project =
-            projectVMs |> List.find (.id >> equals (Document.getId project))
-
         focusedId =
             entityList
                 |> List.find (Model.getEntityId >> equals viewModel.focusedEntityInfo.id)

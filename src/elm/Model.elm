@@ -774,68 +774,71 @@ getCurrentViewEntityList model =
             []
 
 
+getContextListForCurrentViewFromTodoList todoList model =
+    let
+        contextIdSet =
+            todoList
+                .|> Todo.getContextId
+                |> Set.fromList
+
+        includeNull =
+            Set.member "" contextIdSet
+
+        nullContextAsList =
+            if model.showDeleted || not includeNull then
+                []
+            else
+                [ Context.null ]
+    in
+        contextIdSet
+            |> Store.findAllByIdSetIn model.contextStore
+            |> List.append nullContextAsList
+
+
+getProjectListForCurrentViewFromTodoList todoList model =
+    let
+        projectIdSet =
+            todoList
+                .|> Todo.getProjectId
+                |> Set.fromList
+
+        includeNull =
+            Set.member "" projectIdSet
+
+        nullProjectAsList =
+            if model.showDeleted || not includeNull then
+                []
+            else
+                [ Project.null ]
+    in
+        projectIdSet
+            |> Store.findAllByIdSetIn model.projectStore
+            |> List.append nullProjectAsList
+
+
 createViewEntityList viewType model =
     let
-        {- _ =
-           { project = getFilteredContextList model
-           , context = getFilteredProjectList model
-           }
-        -}
         todoList =
             getTodoListForCurrentView model
 
-        contextList =
-            let
-                contextIdSet =
-                    todoList
-                        .|> Todo.getContextId
-                        |> Set.fromList
+        contextList _ =
+            getContextListForCurrentViewFromTodoList todoList model
 
-                includeNull =
-                    Set.member "" contextIdSet
-
-                nullContextAsList =
-                    if model.showDeleted || not includeNull then
-                        []
-                    else
-                        [ Context.null ]
-            in
-                contextIdSet
-                    |> Store.findAllByIdSetIn model.contextStore
-                    |> List.append nullContextAsList
-
-        projectList =
-            let
-                projectIdSet =
-                    todoList
-                        .|> Todo.getProjectId
-                        |> Set.fromList
-
-                includeNull =
-                    Set.member "" projectIdSet
-
-                nullProjectAsList =
-                    if model.showDeleted || not includeNull then
-                        []
-                    else
-                        [ Project.null ]
-            in
-                projectIdSet
-                    |> Store.findAllByIdSetIn model.projectStore
-                    |> List.append nullProjectAsList
+        projectList _ =
+            getProjectListForCurrentViewFromTodoList todoList model
     in
         case viewType of
             Entity.ContextsView ->
-                getContextsViewEntityList contextList todoList False
+                getContextsViewEntityList (contextList ()) todoList False model
 
             Entity.ContextView id ->
-                getContextsViewEntityList contextList todoList True
+                getContextsViewEntityList (contextList ()) todoList True model
 
             Entity.ProjectsView ->
-                getProjectsViewEntityList projectList todoList False
+                getProjectsViewEntityList (projectList ()) todoList False model
 
             Entity.ProjectView id ->
-                getProjectsViewEntityList projectList todoList True
+                getProjectsViewEntityList (projectList ()) todoList True model
 
 
 type alias GroupedTodoList =
@@ -844,7 +847,7 @@ type alias GroupedTodoList =
     }
 
 
-getContextsViewEntityList contextList activeTodoList enableSubgroup =
+getContextsViewEntityList contextList activeTodoList enableSubgroup model =
     let
         -- todo : use getFiltered todo list
         todoListByContextId =
@@ -863,7 +866,7 @@ getContextsViewEntityList contextList activeTodoList enableSubgroup =
                 )
 
 
-getProjectsViewEntityList projectList activeTodoList enableSubgroup =
+getProjectsViewEntityList projectList activeTodoList enableSubgroup model =
     let
         -- todo : use getFiltered todo list
         todoListByProjectId =

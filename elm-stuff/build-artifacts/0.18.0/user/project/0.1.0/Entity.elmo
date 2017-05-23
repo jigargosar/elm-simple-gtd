@@ -1,0 +1,77 @@
+var _user$project$Entity$routes = function (viewType) {
+	var _p0 = viewType;
+	switch (_p0.ctor) {
+		case 'ContextsView':
+			return {
+				ctor: '::',
+				_0: 'lists',
+				_1: {
+					ctor: '::',
+					_0: 'contexts',
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'ProjectsView':
+			return {
+				ctor: '::',
+				_0: 'lists',
+				_1: {
+					ctor: '::',
+					_0: 'projects',
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'ProjectView':
+			var _p1 = _p0._0;
+			return _elm_lang$core$String$isEmpty(_p1) ? {
+				ctor: '::',
+				_0: 'project',
+				_1: {
+					ctor: '::',
+					_0: 'NotAssigned',
+					_1: {ctor: '[]'}
+				}
+			} : {
+				ctor: '::',
+				_0: 'project',
+				_1: {
+					ctor: '::',
+					_0: _p1,
+					_1: {ctor: '[]'}
+				}
+			};
+		default:
+			var _p2 = _p0._0;
+			return _elm_lang$core$String$isEmpty(_p2) ? {
+				ctor: '::',
+				_0: 'Inbox',
+				_1: {ctor: '[]'}
+			} : {
+				ctor: '::',
+				_0: 'context',
+				_1: {
+					ctor: '::',
+					_0: _p2,
+					_1: {ctor: '[]'}
+				}
+			};
+	}
+};
+var _user$project$Entity$TodoEntity = function (a) {
+	return {ctor: 'TodoEntity', _0: a};
+};
+var _user$project$Entity$ContextEntity = function (a) {
+	return {ctor: 'ContextEntity', _0: a};
+};
+var _user$project$Entity$ProjectEntity = function (a) {
+	return {ctor: 'ProjectEntity', _0: a};
+};
+var _user$project$Entity$ProjectView = function (a) {
+	return {ctor: 'ProjectView', _0: a};
+};
+var _user$project$Entity$ProjectsView = {ctor: 'ProjectsView'};
+var _user$project$Entity$ContextView = function (a) {
+	return {ctor: 'ContextView', _0: a};
+};
+var _user$project$Entity$ContextsView = {ctor: 'ContextsView'};
+var _user$project$Entity$defaultListView = _user$project$Entity$ContextsView;

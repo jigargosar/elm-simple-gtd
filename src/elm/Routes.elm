@@ -1,6 +1,7 @@
 module Routes exposing (..)
 
 import Document
+import Entity
 import Model as Model
 import Msg exposing (Msg)
 import Navigation exposing (Location)
@@ -21,24 +22,7 @@ delta2builder previous current =
 getPathFromModel model =
     case Model.getMainViewType model of
         EntityListView viewType ->
-            case viewType of
-                ContextsView ->
-                    [ "lists", "contexts" ]
-
-                ProjectsView ->
-                    [ "lists", "projects" ]
-
-                ProjectView id ->
-                    if String.isEmpty id then
-                        [ "project", "NotAssigned" ]
-                    else
-                        [ "project", id ]
-
-                ContextView id ->
-                    if String.isEmpty id then
-                        [ "Inbox" ]
-                    else
-                        [ "context", id ]
+            Entity.routes viewType
 
         BinView ->
             [ "lists", "bin" ]
@@ -59,10 +43,10 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "contexts" :: [] ->
-            [ Msg.SetGroupByView ContextsView ]
+            [ Msg.SetGroupByView Entity.ContextsView ]
 
         "lists" :: "projects" :: [] ->
-            [ Msg.SetGroupByView ProjectsView ]
+            [ Msg.SetGroupByView Entity.ProjectsView ]
 
         "lists" :: "bin" :: [] ->
             [ Msg.SwitchView BinView ]
@@ -71,16 +55,16 @@ builder2messages builder =
             [ Msg.SwitchView DoneView ]
 
         "Inbox" :: [] ->
-            [ Msg.SetGroupByView (ContextView "") ]
+            [ Msg.SetGroupByView (Entity.ContextView "") ]
 
         "context" :: id :: [] ->
-            [ Msg.SetGroupByView (ContextView id) ]
+            [ Msg.SetGroupByView (Entity.ContextView id) ]
 
         "project" :: "NotAssigned" :: [] ->
-            [ Msg.SetGroupByView (ProjectView "") ]
+            [ Msg.SetGroupByView (Entity.ProjectView "") ]
 
         "project" :: id :: [] ->
-            [ Msg.SetGroupByView (ProjectView id) ]
+            [ Msg.SetGroupByView (Entity.ProjectView id) ]
 
         "notification" :: todoId :: [] ->
             [ Msg.ShowReminderOverlayForTodoId todoId ]

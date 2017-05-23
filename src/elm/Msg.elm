@@ -5,6 +5,7 @@ import Context
 import Document
 import Dom
 import EditMode
+import Entity exposing (Entity)
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Model exposing (..)

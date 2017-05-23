@@ -6,6 +6,7 @@ import Date.Extra.Create
 import Dict.Extra
 import Document exposing (Document)
 import EditMode exposing (EditMode)
+import Entity exposing (Entity)
 import Ext.Keyboard as Keyboard
 import Ext.List as List
 import Firebase
@@ -32,11 +33,8 @@ import Toolkit.Helpers exposing (..)
 import Tuple2
 
 
-type EntityListViewType
-    = ContextsView
-    | ContextView Document.Id
-    | ProjectsView
-    | ProjectView Document.Id
+type alias EntityListViewType =
+    Entity.ListViewType
 
 
 type ViewType
@@ -97,12 +95,6 @@ type EntityAction
     | SetBlurred
     | SetFocusedIn
     | ToggleSelected
-
-
-type Entity
-    = ProjectEntity Project.Model
-    | ContextEntity Context.Model
-    | TodoEntity Todo.Model
 
 
 type EntityType
@@ -226,7 +218,7 @@ init flags =
             , projectStore = projectStore
             , contextStore = contextStore
             , editMode = EditMode.none
-            , mainViewType = EntityListView ContextsView
+            , mainViewType = EntityListView Entity.defaultListView
             , keyboardState = Keyboard.init
             , showDeleted = False
             , reminderOverlay = ReminderOverlay.none
@@ -382,13 +374,13 @@ getActiveTodoListGroupedBy fn =
 createAndEditNewProject model =
     Store.insert (Project.init "<New Project>" model.now) model.projectStore
         |> Tuple2.mapSecond (setProjectStore # model)
-        |> (\( project, model ) -> startEditingEntity (ProjectEntity project) model)
+        |> (\( project, model ) -> startEditingEntity (Entity.ProjectEntity project) model)
 
 
 createAndEditNewContext model =
     Store.insert (Project.init "<New Context>" model.now) model.contextStore
         |> Tuple2.mapSecond (setContextStore # model)
-        |> (\( context, model ) -> startEditingEntity (ContextEntity context) model)
+        |> (\( context, model ) -> startEditingEntity (Entity.ContextEntity context) model)
 
 
 isShowDetailsKeyPressed =
@@ -492,17 +484,17 @@ toggleDeleteEntity entity model =
     in
         model
             |> case entity of
-                ContextEntity context ->
+                Entity.ContextEntity context ->
                     updateDoc entityId
                         (Document.toggleDeleted)
                         contextStore
 
-                ProjectEntity project ->
+                Entity.ProjectEntity project ->
                     updateDoc entityId
                         (Document.toggleDeleted)
                         projectStore
 
-                TodoEntity todo ->
+                Entity.TodoEntity todo ->
                     updateTodo Todo.ToggleDeleted entityId
 
 
@@ -557,10 +549,10 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
             case model.mainViewType of
                 EntityListView viewType ->
                     case viewType of
-                        ContextView id ->
+                        Entity.ContextView id ->
                             model.contextStore |> Store.findById id >>? Todo.SetContext
 
-                        ProjectView id ->
+                        Entity.ProjectView id ->
                             model.projectStore |> Store.findById id >>? Todo.SetProject
 
                         _ ->
@@ -579,13 +571,13 @@ setTodoContextOrProjectBasedOnCurrentView todoId model =
 createEntityEditForm : Entity -> Model -> EditMode
 createEntityEditForm entity model =
     case entity of
-        ContextEntity context ->
+        Entity.ContextEntity context ->
             EditMode.editContextMode context
 
-        ProjectEntity project ->
+        Entity.ProjectEntity project ->
             EditMode.editProjectMode project
 
-        TodoEntity todo ->
+        Entity.TodoEntity todo ->
             Todo.Form.create todo |> EditMode.EditTodo
 
 
@@ -767,13 +759,13 @@ setEntityListViewType =
 
 getEntityId entity =
     case entity of
-        TodoEntity doc ->
+        Entity.TodoEntity doc ->
             Document.getId doc
 
-        ProjectEntity doc ->
+        Entity.ProjectEntity doc ->
             Document.getId doc
 
-        ContextEntity doc ->
+        Entity.ContextEntity doc ->
             Document.getId doc
 
 
@@ -788,28 +780,28 @@ getCurrentViewEntityList model =
 
 createViewEntityList viewType model =
     case viewType of
-        ContextsView ->
+        Entity.ContextsView ->
             let
                 contextList =
                     getFilteredContextList model
             in
                 getContextsViewEntityList contextList model
 
-        ContextView id ->
+        Entity.ContextView id ->
             let
                 contextList =
                     model.contextStore |> Store.findById id ?= Context.null |> List.singleton
             in
                 getContextsViewEntityList contextList model
 
-        ProjectsView ->
+        Entity.ProjectsView ->
             let
                 projectList =
                     getFilteredProjectList model
             in
                 getProjectsViewEntityList projectList model
 
-        ProjectView id ->
+        Entity.ProjectView id ->
             let
                 projectList =
                     model.projectStore |> Store.findById id ?= Project.null |> List.singleton
@@ -827,12 +819,12 @@ getContextsViewEntityList contextList model =
             todoListByContextId
                 |> Dict.get (Document.getId context)
                 ?= []
-                .|> TodoEntity
+                .|> Entity.TodoEntity
     in
         contextList
             |> List.concatMap
                 (\context ->
-                    (ContextEntity context) :: (todoEntitiesForContext context)
+                    (Entity.ContextEntity context) :: (todoEntitiesForContext context)
                 )
 
 
@@ -846,12 +838,12 @@ getProjectsViewEntityList projectList model =
             todoListByProjectId
                 |> Dict.get (Document.getId project)
                 ?= []
-                .|> TodoEntity
+                .|> Entity.TodoEntity
     in
         projectList
             |> List.concatMap
                 (\project ->
-                    (ProjectEntity project) :: (todoEntitiesForProject project)
+                    (Entity.ProjectEntity project) :: (todoEntitiesForProject project)
                 )
 
 

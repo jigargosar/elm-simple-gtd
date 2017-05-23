@@ -11,13 +11,13 @@ var _user$project$Routes$builder2messages = function (builder) {
 								case 'contexts':
 									return {
 										ctor: '::',
-										_0: _user$project$Msg$SetGroupByView(_user$project$Model$ContextsView),
+										_0: _user$project$Msg$SetGroupByView(_user$project$Entity$ContextsView),
 										_1: {ctor: '[]'}
 									};
 								case 'projects':
 									return {
 										ctor: '::',
-										_0: _user$project$Msg$SetGroupByView(_user$project$Model$ProjectsView),
+										_0: _user$project$Msg$SetGroupByView(_user$project$Entity$ProjectsView),
 										_1: {ctor: '[]'}
 									};
 								case 'bin':
@@ -39,7 +39,7 @@ var _user$project$Routes$builder2messages = function (builder) {
 							return {
 								ctor: '::',
 								_0: _user$project$Msg$SetGroupByView(
-									_user$project$Model$ContextView(_p0._1._0)),
+									_user$project$Entity$ContextView(_p0._1._0)),
 								_1: {ctor: '[]'}
 							};
 						case 'project':
@@ -47,14 +47,14 @@ var _user$project$Routes$builder2messages = function (builder) {
 								return {
 									ctor: '::',
 									_0: _user$project$Msg$SetGroupByView(
-										_user$project$Model$ProjectView('')),
+										_user$project$Entity$ProjectView('')),
 									_1: {ctor: '[]'}
 								};
 							} else {
 								return {
 									ctor: '::',
 									_0: _user$project$Msg$SetGroupByView(
-										_user$project$Model$ProjectView(_p0._1._0)),
+										_user$project$Entity$ProjectView(_p0._1._0)),
 									_1: {ctor: '[]'}
 								};
 							}
@@ -76,7 +76,7 @@ var _user$project$Routes$builder2messages = function (builder) {
 						return {
 							ctor: '::',
 							_0: _user$project$Msg$SetGroupByView(
-								_user$project$Model$ContextView('')),
+								_user$project$Entity$ContextView('')),
 							_1: {ctor: '[]'}
 						};
 					case 'custom-sync':
@@ -103,63 +103,7 @@ var _user$project$Routes$getPathFromModel = function (model) {
 	var _p1 = _user$project$Model$getMainViewType(model);
 	switch (_p1.ctor) {
 		case 'EntityListView':
-			var _p2 = _p1._0;
-			switch (_p2.ctor) {
-				case 'ContextsView':
-					return {
-						ctor: '::',
-						_0: 'lists',
-						_1: {
-							ctor: '::',
-							_0: 'contexts',
-							_1: {ctor: '[]'}
-						}
-					};
-				case 'ProjectsView':
-					return {
-						ctor: '::',
-						_0: 'lists',
-						_1: {
-							ctor: '::',
-							_0: 'projects',
-							_1: {ctor: '[]'}
-						}
-					};
-				case 'ProjectView':
-					var _p3 = _p2._0;
-					return _elm_lang$core$String$isEmpty(_p3) ? {
-						ctor: '::',
-						_0: 'project',
-						_1: {
-							ctor: '::',
-							_0: 'NotAssigned',
-							_1: {ctor: '[]'}
-						}
-					} : {
-						ctor: '::',
-						_0: 'project',
-						_1: {
-							ctor: '::',
-							_0: _p3,
-							_1: {ctor: '[]'}
-						}
-					};
-				default:
-					var _p4 = _p2._0;
-					return _elm_lang$core$String$isEmpty(_p4) ? {
-						ctor: '::',
-						_0: 'Inbox',
-						_1: {ctor: '[]'}
-					} : {
-						ctor: '::',
-						_0: 'context',
-						_1: {
-							ctor: '::',
-							_0: _p4,
-							_1: {ctor: '[]'}
-						}
-					};
-			}
+			return _user$project$Entity$routes(_p1._0);
 		case 'BinView':
 			return {
 				ctor: '::',

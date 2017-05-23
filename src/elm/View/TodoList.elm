@@ -6,6 +6,7 @@ import Dict.Extra as Dict
 import Document
 import Dom
 import EditMode
+import Entity
 import GroupEntity.View
 import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
@@ -103,13 +104,13 @@ listView entityList viewModel =
                     getTabindexAV focused
             in
                 case entity of
-                    ContextEntity context ->
+                    Entity.ContextEntity context ->
                         getMaybeContextVM context ?|> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
-                    ProjectEntity project ->
+                    Entity.ProjectEntity project ->
                         getMaybeProjectVM project ?|> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
-                    TodoEntity todo ->
+                    Entity.TodoEntity todo ->
                         Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo) |> Just
 
         idList =

@@ -7,6 +7,7 @@ import Dict
 import Document
 import Dom
 import EditMode
+import Entity
 import Ext.Decode exposing (traceDecoder)
 import Ext.Time
 import Html.Attributes.Extra exposing (intProperty)
@@ -17,7 +18,7 @@ import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
-import Model exposing (Entity(TodoEntity), EntityAction(ToggleDeleted))
+import Model exposing (EntityAction(ToggleDeleted))
 import Msg exposing (Msg, commonMsg)
 import Polymer.Attributes exposing (boolProperty, stringProperty)
 import Polymer.Events exposing (onTap)
@@ -168,7 +169,7 @@ createTodoViewModel vc tabindexAV todo =
             text |> String.trim |> String.ellipsis 100
 
         createEntityActionMsg =
-            Msg.OnEntityAction (TodoEntity todo)
+            Msg.OnEntityAction (Entity.TodoEntity todo)
 
         maybeEditTodoForm =
             vc.getMaybeEditTodoFormForTodo todo
@@ -484,7 +485,7 @@ createEditTodoViewModel form todo =
             { text = form.todoText
             }
         , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
-        , onDeleteClicked = Msg.OnEntityAction (TodoEntity todo) ToggleDeleted
+        , onDeleteClicked = Msg.OnEntityAction (Entity.TodoEntity todo) ToggleDeleted
         }
 
 

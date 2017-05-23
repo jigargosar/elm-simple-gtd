@@ -1,6 +1,7 @@
 module View.AppDrawer exposing (..)
 
 import Document
+import Entity
 import GroupEntity.ViewModel
 import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
@@ -111,16 +112,16 @@ getSelectedIndex { mainViewType, projects, contexts } =
         case mainViewType of
             EntityListView viewType ->
                 case viewType of
-                    ContextsView ->
+                    Entity.ContextsView ->
                         0
 
-                    ContextView id ->
+                    Entity.ContextView id ->
                         1 + (contextIndexById id)
 
-                    ProjectsView ->
+                    Entity.ProjectsView ->
                         projectsIndex
 
-                    ProjectView id ->
+                    Entity.ProjectView id ->
                         1 + projectsIndex + (projectIndexById id)
 
             BinView ->

@@ -4,9 +4,10 @@ import Context
 import Dict
 import Document
 import EditMode exposing (EditMode)
+import Entity exposing (Entity)
 import Ext.Keyboard exposing (KeyboardEvent)
 import Lazy
-import Model exposing (Entity(ContextEntity, ProjectEntity), EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), GroupEntityType(ContextGroup, ProjectGroup), ViewType(..), EntityListViewType(..))
+import Model exposing (EntityAction(NameChanged, Save, StartEditing, ToggleDeleted), EntityListViewType, GroupEntityType(ContextGroup, ProjectGroup), ViewType(..))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -192,12 +193,12 @@ contexts model =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
             , entityType = ContextGroup
-            , entityWrapper = ContextEntity
+            , entityWrapper = Entity.ContextEntity
             , nullEntity = Context.null
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultIconName = "av:fiber-manual-record"
-            , getViewType = ContextView
+            , getViewType = Entity.ContextView
             , maybeEditModel = Model.getMaybeEditModelForEntityType ContextGroup model
             }
 
@@ -206,7 +207,7 @@ contexts model =
             createList config model
     in
         { entityList = contextList
-        , viewType = ContextsView
+        , viewType = Entity.ContextsView
         , title = "Contexts"
         , showDeleted = model.showDeleted
         , onAddClicked = Msg.NewContext
@@ -223,18 +224,18 @@ projects model =
                 { groupByFn = Todo.getProjectId
                 , namePrefix = "#"
                 , entityType = ProjectGroup
-                , entityWrapper = ProjectEntity
+                , entityWrapper = Entity.ProjectEntity
                 , nullEntity = Project.null
                 , isNull = Project.isNull
                 , nullIcon = { name = "apps", color = nullProjectColor }
                 , defaultIconName = "apps"
-                , getViewType = ProjectView
+                , getViewType = Entity.ProjectView
                 , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectGroup model
                 }
                 model
     in
         { entityList = projectList
-        , viewType = ProjectsView
+        , viewType = Entity.ProjectsView
         , title = "Projects"
         , showDeleted = model.showDeleted
         , onAddClicked = Msg.NewProject

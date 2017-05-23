@@ -1,6 +1,7 @@
 module ViewModel exposing (..)
 
 import Document
+import Entity
 import GroupEntity.ViewModel exposing (EntityViewModel)
 import Html exposing (Attribute)
 import Msg exposing (Msg)
@@ -12,7 +13,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Model exposing (EntityListViewType(..), EntityFocus, ViewType(..))
+import Model exposing (EntityFocus, ViewType(..))
 import View.Shared exposing (SharedViewModel)
 
 
@@ -85,16 +86,16 @@ getViewInfo mainViewType projectsVM contextsVM =
         case mainViewType of
             EntityListView viewType ->
                 case viewType of
-                    ContextsView ->
+                    Entity.ContextsView ->
                         ( contextsVM.title, contextsVM.icon.color )
 
-                    ContextView id ->
+                    Entity.ContextView id ->
                         contextsVM.entityList |> appHeaderInfoById id
 
-                    ProjectsView ->
+                    Entity.ProjectsView ->
                         ( projectsVM.title, projectsVM.icon.color )
 
-                    ProjectView id ->
+                    Entity.ProjectView id ->
                         projectsVM.entityList |> appHeaderInfoById id
 
             BinView ->

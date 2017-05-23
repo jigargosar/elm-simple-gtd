@@ -71,7 +71,7 @@ var _user$project$Todo_View$createEditTodoViewModel = F2(
 			},
 			onDeleteClicked: A2(
 				_user$project$Msg$OnEntityAction,
-				_user$project$Model$TodoEntity(todo),
+				_user$project$Entity$TodoEntity(todo),
 				_user$project$Model$ToggleDeleted)
 		};
 	});
@@ -289,7 +289,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		var toggleDoneMsg = _user$project$Msg$ToggleTodoDone(todo);
 		var maybeEditTodoForm = vc.getMaybeEditTodoFormForTodo(todo);
 		var createEntityActionMsg = _user$project$Msg$OnEntityAction(
-			_user$project$Model$TodoEntity(todo));
+			_user$project$Entity$TodoEntity(todo));
 		var startEditingMsg = createEntityActionMsg(_user$project$Model$StartEditing);
 		var toggleDeleteMsg = createEntityActionMsg(_user$project$Model$ToggleDeleted);
 		var onKeyDownMsg = function (_p5) {

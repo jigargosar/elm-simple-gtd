@@ -92,18 +92,18 @@ var _user$project$GroupEntity_ViewModel$contexts = function (model) {
 		groupByFn: _user$project$Todo$getContextId,
 		namePrefix: '@',
 		entityType: _user$project$Model$ContextGroup,
-		entityWrapper: _user$project$Model$ContextEntity,
+		entityWrapper: _user$project$Entity$ContextEntity,
 		nullEntity: _user$project$Context$null,
 		isNull: _user$project$Context$isNull,
 		nullIcon: {name: 'inbox', color: _user$project$GroupEntity_ViewModel$inboxColor},
 		defaultIconName: 'av:fiber-manual-record',
-		getViewType: _user$project$Model$ContextView,
+		getViewType: _user$project$Entity$ContextView,
 		maybeEditModel: A2(_user$project$Model$getMaybeEditModelForEntityType, _user$project$Model$ContextGroup, model)
 	};
 	var contextList = A2(_user$project$GroupEntity_ViewModel$createList, config, model);
 	return {
 		entityList: contextList,
-		viewType: _user$project$Model$ContextsView,
+		viewType: _user$project$Entity$ContextsView,
 		title: 'Contexts',
 		showDeleted: model.showDeleted,
 		onAddClicked: _user$project$Msg$NewContext,
@@ -117,18 +117,18 @@ var _user$project$GroupEntity_ViewModel$projects = function (model) {
 			groupByFn: _user$project$Todo$getProjectId,
 			namePrefix: '#',
 			entityType: _user$project$Model$ProjectGroup,
-			entityWrapper: _user$project$Model$ProjectEntity,
+			entityWrapper: _user$project$Entity$ProjectEntity,
 			nullEntity: _user$project$Project$null,
 			isNull: _user$project$Project$isNull,
 			nullIcon: {name: 'apps', color: _user$project$GroupEntity_ViewModel$nullProjectColor},
 			defaultIconName: 'apps',
-			getViewType: _user$project$Model$ProjectView,
+			getViewType: _user$project$Entity$ProjectView,
 			maybeEditModel: A2(_user$project$Model$getMaybeEditModelForEntityType, _user$project$Model$ProjectGroup, model)
 		},
 		model);
 	return {
 		entityList: projectList,
-		viewType: _user$project$Model$ProjectsView,
+		viewType: _user$project$Entity$ProjectsView,
 		title: 'Projects',
 		showDeleted: model.showDeleted,
 		onAddClicked: _user$project$Msg$NewProject,

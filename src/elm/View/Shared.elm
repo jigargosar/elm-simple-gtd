@@ -4,6 +4,7 @@ import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
 import EditMode exposing (EditMode)
+import Entity exposing (Entity)
 import GroupEntity.ViewModel
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
@@ -23,7 +24,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Model exposing (Entity, Model)
+import Model exposing (Model)
 import Project
 import Project
 import Todo

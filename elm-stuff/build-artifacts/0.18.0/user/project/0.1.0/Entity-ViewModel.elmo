@@ -87,7 +87,7 @@ var _user$project$Entity_ViewModel$IconVM = F2(
 	function (a, b) {
 		return {name: a, color: b};
 	});
-var _user$project$Entity_ViewModel$EntityViewModel = function (a) {
+var _user$project$Entity_ViewModel$GroupEntityViewModel = function (a) {
 	return function (b) {
 		return function (c) {
 			return function (d) {

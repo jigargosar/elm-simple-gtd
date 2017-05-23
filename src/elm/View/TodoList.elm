@@ -106,10 +106,11 @@ listView entityList viewModel =
             in
                 case entity of
                     Entity.ContextEntity context ->
-                        Entity.ViewModel.context context |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
+                        Entity.ViewModel.forContext context
+                            |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     Entity.ProjectEntity project ->
-                        Entity.ViewModel.project project |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
+                        Entity.ViewModel.forProject project |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     Entity.TodoEntity todo ->
                         Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo)

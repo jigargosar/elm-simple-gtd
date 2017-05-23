@@ -133,8 +133,8 @@ create config entityModel =
         }
 
 
-context : Context.Model -> EntityViewModel
-context context =
+forContext : Context.Model -> EntityViewModel
+forContext context =
     let
         config : Config
         config =
@@ -149,11 +149,11 @@ context context =
             , getViewType = Entity.ContextView
             }
     in
-        create config context
+        create config forContext
 
 
-project : Project.Model -> EntityViewModel
-project project =
+forProject : Project.Model -> EntityViewModel
+forProject project =
     let
         config : Config
         config =
@@ -168,7 +168,7 @@ project project =
             , getViewType = Entity.ProjectView
             }
     in
-        create config project
+        create config forProject
 
 
 inboxColor =

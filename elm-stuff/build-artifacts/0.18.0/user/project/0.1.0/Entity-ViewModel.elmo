@@ -34,11 +34,6 @@ var _user$project$Entity_ViewModel$create = F2(
 			id: id,
 			name: name,
 			isDeleted: _user$project$Document$isDeleted(entityModel),
-			onActiveStateChanged: function (bool) {
-				return bool ? _user$project$Msg$SwitchView(
-					_user$project$Model$EntityListView(
-						config.getViewType(id))) : _user$project$Msg$commonMsg.noOp;
-			},
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,
 			onSaveClicked: createEntityActionMsg(_user$project$Entity$Save),
@@ -48,7 +43,6 @@ var _user$project$Entity_ViewModel$create = F2(
 			},
 			onCancelClicked: _user$project$Msg$DeactivateEditingMode,
 			icon: icon,
-			appHeader: appHeader,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$SetFocusedIn),
 			onFocus: createEntityActionMsg(_user$project$Entity$SetFocused),
 			onBlur: createEntityActionMsg(_user$project$Entity$SetBlurred),
@@ -100,11 +94,7 @@ var _user$project$Entity_ViewModel$GroupViewModel = function (a) {
 										return function (k) {
 											return function (l) {
 												return function (m) {
-													return function (n) {
-														return function (o) {
-															return {id: a, name: b, appHeader: c, isDeleted: d, onActiveStateChanged: e, startEditingMsg: f, onDeleteClicked: g, onSaveClicked: h, onNameChanged: i, onCancelClicked: j, icon: k, onFocusIn: l, onFocus: m, onBlur: n, onKeyDownMsg: o};
-														};
-													};
+													return {id: a, name: b, isDeleted: c, startEditingMsg: d, onDeleteClicked: e, onSaveClicked: f, onNameChanged: g, onCancelClicked: h, icon: i, onFocusIn: j, onFocus: k, onBlur: l, onKeyDownMsg: m};
 												};
 											};
 										};

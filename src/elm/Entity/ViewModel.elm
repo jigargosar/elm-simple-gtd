@@ -30,9 +30,7 @@ type alias IconVM =
 type alias GroupViewModel =
     { id : String
     , name : String
-    , appHeader : { name : String, backgroundColor : String }
     , isDeleted : Bool
-    , onActiveStateChanged : Bool -> Msg
     , startEditingMsg : Msg
     , onDeleteClicked : Msg
     , onSaveClicked : Msg
@@ -109,20 +107,12 @@ create config entityModel =
         { id = id
         , name = name
         , isDeleted = Document.isDeleted entityModel
-        , onActiveStateChanged =
-            (\bool ->
-                if bool then
-                    Msg.SwitchView (config.getViewType id |> EntityListView)
-                else
-                    commonMsg.noOp
-            )
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg
         , onSaveClicked = createEntityActionMsg Entity.Save
         , onNameChanged = Entity.NameChanged >> createEntityActionMsg
         , onCancelClicked = Msg.DeactivateEditingMode
         , icon = icon
-        , appHeader = appHeader
         , onFocusIn = createEntityActionMsg Entity.SetFocusedIn
         , onFocus = createEntityActionMsg Entity.SetFocused
         , onBlur = createEntityActionMsg Entity.SetBlurred

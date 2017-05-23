@@ -94,9 +94,6 @@ create config entityModel =
 
         onKeyDownMsg { key } =
             case key of
-                {- Key.Space ->
-                   createEntityActionMsg Model.ToggleSelected
-                -}
                 Key.CharE ->
                     startEditingMsg
 

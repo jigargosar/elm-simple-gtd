@@ -757,37 +757,49 @@ getCurrentViewEntityList model =
 
 
 createViewEntityList viewType model =
-    case viewType of
-        Entity.ContextsView ->
-            let
-                contextList =
-                    getFilteredContextList model
-            in
-                getContextsViewEntityList contextList model
+    let
+        _ =
+            { project = getFilteredContextList model
+            , context = getFilteredProjectList model
+            }
+    in
+        case viewType of
+            Entity.ContextsView ->
+                let
+                    contextList =
+                        getFilteredContextList model
+                in
+                    getContextsViewEntityList contextList model False
 
-        Entity.ContextView id ->
-            let
-                contextList =
-                    model.contextStore |> Store.findById id ?= Context.null |> List.singleton
-            in
-                getContextsViewEntityList contextList model
+            Entity.ContextView id ->
+                let
+                    contextList =
+                        model.contextStore |> Store.findById id ?= Context.null |> List.singleton
+                in
+                    getContextsViewEntityList contextList model True
 
-        Entity.ProjectsView ->
-            let
-                projectList =
-                    getFilteredProjectList model
-            in
-                getProjectsViewEntityList projectList model
+            Entity.ProjectsView ->
+                let
+                    projectList =
+                        getFilteredProjectList model
+                in
+                    getProjectsViewEntityList projectList model
 
-        Entity.ProjectView id ->
-            let
-                projectList =
-                    model.projectStore |> Store.findById id ?= Project.null |> List.singleton
-            in
-                getProjectsViewEntityList projectList model
+            Entity.ProjectView id ->
+                let
+                    projectList =
+                        model.projectStore |> Store.findById id ?= Project.null |> List.singleton
+                in
+                    getProjectsViewEntityList projectList model
 
 
-getContextsViewEntityList contextList model =
+type alias GroupedTodoList =
+    { project : Dict Document.Id (List Todo.Model)
+    , context : Dict Document.Id (List Todo.Model)
+    }
+
+
+getContextsViewEntityList contextList model enableSubgroup =
     let
         -- todo : use getFiltered todo list
         todoListByContextId =

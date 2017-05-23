@@ -8,3 +8,13 @@ var _user$project$EntityList_ViewModel$create = F2(
 var _user$project$EntityList_ViewModel$ViewModel = function (a) {
 	return {entityList: a};
 };
+var _user$project$EntityList_ViewModel$EntityViewModel = F6(
+	function (a, b, c, d, e, f) {
+		return {onFocusIn: a, onFocus: b, onBlur: c, startEditingMsg: d, toggleDeleteMsg: e, startEditingMsg: f};
+	});
+var _user$project$EntityList_ViewModel$Todo = function (a) {
+	return {ctor: 'Todo', _0: a};
+};
+var _user$project$EntityList_ViewModel$Group = function (a) {
+	return {ctor: 'Group', _0: a};
+};

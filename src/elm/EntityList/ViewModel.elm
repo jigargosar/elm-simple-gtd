@@ -1,17 +1,35 @@
 module EntityList.ViewModel exposing (..)
 
 import Entity exposing (Entity)
+import EntityList.GroupViewModel
 import Model
+import Msg exposing (Msg)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Todo.View exposing (TodoViewModel)
 
 
 type alias ViewModel =
     { entityList : List Entity
+    }
+
+
+type EntityViewModelWrapper
+    = Group EntityList.GroupViewModel.ViewModel
+    | Todo TodoViewModel
+
+
+type alias EntityViewModel =
+    { onFocusIn : Msg
+    , onFocus : Msg
+    , onBlur : Msg
+    , startEditingMsg : Msg
+    , toggleDeleteMsg : Msg
+    , startEditingMsg : Msg
     }
 
 

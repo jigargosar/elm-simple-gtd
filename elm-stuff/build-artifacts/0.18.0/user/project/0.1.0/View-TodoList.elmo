@@ -120,6 +120,6 @@ var _user$project$View_TodoList$filtered = F2(
 			},
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				_user$project$Model$getFilteredTodoList(model),
+				_user$project$Model$getTodoListForCurrentView(model),
 				createTodoView));
 	});

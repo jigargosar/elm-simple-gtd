@@ -582,10 +582,10 @@ clearSelection =
     setSelectedEntityIdSet Set.empty
 
 
-getFilteredTodoList model =
+getTodoListForCurrentView model =
     let
         filter =
-            model |> getCurrentTodoListFilter
+            model |> getTodoListFilterForCurrentView
 
         allTodos =
             model |> getTodoStore >> Store.asList
@@ -600,16 +600,34 @@ getFilteredTodoList model =
             |> List.take 25
 
 
-getCurrentTodoListFilter model =
-    case getMainViewType model of
-        BinView ->
-            Todo.binFilter
+getTodoListFilterForCurrentView model =
+    let
+        isActive =
+            Todo.toAllPassPredicate [ Todo.isDone >> not, Todo.isDeleted >> not ]
+    in
+        case getMainViewType model of
+            BinView ->
+                Todo.binFilter
 
-        DoneView ->
-            Todo.doneFilter
+            DoneView ->
+                Todo.doneFilter
 
-        _ ->
-            always (True)
+            EntityListView viewType ->
+                case viewType of
+                    Entity.ContextsView ->
+                        isActive
+
+                    Entity.ContextView id ->
+                        Todo.toAllPassPredicate [ isActive, Todo.getContextId >> equals id ]
+
+                    Entity.ProjectsView ->
+                        isActive
+
+                    Entity.ProjectView id ->
+                        Todo.toAllPassPredicate [ isActive, Todo.getProjectId >> equals id ]
+
+            _ ->
+                always (True)
 
 
 getCurrentTodoListSortByFunction model =
@@ -763,37 +781,33 @@ createViewEntityList viewType model =
            , context = getFilteredProjectList model
            }
         -}
-        activeTodoList =
-            getActiveTodoList model
+        todoList =
+            getTodoListForCurrentView model
+
+        contextList =
+            todoList
+                .|> Todo.getContextId
+                |> Set.fromList
+                |> Store.findAllByIdSetIn model.contextStore
+
+        projectList =
+            todoList
+                .|> Todo.getProjectId
+                |> Set.fromList
+                |> Store.findAllByIdSetIn model.projectStore
     in
         case viewType of
             Entity.ContextsView ->
-                let
-                    contextList =
-                        getFilteredContextList model
-                in
-                    getContextsViewEntityList contextList activeTodoList False
+                getContextsViewEntityList contextList todoList False
 
             Entity.ContextView id ->
-                let
-                    contextList =
-                        model.contextStore |> Store.findById id ?= Context.null |> List.singleton
-                in
-                    getContextsViewEntityList contextList activeTodoList True
+                getContextsViewEntityList contextList todoList True
 
             Entity.ProjectsView ->
-                let
-                    projectList =
-                        getFilteredProjectList model
-                in
-                    getProjectsViewEntityList projectList activeTodoList False
+                getProjectsViewEntityList projectList todoList False
 
             Entity.ProjectView id ->
-                let
-                    projectList =
-                        model.projectStore |> Store.findById id ?= Project.null |> List.singleton
-                in
-                    getProjectsViewEntityList projectList activeTodoList True
+                getProjectsViewEntityList projectList todoList True
 
 
 type alias GroupedTodoList =

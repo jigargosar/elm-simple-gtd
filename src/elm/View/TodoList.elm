@@ -52,7 +52,7 @@ filtered viewModel model =
             Todo.View.initKeyed (viewModel.createTodoViewModel (tabindex -1) todo)
     in
         model
-            |> Model.getFilteredTodoList
+            |> Model.getTodoListForCurrentView
             .|> createTodoView
             |> Keyed.node "paper-listbox"
                 [ stringProperty "selected" "0"

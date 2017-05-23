@@ -14,13 +14,14 @@ port module Store
         , updateAllDocs
         , findAndUpdateT
         , replaceDoc__
-        , findAllByIdSet__
+        , findAllByIdSetIn
         , onPouchDbChange
         , upsertEncoded__
         , persist
         )
 
 import Dict
+import Dict.Extra
 import Document exposing (Document, Id)
 import Ext.Debug
 import Ext.Random as Random
@@ -247,12 +248,8 @@ filter fn =
     asList >> List.filter fn
 
 
-findAllByIdSet__ idSet store =
-    let
-        idDict =
-            asIdDict store
-    in
-        idSet |> Set.toList .|> Dict.get # idDict |> List.filterMap identity
+findAllByIdSetIn store idSet =
+    asIdDict store |> Dict.Extra.keepOnly idSet |> Dict.values
 
 
 reject fn =

@@ -84,16 +84,13 @@ var _user$project$Store$asIdDict = function (_p5) {
 				{ctor: '_Tuple2', _0: _user$project$Document$getId, _1: _elm_lang$core$Basics$identity}),
 			_p5));
 };
-var _user$project$Store$findAllByIdSet__ = F2(
-	function (idSet, store) {
-		var idDict = _user$project$Store$asIdDict(store);
-		return A2(
-			_elm_lang$core$List$filterMap,
-			_elm_lang$core$Basics$identity,
+var _user$project$Store$findAllByIdSetIn = F2(
+	function (store, idSet) {
+		return _elm_lang$core$Dict$values(
 			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				_elm_lang$core$Set$toList(idSet),
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, idDict)));
+				_elm_community$dict_extra$Dict_Extra$keepOnly,
+				idSet,
+				_user$project$Store$asIdDict(store)));
 	});
 var _user$project$Store$prepend = function (model) {
 	return _user$project$Store$updateList(

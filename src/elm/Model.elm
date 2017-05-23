@@ -77,11 +77,6 @@ type alias EntityFocus =
     { id : Document.Id }
 
 
-type ModelField
-    = NowField Time
-    | MainViewTypeField ViewType
-
-
 type alias ModelF =
     Model -> Model
 

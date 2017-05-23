@@ -40,8 +40,11 @@ isEntityFocusedInEntityList entityList viewModel =
         Model.getEntityId >> equals focusedId
 
 
-listView entityList viewModel =
+listView viewType model viewModel =
     let
+        entityList =
+            Model.createViewEntityList viewType model
+
         isEntityFocused =
             isEntityFocusedInEntityList entityList viewModel
 

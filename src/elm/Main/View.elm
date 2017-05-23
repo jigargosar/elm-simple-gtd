@@ -27,8 +27,7 @@ init viewModel model =
     div [ id "main-view" ]
         ([ case Model.getMainViewType model of
             EntityListView viewType ->
-                Model.createViewEntityList viewType model
-                    |> (EntityList.View.listView # viewModel)
+                EntityList.View.listView viewType model viewModel
 
             BinView ->
                 View.TodoList.filtered viewModel model

@@ -30,9 +30,9 @@ var _user$project$EntityList_View$getTabindexAV = function (focused) {
 	return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
 };
 var _user$project$EntityList_View$listView = F3(
-	function (viewType, model, viewModel) {
+	function (viewType, model, mainViewModel) {
 		var entityList = A2(_user$project$Model$createViewEntityList, viewType, model);
-		var isEntityFocused = A2(_user$project$EntityList_View$isEntityFocusedInEntityList, entityList, viewModel);
+		var isEntityFocused = A2(_user$project$EntityList_View$isEntityFocusedInEntityList, entityList, mainViewModel);
 		var createEntityView = F2(
 			function (index, entity) {
 				var tabIndexAV = _user$project$EntityList_View$getTabindexAV(
@@ -43,17 +43,17 @@ var _user$project$EntityList_View$listView = F3(
 						return A3(
 							_user$project$GroupEntity_View$initKeyed,
 							tabIndexAV,
-							viewModel,
+							mainViewModel,
 							_user$project$EntityList$createContextGroupViewModel(_p2._0));
 					case 'ProjectEntity':
 						return A3(
 							_user$project$GroupEntity_View$initKeyed,
 							tabIndexAV,
-							viewModel,
+							mainViewModel,
 							_user$project$EntityList$createProjectGroupViewModel(_p2._0));
 					default:
 						return _user$project$Todo_View$initKeyed(
-							A2(viewModel.createTodoViewModel, tabIndexAV, _p2._0));
+							A2(mainViewModel.createTodoViewModel, tabIndexAV, _p2._0));
 				}
 			});
 		return A3(

@@ -40,13 +40,13 @@ isEntityFocusedInEntityList entityList viewModel =
         Model.getEntityId >> equals focusedId
 
 
-listView viewType model viewModel =
+listView viewType model mainViewModel =
     let
         entityList =
             Model.createViewEntityList viewType model
 
         isEntityFocused =
-            isEntityFocusedInEntityList entityList viewModel
+            isEntityFocusedInEntityList entityList mainViewModel
 
         createEntityView index entity =
             let
@@ -56,14 +56,14 @@ listView viewType model viewModel =
                 case entity of
                     Entity.ContextEntity context ->
                         EntityList.createContextGroupViewModel {- viewModel tabIndexAV -} context
-                            |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
+                            |> (GroupEntity.View.initKeyed tabIndexAV mainViewModel)
 
                     Entity.ProjectEntity project ->
                         EntityList.createProjectGroupViewModel project
-                            |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
+                            |> (GroupEntity.View.initKeyed tabIndexAV mainViewModel)
 
                     Entity.TodoEntity todo ->
-                        Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo)
+                        Todo.View.initKeyed (mainViewModel.createTodoViewModel tabIndexAV todo)
     in
         Html.Keyed.node "div"
             [ class "entity-list focusable-list"

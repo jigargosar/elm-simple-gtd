@@ -123,8 +123,7 @@ var _user$project$Main_View$init = F2(
 						var _p2 = _user$project$Model$getMainViewType(model);
 						switch (_p2.ctor) {
 							case 'EntityListView':
-								return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$EntityList_View$listView, viewModel)(
-									A2(_user$project$Model$createViewEntityList, _p2._0, model));
+								return A3(_user$project$EntityList_View$listView, _p2._0, model, viewModel);
 							case 'BinView':
 								return A2(_user$project$View_TodoList$filtered, viewModel, model);
 							case 'DoneView':

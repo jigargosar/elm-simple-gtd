@@ -85,16 +85,6 @@ createList config model =
         getTodoListWithGroupId id =
             todoListDict |> Dict.get id ?= []
 
-        appendDeletedEntityList =
-            if model.showDeleted then
-                List.append # (Model.getDeletedEntityList config.entityType model)
-            else
-                identity
-
-        --        entityList =
-        --            Model.getActiveEntityList config.entityType model
-        --                |> (::) config.nullEntity
-        --                |> appendDeletedEntityList
         entityList =
             if model.showDeleted then
                 Model.getDeletedEntityList config.entityType model

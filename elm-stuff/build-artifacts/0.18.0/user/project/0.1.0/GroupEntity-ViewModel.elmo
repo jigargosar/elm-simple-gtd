@@ -75,10 +75,6 @@ var _user$project$GroupEntity_ViewModel$createList = F2(
 				}),
 			config.nullEntity,
 			A2(_user$project$Model$getActiveEntityList, config.entityType, model));
-		var appendDeletedEntityList = model.showDeleted ? A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-			_elm_lang$core$List$append,
-			A2(_user$project$Model$getDeletedEntityList, config.entityType, model)) : _elm_lang$core$Basics$identity;
 		var todoListDict = A2(_user$project$Model$getActiveTodoListGroupedBy, config.groupByFn, model);
 		var getTodoListWithGroupId = function (id) {
 			return A2(

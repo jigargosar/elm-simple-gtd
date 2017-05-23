@@ -41,7 +41,7 @@ import GroupEntity.ViewModel exposing (EntityViewModel)
 import Todo.View exposing (EditViewModel)
 import Tuple2
 import View.Shared exposing (..)
-import ViewModel exposing (EntityView(..))
+import ViewModel
 import WebComponents
 import Entity.ViewModel
 
@@ -106,7 +106,7 @@ listView entityList viewModel =
             in
                 case entity of
                     Entity.ContextEntity context ->
-                        Entity.ViewModel.forContext context
+                        Entity.ViewModel.forContext {- viewModel tabIndexAV -} context
                             |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     Entity.ProjectEntity project ->

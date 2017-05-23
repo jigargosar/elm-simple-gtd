@@ -40,13 +40,13 @@ var _user$project$View_TodoList$listView = F2(
 							_user$project$GroupEntity_View$initKeyed,
 							tabIndexAV,
 							viewModel,
-							_user$project$Entity_ViewModel$context(_p2._0));
+							_user$project$Entity_ViewModel$forContext(_p2._0));
 					case 'ProjectEntity':
 						return A3(
 							_user$project$GroupEntity_View$initKeyed,
 							tabIndexAV,
 							viewModel,
-							_user$project$Entity_ViewModel$project(_p2._0));
+							_user$project$Entity_ViewModel$forProject(_p2._0));
 					default:
 						return _user$project$Todo_View$initKeyed(
 							A2(viewModel.createTodoViewModel, tabIndexAV, _p2._0));

@@ -149,7 +149,7 @@ forContext context =
             , getViewType = Entity.ContextView
             }
     in
-        create config forContext
+        create config context
 
 
 forProject : Project.Model -> EntityViewModel
@@ -168,7 +168,7 @@ forProject project =
             , getViewType = Entity.ProjectView
             }
     in
-        create config forProject
+        create config project
 
 
 inboxColor =

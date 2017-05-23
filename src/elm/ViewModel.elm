@@ -17,20 +17,6 @@ import Model exposing (EntityFocus, ViewType(..))
 import View.Shared exposing (SharedViewModel)
 
 
-type EntityView
-    = EntityView EntityViewModel
-    | TodoView Todo.Model
-
-
-getIdOfEntityView entityView =
-    case entityView of
-        TodoView todo ->
-            Document.getId todo
-
-        EntityView vm ->
-            vm.id
-
-
 type alias Model =
     { contexts : GroupEntity.ViewModel.ViewModel
     , projects : GroupEntity.ViewModel.ViewModel

@@ -70,21 +70,7 @@ var _user$project$ViewModel$create = function (model) {
 		focusedEntityInfo: model.focusedEntityInfo
 	};
 };
-var _user$project$ViewModel$getIdOfEntityView = function (entityView) {
-	var _p7 = entityView;
-	if (_p7.ctor === 'TodoView') {
-		return _user$project$Document$getId(_p7._0);
-	} else {
-		return _p7._0.id;
-	}
-};
 var _user$project$ViewModel$Model = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {contexts: a, projects: b, viewName: c, mainViewType: d, header: e, shared: f, createTodoViewModel: g, focusedEntityInfo: h};
 	});
-var _user$project$ViewModel$TodoView = function (a) {
-	return {ctor: 'TodoView', _0: a};
-};
-var _user$project$ViewModel$EntityView = function (a) {
-	return {ctor: 'EntityView', _0: a};
-};

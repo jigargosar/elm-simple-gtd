@@ -55,7 +55,7 @@ var _user$project$Entity_ViewModel$create = F2(
 			onKeyDownMsg: onKeyDownMsg
 		};
 	});
-var _user$project$Entity_ViewModel$context = function (context) {
+var _user$project$Entity_ViewModel$forContext = function (context) {
 	var config = {
 		groupByFn: _user$project$Todo$getContextId,
 		namePrefix: '@',
@@ -69,7 +69,7 @@ var _user$project$Entity_ViewModel$context = function (context) {
 	};
 	return A2(_user$project$Entity_ViewModel$create, config, context);
 };
-var _user$project$Entity_ViewModel$project = function (project) {
+var _user$project$Entity_ViewModel$forProject = function (project) {
 	var config = {
 		groupByFn: _user$project$Todo$getProjectId,
 		namePrefix: '@',

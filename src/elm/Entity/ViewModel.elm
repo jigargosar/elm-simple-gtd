@@ -27,7 +27,7 @@ type alias IconVM =
     }
 
 
-type alias GroupEntityViewModel =
+type alias GroupViewModel =
     { id : String
     , name : String
     , appHeader : { name : String, backgroundColor : String }
@@ -133,7 +133,7 @@ create config entityModel =
         }
 
 
-forContext : Context.Model -> GroupEntityViewModel
+forContext : Context.Model -> GroupViewModel
 forContext context =
     let
         config : Config
@@ -152,7 +152,7 @@ forContext context =
         create config context
 
 
-forProject : Project.Model -> GroupEntityViewModel
+forProject : Project.Model -> GroupViewModel
 forProject project =
     let
         config : Config

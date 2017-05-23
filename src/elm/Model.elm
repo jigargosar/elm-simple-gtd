@@ -832,13 +832,35 @@ createViewEntityList viewType model =
                 getContextsViewEntityList todoList False model
 
             Entity.ContextView id ->
-                getContextsViewEntityList todoList True model
+                let
+                    addDefaultIfEmpty list =
+                        if List.isEmpty list then
+                            findContextById id model
+                                ?|> Entity.ContextEntity
+                                >> List.singleton
+                                ?= []
+                        else
+                            list
+                in
+                    getContextsViewEntityList todoList True model
+                        |> addDefaultIfEmpty
 
             Entity.ProjectsView ->
                 getProjectsViewEntityList todoList False model
 
             Entity.ProjectView id ->
-                getProjectsViewEntityList todoList True model
+                let
+                    addDefaultIfEmpty list =
+                        if List.isEmpty list then
+                            findProjectById id model
+                                ?|> Entity.ProjectEntity
+                                >> List.singleton
+                                ?= []
+                        else
+                            list
+                in
+                    getProjectsViewEntityList todoList True model
+                        |> addDefaultIfEmpty
 
 
 type alias GroupedTodoList =

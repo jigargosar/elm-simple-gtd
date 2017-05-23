@@ -43,7 +43,7 @@ import Tuple2
 import View.Shared exposing (..)
 import ViewModel
 import WebComponents
-import Entity.ViewModel
+import EntityList
 
 
 filtered : ViewModel.Model -> Model -> Html Msg
@@ -96,11 +96,12 @@ listView entityList viewModel =
             in
                 case entity of
                     Entity.ContextEntity context ->
-                        Entity.ViewModel.contextGroup {- viewModel tabIndexAV -} context
+                        EntityList.createContextGroupViewModel {- viewModel tabIndexAV -} context
                             |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     Entity.ProjectEntity project ->
-                        Entity.ViewModel.projectGroup project |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
+                        EntityList.createProjectGroupViewModel project
+                            |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     Entity.TodoEntity todo ->
                         Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo)

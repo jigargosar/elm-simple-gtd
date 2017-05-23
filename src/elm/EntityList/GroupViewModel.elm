@@ -1,4 +1,4 @@
-module Entity.ViewModel exposing (..)
+module EntityList.GroupViewModel exposing (..)
 
 import Context
 import Dict
@@ -27,7 +27,7 @@ type alias IconVM =
     }
 
 
-type alias GroupViewModel =
+type alias ViewModel =
     { id : String
     , name : String
     , isDeleted : Bool
@@ -120,8 +120,8 @@ create config entityModel =
         }
 
 
-contextGroup : Context.Model -> GroupViewModel
-contextGroup context =
+forContext : Context.Model -> ViewModel
+forContext context =
     let
         config : Config
         config =
@@ -139,8 +139,8 @@ contextGroup context =
         create config context
 
 
-projectGroup : Project.Model -> GroupViewModel
-projectGroup project =
+forProject : Project.Model -> ViewModel
+forProject project =
     let
         config : Config
         config =

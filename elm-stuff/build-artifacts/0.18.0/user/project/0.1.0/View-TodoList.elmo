@@ -40,46 +40,18 @@ var _user$project$View_TodoList$listView = F2(
 							_user$project$GroupEntity_View$initKeyed,
 							tabIndexAV,
 							viewModel,
-							_user$project$Entity_ViewModel$forContext(_p2._0));
+							_user$project$Entity_ViewModel$contextGroup(_p2._0));
 					case 'ProjectEntity':
 						return A3(
 							_user$project$GroupEntity_View$initKeyed,
 							tabIndexAV,
 							viewModel,
-							_user$project$Entity_ViewModel$forProject(_p2._0));
+							_user$project$Entity_ViewModel$projectGroup(_p2._0));
 					default:
 						return _user$project$Todo_View$initKeyed(
 							A2(viewModel.createTodoViewModel, tabIndexAV, _p2._0));
 				}
 			});
-		var contextVMs = viewModel.contexts.entityList;
-		var getMaybeContextVM = function (context) {
-			return A2(
-				_elm_community$list_extra$List_Extra$find,
-				function (_p3) {
-					return A2(
-						_user$project$Ext_Function$equals,
-						_user$project$Document$getId(context),
-						function (_) {
-							return _.id;
-						}(_p3));
-				},
-				contextVMs);
-		};
-		var projectVMs = viewModel.projects.entityList;
-		var getMaybeProjectVM = function (project) {
-			return A2(
-				_elm_community$list_extra$List_Extra$find,
-				function (_p4) {
-					return A2(
-						_user$project$Ext_Function$equals,
-						_user$project$Document$getId(project),
-						function (_) {
-							return _.id;
-						}(_p4));
-				},
-				projectVMs);
-		};
 		return A3(
 			_elm_lang$html$Html_Keyed$node,
 			'div',

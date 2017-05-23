@@ -133,8 +133,8 @@ create config entityModel =
         }
 
 
-forContext : Context.Model -> GroupViewModel
-forContext context =
+contextGroup : Context.Model -> GroupViewModel
+contextGroup context =
     let
         config : Config
         config =
@@ -152,8 +152,8 @@ forContext context =
         create config context
 
 
-forProject : Project.Model -> GroupViewModel
-forProject project =
+projectGroup : Project.Model -> GroupViewModel
+projectGroup project =
     let
         config : Config
         config =

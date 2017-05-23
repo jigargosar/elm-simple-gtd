@@ -94,11 +94,11 @@ listView entityList viewModel =
             in
                 case entity of
                     Entity.ContextEntity context ->
-                        Entity.ViewModel.forContext {- viewModel tabIndexAV -} context
+                        Entity.ViewModel.contextGroup {- viewModel tabIndexAV -} context
                             |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     Entity.ProjectEntity project ->
-                        Entity.ViewModel.forProject project |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
+                        Entity.ViewModel.projectGroup project |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     Entity.TodoEntity todo ->
                         Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo)

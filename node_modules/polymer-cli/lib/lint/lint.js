@@ -62,7 +62,7 @@ function lint(options, config) {
             warnings = yield linter.lintPackage();
         }
         const filtered = warnings.filter((w) => !filter.shouldIgnore(w));
-        const printer = new warning_printer_1.WarningPrinter(process.stdout, { analyzer: analyzer, verbosity: 'full', color: true });
+        const printer = new warning_printer_1.WarningPrinter(process.stdout, { verbosity: 'full', color: true });
         yield printer.printWarnings(filtered);
         if (filtered.length > 0) {
             let message = '';

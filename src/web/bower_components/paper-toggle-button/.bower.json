@@ -1,5 +1,6 @@
 {
   "name": "paper-toggle-button",
+  "version": "2.0.0",
   "description": "A material design toggle button control",
   "authors": [
     "The Polymer Authors"
@@ -20,23 +21,23 @@
   "main": "paper-toggle-button.html",
   "ignore": [],
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0-rc.1",
-    "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#2.0-preview",
-    "paper-behaviors": "PolymerElements/paper-behaviors#2.0-preview",
-    "paper-styles": "PolymerElements/paper-styles#2.0-preview"
+    "polymer": "Polymer/polymer#1.9 - 2",
+    "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#1 - 2",
+    "paper-behaviors": "PolymerElements/paper-behaviors#1 - 2",
+    "paper-styles": "PolymerElements/paper-styles#1 - 2"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#2.0-preview",
-    "iron-test-helpers": "PolymerElements/iron-test-helpers#2.0-preview",
-    "web-component-tester": "^6.0.0-prerelease.6",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1"
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#1 - 2",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#1 - 2",
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   },
   "variants": {
     "1.x": {
       "dependencies": {
-        "polymer": "Polymer/polymer#^1.1.0",
+        "polymer": "Polymer/polymer#^1.9",
         "iron-checked-element-behavior": "PolymerElements/iron-checked-element-behavior#^1.0.0",
         "paper-behaviors": "PolymerElements/paper-behaviors#^1.0.0",
         "paper-styles": "PolymerElements/paper-styles#^1.1.0"
@@ -48,16 +49,22 @@
         "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
         "web-component-tester": "^4.0.0",
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
       }
     }
   },
-  "_release": "dc237b82e7",
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  },
+  "_release": "2.0.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "2.0-preview",
-    "commit": "dc237b82e78d9964f891c3048503473f26bcf604"
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "8e3113cf203f287180ef08e990c3edf29961083d"
   },
   "_source": "https://github.com/PolymerElements/paper-toggle-button.git",
-  "_target": "2.0-preview",
+  "_target": "2.0.0",
   "_originalSource": "PolymerElements/paper-toggle-button"
 }

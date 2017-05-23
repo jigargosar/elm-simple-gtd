@@ -1,5 +1,6 @@
 {
   "name": "iron-icons",
+  "version": "2.0.0",
   "description": "A set of icons for use with iron-icon",
   "authors": [
     "The Polymer Authors"
@@ -18,23 +19,23 @@
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/PolymerElements/paper-icons",
   "dependencies": {
-    "iron-icon": "PolymerElements/iron-icon#2.0-preview",
-    "iron-iconset-svg": "PolymerElements/iron-iconset-svg#2.0-preview",
-    "polymer": "Polymer/polymer#^2.0.0-rc.1"
+    "iron-icon": "PolymerElements/iron-icon#1 - 2",
+    "iron-iconset-svg": "PolymerElements/iron-iconset-svg#1 - 2",
+    "polymer": "Polymer/polymer#1.9 - 2"
   },
   "devDependencies": {
-    "paper-styles": "PolymerElements/paper-styles#2.0-preview",
-    "iron-component-page": "polymerelements/iron-component-page#2.0-preview",
-    "iron-meta": "PolymerElements/iron-meta#2.0-preview",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1",
-    "web-component-tester": "^6.0.0-prerelease.6"
+    "paper-styles": "PolymerElements/paper-styles#1 - 2",
+    "iron-component-page": "polymerelements/iron-component-page#1 - 2",
+    "iron-meta": "PolymerElements/iron-meta#1 - 2",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
+    "web-component-tester": "^6.0.0"
   },
   "variants": {
     "1.x": {
       "dependencies": {
         "iron-icon": "polymerelements/iron-icon#^1.0.0",
         "iron-iconset-svg": "polymerelements/iron-iconset-svg#^1.0.0",
-        "polymer": "Polymer/polymer#^1.0.0"
+        "polymer": "Polymer/polymer#^1.9"
       },
       "devDependencies": {
         "paper-styles": "polymerelements/paper-styles#^1.0.2",
@@ -42,6 +43,9 @@
         "iron-meta": "polymerelements/iron-meta#^1.0.0",
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
         "web-component-tester": "^4.0.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
       }
     }
   },
@@ -49,13 +53,16 @@
     "util",
     "update-icons.sh"
   ],
-  "_release": "5e6b568210",
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  },
+  "_release": "2.0.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "2.0-preview",
-    "commit": "5e6b568210022882440bc726394a9bdbc33d8489"
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "caca3514695136380ac98e3677f1c6ba38d9f82d"
   },
   "_source": "https://github.com/PolymerElements/iron-icons.git",
-  "_target": "2.0-preview",
+  "_target": "2.0.0",
   "_originalSource": "PolymerElements/iron-icons"
 }

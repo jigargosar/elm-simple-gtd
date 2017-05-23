@@ -1,5 +1,6 @@
 {
   "name": "iron-image",
+  "version": "2.0.0",
   "license": "http://polymer.github.io/LICENSE.txt",
   "description": "An image-displaying element with lots of convenient features",
   "private": true,
@@ -18,19 +19,19 @@
   "main": "iron-image.html",
   "ignore": [],
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0-rc.1"
+    "polymer": "Polymer/polymer#1.9 - 2"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
-    "paper-styles": "PolymerElements/paper-styles#2.0-preview",
-    "web-component-tester": "^6.0.0-prerelease.6",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1"
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
+    "paper-styles": "PolymerElements/paper-styles#1 - 2",
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   },
   "variants": {
     "1.x": {
       "dependencies": {
-        "polymer": "Polymer/polymer#^1.1.0"
+        "polymer": "Polymer/polymer#^1.9"
       },
       "devDependencies": {
         "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -38,17 +39,23 @@
         "paper-styles": "PolymerElements/paper-styles#^1.0.4",
         "web-component-tester": "^4.0.0",
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
       }
     }
   },
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  },
   "homepage": "https://github.com/PolymerElements/iron-image",
-  "_release": "8e0460a410",
+  "_release": "2.0.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "2.0-preview",
-    "commit": "8e0460a4105e021b34451f078a1cf742fb7f5f72"
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "82eca3a262283e713a5937905dd8b2411bf64ede"
   },
   "_source": "https://github.com/PolymerElements/iron-image.git",
-  "_target": "2.0-preview",
+  "_target": "1 - 2",
   "_originalSource": "PolymerElements/iron-image"
 }

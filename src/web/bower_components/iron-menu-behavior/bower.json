@@ -22,23 +22,23 @@
   "homepage": "https://github.com/PolymerElements/iron-menu-behavior",
   "ignore": [],
   "dependencies": {
-    "iron-selector": "PolymerElements/iron-selector#2.0-preview",
-    "polymer": "Polymer/polymer#^2.0.0-rc.1",
-    "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#2.0-preview",
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#2.0-preview"
+    "iron-selector": "PolymerElements/iron-selector#1 - 2",
+    "polymer": "Polymer/polymer#1.9 - 2",
+    "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#1 - 2",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#1 - 2"
   },
   "devDependencies": {
-    "paper-styles": "PolymerElements/paper-styles#2.0-preview",
-    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
-    "iron-test-helpers": "PolymerElements/iron-test-helpers#2.0-preview",
-    "web-component-tester": "^6.0.0-prerelease.6",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1"
+    "paper-styles": "PolymerElements/paper-styles#1 - 2",
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#1 - 2",
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   },
   "variants": {
     "1.x": {
       "dependencies": {
         "iron-selector": "PolymerElements/iron-selector#^1.0.0",
-        "polymer": "Polymer/polymer#^1.1.0",
+        "polymer": "Polymer/polymer#^1.9",
         "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#^1.0.0",
         "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0"
       },
@@ -48,7 +48,13 @@
         "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
         "web-component-tester": "^4.0.0",
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
       }
     }
+  },
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
   }
 }

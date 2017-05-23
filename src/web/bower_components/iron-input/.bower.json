@@ -1,5 +1,6 @@
 {
   "name": "iron-input",
+  "version": "2.0.0",
   "description": "An input element with data binding",
   "authors": [
     "The Polymer Authors"
@@ -19,25 +20,25 @@
   "homepage": "https://github.com/PolymerElements/iron-input",
   "ignore": [],
   "dependencies": {
-    "iron-a11y-announcer": "PolymerElements/iron-a11y-announcer#2.0-preview",
-    "iron-validatable-behavior": "PolymerElements/iron-validatable-behavior#2.0-preview",
-    "polymer": "Polymer/polymer#^2.0.0-rc.1"
+    "iron-a11y-announcer": "PolymerElements/iron-a11y-announcer#1 - 2",
+    "iron-validatable-behavior": "PolymerElements/iron-validatable-behavior#1 - 2",
+    "polymer": "Polymer/polymer#1.9 - 2"
   },
   "devDependencies": {
-    "iron-component-page": "polymerelements/iron-component-page#2.0-preview",
-    "iron-demo-helpers": "polymerelements/iron-demo-helpers#2.0-preview",
-    "iron-validator-behavior": "PolymerElements/iron-validator-behavior#2.0-preview",
-    "paper-styles": "polymerelements/paper-styles#2.0-preview",
+    "iron-component-page": "polymerelements/iron-component-page#1 - 2",
+    "iron-demo-helpers": "polymerelements/iron-demo-helpers#1 - 2",
+    "iron-validator-behavior": "PolymerElements/iron-validator-behavior#1 - 2",
+    "paper-styles": "polymerelements/paper-styles#1 - 2",
     "test-fixture": "PolymerElements/test-fixture#^3.0.0-rc.1",
-    "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.6",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1"
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   },
   "variants": {
     "1.x": {
       "dependencies": {
         "iron-a11y-announcer": "PolymerElements/iron-a11y-announcer#^1.0.0",
         "iron-validatable-behavior": "PolymerElements/iron-validatable-behavior#^1.0.0",
-        "polymer": "Polymer/polymer#^1.1.0"
+        "polymer": "Polymer/polymer#^1.9"
       },
       "devDependencies": {
         "iron-component-page": "polymerelements/iron-component-page#^1.0.0",
@@ -47,16 +48,22 @@
         "test-fixture": "PolymerElements/test-fixture#^1.0.0",
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
         "web-component-tester": "Polymer/web-component-tester#^4.0.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
       }
     }
   },
-  "_release": "9109ec6a08",
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  },
+  "_release": "2.0.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "2.0-preview",
-    "commit": "9109ec6a083fb2e78804262e7db93ac7dec7136c"
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "330e8431f2ff423c34cd6e1744293dc779b4e3b0"
   },
   "_source": "https://github.com/PolymerElements/iron-input.git",
-  "_target": "2.0-preview",
+  "_target": "1 - 2",
   "_originalSource": "PolymerElements/iron-input"
 }

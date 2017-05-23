@@ -10,11 +10,13 @@ export function isMaybeThenable(x) {
   return typeof x === 'object' && x !== null;
 }
 
-let _isArray;
+var _isArray;
 if (!Array.isArray) {
-  _isArray = x => Object.prototype.toString.call(x) === '[object Array]';
+  _isArray = function (x) {
+    return Object.prototype.toString.call(x) === '[object Array]';
+  };
 } else {
   _isArray = Array.isArray;
 }
 
-export const isArray = _isArray;
+export var isArray = _isArray;

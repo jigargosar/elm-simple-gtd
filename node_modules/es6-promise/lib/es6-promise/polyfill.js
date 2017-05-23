@@ -2,7 +2,7 @@
 import Promise from './promise';
 
 export default function polyfill() {
-  let local;
+  var local;
 
   if (typeof global !== 'undefined') {
       local = global;
@@ -16,19 +16,10 @@ export default function polyfill() {
       }
   }
 
-  let P = local.Promise;
+  var P = local.Promise;
 
-  if (P) {
-    var promiseToString = null;
-    try {
-        promiseToString = Object.prototype.toString.call(P.resolve());
-    } catch(e) {
-        // silently ignored
-    }
-
-    if (promiseToString === '[object Promise]' && !P.cast){
-        return;
-    }
+  if (P && Object.prototype.toString.call(P.resolve()) === '[object Promise]' && !P.cast) {
+    return;
   }
 
   local.Promise = Promise;

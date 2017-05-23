@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
@@ -11,7 +12,6 @@
  * subject to an additional IP rights grant found at
  * http://polymer.github.io/PATENTS.txt
  */
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -98,27 +98,6 @@ Expected to find a ${mdFilenames.join(' or ')} at: ${pathToLocalWct}/
 
     The test runner expects a version that satisfies ${allowedRange} but the
     bower package you have installed is ${version}.
-`);
-            }
-            // Check that there's a wct node module.
-            const pathToWctNodeModule = path.join(options.root, 'node_modules', 'web-component-tester');
-            if (!exists(pathToWctNodeModule)) {
-                console.warn(`
-    The web-component-tester node module is not installed as a dependency of
-    this project (${packageName}).
-
-    We recommend that you run this command to add it:
-        npm install --save-dev web-component-tester
-
-    or run:
-        yarn add web-component-tester --dev
-
-    Doing so will ensure that your project is in control of the version of wct
-    that your project is tested with, insulating you from any future breaking
-    changes and making your test runs more reproducible. In a future release
-    of wct this will be required.
-
-    Expected a directory to exist at: ${pathToWctNodeModule}/
 `);
             }
             let hasWarnedBrowserJs = false;

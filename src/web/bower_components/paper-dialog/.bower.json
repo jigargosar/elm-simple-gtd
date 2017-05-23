@@ -1,6 +1,7 @@
 {
   "name": "paper-dialog",
   "description": "A Material Design dialog",
+  "version": "2.0.0",
   "authors": "The Polymer Authors",
   "keywords": [
     "web-components",
@@ -18,23 +19,23 @@
   "homepage": "https://github.com/PolymerElements/paper-dialog",
   "ignore": [],
   "dependencies": {
-    "neon-animation": "PolymerElements/neon-animation#2.0-preview",
-    "paper-dialog-behavior": "PolymerElements/paper-dialog-behavior#2.0-preview",
-    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#2.0-preview",
-    "polymer": "Polymer/polymer#^2.0.0-rc.1"
+    "neon-animation": "PolymerElements/neon-animation#1 - 2",
+    "paper-dialog-behavior": "PolymerElements/paper-dialog-behavior#1 - 2",
+    "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#1 - 2",
+    "polymer": "Polymer/polymer#1.9 - 2"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#2.0-preview",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
-    "iron-test-helpers": "PolymerElements/iron-test-helpers#2.0-preview",
-    "paper-button": "PolymerElements/paper-button#2.0-preview",
-    "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#2.0-preview",
-    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#2.0-preview",
-    "paper-item": "PolymerElements/paper-item#2.0-preview",
-    "paper-listbox": "PolymerElements/paper-listbox#2.0-preview",
+    "iron-component-page": "PolymerElements/iron-component-page#1 - 2",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#1 - 2",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#1 - 2",
+    "paper-button": "PolymerElements/paper-button#1 - 2",
+    "paper-dialog-scrollable": "PolymerElements/paper-dialog-scrollable#1 - 2",
+    "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#1 - 2",
+    "paper-item": "PolymerElements/paper-item#1 - 2",
+    "paper-listbox": "PolymerElements/paper-listbox#1 - 2",
     "web-animations-js": "web-animations/web-animations-js#^2.2.0",
-    "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.6",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1"
+    "web-component-tester": "^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   },
   "variants": {
     "1.x": {
@@ -42,7 +43,7 @@
         "neon-animation": "PolymerElements/neon-animation#^1.0.0",
         "paper-dialog-behavior": "PolymerElements/paper-dialog-behavior#^1.0.0",
         "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#^1.7.0",
-        "polymer": "Polymer/polymer#^1.7.0"
+        "polymer": "Polymer/polymer#^1.9"
       },
       "devDependencies": {
         "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -56,16 +57,22 @@
         "web-animations-js": "web-animations/web-animations-js#^2.2.0",
         "web-component-tester": "^4.0.0",
         "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7"
       }
     }
   },
-  "_release": "525d850c91",
+  "resolutions": {
+    "webcomponentsjs": "^1.0.0"
+  },
+  "_release": "2.0.0",
   "_resolution": {
-    "type": "branch",
-    "branch": "2.0-preview",
-    "commit": "525d850c91f20db1ef577cb95dbe906c8bbac4d9"
+    "type": "version",
+    "tag": "v2.0.0",
+    "commit": "49d2e8c670e58542b8edaa277ca062050a581a6f"
   },
   "_source": "https://github.com/PolymerElements/paper-dialog.git",
-  "_target": "2.0-preview",
+  "_target": "2.0.0",
   "_originalSource": "PolymerElements/paper-dialog"
 }

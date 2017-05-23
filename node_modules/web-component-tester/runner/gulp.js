@@ -1,3 +1,4 @@
+"use strict";
 /**
  * @license
  * Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
@@ -11,7 +12,6 @@
  * subject to an additional IP rights grant found at
  * http://polymer.github.io/PATENTS.txt
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const chalk = require("chalk");
 const test_1 = require("./test");

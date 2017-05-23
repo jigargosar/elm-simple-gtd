@@ -820,12 +820,6 @@ createViewEntityList viewType model =
     let
         todoList =
             getTodoListForCurrentView model
-
-        contextList _ =
-            getContextListForCurrentViewFromTodoList todoList model
-
-        projectList _ =
-            getProjectListForCurrentViewFromTodoList todoList model
     in
         case viewType of
             Entity.ContextsView ->

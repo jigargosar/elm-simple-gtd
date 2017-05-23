@@ -51,37 +51,37 @@ var _user$project$ViewModel$getViewInfo = F3(
 				return {ctor: '_Tuple2', _0: 'Custom Sync', _1: _user$project$ViewModel$sgtdBlue};
 		}
 	});
+var _user$project$ViewModel$create = function (model) {
+	var sharedViewModel = _user$project$View_Shared$createSharedViewModel(model);
+	var mainViewType = model.mainViewType;
+	var projectsVM = _user$project$GroupEntity_ViewModel$projects(model);
+	var contextsVM = _user$project$GroupEntity_ViewModel$contexts(model);
+	var _p6 = A3(_user$project$ViewModel$getViewInfo, mainViewType, projectsVM, contextsVM);
+	var viewName = _p6._0;
+	var headerBackgroundColor = _p6._1;
+	return {
+		contexts: contextsVM,
+		projects: projectsVM,
+		viewName: viewName,
+		mainViewType: mainViewType,
+		header: {backgroundColor: headerBackgroundColor},
+		shared: sharedViewModel,
+		createTodoViewModel: _user$project$Todo_View$createTodoViewModel(sharedViewModel),
+		focusedEntityInfo: model.focusedEntityInfo
+	};
+};
 var _user$project$ViewModel$getIdOfEntityView = function (entityView) {
-	var _p6 = entityView;
-	if (_p6.ctor === 'TodoView') {
-		return _user$project$Document$getId(_p6._0);
+	var _p7 = entityView;
+	if (_p7.ctor === 'TodoView') {
+		return _user$project$Document$getId(_p7._0);
 	} else {
-		return _p6._0.id;
+		return _p7._0.id;
 	}
 };
 var _user$project$ViewModel$Model = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {contexts: a, projects: b, viewName: c, mainViewType: d, header: e, shared: f, createTodoViewModel: g, focusedEntityInfo: h};
 	});
-var _user$project$ViewModel$create = function (model) {
-	var sharedViewModel = _user$project$View_Shared$createSharedViewModel(model);
-	var mainViewType = model.mainViewType;
-	var projectsVM = _user$project$GroupEntity_ViewModel$projects(model);
-	var contextsVM = _user$project$GroupEntity_ViewModel$contexts(model);
-	var _p7 = A3(_user$project$ViewModel$getViewInfo, mainViewType, projectsVM, contextsVM);
-	var viewName = _p7._0;
-	var headerBackgroundColor = _p7._1;
-	return A8(
-		_user$project$ViewModel$Model,
-		contextsVM,
-		projectsVM,
-		viewName,
-		mainViewType,
-		{backgroundColor: headerBackgroundColor},
-		sharedViewModel,
-		_user$project$Todo_View$createTodoViewModel(sharedViewModel),
-		model.focusedEntityInfo);
-};
 var _user$project$ViewModel$TodoView = function (a) {
 	return {ctor: 'TodoView', _0: a};
 };

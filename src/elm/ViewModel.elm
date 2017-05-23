@@ -60,15 +60,15 @@ create model =
         sharedViewModel =
             View.Shared.createSharedViewModel model
     in
-        Model
-            contextsVM
-            projectsVM
-            viewName
-            mainViewType
-            { backgroundColor = headerBackgroundColor }
-            sharedViewModel
-            (Todo.View.createTodoViewModel sharedViewModel)
-            model.focusedEntityInfo
+        { contexts = contextsVM
+        , projects = projectsVM
+        , viewName = viewName
+        , mainViewType = mainViewType
+        , header = { backgroundColor = headerBackgroundColor }
+        , shared = sharedViewModel
+        , createTodoViewModel = (Todo.View.createTodoViewModel sharedViewModel)
+        , focusedEntityInfo = model.focusedEntityInfo
+        }
 
 
 getViewInfo mainViewType projectsVM contextsVM =

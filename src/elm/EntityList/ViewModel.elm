@@ -17,4 +17,8 @@ type alias ViewModel =
 
 create : Entity.ListViewType -> Model.Model -> ViewModel
 create viewType model =
-    { entityList = Model.createViewEntityList viewType model }
+    let
+        entityList =
+            Model.createViewEntityList viewType model
+    in
+        { entityList = Model.createViewEntityList viewType model }

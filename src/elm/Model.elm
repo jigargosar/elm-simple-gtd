@@ -829,16 +829,16 @@ createViewEntityList viewType model =
     in
         case viewType of
             Entity.ContextsView ->
-                getContextsViewEntityList (contextList ()) todoList False model
+                getContextsViewEntityList todoList False model
 
             Entity.ContextView id ->
-                getContextsViewEntityList (contextList ()) todoList True model
+                getContextsViewEntityList todoList True model
 
             Entity.ProjectsView ->
-                getProjectsViewEntityList (projectList ()) todoList False model
+                getProjectsViewEntityList todoList False model
 
             Entity.ProjectView id ->
-                getProjectsViewEntityList (projectList ()) todoList True model
+                getProjectsViewEntityList todoList True model
 
 
 type alias GroupedTodoList =
@@ -847,30 +847,46 @@ type alias GroupedTodoList =
     }
 
 
-getContextsViewEntityList contextList activeTodoList enableSubgroup model =
+getContextsViewEntityList todoList enableSubgroup model =
     let
-        -- todo : use getFiltered todo list
         todoListByContextId =
-            activeTodoList |> Dict.Extra.groupBy Todo.getContextId
+            todoList |> Dict.Extra.groupBy Todo.getContextId
+
+        contextList =
+            getContextListForCurrentViewFromTodoList todoList model
 
         todoEntitiesForContext context =
             todoListByContextId
                 |> Dict.get (Document.getId context)
                 ?= []
                 .|> Entity.TodoEntity
+
+        subGroupEntitiesForContext context =
+            todoListByContextId
+                |> Dict.get (Document.getId context)
+                ?= []
+                |> (\todoList -> getProjectsViewEntityList todoList False model)
+
+        entitiesForContext =
+            if enableSubgroup then
+                subGroupEntitiesForContext
+            else
+                todoEntitiesForContext
     in
         contextList
             |> List.concatMap
                 (\context ->
-                    (Entity.ContextEntity context) :: (todoEntitiesForContext context)
+                    (Entity.ContextEntity context) :: (entitiesForContext context)
                 )
 
 
-getProjectsViewEntityList projectList activeTodoList enableSubgroup model =
+getProjectsViewEntityList todoList enableSubgroup model =
     let
-        -- todo : use getFiltered todo list
         todoListByProjectId =
-            activeTodoList |> Dict.Extra.groupBy Todo.getProjectId
+            todoList |> Dict.Extra.groupBy Todo.getProjectId
+
+        projectList =
+            getProjectListForCurrentViewFromTodoList todoList model
 
         todoEntitiesForProject project =
             todoListByProjectId

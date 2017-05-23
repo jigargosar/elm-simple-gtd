@@ -222,9 +222,25 @@ var _user$project$Model$updateLayout = F2(
 				_user$project$Model$getLayout(model)),
 			model);
 	});
-var _user$project$Model$getProjectsViewEntityList = F4(
-	function (projectList, activeTodoList, enableSubgroup, model) {
-		var todoListByProjectId = A2(_elm_community$dict_extra$Dict_Extra$groupBy, _user$project$Todo$getProjectId, activeTodoList);
+var _user$project$Model$getProjectListForCurrentViewFromTodoList = F2(
+	function (todoList, model) {
+		var projectIdSet = _elm_lang$core$Set$fromList(
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], todoList, _user$project$Todo$getProjectId));
+		var includeNull = A2(_elm_lang$core$Set$member, '', projectIdSet);
+		var nullProjectAsList = (model.showDeleted || (!includeNull)) ? {ctor: '[]'} : {
+			ctor: '::',
+			_0: _user$project$Project$null,
+			_1: {ctor: '[]'}
+		};
+		return A2(
+			_elm_lang$core$List$append,
+			nullProjectAsList,
+			A2(_user$project$Store$findAllByIdSetIn, model.projectStore, projectIdSet));
+	});
+var _user$project$Model$getProjectsViewEntityList = F3(
+	function (todoList, enableSubgroup, model) {
+		var projectList = A2(_user$project$Model$getProjectListForCurrentViewFromTodoList, todoList, model);
+		var todoListByProjectId = A2(_elm_community$dict_extra$Dict_Extra$groupBy, _user$project$Todo$getProjectId, todoList);
 		var todoEntitiesForProject = function (project) {
 			return A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
@@ -248,47 +264,6 @@ var _user$project$Model$getProjectsViewEntityList = F4(
 			},
 			projectList);
 	});
-var _user$project$Model$getContextsViewEntityList = F4(
-	function (contextList, activeTodoList, enableSubgroup, model) {
-		var todoListByContextId = A2(_elm_community$dict_extra$Dict_Extra$groupBy, _user$project$Todo$getContextId, activeTodoList);
-		var todoEntitiesForContext = function (context) {
-			return A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(
-						_elm_lang$core$Dict$get,
-						_user$project$Document$getId(context),
-						todoListByContextId),
-					{ctor: '[]'}),
-				_user$project$Entity$TodoEntity);
-		};
-		return A2(
-			_elm_lang$core$List$concatMap,
-			function (context) {
-				return {
-					ctor: '::',
-					_0: _user$project$Entity$ContextEntity(context),
-					_1: todoEntitiesForContext(context)
-				};
-			},
-			contextList);
-	});
-var _user$project$Model$getProjectListForCurrentViewFromTodoList = F2(
-	function (todoList, model) {
-		var projectIdSet = _elm_lang$core$Set$fromList(
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], todoList, _user$project$Todo$getProjectId));
-		var includeNull = A2(_elm_lang$core$Set$member, '', projectIdSet);
-		var nullProjectAsList = (model.showDeleted || (!includeNull)) ? {ctor: '[]'} : {
-			ctor: '::',
-			_0: _user$project$Project$null,
-			_1: {ctor: '[]'}
-		};
-		return A2(
-			_elm_lang$core$List$append,
-			nullProjectAsList,
-			A2(_user$project$Store$findAllByIdSetIn, model.projectStore, projectIdSet));
-	});
 var _user$project$Model$getContextListForCurrentViewFromTodoList = F2(
 	function (todoList, model) {
 		var contextIdSet = _elm_lang$core$Set$fromList(
@@ -303,6 +278,46 @@ var _user$project$Model$getContextListForCurrentViewFromTodoList = F2(
 			_elm_lang$core$List$append,
 			nullContextAsList,
 			A2(_user$project$Store$findAllByIdSetIn, model.contextStore, contextIdSet));
+	});
+var _user$project$Model$getContextsViewEntityList = F3(
+	function (todoList, enableSubgroup, model) {
+		var contextList = A2(_user$project$Model$getContextListForCurrentViewFromTodoList, todoList, model);
+		var todoListByContextId = A2(_elm_community$dict_extra$Dict_Extra$groupBy, _user$project$Todo$getContextId, todoList);
+		var todoEntitiesForContext = function (context) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_elm_lang$core$Dict$get,
+						_user$project$Document$getId(context),
+						todoListByContextId),
+					{ctor: '[]'}),
+				_user$project$Entity$TodoEntity);
+		};
+		var subGroupEntitiesForContext = function (context) {
+			return function (todoList) {
+				return A3(_user$project$Model$getProjectsViewEntityList, todoList, false, model);
+			}(
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_elm_lang$core$Dict$get,
+						_user$project$Document$getId(context),
+						todoListByContextId),
+					{ctor: '[]'}));
+		};
+		var entitiesForContext = enableSubgroup ? subGroupEntitiesForContext : todoEntitiesForContext;
+		return A2(
+			_elm_lang$core$List$concatMap,
+			function (context) {
+				return {
+					ctor: '::',
+					_0: _user$project$Entity$ContextEntity(context),
+					_1: entitiesForContext(context)
+				};
+			},
+			contextList);
 	});
 var _user$project$Model$getEntityId = function (entity) {
 	var _p4 = entity;
@@ -564,37 +579,13 @@ var _user$project$Model$createViewEntityList = F2(
 		var _p27 = viewType;
 		switch (_p27.ctor) {
 			case 'ContextsView':
-				return A4(
-					_user$project$Model$getContextsViewEntityList,
-					contextList(
-						{ctor: '_Tuple0'}),
-					todoList,
-					false,
-					model);
+				return A3(_user$project$Model$getContextsViewEntityList, todoList, false, model);
 			case 'ContextView':
-				return A4(
-					_user$project$Model$getContextsViewEntityList,
-					contextList(
-						{ctor: '_Tuple0'}),
-					todoList,
-					true,
-					model);
+				return A3(_user$project$Model$getContextsViewEntityList, todoList, true, model);
 			case 'ProjectsView':
-				return A4(
-					_user$project$Model$getProjectsViewEntityList,
-					projectList(
-						{ctor: '_Tuple0'}),
-					todoList,
-					false,
-					model);
+				return A3(_user$project$Model$getProjectsViewEntityList, todoList, false, model);
 			default:
-				return A4(
-					_user$project$Model$getProjectsViewEntityList,
-					projectList(
-						{ctor: '_Tuple0'}),
-					todoList,
-					true,
-					model);
+				return A3(_user$project$Model$getProjectsViewEntityList, todoList, true, model);
 		}
 	});
 var _user$project$Model$getCurrentViewEntityList = function (model) {

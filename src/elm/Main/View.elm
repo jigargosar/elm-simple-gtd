@@ -2,6 +2,7 @@ module Main.View exposing (..)
 
 import Context
 import Document
+import EntityList.View
 import GroupEntity.ViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -27,7 +28,7 @@ init viewModel model =
         ([ case Model.getMainViewType model of
             EntityListView viewType ->
                 Model.createViewEntityList viewType model
-                    |> (View.TodoList.listView # viewModel)
+                    |> (EntityList.View.listView # viewModel)
 
             BinView ->
                 View.TodoList.filtered viewModel model

@@ -1,3 +1,6 @@
+## Upcoming
+* [minor] npm and bower package updates 
+
 ## v0.12.8 - 2017-05-22
 * travis: fix release deployment syntax error 
 

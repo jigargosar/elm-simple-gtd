@@ -39,7 +39,7 @@
         <array />
       </option>
       <option name="outputFromStdout" value="false" />
-      <option name="program" value="/usr/local/Cellar/node/7.7.1/bin/elm-format" />
+      <option name="program" value="/usr/local/Cellar/node/7.10.0/bin/elm-format" />
       <option name="scopeName" value="all-src" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="" />

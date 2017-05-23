@@ -46,7 +46,7 @@ init tabindexAV vc vm =
 
 defaultView tabindexAV vm =
     [ div [ class "layout horizontal justified" ]
-        [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
+        [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge { name = vm.name, count = 0 } ]
         , WebComponents.iconButton "create"
             [ class "flex-none", onClick vm.startEditingMsg, tabindexAV ]
         ]

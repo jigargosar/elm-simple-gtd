@@ -237,33 +237,6 @@ var _user$project$Model$getProjectListForCurrentViewFromTodoList = F2(
 			nullProjectAsList,
 			A2(_user$project$Store$findAllByIdSetIn, model.projectStore, projectIdSet));
 	});
-var _user$project$Model$getProjectsViewEntityList = F3(
-	function (todoList, enableSubgroup, model) {
-		var projectList = A2(_user$project$Model$getProjectListForCurrentViewFromTodoList, todoList, model);
-		var todoListByProjectId = A2(_elm_community$dict_extra$Dict_Extra$groupBy, _user$project$Todo$getProjectId, todoList);
-		var todoEntitiesForProject = function (project) {
-			return A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(
-						_elm_lang$core$Dict$get,
-						_user$project$Document$getId(project),
-						todoListByProjectId),
-					{ctor: '[]'}),
-				_user$project$Entity$TodoEntity);
-		};
-		return A2(
-			_elm_lang$core$List$concatMap,
-			function (project) {
-				return {
-					ctor: '::',
-					_0: _user$project$Entity$ProjectEntity(project),
-					_1: todoEntitiesForProject(project)
-				};
-			},
-			projectList);
-	});
 var _user$project$Model$getContextListForCurrentViewFromTodoList = F2(
 	function (todoList, model) {
 		var contextIdSet = _elm_lang$core$Set$fromList(
@@ -318,6 +291,46 @@ var _user$project$Model$getContextsViewEntityList = F3(
 				};
 			},
 			contextList);
+	});
+var _user$project$Model$getProjectsViewEntityList = F3(
+	function (todoList, enableSubgroup, model) {
+		var projectList = A2(_user$project$Model$getProjectListForCurrentViewFromTodoList, todoList, model);
+		var todoListByProjectId = A2(_elm_community$dict_extra$Dict_Extra$groupBy, _user$project$Todo$getProjectId, todoList);
+		var todoEntitiesForProject = function (project) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_elm_lang$core$Dict$get,
+						_user$project$Document$getId(project),
+						todoListByProjectId),
+					{ctor: '[]'}),
+				_user$project$Entity$TodoEntity);
+		};
+		var subGroupEntitiesForProject = function (project) {
+			return function (todoList) {
+				return A3(_user$project$Model$getContextsViewEntityList, todoList, false, model);
+			}(
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_elm_lang$core$Dict$get,
+						_user$project$Document$getId(project),
+						todoListByProjectId),
+					{ctor: '[]'}));
+		};
+		var entitiesForProject = enableSubgroup ? subGroupEntitiesForProject : todoEntitiesForProject;
+		return A2(
+			_elm_lang$core$List$concatMap,
+			function (project) {
+				return {
+					ctor: '::',
+					_0: _user$project$Entity$ProjectEntity(project),
+					_1: entitiesForProject(project)
+				};
+			},
+			projectList);
 	});
 var _user$project$Model$getEntityId = function (entity) {
 	var _p4 = entity;

@@ -893,11 +893,23 @@ getProjectsViewEntityList todoList enableSubgroup model =
                 |> Dict.get (Document.getId project)
                 ?= []
                 .|> Entity.TodoEntity
+
+        subGroupEntitiesForProject project =
+            todoListByProjectId
+                |> Dict.get (Document.getId project)
+                ?= []
+                |> (\todoList -> getContextsViewEntityList todoList False model)
+
+        entitiesForProject =
+            if enableSubgroup then
+                subGroupEntitiesForProject
+            else
+                todoEntitiesForProject
     in
         projectList
             |> List.concatMap
                 (\project ->
-                    (Entity.ProjectEntity project) :: (todoEntitiesForProject project)
+                    (Entity.ProjectEntity project) :: (entitiesForProject project)
                 )
 
 

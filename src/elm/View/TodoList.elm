@@ -43,6 +43,7 @@ import Tuple2
 import View.Shared exposing (..)
 import ViewModel exposing (EntityView(..))
 import WebComponents
+import Entity.ViewModel
 
 
 filtered : ViewModel.Model -> Model -> Html Msg
@@ -105,13 +106,13 @@ listView entityList viewModel =
             in
                 case entity of
                     Entity.ContextEntity context ->
-                        getMaybeContextVM context ?|> (GroupEntity.View.initKeyed tabIndexAV viewModel)
+                        Entity.ViewModel.context context |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     Entity.ProjectEntity project ->
-                        getMaybeProjectVM project ?|> (GroupEntity.View.initKeyed tabIndexAV viewModel)
+                        Entity.ViewModel.project project |> (GroupEntity.View.initKeyed tabIndexAV viewModel)
 
                     Entity.TodoEntity todo ->
-                        Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo) |> Just
+                        Todo.View.initKeyed (viewModel.createTodoViewModel tabIndexAV todo)
 
         idList =
             entityList
@@ -123,5 +124,4 @@ listView entityList viewModel =
             ]
             (entityList
                 |> List.indexedMap createEntityView
-                |> List.filterMap identity
             )

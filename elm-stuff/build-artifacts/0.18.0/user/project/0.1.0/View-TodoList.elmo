@@ -29,17 +29,40 @@ var _user$project$View_TodoList$listView = F2(
 				focusedId,
 				_user$project$Model$getEntityId(_p1));
 		};
+		var createEntityView = F2(
+			function (index, entity) {
+				var focused = isEntityFocused(entity);
+				var tabIndexAV = _user$project$View_TodoList$getTabindexAV(focused);
+				var _p2 = entity;
+				switch (_p2.ctor) {
+					case 'ContextEntity':
+						return A3(
+							_user$project$GroupEntity_View$initKeyed,
+							tabIndexAV,
+							viewModel,
+							_user$project$Entity_ViewModel$context(_p2._0));
+					case 'ProjectEntity':
+						return A3(
+							_user$project$GroupEntity_View$initKeyed,
+							tabIndexAV,
+							viewModel,
+							_user$project$Entity_ViewModel$project(_p2._0));
+					default:
+						return _user$project$Todo_View$initKeyed(
+							A2(viewModel.createTodoViewModel, tabIndexAV, _p2._0));
+				}
+			});
 		var contextVMs = viewModel.contexts.entityList;
 		var getMaybeContextVM = function (context) {
 			return A2(
 				_elm_community$list_extra$List_Extra$find,
-				function (_p2) {
+				function (_p3) {
 					return A2(
 						_user$project$Ext_Function$equals,
 						_user$project$Document$getId(context),
 						function (_) {
 							return _.id;
-						}(_p2));
+						}(_p3));
 				},
 				contextVMs);
 		};
@@ -47,38 +70,16 @@ var _user$project$View_TodoList$listView = F2(
 		var getMaybeProjectVM = function (project) {
 			return A2(
 				_elm_community$list_extra$List_Extra$find,
-				function (_p3) {
+				function (_p4) {
 					return A2(
 						_user$project$Ext_Function$equals,
 						_user$project$Document$getId(project),
 						function (_) {
 							return _.id;
-						}(_p3));
+						}(_p4));
 				},
 				projectVMs);
 		};
-		var createEntityView = F2(
-			function (index, entity) {
-				var focused = isEntityFocused(entity);
-				var tabIndexAV = _user$project$View_TodoList$getTabindexAV(focused);
-				var _p4 = entity;
-				switch (_p4.ctor) {
-					case 'ContextEntity':
-						return A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-							getMaybeContextVM(_p4._0),
-							A2(_user$project$GroupEntity_View$initKeyed, tabIndexAV, viewModel));
-					case 'ProjectEntity':
-						return A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-							getMaybeProjectVM(_p4._0),
-							A2(_user$project$GroupEntity_View$initKeyed, tabIndexAV, viewModel));
-					default:
-						return _elm_lang$core$Maybe$Just(
-							_user$project$Todo_View$initKeyed(
-								A2(viewModel.createTodoViewModel, tabIndexAV, _p4._0)));
-				}
-			});
 		return A3(
 			_elm_lang$html$Html_Keyed$node,
 			'div',
@@ -92,10 +93,7 @@ var _user$project$View_TodoList$listView = F2(
 					_1: {ctor: '[]'}
 				}
 			},
-			A2(
-				_elm_lang$core$List$filterMap,
-				_elm_lang$core$Basics$identity,
-				A2(_elm_lang$core$List$indexedMap, createEntityView, entityList)));
+			A2(_elm_lang$core$List$indexedMap, createEntityView, entityList));
 	});
 var _user$project$View_TodoList$filtered = F2(
 	function (viewModel, model) {

@@ -1,5 +1,6 @@
 module EntityList.ViewModel exposing (..)
 
+import Document
 import Entity exposing (Entity)
 import EntityList.GroupViewModel
 import Model
@@ -24,7 +25,8 @@ type EntityViewModelWrapper
 
 
 type alias EntityViewModel =
-    { onFocusIn : Msg
+    { id : Document.Id
+    , onFocusIn : Msg
     , onFocus : Msg
     , onBlur : Msg
     , startEditingMsg : Msg

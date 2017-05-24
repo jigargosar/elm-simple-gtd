@@ -33,7 +33,7 @@ export const travis = {
         }
 
         if (_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, tagName) && pullRequest !== "false") {
-            run("npm run build")
+            build.prod()
         } else {
             build.dev()
         }

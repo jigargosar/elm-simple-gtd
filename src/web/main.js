@@ -24,8 +24,8 @@ window.addEventListener('WebComponentsReady', () => {
 });
 
 //noinspection JSUnresolvedVariable
-const env = ENV
-console.log(env)
+const env = process.env
+console.log(process.env)
 
 const npmPackageVersion = env["npm_package_version"]
 

@@ -53,10 +53,52 @@ type alias EntityViewModel =
     }
 
 
+createVMList viewType model appViewModel =
+    let
+        entityList =
+            Model.createViewEntityList viewType model
+
+        focusInId =
+            getFocusInId entityList appViewModel
+
+        getTabindexAV entity =
+            let
+                tabindexValue =
+                    if Model.getEntityId entity == focusInId then
+                        0
+                    else
+                        -1
+            in
+                tabindex tabindexValue
+
+        createVM entity =
+            let
+                tabIndexAV =
+                    getTabindexAV entity
+            in
+                case entity of
+                    Entity.ContextEntity context ->
+                        EntityList.createContextGroupViewModel {- viewModel tabIndexAV -} context
+                            |> Group
+
+                    Entity.ProjectEntity project ->
+                        EntityList.createProjectGroupViewModel project
+                            |> Group
+
+                    Entity.TodoEntity todo ->
+                        appViewModel.createTodoViewModel tabIndexAV todo
+                            |> Todo
+    in
+        entityList .|> createVM
+
+
 listView viewType model appViewModel =
     let
         entityList =
             Model.createViewEntityList viewType model
+
+        vmList =
+            createVMList viewType model appViewModel
 
         focusInId =
             getFocusInId entityList appViewModel

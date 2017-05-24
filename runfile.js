@@ -17,7 +17,7 @@ export const docs = {
 
 export const travis = {
     deploy: {
-        dev: runF("firebase deploy --project dev --public dev --token $FIREBASE_TOKEN_DEV"),
+        dev: runF("firebase deploy --project dev --public dev/build/unbundled --token $FIREBASE_TOKEN_DEV"),
         prod: runF("firebase deploy --project prod --public docs --token $FIREBASE_TOKEN_PROD")
     },
     build(tagName, pullRequest){
@@ -38,6 +38,25 @@ export const travis = {
             run("npm run build-dev")
         }
     }
+}
+
+export const deploy = {
+    prod(deployFunctions = false){
+        if (deployFunctions) {
+            run("firebase deploy --project prod --public docs")
+        }
+        else{
+            run("firebase deploy --except functions --project prod --public docs")
+        }
+    },
+    dev(deployFunctions = false){
+        if (deployFunctions) {
+            run("firebase deploy --project dev --public dev/build/unbundled")
+        }
+        else{
+            run("firebase deploy --except functions --project dev --public dev/build/unbundled")
+        }
+    },
 }
 
 export const build = {

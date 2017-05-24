@@ -61235,7 +61235,9 @@ window.addEventListener('WebComponentsReady', function () {
     boot().catch(console.error);
 });
 
-var env = {"PATH":"/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:./node_modules/.bin:/usr/local/Cellar/node/7.10.0/bin:/Users/jigargosar/.yarn/bin:/Users/jigargosar/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/Racket v6.4/bin:/Users/jigargosar/libs/android-sdk-macosx/tools:/Users/jigargosar/libs/android-sdk-macosx/platform-tools","PWD":"/Users/jigargosar/GitHub/elm-simple-gtd","NODE_ENV":"production","npm_package_version":"0.13.6","SHLVL":"1","_":"/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin/webpack","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0"};
+var env = {"PATH":"/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:./node_modules/.bin:/usr/local/Cellar/node/7.10.0/bin:/Users/jigargosar/.yarn/bin:/Users/jigargosar/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/Racket v6.4/bin:/Users/jigargosar/libs/android-sdk-macosx/tools:/Users/jigargosar/libs/android-sdk-macosx/platform-tools","PWD":"/Users/jigargosar/GitHub/elm-simple-gtd","NODE_ENV":"production","npm_package_version":"0.13.7","SHLVL":"1","_":"/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin/webpack","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0"};
+
+console.log("env", env);
 
 var npmPackageVersion = env["npm_package_version"];
 
@@ -62955,7 +62957,7 @@ function load() {
 
   // If debug isn't set in LS, and we're in Electron, try to load $DEBUG
   if (typeof process !== 'undefined' && 'env' in process) {
-    return {"PATH":"/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:./node_modules/.bin:/usr/local/Cellar/node/7.10.0/bin:/Users/jigargosar/.yarn/bin:/Users/jigargosar/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/Racket v6.4/bin:/Users/jigargosar/libs/android-sdk-macosx/tools:/Users/jigargosar/libs/android-sdk-macosx/platform-tools","PWD":"/Users/jigargosar/GitHub/elm-simple-gtd","NODE_ENV":"production","npm_package_version":"0.13.6","SHLVL":"1","_":"/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin/webpack","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0"}.DEBUG;
+    return {"PATH":"/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin:./node_modules/.bin:/usr/local/Cellar/node/7.10.0/bin:/Users/jigargosar/.yarn/bin:/Users/jigargosar/.yarn/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Applications/Racket v6.4/bin:/Users/jigargosar/libs/android-sdk-macosx/tools:/Users/jigargosar/libs/android-sdk-macosx/platform-tools","PWD":"/Users/jigargosar/GitHub/elm-simple-gtd","NODE_ENV":"production","npm_package_version":"0.13.7","SHLVL":"1","_":"/Users/jigargosar/GitHub/elm-simple-gtd/node_modules/.bin/webpack","__CF_USER_TEXT_ENCODING":"0x1F5:0x0:0x0"}.DEBUG;
   }
 }
 

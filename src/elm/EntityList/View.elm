@@ -67,6 +67,7 @@ type alias SubGroup =
 type Tree
     = SubGroupNode SubGroup
     | GroupNode (List SubGroup)
+    | Empty
 
 
 createVMList : List Entity.Entity -> ViewModel.Model -> List ViewModel
@@ -84,6 +85,19 @@ createVMList entityList appViewModel =
                         -1
             in
                 tabindex tabindexValue
+
+        tree vmList =
+            vmList
+                |> List.foldl
+                    (\vm tree ->
+                        case vm of
+                            Group vm ->
+                                Empty
+
+                            Todo vm ->
+                                Empty
+                    )
+                    Empty
 
         updateCount vmList =
             vmList

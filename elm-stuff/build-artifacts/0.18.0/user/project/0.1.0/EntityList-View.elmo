@@ -43,6 +43,7 @@ var _user$project$EntityList_View$Todo = function (a) {
 var _user$project$EntityList_View$Group = function (a) {
 	return {ctor: 'Group', _0: a};
 };
+var _user$project$EntityList_View$Empty = {ctor: 'Empty'};
 var _user$project$EntityList_View$createVMList = F2(
 	function (entityList, appViewModel) {
 		var updateCount = function (vmList) {
@@ -87,6 +88,21 @@ var _user$project$EntityList_View$createVMList = F2(
 					},
 					vmList));
 		};
+		var tree = function (vmList) {
+			return A3(
+				_elm_lang$core$List$foldl,
+				F2(
+					function (vm, tree) {
+						var _p7 = vm;
+						if (_p7.ctor === 'Group') {
+							return _user$project$EntityList_View$Empty;
+						} else {
+							return _user$project$EntityList_View$Empty;
+						}
+					}),
+				_user$project$EntityList_View$Empty,
+				vmList);
+		};
 		var focusInId = A2(_user$project$EntityList_View$getFocusInId, entityList, appViewModel);
 		var getTabindexAV = function (entity) {
 			var tabindexValue = _elm_lang$core$Native_Utils.eq(
@@ -96,17 +112,17 @@ var _user$project$EntityList_View$createVMList = F2(
 		};
 		var createVM = function (entity) {
 			var tabIndexAV = getTabindexAV(entity);
-			var _p7 = entity;
-			switch (_p7.ctor) {
+			var _p8 = entity;
+			switch (_p8.ctor) {
 				case 'ContextEntity':
 					return _user$project$EntityList_View$Group(
-						A2(_user$project$EntityList$createContextGroupViewModel, tabIndexAV, _p7._0));
+						A2(_user$project$EntityList$createContextGroupViewModel, tabIndexAV, _p8._0));
 				case 'ProjectEntity':
 					return _user$project$EntityList_View$Group(
-						A2(_user$project$EntityList$createProjectGroupViewModel, tabIndexAV, _p7._0));
+						A2(_user$project$EntityList$createProjectGroupViewModel, tabIndexAV, _p8._0));
 				default:
 					return _user$project$EntityList_View$Todo(
-						A2(appViewModel.createTodoViewModel, tabIndexAV, _p7._0));
+						A2(appViewModel.createTodoViewModel, tabIndexAV, _p8._0));
 			}
 		};
 		return updateCount(
@@ -115,11 +131,11 @@ var _user$project$EntityList_View$createVMList = F2(
 var _user$project$EntityList_View$listView = F3(
 	function (viewType, model, appViewModel) {
 		var createEntityView = function (vm) {
-			var _p8 = vm;
-			if (_p8.ctor === 'Group') {
-				return A2(_user$project$GroupEntity_View$initKeyed, appViewModel, _p8._0);
+			var _p9 = vm;
+			if (_p9.ctor === 'Group') {
+				return A2(_user$project$GroupEntity_View$initKeyed, appViewModel, _p9._0);
 			} else {
-				return _user$project$Todo_View$initKeyed(_p8._0);
+				return _user$project$Todo_View$initKeyed(_p9._0);
 			}
 		};
 		var entityList = A2(_user$project$Model$createViewEntityList, viewType, model);

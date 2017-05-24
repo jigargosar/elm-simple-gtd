@@ -22,22 +22,6 @@ import Todo.View exposing (TodoViewModel)
 import ViewModel
 
 
-isCursorAtEntityInEntityList entityList viewModel =
-    let
-        focusedId =
-            getFocusInId entityList viewModel
-    in
-        Model.getEntityId >> equals focusedId
-
-
-getFocusInId entityList viewModel =
-    entityList
-        |> List.find (Model.getEntityId >> equals viewModel.focusedEntityInfo.id)
-        |> Maybe.orElse (List.head entityList)
-        ?|> Model.getEntityId
-        ?= ""
-
-
 type alias GroupViewModel =
     EntityList.GroupViewModel.ViewModel
 
@@ -59,22 +43,57 @@ type alias EntityViewModel =
     }
 
 
+isCursorAtEntityInEntityList entityList viewModel =
+    let
+        focusedId =
+            getFocusInId entityList viewModel
+    in
+        Model.getEntityId >> equals focusedId
 
-{-
-   type alias SubGroup =
-       { entity : Entity
-       , kids : List Entity
-       }
 
-   type Tree
-       = SubGroupNode SubGroup
-       | GroupNode (List SubGroup)
-       | Empty
+getFocusInId entityList viewModel =
+    entityList
+        |> List.find (Model.getEntityId >> equals viewModel.focusedEntityInfo.id)
+        |> Maybe.orElse (List.head entityList)
+        ?|> Model.getEntityId
+        ?= ""
 
-   type Entity2 =
-       GroupEntity2 DocumentWithName
-       | TodoEntity2 Todo.Model
+
+{-| todo: reefactoring build tree in model then flatten it there , don't build tree here, its easier there
 -}
+updateCount vmList =
+    vmList
+        |> List.foldr
+            (\vm ( vmList, count ) ->
+                case vm of
+                    Group vm ->
+                        ( Group { vm | count = count } :: vmList, 0 )
+
+                    Todo vm ->
+                        ( Todo vm :: vmList, count + 1 )
+            )
+            ( [], 0 )
+        |> Tuple.first
+        |> (\list ->
+                case list of
+                    (Group vm) :: rest ->
+                        let
+                            isTodo vm =
+                                case vm of
+                                    Group vm ->
+                                        False
+
+                                    Todo vm ->
+                                        True
+
+                            totalTodoCount =
+                                vmList |> List.filter (isTodo) |> List.length
+                        in
+                            (Group { vm | count = totalTodoCount }) :: rest
+
+                    _ ->
+                        list
+           )
 
 
 createVMList : List Entity.Entity -> ViewModel.Model -> List ViewModel
@@ -92,40 +111,6 @@ createVMList entityList appViewModel =
                         -1
             in
                 tabindex tabindexValue
-
-        updateCount vmList =
-            vmList
-                |> List.foldr
-                    (\vm ( vmList, count ) ->
-                        case vm of
-                            Group vm ->
-                                ( Group { vm | count = count } :: vmList, 0 )
-
-                            Todo vm ->
-                                ( Todo vm :: vmList, count + 1 )
-                    )
-                    ( [], 0 )
-                |> Tuple.first
-                |> (\list ->
-                        case list of
-                            (Group vm) :: rest ->
-                                let
-                                    isTodo vm =
-                                        case vm of
-                                            Group vm ->
-                                                False
-
-                                            Todo vm ->
-                                                True
-
-                                    totalTodoCount =
-                                        vmList |> List.filter (isTodo) |> List.length
-                                in
-                                    (Group { vm | count = totalTodoCount }) :: rest
-
-                            _ ->
-                                list
-                   )
 
         createVM entity =
             let

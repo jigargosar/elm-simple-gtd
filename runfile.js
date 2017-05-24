@@ -62,13 +62,13 @@ export const deploy = {
 
 import json from "jsonfile"
 
-const packageJson = json.readFileSync("package.json")
+const getPackageJson = () => json.readFileSync("package.json")
 
 const dev = {
-    buildRunOptions: {env: {NODE_ENV: "development", npm_package_version: packageJson.version}}
+    buildRunOptions: {env: {NODE_ENV: "development", npm_package_version: getPackageJson().version}}
 }
 const prod = {
-    buildRunOptions: {env: {NODE_ENV: "production", npm_package_version: packageJson.version}}
+    buildRunOptions: {env: {NODE_ENV: "production", npm_package_version: getPackageJson().version}}
 }
 
 export const hot = runF(`webpack-dev-server --hot --inline`, dev.buildRunOptions)

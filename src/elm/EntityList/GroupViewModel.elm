@@ -6,6 +6,7 @@ import Document
 import EditMode exposing (EditMode)
 import Entity exposing (Entity)
 import Ext.Keyboard exposing (KeyboardEvent)
+import Html
 import Lazy
 import Model exposing (EntityListViewType, GroupEntityType(ContextGroup, ProjectGroup), ViewType(..))
 import Msg exposing (Msg, commonMsg)
@@ -42,6 +43,7 @@ type alias ViewModel =
     , onFocus : Msg
     , onBlur : Msg
     , onKeyDownMsg : KeyboardEvent -> Msg
+    , tabindexAV : Html.Attribute Msg
     }
 
 
@@ -59,10 +61,11 @@ type alias Config =
     , nullIcon : IconVM
     , defaultIconName : String
     , getViewType : Document.Id -> EntityListViewType
+    , tabindexAV : Html.Attribute Msg
     }
 
 
-create config entityModel =
+create tabindexAV config entityModel =
     let
         id =
             Document.getId entityModel
@@ -119,11 +122,12 @@ create config entityModel =
         , onFocus = createEntityActionMsg Entity.SetFocused
         , onBlur = createEntityActionMsg Entity.SetBlurred
         , onKeyDownMsg = onKeyDownMsg
+        , tabindexAV = tabindexAV
         }
 
 
-forContext : Context.Model -> ViewModel
-forContext context =
+forContext : Html.Attribute Msg -> Context.Model -> ViewModel
+forContext tabindexAV context =
     let
         config : Config
         config =
@@ -136,13 +140,14 @@ forContext context =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.ContextView
+            , tabindexAV = tabindexAV
             }
     in
-        create config context
+        create tabindexAV config context
 
 
-forProject : Project.Model -> ViewModel
-forProject project =
+forProject : Html.Attribute Msg -> Project.Model -> ViewModel
+forProject tabindexAV project =
     let
         config : Config
         config =
@@ -155,9 +160,10 @@ forProject project =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.ProjectView
+            , tabindexAV = tabindexAV
             }
     in
-        create config project
+        create tabindexAV config project
 
 
 inboxColor =

@@ -55,10 +55,10 @@ var _user$project$EntityList_View$createVMList = F3(
 			switch (_p2.ctor) {
 				case 'ContextEntity':
 					return _user$project$EntityList_View$Group(
-						_user$project$EntityList$createContextGroupViewModel(_p2._0));
+						A2(_user$project$EntityList$createContextGroupViewModel, tabIndexAV, _p2._0));
 				case 'ProjectEntity':
 					return _user$project$EntityList_View$Group(
-						_user$project$EntityList$createProjectGroupViewModel(_p2._0));
+						A2(_user$project$EntityList$createProjectGroupViewModel, tabIndexAV, _p2._0));
 				default:
 					return _user$project$EntityList_View$Todo(
 						A2(appViewModel.createTodoViewModel, tabIndexAV, _p2._0));
@@ -87,13 +87,13 @@ var _user$project$EntityList_View$listView = F3(
 							_user$project$GroupEntity_View$initKeyed,
 							tabIndexAV,
 							appViewModel,
-							_user$project$EntityList$createContextGroupViewModel(_p3._0));
+							A2(_user$project$EntityList$createContextGroupViewModel, tabIndexAV, _p3._0));
 					case 'ProjectEntity':
 						return A3(
 							_user$project$GroupEntity_View$initKeyed,
 							tabIndexAV,
 							appViewModel,
-							_user$project$EntityList$createProjectGroupViewModel(_p3._0));
+							A2(_user$project$EntityList$createProjectGroupViewModel, tabIndexAV, _p3._0));
 					default:
 						return _user$project$Todo_View$initKeyed(
 							A2(appViewModel.createTodoViewModel, tabIndexAV, _p3._0));

@@ -4,8 +4,8 @@ var _user$project$EntityList_GroupViewModel$projectsColor = 'rgb(124, 77, 255)';
 var _user$project$EntityList_GroupViewModel$nullProjectColor = 'rgb(179, 157, 219)';
 var _user$project$EntityList_GroupViewModel$contextsColor = _user$project$EntityList_GroupViewModel$sgtdBlue;
 var _user$project$EntityList_GroupViewModel$inboxColor = '#42a5f5';
-var _user$project$EntityList_GroupViewModel$create = F2(
-	function (config, entityModel) {
+var _user$project$EntityList_GroupViewModel$create = F3(
+	function (tabindexAV, config, entityModel) {
 		var name = entityModel.name;
 		var isNull = config.isNull(entityModel);
 		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$EntityList_GroupViewModel$lightGray};
@@ -47,37 +47,42 @@ var _user$project$EntityList_GroupViewModel$create = F2(
 			onFocusIn: createEntityActionMsg(_user$project$Entity$SetFocusedIn),
 			onFocus: createEntityActionMsg(_user$project$Entity$SetFocused),
 			onBlur: createEntityActionMsg(_user$project$Entity$SetBlurred),
-			onKeyDownMsg: onKeyDownMsg
+			onKeyDownMsg: onKeyDownMsg,
+			tabindexAV: tabindexAV
 		};
 	});
-var _user$project$EntityList_GroupViewModel$forContext = function (context) {
-	var config = {
-		groupByFn: _user$project$Todo$getContextId,
-		namePrefix: '@',
-		entityType: _user$project$Model$ContextGroup,
-		entityWrapper: _user$project$Entity$ContextEntity,
-		nullEntity: _user$project$Context$null,
-		isNull: _user$project$Context$isNull,
-		nullIcon: {name: 'inbox', color: _user$project$EntityList_GroupViewModel$inboxColor},
-		defaultIconName: 'av:fiber-manual-record',
-		getViewType: _user$project$Entity$ContextView
-	};
-	return A2(_user$project$EntityList_GroupViewModel$create, config, context);
-};
-var _user$project$EntityList_GroupViewModel$forProject = function (project) {
-	var config = {
-		groupByFn: _user$project$Todo$getProjectId,
-		namePrefix: '@',
-		entityType: _user$project$Model$ProjectGroup,
-		entityWrapper: _user$project$Entity$ProjectEntity,
-		nullEntity: _user$project$Project$null,
-		isNull: _user$project$Project$isNull,
-		nullIcon: {name: 'inbox', color: _user$project$EntityList_GroupViewModel$inboxColor},
-		defaultIconName: 'av:fiber-manual-record',
-		getViewType: _user$project$Entity$ProjectView
-	};
-	return A2(_user$project$EntityList_GroupViewModel$create, config, project);
-};
+var _user$project$EntityList_GroupViewModel$forContext = F2(
+	function (tabindexAV, context) {
+		var config = {
+			groupByFn: _user$project$Todo$getContextId,
+			namePrefix: '@',
+			entityType: _user$project$Model$ContextGroup,
+			entityWrapper: _user$project$Entity$ContextEntity,
+			nullEntity: _user$project$Context$null,
+			isNull: _user$project$Context$isNull,
+			nullIcon: {name: 'inbox', color: _user$project$EntityList_GroupViewModel$inboxColor},
+			defaultIconName: 'av:fiber-manual-record',
+			getViewType: _user$project$Entity$ContextView,
+			tabindexAV: tabindexAV
+		};
+		return A3(_user$project$EntityList_GroupViewModel$create, tabindexAV, config, context);
+	});
+var _user$project$EntityList_GroupViewModel$forProject = F2(
+	function (tabindexAV, project) {
+		var config = {
+			groupByFn: _user$project$Todo$getProjectId,
+			namePrefix: '@',
+			entityType: _user$project$Model$ProjectGroup,
+			entityWrapper: _user$project$Entity$ProjectEntity,
+			nullEntity: _user$project$Project$null,
+			isNull: _user$project$Project$isNull,
+			nullIcon: {name: 'inbox', color: _user$project$EntityList_GroupViewModel$inboxColor},
+			defaultIconName: 'av:fiber-manual-record',
+			getViewType: _user$project$Entity$ProjectView,
+			tabindexAV: tabindexAV
+		};
+		return A3(_user$project$EntityList_GroupViewModel$create, tabindexAV, config, project);
+	});
 var _user$project$EntityList_GroupViewModel$IconVM = F2(
 	function (a, b) {
 		return {name: a, color: b};
@@ -96,7 +101,9 @@ var _user$project$EntityList_GroupViewModel$ViewModel = function (a) {
 											return function (l) {
 												return function (m) {
 													return function (n) {
-														return {id: a, count: b, name: c, isDeleted: d, startEditingMsg: e, onDeleteClicked: f, onSaveClicked: g, onNameChanged: h, onCancelClicked: i, icon: j, onFocusIn: k, onFocus: l, onBlur: m, onKeyDownMsg: n};
+														return function (o) {
+															return {id: a, count: b, name: c, isDeleted: d, startEditingMsg: e, onDeleteClicked: f, onSaveClicked: g, onNameChanged: h, onCancelClicked: i, icon: j, onFocusIn: k, onFocus: l, onBlur: m, onKeyDownMsg: n, tabindexAV: o};
+														};
 													};
 												};
 											};
@@ -111,7 +118,24 @@ var _user$project$EntityList_GroupViewModel$ViewModel = function (a) {
 		};
 	};
 };
-var _user$project$EntityList_GroupViewModel$Config = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {groupByFn: a, namePrefix: b, entityType: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i};
-	});
+var _user$project$EntityList_GroupViewModel$Config = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {groupByFn: a, namePrefix: b, entityType: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i, tabindexAV: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};

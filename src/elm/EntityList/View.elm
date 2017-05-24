@@ -78,11 +78,11 @@ createVMList viewType model appViewModel =
             in
                 case entity of
                     Entity.ContextEntity context ->
-                        EntityList.createContextGroupViewModel {- viewModel tabIndexAV -} context
+                        EntityList.createContextGroupViewModel tabIndexAV context
                             |> Group
 
                     Entity.ProjectEntity project ->
-                        EntityList.createProjectGroupViewModel project
+                        EntityList.createProjectGroupViewModel tabIndexAV project
                             |> Group
 
                     Entity.TodoEntity todo ->
@@ -120,11 +120,11 @@ listView viewType model appViewModel =
             in
                 case entity of
                     Entity.ContextEntity context ->
-                        EntityList.createContextGroupViewModel {- viewModel tabIndexAV -} context
+                        EntityList.createContextGroupViewModel tabIndexAV context
                             |> (GroupEntity.View.initKeyed tabIndexAV appViewModel)
 
                     Entity.ProjectEntity project ->
-                        EntityList.createProjectGroupViewModel project
+                        EntityList.createProjectGroupViewModel tabIndexAV project
                             |> (GroupEntity.View.initKeyed tabIndexAV appViewModel)
 
                     Entity.TodoEntity todo ->

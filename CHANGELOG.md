@@ -1,5 +1,7 @@
 ## Upcoming
-* [minor] npm and bower package updates 
+* [minor] npm and bower package updates
+* [feature] subgroup entity view
+* [fix] todo count in subgroup view
 
 ## v0.12.8 - 2017-05-22
 * travis: fix release deployment syntax error 

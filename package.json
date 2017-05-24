@@ -23,7 +23,7 @@
     "postbump": "npm run build && run build:commitDocs && npm run deploy:dev",
     "build": "bash scripts/build.sh",
     "build-dev": "run build:dev",
-    "predeploy-dev": "npm run build-dev",
+    "predeploy-dev": "run build:dev",
     "deploy-dev": "run deploy:dev",
     "link": "ln -Fs `pwd`/src/web/bower_components static/bower_components; ln -Fs `pwd`/src/web/bower_components dev/bower_components",
     "start": "http-server docs"

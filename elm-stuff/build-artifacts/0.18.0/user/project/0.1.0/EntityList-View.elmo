@@ -40,8 +40,7 @@ var _user$project$EntityList_View$Group = function (a) {
 	return {ctor: 'Group', _0: a};
 };
 var _user$project$EntityList_View$createVMList = F3(
-	function (viewType, model, appViewModel) {
-		var entityList = A2(_user$project$Model$createViewEntityList, viewType, model);
+	function (entityList, model, appViewModel) {
 		var focusInId = A2(_user$project$EntityList_View$getFocusInId, entityList, appViewModel);
 		var getTabindexAV = function (entity) {
 			var tabindexValue = _elm_lang$core$Native_Utils.eq(
@@ -68,37 +67,16 @@ var _user$project$EntityList_View$createVMList = F3(
 	});
 var _user$project$EntityList_View$listView = F3(
 	function (viewType, model, appViewModel) {
-		var vmList = A3(_user$project$EntityList_View$createVMList, viewType, model, appViewModel);
-		var entityList = A2(_user$project$Model$createViewEntityList, viewType, model);
-		var focusInId = A2(_user$project$EntityList_View$getFocusInId, entityList, appViewModel);
-		var getTabindexAV = function (entity) {
-			var tabindexValue = _elm_lang$core$Native_Utils.eq(
-				_user$project$Model$getEntityId(entity),
-				focusInId) ? 0 : -1;
-			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
+		var createEntityView = function (vm) {
+			var _p3 = vm;
+			if (_p3.ctor === 'Group') {
+				return A2(_user$project$GroupEntity_View$initKeyed, appViewModel, _p3._0);
+			} else {
+				return _user$project$Todo_View$initKeyed(_p3._0);
+			}
 		};
-		var createEntityView = F2(
-			function (index, entity) {
-				var tabIndexAV = getTabindexAV(entity);
-				var _p3 = entity;
-				switch (_p3.ctor) {
-					case 'ContextEntity':
-						return A3(
-							_user$project$GroupEntity_View$initKeyed,
-							tabIndexAV,
-							appViewModel,
-							A2(_user$project$EntityList$createContextGroupViewModel, tabIndexAV, _p3._0));
-					case 'ProjectEntity':
-						return A3(
-							_user$project$GroupEntity_View$initKeyed,
-							tabIndexAV,
-							appViewModel,
-							A2(_user$project$EntityList$createProjectGroupViewModel, tabIndexAV, _p3._0));
-					default:
-						return _user$project$Todo_View$initKeyed(
-							A2(appViewModel.createTodoViewModel, tabIndexAV, _p3._0));
-				}
-			});
+		var entityList = A2(_user$project$Model$createViewEntityList, viewType, model);
+		var vmList = A3(_user$project$EntityList_View$createVMList, entityList, model, appViewModel);
 		return A3(
 			_elm_lang$html$Html_Keyed$node,
 			'div',
@@ -112,5 +90,5 @@ var _user$project$EntityList_View$listView = F3(
 					_1: {ctor: '[]'}
 				}
 			},
-			A2(_elm_lang$core$List$indexedMap, createEntityView, entityList));
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vmList, createEntityView));
 	});

@@ -53,11 +53,8 @@ type alias EntityViewModel =
     }
 
 
-createVMList viewType model appViewModel =
+createVMList entityList model appViewModel =
     let
-        entityList =
-            Model.createViewEntityList viewType model
-
         focusInId =
             getFocusInId entityList appViewModel
 
@@ -98,42 +95,20 @@ listView viewType model appViewModel =
             Model.createViewEntityList viewType model
 
         vmList =
-            createVMList viewType model appViewModel
+            createVMList entityList model appViewModel
 
-        focusInId =
-            getFocusInId entityList appViewModel
+        createEntityView vm =
+            case vm of
+                Group vm ->
+                    GroupEntity.View.initKeyed appViewModel vm
 
-        getTabindexAV entity =
-            let
-                tabindexValue =
-                    if Model.getEntityId entity == focusInId then
-                        0
-                    else
-                        -1
-            in
-                tabindex tabindexValue
-
-        createEntityView index entity =
-            let
-                tabIndexAV =
-                    getTabindexAV entity
-            in
-                case entity of
-                    Entity.ContextEntity context ->
-                        EntityList.createContextGroupViewModel tabIndexAV context
-                            |> (GroupEntity.View.initKeyed tabIndexAV appViewModel)
-
-                    Entity.ProjectEntity project ->
-                        EntityList.createProjectGroupViewModel tabIndexAV project
-                            |> (GroupEntity.View.initKeyed tabIndexAV appViewModel)
-
-                    Entity.TodoEntity todo ->
-                        Todo.View.initKeyed (appViewModel.createTodoViewModel tabIndexAV todo)
+                Todo vm ->
+                    Todo.View.initKeyed vm
     in
         Html.Keyed.node "div"
             [ class "entity-list focusable-list"
             , Msg.OnEntityListKeyDown entityList |> onKeyDown
             ]
-            (entityList
-                |> List.indexedMap createEntityView
+            (vmList
+                .|> createEntityView
             )

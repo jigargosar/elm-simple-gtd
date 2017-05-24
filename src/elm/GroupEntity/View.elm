@@ -19,17 +19,20 @@ import View.Shared exposing (defaultOkCancelDeleteButtons)
 import WebComponents
 
 
-initKeyed tabindexAV mainViewModel vm =
-    ( vm.id, init tabindexAV mainViewModel.shared vm )
+initKeyed mainViewModel vm =
+    ( vm.id, init mainViewModel.shared vm )
 
 
-init tabindexAV vc vm =
+init vc vm =
     let
         maybeForm =
             if vm.id /= "" then
                 vc.getMaybeEditEntityFormForEntityId vm.id
             else
                 Nothing
+
+        tabindexAV =
+            vm.tabindexAV
     in
         div
             [ class "entity-item"

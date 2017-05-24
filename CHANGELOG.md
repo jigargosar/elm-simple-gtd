@@ -1,4 +1,4 @@
-## Upcoming
+## v0.13.7 - 2017-05-24
 * update run/build scripts  
 
 ## v0.13.0 - 2017-05-24

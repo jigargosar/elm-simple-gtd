@@ -62,8 +62,7 @@ var _user$project$GroupEntity_View$defaultView = F2(
 						},
 						{
 							ctor: '::',
-							_0: _user$project$View_Shared$defaultBadge(
-								{name: vm.name, count: 0}),
+							_0: _user$project$View_Shared$defaultBadge(vm),
 							_1: {ctor: '[]'}
 						}),
 					_1: {

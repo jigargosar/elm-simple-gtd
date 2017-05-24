@@ -41,6 +41,48 @@ var _user$project$EntityList_View$Group = function (a) {
 };
 var _user$project$EntityList_View$createVMList = F2(
 	function (entityList, appViewModel) {
+		var updateCount = function (vmList) {
+			return _elm_lang$core$Tuple$first(
+				A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (vm, _p2) {
+							var _p3 = _p2;
+							var _p6 = _p3._0;
+							var _p5 = _p3._1;
+							var _p4 = vm;
+							if (_p4.ctor === 'Group') {
+								return {
+									ctor: '_Tuple2',
+									_0: {
+										ctor: '::',
+										_0: _user$project$EntityList_View$Group(
+											_elm_lang$core$Native_Utils.update(
+												_p4._0,
+												{count: _p5})),
+										_1: _p6
+									},
+									_1: 0
+								};
+							} else {
+								return {
+									ctor: '_Tuple2',
+									_0: {
+										ctor: '::',
+										_0: _user$project$EntityList_View$Todo(_p4._0),
+										_1: _p6
+									},
+									_1: _p5 + 1
+								};
+							}
+						}),
+					{
+						ctor: '_Tuple2',
+						_0: {ctor: '[]'},
+						_1: 0
+					},
+					vmList));
+		};
 		var focusInId = A2(_user$project$EntityList_View$getFocusInId, entityList, appViewModel);
 		var getTabindexAV = function (entity) {
 			var tabindexValue = _elm_lang$core$Native_Utils.eq(
@@ -50,29 +92,30 @@ var _user$project$EntityList_View$createVMList = F2(
 		};
 		var createVM = function (entity) {
 			var tabIndexAV = getTabindexAV(entity);
-			var _p2 = entity;
-			switch (_p2.ctor) {
+			var _p7 = entity;
+			switch (_p7.ctor) {
 				case 'ContextEntity':
 					return _user$project$EntityList_View$Group(
-						A2(_user$project$EntityList$createContextGroupViewModel, tabIndexAV, _p2._0));
+						A2(_user$project$EntityList$createContextGroupViewModel, tabIndexAV, _p7._0));
 				case 'ProjectEntity':
 					return _user$project$EntityList_View$Group(
-						A2(_user$project$EntityList$createProjectGroupViewModel, tabIndexAV, _p2._0));
+						A2(_user$project$EntityList$createProjectGroupViewModel, tabIndexAV, _p7._0));
 				default:
 					return _user$project$EntityList_View$Todo(
-						A2(appViewModel.createTodoViewModel, tabIndexAV, _p2._0));
+						A2(appViewModel.createTodoViewModel, tabIndexAV, _p7._0));
 			}
 		};
-		return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], entityList, createVM);
+		return updateCount(
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], entityList, createVM));
 	});
 var _user$project$EntityList_View$listView = F3(
 	function (viewType, model, appViewModel) {
 		var createEntityView = function (vm) {
-			var _p3 = vm;
-			if (_p3.ctor === 'Group') {
-				return A2(_user$project$GroupEntity_View$initKeyed, appViewModel, _p3._0);
+			var _p8 = vm;
+			if (_p8.ctor === 'Group') {
+				return A2(_user$project$GroupEntity_View$initKeyed, appViewModel, _p8._0);
 			} else {
-				return _user$project$Todo_View$initKeyed(_p3._0);
+				return _user$project$Todo_View$initKeyed(_p8._0);
 			}
 		};
 		var entityList = A2(_user$project$Model$createViewEntityList, viewType, model);

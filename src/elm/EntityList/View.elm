@@ -70,6 +70,20 @@ createVMList entityList appViewModel =
             in
                 tabindex tabindexValue
 
+        updateCount vmList =
+            vmList
+                |> List.foldr
+                    (\vm ( vmList, count ) ->
+                        case vm of
+                            Group vm ->
+                                ( Group { vm | count = count } :: vmList, 0 )
+
+                            Todo vm ->
+                                ( Todo vm :: vmList, count + 1 )
+                    )
+                    ( [], 0 )
+                |> Tuple.first
+
         createVM entity =
             let
                 tabIndexAV =
@@ -88,7 +102,7 @@ createVMList entityList appViewModel =
                         appViewModel.createTodoViewModel tabIndexAV todo
                             |> Todo
     in
-        entityList .|> createVM
+        entityList .|> createVM |> updateCount
 
 
 listView : Entity.ListViewType -> Model.Model -> ViewModel.Model -> Html.Html Msg

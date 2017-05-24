@@ -33,6 +33,10 @@ var _user$project$EntityList_View$EntityViewModel = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {id: a, onFocusIn: b, onFocus: c, onBlur: d, startEditingMsg: e, toggleDeleteMsg: f, startEditingMsg: g, tabIndexAV: h};
 	});
+var _user$project$EntityList_View$SubGroup = F2(
+	function (a, b) {
+		return {groupVM: a, todoListVM: b};
+	});
 var _user$project$EntityList_View$Todo = function (a) {
 	return {ctor: 'Todo', _0: a};
 };
@@ -135,3 +139,9 @@ var _user$project$EntityList_View$listView = F3(
 			},
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vmList, createEntityView));
 	});
+var _user$project$EntityList_View$GroupNode = function (a) {
+	return {ctor: 'GroupNode', _0: a};
+};
+var _user$project$EntityList_View$SubGroupNode = function (a) {
+	return {ctor: 'SubGroupNode', _0: a};
+};

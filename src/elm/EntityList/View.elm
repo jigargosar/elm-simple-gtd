@@ -37,8 +37,12 @@ getFocusInId entityList viewModel =
         ?= ""
 
 
+type alias GroupViewModel =
+    EntityList.GroupViewModel.ViewModel
+
+
 type ViewModel
-    = Group EntityList.GroupViewModel.ViewModel
+    = Group GroupViewModel
     | Todo TodoViewModel
 
 
@@ -52,6 +56,17 @@ type alias EntityViewModel =
     , startEditingMsg : Msg
     , tabIndexAV : Html.Attribute Msg
     }
+
+
+type alias SubGroup =
+    { groupVM : GroupViewModel
+    , todoListVM : List TodoViewModel
+    }
+
+
+type Tree
+    = SubGroupNode SubGroup
+    | GroupNode (List SubGroup)
 
 
 createVMList : List Entity.Entity -> ViewModel.Model -> List ViewModel

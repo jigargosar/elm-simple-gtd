@@ -109,7 +109,19 @@ createVMList entityList appViewModel =
                 |> (\list ->
                         case list of
                             (Group vm) :: rest ->
-                                list
+                                let
+                                    isTodo vm =
+                                        case vm of
+                                            Group vm ->
+                                                False
+
+                                            Todo vm ->
+                                                True
+
+                                    totalTodoCount =
+                                        vmList |> List.filter (isTodo) |> List.length
+                                in
+                                    (Group { vm | count = totalTodoCount }) :: rest
 
                             _ ->
                                 list

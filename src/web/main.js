@@ -25,6 +25,8 @@ window.addEventListener('WebComponentsReady', () => {
 
 const env = process.env
 
+console.log("env", env)
+
 const npmPackageVersion = env["npm_package_version"]
 
 async function boot() {

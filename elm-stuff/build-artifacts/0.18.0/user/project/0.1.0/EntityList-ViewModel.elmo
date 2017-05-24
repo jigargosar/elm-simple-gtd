@@ -8,9 +8,9 @@ var _user$project$EntityList_ViewModel$create = F2(
 var _user$project$EntityList_ViewModel$ViewModel = function (a) {
 	return {entityList: a};
 };
-var _user$project$EntityList_ViewModel$EntityViewModel = F6(
-	function (a, b, c, d, e, f) {
-		return {onFocusIn: a, onFocus: b, onBlur: c, startEditingMsg: d, toggleDeleteMsg: e, startEditingMsg: f};
+var _user$project$EntityList_ViewModel$EntityViewModel = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {id: a, onFocusIn: b, onFocus: c, onBlur: d, startEditingMsg: e, toggleDeleteMsg: f, startEditingMsg: g, tabIndexAV: h};
 	});
 var _user$project$EntityList_ViewModel$Todo = function (a) {
 	return {ctor: 'Todo', _0: a};

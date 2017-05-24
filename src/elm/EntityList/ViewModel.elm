@@ -3,6 +3,7 @@ module EntityList.ViewModel exposing (..)
 import Document
 import Entity exposing (Entity)
 import EntityList.GroupViewModel
+import Html
 import Model
 import Msg exposing (Msg)
 import Toolkit.Helpers exposing (..)
@@ -32,6 +33,7 @@ type alias EntityViewModel =
     , startEditingMsg : Msg
     , toggleDeleteMsg : Msg
     , startEditingMsg : Msg
+    , tabIndexAV : Html.Attribute Msg
     }
 
 

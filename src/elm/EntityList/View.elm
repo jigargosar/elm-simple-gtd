@@ -1,8 +1,10 @@
 module EntityList.View exposing (..)
 
+import Document
 import Entity
 import EntityList
-import EntityList.ViewModel
+import EntityList.GroupViewModel
+import Html
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -14,60 +16,77 @@ import GroupEntity.View
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
 import Model
-import Msg
-import Todo.View
+import Msg exposing (Msg)
+import Todo.View exposing (TodoViewModel)
 
 
-getTabindexAV focused =
-    let
-        tabindexValue =
-            if focused then
-                0
-            else
-                -1
-    in
-        tabindex tabindexValue
-
-
-hasFocusInEntityList entityList viewModel =
+isCursorAtEntityInEntityList entityList viewModel =
     let
         focusedId =
-            entityList
-                |> List.find (Model.getEntityId >> equals viewModel.focusedEntityInfo.id)
-                |> Maybe.orElse (List.head entityList)
-                ?|> Model.getEntityId
-                ?= ""
+            getFocusInId entityList viewModel
     in
         Model.getEntityId >> equals focusedId
 
 
-listView viewType model mainViewModel =
-    let
-        vm =
-            EntityList.ViewModel.list viewType mainViewModel model
+getFocusInId entityList viewModel =
+    entityList
+        |> List.find (Model.getEntityId >> equals viewModel.focusedEntityInfo.id)
+        |> Maybe.orElse (List.head entityList)
+        ?|> Model.getEntityId
+        ?= ""
 
+
+type ViewModel
+    = Group EntityList.GroupViewModel.ViewModel
+    | Todo TodoViewModel
+
+
+type alias EntityViewModel =
+    { id : Document.Id
+    , onFocusIn : Msg
+    , onFocus : Msg
+    , onBlur : Msg
+    , startEditingMsg : Msg
+    , toggleDeleteMsg : Msg
+    , startEditingMsg : Msg
+    , tabIndexAV : Html.Attribute Msg
+    }
+
+
+listView viewType model appViewModel =
+    let
         entityList =
             Model.createViewEntityList viewType model
 
-        hasFocusIn =
-            hasFocusInEntityList entityList mainViewModel
+        focusInId =
+            getFocusInId entityList appViewModel
+
+        getTabindexAV entity =
+            let
+                tabindexValue =
+                    if Model.getEntityId entity == focusInId then
+                        0
+                    else
+                        -1
+            in
+                tabindex tabindexValue
 
         createEntityView index entity =
             let
                 tabIndexAV =
-                    getTabindexAV (hasFocusIn entity)
+                    getTabindexAV entity
             in
                 case entity of
                     Entity.ContextEntity context ->
                         EntityList.createContextGroupViewModel {- viewModel tabIndexAV -} context
-                            |> (GroupEntity.View.initKeyed tabIndexAV mainViewModel)
+                            |> (GroupEntity.View.initKeyed tabIndexAV appViewModel)
 
                     Entity.ProjectEntity project ->
                         EntityList.createProjectGroupViewModel project
-                            |> (GroupEntity.View.initKeyed tabIndexAV mainViewModel)
+                            |> (GroupEntity.View.initKeyed tabIndexAV appViewModel)
 
                     Entity.TodoEntity todo ->
-                        Todo.View.initKeyed (mainViewModel.createTodoViewModel tabIndexAV todo)
+                        Todo.View.initKeyed (appViewModel.createTodoViewModel tabIndexAV todo)
     in
         Html.Keyed.node "div"
             [ class "entity-list focusable-list"

@@ -1,6 +1,6 @@
-var _user$project$EntityList_View$hasFocusInEntityList = F2(
+var _user$project$EntityList_View$getFocusInId = F2(
 	function (entityList, viewModel) {
-		var focusedId = A2(
+		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
@@ -18,45 +18,39 @@ var _user$project$EntityList_View$hasFocusInEntityList = F2(
 						entityList)),
 				_user$project$Model$getEntityId),
 			'');
-		return function (_p1) {
-			return A2(
-				_user$project$Ext_Function$equals,
-				focusedId,
-				_user$project$Model$getEntityId(_p1));
-		};
 	});
-var _user$project$EntityList_View$getTabindexAV = function (focused) {
-	var tabindexValue = focused ? 0 : -1;
-	return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
-};
 var _user$project$EntityList_View$listView = F3(
-	function (viewType, model, mainViewModel) {
+	function (viewType, model, appViewModel) {
 		var entityList = A2(_user$project$Model$createViewEntityList, viewType, model);
-		var hasFocusIn = A2(_user$project$EntityList_View$hasFocusInEntityList, entityList, mainViewModel);
+		var focusInId = A2(_user$project$EntityList_View$getFocusInId, entityList, appViewModel);
+		var getTabindexAV = function (entity) {
+			var tabindexValue = _elm_lang$core$Native_Utils.eq(
+				_user$project$Model$getEntityId(entity),
+				focusInId) ? 0 : -1;
+			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
+		};
 		var createEntityView = F2(
 			function (index, entity) {
-				var tabIndexAV = _user$project$EntityList_View$getTabindexAV(
-					hasFocusIn(entity));
-				var _p2 = entity;
-				switch (_p2.ctor) {
+				var tabIndexAV = getTabindexAV(entity);
+				var _p1 = entity;
+				switch (_p1.ctor) {
 					case 'ContextEntity':
 						return A3(
 							_user$project$GroupEntity_View$initKeyed,
 							tabIndexAV,
-							mainViewModel,
-							_user$project$EntityList$createContextGroupViewModel(_p2._0));
+							appViewModel,
+							_user$project$EntityList$createContextGroupViewModel(_p1._0));
 					case 'ProjectEntity':
 						return A3(
 							_user$project$GroupEntity_View$initKeyed,
 							tabIndexAV,
-							mainViewModel,
-							_user$project$EntityList$createProjectGroupViewModel(_p2._0));
+							appViewModel,
+							_user$project$EntityList$createProjectGroupViewModel(_p1._0));
 					default:
 						return _user$project$Todo_View$initKeyed(
-							A2(mainViewModel.createTodoViewModel, tabIndexAV, _p2._0));
+							A2(appViewModel.createTodoViewModel, tabIndexAV, _p1._0));
 				}
 			});
-		var vm = A3(_user$project$EntityList_ViewModel$list, viewType, mainViewModel, model);
 		return A3(
 			_elm_lang$html$Html_Keyed$node,
 			'div',
@@ -72,3 +66,23 @@ var _user$project$EntityList_View$listView = F3(
 			},
 			A2(_elm_lang$core$List$indexedMap, createEntityView, entityList));
 	});
+var _user$project$EntityList_View$isCursorAtEntityInEntityList = F2(
+	function (entityList, viewModel) {
+		var focusedId = A2(_user$project$EntityList_View$getFocusInId, entityList, viewModel);
+		return function (_p2) {
+			return A2(
+				_user$project$Ext_Function$equals,
+				focusedId,
+				_user$project$Model$getEntityId(_p2));
+		};
+	});
+var _user$project$EntityList_View$EntityViewModel = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {id: a, onFocusIn: b, onFocus: c, onBlur: d, startEditingMsg: e, toggleDeleteMsg: f, startEditingMsg: g, tabIndexAV: h};
+	});
+var _user$project$EntityList_View$Todo = function (a) {
+	return {ctor: 'Todo', _0: a};
+};
+var _user$project$EntityList_View$Group = function (a) {
+	return {ctor: 'Group', _0: a};
+};

@@ -29,6 +29,7 @@ type alias IconVM =
 
 type alias ViewModel =
     { id : String
+    , count : Int
     , name : String
     , isDeleted : Bool
     , startEditingMsg : Msg
@@ -106,6 +107,7 @@ create config entityModel =
     in
         { id = id
         , name = name
+        , count = 0
         , isDeleted = Document.isDeleted entityModel
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg

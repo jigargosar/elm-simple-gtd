@@ -33,6 +33,7 @@ var _user$project$EntityList_GroupViewModel$create = F2(
 		return {
 			id: id,
 			name: name,
+			count: 0,
 			isDeleted: _user$project$Document$isDeleted(entityModel),
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,
@@ -94,7 +95,9 @@ var _user$project$EntityList_GroupViewModel$ViewModel = function (a) {
 										return function (k) {
 											return function (l) {
 												return function (m) {
-													return {id: a, name: b, isDeleted: c, startEditingMsg: d, onDeleteClicked: e, onSaveClicked: f, onNameChanged: g, onCancelClicked: h, icon: i, onFocusIn: j, onFocus: k, onBlur: l, onKeyDownMsg: m};
+													return function (n) {
+														return {id: a, count: b, name: c, isDeleted: d, startEditingMsg: e, onDeleteClicked: f, onSaveClicked: g, onNameChanged: h, onCancelClicked: i, icon: j, onFocusIn: k, onFocus: l, onBlur: m, onKeyDownMsg: n};
+													};
 												};
 											};
 										};

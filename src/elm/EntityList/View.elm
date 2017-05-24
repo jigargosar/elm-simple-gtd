@@ -59,7 +59,7 @@ getFocusInId entityList viewModel =
         ?= ""
 
 
-{-| todo: reefactoring build tree in model then flatten it there , don't build tree here, its easier there
+{-| todo: refactoring: build tree in model then flatten it there , don't build tree here, its easier there
 -}
 updateCount vmList =
     vmList
@@ -76,7 +76,7 @@ updateCount vmList =
         |> Tuple.first
         |> (\list ->
                 case list of
-                    (Group vm) :: rest ->
+                    (Group vm) :: ((Group _) as group2) :: rest ->
                         let
                             isTodo vm =
                                 case vm of
@@ -89,7 +89,7 @@ updateCount vmList =
                             totalTodoCount =
                                 vmList |> List.filter (isTodo) |> List.length
                         in
-                            (Group { vm | count = totalTodoCount }) :: rest
+                            (Group { vm | count = totalTodoCount }) :: group2 :: rest
 
                     _ ->
                         list

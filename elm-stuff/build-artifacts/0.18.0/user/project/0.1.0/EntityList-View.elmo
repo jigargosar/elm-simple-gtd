@@ -42,7 +42,7 @@ var _user$project$EntityList_View$Group = function (a) {
 var _user$project$EntityList_View$updateCount = function (vmList) {
 	return function (list) {
 		var _p2 = list;
-		if ((_p2.ctor === '::') && (_p2._0.ctor === 'Group')) {
+		if ((((_p2.ctor === '::') && (_p2._0.ctor === 'Group')) && (_p2._1.ctor === '::')) && (_p2._1._0.ctor === 'Group')) {
 			var isTodo = function (vm) {
 				var _p3 = vm;
 				if (_p3.ctor === 'Group') {
@@ -59,7 +59,7 @@ var _user$project$EntityList_View$updateCount = function (vmList) {
 					_elm_lang$core$Native_Utils.update(
 						_p2._0._0,
 						{count: totalTodoCount})),
-				_1: _p2._1
+				_1: {ctor: '::', _0: _p2._1._0, _1: _p2._1._1}
 			};
 		} else {
 			return list;

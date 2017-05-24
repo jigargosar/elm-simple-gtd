@@ -32,6 +32,7 @@
     "elm-webpack-loader": "4.3.1",
     "file-loader": "0.11.1",
     "firebase-tools": "3.9.0",
+    "jsonfile": "3.0.0",
     "kefir": "3.7.1",
     "nodemon": "1.11.0",
     "polymer-cli": "1.0.2",

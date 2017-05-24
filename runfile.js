@@ -2,7 +2,7 @@
 import {run} from 'runjs'
 import * as _ from "ramda"
 
-const runF = cmd => () => run(cmd)
+const runF = (cmd, options={}) => () => run(cmd, options)
 
 export const docs = {
     gitStatus(){
@@ -60,6 +60,24 @@ export const deploy = {
     },
 }
 
+import json from "jsonfile"
+
+const packageJson = json.readFileSync("package.json")
+
+const dev = {
+    buildRunOptions: {env: {NODE_ENV: "development", npm_package_version: packageJson.version}}
+}
+const prod = {
+    buildRunOptions: {env: {NODE_ENV: "production", npm_package_version: packageJson.version}}
+}
+
+export const hot = runF(`webpack-dev-server --hot --inline`, dev.buildRunOptions)
+
+export const hotmon = () => {
+    run(`nodemon --watch runfile.js --watch webpack.config.babel.js --watch package.json --exec "run hot"`)
+}
+
+
 export const bump = () => {
     run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
     build.prod()
@@ -76,14 +94,14 @@ export const build = {
     dev(){
         run("rimraf dev")
         run("cp -R static/ dev")
-        run("cross-env NODE_ENV=development webpack --progress")
+        run("webpack --progress", dev.buildRunOptions)
         run("polymer --version", {cwd: "dev"})
         run("polymer build", {cwd: "dev"})
     },
     prod(){
         run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
-        run("cross-env NODE_ENV=production webpack --progress")
+        run("webpack --progress", prod.buildRunOptions)
         run("polymer --version", {cwd: "app"})
         run("polymer build", {cwd: "app"})
         run("cp -R app/build/unbundled/ docs")

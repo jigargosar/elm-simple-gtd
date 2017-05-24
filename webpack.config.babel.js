@@ -33,7 +33,8 @@ export default {
     plugins: [
         new webpack.DefinePlugin({
             'IS_DEVELOPMENT_ENV': isDevEnv,
-            "packageJSON": JSON.stringify(pkg)
+            "packageJSON": JSON.stringify(pkg),
+            "ENV": JSON.stringify(process.env)
         }),
         new ServiceWorkerWebpackPlugin({
             options: {"foo": "bar"},

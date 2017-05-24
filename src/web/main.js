@@ -24,6 +24,11 @@ window.addEventListener('WebComponentsReady', () => {
     boot().catch(console.error)
 });
 
+//noinspection JSUnresolvedVariable
+const env = ENV
+
+const version = env["npm_version"]
+
 async function boot() {
     const deviceId = getOrCreateDeviceId()
     const $elm = $("#elm-app-container")

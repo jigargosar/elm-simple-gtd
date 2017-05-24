@@ -18,7 +18,6 @@ import DB from "./pouchdb-wrapper"
 
 
 const developmentMode = IS_DEVELOPMENT_ENV
-const pkg = packageJSON
 
 window.addEventListener('WebComponentsReady', () => {
     boot().catch(console.error)
@@ -26,8 +25,9 @@ window.addEventListener('WebComponentsReady', () => {
 
 //noinspection JSUnresolvedVariable
 const env = ENV
+console.log(env)
 
-const version = env["npm_version"]
+const npmPackageVersion = env["npm_package_version"]
 
 async function boot() {
     const deviceId = getOrCreateDeviceId()
@@ -78,7 +78,7 @@ async function boot() {
         // encodedContextList: [],
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
         developmentMode: developmentMode,
-        appVersion: pkg.version,
+        appVersion: npmPackageVersion,
         deviceId
     }
     const Elm = require("elm/Main.elm")

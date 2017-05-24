@@ -22,7 +22,6 @@
     "bump": "npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'",
     "postbump": "npm run build && run build:commitDocs && npm run deploy:dev",
     "build": "bash scripts/build.sh",
-    "prebuild-dev": "rimraf dev",
     "build-dev": "run build:dev",
     "predeploy-dev": "npm run build-dev",
     "deploy-dev": "run deploy:dev",

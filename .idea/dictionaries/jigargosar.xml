@@ -14,6 +14,7 @@
       <w>minify</w>
       <w>pouchdb</w>
       <w>precache</w>
+      <w>rimraf</w>
       <w>sgtd</w>
       <w>tabindex</w>
       <w>vaadin</w>

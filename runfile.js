@@ -66,23 +66,22 @@ export const build = {
         docs.gitStatus()
     },
     dev(){
-        run(`cp -R static/ dev &&
-            cross-env NODE_ENV=development webpack --progress &&
-            cd dev &&
-            polymer --version &&
-            polymer build &&
-            cd ..
-            `)
+        run("rimraf dev")
+        run("cp -R static/ dev")
+        run("cross-env NODE_ENV=development webpack --progress")
+        run("cd dev")
+        run("polymer --version")
+        run("polymer build")
+        run("cd .. ")
     },
     prod(){
-        run(`cp -R static/ app &&
-            cross-env NODE_ENV=production webpack --progress &&
-            cd app &&
-            polymer --version &&
-            polymer build &&
-            cd .. &&
-            cp -R app/build/unbundled/ docs
-            `)
+        run("cp -R static/ app")
+        run("cross-env NODE_ENV=production webpack --progress")
+        run("cd app")
+        run("polymer --version")
+        run("polymer build")
+        run("cd ..")
+        run("cp -R app/build/unbundled/ docs")
     }
 }
 

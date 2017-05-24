@@ -33,75 +33,63 @@ var _user$project$EntityList_View$EntityViewModel = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {id: a, onFocusIn: b, onFocus: c, onBlur: d, startEditingMsg: e, toggleDeleteMsg: f, startEditingMsg: g, tabIndexAV: h};
 	});
-var _user$project$EntityList_View$SubGroup = F2(
-	function (a, b) {
-		return {groupVM: a, todoListVM: b};
-	});
 var _user$project$EntityList_View$Todo = function (a) {
 	return {ctor: 'Todo', _0: a};
 };
 var _user$project$EntityList_View$Group = function (a) {
 	return {ctor: 'Group', _0: a};
 };
-var _user$project$EntityList_View$Empty = {ctor: 'Empty'};
 var _user$project$EntityList_View$createVMList = F2(
 	function (entityList, appViewModel) {
 		var updateCount = function (vmList) {
-			return _elm_lang$core$Tuple$first(
-				A3(
-					_elm_lang$core$List$foldr,
-					F2(
-						function (vm, _p2) {
-							var _p3 = _p2;
-							var _p6 = _p3._0;
-							var _p5 = _p3._1;
-							var _p4 = vm;
-							if (_p4.ctor === 'Group') {
-								return {
-									ctor: '_Tuple2',
-									_0: {
-										ctor: '::',
-										_0: _user$project$EntityList_View$Group(
-											_elm_lang$core$Native_Utils.update(
-												_p4._0,
-												{count: _p5})),
-										_1: _p6
-									},
-									_1: 0
-								};
-							} else {
-								return {
-									ctor: '_Tuple2',
-									_0: {
-										ctor: '::',
-										_0: _user$project$EntityList_View$Todo(_p4._0),
-										_1: _p6
-									},
-									_1: _p5 + 1
-								};
-							}
-						}),
-					{
-						ctor: '_Tuple2',
-						_0: {ctor: '[]'},
-						_1: 0
-					},
-					vmList));
-		};
-		var tree = function (vmList) {
-			return A3(
-				_elm_lang$core$List$foldl,
-				F2(
-					function (vm, tree) {
-						var _p7 = vm;
-						if (_p7.ctor === 'Group') {
-							return _user$project$EntityList_View$Empty;
-						} else {
-							return _user$project$EntityList_View$Empty;
-						}
-					}),
-				_user$project$EntityList_View$Empty,
-				vmList);
+			return function (list) {
+				var _p2 = list;
+				if ((_p2.ctor === '::') && (_p2._0.ctor === 'Group')) {
+					return list;
+				} else {
+					return list;
+				}
+			}(
+				_elm_lang$core$Tuple$first(
+					A3(
+						_elm_lang$core$List$foldr,
+						F2(
+							function (vm, _p3) {
+								var _p4 = _p3;
+								var _p7 = _p4._0;
+								var _p6 = _p4._1;
+								var _p5 = vm;
+								if (_p5.ctor === 'Group') {
+									return {
+										ctor: '_Tuple2',
+										_0: {
+											ctor: '::',
+											_0: _user$project$EntityList_View$Group(
+												_elm_lang$core$Native_Utils.update(
+													_p5._0,
+													{count: _p6})),
+											_1: _p7
+										},
+										_1: 0
+									};
+								} else {
+									return {
+										ctor: '_Tuple2',
+										_0: {
+											ctor: '::',
+											_0: _user$project$EntityList_View$Todo(_p5._0),
+											_1: _p7
+										},
+										_1: _p6 + 1
+									};
+								}
+							}),
+						{
+							ctor: '_Tuple2',
+							_0: {ctor: '[]'},
+							_1: 0
+						},
+						vmList)));
 		};
 		var focusInId = A2(_user$project$EntityList_View$getFocusInId, entityList, appViewModel);
 		var getTabindexAV = function (entity) {
@@ -155,9 +143,3 @@ var _user$project$EntityList_View$listView = F3(
 			},
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vmList, createEntityView));
 	});
-var _user$project$EntityList_View$GroupNode = function (a) {
-	return {ctor: 'GroupNode', _0: a};
-};
-var _user$project$EntityList_View$SubGroupNode = function (a) {
-	return {ctor: 'SubGroupNode', _0: a};
-};

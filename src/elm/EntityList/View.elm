@@ -1,10 +1,11 @@
 module EntityList.View exposing (..)
 
 import Document
-import Entity
+import Entity exposing (Entity)
 import EntityList
-import EntityList.GroupViewModel
+import EntityList.GroupViewModel exposing (DocumentWithName)
 import Html
+import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -58,16 +59,22 @@ type alias EntityViewModel =
     }
 
 
-type alias SubGroup =
-    { groupVM : GroupViewModel
-    , todoListVM : List TodoViewModel
-    }
 
+{-
+   type alias SubGroup =
+       { entity : Entity
+       , kids : List Entity
+       }
 
-type Tree
-    = SubGroupNode SubGroup
-    | GroupNode (List SubGroup)
-    | Empty
+   type Tree
+       = SubGroupNode SubGroup
+       | GroupNode (List SubGroup)
+       | Empty
+
+   type Entity2 =
+       GroupEntity2 DocumentWithName
+       | TodoEntity2 Todo.Model
+-}
 
 
 createVMList : List Entity.Entity -> ViewModel.Model -> List ViewModel
@@ -86,19 +93,6 @@ createVMList entityList appViewModel =
             in
                 tabindex tabindexValue
 
-        tree vmList =
-            vmList
-                |> List.foldl
-                    (\vm tree ->
-                        case vm of
-                            Group vm ->
-                                Empty
-
-                            Todo vm ->
-                                Empty
-                    )
-                    Empty
-
         updateCount vmList =
             vmList
                 |> List.foldr
@@ -112,6 +106,14 @@ createVMList entityList appViewModel =
                     )
                     ( [], 0 )
                 |> Tuple.first
+                |> (\list ->
+                        case list of
+                            (Group vm) :: rest ->
+                                list
+
+                            _ ->
+                                list
+                   )
 
         createVM entity =
             let

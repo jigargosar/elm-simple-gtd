@@ -69,8 +69,8 @@ export default {
             {
                 test: /\.elm$/,
                 exclude: [/elm-stuff/, /node_modules/],
-                use: ["elm-hot-loader","elm-webpack-loader?verbose=true&warn=true"],
-                // use: ["elm-hot-loader", "elm-webpack-loader?verbose=true"],
+                // use: ["elm-hot-loader","elm-webpack-loader?verbose=true&warn=true"],
+                use: ["elm-hot-loader", "elm-webpack-loader?verbose=true"],
                 // use: ["elm-hot-loader","elm-webpack-loader?debug=true"],
                 // use: ["elm-hot-loader", "elm-webpack-loader"],
             },

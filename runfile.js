@@ -35,7 +35,7 @@ export const travis = {
         if (_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, tagName) && pullRequest !== "false") {
             run("npm run build")
         } else {
-            run("npm run build-dev")
+            build.dev()
         }
     }
 }
@@ -50,6 +50,7 @@ export const deploy = {
         }
     },
     dev(deployFunctions = false){
+        build.dev()
         if (deployFunctions) {
             run("firebase deploy --project dev --public dev/build/unbundled")
         }
@@ -73,6 +74,7 @@ export const build = {
         run("polymer build", {cwd: "dev"})
     },
     prod(){
+        run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
         run("cross-env NODE_ENV=production webpack --progress")
         run("polymer --version", {cwd: "app"})

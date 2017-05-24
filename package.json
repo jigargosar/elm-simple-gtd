@@ -16,7 +16,7 @@
     "postinstall": "yarn global add elm@0.18.0",
     "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "hot": "cross-env NODE_ENV=development webpack-dev-server --hot --inline",
-    "hot-hot": "nodemon --watch webpack.config.js --watch package.json --exec \"npm run hot\"",
+    "hot-hot": "nodemon --watch webpack.config.babel.js --watch package.json --exec \"npm run hot\"",
     "prebuild": "bash -c \"rimraf app && rimraf docs && rimraf build \"",
     "bump": "npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'",
     "_bump": "npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'",

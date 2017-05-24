@@ -13,7 +13,7 @@ console.log("process.env.NODE_ENV: ", isDevEnv, nodeENV)
 const outputDir = isDevEnv ? "dev" : "app"
 
 
-module.exports = {
+export default {
     resolve: {
         alias: {elm: path.resolve(__dirname, 'src/elm/')}
     },
@@ -69,8 +69,8 @@ module.exports = {
             {
                 test: /\.elm$/,
                 exclude: [/elm-stuff/, /node_modules/],
-                // use: ["elm-hot-loader","elm-webpack-loader?verbose=true&debug=true"],
-                use: ["elm-hot-loader", "elm-webpack-loader?verbose=true"],
+                use: ["elm-hot-loader","elm-webpack-loader?verbose=true&warn=true"],
+                // use: ["elm-hot-loader", "elm-webpack-loader?verbose=true"],
                 // use: ["elm-hot-loader","elm-webpack-loader?debug=true"],
                 // use: ["elm-hot-loader", "elm-webpack-loader"],
             },
@@ -104,7 +104,7 @@ module.exports = {
 };
 
 
-const serviceWorkerTemplate = (url) =>
+const serviceWorkerTemplate = url =>
     `
         const url = "${url}";
         

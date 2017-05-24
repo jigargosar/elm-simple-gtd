@@ -90,8 +90,9 @@ var _user$project$GroupEntity_View$defaultView = F2(
 			_1: {ctor: '[]'}
 		};
 	});
-var _user$project$GroupEntity_View$init = F3(
-	function (tabindexAV, vc, vm) {
+var _user$project$GroupEntity_View$init = F2(
+	function (vc, vm) {
+		var tabindexAV = vm.tabindexAV;
 		var maybeForm = (!_elm_lang$core$Native_Utils.eq(vm.id, '')) ? vc.getMaybeEditEntityFormForEntityId(vm.id) : _elm_lang$core$Maybe$Nothing;
 		return A2(
 			_elm_lang$html$Html$div,
@@ -128,11 +129,11 @@ var _user$project$GroupEntity_View$init = F3(
 				A2(_user$project$GroupEntity_View$editEntityView, tabindexAV, vm),
 				maybeForm));
 	});
-var _user$project$GroupEntity_View$initKeyed = F3(
-	function (tabindexAV, mainViewModel, vm) {
+var _user$project$GroupEntity_View$initKeyed = F2(
+	function (mainViewModel, vm) {
 		return {
 			ctor: '_Tuple2',
 			_0: vm.id,
-			_1: A3(_user$project$GroupEntity_View$init, tabindexAV, mainViewModel.shared, vm)
+			_1: A2(_user$project$GroupEntity_View$init, mainViewModel.shared, vm)
 		};
 	});

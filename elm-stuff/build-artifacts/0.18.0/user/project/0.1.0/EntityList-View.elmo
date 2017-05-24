@@ -39,8 +39,8 @@ var _user$project$EntityList_View$Todo = function (a) {
 var _user$project$EntityList_View$Group = function (a) {
 	return {ctor: 'Group', _0: a};
 };
-var _user$project$EntityList_View$createVMList = F3(
-	function (entityList, model, appViewModel) {
+var _user$project$EntityList_View$createVMList = F2(
+	function (entityList, appViewModel) {
 		var focusInId = A2(_user$project$EntityList_View$getFocusInId, entityList, appViewModel);
 		var getTabindexAV = function (entity) {
 			var tabindexValue = _elm_lang$core$Native_Utils.eq(
@@ -76,7 +76,7 @@ var _user$project$EntityList_View$listView = F3(
 			}
 		};
 		var entityList = A2(_user$project$Model$createViewEntityList, viewType, model);
-		var vmList = A3(_user$project$EntityList_View$createVMList, entityList, model, appViewModel);
+		var vmList = A2(_user$project$EntityList_View$createVMList, entityList, appViewModel);
 		return A3(
 			_elm_lang$html$Html_Keyed$node,
 			'div',

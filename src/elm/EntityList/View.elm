@@ -18,6 +18,7 @@ import Html.Keyed
 import Model
 import Msg exposing (Msg)
 import Todo.View exposing (TodoViewModel)
+import ViewModel
 
 
 isCursorAtEntityInEntityList entityList viewModel =
@@ -53,7 +54,8 @@ type alias EntityViewModel =
     }
 
 
-createVMList entityList model appViewModel =
+createVMList : List Entity.Entity -> ViewModel.Model -> List ViewModel
+createVMList entityList appViewModel =
     let
         focusInId =
             getFocusInId entityList appViewModel
@@ -89,13 +91,14 @@ createVMList entityList model appViewModel =
         entityList .|> createVM
 
 
+listView : Entity.ListViewType -> Model.Model -> ViewModel.Model -> Html.Html Msg
 listView viewType model appViewModel =
     let
         entityList =
             Model.createViewEntityList viewType model
 
         vmList =
-            createVMList entityList model appViewModel
+            createVMList entityList appViewModel
 
         createEntityView vm =
             case vm of

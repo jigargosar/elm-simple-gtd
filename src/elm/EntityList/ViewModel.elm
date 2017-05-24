@@ -2,7 +2,9 @@ module EntityList.ViewModel exposing (..)
 
 import Document
 import Entity exposing (Entity)
+import EntityList
 import EntityList.GroupViewModel
+import GroupEntity.View
 import Html
 import Html.Attributes exposing (tabindex)
 import Model
@@ -14,6 +16,7 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.View exposing (TodoViewModel)
+import ViewModel
 
 
 type ViewModel
@@ -56,10 +59,30 @@ isEntityFocusedInEntityList entityList viewModel =
         Model.getEntityId >> equals focusedId
 
 
-create : Entity.ListViewType -> Model.Model -> List ViewModel
-create viewType model =
+list : Entity.ListViewType -> ViewModel.Model -> Model.Model -> List ViewModel
+list viewType appViewModel model =
     let
         entityList =
             Model.createViewEntityList viewType model
+
+        isFocused =
+            isEntityFocusedInEntityList entityList appViewModel
+
+        create entity =
+            let
+                tabIndexAV =
+                    getTabindexAV (isFocused entity)
+            in
+                case entity of
+                    Entity.ContextEntity context ->
+                        EntityList.createContextGroupViewModel {- viewModel tabIndexAV -} context
+                            |> (GroupEntity.View.initKeyed tabIndexAV appViewModel)
+
+                    Entity.ProjectEntity project ->
+                        EntityList.createProjectGroupViewModel project
+                            |> (GroupEntity.View.initKeyed tabIndexAV appViewModel)
+
+                    Entity.TodoEntity todo ->
+                        Todo.View.initKeyed (appViewModel.createTodoViewModel tabIndexAV todo)
     in
         []

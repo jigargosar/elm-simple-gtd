@@ -44,7 +44,7 @@ isEntityFocusedInEntityList entityList viewModel =
 listView viewType model mainViewModel =
     let
         vm =
-            EntityList.ViewModel.create viewType model
+            EntityList.ViewModel.list viewType mainViewModel model
 
         entityList =
             Model.createViewEntityList viewType model

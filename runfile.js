@@ -45,7 +45,7 @@ export const deploy = {
         if (deployFunctions) {
             run("firebase deploy --project prod --public docs")
         }
-        else{
+        else {
             run("firebase deploy --except functions --project prod --public docs")
         }
     },
@@ -53,7 +53,7 @@ export const deploy = {
         if (deployFunctions) {
             run("firebase deploy --project dev --public dev/build/unbundled")
         }
-        else{
+        else {
             run("firebase deploy --except functions --project dev --public dev/build/unbundled")
         }
     },
@@ -64,6 +64,25 @@ export const build = {
         docs.gitStatus()
         docs.commit()
         docs.gitStatus()
+    },
+    dev(){
+        run(`cp -R static/ dev &&
+            cross-env NODE_ENV=development webpack --progress &&
+            cd dev &&
+            polymer --version &&
+            polymer build &&
+            cd ..
+            `)
+    },
+    prod(){
+        run(`cp -R static/ app &&
+            cross-env NODE_ENV=production webpack --progress &&
+            cd app &&
+            polymer --version &&
+            polymer build &&
+            cd .. &&
+            cp -R app/build/unbundled/ docs
+            `)
     }
 }
 

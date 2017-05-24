@@ -69,18 +69,14 @@ export const build = {
         run("rimraf dev")
         run("cp -R static/ dev")
         run("cross-env NODE_ENV=development webpack --progress")
-        run("cd dev")
-        run("polymer --version")
-        run("polymer build")
-        run("cd .. ")
+        run("polymer --version", {cwd: "dev"})
+        run("polymer build", {cwd: "dev"})
     },
     prod(){
         run("cp -R static/ app")
         run("cross-env NODE_ENV=production webpack --progress")
-        run("cd app")
-        run("polymer --version")
-        run("polymer build")
-        run("cd ..")
+        run("polymer --version", {cwd: "app"})
+        run("polymer build", {cwd: "app"})
         run("cp -R app/build/unbundled/ docs")
     }
 }

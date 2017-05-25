@@ -34,6 +34,9 @@ var _user$project$Ext_Keyboard$onEnter = function (msg) {
 		'keyup',
 		A2(_user$project$Ext_Keyboard$succeedIfDecodedKeyEquals, _ohanhi$keyboard_extra$Keyboard_Extra$Enter, msg));
 };
+var _user$project$Ext_Keyboard$isAnySoftKeyDown = function (ke) {
+	return ke.isShiftDown || (ke.isMetaDown || (ke.isControlDown || ke.isAltDown));
+};
 var _user$project$Ext_Keyboard$targetKeyDecoder = A2(
 	_elm_lang$core$Json_Decode$map,
 	_ohanhi$keyboard_extra$Keyboard_Extra$fromCode,
@@ -41,26 +44,30 @@ var _user$project$Ext_Keyboard$targetKeyDecoder = A2(
 var _user$project$Ext_Keyboard$preventDefaultAndStopPropagation = {stopPropagation: true, preventDefault: true};
 var _user$project$Ext_Keyboard$preventDefault = {stopPropagation: false, preventDefault: true};
 var _user$project$Ext_Keyboard$stopPropagation = {stopPropagation: true, preventDefault: false};
-var _user$project$Ext_Keyboard$KeyboardEvent = F4(
-	function (a, b, c, d) {
-		return {key: a, isShiftDown: b, isMetaDown: c, isControlDown: d};
+var _user$project$Ext_Keyboard$KeyboardEvent = F5(
+	function (a, b, c, d, e) {
+		return {key: a, isShiftDown: b, isMetaDown: c, isControlDown: d, isAltDown: e};
 	});
 var _user$project$Ext_Keyboard$keyboardEventDecoder = A3(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'ctrlKey',
+	'altKey',
 	_elm_lang$core$Json_Decode$bool,
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'metaKey',
+		'ctrlKey',
 		_elm_lang$core$Json_Decode$bool,
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'shiftKey',
+			'metaKey',
 			_elm_lang$core$Json_Decode$bool,
-			A2(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
-				_user$project$Ext_Keyboard$targetKeyDecoder,
-				_elm_lang$core$Json_Decode$succeed(_user$project$Ext_Keyboard$KeyboardEvent)))));
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'shiftKey',
+				_elm_lang$core$Json_Decode$bool,
+				A2(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
+					_user$project$Ext_Keyboard$targetKeyDecoder,
+					_elm_lang$core$Json_Decode$succeed(_user$project$Ext_Keyboard$KeyboardEvent))))));
 var _user$project$Ext_Keyboard$onKeyUp = function (onKeyMsg) {
 	return A2(
 		_elm_lang$html$Html_Events$on,

@@ -59,10 +59,15 @@ keyboardEventDecoder =
         |> D.required "shiftKey" D.bool
         |> D.required "metaKey" D.bool
         |> D.required "ctrlKey" D.bool
+        |> D.required "altKey" D.bool
 
 
 type alias KeyboardEvent =
-    { key : Key, isShiftDown : Bool, isMetaDown : Bool, isControlDown : Bool }
+    { key : Key, isShiftDown : Bool, isMetaDown : Bool, isControlDown : Bool, isAltDown : Bool }
+
+
+isAnySoftKeyDown ke =
+    ke.isShiftDown || ke.isMetaDown || ke.isControlDown || ke.isAltDown
 
 
 succeedIfDecodedKeyEquals key msg =

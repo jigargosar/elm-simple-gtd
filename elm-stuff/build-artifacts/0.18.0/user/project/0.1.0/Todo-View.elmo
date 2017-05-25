@@ -294,22 +294,26 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		var toggleDeleteMsg = createEntityActionMsg(_user$project$Entity$ToggleDeleted);
 		var onKeyDownMsg = function (_p5) {
 			var _p6 = _p5;
-			var _p7 = _p6.key;
-			switch (_p7.ctor) {
-				case 'Space':
-					return createEntityActionMsg(_user$project$Entity$ToggleSelected);
-				case 'CharE':
-					return startEditingMsg;
-				case 'CharD':
-					return toggleDoneMsg;
-				case 'Delete':
-					return toggleDeleteMsg;
-				case 'CharP':
-					return _user$project$Msg$StartEditingProject(todo);
-				case 'CharC':
-					return _user$project$Msg$StartEditingContext(todo);
-				default:
-					return _user$project$Msg$commonMsg.noOp;
+			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p6)) {
+				return _user$project$Msg$commonMsg.noOp;
+			} else {
+				var _p7 = _p6.key;
+				switch (_p7.ctor) {
+					case 'Space':
+						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
+					case 'CharE':
+						return startEditingMsg;
+					case 'CharD':
+						return toggleDoneMsg;
+					case 'Delete':
+						return toggleDeleteMsg;
+					case 'CharP':
+						return _user$project$Msg$StartEditingProject(todo);
+					case 'CharC':
+						return _user$project$Msg$StartEditingContext(todo);
+					default:
+						return _user$project$Msg$commonMsg.noOp;
+				}
 			}
 		};
 		var text = _user$project$Todo$getText(todo);

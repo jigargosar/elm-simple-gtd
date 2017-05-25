@@ -177,28 +177,31 @@ createTodoViewModel vc tabindexAV todo =
         isFocused =
             vc.maybeFocusedEntity ?|> (Model.getEntityId >> equals todoId) ?= False
 
-        onKeyDownMsg { key } =
-            case key of
-                Key.Space ->
-                    createEntityActionMsg Entity.ToggleSelected
+        onKeyDownMsg ({ key } as ke) =
+            if Ext.Keyboard.isAnySoftKeyDown ke then
+                commonMsg.noOp
+            else
+                case key of
+                    Key.Space ->
+                        createEntityActionMsg Entity.ToggleSelected
 
-                Key.CharE ->
-                    startEditingMsg
+                    Key.CharE ->
+                        startEditingMsg
 
-                Key.CharD ->
-                    toggleDoneMsg
+                    Key.CharD ->
+                        toggleDoneMsg
 
-                Key.Delete ->
-                    toggleDeleteMsg
+                    Key.Delete ->
+                        toggleDeleteMsg
 
-                Key.CharP ->
-                    Msg.StartEditingProject todo
+                    Key.CharP ->
+                        Msg.StartEditingProject todo
 
-                Key.CharC ->
-                    Msg.StartEditingContext todo
+                    Key.CharC ->
+                        Msg.StartEditingContext todo
 
-                _ ->
-                    commonMsg.noOp
+                    _ ->
+                        commonMsg.noOp
 
         startEditingMsg =
             createEntityActionMsg Entity.StartEditing

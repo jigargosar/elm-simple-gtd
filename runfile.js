@@ -55,19 +55,19 @@ export const travis = {
 export const deploy = {
     prod(deployFunctions = false){
         if (deployFunctions) {
-            run("firebase deploy --project prod --public docs")
+            run(`firebase deploy ${firebaseProdOpts}`)
         }
         else {
-            run("firebase deploy --except functions --project prod --public docs")
+            run(`firebase deploy --except functions ${firebaseProdOpts}`)
         }
     },
     dev(deployFunctions = false){
         build.dev()
         if (deployFunctions) {
-            run("firebase deploy --project dev --public dev/build/unbundled")
+            run(`firebase deploy ${firebaseDevOpts}`)
         }
         else {
-            run("firebase deploy --except functions --project dev --public dev/build/unbundled")
+            run(`firebase deploy --except functions ${firebaseDevOpts}`)
         }
     },
 }

@@ -52,10 +52,11 @@ init vm =
     let
         maybeEditVM : Maybe EditViewModel
         maybeEditVM =
-            if vm.isSelected then
-                Nothing
-            else
-                vm.edit
+            {- if vm.isSelected then
+                   Nothing
+               else
+            -}
+            vm.edit
 
         isEditing =
             Maybe.isJust maybeEditVM

@@ -817,7 +817,7 @@ var _user$project$Todo_View$defaultView = function (vm) {
 	};
 };
 var _user$project$Todo_View$init = function (vm) {
-	var maybeEditVM = vm.isSelected ? _elm_lang$core$Maybe$Nothing : vm.edit;
+	var maybeEditVM = vm.edit;
 	var isEditing = _elm_community$maybe_extra$Maybe_Extra$isJust(maybeEditVM);
 	return A2(
 		_elm_lang$html$Html$div,

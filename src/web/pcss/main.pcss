@@ -30,15 +30,16 @@
     opacity: 0.15;
   }
 
+  &.selected:before {
+    background-color: rgb(255, 255, 0);
+    opacity: 0.1;
+  }
+
   &[tabindex="0"]:before {
     background-color: black;
     opacity: 0.1;
   }
 
-  &.selected:before {
-    background-color: rgb(255, 255, 0);
-    opacity: 0.1;
-  }
 }
 
 .ellipsis {

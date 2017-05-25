@@ -56,14 +56,14 @@ deploy:
 
   - provider: script
     skip_cleanup: true
-    script: run travis:deploy:prod
+    script: run travis:deploy:prod $TRAVIS_TAG
     on:
       condition: "$TRAVIS_TAG =~ $RELEASE_TAG_REGEX && $TRAVIS_PULL_REQUEST = 'false'"
       tags: true
 
   - provider: script
     skip_cleanup: true
-    script: run travis:deploy:dev
+    script: run travis:deploy:dev $TRAVIS_COMMIT $TRAVIS_COMMIT_MESSAGE
     on:
       branch: master
       condition: "$TRAVIS_TAG = ''"

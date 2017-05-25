@@ -24,6 +24,21 @@ import View.TodoList
 
 
 init viewModel model =
+    {- div
+       [ class "row"
+
+       {- , onKeyDownStopPropagation (\_ -> commonMsg.logString "sp") -}
+       ]
+       [ Html.form [ class "col s12" ]
+           [ div [ class "row" ]
+               [ div [ class "input-field col s12" ]
+                   [ Html.textarea [ id "textarea1", class "materialize-textarea" ] []
+                   , Html.label [ for "textarea1" ] [ text "Textarea" ]
+                   ]
+               ]
+           ]
+       ]
+    -}
     div [ id "main-view" ]
         ([ case Model.getMainViewType model of
             EntityListView viewType ->
@@ -58,7 +73,8 @@ init viewModel model =
 
 
 overlayViews m =
-    contextDropdown m ++ projectDropdown m
+    contextDropdown m
+        ++ projectDropdown m
 
 
 contextDropdown : Model -> List (Html Msg)

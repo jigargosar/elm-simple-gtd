@@ -33,7 +33,7 @@ import List.Extra as List
 import Model as Model
 import Model exposing (..)
 import Todo
-import Polymer.Paper as Paper exposing (badge, button, fab, input, item, itemBody, material, tab, tabs)
+import Polymer.Paper as Paper
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)

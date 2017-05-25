@@ -9,7 +9,7 @@ const fetchPackageJson = () => json.readFileSync("package.json")
 const fetchPackageVersion = () => fetchPackageJson().version
 
 const getDocsCommitMsg = () =>
-    `'[runfile-commit-docs] ${fetchPackageVersion()}'`
+    `[runfile-commit-docs] ${fetchPackageVersion()}`
 
 export const docs = {
     gitStatus(){
@@ -84,9 +84,9 @@ export const hotmon = () => {
 
 export const bump = () => {
     run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
-    // build.prod()
-    // build.commitDocs()
-    // deploy.dev()
+    build.prod()
+    build.commitDocs()
+    deploy.dev()
 }
 
 export const build = {

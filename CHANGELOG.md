@@ -1,4 +1,4 @@
-## Upcoming
+## v0.13.17 - 2017-05-25
 * [fix] make notification done work 
 
 ## v0.13.16 - 2017-05-25

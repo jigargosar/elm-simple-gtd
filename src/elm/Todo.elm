@@ -70,6 +70,7 @@ type alias Encoded =
 
 type UpdateAction
     = SetDone Bool
+    | MarkDone
     | SetText Text
     | SetDeleted Bool
     | SetContextId Id
@@ -159,6 +160,9 @@ update actions now =
 
                 ToggleDone ->
                     innerUpdate (SetDone (not model.done)) model
+
+                MarkDone ->
+                    innerUpdate (SetDone True) model
 
                 ToggleDeleted ->
                     innerUpdate (SetDeleted (not model.deleted)) model

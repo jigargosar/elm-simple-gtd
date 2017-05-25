@@ -47,7 +47,7 @@ type Msg
     | ToggleShowDeletedEntity
     | ToggleDrawer
     | OnLayoutNarrowChanged Bool
-    | ToggleTodoDone Todo.Model
+    | ToggleTodoDone Todo.Id
     | SetTodoContext Context.Model Todo.Model
     | SetTodoProject Project.Model Todo.Model
     | NewTodo

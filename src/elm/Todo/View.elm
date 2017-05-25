@@ -210,7 +210,7 @@ createTodoViewModel vc tabindexAV todo =
             createEntityActionMsg Entity.ToggleDeleted
 
         toggleDoneMsg =
-            Msg.ToggleTodoDone todo
+            Msg.ToggleTodoDone todoId
     in
         { isDone = Todo.getDone todo
         , key = todoId

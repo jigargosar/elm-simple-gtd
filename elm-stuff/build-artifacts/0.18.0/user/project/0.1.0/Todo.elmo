@@ -370,6 +370,7 @@ var _user$project$Todo$SetDeleted = function (a) {
 var _user$project$Todo$SetText = function (a) {
 	return {ctor: 'SetText', _0: a};
 };
+var _user$project$Todo$MarkDone = {ctor: 'MarkDone'};
 var _user$project$Todo$SetDone = function (a) {
 	return {ctor: 'SetDone', _0: a};
 };
@@ -423,11 +424,17 @@ var _user$project$Todo$update = F2(
 							action = _v7;
 							model = _v8;
 							continue innerUpdate;
-						case 'ToggleDeleted':
-							var _v9 = _user$project$Todo$SetDeleted(!model.deleted),
+						case 'MarkDone':
+							var _v9 = _user$project$Todo$SetDone(true),
 								_v10 = model;
 							action = _v9;
 							model = _v10;
+							continue innerUpdate;
+						case 'ToggleDeleted':
+							var _v11 = _user$project$Todo$SetDeleted(!model.deleted),
+								_v12 = model;
+							action = _v11;
+							model = _v12;
 							continue innerUpdate;
 						case 'SetTime':
 							var _p15 = _p13._0;

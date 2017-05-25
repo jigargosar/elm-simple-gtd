@@ -181,8 +181,8 @@ update msg =
                 ReminderOverlayAction action ->
                     reminderOverlayAction action
 
-                ToggleTodoDone todo ->
-                    updateTodo Todo.ToggleDone todo
+                ToggleTodoDone todoId ->
+                    Return.map (Model.updateTodo Todo.ToggleDone todoId)
 
                 SetTodoContext todoContext todo ->
                     updateTodoAndMaybeAlsoSelected (Todo.SetContext todoContext) todo
@@ -338,11 +338,6 @@ persist lens =
         )
 
 
-updateTodo : Todo.UpdateAction -> Todo.Model -> ReturnF
-updateTodo action todo =
-    Return.map (Model.updateTodo action (Document.getId todo))
-
-
 updateTodoAndMaybeAlsoSelected action todo =
     Return.map (Model.updateTodoAndMaybeAlsoSelected action (Document.getId todo))
 
@@ -417,8 +412,10 @@ reminderOverlayAction action =
                                     Model.removeReminderOverlay
                                         >> Return.singleton
 
-                                _ ->
-                                    Return.singleton
+                                ReminderOverlay.MarkDone ->
+                                    Model.updateTodo Todo.MarkDone todoId
+                                        >> Return.singleton
+                                        >> Return.command (closeNotification todoId)
 
                     _ ->
                         Return.singleton

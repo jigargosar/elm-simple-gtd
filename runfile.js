@@ -82,7 +82,7 @@ export const bump = () => {
     run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
     build.prod()
     build.commitDocs()
-    // deploy.dev()
+    deploy.dev()
 }
 
 export const build = {

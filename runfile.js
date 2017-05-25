@@ -3,9 +3,13 @@ import {run} from 'runjs'
 import * as _ from "ramda"
 import json from "jsonfile"
 
-const runF = (cmd, options={}) => () => run(cmd, options)
+const runF = (cmd, options = {}) => () => run(cmd, options)
 
-const getPackageJson = () => json.readFileSync("package.json")
+const fetchPackageJson = () => json.readFileSync("package.json")
+const fetchPackageVersion = () => fetchPackageJson().version
+
+const getDocsCommitMsg = () =>
+    `'[runfile-commit-docs] ${fetchPackageVersion()}'`
 
 export const docs = {
     gitStatus(){
@@ -14,7 +18,7 @@ export const docs = {
     commit(){
         run("git unstage .")
         run("git add docs/**")
-        run("git commit -m '[npm-auto-commit] deploy docs'")
+        run(`git commit -m '${getDocsCommitMsg()}'`)
     }
 }
 
@@ -64,14 +68,14 @@ export const deploy = {
 }
 
 
-const dev = {
-    buildRunOptions: {env: {NODE_ENV: "development", npm_package_version: getPackageJson().version}}
-}
-const prod = {
-    buildRunOptions: {env: {NODE_ENV: "production", npm_package_version: getPackageJson().version}}
-}
+const dev = () => ( {
+    buildRunOptions: {env: {NODE_ENV: "development", npm_package_version: fetchPackageJson().version}}
+})
+const prod = () => ({
+    buildRunOptions: {env: {NODE_ENV: "production", npm_package_version: fetchPackageJson().version}}
+})
 
-export const hot = runF(`webpack-dev-server --hot --inline`, dev.buildRunOptions)
+export const hot = runF(`webpack-dev-server --hot --inline`, dev().buildRunOptions)
 
 export const hotmon = () => {
     run(`nodemon --watch runfile.js --watch webpack.config.babel.js --watch package.json --exec "run hot"`)
@@ -91,19 +95,19 @@ export const build = {
         docs.commit()
         docs.gitStatus()
     },
-    dev(travis=false){
+    dev(travis = false){
         run("rimraf dev")
         run("cp -R static/ dev")
-        const travisPrefix = travis? "sysconfcpus -n 2" :""
-        run(`${travisPrefix} webpack --progress`, dev.buildRunOptions)
+        const travisPrefix = travis ? "sysconfcpus -n 2" : ""
+        run(`${travisPrefix} webpack --progress`, dev().buildRunOptions)
         run("polymer --version", {cwd: "dev"})
         run(`${travisPrefix} polymer build`, {cwd: "dev"})
     },
-    prod(travis=false){
+    prod(travis = false){
         run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
-        const travisPrefix = travis? "sysconfcpus -n 2" :""
-        run(`${travisPrefix} webpack --progress`, prod.buildRunOptions)
+        const travisPrefix = travis ? "sysconfcpus -n 2" : ""
+        run(`${travisPrefix} webpack --progress`, prod().buildRunOptions)
         run("polymer --version", {cwd: "app"})
         run(`${travisPrefix} polymer build`, {cwd: "app"})
         run("cp -R app/build/unbundled/ docs")

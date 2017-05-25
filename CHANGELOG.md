@@ -1,4 +1,4 @@
-## Upcoming
+## v0.13.16 - 2017-05-25
 * [fix] single key action should only trigger when no modifiers are pressed, e.g. cmd+shift+c dev tool shortcut gets triggered when we try to change context with `c` key 
 
 ## v0.13.15 - 2017-05-25

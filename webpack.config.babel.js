@@ -1,14 +1,19 @@
 const webpack = require('webpack');
 const path = require("path");
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
-const pkg = require("./package.json");
 
-const nodeENV = process.env.NODE_ENV || "development"
+const nodeENV = process.env.NODE_ENV
+console.log(`webpack: process.env.NODE_ENV: "${nodeENV}"`)
+
+if (nodeENV !== "development" && nodeENV !== "production"){
+    console.error("webpack: Error process.env.NODE_ENV invalid", nodeENV)
+    process.exit(1)
+}
 
 const isDevEnv = nodeENV === "development"
 
-console.log("isDevEnv: ", isDevEnv, nodeENV)
-console.log("process.env.NODE_ENV: ", isDevEnv, nodeENV)
+console.log("webpack: isDevEnv: ", isDevEnv)
+
 
 const outputDir = isDevEnv ? "dev" : "app"
 
@@ -33,7 +38,6 @@ export default {
     plugins: [
         new webpack.DefinePlugin({
             'IS_DEVELOPMENT_ENV': isDevEnv,
-            "packageJSON": JSON.stringify(pkg),
             "process.env": JSON.stringify(process.env)
         }),
         new ServiceWorkerWebpackPlugin({

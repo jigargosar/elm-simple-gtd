@@ -44,7 +44,7 @@ export const travis = {
             throw new Error("wont build for pull request !== 'false'")
         }
 
-        if (_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, tagName) && pullRequest !== "false") {
+        if (_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, tagName)) {
             build.prod(true)
         } else {
             build.dev(true)
@@ -73,17 +73,21 @@ export const deploy = {
 }
 
 
-const dev = () => ( {
-    buildRunOptions: {env: {NODE_ENV: "development", npm_package_version: fetchPackageJson().version}}
-})
-const prod = () => ({
-    buildRunOptions: {env: {NODE_ENV: "production", npm_package_version: fetchPackageJson().version}}
-})
+const dev = () => {
+    return {
+        buildRunOptions: {env: {NODE_ENV: "development", npm_package_version: fetchPackageJson().version}}
+    }
+}
+const prod = () => {
+    return {
+        buildRunOptions: {env: {NODE_ENV: "production", npm_package_version: fetchPackageJson().version}}
+    }
+}
 
 export const hot = runF(`webpack-dev-server --hot --inline`, dev().buildRunOptions)
 
 export const hotmon = () => {
-    run(`nodemon --watch runfile.js --watch webpack.config.babel.js --watch package.json --exec "run hot"`)
+    run(`nodemon --watch runfile.js --watch webpack.config.babel.js --watch package.json --exec "run hot"`, dev().buildRunOptions)
 }
 
 export const testBump = () => {

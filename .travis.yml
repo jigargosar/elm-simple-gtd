@@ -63,7 +63,7 @@ deploy:
 
   - provider: script
     skip_cleanup: true
-    script: run travis:deploy:dev $TRAVIS_COMMIT $TRAVIS_COMMIT_MESSAGE
+    script: run travis:deploy:dev $TRAVIS_COMMIT "$TRAVIS_COMMIT_MESSAGE"
     on:
       branch: master
       condition: "$TRAVIS_TAG = ''"

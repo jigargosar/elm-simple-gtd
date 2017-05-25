@@ -1,4 +1,4 @@
-## Upcoming
+## v0.13.15 - 2017-05-25
 * [fix] css color changes that have been lost after node_modules upgrade 
 
 ## v0.13.7 - 2017-05-24

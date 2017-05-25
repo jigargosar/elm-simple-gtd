@@ -36,9 +36,9 @@ export const travis = {
         }
 
         if (_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, tagName) && pullRequest !== "false") {
-            build.prod()
+            build.prod(true)
         } else {
-            build.dev()
+            build.dev(true)
         }
     }
 }
@@ -91,19 +91,21 @@ export const build = {
         docs.commit()
         docs.gitStatus()
     },
-    dev(){
+    dev(travis=false){
         run("rimraf dev")
         run("cp -R static/ dev")
-        run("webpack --progress", dev.buildRunOptions)
+        const travisPrefix = travis? "sysconfcpus -n 2" :""
+        run(`${travisPrefix} webpack --progress`, dev.buildRunOptions)
         run("polymer --version", {cwd: "dev"})
-        run("polymer build", {cwd: "dev"})
+        run(`${travisPrefix} polymer build`, {cwd: "dev"})
     },
-    prod(){
+    prod(travis=false){
         run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
-        run("webpack --progress", prod.buildRunOptions)
+        const travisPrefix = travis? "sysconfcpus -n 2" :""
+        run(`${travisPrefix} webpack --progress`, prod.buildRunOptions)
         run("polymer --version", {cwd: "app"})
-        run("polymer build", {cwd: "app"})
+        run(`${travisPrefix} polymer build`, {cwd: "app"})
         run("cp -R app/build/unbundled/ docs")
     }
 }

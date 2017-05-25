@@ -86,6 +86,9 @@ export const hotmon = () => {
     run(`nodemon --watch runfile.js --watch webpack.config.babel.js --watch package.json --exec "run hot"`)
 }
 
+export const testBump = () => {
+    run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
+}
 
 export const bump = () => {
     run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")

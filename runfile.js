@@ -1,8 +1,11 @@
 "use strict"
 import {run} from 'runjs'
 import * as _ from "ramda"
+import json from "jsonfile"
 
 const runF = (cmd, options={}) => () => run(cmd, options)
+
+const getPackageJson = () => json.readFileSync("package.json")
 
 export const docs = {
     gitStatus(){
@@ -60,9 +63,6 @@ export const deploy = {
     },
 }
 
-import json from "jsonfile"
-
-const getPackageJson = () => json.readFileSync("package.json")
 
 const dev = {
     buildRunOptions: {env: {NODE_ENV: "development", npm_package_version: getPackageJson().version}}

@@ -1,3 +1,6 @@
+## Upcoming
+* [fix] always open popups at bottom, its annoying to see them go behind stuff. 
+
 ## v0.13.17 - 2017-05-25
 * [fix] make notification done work 
 

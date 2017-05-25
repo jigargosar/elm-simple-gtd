@@ -130,7 +130,7 @@ async function boot() {
                 at: "right top",
                 of: "#" + ofId,
                 within: "#main-view",
-                collision: "flipfit"
+                collision: "none"
             }).find(`[tabindex="0"]`).focus()
         })
     })

@@ -143,7 +143,7 @@ var _user$project$EntityList_View$listView = F3(
 				return _user$project$Todo_View$initKeyed(_p10._0);
 			}
 		};
-		var entityList = A2(_user$project$Model$createViewEntityList, viewType, model);
+		var entityList = A2(_user$project$Model$createEntityListFromEntityListViewType, viewType, model);
 		var vmList = A2(_user$project$EntityList_View$createVMList, entityList, appViewModel);
 		return A3(
 			_elm_lang$html$Html_Keyed$node,

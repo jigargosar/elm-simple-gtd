@@ -827,7 +827,16 @@ createEntityListFromEntityListViewType viewType model =
     in
         case viewType of
             Entity.ContextsView ->
-                getContextsViewEntityList todoList False model
+                let
+                    nullEntity =
+                        (Entity.ContextEntity Context.null)
+
+                    addDefaultIfMissing =
+                        when (List.notMember nullEntity)
+                            ((::) nullEntity)
+                in
+                    getContextsViewEntityList todoList False model
+                        |> addDefaultIfMissing
 
             Entity.ContextView id ->
                 let

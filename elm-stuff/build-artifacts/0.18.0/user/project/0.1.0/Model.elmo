@@ -580,13 +580,22 @@ var _user$project$Model$getTodoListForCurrentView = function (model) {
 			sortFunction,
 			A2(_elm_lang$core$List$filter, filter, allTodos)));
 };
-var _user$project$Model$createViewEntityList = F2(
+var _user$project$Model$createEntityListFromEntityListViewType = F2(
 	function (viewType, model) {
 		var todoList = _user$project$Model$getTodoListForCurrentView(model);
 		var _p25 = viewType;
 		switch (_p25.ctor) {
 			case 'ContextsView':
-				return A3(_user$project$Model$getContextsViewEntityList, todoList, false, model);
+				var nullEntity = _user$project$Entity$ContextEntity(_user$project$Context$null);
+				var addDefaultIfMissing = A2(
+					_user$project$Ext_Function$when,
+					_elm_community$list_extra$List_Extra$notMember(nullEntity),
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						})(nullEntity));
+				return addDefaultIfMissing(
+					A3(_user$project$Model$getContextsViewEntityList, todoList, false, model));
 			case 'ContextView':
 				var addDefaultIfEmpty = function (list) {
 					return _elm_lang$core$List$isEmpty(list) ? function (_p26) {
@@ -620,7 +629,7 @@ var _user$project$Model$createViewEntityList = F2(
 var _user$project$Model$getCurrentViewEntityList = function (model) {
 	var _p28 = model.mainViewType;
 	if (_p28.ctor === 'EntityListView') {
-		return A2(_user$project$Model$createViewEntityList, _p28._0, model);
+		return A2(_user$project$Model$createEntityListFromEntityListViewType, _p28._0, model);
 	} else {
 		return {ctor: '[]'};
 	}

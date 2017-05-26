@@ -182,7 +182,8 @@ var _user$project$Main$reminderOverlayAction = function (action) {
 									_Fresheyeball$elm_return$Return$command,
 									_user$project$Main$closeNotification(todoId),
 									_Fresheyeball$elm_return$Return$singleton(
-										A3(_user$project$Model$updateTodo, _user$project$Todo$MarkDone, todoId, _p8)));
+										_user$project$Model$removeReminderOverlay(
+											A3(_user$project$Model$updateTodo, _user$project$Todo$MarkDone, todoId, _p8))));
 							};
 					}
 				} else {

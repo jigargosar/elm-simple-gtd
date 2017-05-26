@@ -414,6 +414,7 @@ reminderOverlayAction action =
 
                                 ReminderOverlay.MarkDone ->
                                     Model.updateTodo Todo.MarkDone todoId
+                                        >> Model.removeReminderOverlay
                                         >> Return.singleton
                                         >> Return.command (closeNotification todoId)
 

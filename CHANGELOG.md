@@ -1,3 +1,7 @@
+## Upcoming
+* [fix] on notification done, hide overlay. and handle done click in notification itself. 
+ 
+
 ## v0.13.18 - 2017-05-26
 * [fix] always open popups at bottom, its annoying to see them go behind stuff. 
 

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.13.20 - 2017-05-26
 * [fix] show inbox/null entity when no todo's are found 
 
 ## v0.13.19 - 2017-05-26

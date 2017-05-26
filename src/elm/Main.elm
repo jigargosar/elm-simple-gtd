@@ -279,7 +279,7 @@ update msg =
                         >> andThenUpdate DeactivateEditingMode
 
                 NewTodo ->
-                    Return.map (Model.activateNewTodoMode)
+                    Return.map (Model.activateNewTodoModeWithFocusInEntityAsReference)
                         >> autoFocusPaperInputCmd
 
                 NewProject ->

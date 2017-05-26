@@ -18,3 +18,6 @@ var _user$project$Todo_NewForm$create = F2(
 	});
 var _user$project$Todo_NewForm$ReferenceTodoId = {ctor: 'ReferenceTodoId'};
 var _user$project$Todo_NewForm$Text = {ctor: 'Text'};
+var _user$project$Todo_NewForm$setText = function (text) {
+	return A2(_user$project$Todo_NewForm$set, _user$project$Todo_NewForm$Text, text);
+};

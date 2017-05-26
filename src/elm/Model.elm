@@ -377,13 +377,13 @@ isShowDetailsKeyPressed =
 --
 
 
-activateNewTodoMode : ModelF
-activateNewTodoMode model =
+activateNewTodoModeWithFocusInEntityAsReference : ModelF
+activateNewTodoModeWithFocusInEntityAsReference model =
     setEditMode (Todo.NewForm.create (getFocusInEntityId model) "" |> EditMode.NewTodo) model
 
 
 updateNewTodoText form text =
-    editMode.set (form |> Todo.NewForm.set Todo.NewForm.Text text |> EditMode.NewTodo)
+    editMode.set (Todo.NewForm.setText text form |> EditMode.NewTodo)
 
 
 startEditingReminder : Todo.Model -> ModelF

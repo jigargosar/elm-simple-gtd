@@ -571,7 +571,7 @@ var _user$project$Main$update = function (msg) {
 					case 'NewTodo':
 						return function (_p46) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoMode, _p46));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoModeWithFocusInEntityAsReference, _p46));
 						};
 					case 'NewProject':
 						return function (_p47) {

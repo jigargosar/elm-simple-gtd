@@ -41,3 +41,7 @@ set field value =
 
 getText =
     Form.get "text"
+
+
+setText text =
+    set Text text

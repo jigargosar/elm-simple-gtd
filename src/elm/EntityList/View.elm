@@ -27,7 +27,8 @@ type alias GroupViewModel =
 
 
 type ViewModel
-    = Group GroupViewModel
+    = Context GroupViewModel
+    | Project GroupViewModel
     | Todo TodoViewModel
 
 
@@ -66,8 +67,11 @@ updateCount vmList =
         |> List.foldr
             (\vm ( vmList, count ) ->
                 case vm of
-                    Group vm ->
-                        ( Group { vm | count = count } :: vmList, 0 )
+                    Context vm ->
+                        ( Context { vm | count = count } :: vmList, 0 )
+
+                    Project vm ->
+                        ( Project { vm | count = count } :: vmList, 0 )
 
                     Todo vm ->
                         ( Todo vm :: vmList, count + 1 )
@@ -76,20 +80,35 @@ updateCount vmList =
         |> Tuple.first
         |> (\list ->
                 case list of
-                    (Group vm) :: ((Group _) as group2) :: rest ->
+                    (Context vm) :: (Project pvm) :: rest ->
                         let
                             isTodo vm =
                                 case vm of
-                                    Group vm ->
-                                        False
-
                                     Todo vm ->
                                         True
+
+                                    _ ->
+                                        False
 
                             totalTodoCount =
                                 vmList |> List.filter (isTodo) |> List.length
                         in
-                            (Group { vm | count = totalTodoCount }) :: group2 :: rest
+                            (Context { vm | count = totalTodoCount }) :: Project pvm :: rest
+
+                    (Project vm) :: (Context cvm) :: rest ->
+                        let
+                            isTodo vm =
+                                case vm of
+                                    Todo vm ->
+                                        True
+
+                                    _ ->
+                                        False
+
+                            totalTodoCount =
+                                vmList |> List.filter (isTodo) |> List.length
+                        in
+                            (Project { vm | count = totalTodoCount }) :: Context cvm :: rest
 
                     _ ->
                         list
@@ -120,11 +139,11 @@ createVMList entityList appViewModel =
                 case entity of
                     Entity.ContextEntity context ->
                         EntityList.createContextGroupViewModel tabIndexAV context
-                            |> Group
+                            |> Context
 
                     Entity.ProjectEntity project ->
                         EntityList.createProjectGroupViewModel tabIndexAV project
-                            |> Group
+                            |> Project
 
                     Entity.TodoEntity todo ->
                         appViewModel.createTodoViewModel tabIndexAV todo
@@ -144,7 +163,10 @@ listView viewType model appViewModel =
 
         createEntityView vm =
             case vm of
-                Group vm ->
+                Context vm ->
+                    GroupEntity.View.initKeyed appViewModel vm
+
+                Project vm ->
                     GroupEntity.View.initKeyed appViewModel vm
 
                 Todo vm ->

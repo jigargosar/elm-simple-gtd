@@ -838,6 +838,18 @@ createEntityListFromEntityListViewType viewType model =
                     getContextsViewEntityList todoList False model
                         |> addDefaultIfMissing
 
+            Entity.ProjectsView ->
+                let
+                    nullEntity =
+                        (Entity.ProjectEntity Project.null)
+
+                    addDefaultIfMissing =
+                        when (List.notMember nullEntity)
+                            ((::) nullEntity)
+                in
+                    getProjectsViewEntityList todoList False model
+                        |> addDefaultIfMissing
+
             Entity.ContextView id ->
                 let
                     addDefaultIfEmpty list =
@@ -851,9 +863,6 @@ createEntityListFromEntityListViewType viewType model =
                 in
                     getContextsViewEntityList todoList True model
                         |> addDefaultIfEmpty
-
-            Entity.ProjectsView ->
-                getProjectsViewEntityList todoList False model
 
             Entity.ProjectView id ->
                 let

@@ -596,6 +596,17 @@ var _user$project$Model$createEntityListFromEntityListViewType = F2(
 						})(nullEntity));
 				return addDefaultIfMissing(
 					A3(_user$project$Model$getContextsViewEntityList, todoList, false, model));
+			case 'ProjectsView':
+				var nullEntity = _user$project$Entity$ProjectEntity(_user$project$Project$null);
+				var addDefaultIfMissing = A2(
+					_user$project$Ext_Function$when,
+					_elm_community$list_extra$List_Extra$notMember(nullEntity),
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						})(nullEntity));
+				return addDefaultIfMissing(
+					A3(_user$project$Model$getProjectsViewEntityList, todoList, false, model));
 			case 'ContextView':
 				var addDefaultIfEmpty = function (list) {
 					return _elm_lang$core$List$isEmpty(list) ? function (_p26) {
@@ -609,8 +620,6 @@ var _user$project$Model$createEntityListFromEntityListViewType = F2(
 				};
 				return addDefaultIfEmpty(
 					A3(_user$project$Model$getContextsViewEntityList, todoList, true, model));
-			case 'ProjectsView':
-				return A3(_user$project$Model$getProjectsViewEntityList, todoList, false, model);
 			default:
 				var addDefaultIfEmpty = function (list) {
 					return _elm_lang$core$List$isEmpty(list) ? function (_p27) {

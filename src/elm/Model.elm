@@ -64,6 +64,7 @@ type alias Model =
     , maybeFocusedEntity : Maybe Entity
     , appVersion : String
     , deviceId : String
+    , focusInEntity : Entity.Entity
     }
 
 
@@ -160,6 +161,10 @@ user =
     { get = .user, set = (\s b -> { b | user = s }) }
 
 
+focusInEntity =
+    { get = .focusInEntity, set = (\s b -> { b | focusInEntity = s }) }
+
+
 update lens smallF big =
     setIn big lens (smallF (lens.get big))
 
@@ -214,6 +219,7 @@ init flags =
             , maybeFocusedEntity = Nothing
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
+            , focusInEntity = Entity.ContextEntity Context.null
             }
     in
         model
@@ -379,7 +385,7 @@ isShowDetailsKeyPressed =
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF
 activateNewTodoModeWithFocusInEntityAsReference model =
-    setEditMode (Todo.NewForm.create (getFocusInEntityId model) "" |> EditMode.NewTodo) model
+    setEditMode (Todo.NewForm.create (focusInEntity.get model) "" |> EditMode.NewTodo) model
 
 
 updateNewTodoText form text =

@@ -2,6 +2,7 @@ module Todo.NewForm exposing (..)
 
 import Context
 import Document
+import Entity
 import Form
 import Project
 import Toolkit.Helpers exposing (..)
@@ -14,7 +15,9 @@ import Todo
 
 
 type alias Model =
-    Form.Model
+    { text : Todo.Text
+    , referenceEntity : Entity.Entity
+    }
 
 
 type Field
@@ -22,26 +25,14 @@ type Field
     | ReferenceTodoId
 
 
-create : Todo.Id -> Todo.Text -> Form.Model
-create referenceTodoId text =
-    Form.init
-        |> Form.set "text" text
-        |> Form.set "referenceTodoId" referenceTodoId
-
-
-set : Field -> String -> Form.ModelF
-set field value =
-    case field of
-        Text ->
-            Form.set "text" value
-
-        ReferenceTodoId ->
-            Form.set "referenceTodoId" value
+create : Entity.Entity -> Todo.Text -> Model
+create referenceEntity text =
+    { text = text, referenceEntity = referenceEntity }
 
 
 getText =
-    Form.get "text"
+    .text
 
 
-setText text =
-    set Text text
+setText text form =
+    { form | text = text }

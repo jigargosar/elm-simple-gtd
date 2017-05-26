@@ -1,23 +1,19 @@
-var _user$project$Todo_NewForm$getText = _user$project$Form$get('text');
-var _user$project$Todo_NewForm$set = F2(
-	function (field, value) {
-		var _p0 = field;
-		if (_p0.ctor === 'Text') {
-			return A2(_user$project$Form$set, 'text', value);
-		} else {
-			return A2(_user$project$Form$set, 'referenceTodoId', value);
-		}
+var _user$project$Todo_NewForm$setText = F2(
+	function (text, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{text: text});
 	});
+var _user$project$Todo_NewForm$getText = function (_) {
+	return _.text;
+};
 var _user$project$Todo_NewForm$create = F2(
-	function (referenceTodoId, text) {
-		return A3(
-			_user$project$Form$set,
-			'referenceTodoId',
-			referenceTodoId,
-			A3(_user$project$Form$set, 'text', text, _user$project$Form$init));
+	function (referenceEntity, text) {
+		return {text: text, referenceEntity: referenceEntity};
+	});
+var _user$project$Todo_NewForm$Model = F2(
+	function (a, b) {
+		return {text: a, referenceEntity: b};
 	});
 var _user$project$Todo_NewForm$ReferenceTodoId = {ctor: 'ReferenceTodoId'};
 var _user$project$Todo_NewForm$Text = {ctor: 'Text'};
-var _user$project$Todo_NewForm$setText = function (text) {
-	return A2(_user$project$Todo_NewForm$set, _user$project$Todo_NewForm$Text, text);
-};

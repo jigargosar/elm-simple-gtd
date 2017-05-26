@@ -803,16 +803,6 @@ var _user$project$Model$startEditingReminder = function (todo) {
 					}(_p39)));
 		});
 };
-var _user$project$Model$activateNewTodoModeWithFocusInEntityAsReference = function (model) {
-	return A2(
-		_user$project$Model$setEditMode,
-		_user$project$EditMode$NewTodo(
-			A2(
-				_user$project$Todo_NewForm$create,
-				_user$project$Model$getFocusInEntityId(model),
-				'')),
-		model);
-};
 var _user$project$Model$createAndEditNewContext = function (model) {
 	return function (_p40) {
 		var _p41 = _p40;
@@ -1041,6 +1031,27 @@ var _user$project$Model$updateAllDocs = F4(
 var _user$project$Model$updateDoc = function (id) {
 	return _user$project$Model$updateAllDocs(
 		_elm_lang$core$Set$singleton(id));
+};
+var _user$project$Model$focusInEntity = {
+	get: function (_) {
+		return _.focusInEntity;
+	},
+	set: F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{focusInEntity: s});
+		})
+};
+var _user$project$Model$activateNewTodoModeWithFocusInEntityAsReference = function (model) {
+	return A2(
+		_user$project$Model$setEditMode,
+		_user$project$EditMode$NewTodo(
+			A2(
+				_user$project$Todo_NewForm$create,
+				_user$project$Model$focusInEntity.get(model),
+				'')),
+		model);
 };
 var _user$project$Model$user = {
 	get: function (_) {
@@ -1365,7 +1376,9 @@ var _user$project$Model$Model = function (a) {
 																return function (q) {
 																	return function (r) {
 																		return function (s) {
-																			return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, focusedEntityInfo: n, selectedEntityIdSet: o, layout: p, maybeFocusedEntity: q, appVersion: r, deviceId: s};
+																			return function (t) {
+																				return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, focusedEntityInfo: n, selectedEntityIdSet: o, layout: p, maybeFocusedEntity: q, appVersion: r, deviceId: s, focusInEntity: t};
+																			};
 																		};
 																	};
 																};
@@ -1520,7 +1533,8 @@ var _user$project$Model$init = function (flags) {
 		layout: {narrow: false, forceNarrow: false},
 		maybeFocusedEntity: _elm_lang$core$Maybe$Nothing,
 		appVersion: flags.appVersion,
-		deviceId: flags.deviceId
+		deviceId: flags.deviceId,
+		focusInEntity: _user$project$Entity$ContextEntity(_user$project$Context$null)
 	};
 	return model;
 };

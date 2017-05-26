@@ -43,7 +43,7 @@ type alias SyncForm =
 
 
 type EditMode
-    = NewTodo Form.Model
+    = NewTodo Todo.NewForm.Model
     | EditTodo Todo.Form.Model
     | EditTodoReminder Todo.ReminderForm.Model
     | EditTodoContext Todo.Model

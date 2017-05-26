@@ -219,10 +219,14 @@ init flags =
             , maybeFocusedEntity = Nothing
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
-            , focusInEntity = Entity.ContextEntity Context.null
+            , focusInEntity = inboxEntity
             }
     in
         model
+
+
+inboxEntity =
+    Entity.ContextEntity Context.null
 
 
 getMaybeUserProfile =
@@ -386,6 +390,11 @@ isShowDetailsKeyPressed =
 activateNewTodoModeWithFocusInEntityAsReference : ModelF
 activateNewTodoModeWithFocusInEntityAsReference model =
     setEditMode (Todo.NewForm.create (focusInEntity.get model) "" |> EditMode.NewTodo) model
+
+
+activateNewTodoModeWithInboxAsReference : ModelF
+activateNewTodoModeWithInboxAsReference =
+    setEditMode (Todo.NewForm.create inboxEntity "" |> EditMode.NewTodo)
 
 
 updateNewTodoText form text =

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.15.0 - 2017-05-26
 * [feature] set new todo project/context based on focused entity
 
 ## v0.14.0 - 2017-05-26

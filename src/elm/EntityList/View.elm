@@ -137,7 +137,7 @@ listView : Entity.ListViewType -> Model.Model -> ViewModel.Model -> Html.Html Ms
 listView viewType model appViewModel =
     let
         entityList =
-            Model.createViewEntityList viewType model
+            Model.createEntityListFromEntityListViewType viewType model
 
         vmList =
             createVMList entityList appViewModel

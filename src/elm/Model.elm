@@ -772,7 +772,7 @@ getEntityId entity =
 getCurrentViewEntityList model =
     case model.mainViewType of
         EntityListView viewType ->
-            createViewEntityList viewType model
+            createEntityListFromEntityListViewType viewType model
 
         _ ->
             []
@@ -820,7 +820,7 @@ getProjectListForCurrentViewFromTodoList todoList model =
             |> List.append nullProjectAsList
 
 
-createViewEntityList viewType model =
+createEntityListFromEntityListViewType viewType model =
     let
         todoList =
             getTodoListForCurrentView model

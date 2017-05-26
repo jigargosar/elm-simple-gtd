@@ -1,4 +1,4 @@
-## Upcoming
+## v0.13.18 - 2017-05-26
 * [fix] always open popups at bottom, its annoying to see them go behind stuff. 
 
 ## v0.13.17 - 2017-05-25

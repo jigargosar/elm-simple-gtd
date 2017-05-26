@@ -1,3 +1,6 @@
+## Upcoming
+* [fix] show inbox/null entity when no todo's are found 
+
 ## v0.13.19 - 2017-05-26
 * [fix] on notification done, hide overlay. and handle done click in notification itself. 
  

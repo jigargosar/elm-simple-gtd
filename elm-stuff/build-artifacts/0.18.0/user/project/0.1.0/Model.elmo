@@ -589,16 +589,14 @@ var _user$project$Model$createViewEntityList = F2(
 				return A3(_user$project$Model$getContextsViewEntityList, todoList, false, model);
 			case 'ContextView':
 				var addDefaultIfEmpty = function (list) {
-					return _elm_lang$core$List$isEmpty(list) ? A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					return _elm_lang$core$List$isEmpty(list) ? function (_p26) {
+						return _elm_lang$core$List$singleton(
+							_user$project$Entity$ContextEntity(_p26));
+					}(
 						A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 							A2(_user$project$Model$findContextById, _p25._0, model),
-							function (_p26) {
-								return _elm_lang$core$List$singleton(
-									_user$project$Entity$ContextEntity(_p26));
-							}),
-						{ctor: '[]'}) : list;
+							_user$project$Context$null)) : list;
 				};
 				return addDefaultIfEmpty(
 					A3(_user$project$Model$getContextsViewEntityList, todoList, true, model));
@@ -606,16 +604,14 @@ var _user$project$Model$createViewEntityList = F2(
 				return A3(_user$project$Model$getProjectsViewEntityList, todoList, false, model);
 			default:
 				var addDefaultIfEmpty = function (list) {
-					return _elm_lang$core$List$isEmpty(list) ? A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					return _elm_lang$core$List$isEmpty(list) ? function (_p27) {
+						return _elm_lang$core$List$singleton(
+							_user$project$Entity$ProjectEntity(_p27));
+					}(
 						A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 							A2(_user$project$Model$findProjectById, _p25._0, model),
-							function (_p27) {
-								return _elm_lang$core$List$singleton(
-									_user$project$Entity$ProjectEntity(_p27));
-							}),
-						{ctor: '[]'}) : list;
+							_user$project$Project$null)) : list;
 				};
 				return addDefaultIfEmpty(
 					A3(_user$project$Model$getProjectsViewEntityList, todoList, true, model));
@@ -1442,10 +1438,6 @@ var _user$project$Model$groupByTodoContextViewModel = function (_p67) {
 				_user$project$Store$asList(
 					_user$project$Model$getTodoStore(_p67)))));
 };
-var _user$project$Model$GroupedTodoList = F2(
-	function (a, b) {
-		return {project: a, context: b};
-	});
 var _user$project$Model$SyncView = {ctor: 'SyncView'};
 var _user$project$Model$BinView = {ctor: 'BinView'};
 var _user$project$Model$DoneView = {ctor: 'DoneView'};

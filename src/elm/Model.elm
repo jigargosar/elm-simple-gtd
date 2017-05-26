@@ -830,9 +830,9 @@ createViewEntityList viewType model =
                     addDefaultIfEmpty list =
                         if List.isEmpty list then
                             findContextById id model
-                                ?|> Entity.ContextEntity
+                                ?= Context.null
+                                |> Entity.ContextEntity
                                 >> List.singleton
-                                ?= []
                         else
                             list
                 in
@@ -847,20 +847,14 @@ createViewEntityList viewType model =
                     addDefaultIfEmpty list =
                         if List.isEmpty list then
                             findProjectById id model
-                                ?|> Entity.ProjectEntity
+                                ?= Project.null
+                                |> Entity.ProjectEntity
                                 >> List.singleton
-                                ?= []
                         else
                             list
                 in
                     getProjectsViewEntityList todoList True model
                         |> addDefaultIfEmpty
-
-
-type alias GroupedTodoList =
-    { project : Dict Document.Id (List Todo.Model)
-    , context : Dict Document.Id (List Todo.Model)
-    }
 
 
 getContextsViewEntityList todoList enableSubgroup model =

@@ -1214,13 +1214,23 @@ getProjectsAsIdDict =
 -- Document Update Helpers
 
 
-findAndUpdateDoc findFn updateFn store model =
+findAndUpdateDocT :
+    (Document x -> Bool)
+    -> (Document x -> Document x)
+    ->
+        { c
+            | get : Model -> Store.Store x
+            , set : ( Document x, Store.Store x ) -> Model -> ( Document x, Model )
+        }
+    -> Model
+    -> Maybe ( Document x, Model )
+findAndUpdateDocT docFindFn docUpdateFn store model =
     let
         updateMaybeF =
             Store.findAndUpdateT
-                findFn
+                docFindFn
                 model.now
-                updateFn
+                docUpdateFn
     in
         updateMaybe store updateMaybeF model
 
@@ -1270,7 +1280,7 @@ updateAllDocs idSet updateFn store model =
 
 
 findAndUpdateTodoT2 findFn action model =
-    findAndUpdateDoc findFn (todoUpdateF action model) todoStoreT2 model
+    findAndUpdateDocT findFn (todoUpdateF action model) todoStoreT2 model
 
 
 updateTodo action todoId model =

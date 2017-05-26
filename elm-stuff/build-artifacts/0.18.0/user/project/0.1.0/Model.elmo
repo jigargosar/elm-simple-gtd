@@ -1003,9 +1003,9 @@ var _user$project$Model$updateMaybe = F3(
 			A2(_user$project$Model$setIn, big, lens));
 		return maybeBigT;
 	});
-var _user$project$Model$findAndUpdateDoc = F4(
-	function (findFn, updateFn, store, model) {
-		var updateMaybeF = A3(_user$project$Store$findAndUpdateT, findFn, model.now, updateFn);
+var _user$project$Model$findAndUpdateDocT = F4(
+	function (docFindFn, docUpdateFn, store, model) {
+		var updateMaybeF = A3(_user$project$Store$findAndUpdateT, docFindFn, model.now, docUpdateFn);
 		return A3(_user$project$Model$updateMaybe, store, updateMaybeF, model);
 	});
 var _user$project$Model$update = F3(
@@ -1170,7 +1170,7 @@ var _user$project$Model$insertTodo = function (constructWithId) {
 var _user$project$Model$findAndUpdateTodoT2 = F3(
 	function (findFn, action, model) {
 		return A4(
-			_user$project$Model$findAndUpdateDoc,
+			_user$project$Model$findAndUpdateDocT,
 			findFn,
 			A2(_user$project$Model$todoUpdateF, action, model),
 			_user$project$Model$todoStoreT2,

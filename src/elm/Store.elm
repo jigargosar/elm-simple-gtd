@@ -125,6 +125,12 @@ replaceDocIn =
     flip replaceDoc__
 
 
+findAndUpdateT :
+    (Document x -> Bool)
+    -> Time
+    -> (Document x -> Document x)
+    -> Store x
+    -> Maybe ( Document x, Store x )
 findAndUpdateT findFn now updateFn store =
     let
         updateAndSetModifiedAt =
@@ -262,12 +268,14 @@ reject fn =
     asList >> Ext.Function.reject fn
 
 
+findBy : (Document x -> Bool) -> Store x -> Maybe (Document x)
 findBy predicate =
     asList >> List.find predicate
 
 
+findById : Document.Id -> Store x -> Maybe (Document x)
 findById id =
-    findBy (.id >> (==) id)
+    findBy (Document.hasId id)
 
 
 getSeed =

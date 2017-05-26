@@ -200,8 +200,8 @@ update msg =
                     updateTodoAndMaybeAlsoSelected (Todo.SetProject project) todo
                         >> andThenUpdate DeactivateEditingMode
 
-                NewTodoTextChanged text ->
-                    Return.map (Model.updateNewTodoText text)
+                NewTodoTextChanged form text ->
+                    Return.map (Model.updateNewTodoText form text)
 
                 DeactivateEditingMode ->
                     Return.map (Model.deactivateEditingMode)
@@ -447,6 +447,9 @@ onGlobalKeyUp key =
                     andThenUpdate DeactivateEditingMode
 
                 ( Key.CharQ, EditMode.None ) ->
+                    andThenUpdate NewTodo
+
+                ( Key.CharI, EditMode.None ) ->
                     andThenUpdate NewTodo
 
                 _ ->

@@ -152,6 +152,10 @@ now =
     { get = .now, set = (\s b -> { b | now = s }) }
 
 
+editMode =
+    { get = .editMode, set = (\s b -> { b | editMode = s }) }
+
+
 user =
     { get = .user, set = (\s b -> { b | user = s }) }
 
@@ -375,11 +379,11 @@ isShowDetailsKeyPressed =
 
 activateNewTodoMode : ModelF
 activateNewTodoMode model =
-    setEditMode (Todo.NewForm.create "" |> EditMode.NewTodo) model
+    setEditMode (Todo.NewForm.create (getFocusInEntityId model) "" |> EditMode.NewTodo) model
 
 
-updateNewTodoText text =
-    setEditMode (Todo.NewForm.create text |> EditMode.NewTodo)
+updateNewTodoText form text =
+    editMode.set (form |> Todo.NewForm.set Todo.NewForm.Text text |> EditMode.NewTodo)
 
 
 startEditingReminder : Todo.Model -> ModelF

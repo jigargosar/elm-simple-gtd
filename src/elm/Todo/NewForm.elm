@@ -19,12 +19,14 @@ type alias Model =
 
 type Field
     = Text
+    | ReferenceTodoId
 
 
-create : Todo.Text -> Form.Model
-create text =
+create : Todo.Id -> Todo.Text -> Form.Model
+create referenceTodoId text =
     Form.init
         |> Form.set "text" text
+        |> Form.set "referenceTodoId" referenceTodoId
 
 
 set : Field -> String -> Form.ModelF
@@ -32,6 +34,9 @@ set field value =
     case field of
         Text ->
             Form.set "text" value
+
+        ReferenceTodoId ->
+            Form.set "referenceTodoId" value
 
 
 getText =

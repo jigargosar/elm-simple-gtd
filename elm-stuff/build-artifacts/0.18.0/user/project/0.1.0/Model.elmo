@@ -785,16 +785,14 @@ var _user$project$Model$startEditingReminder = function (todo) {
 					}(_p39)));
 		});
 };
-var _user$project$Model$updateNewTodoText = function (text) {
-	return _user$project$Model$setEditMode(
-		_user$project$EditMode$NewTodo(
-			_user$project$Todo_NewForm$create(text)));
-};
 var _user$project$Model$activateNewTodoMode = function (model) {
 	return A2(
 		_user$project$Model$setEditMode,
 		_user$project$EditMode$NewTodo(
-			_user$project$Todo_NewForm$create('')),
+			A2(
+				_user$project$Todo_NewForm$create,
+				_user$project$Model$getFocusInEntityId(model),
+				'')),
 		model);
 };
 var _user$project$Model$createAndEditNewContext = function (model) {
@@ -1046,6 +1044,23 @@ var _user$project$Model$getMaybeUserId = function (_p52) {
 		_user$project$Model$user.get(_p52));
 };
 var _user$project$Model$setUser = _user$project$Model$user.set;
+var _user$project$Model$editMode = {
+	get: function (_) {
+		return _.editMode;
+	},
+	set: F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{editMode: s});
+		})
+};
+var _user$project$Model$updateNewTodoText = F2(
+	function (form, text) {
+		return _user$project$Model$editMode.set(
+			_user$project$EditMode$NewTodo(
+				A3(_user$project$Todo_NewForm$set, _user$project$Todo_NewForm$Text, text, form)));
+	});
 var _user$project$Model$now = {
 	get: function (_) {
 		return _.now;

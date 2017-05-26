@@ -62,9 +62,10 @@ var _user$project$Msg$NewTodoKeyUp = function (a) {
 	return {ctor: 'NewTodoKeyUp', _0: a};
 };
 var _user$project$Msg$DeactivateEditingMode = {ctor: 'DeactivateEditingMode'};
-var _user$project$Msg$NewTodoTextChanged = function (a) {
-	return {ctor: 'NewTodoTextChanged', _0: a};
-};
+var _user$project$Msg$NewTodoTextChanged = F2(
+	function (a, b) {
+		return {ctor: 'NewTodoTextChanged', _0: a, _1: b};
+	});
 var _user$project$Msg$NewContext = {ctor: 'NewContext'};
 var _user$project$Msg$NewProject = {ctor: 'NewProject'};
 var _user$project$Msg$NewTodo = {ctor: 'NewTodo'};

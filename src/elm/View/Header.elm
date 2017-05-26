@@ -70,7 +70,7 @@ headerView m =
             Paper.input
                 [ id newTodoInputId
                 , class "auto-focus"
-                , onInput Msg.NewTodoTextChanged
+                , onInput (Msg.NewTodoTextChanged form)
                 , form |> Todo.NewForm.getText |> value
                 , onBlur Msg.DeactivateEditingMode
                 , Keyboard.onKeyUp Msg.NewTodoKeyUp

@@ -143,6 +143,7 @@ var _user$project$View_Header$newTodoInputId = 'new-todo-input';
 var _user$project$View_Header$headerView = function (m) {
 	var _p2 = m.editMode;
 	if (_p2.ctor === 'NewTodo') {
+		var _p3 = _p2._0;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$input,
 			{
@@ -153,11 +154,12 @@ var _user$project$View_Header$headerView = function (m) {
 					_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onInput(_user$project$Msg$NewTodoTextChanged),
+						_0: _elm_lang$html$Html_Events$onInput(
+							_user$project$Msg$NewTodoTextChanged(_p3)),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$value(
-								_user$project$Todo_NewForm$getText(_p2._0)),
+								_user$project$Todo_NewForm$getText(_p3)),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$html$Html_Events$onBlur(_user$project$Msg$DeactivateEditingMode),

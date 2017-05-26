@@ -1123,6 +1123,7 @@ setFocusInEntityWithId id model =
 
 setFocusInEntity entity =
     setFocusInEntityWithId (getEntityId entity)
+        >> focusInEntity.set entity
 
 
 setMaybeFocusedEntity maybeEntity model =

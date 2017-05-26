@@ -389,12 +389,12 @@ isShowDetailsKeyPressed =
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF
 activateNewTodoModeWithFocusInEntityAsReference model =
-    setEditMode (Todo.NewForm.create (focusInEntity.get model) "" |> EditMode.NewTodo) model
+    editMode.set (Todo.NewForm.create (focusInEntity.get model) "" |> EditMode.NewTodo) model
 
 
 activateNewTodoModeWithInboxAsReference : ModelF
 activateNewTodoModeWithInboxAsReference =
-    setEditMode (Todo.NewForm.create inboxEntity "" |> EditMode.NewTodo)
+    editMode.set (Todo.NewForm.create inboxEntity "" |> EditMode.NewTodo)
 
 
 updateNewTodoText form text =

@@ -68,6 +68,7 @@ var _user$project$Msg$NewTodoTextChanged = F2(
 	});
 var _user$project$Msg$NewContext = {ctor: 'NewContext'};
 var _user$project$Msg$NewProject = {ctor: 'NewProject'};
+var _user$project$Msg$NewTodoForInbox = {ctor: 'NewTodoForInbox'};
 var _user$project$Msg$NewTodo = {ctor: 'NewTodo'};
 var _user$project$Msg$SetTodoProject = F2(
 	function (a, b) {

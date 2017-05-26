@@ -573,58 +573,63 @@ var _user$project$Main$update = function (msg) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
 								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoModeWithFocusInEntityAsReference, _p46));
 						};
-					case 'NewProject':
+					case 'NewTodoForInbox':
 						return function (_p47) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewProject, _p47));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoModeWithInboxAsReference, _p47));
 						};
-					case 'NewContext':
+					case 'NewProject':
 						return function (_p48) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewContext, _p48));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewProject, _p48));
+						};
+					case 'NewContext':
+						return function (_p49) {
+							return _user$project$DomPorts$autoFocusPaperInputCmd(
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewContext, _p49));
 						};
 					case 'StartAddingNewEntity':
 						return _elm_lang$core$Basics$identity;
 					case 'OnEntityAction':
-						var _p52 = _p18._0;
-						var _p49 = _p18._1;
-						switch (_p49.ctor) {
+						var _p53 = _p18._0;
+						var _p50 = _p18._1;
+						switch (_p50.ctor) {
 							case 'StartEditing':
-								return function (_p50) {
+								return function (_p51) {
 									return _user$project$DomPorts$autoFocusPaperInputCmd(
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$startEditingEntity(_p52),
-											_p50));
+											_user$project$Model$startEditingEntity(_p53),
+											_p51));
 								};
 							case 'NameChanged':
 								return _Fresheyeball$elm_return$Return$map(
-									A2(_user$project$Model$updateEditModeNameChanged, _p49._0, _p52));
+									A2(_user$project$Model$updateEditModeNameChanged, _p50._0, _p53));
 							case 'Save':
 								return _user$project$Main$andThenUpdate(_user$project$Msg$SaveCurrentForm);
 							case 'ToggleDeleted':
-								return function (_p51) {
+								return function (_p52) {
 									return A2(
 										_user$project$Main$andThenUpdate,
 										_user$project$Msg$DeactivateEditingMode,
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$toggleDeleteEntity(_p52),
-											_p51));
+											_user$project$Model$toggleDeleteEntity(_p53),
+											_p52));
 								};
 							case 'SetFocusedIn':
 								return _Fresheyeball$elm_return$Return$map(
-									_user$project$Model$setFocusInEntity(_p52));
+									_user$project$Model$setFocusInEntity(_p53));
 							case 'SetFocused':
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$setMaybeFocusedEntity(
-										_elm_lang$core$Maybe$Just(_p52)));
+										_elm_lang$core$Maybe$Just(_p53)));
 							case 'SetBlurred':
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$setMaybeFocusedEntity(_elm_lang$core$Maybe$Nothing));
 							default:
 								return _Fresheyeball$elm_return$Return$map(
-									_user$project$Model$toggleEntitySelection(_p52));
+									_user$project$Model$toggleEntitySelection(_p53));
 						}
 					default:
 						return _user$project$Main$onGlobalKeyUp(_p18._0);
@@ -633,35 +638,35 @@ var _user$project$Main$update = function (msg) {
 				_Fresheyeball$elm_return$Return$singleton(_p17)));
 	};
 };
-var _user$project$Main$andThenUpdate = function (_p53) {
+var _user$project$Main$andThenUpdate = function (_p54) {
 	return _Fresheyeball$elm_return$Return$andThen(
-		_user$project$Main$update(_p53));
+		_user$project$Main$update(_p54));
 };
 var _user$project$Main$onGlobalKeyUp = function (key) {
 	return A2(
 		_user$project$Ext_Return$with,
 		_user$project$Model$getEditMode,
 		function (editMode) {
-			var _p54 = {ctor: '_Tuple2', _0: key, _1: editMode};
+			var _p55 = {ctor: '_Tuple2', _0: key, _1: editMode};
 			_v7_4:
 			do {
-				if (_p54.ctor === '_Tuple2') {
-					switch (_p54._0.ctor) {
+				if (_p55.ctor === '_Tuple2') {
+					switch (_p55._0.ctor) {
 						case 'Escape':
-							if (_p54._1.ctor === 'None') {
+							if (_p55._1.ctor === 'None') {
 								return _Fresheyeball$elm_return$Return$map(_user$project$Model$clearSelection);
 							} else {
 								return _user$project$Main$andThenUpdate(_user$project$Msg$DeactivateEditingMode);
 							}
 						case 'CharQ':
-							if (_p54._1.ctor === 'None') {
+							if (_p55._1.ctor === 'None') {
 								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodo);
 							} else {
 								break _v7_4;
 							}
 						case 'CharI':
-							if (_p54._1.ctor === 'None') {
-								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodo);
+							if (_p55._1.ctor === 'None') {
+								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodoForInbox);
 							} else {
 								break _v7_4;
 							}
@@ -677,9 +682,9 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 };
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p55) {
+		function (_p56) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p55));
+				_user$project$Main$update(_p56));
 		}));
 var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 	{delta2url: _user$project$Routes$delta2hash, location2messages: _user$project$Routes$hash2messages, init: _user$project$Main$init, update: _user$project$Main$update, view: _user$project$View$init, subscriptions: _user$project$Main$subscriptions})(
@@ -734,9 +739,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 				A2(_elm_lang$core$Json_Decode$field, 'developmentMode', _elm_lang$core$Json_Decode$bool));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$andThenUpdateAll = function (_p56) {
+var _user$project$Main$andThenUpdateAll = function (_p57) {
 	return _user$project$Main$andThenUpdate(
-		_user$project$Msg$OnMsgList(_p56));
+		_user$project$Msg$OnMsgList(_p57));
 };
 var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',

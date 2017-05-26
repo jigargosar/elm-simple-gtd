@@ -13,7 +13,6 @@ port module Store
         , filter
         , updateAllDocs
         , findAndUpdateT
-        , replaceDoc__
         , findAllByIdSetIn
         , onPouchDbChange
         , upsertEncoded__
@@ -127,8 +126,15 @@ replaceDocIn =
 
 
 findAndUpdateT findFn now updateFn store =
-    findBy findFn store
-        ?|> (\doc -> updateFn doc |> replaceDocIn store |> (,) doc)
+    let
+        updateAndSetModifiedAt =
+            updateFn >> Document.setModifiedAt now
+    in
+        findBy findFn store
+            ?+> (updateAndSetModifiedAt
+                    >> apply2 ( Document.getId, replaceDocIn store )
+                    >> (\( id, store ) -> findById id store ?|> (\doc -> ( doc, store )))
+                )
 
 
 updateDoc id =

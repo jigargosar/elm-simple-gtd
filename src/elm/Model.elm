@@ -464,13 +464,36 @@ saveCurrentForm model =
         EditMode.NewTodo form ->
             insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model
                 |> Tuple.mapFirst Document.getId
-                |> uncurry setTodoContextOrProjectBasedOnCurrentView
+                |> uncurry
+                    (\todoId ->
+                        updateTodo
+                            (case form.referenceEntity of
+                                Entity.TodoEntity fromTodo ->
+                                    (Todo.CopyProjectAndContextId fromTodo)
 
+                                Entity.ContextEntity context ->
+                                    (Todo.SetContext context)
+
+                                Entity.ProjectEntity project ->
+                                    (Todo.SetProject project)
+                            )
+                            todoId
+                            >> setFocusInEntityFromTodoId todoId
+                    )
+
+        --                |> uncurry setTodoContextOrProjectBasedOnCurrentView
         EditMode.EditSyncSettings form ->
             { model | pouchDBRemoteSyncURI = form.uri }
 
         EditMode.None ->
             model
+
+
+setFocusInEntityFromTodoId : Todo.Id -> ModelF
+setFocusInEntityFromTodoId todoId model =
+    maybe2Tuple ( findTodoById todoId model ?|> Entity.TodoEntity, Just model )
+        ?|> uncurry setFocusInEntity
+        ?= model
 
 
 toggleDeleteEntity : Entity -> ModelF

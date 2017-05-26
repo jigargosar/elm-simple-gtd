@@ -77,6 +77,7 @@ type UpdateAction
     | SetTime (Maybe Time)
     | SetContext Context.Model
     | SetProjectId Id
+    | CopyProjectAndContextId Model
     | SetProject Project.Model
     | ToggleDone
     | ToggleDeleted
@@ -151,6 +152,11 @@ update actions now =
 
                 SetProjectId projectId ->
                     { model | projectId = projectId }
+
+                CopyProjectAndContextId fromTodo ->
+                    model
+                        |> innerUpdate (SetContextId fromTodo.contextId)
+                        >> innerUpdate (SetProjectId fromTodo.projectId)
 
                 SetContext context ->
                     innerUpdate (SetContextId (Document.getId context)) model

@@ -352,6 +352,9 @@ var _user$project$Todo$ToggleDone = {ctor: 'ToggleDone'};
 var _user$project$Todo$SetProject = function (a) {
 	return {ctor: 'SetProject', _0: a};
 };
+var _user$project$Todo$CopyProjectAndContextId = function (a) {
+	return {ctor: 'CopyProjectAndContextId', _0: a};
+};
 var _user$project$Todo$SetProjectId = function (a) {
 	return {ctor: 'SetProjectId', _0: a};
 };
@@ -404,6 +407,17 @@ var _user$project$Todo$update = F2(
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{projectId: _p13._0});
+						case 'CopyProjectAndContextId':
+							var _p16 = _p13._0;
+							return function (_p15) {
+								return A2(
+									innerUpdate,
+									_user$project$Todo$SetProjectId(_p16.projectId),
+									A2(
+										innerUpdate,
+										_user$project$Todo$SetContextId(_p16.contextId),
+										_p15));
+							}(model);
 						case 'SetContext':
 							var _v3 = _user$project$Todo$SetContextId(
 								_user$project$Document$getId(_p13._0)),
@@ -437,11 +451,11 @@ var _user$project$Todo$update = F2(
 							model = _v12;
 							continue innerUpdate;
 						case 'SetTime':
-							var _p15 = _p13._0;
-							var reminder = _user$project$Todo$maybeTimeToReminder(_p15);
+							var _p17 = _p13._0;
+							var reminder = _user$project$Todo$maybeTimeToReminder(_p17);
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{dueAt: _p15, reminder: reminder});
+								{dueAt: _p17, reminder: reminder});
 						case 'TurnReminderOff':
 							return _elm_lang$core$Native_Utils.update(
 								model,
@@ -455,7 +469,7 @@ var _user$project$Todo$update = F2(
 					}
 				}
 			});
-		return function (_p16) {
+		return function (_p18) {
 			return function (model) {
 				return _elm_lang$core$Native_Utils.update(
 					model,
@@ -464,6 +478,6 @@ var _user$project$Todo$update = F2(
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
 					_elm_lang$core$List$foldl(innerUpdate),
-					actions)(_p16));
+					actions)(_p18));
 		};
 	});

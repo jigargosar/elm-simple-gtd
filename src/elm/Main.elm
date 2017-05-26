@@ -282,6 +282,10 @@ update msg =
                     Return.map (Model.activateNewTodoModeWithFocusInEntityAsReference)
                         >> autoFocusPaperInputCmd
 
+                NewTodoForInbox ->
+                    Return.map (Model.activateNewTodoModeWithInboxAsReference)
+                        >> autoFocusPaperInputCmd
+
                 NewProject ->
                     Return.map Model.createAndEditNewProject
                         >> autoFocusPaperInputCmd
@@ -450,7 +454,7 @@ onGlobalKeyUp key =
                     andThenUpdate NewTodo
 
                 ( Key.CharI, EditMode.None ) ->
-                    andThenUpdate NewTodo
+                    andThenUpdate NewTodoForInbox
 
                 _ ->
                     identity

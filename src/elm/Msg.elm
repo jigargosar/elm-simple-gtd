@@ -51,6 +51,7 @@ type Msg
     | SetTodoContext Context.Model Todo.Model
     | SetTodoProject Project.Model Todo.Model
     | NewTodo
+    | NewTodoForInbox
     | NewProject
     | NewContext
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text

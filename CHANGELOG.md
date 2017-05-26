@@ -1,7 +1,7 @@
 ## Later
 * [feature] set new todo project/context based on focused entity
 
-## Upcoming
+## v0.14.0 - 2017-05-26
 * [fix] show inbox/null entity when no todo's are found, in contexts/projects view as well 
 
 ## v0.13.20 - 2017-05-26

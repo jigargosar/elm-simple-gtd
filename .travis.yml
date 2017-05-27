@@ -58,7 +58,6 @@ deploy:
     skip_cleanup: true
     script: run travis:deploy
     on:
-      tags: true
       all_branches: true
 
 notifications:

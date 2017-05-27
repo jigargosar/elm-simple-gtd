@@ -5,18 +5,15 @@ import _ from "ramda"
 
 const nodeENV = process.env.NODE_ENV
 console.log(`webpack: process.env.NODE_ENV: "${nodeENV}"`)
+
 const envList = ["development", "production"]
-
-
 if (!_.contains(nodeENV)(envList)) {
     console.error("webpack: Error process.env.NODE_ENV invalid", nodeENV)
     process.exit(1)
 }
 
 const isDevEnv = nodeENV === "development"
-
 console.log("webpack: isDevEnv: ", isDevEnv)
-
 
 const outputDir = isDevEnv ? "dev" : "app"
 

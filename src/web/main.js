@@ -129,30 +129,31 @@ async function boot() {
     })
 
     const text_area_selector = ".materialize-textarea"
-    $('body').on('autoresize', text_area_selector, function () {
+    /*$('body').on('autoresize', text_area_selector, function () {
         console.log("autoresize triggered", this)
-    });
-    
+    });*/
+
     app.ports["focusPaperInput"].subscribe((selector) => {
         console.log("focusPaperInput: selector",selector)
         setTimeout(()=>{
             requestAnimationFrame(()=>{
-                const $textArea = $(selector)
-                $textArea.focus()
 
                 $(text_area_selector).each(function () {
                     const $textarea = $(this)
+                    console.log($textarea)
                     const originalHeight = $textarea.height()
                     console.log("original height", $textarea.height())
+                    $textarea.focus()
                     /**
                      * Instead of resizing textarea on document load,
                      * store the original height and the original length
                      */
                     $textarea.data("original-height", originalHeight);
                     $textarea.data("previous-length", $textarea.val().length);
+                    // console.log($textArea)
+                    $textarea.trigger('autoresize')
                 });
-                console.log($textArea)
-                $textArea.trigger('autoresize')
+
             })
         },10)
 

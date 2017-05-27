@@ -18,5 +18,5 @@ const $ = require("jquery")
 window.jQuery = $
 require("./jquery.trap")
 require("jquery-ui/ui/position")
-require("materialize-css")
-// require("materialize-css/js/forms.js")
+require("materialize-css/bin/materialize.js")
+require("materialize-css/js/forms.js")

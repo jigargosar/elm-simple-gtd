@@ -496,8 +496,19 @@ editView : EditViewModel -> List (Html Msg)
 editView edit =
     [ div [ class "vertical layout flex-auto" ]
         [ div [ class "flex" ]
-            [ Html.node "paper-textarea"
-                [ class "auto-focus"
+            [ div [ class "input-field", onKeyDownStopPropagation (\_ -> commonMsg.logString "sp") ]
+                [ Html.textarea
+                    [ class "materialize-textarea"
+                    , attribute "data-original-height" "0"
+
+                    --                    , autofocus True
+                    , defaultValue (edit.todo.text)
+                    ]
+                    []
+                , Html.label [] [ text "Todo" ]
+                ]
+            , Html.node "paper-textarea"
+                [ class "_auto-focus"
                 , stringProperty "label" "Todo"
                 , value (edit.todo.text)
 

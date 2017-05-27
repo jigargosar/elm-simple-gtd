@@ -19,36 +19,84 @@ var _user$project$Todo_View$editView = function (edit) {
 					},
 					{
 						ctor: '::',
-						_0: A3(
-							_elm_lang$html$Html$node,
-							'paper-textarea',
+						_0: A2(
+							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+								_0: _elm_lang$html$Html_Attributes$class('input-field'),
 								_1: {
 									ctor: '::',
-									_0: A2(_edvail$elm_polymer$Polymer_Attributes$stringProperty, 'label', 'Todo'),
-									_1: {
+									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+										function (_p0) {
+											return _user$project$Msg$commonMsg.logString('sp');
+										}),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$textarea,
+									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$value(edit.todo.text),
+										_0: _elm_lang$html$Html_Attributes$class('materialize-textarea'),
 										_1: {
 											ctor: '::',
-											_0: A2(_elm_lang$html$Html_Attributes$property, 'keyBindings', _elm_lang$core$Json_Encode$null),
+											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-original-height', '0'),
 											_1: {
 												ctor: '::',
-												_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
+												_0: _elm_lang$html$Html_Attributes$defaultValue(edit.todo.text),
+												_1: {ctor: '[]'}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$label,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Todo'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A3(
+								_elm_lang$html$Html$node,
+								'paper-textarea',
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('_auto-focus'),
+									_1: {
+										ctor: '::',
+										_0: A2(_edvail$elm_polymer$Polymer_Attributes$stringProperty, 'label', 'Todo'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$value(edit.todo.text),
+											_1: {
+												ctor: '::',
+												_0: A2(_elm_lang$html$Html_Attributes$property, 'keyBindings', _elm_lang$core$Json_Encode$null),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onInput(edit.onTodoTextChanged),
-													_1: {ctor: '[]'}
+													_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onInput(edit.onTodoTextChanged),
+														_1: {ctor: '[]'}
+													}
 												}
 											}
 										}
 									}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {ctor: '[]'}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
+						}
 					}),
 				_1: {
 					ctor: '::',
@@ -65,9 +113,9 @@ var _user$project$Todo_View$createEditTodoViewModel = F2(
 		var todoId = form.id;
 		return {
 			todo: {text: form.todoText},
-			onTodoTextChanged: function (_p0) {
+			onTodoTextChanged: function (_p1) {
 				return updateTodoForm(
-					_user$project$Todo_Form$SetText(_p0));
+					_user$project$Todo_Form$SetText(_p1));
 			},
 			onDeleteClicked: A2(
 				_user$project$Msg$OnEntityAction,
@@ -117,13 +165,13 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 					dueAt,
 					_user$project$Ext_Time$dayDiffInWords(vc.now)),
 				''),
-			onDateChanged: function (_p1) {
+			onDateChanged: function (_p2) {
 				return updateReminderForm(
-					_user$project$Todo_ReminderForm$SetDate(_p1));
+					_user$project$Todo_ReminderForm$SetDate(_p2));
 			},
-			onTimeChanged: function (_p2) {
+			onTimeChanged: function (_p3) {
 				return updateReminderForm(
-					_user$project$Todo_ReminderForm$SetTime(_p2));
+					_user$project$Todo_ReminderForm$SetTime(_p3));
 			},
 			startEditingMsg: _user$project$Msg$StartEditingReminder(todo)
 		};
@@ -140,9 +188,9 @@ var _user$project$Todo_View$projectDropdownMenu = function (vm) {
 			},
 			{
 				ctor: '::',
-				_0: function (_p3) {
+				_0: function (_p4) {
 					return _elm_lang$html$Html$text(
-						_user$project$Project$getName(_p3));
+						_user$project$Project$getName(_p4));
 				}(project),
 				_1: {ctor: '[]'}
 			});
@@ -205,9 +253,9 @@ var _user$project$Todo_View$contextDropdownMenu = function (vm) {
 			},
 			{
 				ctor: '::',
-				_0: function (_p4) {
+				_0: function (_p5) {
 					return _elm_lang$html$Html$text(
-						_user$project$Context$getName(_p4));
+						_user$project$Context$getName(_p5));
 				}(context),
 				_1: {ctor: '[]'}
 			});
@@ -292,30 +340,30 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
 		var toggleDeleteMsg = createEntityActionMsg(_user$project$Entity$ToggleDeleted);
 		var text = _user$project$Todo$getText(todo);
-		var _p5 = function () {
+		var _p6 = function () {
 			var lines = _elm_lang$core$String$lines(
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 					_elm_community$string_extra$String_Extra$nonEmpty(
 						_elm_lang$core$String$trim(text)),
 					'< empty >'));
-			var _p6 = lines;
-			if (_p6.ctor === '[]') {
+			var _p7 = lines;
+			if (_p7.ctor === '[]') {
 				return {ctor: '_Tuple2', _0: '', _1: false};
 			} else {
-				if (_p6._1.ctor === '[]') {
-					return {ctor: '_Tuple2', _0: _p6._0, _1: false};
+				if (_p7._1.ctor === '[]') {
+					return {ctor: '_Tuple2', _0: _p7._0, _1: false};
 				} else {
 					return {
 						ctor: '_Tuple2',
-						_0: A2(_elm_lang$core$Basics_ops['++'], _p6._0, ' ...'),
+						_0: A2(_elm_lang$core$Basics_ops['++'], _p7._0, ' ...'),
 						_1: true
 					};
 				}
 			}
 		}();
-		var displayText = _p5._0;
-		var isMultiLine = _p5._1;
+		var displayText = _p6._0;
+		var isMultiLine = _p6._1;
 		var displayText2 = A2(
 			_elm_community$string_extra$String_Extra$ellipsis,
 			100,
@@ -351,21 +399,21 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 				vc.maybeFocusedEntity,
-				function (_p7) {
+				function (_p8) {
 					return A2(
 						_user$project$Ext_Function$equals,
 						todoId,
-						_user$project$Model$getEntityId(_p7));
+						_user$project$Model$getEntityId(_p8));
 				}),
 			false);
 		var toggleDoneMsg = _user$project$Msg$ToggleTodoDone(todoId);
-		var onKeyDownMsg = function (_p8) {
-			var _p9 = _p8;
-			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p9)) {
+		var onKeyDownMsg = function (_p9) {
+			var _p10 = _p9;
+			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p10)) {
 				return _user$project$Msg$commonMsg.noOp;
 			} else {
-				var _p10 = _p9.key;
-				switch (_p10.ctor) {
+				var _p11 = _p10.key;
+				switch (_p11.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 					case 'CharE':
@@ -425,8 +473,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p11, content) {
-		var _p12 = _p11;
+	function (_p12, content) {
+		var _p13 = _p12;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$button,
 			{
@@ -445,7 +493,7 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
 						_1: {
 							ctor: '::',
-							_0: _p12.tabindexAV,
+							_0: _p13.tabindexAV,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -869,7 +917,7 @@ var _user$project$Todo_View$init = function (vm) {
 		},
 		A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p13) {
+			function (_p14) {
 				return _user$project$Todo_View$defaultView(vm);
 			},
 			_user$project$Todo_View$editView,

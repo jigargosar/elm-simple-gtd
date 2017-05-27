@@ -28,6 +28,7 @@ const TRAVIS_PULL_REQUEST = process.env["TRAVIS_PULL_REQUEST"]
 const TRAVIS = process.env["TRAVIS"]
 const TRAVIS_COMMIT = process.env["TRAVIS_COMMIT"]
 const TRAVIS_COMMIT_MESSAGE = process.env["TRAVIS_COMMIT_MESSAGE"]
+const TRAVIS_BRANCH = process.env["TRAVIS_BRANCH"]
 
 const firebaseDevOpts = `--project dev --public dev/build/unbundled --token ${FIREBASE_TOKEN}`
 const firebaseProdOpts = `--project prod --public docs --token ${FIREBASE_TOKEN}`
@@ -62,6 +63,7 @@ export const travis = {
          prod: () => run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)*/
     },
     build(){
+        console.log("TRAVIS_BRANCH=",TRAVIS_BRANCH)
         validateNotPullRequest()
 
         if (doesTravisTagMatchReleaseSemVer) {

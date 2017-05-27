@@ -54,18 +54,7 @@ deploy:
       condition: "$TRAVIS_TAG =~ $RELEASE_TAG_REGEX && $TRAVIS_PULL_REQUEST = 'false'"
       tags: true
 
-#  - provider: script
-#    skip_cleanup: true
-#    script: run travis:deploy:prod
-#    on:
-#      condition: "$TRAVIS_TAG =~ $RELEASE_TAG_REGEX && $TRAVIS_PULL_REQUEST = 'false'"
-#      tags: true
-
   - provider: script
     skip_cleanup: true
     script: run travis:deploy
-    on:
-      branch: master
-#      condition: "$TRAVIS_TAG = ''"
-
 

@@ -1,6 +1,6 @@
-## Upcoming
+## Later
 * [fix] cursor jump on editing any text field 
-    * use materialize css inputs and set defaultValue 
+    * use materialize css inputs and set defaultValue
 
 ## v0.16.0 - 2017-05-27
 * travis: simplify firebase token 

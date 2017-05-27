@@ -45,10 +45,10 @@ export const travis = {
             run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)
 
         } else {
-            run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
+            run(`echo https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT`)
             run("echo $TRAVIS_COMMIT_MESSAGE")
             run(`firebase deploy ${firebaseDevOpts} `
-                + `-m "travis: "$TRAVIS_COMMIT_MESSAGE" https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
+                + `-m "travis: $TRAVIS_COMMIT_MESSAGE https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
         }
 
         /*dev: () => {

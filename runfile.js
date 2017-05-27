@@ -29,23 +29,40 @@ const TRAVIS = process.env["TRAVIS"]
 
 const firebaseDevOpts = `--project dev --public dev/build/unbundled --token ${FIREBASE_TOKEN}`
 const firebaseProdOpts = `--project prod --public docs --token ${FIREBASE_TOKEN}`
-export const travis = {
 
-    deploy: {
-        dev: () => {
+const doesTravisTagMatchReleaseSemVer = _.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, TRAVIS_TAG)
+
+function validateNotPullRequest() {
+    if (TRAVIS_PULL_REQUEST !== "false") {
+        throw new Error("wont build for pull request !== 'false'")
+    }
+}
+export const travis = {
+    deploy: function(){
+        validateNotPullRequest()
+
+        if (doesTravisTagMatchReleaseSemVer) {
+            run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)
+
+        } else {
+            run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
+            run("echo $TRAVIS_COMMIT_MESSAGE")
+            run(`firebase deploy ${firebaseDevOpts} `
+                + `-m "travis: "$TRAVIS_COMMIT_MESSAGE" https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
+        }
+
+        /*dev: () => {
             run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
             run("echo $TRAVIS_COMMIT_MESSAGE")
             run(`firebase deploy ${firebaseDevOpts} `
                 + `-m "travis: "$TRAVIS_COMMIT_MESSAGE" https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
         },
-        prod: () => run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)
+        prod: () => run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)*/
     },
     build(){
-        if (TRAVIS_PULL_REQUEST !== "false") {
-            throw new Error("wont build for pull request !== 'false'")
-        }
+        validateNotPullRequest()
 
-        if (_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, TRAVIS_TAG)) {
+        if (doesTravisTagMatchReleaseSemVer) {
             build.prod()
         } else {
             build.dev()

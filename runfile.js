@@ -109,6 +109,7 @@ export const bump = function () {
         docs.gitStatus()
         docs.commit()
         docs.gitStatus()
+        build.dev()
         deploy.dev()
     } else {
         run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
@@ -116,6 +117,19 @@ export const bump = function () {
 }
 
 const travisRunPrefix = TRAVIS ? "sysconfcpus -n 2" : ""
+
+export const b = function () {
+    if (!this.options || !(this.options.d || this.options.p)) {
+        console.error("Invalid options please specify env: -d or -p")
+        process.exit(1)
+    }
+
+    if(this.options.d){
+        build.dev()
+    }else{
+        build.prod()
+    }
+}
 export const build = {
     dev: function () {
         console.info("build:dev")
@@ -144,7 +158,6 @@ export const deploy = {
         run(firebaseDeployDev)
     },
 }
-
 
 
 export function dummy(...args) {

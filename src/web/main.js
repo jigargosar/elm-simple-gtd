@@ -128,17 +128,12 @@ async function boot() {
         })
     })
 
-    const text_area_selector = ".materialize-textarea"
-    /*$('body').on('autoresize', text_area_selector, function () {
-        console.log("autoresize triggered", this)
-    });*/
-
     app.ports["focusPaperInput"].subscribe((selector) => {
         console.log("focusPaperInput: selector",selector)
         setTimeout(()=>{
             requestAnimationFrame(()=>{
-
-                $(text_area_selector).each(function () {
+                // $(".materialize-textarea").each(function () {
+                $(selector).each(function () {
                     const $textarea = $(this)
                     console.log($textarea)
                     const originalHeight = $textarea.height()
@@ -155,7 +150,7 @@ async function boot() {
                 });
 
             })
-        },10)
+        },0)
 
         setTimeout(() => {
             requestAnimationFrame(() => {

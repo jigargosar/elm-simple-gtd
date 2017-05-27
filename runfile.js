@@ -79,15 +79,6 @@ export const travis = {
     }
 }
 
-export const deploy = {
-    prod(){
-        run(firebaseDeployProd)
-    },
-    dev(){
-        run(firebaseDeployDev)
-    },
-}
-
 
 const dev = () => {
     return {
@@ -115,7 +106,9 @@ export const bump = function () {
     if (this.options && (this.options["c"] || this.options["commit-docs"])) {
         run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
         build.prod()
-        build.commitDocs()
+        docs.gitStatus()
+        docs.commit()
+        docs.gitStatus()
         deploy.dev()
     } else {
         run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
@@ -124,11 +117,6 @@ export const bump = function () {
 
 const travisRunPrefix = TRAVIS ? "sysconfcpus -n 2" : ""
 export const build = {
-    commitDocs: function () {
-        docs.gitStatus()
-        docs.commit()
-        docs.gitStatus()
-    },
     dev: function () {
         console.info("build:dev")
         run("rimraf dev")
@@ -147,6 +135,17 @@ export const build = {
         run("cp -R app/build/unbundled/ docs")
     }
 }
+
+export const deploy = {
+    prod(){
+        run(firebaseDeployProd)
+    },
+    dev(){
+        run(firebaseDeployDev)
+    },
+}
+
+
 
 export function dummy(...args) {
     console.log("running dummy", this.options, args)

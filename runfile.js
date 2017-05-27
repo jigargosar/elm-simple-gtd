@@ -32,7 +32,6 @@ export const travis = {
         dev: () => {
             run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
             run("echo $TRAVIS_COMMIT_MESSAGE")
-            console.log(commit, commitMsg)
             run(`firebase deploy ${firebaseDevOpts} `
                 + `-m "travis: "$TRAVIS_COMMIT_MESSAGE" https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
         },

@@ -503,23 +503,26 @@ editView edit =
 
                     --                    , autofocus True
                     , defaultValue (edit.todo.text)
+                    , onInput edit.onTodoTextChanged
                     ]
                     []
                 , Html.label [] [ text "Todo" ]
                 ]
-            , Html.node "paper-textarea"
-                [ class "_auto-focus"
-                , stringProperty "label" "Todo"
-                , value (edit.todo.text)
 
-                -- for when we need custom handling for enter key
-                , property "keyBindings" Json.Encode.null
+            {- , Html.node "paper-textarea"
+               [ class "_auto-focus"
+               , stringProperty "label" "Todo"
+               , value (edit.todo.text)
 
-                -- so that space key doesn't buble up
-                , boolProperty "stopKeyboardEventPropagation" True
-                , onInput edit.onTodoTextChanged
-                ]
-                []
+               -- for when we need custom handling for enter key
+               , property "keyBindings" Json.Encode.null
+
+               -- so that space key doesn't buble up
+               , boolProperty "stopKeyboardEventPropagation" True
+               , onInput edit.onTodoTextChanged
+               ]
+               []
+            -}
             ]
         , defaultOkCancelDeleteButtons edit.onDeleteClicked
         ]

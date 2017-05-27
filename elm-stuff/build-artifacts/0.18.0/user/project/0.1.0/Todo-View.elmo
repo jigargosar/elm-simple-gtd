@@ -46,7 +46,11 @@ var _user$project$Todo_View$editView = function (edit) {
 											_1: {
 												ctor: '::',
 												_0: _elm_lang$html$Html_Attributes$defaultValue(edit.todo.text),
-												_1: {ctor: '[]'}
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onInput(edit.onTodoTextChanged),
+													_1: {ctor: '[]'}
+												}
 											}
 										}
 									},
@@ -64,39 +68,7 @@ var _user$project$Todo_View$editView = function (edit) {
 									_1: {ctor: '[]'}
 								}
 							}),
-						_1: {
-							ctor: '::',
-							_0: A3(
-								_elm_lang$html$Html$node,
-								'paper-textarea',
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('_auto-focus'),
-									_1: {
-										ctor: '::',
-										_0: A2(_edvail$elm_polymer$Polymer_Attributes$stringProperty, 'label', 'Todo'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$value(edit.todo.text),
-											_1: {
-												ctor: '::',
-												_0: A2(_elm_lang$html$Html_Attributes$property, 'keyBindings', _elm_lang$core$Json_Encode$null),
-												_1: {
-													ctor: '::',
-													_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
-													_1: {
-														ctor: '::',
-														_0: _elm_lang$html$Html_Events$onInput(edit.onTodoTextChanged),
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}
-									}
-								},
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					}),
 				_1: {
 					ctor: '::',

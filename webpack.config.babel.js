@@ -1,11 +1,14 @@
-const webpack = require('webpack');
-const path = require("path");
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+import webpack from "webpack"
+import path from "path"
+import ServiceWorkerWebpackPlugin from "serviceworker-webpack-plugin"
+import _ from "ramda"
 
 const nodeENV = process.env.NODE_ENV
 console.log(`webpack: process.env.NODE_ENV: "${nodeENV}"`)
+const envList = ["development", "production"]
 
-if (nodeENV !== "development" && nodeENV !== "production"){
+
+if (!_.contains(nodeENV)(envList)) {
     console.error("webpack: Error process.env.NODE_ENV invalid", nodeENV)
     process.exit(1)
 }
@@ -16,7 +19,6 @@ console.log("webpack: isDevEnv: ", isDevEnv)
 
 
 const outputDir = isDevEnv ? "dev" : "app"
-
 
 export default {
     resolve: {
@@ -41,23 +43,12 @@ export default {
             "process.env": JSON.stringify(process.env)
         }),
         new ServiceWorkerWebpackPlugin({
-            options: {"foo": "bar"},
             entry: './src/web/notification-sw.js',
             filename: "notification-sw.js",
             template: function () {
-                return Promise.resolve(
-                    serviceWorkerTemplate(
-                        isDevEnv ? "http://localhost:8020/" : "https://simplegtd.com/"
-                    )
-                )
+                return Promise.resolve(serviceWorkerTemplate)
             }
         }),
-        // new webpack.ProvidePlugin({
-        //     firebase:"firebase"
-        // }),
-        // new HtmlWebpackPlugin({ title: 'Example', template: './index.html' }),
-        // new webpack.LoaderOptionsPlugin({ options: { postcss: [ autoprefixer ] } })
-        // new WriteFilePlugin(),
         new webpack.optimize.CommonsChunkPlugin({
             name: "common",
             minChunks: 2
@@ -109,10 +100,8 @@ export default {
 };
 
 
-const serviceWorkerTemplate = url =>
+const serviceWorkerTemplate =
     `
-        const url = "${url}";
-        
         const isDevEnv = ${isDevEnv};
     
     `

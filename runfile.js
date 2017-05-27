@@ -30,8 +30,8 @@ const TRAVIS_COMMIT = process.env["TRAVIS_COMMIT"]
 const TRAVIS_COMMIT_MESSAGE = process.env["TRAVIS_COMMIT_MESSAGE"]
 const TRAVIS_BRANCH = process.env["TRAVIS_BRANCH"]
 
-const firebaseDevOpts = `--project dev --public dev/build/unbundled --token ${FIREBASE_TOKEN}`
-const firebaseProdOpts = `--project prod --public docs --token ${FIREBASE_TOKEN}`
+const firebaseDeployDev = `firebase deploy --except functions --project dev --public dev/build/unbundled --token ${FIREBASE_TOKEN}`
+const firebaseDeployProd = `firebase deploy --except functions --project prod --public docs --token ${FIREBASE_TOKEN}`
 
 const doesTravisTagMatchReleaseSemVer =
     _.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, TRAVIS_TAG)
@@ -43,13 +43,13 @@ function validateNotPullRequest() {
 }
 
 function validateBranchOrTag() {
-    if(doesTravisTagMatchReleaseSemVer || TRAVIS_BRANCH === "master"){
+    if (doesTravisTagMatchReleaseSemVer || TRAVIS_BRANCH === "master") {
         return
     }
     throw new Error("Won't build/deploy for branches other than master or non-sem-ver tags.")
 }
 
-function travisValidate(){
+function travisValidate() {
     console.info("TRAVIS_BRANCH=", TRAVIS_BRANCH)
     console.info("TRAVIS_TAG=", TRAVIS_TAG)
     console.info("TRAVIS_PULL_REQUEST=", TRAVIS_PULL_REQUEST)
@@ -61,13 +61,11 @@ export const travis = {
         travisValidate()
 
         if (doesTravisTagMatchReleaseSemVer) {
-            run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)
+            run(`${firebaseDeployProd} -m "travis: ${TRAVIS_TAG}"`)
 
-        } else  {
-            run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
-            run("echo $TRAVIS_COMMIT_MESSAGE")
-            run(`firebase deploy ${firebaseDevOpts} `
-                + `-m "travis: ${TRAVIS_COMMIT_MESSAGE} https://github.com/jigargosar/elm-simple-gtd/commit/${TRAVIS_COMMIT}"`)
+        } else {
+            run(firebaseDeployDev
+                + ` -m "travis: ${TRAVIS_COMMIT_MESSAGE} https://github.com/jigargosar/elm-simple-gtd/commit/${TRAVIS_COMMIT}"`)
         }
     },
     build(){
@@ -82,22 +80,11 @@ export const travis = {
 }
 
 export const deploy = {
-    prod(deployFunctions = false){
-        if (deployFunctions) {
-            run(`firebase deploy ${firebaseProdOpts}`)
-        }
-        else {
-            run(`firebase deploy --except functions ${firebaseProdOpts}`)
-        }
+    prod(){
+        run(firebaseDeployProd)
     },
-    dev(deployFunctions = false){
-        // build.dev()
-        if (deployFunctions) {
-            run(`firebase deploy ${firebaseDevOpts}`)
-        }
-        else {
-            run(`firebase deploy --except functions ${firebaseDevOpts}`)
-        }
+    dev(){
+        run(firebaseDeployDev)
     },
 }
 

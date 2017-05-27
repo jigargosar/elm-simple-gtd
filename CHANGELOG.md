@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.11 - 2017-05-27
 * [fix] increasing limit of todo shown on a page to 50, since our grouped views filter by todo count, certain context are not shown at all. 
   * we need to restrict number of todo per group. Perhaps its time for refactoring entity list into tree 
 

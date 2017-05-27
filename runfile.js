@@ -21,8 +21,8 @@ export const docs = {
         run(`git commit -m '${getDocsCommitMsg()}'`)
     }
 }
-const firebaseDevOpts = "--project dev --public dev/build/unbundled"
-const firebaseProdOpts = "--project prod --public docs"
+const firebaseDevOpts = "--project dev --public dev/build/unbundled --token $FIREBASE_TOKEN"
+const firebaseProdOpts = "--project prod --public docs --token $FIREBASE_TOKEN"
 export const travis = {
 
     deploy: {
@@ -30,10 +30,10 @@ export const travis = {
             run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
             run("echo $TRAVIS_COMMIT_MESSAGE")
             console.log(commit, commitMsg)
-            run(`firebase deploy ${firebaseDevOpts} --token $FIREBASE_TOKEN `
+            run(`firebase deploy ${firebaseDevOpts} `
                 + `-m "travis: "$TRAVIS_COMMIT_MESSAGE" https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
         },
-        prod: () => run(`firebase deploy ${firebaseProdOpts} --token $FIREBASE_TOKEN -m "travis: $TRAVIS_TAG"`)
+        prod: () => run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)
     },
     build(tagName, pullRequest){
         if (arguments.length !== 2) {

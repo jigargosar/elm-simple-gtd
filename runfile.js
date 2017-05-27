@@ -26,11 +26,12 @@ const firebaseProdOpts = "--project prod --public docs"
 export const travis = {
 
     deploy: {
-        dev: (commit = "<no commit>", commitMsg = "<no message>") => {
+        dev: () => {
             console.log(commit, commitMsg)
-            run(`firebase deploy ${firebaseDevOpts} --token $FIREBASE_TOKEN_DEV -m "travis: ${commitMsg} https://github.com/jigargosar/elm-simple-gtd/commit/${commit} "`)
+            run(`firebase deploy ${firebaseDevOpts} --token $FIREBASE_TOKEN_DEV `
+                + `-m "travis: "$TRAVIS_COMMIT_MESSAGE" https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
         },
-        prod: (tagName) => run(`firebase deploy ${firebaseProdOpts} --token $FIREBASE_TOKEN_PROD -m "travis: ${tagName}"`)
+        prod: () => run(`firebase deploy ${firebaseProdOpts} --token $FIREBASE_TOKEN_PROD -m "travis: $TRAVIS_TAG"`)
     },
     build(tagName, pullRequest){
         if (arguments.length !== 2) {

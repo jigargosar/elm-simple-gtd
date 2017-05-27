@@ -1,7 +1,11 @@
-## Upcoming
+## Later
 * [minor] get rid of top level polymer ux components, it is extremely painful to work with existing components when we need to change some behaviour. 
     * polymer ux components were good as long as one is happy with default behaviour.
     * for example: we can't set defaultValue on paper-input, and setting value causes cursor jumps. So we have to revert to using ports, since it does not play well with materializecss.com expandable textarea.
+
+## Upcoming
+* travis: simplify firebase token 
+
 
 ## v0.15.0 - 2017-05-26
 * [feature] set new todo project/context based on focused entity

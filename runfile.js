@@ -21,8 +21,8 @@ export const docs = {
         run(`git commit -m '${getDocsCommitMsg()}'`)
     }
 }
-const firebaseDevOpts = "--project dev --public dev/build/unbundled --token $FIREBASE_TOKEN"
-const firebaseProdOpts = "--project prod --public docs --token $FIREBASE_TOKEN"
+const firebaseDevOpts = `--project dev --public dev/build/unbundled --token "$FIREBASE_TOKEN"`
+const firebaseProdOpts = `--project prod --public docs --token "$FIREBASE_TOKEN"`
 export const travis = {
 
     deploy: {

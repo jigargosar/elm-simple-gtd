@@ -119,7 +119,7 @@ export const build = {
         run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
         const travisPrefix = travis ? "sysconfcpus -n 2" : ""
-        run(`${travisPrefix} webpack --progress`, prod().buildRunOptions)
+        run(`${travisPrefix} webpack -p --progress`, prod().buildRunOptions)
         run("polymer --version", {cwd: "app"})
         run(`${travisPrefix} polymer build`, {cwd: "app"})
         run("cp -R app/build/unbundled/ docs")

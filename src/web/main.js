@@ -139,10 +139,6 @@ async function boot() {
                     const originalHeight = $textarea.height()
                     console.log("original height", $textarea.height())
                     $textarea.focus()
-                    /**
-                     * Instead of resizing textarea on document load,
-                     * store the original height and the original length
-                     */
                     $textarea.data("original-height", originalHeight);
                     $textarea.data("previous-length", $textarea.val().length);
                     // console.log($textArea)

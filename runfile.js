@@ -101,19 +101,23 @@ export const bump = () => {
     deploy.dev()
 }
 
+console.log(this)
+
 export const build = {
     commitDocs(){
         docs.gitStatus()
         docs.commit()
         docs.gitStatus()
     },
-    dev(travis = false){
-        run("rimraf dev")
+    dev:function(travis = false){
+        console.log(this)
+        dummy.bind(this)()
+        /*run("rimraf dev")
         run("cp -R static/ dev")
         const travisPrefix = travis ? "sysconfcpus -n 2" : ""
         run(`${travisPrefix} webpack --progress`, dev().buildRunOptions)
         run("polymer --version", {cwd: "dev"})
-        run(`${travisPrefix} polymer build`, {cwd: "dev"})
+        run(`${travisPrefix} polymer build`, {cwd: "dev"})*/
     },
     prod(travis = false){
         run("rimraf app && rimraf docs && rimraf build")
@@ -127,7 +131,13 @@ export const build = {
 }
 
 export function dummy(...args) {
-    console.log(this.options , args)
+    console.log("running dummy", this.options , args)
+    console.log("calling dummy 2, passing options")
+    dummy2.apply(this, args)
+}
+
+export function dummy2(...args) {
+    console.log("running dummy2", this.options , args)
 }
 
 dummy.help = 'logs all options and args to console'

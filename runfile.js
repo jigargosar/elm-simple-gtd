@@ -22,7 +22,10 @@ export const docs = {
     }
 }
 
-const FIREBASE_TOKEN = process.env.FIREBASE_TOKEN
+const FIREBASE_TOKEN = process.env["FIREBASE_TOKEN"]
+const TRAVIS_TAG = process.env["TRAVIS_TAG"]
+const TRAVIS_PULL_REQUEST = process.env["TRAVIS_PULL_REQUEST"]
+const TRAVIS = process.env["TRAVIS"]
 
 const firebaseDevOpts = `--project dev --public dev/build/unbundled --token ${FIREBASE_TOKEN}`
 const firebaseProdOpts = `--project prod --public docs --token ${FIREBASE_TOKEN}`
@@ -37,22 +40,15 @@ export const travis = {
         },
         prod: () => run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)
     },
-    build(tagName, pullRequest){
-        if (arguments.length !== 2) {
-            throw new Error(
-                `cannot build without tagName and pullRequest arguments
-                tagName = ${tagName} pullRequest = ${pullRequest}
-                `)
-        }
-
-        if (pullRequest !== "false") {
+    build(){
+        if (TRAVIS_PULL_REQUEST !== "false") {
             throw new Error("wont build for pull request !== 'false'")
         }
 
-        if (_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, tagName)) {
-            build.prod(true)
+        if (_.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, TRAVIS_TAG)) {
+            build.prod()
         } else {
-            build.dev(true)
+            build.dev()
         }
     }
 }
@@ -111,27 +107,26 @@ export const bump = function () {
     deploy.dev()
 }
 
+const travisRunPrefix = TRAVIS ? "sysconfcpus -n 2" : ""
 export const build = {
     commitDocs: function () {
         docs.gitStatus()
         docs.commit()
         docs.gitStatus()
     },
-    dev: function (travis = false) {
+    dev: function () {
         run("rimraf dev")
         run("cp -R static/ dev")
-        const travisPrefix = travis ? "sysconfcpus -n 2" : ""
-        run(`${travisPrefix} webpack --progress`, dev().buildRunOptions)
+        run(`${travisRunPrefix} webpack --progress`, dev().buildRunOptions)
         run("polymer --version", {cwd: "dev"})
-        run(`${travisPrefix} polymer build`, {cwd: "dev"})
+        run(`${travisRunPrefix} polymer build`, {cwd: "dev"})
     },
-    prod: function (travis = false) {
+    prod: function () {
         run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
-        const travisPrefix = travis ? "sysconfcpus -n 2" : ""
-        run(`${travisPrefix} webpack --progress`, prod().buildRunOptions)
+        run(`${travisRunPrefix} webpack --progress`, prod().buildRunOptions)
         run("polymer --version", {cwd: "app"})
-        run(`${travisPrefix} polymer build`, {cwd: "app"})
+        run(`${travisRunPrefix} polymer build`, {cwd: "app"})
         run("cp -R app/build/unbundled/ docs")
     }
 }

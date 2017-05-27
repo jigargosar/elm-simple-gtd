@@ -40,7 +40,7 @@ function validateNotPullRequest() {
     }
 }
 export const travis = {
-    deploy: function(){
+    deploy: function () {
         validateNotPullRequest()
 
         if (doesTravisTagMatchReleaseSemVer) {
@@ -54,12 +54,12 @@ export const travis = {
         }
 
         /*dev: () => {
-            run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
-            run("echo $TRAVIS_COMMIT_MESSAGE")
-            run(`firebase deploy ${firebaseDevOpts} `
-                + `-m "travis: "$TRAVIS_COMMIT_MESSAGE" https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
-        },
-        prod: () => run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)*/
+         run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
+         run("echo $TRAVIS_COMMIT_MESSAGE")
+         run(`firebase deploy ${firebaseDevOpts} `
+         + `-m "travis: "$TRAVIS_COMMIT_MESSAGE" https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
+         },
+         prod: () => run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)*/
     },
     build(){
         validateNotPullRequest()
@@ -115,15 +115,15 @@ export const hotmon = () => {
         dev().buildRunOptions)
 }
 
-export const testBump = () => {
-    run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
-}
-
 export const bump = function () {
-    run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
-    build.prod()
-    build.commitDocs()
-    deploy.dev()
+    if (this.options && (this.options["c"] || this.options["commit-docs"])) {
+        run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
+        build.prod()
+        build.commitDocs()
+        deploy.dev()
+    } else {
+        run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
+    }
 }
 
 const travisRunPrefix = TRAVIS ? "sysconfcpus -n 2" : ""

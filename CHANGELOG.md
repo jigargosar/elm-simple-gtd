@@ -3,7 +3,7 @@
     * polymer ux components were good as long as one is happy with default behaviour.
     * for example: we can't set defaultValue on paper-input, and setting value causes cursor jumps. So we have to revert to using ports, since it does not play well with materializecss.com expandable textarea.
 
-## Upcoming
+## v0.16.0 - 2017-05-27
 * travis: simplify firebase token 
 
 

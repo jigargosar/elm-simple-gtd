@@ -15,6 +15,7 @@ if (!_.contains(nodeENV)(envList)) {
 const isDevEnv = nodeENV === "development"
 console.log("webpack: isDevEnv: ", isDevEnv)
 
+
 const outputDir = isDevEnv ? "dev" : "app"
 
 export default {
@@ -56,7 +57,10 @@ export default {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: function (fileName) {
+                    return !_.test(/crypto-random-string/, fileName)
+                           && _.test(/(node_modules|bower_components)/, fileName)
+                },
                 use: 'babel-loader',
             },
             {

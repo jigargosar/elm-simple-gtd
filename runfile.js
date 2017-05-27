@@ -143,7 +143,7 @@ export const build = {
         console.info("build:prod")
         run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
-        run(`${travisRunPrefix} webpack --progress`, prod().buildRunOptions)
+        run(`${travisRunPrefix} webpack -p --progress`, prod().buildRunOptions)
         run("polymer --version", {cwd: "app"})
         run(`${travisRunPrefix} polymer build`, {cwd: "app"})
         run("cp -R app/build/unbundled/ docs")

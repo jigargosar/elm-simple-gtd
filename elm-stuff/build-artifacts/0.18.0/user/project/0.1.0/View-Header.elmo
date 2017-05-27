@@ -64,7 +64,7 @@ var _user$project$View_Header$defaultHeader = function (m) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$h2,
+				_elm_lang$html$Html$h4,
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$class('ellipsis'),

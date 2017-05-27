@@ -112,7 +112,7 @@ defaultHeader m =
                 ?= Paper.item [ onClick Msg.SignIn ] [ text "SignIn" ]
     in
         div [ class "flex-auto layout horizontal justified center" ]
-            [ h2 [ class "ellipsis" ] [ title |> text ]
+            [ h4 [ class "ellipsis" ] [ title |> text ]
             , div []
                 [ Paper.menuButton
                     [ dynamicAlign

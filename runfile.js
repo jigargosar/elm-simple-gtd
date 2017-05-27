@@ -126,12 +126,8 @@ export const build = {
     }
 }
 
-export function createcomponent(name) {
-
+export function dummy(...args) {
+    console.log(this.options , args)
 }
 
-export function lint(path = '.') {
-    this.options.fix ? run(`eslint ${path} --fix`) : run(`eslint ${path}`)
-}
-
-lint.help = 'Do linting for javascript files'
+dummy.help = 'logs all options and args to console'

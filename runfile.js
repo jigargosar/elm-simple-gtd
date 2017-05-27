@@ -41,34 +41,42 @@ function validateNotPullRequest() {
         throw new Error("wont build for pull request !== 'false'")
     }
 }
+
+function validateBranchAndTag() {
+    if(doesTravisTagMatchReleaseSemVer || TRAVIS_BRANCH === "master"){
+        return
+    }
+    throw new Error("Won't deploy/build for branches other than master or non-sem-ver tags.")
+}
+
+function travisValidate(){
+    validateNotPullRequest()
+    validateBranchAndTag()
+}
 export const travis = {
     deploy: function () {
-        validateNotPullRequest()
+        travisValidate()
 
         if (doesTravisTagMatchReleaseSemVer) {
             run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)
 
-        } else if (TRAVIS_BRANCH === "master") {
+        } else  {
             run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
             run("echo $TRAVIS_COMMIT_MESSAGE")
             run(`firebase deploy ${firebaseDevOpts} `
                 + `-m "travis: ${TRAVIS_COMMIT_MESSAGE} https://github.com/jigargosar/elm-simple-gtd/commit/${TRAVIS_COMMIT}"`)
-        } else {
-            throw new Error("Won't deploy for branches other than master or non-sem-ver tags.")
         }
     },
     build(){
         console.info("TRAVIS_BRANCH=", TRAVIS_BRANCH)
         console.info("TRAVIS_TAG=", TRAVIS_TAG)
         console.info("TRAVIS_PULL_REQUEST=", TRAVIS_PULL_REQUEST)
-        validateNotPullRequest()
+        travisValidate()
 
         if (doesTravisTagMatchReleaseSemVer) {
             build.prod()
-        } else if (TRAVIS_BRANCH === "master") {
-            build.dev()
         } else {
-            throw new Error("Won't build for branches other than master or non-sem-ver tags.")
+            build.dev()
         }
     }
 }

@@ -27,6 +27,8 @@ export const travis = {
 
     deploy: {
         dev: () => {
+            run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
+            run("echo $TRAVIS_COMMIT_MESSAGE")
             console.log(commit, commitMsg)
             run(`firebase deploy ${firebaseDevOpts} --token $FIREBASE_TOKEN_DEV `
                 + `-m "travis: "$TRAVIS_COMMIT_MESSAGE" https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)

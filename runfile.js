@@ -26,7 +26,7 @@ const firebaseProdOpts = "--project prod --public docs"
 export const travis = {
 
     deploy: {
-        dev: (commit="<no commit>", commitMsg="<no message>") => {
+        dev: (commit = "<no commit>", commitMsg = "<no message>") => {
             console.log(commit, commitMsg)
             run(`firebase deploy ${firebaseDevOpts} --token $FIREBASE_TOKEN_DEV -m "travis: ${commitMsg} https://github.com/jigargosar/elm-simple-gtd/commit/${commit} "`)
         },
@@ -75,26 +75,31 @@ export const deploy = {
 
 const dev = () => {
     return {
-        buildRunOptions: {env: {NODE_ENV: "development", npm_package_version: fetchPackageJson().version}}
+        buildRunOptions: {
+            env: {NODE_ENV: "development", npm_package_version: fetchPackageJson().version}
+        }
     }
 }
 const prod = () => {
     return {
-        buildRunOptions: {env: {NODE_ENV: "production", npm_package_version: fetchPackageJson().version}}
+        buildRunOptions: {
+            env: {NODE_ENV: "production", npm_package_version: fetchPackageJson().version}
+        }
     }
 }
 
 export const hot = runF(`webpack-dev-server --hot --inline`, dev().buildRunOptions)
 
 export const hotmon = () => {
-    run(`nodemon --watch runfile.js --watch webpack.config.babel.js --watch package.json --exec "run hot"`, dev().buildRunOptions)
+    run(`nodemon --watch runfile.js --watch webpack.config.babel.js --watch package.json --exec "run hot"`,
+        dev().buildRunOptions)
 }
 
 export const testBump = () => {
     run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
 }
 
-export const bump = () => {
+export const bump = function () {
     run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
     build.prod()
     build.commitDocs()
@@ -104,22 +109,20 @@ export const bump = () => {
 console.log(this)
 
 export const build = {
-    commitDocs(){
+    commitDocs: function () {
         docs.gitStatus()
         docs.commit()
         docs.gitStatus()
     },
-    dev:function(travis = false){
-        console.log(this)
-        dummy.bind(this)()
-        /*run("rimraf dev")
+    dev: function (travis = false) {
+        run("rimraf dev")
         run("cp -R static/ dev")
         const travisPrefix = travis ? "sysconfcpus -n 2" : ""
         run(`${travisPrefix} webpack --progress`, dev().buildRunOptions)
         run("polymer --version", {cwd: "dev"})
-        run(`${travisPrefix} polymer build`, {cwd: "dev"})*/
+        run(`${travisPrefix} polymer build`, {cwd: "dev"})
     },
-    prod(travis = false){
+    prod: function (travis = false) {
         run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
         const travisPrefix = travis ? "sysconfcpus -n 2" : ""
@@ -131,13 +134,13 @@ export const build = {
 }
 
 export function dummy(...args) {
-    console.log("running dummy", this.options , args)
+    console.log("running dummy", this.options, args)
     console.log("calling dummy 2, passing options")
     dummy2.apply(this, args)
 }
 
 export function dummy2(...args) {
-    console.log("running dummy2", this.options , args)
+    console.log("running dummy2", this.options, args)
 }
 
 dummy.help = 'logs all options and args to console'

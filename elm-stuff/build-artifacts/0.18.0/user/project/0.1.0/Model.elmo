@@ -570,7 +570,7 @@ var _user$project$Model$getTodoListForCurrentView = function (model) {
 	var filter = _user$project$Model$getTodoListFilterForCurrentView(model);
 	return A2(
 		_elm_lang$core$List$take,
-		25,
+		50,
 		A2(
 			_elm_lang$core$List$sortBy,
 			sortFunction,

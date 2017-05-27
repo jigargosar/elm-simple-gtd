@@ -128,16 +128,43 @@ async function boot() {
         })
     })
 
+    const text_area_selector = ".materialize-textarea"
+    $('body').on('autoresize', text_area_selector, function () {
+        console.log("autoresize triggered", this)
+    });
+    
     app.ports["focusPaperInput"].subscribe((selector) => {
+        console.log("focusPaperInput: selector",selector)
+        setTimeout(()=>{
+            requestAnimationFrame(()=>{
+                const $textArea = $(selector)
+                $textArea.focus()
+
+                $(text_area_selector).each(function () {
+                    const $textarea = $(this)
+                    const originalHeight = $textarea.height()
+                    console.log("original height", $textarea.height())
+                    /**
+                     * Instead of resizing textarea on document load,
+                     * store the original height and the original length
+                     */
+                    $textarea.data("original-height", originalHeight);
+                    $textarea.data("previous-length", $textarea.val().length);
+                });
+                console.log($textArea)
+                $textArea.trigger('autoresize')
+            })
+        },10)
+
         setTimeout(() => {
             requestAnimationFrame(() => {
                 const toFocus = document.querySelector(selector)
                 // console.log("toFocus", toFocus, document.activeElement)
-                if (toFocus && document.activeElement !== toFocus) {
+                /*if (toFocus && document.activeElement !== toFocus) {
                     toFocus.focus()
                 } else {
                     // console.log("not focusing")
-                }
+                }*/
                 if (toFocus && toFocus.inputElement) {
                     // console.log(toFocus.inputElement, toFocus.$.input)
                     toFocus.inputElement.focus()

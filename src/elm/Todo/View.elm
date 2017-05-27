@@ -498,10 +498,9 @@ editView edit =
         [ div [ class "flex" ]
             [ div [ class "input-field", onKeyDownStopPropagation (\_ -> commonMsg.logString "sp") ]
                 [ Html.textarea
-                    [ class "materialize-textarea"
-                    , attribute "data-original-height" "0"
+                    [ class "materialize-textarea auto-focus"
 
-                    --                    , autofocus True
+                    --                    , attribute "data-original-height" "0"
                     , defaultValue (edit.todo.text)
                     , onInput edit.onTodoTextChanged
                     ]

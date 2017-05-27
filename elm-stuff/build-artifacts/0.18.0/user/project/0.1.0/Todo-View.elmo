@@ -39,18 +39,14 @@ var _user$project$Todo_View$editView = function (edit) {
 									_elm_lang$html$Html$textarea,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('materialize-textarea'),
+										_0: _elm_lang$html$Html_Attributes$class('materialize-textarea auto-focus'),
 										_1: {
 											ctor: '::',
-											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-original-height', '0'),
+											_0: _elm_lang$html$Html_Attributes$defaultValue(edit.todo.text),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$defaultValue(edit.todo.text),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onInput(edit.onTodoTextChanged),
-													_1: {ctor: '[]'}
-												}
+												_0: _elm_lang$html$Html_Events$onInput(edit.onTodoTextChanged),
+												_1: {ctor: '[]'}
 											}
 										}
 									},

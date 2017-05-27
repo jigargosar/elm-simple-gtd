@@ -33,7 +33,8 @@ const TRAVIS_BRANCH = process.env["TRAVIS_BRANCH"]
 const firebaseDevOpts = `--project dev --public dev/build/unbundled --token ${FIREBASE_TOKEN}`
 const firebaseProdOpts = `--project prod --public docs --token ${FIREBASE_TOKEN}`
 
-const doesTravisTagMatchReleaseSemVer = _.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, TRAVIS_TAG)
+const doesTravisTagMatchReleaseSemVer =
+    _.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, TRAVIS_TAG)
 
 function validateNotPullRequest() {
     if (TRAVIS_PULL_REQUEST !== "false") {
@@ -47,29 +48,27 @@ export const travis = {
         if (doesTravisTagMatchReleaseSemVer) {
             run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)
 
-        } else {
+        } else if (TRAVIS_BRANCH === "master") {
             run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
             run("echo $TRAVIS_COMMIT_MESSAGE")
             run(`firebase deploy ${firebaseDevOpts} `
                 + `-m "travis: ${TRAVIS_COMMIT_MESSAGE} https://github.com/jigargosar/elm-simple-gtd/commit/${TRAVIS_COMMIT}"`)
+        } else {
+            throw new Error("Won't deploy for branches other than master or non-sem-ver tags.")
         }
-
-        /*dev: () => {
-         run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
-         run("echo $TRAVIS_COMMIT_MESSAGE")
-         run(`firebase deploy ${firebaseDevOpts} `
-         + `-m "travis: "$TRAVIS_COMMIT_MESSAGE" https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
-         },
-         prod: () => run(`firebase deploy ${firebaseProdOpts}  -m "travis: $TRAVIS_TAG"`)*/
     },
     build(){
-        console.log("TRAVIS_BRANCH=",TRAVIS_BRANCH)
+        console.info("TRAVIS_BRANCH=", TRAVIS_BRANCH)
+        console.info("TRAVIS_TAG=", TRAVIS_TAG)
+        console.info("TRAVIS_PULL_REQUEST=", TRAVIS_PULL_REQUEST)
         validateNotPullRequest()
 
         if (doesTravisTagMatchReleaseSemVer) {
             build.prod()
-        } else {
+        } else if (TRAVIS_BRANCH === "master") {
             build.dev()
+        } else {
+            throw new Error("Won't build for branches other than master or non-sem-ver tags.")
         }
     }
 }
@@ -136,6 +135,7 @@ export const build = {
         docs.gitStatus()
     },
     dev: function () {
+        console.info("build:dev")
         run("rimraf dev")
         run("cp -R static/ dev")
         run(`${travisRunPrefix} webpack --progress`, dev().buildRunOptions)
@@ -143,6 +143,7 @@ export const build = {
         run(`${travisRunPrefix} polymer build`, {cwd: "dev"})
     },
     prod: function () {
+        console.info("build:prod")
         run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
         run(`${travisRunPrefix} webpack --progress`, prod().buildRunOptions)

@@ -135,13 +135,10 @@ async function boot() {
                 // $(".materialize-textarea").each(function () {
                 $(selector).each(function () {
                     const $textarea = $(this)
-                    console.log($textarea)
                     const originalHeight = $textarea.height()
-                    console.log("original height", $textarea.height())
-                    $textarea.focus()
                     $textarea.data("original-height", originalHeight);
                     $textarea.data("previous-length", $textarea.val().length);
-                    // console.log($textArea)
+                    $textarea.focus()
                     $textarea.trigger('autoresize')
                 });
 

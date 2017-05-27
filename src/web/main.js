@@ -129,31 +129,28 @@ async function boot() {
     })
 
     app.ports["focusPaperInput"].subscribe((selector) => {
-        console.log("focusPaperInput: selector",selector)
-        setTimeout(()=>{
-            requestAnimationFrame(()=>{
-                // $(".materialize-textarea").each(function () {
-                $(selector).each(function () {
-                    const $textarea = $(this)
-                    const originalHeight = $textarea.height()
-                    $textarea.data("original-height", originalHeight);
-                    $textarea.data("previous-length", $textarea.val().length);
-                    $textarea.focus()
-                    $textarea.trigger('autoresize')
-                });
+        // console.log("focusPaperInput: selector",selector)
+        requestAnimationFrame(() => {
+            $(".materialize-textarea.auto-focus").each(function () {
+                const $textarea = $(this)
+                const originalHeight = $textarea.height()
+                $textarea.data("original-height", originalHeight);
+                $textarea.data("previous-length", $textarea.val().length);
+                $textarea.focus()
+                $textarea.trigger('autoresize')
+            });
 
-            })
-        },0)
+        })
 
         setTimeout(() => {
             requestAnimationFrame(() => {
                 const toFocus = document.querySelector(selector)
                 // console.log("toFocus", toFocus, document.activeElement)
-                /*if (toFocus && document.activeElement !== toFocus) {
-                    toFocus.focus()
-                } else {
-                    // console.log("not focusing")
-                }*/
+                if (toFocus && document.activeElement !== toFocus) {
+                 toFocus.focus()
+                 } else {
+                 // console.log("not focusing")
+                 }
                 if (toFocus && toFocus.inputElement) {
                     // console.log(toFocus.inputElement, toFocus.$.input)
                     toFocus.inputElement.focus()

@@ -427,7 +427,7 @@ reminderView vm =
                 ]
                 [ reminderTrigger
                 , div
-                    [ class "static dropdown-content"
+                    [ class "static"
                     , attribute "slot" "dropdown-content"
                     ]
                     [ div [ class "font-subhead" ] [ text "Select date and time" ]

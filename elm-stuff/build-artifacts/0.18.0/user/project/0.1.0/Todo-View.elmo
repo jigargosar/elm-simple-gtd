@@ -569,7 +569,7 @@ var _user$project$Todo_View$reminderView = function (vm) {
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('static dropdown-content'),
+						_0: _elm_lang$html$Html_Attributes$class('static'),
 						_1: {
 							ctor: '::',
 							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-content'),

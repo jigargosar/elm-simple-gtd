@@ -4,9 +4,6 @@ const _ = require("ramda")
 
 const cryptoRandomString = require('crypto-random-string');
 
-require("./pcss/main.pcss")
-
-
 const sound = require("./sound")
 const $ = require("jquery")
 window.jQuery = $

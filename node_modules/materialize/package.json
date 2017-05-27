@@ -1,0 +1,16 @@
+{
+  "name": "materialize",
+  "version": "1.0.0",
+  "description": "Turn a list into an object",
+  "keywords": ["array-to-object", "properties", "ast" ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fgnass/materialize.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "author": "Felix Gnass <fgnass@gmail.com>",
+  "license": "MIT"
+}

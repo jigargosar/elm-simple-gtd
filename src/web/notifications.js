@@ -1,6 +1,7 @@
 "use strict";
 import _ from "ramda"
-export const setup = setupNotifications
+
+export default {setup : setupNotifications}
 
 async function setupNotifications(app) {
     console.info("Setting up notification ports and sw registration")

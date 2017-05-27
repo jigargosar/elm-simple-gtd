@@ -1,20 +1,16 @@
 "use strict";
 
-const _ = require("ramda")
-
-const cryptoRandomString = require('crypto-random-string');
-
-const sound = require("./sound")
-const $ = require("jquery")
-window.jQuery = $
-require("./jquery.trap")
-require("jquery-ui/ui/position")
-const Notifications = require("./notifications")
+import sound from "./sound"
 import Fire from "./fire"
 import DB from "./pouchdb-wrapper"
+import $ from "jquery"
+import _ from "ramda"
+import Notifications from "./notifications"
+import cryptoRandomString from "crypto-random-string"
 
 
-const developmentMode = IS_DEVELOPMENT_ENV
+//noinspection JSUnresolvedVariable
+const isDevelopmentMode = IS_DEVELOPMENT_ENV
 
 window.addEventListener('WebComponentsReady', () => {
     boot().catch(console.error)
@@ -74,7 +70,7 @@ async function boot() {
         // encodedProjectList: [],
         // encodedContextList: [],
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
-        developmentMode: developmentMode,
+        developmentMode: isDevelopmentMode,
         appVersion: npmPackageVersion,
         deviceId
     }

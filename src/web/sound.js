@@ -2,7 +2,7 @@
 
 import howler from "howler"
 
-module.exports= (function () {
+export default  (function () {
     const Howl = howler.Howl
 
     const sound = new Howl({

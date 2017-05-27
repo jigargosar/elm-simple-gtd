@@ -38,20 +38,23 @@ const doesTravisTagMatchReleaseSemVer =
 
 function validateNotPullRequest() {
     if (TRAVIS_PULL_REQUEST !== "false") {
-        throw new Error("wont build for pull request !== 'false'")
+        throw new Error("wont build/deploy for pull request !== 'false'")
     }
 }
 
-function validateBranchAndTag() {
+function validateBranchOrTag() {
     if(doesTravisTagMatchReleaseSemVer || TRAVIS_BRANCH === "master"){
         return
     }
-    throw new Error("Won't deploy/build for branches other than master or non-sem-ver tags.")
+    throw new Error("Won't build/deploy for branches other than master or non-sem-ver tags.")
 }
 
 function travisValidate(){
+    console.info("TRAVIS_BRANCH=", TRAVIS_BRANCH)
+    console.info("TRAVIS_TAG=", TRAVIS_TAG)
+    console.info("TRAVIS_PULL_REQUEST=", TRAVIS_PULL_REQUEST)
     validateNotPullRequest()
-    validateBranchAndTag()
+    validateBranchOrTag()
 }
 export const travis = {
     deploy: function () {
@@ -68,9 +71,6 @@ export const travis = {
         }
     },
     build(){
-        console.info("TRAVIS_BRANCH=", TRAVIS_BRANCH)
-        console.info("TRAVIS_TAG=", TRAVIS_TAG)
-        console.info("TRAVIS_PULL_REQUEST=", TRAVIS_PULL_REQUEST)
         travisValidate()
 
         if (doesTravisTagMatchReleaseSemVer) {

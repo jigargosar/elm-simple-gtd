@@ -5,8 +5,6 @@ var serviceWorkerOption = {
   ]
 };
         
-        const url = "https://simplegtd.com/";
-        
         const isDevEnv = false;
     
     
@@ -180,7 +178,7 @@ function displayNotification(event) {
                 requiresInteraction: true,
                 sticky: true,
                 renotify: true,
-                tag: data.todoId,
+                tag: data.id,
                 vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
                 sound: "/alarm.ogg",
                 icon: "/logo.png",

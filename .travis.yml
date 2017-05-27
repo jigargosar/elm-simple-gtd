@@ -61,3 +61,6 @@ deploy:
       tags: true
       all_branches: true
 
+notifications:
+    slack: $JGC_SLACK_TOKEN
+

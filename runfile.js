@@ -109,8 +109,6 @@ export const bump = function () {
         docs.gitStatus()
         docs.commit()
         docs.gitStatus()
-        build.dev()
-        deploy.dev()
     } else {
         run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
     }

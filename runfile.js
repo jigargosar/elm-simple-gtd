@@ -21,8 +21,11 @@ export const docs = {
         run(`git commit -m '${getDocsCommitMsg()}'`)
     }
 }
-const firebaseDevOpts = `--project dev --public dev/build/unbundled --token "$FIREBASE_TOKEN"`
-const firebaseProdOpts = `--project prod --public docs --token "$FIREBASE_TOKEN"`
+
+const FIREBASE_TOKEN = process.env.FIREBASE_TOKEN
+
+const firebaseDevOpts = `--project dev --public dev/build/unbundled --token ${FIREBASE_TOKEN}`
+const firebaseProdOpts = `--project prod --public docs --token ${FIREBASE_TOKEN}`
 export const travis = {
 
     deploy: {
@@ -65,7 +68,7 @@ export const deploy = {
         }
     },
     dev(deployFunctions = false){
-        build.dev()
+        // build.dev()
         if (deployFunctions) {
             run(`firebase deploy ${firebaseDevOpts}`)
         }
@@ -108,8 +111,6 @@ export const bump = function () {
     build.commitDocs()
     deploy.dev()
 }
-
-console.log(this)
 
 export const build = {
     commitDocs: function () {

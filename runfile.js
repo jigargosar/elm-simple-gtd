@@ -26,6 +26,8 @@ const FIREBASE_TOKEN = process.env["FIREBASE_TOKEN"]
 const TRAVIS_TAG = process.env["TRAVIS_TAG"]
 const TRAVIS_PULL_REQUEST = process.env["TRAVIS_PULL_REQUEST"]
 const TRAVIS = process.env["TRAVIS"]
+const TRAVIS_COMMIT = process.env["TRAVIS_COMMIT"]
+const TRAVIS_COMMIT_MESSAGE = process.env["TRAVIS_COMMIT_MESSAGE"]
 
 const firebaseDevOpts = `--project dev --public dev/build/unbundled --token ${FIREBASE_TOKEN}`
 const firebaseProdOpts = `--project prod --public docs --token ${FIREBASE_TOKEN}`
@@ -48,7 +50,7 @@ export const travis = {
             run(`echo "https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
             run("echo $TRAVIS_COMMIT_MESSAGE")
             run(`firebase deploy ${firebaseDevOpts} `
-                + `-m "travis: $TRAVIS_COMMIT_MESSAGE https://github.com/jigargosar/elm-simple-gtd/commit/$TRAVIS_COMMIT"`)
+                + `-m "travis: ${TRAVIS_COMMIT_MESSAGE} https://github.com/jigargosar/elm-simple-gtd/commit/${TRAVIS_COMMIT}"`)
         }
 
         /*dev: () => {

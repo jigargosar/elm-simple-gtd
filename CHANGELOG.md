@@ -1,5 +1,5 @@
 ## Upcoming
-* migrating simplegtd.com domain to firebase hosting  
+* start process of migrating simplegtd.com domain to firebase hosting  
 
 ## v0.16.11 - 2017-05-27
 * [fix] increasing limit of todo shown on a page to 50, since our grouped views filter by todo count, certain context are not shown at all. 

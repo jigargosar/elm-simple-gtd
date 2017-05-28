@@ -14,11 +14,14 @@ require("kefir")
 
 
 // jquery
-const jQuery = require("jquery")
-window.jQuery = global.jQuery = jQuery
+
+// material auto-size fix.
+// const jQuery = require("jquery")
+// window.jQuery = global.jQuery = jQuery
 // window.$ = global.$ = jQuery
+// require("materialize-css")
+// require("materialize-css/js/forms.js")
 
 require("materialize-css")
-require("materialize-css/js/forms.js")
 require("./jquery.trap")
 require("jquery-ui/ui/position")

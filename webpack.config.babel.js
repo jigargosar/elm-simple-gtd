@@ -36,12 +36,12 @@ export default {
     },
 
     plugins: [
-        /*new webpack["ProvidePlugin"]({
+        new webpack["ProvidePlugin"]({
             $: "jquery",
             jQuery: "jquery",
             "window.jQuery": "jquery"
         }),
-        */new webpack.DefinePlugin({
+        new webpack.DefinePlugin({
             'IS_DEVELOPMENT_ENV': isDevEnv,
             "process.env": JSON.stringify(process.env)
         }),

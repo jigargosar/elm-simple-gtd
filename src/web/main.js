@@ -7,6 +7,7 @@ import $ from "jquery"
 import _ from "ramda"
 import Notifications from "./notifications"
 import cryptoRandomString from "crypto-random-string"
+import autosize from "autosize"
 
 
 //noinspection JSUnresolvedVariable
@@ -129,8 +130,17 @@ async function boot() {
     })
 
     app.ports["focusPaperInput"].subscribe((selector) => {
-        // console.log("focusPaperInput: selector",selector)
+        console.log("focusPaperInput: selector",selector)
         requestAnimationFrame(() => {
+            $(".materialize-textarea.auto-focus").each(function () {
+                const $textarea = $(this)
+                autosize($textarea);
+                $textarea.focus()
+            });
+        })
+
+        // old mat fix for auto-resize
+        /*requestAnimationFrame(() => {
             $(".materialize-textarea.auto-focus").each(function () {
                 const $textarea = $(this)
                 const originalHeight = $textarea.height()
@@ -139,8 +149,7 @@ async function boot() {
                 $textarea.focus()
                 $textarea.trigger('autoresize')
             });
-
-        })
+        })*/
 
         setTimeout(() => {
             requestAnimationFrame(() => {

@@ -46,6 +46,7 @@
     "webpack-dev-server": "2.4.5"
   },
   "dependencies": {
+    "autosize": "3.0.21",
     "babel-polyfill": "6.23.0",
     "crypto-random-string": "1.0.0",
     "howler": "2.0.3",

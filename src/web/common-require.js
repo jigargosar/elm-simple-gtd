@@ -14,9 +14,11 @@ require("kefir")
 
 
 // jquery
-const $ = require("jquery")
-window.jQuery = $
-require("materialize-css/dist/js/materialize.js")
+const jQuery = require("jquery")
+window.jQuery = global.jQuery = jQuery
+// window.$ = global.$ = jQuery
+
+require("materialize-css")
 require("materialize-css/js/forms.js")
 require("./jquery.trap")
 require("jquery-ui/ui/position")

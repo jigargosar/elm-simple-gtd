@@ -1,3 +1,6 @@
+## Upcoming
+* completed domain migration to firebase hosting 
+
 ## v0.16.12 - 2017-05-28
 * start process of migrating simplegtd.com domain to firebase hosting
 * [fix] auto-size input

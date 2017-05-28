@@ -133,9 +133,8 @@ async function boot() {
         console.log("focusPaperInput: selector",selector)
         requestAnimationFrame(() => {
             $(".materialize-textarea.auto-focus").each(function () {
-                const $textarea = $(this)
-                autosize($textarea);
-                $textarea.focus()
+                autosize(this);
+                this.focus()
             });
         })
 

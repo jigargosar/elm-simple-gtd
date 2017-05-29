@@ -109,8 +109,14 @@ export const bump = function () {
         docs.gitStatus()
         docs.commit()
         docs.gitStatus()
-    } else {
+    } else if (this.options && (this.options["d"] || this.options["dev-deploy"])) {
+        run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
+        build.dev()
+        deploy.dev()
+    }
+    else {
         run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
+
     }
 }
 
@@ -122,9 +128,9 @@ export const b = function () {
         process.exit(1)
     }
 
-    if(this.options.d){
+    if (this.options.d) {
         build.dev()
-    }else{
+    } else {
         build.prod()
     }
 }
@@ -149,12 +155,8 @@ export const build = {
 }
 
 export const deploy = {
-    prod(){
-        run(firebaseDeployProd)
-    },
-    dev(){
-        run(firebaseDeployDev)
-    },
+    prod:runF(firebaseDeployProd),
+    dev:runF(firebaseDeployDev),
 }
 
 

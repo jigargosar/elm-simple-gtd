@@ -140,6 +140,14 @@ encodeFCMToken =
     E.maybe E.string
 
 
+encodeClient client =
+    E.object
+        [ "id" => E.string client.id
+        , "token" => E.maybe E.string client.token
+        , "connected" => E.bool client.connected
+        ]
+
+
 customSw =
     boolProperty "customSw" True
 
@@ -150,6 +158,10 @@ type alias AppAttributes =
 
 setTokenCmd deviceId uid fcmToken =
     fireDataWrite ( "/users/" ++ uid ++ "/tokens/" ++ deviceId, encodeFCMToken fcmToken )
+
+
+updateClientCmd uid client =
+    fireDataWrite ( "/users/" ++ uid ++ "/clients/" ++ client.id, encodeClient client )
 
 
 scheduledReminderNotificationCmd : Maybe Time -> String -> String -> Cmd msg

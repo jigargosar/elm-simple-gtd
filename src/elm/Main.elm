@@ -468,6 +468,12 @@ firebaseUpdateTokenCmd model =
     Model.getMaybeUserId model ?|> Firebase.setTokenCmd model.deviceId # model.fcmToken ?= Cmd.none
 
 
+firebaseUpdateClientCmd model =
+    Model.getMaybeUserId model
+        ?|> (Firebase.setTokenCmd model.deviceId # model.fcmToken)
+        ?= Cmd.none
+
+
 scheduleReminderNotificationForMaybeTodoIdCmd : Maybe Todo.Id -> Model -> Cmd msg
 scheduleReminderNotificationForMaybeTodoIdCmd maybeTodoId model =
     maybeTodoId

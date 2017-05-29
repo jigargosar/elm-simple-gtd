@@ -1,4 +1,29 @@
 var _user$project$Firebase$customSw = A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'customSw', true);
+var _user$project$Firebase$encodeClient = function (client) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$Ext_Function_Infix_ops['=>'],
+				'id',
+				_elm_lang$core$Json_Encode$string(client.id)),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Ext_Function_Infix_ops['=>'],
+					'token',
+					A2(_elm_community$json_extra$Json_Encode_Extra$maybe, _elm_lang$core$Json_Encode$string, client.token)),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Ext_Function_Infix_ops['=>'],
+						'connected',
+						_elm_lang$core$Json_Encode$bool(client.connected)),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
 var _user$project$Firebase$encodeFCMToken = _elm_community$json_extra$Json_Encode_Extra$maybe(_elm_lang$core$Json_Encode$string);
 var _user$project$Firebase$getPhotoURL = function (_) {
 	return _.photoURL;
@@ -53,6 +78,21 @@ var _user$project$Firebase$setTokenCmd = F3(
 						uid,
 						A2(_elm_lang$core$Basics_ops['++'], '/tokens/', deviceId))),
 				_1: _user$project$Firebase$encodeFCMToken(fcmToken)
+			});
+	});
+var _user$project$Firebase$updateClientCmd = F2(
+	function (uid, client) {
+		return _user$project$Firebase$fireDataWrite(
+			{
+				ctor: '_Tuple2',
+				_0: A2(
+					_elm_lang$core$Basics_ops['++'],
+					'/users/',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						uid,
+						A2(_elm_lang$core$Basics_ops['++'], '/clients/', client.id))),
+				_1: _user$project$Firebase$encodeClient(client)
 			});
 	});
 var _user$project$Firebase$scheduledReminderNotificationCmd = F3(

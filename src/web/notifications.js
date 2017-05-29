@@ -55,7 +55,7 @@ const closeNotification = reg => async (tag) => {
 const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
     console.info(connected, msg)
     const {tag, title, data} = msg
-    const notifyMsg = {todoId: tag, title, uid}
+    const notifyMsg = {todoId: tag, tag, title, uid, serverTimestamp: firebase.database.ServerValue.TIMESTAMP}
 
     if (connected) {
         // fetch("https://us-central1-rational-mote-664.cloudfunctions.net/notificationCorn", {mode:"no-cors"})
@@ -64,7 +64,7 @@ const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
 
         fire
             .ref(`/users/${uid}/notify/${tag}`)
-            .set(_.merge(msg, {serverTimestamp: firebase.database.ServerValue.TIMESTAMP}))
+            .set(notifyMsg)
 
 
         // $.get('https://us-central1-rational-mote-664.cloudfunctions.net/sendPush', msg)

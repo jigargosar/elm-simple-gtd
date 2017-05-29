@@ -130,6 +130,7 @@ update msg =
                 OnUserChanged user ->
                     Return.map (Model.setUser user)
                         >> Return.maybeEffect firebaseUpdateTokenCmd
+                        >> Return.maybeEffect firebaseUpdateClientCmd
                         >> startSyncWithFirebase user
 
                 OnFCMTokenChanged token ->

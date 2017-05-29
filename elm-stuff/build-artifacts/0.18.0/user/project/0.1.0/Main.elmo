@@ -330,11 +330,14 @@ var _user$project$Main$update = function (msg) {
 								_p20,
 								A2(
 									_user$project$Ext_Return$maybeEffect,
-									_user$project$Main$firebaseUpdateTokenCmd,
+									_user$project$Main$firebaseUpdateClientCmd,
 									A2(
-										_Fresheyeball$elm_return$Return$map,
-										_user$project$Model$setUser(_p20),
-										_p19)));
+										_user$project$Ext_Return$maybeEffect,
+										_user$project$Main$firebaseUpdateTokenCmd,
+										A2(
+											_Fresheyeball$elm_return$Return$map,
+											_user$project$Model$setUser(_p20),
+											_p19))));
 						};
 					case 'OnFCMTokenChanged':
 						var _p23 = _p18._0;

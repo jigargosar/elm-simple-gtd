@@ -4,7 +4,7 @@ import $ from "jquery"
 
 export default {setup: setupNotifications}
 
-async function setupNotifications(app) {
+async function setupNotifications(fire, app) {
     console.info("Setting up notification ports and sw registration")
     if (!'serviceWorker' in navigator) {
         console.warn("serviceWorker not found in navigator")
@@ -39,7 +39,7 @@ async function setupNotifications(app) {
     }, 100)
 
 
-    app.ports["showNotification"].subscribe(showNotification(reg))
+    app.ports["showNotification"].subscribe(showNotification(fire, reg))
     app.ports["closeNotification"].subscribe(closeNotification(reg))
 
 }
@@ -52,7 +52,7 @@ const closeNotification = reg => async (tag) => {
     }
 }
 
-const showNotification = reg => async ([connected, msg]) => {
+const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
     console.info(connected, msg)
     const {tag, title, data} = msg
 
@@ -61,8 +61,8 @@ const showNotification = reg => async ([connected, msg]) => {
         //     .then(console.warn)
         //     .catch(console.error)
 
-        firebaseApp
-            .database().ref(`/users/${uid}/notify/${tag}`)
+        fire
+            .ref(`/users/${uid}/notify/${tag}`)
             .set(_.merge(msg, {serverTimestamp: firebase.database.ServerValue.TIMESTAMP}))
 
 

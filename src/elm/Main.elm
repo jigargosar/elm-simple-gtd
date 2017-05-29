@@ -42,11 +42,11 @@ import Model exposing (..)
 import View
 
 
-port showNotification : ( Bool, TodoNotification ) -> Cmd msg
+port showNotification : ( String, Bool, TodoNotification ) -> Cmd msg
 
 
 showNotificationCmd =
-    curry showNotification
+    curry3 showNotification
 
 
 port closeNotification : String -> Cmd msg
@@ -400,7 +400,11 @@ scheduleReminderNotifications ( todo, model ) =
 
 
 showTodoNotificationCmd todo model =
-    createTodoNotification todo |> showNotificationCmd model.firebaseClient.connected
+    let
+        result uid =
+            createTodoNotification todo |> showNotificationCmd uid model.firebaseClient.connected
+    in
+        model |> Model.getMaybeUserId ?|> result ?= Cmd.none
 
 
 withNow : (Time -> Msg) -> ReturnF

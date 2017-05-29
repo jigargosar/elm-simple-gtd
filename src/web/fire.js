@@ -43,7 +43,6 @@ export const setup = (app, dbList) => {
     })
 
 
-
     function startReplicationToFirebase(uid, db) {
         const lasSeqKey = `pouch-fire-sync.${db.name}.out.lastSeq`
         const lastSeqString = localStorage.getItem(lasSeqKey)
@@ -117,7 +116,7 @@ export const setup = (app, dbList) => {
             .map(doc =>
                 db.getClean(doc._id)
                   .then(_.omit(["_rev"]))
-                  .then(_.equals(_.omit(["firebaseServerPersistedAt"],doc)))
+                  .then(_.equals(_.omit(["firebaseServerPersistedAt"], doc)))
                   .then((docsSame) => {
                       if (docsSame) {
                           updateKey(doc)
@@ -175,6 +174,11 @@ export const setup = (app, dbList) => {
             .signOut()
             .catch(console.error)
     })
+    return {
+        ref(...args){
+            return firebaseApp.database().ref(...args)
+        }
+    }
 }
 
 export default {

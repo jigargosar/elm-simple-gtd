@@ -79,7 +79,7 @@ async function boot() {
     const app = Elm["Main"]
         .embed(document.getElementById("elm-app-container"), flags)
 
-    Fire.setup(app, _.values(dbMap))
+    const fire = Fire.setup(app, _.values(dbMap))
 
     _.mapObjIndexed((db, name) => db.onChange(
         (doc) => {
@@ -98,7 +98,7 @@ async function boot() {
         dbMap[dbName].upsert(id, doc).catch(console.error)
     });
 
-    Notifications.setup(app).catch(console.error)
+    Notifications.setup(fire, app).catch(console.error)
 
     app.ports["focusSelector"].subscribe((selector) => {
         // setTimeout(() => {

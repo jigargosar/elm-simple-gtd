@@ -133,20 +133,31 @@ var _user$project$Main$showNotification = _elm_lang$core$Native_Platform.outgoin
 	function (v) {
 		return [
 			v._0,
+			v._1,
 			{
-			title: v._1.title,
-			tag: v._1.tag,
-			data: {id: v._1.data.id}
+			title: v._2.title,
+			tag: v._2.tag,
+			data: {id: v._2.data.id}
 		}
 		];
 	});
-var _user$project$Main$showNotificationCmd = _elm_lang$core$Basics$curry(_user$project$Main$showNotification);
+var _user$project$Main$showNotificationCmd = _danielnarey$elm_toolkit$Toolkit_Helpers$curry3(_user$project$Main$showNotification);
 var _user$project$Main$showTodoNotificationCmd = F2(
 	function (todo, model) {
+		var result = function (uid) {
+			return A3(
+				_user$project$Main$showNotificationCmd,
+				uid,
+				model.firebaseClient.connected,
+				_user$project$Main$createTodoNotification(todo));
+		};
 		return A2(
-			_user$project$Main$showNotificationCmd,
-			model.firebaseClient.connected,
-			_user$project$Main$createTodoNotification(todo));
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				_user$project$Model$getMaybeUserId(model),
+				result),
+			_elm_lang$core$Platform_Cmd$none);
 	});
 var _user$project$Main$scheduleReminderNotifications = function (_p3) {
 	var _p4 = _p3;

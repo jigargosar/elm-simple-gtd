@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.13 - 2017-05-29
 * completed domain migration to firebase hosting 
 
 ## v0.16.12 - 2017-05-28

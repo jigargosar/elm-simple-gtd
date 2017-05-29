@@ -67,6 +67,12 @@ function getUserTokenMap(uid) {
                 .then(getMapFromSnapshot)
 }
 
+function getUserClients(uid) {
+    return admin.database().ref("/users/" + uid + "/clients").once("value")
+                .then(getMapFromSnapshot)
+                .then(_.values)
+}
+
 function getMapFromSnapshot(snapshot) {
     const map = {}
     snapshot.forEach(entry => {

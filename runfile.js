@@ -103,7 +103,7 @@ export const hotmon = () => {
 }
 
 export const bump = function () {
-    if (this.options && (this.options["d"] || this.options["commit-docs"])) {
+    if (this.options && (this.options["g"] || this.options["github-commit-docs"])) {
         run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
         build.prod()
         docs.gitStatus()

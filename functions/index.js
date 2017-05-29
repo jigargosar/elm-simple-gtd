@@ -82,24 +82,25 @@ function getMapFromSnapshot(snapshot) {
 }
 
 function sendPushNotifications(notificationMap) {
-    const getUserTokenMapMemo = _.memoize(getUserTokenMap)
+    const getUserClientsMemo = _.memoize(getUserClients)
     const promiseList = []
     notificationMap.forEach(notificationEntry => {
         const notificationData = notificationEntry.val()
         const uid = notificationData.uid
-        promiseList.push(getUserTokenMapMemo(uid).then(sendPush(notificationData)))
+        promiseList.push(getUserClientsMemo(uid).then(sendPush(notificationData)))
     })
     return Promise.all(promiseList)
 }
 
-const sendPush = notificationData => tokenMap => {
-    console.log("tokenMap", tokenMap)
+const sendPush = notificationData => clients => {
+    console.log("clients", clients)
     const {todoId, timestamp, uid} = notificationData
-    function sendPushForDevice(token, deviceId){
+
+    function sendPushForClient(client) {
         return admin
             .messaging()
             .sendToDevice(
-                token,
+                client.token,
                 {data: {todoId, timestamp: "" + timestamp, uid}},
                 {timeToLive: tenMinutes, priority: "high"}
             )
@@ -108,17 +109,16 @@ const sendPush = notificationData => tokenMap => {
                     return mdResult.error && mdResult.error.code === "messaging/registration-token-not-registered"
                 })
                 if (tokenUnregistered) {
-                    return deleteToken(uid, deviceId)
+                    return deleteToken(uid, client.id)
                         .then(res => ({error: {mdRes, deleteTokenRes: res}}))
                 }
                 return mdRes
             })
     }
-    return Promise.all(
-        _.compose(_.values, _.mapObjIndexed(sendPushForDevice))(tokenMap)
-    )
+
+    return Promise.all(_.map(sendPushForClient, clients))
 }
 
 function deleteToken(uid, deviceId) {
-    return admin.database().ref(`/users/${uid}/token/${deviceId}`).set(null)
+    return admin.database().ref(`/users/${uid}/clients/${deviceId}/token`).set(null)
 }

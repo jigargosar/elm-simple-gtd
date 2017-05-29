@@ -87,7 +87,12 @@ function sendPushNotifications(notificationMap) {
     notificationMap.forEach(notificationEntry => {
         const notificationData = notificationEntry.val()
         const uid = notificationData.uid
-        promiseList.push(getUserClientsMemo(uid).then(sendPush(notificationData)))
+        const clients = getUserClientsMemo(uid)
+        const isAnyClientConnected = _.any(_.prop("connected"), clients)
+        if (isAnyClientConnected) {
+            console.log("ignoring push, since we have at least one connected client.", notificationData, clients)
+        }
+        promiseList.push(clients.then(sendPush(notificationData)))
     })
     return Promise.all(promiseList)
 }

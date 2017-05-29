@@ -42,7 +42,11 @@ import Model exposing (..)
 import View
 
 
-port showNotification : TodoNotification -> Cmd msg
+port showNotification : ( Bool, TodoNotification ) -> Cmd msg
+
+
+showNotificationCmd =
+    curry showNotification
 
 
 port closeNotification : String -> Cmd msg
@@ -385,11 +389,18 @@ onUpdateNow now =
 
 
 scheduleReminderNotifications ( todo, model ) =
-    model ! [ showTodoNotificationCmd todo, scheduleReminderNotificationHelp todo model ]
+    model ! [ showTodoNotificationCmd todo model, scheduleReminderNotificationHelp todo model ]
 
 
-showTodoNotificationCmd =
-    createTodoNotification >> showNotification >> (::) # [ startAlarm () ] >> Cmd.batch
+
+{-
+   showTodoNotificationCmd =
+       createTodoNotification >> showNotification >> (::) # [ startAlarm () ] >> Cmd.batch
+-}
+
+
+showTodoNotificationCmd todo model =
+    createTodoNotification todo |> showNotificationCmd model.firebaseClient.connected
 
 
 withNow : (Time -> Msg) -> ReturnF

@@ -137,7 +137,7 @@ exports.onNotify =
             const newData = event.data.val()
             const uid = event.params["uid"]
 
-            if(!oldData && newData){
+            if (!oldData && newData || oldData && newData && oldData.timestamp < newData.timestamp) {
                 sendPush(newData)(getUserClients(uid))
             }
         })

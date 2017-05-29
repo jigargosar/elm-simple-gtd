@@ -1,3 +1,6 @@
+## Upcoming
+* [fix] notifications: step 1: store client info  
+
 ## v0.16.13 - 2017-05-29
 * completed domain migration to firebase hosting 
 

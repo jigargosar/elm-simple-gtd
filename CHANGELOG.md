@@ -1,3 +1,8 @@
+## Upcoming
+* [fix] notifications: step 2: functions: 
+    * ignore push if at least one client is connected.
+    * functions: use user clients instead of user tokens to send push
+
 ## v0.16.14 - 2017-05-29
 * [fix] notifications: step 1: store client info  
 

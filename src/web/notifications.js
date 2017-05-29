@@ -55,6 +55,7 @@ const closeNotification = reg => async (tag) => {
 const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
     console.info(connected, msg)
     const {tag, title, data} = msg
+    const notifyMsg = {todoId: tag, title, uid}
 
     if (connected) {
         // fetch("https://us-central1-rational-mote-664.cloudfunctions.net/notificationCorn", {mode:"no-cors"})

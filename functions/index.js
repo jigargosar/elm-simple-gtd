@@ -127,3 +127,17 @@ const sendPush = notificationData => clients => {
 function deleteToken(uid, deviceId) {
     return admin.database().ref(`/users/${uid}/clients/${deviceId}/token`).set(null)
 }
+
+
+exports.onNotify =
+    functions
+        .database.ref("/users/{uid}/notify/{tag}")
+        .onWrite(event =>{
+            const oldData = event.data.previous.val();
+            const newData = event.data.val()
+            const uid = event.params["uid"]
+
+            if(!oldData && newData){
+                sendPush(newData)(getUserClients(uid))
+            }
+        })

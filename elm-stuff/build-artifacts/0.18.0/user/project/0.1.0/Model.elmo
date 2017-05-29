@@ -982,12 +982,6 @@ var _user$project$Model$toggleLayoutForceNarrow = _user$project$Model$updateLayo
 			layout,
 			{forceNarrow: !layout.forceNarrow});
 	});
-var _user$project$Model$setFCMToken = F2(
-	function (fcmToken, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{fcmToken: fcmToken});
-	});
 var _user$project$Model$inboxEntity = _user$project$Entity$ContextEntity(_user$project$Context$null);
 var _user$project$Model$setIn = F3(
 	function (big, lens, small) {
@@ -1119,6 +1113,33 @@ var _user$project$Model$updateNewTodoText = F2(
 			_user$project$EditMode$NewTodo(
 				A2(_user$project$Todo_NewForm$setText, text, form)));
 	});
+var _user$project$Model$firebaseClient = {
+	get: function (_) {
+		return _.firebaseClient;
+	},
+	set: F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{firebaseClient: s});
+		})
+};
+var _user$project$Model$setFCMToken = F2(
+	function (fcmToken, model) {
+		return A3(
+			_user$project$Model$update,
+			_user$project$Model$firebaseClient,
+			_user$project$Firebase$updateToken(fcmToken),
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{fcmToken: fcmToken}));
+	});
+var _user$project$Model$updateFirebaseConnection = function (connected) {
+	return A2(
+		_user$project$Model$update,
+		_user$project$Model$firebaseClient,
+		_user$project$Firebase$updateConnection(connected));
+};
 var _user$project$Model$now = {
 	get: function (_) {
 		return _.now;

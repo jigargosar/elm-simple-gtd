@@ -154,6 +154,10 @@ now =
     { get = .now, set = (\s b -> { b | now = s }) }
 
 
+firebaseClient =
+    { get = .firebaseClient, set = (\s b -> { b | firebaseClient = s }) }
+
+
 editMode =
     { get = .editMode, set = (\s b -> { b | editMode = s }) }
 
@@ -248,6 +252,11 @@ setUser =
 
 setFCMToken fcmToken model =
     { model | fcmToken = fcmToken }
+        |> update firebaseClient (Firebase.updateToken fcmToken)
+
+
+updateFirebaseConnection connected =
+    update firebaseClient (Firebase.updateConnection connected)
 
 
 toggleLayoutForceNarrow =

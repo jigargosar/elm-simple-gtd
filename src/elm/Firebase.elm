@@ -148,6 +148,14 @@ encodeClient client =
         ]
 
 
+updateConnection connected client =
+    { client | connected = connected }
+
+
+updateToken token client =
+    { client | token = token }
+
+
 customSw =
     boolProperty "customSw" True
 
@@ -156,11 +164,11 @@ type alias AppAttributes =
     List ( String, String )
 
 
-setTokenCmd deviceId uid fcmToken =
+updateTokenCmd deviceId fcmToken uid =
     fireDataWrite ( "/users/" ++ uid ++ "/tokens/" ++ deviceId, encodeFCMToken fcmToken )
 
 
-updateClientCmd uid client =
+updateClientCmd client uid =
     fireDataWrite ( "/users/" ++ uid ++ "/clients/" ++ client.id, encodeClient client )
 
 

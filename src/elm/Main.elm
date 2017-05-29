@@ -129,7 +129,7 @@ update msg =
 
                 OnUserChanged user ->
                     Return.map (Model.setUser user)
-                        >> Return.effect_ firebaseUpdateTokenCmd
+                        >> Return.maybeEffect firebaseUpdateTokenCmd
                         >> startSyncWithFirebase user
 
                 OnFCMTokenChanged token ->
@@ -138,10 +138,11 @@ update msg =
                             Debug.log "fcm: token" (token)
                     in
                         Return.map (Model.setFCMToken token)
-                            >> Return.effect_ firebaseUpdateTokenCmd
+                            >> Return.maybeEffect firebaseUpdateTokenCmd
 
                 OnFirebaseConnectionChanged connected ->
-                    identity
+                    Return.map (Model.updateFirebaseConnection connected)
+                        >> Return.maybeEffect firebaseUpdateClientCmd
 
                 OnEntityListKeyDown entityList { key, isShiftDown } ->
                     case key of
@@ -465,13 +466,12 @@ onGlobalKeyUp key =
 
 
 firebaseUpdateTokenCmd model =
-    Model.getMaybeUserId model ?|> Firebase.setTokenCmd model.deviceId # model.fcmToken ?= Cmd.none
+    Model.getMaybeUserId model ?|> Firebase.updateTokenCmd model.deviceId model.fcmToken
 
 
 firebaseUpdateClientCmd model =
     Model.getMaybeUserId model
-        ?|> (Firebase.setTokenCmd model.deviceId # model.fcmToken)
-        ?= Cmd.none
+        ?|> Firebase.updateClientCmd model.firebaseClient
 
 
 scheduleReminderNotificationForMaybeTodoIdCmd : Maybe Todo.Id -> Model -> Cmd msg

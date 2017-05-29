@@ -1,4 +1,16 @@
 var _user$project$Firebase$customSw = A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'customSw', true);
+var _user$project$Firebase$updateToken = F2(
+	function (token, client) {
+		return _elm_lang$core$Native_Utils.update(
+			client,
+			{token: token});
+	});
+var _user$project$Firebase$updateConnection = F2(
+	function (connected, client) {
+		return _elm_lang$core$Native_Utils.update(
+			client,
+			{connected: connected});
+	});
 var _user$project$Firebase$encodeClient = function (client) {
 	return _elm_lang$core$Json_Encode$object(
 		{
@@ -65,8 +77,8 @@ var _user$project$Firebase$fireDataWrite = _elm_lang$core$Native_Platform.outgoi
 	function (v) {
 		return [v._0, v._1];
 	});
-var _user$project$Firebase$setTokenCmd = F3(
-	function (deviceId, uid, fcmToken) {
+var _user$project$Firebase$updateTokenCmd = F3(
+	function (deviceId, fcmToken, uid) {
 		return _user$project$Firebase$fireDataWrite(
 			{
 				ctor: '_Tuple2',
@@ -81,7 +93,7 @@ var _user$project$Firebase$setTokenCmd = F3(
 			});
 	});
 var _user$project$Firebase$updateClientCmd = F2(
-	function (uid, client) {
+	function (client, uid) {
 		return _user$project$Firebase$fireDataWrite(
 			{
 				ctor: '_Tuple2',

@@ -2,7 +2,7 @@
 import _ from "ramda"
 import $ from "jquery"
 
-export default {setup : setupNotifications}
+export default {setup: setupNotifications}
 
 async function setupNotifications(app) {
     console.info("Setting up notification ports and sw registration")
@@ -56,12 +56,21 @@ const showNotification = reg => async ([connected, msg]) => {
     console.info(connected, msg)
     const {tag, title, data} = msg
 
-    if(connected){
-        $.get('https://us-central1-rational-mote-664.cloudfunctions.net/sendPush', msg)
-         .then(console.warn)
-         .catch(console.error)
+    if (connected) {
+        // fetch("https://us-central1-rational-mote-664.cloudfunctions.net/notificationCorn", {mode:"no-cors"})
+        //     .then(console.warn)
+        //     .catch(console.error)
 
-    }else{
+        firebaseApp
+            .database().ref(`/users/${uid}/notify/${tag}`)
+            .set(_.merge(msg, {serverTimestamp: firebase.database.ServerValue.TIMESTAMP}))
+
+
+        // $.get('https://us-central1-rational-mote-664.cloudfunctions.net/sendPush', msg)
+        //  .then(console.warn)
+        //  .catch(console.error)
+
+    } else {
         const permission = await Notification.requestPermission()
         if (permission !== "granted") return
         reg.showNotification("", {
@@ -82,14 +91,14 @@ const showNotification = reg => async ([connected, msg]) => {
     }
 }
 
-const authenticatedRequest = function(method, url, body) {
+const authenticatedRequest = function (method, url, body) {
 
     if (!firebase.auth().currentUser) {
         throw new Error('Not authenticated. Make sure you\'re signed in!');
     }
 
     // Get the Firebase auth token to authenticate the request
-    return firebase.auth().currentUser.getToken().then(function(token) {
+    return firebase.auth().currentUser.getToken().then(function (token) {
         const request = {
             method: method,
             url: url,
@@ -103,7 +112,7 @@ const authenticatedRequest = function(method, url, body) {
         }
 
         console.log('Making authenticated request:', method, url);
-        return $.ajax(request).catch(function() {
+        return $.ajax(request).catch(function () {
             throw new Error('Request error: ' + method + ' ' + url);
         });
     });

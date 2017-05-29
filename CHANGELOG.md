@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.14 - 2017-05-29
 * [fix] notifications: step 1: store client info  
 
 ## v0.16.13 - 2017-05-29

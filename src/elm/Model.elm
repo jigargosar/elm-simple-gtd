@@ -64,6 +64,7 @@ type alias Model =
     , maybeFocusedEntity : Maybe Entity
     , appVersion : String
     , deviceId : String
+    , firebaseClient : Firebase.Client
     , focusInEntity : Entity.Entity
     }
 
@@ -199,6 +200,9 @@ init flags =
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.step storeGenerator (Random.seedFromTime now)
 
+        firebaseClient =
+            Firebase.initClient flags.deviceId
+
         model =
             { now = now
             , todoStore = todoStore
@@ -220,6 +224,7 @@ init flags =
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
             , focusInEntity = inboxEntity
+            , firebaseClient = firebaseClient
             }
     in
         model

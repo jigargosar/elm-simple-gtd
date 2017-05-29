@@ -37,5 +37,10 @@ init m =
             , customSw
             ]
             []
+         , Html.node "firebase-document"
+            [ attribute "path" ".info/connected"
+            , onConnectionChange Msg.OnFirebaseConnectionChanged
+            ]
+            []
          ]
         )

@@ -1428,7 +1428,9 @@ var _user$project$Model$Model = function (a) {
 																	return function (r) {
 																		return function (s) {
 																			return function (t) {
-																				return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, focusedEntityInfo: n, selectedEntityIdSet: o, layout: p, maybeFocusedEntity: q, appVersion: r, deviceId: s, focusInEntity: t};
+																				return function (u) {
+																					return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, focusedEntityInfo: n, selectedEntityIdSet: o, layout: p, maybeFocusedEntity: q, appVersion: r, deviceId: s, firebaseClient: t, focusInEntity: u};
+																				};
 																			};
 																		};
 																	};
@@ -1542,6 +1544,7 @@ var _user$project$Model$EntityListView = function (a) {
 	return {ctor: 'EntityListView', _0: a};
 };
 var _user$project$Model$init = function (flags) {
+	var firebaseClient = _user$project$Firebase$initClient(flags.deviceId);
 	var _p78 = flags;
 	var now = _p78.now;
 	var encodedTodoList = _p78.encodedTodoList;
@@ -1585,7 +1588,8 @@ var _user$project$Model$init = function (flags) {
 		maybeFocusedEntity: _elm_lang$core$Maybe$Nothing,
 		appVersion: flags.appVersion,
 		deviceId: flags.deviceId,
-		focusInEntity: _user$project$Model$inboxEntity
+		focusInEntity: _user$project$Model$inboxEntity,
+		firebaseClient: firebaseClient
 	};
 	return model;
 };

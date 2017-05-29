@@ -101,6 +101,9 @@ var _user$project$Msg$RemotePouchSync = function (a) {
 };
 var _user$project$Msg$SignOut = {ctor: 'SignOut'};
 var _user$project$Msg$SignIn = {ctor: 'SignIn'};
+var _user$project$Msg$OnFirebaseConnectionChanged = function (a) {
+	return {ctor: 'OnFirebaseConnectionChanged', _0: a};
+};
 var _user$project$Msg$OnFCMTokenChanged = function (a) {
 	return {ctor: 'OnFCMTokenChanged', _0: a};
 };

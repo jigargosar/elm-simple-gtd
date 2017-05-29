@@ -348,6 +348,8 @@ var _user$project$Main$update = function (msg) {
 									_user$project$Model$setFCMToken(_p23),
 									_p22));
 						};
+					case 'OnFirebaseConnectionChanged':
+						return _elm_lang$core$Basics$identity;
 					case 'OnEntityListKeyDown':
 						var _p27 = _p18._0;
 						var _p24 = _p18._1.key;

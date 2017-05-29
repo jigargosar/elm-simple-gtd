@@ -19,8 +19,12 @@ var _user$project$Firebase$getMaybeUserProfile = function (user) {
 		return _elm_lang$core$List$head(_p1._0.providerData);
 	}
 };
+var _user$project$Firebase$onConnectionChange = _user$project$WebComponents$onBoolPropertyChanged('data');
 var _user$project$Firebase$fcmTokenDecoder = _elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string);
 var _user$project$Firebase$onFCMTokenChanged = A2(_user$project$WebComponents$onPropertyChanged, 'token', _user$project$Firebase$fcmTokenDecoder);
+var _user$project$Firebase$initClient = function (deviceId) {
+	return {id: deviceId, connected: false, token: _elm_lang$core$Maybe$Nothing};
+};
 var _user$project$Firebase$signIn = _elm_lang$core$Native_Platform.outgoingPort(
 	'signIn',
 	function (v) {
@@ -155,6 +159,10 @@ var _user$project$Firebase$providerDataDecoder = A3(
 					'displayName',
 					_elm_lang$core$Json_Decode$string,
 					_elm_lang$core$Json_Decode$succeed(_user$project$Firebase$ProviderData))))));
+var _user$project$Firebase$Client = F3(
+	function (a, b, c) {
+		return {id: a, connected: b, token: c};
+	});
 var _user$project$Firebase$LoggedIn = function (a) {
 	return {ctor: 'LoggedIn', _0: a};
 };

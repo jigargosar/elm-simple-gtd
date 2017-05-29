@@ -40,7 +40,23 @@ var _user$project$Firebase_View$init = function (m) {
 						}
 					},
 					{ctor: '[]'}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_elm_lang$html$Html$node,
+						'firebase-document',
+						{
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'path', '.info/connected'),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Firebase$onConnectionChange(_user$project$Msg$OnFirebaseConnectionChanged),
+								_1: {ctor: '[]'}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };

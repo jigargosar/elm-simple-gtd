@@ -140,6 +140,9 @@ update msg =
                         Return.map (Model.setFCMToken token)
                             >> Return.effect_ firebaseUpdateTokenCmd
 
+                OnFirebaseConnectionChanged connected ->
+                    identity
+
                 OnEntityListKeyDown entityList { key, isShiftDown } ->
                     case key of
                         Key.ArrowUp ->

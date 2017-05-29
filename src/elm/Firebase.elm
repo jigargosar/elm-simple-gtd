@@ -57,6 +57,17 @@ type alias ProviderData =
     }
 
 
+type alias Client =
+    { id : String
+    , connected : Bool
+    , token : Maybe String
+    }
+
+
+initClient deviceId =
+    { id = deviceId, connected = False, token = Nothing }
+
+
 providerDataDecoder =
     D.succeed ProviderData
         |> D.required "displayName" D.string
@@ -93,6 +104,10 @@ fcmTokenDecoder =
 
 onFCMTokenChanged =
     onPropertyChanged "token" fcmTokenDecoder
+
+
+onConnectionChange =
+    onBoolPropertyChanged "data"
 
 
 getMaybeUserProfile user =

@@ -38,6 +38,7 @@ type Msg
     | OnFirebaseChange String D.Value
     | OnUserChanged Firebase.User
     | OnFCMTokenChanged Firebase.FCMToken
+    | OnFirebaseConnectionChanged Bool
     | SignIn
     | SignOut
     | RemotePouchSync EditMode.SyncForm

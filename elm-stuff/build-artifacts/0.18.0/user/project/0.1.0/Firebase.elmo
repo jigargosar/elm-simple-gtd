@@ -72,14 +72,14 @@ var _user$project$Firebase$signOut = _elm_lang$core$Native_Platform.outgoingPort
 	function (v) {
 		return null;
 	});
-var _user$project$Firebase$fireDataWrite = _elm_lang$core$Native_Platform.outgoingPort(
-	'fireDataWrite',
+var _user$project$Firebase$firebaseRefSet = _elm_lang$core$Native_Platform.outgoingPort(
+	'firebaseRefSet',
 	function (v) {
 		return [v._0, v._1];
 	});
 var _user$project$Firebase$updateTokenCmd = F3(
 	function (deviceId, fcmToken, uid) {
-		return _user$project$Firebase$fireDataWrite(
+		return _user$project$Firebase$firebaseRefSet(
 			{
 				ctor: '_Tuple2',
 				_0: A2(
@@ -94,7 +94,7 @@ var _user$project$Firebase$updateTokenCmd = F3(
 	});
 var _user$project$Firebase$updateClientCmd = F2(
 	function (client, uid) {
-		return _user$project$Firebase$fireDataWrite(
+		return _user$project$Firebase$firebaseRefSet(
 			{
 				ctor: '_Tuple2',
 				_0: A2(
@@ -140,7 +140,7 @@ var _user$project$Firebase$scheduledReminderNotificationCmd = F3(
 						});
 				}),
 			_elm_lang$core$Json_Encode$null);
-		return _user$project$Firebase$fireDataWrite(
+		return _user$project$Firebase$firebaseRefSet(
 			{
 				ctor: '_Tuple2',
 				_0: A2(
@@ -153,8 +153,8 @@ var _user$project$Firebase$scheduledReminderNotificationCmd = F3(
 				_1: value
 			});
 	});
-var _user$project$Firebase$fireDataPush = _elm_lang$core$Native_Platform.outgoingPort(
-	'fireDataPush',
+var _user$project$Firebase$firebaseRefPush = _elm_lang$core$Native_Platform.outgoingPort(
+	'firebaseRefPush',
 	function (v) {
 		return [v._0, v._1];
 	});
@@ -164,6 +164,16 @@ var _user$project$Firebase$fireStartSync = _elm_lang$core$Native_Platform.outgoi
 		return v;
 	});
 var _user$project$Firebase$startSyncCmd = _user$project$Firebase$fireStartSync;
+var _user$project$Firebase$firebaseSetupOnDisconnect = _elm_lang$core$Native_Platform.outgoingPort(
+	'firebaseSetupOnDisconnect',
+	function (v) {
+		return [v._0, v._1];
+	});
+var _user$project$Firebase$setupOnDisconnectCmd = F2(
+	function (client, uid) {
+		return _user$project$Firebase$firebaseSetupOnDisconnect(
+			{ctor: '_Tuple2', _0: uid, _1: client.id});
+	});
 var _user$project$Firebase$onFirebaseChange = _elm_lang$core$Native_Platform.incomingPort(
 	'onFirebaseChange',
 	A2(

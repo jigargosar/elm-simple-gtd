@@ -130,6 +130,7 @@ update msg =
                 OnUserChanged user ->
                     Return.map (Model.setUser user)
                         >> Return.maybeEffect firebaseUpdateClientCmd
+                        >> Return.maybeEffect firebaseSetupOnDisconnectCmd
                         >> startSyncWithFirebase user
 
                 OnFCMTokenChanged token ->
@@ -473,6 +474,11 @@ firebaseUpdateClientCmd model =
                 )
         >> Tuple2.toList
         >> Cmd.batch
+
+
+firebaseSetupOnDisconnectCmd model =
+    Model.getMaybeUserId model
+        ?|> Firebase.setupOnDisconnectCmd model.firebaseClient
 
 
 scheduleReminderNotificationForMaybeTodoIdCmd : Maybe Todo.Id -> Model -> Cmd msg

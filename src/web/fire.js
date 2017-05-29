@@ -43,12 +43,6 @@ export const setup = (app, dbList) => {
     })
 
 
-    app.ports["fireDataWrite"].subscribe(([path, value]) => {
-        // console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
-        const ref = firebaseApp.database().ref(path);
-        ref.set(value)
-           .catch(console.error)
-    })
 
     function startReplicationToFirebase(uid, db) {
         const lasSeqKey = `pouch-fire-sync.${db.name}.out.lastSeq`
@@ -157,8 +151,20 @@ export const setup = (app, dbList) => {
         })(dbList)
     })
 
+    app.ports["firebaseSetupOnDisconnect"].subscribe(([uid, deviceId]) => {
+        console.log("[FJS]:firebaseSetupOnDisconnect: called")
+        const connectedRef = firebaseApp.database().ref(`/users/${uid}/clients/${deviceId}/connected`)
+        connectedRef.onDisconnect().set(false)
+    })
 
-    app.ports["fireDataPush"].subscribe(([path, value]) => {
+    app.ports["firebaseRefSet"].subscribe(([path, value]) => {
+        // console.log(`firebaseApp.database().ref(path).set(value)`, {path, value})
+        const ref = firebaseApp.database().ref(path);
+        ref.set(value)
+           .catch(console.error)
+    })
+
+    app.ports["firebaseRefPush"].subscribe(([path, value]) => {
         console.log(`firebaseApp.database().ref(path).push(value)`, {path, value})
         firebaseApp.database().ref(path).push(value)
     })

@@ -16,19 +16,30 @@ import Json.Encode.Extra as E
 import Time exposing (Time)
 
 
+type alias UID =
+    String
+
+
+type alias DeviceId =
+    String
+
+
 port signIn : () -> Cmd msg
 
 
 port signOut : () -> Cmd msg
 
 
-port fireDataWrite : ( String, E.Value ) -> Cmd msg
+port firebaseRefSet : ( String, E.Value ) -> Cmd msg
 
 
-port fireDataPush : ( String, E.Value ) -> Cmd msg
+port firebaseRefPush : ( String, E.Value ) -> Cmd msg
 
 
 port fireStartSync : String -> Cmd msg
+
+
+port firebaseSetupOnDisconnect : ( UID, DeviceId ) -> Cmd msg
 
 
 port onFirebaseChange : (( String, E.Value ) -> msg) -> Sub msg
@@ -36,6 +47,10 @@ port onFirebaseChange : (( String, E.Value ) -> msg) -> Sub msg
 
 onChange tagger =
     onFirebaseChange (uncurry tagger)
+
+
+setupOnDisconnectCmd client uid =
+    firebaseSetupOnDisconnect ( uid, client.id )
 
 
 startSyncCmd =
@@ -58,7 +73,7 @@ type alias ProviderData =
 
 
 type alias Client =
-    { id : String
+    { id : DeviceId
     , connected : Bool
     , token : Maybe String
     }
@@ -165,11 +180,11 @@ type alias AppAttributes =
 
 
 updateTokenCmd deviceId fcmToken uid =
-    fireDataWrite ( "/users/" ++ uid ++ "/tokens/" ++ deviceId, encodeFCMToken fcmToken )
+    firebaseRefSet ( "/users/" ++ uid ++ "/tokens/" ++ deviceId, encodeFCMToken fcmToken )
 
 
 updateClientCmd client uid =
-    fireDataWrite ( "/users/" ++ uid ++ "/clients/" ++ client.id, encodeClient client )
+    firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, encodeClient client )
 
 
 scheduledReminderNotificationCmd : Maybe Time -> String -> String -> Cmd msg
@@ -186,4 +201,4 @@ scheduledReminderNotificationCmd maybeTime uid todoId =
                     )
                 ?= E.null
     in
-        fireDataWrite ( "/notifications/" ++ uid ++ "---" ++ todoId, value )
+        firebaseRefSet ( "/notifications/" ++ uid ++ "---" ++ todoId, value )

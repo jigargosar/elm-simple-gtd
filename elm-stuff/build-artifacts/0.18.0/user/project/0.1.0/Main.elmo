@@ -59,6 +59,12 @@ var _user$project$Main$scheduleReminderNotificationForMaybeTodoIdCmd = F2(
 				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Main$scheduleReminderNotificationCmd, model)),
 			_elm_lang$core$Platform_Cmd$none);
 	});
+var _user$project$Main$firebaseSetupOnDisconnectCmd = function (model) {
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+		_user$project$Model$getMaybeUserId(model),
+		_user$project$Firebase$setupOnDisconnectCmd(model.firebaseClient));
+};
 var _user$project$Main$firebaseUpdateClientCmd = function (model) {
 	return A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
@@ -335,11 +341,14 @@ var _user$project$Main$update = function (msg) {
 								_p21,
 								A2(
 									_user$project$Ext_Return$maybeEffect,
-									_user$project$Main$firebaseUpdateClientCmd,
+									_user$project$Main$firebaseSetupOnDisconnectCmd,
 									A2(
-										_Fresheyeball$elm_return$Return$map,
-										_user$project$Model$setUser(_p21),
-										_p20)));
+										_user$project$Ext_Return$maybeEffect,
+										_user$project$Main$firebaseUpdateClientCmd,
+										A2(
+											_Fresheyeball$elm_return$Return$map,
+											_user$project$Model$setUser(_p21),
+											_p20))));
 						};
 					case 'OnFCMTokenChanged':
 						var _p24 = _p19._0;

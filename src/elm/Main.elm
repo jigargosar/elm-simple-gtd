@@ -281,15 +281,6 @@ update msg =
                         >> focusSelectorIfNoFocusCmd ".entity-list > [tabindex=0]"
 
                 SaveCurrentForm ->
-                    {- Return.map
-                       (apply2
-                           ( Model.getMaybeEditTodoReminderForm >>? .id
-                           , Model.saveCurrentForm
-                           )
-                       )
-                       >> Return.andThen
-                           (apply2 ( Tuple.second, uncurry scheduleReminderNotificationForMaybeTodoIdCmd ))
-                    -}
                     Return.andThen Model.saveCurrentForm
                         >> andThenUpdate DeactivateEditingMode
 
@@ -384,28 +375,6 @@ andThenUpdateAll =
 
 setDomFocusToFocusedEntityCmd =
     (commonMsg.focus ".entity-list > [tabindex=0]")
-
-
-
-{-
-   onUpdateNow now =
-       Return.map (Model.setNow now)
-           >> Return.andThenMaybe
-               (Model.findAndSnoozeOverDueTodo
-                   >>? scheduleReminderNotifications
-               )
-
-
-   scheduleReminderNotifications ( todo, model ) =
-       model ! [ showTodoNotificationCmd todo model, scheduleReminderNotificationHelp todo model ]
-
-   showTodoNotificationCmd todo model =
-       let
-           result uid =
-               createTodoNotification todo |> showNotificationCmd uid model.firebaseClient.connected
-       in
-           model |> Model.getMaybeUserId ?|> result ?= Cmd.none
--}
 
 
 onUpdateNow now =
@@ -507,13 +476,6 @@ firebaseUpdateClientCmd model =
 firebaseSetupOnDisconnectCmd model =
     Model.getMaybeUserId model
         ?|> Firebase.setupOnDisconnectCmd model.firebaseClient
-
-
-scheduleReminderNotificationForMaybeTodoIdCmd : Maybe Todo.Id -> Model -> Cmd msg
-scheduleReminderNotificationForMaybeTodoIdCmd maybeTodoId model =
-    maybeTodoId
-        ?|> (scheduleReminderNotificationCmd # model)
-        ?= Cmd.none
 
 
 scheduleReminderNotificationCmd todoId model =

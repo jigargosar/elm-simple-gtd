@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.17 - 2017-05-30
 * [fix] notification: use event.waitUntil to fix bkg processing notification issue 
 
 ## v0.16.16 - 2017-05-30

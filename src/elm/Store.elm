@@ -192,7 +192,7 @@ updateAllT2 :
     -> Time
     -> (Document x -> Document x)
     -> Store x
-    -> Maybe (UpdateAllReturn x)
+    -> UpdateAllReturn x
 updateAllT2 idSet now updateFn store =
     let
         updateAndCollectChanges : Id -> UpdateAllReturnF x
@@ -204,8 +204,6 @@ updateAllT2 idSet now updateFn store =
             )
     in
         Set.foldl updateAndCollectChanges ( [], store ) idSet
-            |> Tuple2.mapEach List.toMaybe Just
-            |> maybe2Tuple
 
 
 updateAllDocs :

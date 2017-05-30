@@ -258,20 +258,15 @@ var _user$project$Store$updateAllT2 = F4(
 							_user$project$Ext_List$prependIn(_p17._0))),
 					_p17);
 			});
-		return _danielnarey$elm_toolkit$Toolkit_Helpers$maybe2Tuple(
-			A3(
-				_Fresheyeball$elm_tuple_extra$Tuple2$mapEach,
-				_user$project$Ext_List$toMaybe,
-				_elm_lang$core$Maybe$Just,
-				A3(
-					_elm_lang$core$Set$foldl,
-					updateAndCollectChanges,
-					{
-						ctor: '_Tuple2',
-						_0: {ctor: '[]'},
-						_1: store
-					},
-					idSet)));
+		return A3(
+			_elm_lang$core$Set$foldl,
+			updateAndCollectChanges,
+			{
+				ctor: '_Tuple2',
+				_0: {ctor: '[]'},
+				_1: store
+			},
+			idSet);
 	});
 var _user$project$Store$updateAllDocHelp = F3(
 	function (id, updateDocFn, store) {

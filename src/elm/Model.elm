@@ -1321,23 +1321,22 @@ type alias ModelReturnF msg =
 
 updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg
 updateTodo action todoId model =
-    updateMaybe todoStoreT2 (Todo.Store.update action model.now todoId) model
-        ?|> (\( changes, model ) ->
-                let
-                    _ =
-                        Debug.log "changes" (changes)
+    let
+        todoChangesToCmd ( changes, model ) =
+            case getMaybeUserId model of
+                Nothing ->
+                    Cmd.none
 
-                    cmds =
-                        changes
-                            .|> getNotificationCmdFromTodoChange
-                            |> Cmd.batch
-                in
-                    ( model, cmds )
-            )
-        ?= ( model, Cmd.none )
+                Just uid ->
+                    changes
+                        .|> getNotificationCmdFromTodoChange uid
+                        |> Cmd.batch
+    in
+        update todoStoreT2 (Todo.Store.update action model.now todoId) model
+            |> apply2 ( Tuple.second, todoChangesToCmd )
 
 
-getNotificationCmdFromTodoChange (( old, new ) as change) =
+getNotificationCmdFromTodoChange uid (( old, new ) as change) =
     if Todo.hasReminderChanged change then
         Cmd.none
     else

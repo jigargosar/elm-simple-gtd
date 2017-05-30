@@ -165,39 +165,39 @@ type alias UpdateAllReturnF x =
     UpdateAllReturn x -> UpdateAllReturn x
 
 
-updateDocT2 :
+updateT2 :
     Time
     -> (Document x -> Document x)
     -> Document.Id
     -> Store x
     -> Maybe (UpdateReturn x)
-updateDocT2 now updateFn =
-    updateDocT2Help (updateFn >> Document.setModifiedAt now)
+updateT2 now updateFn =
+    updateT2Help (updateFn >> Document.setModifiedAt now)
 
 
-updateDocT2Help :
+updateT2Help :
     (Document x -> Document x)
     -> Document.Id
     -> Store x
     -> Maybe (UpdateReturn x)
-updateDocT2Help updateFn id store =
+updateT2Help updateFn id store =
     findById id store
         ?|> apply2 ( identity, updateFn )
         >> apply2 ( identity, Tuple.second >> replaceDocIn store )
 
 
-updateAllDocsT2 :
+updateAllT2 :
     Set Document.Id
     -> Time
     -> (Document x -> Document x)
     -> Store x
     -> Maybe (UpdateAllReturn x)
-updateAllDocsT2 idSet now updateFn store =
+updateAllT2 idSet now updateFn store =
     let
         folder : Id -> UpdateAllReturnF x
         folder =
             (\id ( list, store ) ->
-                updateDocT2 now updateFn id store
+                updateT2 now updateFn id store
                     ?|> Tuple.mapFirst (List.prependIn list)
                     ?= ( list, store )
             )
@@ -205,13 +205,6 @@ updateAllDocsT2 idSet now updateFn store =
         Set.foldl folder ( [], store ) idSet
             |> Tuple2.mapEach List.toMaybe Just
             |> maybe2Tuple
-
-
-updateAllDocHelpT2 id updateDocFn store =
-    findById id store
-        ?|> updateDocFn
-        >> replaceDocIn store
-        ?= store
 
 
 updateAllDocs :

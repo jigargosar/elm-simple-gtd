@@ -119,6 +119,12 @@ export const bump = function () {
 
     }
 }
+bump.help  =
+    `
+        <no options>: bump and push, let travis handle the build.
+        -g --github-commit-docs: after bump, build and commit github docs for deployment
+        -d --dev-deploy: after bump, deploy to firebase dev.
+    `
 
 const travisRunPrefix = TRAVIS ? "sysconfcpus -n 2" : ""
 

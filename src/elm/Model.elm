@@ -1326,10 +1326,22 @@ updateTodo action todoId model =
                 let
                     _ =
                         Debug.log "changes" (changes)
+
+                    cmds =
+                        changes
+                            .|> getNotificationCmdFromTodoChange
+                            |> Cmd.batch
                 in
-                    ( model, Cmd.none )
+                    ( model, cmds )
             )
         ?= ( model, Cmd.none )
+
+
+getNotificationCmdFromTodoChange (( old, new ) as change) =
+    if Todo.hasReminderChanged change then
+        Cmd.none
+    else
+        Cmd.none
 
 
 updateAllTodos action todoIdSet model =

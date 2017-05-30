@@ -142,7 +142,7 @@ update actions now =
                         { model | done = done, reminder = reminder }
 
                 SetDeleted deleted ->
-                    { model | deleted = deleted, deletedAt = now }
+                    { model | deleted = deleted, deletedAt = now, reminder = None }
 
                 SetText text ->
                     { model | text = text }
@@ -188,6 +188,10 @@ update actions now =
     in
         (List.foldl innerUpdate # actions)
             >> (\model -> { model | modifiedAt = now })
+
+
+hasReminderChanged ( old, new ) =
+    old.reminder /= new.reminder
 
 
 getMaybeReminderTime model =

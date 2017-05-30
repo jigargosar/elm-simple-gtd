@@ -101,11 +101,15 @@ var _user$project$Todo$isReminderOverdue = function (now) {
 			_user$project$Todo$getMaybeReminderTime(_p6));
 	};
 };
+var _user$project$Todo$hasReminderChanged = function (_p7) {
+	var _p8 = _p7;
+	return !_elm_lang$core$Native_Utils.eq(_p8._0.reminder, _p8._1.reminder);
+};
 var _user$project$Todo$getModifiedAt = function (_) {
 	return _.modifiedAt;
 };
 var _user$project$Todo$modifiedAtInWords = function (now) {
-	return function (_p7) {
+	return function (_p9) {
 		return A3(
 			_alpacaaa$elm_date_distance$Date_Distance$inWordsWithConfig,
 			_elm_lang$core$Native_Utils.update(
@@ -113,14 +117,14 @@ var _user$project$Todo$modifiedAtInWords = function (now) {
 				{includeSeconds: true}),
 			_elm_lang$core$Date$fromTime(now),
 			_elm_lang$core$Date$fromTime(
-				_user$project$Todo$getModifiedAt(_p7)));
+				_user$project$Todo$getModifiedAt(_p9)));
 	};
 };
 var _user$project$Todo$getCreatedAt = function (_) {
 	return _.createdAt;
 };
 var _user$project$Todo$createdAtInWords = function (now) {
-	return function (_p8) {
+	return function (_p10) {
 		return A3(
 			_alpacaaa$elm_date_distance$Date_Distance$inWordsWithConfig,
 			_elm_lang$core$Native_Utils.update(
@@ -128,18 +132,18 @@ var _user$project$Todo$createdAtInWords = function (now) {
 				{includeSeconds: true}),
 			_elm_lang$core$Date$fromTime(now),
 			_elm_lang$core$Date$fromTime(
-				_user$project$Todo$getCreatedAt(_p8)));
+				_user$project$Todo$getCreatedAt(_p10)));
 	};
 };
 var _user$project$Todo$getProjectId = function (_) {
 	return _.projectId;
 };
 var _user$project$Todo$hasProjectId = function (projectId) {
-	return function (_p9) {
+	return function (_p11) {
 		return A2(
 			_user$project$Ext_Function$equals,
 			projectId,
-			_user$project$Todo$getProjectId(_p9));
+			_user$project$Todo$getProjectId(_p11));
 	};
 };
 var _user$project$Todo$getDeleted = function (_) {
@@ -149,8 +153,8 @@ var _user$project$Todo$isDeleted = _user$project$Todo$getDeleted;
 var _user$project$Todo$getDeletedAt = function (todo) {
 	return (_user$project$Todo$getDeleted(todo) && _elm_lang$core$Native_Utils.eq(todo.deletedAt, _user$project$Todo$defaultDeletedAt)) ? _user$project$Todo$getModifiedAt(todo) : todo.deletedAt;
 };
-var _user$project$Todo$isNotDeleted = function (_p10) {
-	return !_user$project$Todo$getDeleted(_p10);
+var _user$project$Todo$isNotDeleted = function (_p12) {
+	return !_user$project$Todo$getDeleted(_p12);
 };
 var _user$project$Todo$doneFilter = _user$project$Todo$toAllPassPredicate(
 	{
@@ -172,8 +176,8 @@ var _user$project$Todo$projectIdFilter = function (projectId) {
 				_0: _user$project$Todo$isNotDeleted,
 				_1: {
 					ctor: '::',
-					_0: function (_p11) {
-						return !_user$project$Todo$isDone(_p11);
+					_0: function (_p13) {
+						return !_user$project$Todo$isDone(_p13);
 					},
 					_1: {ctor: '[]'}
 				}
@@ -290,7 +294,7 @@ var _user$project$Todo$reminderDecoder = A3(
 		}));
 var _user$project$Todo$None = {ctor: 'None'};
 var _user$project$Todo$defaultReminder = _user$project$Todo$None;
-var _user$project$Todo$todoRecordDecoder = function (_p12) {
+var _user$project$Todo$todoRecordDecoder = function (_p14) {
 	return A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 		'reminder',
@@ -320,7 +324,7 @@ var _user$project$Todo$todoRecordDecoder = function (_p12) {
 							'done',
 							_elm_lang$core$Json_Decode$bool,
 							_user$project$Todo$defaultDone,
-							A4(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional, 'deletedAt', _elm_lang$core$Json_Decode$float, _user$project$Todo$defaultDeletedAt, _p12)))))));
+							A4(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional, 'deletedAt', _elm_lang$core$Json_Decode$float, _user$project$Todo$defaultDeletedAt, _p14)))))));
 };
 var _user$project$Todo$decoder = _user$project$Todo$todoRecordDecoder(
 	_user$project$Document$documentFieldsDecoder(
@@ -375,79 +379,79 @@ var _user$project$Todo$update = F2(
 			function (action, model) {
 				innerUpdate:
 				while (true) {
-					var _p13 = action;
-					switch (_p13.ctor) {
+					var _p15 = action;
+					switch (_p15.ctor) {
 						case 'SetDone':
-							var _p14 = _p13._0;
-							var reminder = _p14 ? _user$project$Todo$None : model.reminder;
+							var _p16 = _p15._0;
+							var reminder = _p16 ? _user$project$Todo$None : model.reminder;
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{done: _p14, reminder: reminder});
+								{done: _p16, reminder: reminder});
 						case 'SetDeleted':
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{deleted: _p13._0, deletedAt: now});
+								{deleted: _p15._0, deletedAt: now, reminder: _user$project$Todo$None});
 						case 'SetText':
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{text: _p13._0});
+								{text: _p15._0});
 						case 'SetContextId':
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{contextId: _p13._0});
+								{contextId: _p15._0});
 						case 'SetProjectId':
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{projectId: _p13._0});
+								{projectId: _p15._0});
 						case 'CopyProjectAndContextId':
-							var _p16 = _p13._0;
-							return function (_p15) {
+							var _p18 = _p15._0;
+							return function (_p17) {
 								return A2(
 									innerUpdate,
-									_user$project$Todo$SetProjectId(_p16.projectId),
+									_user$project$Todo$SetProjectId(_p18.projectId),
 									A2(
 										innerUpdate,
-										_user$project$Todo$SetContextId(_p16.contextId),
-										_p15));
+										_user$project$Todo$SetContextId(_p18.contextId),
+										_p17));
 							}(model);
 						case 'SetContext':
-							var _v3 = _user$project$Todo$SetContextId(
-								_user$project$Document$getId(_p13._0)),
-								_v4 = model;
-							action = _v3;
-							model = _v4;
+							var _v4 = _user$project$Todo$SetContextId(
+								_user$project$Document$getId(_p15._0)),
+								_v5 = model;
+							action = _v4;
+							model = _v5;
 							continue innerUpdate;
 						case 'SetProject':
-							var _v5 = _user$project$Todo$SetProjectId(
-								_user$project$Document$getId(_p13._0)),
-								_v6 = model;
-							action = _v5;
-							model = _v6;
+							var _v6 = _user$project$Todo$SetProjectId(
+								_user$project$Document$getId(_p15._0)),
+								_v7 = model;
+							action = _v6;
+							model = _v7;
 							continue innerUpdate;
 						case 'ToggleDone':
-							var _v7 = _user$project$Todo$SetDone(!model.done),
-								_v8 = model;
-							action = _v7;
-							model = _v8;
+							var _v8 = _user$project$Todo$SetDone(!model.done),
+								_v9 = model;
+							action = _v8;
+							model = _v9;
 							continue innerUpdate;
 						case 'MarkDone':
-							var _v9 = _user$project$Todo$SetDone(true),
-								_v10 = model;
-							action = _v9;
-							model = _v10;
+							var _v10 = _user$project$Todo$SetDone(true),
+								_v11 = model;
+							action = _v10;
+							model = _v11;
 							continue innerUpdate;
 						case 'ToggleDeleted':
-							var _v11 = _user$project$Todo$SetDeleted(!model.deleted),
-								_v12 = model;
-							action = _v11;
-							model = _v12;
+							var _v12 = _user$project$Todo$SetDeleted(!model.deleted),
+								_v13 = model;
+							action = _v12;
+							model = _v13;
 							continue innerUpdate;
 						case 'SetTime':
-							var _p17 = _p13._0;
-							var reminder = _user$project$Todo$maybeTimeToReminder(_p17);
+							var _p19 = _p15._0;
+							var reminder = _user$project$Todo$maybeTimeToReminder(_p19);
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{dueAt: _p17, reminder: reminder});
+								{dueAt: _p19, reminder: reminder});
 						case 'TurnReminderOff':
 							return _elm_lang$core$Native_Utils.update(
 								model,
@@ -456,12 +460,12 @@ var _user$project$Todo$update = F2(
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									reminder: _user$project$Todo$At(_p13._0)
+									reminder: _user$project$Todo$At(_p15._0)
 								});
 					}
 				}
 			});
-		return function (_p18) {
+		return function (_p20) {
 			return function (model) {
 				return _elm_lang$core$Native_Utils.update(
 					model,
@@ -470,6 +474,6 @@ var _user$project$Todo$update = F2(
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
 					_elm_lang$core$List$foldl(innerUpdate),
-					actions)(_p18));
+					actions)(_p20));
 		};
 	});

@@ -199,9 +199,9 @@ init flags =
 
         storeGenerator =
             Random.map3 (,,)
-                (Todo.Store.generator encodedTodoList)
-                (Project.storeGenerator encodedProjectList)
-                (Context.storeGenerator encodedContextList)
+                (Todo.Store.generator flags.deviceId encodedTodoList)
+                (Project.storeGenerator flags.deviceId encodedProjectList)
+                (Context.storeGenerator flags.deviceId encodedContextList)
 
         ( ( todoStore, projectStore, contextStore ), seed ) =
             Random.step storeGenerator (Random.seedFromTime now)

@@ -2,6 +2,7 @@ module Project exposing (..)
 
 import Dict
 import Document exposing (Document, Id, Revision)
+import Firebase exposing (DeviceId)
 import Maybe.Extra
 import Store
 import Toolkit.Helpers exposing (..)
@@ -53,7 +54,7 @@ findNameById id =
     Store.findById id >>? getName
 
 
-storeGenerator : List Encoded -> Random.Generator Store
+storeGenerator : DeviceId -> List Encoded -> Random.Generator Store
 storeGenerator =
     Store.generator "project-db" otherFieldsEncoder decoder
 

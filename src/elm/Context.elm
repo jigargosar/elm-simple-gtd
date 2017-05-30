@@ -2,6 +2,7 @@ module Context exposing (..)
 
 import Dict
 import Document exposing (Document, Id, Revision)
+import Firebase exposing (DeviceId)
 import Store
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -90,7 +91,7 @@ setDeleted deleted model =
     { model | deleted = deleted }
 
 
-storeGenerator : List Encoded -> Random.Generator Store
+storeGenerator : DeviceId -> List Encoded -> Random.Generator Store
 storeGenerator =
     Store.generator "context-db" otherFieldsEncoder decoder
 

@@ -1580,9 +1580,9 @@ var _user$project$Model$init = function (flags) {
 			function (v0, v1, v2) {
 				return {ctor: '_Tuple3', _0: v0, _1: v1, _2: v2};
 			}),
-		_user$project$Todo_Store$generator(encodedTodoList),
-		_user$project$Project$storeGenerator(encodedProjectList),
-		_user$project$Context$storeGenerator(encodedContextList));
+		A2(_user$project$Todo_Store$generator, flags.deviceId, encodedTodoList),
+		A2(_user$project$Project$storeGenerator, flags.deviceId, encodedProjectList),
+		A2(_user$project$Context$storeGenerator, flags.deviceId, encodedContextList));
 	var _p85 = A2(
 		_mgold$elm_random_pcg$Random_Pcg$step,
 		storeGenerator,

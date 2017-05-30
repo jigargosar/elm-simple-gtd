@@ -26,6 +26,7 @@ import Document exposing (Document, Id)
 import Ext.Debug
 import Ext.List as List
 import Ext.Random as Random
+import Firebase exposing (DeviceId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -72,18 +73,25 @@ decodeList decoder =
             )
 
 
-init name otherFieldsEncoder decoder encodedList seed =
+init name otherFieldsEncoder decoder deviceId encodedList seed =
     { seed = seed
     , list = decodeList decoder encodedList
     , name = name
     , otherFieldsEncoder = otherFieldsEncoder
     , decoder = decoder
+    , deviceId = deviceId
     }
 
 
-generator : String -> (Document x -> List ( String, E.Value )) -> Decoder (Document x) -> List E.Value -> Random.Generator (Store x)
-generator name otherFieldsEncoder decoder encodedList =
-    init name otherFieldsEncoder decoder encodedList |> Random.mapWithIndependentSeed
+generator :
+    String
+    -> (Document x -> List ( String, E.Value ))
+    -> Decoder (Document x)
+    -> DeviceId
+    -> List E.Value
+    -> Random.Generator (Store x)
+generator name otherFieldsEncoder decoder deviceId encodedList =
+    init name otherFieldsEncoder decoder deviceId encodedList |> Random.mapWithIndependentSeed
 
 
 
@@ -298,6 +306,7 @@ type alias Store x =
     , otherFieldsEncoder : Document x -> List ( String, E.Value )
     , decoder : Decoder (Document x)
     , name : String
+    , deviceId : DeviceId
     }
 
 

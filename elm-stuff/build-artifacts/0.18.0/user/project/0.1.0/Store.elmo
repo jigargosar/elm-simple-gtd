@@ -165,7 +165,7 @@ var _user$project$Store$upsertOnPouchDBChange = F2(
 				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$upsertDocOnPouchDBChange, store)),
 			store);
 	});
-var _user$project$Store$replaceDoc__ = F2(
+var _user$project$Store$replaceDoc = F2(
 	function (doc, s) {
 		var newDoc = _elm_lang$core$Native_Utils.update(
 			doc,
@@ -177,7 +177,7 @@ var _user$project$Store$replaceDoc__ = F2(
 				newDoc,
 				s.list));
 	});
-var _user$project$Store$replaceDocIn = _elm_lang$core$Basics$flip(_user$project$Store$replaceDoc__);
+var _user$project$Store$replaceDocIn = _elm_lang$core$Basics$flip(_user$project$Store$replaceDoc);
 var _user$project$Store$findAndUpdateT = F4(
 	function (findFn, now, updateFn, store) {
 		var updateAndSetModifiedAt = function (_p8) {
@@ -320,20 +320,21 @@ var _user$project$Store$decodeList = function (decoder) {
 				_p20));
 	};
 };
-var _user$project$Store$init = F5(
-	function (name, otherFieldsEncoder, decoder, encodedList, seed) {
+var _user$project$Store$init = F6(
+	function (name, otherFieldsEncoder, decoder, deviceId, encodedList, seed) {
 		return {
 			seed: seed,
 			list: A2(_user$project$Store$decodeList, decoder, encodedList),
 			name: name,
 			otherFieldsEncoder: otherFieldsEncoder,
-			decoder: decoder
+			decoder: decoder,
+			deviceId: deviceId
 		};
 	});
-var _user$project$Store$generator = F4(
-	function (name, otherFieldsEncoder, decoder, encodedList) {
+var _user$project$Store$generator = F5(
+	function (name, otherFieldsEncoder, decoder, deviceId, encodedList) {
 		return _user$project$Ext_Random$mapWithIndependentSeed(
-			A4(_user$project$Store$init, name, otherFieldsEncoder, decoder, encodedList));
+			A5(_user$project$Store$init, name, otherFieldsEncoder, decoder, deviceId, encodedList));
 	});
 var _user$project$Store$pouchDBUpsert = _elm_lang$core$Native_Platform.outgoingPort(
 	'pouchDBUpsert',
@@ -400,7 +401,7 @@ var _user$project$Store$onChange = function (_p23) {
 	return _user$project$Store$pouchDBChanges(
 		_elm_lang$core$Basics$uncurry(_p23));
 };
-var _user$project$Store$Store = F5(
-	function (a, b, c, d, e) {
-		return {seed: a, list: b, otherFieldsEncoder: c, decoder: d, name: e};
+var _user$project$Store$Store = F6(
+	function (a, b, c, d, e, f) {
+		return {seed: a, list: b, otherFieldsEncoder: c, decoder: d, name: e, deviceId: f};
 	});

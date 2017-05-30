@@ -8,7 +8,7 @@
 
 self.addEventListener('install', function (event) {
     //noinspection JSUnresolvedVariable
-    if(isDevEnv){
+    if (isDevEnv) {
         event.waitUntil(self.skipWaiting())
     }
 })
@@ -114,7 +114,7 @@ function displayNotification(event) {
                     tag: data.id,
                     vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
                     sound: "/alarm.ogg",
-                    icon:"/logo.png",
+                    icon: "/logo.png",
                     actions: [
                         {title: "Mark Done", action: "mark-done"},
                         {title: "Snooze", action: "snooze"},
@@ -138,19 +138,19 @@ function displayNotification(event) {
 }
 
 self.addEventListener('push', function (event) {
-    console.log('[Service Worker] Push Received.');
-    console.log(`[Service Worker] Push had this data: "${event.data.text()}"`)
+    console.log(`[notification-sw] Push received. event.data.text(): `, ${event.data.text()})
+    return displayNotification(event)
 
-    event.waitUntil(clients
-        .matchAll({type: "window"})
-        .then(function (clientList) {
-            if (clientList.length === 0 || isMobile()) {
-                return displayNotification(event)
-            } else {
-                console.warn(
-                    "not displaying notification since we detected an controlled browser window and non-mobile browser")
-            }
-        }))
+    // event.waitUntil(clients
+    //     .matchAll({type: "window"})
+    //     .then(function (clientList) {
+    //         if (clientList.length === 0 || isMobile()) {
+    //             return displayNotification(event)
+    //         } else {
+    //             console.warn(
+    //                 "not displaying notification since we detected an controlled browser window and non-mobile browser")
+    //         }
+    //     }))
 });
 
 

@@ -23,7 +23,7 @@ import Dict
 import Dict.Extra
 import Document exposing (Document, Id)
 import Ext.Debug
-import Ext.List
+import Ext.List as List
 import Ext.Random as Random
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -145,35 +145,6 @@ findAndUpdateT findFn now updateFn store =
                 )
 
 
-type alias UpdateReturn x =
-    Maybe ( ( Document x, Document x ), Store x )
-
-
-type alias UpdateAllReturn x =
-    Maybe ( List ( Document x, Document x ), Store x )
-
-
-updateDocT2 :
-    Time
-    -> (Document x -> Document x)
-    -> Document.Id
-    -> Store x
-    -> UpdateReturn x
-updateDocT2 now updateFn =
-    updateDocT2Help (updateFn >> Document.setModifiedAt now)
-
-
-updateDocT2Help :
-    (Document x -> Document x)
-    -> Document.Id
-    -> Store x
-    -> UpdateReturn x
-updateDocT2Help updateFn id store =
-    findById id store
-        ?|> apply2 ( identity, updateFn )
-        >> apply2 ( identity, Tuple.second >> replaceDocIn store )
-
-
 type alias Change x =
     ( Document x, Document x )
 
@@ -182,34 +153,57 @@ type alias ChangeList x =
     List (Change x)
 
 
+type alias UpdateReturn x =
+    ( Change x, Store x )
+
+
+type alias UpdateAllReturn x =
+    ( ChangeList x, Store x )
+
+
+type alias UpdateAllReturnF x =
+    UpdateAllReturn x -> UpdateAllReturn x
+
+
+updateDocT2 :
+    Time
+    -> (Document x -> Document x)
+    -> Document.Id
+    -> Store x
+    -> Maybe (UpdateReturn x)
+updateDocT2 now updateFn =
+    updateDocT2Help (updateFn >> Document.setModifiedAt now)
+
+
+updateDocT2Help :
+    (Document x -> Document x)
+    -> Document.Id
+    -> Store x
+    -> Maybe (UpdateReturn x)
+updateDocT2Help updateFn id store =
+    findById id store
+        ?|> apply2 ( identity, updateFn )
+        >> apply2 ( identity, Tuple.second >> replaceDocIn store )
+
+
 updateAllDocsT2 :
     Set Document.Id
     -> Time
     -> (Document x -> Document x)
     -> Store x
-    -> UpdateAllReturn x
+    -> Maybe (UpdateAllReturn x)
 updateAllDocsT2 idSet now updateFn store =
     let
-        folder : Id -> ( List ( Document x, Document x ), Store x ) -> ( List ( Document x, Document x ), Store x )
+        folder : Id -> UpdateAllReturnF x
         folder =
             (\id ( list, store ) ->
-                {- updateDocT2 now updateFn id store
-                   ?|> Tuple.mapFirst ((::) list)
-                   ?=
-                -}
-                ( list, store )
+                updateDocT2 now updateFn id store
+                    ?|> Tuple.mapFirst (List.prependIn list)
+                    ?= ( list, store )
             )
-
-        initial : ( List ( Document x, Document x ), Store x )
-        initial =
-            ( [], store )
-
-        foo : ( List ( Document x, Document x ), Store x )
-        foo =
-            Set.foldl folder initial idSet
     in
-        foo
-            |> Tuple2.mapEach Ext.List.toMaybe Just
+        Set.foldl folder ( [], store ) idSet
+            |> Tuple2.mapEach List.toMaybe Just
             |> maybe2Tuple
 
 

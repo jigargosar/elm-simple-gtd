@@ -98,16 +98,16 @@ const sendPush = notificationData => clients => {
     const {todoId, timestamp, uid} = notificationData
 
     function sendPushForClient(client) {
-        if (client.connected) {
-            console
-                .log("ignoring push for connected client"
-                    , notificationData
-                    , client)
-
-            return Promise.resolve({
-                msg: "ignoring push for connected client", client, notificationData
-            })
-        }
+        // if (client.connected) {
+        //     console
+        //         .log("ignoring push for connected client"
+        //             , notificationData
+        //             , client)
+        //
+        //     return Promise.resolve({
+        //         msg: "ignoring push for connected client", client, notificationData
+        //     })
+        // }
 
         return admin
             .messaging()

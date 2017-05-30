@@ -114,8 +114,8 @@ persist s =
         ns ! cmds
 
 
-replaceDoc__ : Document x -> Store x -> Store x
-replaceDoc__ doc s =
+replaceDoc : Document x -> Store x -> Store x
+replaceDoc doc s =
     let
         newDoc =
             { doc | dirty = True }
@@ -125,7 +125,7 @@ replaceDoc__ doc s =
 
 
 replaceDocIn =
-    flip replaceDoc__
+    flip replaceDoc
 
 
 findAndUpdateT :

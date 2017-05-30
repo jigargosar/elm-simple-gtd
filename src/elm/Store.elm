@@ -143,8 +143,29 @@ findAndUpdateT findFn now updateFn store =
                 )
 
 
-updateDoc id =
-    updateAllDocs (Set.singleton id)
+updateDoc :
+    Time
+    -> (Document x -> Document x)
+    -> Document.Id
+    -> Store x
+    -> UpdateReturn x
+updateDoc now updateFn =
+    updateDocHelp (updateFn >> Document.setModifiedAt now)
+
+
+type alias UpdateReturn x =
+    Maybe ( ( Document x, Document x ), Store x )
+
+
+updateDocHelp :
+    (Document x -> Document x)
+    -> Document.Id
+    -> Store x
+    -> UpdateReturn x
+updateDocHelp updateFn id store =
+    findById id store
+        ?|> apply2 ( identity, updateFn )
+        >> apply2 ( identity, Tuple.second >> replaceDocIn store )
 
 
 updateAllDocs :
@@ -158,10 +179,10 @@ updateAllDocs idSet now updateFn store =
         updateAndSetModifiedAt =
             updateFn >> Document.setModifiedAt now
     in
-        idSet |> Set.foldl (updateDocHelp # updateFn) store
+        idSet |> Set.foldl (updateAllDocHelp # updateAndSetModifiedAt) store
 
 
-updateDocHelp id updateDocFn store =
+updateAllDocHelp id updateDocFn store =
     findById id store
         ?|> updateDocFn
         >> replaceDocIn store

@@ -411,7 +411,6 @@ reminderOverlayAction action =
                                     Model.updateTodo (Todo.TurnReminderOff) todoId
                                         >> Tuple.mapFirst Model.removeReminderOverlay
                                         >> Return.command (closeNotification todoId)
-                                        >> Return.effect_ (scheduleReminderNotificationCmd todoId)
 
                                 ReminderOverlay.ShowSnoozeOptions ->
                                     Model.setReminderOverlayToSnoozeView todoDetails
@@ -421,7 +420,6 @@ reminderOverlayAction action =
                                     Return.singleton
                                         >> Return.andThen (Model.snoozeTodoWithOffset snoozeOffset todoId)
                                         >> Return.command (closeNotification todoId)
-                                        >> Return.effect_ (scheduleReminderNotificationCmd todoId)
 
                                 ReminderOverlay.Close ->
                                     Model.removeReminderOverlay
@@ -476,28 +474,6 @@ firebaseUpdateClientCmd model =
 firebaseSetupOnDisconnectCmd model =
     Model.getMaybeUserId model
         ?|> Firebase.setupOnDisconnectCmd model.firebaseClient
-
-
-scheduleReminderNotificationCmd todoId model =
-    Model.findTodoById todoId model
-        ?|> (scheduleReminderNotificationHelp # model)
-        ?= Cmd.none
-
-
-scheduleReminderNotificationHelp : Todo.Model -> Model -> Cmd msg
-scheduleReminderNotificationHelp todo model =
-    let
-        scheduleHelp uid =
-            let
-                maybeTime =
-                    Todo.getMaybeReminderTime todo
-
-                todoId =
-                    Document.getId todo
-            in
-                Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
-    in
-        (Model.getMaybeUserId model) ?|> scheduleHelp ?= Cmd.none
 
 
 positionContextDropdownCmd todo =

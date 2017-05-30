@@ -194,15 +194,15 @@ updateAllT2 :
     -> Maybe (UpdateAllReturn x)
 updateAllT2 idSet now updateFn store =
     let
-        folder : Id -> UpdateAllReturnF x
-        folder =
-            (\id ( list, store ) ->
+        updateAndCollectChanges : Id -> UpdateAllReturnF x
+        updateAndCollectChanges =
+            (\id (( list, store ) as acc) ->
                 updateT2 now updateFn id store
                     ?|> Tuple.mapFirst (List.prependIn list)
-                    ?= ( list, store )
+                    ?= acc
             )
     in
-        Set.foldl folder ( [], store ) idSet
+        Set.foldl updateAndCollectChanges ( [], store ) idSet
             |> Tuple2.mapEach List.toMaybe Just
             |> maybe2Tuple
 

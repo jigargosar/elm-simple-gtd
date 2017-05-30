@@ -143,26 +143,26 @@ findAndUpdateT findFn now updateFn store =
                 )
 
 
-updateDoc :
+type alias UpdateReturn x =
+    Maybe ( ( Document x, Document x ), Store x )
+
+
+updateDocT2 :
     Time
     -> (Document x -> Document x)
     -> Document.Id
     -> Store x
     -> UpdateReturn x
-updateDoc now updateFn =
-    updateDocHelp (updateFn >> Document.setModifiedAt now)
+updateDocT2 now updateFn =
+    updateDocT2Help (updateFn >> Document.setModifiedAt now)
 
 
-type alias UpdateReturn x =
-    Maybe ( ( Document x, Document x ), Store x )
-
-
-updateDocHelp :
+updateDocT2Help :
     (Document x -> Document x)
     -> Document.Id
     -> Store x
     -> UpdateReturn x
-updateDocHelp updateFn id store =
+updateDocT2Help updateFn id store =
     findById id store
         ?|> apply2 ( identity, updateFn )
         >> apply2 ( identity, Tuple.second >> replaceDocIn store )

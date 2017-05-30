@@ -5,6 +5,7 @@
     * functions: add onTodoChanged for pushing notifications, when a todo is snoozed. (this happens only when at least one client is connected and auto snoozes when reminder is due.)
 * [fix] schedule notification in firebase, whenever todo changes. 
   * we had to centralize update of todo, and model had to return cmds. Not clean but will work for now.
+  * in future we will move this work in firebase functions itself, this will also help us fix updating notifications scheduled when we were offline.
 
 ## v0.16.14 - 2017-05-29
 * [fix] notifications: step 1: store client info  

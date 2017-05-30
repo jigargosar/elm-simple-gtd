@@ -138,7 +138,7 @@ function displayNotification(event) {
 }
 
 self.addEventListener('push', function (event) {
-    console.log(`[notification-sw] Push received. event.data.text(): `, ${event.data.text()})
+    console.log(`[notification-sw] Push received. event.data.text(): `, event.data.text())
     return displayNotification(event)
 
     // event.waitUntil(clients

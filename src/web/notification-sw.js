@@ -95,7 +95,7 @@ firebase.initializeApp({
 function displayNotification(event) {
     try {
         const data = event.data.json().data
-        console.log(`[Service Worker] Push had this json: `, data)
+        console.log(`[notification-sw] displaying notification `, data)
         const todoId = data.todoId
         data.id = todoId
 
@@ -139,7 +139,8 @@ function displayNotification(event) {
 
 self.addEventListener('push', function (event) {
     console.log(`[notification-sw] Push received. event.data.text(): `, event.data.text())
-    return displayNotification(event)
+
+    return event.waitUntil(displayNotification(event))
 
     // event.waitUntil(clients
     //     .matchAll({type: "window"})

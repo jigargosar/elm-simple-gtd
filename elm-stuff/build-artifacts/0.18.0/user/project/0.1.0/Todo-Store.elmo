@@ -1,1 +1,17 @@
+var _user$project$Todo_Store$update = F4(
+	function (action, now, todoId, store) {
+		return A4(
+			_user$project$Store$updateAllDocs,
+			_elm_lang$core$Set$singleton(todoId),
+			now,
+			A2(
+				_user$project$Todo$update,
+				{
+					ctor: '::',
+					_0: action,
+					_1: {ctor: '[]'}
+				},
+				now),
+			store);
+	});
 var _user$project$Todo_Store$generator = A3(_user$project$Store$generator, 'todo-db', _user$project$Todo$encodeOtherFields, _user$project$Todo$decoder);

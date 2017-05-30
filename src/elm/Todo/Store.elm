@@ -1,6 +1,7 @@
 module Todo.Store exposing (..)
 
 import Random.Pcg as Random
+import Set
 import Todo exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -14,3 +15,10 @@ import Store
 generator : List Encoded -> Random.Generator Store
 generator =
     Store.generator "todo-db" encodeOtherFields decoder
+
+
+update action now todoId store =
+    Store.updateAllDocs (Set.singleton todoId)
+        now
+        (Todo.update [ action ] now)
+        store

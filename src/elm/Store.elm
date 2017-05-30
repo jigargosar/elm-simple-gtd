@@ -158,10 +158,10 @@ updateAllDocs idSet now updateFn store =
         updateAndSetModifiedAt =
             updateFn >> Document.setModifiedAt now
     in
-        idSet |> Set.foldl (updateDocWithId # updateFn) store
+        idSet |> Set.foldl (updateDocHelp # updateFn) store
 
 
-updateDocWithId id updateDocFn store =
+updateDocHelp id updateDocFn store =
     findById id store
         ?|> updateDocFn
         >> replaceDocIn store

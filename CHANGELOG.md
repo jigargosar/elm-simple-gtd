@@ -1,7 +1,8 @@
 ## Upcoming
 * [fix] notifications: step 2: functions: 
-    * ignore push if at least one client is connected.
+    * ignore push for connected clients.
     * functions: use user clients instead of user tokens to send push
+    * functions: add onTodoChanged for pushing notifications, when a todo is snoozed. (this happens only when at least one client is connected and auto snoozes when reminder is due.)
 
 ## v0.16.14 - 2017-05-29
 * [fix] notifications: step 1: store client info  

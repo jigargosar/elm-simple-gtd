@@ -182,7 +182,7 @@ update msg =
                             data.id
                     in
                         if action == "mark-done" then
-                            Return.map (Model.updateTodo Todo.MarkDone todoId)
+                            Return.andThen (Model.updateTodo Todo.MarkDone todoId)
                                 >> command (closeNotification todoId)
                         else
                             todoId |> ShowReminderOverlayForTodoId >> andThenUpdate
@@ -203,7 +203,7 @@ update msg =
                     reminderOverlayAction action
 
                 ToggleTodoDone todoId ->
-                    Return.map (Model.updateTodo Todo.ToggleDone todoId)
+                    Return.andThen (Model.updateTodo Todo.ToggleDone todoId)
 
                 SetTodoContext todoContext todo ->
                     updateTodoAndMaybeAlsoSelected (Todo.SetContext todoContext) todo
@@ -281,14 +281,16 @@ update msg =
                         >> focusSelectorIfNoFocusCmd ".entity-list > [tabindex=0]"
 
                 SaveCurrentForm ->
-                    Return.map
-                        (apply2
-                            ( Model.getMaybeEditTodoReminderForm >>? .id
-                            , Model.saveCurrentForm
-                            )
-                        )
-                        >> Return.andThen
-                            (apply2 ( Tuple.second, uncurry scheduleReminderNotificationForMaybeTodoIdCmd ))
+                    {- Return.map
+                       (apply2
+                           ( Model.getMaybeEditTodoReminderForm >>? .id
+                           , Model.saveCurrentForm
+                           )
+                       )
+                       >> Return.andThen
+                           (apply2 ( Tuple.second, uncurry scheduleReminderNotificationForMaybeTodoIdCmd ))
+                    -}
+                    Return.andThen Model.saveCurrentForm
                         >> andThenUpdate DeactivateEditingMode
 
                 NewTodo ->
@@ -323,7 +325,7 @@ update msg =
                             andThenUpdate SaveCurrentForm
 
                         Entity.ToggleDeleted ->
-                            Return.map (Model.toggleDeleteEntity entity)
+                            Return.andThen (Model.toggleDeleteEntity entity)
                                 >> andThenUpdate DeactivateEditingMode
 
                         Entity.SetFocusedIn ->
@@ -438,8 +440,7 @@ reminderOverlayAction action =
                             case action of
                                 ReminderOverlay.Dismiss ->
                                     Model.updateTodo (Todo.TurnReminderOff) todoId
-                                        >> Model.removeReminderOverlay
-                                        >> Return.singleton
+                                        >> Tuple.mapFirst Model.removeReminderOverlay
                                         >> Return.command (closeNotification todoId)
                                         >> Return.effect_ (scheduleReminderNotificationCmd todoId)
 
@@ -449,7 +450,7 @@ reminderOverlayAction action =
 
                                 ReminderOverlay.SnoozeTill snoozeOffset ->
                                     Return.singleton
-                                        >> Return.map (Model.snoozeTodoWithOffset snoozeOffset todoId)
+                                        >> Return.andThen (Model.snoozeTodoWithOffset snoozeOffset todoId)
                                         >> Return.command (closeNotification todoId)
                                         >> Return.effect_ (scheduleReminderNotificationCmd todoId)
 
@@ -459,8 +460,7 @@ reminderOverlayAction action =
 
                                 ReminderOverlay.MarkDone ->
                                     Model.updateTodo Todo.MarkDone todoId
-                                        >> Model.removeReminderOverlay
-                                        >> Return.singleton
+                                        >> Tuple.mapFirst Model.removeReminderOverlay
                                         >> Return.command (closeNotification todoId)
 
                     _ ->

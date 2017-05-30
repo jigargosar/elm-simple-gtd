@@ -21,6 +21,7 @@ import Ext.Random as Random
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
+import Return
 import Set exposing (Set)
 import Store
 import Time exposing (Time)
@@ -363,7 +364,7 @@ snoozeTodoWithOffset snoozeOffset todoId model =
     in
         model
             |> updateTodo (time |> Todo.SnoozeTill) todoId
-            >> removeReminderOverlay
+            >> Tuple.mapFirst removeReminderOverlay
 
 
 findAndSnoozeOverDueTodo : Model -> Maybe ( Todo.Model, Model )
@@ -455,12 +456,14 @@ saveCurrentForm model =
                 |> updateDoc form.id
                     (Context.setName form.name)
                     contextStore
+                |> Return.singleton
 
         EditMode.EditProject form ->
             model
                 |> updateDoc form.id
                     (Project.setName form.name)
                     projectStore
+                |> Return.singleton
 
         EditMode.EditTodo form ->
             model
@@ -472,9 +475,11 @@ saveCurrentForm model =
 
         EditMode.EditTodoContext form ->
             model
+                |> Return.singleton
 
         EditMode.EditTodoProject form ->
             model
+                |> Return.singleton
 
         EditMode.NewTodo form ->
             insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model
@@ -493,15 +498,16 @@ saveCurrentForm model =
                                     (Todo.SetProject project)
                             )
                             todoId
-                            >> setFocusInEntityFromTodoId todoId
+                            >> Tuple.mapFirst (setFocusInEntityFromTodoId todoId)
                     )
 
-        --                |> uncurry setTodoContextOrProjectBasedOnCurrentView
         EditMode.EditSyncSettings form ->
             { model | pouchDBRemoteSyncURI = form.uri }
+                |> Return.singleton
 
         EditMode.None ->
             model
+                |> Return.singleton
 
 
 setFocusInEntityFromTodoId : Todo.Id -> ModelF
@@ -511,7 +517,7 @@ setFocusInEntityFromTodoId todoId model =
         ?= model
 
 
-toggleDeleteEntity : Entity -> ModelF
+toggleDeleteEntity : Entity -> ModelReturnF msg
 toggleDeleteEntity entity model =
     let
         entityId =
@@ -523,11 +529,13 @@ toggleDeleteEntity entity model =
                     updateDoc entityId
                         (Document.toggleDeleted)
                         contextStore
+                        >> Return.singleton
 
                 Entity.ProjectEntity project ->
                     updateDoc entityId
                         (Document.toggleDeleted)
                         projectStore
+                        >> Return.singleton
 
                 Entity.TodoEntity todo ->
                     updateTodo Todo.ToggleDeleted entityId
@@ -578,29 +586,30 @@ createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 
 
-setTodoContextOrProjectBasedOnCurrentView todoId model =
-    let
-        maybeTodoUpdateAction =
-            case model.mainViewType of
-                EntityListView viewType ->
-                    case viewType of
-                        Entity.ContextView id ->
-                            model.contextStore |> Store.findById id >>? Todo.SetContext
 
-                        Entity.ProjectView id ->
-                            model.projectStore |> Store.findById id >>? Todo.SetProject
-
-                        _ ->
-                            Nothing
-
-                _ ->
-                    Nothing
-
-        maybeModel =
-            maybeTodoUpdateAction
-                ?|> (updateTodo # todoId # model)
-    in
-        maybeModel ?= model |> setFocusInEntityWithId todoId
+--setTodoContextOrProjectBasedOnCurrentView todoId model =
+--    let
+--        maybeTodoUpdateAction =
+--            case model.mainViewType of
+--                EntityListView viewType ->
+--                    case viewType of
+--                        Entity.ContextView id ->
+--                            model.contextStore |> Store.findById id >>? Todo.SetContext
+--
+--                        Entity.ProjectView id ->
+--                            model.projectStore |> Store.findById id >>? Todo.SetProject
+--
+--                        _ ->
+--                            Nothing
+--
+--                _ ->
+--                    Nothing
+--
+--        maybeModel =
+--            maybeTodoUpdateAction
+--                ?|> (updateTodo # todoId # model)
+--    in
+--        maybeModel ?= model |> setFocusInEntityWithId todoId
 
 
 createEntityEditForm : Entity -> Model -> EditMode
@@ -1298,11 +1307,29 @@ findAndUpdateTodoT2 findFn action model =
     findAndUpdateDocT findFn (todoUpdateF action model) todoStoreT2 model
 
 
+
+{--> Maybe ( Todo.Model, Todo.Model, Todo.Store )-}
+
+
+type alias Return msg =
+    Return.Return msg Model
+
+
+type alias ModelReturnF msg =
+    Model -> Return msg
+
+
+updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg
 updateTodo action todoId model =
-    updateDoc todoId
-        (todoUpdateF action model)
-        todoStore
-        model
+    updateMaybe todoStoreT2 (Todo.Store.update action model.now todoId) model
+        ?|> (\( changes, model ) ->
+                let
+                    _ =
+                        Debug.log "changes" (changes)
+                in
+                    ( model, Cmd.none )
+            )
+        ?= ( model, Cmd.none )
 
 
 updateAllTodos action todoIdSet model =

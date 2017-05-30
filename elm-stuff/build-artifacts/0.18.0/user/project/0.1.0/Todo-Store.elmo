@@ -1,7 +1,7 @@
 var _user$project$Todo_Store$update = F4(
 	function (action, now, todoId, store) {
 		return A4(
-			_user$project$Store$updateAllDocs,
+			_user$project$Store$updateAllT2,
 			_elm_lang$core$Set$singleton(todoId),
 			now,
 			A2(

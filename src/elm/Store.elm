@@ -12,6 +12,7 @@ port module Store
         , asList
         , filter
         , updateAllDocs
+        , updateAllT2
         , findAndUpdateT
         , findAllByIdSetIn
         , onPouchDbChange

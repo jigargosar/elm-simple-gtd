@@ -18,7 +18,7 @@ generator =
 
 
 update action now todoId store =
-    Store.updateAllDocs (Set.singleton todoId)
+    Store.updateAllT2 (Set.singleton todoId)
         now
         (Todo.update [ action ] now)
         store

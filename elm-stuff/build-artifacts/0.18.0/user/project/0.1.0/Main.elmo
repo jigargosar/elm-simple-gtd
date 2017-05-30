@@ -160,9 +160,10 @@ var _user$project$Main$reminderOverlayAction = function (action) {
 									A2(
 										_Fresheyeball$elm_return$Return$command,
 										_user$project$Main$closeNotification(todoId),
-										_Fresheyeball$elm_return$Return$singleton(
-											_user$project$Model$removeReminderOverlay(
-												A3(_user$project$Model$updateTodo, _user$project$Todo$TurnReminderOff, todoId, _p5)))));
+										A2(
+											_elm_lang$core$Tuple$mapFirst,
+											_user$project$Model$removeReminderOverlay,
+											A3(_user$project$Model$updateTodo, _user$project$Todo$TurnReminderOff, todoId, _p5))));
 							};
 						case 'ShowSnoozeOptions':
 							return function (_p6) {
@@ -178,7 +179,7 @@ var _user$project$Main$reminderOverlayAction = function (action) {
 										_Fresheyeball$elm_return$Return$command,
 										_user$project$Main$closeNotification(todoId),
 										A2(
-											_Fresheyeball$elm_return$Return$map,
+											_Fresheyeball$elm_return$Return$andThen,
 											A2(_user$project$Model$snoozeTodoWithOffset, _p4._0, todoId),
 											_Fresheyeball$elm_return$Return$singleton(_p7))));
 							};
@@ -192,9 +193,10 @@ var _user$project$Main$reminderOverlayAction = function (action) {
 								return A2(
 									_Fresheyeball$elm_return$Return$command,
 									_user$project$Main$closeNotification(todoId),
-									_Fresheyeball$elm_return$Return$singleton(
-										_user$project$Model$removeReminderOverlay(
-											A3(_user$project$Model$updateTodo, _user$project$Todo$MarkDone, todoId, _p9))));
+									A2(
+										_elm_lang$core$Tuple$mapFirst,
+										_user$project$Model$removeReminderOverlay,
+										A3(_user$project$Model$updateTodo, _user$project$Todo$MarkDone, todoId, _p9)));
 							};
 					}
 				} else {
@@ -412,7 +414,7 @@ var _user$project$Main$update = function (msg) {
 								_user$project$Main$command,
 								_user$project$Main$closeNotification(todoId),
 								A2(
-									_Fresheyeball$elm_return$Return$map,
+									_Fresheyeball$elm_return$Return$andThen,
 									A2(_user$project$Model$updateTodo, _user$project$Todo$MarkDone, todoId),
 									_p29));
 						} : function (_p30) {
@@ -435,7 +437,7 @@ var _user$project$Main$update = function (msg) {
 					case 'ReminderOverlayAction':
 						return _user$project$Main$reminderOverlayAction(_p16._0);
 					case 'ToggleTodoDone':
-						return _Fresheyeball$elm_return$Return$map(
+						return _Fresheyeball$elm_return$Return$andThen(
 							A2(_user$project$Model$updateTodo, _user$project$Todo$ToggleDone, _p16._0));
 					case 'SetTodoContext':
 						return function (_p31) {
@@ -558,28 +560,7 @@ var _user$project$Main$update = function (msg) {
 							return A2(
 								_user$project$Main$andThenUpdate,
 								_user$project$Msg$DeactivateEditingMode,
-								A2(
-									_Fresheyeball$elm_return$Return$andThen,
-									_danielnarey$elm_toolkit$Toolkit_Helpers$apply2(
-										{
-											ctor: '_Tuple2',
-											_0: _elm_lang$core$Tuple$second,
-											_1: _elm_lang$core$Basics$uncurry(_user$project$Main$scheduleReminderNotificationForMaybeTodoIdCmd)
-										}),
-									A2(
-										_Fresheyeball$elm_return$Return$map,
-										_danielnarey$elm_toolkit$Toolkit_Helpers$apply2(
-											{
-												ctor: '_Tuple2',
-												_0: A2(
-													_user$project$Ext_Function_Infix_ops['>>?'],
-													_user$project$Model$getMaybeEditTodoReminderForm,
-													function (_) {
-														return _.id;
-													}),
-												_1: _user$project$Model$saveCurrentForm
-											}),
-										_p44)));
+								A2(_Fresheyeball$elm_return$Return$andThen, _user$project$Model$saveCurrentForm, _p44));
 						};
 					case 'NewTodo':
 						return function (_p45) {
@@ -626,7 +607,7 @@ var _user$project$Main$update = function (msg) {
 										_user$project$Main$andThenUpdate,
 										_user$project$Msg$DeactivateEditingMode,
 										A2(
-											_Fresheyeball$elm_return$Return$map,
+											_Fresheyeball$elm_return$Return$andThen,
 											_user$project$Model$toggleDeleteEntity(_p52),
 											_p51));
 								};

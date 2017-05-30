@@ -325,7 +325,6 @@ var _user$project$Todo$todoRecordDecoder = function (_p12) {
 var _user$project$Todo$decoder = _user$project$Todo$todoRecordDecoder(
 	_user$project$Document$documentFieldsDecoder(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Todo$todoConstructor)));
-var _user$project$Todo$storeGenerator = A3(_user$project$Store$generator, 'todo-db', _user$project$Todo$encodeOtherFields, _user$project$Todo$decoder);
 var _user$project$Todo$init = F3(
 	function (createdAt, text, id) {
 		return _user$project$Todo$todoConstructor(id)(_user$project$Document$defaultRevision)(createdAt)(createdAt)(_user$project$Todo$defaultDeleted)(_user$project$Todo$defaultDeletedAt)(_user$project$Todo$defaultDone)(text)(_user$project$Todo$defaultDueAt)(_user$project$Todo$defaultProjectId)(_user$project$Todo$defaultContextId)(_user$project$Todo$defaultReminder);

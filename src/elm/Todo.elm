@@ -394,10 +394,5 @@ modifiedAtInWords now =
             (Date.fromTime now)
 
 
-storeGenerator : List Encoded -> Random.Generator Store
-storeGenerator =
-    Store.generator "todo-db" encodeOtherFields decoder
-
-
 type alias Store =
     Store.Store Record

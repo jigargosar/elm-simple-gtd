@@ -28,6 +28,7 @@ import Todo
 import Todo.Form
 import Todo.NewForm
 import Todo.ReminderForm
+import Todo.Store
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
@@ -197,7 +198,7 @@ init flags =
 
         storeGenerator =
             Random.map3 (,,)
-                (Todo.storeGenerator encodedTodoList)
+                (Todo.Store.generator encodedTodoList)
                 (Project.storeGenerator encodedProjectList)
                 (Context.storeGenerator encodedContextList)
 

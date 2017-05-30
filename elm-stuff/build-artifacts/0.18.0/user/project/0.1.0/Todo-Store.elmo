@@ -1,0 +1,1 @@
+var _user$project$Todo_Store$generator = A3(_user$project$Store$generator, 'todo-db', _user$project$Todo$encodeOtherFields, _user$project$Todo$decoder);

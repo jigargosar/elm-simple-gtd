@@ -226,15 +226,15 @@ generate generator m =
 
 
 insert : (Id -> Document x) -> Store x -> ( Document x, Store x )
-insert constructor s =
+insert constructor store =
     Random.mapWithIdGenerator constructor
-        |> (generate # s)
-        |> (\( d, s ) ->
+        |> (generate # store)
+        |> (\( doc, store ) ->
                 let
-                    nd =
-                        { d | dirty = True }
+                    newDoc =
+                        { doc | dirty = True }
                 in
-                    ( nd, prepend nd s )
+                    ( newDoc, prepend newDoc store )
            )
 
 

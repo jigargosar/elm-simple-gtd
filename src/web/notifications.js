@@ -54,9 +54,9 @@ const closeNotification = reg => async (tag) => {
 
 // const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
 const showNotification = (fire, reg) => async (msg) => {
-    console.info(connected, msg)
     const {tag, title, data} = msg
     /*
+    console.info(connected, msg)
     const notifyMsg = {
         todoId: tag, tag, title, uid, timestamp:Date.now(),serverTimestamp: firebase.database.ServerValue.TIMESTAMP
     }

@@ -19,3 +19,16 @@ listLastIndex list =
 
 clampIndex index =
     listLastIndex >> clamp 0 # index
+
+
+prependIn =
+    flip (::)
+
+
+toMaybe list =
+    case list of
+        [] ->
+            Nothing
+
+        _ ->
+            Just list

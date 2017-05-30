@@ -1,6 +1,19 @@
-var _user$project$Ext_List$listLastIndex = function (list) {
+var _user$project$Ext_List$toMaybe = function (list) {
 	var _p0 = list;
 	if (_p0.ctor === '[]') {
+		return _elm_lang$core$Maybe$Nothing;
+	} else {
+		return _elm_lang$core$Maybe$Just(list);
+	}
+};
+var _user$project$Ext_List$prependIn = _elm_lang$core$Basics$flip(
+	F2(
+		function (x, y) {
+			return {ctor: '::', _0: x, _1: y};
+		}));
+var _user$project$Ext_List$listLastIndex = function (list) {
+	var _p1 = list;
+	if (_p1.ctor === '[]') {
 		return 0;
 	} else {
 		return _elm_lang$core$List$length(list) - 1;
@@ -9,11 +22,11 @@ var _user$project$Ext_List$listLastIndex = function (list) {
 var _user$project$Ext_List$clampIndex = function (index) {
 	return A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-		function (_p1) {
+		function (_p2) {
 			return A2(
 				_elm_lang$core$Basics$clamp,
 				0,
-				_user$project$Ext_List$listLastIndex(_p1));
+				_user$project$Ext_List$listLastIndex(_p2));
 		},
 		index);
 };

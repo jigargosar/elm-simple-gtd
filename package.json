@@ -1,6 +1,6 @@
 {
   "name": "simplegtd.com",
-  "version": "0.16.15",
+  "version": "0.16.16",
   "main": "index.js",
   "license": "MIT",
   "engines": {

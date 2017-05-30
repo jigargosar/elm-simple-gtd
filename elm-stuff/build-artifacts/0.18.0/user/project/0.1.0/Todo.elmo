@@ -1,4 +1,3 @@
-var _user$project$Todo$toVM = _elm_lang$core$Basics$identity;
 var _user$project$Todo$toAnyPassPredicate = function (predicateList) {
 	return function (_p0) {
 		return A2(
@@ -48,12 +47,6 @@ var _user$project$Todo$encodeReminder = function (reminder) {
 			});
 	}
 };
-var _user$project$Todo$copyTodo = F3(
-	function (createdAt, todo, id) {
-		return _elm_lang$core$Native_Utils.update(
-			todo,
-			{id: id, rev: _user$project$Document$defaultRevision, createdAt: createdAt, modifiedAt: createdAt});
-	});
 var _user$project$Todo$todoConstructor = function (id) {
 	return function (rev) {
 		return function (createdAt) {

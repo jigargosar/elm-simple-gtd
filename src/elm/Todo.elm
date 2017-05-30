@@ -283,10 +283,6 @@ decoder =
         |> todoRecordDecoder
 
 
-copyTodo createdAt todo id =
-    { todo | id = id, rev = Document.defaultRevision, createdAt = createdAt, modifiedAt = createdAt }
-
-
 encodeOtherFields todo =
     [ "done" => E.bool (isDone todo)
     , "text" => E.string (getText todo)
@@ -378,11 +374,6 @@ toAllPassPredicate predicateList =
 
 toAnyPassPredicate predicateList =
     (applyList predicateList >> List.any identity)
-
-
-toVM : Model -> ViewModel
-toVM =
-    identity
 
 
 createdAtInWords : Time -> Model -> String

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.16 - 2017-05-30
 * [fix] notifications: step 2: functions: 
     * ignore push for connected clients.
     * functions: use user clients instead of user tokens to send push

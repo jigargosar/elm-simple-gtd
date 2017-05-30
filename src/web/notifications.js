@@ -52,9 +52,11 @@ const closeNotification = reg => async (tag) => {
     }
 }
 
-const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
+// const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
+const showNotification = (fire, reg) => async (msg) => {
     console.info(connected, msg)
     const {tag, title, data} = msg
+    /*
     const notifyMsg = {
         todoId: tag, tag, title, uid, timestamp:Date.now(),serverTimestamp: firebase.database.ServerValue.TIMESTAMP
     }
@@ -73,7 +75,7 @@ const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
         //  .then(console.warn)
         //  .catch(console.error)
 
-    } else {
+    } else {*/
         const permission = await Notification.requestPermission()
         if (permission !== "granted") return
         reg.showNotification("", {
@@ -91,7 +93,7 @@ const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
             body: title,
             data
         })
-    }
+    // }
 }
 
 const authenticatedRequest = function (method, url, body) {

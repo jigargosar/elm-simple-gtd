@@ -42,11 +42,15 @@ import Model exposing (..)
 import View
 
 
-port showNotification : ( String, Bool, TodoNotification ) -> Cmd msg
+{-
+   port showNotification : ( String, Bool, TodoNotification ) -> Cmd msg
+
+   showNotificationCmd =
+       curry3 showNotification
+-}
 
 
-showNotificationCmd =
-    curry3 showNotification
+port showNotification : TodoNotification -> Cmd msg
 
 
 port closeNotification : String -> Cmd msg
@@ -380,31 +384,40 @@ setDomFocusToFocusedEntityCmd =
     (commonMsg.focus ".entity-list > [tabindex=0]")
 
 
-onUpdateNow now =
-    Return.map (Model.setNow now)
-        >> Return.andThenMaybe
-            (Model.findAndSnoozeOverDueTodo
-                >>? scheduleReminderNotifications
-            )
-
-
-scheduleReminderNotifications ( todo, model ) =
-    model ! [ showTodoNotificationCmd todo model, scheduleReminderNotificationHelp todo model ]
-
-
 
 {-
-   showTodoNotificationCmd =
-       createTodoNotification >> showNotification >> (::) # [ startAlarm () ] >> Cmd.batch
+   onUpdateNow now =
+       Return.map (Model.setNow now)
+           >> Return.andThenMaybe
+               (Model.findAndSnoozeOverDueTodo
+                   >>? scheduleReminderNotifications
+               )
+
+
+   scheduleReminderNotifications ( todo, model ) =
+       model ! [ showTodoNotificationCmd todo model, scheduleReminderNotificationHelp todo model ]
+
+   showTodoNotificationCmd todo model =
+       let
+           result uid =
+               createTodoNotification todo |> showNotificationCmd uid model.firebaseClient.connected
+       in
+           model |> Model.getMaybeUserId ?|> result ?= Cmd.none
 -}
 
 
-showTodoNotificationCmd todo model =
-    let
-        result uid =
-            createTodoNotification todo |> showNotificationCmd uid model.firebaseClient.connected
-    in
-        model |> Model.getMaybeUserId ?|> result ?= Cmd.none
+onUpdateNow now =
+    Return.map (Model.setNow now)
+        >> sendNotifications
+
+
+sendNotifications =
+    Return.andThenMaybe
+        (Model.findAndSnoozeOverDueTodo >>? (Tuple.mapFirst showTodoNotificationCmd >> Tuple2.swap))
+
+
+showTodoNotificationCmd =
+    createTodoNotification >> showNotification >> (::) # [ startAlarm () ] >> Cmd.batch
 
 
 withNow : (Time -> Msg) -> ReturnF

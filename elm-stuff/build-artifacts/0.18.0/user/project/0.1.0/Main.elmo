@@ -271,10 +271,10 @@ var _user$project$Main$update = function (msg) {
 						return _user$project$CommonMsg$update(_p16._0);
 					case 'OnPouchDBChange':
 						return _Fresheyeball$elm_return$Return$map(
-							A2(_user$project$Model$onPouchDBChange, _p16._0, _p16._1));
+							A2(_user$project$Model$upsertEncodedDocOnPouchDBChange, _p16._0, _p16._1));
 					case 'OnFirebaseChange':
 						return _Fresheyeball$elm_return$Return$effect_(
-							A2(_user$project$Model$upsertEncodedDocCmd, _p16._0, _p16._1));
+							A2(_user$project$Model$upsertEncodedDocOnFirebaseChange, _p16._0, _p16._1));
 					case 'SignIn':
 						return _Fresheyeball$elm_return$Return$command(
 							_user$project$Firebase$signIn(

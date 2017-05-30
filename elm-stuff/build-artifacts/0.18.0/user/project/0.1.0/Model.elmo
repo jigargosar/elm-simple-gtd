@@ -419,28 +419,28 @@ var _user$project$Model$focusNextEntity = F2(
 var _user$project$Model$getMainViewType = function (_) {
 	return _.mainViewType;
 };
-var _user$project$Model$upsertEncodedDocCmd = F2(
+var _user$project$Model$upsertEncodedDocOnFirebaseChange = F2(
 	function (dbName, encodedEntity) {
 		var _p9 = dbName;
 		switch (_p9) {
 			case 'todo-db':
 				return function (_p10) {
 					return A2(
-						_user$project$Store$upsertEncoded__,
+						_user$project$Store$upsertInPouchDbOnFirebaseChange,
 						encodedEntity,
 						_user$project$Model$getTodoStore(_p10));
 				};
 			case 'project-db':
 				return function (_p11) {
 					return A2(
-						_user$project$Store$upsertEncoded__,
+						_user$project$Store$upsertInPouchDbOnFirebaseChange,
 						encodedEntity,
 						_user$project$Model$getProjectStore(_p11));
 				};
 			case 'context-db':
 				return function (_p12) {
 					return A2(
-						_user$project$Store$upsertEncoded__,
+						_user$project$Store$upsertInPouchDbOnFirebaseChange,
 						encodedEntity,
 						_user$project$Model$getContextStore(_p12));
 				};
@@ -1408,7 +1408,7 @@ var _user$project$Model$toggleDeleteEntity = F2(
 			}
 		}()(model);
 	});
-var _user$project$Model$onPouchDBChange = F2(
+var _user$project$Model$upsertEncodedDocOnPouchDBChange = F2(
 	function (dbName, encodedEntity) {
 		var _p76 = dbName;
 		switch (_p76) {
@@ -1416,17 +1416,17 @@ var _user$project$Model$onPouchDBChange = F2(
 				return A2(
 					_user$project$Model$update,
 					_user$project$Model$todoStore,
-					_user$project$Store$upsertEncodedDocOnPouchDBChange(encodedEntity));
+					_user$project$Store$upsertOnPouchDBChange(encodedEntity));
 			case 'project-db':
 				return A2(
 					_user$project$Model$update,
 					_user$project$Model$projectStore,
-					_user$project$Store$upsertEncodedDocOnPouchDBChange(encodedEntity));
+					_user$project$Store$upsertOnPouchDBChange(encodedEntity));
 			case 'context-db':
 				return A2(
 					_user$project$Model$update,
 					_user$project$Model$contextStore,
-					_user$project$Store$upsertEncodedDocOnPouchDBChange(encodedEntity));
+					_user$project$Store$upsertOnPouchDBChange(encodedEntity));
 			default:
 				return _elm_lang$core$Basics$identity;
 		}

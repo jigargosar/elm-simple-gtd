@@ -57,8 +57,9 @@ export const setup = (app, dbList) => {
         const onChange = change => {
             // console.log("sending pouchdb change to firebase: ", change)
             console.log("sending pouchdb change to firebase: ", change.id)
-            const fireDoc = _.compose(_.omit("_rev"), _.merge(change.doc))
-                             ({"firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP})
+            const fireDoc =
+                _.compose(_.omit("_rev"), _.merge(change.doc)
+                )({"firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP})
             return firebaseApp
                 .database().ref(`/users/${uid}/${db.name}/${change.id}`)
                 .set(fireDoc)
@@ -84,7 +85,7 @@ export const setup = (app, dbList) => {
         const dbName = db.name
         const lastPersistedAtKey = `pouch-fire-sync.${dbName}.in.lastPersistedAt`
 
-        function updateKey(doc) {
+        function updateLastPersistedAt(doc) {
             localStorage.setItem(lastPersistedAtKey,
                 Math.min(doc.firebaseServerPersistedAt, Date.now())
             )
@@ -92,7 +93,7 @@ export const setup = (app, dbList) => {
 
         const onFirebaseChange = doc => {
             app.ports["onFirebaseChange"].send([dbName, doc])
-            updateKey(doc)
+            updateLastPersistedAt(doc)
         }
 
         const lastPersistedAtString = localStorage.getItem(lastPersistedAtKey)
@@ -119,7 +120,7 @@ export const setup = (app, dbList) => {
                   .then(_.equals(_.omit(["firebaseServerPersistedAt"], doc)))
                   .then((docsSame) => {
                       if (docsSame) {
-                          updateKey(doc)
+                          updateLastPersistedAt(doc)
                           return "firebase changes: docs same ignoring update"
                       } else {
                           onFirebaseChange(doc)

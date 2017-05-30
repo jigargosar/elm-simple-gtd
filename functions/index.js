@@ -88,10 +88,6 @@ function sendPushNotifications(notificationMap) {
         const notificationData = notificationEntry.val()
         const uid = notificationData.uid
         const clients = getUserClientsMemo(uid)
-        const isAnyClientConnected = _.any(_.prop("connected"), clients)
-        if (isAnyClientConnected) {
-            console.log("ignoring push, since we have at least one connected client.", notificationData, clients)
-        }
         promiseList.push(clients.then(sendPush(notificationData)))
     })
     return Promise.all(promiseList)
@@ -102,6 +98,17 @@ const sendPush = notificationData => clients => {
     const {todoId, timestamp, uid} = notificationData
 
     function sendPushForClient(client) {
+        if (client.connected) {
+            console
+                .log("ignoring push for connected client"
+                    , notificationData
+                    , client)
+
+            return Promise.resolve({
+                msg: "ignoring push for connected client", client, notificationData
+            })
+        }
+
         return admin
             .messaging()
             .sendToDevice(
@@ -129,15 +136,45 @@ function deleteToken(uid, deviceId) {
 }
 
 
-exports.onNotify =
-    functions
-        .database.ref("/users/{uid}/notify/{tag}")
-        .onWrite(event =>{
-            const oldData = event.data.previous.val();
-            const newData = event.data.val()
-            const uid = event.params["uid"]
+// exports.onNotify =
+//     functions
+//         .database.ref("/users/{uid}/notify/{tag}")
+//         .onWrite(event =>{
+//             const oldData = event.data.previous.val();
+//             const newData = event.data.val()
+//             const uid = event.params["uid"]
+//
+//             if (!oldData && newData || oldData && newData && oldData.timestamp < newData.timestamp) {
+//                 return getUserClients(uid).then(sendPush(newData))
+//             }
+//         })
 
-            if (!oldData && newData || oldData && newData && oldData.timestamp < newData.timestamp) {
-                return getUserClients(uid).then(sendPush(newData))
+
+exports.onTodoUpdated =
+    functions
+        .database.ref("/users/{uid}/todo-db/{todoId}")
+        .onWrite(event => {
+            const oldTodo = event.data.previous.val();
+            const newTodo = event.data.val()
+            const uid = event.params["uid"]
+            const todoId = event.params["todoId"]
+
+            if (oldTodo && newTodo) {
+                // todo was updated
+                if (oldTodo.dueAt && newTodo.dueAt
+                    && oldTodo.dueAt === newTodo.dueAt
+                    && oldTodo.reminder && oldTodo.reminder.at
+                    && newTodo.reminder && newTodo.reminder.at
+                    && oldTodo.reminder.at !== newTodo.reminder.at
+                ) {
+                    const timestamp = oldTodo.reminder.at
+                    //todo was snoozed
+                    const notificationData = {uid, timestamp, todoId}
+                    return getUserClients(uid)
+                        .then(sendPush(notificationData))
+                }
+
+
             }
+
         })

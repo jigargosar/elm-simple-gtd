@@ -15,8 +15,8 @@ port module Store
         , updateAllT2
         , findAndUpdateT
         , findAllByIdSetIn
-        , onPouchDbChange
-        , upsertEncoded__
+        , upsertOnPouchDBChange
+        , upsertInPouchDbOnFirebaseChange
         , persist
         )
 
@@ -234,24 +234,19 @@ decode encodedDoc store =
         |> Result.toMaybe
 
 
-upsertEncoded__ : D.Value -> Store x -> Cmd msg
-upsertEncoded__ jsonValue store =
+upsertInPouchDbOnFirebaseChange : D.Value -> Store x -> Cmd msg
+upsertInPouchDbOnFirebaseChange jsonValue store =
     decode jsonValue store
         ?|> upsertIn store
         ?= Cmd.none
 
 
-onPouchDbChange : D.Value -> Store x -> Store x
-onPouchDbChange encodedDoc store =
-    decode encodedDoc store ?|> insertExternal # store ?= store
+upsertOnPouchDBChange : D.Value -> Store x -> Store x
+upsertOnPouchDBChange encodedDoc store =
+    decode encodedDoc store ?|> upsertDocOnPouchDBChange # store ?= store
 
 
-insertExternal doc store =
-    {- let
-           _ =
-               Debug.log "exter doc change adding to store" (doc)
-       in
-    -}
+upsertDocOnPouchDBChange doc store =
     asIdDict store
         |> Dict.insert (Document.getId doc) doc
         |> Dict.values

@@ -1416,17 +1416,17 @@ var _user$project$Model$onPouchDBChange = F2(
 				return A2(
 					_user$project$Model$update,
 					_user$project$Model$todoStore,
-					_user$project$Store$onPouchDbChange(encodedEntity));
+					_user$project$Store$upsertEncodedDocOnPouchDBChange(encodedEntity));
 			case 'project-db':
 				return A2(
 					_user$project$Model$update,
 					_user$project$Model$projectStore,
-					_user$project$Store$onPouchDbChange(encodedEntity));
+					_user$project$Store$upsertEncodedDocOnPouchDBChange(encodedEntity));
 			case 'context-db':
 				return A2(
 					_user$project$Model$update,
 					_user$project$Model$contextStore,
-					_user$project$Store$onPouchDbChange(encodedEntity));
+					_user$project$Store$upsertEncodedDocOnPouchDBChange(encodedEntity));
 			default:
 				return _elm_lang$core$Basics$identity;
 		}

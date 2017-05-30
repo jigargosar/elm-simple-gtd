@@ -136,7 +136,7 @@ var _user$project$Store$updateExternalHelp = F2(
 				merge),
 			add);
 	});
-var _user$project$Store$insertExternal = F2(
+var _user$project$Store$upsertDocOnPouchDBChange = F2(
 	function (doc, store) {
 		return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$setList, store)(
 			_elm_lang$core$Dict$values(
@@ -155,14 +155,14 @@ var _user$project$Store$decode = F2(
 					A2(_elm_lang$core$Basics_ops['++'], 'Store ', store.name)),
 				A2(_elm_lang$core$Json_Decode$decodeValue, store.decoder, encodedDoc)));
 	});
-var _user$project$Store$onPouchDbChange = F2(
+var _user$project$Store$upsertOnPouchDBChange = F2(
 	function (encodedDoc, store) {
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 				A2(_user$project$Store$decode, encodedDoc, store),
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$insertExternal, store)),
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$upsertDocOnPouchDBChange, store)),
 			store);
 	});
 var _user$project$Store$replaceDoc__ = F2(
@@ -372,7 +372,7 @@ var _user$project$Store$persist = function (s) {
 		_user$project$Store$upsertIn(s));
 	return A2(_elm_lang$core$Platform_Cmd_ops['!'], ns, cmds);
 };
-var _user$project$Store$upsertEncoded__ = F2(
+var _user$project$Store$upsertInPouchDbOnFirebaseChange = F2(
 	function (jsonValue, store) {
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],

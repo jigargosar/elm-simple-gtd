@@ -773,32 +773,32 @@ setTodoStoreFromTuple tuple model =
     tuple |> Tuple.mapSecond (setTodoStore # model)
 
 
-onPouchDBChange dbName encodedEntity =
+upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            update todoStore (Store.onPouchDbChange encodedEntity)
+            update todoStore (Store.upsertOnPouchDBChange encodedEntity)
 
         "project-db" ->
-            update projectStore (Store.onPouchDbChange encodedEntity)
+            update projectStore (Store.upsertOnPouchDBChange encodedEntity)
 
         "context-db" ->
-            update contextStore (Store.onPouchDbChange encodedEntity)
+            update contextStore (Store.upsertOnPouchDBChange encodedEntity)
 
         _ ->
             identity
 
 
-upsertEncodedDocCmd : String -> E.Value -> Model -> Cmd msg
-upsertEncodedDocCmd dbName encodedEntity =
+upsertEncodedDocOnFirebaseChange : String -> E.Value -> Model -> Cmd msg
+upsertEncodedDocOnFirebaseChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            getTodoStore >> (Store.upsertEncoded__ encodedEntity)
+            getTodoStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
 
         "project-db" ->
-            getProjectStore >> (Store.upsertEncoded__ encodedEntity)
+            getProjectStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
 
         "context-db" ->
-            getContextStore >> (Store.upsertEncoded__ encodedEntity)
+            getContextStore >> (Store.upsertInPouchDbOnFirebaseChange encodedEntity)
 
         _ ->
             (\_ -> Cmd.none)

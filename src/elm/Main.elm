@@ -124,10 +124,10 @@ update msg =
                     CommonMsg.update msg
 
                 OnPouchDBChange dbName encodedDoc ->
-                    Return.map (Model.onPouchDBChange dbName encodedDoc)
+                    Return.map (Model.upsertEncodedDocOnPouchDBChange dbName encodedDoc)
 
                 OnFirebaseChange dbName encodedDoc ->
-                    Return.effect_ (Model.upsertEncodedDocCmd dbName encodedDoc)
+                    Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
                 SignIn ->
                     Return.command (Firebase.signIn ())

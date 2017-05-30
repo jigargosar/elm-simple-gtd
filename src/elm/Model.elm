@@ -1338,7 +1338,14 @@ updateTodo action todoId model =
 
 getNotificationCmdFromTodoChange uid (( old, new ) as change) =
     if Todo.hasReminderChanged change then
-        Cmd.none
+        let
+            todoId =
+                Document.getId new
+
+            maybeTime =
+                Todo.getMaybeReminderTime new
+        in
+            Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
     else
         Cmd.none
 

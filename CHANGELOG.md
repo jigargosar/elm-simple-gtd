@@ -3,6 +3,8 @@
     * ignore push for connected clients.
     * functions: use user clients instead of user tokens to send push
     * functions: add onTodoChanged for pushing notifications, when a todo is snoozed. (this happens only when at least one client is connected and auto snoozes when reminder is due.)
+* [fix] schedule notification in firebase, whenever todo changes. 
+  * we had to centralize update of todo, and model had to return cmds. Not clean but will work for now.
 
 ## v0.16.14 - 2017-05-29
 * [fix] notifications: step 1: store client info  

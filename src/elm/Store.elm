@@ -18,6 +18,8 @@ port module Store
         , upsertOnPouchDBChange
         , upsertInPouchDbOnFirebaseChange
         , persist
+        , UpdateAllReturn
+        , ChangeList
         )
 
 import Dict

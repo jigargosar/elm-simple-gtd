@@ -1023,6 +1023,11 @@ var _user$project$Model$update = F3(
 			smallF(
 				lens.get(big)));
 	});
+var _user$project$Model$updateAllDocsT2 = F4(
+	function (idSet, updateFnT2, store, model) {
+		var storeF = A3(_user$project$Store$updateAllT2, idSet, model.now, updateFnT2);
+		return A3(_user$project$Model$update, store, storeF, model);
+	});
 var _user$project$Model$updateAllDocs = F4(
 	function (idSet, updateFn, store, model) {
 		var storeF = A3(_user$project$Store$updateAll, idSet, model.now, updateFn);
@@ -1253,6 +1258,15 @@ var _user$project$Model$snoozeTodoWithOffset = F3(
 					todoId,
 					_p63));
 		}(model);
+	});
+var _user$project$Model$updateAllTodos2 = F3(
+	function (action, todoIdSet, model) {
+		return A4(
+			_user$project$Model$updateAllDocsT2,
+			todoIdSet,
+			A2(_user$project$Model$todoUpdateF, action, model),
+			_user$project$Model$todoStoreT2,
+			model);
 	});
 var _user$project$Model$todoStore = {
 	get: function (_) {
@@ -1497,6 +1511,10 @@ var _user$project$Model$TodoNotificationEvent = F2(
 		return {action: a, data: b};
 	});
 var _user$project$Model$Lens = F2(
+	function (a, b) {
+		return {get: a, set: b};
+	});
+var _user$project$Model$LensT2 = F2(
 	function (a, b) {
 		return {get: a, set: b};
 	});

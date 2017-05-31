@@ -132,6 +132,10 @@ type alias Lens small big =
     { get : big -> small, set : small -> big -> big }
 
 
+type alias LensT2 small big x =
+    { get : big -> small, set : ( x, small ) -> big -> ( x, big ) }
+
+
 contextStore =
     { get = .contextStore, set = (\s b -> { b | contextStore = s }) }
 
@@ -144,6 +148,7 @@ todoStore =
     { get = .todoStore, set = (\s b -> { b | todoStore = s }) }
 
 
+todoStoreT2 : LensT2 Todo.Store Model x
 todoStoreT2 =
     { get = .todoStore, set = (\( x, s ) b -> ( x, { b | todoStore = s } )) }
 
@@ -1276,6 +1281,24 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
                     identity
 
 
+updateAllDocsT2 :
+    Set Document.Id
+    -> Document.DocF x
+    -> LensT2 (Store.Store x) Model (Store.ChangeList x)
+    -> Model
+    -> ( Store.ChangeList x, Model )
+updateAllDocsT2 idSet updateFnT2 store model =
+    let
+        storeF =
+            Store.updateAllT2 idSet model.now updateFnT2
+    in
+        update store storeF model
+
+
+
+--            |> updateEntityListCursor model
+
+
 updateAllDocs idSet updateFn store model =
     let
         storeF =
@@ -1327,5 +1350,32 @@ updateAllTodos action todoIdSet model =
         model
 
 
+updateAllTodos2 action todoIdSet model =
+    updateAllDocsT2 todoIdSet
+        (todoUpdateF action model)
+        todoStoreT2
+        model
+
+
 todoUpdateF action model =
     Todo.update [ action ] model.now
+
+
+
+{-
+   updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg
+   updateTodo action todoId model =
+       let
+           todoChangesToCmd ( changes, model ) =
+               case getMaybeUserId model of
+                   Nothing ->
+                       Cmd.none
+
+                   Just uid ->
+                       changes
+                           .|> getNotificationCmdFromTodoChange uid
+                           |> Cmd.batch
+       in
+           update todoStoreT2 (Todo.Store.update action model.now todoId) model
+               |> apply2 ( Tuple.second, todoChangesToCmd )
+-}

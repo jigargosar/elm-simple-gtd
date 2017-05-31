@@ -33,6 +33,10 @@ type alias Revision =
     String
 
 
+type alias DocF x =
+    Document x -> Document x
+
+
 defaultRevision =
     ""
 

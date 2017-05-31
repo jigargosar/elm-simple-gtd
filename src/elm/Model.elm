@@ -1212,6 +1212,14 @@ getProjectsAsIdDict =
 -- Document Update Helpers
 
 
+type alias Return msg =
+    Return.Return msg Model
+
+
+type alias ModelReturnF msg =
+    Model -> Return msg
+
+
 findAndUpdateDocT :
     (Document x -> Bool)
     -> (Document x -> Document x)
@@ -1279,18 +1287,6 @@ updateAllDocs idSet updateFn store model =
 
 findAndUpdateTodoT2 findFn action model =
     findAndUpdateDocT findFn (todoUpdateF action model) todoStoreT2 model
-
-
-
-{--> Maybe ( Todo.Model, Todo.Model, Todo.Store )-}
-
-
-type alias Return msg =
-    Return.Return msg Model
-
-
-type alias ModelReturnF msg =
-    Model -> Return msg
 
 
 updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg

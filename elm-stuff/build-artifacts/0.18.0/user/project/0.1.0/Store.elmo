@@ -273,47 +273,27 @@ var _user$project$Store$updateAllT2 = F4(
 			},
 			idSet);
 	});
-var _user$project$Store$updateAll = F4(
-	function (idSet, now, updateFn, store) {
-		return _elm_lang$core$Tuple$second(
-			A4(_user$project$Store$updateAllT2, idSet, now, updateFn, store));
-	});
-var _user$project$Store$updateAllDocHelp = F3(
-	function (id, updateDocFn, store) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				A2(_user$project$Store$findById, id, store),
-				function (_p17) {
-					return A2(
-						_user$project$Store$replaceDocIn,
-						store,
-						updateDocFn(_p17));
-				}),
-			store);
-	});
 var _user$project$Store$encode = F2(
 	function (doc, s) {
 		return A2(_user$project$Document$encode, s.otherFieldsEncoder, doc);
 	});
 var _user$project$Store$decodeList = function (decoder) {
-	return function (_p18) {
+	return function (_p17) {
 		return A2(
 			_elm_lang$core$List$filterMap,
 			function (result) {
-				var _p19 = result;
-				if (_p19.ctor === 'Ok') {
-					return _elm_lang$core$Maybe$Just(_p19._0);
+				var _p18 = result;
+				if (_p18.ctor === 'Ok') {
+					return _elm_lang$core$Maybe$Just(_p18._0);
 				} else {
-					var _p20 = A2(_elm_lang$core$Debug$log, 'Error while decoding Project', _p19._0);
+					var _p19 = A2(_elm_lang$core$Debug$log, 'Error while decoding Project', _p18._0);
 					return _elm_lang$core$Maybe$Nothing;
 				}
 			},
 			A2(
 				_elm_lang$core$List$map,
 				_elm_lang$core$Json_Decode$decodeValue(decoder),
-				_p18));
+				_p17));
 	};
 };
 var _user$project$Store$init = F6(
@@ -393,9 +373,9 @@ var _user$project$Store$pouchDBChanges = _elm_lang$core$Native_Platform.incoming
 				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
 		},
 		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
-var _user$project$Store$onChange = function (_p21) {
+var _user$project$Store$onChange = function (_p20) {
 	return _user$project$Store$pouchDBChanges(
-		_elm_lang$core$Basics$uncurry(_p21));
+		_elm_lang$core$Basics$uncurry(_p20));
 };
 var _user$project$Store$Store = F6(
 	function (a, b, c, d, e, f) {

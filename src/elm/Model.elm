@@ -148,6 +148,16 @@ todoStore =
     { get = .todoStore, set = (\s b -> { b | todoStore = s }) }
 
 
+contextStoreT2 : LensT2 Context.Store Model x
+contextStoreT2 =
+    { get = .contextStore, set = (\( x, s ) b -> ( x, { b | contextStore = s } )) }
+
+
+projectStoreT2 : LensT2 Project.Store Model x
+projectStoreT2 =
+    { get = .projectStore, set = (\( x, s ) b -> ( x, { b | projectStore = s } )) }
+
+
 todoStoreT2 : LensT2 Todo.Store Model x
 todoStoreT2 =
     { get = .todoStore, set = (\( x, s ) b -> ( x, { b | todoStore = s } )) }
@@ -458,17 +468,13 @@ saveCurrentForm model =
     case model.editMode of
         EditMode.EditContext form ->
             model
-                |> updateDoc form.id
+                |> updateContext form.id
                     (Context.setName form.name)
-                    contextStore
-                |> Return.singleton
 
         EditMode.EditProject form ->
             model
-                |> updateDoc form.id
+                |> updateProject form.id
                     (Project.setName form.name)
-                    projectStore
-                |> Return.singleton
 
         EditMode.EditTodo form ->
             model
@@ -531,16 +537,10 @@ toggleDeleteEntity entity model =
         model
             |> case entity of
                 Entity.ContextEntity context ->
-                    updateDoc entityId
-                        (Document.toggleDeleted)
-                        contextStore
-                        >> Return.singleton
+                    updateContext entityId Document.toggleDeleted
 
                 Entity.ProjectEntity project ->
-                    updateDoc entityId
-                        (Document.toggleDeleted)
-                        projectStore
-                        >> Return.singleton
+                    updateProject entityId Document.toggleDeleted
 
                 Entity.TodoEntity todo ->
                     updateTodo Todo.ToggleDeleted entityId
@@ -1246,8 +1246,18 @@ findAndUpdateDocT docFindFn docUpdateFn store model =
         updateMaybe store updateMaybeF model
 
 
-updateDoc id =
-    updateAllDocs (Set.singleton id)
+updateContext id updateFn =
+    updateAllNamedDocsDocs (Set.singleton id) updateFn contextStoreT2
+
+
+updateProject id updateFn =
+    updateAllNamedDocsDocs (Set.singleton id) updateFn projectStoreT2
+
+
+updateAllNamedDocsDocs idSet updateFn store model =
+    update store (Store.updateAllT2 idSet model.now updateFn) model
+        |> apply2 ( Tuple.second, (\changes -> Cmd.none) )
+        |> Return.map (updateEntityListCursor model)
 
 
 updateEntityListCursor oldModel newModel =
@@ -1281,15 +1291,6 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
                     identity
 
 
-updateAllDocs idSet updateFn store model =
-    let
-        storeF =
-            Store.updateAll idSet model.now updateFn
-    in
-        update store storeF model
-            |> updateEntityListCursor model
-
-
 findAndUpdateTodoT2 findFn action model =
     findAndUpdateDocT findFn (todoUpdateF action model) todoStoreT2 model
 
@@ -1297,20 +1298,6 @@ findAndUpdateTodoT2 findFn action model =
 updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg
 updateTodo action todoId =
     updateAllTodos action (Set.singleton todoId)
-
-
-getNotificationCmdFromTodoChange uid (( old, new ) as change) =
-    if Todo.hasReminderChanged change then
-        let
-            todoId =
-                Document.getId new
-
-            maybeTime =
-                Todo.getMaybeReminderTime new
-        in
-            Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
-    else
-        Cmd.none
 
 
 updateAllTodos : Todo.UpdateAction -> Document.IdSet -> ModelReturnF msg
@@ -1329,6 +1316,20 @@ updateAllTodos action todoIdSet model =
         update todoStoreT2 (Todo.Store.updateAll todoIdSet action model.now) model
             |> apply2 ( Tuple.second, todoChangesToCmd )
             |> Return.map (updateEntityListCursor model)
+
+
+getNotificationCmdFromTodoChange uid (( old, new ) as change) =
+    if Todo.hasReminderChanged change then
+        let
+            todoId =
+                Document.getId new
+
+            maybeTime =
+                Todo.getMaybeReminderTime new
+        in
+            Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
+    else
+        Cmd.none
 
 
 todoUpdateF action model =

@@ -11,7 +11,6 @@ port module Store
         , asIdDict
         , asList
         , filter
-        , updateAll
         , updateAllT2
         , findAndUpdateT
         , findAllByIdSetIn
@@ -214,24 +213,6 @@ updateAllT2 idSet now updateFn store =
             )
     in
         Set.foldl updateAndCollectChanges ( [], store ) idSet
-
-
-updateAll :
-    Set Document.Id
-    -> Time
-    -> (Document x -> Document x)
-    -> Store x
-    -> Store x
-updateAll idSet now updateFn store =
-    updateAllT2 idSet now updateFn store
-        |> Tuple.second
-
-
-updateAllDocHelp id updateDocFn store =
-    findById id store
-        ?|> updateDocFn
-        >> replaceDocIn store
-        ?= store
 
 
 decode : D.Value -> Store x -> Maybe (Document x)

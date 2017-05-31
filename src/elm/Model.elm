@@ -1313,6 +1313,7 @@ getNotificationCmdFromTodoChange uid (( old, new ) as change) =
         Cmd.none
 
 
+updateAllTodos : Todo.UpdateAction -> Document.IdSet -> ModelReturnF msg
 updateAllTodos action todoIdSet model =
     let
         todoChangesToCmd ( changes, model ) =
@@ -1327,6 +1328,7 @@ updateAllTodos action todoIdSet model =
     in
         update todoStoreT2 (Todo.Store.updateAll todoIdSet action model.now) model
             |> apply2 ( Tuple.second, todoChangesToCmd )
+            |> Return.map (updateEntityListCursor model)
 
 
 todoUpdateF action model =

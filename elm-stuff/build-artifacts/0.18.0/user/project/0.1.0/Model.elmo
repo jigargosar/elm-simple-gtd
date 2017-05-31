@@ -1232,13 +1232,16 @@ var _user$project$Model$updateAllTodos = F3(
 			}
 		};
 		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
-			{ctor: '_Tuple2', _0: _elm_lang$core$Tuple$second, _1: todoChangesToCmd},
-			A3(
-				_user$project$Model$update,
-				_user$project$Model$todoStoreT2,
-				A3(_user$project$Todo_Store$updateAll, todoIdSet, action, model.now),
-				model));
+			_Fresheyeball$elm_return$Return$map,
+			_user$project$Model$updateEntityListCursor(model),
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
+				{ctor: '_Tuple2', _0: _elm_lang$core$Tuple$second, _1: todoChangesToCmd},
+				A3(
+					_user$project$Model$update,
+					_user$project$Model$todoStoreT2,
+					A3(_user$project$Todo_Store$updateAll, todoIdSet, action, model.now),
+					model)));
 	});
 var _user$project$Model$updateTodoAndMaybeAlsoSelected = F3(
 	function (action, todoId, model) {

@@ -11,6 +11,7 @@ import Maybe.Extra as Maybe
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Set exposing (Set)
 
 
 getId =
@@ -49,6 +50,10 @@ type alias Meta =
     , createdAt : Time
     , modifiedAt : Time
     }
+
+
+type alias IdSet =
+    Set Id
 
 
 type alias Document moreFields =

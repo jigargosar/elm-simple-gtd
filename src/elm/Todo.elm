@@ -4,6 +4,7 @@ import Context
 import Date
 import Date.Distance exposing (defaultConfig)
 import Document exposing (Revision)
+import Firebase exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
@@ -245,12 +246,13 @@ defaultContextId =
     ""
 
 
-todoConstructor id rev createdAt modifiedAt deleted deletedAt done text dueAt projectId contextId reminder =
+todoConstructor id rev createdAt modifiedAt deleted deviceId deletedAt done text dueAt projectId contextId reminder =
     { id = id
     , rev = rev
     , dirty = False
     , createdAt = createdAt
     , modifiedAt = modifiedAt
+    , deviceId = deviceId
     , deleted = deleted
 
     --
@@ -321,6 +323,7 @@ init createdAt text id =
         createdAt
         createdAt
         defaultDeleted
+        ""
         defaultDeletedAt
         defaultDone
         text

@@ -1,5 +1,6 @@
 module Document exposing (..)
 
+import Firebase exposing (DeviceId)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -54,6 +55,7 @@ type alias Document moreFields =
         , deleted : Bool
         , createdAt : Time
         , modifiedAt : Time
+        , deviceId : DeviceId
     }
 
 
@@ -73,13 +75,14 @@ encode encodeOtherFields doc =
         )
 
 
-documentFieldsDecoder : Decoder (Id -> Revision -> Time -> Time -> Bool -> x) -> Decoder x
+documentFieldsDecoder : Decoder (Id -> Revision -> Time -> Time -> Bool -> DeviceId -> x) -> Decoder x
 documentFieldsDecoder =
     D.required "_id" D.string
         >> D.optional "_rev" D.string defaultRevision
         >> D.optional "createdAt" (D.float) 0
         >> D.optional "modifiedAt" (D.float) 0
         >> D.optional "deleted" D.bool False
+        >> D.optional "deviceId" D.string ""
 
 
 isDeleted =
@@ -92,6 +95,10 @@ setDeleted deleted model =
 
 setModifiedAt modifiedAt model =
     { model | modifiedAt = modifiedAt }
+
+
+setDeviceId deviceId model =
+    { model | deviceId = deviceId }
 
 
 toggleDeleted model =

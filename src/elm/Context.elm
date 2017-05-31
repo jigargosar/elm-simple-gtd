@@ -38,8 +38,8 @@ type alias Encoded =
     E.Value
 
 
-constructor : Id -> Revision -> Time -> Time -> Bool -> Name -> Model
-constructor id rev createdAt modifiedAt deleted name =
+constructor : Id -> Revision -> Time -> Time -> Bool -> Name -> DeviceId -> Model
+constructor id rev createdAt modifiedAt deleted name deviceId =
     { id = id
     , rev = rev
     , createdAt = createdAt
@@ -47,11 +47,12 @@ constructor id rev createdAt modifiedAt deleted name =
     , dirty = False
     , deleted = deleted
     , name = name
+    , deviceId = deviceId
     }
 
 
 init name now id =
-    constructor id "" now now False name
+    constructor id "" now now False name ""
 
 
 otherFieldsEncoder : Document Record -> List ( String, E.Value )
@@ -68,7 +69,7 @@ decoder =
 
 null : Model
 null =
-    constructor "" "" 0 0 False "Inbox"
+    constructor "" "" 0 0 False "Inbox" ""
 
 
 isNull =
@@ -94,23 +95,6 @@ setDeleted deleted model =
 storeGenerator : DeviceId -> List Encoded -> Random.Generator Store
 storeGenerator =
     Store.generator "context-db" otherFieldsEncoder decoder
-
-
-insertIfNotExistByName name_ now context =
-    let
-        name =
-            String.trim name_
-    in
-        if (String.isEmpty name || String.toLower name == "inbox") then
-            context
-        else
-            findByName name context
-                |> Maybe.unpack
-                    (\_ ->
-                        Store.insert (init name now) context
-                            |> Tuple.second
-                    )
-                    (\_ -> context)
 
 
 findNameById id =

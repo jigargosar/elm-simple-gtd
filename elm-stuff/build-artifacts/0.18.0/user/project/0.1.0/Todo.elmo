@@ -52,14 +52,16 @@ var _user$project$Todo$todoConstructor = function (id) {
 		return function (createdAt) {
 			return function (modifiedAt) {
 				return function (deleted) {
-					return function (deletedAt) {
-						return function (done) {
-							return function (text) {
-								return function (dueAt) {
-									return function (projectId) {
-										return function (contextId) {
-											return function (reminder) {
-												return {id: id, rev: rev, dirty: false, createdAt: createdAt, modifiedAt: modifiedAt, deleted: deleted, deletedAt: deletedAt, done: done, text: text, dueAt: dueAt, projectId: projectId, contextId: contextId, reminder: reminder};
+					return function (deviceId) {
+						return function (deletedAt) {
+							return function (done) {
+								return function (text) {
+									return function (dueAt) {
+										return function (projectId) {
+											return function (contextId) {
+												return function (reminder) {
+													return {id: id, rev: rev, dirty: false, createdAt: createdAt, modifiedAt: modifiedAt, deviceId: deviceId, deleted: deleted, deletedAt: deletedAt, done: done, text: text, dueAt: dueAt, projectId: projectId, contextId: contextId, reminder: reminder};
+												};
 											};
 										};
 									};
@@ -331,7 +333,7 @@ var _user$project$Todo$decoder = _user$project$Todo$todoRecordDecoder(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Todo$todoConstructor)));
 var _user$project$Todo$init = F3(
 	function (createdAt, text, id) {
-		return _user$project$Todo$todoConstructor(id)(_user$project$Document$defaultRevision)(createdAt)(createdAt)(_user$project$Todo$defaultDeleted)(_user$project$Todo$defaultDeletedAt)(_user$project$Todo$defaultDone)(text)(_user$project$Todo$defaultDueAt)(_user$project$Todo$defaultProjectId)(_user$project$Todo$defaultContextId)(_user$project$Todo$defaultReminder);
+		return _user$project$Todo$todoConstructor(id)(_user$project$Document$defaultRevision)(createdAt)(createdAt)(_user$project$Todo$defaultDeleted)('')(_user$project$Todo$defaultDeletedAt)(_user$project$Todo$defaultDone)(text)(_user$project$Todo$defaultDueAt)(_user$project$Todo$defaultProjectId)(_user$project$Todo$defaultContextId)(_user$project$Todo$defaultReminder);
 	});
 var _user$project$Todo$maybeTimeToReminder = function (maybeTime) {
 	return A2(

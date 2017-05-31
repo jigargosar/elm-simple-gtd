@@ -19,7 +19,8 @@ import Time exposing (Time)
 
 
 type alias Record =
-    { name : Name }
+    { name : Name
+    }
 
 
 type alias Project =
@@ -61,19 +62,6 @@ storeGenerator =
 
 findByName projectName =
     Store.findBy (nameEquals (String.trim projectName))
-
-
-insertIfNotExistByName projectName now store =
-    if (String.Extra.isBlank projectName) then
-        store
-    else
-        findByName projectName store
-            |> Maybe.Extra.unpack
-                (\_ ->
-                    Store.insert (init projectName now) store
-                        |> Tuple.second
-                )
-                (\_ -> store)
 
 
 nameEquals name =
@@ -128,9 +116,10 @@ updateName updater model =
     setName (updater model) model
 
 
-constructor id rev createdAt modifiedAt deleted name =
+constructor id rev createdAt modifiedAt deleted name deviceId =
     { id = id
     , rev = rev
+    , deviceId = deviceId
     , createdAt = createdAt
     , modifiedAt = modifiedAt
     , deleted = deleted
@@ -141,12 +130,12 @@ constructor id rev createdAt modifiedAt deleted name =
 
 init : Name -> Time -> Id -> Model
 init name now id =
-    constructor id "" now now False name
+    constructor id "" now now False name ""
 
 
 null : Model
 null =
-    constructor "" "" 0 0 False "<No Project>"
+    constructor "" "" 0 0 False "<No Project>" ""
 
 
 isNull =

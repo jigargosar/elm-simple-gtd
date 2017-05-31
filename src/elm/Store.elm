@@ -143,15 +143,15 @@ findAndUpdateT :
     -> Store x
     -> Maybe ( Document x, Store x )
 findAndUpdateT findFn now updateFn store =
-    let
-        updateAndSetModifiedAt =
-            updateFn >> Document.setModifiedAt now
-    in
-        findBy findFn store
-            ?+> (updateAndSetModifiedAt
-                    >> apply2 ( Document.getId, replaceDocIn store )
-                    >> (\( id, store ) -> findById id store ?|> (\doc -> ( doc, store )))
-                )
+    findBy findFn store
+        ?+> (getUpdateFnDecorator updateFn now store
+                >> apply2 ( Document.getId, replaceDocIn store )
+                >> (\( id, store ) -> findById id store ?|> (\doc -> ( doc, store )))
+            )
+
+
+getUpdateFnDecorator updateFn now store =
+    updateFn >> Document.setModifiedAt now >> Document.setDeviceId store.deviceId
 
 
 type alias Change x =
@@ -180,8 +180,8 @@ updateT2 :
     -> Document.Id
     -> Store x
     -> Maybe (UpdateReturn x)
-updateT2 now updateFn =
-    updateT2Help (updateFn >> Document.setModifiedAt now)
+updateT2 now updateFn id store =
+    updateT2Help (getUpdateFnDecorator updateFn now store) id store
 
 
 updateT2Help :
@@ -223,7 +223,7 @@ updateAllDocs :
 updateAllDocs idSet now updateFn store =
     let
         updateAndSetModifiedAt =
-            updateFn >> Document.setModifiedAt now
+            getUpdateFnDecorator updateFn now store
     in
         idSet |> Set.foldl (updateAllDocHelp # updateAndSetModifiedAt) store
 

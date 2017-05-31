@@ -3,6 +3,12 @@ var _user$project$Document$toggleDeleted = function (model) {
 		model,
 		{deleted: !model.deleted});
 };
+var _user$project$Document$setDeviceId = F2(
+	function (deviceId, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{deviceId: deviceId});
+	});
 var _user$project$Document$setModifiedAt = F2(
 	function (modifiedAt, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -70,25 +76,30 @@ var _user$project$Document$defaultRevision = '';
 var _user$project$Document$documentFieldsDecoder = function (_p0) {
 	return A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-		'deleted',
-		_elm_lang$core$Json_Decode$bool,
-		false,
+		'deviceId',
+		_elm_lang$core$Json_Decode$string,
+		'',
 		A4(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-			'modifiedAt',
-			_elm_lang$core$Json_Decode$float,
-			0,
+			'deleted',
+			_elm_lang$core$Json_Decode$bool,
+			false,
 			A4(
 				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-				'createdAt',
+				'modifiedAt',
 				_elm_lang$core$Json_Decode$float,
 				0,
 				A4(
 					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-					'_rev',
-					_elm_lang$core$Json_Decode$string,
-					_user$project$Document$defaultRevision,
-					A3(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required, '_id', _elm_lang$core$Json_Decode$string, _p0)))));
+					'createdAt',
+					_elm_lang$core$Json_Decode$float,
+					0,
+					A4(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+						'_rev',
+						_elm_lang$core$Json_Decode$string,
+						_user$project$Document$defaultRevision,
+						A3(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required, '_id', _elm_lang$core$Json_Decode$string, _p0))))));
 };
 var _user$project$Document$getId = function (_) {
 	return _.id;

@@ -202,17 +202,8 @@ updateAllT2 :
     -> (Document x -> Document x)
     -> Store x
     -> UpdateAllReturn x
-updateAllT2 idSet now updateFn store =
-    let
-        updateAndCollectChanges : Id -> UpdateAllReturnF x
-        updateAndCollectChanges =
-            (\id (( list, store ) as acc) ->
-                updateT2 now updateFn id store
-                    ?|> Tuple.mapFirst (List.prependIn list)
-                    ?= acc
-            )
-    in
-        Set.foldl updateAndCollectChanges ( [], store ) idSet
+updateAllT2 idSet =
+    findAndUpdateAllBy (Document.getId >> Set.member # idSet)
 
 
 findAndUpdateAllBy :

@@ -249,45 +249,21 @@ var _user$project$Store$updateT2 = F4(
 			id,
 			store);
 	});
-var _user$project$Store$updateAllT2 = F4(
-	function (idSet, now, updateFn, store) {
-		var updateAndCollectChanges = F2(
-			function (id, _p15) {
-				var _p16 = _p15;
-				return A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-						A4(_user$project$Store$updateT2, now, updateFn, id, _p16._1),
-						_elm_lang$core$Tuple$mapFirst(
-							_user$project$Ext_List$prependIn(_p16._0))),
-					_p16);
-			});
-		return A3(
-			_elm_lang$core$Set$foldl,
-			updateAndCollectChanges,
-			{
-				ctor: '_Tuple2',
-				_0: {ctor: '[]'},
-				_1: store
-			},
-			idSet);
-	});
 var _user$project$Store$findAndUpdateAllBy = F4(
 	function (pred, now, updateFn_, store) {
 		var updateFn = A3(_user$project$Store$getUpdateFnDecorator, updateFn_, now, store);
 		var updateAndCollectChanges = F2(
-			function (oldDoc, _p17) {
-				var _p18 = _p17;
+			function (oldDoc, _p15) {
+				var _p16 = _p15;
 				var newDoc = updateFn(oldDoc);
 				return {
 					ctor: '_Tuple2',
 					_0: {
 						ctor: '::',
 						_0: {ctor: '_Tuple2', _0: oldDoc, _1: newDoc},
-						_1: _p18._0
+						_1: _p16._0
 					},
-					_1: A2(_user$project$Store$replaceDocIn, _p18._1, newDoc)
+					_1: A2(_user$project$Store$replaceDocIn, _p16._1, newDoc)
 				};
 			});
 		return A3(
@@ -303,27 +279,37 @@ var _user$project$Store$findAndUpdateAllBy = F4(
 				pred,
 				_user$project$Store$asList(store)));
 	});
+var _user$project$Store$updateAllT2 = function (idSet) {
+	return _user$project$Store$findAndUpdateAllBy(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
+			function (_p17) {
+				return _elm_lang$core$Set$member(
+					_user$project$Document$getId(_p17));
+			},
+			idSet));
+};
 var _user$project$Store$encode = F2(
 	function (doc, s) {
 		return A2(_user$project$Document$encode, s.otherFieldsEncoder, doc);
 	});
 var _user$project$Store$decodeList = function (decoder) {
-	return function (_p19) {
+	return function (_p18) {
 		return A2(
 			_elm_lang$core$List$filterMap,
 			function (result) {
-				var _p20 = result;
-				if (_p20.ctor === 'Ok') {
-					return _elm_lang$core$Maybe$Just(_p20._0);
+				var _p19 = result;
+				if (_p19.ctor === 'Ok') {
+					return _elm_lang$core$Maybe$Just(_p19._0);
 				} else {
-					var _p21 = A2(_elm_lang$core$Debug$log, 'Error while decoding Project', _p20._0);
+					var _p20 = A2(_elm_lang$core$Debug$log, 'Error while decoding Project', _p19._0);
 					return _elm_lang$core$Maybe$Nothing;
 				}
 			},
 			A2(
 				_elm_lang$core$List$map,
 				_elm_lang$core$Json_Decode$decodeValue(decoder),
-				_p19));
+				_p18));
 	};
 };
 var _user$project$Store$init = F6(
@@ -403,9 +389,9 @@ var _user$project$Store$pouchDBChanges = _elm_lang$core$Native_Platform.incoming
 				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
 		},
 		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
-var _user$project$Store$onChange = function (_p22) {
+var _user$project$Store$onChange = function (_p21) {
 	return _user$project$Store$pouchDBChanges(
-		_elm_lang$core$Basics$uncurry(_p22));
+		_elm_lang$core$Basics$uncurry(_p21));
 };
 var _user$project$Store$Store = F6(
 	function (a, b, c, d, e, f) {

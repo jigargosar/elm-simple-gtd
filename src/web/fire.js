@@ -3,28 +3,28 @@ const _ = require("ramda")
 const Kefir = require("kefir")
 
 
-const firebaseDevConfig = {
-    apiKey: "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc",
-    authDomain: "rational-mote-664.firebaseapp.com",
-    databaseURL: "https://rational-mote-664.firebaseio.com",
-    projectId: "rational-mote-664",
-    storageBucket: "rational-mote-664.appspot.com",
-    messagingSenderId: "49437522774"
-}
-
-const firebaseProdConfig = {
-    apiKey: "AIzaSyDgqOiOMuTvK3PdzJ0Oz6ctEg-devcgZYc",
-    authDomain: "simple-gtd-prod.firebaseapp.com",
-    databaseURL: "https://simple-gtd-prod.firebaseio.com",
-    projectId: "simple-gtd-prod",
-    storageBucket: "simple-gtd-prod.appspot.com",
-    messagingSenderId: "1061254169900"
-}
-
-//noinspection JSUnresolvedVariable
-const firebaseConfig =
-    IS_DEVELOPMENT_ENV ? firebaseDevConfig : firebaseProdConfig
-
+const firebaseConfig = (() => {
+    //noinspection JSUnresolvedVariable
+    if (IS_DEVELOPMENT_ENV) {
+        return {
+            apiKey: "AIzaSyASFVPlWjIrpgSlmlEEIMZ0dtPFOuRC0Hc",
+            authDomain: "rational-mote-664.firebaseapp.com",
+            databaseURL: "https://rational-mote-664.firebaseio.com",
+            projectId: "rational-mote-664",
+            storageBucket: "rational-mote-664.appspot.com",
+            messagingSenderId: "49437522774"
+        }
+    } else {
+        return {
+            apiKey: "AIzaSyDgqOiOMuTvK3PdzJ0Oz6ctEg-devcgZYc",
+            authDomain: "simple-gtd-prod.firebaseapp.com",
+            databaseURL: "https://simple-gtd-prod.firebaseio.com",
+            projectId: "simple-gtd-prod",
+            storageBucket: "simple-gtd-prod.appspot.com",
+            messagingSenderId: "1061254169900"
+        }
+    }
+})()
 
 export const setup = (app, dbList, localDeviceId) => {
     const firebaseApp = firebase.initializeApp(firebaseConfig);
@@ -66,8 +66,6 @@ export const setup = (app, dbList, localDeviceId) => {
                 return change.seq
             }
             if (isDocChangeLocal(change.doc)) {
-
-                // console.log("sending pouchdb change to firebase: ", change)
                 console.log("[PouchToFire]: sending local change: ",
                     change, change.doc.deviceId, localDeviceId)
 
@@ -81,7 +79,7 @@ export const setup = (app, dbList, localDeviceId) => {
                     .set(fireDoc)
                     .then(updateLastSeq)
             }
-            else{
+            else {
                 console.log("[PouchToFire]: ignoring non-local change: ",
                     change, change.doc.deviceId, localDeviceId)
                 return Promise.resolve(updateLastSeq())
@@ -123,9 +121,6 @@ export const setup = (app, dbList, localDeviceId) => {
             .ref(`/users/${uid}/${dbName}`)
             .orderByChild("firebaseServerPersistedAt")
             .startAt(lastPersistedAt + 1)
-
-        // todoDbRef.on("child_added", onFirebaseChange(dbName))
-        // todoDbRef.on("child_changed", onFirebaseChange(dbName))
 
         const changeStream = Kefir.merge([
             Kefir.fromEvents(todoDbRef, "child_changed"),

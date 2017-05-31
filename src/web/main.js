@@ -79,7 +79,7 @@ async function boot() {
     const app = Elm["Main"]
         .embed(document.getElementById("elm-app-container"), flags)
 
-    const fire = Fire.setup(app, _.values(dbMap))
+    const fire = Fire.setup(app, _.values(dbMap), deviceId)
 
     _.mapObjIndexed((db, name) => db.onChange(
         (doc) => {

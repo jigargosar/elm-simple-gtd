@@ -26,7 +26,7 @@ const firebaseConfig =
     IS_DEVELOPMENT_ENV ? firebaseDevConfig : firebaseProdConfig
 
 
-export const setup = (app, dbList) => {
+export const setup = (app, dbList, localDeviceId) => {
     const firebaseApp = firebase.initializeApp(firebaseConfig);
     let changesEmitters = []
 
@@ -44,8 +44,8 @@ export const setup = (app, dbList) => {
 
 
     function startReplicationToFirebase(uid, db) {
-        const lasSeqKey = `pouch-fire-sync.${db.name}.out.lastSeq`
-        const lastSeqString = localStorage.getItem(lasSeqKey)
+        const lastSeqKey = `pouch-fire-sync.${db.name}.out.lastSeq`
+        const lastSeqString = localStorage.getItem(lastSeqKey)
         const lastSeq = parseInt(lastSeqString, 10) || 0
 
         const changes = db.changes({
@@ -54,19 +54,38 @@ export const setup = (app, dbList) => {
             since: lastSeq
         })
 
+
+        function isLocalChange(change) {
+            const docDeviceId = change.doc.deviceId
+            return !docDeviceId || docDeviceId === "" || docDeviceId === localDeviceId
+        }
+
         const onChange = change => {
-            // console.log("sending pouchdb change to firebase: ", change)
-            console.log("sending pouchdb change to firebase: ", change.id)
-            const fireDoc =
-                _.compose(_.omit("_rev"), _.merge(change.doc)
-                )({"firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP})
-            return firebaseApp
-                .database().ref(`/users/${uid}/${db.name}/${change.id}`)
-                .set(fireDoc)
-                .then(() => {
-                    localStorage.setItem(lasSeqKey, change.seq)
-                    return change.seq
-                })
+            const updateLastSeq = () => {
+                localStorage.setItem(lastSeqKey, change.seq)
+                return change.seq
+            }
+            if (isLocalChange(change)) {
+
+                // console.log("sending pouchdb change to firebase: ", change)
+                console.log("[PouchToFire]: sending local change: ",
+                    change, change.doc.deviceId, localDeviceId)
+
+                const fireDoc =
+                    _.compose(_.omit("_rev"), _.merge(change.doc)
+                    )({"firebaseServerPersistedAt": firebase.database.ServerValue.TIMESTAMP})
+
+
+                return firebaseApp
+                    .database().ref(`/users/${uid}/${db.name}/${change.id}`)
+                    .set(fireDoc)
+                    .then(updateLastSeq)
+            }
+            else{
+                console.log("[PouchToFire]: ignoring non-local change: ",
+                    change, change.doc.deviceId, localDeviceId)
+                return Promise.resolve(updateLastSeq())
+            }
         }
 
         const errorStream = Kefir.fromEvents(changes, "error")

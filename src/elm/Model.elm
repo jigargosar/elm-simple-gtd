@@ -1295,20 +1295,8 @@ findAndUpdateTodoT2 findFn action model =
 
 
 updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg
-updateTodo action todoId model =
-    let
-        todoChangesToCmd ( changes, model ) =
-            case getMaybeUserId model of
-                Nothing ->
-                    Cmd.none
-
-                Just uid ->
-                    changes
-                        .|> getNotificationCmdFromTodoChange uid
-                        |> Cmd.batch
-    in
-        update todoStoreT2 (Todo.Store.update action model.now todoId) model
-            |> apply2 ( Tuple.second, todoChangesToCmd )
+updateTodo action todoId =
+    updateAllTodos action (Set.singleton todoId)
 
 
 getNotificationCmdFromTodoChange uid (( old, new ) as change) =
@@ -1326,10 +1314,20 @@ getNotificationCmdFromTodoChange uid (( old, new ) as change) =
 
 
 updateAllTodos action todoIdSet model =
-    updateAllDocs todoIdSet
-        (todoUpdateF action model)
-        todoStore
-        model
+    let
+        todoChangesToCmd ( changes, model ) =
+            case getMaybeUserId model of
+                Nothing ->
+                    Cmd.none
+
+                Just uid ->
+                    changes
+                        .|> getNotificationCmdFromTodoChange uid
+                        |> Cmd.batch
+    in
+        update todoStoreT2 (Todo.Store.updateAll todoIdSet action model.now) model
+            |> apply2 ( Tuple.second, todoChangesToCmd )
+
 
 todoUpdateF action model =
     Todo.update [ action ] model.now

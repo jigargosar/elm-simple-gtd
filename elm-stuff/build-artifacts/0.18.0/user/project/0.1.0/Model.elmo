@@ -1023,11 +1023,6 @@ var _user$project$Model$update = F3(
 			smallF(
 				lens.get(big)));
 	});
-var _user$project$Model$updateAllDocsT2 = F4(
-	function (idSet, updateFnT2, store, model) {
-		var storeF = A3(_user$project$Store$updateAllT2, idSet, model.now, updateFnT2);
-		return A3(_user$project$Model$update, store, storeF, model);
-	});
 var _user$project$Model$updateAllDocs = F4(
 	function (idSet, updateFn, store, model) {
 		var storeF = A3(_user$project$Store$updateAll, idSet, model.now, updateFn);
@@ -1221,8 +1216,8 @@ var _user$project$Model$findAndSnoozeOverDueTodo = function (model) {
 		_user$project$Todo$SnoozeTill(model.now + (_elm_lang$core$Time$minute * 15)),
 		model);
 };
-var _user$project$Model$updateTodo = F3(
-	function (action, todoId, model) {
+var _user$project$Model$updateAllTodos = F3(
+	function (action, todoIdSet, model) {
 		var todoChangesToCmd = function (_p60) {
 			var _p61 = _p60;
 			var _p62 = _user$project$Model$getMaybeUserId(_p61._1);
@@ -1242,13 +1237,26 @@ var _user$project$Model$updateTodo = F3(
 			A3(
 				_user$project$Model$update,
 				_user$project$Model$todoStoreT2,
-				A3(_user$project$Todo_Store$update, action, model.now, todoId),
+				A3(_user$project$Todo_Store$updateAll, todoIdSet, action, model.now),
 				model));
+	});
+var _user$project$Model$updateTodoAndMaybeAlsoSelected = F3(
+	function (action, todoId, model) {
+		var _p63 = _user$project$Model$getFocusInEntityIndex;
+		var idSet = A2(_elm_lang$core$Set$member, todoId, model.selectedEntityIdSet) ? model.selectedEntityIdSet : _elm_lang$core$Set$singleton(todoId);
+		return A3(_user$project$Model$updateAllTodos, action, idSet, model);
+	});
+var _user$project$Model$updateTodo = F2(
+	function (action, todoId) {
+		return A2(
+			_user$project$Model$updateAllTodos,
+			action,
+			_elm_lang$core$Set$singleton(todoId));
 	});
 var _user$project$Model$snoozeTodoWithOffset = F3(
 	function (snoozeOffset, todoId, model) {
 		var time = A2(_user$project$ReminderOverlay$addSnoozeOffset, model.now, snoozeOffset);
-		return function (_p63) {
+		return function (_p64) {
 			return A2(
 				_elm_lang$core$Tuple$mapFirst,
 				_user$project$Model$removeReminderOverlay,
@@ -1256,17 +1264,8 @@ var _user$project$Model$snoozeTodoWithOffset = F3(
 					_user$project$Model$updateTodo,
 					_user$project$Todo$SnoozeTill(time),
 					todoId,
-					_p63));
+					_p64));
 		}(model);
-	});
-var _user$project$Model$updateAllTodos2 = F3(
-	function (action, todoIdSet, model) {
-		return A4(
-			_user$project$Model$updateAllDocsT2,
-			todoIdSet,
-			A2(_user$project$Model$todoUpdateF, action, model),
-			_user$project$Model$todoStoreT2,
-			model);
 	});
 var _user$project$Model$todoStore = {
 	get: function (_) {
@@ -1279,21 +1278,6 @@ var _user$project$Model$todoStore = {
 				{todoStore: s});
 		})
 };
-var _user$project$Model$updateAllTodos = F3(
-	function (action, todoIdSet, model) {
-		return A4(
-			_user$project$Model$updateAllDocs,
-			todoIdSet,
-			A2(_user$project$Model$todoUpdateF, action, model),
-			_user$project$Model$todoStore,
-			model);
-	});
-var _user$project$Model$updateTodoAndMaybeAlsoSelected = F3(
-	function (action, todoId, model) {
-		var _p64 = _user$project$Model$getFocusInEntityIndex;
-		var idSet = A2(_elm_lang$core$Set$member, todoId, model.selectedEntityIdSet) ? model.selectedEntityIdSet : _elm_lang$core$Set$singleton(todoId);
-		return A3(_user$project$Model$updateAllTodos, action, idSet, model);
-	});
 var _user$project$Model$projectStore = {
 	get: function (_) {
 		return _.projectStore;

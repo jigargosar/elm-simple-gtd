@@ -357,7 +357,7 @@ persist lens =
 
 
 updateTodoAndMaybeAlsoSelected action todo =
-    Return.map (Model.updateTodoAndMaybeAlsoSelected action (Document.getId todo))
+    Return.andThen (Model.updateTodoAndMaybeAlsoSelected action (Document.getId todo))
 
 
 onMsgList : List Msg -> ReturnF

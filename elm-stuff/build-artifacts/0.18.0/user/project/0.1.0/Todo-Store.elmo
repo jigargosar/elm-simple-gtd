@@ -1,8 +1,8 @@
-var _user$project$Todo_Store$update = F4(
-	function (action, now, todoId, store) {
+var _user$project$Todo_Store$updateAll = F4(
+	function (idSet, action, now, store) {
 		return A4(
 			_user$project$Store$updateAllT2,
-			_elm_lang$core$Set$singleton(todoId),
+			idSet,
 			now,
 			A2(
 				_user$project$Todo$update,

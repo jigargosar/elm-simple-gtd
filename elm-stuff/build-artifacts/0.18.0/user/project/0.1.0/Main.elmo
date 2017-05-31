@@ -55,7 +55,7 @@ var _user$project$Main$withNow = function (msg) {
 var _user$project$Main$setDomFocusToFocusedEntityCmd = _user$project$Msg$commonMsg.focus('.entity-list > [tabindex=0]');
 var _user$project$Main$updateTodoAndMaybeAlsoSelected = F2(
 	function (action, todo) {
-		return _Fresheyeball$elm_return$Return$map(
+		return _Fresheyeball$elm_return$Return$andThen(
 			A2(
 				_user$project$Model$updateTodoAndMaybeAlsoSelected,
 				action,

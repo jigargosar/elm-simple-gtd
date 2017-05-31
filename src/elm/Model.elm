@@ -586,32 +586,6 @@ createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 
 
-
---setTodoContextOrProjectBasedOnCurrentView todoId model =
---    let
---        maybeTodoUpdateAction =
---            case model.mainViewType of
---                EntityListView viewType ->
---                    case viewType of
---                        Entity.ContextView id ->
---                            model.contextStore |> Store.findById id >>? Todo.SetContext
---
---                        Entity.ProjectView id ->
---                            model.projectStore |> Store.findById id >>? Todo.SetProject
---
---                        _ ->
---                            Nothing
---
---                _ ->
---                    Nothing
---
---        maybeModel =
---            maybeTodoUpdateAction
---                ?|> (updateTodo # todoId # model)
---    in
---        maybeModel ?= model |> setFocusInEntityWithId todoId
-
-
 createEntityEditForm : Entity -> Model -> EditMode
 createEntityEditForm entity model =
     case entity of

@@ -45,7 +45,9 @@ export const setup = (app, dbList, localDeviceId) => {
 
     function isDocChangeLocal(doc) {
         const docDeviceId = doc.deviceId
-        return !docDeviceId || docDeviceId === "" || docDeviceId === localDeviceId
+        const ret = !docDeviceId || docDeviceId === "" || docDeviceId === localDeviceId
+        console.log("isDocChangeLocal:", docDeviceId, localDeviceId, ret)
+        return ret
     }
 
     function startReplicationToFirebase(uid, db) {
@@ -130,11 +132,11 @@ export const setup = (app, dbList, localDeviceId) => {
             .map(_.invoker(0, "val"))
             .map(doc =>
                 db.getClean(doc._id)
-                  .then(_.omit(["_rev"]))
+                  // .then(_.omit(["_rev"]))
                   // .then(_.equals(_.omit(["firebaseServerPersistedAt"], doc)))
-                  .then(isDocChangeLocal(doc))
-                  .then((isLocalChange) => {
-                      if (isLocalChange) {
+                  // .then(isDocChangeLocal)
+                  .then(() => {
+                      if (isDocChangeLocal(doc)) {
                           updateLastPersistedAt(doc)
                           return "[FireToELm] ignoring local change: note we receive this message twice when online, since we are setting firebaseServerPersistedAt field."
                       } else {

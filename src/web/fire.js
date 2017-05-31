@@ -141,7 +141,7 @@ export const setup = (app, dbList, localDeviceId) => {
                   .then((isLocalChange) => {
                       if (isLocalChange) {
                           updateLastPersistedAt(doc)
-                          return "[FireToELm] ignoring local change"
+                          return "[FireToELm] ignoring local change: note we receive this message twice when online, since we are setting firebaseServerPersistedAt field."
                       } else {
                           onFirebaseChange(doc)
                           return "[FireToELm] sending non-local change"

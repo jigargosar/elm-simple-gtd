@@ -1281,24 +1281,6 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
                     identity
 
 
-updateAllDocsT2 :
-    Set Document.Id
-    -> Document.DocF x
-    -> LensT2 (Store.Store x) Model (Store.ChangeList x)
-    -> Model
-    -> ( Store.ChangeList x, Model )
-updateAllDocsT2 idSet updateFnT2 store model =
-    let
-        storeF =
-            Store.updateAllT2 idSet model.now updateFnT2
-    in
-        update store storeF model
-
-
-
---            |> updateEntityListCursor model
-
-
 updateAllDocs idSet updateFn store model =
     let
         storeF =
@@ -1348,14 +1330,6 @@ updateAllTodos action todoIdSet model =
         (todoUpdateF action model)
         todoStore
         model
-
-
-updateAllTodos2 action todoIdSet model =
-    updateAllDocsT2 todoIdSet
-        (todoUpdateF action model)
-        todoStoreT2
-        model
-
 
 todoUpdateF action model =
     Todo.update [ action ] model.now

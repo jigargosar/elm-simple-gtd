@@ -38,21 +38,22 @@ type alias Encoded =
     E.Value
 
 
-constructor : Id -> Revision -> Time -> Time -> Bool -> Name -> DeviceId -> Model
-constructor id rev createdAt modifiedAt deleted name deviceId =
+constructor : Id -> Revision -> Time -> Time -> Bool -> DeviceId -> Name -> Model
+constructor id rev createdAt modifiedAt deleted deviceId name =
     { id = id
     , rev = rev
     , createdAt = createdAt
     , modifiedAt = modifiedAt
     , dirty = False
     , deleted = deleted
-    , name = name
     , deviceId = deviceId
+    , name = name
     }
 
 
-init name now id =
-    constructor id "" now now False name ""
+init : Name -> Time -> DeviceId -> Id -> Model
+init name now deviceId id =
+    constructor id "" now now False deviceId name
 
 
 otherFieldsEncoder : Document Record -> List ( String, E.Value )
@@ -69,7 +70,7 @@ decoder =
 
 null : Model
 null =
-    constructor "" "" 0 0 False "Inbox" ""
+    constructor "" "" 0 0 False "" "Inbox"
 
 
 isNull =

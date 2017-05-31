@@ -316,14 +316,14 @@ encodeReminder reminder =
             E.object [ "at" => E.float time ]
 
 
-init createdAt text id =
+init createdAt text deviceId id =
     todoConstructor
         id
         Document.defaultRevision
         createdAt
         createdAt
         defaultDeleted
-        ""
+        deviceId
         defaultDeletedAt
         defaultDone
         text

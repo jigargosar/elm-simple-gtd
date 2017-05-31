@@ -824,7 +824,7 @@ var _user$project$Model$createAndEditNewContext = function (model) {
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$setContextStore, model),
 			A2(
 				_user$project$Store$insert,
-				A2(_user$project$Project$init, '<New Context>', model.now),
+				A2(_user$project$Context$init, '<New Context>', model.now),
 				model.contextStore)));
 };
 var _user$project$Model$createAndEditNewProject = function (model) {

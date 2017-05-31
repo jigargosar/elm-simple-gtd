@@ -9,7 +9,7 @@ import EditMode exposing (EditMode)
 import Entity exposing (Entity)
 import Ext.Keyboard as Keyboard
 import Ext.List as List
-import Firebase
+import Firebase exposing (DeviceId)
 import Project
 import ReminderOverlay
 import Dict exposing (Dict)
@@ -386,7 +386,7 @@ createAndEditNewProject model =
 
 
 createAndEditNewContext model =
-    Store.insert (Project.init "<New Context>" model.now) model.contextStore
+    Store.insert (Context.init "<New Context>" model.now) model.contextStore
         |> Tuple2.mapSecond (setContextStore # model)
         |> (\( context, model ) -> startEditingEntity (Entity.ContextEntity context) model)
 
@@ -764,7 +764,7 @@ updateTodoAndMaybeAlsoSelected action todoId model =
         model |> updateAllTodos action idSet
 
 
-insertTodo : (Document.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
+insertTodo : (DeviceId -> Document.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodo constructWithId =
     update todoStoreT2 (Store.insert (constructWithId))
 

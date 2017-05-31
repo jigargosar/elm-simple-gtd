@@ -57,7 +57,14 @@ var _user$project$Document$encodeMetaFields = function (doc) {
 							_user$project$Ext_Function_Infix_ops['=>'],
 							'deleted',
 							_elm_lang$core$Json_Encode$bool(doc.deleted)),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_user$project$Ext_Function_Infix_ops['=>'],
+								'deviceId',
+								_elm_lang$core$Json_Encode$string(doc.deviceId)),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			}

@@ -287,9 +287,9 @@ generate generator m =
         |> Tuple.mapSecond (setSeed # m)
 
 
-insert : (Id -> Document x) -> Store x -> ( Document x, Store x )
+insert : (DeviceId -> Id -> Document x) -> Store x -> ( Document x, Store x )
 insert constructor store =
-    Random.mapWithIdGenerator constructor
+    Random.mapWithIdGenerator (constructor store.deviceId)
         |> (generate # store)
         |> (\( doc, store ) ->
                 let

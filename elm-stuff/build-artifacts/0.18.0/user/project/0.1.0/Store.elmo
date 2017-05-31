@@ -118,7 +118,8 @@ var _user$project$Store$insert = F2(
 			};
 		}(
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$generate, store)(
-				_user$project$Ext_Random$mapWithIdGenerator(constructor)));
+				_user$project$Ext_Random$mapWithIdGenerator(
+					constructor(store.deviceId))));
 	});
 var _user$project$Store$updateExternalHelp = F2(
 	function (newDoc, store) {

@@ -116,7 +116,7 @@ updateName updater model =
     setName (updater model) model
 
 
-constructor id rev createdAt modifiedAt deleted name deviceId =
+constructor id rev createdAt modifiedAt deleted deviceId name =
     { id = id
     , rev = rev
     , deviceId = deviceId
@@ -128,14 +128,14 @@ constructor id rev createdAt modifiedAt deleted name deviceId =
     }
 
 
-init : Name -> Time -> Id -> Model
-init name now id =
-    constructor id "" now now False name ""
+init : Name -> Time -> DeviceId -> Id -> Model
+init name now deviceId id =
+    constructor id "" now now False deviceId name
 
 
 null : Model
 null =
-    constructor "" "" 0 0 False "<No Project>" ""
+    constructor "" "" 0 0 False "" "<No Project>"
 
 
 isNull =

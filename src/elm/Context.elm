@@ -85,14 +85,6 @@ setName name model =
     { model | name = name }
 
 
-setModifiedAt modifiedAt model =
-    { model | modifiedAt = modifiedAt }
-
-
-setDeleted deleted model =
-    { model | deleted = deleted }
-
-
 storeGenerator : DeviceId -> List Encoded -> Random.Generator Store
 storeGenerator =
     Store.generator "context-db" otherFieldsEncoder decoder

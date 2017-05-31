@@ -10,18 +10,6 @@ var _user$project$Context$getEncodedNames = function (_p0) {
 			},
 			_p0));
 };
-var _user$project$Context$setDeleted = F2(
-	function (deleted, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{deleted: deleted});
-	});
-var _user$project$Context$setModifiedAt = F2(
-	function (modifiedAt, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{modifiedAt: modifiedAt});
-	});
 var _user$project$Context$setName = F2(
 	function (name, model) {
 		return _elm_lang$core$Native_Utils.update(

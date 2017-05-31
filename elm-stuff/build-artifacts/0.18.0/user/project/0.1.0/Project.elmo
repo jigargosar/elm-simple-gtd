@@ -14,18 +14,6 @@ var _user$project$Project$decoder = A3(
 	_elm_lang$core$Json_Decode$string,
 	_user$project$Document$documentFieldsDecoder(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Project$constructor)));
-var _user$project$Project$setModifiedAt = F2(
-	function (modifiedAt, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{modifiedAt: modifiedAt});
-	});
-var _user$project$Project$setDeleted = F2(
-	function (deleted, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{deleted: deleted});
-	});
 var _user$project$Project$setName = F2(
 	function (name, model) {
 		return _elm_lang$core$Native_Utils.update(

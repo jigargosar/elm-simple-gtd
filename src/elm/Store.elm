@@ -11,7 +11,7 @@ port module Store
         , asIdDict
         , asList
         , filter
-        , updateAllDocs
+        , updateAll
         , updateAllT2
         , findAndUpdateT
         , findAllByIdSetIn
@@ -214,18 +214,15 @@ updateAllT2 idSet now updateFn store =
         Set.foldl updateAndCollectChanges ( [], store ) idSet
 
 
-updateAllDocs :
+updateAll :
     Set Document.Id
     -> Time
     -> (Document x -> Document x)
     -> Store x
     -> Store x
-updateAllDocs idSet now updateFn store =
-    let
-        updateAndSetModifiedAt =
-            getUpdateFnDecorator updateFn now store
-    in
-        idSet |> Set.foldl (updateAllDocHelp # updateAndSetModifiedAt) store
+updateAll idSet now updateFn store =
+    updateAllT2 idSet now updateFn store
+        |> Tuple.second
 
 
 updateAllDocHelp id updateDocFn store =

@@ -103,14 +103,6 @@ setName name model =
     { model | name = name }
 
 
-setDeleted deleted model =
-    { model | deleted = deleted }
-
-
-setModifiedAt modifiedAt model =
-    { model | modifiedAt = modifiedAt }
-
-
 updateName : (Model -> Name) -> ModelF
 updateName updater model =
     setName (updater model) model

@@ -1025,7 +1025,7 @@ var _user$project$Model$update = F3(
 	});
 var _user$project$Model$updateAllDocs = F4(
 	function (idSet, updateFn, store, model) {
-		var storeF = A3(_user$project$Store$updateAllDocs, idSet, model.now, updateFn);
+		var storeF = A3(_user$project$Store$updateAll, idSet, model.now, updateFn);
 		return A2(
 			_user$project$Model$updateEntityListCursor,
 			model,

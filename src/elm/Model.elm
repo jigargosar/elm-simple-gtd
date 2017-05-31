@@ -1297,7 +1297,7 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
 updateAllDocs idSet updateFn store model =
     let
         storeF =
-            Store.updateAllDocs idSet model.now updateFn
+            Store.updateAll idSet model.now updateFn
     in
         update store storeF model
             |> updateEntityListCursor model

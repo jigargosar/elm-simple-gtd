@@ -273,6 +273,11 @@ var _user$project$Store$updateAllT2 = F4(
 			},
 			idSet);
 	});
+var _user$project$Store$updateAll = F4(
+	function (idSet, now, updateFn, store) {
+		return _elm_lang$core$Tuple$second(
+			A4(_user$project$Store$updateAllT2, idSet, now, updateFn, store));
+	});
 var _user$project$Store$updateAllDocHelp = F3(
 	function (id, updateDocFn, store) {
 		return A2(
@@ -287,15 +292,6 @@ var _user$project$Store$updateAllDocHelp = F3(
 						updateDocFn(_p17));
 				}),
 			store);
-	});
-var _user$project$Store$updateAllDocs = F4(
-	function (idSet, now, updateFn, store) {
-		var updateAndSetModifiedAt = A3(_user$project$Store$getUpdateFnDecorator, updateFn, now, store);
-		return A3(
-			_elm_lang$core$Set$foldl,
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$updateAllDocHelp, updateAndSetModifiedAt),
-			store,
-			idSet);
 	});
 var _user$project$Store$encode = F2(
 	function (doc, s) {

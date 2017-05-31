@@ -65,6 +65,7 @@ encodeMetaFields doc =
     , "createdAt" => E.int (doc.createdAt |> round)
     , "modifiedAt" => E.int (doc.modifiedAt |> round)
     , "deleted" => E.bool (doc.deleted)
+    , "deviceId" => E.string doc.deviceId
     ]
 
 

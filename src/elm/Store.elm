@@ -215,6 +215,33 @@ updateAllT2 idSet now updateFn store =
         Set.foldl updateAndCollectChanges ( [], store ) idSet
 
 
+findAndUpdateAllBy :
+    (Document x -> Bool)
+    -> Time
+    -> (Document x -> Document x)
+    -> Store x
+    -> UpdateAllReturn x
+findAndUpdateAllBy pred now updateFn_ store =
+    let
+        updateFn =
+            (getUpdateFnDecorator updateFn_ now store)
+
+        updateAndCollectChanges : Document x -> UpdateAllReturnF x
+        updateAndCollectChanges =
+            (\oldDoc ( list, store ) ->
+                let
+                    newDoc =
+                        updateFn oldDoc
+                in
+                    -- todo: replace doc actually marks it dirty so we need to get new doc from that function.
+                    ( ( oldDoc, newDoc ) :: list, replaceDocIn store newDoc )
+            )
+    in
+        asList store
+            |> List.filter pred
+            |> List.foldl updateAndCollectChanges ( [], store )
+
+
 decode : D.Value -> Store x -> Maybe (Document x)
 decode encodedDoc store =
     D.decodeValue store.decoder encodedDoc

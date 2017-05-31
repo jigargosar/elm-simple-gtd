@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.18 - 2017-05-31
 * [fix] firebase: when pouchdb updates in response to an firebase non-local change, don't send that change back to firebase.
     * Also don't send local changes received from firebase listeners to elm.
     * Updates are distinguished based on the deviceId field in all docs. 

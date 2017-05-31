@@ -43,6 +43,11 @@ export const setup = (app, dbList, localDeviceId) => {
     })
 
 
+    function isDocChangeLocal(doc) {
+        const docDeviceId = doc.deviceId
+        return !docDeviceId || docDeviceId === "" || docDeviceId === localDeviceId
+    }
+
     function startReplicationToFirebase(uid, db) {
         const lastSeqKey = `pouch-fire-sync.${db.name}.out.lastSeq`
         const lastSeqString = localStorage.getItem(lastSeqKey)
@@ -55,17 +60,12 @@ export const setup = (app, dbList, localDeviceId) => {
         })
 
 
-        function isLocalChange(change) {
-            const docDeviceId = change.doc.deviceId
-            return !docDeviceId || docDeviceId === "" || docDeviceId === localDeviceId
-        }
-
         const onChange = change => {
             const updateLastSeq = () => {
                 localStorage.setItem(lastSeqKey, change.seq)
                 return change.seq
             }
-            if (isLocalChange(change)) {
+            if (isDocChangeLocal(change.doc)) {
 
                 // console.log("sending pouchdb change to firebase: ", change)
                 console.log("[PouchToFire]: sending local change: ",
@@ -95,8 +95,8 @@ export const setup = (app, dbList, localDeviceId) => {
              // .log()
              .map(onChange)
              .flatMap(Kefir.fromPromise)
-             .onValue(val => console.log("fireSyncSuccess: ", val))
-             .onError(e => console.error("fireSyncError: ", e))
+             .onValue(msg => console.log("[PouchToFire] ", msg))
+             .onError(e => console.error("[PouchToFire] ", e))
         return changes
     }
 
@@ -136,28 +136,29 @@ export const setup = (app, dbList, localDeviceId) => {
             .map(doc =>
                 db.getClean(doc._id)
                   .then(_.omit(["_rev"]))
-                  .then(_.equals(_.omit(["firebaseServerPersistedAt"], doc)))
-                  .then((docsSame) => {
-                      if (docsSame) {
+                  // .then(_.equals(_.omit(["firebaseServerPersistedAt"], doc)))
+                  .then(isDocChangeLocal(doc))
+                  .then((isLocalChange) => {
+                      if (isLocalChange) {
                           updateLastPersistedAt(doc)
-                          return "firebase changes: docs same ignoring update"
+                          return "[FireToELm] ignoring local change"
                       } else {
                           onFirebaseChange(doc)
-                          return "firebase changes: docs not same, sending to elm"
+                          return "[FireToELm] sending non-local change"
                       }
                   })
                   .catch(e => {
-                      console.error("fal: ", e)
                       if (e.status === 404) {
                           onFirebaseChange(doc)
-                          return "firebase changes: docs not found locally, sending to elm"
+                          return "[FireToELm] docs not found locally, sending to elm"
                       }
+                      throw e;
                   })
             )
             .flatMap(Kefir.fromPromise)
-            .onValue(val => console.log("scc: ", val))
+            .onValue(msg => console.log(msg))
             .onError(e => {
-                console.error("fal: ", e)
+                console.error("[FireToELm] ", e)
             })
     }
 

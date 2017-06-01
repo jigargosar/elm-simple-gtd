@@ -289,6 +289,7 @@ isLayoutAutoNarrow =
 
 filterTodos pred model =
     Store.filter pred model.todoStore
+        |> List.sortBy (Todo.getCreatedAt >> negate)
 
 
 filterProjects pred model =
@@ -733,12 +734,15 @@ findTodoById id =
 
 findProjectById : Document.Id -> Model -> Maybe Project.Model
 findProjectById id =
-    .projectStore >> Store.findById id
+    .projectStore
+        >> Store.findById id
+        >> Maybe.orElseLazy (\_ -> ([ Project.null ] |> List.find (Document.hasId id)))
 
 
 findContextById : Document.Id -> Model -> Maybe Context.Model
 findContextById id =
     .contextStore >> Store.findById id
+    >> Maybe.orElseLazy (\_ -> ([ Context.null ] |> List.find (Document.hasId id)))
 
 
 updateTodoAndMaybeAlsoSelected action todoId model =

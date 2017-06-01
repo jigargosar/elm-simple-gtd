@@ -296,6 +296,40 @@ getCurrentNamedDocList store model =
             Document.isDeleted
 
 
+filterProjects pred model =
+    Store.filter pred model.projectStore
+
+
+filterContexts pred model =
+    Store.filter pred model.contextStore
+
+
+createGrouping viewType model =
+    let
+        filter =
+            if model.showDeleted then
+                Document.isDeleted >> not
+            else
+                Document.isDeleted
+    in
+        case viewType of
+            Entity.ContextsView ->
+                let
+                    _ =
+                        filterContexts
+                in
+                    1
+
+            Entity.ProjectsView ->
+                1
+
+            Entity.ContextView id ->
+                1
+
+            Entity.ProjectView id ->
+                1
+
+
 getActiveTodoList =
     .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 

@@ -86,20 +86,5 @@ type Grouping
     | Multi (List TodoGroup)
 
 
-createGrouping viewType model =
-    case viewType of
-        ContextsView ->
-            1
-
-        ProjectsView ->
-            1
-
-        ContextView id ->
-            1
-
-        ProjectView id ->
-            1
-
-
 
 {- | Flat TodoList -}

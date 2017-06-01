@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.25 - 2017-06-01
 * group entity: re-modeling 
 * Consistent sorting   
 

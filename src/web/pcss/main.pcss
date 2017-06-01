@@ -196,8 +196,9 @@ paper-listbox {
 
   & .display-text {
     padding: 0 8px;
-    white-space: pre-line; /*sequences of whitespace are collapsed*/
-    /*white-space: pre-wrap; !*sequences of whitespace are preserved*!*/
+    /*white-space: pre-line; !*sequences of whitespace are collapsed*!*/
+    /* when indenting items using star, whitespace should not be lost*/
+    white-space: pre-wrap; /*sequences of whitespace are preserved*/
   }
 
   & paper-item-body {

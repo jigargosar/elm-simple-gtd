@@ -99,6 +99,10 @@ isDeleted =
     .deleted
 
 
+isNotDeleted =
+    isDeleted >> not
+
+
 setDeleted deleted model =
     { model | deleted = deleted }
 

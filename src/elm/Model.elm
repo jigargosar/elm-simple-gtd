@@ -301,30 +301,18 @@ filterContexts pred model =
         |> List.append (Context.filterNull pred)
 
 
+currentDocPredicate model =
+    if model.showDeleted then
+        Document.isDeleted
+    else
+        Document.isNotDeleted
+
+
 filterCurrentContexts model =
-    let
-        pred =
-            if model.showDeleted then
-                Document.isDeleted
-            else
-                Document.isDeleted >> not
-    in
-        Store.filter pred model.contextStore
-            |> List.append (Context.filterNull pred)
+    filterContexts (currentDocPredicate model) model
 
-
-filterCurrentProjects : Model -> List Project.Model
 filterCurrentProjects model =
-    let
-        pred =
-            if model.showDeleted then
-                Document.isDeleted
-            else
-                Document.isDeleted >> not
-    in
-        Store.filter pred model.projectStore
-            |> List.append (Project.filterNull pred)
-
+    filterProjects (currentDocPredicate model) model
 
 createGrouping : Entity.ListViewType -> Model -> Entity.Grouping
 createGrouping viewType model =
@@ -335,11 +323,16 @@ createGrouping viewType model =
             else
                 Document.isDeleted >> not
 
+        todoFilter =
+            if model.showDeleted then
+                Document.isDeleted
+            else
+                Ext.Predicate.all [ Todo.isNotDeleted, Todo.isNotDone ]
+
         filterTodosForContext context =
             filterTodos
                 (Ext.Predicate.all
-                    [ deletedFilter
-                    , Todo.isNotDone
+                    [ todoFilter
                     , Todo.contextFilter context
                     ]
                 )
@@ -348,8 +341,7 @@ createGrouping viewType model =
         filterTodosForProject project =
             filterTodos
                 (Ext.Predicate.all
-                    [ deletedFilter
-                    , Todo.isNotDone
+                    [ todoFilter
                     , Todo.projectFilter project
                     ]
                 )
@@ -360,11 +352,11 @@ createGrouping viewType model =
     in
         case viewType of
             Entity.ContextsView ->
-                filterContexts deletedFilter model
+                filterCurrentContexts model
                     |> Entity.createGroupingForContexts filterTodosForContext
 
             Entity.ProjectsView ->
-                filterProjects deletedFilter model
+                filterCurrentProjects model
                     |> Entity.createGroupingForProjects filterTodosForProject
 
             Entity.ContextView id ->

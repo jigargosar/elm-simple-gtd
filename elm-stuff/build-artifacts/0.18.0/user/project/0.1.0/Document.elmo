@@ -24,6 +24,9 @@ var _user$project$Document$setDeleted = F2(
 var _user$project$Document$isDeleted = function (_) {
 	return _.deleted;
 };
+var _user$project$Document$isNotDeleted = function (_p0) {
+	return !_user$project$Document$isDeleted(_p0);
+};
 var _user$project$Document$encodeMetaFields = function (doc) {
 	return {
 		ctor: '::',
@@ -80,7 +83,7 @@ var _user$project$Document$encode = F2(
 				encodeOtherFields(doc)));
 	});
 var _user$project$Document$defaultRevision = '';
-var _user$project$Document$documentFieldsDecoder = function (_p0) {
+var _user$project$Document$documentFieldsDecoder = function (_p1) {
 	return A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 		'deviceId',
@@ -106,17 +109,17 @@ var _user$project$Document$documentFieldsDecoder = function (_p0) {
 						'_rev',
 						_elm_lang$core$Json_Decode$string,
 						_user$project$Document$defaultRevision,
-						A3(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required, '_id', _elm_lang$core$Json_Decode$string, _p0))))));
+						A3(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required, '_id', _elm_lang$core$Json_Decode$string, _p1))))));
 };
 var _user$project$Document$getId = function (_) {
 	return _.id;
 };
 var _user$project$Document$hasId = function (id) {
-	return function (_p1) {
+	return function (_p2) {
 		return A2(
 			_user$project$Ext_Function$equals,
 			id,
-			_user$project$Document$getId(_p1));
+			_user$project$Document$getId(_p2));
 	};
 };
 var _user$project$Document$equalById = F2(

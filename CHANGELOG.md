@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.24 - 2017-06-01
 * on create grp entity, switch view to that entity. 
 
 ## v0.16.22 - 2017-06-01

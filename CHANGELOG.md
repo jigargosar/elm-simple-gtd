@@ -1,5 +1,6 @@
 ## Upcoming
 * [fix] on done or any change to entity focus should jump to next item in list.
+* [fix] when auto snoozing todo locally, update notifications too. (ideally notifications should be updated on todo change firebase function, so that we don't have to manage notification persistence to firebase manually. also notification data, if any will be up to date in firebase. and this will fix the bug, of not updating notifications scheduled when we were offline.)
 
 ## v0.16.18 - 2017-05-31
 * [fix] firebase: when pouchdb updates in response to an firebase non-local change, don't send that change back to firebase.

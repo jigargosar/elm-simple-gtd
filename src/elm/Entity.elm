@@ -36,12 +36,6 @@ type Action
     | ToggleSelected
 
 
-type Type
-    = TodoEntityType
-    | ContextEntityType
-    | ProjectEntityType
-
-
 defaultListView =
     ContextsView
 

@@ -42,7 +42,6 @@ import Tuple2
 import View.Shared exposing (..)
 import ViewModel
 import WebComponents
-import EntityList
 
 
 filtered : ViewModel.Model -> Model -> Html Msg

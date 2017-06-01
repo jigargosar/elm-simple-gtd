@@ -85,6 +85,3 @@ var _user$project$Entity$NameChanged = function (a) {
 var _user$project$Entity$Save = {ctor: 'Save'};
 var _user$project$Entity$ToggleDeleted = {ctor: 'ToggleDeleted'};
 var _user$project$Entity$StartEditing = {ctor: 'StartEditing'};
-var _user$project$Entity$ProjectEntityType = {ctor: 'ProjectEntityType'};
-var _user$project$Entity$ContextEntityType = {ctor: 'ContextEntityType'};
-var _user$project$Entity$TodoEntityType = {ctor: 'TodoEntityType'};

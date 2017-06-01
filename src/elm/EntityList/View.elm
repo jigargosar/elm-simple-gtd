@@ -2,7 +2,6 @@ module EntityList.View exposing (..)
 
 import Document
 import Entity exposing (Entity)
-import EntityList
 import EntityList.GroupView
 import EntityList.GroupViewModel exposing (DocumentWithName)
 import Html
@@ -138,11 +137,11 @@ createVMList entityList appViewModel =
             in
                 case entity of
                     Entity.ContextEntity context ->
-                        EntityList.createContextGroupViewModel tabIndexAV context
+                        EntityList.GroupViewModel.forContext tabIndexAV context
                             |> Context
 
                     Entity.ProjectEntity project ->
-                        EntityList.createProjectGroupViewModel tabIndexAV project
+                        EntityList.GroupViewModel.forProject tabIndexAV project
                             |> Project
 
                     Entity.TodoEntity todo ->

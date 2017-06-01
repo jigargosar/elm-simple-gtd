@@ -182,10 +182,10 @@ var _user$project$EntityList_View$createVMList = F2(
 			switch (_p10.ctor) {
 				case 'ContextEntity':
 					return _user$project$EntityList_View$Context(
-						A2(_user$project$EntityList$createContextGroupViewModel, tabIndexAV, _p10._0));
+						A2(_user$project$EntityList_GroupViewModel$forContext, tabIndexAV, _p10._0));
 				case 'ProjectEntity':
 					return _user$project$EntityList_View$Project(
-						A2(_user$project$EntityList$createProjectGroupViewModel, tabIndexAV, _p10._0));
+						A2(_user$project$EntityList_GroupViewModel$forProject, tabIndexAV, _p10._0));
 				default:
 					return _user$project$EntityList_View$Todo(
 						A2(appViewModel.createTodoViewModel, tabIndexAV, _p10._0));

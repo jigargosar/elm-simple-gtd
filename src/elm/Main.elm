@@ -300,9 +300,6 @@ update msg =
                     Return.map Model.createAndEditNewContext
                         >> autoFocusPaperInputCmd
 
-                StartAddingNewEntity entityType ->
-                    identity
-
                 OnEntityAction entity action ->
                     case (action) of
                         Entity.StartEditing ->

@@ -7,7 +7,7 @@ import EditMode exposing (EditMode)
 import Entity exposing (Entity)
 import Ext.Keyboard exposing (KeyboardEvent)
 import Lazy
-import Model exposing (EntityListViewType, GroupEntityType(ContextGroup, ProjectGroup), ViewType(..))
+import Model exposing (EntityListViewType, ViewType(..))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -19,6 +19,7 @@ import Maybe.Extra as Maybe
 import Model
 import Project
 import Keyboard.Extra as Key exposing (Key)
+import Store
 
 
 type alias IconVM =
@@ -28,7 +29,7 @@ type alias IconVM =
 
 
 type alias ViewModel =
-    { entityList : List EntityViewModel
+    { entityList : List DocumentWithNameViewModel
     , viewType : EntityListViewType
     , title : String
     , showDeleted : Bool
@@ -37,7 +38,7 @@ type alias ViewModel =
     }
 
 
-type alias EntityViewModel =
+type alias DocumentWithNameViewModel =
     { id : String
     , name : String
     , appHeader : { name : String, backgroundColor : String }
@@ -59,14 +60,22 @@ type alias EntityViewModel =
     }
 
 
+type alias Record =
+    { name : String }
+
+
 type alias DocumentWithName =
-    Document.Document { name : String }
+    Document.Document Record
+
+
+type alias DocumentWithNameStore =
+    Store.Store Record
 
 
 type alias Config =
     { groupByFn : Todo.Model -> Document.Id
     , namePrefix : String
-    , entityType : GroupEntityType
+    , store : DocumentWithNameStore
     , entityWrapper : DocumentWithName -> Entity
     , nullEntity : DocumentWithName
     , isNull : DocumentWithName -> Bool
@@ -76,7 +85,7 @@ type alias Config =
     }
 
 
-createList : Config -> Model.Model -> List EntityViewModel
+createList : Config -> Model.Model -> List DocumentWithNameViewModel
 createList config model =
     let
         todoListDict =
@@ -85,14 +94,10 @@ createList config model =
         getTodoListWithGroupId id =
             todoListDict |> Dict.get id ?= []
 
-        entityList =
-            if model.showDeleted then
-                Model.getDeletedEntityList config.entityType model
-            else
-                Model.getActiveEntityList config.entityType model
-                    |> (::) config.nullEntity
+        docsWithName =
+            Model.getCurrentNamedDocList config.store model
     in
-        entityList
+        docsWithName
             .|> create getTodoListWithGroupId config
 
 
@@ -182,7 +187,7 @@ contexts model =
         config =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
-            , entityType = ContextGroup
+            , store = Model.getContextStore model
             , entityWrapper = Entity.ContextEntity
             , nullEntity = Context.null
             , isNull = Context.isNull
@@ -191,7 +196,7 @@ contexts model =
             , getViewType = Entity.ContextView
             }
 
-        contextList : List EntityViewModel
+        contextList : List DocumentWithNameViewModel
         contextList =
             createList config model
     in
@@ -207,12 +212,12 @@ contexts model =
 projects : Model.Model -> ViewModel
 projects model =
     let
-        projectList : List EntityViewModel
+        projectList : List DocumentWithNameViewModel
         projectList =
             createList
                 { groupByFn = Todo.getProjectId
                 , namePrefix = "#"
-                , entityType = ProjectGroup
+                , store = Model.getProjectStore model
                 , entityWrapper = Entity.ProjectEntity
                 , nullEntity = Project.null
                 , isNull = Project.isNull

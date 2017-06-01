@@ -2,7 +2,7 @@ module ViewModel exposing (..)
 
 import Document
 import Entity
-import GroupEntity.ViewModel exposing (EntityViewModel)
+import GroupEntity.ViewModel exposing (DocumentWithNameViewModel)
 import Html exposing (Attribute)
 import Msg exposing (Msg)
 import Todo

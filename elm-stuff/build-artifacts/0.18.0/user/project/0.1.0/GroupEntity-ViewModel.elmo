@@ -62,13 +62,7 @@ var _user$project$GroupEntity_ViewModel$create = F3(
 	});
 var _user$project$GroupEntity_ViewModel$createList = F2(
 	function (config, model) {
-		var entityList = model.showDeleted ? A2(_user$project$Model$getDeletedEntityList, config.entityType, model) : A2(
-			F2(
-				function (x, y) {
-					return {ctor: '::', _0: x, _1: y};
-				}),
-			config.nullEntity,
-			A2(_user$project$Model$getActiveEntityList, config.entityType, model));
+		var docsWithName = A2(_user$project$Model$getCurrentNamedDocList, config.store, model);
 		var todoListDict = A2(_user$project$Model$getActiveTodoListGroupedBy, config.groupByFn, model);
 		var getTodoListWithGroupId = function (id) {
 			return A2(
@@ -78,14 +72,14 @@ var _user$project$GroupEntity_ViewModel$createList = F2(
 		};
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-			entityList,
+			docsWithName,
 			A2(_user$project$GroupEntity_ViewModel$create, getTodoListWithGroupId, config));
 	});
 var _user$project$GroupEntity_ViewModel$contexts = function (model) {
 	var config = {
 		groupByFn: _user$project$Todo$getContextId,
 		namePrefix: '@',
-		entityType: _user$project$Model$ContextGroup,
+		store: _user$project$Model$getContextStore(model),
 		entityWrapper: _user$project$Entity$ContextEntity,
 		nullEntity: _user$project$Context$null,
 		isNull: _user$project$Context$isNull,
@@ -109,7 +103,7 @@ var _user$project$GroupEntity_ViewModel$projects = function (model) {
 		{
 			groupByFn: _user$project$Todo$getProjectId,
 			namePrefix: '#',
-			entityType: _user$project$Model$ProjectGroup,
+			store: _user$project$Model$getProjectStore(model),
 			entityWrapper: _user$project$Entity$ProjectEntity,
 			nullEntity: _user$project$Project$null,
 			isNull: _user$project$Project$isNull,
@@ -135,7 +129,7 @@ var _user$project$GroupEntity_ViewModel$ViewModel = F6(
 	function (a, b, c, d, e, f) {
 		return {entityList: a, viewType: b, title: c, showDeleted: d, onAddClicked: e, icon: f};
 	});
-var _user$project$GroupEntity_ViewModel$EntityViewModel = function (a) {
+var _user$project$GroupEntity_ViewModel$DocumentWithNameViewModel = function (a) {
 	return function (b) {
 		return function (c) {
 			return function (d) {
@@ -172,7 +166,10 @@ var _user$project$GroupEntity_ViewModel$EntityViewModel = function (a) {
 		};
 	};
 };
+var _user$project$GroupEntity_ViewModel$Record = function (a) {
+	return {name: a};
+};
 var _user$project$GroupEntity_ViewModel$Config = F9(
 	function (a, b, c, d, e, f, g, h, i) {
-		return {groupByFn: a, namePrefix: b, entityType: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i};
+		return {groupByFn: a, namePrefix: b, store: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i};
 	});

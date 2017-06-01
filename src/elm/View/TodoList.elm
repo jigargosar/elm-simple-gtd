@@ -37,7 +37,7 @@ import Polymer.Paper as Paper
 import Polymer.App exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import GroupEntity.ViewModel exposing (EntityViewModel)
+import GroupEntity.ViewModel exposing (DocumentWithNameViewModel)
 import Todo.View exposing (EditViewModel)
 import Tuple2
 import View.Shared exposing (..)

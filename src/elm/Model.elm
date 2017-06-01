@@ -313,6 +313,16 @@ getActiveEntityList =
     getEntityStore >>> Store.reject Document.isDeleted
 
 
+getCurrentNamedDocList store model =
+    store
+        |> (if model.showDeleted then
+                Store.filter
+            else
+                Store.reject
+           )
+            Document.isDeleted
+
+
 getActiveTodoList =
     .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 

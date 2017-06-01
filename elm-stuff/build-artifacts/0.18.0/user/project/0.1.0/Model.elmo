@@ -858,6 +858,13 @@ var _user$project$Model$getActiveTodoListGroupedBy = function (fn) {
 			_user$project$Model$getActiveTodoList(_p42));
 	};
 };
+var _user$project$Model$getCurrentNamedDocList = F2(
+	function (store, model) {
+		return A2(
+			model.showDeleted ? _user$project$Store$filter : _user$project$Store$reject,
+			_user$project$Document$isDeleted,
+			store);
+	});
 var _user$project$Model$getEntityStore = function (entityType) {
 	var _p43 = entityType;
 	if (_p43.ctor === 'ProjectGroup') {

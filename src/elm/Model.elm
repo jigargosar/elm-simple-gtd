@@ -314,12 +314,22 @@ createGrouping viewType model =
     let
         deletedFilter =
             if model.showDeleted then
-                Document.isDeleted >> not
-            else
                 Document.isDeleted
+            else
+                Document.isDeleted >> not
+
+        doneFilter =
+            Todo.isDone >> not
 
         todoListForContext context =
-            filterTodos (Ext.Predicate.all [ deletedFilter, Todo.getContextId >> equals (Document.getId context) ]) model
+            filterTodos
+                (Ext.Predicate.all
+                    [ deletedFilter
+                    , doneFilter
+                    , Todo.getContextId >> equals (Document.getId context)
+                    ]
+                )
+                model
 
         defRet =
             Entity.Multi []
@@ -919,8 +929,10 @@ createEntityListFromEntityListViewType viewType model =
                         when (List.notMember nullEntity)
                             ((::) nullEntity)
                 in
-                    getContextsViewEntityList todoList False model
-                        |> addDefaultIfMissing
+                    {- getContextsViewEntityList todoList False model
+                       |> addDefaultIfMissing
+                    -}
+                    createGrouping viewType model |> flattenGrouping
 
             Entity.ProjectsView ->
                 let

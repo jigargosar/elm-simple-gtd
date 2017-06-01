@@ -159,7 +159,9 @@ entityListItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
         [ Html.node "iron-icon" [ iconA vm.icon.name, style [ "color" => vm.icon.color ] ] []
         , itemBody [] [ View.Shared.defaultBadge vm ]
-        , div [ class "show-on-hover" ] [ settingsButton vm.startEditingMsg ]
+        , div [ class "show-on-hover" ]
+            [ WebComponents.iconButton "settings" [ onClick vm.startEditingMsg ]
+            ]
         ]
 
 

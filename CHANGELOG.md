@@ -1,5 +1,7 @@
 ## Upcoming
-* [fix] on done or any change to entity focus should jump to next item in list.
+* [fix] entity list: 
+    * focus next entity if current entity is no longer visible in current filtered view.
+    * otherwise keep it focused post edit; irrespective of its position change, if any.   
 * [fix] when auto snoozing todo locally, update notifications too. (ideally notifications should be updated on todo change firebase function, so that we don't have to manage notification persistence to firebase manually. also notification data, if any will be up to date in firebase. Single point of change is better. But todo notification logic will be duplicated. unless we could run existing elm code from firebase functions.)
 
 ## v0.16.18 - 2017-05-31

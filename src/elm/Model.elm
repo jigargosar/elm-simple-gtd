@@ -1253,14 +1253,14 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
     in
         model
             |> case indexTuple of
-                ( Just oldIndex, Just newIndex ) ->
-                    if oldIndex < newIndex then
-                        setFocusInIndex (oldIndex)
-                    else if oldIndex > newIndex then
-                        setFocusInIndex (oldIndex + 1)
-                    else
-                        identity
-
+                {- ( Just oldIndex, Just newIndex ) ->
+                   if oldIndex < newIndex then
+                       setFocusInIndex (oldIndex)
+                   else if oldIndex > newIndex then
+                       setFocusInIndex (oldIndex + 1)
+                   else
+                       identity
+                -}
                 ( Just oldIndex, Nothing ) ->
                     setFocusInIndex oldIndex
 

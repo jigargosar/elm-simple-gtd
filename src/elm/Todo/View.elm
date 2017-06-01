@@ -220,7 +220,7 @@ createTodoViewModel vc tabindexAV todo =
         toggleDoneMsg =
             Msg.ToggleTodoDone todoId
     in
-        { isDone = Todo.getDone todo
+        { isDone = Todo.isDone todo
         , key = todoId
         , isDeleted = Todo.getDeleted todo
         , isFocused = isFocused

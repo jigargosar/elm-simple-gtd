@@ -95,11 +95,6 @@ getDueAt =
     (.dueAt)
 
 
-getDone : Model -> Bool
-getDone =
-    (.done)
-
-
 getDeleted : Model -> Bool
 getDeleted =
     (.deleted)
@@ -346,8 +341,16 @@ getContextId =
     .contextId
 
 
+contextFilter context =
+    getContextId >> equals (Document.getId context)
+
+
 isNotDeleted =
     getDeleted >> not
+
+
+isNotDone =
+    isDone >> not
 
 
 filterAllPass =

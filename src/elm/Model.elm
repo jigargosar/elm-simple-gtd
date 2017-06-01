@@ -320,15 +320,12 @@ createGrouping viewType model =
             else
                 Document.isDeleted >> not
 
-        doneFilter =
-            Todo.isDone >> not
-
-        todoListForContext context =
+        getTodoListForContext context =
             filterTodos
                 (Ext.Predicate.all
                     [ deletedFilter
-                    , doneFilter
-                    , Todo.getContextId >> equals (Document.getId context)
+                    , Todo.isNotDone
+                    , Todo.contextFilter context
                     ]
                 )
                 model
@@ -338,21 +335,8 @@ createGrouping viewType model =
     in
         case viewType of
             Entity.ContextsView ->
-                let
-                    contexts =
-                        filterContexts deletedFilter model
-                            |> (::) Context.null
-
-                    defRet =
-                        contexts
-                            .|> (\context ->
-                                    { groupEntity = Entity.ContextGroup context
-                                    , list = todoListForContext context
-                                    }
-                                )
-                            |> Entity.Multi
-                in
-                    defRet
+                filterContexts deletedFilter model
+                    |> Entity.createGroupingForContexts getTodoListForContext
 
             Entity.ProjectsView ->
                 defRet

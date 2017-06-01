@@ -92,12 +92,27 @@ var _user$project$Entity$StartEditing = {ctor: 'StartEditing'};
 var _user$project$Entity$ContextGroup = function (a) {
 	return {ctor: 'ContextGroup', _0: a};
 };
+var _user$project$Entity$createContextTodoGroup = F2(
+	function (getTodoList, context) {
+		return {
+			groupEntity: _user$project$Entity$ContextGroup(context),
+			list: getTodoList(context)
+		};
+	});
 var _user$project$Entity$ProjectGroup = function (a) {
 	return {ctor: 'ProjectGroup', _0: a};
 };
 var _user$project$Entity$Multi = function (a) {
 	return {ctor: 'Multi', _0: a};
 };
+var _user$project$Entity$createGroupingForContexts = F2(
+	function (getTodoList, contexts) {
+		return _user$project$Entity$Multi(
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				contexts,
+				_user$project$Entity$createContextTodoGroup(getTodoList)));
+	});
 var _user$project$Entity$Single = function (a) {
 	return {ctor: 'Single', _0: a};
 };

@@ -388,7 +388,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			}
 		};
 		return {
-			isDone: _user$project$Todo$getDone(todo),
+			isDone: _user$project$Todo$isDone(todo),
 			key: todoId,
 			isDeleted: _user$project$Todo$getDeleted(todo),
 			isFocused: isFocused,

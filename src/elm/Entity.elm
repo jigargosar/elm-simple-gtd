@@ -86,5 +86,15 @@ type Grouping
     | Multi (List TodoGroup)
 
 
+createContextTodoGroup getTodoList context =
+    { groupEntity = ContextGroup context
+    , list = getTodoList context
+    }
+
+
+createGroupingForContexts getTodoList contexts =
+    contexts .|> createContextTodoGroup getTodoList |> Multi
+
+
 
 {- | Flat TodoList -}

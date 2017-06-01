@@ -305,19 +305,6 @@ getEntityStore entityType =
             .contextStore
 
 
-getMaybeEditModelForEntityType : GroupEntityType -> Model -> Maybe EditMode.EntityForm
-getMaybeEditModelForEntityType entityType model =
-    case ( entityType, model.editMode ) of
-        ( ProjectGroup, EditMode.EditProject editModel ) ->
-            Just editModel
-
-        ( ContextGroup, EditMode.EditContext editModel ) ->
-            Just editModel
-
-        _ ->
-            Nothing
-
-
 getEntityList =
     getEntityStore >>> Store.asList
 

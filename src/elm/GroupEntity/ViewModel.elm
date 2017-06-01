@@ -73,7 +73,6 @@ type alias Config =
     , nullIcon : IconVM
     , defaultIconName : String
     , getViewType : Document.Id -> EntityListViewType
-    , maybeEditModel : Maybe EditMode.EntityForm
     }
 
 
@@ -119,15 +118,6 @@ create todoListByEntityId config entity =
                 (commonMsg.noOp)
             else
                 (createEntityActionMsg Entity.ToggleDeleted)
-
-        maybeEditModel =
-            config.maybeEditModel
-                ?+> (\editModel ->
-                        if editModel.id == id then
-                            Just editModel
-                        else
-                            Nothing
-                    )
 
         icon =
             if isNull then
@@ -199,7 +189,6 @@ contexts model =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.ContextView
-            , maybeEditModel = Model.getMaybeEditModelForEntityType ContextGroup model
             }
 
         contextList : List EntityViewModel
@@ -230,7 +219,6 @@ projects model =
                 , nullIcon = { name = "apps", color = nullProjectColor }
                 , defaultIconName = "apps"
                 , getViewType = Entity.ProjectView
-                , maybeEditModel = Model.getMaybeEditModelForEntityType ProjectGroup model
                 }
                 model
     in

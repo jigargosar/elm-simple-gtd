@@ -435,13 +435,13 @@ startEditingReminder todo =
     updateEditModeM (.now >> Todo.ReminderForm.create todo >> EditMode.EditTodoReminder)
 
 
-startEditingContext : Todo.Model -> ModelF
-startEditingContext todo =
+startEditingTodoContext : Todo.Model -> ModelF
+startEditingTodoContext todo =
     setEditMode (EditMode.EditTodoContext todo)
 
 
-startEditingProject : Todo.Model -> ModelF
-startEditingProject todo =
+startEditingTodoProject : Todo.Model -> ModelF
+startEditingTodoProject todo =
     setEditMode (EditMode.EditTodoProject todo)
 
 

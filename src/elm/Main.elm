@@ -233,11 +233,11 @@ update msg =
                         >> autoFocusPaperInputCmd
 
                 StartEditingContext todo ->
-                    Return.map (Model.startEditingContext todo)
+                    Return.map (Model.startEditingTodoContext todo)
                         >> Return.command (positionContextDropdownCmd todo)
 
                 StartEditingProject todo ->
-                    Return.map (Model.startEditingProject todo)
+                    Return.map (Model.startEditingTodoProject todo)
                         >> Return.command (positionProjectDropdownCmd todo)
 
                 UpdateTodoForm form action ->

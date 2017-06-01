@@ -1,3 +1,17 @@
+var _user$project$Entity$createProjectTodoGroup = F2(
+	function (getTodoList, project) {
+		return {
+			project: project,
+			list: getTodoList(project)
+		};
+	});
+var _user$project$Entity$createContextTodoGroup = F2(
+	function (getTodoList, context) {
+		return {
+			context: context,
+			list: getTodoList(context)
+		};
+	});
 var _user$project$Entity$routes = function (viewType) {
 	var _p0 = viewType;
 	switch (_p0.ctor) {
@@ -57,9 +71,13 @@ var _user$project$Entity$routes = function (viewType) {
 			};
 	}
 };
-var _user$project$Entity$TodoGroup = F2(
+var _user$project$Entity$TodoContextGroup = F2(
 	function (a, b) {
-		return {groupEntity: a, list: b};
+		return {context: a, list: b};
+	});
+var _user$project$Entity$TodoProjectGroup = F2(
+	function (a, b) {
+		return {project: a, list: b};
 	});
 var _user$project$Entity$TodoEntity = function (a) {
 	return {ctor: 'TodoEntity', _0: a};
@@ -72,26 +90,43 @@ var _user$project$Entity$ProjectEntity = function (a) {
 };
 var _user$project$Entity$flattenGrouping = function (grouping) {
 	var _p3 = grouping;
-	if (_p3.ctor === 'Single') {
-		return {ctor: '[]'};
-	} else {
-		return A2(
-			_elm_lang$core$List$concatMap,
-			function (g) {
-				return {
-					ctor: '::',
-					_0: function () {
-						var _p4 = g.groupEntity;
-						if (_p4.ctor === 'ContextGroup') {
-							return _user$project$Entity$ContextEntity(_p4._0);
-						} else {
-							return _user$project$Entity$ProjectEntity(_p4._0);
-						}
-					}(),
-					_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.list, _user$project$Entity$TodoEntity)
-				};
-			},
-			_p3._0);
+	switch (_p3.ctor) {
+		case 'SingleContext':
+			var _p4 = _p3._0;
+			return {
+				ctor: '::',
+				_0: _user$project$Entity$ContextEntity(_p4.context),
+				_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p4.list, _user$project$Entity$TodoEntity)
+			};
+		case 'SingleProject':
+			var _p5 = _p3._0;
+			return {
+				ctor: '::',
+				_0: _user$project$Entity$ProjectEntity(_p5.project),
+				_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p5.list, _user$project$Entity$TodoEntity)
+			};
+		case 'MultiContext':
+			return A2(
+				_elm_lang$core$List$concatMap,
+				function (g) {
+					return {
+						ctor: '::',
+						_0: _user$project$Entity$ContextEntity(g.context),
+						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.list, _user$project$Entity$TodoEntity)
+					};
+				},
+				_p3._0);
+		default:
+			return A2(
+				_elm_lang$core$List$concatMap,
+				function (g) {
+					return {
+						ctor: '::',
+						_0: _user$project$Entity$ProjectEntity(g.project),
+						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.list, _user$project$Entity$TodoEntity)
+					};
+				},
+				_p3._0);
 	}
 };
 var _user$project$Entity$ProjectView = function (a) {
@@ -116,52 +151,44 @@ var _user$project$Entity$StartEditing = {ctor: 'StartEditing'};
 var _user$project$Entity$ContextGroup = function (a) {
 	return {ctor: 'ContextGroup', _0: a};
 };
-var _user$project$Entity$createContextTodoGroup = F2(
-	function (getTodoList, context) {
-		return {
-			groupEntity: _user$project$Entity$ContextGroup(context),
-			list: getTodoList(context)
-		};
-	});
 var _user$project$Entity$ProjectGroup = function (a) {
 	return {ctor: 'ProjectGroup', _0: a};
 };
-var _user$project$Entity$createProjectTodoGroup = F2(
-	function (getTodoList, project) {
-		return {
-			groupEntity: _user$project$Entity$ProjectGroup(project),
-			list: getTodoList(project)
-		};
-	});
-var _user$project$Entity$Multi = function (a) {
-	return {ctor: 'Multi', _0: a};
+var _user$project$Entity$MultiProject = function (a) {
+	return {ctor: 'MultiProject', _0: a};
 };
-var _user$project$Entity$createGroupingForContexts = F2(
-	function (getTodoList, contexts) {
-		return _user$project$Entity$Multi(
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				contexts,
-				_user$project$Entity$createContextTodoGroup(getTodoList)));
-	});
 var _user$project$Entity$createGroupingForProjects = F2(
 	function (getTodoList, projects) {
-		return _user$project$Entity$Multi(
+		return _user$project$Entity$MultiProject(
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 				projects,
 				_user$project$Entity$createProjectTodoGroup(getTodoList)));
 	});
-var _user$project$Entity$Single = function (a) {
-	return {ctor: 'Single', _0: a};
+var _user$project$Entity$MultiContext = function (a) {
+	return {ctor: 'MultiContext', _0: a};
+};
+var _user$project$Entity$createGroupingForContexts = F2(
+	function (getTodoList, contexts) {
+		return _user$project$Entity$MultiContext(
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				contexts,
+				_user$project$Entity$createContextTodoGroup(getTodoList)));
+	});
+var _user$project$Entity$SingleProject = function (a) {
+	return {ctor: 'SingleProject', _0: a};
+};
+var _user$project$Entity$createGroupingForProject = F2(
+	function (getTodoList, project) {
+		return _user$project$Entity$SingleProject(
+			A2(_user$project$Entity$createProjectTodoGroup, getTodoList, project));
+	});
+var _user$project$Entity$SingleContext = function (a) {
+	return {ctor: 'SingleContext', _0: a};
 };
 var _user$project$Entity$createGroupingForContext = F2(
 	function (getTodoList, context) {
-		return _user$project$Entity$Single(
+		return _user$project$Entity$SingleContext(
 			A2(_user$project$Entity$createContextTodoGroup, getTodoList, context));
-	});
-var _user$project$Entity$createGroupingForProject = F2(
-	function (getTodoList, project) {
-		return _user$project$Entity$Single(
-			A2(_user$project$Entity$createProjectTodoGroup, getTodoList, project));
 	});

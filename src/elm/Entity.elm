@@ -75,61 +75,76 @@ type alias TodoList =
     List Todo.Model
 
 
-type alias TodoGroup =
-    { groupEntity : GroupEntity
+type alias TodoContextGroup =
+    { context : Context.Model
+    , list : TodoList
+    }
+
+
+type alias TodoProjectGroup =
+    { project : Project.Model
     , list : TodoList
     }
 
 
 type Grouping
-    = Single TodoGroup
-    | Multi (List TodoGroup)
+    = SingleContext TodoContextGroup
+    | SingleProject TodoProjectGroup
+    | MultiContext (List TodoContextGroup)
+    | MultiProject (List TodoProjectGroup)
 
 
 createContextTodoGroup getTodoList context =
-    { groupEntity = ContextGroup context
+    { context = context
     , list = getTodoList context
     }
 
 
 createProjectTodoGroup getTodoList project =
-    { groupEntity = ProjectGroup project
+    { project = project
     , list = getTodoList project
     }
 
 
 createGroupingForContexts getTodoList contexts =
-    contexts .|> createContextTodoGroup getTodoList |> Multi
+    contexts .|> createContextTodoGroup getTodoList |> MultiContext
 
 
 createGroupingForContext getTodoList context =
-    context |> createContextTodoGroup getTodoList |> Single
+    context |> createContextTodoGroup getTodoList |> SingleContext
 
 
 createGroupingForProjects getTodoList projects =
-    projects .|> createProjectTodoGroup getTodoList |> Multi
+    projects .|> createProjectTodoGroup getTodoList |> MultiProject
 
 
 createGroupingForProject getTodoList project =
-    project |> createProjectTodoGroup getTodoList |> Single
+    project |> createProjectTodoGroup getTodoList |> SingleProject
 
 
 flattenGrouping : Grouping -> List Entity
 flattenGrouping grouping =
     case grouping of
-        Single todoGroup ->
-            []
+        SingleContext g ->
+            (ContextEntity g.context)
+                :: (g.list .|> TodoEntity)
 
-        Multi groupList ->
+        SingleProject g ->
+            (ProjectEntity g.project)
+                :: (g.list .|> TodoEntity)
+
+        MultiContext groupList ->
             groupList
                 |> List.concatMap
                     (\g ->
-                        (case g.groupEntity of
-                            ContextGroup context ->
-                                ContextEntity context
+                        (ContextEntity g.context)
+                            :: (g.list .|> TodoEntity)
+                    )
 
-                            ProjectGroup project ->
-                                ProjectEntity project
-                        )
+        MultiProject groupList ->
+            groupList
+                |> List.concatMap
+                    (\g ->
+                        (ProjectEntity g.project)
                             :: (g.list .|> TodoEntity)
                     )

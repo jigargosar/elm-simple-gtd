@@ -348,9 +348,6 @@ createGrouping viewType model =
                     ]
                 )
                 model
-
-        defRet =
-            Entity.Multi []
     in
         case viewType of
             Entity.ContextsView ->
@@ -736,33 +733,6 @@ findContextById id =
     .contextStore >> Store.findById id
 
 
-type alias TodoContextViewModel =
-    { name : String, todoList : List Todo.Model, count : Int, isEmpty : Bool }
-
-
-groupByTodoContextViewModel : Model -> List TodoContextViewModel
-groupByTodoContextViewModel =
-    getTodoStore
-        >> Store.asList
-        >> Todo.rejectAnyPass [ Todo.isDeleted, Todo.isDone ]
-        --        >> Dict.Extra.groupBy (Todo.getTodoContext >> toString)
-        >> Dict.Extra.groupBy (\_ -> "Inbox")
-        >> (\dict ->
-                --                Todo.getAllTodoContexts
-                [ "Inbox" ]
-                    .|> (apply2
-                            ( identity
-                            , (Dict.get # dict >> Maybe.withDefault [])
-                            )
-                            >> (\( name, list ) ->
-                                    list
-                                        |> apply3 ( identity, List.length, List.isEmpty )
-                                        >> uncurry3 (TodoContextViewModel name)
-                               )
-                        )
-           )
-
-
 updateTodoAndMaybeAlsoSelected action todoId model =
     let
         idSet =
@@ -916,32 +886,10 @@ createEntityListFromEntityListViewType viewType model =
                 createGrouping viewType model |> Entity.flattenGrouping
 
             Entity.ContextView id ->
-                let
-                    addDefaultIfEmpty list =
-                        if List.isEmpty list then
-                            findContextById id model
-                                ?= Context.null
-                                |> Entity.ContextEntity
-                                >> List.singleton
-                        else
-                            list
-                in
-                    getContextsViewEntityList todoList True model
-                        |> addDefaultIfEmpty
+                createGrouping viewType model |> Entity.flattenGrouping
 
             Entity.ProjectView id ->
-                let
-                    addDefaultIfEmpty list =
-                        if List.isEmpty list then
-                            findProjectById id model
-                                ?= Project.null
-                                |> Entity.ProjectEntity
-                                >> List.singleton
-                        else
-                            list
-                in
-                    getProjectsViewEntityList todoList True model
-                        |> addDefaultIfEmpty
+                createGrouping viewType model |> Entity.flattenGrouping
 
 
 getContextsViewEntityList todoList enableSubgroup model =

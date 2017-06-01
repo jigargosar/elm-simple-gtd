@@ -1,20 +1,6 @@
-var _user$project$Entity$createGrouping = F2(
-	function (viewType, model) {
-		var _p0 = viewType;
-		switch (_p0.ctor) {
-			case 'ContextsView':
-				return 1;
-			case 'ProjectsView':
-				return 1;
-			case 'ContextView':
-				return 1;
-			default:
-				return 1;
-		}
-	});
 var _user$project$Entity$routes = function (viewType) {
-	var _p1 = viewType;
-	switch (_p1.ctor) {
+	var _p0 = viewType;
+	switch (_p0.ctor) {
 		case 'ContextsView':
 			return {
 				ctor: '::',
@@ -36,8 +22,8 @@ var _user$project$Entity$routes = function (viewType) {
 				}
 			};
 		case 'ProjectView':
-			var _p2 = _p1._0;
-			return _elm_lang$core$String$isEmpty(_p2) ? {
+			var _p1 = _p0._0;
+			return _elm_lang$core$String$isEmpty(_p1) ? {
 				ctor: '::',
 				_0: 'project',
 				_1: {
@@ -50,13 +36,13 @@ var _user$project$Entity$routes = function (viewType) {
 				_0: 'project',
 				_1: {
 					ctor: '::',
-					_0: _p2,
+					_0: _p1,
 					_1: {ctor: '[]'}
 				}
 			};
 		default:
-			var _p3 = _p1._0;
-			return _elm_lang$core$String$isEmpty(_p3) ? {
+			var _p2 = _p0._0;
+			return _elm_lang$core$String$isEmpty(_p2) ? {
 				ctor: '::',
 				_0: 'Inbox',
 				_1: {ctor: '[]'}
@@ -65,7 +51,7 @@ var _user$project$Entity$routes = function (viewType) {
 				_0: 'context',
 				_1: {
 					ctor: '::',
-					_0: _p3,
+					_0: _p2,
 					_1: {ctor: '[]'}
 				}
 			};

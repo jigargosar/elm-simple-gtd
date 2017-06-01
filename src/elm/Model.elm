@@ -9,6 +9,7 @@ import EditMode exposing (EditMode)
 import Entity exposing (Entity)
 import Ext.Keyboard as Keyboard
 import Ext.List as List
+import Ext.Predicate
 import Firebase exposing (DeviceId)
 import Project
 import ReminderOverlay
@@ -296,6 +297,10 @@ getCurrentNamedDocList store model =
             Document.isDeleted
 
 
+filterTodos pred model =
+    Store.filter pred model.todoStore
+
+
 filterProjects pred model =
     Store.filter pred model.projectStore
 
@@ -304,30 +309,47 @@ filterContexts pred model =
     Store.filter pred model.contextStore
 
 
+createGrouping : Entity.ListViewType -> Model -> Entity.Grouping
 createGrouping viewType model =
     let
-        filter =
+        deletedFilter =
             if model.showDeleted then
                 Document.isDeleted >> not
             else
                 Document.isDeleted
+
+        todoListForContext context =
+            filterTodos (Ext.Predicate.all [ deletedFilter, Todo.getContextId >> equals (Document.getId context) ]) model
+
+        defRet =
+            Entity.Multi []
     in
         case viewType of
             Entity.ContextsView ->
                 let
-                    _ =
-                        filterContexts
+                    contexts =
+                        filterContexts deletedFilter model
+                            |> (::) Context.null
+
+                    defRet =
+                        contexts
+                            .|> (\context ->
+                                    { groupEntity = Entity.ContextGroup context
+                                    , list = todoListForContext context
+                                    }
+                                )
+                            |> Entity.Multi
                 in
-                    1
+                    defRet
 
             Entity.ProjectsView ->
-                1
+                defRet
 
             Entity.ContextView id ->
-                1
+                defRet
 
             Entity.ProjectView id ->
-                1
+                defRet
 
 
 getActiveTodoList =

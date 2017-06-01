@@ -1,0 +1,16 @@
+var _user$project$Ext_Predicate$any = function (list) {
+	return function (_p0) {
+		return A2(
+			_elm_lang$core$List$any,
+			_elm_lang$core$Basics$identity,
+			A2(_danielnarey$elm_toolkit$Toolkit_Helpers$applyList, list, _p0));
+	};
+};
+var _user$project$Ext_Predicate$all = function (list) {
+	return function (_p1) {
+		return A2(
+			_elm_lang$core$List$all,
+			_elm_lang$core$Basics$identity,
+			A2(_danielnarey$elm_toolkit$Toolkit_Helpers$applyList, list, _p1));
+	};
+};

@@ -1253,6 +1253,7 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
     in
         model
             |> case indexTuple of
+                -- note: currently we are focusing next entity only if current entity is removed from the view.
                 {- ( Just oldIndex, Just newIndex ) ->
                    if oldIndex < newIndex then
                        setFocusInIndex (oldIndex)

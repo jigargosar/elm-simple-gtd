@@ -92,8 +92,18 @@ createContextTodoGroup getTodoList context =
     }
 
 
+createProjectTodoGroup getTodoList project =
+    { groupEntity = ProjectGroup project
+    , list = getTodoList project
+    }
+
+
 createGroupingForContexts getTodoList contexts =
     contexts .|> createContextTodoGroup getTodoList |> Multi
+
+
+createGroupingForProjects getTodoList projects =
+    projects .|> createProjectTodoGroup getTodoList |> Multi
 
 
 

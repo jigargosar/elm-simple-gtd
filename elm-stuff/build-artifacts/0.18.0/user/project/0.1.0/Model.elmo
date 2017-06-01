@@ -814,7 +814,7 @@ var _user$project$Model$createGrouping = F2(
 		var deletedFilter = model.showDeleted ? _user$project$Document$isDeleted : function (_p39) {
 			return !_user$project$Document$isDeleted(_p39);
 		};
-		var getTodoListForContext = function (context) {
+		var filterTodosForContext = function (context) {
 			return A2(
 				_user$project$Model$filterTodos,
 				_user$project$Ext_Predicate$all(
@@ -833,15 +833,37 @@ var _user$project$Model$createGrouping = F2(
 					}),
 				model);
 		};
+		var filterTodosForProject = function (project) {
+			return A2(
+				_user$project$Model$filterTodos,
+				_user$project$Ext_Predicate$all(
+					{
+						ctor: '::',
+						_0: deletedFilter,
+						_1: {
+							ctor: '::',
+							_0: _user$project$Todo$isNotDone,
+							_1: {
+								ctor: '::',
+								_0: _user$project$Todo$projectFilter(project),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				model);
+		};
 		var _p40 = viewType;
 		switch (_p40.ctor) {
 			case 'ContextsView':
 				return A2(
 					_user$project$Entity$createGroupingForContexts,
-					getTodoListForContext,
+					filterTodosForContext,
 					A2(_user$project$Model$filterContexts, deletedFilter, model));
 			case 'ProjectsView':
-				return defRet;
+				return A2(
+					_user$project$Entity$createGroupingForProjects,
+					filterTodosForProject,
+					A2(_user$project$Model$filterProjects, deletedFilter, model));
 			case 'ContextView':
 				return defRet;
 			default:

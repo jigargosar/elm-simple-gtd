@@ -345,6 +345,10 @@ contextFilter context =
     getContextId >> equals (Document.getId context)
 
 
+projectFilter project =
+    getProjectId >> equals (Document.getId project)
+
+
 isNotDeleted =
     getDeleted >> not
 

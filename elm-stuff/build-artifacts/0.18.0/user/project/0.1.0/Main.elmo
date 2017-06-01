@@ -535,8 +535,6 @@ var _user$project$Main$update = function (msg) {
 							return _user$project$DomPorts$autoFocusPaperInputCmd(
 								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewContext, _p47));
 						};
-					case 'StartAddingNewEntity':
-						return _elm_lang$core$Basics$identity;
 					case 'OnEntityAction':
 						var _p51 = _p15._0;
 						var _p48 = _p15._1;

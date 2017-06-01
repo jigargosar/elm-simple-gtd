@@ -1,7 +1,4 @@
 var _user$project$Msg$toCmd = _user$project$Ext_Cmd$toCmd;
-var _user$project$Msg$StartAddingNewEntity = function (a) {
-	return {ctor: 'StartAddingNewEntity', _0: a};
-};
 var _user$project$Msg$OnEntityAction = F2(
 	function (a, b) {
 		return {ctor: 'OnEntityAction', _0: a, _1: b};

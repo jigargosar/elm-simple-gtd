@@ -1,6 +1,20 @@
+var _user$project$Entity$createGrouping = F2(
+	function (viewType, model) {
+		var _p0 = viewType;
+		switch (_p0.ctor) {
+			case 'ContextsView':
+				return 1;
+			case 'ProjectsView':
+				return 1;
+			case 'ContextView':
+				return 1;
+			default:
+				return 1;
+		}
+	});
 var _user$project$Entity$routes = function (viewType) {
-	var _p0 = viewType;
-	switch (_p0.ctor) {
+	var _p1 = viewType;
+	switch (_p1.ctor) {
 		case 'ContextsView':
 			return {
 				ctor: '::',
@@ -22,8 +36,8 @@ var _user$project$Entity$routes = function (viewType) {
 				}
 			};
 		case 'ProjectView':
-			var _p1 = _p0._0;
-			return _elm_lang$core$String$isEmpty(_p1) ? {
+			var _p2 = _p1._0;
+			return _elm_lang$core$String$isEmpty(_p2) ? {
 				ctor: '::',
 				_0: 'project',
 				_1: {
@@ -36,13 +50,13 @@ var _user$project$Entity$routes = function (viewType) {
 				_0: 'project',
 				_1: {
 					ctor: '::',
-					_0: _p1,
+					_0: _p2,
 					_1: {ctor: '[]'}
 				}
 			};
 		default:
-			var _p2 = _p0._0;
-			return _elm_lang$core$String$isEmpty(_p2) ? {
+			var _p3 = _p1._0;
+			return _elm_lang$core$String$isEmpty(_p3) ? {
 				ctor: '::',
 				_0: 'Inbox',
 				_1: {ctor: '[]'}
@@ -51,12 +65,16 @@ var _user$project$Entity$routes = function (viewType) {
 				_0: 'context',
 				_1: {
 					ctor: '::',
-					_0: _p2,
+					_0: _p3,
 					_1: {ctor: '[]'}
 				}
 			};
 	}
 };
+var _user$project$Entity$TodoGroup = F2(
+	function (a, b) {
+		return {groupEntity: a, list: b};
+	});
 var _user$project$Entity$TodoEntity = function (a) {
 	return {ctor: 'TodoEntity', _0: a};
 };
@@ -85,3 +103,15 @@ var _user$project$Entity$NameChanged = function (a) {
 var _user$project$Entity$Save = {ctor: 'Save'};
 var _user$project$Entity$ToggleDeleted = {ctor: 'ToggleDeleted'};
 var _user$project$Entity$StartEditing = {ctor: 'StartEditing'};
+var _user$project$Entity$ContextGroup = function (a) {
+	return {ctor: 'ContextGroup', _0: a};
+};
+var _user$project$Entity$ProjectGroup = function (a) {
+	return {ctor: 'ProjectGroup', _0: a};
+};
+var _user$project$Entity$Multi = function (a) {
+	return {ctor: 'Multi', _0: a};
+};
+var _user$project$Entity$Single = function (a) {
+	return {ctor: 'Single', _0: a};
+};

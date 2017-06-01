@@ -2,6 +2,7 @@ module Entity exposing (..)
 
 import Context
 import Document
+import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -59,3 +60,46 @@ routes viewType =
                 [ "Inbox" ]
             else
                 [ "context", id ]
+
+
+type GroupEntity
+    = ProjectGroup Project.Model
+    | ContextGroup Context.Model
+
+
+
+{- | TimeGroup Time -}
+
+
+type alias TodoList =
+    List Todo.Model
+
+
+type alias TodoGroup =
+    { groupEntity : GroupEntity
+    , list : TodoList
+    }
+
+
+type Grouping
+    = Single TodoGroup
+    | Multi (List TodoGroup)
+
+
+createGrouping viewType model =
+    case viewType of
+        ContextsView ->
+            1
+
+        ProjectsView ->
+            1
+
+        ContextView id ->
+            1
+
+        ProjectView id ->
+            1
+
+
+
+{- | Flat TodoList -}

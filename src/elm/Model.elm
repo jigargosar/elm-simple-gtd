@@ -86,18 +86,6 @@ type alias ModelF =
     Model -> Model
 
 
-
---type GroupEntityType
---    = ProjectGroup
---    | ContextGroup
---
---
---type GroupEntity
---    = ProjectGroupEntity Project.Model
---    | ContextGroupEntity Context.Model
---
-
-
 type alias Flags =
     { now : Time
     , encodedTodoList : List Todo.Encoded

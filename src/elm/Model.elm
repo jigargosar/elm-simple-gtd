@@ -293,11 +293,13 @@ filterTodos pred model =
 
 filterProjects pred model =
     Store.filter pred model.projectStore
+        |> List.sortBy (Project.getName >> String.toLower)
         |> List.append (Project.filterNull pred)
 
 
 filterContexts pred model =
     Store.filter pred model.contextStore
+        |> List.sortBy (Context.getName >> String.toLower)
         |> List.append (Context.filterNull pred)
 
 

@@ -359,27 +359,6 @@ createGrouping viewType model =
                 defRet
 
 
-flattenGrouping : Entity.Grouping -> List Entity.Entity
-flattenGrouping grouping =
-    case grouping of
-        Entity.Single todoGroup ->
-            []
-
-        Entity.Multi groupList ->
-            groupList
-                |> List.concatMap
-                    (\g ->
-                        (case g.groupEntity of
-                            Entity.ContextGroup context ->
-                                Entity.ContextEntity context
-
-                            Entity.ProjectGroup project ->
-                                Entity.ProjectEntity project
-                        )
-                            :: (g.list .|> Entity.TodoEntity)
-                    )
-
-
 getActiveTodoList =
     .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 
@@ -918,30 +897,10 @@ createEntityListFromEntityListViewType viewType model =
     in
         case viewType of
             Entity.ContextsView ->
-                let
-                    nullEntity =
-                        (Entity.ContextEntity Context.null)
-
-                    addDefaultIfMissing =
-                        when (List.notMember nullEntity)
-                            ((::) nullEntity)
-                in
-                    {- getContextsViewEntityList todoList False model
-                       |> addDefaultIfMissing
-                    -}
-                    createGrouping viewType model |> flattenGrouping
+                createGrouping viewType model |> Entity.flattenGrouping
 
             Entity.ProjectsView ->
-                let
-                    nullEntity =
-                        (Entity.ProjectEntity Project.null)
-
-                    addDefaultIfMissing =
-                        when (List.notMember nullEntity)
-                            ((::) nullEntity)
-                in
-                    getProjectsViewEntityList todoList False model
-                        |> addDefaultIfMissing
+                createGrouping viewType model |> Entity.flattenGrouping
 
             Entity.ContextView id ->
                 let

@@ -70,6 +70,30 @@ var _user$project$Entity$ContextEntity = function (a) {
 var _user$project$Entity$ProjectEntity = function (a) {
 	return {ctor: 'ProjectEntity', _0: a};
 };
+var _user$project$Entity$flattenGrouping = function (grouping) {
+	var _p3 = grouping;
+	if (_p3.ctor === 'Single') {
+		return {ctor: '[]'};
+	} else {
+		return A2(
+			_elm_lang$core$List$concatMap,
+			function (g) {
+				return {
+					ctor: '::',
+					_0: function () {
+						var _p4 = g.groupEntity;
+						if (_p4.ctor === 'ContextGroup') {
+							return _user$project$Entity$ContextEntity(_p4._0);
+						} else {
+							return _user$project$Entity$ProjectEntity(_p4._0);
+						}
+					}(),
+					_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.list, _user$project$Entity$TodoEntity)
+				};
+			},
+			_p3._0);
+	}
+};
 var _user$project$Entity$ProjectView = function (a) {
 	return {ctor: 'ProjectView', _0: a};
 };
@@ -102,6 +126,13 @@ var _user$project$Entity$createContextTodoGroup = F2(
 var _user$project$Entity$ProjectGroup = function (a) {
 	return {ctor: 'ProjectGroup', _0: a};
 };
+var _user$project$Entity$createProjectTodoGroup = F2(
+	function (getTodoList, project) {
+		return {
+			groupEntity: _user$project$Entity$ProjectGroup(project),
+			list: getTodoList(project)
+		};
+	});
 var _user$project$Entity$Multi = function (a) {
 	return {ctor: 'Multi', _0: a};
 };
@@ -112,6 +143,14 @@ var _user$project$Entity$createGroupingForContexts = F2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 				contexts,
 				_user$project$Entity$createContextTodoGroup(getTodoList)));
+	});
+var _user$project$Entity$createGroupingForProjects = F2(
+	function (getTodoList, projects) {
+		return _user$project$Entity$Multi(
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				projects,
+				_user$project$Entity$createProjectTodoGroup(getTodoList)));
 	});
 var _user$project$Entity$Single = function (a) {
 	return {ctor: 'Single', _0: a};

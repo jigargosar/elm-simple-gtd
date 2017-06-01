@@ -106,5 +106,22 @@ createGroupingForProjects getTodoList projects =
     projects .|> createProjectTodoGroup getTodoList |> Multi
 
 
+flattenGrouping : Grouping -> List Entity
+flattenGrouping grouping =
+    case grouping of
+        Single todoGroup ->
+            []
 
-{- | Flat TodoList -}
+        Multi groupList ->
+            groupList
+                |> List.concatMap
+                    (\g ->
+                        (case g.groupEntity of
+                            ContextGroup context ->
+                                ContextEntity context
+
+                            ProjectGroup project ->
+                                ProjectEntity project
+                        )
+                            :: (g.list .|> TodoEntity)
+                    )

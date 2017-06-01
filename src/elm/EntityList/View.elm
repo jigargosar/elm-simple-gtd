@@ -3,6 +3,7 @@ module EntityList.View exposing (..)
 import Document
 import Entity exposing (Entity)
 import EntityList
+import EntityList.GroupView
 import EntityList.GroupViewModel exposing (DocumentWithName)
 import Html
 import Todo
@@ -13,7 +14,6 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Ext.Keyboard exposing (onKeyDown)
-import GroupEntity.View
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
 import Model
@@ -164,10 +164,10 @@ listView viewType model appViewModel =
         createEntityView vm =
             case vm of
                 Context vm ->
-                    GroupEntity.View.initKeyed appViewModel vm
+                    EntityList.GroupView.initKeyed appViewModel vm
 
                 Project vm ->
-                    GroupEntity.View.initKeyed appViewModel vm
+                    EntityList.GroupView.initKeyed appViewModel vm
 
                 Todo vm ->
                     Todo.View.initKeyed vm

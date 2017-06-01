@@ -3,7 +3,7 @@ module Main.View exposing (..)
 import Context
 import Document
 import EntityList.View
-import GroupEntity.ViewModel
+import OldGroupEntity.ViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)

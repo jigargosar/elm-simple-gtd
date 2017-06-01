@@ -17,7 +17,7 @@ import Msg exposing (Msg, commonMsg)
 import Polymer.Firebase
 import ReminderOverlay
 import Set
-import GroupEntity.ViewModel
+import OldGroupEntity.ViewModel
 import View.Header
 import Main.View
 import View.TodoList

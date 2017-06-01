@@ -200,9 +200,9 @@ var _user$project$EntityList_View$listView = F3(
 			var _p11 = vm;
 			switch (_p11.ctor) {
 				case 'Context':
-					return A2(_user$project$GroupEntity_View$initKeyed, appViewModel, _p11._0);
+					return A2(_user$project$EntityList_GroupView$initKeyed, appViewModel, _p11._0);
 				case 'Project':
-					return A2(_user$project$GroupEntity_View$initKeyed, appViewModel, _p11._0);
+					return A2(_user$project$EntityList_GroupView$initKeyed, appViewModel, _p11._0);
 				default:
 					return _user$project$Todo_View$initKeyed(_p11._0);
 			}

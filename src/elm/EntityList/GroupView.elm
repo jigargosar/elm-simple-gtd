@@ -1,4 +1,4 @@
-module GroupEntity.View exposing (..)
+module EntityList.GroupView exposing (..)
 
 import Ext.Keyboard exposing (onKeyDown)
 import Html exposing (..)

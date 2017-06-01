@@ -2,7 +2,7 @@ module View.AppDrawer exposing (..)
 
 import Document
 import Entity
-import GroupEntity.ViewModel
+import OldGroupEntity.ViewModel
 import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
 import Html.Keyed as Keyed
@@ -154,7 +154,7 @@ entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } 
         ++ (List.map entityListItem entityList)
 
 
-entityListItem : GroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg
+entityListItem : OldGroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg
 entityListItem vm =
     item [ onClick (vm.onActiveStateChanged True) ]
         [ Html.node "iron-icon" [ iconA vm.icon.name, style [ "color" => vm.icon.color ] ] []

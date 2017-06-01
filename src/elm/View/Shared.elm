@@ -5,7 +5,7 @@ import Dict exposing (Dict)
 import Document exposing (Id)
 import EditMode exposing (EditMode)
 import Entity exposing (Entity)
-import GroupEntity.ViewModel
+import OldGroupEntity.ViewModel
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Attributes.Extra exposing (boolProperty, intProperty)

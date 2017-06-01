@@ -2,7 +2,7 @@ module ViewModel exposing (..)
 
 import Document
 import Entity
-import GroupEntity.ViewModel exposing (DocumentWithNameViewModel)
+import OldGroupEntity.ViewModel exposing (DocumentWithNameViewModel)
 import Html exposing (Attribute)
 import Msg exposing (Msg)
 import Todo
@@ -18,8 +18,8 @@ import View.Shared exposing (SharedViewModel)
 
 
 type alias Model =
-    { contexts : GroupEntity.ViewModel.ViewModel
-    , projects : GroupEntity.ViewModel.ViewModel
+    { contexts : OldGroupEntity.ViewModel.ViewModel
+    , projects : OldGroupEntity.ViewModel.ViewModel
     , viewName : String
     , mainViewType : ViewType
     , header : { backgroundColor : String }
@@ -33,10 +33,10 @@ create : Model.Model -> Model
 create model =
     let
         contextsVM =
-            GroupEntity.ViewModel.contexts model
+            OldGroupEntity.ViewModel.contexts model
 
         projectsVM =
-            GroupEntity.ViewModel.projects model
+            OldGroupEntity.ViewModel.projects model
 
         mainViewType =
             model.mainViewType

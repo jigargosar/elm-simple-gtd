@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.22 - 2017-06-01
 * [fix] show all todo content till double new line. 
 
 ## v0.16.21 - 2017-06-01

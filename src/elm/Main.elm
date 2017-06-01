@@ -384,11 +384,15 @@ onUpdateNow now =
 
 sendNotifications =
     Return.andThenMaybe
-        (Model.findAndSnoozeOverDueTodo >>? (Tuple.mapFirst showTodoNotificationCmd >> Tuple2.swap))
+        (Model.findAndSnoozeOverDueTodo >>? showTodoNotificationCmd)
 
 
-showTodoNotificationCmd =
-    createTodoNotification >> showNotification >> (::) # [ startAlarm () ] >> Cmd.batch
+showTodoNotificationCmd ( ( todo, model ), cmd ) =
+    let
+        cmds =
+            [ cmd, createTodoNotification todo |> showNotification, startAlarm () ]
+    in
+        model ! cmds
 
 
 withNow : (Time -> Msg) -> ReturnF

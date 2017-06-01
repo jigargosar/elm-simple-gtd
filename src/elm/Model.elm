@@ -22,6 +22,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Return
+import Ext.Return as Return
 import Set exposing (Set)
 import Store
 import Time exposing (Time)
@@ -382,12 +383,17 @@ snoozeTodoWithOffset snoozeOffset todoId model =
             >> Tuple.mapFirst removeReminderOverlay
 
 
-findAndSnoozeOverDueTodo : Model -> Maybe ( Todo.Model, Model )
+findAndSnoozeOverDueTodo : Model -> Maybe ( ( Todo.Model, Model ), Cmd msg )
 findAndSnoozeOverDueTodo model =
-    findAndUpdateTodoT2
-        (Todo.isReminderOverdue model.now)
-        (Todo.SnoozeTill (model.now + (Time.minute * 15)))
-        model
+    let
+        snooze todoId =
+            updateTodo (Todo.SnoozeTill (model.now + (Time.minute * 15))) todoId model
+                |> (\( model, cmd ) ->
+                        findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
+                   )
+    in
+        Store.findBy (Todo.isReminderOverdue model.now) model.todoStore
+            ?+> (Document.getId >> snooze)
 
 
 getActiveTodoListGroupedBy fn =
@@ -408,14 +414,6 @@ createAndEditNewContext model =
 
 isShowDetailsKeyPressed =
     keyboardState.get >> Keyboard.isAltDown >> not
-
-
-
---
---
---update2 lens l2 smallF big =
---    lens.set (smallF (l2.get big) (lens.get big)) big
---
 
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF
@@ -1225,27 +1223,6 @@ type alias ModelReturnF msg =
     Model -> Return msg
 
 
-findAndUpdateDocT :
-    (Document x -> Bool)
-    -> (Document x -> Document x)
-    ->
-        { c
-            | get : Model -> Store.Store x
-            , set : ( Document x, Store.Store x ) -> Model -> ( Document x, Model )
-        }
-    -> Model
-    -> Maybe ( Document x, Model )
-findAndUpdateDocT docFindFn docUpdateFn store model =
-    let
-        updateMaybeF =
-            Store.findAndUpdateT
-                docFindFn
-                model.now
-                docUpdateFn
-    in
-        updateMaybe store updateMaybeF model
-
-
 updateContext id updateFn =
     updateAllNamedDocsDocs (Set.singleton id) updateFn contextStoreT2
 
@@ -1255,7 +1232,7 @@ updateProject id updateFn =
 
 
 updateAllNamedDocsDocs idSet updateFn store model =
-    update store (Store.updateAllT2 idSet model.now updateFn) model
+    update store (Store.updateAll idSet model.now updateFn) model
         |> apply2 ( Tuple.second, (\changes -> Cmd.none) )
         |> Return.map (updateEntityListCursor model)
 
@@ -1291,17 +1268,7 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
                     identity
 
 
-findAndUpdateTodoT2 findFn action model =
-    findAndUpdateDocT findFn (todoUpdateF action model) todoStoreT2 model
-
-
-updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg
-updateTodo action todoId =
-    updateAllTodos action (Set.singleton todoId)
-
-
-updateAllTodos : Todo.UpdateAction -> Document.IdSet -> ModelReturnF msg
-updateAllTodos action todoIdSet model =
+findAndUpdateAllTodos findFn action model =
     let
         todoChangesToCmd ( changes, model ) =
             case getMaybeUserId model of
@@ -1312,10 +1279,23 @@ updateAllTodos action todoIdSet model =
                     changes
                         .|> getNotificationCmdFromTodoChange uid
                         |> Cmd.batch
+
+        updateFn =
+            Todo.update [ action ] model.now
     in
-        update todoStoreT2 (Todo.Store.updateAll todoIdSet action model.now) model
+        update todoStoreT2 (Store.findAndUpdateAll findFn model.now updateFn) model
             |> apply2 ( Tuple.second, todoChangesToCmd )
             |> Return.map (updateEntityListCursor model)
+
+
+updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg
+updateTodo action todoId =
+    findAndUpdateAllTodos (Document.hasId todoId) action
+
+
+updateAllTodos : Todo.UpdateAction -> Document.IdSet -> ModelReturnF msg
+updateAllTodos action idSet model =
+    findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
 
 
 getNotificationCmdFromTodoChange uid (( old, new ) as change) =
@@ -1330,27 +1310,3 @@ getNotificationCmdFromTodoChange uid (( old, new ) as change) =
             Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
     else
         Cmd.none
-
-
-todoUpdateF action model =
-    Todo.update [ action ] model.now
-
-
-
-{-
-   updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg
-   updateTodo action todoId model =
-       let
-           todoChangesToCmd ( changes, model ) =
-               case getMaybeUserId model of
-                   Nothing ->
-                       Cmd.none
-
-                   Just uid ->
-                       changes
-                           .|> getNotificationCmdFromTodoChange uid
-                           |> Cmd.batch
-       in
-           update todoStoreT2 (Todo.Store.update action model.now todoId) model
-               |> apply2 ( Tuple.second, todoChangesToCmd )
--}

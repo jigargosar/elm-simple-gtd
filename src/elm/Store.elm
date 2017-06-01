@@ -11,8 +11,8 @@ port module Store
         , asIdDict
         , asList
         , filter
-        , updateAllT2
-        , findAndUpdateT
+        , updateAll
+        , findAndUpdateAll
         , findAllByIdSetIn
         , upsertOnPouchDBChange
         , upsertInPouchDbOnFirebaseChange
@@ -137,20 +137,6 @@ replaceDocIn =
     flip replaceDoc
 
 
-findAndUpdateT :
-    (Document x -> Bool)
-    -> Time
-    -> (Document x -> Document x)
-    -> Store x
-    -> Maybe ( Document x, Store x )
-findAndUpdateT findFn now updateFn store =
-    findBy findFn store
-        ?+> (getUpdateFnDecorator updateFn now store
-                >> apply2 ( Document.getId, replaceDocIn store )
-                >> (\( id, store ) -> findById id store ?|> (\doc -> ( doc, store )))
-            )
-
-
 getUpdateFnDecorator updateFn now store =
     updateFn >> Document.setModifiedAt now >> Document.setDeviceId store.deviceId
 
@@ -175,44 +161,23 @@ type alias UpdateAllReturnF x =
     UpdateAllReturn x -> UpdateAllReturn x
 
 
-updateT2 :
-    Time
-    -> (Document x -> Document x)
-    -> Document.Id
-    -> Store x
-    -> Maybe (UpdateReturn x)
-updateT2 now updateFn id store =
-    updateT2Help (getUpdateFnDecorator updateFn now store) id store
-
-
-updateT2Help :
-    (Document x -> Document x)
-    -> Document.Id
-    -> Store x
-    -> Maybe (UpdateReturn x)
-updateT2Help updateFn id store =
-    findById id store
-        ?|> apply2 ( identity, updateFn )
-        >> apply2 ( identity, Tuple.second >> replaceDocIn store )
-
-
-updateAllT2 :
+updateAll :
     Set Document.Id
     -> Time
     -> (Document x -> Document x)
     -> Store x
     -> UpdateAllReturn x
-updateAllT2 idSet =
-    findAndUpdateAllBy (Document.getId >> Set.member # idSet)
+updateAll idSet =
+    findAndUpdateAll (Document.getId >> Set.member # idSet)
 
 
-findAndUpdateAllBy :
+findAndUpdateAll :
     (Document x -> Bool)
     -> Time
     -> (Document x -> Document x)
     -> Store x
     -> UpdateAllReturn x
-findAndUpdateAllBy pred now updateFn_ store =
+findAndUpdateAll pred now updateFn_ store =
     let
         updateFn =
             (getUpdateFnDecorator updateFn_ now store)

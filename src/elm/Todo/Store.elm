@@ -23,10 +23,8 @@ generator =
    update action now todoId store =
        updateAll (Set.singleton todoId) action now store
 -}
-
-
-updateAll idSet action now store =
-    Store.updateAllT2 idSet
-        now
-        (Todo.update [ action ] now)
-        store
+--updateAll idSet action now store =
+--    Store.updateAll idSet
+--        now
+--        (Todo.update [ action ] now)
+--        store

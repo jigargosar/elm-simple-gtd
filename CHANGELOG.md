@@ -1,5 +1,5 @@
 ## Upcoming
-* [fix] [regression] on done focus should jump to next item in list. 
+* [fix] on done or any change to entity focus should jump to next item in list.
 
 ## v0.16.18 - 2017-05-31
 * [fix] firebase: when pouchdb updates in response to an firebase non-local change, don't send that change back to firebase.

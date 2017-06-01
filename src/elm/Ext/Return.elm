@@ -30,13 +30,6 @@ with f1 f2 =
         )
 
 
-mapModelWithMaybe f1 f2 =
-    Return.map
-        (\m ->
-            f1 m ?|> f2 ?= m
-        )
-
-
 mapModelWith f1 f2 =
     Return.map
         (\m ->

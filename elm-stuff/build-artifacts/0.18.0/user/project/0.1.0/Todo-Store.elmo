@@ -1,17 +1,1 @@
-var _user$project$Todo_Store$updateAll = F4(
-	function (idSet, action, now, store) {
-		return A4(
-			_user$project$Store$updateAllT2,
-			idSet,
-			now,
-			A2(
-				_user$project$Todo$update,
-				{
-					ctor: '::',
-					_0: action,
-					_1: {ctor: '[]'}
-				},
-				now),
-			store);
-	});
 var _user$project$Todo_Store$generator = A3(_user$project$Store$generator, 'todo-db', _user$project$Todo$encodeOtherFields, _user$project$Todo$decoder);

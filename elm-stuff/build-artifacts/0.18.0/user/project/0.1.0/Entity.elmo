@@ -155,3 +155,13 @@ var _user$project$Entity$createGroupingForProjects = F2(
 var _user$project$Entity$Single = function (a) {
 	return {ctor: 'Single', _0: a};
 };
+var _user$project$Entity$createGroupingForContext = F2(
+	function (getTodoList, context) {
+		return _user$project$Entity$Single(
+			A2(_user$project$Entity$createContextTodoGroup, getTodoList, context));
+	});
+var _user$project$Entity$createGroupingForProject = F2(
+	function (getTodoList, project) {
+		return _user$project$Entity$Single(
+			A2(_user$project$Entity$createProjectTodoGroup, getTodoList, project));
+	});

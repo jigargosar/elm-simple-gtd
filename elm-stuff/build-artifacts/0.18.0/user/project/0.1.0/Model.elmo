@@ -858,9 +858,21 @@ var _user$project$Model$createGrouping = F2(
 					filterTodosForProject,
 					_user$project$Model$filterCurrentProjects(model));
 			case 'ContextView':
-				return defRet;
+				return A2(
+					_user$project$Entity$createGroupingForContext,
+					filterTodosForContext,
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+						A2(_user$project$Model$findContextById, _p38._0, model),
+						_user$project$Context$null));
 			default:
-				return defRet;
+				return A2(
+					_user$project$Entity$createGroupingForProject,
+					filterTodosForProject,
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+						A2(_user$project$Model$findProjectById, _p38._0, model),
+						_user$project$Project$null));
 		}
 	});
 var _user$project$Model$createEntityListFromEntityListViewType = F2(

@@ -102,8 +102,16 @@ createGroupingForContexts getTodoList contexts =
     contexts .|> createContextTodoGroup getTodoList |> Multi
 
 
+createGroupingForContext getTodoList context =
+    context |> createContextTodoGroup getTodoList |> Single
+
+
 createGroupingForProjects getTodoList projects =
     projects .|> createProjectTodoGroup getTodoList |> Multi
+
+
+createGroupingForProject getTodoList project =
+    project |> createProjectTodoGroup getTodoList |> Single
 
 
 flattenGrouping : Grouping -> List Entity

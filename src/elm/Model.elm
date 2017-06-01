@@ -311,8 +311,10 @@ currentDocPredicate model =
 filterCurrentContexts model =
     filterContexts (currentDocPredicate model) model
 
+
 filterCurrentProjects model =
     filterProjects (currentDocPredicate model) model
+
 
 createGrouping : Entity.ListViewType -> Model -> Entity.Grouping
 createGrouping viewType model =
@@ -360,10 +362,14 @@ createGrouping viewType model =
                     |> Entity.createGroupingForProjects filterTodosForProject
 
             Entity.ContextView id ->
-                defRet
+                findContextById id model
+                    ?= Context.null
+                    |> Entity.createGroupingForContext filterTodosForContext
 
             Entity.ProjectView id ->
-                defRet
+                findProjectById id model
+                    ?= Project.null
+                    |> Entity.createGroupingForProject filterTodosForProject
 
 
 getActiveTodoList =

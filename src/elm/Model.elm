@@ -86,14 +86,16 @@ type alias ModelF =
     Model -> Model
 
 
-type GroupEntityType
-    = ProjectGroup
-    | ContextGroup
 
-
-type GroupEntity
-    = ProjectGroupEntity Project.Model
-    | ContextGroupEntity Context.Model
+--type GroupEntityType
+--    = ProjectGroup
+--    | ContextGroup
+--
+--
+--type GroupEntity
+--    = ProjectGroupEntity Project.Model
+--    | ContextGroupEntity Context.Model
+--
 
 
 type alias Flags =
@@ -294,23 +296,6 @@ isLayoutAutoNarrow =
     getLayout
         >> apply2 ( .forceNarrow >> not, .narrow )
         >> uncurry and
-
-
-getEntityStore entityType =
-    case entityType of
-        ProjectGroup ->
-            .projectStore
-
-        ContextGroup ->
-            .contextStore
-
-
-getDeletedEntityList =
-    getEntityStore >>> Store.filter Document.isDeleted
-
-
-getActiveEntityList =
-    getEntityStore >>> Store.reject Document.isDeleted
 
 
 getCurrentNamedDocList store model =

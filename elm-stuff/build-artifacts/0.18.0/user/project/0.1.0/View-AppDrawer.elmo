@@ -118,13 +118,7 @@ var _user$project$View_AppDrawer$entityListView = F2(
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('has-hover-elements'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(
-								_user$project$Msg$SwitchView(
-									_user$project$Model$EntityListView(_p1.viewType))),
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
@@ -150,7 +144,13 @@ var _user$project$View_AppDrawer$entityListView = F2(
 							ctor: '::',
 							_0: A2(
 								_edvail$elm_polymer$Polymer_Paper$itemBody,
-								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(
+										_user$project$Msg$SwitchView(
+											_user$project$Model$EntityListView(_p1.viewType))),
+									_1: {ctor: '[]'}
+								},
 								{
 									ctor: '::',
 									_0: _user$project$View_AppDrawer$headLineText(_p1.title),
@@ -194,7 +194,7 @@ var _user$project$View_AppDrawer$entityListView = F2(
 														_0: _user$project$WebComponents$iconA('add'),
 														_1: {
 															ctor: '::',
-															_0: _elm_lang$html$Html_Events$onClick(_p1.onAddClicked),
+															_0: _elm_community$html_extra$Html_Events_Extra$onClickPreventDefaultAndStopPropagation(_p1.onAddClicked),
 															_1: {ctor: '[]'}
 														}
 													},

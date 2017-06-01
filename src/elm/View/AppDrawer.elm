@@ -139,16 +139,13 @@ divider =
 
 
 entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
-    [ item
-        [ class "has-hover-elements"
-        , onClick (SwitchView (EntityListView viewType))
-        ]
+    [ item [ class "has-hover-elements" ]
         [ Html.node "iron-icon" [ iconA icon.name, style [ "color" => icon.color ] ] []
-        , itemBody [] [ headLineText title ]
+        , itemBody [ onClick (SwitchView (EntityListView viewType)) ] [ headLineText title ]
         , div [ class "show-on-hover layout horizontal center" ]
             [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
             , WebComponents.icon "delete" []
-            , iconButton [ iconA "add", onClick onAddClicked ] []
+            , iconButton [ iconA "add", onClickPreventDefaultAndStopPropagation onAddClicked ] []
             ]
         ]
 

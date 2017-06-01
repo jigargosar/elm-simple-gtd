@@ -447,7 +447,7 @@ var _user$project$Main$update = function (msg) {
 								_user$project$Main$positionContextDropdownCmd(_p36),
 								A2(
 									_Fresheyeball$elm_return$Return$map,
-									_user$project$Model$startEditingContext(_p36),
+									_user$project$Model$startEditingTodoContext(_p36),
 									_p35));
 						};
 					case 'StartEditingProject':
@@ -458,7 +458,7 @@ var _user$project$Main$update = function (msg) {
 								_user$project$Main$positionProjectDropdownCmd(_p38),
 								A2(
 									_Fresheyeball$elm_return$Return$map,
-									_user$project$Model$startEditingProject(_p38),
+									_user$project$Model$startEditingTodoProject(_p38),
 									_p37));
 						};
 					case 'UpdateTodoForm':
@@ -486,7 +486,7 @@ var _user$project$Main$update = function (msg) {
 								A2(_user$project$Todo_ReminderForm$set, _p15._1, _p15._0)));
 					case 'SwitchView':
 						return _Fresheyeball$elm_return$Return$map(
-							_user$project$Model$switchView(_p15._0));
+							_user$project$Model$switchToView(_p15._0));
 					case 'SetGroupByView':
 						return _Fresheyeball$elm_return$Return$map(
 							_user$project$Model$setEntityListViewType(_p15._0));

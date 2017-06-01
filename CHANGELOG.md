@@ -1,3 +1,6 @@
+## Upcoming
+* on create grp entity, switch view to that entity. 
+
 ## v0.16.22 - 2017-06-01
 * [fix] show all todo content till double new line. 
 

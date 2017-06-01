@@ -403,13 +403,21 @@ getActiveTodoListGroupedBy fn =
 createAndEditNewProject model =
     Store.insert (Project.init "<New Project>" model.now) model.projectStore
         |> Tuple2.mapSecond (setProjectStore # model)
-        |> (\( project, model ) -> startEditingEntity (Entity.ProjectEntity project) model)
+        |> (\( project, model ) ->
+                model
+                    |> switchToProjectView project
+                    |> startEditingEntity (Entity.ProjectEntity project)
+           )
 
 
 createAndEditNewContext model =
     Store.insert (Context.init "<New Context>" model.now) model.contextStore
         |> Tuple2.mapSecond (setContextStore # model)
-        |> (\( context, model ) -> startEditingEntity (Entity.ContextEntity context) model)
+        |> (\( context, model ) ->
+                model
+                    |> switchToContextView context
+                    |> startEditingEntity (Entity.ContextEntity context)
+           )
 
 
 isShowDetailsKeyPressed =
@@ -786,14 +794,22 @@ getMainViewType =
     (.mainViewType)
 
 
-switchView : ViewType -> ModelF
-switchView mainViewType model =
+switchToView : ViewType -> ModelF
+switchToView mainViewType model =
     { model | mainViewType = mainViewType }
         |> clearSelection
 
 
+switchToProjectView =
+    Document.getId >> Entity.ProjectView >> EntityListView >> switchToView
+
+
+switchToContextView =
+    Document.getId >> Entity.ContextView >> EntityListView >> switchToView
+
+
 setEntityListViewType =
-    EntityListView >> switchView
+    EntityListView >> switchToView
 
 
 getEntityId entity =

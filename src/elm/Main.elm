@@ -262,7 +262,7 @@ update msg =
                         )
 
                 SwitchView viewType ->
-                    Return.map (Model.switchView viewType)
+                    Return.map (Model.switchToView viewType)
 
                 SetGroupByView viewType ->
                     Return.map (Model.setEntityListViewType viewType)

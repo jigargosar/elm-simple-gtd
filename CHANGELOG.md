@@ -1,3 +1,7 @@
+## Upcoming
+* group entity: re-modeling 
+* Consistent sorting   
+
 ## v0.16.24 - 2017-06-01
 * on create grp entity, switch view to that entity. 
 

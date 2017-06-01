@@ -1056,11 +1056,11 @@ focusNextEntity entityList model =
 
 
 getActiveProjects =
-    (.projectStore) >> Store.reject Document.isDeleted >> (::) Project.null
+    filterProjects Document.isNotDeleted
 
 
 getActiveContexts =
-    (.contextStore) >> Store.reject Document.isDeleted >> (::) Context.null
+    filterContexts Document.isNotDeleted
 
 
 getContextsAsIdDict =

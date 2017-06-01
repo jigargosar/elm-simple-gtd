@@ -119,6 +119,7 @@ createProjectSubGroups findProjectById tcg =
                 |> List.unique
                 .|> findProjectById
                 |> List.filterMap identity
+                |> Project.sort
 
         filterTodoForProject project =
             tcg.list
@@ -145,6 +146,7 @@ createContextSubGroups findContextById tcg =
                 |> List.unique
                 .|> findContextById
                 |> List.filterMap identity
+                |> Context.sort
 
         filterTodoForContext context =
             tcg.list

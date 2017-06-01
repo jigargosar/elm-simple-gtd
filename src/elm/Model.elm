@@ -292,16 +292,16 @@ filterTodos pred model =
         |> List.sortBy (Todo.getCreatedAt >> negate)
 
 
-filterProjects pred model =
-    Store.filter pred model.projectStore
-        |> List.sortBy (Project.getName >> String.toLower)
-        |> List.append (Project.filterNull pred)
-
-
 filterContexts pred model =
     Store.filter pred model.contextStore
-        |> List.sortBy (Context.getName >> String.toLower)
         |> List.append (Context.filterNull pred)
+        |> Context.sort
+
+
+filterProjects pred model =
+    Store.filter pred model.projectStore
+        |> List.append (Project.filterNull pred)
+        |> Project.sort
 
 
 currentDocPredicate model =

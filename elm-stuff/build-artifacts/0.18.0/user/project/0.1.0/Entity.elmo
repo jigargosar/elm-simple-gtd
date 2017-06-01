@@ -13,14 +13,15 @@ var _user$project$Entity$createProjectSubGroups = F2(
 				_user$project$Todo$projectFilter(project),
 				tcg.list);
 		};
-		var projects = A2(
-			_elm_lang$core$List$filterMap,
-			_elm_lang$core$Basics$identity,
+		var projects = _user$project$Project$sort(
 			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				_elm_community$list_extra$List_Extra$unique(
-					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], tcg.list, _user$project$Todo$getProjectId)),
-				findProjectById));
+				_elm_lang$core$List$filterMap,
+				_elm_lang$core$Basics$identity,
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+					_elm_community$list_extra$List_Extra$unique(
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], tcg.list, _user$project$Todo$getProjectId)),
+					findProjectById)));
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 			projects,
@@ -41,14 +42,15 @@ var _user$project$Entity$createContextSubGroups = F2(
 				_user$project$Todo$contextFilter(context),
 				tcg.list);
 		};
-		var contexts = A2(
-			_elm_lang$core$List$filterMap,
-			_elm_lang$core$Basics$identity,
+		var contexts = _user$project$Context$sort(
 			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				_elm_community$list_extra$List_Extra$unique(
-					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], tcg.list, _user$project$Todo$getContextId)),
-				findContextById));
+				_elm_lang$core$List$filterMap,
+				_elm_lang$core$Basics$identity,
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+					_elm_community$list_extra$List_Extra$unique(
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], tcg.list, _user$project$Todo$getContextId)),
+					findContextById)));
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 			contexts,

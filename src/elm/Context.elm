@@ -77,6 +77,24 @@ filterNull pred =
     [ null ] |> List.filter pred
 
 
+sort =
+    List.sortWith
+        (\v1 v2 ->
+            case ( isNull v1, isNull v2 ) of
+                ( True, False ) ->
+                    LT
+
+                ( False, True ) ->
+                    GT
+
+                ( True, True ) ->
+                    EQ
+
+                ( False, False ) ->
+                    compare (getName v1) (getName v2)
+        )
+
+
 isNull =
     equals null
 

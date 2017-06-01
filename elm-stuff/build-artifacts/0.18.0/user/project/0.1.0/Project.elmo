@@ -40,6 +40,31 @@ var _user$project$Project$updateName = F2(
 var _user$project$Project$getName = function (_) {
 	return _.name;
 };
+var _user$project$Project$sort = _elm_lang$core$List$sortWith(
+	F2(
+		function (v1, v2) {
+			var _p0 = {
+				ctor: '_Tuple2',
+				_0: _user$project$Project$isNull(v1),
+				_1: _user$project$Project$isNull(v2)
+			};
+			if (_p0._0 === true) {
+				if (_p0._1 === false) {
+					return _elm_lang$core$Basics$LT;
+				} else {
+					return _elm_lang$core$Basics$EQ;
+				}
+			} else {
+				if (_p0._1 === true) {
+					return _elm_lang$core$Basics$GT;
+				} else {
+					return A2(
+						_elm_lang$core$Basics$compare,
+						_user$project$Project$getName(v1),
+						_user$project$Project$getName(v2));
+				}
+			}
+		}));
 var _user$project$Project$otherFieldsEncoder = function (project) {
 	return {
 		ctor: '::',
@@ -81,11 +106,11 @@ var _user$project$Project$updateId = F2(
 			model);
 	});
 var _user$project$Project$nameEquals = function (name) {
-	return function (_p0) {
+	return function (_p1) {
 		return A2(
 			_user$project$Ext_Function$equals,
 			name,
-			_user$project$Project$getName(_p0));
+			_user$project$Project$getName(_p1));
 	};
 };
 var _user$project$Project$findByName = function (projectName) {
@@ -100,23 +125,23 @@ var _user$project$Project$findNameById = function (id) {
 		_user$project$Store$findById(id),
 		_user$project$Project$getName);
 };
-var _user$project$Project$getProjectIdToNameDict = function (_p1) {
+var _user$project$Project$getProjectIdToNameDict = function (_p2) {
 	return _elm_lang$core$Dict$fromList(
 		A2(
 			_user$project$Store$map,
 			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2(
 				{ctor: '_Tuple2', _0: _user$project$Document$getId, _1: _user$project$Project$getName}),
-			_p1));
+			_p2));
 };
-var _user$project$Project$getEncodedProjectNames = function (_p2) {
+var _user$project$Project$getEncodedProjectNames = function (_p3) {
 	return _elm_lang$core$Json_Encode$list(
 		A2(
 			_user$project$Store$map,
-			function (_p3) {
+			function (_p4) {
 				return _elm_lang$core$Json_Encode$string(
-					_user$project$Project$getName(_p3));
+					_user$project$Project$getName(_p4));
 			},
-			_p2));
+			_p3));
 };
 var _user$project$Project$Record = function (a) {
 	return {name: a};

@@ -800,6 +800,12 @@ var _user$project$Model$filterTodos = F2(
 	});
 var _user$project$Model$createGrouping = F2(
 	function (viewType, model) {
+		var findContextByIdHelp = function (id) {
+			return A2(_user$project$Model$findContextById, id, model);
+		};
+		var findProjectByIdHelp = function (id) {
+			return A2(_user$project$Model$findProjectById, id, model);
+		};
 		var todoFilter = model.showDeleted ? _user$project$Document$isDeleted : _user$project$Ext_Predicate$all(
 			{
 				ctor: '::',
@@ -856,17 +862,19 @@ var _user$project$Model$createGrouping = F2(
 					filterTodosForProject,
 					_user$project$Model$filterCurrentProjects(model));
 			case 'ContextView':
-				return A2(
+				return A3(
 					_user$project$Entity$createGroupingForContext,
 					filterTodosForContext,
+					findProjectByIdHelp,
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 						A2(_user$project$Model$findContextById, _p38._0, model),
 						_user$project$Context$null));
 			default:
-				return A2(
+				return A3(
 					_user$project$Entity$createGroupingForProject,
 					filterTodosForProject,
+					findContextByIdHelp,
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 						A2(_user$project$Model$findProjectById, _p38._0, model),

@@ -348,6 +348,12 @@ createGrouping viewType model =
                     ]
                 )
                 model
+
+        findProjectByIdHelp id =
+            findProjectById id model
+
+        findContextByIdHelp id =
+            findContextById id model
     in
         case viewType of
             Entity.ContextsView ->
@@ -361,12 +367,12 @@ createGrouping viewType model =
             Entity.ContextView id ->
                 findContextById id model
                     ?= Context.null
-                    |> Entity.createGroupingForContext filterTodosForContext
+                    |> Entity.createGroupingForContext filterTodosForContext findProjectByIdHelp
 
             Entity.ProjectView id ->
                 findProjectById id model
                     ?= Project.null
-                    |> Entity.createGroupingForProject filterTodosForProject
+                    |> Entity.createGroupingForProject filterTodosForProject findContextByIdHelp
 
 
 getActiveTodoList =

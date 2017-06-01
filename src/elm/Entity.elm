@@ -2,6 +2,7 @@ module Entity exposing (..)
 
 import Context
 import Document
+import Set
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -88,8 +89,8 @@ type alias TodoProjectGroup =
 
 
 type Grouping
-    = SingleContext TodoContextGroup
-    | SingleProject TodoProjectGroup
+    = SingleContext TodoContextGroup (List TodoProjectGroup)
+    | SingleProject TodoProjectGroup (List TodoProjectGroup)
     | MultiContext (List TodoContextGroup)
     | MultiProject (List TodoProjectGroup)
 
@@ -110,28 +111,64 @@ createGroupingForContexts getTodoList contexts =
     contexts .|> createContextTodoGroup getTodoList |> MultiContext
 
 
-createGroupingForContext getTodoList context =
-    context |> createContextTodoGroup getTodoList |> SingleContext
+createProjectSubGroups findProjectById tcg =
+    let
+        projects =
+            tcg.list
+                .|> Todo.getProjectId
+                |> List.unique
+                .|> findProjectById
+                |> List.filterMap identity
+
+        filterTodoForProject project =
+            tcg.list
+                |> List.filter (Todo.projectFilter project)
+    in
+        projects .|> createProjectTodoGroup filterTodoForProject
+
+
+createGroupingForContext getTodoList findProjectById context =
+    context
+        |> createContextTodoGroup getTodoList
+        |> (\tcg -> SingleContext tcg (createProjectSubGroups findProjectById tcg))
 
 
 createGroupingForProjects getTodoList projects =
     projects .|> createProjectTodoGroup getTodoList |> MultiProject
 
 
-createGroupingForProject getTodoList project =
-    project |> createProjectTodoGroup getTodoList |> SingleProject
+createContextSubGroups findContextById tcg =
+    let
+        contexts =
+            tcg.list
+                .|> Todo.getContextId
+                |> List.unique
+                .|> findContextById
+                |> List.filterMap identity
+
+        filterTodoForContext context =
+            tcg.list
+                |> List.filter (Todo.contextFilter context)
+    in
+        contexts .|> createContextTodoGroup filterTodoForContext
+
+
+createGroupingForProject getTodoList findProjectById project =
+    project
+        |> createProjectTodoGroup getTodoList
+        |> (\tcg -> SingleProject tcg (createProjectSubGroups findProjectById tcg))
 
 
 flattenGrouping : Grouping -> List Entity
 flattenGrouping grouping =
     case grouping of
-        SingleContext g ->
-            (ContextEntity g.context)
-                :: (g.list .|> TodoEntity)
+        SingleContext cg pgList ->
+            (ContextEntity cg.context)
+                :: flattenGrouping (MultiProject pgList)
 
-        SingleProject g ->
-            (ProjectEntity g.project)
-                :: (g.list .|> TodoEntity)
+        SingleProject pg cgList ->
+            (ProjectEntity pg.project)
+                :: flattenGrouping (MultiProject cgList)
 
         MultiContext groupList ->
             groupList

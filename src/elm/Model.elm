@@ -352,6 +352,27 @@ createGrouping viewType model =
                 defRet
 
 
+flattenGrouping : Entity.Grouping -> List Entity.Entity
+flattenGrouping grouping =
+    case grouping of
+        Entity.Single todoGroup ->
+            []
+
+        Entity.Multi groupList ->
+            groupList
+                |> List.concatMap
+                    (\g ->
+                        (case g.groupEntity of
+                            Entity.ContextGroup context ->
+                                Entity.ContextEntity context
+
+                            Entity.ProjectGroup project ->
+                                Entity.ProjectEntity project
+                        )
+                            :: (g.list .|> Entity.TodoEntity)
+                    )
+
+
 getActiveTodoList =
     .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
 

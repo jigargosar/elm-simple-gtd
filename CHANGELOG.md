@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.21 - 2017-06-01
 * [fix] entity list: 
     * focus next entity if current entity is no longer visible in current filtered view.
     * otherwise keep it focused post edit; irrespective of its position change, if any.   

@@ -62,7 +62,7 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 	});
 var _user$project$OldGroupEntity_ViewModel$createList = F2(
 	function (config, model) {
-		var docsWithName = A2(_user$project$Model$getCurrentNamedDocList, config.store, model);
+		var list = config.filter(model);
 		var todoListDict = A2(_user$project$Model$getActiveTodoListGroupedBy, config.groupByFn, model);
 		var getTodoListWithGroupId = function (id) {
 			return A2(
@@ -72,14 +72,14 @@ var _user$project$OldGroupEntity_ViewModel$createList = F2(
 		};
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-			docsWithName,
+			list,
 			A2(_user$project$OldGroupEntity_ViewModel$create, getTodoListWithGroupId, config));
 	});
 var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 	var config = {
 		groupByFn: _user$project$Todo$getContextId,
 		namePrefix: '@',
-		store: _user$project$Model$getContextStore(model),
+		filter: _user$project$Model$filterCurrentContexts,
 		entityWrapper: _user$project$Entity$ContextEntity,
 		nullEntity: _user$project$Context$null,
 		isNull: _user$project$Context$isNull,
@@ -98,20 +98,18 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 	};
 };
 var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
-	var projectList = A2(
-		_user$project$OldGroupEntity_ViewModel$createList,
-		{
-			groupByFn: _user$project$Todo$getProjectId,
-			namePrefix: '#',
-			store: _user$project$Model$getProjectStore(model),
-			entityWrapper: _user$project$Entity$ProjectEntity,
-			nullEntity: _user$project$Project$null,
-			isNull: _user$project$Project$isNull,
-			nullIcon: {name: 'apps', color: _user$project$OldGroupEntity_ViewModel$nullProjectColor},
-			defaultIconName: 'apps',
-			getViewType: _user$project$Entity$ProjectView
-		},
-		model);
+	var config = {
+		groupByFn: _user$project$Todo$getProjectId,
+		namePrefix: '#',
+		filter: _user$project$Model$filterCurrentProjects,
+		entityWrapper: _user$project$Entity$ProjectEntity,
+		nullEntity: _user$project$Project$null,
+		isNull: _user$project$Project$isNull,
+		nullIcon: {name: 'apps', color: _user$project$OldGroupEntity_ViewModel$nullProjectColor},
+		defaultIconName: 'apps',
+		getViewType: _user$project$Entity$ProjectView
+	};
+	var projectList = A2(_user$project$OldGroupEntity_ViewModel$createList, config, model);
 	return {
 		entityList: projectList,
 		viewType: _user$project$Entity$ProjectsView,
@@ -171,5 +169,5 @@ var _user$project$OldGroupEntity_ViewModel$Record = function (a) {
 };
 var _user$project$OldGroupEntity_ViewModel$Config = F9(
 	function (a, b, c, d, e, f, g, h, i) {
-		return {groupByFn: a, namePrefix: b, store: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i};
+		return {groupByFn: a, namePrefix: b, filter: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i};
 	});

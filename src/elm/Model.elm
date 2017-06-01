@@ -287,16 +287,6 @@ isLayoutAutoNarrow =
         >> uncurry and
 
 
-getCurrentNamedDocList store model =
-    store
-        |> (if model.showDeleted then
-                Store.filter
-            else
-                Store.reject
-           )
-            Document.isDeleted
-
-
 filterTodos pred model =
     Store.filter pred model.todoStore
 
@@ -309,6 +299,31 @@ filterProjects pred model =
 filterContexts pred model =
     Store.filter pred model.contextStore
         |> List.append (Context.filterNull pred)
+
+
+filterCurrentContexts model =
+    let
+        pred =
+            if model.showDeleted then
+                Document.isDeleted
+            else
+                Document.isDeleted >> not
+    in
+        Store.filter pred model.contextStore
+            |> List.append (Context.filterNull pred)
+
+
+filterCurrentProjects : Model -> List Project.Model
+filterCurrentProjects model =
+    let
+        pred =
+            if model.showDeleted then
+                Document.isDeleted
+            else
+                Document.isDeleted >> not
+    in
+        Store.filter pred model.projectStore
+            |> List.append (Project.filterNull pred)
 
 
 createGrouping : Entity.ListViewType -> Model -> Entity.Grouping

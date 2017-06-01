@@ -75,7 +75,7 @@ type alias DocumentWithNameStore =
 type alias Config =
     { groupByFn : Todo.Model -> Document.Id
     , namePrefix : String
-    , store : DocumentWithNameStore
+    , filter : Model.Model -> List DocumentWithName
     , entityWrapper : DocumentWithName -> Entity
     , nullEntity : DocumentWithName
     , isNull : DocumentWithName -> Bool
@@ -94,10 +94,11 @@ createList config model =
         getTodoListWithGroupId id =
             todoListDict |> Dict.get id ?= []
 
-        docsWithName =
-            Model.getCurrentNamedDocList config.store model
+        list : List DocumentWithName
+        list =
+            config.filter model
     in
-        docsWithName
+        list
             .|> create getTodoListWithGroupId config
 
 
@@ -187,7 +188,7 @@ contexts model =
         config =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
-            , store = Model.getContextStore model
+            , filter = Model.filterCurrentContexts
             , entityWrapper = Entity.ContextEntity
             , nullEntity = Context.null
             , isNull = Context.isNull
@@ -212,20 +213,22 @@ contexts model =
 projects : Model.Model -> ViewModel
 projects model =
     let
+        config : Config
+        config =
+            { groupByFn = Todo.getProjectId
+            , namePrefix = "#"
+            , filter = Model.filterCurrentProjects
+            , entityWrapper = Entity.ProjectEntity
+            , nullEntity = Project.null
+            , isNull = Project.isNull
+            , nullIcon = { name = "apps", color = nullProjectColor }
+            , defaultIconName = "apps"
+            , getViewType = Entity.ProjectView
+            }
+
         projectList : List DocumentWithNameViewModel
         projectList =
-            createList
-                { groupByFn = Todo.getProjectId
-                , namePrefix = "#"
-                , store = Model.getProjectStore model
-                , entityWrapper = Entity.ProjectEntity
-                , nullEntity = Project.null
-                , isNull = Project.isNull
-                , nullIcon = { name = "apps", color = nullProjectColor }
-                , defaultIconName = "apps"
-                , getViewType = Entity.ProjectView
-                }
-                model
+            createList config model
     in
         { entityList = projectList
         , viewType = Entity.ProjectsView

@@ -303,10 +303,12 @@ filterTodos pred model =
 
 filterProjects pred model =
     Store.filter pred model.projectStore
+        |> List.append (Project.filterNull pred)
 
 
 filterContexts pred model =
     Store.filter pred model.contextStore
+        |> List.append (Context.filterNull pred)
 
 
 createGrouping : Entity.ListViewType -> Model -> Entity.Grouping

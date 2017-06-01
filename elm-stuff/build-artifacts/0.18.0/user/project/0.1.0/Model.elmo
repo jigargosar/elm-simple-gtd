@@ -791,11 +791,17 @@ var _user$project$Model$flattenGrouping = function (grouping) {
 };
 var _user$project$Model$filterContexts = F2(
 	function (pred, model) {
-		return A2(_user$project$Store$filter, pred, model.contextStore);
+		return A2(
+			_elm_lang$core$List$append,
+			_user$project$Context$filterNull(pred),
+			A2(_user$project$Store$filter, pred, model.contextStore));
 	});
 var _user$project$Model$filterProjects = F2(
 	function (pred, model) {
-		return A2(_user$project$Store$filter, pred, model.projectStore);
+		return A2(
+			_elm_lang$core$List$append,
+			_user$project$Project$filterNull(pred),
+			A2(_user$project$Store$filter, pred, model.projectStore));
 	});
 var _user$project$Model$filterTodos = F2(
 	function (pred, model) {

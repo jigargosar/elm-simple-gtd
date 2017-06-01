@@ -130,6 +130,10 @@ null =
     constructor "" "" 0 0 False "" "<No Project>"
 
 
+filterNull pred =
+    [ null ] |> List.filter pred
+
+
 isNull =
     equals null
 

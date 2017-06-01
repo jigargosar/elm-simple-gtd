@@ -73,6 +73,10 @@ null =
     constructor "" "" 0 0 False "" "Inbox"
 
 
+filterNull pred =
+    [ null ] |> List.filter pred
+
+
 isNull =
     equals null
 

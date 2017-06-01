@@ -61,6 +61,16 @@ var _user$project$Context$decoder = A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Context$constructor)));
 var _user$project$Context$storeGenerator = A3(_user$project$Store$generator, 'context-db', _user$project$Context$otherFieldsEncoder, _user$project$Context$decoder);
 var _user$project$Context$null = A7(_user$project$Context$constructor, '', '', 0, 0, false, '', 'Inbox');
+var _user$project$Context$filterNull = function (pred) {
+	return A2(
+		_elm_lang$core$List$filter,
+		pred,
+		{
+			ctor: '::',
+			_0: _user$project$Context$null,
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Context$isNull = _user$project$Ext_Function$equals(_user$project$Context$null);
 var _user$project$Context$Record = function (a) {
 	return {name: a};

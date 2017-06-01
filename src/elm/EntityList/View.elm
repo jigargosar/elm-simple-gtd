@@ -155,7 +155,7 @@ listView : Entity.ListViewType -> Model.Model -> ViewModel.Model -> Html.Html Ms
 listView viewType model appViewModel =
     let
         entityList =
-            Model.createEntityListFromEntityListViewType viewType model
+            Model.createGrouping viewType model |> Entity.flattenGrouping
 
         vmList =
             createVMList entityList appViewModel

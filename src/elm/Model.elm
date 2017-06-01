@@ -741,8 +741,9 @@ findProjectById id =
 
 findContextById : Document.Id -> Model -> Maybe Context.Model
 findContextById id =
-    .contextStore >> Store.findById id
-    >> Maybe.orElseLazy (\_ -> ([ Context.null ] |> List.find (Document.hasId id)))
+    .contextStore
+        >> Store.findById id
+        >> Maybe.orElseLazy (\_ -> ([ Context.null ] |> List.find (Document.hasId id)))
 
 
 updateTodoAndMaybeAlsoSelected action todoId model =
@@ -837,137 +838,10 @@ getEntityId entity =
 getCurrentViewEntityList model =
     case model.mainViewType of
         EntityListView viewType ->
-            createEntityListFromEntityListViewType viewType model
+            createGrouping viewType model |> Entity.flattenGrouping
 
         _ ->
             []
-
-
-getContextListForCurrentViewFromTodoList todoList model =
-    let
-        contextIdSet =
-            todoList
-                .|> Todo.getContextId
-                |> Set.fromList
-
-        includeNull =
-            Set.member "" contextIdSet
-
-        nullContextAsList =
-            if model.showDeleted || not includeNull then
-                []
-            else
-                [ Context.null ]
-    in
-        contextIdSet
-            |> Store.findAllByIdSetIn model.contextStore
-            |> List.append nullContextAsList
-
-
-getProjectListForCurrentViewFromTodoList todoList model =
-    let
-        projectIdSet =
-            todoList
-                .|> Todo.getProjectId
-                |> Set.fromList
-
-        includeNull =
-            Set.member "" projectIdSet
-
-        nullProjectAsList =
-            if model.showDeleted || not includeNull then
-                []
-            else
-                [ Project.null ]
-    in
-        projectIdSet
-            |> Store.findAllByIdSetIn model.projectStore
-            |> List.append nullProjectAsList
-
-
-createEntityListFromEntityListViewType viewType model =
-    let
-        todoList =
-            getTodoListForCurrentView model
-    in
-        case viewType of
-            Entity.ContextsView ->
-                createGrouping viewType model |> Entity.flattenGrouping
-
-            Entity.ProjectsView ->
-                createGrouping viewType model |> Entity.flattenGrouping
-
-            Entity.ContextView id ->
-                createGrouping viewType model |> Entity.flattenGrouping
-
-            Entity.ProjectView id ->
-                createGrouping viewType model |> Entity.flattenGrouping
-
-
-getContextsViewEntityList todoList enableSubgroup model =
-    let
-        todoListByContextId =
-            todoList |> Dict.Extra.groupBy Todo.getContextId
-
-        contextList =
-            getContextListForCurrentViewFromTodoList todoList model
-
-        todoEntitiesForContext context =
-            todoListByContextId
-                |> Dict.get (Document.getId context)
-                ?= []
-                .|> Entity.TodoEntity
-
-        subGroupEntitiesForContext context =
-            todoListByContextId
-                |> Dict.get (Document.getId context)
-                ?= []
-                |> (\todoList -> getProjectsViewEntityList todoList False model)
-
-        entitiesForContext =
-            if enableSubgroup then
-                subGroupEntitiesForContext
-            else
-                todoEntitiesForContext
-    in
-        contextList
-            |> List.concatMap
-                (\context ->
-                    (Entity.ContextEntity context) :: (entitiesForContext context)
-                )
-
-
-getProjectsViewEntityList todoList enableSubgroup model =
-    let
-        todoListByProjectId =
-            todoList |> Dict.Extra.groupBy Todo.getProjectId
-
-        projectList =
-            getProjectListForCurrentViewFromTodoList todoList model
-
-        todoEntitiesForProject project =
-            todoListByProjectId
-                |> Dict.get (Document.getId project)
-                ?= []
-                .|> Entity.TodoEntity
-
-        subGroupEntitiesForProject project =
-            todoListByProjectId
-                |> Dict.get (Document.getId project)
-                ?= []
-                |> (\todoList -> getContextsViewEntityList todoList False model)
-
-        entitiesForProject =
-            if enableSubgroup then
-                subGroupEntitiesForProject
-            else
-                todoEntitiesForProject
-    in
-        projectList
-            |> List.concatMap
-                (\project ->
-                    (Entity.ProjectEntity project) :: (entitiesForProject project)
-                )
 
 
 getLayout : Model -> Layout

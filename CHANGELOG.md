@@ -1,3 +1,6 @@
+## Upcoming
+* [fix] show all todo content till double new line. 
+
 ## v0.16.21 - 2017-06-01
 * [fix] entity list: 
     * focus next entity if current entity is no longer visible in current filtered view.

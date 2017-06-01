@@ -308,34 +308,22 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
 		var toggleDeleteMsg = createEntityActionMsg(_user$project$Entity$ToggleDeleted);
 		var text = _user$project$Todo$getText(todo);
-		var _p6 = function () {
-			var lines = _elm_lang$core$String$lines(
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					_elm_community$string_extra$String_Extra$nonEmpty(
-						_elm_lang$core$String$trim(text)),
-					'< empty >'));
-			var _p7 = lines;
-			if (_p7.ctor === '[]') {
-				return {ctor: '_Tuple2', _0: '', _1: false};
-			} else {
-				if (_p7._1.ctor === '[]') {
-					return {ctor: '_Tuple2', _0: _p7._0, _1: false};
-				} else {
-					return {
-						ctor: '_Tuple2',
-						_0: A2(_elm_lang$core$Basics_ops['++'], _p7._0, ' ...'),
-						_1: true
-					};
-				}
-			}
+		var displayText = function () {
+			var cleanText = A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				_elm_community$string_extra$String_Extra$nonEmpty(
+					_elm_lang$core$String$trim(text)),
+				'< empty >');
+			var ret = A4(
+				_elm_lang$core$Regex$replace,
+				_elm_lang$core$Regex$AtMost(1),
+				_elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*'),
+				function (match) {
+					return '\n...';
+				},
+				cleanText);
+			return ret;
 		}();
-		var displayText = _p6._0;
-		var isMultiLine = _p6._1;
-		var displayText2 = A2(
-			_elm_community$string_extra$String_Extra$ellipsis,
-			100,
-			_elm_lang$core$String$trim(text));
 		var contextId = _user$project$Todo$getContextId(todo);
 		var projectId = _user$project$Todo$getProjectId(todo);
 		var truncateName = _elm_community$string_extra$String_Extra$ellipsis(15);
@@ -367,21 +355,21 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 				vc.maybeFocusedEntity,
-				function (_p8) {
+				function (_p6) {
 					return A2(
 						_user$project$Ext_Function$equals,
 						todoId,
-						_user$project$Model$getEntityId(_p8));
+						_user$project$Model$getEntityId(_p6));
 				}),
 			false);
 		var toggleDoneMsg = _user$project$Msg$ToggleTodoDone(todoId);
-		var onKeyDownMsg = function (_p9) {
-			var _p10 = _p9;
-			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p10)) {
+		var onKeyDownMsg = function (_p7) {
+			var _p8 = _p7;
+			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p8)) {
 				return _user$project$Msg$commonMsg.noOp;
 			} else {
-				var _p11 = _p10.key;
-				switch (_p11.ctor) {
+				var _p9 = _p8.key;
+				switch (_p9.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 					case 'CharE':
@@ -406,7 +394,6 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			isFocused: isFocused,
 			onKeyDownMsg: onKeyDownMsg,
 			text: text,
-			isMultiLine: isMultiLine,
 			displayText: displayText,
 			projectDisplayName: projectDisplayName,
 			contextDisplayName: contextDisplayName,
@@ -441,8 +428,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p12, content) {
-		var _p13 = _p12;
+	function (_p10, content) {
+		var _p11 = _p10;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$button,
 			{
@@ -461,7 +448,7 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
 						_1: {
 							ctor: '::',
-							_0: _p13.tabindexAV,
+							_0: _p11.tabindexAV,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -885,7 +872,7 @@ var _user$project$Todo_View$init = function (vm) {
 		},
 		A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p14) {
+			function (_p12) {
 				return _user$project$Todo_View$defaultView(vm);
 			},
 			_user$project$Todo_View$editView,
@@ -926,9 +913,7 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 																									return function (z) {
 																										return function (_1) {
 																											return function (_2) {
-																												return function (_3) {
-																													return {text: a, key: b, displayText: c, isMultiLine: d, isDone: e, isDeleted: f, isFocused: g, onKeyDownMsg: h, projectDisplayName: i, contextDisplayName: j, selectedProjectIndex: k, setContextMsg: l, setProjectMsg: m, startEditingMsg: n, toggleDoneMsg: o, onDeleteClicked: p, showDetails: q, activeContexts: r, activeProjects: s, onReminderButtonClicked: t, showContextDropdownMsg: u, showProjectDropdownMsg: v, reminder: w, edit: x, onFocusIn: y, onFocus: z, onBlur: _1, tabindexAV: _2, isSelected: _3};
-																												};
+																												return {text: a, key: b, displayText: c, isDone: d, isDeleted: e, isFocused: f, onKeyDownMsg: g, projectDisplayName: h, contextDisplayName: i, selectedProjectIndex: j, setContextMsg: k, setProjectMsg: l, startEditingMsg: m, toggleDoneMsg: n, onDeleteClicked: o, showDetails: p, activeContexts: q, activeProjects: r, onReminderButtonClicked: s, showContextDropdownMsg: t, showProjectDropdownMsg: u, reminder: v, edit: w, onFocusIn: x, onFocus: y, onBlur: z, tabindexAV: _1, isSelected: _2};
 																											};
 																										};
 																									};

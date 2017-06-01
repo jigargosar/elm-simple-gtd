@@ -22,6 +22,9 @@ import Msg exposing (Msg, commonMsg)
 import Polymer.Attributes exposing (boolProperty, stringProperty)
 import Polymer.Events exposing (onTap)
 import Project
+import Regex
+import RegexBuilder
+import RegexBuilder.Extra as RegexBuilder
 import Set
 import String.Extra as String
 import Svg.Events exposing (onFocusIn, onFocusOut)
@@ -88,7 +91,6 @@ type alias TodoViewModel =
     { text : Todo.Text
     , key : String
     , displayText : String
-    , isMultiLine : Bool
     , isDone : Bool
     , isDeleted : Bool
     , isFocused : Bool
@@ -149,24 +151,30 @@ createTodoViewModel vc tabindexAV todo =
         text =
             Todo.getText todo
 
-        ( displayText, isMultiLine ) =
+        displayText =
             let
-                lines =
-                    text |> String.trim |> String.nonEmpty ?= "< empty >" |> String.lines
+                cleanText =
+                    text |> String.trim |> String.nonEmpty ?= "< empty >"
+
+                ret =
+                    cleanText
+                        --                        |> Debug.log "cleanText"
+                        |> Regex.replace (Regex.AtMost 1) (Regex.regex "\\n\\n\\n(.|\n)*") (\match -> "\n...")
+
+                --                        |> Debug.log "displayText"
             in
-                case lines of
-                    [] ->
-                        -- never happens
-                        ( "", False )
+                {- case cleanText |> String.lines of
+                   [] ->
+                       -- never happens
+                       ""
 
-                    firstLine :: [] ->
-                        ( firstLine, False )
+                   firstLine :: [] ->
+                       firstLine
 
-                    firstLine :: xs ->
-                        ( firstLine ++ " ...", True )
-
-        displayText2 =
-            text |> String.trim |> String.ellipsis 100
+                   firstLine :: xs ->
+                       firstLine ++ " ..."
+                -}
+                ret
 
         createEntityActionMsg =
             Msg.OnEntityAction (Entity.TodoEntity todo)
@@ -218,7 +226,6 @@ createTodoViewModel vc tabindexAV todo =
         , isFocused = isFocused
         , onKeyDownMsg = onKeyDownMsg
         , text = text
-        , isMultiLine = isMultiLine
         , displayText = displayText
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName

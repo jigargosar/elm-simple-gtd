@@ -305,30 +305,12 @@ getEntityStore entityType =
             .contextStore
 
 
-getEntityList =
-    getEntityStore >>> Store.asList
-
-
 getDeletedEntityList =
     getEntityStore >>> Store.filter Document.isDeleted
 
 
 getActiveEntityList =
     getEntityStore >>> Store.reject Document.isDeleted
-
-
-getFilteredContextList model =
-    if model.showDeleted then
-        getDeletedEntityList ContextGroup model
-    else
-        Context.null :: getActiveEntityList ContextGroup model
-
-
-getFilteredProjectList model =
-    if model.showDeleted then
-        getDeletedEntityList ProjectGroup model
-    else
-        Project.null :: getActiveEntityList ProjectGroup model
 
 
 getActiveTodoList =

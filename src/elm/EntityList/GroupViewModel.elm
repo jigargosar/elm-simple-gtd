@@ -8,7 +8,7 @@ import Entity exposing (Entity)
 import Ext.Keyboard exposing (KeyboardEvent)
 import Html
 import Lazy
-import Model exposing (EntityListViewType, GroupEntityType(ContextGroup, ProjectGroup), ViewType(..))
+import Model exposing (EntityListViewType, ViewType(..))
 import Msg exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -54,7 +54,6 @@ type alias DocumentWithName =
 type alias Config =
     { groupByFn : Todo.Model -> Document.Id
     , namePrefix : String
-    , entityType : GroupEntityType
     , entityWrapper : DocumentWithName -> Entity
     , nullEntity : DocumentWithName
     , isNull : DocumentWithName -> Bool
@@ -133,7 +132,6 @@ forContext tabindexAV context =
         config =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
-            , entityType = ContextGroup
             , entityWrapper = Entity.ContextEntity
             , nullEntity = Context.null
             , isNull = Context.isNull
@@ -153,7 +151,6 @@ forProject tabindexAV project =
         config =
             { groupByFn = Todo.getProjectId
             , namePrefix = "@"
-            , entityType = ProjectGroup
             , entityWrapper = Entity.ProjectEntity
             , nullEntity = Project.null
             , isNull = Project.isNull

@@ -870,7 +870,6 @@ var _user$project$Model$getEntityStore = function (entityType) {
 		};
 	}
 };
-var _user$project$Model$getEntityList = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Model$getEntityStore, _user$project$Store$asList);
 var _user$project$Model$getDeletedEntityList = A2(
 	_user$project$Ext_Function_Infix_ops['>>>'],
 	_user$project$Model$getEntityStore,
@@ -1678,21 +1677,7 @@ var _user$project$Model$setEntityListViewType = function (_p94) {
 		_user$project$Model$EntityListView(_p94));
 };
 var _user$project$Model$ContextGroup = {ctor: 'ContextGroup'};
-var _user$project$Model$getFilteredContextList = function (model) {
-	return model.showDeleted ? A2(_user$project$Model$getDeletedEntityList, _user$project$Model$ContextGroup, model) : {
-		ctor: '::',
-		_0: _user$project$Context$null,
-		_1: A2(_user$project$Model$getActiveEntityList, _user$project$Model$ContextGroup, model)
-	};
-};
 var _user$project$Model$ProjectGroup = {ctor: 'ProjectGroup'};
-var _user$project$Model$getFilteredProjectList = function (model) {
-	return model.showDeleted ? A2(_user$project$Model$getDeletedEntityList, _user$project$Model$ProjectGroup, model) : {
-		ctor: '::',
-		_0: _user$project$Project$null,
-		_1: A2(_user$project$Model$getActiveEntityList, _user$project$Model$ProjectGroup, model)
-	};
-};
 var _user$project$Model$ContextGroupEntity = function (a) {
 	return {ctor: 'ContextGroupEntity', _0: a};
 };

@@ -56,7 +56,6 @@ var _user$project$EntityList_GroupViewModel$forContext = F2(
 		var config = {
 			groupByFn: _user$project$Todo$getContextId,
 			namePrefix: '@',
-			entityType: _user$project$Model$ContextGroup,
 			entityWrapper: _user$project$Entity$ContextEntity,
 			nullEntity: _user$project$Context$null,
 			isNull: _user$project$Context$isNull,
@@ -72,7 +71,6 @@ var _user$project$EntityList_GroupViewModel$forProject = F2(
 		var config = {
 			groupByFn: _user$project$Todo$getProjectId,
 			namePrefix: '@',
-			entityType: _user$project$Model$ProjectGroup,
 			entityWrapper: _user$project$Entity$ProjectEntity,
 			nullEntity: _user$project$Project$null,
 			isNull: _user$project$Project$isNull,
@@ -118,24 +116,7 @@ var _user$project$EntityList_GroupViewModel$ViewModel = function (a) {
 		};
 	};
 };
-var _user$project$EntityList_GroupViewModel$Config = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return {groupByFn: a, namePrefix: b, entityType: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i, tabindexAV: j};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
+var _user$project$EntityList_GroupViewModel$Config = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {groupByFn: a, namePrefix: b, entityWrapper: c, nullEntity: d, isNull: e, nullIcon: f, defaultIconName: g, getViewType: h, tabindexAV: i};
+	});

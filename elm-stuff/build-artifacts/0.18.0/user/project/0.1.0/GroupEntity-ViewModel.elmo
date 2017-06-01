@@ -32,12 +32,6 @@ var _user$project$GroupEntity_ViewModel$create = F3(
 		var id = _user$project$Document$getId(entity);
 		var todoList = todoListByEntityId(id);
 		var count = _elm_lang$core$List$length(todoList);
-		var maybeEditModel = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
-			config.maybeEditModel,
-			function (editModel) {
-				return _elm_lang$core$Native_Utils.eq(editModel.id, id) ? _elm_lang$core$Maybe$Just(editModel) : _elm_lang$core$Maybe$Nothing;
-			});
 		return {
 			id: id,
 			name: name,
@@ -97,8 +91,7 @@ var _user$project$GroupEntity_ViewModel$contexts = function (model) {
 		isNull: _user$project$Context$isNull,
 		nullIcon: {name: 'inbox', color: _user$project$GroupEntity_ViewModel$inboxColor},
 		defaultIconName: 'av:fiber-manual-record',
-		getViewType: _user$project$Entity$ContextView,
-		maybeEditModel: A2(_user$project$Model$getMaybeEditModelForEntityType, _user$project$Model$ContextGroup, model)
+		getViewType: _user$project$Entity$ContextView
 	};
 	var contextList = A2(_user$project$GroupEntity_ViewModel$createList, config, model);
 	return {
@@ -122,8 +115,7 @@ var _user$project$GroupEntity_ViewModel$projects = function (model) {
 			isNull: _user$project$Project$isNull,
 			nullIcon: {name: 'apps', color: _user$project$GroupEntity_ViewModel$nullProjectColor},
 			defaultIconName: 'apps',
-			getViewType: _user$project$Entity$ProjectView,
-			maybeEditModel: A2(_user$project$Model$getMaybeEditModelForEntityType, _user$project$Model$ProjectGroup, model)
+			getViewType: _user$project$Entity$ProjectView
 		},
 		model);
 	return {
@@ -180,24 +172,7 @@ var _user$project$GroupEntity_ViewModel$EntityViewModel = function (a) {
 		};
 	};
 };
-var _user$project$GroupEntity_ViewModel$Config = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return {groupByFn: a, namePrefix: b, entityType: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i, maybeEditModel: j};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
+var _user$project$GroupEntity_ViewModel$Config = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {groupByFn: a, namePrefix: b, entityType: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i};
+	});

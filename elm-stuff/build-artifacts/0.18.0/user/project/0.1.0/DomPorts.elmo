@@ -1,13 +1,13 @@
-var _user$project$DomPorts$focusPaperInput = _elm_lang$core$Native_Platform.outgoingPort(
-	'focusPaperInput',
+var _user$project$DomPorts$focusInput = _elm_lang$core$Native_Platform.outgoingPort(
+	'focusInput',
 	function (v) {
 		return v;
 	});
-var _user$project$DomPorts$focusPaperInputCmd = function (_p0) {
+var _user$project$DomPorts$focusInputCmd = function (_p0) {
 	return _Fresheyeball$elm_return$Return$command(
-		_user$project$DomPorts$focusPaperInput(_p0));
+		_user$project$DomPorts$focusInput(_p0));
 };
-var _user$project$DomPorts$autoFocusPaperInputCmd = _user$project$DomPorts$focusPaperInputCmd('.auto-focus');
+var _user$project$DomPorts$autoFocusInputCmd = _user$project$DomPorts$focusInputCmd('.auto-focus');
 var _user$project$DomPorts$focusSelector = _elm_lang$core$Native_Platform.outgoingPort(
 	'focusSelector',
 	function (v) {

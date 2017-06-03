@@ -3,7 +3,7 @@ port module Main exposing (..)
 import CommonMsg
 import Document
 import Dom
-import DomPorts exposing (autoFocusPaperInputCmd, focusPaperInputCmd, focusSelectorIfNoFocusCmd)
+import DomPorts exposing (autoFocusInputCmd, focusInputCmd, focusSelectorIfNoFocusCmd)
 import EditMode
 import Entity
 import Ext.Debug
@@ -192,10 +192,10 @@ update msg =
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))
 
                 FocusPaperInput selector ->
-                    focusPaperInputCmd selector
+                    focusInputCmd selector
 
                 AutoFocusPaperInput ->
-                    autoFocusPaperInputCmd
+                    autoFocusInputCmd
 
                 TodoAction action id ->
                     identity
@@ -231,7 +231,7 @@ update msg =
 
                 StartEditingReminder todo ->
                     Return.map (Model.startEditingReminder todo)
-                        >> autoFocusPaperInputCmd
+                        >> autoFocusInputCmd
 
                 StartEditingContext todo ->
                     Return.map (Model.startEditingTodoContext todo)
@@ -287,25 +287,25 @@ update msg =
 
                 NewTodo ->
                     Return.map (Model.activateNewTodoModeWithFocusInEntityAsReference)
-                        >> autoFocusPaperInputCmd
+                        >> autoFocusInputCmd
 
                 NewTodoForInbox ->
                     Return.map (Model.activateNewTodoModeWithInboxAsReference)
-                        >> autoFocusPaperInputCmd
+                        >> autoFocusInputCmd
 
                 NewProject ->
                     Return.map Model.createAndEditNewProject
-                        >> autoFocusPaperInputCmd
+                        >> autoFocusInputCmd
 
                 NewContext ->
                     Return.map Model.createAndEditNewContext
-                        >> autoFocusPaperInputCmd
+                        >> autoFocusInputCmd
 
                 OnEntityAction entity action ->
                     case (action) of
                         Entity.StartEditing ->
                             Return.map (Model.startEditingEntity entity)
-                                >> autoFocusPaperInputCmd
+                                >> autoFocusInputCmd
 
                         Entity.NameChanged newName ->
                             Return.map (Model.updateEditModeNameChanged newName entity)
@@ -337,7 +337,11 @@ update msg =
                         _ =
                             Debug.log "input, form" ( input, form )
                     in
-                        map (Model.setEditMode (LaunchBar.Form.updateKey input form |> EditMode.LaunchBar))
+                        map
+                            (Model.setEditMode
+                                (LaunchBar.Form.updateKey input form |> EditMode.LaunchBar)
+                            )
+                            >> autoFocusInputCmd
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key

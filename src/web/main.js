@@ -129,8 +129,8 @@ async function boot() {
         })
     })
 
-    app.ports["focusPaperInput"].subscribe((selector) => {
-        console.log("focusPaperInput: selector",selector)
+    app.ports["focusInput"].subscribe((selector) => {
+        console.log("focusInput: selector", selector)
         requestAnimationFrame(() => {
             $(".materialize-textarea.auto-focus").each(function () {
                 autosize(this);
@@ -140,25 +140,23 @@ async function boot() {
 
         // old mat fix for auto-resize
         /*requestAnimationFrame(() => {
-            $(".materialize-textarea.auto-focus").each(function () {
-                const $textarea = $(this)
-                const originalHeight = $textarea.height()
-                $textarea.data("original-height", originalHeight);
-                $textarea.data("previous-length", $textarea.val().length);
-                $textarea.focus()
-                $textarea.trigger('autoresize')
-            });
-        })*/
+         $(".materialize-textarea.auto-focus").each(function () {
+         const $textarea = $(this)
+         const originalHeight = $textarea.height()
+         $textarea.data("original-height", originalHeight);
+         $textarea.data("previous-length", $textarea.val().length);
+         $textarea.focus()
+         $textarea.trigger('autoresize')
+         });
+         })*/
 
         setTimeout(() => {
             requestAnimationFrame(() => {
                 const toFocus = document.querySelector(selector)
                 // console.log("toFocus", toFocus, document.activeElement)
                 if (toFocus && document.activeElement !== toFocus) {
-                 toFocus.focus()
-                 } else {
-                 // console.log("not focusing")
-                 }
+                    toFocus.focus();
+                }
                 if (toFocus && toFocus.inputElement) {
                     // console.log(toFocus.inputElement, toFocus.$.input)
                     toFocus.inputElement.focus()

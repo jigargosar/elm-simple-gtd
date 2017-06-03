@@ -11,7 +11,7 @@ type alias DomSelector =
     String
 
 
-port focusPaperInput : DomSelector -> Cmd msg
+port focusInput : DomSelector -> Cmd msg
 
 
 port focusSelector : DomSelector -> Cmd msg
@@ -20,12 +20,12 @@ port focusSelector : DomSelector -> Cmd msg
 port focusSelectorIfNoFocus : DomSelector -> Cmd msg
 
 
-autoFocusPaperInputCmd =
-    focusPaperInputCmd ".auto-focus"
+autoFocusInputCmd =
+    focusInputCmd ".auto-focus"
 
 
-focusPaperInputCmd =
-    focusPaperInput >> Return.command
+focusInputCmd =
+    focusInput >> Return.command
 
 
 focusSelectorIfNoFocusCmd =

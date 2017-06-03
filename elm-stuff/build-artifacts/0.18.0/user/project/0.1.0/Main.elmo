@@ -593,40 +593,33 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 		_user$project$Model$getEditMode,
 		function (editMode) {
 			var _p53 = {ctor: '_Tuple2', _0: key, _1: editMode};
-			_v7_5:
+			_v7_2:
 			do {
 				if (_p53.ctor === '_Tuple2') {
-					switch (_p53._0.ctor) {
-						case 'CharQ':
-							if (_p53._1.ctor === 'None') {
-								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodo);
-							} else {
-								break _v7_5;
-							}
-						case 'CharI':
-							if (_p53._1.ctor === 'None') {
-								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodoForInbox);
-							} else {
-								break _v7_5;
-							}
-						case 'Slash':
-							if (_p53._1.ctor === 'None') {
-								var _p54 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
-								return _elm_lang$core$Basics$identity;
-							} else {
-								break _v7_5;
-							}
-						case 'Escape':
-							if (_p53._1.ctor === 'None') {
+					if (_p53._1.ctor === 'None') {
+						var _p54 = _p53._0;
+						switch (_p54.ctor) {
+							case 'Escape':
 								return _Fresheyeball$elm_return$Return$map(_user$project$Model$clearSelection);
-							} else {
-								return _user$project$Main$andThenUpdate(_user$project$Msg$DeactivateEditingMode);
-							}
-						default:
-							break _v7_5;
+							case 'CharQ':
+								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodo);
+							case 'CharI':
+								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodoForInbox);
+							case 'Slash':
+								var _p55 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
+								return _elm_lang$core$Basics$identity;
+							default:
+								return _elm_lang$core$Basics$identity;
+						}
+					} else {
+						if (_p53._0.ctor === 'Escape') {
+							return _user$project$Main$andThenUpdate(_user$project$Msg$DeactivateEditingMode);
+						} else {
+							break _v7_2;
+						}
 					}
 				} else {
-					break _v7_5;
+					break _v7_2;
 				}
 			} while(false);
 			return _elm_lang$core$Basics$identity;
@@ -634,9 +627,9 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 };
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p55) {
+		function (_p56) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p55));
+				_user$project$Main$update(_p56));
 		}));
 var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 	{delta2url: _user$project$Routes$delta2hash, location2messages: _user$project$Routes$hash2messages, init: _user$project$Main$init, update: _user$project$Main$update, view: _user$project$View$init, subscriptions: _user$project$Main$subscriptions})(
@@ -691,9 +684,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 				A2(_elm_lang$core$Json_Decode$field, 'developmentMode', _elm_lang$core$Json_Decode$bool));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$andThenUpdateAll = function (_p56) {
+var _user$project$Main$andThenUpdateAll = function (_p57) {
 	return _user$project$Main$andThenUpdate(
-		_user$project$Msg$OnMsgList(_p56));
+		_user$project$Msg$OnMsgList(_p57));
 };
 var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',

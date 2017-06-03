@@ -445,21 +445,26 @@ onGlobalKeyUp key =
     Return.with (Model.getEditMode)
         (\editMode ->
             case ( key, editMode ) of
-                ( Key.Escape, EditMode.None ) ->
-                    Return.map (Model.clearSelection)
+                ( key, EditMode.None ) ->
+                    case key of
+                        Key.Escape ->
+                            Return.map (Model.clearSelection)
 
-                ( Key.CharQ, EditMode.None ) ->
-                    andThenUpdate NewTodo
+                        Key.CharQ ->
+                            andThenUpdate NewTodo
 
-                ( Key.CharI, EditMode.None ) ->
-                    andThenUpdate NewTodoForInbox
+                        Key.CharI ->
+                            andThenUpdate NewTodoForInbox
 
-                ( Key.Slash, EditMode.None ) ->
-                    let
-                        _ =
-                            Debug.log "slashpressed" ("slashpressed")
-                    in
-                        identity
+                        Key.Slash ->
+                            let
+                                _ =
+                                    Debug.log "slashpressed" ("slashpressed")
+                            in
+                                identity
+
+                        _ ->
+                            identity
 
                 ( Key.Escape, _ ) ->
                     andThenUpdate DeactivateEditingMode

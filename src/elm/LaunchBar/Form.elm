@@ -22,5 +22,5 @@ create =
     { input = "" }
 
 
-updateKey input model =
-    { model        | input = input    }
+updateInput input model =
+    { model | input = input }

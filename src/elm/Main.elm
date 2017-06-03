@@ -336,7 +336,7 @@ update msg =
                 UpdateLaunchBarInput form input ->
                     map
                         (Model.setEditMode
-                            (LaunchBar.Form.updateKey input form |> EditMode.LaunchBar)
+                            (LaunchBar.Form.updateInput input form |> EditMode.LaunchBar)
                         )
 
                 OnGlobalKeyUp key ->

@@ -1,7 +1,7 @@
 module LaunchBar.View exposing (..)
 
 import EditMode
-import Ext.Keyboard exposing (onKeyDown)
+import Ext.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -13,24 +13,22 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Msg
+import Msg exposing (commonMsg)
 
 
 init m =
-    let
-        val =
-            case Model.getEditMode m of
-                EditMode.LaunchBar form ->
-                    form.input
+    case Model.getEditMode m of
+        EditMode.LaunchBar form ->
+            div [ id "modal-background", onKeyDownStopPropagation (\_ -> commonMsg.noOp) ]
+                [ div
+                    [ id "launch-bar-container"
+                    , attribute "onclick" "console.log('focusing');document.getElementById('hidden-input').focus(); return false;"
+                    , onInput (Msg.UpdateLaunchBarInput form)
+                    ]
+                    [ div [] [ text "Input:", text form.input ]
+                    , input [ id "hidden-input", value form.input ] []
+                    ]
+                ]
 
-                _ ->
-                    ""
-    in
-        div
-            [ id "launch-bar-container"
-            , attribute "onclick" "console.log('focusing');document.getElementById('hidden-input').focus(); return false;"
-            , onInput (Msg.UpdateLaunchBarInput { input = val })
-            ]
-            [ div [] [ text "Input:", text val ]
-            , input [ id "hidden-input", attribute "type" "text" ] []
-            ]
+        _ ->
+            span [] []

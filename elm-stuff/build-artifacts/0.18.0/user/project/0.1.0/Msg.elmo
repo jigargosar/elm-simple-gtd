@@ -1,4 +1,9 @@
 var _user$project$Msg$toCmd = _user$project$Ext_Cmd$toCmd;
+var _user$project$Msg$UpdateLaunchBarInput = F2(
+	function (a, b) {
+		return {ctor: 'UpdateLaunchBarInput', _0: a, _1: b};
+	});
+var _user$project$Msg$StartLaunchBar = {ctor: 'StartLaunchBar'};
 var _user$project$Msg$OnEntityAction = F2(
 	function (a, b) {
 		return {ctor: 'OnEntityAction', _0: a, _1: b};
@@ -65,7 +70,6 @@ var _user$project$Msg$NewTodoTextChanged = F2(
 	});
 var _user$project$Msg$NewContext = {ctor: 'NewContext'};
 var _user$project$Msg$NewProject = {ctor: 'NewProject'};
-var _user$project$Msg$StartLaunchBar = {ctor: 'StartLaunchBar'};
 var _user$project$Msg$NewTodoForInbox = {ctor: 'NewTodoForInbox'};
 var _user$project$Msg$NewTodo = {ctor: 'NewTodo'};
 var _user$project$Msg$SetTodoProject = F2(

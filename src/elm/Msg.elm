@@ -26,6 +26,7 @@ import Firebase
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import LaunchBar.Form
 
 
 type alias PrevNextIdPair =
@@ -53,7 +54,6 @@ type Msg
     | SetTodoProject Project.Model Todo.Model
     | NewTodo
     | NewTodoForInbox
-    | StartLaunchBar
     | NewProject
     | NewContext
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text
@@ -77,6 +77,8 @@ type Msg
     | OnKeyboardMsg Keyboard.Msg
     | OnGlobalKeyUp Keyboard.Key
     | OnEntityAction Entity Entity.Action
+    | StartLaunchBar
+    | UpdateLaunchBarInput LaunchBar.Form.Model String
 
 
 toCmds : List Msg -> Cmd Msg

@@ -1,10 +1,28 @@
 var _user$project$LaunchBar_View$init = function (m) {
+	var val = function () {
+		var _p0 = _user$project$Model$getEditMode(m);
+		if (_p0.ctor === 'LaunchBar') {
+			return _p0._0.input;
+		} else {
+			return '';
+		}
+	}();
 	return A2(
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$id('launch-bar-container'),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'onclick', 'console.log(\'focusing\');document.getElementById(\'hidden-input\').focus(); return false;'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onInput(
+						_user$project$Msg$UpdateLaunchBarInput(
+							{input: val})),
+					_1: {ctor: '[]'}
+				}
+			}
 		},
 		{
 			ctor: '::',
@@ -13,8 +31,12 @@ var _user$project$LaunchBar_View$init = function (m) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('Query'),
-					_1: {ctor: '[]'}
+					_0: _elm_lang$html$Html$text('Input:'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(val),
+						_1: {ctor: '[]'}
+					}
 				}),
 			_1: {
 				ctor: '::',
@@ -22,8 +44,12 @@ var _user$project$LaunchBar_View$init = function (m) {
 					_elm_lang$html$Html$input,
 					{
 						ctor: '::',
-						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'type', 'custom'),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$id('hidden-input'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'type', 'text'),
+							_1: {ctor: '[]'}
+						}
 					},
 					{ctor: '[]'}),
 				_1: {ctor: '[]'}

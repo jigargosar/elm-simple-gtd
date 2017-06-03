@@ -1,5 +1,7 @@
 module LaunchBar.Form exposing (..)
 
+import Char
+import Keyboard.Extra
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -18,3 +20,7 @@ type alias Model =
 
 create =
     { input = "" }
+
+
+updateKey input model =
+    { model        | input = input    }

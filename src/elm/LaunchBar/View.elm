@@ -30,7 +30,7 @@ init m =
                     , onInput (Msg.UpdateLaunchBarInput form)
                     ]
                     [ div [] [ text "Input:", text form.input ]
-                    , input [ id "hidden-input", value form.input ] []
+                    , input [ id "hidden-input", class "auto-focus", value form.input ] []
                     ]
                 ]
 

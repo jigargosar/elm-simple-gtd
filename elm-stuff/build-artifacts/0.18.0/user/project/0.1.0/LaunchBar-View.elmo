@@ -61,8 +61,12 @@ var _user$project$LaunchBar_View$init = function (m) {
 									_0: _elm_lang$html$Html_Attributes$id('hidden-input'),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$value(_p2.input),
-										_1: {ctor: '[]'}
+										_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$value(_p2.input),
+											_1: {ctor: '[]'}
+										}
 									}
 								},
 								{ctor: '[]'}),

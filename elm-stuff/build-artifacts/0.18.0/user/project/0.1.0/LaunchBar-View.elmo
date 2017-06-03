@@ -13,7 +13,11 @@ var _user$project$LaunchBar_View$init = function (m) {
 						function (_p1) {
 							return _user$project$Msg$commonMsg.noOp;
 						}),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Msg$DeactivateEditingMode),
+						_1: {ctor: '[]'}
+					}
 				}
 			},
 			{
@@ -25,7 +29,7 @@ var _user$project$LaunchBar_View$init = function (m) {
 						_0: _elm_lang$html$Html_Attributes$id('launch-bar-container'),
 						_1: {
 							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'onclick', 'console.log(\'focusing\');document.getElementById(\'hidden-input\').focus(); return false;'),
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'onclick', 'console.log(\'focusing\');document.getElementById(\'hidden-input\').focus(); event.stopPropagation(); event.preventDefault();'),
 							_1: {
 								ctor: '::',
 								_0: _elm_lang$html$Html_Events$onInput(

@@ -328,10 +328,17 @@ update msg =
                         Entity.ToggleSelected ->
                             Return.map (Model.toggleEntitySelection entity)
 
+                StartLaunchBar ->
+                    map (Model.activateLaunchBar)
+
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key
            )
         >> persistAll
+
+
+map =
+    Return.map
 
 
 modelTapLog =
@@ -461,7 +468,7 @@ onGlobalKeyUp key =
                                 _ =
                                     Debug.log "slashpressed" ("slashpressed")
                             in
-                                identity
+                                andThenUpdate StartLaunchBar
 
                         _ ->
                             identity

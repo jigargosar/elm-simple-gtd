@@ -53,6 +53,7 @@ type Msg
     | SetTodoProject Project.Model Todo.Model
     | NewTodo
     | NewTodoForInbox
+    | StartLaunchBar
     | NewProject
     | NewContext
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text

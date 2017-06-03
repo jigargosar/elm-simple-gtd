@@ -3,6 +3,7 @@ module EditMode exposing (..)
 import Context
 import Document
 import Form
+import LaunchBar.Form
 import Project
 import Todo
 import Todo.NewForm
@@ -51,6 +52,7 @@ type EditMode
     | EditContext EditContextForm
     | EditProject EditProjectForm
     | EditSyncSettings SyncForm
+    | LaunchBar LaunchBar.Form.Model
     | None
 
 

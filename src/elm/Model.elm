@@ -11,6 +11,7 @@ import Ext.Keyboard as Keyboard
 import Ext.List as List
 import Ext.Predicate
 import Firebase exposing (DeviceId)
+import LaunchBar.Form
 import Project
 import ReminderOverlay
 import Dict exposing (Dict)
@@ -458,6 +459,11 @@ isShowDetailsKeyPressed =
     keyboardState.get >> Keyboard.isAltDown >> not
 
 
+activateLaunchBar : ModelF
+activateLaunchBar =
+    editMode.set (LaunchBar.Form.create |> EditMode.LaunchBar)
+
+
 activateNewTodoModeWithFocusInEntityAsReference : ModelF
 activateNewTodoModeWithFocusInEntityAsReference model =
     editMode.set (Todo.NewForm.create (focusInEntity.get model) "" |> EditMode.NewTodo) model
@@ -554,6 +560,10 @@ saveCurrentForm model =
 
         EditMode.EditSyncSettings form ->
             { model | pouchDBRemoteSyncURI = form.uri }
+                |> Return.singleton
+
+        EditMode.LaunchBar form->
+            model
                 |> Return.singleton
 
         EditMode.None ->

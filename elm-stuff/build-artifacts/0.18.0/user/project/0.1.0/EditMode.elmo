@@ -11,6 +11,9 @@ var _user$project$EditMode$SyncForm = function (a) {
 };
 var _user$project$EditMode$None = {ctor: 'None'};
 var _user$project$EditMode$none = _user$project$EditMode$None;
+var _user$project$EditMode$LaunchBar = function (a) {
+	return {ctor: 'LaunchBar', _0: a};
+};
 var _user$project$EditMode$EditSyncSettings = function (a) {
 	return {ctor: 'EditSyncSettings', _0: a};
 };

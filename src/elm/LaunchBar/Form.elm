@@ -13,8 +13,8 @@ _ =
 
 
 type alias Model =
-    {}
+    { input : String }
 
 
 create =
-    {}
+    { input = "" }

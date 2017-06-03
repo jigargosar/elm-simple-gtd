@@ -8,7 +8,25 @@ var _user$project$LaunchBar_View$init = function (m) {
 		},
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html$text('Launchbar dialog'),
-			_1: {ctor: '[]'}
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Query'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'type', 'custom'),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
 		});
 };

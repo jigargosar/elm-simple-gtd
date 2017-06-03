@@ -14,5 +14,6 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 
 init m =
     div [ id "launch-bar-container" ]
-        [ text "Launchbar dialog"
+        [ div [] [ text "Query" ]
+        , input [ attribute "type" "custom" ] []
         ]

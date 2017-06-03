@@ -1,3 +1,5 @@
-var _user$project$LaunchBar_Form$create = {};
+var _user$project$LaunchBar_Form$create = {input: ''};
 var _user$project$LaunchBar_Form$_p0 = 1;
-var _user$project$LaunchBar_Form$Model = {};
+var _user$project$LaunchBar_Form$Model = function (a) {
+	return {input: a};
+};

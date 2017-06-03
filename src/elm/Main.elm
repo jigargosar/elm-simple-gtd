@@ -448,14 +448,21 @@ onGlobalKeyUp key =
                 ( Key.Escape, EditMode.None ) ->
                     Return.map (Model.clearSelection)
 
-                ( Key.Escape, _ ) ->
-                    andThenUpdate DeactivateEditingMode
-
                 ( Key.CharQ, EditMode.None ) ->
                     andThenUpdate NewTodo
 
                 ( Key.CharI, EditMode.None ) ->
                     andThenUpdate NewTodoForInbox
+
+                ( Key.Slash, EditMode.None ) ->
+                    let
+                        _ =
+                            Debug.log "slashpressed" ("slashpressed")
+                    in
+                        identity
+
+                ( Key.Escape, _ ) ->
+                    andThenUpdate DeactivateEditingMode
 
                 _ ->
                     identity

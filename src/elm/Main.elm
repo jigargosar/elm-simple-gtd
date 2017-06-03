@@ -331,6 +331,7 @@ update msg =
 
                 StartLaunchBar ->
                     map (Model.activateLaunchBar)
+                        >> autoFocusInputCmd
 
                 UpdateLaunchBarInput form input ->
                     map

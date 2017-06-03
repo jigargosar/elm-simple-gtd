@@ -45,6 +45,7 @@ import Ext.Html
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import LaunchBar.View
 
 
 init m =
@@ -60,6 +61,7 @@ appView m =
         [ appDrawerLayoutView m
         , addTodoFab m
         , showReminderOverlay m
+        , LaunchBar.View.init m
         ]
 
 

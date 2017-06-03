@@ -972,6 +972,8 @@ var _user$project$Model$editMode = {
 				{editMode: s});
 		})
 };
+var _user$project$Model$activateLaunchBar = _user$project$Model$editMode.set(
+	_user$project$EditMode$LaunchBar(_user$project$LaunchBar_Form$create));
 var _user$project$Model$activateNewTodoModeWithFocusInEntityAsReference = function (model) {
 	return A2(
 		_user$project$Model$editMode.set,
@@ -1300,6 +1302,8 @@ var _user$project$Model$saveCurrentForm = function (model) {
 				_elm_lang$core$Native_Utils.update(
 					model,
 					{pouchDBRemoteSyncURI: _p66._0.uri}));
+		case 'LaunchBar':
+			return _Fresheyeball$elm_return$Return$singleton(model);
 		default:
 			return _Fresheyeball$elm_return$Return$singleton(model);
 	}

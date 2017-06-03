@@ -81,6 +81,7 @@ var _user$project$Main$persistAll = function (_p1) {
 			A2(_user$project$Main$persist, _user$project$Model$projectStore, _p1)));
 };
 var _user$project$Main$modelTapLog = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Debug$tapLog, _Fresheyeball$elm_return$Return$map);
+var _user$project$Main$map = _Fresheyeball$elm_return$Return$map;
 var _user$project$Main$init = function (_p2) {
 	return _Fresheyeball$elm_return$Return$singleton(
 		_user$project$Model$init(_p2));
@@ -576,6 +577,8 @@ var _user$project$Main$update = function (msg) {
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$toggleEntitySelection(_p51));
 						}
+					case 'StartLaunchBar':
+						return _user$project$Main$map(_user$project$Model$activateLaunchBar);
 					default:
 						return _user$project$Main$onGlobalKeyUp(_p15._0);
 				}
@@ -607,7 +610,7 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodoForInbox);
 							case 'Slash':
 								var _p55 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
-								return _elm_lang$core$Basics$identity;
+								return _user$project$Main$andThenUpdate(_user$project$Msg$StartLaunchBar);
 							default:
 								return _elm_lang$core$Basics$identity;
 						}

@@ -90,7 +90,7 @@ type alias TodoProjectGroup =
 
 type Grouping
     = SingleContext TodoContextGroup (List TodoProjectGroup)
-    | SingleProject TodoProjectGroup (List TodoProjectGroup)
+    | SingleProject TodoProjectGroup (List TodoContextGroup)
     | MultiContext (List TodoContextGroup)
     | MultiProject (List TodoProjectGroup)
 
@@ -128,10 +128,10 @@ createProjectSubGroups findProjectById tcg =
         projects .|> createProjectTodoGroup filterTodoForProject
 
 
-createGroupingForContext getTodoList findProjectById context =
+createGroupingForContext getTodoList findContextById context =
     context
         |> createContextTodoGroup getTodoList
-        |> (\tcg -> SingleContext tcg (createProjectSubGroups findProjectById tcg))
+        |> (\tcg -> SingleContext tcg (createProjectSubGroups findContextById tcg))
 
 
 createGroupingForProjects getTodoList projects =
@@ -158,7 +158,7 @@ createContextSubGroups findContextById tcg =
 createGroupingForProject getTodoList findProjectById project =
     project
         |> createProjectTodoGroup getTodoList
-        |> (\tcg -> SingleProject tcg (createProjectSubGroups findProjectById tcg))
+        |> (\tcg -> SingleProject tcg (createContextSubGroups findProjectById tcg))
 
 
 flattenGrouping : Grouping -> List Entity
@@ -170,7 +170,7 @@ flattenGrouping grouping =
 
         SingleProject pg cgList ->
             (ProjectEntity pg.project)
-                :: flattenGrouping (MultiProject cgList)
+                :: flattenGrouping (MultiContext cgList)
 
         MultiContext groupList ->
             groupList

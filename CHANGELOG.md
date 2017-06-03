@@ -1,4 +1,4 @@
-## Upcoming
+## v0.16.26 - 2017-06-03
 * [fix] show list in project view (probably got lost in last refactoring.) 
 
 ## v0.16.25 - 2017-06-01

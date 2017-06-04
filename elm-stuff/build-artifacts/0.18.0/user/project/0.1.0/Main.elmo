@@ -48,10 +48,6 @@ var _user$project$Main$firebaseUpdateClientCmd = function (model) {
 		});
 };
 var _user$project$Main$command = _Fresheyeball$elm_return$Return$command;
-var _user$project$Main$withNow = function (msg) {
-	return _Fresheyeball$elm_return$Return$command(
-		A2(_elm_lang$core$Task$perform, msg, _elm_lang$core$Time$now));
-};
 var _user$project$Main$setDomFocusToFocusedEntityCmd = _user$project$Msg$commonMsg.focus('.entity-list > [tabindex=0]');
 var _user$project$Main$updateTodoAndMaybeAlsoSelected = F2(
 	function (action, todo) {
@@ -82,6 +78,10 @@ var _user$project$Main$persistAll = function (_p1) {
 };
 var _user$project$Main$modelTapLog = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Debug$tapLog, _Fresheyeball$elm_return$Return$map);
 var _user$project$Main$map = _Fresheyeball$elm_return$Return$map;
+var _user$project$Main$withNow = function (toMsg) {
+	return _user$project$Main$command(
+		A2(_elm_lang$core$Task$perform, toMsg, _elm_lang$core$Time$now));
+};
 var _user$project$Main$init = function (_p2) {
 	return _Fresheyeball$elm_return$Return$singleton(
 		_user$project$Model$init(_p2));
@@ -577,29 +577,39 @@ var _user$project$Main$update = function (msg) {
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$toggleEntitySelection(_p51));
 						}
-					case 'StartLaunchBar':
-						return function (_p52) {
-							return _user$project$DomPorts$autoFocusInputCmd(
-								A2(_user$project$Main$map, _user$project$Model$activateLaunchBar, _p52));
-						};
-					case 'UpdateLaunchBarInput':
-						return _user$project$Main$map(
-							A2(_user$project$Model$updateLaunchBarInput, _p15._1, _p15._0));
+					case 'OnLaunchBarActionWithNow':
+						var _p56 = _p15._1;
+						var _p52 = _p15._0;
+						switch (_p52.ctor) {
+							case 'OnEnter':
+								return function (_p53) {
+									return function () {
+										var _p54 = _p52._0;
+										if (_p54.ctor === 'Project') {
+											return _user$project$Main$map(
+												_user$project$Model$switchToProjectView(_p54._0));
+										} else {
+											return _user$project$Main$map(
+												_user$project$Model$switchToContextView(_p54._0));
+										}
+									}()(
+										A2(_user$project$Main$andThenUpdate, _user$project$Msg$DeactivateEditingMode, _p53));
+								};
+							case 'OnInputChanged':
+								return _user$project$Main$map(
+									A3(_user$project$Model$updateLaunchBarInput, _p56, _p52._1, _p52._0));
+							default:
+								return function (_p55) {
+									return _user$project$DomPorts$autoFocusInputCmd(
+										A2(
+											_user$project$Main$map,
+											_user$project$Model$activateLaunchBar(_p56),
+											_p55));
+								};
+						}
 					case 'OnLaunchBarAction':
-						var _p53 = _p15._0;
-						return function (_p54) {
-							return function () {
-								var _p55 = _p53._0;
-								if (_p55.ctor === 'Project') {
-									return _user$project$Main$map(
-										_user$project$Model$switchToProjectView(_p55._0));
-								} else {
-									return _user$project$Main$map(
-										_user$project$Model$switchToContextView(_p55._0));
-								}
-							}()(
-								A2(_user$project$Main$andThenUpdate, _user$project$Msg$DeactivateEditingMode, _p54));
-						};
+						return _user$project$Main$withNow(
+							_user$project$Msg$OnLaunchBarActionWithNow(_p15._0));
 					default:
 						return _user$project$Main$onGlobalKeyUp(_p15._0);
 				}
@@ -607,22 +617,22 @@ var _user$project$Main$update = function (msg) {
 				_Fresheyeball$elm_return$Return$singleton(_p14)));
 	};
 };
-var _user$project$Main$andThenUpdate = function (_p56) {
+var _user$project$Main$andThenUpdate = function (_p57) {
 	return _Fresheyeball$elm_return$Return$andThen(
-		_user$project$Main$update(_p56));
+		_user$project$Main$update(_p57));
 };
 var _user$project$Main$onGlobalKeyUp = function (key) {
 	return A2(
 		_user$project$Ext_Return$with,
 		_user$project$Model$getEditMode,
 		function (editMode) {
-			var _p57 = {ctor: '_Tuple2', _0: key, _1: editMode};
+			var _p58 = {ctor: '_Tuple2', _0: key, _1: editMode};
 			_v9_2:
 			do {
-				if (_p57.ctor === '_Tuple2') {
-					if (_p57._1.ctor === 'None') {
-						var _p58 = _p57._0;
-						switch (_p58.ctor) {
+				if (_p58.ctor === '_Tuple2') {
+					if (_p58._1.ctor === 'None') {
+						var _p59 = _p58._0;
+						switch (_p59.ctor) {
 							case 'Escape':
 								return _Fresheyeball$elm_return$Return$map(_user$project$Model$clearSelection);
 							case 'CharQ':
@@ -630,13 +640,14 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 							case 'CharI':
 								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodoForInbox);
 							case 'Slash':
-								var _p59 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
-								return _user$project$Main$andThenUpdate(_user$project$Msg$StartLaunchBar);
+								var _p60 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
+								return _user$project$Main$andThenUpdate(
+									_user$project$Msg$OnLaunchBarAction(_user$project$LaunchBar$Open));
 							default:
 								return _elm_lang$core$Basics$identity;
 						}
 					} else {
-						if (_p57._0.ctor === 'Escape') {
+						if (_p58._0.ctor === 'Escape') {
 							return _user$project$Main$andThenUpdate(_user$project$Msg$DeactivateEditingMode);
 						} else {
 							break _v9_2;
@@ -651,9 +662,9 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 };
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p60) {
+		function (_p61) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p60));
+				_user$project$Main$update(_p61));
 		}));
 var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 	{delta2url: _user$project$Routes$delta2hash, location2messages: _user$project$Routes$hash2messages, init: _user$project$Main$init, update: _user$project$Main$update, view: _user$project$View$init, subscriptions: _user$project$Main$subscriptions})(
@@ -708,9 +719,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 				A2(_elm_lang$core$Json_Decode$field, 'developmentMode', _elm_lang$core$Json_Decode$bool));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$andThenUpdateAll = function (_p61) {
+var _user$project$Main$andThenUpdateAll = function (_p62) {
 	return _user$project$Main$andThenUpdate(
-		_user$project$Msg$OnMsgList(_p61));
+		_user$project$Msg$OnMsgList(_p62));
 };
 var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',

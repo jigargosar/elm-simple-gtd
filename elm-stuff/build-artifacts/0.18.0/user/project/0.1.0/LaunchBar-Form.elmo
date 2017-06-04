@@ -10,7 +10,7 @@ var _user$project$LaunchBar_Form$updateInputHelp = F3(
 				{input: input}));
 	});
 var _user$project$LaunchBar_Form$updateInput = F3(
-	function (input, model, now) {
+	function (now, input, model) {
 		var newInput = ((_elm_lang$core$Native_Utils.cmp(now - model.updatedAt, 1 * _elm_lang$core$Time$second) > 0) ? A3(
 			_elm_lang$core$Regex$replace,
 			_elm_lang$core$Regex$AtMost(1),

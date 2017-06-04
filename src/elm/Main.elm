@@ -330,11 +330,7 @@ update msg =
                         Entity.ToggleSelected ->
                             Return.map (Model.toggleEntitySelection entity)
 
-                StartLaunchBar ->
-                    map (Model.activateLaunchBar)
-                        >> autoFocusInputCmd
-
-                OnLaunchBarAction action ->
+                OnLaunchBarActionWithNow action now ->
                     case action of
                         LaunchBar.OnEnter entity ->
                             andThenUpdate DeactivateEditingMode
@@ -346,12 +342,24 @@ update msg =
                                         map (Model.switchToContextView context)
 
                         LaunchBar.OnInputChanged form text ->
-                            map (Model.updateLaunchBarInput text form)
+                            map (Model.updateLaunchBarInput now text form)
+
+                        LaunchBar.Open ->
+                            map (Model.activateLaunchBar now)
+                                >> autoFocusInputCmd
+
+                OnLaunchBarAction action ->
+                    withNow (OnLaunchBarActionWithNow action)
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key
            )
         >> persistAll
+
+
+withNow : (Time -> Msg) -> ReturnF
+withNow toMsg =
+    command (Task.perform toMsg Time.now)
 
 
 map =
@@ -414,11 +422,6 @@ showTodoNotificationCmd ( ( todo, model ), cmd ) =
             [ cmd, createTodoNotification todo |> showNotification, startAlarm () ]
     in
         model ! cmds
-
-
-withNow : (Time -> Msg) -> ReturnF
-withNow msg =
-    Task.perform (msg) Time.now |> Return.command
 
 
 reminderOverlayAction action =
@@ -485,7 +488,7 @@ onGlobalKeyUp key =
                                 _ =
                                     Debug.log "slashpressed" ("slashpressed")
                             in
-                                andThenUpdate StartLaunchBar
+                                LaunchBar.Open |> OnLaunchBarAction |> andThenUpdate
 
                         _ ->
                             identity

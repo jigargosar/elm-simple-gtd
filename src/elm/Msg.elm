@@ -78,8 +78,8 @@ type Msg
     | OnKeyboardMsg Keyboard.Msg
     | OnGlobalKeyUp Keyboard.Key
     | OnEntityAction Entity Entity.Action
-    | StartLaunchBar
     | OnLaunchBarAction LaunchBar.Action
+    | OnLaunchBarActionWithNow LaunchBar.Action Time
 
 
 toCmds : List Msg -> Cmd Msg

@@ -43,6 +43,11 @@ var _user$project$LaunchBar$Context = function (a) {
 	return {ctor: 'Context', _0: a};
 };
 var _user$project$LaunchBar$defaultEntity = _user$project$LaunchBar$Context(_user$project$Context$null);
+var _user$project$LaunchBar$Open = {ctor: 'Open'};
+var _user$project$LaunchBar$OnInputChanged = F2(
+	function (a, b) {
+		return {ctor: 'OnInputChanged', _0: a, _1: b};
+	});
 var _user$project$LaunchBar$OnEnter = function (a) {
 	return {ctor: 'OnEnter', _0: a};
 };

@@ -21,6 +21,7 @@ type Entity
 type Action
     = OnEnter Entity
     | OnInputChanged LaunchBar.Form.Model String
+    | Open
 
 
 getName entity =

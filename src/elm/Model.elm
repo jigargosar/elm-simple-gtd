@@ -463,13 +463,13 @@ isShowDetailsKeyPressed =
     keyboardState.get >> Keyboard.isAltDown >> not
 
 
-activateLaunchBar : ModelF
-activateLaunchBar =
-    setWith editMode (.now >> LaunchBar.Form.create >> EditMode.LaunchBar)
+activateLaunchBar : Time -> ModelF
+activateLaunchBar now =
+    editMode.set (LaunchBar.Form.create now |> EditMode.LaunchBar)
 
 
-updateLaunchBarInput text form =
-    setWith editMode (.now >> LaunchBar.Form.updateInput text form >> EditMode.LaunchBar)
+updateLaunchBarInput now text form =
+    editMode.set (LaunchBar.Form.updateInput now text form |> EditMode.LaunchBar)
 
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF

@@ -61,7 +61,10 @@ var _user$project$LaunchBar_View$formView = F2(
 								_1: {
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onInput(
-										_user$project$Msg$UpdateLaunchBarInput(form)),
+										function (_p3) {
+											return _user$project$Msg$OnLaunchBarAction(
+												A2(_user$project$LaunchBar$OnInputChanged, form, _p3));
+										}),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -133,9 +136,9 @@ var _user$project$LaunchBar_View$formView = F2(
 			});
 	});
 var _user$project$LaunchBar_View$init = function (m) {
-	var _p3 = _user$project$Model$getEditMode(m);
-	if (_p3.ctor === 'LaunchBar') {
-		return A2(_user$project$LaunchBar_View$formView, _p3._0, m);
+	var _p4 = _user$project$Model$getEditMode(m);
+	if (_p4.ctor === 'LaunchBar') {
+		return A2(_user$project$LaunchBar_View$formView, _p4._0, m);
 	} else {
 		return A2(
 			_elm_lang$html$Html$span,

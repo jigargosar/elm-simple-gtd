@@ -18,14 +18,18 @@ type alias Model =
     }
 
 
+type alias ModelF =
+    Model -> Model
+
+
 create now =
     { input = ""
     , updatedAt = now
     }
 
 
-updateInput : String -> Model -> Time -> Model
-updateInput input model now =
+updateInput : Time -> String -> ModelF
+updateInput now input model =
     let
         newInput =
             input

@@ -20,7 +20,7 @@ var _user$project$LaunchBar$fuzzyMatch = F2(
 				{ctor: '[]'},
 				n);
 		};
-		var boil = _elm_community$string_extra$String_Extra$classify;
+		var boil = _elm_community$string_extra$String_Extra$underscored;
 		var boiledHay = function (_p1) {
 			return boil(
 				_user$project$LaunchBar$getName(_p1));

@@ -46,7 +46,7 @@ fuzzyMatch needle entity =
     let
         --        boil = String.toLower
         boil =
-            String.Extra.classify
+            String.Extra.underscored
 
         boiledHay =
             entity |> getName >> boil

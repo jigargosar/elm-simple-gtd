@@ -2,6 +2,7 @@ module LaunchBar.Form exposing (..)
 
 import Char
 import Keyboard.Extra
+import Regex
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -27,6 +28,21 @@ create now =
     }
 
 
+updateInput : String -> Model -> Time -> Model
 updateInput input model now =
+    let
+        newInput =
+            input
+                |> if now - model.updatedAt > 1 * Time.second then
+                    Regex.replace (Regex.AtMost 1)
+                        (Regex.regex ("^" ++ Regex.escape model.input))
+                        (\_ -> "")
+                   else
+                    identity
+    in
+        updateInputHelp newInput model now
+
+
+updateInputHelp input model now =
     { model | input = input }
         |> (\model -> { model | updatedAt = now })

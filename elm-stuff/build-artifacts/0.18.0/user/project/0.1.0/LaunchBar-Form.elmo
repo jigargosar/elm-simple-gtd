@@ -1,11 +1,34 @@
-var _user$project$LaunchBar_Form$updateInput = F2(
-	function (input, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{input: input});
+var _user$project$LaunchBar_Form$updateInputHelp = F3(
+	function (input, model, now) {
+		return function (model) {
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{updatedAt: now});
+		}(
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{input: input}));
 	});
-var _user$project$LaunchBar_Form$create = {input: ''};
-var _user$project$LaunchBar_Form$_p0 = 1;
-var _user$project$LaunchBar_Form$Model = function (a) {
-	return {input: a};
+var _user$project$LaunchBar_Form$updateInput = F3(
+	function (input, model, now) {
+		var newInput = ((_elm_lang$core$Native_Utils.cmp(now - model.updatedAt, 1 * _elm_lang$core$Time$second) > 0) ? A3(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$AtMost(1),
+			_elm_lang$core$Regex$regex(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'^',
+					_elm_lang$core$Regex$escape(model.input))),
+			function (_p0) {
+				return '';
+			}) : _elm_lang$core$Basics$identity)(input);
+		return A3(_user$project$LaunchBar_Form$updateInputHelp, newInput, model, now);
+	});
+var _user$project$LaunchBar_Form$create = function (now) {
+	return {input: '', updatedAt: now};
 };
+var _user$project$LaunchBar_Form$_p1 = 1;
+var _user$project$LaunchBar_Form$Model = F2(
+	function (a, b) {
+		return {input: a, updatedAt: b};
+	});

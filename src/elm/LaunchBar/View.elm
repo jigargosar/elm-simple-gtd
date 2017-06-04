@@ -72,13 +72,13 @@ formView form m =
             ]
             [ div
                 [ id "launch-bar-container"
-                , class "layout horizontal justified"
+                , class "layout horizontal"
                 , attribute "onclick"
                     "console.log('focusing');document.getElementById('hidden-input').focus(); event.stopPropagation(); event.preventDefault();"
                 , onInput (LaunchBar.OnInputChanged form >> Msg.OnLaunchBarAction)
                 ]
-                [ div [ class "" ] [ text "", text matchingEntityName ]
-                , div [ class "" ] [ text "", text form.input ]
+                [ div [ class "flex-auto ellipsis" ] [ text matchingEntityName ]
+                , div [ class "no-wrap input typing" ] [ text form.input ]
                 , input
                     [ id "hidden-input"
                     , class "auto-focus"

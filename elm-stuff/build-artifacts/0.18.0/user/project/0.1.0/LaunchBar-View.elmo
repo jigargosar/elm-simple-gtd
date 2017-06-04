@@ -54,7 +54,7 @@ var _user$project$LaunchBar_View$formView = F2(
 						_0: _elm_lang$html$Html_Attributes$id('launch-bar-container'),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('layout horizontal justified'),
+							_0: _elm_lang$html$Html_Attributes$class('layout horizontal'),
 							_1: {
 								ctor: '::',
 								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'onclick', 'console.log(\'focusing\');document.getElementById(\'hidden-input\').focus(); event.stopPropagation(); event.preventDefault();'),
@@ -76,17 +76,13 @@ var _user$project$LaunchBar_View$formView = F2(
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class(''),
+								_0: _elm_lang$html$Html_Attributes$class('flex-auto ellipsis'),
 								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(''),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(matchingEntityName),
-									_1: {ctor: '[]'}
-								}
+								_0: _elm_lang$html$Html$text(matchingEntityName),
+								_1: {ctor: '[]'}
 							}),
 						_1: {
 							ctor: '::',
@@ -94,17 +90,13 @@ var _user$project$LaunchBar_View$formView = F2(
 								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class(''),
+									_0: _elm_lang$html$Html_Attributes$class('no-wrap input typing'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text(''),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html$text(form.input),
-										_1: {ctor: '[]'}
-									}
+									_0: _elm_lang$html$Html$text(form.input),
+									_1: {ctor: '[]'}
 								}),
 							_1: {
 								ctor: '::',

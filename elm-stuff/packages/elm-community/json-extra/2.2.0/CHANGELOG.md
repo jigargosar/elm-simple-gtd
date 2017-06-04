@@ -1,3 +1,22 @@
+### 2.2.0
+
+**Additions:**
+- `parseInt` and `parseFloat` for weird api's that return numbers as strings
+- `doubleEncoded` for a more generic _json as a string in json_ issues
+
+**Fixes:**
+- `optionalField` decodes the field, rather than the surrounding object now.
+
+**Other Stuff:**
+- Code Style conforms to elm-format@exp
+- Doc tests!
+- Travis integration
+
+### 2.1.0
+
+**Additions:**
+- `optionalField : String -> Json.Decode.Decoder a -> Json.Decode.Decoder (Maybe.Maybe a)` - Decode an optional field, succeeding with `Nothing` if it is missing, but still giving an error if it is malformed.
+
 ### 2.0.0
 
 **Breaking Changes:**

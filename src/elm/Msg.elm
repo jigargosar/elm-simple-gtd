@@ -79,7 +79,6 @@ type Msg
     | OnGlobalKeyUp Keyboard.Key
     | OnEntityAction Entity Entity.Action
     | StartLaunchBar
-    | UpdateLaunchBarInput LaunchBar.Form.Model String
     | OnLaunchBarAction LaunchBar.Action
 
 

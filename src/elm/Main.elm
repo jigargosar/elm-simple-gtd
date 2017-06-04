@@ -334,9 +334,6 @@ update msg =
                     map (Model.activateLaunchBar)
                         >> autoFocusInputCmd
 
-                UpdateLaunchBarInput form text ->
-                    map (Model.updateLaunchBarInput text form)
-
                 OnLaunchBarAction action ->
                     case action of
                         LaunchBar.OnEnter entity ->
@@ -347,6 +344,9 @@ update msg =
 
                                     LaunchBar.Context context ->
                                         map (Model.switchToContextView context)
+
+                        LaunchBar.OnInputChanged form text ->
+                            map (Model.updateLaunchBarInput text form)
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key

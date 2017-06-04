@@ -2,6 +2,7 @@ module LaunchBar exposing (..)
 
 import Context
 import Fuzzy
+import LaunchBar.Form
 import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -19,6 +20,7 @@ type Entity
 
 type Action
     = OnEnter Entity
+    | OnInputChanged LaunchBar.Form.Model String
 
 
 getName entity =

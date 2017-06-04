@@ -75,7 +75,7 @@ formView form m =
                 , class "layout horizontal justified"
                 , attribute "onclick"
                     "console.log('focusing');document.getElementById('hidden-input').focus(); event.stopPropagation(); event.preventDefault();"
-                , onInput (Msg.UpdateLaunchBarInput form)
+                , onInput (LaunchBar.OnInputChanged form >> Msg.OnLaunchBarAction)
                 ]
                 [ div [ class "" ] [ text "", text matchingEntityName ]
                 , div [ class "" ] [ text "", text form.input ]

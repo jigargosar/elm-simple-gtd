@@ -592,9 +592,12 @@ var _user$project$Main$update = function (msg) {
 											case 'Projects':
 												return _user$project$Main$map(
 													_user$project$Model$setEntityListViewType(_user$project$Entity$ProjectsView));
-											default:
+											case 'Context':
 												return _user$project$Main$map(
 													_user$project$Model$switchToContextView(_p54._0));
+											default:
+												return _user$project$Main$map(
+													_user$project$Model$setEntityListViewType(_user$project$Entity$ContextsView));
 										}
 									}()(
 										A2(_user$project$Main$andThenUpdate, _user$project$Msg$DeactivateEditingMode, _p53));

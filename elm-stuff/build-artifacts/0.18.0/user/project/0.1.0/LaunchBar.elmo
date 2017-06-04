@@ -5,8 +5,10 @@ var _user$project$LaunchBar$getName = function (entity) {
 			return _user$project$Project$getName(_p0._0);
 		case 'Context':
 			return _user$project$Context$getName(_p0._0);
-		default:
+		case 'Projects':
 			return 'Projects';
+		default:
+			return 'Contexts';
 	}
 };
 var _user$project$LaunchBar$fuzzyMatch = F2(
@@ -18,30 +20,55 @@ var _user$project$LaunchBar$fuzzyMatch = F2(
 				{ctor: '[]'},
 				n);
 		};
-		var boiledNeedle = _elm_lang$core$String$toLower(needle);
+		var boil = _elm_community$string_extra$String_Extra$classify;
 		var boiledHay = function (_p1) {
-			return _elm_lang$core$String$toLower(
+			return boil(
 				_user$project$LaunchBar$getName(_p1));
 		}(entity);
+		var boiledNeedle = boil(needle);
 		var _p2 = {
 			ctor: '_Tuple2',
 			_0: _elm_lang$core$String$toList(needle),
 			_1: entity
 		};
-		if (((((_p2.ctor === '_Tuple2') && (_p2._0.ctor === '::')) && (_p2._0._0.valueOf() === '#')) && (_p2._0._1.ctor === '[]')) && (_p2._1.ctor === 'Projects')) {
-			return {
-				ctor: '_Tuple2',
-				_0: entity,
-				_1: A2(match, boiledNeedle, '#')
-			};
-		} else {
-			return {
-				ctor: '_Tuple2',
-				_0: entity,
-				_1: A2(match, boiledNeedle, boiledHay)
-			};
-		}
+		_v1_2:
+		do {
+			if (((_p2.ctor === '_Tuple2') && (_p2._0.ctor === '::')) && (_p2._0._1.ctor === '[]')) {
+				switch (_p2._0._0.valueOf()) {
+					case '#':
+						if (_p2._1.ctor === 'Projects') {
+							return {
+								ctor: '_Tuple2',
+								_0: entity,
+								_1: A2(match, boiledNeedle, '#')
+							};
+						} else {
+							break _v1_2;
+						}
+					case '@':
+						if (_p2._1.ctor === 'Contexts') {
+							return {
+								ctor: '_Tuple2',
+								_0: entity,
+								_1: A2(match, boiledNeedle, '@')
+							};
+						} else {
+							break _v1_2;
+						}
+					default:
+						break _v1_2;
+				}
+			} else {
+				break _v1_2;
+			}
+		} while(false);
+		return {
+			ctor: '_Tuple2',
+			_0: entity,
+			_1: A2(match, boiledNeedle, boiledHay)
+		};
 	});
+var _user$project$LaunchBar$Contexts = {ctor: 'Contexts'};
 var _user$project$LaunchBar$Projects = {ctor: 'Projects'};
 var _user$project$LaunchBar$Project = function (a) {
 	return {ctor: 'Project', _0: a};
@@ -68,22 +95,44 @@ var _user$project$LaunchBar$getFuzzyResults = F2(
 				{
 					ctor: '::',
 					_0: _user$project$LaunchBar$Projects,
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _user$project$LaunchBar$Contexts,
+						_1: {ctor: '[]'}
+					}
 				}));
 		var entityList = function () {
 			var _p3 = _elm_lang$core$String$toList(needle);
-			if ((_p3.ctor === '::') && (_p3._0.valueOf() === '#')) {
-				return A2(
-					_elm_lang$core$Basics_ops['++'],
-					{
-						ctor: '::',
-						_0: _user$project$LaunchBar$Projects,
-						_1: {ctor: '[]'}
-					},
-					projects);
-			} else {
-				return all;
-			}
+			_v2_2:
+			do {
+				if (_p3.ctor === '::') {
+					switch (_p3._0.valueOf()) {
+						case '#':
+							return A2(
+								_elm_lang$core$Basics_ops['++'],
+								{
+									ctor: '::',
+									_0: _user$project$LaunchBar$Projects,
+									_1: {ctor: '[]'}
+								},
+								projects);
+						case '@':
+							return A2(
+								_elm_lang$core$Basics_ops['++'],
+								{
+									ctor: '::',
+									_0: _user$project$LaunchBar$Contexts,
+									_1: {ctor: '[]'}
+								},
+								contexts);
+						default:
+							break _v2_2;
+					}
+				} else {
+					break _v2_2;
+				}
+			} while(false);
+			return all;
 		}();
 		return A2(
 			_elm_lang$core$List$sortBy,

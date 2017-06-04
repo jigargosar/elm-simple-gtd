@@ -344,6 +344,9 @@ update msg =
                                     LaunchBar.Context context ->
                                         map (Model.switchToContextView context)
 
+                                    LaunchBar.Contexts ->
+                                        map (Model.setEntityListViewType Entity.ContextsView)
+
                         LaunchBar.OnInputChanged form text ->
                             map (Model.updateLaunchBarInput now text form)
 

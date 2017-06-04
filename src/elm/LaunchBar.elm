@@ -11,12 +11,14 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Project
+import String.Extra
 
 
 type Entity
     = Context Context.Model
     | Project Project.Model
     | Projects
+    | Contexts
 
 
 type Action
@@ -36,14 +38,21 @@ getName entity =
         Projects ->
             "Projects"
 
+        Contexts ->
+            "Contexts"
+
 
 fuzzyMatch needle entity =
     let
+        --        boil = String.toLower
+        boil =
+            String.Extra.classify
+
         boiledHay =
-            entity |> getName >> String.toLower
+            entity |> getName >> boil
 
         boiledNeedle =
-            String.toLower needle
+            boil needle
 
         match n =
             Fuzzy.match [] [] n
@@ -51,6 +60,9 @@ fuzzyMatch needle entity =
         case ( String.toList needle, entity ) of
             ( '#' :: [], Projects ) ->
                 ( entity, match boiledNeedle "#" )
+
+            ( '@' :: [], Contexts ) ->
+                ( entity, match boiledNeedle "@" )
 
             _ ->
                 ( entity, match boiledNeedle boiledHay )
@@ -67,12 +79,15 @@ getFuzzyResults needle m =
                 .|> Project
 
         all =
-            projects ++ contexts ++ [ Projects ]
+            projects ++ contexts ++ [ Projects, Contexts ]
 
         entityList =
             case String.toList needle of
                 '#' :: xs ->
                     [ Projects ] ++ projects
+
+                '@' :: xs ->
+                    [ Contexts ] ++ contexts
 
                 _ ->
                     all

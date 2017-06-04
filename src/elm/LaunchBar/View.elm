@@ -5,6 +5,7 @@ import EditMode
 import Ext.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Fuzzy
 import Keyboard.Extra as Key exposing (Key(..))
+import LaunchBar
 import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -30,49 +31,22 @@ init m =
             span [] []
 
 
-type SearchEntity
-    = Context Context.Model
-    | Project Project.Model
-
-
 formView form m =
     let
         entityList =
             let
                 contexts =
                     Model.getActiveContexts m
-                        .|> Context
+                        .|> LaunchBar.Context
 
                 projects =
                     Model.getActiveProjects m
-                        .|> Project
+                        .|> LaunchBar.Project
             in
                 projects ++ contexts
 
-        getName entity =
-            case entity of
-                Project project ->
-                    Project.getName project
-
-                Context context ->
-                    Context.getName context
-
-        {-
-           isMatch =
-               getName >> String.dasherize >> String.startsWith (String.dasherize form.input)
-           matchingEntityName =
-              entityList
-                  |> List.find isMatch
-                  ?|> getName
-                  ?= ""
-        -}
         fuzzyResults =
-            entityList
-                .|> getName
-                >> String.toLower
-                >> Fuzzy.match [] [ " " ] (String.toLower form.input)
-                |> List.zip entityList
-                |> List.sortBy (Tuple.second >> (.score))
+            LaunchBar.getFuzzyResults form.input entityList
 
         maybeMatchingEntity =
             fuzzyResults
@@ -80,20 +54,12 @@ formView form m =
                 ?|> Tuple.first
 
         matchingEntityName =
-            maybeMatchingEntity ?|> getName ?= "Not found"
-
-        toViewType entity =
-            case entity of
-                Project project ->
-                    Model.projectView project
-
-                Context context ->
-                    Model.contextView context
+            maybeMatchingEntity ?|> LaunchBar.getName ?= "Not found"
 
         keyHandler { key } =
             case key of
                 Key.Enter ->
-                    maybeMatchingEntity ?|> toViewType >> Msg.SwitchView ?= commonMsg.noOp
+                    maybeMatchingEntity ?|> LaunchBar.toViewType >> Msg.SwitchView ?= commonMsg.noOp
 
                 _ ->
                     commonMsg.noOp

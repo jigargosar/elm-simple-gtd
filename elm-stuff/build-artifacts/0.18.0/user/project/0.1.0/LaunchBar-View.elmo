@@ -1,85 +1,37 @@
-var _user$project$LaunchBar_View$Project = function (a) {
-	return {ctor: 'Project', _0: a};
-};
-var _user$project$LaunchBar_View$Context = function (a) {
-	return {ctor: 'Context', _0: a};
-};
 var _user$project$LaunchBar_View$formView = F2(
 	function (form, m) {
-		var toViewType = function (entity) {
-			var _p0 = entity;
-			if (_p0.ctor === 'Project') {
-				return _user$project$Model$projectView(_p0._0);
-			} else {
-				return _user$project$Model$contextView(_p0._0);
-			}
-		};
-		var getName = function (entity) {
-			var _p1 = entity;
-			if (_p1.ctor === 'Project') {
-				return _user$project$Project$getName(_p1._0);
-			} else {
-				return _user$project$Context$getName(_p1._0);
-			}
-		};
 		var entityList = function () {
 			var projects = A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 				_user$project$Model$getActiveProjects(m),
-				_user$project$LaunchBar_View$Project);
+				_user$project$LaunchBar$Project);
 			var contexts = A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 				_user$project$Model$getActiveContexts(m),
-				_user$project$LaunchBar_View$Context);
+				_user$project$LaunchBar$Context);
 			return A2(_elm_lang$core$Basics_ops['++'], projects, contexts);
 		}();
-		var fuzzyResults = A2(
-			_elm_lang$core$List$sortBy,
-			function (_p2) {
-				return function (_) {
-					return _.score;
-				}(
-					_elm_lang$core$Tuple$second(_p2));
-			},
-			A2(
-				_elm_community$list_extra$List_Extra$zip,
-				entityList,
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-					entityList,
-					function (_p3) {
-						return A4(
-							_tripokey$elm_fuzzy$Fuzzy$match,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: ' ',
-								_1: {ctor: '[]'}
-							},
-							_elm_lang$core$String$toLower(form.input),
-							_elm_lang$core$String$toLower(
-								getName(_p3)));
-					})));
+		var fuzzyResults = A2(_user$project$LaunchBar$getFuzzyResults, form.input, entityList);
 		var maybeMatchingEntity = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_elm_lang$core$List$head(fuzzyResults),
 			_elm_lang$core$Tuple$first);
 		var matchingEntityName = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeMatchingEntity, getName),
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeMatchingEntity, _user$project$LaunchBar$getName),
 			'Not found');
-		var keyHandler = function (_p4) {
-			var _p5 = _p4;
-			var _p6 = _p5.key;
-			if (_p6.ctor === 'Enter') {
+		var keyHandler = function (_p0) {
+			var _p1 = _p0;
+			var _p2 = _p1.key;
+			if (_p2.ctor === 'Enter') {
 				return A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 						maybeMatchingEntity,
-						function (_p7) {
+						function (_p3) {
 							return _user$project$Msg$SwitchView(
-								toViewType(_p7));
+								_user$project$LaunchBar$toViewType(_p3));
 						}),
 					_user$project$Msg$commonMsg.noOp);
 			} else {
@@ -189,9 +141,9 @@ var _user$project$LaunchBar_View$formView = F2(
 			});
 	});
 var _user$project$LaunchBar_View$init = function (m) {
-	var _p8 = _user$project$Model$getEditMode(m);
-	if (_p8.ctor === 'LaunchBar') {
-		return A2(_user$project$LaunchBar_View$formView, _p8._0, m);
+	var _p4 = _user$project$Model$getEditMode(m);
+	if (_p4.ctor === 'LaunchBar') {
+		return A2(_user$project$LaunchBar_View$formView, _p4._0, m);
 	} else {
 		return A2(
 			_elm_lang$html$Html$span,

@@ -585,12 +585,16 @@ var _user$project$Main$update = function (msg) {
 								return function (_p53) {
 									return function () {
 										var _p54 = _p52._0;
-										if (_p54.ctor === 'Project') {
-											return _user$project$Main$map(
-												_user$project$Model$switchToProjectView(_p54._0));
-										} else {
-											return _user$project$Main$map(
-												_user$project$Model$switchToContextView(_p54._0));
+										switch (_p54.ctor) {
+											case 'Project':
+												return _user$project$Main$map(
+													_user$project$Model$switchToProjectView(_p54._0));
+											case 'Projects':
+												return _user$project$Main$map(
+													_user$project$Model$setEntityListViewType(_user$project$Entity$ProjectsView));
+											default:
+												return _user$project$Main$map(
+													_user$project$Model$switchToContextView(_p54._0));
 										}
 									}()(
 										A2(_user$project$Main$andThenUpdate, _user$project$Msg$DeactivateEditingMode, _p53));

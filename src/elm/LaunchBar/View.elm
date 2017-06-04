@@ -33,20 +33,8 @@ init m =
 
 formView form m =
     let
-        entityList =
-            let
-                contexts =
-                    Model.getActiveContexts m
-                        .|> LaunchBar.Context
-
-                projects =
-                    Model.getActiveProjects m
-                        .|> LaunchBar.Project
-            in
-                projects ++ contexts
-
         fuzzyResults =
-            LaunchBar.getFuzzyResults form.input entityList
+            LaunchBar.getFuzzyResults form.input m
 
         matchingEntity =
             fuzzyResults

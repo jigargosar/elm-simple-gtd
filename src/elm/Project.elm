@@ -127,7 +127,7 @@ init name now deviceId id =
 
 null : Model
 null =
-    constructor "" "" 0 0 False "" "<No Project>"
+    constructor "" "" 0 0 False "" "No Project"
 
 
 filterNull pred =

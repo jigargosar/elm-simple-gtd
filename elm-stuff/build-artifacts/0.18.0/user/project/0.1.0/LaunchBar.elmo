@@ -1,47 +1,103 @@
 var _user$project$LaunchBar$getName = function (entity) {
 	var _p0 = entity;
-	if (_p0.ctor === 'Project') {
-		return _user$project$Project$getName(_p0._0);
-	} else {
-		return _user$project$Context$getName(_p0._0);
+	switch (_p0.ctor) {
+		case 'Project':
+			return _user$project$Project$getName(_p0._0);
+		case 'Context':
+			return _user$project$Context$getName(_p0._0);
+		default:
+			return 'Projects';
 	}
 };
-var _user$project$LaunchBar$getFuzzyResults = F2(
-	function (needle, entityList) {
-		return A2(
-			_elm_lang$core$List$sortBy,
-			function (_p1) {
-				return function (_) {
-					return _.score;
-				}(
-					_elm_lang$core$Tuple$second(_p1));
-			},
-			A2(
-				_elm_community$list_extra$List_Extra$zip,
-				entityList,
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-					entityList,
-					function (_p2) {
-						return A4(
-							_tripokey$elm_fuzzy$Fuzzy$match,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: ' ',
-								_1: {ctor: '[]'}
-							},
-							_elm_lang$core$String$toLower(needle),
-							_elm_lang$core$String$toLower(
-								_user$project$LaunchBar$getName(_p2)));
-					})));
+var _user$project$LaunchBar$fuzzyMatch = F2(
+	function (needle, entity) {
+		var match = function (n) {
+			return A3(
+				_tripokey$elm_fuzzy$Fuzzy$match,
+				{ctor: '[]'},
+				{ctor: '[]'},
+				n);
+		};
+		var boiledNeedle = _elm_lang$core$String$toLower(needle);
+		var boiledHay = function (_p1) {
+			return _elm_lang$core$String$toLower(
+				_user$project$LaunchBar$getName(_p1));
+		}(entity);
+		var _p2 = {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$String$toList(needle),
+			_1: entity
+		};
+		if (((((_p2.ctor === '_Tuple2') && (_p2._0.ctor === '::')) && (_p2._0._0.valueOf() === '#')) && (_p2._0._1.ctor === '[]')) && (_p2._1.ctor === 'Projects')) {
+			return {
+				ctor: '_Tuple2',
+				_0: entity,
+				_1: A2(match, boiledNeedle, '#')
+			};
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: entity,
+				_1: A2(match, boiledNeedle, boiledHay)
+			};
+		}
 	});
+var _user$project$LaunchBar$Projects = {ctor: 'Projects'};
 var _user$project$LaunchBar$Project = function (a) {
 	return {ctor: 'Project', _0: a};
 };
 var _user$project$LaunchBar$Context = function (a) {
 	return {ctor: 'Context', _0: a};
 };
+var _user$project$LaunchBar$getFuzzyResults = F2(
+	function (needle, m) {
+		var projects = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+			_user$project$Model$getActiveProjects(m),
+			_user$project$LaunchBar$Project);
+		var contexts = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+			_user$project$Model$getActiveContexts(m),
+			_user$project$LaunchBar$Context);
+		var all = A2(
+			_elm_lang$core$Basics_ops['++'],
+			projects,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				contexts,
+				{
+					ctor: '::',
+					_0: _user$project$LaunchBar$Projects,
+					_1: {ctor: '[]'}
+				}));
+		var entityList = function () {
+			var _p3 = _elm_lang$core$String$toList(needle);
+			if ((_p3.ctor === '::') && (_p3._0.valueOf() === '#')) {
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					{
+						ctor: '::',
+						_0: _user$project$LaunchBar$Projects,
+						_1: {ctor: '[]'}
+					},
+					projects);
+			} else {
+				return all;
+			}
+		}();
+		return A2(
+			_elm_lang$core$List$sortBy,
+			function (_p4) {
+				return function (_) {
+					return _.score;
+				}(
+					_elm_lang$core$Tuple$second(_p4));
+			},
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				entityList,
+				_user$project$LaunchBar$fuzzyMatch(needle)));
+	});
 var _user$project$LaunchBar$defaultEntity = _user$project$LaunchBar$Context(_user$project$Context$null);
 var _user$project$LaunchBar$Open = {ctor: 'Open'};
 var _user$project$LaunchBar$OnInputChanged = F2(

@@ -1,17 +1,6 @@
 var _user$project$LaunchBar_View$formView = F2(
 	function (form, m) {
-		var entityList = function () {
-			var projects = A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				_user$project$Model$getActiveProjects(m),
-				_user$project$LaunchBar$Project);
-			var contexts = A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				_user$project$Model$getActiveContexts(m),
-				_user$project$LaunchBar$Context);
-			return A2(_elm_lang$core$Basics_ops['++'], projects, contexts);
-		}();
-		var fuzzyResults = A2(_user$project$LaunchBar$getFuzzyResults, form.input, entityList);
+		var fuzzyResults = A2(_user$project$LaunchBar$getFuzzyResults, form.input, m);
 		var matchingEntity = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			A2(

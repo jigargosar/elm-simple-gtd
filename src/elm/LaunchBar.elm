@@ -16,6 +16,7 @@ import Project
 type Entity
     = Context Context.Model
     | Project Project.Model
+    | Projects
 
 
 type Action
@@ -32,14 +33,53 @@ getName entity =
         Context context ->
             Context.getName context
 
+        Projects ->
+            "Projects"
 
-getFuzzyResults needle entityList =
-    entityList
-        .|> getName
-        >> String.toLower
-        >> Fuzzy.match [] [ " " ] (String.toLower needle)
-        |> List.zip entityList
-        |> List.sortBy (Tuple.second >> (.score))
+
+fuzzyMatch needle entity =
+    let
+        boiledHay =
+            entity |> getName >> String.toLower
+
+        boiledNeedle =
+            String.toLower needle
+
+        match n =
+            Fuzzy.match [] [] n
+    in
+        case ( String.toList needle, entity ) of
+            ( '#' :: [], Projects ) ->
+                ( entity, match boiledNeedle "#" )
+
+            _ ->
+                ( entity, match boiledNeedle boiledHay )
+
+
+getFuzzyResults needle m =
+    let
+        contexts =
+            Model.getActiveContexts m
+                .|> Context
+
+        projects =
+            Model.getActiveProjects m
+                .|> Project
+
+        all =
+            projects ++ contexts ++ [ Projects ]
+
+        entityList =
+            case String.toList needle of
+                '#' :: xs ->
+                    [ Projects ] ++ projects
+
+                _ ->
+                    all
+    in
+        entityList
+            .|> fuzzyMatch needle
+            |> List.sortBy (Tuple.second >> (.score))
 
 
 defaultEntity =

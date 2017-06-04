@@ -338,6 +338,9 @@ update msg =
                                     LaunchBar.Project project ->
                                         map (Model.switchToProjectView project)
 
+                                    LaunchBar.Projects ->
+                                        map (Model.setEntityListViewType Entity.ProjectsView)
+
                                     LaunchBar.Context context ->
                                         map (Model.switchToContextView context)
 

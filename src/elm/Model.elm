@@ -188,6 +188,10 @@ setIn big lens small =
     lens.set small big
 
 
+setWith lens smallFn big =
+    lens.set (smallFn big) big
+
+
 updateMaybe lens smallMaybeF big =
     let
         maybeSmallT =
@@ -461,7 +465,11 @@ isShowDetailsKeyPressed =
 
 activateLaunchBar : ModelF
 activateLaunchBar =
-    editMode.set (LaunchBar.Form.create |> EditMode.LaunchBar)
+    setWith editMode (.now >> LaunchBar.Form.create >> EditMode.LaunchBar)
+
+
+updateLaunchBarInput text form =
+    setWith editMode (.now >> LaunchBar.Form.updateInput text form >> EditMode.LaunchBar)
 
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF

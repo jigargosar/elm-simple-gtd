@@ -8,6 +8,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Time exposing (Time)
 
 
 _ =
@@ -15,12 +16,17 @@ _ =
 
 
 type alias Model =
-    { input : String }
+    { input : String
+    , updatedAt : Time
+    }
 
 
-create =
-    { input = "" }
+create now =
+    { input = ""
+    , updatedAt = now
+    }
 
 
-updateInput input model =
+updateInput input model now =
     { model | input = input }
+        |> (\model -> { model | updatedAt = now })

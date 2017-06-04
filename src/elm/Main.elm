@@ -333,11 +333,8 @@ update msg =
                     map (Model.activateLaunchBar)
                         >> autoFocusInputCmd
 
-                UpdateLaunchBarInput form input ->
-                    map
-                        (Model.setEditMode
-                            (LaunchBar.Form.updateInput input form |> EditMode.LaunchBar)
-                        )
+                UpdateLaunchBarInput form text ->
+                    map (Model.updateLaunchBarInput text form)
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key

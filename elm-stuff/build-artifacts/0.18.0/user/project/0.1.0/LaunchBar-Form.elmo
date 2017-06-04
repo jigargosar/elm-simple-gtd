@@ -27,7 +27,6 @@ var _user$project$LaunchBar_Form$updateInput = F3(
 var _user$project$LaunchBar_Form$create = function (now) {
 	return {input: '', updatedAt: now};
 };
-var _user$project$LaunchBar_Form$_p1 = 1;
 var _user$project$LaunchBar_Form$Model = F2(
 	function (a, b) {
 		return {input: a, updatedAt: b};

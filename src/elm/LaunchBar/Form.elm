@@ -12,10 +12,6 @@ import Maybe.Extra as Maybe
 import Time exposing (Time)
 
 
-_ =
-    1
-
-
 type alias Model =
     { input : String
     , updatedAt : Time

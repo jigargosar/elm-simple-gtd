@@ -1,4 +1,4 @@
-## Upcoming
+## v0.17.0 - 2017-06-04
 * [minor] activate launch bar with `/` key for quick access to contexts and project. 
 
 ## v0.16.26 - 2017-06-03

@@ -1,28 +1,20 @@
-var _user$project$LaunchBar$toViewType = function (entity) {
+var _user$project$LaunchBar$getName = function (entity) {
 	var _p0 = entity;
 	if (_p0.ctor === 'Project') {
-		return _user$project$Model$projectView(_p0._0);
+		return _user$project$Project$getName(_p0._0);
 	} else {
-		return _user$project$Model$contextView(_p0._0);
-	}
-};
-var _user$project$LaunchBar$getName = function (entity) {
-	var _p1 = entity;
-	if (_p1.ctor === 'Project') {
-		return _user$project$Project$getName(_p1._0);
-	} else {
-		return _user$project$Context$getName(_p1._0);
+		return _user$project$Context$getName(_p0._0);
 	}
 };
 var _user$project$LaunchBar$getFuzzyResults = F2(
 	function (needle, entityList) {
 		return A2(
 			_elm_lang$core$List$sortBy,
-			function (_p2) {
+			function (_p1) {
 				return function (_) {
 					return _.score;
 				}(
-					_elm_lang$core$Tuple$second(_p2));
+					_elm_lang$core$Tuple$second(_p1));
 			},
 			A2(
 				_elm_community$list_extra$List_Extra$zip,
@@ -30,7 +22,7 @@ var _user$project$LaunchBar$getFuzzyResults = F2(
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 					entityList,
-					function (_p3) {
+					function (_p2) {
 						return A4(
 							_tripokey$elm_fuzzy$Fuzzy$match,
 							{ctor: '[]'},
@@ -41,7 +33,7 @@ var _user$project$LaunchBar$getFuzzyResults = F2(
 							},
 							_elm_lang$core$String$toLower(needle),
 							_elm_lang$core$String$toLower(
-								_user$project$LaunchBar$getName(_p3)));
+								_user$project$LaunchBar$getName(_p2)));
 					})));
 	});
 var _user$project$LaunchBar$Project = function (a) {
@@ -49,4 +41,8 @@ var _user$project$LaunchBar$Project = function (a) {
 };
 var _user$project$LaunchBar$Context = function (a) {
 	return {ctor: 'Context', _0: a};
+};
+var _user$project$LaunchBar$defaultEntity = _user$project$LaunchBar$Context(_user$project$Context$null);
+var _user$project$LaunchBar$OnEnter = function (a) {
+	return {ctor: 'OnEnter', _0: a};
 };

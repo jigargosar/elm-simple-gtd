@@ -8,6 +8,7 @@ import EditMode
 import Entity exposing (Entity)
 import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
+import LaunchBar
 import Model exposing (..)
 import Project
 import ReminderOverlay
@@ -79,6 +80,7 @@ type Msg
     | OnEntityAction Entity Entity.Action
     | StartLaunchBar
     | UpdateLaunchBarInput LaunchBar.Form.Model String
+    | OnLaunchBarAction LaunchBar.Action
 
 
 toCmds : List Msg -> Cmd Msg

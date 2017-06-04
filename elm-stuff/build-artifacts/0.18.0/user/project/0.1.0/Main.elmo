@@ -585,6 +585,21 @@ var _user$project$Main$update = function (msg) {
 					case 'UpdateLaunchBarInput':
 						return _user$project$Main$map(
 							A2(_user$project$Model$updateLaunchBarInput, _p15._1, _p15._0));
+					case 'OnLaunchBarAction':
+						var _p53 = _p15._0;
+						return function (_p54) {
+							return function () {
+								var _p55 = _p53._0;
+								if (_p55.ctor === 'Project') {
+									return _user$project$Main$map(
+										_user$project$Model$switchToProjectView(_p55._0));
+								} else {
+									return _user$project$Main$map(
+										_user$project$Model$switchToContextView(_p55._0));
+								}
+							}()(
+								A2(_user$project$Main$andThenUpdate, _user$project$Msg$DeactivateEditingMode, _p54));
+						};
 					default:
 						return _user$project$Main$onGlobalKeyUp(_p15._0);
 				}
@@ -592,22 +607,22 @@ var _user$project$Main$update = function (msg) {
 				_Fresheyeball$elm_return$Return$singleton(_p14)));
 	};
 };
-var _user$project$Main$andThenUpdate = function (_p53) {
+var _user$project$Main$andThenUpdate = function (_p56) {
 	return _Fresheyeball$elm_return$Return$andThen(
-		_user$project$Main$update(_p53));
+		_user$project$Main$update(_p56));
 };
 var _user$project$Main$onGlobalKeyUp = function (key) {
 	return A2(
 		_user$project$Ext_Return$with,
 		_user$project$Model$getEditMode,
 		function (editMode) {
-			var _p54 = {ctor: '_Tuple2', _0: key, _1: editMode};
-			_v7_2:
+			var _p57 = {ctor: '_Tuple2', _0: key, _1: editMode};
+			_v9_2:
 			do {
-				if (_p54.ctor === '_Tuple2') {
-					if (_p54._1.ctor === 'None') {
-						var _p55 = _p54._0;
-						switch (_p55.ctor) {
+				if (_p57.ctor === '_Tuple2') {
+					if (_p57._1.ctor === 'None') {
+						var _p58 = _p57._0;
+						switch (_p58.ctor) {
 							case 'Escape':
 								return _Fresheyeball$elm_return$Return$map(_user$project$Model$clearSelection);
 							case 'CharQ':
@@ -615,20 +630,20 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 							case 'CharI':
 								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodoForInbox);
 							case 'Slash':
-								var _p56 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
+								var _p59 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
 								return _user$project$Main$andThenUpdate(_user$project$Msg$StartLaunchBar);
 							default:
 								return _elm_lang$core$Basics$identity;
 						}
 					} else {
-						if (_p54._0.ctor === 'Escape') {
+						if (_p57._0.ctor === 'Escape') {
 							return _user$project$Main$andThenUpdate(_user$project$Msg$DeactivateEditingMode);
 						} else {
-							break _v7_2;
+							break _v9_2;
 						}
 					}
 				} else {
-					break _v7_2;
+					break _v9_2;
 				}
 			} while(false);
 			return _elm_lang$core$Basics$identity;
@@ -636,9 +651,9 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 };
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p57) {
+		function (_p60) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p57));
+				_user$project$Main$update(_p60));
 		}));
 var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 	{delta2url: _user$project$Routes$delta2hash, location2messages: _user$project$Routes$hash2messages, init: _user$project$Main$init, update: _user$project$Main$update, view: _user$project$View$init, subscriptions: _user$project$Main$subscriptions})(
@@ -693,9 +708,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 				A2(_elm_lang$core$Json_Decode$field, 'developmentMode', _elm_lang$core$Json_Decode$bool));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$andThenUpdateAll = function (_p58) {
+var _user$project$Main$andThenUpdateAll = function (_p61) {
 	return _user$project$Main$andThenUpdate(
-		_user$project$Msg$OnMsgList(_p58));
+		_user$project$Msg$OnMsgList(_p61));
 };
 var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',

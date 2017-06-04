@@ -10,6 +10,7 @@ import Ext.Debug
 import Ext.Keyboard as Keyboard exposing (Key)
 import Ext.Return as Return
 import Firebase
+import LaunchBar
 import LaunchBar.Form
 import Project
 import Ext.Random as Random
@@ -335,6 +336,17 @@ update msg =
 
                 UpdateLaunchBarInput form text ->
                     map (Model.updateLaunchBarInput text form)
+
+                OnLaunchBarAction action ->
+                    case action of
+                        LaunchBar.OnEnter entity ->
+                            andThenUpdate DeactivateEditingMode
+                                >> case entity of
+                                    LaunchBar.Project project ->
+                                        map (Model.switchToProjectView project)
+
+                                    LaunchBar.Context context ->
+                                        map (Model.switchToContextView context)
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key

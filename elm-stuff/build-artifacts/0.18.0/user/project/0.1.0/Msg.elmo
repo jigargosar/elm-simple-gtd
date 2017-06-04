@@ -1,4 +1,7 @@
 var _user$project$Msg$toCmd = _user$project$Ext_Cmd$toCmd;
+var _user$project$Msg$OnLaunchBarAction = function (a) {
+	return {ctor: 'OnLaunchBarAction', _0: a};
+};
 var _user$project$Msg$UpdateLaunchBarInput = F2(
 	function (a, b) {
 		return {ctor: 'UpdateLaunchBarInput', _0: a, _1: b};

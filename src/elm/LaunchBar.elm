@@ -12,9 +12,13 @@ import Maybe.Extra as Maybe
 import Project
 
 
-type SearchEntity
+type Entity
     = Context Context.Model
     | Project Project.Model
+
+
+type Action
+    = OnEnter Entity
 
 
 getName entity =
@@ -35,10 +39,5 @@ getFuzzyResults needle entityList =
         |> List.sortBy (Tuple.second >> (.score))
 
 
-toViewType entity =
-    case entity of
-        Project project ->
-            Model.projectView project
-
-        Context context ->
-            Model.contextView context
+defaultEntity =
+    Context Context.null

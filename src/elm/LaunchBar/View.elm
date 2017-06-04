@@ -48,18 +48,19 @@ formView form m =
         fuzzyResults =
             LaunchBar.getFuzzyResults form.input entityList
 
-        maybeMatchingEntity =
+        matchingEntity =
             fuzzyResults
                 |> List.head
                 ?|> Tuple.first
+                ?= LaunchBar.defaultEntity
 
         matchingEntityName =
-            maybeMatchingEntity ?|> LaunchBar.getName ?= "Not found"
+            matchingEntity |> LaunchBar.getName
 
         keyHandler { key } =
             case key of
                 Key.Enter ->
-                    maybeMatchingEntity ?|> LaunchBar.toViewType >> Msg.SwitchView ?= commonMsg.noOp
+                    matchingEntity |> LaunchBar.OnEnter |> Msg.OnLaunchBarAction
 
                 _ ->
                     commonMsg.noOp

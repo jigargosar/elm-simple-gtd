@@ -24,8 +24,12 @@ var _user$project$EntityList_GroupView$editEntityView = F3(
 									_0: _elm_lang$html$Html_Attributes$value(form.name),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onInput(vm.onNameChanged),
-										_1: {ctor: '[]'}
+										_0: _elm_community$html_extra$Html_Events_Extra$onEnter(_user$project$Msg$SaveCurrentForm),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onInput(vm.onNameChanged),
+											_1: {ctor: '[]'}
+										}
 									}
 								}
 							}

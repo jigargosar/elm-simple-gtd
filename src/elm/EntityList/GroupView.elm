@@ -5,7 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Attributes.Extra exposing (stringProperty)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
+import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import Msg
 import Polymer.Paper as Paper
 import Svg.Events exposing (onFocusIn)
@@ -62,6 +62,7 @@ editEntityView tabindexAV vm form =
             [ class "auto-focus"
             , stringProperty "label" "Name"
             , value (form.name)
+            , onEnter Msg.SaveCurrentForm
             , onInput vm.onNameChanged
             ]
             []

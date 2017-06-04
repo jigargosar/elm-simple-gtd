@@ -1,3 +1,6 @@
+## Upcoming
+* [patch]: context/prj : enter key should save form 
+
 ## v0.17.0 - 2017-06-04
 * [minor] activate launch bar with `/` key for quick access to contexts and project. 
 

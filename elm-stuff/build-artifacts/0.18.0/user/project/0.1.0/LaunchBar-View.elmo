@@ -1,5 +1,42 @@
+var _user$project$LaunchBar_View$Project = function (a) {
+	return {ctor: 'Project', _0: a};
+};
+var _user$project$LaunchBar_View$Context = function (a) {
+	return {ctor: 'Context', _0: a};
+};
 var _user$project$LaunchBar_View$formView = F2(
 	function (form, m) {
+		var getName = function (entity) {
+			var _p0 = entity;
+			if (_p0.ctor === 'Project') {
+				return _user$project$Project$getName(_p0._0);
+			} else {
+				return _user$project$Context$getName(_p0._0);
+			}
+		};
+		var isMatch = function (_p1) {
+			return A2(
+				_elm_lang$core$String$startsWith,
+				_elm_community$string_extra$String_Extra$underscored(form.input),
+				_elm_community$string_extra$String_Extra$underscored(
+					getName(_p1)));
+		};
+		var projects = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+			_user$project$Model$getActiveProjects(m),
+			_user$project$LaunchBar_View$Project);
+		var contexts = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+			_user$project$Model$getActiveContexts(m),
+			_user$project$LaunchBar_View$Context);
+		var entityList = A2(_elm_lang$core$Basics_ops['++'], projects, contexts);
+		var matchingEntityName = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(_elm_community$list_extra$List_Extra$find, isMatch, entityList),
+				getName),
+			'');
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -8,7 +45,7 @@ var _user$project$LaunchBar_View$formView = F2(
 				_1: {
 					ctor: '::',
 					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-						function (_p0) {
+						function (_p2) {
 							return _user$project$Msg$commonMsg.noOp;
 						}),
 					_1: {
@@ -46,7 +83,7 @@ var _user$project$LaunchBar_View$formView = F2(
 								_0: _elm_lang$html$Html$text('Input:'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html$text(form.input),
+									_0: _elm_lang$html$Html$text(matchingEntityName),
 									_1: {ctor: '[]'}
 								}
 							}),
@@ -79,9 +116,9 @@ var _user$project$LaunchBar_View$formView = F2(
 			});
 	});
 var _user$project$LaunchBar_View$init = function (m) {
-	var _p1 = _user$project$Model$getEditMode(m);
-	if (_p1.ctor === 'LaunchBar') {
-		return A2(_user$project$LaunchBar_View$formView, _p1._0, m);
+	var _p3 = _user$project$Model$getEditMode(m);
+	if (_p3.ctor === 'LaunchBar') {
+		return A2(_user$project$LaunchBar_View$formView, _p3._0, m);
 	} else {
 		return A2(
 			_elm_lang$html$Html$span,

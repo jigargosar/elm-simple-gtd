@@ -1,4 +1,4 @@
-var _user$project$LaunchBar_Form$updateKey = F2(
+var _user$project$LaunchBar_Form$updateInput = F2(
 	function (input, model) {
 		return _elm_lang$core$Native_Utils.update(
 			model,

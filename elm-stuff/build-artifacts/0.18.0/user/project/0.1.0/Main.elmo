@@ -586,7 +586,7 @@ var _user$project$Main$update = function (msg) {
 						return _user$project$Main$map(
 							_user$project$Model$setEditMode(
 								_user$project$EditMode$LaunchBar(
-									A2(_user$project$LaunchBar_Form$updateKey, _p15._1, _p15._0))));
+									A2(_user$project$LaunchBar_Form$updateInput, _p15._1, _p15._0))));
 					default:
 						return _user$project$Main$onGlobalKeyUp(_p15._0);
 				}

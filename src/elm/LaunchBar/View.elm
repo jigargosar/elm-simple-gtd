@@ -3,6 +3,8 @@ module LaunchBar.View exposing (..)
 import Context
 import EditMode
 import Ext.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
+import Fuzzy
+import Keyboard.Extra as Key exposing (Key(..))
 import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -35,16 +37,17 @@ type SearchEntity
 
 formView form m =
     let
-        contexts =
-            Model.getActiveContexts m
-                .|> Context
-
-        projects =
-            Model.getActiveProjects m
-                .|> Project
-
         entityList =
-            projects ++ contexts
+            let
+                contexts =
+                    Model.getActiveContexts m
+                        .|> Context
+
+                projects =
+                    Model.getActiveProjects m
+                        .|> Project
+            in
+                projects ++ contexts
 
         getName entity =
             case entity of
@@ -54,27 +57,61 @@ formView form m =
                 Context context ->
                     Context.getName context
 
-        isMatch =
-            getName >> String.underscored >> String.startsWith (String.underscored form.input)
+        {-
+           isMatch =
+               getName >> String.dasherize >> String.startsWith (String.dasherize form.input)
+           matchingEntityName =
+              entityList
+                  |> List.find isMatch
+                  ?|> getName
+                  ?= ""
+        -}
+        fuzzyResults =
+            entityList
+                .|> getName
+                >> String.toLower
+                >> Fuzzy.match [] [ " " ] (String.toLower form.input)
+                |> List.zip entityList
+                |> List.sortBy (Tuple.second >> (.score))
+
+        maybeMatchingEntity =
+            fuzzyResults
+                |> List.head
+                ?|> Tuple.first
 
         matchingEntityName =
-            entityList
-                |> List.find isMatch
-                ?|> getName
-                ?= ""
+            maybeMatchingEntity ?|> getName ?= "Not found"
+
+        toViewType entity =
+            case entity of
+                Project project ->
+                    Model.projectView project
+
+                Context context ->
+                    Model.contextView context
+
+        keyHandler { key } =
+            case key of
+                Key.Enter ->
+                    maybeMatchingEntity ?|> toViewType >> Msg.SwitchView ?= commonMsg.noOp
+
+                _ ->
+                    commonMsg.noOp
     in
         div
-            [ id "modal-background"
-            , onKeyDownStopPropagation (\_ -> commonMsg.noOp)
+            [ class "modal-background"
+            , onKeyDownStopPropagation (keyHandler)
             , onClickStopPropagation Msg.DeactivateEditingMode
             ]
             [ div
                 [ id "launch-bar-container"
+                , class "layout horizontal justified"
                 , attribute "onclick"
                     "console.log('focusing');document.getElementById('hidden-input').focus(); event.stopPropagation(); event.preventDefault();"
                 , onInput (Msg.UpdateLaunchBarInput form)
                 ]
-                [ div [] [ text "Input:", text matchingEntityName ]
+                [ div [ class "" ] [ text "", text matchingEntityName ]
+                , div [ class "" ] [ text "", text form.input ]
                 , input
                     [ id "hidden-input"
                     , class "auto-focus"

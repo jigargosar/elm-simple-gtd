@@ -562,7 +562,7 @@ saveCurrentForm model =
             { model | pouchDBRemoteSyncURI = form.uri }
                 |> Return.singleton
 
-        EditMode.LaunchBar form->
+        EditMode.LaunchBar form ->
             model
                 |> Return.singleton
 
@@ -821,12 +821,20 @@ switchToView mainViewType model =
         |> clearSelection
 
 
+projectView =
+    Document.getId >> Entity.ProjectView >> EntityListView
+
+
+contextView =
+    Document.getId >> Entity.ContextView >> EntityListView
+
+
 switchToProjectView =
-    Document.getId >> Entity.ProjectView >> EntityListView >> switchToView
+    projectView >> switchToView
 
 
 switchToContextView =
-    Document.getId >> Entity.ContextView >> EntityListView >> switchToView
+    contextView >> switchToView
 
 
 setEntityListViewType =

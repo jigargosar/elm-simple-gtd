@@ -6,48 +6,94 @@ var _user$project$LaunchBar_View$Context = function (a) {
 };
 var _user$project$LaunchBar_View$formView = F2(
 	function (form, m) {
-		var getName = function (entity) {
+		var toViewType = function (entity) {
 			var _p0 = entity;
 			if (_p0.ctor === 'Project') {
-				return _user$project$Project$getName(_p0._0);
+				return _user$project$Model$projectView(_p0._0);
 			} else {
-				return _user$project$Context$getName(_p0._0);
+				return _user$project$Model$contextView(_p0._0);
 			}
 		};
-		var isMatch = function (_p1) {
-			return A2(
-				_elm_lang$core$String$startsWith,
-				_elm_community$string_extra$String_Extra$underscored(form.input),
-				_elm_community$string_extra$String_Extra$underscored(
-					getName(_p1)));
+		var getName = function (entity) {
+			var _p1 = entity;
+			if (_p1.ctor === 'Project') {
+				return _user$project$Project$getName(_p1._0);
+			} else {
+				return _user$project$Context$getName(_p1._0);
+			}
 		};
-		var projects = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-			_user$project$Model$getActiveProjects(m),
-			_user$project$LaunchBar_View$Project);
-		var contexts = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-			_user$project$Model$getActiveContexts(m),
-			_user$project$LaunchBar_View$Context);
-		var entityList = A2(_elm_lang$core$Basics_ops['++'], projects, contexts);
+		var entityList = function () {
+			var projects = A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				_user$project$Model$getActiveProjects(m),
+				_user$project$LaunchBar_View$Project);
+			var contexts = A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+				_user$project$Model$getActiveContexts(m),
+				_user$project$LaunchBar_View$Context);
+			return A2(_elm_lang$core$Basics_ops['++'], projects, contexts);
+		}();
+		var fuzzyResults = A2(
+			_elm_lang$core$List$sortBy,
+			function (_p2) {
+				return function (_) {
+					return _.score;
+				}(
+					_elm_lang$core$Tuple$second(_p2));
+			},
+			A2(
+				_elm_community$list_extra$List_Extra$zip,
+				entityList,
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+					entityList,
+					function (_p3) {
+						return A4(
+							_tripokey$elm_fuzzy$Fuzzy$match,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: ' ',
+								_1: {ctor: '[]'}
+							},
+							_elm_lang$core$String$toLower(form.input),
+							_elm_lang$core$String$toLower(
+								getName(_p3)));
+					})));
+		var maybeMatchingEntity = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_elm_lang$core$List$head(fuzzyResults),
+			_elm_lang$core$Tuple$first);
 		var matchingEntityName = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				A2(_elm_community$list_extra$List_Extra$find, isMatch, entityList),
-				getName),
-			'');
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeMatchingEntity, getName),
+			'Not found');
+		var keyHandler = function (_p4) {
+			var _p5 = _p4;
+			var _p6 = _p5.key;
+			if (_p6.ctor === 'Enter') {
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						maybeMatchingEntity,
+						function (_p7) {
+							return _user$project$Msg$SwitchView(
+								toViewType(_p7));
+						}),
+					_user$project$Msg$commonMsg.noOp);
+			} else {
+				return _user$project$Msg$commonMsg.noOp;
+			}
+		};
 		return A2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('modal-background'),
+				_0: _elm_lang$html$Html_Attributes$class('modal-background'),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-						function (_p2) {
-							return _user$project$Msg$commonMsg.noOp;
-						}),
+					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(keyHandler),
 					_1: {
 						ctor: '::',
 						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Msg$DeactivateEditingMode),
@@ -64,12 +110,16 @@ var _user$project$LaunchBar_View$formView = F2(
 						_0: _elm_lang$html$Html_Attributes$id('launch-bar-container'),
 						_1: {
 							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'onclick', 'console.log(\'focusing\');document.getElementById(\'hidden-input\').focus(); event.stopPropagation(); event.preventDefault();'),
+							_0: _elm_lang$html$Html_Attributes$class('layout horizontal justified'),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onInput(
-									_user$project$Msg$UpdateLaunchBarInput(form)),
-								_1: {ctor: '[]'}
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'onclick', 'console.log(\'focusing\');document.getElementById(\'hidden-input\').focus(); event.stopPropagation(); event.preventDefault();'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onInput(
+										_user$project$Msg$UpdateLaunchBarInput(form)),
+									_1: {ctor: '[]'}
+								}
 							}
 						}
 					},
@@ -77,10 +127,14 @@ var _user$project$LaunchBar_View$formView = F2(
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$div,
-							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Input:'),
+								_0: _elm_lang$html$Html_Attributes$class(''),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(''),
 								_1: {
 									ctor: '::',
 									_0: _elm_lang$html$Html$text(matchingEntityName),
@@ -90,35 +144,54 @@ var _user$project$LaunchBar_View$formView = F2(
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$input,
+								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$id('hidden-input'),
+									_0: _elm_lang$html$Html_Attributes$class(''),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(''),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+										_0: _elm_lang$html$Html$text(form.input),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$id('hidden-input'),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$autofocus(true),
+											_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$value(form.input),
-												_1: {ctor: '[]'}
+												_0: _elm_lang$html$Html_Attributes$autofocus(true),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$value(form.input),
+													_1: {ctor: '[]'}
+												}
 											}
 										}
-									}
-								},
-								{ctor: '[]'}),
-							_1: {ctor: '[]'}
+									},
+									{ctor: '[]'}),
+								_1: {ctor: '[]'}
+							}
 						}
 					}),
 				_1: {ctor: '[]'}
 			});
 	});
 var _user$project$LaunchBar_View$init = function (m) {
-	var _p3 = _user$project$Model$getEditMode(m);
-	if (_p3.ctor === 'LaunchBar') {
-		return A2(_user$project$LaunchBar_View$formView, _p3._0, m);
+	var _p8 = _user$project$Model$getEditMode(m);
+	if (_p8.ctor === 'LaunchBar') {
+		return A2(_user$project$LaunchBar_View$formView, _p8._0, m);
 	} else {
 		return A2(
 			_elm_lang$html$Html$span,

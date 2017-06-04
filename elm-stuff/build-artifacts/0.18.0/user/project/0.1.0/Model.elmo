@@ -1508,20 +1508,23 @@ var _user$project$Model$init = function (flags) {
 	};
 	return model;
 };
-var _user$project$Model$switchToProjectView = function (_p78) {
+var _user$project$Model$projectView = function (_p78) {
+	return _user$project$Model$EntityListView(
+		_user$project$Entity$ProjectView(
+			_user$project$Document$getId(_p78)));
+};
+var _user$project$Model$switchToProjectView = function (_p79) {
 	return _user$project$Model$switchToView(
-		_user$project$Model$EntityListView(
-			_user$project$Entity$ProjectView(
-				_user$project$Document$getId(_p78))));
+		_user$project$Model$projectView(_p79));
 };
 var _user$project$Model$createAndEditNewProject = function (model) {
-	return function (_p79) {
-		var _p80 = _p79;
-		var _p81 = _p80._0;
+	return function (_p80) {
+		var _p81 = _p80;
+		var _p82 = _p81._0;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Entity$ProjectEntity(_p81),
-			A2(_user$project$Model$switchToProjectView, _p81, _p80._1));
+			_user$project$Entity$ProjectEntity(_p82),
+			A2(_user$project$Model$switchToProjectView, _p82, _p81._1));
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -1531,20 +1534,23 @@ var _user$project$Model$createAndEditNewProject = function (model) {
 				A2(_user$project$Project$init, '<New Project>', model.now),
 				model.projectStore)));
 };
-var _user$project$Model$switchToContextView = function (_p82) {
+var _user$project$Model$contextView = function (_p83) {
+	return _user$project$Model$EntityListView(
+		_user$project$Entity$ContextView(
+			_user$project$Document$getId(_p83)));
+};
+var _user$project$Model$switchToContextView = function (_p84) {
 	return _user$project$Model$switchToView(
-		_user$project$Model$EntityListView(
-			_user$project$Entity$ContextView(
-				_user$project$Document$getId(_p82))));
+		_user$project$Model$contextView(_p84));
 };
 var _user$project$Model$createAndEditNewContext = function (model) {
-	return function (_p83) {
-		var _p84 = _p83;
-		var _p85 = _p84._0;
+	return function (_p85) {
+		var _p86 = _p85;
+		var _p87 = _p86._0;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Entity$ContextEntity(_p85),
-			A2(_user$project$Model$switchToContextView, _p85, _p84._1));
+			_user$project$Entity$ContextEntity(_p87),
+			A2(_user$project$Model$switchToContextView, _p87, _p86._1));
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -1554,7 +1560,7 @@ var _user$project$Model$createAndEditNewContext = function (model) {
 				A2(_user$project$Context$init, '<New Context>', model.now),
 				model.contextStore)));
 };
-var _user$project$Model$setEntityListViewType = function (_p86) {
+var _user$project$Model$setEntityListViewType = function (_p88) {
 	return _user$project$Model$switchToView(
-		_user$project$Model$EntityListView(_p86));
+		_user$project$Model$EntityListView(_p88));
 };

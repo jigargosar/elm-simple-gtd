@@ -245,9 +245,9 @@ init flags =
             , developmentMode = flags.developmentMode
             , selectedEntityIdSet = Set.empty
             , layout = { narrow = False, forceNarrow = False }
-            , maybeFocusedEntity = Nothing
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
+            , maybeFocusedEntity = Nothing
             , focusInEntity = inboxEntity
             , firebaseClient = firebaseClient
             }

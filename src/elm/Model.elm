@@ -122,7 +122,6 @@ type alias Model =
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken
     , developmentMode : Bool
-    , focusedEntityInfo : EntityFocus
     , selectedEntityIdSet : Set Document.Id
     , layout : Layout
     , maybeFocusedEntity : Maybe Entity
@@ -137,10 +136,6 @@ type alias Layout =
     { narrow : Bool
     , forceNarrow : Bool
     }
-
-
-type alias EntityFocus =
-    { id : Document.Id }
 
 
 type alias ModelF =
@@ -260,7 +255,6 @@ init flags =
             , user = Firebase.NotLoggedIn
             , fcmToken = Nothing
             , developmentMode = flags.developmentMode
-            , focusedEntityInfo = { id = "" }
             , selectedEntityIdSet = Set.empty
             , layout = { narrow = False, forceNarrow = False }
             , maybeFocusedEntity = Nothing
@@ -796,9 +790,6 @@ updateTodoAndMaybeAlsoSelected action todoId model =
                 model.selectedEntityIdSet
             else
                 Set.singleton todoId
-
-        _ =
-            getFocusInEntityIndex
     in
         model |> updateAllTodos action idSet
 
@@ -1035,36 +1026,18 @@ updateKeyboardState updater model =
 -- Focus Functions
 
 
-setFocusInEntityByIndex entityList index model =
+setFocusInEntityByIndex index entityList =
     let
         maybeEntity =
             List.clampIndex index entityList
                 |> (List.getAt # entityList)
                 |> Maybe.orElse (List.head entityList)
-
-        focusedEntityId =
-            maybeEntity
-                ?|> getEntityId
-                ?= ""
-
-        focusedEntityInfo =
-            { id = focusedEntityId }
     in
-        { model | focusedEntityInfo = focusedEntityInfo }
-            |> setMaybeFocusInEntity maybeEntity
-
-
-setFocusInEntityWithId id model =
-    let
-        focusedEntityInfo =
-            model.focusedEntityInfo
-    in
-        { model | focusedEntityInfo = { focusedEntityInfo | id = id } }
+        setMaybeFocusInEntity maybeEntity
 
 
 setFocusInEntity entity =
-    setFocusInEntityWithId (getEntityId entity)
-        >> set focusInEntity entity
+    set focusInEntity entity
 
 
 setMaybeFocusInEntity maybeEntity model =
@@ -1094,14 +1067,14 @@ focusPrevEntity : List Entity -> ModelF
 focusPrevEntity entityList model =
     getFocusInEntityIndex entityList model
         |> andThenSubtract 1
-        |> (setFocusInEntityByIndex entityList # model)
+        |> (setFocusInEntityByIndex # entityList # model)
 
 
 focusNextEntity : List Entity -> ModelF
 focusNextEntity entityList model =
     getFocusInEntityIndex entityList model
         |> add 1
-        |> (setFocusInEntityByIndex entityList # model)
+        |> (setFocusInEntityByIndex # entityList # model)
 
 
 
@@ -1161,8 +1134,8 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
     let
         setFocusInIndex index =
             setFocusInEntityByIndex
-                (getCurrentViewEntityList model)
                 index
+                (getCurrentViewEntityList model)
     in
         model
             |> case indexTuple of

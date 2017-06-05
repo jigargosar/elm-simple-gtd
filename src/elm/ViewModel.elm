@@ -13,7 +13,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Model exposing (EntityFocus, ViewType(..))
+import Model exposing (ViewType(..))
 import View.Shared exposing (SharedViewModel)
 
 

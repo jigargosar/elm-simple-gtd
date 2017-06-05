@@ -19,16 +19,6 @@ var _user$project$EntityList_View$getFocusInId = F2(
 				_user$project$Model$getEntityId),
 			'');
 	});
-var _user$project$EntityList_View$isCursorAtEntityInEntityList = F2(
-	function (entityList, viewModel) {
-		var focusedId = A2(_user$project$EntityList_View$getFocusInId, entityList, viewModel);
-		return function (_p1) {
-			return A2(
-				_user$project$Ext_Function$equals,
-				focusedId,
-				_user$project$Model$getEntityId(_p1));
-		};
-	});
 var _user$project$EntityList_View$EntityViewModel = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {id: a, onFocusIn: b, onFocus: c, onBlur: d, startEditingMsg: e, toggleDeleteMsg: f, startEditingMsg: g, tabIndexAV: h};
@@ -44,13 +34,40 @@ var _user$project$EntityList_View$Context = function (a) {
 };
 var _user$project$EntityList_View$updateCount = function (vmList) {
 	return function (list) {
-		var _p2 = list;
+		var _p1 = list;
 		_v0_2:
 		do {
-			if ((_p2.ctor === '::') && (_p2._1.ctor === '::')) {
-				switch (_p2._0.ctor) {
+			if ((_p1.ctor === '::') && (_p1._1.ctor === '::')) {
+				switch (_p1._0.ctor) {
 					case 'Context':
-						if (_p2._1._0.ctor === 'Project') {
+						if (_p1._1._0.ctor === 'Project') {
+							var isTodo = function (vm) {
+								var _p2 = vm;
+								if (_p2.ctor === 'Todo') {
+									return true;
+								} else {
+									return false;
+								}
+							};
+							var totalTodoCount = _elm_lang$core$List$length(
+								A2(_elm_lang$core$List$filter, isTodo, vmList));
+							return {
+								ctor: '::',
+								_0: _user$project$EntityList_View$Context(
+									_elm_lang$core$Native_Utils.update(
+										_p1._0._0,
+										{count: totalTodoCount})),
+								_1: {
+									ctor: '::',
+									_0: _user$project$EntityList_View$Project(_p1._1._0._0),
+									_1: _p1._1._1
+								}
+							};
+						} else {
+							break _v0_2;
+						}
+					case 'Project':
+						if (_p1._1._0.ctor === 'Context') {
 							var isTodo = function (vm) {
 								var _p3 = vm;
 								if (_p3.ctor === 'Todo') {
@@ -63,41 +80,14 @@ var _user$project$EntityList_View$updateCount = function (vmList) {
 								A2(_elm_lang$core$List$filter, isTodo, vmList));
 							return {
 								ctor: '::',
-								_0: _user$project$EntityList_View$Context(
-									_elm_lang$core$Native_Utils.update(
-										_p2._0._0,
-										{count: totalTodoCount})),
-								_1: {
-									ctor: '::',
-									_0: _user$project$EntityList_View$Project(_p2._1._0._0),
-									_1: _p2._1._1
-								}
-							};
-						} else {
-							break _v0_2;
-						}
-					case 'Project':
-						if (_p2._1._0.ctor === 'Context') {
-							var isTodo = function (vm) {
-								var _p4 = vm;
-								if (_p4.ctor === 'Todo') {
-									return true;
-								} else {
-									return false;
-								}
-							};
-							var totalTodoCount = _elm_lang$core$List$length(
-								A2(_elm_lang$core$List$filter, isTodo, vmList));
-							return {
-								ctor: '::',
 								_0: _user$project$EntityList_View$Project(
 									_elm_lang$core$Native_Utils.update(
-										_p2._0._0,
+										_p1._0._0,
 										{count: totalTodoCount})),
 								_1: {
 									ctor: '::',
-									_0: _user$project$EntityList_View$Context(_p2._1._0._0),
-									_1: _p2._1._1
+									_0: _user$project$EntityList_View$Context(_p1._1._0._0),
+									_1: _p1._1._1
 								}
 							};
 						} else {
@@ -116,12 +106,12 @@ var _user$project$EntityList_View$updateCount = function (vmList) {
 			A3(
 				_elm_lang$core$List$foldr,
 				F2(
-					function (vm, _p5) {
-						var _p6 = _p5;
-						var _p9 = _p6._0;
-						var _p8 = _p6._1;
-						var _p7 = vm;
-						switch (_p7.ctor) {
+					function (vm, _p4) {
+						var _p5 = _p4;
+						var _p8 = _p5._0;
+						var _p7 = _p5._1;
+						var _p6 = vm;
+						switch (_p6.ctor) {
 							case 'Context':
 								return {
 									ctor: '_Tuple2',
@@ -129,9 +119,9 @@ var _user$project$EntityList_View$updateCount = function (vmList) {
 										ctor: '::',
 										_0: _user$project$EntityList_View$Context(
 											_elm_lang$core$Native_Utils.update(
-												_p7._0,
-												{count: _p8})),
-										_1: _p9
+												_p6._0,
+												{count: _p7})),
+										_1: _p8
 									},
 									_1: 0
 								};
@@ -142,9 +132,9 @@ var _user$project$EntityList_View$updateCount = function (vmList) {
 										ctor: '::',
 										_0: _user$project$EntityList_View$Project(
 											_elm_lang$core$Native_Utils.update(
-												_p7._0,
-												{count: _p8})),
-										_1: _p9
+												_p6._0,
+												{count: _p7})),
+										_1: _p8
 									},
 									_1: 0
 								};
@@ -153,10 +143,10 @@ var _user$project$EntityList_View$updateCount = function (vmList) {
 									ctor: '_Tuple2',
 									_0: {
 										ctor: '::',
-										_0: _user$project$EntityList_View$Todo(_p7._0),
-										_1: _p9
+										_0: _user$project$EntityList_View$Todo(_p6._0),
+										_1: _p8
 									},
-									_1: _p8 + 1
+									_1: _p7 + 1
 								};
 						}
 					}),
@@ -167,28 +157,35 @@ var _user$project$EntityList_View$updateCount = function (vmList) {
 				},
 				vmList)));
 };
-var _user$project$EntityList_View$createVMList = F2(
-	function (entityList, appViewModel) {
-		var focusInId = A2(_user$project$EntityList_View$getFocusInId, entityList, appViewModel);
+var _user$project$EntityList_View$createVMList = F3(
+	function (entityList, appViewModel, model) {
+		var maybeFocusInEntity = A2(_user$project$Model$getMaybeFocusInEntity, entityList, model);
+		var hasFocusIn = function (entity) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					maybeFocusInEntity,
+					_user$project$Entity$equalById(entity)),
+				false);
+		};
 		var getTabindexAV = function (entity) {
-			var tabindexValue = _elm_lang$core$Native_Utils.eq(
-				_user$project$Model$getEntityId(entity),
-				focusInId) ? 0 : -1;
+			var tabindexValue = hasFocusIn(entity) ? 0 : -1;
 			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
 		};
 		var createVM = function (entity) {
 			var tabIndexAV = getTabindexAV(entity);
-			var _p10 = entity;
-			switch (_p10.ctor) {
+			var _p9 = entity;
+			switch (_p9.ctor) {
 				case 'ContextEntity':
 					return _user$project$EntityList_View$Context(
-						A2(_user$project$EntityList_GroupViewModel$forContext, tabIndexAV, _p10._0));
+						A2(_user$project$EntityList_GroupViewModel$forContext, tabIndexAV, _p9._0));
 				case 'ProjectEntity':
 					return _user$project$EntityList_View$Project(
-						A2(_user$project$EntityList_GroupViewModel$forProject, tabIndexAV, _p10._0));
+						A2(_user$project$EntityList_GroupViewModel$forProject, tabIndexAV, _p9._0));
 				default:
 					return _user$project$EntityList_View$Todo(
-						A2(appViewModel.createTodoViewModel, tabIndexAV, _p10._0));
+						A2(appViewModel.createTodoViewModel, tabIndexAV, _p9._0));
 			}
 		};
 		return _user$project$EntityList_View$updateCount(
@@ -197,19 +194,19 @@ var _user$project$EntityList_View$createVMList = F2(
 var _user$project$EntityList_View$listView = F3(
 	function (viewType, model, appViewModel) {
 		var createEntityView = function (vm) {
-			var _p11 = vm;
-			switch (_p11.ctor) {
+			var _p10 = vm;
+			switch (_p10.ctor) {
 				case 'Context':
-					return A2(_user$project$EntityList_GroupView$initKeyed, appViewModel, _p11._0);
+					return A2(_user$project$EntityList_GroupView$initKeyed, appViewModel, _p10._0);
 				case 'Project':
-					return A2(_user$project$EntityList_GroupView$initKeyed, appViewModel, _p11._0);
+					return A2(_user$project$EntityList_GroupView$initKeyed, appViewModel, _p10._0);
 				default:
-					return _user$project$Todo_View$initKeyed(_p11._0);
+					return _user$project$Todo_View$initKeyed(_p10._0);
 			}
 		};
 		var entityList = _user$project$Entity$flattenGrouping(
 			A2(_user$project$Model$createGrouping, viewType, model));
-		var vmList = A2(_user$project$EntityList_View$createVMList, entityList, appViewModel);
+		var vmList = A3(_user$project$EntityList_View$createVMList, entityList, appViewModel, model);
 		return A3(
 			_elm_lang$html$Html_Keyed$node,
 			'div',

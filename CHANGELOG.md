@@ -1,6 +1,7 @@
 ## Upcoming
 * extract schedule model from todo.
 * extract record update helpers in Ext.Record
+* [fix] arrow key navigation works even when entity list contains two null entities, i.e. same id but different entity type.
 
 ## v0.17.1 - 2017-06-04
 * [patch]: context/prj : enter key should save form 

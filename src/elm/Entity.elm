@@ -50,6 +50,25 @@ getId entity =
             Document.getId doc
 
 
+equalById e1 e2 =
+    let
+        eq =
+            Document.equalById
+    in
+        case ( e1, e2 ) of
+            ( ProjectEntity m1, ProjectEntity m2 ) ->
+                eq m1 m2
+
+            ( ContextEntity m1, ContextEntity m2 ) ->
+                eq m1 m2
+
+            ( TodoEntity m1, TodoEntity m2 ) ->
+                eq m1 m2
+
+            _ ->
+                False
+
+
 defaultListView =
     ContextsView
 

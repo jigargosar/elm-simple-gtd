@@ -1085,7 +1085,14 @@ getFocusInEntityIndex entityList model =
 
 getMaybeFocusInEntityIndex entityList model =
     entityList
-        |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
+        --         |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
+        |> List.findIndex (Entity.equalById model.focusInEntity)
+
+
+getMaybeFocusInEntity entityList model =
+    entityList
+        |> List.find (Entity.equalById model.focusInEntity)
+        |> Maybe.orElse (List.head entityList)
 
 
 focusPrevEntity : List Entity -> ModelF

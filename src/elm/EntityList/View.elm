@@ -43,14 +43,6 @@ type alias EntityViewModel =
     }
 
 
-isCursorAtEntityInEntityList entityList viewModel =
-    let
-        focusedId =
-            getFocusInId entityList viewModel
-    in
-        Model.getEntityId >> equals focusedId
-
-
 getFocusInId entityList viewModel =
     entityList
         |> List.find (Model.getEntityId >> equals viewModel.focusedEntityInfo.id)
@@ -114,16 +106,19 @@ updateCount vmList =
            )
 
 
-createVMList : List Entity.Entity -> ViewModel.Model -> List ViewModel
-createVMList entityList appViewModel =
+createVMList : List Entity.Entity -> ViewModel.Model -> Model.Model -> List ViewModel
+createVMList entityList appViewModel model =
     let
-        focusInId =
-            getFocusInId entityList appViewModel
+        maybeFocusInEntity =
+            Model.getMaybeFocusInEntity entityList model
+
+        hasFocusIn entity =
+            maybeFocusInEntity ?|> Entity.equalById entity ?= False
 
         getTabindexAV entity =
             let
                 tabindexValue =
-                    if Model.getEntityId entity == focusInId then
+                    if hasFocusIn entity then
                         0
                     else
                         -1
@@ -158,7 +153,7 @@ listView viewType model appViewModel =
             Model.createGrouping viewType model |> Entity.flattenGrouping
 
         vmList =
-            createVMList entityList appViewModel
+            createVMList entityList appViewModel model
 
         createEntityView vm =
             case vm of

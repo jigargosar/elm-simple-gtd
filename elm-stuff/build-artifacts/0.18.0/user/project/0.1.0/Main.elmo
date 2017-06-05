@@ -195,7 +195,7 @@ var _user$project$Main$subscriptions = function (m) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
 			ctor: '::',
-			_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 1, _user$project$Model$OnNowChanged),
+			_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 10000, _user$project$Model$OnNowChanged),
 			_1: {
 				ctor: '::',
 				_0: _user$project$Ext_Keyboard$subscription(_user$project$Model$OnKeyboardMsg),

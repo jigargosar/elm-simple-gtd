@@ -74,8 +74,7 @@ dropdownTrigger { tabindexAV } content =
 
 
 type alias TodoViewModel =
-    { text : Todo.Text
-    , key : String
+    { key : String
     , displayText : String
     , isDone : Bool
     , isDeleted : Bool
@@ -203,7 +202,6 @@ createTodoViewModel vc tabindexAV todo =
         , key = todoId
         , isDeleted = Todo.getDeleted todo
         , onKeyDownMsg = onKeyDownMsg
-        , text = text
         , displayText = displayText
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName

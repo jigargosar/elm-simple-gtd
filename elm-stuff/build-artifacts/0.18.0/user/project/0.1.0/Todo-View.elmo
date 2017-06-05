@@ -77,12 +77,12 @@ var _user$project$Todo_View$editView = function (edit) {
 };
 var _user$project$Todo_View$createEditTodoViewModel = F2(
 	function (form, todo) {
-		var updateTodoForm = _user$project$Model$UpdateTodoForm(form);
+		var updateTodoFormMsg = _user$project$Model$UpdateTodoForm(form);
 		var todoId = form.id;
 		return {
 			todo: {text: form.todoText},
 			onTodoTextChanged: function (_p1) {
-				return updateTodoForm(
+				return updateTodoFormMsg(
 					_user$project$Todo_Form$SetText(_p1));
 			},
 			onDeleteClicked: A2(
@@ -348,7 +348,6 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			key: todoId,
 			isDeleted: _user$project$Todo$getDeleted(todo),
 			onKeyDownMsg: onKeyDownMsg,
-			text: text,
 			displayText: displayText,
 			projectDisplayName: projectDisplayName,
 			contextDisplayName: contextDisplayName,
@@ -835,9 +834,7 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 																	return function (r) {
 																		return function (s) {
 																			return function (t) {
-																				return function (u) {
-																					return {text: a, key: b, displayText: c, isDone: d, isDeleted: e, onKeyDownMsg: f, projectDisplayName: g, contextDisplayName: h, setContextMsg: i, setProjectMsg: j, startEditingMsg: k, toggleDoneMsg: l, onDeleteClicked: m, showContextDropdownMsg: n, showProjectDropdownMsg: o, reminder: p, edit: q, isEditing: r, onFocusIn: s, tabindexAV: t, isSelected: u};
-																				};
+																				return {key: a, displayText: b, isDone: c, isDeleted: d, onKeyDownMsg: e, projectDisplayName: f, contextDisplayName: g, setContextMsg: h, setProjectMsg: i, startEditingMsg: j, toggleDoneMsg: k, onDeleteClicked: l, showContextDropdownMsg: m, showProjectDropdownMsg: n, reminder: o, edit: p, isEditing: q, onFocusIn: r, tabindexAV: s, isSelected: t};
 																			};
 																		};
 																	};

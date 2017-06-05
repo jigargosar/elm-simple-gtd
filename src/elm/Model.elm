@@ -1012,13 +1012,6 @@ updateKeyboardState updater model =
 -- Focus Functions
 
 
-setFocusInEntityByIndex index entityList model =
-    List.clampIndex index entityList
-        |> (List.getAt # entityList)
-        |> Maybe.orElse (List.head entityList)
-        |> maybeSetIn model focusInEntity
-
-
 setFocusInEntity entity =
     set focusInEntity entity
 
@@ -1040,16 +1033,6 @@ moveFocusBy =
 
 
 
-{-
-   moveFocusBy : Int -> List Entity -> ModelF
-   moveFocusBy num entityList model =
-       getMaybeFocusInEntityIndex entityList model
-           ?= 0
-           |> add num
-           |> (setFocusInEntityByIndex # entityList # model)
-
-
--}
 -- Document Query Helpers
 
 
@@ -1104,6 +1087,12 @@ updateEntityListCursor oldModel newModel =
 
 updateEntityListCursorFromEntityIndexTuple model indexTuple =
     let
+        setFocusInEntityByIndex index entityList model =
+            List.clampIndex index entityList
+                |> (List.getAt # entityList)
+                |> Maybe.orElse (List.head entityList)
+                |> maybeSetIn model focusInEntity
+
         setFocusInIndex index =
             setFocusInEntityByIndex
                 index

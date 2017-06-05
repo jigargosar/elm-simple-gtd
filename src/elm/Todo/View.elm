@@ -430,13 +430,13 @@ createEditTodoViewModel form todo =
         todoId =
             form.id
 
-        updateTodoForm =
+        updateTodoFormMsg =
             Model.UpdateTodoForm form
     in
         { todo =
             { text = form.todoText
             }
-        , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
+        , onTodoTextChanged = updateTodoFormMsg << Todo.Form.SetText
         , onDeleteClicked = Model.OnEntityAction (Entity.TodoEntity todo) Entity.ToggleDeleted
         }
 

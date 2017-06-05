@@ -52,26 +52,14 @@ initKeyed vm =
 
 init : TodoViewModel -> Html Msg
 init vm =
-    let
-        maybeEditVM : Maybe EditViewModel
-        maybeEditVM =
-            {- if vm.isSelected then
-                   Nothing
-               else
-            -}
-            vm.edit
-
-        isEditing =
-            Maybe.isJust maybeEditVM
-    in
-        div
-            [ classList [ "todo-item" => True, "selected" => vm.isSelected, "editing" => isEditing ]
-            , onFocusIn vm.onFocusIn
-            , vm.tabindexAV
-            , onKeyDown vm.onKeyDownMsg
-            , attribute "data-key" vm.key
-            ]
-            (maybeEditVM |> Maybe.unpack (\_ -> defaultView vm) editView)
+    div
+        [ classList [ "todo-item" => True, "selected" => vm.isSelected, "editing" => vm.isEditing ]
+        , onFocusIn vm.onFocusIn
+        , vm.tabindexAV
+        , onKeyDown vm.onKeyDownMsg
+        , attribute "data-key" vm.key
+        ]
+        (vm.edit |> Maybe.unpack (\_ -> defaultView vm) editView)
 
 
 dropdownTrigger { tabindexAV } content =
@@ -99,11 +87,11 @@ type alias TodoViewModel =
     , startEditingMsg : Msg
     , toggleDoneMsg : Msg
     , onDeleteClicked : Msg
-    , onReminderButtonClicked : Msg
     , showContextDropdownMsg : Msg
     , showProjectDropdownMsg : Msg
     , reminder : ReminderViewModel
     , edit : Maybe EditViewModel
+    , isEditing : Bool
     , onFocusIn : Msg
     , tabindexAV : Attribute Msg
     , isSelected : Bool
@@ -207,6 +195,9 @@ createTodoViewModel vc tabindexAV todo =
 
         toggleDoneMsg =
             Model.ToggleTodoDone todoId
+
+        maybeEditVM =
+            maybeEditTodoForm ?|> createEditTodoViewModel # todo
     in
         { isDone = Todo.isDone todo
         , key = todoId
@@ -222,9 +213,9 @@ createTodoViewModel vc tabindexAV todo =
         , showProjectDropdownMsg = Model.StartEditingProject todo
         , startEditingMsg = startEditingMsg
         , toggleDoneMsg = toggleDoneMsg
-        , onReminderButtonClicked = Model.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
-        , edit = maybeEditTodoForm ?|> createEditTodoViewModel # todo
+        , edit = maybeEditVM
+        , isEditing = Maybe.isJust maybeEditVM
         , onDeleteClicked = toggleDeleteMsg
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
         , tabindexAV = tabindexAV
@@ -246,8 +237,8 @@ defaultView vm =
             [ class "layout horizontal end-justified"
             ]
             [ reminderView vm
-            , div [ style [ "padding" => "0 8px" ] ] [ contextDropdownMenu vm ]
-            , div [ style [ "padding" => "0 8px" ] ] [ projectDropdownMenu vm ]
+            , div [ style [ "padding" => "0 8px" ] ] [ contextButton vm ]
+            , div [ style [ "padding" => "0 8px" ] ] [ projectButton vm ]
             ]
         ]
     ]
@@ -264,40 +255,28 @@ doneIconButton vm =
         []
 
 
-contextDropdownMenu vm =
-    let
-        createContextItem context =
-            Paper.item
-                [ onClickStopPropagation (vm.setContextMsg context) ]
-                [ context |> Context.getName >> text ]
-    in
-        Paper.button
-            [ id ("context-dropdown-" ++ vm.key)
-            , style [ "height" => "24px" ]
-            , class "small padding-0 margin-0 shrink"
-            , vm.tabindexAV
-            , onClick vm.showContextDropdownMsg
-            ]
-            [ div [ class "title primary-text-color" ] [ text vm.contextDisplayName ]
-            ]
+contextButton vm =
+    Paper.button
+        [ id ("context-dropdown-" ++ vm.key)
+        , style [ "height" => "24px" ]
+        , class "small padding-0 margin-0 shrink"
+        , vm.tabindexAV
+        , onClick vm.showContextDropdownMsg
+        ]
+        [ div [ class "title primary-text-color" ] [ text vm.contextDisplayName ]
+        ]
 
 
-projectDropdownMenu vm =
-    let
-        createProjectItem project =
-            Paper.item
-                [ onClickStopPropagation (vm.setProjectMsg project) ]
-                [ project |> Project.getName >> text ]
-    in
-        Paper.button
-            [ id ("project-dropdown-" ++ vm.key)
-            , style [ "height" => "24px" ]
-            , class "small padding-0 margin-0 shrink"
-            , vm.tabindexAV
-            , onClick vm.showProjectDropdownMsg
-            ]
-            [ div [ class "title primary-text-color" ] [ text vm.projectDisplayName ]
-            ]
+projectButton vm =
+    Paper.button
+        [ id ("project-dropdown-" ++ vm.key)
+        , style [ "height" => "24px" ]
+        , class "small padding-0 margin-0 shrink"
+        , vm.tabindexAV
+        , onClick vm.showProjectDropdownMsg
+        ]
+        [ div [ class "title primary-text-color" ] [ text vm.projectDisplayName ]
+        ]
 
 
 type alias ReminderViewModel =
@@ -466,32 +445,15 @@ editView : EditViewModel -> List (Html Msg)
 editView edit =
     [ div [ class "vertical layout flex-auto" ]
         [ div [ class "flex" ]
-            [ div [ class "input-field", onKeyDownStopPropagation (\_ -> commonMsg.logString "sp") ]
+            [ div [ class "input-field", onKeyDownStopPropagation (\_ -> commonMsg.noOp) ]
                 [ Html.textarea
                     [ class "materialize-textarea auto-focus"
-
-                    --                    , attribute "data-original-height" "0"
                     , defaultValue (edit.todo.text)
                     , onInput edit.onTodoTextChanged
                     ]
                     []
                 , Html.label [] [ text "Todo" ]
                 ]
-
-            {- , Html.node "paper-textarea"
-               [ class "_auto-focus"
-               , stringProperty "label" "Todo"
-               , value (edit.todo.text)
-
-               -- for when we need custom handling for enter key
-               , property "keyBindings" Json.Encode.null
-
-               -- so that space key doesn't buble up
-               , boolProperty "stopKeyboardEventPropagation" True
-               , onInput edit.onTodoTextChanged
-               ]
-               []
-            -}
             ]
         , defaultOkCancelDeleteButtons edit.onDeleteClicked
         ]

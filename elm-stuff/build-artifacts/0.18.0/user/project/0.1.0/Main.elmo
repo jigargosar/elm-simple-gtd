@@ -567,7 +567,7 @@ var _user$project$Main$update = function (msg) {
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$toggleEntitySelection(_p51));
 						}
-					case 'OnLaunchBarActionWithNow':
+					case 'OnLaunchBarMsgWithNow':
 						var _p56 = _p15._1;
 						var _p52 = _p15._0;
 						switch (_p52.ctor) {
@@ -604,9 +604,9 @@ var _user$project$Main$update = function (msg) {
 											_p55));
 								};
 						}
-					case 'OnLaunchBarAction':
+					case 'OnLaunchBarMsg':
 						return _user$project$Main$withNow(
-							_user$project$Model$OnLaunchBarActionWithNow(_p15._0));
+							_user$project$Model$OnLaunchBarMsgWithNow(_p15._0));
 					default:
 						return _user$project$Main$onGlobalKeyUp(_p15._0);
 				}
@@ -639,7 +639,7 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 							case 'Slash':
 								var _p60 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
 								return _user$project$Main$andThenUpdate(
-									_user$project$Model$OnLaunchBarAction(_user$project$LaunchBar$Open));
+									_user$project$Model$OnLaunchBarMsg(_user$project$LaunchBar$Open));
 							default:
 								return _elm_lang$core$Basics$identity;
 						}

@@ -384,22 +384,12 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			displayText: displayText,
 			projectDisplayName: projectDisplayName,
 			contextDisplayName: contextDisplayName,
-			selectedProjectIndex: A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-				A2(
-					_elm_community$list_extra$List_Extra$findIndex,
-					_user$project$Document$hasId(projectId),
-					vc.activeProjects),
-				0),
 			setContextMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
 			setProjectMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo),
 			showContextDropdownMsg: _user$project$Model$StartEditingContext(todo),
 			showProjectDropdownMsg: _user$project$Model$StartEditingProject(todo),
 			startEditingMsg: startEditingMsg,
 			toggleDoneMsg: toggleDoneMsg,
-			showDetails: vc.showDetails,
-			activeContexts: vc.activeContexts,
-			activeProjects: vc.activeProjects,
 			onReminderButtonClicked: _user$project$Model$StartEditingReminder(todo),
 			reminder: A2(_user$project$Todo_View$createReminderViewModel, vc, todo),
 			edit: A2(
@@ -883,15 +873,7 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 																		return function (s) {
 																			return function (t) {
 																				return function (u) {
-																					return function (v) {
-																						return function (w) {
-																							return function (x) {
-																								return function (y) {
-																									return {text: a, key: b, displayText: c, isDone: d, isDeleted: e, onKeyDownMsg: f, projectDisplayName: g, contextDisplayName: h, selectedProjectIndex: i, setContextMsg: j, setProjectMsg: k, startEditingMsg: l, toggleDoneMsg: m, onDeleteClicked: n, showDetails: o, activeContexts: p, activeProjects: q, onReminderButtonClicked: r, showContextDropdownMsg: s, showProjectDropdownMsg: t, reminder: u, edit: v, onFocusIn: w, tabindexAV: x, isSelected: y};
-																								};
-																							};
-																						};
-																					};
+																					return {text: a, key: b, displayText: c, isDone: d, isDeleted: e, onKeyDownMsg: f, projectDisplayName: g, contextDisplayName: h, setContextMsg: i, setProjectMsg: j, startEditingMsg: k, toggleDoneMsg: l, onDeleteClicked: m, onReminderButtonClicked: n, showContextDropdownMsg: o, showProjectDropdownMsg: p, reminder: q, edit: r, onFocusIn: s, tabindexAV: t, isSelected: u};
 																				};
 																			};
 																		};

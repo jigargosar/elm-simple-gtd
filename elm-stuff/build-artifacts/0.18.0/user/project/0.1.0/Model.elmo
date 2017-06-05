@@ -1318,12 +1318,12 @@ var _user$project$Model$TodoNotificationEvent = F2(
 	function (a, b) {
 		return {action: a, data: b};
 	});
-var _user$project$Model$OnLaunchBarActionWithNow = F2(
+var _user$project$Model$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {
-		return {ctor: 'OnLaunchBarActionWithNow', _0: a, _1: b};
+		return {ctor: 'OnLaunchBarMsgWithNow', _0: a, _1: b};
 	});
-var _user$project$Model$OnLaunchBarAction = function (a) {
-	return {ctor: 'OnLaunchBarAction', _0: a};
+var _user$project$Model$OnLaunchBarMsg = function (a) {
+	return {ctor: 'OnLaunchBarMsg', _0: a};
 };
 var _user$project$Model$OnEntityAction = F2(
 	function (a, b) {

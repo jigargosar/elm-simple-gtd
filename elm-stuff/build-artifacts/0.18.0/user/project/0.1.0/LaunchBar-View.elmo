@@ -17,7 +17,7 @@ var _user$project$LaunchBar_View$formView = F2(
 			var _p1 = _p0;
 			var _p2 = _p1.key;
 			if (_p2.ctor === 'Enter') {
-				return _user$project$Model$OnLaunchBarAction(
+				return _user$project$Model$OnLaunchBarMsg(
 					_user$project$LaunchBar$OnEnter(matchingEntity));
 			} else {
 				return _user$project$Model$commonMsg.noOp;
@@ -55,7 +55,7 @@ var _user$project$LaunchBar_View$formView = F2(
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onInput(
 										function (_p3) {
-											return _user$project$Model$OnLaunchBarAction(
+											return _user$project$Model$OnLaunchBarMsg(
 												A2(_user$project$LaunchBar$OnInputChanged, form, _p3));
 										}),
 									_1: {ctor: '[]'}

@@ -94,15 +94,11 @@ type alias TodoViewModel =
     , onKeyDownMsg : KeyboardEvent -> Msg
     , projectDisplayName : String
     , contextDisplayName : String
-    , selectedProjectIndex : Int
     , setContextMsg : Context.Model -> Msg
     , setProjectMsg : Project.Model -> Msg
     , startEditingMsg : Msg
     , toggleDoneMsg : Msg
     , onDeleteClicked : Msg
-    , showDetails : Bool
-    , activeContexts : List Context.Model
-    , activeProjects : List Project.Model
     , onReminderButtonClicked : Msg
     , showContextDropdownMsg : Msg
     , showProjectDropdownMsg : Msg
@@ -220,16 +216,12 @@ createTodoViewModel vc tabindexAV todo =
         , displayText = displayText
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
-        , selectedProjectIndex = vc.activeProjects |> List.findIndex (Document.hasId projectId) ?= 0
         , setContextMsg = Model.SetTodoContext # todo
         , setProjectMsg = Model.SetTodoProject # todo
         , showContextDropdownMsg = Model.StartEditingContext todo
         , showProjectDropdownMsg = Model.StartEditingProject todo
         , startEditingMsg = startEditingMsg
         , toggleDoneMsg = toggleDoneMsg
-        , showDetails = vc.showDetails
-        , activeContexts = vc.activeContexts
-        , activeProjects = vc.activeProjects
         , onReminderButtonClicked = Model.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
         , edit = maybeEditTodoForm ?|> createEditTodoViewModel # todo
@@ -290,15 +282,6 @@ contextDropdownMenu vm =
             ]
 
 
-
---        Paper.menuButton [ dynamicAlign ]
---            [ dropdownTrigger vm (text vm.contextDisplayName)
---            , Paper.listbox
---                [ class "dropdown-content", attribute "slot" "dropdown-content" ]
---                (vm.activeContexts .|> createContextItem)
---            ]
-
-
 projectDropdownMenu vm =
     let
         createProjectItem project =
@@ -315,15 +298,6 @@ projectDropdownMenu vm =
             ]
             [ div [ class "title primary-text-color" ] [ text vm.projectDisplayName ]
             ]
-
-
-
---        Paper.menuButton [ dynamicAlign ]
---            [ dropdownTrigger vm (text vm.projectDisplayName)
---            , Paper.listbox
---                [ class "dropdown-content", attribute "slot" "dropdown-content" ]
---                (vm.activeProjects .|> createProjectItem)
---            ]
 
 
 type alias ReminderViewModel =

@@ -10,6 +10,7 @@ import Entity exposing (Entity)
 import Ext.Keyboard as Keyboard
 import Ext.List as List
 import Ext.Predicate
+import Ext.Record as Record exposing (LensT2)
 import Firebase exposing (DeviceId)
 import LaunchBar.Form
 import Project
@@ -121,14 +122,6 @@ type alias TodoNotificationEvent =
 -- Model Lens
 
 
-type alias Lens small big =
-    { get : big -> small, set : small -> big -> big }
-
-
-type alias LensT2 small big x =
-    { get : big -> small, set : ( x, small ) -> big -> ( x, big ) }
-
-
 contextStore =
     { get = .contextStore, set = (\s b -> { b | contextStore = s }) }
 
@@ -139,21 +132,6 @@ projectStore =
 
 todoStore =
     { get = .todoStore, set = (\s b -> { b | todoStore = s }) }
-
-
-contextStoreT2 : LensT2 Context.Store Model x
-contextStoreT2 =
-    { get = .contextStore, set = (\( x, s ) b -> ( x, { b | contextStore = s } )) }
-
-
-projectStoreT2 : LensT2 Project.Store Model x
-projectStoreT2 =
-    { get = .projectStore, set = (\( x, s ) b -> ( x, { b | projectStore = s } )) }
-
-
-todoStoreT2 : LensT2 Todo.Store Model x
-todoStoreT2 =
-    { get = .todoStore, set = (\( x, s ) b -> ( x, { b | todoStore = s } )) }
 
 
 keyboardState =
@@ -180,27 +158,12 @@ focusInEntity =
     { get = .focusInEntity, set = (\s b -> { b | focusInEntity = s }) }
 
 
-update lens smallF big =
+over lens smallF big =
     setIn big lens (smallF (lens.get big))
 
 
 setIn big lens small =
     lens.set small big
-
-
-setWith lens smallFn big =
-    lens.set (smallFn big) big
-
-
-updateMaybe lens smallMaybeF big =
-    let
-        maybeSmallT =
-            smallMaybeF (lens.get big)
-
-        maybeBigT =
-            maybeSmallT ?|> setIn big lens
-    in
-        maybeBigT
 
 
 init : Flags -> Model
@@ -266,11 +229,11 @@ setUser =
 
 setFCMToken fcmToken model =
     { model | fcmToken = fcmToken }
-        |> update firebaseClient (Firebase.updateToken fcmToken)
+        |> over firebaseClient (Firebase.updateToken fcmToken)
 
 
 updateFirebaseConnection connected =
-    update firebaseClient (Firebase.updateConnection connected)
+    over firebaseClient (Firebase.updateConnection connected)
 
 
 toggleLayoutForceNarrow =
@@ -780,7 +743,7 @@ updateTodoAndMaybeAlsoSelected action todoId model =
 
 insertTodo : (DeviceId -> Document.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodo constructWithId =
-    update todoStoreT2 (Store.insert (constructWithId))
+    Record.overT2 todoStore (Store.insert (constructWithId))
 
 
 setTodoStoreFromTuple tuple model =
@@ -790,13 +753,13 @@ setTodoStoreFromTuple tuple model =
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            update todoStore (Store.upsertOnPouchDBChange encodedEntity)
+            over todoStore (Store.upsertOnPouchDBChange encodedEntity)
 
         "project-db" ->
-            update projectStore (Store.upsertOnPouchDBChange encodedEntity)
+            over projectStore (Store.upsertOnPouchDBChange encodedEntity)
 
         "context-db" ->
-            update contextStore (Store.upsertOnPouchDBChange encodedEntity)
+            over contextStore (Store.upsertOnPouchDBChange encodedEntity)
 
         _ ->
             identity
@@ -1110,15 +1073,15 @@ type alias ModelReturnF msg =
 
 
 updateContext id updateFn =
-    updateAllNamedDocsDocs (Set.singleton id) updateFn contextStoreT2
+    updateAllNamedDocsDocs (Set.singleton id) updateFn contextStore
 
 
 updateProject id updateFn =
-    updateAllNamedDocsDocs (Set.singleton id) updateFn projectStoreT2
+    updateAllNamedDocsDocs (Set.singleton id) updateFn projectStore
 
 
 updateAllNamedDocsDocs idSet updateFn store model =
-    update store (Store.updateAll idSet model.now updateFn) model
+    Record.overT2 store (Store.updateAll idSet model.now updateFn) model
         |> apply2 ( Tuple.second, (\changes -> Cmd.none) )
         |> Return.map (updateEntityListCursor model)
 
@@ -1170,7 +1133,7 @@ findAndUpdateAllTodos findFn action model =
         updateFn =
             Todo.update [ action ] model.now
     in
-        update todoStoreT2 (Store.findAndUpdateAll findFn model.now updateFn) model
+        Record.overT2 todoStore (Store.findAndUpdateAll findFn model.now updateFn) model
             |> apply2 ( Tuple.second, todoChangesToCmd )
             |> Return.map (updateEntityListCursor model)
 

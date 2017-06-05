@@ -40,8 +40,6 @@ type alias ViewModel =
     , onCancelClicked : Msg
     , icon : IconVM
     , onFocusIn : Msg
-    , onFocus : Msg
-    , onBlur : Msg
     , onKeyDownMsg : KeyboardEvent -> Msg
     , tabindexAV : Html.Attribute Msg
     }
@@ -118,8 +116,6 @@ create tabindexAV config entityModel =
         , onCancelClicked = Model.DeactivateEditingMode
         , icon = icon
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
-        , onFocus = createEntityActionMsg Entity.OnFocus
-        , onBlur = createEntityActionMsg Entity.OnBlur
         , onKeyDownMsg = onKeyDownMsg
         , tabindexAV = tabindexAV
         }

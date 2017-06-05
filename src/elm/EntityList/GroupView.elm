@@ -38,8 +38,6 @@ init vc vm =
             [ class "entity-item"
             , tabindexAV
             , onFocusIn vm.onFocusIn
-            , onFocus vm.onFocus
-            , onBlur vm.onBlur
             , onKeyDown vm.onKeyDownMsg
             ]
             (maybeForm

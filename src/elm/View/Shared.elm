@@ -44,7 +44,6 @@ type alias SharedViewModel =
     , activeContexts : List Context.Model
     , showDetails : Bool
     , selectedEntityIdSet : Set Document.Id
-    , maybeFocusedEntity : Maybe Entity
     }
 
 
@@ -82,7 +81,6 @@ createSharedViewModel model =
                         Nothing
     in
         { now = now
-        , maybeFocusedEntity = model.maybeFocusedEntity
         , selectedEntityIdSet = model.selectedEntityIdSet
         , projectByIdDict = Model.getProjectsAsIdDict model
         , contextByIdDict = Model.getContextsAsIdDict model

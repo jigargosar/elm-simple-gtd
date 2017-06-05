@@ -195,7 +195,6 @@ var _user$project$View_Shared$createSharedViewModel = function (model) {
 	};
 	return {
 		now: now,
-		maybeFocusedEntity: model.maybeFocusedEntity,
 		selectedEntityIdSet: model.selectedEntityIdSet,
 		projectByIdDict: _user$project$Model$getProjectsAsIdDict(model),
 		contextByIdDict: _user$project$Model$getContextsAsIdDict(model),
@@ -239,9 +238,7 @@ var _user$project$View_Shared$SharedViewModel = function (a) {
 								return function (i) {
 									return function (j) {
 										return function (k) {
-											return function (l) {
-												return {now: a, getMaybeEditTodoFormForTodo: b, getMaybeTodoReminderFormForTodo: c, getTodoReminderForm: d, getMaybeEditEntityFormForEntityId: e, projectByIdDict: f, contextByIdDict: g, activeProjects: h, activeContexts: i, showDetails: j, selectedEntityIdSet: k, maybeFocusedEntity: l};
-											};
+											return {now: a, getMaybeEditTodoFormForTodo: b, getMaybeTodoReminderFormForTodo: c, getTodoReminderForm: d, getMaybeEditEntityFormForEntityId: e, projectByIdDict: f, contextByIdDict: g, activeProjects: h, activeContexts: i, showDetails: j, selectedEntityIdSet: k};
 										};
 									};
 								};

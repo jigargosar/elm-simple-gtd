@@ -45,8 +45,6 @@ var _user$project$EntityList_GroupViewModel$create = F3(
 			onCancelClicked: _user$project$Model$DeactivateEditingMode,
 			icon: icon,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
-			onFocus: createEntityActionMsg(_user$project$Entity$OnFocus),
-			onBlur: createEntityActionMsg(_user$project$Entity$OnBlur),
 			onKeyDownMsg: onKeyDownMsg,
 			tabindexAV: tabindexAV
 		};
@@ -98,11 +96,7 @@ var _user$project$EntityList_GroupViewModel$ViewModel = function (a) {
 										return function (k) {
 											return function (l) {
 												return function (m) {
-													return function (n) {
-														return function (o) {
-															return {id: a, count: b, name: c, isDeleted: d, startEditingMsg: e, onDeleteClicked: f, onSaveClicked: g, onNameChanged: h, onCancelClicked: i, icon: j, onFocusIn: k, onFocus: l, onBlur: m, onKeyDownMsg: n, tabindexAV: o};
-														};
-													};
+													return {id: a, count: b, name: c, isDeleted: d, startEditingMsg: e, onDeleteClicked: f, onSaveClicked: g, onNameChanged: h, onCancelClicked: i, icon: j, onFocusIn: k, onKeyDownMsg: l, tabindexAV: m};
 												};
 											};
 										};

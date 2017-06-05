@@ -67,8 +67,6 @@ init vm =
         div
             [ classList [ "todo-item" => True, "selected" => vm.isSelected, "editing" => isEditing ]
             , onFocusIn vm.onFocusIn
-            , onFocus vm.onFocus
-            , onBlur vm.onBlur
             , vm.tabindexAV
             , onKeyDown vm.onKeyDownMsg
             , attribute "data-key" vm.key
@@ -93,7 +91,6 @@ type alias TodoViewModel =
     , displayText : String
     , isDone : Bool
     , isDeleted : Bool
-    , isFocused : Bool
     , onKeyDownMsg : KeyboardEvent -> Msg
     , projectDisplayName : String
     , contextDisplayName : String
@@ -112,8 +109,6 @@ type alias TodoViewModel =
     , reminder : ReminderViewModel
     , edit : Maybe EditViewModel
     , onFocusIn : Msg
-    , onFocus : Msg
-    , onBlur : Msg
     , tabindexAV : Attribute Msg
     , isSelected : Bool
     }
@@ -182,9 +177,6 @@ createTodoViewModel vc tabindexAV todo =
         maybeEditTodoForm =
             vc.getMaybeEditTodoFormForTodo todo
 
-        isFocused =
-            vc.maybeFocusedEntity ?|> (Model.getEntityId >> equals todoId) ?= False
-
         onKeyDownMsg ({ key } as ke) =
             if Ext.Keyboard.isAnySoftKeyDown ke then
                 commonMsg.noOp
@@ -223,7 +215,6 @@ createTodoViewModel vc tabindexAV todo =
         { isDone = Todo.isDone todo
         , key = todoId
         , isDeleted = Todo.getDeleted todo
-        , isFocused = isFocused
         , onKeyDownMsg = onKeyDownMsg
         , text = text
         , displayText = displayText
@@ -244,8 +235,6 @@ createTodoViewModel vc tabindexAV todo =
         , edit = maybeEditTodoForm ?|> createEditTodoViewModel # todo
         , onDeleteClicked = toggleDeleteMsg
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
-        , onFocus = createEntityActionMsg Entity.OnFocus
-        , onBlur = createEntityActionMsg Entity.OnBlur
         , tabindexAV = tabindexAV
         , isSelected = vc.selectedEntityIdSet |> Set.member todoId
         }

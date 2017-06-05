@@ -124,7 +124,6 @@ type alias Model =
     , developmentMode : Bool
     , selectedEntityIdSet : Set Document.Id
     , layout : Layout
-    , maybeFocusedEntity : Maybe Entity
     , appVersion : String
     , deviceId : String
     , firebaseClient : Firebase.Client
@@ -247,7 +246,6 @@ init flags =
             , layout = { narrow = False, forceNarrow = False }
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
-            , maybeFocusedEntity = Nothing
             , focusInEntity = inboxEntity
             , firebaseClient = firebaseClient
             }
@@ -1023,10 +1021,6 @@ setFocusInEntityByIndex index entityList model =
 
 setFocusInEntity entity =
     set focusInEntity entity
-
-
-setMaybeFocusedEntity maybeEntity model =
-    { model | maybeFocusedEntity = maybeEntity }
 
 
 getFocusInEntityIndex entityList model =

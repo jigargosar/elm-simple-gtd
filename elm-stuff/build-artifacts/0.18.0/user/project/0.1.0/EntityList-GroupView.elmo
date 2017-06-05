@@ -110,16 +110,8 @@ var _user$project$EntityList_GroupView$init = F2(
 						_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onFocus(vm.onFocus),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onBlur(vm.onBlur),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
-									_1: {ctor: '[]'}
-								}
-							}
+							_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
+							_1: {ctor: '[]'}
 						}
 					}
 				}

@@ -54,8 +54,6 @@ type alias DocumentWithNameViewModel =
     , onCancelClicked : Msg
     , icon : IconVM
     , onFocusIn : Msg
-    , onFocus : Msg
-    , onBlur : Msg
     , onKeyDownMsg : KeyboardEvent -> Msg
     }
 
@@ -175,8 +173,6 @@ create todoListByEntityId config entity =
         , icon = icon
         , appHeader = appHeader
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
-        , onFocus = createEntityActionMsg Entity.OnFocus
-        , onBlur = createEntityActionMsg Entity.OnBlur
         , onKeyDownMsg = onKeyDownMsg
         }
 

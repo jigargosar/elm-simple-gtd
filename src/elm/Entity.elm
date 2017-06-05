@@ -32,8 +32,6 @@ type Action
     | ToggleDeleted
     | Save
     | NameChanged String
-    | OnFocus
-    | OnBlur
     | OnFocusIn
     | ToggleSelected
 

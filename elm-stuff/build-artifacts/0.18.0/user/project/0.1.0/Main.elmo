@@ -567,13 +567,6 @@ var _user$project$Main$update = function (msg) {
 							case 'OnFocusIn':
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$setFocusInEntity(_p51));
-							case 'OnFocus':
-								return _Fresheyeball$elm_return$Return$map(
-									_user$project$Model$setMaybeFocusedEntity(
-										_elm_lang$core$Maybe$Just(_p51)));
-							case 'OnBlur':
-								return _Fresheyeball$elm_return$Return$map(
-									_user$project$Model$setMaybeFocusedEntity(_elm_lang$core$Maybe$Nothing));
 							default:
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$toggleEntitySelection(_p51));

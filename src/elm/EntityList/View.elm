@@ -34,8 +34,6 @@ type ViewModel
 type alias EntityViewModel =
     { id : Document.Id
     , onFocusIn : Msg
-    , onFocus : Msg
-    , onBlur : Msg
     , startEditingMsg : Msg
     , toggleDeleteMsg : Msg
     , startEditingMsg : Msg

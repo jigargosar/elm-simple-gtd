@@ -46,12 +46,6 @@ var _user$project$Model$getFocusInEntityIndex = F2(
 			A2(_user$project$Model$getMaybeFocusInEntityIndex, entityList, model),
 			0);
 	});
-var _user$project$Model$setMaybeFocusedEntity = F2(
-	function (maybeEntity, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{maybeFocusedEntity: maybeEntity});
-	});
 var _user$project$Model$setKeyboardState = F2(
 	function (keyboardState, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -1310,9 +1304,7 @@ var _user$project$Model$Model = function (a) {
 																return function (q) {
 																	return function (r) {
 																		return function (s) {
-																			return function (t) {
-																				return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, maybeFocusedEntity: p, appVersion: q, deviceId: r, firebaseClient: s, focusInEntity: t};
-																			};
+																			return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s};
 																		};
 																	};
 																};
@@ -1521,7 +1513,6 @@ var _user$project$Model$init = function (flags) {
 		developmentMode: flags.developmentMode,
 		selectedEntityIdSet: _elm_lang$core$Set$empty,
 		layout: {narrow: false, forceNarrow: false},
-		maybeFocusedEntity: _elm_lang$core$Maybe$Nothing,
 		appVersion: flags.appVersion,
 		deviceId: flags.deviceId,
 		focusInEntity: _user$project$Model$inboxEntity,

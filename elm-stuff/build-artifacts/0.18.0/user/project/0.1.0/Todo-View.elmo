@@ -350,26 +350,14 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 						_user$project$Context$getName)(contextId),
 					'Inbox')));
 		var todoId = _user$project$Document$getId(todo);
-		var isFocused = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				vc.maybeFocusedEntity,
-				function (_p6) {
-					return A2(
-						_user$project$Ext_Function$equals,
-						todoId,
-						_user$project$Model$getEntityId(_p6));
-				}),
-			false);
 		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
-		var onKeyDownMsg = function (_p7) {
-			var _p8 = _p7;
-			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p8)) {
+		var onKeyDownMsg = function (_p6) {
+			var _p7 = _p6;
+			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p7)) {
 				return _user$project$Model$commonMsg.noOp;
 			} else {
-				var _p9 = _p8.key;
-				switch (_p9.ctor) {
+				var _p8 = _p7.key;
+				switch (_p8.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 					case 'CharE':
@@ -391,7 +379,6 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			isDone: _user$project$Todo$isDone(todo),
 			key: todoId,
 			isDeleted: _user$project$Todo$getDeleted(todo),
-			isFocused: isFocused,
 			onKeyDownMsg: onKeyDownMsg,
 			text: text,
 			displayText: displayText,
@@ -421,15 +408,13 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Todo_View$createEditTodoViewModel, todo)),
 			onDeleteClicked: toggleDeleteMsg,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
-			onFocus: createEntityActionMsg(_user$project$Entity$OnFocus),
-			onBlur: createEntityActionMsg(_user$project$Entity$OnBlur),
 			tabindexAV: tabindexAV,
 			isSelected: A2(_elm_lang$core$Set$member, todoId, vc.selectedEntityIdSet)
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p10, content) {
-		var _p11 = _p10;
+	function (_p9, content) {
+		var _p10 = _p9;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$button,
 			{
@@ -448,7 +433,7 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
 						_1: {
 							ctor: '::',
-							_0: _p11.tabindexAV,
+							_0: _p10.tabindexAV,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -849,22 +834,14 @@ var _user$project$Todo_View$init = function (vm) {
 				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onFocus(vm.onFocus),
+					_0: vm.tabindexAV,
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onBlur(vm.onBlur),
+						_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
 						_1: {
 							ctor: '::',
-							_0: vm.tabindexAV,
-							_1: {
-								ctor: '::',
-								_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
-								_1: {
-									ctor: '::',
-									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-key', vm.key),
-									_1: {ctor: '[]'}
-								}
-							}
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-key', vm.key),
+							_1: {ctor: '[]'}
 						}
 					}
 				}
@@ -872,7 +849,7 @@ var _user$project$Todo_View$init = function (vm) {
 		},
 		A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p12) {
+			function (_p11) {
 				return _user$project$Todo_View$defaultView(vm);
 			},
 			_user$project$Todo_View$editView,
@@ -910,13 +887,7 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 																						return function (w) {
 																							return function (x) {
 																								return function (y) {
-																									return function (z) {
-																										return function (_1) {
-																											return function (_2) {
-																												return {text: a, key: b, displayText: c, isDone: d, isDeleted: e, isFocused: f, onKeyDownMsg: g, projectDisplayName: h, contextDisplayName: i, selectedProjectIndex: j, setContextMsg: k, setProjectMsg: l, startEditingMsg: m, toggleDoneMsg: n, onDeleteClicked: o, showDetails: p, activeContexts: q, activeProjects: r, onReminderButtonClicked: s, showContextDropdownMsg: t, showProjectDropdownMsg: u, reminder: v, edit: w, onFocusIn: x, onFocus: y, onBlur: z, tabindexAV: _1, isSelected: _2};
-																											};
-																										};
-																									};
+																									return {text: a, key: b, displayText: c, isDone: d, isDeleted: e, onKeyDownMsg: f, projectDisplayName: g, contextDisplayName: h, selectedProjectIndex: i, setContextMsg: j, setProjectMsg: k, startEditingMsg: l, toggleDoneMsg: m, onDeleteClicked: n, showDetails: o, activeContexts: p, activeProjects: q, onReminderButtonClicked: r, showContextDropdownMsg: s, showProjectDropdownMsg: t, reminder: u, edit: v, onFocusIn: w, tabindexAV: x, isSelected: y};
 																								};
 																							};
 																						};

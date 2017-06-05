@@ -318,12 +318,6 @@ update msg =
                         Entity.OnFocusIn ->
                             Return.map (Model.setFocusInEntity entity)
 
-                        Entity.OnFocus ->
-                            Return.map (Model.setMaybeFocusedEntity (Just entity))
-
-                        Entity.OnBlur ->
-                            Return.map (Model.setMaybeFocusedEntity Nothing)
-
                         Entity.ToggleSelected ->
                             Return.map (Model.toggleEntitySelection entity)
 

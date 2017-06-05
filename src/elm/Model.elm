@@ -158,12 +158,12 @@ focusInEntity =
     { get = .focusInEntity, set = (\s b -> { b | focusInEntity = s }) }
 
 
-over lens smallF big =
-    setIn big lens (smallF (lens.get big))
+over =
+    Record.over
 
 
-setIn big lens small =
-    lens.set small big
+setIn =
+    Record.setIn
 
 
 init : Flags -> Model

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.17.2 - 2017-06-05
 * extract schedule model from todo.
 * extract record update helpers in Ext.Record
 * [fix] arrow key navigation works even when entity list contains two null entities, i.e. same id but different entity type.

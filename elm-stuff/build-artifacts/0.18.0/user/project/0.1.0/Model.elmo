@@ -366,7 +366,7 @@ var _user$project$Model$getCurrentTodoListSortByFunction = function (model) {
 		case 'BinView':
 			return function (_p18) {
 				return _elm_lang$core$Basics$negate(
-					_user$project$Todo$getDeletedAt(_p18));
+					_user$project$Todo$getModifiedAt(_p18));
 			};
 		case 'DoneView':
 			return function (_p19) {
@@ -1067,7 +1067,7 @@ var _user$project$Model$insertTodo = function (constructWithId) {
 };
 var _user$project$Model$findAndUpdateAllTodos = F3(
 	function (findFn, action, model) {
-		var updateFn = A2(_user$project$Todo$update, action, model.now);
+		var updateFn = _user$project$Todo$update(action);
 		var todoChangesToCmd = function (_p50) {
 			var _p51 = _p50;
 			var _p52 = _user$project$Model$getMaybeUserId(_p51._1);
@@ -1130,7 +1130,11 @@ var _user$project$Model$findAndSnoozeOverDueTodo = function (model) {
 					};
 				});
 		}(
-			A3(_user$project$Model$updateTodo, _user$project$Todo$AutoSnooze, todoId, model));
+			A3(
+				_user$project$Model$updateTodo,
+				_user$project$Todo$AutoSnooze(model.now),
+				todoId,
+				model));
 	};
 	return A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],

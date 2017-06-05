@@ -4,6 +4,7 @@ import Context
 import Date
 import Date.Distance exposing (defaultConfig)
 import Document exposing (Revision)
+import Ext.Record
 import Firebase exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
@@ -49,7 +50,6 @@ type alias Record =
     , schedule : Todo.Schedule.Model
     , projectId : Document.Id
     , contextId : Document.Id
-    , deletedAt : Time
     }
 
 
@@ -81,7 +81,7 @@ type UpdateAction
     | TurnReminderOff
     | SetSchedule Todo.Schedule.Model
     | SnoozeTill Time
-    | AutoSnooze
+    | AutoSnooze Time
 
 
 type alias ModelF =
@@ -124,14 +124,34 @@ getMaybeTime model =
     getMaybeReminderTime model |> Maybe.orElse (getMaybeDueAt model)
 
 
-update : UpdateAction -> Time -> ModelF
-update action now model =
+done =
+    Ext.Record.init .done (\s b -> { b | done = s })
+
+
+text =
+    Ext.Record.init .text (\s b -> { b | text = s })
+
+
+schedule =
+    Ext.Record.init .schedule (\s b -> { b | schedule = s })
+
+
+projectId =
+    Ext.Record.init .projectId (\s b -> { b | projectId = s })
+
+
+contextId =
+    Ext.Record.init .contextId (\s b -> { b | contextId = s })
+
+
+update : UpdateAction -> ModelF
+update action model =
     case action of
         SetDone done ->
             { model | done = done }
 
         SetDeleted deleted ->
-            { model | deleted = deleted, deletedAt = now }
+            { model | deleted = deleted }
 
         SetText text ->
             { model | text = text }
@@ -144,39 +164,39 @@ update action now model =
 
         CopyProjectAndContextId fromTodo ->
             model
-                |> update (SetContextId fromTodo.contextId) now
-                >> update (SetProjectId fromTodo.projectId) now
+                |> update (SetContextId fromTodo.contextId)
+                >> update (SetProjectId fromTodo.projectId)
 
         SetContext context ->
-            update (SetContextId (Document.getId context)) now model
+            update (SetContextId (Document.getId context)) model
 
         SetProject project ->
-            update (SetProjectId (Document.getId project)) now model
+            update (SetProjectId (Document.getId project)) model
 
         ToggleDone ->
-            update (SetDone (not model.done)) now model
+            update (SetDone (not model.done)) model
 
         MarkDone ->
-            update (SetDone True) now model
+            update (SetDone True) model
 
         ToggleDeleted ->
-            update (SetDeleted (not model.deleted)) now model
+            update (SetDeleted (not model.deleted)) model
 
         SetSchedule schedule ->
             { model | schedule = schedule }
 
         SetScheduleFromMaybeTime maybeTime ->
-            update (SetSchedule (Todo.Schedule.fromMaybeTime maybeTime)) now model
+            update (SetSchedule (Todo.Schedule.fromMaybeTime maybeTime)) model
 
         TurnReminderOff ->
-            update (SetSchedule (Todo.Schedule.turnReminderOff model.schedule)) now model
+            update (SetSchedule (Todo.Schedule.turnReminderOff model.schedule)) model
 
         SnoozeTill time ->
-            update (SetSchedule (Todo.Schedule.snoozeTill time model.schedule)) now model
+            update (SetSchedule (Todo.Schedule.snoozeTill time model.schedule)) model
 
-        AutoSnooze ->
+        AutoSnooze now ->
             --todo: add update schedule and or lens.
-            update (SetSchedule (Todo.Schedule.snoozeTill (now + (Time.minute * 15)) model.schedule)) now model
+            update (SetSchedule (Todo.Schedule.snoozeTill (now + (Time.minute * 15)) model.schedule)) model
 
 
 hasReminderChanged ( old, new ) =
@@ -202,10 +222,6 @@ defaultDeleted =
     False
 
 
-defaultDeletedAt =
-    0
-
-
 defaultDone =
     False
 
@@ -218,7 +234,7 @@ defaultContextId =
     ""
 
 
-todoConstructor id rev createdAt modifiedAt deleted deviceId deletedAt done text dueAt projectId contextId reminder =
+todoConstructor id rev createdAt modifiedAt deleted deviceId done text dueAt projectId contextId reminder =
     { id = id
     , rev = rev
     , dirty = False
@@ -228,7 +244,6 @@ todoConstructor id rev createdAt modifiedAt deleted deviceId deletedAt done text
     , deleted = deleted
 
     --
-    , deletedAt = deletedAt
     , done = done
     , text = text
     , schedule = dueAtAndReminderToSchedule dueAt reminder
@@ -251,8 +266,7 @@ dueAtAndReminderToSchedule dueAt reminder =
 
 
 todoRecordDecoder =
-    D.optional "deletedAt" D.float defaultDeletedAt
-        >> D.optional "done" D.bool defaultDone
+    D.optional "done" D.bool defaultDone
         >> D.required "text" D.string
         >> D.optional "dueAt" (D.maybe D.float) defaultDueAt
         >> D.optional "projectId" D.string defaultProjectId
@@ -280,15 +294,7 @@ encodeOtherFields todo =
     , "projectId" => (todo.projectId |> E.string)
     , "contextId" => (todo.contextId |> E.string)
     , "reminder" => (Todo.Schedule.getMaybeReminderTime todo.schedule |> encodeReminder)
-    , "deletedAt" => E.float (getDeletedAt todo)
     ]
-
-
-getDeletedAt todo =
-    if getDeleted todo && todo.deletedAt == defaultDeletedAt then
-        getModifiedAt todo
-    else
-        todo.deletedAt
 
 
 encodeReminder maybeReminderTime =
@@ -303,7 +309,6 @@ init createdAt text deviceId id =
         createdAt
         defaultDeleted
         deviceId
-        defaultDeletedAt
         defaultDone
         text
         defaultDueAt

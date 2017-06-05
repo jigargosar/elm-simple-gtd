@@ -393,7 +393,7 @@ findAndSnoozeOverDueTodo : Model -> Maybe ( ( Todo.Model, Model ), Cmd msg )
 findAndSnoozeOverDueTodo model =
     let
         snooze todoId =
-            updateTodo Todo.AutoSnooze todoId model
+            updateTodo (Todo.AutoSnooze model.now) todoId model
                 |> (\( model, cmd ) ->
                         findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
                    )
@@ -568,7 +568,7 @@ toggleDeleteEntity entity model =
                     updateProject entityId Document.toggleDeleted
 
                 Entity.TodoEntity todo ->
-                    updateTodo Todo.ToggleDeleted entityId
+                    updateTodo (Todo.ToggleDeleted) entityId
 
 
 getMaybeEditTodoReminderForm model =
@@ -703,7 +703,7 @@ getTodoListFilterForCurrentView model =
 getCurrentTodoListSortByFunction model =
     case getMainViewType model of
         BinView ->
-            Todo.getDeletedAt >> negate
+            Todo.getModifiedAt >> negate
 
         DoneView ->
             Todo.getModifiedAt >> negate
@@ -1135,7 +1135,7 @@ findAndUpdateAllTodos findFn action model =
                         |> Cmd.batch
 
         updateFn =
-            Todo.update action model.now
+            Todo.update action
     in
         Record.overT2 todoStore (Store.findAndUpdateAll findFn model.now updateFn) model
             |> apply2 ( Tuple.second, todoChangesToCmd )

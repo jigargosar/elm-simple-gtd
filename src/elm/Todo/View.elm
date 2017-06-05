@@ -295,14 +295,18 @@ type alias ReminderViewModel =
 createReminderViewModel : SharedViewModel -> Todo.Model -> ReminderViewModel
 createReminderViewModel vc todo =
     let
+        maybeTodoReminderForm =
+            vc.getMaybeTodoReminderFormForTodo todo
+
         form =
-            vc.getTodoReminderForm todo
+            maybeTodoReminderForm
+                |> Maybe.unpack (\_ -> Todo.ReminderForm.create todo vc.now) identity
 
         updateReminderForm =
             Model.UpdateReminderForm form
 
         isDropdownOpen =
-            Maybe.isJust (vc.getMaybeTodoReminderFormForTodo todo)
+            Maybe.isJust maybeTodoReminderForm
 
         overDueText =
             "Overdue"

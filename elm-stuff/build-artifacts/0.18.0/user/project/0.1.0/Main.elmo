@@ -62,9 +62,12 @@ var _user$project$Main$persist = function (lens) {
 		function (m) {
 			return A2(
 				_elm_lang$core$Tuple$mapFirst,
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], lens.set, m),
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
+					_user$project$Ext_Record$set(lens),
+					m),
 				_user$project$Store$persist(
-					lens.get(m)));
+					A2(_user$project$Ext_Record$get, lens, m)));
 		});
 };
 var _user$project$Main$persistAll = function (_p1) {

@@ -8,29 +8,38 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 
 
-type alias Lens small big =
+type alias LensRec small big =
     { get : big -> small, set : small -> big -> big }
 
 
-type alias LensT2 small big x =
-    { get : big -> small, set : ( x, small ) -> big -> ( x, big ) }
+type Lens small big
+    = Lens (LensRec small big)
+
+
+init : (big -> small) -> (small -> big -> big) -> Lens small big
+init getter setter =
+    Lens { get = getter, set = setter }
+
+
+get (Lens lens) big =
+    lens.get big
+
+
+set (Lens lens) small big =
+    lens.set small big
 
 
 over lens smallF big =
-    setIn big lens (smallF (lens.get big))
+    setIn big lens (smallF (get lens big))
 
 
-overT2 lens smallFT2 b =
+setIn big lens small =
+    set lens small big
+
+
+overT2 (Lens lens) smallFT2 b =
     let
         ( x, s ) =
             lens.get b |> smallFT2
     in
         ( x, lens.set s b )
-
-
-setIn big lens small =
-    lens.set small big
-
-
-createT2 getter setter =
-    { get = getter, set = (\( x, s ) b -> ( x, setter s b )) }

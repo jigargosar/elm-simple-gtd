@@ -10,7 +10,7 @@ import Entity exposing (Entity)
 import Ext.Keyboard as Keyboard
 import Ext.List as List
 import Ext.Predicate
-import Ext.Record as Record exposing (LensT2)
+import Ext.Record as Record
 import Firebase exposing (DeviceId)
 import LaunchBar.Form
 import Project
@@ -123,39 +123,39 @@ type alias TodoNotificationEvent =
 
 
 contextStore =
-    { get = .contextStore, set = (\s b -> { b | contextStore = s }) }
+    Record.init .contextStore (\s b -> { b | contextStore = s })
 
 
 projectStore =
-    { get = .projectStore, set = (\s b -> { b | projectStore = s }) }
+    Record.init .projectStore (\s b -> { b | projectStore = s })
 
 
 todoStore =
-    { get = .todoStore, set = (\s b -> { b | todoStore = s }) }
+    Record.init .todoStore (\s b -> { b | todoStore = s })
 
 
 keyboardState =
-    { get = .keyboardState, set = (\s b -> { b | keyboardState = s }) }
+    Record.init .keyboardState (\s b -> { b | keyboardState = s })
 
 
 now =
-    { get = .now, set = (\s b -> { b | now = s }) }
+    Record.init .now (\s b -> { b | now = s })
 
 
 firebaseClient =
-    { get = .firebaseClient, set = (\s b -> { b | firebaseClient = s }) }
+    Record.init .firebaseClient (\s b -> { b | firebaseClient = s })
 
 
 editMode =
-    { get = .editMode, set = (\s b -> { b | editMode = s }) }
+    Record.init .editMode (\s b -> { b | editMode = s })
 
 
 user =
-    { get = .user, set = (\s b -> { b | user = s }) }
+    Record.init .user (\s b -> { b | user = s })
 
 
 focusInEntity =
-    { get = .focusInEntity, set = (\s b -> { b | focusInEntity = s }) }
+    Record.init .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
 over =
@@ -164,6 +164,10 @@ over =
 
 setIn =
     Record.setIn
+
+
+set =
+    Record.set
 
 
 init : Flags -> Model
@@ -216,15 +220,15 @@ inboxEntity =
 
 
 getMaybeUserProfile =
-    user.get >> Firebase.getMaybeUserProfile
+    .user >> Firebase.getMaybeUserProfile
 
 
 getMaybeUserId =
-    user.get >> Firebase.getMaybeUserId
+    .user >> Firebase.getMaybeUserId
 
 
 setUser =
-    user.set
+    set user
 
 
 setFCMToken fcmToken model =
@@ -423,30 +427,30 @@ createAndEditNewContext model =
 
 
 isShowDetailsKeyPressed =
-    keyboardState.get >> Keyboard.isAltDown >> not
+    .keyboardState >> Keyboard.isAltDown >> not
 
 
 activateLaunchBar : Time -> ModelF
 activateLaunchBar now =
-    editMode.set (LaunchBar.Form.create now |> EditMode.LaunchBar)
+    set editMode (LaunchBar.Form.create now |> EditMode.LaunchBar)
 
 
 updateLaunchBarInput now text form =
-    editMode.set (LaunchBar.Form.updateInput now text form |> EditMode.LaunchBar)
+    set editMode (LaunchBar.Form.updateInput now text form |> EditMode.LaunchBar)
 
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF
 activateNewTodoModeWithFocusInEntityAsReference model =
-    editMode.set (Todo.NewForm.create (focusInEntity.get model) "" |> EditMode.NewTodo) model
+    set editMode (Todo.NewForm.create (model.focusInEntity) "" |> EditMode.NewTodo) model
 
 
 activateNewTodoModeWithInboxAsReference : ModelF
 activateNewTodoModeWithInboxAsReference =
-    editMode.set (Todo.NewForm.create inboxEntity "" |> EditMode.NewTodo)
+    set editMode (Todo.NewForm.create inboxEntity "" |> EditMode.NewTodo)
 
 
 updateNewTodoText form text =
-    editMode.set (Todo.NewForm.setText text form |> EditMode.NewTodo)
+    set editMode (Todo.NewForm.setText text form |> EditMode.NewTodo)
 
 
 startEditingReminder : Todo.Model -> ModelF
@@ -1005,7 +1009,7 @@ setFocusInEntityWithId id model =
 
 setFocusInEntity entity =
     setFocusInEntityWithId (getEntityId entity)
-        >> focusInEntity.set entity
+        >> set focusInEntity entity
 
 
 setMaybeFocusedEntity maybeEntity model =

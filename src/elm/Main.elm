@@ -8,6 +8,7 @@ import EditMode
 import Entity
 import Ext.Debug
 import Ext.Keyboard as Keyboard exposing (Key)
+import Ext.Record
 import Ext.Return as Return
 import Firebase
 import LaunchBar
@@ -385,9 +386,9 @@ persistAll =
 persist lens =
     Return.andThen
         (\m ->
-            lens.get m
+            Ext.Record.get lens m
                 |> Store.persist
-                |> Tuple.mapFirst (lens.set # m)
+                |> Tuple.mapFirst (Ext.Record.set lens # m)
         )
 
 

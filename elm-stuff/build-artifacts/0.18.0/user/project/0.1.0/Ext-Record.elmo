@@ -1,33 +1,30 @@
-var _user$project$Ext_Record$createT2 = F2(
-	function (getter, setter) {
-		return {
-			get: getter,
-			set: F2(
-				function (_p0, b) {
-					var _p1 = _p0;
-					return {
-						ctor: '_Tuple2',
-						_0: _p1._0,
-						_1: A2(setter, _p1._1, b)
-					};
-				})
-		};
-	});
-var _user$project$Ext_Record$setIn = F3(
-	function (big, lens, small) {
-		return A2(lens.set, small, big);
-	});
 var _user$project$Ext_Record$overT2 = F3(
-	function (lens, smallFT2, b) {
+	function (_p0, smallFT2, b) {
+		var _p1 = _p0;
+		var _p3 = _p1._0;
 		var _p2 = smallFT2(
-			lens.get(b));
+			_p3.get(b));
 		var x = _p2._0;
 		var s = _p2._1;
 		return {
 			ctor: '_Tuple2',
 			_0: x,
-			_1: A2(lens.set, s, b)
+			_1: A2(_p3.set, s, b)
 		};
+	});
+var _user$project$Ext_Record$set = F3(
+	function (_p4, small, big) {
+		var _p5 = _p4;
+		return A2(_p5._0.set, small, big);
+	});
+var _user$project$Ext_Record$setIn = F3(
+	function (big, lens, small) {
+		return A3(_user$project$Ext_Record$set, lens, small, big);
+	});
+var _user$project$Ext_Record$get = F2(
+	function (_p6, big) {
+		var _p7 = _p6;
+		return _p7._0.get(big);
 	});
 var _user$project$Ext_Record$over = F3(
 	function (lens, smallF, big) {
@@ -36,13 +33,17 @@ var _user$project$Ext_Record$over = F3(
 			big,
 			lens,
 			smallF(
-				lens.get(big)));
+				A2(_user$project$Ext_Record$get, lens, big)));
 	});
-var _user$project$Ext_Record$Lens = F2(
+var _user$project$Ext_Record$LensRec = F2(
 	function (a, b) {
 		return {get: a, set: b};
 	});
-var _user$project$Ext_Record$LensT2 = F2(
-	function (a, b) {
-		return {get: a, set: b};
+var _user$project$Ext_Record$Lens = function (a) {
+	return {ctor: 'Lens', _0: a};
+};
+var _user$project$Ext_Record$init = F2(
+	function (getter, setter) {
+		return _user$project$Ext_Record$Lens(
+			{get: getter, set: setter});
 	});

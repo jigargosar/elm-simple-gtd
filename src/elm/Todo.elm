@@ -23,6 +23,7 @@ import Dict.Extra as Dict
 import Time exposing (Time)
 import Project
 import Store
+import Todo.Schedule
 
 
 type alias Text =
@@ -38,10 +39,6 @@ type alias Id =
     Document.Id
 
 
-
---    | WaitingForResponseTill Time
-
-
 defaultReminder =
     None
 
@@ -49,10 +46,9 @@ defaultReminder =
 type alias Record =
     { done : Bool
     , text : Text
-    , dueAt : Maybe Time
+    , schedule : Todo.Schedule.Model
     , projectId : Document.Id
     , contextId : Document.Id
-    , reminder : Reminder
     , deletedAt : Time
     }
 
@@ -75,7 +71,7 @@ type UpdateAction
     | SetText Text
     | SetDeleted Bool
     | SetContextId Id
-    | SetTime (Maybe Time)
+    | SetScheduleFromMaybeTime (Maybe Time)
     | SetContext Context.Model
     | SetProjectId Id
     | CopyProjectAndContextId Model
@@ -83,16 +79,22 @@ type UpdateAction
     | ToggleDone
     | ToggleDeleted
     | TurnReminderOff
+    | SetSchedule Todo.Schedule.Model
     | SnoozeTill Time
+    | AutoSnooze
 
 
 type alias ModelF =
     Model -> Model
 
 
-getDueAt : Model -> Maybe Time
-getDueAt =
-    (.dueAt)
+getMaybeDueAt : Model -> Maybe Time
+getMaybeDueAt =
+    .schedule >> Todo.Schedule.getMaybeDueAt
+
+
+getMaybeReminderTime =
+    .schedule >> Todo.Schedule.getMaybeReminderTime
 
 
 getDeleted : Model -> Bool
@@ -119,7 +121,7 @@ getModifiedAt =
 
 
 getMaybeTime model =
-    getMaybeReminderTime model |> Maybe.orElse (getDueAt model)
+    getMaybeReminderTime model |> Maybe.orElse (getMaybeDueAt model)
 
 
 update : List UpdateAction -> Time -> ModelF
@@ -128,17 +130,10 @@ update actions now =
         innerUpdate action model =
             case action of
                 SetDone done ->
-                    let
-                        reminder =
-                            if done then
-                                None
-                            else
-                                model.reminder
-                    in
-                        { model | done = done, reminder = reminder }
+                    { model | done = done }
 
                 SetDeleted deleted ->
-                    { model | deleted = deleted, deletedAt = now, reminder = None }
+                    { model | deleted = deleted, deletedAt = now }
 
                 SetText text ->
                     { model | text = text }
@@ -169,37 +164,29 @@ update actions now =
                 ToggleDeleted ->
                     innerUpdate (SetDeleted (not model.deleted)) model
 
-                SetTime maybeTime ->
-                    let
-                        reminder =
-                            maybeTimeToReminder maybeTime
-                    in
-                        { model | dueAt = maybeTime, reminder = reminder }
+                SetSchedule schedule ->
+                    { model | schedule = schedule }
+
+                SetScheduleFromMaybeTime maybeTime ->
+                    innerUpdate (SetSchedule (Todo.Schedule.fromMaybeTime maybeTime)) model
 
                 TurnReminderOff ->
-                    { model | reminder = None }
+                    innerUpdate (SetSchedule (Todo.Schedule.turnReminderOff model.schedule)) model
 
                 SnoozeTill time ->
-                    { model | reminder = At time }
+                    innerUpdate (SetSchedule (Todo.Schedule.snoozeTill time model.schedule)) model
+
+                AutoSnooze ->
+                    --todo: add update schedule and or lens.
+                    -- todo: remove multiple actions and updating modified at.
+                    innerUpdate (SetSchedule (Todo.Schedule.snoozeTill (now + (Time.minute * 15)) model.schedule)) model
     in
         (List.foldl innerUpdate # actions)
             >> (\model -> { model | modifiedAt = now })
 
 
 hasReminderChanged ( old, new ) =
-    old.reminder /= new.reminder
-
-
-getMaybeReminderTime model =
-    if Maybe.isNothing model.dueAt then
-        Nothing
-    else
-        case model.reminder of
-            None ->
-                Nothing
-
-            At time ->
-                Just time
+    Todo.Schedule.hasReminderChanged old.schedule new.schedule
 
 
 isReminderOverdue now =
@@ -207,14 +194,10 @@ isReminderOverdue now =
 
 
 isSnoozed todo =
-    ( getMaybeReminderTime todo, getDueAt todo )
+    ( getMaybeReminderTime todo, getMaybeDueAt todo )
         |> maybe2Tuple
         ?|> uncurry notEquals
         ?= False
-
-
-maybeTimeToReminder maybeTime =
-    maybeTime ?|> At ?= None
 
 
 defaultDueAt =
@@ -254,11 +237,23 @@ todoConstructor id rev createdAt modifiedAt deleted deviceId deletedAt done text
     , deletedAt = deletedAt
     , done = done
     , text = text
-    , dueAt = dueAt
+    , schedule = dueAtAndReminderToSchedule dueAt reminder
     , projectId = projectId
     , contextId = contextId
-    , reminder = reminder
     }
+
+
+dueAtAndReminderToSchedule dueAt reminder =
+    dueAt
+        ?|> (\dueAt ->
+                case reminder of
+                    None ->
+                        Todo.Schedule.NoReminder dueAt
+
+                    At reminderTime ->
+                        Todo.Schedule.WithReminder dueAt reminderTime
+            )
+        ?= Todo.Schedule.unscheduled
 
 
 todoRecordDecoder =
@@ -287,10 +282,10 @@ decoder =
 encodeOtherFields todo =
     [ "done" => E.bool (isDone todo)
     , "text" => E.string (getText todo)
-    , "dueAt" => (getDueAt todo |> Maybe.map E.float ?= E.null)
+    , "dueAt" => (getMaybeDueAt todo |> Maybe.map E.float ?= E.null)
     , "projectId" => (todo.projectId |> E.string)
     , "contextId" => (todo.contextId |> E.string)
-    , "reminder" => encodeReminder todo.reminder
+    , "reminder" => (Todo.Schedule.getMaybeReminderTime todo.schedule |> encodeReminder)
     , "deletedAt" => E.float (getDeletedAt todo)
     ]
 
@@ -302,13 +297,8 @@ getDeletedAt todo =
         todo.deletedAt
 
 
-encodeReminder reminder =
-    case reminder of
-        None ->
-            E.null
-
-        At time ->
-            E.object [ "at" => E.float time ]
+encodeReminder maybeReminderTime =
+    maybeReminderTime ?|> (\reminderTime -> E.object [ "at" => E.float reminderTime ]) ?= E.null
 
 
 init createdAt text deviceId id =

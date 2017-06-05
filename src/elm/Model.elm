@@ -426,7 +426,7 @@ findAndSnoozeOverDueTodo : Model -> Maybe ( ( Todo.Model, Model ), Cmd msg )
 findAndSnoozeOverDueTodo model =
     let
         snooze todoId =
-            updateTodo (Todo.SnoozeTill (model.now + (Time.minute * 15))) todoId model
+            updateTodo Todo.AutoSnooze todoId model
                 |> (\( model, cmd ) ->
                         findTodoById todoId model ?|> (\todo -> ( ( todo, model ), cmd ))
                    )
@@ -536,7 +536,7 @@ saveCurrentForm model =
 
         EditMode.EditTodoReminder form ->
             model
-                |> updateTodo (Todo.SetTime (Todo.ReminderForm.getMaybeTime form)) form.id
+                |> updateTodo (Todo.SetScheduleFromMaybeTime (Todo.ReminderForm.getMaybeTime form)) form.id
 
         EditMode.EditTodoContext form ->
             model

@@ -1,0 +1,69 @@
+var _user$project$Todo_Schedule$getMaybeReminderTime = function (model) {
+	var _p0 = model;
+	switch (_p0.ctor) {
+		case 'NoReminder':
+			return _elm_lang$core$Maybe$Nothing;
+		case 'WithReminder':
+			return _elm_lang$core$Maybe$Just(_p0._1);
+		default:
+			return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _user$project$Todo_Schedule$hasReminderChanged = F2(
+	function (old, $new) {
+		return !_elm_lang$core$Native_Utils.eq(
+			_user$project$Todo_Schedule$getMaybeReminderTime(old),
+			_user$project$Todo_Schedule$getMaybeReminderTime($new));
+	});
+var _user$project$Todo_Schedule$getMaybeDueAt = function (model) {
+	var _p1 = model;
+	switch (_p1.ctor) {
+		case 'NoReminder':
+			return _elm_lang$core$Maybe$Just(_p1._0);
+		case 'WithReminder':
+			return _elm_lang$core$Maybe$Just(_p1._0);
+		default:
+			return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _user$project$Todo_Schedule$Unscheduled = {ctor: 'Unscheduled'};
+var _user$project$Todo_Schedule$unscheduled = _user$project$Todo_Schedule$Unscheduled;
+var _user$project$Todo_Schedule$WithReminder = F2(
+	function (a, b) {
+		return {ctor: 'WithReminder', _0: a, _1: b};
+	});
+var _user$project$Todo_Schedule$initWithReminder = function (time) {
+	return A2(_user$project$Todo_Schedule$WithReminder, time, time);
+};
+var _user$project$Todo_Schedule$fromMaybeTime = function (maybeTime) {
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeTime, _user$project$Todo_Schedule$initWithReminder),
+		_user$project$Todo_Schedule$unscheduled);
+};
+var _user$project$Todo_Schedule$snoozeTill = F2(
+	function (snoozedTillTime, model) {
+		var _p2 = model;
+		switch (_p2.ctor) {
+			case 'NoReminder':
+				return A2(_user$project$Todo_Schedule$WithReminder, _p2._0, snoozedTillTime);
+			case 'WithReminder':
+				return A2(_user$project$Todo_Schedule$WithReminder, _p2._0, snoozedTillTime);
+			default:
+				return model;
+		}
+	});
+var _user$project$Todo_Schedule$NoReminder = function (a) {
+	return {ctor: 'NoReminder', _0: a};
+};
+var _user$project$Todo_Schedule$turnReminderOff = function (model) {
+	var _p3 = model;
+	switch (_p3.ctor) {
+		case 'WithReminder':
+			return _user$project$Todo_Schedule$NoReminder(_p3._0);
+		case 'NoReminder':
+			return model;
+		default:
+			return model;
+	}
+};

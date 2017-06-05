@@ -387,7 +387,7 @@ createReminderViewModel vc todo =
             Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
 
         dueAt =
-            Todo.getDueAt todo
+            Todo.getMaybeDueAt todo
     in
         { isDropdownOpen = isDropdownOpen
         , date = form.date
@@ -395,7 +395,7 @@ createReminderViewModel vc todo =
         , displayText = displayText
         , isOverDue = displayText == overDueText
         , isSnoozed = Todo.isSnoozed todo
-        , dueAtToolTipText = Todo.getDueAt todo ?|> Ext.Time.formatDateTime ?= ""
+        , dueAtToolTipText = Todo.getMaybeDueAt todo ?|> Ext.Time.formatDateTime ?= ""
         , dayDiffInWords = dueAt ?|> Ext.Time.dayDiffInWords vc.now ?= ""
         , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
         , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime

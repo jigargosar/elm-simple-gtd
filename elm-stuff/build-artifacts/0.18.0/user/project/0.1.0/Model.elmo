@@ -1156,11 +1156,7 @@ var _user$project$Model$findAndSnoozeOverDueTodo = function (model) {
 					};
 				});
 		}(
-			A3(
-				_user$project$Model$updateTodo,
-				_user$project$Todo$SnoozeTill(model.now + (_elm_lang$core$Time$minute * 15)),
-				todoId,
-				model));
+			A3(_user$project$Model$updateTodo, _user$project$Todo$AutoSnooze, todoId, model));
 	};
 	return A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
@@ -1269,7 +1265,7 @@ var _user$project$Model$saveCurrentForm = function (model) {
 			var _p70 = _p66._0;
 			return A3(
 				_user$project$Model$updateTodo,
-				_user$project$Todo$SetTime(
+				_user$project$Todo$SetScheduleFromMaybeTime(
 					_user$project$Todo_ReminderForm$getMaybeTime(_p70)),
 				_p70.id,
 				model);

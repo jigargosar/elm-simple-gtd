@@ -93,7 +93,7 @@ var _user$project$Todo_View$createEditTodoViewModel = F2(
 	});
 var _user$project$Todo_View$createReminderViewModel = F2(
 	function (vc, todo) {
-		var dueAt = _user$project$Todo$getDueAt(todo);
+		var dueAt = _user$project$Todo$getMaybeDueAt(todo);
 		var smartFormat = _user$project$Ext_Time$smartFormat(vc.now);
 		var overDueText = 'Overdue';
 		var formatReminderTime = function (time) {
@@ -123,7 +123,7 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-					_user$project$Todo$getDueAt(todo),
+					_user$project$Todo$getMaybeDueAt(todo),
 					_user$project$Ext_Time$formatDateTime),
 				''),
 			dayDiffInWords: A2(

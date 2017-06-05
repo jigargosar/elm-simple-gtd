@@ -125,6 +125,17 @@ var _user$project$Todo$hasReminderChanged = function (_p7) {
 	var _p8 = _p7;
 	return A2(_user$project$Todo_Schedule$hasReminderChanged, _p8._0.schedule, _p8._1.schedule);
 };
+var _user$project$Todo$deleted = A2(
+	_user$project$Ext_Record$init,
+	function (_) {
+		return _.deleted;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{deleted: s});
+		}));
 var _user$project$Todo$contextId = A2(
 	_user$project$Ext_Record$init,
 	function (_) {
@@ -158,6 +169,10 @@ var _user$project$Todo$schedule = A2(
 				b,
 				{schedule: s});
 		}));
+var _user$project$Todo$updateSchedule = F2(
+	function (fn, model) {
+		return A3(_user$project$Ext_Record$over, _user$project$Todo$schedule, fn, model);
+	});
 var _user$project$Todo$text = A2(
 	_user$project$Ext_Record$init,
 	function (_) {
@@ -448,117 +463,60 @@ var _user$project$Todo$SetScheduleFromMaybeTime = function (a) {
 var _user$project$Todo$SetContextId = function (a) {
 	return {ctor: 'SetContextId', _0: a};
 };
-var _user$project$Todo$SetDeleted = function (a) {
-	return {ctor: 'SetDeleted', _0: a};
+var _user$project$Todo$update = function (action) {
+	var _p19 = action;
+	switch (_p19.ctor) {
+		case 'SetText':
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$text, _p19._0);
+		case 'SetContextId':
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$contextId, _p19._0);
+		case 'SetProjectId':
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$projectId, _p19._0);
+		case 'SetSchedule':
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$schedule, _p19._0);
+		case 'CopyProjectAndContextId':
+			var _p21 = _p19._0;
+			return function (_p20) {
+				return A2(
+					_user$project$Todo$update,
+					_user$project$Todo$SetProjectId(_p21.projectId),
+					A2(
+						_user$project$Todo$update,
+						_user$project$Todo$SetContextId(_p21.contextId),
+						_p20));
+			};
+		case 'SetProject':
+			return A2(
+				_user$project$Ext_Record$set,
+				_user$project$Todo$projectId,
+				_user$project$Document$getId(_p19._0));
+		case 'SetContext':
+			return A2(
+				_user$project$Ext_Record$set,
+				_user$project$Todo$contextId,
+				_user$project$Document$getId(_p19._0));
+		case 'ToggleDone':
+			return A2(_user$project$Ext_Record$over, _user$project$Todo$done, _elm_lang$core$Basics$not);
+		case 'MarkDone':
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$done, true);
+		case 'ToggleDeleted':
+			return A2(_user$project$Ext_Record$over, _user$project$Todo$deleted, _elm_lang$core$Basics$not);
+		case 'SetScheduleFromMaybeTime':
+			return A2(
+				_user$project$Ext_Record$set,
+				_user$project$Todo$schedule,
+				_user$project$Todo_Schedule$fromMaybeTime(_p19._0));
+		case 'TurnReminderOff':
+			return _user$project$Todo$updateSchedule(_user$project$Todo_Schedule$turnReminderOff);
+		case 'SnoozeTill':
+			return _user$project$Todo$updateSchedule(
+				_user$project$Todo_Schedule$snoozeTill(_p19._0));
+		default:
+			return _user$project$Todo$updateSchedule(
+				_user$project$Todo_Schedule$snoozeTill(_p19._0 + (_elm_lang$core$Time$minute * 15)));
+	}
 };
 var _user$project$Todo$SetText = function (a) {
 	return {ctor: 'SetText', _0: a};
 };
 var _user$project$Todo$MarkDone = {ctor: 'MarkDone'};
-var _user$project$Todo$SetDone = function (a) {
-	return {ctor: 'SetDone', _0: a};
-};
-var _user$project$Todo$update = F2(
-	function (action, model) {
-		update:
-		while (true) {
-			var _p19 = action;
-			switch (_p19.ctor) {
-				case 'SetDone':
-					return _elm_lang$core$Native_Utils.update(
-						model,
-						{done: _p19._0});
-				case 'SetDeleted':
-					return _elm_lang$core$Native_Utils.update(
-						model,
-						{deleted: _p19._0});
-				case 'SetText':
-					return _elm_lang$core$Native_Utils.update(
-						model,
-						{text: _p19._0});
-				case 'SetContextId':
-					return _elm_lang$core$Native_Utils.update(
-						model,
-						{contextId: _p19._0});
-				case 'SetProjectId':
-					return _elm_lang$core$Native_Utils.update(
-						model,
-						{projectId: _p19._0});
-				case 'CopyProjectAndContextId':
-					var _p21 = _p19._0;
-					return function (_p20) {
-						return A2(
-							_user$project$Todo$update,
-							_user$project$Todo$SetProjectId(_p21.projectId),
-							A2(
-								_user$project$Todo$update,
-								_user$project$Todo$SetContextId(_p21.contextId),
-								_p20));
-					}(model);
-				case 'SetContext':
-					var _v3 = _user$project$Todo$SetContextId(
-						_user$project$Document$getId(_p19._0)),
-						_v4 = model;
-					action = _v3;
-					model = _v4;
-					continue update;
-				case 'SetProject':
-					var _v5 = _user$project$Todo$SetProjectId(
-						_user$project$Document$getId(_p19._0)),
-						_v6 = model;
-					action = _v5;
-					model = _v6;
-					continue update;
-				case 'ToggleDone':
-					var _v7 = _user$project$Todo$SetDone(!model.done),
-						_v8 = model;
-					action = _v7;
-					model = _v8;
-					continue update;
-				case 'MarkDone':
-					var _v9 = _user$project$Todo$SetDone(true),
-						_v10 = model;
-					action = _v9;
-					model = _v10;
-					continue update;
-				case 'ToggleDeleted':
-					var _v11 = _user$project$Todo$SetDeleted(!model.deleted),
-						_v12 = model;
-					action = _v11;
-					model = _v12;
-					continue update;
-				case 'SetSchedule':
-					return _elm_lang$core$Native_Utils.update(
-						model,
-						{schedule: _p19._0});
-				case 'SetScheduleFromMaybeTime':
-					var _v13 = _user$project$Todo$SetSchedule(
-						_user$project$Todo_Schedule$fromMaybeTime(_p19._0)),
-						_v14 = model;
-					action = _v13;
-					model = _v14;
-					continue update;
-				case 'TurnReminderOff':
-					var _v15 = _user$project$Todo$SetSchedule(
-						_user$project$Todo_Schedule$turnReminderOff(model.schedule)),
-						_v16 = model;
-					action = _v15;
-					model = _v16;
-					continue update;
-				case 'SnoozeTill':
-					var _v17 = _user$project$Todo$SetSchedule(
-						A2(_user$project$Todo_Schedule$snoozeTill, _p19._0, model.schedule)),
-						_v18 = model;
-					action = _v17;
-					model = _v18;
-					continue update;
-				default:
-					var _v19 = _user$project$Todo$SetSchedule(
-						A2(_user$project$Todo_Schedule$snoozeTill, _p19._0 + (_elm_lang$core$Time$minute * 15), model.schedule)),
-						_v20 = model;
-					action = _v19;
-					model = _v20;
-					continue update;
-			}
-		}
-	});

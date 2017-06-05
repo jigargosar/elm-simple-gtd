@@ -4,7 +4,7 @@ import Context
 import Date
 import Date.Distance exposing (defaultConfig)
 import Document exposing (Revision)
-import Ext.Record
+import Ext.Record exposing (over, set)
 import Firebase exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
@@ -66,10 +66,8 @@ type alias Encoded =
 
 
 type UpdateAction
-    = SetDone Bool
-    | MarkDone
+    = MarkDone
     | SetText Text
-    | SetDeleted Bool
     | SetContextId Id
     | SetScheduleFromMaybeTime (Maybe Time)
     | SetContext Context.Model
@@ -144,59 +142,59 @@ contextId =
     Ext.Record.init .contextId (\s b -> { b | contextId = s })
 
 
+deleted =
+    Ext.Record.init .deleted (\s b -> { b | deleted = s })
+
+
+updateSchedule fn model =
+    over schedule fn model
+
+
 update : UpdateAction -> ModelF
-update action model =
+update action =
     case action of
-        SetDone done ->
-            { model | done = done }
+        SetText val ->
+            set text val
 
-        SetDeleted deleted ->
-            { model | deleted = deleted }
+        SetContextId val ->
+            set contextId val
 
-        SetText text ->
-            { model | text = text }
+        SetProjectId val ->
+            set projectId val
 
-        SetContextId contextId ->
-            { model | contextId = contextId }
-
-        SetProjectId projectId ->
-            { model | projectId = projectId }
+        SetSchedule val ->
+            set schedule val
 
         CopyProjectAndContextId fromTodo ->
-            model
-                |> update (SetContextId fromTodo.contextId)
+            update (SetContextId fromTodo.contextId)
                 >> update (SetProjectId fromTodo.projectId)
 
-        SetContext context ->
-            update (SetContextId (Document.getId context)) model
-
         SetProject project ->
-            update (SetProjectId (Document.getId project)) model
+            Document.getId project |> set projectId
+
+        SetContext context ->
+            Document.getId context |> set contextId
 
         ToggleDone ->
-            update (SetDone (not model.done)) model
+            over done not
 
         MarkDone ->
-            update (SetDone True) model
+            set done True
 
         ToggleDeleted ->
-            update (SetDeleted (not model.deleted)) model
-
-        SetSchedule schedule ->
-            { model | schedule = schedule }
+            over deleted not
 
         SetScheduleFromMaybeTime maybeTime ->
-            update (SetSchedule (Todo.Schedule.fromMaybeTime maybeTime)) model
+            set schedule (Todo.Schedule.fromMaybeTime maybeTime)
 
         TurnReminderOff ->
-            update (SetSchedule (Todo.Schedule.turnReminderOff model.schedule)) model
+            updateSchedule Todo.Schedule.turnReminderOff
 
         SnoozeTill time ->
-            update (SetSchedule (Todo.Schedule.snoozeTill time model.schedule)) model
+            updateSchedule (Todo.Schedule.snoozeTill time)
 
         AutoSnooze now ->
-            --todo: add update schedule and or lens.
-            update (SetSchedule (Todo.Schedule.snoozeTill (now + (Time.minute * 15)) model.schedule)) model
+            updateSchedule (Todo.Schedule.snoozeTill (now + (Time.minute * 15)))
 
 
 hasReminderChanged ( old, new ) =

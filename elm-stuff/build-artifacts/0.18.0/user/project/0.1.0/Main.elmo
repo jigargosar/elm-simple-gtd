@@ -385,8 +385,6 @@ var _user$project$Main$update = function (msg) {
 									m,
 									{showDeleted: !m.showDeleted});
 							});
-					case 'AutoFocusPaperInput':
-						return _user$project$DomPorts$autoFocusInputCmd;
 					case 'TodoAction':
 						return _elm_lang$core$Basics$identity;
 					case 'ReminderOverlayAction':

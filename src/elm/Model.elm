@@ -75,7 +75,6 @@ type Msg
     | StartEditingContext Todo.Model
     | StartEditingProject Todo.Model
     | SaveCurrentForm
-    | AutoFocusInput
     | UpdateRemoteSyncFormUri EditMode.SyncForm String
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action

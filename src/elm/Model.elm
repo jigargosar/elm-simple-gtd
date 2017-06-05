@@ -1037,9 +1037,13 @@ updateKeyboardState updater model =
 
 setFocusInEntityByIndex entityList index model =
     let
-        focusedEntityId =
+        maybeEntity =
             List.clampIndex index entityList
                 |> (List.getAt # entityList)
+                |> Maybe.orElse (List.head entityList)
+
+        focusedEntityId =
+            maybeEntity
                 ?|> getEntityId
                 ?= ""
 
@@ -1047,6 +1051,7 @@ setFocusInEntityByIndex entityList index model =
             { id = focusedEntityId }
     in
         { model | focusedEntityInfo = focusedEntityInfo }
+            |> setMaybeFocusInEntity maybeEntity
 
 
 setFocusInEntityWithId id model =
@@ -1062,6 +1067,10 @@ setFocusInEntity entity =
         >> set focusInEntity entity
 
 
+setMaybeFocusInEntity maybeEntity model =
+    maybeEntity ?|> setFocusInEntity # model ?= model
+
+
 setMaybeFocusedEntity maybeEntity model =
     { model | maybeFocusedEntity = maybeEntity }
 
@@ -1071,8 +1080,7 @@ getFocusInEntityId model =
 
 
 getFocusInEntityIndex entityList model =
-    getMaybeFocusInEntityIndex entityList model
-        ?= 0
+    getMaybeFocusInEntityIndex entityList model ?= 0
 
 
 getMaybeFocusInEntityIndex entityList model =

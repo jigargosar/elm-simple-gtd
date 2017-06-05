@@ -201,21 +201,6 @@ var _user$project$Model$toggleEntitySelection = function (entity) {
 		_user$project$Model$toggleSetMember(
 			_user$project$Model$getEntityId(entity)));
 };
-var _user$project$Model$setFocusInEntityByIndex = F3(
-	function (entityList, index, model) {
-		var focusedEntityId = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_community$list_extra$List_Extra$getAt, entityList)(
-					A2(_user$project$Ext_List$clampIndex, index, entityList)),
-				_user$project$Model$getEntityId),
-			'');
-		var focusedEntityInfo = {id: focusedEntityId};
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{focusedEntityInfo: focusedEntityInfo});
-	});
 var _user$project$Model$getMaybeFocusInEntityIndex = F2(
 	function (entityList, model) {
 		return A2(
@@ -234,28 +219,6 @@ var _user$project$Model$getFocusInEntityIndex = F2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 			A2(_user$project$Model$getMaybeFocusInEntityIndex, entityList, model),
 			0);
-	});
-var _user$project$Model$focusPrevEntity = F2(
-	function (entityList, model) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-			_user$project$Model$setFocusInEntityByIndex(entityList),
-			model)(
-			A2(
-				_user$project$Ext_Function$andThenSubtract,
-				1,
-				A2(_user$project$Model$getFocusInEntityIndex, entityList, model)));
-	});
-var _user$project$Model$focusNextEntity = F2(
-	function (entityList, model) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-			_user$project$Model$setFocusInEntityByIndex(entityList),
-			model)(
-			A2(
-				_user$project$Ext_Function$add,
-				1,
-				A2(_user$project$Model$getFocusInEntityIndex, entityList, model)));
 	});
 var _user$project$Model$getMainViewType = function (_) {
 	return _.mainViewType;
@@ -782,6 +745,155 @@ var _user$project$Model$getCurrentViewEntityList = function (model) {
 		return {ctor: '[]'};
 	}
 };
+var _user$project$Model$isLayoutAutoNarrow = function (_p41) {
+	return A2(
+		_elm_lang$core$Basics$uncurry,
+		_user$project$Ext_Function$and,
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
+			{
+				ctor: '_Tuple2',
+				_0: function (_p42) {
+					return !function (_) {
+						return _.forceNarrow;
+					}(_p42);
+				},
+				_1: function (_) {
+					return _.narrow;
+				}
+			},
+			_user$project$Model$getLayout(_p41)));
+};
+var _user$project$Model$getLayoutForceNarrow = function (_p43) {
+	return function (_) {
+		return _.forceNarrow;
+	}(
+		function (_) {
+			return _.layout;
+		}(_p43));
+};
+var _user$project$Model$setLayoutNarrow = function (narrow) {
+	return _user$project$Model$updateLayout(
+		function (layout) {
+			return _elm_lang$core$Native_Utils.update(
+				layout,
+				{narrow: narrow});
+		});
+};
+var _user$project$Model$toggleLayoutForceNarrow = _user$project$Model$updateLayout(
+	function (layout) {
+		return _elm_lang$core$Native_Utils.update(
+			layout,
+			{forceNarrow: !layout.forceNarrow});
+	});
+var _user$project$Model$getMaybeUserId = function (_p44) {
+	return _user$project$Firebase$getMaybeUserId(
+		function (_) {
+			return _.user;
+		}(_p44));
+};
+var _user$project$Model$getMaybeUserProfile = function (_p45) {
+	return _user$project$Firebase$getMaybeUserProfile(
+		function (_) {
+			return _.user;
+		}(_p45));
+};
+var _user$project$Model$inboxEntity = _user$project$Entity$ContextEntity(_user$project$Context$null);
+var _user$project$Model$set = _user$project$Ext_Record$set;
+var _user$project$Model$setIn = _user$project$Ext_Record$setIn;
+var _user$project$Model$over = _user$project$Ext_Record$over;
+var _user$project$Model$focusInEntity = A2(
+	_user$project$Ext_Record$init,
+	function (_) {
+		return _.focusInEntity;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{focusInEntity: s});
+		}));
+var _user$project$Model$setFocusInEntity = function (entity) {
+	return function (_p46) {
+		return A3(
+			_user$project$Model$set,
+			_user$project$Model$focusInEntity,
+			entity,
+			A2(
+				_user$project$Model$setFocusInEntityWithId,
+				_user$project$Model$getEntityId(entity),
+				_p46));
+	};
+};
+var _user$project$Model$setFocusInEntityFromTodoId = F2(
+	function (todoId, model) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				_danielnarey$elm_toolkit$Toolkit_Helpers$maybe2Tuple(
+					{
+						ctor: '_Tuple2',
+						_0: A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+							A2(_user$project$Model$findTodoById, todoId, model),
+							_user$project$Entity$TodoEntity),
+						_1: _elm_lang$core$Maybe$Just(model)
+					}),
+				_elm_lang$core$Basics$uncurry(_user$project$Model$setFocusInEntity)),
+			model);
+	});
+var _user$project$Model$setMaybeFocusInEntity = F2(
+	function (maybeEntity, model) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				maybeEntity,
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$setFocusInEntity, model)),
+			model);
+	});
+var _user$project$Model$setFocusInEntityByIndex = F3(
+	function (entityList, index, model) {
+		var maybeEntity = A2(
+			_elm_community$maybe_extra$Maybe_Extra$orElse,
+			_elm_lang$core$List$head(entityList),
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_community$list_extra$List_Extra$getAt, entityList)(
+				A2(_user$project$Ext_List$clampIndex, index, entityList)));
+		var focusedEntityId = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeEntity, _user$project$Model$getEntityId),
+			'');
+		var focusedEntityInfo = {id: focusedEntityId};
+		return A2(
+			_user$project$Model$setMaybeFocusInEntity,
+			maybeEntity,
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{focusedEntityInfo: focusedEntityInfo}));
+	});
+var _user$project$Model$focusPrevEntity = F2(
+	function (entityList, model) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
+			_user$project$Model$setFocusInEntityByIndex(entityList),
+			model)(
+			A2(
+				_user$project$Ext_Function$andThenSubtract,
+				1,
+				A2(_user$project$Model$getFocusInEntityIndex, entityList, model)));
+	});
+var _user$project$Model$focusNextEntity = F2(
+	function (entityList, model) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
+			_user$project$Model$setFocusInEntityByIndex(entityList),
+			model)(
+			A2(
+				_user$project$Ext_Function$add,
+				1,
+				A2(_user$project$Model$getFocusInEntityIndex, entityList, model)));
+	});
 var _user$project$Model$updateEntityListCursorFromEntityIndexTuple = F2(
 	function (model, indexTuple) {
 		var setFocusInIndex = function (index) {
@@ -791,9 +903,9 @@ var _user$project$Model$updateEntityListCursorFromEntityIndexTuple = F2(
 				index);
 		};
 		return function () {
-			var _p41 = indexTuple;
-			if (((_p41.ctor === '_Tuple2') && (_p41._0.ctor === 'Just')) && (_p41._1.ctor === 'Nothing')) {
-				return setFocusInIndex(_p41._0._0);
+			var _p47 = indexTuple;
+			if (((_p47.ctor === '_Tuple2') && (_p47._0.ctor === 'Just')) && (_p47._1.ctor === 'Nothing')) {
+				return setFocusInIndex(_p47._0._0);
 			} else {
 				return _elm_lang$core$Basics$identity;
 			}
@@ -806,9 +918,9 @@ var _user$project$Model$updateEntityListCursor = F2(
 			newModel,
 			A2(
 				_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth,
-				function (_p42) {
+				function (_p48) {
 					return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$getMaybeFocusInEntityIndex, oldModel)(
-						_user$project$Model$getCurrentViewEntityList(_p42));
+						_user$project$Model$getCurrentViewEntityList(_p48));
 				},
 				{ctor: '_Tuple2', _0: oldModel, _1: newModel}));
 	});
@@ -831,104 +943,6 @@ var _user$project$Model$updateAllNamedDocsDocs = F4(
 					store,
 					A3(_user$project$Store$updateAll, idSet, model.now, updateFn),
 					model)));
-	});
-var _user$project$Model$isLayoutAutoNarrow = function (_p43) {
-	return A2(
-		_elm_lang$core$Basics$uncurry,
-		_user$project$Ext_Function$and,
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
-			{
-				ctor: '_Tuple2',
-				_0: function (_p44) {
-					return !function (_) {
-						return _.forceNarrow;
-					}(_p44);
-				},
-				_1: function (_) {
-					return _.narrow;
-				}
-			},
-			_user$project$Model$getLayout(_p43)));
-};
-var _user$project$Model$getLayoutForceNarrow = function (_p45) {
-	return function (_) {
-		return _.forceNarrow;
-	}(
-		function (_) {
-			return _.layout;
-		}(_p45));
-};
-var _user$project$Model$setLayoutNarrow = function (narrow) {
-	return _user$project$Model$updateLayout(
-		function (layout) {
-			return _elm_lang$core$Native_Utils.update(
-				layout,
-				{narrow: narrow});
-		});
-};
-var _user$project$Model$toggleLayoutForceNarrow = _user$project$Model$updateLayout(
-	function (layout) {
-		return _elm_lang$core$Native_Utils.update(
-			layout,
-			{forceNarrow: !layout.forceNarrow});
-	});
-var _user$project$Model$getMaybeUserId = function (_p46) {
-	return _user$project$Firebase$getMaybeUserId(
-		function (_) {
-			return _.user;
-		}(_p46));
-};
-var _user$project$Model$getMaybeUserProfile = function (_p47) {
-	return _user$project$Firebase$getMaybeUserProfile(
-		function (_) {
-			return _.user;
-		}(_p47));
-};
-var _user$project$Model$inboxEntity = _user$project$Entity$ContextEntity(_user$project$Context$null);
-var _user$project$Model$set = _user$project$Ext_Record$set;
-var _user$project$Model$setIn = _user$project$Ext_Record$setIn;
-var _user$project$Model$over = _user$project$Ext_Record$over;
-var _user$project$Model$focusInEntity = A2(
-	_user$project$Ext_Record$init,
-	function (_) {
-		return _.focusInEntity;
-	},
-	F2(
-		function (s, b) {
-			return _elm_lang$core$Native_Utils.update(
-				b,
-				{focusInEntity: s});
-		}));
-var _user$project$Model$setFocusInEntity = function (entity) {
-	return function (_p48) {
-		return A3(
-			_user$project$Model$set,
-			_user$project$Model$focusInEntity,
-			entity,
-			A2(
-				_user$project$Model$setFocusInEntityWithId,
-				_user$project$Model$getEntityId(entity),
-				_p48));
-	};
-};
-var _user$project$Model$setFocusInEntityFromTodoId = F2(
-	function (todoId, model) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				_danielnarey$elm_toolkit$Toolkit_Helpers$maybe2Tuple(
-					{
-						ctor: '_Tuple2',
-						_0: A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-							A2(_user$project$Model$findTodoById, todoId, model),
-							_user$project$Entity$TodoEntity),
-						_1: _elm_lang$core$Maybe$Just(model)
-					}),
-				_elm_lang$core$Basics$uncurry(_user$project$Model$setFocusInEntity)),
-			model);
 	});
 var _user$project$Model$user = A2(
 	_user$project$Ext_Record$init,

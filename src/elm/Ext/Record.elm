@@ -37,9 +37,7 @@ setIn big field small =
     set field small big
 
 
-overT2 (Field field) smallFT2 b =
-    let
-        ( x, s ) =
-            field.get b |> smallFT2
-    in
-        ( x, field.set s b )
+overT2 field smallFT2 b =
+    get field b
+        |> smallFT2
+        |> Tuple.mapSecond (setIn b field)

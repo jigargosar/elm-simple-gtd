@@ -1,30 +1,16 @@
-var _user$project$Ext_Record$overT2 = F3(
-	function (_p0, smallFT2, b) {
-		var _p1 = _p0;
-		var _p3 = _p1._0;
-		var _p2 = smallFT2(
-			_p3.get(b));
-		var x = _p2._0;
-		var s = _p2._1;
-		return {
-			ctor: '_Tuple2',
-			_0: x,
-			_1: A2(_p3.set, s, b)
-		};
-	});
 var _user$project$Ext_Record$set = F3(
-	function (_p4, small, big) {
-		var _p5 = _p4;
-		return A2(_p5._0.set, small, big);
+	function (_p0, small, big) {
+		var _p1 = _p0;
+		return A2(_p1._0.set, small, big);
 	});
 var _user$project$Ext_Record$setIn = F3(
 	function (big, field, small) {
 		return A3(_user$project$Ext_Record$set, field, small, big);
 	});
 var _user$project$Ext_Record$get = F2(
-	function (_p6, big) {
-		var _p7 = _p6;
-		return _p7._0.get(big);
+	function (_p2, big) {
+		var _p3 = _p2;
+		return _p3._0.get(big);
 	});
 var _user$project$Ext_Record$over = F3(
 	function (field, smallF, big) {
@@ -34,6 +20,14 @@ var _user$project$Ext_Record$over = F3(
 			field,
 			smallF(
 				A2(_user$project$Ext_Record$get, field, big)));
+	});
+var _user$project$Ext_Record$overT2 = F3(
+	function (field, smallFT2, b) {
+		return A2(
+			_elm_lang$core$Tuple$mapSecond,
+			A2(_user$project$Ext_Record$setIn, b, field),
+			smallFT2(
+				A2(_user$project$Ext_Record$get, field, b)));
 	});
 var _user$project$Ext_Record$FieldModel = F2(
 	function (a, b) {

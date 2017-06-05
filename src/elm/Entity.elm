@@ -38,6 +38,18 @@ type Action
     | ToggleSelected
 
 
+getId entity =
+    case entity of
+        TodoEntity doc ->
+            Document.getId doc
+
+        ProjectEntity doc ->
+            Document.getId doc
+
+        ContextEntity doc ->
+            Document.getId doc
+
+
 defaultListView =
     ContextsView
 
@@ -66,10 +78,6 @@ routes viewType =
 type GroupEntity
     = ProjectGroup Project.Model
     | ContextGroup Context.Model
-
-
-
-{- | TimeGroup Time -}
 
 
 type alias TodoList =

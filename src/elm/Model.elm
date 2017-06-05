@@ -874,16 +874,8 @@ setEntityListViewType =
     EntityListView >> switchToView
 
 
-getEntityId entity =
-    case entity of
-        Entity.TodoEntity doc ->
-            Document.getId doc
-
-        Entity.ProjectEntity doc ->
-            Document.getId doc
-
-        Entity.ContextEntity doc ->
-            Document.getId doc
+getEntityId =
+    Entity.getId
 
 
 getCurrentViewEntityList model =

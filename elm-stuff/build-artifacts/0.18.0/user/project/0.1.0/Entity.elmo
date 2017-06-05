@@ -115,6 +115,17 @@ var _user$project$Entity$routes = function (viewType) {
 			};
 	}
 };
+var _user$project$Entity$getId = function (entity) {
+	var _p3 = entity;
+	switch (_p3.ctor) {
+		case 'TodoEntity':
+			return _user$project$Document$getId(_p3._0);
+		case 'ProjectEntity':
+			return _user$project$Document$getId(_p3._0);
+		default:
+			return _user$project$Document$getId(_p3._0);
+	}
+};
 var _user$project$Entity$TodoContextGroup = F2(
 	function (a, b) {
 		return {context: a, list: b};
@@ -180,21 +191,21 @@ var _user$project$Entity$createGroupingForContexts = F2(
 				_user$project$Entity$createContextTodoGroup(getTodoList)));
 	});
 var _user$project$Entity$flattenGrouping = function (grouping) {
-	var _p3 = grouping;
-	switch (_p3.ctor) {
+	var _p4 = grouping;
+	switch (_p4.ctor) {
 		case 'SingleContext':
 			return {
 				ctor: '::',
-				_0: _user$project$Entity$ContextEntity(_p3._0.context),
+				_0: _user$project$Entity$ContextEntity(_p4._0.context),
 				_1: _user$project$Entity$flattenGrouping(
-					_user$project$Entity$MultiProject(_p3._1))
+					_user$project$Entity$MultiProject(_p4._1))
 			};
 		case 'SingleProject':
 			return {
 				ctor: '::',
-				_0: _user$project$Entity$ProjectEntity(_p3._0.project),
+				_0: _user$project$Entity$ProjectEntity(_p4._0.project),
 				_1: _user$project$Entity$flattenGrouping(
-					_user$project$Entity$MultiContext(_p3._1))
+					_user$project$Entity$MultiContext(_p4._1))
 			};
 		case 'MultiContext':
 			return A2(
@@ -206,7 +217,7 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.list, _user$project$Entity$TodoEntity)
 					};
 				},
-				_p3._0);
+				_p4._0);
 		default:
 			return A2(
 				_elm_lang$core$List$concatMap,
@@ -217,7 +228,7 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.list, _user$project$Entity$TodoEntity)
 					};
 				},
-				_p3._0);
+				_p4._0);
 	}
 };
 var _user$project$Entity$SingleProject = F2(

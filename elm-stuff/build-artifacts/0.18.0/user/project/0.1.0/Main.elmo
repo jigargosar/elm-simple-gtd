@@ -385,8 +385,6 @@ var _user$project$Main$update = function (msg) {
 									m,
 									{showDeleted: !m.showDeleted});
 							});
-					case 'FocusPaperInput':
-						return _user$project$DomPorts$focusInputCmd(_p15._0);
 					case 'AutoFocusPaperInput':
 						return _user$project$DomPorts$autoFocusInputCmd;
 					case 'TodoAction':

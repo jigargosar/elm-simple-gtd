@@ -192,10 +192,7 @@ update msg =
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))
 
-                FocusPaperInput selector ->
-                    focusInputCmd selector
-
-                AutoFocusPaperInput ->
+                AutoFocusInput ->
                     autoFocusInputCmd
 
                 TodoAction action id ->

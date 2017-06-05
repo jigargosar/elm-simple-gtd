@@ -18,8 +18,8 @@ var _user$project$Ext_Record$set = F3(
 		return A2(_p5._0.set, small, big);
 	});
 var _user$project$Ext_Record$setIn = F3(
-	function (big, lens, small) {
-		return A3(_user$project$Ext_Record$set, lens, small, big);
+	function (big, field, small) {
+		return A3(_user$project$Ext_Record$set, field, small, big);
 	});
 var _user$project$Ext_Record$get = F2(
 	function (_p6, big) {
@@ -27,23 +27,23 @@ var _user$project$Ext_Record$get = F2(
 		return _p7._0.get(big);
 	});
 var _user$project$Ext_Record$over = F3(
-	function (lens, smallF, big) {
+	function (field, smallF, big) {
 		return A3(
 			_user$project$Ext_Record$setIn,
 			big,
-			lens,
+			field,
 			smallF(
-				A2(_user$project$Ext_Record$get, lens, big)));
+				A2(_user$project$Ext_Record$get, field, big)));
 	});
-var _user$project$Ext_Record$LensRec = F2(
+var _user$project$Ext_Record$FieldModel = F2(
 	function (a, b) {
 		return {get: a, set: b};
 	});
-var _user$project$Ext_Record$Lens = function (a) {
-	return {ctor: 'Lens', _0: a};
+var _user$project$Ext_Record$Field = function (a) {
+	return {ctor: 'Field', _0: a};
 };
 var _user$project$Ext_Record$init = F2(
 	function (getter, setter) {
-		return _user$project$Ext_Record$Lens(
+		return _user$project$Ext_Record$Field(
 			{get: getter, set: setter});
 	});

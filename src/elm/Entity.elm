@@ -2,6 +2,7 @@ module Entity exposing (..)
 
 import Context
 import Document
+import Ext.List as List
 import Set
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -212,3 +213,13 @@ flattenGrouping grouping =
                         (ProjectEntity g.project)
                             :: (g.list .|> TodoEntity)
                     )
+
+
+findEntityByOffsetIn offsetIndex entityList fromEntity =
+    entityList
+        |> List.findIndex (equalById fromEntity)
+        ?= 0
+        |> add offsetIndex
+        |> List.clampIndexIn entityList
+        |> List.atIndexIn entityList
+        |> Maybe.orElse (List.head entityList)

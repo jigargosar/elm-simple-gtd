@@ -35,6 +35,17 @@ var _user$project$Ext_Record$over = F3(
 			smallF(
 				A2(_user$project$Ext_Record$get, field, big)));
 	});
+var _user$project$Ext_Record$maybeOver = F3(
+	function (field, smallF, big) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				smallF(
+					A2(_user$project$Ext_Record$get, field, big)),
+				A2(_user$project$Ext_Record$setIn, big, field)),
+			big);
+	});
 var _user$project$Ext_Record$overT2 = F3(
 	function (field, smallFT2, b) {
 		return A2(

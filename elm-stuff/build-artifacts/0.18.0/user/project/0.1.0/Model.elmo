@@ -800,20 +800,6 @@ var _user$project$Model$setFocusInEntityByIndex = F3(
 				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_community$list_extra$List_Extra$getAt, entityList)(
 					A2(_user$project$Ext_List$clampIndex, index, entityList))));
 	});
-var _user$project$Model$moveFocusBy = F3(
-	function (num, entityList, model) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$setFocusInEntityByIndex, entityList),
-			model)(
-			A2(
-				_user$project$Ext_Function$add,
-				num,
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(_user$project$Model$getMaybeFocusInEntityIndex, entityList, model),
-					0)));
-	});
 var _user$project$Model$updateEntityListCursorFromEntityIndexTuple = F2(
 	function (model, indexTuple) {
 		var setFocusInIndex = function (index) {
@@ -885,6 +871,10 @@ var _user$project$Model$setFocusInEntityFromTodoId = F2(
 				_elm_lang$core$Basics$uncurry(_user$project$Model$setFocusInEntity)),
 			model);
 	});
+var _user$project$Model$moveFocusBy = A2(
+	_user$project$Ext_Function_Infix_ops['>>>'],
+	_user$project$Entity$findEntityByOffsetIn,
+	_user$project$Ext_Record$maybeOver(_user$project$Model$focusInEntity));
 var _user$project$Model$user = A2(
 	_user$project$Ext_Record$init,
 	function (_) {

@@ -11,6 +11,7 @@ var _user$project$Ext_List$prependIn = _elm_lang$core$Basics$flip(
 		function (x, y) {
 			return {ctor: '::', _0: x, _1: y};
 		}));
+var _user$project$Ext_List$atIndexIn = _elm_lang$core$Basics$flip(_elm_community$list_extra$List_Extra$getAt);
 var _user$project$Ext_List$listLastIndex = function (list) {
 	var _p1 = list;
 	if (_p1.ctor === '[]') {
@@ -30,3 +31,4 @@ var _user$project$Ext_List$clampIndex = function (index) {
 		},
 		index);
 };
+var _user$project$Ext_List$clampIndexIn = _elm_lang$core$Basics$flip(_user$project$Ext_List$clampIndex);

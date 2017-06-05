@@ -1,4 +1,4 @@
-module Ext.Record exposing (init, get, set, over, setIn, overT2, maybeSet, maybeSetIn)
+module Ext.Record exposing (init, get, set, setIn, over, overT2, maybeSet, maybeSetIn, maybeOver)
 
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -39,6 +39,12 @@ maybeSetIn big field maybeSmall =
 
 over field smallF big =
     setIn big field (smallF (get field big))
+
+
+maybeOver field smallF big =
+    smallF (get field big)
+        ?|> setIn big field
+        ?= big
 
 
 setIn big field small =

@@ -12,7 +12,7 @@ import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Ext.List as List
 import Ext.Predicate
-import Ext.Record as Record exposing (maybeSetIn, over, set)
+import Ext.Record as Record exposing (maybeOver, maybeSetIn, over, set)
 import Firebase exposing (DeviceId)
 import LaunchBar.Form
 import Project
@@ -1035,14 +1035,21 @@ getMaybeFocusInEntity entityList model =
 
 
 moveFocusBy : Int -> List Entity -> ModelF
-moveFocusBy num entityList model =
-    getMaybeFocusInEntityIndex entityList model
-        ?= 0
-        |> add num
-        |> (setFocusInEntityByIndex # entityList # model)
+moveFocusBy =
+    Entity.findEntityByOffsetIn >>> maybeOver focusInEntity
 
 
 
+{-
+   moveFocusBy : Int -> List Entity -> ModelF
+   moveFocusBy num entityList model =
+       getMaybeFocusInEntityIndex entityList model
+           ?= 0
+           |> add num
+           |> (setFocusInEntityByIndex # entityList # model)
+
+
+-}
 -- Document Query Helpers
 
 

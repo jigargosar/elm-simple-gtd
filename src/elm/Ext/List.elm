@@ -21,6 +21,14 @@ clampIndex index =
     listLastIndex >> clamp 0 # index
 
 
+clampIndexIn =
+    flip clampIndex
+
+
+atIndexIn =
+    flip List.getAt
+
+
 prependIn =
     flip (::)
 

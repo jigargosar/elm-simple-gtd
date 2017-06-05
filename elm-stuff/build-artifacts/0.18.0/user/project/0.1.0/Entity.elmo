@@ -148,6 +148,28 @@ var _user$project$Entity$equalById = F2(
 		} while(false);
 		return false;
 	});
+var _user$project$Entity$findEntityByOffsetIn = F3(
+	function (offsetIndex, entityList, fromEntity) {
+		return A2(
+			_elm_community$maybe_extra$Maybe_Extra$orElse,
+			_elm_lang$core$List$head(entityList),
+			A2(
+				_user$project$Ext_List$atIndexIn,
+				entityList,
+				A2(
+					_user$project$Ext_List$clampIndexIn,
+					entityList,
+					A2(
+						_user$project$Ext_Function$add,
+						offsetIndex,
+						A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+							A2(
+								_elm_community$list_extra$List_Extra$findIndex,
+								_user$project$Entity$equalById(fromEntity),
+								entityList),
+							0)))));
+	});
 var _user$project$Entity$getId = function (entity) {
 	var _p4 = entity;
 	switch (_p4.ctor) {

@@ -13,7 +13,7 @@ import Html.Events exposing (onClick)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Encode
 import Model
-import Msg
+import Model
 import Polymer.Attributes exposing (icon)
 import Polymer.Paper as Paper exposing (badge)
 import Set exposing (Set)
@@ -159,11 +159,11 @@ hideOnHover bool children =
 
 
 defaultOkCancelButtons =
-    okCancelButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode
+    okCancelButtons Model.SaveCurrentForm Model.DeactivateEditingMode
 
 
 defaultOkCancelDeleteButtons deleteMsg =
-    okCancelDeleteButtons Msg.SaveCurrentForm Msg.DeactivateEditingMode deleteMsg
+    okCancelDeleteButtons Model.SaveCurrentForm Model.DeactivateEditingMode deleteMsg
 
 
 layoutHorizontalReverse =

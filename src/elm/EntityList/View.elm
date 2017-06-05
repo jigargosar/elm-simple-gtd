@@ -16,7 +16,7 @@ import Ext.Keyboard exposing (onKeyDown)
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
 import Model
-import Msg exposing (Msg)
+import Model exposing (Msg)
 import Todo.View exposing (TodoViewModel)
 import ViewModel
 
@@ -173,7 +173,7 @@ listView viewType model appViewModel =
     in
         Html.Keyed.node "div"
             [ class "entity-list focusable-list"
-            , Msg.OnEntityListKeyDown entityList |> onKeyDown
+            , Model.OnEntityListKeyDown entityList |> onKeyDown
             ]
             (vmList
                 .|> createEntityView

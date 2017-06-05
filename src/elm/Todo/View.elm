@@ -18,7 +18,7 @@ import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
-import Msg exposing (Msg, commonMsg)
+import Model exposing (Msg, commonMsg)
 import Polymer.Attributes exposing (boolProperty, stringProperty)
 import Polymer.Events exposing (onTap)
 import Project
@@ -177,7 +177,7 @@ createTodoViewModel vc tabindexAV todo =
                 ret
 
         createEntityActionMsg =
-            Msg.OnEntityAction (Entity.TodoEntity todo)
+            Model.OnEntityAction (Entity.TodoEntity todo)
 
         maybeEditTodoForm =
             vc.getMaybeEditTodoFormForTodo todo
@@ -203,10 +203,10 @@ createTodoViewModel vc tabindexAV todo =
                         toggleDeleteMsg
 
                     Key.CharP ->
-                        Msg.StartEditingProject todo
+                        Model.StartEditingProject todo
 
                     Key.CharC ->
-                        Msg.StartEditingContext todo
+                        Model.StartEditingContext todo
 
                     _ ->
                         commonMsg.noOp
@@ -218,7 +218,7 @@ createTodoViewModel vc tabindexAV todo =
             createEntityActionMsg Entity.ToggleDeleted
 
         toggleDoneMsg =
-            Msg.ToggleTodoDone todoId
+            Model.ToggleTodoDone todoId
     in
         { isDone = Todo.isDone todo
         , key = todoId
@@ -230,16 +230,16 @@ createTodoViewModel vc tabindexAV todo =
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
         , selectedProjectIndex = vc.activeProjects |> List.findIndex (Document.hasId projectId) ?= 0
-        , setContextMsg = Msg.SetTodoContext # todo
-        , setProjectMsg = Msg.SetTodoProject # todo
-        , showContextDropdownMsg = Msg.StartEditingContext todo
-        , showProjectDropdownMsg = Msg.StartEditingProject todo
+        , setContextMsg = Model.SetTodoContext # todo
+        , setProjectMsg = Model.SetTodoProject # todo
+        , showContextDropdownMsg = Model.StartEditingContext todo
+        , showProjectDropdownMsg = Model.StartEditingProject todo
         , startEditingMsg = startEditingMsg
         , toggleDoneMsg = toggleDoneMsg
         , showDetails = vc.showDetails
         , activeContexts = vc.activeContexts
         , activeProjects = vc.activeProjects
-        , onReminderButtonClicked = Msg.StartEditingReminder todo
+        , onReminderButtonClicked = Model.StartEditingReminder todo
         , reminder = createReminderViewModel vc todo
         , edit = maybeEditTodoForm ?|> createEditTodoViewModel # todo
         , onDeleteClicked = toggleDeleteMsg
@@ -359,7 +359,7 @@ createReminderViewModel vc todo =
             vc.getTodoReminderForm todo
 
         updateReminderForm =
-            Msg.UpdateReminderForm form
+            Model.UpdateReminderForm form
 
         isDropdownOpen =
             Maybe.isJust (vc.getMaybeTodoReminderFormForTodo todo)
@@ -399,7 +399,7 @@ createReminderViewModel vc todo =
         , dayDiffInWords = dueAt ?|> Ext.Time.dayDiffInWords vc.now ?= ""
         , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
         , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
-        , startEditingMsg = Msg.StartEditingReminder todo
+        , startEditingMsg = Model.StartEditingReminder todo
         }
 
 
@@ -489,13 +489,13 @@ createEditTodoViewModel form todo =
             form.id
 
         updateTodoForm =
-            Msg.UpdateTodoForm form
+            Model.UpdateTodoForm form
     in
         { todo =
             { text = form.todoText
             }
         , onTodoTextChanged = updateTodoForm << Todo.Form.SetText
-        , onDeleteClicked = Msg.OnEntityAction (Entity.TodoEntity todo) Entity.ToggleDeleted
+        , onDeleteClicked = Model.OnEntityAction (Entity.TodoEntity todo) Entity.ToggleDeleted
         }
 
 

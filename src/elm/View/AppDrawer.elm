@@ -10,7 +10,7 @@ import Html exposing (Attribute, Html, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, checked, class, classList, id, style, tabindex, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
-import Msg exposing (Msg(SwitchView), commonMsg)
+import Model exposing (Msg(SwitchView), commonMsg)
 import String.Extra
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)
@@ -61,7 +61,7 @@ view viewModel m =
                                 [ iconA "menu"
                                 , tabindex -1
                                 , attribute "drawer-toggle" ""
-                                , onClick Msg.ToggleDrawer
+                                , onClick Model.ToggleDrawer
                                 ]
                                 []
                             ]
@@ -143,7 +143,7 @@ entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } 
         [ Html.node "iron-icon" [ iconA icon.name, style [ "color" => icon.color ] ] []
         , itemBody [ onClick (SwitchView (EntityListView viewType)) ] [ headLineText title ]
         , div [ class "show-on-hover layout horizontal center" ]
-            [ toggleButton [ checked showDeleted, onClick Msg.ToggleShowDeletedEntity ] []
+            [ toggleButton [ checked showDeleted, onClick Model.ToggleShowDeletedEntity ] []
             , WebComponents.icon "delete" []
             , iconButton [ iconA "add", onClickPreventDefaultAndStopPropagation onAddClicked ] []
             ]

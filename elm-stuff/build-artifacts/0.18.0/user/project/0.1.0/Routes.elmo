@@ -11,25 +11,25 @@ var _user$project$Routes$builder2messages = function (builder) {
 								case 'contexts':
 									return {
 										ctor: '::',
-										_0: _user$project$Msg$SetGroupByView(_user$project$Entity$ContextsView),
+										_0: _user$project$Model$SetGroupByView(_user$project$Entity$ContextsView),
 										_1: {ctor: '[]'}
 									};
 								case 'projects':
 									return {
 										ctor: '::',
-										_0: _user$project$Msg$SetGroupByView(_user$project$Entity$ProjectsView),
+										_0: _user$project$Model$SetGroupByView(_user$project$Entity$ProjectsView),
 										_1: {ctor: '[]'}
 									};
 								case 'bin':
 									return {
 										ctor: '::',
-										_0: _user$project$Msg$SwitchView(_user$project$Model$BinView),
+										_0: _user$project$Model$SwitchView(_user$project$Model$BinView),
 										_1: {ctor: '[]'}
 									};
 								case 'done':
 									return {
 										ctor: '::',
-										_0: _user$project$Msg$SwitchView(_user$project$Model$DoneView),
+										_0: _user$project$Model$SwitchView(_user$project$Model$DoneView),
 										_1: {ctor: '[]'}
 									};
 								default:
@@ -38,7 +38,7 @@ var _user$project$Routes$builder2messages = function (builder) {
 						case 'context':
 							return {
 								ctor: '::',
-								_0: _user$project$Msg$SetGroupByView(
+								_0: _user$project$Model$SetGroupByView(
 									_user$project$Entity$ContextView(_p0._1._0)),
 								_1: {ctor: '[]'}
 							};
@@ -46,14 +46,14 @@ var _user$project$Routes$builder2messages = function (builder) {
 							if (_p0._1._0 === 'NotAssigned') {
 								return {
 									ctor: '::',
-									_0: _user$project$Msg$SetGroupByView(
+									_0: _user$project$Model$SetGroupByView(
 										_user$project$Entity$ProjectView('')),
 									_1: {ctor: '[]'}
 								};
 							} else {
 								return {
 									ctor: '::',
-									_0: _user$project$Msg$SetGroupByView(
+									_0: _user$project$Model$SetGroupByView(
 										_user$project$Entity$ProjectView(_p0._1._0)),
 									_1: {ctor: '[]'}
 								};
@@ -61,7 +61,7 @@ var _user$project$Routes$builder2messages = function (builder) {
 						case 'notification':
 							return {
 								ctor: '::',
-								_0: _user$project$Msg$ShowReminderOverlayForTodoId(_p0._1._0),
+								_0: _user$project$Model$ShowReminderOverlayForTodoId(_p0._1._0),
 								_1: {ctor: '[]'}
 							};
 						default:
@@ -75,14 +75,14 @@ var _user$project$Routes$builder2messages = function (builder) {
 					case 'Inbox':
 						return {
 							ctor: '::',
-							_0: _user$project$Msg$SetGroupByView(
+							_0: _user$project$Model$SetGroupByView(
 								_user$project$Entity$ContextView('')),
 							_1: {ctor: '[]'}
 						};
 					case 'custom-sync':
 						return {
 							ctor: '::',
-							_0: _user$project$Msg$SwitchView(_user$project$Model$SyncView),
+							_0: _user$project$Model$SwitchView(_user$project$Model$SyncView),
 							_1: {ctor: '[]'}
 						};
 					default:

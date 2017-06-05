@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Msg
+import Model
 import ReminderOverlay
 import Time
 import Toolkit.Helpers exposing (..)
@@ -30,9 +30,9 @@ reminderOverlayActiveView activeView todoDetails =
         ReminderOverlay.InitialView ->
             let
                 vm =
-                    { onDismissClicked = Msg.ReminderOverlayAction ReminderOverlay.Dismiss
-                    , onDoneClicked = Msg.ReminderOverlayAction ReminderOverlay.MarkDone
-                    , onSnoozeClicked = Msg.ReminderOverlayAction ReminderOverlay.ShowSnoozeOptions
+                    { onDismissClicked = Model.ReminderOverlayAction ReminderOverlay.Dismiss
+                    , onDoneClicked = Model.ReminderOverlayAction ReminderOverlay.MarkDone
+                    , onSnoozeClicked = Model.ReminderOverlayAction ReminderOverlay.ShowSnoozeOptions
                     }
             in
                 activeViewShell todoDetails
@@ -44,7 +44,7 @@ reminderOverlayActiveView activeView todoDetails =
         ReminderOverlay.SnoozeView ->
             let
                 msg =
-                    ReminderOverlay.SnoozeTill >> Msg.ReminderOverlayAction
+                    ReminderOverlay.SnoozeTill >> Model.ReminderOverlayAction
 
                 vm =
                     { snoozeFor15Min = msg (ReminderOverlay.SnoozeForMilli (Time.minute * 15))
@@ -64,7 +64,7 @@ reminderOverlayActiveView activeView todoDetails =
 activeViewShell todoDetails children =
     let
         onOutsideClick =
-            Msg.ReminderOverlayAction ReminderOverlay.Close
+            Model.ReminderOverlayAction ReminderOverlay.Close
     in
         div [ class "full-view fixed-top", onClickStopPropagation onOutsideClick ]
             [ div [ class "fixed-bottom top-shadow static" ]

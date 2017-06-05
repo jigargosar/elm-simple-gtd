@@ -13,7 +13,7 @@ import Html.Attributes exposing (action, attribute, autofocus, class, classList,
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model
-import Msg exposing (Msg, commonMsg)
+import Model exposing (Msg, commonMsg)
 import Polymer.Firebase
 import ReminderOverlay
 import Set
@@ -86,13 +86,13 @@ appDrawerLayoutView m =
         onClickHandler : List Dom.Id -> Msg
         onClickHandler pathIdList =
             List.find (List.member # [ "context-dropdown", "project-dropdown" ]) pathIdList
-                ?|> (\_ -> Msg.DeactivateEditingMode)
+                ?|> (\_ -> Model.DeactivateEditingMode)
                 ?= commonMsg.noOp
 
         onClickAttributeList =
             let
                 return =
-                    [ Ext.Html.onClickTargetPathHavingIds [ "context-dropdown", "project-dropdown" ] Msg.DeactivateEditingMode
+                    [ Ext.Html.onClickTargetPathHavingIds [ "context-dropdown", "project-dropdown" ] Model.DeactivateEditingMode
                     ]
             in
                 case m.editMode of
@@ -109,7 +109,7 @@ appDrawerLayoutView m =
     in
         App.drawerLayout
             ([ boolProperty "forceNarrow" forceNarrow
-             , onBoolPropertyChanged "narrow" Msg.OnLayoutNarrowChanged
+             , onBoolPropertyChanged "narrow" Model.OnLayoutNarrowChanged
              ]
                 ++ onClickAttributeList
             )
@@ -126,7 +126,7 @@ addTodoFab m =
         [ id "add-fab"
         , attribute "icon" "add"
         , attribute "mini" ""
-        , onClick Msg.NewTodo
+        , onClick Model.NewTodo
         , tabindex -1
         ]
         []

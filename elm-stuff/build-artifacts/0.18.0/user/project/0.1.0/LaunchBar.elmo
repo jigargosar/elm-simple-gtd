@@ -76,16 +76,10 @@ var _user$project$LaunchBar$Project = function (a) {
 var _user$project$LaunchBar$Context = function (a) {
 	return {ctor: 'Context', _0: a};
 };
-var _user$project$LaunchBar$getFuzzyResults = F2(
-	function (needle, m) {
-		var projects = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-			_user$project$Model$getActiveProjects(m),
-			_user$project$LaunchBar$Project);
-		var contexts = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-			_user$project$Model$getActiveContexts(m),
-			_user$project$LaunchBar$Context);
+var _user$project$LaunchBar$getFuzzyResults = F3(
+	function (needle, activeContexts, activeProjects) {
+		var projects = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeProjects, _user$project$LaunchBar$Project);
+		var contexts = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], activeContexts, _user$project$LaunchBar$Context);
 		var all = A2(
 			_elm_lang$core$Basics_ops['++'],
 			projects,

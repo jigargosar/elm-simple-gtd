@@ -13,9 +13,9 @@ var _user$project$EntityList_GroupViewModel$create = F3(
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
 		};
-		var createEntityActionMsg = _user$project$Msg$OnEntityAction(
+		var createEntityActionMsg = _user$project$Model$OnEntityAction(
 			config.entityWrapper(entityModel));
-		var toggleDeleteMsg = isNull ? _user$project$Msg$commonMsg.noOp : createEntityActionMsg(_user$project$Entity$ToggleDeleted);
+		var toggleDeleteMsg = isNull ? _user$project$Model$commonMsg.noOp : createEntityActionMsg(_user$project$Entity$ToggleDeleted);
 		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
 		var onKeyDownMsg = function (_p0) {
 			var _p1 = _p0;
@@ -26,7 +26,7 @@ var _user$project$EntityList_GroupViewModel$create = F3(
 				case 'Delete':
 					return toggleDeleteMsg;
 				default:
-					return _user$project$Msg$commonMsg.noOp;
+					return _user$project$Model$commonMsg.noOp;
 			}
 		};
 		var id = _user$project$Document$getId(entityModel);
@@ -42,7 +42,7 @@ var _user$project$EntityList_GroupViewModel$create = F3(
 				return createEntityActionMsg(
 					_user$project$Entity$NameChanged(_p3));
 			},
-			onCancelClicked: _user$project$Msg$DeactivateEditingMode,
+			onCancelClicked: _user$project$Model$DeactivateEditingMode,
 			icon: icon,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$SetFocusedIn),
 			onFocus: createEntityActionMsg(_user$project$Entity$SetFocused),

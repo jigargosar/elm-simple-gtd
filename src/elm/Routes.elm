@@ -3,7 +3,7 @@ module Routes exposing (..)
 import Document
 import Entity
 import Model as Model
-import Msg exposing (Msg)
+import Model exposing (Msg)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
@@ -43,34 +43,34 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "contexts" :: [] ->
-            [ Msg.SetGroupByView Entity.ContextsView ]
+            [ Model.SetGroupByView Entity.ContextsView ]
 
         "lists" :: "projects" :: [] ->
-            [ Msg.SetGroupByView Entity.ProjectsView ]
+            [ Model.SetGroupByView Entity.ProjectsView ]
 
         "lists" :: "bin" :: [] ->
-            [ Msg.SwitchView BinView ]
+            [ Model.SwitchView BinView ]
 
         "lists" :: "done" :: [] ->
-            [ Msg.SwitchView DoneView ]
+            [ Model.SwitchView DoneView ]
 
         "Inbox" :: [] ->
-            [ Msg.SetGroupByView (Entity.ContextView "") ]
+            [ Model.SetGroupByView (Entity.ContextView "") ]
 
         "context" :: id :: [] ->
-            [ Msg.SetGroupByView (Entity.ContextView id) ]
+            [ Model.SetGroupByView (Entity.ContextView id) ]
 
         "project" :: "NotAssigned" :: [] ->
-            [ Msg.SetGroupByView (Entity.ProjectView "") ]
+            [ Model.SetGroupByView (Entity.ProjectView "") ]
 
         "project" :: id :: [] ->
-            [ Msg.SetGroupByView (Entity.ProjectView id) ]
+            [ Model.SetGroupByView (Entity.ProjectView id) ]
 
         "notification" :: todoId :: [] ->
-            [ Msg.ShowReminderOverlayForTodoId todoId ]
+            [ Model.ShowReminderOverlayForTodoId todoId ]
 
         "custom-sync" :: [] ->
-            [ Msg.SwitchView SyncView ]
+            [ Model.SwitchView SyncView ]
 
         _ ->
             -- If nothing provided for this part of the URL, return empty list

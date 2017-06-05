@@ -13,9 +13,9 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
 		};
-		var createEntityActionMsg = _user$project$Msg$OnEntityAction(
+		var createEntityActionMsg = _user$project$Model$OnEntityAction(
 			config.entityWrapper(entity));
-		var toggleDeleteMsg = isNull ? _user$project$Msg$commonMsg.noOp : createEntityActionMsg(_user$project$Entity$ToggleDeleted);
+		var toggleDeleteMsg = isNull ? _user$project$Model$commonMsg.noOp : createEntityActionMsg(_user$project$Entity$ToggleDeleted);
 		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
 		var onKeyDownMsg = function (_p0) {
 			var _p1 = _p0;
@@ -26,7 +26,7 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 				case 'Delete':
 					return toggleDeleteMsg;
 				default:
-					return _user$project$Msg$commonMsg.noOp;
+					return _user$project$Model$commonMsg.noOp;
 			}
 		};
 		var id = _user$project$Document$getId(entity);
@@ -40,9 +40,9 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 			isEmpty: _elm_lang$core$Native_Utils.eq(count, 0),
 			count: _elm_lang$core$List$length(todoList),
 			onActiveStateChanged: function (bool) {
-				return bool ? _user$project$Msg$SwitchView(
+				return bool ? _user$project$Model$SwitchView(
 					_user$project$Model$EntityListView(
-						config.getViewType(id))) : _user$project$Msg$commonMsg.noOp;
+						config.getViewType(id))) : _user$project$Model$commonMsg.noOp;
 			},
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,
@@ -51,7 +51,7 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 				return createEntityActionMsg(
 					_user$project$Entity$NameChanged(_p3));
 			},
-			onCancelClicked: _user$project$Msg$DeactivateEditingMode,
+			onCancelClicked: _user$project$Model$DeactivateEditingMode,
 			icon: icon,
 			appHeader: appHeader,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$SetFocusedIn),
@@ -93,7 +93,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		viewType: _user$project$Entity$ContextsView,
 		title: 'Contexts',
 		showDeleted: model.showDeleted,
-		onAddClicked: _user$project$Msg$NewContext,
+		onAddClicked: _user$project$Model$NewContext,
 		icon: {name: 'group-work', color: _user$project$OldGroupEntity_ViewModel$contextsColor}
 	};
 };
@@ -115,7 +115,7 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		viewType: _user$project$Entity$ProjectsView,
 		title: 'Projects',
 		showDeleted: model.showDeleted,
-		onAddClicked: _user$project$Msg$NewProject,
+		onAddClicked: _user$project$Model$NewProject,
 		icon: {name: 'group-work', color: _user$project$OldGroupEntity_ViewModel$projectsColor}
 	};
 };

@@ -1391,6 +1391,129 @@ var _user$project$Model$TodoNotificationEvent = F2(
 	function (a, b) {
 		return {action: a, data: b};
 	});
+var _user$project$Model$OnLaunchBarActionWithNow = F2(
+	function (a, b) {
+		return {ctor: 'OnLaunchBarActionWithNow', _0: a, _1: b};
+	});
+var _user$project$Model$OnLaunchBarAction = function (a) {
+	return {ctor: 'OnLaunchBarAction', _0: a};
+};
+var _user$project$Model$OnEntityAction = F2(
+	function (a, b) {
+		return {ctor: 'OnEntityAction', _0: a, _1: b};
+	});
+var _user$project$Model$OnGlobalKeyUp = function (a) {
+	return {ctor: 'OnGlobalKeyUp', _0: a};
+};
+var _user$project$Model$OnKeyboardMsg = function (a) {
+	return {ctor: 'OnKeyboardMsg', _0: a};
+};
+var _user$project$Model$OnNowChanged = function (a) {
+	return {ctor: 'OnNowChanged', _0: a};
+};
+var _user$project$Model$ShowReminderOverlayForTodoId = function (a) {
+	return {ctor: 'ShowReminderOverlayForTodoId', _0: a};
+};
+var _user$project$Model$SetGroupByView = function (a) {
+	return {ctor: 'SetGroupByView', _0: a};
+};
+var _user$project$Model$SwitchView = function (a) {
+	return {ctor: 'SwitchView', _0: a};
+};
+var _user$project$Model$OnEntityListKeyDown = F2(
+	function (a, b) {
+		return {ctor: 'OnEntityListKeyDown', _0: a, _1: b};
+	});
+var _user$project$Model$UpdateReminderForm = F2(
+	function (a, b) {
+		return {ctor: 'UpdateReminderForm', _0: a, _1: b};
+	});
+var _user$project$Model$UpdateTodoForm = F2(
+	function (a, b) {
+		return {ctor: 'UpdateTodoForm', _0: a, _1: b};
+	});
+var _user$project$Model$UpdateRemoteSyncFormUri = F2(
+	function (a, b) {
+		return {ctor: 'UpdateRemoteSyncFormUri', _0: a, _1: b};
+	});
+var _user$project$Model$AutoFocusPaperInput = {ctor: 'AutoFocusPaperInput'};
+var _user$project$Model$FocusPaperInput = function (a) {
+	return {ctor: 'FocusPaperInput', _0: a};
+};
+var _user$project$Model$SaveCurrentForm = {ctor: 'SaveCurrentForm'};
+var _user$project$Model$StartEditingProject = function (a) {
+	return {ctor: 'StartEditingProject', _0: a};
+};
+var _user$project$Model$StartEditingContext = function (a) {
+	return {ctor: 'StartEditingContext', _0: a};
+};
+var _user$project$Model$StartEditingReminder = function (a) {
+	return {ctor: 'StartEditingReminder', _0: a};
+};
+var _user$project$Model$NewTodoKeyUp = function (a) {
+	return {ctor: 'NewTodoKeyUp', _0: a};
+};
+var _user$project$Model$DeactivateEditingMode = {ctor: 'DeactivateEditingMode'};
+var _user$project$Model$NewTodoTextChanged = F2(
+	function (a, b) {
+		return {ctor: 'NewTodoTextChanged', _0: a, _1: b};
+	});
+var _user$project$Model$NewContext = {ctor: 'NewContext'};
+var _user$project$Model$NewProject = {ctor: 'NewProject'};
+var _user$project$Model$NewTodoForInbox = {ctor: 'NewTodoForInbox'};
+var _user$project$Model$NewTodo = {ctor: 'NewTodo'};
+var _user$project$Model$SetTodoProject = F2(
+	function (a, b) {
+		return {ctor: 'SetTodoProject', _0: a, _1: b};
+	});
+var _user$project$Model$SetTodoContext = F2(
+	function (a, b) {
+		return {ctor: 'SetTodoContext', _0: a, _1: b};
+	});
+var _user$project$Model$ToggleTodoDone = function (a) {
+	return {ctor: 'ToggleTodoDone', _0: a};
+};
+var _user$project$Model$OnLayoutNarrowChanged = function (a) {
+	return {ctor: 'OnLayoutNarrowChanged', _0: a};
+};
+var _user$project$Model$ToggleDrawer = {ctor: 'ToggleDrawer'};
+var _user$project$Model$ToggleShowDeletedEntity = {ctor: 'ToggleShowDeletedEntity'};
+var _user$project$Model$OnNotificationClicked = function (a) {
+	return {ctor: 'OnNotificationClicked', _0: a};
+};
+var _user$project$Model$ReminderOverlayAction = function (a) {
+	return {ctor: 'ReminderOverlayAction', _0: a};
+};
+var _user$project$Model$TodoAction = F2(
+	function (a, b) {
+		return {ctor: 'TodoAction', _0: a, _1: b};
+	});
+var _user$project$Model$RemotePouchSync = function (a) {
+	return {ctor: 'RemotePouchSync', _0: a};
+};
+var _user$project$Model$SignOut = {ctor: 'SignOut'};
+var _user$project$Model$SignIn = {ctor: 'SignIn'};
+var _user$project$Model$OnFirebaseConnectionChanged = function (a) {
+	return {ctor: 'OnFirebaseConnectionChanged', _0: a};
+};
+var _user$project$Model$OnFCMTokenChanged = function (a) {
+	return {ctor: 'OnFCMTokenChanged', _0: a};
+};
+var _user$project$Model$OnUserChanged = function (a) {
+	return {ctor: 'OnUserChanged', _0: a};
+};
+var _user$project$Model$OnFirebaseChange = F2(
+	function (a, b) {
+		return {ctor: 'OnFirebaseChange', _0: a, _1: b};
+	});
+var _user$project$Model$OnPouchDBChange = F2(
+	function (a, b) {
+		return {ctor: 'OnPouchDBChange', _0: a, _1: b};
+	});
+var _user$project$Model$OnCommonMsg = function (a) {
+	return {ctor: 'OnCommonMsg', _0: a};
+};
+var _user$project$Model$commonMsg = _user$project$CommonMsg$createHelper(_user$project$Model$OnCommonMsg);
 var _user$project$Model$SyncView = {ctor: 'SyncView'};
 var _user$project$Model$BinView = {ctor: 'BinView'};
 var _user$project$Model$DoneView = {ctor: 'DoneView'};

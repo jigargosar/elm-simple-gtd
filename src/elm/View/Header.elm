@@ -8,7 +8,7 @@ import Html.Attributes.Extra exposing (..)
 import Model
 import Todo.NewForm
 import Model exposing (Model)
-import Msg exposing (Msg)
+import Model exposing (Msg)
 import Polymer.App as App
 import Polymer.Paper as Paper
 import Html exposing (..)
@@ -55,7 +55,7 @@ init viewModel m =
                     [ iconA "menu"
                     , tabindex -1
                     , attribute "drawer-toggle" ""
-                    , onClick Msg.ToggleDrawer
+                    , onClick Model.ToggleDrawer
                     , class "hide-when-wide"
                     ]
                     []
@@ -70,10 +70,10 @@ headerView m =
             Paper.input
                 [ id newTodoInputId
                 , class "auto-focus"
-                , onInput (Msg.NewTodoTextChanged form)
+                , onInput (Model.NewTodoTextChanged form)
                 , form |> Todo.NewForm.getText |> value
-                , onBlur Msg.DeactivateEditingMode
-                , Keyboard.onKeyUp Msg.NewTodoKeyUp
+                , onBlur Model.DeactivateEditingMode
+                , Keyboard.onKeyUp Model.NewTodoKeyUp
                 , stringProperty "label" "New Todo"
                 , boolProperty "alwaysFloatLabel" True
                 , style [ ( "width", "100%" ), "color" => "white" ]
@@ -108,8 +108,8 @@ defaultHeader m =
 
         userSignInLink =
             maybeUserProfile
-                ?|> (\_ -> Paper.item [ onClick Msg.SignOut ] [ text "SignOut" ])
-                ?= Paper.item [ onClick Msg.SignIn ] [ text "SignIn" ]
+                ?|> (\_ -> Paper.item [ onClick Model.SignOut ] [ text "SignOut" ])
+                ?= Paper.item [ onClick Model.SignIn ] [ text "SignIn" ]
     in
         div [ class "flex-auto layout horizontal justified center" ]
             [ h4 [ class "ellipsis" ] [ title |> text ]

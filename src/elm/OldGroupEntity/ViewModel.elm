@@ -8,7 +8,7 @@ import Entity exposing (Entity)
 import Ext.Keyboard exposing (KeyboardEvent)
 import Lazy
 import Model exposing (EntityListViewType, ViewType(..))
-import Msg exposing (Msg, commonMsg)
+import Model exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -108,7 +108,7 @@ create todoListByEntityId config entity =
             Document.getId entity
 
         createEntityActionMsg =
-            Msg.OnEntityAction (config.entityWrapper entity)
+            Model.OnEntityAction (config.entityWrapper entity)
 
         todoList =
             todoListByEntityId id
@@ -163,7 +163,7 @@ create todoListByEntityId config entity =
         , onActiveStateChanged =
             (\bool ->
                 if bool then
-                    Msg.SwitchView (config.getViewType id |> EntityListView)
+                    Model.SwitchView (config.getViewType id |> EntityListView)
                 else
                     commonMsg.noOp
             )
@@ -171,7 +171,7 @@ create todoListByEntityId config entity =
         , onDeleteClicked = toggleDeleteMsg
         , onSaveClicked = createEntityActionMsg Entity.Save
         , onNameChanged = Entity.NameChanged >> createEntityActionMsg
-        , onCancelClicked = Msg.DeactivateEditingMode
+        , onCancelClicked = Model.DeactivateEditingMode
         , icon = icon
         , appHeader = appHeader
         , onFocusIn = createEntityActionMsg Entity.SetFocusedIn
@@ -205,7 +205,7 @@ contexts model =
         , viewType = Entity.ContextsView
         , title = "Contexts"
         , showDeleted = model.showDeleted
-        , onAddClicked = Msg.NewContext
+        , onAddClicked = Model.NewContext
         , icon = { name = "group-work", color = contextsColor }
         }
 
@@ -234,7 +234,7 @@ projects model =
         , viewType = Entity.ProjectsView
         , title = "Projects"
         , showDeleted = model.showDeleted
-        , onAddClicked = Msg.NewProject
+        , onAddClicked = Model.NewProject
         , icon =
             { name = "group-work"
             , color = projectsColor

@@ -8,7 +8,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Msg exposing (Msg)
+import Model exposing (Msg)
 import Polymer.Paper as Paper
 import Polymer.App as App
 import Project
@@ -59,11 +59,11 @@ init viewModel model =
                         [ Paper.input
                             [ attribute "label" "Cloudant URL or any CouchDB URL"
                             , value form.uri
-                            , onInput (Msg.UpdateRemoteSyncFormUri form)
+                            , onInput (Model.UpdateRemoteSyncFormUri form)
                             ]
                             []
                         , div []
-                            [ Paper.button [ form |> Msg.RemotePouchSync >> onClick ]
+                            [ Paper.button [ form |> Model.RemotePouchSync >> onClick ]
                                 [ text "Start Sync" ]
                             ]
                         ]
@@ -88,7 +88,7 @@ contextDropdown model =
         view todo =
             let
                 onItemClick =
-                    Msg.SetTodoContext # todo
+                    Model.SetTodoContext # todo
             in
                 Paper.material [ id "context-dropdown", attribute "data-prevent-default-keys" "Tab" ]
                     [ Paper.listbox []
@@ -109,7 +109,7 @@ projectDropdown model =
         view todo =
             let
                 onItemClick =
-                    Msg.SetTodoProject # todo
+                    Model.SetTodoProject # todo
             in
                 Paper.material [ id "project-dropdown", attribute "data-prevent-default-keys" "Tab" ]
                     [ Paper.listbox []

@@ -40,7 +40,6 @@ import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
 import Tuple2
 import Html
-import Msg exposing (..)
 import Model exposing (..)
 import View
 
@@ -276,9 +275,6 @@ update msg =
                 OnNowChanged now ->
                     onUpdateNow now
 
-                OnMsgList messages ->
-                    onMsgList messages
-
                 OnKeyboardMsg msg ->
                     Return.map (Model.updateKeyboardState (Keyboard.update msg))
                         >> focusSelectorIfNoFocusCmd ".entity-list > [tabindex=0]"
@@ -403,10 +399,6 @@ onMsgList =
 
 andThenUpdate =
     update >> Return.andThen
-
-
-andThenUpdateAll =
-    OnMsgList >> andThenUpdate
 
 
 setDomFocusToFocusedEntityCmd =

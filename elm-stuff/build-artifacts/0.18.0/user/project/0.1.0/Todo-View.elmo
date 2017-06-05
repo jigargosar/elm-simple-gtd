@@ -28,7 +28,7 @@ var _user$project$Todo_View$editView = function (edit) {
 									ctor: '::',
 									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
 										function (_p0) {
-											return _user$project$Msg$commonMsg.logString('sp');
+											return _user$project$Model$commonMsg.logString('sp');
 										}),
 									_1: {ctor: '[]'}
 								}
@@ -77,7 +77,7 @@ var _user$project$Todo_View$editView = function (edit) {
 };
 var _user$project$Todo_View$createEditTodoViewModel = F2(
 	function (form, todo) {
-		var updateTodoForm = _user$project$Msg$UpdateTodoForm(form);
+		var updateTodoForm = _user$project$Model$UpdateTodoForm(form);
 		var todoId = form.id;
 		return {
 			todo: {text: form.todoText},
@@ -86,7 +86,7 @@ var _user$project$Todo_View$createEditTodoViewModel = F2(
 					_user$project$Todo_Form$SetText(_p1));
 			},
 			onDeleteClicked: A2(
-				_user$project$Msg$OnEntityAction,
+				_user$project$Model$OnEntityAction,
 				_user$project$Entity$TodoEntity(todo),
 				_user$project$Entity$ToggleDeleted)
 		};
@@ -111,7 +111,7 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 		var isDropdownOpen = _elm_community$maybe_extra$Maybe_Extra$isJust(
 			vc.getMaybeTodoReminderFormForTodo(todo));
 		var form = vc.getTodoReminderForm(todo);
-		var updateReminderForm = _user$project$Msg$UpdateReminderForm(form);
+		var updateReminderForm = _user$project$Model$UpdateReminderForm(form);
 		return {
 			isDropdownOpen: isDropdownOpen,
 			date: form.date,
@@ -141,7 +141,7 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 				return updateReminderForm(
 					_user$project$Todo_ReminderForm$SetTime(_p3));
 			},
-			startEditingMsg: _user$project$Msg$StartEditingReminder(todo)
+			startEditingMsg: _user$project$Model$StartEditingReminder(todo)
 		};
 	});
 var _user$project$Todo_View$projectDropdownMenu = function (vm) {
@@ -303,7 +303,7 @@ var _user$project$Todo_View$doneIconButton = function (vm) {
 var _user$project$Todo_View$createTodoViewModel = F3(
 	function (vc, tabindexAV, todo) {
 		var maybeEditTodoForm = vc.getMaybeEditTodoFormForTodo(todo);
-		var createEntityActionMsg = _user$project$Msg$OnEntityAction(
+		var createEntityActionMsg = _user$project$Model$OnEntityAction(
 			_user$project$Entity$TodoEntity(todo));
 		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
 		var toggleDeleteMsg = createEntityActionMsg(_user$project$Entity$ToggleDeleted);
@@ -362,11 +362,11 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 						_user$project$Model$getEntityId(_p6));
 				}),
 			false);
-		var toggleDoneMsg = _user$project$Msg$ToggleTodoDone(todoId);
+		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
 		var onKeyDownMsg = function (_p7) {
 			var _p8 = _p7;
 			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p8)) {
-				return _user$project$Msg$commonMsg.noOp;
+				return _user$project$Model$commonMsg.noOp;
 			} else {
 				var _p9 = _p8.key;
 				switch (_p9.ctor) {
@@ -379,11 +379,11 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					case 'Delete':
 						return toggleDeleteMsg;
 					case 'CharP':
-						return _user$project$Msg$StartEditingProject(todo);
+						return _user$project$Model$StartEditingProject(todo);
 					case 'CharC':
-						return _user$project$Msg$StartEditingContext(todo);
+						return _user$project$Model$StartEditingContext(todo);
 					default:
-						return _user$project$Msg$commonMsg.noOp;
+						return _user$project$Model$commonMsg.noOp;
 				}
 			}
 		};
@@ -404,16 +404,16 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					_user$project$Document$hasId(projectId),
 					vc.activeProjects),
 				0),
-			setContextMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Msg$SetTodoContext, todo),
-			setProjectMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Msg$SetTodoProject, todo),
-			showContextDropdownMsg: _user$project$Msg$StartEditingContext(todo),
-			showProjectDropdownMsg: _user$project$Msg$StartEditingProject(todo),
+			setContextMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
+			setProjectMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo),
+			showContextDropdownMsg: _user$project$Model$StartEditingContext(todo),
+			showProjectDropdownMsg: _user$project$Model$StartEditingProject(todo),
 			startEditingMsg: startEditingMsg,
 			toggleDoneMsg: toggleDoneMsg,
 			showDetails: vc.showDetails,
 			activeContexts: vc.activeContexts,
 			activeProjects: vc.activeProjects,
-			onReminderButtonClicked: _user$project$Msg$StartEditingReminder(todo),
+			onReminderButtonClicked: _user$project$Model$StartEditingReminder(todo),
 			reminder: A2(_user$project$Todo_View$createReminderViewModel, vc, todo),
 			edit: A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],

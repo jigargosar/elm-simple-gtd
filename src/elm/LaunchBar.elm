@@ -3,7 +3,6 @@ module LaunchBar exposing (..)
 import Context
 import Fuzzy
 import LaunchBar.Form
-import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -68,15 +67,13 @@ fuzzyMatch needle entity =
                 ( entity, match boiledNeedle boiledHay )
 
 
-getFuzzyResults needle m =
+getFuzzyResults needle activeContexts activeProjects =
     let
         contexts =
-            Model.getActiveContexts m
-                .|> Context
+            activeContexts .|> Context
 
         projects =
-            Model.getActiveProjects m
-                .|> Project
+            activeProjects .|> Project
 
         all =
             projects ++ contexts ++ [ Projects, Contexts ]

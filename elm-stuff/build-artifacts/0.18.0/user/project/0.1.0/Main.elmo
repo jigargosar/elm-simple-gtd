@@ -48,7 +48,7 @@ var _user$project$Main$firebaseUpdateClientCmd = function (model) {
 		});
 };
 var _user$project$Main$command = _Fresheyeball$elm_return$Return$command;
-var _user$project$Main$setDomFocusToFocusedEntityCmd = _user$project$Msg$commonMsg.focus('.entity-list > [tabindex=0]');
+var _user$project$Main$setDomFocusToFocusedEntityCmd = _user$project$Model$commonMsg.focus('.entity-list > [tabindex=0]');
 var _user$project$Main$updateTodoAndMaybeAlsoSelected = F2(
 	function (action, todo) {
 		return _Fresheyeball$elm_return$Return$andThen(
@@ -195,22 +195,22 @@ var _user$project$Main$subscriptions = function (m) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
 			ctor: '::',
-			_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 1, _user$project$Msg$OnNowChanged),
+			_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 1, _user$project$Model$OnNowChanged),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Ext_Keyboard$subscription(_user$project$Msg$OnKeyboardMsg),
+				_0: _user$project$Ext_Keyboard$subscription(_user$project$Model$OnKeyboardMsg),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$keyUps(_user$project$Msg$OnGlobalKeyUp),
+					_0: _user$project$Ext_Keyboard$keyUps(_user$project$Model$OnGlobalKeyUp),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Main$notificationClicked(_user$project$Msg$OnNotificationClicked),
+						_0: _user$project$Main$notificationClicked(_user$project$Model$OnNotificationClicked),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Store$onChange(_user$project$Msg$OnPouchDBChange),
+							_0: _user$project$Store$onChange(_user$project$Model$OnPouchDBChange),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Firebase$onChange(_user$project$Msg$OnFirebaseChange),
+								_0: _user$project$Firebase$onChange(_user$project$Model$OnFirebaseChange),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -362,7 +362,7 @@ var _user$project$Main$update = function (msg) {
 											return _.pouchDBRemoteSyncURI;
 										}(_p27));
 								},
-								A2(_user$project$Main$andThenUpdate, _user$project$Msg$SaveCurrentForm, _p26));
+								A2(_user$project$Main$andThenUpdate, _user$project$Model$SaveCurrentForm, _p26));
 						};
 					case 'OnNotificationClicked':
 						var todoId = _p15._0.data.id;
@@ -376,7 +376,7 @@ var _user$project$Main$update = function (msg) {
 									_p28));
 						} : function (_p29) {
 							return _user$project$Main$andThenUpdate(
-								_user$project$Msg$ShowReminderOverlayForTodoId(_p29));
+								_user$project$Model$ShowReminderOverlayForTodoId(_p29));
 						}(todoId);
 					case 'ToggleShowDeletedEntity':
 						return _Fresheyeball$elm_return$Return$map(
@@ -400,7 +400,7 @@ var _user$project$Main$update = function (msg) {
 						return function (_p30) {
 							return A2(
 								_user$project$Main$andThenUpdate,
-								_user$project$Msg$DeactivateEditingMode,
+								_user$project$Model$DeactivateEditingMode,
 								A3(
 									_user$project$Main$updateTodoAndMaybeAlsoSelected,
 									_user$project$Todo$SetContext(_p15._0),
@@ -411,7 +411,7 @@ var _user$project$Main$update = function (msg) {
 						return function (_p31) {
 							return A2(
 								_user$project$Main$andThenUpdate,
-								_user$project$Msg$DeactivateEditingMode,
+								_user$project$Model$DeactivateEditingMode,
 								A3(
 									_user$project$Main$updateTodoAndMaybeAlsoSelected,
 									_user$project$Todo$SetProject(_p15._0),
@@ -431,7 +431,7 @@ var _user$project$Main$update = function (msg) {
 					case 'NewTodoKeyUp':
 						var _p33 = _p15._0.key;
 						if (_p33.ctor === 'Enter') {
-							return _user$project$Main$andThenUpdate(_user$project$Msg$SaveCurrentForm);
+							return _user$project$Main$andThenUpdate(_user$project$Model$SaveCurrentForm);
 						} else {
 							return _elm_lang$core$Basics$identity;
 						}
@@ -499,8 +499,6 @@ var _user$project$Main$update = function (msg) {
 							_user$project$Model$showReminderOverlayForTodoId(_p15._0));
 					case 'OnNowChanged':
 						return _user$project$Main$onUpdateNow(_p15._0);
-					case 'OnMsgList':
-						return _user$project$Main$onMsgList(_p15._0);
 					case 'OnKeyboardMsg':
 						return function (_p42) {
 							return A2(
@@ -516,7 +514,7 @@ var _user$project$Main$update = function (msg) {
 						return function (_p43) {
 							return A2(
 								_user$project$Main$andThenUpdate,
-								_user$project$Msg$DeactivateEditingMode,
+								_user$project$Model$DeactivateEditingMode,
 								A2(_Fresheyeball$elm_return$Return$andThen, _user$project$Model$saveCurrentForm, _p43));
 						};
 					case 'NewTodo':
@@ -555,12 +553,12 @@ var _user$project$Main$update = function (msg) {
 								return _Fresheyeball$elm_return$Return$map(
 									A2(_user$project$Model$updateEditModeNameChanged, _p48._0, _p51));
 							case 'Save':
-								return _user$project$Main$andThenUpdate(_user$project$Msg$SaveCurrentForm);
+								return _user$project$Main$andThenUpdate(_user$project$Model$SaveCurrentForm);
 							case 'ToggleDeleted':
 								return function (_p50) {
 									return A2(
 										_user$project$Main$andThenUpdate,
-										_user$project$Msg$DeactivateEditingMode,
+										_user$project$Model$DeactivateEditingMode,
 										A2(
 											_Fresheyeball$elm_return$Return$andThen,
 											_user$project$Model$toggleDeleteEntity(_p51),
@@ -603,7 +601,7 @@ var _user$project$Main$update = function (msg) {
 													_user$project$Model$setEntityListViewType(_user$project$Entity$ContextsView));
 										}
 									}()(
-										A2(_user$project$Main$andThenUpdate, _user$project$Msg$DeactivateEditingMode, _p53));
+										A2(_user$project$Main$andThenUpdate, _user$project$Model$DeactivateEditingMode, _p53));
 								};
 							case 'OnInputChanged':
 								return _user$project$Main$map(
@@ -619,7 +617,7 @@ var _user$project$Main$update = function (msg) {
 						}
 					case 'OnLaunchBarAction':
 						return _user$project$Main$withNow(
-							_user$project$Msg$OnLaunchBarActionWithNow(_p15._0));
+							_user$project$Model$OnLaunchBarActionWithNow(_p15._0));
 					default:
 						return _user$project$Main$onGlobalKeyUp(_p15._0);
 				}
@@ -646,19 +644,19 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 							case 'Escape':
 								return _Fresheyeball$elm_return$Return$map(_user$project$Model$clearSelection);
 							case 'CharQ':
-								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodo);
+								return _user$project$Main$andThenUpdate(_user$project$Model$NewTodo);
 							case 'CharI':
-								return _user$project$Main$andThenUpdate(_user$project$Msg$NewTodoForInbox);
+								return _user$project$Main$andThenUpdate(_user$project$Model$NewTodoForInbox);
 							case 'Slash':
 								var _p60 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
 								return _user$project$Main$andThenUpdate(
-									_user$project$Msg$OnLaunchBarAction(_user$project$LaunchBar$Open));
+									_user$project$Model$OnLaunchBarAction(_user$project$LaunchBar$Open));
 							default:
 								return _elm_lang$core$Basics$identity;
 						}
 					} else {
 						if (_p58._0.ctor === 'Escape') {
-							return _user$project$Main$andThenUpdate(_user$project$Msg$DeactivateEditingMode);
+							return _user$project$Main$andThenUpdate(_user$project$Model$DeactivateEditingMode);
 						} else {
 							break _v9_2;
 						}
@@ -670,12 +668,6 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 			return _elm_lang$core$Basics$identity;
 		});
 };
-var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
-	_elm_lang$core$List$foldl(
-		function (_p61) {
-			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p61));
-		}));
 var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 	{delta2url: _user$project$Routes$delta2hash, location2messages: _user$project$Routes$hash2messages, init: _user$project$Main$init, update: _user$project$Main$update, view: _user$project$View$init, subscriptions: _user$project$Main$subscriptions})(
 	A2(
@@ -729,10 +721,12 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 				A2(_elm_lang$core$Json_Decode$field, 'developmentMode', _elm_lang$core$Json_Decode$bool));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$andThenUpdateAll = function (_p62) {
-	return _user$project$Main$andThenUpdate(
-		_user$project$Msg$OnMsgList(_p62));
-};
+var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
+	_elm_lang$core$List$foldl(
+		function (_p61) {
+			return _Fresheyeball$elm_return$Return$andThen(
+				_user$project$Main$update(_p61));
+		}));
 var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',
 	function (v) {

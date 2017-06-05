@@ -16,7 +16,7 @@ var _user$project$Firebase_View$init = function (m) {
 					_0: _elm_lang$html$Html_Attributes$id('firebase-auth'),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Firebase$onUserChanged(_user$project$Msg$OnUserChanged),
+						_0: _user$project$Firebase$onUserChanged(_user$project$Model$OnUserChanged),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -31,7 +31,7 @@ var _user$project$Firebase_View$init = function (m) {
 						_0: _elm_lang$html$Html_Attributes$id('fb-messaging'),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Firebase$onFCMTokenChanged(_user$project$Msg$OnFCMTokenChanged),
+							_0: _user$project$Firebase$onFCMTokenChanged(_user$project$Model$OnFCMTokenChanged),
 							_1: {
 								ctor: '::',
 								_0: _user$project$Firebase$customSw,
@@ -50,7 +50,7 @@ var _user$project$Firebase_View$init = function (m) {
 							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'path', '.info/connected'),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Firebase$onConnectionChange(_user$project$Msg$OnFirebaseConnectionChanged),
+								_0: _user$project$Firebase$onConnectionChange(_user$project$Model$OnFirebaseConnectionChanged),
 								_1: {ctor: '[]'}
 							}
 						},

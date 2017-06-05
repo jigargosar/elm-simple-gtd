@@ -17,7 +17,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Msg exposing (commonMsg)
+import Model exposing (commonMsg)
 import Project
 import String.Extra as String
 
@@ -34,7 +34,7 @@ init m =
 formView form m =
     let
         fuzzyResults =
-            LaunchBar.getFuzzyResults form.input m
+            LaunchBar.getFuzzyResults form.input (Model.getActiveContexts m) (Model.getActiveProjects m)
 
         matchingEntity =
             fuzzyResults
@@ -48,7 +48,7 @@ formView form m =
         keyHandler { key } =
             case key of
                 Key.Enter ->
-                    matchingEntity |> LaunchBar.OnEnter |> Msg.OnLaunchBarAction
+                    matchingEntity |> LaunchBar.OnEnter |> Model.OnLaunchBarAction
 
                 _ ->
                     commonMsg.noOp
@@ -56,14 +56,14 @@ formView form m =
         div
             [ class "modal-background"
             , onKeyDownStopPropagation (keyHandler)
-            , onClickStopPropagation Msg.DeactivateEditingMode
+            , onClickStopPropagation Model.DeactivateEditingMode
             ]
             [ div
                 [ id "launch-bar-container"
                 , class "layout horizontal"
                 , attribute "onclick"
                     "console.log('focusing');document.getElementById('hidden-input').focus(); event.stopPropagation(); event.preventDefault();"
-                , onInput (LaunchBar.OnInputChanged form >> Msg.OnLaunchBarAction)
+                , onInput (LaunchBar.OnInputChanged form >> Model.OnLaunchBarAction)
                 ]
                 [ div [ class "flex-auto ellipsis" ] [ text matchingEntityName ]
                 , div [ class "no-wrap input typing" ] [ text form.input ]

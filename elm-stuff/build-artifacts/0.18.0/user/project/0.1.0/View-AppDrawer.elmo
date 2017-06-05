@@ -5,7 +5,7 @@ var _user$project$View_AppDrawer$switchViewItem = F3(
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Msg$SwitchView(viewType)),
+					_user$project$Model$SwitchView(viewType)),
 				_1: {ctor: '[]'}
 			},
 			{
@@ -154,7 +154,7 @@ var _user$project$View_AppDrawer$entityListView = F2(
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onClick(
-										_user$project$Msg$SwitchView(
+										_user$project$Model$SwitchView(
 											_user$project$Model$EntityListView(_p1.viewType))),
 									_1: {ctor: '[]'}
 								},
@@ -181,7 +181,7 @@ var _user$project$View_AppDrawer$entityListView = F2(
 												_0: _elm_lang$html$Html_Attributes$checked(_p1.showDeleted),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$ToggleShowDeletedEntity),
+													_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleShowDeletedEntity),
 													_1: {ctor: '[]'}
 												}
 											},
@@ -412,7 +412,7 @@ var _user$project$View_AppDrawer$view = F2(
 																_0: A2(_elm_lang$html$Html_Attributes$attribute, 'drawer-toggle', ''),
 																_1: {
 																	ctor: '::',
-																	_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$ToggleDrawer),
+																	_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleDrawer),
 																	_1: {ctor: '[]'}
 																}
 															}

@@ -19,7 +19,7 @@ var _user$project$Main_View$projectDropdown = function (model) {
 				});
 		});
 	var view = function (todo) {
-		var onItemClick = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Msg$SetTodoProject, todo);
+		var onItemClick = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo);
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$material,
 			{
@@ -70,7 +70,7 @@ var _user$project$Main_View$contextDropdown = function (model) {
 				});
 		});
 	var view = function (todo) {
-		var onItemClick = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Msg$SetTodoContext, todo);
+		var onItemClick = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo);
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$material,
 			{
@@ -150,7 +150,7 @@ var _user$project$Main_View$init = F2(
 													_1: {
 														ctor: '::',
 														_0: _elm_lang$html$Html_Events$onInput(
-															_user$project$Msg$UpdateRemoteSyncFormUri(form)),
+															_user$project$Model$UpdateRemoteSyncFormUri(form)),
 														_1: {ctor: '[]'}
 													}
 												}
@@ -169,7 +169,7 @@ var _user$project$Main_View$init = F2(
 															ctor: '::',
 															_0: function (_p3) {
 																return _elm_lang$html$Html_Events$onClick(
-																	_user$project$Msg$RemotePouchSync(_p3));
+																	_user$project$Model$RemotePouchSync(_p3));
 															}(form),
 															_1: {ctor: '[]'}
 														},

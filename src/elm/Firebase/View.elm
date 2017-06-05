@@ -12,7 +12,6 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Msg exposing (commonMsg)
 import WebComponents exposing (..)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
@@ -28,18 +27,18 @@ init m =
     div [ id "firebase-container" ]
         ([ Html.node "firebase-auth"
             [ id "firebase-auth"
-            , onUserChanged Msg.OnUserChanged
+            , onUserChanged Model.OnUserChanged
             ]
             []
          , Html.node "firebase-messaging"
             [ id "fb-messaging"
-            , onFCMTokenChanged Msg.OnFCMTokenChanged
+            , onFCMTokenChanged Model.OnFCMTokenChanged
             , customSw
             ]
             []
          , Html.node "firebase-document"
             [ attribute "path" ".info/connected"
-            , onConnectionChange Msg.OnFirebaseConnectionChanged
+            , onConnectionChange Model.OnFirebaseConnectionChanged
             ]
             []
          ]

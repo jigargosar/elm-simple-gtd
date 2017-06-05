@@ -4,7 +4,7 @@ import Document
 import Entity
 import OldGroupEntity.ViewModel exposing (DocumentWithNameViewModel)
 import Html exposing (Attribute)
-import Msg exposing (Msg)
+import Model exposing (Msg)
 import Todo
 import Todo.View
 import Toolkit.Helpers exposing (..)

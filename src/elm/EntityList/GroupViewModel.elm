@@ -9,7 +9,7 @@ import Ext.Keyboard exposing (KeyboardEvent)
 import Html
 import Lazy
 import Model exposing (EntityListViewType, ViewType(..))
-import Msg exposing (Msg, commonMsg)
+import Model exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -70,7 +70,7 @@ create tabindexAV config entityModel =
             Document.getId entityModel
 
         createEntityActionMsg =
-            Msg.OnEntityAction (config.entityWrapper entityModel)
+            Model.OnEntityAction (config.entityWrapper entityModel)
 
         isNull =
             config.isNull entityModel
@@ -115,7 +115,7 @@ create tabindexAV config entityModel =
         , onDeleteClicked = toggleDeleteMsg
         , onSaveClicked = createEntityActionMsg Entity.Save
         , onNameChanged = Entity.NameChanged >> createEntityActionMsg
-        , onCancelClicked = Msg.DeactivateEditingMode
+        , onCancelClicked = Model.DeactivateEditingMode
         , icon = icon
         , onFocusIn = createEntityActionMsg Entity.SetFocusedIn
         , onFocus = createEntityActionMsg Entity.SetFocused

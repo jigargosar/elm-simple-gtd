@@ -1,5 +1,6 @@
 module Model exposing (..)
 
+import CommonMsg
 import Context
 import Date
 import Date.Extra.Create
@@ -7,7 +8,8 @@ import Dict.Extra
 import Document exposing (Document)
 import EditMode exposing (EditMode)
 import Entity exposing (Entity)
-import Ext.Keyboard as Keyboard
+import Ext.Cmd
+import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Ext.List as List
 import Ext.Predicate
 import Ext.Record as Record
@@ -37,6 +39,62 @@ import Todo.Store
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
+import LaunchBar
+
+
+type Msg
+    = OnCommonMsg CommonMsg.Msg
+    | OnPouchDBChange String D.Value
+    | OnFirebaseChange String D.Value
+    | OnUserChanged Firebase.User
+    | OnFCMTokenChanged Firebase.FCMToken
+    | OnFirebaseConnectionChanged Bool
+    | SignIn
+    | SignOut
+    | RemotePouchSync EditMode.SyncForm
+    | TodoAction Todo.UpdateAction Todo.Id
+    | ReminderOverlayAction ReminderOverlay.Action
+    | OnNotificationClicked TodoNotificationEvent
+    | ToggleShowDeletedEntity
+    | ToggleDrawer
+    | OnLayoutNarrowChanged Bool
+    | ToggleTodoDone Todo.Id
+    | SetTodoContext Context.Model Todo.Model
+    | SetTodoProject Project.Model Todo.Model
+    | NewTodo
+    | NewTodoForInbox
+    | NewProject
+    | NewContext
+    | NewTodoTextChanged Todo.NewForm.Model Todo.Text
+    | DeactivateEditingMode
+    | NewTodoKeyUp KeyboardEvent
+    | StartEditingReminder Todo.Model
+    | StartEditingContext Todo.Model
+    | StartEditingProject Todo.Model
+    | SaveCurrentForm
+    | FocusPaperInput String
+    | AutoFocusPaperInput
+    | UpdateRemoteSyncFormUri EditMode.SyncForm String
+    | UpdateTodoForm Todo.Form.Model Todo.Form.Action
+    | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
+    | OnEntityListKeyDown (List Entity) KeyboardEvent
+    | SwitchView ViewType
+    | SetGroupByView EntityListViewType
+    | ShowReminderOverlayForTodoId Todo.Id
+    | OnNowChanged Time
+    | OnKeyboardMsg Keyboard.Msg
+    | OnGlobalKeyUp Keyboard.Key
+    | OnEntityAction Entity Entity.Action
+    | OnLaunchBarAction LaunchBar.Action
+    | OnLaunchBarActionWithNow LaunchBar.Action Time
+
+
+commonMsg : CommonMsg.Helper Msg
+commonMsg =
+    CommonMsg.createHelper OnCommonMsg
 
 
 type alias EntityListViewType =

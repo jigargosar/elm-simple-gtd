@@ -12,7 +12,7 @@ var _user$project$View$addTodoFab = function (m) {
 					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'mini', ''),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Msg$NewTodo),
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$NewTodo),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$tabindex(-1),
@@ -39,7 +39,7 @@ var _user$project$View$appDrawerLayoutView = function (m) {
 						_1: {ctor: '[]'}
 					}
 				},
-				_user$project$Msg$DeactivateEditingMode),
+				_user$project$Model$DeactivateEditingMode),
 			_1: {ctor: '[]'}
 		};
 		var _p0 = m.editMode;
@@ -73,9 +73,9 @@ var _user$project$View$appDrawerLayoutView = function (m) {
 						}),
 					pathIdList),
 				function (_p1) {
-					return _user$project$Msg$DeactivateEditingMode;
+					return _user$project$Model$DeactivateEditingMode;
 				}),
-			_user$project$Msg$commonMsg.noOp);
+			_user$project$Model$commonMsg.noOp);
 	};
 	var forceNarrow = _user$project$Model$getLayoutForceNarrow(m);
 	var viewModel = _user$project$ViewModel$create(m);
@@ -88,7 +88,7 @@ var _user$project$View$appDrawerLayoutView = function (m) {
 				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'forceNarrow', forceNarrow),
 				_1: {
 					ctor: '::',
-					_0: A2(_user$project$WebComponents$onBoolPropertyChanged, 'narrow', _user$project$Msg$OnLayoutNarrowChanged),
+					_0: A2(_user$project$WebComponents$onBoolPropertyChanged, 'narrow', _user$project$Model$OnLayoutNarrowChanged),
 					_1: {ctor: '[]'}
 				}
 			},

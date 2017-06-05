@@ -1,6 +1,6 @@
 var _user$project$View_ReminderOverlay$activeViewShell = F2(
 	function (todoDetails, children) {
-		var onOutsideClick = _user$project$Msg$ReminderOverlayAction(_user$project$ReminderOverlay$Close);
+		var onOutsideClick = _user$project$Model$ReminderOverlayAction(_user$project$ReminderOverlay$Close);
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -56,9 +56,9 @@ var _user$project$View_ReminderOverlay$reminderOverlayActiveView = F2(
 		var _p0 = activeView;
 		if (_p0.ctor === 'InitialView') {
 			var vm = {
-				onDismissClicked: _user$project$Msg$ReminderOverlayAction(_user$project$ReminderOverlay$Dismiss),
-				onDoneClicked: _user$project$Msg$ReminderOverlayAction(_user$project$ReminderOverlay$MarkDone),
-				onSnoozeClicked: _user$project$Msg$ReminderOverlayAction(_user$project$ReminderOverlay$ShowSnoozeOptions)
+				onDismissClicked: _user$project$Model$ReminderOverlayAction(_user$project$ReminderOverlay$Dismiss),
+				onDoneClicked: _user$project$Model$ReminderOverlayAction(_user$project$ReminderOverlay$MarkDone),
+				onSnoozeClicked: _user$project$Model$ReminderOverlayAction(_user$project$ReminderOverlay$ShowSnoozeOptions)
 			};
 			return A2(
 				_user$project$View_ReminderOverlay$activeViewShell,
@@ -78,7 +78,7 @@ var _user$project$View_ReminderOverlay$reminderOverlayActiveView = F2(
 				});
 		} else {
 			var msg = function (_p1) {
-				return _user$project$Msg$ReminderOverlayAction(
+				return _user$project$Model$ReminderOverlayAction(
 					_user$project$ReminderOverlay$SnoozeTill(_p1));
 			};
 			var vm = {

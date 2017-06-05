@@ -1042,16 +1042,6 @@ moveFocusBy num entityList model =
         |> (setFocusInEntityByIndex # entityList # model)
 
 
-focusPrevEntity : List Entity -> ModelF
-focusPrevEntity =
-    moveFocusBy -1
-
-
-focusNextEntity : List Entity -> ModelF
-focusNextEntity =
-    moveFocusBy 1
-
-
 
 -- Document Query Helpers
 

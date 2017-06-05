@@ -814,8 +814,6 @@ var _user$project$Model$moveFocusBy = F3(
 					A2(_user$project$Model$getMaybeFocusInEntityIndex, entityList, model),
 					0)));
 	});
-var _user$project$Model$focusPrevEntity = _user$project$Model$moveFocusBy(-1);
-var _user$project$Model$focusNextEntity = _user$project$Model$moveFocusBy(1);
 var _user$project$Model$updateEntityListCursorFromEntityIndexTuple = F2(
 	function (model, indexTuple) {
 		var setFocusInIndex = function (index) {

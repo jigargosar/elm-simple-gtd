@@ -158,11 +158,11 @@ update msg =
                 OnEntityListKeyDown entityList { key, isShiftDown } ->
                     case key of
                         Key.ArrowUp ->
-                            Return.map (Model.focusPrevEntity entityList)
+                            Return.map (Model.moveFocusBy -1 entityList)
                                 >> andThenUpdate setDomFocusToFocusedEntityCmd
 
                         Key.ArrowDown ->
-                            Return.map (Model.focusNextEntity entityList)
+                            Return.map (Model.moveFocusBy 1 entityList)
                                 >> andThenUpdate setDomFocusToFocusedEntityCmd
 
                         _ ->

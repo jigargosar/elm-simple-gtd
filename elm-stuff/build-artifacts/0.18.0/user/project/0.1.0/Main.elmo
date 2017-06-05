@@ -331,7 +331,7 @@ var _user$project$Main$update = function (msg) {
 										_user$project$Main$setDomFocusToFocusedEntityCmd,
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$focusPrevEntity(_p25),
+											A2(_user$project$Model$moveFocusBy, -1, _p25),
 											_p23));
 								};
 							case 'ArrowDown':
@@ -341,7 +341,7 @@ var _user$project$Main$update = function (msg) {
 										_user$project$Main$setDomFocusToFocusedEntityCmd,
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$focusNextEntity(_p25),
+											A2(_user$project$Model$moveFocusBy, 1, _p25),
 											_p24));
 								};
 							default:

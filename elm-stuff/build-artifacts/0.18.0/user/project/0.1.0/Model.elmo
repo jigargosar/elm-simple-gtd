@@ -1067,14 +1067,7 @@ var _user$project$Model$insertTodo = function (constructWithId) {
 };
 var _user$project$Model$findAndUpdateAllTodos = F3(
 	function (findFn, action, model) {
-		var updateFn = A2(
-			_user$project$Todo$update,
-			{
-				ctor: '::',
-				_0: action,
-				_1: {ctor: '[]'}
-			},
-			model.now);
+		var updateFn = A2(_user$project$Todo$update, action, model.now);
 		var todoChangesToCmd = function (_p50) {
 			var _p51 = _p50;
 			var _p52 = _user$project$Model$getMaybeUserId(_p51._1);

@@ -124,65 +124,59 @@ getMaybeTime model =
     getMaybeReminderTime model |> Maybe.orElse (getMaybeDueAt model)
 
 
-update : List UpdateAction -> Time -> ModelF
-update actions now =
-    let
-        innerUpdate action model =
-            case action of
-                SetDone done ->
-                    { model | done = done }
+update : UpdateAction -> Time -> ModelF
+update action now model =
+    case action of
+        SetDone done ->
+            { model | done = done }
 
-                SetDeleted deleted ->
-                    { model | deleted = deleted, deletedAt = now }
+        SetDeleted deleted ->
+            { model | deleted = deleted, deletedAt = now }
 
-                SetText text ->
-                    { model | text = text }
+        SetText text ->
+            { model | text = text }
 
-                SetContextId contextId ->
-                    { model | contextId = contextId }
+        SetContextId contextId ->
+            { model | contextId = contextId }
 
-                SetProjectId projectId ->
-                    { model | projectId = projectId }
+        SetProjectId projectId ->
+            { model | projectId = projectId }
 
-                CopyProjectAndContextId fromTodo ->
-                    model
-                        |> innerUpdate (SetContextId fromTodo.contextId)
-                        >> innerUpdate (SetProjectId fromTodo.projectId)
+        CopyProjectAndContextId fromTodo ->
+            model
+                |> update (SetContextId fromTodo.contextId) now
+                >> update (SetProjectId fromTodo.projectId) now
 
-                SetContext context ->
-                    innerUpdate (SetContextId (Document.getId context)) model
+        SetContext context ->
+            update (SetContextId (Document.getId context)) now model
 
-                SetProject project ->
-                    innerUpdate (SetProjectId (Document.getId project)) model
+        SetProject project ->
+            update (SetProjectId (Document.getId project)) now model
 
-                ToggleDone ->
-                    innerUpdate (SetDone (not model.done)) model
+        ToggleDone ->
+            update (SetDone (not model.done)) now model
 
-                MarkDone ->
-                    innerUpdate (SetDone True) model
+        MarkDone ->
+            update (SetDone True) now model
 
-                ToggleDeleted ->
-                    innerUpdate (SetDeleted (not model.deleted)) model
+        ToggleDeleted ->
+            update (SetDeleted (not model.deleted)) now model
 
-                SetSchedule schedule ->
-                    { model | schedule = schedule }
+        SetSchedule schedule ->
+            { model | schedule = schedule }
 
-                SetScheduleFromMaybeTime maybeTime ->
-                    innerUpdate (SetSchedule (Todo.Schedule.fromMaybeTime maybeTime)) model
+        SetScheduleFromMaybeTime maybeTime ->
+            update (SetSchedule (Todo.Schedule.fromMaybeTime maybeTime)) now model
 
-                TurnReminderOff ->
-                    innerUpdate (SetSchedule (Todo.Schedule.turnReminderOff model.schedule)) model
+        TurnReminderOff ->
+            update (SetSchedule (Todo.Schedule.turnReminderOff model.schedule)) now model
 
-                SnoozeTill time ->
-                    innerUpdate (SetSchedule (Todo.Schedule.snoozeTill time model.schedule)) model
+        SnoozeTill time ->
+            update (SetSchedule (Todo.Schedule.snoozeTill time model.schedule)) now model
 
-                AutoSnooze ->
-                    --todo: add update schedule and or lens.
-                    -- todo: remove multiple actions and updating modified at.
-                    innerUpdate (SetSchedule (Todo.Schedule.snoozeTill (now + (Time.minute * 15)) model.schedule)) model
-    in
-        (List.foldl innerUpdate # actions)
-            >> (\model -> { model | modifiedAt = now })
+        AutoSnooze ->
+            --todo: add update schedule and or lens.
+            update (SetSchedule (Todo.Schedule.snoozeTill (now + (Time.minute * 15)) model.schedule)) now model
 
 
 hasReminderChanged ( old, new ) =

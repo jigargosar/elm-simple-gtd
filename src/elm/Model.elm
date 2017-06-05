@@ -1135,7 +1135,7 @@ findAndUpdateAllTodos findFn action model =
                         |> Cmd.batch
 
         updateFn =
-            Todo.update [ action ] model.now
+            Todo.update action model.now
     in
         Record.overT2 todoStore (Store.findAndUpdateAll findFn model.now updateFn) model
             |> apply2 ( Tuple.second, todoChangesToCmd )

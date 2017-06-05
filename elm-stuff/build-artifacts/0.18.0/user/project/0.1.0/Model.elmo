@@ -39,13 +39,6 @@ var _user$project$Model$getMaybeFocusInEntityIndex = F2(
 			_user$project$Entity$equalById(model.focusInEntity),
 			entityList);
 	});
-var _user$project$Model$getFocusInEntityIndex = F2(
-	function (entityList, model) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(_user$project$Model$getMaybeFocusInEntityIndex, entityList, model),
-			0);
-	});
 var _user$project$Model$setKeyboardState = F2(
 	function (keyboardState, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -807,28 +800,22 @@ var _user$project$Model$setFocusInEntityByIndex = F3(
 				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_community$list_extra$List_Extra$getAt, entityList)(
 					A2(_user$project$Ext_List$clampIndex, index, entityList))));
 	});
-var _user$project$Model$focusPrevEntity = F2(
-	function (entityList, model) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$setFocusInEntityByIndex, entityList),
-			model)(
-			A2(
-				_user$project$Ext_Function$andThenSubtract,
-				1,
-				A2(_user$project$Model$getFocusInEntityIndex, entityList, model)));
-	});
-var _user$project$Model$focusNextEntity = F2(
-	function (entityList, model) {
+var _user$project$Model$moveFocusBy = F3(
+	function (num, entityList, model) {
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$setFocusInEntityByIndex, entityList),
 			model)(
 			A2(
 				_user$project$Ext_Function$add,
-				1,
-				A2(_user$project$Model$getFocusInEntityIndex, entityList, model)));
+				num,
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(_user$project$Model$getMaybeFocusInEntityIndex, entityList, model),
+					0)));
 	});
+var _user$project$Model$focusPrevEntity = _user$project$Model$moveFocusBy(-1);
+var _user$project$Model$focusNextEntity = _user$project$Model$moveFocusBy(1);
 var _user$project$Model$updateEntityListCursorFromEntityIndexTuple = F2(
 	function (model, indexTuple) {
 		var setFocusInIndex = function (index) {

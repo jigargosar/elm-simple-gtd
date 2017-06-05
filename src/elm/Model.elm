@@ -1023,10 +1023,6 @@ setFocusInEntity entity =
     set focusInEntity entity
 
 
-getFocusInEntityIndex entityList model =
-    getMaybeFocusInEntityIndex entityList model ?= 0
-
-
 getMaybeFocusInEntityIndex entityList model =
     entityList
         |> List.findIndex (Entity.equalById model.focusInEntity)
@@ -1038,18 +1034,22 @@ getMaybeFocusInEntity entityList model =
         |> Maybe.orElse (List.head entityList)
 
 
-focusPrevEntity : List Entity -> ModelF
-focusPrevEntity entityList model =
-    getFocusInEntityIndex entityList model
-        |> andThenSubtract 1
+moveFocusBy : Int -> List Entity -> ModelF
+moveFocusBy num entityList model =
+    getMaybeFocusInEntityIndex entityList model
+        ?= 0
+        |> add num
         |> (setFocusInEntityByIndex # entityList # model)
+
+
+focusPrevEntity : List Entity -> ModelF
+focusPrevEntity =
+    moveFocusBy -1
 
 
 focusNextEntity : List Entity -> ModelF
-focusNextEntity entityList model =
-    getFocusInEntityIndex entityList model
-        |> add 1
-        |> (setFocusInEntityByIndex # entityList # model)
+focusNextEntity =
+    moveFocusBy 1
 
 
 

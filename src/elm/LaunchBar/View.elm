@@ -48,7 +48,7 @@ formView form m =
         keyHandler { key } =
             case key of
                 Key.Enter ->
-                    matchingEntity |> LaunchBar.OnEnter |> Model.OnLaunchBarAction
+                    matchingEntity |> LaunchBar.OnEnter |> Model.OnLaunchBarMsg
 
                 _ ->
                     commonMsg.noOp
@@ -63,7 +63,7 @@ formView form m =
                 , class "layout horizontal"
                 , attribute "onclick"
                     "console.log('focusing');document.getElementById('hidden-input').focus(); event.stopPropagation(); event.preventDefault();"
-                , onInput (LaunchBar.OnInputChanged form >> Model.OnLaunchBarAction)
+                , onInput (LaunchBar.OnInputChanged form >> Model.OnLaunchBarMsg)
                 ]
                 [ div [ class "flex-auto ellipsis" ] [ text matchingEntityName ]
                 , div [ class "no-wrap input typing" ] [ text form.input ]

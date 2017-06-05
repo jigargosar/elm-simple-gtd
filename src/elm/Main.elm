@@ -315,8 +315,8 @@ update msg =
                         Entity.ToggleSelected ->
                             Return.map (Model.toggleEntitySelection entity)
 
-                OnLaunchBarActionWithNow action now ->
-                    case action of
+                OnLaunchBarMsgWithNow msg now ->
+                    case msg of
                         LaunchBar.OnEnter entity ->
                             andThenUpdate DeactivateEditingMode
                                 >> case entity of
@@ -336,11 +336,10 @@ update msg =
                             map (Model.updateLaunchBarInput now text form)
 
                         LaunchBar.Open ->
-                            map (Model.activateLaunchBar now)
-                                >> autoFocusInputCmd
+                            map (Model.activateLaunchBar now) >> autoFocusInputCmd
 
-                OnLaunchBarAction action ->
-                    withNow (OnLaunchBarActionWithNow action)
+                OnLaunchBarMsg msg ->
+                    withNow (OnLaunchBarMsgWithNow msg)
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key
@@ -475,7 +474,7 @@ onGlobalKeyUp key =
                                 _ =
                                     Debug.log "slashpressed" ("slashpressed")
                             in
-                                LaunchBar.Open |> OnLaunchBarAction |> andThenUpdate
+                                LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
 
                         _ ->
                             identity

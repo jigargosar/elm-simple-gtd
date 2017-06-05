@@ -86,8 +86,8 @@ type Msg
     | OnKeyboardMsg Keyboard.Msg
     | OnGlobalKeyUp Keyboard.Key
     | OnEntityAction Entity Entity.Action
-    | OnLaunchBarAction LaunchBar.Action
-    | OnLaunchBarActionWithNow LaunchBar.Action Time
+    | OnLaunchBarMsg LaunchBar.Action
+    | OnLaunchBarMsgWithNow LaunchBar.Action Time
 
 
 commonMsg : CommonMsg.Helper Msg

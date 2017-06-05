@@ -7,6 +7,20 @@ var _user$project$Ext_Record$setIn = F3(
 	function (big, field, small) {
 		return A3(_user$project$Ext_Record$set, field, small, big);
 	});
+var _user$project$Ext_Record$maybeSet = F3(
+	function (field, maybeSmall, big) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				maybeSmall,
+				A2(_user$project$Ext_Record$setIn, big, field)),
+			big);
+	});
+var _user$project$Ext_Record$maybeSetIn = F3(
+	function (big, field, maybeSmall) {
+		return A3(_user$project$Ext_Record$maybeSet, field, maybeSmall, big);
+	});
 var _user$project$Ext_Record$get = F2(
 	function (_p2, big) {
 		var _p3 = _p2;

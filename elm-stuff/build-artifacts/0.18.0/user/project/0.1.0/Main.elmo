@@ -564,14 +564,14 @@ var _user$project$Main$update = function (msg) {
 											_user$project$Model$toggleDeleteEntity(_p51),
 											_p50));
 								};
-							case 'SetFocusedIn':
+							case 'OnFocusIn':
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$setFocusInEntity(_p51));
-							case 'SetFocused':
+							case 'OnFocus':
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$setMaybeFocusedEntity(
 										_elm_lang$core$Maybe$Just(_p51)));
-							case 'SetBlurred':
+							case 'OnBlur':
 								return _Fresheyeball$elm_return$Return$map(
 									_user$project$Model$setMaybeFocusedEntity(_elm_lang$core$Maybe$Nothing));
 							default:

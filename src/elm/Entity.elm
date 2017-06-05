@@ -32,9 +32,9 @@ type Action
     | ToggleDeleted
     | Save
     | NameChanged String
-    | SetFocused
-    | SetBlurred
-    | SetFocusedIn
+    | OnFocus
+    | OnBlur
+    | OnFocusIn
     | ToggleSelected
 
 

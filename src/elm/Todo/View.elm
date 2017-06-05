@@ -243,9 +243,9 @@ createTodoViewModel vc tabindexAV todo =
         , reminder = createReminderViewModel vc todo
         , edit = maybeEditTodoForm ?|> createEditTodoViewModel # todo
         , onDeleteClicked = toggleDeleteMsg
-        , onFocusIn = createEntityActionMsg Entity.SetFocusedIn
-        , onFocus = createEntityActionMsg Entity.SetFocused
-        , onBlur = createEntityActionMsg Entity.SetBlurred
+        , onFocusIn = createEntityActionMsg Entity.OnFocusIn
+        , onFocus = createEntityActionMsg Entity.OnFocus
+        , onBlur = createEntityActionMsg Entity.OnBlur
         , tabindexAV = tabindexAV
         , isSelected = vc.selectedEntityIdSet |> Set.member todoId
         }

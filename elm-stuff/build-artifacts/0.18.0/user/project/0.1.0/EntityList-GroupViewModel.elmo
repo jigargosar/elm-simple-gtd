@@ -44,9 +44,9 @@ var _user$project$EntityList_GroupViewModel$create = F3(
 			},
 			onCancelClicked: _user$project$Model$DeactivateEditingMode,
 			icon: icon,
-			onFocusIn: createEntityActionMsg(_user$project$Entity$SetFocusedIn),
-			onFocus: createEntityActionMsg(_user$project$Entity$SetFocused),
-			onBlur: createEntityActionMsg(_user$project$Entity$SetBlurred),
+			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
+			onFocus: createEntityActionMsg(_user$project$Entity$OnFocus),
+			onBlur: createEntityActionMsg(_user$project$Entity$OnBlur),
 			onKeyDownMsg: onKeyDownMsg,
 			tabindexAV: tabindexAV
 		};

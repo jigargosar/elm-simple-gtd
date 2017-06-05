@@ -790,9 +790,6 @@ var _user$project$Model$getMaybeUserProfile = function (_p44) {
 		}(_p44));
 };
 var _user$project$Model$inboxEntity = _user$project$Entity$ContextEntity(_user$project$Context$null);
-var _user$project$Model$set = _user$project$Ext_Record$set;
-var _user$project$Model$setIn = _user$project$Ext_Record$setIn;
-var _user$project$Model$over = _user$project$Ext_Record$over;
 var _user$project$Model$focusInEntity = A2(
 	_user$project$Ext_Record$init,
 	function (_) {
@@ -804,45 +801,17 @@ var _user$project$Model$focusInEntity = A2(
 				b,
 				{focusInEntity: s});
 		}));
-var _user$project$Model$setFocusInEntity = function (entity) {
-	return A2(_user$project$Model$set, _user$project$Model$focusInEntity, entity);
-};
-var _user$project$Model$setFocusInEntityFromTodoId = F2(
-	function (todoId, model) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+var _user$project$Model$setFocusInEntityByIndex = F3(
+	function (index, entityList, model) {
+		return A3(
+			_user$project$Ext_Record$maybeSetIn,
+			model,
+			_user$project$Model$focusInEntity,
 			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				_danielnarey$elm_toolkit$Toolkit_Helpers$maybe2Tuple(
-					{
-						ctor: '_Tuple2',
-						_0: A2(
-							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-							A2(_user$project$Model$findTodoById, todoId, model),
-							_user$project$Entity$TodoEntity),
-						_1: _elm_lang$core$Maybe$Just(model)
-					}),
-				_elm_lang$core$Basics$uncurry(_user$project$Model$setFocusInEntity)),
-			model);
-	});
-var _user$project$Model$setMaybeFocusInEntity = F2(
-	function (maybeEntity, model) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				maybeEntity,
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$setFocusInEntity, model)),
-			model);
-	});
-var _user$project$Model$setFocusInEntityByIndex = F2(
-	function (index, entityList) {
-		var maybeEntity = A2(
-			_elm_community$maybe_extra$Maybe_Extra$orElse,
-			_elm_lang$core$List$head(entityList),
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_community$list_extra$List_Extra$getAt, entityList)(
-				A2(_user$project$Ext_List$clampIndex, index, entityList)));
-		return _user$project$Model$setMaybeFocusInEntity(maybeEntity);
+				_elm_community$maybe_extra$Maybe_Extra$orElse,
+				_elm_lang$core$List$head(entityList),
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_community$list_extra$List_Extra$getAt, entityList)(
+					A2(_user$project$Ext_List$clampIndex, index, entityList))));
 	});
 var _user$project$Model$focusPrevEntity = F2(
 	function (entityList, model) {
@@ -916,6 +885,27 @@ var _user$project$Model$updateAllNamedDocsDocs = F4(
 					A3(_user$project$Store$updateAll, idSet, model.now, updateFn),
 					model)));
 	});
+var _user$project$Model$setFocusInEntity = function (entity) {
+	return A2(_user$project$Ext_Record$set, _user$project$Model$focusInEntity, entity);
+};
+var _user$project$Model$setFocusInEntityFromTodoId = F2(
+	function (todoId, model) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				_danielnarey$elm_toolkit$Toolkit_Helpers$maybe2Tuple(
+					{
+						ctor: '_Tuple2',
+						_0: A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+							A2(_user$project$Model$findTodoById, todoId, model),
+							_user$project$Entity$TodoEntity),
+						_1: _elm_lang$core$Maybe$Just(model)
+					}),
+				_elm_lang$core$Basics$uncurry(_user$project$Model$setFocusInEntity)),
+			model);
+	});
 var _user$project$Model$user = A2(
 	_user$project$Ext_Record$init,
 	function (_) {
@@ -927,7 +917,7 @@ var _user$project$Model$user = A2(
 				b,
 				{user: s});
 		}));
-var _user$project$Model$setUser = _user$project$Model$set(_user$project$Model$user);
+var _user$project$Model$setUser = _user$project$Ext_Record$set(_user$project$Model$user);
 var _user$project$Model$editMode = A2(
 	_user$project$Ext_Record$init,
 	function (_) {
@@ -941,7 +931,7 @@ var _user$project$Model$editMode = A2(
 		}));
 var _user$project$Model$activateLaunchBar = function (now) {
 	return A2(
-		_user$project$Model$set,
+		_user$project$Ext_Record$set,
 		_user$project$Model$editMode,
 		_user$project$EditMode$LaunchBar(
 			_user$project$LaunchBar_Form$create(now)));
@@ -949,28 +939,28 @@ var _user$project$Model$activateLaunchBar = function (now) {
 var _user$project$Model$updateLaunchBarInput = F3(
 	function (now, text, form) {
 		return A2(
-			_user$project$Model$set,
+			_user$project$Ext_Record$set,
 			_user$project$Model$editMode,
 			_user$project$EditMode$LaunchBar(
 				A3(_user$project$LaunchBar_Form$updateInput, now, text, form)));
 	});
 var _user$project$Model$activateNewTodoModeWithFocusInEntityAsReference = function (model) {
 	return A3(
-		_user$project$Model$set,
+		_user$project$Ext_Record$set,
 		_user$project$Model$editMode,
 		_user$project$EditMode$NewTodo(
 			A2(_user$project$Todo_NewForm$create, model.focusInEntity, '')),
 		model);
 };
 var _user$project$Model$activateNewTodoModeWithInboxAsReference = A2(
-	_user$project$Model$set,
+	_user$project$Ext_Record$set,
 	_user$project$Model$editMode,
 	_user$project$EditMode$NewTodo(
 		A2(_user$project$Todo_NewForm$create, _user$project$Model$inboxEntity, '')));
 var _user$project$Model$updateNewTodoText = F2(
 	function (form, text) {
 		return A2(
-			_user$project$Model$set,
+			_user$project$Ext_Record$set,
 			_user$project$Model$editMode,
 			_user$project$EditMode$NewTodo(
 				A2(_user$project$Todo_NewForm$setText, text, form)));
@@ -989,7 +979,7 @@ var _user$project$Model$firebaseClient = A2(
 var _user$project$Model$setFCMToken = F2(
 	function (fcmToken, model) {
 		return A3(
-			_user$project$Model$over,
+			_user$project$Ext_Record$over,
 			_user$project$Model$firebaseClient,
 			_user$project$Firebase$updateToken(fcmToken),
 			_elm_lang$core$Native_Utils.update(
@@ -998,7 +988,7 @@ var _user$project$Model$setFCMToken = F2(
 	});
 var _user$project$Model$updateFirebaseConnection = function (connected) {
 	return A2(
-		_user$project$Model$over,
+		_user$project$Ext_Record$over,
 		_user$project$Model$firebaseClient,
 		_user$project$Firebase$updateConnection(connected));
 };
@@ -1178,17 +1168,17 @@ var _user$project$Model$upsertEncodedDocOnPouchDBChange = F2(
 		switch (_p56) {
 			case 'todo-db':
 				return A2(
-					_user$project$Model$over,
+					_user$project$Ext_Record$over,
 					_user$project$Model$todoStore,
 					_user$project$Store$upsertOnPouchDBChange(encodedEntity));
 			case 'project-db':
 				return A2(
-					_user$project$Model$over,
+					_user$project$Ext_Record$over,
 					_user$project$Model$projectStore,
 					_user$project$Store$upsertOnPouchDBChange(encodedEntity));
 			case 'context-db':
 				return A2(
-					_user$project$Model$over,
+					_user$project$Ext_Record$over,
 					_user$project$Model$contextStore,
 					_user$project$Store$upsertOnPouchDBChange(encodedEntity));
 			default:

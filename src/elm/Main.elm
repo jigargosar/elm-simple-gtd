@@ -315,13 +315,13 @@ update msg =
                             Return.andThen (Model.toggleDeleteEntity entity)
                                 >> andThenUpdate DeactivateEditingMode
 
-                        Entity.SetFocusedIn ->
+                        Entity.OnFocusIn ->
                             Return.map (Model.setFocusInEntity entity)
 
-                        Entity.SetFocused ->
+                        Entity.OnFocus ->
                             Return.map (Model.setMaybeFocusedEntity (Just entity))
 
-                        Entity.SetBlurred ->
+                        Entity.OnBlur ->
                             Return.map (Model.setMaybeFocusedEntity Nothing)
 
                         Entity.ToggleSelected ->

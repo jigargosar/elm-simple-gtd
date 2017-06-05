@@ -117,9 +117,9 @@ create tabindexAV config entityModel =
         , onNameChanged = Entity.NameChanged >> createEntityActionMsg
         , onCancelClicked = Model.DeactivateEditingMode
         , icon = icon
-        , onFocusIn = createEntityActionMsg Entity.SetFocusedIn
-        , onFocus = createEntityActionMsg Entity.SetFocused
-        , onBlur = createEntityActionMsg Entity.SetBlurred
+        , onFocusIn = createEntityActionMsg Entity.OnFocusIn
+        , onFocus = createEntityActionMsg Entity.OnFocus
+        , onBlur = createEntityActionMsg Entity.OnBlur
         , onKeyDownMsg = onKeyDownMsg
         , tabindexAV = tabindexAV
         }

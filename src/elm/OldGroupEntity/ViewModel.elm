@@ -174,9 +174,9 @@ create todoListByEntityId config entity =
         , onCancelClicked = Model.DeactivateEditingMode
         , icon = icon
         , appHeader = appHeader
-        , onFocusIn = createEntityActionMsg Entity.SetFocusedIn
-        , onFocus = createEntityActionMsg Entity.SetFocused
-        , onBlur = createEntityActionMsg Entity.SetBlurred
+        , onFocusIn = createEntityActionMsg Entity.OnFocusIn
+        , onFocus = createEntityActionMsg Entity.OnFocus
+        , onBlur = createEntityActionMsg Entity.OnBlur
         , onKeyDownMsg = onKeyDownMsg
         }
 

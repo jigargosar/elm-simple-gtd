@@ -12,7 +12,7 @@ import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Ext.List as List
 import Ext.Predicate
-import Ext.Record as Record
+import Ext.Record as Record exposing (maybeSetIn, over, set)
 import Firebase exposing (DeviceId)
 import LaunchBar.Form
 import Project
@@ -209,18 +209,6 @@ user =
 
 focusInEntity =
     Record.init .focusInEntity (\s b -> { b | focusInEntity = s })
-
-
-over =
-    Record.over
-
-
-setIn =
-    Record.setIn
-
-
-set =
-    Record.set
 
 
 init : Flags -> Model
@@ -1026,22 +1014,15 @@ updateKeyboardState updater model =
 -- Focus Functions
 
 
-setFocusInEntityByIndex index entityList =
-    let
-        maybeEntity =
-            List.clampIndex index entityList
-                |> (List.getAt # entityList)
-                |> Maybe.orElse (List.head entityList)
-    in
-        setMaybeFocusInEntity maybeEntity
+setFocusInEntityByIndex index entityList model =
+    List.clampIndex index entityList
+        |> (List.getAt # entityList)
+        |> Maybe.orElse (List.head entityList)
+        |> maybeSetIn model focusInEntity
 
 
 setFocusInEntity entity =
     set focusInEntity entity
-
-
-setMaybeFocusInEntity maybeEntity model =
-    maybeEntity ?|> setFocusInEntity # model ?= model
 
 
 setMaybeFocusedEntity maybeEntity model =

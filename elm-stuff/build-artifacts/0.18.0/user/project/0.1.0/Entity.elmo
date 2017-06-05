@@ -186,9 +186,9 @@ var _user$project$Entity$ContextView = function (a) {
 var _user$project$Entity$ContextsView = {ctor: 'ContextsView'};
 var _user$project$Entity$defaultListView = _user$project$Entity$ContextsView;
 var _user$project$Entity$ToggleSelected = {ctor: 'ToggleSelected'};
-var _user$project$Entity$SetFocusedIn = {ctor: 'SetFocusedIn'};
-var _user$project$Entity$SetBlurred = {ctor: 'SetBlurred'};
-var _user$project$Entity$SetFocused = {ctor: 'SetFocused'};
+var _user$project$Entity$OnFocusIn = {ctor: 'OnFocusIn'};
+var _user$project$Entity$OnBlur = {ctor: 'OnBlur'};
+var _user$project$Entity$OnFocus = {ctor: 'OnFocus'};
 var _user$project$Entity$NameChanged = function (a) {
 	return {ctor: 'NameChanged', _0: a};
 };

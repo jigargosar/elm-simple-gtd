@@ -66,11 +66,10 @@ var _user$project$ViewModel$create = function (model) {
 		mainViewType: mainViewType,
 		header: {backgroundColor: headerBackgroundColor},
 		shared: sharedViewModel,
-		createTodoViewModel: _user$project$Todo_View$createTodoViewModel(sharedViewModel),
-		focusedEntityInfo: model.focusedEntityInfo
+		createTodoViewModel: _user$project$Todo_View$createTodoViewModel(sharedViewModel)
 	};
 };
-var _user$project$ViewModel$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {contexts: a, projects: b, viewName: c, mainViewType: d, header: e, shared: f, createTodoViewModel: g, focusedEntityInfo: h};
+var _user$project$ViewModel$Model = F7(
+	function (a, b, c, d, e, f, g) {
+		return {contexts: a, projects: b, viewName: c, mainViewType: d, header: e, shared: f, createTodoViewModel: g};
 	});

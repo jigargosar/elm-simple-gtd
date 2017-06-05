@@ -1075,17 +1075,12 @@ setMaybeFocusedEntity maybeEntity model =
     { model | maybeFocusedEntity = maybeEntity }
 
 
-getFocusInEntityId model =
-    model.focusedEntityInfo.id
-
-
 getFocusInEntityIndex entityList model =
     getMaybeFocusInEntityIndex entityList model ?= 0
 
 
 getMaybeFocusInEntityIndex entityList model =
     entityList
-        --         |> List.findIndex (getEntityId >> equals model.focusedEntityInfo.id)
         |> List.findIndex (Entity.equalById model.focusInEntity)
 
 

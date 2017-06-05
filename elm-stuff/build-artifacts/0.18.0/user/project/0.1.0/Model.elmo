@@ -46,9 +46,6 @@ var _user$project$Model$getFocusInEntityIndex = F2(
 			A2(_user$project$Model$getMaybeFocusInEntityIndex, entityList, model),
 			0);
 	});
-var _user$project$Model$getFocusInEntityId = function (model) {
-	return model.focusedEntityInfo.id;
-};
 var _user$project$Model$setMaybeFocusedEntity = F2(
 	function (maybeEntity, model) {
 		return _elm_lang$core$Native_Utils.update(

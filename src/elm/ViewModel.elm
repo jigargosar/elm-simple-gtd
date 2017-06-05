@@ -25,7 +25,6 @@ type alias Model =
     , header : { backgroundColor : String }
     , shared : SharedViewModel
     , createTodoViewModel : Attribute Msg -> Todo.Model -> Todo.View.TodoViewModel
-    , focusedEntityInfo : EntityFocus
     }
 
 
@@ -54,7 +53,6 @@ create model =
         , header = { backgroundColor = headerBackgroundColor }
         , shared = sharedViewModel
         , createTodoViewModel = (Todo.View.createTodoViewModel sharedViewModel)
-        , focusedEntityInfo = model.focusedEntityInfo
         }
 
 

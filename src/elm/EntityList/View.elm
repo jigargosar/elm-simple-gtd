@@ -43,14 +43,6 @@ type alias EntityViewModel =
     }
 
 
-getFocusInId entityList viewModel =
-    entityList
-        |> List.find (Model.getEntityId >> equals viewModel.focusedEntityInfo.id)
-        |> Maybe.orElse (List.head entityList)
-        ?|> Model.getEntityId
-        ?= ""
-
-
 {-| todo: refactoring: build tree in model then flatten it there , don't build tree here, its easier there
 -}
 updateCount vmList =

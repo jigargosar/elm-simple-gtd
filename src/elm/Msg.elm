@@ -30,10 +30,6 @@ import Json.Encode as E
 import LaunchBar.Form
 
 
-type alias PrevNextIdPair =
-    ( Document.Id, Document.Id )
-
-
 type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnPouchDBChange String D.Value

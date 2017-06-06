@@ -149,7 +149,9 @@ var _user$project$View$createContextMenuViewModel = F2(
 			maybeFocusKey: _elm_lang$core$Maybe$Nothing,
 			onFocusIndexChanged: function (_p2) {
 				return _user$project$Model$commonMsg.noOp;
-			}
+			},
+			noOp: _user$project$Model$commonMsg.noOp,
+			onOutsideClick: _user$project$Model$DeactivateEditingMode
 		};
 	});
 var _user$project$View$contextMenu = function (model) {
@@ -183,7 +185,9 @@ var _user$project$View$createProjectMenuViewModel = F2(
 					_user$project$Project$getName(_p7));
 			},
 			maybeFocusKey: _p5.maybeFocusKey,
-			onFocusIndexChanged: _user$project$Model$UpdateEditTodoProjectMaybeFocusKey(_p5)
+			onFocusIndexChanged: _user$project$Model$UpdateEditTodoProjectMaybeFocusKey(_p5),
+			noOp: _user$project$Model$commonMsg.noOp,
+			onOutsideClick: _user$project$Model$DeactivateEditingMode
 		};
 	});
 var _user$project$View$projectMenu = function (model) {

@@ -86,6 +86,8 @@ createProjectMenuViewModel model ({ todo, maybeFocusKey } as form) =
     , itemView = Project.getName >> text
     , maybeFocusKey = maybeFocusKey
     , onFocusIndexChanged = Model.UpdateEditTodoProjectMaybeFocusKey form
+    , noOp = commonMsg.noOp
+    , onOutsideClick = Model.DeactivateEditingMode
     }
 
 
@@ -107,6 +109,8 @@ createContextMenuViewModel model todo =
     , itemView = Context.getName >> text
     , maybeFocusKey = Nothing
     , onFocusIndexChanged = (\_ -> commonMsg.noOp)
+    , noOp = commonMsg.noOp
+    , onOutsideClick = Model.DeactivateEditingMode
     }
 
 

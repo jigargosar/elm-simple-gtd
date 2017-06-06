@@ -30,6 +30,8 @@ type alias Config item msg =
     , isSelected : item -> Bool
     , maybeFocusKey : Maybe String
     , onFocusIndexChanged : Maybe String -> msg
+    , noOp : msg
+    , onOutsideClick : msg
     }
 
 
@@ -58,14 +60,14 @@ findMaybeFocusedIndex vm =
         vm.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn vm.items
 
 
-createItemViewModel : msg -> Int -> Int -> Config item msg -> Int -> item -> ItemViewModel msg
-createItemViewModel noOp selectedIndex focusedIndex menuVM index item =
+createItemViewModel : Int -> Int -> Config item msg -> Int -> item -> ItemViewModel msg
+createItemViewModel selectedIndex focusedIndex config index item =
     let
         clampIndex =
-            List.clampIndexIn menuVM.items
+            List.clampIndexIn config.items
 
         onSelect =
-            menuVM.onSelect item
+            config.onSelect item
 
         onKeyDown { key } =
             case key of
@@ -73,7 +75,7 @@ createItemViewModel noOp selectedIndex focusedIndex menuVM index item =
                     onSelect
 
                 _ ->
-                    noOp
+                    config.noOp
 
         isFocused =
             focusedIndex == index
@@ -82,12 +84,12 @@ createItemViewModel noOp selectedIndex focusedIndex menuVM index item =
         , shouldAutoFocus = isFocused
         , tabIndexValue = boolToTabIndexValue isFocused
         , onClick = onSelect
-        , view = menuVM.itemView item
+        , view = config.itemView item
         , onKeyDown = onKeyDown
         }
 
 
-view : Config item Model.Msg -> Html Model.Msg
+view : Config item msg -> Html msg
 view vm =
     let
         clampIndex =
@@ -118,12 +120,12 @@ view vm =
                         onFocusIndexChange 1
 
                     _ ->
-                        commonMsg.noOp
+                        vm.noOp
     in
         div
             [ class "modal-background"
             , onKeyDownStopPropagation onKeyDown
-            , onClickStopPropagation Model.DeactivateEditingMode
+            , onClickStopPropagation vm.onOutsideClick
             ]
             [ ul
                 [ id vm.domId
@@ -132,7 +134,7 @@ view vm =
                 ]
                 (vm.items
                     .#|>
-                        (createItemViewModel commonMsg.noOp selectedIndex focusedIndex vm
+                        (createItemViewModel selectedIndex focusedIndex vm
                             >>> menuItem
                         )
                 )

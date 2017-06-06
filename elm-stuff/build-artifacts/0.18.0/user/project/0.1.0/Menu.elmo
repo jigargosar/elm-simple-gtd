@@ -54,26 +54,26 @@ var _user$project$Menu$findMaybeFocusedIndex = function (vm) {
 var _user$project$Menu$boolToTabIndexValue = function (bool) {
 	return bool ? 0 : -1;
 };
-var _user$project$Menu$createItemViewModel = F6(
-	function (noOp, selectedIndex, focusedIndex, menuVM, index, item) {
+var _user$project$Menu$createItemViewModel = F5(
+	function (selectedIndex, focusedIndex, config, index, item) {
 		var isFocused = _elm_lang$core$Native_Utils.eq(focusedIndex, index);
-		var onSelect = menuVM.onSelect(item);
+		var onSelect = config.onSelect(item);
 		var onKeyDown = function (_p1) {
 			var _p2 = _p1;
 			var _p3 = _p2.key;
 			if (_p3.ctor === 'Enter') {
 				return onSelect;
 			} else {
-				return noOp;
+				return config.noOp;
 			}
 		};
-		var clampIndex = _user$project$Ext_List$clampIndexIn(menuVM.items);
+		var clampIndex = _user$project$Ext_List$clampIndexIn(config.items);
 		return {
 			isSelected: _elm_lang$core$Native_Utils.eq(selectedIndex, index),
 			shouldAutoFocus: isFocused,
 			tabIndexValue: _user$project$Menu$boolToTabIndexValue(isFocused),
 			onClick: onSelect,
-			view: menuVM.itemView(item),
+			view: config.itemView(item),
 			onKeyDown: onKeyDown
 		};
 	});
@@ -112,7 +112,7 @@ var _user$project$Menu$view = function (vm) {
 			case 'ArrowDown':
 				return onFocusIndexChange(1);
 			default:
-				return _user$project$Model$commonMsg.noOp;
+				return vm.noOp;
 		}
 	};
 	return A2(
@@ -125,7 +125,7 @@ var _user$project$Menu$view = function (vm) {
 				_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(onKeyDown),
 				_1: {
 					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$DeactivateEditingMode),
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.onOutsideClick),
 					_1: {ctor: '[]'}
 				}
 			}
@@ -152,15 +152,32 @@ var _user$project$Menu$view = function (vm) {
 					vm.items,
 					A2(
 						_user$project$Ext_Function_Infix_ops['>>>'],
-						A4(_user$project$Menu$createItemViewModel, _user$project$Model$commonMsg.noOp, selectedIndex, focusedIndex, vm),
+						A3(_user$project$Menu$createItemViewModel, selectedIndex, focusedIndex, vm),
 						_user$project$Menu$menuItem))),
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Menu$Config = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {items: a, onSelect: b, itemKey: c, domId: d, itemView: e, isSelected: f, maybeFocusKey: g, onFocusIndexChanged: h};
-	});
+var _user$project$Menu$Config = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {items: a, onSelect: b, itemKey: c, domId: d, itemView: e, isSelected: f, maybeFocusKey: g, onFocusIndexChanged: h, noOp: i, onOutsideClick: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _user$project$Menu$ItemViewModel = F6(
 	function (a, b, c, d, e, f) {
 		return {shouldAutoFocus: a, tabIndexValue: b, isSelected: c, onClick: d, onKeyDown: e, view: f};

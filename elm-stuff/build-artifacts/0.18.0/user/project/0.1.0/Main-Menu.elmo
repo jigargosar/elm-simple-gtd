@@ -1,51 +1,68 @@
-var _user$project$Main_Menu$projectMenu = function (model) {
-	var createListItem = F2(
-		function (onItemClick, project) {
-			return A2(
-				_edvail$elm_polymer$Polymer_Paper$item,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(
-						onItemClick(project)),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: function (_p0) {
-						return _elm_lang$html$Html$text(
-							_user$project$Project$getName(_p0));
-					}(project),
-					_1: {ctor: '[]'}
-				});
-		});
-	var view = function (todo) {
-		var onItemClick = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo);
+var _user$project$Main_Menu$projectMenuView = function (vm) {
+	var createListItem = function (item) {
 		return A2(
-			_edvail$elm_polymer$Polymer_Paper$material,
+			_edvail$elm_polymer$Polymer_Paper$item,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('project-menu'),
-				_1: {
-					ctor: '::',
-					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
-					_1: {ctor: '[]'}
-				}
+				_0: _elm_lang$html$Html_Events$onClick(
+					vm.onSelect(item)),
+				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_Paper$listbox,
-					{ctor: '[]'},
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-						_user$project$Model$getActiveProjects(model),
-						createListItem(onItemClick))),
+				_0: vm.itemView(item),
 				_1: {ctor: '[]'}
 			});
 	};
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$material,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(vm.domId),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_edvail$elm_polymer$Polymer_Paper$listbox,
+				{ctor: '[]'},
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.items, createListItem)),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Main_Menu$createProjectMenuViewModel = F2(
+	function (model, todo) {
+		return {
+			items: _user$project$Model$getActiveProjects(model),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo),
+			itemDomId: function (_p0) {
+				return A2(
+					_elm_lang$core$String$append,
+					'project-id-',
+					_user$project$Document$getId(_p0));
+			},
+			domId: 'project-menu',
+			itemView: function (_p1) {
+				return _elm_lang$html$Html$text(
+					_user$project$Project$getName(_p1));
+			}
+		};
+	});
+var _user$project$Main_Menu$projectMenu = function (model) {
 	return _elm_community$maybe_extra$Maybe_Extra$toList(
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_user$project$Model$getMaybeEditTodoProjectForm(model),
-			view));
+			function (_p2) {
+				return _user$project$Main_Menu$projectMenuView(
+					A2(_user$project$Main_Menu$createProjectMenuViewModel, model, _p2));
+			}));
 };
+var _user$project$Main_Menu$ViewModel = F5(
+	function (a, b, c, d, e) {
+		return {items: a, onSelect: b, itemDomId: c, domId: d, itemView: e};
+	});

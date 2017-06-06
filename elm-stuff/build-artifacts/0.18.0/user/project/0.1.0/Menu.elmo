@@ -1,0 +1,40 @@
+var _user$project$Menu$view = function (vm) {
+	var createListItem = function (item) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					vm.onSelect(item)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: vm.itemView(item),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$material,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(vm.domId),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_edvail$elm_polymer$Polymer_Paper$listbox,
+				{ctor: '[]'},
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.items, createListItem)),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Menu$ViewModel = F5(
+	function (a, b, c, d, e) {
+		return {items: a, onSelect: b, itemDomId: c, domId: d, itemView: e};
+	});

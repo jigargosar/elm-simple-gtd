@@ -3,7 +3,7 @@ module Main.View exposing (..)
 import Context
 import Document
 import EntityList.View
-import Main.Menu
+import Menu
 import OldGroupEntity.ViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -13,6 +13,7 @@ import Model exposing (Msg)
 import Polymer.Paper as Paper
 import Polymer.App as App
 import Project
+import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -25,21 +26,6 @@ import View.TodoList
 
 
 init viewModel model =
-    {- div
-       [ class "row"
-
-       {- , onKeyDownStopPropagation (\_ -> commonMsg.logString "sp") -}
-       ]
-       [ Html.form [ class "col s12" ]
-           [ div [ class "row" ]
-               [ div [ class "input-field col s12" ]
-                   [ Html.textarea [ id "textarea1", class "materialize-textarea" ] []
-                   , Html.label [ for "textarea1" ] [ text "Textarea" ]
-                   ]
-               ]
-           ]
-       ]
-    -}
     div [ id "main-view" ]
         ([ case Model.getMainViewType model of
             EntityListView viewType ->
@@ -75,7 +61,7 @@ init viewModel model =
 
 overlayViews m =
     contextMenu m
-        ++ Main.Menu.projectMenu m
+        ++ projectMenu m
 
 
 contextMenu : Model -> List (Html Msg)
@@ -97,3 +83,21 @@ contextMenu model =
                     ]
     in
         model |> Model.getMaybeEditTodoContextForm ?|> view |> Maybe.toList
+
+
+createProjectMenuViewModel : Model -> Todo.Model -> Menu.ViewModel Project.Model Msg
+createProjectMenuViewModel model todo =
+    { items = Model.getActiveProjects model
+    , onSelect = Model.SetTodoProject # todo
+    , itemDomId = Document.getId >> String.append "project-id-"
+    , domId = "project-menu"
+    , itemView = Project.getName >> text
+    }
+
+
+projectMenu : Model -> List (Html Msg)
+projectMenu model =
+    model
+        |> Model.getMaybeEditTodoProjectForm
+        ?|> (createProjectMenuViewModel model >> Menu.view)
+        |> Maybe.toList

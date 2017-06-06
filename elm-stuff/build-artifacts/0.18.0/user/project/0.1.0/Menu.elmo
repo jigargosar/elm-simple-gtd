@@ -19,26 +19,48 @@ var _user$project$Menu$view = function (vm) {
 		A2(_elm_community$list_extra$List_Extra$findIndex, vm.isSelected, vm.items),
 		0);
 	return A2(
-		_edvail$elm_polymer$Polymer_Paper$material,
+		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id(vm.domId),
+			_0: _elm_lang$html$Html_Attributes$class('modal-background'),
 			_1: {
 				ctor: '::',
-				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
-				_1: {ctor: '[]'}
+				_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+					function (_p0) {
+						return _user$project$Model$commonMsg.noOp;
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$DeactivateEditingMode),
+					_1: {ctor: '[]'}
+				}
 			}
 		},
 		{
 			ctor: '::',
 			_0: A2(
-				_edvail$elm_polymer$Polymer_Paper$listbox,
+				_edvail$elm_polymer$Polymer_Paper$material,
 				{
 					ctor: '::',
-					_0: A2(_elm_community$html_extra$Html_Attributes_Extra$intProperty, 'selected', selectedIndex),
-					_1: {ctor: '[]'}
+					_0: _elm_lang$html$Html_Attributes$id(vm.domId),
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
+						_1: {ctor: '[]'}
+					}
 				},
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.items, createListItem)),
+				{
+					ctor: '::',
+					_0: A2(
+						_edvail$elm_polymer$Polymer_Paper$listbox,
+						{
+							ctor: '::',
+							_0: A2(_elm_community$html_extra$Html_Attributes_Extra$intProperty, 'selected', selectedIndex),
+							_1: {ctor: '[]'}
+						},
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.items, createListItem)),
+					_1: {ctor: '[]'}
+				}),
 			_1: {ctor: '[]'}
 		});
 };

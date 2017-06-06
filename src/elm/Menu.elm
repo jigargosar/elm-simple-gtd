@@ -1,8 +1,9 @@
 module Menu exposing (..)
 
 import Document
+import Ext.Keyboard exposing (onKeyDownStopPropagation)
 import Html.Attributes.Extra exposing (intProperty)
-import Model exposing (Model)
+import Model exposing (Model, commonMsg)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -39,7 +40,13 @@ view vm =
                 [ onClick (vm.onSelect item) ]
                 [ vm.itemView item ]
     in
-        Paper.material [ id vm.domId, attribute "data-prevent-default-keys" "Tab" ]
-            [ Paper.listbox [ intProperty "selected" selectedIndex ]
-                (vm.items .|> createListItem)
+        div
+            [ class "modal-background"
+            , onKeyDownStopPropagation ((\_ -> commonMsg.noOp))
+            , onClickStopPropagation Model.DeactivateEditingMode
+            ]
+            [ Paper.material [ id vm.domId, attribute "data-prevent-default-keys" "Tab" ]
+                [ Paper.listbox [ intProperty "selected" selectedIndex ]
+                    (vm.items .|> createListItem)
+                ]
             ]

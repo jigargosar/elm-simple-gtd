@@ -123,8 +123,8 @@ async function boot() {
                 my: "right top",
                 at: "right top",
                 of: "#" + ofId,
-                within: "#main-view",
-                collision: "none"
+                within: ".modal-background",
+                collision: "flipfit"
             }).find(`[tabindex="0"]`).focus()
         })
     })

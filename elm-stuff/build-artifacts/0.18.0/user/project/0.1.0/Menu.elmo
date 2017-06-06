@@ -9,13 +9,13 @@ var _user$project$Menu$menuItem = F3(
 					vm.onSelect(item)),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$tabindex(_p1._1),
+					_0: _elm_lang$html$Html_Attributes$tabindex(_p1._2),
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$classList(
 							{
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', _p1._0),
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', _p1._1),
 								_1: {
 									ctor: '::',
 									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'item', true),
@@ -39,15 +39,16 @@ var _user$project$Menu$isIndexSelected = function (vm) {
 			A2(_elm_community$list_extra$List_Extra$findIndex, vm.isSelected, vm.items),
 			0));
 };
-var _user$project$Menu$boolToTabIndexValue = function (bool) {
-	return bool ? 0 : -1;
-};
 var _user$project$Menu$view = function (vm) {
-	var getAutoFocusAndTabIndex = function (_p2) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
-			{ctor: '_Tuple2', _0: _elm_lang$core$Basics$identity, _1: _user$project$Menu$boolToTabIndexValue},
-			A2(_user$project$Menu$isIndexSelected, vm, _p2));
+	var createItemViewModel = function (index) {
+		var isSelected = A2(_user$project$Menu$isIndexSelected, vm, index);
+		var boolToTabIndexValue = function (bool) {
+			return bool ? 0 : -1;
+		};
+		var tabindexValue = boolToTabIndexValue(
+			A2(_user$project$Menu$isIndexSelected, vm, index));
+		var shouldAutoFocus = _elm_lang$core$Native_Utils.eq(tabindexValue, 0);
+		return {ctor: '_Tuple3', _0: isSelected, _1: shouldAutoFocus, _2: tabindexValue};
 	};
 	return A2(
 		_elm_lang$html$Html$div,
@@ -57,7 +58,7 @@ var _user$project$Menu$view = function (vm) {
 			_1: {
 				ctor: '::',
 				_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-					function (_p3) {
+					function (_p2) {
 						return _user$project$Model$commonMsg.noOp;
 					}),
 				_1: {
@@ -86,11 +87,11 @@ var _user$project$Menu$view = function (vm) {
 				},
 				A2(
 					_elm_lang$core$List$indexedMap,
-					function (_p4) {
+					function (_p3) {
 						return A2(
 							_user$project$Menu$menuItem,
 							vm,
-							getAutoFocusAndTabIndex(_p4));
+							createItemViewModel(_p3));
 					},
 					vm.items)),
 			_1: {ctor: '[]'}

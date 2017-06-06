@@ -1,0 +1,7 @@
+var _user$project$Todo_ProjectsForm$init = function (todo) {
+	return {todo: todo, maybeFocusIndex: _elm_lang$core$Maybe$Nothing};
+};
+var _user$project$Todo_ProjectsForm$Model = F2(
+	function (a, b) {
+		return {todo: a, maybeFocusIndex: b};
+	});

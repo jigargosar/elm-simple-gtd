@@ -77,7 +77,7 @@ overlayViews m =
 
 
 createProjectMenuViewModel : Model -> Todo.ProjectsForm.Model -> Menu.ViewModel Project.Model Msg
-createProjectMenuViewModel model { todo, maybeFocusIndex } =
+createProjectMenuViewModel model ({ todo, maybeFocusIndex } as form) =
     { items = Model.getActiveProjects model
     , onSelect = Model.SetTodoProject # todo
     , isSelected = Document.hasId (Todo.getProjectId todo)
@@ -85,7 +85,7 @@ createProjectMenuViewModel model { todo, maybeFocusIndex } =
     , domId = "project-menu"
     , itemView = Project.getName >> text
     , maybeFocusIndex = maybeFocusIndex
-    , onFocusIndexChanged = (\_ -> commonMsg.noOp)
+    , onFocusIndexChanged = Model.UpdateEditTodoProjectFormFocusIndex form
     }
 
 

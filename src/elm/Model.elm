@@ -77,6 +77,7 @@ type Msg
     | StartEditingProject Todo.Model
     | SaveCurrentForm
     | UpdateRemoteSyncFormUri EditMode.SyncForm String
+    | UpdateEditTodoProjectFormFocusIndex Todo.ProjectsForm.Model Int
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | OnEntityListKeyDown (List Entity) KeyboardEvent

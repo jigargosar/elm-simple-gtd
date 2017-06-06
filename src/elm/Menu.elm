@@ -1,7 +1,7 @@
 module Menu exposing (..)
 
 import Document
-import Ext.Keyboard exposing (KeyboardEvent, onKeyDownStopPropagation)
+import Ext.Keyboard exposing (KeyboardEvent, onKeyDown, onKeyDownStopPropagation)
 import Ext.List as List
 import Html.Attributes.Extra exposing (intProperty)
 import Keyboard.Extra as Key
@@ -53,7 +53,10 @@ createItemViewModel menuVM index item =
             menuVM.items |> List.findIndex menuVM.isSelected ?= 0 |> clampIndex
 
         focusedIndex =
-            menuVM.maybeFocusIndex ?= selectedIndex |> clampIndex
+            menuVM.maybeFocusIndex
+                ?= selectedIndex
+                |> clampIndex
+                |> Debug.log "FI"
 
         isFocused =
             focusedIndex == index
@@ -74,24 +77,30 @@ createItemViewModel menuVM index item =
         shouldAutoFocus =
             tabIndexValue == 0
 
+        onFocusIndexChange =
+            add focusedIndex >> clampIndex >> menuVM.onFocusIndexChanged
+
+        onSelect =
+            menuVM.onSelect item
+
         onKeyDown { key } =
-            (case key of
+            case key of
                 Key.ArrowUp ->
-                    focusedIndex - 1
+                    onFocusIndexChange -1
 
                 Key.ArrowDown ->
-                    focusedIndex + 1
+                    onFocusIndexChange 1
+
+                Key.Enter ->
+                    onSelect
 
                 _ ->
-                    focusedIndex
-            )
-                |> clampIndex
-                |> menuVM.onFocusIndexChanged
+                    onFocusIndexChange 0
     in
         { isSelected = isSelected
         , shouldAutoFocus = shouldAutoFocus
         , tabIndexValue = tabIndexValue
-        , onClick = menuVM.onSelect item
+        , onClick = onSelect
         , view = menuVM.itemView item
         , onKeyDown = onKeyDown
         }
@@ -116,6 +125,7 @@ menuItem vm =
     div
         [ onClick vm.onClick
         , tabindex vm.tabIndexValue
+        , onKeyDown vm.onKeyDown
         , classList [ "auto-focus" => vm.shouldAutoFocus, "item" => True ]
         ]
         [ vm.view ]

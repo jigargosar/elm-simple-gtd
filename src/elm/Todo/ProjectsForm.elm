@@ -17,3 +17,7 @@ type alias Model =
 
 init todo =
     { todo = todo, maybeFocusIndex = Nothing }
+
+
+setFocusIndex index form =
+    { form | maybeFocusIndex = Just index }

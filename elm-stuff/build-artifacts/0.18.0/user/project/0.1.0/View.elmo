@@ -165,12 +165,12 @@ var _user$project$View$contextMenu = function (model) {
 var _user$project$View$createProjectMenuViewModel = F2(
 	function (model, _p4) {
 		var _p5 = _p4;
-		var _p9 = _p5.todo;
+		var _p8 = _p5.todo;
 		return {
 			items: _user$project$Model$getActiveProjects(model),
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p9),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p8),
 			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getProjectId(_p9)),
+				_user$project$Todo$getProjectId(_p8)),
 			itemDomId: function (_p6) {
 				return A2(
 					_elm_lang$core$String$append,
@@ -183,9 +183,7 @@ var _user$project$View$createProjectMenuViewModel = F2(
 					_user$project$Project$getName(_p7));
 			},
 			maybeFocusIndex: _p5.maybeFocusIndex,
-			onFocusIndexChanged: function (_p8) {
-				return _user$project$Model$commonMsg.noOp;
-			}
+			onFocusIndexChanged: _user$project$Model$UpdateEditTodoProjectFormFocusIndex(_p5)
 		};
 	});
 var _user$project$View$projectMenu = function (model) {
@@ -193,9 +191,9 @@ var _user$project$View$projectMenu = function (model) {
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_user$project$Model$getMaybeEditTodoProjectForm(model),
-			function (_p10) {
+			function (_p9) {
 				return _user$project$Menu$view(
-					A2(_user$project$View$createProjectMenuViewModel, model, _p10));
+					A2(_user$project$View$createProjectMenuViewModel, model, _p9));
 			}));
 };
 var _user$project$View$overlayViews = function (m) {

@@ -9,17 +9,21 @@ var _user$project$Menu$menuItem = function (vm) {
 				_0: _elm_lang$html$Html_Attributes$tabindex(vm.tabIndexValue),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$classList(
-						{
-							ctor: '::',
-							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', vm.shouldAutoFocus),
-							_1: {
+					_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDown),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'item', true),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', vm.shouldAutoFocus),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'item', true),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		},
@@ -31,6 +35,7 @@ var _user$project$Menu$menuItem = function (vm) {
 };
 var _user$project$Menu$createItemViewModel = F3(
 	function (menuVM, index, item) {
+		var onSelect = menuVM.onSelect(item);
 		var clampIndex = _user$project$Ext_List$clampIndexIn(menuVM.items);
 		var selectedIndex = clampIndex(
 			A2(
@@ -38,8 +43,11 @@ var _user$project$Menu$createItemViewModel = F3(
 				A2(_elm_community$list_extra$List_Extra$findIndex, menuVM.isSelected, menuVM.items),
 				0));
 		var isSelected = _elm_lang$core$Native_Utils.eq(selectedIndex, index);
-		var focusedIndex = clampIndex(
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='], menuVM.maybeFocusIndex, selectedIndex));
+		var focusedIndex = A2(
+			_elm_lang$core$Debug$log,
+			'FI',
+			clampIndex(
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='], menuVM.maybeFocusIndex, selectedIndex)));
 		var isFocused = _elm_lang$core$Native_Utils.eq(focusedIndex, index);
 		var tabIndexValue = function () {
 			var boolToTabIndexValue = function (bool) {
@@ -48,27 +56,30 @@ var _user$project$Menu$createItemViewModel = F3(
 			return boolToTabIndexValue(isFocused);
 		}();
 		var shouldAutoFocus = _elm_lang$core$Native_Utils.eq(tabIndexValue, 0);
-		var onKeyDown = function (_p0) {
-			var _p1 = _p0;
+		var onFocusIndexChange = function (_p0) {
 			return menuVM.onFocusIndexChanged(
 				clampIndex(
-					function () {
-						var _p2 = _p1.key;
-						switch (_p2.ctor) {
-							case 'ArrowUp':
-								return focusedIndex - 1;
-							case 'ArrowDown':
-								return focusedIndex + 1;
-							default:
-								return focusedIndex;
-						}
-					}()));
+					A2(_user$project$Ext_Function$add, focusedIndex, _p0)));
+		};
+		var onKeyDown = function (_p1) {
+			var _p2 = _p1;
+			var _p3 = _p2.key;
+			switch (_p3.ctor) {
+				case 'ArrowUp':
+					return onFocusIndexChange(-1);
+				case 'ArrowDown':
+					return onFocusIndexChange(1);
+				case 'Enter':
+					return onSelect;
+				default:
+					return onFocusIndexChange(0);
+			}
 		};
 		return {
 			isSelected: isSelected,
 			shouldAutoFocus: shouldAutoFocus,
 			tabIndexValue: tabIndexValue,
-			onClick: menuVM.onSelect(item),
+			onClick: onSelect,
 			view: menuVM.itemView(item),
 			onKeyDown: onKeyDown
 		};
@@ -82,7 +93,7 @@ var _user$project$Menu$view = function (vm) {
 			_1: {
 				ctor: '::',
 				_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-					function (_p3) {
+					function (_p4) {
 						return _user$project$Model$commonMsg.noOp;
 					}),
 				_1: {

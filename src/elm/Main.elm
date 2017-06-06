@@ -29,6 +29,7 @@ import Store
 import String.Extra
 import Todo
 import Todo.Form
+import Todo.ProjectsForm
 import Todo.ReminderForm
 import Navigation exposing (Location)
 import Return
@@ -242,6 +243,14 @@ update msg =
                             |> EditMode.EditTodo
                             >> Model.setEditMode
                         )
+
+                UpdateEditTodoProjectFormFocusIndex form index ->
+                    Return.map
+                        (Todo.ProjectsForm.setFocusIndex index form
+                            |> EditMode.EditTodoProject
+                            >> Model.setEditMode
+                        )
+                        >> autoFocusInputCmd
 
                 UpdateRemoteSyncFormUri form uri ->
                     Return.map

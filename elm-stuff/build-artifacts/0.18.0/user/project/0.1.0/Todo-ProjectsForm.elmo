@@ -1,3 +1,11 @@
+var _user$project$Todo_ProjectsForm$setFocusIndex = F2(
+	function (index, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{
+				maybeFocusIndex: _elm_lang$core$Maybe$Just(index)
+			});
+	});
 var _user$project$Todo_ProjectsForm$init = function (todo) {
 	return {todo: todo, maybeFocusIndex: _elm_lang$core$Maybe$Nothing};
 };

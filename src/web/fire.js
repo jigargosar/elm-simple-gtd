@@ -45,8 +45,9 @@ export const setup = (app, dbList, localDeviceId) => {
 
     function isDocChangeLocal(doc) {
         const docDeviceId = doc.deviceId
+        //noinspection UnnecessaryLocalVariableJS
         const ret = !docDeviceId || docDeviceId === "" || docDeviceId === localDeviceId
-        console.log("isDocChangeLocal:", docDeviceId, localDeviceId, ret)
+        // console.log("isDocChangeLocal:", docDeviceId, localDeviceId, ret)
         return ret
     }
 

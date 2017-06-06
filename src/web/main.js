@@ -117,7 +117,7 @@ async function boot() {
         }
     })
 
-    app.ports["positionDropdown"].subscribe(([myId, ofId]) => {
+    app.ports["positionMenu"].subscribe(([myId, ofId]) => {
         requestAnimationFrame(() => {
             $("#" + myId).position({
                 my: "right top",

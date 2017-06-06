@@ -22,8 +22,8 @@ var _user$project$DomPorts$focusSelectorIfNoFocusCmd = function (_p1) {
 	return _Fresheyeball$elm_return$Return$command(
 		_user$project$DomPorts$focusSelectorIfNoFocus(_p1));
 };
-var _user$project$DomPorts$positionDropdown = _elm_lang$core$Native_Platform.outgoingPort(
-	'positionDropdown',
+var _user$project$DomPorts$positionMenu = _elm_lang$core$Native_Platform.outgoingPort(
+	'positionMenu',
 	function (v) {
 		return [v._0, v._1];
 	});

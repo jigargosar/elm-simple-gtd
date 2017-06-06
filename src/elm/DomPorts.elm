@@ -32,4 +32,4 @@ focusSelectorIfNoFocusCmd =
     focusSelectorIfNoFocus >> Return.command
 
 
-port positionDropdown : ( Dom.Id, Dom.Id ) -> Cmd msg
+port positionMenu : ( Dom.Id, Dom.Id ) -> Cmd msg

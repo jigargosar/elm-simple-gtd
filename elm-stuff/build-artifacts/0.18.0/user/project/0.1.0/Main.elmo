@@ -2,8 +2,8 @@ var _user$project$Main$startSyncWithFirebase = function (user) {
 	return _user$project$Ext_Return$maybeEffect(
 		A2(_user$project$Ext_Function_Infix_ops['>>?'], _user$project$Model$getMaybeUserId, _user$project$Firebase$startSyncCmd));
 };
-var _user$project$Main$positionProjectDropdownCmd = function (todo) {
-	return _user$project$DomPorts$positionDropdown(
+var _user$project$Main$positionProjectMenuCmd = function (todo) {
+	return _user$project$DomPorts$positionMenu(
 		{
 			ctor: '_Tuple2',
 			_0: 'project-menu',
@@ -13,8 +13,8 @@ var _user$project$Main$positionProjectDropdownCmd = function (todo) {
 				_user$project$Document$getId(todo))
 		});
 };
-var _user$project$Main$positionContextDropdownCmd = function (todo) {
-	return _user$project$DomPorts$positionDropdown(
+var _user$project$Main$positionContextMenuCmd = function (todo) {
+	return _user$project$DomPorts$positionMenu(
 		{
 			ctor: '_Tuple2',
 			_0: 'context-menu',
@@ -444,7 +444,7 @@ var _user$project$Main$update = function (msg) {
 						return function (_p35) {
 							return A2(
 								_Fresheyeball$elm_return$Return$command,
-								_user$project$Main$positionContextDropdownCmd(_p36),
+								_user$project$Main$positionContextMenuCmd(_p36),
 								A2(
 									_Fresheyeball$elm_return$Return$map,
 									_user$project$Model$startEditingTodoContext(_p36),
@@ -455,7 +455,7 @@ var _user$project$Main$update = function (msg) {
 						return function (_p37) {
 							return A2(
 								_Fresheyeball$elm_return$Return$command,
-								_user$project$Main$positionProjectDropdownCmd(_p38),
+								_user$project$Main$positionProjectMenuCmd(_p38),
 								A2(
 									_Fresheyeball$elm_return$Return$map,
 									_user$project$Model$startEditingTodoProject(_p38),

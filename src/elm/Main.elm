@@ -230,11 +230,11 @@ update msg =
 
                 StartEditingContext todo ->
                     Return.map (Model.startEditingTodoContext todo)
-                        >> Return.command (positionContextDropdownCmd todo)
+                        >> Return.command (positionContextMenuCmd todo)
 
                 StartEditingProject todo ->
                     Return.map (Model.startEditingTodoProject todo)
-                        >> Return.command (positionProjectDropdownCmd todo)
+                        >> Return.command (positionProjectMenuCmd todo)
 
                 UpdateTodoForm form action ->
                     Return.map
@@ -502,12 +502,12 @@ firebaseSetupOnDisconnectCmd model =
         ?|> Firebase.setupOnDisconnectCmd model.firebaseClient
 
 
-positionContextDropdownCmd todo =
-    DomPorts.positionDropdown ( "context-menu", "context-menu-" ++ Document.getId todo )
+positionContextMenuCmd todo =
+    DomPorts.positionMenu ( "context-menu", "context-menu-" ++ Document.getId todo )
 
 
-positionProjectDropdownCmd todo =
-    DomPorts.positionDropdown ( "project-menu", "project-menu-" ++ Document.getId todo )
+positionProjectMenuCmd todo =
+    DomPorts.positionMenu ( "project-menu", "project-menu-" ++ Document.getId todo )
 
 
 startSyncWithFirebase user =

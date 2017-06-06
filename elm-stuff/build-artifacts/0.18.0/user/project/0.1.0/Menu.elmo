@@ -112,7 +112,7 @@ var _user$project$Menu$view = function (vm) {
 			case 'ArrowDown':
 				return onFocusIndexChange(1);
 			default:
-				return onFocusIndexChange(0);
+				return _user$project$Model$commonMsg.noOp;
 		}
 	};
 	return A2(

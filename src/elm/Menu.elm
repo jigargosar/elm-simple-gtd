@@ -118,7 +118,7 @@ view vm =
                         onFocusIndexChange 1
 
                     _ ->
-                        onFocusIndexChange 0
+                        commonMsg.noOp
     in
         div
             [ class "modal-background"

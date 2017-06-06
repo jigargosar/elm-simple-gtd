@@ -146,7 +146,10 @@ var _user$project$View$createContextMenuViewModel = F2(
 				return _elm_lang$html$Html$text(
 					_user$project$Context$getName(_p1));
 			},
-			maybeFocusIndex: _elm_lang$core$Maybe$Nothing
+			maybeFocusIndex: _elm_lang$core$Maybe$Nothing,
+			onFocusIndexChanged: function (_p2) {
+				return _user$project$Model$commonMsg.noOp;
+			}
 		};
 	});
 var _user$project$View$contextMenu = function (model) {
@@ -154,32 +157,35 @@ var _user$project$View$contextMenu = function (model) {
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_user$project$Model$getMaybeEditTodoContextForm(model),
-			function (_p2) {
+			function (_p3) {
 				return _user$project$Menu$view(
-					A2(_user$project$View$createContextMenuViewModel, model, _p2));
+					A2(_user$project$View$createContextMenuViewModel, model, _p3));
 			}));
 };
 var _user$project$View$createProjectMenuViewModel = F2(
-	function (model, _p3) {
-		var _p4 = _p3;
-		var _p7 = _p4.todo;
+	function (model, _p4) {
+		var _p5 = _p4;
+		var _p9 = _p5.todo;
 		return {
 			items: _user$project$Model$getActiveProjects(model),
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p7),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p9),
 			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getProjectId(_p7)),
-			itemDomId: function (_p5) {
+				_user$project$Todo$getProjectId(_p9)),
+			itemDomId: function (_p6) {
 				return A2(
 					_elm_lang$core$String$append,
 					'project-id-',
-					_user$project$Document$getId(_p5));
+					_user$project$Document$getId(_p6));
 			},
 			domId: 'project-menu',
-			itemView: function (_p6) {
+			itemView: function (_p7) {
 				return _elm_lang$html$Html$text(
-					_user$project$Project$getName(_p6));
+					_user$project$Project$getName(_p7));
 			},
-			maybeFocusIndex: _p4.maybeFocusIndex
+			maybeFocusIndex: _p5.maybeFocusIndex,
+			onFocusIndexChanged: function (_p8) {
+				return _user$project$Model$commonMsg.noOp;
+			}
 		};
 	});
 var _user$project$View$projectMenu = function (model) {
@@ -187,9 +193,9 @@ var _user$project$View$projectMenu = function (model) {
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_user$project$Model$getMaybeEditTodoProjectForm(model),
-			function (_p8) {
+			function (_p10) {
 				return _user$project$Menu$view(
-					A2(_user$project$View$createProjectMenuViewModel, model, _p8));
+					A2(_user$project$View$createProjectMenuViewModel, model, _p10));
 			}));
 };
 var _user$project$View$overlayViews = function (m) {

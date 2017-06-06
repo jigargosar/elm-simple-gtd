@@ -14,7 +14,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Model exposing (Msg)
 import Polymer.Paper as Paper
 import Project
 import Todo
@@ -32,16 +31,26 @@ type alias ViewModel item msg =
     }
 
 
+type alias ItemViewModel msg =
+    { shouldAutoFocus : Bool
+    , tabIndexValue : Int
+    , isSelected : Bool
+    , onClick : msg
+    , view : Html msg
+    }
+
+
 isIndexSelected vm =
     vm.items |> List.findIndex vm.isSelected ?= 0 |> equals
 
 
-createItemViewModel vm index =
+createItemViewModel : ViewModel item msg -> Int -> item -> ItemViewModel msg
+createItemViewModel menuVM index item =
     let
         shouldAutoFocus =
-            tabindexValue == 0
+            tabIndexValue == 0
 
-        tabindexValue =
+        tabIndexValue =
             let
                 boolToTabIndexValue bool =
                     if bool then
@@ -49,12 +58,17 @@ createItemViewModel vm index =
                     else
                         -1
             in
-                vm.maybeFocusIndex ?|> equals index ?= isSelected |> boolToTabIndexValue
+                menuVM.maybeFocusIndex ?|> equals index ?= isSelected |> boolToTabIndexValue
 
         isSelected =
-            index |> isIndexSelected vm
+            index |> isIndexSelected menuVM
     in
-        ( isSelected, shouldAutoFocus, tabindexValue )
+        { isSelected = isSelected
+        , shouldAutoFocus = shouldAutoFocus
+        , tabIndexValue = tabIndexValue
+        , onClick = menuVM.onSelect item
+        , view = menuVM.itemView item
+        }
 
 
 view vm =
@@ -68,14 +82,14 @@ view vm =
             , class "menu"
             , attribute "data-prevent-default-keys" "Tab"
             ]
-            (vm.items |> List.indexedMap (createItemViewModel vm >> menuItem vm))
+            (vm.items |> List.indexedMap (createItemViewModel vm >>> menuItem))
         ]
 
 
-menuItem vm ( isSelected, shouldAutoFocus, tabindexValue ) item =
+menuItem vm =
     div
-        [ onClick (vm.onSelect item)
-        , tabindex tabindexValue
-        , classList [ "auto-focus" => shouldAutoFocus, "item" => True ]
+        [ onClick vm.onClick
+        , tabindex vm.tabIndexValue
+        , classList [ "auto-focus" => vm.shouldAutoFocus, "item" => True ]
         ]
-        [ vm.itemView item ]
+        [ vm.view ]

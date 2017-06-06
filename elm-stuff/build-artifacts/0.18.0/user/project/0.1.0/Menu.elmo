@@ -1,37 +1,34 @@
-var _user$project$Menu$menuItem = F3(
-	function (vm, _p0, item) {
-		var _p1 = _p0;
-		return A2(
-			_elm_lang$html$Html$div,
-			{
+var _user$project$Menu$menuItem = function (vm) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(vm.onClick),
+			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					vm.onSelect(item)),
+				_0: _elm_lang$html$Html_Attributes$tabindex(vm.tabIndexValue),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$tabindex(_p1._2),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$classList(
-							{
+					_0: _elm_lang$html$Html_Attributes$classList(
+						{
+							ctor: '::',
+							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', vm.shouldAutoFocus),
+							_1: {
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', _p1._1),
-								_1: {
-									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'item', true),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'item', true),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
 				}
-			},
-			{
-				ctor: '::',
-				_0: vm.itemView(item),
-				_1: {ctor: '[]'}
-			});
-	});
+			}
+		},
+		{
+			ctor: '::',
+			_0: vm.view,
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Menu$isIndexSelected = function (vm) {
 	return _user$project$Ext_Function$equals(
 		A2(
@@ -39,10 +36,10 @@ var _user$project$Menu$isIndexSelected = function (vm) {
 			A2(_elm_community$list_extra$List_Extra$findIndex, vm.isSelected, vm.items),
 			0));
 };
-var _user$project$Menu$createItemViewModel = F2(
-	function (vm, index) {
-		var isSelected = A2(_user$project$Menu$isIndexSelected, vm, index);
-		var tabindexValue = function () {
+var _user$project$Menu$createItemViewModel = F3(
+	function (menuVM, index, item) {
+		var isSelected = A2(_user$project$Menu$isIndexSelected, menuVM, index);
+		var tabIndexValue = function () {
 			var boolToTabIndexValue = function (bool) {
 				return bool ? 0 : -1;
 			};
@@ -51,12 +48,18 @@ var _user$project$Menu$createItemViewModel = F2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-						vm.maybeFocusIndex,
+						menuVM.maybeFocusIndex,
 						_user$project$Ext_Function$equals(index)),
 					isSelected));
 		}();
-		var shouldAutoFocus = _elm_lang$core$Native_Utils.eq(tabindexValue, 0);
-		return {ctor: '_Tuple3', _0: isSelected, _1: shouldAutoFocus, _2: tabindexValue};
+		var shouldAutoFocus = _elm_lang$core$Native_Utils.eq(tabIndexValue, 0);
+		return {
+			isSelected: isSelected,
+			shouldAutoFocus: shouldAutoFocus,
+			tabIndexValue: tabIndexValue,
+			onClick: menuVM.onSelect(item),
+			view: menuVM.itemView(item)
+		};
 	});
 var _user$project$Menu$view = function (vm) {
 	return A2(
@@ -67,7 +70,7 @@ var _user$project$Menu$view = function (vm) {
 			_1: {
 				ctor: '::',
 				_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-					function (_p2) {
+					function (_p0) {
 						return _user$project$Model$commonMsg.noOp;
 					}),
 				_1: {
@@ -96,12 +99,10 @@ var _user$project$Menu$view = function (vm) {
 				},
 				A2(
 					_elm_lang$core$List$indexedMap,
-					function (_p3) {
-						return A2(
-							_user$project$Menu$menuItem,
-							vm,
-							A2(_user$project$Menu$createItemViewModel, vm, _p3));
-					},
+					A2(
+						_user$project$Ext_Function_Infix_ops['>>>'],
+						_user$project$Menu$createItemViewModel(vm),
+						_user$project$Menu$menuItem),
 					vm.items)),
 			_1: {ctor: '[]'}
 		});
@@ -109,4 +110,8 @@ var _user$project$Menu$view = function (vm) {
 var _user$project$Menu$ViewModel = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {items: a, onSelect: b, itemDomId: c, domId: d, itemView: e, isSelected: f, maybeFocusIndex: g, onFocusIndexChanged: h};
+	});
+var _user$project$Menu$ItemViewModel = F5(
+	function (a, b, c, d, e) {
+		return {shouldAutoFocus: a, tabIndexValue: b, isSelected: c, onClick: d, view: e};
 	});

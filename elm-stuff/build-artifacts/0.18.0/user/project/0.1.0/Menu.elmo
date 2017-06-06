@@ -157,7 +157,7 @@ var _user$project$Menu$view = function (vm) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Menu$ViewModel = F8(
+var _user$project$Menu$Config = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {items: a, onSelect: b, itemKey: c, domId: d, itemView: e, isSelected: f, maybeFocusKey: g, onFocusIndexChanged: h};
 	});

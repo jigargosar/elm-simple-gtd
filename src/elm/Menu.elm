@@ -21,7 +21,7 @@ import Project
 import Todo
 
 
-type alias ViewModel item msg =
+type alias Config item msg =
     { items : List item
     , onSelect : item -> msg
     , itemKey : item -> String
@@ -58,7 +58,7 @@ findMaybeFocusedIndex vm =
         vm.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn vm.items
 
 
-createItemViewModel : msg -> Int -> Int -> ViewModel item msg -> Int -> item -> ItemViewModel msg
+createItemViewModel : msg -> Int -> Int -> Config item msg -> Int -> item -> ItemViewModel msg
 createItemViewModel noOp selectedIndex focusedIndex menuVM index item =
     let
         clampIndex =
@@ -87,7 +87,7 @@ createItemViewModel noOp selectedIndex focusedIndex menuVM index item =
         }
 
 
-view : ViewModel item Model.Msg -> Html Model.Msg
+view : Config item Model.Msg -> Html Model.Msg
 view vm =
     let
         clampIndex =

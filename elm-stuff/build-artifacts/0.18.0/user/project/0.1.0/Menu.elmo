@@ -39,17 +39,26 @@ var _user$project$Menu$isIndexSelected = function (vm) {
 			A2(_elm_community$list_extra$List_Extra$findIndex, vm.isSelected, vm.items),
 			0));
 };
-var _user$project$Menu$view = function (vm) {
-	var createItemViewModel = function (index) {
+var _user$project$Menu$createItemViewModel = F2(
+	function (vm, index) {
 		var isSelected = A2(_user$project$Menu$isIndexSelected, vm, index);
-		var boolToTabIndexValue = function (bool) {
-			return bool ? 0 : -1;
-		};
-		var tabindexValue = boolToTabIndexValue(
-			A2(_user$project$Menu$isIndexSelected, vm, index));
+		var tabindexValue = function () {
+			var boolToTabIndexValue = function (bool) {
+				return bool ? 0 : -1;
+			};
+			return boolToTabIndexValue(
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						vm.maybeFocusIndex,
+						_user$project$Ext_Function$equals(index)),
+					isSelected));
+		}();
 		var shouldAutoFocus = _elm_lang$core$Native_Utils.eq(tabindexValue, 0);
 		return {ctor: '_Tuple3', _0: isSelected, _1: shouldAutoFocus, _2: tabindexValue};
-	};
+	});
+var _user$project$Menu$view = function (vm) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -91,7 +100,7 @@ var _user$project$Menu$view = function (vm) {
 						return A2(
 							_user$project$Menu$menuItem,
 							vm,
-							createItemViewModel(_p3));
+							A2(_user$project$Menu$createItemViewModel, vm, _p3));
 					},
 					vm.items)),
 			_1: {ctor: '[]'}

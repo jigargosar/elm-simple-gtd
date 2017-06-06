@@ -35,39 +35,40 @@ isIndexSelected vm =
     vm.items |> List.findIndex vm.isSelected ?= 0 |> equals
 
 
-view vm =
+createItemViewModel vm index =
     let
-        createItemViewModel index =
+        shouldAutoFocus =
+            tabindexValue == 0
+
+        tabindexValue =
             let
                 boolToTabIndexValue bool =
                     if bool then
                         0
                     else
                         -1
-
-                shouldAutoFocus =
-                    tabindexValue == 0
-
-                tabindexValue =
-                    index |> isIndexSelected vm |> boolToTabIndexValue
-
-                isSelected =
-                    index |> isIndexSelected vm
             in
-                ( isSelected, shouldAutoFocus, tabindexValue )
+                vm.maybeFocusIndex ?|> equals index ?= isSelected |> boolToTabIndexValue
+
+        isSelected =
+            index |> isIndexSelected vm
     in
-        div
-            [ class "modal-background"
-            , onKeyDownStopPropagation ((\_ -> commonMsg.noOp))
-            , onClickStopPropagation Model.DeactivateEditingMode
+        ( isSelected, shouldAutoFocus, tabindexValue )
+
+
+view vm =
+    div
+        [ class "modal-background"
+        , onKeyDownStopPropagation ((\_ -> commonMsg.noOp))
+        , onClickStopPropagation Model.DeactivateEditingMode
+        ]
+        [ div
+            [ id vm.domId
+            , class "menu"
+            , attribute "data-prevent-default-keys" "Tab"
             ]
-            [ div
-                [ id vm.domId
-                , class "menu"
-                , attribute "data-prevent-default-keys" "Tab"
-                ]
-                (vm.items |> List.indexedMap (createItemViewModel >> menuItem vm))
-            ]
+            (vm.items |> List.indexedMap (createItemViewModel vm >> menuItem vm))
+        ]
 
 
 menuItem vm ( isSelected, shouldAutoFocus, tabindexValue ) item =

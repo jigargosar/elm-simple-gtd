@@ -85,6 +85,7 @@ createProjectMenuViewModel model { todo, maybeFocusIndex } =
     , domId = "project-menu"
     , itemView = Project.getName >> text
     , maybeFocusIndex = maybeFocusIndex
+    , onFocusIndexChanged = (\_ -> commonMsg.noOp)
     }
 
 
@@ -105,6 +106,7 @@ createContextMenuViewModel model todo =
     , domId = "context-menu"
     , itemView = Context.getName >> text
     , maybeFocusIndex = Nothing
+    , onFocusIndexChanged = (\_ -> commonMsg.noOp)
     }
 
 

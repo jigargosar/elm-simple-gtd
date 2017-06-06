@@ -28,6 +28,7 @@ type alias ViewModel item msg =
     , itemView : item -> Html msg
     , isSelected : item -> Bool
     , maybeFocusIndex : Maybe Int
+    , onFocusIndexChanged : Int -> msg
     }
 
 

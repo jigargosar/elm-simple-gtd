@@ -19,6 +19,7 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Polymer.Paper as Paper
 import Project
 import Todo
+import View.FullBleedCapture
 
 
 type alias Config item msg =
@@ -31,7 +32,7 @@ type alias Config item msg =
     , maybeFocusKey : Maybe String
     , onFocusIndexChanged : Maybe String -> msg
     , noOp : msg
-    , onOutsideClick : msg
+    , onOutsideMouseDown : msg
     }
 
 
@@ -127,10 +128,7 @@ view vm =
                 .#|> createItemViewModel selectedIndex focusedIndex vm
                 >>> menuItem
     in
-        div
-            [ class "fullbleed-capture"
-            , onClickStopPropagation vm.onOutsideClick
-            ]
+        View.FullBleedCapture.init { onMouseDown = vm.onOutsideMouseDown }
             [ ul
                 [ id vm.domId
                 , class "menu"

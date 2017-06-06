@@ -87,7 +87,7 @@ createProjectMenuConfig model ({ todo, maybeFocusKey } as form) =
     , maybeFocusKey = maybeFocusKey
     , onFocusIndexChanged = Model.UpdateEditTodoProjectMaybeFocusKey form
     , noOp = commonMsg.noOp
-    , onOutsideClick = Model.DeactivateEditingMode
+    , onOutsideMouseDown = Model.DeactivateEditingMode
     }
 
 
@@ -110,7 +110,7 @@ createContextMenuConfig model todo =
     , maybeFocusKey = Nothing
     , onFocusIndexChanged = (\_ -> commonMsg.noOp)
     , noOp = commonMsg.noOp
-    , onOutsideClick = Model.DeactivateEditingMode
+    , onOutsideMouseDown = Model.DeactivateEditingMode
     }
 
 

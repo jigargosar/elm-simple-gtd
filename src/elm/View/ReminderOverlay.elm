@@ -63,10 +63,10 @@ reminderOverlayActiveView activeView todoDetails =
 
 activeViewShell todoDetails children =
     let
-        onOutsideClick =
+        onOutsideMouseDown =
             Model.ReminderOverlayAction ReminderOverlay.Close
     in
-        div [ class "full-view fixed-top", onClickStopPropagation onOutsideClick ]
+        div [ class "full-view fixed-top", onClickStopPropagation onOutsideMouseDown ]
             [ div [ class "fixed-bottom top-shadow static" ]
                 [ div [ class "font-headline" ] [ text todoDetails.text ]
                 , div [ class "layout horizontal flex-auto-children" ]

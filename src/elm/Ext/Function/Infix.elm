@@ -3,7 +3,7 @@ module Ext.Function.Infix exposing (..)
 
 (=>) =
     (,)
-infix 9 =>
+infixr 5 =>
 
 
 (?>>) f1 f2 =

@@ -58,44 +58,22 @@ findMaybeFocusedIndex vm =
         vm.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn vm.items
 
 
-createItemViewModel : ViewModel item msg -> Int -> item -> ItemViewModel msg
-createItemViewModel menuVM index item =
+createItemViewModel : msg -> Int -> Int -> ViewModel item msg -> Int -> item -> ItemViewModel msg
+createItemViewModel noOp selectedIndex focusedIndex menuVM index item =
     let
         clampIndex =
             List.clampIndexIn menuVM.items
 
-        selectedIndex =
-            menuVM.items |> List.findIndex menuVM.isSelected ?= 0 |> clampIndex
-
-        focusedIndex =
-            findMaybeFocusedIndex menuVM ?= selectedIndex
-
         onSelect =
             menuVM.onSelect item
 
-        indexToFocusKey index =
-            List.getAt index menuVM.items ?|> menuVM.itemKey |> Maybe.orElse menuVM.maybeFocusKey
-
         onKeyDown { key } =
-            let
-                onFocusIndexChange =
-                    add focusedIndex
-                        >> clampIndex
-                        >> indexToFocusKey
-                        >> menuVM.onFocusIndexChanged
-            in
-                case key of
-                    Key.ArrowUp ->
-                        onFocusIndexChange -1
+            case key of
+                Key.Enter ->
+                    onSelect
 
-                    Key.ArrowDown ->
-                        onFocusIndexChange 1
-
-                    Key.Enter ->
-                        onSelect
-
-                    _ ->
-                        onFocusIndexChange 0
+                _ ->
+                    noOp
 
         isFocused =
             focusedIndex == index
@@ -109,19 +87,61 @@ createItemViewModel menuVM index item =
         }
 
 
+view : ViewModel item Model.Msg -> Html Model.Msg
 view vm =
-    div
-        [ class "modal-background"
-        , onKeyDownStopPropagation ((\_ -> commonMsg.noOp))
-        , onClickStopPropagation Model.DeactivateEditingMode
-        ]
-        [ ul
-            [ id vm.domId
-            , class "menu"
-            , attribute "data-prevent-default-keys" "Tab"
+    let
+        clampIndex =
+            List.clampIndexIn vm.items
+
+        selectedIndex =
+            vm.items |> List.findIndex vm.isSelected ?= 0 |> clampIndex
+
+        focusedIndex =
+            findMaybeFocusedIndex vm ?= selectedIndex
+
+        onKeyDown { key } =
+            let
+                indexToFocusKey index =
+                    List.getAt index vm.items ?|> vm.itemKey |> Maybe.orElse vm.maybeFocusKey
+
+                onFocusIndexChange =
+                    add focusedIndex
+                        >> clampIndex
+                        >> indexToFocusKey
+                        >> vm.onFocusIndexChanged
+            in
+                case key of
+                    Key.ArrowUp ->
+                        onFocusIndexChange -1
+
+                    Key.ArrowDown ->
+                        onFocusIndexChange 1
+
+                    _ ->
+                        onFocusIndexChange 0
+    in
+        div
+            [ class "modal-background"
+            , onKeyDownStopPropagation onKeyDown
+            , onClickStopPropagation Model.DeactivateEditingMode
             ]
-            (vm.items |> List.indexedMap (createItemViewModel vm >>> menuItem))
-        ]
+            [ ul
+                [ id vm.domId
+                , class "menu"
+                , attribute "data-prevent-default-keys" "Tab"
+                ]
+                (vm.items
+                    .#|>
+                        (createItemViewModel commonMsg.noOp selectedIndex focusedIndex vm
+                            >>> menuItem
+                        )
+                )
+            ]
+
+
+(.#|>) =
+    flip List.indexedMap
+infixl 0 .#|>
 
 
 menuItem vm =

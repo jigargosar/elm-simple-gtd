@@ -130,7 +130,7 @@ async function boot() {
     })
 
     app.ports["focusInput"].subscribe((selector) => {
-        console.log("focusInput: selector", selector)
+        // console.log("focusInput: selector", selector)
         requestAnimationFrame(() => {
             $(".materialize-textarea.auto-focus").each(function () {
                 autosize(this);
@@ -156,7 +156,7 @@ async function boot() {
                 // console.log("toFocus", toFocus, document.activeElement)
                 if (toFocus && document.activeElement !== toFocus) {
                     toFocus.focus();
-                    console.log("focusing")
+                    // console.log("focusing")
                 }
                 if (toFocus && toFocus.inputElement) {
                     // console.log(toFocus.inputElement, toFocus.$.input)

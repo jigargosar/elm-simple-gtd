@@ -124,7 +124,7 @@ async function boot() {
                 at: "right top",
                 of: "#" + ofId,
                 within: ".modal-background",
-                collision: "flipfit"
+                collision: "fit"
             }).find(`[tabindex="0"]`).focus()
         })
     })

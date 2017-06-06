@@ -129,13 +129,13 @@ view vm =
     in
         div
             [ class "modal-background"
-            , onKeyDownStopPropagation onKeyDown
             , onClickStopPropagation vm.onOutsideClick
             ]
             [ ul
                 [ id vm.domId
                 , class "menu"
                 , attribute "data-prevent-default-keys" "Tab"
+                , onKeyDownStopPropagation onKeyDown
                 ]
                 itemViewList
             ]

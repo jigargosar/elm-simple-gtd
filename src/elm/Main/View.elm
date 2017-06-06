@@ -64,27 +64,6 @@ overlayViews m =
         ++ projectMenu m
 
 
-contextMenu : Model -> List (Html Msg)
-contextMenu model =
-    let
-        createListItem onItemClick context =
-            Paper.item
-                [ onClick (onItemClick context) ]
-                [ context |> Context.getName >> text ]
-
-        view todo =
-            let
-                onItemClick =
-                    Model.SetTodoContext # todo
-            in
-                Paper.material [ id "context-dropdown", attribute "data-prevent-default-keys" "Tab" ]
-                    [ Paper.listbox []
-                        (Model.getActiveContexts model .|> createListItem onItemClick)
-                    ]
-    in
-        model |> Model.getMaybeEditTodoContextForm ?|> view |> Maybe.toList
-
-
 createProjectMenuViewModel : Model -> Todo.Model -> Menu.ViewModel Project.Model Msg
 createProjectMenuViewModel model todo =
     { items = Model.getActiveProjects model
@@ -100,4 +79,22 @@ projectMenu model =
     model
         |> Model.getMaybeEditTodoProjectForm
         ?|> (createProjectMenuViewModel model >> Menu.view)
+        |> Maybe.toList
+
+
+createContextMenuViewModel : Model -> Todo.Model -> Menu.ViewModel Context.Model Msg
+createContextMenuViewModel model todo =
+    { items = Model.getActiveContexts model
+    , onSelect = Model.SetTodoContext # todo
+    , itemDomId = Document.getId >> String.append "context-id-"
+    , domId = "context-menu"
+    , itemView = Context.getName >> text
+    }
+
+
+contextMenu : Model -> List (Html Msg)
+contextMenu model =
+    model
+        |> Model.getMaybeEditTodoContextForm
+        ?|> (createContextMenuViewModel model >> Menu.view)
         |> Maybe.toList

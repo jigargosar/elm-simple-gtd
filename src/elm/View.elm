@@ -85,14 +85,14 @@ appDrawerLayoutView m =
 
         onClickHandler : List Dom.Id -> Msg
         onClickHandler pathIdList =
-            List.find (List.member # [ "context-dropdown", "project-menu" ]) pathIdList
+            List.find (List.member # [ "context-menu", "project-menu" ]) pathIdList
                 ?|> (\_ -> Model.DeactivateEditingMode)
                 ?= commonMsg.noOp
 
         onClickAttributeList =
             let
                 return =
-                    [ Ext.Html.onClickTargetPathHavingIds [ "context-dropdown", "project-menu" ] Model.DeactivateEditingMode
+                    [ Ext.Html.onClickTargetPathHavingIds [ "context-menu", "project-menu" ] Model.DeactivateEditingMode
                     ]
             in
                 case m.editMode of

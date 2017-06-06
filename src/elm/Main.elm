@@ -503,7 +503,7 @@ firebaseSetupOnDisconnectCmd model =
 
 
 positionContextDropdownCmd todo =
-    DomPorts.positionDropdown ( "context-dropdown", "context-dropdown-" ++ Document.getId todo )
+    DomPorts.positionDropdown ( "context-menu", "context-menu-" ++ Document.getId todo )
 
 
 positionProjectDropdownCmd todo =

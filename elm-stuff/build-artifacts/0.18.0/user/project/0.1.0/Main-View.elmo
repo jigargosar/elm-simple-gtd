@@ -1,18 +1,46 @@
+var _user$project$Main_View$createContextMenuViewModel = F2(
+	function (model, todo) {
+		return {
+			items: _user$project$Model$getActiveContexts(model),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
+			itemDomId: function (_p0) {
+				return A2(
+					_elm_lang$core$String$append,
+					'context-id-',
+					_user$project$Document$getId(_p0));
+			},
+			domId: 'context-menu',
+			itemView: function (_p1) {
+				return _elm_lang$html$Html$text(
+					_user$project$Context$getName(_p1));
+			}
+		};
+	});
+var _user$project$Main_View$contextMenu = function (model) {
+	return _elm_community$maybe_extra$Maybe_Extra$toList(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_user$project$Model$getMaybeEditTodoContextForm(model),
+			function (_p2) {
+				return _user$project$Menu$view(
+					A2(_user$project$Main_View$createContextMenuViewModel, model, _p2));
+			}));
+};
 var _user$project$Main_View$createProjectMenuViewModel = F2(
 	function (model, todo) {
 		return {
 			items: _user$project$Model$getActiveProjects(model),
 			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo),
-			itemDomId: function (_p0) {
+			itemDomId: function (_p3) {
 				return A2(
 					_elm_lang$core$String$append,
 					'project-id-',
-					_user$project$Document$getId(_p0));
+					_user$project$Document$getId(_p3));
 			},
 			domId: 'project-menu',
-			itemView: function (_p1) {
+			itemView: function (_p4) {
 				return _elm_lang$html$Html$text(
-					_user$project$Project$getName(_p1));
+					_user$project$Project$getName(_p4));
 			}
 		};
 	});
@@ -21,61 +49,10 @@ var _user$project$Main_View$projectMenu = function (model) {
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_user$project$Model$getMaybeEditTodoProjectForm(model),
-			function (_p2) {
+			function (_p5) {
 				return _user$project$Menu$view(
-					A2(_user$project$Main_View$createProjectMenuViewModel, model, _p2));
+					A2(_user$project$Main_View$createProjectMenuViewModel, model, _p5));
 			}));
-};
-var _user$project$Main_View$contextMenu = function (model) {
-	var createListItem = F2(
-		function (onItemClick, context) {
-			return A2(
-				_edvail$elm_polymer$Polymer_Paper$item,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(
-						onItemClick(context)),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: function (_p3) {
-						return _elm_lang$html$Html$text(
-							_user$project$Context$getName(_p3));
-					}(context),
-					_1: {ctor: '[]'}
-				});
-		});
-	var view = function (todo) {
-		var onItemClick = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo);
-		return A2(
-			_edvail$elm_polymer$Polymer_Paper$material,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('context-dropdown'),
-				_1: {
-					ctor: '::',
-					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_Paper$listbox,
-					{ctor: '[]'},
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-						_user$project$Model$getActiveContexts(model),
-						createListItem(onItemClick))),
-				_1: {ctor: '[]'}
-			});
-	};
-	return _elm_community$maybe_extra$Maybe_Extra$toList(
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			_user$project$Model$getMaybeEditTodoContextForm(model),
-			view));
 };
 var _user$project$Main_View$overlayViews = function (m) {
 	return A2(
@@ -97,10 +74,10 @@ var _user$project$Main_View$init = F2(
 				{
 					ctor: '::',
 					_0: function () {
-						var _p4 = _user$project$Model$getMainViewType(model);
-						switch (_p4.ctor) {
+						var _p6 = _user$project$Model$getMainViewType(model);
+						switch (_p6.ctor) {
 							case 'EntityListView':
-								return A3(_user$project$EntityList_View$listView, _p4._0, model, viewModel);
+								return A3(_user$project$EntityList_View$listView, _p6._0, model, viewModel);
 							case 'BinView':
 								return A2(_user$project$View_TodoList$filtered, viewModel, model);
 							case 'DoneView':
@@ -144,9 +121,9 @@ var _user$project$Main_View$init = F2(
 														_edvail$elm_polymer$Polymer_Paper$button,
 														{
 															ctor: '::',
-															_0: function (_p5) {
+															_0: function (_p7) {
 																return _elm_lang$html$Html_Events$onClick(
-																	_user$project$Model$RemotePouchSync(_p5));
+																	_user$project$Model$RemotePouchSync(_p7));
 															}(form),
 															_1: {ctor: '[]'}
 														},

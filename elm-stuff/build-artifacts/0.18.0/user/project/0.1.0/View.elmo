@@ -32,7 +32,7 @@ var _user$project$View$appDrawerLayoutView = function (m) {
 				_user$project$Ext_Html$onClickTargetPathHavingIds,
 				{
 					ctor: '::',
-					_0: 'context-dropdown',
+					_0: 'context-menu',
 					_1: {
 						ctor: '::',
 						_0: 'project-menu',
@@ -64,7 +64,7 @@ var _user$project$View$appDrawerLayoutView = function (m) {
 						_elm_lang$core$List$member,
 						{
 							ctor: '::',
-							_0: 'context-dropdown',
+							_0: 'context-menu',
 							_1: {
 								ctor: '::',
 								_0: 'project-menu',

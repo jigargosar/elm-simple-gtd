@@ -17,10 +17,10 @@ var _user$project$Main$positionContextDropdownCmd = function (todo) {
 	return _user$project$DomPorts$positionDropdown(
 		{
 			ctor: '_Tuple2',
-			_0: 'context-dropdown',
+			_0: 'context-menu',
 			_1: A2(
 				_elm_lang$core$Basics_ops['++'],
-				'context-dropdown-',
+				'context-menu-',
 				_user$project$Document$getId(todo))
 		});
 };

@@ -123,7 +123,7 @@ async function boot() {
                 my: "right top",
                 at: "right top",
                 of: "#" + ofId,
-                within: ".modal-background",
+                within: ".fullbleed-capture",
                 collision: "fit"
             }).find(`[tabindex="0"]`).focus()
         })

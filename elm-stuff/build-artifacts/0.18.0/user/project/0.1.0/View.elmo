@@ -128,7 +128,7 @@ var _user$project$View$bottomSheet = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
-var _user$project$View$createContextMenuViewModel = F2(
+var _user$project$View$createContextMenuConfig = F2(
 	function (model, todo) {
 		return {
 			items: _user$project$Model$getActiveContexts(model),
@@ -161,10 +161,10 @@ var _user$project$View$contextMenu = function (model) {
 			_user$project$Model$getMaybeEditTodoContextForm(model),
 			function (_p3) {
 				return _user$project$Menu$view(
-					A2(_user$project$View$createContextMenuViewModel, model, _p3));
+					A2(_user$project$View$createContextMenuConfig, model, _p3));
 			}));
 };
-var _user$project$View$createProjectMenuViewModel = F2(
+var _user$project$View$createProjectMenuConfig = F2(
 	function (model, _p4) {
 		var _p5 = _p4;
 		var _p8 = _p5.todo;
@@ -197,7 +197,7 @@ var _user$project$View$projectMenu = function (model) {
 			_user$project$Model$getMaybeEditTodoProjectForm(model),
 			function (_p9) {
 				return _user$project$Menu$view(
-					A2(_user$project$View$createProjectMenuViewModel, model, _p9));
+					A2(_user$project$View$createProjectMenuConfig, model, _p9));
 			}));
 };
 var _user$project$View$overlayViews = function (m) {

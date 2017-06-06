@@ -128,7 +128,7 @@ view vm =
                 >>> menuItem
     in
         div
-            [ class "modal-background"
+            [ class "fullbleed-capture"
             , onClickStopPropagation vm.onOutsideClick
             ]
             [ ul

@@ -54,7 +54,7 @@ formView form m =
                     commonMsg.noOp
     in
         div
-            [ class "modal-background"
+            [ class "fullbleed-capture"
             , onKeyDownStopPropagation (keyHandler)
             , onClickStopPropagation Model.DeactivateEditingMode
             ]

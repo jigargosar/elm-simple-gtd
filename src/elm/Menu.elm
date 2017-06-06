@@ -27,6 +27,7 @@ type alias ViewModel item msg =
     , domId : String
     , itemView : item -> Html msg
     , isSelected : item -> Bool
+    , maybeFocusIndex : Maybe Int
     }
 
 

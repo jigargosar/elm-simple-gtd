@@ -25,33 +25,6 @@ var _user$project$View$addTodoFab = function (m) {
 		{ctor: '[]'});
 };
 var _user$project$View$appDrawerLayoutView = function (m) {
-	var onClickAttributeList = function () {
-		var $return = {
-			ctor: '::',
-			_0: A2(
-				_user$project$Ext_Html$onClickTargetPathHavingIds,
-				{
-					ctor: '::',
-					_0: 'context-menu',
-					_1: {
-						ctor: '::',
-						_0: 'project-menu',
-						_1: {ctor: '[]'}
-					}
-				},
-				_user$project$Model$DeactivateEditingMode),
-			_1: {ctor: '[]'}
-		};
-		var _p0 = m.editMode;
-		switch (_p0.ctor) {
-			case 'EditTodoContext':
-				return $return;
-			case 'EditTodoProject':
-				return $return;
-			default:
-				return {ctor: '[]'};
-		}
-	}();
 	var onClickHandler = function (pathIdList) {
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
@@ -72,7 +45,7 @@ var _user$project$View$appDrawerLayoutView = function (m) {
 							}
 						}),
 					pathIdList),
-				function (_p1) {
+				function (_p0) {
 					return _user$project$Model$DeactivateEditingMode;
 				}),
 			_user$project$Model$commonMsg.noOp);
@@ -81,18 +54,15 @@ var _user$project$View$appDrawerLayoutView = function (m) {
 	var viewModel = _user$project$ViewModel$create(m);
 	return A2(
 		_edvail$elm_polymer$Polymer_App$drawerLayout,
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			{
+		{
+			ctor: '::',
+			_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'forceNarrow', forceNarrow),
+			_1: {
 				ctor: '::',
-				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'forceNarrow', forceNarrow),
-				_1: {
-					ctor: '::',
-					_0: A2(_user$project$WebComponents$onBoolPropertyChanged, 'narrow', _user$project$Model$OnLayoutNarrowChanged),
-					_1: {ctor: '[]'}
-				}
-			},
-			onClickAttributeList),
+				_0: A2(_user$project$WebComponents$onBoolPropertyChanged, 'narrow', _user$project$Model$OnLayoutNarrowChanged),
+				_1: {ctor: '[]'}
+			}
+		},
 		{
 			ctor: '::',
 			_0: A2(_user$project$View_AppDrawer$view, viewModel, m),
@@ -190,17 +160,18 @@ var _user$project$View$createContextMenuViewModel = F2(
 			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
 			isSelected: _user$project$Document$hasId(
 				_user$project$Todo$getContextId(todo)),
-			itemDomId: function (_p2) {
+			itemDomId: function (_p1) {
 				return A2(
 					_elm_lang$core$String$append,
 					'context-id-',
-					_user$project$Document$getId(_p2));
+					_user$project$Document$getId(_p1));
 			},
 			domId: 'context-menu',
-			itemView: function (_p3) {
+			itemView: function (_p2) {
 				return _elm_lang$html$Html$text(
-					_user$project$Context$getName(_p3));
-			}
+					_user$project$Context$getName(_p2));
+			},
+			maybeFocusIndex: _elm_lang$core$Maybe$Nothing
 		};
 	});
 var _user$project$View$contextMenu = function (model) {
@@ -208,29 +179,32 @@ var _user$project$View$contextMenu = function (model) {
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_user$project$Model$getMaybeEditTodoContextForm(model),
-			function (_p4) {
+			function (_p3) {
 				return _user$project$Menu$view(
-					A2(_user$project$View$createContextMenuViewModel, model, _p4));
+					A2(_user$project$View$createContextMenuViewModel, model, _p3));
 			}));
 };
 var _user$project$View$createProjectMenuViewModel = F2(
-	function (model, todo) {
+	function (model, _p4) {
+		var _p5 = _p4;
+		var _p8 = _p5.todo;
 		return {
 			items: _user$project$Model$getActiveProjects(model),
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p8),
 			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getProjectId(todo)),
-			itemDomId: function (_p5) {
+				_user$project$Todo$getProjectId(_p8)),
+			itemDomId: function (_p6) {
 				return A2(
 					_elm_lang$core$String$append,
 					'project-id-',
-					_user$project$Document$getId(_p5));
+					_user$project$Document$getId(_p6));
 			},
 			domId: 'project-menu',
-			itemView: function (_p6) {
+			itemView: function (_p7) {
 				return _elm_lang$html$Html$text(
-					_user$project$Project$getName(_p6));
-			}
+					_user$project$Project$getName(_p7));
+			},
+			maybeFocusIndex: _p5.maybeFocusIndex
 		};
 	});
 var _user$project$View$projectMenu = function (model) {
@@ -238,9 +212,9 @@ var _user$project$View$projectMenu = function (model) {
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_user$project$Model$getMaybeEditTodoProjectForm(model),
-			function (_p7) {
+			function (_p9) {
 				return _user$project$Menu$view(
-					A2(_user$project$View$createProjectMenuViewModel, model, _p7));
+					A2(_user$project$View$createProjectMenuViewModel, model, _p9));
 			}));
 };
 var _user$project$View$overlayViews = function (m) {

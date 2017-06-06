@@ -19,6 +19,7 @@ import Polymer.Firebase
 import ReminderOverlay
 import Set
 import OldGroupEntity.ViewModel
+import Todo.ProjectsForm
 import View.Header
 import Main.View
 import View.TodoList
@@ -75,14 +76,15 @@ overlayViews m =
         ++ projectMenu m
 
 
-createProjectMenuViewModel : Model -> Todo.Model -> Menu.ViewModel Project.Model Msg
-createProjectMenuViewModel model todo =
+createProjectMenuViewModel : Model -> Todo.ProjectsForm.Model -> Menu.ViewModel Project.Model Msg
+createProjectMenuViewModel model { todo, maybeFocusIndex } =
     { items = Model.getActiveProjects model
     , onSelect = Model.SetTodoProject # todo
     , isSelected = Document.hasId (Todo.getProjectId todo)
     , itemDomId = Document.getId >> String.append "project-id-"
     , domId = "project-menu"
     , itemView = Project.getName >> text
+    , maybeFocusIndex = maybeFocusIndex
     }
 
 
@@ -102,6 +104,7 @@ createContextMenuViewModel model todo =
     , itemDomId = Document.getId >> String.append "context-id-"
     , domId = "context-menu"
     , itemView = Context.getName >> text
+    , maybeFocusIndex = Nothing
     }
 
 
@@ -137,29 +140,29 @@ appDrawerLayoutView m =
                 ?|> (\_ -> Model.DeactivateEditingMode)
                 ?= commonMsg.noOp
 
-        onClickAttributeList =
-            let
-                return =
-                    [ Ext.Html.onClickTargetPathHavingIds [ "context-menu", "project-menu" ] Model.DeactivateEditingMode
-                    ]
-            in
-                case m.editMode of
-                    EditMode.EditTodoContext _ ->
-                        --                        [ Ext.Html.onClickPathIds onClickHandler ]
-                        return
-
-                    EditMode.EditTodoProject _ ->
-                        --                        [ Ext.Html.onClickPathIds onClickHandler ]
-                        return
-
-                    _ ->
-                        []
+        --        onClickAttributeList =
+        --            let
+        --                return =
+        --                    [ Ext.Html.onClickTargetPathHavingIds [ "context-menu", "project-menu" ] Model.DeactivateEditingMode
+        --                    ]
+        --            in
+        --                case m.editMode of
+        --                    EditMode.EditTodoContext _ ->
+        --                        --                        [ Ext.Html.onClickPathIds onClickHandler ]
+        --                        return
+        --
+        --                    EditMode.EditTodoProject _ ->
+        --                        --                        [ Ext.Html.onClickPathIds onClickHandler ]
+        --                        return
+        --
+        --                    _ ->
+        --                        []
     in
         App.drawerLayout
             ([ boolProperty "forceNarrow" forceNarrow
              , onBoolPropertyChanged "narrow" Model.OnLayoutNarrowChanged
              ]
-                ++ onClickAttributeList
+             --                ++ onClickAttributeList
             )
             [ View.AppDrawer.view viewModel m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]

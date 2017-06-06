@@ -96,7 +96,7 @@ var _user$project$Menu$view = function (vm) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Menu$ViewModel = F6(
-	function (a, b, c, d, e, f) {
-		return {items: a, onSelect: b, itemDomId: c, domId: d, itemView: e, isSelected: f};
+var _user$project$Menu$ViewModel = F7(
+	function (a, b, c, d, e, f, g) {
+		return {items: a, onSelect: b, itemDomId: c, domId: d, itemView: e, isSelected: f, maybeFocusIndex: g};
 	});

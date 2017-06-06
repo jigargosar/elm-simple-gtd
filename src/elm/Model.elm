@@ -43,6 +43,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import LaunchBar
+import Todo.ProjectsForm
 
 
 type Msg
@@ -501,7 +502,7 @@ startEditingTodoContext todo =
 
 startEditingTodoProject : Todo.Model -> ModelF
 startEditingTodoProject todo =
-    setEditMode (EditMode.EditTodoProject todo)
+    setEditMode (Todo.ProjectsForm.init todo |> EditMode.EditTodoProject)
 
 
 startEditingEntity : Entity -> ModelF

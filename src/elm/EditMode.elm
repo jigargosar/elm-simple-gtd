@@ -7,6 +7,7 @@ import LaunchBar.Form
 import Project
 import Todo
 import Todo.NewForm
+import Todo.ProjectsForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -48,7 +49,7 @@ type EditMode
     | EditTodo Todo.Form.Model
     | EditTodoReminder Todo.ReminderForm.Model
     | EditTodoContext Todo.Model
-    | EditTodoProject Todo.Model
+    | EditTodoProject Todo.ProjectsForm.Model
     | EditContext EditContextForm
     | EditProject EditProjectForm
     | EditSyncSettings SyncForm

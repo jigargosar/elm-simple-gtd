@@ -36,7 +36,7 @@ view vm =
             vm.items |> List.findIndex vm.isSelected ?= 0
 
         createListItem item =
-            Paper.item
+            div
                 [ onClick (vm.onSelect item) ]
                 [ vm.itemView item ]
     in
@@ -45,8 +45,6 @@ view vm =
             , onKeyDownStopPropagation ((\_ -> commonMsg.noOp))
             , onClickStopPropagation Model.DeactivateEditingMode
             ]
-            [ Paper.material [ id vm.domId, attribute "data-prevent-default-keys" "Tab" ]
-                [ Paper.listbox [ intProperty "selected" selectedIndex ]
-                    (vm.items .|> createListItem)
-                ]
+            [ div [ id vm.domId, attribute "data-prevent-default-keys" "Tab" ]
+                (vm.items .|> createListItem)
             ]

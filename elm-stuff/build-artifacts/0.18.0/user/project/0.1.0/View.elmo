@@ -25,31 +25,6 @@ var _user$project$View$addTodoFab = function (m) {
 		{ctor: '[]'});
 };
 var _user$project$View$appDrawerLayoutView = function (m) {
-	var onClickHandler = function (pathIdList) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				A2(
-					_elm_community$list_extra$List_Extra$find,
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-						_elm_lang$core$List$member,
-						{
-							ctor: '::',
-							_0: 'context-menu',
-							_1: {
-								ctor: '::',
-								_0: 'project-menu',
-								_1: {ctor: '[]'}
-							}
-						}),
-					pathIdList),
-				function (_p0) {
-					return _user$project$Model$DeactivateEditingMode;
-				}),
-			_user$project$Model$commonMsg.noOp);
-	};
 	var forceNarrow = _user$project$Model$getLayoutForceNarrow(m);
 	var viewModel = _user$project$ViewModel$create(m);
 	return A2(
@@ -160,16 +135,16 @@ var _user$project$View$createContextMenuViewModel = F2(
 			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
 			isSelected: _user$project$Document$hasId(
 				_user$project$Todo$getContextId(todo)),
-			itemDomId: function (_p1) {
+			itemDomId: function (_p0) {
 				return A2(
 					_elm_lang$core$String$append,
 					'context-id-',
-					_user$project$Document$getId(_p1));
+					_user$project$Document$getId(_p0));
 			},
 			domId: 'context-menu',
-			itemView: function (_p2) {
+			itemView: function (_p1) {
 				return _elm_lang$html$Html$text(
-					_user$project$Context$getName(_p2));
+					_user$project$Context$getName(_p1));
 			},
 			maybeFocusIndex: _elm_lang$core$Maybe$Nothing
 		};
@@ -179,32 +154,32 @@ var _user$project$View$contextMenu = function (model) {
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_user$project$Model$getMaybeEditTodoContextForm(model),
-			function (_p3) {
+			function (_p2) {
 				return _user$project$Menu$view(
-					A2(_user$project$View$createContextMenuViewModel, model, _p3));
+					A2(_user$project$View$createContextMenuViewModel, model, _p2));
 			}));
 };
 var _user$project$View$createProjectMenuViewModel = F2(
-	function (model, _p4) {
-		var _p5 = _p4;
-		var _p8 = _p5.todo;
+	function (model, _p3) {
+		var _p4 = _p3;
+		var _p7 = _p4.todo;
 		return {
 			items: _user$project$Model$getActiveProjects(model),
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p8),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p7),
 			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getProjectId(_p8)),
-			itemDomId: function (_p6) {
+				_user$project$Todo$getProjectId(_p7)),
+			itemDomId: function (_p5) {
 				return A2(
 					_elm_lang$core$String$append,
 					'project-id-',
-					_user$project$Document$getId(_p6));
+					_user$project$Document$getId(_p5));
 			},
 			domId: 'project-menu',
-			itemView: function (_p7) {
+			itemView: function (_p6) {
 				return _elm_lang$html$Html$text(
-					_user$project$Project$getName(_p7));
+					_user$project$Project$getName(_p6));
 			},
-			maybeFocusIndex: _p5.maybeFocusIndex
+			maybeFocusIndex: _p4.maybeFocusIndex
 		};
 	});
 var _user$project$View$projectMenu = function (model) {
@@ -212,9 +187,9 @@ var _user$project$View$projectMenu = function (model) {
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_user$project$Model$getMaybeEditTodoProjectForm(model),
-			function (_p9) {
+			function (_p8) {
 				return _user$project$Menu$view(
-					A2(_user$project$View$createProjectMenuViewModel, model, _p9));
+					A2(_user$project$View$createProjectMenuViewModel, model, _p8));
 			}));
 };
 var _user$project$View$overlayViews = function (m) {

@@ -133,37 +133,11 @@ appDrawerLayoutView m =
 
         forceNarrow =
             Model.getLayoutForceNarrow m
-
-        onClickHandler : List Dom.Id -> Msg
-        onClickHandler pathIdList =
-            List.find (List.member # [ "context-menu", "project-menu" ]) pathIdList
-                ?|> (\_ -> Model.DeactivateEditingMode)
-                ?= commonMsg.noOp
-
-        --        onClickAttributeList =
-        --            let
-        --                return =
-        --                    [ Ext.Html.onClickTargetPathHavingIds [ "context-menu", "project-menu" ] Model.DeactivateEditingMode
-        --                    ]
-        --            in
-        --                case m.editMode of
-        --                    EditMode.EditTodoContext _ ->
-        --                        --                        [ Ext.Html.onClickPathIds onClickHandler ]
-        --                        return
-        --
-        --                    EditMode.EditTodoProject _ ->
-        --                        --                        [ Ext.Html.onClickPathIds onClickHandler ]
-        --                        return
-        --
-        --                    _ ->
-        --                        []
     in
         App.drawerLayout
-            ([ boolProperty "forceNarrow" forceNarrow
-             , onBoolPropertyChanged "narrow" Model.OnLayoutNarrowChanged
-             ]
-             --                ++ onClickAttributeList
-            )
+            [ boolProperty "forceNarrow" forceNarrow
+            , onBoolPropertyChanged "narrow" Model.OnLayoutNarrowChanged
+            ]
             [ View.AppDrawer.view viewModel m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ View.Header.init viewModel m

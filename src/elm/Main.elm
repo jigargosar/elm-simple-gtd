@@ -244,9 +244,9 @@ update msg =
                             >> Model.setEditMode
                         )
 
-                UpdateEditTodoProjectFormFocusIndex form index ->
+                UpdateEditTodoProjectMaybeFocusKey form maybeFocusKey ->
                     Return.map
-                        (Todo.ProjectsForm.setFocusIndex index form
+                        (Todo.ProjectsForm.setMaybeFocusKey maybeFocusKey form
                             |> EditMode.EditTodoProject
                             >> Model.setEditMode
                         )

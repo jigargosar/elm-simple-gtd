@@ -1,15 +1,13 @@
-var _user$project$Todo_ProjectsForm$setFocusIndex = F2(
-	function (index, form) {
+var _user$project$Todo_ProjectsForm$setMaybeFocusKey = F2(
+	function (maybeFocusKey, form) {
 		return _elm_lang$core$Native_Utils.update(
 			form,
-			{
-				maybeFocusIndex: _elm_lang$core$Maybe$Just(index)
-			});
+			{maybeFocusKey: maybeFocusKey});
 	});
 var _user$project$Todo_ProjectsForm$init = function (todo) {
-	return {todo: todo, maybeFocusIndex: _elm_lang$core$Maybe$Nothing};
+	return {todo: todo, maybeFocusKey: _elm_lang$core$Maybe$Nothing};
 };
 var _user$project$Todo_ProjectsForm$Model = F2(
 	function (a, b) {
-		return {todo: a, maybeFocusIndex: b};
+		return {todo: a, maybeFocusKey: b};
 	});

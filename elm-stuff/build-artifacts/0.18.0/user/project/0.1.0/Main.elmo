@@ -468,7 +468,7 @@ var _user$project$Main$update = function (msg) {
 									_user$project$EditMode$EditTodo(_p39));
 							}(
 								A2(_user$project$Todo_Form$set, _p15._1, _p15._0)));
-					case 'UpdateEditTodoProjectFormFocusIndex':
+					case 'UpdateEditTodoProjectMaybeFocusKey':
 						return function (_p40) {
 							return _user$project$DomPorts$autoFocusInputCmd(
 								A2(
@@ -477,7 +477,7 @@ var _user$project$Main$update = function (msg) {
 										return _user$project$Model$setEditMode(
 											_user$project$EditMode$EditTodoProject(_p41));
 									}(
-										A2(_user$project$Todo_ProjectsForm$setFocusIndex, _p15._1, _p15._0)),
+										A2(_user$project$Todo_ProjectsForm$setMaybeFocusKey, _p15._1, _p15._0)),
 									_p40));
 						};
 					case 'UpdateRemoteSyncFormUri':

@@ -11,13 +11,13 @@ import Maybe.Extra as Maybe
 
 type alias Model =
     { todo : Todo.Model
-    , maybeFocusIndex : Maybe Int
+    , maybeFocusKey : Maybe String
     }
 
 
 init todo =
-    { todo = todo, maybeFocusIndex = Nothing }
+    { todo = todo, maybeFocusKey = Nothing }
 
 
-setFocusIndex index form =
-    { form | maybeFocusIndex = Just index }
+setMaybeFocusKey maybeFocusKey form =
+    { form | maybeFocusKey = maybeFocusKey }

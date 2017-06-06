@@ -146,7 +146,7 @@ var _user$project$View$createContextMenuViewModel = F2(
 				return _elm_lang$html$Html$text(
 					_user$project$Context$getName(_p1));
 			},
-			maybeFocusIndex: _elm_lang$core$Maybe$Nothing,
+			maybeFocusKey: _elm_lang$core$Maybe$Nothing,
 			onFocusIndexChanged: function (_p2) {
 				return _user$project$Model$commonMsg.noOp;
 			}
@@ -182,8 +182,8 @@ var _user$project$View$createProjectMenuViewModel = F2(
 				return _elm_lang$html$Html$text(
 					_user$project$Project$getName(_p7));
 			},
-			maybeFocusIndex: _p5.maybeFocusIndex,
-			onFocusIndexChanged: _user$project$Model$UpdateEditTodoProjectFormFocusIndex(_p5)
+			maybeFocusKey: _p5.maybeFocusKey,
+			onFocusIndexChanged: _user$project$Model$UpdateEditTodoProjectMaybeFocusKey(_p5)
 		};
 	});
 var _user$project$View$projectMenu = function (model) {

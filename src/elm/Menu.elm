@@ -28,8 +28,8 @@ type alias ViewModel item msg =
     , domId : String
     , itemView : item -> Html msg
     , isSelected : item -> Bool
-    , maybeFocusIndex : Maybe Int
-    , onFocusIndexChanged : Int -> msg
+    , maybeFocusKey : Maybe String
+    , onFocusIndexChanged : Maybe String -> msg
     }
 
 
@@ -59,18 +59,29 @@ createItemViewModel menuVM index item =
         selectedIndex =
             menuVM.items |> List.findIndex menuVM.isSelected ?= 0 |> clampIndex
 
+        maybeFocusedIndex key =
+            menuVM.items
+                |> List.findIndex (menuVM.itemDomId >> equals key)
+
         focusedIndex =
-            menuVM.maybeFocusIndex
+            menuVM.maybeFocusKey
+                ?+> maybeFocusedIndex
                 ?= selectedIndex
                 |> clampIndex
 
         onSelect =
             menuVM.onSelect item
 
+        indexToFocusKey index =
+            menuVM.items |> List.getAt index ?|> menuVM.itemDomId |> Maybe.orElse menuVM.maybeFocusKey
+
         onKeyDown { key } =
             let
                 onFocusIndexChange =
-                    add focusedIndex >> clampIndex >> menuVM.onFocusIndexChanged
+                    add focusedIndex
+                        >> clampIndex
+                        >> indexToFocusKey
+                        >> menuVM.onFocusIndexChanged
             in
                 case key of
                     Key.ArrowUp ->

@@ -77,15 +77,15 @@ overlayViews m =
 
 
 createProjectMenuViewModel : Model -> Todo.ProjectsForm.Model -> Menu.ViewModel Project.Model Msg
-createProjectMenuViewModel model ({ todo, maybeFocusIndex } as form) =
+createProjectMenuViewModel model ({ todo, maybeFocusKey } as form) =
     { items = Model.getActiveProjects model
     , onSelect = Model.SetTodoProject # todo
     , isSelected = Document.hasId (Todo.getProjectId todo)
     , itemDomId = Document.getId >> String.append "project-id-"
     , domId = "project-menu"
     , itemView = Project.getName >> text
-    , maybeFocusIndex = maybeFocusIndex
-    , onFocusIndexChanged = Model.UpdateEditTodoProjectFormFocusIndex form
+    , maybeFocusKey = maybeFocusKey
+    , onFocusIndexChanged = Model.UpdateEditTodoProjectMaybeFocusKey form
     }
 
 
@@ -105,7 +105,7 @@ createContextMenuViewModel model todo =
     , itemDomId = Document.getId >> String.append "context-id-"
     , domId = "context-menu"
     , itemView = Context.getName >> text
-    , maybeFocusIndex = Nothing
+    , maybeFocusKey = Nothing
     , onFocusIndexChanged = (\_ -> commonMsg.noOp)
     }
 

@@ -34,7 +34,27 @@ var _user$project$Menu$boolToTabIndexValue = function (bool) {
 };
 var _user$project$Menu$createItemViewModel = F3(
 	function (menuVM, index, item) {
+		var indexToFocusKey = function (index) {
+			return A2(
+				_elm_community$maybe_extra$Maybe_Extra$orElse,
+				menuVM.maybeFocusKey,
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					A2(_elm_community$list_extra$List_Extra$getAt, index, menuVM.items),
+					menuVM.itemDomId));
+		};
 		var onSelect = menuVM.onSelect(item);
+		var maybeFocusedIndex = function (key) {
+			return A2(
+				_elm_community$list_extra$List_Extra$findIndex,
+				function (_p0) {
+					return A2(
+						_user$project$Ext_Function$equals,
+						key,
+						menuVM.itemDomId(_p0));
+				},
+				menuVM.items);
+		};
 		var clampIndex = _user$project$Ext_List$clampIndexIn(menuVM.items);
 		var selectedIndex = clampIndex(
 			A2(
@@ -42,17 +62,21 @@ var _user$project$Menu$createItemViewModel = F3(
 				A2(_elm_community$list_extra$List_Extra$findIndex, menuVM.isSelected, menuVM.items),
 				0));
 		var focusedIndex = clampIndex(
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='], menuVM.maybeFocusIndex, selectedIndex));
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'], menuVM.maybeFocusKey, maybeFocusedIndex),
+				selectedIndex));
 		var isFocused = _elm_lang$core$Native_Utils.eq(focusedIndex, index);
-		var onKeyDown = function (_p0) {
-			var _p1 = _p0;
-			var onFocusIndexChange = function (_p2) {
+		var onKeyDown = function (_p1) {
+			var _p2 = _p1;
+			var onFocusIndexChange = function (_p3) {
 				return menuVM.onFocusIndexChanged(
-					clampIndex(
-						A2(_user$project$Ext_Function$add, focusedIndex, _p2)));
+					indexToFocusKey(
+						clampIndex(
+							A2(_user$project$Ext_Function$add, focusedIndex, _p3))));
 			};
-			var _p3 = _p1.key;
-			switch (_p3.ctor) {
+			var _p4 = _p2.key;
+			switch (_p4.ctor) {
 				case 'ArrowUp':
 					return onFocusIndexChange(-1);
 				case 'ArrowDown':
@@ -81,7 +105,7 @@ var _user$project$Menu$view = function (vm) {
 			_1: {
 				ctor: '::',
 				_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-					function (_p4) {
+					function (_p5) {
 						return _user$project$Model$commonMsg.noOp;
 					}),
 				_1: {
@@ -120,7 +144,7 @@ var _user$project$Menu$view = function (vm) {
 };
 var _user$project$Menu$ViewModel = F8(
 	function (a, b, c, d, e, f, g, h) {
-		return {items: a, onSelect: b, itemDomId: c, domId: d, itemView: e, isSelected: f, maybeFocusIndex: g, onFocusIndexChanged: h};
+		return {items: a, onSelect: b, itemDomId: c, domId: d, itemView: e, isSelected: f, maybeFocusKey: g, onFocusIndexChanged: h};
 	});
 var _user$project$Menu$ItemViewModel = F6(
 	function (a, b, c, d, e, f) {

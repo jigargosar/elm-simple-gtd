@@ -76,8 +76,8 @@ overlayViews m =
         ++ projectMenu m
 
 
-createProjectMenuViewModel : Model -> Todo.ProjectsForm.Model -> Menu.Config Project.Model Msg
-createProjectMenuViewModel model ({ todo, maybeFocusKey } as form) =
+createProjectMenuConfig : Model -> Todo.ProjectsForm.Model -> Menu.Config Project.Model Msg
+createProjectMenuConfig model ({ todo, maybeFocusKey } as form) =
     { items = Model.getActiveProjects model
     , onSelect = Model.SetTodoProject # todo
     , isSelected = Document.hasId (Todo.getProjectId todo)
@@ -95,12 +95,12 @@ projectMenu : Model -> List (Html Msg)
 projectMenu model =
     model
         |> Model.getMaybeEditTodoProjectForm
-        ?|> (createProjectMenuViewModel model >> Menu.view)
+        ?|> (createProjectMenuConfig model >> Menu.view)
         |> Maybe.toList
 
 
-createContextMenuViewModel : Model -> Todo.Model -> Menu.Config Context.Model Msg
-createContextMenuViewModel model todo =
+createContextMenuConfig : Model -> Todo.Model -> Menu.Config Context.Model Msg
+createContextMenuConfig model todo =
     { items = Model.getActiveContexts model
     , onSelect = Model.SetTodoContext # todo
     , isSelected = Document.hasId (Todo.getContextId todo)
@@ -118,7 +118,7 @@ contextMenu : Model -> List (Html Msg)
 contextMenu model =
     model
         |> Model.getMaybeEditTodoContextForm
-        ?|> (createContextMenuViewModel model >> Menu.view)
+        ?|> (createContextMenuConfig model >> Menu.view)
         |> Maybe.toList
 
 

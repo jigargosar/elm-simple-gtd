@@ -127,12 +127,8 @@ var _user$project$Menu$view = function (vm) {
 			_0: _elm_lang$html$Html_Attributes$class('modal-background'),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(onKeyDown),
-				_1: {
-					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.onOutsideClick),
-					_1: {ctor: '[]'}
-				}
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.onOutsideClick),
+				_1: {ctor: '[]'}
 			}
 		},
 		{
@@ -148,7 +144,11 @@ var _user$project$Menu$view = function (vm) {
 						_1: {
 							ctor: '::',
 							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(onKeyDown),
+								_1: {ctor: '[]'}
+							}
 						}
 					}
 				},

@@ -16,11 +16,7 @@ var _user$project$Menu$menuItem = function (vm) {
 							{
 								ctor: '::',
 								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', vm.shouldAutoFocus),
-								_1: {
-									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'item', true),
-									_1: {ctor: '[]'}
-								}
+								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
 					}
@@ -33,60 +29,59 @@ var _user$project$Menu$menuItem = function (vm) {
 			_1: {ctor: '[]'}
 		});
 };
+var _user$project$Menu$boolToTabIndexValue = function (bool) {
+	return bool ? 0 : -1;
+};
 var _user$project$Menu$createItemViewModel = F3(
 	function (menuVM, index, item) {
+		var onSelect = menuVM.onSelect(item);
 		var clampIndex = _user$project$Ext_List$clampIndexIn(menuVM.items);
 		var selectedIndex = clampIndex(
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 				A2(_elm_community$list_extra$List_Extra$findIndex, menuVM.isSelected, menuVM.items),
 				0));
-		var isSelected = _elm_lang$core$Native_Utils.eq(selectedIndex, index);
 		var focusedIndex = clampIndex(
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='], menuVM.maybeFocusIndex, selectedIndex));
 		var isFocused = _elm_lang$core$Native_Utils.eq(focusedIndex, index);
-		var tabIndexValue = function () {
-			var boolToTabIndexValue = function (bool) {
-				return bool ? 0 : -1;
-			};
-			return boolToTabIndexValue(isFocused);
-		}();
-		var shouldAutoFocus = _elm_lang$core$Native_Utils.eq(tabIndexValue, 0);
 		var onKeyDown = function (_p0) {
 			var _p1 = _p0;
-			return menuVM.onFocusIndexChanged(
-				clampIndex(
-					function () {
-						var _p2 = _p1.key;
-						switch (_p2.ctor) {
-							case 'ArrowUp':
-								return focusedIndex - 1;
-							case 'ArrowDown':
-								return focusedIndex + 1;
-							default:
-								return focusedIndex;
-						}
-					}()));
+			var onFocusIndexChange = function (_p2) {
+				return menuVM.onFocusIndexChanged(
+					clampIndex(
+						A2(_user$project$Ext_Function$add, focusedIndex, _p2)));
+			};
+			var _p3 = _p1.key;
+			switch (_p3.ctor) {
+				case 'ArrowUp':
+					return onFocusIndexChange(-1);
+				case 'ArrowDown':
+					return onFocusIndexChange(1);
+				case 'Enter':
+					return onSelect;
+				default:
+					return onFocusIndexChange(0);
+			}
 		};
 		return {
-			isSelected: isSelected,
-			shouldAutoFocus: shouldAutoFocus,
-			tabIndexValue: tabIndexValue,
-			onClick: menuVM.onSelect(item),
+			isSelected: _elm_lang$core$Native_Utils.eq(selectedIndex, index),
+			shouldAutoFocus: isFocused,
+			tabIndexValue: _user$project$Menu$boolToTabIndexValue(isFocused),
+			onClick: onSelect,
 			view: menuVM.itemView(item),
 			onKeyDown: onKeyDown
 		};
 	});
 var _user$project$Menu$view = function (vm) {
 	return A2(
-		_elm_lang$html$Html$ul,
+		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$class('modal-background'),
 			_1: {
 				ctor: '::',
 				_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-					function (_p3) {
+					function (_p4) {
 						return _user$project$Model$commonMsg.noOp;
 					}),
 				_1: {
@@ -99,7 +94,7 @@ var _user$project$Menu$view = function (vm) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
+				_elm_lang$html$Html$ul,
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$id(vm.domId),

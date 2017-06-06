@@ -1,3 +1,7 @@
+## Upcoming
+* [refactoring] extract generic menu code from context and project menus.
+* [fix] preselect prj/ctx in menu for todo.
+
 ## v0.17.2 - 2017-06-05
 * extract schedule model from todo.
 * extract record update helpers in Ext.Record

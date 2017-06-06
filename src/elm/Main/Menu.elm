@@ -1,6 +1,6 @@
 module Main.Menu exposing (..)
 
-import Main exposing (Model)
+import Model exposing (Model)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)

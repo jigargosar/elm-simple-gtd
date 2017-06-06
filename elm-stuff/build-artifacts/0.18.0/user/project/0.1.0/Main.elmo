@@ -6,10 +6,10 @@ var _user$project$Main$positionProjectDropdownCmd = function (todo) {
 	return _user$project$DomPorts$positionDropdown(
 		{
 			ctor: '_Tuple2',
-			_0: 'project-dropdown',
+			_0: 'project-menu',
 			_1: A2(
 				_elm_lang$core$Basics_ops['++'],
-				'project-dropdown-',
+				'project-menu-',
 				_user$project$Document$getId(todo))
 		});
 };

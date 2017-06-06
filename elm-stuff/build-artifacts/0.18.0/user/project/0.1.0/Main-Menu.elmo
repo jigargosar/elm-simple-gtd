@@ -1,0 +1,51 @@
+var _user$project$Main_Menu$projectMenu = function (model) {
+	var createListItem = F2(
+		function (onItemClick, project) {
+			return A2(
+				_edvail$elm_polymer$Polymer_Paper$item,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						onItemClick(project)),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: function (_p0) {
+						return _elm_lang$html$Html$text(
+							_user$project$Project$getName(_p0));
+					}(project),
+					_1: {ctor: '[]'}
+				});
+		});
+	var view = function (todo) {
+		var onItemClick = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo);
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$material,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id('project-menu'),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_Paper$listbox,
+					{ctor: '[]'},
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+						_user$project$Model$getActiveProjects(model),
+						createListItem(onItemClick))),
+				_1: {ctor: '[]'}
+			});
+	};
+	return _elm_community$maybe_extra$Maybe_Extra$toList(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_user$project$Model$getMaybeEditTodoProjectForm(model),
+			view));
+};

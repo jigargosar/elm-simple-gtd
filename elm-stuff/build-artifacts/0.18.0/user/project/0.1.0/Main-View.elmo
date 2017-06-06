@@ -1,54 +1,3 @@
-var _user$project$Main_View$projectMenu = function (model) {
-	var createListItem = F2(
-		function (onItemClick, project) {
-			return A2(
-				_edvail$elm_polymer$Polymer_Paper$item,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(
-						onItemClick(project)),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: function (_p0) {
-						return _elm_lang$html$Html$text(
-							_user$project$Project$getName(_p0));
-					}(project),
-					_1: {ctor: '[]'}
-				});
-		});
-	var view = function (todo) {
-		var onItemClick = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo);
-		return A2(
-			_edvail$elm_polymer$Polymer_Paper$material,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('project-dropdown'),
-				_1: {
-					ctor: '::',
-					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_Paper$listbox,
-					{ctor: '[]'},
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-						_user$project$Model$getActiveProjects(model),
-						createListItem(onItemClick))),
-				_1: {ctor: '[]'}
-			});
-	};
-	return _elm_community$maybe_extra$Maybe_Extra$toList(
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			_user$project$Model$getMaybeEditTodoProjectForm(model),
-			view));
-};
 var _user$project$Main_View$contextMenu = function (model) {
 	var createListItem = F2(
 		function (onItemClick, context) {
@@ -62,9 +11,9 @@ var _user$project$Main_View$contextMenu = function (model) {
 				},
 				{
 					ctor: '::',
-					_0: function (_p1) {
+					_0: function (_p0) {
 						return _elm_lang$html$Html$text(
-							_user$project$Context$getName(_p1));
+							_user$project$Context$getName(_p0));
 					}(context),
 					_1: {ctor: '[]'}
 				});
@@ -104,7 +53,7 @@ var _user$project$Main_View$overlayViews = function (m) {
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
 		_user$project$Main_View$contextMenu(m),
-		_user$project$Main_View$projectMenu(m));
+		_user$project$Main_Menu$projectMenu(m));
 };
 var _user$project$Main_View$init = F2(
 	function (viewModel, model) {
@@ -120,10 +69,10 @@ var _user$project$Main_View$init = F2(
 				{
 					ctor: '::',
 					_0: function () {
-						var _p2 = _user$project$Model$getMainViewType(model);
-						switch (_p2.ctor) {
+						var _p1 = _user$project$Model$getMainViewType(model);
+						switch (_p1.ctor) {
 							case 'EntityListView':
-								return A3(_user$project$EntityList_View$listView, _p2._0, model, viewModel);
+								return A3(_user$project$EntityList_View$listView, _p1._0, model, viewModel);
 							case 'BinView':
 								return A2(_user$project$View_TodoList$filtered, viewModel, model);
 							case 'DoneView':
@@ -167,9 +116,9 @@ var _user$project$Main_View$init = F2(
 														_edvail$elm_polymer$Polymer_Paper$button,
 														{
 															ctor: '::',
-															_0: function (_p3) {
+															_0: function (_p2) {
 																return _elm_lang$html$Html_Events$onClick(
-																	_user$project$Model$RemotePouchSync(_p3));
+																	_user$project$Model$RemotePouchSync(_p2));
 															}(form),
 															_1: {ctor: '[]'}
 														},

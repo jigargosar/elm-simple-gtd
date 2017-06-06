@@ -73,12 +73,12 @@ init viewModel model =
 
 
 overlayViews m =
-    contextDropdown m
-        ++ projectDropdown m
+    contextMenu m
+        ++ projectMenu m
 
 
-contextDropdown : Model -> List (Html Msg)
-contextDropdown model =
+contextMenu : Model -> List (Html Msg)
+contextMenu model =
     let
         createListItem onItemClick context =
             Paper.item
@@ -98,8 +98,8 @@ contextDropdown model =
         model |> Model.getMaybeEditTodoContextForm ?|> view |> Maybe.toList
 
 
-projectDropdown : Model -> List (Html Msg)
-projectDropdown model =
+projectMenu : Model -> List (Html Msg)
+projectMenu model =
     let
         createListItem onItemClick project =
             Paper.item

@@ -37,7 +37,7 @@ type alias Config item msg =
 
 
 type alias ItemViewModel msg =
-    { shouldAutoFocus : Bool
+    { isFocused : Bool
     , tabIndexValue : Int
     , isSelected : Bool
     , onClick : msg
@@ -82,7 +82,7 @@ createItemViewModel selectedIndex focusedIndex config index item =
             focusedIndex == index
     in
         { isSelected = selectedIndex == index
-        , shouldAutoFocus = isFocused
+        , isFocused = isFocused
         , tabIndexValue = boolToTabIndexValue isFocused
         , onClick = onSelect
         , view = config.itemView item
@@ -147,6 +147,6 @@ menuItem vm =
         [ onClick vm.onClick
         , tabindex vm.tabIndexValue
         , onKeyDown vm.onKeyDown
-        , classList [ "auto-focus" => vm.shouldAutoFocus ]
+        , classList [ "auto-focus" => vm.isFocused ]
         ]
         [ vm.view ]

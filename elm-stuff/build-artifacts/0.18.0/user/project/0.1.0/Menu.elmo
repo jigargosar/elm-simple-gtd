@@ -15,7 +15,7 @@ var _user$project$Menu$menuItem = function (vm) {
 						_0: _elm_lang$html$Html_Attributes$classList(
 							{
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', vm.shouldAutoFocus),
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', vm.isFocused),
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
@@ -68,7 +68,7 @@ var _user$project$Menu$createItemViewModel = F5(
 		var clampIndex = _user$project$Ext_List$clampIndexIn(config.items);
 		return {
 			isSelected: _elm_lang$core$Native_Utils.eq(selectedIndex, index),
-			shouldAutoFocus: isFocused,
+			isFocused: isFocused,
 			tabIndexValue: _user$project$Menu$boolToTabIndexValue(isFocused),
 			onClick: onSelect,
 			view: config.itemView(item),
@@ -172,5 +172,5 @@ var _user$project$Menu$Config = function (a) {
 };
 var _user$project$Menu$ItemViewModel = F6(
 	function (a, b, c, d, e, f) {
-		return {shouldAutoFocus: a, tabIndexValue: b, isSelected: c, onClick: d, onKeyDown: e, view: f};
+		return {isFocused: a, tabIndexValue: b, isSelected: c, onClick: d, onKeyDown: e, view: f};
 	});

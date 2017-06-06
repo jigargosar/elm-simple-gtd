@@ -183,7 +183,73 @@ var _user$project$View$bottomSheet = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
-var _user$project$View$appView = function (m) {
+var _user$project$View$createContextMenuViewModel = F2(
+	function (model, todo) {
+		return {
+			items: _user$project$Model$getActiveContexts(model),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
+			isSelected: _user$project$Document$hasId(
+				_user$project$Todo$getContextId(todo)),
+			itemDomId: function (_p2) {
+				return A2(
+					_elm_lang$core$String$append,
+					'context-id-',
+					_user$project$Document$getId(_p2));
+			},
+			domId: 'context-menu',
+			itemView: function (_p3) {
+				return _elm_lang$html$Html$text(
+					_user$project$Context$getName(_p3));
+			}
+		};
+	});
+var _user$project$View$contextMenu = function (model) {
+	return _elm_community$maybe_extra$Maybe_Extra$toList(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_user$project$Model$getMaybeEditTodoContextForm(model),
+			function (_p4) {
+				return _user$project$Menu$view(
+					A2(_user$project$View$createContextMenuViewModel, model, _p4));
+			}));
+};
+var _user$project$View$createProjectMenuViewModel = F2(
+	function (model, todo) {
+		return {
+			items: _user$project$Model$getActiveProjects(model),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo),
+			isSelected: _user$project$Document$hasId(
+				_user$project$Todo$getProjectId(todo)),
+			itemDomId: function (_p5) {
+				return A2(
+					_elm_lang$core$String$append,
+					'project-id-',
+					_user$project$Document$getId(_p5));
+			},
+			domId: 'project-menu',
+			itemView: function (_p6) {
+				return _elm_lang$html$Html$text(
+					_user$project$Project$getName(_p6));
+			}
+		};
+	});
+var _user$project$View$projectMenu = function (model) {
+	return _elm_community$maybe_extra$Maybe_Extra$toList(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_user$project$Model$getMaybeEditTodoProjectForm(model),
+			function (_p7) {
+				return _user$project$Menu$view(
+					A2(_user$project$View$createProjectMenuViewModel, model, _p7));
+			}));
+};
+var _user$project$View$overlayViews = function (m) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_user$project$View$contextMenu(m),
+		_user$project$View$projectMenu(m));
+};
+var _user$project$View$appView = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -191,23 +257,26 @@ var _user$project$View$appView = function (m) {
 			_0: _elm_lang$html$Html_Attributes$id('app-view'),
 			_1: {ctor: '[]'}
 		},
-		{
-			ctor: '::',
-			_0: _user$project$View$appDrawerLayoutView(m),
-			_1: {
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
 				ctor: '::',
-				_0: _user$project$View$addTodoFab(m),
+				_0: _user$project$View$appDrawerLayoutView(model),
 				_1: {
 					ctor: '::',
-					_0: _user$project$View_ReminderOverlay$showReminderOverlay(m),
+					_0: _user$project$View$addTodoFab(model),
 					_1: {
 						ctor: '::',
-						_0: _user$project$LaunchBar_View$init(m),
-						_1: {ctor: '[]'}
+						_0: _user$project$View_ReminderOverlay$showReminderOverlay(model),
+						_1: {
+							ctor: '::',
+							_0: _user$project$LaunchBar_View$init(model),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
-			}
-		});
+			},
+			_user$project$View$overlayViews(model)));
 };
 var _user$project$View$init = function (m) {
 	return A2(

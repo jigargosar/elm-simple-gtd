@@ -27,7 +27,7 @@ import View.TodoList
 
 init viewModel model =
     div [ id "main-view" ]
-        ([ case Model.getMainViewType model of
+        [ case Model.getMainViewType model of
             EntityListView viewType ->
                 EntityList.View.listView viewType model viewModel
 
@@ -54,49 +54,4 @@ init viewModel model =
                                 [ text "Start Sync" ]
                             ]
                         ]
-         ]
-            ++ (overlayViews model)
-        )
-
-
-overlayViews m =
-    contextMenu m
-        ++ projectMenu m
-
-
-createProjectMenuViewModel : Model -> Todo.Model -> Menu.ViewModel Project.Model Msg
-createProjectMenuViewModel model todo =
-    { items = Model.getActiveProjects model
-    , onSelect = Model.SetTodoProject # todo
-    , isSelected = Document.hasId (Todo.getProjectId todo)
-    , itemDomId = Document.getId >> String.append "project-id-"
-    , domId = "project-menu"
-    , itemView = Project.getName >> text
-    }
-
-
-projectMenu : Model -> List (Html Msg)
-projectMenu model =
-    model
-        |> Model.getMaybeEditTodoProjectForm
-        ?|> (createProjectMenuViewModel model >> Menu.view)
-        |> Maybe.toList
-
-
-createContextMenuViewModel : Model -> Todo.Model -> Menu.ViewModel Context.Model Msg
-createContextMenuViewModel model todo =
-    { items = Model.getActiveContexts model
-    , onSelect = Model.SetTodoContext # todo
-    , isSelected = Document.hasId (Todo.getContextId todo)
-    , itemDomId = Document.getId >> String.append "context-id-"
-    , domId = "context-menu"
-    , itemView = Context.getName >> text
-    }
-
-
-contextMenu : Model -> List (Html Msg)
-contextMenu model =
-    model
-        |> Model.getMaybeEditTodoContextForm
-        ?|> (createContextMenuViewModel model >> Menu.view)
-        |> Maybe.toList
+        ]

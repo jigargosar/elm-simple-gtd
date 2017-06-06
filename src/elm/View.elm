@@ -1,6 +1,7 @@
 module View exposing (init)
 
 import Context
+import Document
 import Dom
 import EditMode
 import Firebase
@@ -46,6 +47,8 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import LaunchBar.View
+import Menu
+import Project
 
 
 init m =
@@ -56,13 +59,58 @@ init m =
         )
 
 
-appView m =
+appView model =
     div [ id "app-view" ]
-        [ appDrawerLayoutView m
-        , addTodoFab m
-        , showReminderOverlay m
-        , LaunchBar.View.init m
-        ]
+        ([ appDrawerLayoutView model
+         , addTodoFab model
+         , showReminderOverlay model
+         , LaunchBar.View.init model
+         ]
+            ++ (overlayViews model)
+        )
+
+
+overlayViews m =
+    contextMenu m
+        ++ projectMenu m
+
+
+createProjectMenuViewModel : Model -> Todo.Model -> Menu.ViewModel Project.Model Msg
+createProjectMenuViewModel model todo =
+    { items = Model.getActiveProjects model
+    , onSelect = Model.SetTodoProject # todo
+    , isSelected = Document.hasId (Todo.getProjectId todo)
+    , itemDomId = Document.getId >> String.append "project-id-"
+    , domId = "project-menu"
+    , itemView = Project.getName >> text
+    }
+
+
+projectMenu : Model -> List (Html Msg)
+projectMenu model =
+    model
+        |> Model.getMaybeEditTodoProjectForm
+        ?|> (createProjectMenuViewModel model >> Menu.view)
+        |> Maybe.toList
+
+
+createContextMenuViewModel : Model -> Todo.Model -> Menu.ViewModel Context.Model Msg
+createContextMenuViewModel model todo =
+    { items = Model.getActiveContexts model
+    , onSelect = Model.SetTodoContext # todo
+    , isSelected = Document.hasId (Todo.getContextId todo)
+    , itemDomId = Document.getId >> String.append "context-id-"
+    , domId = "context-menu"
+    , itemView = Context.getName >> text
+    }
+
+
+contextMenu : Model -> List (Html Msg)
+contextMenu model =
+    model
+        |> Model.getMaybeEditTodoContextForm
+        ?|> (createContextMenuViewModel model >> Menu.view)
+        |> Maybe.toList
 
 
 bottomSheet =

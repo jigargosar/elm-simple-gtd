@@ -1,69 +1,3 @@
-var _user$project$Main_View$createContextMenuViewModel = F2(
-	function (model, todo) {
-		return {
-			items: _user$project$Model$getActiveContexts(model),
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
-			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getContextId(todo)),
-			itemDomId: function (_p0) {
-				return A2(
-					_elm_lang$core$String$append,
-					'context-id-',
-					_user$project$Document$getId(_p0));
-			},
-			domId: 'context-menu',
-			itemView: function (_p1) {
-				return _elm_lang$html$Html$text(
-					_user$project$Context$getName(_p1));
-			}
-		};
-	});
-var _user$project$Main_View$contextMenu = function (model) {
-	return _elm_community$maybe_extra$Maybe_Extra$toList(
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			_user$project$Model$getMaybeEditTodoContextForm(model),
-			function (_p2) {
-				return _user$project$Menu$view(
-					A2(_user$project$Main_View$createContextMenuViewModel, model, _p2));
-			}));
-};
-var _user$project$Main_View$createProjectMenuViewModel = F2(
-	function (model, todo) {
-		return {
-			items: _user$project$Model$getActiveProjects(model),
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo),
-			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getProjectId(todo)),
-			itemDomId: function (_p3) {
-				return A2(
-					_elm_lang$core$String$append,
-					'project-id-',
-					_user$project$Document$getId(_p3));
-			},
-			domId: 'project-menu',
-			itemView: function (_p4) {
-				return _elm_lang$html$Html$text(
-					_user$project$Project$getName(_p4));
-			}
-		};
-	});
-var _user$project$Main_View$projectMenu = function (model) {
-	return _elm_community$maybe_extra$Maybe_Extra$toList(
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			_user$project$Model$getMaybeEditTodoProjectForm(model),
-			function (_p5) {
-				return _user$project$Menu$view(
-					A2(_user$project$Main_View$createProjectMenuViewModel, model, _p5));
-			}));
-};
-var _user$project$Main_View$overlayViews = function (m) {
-	return A2(
-		_elm_lang$core$Basics_ops['++'],
-		_user$project$Main_View$contextMenu(m),
-		_user$project$Main_View$projectMenu(m));
-};
 var _user$project$Main_View$init = F2(
 	function (viewModel, model) {
 		return A2(
@@ -73,77 +7,74 @@ var _user$project$Main_View$init = F2(
 				_0: _elm_lang$html$Html_Attributes$id('main-view'),
 				_1: {ctor: '[]'}
 			},
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				{
-					ctor: '::',
-					_0: function () {
-						var _p6 = _user$project$Model$getMainViewType(model);
-						switch (_p6.ctor) {
-							case 'EntityListView':
-								return A3(_user$project$EntityList_View$listView, _p6._0, model, viewModel);
-							case 'BinView':
-								return A2(_user$project$View_TodoList$filtered, viewModel, model);
-							case 'DoneView':
-								return A2(_user$project$View_TodoList$filtered, viewModel, model);
-							default:
-								var form = _user$project$Model$getRemoteSyncForm(model);
-								return A2(
-									_edvail$elm_polymer$Polymer_Paper$material,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('static layout vertical'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_edvail$elm_polymer$Polymer_Paper$input,
-											{
+			{
+				ctor: '::',
+				_0: function () {
+					var _p0 = _user$project$Model$getMainViewType(model);
+					switch (_p0.ctor) {
+						case 'EntityListView':
+							return A3(_user$project$EntityList_View$listView, _p0._0, model, viewModel);
+						case 'BinView':
+							return A2(_user$project$View_TodoList$filtered, viewModel, model);
+						case 'DoneView':
+							return A2(_user$project$View_TodoList$filtered, viewModel, model);
+						default:
+							var form = _user$project$Model$getRemoteSyncForm(model);
+							return A2(
+								_edvail$elm_polymer$Polymer_Paper$material,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('static layout vertical'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_edvail$elm_polymer$Polymer_Paper$input,
+										{
+											ctor: '::',
+											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'label', 'Cloudant URL or any CouchDB URL'),
+											_1: {
 												ctor: '::',
-												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'label', 'Cloudant URL or any CouchDB URL'),
+												_0: _elm_lang$html$Html_Attributes$value(form.uri),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$value(form.uri),
-													_1: {
-														ctor: '::',
-														_0: _elm_lang$html$Html_Events$onInput(
-															_user$project$Model$UpdateRemoteSyncFormUri(form)),
-														_1: {ctor: '[]'}
-													}
-												}
-											},
-											{ctor: '[]'}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$div,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: A2(
-														_edvail$elm_polymer$Polymer_Paper$button,
-														{
-															ctor: '::',
-															_0: function (_p7) {
-																return _elm_lang$html$Html_Events$onClick(
-																	_user$project$Model$RemotePouchSync(_p7));
-															}(form),
-															_1: {ctor: '[]'}
-														},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text('Start Sync'),
-															_1: {ctor: '[]'}
-														}),
+													_0: _elm_lang$html$Html_Events$onInput(
+														_user$project$Model$UpdateRemoteSyncFormUri(form)),
 													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
-									});
-						}
-					}(),
-					_1: {ctor: '[]'}
-				},
-				_user$project$Main_View$overlayViews(model)));
+												}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_edvail$elm_polymer$Polymer_Paper$button,
+													{
+														ctor: '::',
+														_0: function (_p1) {
+															return _elm_lang$html$Html_Events$onClick(
+																_user$project$Model$RemotePouchSync(_p1));
+														}(form),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Start Sync'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								});
+					}
+				}(),
+				_1: {ctor: '[]'}
+			});
 	});

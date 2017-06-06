@@ -12,9 +12,15 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 
 
-init { onMouseDown } contentList =
+type alias ViewModel msg =
+    { onMouseDown : msg
+    , children : Html msg
+    }
+
+
+init vm =
     div
         [ class "fullbleed-capture"
-        , onMouseDown onMouseDown
+        , onMouseDown vm.onMouseDown
         ]
-        contentList
+        vm.children

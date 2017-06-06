@@ -128,15 +128,18 @@ view vm =
                 .#|> createItemViewModel selectedIndex focusedIndex vm
                 >>> menuItem
     in
-        View.FullBleedCapture.init { onMouseDown = vm.onOutsideMouseDown }
-            [ ul
-                [ id vm.domId
-                , class "menu"
-                , attribute "data-prevent-default-keys" "Tab"
-                , onKeyDownStopPropagation onKeyDown
+        View.FullBleedCapture.init
+            { onMouseDown = vm.onOutsideMouseDown
+            , children =
+                [ ul
+                    [ id vm.domId
+                    , class "menu"
+                    , attribute "data-prevent-default-keys" "Tab"
+                    , onKeyDownStopPropagation onKeyDown
+                    ]
+                    itemViewList
                 ]
-                itemViewList
-            ]
+            }
 
 
 menuItem vm =

@@ -120,40 +120,33 @@ var _user$project$Menu$view = function (vm) {
 				return vm.noOp;
 		}
 	};
-	return A2(
-		_elm_lang$html$Html$div,
+	return _user$project$View_FullBleedCapture$init(
 		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('fullbleed-capture'),
-			_1: {
+			onMouseDown: vm.onOutsideMouseDown,
+			children: {
 				ctor: '::',
-				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.onOutsideClick),
-				_1: {ctor: '[]'}
-			}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$ul,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id(vm.domId),
-					_1: {
+				_0: A2(
+					_elm_lang$html$Html$ul,
+					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('menu'),
+						_0: _elm_lang$html$Html_Attributes$id(vm.domId),
 						_1: {
 							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
+							_0: _elm_lang$html$Html_Attributes$class('menu'),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(onKeyDown),
-								_1: {ctor: '[]'}
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(onKeyDown),
+									_1: {ctor: '[]'}
+								}
 							}
 						}
-					}
-				},
-				itemViewList),
-			_1: {ctor: '[]'}
+					},
+					itemViewList),
+				_1: {ctor: '[]'}
+			}
 		});
 };
 var _user$project$Menu$Config = function (a) {
@@ -166,7 +159,7 @@ var _user$project$Menu$Config = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {items: a, onSelect: b, itemKey: c, domId: d, itemView: e, isSelected: f, maybeFocusKey: g, onFocusIndexChanged: h, noOp: i, onOutsideClick: j};
+										return {items: a, onSelect: b, itemKey: c, domId: d, itemView: e, isSelected: f, maybeFocusKey: g, onFocusIndexChanged: h, noOp: i, onOutsideMouseDown: j};
 									};
 								};
 							};

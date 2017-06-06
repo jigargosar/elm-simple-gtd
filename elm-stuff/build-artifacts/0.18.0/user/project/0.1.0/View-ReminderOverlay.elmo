@@ -1,6 +1,6 @@
 var _user$project$View_ReminderOverlay$activeViewShell = F2(
 	function (todoDetails, children) {
-		var onOutsideClick = _user$project$Model$ReminderOverlayAction(_user$project$ReminderOverlay$Close);
+		var onOutsideMouseDown = _user$project$Model$ReminderOverlayAction(_user$project$ReminderOverlay$Close);
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -8,7 +8,7 @@ var _user$project$View_ReminderOverlay$activeViewShell = F2(
 				_0: _elm_lang$html$Html_Attributes$class('full-view fixed-top'),
 				_1: {
 					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(onOutsideClick),
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(onOutsideMouseDown),
 					_1: {ctor: '[]'}
 				}
 			},

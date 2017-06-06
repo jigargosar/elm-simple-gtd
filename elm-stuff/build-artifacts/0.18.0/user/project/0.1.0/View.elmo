@@ -151,7 +151,7 @@ var _user$project$View$createContextMenuConfig = F2(
 				return _user$project$Model$commonMsg.noOp;
 			},
 			noOp: _user$project$Model$commonMsg.noOp,
-			onOutsideClick: _user$project$Model$DeactivateEditingMode
+			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};
 	});
 var _user$project$View$contextMenu = function (model) {
@@ -187,7 +187,7 @@ var _user$project$View$createProjectMenuConfig = F2(
 			maybeFocusKey: _p5.maybeFocusKey,
 			onFocusIndexChanged: _user$project$Model$UpdateEditTodoProjectMaybeFocusKey(_p5),
 			noOp: _user$project$Model$commonMsg.noOp,
-			onOutsideClick: _user$project$Model$DeactivateEditingMode
+			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};
 	});
 var _user$project$View$projectMenu = function (model) {

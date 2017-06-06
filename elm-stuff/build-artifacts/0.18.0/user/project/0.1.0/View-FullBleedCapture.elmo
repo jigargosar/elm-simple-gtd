@@ -1,0 +1,18 @@
+var _user$project$View_FullBleedCapture$init = function (vm) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('fullbleed-capture'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onMouseDown(vm.onMouseDown),
+				_1: {ctor: '[]'}
+			}
+		},
+		vm.children);
+};
+var _user$project$View_FullBleedCapture$ViewModel = F2(
+	function (a, b) {
+		return {onMouseDown: a, children: b};
+	});

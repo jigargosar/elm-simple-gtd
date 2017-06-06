@@ -43,6 +43,13 @@ type alias ItemViewModel msg =
     }
 
 
+boolToTabIndexValue bool =
+    if bool then
+        0
+    else
+        -1
+
+
 createItemViewModel : ViewModel item msg -> Int -> item -> ItemViewModel msg
 createItemViewModel menuVM index item =
     let
@@ -56,50 +63,34 @@ createItemViewModel menuVM index item =
             menuVM.maybeFocusIndex
                 ?= selectedIndex
                 |> clampIndex
-                |> Debug.log "FI"
-
-        isFocused =
-            focusedIndex == index
-
-        isSelected =
-            selectedIndex == index
-
-        tabIndexValue =
-            let
-                boolToTabIndexValue bool =
-                    if bool then
-                        0
-                    else
-                        -1
-            in
-                isFocused |> boolToTabIndexValue
-
-        shouldAutoFocus =
-            tabIndexValue == 0
-
-        onFocusIndexChange =
-            add focusedIndex >> clampIndex >> menuVM.onFocusIndexChanged
 
         onSelect =
             menuVM.onSelect item
 
         onKeyDown { key } =
-            case key of
-                Key.ArrowUp ->
-                    onFocusIndexChange -1
+            let
+                onFocusIndexChange =
+                    add focusedIndex >> clampIndex >> menuVM.onFocusIndexChanged
+            in
+                case key of
+                    Key.ArrowUp ->
+                        onFocusIndexChange -1
 
-                Key.ArrowDown ->
-                    onFocusIndexChange 1
+                    Key.ArrowDown ->
+                        onFocusIndexChange 1
 
-                Key.Enter ->
-                    onSelect
+                    Key.Enter ->
+                        onSelect
 
-                _ ->
-                    onFocusIndexChange 0
+                    _ ->
+                        onFocusIndexChange 0
+
+        isFocused =
+            focusedIndex == index
     in
-        { isSelected = isSelected
-        , shouldAutoFocus = shouldAutoFocus
-        , tabIndexValue = tabIndexValue
+        { isSelected = selectedIndex == index
+        , shouldAutoFocus = isFocused
+        , tabIndexValue = boolToTabIndexValue isFocused
         , onClick = onSelect
         , view = menuVM.itemView item
         , onKeyDown = onKeyDown

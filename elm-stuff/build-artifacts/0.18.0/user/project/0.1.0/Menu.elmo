@@ -33,6 +33,9 @@ var _user$project$Menu$menuItem = function (vm) {
 			_1: {ctor: '[]'}
 		});
 };
+var _user$project$Menu$boolToTabIndexValue = function (bool) {
+	return bool ? 0 : -1;
+};
 var _user$project$Menu$createItemViewModel = F3(
 	function (menuVM, index, item) {
 		var onSelect = menuVM.onSelect(item);
@@ -42,28 +45,17 @@ var _user$project$Menu$createItemViewModel = F3(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 				A2(_elm_community$list_extra$List_Extra$findIndex, menuVM.isSelected, menuVM.items),
 				0));
-		var isSelected = _elm_lang$core$Native_Utils.eq(selectedIndex, index);
-		var focusedIndex = A2(
-			_elm_lang$core$Debug$log,
-			'FI',
-			clampIndex(
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='], menuVM.maybeFocusIndex, selectedIndex)));
+		var focusedIndex = clampIndex(
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='], menuVM.maybeFocusIndex, selectedIndex));
 		var isFocused = _elm_lang$core$Native_Utils.eq(focusedIndex, index);
-		var tabIndexValue = function () {
-			var boolToTabIndexValue = function (bool) {
-				return bool ? 0 : -1;
+		var onKeyDown = function (_p0) {
+			var _p1 = _p0;
+			var onFocusIndexChange = function (_p2) {
+				return menuVM.onFocusIndexChanged(
+					clampIndex(
+						A2(_user$project$Ext_Function$add, focusedIndex, _p2)));
 			};
-			return boolToTabIndexValue(isFocused);
-		}();
-		var shouldAutoFocus = _elm_lang$core$Native_Utils.eq(tabIndexValue, 0);
-		var onFocusIndexChange = function (_p0) {
-			return menuVM.onFocusIndexChanged(
-				clampIndex(
-					A2(_user$project$Ext_Function$add, focusedIndex, _p0)));
-		};
-		var onKeyDown = function (_p1) {
-			var _p2 = _p1;
-			var _p3 = _p2.key;
+			var _p3 = _p1.key;
 			switch (_p3.ctor) {
 				case 'ArrowUp':
 					return onFocusIndexChange(-1);
@@ -76,9 +68,9 @@ var _user$project$Menu$createItemViewModel = F3(
 			}
 		};
 		return {
-			isSelected: isSelected,
-			shouldAutoFocus: shouldAutoFocus,
-			tabIndexValue: tabIndexValue,
+			isSelected: _elm_lang$core$Native_Utils.eq(selectedIndex, index),
+			shouldAutoFocus: isFocused,
+			tabIndexValue: _user$project$Menu$boolToTabIndexValue(isFocused),
 			onClick: onSelect,
 			view: menuVM.itemView(item),
 			onKeyDown: onKeyDown

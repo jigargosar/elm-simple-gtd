@@ -3,6 +3,8 @@ var _user$project$Main_View$createContextMenuViewModel = F2(
 		return {
 			items: _user$project$Model$getActiveContexts(model),
 			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
+			isSelected: _user$project$Document$hasId(
+				_user$project$Todo$getContextId(todo)),
 			itemDomId: function (_p0) {
 				return A2(
 					_elm_lang$core$String$append,
@@ -31,6 +33,8 @@ var _user$project$Main_View$createProjectMenuViewModel = F2(
 		return {
 			items: _user$project$Model$getActiveProjects(model),
 			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo),
+			isSelected: _user$project$Document$hasId(
+				_user$project$Todo$getProjectId(todo)),
 			itemDomId: function (_p3) {
 				return A2(
 					_elm_lang$core$String$append,

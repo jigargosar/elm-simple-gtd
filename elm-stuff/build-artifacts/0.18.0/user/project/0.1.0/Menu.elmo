@@ -14,6 +14,10 @@ var _user$project$Menu$view = function (vm) {
 				_1: {ctor: '[]'}
 			});
 	};
+	var selectedIndex = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(_elm_community$list_extra$List_Extra$findIndex, vm.isSelected, vm.items),
+		0);
 	return A2(
 		_edvail$elm_polymer$Polymer_Paper$material,
 		{
@@ -29,12 +33,16 @@ var _user$project$Menu$view = function (vm) {
 			ctor: '::',
 			_0: A2(
 				_edvail$elm_polymer$Polymer_Paper$listbox,
-				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(_elm_community$html_extra$Html_Attributes_Extra$intProperty, 'selected', selectedIndex),
+					_1: {ctor: '[]'}
+				},
 				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.items, createListItem)),
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Menu$ViewModel = F5(
-	function (a, b, c, d, e) {
-		return {items: a, onSelect: b, itemDomId: c, domId: d, itemView: e};
+var _user$project$Menu$ViewModel = F6(
+	function (a, b, c, d, e, f) {
+		return {items: a, onSelect: b, itemDomId: c, domId: d, itemView: e, isSelected: f};
 	});

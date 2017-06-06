@@ -68,6 +68,7 @@ createProjectMenuViewModel : Model -> Todo.Model -> Menu.ViewModel Project.Model
 createProjectMenuViewModel model todo =
     { items = Model.getActiveProjects model
     , onSelect = Model.SetTodoProject # todo
+    , isSelected = Document.hasId (Todo.getProjectId todo)
     , itemDomId = Document.getId >> String.append "project-id-"
     , domId = "project-menu"
     , itemView = Project.getName >> text
@@ -86,6 +87,7 @@ createContextMenuViewModel : Model -> Todo.Model -> Menu.ViewModel Context.Model
 createContextMenuViewModel model todo =
     { items = Model.getActiveContexts model
     , onSelect = Model.SetTodoContext # todo
+    , isSelected = Document.hasId (Todo.getContextId todo)
     , itemDomId = Document.getId >> String.append "context-id-"
     , domId = "context-menu"
     , itemView = Context.getName >> text

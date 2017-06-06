@@ -1,6 +1,7 @@
 module Menu exposing (..)
 
 import Document
+import Html.Attributes.Extra exposing (intProperty)
 import Model exposing (Model)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -24,17 +25,21 @@ type alias ViewModel item msg =
     , itemDomId : item -> String
     , domId : String
     , itemView : item -> Html msg
+    , isSelected : item -> Bool
     }
 
 
 view vm =
     let
+        selectedIndex =
+            vm.items |> List.findIndex vm.isSelected ?= 0
+
         createListItem item =
             Paper.item
                 [ onClick (vm.onSelect item) ]
                 [ vm.itemView item ]
     in
         Paper.material [ id vm.domId, attribute "data-prevent-default-keys" "Tab" ]
-            [ Paper.listbox []
+            [ Paper.listbox [ intProperty "selected" selectedIndex ]
                 (vm.items .|> createListItem)
             ]

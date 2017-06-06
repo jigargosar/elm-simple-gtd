@@ -1,8 +1,10 @@
 module Menu exposing (..)
 
 import Document
-import Ext.Keyboard exposing (onKeyDownStopPropagation)
+import Ext.Keyboard exposing (KeyboardEvent, onKeyDownStopPropagation)
+import Ext.List as List
 import Html.Attributes.Extra exposing (intProperty)
+import Keyboard.Extra as Key
 import Model exposing (Model, commonMsg)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -36,19 +38,28 @@ type alias ItemViewModel msg =
     , tabIndexValue : Int
     , isSelected : Bool
     , onClick : msg
+    , onKeyDown : KeyboardEvent -> msg
     , view : Html msg
     }
-
-
-isIndexSelected vm =
-    vm.items |> List.findIndex vm.isSelected ?= 0 |> equals
 
 
 createItemViewModel : ViewModel item msg -> Int -> item -> ItemViewModel msg
 createItemViewModel menuVM index item =
     let
-        shouldAutoFocus =
-            tabIndexValue == 0
+        clampIndex =
+            List.clampIndexIn menuVM.items
+
+        selectedIndex =
+            menuVM.items |> List.findIndex menuVM.isSelected ?= 0 |> clampIndex
+
+        focusedIndex =
+            menuVM.maybeFocusIndex ?= selectedIndex |> clampIndex
+
+        isFocused =
+            focusedIndex == index
+
+        isSelected =
+            selectedIndex == index
 
         tabIndexValue =
             let
@@ -58,16 +69,31 @@ createItemViewModel menuVM index item =
                     else
                         -1
             in
-                menuVM.maybeFocusIndex ?|> equals index ?= isSelected |> boolToTabIndexValue
+                isFocused |> boolToTabIndexValue
 
-        isSelected =
-            index |> isIndexSelected menuVM
+        shouldAutoFocus =
+            tabIndexValue == 0
+
+        onKeyDown { key } =
+            (case key of
+                Key.ArrowUp ->
+                    focusedIndex - 1
+
+                Key.ArrowDown ->
+                    focusedIndex + 1
+
+                _ ->
+                    focusedIndex
+            )
+                |> clampIndex
+                |> menuVM.onFocusIndexChanged
     in
         { isSelected = isSelected
         , shouldAutoFocus = shouldAutoFocus
         , tabIndexValue = tabIndexValue
         , onClick = menuVM.onSelect item
         , view = menuVM.itemView item
+        , onKeyDown = onKeyDown
         }
 
 

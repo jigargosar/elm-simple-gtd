@@ -24,7 +24,7 @@ import Todo
 type alias ViewModel item msg =
     { items : List item
     , onSelect : item -> msg
-    , itemDomId : item -> String
+    , itemKey : item -> String
     , domId : String
     , itemView : item -> Html msg
     , isSelected : item -> Bool
@@ -50,6 +50,14 @@ boolToTabIndexValue bool =
         -1
 
 
+findMaybeFocusedIndex vm =
+    let
+        findIndexOfItemWithKey key =
+            List.findIndex (vm.itemKey >> equals key) vm.items
+    in
+        vm.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn vm.items
+
+
 createItemViewModel : ViewModel item msg -> Int -> item -> ItemViewModel msg
 createItemViewModel menuVM index item =
     let
@@ -59,21 +67,14 @@ createItemViewModel menuVM index item =
         selectedIndex =
             menuVM.items |> List.findIndex menuVM.isSelected ?= 0 |> clampIndex
 
-        maybeFocusedIndex key =
-            menuVM.items
-                |> List.findIndex (menuVM.itemDomId >> equals key)
-
         focusedIndex =
-            menuVM.maybeFocusKey
-                ?+> maybeFocusedIndex
-                ?= selectedIndex
-                |> clampIndex
+            findMaybeFocusedIndex menuVM ?= selectedIndex
 
         onSelect =
             menuVM.onSelect item
 
         indexToFocusKey index =
-            menuVM.items |> List.getAt index ?|> menuVM.itemDomId |> Maybe.orElse menuVM.maybeFocusKey
+            List.getAt index menuVM.items ?|> menuVM.itemKey |> Maybe.orElse menuVM.maybeFocusKey
 
         onKeyDown { key } =
             let

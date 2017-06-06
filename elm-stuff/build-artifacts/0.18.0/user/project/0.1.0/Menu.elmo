@@ -29,6 +29,26 @@ var _user$project$Menu$menuItem = function (vm) {
 			_1: {ctor: '[]'}
 		});
 };
+var _user$project$Menu$findMaybeFocusedIndex = function (vm) {
+	var findIndexOfItemWithKey = function (key) {
+		return A2(
+			_elm_community$list_extra$List_Extra$findIndex,
+			function (_p0) {
+				return A2(
+					_user$project$Ext_Function$equals,
+					key,
+					vm.itemKey(_p0));
+			},
+			vm.items);
+	};
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
+		vm.maybeFocusKey,
+		A2(
+			_user$project$Ext_Function_Infix_ops['>>?'],
+			findIndexOfItemWithKey,
+			_user$project$Ext_List$clampIndexIn(vm.items)));
+};
 var _user$project$Menu$boolToTabIndexValue = function (bool) {
 	return bool ? 0 : -1;
 };
@@ -41,31 +61,19 @@ var _user$project$Menu$createItemViewModel = F3(
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 					A2(_elm_community$list_extra$List_Extra$getAt, index, menuVM.items),
-					menuVM.itemDomId));
+					menuVM.itemKey));
 		};
 		var onSelect = menuVM.onSelect(item);
-		var maybeFocusedIndex = function (key) {
-			return A2(
-				_elm_community$list_extra$List_Extra$findIndex,
-				function (_p0) {
-					return A2(
-						_user$project$Ext_Function$equals,
-						key,
-						menuVM.itemDomId(_p0));
-				},
-				menuVM.items);
-		};
 		var clampIndex = _user$project$Ext_List$clampIndexIn(menuVM.items);
 		var selectedIndex = clampIndex(
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 				A2(_elm_community$list_extra$List_Extra$findIndex, menuVM.isSelected, menuVM.items),
 				0));
-		var focusedIndex = clampIndex(
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'], menuVM.maybeFocusKey, maybeFocusedIndex),
-				selectedIndex));
+		var focusedIndex = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			_user$project$Menu$findMaybeFocusedIndex(menuVM),
+			selectedIndex);
 		var isFocused = _elm_lang$core$Native_Utils.eq(focusedIndex, index);
 		var onKeyDown = function (_p1) {
 			var _p2 = _p1;
@@ -144,7 +152,7 @@ var _user$project$Menu$view = function (vm) {
 };
 var _user$project$Menu$ViewModel = F8(
 	function (a, b, c, d, e, f, g, h) {
-		return {items: a, onSelect: b, itemDomId: c, domId: d, itemView: e, isSelected: f, maybeFocusKey: g, onFocusIndexChanged: h};
+		return {items: a, onSelect: b, itemKey: c, domId: d, itemView: e, isSelected: f, maybeFocusKey: g, onFocusIndexChanged: h};
 	});
 var _user$project$Menu$ItemViewModel = F6(
 	function (a, b, c, d, e, f) {

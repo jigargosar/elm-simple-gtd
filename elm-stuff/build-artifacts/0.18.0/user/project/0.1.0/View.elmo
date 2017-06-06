@@ -135,7 +135,7 @@ var _user$project$View$createContextMenuViewModel = F2(
 			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
 			isSelected: _user$project$Document$hasId(
 				_user$project$Todo$getContextId(todo)),
-			itemDomId: function (_p0) {
+			itemKey: function (_p0) {
 				return A2(
 					_elm_lang$core$String$append,
 					'context-id-',
@@ -171,7 +171,7 @@ var _user$project$View$createProjectMenuViewModel = F2(
 			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p8),
 			isSelected: _user$project$Document$hasId(
 				_user$project$Todo$getProjectId(_p8)),
-			itemDomId: function (_p6) {
+			itemKey: function (_p6) {
 				return A2(
 					_elm_lang$core$String$append,
 					'project-id-',

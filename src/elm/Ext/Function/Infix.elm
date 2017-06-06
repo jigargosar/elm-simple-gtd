@@ -6,6 +6,11 @@ module Ext.Function.Infix exposing (..)
 infixr 5 =>
 
 
+(.#|>) =
+    flip List.indexedMap
+infixl 0 .#|>
+
+
 (?>>) f1 f2 =
     f1 >> Maybe.map f2
 infixl 9 ?>>
@@ -32,11 +37,10 @@ infixl 9 >>?+
 
 
 {-|
-```elm
-(\x y -> bar <| foo x y)
--- becomes
-bar <<< foo
-```
+
+    (\x y -> bar <| foo x y)
+    -- becomes
+    bar <<< foo
 -}
 (<<<) : (c -> d) -> (a -> b -> c) -> a -> b -> d
 (<<<) =
@@ -44,11 +48,10 @@ bar <<< foo
 
 
 {-|
-```elm
-(\x y z -> foo x y z |> bar)
--- becomes
-foo >>>> bar
-```
+
+    (\x y z -> foo x y z |> bar)
+    -- becomes
+    foo >>>> bar
 -}
 (>>>>) : (a -> b -> c -> d) -> (d -> e) -> a -> b -> c -> e
 (>>>>) fff f x y z =
@@ -56,11 +59,10 @@ foo >>>> bar
 
 
 {-|
-```elm
-(\x y z -> bar <| foo x y z)
--- becomes
-bar <<<< foo
-```
+
+    (\x y z -> bar <| foo x y z)
+    -- becomes
+    bar <<<< foo
 -}
 (<<<<) : (d -> e) -> (a -> b -> c -> d) -> a -> b -> c -> e
 (<<<<) =

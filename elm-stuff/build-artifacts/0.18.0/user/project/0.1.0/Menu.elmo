@@ -29,8 +29,6 @@ var _user$project$Menu$menuItem = function (vm) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Menu_ops = _user$project$Menu_ops || {};
-_user$project$Menu_ops['.#|>'] = _elm_lang$core$Basics$flip(_elm_lang$core$List$indexedMap);
 var _user$project$Menu$findMaybeFocusedIndex = function (vm) {
 	var findIndexOfItemWithKey = function (key) {
 		return A2(
@@ -88,6 +86,13 @@ var _user$project$Menu$view = function (vm) {
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 		_user$project$Menu$findMaybeFocusedIndex(vm),
 		selectedIndex);
+	var itemViewList = A2(
+		_user$project$Ext_Function_Infix_ops['.#|>'],
+		vm.items,
+		A2(
+			_user$project$Ext_Function_Infix_ops['>>>'],
+			A3(_user$project$Menu$createItemViewModel, selectedIndex, focusedIndex, vm),
+			_user$project$Menu$menuItem));
 	var onKeyDown = function (_p4) {
 		var _p5 = _p4;
 		var indexToFocusKey = function (index) {
@@ -147,13 +152,7 @@ var _user$project$Menu$view = function (vm) {
 						}
 					}
 				},
-				A2(
-					_user$project$Menu_ops['.#|>'],
-					vm.items,
-					A2(
-						_user$project$Ext_Function_Infix_ops['>>>'],
-						A3(_user$project$Menu$createItemViewModel, selectedIndex, focusedIndex, vm),
-						_user$project$Menu$menuItem))),
+				itemViewList),
 			_1: {ctor: '[]'}
 		});
 };

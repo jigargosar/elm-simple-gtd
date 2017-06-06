@@ -121,6 +121,11 @@ view vm =
 
                     _ ->
                         vm.noOp
+
+        itemViewList =
+            vm.items
+                .#|> createItemViewModel selectedIndex focusedIndex vm
+                >>> menuItem
     in
         div
             [ class "modal-background"
@@ -132,18 +137,8 @@ view vm =
                 , class "menu"
                 , attribute "data-prevent-default-keys" "Tab"
                 ]
-                (vm.items
-                    .#|>
-                        (createItemViewModel selectedIndex focusedIndex vm
-                            >>> menuItem
-                        )
-                )
+                itemViewList
             ]
-
-
-(.#|>) =
-    flip List.indexedMap
-infixl 0 .#|>
 
 
 menuItem vm =

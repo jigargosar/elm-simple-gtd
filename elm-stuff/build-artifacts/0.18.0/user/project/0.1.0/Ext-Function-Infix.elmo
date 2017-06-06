@@ -63,6 +63,8 @@ _user$project$Ext_Function_Infix_ops['?>>'] = F2(
 		};
 	});
 var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
+_user$project$Ext_Function_Infix_ops['.#|>'] = _elm_lang$core$Basics$flip(_elm_lang$core$List$indexedMap);
+var _user$project$Ext_Function_Infix_ops = _user$project$Ext_Function_Infix_ops || {};
 _user$project$Ext_Function_Infix_ops['=>'] = F2(
 	function (v0, v1) {
 		return {ctor: '_Tuple2', _0: v0, _1: v1};

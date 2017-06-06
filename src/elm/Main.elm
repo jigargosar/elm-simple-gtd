@@ -507,7 +507,7 @@ positionContextDropdownCmd todo =
 
 
 positionProjectDropdownCmd todo =
-    DomPorts.positionDropdown ( "project-dropdown", "project-dropdown-" ++ Document.getId todo )
+    DomPorts.positionDropdown ( "project-menu", "project-menu-" ++ Document.getId todo )
 
 
 startSyncWithFirebase user =

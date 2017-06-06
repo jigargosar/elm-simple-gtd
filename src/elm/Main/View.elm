@@ -96,24 +96,3 @@ contextMenu model =
                     ]
     in
         model |> Model.getMaybeEditTodoContextForm ?|> view |> Maybe.toList
-
-
-projectMenu : Model -> List (Html Msg)
-projectMenu model =
-    let
-        createListItem onItemClick project =
-            Paper.item
-                [ onClick (onItemClick project) ]
-                [ project |> Project.getName >> text ]
-
-        view todo =
-            let
-                onItemClick =
-                    Model.SetTodoProject # todo
-            in
-                Paper.material [ id "project-dropdown", attribute "data-prevent-default-keys" "Tab" ]
-                    [ Paper.listbox []
-                        (Model.getActiveProjects model .|> createListItem onItemClick)
-                    ]
-    in
-        model |> Model.getMaybeEditTodoProjectForm ?|> view |> Maybe.toList

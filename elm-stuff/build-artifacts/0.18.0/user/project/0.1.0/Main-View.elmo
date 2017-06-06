@@ -1,4 +1,4 @@
-var _user$project$Main_View$projectDropdown = function (model) {
+var _user$project$Main_View$projectMenu = function (model) {
 	var createListItem = F2(
 		function (onItemClick, project) {
 			return A2(
@@ -49,7 +49,7 @@ var _user$project$Main_View$projectDropdown = function (model) {
 			_user$project$Model$getMaybeEditTodoProjectForm(model),
 			view));
 };
-var _user$project$Main_View$contextDropdown = function (model) {
+var _user$project$Main_View$contextMenu = function (model) {
 	var createListItem = F2(
 		function (onItemClick, context) {
 			return A2(
@@ -103,8 +103,8 @@ var _user$project$Main_View$contextDropdown = function (model) {
 var _user$project$Main_View$overlayViews = function (m) {
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
-		_user$project$Main_View$contextDropdown(m),
-		_user$project$Main_View$projectDropdown(m));
+		_user$project$Main_View$contextMenu(m),
+		_user$project$Main_View$projectMenu(m));
 };
 var _user$project$Main_View$init = F2(
 	function (viewModel, model) {

@@ -30,21 +30,40 @@ type alias ViewModel item msg =
     }
 
 
+boolToTabIndexValue bool =
+    if bool then
+        0
+    else
+        -1
+
+
+isIndexSelected vm =
+    vm.items |> List.findIndex vm.isSelected ?= 0 |> equals
+
+
 view vm =
     let
-        selectedIndex =
-            vm.items |> List.findIndex vm.isSelected ?= 0
-
-        createListItem item =
-            div
-                [ onClick (vm.onSelect item) ]
-                [ vm.itemView item ]
+        getAutoFocusAndTabIndex =
+            isIndexSelected vm >> apply2 ( identity, boolToTabIndexValue )
     in
         div
             [ class "modal-background"
             , onKeyDownStopPropagation ((\_ -> commonMsg.noOp))
             , onClickStopPropagation Model.DeactivateEditingMode
             ]
-            [ div [ id vm.domId, attribute "data-prevent-default-keys" "Tab" ]
-                (vm.items .|> createListItem)
+            [ div
+                [ id vm.domId
+                , class "menu"
+                , attribute "data-prevent-default-keys" "Tab"
+                ]
+                (vm.items |> List.indexedMap (getAutoFocusAndTabIndex >> menuItem vm))
             ]
+
+
+menuItem vm ( shouldAutoFocus, tabindexValue ) item =
+    div
+        [ onClick (vm.onSelect item)
+        , tabindex tabindexValue
+        , classList [ "auto-focus" => shouldAutoFocus, "item" => True ]
+        ]
+        [ vm.itemView item ]

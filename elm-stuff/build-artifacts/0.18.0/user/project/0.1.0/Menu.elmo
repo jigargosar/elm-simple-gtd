@@ -1,23 +1,54 @@
-var _user$project$Menu$view = function (vm) {
-	var createListItem = function (item) {
+var _user$project$Menu$menuItem = F3(
+	function (vm, _p0, item) {
+		var _p1 = _p0;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Events$onClick(
 					vm.onSelect(item)),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$tabindex(_p1._1),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', _p1._0),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'item', true),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
 			},
 			{
 				ctor: '::',
 				_0: vm.itemView(item),
 				_1: {ctor: '[]'}
 			});
+	});
+var _user$project$Menu$isIndexSelected = function (vm) {
+	return _user$project$Ext_Function$equals(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(_elm_community$list_extra$List_Extra$findIndex, vm.isSelected, vm.items),
+			0));
+};
+var _user$project$Menu$boolToTabIndexValue = function (bool) {
+	return bool ? 0 : -1;
+};
+var _user$project$Menu$view = function (vm) {
+	var getAutoFocusAndTabIndex = function (_p2) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
+			{ctor: '_Tuple2', _0: _elm_lang$core$Basics$identity, _1: _user$project$Menu$boolToTabIndexValue},
+			A2(_user$project$Menu$isIndexSelected, vm, _p2));
 	};
-	var selectedIndex = A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-		A2(_elm_community$list_extra$List_Extra$findIndex, vm.isSelected, vm.items),
-		0);
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -26,7 +57,7 @@ var _user$project$Menu$view = function (vm) {
 			_1: {
 				ctor: '::',
 				_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-					function (_p0) {
+					function (_p3) {
 						return _user$project$Model$commonMsg.noOp;
 					}),
 				_1: {
@@ -45,11 +76,23 @@ var _user$project$Menu$view = function (vm) {
 					_0: _elm_lang$html$Html_Attributes$id(vm.domId),
 					_1: {
 						ctor: '::',
-						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('menu'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
+							_1: {ctor: '[]'}
+						}
 					}
 				},
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.items, createListItem)),
+				A2(
+					_elm_lang$core$List$indexedMap,
+					function (_p4) {
+						return A2(
+							_user$project$Menu$menuItem,
+							vm,
+							getAutoFocusAndTabIndex(_p4));
+					},
+					vm.items)),
 			_1: {ctor: '[]'}
 		});
 };

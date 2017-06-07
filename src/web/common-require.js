@@ -3,7 +3,7 @@ require("babel-polyfill")
 require("./bower_components/webcomponentsjs/webcomponents-loader")
 
 // style
-require("materialize-css/bin/materialize.css")
+// require("materialize-css/bin/materialize.css")
 require("./pcss/main.pcss")
 
 

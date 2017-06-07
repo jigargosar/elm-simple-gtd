@@ -127,7 +127,7 @@ view items config =
             , children =
                 [ ul
                     [ id config.domId
-                    , class "menu"
+                    , class "menu collection"
                     , attribute "data-prevent-default-keys" "Tab"
                     ]
                     itemViewList
@@ -164,10 +164,14 @@ boolToTabIndexValue bool =
 
 
 menuItemView itemVM =
-    li
+    a
         [ onClick itemVM.onClick
         , tabindex itemVM.tabIndexValue
         , onKeyDownStopPropagation itemVM.onKeyDown
-        , classList [ "auto-focus" => itemVM.isFocused ]
+        , classList
+            [ "auto-focus" => itemVM.isFocused
+            , "collection-item" => True
+            , "active" => itemVM.isSelected
+            ]
         ]
         [ itemVM.view ]

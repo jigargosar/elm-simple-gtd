@@ -1,7 +1,7 @@
 {
   "name": "isobject",
   "description": "Returns true if the value is an object and not an array or null.",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "homepage": "https://github.com/jonschlinkert/isobject",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/isobject",
@@ -19,9 +19,7 @@
   "scripts": {
     "test": "mocha"
   },
-  "dependencies": {
-    "isarray": "1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "gulp-format-md": "^0.1.9",
     "mocha": "^2.4.5"
@@ -43,10 +41,10 @@
   "verb": {
     "related": {
       "list": [
-        "merge-deep",
         "extend-shallow",
         "is-plain-object",
-        "kind-of"
+        "kind-of",
+        "merge-deep"
       ]
     },
     "toc": false,
@@ -63,5 +61,10 @@
     "reflinks": [
       "verb"
     ]
-  }
+  },
+  "contributors": [
+    "Jon Schlinkert <jon.schlinkert@sellside.com> (http://twitter.com/jonschlinkert)",
+    "(https://github.com/LeSuisse)",
+    "Tom MacWright <tom@macwright.org> (http://macwright.org)"
+  ]
 }

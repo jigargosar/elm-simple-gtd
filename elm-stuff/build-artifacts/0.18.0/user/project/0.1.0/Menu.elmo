@@ -1,6 +1,6 @@
 var _user$project$Menu$menuItemView = function (itemVM) {
 	return A2(
-		_elm_lang$html$Html$li,
+		_elm_lang$html$Html$a,
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Events$onClick(itemVM.onClick),
@@ -16,7 +16,15 @@ var _user$project$Menu$menuItemView = function (itemVM) {
 							{
 								ctor: '::',
 								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', itemVM.isFocused),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'collection-item', true),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'active', itemVM.isSelected),
+										_1: {ctor: '[]'}
+									}
+								}
 							}),
 						_1: {ctor: '[]'}
 					}
@@ -152,7 +160,7 @@ var _user$project$Menu$view = F2(
 							_0: _elm_lang$html$Html_Attributes$id(config.domId),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('menu'),
+								_0: _elm_lang$html$Html_Attributes$class('menu collection'),
 								_1: {
 									ctor: '::',
 									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),

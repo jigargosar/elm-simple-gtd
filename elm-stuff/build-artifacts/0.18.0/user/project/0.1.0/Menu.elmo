@@ -34,7 +34,6 @@ var _user$project$Menu$boolToTabIndexValue = function (bool) {
 };
 var _user$project$Menu$createItemViewModel = F4(
 	function (menuVM, config, index, item) {
-		var onSelect = config.onSelect(item);
 		var _p0 = menuVM;
 		var selectedIndex = _p0.selectedIndex;
 		var focusedIndex = _p0.focusedIndex;
@@ -46,7 +45,7 @@ var _user$project$Menu$createItemViewModel = F4(
 			isSelected: _elm_lang$core$Native_Utils.eq(selectedIndex, index),
 			isFocused: isFocused,
 			tabIndexValue: _user$project$Menu$boolToTabIndexValue(isFocused),
-			onClick: onSelect,
+			onClick: config.onSelect(item),
 			view: config.itemView(item),
 			onKeyDown: onKeyDown
 		};
@@ -82,6 +81,7 @@ var _user$project$Menu$createViewModel = function (config) {
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 		_user$project$Menu$findMaybeFocusedIndex(config),
 		selectedIndex);
+	var isFocusedAt = _user$project$Ext_Function$equals(focusedIndex);
 	var maybeFocusedItem = A2(_elm_community$list_extra$List_Extra$getAt, focusedIndex, config.items);
 	var onFocusedItemKeyDown = function (_p3) {
 		var _p4 = _p3;
@@ -118,7 +118,22 @@ var _user$project$Menu$createViewModel = function (config) {
 				return config.noOp;
 		}
 	};
-	return {selectedIndex: selectedIndex, focusedIndex: focusedIndex, onFocusedItemKeyDown: onFocusedItemKeyDown};
+	var onKeyDownAt = function (index) {
+		return isFocusedAt(index) ? onFocusedItemKeyDown : function (_p7) {
+			return config.noOp;
+		};
+	};
+	return {
+		selectedIndex: selectedIndex,
+		focusedIndex: focusedIndex,
+		isFocusedAt: isFocusedAt,
+		tabIndexValueAt: function (_p8) {
+			return _user$project$Menu$boolToTabIndexValue(
+				isFocusedAt(_p8));
+		},
+		onFocusedItemKeyDown: onFocusedItemKeyDown,
+		onKeyDownAt: onKeyDownAt
+	};
 };
 var _user$project$Menu$view = function (config) {
 	var menuVM = _user$project$Menu$createViewModel(config);
@@ -175,9 +190,9 @@ var _user$project$Menu$Config = function (a) {
 		};
 	};
 };
-var _user$project$Menu$ViewModel = F3(
-	function (a, b, c) {
-		return {selectedIndex: a, focusedIndex: b, onFocusedItemKeyDown: c};
+var _user$project$Menu$ViewModel = F6(
+	function (a, b, c, d, e, f) {
+		return {selectedIndex: a, focusedIndex: b, isFocusedAt: c, tabIndexValueAt: d, onFocusedItemKeyDown: e, onKeyDownAt: f};
 	});
 var _user$project$Menu$ItemViewModel = F6(
 	function (a, b, c, d, e, f) {

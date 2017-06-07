@@ -39,7 +39,10 @@ type alias Config item msg =
 type alias ViewModel msg =
     { selectedIndex : Int
     , focusedIndex : Int
+    , isFocusedAt : Int -> Bool
+    , tabIndexValueAt : Int -> Int
     , onFocusedItemKeyDown : KeyboardEvent -> msg
+    , onKeyDownAt : Int -> KeyboardEvent -> msg
     }
 
 
@@ -54,6 +57,9 @@ createViewModel config =
 
         focusedIndex =
             findMaybeFocusedIndex config ?= selectedIndex
+
+        isFocusedAt =
+            equals focusedIndex
 
         maybeFocusedItem =
             List.getAt focusedIndex config.items
@@ -82,10 +88,19 @@ createViewModel config =
 
                     _ ->
                         config.noOp
+
+        onKeyDownAt index =
+            if isFocusedAt index then
+                onFocusedItemKeyDown
+            else
+                (\_ -> config.noOp)
     in
         { selectedIndex = selectedIndex
         , focusedIndex = focusedIndex
+        , isFocusedAt = isFocusedAt
+        , tabIndexValueAt = isFocusedAt >> boolToTabIndexValue
         , onFocusedItemKeyDown = onFocusedItemKeyDown
+        , onKeyDownAt = onKeyDownAt
         }
 
 

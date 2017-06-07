@@ -50,6 +50,7 @@ import Json.Encode as E
 import LaunchBar.View
 import Menu
 import Project
+import Todo.View.Menu
 
 
 init m =
@@ -79,12 +80,10 @@ overlayViews model =
                     LaunchBar.View.init form model
 
                 EditMode.EditTodoContext form ->
-                    createContextMenuConfig form model
-                        |> Menu.view (Model.getActiveContexts model)
+                    Todo.View.Menu.context form model
 
                 EditMode.EditTodoProject form ->
-                    createProjectMenuConfig form model
-                        |> Menu.view (Model.getActiveProjects model)
+                    Todo.View.Menu.project form model
 
                 _ ->
                     span [] []
@@ -93,34 +92,6 @@ overlayViews model =
         , View.ReminderOverlay.maybe model
         ]
             |> List.filterMap identity
-
-
-createProjectMenuConfig : Todo.ProjectsForm.Model -> Model -> Menu.Config Project.Model Msg
-createProjectMenuConfig ({ todo, maybeFocusKey } as form) model =
-    { onSelect = Model.SetTodoProject # todo
-    , isSelected = Document.hasId (Todo.getProjectId todo)
-    , itemKey = Document.getId >> String.append "project-id-"
-    , domId = "project-menu"
-    , itemView = Project.getName >> text
-    , maybeFocusKey = maybeFocusKey
-    , onFocusIndexChanged = Model.UpdateEditTodoProjectMaybeFocusKey form
-    , noOp = commonMsg.noOp
-    , onOutsideMouseDown = Model.DeactivateEditingMode
-    }
-
-
-createContextMenuConfig : Todo.Model -> Model -> Menu.Config Context.Model Msg
-createContextMenuConfig todo model =
-    { onSelect = Model.SetTodoContext # todo
-    , isSelected = Document.hasId (Todo.getContextId todo)
-    , itemKey = Document.getId >> String.append "context-id-"
-    , domId = "context-menu"
-    , itemView = Context.getName >> text
-    , maybeFocusKey = Nothing
-    , onFocusIndexChanged = (\_ -> commonMsg.noOp)
-    , noOp = commonMsg.noOp
-    , onOutsideMouseDown = Model.DeactivateEditingMode
-    }
 
 
 bottomSheet =

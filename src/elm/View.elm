@@ -79,11 +79,11 @@ overlayViews model =
                     LaunchBar.View.init form model
 
                 EditMode.EditTodoContext form ->
-                    createContextMenuConfig model form
+                    createContextMenuConfig form model
                         |> Menu.view (Model.getActiveContexts model)
 
                 EditMode.EditTodoProject form ->
-                    createProjectMenuConfig model form
+                    createProjectMenuConfig form model
                         |> Menu.view (Model.getActiveProjects model)
 
                 _ ->
@@ -95,8 +95,8 @@ overlayViews model =
             |> List.filterMap identity
 
 
-createProjectMenuConfig : Model -> Todo.ProjectsForm.Model -> Menu.Config Project.Model Msg
-createProjectMenuConfig model ({ todo, maybeFocusKey } as form) =
+createProjectMenuConfig : Todo.ProjectsForm.Model -> Model -> Menu.Config Project.Model Msg
+createProjectMenuConfig ({ todo, maybeFocusKey } as form) model =
     { onSelect = Model.SetTodoProject # todo
     , isSelected = Document.hasId (Todo.getProjectId todo)
     , itemKey = Document.getId >> String.append "project-id-"
@@ -109,8 +109,8 @@ createProjectMenuConfig model ({ todo, maybeFocusKey } as form) =
     }
 
 
-createContextMenuConfig : Model -> Todo.Model -> Menu.Config Context.Model Msg
-createContextMenuConfig model todo =
+createContextMenuConfig : Todo.Model -> Model -> Menu.Config Context.Model Msg
+createContextMenuConfig todo model =
     { onSelect = Model.SetTodoContext # todo
     , isSelected = Document.hasId (Todo.getContextId todo)
     , itemKey = Document.getId >> String.append "context-id-"

@@ -143,14 +143,6 @@ createItemViewModel menuVM config index item =
         onSelect =
             config.onSelect item
 
-        onFocusedItemKeyDown { key } =
-            case key of
-                Key.Enter ->
-                    onSelect
-
-                _ ->
-                    config.noOp
-
         isFocused =
             focusedIndex == index
 

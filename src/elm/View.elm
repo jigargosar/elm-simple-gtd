@@ -19,7 +19,7 @@ import Polymer.Firebase
 import ReminderOverlay
 import Set
 import OldGroupEntity.ViewModel
-import Todo.ProjectsForm
+import Todo.GroupListForm
 import View.Header
 import Main.View
 import View.TodoList

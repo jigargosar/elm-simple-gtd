@@ -7,7 +7,7 @@ import LaunchBar.Form
 import Project
 import Todo
 import Todo.NewForm
-import Todo.ProjectsForm
+import Todo.GroupListForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -51,8 +51,8 @@ type EditMode
     | EditProject EditProjectForm
       -- overlay
     | EditTodoReminder Todo.ReminderForm.Model
-    | EditTodoContext Todo.Model
-    | EditTodoProject Todo.ProjectsForm.Model
+    | EditTodoContext Todo.GroupListForm.Model
+    | EditTodoProject Todo.GroupListForm.Model
     | LaunchBar LaunchBar.Form.Model
       -- different page !!
     | EditSyncSettings SyncForm

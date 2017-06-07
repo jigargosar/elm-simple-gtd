@@ -482,14 +482,15 @@ var _user$project$Model$startEditingEntity = F2(
 			A2(_user$project$Model$createEntityEditForm, entity, model),
 			model);
 	});
+var _user$project$Model$startEditingTodoContext = function (todo) {
+	return _user$project$Model$setEditMode(
+		_user$project$EditMode$EditTodoContext(
+			_user$project$Todo_GroupListForm$init(todo)));
+};
 var _user$project$Model$startEditingTodoProject = function (todo) {
 	return _user$project$Model$setEditMode(
 		_user$project$EditMode$EditTodoProject(
-			_user$project$Todo_ProjectsForm$init(todo)));
-};
-var _user$project$Model$startEditingTodoContext = function (todo) {
-	return _user$project$Model$setEditMode(
-		_user$project$EditMode$EditTodoContext(todo));
+			_user$project$Todo_GroupListForm$init(todo)));
 };
 var _user$project$Model$startEditingReminder = function (todo) {
 	return _user$project$Model$updateEditModeM(
@@ -1343,6 +1344,10 @@ var _user$project$Model$UpdateReminderForm = F2(
 var _user$project$Model$UpdateTodoForm = F2(
 	function (a, b) {
 		return {ctor: 'UpdateTodoForm', _0: a, _1: b};
+	});
+var _user$project$Model$UpdateEditTodoContextMaybeFocusKey = F2(
+	function (a, b) {
+		return {ctor: 'UpdateEditTodoContextMaybeFocusKey', _0: a, _1: b};
 	});
 var _user$project$Model$UpdateEditTodoProjectMaybeFocusKey = F2(
 	function (a, b) {

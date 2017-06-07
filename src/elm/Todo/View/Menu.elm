@@ -16,29 +16,10 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Todo.ProjectsForm
+import Todo.GroupListForm
 
 
-createContextMenuConfig : Todo.Model -> Model.Model -> Menu.Config Context.Model Model.Msg
-createContextMenuConfig todo model =
-    { onSelect = Model.SetTodoContext # todo
-    , isSelected = Document.hasId (Todo.getContextId todo)
-    , itemKey = Document.getId >> String.append "context-id-"
-    , domId = "context-menu"
-    , itemView = Context.getName >> text
-    , maybeFocusKey = Nothing
-    , onFocusIndexChanged = (\_ -> commonMsg.noOp)
-    , noOp = commonMsg.noOp
-    , onOutsideMouseDown = Model.DeactivateEditingMode
-    }
-
-
-context form model =
-    createContextMenuConfig form model
-        |> Menu.view (Model.getActiveContexts model)
-
-
-createProjectMenuConfig : Todo.ProjectsForm.Model -> Model.Model -> Menu.Config Project.Model Model.Msg
+createProjectMenuConfig : Todo.GroupListForm.Model -> Model.Model -> Menu.Config Project.Model Model.Msg
 createProjectMenuConfig ({ todo, maybeFocusKey } as form) model =
     { onSelect = Model.SetTodoProject # todo
     , isSelected = Document.hasId (Todo.getProjectId todo)
@@ -55,3 +36,22 @@ createProjectMenuConfig ({ todo, maybeFocusKey } as form) model =
 project form model =
     createProjectMenuConfig form model
         |> Menu.view (Model.getActiveProjects model)
+
+
+createContextMenuConfig : Todo.GroupListForm.Model -> Model.Model -> Menu.Config Context.Model Model.Msg
+createContextMenuConfig ({ todo, maybeFocusKey } as form) model =
+    { onSelect = Model.SetTodoContext # todo
+    , isSelected = Document.hasId (Todo.getContextId todo)
+    , itemKey = Document.getId >> String.append "context-id-"
+    , domId = "context-menu"
+    , itemView = Context.getName >> text
+    , maybeFocusKey = maybeFocusKey
+    , onFocusIndexChanged = Model.UpdateEditTodoContextMaybeFocusKey form
+    , noOp = commonMsg.noOp
+    , onOutsideMouseDown = Model.DeactivateEditingMode
+    }
+
+
+context form model =
+    createContextMenuConfig form model
+        |> Menu.view (Model.getActiveContexts model)

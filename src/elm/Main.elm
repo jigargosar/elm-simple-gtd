@@ -29,7 +29,7 @@ import Store
 import String.Extra
 import Todo
 import Todo.Form
-import Todo.ProjectsForm
+import Todo.GroupListForm
 import Todo.ReminderForm
 import Navigation exposing (Location)
 import Return
@@ -246,8 +246,16 @@ update msg =
 
                 UpdateEditTodoProjectMaybeFocusKey form maybeFocusKey ->
                     Return.map
-                        (Todo.ProjectsForm.setMaybeFocusKey maybeFocusKey form
+                        (Todo.GroupListForm.setMaybeFocusKey maybeFocusKey form
                             |> EditMode.EditTodoProject
+                            >> Model.setEditMode
+                        )
+                        >> autoFocusInputCmd
+
+                UpdateEditTodoContextMaybeFocusKey form maybeFocusKey ->
+                    Return.map
+                        (Todo.GroupListForm.setMaybeFocusKey maybeFocusKey form
+                            |> EditMode.EditTodoContext
                             >> Model.setEditMode
                         )
                         >> autoFocusInputCmd

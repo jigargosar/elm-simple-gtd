@@ -1,4 +1,4 @@
-module Todo.ProjectsForm exposing (..)
+module Todo.GroupListForm exposing (..)
 
 import Todo
 import Toolkit.Helpers exposing (..)

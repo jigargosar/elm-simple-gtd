@@ -137,9 +137,6 @@ createItemViewModel menuVM config index item =
         { selectedIndex, focusedIndex } =
             menuVM
 
-        onSelect =
-            config.onSelect item
-
         isFocused =
             focusedIndex == index
 
@@ -152,7 +149,7 @@ createItemViewModel menuVM config index item =
         { isSelected = selectedIndex == index
         , isFocused = isFocused
         , tabIndexValue = boolToTabIndexValue isFocused
-        , onClick = onSelect
+        , onClick = config.onSelect item
         , view = config.itemView item
         , onKeyDown = onKeyDown
         }

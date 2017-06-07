@@ -123,21 +123,22 @@ view config =
 
         onKeyDown { key } =
             let
-                indexToFocusKey index =
-                    List.getAt index config.items ?|> config.itemKey |> Maybe.orElse config.maybeFocusKey
-
-                onFocusIndexChange =
-                    add vm.focusedIndex
-                        >> clampIndex
-                        >> indexToFocusKey
-                        >> config.onFocusIndexChanged
+                moveFocusIndexBy offset =
+                    let
+                        indexToFocusKey index =
+                            List.getAt index config.items ?|> config.itemKey |> Maybe.orElse config.maybeFocusKey
+                    in
+                        offset
+                            |> add vm.focusedIndex
+                            >> clampIndex
+                            >> indexToFocusKey
             in
                 case key of
                     Key.ArrowUp ->
-                        onFocusIndexChange -1
+                        moveFocusIndexBy -1 |> config.onFocusIndexChanged
 
                     Key.ArrowDown ->
-                        onFocusIndexChange 1
+                        moveFocusIndexBy 1 |> config.onFocusIndexChanged
 
                     _ ->
                         config.noOp

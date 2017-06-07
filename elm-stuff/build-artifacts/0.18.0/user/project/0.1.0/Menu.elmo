@@ -49,17 +49,31 @@ var _user$project$Menu$findMaybeFocusedIndex = function (vm) {
 			findIndexOfItemWithKey,
 			_user$project$Ext_List$clampIndexIn(vm.items)));
 };
+var _user$project$Menu$createViewModel = function (config) {
+	var clampIndex = _user$project$Ext_List$clampIndexIn(config.items);
+	var selectedIndex = clampIndex(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(_elm_community$list_extra$List_Extra$findIndex, config.isSelected, config.items),
+			0));
+	var focusedIndex = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		_user$project$Menu$findMaybeFocusedIndex(config),
+		selectedIndex);
+	return {selectedIndex: selectedIndex, focusedIndex: focusedIndex};
+};
 var _user$project$Menu$boolToTabIndexValue = function (bool) {
 	return bool ? 0 : -1;
 };
-var _user$project$Menu$createItemViewModel = F5(
-	function (selectedIndex, focusedIndex, config, index, item) {
-		var isFocused = _elm_lang$core$Native_Utils.eq(focusedIndex, index);
+var _user$project$Menu$createItemViewModel = F4(
+	function (_p1, config, index, item) {
+		var _p2 = _p1;
+		var isFocused = _elm_lang$core$Native_Utils.eq(_p2.focusedIndex, index);
 		var onSelect = config.onSelect(item);
-		var onKeyDown = function (_p1) {
-			var _p2 = _p1;
-			var _p3 = _p2.key;
-			if (_p3.ctor === 'Enter') {
+		var onKeyDown = function (_p3) {
+			var _p4 = _p3;
+			var _p5 = _p4.key;
+			if (_p5.ctor === 'Enter') {
 				return onSelect;
 			} else {
 				return config.noOp;
@@ -67,7 +81,7 @@ var _user$project$Menu$createItemViewModel = F5(
 		};
 		var clampIndex = _user$project$Ext_List$clampIndexIn(config.items);
 		return {
-			isSelected: _elm_lang$core$Native_Utils.eq(selectedIndex, index),
+			isSelected: _elm_lang$core$Native_Utils.eq(_p2.selectedIndex, index),
 			isFocused: isFocused,
 			tabIndexValue: _user$project$Menu$boolToTabIndexValue(isFocused),
 			onClick: onSelect,
@@ -75,61 +89,56 @@ var _user$project$Menu$createItemViewModel = F5(
 			onKeyDown: onKeyDown
 		};
 	});
-var _user$project$Menu$view = function (vm) {
-	var clampIndex = _user$project$Ext_List$clampIndexIn(vm.items);
-	var selectedIndex = clampIndex(
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(_elm_community$list_extra$List_Extra$findIndex, vm.isSelected, vm.items),
-			0));
-	var focusedIndex = A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-		_user$project$Menu$findMaybeFocusedIndex(vm),
-		selectedIndex);
-	var itemViewList = A2(
-		_user$project$Ext_Function_Infix_ops['.#|>'],
-		vm.items,
-		A2(
-			_user$project$Ext_Function_Infix_ops['>>>'],
-			A3(_user$project$Menu$createItemViewModel, selectedIndex, focusedIndex, vm),
-			_user$project$Menu$menuItem));
-	var onKeyDown = function (_p4) {
-		var _p5 = _p4;
-		var indexToFocusKey = function (index) {
-			return A2(
-				_elm_community$maybe_extra$Maybe_Extra$orElse,
-				vm.maybeFocusKey,
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-					A2(_elm_community$list_extra$List_Extra$getAt, index, vm.items),
-					vm.itemKey));
-		};
-		var onFocusIndexChange = function (_p6) {
-			return vm.onFocusIndexChanged(
-				indexToFocusKey(
+var _user$project$Menu$view = function (config) {
+	var clampIndex = _user$project$Ext_List$clampIndexIn(config.items);
+	var vm = _user$project$Menu$createViewModel(config);
+	var onKeyDown = function (_p6) {
+		var _p7 = _p6;
+		var moveFocusIndexBy = function (offset) {
+			var indexToFocusKey = function (index) {
+				return A2(
+					_elm_community$maybe_extra$Maybe_Extra$orElse,
+					config.maybeFocusKey,
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						A2(_elm_community$list_extra$List_Extra$getAt, index, config.items),
+						config.itemKey));
+			};
+			return function (_p8) {
+				return indexToFocusKey(
 					clampIndex(
-						A2(_user$project$Ext_Function$add, focusedIndex, _p6))));
+						A2(_user$project$Ext_Function$add, vm.focusedIndex, _p8)));
+			}(offset);
 		};
-		var _p7 = _p5.key;
-		switch (_p7.ctor) {
+		var _p9 = _p7.key;
+		switch (_p9.ctor) {
 			case 'ArrowUp':
-				return onFocusIndexChange(-1);
+				return config.onFocusIndexChanged(
+					moveFocusIndexBy(-1));
 			case 'ArrowDown':
-				return onFocusIndexChange(1);
+				return config.onFocusIndexChanged(
+					moveFocusIndexBy(1));
 			default:
-				return vm.noOp;
+				return config.noOp;
 		}
 	};
+	var itemViewList = A2(
+		_user$project$Ext_Function_Infix_ops['.#|>'],
+		config.items,
+		A2(
+			_user$project$Ext_Function_Infix_ops['>>>'],
+			A2(_user$project$Menu$createItemViewModel, vm, config),
+			_user$project$Menu$menuItem));
 	return _user$project$View_FullBleedCapture$init(
 		{
-			onMouseDown: vm.onOutsideMouseDown,
+			onMouseDown: config.onOutsideMouseDown,
 			children: {
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$ul,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$id(vm.domId),
+						_0: _elm_lang$html$Html_Attributes$id(config.domId),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$class('menu'),
@@ -170,6 +179,10 @@ var _user$project$Menu$Config = function (a) {
 		};
 	};
 };
+var _user$project$Menu$ViewModel = F2(
+	function (a, b) {
+		return {selectedIndex: a, focusedIndex: b};
+	});
 var _user$project$Menu$ItemViewModel = F6(
 	function (a, b, c, d, e, f) {
 		return {isFocused: a, tabIndexValue: b, isSelected: c, onClick: d, onKeyDown: e, view: f};

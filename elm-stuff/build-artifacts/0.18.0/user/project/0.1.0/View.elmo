@@ -179,26 +179,26 @@ var _user$project$View$createProjectMenuConfig = F2(
 		};
 	});
 var _user$project$View$overlayViews = function (model) {
-	var editModeView = function () {
+	var editModeOverlayView = function () {
 		var _p8 = _user$project$Model$getEditMode(model);
 		switch (_p8.ctor) {
 			case 'LaunchBar':
-				return _elm_lang$core$Maybe$Just(
-					A2(_user$project$LaunchBar_View$init, _p8._0, model));
+				return A2(_user$project$LaunchBar_View$init, _p8._0, model);
 			case 'EditTodoContext':
-				return _elm_lang$core$Maybe$Just(
-					A2(
-						_user$project$Menu$view,
-						_user$project$Model$getActiveContexts(model),
-						A2(_user$project$View$createContextMenuConfig, model, _p8._0)));
+				return A2(
+					_user$project$Menu$view,
+					_user$project$Model$getActiveContexts(model),
+					A2(_user$project$View$createContextMenuConfig, model, _p8._0));
 			case 'EditTodoProject':
-				return _elm_lang$core$Maybe$Just(
-					A2(
-						_user$project$Menu$view,
-						_user$project$Model$getActiveProjects(model),
-						A2(_user$project$View$createProjectMenuConfig, model, _p8._0)));
+				return A2(
+					_user$project$Menu$view,
+					_user$project$Model$getActiveProjects(model),
+					A2(_user$project$View$createProjectMenuConfig, model, _p8._0));
 			default:
-				return _elm_lang$core$Maybe$Nothing;
+				return A2(
+					_elm_lang$html$Html$span,
+					{ctor: '[]'},
+					{ctor: '[]'});
 		}
 	}();
 	return A2(
@@ -206,7 +206,7 @@ var _user$project$View$overlayViews = function (model) {
 		_elm_lang$core$Basics$identity,
 		{
 			ctor: '::',
-			_0: editModeView,
+			_0: _elm_lang$core$Maybe$Just(editModeOverlayView),
 			_1: {
 				ctor: '::',
 				_0: _user$project$View_ReminderOverlay$maybe(model),

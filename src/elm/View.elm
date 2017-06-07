@@ -73,26 +73,23 @@ appView model =
 
 overlayViews model =
     let
-        editModeView =
+        editModeOverlayView =
             case Model.getEditMode model of
                 EditMode.LaunchBar form ->
                     LaunchBar.View.init form model
-                        |> Just
 
                 EditMode.EditTodoContext form ->
                     createContextMenuConfig model form
                         |> Menu.view (Model.getActiveContexts model)
-                        |> Just
 
                 EditMode.EditTodoProject form ->
                     createProjectMenuConfig model form
                         |> Menu.view (Model.getActiveProjects model)
-                        |> Just
 
                 _ ->
-                    Nothing
+                    span [] []
     in
-        [ editModeView
+        [ Just editModeOverlayView
         , View.ReminderOverlay.maybe model
         ]
             |> List.filterMap identity

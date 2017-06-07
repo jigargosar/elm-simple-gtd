@@ -112,14 +112,12 @@ var _user$project$View_ReminderOverlay$reminderOverlayActiveView = F2(
 				});
 		}
 	});
-var _user$project$View_ReminderOverlay$showReminderOverlay = function (m) {
+var _user$project$View_ReminderOverlay$maybe = function (m) {
 	var _p2 = m.reminderOverlay;
 	if (_p2.ctor === 'Active') {
-		return A2(_user$project$View_ReminderOverlay$reminderOverlayActiveView, _p2._0, _p2._1);
+		return _elm_lang$core$Maybe$Just(
+			A2(_user$project$View_ReminderOverlay$reminderOverlayActiveView, _p2._0, _p2._1));
 	} else {
-		return A2(
-			_elm_lang$html$Html$span,
-			{ctor: '[]'},
-			{ctor: '[]'});
+		return _elm_lang$core$Maybe$Nothing;
 	}
 };

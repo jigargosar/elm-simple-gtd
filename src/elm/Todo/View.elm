@@ -255,7 +255,7 @@ doneIconButton vm =
 
 contextButton vm =
     Paper.button
-        [ id (" context-menu-" ++ vm.key)
+        [ id ("context-menu-" ++ vm.key)
         , style [ "height" => "24px" ]
         , class "small padding-0 margin-0 shrink"
         , vm.tabindexAV

@@ -25,13 +25,13 @@ import String.Extra as String
 maybe m =
     case Model.getEditMode m of
         EditMode.LaunchBar form ->
-            formView form m |> Just
+            init form m |> Just
 
         _ ->
             Nothing
 
 
-formView form m =
+init form m =
     let
         fuzzyResults =
             LaunchBar.getFuzzyResults form.input (Model.getActiveContexts m) (Model.getActiveProjects m)

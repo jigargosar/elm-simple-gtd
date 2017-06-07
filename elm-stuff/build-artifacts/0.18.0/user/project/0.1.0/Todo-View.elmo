@@ -1,3 +1,5 @@
+var _user$project$Todo_View$contextMenu = _user$project$Todo_View_Menu$context;
+var _user$project$Todo_View$projectMenu = _user$project$Todo_View_Menu$project;
 var _user$project$Todo_View$editView = function (edit) {
 	return {
 		ctor: '::',

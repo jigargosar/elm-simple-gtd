@@ -80,10 +80,10 @@ overlayViews model =
                     LaunchBar.View.init form model
 
                 EditMode.EditTodoContext form ->
-                    Todo.View.Menu.context form model
+                    Todo.View.contextMenu form model
 
                 EditMode.EditTodoProject form ->
-                    Todo.View.Menu.project form model
+                    Todo.View.projectMenu form model
 
                 _ ->
                     span [] []

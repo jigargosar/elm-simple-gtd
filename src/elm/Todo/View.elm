@@ -32,6 +32,7 @@ import Time.Format
 import Todo
 import Todo.Form
 import Todo.ReminderForm
+import Todo.View.Menu
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -446,3 +447,11 @@ editView edit =
         , defaultOkCancelDeleteButtons edit.onDeleteClicked
         ]
     ]
+
+
+projectMenu =
+    Todo.View.Menu.project
+
+
+contextMenu =
+    Todo.View.Menu.context

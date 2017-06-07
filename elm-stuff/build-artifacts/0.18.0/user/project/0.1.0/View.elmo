@@ -135,9 +135,9 @@ var _user$project$View$overlayViews = function (model) {
 			case 'LaunchBar':
 				return A2(_user$project$LaunchBar_View$init, _p0._0, model);
 			case 'EditTodoContext':
-				return A2(_user$project$Todo_View_Menu$context, _p0._0, model);
+				return A2(_user$project$Todo_View$contextMenu, _p0._0, model);
 			case 'EditTodoProject':
-				return A2(_user$project$Todo_View_Menu$project, _p0._0, model);
+				return A2(_user$project$Todo_View$projectMenu, _p0._0, model);
 			default:
 				return A2(
 					_elm_lang$html$Html$span,

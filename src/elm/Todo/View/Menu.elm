@@ -1,10 +1,12 @@
 module Todo.View.Menu exposing (..)
 
 import Context
+import Context.View
 import Document
 import Menu
 import Model exposing (commonMsg)
 import Project
+import Project.View
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -23,7 +25,7 @@ createProjectMenuConfig : Todo.GroupListForm.Model -> Model.Model -> Menu.Config
 createProjectMenuConfig ({ todo } as form) model =
     { onSelect = Model.SetTodoProject # todo
     , isSelected = Document.hasId (Todo.getProjectId todo)
-    , itemKey = Document.getId >> String.append "project-id-"
+    , itemKey = Project.View.getKey
     , domId = "project-menu"
     , itemView = Project.getName >> text
     , onStateChanged = Model.OnEditTodoProjectMenuStateChanged form
@@ -41,7 +43,7 @@ createContextMenuConfig : Todo.GroupListForm.Model -> Model.Model -> Menu.Config
 createContextMenuConfig ({ todo } as form) model =
     { onSelect = Model.SetTodoContext # todo
     , isSelected = Document.hasId (Todo.getContextId todo)
-    , itemKey = Document.getId >> String.append "context-id-"
+    , itemKey = Context.View.getKey
     , domId = "context-menu"
     , itemView = Context.getName >> text
     , onStateChanged = Model.OnEditTodoContextMenuStateChanged form

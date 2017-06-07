@@ -1345,13 +1345,13 @@ var _user$project$Model$UpdateTodoForm = F2(
 	function (a, b) {
 		return {ctor: 'UpdateTodoForm', _0: a, _1: b};
 	});
-var _user$project$Model$UpdateEditTodoContextMaybeFocusKey = F2(
+var _user$project$Model$OnEditTodoContextMenuStateChanged = F2(
 	function (a, b) {
-		return {ctor: 'UpdateEditTodoContextMaybeFocusKey', _0: a, _1: b};
+		return {ctor: 'OnEditTodoContextMenuStateChanged', _0: a, _1: b};
 	});
-var _user$project$Model$UpdateEditTodoProjectMaybeFocusKey = F2(
+var _user$project$Model$OnEditTodoProjectMenuStateChanged = F2(
 	function (a, b) {
-		return {ctor: 'UpdateEditTodoProjectMaybeFocusKey', _0: a, _1: b};
+		return {ctor: 'OnEditTodoProjectMenuStateChanged', _0: a, _1: b};
 	});
 var _user$project$Model$UpdateRemoteSyncFormUri = F2(
 	function (a, b) {

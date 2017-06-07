@@ -36,18 +36,17 @@ type alias Config item msg =
     }
 
 
-type alias ViewModel msg =
-    { selectedIndex : Int
-    , focusedIndex : Int
-    , isFocusedAt : Int -> Bool
+type alias ViewModel item msg =
+    { isFocusedAt : Int -> Bool
     , isSelectedAt : Int -> Bool
     , tabIndexValueAt : Int -> Int
-    , onFocusedItemKeyDown : KeyboardEvent -> msg
     , onKeyDownAt : Int -> KeyboardEvent -> msg
+    , onSelect : item -> msg
+    , itemView : item -> Html msg
     }
 
 
-createViewModel : Config item msg -> ViewModel msg
+createViewModel : Config item msg -> ViewModel item msg
 createViewModel config =
     let
         clampIndex =
@@ -96,13 +95,12 @@ createViewModel config =
             else
                 (\_ -> config.noOp)
     in
-        { selectedIndex = selectedIndex
-        , focusedIndex = focusedIndex
-        , isFocusedAt = isFocusedAt
+        { isFocusedAt = isFocusedAt
         , isSelectedAt = equals selectedIndex
         , tabIndexValueAt = isFocusedAt >> boolToTabIndexValue
-        , onFocusedItemKeyDown = onFocusedItemKeyDown
         , onKeyDownAt = onKeyDownAt
+        , onSelect = config.onSelect
+        , itemView = config.itemView
         }
 
 
@@ -122,7 +120,7 @@ view config =
 
         itemViewList =
             config.items
-                .#|> createItemViewModel menuVM config
+                .#|> createItemViewModel menuVM
                 >>> menuItemView
     in
         View.FullBleedCapture.init
@@ -148,13 +146,13 @@ type alias ItemViewModel msg =
     }
 
 
-createItemViewModel : ViewModel msg -> Config item msg -> Int -> item -> ItemViewModel msg
-createItemViewModel menuVM config index item =
+createItemViewModel : ViewModel item msg -> Int -> item -> ItemViewModel msg
+createItemViewModel menuVM index item =
     { isSelected = menuVM.isSelectedAt index
     , isFocused = menuVM.isFocusedAt index
     , tabIndexValue = menuVM.tabIndexValueAt index
-    , onClick = config.onSelect item
-    , view = config.itemView item
+    , onClick = menuVM.onSelect item
+    , view = menuVM.itemView item
     , onKeyDown = menuVM.onKeyDownAt index
     }
 

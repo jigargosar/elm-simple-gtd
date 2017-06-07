@@ -32,33 +32,26 @@ var _user$project$Menu$menuItemView = function (itemVM) {
 var _user$project$Menu$boolToTabIndexValue = function (bool) {
 	return bool ? 0 : -1;
 };
-var _user$project$Menu$createItemViewModel = F4(
-	function (menuVM, config, index, item) {
-		var _p0 = menuVM;
-		var selectedIndex = _p0.selectedIndex;
-		var focusedIndex = _p0.focusedIndex;
-		var isFocused = _elm_lang$core$Native_Utils.eq(focusedIndex, index);
-		var onKeyDown = isFocused ? menuVM.onFocusedItemKeyDown : function (_p1) {
-			return config.noOp;
-		};
+var _user$project$Menu$createItemViewModel = F3(
+	function (menuVM, index, item) {
 		return {
-			isSelected: _elm_lang$core$Native_Utils.eq(selectedIndex, index),
-			isFocused: isFocused,
-			tabIndexValue: _user$project$Menu$boolToTabIndexValue(isFocused),
-			onClick: config.onSelect(item),
-			view: config.itemView(item),
-			onKeyDown: onKeyDown
+			isSelected: menuVM.isSelectedAt(index),
+			isFocused: menuVM.isFocusedAt(index),
+			tabIndexValue: menuVM.tabIndexValueAt(index),
+			onClick: menuVM.onSelect(item),
+			view: menuVM.itemView(item),
+			onKeyDown: menuVM.onKeyDownAt(index)
 		};
 	});
 var _user$project$Menu$findMaybeFocusedIndex = function (vm) {
 	var findIndexOfItemWithKey = function (key) {
 		return A2(
 			_elm_community$list_extra$List_Extra$findIndex,
-			function (_p2) {
+			function (_p0) {
 				return A2(
 					_user$project$Ext_Function$equals,
 					key,
-					vm.itemKey(_p2));
+					vm.itemKey(_p0));
 			},
 			vm.items);
 	};
@@ -83,8 +76,8 @@ var _user$project$Menu$createViewModel = function (config) {
 		selectedIndex);
 	var isFocusedAt = _user$project$Ext_Function$equals(focusedIndex);
 	var maybeFocusedItem = A2(_elm_community$list_extra$List_Extra$getAt, focusedIndex, config.items);
-	var onFocusedItemKeyDown = function (_p3) {
-		var _p4 = _p3;
+	var onFocusedItemKeyDown = function (_p1) {
+		var _p2 = _p1;
 		var moveFocusIndexBy = function (offset) {
 			var indexToFocusKey = function (index) {
 				return A2(
@@ -95,14 +88,14 @@ var _user$project$Menu$createViewModel = function (config) {
 						A2(_elm_community$list_extra$List_Extra$getAt, index, config.items),
 						config.itemKey));
 			};
-			return function (_p5) {
+			return function (_p3) {
 				return indexToFocusKey(
 					clampIndex(
-						A2(_user$project$Ext_Function$add, focusedIndex, _p5)));
+						A2(_user$project$Ext_Function$add, focusedIndex, _p3)));
 			}(offset);
 		};
-		var _p6 = _p4.key;
-		switch (_p6.ctor) {
+		var _p4 = _p2.key;
+		switch (_p4.ctor) {
 			case 'Enter':
 				return A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
@@ -119,20 +112,20 @@ var _user$project$Menu$createViewModel = function (config) {
 		}
 	};
 	var onKeyDownAt = function (index) {
-		return isFocusedAt(index) ? onFocusedItemKeyDown : function (_p7) {
+		return isFocusedAt(index) ? onFocusedItemKeyDown : function (_p5) {
 			return config.noOp;
 		};
 	};
 	return {
-		selectedIndex: selectedIndex,
-		focusedIndex: focusedIndex,
 		isFocusedAt: isFocusedAt,
-		tabIndexValueAt: function (_p8) {
+		isSelectedAt: _user$project$Ext_Function$equals(selectedIndex),
+		tabIndexValueAt: function (_p6) {
 			return _user$project$Menu$boolToTabIndexValue(
-				isFocusedAt(_p8));
+				isFocusedAt(_p6));
 		},
-		onFocusedItemKeyDown: onFocusedItemKeyDown,
-		onKeyDownAt: onKeyDownAt
+		onKeyDownAt: onKeyDownAt,
+		onSelect: config.onSelect,
+		itemView: config.itemView
 	};
 };
 var _user$project$Menu$view = function (config) {
@@ -142,7 +135,7 @@ var _user$project$Menu$view = function (config) {
 		config.items,
 		A2(
 			_user$project$Ext_Function_Infix_ops['>>>'],
-			A2(_user$project$Menu$createItemViewModel, menuVM, config),
+			_user$project$Menu$createItemViewModel(menuVM),
 			_user$project$Menu$menuItemView));
 	return _user$project$View_FullBleedCapture$init(
 		{
@@ -192,7 +185,7 @@ var _user$project$Menu$Config = function (a) {
 };
 var _user$project$Menu$ViewModel = F6(
 	function (a, b, c, d, e, f) {
-		return {selectedIndex: a, focusedIndex: b, isFocusedAt: c, tabIndexValueAt: d, onFocusedItemKeyDown: e, onKeyDownAt: f};
+		return {isFocusedAt: a, isSelectedAt: b, tabIndexValueAt: c, onKeyDownAt: d, onSelect: e, itemView: f};
 	});
 var _user$project$Menu$ItemViewModel = F6(
 	function (a, b, c, d, e, f) {

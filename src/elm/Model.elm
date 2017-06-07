@@ -44,7 +44,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import LaunchBar
-import Todo.GroupListForm
+import Todo.GroupForm
 
 
 type Msg
@@ -78,8 +78,8 @@ type Msg
     | StartEditingProject Todo.Model
     | SaveCurrentForm
     | UpdateRemoteSyncFormUri EditMode.SyncForm String
-    | OnEditTodoProjectMenuStateChanged Todo.GroupListForm.Model Menu.State
-    | OnEditTodoContextMenuStateChanged Todo.GroupListForm.Model Menu.State
+    | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model Menu.State
+    | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model Menu.State
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | OnEntityListKeyDown (List Entity) KeyboardEvent
@@ -500,12 +500,12 @@ startEditingReminder todo =
 
 startEditingTodoProject : Todo.Model -> ModelF
 startEditingTodoProject todo =
-    setEditMode (Todo.GroupListForm.init todo |> EditMode.EditTodoProject)
+    setEditMode (Todo.GroupForm.init todo |> EditMode.EditTodoProject)
 
 
 startEditingTodoContext : Todo.Model -> ModelF
 startEditingTodoContext todo =
-    setEditMode (Todo.GroupListForm.init todo |> EditMode.EditTodoContext)
+    setEditMode (Todo.GroupForm.init todo |> EditMode.EditTodoContext)
 
 
 startEditingEntity : Entity -> ModelF

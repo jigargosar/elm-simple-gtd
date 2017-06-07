@@ -1,21 +1,16 @@
 var _user$project$Todo_View_Menu$createContextMenuConfig = F2(
 	function (_p0, model) {
 		var _p1 = _p0;
-		var _p4 = _p1.todo;
+		var _p3 = _p1.todo;
 		return {
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, _p4),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, _p3),
 			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getContextId(_p4)),
-			itemKey: function (_p2) {
-				return A2(
-					_elm_lang$core$String$append,
-					'context-id-',
-					_user$project$Document$getId(_p2));
-			},
+				_user$project$Todo$getContextId(_p3)),
+			itemKey: _user$project$Context_View$getKey,
 			domId: 'context-menu',
-			itemView: function (_p3) {
+			itemView: function (_p2) {
 				return _elm_lang$html$Html$text(
-					_user$project$Context$getName(_p3));
+					_user$project$Context$getName(_p2));
 			},
 			onStateChanged: _user$project$Model$OnEditTodoContextMenuStateChanged(_p1),
 			noOp: _user$project$Model$commonMsg.noOp,
@@ -31,25 +26,20 @@ var _user$project$Todo_View_Menu$context = F2(
 			A2(_user$project$Todo_View_Menu$createContextMenuConfig, form, model));
 	});
 var _user$project$Todo_View_Menu$createProjectMenuConfig = F2(
-	function (_p5, model) {
-		var _p6 = _p5;
-		var _p9 = _p6.todo;
+	function (_p4, model) {
+		var _p5 = _p4;
+		var _p7 = _p5.todo;
 		return {
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p9),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p7),
 			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getProjectId(_p9)),
-			itemKey: function (_p7) {
-				return A2(
-					_elm_lang$core$String$append,
-					'project-id-',
-					_user$project$Document$getId(_p7));
-			},
+				_user$project$Todo$getProjectId(_p7)),
+			itemKey: _user$project$Project_View$getKey,
 			domId: 'project-menu',
-			itemView: function (_p8) {
+			itemView: function (_p6) {
 				return _elm_lang$html$Html$text(
-					_user$project$Project$getName(_p8));
+					_user$project$Project$getName(_p6));
 			},
-			onStateChanged: _user$project$Model$OnEditTodoProjectMenuStateChanged(_p6),
+			onStateChanged: _user$project$Model$OnEditTodoProjectMenuStateChanged(_p5),
 			noOp: _user$project$Model$commonMsg.noOp,
 			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};

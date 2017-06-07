@@ -485,12 +485,12 @@ var _user$project$Model$startEditingEntity = F2(
 var _user$project$Model$startEditingTodoContext = function (todo) {
 	return _user$project$Model$setEditMode(
 		_user$project$EditMode$EditTodoContext(
-			_user$project$Todo_GroupListForm$init(todo)));
+			_user$project$Todo_GroupForm$init(todo)));
 };
 var _user$project$Model$startEditingTodoProject = function (todo) {
 	return _user$project$Model$setEditMode(
 		_user$project$EditMode$EditTodoProject(
-			_user$project$Todo_GroupListForm$init(todo)));
+			_user$project$Todo_GroupForm$init(todo)));
 };
 var _user$project$Model$startEditingReminder = function (todo) {
 	return _user$project$Model$updateEditModeM(

@@ -477,7 +477,7 @@ var _user$project$Main$update = function (msg) {
 										return _user$project$Model$setEditMode(
 											_user$project$EditMode$EditTodoProject(_p41));
 									}(
-										A2(_user$project$Todo_GroupListForm$setMenuState, _p15._1, _p15._0)),
+										A2(_user$project$Todo_GroupForm$setMenuState, _p15._1, _p15._0)),
 									_p40));
 						};
 					case 'OnEditTodoContextMenuStateChanged':
@@ -489,7 +489,7 @@ var _user$project$Main$update = function (msg) {
 										return _user$project$Model$setEditMode(
 											_user$project$EditMode$EditTodoContext(_p43));
 									}(
-										A2(_user$project$Todo_GroupListForm$setMenuState, _p15._1, _p15._0)),
+										A2(_user$project$Todo_GroupForm$setMenuState, _p15._1, _p15._0)),
 									_p42));
 						};
 					case 'UpdateRemoteSyncFormUri':

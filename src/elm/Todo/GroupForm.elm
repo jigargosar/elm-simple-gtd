@@ -1,4 +1,4 @@
-module Todo.GroupListForm exposing (..)
+module Todo.GroupForm exposing (..)
 
 import Menu
 import Todo

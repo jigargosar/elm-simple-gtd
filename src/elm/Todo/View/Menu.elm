@@ -18,10 +18,10 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Todo.GroupListForm
+import Todo.GroupForm
 
 
-createProjectMenuConfig : Todo.GroupListForm.Model -> Model.Model -> Menu.Config Project.Model Model.Msg
+createProjectMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Project.Model Model.Msg
 createProjectMenuConfig ({ todo } as form) model =
     { onSelect = Model.SetTodoProject # todo
     , isSelected = Document.hasId (Todo.getProjectId todo)
@@ -39,7 +39,7 @@ project form model =
         |> Menu.view (Model.getActiveProjects model) form.menuState
 
 
-createContextMenuConfig : Todo.GroupListForm.Model -> Model.Model -> Menu.Config Context.Model Model.Msg
+createContextMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Context.Model Model.Msg
 createContextMenuConfig ({ todo } as form) model =
     { onSelect = Model.SetTodoContext # todo
     , isSelected = Document.hasId (Todo.getContextId todo)

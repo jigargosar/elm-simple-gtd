@@ -29,7 +29,7 @@ import Store
 import String.Extra
 import Todo
 import Todo.Form
-import Todo.GroupListForm
+import Todo.GroupForm
 import Todo.ReminderForm
 import Navigation exposing (Location)
 import Return
@@ -246,7 +246,7 @@ update msg =
 
                 OnEditTodoProjectMenuStateChanged form menuState ->
                     Return.map
-                        (Todo.GroupListForm.setMenuState menuState form
+                        (Todo.GroupForm.setMenuState menuState form
                             |> EditMode.EditTodoProject
                             >> Model.setEditMode
                         )
@@ -254,7 +254,7 @@ update msg =
 
                 OnEditTodoContextMenuStateChanged form menuState ->
                     Return.map
-                        (Todo.GroupListForm.setMenuState menuState form
+                        (Todo.GroupForm.setMenuState menuState form
                             |> EditMode.EditTodoContext
                             >> Model.setEditMode
                         )

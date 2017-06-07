@@ -11,11 +11,20 @@ var _user$project$EditMode$SyncForm = function (a) {
 };
 var _user$project$EditMode$None = {ctor: 'None'};
 var _user$project$EditMode$none = _user$project$EditMode$None;
+var _user$project$EditMode$EditSyncSettings = function (a) {
+	return {ctor: 'EditSyncSettings', _0: a};
+};
 var _user$project$EditMode$LaunchBar = function (a) {
 	return {ctor: 'LaunchBar', _0: a};
 };
-var _user$project$EditMode$EditSyncSettings = function (a) {
-	return {ctor: 'EditSyncSettings', _0: a};
+var _user$project$EditMode$EditTodoProject = function (a) {
+	return {ctor: 'EditTodoProject', _0: a};
+};
+var _user$project$EditMode$EditTodoContext = function (a) {
+	return {ctor: 'EditTodoContext', _0: a};
+};
+var _user$project$EditMode$EditTodoReminder = function (a) {
+	return {ctor: 'EditTodoReminder', _0: a};
 };
 var _user$project$EditMode$EditProject = function (a) {
 	return {ctor: 'EditProject', _0: a};
@@ -51,15 +60,6 @@ var _user$project$EditMode$editContextSetName = F2(
 				ecm,
 				{name: name}));
 	});
-var _user$project$EditMode$EditTodoProject = function (a) {
-	return {ctor: 'EditTodoProject', _0: a};
-};
-var _user$project$EditMode$EditTodoContext = function (a) {
-	return {ctor: 'EditTodoContext', _0: a};
-};
-var _user$project$EditMode$EditTodoReminder = function (a) {
-	return {ctor: 'EditTodoReminder', _0: a};
-};
 var _user$project$EditMode$EditTodo = function (a) {
 	return {ctor: 'EditTodo', _0: a};
 };

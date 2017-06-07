@@ -47,13 +47,15 @@ type alias SyncForm =
 type EditMode
     = NewTodo Todo.NewForm.Model
     | EditTodo Todo.Form.Model
+    | EditContext EditContextForm
+    | EditProject EditProjectForm
+      -- overlay
     | EditTodoReminder Todo.ReminderForm.Model
     | EditTodoContext Todo.Model
     | EditTodoProject Todo.ProjectsForm.Model
-    | EditContext EditContextForm
-    | EditProject EditProjectForm
-    | EditSyncSettings SyncForm
     | LaunchBar LaunchBar.Form.Model
+      -- different page !!
+    | EditSyncSettings SyncForm
     | None
 
 

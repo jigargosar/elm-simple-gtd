@@ -1,3 +1,6 @@
+## Upcoming
+* [patch] Replace polymer context/project menus with custom. And style them using mat-css 
+
 ## v0.17.3 - 2017-06-06
 * [refactoring] extract generic menu code from context and project menus.
 * [fix] preselect prj/ctx in menu for todo.

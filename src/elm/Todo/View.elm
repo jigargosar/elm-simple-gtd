@@ -242,7 +242,7 @@ doneIconButton vm =
 
 contextButton vm =
     Paper.button
-        [ id ("context-menu-" ++ vm.key)
+        [ id ("edit-context-buton-" ++ vm.key)
         , style [ "height" => "24px" ]
         , class "small padding-0 margin-0 shrink"
         , vm.tabindexAV
@@ -254,7 +254,7 @@ contextButton vm =
 
 projectButton vm =
     Paper.button
-        [ id ("project-menu-" ++ vm.key)
+        [ id ("edit-project-buton-" ++ vm.key)
         , style [ "height" => "24px" ]
         , class "small padding-0 margin-0 shrink"
         , vm.tabindexAV

@@ -35,8 +35,7 @@ createProjectMenuConfig ({ todo } as form) model =
 
 
 project form model =
-    createProjectMenuConfig form model
-        |> Menu.view (Model.getActiveProjects model) form.menuState
+    Menu.view (Model.getActiveProjects model) form.menuState (createProjectMenuConfig form model)
 
 
 createContextMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Context.Model Model.Msg

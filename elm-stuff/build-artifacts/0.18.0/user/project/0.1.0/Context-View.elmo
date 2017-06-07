@@ -1,0 +1,6 @@
+var _user$project$Context_View$getKey = function (_p0) {
+	return A2(
+		_elm_lang$core$String$append,
+		'context-key-',
+		_user$project$Document$getId(_p0));
+};

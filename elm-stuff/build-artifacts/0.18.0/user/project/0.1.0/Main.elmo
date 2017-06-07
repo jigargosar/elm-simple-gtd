@@ -9,7 +9,7 @@ var _user$project$Main$positionProjectMenuCmd = function (todo) {
 			_0: 'project-menu',
 			_1: A2(
 				_elm_lang$core$Basics_ops['++'],
-				'project-menu-',
+				'edit-project-buton-',
 				_user$project$Document$getId(todo))
 		});
 };
@@ -20,7 +20,7 @@ var _user$project$Main$positionContextMenuCmd = function (todo) {
 			_0: 'context-menu',
 			_1: A2(
 				_elm_lang$core$Basics_ops['++'],
-				'context-menu-',
+				'edit-context-buton-',
 				_user$project$Document$getId(todo))
 		});
 };

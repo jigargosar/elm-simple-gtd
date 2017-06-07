@@ -520,11 +520,11 @@ firebaseSetupOnDisconnectCmd model =
 
 
 positionContextMenuCmd todo =
-    DomPorts.positionMenu ( "context-menu", "context-menu-" ++ Document.getId todo )
+    DomPorts.positionMenu ( "context-menu", "edit-context-buton-" ++ Document.getId todo )
 
 
 positionProjectMenuCmd todo =
-    DomPorts.positionMenu ( "project-menu", "project-menu-" ++ Document.getId todo )
+    DomPorts.positionMenu ( "project-menu", "edit-project-buton-" ++ Document.getId todo )
 
 
 startSyncWithFirebase user =

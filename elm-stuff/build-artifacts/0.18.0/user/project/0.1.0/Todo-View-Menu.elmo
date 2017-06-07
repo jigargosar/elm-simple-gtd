@@ -17,17 +17,17 @@ var _user$project$Todo_View_Menu$createContextMenuConfig = F2(
 				return _elm_lang$html$Html$text(
 					_user$project$Context$getName(_p3));
 			},
-			maybeFocusKey: _p1.maybeFocusKey,
-			onFocusIndexChanged: _user$project$Model$UpdateEditTodoContextMaybeFocusKey(_p1),
+			onStateChanged: _user$project$Model$OnEditTodoContextMenuStateChanged(_p1),
 			noOp: _user$project$Model$commonMsg.noOp,
 			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};
 	});
 var _user$project$Todo_View_Menu$context = F2(
 	function (form, model) {
-		return A2(
+		return A3(
 			_user$project$Menu$view,
 			_user$project$Model$getActiveContexts(model),
+			form.menuState,
 			A2(_user$project$Todo_View_Menu$createContextMenuConfig, form, model));
 	});
 var _user$project$Todo_View_Menu$createProjectMenuConfig = F2(
@@ -49,16 +49,16 @@ var _user$project$Todo_View_Menu$createProjectMenuConfig = F2(
 				return _elm_lang$html$Html$text(
 					_user$project$Project$getName(_p8));
 			},
-			maybeFocusKey: _p6.maybeFocusKey,
-			onFocusIndexChanged: _user$project$Model$UpdateEditTodoProjectMaybeFocusKey(_p6),
+			onStateChanged: _user$project$Model$OnEditTodoProjectMenuStateChanged(_p6),
 			noOp: _user$project$Model$commonMsg.noOp,
 			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};
 	});
 var _user$project$Todo_View_Menu$project = F2(
 	function (form, model) {
-		return A2(
+		return A3(
 			_user$project$Menu$view,
 			_user$project$Model$getActiveProjects(model),
+			form.menuState,
 			A2(_user$project$Todo_View_Menu$createProjectMenuConfig, form, model));
 	});

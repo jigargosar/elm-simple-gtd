@@ -51,8 +51,8 @@ var _user$project$Menu$createItemViewModel = F3(
 			onKeyDown: menuVM.onKeyDownAt(index)
 		};
 	});
-var _user$project$Menu$findMaybeFocusedIndex = F2(
-	function (items, config) {
+var _user$project$Menu$findMaybeFocusedIndex = F3(
+	function (items, state, config) {
 		var findIndexOfItemWithKey = function (key) {
 			return A2(
 				_elm_community$list_extra$List_Extra$findIndex,
@@ -66,14 +66,18 @@ var _user$project$Menu$findMaybeFocusedIndex = F2(
 		};
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
-			config.maybeFocusKey,
+			state.maybeFocusKey,
 			A2(
 				_user$project$Ext_Function_Infix_ops['>>?'],
 				findIndexOfItemWithKey,
 				_user$project$Ext_List$clampIndexIn(items)));
 	});
-var _user$project$Menu$createViewModel = F2(
-	function (items, config) {
+var _user$project$Menu$initState = {maybeFocusKey: _elm_lang$core$Maybe$Nothing};
+var _user$project$Menu$State = function (a) {
+	return {maybeFocusKey: a};
+};
+var _user$project$Menu$createViewModel = F3(
+	function (items, state, config) {
 		var clampIndex = _user$project$Ext_List$clampIndexIn(items);
 		var selectedIndex = clampIndex(
 			A2(
@@ -82,7 +86,7 @@ var _user$project$Menu$createViewModel = F2(
 				0));
 		var focusedIndex = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(_user$project$Menu$findMaybeFocusedIndex, items, config),
+			A3(_user$project$Menu$findMaybeFocusedIndex, items, state, config),
 			selectedIndex);
 		var isFocusedAt = _user$project$Ext_Function$equals(focusedIndex);
 		var maybeFocusedItem = A2(_elm_community$list_extra$List_Extra$getAt, focusedIndex, items);
@@ -92,16 +96,17 @@ var _user$project$Menu$createViewModel = F2(
 				var indexToFocusKey = function (index) {
 					return A2(
 						_elm_community$maybe_extra$Maybe_Extra$orElse,
-						config.maybeFocusKey,
+						state.maybeFocusKey,
 						A2(
 							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 							A2(_elm_community$list_extra$List_Extra$getAt, index, items),
 							config.itemKey));
 				};
 				return function (_p3) {
-					return indexToFocusKey(
-						clampIndex(
-							A2(_user$project$Ext_Function$add, focusedIndex, _p3)));
+					return _user$project$Menu$State(
+						indexToFocusKey(
+							clampIndex(
+								A2(_user$project$Ext_Function$add, focusedIndex, _p3))));
 				}(offset);
 			};
 			var _p4 = _p2.key;
@@ -112,10 +117,10 @@ var _user$project$Menu$createViewModel = F2(
 						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeFocusedItem, config.onSelect),
 						config.noOp);
 				case 'ArrowUp':
-					return config.onFocusIndexChanged(
+					return config.onStateChanged(
 						moveFocusIndexBy(-1));
 				case 'ArrowDown':
-					return config.onFocusIndexChanged(
+					return config.onStateChanged(
 						moveFocusIndexBy(1));
 				default:
 					return config.noOp;
@@ -138,9 +143,9 @@ var _user$project$Menu$createViewModel = F2(
 			itemView: config.itemView
 		};
 	});
-var _user$project$Menu$view = F2(
-	function (items, config) {
-		var menuVM = A2(_user$project$Menu$createViewModel, items, config);
+var _user$project$Menu$view = F3(
+	function (items, state, config) {
+		var menuVM = A3(_user$project$Menu$createViewModel, items, state, config);
 		var itemViewList = A2(
 			_user$project$Ext_Function_Infix_ops['.#|>'],
 			items,
@@ -173,9 +178,9 @@ var _user$project$Menu$view = F2(
 				}
 			});
 	});
-var _user$project$Menu$Config = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {onSelect: a, itemKey: b, domId: c, itemView: d, isSelected: e, maybeFocusKey: f, onFocusIndexChanged: g, noOp: h, onOutsideMouseDown: i};
+var _user$project$Menu$Config = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {onSelect: a, itemKey: b, domId: c, itemView: d, isSelected: e, onStateChanged: f, noOp: g, onOutsideMouseDown: h};
 	});
 var _user$project$Menu$ViewModel = F6(
 	function (a, b, c, d, e, f) {

@@ -244,17 +244,17 @@ update msg =
                             >> Model.setEditMode
                         )
 
-                UpdateEditTodoProjectMaybeFocusKey form maybeFocusKey ->
+                OnEditTodoProjectMenuStateChanged form menuState ->
                     Return.map
-                        (Todo.GroupListForm.setMaybeFocusKey maybeFocusKey form
+                        (Todo.GroupListForm.setMenuState menuState form
                             |> EditMode.EditTodoProject
                             >> Model.setEditMode
                         )
                         >> autoFocusInputCmd
 
-                UpdateEditTodoContextMaybeFocusKey form maybeFocusKey ->
+                OnEditTodoContextMenuStateChanged form menuState ->
                     Return.map
-                        (Todo.GroupListForm.setMaybeFocusKey maybeFocusKey form
+                        (Todo.GroupListForm.setMenuState menuState form
                             |> EditMode.EditTodoContext
                             >> Model.setEditMode
                         )

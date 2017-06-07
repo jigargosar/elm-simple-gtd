@@ -15,6 +15,7 @@ import Ext.Predicate
 import Ext.Record as Record exposing (maybeOver, maybeSetIn, over, set)
 import Firebase exposing (DeviceId)
 import LaunchBar.Form
+import Menu
 import Project
 import ReminderOverlay
 import Dict exposing (Dict)
@@ -77,8 +78,8 @@ type Msg
     | StartEditingProject Todo.Model
     | SaveCurrentForm
     | UpdateRemoteSyncFormUri EditMode.SyncForm String
-    | UpdateEditTodoProjectMaybeFocusKey Todo.GroupListForm.Model (Maybe String)
-    | UpdateEditTodoContextMaybeFocusKey Todo.GroupListForm.Model (Maybe String)
+    | OnEditTodoProjectMenuStateChanged Todo.GroupListForm.Model Menu.State
+    | OnEditTodoContextMenuStateChanged Todo.GroupListForm.Model Menu.State
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | OnEntityListKeyDown (List Entity) KeyboardEvent

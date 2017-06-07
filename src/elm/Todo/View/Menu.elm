@@ -20,14 +20,13 @@ import Todo.GroupListForm
 
 
 createProjectMenuConfig : Todo.GroupListForm.Model -> Model.Model -> Menu.Config Project.Model Model.Msg
-createProjectMenuConfig ({ todo, maybeFocusKey } as form) model =
+createProjectMenuConfig ({ todo } as form) model =
     { onSelect = Model.SetTodoProject # todo
     , isSelected = Document.hasId (Todo.getProjectId todo)
     , itemKey = Document.getId >> String.append "project-id-"
     , domId = "project-menu"
     , itemView = Project.getName >> text
-    , maybeFocusKey = maybeFocusKey
-    , onFocusIndexChanged = Model.UpdateEditTodoProjectMaybeFocusKey form
+    , onStateChanged = Model.OnEditTodoProjectMenuStateChanged form
     , noOp = commonMsg.noOp
     , onOutsideMouseDown = Model.DeactivateEditingMode
     }
@@ -35,18 +34,17 @@ createProjectMenuConfig ({ todo, maybeFocusKey } as form) model =
 
 project form model =
     createProjectMenuConfig form model
-        |> Menu.view (Model.getActiveProjects model)
+        |> Menu.view (Model.getActiveProjects model) form.menuState
 
 
 createContextMenuConfig : Todo.GroupListForm.Model -> Model.Model -> Menu.Config Context.Model Model.Msg
-createContextMenuConfig ({ todo, maybeFocusKey } as form) model =
+createContextMenuConfig ({ todo } as form) model =
     { onSelect = Model.SetTodoContext # todo
     , isSelected = Document.hasId (Todo.getContextId todo)
     , itemKey = Document.getId >> String.append "context-id-"
     , domId = "context-menu"
     , itemView = Context.getName >> text
-    , maybeFocusKey = maybeFocusKey
-    , onFocusIndexChanged = Model.UpdateEditTodoContextMaybeFocusKey form
+    , onStateChanged = Model.OnEditTodoContextMenuStateChanged form
     , noOp = commonMsg.noOp
     , onOutsideMouseDown = Model.DeactivateEditingMode
     }
@@ -54,4 +52,4 @@ createContextMenuConfig ({ todo, maybeFocusKey } as form) model =
 
 context form model =
     createContextMenuConfig form model
-        |> Menu.view (Model.getActiveContexts model)
+        |> Menu.view (Model.getActiveContexts model) form.menuState

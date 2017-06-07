@@ -1,13 +1,13 @@
-var _user$project$Todo_GroupListForm$setMaybeFocusKey = F2(
-	function (maybeFocusKey, form) {
+var _user$project$Todo_GroupListForm$setMenuState = F2(
+	function (menuState, form) {
 		return _elm_lang$core$Native_Utils.update(
 			form,
-			{maybeFocusKey: maybeFocusKey});
+			{menuState: menuState});
 	});
 var _user$project$Todo_GroupListForm$init = function (todo) {
-	return {todo: todo, maybeFocusKey: _elm_lang$core$Maybe$Nothing};
+	return {todo: todo, menuState: _user$project$Menu$initState};
 };
 var _user$project$Todo_GroupListForm$Model = F2(
 	function (a, b) {
-		return {todo: a, maybeFocusKey: b};
+		return {todo: a, menuState: b};
 	});

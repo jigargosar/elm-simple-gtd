@@ -1,5 +1,6 @@
 module Todo.GroupListForm exposing (..)
 
+import Menu
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -11,13 +12,13 @@ import Maybe.Extra as Maybe
 
 type alias Model =
     { todo : Todo.Model
-    , maybeFocusKey : Maybe String
+    , menuState : Menu.State
     }
 
 
 init todo =
-    { todo = todo, maybeFocusKey = Nothing }
+    { todo = todo, menuState = Menu.initState }
 
 
-setMaybeFocusKey maybeFocusKey form =
-    { form | maybeFocusKey = maybeFocusKey }
+setMenuState menuState form =
+    { form | menuState = menuState }

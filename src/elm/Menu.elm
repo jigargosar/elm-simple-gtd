@@ -5,7 +5,6 @@ import Ext.Keyboard exposing (KeyboardEvent, onKeyDown, onKeyDownStopPropagation
 import Ext.List as List
 import Html.Attributes.Extra exposing (intProperty)
 import Keyboard.Extra as Key
-import Model exposing (Model, commonMsg)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -22,14 +21,24 @@ import Todo
 import View.FullBleedCapture
 
 
+type alias State =
+    { maybeFocusKey : Maybe String
+    }
+
+
+initState : State
+initState =
+    { maybeFocusKey = Nothing
+    }
+
+
 type alias Config item msg =
     { onSelect : item -> msg
     , itemKey : item -> String
     , domId : String
     , itemView : item -> Html msg
     , isSelected : item -> Bool
-    , maybeFocusKey : Maybe String
-    , onFocusIndexChanged : Maybe String -> msg
+    , onStateChanged : State -> msg
     , noOp : msg
     , onOutsideMouseDown : msg
     }
@@ -45,8 +54,8 @@ type alias ViewModel item msg =
     }
 
 
-createViewModel : List item -> Config item msg -> ViewModel item msg
-createViewModel items config =
+createViewModel : List item -> State -> Config item msg -> ViewModel item msg
+createViewModel items state config =
     let
         clampIndex =
             List.clampIndexIn items
@@ -55,7 +64,7 @@ createViewModel items config =
             items |> List.findIndex config.isSelected ?= 0 |> clampIndex
 
         focusedIndex =
-            findMaybeFocusedIndex items config ?= selectedIndex
+            findMaybeFocusedIndex items state config ?= selectedIndex
 
         isFocusedAt =
             equals focusedIndex
@@ -68,22 +77,25 @@ createViewModel items config =
                 moveFocusIndexBy offset =
                     let
                         indexToFocusKey index =
-                            List.getAt index items ?|> config.itemKey |> Maybe.orElse config.maybeFocusKey
+                            List.getAt index items
+                                ?|> config.itemKey
+                                |> Maybe.orElse state.maybeFocusKey
                     in
                         offset
                             |> add focusedIndex
                             >> clampIndex
                             >> indexToFocusKey
+                            >> State
             in
                 case key of
                     Key.Enter ->
                         maybeFocusedItem ?|> config.onSelect ?= config.noOp
 
                     Key.ArrowUp ->
-                        moveFocusIndexBy -1 |> config.onFocusIndexChanged
+                        moveFocusIndexBy -1 |> config.onStateChanged
 
                     Key.ArrowDown ->
-                        moveFocusIndexBy 1 |> config.onFocusIndexChanged
+                        moveFocusIndexBy 1 |> config.onStateChanged
 
                     _ ->
                         config.noOp
@@ -103,19 +115,19 @@ createViewModel items config =
         }
 
 
-findMaybeFocusedIndex items config =
+findMaybeFocusedIndex items state config =
     let
         findIndexOfItemWithKey key =
             List.findIndex (config.itemKey >> equals key) items
     in
-        config.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn items
+        state.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn items
 
 
-view : List item -> Config item msg -> Html msg
-view items config =
+view : List item -> State -> Config item msg -> Html msg
+view items state config =
     let
         menuVM =
-            createViewModel items config
+            createViewModel items state config
 
         itemViewList =
             items

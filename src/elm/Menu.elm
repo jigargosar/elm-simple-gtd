@@ -143,9 +143,6 @@ view config =
         vm =
             createViewModel config
 
-        clampIndex =
-            List.clampIndexIn config.items
-
         itemViewList =
             config.items
                 .#|> createItemViewModel vm config

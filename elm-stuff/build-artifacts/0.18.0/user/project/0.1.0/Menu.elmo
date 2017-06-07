@@ -1,4 +1,4 @@
-var _user$project$Menu$menuItem = function (vm) {
+var _user$project$Menu$menuItemView = function (vm) {
 	return A2(
 		_elm_lang$html$Html$li,
 		{
@@ -128,7 +128,7 @@ var _user$project$Menu$view = function (config) {
 		A2(
 			_user$project$Ext_Function_Infix_ops['>>>'],
 			A2(_user$project$Menu$createItemViewModel, vm, config),
-			_user$project$Menu$menuItem));
+			_user$project$Menu$menuItemView));
 	return _user$project$View_FullBleedCapture$init(
 		{
 			onMouseDown: config.onOutsideMouseDown,

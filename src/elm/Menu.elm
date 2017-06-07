@@ -149,7 +149,7 @@ view config =
         itemViewList =
             config.items
                 .#|> createItemViewModel vm config
-                >>> menuItem
+                >>> menuItemView
     in
         View.FullBleedCapture.init
             { onMouseDown = config.onOutsideMouseDown
@@ -165,7 +165,7 @@ view config =
             }
 
 
-menuItem vm =
+menuItemView vm =
     li
         [ onClick vm.onClick
         , tabindex vm.tabIndexValue

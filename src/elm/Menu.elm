@@ -140,12 +140,12 @@ findMaybeFocusedIndex vm =
 view : Config item msg -> Html msg
 view config =
     let
-        vm =
+        menuVM =
             createViewModel config
 
         itemViewList =
             config.items
-                .#|> createItemViewModel vm config
+                .#|> createItemViewModel menuVM config
                 >>> menuItemView
     in
         View.FullBleedCapture.init
@@ -155,18 +155,18 @@ view config =
                     [ id config.domId
                     , class "menu"
                     , attribute "data-prevent-default-keys" "Tab"
-                    , onKeyDownStopPropagation vm.onKeyDown
+                    , onKeyDownStopPropagation menuVM.onKeyDown
                     ]
                     itemViewList
                 ]
             }
 
 
-menuItemView vm =
+menuItemView itemVM =
     li
-        [ onClick vm.onClick
-        , tabindex vm.tabIndexValue
-        , onKeyDown vm.onKeyDown
-        , classList [ "auto-focus" => vm.isFocused ]
+        [ onClick itemVM.onClick
+        , tabindex itemVM.tabIndexValue
+        , onKeyDown itemVM.onKeyDown
+        , classList [ "auto-focus" => itemVM.isFocused ]
         ]
-        [ vm.view ]
+        [ itemVM.view ]

@@ -1,21 +1,21 @@
-var _user$project$Menu$menuItemView = function (vm) {
+var _user$project$Menu$menuItemView = function (itemVM) {
 	return A2(
 		_elm_lang$html$Html$li,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(vm.onClick),
+			_0: _elm_lang$html$Html_Events$onClick(itemVM.onClick),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$tabindex(vm.tabIndexValue),
+				_0: _elm_lang$html$Html_Attributes$tabindex(itemVM.tabIndexValue),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDown),
+					_0: _user$project$Ext_Keyboard$onKeyDown(itemVM.onKeyDown),
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$classList(
 							{
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', vm.isFocused),
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', itemVM.isFocused),
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
@@ -25,7 +25,7 @@ var _user$project$Menu$menuItemView = function (vm) {
 		},
 		{
 			ctor: '::',
-			_0: vm.view,
+			_0: itemVM.view,
 			_1: {ctor: '[]'}
 		});
 };
@@ -120,14 +120,13 @@ var _user$project$Menu$createViewModel = function (config) {
 	return {selectedIndex: selectedIndex, focusedIndex: focusedIndex, onKeyDown: onKeyDown};
 };
 var _user$project$Menu$view = function (config) {
-	var clampIndex = _user$project$Ext_List$clampIndexIn(config.items);
-	var vm = _user$project$Menu$createViewModel(config);
+	var menuVM = _user$project$Menu$createViewModel(config);
 	var itemViewList = A2(
 		_user$project$Ext_Function_Infix_ops['.#|>'],
 		config.items,
 		A2(
 			_user$project$Ext_Function_Infix_ops['>>>'],
-			A2(_user$project$Menu$createItemViewModel, vm, config),
+			A2(_user$project$Menu$createItemViewModel, menuVM, config),
 			_user$project$Menu$menuItemView));
 	return _user$project$View_FullBleedCapture$init(
 		{
@@ -147,7 +146,7 @@ var _user$project$Menu$view = function (config) {
 								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(vm.onKeyDown),
+									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(menuVM.onKeyDown),
 									_1: {ctor: '[]'}
 								}
 							}

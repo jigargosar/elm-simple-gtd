@@ -35,7 +35,6 @@ initState =
 type alias Config item msg =
     { onSelect : item -> msg
     , itemKey : item -> String
-    , domId : String
     , itemView : item -> Html msg
     , isSelected : item -> Bool
     , onStateChanged : State -> msg
@@ -137,8 +136,8 @@ view items state config =
             { onMouseDown = config.onOutsideMouseDown
             , children =
                 [ ul
-                    [ id config.domId
-                    , class "menu collection"
+                    [ id "popup-menu"
+                    , class "collection"
                     , attribute "data-prevent-default-keys" "Tab"
                     ]
                     itemViewList

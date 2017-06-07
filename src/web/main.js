@@ -117,12 +117,12 @@ async function boot() {
         }
     })
 
-    app.ports["positionMenu"].subscribe(([myId, ofId]) => {
+    app.ports["positionPopupMenu"].subscribe((ofSelector) => {
         requestAnimationFrame(() => {
-            $("#" + myId).position({
+            $("#popup-menu").position({
                 my: "right top",
                 at: "right top",
-                of: "#" + ofId,
+                of: $(ofSelector),
                 within: ".fullbleed-capture",
                 collision: "fit"
             }).find(`[tabindex="0"]`).focus()

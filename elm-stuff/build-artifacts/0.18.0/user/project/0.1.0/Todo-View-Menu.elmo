@@ -7,7 +7,6 @@ var _user$project$Todo_View_Menu$createContextMenuConfig = F2(
 			isSelected: _user$project$Document$hasId(
 				_user$project$Todo$getContextId(_p3)),
 			itemKey: _user$project$Context_View$getKey,
-			domId: 'context-menu',
 			itemView: function (_p2) {
 				return _elm_lang$html$Html$text(
 					_user$project$Context$getName(_p2));
@@ -34,7 +33,6 @@ var _user$project$Todo_View_Menu$createProjectMenuConfig = F2(
 			isSelected: _user$project$Document$hasId(
 				_user$project$Todo$getProjectId(_p7)),
 			itemKey: _user$project$Project_View$getKey,
-			domId: 'project-menu',
 			itemView: function (_p6) {
 				return _elm_lang$html$Html$text(
 					_user$project$Project$getName(_p6));

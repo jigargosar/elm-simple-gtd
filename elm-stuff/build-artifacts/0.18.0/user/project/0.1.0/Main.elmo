@@ -3,26 +3,18 @@ var _user$project$Main$startSyncWithFirebase = function (user) {
 		A2(_user$project$Ext_Function_Infix_ops['>>?'], _user$project$Model$getMaybeUserId, _user$project$Firebase$startSyncCmd));
 };
 var _user$project$Main$positionProjectMenuCmd = function (todo) {
-	return _user$project$DomPorts$positionMenu(
-		{
-			ctor: '_Tuple2',
-			_0: 'project-menu',
-			_1: A2(
-				_elm_lang$core$Basics_ops['++'],
-				'edit-project-buton-',
-				_user$project$Document$getId(todo))
-		});
+	return _user$project$DomPorts$positionPopupMenu(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'#edit-project-buton-',
+			_user$project$Document$getId(todo)));
 };
 var _user$project$Main$positionContextMenuCmd = function (todo) {
-	return _user$project$DomPorts$positionMenu(
-		{
-			ctor: '_Tuple2',
-			_0: 'context-menu',
-			_1: A2(
-				_elm_lang$core$Basics_ops['++'],
-				'edit-context-buton-',
-				_user$project$Document$getId(todo))
-		});
+	return _user$project$DomPorts$positionPopupMenu(
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'#edit-context-buton-',
+			_user$project$Document$getId(todo)));
 };
 var _user$project$Main$firebaseSetupOnDisconnectCmd = function (model) {
 	return A2(

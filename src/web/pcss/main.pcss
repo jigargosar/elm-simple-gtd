@@ -4,17 +4,6 @@
 
 }
 
-/*mat css*/
-.collection-item{
-  outline: none;
-}
-
-a{
-  cursor: pointer;
-}
-
-
-
 * {
   box-sizing: border-box;
 }
@@ -26,6 +15,20 @@ a{
 .display-none {
   display: none;
 }
+
+/*mat css*/
+.collection-item{
+  outline: none;
+
+  &:focus{
+    background-color: gray(92%);
+  }
+}
+
+.collection a.collection-item:not(.active):hover{
+  background-color: gray(96%);
+}
+/*mat css END*/
 
 .focusable-list > * {
   outline: none;

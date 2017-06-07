@@ -158,10 +158,10 @@ var _user$project$Menu$view = F3(
 						_elm_lang$html$Html$ul,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$id(config.domId),
+							_0: _elm_lang$html$Html_Attributes$id('popup-menu'),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('menu collection'),
+								_0: _elm_lang$html$Html_Attributes$class('collection'),
 								_1: {
 									ctor: '::',
 									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
@@ -174,9 +174,9 @@ var _user$project$Menu$view = F3(
 				}
 			});
 	});
-var _user$project$Menu$Config = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {onSelect: a, itemKey: b, domId: c, itemView: d, isSelected: e, onStateChanged: f, noOp: g, onOutsideMouseDown: h};
+var _user$project$Menu$Config = F7(
+	function (a, b, c, d, e, f, g) {
+		return {onSelect: a, itemKey: b, itemView: c, isSelected: d, onStateChanged: e, noOp: f, onOutsideMouseDown: g};
 	});
 var _user$project$Menu$ViewModel = F6(
 	function (a, b, c, d, e, f) {

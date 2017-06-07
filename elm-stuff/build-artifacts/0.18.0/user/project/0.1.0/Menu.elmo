@@ -49,19 +49,6 @@ var _user$project$Menu$findMaybeFocusedIndex = function (vm) {
 			findIndexOfItemWithKey,
 			_user$project$Ext_List$clampIndexIn(vm.items)));
 };
-var _user$project$Menu$createViewModel = function (config) {
-	var clampIndex = _user$project$Ext_List$clampIndexIn(config.items);
-	var selectedIndex = clampIndex(
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(_elm_community$list_extra$List_Extra$findIndex, config.isSelected, config.items),
-			0));
-	var focusedIndex = A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-		_user$project$Menu$findMaybeFocusedIndex(config),
-		selectedIndex);
-	return {selectedIndex: selectedIndex, focusedIndex: focusedIndex};
-};
 var _user$project$Menu$boolToTabIndexValue = function (bool) {
 	return bool ? 0 : -1;
 };
@@ -89,9 +76,17 @@ var _user$project$Menu$createItemViewModel = F4(
 			onKeyDown: onKeyDown
 		};
 	});
-var _user$project$Menu$view = function (config) {
+var _user$project$Menu$createViewModel = function (config) {
 	var clampIndex = _user$project$Ext_List$clampIndexIn(config.items);
-	var vm = _user$project$Menu$createViewModel(config);
+	var selectedIndex = clampIndex(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(_elm_community$list_extra$List_Extra$findIndex, config.isSelected, config.items),
+			0));
+	var focusedIndex = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		_user$project$Menu$findMaybeFocusedIndex(config),
+		selectedIndex);
 	var onKeyDown = function (_p6) {
 		var _p7 = _p6;
 		var moveFocusIndexBy = function (offset) {
@@ -107,7 +102,7 @@ var _user$project$Menu$view = function (config) {
 			return function (_p8) {
 				return indexToFocusKey(
 					clampIndex(
-						A2(_user$project$Ext_Function$add, vm.focusedIndex, _p8)));
+						A2(_user$project$Ext_Function$add, focusedIndex, _p8)));
 			}(offset);
 		};
 		var _p9 = _p7.key;
@@ -122,6 +117,11 @@ var _user$project$Menu$view = function (config) {
 				return config.noOp;
 		}
 	};
+	return {selectedIndex: selectedIndex, focusedIndex: focusedIndex, onKeyDown: onKeyDown};
+};
+var _user$project$Menu$view = function (config) {
+	var clampIndex = _user$project$Ext_List$clampIndexIn(config.items);
+	var vm = _user$project$Menu$createViewModel(config);
 	var itemViewList = A2(
 		_user$project$Ext_Function_Infix_ops['.#|>'],
 		config.items,
@@ -147,7 +147,7 @@ var _user$project$Menu$view = function (config) {
 								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(onKeyDown),
+									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(vm.onKeyDown),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -179,9 +179,9 @@ var _user$project$Menu$Config = function (a) {
 		};
 	};
 };
-var _user$project$Menu$ViewModel = F2(
-	function (a, b) {
-		return {selectedIndex: a, focusedIndex: b};
+var _user$project$Menu$ViewModel = F3(
+	function (a, b, c) {
+		return {selectedIndex: a, focusedIndex: b, onKeyDown: c};
 	});
 var _user$project$Menu$ItemViewModel = F6(
 	function (a, b, c, d, e, f) {

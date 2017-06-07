@@ -36,10 +36,51 @@ type alias Config item msg =
     }
 
 
-type alias ViewModel =
+type alias ViewModel msg =
     { selectedIndex : Int
     , focusedIndex : Int
+    , onKeyDown : KeyboardEvent -> msg
     }
+
+
+createViewModel : Config item msg -> ViewModel msg
+createViewModel config =
+    let
+        clampIndex =
+            List.clampIndexIn config.items
+
+        selectedIndex =
+            config.items |> List.findIndex config.isSelected ?= 0 |> clampIndex
+
+        focusedIndex =
+            findMaybeFocusedIndex config ?= selectedIndex
+
+        onKeyDown { key } =
+            let
+                moveFocusIndexBy offset =
+                    let
+                        indexToFocusKey index =
+                            List.getAt index config.items ?|> config.itemKey |> Maybe.orElse config.maybeFocusKey
+                    in
+                        offset
+                            |> add focusedIndex
+                            >> clampIndex
+                            >> indexToFocusKey
+            in
+                case key of
+                    Key.ArrowUp ->
+                        moveFocusIndexBy -1 |> config.onFocusIndexChanged
+
+                    Key.ArrowDown ->
+                        moveFocusIndexBy 1 |> config.onFocusIndexChanged
+
+                    _ ->
+                        config.noOp
+    in
+        { selectedIndex = selectedIndex
+        , focusedIndex = focusedIndex
+        , onKeyDown = onKeyDown
+        }
 
 
 type alias ItemViewModel msg =
@@ -52,22 +93,7 @@ type alias ItemViewModel msg =
     }
 
 
-boolToTabIndexValue bool =
-    if bool then
-        0
-    else
-        -1
-
-
-findMaybeFocusedIndex vm =
-    let
-        findIndexOfItemWithKey key =
-            List.findIndex (vm.itemKey >> equals key) vm.items
-    in
-        vm.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn vm.items
-
-
-createItemViewModel : ViewModel -> Config item msg -> Int -> item -> ItemViewModel msg
+createItemViewModel : ViewModel msg -> Config item msg -> Int -> item -> ItemViewModel msg
 createItemViewModel { selectedIndex, focusedIndex } config index item =
     let
         clampIndex =
@@ -96,20 +122,19 @@ createItemViewModel { selectedIndex, focusedIndex } config index item =
         }
 
 
-createViewModel config =
+boolToTabIndexValue bool =
+    if bool then
+        0
+    else
+        -1
+
+
+findMaybeFocusedIndex vm =
     let
-        clampIndex =
-            List.clampIndexIn config.items
-
-        selectedIndex =
-            config.items |> List.findIndex config.isSelected ?= 0 |> clampIndex
-
-        focusedIndex =
-            findMaybeFocusedIndex config ?= selectedIndex
+        findIndexOfItemWithKey key =
+            List.findIndex (vm.itemKey >> equals key) vm.items
     in
-        { selectedIndex = selectedIndex
-        , focusedIndex = focusedIndex
-        }
+        vm.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn vm.items
 
 
 view : Config item msg -> Html msg
@@ -120,28 +145,6 @@ view config =
 
         clampIndex =
             List.clampIndexIn config.items
-
-        onKeyDown { key } =
-            let
-                moveFocusIndexBy offset =
-                    let
-                        indexToFocusKey index =
-                            List.getAt index config.items ?|> config.itemKey |> Maybe.orElse config.maybeFocusKey
-                    in
-                        offset
-                            |> add vm.focusedIndex
-                            >> clampIndex
-                            >> indexToFocusKey
-            in
-                case key of
-                    Key.ArrowUp ->
-                        moveFocusIndexBy -1 |> config.onFocusIndexChanged
-
-                    Key.ArrowDown ->
-                        moveFocusIndexBy 1 |> config.onFocusIndexChanged
-
-                    _ ->
-                        config.noOp
 
         itemViewList =
             config.items
@@ -155,7 +158,7 @@ view config =
                     [ id config.domId
                     , class "menu"
                     , attribute "data-prevent-default-keys" "Tab"
-                    , onKeyDownStopPropagation onKeyDown
+                    , onKeyDownStopPropagation vm.onKeyDown
                     ]
                     itemViewList
                 ]

@@ -140,7 +140,7 @@ view items state config =
             , children =
                 [ Html.Keyed.node "ul"
                     [ id "popup-menu"
-                    , class "collection"
+                    , class "collection z-depth-4"
                     , attribute "data-prevent-default-keys" "Tab"
                     ]
                     itemViewList

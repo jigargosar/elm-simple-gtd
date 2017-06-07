@@ -153,72 +153,50 @@ var _user$project$View$createContextMenuConfig = F2(
 			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};
 	});
-var _user$project$View$todoContextMenuMaybe = function (model) {
-	return A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-		_user$project$Model$getMaybeEditTodoContextForm(model),
-		function (_p3) {
-			return A2(
-				_user$project$Menu$view,
-				_user$project$Model$getActiveContexts(model),
-				A2(_user$project$View$createContextMenuConfig, model, _p3));
-		});
-};
 var _user$project$View$createProjectMenuConfig = F2(
-	function (model, _p4) {
-		var _p5 = _p4;
-		var _p8 = _p5.todo;
+	function (model, _p3) {
+		var _p4 = _p3;
+		var _p7 = _p4.todo;
 		return {
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p8),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p7),
 			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getProjectId(_p8)),
-			itemKey: function (_p6) {
+				_user$project$Todo$getProjectId(_p7)),
+			itemKey: function (_p5) {
 				return A2(
 					_elm_lang$core$String$append,
 					'project-id-',
-					_user$project$Document$getId(_p6));
+					_user$project$Document$getId(_p5));
 			},
 			domId: 'project-menu',
-			itemView: function (_p7) {
+			itemView: function (_p6) {
 				return _elm_lang$html$Html$text(
-					_user$project$Project$getName(_p7));
+					_user$project$Project$getName(_p6));
 			},
-			maybeFocusKey: _p5.maybeFocusKey,
-			onFocusIndexChanged: _user$project$Model$UpdateEditTodoProjectMaybeFocusKey(_p5),
+			maybeFocusKey: _p4.maybeFocusKey,
+			onFocusIndexChanged: _user$project$Model$UpdateEditTodoProjectMaybeFocusKey(_p4),
 			noOp: _user$project$Model$commonMsg.noOp,
 			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};
 	});
-var _user$project$View$todoProjectMenuMaybe = function (model) {
-	return A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-		_user$project$Model$getMaybeEditTodoProjectForm(model),
-		function (_p9) {
-			return A2(
-				_user$project$Menu$view,
-				_user$project$Model$getActiveProjects(model),
-				A2(_user$project$View$createProjectMenuConfig, model, _p9));
-		});
-};
 var _user$project$View$overlayViews = function (model) {
 	var editModeView = function () {
-		var _p10 = _user$project$Model$getEditMode(model);
-		switch (_p10.ctor) {
+		var _p8 = _user$project$Model$getEditMode(model);
+		switch (_p8.ctor) {
 			case 'LaunchBar':
 				return _elm_lang$core$Maybe$Just(
-					A2(_user$project$LaunchBar_View$init, _p10._0, model));
+					A2(_user$project$LaunchBar_View$init, _p8._0, model));
 			case 'EditTodoContext':
 				return _elm_lang$core$Maybe$Just(
 					A2(
 						_user$project$Menu$view,
 						_user$project$Model$getActiveContexts(model),
-						A2(_user$project$View$createContextMenuConfig, model, _p10._0)));
+						A2(_user$project$View$createContextMenuConfig, model, _p8._0)));
 			case 'EditTodoProject':
 				return _elm_lang$core$Maybe$Just(
 					A2(
 						_user$project$Menu$view,
 						_user$project$Model$getActiveProjects(model),
-						A2(_user$project$View$createProjectMenuConfig, model, _p10._0)));
+						A2(_user$project$View$createProjectMenuConfig, model, _p8._0)));
 			default:
 				return _elm_lang$core$Maybe$Nothing;
 		}
@@ -231,7 +209,7 @@ var _user$project$View$overlayViews = function (model) {
 			_0: editModeView,
 			_1: {
 				ctor: '::',
-				_0: _user$project$LaunchBar_View$maybe(model),
+				_0: _user$project$View_ReminderOverlay$maybe(model),
 				_1: {ctor: '[]'}
 			}
 		});

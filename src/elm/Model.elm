@@ -618,24 +618,6 @@ getMaybeEditTodoReminderForm model =
             Nothing
 
 
-getMaybeEditTodoContextForm model =
-    case model.editMode of
-        EditMode.EditTodoContext form ->
-            Just form
-
-        _ ->
-            Nothing
-
-
-getMaybeEditTodoProjectForm model =
-    case model.editMode of
-        EditMode.EditTodoProject form ->
-            Just form
-
-        _ ->
-            Nothing
-
-
 getRemoteSyncForm model =
     let
         maybeForm =

@@ -120,12 +120,3 @@ var _user$project$LaunchBar_View$init = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _user$project$LaunchBar_View$maybe = function (m) {
-	var _p4 = _user$project$Model$getEditMode(m);
-	if (_p4.ctor === 'LaunchBar') {
-		return _elm_lang$core$Maybe$Just(
-			A2(_user$project$LaunchBar_View$init, _p4._0, m));
-	} else {
-		return _elm_lang$core$Maybe$Nothing;
-	}
-};

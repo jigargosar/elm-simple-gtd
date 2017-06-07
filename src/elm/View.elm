@@ -93,7 +93,7 @@ overlayViews model =
                     Nothing
     in
         [ editModeView
-        , LaunchBar.View.maybe model
+        , View.ReminderOverlay.maybe model
         ]
             |> List.filterMap identity
 
@@ -112,13 +112,6 @@ createProjectMenuConfig model ({ todo, maybeFocusKey } as form) =
     }
 
 
-todoProjectMenuMaybe : Model -> Maybe (Html Msg)
-todoProjectMenuMaybe model =
-    model
-        |> Model.getMaybeEditTodoProjectForm
-        ?|> (createProjectMenuConfig model >> Menu.view (Model.getActiveProjects model))
-
-
 createContextMenuConfig : Model -> Todo.Model -> Menu.Config Context.Model Msg
 createContextMenuConfig model todo =
     { onSelect = Model.SetTodoContext # todo
@@ -131,13 +124,6 @@ createContextMenuConfig model todo =
     , noOp = commonMsg.noOp
     , onOutsideMouseDown = Model.DeactivateEditingMode
     }
-
-
-todoContextMenuMaybe : Model -> Maybe (Html Msg)
-todoContextMenuMaybe model =
-    model
-        |> Model.getMaybeEditTodoContextForm
-        ?|> (createContextMenuConfig model >> Menu.view (Model.getActiveContexts model))
 
 
 bottomSheet =

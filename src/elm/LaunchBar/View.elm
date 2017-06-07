@@ -22,15 +22,6 @@ import Project
 import String.Extra as String
 
 
-maybe m =
-    case Model.getEditMode m of
-        EditMode.LaunchBar form ->
-            init form m |> Just
-
-        _ ->
-            Nothing
-
-
 init form m =
     let
         fuzzyResults =

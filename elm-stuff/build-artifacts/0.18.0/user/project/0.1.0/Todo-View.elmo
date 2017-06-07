@@ -203,7 +203,7 @@ var _user$project$Todo_View$contextButton = function (vm) {
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$id(
-				A2(_elm_lang$core$Basics_ops['++'], ' context-menu-', vm.key)),
+				A2(_elm_lang$core$Basics_ops['++'], 'context-menu-', vm.key)),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$style(

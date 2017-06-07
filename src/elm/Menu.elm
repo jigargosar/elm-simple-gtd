@@ -36,6 +36,12 @@ type alias Config item msg =
     }
 
 
+type alias ViewModel =
+    { selectedIndex : Int
+    , focusedIndex : Int
+    }
+
+
 type alias ItemViewModel msg =
     { isFocused : Bool
     , tabIndexValue : Int
@@ -61,8 +67,8 @@ findMaybeFocusedIndex vm =
         vm.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn vm.items
 
 
-createItemViewModel : Int -> Int -> Config item msg -> Int -> item -> ItemViewModel msg
-createItemViewModel selectedIndex focusedIndex config index item =
+createItemViewModel : ViewModel -> Config item msg -> Int -> item -> ItemViewModel msg
+createItemViewModel { selectedIndex, focusedIndex } config index item =
     let
         clampIndex =
             List.clampIndexIn config.items
@@ -90,28 +96,41 @@ createItemViewModel selectedIndex focusedIndex config index item =
         }
 
 
-view : Config item msg -> Html msg
-view vm =
+createViewModel config =
     let
         clampIndex =
-            List.clampIndexIn vm.items
+            List.clampIndexIn config.items
 
         selectedIndex =
-            vm.items |> List.findIndex vm.isSelected ?= 0 |> clampIndex
+            config.items |> List.findIndex config.isSelected ?= 0 |> clampIndex
 
         focusedIndex =
-            findMaybeFocusedIndex vm ?= selectedIndex
+            findMaybeFocusedIndex config ?= selectedIndex
+    in
+        { selectedIndex = selectedIndex
+        , focusedIndex = focusedIndex
+        }
+
+
+view : Config item msg -> Html msg
+view config =
+    let
+        vm =
+            createViewModel config
+
+        clampIndex =
+            List.clampIndexIn config.items
 
         onKeyDown { key } =
             let
                 indexToFocusKey index =
-                    List.getAt index vm.items ?|> vm.itemKey |> Maybe.orElse vm.maybeFocusKey
+                    List.getAt index config.items ?|> config.itemKey |> Maybe.orElse config.maybeFocusKey
 
                 onFocusIndexChange =
-                    add focusedIndex
+                    add vm.focusedIndex
                         >> clampIndex
                         >> indexToFocusKey
-                        >> vm.onFocusIndexChanged
+                        >> config.onFocusIndexChanged
             in
                 case key of
                     Key.ArrowUp ->
@@ -121,18 +140,18 @@ view vm =
                         onFocusIndexChange 1
 
                     _ ->
-                        vm.noOp
+                        config.noOp
 
         itemViewList =
-            vm.items
-                .#|> createItemViewModel selectedIndex focusedIndex vm
+            config.items
+                .#|> createItemViewModel vm config
                 >>> menuItem
     in
         View.FullBleedCapture.init
-            { onMouseDown = vm.onOutsideMouseDown
+            { onMouseDown = config.onOutsideMouseDown
             , children =
                 [ ul
-                    [ id vm.domId
+                    [ id config.domId
                     , class "menu"
                     , attribute "data-prevent-default-keys" "Tab"
                     , onKeyDownStopPropagation onKeyDown

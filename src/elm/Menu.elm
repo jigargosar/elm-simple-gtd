@@ -39,7 +39,7 @@ type alias Config item msg =
 type alias ViewModel msg =
     { selectedIndex : Int
     , focusedIndex : Int
-    , onKeyDown : KeyboardEvent -> msg
+    , onFocusedItemKeyDown : KeyboardEvent -> msg
     }
 
 
@@ -58,7 +58,7 @@ createViewModel config =
         maybeFocusedItem =
             List.getAt focusedIndex config.items
 
-        onKeyDown { key } =
+        onFocusedItemKeyDown { key } =
             let
                 moveFocusIndexBy offset =
                     let
@@ -85,8 +85,40 @@ createViewModel config =
     in
         { selectedIndex = selectedIndex
         , focusedIndex = focusedIndex
-        , onKeyDown = onKeyDown
+        , onFocusedItemKeyDown = onFocusedItemKeyDown
         }
+
+
+findMaybeFocusedIndex vm =
+    let
+        findIndexOfItemWithKey key =
+            List.findIndex (vm.itemKey >> equals key) vm.items
+    in
+        vm.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn vm.items
+
+
+view : Config item msg -> Html msg
+view config =
+    let
+        menuVM =
+            createViewModel config
+
+        itemViewList =
+            config.items
+                .#|> createItemViewModel menuVM config
+                >>> menuItemView
+    in
+        View.FullBleedCapture.init
+            { onMouseDown = config.onOutsideMouseDown
+            , children =
+                [ ul
+                    [ id config.domId
+                    , class "menu"
+                    , attribute "data-prevent-default-keys" "Tab"
+                    ]
+                    itemViewList
+                ]
+            }
 
 
 type alias ItemViewModel msg =
@@ -124,7 +156,7 @@ createItemViewModel menuVM config index item =
 
         onKeyDown =
             if isFocused then
-                menuVM.onKeyDown
+                menuVM.onFocusedItemKeyDown
             else
                 (\_ -> config.noOp)
     in
@@ -142,38 +174,6 @@ boolToTabIndexValue bool =
         0
     else
         -1
-
-
-findMaybeFocusedIndex vm =
-    let
-        findIndexOfItemWithKey key =
-            List.findIndex (vm.itemKey >> equals key) vm.items
-    in
-        vm.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn vm.items
-
-
-view : Config item msg -> Html msg
-view config =
-    let
-        menuVM =
-            createViewModel config
-
-        itemViewList =
-            config.items
-                .#|> createItemViewModel menuVM config
-                >>> menuItemView
-    in
-        View.FullBleedCapture.init
-            { onMouseDown = config.onOutsideMouseDown
-            , children =
-                [ ul
-                    [ id config.domId
-                    , class "menu"
-                    , attribute "data-prevent-default-keys" "Tab"
-                    ]
-                    itemViewList
-                ]
-            }
 
 
 menuItemView itemVM =

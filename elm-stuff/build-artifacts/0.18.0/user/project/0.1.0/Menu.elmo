@@ -69,7 +69,7 @@ var _user$project$Menu$createItemViewModel = F4(
 		var selectedIndex = _p4.selectedIndex;
 		var focusedIndex = _p4.focusedIndex;
 		var isFocused = _elm_lang$core$Native_Utils.eq(focusedIndex, index);
-		var onKeyDown = isFocused ? menuVM.onKeyDown : function (_p5) {
+		var onKeyDown = isFocused ? menuVM.onFocusedItemKeyDown : function (_p5) {
 			return config.noOp;
 		};
 		return {
@@ -93,7 +93,7 @@ var _user$project$Menu$createViewModel = function (config) {
 		_user$project$Menu$findMaybeFocusedIndex(config),
 		selectedIndex);
 	var maybeFocusedItem = A2(_elm_community$list_extra$List_Extra$getAt, focusedIndex, config.items);
-	var onKeyDown = function (_p6) {
+	var onFocusedItemKeyDown = function (_p6) {
 		var _p7 = _p6;
 		var moveFocusIndexBy = function (offset) {
 			var indexToFocusKey = function (index) {
@@ -128,7 +128,7 @@ var _user$project$Menu$createViewModel = function (config) {
 				return config.noOp;
 		}
 	};
-	return {selectedIndex: selectedIndex, focusedIndex: focusedIndex, onKeyDown: onKeyDown};
+	return {selectedIndex: selectedIndex, focusedIndex: focusedIndex, onFocusedItemKeyDown: onFocusedItemKeyDown};
 };
 var _user$project$Menu$view = function (config) {
 	var menuVM = _user$project$Menu$createViewModel(config);
@@ -187,7 +187,7 @@ var _user$project$Menu$Config = function (a) {
 };
 var _user$project$Menu$ViewModel = F3(
 	function (a, b, c) {
-		return {selectedIndex: a, focusedIndex: b, onKeyDown: c};
+		return {selectedIndex: a, focusedIndex: b, onFocusedItemKeyDown: c};
 	});
 var _user$project$Menu$ItemViewModel = F6(
 	function (a, b, c, d, e, f) {

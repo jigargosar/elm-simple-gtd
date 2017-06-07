@@ -137,9 +137,6 @@ createItemViewModel menuVM config index item =
         { selectedIndex, focusedIndex } =
             menuVM
 
-        clampIndex =
-            List.clampIndexIn config.items
-
         onSelect =
             config.onSelect item
 

@@ -23,8 +23,7 @@ import View.FullBleedCapture
 
 
 type alias Config item msg =
-    { items : List item
-    , onSelect : item -> msg
+    { onSelect : item -> msg
     , itemKey : item -> String
     , domId : String
     , itemView : item -> Html msg
@@ -46,30 +45,30 @@ type alias ViewModel item msg =
     }
 
 
-createViewModel : Config item msg -> ViewModel item msg
-createViewModel config =
+createViewModel : List item -> Config item msg -> ViewModel item msg
+createViewModel items config =
     let
         clampIndex =
-            List.clampIndexIn config.items
+            List.clampIndexIn items
 
         selectedIndex =
-            config.items |> List.findIndex config.isSelected ?= 0 |> clampIndex
+            items |> List.findIndex config.isSelected ?= 0 |> clampIndex
 
         focusedIndex =
-            findMaybeFocusedIndex config ?= selectedIndex
+            findMaybeFocusedIndex items config ?= selectedIndex
 
         isFocusedAt =
             equals focusedIndex
 
         maybeFocusedItem =
-            List.getAt focusedIndex config.items
+            List.getAt focusedIndex items
 
         onFocusedItemKeyDown { key } =
             let
                 moveFocusIndexBy offset =
                     let
                         indexToFocusKey index =
-                            List.getAt index config.items ?|> config.itemKey |> Maybe.orElse config.maybeFocusKey
+                            List.getAt index items ?|> config.itemKey |> Maybe.orElse config.maybeFocusKey
                     in
                         offset
                             |> add focusedIndex
@@ -104,22 +103,22 @@ createViewModel config =
         }
 
 
-findMaybeFocusedIndex vm =
+findMaybeFocusedIndex items config =
     let
         findIndexOfItemWithKey key =
-            List.findIndex (vm.itemKey >> equals key) vm.items
+            List.findIndex (config.itemKey >> equals key) items
     in
-        vm.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn vm.items
+        config.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn items
 
 
-view : Config item msg -> Html msg
-view config =
+view : List item -> Config item msg -> Html msg
+view items config =
     let
         menuVM =
-            createViewModel config
+            createViewModel items config
 
         itemViewList =
-            config.items
+            items
                 .#|> createItemViewModel menuVM
                 >>> menuItemView
     in

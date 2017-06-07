@@ -9,7 +9,7 @@ var _user$project$Menu$menuItemView = function (itemVM) {
 				_0: _elm_lang$html$Html_Attributes$tabindex(itemVM.tabIndexValue),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$onKeyDown(itemVM.onKeyDown),
+					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(itemVM.onKeyDown),
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$classList(
@@ -53,22 +53,27 @@ var _user$project$Menu$boolToTabIndexValue = function (bool) {
 	return bool ? 0 : -1;
 };
 var _user$project$Menu$createItemViewModel = F4(
-	function (_p1, config, index, item) {
-		var _p2 = _p1;
-		var isFocused = _elm_lang$core$Native_Utils.eq(_p2.focusedIndex, index);
+	function (menuVM, config, index, item) {
 		var onSelect = config.onSelect(item);
-		var onKeyDown = function (_p3) {
-			var _p4 = _p3;
-			var _p5 = _p4.key;
-			if (_p5.ctor === 'Enter') {
+		var onFocusedItemKeyDown = function (_p1) {
+			var _p2 = _p1;
+			var _p3 = _p2.key;
+			if (_p3.ctor === 'Enter') {
 				return onSelect;
 			} else {
 				return config.noOp;
 			}
 		};
 		var clampIndex = _user$project$Ext_List$clampIndexIn(config.items);
+		var _p4 = menuVM;
+		var selectedIndex = _p4.selectedIndex;
+		var focusedIndex = _p4.focusedIndex;
+		var isFocused = _elm_lang$core$Native_Utils.eq(focusedIndex, index);
+		var onKeyDown = isFocused ? menuVM.onKeyDown : function (_p5) {
+			return config.noOp;
+		};
 		return {
-			isSelected: _elm_lang$core$Native_Utils.eq(_p2.selectedIndex, index),
+			isSelected: _elm_lang$core$Native_Utils.eq(selectedIndex, index),
 			isFocused: isFocused,
 			tabIndexValue: _user$project$Menu$boolToTabIndexValue(isFocused),
 			onClick: onSelect,
@@ -87,6 +92,7 @@ var _user$project$Menu$createViewModel = function (config) {
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 		_user$project$Menu$findMaybeFocusedIndex(config),
 		selectedIndex);
+	var maybeFocusedItem = A2(_elm_community$list_extra$List_Extra$getAt, focusedIndex, config.items);
 	var onKeyDown = function (_p6) {
 		var _p7 = _p6;
 		var moveFocusIndexBy = function (offset) {
@@ -107,6 +113,11 @@ var _user$project$Menu$createViewModel = function (config) {
 		};
 		var _p9 = _p7.key;
 		switch (_p9.ctor) {
+			case 'Enter':
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeFocusedItem, config.onSelect),
+					config.noOp);
 			case 'ArrowUp':
 				return config.onFocusIndexChanged(
 					moveFocusIndexBy(-1));
@@ -144,11 +155,7 @@ var _user$project$Menu$view = function (config) {
 							_1: {
 								ctor: '::',
 								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(menuVM.onKeyDown),
-									_1: {ctor: '[]'}
-								}
+								_1: {ctor: '[]'}
 							}
 						}
 					},

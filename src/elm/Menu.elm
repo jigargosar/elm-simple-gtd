@@ -55,6 +55,9 @@ createViewModel config =
         focusedIndex =
             findMaybeFocusedIndex config ?= selectedIndex
 
+        maybeFocusedItem =
+            List.getAt focusedIndex config.items
+
         onKeyDown { key } =
             let
                 moveFocusIndexBy offset =
@@ -68,6 +71,9 @@ createViewModel config =
                             >> indexToFocusKey
             in
                 case key of
+                    Key.Enter ->
+                        maybeFocusedItem ?|> config.onSelect ?= config.noOp
+
                     Key.ArrowUp ->
                         moveFocusIndexBy -1 |> config.onFocusIndexChanged
 
@@ -94,15 +100,18 @@ type alias ItemViewModel msg =
 
 
 createItemViewModel : ViewModel msg -> Config item msg -> Int -> item -> ItemViewModel msg
-createItemViewModel { selectedIndex, focusedIndex } config index item =
+createItemViewModel menuVM config index item =
     let
+        { selectedIndex, focusedIndex } =
+            menuVM
+
         clampIndex =
             List.clampIndexIn config.items
 
         onSelect =
             config.onSelect item
 
-        onKeyDown { key } =
+        onFocusedItemKeyDown { key } =
             case key of
                 Key.Enter ->
                     onSelect
@@ -112,6 +121,12 @@ createItemViewModel { selectedIndex, focusedIndex } config index item =
 
         isFocused =
             focusedIndex == index
+
+        onKeyDown =
+            if isFocused then
+                menuVM.onKeyDown
+            else
+                (\_ -> config.noOp)
     in
         { isSelected = selectedIndex == index
         , isFocused = isFocused
@@ -155,7 +170,6 @@ view config =
                     [ id config.domId
                     , class "menu"
                     , attribute "data-prevent-default-keys" "Tab"
-                    , onKeyDownStopPropagation menuVM.onKeyDown
                     ]
                     itemViewList
                 ]
@@ -166,7 +180,7 @@ menuItemView itemVM =
     li
         [ onClick itemVM.onClick
         , tabindex itemVM.tabIndexValue
-        , onKeyDown itemVM.onKeyDown
+        , onKeyDownStopPropagation itemVM.onKeyDown
         , classList [ "auto-focus" => itemVM.isFocused ]
         ]
         [ itemVM.view ]

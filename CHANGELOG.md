@@ -1,4 +1,4 @@
-## Upcoming
+## v0.17.5 - 2017-06-07
 * [patch] Replace polymer context/project menus with custom. And style them using mat-css 
 
 ## v0.17.3 - 2017-06-06

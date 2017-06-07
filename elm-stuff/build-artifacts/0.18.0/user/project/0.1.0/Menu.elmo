@@ -1,41 +1,45 @@
 var _user$project$Menu$menuItemView = function (itemVM) {
-	return A2(
-		_elm_lang$html$Html$a,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(itemVM.onClick),
-			_1: {
+	return {
+		ctor: '_Tuple2',
+		_0: itemVM.key,
+		_1: A2(
+			_elm_lang$html$Html$a,
+			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$tabindex(itemVM.tabIndexValue),
+				_0: _elm_lang$html$Html_Events$onClick(itemVM.onClick),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(itemVM.onKeyDown),
+					_0: _elm_lang$html$Html_Attributes$tabindex(itemVM.tabIndexValue),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$classList(
-							{
-								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', itemVM.isFocused),
-								_1: {
+						_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(itemVM.onKeyDown),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$classList(
+								{
 									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'collection-item', true),
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', itemVM.isFocused),
 									_1: {
 										ctor: '::',
-										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'active', itemVM.isSelected),
-										_1: {ctor: '[]'}
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'collection-item', true),
+										_1: {
+											ctor: '::',
+											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'active', itemVM.isSelected),
+											_1: {ctor: '[]'}
+										}
 									}
-								}
-							}),
-						_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
-			}
-		},
-		{
-			ctor: '::',
-			_0: itemVM.view,
-			_1: {ctor: '[]'}
-		});
+			},
+			{
+				ctor: '::',
+				_0: itemVM.view,
+				_1: {ctor: '[]'}
+			})
+	};
 };
 var _user$project$Menu$boolToTabIndexValue = function (bool) {
 	return bool ? 0 : -1;
@@ -43,6 +47,7 @@ var _user$project$Menu$boolToTabIndexValue = function (bool) {
 var _user$project$Menu$createItemViewModel = F3(
 	function (menuVM, index, item) {
 		return {
+			key: menuVM.itemKey(item),
 			isSelected: menuVM.isSelectedAt(index),
 			isFocused: menuVM.isFocusedAt(index),
 			tabIndexValue: menuVM.tabIndexValueAt(index),
@@ -136,7 +141,8 @@ var _user$project$Menu$createViewModel = F3(
 			},
 			onKeyDownAt: onKeyDownAt,
 			onSelect: config.onSelect,
-			itemView: config.itemView
+			itemView: config.itemView,
+			itemKey: config.itemKey
 		};
 	});
 var _user$project$Menu$view = F3(
@@ -154,8 +160,9 @@ var _user$project$Menu$view = F3(
 				onMouseDown: config.onOutsideMouseDown,
 				children: {
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$ul,
+					_0: A3(
+						_elm_lang$html$Html_Keyed$node,
+						'ul',
 						{
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$id('popup-menu'),
@@ -178,11 +185,11 @@ var _user$project$Menu$Config = F7(
 	function (a, b, c, d, e, f, g) {
 		return {onSelect: a, itemKey: b, itemView: c, isSelected: d, onStateChanged: e, noOp: f, onOutsideMouseDown: g};
 	});
-var _user$project$Menu$ViewModel = F6(
-	function (a, b, c, d, e, f) {
-		return {isFocusedAt: a, isSelectedAt: b, tabIndexValueAt: c, onKeyDownAt: d, onSelect: e, itemView: f};
+var _user$project$Menu$ViewModel = F7(
+	function (a, b, c, d, e, f, g) {
+		return {isFocusedAt: a, isSelectedAt: b, tabIndexValueAt: c, onKeyDownAt: d, onSelect: e, itemView: f, itemKey: g};
 	});
-var _user$project$Menu$ItemViewModel = F6(
-	function (a, b, c, d, e, f) {
-		return {isFocused: a, tabIndexValue: b, isSelected: c, onClick: d, onKeyDown: e, view: f};
+var _user$project$Menu$ItemViewModel = F7(
+	function (a, b, c, d, e, f, g) {
+		return {key: a, isFocused: b, tabIndexValue: c, isSelected: d, onClick: e, onKeyDown: f, view: g};
 	});

@@ -4,6 +4,7 @@ import Document
 import Ext.Keyboard exposing (KeyboardEvent, onKeyDown, onKeyDownStopPropagation)
 import Ext.List as List
 import Html.Attributes.Extra exposing (intProperty)
+import Html.Keyed
 import Keyboard.Extra as Key
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -50,6 +51,7 @@ type alias ViewModel item msg =
     , onKeyDownAt : Int -> KeyboardEvent -> msg
     , onSelect : item -> msg
     , itemView : item -> Html msg
+    , itemKey : item -> String
     }
 
 
@@ -118,6 +120,7 @@ createViewModel items state config =
         , onKeyDownAt = onKeyDownAt
         , onSelect = config.onSelect
         , itemView = config.itemView
+        , itemKey = config.itemKey
         }
 
 
@@ -135,7 +138,7 @@ view items state config =
         View.FullBleedCapture.init
             { onMouseDown = config.onOutsideMouseDown
             , children =
-                [ ul
+                [ Html.Keyed.node "ul"
                     [ id "popup-menu"
                     , class "collection"
                     , attribute "data-prevent-default-keys" "Tab"
@@ -146,7 +149,8 @@ view items state config =
 
 
 type alias ItemViewModel msg =
-    { isFocused : Bool
+    { key : String
+    , isFocused : Bool
     , tabIndexValue : Int
     , isSelected : Bool
     , onClick : msg
@@ -157,7 +161,8 @@ type alias ItemViewModel msg =
 
 createItemViewModel : ViewModel item msg -> Int -> item -> ItemViewModel msg
 createItemViewModel menuVM index item =
-    { isSelected = menuVM.isSelectedAt index
+    { key = menuVM.itemKey item
+    , isSelected = menuVM.isSelectedAt index
     , isFocused = menuVM.isFocusedAt index
     , tabIndexValue = menuVM.tabIndexValueAt index
     , onClick = menuVM.onSelect item
@@ -174,7 +179,8 @@ boolToTabIndexValue bool =
 
 
 menuItemView itemVM =
-    a
+    ( itemVM.key
+    , a
         [ onClick itemVM.onClick
         , tabindex itemVM.tabIndexValue
         , onKeyDownStopPropagation itemVM.onKeyDown
@@ -185,3 +191,4 @@ menuItemView itemVM =
             ]
         ]
         [ itemVM.view ]
+    )

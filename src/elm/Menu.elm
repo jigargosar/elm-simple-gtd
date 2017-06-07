@@ -63,8 +63,15 @@ createViewModel items state config =
         selectedIndex =
             items |> List.findIndex config.isSelected ?= 0 |> clampIndex
 
+        maybeFocusedIndex =
+            let
+                findIndexOfItemWithKey key =
+                    List.findIndex (config.itemKey >> equals key) items
+            in
+                state.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn items
+
         focusedIndex =
-            findMaybeFocusedIndex items state config ?= selectedIndex
+            maybeFocusedIndex ?= selectedIndex
 
         isFocusedAt =
             equals focusedIndex
@@ -113,14 +120,6 @@ createViewModel items state config =
         , onSelect = config.onSelect
         , itemView = config.itemView
         }
-
-
-findMaybeFocusedIndex items state config =
-    let
-        findIndexOfItemWithKey key =
-            List.findIndex (config.itemKey >> equals key) items
-    in
-        state.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn items
 
 
 view : List item -> State -> Config item msg -> Html msg

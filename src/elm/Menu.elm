@@ -40,6 +40,7 @@ type alias ViewModel msg =
     { selectedIndex : Int
     , focusedIndex : Int
     , isFocusedAt : Int -> Bool
+    , isSelectedAt : Int -> Bool
     , tabIndexValueAt : Int -> Int
     , onFocusedItemKeyDown : KeyboardEvent -> msg
     , onKeyDownAt : Int -> KeyboardEvent -> msg
@@ -98,6 +99,7 @@ createViewModel config =
         { selectedIndex = selectedIndex
         , focusedIndex = focusedIndex
         , isFocusedAt = isFocusedAt
+        , isSelectedAt = equals selectedIndex
         , tabIndexValueAt = isFocusedAt >> boolToTabIndexValue
         , onFocusedItemKeyDown = onFocusedItemKeyDown
         , onKeyDownAt = onKeyDownAt
@@ -148,26 +150,13 @@ type alias ItemViewModel msg =
 
 createItemViewModel : ViewModel msg -> Config item msg -> Int -> item -> ItemViewModel msg
 createItemViewModel menuVM config index item =
-    let
-        { selectedIndex, focusedIndex } =
-            menuVM
-
-        isFocused =
-            focusedIndex == index
-
-        onKeyDown =
-            if isFocused then
-                menuVM.onFocusedItemKeyDown
-            else
-                (\_ -> config.noOp)
-    in
-        { isSelected = selectedIndex == index
-        , isFocused = isFocused
-        , tabIndexValue = boolToTabIndexValue isFocused
-        , onClick = config.onSelect item
-        , view = config.itemView item
-        , onKeyDown = onKeyDown
-        }
+    { isSelected = menuVM.isSelectedAt index
+    , isFocused = menuVM.isFocusedAt index
+    , tabIndexValue = menuVM.tabIndexValueAt index
+    , onClick = config.onSelect item
+    , view = config.itemView item
+    , onKeyDown = menuVM.onKeyDownAt index
+    }
 
 
 boolToTabIndexValue bool =

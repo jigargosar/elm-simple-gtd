@@ -131,7 +131,6 @@ var _user$project$View$bottomSheet = A2(
 var _user$project$View$createContextMenuConfig = F2(
 	function (model, todo) {
 		return {
-			items: _user$project$Model$getActiveContexts(model),
 			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
 			isSelected: _user$project$Document$hasId(
 				_user$project$Todo$getContextId(todo)),
@@ -154,22 +153,22 @@ var _user$project$View$createContextMenuConfig = F2(
 			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};
 	});
-var _user$project$View$contextMenu = function (model) {
-	return _elm_community$maybe_extra$Maybe_Extra$toList(
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			_user$project$Model$getMaybeEditTodoContextForm(model),
-			function (_p3) {
-				return _user$project$Menu$view(
-					A2(_user$project$View$createContextMenuConfig, model, _p3));
-			}));
+var _user$project$View$todoContextMenuMaybe = function (model) {
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+		_user$project$Model$getMaybeEditTodoContextForm(model),
+		function (_p3) {
+			return A2(
+				_user$project$Menu$view,
+				_user$project$Model$getActiveContexts(model),
+				A2(_user$project$View$createContextMenuConfig, model, _p3));
+		});
 };
 var _user$project$View$createProjectMenuConfig = F2(
 	function (model, _p4) {
 		var _p5 = _p4;
 		var _p8 = _p5.todo;
 		return {
-			items: _user$project$Model$getActiveProjects(model),
 			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p8),
 			isSelected: _user$project$Document$hasId(
 				_user$project$Todo$getProjectId(_p8)),
@@ -190,23 +189,52 @@ var _user$project$View$createProjectMenuConfig = F2(
 			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};
 	});
-var _user$project$View$projectMenu = function (model) {
-	return _elm_community$maybe_extra$Maybe_Extra$toList(
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			_user$project$Model$getMaybeEditTodoProjectForm(model),
-			function (_p9) {
-				return _user$project$Menu$view(
-					A2(_user$project$View$createProjectMenuConfig, model, _p9));
-			}));
-};
-var _user$project$View$overlayViews = function (m) {
+var _user$project$View$todoProjectMenuMaybe = function (model) {
 	return A2(
-		_elm_lang$core$Basics_ops['++'],
-		_user$project$View$contextMenu(m),
-		_user$project$View$projectMenu(m));
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+		_user$project$Model$getMaybeEditTodoProjectForm(model),
+		function (_p9) {
+			return A2(
+				_user$project$Menu$view,
+				_user$project$Model$getActiveProjects(model),
+				A2(_user$project$View$createProjectMenuConfig, model, _p9));
+		});
+};
+var _user$project$View$overlayViews = function (model) {
+	return A2(
+		_elm_lang$core$List$filterMap,
+		_elm_lang$core$Basics$identity,
+		{
+			ctor: '::',
+			_0: _user$project$View$todoContextMenuMaybe(model),
+			_1: {
+				ctor: '::',
+				_0: _user$project$View$todoProjectMenuMaybe(model),
+				_1: {
+					ctor: '::',
+					_0: _user$project$View_ReminderOverlay$maybe(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$LaunchBar_View$maybe(model),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
 };
 var _user$project$View$appView = function (model) {
+	var children = A2(
+		_elm_lang$core$Basics_ops['++'],
+		{
+			ctor: '::',
+			_0: _user$project$View$appDrawerLayoutView(model),
+			_1: {
+				ctor: '::',
+				_0: _user$project$View$addTodoFab(model),
+				_1: {ctor: '[]'}
+			}
+		},
+		_user$project$View$overlayViews(model));
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -214,26 +242,7 @@ var _user$project$View$appView = function (model) {
 			_0: _elm_lang$html$Html_Attributes$id('app-view'),
 			_1: {ctor: '[]'}
 		},
-		A2(
-			_elm_lang$core$Basics_ops['++'],
-			{
-				ctor: '::',
-				_0: _user$project$View$appDrawerLayoutView(model),
-				_1: {
-					ctor: '::',
-					_0: _user$project$View$addTodoFab(model),
-					_1: {
-						ctor: '::',
-						_0: _user$project$View_ReminderOverlay$showReminderOverlay(model),
-						_1: {
-							ctor: '::',
-							_0: _user$project$LaunchBar_View$init(model),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			},
-			_user$project$View$overlayViews(model)));
+		children);
 };
 var _user$project$View$init = function (m) {
 	return A2(

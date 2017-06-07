@@ -22,13 +22,13 @@ import Project
 import String.Extra as String
 
 
-init m =
+maybe m =
     case Model.getEditMode m of
         EditMode.LaunchBar form ->
-            formView form m
+            formView form m |> Just
 
         _ ->
-            span [] []
+            Nothing
 
 
 formView form m =

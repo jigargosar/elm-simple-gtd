@@ -16,13 +16,13 @@ import Maybe.Extra as Maybe
 import WebComponents exposing (..)
 
 
-showReminderOverlay m =
+maybe m =
     case m.reminderOverlay of
         ReminderOverlay.Active activeView todoDetails ->
-            reminderOverlayActiveView activeView todoDetails
+            reminderOverlayActiveView activeView todoDetails |> Just
 
         ReminderOverlay.None ->
-            span [] []
+            Nothing
 
 
 reminderOverlayActiveView activeView todoDetails =

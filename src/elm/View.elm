@@ -38,7 +38,7 @@ import Polymer.Paper as Paper exposing (dialog, material)
 import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import View.ReminderOverlay exposing (showReminderOverlay)
+import View.ReminderOverlay exposing (maybe)
 import View.Shared exposing (..)
 import Todo.View
 import ViewModel
@@ -61,19 +61,23 @@ init m =
 
 
 appView model =
-    div [ id "app-view" ]
-        ([ appDrawerLayoutView model
-         , addTodoFab model
-         , showReminderOverlay model
-         , LaunchBar.View.init model
-         ]
-            ++ (overlayViews model)
-        )
+    let
+        children =
+            [ appDrawerLayoutView model
+            , addTodoFab model
+            ]
+                ++ overlayViews model
+    in
+        div [ id "app-view" ] children
 
 
-overlayViews m =
-    contextMenu m
-        ++ projectMenu m
+overlayViews model =
+    [ todoContextMenuMaybe model
+    , todoProjectMenuMaybe model
+    , View.ReminderOverlay.maybe model
+    , LaunchBar.View.maybe model
+    ]
+        |> List.filterMap identity
 
 
 createProjectMenuConfig : Model -> Todo.ProjectsForm.Model -> Menu.Config Project.Model Msg
@@ -90,12 +94,11 @@ createProjectMenuConfig model ({ todo, maybeFocusKey } as form) =
     }
 
 
-projectMenu : Model -> List (Html Msg)
-projectMenu model =
+todoProjectMenuMaybe : Model -> Maybe (Html Msg)
+todoProjectMenuMaybe model =
     model
         |> Model.getMaybeEditTodoProjectForm
         ?|> (createProjectMenuConfig model >> Menu.view (Model.getActiveProjects model))
-        |> Maybe.toList
 
 
 createContextMenuConfig : Model -> Todo.Model -> Menu.Config Context.Model Msg
@@ -112,12 +115,11 @@ createContextMenuConfig model todo =
     }
 
 
-contextMenu : Model -> List (Html Msg)
-contextMenu model =
+todoContextMenuMaybe : Model -> Maybe (Html Msg)
+todoContextMenuMaybe model =
     model
         |> Model.getMaybeEditTodoContextForm
         ?|> (createContextMenuConfig model >> Menu.view (Model.getActiveContexts model))
-        |> Maybe.toList
 
 
 bottomSheet =

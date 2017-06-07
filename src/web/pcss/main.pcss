@@ -1,5 +1,9 @@
 @import "polymer.pcss";
 
+:root {
+
+}
+
 * {
   box-sizing: border-box;
 }
@@ -151,8 +155,7 @@ paper-listbox {
 
 #context-menu, #project-menu {
   position: absolute;
-//left: 100px; //top: 100px; background-color: white;
-  overflow-y: scroll;
+//left: 100px; //top: 100px; background-color: white; overflow-y: scroll;
   overflow-x: hidden;
   max-height: 100vh;
   min-width: 20vw;
@@ -199,7 +202,10 @@ paper-listbox {
     padding: 0 8px;
     /*white-space: pre-line; !*sequences of whitespace are collapsed*!*/
     /* when indenting items using star, whitespace should not be lost*/
+    //overflow-wrap: break-word;
     white-space: pre-wrap; /*sequences of whitespace are preserved*/
+    //word-break: normal;
+    hyphens:auto;
   }
 
   & paper-item-body {
@@ -251,11 +257,6 @@ app-drawer-layout:not([narrow]) .hide-when-wide {
   display: none;
 }
 
-.text-break-all {
-  white-space: normal;
-  word-break: break-all;
-}
-
 #main-view {
   margin: 1rem 1rem 5rem 1rem;
   max-width: 600px;
@@ -263,14 +264,11 @@ app-drawer-layout:not([narrow]) .hide-when-wide {
   min-height: 70vh;
 }
 
-
-textarea.materialize-textarea{
-  //min-height: 2em;
-  //padding-bottom: 0.5rem;
+textarea.materialize-textarea {
+//min-height: 2em; //padding-bottom: 0.5rem;
 }
 
-
-.fullbleed-capture{
+.fullbleed-capture {
   position: fixed;
   top: 0;
   left: 0;
@@ -279,33 +277,32 @@ textarea.materialize-textarea{
   /*background-color: rgba(0, 0, 0, 0.05);*/
 }
 
-#launch-bar-container{
-  position:fixed;
+#launch-bar-container {
+  position: fixed;
   top: 30vh;
   left: 10vw;
   width: 80vw;
   background-color: rgba(128, 128, 128, 0.99);
   color: white;
-  border-radius:5px;
-  box-shadow:1rem 1rem 3rem gray;
+  border-radius: 5px;
+  box-shadow: 1rem 1rem 3rem gray;
   padding: 1rem;
   /*display: flex;
   flex-direction: row;
   align-items: center;
   justify-content:space-between;*/
   font-size: 1.4rem;
-  line-height:1.2em;
+  line-height: 1.2em;
 
-  & input{
+  & input {
     background-color: transparent;
     border: none;
     outline: none;
-    //visibility: hidden;
-    height:0;
+  //visibility: hidden; height: 0;
     width: 0;
   }
 
-  & .input{
+  & .input {
     text-decoration: underline;
     text-decoration-color: cornflowerblue;
     font-size: 1rem;

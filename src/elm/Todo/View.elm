@@ -97,6 +97,22 @@ type alias TodoViewModel =
     }
 
 
+getDisplayText todo =
+    let
+        tripleNewLineAndRestRegex =
+            (Regex.regex "\\n\\n\\n(.|\n)*")
+
+        trimAndReplaceEmptyWithDefault =
+            String.trim >> String.nonEmpty >>?= "< empty >"
+    in
+        Todo.getText todo
+            |> trimAndReplaceEmptyWithDefault
+            |> Regex.replace
+                (Regex.AtMost 1)
+                tripleNewLineAndRestRegex
+                (\match -> "\n...")
+
+
 createTodoViewModel : SharedViewModel -> Attribute Msg -> Todo.Model -> TodoViewModel
 createTodoViewModel vc tabindexAV todo =
     let
@@ -125,34 +141,6 @@ createTodoViewModel vc tabindexAV todo =
                 ?= "Inbox"
                 |> String.append "@"
                 |> truncateName
-
-        text =
-            Todo.getText todo
-
-        displayText =
-            let
-                cleanText =
-                    text |> String.trim |> String.nonEmpty ?= "< empty >"
-
-                ret =
-                    cleanText
-                        --                        |> Debug.log "cleanText"
-                        |> Regex.replace (Regex.AtMost 1) (Regex.regex "\\n\\n\\n(.|\n)*") (\match -> "\n...")
-
-                --                        |> Debug.log "displayText"
-            in
-                {- case cleanText |> String.lines of
-                   [] ->
-                       -- never happens
-                       ""
-
-                   firstLine :: [] ->
-                       firstLine
-
-                   firstLine :: xs ->
-                       firstLine ++ " ..."
-                -}
-                ret
 
         createEntityActionMsg =
             Model.OnEntityAction (Entity.TodoEntity todo)
@@ -202,7 +190,7 @@ createTodoViewModel vc tabindexAV todo =
         , key = todoId
         , isDeleted = Todo.getDeleted todo
         , onKeyDownMsg = onKeyDownMsg
-        , displayText = displayText
+        , displayText = getDisplayText todo
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
         , setContextMsg = Model.SetTodoContext # todo
@@ -223,21 +211,19 @@ createTodoViewModel vc tabindexAV todo =
 
 defaultView : TodoViewModel -> List (Html Msg)
 defaultView vm =
-    [ div [ class "" ]
-        [ div
-            [ class "text-break-all"
-            , onClick vm.startEditingMsg
-            ]
-            [ doneIconButton vm
-            , span [ class "display-text" ] [ text vm.displayText ]
-            ]
-        , div
-            [ class "layout horizontal end-justified"
-            ]
-            [ reminderView vm
-            , div [ style [ "padding" => "0 8px" ] ] [ contextButton vm ]
-            , div [ style [ "padding" => "0 8px" ] ] [ projectButton vm ]
-            ]
+    [ div
+        [ class ""
+        , onClick vm.startEditingMsg
+        ]
+        [ doneIconButton vm
+        , span [ class "display-text" ] [ text vm.displayText ]
+        ]
+    , div
+        [ class "layout horizontal end-justified"
+        ]
+        [ reminderView vm
+        , div [ style [ "padding" => "0 8px" ] ] [ contextButton vm ]
+        , div [ style [ "padding" => "0 8px" ] ] [ projectButton vm ]
         ]
     ]
 

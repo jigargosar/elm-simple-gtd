@@ -270,6 +270,25 @@ var _user$project$Todo_View$doneIconButton = function (vm) {
 		},
 		{ctor: '[]'});
 };
+var _user$project$Todo_View$getDisplayText = function (todo) {
+	var trimAndReplaceEmptyWithDefault = A2(
+		_user$project$Ext_Function_Infix_ops['>>?='],
+		function (_p5) {
+			return _elm_community$string_extra$String_Extra$nonEmpty(
+				_elm_lang$core$String$trim(_p5));
+		},
+		'< empty >');
+	var tripleNewLineAndRestRegex = _elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*');
+	return A4(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$AtMost(1),
+		tripleNewLineAndRestRegex,
+		function (match) {
+			return '\n...';
+		},
+		trimAndReplaceEmptyWithDefault(
+			_user$project$Todo$getText(todo)));
+};
 var _user$project$Todo_View$createTodoViewModel = F3(
 	function (vc, tabindexAV, todo) {
 		var maybeEditTodoForm = vc.getMaybeEditTodoFormForTodo(todo);
@@ -281,23 +300,6 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			_user$project$Entity$TodoEntity(todo));
 		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
 		var toggleDeleteMsg = createEntityActionMsg(_user$project$Entity$ToggleDeleted);
-		var text = _user$project$Todo$getText(todo);
-		var displayText = function () {
-			var cleanText = A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-				_elm_community$string_extra$String_Extra$nonEmpty(
-					_elm_lang$core$String$trim(text)),
-				'< empty >');
-			var ret = A4(
-				_elm_lang$core$Regex$replace,
-				_elm_lang$core$Regex$AtMost(1),
-				_elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*'),
-				function (match) {
-					return '\n...';
-				},
-				cleanText);
-			return ret;
-		}();
 		var contextId = _user$project$Todo$getContextId(todo);
 		var projectId = _user$project$Todo$getProjectId(todo);
 		var truncateName = _elm_community$string_extra$String_Extra$ellipsis(15);
@@ -325,13 +327,13 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					'Inbox')));
 		var todoId = _user$project$Document$getId(todo);
 		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
-		var onKeyDownMsg = function (_p5) {
-			var _p6 = _p5;
-			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p6)) {
+		var onKeyDownMsg = function (_p6) {
+			var _p7 = _p6;
+			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p7)) {
 				return _user$project$Model$commonMsg.noOp;
 			} else {
-				var _p7 = _p6.key;
-				switch (_p7.ctor) {
+				var _p8 = _p7.key;
+				switch (_p8.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 					case 'CharE':
@@ -354,7 +356,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			key: todoId,
 			isDeleted: _user$project$Todo$getDeleted(todo),
 			onKeyDownMsg: onKeyDownMsg,
-			displayText: displayText,
+			displayText: _user$project$Todo_View$getDisplayText(todo),
 			projectDisplayName: projectDisplayName,
 			contextDisplayName: contextDisplayName,
 			setContextMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
@@ -373,8 +375,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p8, content) {
-		var _p9 = _p8;
+	function (_p9, content) {
+		var _p10 = _p9;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$button,
 			{
@@ -393,7 +395,7 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
 						_1: {
 							ctor: '::',
-							_0: _p9.tabindexAV,
+							_0: _p10.tabindexAV,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -673,99 +675,88 @@ var _user$project$Todo_View$defaultView = function (vm) {
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$class(''),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+					_1: {ctor: '[]'}
+				}
 			},
 			{
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('text-break-all'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
-							_1: {ctor: '[]'}
-						}
-					},
-					{
-						ctor: '::',
-						_0: _user$project$Todo_View$doneIconButton(vm),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$span,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('display-text'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(vm.displayText),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}),
+				_0: _user$project$Todo_View$doneIconButton(vm),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$div,
+						_elm_lang$html$Html$span,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('layout horizontal end-justified'),
+							_0: _elm_lang$html$Html_Attributes$class('display-text'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: _user$project$Todo_View$reminderView(vm),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$style(
-											{
-												ctor: '::',
-												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _user$project$Todo_View$contextButton(vm),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$div,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$style(
-												{
-													ctor: '::',
-													_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _user$project$Todo_View$projectButton(vm),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
+							_0: _elm_lang$html$Html$text(vm.displayText),
+							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
 				}
 			}),
-		_1: {ctor: '[]'}
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('layout horizontal end-justified'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _user$project$Todo_View$reminderView(vm),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _user$project$Todo_View$contextButton(vm),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
+											ctor: '::',
+											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _user$project$Todo_View$projectButton(vm),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		}
 	};
 };
 var _user$project$Todo_View$init = function (vm) {
@@ -807,7 +798,7 @@ var _user$project$Todo_View$init = function (vm) {
 		},
 		A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p10) {
+			function (_p11) {
 				return _user$project$Todo_View$defaultView(vm);
 			},
 			_user$project$Todo_View$editView,

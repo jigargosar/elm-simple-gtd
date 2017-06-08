@@ -125,8 +125,26 @@ defaultHeader viewModel m =
                         , slotDropdownTrigger
                         ]
                         []
-                    , Paper.listbox [ slotDropdownContent ]
+                    , Paper.listbox [ class "", slotDropdownContent ]
                         [ userSignInLink
+                        , Paper.item []
+                            [ Paper.itemBody []
+                                [ a
+                                    [ target "_blank"
+                                    , href "https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md"
+                                    ]
+                                    [ text "Changelog v", text m.appVersion ]
+                                ]
+                            ]
+                        , Paper.item []
+                            [ Paper.itemBody []
+                                [ a
+                                    [ target "_blank"
+                                    , href "https://github.com/jigargosar/elm-simple-gtd"
+                                    ]
+                                    [ text "Github" ]
+                                ]
+                            ]
                         ]
                     ]
                 ]

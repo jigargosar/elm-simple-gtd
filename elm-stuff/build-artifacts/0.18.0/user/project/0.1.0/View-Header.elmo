@@ -123,13 +123,87 @@ var _user$project$View_Header$defaultHeader = F2(
 											_edvail$elm_polymer$Polymer_Paper$listbox,
 											{
 												ctor: '::',
-												_0: _user$project$WebComponents$slotDropdownContent,
-												_1: {ctor: '[]'}
+												_0: _elm_lang$html$Html_Attributes$class(''),
+												_1: {
+													ctor: '::',
+													_0: _user$project$WebComponents$slotDropdownContent,
+													_1: {ctor: '[]'}
+												}
 											},
 											{
 												ctor: '::',
 												_0: userSignInLink,
-												_1: {ctor: '[]'}
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_edvail$elm_polymer$Polymer_Paper$item,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_edvail$elm_polymer$Polymer_Paper$itemBody,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$a,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$href('https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md'),
+																				_1: {ctor: '[]'}
+																			}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Changelog v'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text(m.appVersion),
+																				_1: {ctor: '[]'}
+																			}
+																		}),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_edvail$elm_polymer$Polymer_Paper$item,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: A2(
+																	_edvail$elm_polymer$Polymer_Paper$itemBody,
+																	{ctor: '[]'},
+																	{
+																		ctor: '::',
+																		_0: A2(
+																			_elm_lang$html$Html$a,
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																				_1: {
+																					ctor: '::',
+																					_0: _elm_lang$html$Html_Attributes$href('https://github.com/jigargosar/elm-simple-gtd'),
+																					_1: {ctor: '[]'}
+																				}
+																			},
+																			{
+																				ctor: '::',
+																				_0: _elm_lang$html$Html$text('Github'),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}
 											}),
 										_1: {ctor: '[]'}
 									}

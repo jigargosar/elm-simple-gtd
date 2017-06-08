@@ -1,3 +1,7 @@
+## Upcoming
+* [fix] header to display viewName
+* add github and changelog link in account menu 
+
 ## v0.17.8 - 2017-06-08
 * quick nav: Use g key to go to entity, and for todo, toggle current grouping view 
 

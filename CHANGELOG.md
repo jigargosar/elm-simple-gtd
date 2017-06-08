@@ -1,3 +1,6 @@
+## Upcoming
+* quick nav: Use g key to go to entity, and for todo, toggle current grouping view 
+
 ## v0.17.6 - 2017-06-08
 * [fix] bug: new todo cursor jump 
 

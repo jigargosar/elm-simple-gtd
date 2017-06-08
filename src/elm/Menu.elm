@@ -35,6 +35,14 @@ initState =
     }
 
 
+setFocusKey focusKey state =
+    { state | maybeFocusKey = Just focusKey }
+
+
+setFocusKeyIn =
+    flip setFocusKey
+
+
 type alias Config item msg =
     { onSelect : item -> msg
     , itemKey : item -> String
@@ -56,6 +64,11 @@ type alias ViewModel item msg =
     , itemView : item -> Html msg
     , itemKey : item -> String
     }
+
+
+splitSwapListAt : Int -> List item -> List item
+splitSwapListAt index =
+    List.splitAt index >> Tuple2.swap >> uncurry List.append
 
 
 createViewModel : List item -> State -> Config item msg -> ViewModel item msg
@@ -83,18 +96,26 @@ createViewModel items state config =
         maybeFocusedItem =
             List.getAt focusedIndex items
 
-        moveFocusToItemWithChar singleChar state =
+        findItemStartingWith singleChar =
             let
+                boil =
+                    String.toLower
+
                 charString =
-                    String.fromChar singleChar |> String.toLower
+                    String.fromChar singleChar
 
-                findItem =
-                    List.find (config.itemSearchText >> String.startsWith charString)
-
-                newItems =
-                    items |> List.splitAt (focusedIndex + 1) |> Tuple2.swap |> uncurry List.append
+                findPred =
+                    config.itemSearchText >> boil >> String.startsWith (boil charString)
             in
-                newItems |> findItem ?|> config.itemKey >> Just >> State
+                List.find findPred
+
+        maybeFocusItemStartingWith singleChar =
+            items
+                |> splitSwapListAt (focusedIndex + 1)
+                |> findItemStartingWith singleChar
+                ?|> config.itemKey
+                >> setFocusKeyIn state
+                |> maybeOnStateChanged
 
         maybeOnStateChanged maybeState =
             maybeState ?|> config.onStateChanged ?= config.noOp
@@ -127,7 +148,7 @@ createViewModel items state config =
                     _ ->
                         case keyString |> String.toList of
                             singleChar :: [] ->
-                                moveFocusToItemWithChar singleChar state |> maybeOnStateChanged
+                                maybeFocusItemStartingWith singleChar
 
                             _ ->
                                 config.noOp

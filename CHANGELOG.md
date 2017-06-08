@@ -1,4 +1,4 @@
-## Upcoming
+## v0.17.12 - 2017-06-08
 * [fix] header display css 
 
 ## v0.17.11 - 2017-06-08

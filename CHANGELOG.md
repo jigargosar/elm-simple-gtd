@@ -1,3 +1,6 @@
+## Upcoming
+* [fix] header display css 
+
 ## v0.17.11 - 2017-06-08
 * [fix] header to display viewName
 * add github and changelog link in account menu 

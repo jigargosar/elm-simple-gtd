@@ -1,4 +1,4 @@
-## Upcoming
+## v0.17.6 - 2017-06-08
 * [fix] bug: new todo cursor jump 
 
 ## v0.17.5 - 2017-06-07

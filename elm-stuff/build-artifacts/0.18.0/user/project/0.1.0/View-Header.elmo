@@ -163,7 +163,7 @@ var _user$project$View_Header$headerView = function (m) {
 								_user$project$Model$NewTodoTextChanged(_p3)),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$value(
+								_0: _elm_lang$html$Html_Attributes$defaultValue(
 									_user$project$Todo_NewForm$getText(_p3)),
 								_1: {
 									ctor: '::',
@@ -171,15 +171,7 @@ var _user$project$View_Header$headerView = function (m) {
 									_1: {
 										ctor: '::',
 										_0: _user$project$Ext_Keyboard$onKeyUp(_user$project$Model$NewTodoKeyUp),
-										_1: {
-											ctor: '::',
-											_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'label', 'New Todo'),
-											_1: {
-												ctor: '::',
-												_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'alwaysFloatLabel', true),
-												_1: {ctor: '[]'}
-											}
-										}
+										_1: {ctor: '[]'}
 									}
 								}
 							}

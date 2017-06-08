@@ -67,12 +67,12 @@ headerView m =
                 [ input
                     [ class "auto-focus"
                     , onInput (Model.NewTodoTextChanged form)
-                    , form |> Todo.NewForm.getText |> value
+                    , form |> Todo.NewForm.getText |> defaultValue
                     , onBlur Model.DeactivateEditingMode
                     , Keyboard.onKeyUp Model.NewTodoKeyUp
-                    , stringProperty "label" "New Todo"
-                    , boolProperty "alwaysFloatLabel" True
 
+                    --                    , stringProperty "label" "New Todo"
+                    --                    , boolProperty "alwaysFloatLabel" True
                     --                    , style [ ( "width", "100%" ), "color" => "white" ]
                     ]
                     []

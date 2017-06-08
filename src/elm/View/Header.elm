@@ -25,10 +25,6 @@ import Set
 import WebComponents exposing (..)
 
 
-newTodoInputId =
-    "new-todo-input"
-
-
 init viewModel m =
     let
         fixedAttributeAsList =
@@ -67,18 +63,21 @@ init viewModel m =
 headerView m =
     case m.editMode of
         EditMode.NewTodo form ->
-            Paper.input
-                [ id newTodoInputId
-                , class "auto-focus"
-                , onInput (Model.NewTodoTextChanged form)
-                , form |> Todo.NewForm.getText |> value
-                , onBlur Model.DeactivateEditingMode
-                , Keyboard.onKeyUp Model.NewTodoKeyUp
-                , stringProperty "label" "New Todo"
-                , boolProperty "alwaysFloatLabel" True
-                , style [ ( "width", "100%" ), "color" => "white" ]
+            div [ class "new-todo input-field" ]
+                [ input
+                    [ class "auto-focus"
+                    , onInput (Model.NewTodoTextChanged form)
+                    , form |> Todo.NewForm.getText |> value
+                    , onBlur Model.DeactivateEditingMode
+                    , Keyboard.onKeyUp Model.NewTodoKeyUp
+                    , stringProperty "label" "New Todo"
+                    , boolProperty "alwaysFloatLabel" True
+
+                    --                    , style [ ( "width", "100%" ), "color" => "white" ]
+                    ]
+                    []
+                , label [ class "active" ] [ text "New Todo" ]
                 ]
-                []
 
         _ ->
             defaultHeader m

@@ -139,51 +139,44 @@ var _user$project$View_Header$defaultHeader = function (m) {
 			}
 		});
 };
-var _user$project$View_Header$newTodoInputId = 'new-todo-input';
 var _user$project$View_Header$headerView = function (m) {
 	var _p2 = m.editMode;
 	if (_p2.ctor === 'NewTodo') {
 		var _p3 = _p2._0;
 		return A2(
-			_edvail$elm_polymer$Polymer_Paper$input,
+			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id(_user$project$View_Header$newTodoInputId),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
-					_1: {
+				_0: _elm_lang$html$Html_Attributes$class('new-todo input-field'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onInput(
-							_user$project$Model$NewTodoTextChanged(_p3)),
+						_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$value(
-								_user$project$Todo_NewForm$getText(_p3)),
+							_0: _elm_lang$html$Html_Events$onInput(
+								_user$project$Model$NewTodoTextChanged(_p3)),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$DeactivateEditingMode),
+								_0: _elm_lang$html$Html_Attributes$value(
+									_user$project$Todo_NewForm$getText(_p3)),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Ext_Keyboard$onKeyUp(_user$project$Model$NewTodoKeyUp),
+									_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$DeactivateEditingMode),
 									_1: {
 										ctor: '::',
-										_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'label', 'New Todo'),
+										_0: _user$project$Ext_Keyboard$onKeyUp(_user$project$Model$NewTodoKeyUp),
 										_1: {
 											ctor: '::',
-											_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'alwaysFloatLabel', true),
+											_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'label', 'New Todo'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$style(
-													{
-														ctor: '::',
-														_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
-														_1: {
-															ctor: '::',
-															_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', 'white'),
-															_1: {ctor: '[]'}
-														}
-													}),
+												_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'alwaysFloatLabel', true),
 												_1: {ctor: '[]'}
 											}
 										}
@@ -191,10 +184,25 @@ var _user$project$View_Header$headerView = function (m) {
 								}
 							}
 						}
-					}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$label,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('active'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('New Todo'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
 				}
-			},
-			{ctor: '[]'});
+			});
 	} else {
 		return _user$project$View_Header$defaultHeader(m);
 	}

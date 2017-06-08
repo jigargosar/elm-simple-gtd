@@ -3,7 +3,7 @@ var _user$project$Menu$menuItemView = function (itemVM) {
 		ctor: '_Tuple2',
 		_0: itemVM.key,
 		_1: A2(
-			_elm_lang$html$Html$a,
+			_elm_lang$html$Html$li,
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Events$onClick(itemVM.onClick),

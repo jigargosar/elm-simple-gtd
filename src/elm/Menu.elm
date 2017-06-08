@@ -216,7 +216,7 @@ boolToTabIndexValue bool =
 
 menuItemView itemVM =
     ( itemVM.key
-    , a
+    , li
         [ onClick itemVM.onClick
         , tabindex itemVM.tabIndexValue
         , onKeyDownStopPropagation itemVM.onKeyDown

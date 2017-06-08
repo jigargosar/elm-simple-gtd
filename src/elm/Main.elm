@@ -332,6 +332,9 @@ update msg =
                         Entity.ToggleSelected ->
                             Return.map (Model.toggleEntitySelection entity)
 
+                        Entity.Goto ->
+                            Return.map (Model.switchToEntityListViewFromEntity entity)
+
                 OnLaunchBarMsgWithNow msg now ->
                     case msg of
                         LaunchBar.OnEnter entity ->

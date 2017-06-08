@@ -205,8 +205,23 @@ var _user$project$Entity$ProjectsView = {ctor: 'ProjectsView'};
 var _user$project$Entity$ContextView = function (a) {
 	return {ctor: 'ContextView', _0: a};
 };
+var _user$project$Entity$getEntityViewType = function (entity) {
+	var _p5 = entity;
+	switch (_p5.ctor) {
+		case 'ContextEntity':
+			return _user$project$Entity$ContextView(
+				_user$project$Document$getId(_p5._0));
+		case 'ProjectEntity':
+			return _user$project$Entity$ProjectView(
+				_user$project$Document$getId(_p5._0));
+		default:
+			return _user$project$Entity$ContextView(
+				_user$project$Todo$getContextId(_p5._0));
+	}
+};
 var _user$project$Entity$ContextsView = {ctor: 'ContextsView'};
 var _user$project$Entity$defaultListView = _user$project$Entity$ContextsView;
+var _user$project$Entity$Goto = {ctor: 'Goto'};
 var _user$project$Entity$ToggleSelected = {ctor: 'ToggleSelected'};
 var _user$project$Entity$OnFocusIn = {ctor: 'OnFocusIn'};
 var _user$project$Entity$NameChanged = function (a) {
@@ -244,21 +259,21 @@ var _user$project$Entity$createGroupingForContexts = F2(
 				_user$project$Entity$createContextTodoGroup(getTodoList)));
 	});
 var _user$project$Entity$flattenGrouping = function (grouping) {
-	var _p5 = grouping;
-	switch (_p5.ctor) {
+	var _p6 = grouping;
+	switch (_p6.ctor) {
 		case 'SingleContext':
 			return {
 				ctor: '::',
-				_0: _user$project$Entity$ContextEntity(_p5._0.context),
+				_0: _user$project$Entity$ContextEntity(_p6._0.context),
 				_1: _user$project$Entity$flattenGrouping(
-					_user$project$Entity$MultiProject(_p5._1))
+					_user$project$Entity$MultiProject(_p6._1))
 			};
 		case 'SingleProject':
 			return {
 				ctor: '::',
-				_0: _user$project$Entity$ProjectEntity(_p5._0.project),
+				_0: _user$project$Entity$ProjectEntity(_p6._0.project),
 				_1: _user$project$Entity$flattenGrouping(
-					_user$project$Entity$MultiContext(_p5._1))
+					_user$project$Entity$MultiContext(_p6._1))
 			};
 		case 'MultiContext':
 			return A2(
@@ -270,7 +285,7 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.list, _user$project$Entity$TodoEntity)
 					};
 				},
-				_p5._0);
+				_p6._0);
 		default:
 			return A2(
 				_elm_lang$core$List$concatMap,
@@ -281,7 +296,7 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.list, _user$project$Entity$TodoEntity)
 					};
 				},
-				_p5._0);
+				_p6._0);
 	}
 };
 var _user$project$Entity$SingleProject = F2(

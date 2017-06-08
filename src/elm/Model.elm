@@ -513,6 +513,10 @@ startEditingEntity entity model =
     setEditMode (createEntityEditForm entity model) model
 
 
+switchToEntityListViewFromEntity entity =
+    entity |> Entity.getEntityViewType |> setEntityListViewType
+
+
 updateEditModeNameChanged newName entity model =
     case model.editMode of
         EditMode.EditContext ecm ->

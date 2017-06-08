@@ -25,6 +25,8 @@ var _user$project$EntityList_GroupViewModel$create = F3(
 					return startEditingMsg;
 				case 'Delete':
 					return toggleDeleteMsg;
+				case 'CharG':
+					return createEntityActionMsg(_user$project$Entity$Goto);
 				default:
 					return _user$project$Model$commonMsg.noOp;
 			}

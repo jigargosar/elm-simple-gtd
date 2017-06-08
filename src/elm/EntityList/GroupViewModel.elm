@@ -99,6 +99,9 @@ create tabindexAV config entityModel =
                 Key.Delete ->
                     toggleDeleteMsg
 
+                Key.CharG ->
+                    createEntityActionMsg Entity.Goto
+
                 _ ->
                     commonMsg.noOp
 

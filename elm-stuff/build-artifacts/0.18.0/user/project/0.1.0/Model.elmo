@@ -1541,3 +1541,7 @@ var _user$project$Model$setEntityListViewType = function (_p76) {
 	return _user$project$Model$switchToView(
 		_user$project$Model$EntityListView(_p76));
 };
+var _user$project$Model$switchToEntityListViewFromEntity = function (entity) {
+	return _user$project$Model$setEntityListViewType(
+		_user$project$Entity$getEntityViewType(entity));
+};

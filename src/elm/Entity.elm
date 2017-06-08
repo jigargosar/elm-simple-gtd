@@ -35,6 +35,7 @@ type Action
     | NameChanged String
     | OnFocusIn
     | ToggleSelected
+    | Goto
 
 
 getId entity =
@@ -91,6 +92,19 @@ routes viewType =
                 [ "Inbox" ]
             else
                 [ "context", id ]
+
+
+getEntityViewType : Entity -> ListViewType
+getEntityViewType entity =
+    case entity of
+        ContextEntity model ->
+            Document.getId model |> ContextView
+
+        ProjectEntity model ->
+            Document.getId model |> ProjectView
+
+        TodoEntity model ->
+            Todo.getContextId model |> ContextView
 
 
 type GroupEntity

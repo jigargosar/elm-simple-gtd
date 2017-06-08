@@ -20,6 +20,7 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Polymer.Paper as Paper
 import Project
 import Todo
+import Tuple2
 import View.FullBleedCapture
 
 
@@ -82,8 +83,21 @@ createViewModel items state config =
         maybeFocusedItem =
             List.getAt focusedIndex items
 
-        moveFocusToItemWithChar singleChar =
-            state
+        moveFocusToItemWithChar singleChar state =
+            let
+                charString =
+                    String.fromChar singleChar |> String.toLower
+
+                findItem =
+                    List.find (config.itemSearchText >> String.startsWith charString)
+
+                newItems =
+                    items |> List.splitAt (focusedIndex + 1) |> Tuple2.swap |> uncurry List.append
+            in
+                newItems |> findItem ?|> config.itemKey >> Just >> State
+
+        maybeOnStateChanged maybeState =
+            maybeState ?|> config.onStateChanged ?= config.noOp
 
         onFocusedItemKeyDown { key, keyString } =
             let
@@ -113,7 +127,7 @@ createViewModel items state config =
                     _ ->
                         case keyString |> String.toList of
                             singleChar :: [] ->
-                                moveFocusToItemWithChar singleChar |> config.onStateChanged
+                                moveFocusToItemWithChar singleChar state |> maybeOnStateChanged
 
                             _ ->
                                 config.noOp

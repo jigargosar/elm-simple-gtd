@@ -62,8 +62,11 @@ var _user$project$Menu$State = function (a) {
 };
 var _user$project$Menu$createViewModel = F3(
 	function (items, state, config) {
-		var moveFocusToItemWithChar = function (singleChar) {
-			return state;
+		var maybeOnStateChanged = function (maybeState) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeState, config.onStateChanged),
+				config.noOp);
 		};
 		var maybeFocusedIndex = function () {
 			var findIndexOfItemWithKey = function (key) {
@@ -94,8 +97,33 @@ var _user$project$Menu$createViewModel = F3(
 		var focusedIndex = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='], maybeFocusedIndex, selectedIndex);
 		var isFocusedAt = _user$project$Ext_Function$equals(focusedIndex);
 		var maybeFocusedItem = A2(_elm_community$list_extra$List_Extra$getAt, focusedIndex, items);
-		var onFocusedItemKeyDown = function (_p1) {
-			var _p2 = _p1;
+		var moveFocusToItemWithChar = F2(
+			function (singleChar, state) {
+				var newItems = A2(
+					_elm_lang$core$Basics$uncurry,
+					_elm_lang$core$List$append,
+					_Fresheyeball$elm_tuple_extra$Tuple2$swap(
+						A2(_elm_community$list_extra$List_Extra$splitAt, focusedIndex + 1, items)));
+				var charString = _elm_lang$core$String$toLower(
+					_elm_lang$core$String$fromChar(singleChar));
+				var findItem = _elm_community$list_extra$List_Extra$find(
+					function (_p1) {
+						return A2(
+							_elm_lang$core$String$startsWith,
+							charString,
+							config.itemSearchText(_p1));
+					});
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					findItem(newItems),
+					function (_p2) {
+						return _user$project$Menu$State(
+							_elm_lang$core$Maybe$Just(
+								config.itemKey(_p2)));
+					});
+			});
+		var onFocusedItemKeyDown = function (_p3) {
+			var _p4 = _p3;
 			var moveFocusIndexBy = function (offset) {
 				var indexToFocusKey = function (index) {
 					return A2(
@@ -106,15 +134,15 @@ var _user$project$Menu$createViewModel = F3(
 							A2(_elm_community$list_extra$List_Extra$getAt, index, items),
 							config.itemKey));
 				};
-				return function (_p3) {
+				return function (_p5) {
 					return _user$project$Menu$State(
 						indexToFocusKey(
 							clampIndex(
-								A2(_user$project$Ext_Function$add, focusedIndex, _p3))));
+								A2(_user$project$Ext_Function$add, focusedIndex, _p5))));
 				}(offset);
 			};
-			var _p4 = _p2.key;
-			switch (_p4.ctor) {
+			var _p6 = _p4.key;
+			switch (_p6.ctor) {
 				case 'Enter':
 					return A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
@@ -127,26 +155,26 @@ var _user$project$Menu$createViewModel = F3(
 					return config.onStateChanged(
 						moveFocusIndexBy(1));
 				default:
-					var _p5 = _elm_lang$core$String$toList(_p2.keyString);
-					if ((_p5.ctor === '::') && (_p5._1.ctor === '[]')) {
-						return config.onStateChanged(
-							moveFocusToItemWithChar(_p5._0));
+					var _p7 = _elm_lang$core$String$toList(_p4.keyString);
+					if ((_p7.ctor === '::') && (_p7._1.ctor === '[]')) {
+						return maybeOnStateChanged(
+							A2(moveFocusToItemWithChar, _p7._0, state));
 					} else {
 						return config.noOp;
 					}
 			}
 		};
 		var onKeyDownAt = function (index) {
-			return isFocusedAt(index) ? onFocusedItemKeyDown : function (_p6) {
+			return isFocusedAt(index) ? onFocusedItemKeyDown : function (_p8) {
 				return config.noOp;
 			};
 		};
 		return {
 			isFocusedAt: isFocusedAt,
 			isSelectedAt: _user$project$Ext_Function$equals(selectedIndex),
-			tabIndexValueAt: function (_p7) {
+			tabIndexValueAt: function (_p9) {
 				return _user$project$Menu$boolToTabIndexValue(
-					isFocusedAt(_p7));
+					isFocusedAt(_p9));
 			},
 			onKeyDownAt: onKeyDownAt,
 			onSelect: config.onSelect,

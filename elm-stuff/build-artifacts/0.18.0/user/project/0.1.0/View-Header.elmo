@@ -51,22 +51,26 @@ var _user$project$View_Header$defaultHeader = F2(
 					_0: _elm_lang$html$Html$text('SignIn'),
 					_1: {ctor: '[]'}
 				}));
-		var title = m.developmentMode ? A2(
+		var title_ = m.developmentMode ? A2(
 			_elm_lang$core$Basics_ops['++'],
 			viewModel.viewName,
 			A2(_elm_lang$core$Basics_ops['++'], ' dev:', m.appVersion)) : viewModel.viewName;
 		return {
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$h4,
+				_elm_lang$html$Html$h5,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('ellipsis'),
-					_1: {ctor: '[]'}
+					_0: _elm_lang$html$Html_Attributes$class('ellipsis title'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$title(title_),
+						_1: {ctor: '[]'}
+					}
 				},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(title),
+					_0: _elm_lang$html$Html$text(title_),
 					_1: {ctor: '[]'}
 				}),
 			_1: {

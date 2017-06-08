@@ -91,7 +91,7 @@ headLineText title =
 
 defaultHeader viewModel m =
     let
-        title =
+        title_ =
             if m.developmentMode then
                 viewModel.viewName ++ " dev:" ++ m.appVersion
             else
@@ -113,7 +113,7 @@ defaultHeader viewModel m =
                 ?|> (\_ -> Paper.item [ onClick Model.SignOut ] [ text "SignOut" ])
                 ?= Paper.item [ onClick Model.SignIn ] [ text "SignIn" ]
     in
-        [ h4 [ class "ellipsis" ] [ title |> text ]
+        [ h5 [ class "ellipsis title", title title_ ] [ title_ |> text ]
         , Paper.itemBody [] []
         , Paper.menuButton
             [ dynamicAlign

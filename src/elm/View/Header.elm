@@ -55,12 +55,12 @@ init viewModel m =
                     , class "hide-when-wide"
                     ]
                     []
-                , headerView m
+                , headerView viewModel m
                 ]
             ]
 
 
-headerView m =
+headerView viewModel m =
     case m.editMode of
         EditMode.NewTodo form ->
             div [ class "new-todo input-field" ]
@@ -80,19 +80,20 @@ headerView m =
                 ]
 
         _ ->
-            defaultHeader m
+            defaultHeader viewModel m
 
 
-defaultHeader m =
+headLineText title =
+    div [ class "big-paper-item-text" ] [ text title ]
+
+
+defaultHeader viewModel m =
     let
         title =
-            (if m.developmentMode then
-                "DEV_ENV"
-             else
-                "SimpleGTD"
-            )
-                ++ " "
-                ++ m.appVersion
+            if m.developmentMode then
+                "DEV_ENV" ++ " " ++ m.appVersion
+            else
+                viewModel.viewName
 
         maybeUserProfile =
             Model.getMaybeUserProfile m

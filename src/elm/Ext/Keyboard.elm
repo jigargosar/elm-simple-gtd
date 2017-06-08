@@ -7,6 +7,7 @@ import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Keyboard.Extra as KX exposing (Key)
 import Ext.Function.Infix exposing (..)
+import Keyboard
 
 
 onKeyUp : (KeyboardEvent -> msg) -> Attribute msg
@@ -60,10 +61,17 @@ keyboardEventDecoder =
         |> D.required "metaKey" D.bool
         |> D.required "ctrlKey" D.bool
         |> D.required "altKey" D.bool
+        |> D.required "key" D.string
 
 
 type alias KeyboardEvent =
-    { key : Key, isShiftDown : Bool, isMetaDown : Bool, isControlDown : Bool, isAltDown : Bool }
+    { key : Key
+    , isShiftDown : Bool
+    , isMetaDown : Bool
+    , isControlDown : Bool
+    , isAltDown : Bool
+    , keyString : String
+    }
 
 
 isAnySoftKeyDown ke =
@@ -95,8 +103,8 @@ onEnter msg =
     Events.on "keyup" (succeedIfDecodedKeyEquals KX.Enter msg)
 
 
-keyUps =
-    KX.ups
+keyUps toMsg =
+    Keyboard.ups (toMsg << KX.fromCode {- << Debug.log "global key code" -})
 
 
 init =

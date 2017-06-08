@@ -1,5 +1,6 @@
 module Menu exposing (..)
 
+import Char
 import Document
 import Ext.Keyboard exposing (KeyboardEvent, onKeyDown, onKeyDownStopPropagation)
 import Ext.List as List
@@ -36,6 +37,7 @@ initState =
 type alias Config item msg =
     { onSelect : item -> msg
     , itemKey : item -> String
+    , itemSearchText : item -> String
     , itemView : item -> Html msg
     , isSelected : item -> Bool
     , onStateChanged : State -> msg
@@ -80,7 +82,10 @@ createViewModel items state config =
         maybeFocusedItem =
             List.getAt focusedIndex items
 
-        onFocusedItemKeyDown { key } =
+        moveFocusToItemWithChar singleChar =
+            state
+
+        onFocusedItemKeyDown { key, keyString } =
             let
                 moveFocusIndexBy offset =
                     let
@@ -106,7 +111,12 @@ createViewModel items state config =
                         moveFocusIndexBy 1 |> config.onStateChanged
 
                     _ ->
-                        config.noOp
+                        case keyString |> String.toList of
+                            singleChar :: [] ->
+                                moveFocusToItemWithChar singleChar |> config.onStateChanged
+
+                            _ ->
+                                config.noOp
 
         onKeyDownAt index =
             if isFocusedAt index then

@@ -1,12 +1,10 @@
 module Todo.View.Menu exposing (..)
 
 import Context
-import Context.View
-import Document
+import Document exposing (Document)
 import Menu
 import Model exposing (commonMsg)
 import Project
-import Project.View
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -25,7 +23,8 @@ createProjectMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Pro
 createProjectMenuConfig ({ todo } as form) model =
     { onSelect = Model.SetTodoProject # todo
     , isSelected = Document.hasId (Todo.getProjectId todo)
-    , itemKey = Project.View.getKey
+    , itemKey = getMenuKey "project"
+    , itemSearchText = Project.getName
     , itemView = Project.getName >> text
     , onStateChanged = Model.OnEditTodoProjectMenuStateChanged form
     , noOp = commonMsg.noOp
@@ -41,7 +40,8 @@ createContextMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Con
 createContextMenuConfig ({ todo } as form) model =
     { onSelect = Model.SetTodoContext # todo
     , isSelected = Document.hasId (Todo.getContextId todo)
-    , itemKey = Context.View.getKey
+    , itemKey = getMenuKey "context"
+    , itemSearchText = Context.getName
     , itemView = Context.getName >> text
     , onStateChanged = Model.OnEditTodoContextMenuStateChanged form
     , noOp = commonMsg.noOp
@@ -52,3 +52,8 @@ createContextMenuConfig ({ todo } as form) model =
 context form model =
     createContextMenuConfig form model
         |> Menu.view (Model.getActiveContexts model) form.menuState
+
+
+getMenuKey : String -> Document x -> String
+getMenuKey prefix =
+    Document.getId >> String.append "-menu-key-" >> String.append prefix

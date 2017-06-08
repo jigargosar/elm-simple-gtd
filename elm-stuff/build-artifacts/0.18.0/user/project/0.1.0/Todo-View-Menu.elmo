@@ -1,17 +1,29 @@
+var _user$project$Todo_View_Menu$getMenuKey = function (prefix) {
+	return function (_p0) {
+		return A2(
+			_elm_lang$core$String$append,
+			prefix,
+			A2(
+				_elm_lang$core$String$append,
+				'-menu-key-',
+				_user$project$Document$getId(_p0)));
+	};
+};
 var _user$project$Todo_View_Menu$createContextMenuConfig = F2(
-	function (_p0, model) {
-		var _p1 = _p0;
-		var _p3 = _p1.todo;
+	function (_p1, model) {
+		var _p2 = _p1;
+		var _p4 = _p2.todo;
 		return {
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, _p3),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, _p4),
 			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getContextId(_p3)),
-			itemKey: _user$project$Context_View$getKey,
-			itemView: function (_p2) {
+				_user$project$Todo$getContextId(_p4)),
+			itemKey: _user$project$Todo_View_Menu$getMenuKey('context'),
+			itemSearchText: _user$project$Context$getName,
+			itemView: function (_p3) {
 				return _elm_lang$html$Html$text(
-					_user$project$Context$getName(_p2));
+					_user$project$Context$getName(_p3));
 			},
-			onStateChanged: _user$project$Model$OnEditTodoContextMenuStateChanged(_p1),
+			onStateChanged: _user$project$Model$OnEditTodoContextMenuStateChanged(_p2),
 			noOp: _user$project$Model$commonMsg.noOp,
 			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};
@@ -25,19 +37,20 @@ var _user$project$Todo_View_Menu$context = F2(
 			A2(_user$project$Todo_View_Menu$createContextMenuConfig, form, model));
 	});
 var _user$project$Todo_View_Menu$createProjectMenuConfig = F2(
-	function (_p4, model) {
-		var _p5 = _p4;
-		var _p7 = _p5.todo;
+	function (_p5, model) {
+		var _p6 = _p5;
+		var _p8 = _p6.todo;
 		return {
-			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p7),
+			onSelect: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, _p8),
 			isSelected: _user$project$Document$hasId(
-				_user$project$Todo$getProjectId(_p7)),
-			itemKey: _user$project$Project_View$getKey,
-			itemView: function (_p6) {
+				_user$project$Todo$getProjectId(_p8)),
+			itemKey: _user$project$Todo_View_Menu$getMenuKey('project'),
+			itemSearchText: _user$project$Project$getName,
+			itemView: function (_p7) {
 				return _elm_lang$html$Html$text(
-					_user$project$Project$getName(_p6));
+					_user$project$Project$getName(_p7));
 			},
-			onStateChanged: _user$project$Model$OnEditTodoProjectMenuStateChanged(_p5),
+			onStateChanged: _user$project$Model$OnEditTodoProjectMenuStateChanged(_p6),
 			noOp: _user$project$Model$commonMsg.noOp,
 			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
 		};

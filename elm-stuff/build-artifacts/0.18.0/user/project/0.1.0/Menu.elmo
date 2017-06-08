@@ -62,6 +62,9 @@ var _user$project$Menu$State = function (a) {
 };
 var _user$project$Menu$createViewModel = F3(
 	function (items, state, config) {
+		var moveFocusToItemWithChar = function (singleChar) {
+			return state;
+		};
 		var maybeFocusedIndex = function () {
 			var findIndexOfItemWithKey = function (key) {
 				return A2(
@@ -124,20 +127,26 @@ var _user$project$Menu$createViewModel = F3(
 					return config.onStateChanged(
 						moveFocusIndexBy(1));
 				default:
-					return config.noOp;
+					var _p5 = _elm_lang$core$String$toList(_p2.keyString);
+					if ((_p5.ctor === '::') && (_p5._1.ctor === '[]')) {
+						return config.onStateChanged(
+							moveFocusToItemWithChar(_p5._0));
+					} else {
+						return config.noOp;
+					}
 			}
 		};
 		var onKeyDownAt = function (index) {
-			return isFocusedAt(index) ? onFocusedItemKeyDown : function (_p5) {
+			return isFocusedAt(index) ? onFocusedItemKeyDown : function (_p6) {
 				return config.noOp;
 			};
 		};
 		return {
 			isFocusedAt: isFocusedAt,
 			isSelectedAt: _user$project$Ext_Function$equals(selectedIndex),
-			tabIndexValueAt: function (_p6) {
+			tabIndexValueAt: function (_p7) {
 				return _user$project$Menu$boolToTabIndexValue(
-					isFocusedAt(_p6));
+					isFocusedAt(_p7));
 			},
 			onKeyDownAt: onKeyDownAt,
 			onSelect: config.onSelect,
@@ -181,9 +190,9 @@ var _user$project$Menu$view = F3(
 				}
 			});
 	});
-var _user$project$Menu$Config = F7(
-	function (a, b, c, d, e, f, g) {
-		return {onSelect: a, itemKey: b, itemView: c, isSelected: d, onStateChanged: e, noOp: f, onOutsideMouseDown: g};
+var _user$project$Menu$Config = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {onSelect: a, itemKey: b, itemSearchText: c, itemView: d, isSelected: e, onStateChanged: f, noOp: g, onOutsideMouseDown: h};
 	});
 var _user$project$Menu$ViewModel = F7(
 	function (a, b, c, d, e, f, g) {

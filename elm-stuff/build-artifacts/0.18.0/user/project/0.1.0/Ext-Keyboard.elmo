@@ -8,13 +8,19 @@ var _user$project$Ext_Keyboard$subscription = function (tagger) {
 	return A2(_elm_lang$core$Platform_Sub$map, tagger, _ohanhi$keyboard_extra$Keyboard_Extra$subscriptions);
 };
 var _user$project$Ext_Keyboard$init = _ohanhi$keyboard_extra$Keyboard_Extra$initialState;
-var _user$project$Ext_Keyboard$keyUps = _ohanhi$keyboard_extra$Keyboard_Extra$ups;
+var _user$project$Ext_Keyboard$keyUps = function (toMsg) {
+	return _elm_lang$keyboard$Keyboard$ups(
+		function (_p0) {
+			return toMsg(
+				_ohanhi$keyboard_extra$Keyboard_Extra$fromCode(_p0));
+		});
+};
 var _user$project$Ext_Keyboard$succeedIfDecodedKeyEquals = F2(
 	function (key, msg) {
 		return A2(
 			_elm_lang$core$Json_Decode$andThen,
 			function (actualKey) {
-				var _p0 = A2(
+				var _p1 = A2(
 					_elm_lang$core$Debug$log,
 					'actualKey, expectedKey',
 					{ctor: '_Tuple2', _0: actualKey, _1: key});
@@ -44,30 +50,34 @@ var _user$project$Ext_Keyboard$targetKeyDecoder = A2(
 var _user$project$Ext_Keyboard$preventDefaultAndStopPropagation = {stopPropagation: true, preventDefault: true};
 var _user$project$Ext_Keyboard$preventDefault = {stopPropagation: false, preventDefault: true};
 var _user$project$Ext_Keyboard$stopPropagation = {stopPropagation: true, preventDefault: false};
-var _user$project$Ext_Keyboard$KeyboardEvent = F5(
-	function (a, b, c, d, e) {
-		return {key: a, isShiftDown: b, isMetaDown: c, isControlDown: d, isAltDown: e};
+var _user$project$Ext_Keyboard$KeyboardEvent = F6(
+	function (a, b, c, d, e, f) {
+		return {key: a, isShiftDown: b, isMetaDown: c, isControlDown: d, isAltDown: e, keyString: f};
 	});
 var _user$project$Ext_Keyboard$keyboardEventDecoder = A3(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'altKey',
-	_elm_lang$core$Json_Decode$bool,
+	'key',
+	_elm_lang$core$Json_Decode$string,
 	A3(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'ctrlKey',
+		'altKey',
 		_elm_lang$core$Json_Decode$bool,
 		A3(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'metaKey',
+			'ctrlKey',
 			_elm_lang$core$Json_Decode$bool,
 			A3(
 				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'shiftKey',
+				'metaKey',
 				_elm_lang$core$Json_Decode$bool,
-				A2(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
-					_user$project$Ext_Keyboard$targetKeyDecoder,
-					_elm_lang$core$Json_Decode$succeed(_user$project$Ext_Keyboard$KeyboardEvent))))));
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'shiftKey',
+					_elm_lang$core$Json_Decode$bool,
+					A2(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
+						_user$project$Ext_Keyboard$targetKeyDecoder,
+						_elm_lang$core$Json_Decode$succeed(_user$project$Ext_Keyboard$KeyboardEvent)))))));
 var _user$project$Ext_Keyboard$onKeyUp = function (onKeyMsg) {
 	return A2(
 		_elm_lang$html$Html_Events$on,

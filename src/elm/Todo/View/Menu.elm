@@ -32,10 +32,6 @@ createProjectMenuConfig ({ todo } as form) model =
     }
 
 
-project form model =
-    Menu.view (Model.getActiveProjects model) form.menuState (createProjectMenuConfig form model)
-
-
 createContextMenuConfig : Todo.GroupForm.Model -> Model.Model -> Menu.Config Context.Model Model.Msg
 createContextMenuConfig ({ todo } as form) model =
     { onSelect = Model.SetTodoContext # todo
@@ -49,9 +45,16 @@ createContextMenuConfig ({ todo } as form) model =
     }
 
 
+project form model =
+    Menu.view (Model.getActiveProjects model)
+        form.menuState
+        (createProjectMenuConfig form model)
+
+
 context form model =
-    createContextMenuConfig form model
-        |> Menu.view (Model.getActiveContexts model) form.menuState
+    Menu.view (Model.getActiveContexts model)
+        form.menuState
+        (createContextMenuConfig form model)
 
 
 getMenuKey : String -> Document x -> String

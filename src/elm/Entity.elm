@@ -94,8 +94,30 @@ routes viewType =
                 [ "context", id ]
 
 
-getEntityViewType : Entity -> ListViewType
-getEntityViewType entity =
+getTodoGotoGroupView todo prevView =
+    let
+        contextView =
+            Todo.getContextId todo |> ContextView
+
+        projectView =
+            Todo.getProjectId todo |> ProjectView
+    in
+        case prevView of
+            ProjectsView ->
+                contextView
+
+            ProjectView _ ->
+                contextView
+
+            ContextsView ->
+                projectView
+
+            ContextView _ ->
+                projectView
+
+
+getGotoEntityViewType : Maybe ListViewType -> Entity -> ListViewType
+getGotoEntityViewType maybePrevView entity =
     case entity of
         ContextEntity model ->
             Document.getId model |> ContextView
@@ -104,7 +126,7 @@ getEntityViewType entity =
             Document.getId model |> ProjectView
 
         TodoEntity model ->
-            Todo.getContextId model |> ContextView
+            maybePrevView ?|> getTodoGotoGroupView model ?= (Todo.getContextId model |> ContextView)
 
 
 type GroupEntity

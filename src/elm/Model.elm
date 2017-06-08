@@ -513,8 +513,12 @@ startEditingEntity entity model =
     setEditMode (createEntityEditForm entity model) model
 
 
-switchToEntityListViewFromEntity entity =
-    entity |> Entity.getEntityViewType |> setEntityListViewType
+switchToEntityListViewFromEntity entity model =
+    let
+        maybeEntityListViewType =
+            maybeGetCurrentEntityListViewType model
+    in
+        entity |> Entity.getGotoEntityViewType maybeEntityListViewType |> (setEntityListViewType # model)
 
 
 updateEditModeNameChanged newName entity model =
@@ -844,12 +848,22 @@ getEntityId =
 
 
 getCurrentViewEntityList model =
+    --todo: can use maybeGetCurrentEntityListViewType
     case model.mainViewType of
         EntityListView viewType ->
             createGrouping viewType model |> Entity.flattenGrouping
 
         _ ->
             []
+
+
+maybeGetCurrentEntityListViewType model =
+    case model.mainViewType of
+        EntityListView viewType ->
+            Just viewType
+
+        _ ->
+            Nothing
 
 
 getLayout : Model -> Layout

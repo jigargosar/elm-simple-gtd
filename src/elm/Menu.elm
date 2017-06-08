@@ -90,68 +90,58 @@ createViewModel items state config =
         focusedIndex =
             maybeFocusedIndex ?= selectedIndex
 
-        isFocusedAt =
-            equals focusedIndex
-
-        maybeFocusedItem =
-            List.getAt focusedIndex items
-
-        findItemStartingWith singleChar =
+        onFocusItemStartingWithMsg singleChar =
             let
-                boil =
-                    String.toLower
-
-                charString =
-                    String.fromChar singleChar
-
                 findPred =
-                    config.itemSearchText >> boil >> String.startsWith (boil charString)
+                    let
+                        boil =
+                            String.toLower
+
+                        charString =
+                            String.fromChar singleChar
+                    in
+                        config.itemSearchText >> boil >> String.startsWith (boil charString)
             in
-                List.find findPred
-
-        maybeFocusItemStartingWith singleChar =
-            items
-                |> splitSwapListAt (focusedIndex + 1)
-                |> findItemStartingWith singleChar
-                ?|> config.itemKey
-                >> setFocusKeyIn state
-                |> maybeOnStateChanged
-
-        maybeOnStateChanged maybeState =
-            maybeState ?|> config.onStateChanged ?= config.noOp
+                items
+                    |> splitSwapListAt (focusedIndex + 1)
+                    |> List.find findPred
+                    ?|> config.itemKey
+                    >> setFocusKeyIn state
+                    >> config.onStateChanged
+                    ?= config.noOp
 
         onFocusedItemKeyDown { key, keyString } =
             let
-                moveFocusIndexBy offset =
-                    let
-                        indexToFocusKey index =
-                            List.getAt index items
-                                ?|> config.itemKey
-                                |> Maybe.orElse state.maybeFocusKey
-                    in
-                        offset
-                            |> add focusedIndex
-                            >> clampIndex
-                            >> indexToFocusKey
-                            >> State
+                onFocusIndexChangeByMsg offset =
+                    focusedIndex
+                        + offset
+                        |> clampIndex
+                        |> (List.getAt # items)
+                        ?|> config.itemKey
+                        >> setFocusKeyIn state
+                        >> config.onStateChanged
+                        ?= config.noOp
             in
                 case key of
                     Key.Enter ->
-                        maybeFocusedItem ?|> config.onSelect ?= config.noOp
+                        List.getAt focusedIndex items ?|> config.onSelect ?= config.noOp
 
                     Key.ArrowUp ->
-                        moveFocusIndexBy -1 |> config.onStateChanged
+                        onFocusIndexChangeByMsg -1
 
                     Key.ArrowDown ->
-                        moveFocusIndexBy 1 |> config.onStateChanged
+                        onFocusIndexChangeByMsg 1
 
                     _ ->
                         case keyString |> String.toList of
                             singleChar :: [] ->
-                                maybeFocusItemStartingWith singleChar
+                                onFocusItemStartingWithMsg singleChar
 
                             _ ->
                                 config.noOp
+
+        isFocusedAt =
+            equals focusedIndex
 
         onKeyDownAt index =
             if isFocusedAt index then

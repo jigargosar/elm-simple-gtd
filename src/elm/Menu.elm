@@ -90,6 +90,13 @@ createViewModel items state config =
         focusedIndex =
             maybeFocusedIndex ?= selectedIndex
 
+        stateChangedMsgFromMaybeFocusedItem maybeItem =
+            maybeItem
+                ?|> config.itemKey
+                >> setFocusKeyIn state
+                >> config.onStateChanged
+                ?= config.noOp
+
         onFocusItemStartingWithMsg singleChar =
             let
                 findPred =
@@ -105,10 +112,7 @@ createViewModel items state config =
                 items
                     |> splitSwapListAt (focusedIndex + 1)
                     |> List.find findPred
-                    ?|> config.itemKey
-                    >> setFocusKeyIn state
-                    >> config.onStateChanged
-                    ?= config.noOp
+                    |> stateChangedMsgFromMaybeFocusedItem
 
         onFocusedItemKeyDown { key, keyString } =
             let
@@ -117,10 +121,7 @@ createViewModel items state config =
                         + offset
                         |> clampIndex
                         |> (List.getAt # items)
-                        ?|> config.itemKey
-                        >> setFocusKeyIn state
-                        >> config.onStateChanged
-                        ?= config.noOp
+                        |> stateChangedMsgFromMaybeFocusedItem
             in
                 case key of
                     Key.Enter ->

@@ -47,7 +47,7 @@ init viewModel m =
             [ App.toolbar
                 [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
                 ]
-                [ paperIconButton
+                ([ paperIconButton
                     [ iconA "menu"
                     , tabindex -1
                     , attribute "drawer-toggle" ""
@@ -55,15 +55,16 @@ init viewModel m =
                     , class "hide-when-wide"
                     ]
                     []
-                , headerView viewModel m
-                ]
+                 ]
+                    ++ (headerView viewModel m)
+                )
             ]
 
 
 headerView viewModel m =
     case m.editMode of
         EditMode.NewTodo form ->
-            div [ class "new-todo input-field" ]
+            [ div [ class "new-todo input-field" ]
                 [ input
                     [ class "auto-focus"
                     , onInput (Model.NewTodoTextChanged form)
@@ -78,6 +79,7 @@ headerView viewModel m =
                     []
                 , label [ class "active" ] [ text "New Todo" ]
                 ]
+            ]
 
         _ ->
             defaultHeader viewModel m
@@ -91,7 +93,7 @@ defaultHeader viewModel m =
     let
         title =
             if m.developmentMode then
-                "DEV_ENV" ++ " " ++ m.appVersion
+                viewModel.viewName ++ " dev:" ++ m.appVersion
             else
                 viewModel.viewName
 
@@ -111,41 +113,39 @@ defaultHeader viewModel m =
                 ?|> (\_ -> Paper.item [ onClick Model.SignOut ] [ text "SignOut" ])
                 ?= Paper.item [ onClick Model.SignIn ] [ text "SignIn" ]
     in
-        div [ class "flex-auto layout horizontal justified center" ]
-            [ h4 [ class "ellipsis" ] [ title |> text ]
-            , div []
-                [ Paper.menuButton
-                    [ dynamicAlign
-                    , boolProperty "noOverlap" True
-                    , boolProperty "closeOnActivate" True
-                    ]
-                    [ Html.node "iron-icon"
-                        [ userAccountAttribute
-                        , class "account"
-                        , slotDropdownTrigger
+        [ h4 [ class "ellipsis" ] [ title |> text ]
+        , Paper.itemBody [] []
+        , Paper.menuButton
+            [ dynamicAlign
+            , boolProperty "noOverlap" True
+            , boolProperty "closeOnActivate" True
+            ]
+            [ Html.node "iron-icon"
+                [ userAccountAttribute
+                , class "account"
+                , slotDropdownTrigger
+                ]
+                []
+            , Paper.listbox [ class "", slotDropdownContent ]
+                [ userSignInLink
+                , Paper.item []
+                    [ Paper.itemBody []
+                        [ a
+                            [ target "_blank"
+                            , href "https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md"
+                            ]
+                            [ text "Changelog v", text m.appVersion ]
                         ]
-                        []
-                    , Paper.listbox [ class "", slotDropdownContent ]
-                        [ userSignInLink
-                        , Paper.item []
-                            [ Paper.itemBody []
-                                [ a
-                                    [ target "_blank"
-                                    , href "https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md"
-                                    ]
-                                    [ text "Changelog v", text m.appVersion ]
-                                ]
+                    ]
+                , Paper.item []
+                    [ Paper.itemBody []
+                        [ a
+                            [ target "_blank"
+                            , href "https://github.com/jigargosar/elm-simple-gtd"
                             ]
-                        , Paper.item []
-                            [ Paper.itemBody []
-                                [ a
-                                    [ target "_blank"
-                                    , href "https://github.com/jigargosar/elm-simple-gtd"
-                                    ]
-                                    [ text "Github" ]
-                                ]
-                            ]
+                            [ text "Github" ]
                         ]
                     ]
                 ]
             ]
+        ]

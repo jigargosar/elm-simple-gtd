@@ -53,166 +53,159 @@ var _user$project$View_Header$defaultHeader = F2(
 				}));
 		var title = m.developmentMode ? A2(
 			_elm_lang$core$Basics_ops['++'],
-			'DEV_ENV',
-			A2(_elm_lang$core$Basics_ops['++'], ' ', m.appVersion)) : viewModel.viewName;
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('flex-auto layout horizontal justified center'),
-				_1: {ctor: '[]'}
-			},
-			{
+			viewModel.viewName,
+			A2(_elm_lang$core$Basics_ops['++'], ' dev:', m.appVersion)) : viewModel.viewName;
+		return {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h4,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('ellipsis'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(title),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$h4,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('ellipsis'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(title),
-						_1: {ctor: '[]'}
-					}),
+					_edvail$elm_polymer$Polymer_Paper$itemBody,
+					{ctor: '[]'},
+					{ctor: '[]'}),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
+						_edvail$elm_polymer$Polymer_Paper$menuButton,
 						{
 							ctor: '::',
-							_0: A2(
-								_edvail$elm_polymer$Polymer_Paper$menuButton,
+							_0: _user$project$WebComponents$dynamicAlign,
+							_1: {
+								ctor: '::',
+								_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'noOverlap', true),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'closeOnActivate', true),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						{
+							ctor: '::',
+							_0: A3(
+								_elm_lang$html$Html$node,
+								'iron-icon',
 								{
 									ctor: '::',
-									_0: _user$project$WebComponents$dynamicAlign,
+									_0: userAccountAttribute,
 									_1: {
 										ctor: '::',
-										_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'noOverlap', true),
+										_0: _elm_lang$html$Html_Attributes$class('account'),
 										_1: {
 											ctor: '::',
-											_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'closeOnActivate', true),
+											_0: _user$project$WebComponents$slotDropdownTrigger,
 											_1: {ctor: '[]'}
 										}
 									}
 								},
-								{
-									ctor: '::',
-									_0: A3(
-										_elm_lang$html$Html$node,
-										'iron-icon',
-										{
-											ctor: '::',
-											_0: userAccountAttribute,
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('account'),
-												_1: {
-													ctor: '::',
-													_0: _user$project$WebComponents$slotDropdownTrigger,
-													_1: {ctor: '[]'}
-												}
-											}
-										},
-										{ctor: '[]'}),
-									_1: {
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_edvail$elm_polymer$Polymer_Paper$listbox,
+									{
 										ctor: '::',
-										_0: A2(
-											_edvail$elm_polymer$Polymer_Paper$listbox,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class(''),
-												_1: {
-													ctor: '::',
-													_0: _user$project$WebComponents$slotDropdownContent,
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: userSignInLink,
-												_1: {
+										_0: _elm_lang$html$Html_Attributes$class(''),
+										_1: {
+											ctor: '::',
+											_0: _user$project$WebComponents$slotDropdownContent,
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: userSignInLink,
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_edvail$elm_polymer$Polymer_Paper$item,
+												{ctor: '[]'},
+												{
 													ctor: '::',
 													_0: A2(
-														_edvail$elm_polymer$Polymer_Paper$item,
+														_edvail$elm_polymer$Polymer_Paper$itemBody,
 														{ctor: '[]'},
 														{
 															ctor: '::',
 															_0: A2(
-																_edvail$elm_polymer$Polymer_Paper$itemBody,
-																{ctor: '[]'},
+																_elm_lang$html$Html$a,
 																{
 																	ctor: '::',
-																	_0: A2(
-																		_elm_lang$html$Html$a,
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$target('_blank'),
-																			_1: {
-																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$href('https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md'),
-																				_1: {ctor: '[]'}
-																			}
-																		},
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html$text('Changelog v'),
-																			_1: {
-																				ctor: '::',
-																				_0: _elm_lang$html$Html$text(m.appVersion),
-																				_1: {ctor: '[]'}
-																			}
-																		}),
-																	_1: {ctor: '[]'}
+																	_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$href('https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md'),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Changelog v'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text(m.appVersion),
+																		_1: {ctor: '[]'}
+																	}
 																}),
 															_1: {ctor: '[]'}
 														}),
-													_1: {
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_edvail$elm_polymer$Polymer_Paper$item,
+													{ctor: '[]'},
+													{
 														ctor: '::',
 														_0: A2(
-															_edvail$elm_polymer$Polymer_Paper$item,
+															_edvail$elm_polymer$Polymer_Paper$itemBody,
 															{ctor: '[]'},
 															{
 																ctor: '::',
 																_0: A2(
-																	_edvail$elm_polymer$Polymer_Paper$itemBody,
-																	{ctor: '[]'},
+																	_elm_lang$html$Html$a,
 																	{
 																		ctor: '::',
-																		_0: A2(
-																			_elm_lang$html$Html$a,
-																			{
-																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$target('_blank'),
-																				_1: {
-																					ctor: '::',
-																					_0: _elm_lang$html$Html_Attributes$href('https://github.com/jigargosar/elm-simple-gtd'),
-																					_1: {ctor: '[]'}
-																				}
-																			},
-																			{
-																				ctor: '::',
-																				_0: _elm_lang$html$Html$text('Github'),
-																				_1: {ctor: '[]'}
-																			}),
+																		_0: _elm_lang$html$Html_Attributes$target('_blank'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$href('https://github.com/jigargosar/elm-simple-gtd'),
+																			_1: {ctor: '[]'}
+																		}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Github'),
 																		_1: {ctor: '[]'}
 																	}),
 																_1: {ctor: '[]'}
 															}),
 														_1: {ctor: '[]'}
-													}
-												}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}),
 					_1: {ctor: '[]'}
 				}
-			});
+			}
+		};
 	});
 var _user$project$View_Header$headLineText = function (title) {
 	return A2(
@@ -233,58 +226,62 @@ var _user$project$View_Header$headerView = F2(
 		var _p2 = m.editMode;
 		if (_p2.ctor === 'NewTodo') {
 			var _p3 = _p2._0;
-			return A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('new-todo input-field'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$input,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
-							_1: {
+			return {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('new-todo input-field'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$input,
+							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onInput(
-									_user$project$Model$NewTodoTextChanged(_p3)),
+								_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$defaultValue(
-										_user$project$Todo_NewForm$getText(_p3)),
+									_0: _elm_lang$html$Html_Events$onInput(
+										_user$project$Model$NewTodoTextChanged(_p3)),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$DeactivateEditingMode),
+										_0: _elm_lang$html$Html_Attributes$defaultValue(
+											_user$project$Todo_NewForm$getText(_p3)),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Ext_Keyboard$onKeyUp(_user$project$Model$NewTodoKeyUp),
-											_1: {ctor: '[]'}
+											_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$DeactivateEditingMode),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Ext_Keyboard$onKeyUp(_user$project$Model$NewTodoKeyUp),
+												_1: {ctor: '[]'}
+											}
 										}
 									}
 								}
-							}
-						},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$label,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('active'),
-								_1: {ctor: '[]'}
 							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('New Todo'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				});
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$label,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('active'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('New Todo'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			};
 		} else {
 			return A2(_user$project$View_Header$defaultHeader, viewModel, m);
 		}
@@ -340,38 +337,37 @@ var _user$project$View_Header$init = F2(
 							}),
 						_1: {ctor: '[]'}
 					},
-					{
-						ctor: '::',
-						_0: A2(
-							_user$project$WebComponents$paperIconButton,
-							{
-								ctor: '::',
-								_0: _user$project$WebComponents$iconA('menu'),
-								_1: {
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						{
+							ctor: '::',
+							_0: A2(
+								_user$project$WebComponents$paperIconButton,
+								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+									_0: _user$project$WebComponents$iconA('menu'),
 									_1: {
 										ctor: '::',
-										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'drawer-toggle', ''),
+										_0: _elm_lang$html$Html_Attributes$tabindex(-1),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleDrawer),
+											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'drawer-toggle', ''),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('hide-when-wide'),
-												_1: {ctor: '[]'}
+												_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleDrawer),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('hide-when-wide'),
+													_1: {ctor: '[]'}
+												}
 											}
 										}
 									}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: A2(_user$project$View_Header$headerView, viewModel, m),
+								},
+								{ctor: '[]'}),
 							_1: {ctor: '[]'}
-						}
-					}),
+						},
+						A2(_user$project$View_Header$headerView, viewModel, m))),
 				_1: {ctor: '[]'}
 			});
 	});

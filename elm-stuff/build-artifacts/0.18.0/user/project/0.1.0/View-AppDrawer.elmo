@@ -423,7 +423,7 @@ var _user$project$View_AppDrawer$view = F2(
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$View_AppDrawer$headLineText(viewModel.viewName),
+											_0: _user$project$View_AppDrawer$headLineText('SimpleGTD.com'),
 											_1: {ctor: '[]'}
 										}
 									}),

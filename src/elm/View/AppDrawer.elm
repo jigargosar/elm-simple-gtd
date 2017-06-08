@@ -65,7 +65,7 @@ view viewModel m =
                                 ]
                                 []
                             ]
-                        , headLineText viewModel.viewName
+                        , headLineText "SimpleGTD.com"
                         ]
                     ]
                 , navList viewModel m

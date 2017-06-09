@@ -276,7 +276,7 @@ var _user$project$View_Header$headerView = F2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-					_user$project$Todo_TimeTracker$maybeView(m),
+					_user$project$Todo_TimeTracker_View$maybe(m),
 					_elm_lang$core$List$singleton),
 				A2(_user$project$View_Header$defaultHeader, viewModel, m));
 		}

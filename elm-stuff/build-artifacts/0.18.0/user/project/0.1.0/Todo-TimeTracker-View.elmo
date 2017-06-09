@@ -1,0 +1,104 @@
+var _user$project$Todo_TimeTracker_View$view = function (vm) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('w--100 layout vertical'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('flex-auto ellipsis'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(vm.displayText),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('flex-auto layout horizontal'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(vm.displayTime),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _user$project$Material$icon(vm.controlIcon),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Todo_TimeTracker_View$createViewModel = F2(
+	function (appModel, tracker) {
+		var todoText = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				A2(_user$project$Model$findTodoById, tracker.todoId, appModel),
+				_user$project$Todo$getText),
+			tracker.todoId);
+		var _p0 = function () {
+			var _p1 = tracker.state;
+			if (_p1.ctor === 'Running') {
+				return {ctor: '_Tuple2', _0: tracker.totalTime + (appModel.now - _p1._0), _1: 'pause'};
+			} else {
+				return {ctor: '_Tuple2', _0: tracker.totalTime, _1: 'play_arrow'};
+			}
+		}();
+		var elapsedTime = _p0._0;
+		var controlIcon = _p0._1;
+		return {
+			displayText: todoText,
+			displayTime: _user$project$Ext_Time$toHHMMSS(elapsedTime),
+			controlIcon: controlIcon
+		};
+	});
+var _user$project$Todo_TimeTracker_View$maybe = function (appModel) {
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+		appModel.timeTracker,
+		function (_p2) {
+			return _user$project$Todo_TimeTracker_View$view(
+				A2(_user$project$Todo_TimeTracker_View$createViewModel, appModel, _p2));
+		});
+};
+var _user$project$Todo_TimeTracker_View$ViewModel = F2(
+	function (a, b) {
+		return {displayText: a, displayTime: b};
+	});

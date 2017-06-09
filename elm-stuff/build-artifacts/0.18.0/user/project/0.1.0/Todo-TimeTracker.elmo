@@ -1,108 +1,19 @@
-var _user$project$Todo_TimeTracker$view = function (vm) {
-	return A2(
-		_edvail$elm_polymer$Polymer_Paper$item,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('w--100'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_edvail$elm_polymer$Polymer_Paper$itemBody,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(vm.displayText),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('row'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('col'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text(vm.displayTime),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$div,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('col'),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _user$project$Material$icon('play_arrow'),
-											_1: {
-												ctor: '::',
-												_0: _user$project$Material$icon('stop'),
-												_1: {
-													ctor: '::',
-													_0: _user$project$Material$icon('pause'),
-													_1: {ctor: '[]'}
-												}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Todo_TimeTracker$createViewModel = F2(
-	function (appModel, tracker) {
-		return {
-			displayText: tracker.todoId,
-			displayTime: _elm_lang$core$Basics$toString(tracker.startedAt)
-		};
-	});
-var _user$project$Todo_TimeTracker$maybeView = function (appModel) {
-	return A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-		appModel.timeTracker,
-		function (_p0) {
-			return _user$project$Todo_TimeTracker$view(
-				A2(_user$project$Todo_TimeTracker$createViewModel, appModel, _p0));
-		});
-};
 var _user$project$Todo_TimeTracker$wrap = _elm_lang$core$Maybe$Just;
+var _user$project$Todo_TimeTracker$init = _elm_lang$core$Maybe$Nothing;
+var _user$project$Todo_TimeTracker$ModelRec = F3(
+	function (a, b, c) {
+		return {todoId: a, totalTime: b, state: c};
+	});
+var _user$project$Todo_TimeTracker$Paused = {ctor: 'Paused'};
+var _user$project$Todo_TimeTracker$Running = function (a) {
+	return {ctor: 'Running', _0: a};
+};
 var _user$project$Todo_TimeTracker$start = F2(
 	function (todoId, now) {
 		return _user$project$Todo_TimeTracker$wrap(
-			{todoId: todoId, startedAt: now});
-	});
-var _user$project$Todo_TimeTracker$init = _elm_lang$core$Maybe$Nothing;
-var _user$project$Todo_TimeTracker$ModelRec = F2(
-	function (a, b) {
-		return {todoId: a, startedAt: b};
-	});
-var _user$project$Todo_TimeTracker$ViewModel = F2(
-	function (a, b) {
-		return {displayText: a, displayTime: b};
+			{
+				todoId: todoId,
+				totalTime: 0,
+				state: _user$project$Todo_TimeTracker$Running(now)
+			});
 	});

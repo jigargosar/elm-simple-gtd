@@ -3,7 +3,7 @@ var _user$project$Material$icon = function (name) {
 		_elm_lang$html$Html$i,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+			_0: _elm_lang$html$Html_Attributes$class('material-icons small'),
 			_1: {ctor: '[]'}
 		},
 		{

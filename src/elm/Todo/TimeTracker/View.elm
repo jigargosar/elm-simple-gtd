@@ -50,10 +50,14 @@ maybe appModel =
 
 
 view vm =
-    div [ class "w--100 layout vertical" ]
+    div [ class "w100 layout vertical" ]
         [ div [ class "flex-auto ellipsis" ] [ text vm.displayText ]
         , div [ class "flex-auto layout horizontal" ]
             [ div [ class "flex-auto" ] [ text vm.displayTime ]
-            , div [ class "flex-auto" ] [ Material.icon vm.controlIcon ]
+            , div [ class "" ]
+                [ Material.iconButton vm.controlIcon
+                , Material.iconButton "cancel"
+                , Material.iconButton "done"
+                ]
             ]
         ]

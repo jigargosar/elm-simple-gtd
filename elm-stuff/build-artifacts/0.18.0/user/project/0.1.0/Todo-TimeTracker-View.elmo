@@ -3,7 +3,7 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('w--100 layout vertical'),
+			_0: _elm_lang$html$Html_Attributes$class('w100 layout vertical'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -49,13 +49,21 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
+									_0: _elm_lang$html$Html_Attributes$class(''),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _user$project$Material$icon(vm.controlIcon),
-									_1: {ctor: '[]'}
+									_0: _user$project$Material$iconButton(vm.controlIcon),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Material$iconButton('cancel'),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Material$iconButton('done'),
+											_1: {ctor: '[]'}
+										}
+									}
 								}),
 							_1: {ctor: '[]'}
 						}

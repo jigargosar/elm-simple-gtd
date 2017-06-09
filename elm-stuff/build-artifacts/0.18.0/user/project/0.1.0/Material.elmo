@@ -1,3 +1,28 @@
+var _user$project$Material$iconButton = function (name) {
+	return A2(
+		_elm_lang$html$Html$a,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('btn-flat btn-floating'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$i,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(name),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Material$icon = function (name) {
 	return A2(
 		_elm_lang$html$Html$i,

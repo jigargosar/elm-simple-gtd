@@ -14,3 +14,7 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 
 icon name =
     i [ class "material-icons small" ] [ text name ]
+
+
+iconButton name =
+    a [ class "btn-flat btn-floating" ] [ i [ class "material-icons" ] [ text name ] ]

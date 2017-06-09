@@ -1,3 +1,17 @@
+var _user$project$Model$gotoTodoWithId = F2(
+	function (todoId, model) {
+		return model;
+	});
+var _user$project$Model$gotoTodoWithIdIn = _elm_lang$core$Basics$flip(_user$project$Model$gotoTodoWithId);
+var _user$project$Model$gotoRunningTodo = function (model) {
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_user$project$Todo_TimeTracker$getMaybeTodoId(model.timeTracker),
+			_user$project$Model$gotoTodoWithIdIn(model)),
+		model);
+};
 var _user$project$Model$getNotificationCmdFromTodoChange = F2(
 	function (uid, _p0) {
 		var _p1 = _p0;

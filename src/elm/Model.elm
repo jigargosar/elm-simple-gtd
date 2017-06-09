@@ -1193,5 +1193,9 @@ gotoRunningTodo model =
         ?= model
 
 
-gotoTodoWithIdIn model =
+gotoTodoWithIdIn =
+    flip gotoTodoWithId
+
+
+gotoTodoWithId todoId model =
     model

@@ -1,3 +1,8 @@
+var _user$project$Todo_TimeTracker$map = _elm_lang$core$Maybe$map;
+var _user$project$Todo_TimeTracker$getMaybeTodoId = _user$project$Todo_TimeTracker$map(
+	function (_) {
+		return _.todoId;
+	});
 var _user$project$Todo_TimeTracker$wrap = _elm_lang$core$Maybe$Just;
 var _user$project$Todo_TimeTracker$none = _elm_lang$core$Maybe$Nothing;
 var _user$project$Todo_TimeTracker$ModelRec = F3(

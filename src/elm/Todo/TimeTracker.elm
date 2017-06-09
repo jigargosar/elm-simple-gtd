@@ -12,6 +12,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
+import Polymer.Paper as Paper
 
 
 type alias ModelRec =
@@ -62,7 +63,9 @@ maybeView appModel =
 
 
 view vm =
-    div []
-        [ div [] [ text vm.displayText ]
-        , div [] [ text vm.displayTime ]
+    Paper.item [ class "w--100" ]
+        [ Paper.itemBody []
+            [ div [] [ text vm.displayText ]
+            , div [] [ text vm.displayTime ]
+            ]
         ]

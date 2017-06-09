@@ -1,29 +1,40 @@
 var _user$project$Todo_TimeTracker$view = function (vm) {
 	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		_edvail$elm_polymer$Polymer_Paper$item,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('w--100'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
+				_edvail$elm_polymer$Polymer_Paper$itemBody,
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(vm.displayText),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					{
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(vm.displayText),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(vm.displayTime),
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(vm.displayTime),
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
+					}
+				}),
+			_1: {ctor: '[]'}
 		});
 };
 var _user$project$Todo_TimeTracker$createViewModel = F2(

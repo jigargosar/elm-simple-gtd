@@ -634,12 +634,15 @@ var _user$project$Main$update = function (msg) {
 					default:
 						var _p62 = _p15._1;
 						var _p61 = _p15._0;
-						if (_p61.ctor === 'OnTodoToggleRunning') {
-							return _user$project$Main$map(
-								A2(_user$project$Model$toggleTodoTimer, _p61._0, _p62));
-						} else {
-							return _user$project$Main$map(
-								_user$project$Model$toggleTodoPause(_p62));
+						switch (_p61.ctor) {
+							case 'OnTodoToggleRunning':
+								return _user$project$Main$map(
+									A2(_user$project$Model$toggleTodoTimer, _p61._0, _p62));
+							case 'OnTodoTogglePaused':
+								return _user$project$Main$map(
+									_user$project$Model$toggleTodoPause(_p62));
+							default:
+								return _user$project$Main$map(_user$project$Model$stopRunningTodo);
 						}
 				}
 			}()(
@@ -678,8 +681,6 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 										_user$project$Main$setDomFocusToFocusedEntityCmd,
 										A2(_user$project$Main$map, _user$project$Model$gotoRunningTodo, _p66));
 								};
-							case 'CharP':
-								return _user$project$Main$andThenUpdate(_user$project$Model$onTodoTogglePaused);
 							default:
 								return _elm_lang$core$Basics$identity;
 						}

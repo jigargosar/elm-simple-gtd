@@ -40,8 +40,14 @@ var _user$project$Ext_Keyboard$onEnter = function (msg) {
 		'keyup',
 		A2(_user$project$Ext_Keyboard$succeedIfDecodedKeyEquals, _ohanhi$keyboard_extra$Keyboard_Extra$Enter, msg));
 };
+var _user$project$Ext_Keyboard$isOnlyShiftKeyDown = function (ke) {
+	return ke.isShiftDown && (!(ke.isMetaDown || (ke.isControlDown || ke.isAltDown)));
+};
 var _user$project$Ext_Keyboard$isAnySoftKeyDown = function (ke) {
 	return ke.isShiftDown || (ke.isMetaDown || (ke.isControlDown || ke.isAltDown));
+};
+var _user$project$Ext_Keyboard$isNoSoftKeyDown = function (_p2) {
+	return !_user$project$Ext_Keyboard$isAnySoftKeyDown(_p2);
 };
 var _user$project$Ext_Keyboard$targetKeyDecoder = A2(
 	_elm_lang$core$Json_Decode$map,

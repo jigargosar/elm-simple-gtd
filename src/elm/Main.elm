@@ -375,6 +375,9 @@ update msg =
 
                         Model.OnTodoTogglePaused ->
                             map (Model.toggleTodoPause now)
+
+                        Model.OnTodoStopRunning ->
+                            map (Model.stopRunningTodo)
            )
         >> persistAll
 
@@ -507,9 +510,6 @@ onGlobalKeyUp key =
                         Key.CharR ->
                             map (Model.gotoRunningTodo)
                                 >> andThenUpdate setDomFocusToFocusedEntityCmd
-
-                        Key.CharP ->
-                            andThenUpdate onTodoTogglePaused
 
                         _ ->
                             identity

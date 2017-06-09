@@ -28,7 +28,7 @@ type alias ViewModel =
 
 createViewModel appModel tracker =
     let
-        ( elapsedTime, controlIcon ) =
+        ( elapsedTime, playPauseIconName ) =
             case tracker.state of
                 Running startedAt ->
                     ( tracker.totalTime + (appModel.now - startedAt), "pause" )
@@ -41,7 +41,8 @@ createViewModel appModel tracker =
     in
         { displayText = todoText
         , displayTime = Ext.Time.toHHMMSS elapsedTime
-        , controlIcon = controlIcon
+        , playPauseIconName = playPauseIconName
+        , onStop = Model.onTodoStopRunning
         }
 
 
@@ -55,8 +56,8 @@ view vm =
         , div [ class "flex-auto layout horizontal" ]
             [ div [ class "flex-auto" ] [ text vm.displayTime ]
             , div [ class "" ]
-                [ Material.iconButton vm.controlIcon
-                , Material.iconButton "stop"
+                [ Material.iconButton vm.playPauseIconName [ onClick Model.onTodoTogglePaused ]
+                , Material.iconButton "stop" [ onClick Model.onTodoStopRunning ]
 
                 {- , Material.iconButton "done" -}
                 ]

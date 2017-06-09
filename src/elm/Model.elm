@@ -50,6 +50,7 @@ import Todo.TimeTracker
 
 type TodoMsg
     = OnTodoToggleRunning Todo.Id
+    | OnTodoStopRunning
     | OnTodoTogglePaused
 
 
@@ -104,6 +105,10 @@ type Msg
 
 onTodoToggleRunning =
     OnTodoToggleRunning >> OnTodoMsg
+
+
+onTodoStopRunning =
+    OnTodoStopRunning |> OnTodoMsg
 
 
 onTodoTogglePaused =
@@ -1198,6 +1203,10 @@ toggleTodoTimer todoId now =
 
 toggleTodoPause now =
     over timeTracker (Todo.TimeTracker.togglePause now)
+
+
+stopRunningTodo =
+    Record.set timeTracker Todo.TimeTracker.none
 
 
 gotoRunningTodo model =

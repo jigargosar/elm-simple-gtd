@@ -54,10 +54,24 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 								},
 								{
 									ctor: '::',
-									_0: _user$project$Material$iconButton(vm.controlIcon),
+									_0: A2(
+										_user$project$Material$iconButton,
+										vm.playPauseIconName,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$onTodoTogglePaused),
+											_1: {ctor: '[]'}
+										}),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Material$iconButton('stop'),
+										_0: A2(
+											_user$project$Material$iconButton,
+											'stop',
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$onTodoStopRunning),
+												_1: {ctor: '[]'}
+											}),
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -86,11 +100,12 @@ var _user$project$Todo_TimeTracker_View$createViewModel = F2(
 			}
 		}();
 		var elapsedTime = _p0._0;
-		var controlIcon = _p0._1;
+		var playPauseIconName = _p0._1;
 		return {
 			displayText: todoText,
 			displayTime: _user$project$Ext_Time$toHHMMSS(elapsedTime),
-			controlIcon: controlIcon
+			playPauseIconName: playPauseIconName,
+			onStop: _user$project$Model$onTodoStopRunning
 		};
 	});
 var _user$project$Todo_TimeTracker_View$maybe = function (appModel) {

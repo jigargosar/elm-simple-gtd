@@ -78,6 +78,15 @@ isAnySoftKeyDown ke =
     ke.isShiftDown || ke.isMetaDown || ke.isControlDown || ke.isAltDown
 
 
+isNoSoftKeyDown =
+    isAnySoftKeyDown >> not
+
+
+isOnlyShiftKeyDown ke =
+    ke.isShiftDown
+        && (not (ke.isMetaDown || ke.isControlDown || ke.isAltDown))
+
+
 succeedIfDecodedKeyEquals key msg =
     KX.targetKey
         |> D.andThen

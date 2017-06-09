@@ -150,9 +150,7 @@ createTodoViewModel vc tabindexAV todo =
             vc.getMaybeEditTodoFormForTodo todo
 
         onKeyDownMsg ({ key } as ke) =
-            if Ext.Keyboard.isAnySoftKeyDown ke then
-                commonMsg.noOp
-            else
+            if Ext.Keyboard.isNoSoftKeyDown ke then
                 case key of
                     Key.Space ->
                         createEntityActionMsg Entity.ToggleSelected
@@ -180,6 +178,15 @@ createTodoViewModel vc tabindexAV todo =
 
                     _ ->
                         commonMsg.noOp
+            else if Ext.Keyboard.isOnlyShiftKeyDown ke then
+                case key of
+                    Key.CharS ->
+                        Model.onTodoTogglePaused
+
+                    _ ->
+                        commonMsg.noOp
+            else
+                commonMsg.noOp
 
         startEditingMsg =
             createEntityActionMsg Entity.StartEditing

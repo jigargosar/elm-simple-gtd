@@ -331,10 +331,10 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
 		var onKeyDownMsg = function (_p6) {
 			var _p7 = _p6;
-			if (_user$project$Ext_Keyboard$isAnySoftKeyDown(_p7)) {
-				return _user$project$Model$commonMsg.noOp;
-			} else {
-				var _p8 = _p7.key;
+			var _p11 = _p7.key;
+			var _p10 = _p7;
+			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p10)) {
+				var _p8 = _p11;
 				switch (_p8.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
@@ -354,6 +354,17 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 						return _user$project$Model$onTodoToggleRunning(todoId);
 					default:
 						return _user$project$Model$commonMsg.noOp;
+				}
+			} else {
+				if (_user$project$Ext_Keyboard$isOnlyShiftKeyDown(_p10)) {
+					var _p9 = _p11;
+					if (_p9.ctor === 'CharS') {
+						return _user$project$Model$onTodoTogglePaused;
+					} else {
+						return _user$project$Model$commonMsg.noOp;
+					}
+				} else {
+					return _user$project$Model$commonMsg.noOp;
 				}
 			}
 		};
@@ -381,8 +392,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p9, content) {
-		var _p10 = _p9;
+	function (_p12, content) {
+		var _p13 = _p12;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$button,
 			{
@@ -401,7 +412,7 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
 						_1: {
 							ctor: '::',
-							_0: _p10.tabindexAV,
+							_0: _p13.tabindexAV,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -804,7 +815,7 @@ var _user$project$Todo_View$init = function (vm) {
 		},
 		A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p11) {
+			function (_p14) {
 				return _user$project$Todo_View$defaultView(vm);
 			},
 			_user$project$Todo_View$editView,

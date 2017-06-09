@@ -856,6 +856,10 @@ switchToContextView =
     contextView >> switchToView
 
 
+switchToContextsView =
+    EntityListView Entity.ContextsView |> switchToView
+
+
 setEntityListViewType =
     EntityListView >> switchToView
 
@@ -1214,6 +1218,6 @@ gotoTodoWithId todoId model =
         maybeTodoEntity
             |> Maybe.unpack
                 (\_ ->
-                    model |> setFocusInEntityFromTodoId todoId
+                    model |> setFocusInEntityFromTodoId todoId |> switchToContextsView
                 )
                 (setFocusInEntity # model)

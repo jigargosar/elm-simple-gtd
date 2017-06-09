@@ -15,6 +15,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
+import Todo.TimeTracker
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -57,7 +58,9 @@ headerView viewModel m =
             newTodoHeader form
 
         _ ->
-            defaultHeader viewModel m
+            Todo.TimeTracker.maybeView m
+                ?|> Maybe.toList
+                ?= defaultHeader viewModel m
 
 
 newTodoHeader form =

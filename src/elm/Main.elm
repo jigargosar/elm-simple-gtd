@@ -365,6 +365,9 @@ update msg =
                     onGlobalKeyUp key
 
                 OnTodoMsg todoMsg ->
+                    withNow (OnTodoMsgWithTime todoMsg)
+
+                OnTodoMsgWithTime todoMsg now ->
                     case todoMsg of
                         Model.OnStartTimer todoId ->
                             map (identity)

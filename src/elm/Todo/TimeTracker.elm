@@ -23,3 +23,9 @@ type alias Model =
 init : Model
 init =
     Nothing
+
+
+start todoId now =
+    { todoId = todoId
+    , startedAt = now
+    }

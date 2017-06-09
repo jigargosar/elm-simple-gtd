@@ -626,29 +626,35 @@ var _user$project$Main$update = function (msg) {
 					case 'OnLaunchBarMsg':
 						return _user$project$Main$withNow(
 							_user$project$Model$OnLaunchBarMsgWithNow(_p15._0));
-					default:
+					case 'OnGlobalKeyUp':
 						return _user$project$Main$onGlobalKeyUp(_p15._0);
+					case 'OnTodoMsg':
+						return _user$project$Main$withNow(
+							_user$project$Model$OnTodoMsgWithTime(_p15._0));
+					default:
+						var _p61 = _p15._0;
+						return _user$project$Main$map(_elm_lang$core$Basics$identity);
 				}
 			}()(
 				_Fresheyeball$elm_return$Return$singleton(_p14)));
 	};
 };
-var _user$project$Main$andThenUpdate = function (_p61) {
+var _user$project$Main$andThenUpdate = function (_p62) {
 	return _Fresheyeball$elm_return$Return$andThen(
-		_user$project$Main$update(_p61));
+		_user$project$Main$update(_p62));
 };
 var _user$project$Main$onGlobalKeyUp = function (key) {
 	return A2(
 		_user$project$Ext_Return$with,
 		_user$project$Model$getEditMode,
 		function (editMode) {
-			var _p62 = {ctor: '_Tuple2', _0: key, _1: editMode};
-			_v9_2:
+			var _p63 = {ctor: '_Tuple2', _0: key, _1: editMode};
+			_v10_2:
 			do {
-				if (_p62.ctor === '_Tuple2') {
-					if (_p62._1.ctor === 'None') {
-						var _p63 = _p62._0;
-						switch (_p63.ctor) {
+				if (_p63.ctor === '_Tuple2') {
+					if (_p63._1.ctor === 'None') {
+						var _p64 = _p63._0;
+						switch (_p64.ctor) {
 							case 'Escape':
 								return _Fresheyeball$elm_return$Return$map(_user$project$Model$clearSelection);
 							case 'CharQ':
@@ -656,21 +662,21 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 							case 'CharI':
 								return _user$project$Main$andThenUpdate(_user$project$Model$NewTodoForInbox);
 							case 'Slash':
-								var _p64 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
+								var _p65 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
 								return _user$project$Main$andThenUpdate(
 									_user$project$Model$OnLaunchBarMsg(_user$project$LaunchBar$Open));
 							default:
 								return _elm_lang$core$Basics$identity;
 						}
 					} else {
-						if (_p62._0.ctor === 'Escape') {
+						if (_p63._0.ctor === 'Escape') {
 							return _user$project$Main$andThenUpdate(_user$project$Model$DeactivateEditingMode);
 						} else {
-							break _v9_2;
+							break _v10_2;
 						}
 					}
 				} else {
-					break _v9_2;
+					break _v10_2;
 				}
 			} while(false);
 			return _elm_lang$core$Basics$identity;
@@ -731,9 +737,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p65) {
+		function (_p66) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p65));
+				_user$project$Main$update(_p66));
 		}));
 var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',

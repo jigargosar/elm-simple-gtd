@@ -98,6 +98,7 @@ type Msg
     | OnLaunchBarMsg LaunchBar.Action
     | OnLaunchBarMsgWithNow LaunchBar.Action Time
     | OnTodoMsg TodoMsg
+    | OnTodoMsgWithTime TodoMsg Time
 
 
 onStartTodoTimer =

@@ -350,6 +350,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 						return _user$project$Model$StartEditingContext(todo);
 					case 'CharG':
 						return createEntityActionMsg(_user$project$Entity$Goto);
+					case 'CharS':
+						return _user$project$Model$onStartTodoTimer(todoId);
 					default:
 						return _user$project$Model$commonMsg.noOp;
 				}

@@ -25,22 +25,48 @@ var _user$project$Todo_TimeTracker$view = function (vm) {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$div,
-							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(vm.displayTime),
+								_0: _elm_lang$html$Html_Attributes$class('row'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('col'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(vm.displayTime),
+										_1: {ctor: '[]'}
+									}),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Material$icon('play_arrow'),
-									_1: {
-										ctor: '::',
-										_0: _user$project$Material$icon('stop'),
-										_1: {
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
 											ctor: '::',
-											_0: _user$project$Material$icon('pause'),
+											_0: _elm_lang$html$Html_Attributes$class('col'),
 											_1: {ctor: '[]'}
-										}
-									}
+										},
+										{
+											ctor: '::',
+											_0: _user$project$Material$icon('play_arrow'),
+											_1: {
+												ctor: '::',
+												_0: _user$project$Material$icon('stop'),
+												_1: {
+													ctor: '::',
+													_0: _user$project$Material$icon('pause'),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
 								}
 							}),
 						_1: {ctor: '[]'}

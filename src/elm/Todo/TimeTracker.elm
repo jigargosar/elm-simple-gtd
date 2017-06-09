@@ -67,11 +67,14 @@ view vm =
     Paper.item [ class "w--100" ]
         [ Paper.itemBody []
             [ div [] [ text vm.displayText ]
-            , div []
-                [ text vm.displayTime
-                , Material.icon "play_arrow"
-                , Material.icon "stop"
-                , Material.icon "pause"
+            , div [ class "row" ]
+                [ div [ class "col" ]
+                    [ text vm.displayTime ]
+                , div [ class "col" ]
+                    [ Material.icon "play_arrow"
+                    , Material.icon "stop"
+                    , Material.icon "pause"
+                    ]
                 ]
             ]
         ]

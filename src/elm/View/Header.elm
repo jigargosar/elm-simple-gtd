@@ -54,21 +54,25 @@ init viewModel m =
 headerView viewModel m =
     case m.editMode of
         EditMode.NewTodo form ->
-            [ div [ class "new-todo input-field" ]
-                [ input
-                    [ class "auto-focus"
-                    , onInput (Model.NewTodoTextChanged form)
-                    , form |> Todo.NewForm.getText |> defaultValue
-                    , onBlur Model.DeactivateEditingMode
-                    , Keyboard.onKeyUp Model.NewTodoKeyUp
-                    ]
-                    []
-                , label [ class "active" ] [ text "New Todo" ]
-                ]
-            ]
+            newTodoHeader form
 
         _ ->
             defaultHeader viewModel m
+
+
+newTodoHeader form =
+    [ div [ class "new-todo input-field" ]
+        [ input
+            [ class "auto-focus"
+            , onInput (Model.NewTodoTextChanged form)
+            , form |> Todo.NewForm.getText |> defaultValue
+            , onBlur Model.DeactivateEditingMode
+            , Keyboard.onKeyUp Model.NewTodoKeyUp
+            ]
+            []
+        , label [ class "active" ] [ text "New Todo" ]
+        ]
+    ]
 
 
 defaultHeader viewModel m =
@@ -78,22 +82,6 @@ defaultHeader viewModel m =
                 viewModel.viewName ++ " dev:" ++ m.appVersion
             else
                 viewModel.viewName
-
-        maybeUserProfile =
-            Model.getMaybeUserProfile m
-
-        userPhotoUrl =
-            Model.getMaybeUserProfile m ?|> Firebase.getPhotoURL ?= ""
-
-        userAccountAttribute =
-            Model.getMaybeUserProfile m
-                ?|> (Firebase.getPhotoURL >> attribute "src")
-                ?= iconA "account-circle"
-
-        userSignInLink =
-            maybeUserProfile
-                ?|> (\_ -> Paper.item [ onClick Model.SignOut ] [ text "SignOut" ])
-                ?= Paper.item [ onClick Model.SignIn ] [ text "SignIn" ]
     in
         [ paperIconButton
             [ iconA "menu"
@@ -105,7 +93,26 @@ defaultHeader viewModel m =
             []
         , h5 [ class "ellipsis title", title title_ ] [ title_ |> text ]
         , Paper.itemBody [] []
-        , Paper.menuButton
+        , menu m
+        ]
+
+
+menu m =
+    let
+        maybeUserProfile =
+            Model.getMaybeUserProfile m
+
+        userAccountAttribute =
+            maybeUserProfile
+                ?|> (Firebase.getPhotoURL >> attribute "src")
+                ?= iconA "account-circle"
+
+        userSignInLink =
+            maybeUserProfile
+                ?|> (\_ -> Paper.item [ onClick Model.SignOut ] [ text "SignOut" ])
+                ?= Paper.item [ onClick Model.SignIn ] [ text "SignIn" ]
+    in
+        Paper.menuButton
             [ dynamicAlign
             , boolProperty "noOverlap" True
             , boolProperty "closeOnActivate" True
@@ -118,24 +125,20 @@ defaultHeader viewModel m =
                 []
             , Paper.listbox [ class "", slotDropdownContent ]
                 [ userSignInLink
-                , Paper.item []
-                    [ Paper.itemBody []
-                        [ a
-                            [ target "_blank"
-                            , href "https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md"
-                            ]
-                            [ text "Changelog v", text m.appVersion ]
-                        ]
-                    ]
-                , Paper.item []
-                    [ Paper.itemBody []
-                        [ a
-                            [ target "_blank"
-                            , href "https://github.com/jigargosar/elm-simple-gtd"
-                            ]
-                            [ text "Github" ]
-                        ]
-                    ]
+                , itemLink "https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md"
+                    ("Changelog v" ++ m.appVersion)
+                , itemLink "https://github.com/jigargosar/elm-simple-gtd" "Github"
                 ]
+            ]
+
+
+itemLink url content =
+    Paper.item []
+        [ Paper.itemBody []
+            [ a
+                [ target "_blank"
+                , href url
+                ]
+                [ text content ]
             ]
         ]

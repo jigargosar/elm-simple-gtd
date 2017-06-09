@@ -1,56 +1,150 @@
+var _user$project$View_Header$itemLink = F2(
+	function (url, content) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_Paper$itemBody,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$target('_blank'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$href(url),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(content),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$View_Header$menu = function (m) {
+	var maybeUserProfile = _user$project$Model$getMaybeUserProfile(m);
+	var userAccountAttribute = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			maybeUserProfile,
+			function (_p0) {
+				return A2(
+					_elm_lang$html$Html_Attributes$attribute,
+					'src',
+					_user$project$Firebase$getPhotoURL(_p0));
+			}),
+		_user$project$WebComponents$iconA('account-circle'));
+	var userSignInLink = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			maybeUserProfile,
+			function (_p1) {
+				return A2(
+					_edvail$elm_polymer$Polymer_Paper$item,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$SignOut),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('SignOut'),
+						_1: {ctor: '[]'}
+					});
+			}),
+		A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$SignIn),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('SignIn'),
+				_1: {ctor: '[]'}
+			}));
+	return A2(
+		_edvail$elm_polymer$Polymer_Paper$menuButton,
+		{
+			ctor: '::',
+			_0: _user$project$WebComponents$dynamicAlign,
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'noOverlap', true),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'closeOnActivate', true),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'iron-icon',
+				{
+					ctor: '::',
+					_0: userAccountAttribute,
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('account'),
+						_1: {
+							ctor: '::',
+							_0: _user$project$WebComponents$slotDropdownTrigger,
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_edvail$elm_polymer$Polymer_Paper$listbox,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class(''),
+						_1: {
+							ctor: '::',
+							_0: _user$project$WebComponents$slotDropdownContent,
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: userSignInLink,
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_user$project$View_Header$itemLink,
+								'https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md',
+								A2(_elm_lang$core$Basics_ops['++'], 'Changelog v', m.appVersion)),
+							_1: {
+								ctor: '::',
+								_0: A2(_user$project$View_Header$itemLink, 'https://github.com/jigargosar/elm-simple-gtd', 'Github'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _user$project$View_Header$defaultHeader = F2(
 	function (viewModel, m) {
-		var userAccountAttribute = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				_user$project$Model$getMaybeUserProfile(m),
-				function (_p0) {
-					return A2(
-						_elm_lang$html$Html_Attributes$attribute,
-						'src',
-						_user$project$Firebase$getPhotoURL(_p0));
-				}),
-			_user$project$WebComponents$iconA('account-circle'));
-		var userPhotoUrl = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				_user$project$Model$getMaybeUserProfile(m),
-				_user$project$Firebase$getPhotoURL),
-			'');
-		var maybeUserProfile = _user$project$Model$getMaybeUserProfile(m);
-		var userSignInLink = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				maybeUserProfile,
-				function (_p1) {
-					return A2(
-						_edvail$elm_polymer$Polymer_Paper$item,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$SignOut),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('SignOut'),
-							_1: {ctor: '[]'}
-						});
-				}),
-			A2(
-				_edvail$elm_polymer$Polymer_Paper$item,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$SignIn),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('SignIn'),
-					_1: {ctor: '[]'}
-				}));
 		var title_ = m.developmentMode ? A2(
 			_elm_lang$core$Basics_ops['++'],
 			viewModel.viewName,
@@ -107,198 +201,76 @@ var _user$project$View_Header$defaultHeader = F2(
 						{ctor: '[]'}),
 					_1: {
 						ctor: '::',
-						_0: A2(
-							_edvail$elm_polymer$Polymer_Paper$menuButton,
-							{
-								ctor: '::',
-								_0: _user$project$WebComponents$dynamicAlign,
-								_1: {
-									ctor: '::',
-									_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'noOverlap', true),
-									_1: {
-										ctor: '::',
-										_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'closeOnActivate', true),
-										_1: {ctor: '[]'}
-									}
-								}
-							},
-							{
-								ctor: '::',
-								_0: A3(
-									_elm_lang$html$Html$node,
-									'iron-icon',
-									{
-										ctor: '::',
-										_0: userAccountAttribute,
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('account'),
-											_1: {
-												ctor: '::',
-												_0: _user$project$WebComponents$slotDropdownTrigger,
-												_1: {ctor: '[]'}
-											}
-										}
-									},
-									{ctor: '[]'}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_edvail$elm_polymer$Polymer_Paper$listbox,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class(''),
-											_1: {
-												ctor: '::',
-												_0: _user$project$WebComponents$slotDropdownContent,
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: userSignInLink,
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_edvail$elm_polymer$Polymer_Paper$item,
-													{ctor: '[]'},
-													{
-														ctor: '::',
-														_0: A2(
-															_edvail$elm_polymer$Polymer_Paper$itemBody,
-															{ctor: '[]'},
-															{
-																ctor: '::',
-																_0: A2(
-																	_elm_lang$html$Html$a,
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$target('_blank'),
-																		_1: {
-																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$href('https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md'),
-																			_1: {ctor: '[]'}
-																		}
-																	},
-																	{
-																		ctor: '::',
-																		_0: _elm_lang$html$Html$text('Changelog v'),
-																		_1: {
-																			ctor: '::',
-																			_0: _elm_lang$html$Html$text(m.appVersion),
-																			_1: {ctor: '[]'}
-																		}
-																	}),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}),
-												_1: {
-													ctor: '::',
-													_0: A2(
-														_edvail$elm_polymer$Polymer_Paper$item,
-														{ctor: '[]'},
-														{
-															ctor: '::',
-															_0: A2(
-																_edvail$elm_polymer$Polymer_Paper$itemBody,
-																{ctor: '[]'},
-																{
-																	ctor: '::',
-																	_0: A2(
-																		_elm_lang$html$Html$a,
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html_Attributes$target('_blank'),
-																			_1: {
-																				ctor: '::',
-																				_0: _elm_lang$html$Html_Attributes$href('https://github.com/jigargosar/elm-simple-gtd'),
-																				_1: {ctor: '[]'}
-																			}
-																		},
-																		{
-																			ctor: '::',
-																			_0: _elm_lang$html$Html$text('Github'),
-																			_1: {ctor: '[]'}
-																		}),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
-											}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}),
+						_0: _user$project$View_Header$menu(m),
 						_1: {ctor: '[]'}
 					}
 				}
 			}
 		};
 	});
+var _user$project$View_Header$newTodoHeader = function (form) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('new-todo input-field'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onInput(
+								_user$project$Model$NewTodoTextChanged(form)),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$defaultValue(
+									_user$project$Todo_NewForm$getText(form)),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$DeactivateEditingMode),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Ext_Keyboard$onKeyUp(_user$project$Model$NewTodoKeyUp),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$label,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('active'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('New Todo'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {ctor: '[]'}
+	};
+};
 var _user$project$View_Header$headerView = F2(
 	function (viewModel, m) {
 		var _p2 = m.editMode;
 		if (_p2.ctor === 'NewTodo') {
-			var _p3 = _p2._0;
-			return {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('new-todo input-field'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$input,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onInput(
-										_user$project$Model$NewTodoTextChanged(_p3)),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$defaultValue(
-											_user$project$Todo_NewForm$getText(_p3)),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$DeactivateEditingMode),
-											_1: {
-												ctor: '::',
-												_0: _user$project$Ext_Keyboard$onKeyUp(_user$project$Model$NewTodoKeyUp),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$label,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('active'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('New Todo'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
-			};
+			return _user$project$View_Header$newTodoHeader(_p2._0);
 		} else {
 			return A2(_user$project$View_Header$defaultHeader, viewModel, m);
 		}

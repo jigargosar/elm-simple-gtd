@@ -49,7 +49,7 @@ import Todo.TimeTracker
 
 
 type TodoMsg
-    = OnStartTimer Todo.Id
+    = OnToggleTodoTimer Todo.Id
 
 
 type Msg
@@ -101,8 +101,8 @@ type Msg
     | OnTodoMsgWithTime TodoMsg Time
 
 
-onStartTodoTimer =
-    OnStartTimer >> OnTodoMsg
+onToggleTodoTimer =
+    OnToggleTodoTimer >> OnTodoMsg
 
 
 commonMsg : CommonMsg.Helper Msg
@@ -265,7 +265,7 @@ init flags =
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
             , focusInEntity = inboxEntity
-            , timeTracker = Todo.TimeTracker.init
+            , timeTracker = Todo.TimeTracker.none
             , firebaseClient = firebaseClient
             }
     in
@@ -1183,5 +1183,5 @@ getNotificationCmdFromTodoChange uid (( old, new ) as change) =
 -- todo time tracking
 
 
-startTodoTimer todoId now =
-    set timeTracker (Todo.TimeTracker.start todoId now)
+toggleTodoTimer todoId now =
+    over timeTracker (Todo.TimeTracker.toggle todoId now)

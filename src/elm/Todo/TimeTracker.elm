@@ -27,8 +27,8 @@ type alias Model =
     Maybe ModelRec
 
 
-init : Model
-init =
+none : Model
+none =
     Nothing
 
 
@@ -36,10 +36,15 @@ wrap =
     Just
 
 
-start : Todo.Id -> Time -> Model
-start todoId now =
-    { todoId = todoId
-    , totalTime = 0
-    , state = Running now
-    }
-        |> wrap
+toggle : Todo.Id -> Time -> Model -> Model
+toggle todoId now model =
+    case model of
+        Nothing ->
+            wrap
+                { todoId = todoId
+                , totalTime = 0
+                , state = Running now
+                }
+
+        Just _ ->
+            none

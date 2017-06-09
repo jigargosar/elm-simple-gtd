@@ -782,12 +782,12 @@ var _user$project$Model$timeTracker = A2(
 				b,
 				{timeTracker: s});
 		}));
-var _user$project$Model$startTodoTimer = F2(
+var _user$project$Model$toggleTodoTimer = F2(
 	function (todoId, now) {
 		return A2(
-			_user$project$Ext_Record$set,
+			_user$project$Ext_Record$over,
 			_user$project$Model$timeTracker,
-			A2(_user$project$Todo_TimeTracker$start, todoId, now));
+			A2(_user$project$Todo_TimeTracker$toggle, todoId, now));
 	});
 var _user$project$Model$focusInEntity = A2(
 	_user$project$Ext_Record$init,
@@ -1332,8 +1332,8 @@ var _user$project$Model$TodoNotificationEvent = F2(
 	function (a, b) {
 		return {action: a, data: b};
 	});
-var _user$project$Model$OnStartTimer = function (a) {
-	return {ctor: 'OnStartTimer', _0: a};
+var _user$project$Model$OnToggleTodoTimer = function (a) {
+	return {ctor: 'OnToggleTodoTimer', _0: a};
 };
 var _user$project$Model$OnTodoMsgWithTime = F2(
 	function (a, b) {
@@ -1342,9 +1342,9 @@ var _user$project$Model$OnTodoMsgWithTime = F2(
 var _user$project$Model$OnTodoMsg = function (a) {
 	return {ctor: 'OnTodoMsg', _0: a};
 };
-var _user$project$Model$onStartTodoTimer = function (_p65) {
+var _user$project$Model$onToggleTodoTimer = function (_p65) {
 	return _user$project$Model$OnTodoMsg(
-		_user$project$Model$OnStartTimer(_p65));
+		_user$project$Model$OnToggleTodoTimer(_p65));
 };
 var _user$project$Model$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {
@@ -1523,7 +1523,7 @@ var _user$project$Model$init = function (flags) {
 		appVersion: flags.appVersion,
 		deviceId: flags.deviceId,
 		focusInEntity: _user$project$Model$inboxEntity,
-		timeTracker: _user$project$Todo_TimeTracker$init,
+		timeTracker: _user$project$Todo_TimeTracker$none,
 		firebaseClient: firebaseClient
 	};
 	return model;

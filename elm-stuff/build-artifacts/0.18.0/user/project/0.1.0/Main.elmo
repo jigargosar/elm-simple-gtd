@@ -634,7 +634,7 @@ var _user$project$Main$update = function (msg) {
 					default:
 						var _p61 = _p15._0;
 						return _user$project$Main$map(
-							A2(_user$project$Model$startTodoTimer, _p61._0, _p15._1));
+							A2(_user$project$Model$toggleTodoTimer, _p61._0, _p15._1));
 				}
 			}()(
 				_Fresheyeball$elm_return$Return$singleton(_p14)));

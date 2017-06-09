@@ -370,8 +370,8 @@ update msg =
 
                 OnTodoMsgWithTime todoMsg now ->
                     case todoMsg of
-                        Model.OnStartTimer todoId ->
-                            map (Model.startTodoTimer todoId now)
+                        Model.OnToggleTodoTimer todoId ->
+                            map (Model.toggleTodoTimer todoId now)
            )
         >> persistAll
 

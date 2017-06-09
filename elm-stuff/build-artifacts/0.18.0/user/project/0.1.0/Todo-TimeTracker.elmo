@@ -1,5 +1,5 @@
 var _user$project$Todo_TimeTracker$wrap = _elm_lang$core$Maybe$Just;
-var _user$project$Todo_TimeTracker$init = _elm_lang$core$Maybe$Nothing;
+var _user$project$Todo_TimeTracker$none = _elm_lang$core$Maybe$Nothing;
 var _user$project$Todo_TimeTracker$ModelRec = F3(
 	function (a, b, c) {
 		return {todoId: a, totalTime: b, state: c};
@@ -8,12 +8,17 @@ var _user$project$Todo_TimeTracker$Paused = {ctor: 'Paused'};
 var _user$project$Todo_TimeTracker$Running = function (a) {
 	return {ctor: 'Running', _0: a};
 };
-var _user$project$Todo_TimeTracker$start = F2(
-	function (todoId, now) {
-		return _user$project$Todo_TimeTracker$wrap(
-			{
-				todoId: todoId,
-				totalTime: 0,
-				state: _user$project$Todo_TimeTracker$Running(now)
-			});
+var _user$project$Todo_TimeTracker$toggle = F3(
+	function (todoId, now, model) {
+		var _p0 = model;
+		if (_p0.ctor === 'Nothing') {
+			return _user$project$Todo_TimeTracker$wrap(
+				{
+					todoId: todoId,
+					totalTime: 0,
+					state: _user$project$Todo_TimeTracker$Running(now)
+				});
+		} else {
+			return _user$project$Todo_TimeTracker$none;
+		}
 	});

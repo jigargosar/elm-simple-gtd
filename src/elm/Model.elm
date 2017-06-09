@@ -1198,4 +1198,22 @@ gotoTodoWithIdIn =
 
 
 gotoTodoWithId todoId model =
-    model
+    let
+        maybeTodoEntity =
+            getCurrentViewEntityList model
+                |> List.find
+                    (\entity ->
+                        case entity of
+                            Entity.TodoEntity doc ->
+                                Document.hasId todoId doc
+
+                            _ ->
+                                False
+                    )
+    in
+        maybeTodoEntity
+            |> Maybe.unpack
+                (\_ ->
+                    model |> setFocusInEntityFromTodoId todoId
+                )
+                (setFocusInEntity # model)

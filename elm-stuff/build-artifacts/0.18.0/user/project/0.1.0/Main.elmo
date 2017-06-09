@@ -666,7 +666,12 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 								return _user$project$Main$andThenUpdate(
 									_user$project$Model$OnLaunchBarMsg(_user$project$LaunchBar$Open));
 							case 'CharR':
-								return _elm_lang$core$Basics$identity;
+								return function (_p65) {
+									return A2(
+										_user$project$Main$andThenUpdate,
+										_user$project$Main$setDomFocusToFocusedEntityCmd,
+										A2(_user$project$Main$map, _user$project$Model$gotoRunningTodo, _p65));
+								};
 							default:
 								return _elm_lang$core$Basics$identity;
 						}
@@ -739,9 +744,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p65) {
+		function (_p66) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p65));
+				_user$project$Main$update(_p66));
 		}));
 var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',

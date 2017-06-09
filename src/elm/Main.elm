@@ -503,6 +503,7 @@ onGlobalKeyUp key =
 
                         Key.CharR ->
                             map (Model.gotoRunningTodo)
+                                >> andThenUpdate setDomFocusToFocusedEntityCmd
 
                         _ ->
                             identity

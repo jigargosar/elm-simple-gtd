@@ -1,0 +1,11 @@
+var _user$project$Todo_TimeTracker$wrap = _elm_lang$core$Maybe$Just;
+var _user$project$Todo_TimeTracker$start = F2(
+	function (todoId, now) {
+		return _user$project$Todo_TimeTracker$wrap(
+			{todoId: todoId, startedAt: now});
+	});
+var _user$project$Todo_TimeTracker$init = _elm_lang$core$Maybe$Nothing;
+var _user$project$Todo_TimeTracker$ModelRec = F2(
+	function (a, b) {
+		return {todoId: a, startedAt: b};
+	});

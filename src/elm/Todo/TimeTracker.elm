@@ -25,7 +25,13 @@ init =
     Nothing
 
 
+wrap =
+    Just
+
+
+start : Todo.Id -> Time -> Model
 start todoId now =
     { todoId = todoId
     , startedAt = now
     }
+        |> wrap

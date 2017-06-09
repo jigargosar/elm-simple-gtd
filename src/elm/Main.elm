@@ -36,6 +36,7 @@ import Return
 import RouteUrl exposing (RouteUrlProgram)
 import Task
 import Time exposing (Time)
+import Todo.TimeTracker
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Maybe.Extra as Maybe
@@ -370,7 +371,7 @@ update msg =
                 OnTodoMsgWithTime todoMsg now ->
                     case todoMsg of
                         Model.OnStartTimer todoId ->
-                            map (identity)
+                            map (Model.startTodoTimer todoId now)
            )
         >> persistAll
 

@@ -1177,3 +1177,11 @@ getNotificationCmdFromTodoChange uid (( old, new ) as change) =
             Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
     else
         Cmd.none
+
+
+
+-- todo time tracking
+
+
+startTodoTimer todoId now =
+    set timeTracker (Todo.TimeTracker.start todoId now)

@@ -45,6 +45,7 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 import LaunchBar
 import Todo.GroupForm
+import Todo.TimeTracker
 
 
 type Msg
@@ -130,6 +131,7 @@ type alias Model =
     , deviceId : String
     , firebaseClient : Firebase.Client
     , focusInEntity : Entity.Entity
+    , timeTracker : Todo.TimeTracker.Model
     }
 
 
@@ -212,6 +214,10 @@ focusInEntity =
     Record.init .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
+timeTracker =
+    Record.init .timeTracker (\s b -> { b | timeTracker = s })
+
+
 init : Flags -> Model
 init flags =
     let
@@ -249,6 +255,7 @@ init flags =
             , appVersion = flags.appVersion
             , deviceId = flags.deviceId
             , focusInEntity = inboxEntity
+            , timeTracker = Todo.TimeTracker.init
             , firebaseClient = firebaseClient
             }
     in

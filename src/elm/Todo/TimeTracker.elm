@@ -16,8 +16,8 @@ type alias ModelRec =
     }
 
 
-type Model
-    = Maybe ModelRec
+type alias Model =
+    Maybe ModelRec
 
 
 init : Model

@@ -365,7 +365,9 @@ update msg =
                     onGlobalKeyUp key
 
                 OnTodoMsg todoMsg ->
-                    identity
+                    case todoMsg of
+                        Model.OnStartTimer todoId ->
+                            map (identity)
            )
         >> persistAll
 

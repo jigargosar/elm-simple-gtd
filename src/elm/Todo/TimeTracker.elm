@@ -36,6 +36,10 @@ wrap =
     Just
 
 
+map =
+    Maybe.map
+
+
 toggle : Todo.Id -> Time -> Model -> Model
 toggle todoId now model =
     case model of
@@ -48,3 +52,7 @@ toggle todoId now model =
 
         Just _ ->
             none
+
+
+getMaybeTodoId =
+    map .todoId

@@ -1185,3 +1185,13 @@ getNotificationCmdFromTodoChange uid (( old, new ) as change) =
 
 toggleTodoTimer todoId now =
     over timeTracker (Todo.TimeTracker.toggle todoId now)
+
+
+gotoRunningTodo model =
+    Todo.TimeTracker.getMaybeTodoId model.timeTracker
+        ?|> gotoTodoWithIdIn model
+        ?= model
+
+
+gotoTodoWithIdIn model =
+    model

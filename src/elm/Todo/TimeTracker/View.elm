@@ -56,8 +56,9 @@ view vm =
             [ div [ class "flex-auto" ] [ text vm.displayTime ]
             , div [ class "" ]
                 [ Material.iconButton vm.controlIcon
-                , Material.iconButton "cancel"
-                , Material.iconButton "done"
+                , Material.iconButton "stop"
+
+                {- , Material.iconButton "done" -}
                 ]
             ]
         ]

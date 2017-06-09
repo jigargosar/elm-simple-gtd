@@ -57,12 +57,8 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 									_0: _user$project$Material$iconButton(vm.controlIcon),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Material$iconButton('cancel'),
-										_1: {
-											ctor: '::',
-											_0: _user$project$Material$iconButton('done'),
-											_1: {ctor: '[]'}
-										}
+										_0: _user$project$Material$iconButton('stop'),
+										_1: {ctor: '[]'}
 									}
 								}),
 							_1: {ctor: '[]'}

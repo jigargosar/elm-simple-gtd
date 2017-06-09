@@ -40,8 +40,8 @@ map =
     Maybe.map
 
 
-toggle : Todo.Id -> Time -> Model -> Model
-toggle todoId now model =
+toggleStartStop : Todo.Id -> Time -> Model -> Model
+toggleStartStop todoId now model =
     case model of
         Nothing ->
             wrap
@@ -52,6 +52,19 @@ toggle todoId now model =
 
         Just _ ->
             none
+
+
+togglePause : Time -> Model -> Model
+togglePause now =
+    map
+        (\rec ->
+            case rec.state of
+                Running startedAt ->
+                    { rec | totalTime = rec.totalTime + (now - startedAt), state = Paused }
+
+                Paused ->
+                    { rec | state = Running now }
+        )
 
 
 getMaybeTodoId =

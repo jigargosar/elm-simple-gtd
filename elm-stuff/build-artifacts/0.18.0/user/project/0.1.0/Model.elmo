@@ -787,7 +787,7 @@ var _user$project$Model$toggleTodoTimer = F2(
 		return A2(
 			_user$project$Ext_Record$over,
 			_user$project$Model$timeTracker,
-			A2(_user$project$Todo_TimeTracker$toggle, todoId, now));
+			A2(_user$project$Todo_TimeTracker$toggleStartStop, todoId, now));
 	});
 var _user$project$Model$focusInEntity = A2(
 	_user$project$Ext_Record$init,

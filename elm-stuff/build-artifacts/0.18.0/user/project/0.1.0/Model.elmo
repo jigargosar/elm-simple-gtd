@@ -789,6 +789,12 @@ var _user$project$Model$toggleTodoTimer = F2(
 			_user$project$Model$timeTracker,
 			A2(_user$project$Todo_TimeTracker$toggleStartStop, todoId, now));
 	});
+var _user$project$Model$toggleTodoPause = function (now) {
+	return A2(
+		_user$project$Ext_Record$over,
+		_user$project$Model$timeTracker,
+		_user$project$Todo_TimeTracker$togglePause(now));
+};
 var _user$project$Model$focusInEntity = A2(
 	_user$project$Ext_Record$init,
 	function (_) {
@@ -1332,8 +1338,9 @@ var _user$project$Model$TodoNotificationEvent = F2(
 	function (a, b) {
 		return {action: a, data: b};
 	});
-var _user$project$Model$OnToggleTodoTimer = function (a) {
-	return {ctor: 'OnToggleTodoTimer', _0: a};
+var _user$project$Model$OnTodoTogglePaused = {ctor: 'OnTodoTogglePaused'};
+var _user$project$Model$OnTodoToggleRunning = function (a) {
+	return {ctor: 'OnTodoToggleRunning', _0: a};
 };
 var _user$project$Model$OnTodoMsgWithTime = F2(
 	function (a, b) {
@@ -1342,10 +1349,11 @@ var _user$project$Model$OnTodoMsgWithTime = F2(
 var _user$project$Model$OnTodoMsg = function (a) {
 	return {ctor: 'OnTodoMsg', _0: a};
 };
-var _user$project$Model$onToggleTodoTimer = function (_p65) {
+var _user$project$Model$onTodoToggleRunning = function (_p65) {
 	return _user$project$Model$OnTodoMsg(
-		_user$project$Model$OnToggleTodoTimer(_p65));
+		_user$project$Model$OnTodoToggleRunning(_p65));
 };
+var _user$project$Model$onTodoTogglePaused = _user$project$Model$OnTodoMsg(_user$project$Model$OnTodoTogglePaused);
 var _user$project$Model$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {
 		return {ctor: 'OnLaunchBarMsgWithNow', _0: a, _1: b};

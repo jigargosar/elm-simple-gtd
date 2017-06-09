@@ -370,8 +370,11 @@ update msg =
 
                 OnTodoMsgWithTime todoMsg now ->
                     case todoMsg of
-                        Model.OnToggleTodoTimer todoId ->
+                        Model.OnTodoToggleRunning todoId ->
                             map (Model.toggleTodoTimer todoId now)
+
+                        Model.OnTodoTogglePaused ->
+                            map (Model.toggleTodoPause now)
            )
         >> persistAll
 
@@ -504,6 +507,9 @@ onGlobalKeyUp key =
                         Key.CharR ->
                             map (Model.gotoRunningTodo)
                                 >> andThenUpdate setDomFocusToFocusedEntityCmd
+
+                        Key.CharP ->
+                            andThenUpdate onTodoTogglePaused
 
                         _ ->
                             identity

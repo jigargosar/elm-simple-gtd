@@ -351,7 +351,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					case 'CharG':
 						return createEntityActionMsg(_user$project$Entity$Goto);
 					case 'CharS':
-						return _user$project$Model$onToggleTodoTimer(todoId);
+						return _user$project$Model$onTodoToggleRunning(todoId);
 					default:
 						return _user$project$Model$commonMsg.noOp;
 				}

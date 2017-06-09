@@ -49,7 +49,8 @@ import Todo.TimeTracker
 
 
 type TodoMsg
-    = OnToggleTodoTimer Todo.Id
+    = OnTodoToggleRunning Todo.Id
+    | OnTodoTogglePaused
 
 
 type Msg
@@ -101,8 +102,12 @@ type Msg
     | OnTodoMsgWithTime TodoMsg Time
 
 
-onToggleTodoTimer =
-    OnToggleTodoTimer >> OnTodoMsg
+onTodoToggleRunning =
+    OnTodoToggleRunning >> OnTodoMsg
+
+
+onTodoTogglePaused =
+    OnTodoTogglePaused |> OnTodoMsg
 
 
 commonMsg : CommonMsg.Helper Msg
@@ -1189,6 +1194,10 @@ getNotificationCmdFromTodoChange uid (( old, new ) as change) =
 
 toggleTodoTimer todoId now =
     over timeTracker (Todo.TimeTracker.toggleStartStop todoId now)
+
+
+toggleTodoPause now =
+    over timeTracker (Todo.TimeTracker.togglePause now)
 
 
 gotoRunningTodo model =

@@ -47,17 +47,7 @@ init viewModel m =
             [ App.toolbar
                 [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
                 ]
-                ([ paperIconButton
-                    [ iconA "menu"
-                    , tabindex -1
-                    , attribute "drawer-toggle" ""
-                    , onClick Model.ToggleDrawer
-                    , class "hide-when-wide"
-                    ]
-                    []
-                 ]
-                    ++ (headerView viewModel m)
-                )
+                (headerView viewModel m)
             ]
 
 
@@ -85,10 +75,6 @@ headerView viewModel m =
             defaultHeader viewModel m
 
 
-headLineText title =
-    div [ class "big-paper-item-text" ] [ text title ]
-
-
 defaultHeader viewModel m =
     let
         title_ =
@@ -113,7 +99,15 @@ defaultHeader viewModel m =
                 ?|> (\_ -> Paper.item [ onClick Model.SignOut ] [ text "SignOut" ])
                 ?= Paper.item [ onClick Model.SignIn ] [ text "SignIn" ]
     in
-        [ h5 [ class "ellipsis title", title title_ ] [ title_ |> text ]
+        [ paperIconButton
+            [ iconA "menu"
+            , tabindex -1
+            , attribute "drawer-toggle" ""
+            , onClick Model.ToggleDrawer
+            , class "hide-when-wide"
+            ]
+            []
+        , h5 [ class "ellipsis title", title title_ ] [ title_ |> text ]
         , Paper.itemBody [] []
         , Paper.menuButton
             [ dynamicAlign

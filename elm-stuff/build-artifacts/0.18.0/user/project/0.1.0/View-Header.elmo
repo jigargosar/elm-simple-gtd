@@ -305,7 +305,7 @@ var _user$project$View_Header$headerView = F2(
 	});
 var _user$project$View_Header$init = F2(
 	function (viewModel, m) {
-		var fixedAttributeAsList = _user$project$Model$isLayoutAutoNarrow(m) ? {
+		var layoutAttributes = _user$project$Model$isLayoutAutoNarrow(m) ? {
 			ctor: '::',
 			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'condenses', ''),
 			_1: {
@@ -318,24 +318,25 @@ var _user$project$View_Header$init = F2(
 			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'fixed', ''),
 			_1: {ctor: '[]'}
 		};
-		return A2(
-			_edvail$elm_polymer$Polymer_App$header,
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				{
+		var attributes = A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id('main-header'),
+				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id('main-header'),
+					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'header'),
 					_1: {
 						ctor: '::',
-						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'header'),
-						_1: {
-							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'effects', 'waterfall'),
-							_1: {ctor: '[]'}
-						}
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'effects', 'waterfall'),
+						_1: {ctor: '[]'}
 					}
-				},
-				fixedAttributeAsList),
+				}
+			},
+			layoutAttributes);
+		return A2(
+			_edvail$elm_polymer$Polymer_App$header,
+			attributes,
 			{
 				ctor: '::',
 				_0: A2(

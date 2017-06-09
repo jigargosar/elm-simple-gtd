@@ -27,23 +27,23 @@ import WebComponents exposing (..)
 
 init viewModel m =
     let
-        fixedAttributeAsList =
+        layoutAttributes =
             if Model.isLayoutAutoNarrow m then
                 [ attribute "condenses" ""
                 , attribute "reveals" ""
                 ]
             else
                 [ attribute "fixed" "" ]
+
+        attributes =
+            [ id "main-header"
+            , attribute "slot" "header"
+            , attribute "effects" "waterfall"
+            ]
+                ++ layoutAttributes
     in
         App.header
-            ([ id "main-header"
-             , attribute "slot" "header"
-             , attribute "effects" "waterfall"
-
-             --             , attribute "effects" "material"
-             ]
-                ++ fixedAttributeAsList
-            )
+            attributes
             [ App.toolbar
                 [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
                 ]
@@ -61,10 +61,6 @@ headerView viewModel m =
                     , form |> Todo.NewForm.getText |> defaultValue
                     , onBlur Model.DeactivateEditingMode
                     , Keyboard.onKeyUp Model.NewTodoKeyUp
-
-                    --                    , stringProperty "label" "New Todo"
-                    --                    , boolProperty "alwaysFloatLabel" True
-                    --                    , style [ ( "width", "100%" ), "color" => "white" ]
                     ]
                     []
                 , label [ class "active" ] [ text "New Todo" ]

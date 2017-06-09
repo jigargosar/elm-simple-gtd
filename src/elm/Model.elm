@@ -48,6 +48,10 @@ import Todo.GroupForm
 import Todo.TimeTracker
 
 
+type TodoMsg
+    = OnStartTimer Todo.Id
+
+
 type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnPouchDBChange String D.Value
@@ -93,6 +97,11 @@ type Msg
     | OnEntityAction Entity Entity.Action
     | OnLaunchBarMsg LaunchBar.Action
     | OnLaunchBarMsgWithNow LaunchBar.Action Time
+    | OnTodoMsg TodoMsg
+
+
+onStartTodoTimer =
+    OnStartTimer >> OnTodoMsg
 
 
 commonMsg : CommonMsg.Helper Msg

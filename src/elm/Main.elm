@@ -363,6 +363,9 @@ update msg =
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key
+
+                OnTodoMsg todoMsg ->
+                    identity
            )
         >> persistAll
 

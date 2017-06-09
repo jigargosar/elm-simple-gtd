@@ -175,6 +175,9 @@ createTodoViewModel vc tabindexAV todo =
                     Key.CharG ->
                         createEntityActionMsg Entity.Goto
 
+                    Key.CharS ->
+                        Model.onStartTodoTimer todoId
+
                     _ ->
                         commonMsg.noOp
 

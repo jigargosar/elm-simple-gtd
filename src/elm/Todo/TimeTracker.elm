@@ -8,6 +8,10 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Html.Events.Extra exposing (onClickStopPropagation)
 
 
 type alias ModelRec =
@@ -37,5 +41,28 @@ start todoId now =
         |> wrap
 
 
-maybeView m =
-    Nothing
+
+-- View
+
+
+type alias ViewModel =
+    { displayText : String
+    , displayTime : String
+    }
+
+
+createViewModel appModel tracker =
+    { displayText = tracker.todoId
+    , displayTime = toString tracker.startedAt
+    }
+
+
+maybeView appModel =
+    appModel.timeTracker ?|> createViewModel appModel >> view
+
+
+view vm =
+    div []
+        [ div [] [ text vm.displayText ]
+        , div [] [ text vm.displayTime ]
+        ]

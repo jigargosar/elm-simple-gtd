@@ -59,7 +59,7 @@ headerView viewModel m =
 
         _ ->
             Todo.TimeTracker.maybeView m
-                ?|> Maybe.toList
+                ?|> List.singleton
                 ?= defaultHeader viewModel m
 
 

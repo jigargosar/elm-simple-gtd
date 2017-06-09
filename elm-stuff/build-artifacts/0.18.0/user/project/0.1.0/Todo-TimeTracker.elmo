@@ -1,5 +1,46 @@
-var _user$project$Todo_TimeTracker$maybeView = function (m) {
-	return _elm_lang$core$Maybe$Nothing;
+var _user$project$Todo_TimeTracker$view = function (vm) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(vm.displayText),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(vm.displayTime),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Todo_TimeTracker$createViewModel = F2(
+	function (appModel, tracker) {
+		return {
+			displayText: tracker.todoId,
+			displayTime: _elm_lang$core$Basics$toString(tracker.startedAt)
+		};
+	});
+var _user$project$Todo_TimeTracker$maybeView = function (appModel) {
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+		appModel.timeTracker,
+		function (_p0) {
+			return _user$project$Todo_TimeTracker$view(
+				A2(_user$project$Todo_TimeTracker$createViewModel, appModel, _p0));
+		});
 };
 var _user$project$Todo_TimeTracker$wrap = _elm_lang$core$Maybe$Just;
 var _user$project$Todo_TimeTracker$start = F2(
@@ -11,4 +52,8 @@ var _user$project$Todo_TimeTracker$init = _elm_lang$core$Maybe$Nothing;
 var _user$project$Todo_TimeTracker$ModelRec = F2(
 	function (a, b) {
 		return {todoId: a, startedAt: b};
+	});
+var _user$project$Todo_TimeTracker$ViewModel = F2(
+	function (a, b) {
+		return {displayText: a, displayTime: b};
 	});

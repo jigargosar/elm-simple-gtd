@@ -663,7 +663,6 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 							case 'CharI':
 								return _user$project$Main$andThenUpdate(_user$project$Model$NewTodoForInbox);
 							case 'Slash':
-								var _p65 = A2(_elm_lang$core$Debug$log, 'slashpressed', 'slashpressed');
 								return _user$project$Main$andThenUpdate(
 									_user$project$Model$OnLaunchBarMsg(_user$project$LaunchBar$Open));
 							default:
@@ -738,9 +737,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p66) {
+		function (_p65) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p66));
+				_user$project$Main$update(_p65));
 		}));
 var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',

@@ -499,11 +499,7 @@ onGlobalKeyUp key =
                             andThenUpdate NewTodoForInbox
 
                         Key.Slash ->
-                            let
-                                _ =
-                                    Debug.log "slashpressed" ("slashpressed")
-                            in
-                                LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
+                            LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
 
                         _ ->
                             identity

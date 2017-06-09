@@ -1,5 +1,6 @@
 module Todo.TimeTracker exposing (..)
 
+import Material
 import Time exposing (Time)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -66,6 +67,11 @@ view vm =
     Paper.item [ class "w--100" ]
         [ Paper.itemBody []
             [ div [] [ text vm.displayText ]
-            , div [] [ text vm.displayTime ]
+            , div []
+                [ text vm.displayTime
+                , Material.icon "play_arrow"
+                , Material.icon "stop"
+                , Material.icon "pause"
+                ]
             ]
         ]

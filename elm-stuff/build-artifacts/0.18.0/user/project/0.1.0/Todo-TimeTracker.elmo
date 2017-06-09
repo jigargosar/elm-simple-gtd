@@ -29,7 +29,19 @@ var _user$project$Todo_TimeTracker$view = function (vm) {
 							{
 								ctor: '::',
 								_0: _elm_lang$html$Html$text(vm.displayTime),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: _user$project$Material$icon('play_arrow'),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Material$icon('stop'),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Material$icon('pause'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
 							}),
 						_1: {ctor: '[]'}
 					}

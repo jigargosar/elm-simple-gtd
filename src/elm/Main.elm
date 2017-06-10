@@ -481,7 +481,10 @@ maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model =
                 { tag = todoId
                 , title = "You are currently working on"
                 , body = Todo.getText todo
-                , actions = []
+                , actions =
+                    [ { title = "Stop", action = "stop" }
+                    , { title = "Mark Done", action = "mark-done" }
+                    ]
                 , data = { id = todoId, notificationClickedPort = "onRunningTodoNotificationClicked" }
                 }
     in

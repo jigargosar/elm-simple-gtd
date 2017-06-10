@@ -55,7 +55,15 @@ var _user$project$Main$maybeCreateRunningTodoNotificationRequest = F2(
 					tag: todoId,
 					title: 'You are currently working on',
 					body: _user$project$Todo$getText(todo),
-					actions: {ctor: '[]'},
+					actions: {
+						ctor: '::',
+						_0: {title: 'Stop', action: 'stop'},
+						_1: {
+							ctor: '::',
+							_0: {title: 'Mark Done', action: 'mark-done'},
+							_1: {ctor: '[]'}
+						}
+					},
 					data: {id: todoId, notificationClickedPort: 'onRunningTodoNotificationClicked'}
 				};
 			});

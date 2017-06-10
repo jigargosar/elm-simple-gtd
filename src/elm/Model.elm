@@ -50,11 +50,27 @@ import Todo.GroupForm
 import Todo.TimeTracker
 
 
+type alias NotificationRequest =
+    { tag : String
+    , title : String
+    , body : String
+    , actions : List { title : String, action : String }
+    , data : { id : String, notificationClickedPort : String }
+    }
+
+
+type alias NotificationClickResponse =
+    { action : String
+    , data : { id : String }
+    }
+
+
 type TodoMsg
     = OnTodoToggleRunning Todo.Id
     | OnTodoInitRunning Todo.Id
     | OnTodoStopRunning
     | OnTodoTogglePaused
+    | OnRunningTodoNotificationClicked NotificationClickResponse
 
 
 type Msg
@@ -120,6 +136,10 @@ onTodoToggleRunning =
 
 onTodoInitRunning =
     OnTodoInitRunning >> OnTodoMsg
+
+
+onRunningTodoNotificationClicked =
+    OnRunningTodoNotificationClicked >> OnTodoMsg
 
 
 onTodoStopRunning =

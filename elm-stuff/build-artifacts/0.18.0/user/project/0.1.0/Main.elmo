@@ -248,6 +248,29 @@ var _user$project$Main$notificationClicked = _elm_lang$core$Native_Platform.inco
 						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
+var _user$project$Main$onRunningTodoNotificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+	'onRunningTodoNotificationClicked',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (action) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (data) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{action: action, data: data});
+				},
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'data',
+					A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (id) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{id: id});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
 var _user$project$Main$subscriptions = function (m) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
@@ -264,14 +287,18 @@ var _user$project$Main$subscriptions = function (m) {
 						_0: _user$project$Main$notificationClicked(_user$project$Model$OnNotificationClicked),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Store$onChange(_user$project$Model$OnPouchDBChange),
+							_0: _user$project$Main$onRunningTodoNotificationClicked(_user$project$Model$onRunningTodoNotificationClicked),
 							_1: {
 								ctor: '::',
-								_0: _user$project$Firebase$onChange(_user$project$Model$OnFirebaseChange),
+								_0: _user$project$Store$onChange(_user$project$Model$OnPouchDBChange),
 								_1: {
 									ctor: '::',
-									_0: _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions(m.keyComboModel),
-									_1: {ctor: '[]'}
+									_0: _user$project$Firebase$onChange(_user$project$Model$OnFirebaseChange),
+									_1: {
+										ctor: '::',
+										_0: _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions(m.keyComboModel),
+										_1: {ctor: '[]'}
+									}
 								}
 							}
 						}
@@ -725,8 +752,10 @@ var _user$project$Main$update = function (msg) {
 									_user$project$Main$over,
 									_user$project$Model$timeTracker,
 									_user$project$Todo_TimeTracker$togglePause(_p65));
-							default:
+							case 'OnTodoStopRunning':
 								return A2(_user$project$Main$set, _user$project$Model$timeTracker, _user$project$Todo_TimeTracker$none);
+							default:
+								return _elm_lang$core$Basics$identity;
 						}
 				}
 			}()(
@@ -849,8 +878,4 @@ var _user$project$Main$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
 	'stopAlarm',
 	function (v) {
 		return null;
-	});
-var _user$project$Main$NotificationRequest = F5(
-	function (a, b, c, d, e) {
-		return {tag: a, title: b, body: c, actions: d, data: e};
 	});

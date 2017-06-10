@@ -16,14 +16,17 @@ async function setupNotifications(fire, app) {
 
     navigator.serviceWorker.addEventListener('message', event => {
         const data = event.data;
-        console.log("MJS: serviceWorker.onMessage", event.data, event)
+        console.log("JS: serviceWorker.onMessage", event.data, event)
         if (data["firebase-messaging-msg-type"]) {
             console.info("FBJS: ignoring message event received", data, event)
         } else {
-            if (data && data["notificationClickedPort"]) {
-                app.ports[data["notificationClickedPort"]].send(data)
+            if (data && data["data"] && data["data"]["notificationClickedPort"]) {
+                const replyPort = data["data"]["notificationClickedPort"]
+                console.log("JS: sending to port: ",replyPort, data)
+                app.ports[replyPort].send(data)
 
             } else {
+                console.log("JS: sending to port: notificationClicked ", data)
                 app.ports["notificationClicked"].send(data)
             }
         }

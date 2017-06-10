@@ -67,6 +67,9 @@ createTodoNotification todo =
 port notificationClicked : (TodoNotificationEvent -> msg) -> Sub msg
 
 
+port onRunningTodoNotificationClicked : (NotificationClickResponse -> msg) -> Sub msg
+
+
 port syncWithRemotePouch : String -> Cmd msg
 
 
@@ -111,6 +114,7 @@ subscriptions m =
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.ups OnGlobalKeyUp
         , notificationClicked OnNotificationClicked
+        , onRunningTodoNotificationClicked Model.onRunningTodoNotificationClicked
         , Store.onChange OnPouchDBChange
         , Firebase.onChange OnFirebaseChange
         , Keyboard.Combo.subscriptions m.keyComboModel
@@ -389,6 +393,9 @@ update msg =
 
                         OnTodoStopRunning ->
                             set timeTracker Todo.TimeTracker.none
+
+                        OnRunningTodoNotificationClicked res ->
+                            identity
            )
         >> persistAll
 
@@ -462,15 +469,6 @@ triggerAlarmCmd bool =
         startAlarm ()
     else
         Cmd.none
-
-
-type alias NotificationRequest =
-    { tag : String
-    , title : String
-    , body : String
-    , actions : List { title : String, action : String }
-    , data : { id : String, notificationClickedPort : String }
-    }
 
 
 maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model =

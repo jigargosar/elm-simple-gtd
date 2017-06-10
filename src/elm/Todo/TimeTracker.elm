@@ -51,13 +51,17 @@ toggleStartStop todoId now model =
             none
 
 
+alarmDelay =
+    1 * Time.minute
+
+
 initRunning : Todo.Id -> Time -> Model
 initRunning todoId now =
     wrap
         { todoId = todoId
         , totalTime = 0
         , state = Running now
-        , nextAlarmAt = now + 15 * Time.minute
+        , nextAlarmAt = now + alarmDelay
         }
 
 
@@ -84,4 +88,9 @@ updateNextAlarmAt now model =
             ( False, model )
 
         Just rec ->
-            ( False, rec |> wrap )
+            (if now >= rec.nextAlarmAt then
+                ( True, { rec | nextAlarmAt = now + alarmDelay } )
+             else
+                ( False, rec )
+            )
+                |> Tuple.mapSecond wrap

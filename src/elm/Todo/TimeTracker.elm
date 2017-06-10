@@ -20,6 +20,7 @@ type alias ModelRec =
     { todoId : Todo.Id
     , totalTime : Time
     , state : State
+    , nextAlarmAt : Time
     }
 
 
@@ -56,6 +57,7 @@ initRunning todoId now =
         { todoId = todoId
         , totalTime = 0
         , state = Running now
+        , nextAlarmAt = now + 15 * Time.minute
         }
 
 
@@ -76,10 +78,10 @@ getMaybeTodoId =
     map .todoId
 
 
-updateNow now model =
+updateNextAlarmAt now model =
     case model of
         Nothing ->
-            ( model, Cmd.none )
+            ( False, model )
 
         Just rec ->
-            ( rec |> wrap, Cmd.none )
+            ( False, rec |> wrap )

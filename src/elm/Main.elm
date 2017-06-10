@@ -462,12 +462,19 @@ showTodoNotificationCmd ( ( todo, model ), cmd ) =
         model ! cmds
 
 
+triggerAlarmCmd bool =
+    if bool then
+        startAlarm ()
+    else
+        Cmd.none
+
+
 updateTodoTimeTracker now model =
     let
-        _ =
-            Todo.TimeTracker.updateNow
+        ( shouldTriggerAlarm, newModel ) =
+            Record.overT2 Model.timeTracker (Todo.TimeTracker.updateNextAlarmAt now) model
     in
-        Record.overReturn Model.timeTracker (Todo.TimeTracker.updateNow now) model
+        newModel ! [ triggerAlarmCmd shouldTriggerAlarm ]
 
 
 reminderOverlayAction action =

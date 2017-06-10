@@ -1372,6 +1372,21 @@ var _user$project$Model$onTodoInitRunning = function (_p66) {
 };
 var _user$project$Model$onTodoStopRunning = _user$project$Model$OnTodoMsg(_user$project$Model$OnTodoStopRunning);
 var _user$project$Model$onTodoTogglePaused = _user$project$Model$OnTodoMsg(_user$project$Model$OnTodoTogglePaused);
+var _user$project$Model$keyboardCombos = {
+	ctor: '::',
+	_0: A2(
+		_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
+		{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$s},
+		_user$project$Model$onTodoStopRunning),
+	_1: {
+		ctor: '::',
+		_0: A2(
+			_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
+			{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$p},
+			_user$project$Model$onTodoTogglePaused),
+		_1: {ctor: '[]'}
+	}
+};
 var _user$project$Model$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {
 		return {ctor: 'OnLaunchBarMsgWithNow', _0: a, _1: b};
@@ -1499,21 +1514,6 @@ var _user$project$Model$OnCommonMsg = function (a) {
 	return {ctor: 'OnCommonMsg', _0: a};
 };
 var _user$project$Model$commonMsg = _user$project$CommonMsg$createHelper(_user$project$Model$OnCommonMsg);
-var _user$project$Model$keyboardCombos = {
-	ctor: '::',
-	_0: A2(
-		_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
-		{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$s},
-		_user$project$Model$onTodoStopRunning),
-	_1: {
-		ctor: '::',
-		_0: A2(
-			_scottcorgan$keyboard_combo$Keyboard_Combo$combo1,
-			_scottcorgan$keyboard_combo$Keyboard_Combo$s,
-			_user$project$Model$commonMsg.logString('only s')),
-		_1: {ctor: '[]'}
-	}
-};
 var _user$project$Model$SyncView = {ctor: 'SyncView'};
 var _user$project$Model$BinView = {ctor: 'BinView'};
 var _user$project$Model$DoneView = {ctor: 'DoneView'};

@@ -110,12 +110,13 @@ type Msg
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
 keyboardCombos =
     [ combo2 ( Combo.shift, Combo.s ) (onTodoStopRunning)
-    , combo1 (Combo.s) (commonMsg.logString "only s")
+    , combo2 ( Combo.shift, Combo.p ) (onTodoTogglePaused)
     ]
 
 
 onTodoToggleRunning =
     OnTodoToggleRunning >> OnTodoMsg
+
 
 onTodoInitRunning =
     OnTodoInitRunning >> OnTodoMsg

@@ -50,7 +50,7 @@ import View
 port showNotification : TodoNotification -> Cmd msg
 
 
-port showRunningTodoNotification : String -> Cmd msg
+port showRunningTodoNotification : NotificationRequest -> Cmd msg
 
 
 port closeNotification : String -> Cmd msg
@@ -464,15 +464,41 @@ triggerAlarmCmd bool =
         Cmd.none
 
 
-updateTodoTimeTracker now model =
-    let
-        ( maybeTracker, newModel ) =
-            Record.overT2 Model.timeTracker (Todo.TimeTracker.updateNextAlarmAt now) model
+type alias NotificationRequest =
+    { tag : String
+    , title : String
+    , body : String
+    , actions : List { title : String, action : String }
+    , data : { id : String, notificationClickedPort : String }
+    }
 
-        maybeTodoId =
-            maybeTracker ?|> .todoId
+
+maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model =
+    let
+        createRequest info todo =
+            let
+                todoId =
+                    Document.getId todo
+            in
+                { tag = todoId
+                , title = "You are currently working on"
+                , body = Todo.getText todo
+                , actions = []
+                , data = { id = todoId, notificationClickedPort = "onRunningTodoNotificationClicked" }
+                }
     in
-        newModel ! [ maybeMapToCmd showRunningTodoNotification maybeTodoId ]
+        maybeTrackerInfo
+            ?+> (\info -> Model.findTodoById info.todoId model ?|> createRequest info)
+
+
+updateTodoTimeTracker now model =
+    Record.overT2 Model.timeTracker (Todo.TimeTracker.updateNextAlarmAt now) model
+        |> (\( maybeTrackerInfo, model ) ->
+                ( model
+                , maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model
+                    |> maybeMapToCmd showRunningTodoNotification
+                )
+           )
 
 
 maybeMapToCmd fn =

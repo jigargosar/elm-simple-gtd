@@ -43,7 +43,7 @@ async function setupNotifications(fire, app) {
 
     app.ports["closeNotification"].subscribe(closeNotification(reg))
 
-    app.ports["triggerRunningNotification"].subscribe(showRunningNotification(reg))
+    app.ports["showRunningTodoNotification"].subscribe(showRunningNotification(reg))
 
 }
 

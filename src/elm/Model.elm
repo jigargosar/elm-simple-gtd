@@ -14,7 +14,8 @@ import Ext.List as List
 import Ext.Predicate
 import Ext.Record as Record exposing (maybeOver, maybeSetIn, over, overReturn, set)
 import Firebase exposing (DeviceId)
-import Keyboard.Combo
+import Keyboard.Combo exposing (combo2, combo3)
+import Keyboard.Combo as Combo
 import LaunchBar.Form
 import Menu
 import Project
@@ -102,14 +103,14 @@ type Msg
     | OnLaunchBarMsgWithNow LaunchBar.Action Time
     | OnTodoMsg TodoMsg
     | OnTodoMsgWithTime TodoMsg Time
-    | OnKeyCombo Keyboard.Combo.Msg
+    | OnKeyCombo Combo.Msg
 
 
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
 keyboardCombos =
-    [ Keyboard.Combo.combo2 ( Keyboard.Combo.control, Keyboard.Combo.s ) commonMsg.noOp
-    , Keyboard.Combo.combo2 ( Keyboard.Combo.control, Keyboard.Combo.a ) commonMsg.noOp
-    , Keyboard.Combo.combo3 ( Keyboard.Combo.control, Keyboard.Combo.alt, Keyboard.Combo.e ) commonMsg.noOp
+    [ combo2 ( Combo.control, Combo.s ) (commonMsg.logString "c+s")
+    , combo2 ( Combo.control, Combo.a ) (commonMsg.logString "c+a")
+    , combo3 ( Combo.control, Combo.alt, Keyboard.Combo.e ) (commonMsg.logString "ca+e")
     ]
 
 

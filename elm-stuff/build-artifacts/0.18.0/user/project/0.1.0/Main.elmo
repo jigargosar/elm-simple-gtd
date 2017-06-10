@@ -203,7 +203,11 @@ var _user$project$Main$subscriptions = function (m) {
 							_1: {
 								ctor: '::',
 								_0: _user$project$Firebase$onChange(_user$project$Model$OnFirebaseChange),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions(m.keyComboModel),
+									_1: {ctor: '[]'}
+								}
 							}
 						}
 					}

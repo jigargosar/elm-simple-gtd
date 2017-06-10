@@ -118,6 +118,7 @@ subscriptions m =
         , notificationClicked OnNotificationClicked
         , Store.onChange OnPouchDBChange
         , Firebase.onChange OnFirebaseChange
+        , Keyboard.Combo.subscriptions m.keyComboModel
         ]
 
 

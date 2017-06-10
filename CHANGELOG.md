@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.0 - 2017-06-10
 * [feature] add time tracker for currently working task 
 
 ## v0.17.12 - 2017-06-08

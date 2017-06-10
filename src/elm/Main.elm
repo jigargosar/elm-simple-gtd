@@ -50,7 +50,7 @@ import View
 port showNotification : TodoNotification -> Cmd msg
 
 
-port triggerRunningNotification : String -> Cmd msg
+port showRunningTodoNotification : String -> Cmd msg
 
 
 port closeNotification : String -> Cmd msg
@@ -472,11 +472,7 @@ updateTodoTimeTracker now model =
         maybeTodoId =
             maybeTracker ?|> .todoId
     in
-        newModel ! [ maybeTriggerTodoRunningNotification maybeTodoId ]
-
-
-maybeTriggerTodoRunningNotification =
-    maybeMapToCmd triggerRunningNotification
+        newModel ! [ maybeMapToCmd showRunningTodoNotification maybeTodoId ]
 
 
 maybeMapToCmd fn =

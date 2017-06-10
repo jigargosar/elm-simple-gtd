@@ -40,6 +40,12 @@ var _user$project$Main$firebaseUpdateClientCmd = function (model) {
 		});
 };
 var _user$project$Main$command = _Fresheyeball$elm_return$Return$command;
+var _user$project$Main$maybeMapToCmd = function (fn) {
+	return A2(
+		_user$project$Ext_Function_Infix_ops['>>?='],
+		_elm_lang$core$Maybe$map(fn),
+		_elm_lang$core$Platform_Cmd$none);
+};
 var _user$project$Main$setDomFocusToFocusInEntityCmd = _user$project$Model$commonMsg.focus('.entity-list > [tabindex=0]');
 var _user$project$Main$updateTodoAndMaybeAlsoSelected = F2(
 	function (action, todo) {
@@ -100,6 +106,14 @@ var _user$project$Main$showNotification = _elm_lang$core$Native_Platform.outgoin
 			data: {id: v.data.id}
 		};
 	});
+var _user$project$Main$triggerRunningNotification = _elm_lang$core$Native_Platform.outgoingPort(
+	'triggerRunningNotification',
+	function (v) {
+		return v;
+	});
+var _user$project$Main$triggerRunningNotificationForMaybeTodoId = function (maybeTodoId) {
+	return A2(_user$project$Main$maybeMapToCmd, _user$project$Main$triggerRunningNotification, maybeTodoId);
+};
 var _user$project$Main$closeNotification = _elm_lang$core$Native_Platform.outgoingPort(
 	'closeNotification',
 	function (v) {
@@ -259,14 +273,14 @@ var _user$project$Main$updateTodoTimeTracker = F2(
 			_user$project$Model$timeTracker,
 			_user$project$Todo_TimeTracker$updateNextAlarmAt(now),
 			model);
-		var shouldTriggerAlarm = _p13._0;
+		var maybeTracker = _p13._0;
 		var newModel = _p13._1;
 		return A2(
 			_elm_lang$core$Platform_Cmd_ops['!'],
 			newModel,
 			{
 				ctor: '::',
-				_0: _user$project$Main$triggerAlarmCmd(shouldTriggerAlarm),
+				_0: _user$project$Main$triggerAlarmCmd(false),
 				_1: {ctor: '[]'}
 			});
 	});

@@ -85,12 +85,16 @@ getMaybeTodoId =
 updateNextAlarmAt now model =
     case model of
         Nothing ->
-            ( False, model )
+            ( Nothing, model )
 
         Just rec ->
             (if now >= rec.nextAlarmAt then
-                ( True, { rec | nextAlarmAt = now + alarmDelay } )
+                let
+                    newRec =
+                        { rec | nextAlarmAt = now + alarmDelay }
+                in
+                    ( Just newRec, newRec )
              else
-                ( False, rec )
+                ( Nothing, rec )
             )
                 |> Tuple.mapSecond wrap

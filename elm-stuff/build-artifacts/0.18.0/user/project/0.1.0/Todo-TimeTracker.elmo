@@ -9,19 +9,26 @@ var _user$project$Todo_TimeTracker$updateNextAlarmAt = F2(
 	function (now, model) {
 		var _p0 = model;
 		if (_p0.ctor === 'Nothing') {
-			return {ctor: '_Tuple2', _0: false, _1: model};
+			return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: model};
 		} else {
 			var _p1 = _p0._0;
 			return A2(
 				_elm_lang$core$Tuple$mapSecond,
 				_user$project$Todo_TimeTracker$wrap,
-				(_elm_lang$core$Native_Utils.cmp(now, _p1.nextAlarmAt) > -1) ? {
-					ctor: '_Tuple2',
-					_0: true,
-					_1: _elm_lang$core$Native_Utils.update(
-						_p1,
-						{nextAlarmAt: now + _user$project$Todo_TimeTracker$alarmDelay})
-				} : {ctor: '_Tuple2', _0: false, _1: _p1});
+				function () {
+					if (_elm_lang$core$Native_Utils.cmp(now, _p1.nextAlarmAt) > -1) {
+						var newRec = _elm_lang$core$Native_Utils.update(
+							_p1,
+							{nextAlarmAt: now + _user$project$Todo_TimeTracker$alarmDelay});
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Maybe$Just(newRec),
+							_1: newRec
+						};
+					} else {
+						return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: _p1};
+					}
+				}());
 		}
 	});
 var _user$project$Todo_TimeTracker$none = _elm_lang$core$Maybe$Nothing;

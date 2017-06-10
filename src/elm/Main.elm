@@ -47,15 +47,10 @@ import Model exposing (..)
 import View
 
 
-{-
-   port showNotification : ( String, Bool, TodoNotification ) -> Cmd msg
-
-   showNotificationCmd =
-       curry3 showNotification
--}
-
-
 port showNotification : TodoNotification -> Cmd msg
+
+
+port triggerRunningNotification : String -> Cmd msg
 
 
 port closeNotification : String -> Cmd msg
@@ -471,10 +466,18 @@ triggerAlarmCmd bool =
 
 updateTodoTimeTracker now model =
     let
-        ( shouldTriggerAlarm, newModel ) =
+        ( maybeTracker, newModel ) =
             Record.overT2 Model.timeTracker (Todo.TimeTracker.updateNextAlarmAt now) model
     in
-        newModel ! [ triggerAlarmCmd shouldTriggerAlarm ]
+        newModel ! [ triggerAlarmCmd False ]
+
+
+triggerRunningNotificationForMaybeTodoId maybeTodoId =
+    maybeTodoId |> maybeMapToCmd triggerRunningNotification
+
+
+maybeMapToCmd fn =
+    Maybe.map fn >>?= Cmd.none
 
 
 reminderOverlayAction action =

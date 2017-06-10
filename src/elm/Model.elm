@@ -162,7 +162,7 @@ type alias Model =
     , firebaseClient : Firebase.Client
     , focusInEntity : Entity.Entity
     , timeTracker : Todo.TimeTracker.Model
-    , keyComboState : Keyboard.Combo.Model Msg
+    , keyComboModel : Keyboard.Combo.Model Msg
     }
 
 
@@ -249,8 +249,8 @@ timeTracker =
     Record.init .timeTracker (\s b -> { b | timeTracker = s })
 
 
-keyComboState =
-    Record.init .keyComboState (\s b -> { b | keyComboState = s })
+keyComboModel =
+    Record.init .keyComboModel (\s b -> { b | keyComboModel = s })
 
 
 init : Flags -> Model
@@ -292,7 +292,7 @@ init flags =
             , focusInEntity = inboxEntity
             , timeTracker = Todo.TimeTracker.none
             , firebaseClient = firebaseClient
-            , keyComboState =
+            , keyComboModel =
                 Keyboard.Combo.init
                     { toMsg = OnKeyCombo
                     , combos = keyboardCombos
@@ -1268,5 +1268,5 @@ gotoTodoWithId todoId model =
 updateCombo : Keyboard.Combo.Msg -> ModelReturnF Msg
 updateCombo comboMsg =
     overReturn
-        keyComboState
+        keyComboModel
         (Keyboard.Combo.update comboMsg)

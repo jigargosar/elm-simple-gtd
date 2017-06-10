@@ -114,7 +114,7 @@ subscriptions m =
     Sub.batch
         [ Time.every (Time.second * 1) OnNowChanged
         , Keyboard.subscription OnKeyboardMsg
-        , Keyboard.downs OnGlobalKeyUp
+        , Keyboard.ups OnGlobalKeyUp
         , notificationClicked OnNotificationClicked
         , Store.onChange OnPouchDBChange
         , Firebase.onChange OnFirebaseChange

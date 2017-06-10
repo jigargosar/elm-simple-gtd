@@ -57,7 +57,7 @@ view vm =
             [ div [ class "flex-auto" ] [ text vm.displayTime ]
             , div [ class "" ]
                 [ Material.iconButton vm.playPauseIconName [ onClick Model.onTodoTogglePaused ]
-                , Material.iconButton "stop" [ onClick Model.onTodoStopRunning ]
+                , Material.iconButton "stop" [ onClick vm.onStop ]
 
                 {- , Material.iconButton "done" -}
                 ]

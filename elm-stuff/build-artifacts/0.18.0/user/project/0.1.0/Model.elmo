@@ -1510,22 +1510,15 @@ var _user$project$Model$keyboardCombos = {
 	ctor: '::',
 	_0: A2(
 		_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
-		{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$control, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$s},
-		_user$project$Model$commonMsg.logString('c+s')),
+		{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$s},
+		_user$project$Model$onTodoStopRunning),
 	_1: {
 		ctor: '::',
 		_0: A2(
-			_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
-			{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$control, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$a},
-			_user$project$Model$commonMsg.logString('c+a')),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_scottcorgan$keyboard_combo$Keyboard_Combo$combo3,
-				{ctor: '_Tuple3', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$control, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$alt, _2: _scottcorgan$keyboard_combo$Keyboard_Combo$e},
-				_user$project$Model$commonMsg.logString('ca+e')),
-			_1: {ctor: '[]'}
-		}
+			_scottcorgan$keyboard_combo$Keyboard_Combo$combo1,
+			_scottcorgan$keyboard_combo$Keyboard_Combo$s,
+			_user$project$Model$commonMsg.logString('only s')),
+		_1: {ctor: '[]'}
 	}
 };
 var _user$project$Model$SyncView = {ctor: 'SyncView'};

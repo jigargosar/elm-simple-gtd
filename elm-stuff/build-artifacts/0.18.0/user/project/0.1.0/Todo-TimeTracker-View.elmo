@@ -69,7 +69,7 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 											'stop',
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$onTodoStopRunning),
+												_0: _elm_lang$html$Html_Events$onClick(vm.onStop),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}

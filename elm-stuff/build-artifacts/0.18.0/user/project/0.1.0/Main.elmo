@@ -193,7 +193,7 @@ var _user$project$Main$subscriptions = function (m) {
 				_0: _user$project$Ext_Keyboard$subscription(_user$project$Model$OnKeyboardMsg),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$downs(_user$project$Model$OnGlobalKeyUp),
+					_0: _user$project$Ext_Keyboard$ups(_user$project$Model$OnGlobalKeyUp),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Main$notificationClicked(_user$project$Model$OnNotificationClicked),

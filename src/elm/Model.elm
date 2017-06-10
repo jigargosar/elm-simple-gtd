@@ -122,6 +122,8 @@ type Msg
     | OnTodoMsg TodoMsg
     | OnTodoMsgWithTime TodoMsg Time
     | OnKeyCombo Combo.Msg
+    | OnCloseNotification String
+    | OnSetDomFocusToFocusInEntity
 
 
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)

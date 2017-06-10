@@ -166,15 +166,18 @@ update msg =
                     Return.map (Model.updateFirebaseConnection connected)
                         >> Return.maybeEffect firebaseUpdateClientCmd
 
+                OnSetDomFocusToFocusInEntity ->
+                    andThenUpdate setDomFocusToFocusInEntityCmd
+
                 OnEntityListKeyDown entityList { key, isShiftDown } ->
                     case key of
                         Key.ArrowUp ->
                             Return.map (Model.moveFocusBy -1 entityList)
-                                >> andThenUpdate setDomFocusToFocusInEntityCmd
+                                >> andThenUpdate OnSetDomFocusToFocusInEntity
 
                         Key.ArrowDown ->
                             Return.map (Model.moveFocusBy 1 entityList)
-                                >> andThenUpdate setDomFocusToFocusInEntityCmd
+                                >> andThenUpdate OnSetDomFocusToFocusInEntity
 
                         _ ->
                             identity
@@ -371,6 +374,9 @@ update msg =
                 OnLaunchBarMsg msg ->
                     withNow (OnLaunchBarMsgWithNow msg)
 
+                OnCloseNotification tag ->
+                    command (closeNotification tag)
+
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key
 
@@ -410,7 +416,7 @@ update msg =
                                     _ ->
                                         andThenUpdate Model.onGotoRunningTodo
                                 )
-                                    >> Return.command (closeNotification todoId)
+                                    >> command (closeNotification todoId)
            )
         >> persistAll
 

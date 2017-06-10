@@ -1,4 +1,4 @@
-var _user$project$Todo_TimeTracker$alarmDelay = 3 * _elm_lang$core$Time$second;
+var _user$project$Todo_TimeTracker$alarmDelay = 10 * _elm_lang$core$Time$minute;
 var _user$project$Todo_TimeTracker$map = _elm_lang$core$Maybe$map;
 var _user$project$Todo_TimeTracker$getMaybeTodoId = _user$project$Todo_TimeTracker$map(
 	function (_) {

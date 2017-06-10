@@ -71,6 +71,7 @@ type TodoMsg
     | OnTodoStopRunning
     | OnTodoTogglePaused
     | OnRunningTodoNotificationClicked NotificationClickResponse
+    | OnGotoRunningTodo
 
 
 type Msg
@@ -148,6 +149,10 @@ onTodoStopRunning =
 
 onTodoTogglePaused =
     OnTodoTogglePaused |> OnTodoMsg
+
+
+onGotoRunningTodo =
+    OnGotoRunningTodo |> OnTodoMsg
 
 
 commonMsg : CommonMsg.Helper Msg

@@ -395,7 +395,18 @@ update msg =
                             set timeTracker Todo.TimeTracker.none
 
                         OnRunningTodoNotificationClicked res ->
-                            identity
+                            let
+                                todoId =
+                                    res.data.id
+                            in
+                                (case res.action of
+                                    "stop" ->
+                                        andThenUpdate Model.onTodoStopRunning
+
+                                    _ ->
+                                        gotoRunningTodo
+                                )
+                                    >> Return.command (closeNotification todoId)
            )
         >> persistAll
 
@@ -549,6 +560,11 @@ command =
     Return.command
 
 
+gotoRunningTodo =
+    map (Model.gotoRunningTodo)
+        >> andThenUpdate setDomFocusToFocusInEntityCmd
+
+
 onGlobalKeyUp : Key -> ReturnF
 onGlobalKeyUp key =
     Return.with (Model.getEditMode)
@@ -569,8 +585,7 @@ onGlobalKeyUp key =
                             LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
 
                         Key.CharR ->
-                            map (Model.gotoRunningTodo)
-                                >> andThenUpdate setDomFocusToFocusInEntityCmd
+                            gotoRunningTodo
 
                         _ ->
                             identity

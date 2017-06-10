@@ -742,50 +742,70 @@ var _user$project$Main$update = function (msg) {
 						return _user$project$Main$withNow(
 							_user$project$Model$OnTodoMsgWithTime(_p18._0));
 					default:
-						var _p65 = _p18._1;
+						var _p68 = _p18._1;
 						var _p64 = _p18._0;
 						switch (_p64.ctor) {
 							case 'OnTodoToggleRunning':
 								return A2(
 									_user$project$Main$over,
 									_user$project$Model$timeTracker,
-									A2(_user$project$Todo_TimeTracker$toggleStartStop, _p64._0, _p65));
+									A2(_user$project$Todo_TimeTracker$toggleStartStop, _p64._0, _p68));
 							case 'OnTodoInitRunning':
 								return A2(
 									_user$project$Main$set,
 									_user$project$Model$timeTracker,
-									A2(_user$project$Todo_TimeTracker$initRunning, _p64._0, _p65));
+									A2(_user$project$Todo_TimeTracker$initRunning, _p64._0, _p68));
 							case 'OnTodoTogglePaused':
 								return A2(
 									_user$project$Main$over,
 									_user$project$Model$timeTracker,
-									_user$project$Todo_TimeTracker$togglePause(_p65));
+									_user$project$Todo_TimeTracker$togglePause(_p68));
 							case 'OnTodoStopRunning':
 								return A2(_user$project$Main$set, _user$project$Model$timeTracker, _user$project$Todo_TimeTracker$none);
 							default:
-								return _elm_lang$core$Basics$identity;
+								var _p67 = _p64._0;
+								var todoId = _p67.data.id;
+								return function (_p65) {
+									return A2(
+										_Fresheyeball$elm_return$Return$command,
+										_user$project$Main$closeNotification(todoId),
+										function () {
+											var _p66 = _p67.action;
+											if (_p66 === 'stop') {
+												return _user$project$Main$andThenUpdate(_user$project$Model$onTodoStopRunning);
+											} else {
+												return _user$project$Main$gotoRunningTodo;
+											}
+										}()(_p65));
+								};
 						}
 				}
 			}()(
 				_Fresheyeball$elm_return$Return$singleton(_p17)));
 	};
 };
-var _user$project$Main$andThenUpdate = function (_p66) {
+var _user$project$Main$andThenUpdate = function (_p69) {
 	return _Fresheyeball$elm_return$Return$andThen(
-		_user$project$Main$update(_p66));
+		_user$project$Main$update(_p69));
+};
+var _user$project$Main$gotoRunningTodo = function (_p70) {
+	return A2(
+		_user$project$Main$andThenUpdate,
+		_user$project$Main$setDomFocusToFocusInEntityCmd,
+		A2(_user$project$Main$map, _user$project$Model$gotoRunningTodo, _p70));
 };
 var _user$project$Main$onGlobalKeyUp = function (key) {
 	return A2(
 		_user$project$Ext_Return$with,
 		_user$project$Model$getEditMode,
 		function (editMode) {
-			var _p67 = {ctor: '_Tuple2', _0: key, _1: editMode};
-			_v11_2:
+			var _p71 = {ctor: '_Tuple2', _0: key, _1: editMode};
+			_v12_2:
 			do {
-				if (_p67.ctor === '_Tuple2') {
-					if (_p67._1.ctor === 'None') {
-						var _p68 = _p67._0;
-						switch (_p68.ctor) {
+				if (_p71.ctor === '_Tuple2') {
+					if (_p71._1.ctor === 'None') {
+						var _p72 = _p71._0;
+						switch (_p72.ctor) {
 							case 'Escape':
 								return _Fresheyeball$elm_return$Return$map(_user$project$Model$clearSelection);
 							case 'CharQ':
@@ -796,24 +816,19 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 								return _user$project$Main$andThenUpdate(
 									_user$project$Model$OnLaunchBarMsg(_user$project$LaunchBar$Open));
 							case 'CharR':
-								return function (_p69) {
-									return A2(
-										_user$project$Main$andThenUpdate,
-										_user$project$Main$setDomFocusToFocusInEntityCmd,
-										A2(_user$project$Main$map, _user$project$Model$gotoRunningTodo, _p69));
-								};
+								return _user$project$Main$gotoRunningTodo;
 							default:
 								return _elm_lang$core$Basics$identity;
 						}
 					} else {
-						if (_p67._0.ctor === 'Escape') {
+						if (_p71._0.ctor === 'Escape') {
 							return _user$project$Main$andThenUpdate(_user$project$Model$DeactivateEditingMode);
 						} else {
-							break _v11_2;
+							break _v12_2;
 						}
 					}
 				} else {
-					break _v11_2;
+					break _v12_2;
 				}
 			} while(false);
 			return _elm_lang$core$Basics$identity;
@@ -874,9 +889,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p70) {
+		function (_p73) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p70));
+				_user$project$Main$update(_p73));
 		}));
 var _user$project$Main$triggerAlarmCmd = function (bool) {
 	return bool ? _user$project$Main$startAlarm(

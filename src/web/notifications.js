@@ -20,7 +20,12 @@ async function setupNotifications(fire, app) {
         if (data["firebase-messaging-msg-type"]) {
             console.info("FBJS: ignoring message event received", data, event)
         } else {
-            app.ports["notificationClicked"].send(data)
+            if (data && data["notificationClickedPort"]) {
+                app.ports[data["notificationClickedPort"]].send(data)
+
+            } else {
+                app.ports["notificationClicked"].send(data)
+            }
         }
     });
 
@@ -43,7 +48,7 @@ async function setupNotifications(fire, app) {
 
     app.ports["closeNotification"].subscribe(closeNotification(reg))
 
-    app.ports["showRunningTodoNotification"].subscribe(showRunningNotification(reg))
+    app.ports["showRunningTodoNotification"].subscribe(showRunningTodoNotification(reg))
 
 }
 
@@ -55,14 +60,50 @@ const closeNotification = reg => async (tag) => {
     }
 }
 
-const showRunningNotification = reg => async (args) => {
-    const todoId = args
-    const tag = todoId
-    const body = todoId
-    const title = "You are currently working on"
+const showRunningTodoNotification = reg => async (req) => {
     const permission = await Notification.requestPermission()
     if (permission !== "granted") return
-    reg.showNotification(title, {
+    reg.showNotification(req.title, {
+        tag: req.tag,
+        requiresInteraction: true,
+        sticky: true,
+        renotify: true,
+        vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
+        sound: "/alarm.ogg",
+        icon: "/logo.png",
+        actions: req.actions,
+        body: req.body,
+        data: req.data
+    })
+}
+
+// const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
+const showNotification = (fire, reg) => async (msg) => {
+    const {tag, title, data} = msg
+    /*
+     console.info(connected, msg)
+     const notifyMsg = {
+     todoId: tag, tag, title, uid, timestamp:Date.now(),serverTimestamp: firebase.database.ServerValue.TIMESTAMP
+     }
+
+     if (connected) {
+     // fetch("https://us-central1-rational-mote-664.cloudfunctions.net/notificationCorn", {mode:"no-cors"})
+     //     .then(console.warn)
+     //     .catch(console.error)
+
+     fire
+     .ref(`/users/${uid}/notify/${tag}`)
+     .set(notifyMsg)
+
+
+     // $.get('https://us-central1-rational-mote-664.cloudfunctions.net/sendPush', msg)
+     //  .then(console.warn)
+     //  .catch(console.error)
+
+     } else {*/
+    const permission = await Notification.requestPermission()
+    if (permission !== "granted") return
+    reg.showNotification("", {
         tag,
         requiresInteraction: true,
         sticky: true,
@@ -74,52 +115,9 @@ const showRunningNotification = reg => async (args) => {
             {title: "Mark Done", action: "mark-done"},
             {title: "Snooze", action: "snooze"},
         ],
-        body: body,
-        data:null
+        body: title,
+        data
     })
-}
-
-// const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
-const showNotification = (fire, reg) => async (msg) => {
-    const {tag, title, data} = msg
-    /*
-    console.info(connected, msg)
-    const notifyMsg = {
-        todoId: tag, tag, title, uid, timestamp:Date.now(),serverTimestamp: firebase.database.ServerValue.TIMESTAMP
-    }
-
-    if (connected) {
-        // fetch("https://us-central1-rational-mote-664.cloudfunctions.net/notificationCorn", {mode:"no-cors"})
-        //     .then(console.warn)
-        //     .catch(console.error)
-
-        fire
-            .ref(`/users/${uid}/notify/${tag}`)
-            .set(notifyMsg)
-
-
-        // $.get('https://us-central1-rational-mote-664.cloudfunctions.net/sendPush', msg)
-        //  .then(console.warn)
-        //  .catch(console.error)
-
-    } else {*/
-        const permission = await Notification.requestPermission()
-        if (permission !== "granted") return
-        reg.showNotification("", {
-            tag,
-            requiresInteraction: true,
-            sticky: true,
-            renotify: true,
-            vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
-            sound: "/alarm.ogg",
-            icon: "/logo.png",
-            actions: [
-                {title: "Mark Done", action: "mark-done"},
-                {title: "Snooze", action: "snooze"},
-            ],
-            body: title,
-            data
-        })
     // }
 }
 

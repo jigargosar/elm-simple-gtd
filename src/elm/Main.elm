@@ -506,40 +506,35 @@ command =
 
 onGlobalKeyUp : Key -> ReturnF
 onGlobalKeyUp key =
-    Return.with (apply2 ( Model.getKeyboardState, Model.getEditMode ))
-        (\( keyboardState, editMode ) ->
-            let
-                _ =
-                    Key.pressedDown keyboardState
-                        |> Debug.log "pressedDown"
-            in
-                case ( key, editMode ) of
-                    ( key, EditMode.None ) ->
-                        case key of
-                            Key.Escape ->
-                                Return.map (Model.clearSelection)
+    Return.with (Model.getEditMode)
+        (\editMode ->
+            case ( key, editMode ) of
+                ( key, EditMode.None ) ->
+                    case key of
+                        Key.Escape ->
+                            Return.map (Model.clearSelection)
 
-                            Key.CharQ ->
-                                andThenUpdate NewTodo
+                        Key.CharQ ->
+                            andThenUpdate NewTodo
 
-                            Key.CharI ->
-                                andThenUpdate NewTodoForInbox
+                        Key.CharI ->
+                            andThenUpdate NewTodoForInbox
 
-                            Key.Slash ->
-                                LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
+                        Key.Slash ->
+                            LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
 
-                            Key.CharR ->
-                                map (Model.gotoRunningTodo)
-                                    >> andThenUpdate setDomFocusToFocusedEntityCmd
+                        Key.CharR ->
+                            map (Model.gotoRunningTodo)
+                                >> andThenUpdate setDomFocusToFocusedEntityCmd
 
-                            _ ->
-                                identity
+                        _ ->
+                            identity
 
-                    ( Key.Escape, _ ) ->
-                        andThenUpdate DeactivateEditingMode
+                ( Key.Escape, _ ) ->
+                    andThenUpdate DeactivateEditingMode
 
-                    _ ->
-                        identity
+                _ ->
+                    identity
         )
 
 

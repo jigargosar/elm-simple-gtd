@@ -446,6 +446,7 @@ setDomFocusToFocusInEntityCmd =
 onUpdateNow now =
     Return.map (Model.setNow now)
         >> sendNotifications
+        >> Return.andThen (updateTodoTimeTracker now)
 
 
 sendNotifications =
@@ -459,6 +460,14 @@ showTodoNotificationCmd ( ( todo, model ), cmd ) =
             [ cmd, createTodoNotification todo |> showNotification, startAlarm () ]
     in
         model ! cmds
+
+
+updateTodoTimeTracker now model =
+    let
+        _ =
+            Todo.TimeTracker.updateNow
+    in
+        Record.overReturn Model.timeTracker (Todo.TimeTracker.updateNow now) model
 
 
 reminderOverlayAction action =

@@ -74,3 +74,12 @@ togglePause now =
 
 getMaybeTodoId =
     map .todoId
+
+
+updateNow now model =
+    case model of
+        Nothing ->
+            ( model, Cmd.none )
+
+        Just rec ->
+            ( rec |> wrap, Cmd.none )

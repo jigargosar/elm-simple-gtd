@@ -40,7 +40,10 @@ async function setupNotifications(fire, app) {
 
 
     app.ports["showNotification"].subscribe(showNotification(fire, reg))
+
     app.ports["closeNotification"].subscribe(closeNotification(reg))
+
+    app.ports["triggerRunningNotification"].subscribe(showRunningNotification(reg))
 
 }
 
@@ -50,6 +53,30 @@ const closeNotification = reg => async (tag) => {
     if (notification) {
         notification.close()
     }
+}
+
+const showRunningNotification = reg => async (args) => {
+    const todoId = args
+    const tag = todoId
+    const body = todoId
+    const title = "You are currently working on"
+    const permission = await Notification.requestPermission()
+    if (permission !== "granted") return
+    reg.showNotification(title, {
+        tag,
+        requiresInteraction: true,
+        sticky: true,
+        renotify: true,
+        vibrate: [500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500],
+        sound: "/alarm.ogg",
+        icon: "/logo.png",
+        actions: [
+            {title: "Mark Done", action: "mark-done"},
+            {title: "Snooze", action: "snooze"},
+        ],
+        body: body,
+        data:null
+    })
 }
 
 // const showNotification = (fire, reg) => async ([uid, connected, msg]) => {

@@ -468,12 +468,15 @@ updateTodoTimeTracker now model =
     let
         ( maybeTracker, newModel ) =
             Record.overT2 Model.timeTracker (Todo.TimeTracker.updateNextAlarmAt now) model
+
+        maybeTodoId =
+            maybeTracker ?|> .todoId
     in
-        newModel ! [ triggerAlarmCmd False ]
+        newModel ! [ maybeTriggerTodoRunningNotification maybeTodoId ]
 
 
-triggerRunningNotificationForMaybeTodoId maybeTodoId =
-    maybeTodoId |> maybeMapToCmd triggerRunningNotification
+maybeTriggerTodoRunningNotification =
+    maybeMapToCmd triggerRunningNotification
 
 
 maybeMapToCmd fn =

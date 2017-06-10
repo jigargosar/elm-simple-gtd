@@ -16,6 +16,10 @@ type State
     | Paused
 
 
+type alias AlarmInfo =
+    ModelRec
+
+
 type alias ModelRec =
     { todoId : Todo.Id
     , totalTime : Time
@@ -52,7 +56,7 @@ toggleStartStop todoId now model =
 
 
 alarmDelay =
-    10 * Time.minute
+    3 * Time.second
 
 
 initRunning : Todo.Id -> Time -> Model

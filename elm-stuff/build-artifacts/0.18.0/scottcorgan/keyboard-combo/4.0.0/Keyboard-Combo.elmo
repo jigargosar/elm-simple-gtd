@@ -1,0 +1,258 @@
+var _scottcorgan$keyboard_combo$Keyboard_Combo$find = F2(
+	function (predicate, list) {
+		find:
+		while (true) {
+			var _p0 = list;
+			if (_p0.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p1 = _p0._0;
+				if (predicate(_p1)) {
+					return _elm_lang$core$Maybe$Just(_p1);
+				} else {
+					var _v1 = predicate,
+						_v2 = _p0._1;
+					predicate = _v1;
+					list = _v2;
+					continue find;
+				}
+			}
+		}
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$getComboMsg = function (combo) {
+	var _p2 = combo;
+	switch (_p2.ctor) {
+		case 'KeyCombo':
+			return _p2._1;
+		case 'KeyCombo2':
+			return _p2._2;
+		case 'KeyCombo3':
+			return _p2._3;
+		default:
+			return _p2._4;
+	}
+};
+var _scottcorgan$keyboard_combo$Keyboard_Combo$keyList = function (combo) {
+	var _p3 = combo;
+	switch (_p3.ctor) {
+		case 'KeyCombo':
+			return {
+				ctor: '::',
+				_0: _p3._0,
+				_1: {ctor: '[]'}
+			};
+		case 'KeyCombo2':
+			return {
+				ctor: '::',
+				_0: _p3._0,
+				_1: {
+					ctor: '::',
+					_0: _p3._1,
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'KeyCombo3':
+			return {
+				ctor: '::',
+				_0: _p3._0,
+				_1: {
+					ctor: '::',
+					_0: _p3._1,
+					_1: {
+						ctor: '::',
+						_0: _p3._2,
+						_1: {ctor: '[]'}
+					}
+				}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: _p3._0,
+				_1: {
+					ctor: '::',
+					_0: _p3._1,
+					_1: {
+						ctor: '::',
+						_0: _p3._2,
+						_1: {
+							ctor: '::',
+							_0: _p3._3,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			};
+	}
+};
+var _scottcorgan$keyboard_combo$Keyboard_Combo$arePressed = F2(
+	function (keyTracker, keysPressed) {
+		return A2(
+			_elm_lang$core$List$all,
+			function (key) {
+				return A2(_ohanhi$keyboard_extra$Keyboard_Extra$isPressed, key, keyTracker);
+			},
+			keysPressed);
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$matchesCombo = function (model) {
+	return A2(
+		_scottcorgan$keyboard_combo$Keyboard_Combo$find,
+		function (combo) {
+			return A2(
+				_scottcorgan$keyboard_combo$Keyboard_Combo$arePressed,
+				model.keys,
+				_scottcorgan$keyboard_combo$Keyboard_Combo$keyList(combo));
+		},
+		model.combos);
+};
+var _scottcorgan$keyboard_combo$Keyboard_Combo$performComboTask = function (combo) {
+	return A2(
+		_elm_lang$core$Task$perform,
+		function (x) {
+			return x;
+		},
+		_elm_lang$core$Task$succeed(
+			_scottcorgan$keyboard_combo$Keyboard_Combo$getComboMsg(combo)));
+};
+var _scottcorgan$keyboard_combo$Keyboard_Combo$getComboCmd = F2(
+	function (possibleCombo, model) {
+		return _elm_lang$core$Native_Utils.eq(possibleCombo, model.activeCombo) ? {ctor: '[]'} : A2(
+			_elm_lang$core$Maybe$withDefault,
+			{ctor: '[]'},
+			A2(
+				_elm_lang$core$Maybe$map,
+				function (combo) {
+					return {
+						ctor: '::',
+						_0: _scottcorgan$keyboard_combo$Keyboard_Combo$performComboTask(combo),
+						_1: {ctor: '[]'}
+					};
+				},
+				possibleCombo));
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$updateActiveCombo = function (model) {
+	var possibleCombo = _scottcorgan$keyboard_combo$Keyboard_Combo$matchesCombo(model);
+	return A2(
+		_elm_lang$core$Platform_Cmd_ops['!'],
+		_elm_lang$core$Native_Utils.update(
+			model,
+			{activeCombo: possibleCombo}),
+		A2(_scottcorgan$keyboard_combo$Keyboard_Combo$getComboCmd, possibleCombo, model));
+};
+var _scottcorgan$keyboard_combo$Keyboard_Combo$backTick = _ohanhi$keyboard_extra$Keyboard_Extra$BackQuote;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$forwardSlash = _ohanhi$keyboard_extra$Keyboard_Extra$Quote;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$backSlash = _ohanhi$keyboard_extra$Keyboard_Extra$BackSlash;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$closeBracket = _ohanhi$keyboard_extra$Keyboard_Extra$CloseBracket;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$openBracket = _ohanhi$keyboard_extra$Keyboard_Extra$OpenBracket;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$equals = _ohanhi$keyboard_extra$Keyboard_Extra$Equals;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$minus = _ohanhi$keyboard_extra$Keyboard_Extra$Minus;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$singleQuote = _ohanhi$keyboard_extra$Keyboard_Extra$Quote;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$semicolon = _ohanhi$keyboard_extra$Keyboard_Extra$Semicolon;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$comma = _ohanhi$keyboard_extra$Keyboard_Extra$Comma;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$period = _ohanhi$keyboard_extra$Keyboard_Extra$Period;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$down = _ohanhi$keyboard_extra$Keyboard_Extra$ArrowDown;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$up = _ohanhi$keyboard_extra$Keyboard_Extra$ArrowUp;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$right = _ohanhi$keyboard_extra$Keyboard_Extra$ArrowRight;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$left = _ohanhi$keyboard_extra$Keyboard_Extra$ArrowLeft;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$nine = _ohanhi$keyboard_extra$Keyboard_Extra$Number9;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$eight = _ohanhi$keyboard_extra$Keyboard_Extra$Number8;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$seven = _ohanhi$keyboard_extra$Keyboard_Extra$Number7;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$six = _ohanhi$keyboard_extra$Keyboard_Extra$Number6;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$five = _ohanhi$keyboard_extra$Keyboard_Extra$Number5;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$four = _ohanhi$keyboard_extra$Keyboard_Extra$Number4;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$three = _ohanhi$keyboard_extra$Keyboard_Extra$Number3;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$two = _ohanhi$keyboard_extra$Keyboard_Extra$Number2;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$one = _ohanhi$keyboard_extra$Keyboard_Extra$Number1;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$zero = _ohanhi$keyboard_extra$Keyboard_Extra$Number0;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$z = _ohanhi$keyboard_extra$Keyboard_Extra$CharZ;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$y = _ohanhi$keyboard_extra$Keyboard_Extra$CharY;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$x = _ohanhi$keyboard_extra$Keyboard_Extra$CharX;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$w = _ohanhi$keyboard_extra$Keyboard_Extra$CharW;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$v = _ohanhi$keyboard_extra$Keyboard_Extra$CharV;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$u = _ohanhi$keyboard_extra$Keyboard_Extra$CharU;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$t = _ohanhi$keyboard_extra$Keyboard_Extra$CharT;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$s = _ohanhi$keyboard_extra$Keyboard_Extra$CharS;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$r = _ohanhi$keyboard_extra$Keyboard_Extra$CharR;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$q = _ohanhi$keyboard_extra$Keyboard_Extra$CharQ;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$p = _ohanhi$keyboard_extra$Keyboard_Extra$CharP;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$o = _ohanhi$keyboard_extra$Keyboard_Extra$CharO;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$n = _ohanhi$keyboard_extra$Keyboard_Extra$CharN;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$m = _ohanhi$keyboard_extra$Keyboard_Extra$CharM;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$l = _ohanhi$keyboard_extra$Keyboard_Extra$CharL;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$k = _ohanhi$keyboard_extra$Keyboard_Extra$CharK;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$j = _ohanhi$keyboard_extra$Keyboard_Extra$CharJ;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$i = _ohanhi$keyboard_extra$Keyboard_Extra$CharI;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$h = _ohanhi$keyboard_extra$Keyboard_Extra$CharH;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$g = _ohanhi$keyboard_extra$Keyboard_Extra$CharG;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$f = _ohanhi$keyboard_extra$Keyboard_Extra$CharF;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$e = _ohanhi$keyboard_extra$Keyboard_Extra$CharE;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$d = _ohanhi$keyboard_extra$Keyboard_Extra$CharD;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$c = _ohanhi$keyboard_extra$Keyboard_Extra$CharC;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$b = _ohanhi$keyboard_extra$Keyboard_Extra$CharB;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$a = _ohanhi$keyboard_extra$Keyboard_Extra$CharA;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$delete = _ohanhi$keyboard_extra$Keyboard_Extra$Delete;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$backspace = _ohanhi$keyboard_extra$Keyboard_Extra$BackSpace;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$space = _ohanhi$keyboard_extra$Keyboard_Extra$Space;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$escape = _ohanhi$keyboard_extra$Keyboard_Extra$Escape;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$tab = _ohanhi$keyboard_extra$Keyboard_Extra$Tab;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$enter = _ohanhi$keyboard_extra$Keyboard_Extra$Enter;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$control = _ohanhi$keyboard_extra$Keyboard_Extra$Control;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$alt = _ohanhi$keyboard_extra$Keyboard_Extra$Alt;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$option = _scottcorgan$keyboard_combo$Keyboard_Combo$alt;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$shift = _ohanhi$keyboard_extra$Keyboard_Extra$Shift;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$super = _ohanhi$keyboard_extra$Keyboard_Extra$Super;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$command = _scottcorgan$keyboard_combo$Keyboard_Combo$super;
+var _scottcorgan$keyboard_combo$Keyboard_Combo$update = F2(
+	function (msg, model) {
+		return _scottcorgan$keyboard_combo$Keyboard_Combo$updateActiveCombo(
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{
+					keys: A2(_ohanhi$keyboard_extra$Keyboard_Extra$update, msg, model.keys)
+				}));
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions = function (model) {
+	return A2(_elm_lang$core$Platform_Sub$map, model.toMsg, _ohanhi$keyboard_extra$Keyboard_Extra$subscriptions);
+};
+var _scottcorgan$keyboard_combo$Keyboard_Combo$init = function (config) {
+	return {keys: _ohanhi$keyboard_extra$Keyboard_Extra$initialState, combos: config.combos, toMsg: config.toMsg, activeCombo: _elm_lang$core$Maybe$Nothing};
+};
+var _scottcorgan$keyboard_combo$Keyboard_Combo$Model = F4(
+	function (a, b, c, d) {
+		return {keys: a, combos: b, toMsg: c, activeCombo: d};
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$KeyCombo4 = F5(
+	function (a, b, c, d, e) {
+		return {ctor: 'KeyCombo4', _0: a, _1: b, _2: c, _3: d, _4: e};
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$combo4 = F2(
+	function (_p4, msg) {
+		var _p5 = _p4;
+		return A5(_scottcorgan$keyboard_combo$Keyboard_Combo$KeyCombo4, _p5._0, _p5._1, _p5._2, _p5._3, msg);
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$KeyCombo3 = F4(
+	function (a, b, c, d) {
+		return {ctor: 'KeyCombo3', _0: a, _1: b, _2: c, _3: d};
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$combo3 = F2(
+	function (_p6, msg) {
+		var _p7 = _p6;
+		return A4(_scottcorgan$keyboard_combo$Keyboard_Combo$KeyCombo3, _p7._0, _p7._1, _p7._2, msg);
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$KeyCombo2 = F3(
+	function (a, b, c) {
+		return {ctor: 'KeyCombo2', _0: a, _1: b, _2: c};
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$combo2 = F2(
+	function (_p8, msg) {
+		var _p9 = _p8;
+		return A3(_scottcorgan$keyboard_combo$Keyboard_Combo$KeyCombo2, _p9._0, _p9._1, msg);
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$KeyCombo = F2(
+	function (a, b) {
+		return {ctor: 'KeyCombo', _0: a, _1: b};
+	});
+var _scottcorgan$keyboard_combo$Keyboard_Combo$combo1 = F2(
+	function (key, msg) {
+		return A2(_scottcorgan$keyboard_combo$Keyboard_Combo$KeyCombo, key, msg);
+	});

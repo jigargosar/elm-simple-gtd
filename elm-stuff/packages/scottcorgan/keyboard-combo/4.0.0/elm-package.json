@@ -1,0 +1,18 @@
+{
+    "version": "4.0.0",
+    "summary": "Handle keyboard key combinations with type safety in Elm",
+    "repository": "https://github.com/scottcorgan/keyboard-combo.git",
+    "license": "BSD3",
+    "source-directories": [
+        "./src"
+    ],
+    "exposed-modules": [
+        "Keyboard.Combo"
+    ],
+    "dependencies": {
+        "elm-lang/core": "5.0.0 <= v < 6.0.0",
+        "elm-lang/html": "2.0.0 <= v < 3.0.0",
+        "ohanhi/keyboard-extra": "2.0.2 <= v < 3.0.0"
+    },
+    "elm-version": "0.18.0 <= v < 0.19.0"
+}

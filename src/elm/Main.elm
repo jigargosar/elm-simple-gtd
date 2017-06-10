@@ -44,6 +44,7 @@ import Maybe.Extra as Maybe
 import Tuple2
 import Html
 import Model exposing (..)
+import Update.Todo
 import View
 
 
@@ -387,36 +388,7 @@ update msg =
                     withNow (OnTodoMsgWithTime todoMsg)
 
                 OnTodoMsgWithTime todoMsg now ->
-                    case todoMsg of
-                        OnTodoToggleRunning todoId ->
-                            over timeTracker (Todo.TimeTracker.toggleStartStop todoId now)
-
-                        OnTodoInitRunning todoId ->
-                            set timeTracker (Todo.TimeTracker.initRunning todoId now)
-
-                        OnTodoTogglePaused ->
-                            over timeTracker (Todo.TimeTracker.togglePause now)
-
-                        OnTodoStopRunning ->
-                            set timeTracker Todo.TimeTracker.none
-
-                        OnGotoRunningTodo ->
-                            map (Model.gotoRunningTodo)
-                                >> andThenUpdate setDomFocusToFocusInEntityCmd
-
-                        OnRunningTodoNotificationClicked res ->
-                            let
-                                todoId =
-                                    res.data.id
-                            in
-                                (case res.action of
-                                    "stop" ->
-                                        andThenUpdate Model.onTodoStopRunning
-
-                                    _ ->
-                                        andThenUpdate Model.onGotoRunningTodo
-                                )
-                                    >> command (closeNotification todoId)
+                    Update.Todo.onTodoMsgWithTime andThenUpdate todoMsg now
            )
         >> persistAll
 

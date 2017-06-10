@@ -13,16 +13,20 @@ var _user$project$Todo_TimeTracker$Paused = {ctor: 'Paused'};
 var _user$project$Todo_TimeTracker$Running = function (a) {
 	return {ctor: 'Running', _0: a};
 };
+var _user$project$Todo_TimeTracker$initRunning = F2(
+	function (todoId, now) {
+		return _user$project$Todo_TimeTracker$wrap(
+			{
+				todoId: todoId,
+				totalTime: 0,
+				state: _user$project$Todo_TimeTracker$Running(now)
+			});
+	});
 var _user$project$Todo_TimeTracker$toggleStartStop = F3(
 	function (todoId, now, model) {
 		var _p0 = model;
 		if (_p0.ctor === 'Nothing') {
-			return _user$project$Todo_TimeTracker$wrap(
-				{
-					todoId: todoId,
-					totalTime: 0,
-					state: _user$project$Todo_TimeTracker$Running(now)
-				});
+			return A2(_user$project$Todo_TimeTracker$initRunning, todoId, now);
 		} else {
 			return _user$project$Todo_TimeTracker$none;
 		}

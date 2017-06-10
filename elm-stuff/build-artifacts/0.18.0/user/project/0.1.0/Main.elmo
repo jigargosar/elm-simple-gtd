@@ -77,6 +77,8 @@ var _user$project$Main$withNow = function (toMsg) {
 	return _user$project$Main$command(
 		A2(_elm_lang$core$Task$perform, toMsg, _elm_lang$core$Time$now));
 };
+var _user$project$Main$set = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _user$project$Main$map);
+var _user$project$Main$over = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _user$project$Main$map);
 var _user$project$Main$init = function (_p2) {
 	return _Fresheyeball$elm_return$Return$singleton(
 		_user$project$Model$init(_p2));
@@ -643,13 +645,22 @@ var _user$project$Main$update = function (msg) {
 						var _p61 = _p15._0;
 						switch (_p61.ctor) {
 							case 'OnTodoToggleRunning':
-								return _user$project$Main$map(
-									A2(_user$project$Model$toggleTodoTimer, _p61._0, _p62));
+								return A2(
+									_user$project$Main$over,
+									_user$project$Model$timeTracker,
+									A2(_user$project$Todo_TimeTracker$toggleStartStop, _p61._0, _p62));
+							case 'OnTodoInitRunning':
+								return A2(
+									_user$project$Main$set,
+									_user$project$Model$timeTracker,
+									A2(_user$project$Todo_TimeTracker$initRunning, _p61._0, _p62));
 							case 'OnTodoTogglePaused':
-								return _user$project$Main$map(
-									_user$project$Model$toggleTodoPause(_p62));
+								return A2(
+									_user$project$Main$over,
+									_user$project$Model$timeTracker,
+									_user$project$Todo_TimeTracker$togglePause(_p62));
 							default:
-								return _user$project$Main$map(_user$project$Model$stopRunningTodo);
+								return A2(_user$project$Main$set, _user$project$Model$timeTracker, _user$project$Todo_TimeTracker$none);
 						}
 				}
 			}()(

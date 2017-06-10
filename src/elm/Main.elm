@@ -8,7 +8,7 @@ import EditMode
 import Entity
 import Ext.Debug
 import Ext.Keyboard as Keyboard exposing (Key)
-import Ext.Record
+import Ext.Record as Record exposing (set)
 import Ext.Return as Return
 import Firebase
 import Keyboard.Combo
@@ -120,6 +120,14 @@ subscriptions m =
         , Firebase.onChange OnFirebaseChange
         , Keyboard.Combo.subscriptions m.keyComboModel
         ]
+
+
+over =
+    Record.over >>> map
+
+
+set =
+    Record.set >>> map
 
 
 update : Msg -> Model -> Return
@@ -375,14 +383,17 @@ update msg =
 
                 OnTodoMsgWithTime todoMsg now ->
                     case todoMsg of
-                        Model.OnTodoToggleRunning todoId ->
-                            map (Model.toggleTodoTimer todoId now)
+                        OnTodoToggleRunning todoId ->
+                            over timeTracker (Todo.TimeTracker.toggleStartStop todoId now)
 
-                        Model.OnTodoTogglePaused ->
-                            map (Model.toggleTodoPause now)
+                        OnTodoInitRunning todoId ->
+                            set timeTracker (Todo.TimeTracker.initRunning todoId now)
 
-                        Model.OnTodoStopRunning ->
-                            map (Model.stopRunningTodo)
+                        OnTodoTogglePaused ->
+                            over timeTracker (Todo.TimeTracker.togglePause now)
+
+                        OnTodoStopRunning ->
+                            set timeTracker Todo.TimeTracker.none
            )
         >> persistAll
 
@@ -409,9 +420,9 @@ persistAll =
 persist lens =
     Return.andThen
         (\m ->
-            Ext.Record.get lens m
+            Record.get lens m
                 |> Store.persist
-                |> Tuple.mapFirst (Ext.Record.set lens # m)
+                |> Tuple.mapFirst (Record.set lens # m)
         )
 
 

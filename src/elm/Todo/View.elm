@@ -178,13 +178,6 @@ createTodoViewModel vc tabindexAV todo =
 
                     _ ->
                         commonMsg.noOp
-            else if Ext.Keyboard.isOnlyShiftKeyDown ke then
-                case key of
-                    Key.CharS ->
-                        Model.onTodoTogglePaused
-
-                    _ ->
-                        commonMsg.noOp
             else
                 commonMsg.noOp
 

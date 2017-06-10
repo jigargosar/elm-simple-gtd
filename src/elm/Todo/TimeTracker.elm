@@ -44,14 +44,19 @@ toggleStartStop : Todo.Id -> Time -> Model -> Model
 toggleStartStop todoId now model =
     case model of
         Nothing ->
-            wrap
-                { todoId = todoId
-                , totalTime = 0
-                , state = Running now
-                }
+            initRunning todoId now
 
         Just _ ->
             none
+
+
+initRunning : Todo.Id -> Time -> Model
+initRunning todoId now =
+    wrap
+        { todoId = todoId
+        , totalTime = 0
+        , state = Running now
+        }
 
 
 togglePause : Time -> Model -> Model

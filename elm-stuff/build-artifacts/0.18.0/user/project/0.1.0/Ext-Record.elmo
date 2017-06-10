@@ -54,6 +54,14 @@ var _user$project$Ext_Record$overT2 = F3(
 			smallFT2(
 				A2(_user$project$Ext_Record$get, field, b)));
 	});
+var _user$project$Ext_Record$overReturn = F3(
+	function (field, smallFT2, b) {
+		return A2(
+			_elm_lang$core$Tuple$mapFirst,
+			A2(_user$project$Ext_Record$setIn, b, field),
+			smallFT2(
+				A2(_user$project$Ext_Record$get, field, b)));
+	});
 var _user$project$Ext_Record$FieldModel = F2(
 	function (a, b) {
 		return {get: a, set: b};

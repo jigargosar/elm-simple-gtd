@@ -112,8 +112,12 @@ onEnter msg =
     Events.on "keyup" (succeedIfDecodedKeyEquals KX.Enter msg)
 
 
-keyUps toMsg =
+ups toMsg =
     Keyboard.ups (toMsg << KX.fromCode {- << Debug.log "global key code" -})
+
+
+downs =
+    KX.downs
 
 
 init =

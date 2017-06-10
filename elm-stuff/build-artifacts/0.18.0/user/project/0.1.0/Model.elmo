@@ -771,6 +771,23 @@ var _user$project$Model$getMaybeUserProfile = function (_p43) {
 		}(_p43));
 };
 var _user$project$Model$inboxEntity = _user$project$Entity$ContextEntity(_user$project$Context$null);
+var _user$project$Model$keyComboState = A2(
+	_user$project$Ext_Record$init,
+	function (_) {
+		return _.keyComboState;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{keyComboState: s});
+		}));
+var _user$project$Model$updateCombo = function (comboMsg) {
+	return A2(
+		_user$project$Ext_Record$overReturn,
+		_user$project$Model$keyComboState,
+		_scottcorgan$keyboard_combo$Keyboard_Combo$update(comboMsg));
+};
 var _user$project$Model$timeTracker = A2(
 	_user$project$Ext_Record$init,
 	function (_) {
@@ -1299,7 +1316,9 @@ var _user$project$Model$Model = function (a) {
 																	return function (r) {
 																		return function (s) {
 																			return function (t) {
-																				return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s, timeTracker: t};
+																				return function (u) {
+																					return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s, timeTracker: t, keyComboState: u};
+																				};
 																			};
 																		};
 																	};
@@ -1343,6 +1362,9 @@ var _user$project$Model$OnTodoTogglePaused = {ctor: 'OnTodoTogglePaused'};
 var _user$project$Model$OnTodoStopRunning = {ctor: 'OnTodoStopRunning'};
 var _user$project$Model$OnTodoToggleRunning = function (a) {
 	return {ctor: 'OnTodoToggleRunning', _0: a};
+};
+var _user$project$Model$OnKeyCombo = function (a) {
+	return {ctor: 'OnKeyCombo', _0: a};
 };
 var _user$project$Model$OnTodoMsgWithTime = F2(
 	function (a, b) {
@@ -1484,6 +1506,28 @@ var _user$project$Model$OnCommonMsg = function (a) {
 	return {ctor: 'OnCommonMsg', _0: a};
 };
 var _user$project$Model$commonMsg = _user$project$CommonMsg$createHelper(_user$project$Model$OnCommonMsg);
+var _user$project$Model$keyboardCombos = {
+	ctor: '::',
+	_0: A2(
+		_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
+		{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$control, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$s},
+		_user$project$Model$commonMsg.noOp),
+	_1: {
+		ctor: '::',
+		_0: A2(
+			_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
+			{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$control, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$a},
+			_user$project$Model$commonMsg.noOp),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_scottcorgan$keyboard_combo$Keyboard_Combo$combo3,
+				{ctor: '_Tuple3', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$control, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$alt, _2: _scottcorgan$keyboard_combo$Keyboard_Combo$e},
+				_user$project$Model$commonMsg.noOp),
+			_1: {ctor: '[]'}
+		}
+	}
+};
 var _user$project$Model$SyncView = {ctor: 'SyncView'};
 var _user$project$Model$BinView = {ctor: 'BinView'};
 var _user$project$Model$DoneView = {ctor: 'DoneView'};
@@ -1535,7 +1579,9 @@ var _user$project$Model$init = function (flags) {
 		deviceId: flags.deviceId,
 		focusInEntity: _user$project$Model$inboxEntity,
 		timeTracker: _user$project$Todo_TimeTracker$none,
-		firebaseClient: firebaseClient
+		firebaseClient: firebaseClient,
+		keyComboState: _scottcorgan$keyboard_combo$Keyboard_Combo$init(
+			{toMsg: _user$project$Model$OnKeyCombo, combos: _user$project$Model$keyboardCombos})
 	};
 	return model;
 };

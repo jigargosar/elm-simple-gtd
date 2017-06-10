@@ -31,6 +31,7 @@
     "justinmimbs/elm-date-extra": "2.0.3",
     "danielnarey/elm-toolkit": "5.1.0",
     "elm-lang/http": "1.0.0",
+    "scottcorgan/keyboard-combo": "4.0.0",
     "rluiten/elm-text-search": "3.1.1",
     "rluiten/trie": "2.0.2",
     "elm-community/list-extra": "6.1.0",

@@ -12,8 +12,9 @@ import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Ext.List as List
 import Ext.Predicate
-import Ext.Record as Record exposing (maybeOver, maybeSetIn, over, set)
+import Ext.Record as Record exposing (maybeOver, maybeSetIn, over, overReturn, set)
 import Firebase exposing (DeviceId)
+import Keyboard.Combo
 import LaunchBar.Form
 import Menu
 import Project
@@ -101,6 +102,15 @@ type Msg
     | OnLaunchBarMsgWithNow LaunchBar.Action Time
     | OnTodoMsg TodoMsg
     | OnTodoMsgWithTime TodoMsg Time
+    | OnKeyCombo Keyboard.Combo.Msg
+
+
+keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
+keyboardCombos =
+    [ Keyboard.Combo.combo2 ( Keyboard.Combo.control, Keyboard.Combo.s ) commonMsg.noOp
+    , Keyboard.Combo.combo2 ( Keyboard.Combo.control, Keyboard.Combo.a ) commonMsg.noOp
+    , Keyboard.Combo.combo3 ( Keyboard.Combo.control, Keyboard.Combo.alt, Keyboard.Combo.e ) commonMsg.noOp
+    ]
 
 
 onTodoToggleRunning =
@@ -152,6 +162,7 @@ type alias Model =
     , firebaseClient : Firebase.Client
     , focusInEntity : Entity.Entity
     , timeTracker : Todo.TimeTracker.Model
+    , keyComboState : Keyboard.Combo.Model Msg
     }
 
 
@@ -238,6 +249,10 @@ timeTracker =
     Record.init .timeTracker (\s b -> { b | timeTracker = s })
 
 
+keyComboState =
+    Record.init .keyComboState (\s b -> { b | keyComboState = s })
+
+
 init : Flags -> Model
 init flags =
     let
@@ -277,6 +292,11 @@ init flags =
             , focusInEntity = inboxEntity
             , timeTracker = Todo.TimeTracker.none
             , firebaseClient = firebaseClient
+            , keyComboState =
+                Keyboard.Combo.init
+                    { toMsg = OnKeyCombo
+                    , combos = keyboardCombos
+                    }
             }
     in
         model
@@ -1239,3 +1259,14 @@ gotoTodoWithId todoId model =
                     model |> setFocusInEntityFromTodoId todoId |> switchToContextsView
                 )
                 (setFocusInEntity # model)
+
+
+
+-- combo
+
+
+updateCombo : Keyboard.Combo.Msg -> ModelReturnF Msg
+updateCombo comboMsg =
+    overReturn
+        keyComboState
+        (Keyboard.Combo.update comboMsg)

@@ -8,7 +8,8 @@ var _user$project$Ext_Keyboard$subscription = function (tagger) {
 	return A2(_elm_lang$core$Platform_Sub$map, tagger, _ohanhi$keyboard_extra$Keyboard_Extra$subscriptions);
 };
 var _user$project$Ext_Keyboard$init = _ohanhi$keyboard_extra$Keyboard_Extra$initialState;
-var _user$project$Ext_Keyboard$keyUps = function (toMsg) {
+var _user$project$Ext_Keyboard$downs = _ohanhi$keyboard_extra$Keyboard_Extra$downs;
+var _user$project$Ext_Keyboard$ups = function (toMsg) {
 	return _elm_lang$keyboard$Keyboard$ups(
 		function (_p0) {
 			return toMsg(

@@ -11,6 +11,7 @@ import Ext.Keyboard as Keyboard exposing (Key)
 import Ext.Record
 import Ext.Return as Return
 import Firebase
+import Keyboard.Combo
 import LaunchBar
 import LaunchBar.Form
 import Project
@@ -113,7 +114,7 @@ subscriptions m =
     Sub.batch
         [ Time.every (Time.second * 1) OnNowChanged
         , Keyboard.subscription OnKeyboardMsg
-        , Keyboard.keyUps OnGlobalKeyUp
+        , Keyboard.downs OnGlobalKeyUp
         , notificationClicked OnNotificationClicked
         , Store.onChange OnPouchDBChange
         , Firebase.onChange OnFirebaseChange
@@ -365,6 +366,9 @@ update msg =
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key
 
+                OnKeyCombo comboMsg ->
+                    Return.andThen (Model.updateCombo comboMsg)
+
                 OnTodoMsg todoMsg ->
                     withNow (OnTodoMsgWithTime todoMsg)
 
@@ -490,35 +494,40 @@ command =
 
 onGlobalKeyUp : Key -> ReturnF
 onGlobalKeyUp key =
-    Return.with (Model.getEditMode)
-        (\editMode ->
-            case ( key, editMode ) of
-                ( key, EditMode.None ) ->
-                    case key of
-                        Key.Escape ->
-                            Return.map (Model.clearSelection)
+    Return.with (apply2 ( Model.getKeyboardState, Model.getEditMode ))
+        (\( keyboardState, editMode ) ->
+            let
+                _ =
+                    Key.pressedDown keyboardState
+                        |> Debug.log "pressedDown"
+            in
+                case ( key, editMode ) of
+                    ( key, EditMode.None ) ->
+                        case key of
+                            Key.Escape ->
+                                Return.map (Model.clearSelection)
 
-                        Key.CharQ ->
-                            andThenUpdate NewTodo
+                            Key.CharQ ->
+                                andThenUpdate NewTodo
 
-                        Key.CharI ->
-                            andThenUpdate NewTodoForInbox
+                            Key.CharI ->
+                                andThenUpdate NewTodoForInbox
 
-                        Key.Slash ->
-                            LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
+                            Key.Slash ->
+                                LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
 
-                        Key.CharR ->
-                            map (Model.gotoRunningTodo)
-                                >> andThenUpdate setDomFocusToFocusedEntityCmd
+                            Key.CharR ->
+                                map (Model.gotoRunningTodo)
+                                    >> andThenUpdate setDomFocusToFocusedEntityCmd
 
-                        _ ->
-                            identity
+                            _ ->
+                                identity
 
-                ( Key.Escape, _ ) ->
-                    andThenUpdate DeactivateEditingMode
+                    ( Key.Escape, _ ) ->
+                        andThenUpdate DeactivateEditingMode
 
-                _ ->
-                    identity
+                    _ ->
+                        identity
         )
 
 

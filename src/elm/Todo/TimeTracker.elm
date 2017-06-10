@@ -52,7 +52,7 @@ toggleStartStop todoId now model =
 
 
 alarmDelay =
-    10 * Time.second
+    10 * Time.minute
 
 
 initRunning : Todo.Id -> Time -> Model

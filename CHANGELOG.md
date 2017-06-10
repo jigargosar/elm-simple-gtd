@@ -1,3 +1,6 @@
+## Upcoming
+* [feature] add time tracker for currently working task 
+
 ## v0.17.12 - 2017-06-08
 * [fix] header display css 
 

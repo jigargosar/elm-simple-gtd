@@ -43,6 +43,7 @@ createViewModel appModel tracker =
         , displayTime = Ext.Time.toHHMMSS elapsedTime
         , playPauseIconName = playPauseIconName
         , onStop = Model.onTodoStopRunning
+        , onTogglePause = Model.onTodoTogglePaused
         }
 
 
@@ -56,7 +57,7 @@ view vm =
         , div [ class "flex-auto layout horizontal" ]
             [ div [ class "flex-auto" ] [ text vm.displayTime ]
             , div [ class "" ]
-                [ Material.iconButton vm.playPauseIconName [ onClick Model.onTodoTogglePaused ]
+                [ Material.iconButton vm.playPauseIconName [ onClick vm.onTogglePause ]
                 , Material.iconButton "stop" [ onClick vm.onStop ]
 
                 {- , Material.iconButton "done" -}

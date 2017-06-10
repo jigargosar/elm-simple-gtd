@@ -59,7 +59,7 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 										vm.playPauseIconName,
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$onTodoTogglePaused),
+											_0: _elm_lang$html$Html_Events$onClick(vm.onTogglePause),
 											_1: {ctor: '[]'}
 										}),
 									_1: {
@@ -105,7 +105,8 @@ var _user$project$Todo_TimeTracker_View$createViewModel = F2(
 			displayText: todoText,
 			displayTime: _user$project$Ext_Time$toHHMMSS(elapsedTime),
 			playPauseIconName: playPauseIconName,
-			onStop: _user$project$Model$onTodoStopRunning
+			onStop: _user$project$Model$onTodoStopRunning,
+			onTogglePause: _user$project$Model$onTodoTogglePaused
 		};
 	});
 var _user$project$Todo_TimeTracker_View$maybe = function (appModel) {

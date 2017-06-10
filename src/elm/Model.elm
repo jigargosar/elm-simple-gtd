@@ -117,6 +117,9 @@ keyboardCombos =
 onTodoToggleRunning =
     OnTodoToggleRunning >> OnTodoMsg
 
+onTodoInitRunning =
+    OnTodoInitRunning >> OnTodoMsg
+
 
 onTodoStopRunning =
     OnTodoStopRunning |> OnTodoMsg

@@ -171,11 +171,11 @@ update msg =
                     case key of
                         Key.ArrowUp ->
                             Return.map (Model.moveFocusBy -1 entityList)
-                                >> andThenUpdate setDomFocusToFocusedEntityCmd
+                                >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                         Key.ArrowDown ->
                             Return.map (Model.moveFocusBy 1 entityList)
-                                >> andThenUpdate setDomFocusToFocusedEntityCmd
+                                >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                         _ ->
                             identity
@@ -226,7 +226,7 @@ update msg =
 
                 DeactivateEditingMode ->
                     Return.map (Model.deactivateEditingMode)
-                        >> andThenUpdate setDomFocusToFocusedEntityCmd
+                        >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                 NewTodoKeyUp { key } ->
                     case key of
@@ -439,7 +439,7 @@ andThenUpdate =
     update >> Return.andThen
 
 
-setDomFocusToFocusedEntityCmd =
+setDomFocusToFocusInEntityCmd =
     (commonMsg.focus ".entity-list > [tabindex=0]")
 
 
@@ -525,7 +525,7 @@ onGlobalKeyUp key =
 
                         Key.CharR ->
                             map (Model.gotoRunningTodo)
-                                >> andThenUpdate setDomFocusToFocusedEntityCmd
+                                >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                         _ ->
                             identity

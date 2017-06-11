@@ -18,6 +18,7 @@ import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
 import Material
 import Maybe.Extra as Maybe
+import Menu
 import Model
 import Model exposing (Msg, commonMsg)
 import Polymer.Attributes exposing (boolProperty, stringProperty)
@@ -483,3 +484,22 @@ projectMenu =
 
 contextMenu =
     Todo.View.Menu.context
+
+
+reminderPopup form model =
+    Menu.view ([ "i1", "i2" ])
+        Menu.initState
+        (createReminderMenuConfig model)
+
+
+createReminderMenuConfig : Model.Model -> Menu.Config String Model.Msg
+createReminderMenuConfig model =
+    { onSelect = (\_ -> commonMsg.noOp)
+    , isSelected = (\_ -> False)
+    , itemKey = identity
+    , itemSearchText = identity
+    , itemView = text
+    , onStateChanged = (\_ -> commonMsg.noOp)
+    , noOp = commonMsg.noOp
+    , onOutsideMouseDown = Model.DeactivateEditingMode
+    }

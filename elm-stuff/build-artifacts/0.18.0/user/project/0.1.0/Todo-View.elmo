@@ -1,3 +1,37 @@
+var _user$project$Todo_View$createReminderMenuConfig = function (model) {
+	return {
+		onSelect: function (_p0) {
+			return _user$project$Model$commonMsg.noOp;
+		},
+		isSelected: function (_p1) {
+			return false;
+		},
+		itemKey: _elm_lang$core$Basics$identity,
+		itemSearchText: _elm_lang$core$Basics$identity,
+		itemView: _elm_lang$html$Html$text,
+		onStateChanged: function (_p2) {
+			return _user$project$Model$commonMsg.noOp;
+		},
+		noOp: _user$project$Model$commonMsg.noOp,
+		onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
+	};
+};
+var _user$project$Todo_View$reminderPopup = F2(
+	function (form, model) {
+		return A3(
+			_user$project$Menu$view,
+			{
+				ctor: '::',
+				_0: 'i1',
+				_1: {
+					ctor: '::',
+					_0: 'i2',
+					_1: {ctor: '[]'}
+				}
+			},
+			_user$project$Menu$initState,
+			_user$project$Todo_View$createReminderMenuConfig(model));
+	});
 var _user$project$Todo_View$contextMenu = _user$project$Todo_View_Menu$context;
 var _user$project$Todo_View$projectMenu = _user$project$Todo_View_Menu$project;
 var _user$project$Todo_View$editView = function (edit) {
@@ -29,7 +63,7 @@ var _user$project$Todo_View$editView = function (edit) {
 								_1: {
 									ctor: '::',
 									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-										function (_p0) {
+										function (_p3) {
 											return _user$project$Model$commonMsg.noOp;
 										}),
 									_1: {ctor: '[]'}
@@ -83,9 +117,9 @@ var _user$project$Todo_View$createEditTodoViewModel = F2(
 		var todoId = form.id;
 		return {
 			todo: {text: form.todoText},
-			onTodoTextChanged: function (_p1) {
+			onTodoTextChanged: function (_p4) {
 				return updateTodoFormMsg(
-					_user$project$Todo_Form$SetText(_p1));
+					_user$project$Todo_Form$SetText(_p4));
 			},
 			onDeleteClicked: A2(
 				_user$project$Model$OnEntityAction,
@@ -113,7 +147,7 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 		var maybeTodoReminderForm = vc.getMaybeTodoReminderFormForTodo(todo);
 		var form = A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p2) {
+			function (_p5) {
 				return A2(_user$project$Todo_ReminderForm$create, todo, vc.now);
 			},
 			_elm_lang$core$Basics$identity,
@@ -141,13 +175,13 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 					dueAt,
 					_user$project$Ext_Time$dayDiffInWords(vc.now)),
 				''),
-			onDateChanged: function (_p3) {
+			onDateChanged: function (_p6) {
 				return updateReminderForm(
-					_user$project$Todo_ReminderForm$SetDate(_p3));
+					_user$project$Todo_ReminderForm$SetDate(_p6));
 			},
-			onTimeChanged: function (_p4) {
+			onTimeChanged: function (_p7) {
 				return updateReminderForm(
-					_user$project$Todo_ReminderForm$SetTime(_p4));
+					_user$project$Todo_ReminderForm$SetTime(_p7));
 			},
 			startEditingMsg: _user$project$Model$StartEditingReminder(todo)
 		};
@@ -330,9 +364,9 @@ var _user$project$Todo_View$doneIconButton = function (vm) {
 var _user$project$Todo_View$getDisplayText = function (todo) {
 	var trimAndReplaceEmptyWithDefault = A2(
 		_user$project$Ext_Function_Infix_ops['>>?='],
-		function (_p5) {
+		function (_p8) {
 			return _elm_community$string_extra$String_Extra$nonEmpty(
-				_elm_lang$core$String$trim(_p5));
+				_elm_lang$core$String$trim(_p8));
 		},
 		'< empty >');
 	var tripleNewLineAndRestRegex = _elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*');
@@ -384,11 +418,11 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					'Inbox')));
 		var todoId = _user$project$Document$getId(todo);
 		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
-		var onKeyDownMsg = function (_p6) {
-			var _p7 = _p6;
-			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p7)) {
-				var _p8 = _p7.key;
-				switch (_p8.ctor) {
+		var onKeyDownMsg = function (_p9) {
+			var _p10 = _p9;
+			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p10)) {
+				var _p11 = _p10.key;
+				switch (_p11.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 					case 'CharE':
@@ -436,8 +470,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p9, content) {
-		var _p10 = _p9;
+	function (_p12, content) {
+		var _p13 = _p12;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$button,
 			{
@@ -456,7 +490,7 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
 						_1: {
 							ctor: '::',
-							_0: _p10.tabindexAV,
+							_0: _p13.tabindexAV,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -879,7 +913,7 @@ var _user$project$Todo_View$init = function (vm) {
 		},
 		A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p11) {
+			function (_p14) {
 				return _user$project$Todo_View$defaultView(vm);
 			},
 			_user$project$Todo_View$editView,

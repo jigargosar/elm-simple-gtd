@@ -138,8 +138,6 @@ var _user$project$View$overlayViews = function (model) {
 				return A2(_user$project$Todo_View$contextMenu, _p0._0, model);
 			case 'EditTodoProject':
 				return A2(_user$project$Todo_View$projectMenu, _p0._0, model);
-			case 'EditTodoReminder':
-				return A2(_user$project$Todo_View$reminderPopup, _p0._0, model);
 			default:
 				return A2(
 					_elm_lang$html$Html$span,

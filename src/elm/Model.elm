@@ -2,13 +2,10 @@ module Model exposing (..)
 
 import CommonMsg
 import Context
-import Date
-import Date.Extra.Create
 import Dict.Extra
 import Document exposing (Document)
 import EditMode exposing (EditMode)
 import Entity exposing (Entity)
-import Ext.Cmd
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Ext.List as List
 import Ext.Predicate
@@ -20,17 +17,14 @@ import LaunchBar.Form
 import Menu
 import Project
 import ReminderOverlay
-import Dict exposing (Dict)
 import Json.Encode as E
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Navigation exposing (Location)
 import Ext.Random as Random
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Return
-import Ext.Return as Return
 import Set exposing (Set)
 import Store
 import Time exposing (Time)
@@ -43,7 +37,6 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
 import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
 import Json.Encode as E
 import LaunchBar
 import Todo.GroupForm

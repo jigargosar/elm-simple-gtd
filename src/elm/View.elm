@@ -1,56 +1,25 @@
 module View exposing (init)
 
-import Context
-import Document
-import Dom
 import EditMode
-import Firebase
 import Firebase.View
 import Html.Attributes.Extra exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
-import Html.Keyed as Keyed
 import Html exposing (Attribute, Html, div, form, h1, h2, hr, input, node, span, text)
 import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, tabindex, type_, value)
 import Html.Events exposing (..)
-import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model
 import Model exposing (Msg, commonMsg)
-import Polymer.Firebase
-import ReminderOverlay
-import Set
-import OldGroupEntity.ViewModel
-import Todo.GroupForm
 import View.Header
 import Main.View
-import View.TodoList
 import View.AppDrawer
-import Maybe.Extra as Maybe
-import Time exposing (Time)
-import Ext.Time
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import Ext.Debug exposing (tapLog)
-import Ext.Decode exposing (traceDecoder)
-import List.Extra as List
 import Model exposing (..)
-import Todo
 import Polymer.Paper as Paper exposing (dialog, material)
 import Polymer.App as App
-import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import View.ReminderOverlay exposing (maybe)
-import View.Shared exposing (..)
 import Todo.View
 import ViewModel
 import WebComponents exposing (doneAllIconP, dynamicAlign, icon, iconA, iconButton, iconTextButton, onBoolPropertyChanged, onPropertyChanged, paperIconButton, slotDropdownContent, slotDropdownTrigger, testDialog)
-import Ext.Html
-import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
-import Json.Encode as E
 import LaunchBar.View
-import Menu
-import Project
-import Todo.View.Menu
 
 
 init m =

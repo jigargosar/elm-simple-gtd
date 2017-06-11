@@ -45,5 +45,30 @@
       <option name="workingDir" value="" />
       <envs />
     </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="$FilePathRelativeToProjectRoot$ --yes --output /dev/null" />
+      <option name="checkSyntaxErrors" value="false" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ALWAYS" />
+      <option name="fileExtension" value="elm" />
+      <option name="immediateSync" value="false" />
+      <option name="name" value="elm-compile-and-lint Copy" />
+      <option name="output" value="" />
+      <option name="outputFilters">
+        <array>
+          <FilterInfo>
+            <option name="description" value="Error Occured" />
+            <option name="name" value="Error Filter" />
+            <option name="regExp" value="^$FILE_PATH$:$LINE$:$COLUMN$ $MESSAGE$" />
+          </FilterInfo>
+        </array>
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$USER_HOME$/.config/yarn/global/node_modules/.bin/elm-make" />
+      <option name="scopeName" value="Current File" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
   </component>
 </project>

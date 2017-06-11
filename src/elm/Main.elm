@@ -2,7 +2,6 @@ port module Main exposing (..)
 
 import CommonMsg
 import Document
-import Dom
 import DomPorts exposing (autoFocusInputCmd, focusInputCmd, focusSelectorIfNoFocusCmd)
 import EditMode
 import Entity
@@ -13,36 +12,23 @@ import Ext.Return as Return
 import Firebase
 import Keyboard.Combo
 import LaunchBar
-import LaunchBar.Form
-import Project
-import Ext.Random as Random
-import Project
-import Random.Pcg as Random exposing (Seed)
-import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Json.Encode as E
 import Keyboard.Extra as Key
 import Model as Model
 import ReminderOverlay
 import Routes
-import Set
 import Store
-import String.Extra
 import Todo
 import Todo.Form
 import Todo.GroupForm
 import Todo.ReminderForm
-import Navigation exposing (Location)
 import Return
 import RouteUrl exposing (RouteUrlProgram)
 import Task
 import Time exposing (Time)
-import Todo.TimeTracker
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
-import Maybe.Extra as Maybe
 import Tuple2
-import Html
 import Model exposing (..)
 import Update.Todo
 import View

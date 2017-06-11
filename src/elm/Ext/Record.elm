@@ -1,12 +1,7 @@
 module Ext.Record exposing (init, get, set, setIn, over, overT2, overReturn, maybeSet, maybeSetIn, maybeOver)
 
 import Return
-import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
 
 
 type alias FieldModel small big =

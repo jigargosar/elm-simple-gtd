@@ -1,6 +1,12 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
+
+## Upcoming
+* revert edit reminder incomplete commits: so as to fix running todo bug.
+* bug: on todo changes running todo gets discarded. 
+
+
 ## v0.18.2 - 2017-06-11
 * [fix] material font icons http url is not loading, use https. 
 

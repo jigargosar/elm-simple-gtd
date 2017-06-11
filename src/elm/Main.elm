@@ -362,7 +362,7 @@ update msg =
                     withNow (OnTodoMsgWithTime todoMsg)
 
                 OnTodoMsgWithTime todoMsg now ->
-                    Todo.Main.update andThenUpdate todoMsg now
+                    Todo.Main.update andThenUpdate now todoMsg
            )
         >> persistAll
 

@@ -64,7 +64,7 @@ subscriptions m =
         ]
 
 
-update andThenUpdate todoMsg now =
+update andThenUpdate now todoMsg =
     case todoMsg of
         ToggleRunning todoId ->
             over timeTracker (Todo.TimeTracker.toggleStartStop todoId now)
@@ -83,35 +83,7 @@ update andThenUpdate todoMsg now =
                 >> andThenUpdate Model.OnSetDomFocusToFocusInEntity
 
         UpdateTimeTracker ->
-            let
-                maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model =
-                    let
-                        createRequest info todo =
-                            let
-                                todoId =
-                                    Document.getId todo
-                            in
-                                { tag = todoId
-                                , title = "You are currently working on"
-                                , body = Todo.getText todo
-                                , actions =
-                                    [ { title = "Stop", action = "stop" }
-                                    , { title = "Mark Done", action = "mark-done" }
-                                    ]
-                                , data = { id = todoId, notificationClickedPort = "onRunningTodoNotificationClicked" }
-                                }
-                    in
-                        maybeTrackerInfo
-                            ?+> (\info -> Model.findTodoById info.todoId model ?|> createRequest info)
-            in
-                Record.overT2 timeTracker (Todo.TimeTracker.updateNextAlarmAt now)
-                    >> (\( maybeTrackerInfo, model ) ->
-                            ( model
-                            , maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model
-                                |> maybeMapToCmd showRunningTodoNotification
-                            )
-                       )
-                    |> andThen
+            updateTimeTracker now
 
         RunningNotificationResponse res ->
             let
@@ -126,6 +98,38 @@ update andThenUpdate todoMsg now =
                         andThenUpdate Model.onGotoRunningTodo
                 )
                     >> andThenUpdate (Model.OnCloseNotification todoId)
+
+
+updateTimeTracker now =
+    let
+        maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model =
+            let
+                createRequest info todo =
+                    let
+                        todoId =
+                            Document.getId todo
+                    in
+                        { tag = todoId
+                        , title = "You are currently working on"
+                        , body = Todo.getText todo
+                        , actions =
+                            [ { title = "Stop", action = "stop" }
+                            , { title = "Mark Done", action = "mark-done" }
+                            ]
+                        , data = { id = todoId, notificationClickedPort = "onRunningTodoNotificationClicked" }
+                        }
+            in
+                maybeTrackerInfo
+                    ?+> (\info -> Model.findTodoById info.todoId model ?|> createRequest info)
+    in
+        Record.overT2 timeTracker (Todo.TimeTracker.updateNextAlarmAt now)
+            >> (\( maybeTrackerInfo, model ) ->
+                    ( model
+                    , maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model
+                        |> maybeMapToCmd showRunningTodoNotification
+                    )
+               )
+            |> andThen
 
 
 gotoRunningTodo model =

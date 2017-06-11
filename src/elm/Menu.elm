@@ -77,8 +77,8 @@ createViewModel items state config =
         clampIndex =
             List.clampIndexIn items
 
-        selectedIndex =
-            items |> List.findIndex config.isSelected ?= 0 |> clampIndex
+        maybeSelectedIndex =
+            items |> List.findIndex config.isSelected ?|> clampIndex
 
         maybeFocusedIndex =
             let
@@ -88,7 +88,7 @@ createViewModel items state config =
                 state.maybeFocusKey ?+> findIndexOfItemWithKey >>? List.clampIndexIn items
 
         focusedIndex =
-            maybeFocusedIndex ?= selectedIndex
+            maybeFocusedIndex |> Maybe.orElse maybeSelectedIndex ?= 0
 
         stateChangedMsgFromMaybeFocusedItem maybeItem =
             maybeItem
@@ -151,7 +151,7 @@ createViewModel items state config =
                 (\_ -> config.noOp)
     in
         { isFocusedAt = isFocusedAt
-        , isSelectedAt = equals selectedIndex
+        , isSelectedAt = maybeSelectedIndex ?|> equals ?= (\_ -> False)
         , tabIndexValueAt = isFocusedAt >> boolToTabIndexValue
         , onKeyDownAt = onKeyDownAt
         , onSelect = config.onSelect

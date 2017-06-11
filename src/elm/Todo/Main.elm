@@ -85,6 +85,9 @@ update andThenUpdate now todoMsg =
         UpdateTimeTracker ->
             updateTimeTracker now
 
+        Upsert todo ->
+            identity
+
         RunningNotificationResponse res ->
             let
                 todoId =

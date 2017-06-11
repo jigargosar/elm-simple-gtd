@@ -22,6 +22,7 @@ import Store
 import Todo
 import Todo.Form
 import Todo.GroupForm
+import Todo.Msg
 import Todo.ReminderForm
 import Return
 import RouteUrl exposing (RouteUrlProgram)
@@ -119,7 +120,12 @@ update msg =
                         )
 
                 OnEntityUpsert entity ->
-                    identity
+                    case entity of
+                        Entity.TodoEntity model ->
+                            Todo.Msg.Upsert model |> andThenTodoMsg
+
+                        _ ->
+                            identity
 
                 OnFirebaseChange dbName encodedDoc ->
                     Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
@@ -413,6 +419,10 @@ onMsgList =
 
 andThenUpdate =
     update >> Return.andThen
+
+
+andThenTodoMsg =
+    OnTodoMsg >> andThenUpdate
 
 
 setDomFocusToFocusInEntityCmd =

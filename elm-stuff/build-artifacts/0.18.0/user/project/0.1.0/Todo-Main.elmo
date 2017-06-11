@@ -175,6 +175,8 @@ var _user$project$Todo_Main$update = F3(
 				};
 			case 'UpdateTimeTracker':
 				return _user$project$Todo_Main$updateTimeTracker(now);
+			case 'Upsert':
+				return _elm_lang$core$Basics$identity;
 			default:
 				var _p9 = _p5._0;
 				var todoId = _p9.data.id;

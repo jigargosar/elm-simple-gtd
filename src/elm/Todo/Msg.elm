@@ -18,3 +18,4 @@ type Msg
     | RunningNotificationResponse Response
     | GotoRunning
     | UpdateTimeTracker
+    | Upsert Todo.Model

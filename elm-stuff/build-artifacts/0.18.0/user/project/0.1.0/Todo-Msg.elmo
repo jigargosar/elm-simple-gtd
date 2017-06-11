@@ -1,13 +1,13 @@
-var _user$project$Todo_Msg$OnUpdateTodoTimeTracker = {ctor: 'OnUpdateTodoTimeTracker'};
-var _user$project$Todo_Msg$OnGotoRunningTodo = {ctor: 'OnGotoRunningTodo'};
-var _user$project$Todo_Msg$OnRunningTodoNotificationClicked = function (a) {
-	return {ctor: 'OnRunningTodoNotificationClicked', _0: a};
+var _user$project$Todo_Msg$UpdateTimeTracker = {ctor: 'UpdateTimeTracker'};
+var _user$project$Todo_Msg$GotoRunning = {ctor: 'GotoRunning'};
+var _user$project$Todo_Msg$RunningTodoNotificationResponse = function (a) {
+	return {ctor: 'RunningTodoNotificationResponse', _0: a};
 };
-var _user$project$Todo_Msg$OnTodoTogglePaused = {ctor: 'OnTodoTogglePaused'};
-var _user$project$Todo_Msg$OnTodoStopRunning = {ctor: 'OnTodoStopRunning'};
-var _user$project$Todo_Msg$OnTodoInitRunning = function (a) {
-	return {ctor: 'OnTodoInitRunning', _0: a};
+var _user$project$Todo_Msg$TogglePaused = {ctor: 'TogglePaused'};
+var _user$project$Todo_Msg$StopRunning = {ctor: 'StopRunning'};
+var _user$project$Todo_Msg$InitRunning = function (a) {
+	return {ctor: 'InitRunning', _0: a};
 };
-var _user$project$Todo_Msg$OnTodoToggleRunning = function (a) {
-	return {ctor: 'OnTodoToggleRunning', _0: a};
+var _user$project$Todo_Msg$ToggleRunning = function (a) {
+	return {ctor: 'ToggleRunning', _0: a};
 };

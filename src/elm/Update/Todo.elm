@@ -40,23 +40,23 @@ maybeMapToCmd fn =
 
 onTodoMsgWithTime andThenUpdate todoMsg now =
     case todoMsg of
-        OnTodoToggleRunning todoId ->
+        ToggleRunning todoId ->
             over Model.timeTracker (Todo.TimeTracker.toggleStartStop todoId now)
 
-        OnTodoInitRunning todoId ->
+        InitRunning todoId ->
             set Model.timeTracker (Todo.TimeTracker.initRunning todoId now)
 
-        OnTodoTogglePaused ->
+        TogglePaused ->
             over Model.timeTracker (Todo.TimeTracker.togglePause now)
 
-        OnTodoStopRunning ->
+        StopRunning ->
             set Model.timeTracker Todo.TimeTracker.none
 
-        OnGotoRunningTodo ->
+        GotoRunning ->
             map (Model.gotoRunningTodo)
                 >> andThenUpdate Model.OnSetDomFocusToFocusInEntity
 
-        OnUpdateTodoTimeTracker ->
+        UpdateTimeTracker ->
             let
                 maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model =
                     let
@@ -89,7 +89,7 @@ onTodoMsgWithTime andThenUpdate todoMsg now =
                         >> foo
                     )
 
-        OnRunningTodoNotificationClicked res ->
+        RunningTodoNotificationResponse res ->
             let
                 todoId =
                     res.data.id

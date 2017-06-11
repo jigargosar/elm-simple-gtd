@@ -113,31 +113,31 @@ keyboardCombos =
 
 
 onTodoToggleRunning =
-    Todo.Msg.OnTodoToggleRunning >> OnTodoMsg
+    Todo.Msg.ToggleRunning >> OnTodoMsg
 
 
 onTodoInitRunning =
-    Todo.Msg.OnTodoInitRunning >> OnTodoMsg
+    Todo.Msg.InitRunning >> OnTodoMsg
 
 
 onRunningTodoNotificationClicked =
-    Todo.Msg.OnRunningTodoNotificationClicked >> OnTodoMsg
+    Todo.Msg.RunningTodoNotificationResponse >> OnTodoMsg
 
 
 onTodoStopRunning =
-    Todo.Msg.OnTodoStopRunning |> OnTodoMsg
+    Todo.Msg.StopRunning |> OnTodoMsg
 
 
 onTodoTogglePaused =
-    Todo.Msg.OnTodoTogglePaused |> OnTodoMsg
+    Todo.Msg.TogglePaused |> OnTodoMsg
 
 
 onGotoRunningTodo =
-    Todo.Msg.OnGotoRunningTodo |> OnTodoMsg
+    Todo.Msg.GotoRunning |> OnTodoMsg
 
 
 onUpdateTodoTimeTracker =
-    Todo.Msg.OnUpdateTodoTimeTracker |> OnTodoMsg
+    Todo.Msg.UpdateTimeTracker |> OnTodoMsg
 
 
 commonMsg : CommonMsg.Helper Msg

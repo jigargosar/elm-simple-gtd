@@ -11,10 +11,10 @@ import Maybe.Extra as Maybe
 
 
 type Msg
-    = OnTodoToggleRunning Todo.Id
-    | OnTodoInitRunning Todo.Id
-    | OnTodoStopRunning
-    | OnTodoTogglePaused
-    | OnRunningTodoNotificationClicked Response
-    | OnGotoRunningTodo
-    | OnUpdateTodoTimeTracker
+    = ToggleRunning Todo.Id
+    | InitRunning Todo.Id
+    | StopRunning
+    | TogglePaused
+    | RunningTodoNotificationResponse Response
+    | GotoRunning
+    | UpdateTimeTracker

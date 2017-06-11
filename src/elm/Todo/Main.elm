@@ -14,7 +14,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Todo.TimeTracker
+import Todo.TimeTracker as Tracker
 
 
 port showTodoReminderNotification : Model.TodoNotification -> Cmd msg
@@ -67,16 +67,16 @@ subscriptions m =
 update andThenUpdate now todoMsg =
     case todoMsg of
         ToggleRunning todoId ->
-            over timeTracker (Todo.TimeTracker.toggleStartStop todoId now)
+            over timeTracker (Tracker.toggleStartStop todoId now)
 
         InitRunning todoId ->
-            set timeTracker (Todo.TimeTracker.initRunning todoId now)
+            set timeTracker (Tracker.initRunning todoId now)
 
         TogglePaused ->
-            over timeTracker (Todo.TimeTracker.togglePause now)
+            over timeTracker (Tracker.togglePause now)
 
         StopRunning ->
-            set timeTracker Todo.TimeTracker.none
+            set timeTracker Tracker.none
 
         GotoRunning ->
             map (gotoRunningTodo)
@@ -123,13 +123,13 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
 
 
 updateTimeTracker now =
-    Record.overT2 timeTracker (Todo.TimeTracker.updateNextAlarmAt now)
+    Record.overT2 timeTracker (Tracker.updateNextAlarmAt now)
         >> apply2 ( Tuple.second, showRunningNotificationCmd )
-        >> andThen
+        |> andThen
 
 
 gotoRunningTodo model =
-    Todo.TimeTracker.getMaybeTodoId model.timeTracker
+    Tracker.getMaybeTodoId model.timeTracker
         ?|> gotoTodoWithIdIn model
         ?= model
 

@@ -2,6 +2,7 @@ module Todo.ReminderForm exposing (..)
 
 import Date
 import Document
+import Menu
 import Time exposing (Time)
 import Time.Format
 import Toolkit.Helpers exposing (..)
@@ -17,6 +18,7 @@ type alias Model =
     { id : Document.Id
     , date : String
     , time : String
+    , menuState : Menu.State
     }
 
 
@@ -34,6 +36,7 @@ create todo now =
         { id = Document.getId todo
         , date = (Time.Format.format "%Y-%m-%d") timeInMilli
         , time = (Time.Format.format "%H:%M") timeInMilli
+        , menuState = Menu.initState
         }
 
 
@@ -45,6 +48,10 @@ set action model =
 
         SetTime value ->
             { model | time = value }
+
+
+setMenuState menuState model =
+    { model | menuState = menuState }
 
 
 getMaybeTime : Model -> Maybe Time

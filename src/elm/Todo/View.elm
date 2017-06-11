@@ -33,6 +33,7 @@ import Svg.Events exposing (onFocusIn, onFocusOut)
 import Time.Format
 import Todo
 import Todo.Form
+import Todo.Msg
 import Todo.ReminderForm
 import Todo.View.Menu
 import Toolkit.Helpers exposing (..)
@@ -489,17 +490,17 @@ contextMenu =
 reminderPopup form model =
     Menu.view ([ "i1", "i2" ])
         Menu.initState
-        (createReminderMenuConfig model)
+        (createReminderMenuConfig form model)
 
 
-createReminderMenuConfig : Model.Model -> Menu.Config String Model.Msg
-createReminderMenuConfig model =
+createReminderMenuConfig : Todo.ReminderForm.Model -> Model.Model -> Menu.Config String Model.Msg
+createReminderMenuConfig form model =
     { onSelect = (\_ -> commonMsg.noOp)
     , isSelected = (\_ -> False)
     , itemKey = identity
     , itemSearchText = identity
     , itemView = text
-    , onStateChanged = (\_ -> commonMsg.noOp)
+    , onStateChanged = Todo.Msg.OnEditReminderMenuStateChanged form >> Model.OnTodoMsg
     , noOp = commonMsg.noOp
     , onOutsideMouseDown = Model.DeactivateEditingMode
     }

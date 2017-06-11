@@ -15,6 +15,12 @@ var _user$project$Todo_ReminderForm$getMaybeTime = function (_p0) {
 			}),
 		_elm_lang$core$Maybe$Nothing);
 };
+var _user$project$Todo_ReminderForm$setMenuState = F2(
+	function (menuState, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{menuState: menuState});
+	});
 var _user$project$Todo_ReminderForm$set = F2(
 	function (action, model) {
 		var _p3 = action;
@@ -37,12 +43,13 @@ var _user$project$Todo_ReminderForm$create = F2(
 		return {
 			id: _user$project$Document$getId(todo),
 			date: A2(_mgold$elm_date_format$Time_Format$format, '%Y-%m-%d', timeInMilli),
-			time: A2(_mgold$elm_date_format$Time_Format$format, '%H:%M', timeInMilli)
+			time: A2(_mgold$elm_date_format$Time_Format$format, '%H:%M', timeInMilli),
+			menuState: _user$project$Menu$initState
 		};
 	});
-var _user$project$Todo_ReminderForm$Model = F3(
-	function (a, b, c) {
-		return {id: a, date: b, time: c};
+var _user$project$Todo_ReminderForm$Model = F4(
+	function (a, b, c, d) {
+		return {id: a, date: b, time: c, menuState: d};
 	});
 var _user$project$Todo_ReminderForm$SetTime = function (a) {
 	return {ctor: 'SetTime', _0: a};

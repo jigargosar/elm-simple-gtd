@@ -8,6 +8,7 @@ import Notification
 import Return
 import Todo
 import Todo.Msg exposing (Msg(..))
+import Todo.ReminderForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -66,6 +67,9 @@ subscriptions m =
 
 update andThenUpdate now todoMsg =
     case todoMsg of
+        OnEditReminderMenuStateChanged form menuState ->
+            Todo.ReminderForm.set menuState form
+
         ToggleRunning todoId ->
             mapOver timeTracker (Tracker.toggleStartStop todoId now)
 

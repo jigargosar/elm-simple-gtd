@@ -1,21 +1,23 @@
-var _user$project$Todo_View$createReminderMenuConfig = function (model) {
-	return {
-		onSelect: function (_p0) {
-			return _user$project$Model$commonMsg.noOp;
-		},
-		isSelected: function (_p1) {
-			return false;
-		},
-		itemKey: _elm_lang$core$Basics$identity,
-		itemSearchText: _elm_lang$core$Basics$identity,
-		itemView: _elm_lang$html$Html$text,
-		onStateChanged: function (_p2) {
-			return _user$project$Model$commonMsg.noOp;
-		},
-		noOp: _user$project$Model$commonMsg.noOp,
-		onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
-	};
-};
+var _user$project$Todo_View$createReminderMenuConfig = F2(
+	function (form, model) {
+		return {
+			onSelect: function (_p0) {
+				return _user$project$Model$commonMsg.noOp;
+			},
+			isSelected: function (_p1) {
+				return false;
+			},
+			itemKey: _elm_lang$core$Basics$identity,
+			itemSearchText: _elm_lang$core$Basics$identity,
+			itemView: _elm_lang$html$Html$text,
+			onStateChanged: function (_p2) {
+				return _user$project$Model$OnTodoMsg(
+					A2(_user$project$Todo_Msg$OnEditReminderMenuStateChanged, form, _p2));
+			},
+			noOp: _user$project$Model$commonMsg.noOp,
+			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
+		};
+	});
 var _user$project$Todo_View$reminderPopup = F2(
 	function (form, model) {
 		return A3(
@@ -30,7 +32,7 @@ var _user$project$Todo_View$reminderPopup = F2(
 				}
 			},
 			_user$project$Menu$initState,
-			_user$project$Todo_View$createReminderMenuConfig(model));
+			A2(_user$project$Todo_View$createReminderMenuConfig, form, model));
 	});
 var _user$project$Todo_View$contextMenu = _user$project$Todo_View_Menu$context;
 var _user$project$Todo_View$projectMenu = _user$project$Todo_View_Menu$project;

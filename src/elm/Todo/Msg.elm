@@ -1,5 +1,6 @@
 module Todo.Msg exposing (..)
 
+import Menu
 import Notification exposing (Response)
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -8,6 +9,7 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Todo.ReminderForm
 
 
 type Msg
@@ -19,3 +21,4 @@ type Msg
     | GotoRunning
     | UpdateTimeTracker
     | Upsert Todo.Model
+    | OnEditReminderMenuStateChanged Todo.ReminderForm.Model Menu.State

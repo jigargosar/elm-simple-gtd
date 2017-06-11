@@ -149,6 +149,11 @@ var _user$project$Todo_Main$update = F3(
 	function (andThenUpdate, now, todoMsg) {
 		var _p5 = todoMsg;
 		switch (_p5.ctor) {
+			case 'OnEditReminderMenuStateChanged':
+				return _user$project$Todo_Main$map(
+					_user$project$Model$setEditMode(
+						_user$project$EditMode$EditTodoReminder(
+							A2(_user$project$Todo_ReminderForm$setMenuState, _p5._1, _p5._0))));
 			case 'ToggleRunning':
 				return A2(
 					_user$project$Todo_Main$mapOver,

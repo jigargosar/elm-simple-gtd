@@ -1,6 +1,7 @@
 port module Todo.Main exposing (..)
 
 import Document
+import EditMode
 import Entity
 import Ext.Record as Record exposing (set)
 import Model
@@ -68,7 +69,12 @@ subscriptions m =
 update andThenUpdate now todoMsg =
     case todoMsg of
         OnEditReminderMenuStateChanged form menuState ->
-            Todo.ReminderForm.set menuState form
+            map
+                (Model.setEditMode
+                    (Todo.ReminderForm.setMenuState menuState form
+                        |> EditMode.EditTodoReminder
+                    )
+                )
 
         ToggleRunning todoId ->
             mapOver timeTracker (Tracker.toggleStartStop todoId now)

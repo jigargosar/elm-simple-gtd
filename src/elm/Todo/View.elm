@@ -273,13 +273,23 @@ projectProjectButton vm =
 
 
 editScheduleButton vm =
-    Material.smallIconButton "schedule"
-        [ id ("edit-schedule-buton-" ++ vm.key)
-        , class ""
-        , vm.tabindexAV
-
-        {- , onClick vm.showProjectDropdownMsg -}
-        ]
+    let
+        reminderVM =
+            vm.reminder
+    in
+        div [ class "layout horizontal center-center", onClick reminderVM.startEditingMsg ]
+            [ div
+                [ classList
+                    [ "overdue" => reminderVM.isOverDue
+                    , "reminder-text" => True
+                    ]
+                ]
+                [ reminderVM.displayText |> text ]
+            , Material.smallIconButton "schedule"
+                [ id ("edit-schedule-buton-" ++ vm.key)
+                , vm.tabindexAV
+                ]
+            ]
 
 
 type alias ReminderViewModel =

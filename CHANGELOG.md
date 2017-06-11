@@ -1,3 +1,6 @@
+## Upcoming
+* edit reminder: add menu items for later, tomorrow, etc.
+
 ## v0.18.0 - 2017-06-10
 * [feature] add time tracker for currently working task 
 

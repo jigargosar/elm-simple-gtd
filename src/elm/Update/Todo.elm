@@ -16,6 +16,9 @@ import Maybe.Extra as Maybe
 import Todo.TimeTracker
 
 
+port showTodoReminderNotification : Model.TodoNotification -> Cmd msg
+
+
 port notificationClicked : (Model.TodoNotificationEvent -> msg) -> Sub msg
 
 

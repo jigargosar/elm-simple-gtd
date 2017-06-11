@@ -35,9 +35,6 @@ import Update.Todo
 import View
 
 
-port showNotification : TodoNotification -> Cmd msg
-
-
 port closeNotification : String -> Cmd msg
 
 
@@ -429,7 +426,7 @@ sendNotifications =
 showTodoNotificationCmd ( ( todo, model ), cmd ) =
     let
         cmds =
-            [ cmd, createTodoNotification todo |> showNotification, startAlarm () ]
+            [ cmd, createTodoNotification todo |> Update.Todo.showTodoReminderNotification, startAlarm () ]
     in
         model ! cmds
 

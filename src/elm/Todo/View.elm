@@ -16,6 +16,7 @@ import Json.Decode
 import Json.Encode
 import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
+import Material
 import Maybe.Extra as Maybe
 import Model
 import Model exposing (Msg, commonMsg)
@@ -229,8 +230,10 @@ defaultView vm =
         [ class "layout horizontal end-justified"
         ]
         [ reminderView vm
-        , div [ style [ "padding" => "0 8px" ] ] [ contextButton vm ]
-        , div [ style [ "padding" => "0 8px" ] ] [ projectButton vm ]
+
+        {- , div [ style [ "padding" => "0 8px" ] ] [ editScheduleButton vm ] -}
+        , div [ style [ "padding" => "0 8px" ] ] [ editContextButton vm ]
+        , div [ style [ "padding" => "0 8px" ] ] [ projectProjectButton vm ]
         ]
     ]
 
@@ -246,7 +249,7 @@ doneIconButton vm =
         []
 
 
-contextButton vm =
+editContextButton vm =
     Paper.button
         [ id ("edit-context-buton-" ++ vm.key)
         , style [ "height" => "24px" ]
@@ -258,7 +261,7 @@ contextButton vm =
         ]
 
 
-projectButton vm =
+projectProjectButton vm =
     Paper.button
         [ id ("edit-project-buton-" ++ vm.key)
         , style [ "height" => "24px" ]
@@ -267,6 +270,19 @@ projectButton vm =
         , onClick vm.showProjectDropdownMsg
         ]
         [ div [ class "title primary-text-color" ] [ text vm.projectDisplayName ]
+        ]
+
+
+editScheduleButton vm =
+    Paper.button
+        [ id ("edit-schedule-buton-" ++ vm.key)
+        , style [ "height" => "24px" ]
+        , class "small padding-0 margin-0 shrink"
+        , vm.tabindexAV
+
+        {- , onClick vm.showProjectDropdownMsg -}
+        ]
+        [ Material.iconButton "clock" []
         ]
 
 

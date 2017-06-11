@@ -1,5 +1,8 @@
-## Upcoming
+## Later
 * edit reminder: add menu items for later, tomorrow, etc.
+
+## Upcoming
+* [fix] material font icons http url is not loading, use https. 
 
 ## v0.18.0 - 2017-06-10
 * [feature] add time tracker for currently working task 

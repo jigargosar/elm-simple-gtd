@@ -119,13 +119,33 @@ async function boot() {
 
     app.ports["positionPopupMenu"].subscribe((ofSelector) => {
         requestAnimationFrame(() => {
-            $("#popup-menu").position({
+            const $popup = $("#popup-menu").position({
                 my: "right top",
                 at: "right top",
                 of: $(ofSelector),
                 within: ".fullbleed-capture",
                 collision: "fit"
-            }).find(`[tabindex="0"]`).first().focus()
+            })
+            const $focusable = $popup.find(`:focusable`)
+            const $first = $focusable.first()
+            const $last = $focusable.last()
+            $first.focus()
+            $first.on("keydown", function (e) {
+                console.log(e.shiftKey, e)
+                if(e.key === "Tab" && e.shiftKey){
+                    e.preventDefault()
+                    e.stopPropagation()
+                    $last.focus()
+                }
+            })
+
+            $last.on("keydown", function (e) {
+                if(e.key === "Tab" && !e.shiftKey){
+                    e.preventDefault()
+                    e.stopPropagation()
+                    $first.focus()
+                }
+            })
         })
     })
 

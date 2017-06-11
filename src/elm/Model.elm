@@ -72,6 +72,7 @@ type TodoMsg
     | OnTodoTogglePaused
     | OnRunningTodoNotificationClicked NotificationClickResponse
     | OnGotoRunningTodo
+    | OnUpdateTodoTimeTracker
 
 
 type Msg
@@ -155,6 +156,10 @@ onTodoTogglePaused =
 
 onGotoRunningTodo =
     OnGotoRunningTodo |> OnTodoMsg
+
+
+onUpdateTodoTimeTracker =
+    OnUpdateTodoTimeTracker |> OnTodoMsg
 
 
 commonMsg : CommonMsg.Helper Msg

@@ -51,9 +51,6 @@ import View
 port showNotification : TodoNotification -> Cmd msg
 
 
-port showRunningTodoNotification : NotificationRequest -> Cmd msg
-
-
 port closeNotification : String -> Cmd msg
 
 
@@ -441,7 +438,7 @@ setDomFocusToFocusInEntityCmd =
 onUpdateNow now =
     Return.map (Model.setNow now)
         >> sendNotifications
-        >> Return.andThen (updateTodoTimeTracker now)
+        >> andThenUpdate Model.onUpdateTodoTimeTracker
 
 
 sendNotifications =
@@ -462,37 +459,6 @@ triggerAlarmCmd bool =
         startAlarm ()
     else
         Cmd.none
-
-
-maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model =
-    let
-        createRequest info todo =
-            let
-                todoId =
-                    Document.getId todo
-            in
-                { tag = todoId
-                , title = "You are currently working on"
-                , body = Todo.getText todo
-                , actions =
-                    [ { title = "Stop", action = "stop" }
-                    , { title = "Mark Done", action = "mark-done" }
-                    ]
-                , data = { id = todoId, notificationClickedPort = "onRunningTodoNotificationClicked" }
-                }
-    in
-        maybeTrackerInfo
-            ?+> (\info -> Model.findTodoById info.todoId model ?|> createRequest info)
-
-
-updateTodoTimeTracker now model =
-    Record.overT2 Model.timeTracker (Todo.TimeTracker.updateNextAlarmAt now) model
-        |> (\( maybeTrackerInfo, model ) ->
-                ( model
-                , maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model
-                    |> maybeMapToCmd showRunningTodoNotification
-                )
-           )
 
 
 maybeMapToCmd fn =

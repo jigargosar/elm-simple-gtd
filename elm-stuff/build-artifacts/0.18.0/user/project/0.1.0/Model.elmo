@@ -1352,6 +1352,7 @@ var _user$project$Model$TodoNotificationEvent = F2(
 	function (a, b) {
 		return {action: a, data: b};
 	});
+var _user$project$Model$OnUpdateTodoTimeTracker = {ctor: 'OnUpdateTodoTimeTracker'};
 var _user$project$Model$OnGotoRunningTodo = {ctor: 'OnGotoRunningTodo'};
 var _user$project$Model$OnRunningTodoNotificationClicked = function (a) {
 	return {ctor: 'OnRunningTodoNotificationClicked', _0: a};
@@ -1408,6 +1409,7 @@ var _user$project$Model$keyboardCombos = {
 	}
 };
 var _user$project$Model$onGotoRunningTodo = _user$project$Model$OnTodoMsg(_user$project$Model$OnGotoRunningTodo);
+var _user$project$Model$onUpdateTodoTimeTracker = _user$project$Model$OnTodoMsg(_user$project$Model$OnUpdateTodoTimeTracker);
 var _user$project$Model$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {
 		return {ctor: 'OnLaunchBarMsgWithNow', _0: a, _1: b};

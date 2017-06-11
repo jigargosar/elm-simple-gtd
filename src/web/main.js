@@ -119,18 +119,45 @@ async function boot() {
 
     app.ports["positionPopupMenu"].subscribe((ofSelector) => {
         requestAnimationFrame(() => {
-            const $popup = $("#popup-menu").position({
+            const $popup = $("#popup-menu")
+            $popup.position({
                 my: "right top",
                 at: "right top",
                 of: $(ofSelector),
                 within: ".fullbleed-capture",
                 collision: "fit"
             })
-            const $focusable = $popup.find(`:focusable`)
-            const $first = $focusable.first()
-            const $last = $focusable.last()
-            $first.focus()
-            $first.on("keydown", function (e) {
+            $popup.find(":focusable").first().focus()
+
+            $popup.on("keydown", ":focusable", function (e) {
+                if(e.key !== "Tab") return
+                const $focusables = $popup.find(":focusable")
+
+                const first = $focusables.first().get(0)
+                const last = $focusables.last().get(0)
+                
+                if(e.shiftKey){
+
+                    if(this === first){
+                        e.preventDefault()
+                        e.stopPropagation()
+                        last.focus()
+                    }
+                }
+                else {
+
+                    if(this === last){
+                        e.preventDefault()
+                        e.stopPropagation()
+                        first.focus()
+                    }
+                }
+
+
+            })
+
+            // todo: can't trap since focusable list will keep changing.
+            /*$first.on("keydown", function (e) {
                 if(e.key === "Tab" && e.shiftKey){
                     e.preventDefault()
                     e.stopPropagation()
@@ -144,7 +171,7 @@ async function boot() {
                     e.stopPropagation()
                     $first.focus()
                 }
-            })
+            })*/
         })
     })
 

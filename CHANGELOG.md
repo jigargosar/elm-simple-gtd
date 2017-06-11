@@ -4,7 +4,7 @@
 ## Upcoming
 * fix running todo being canceled on update
 * edit reminder: get rid of polymer. so that we can add menu and edit date time form
-
+* trap focus in popup menu: fix bug where arrow keys were not moving menu's highlighted item.
 
 ## v0.18.4 - 2017-06-11
 * revert edit reminder incomplete commits: so as to fix running todo bug.

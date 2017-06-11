@@ -1,7 +1,7 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
-## Upcoming
+## v0.18.2 - 2017-06-11
 * [fix] material font icons http url is not loading, use https. 
 
 ## v0.18.0 - 2017-06-10

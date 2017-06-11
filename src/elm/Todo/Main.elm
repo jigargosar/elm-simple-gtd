@@ -75,8 +75,8 @@ update andThenUpdate now todoMsg =
                     |> EditMode.EditTodoReminder
                     >> Model.setEditMode
                 )
-                >> DomPorts.autoFocusInputCmd
 
+        --                >> DomPorts.autoFocusInputCmd
         ToggleRunning todoId ->
             mapOver timeTracker (Tracker.toggleStartStop todoId now)
 

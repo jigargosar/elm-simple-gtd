@@ -17,4 +17,10 @@ icon name =
 
 
 iconButton name attributes =
-    a ([ class "btn-flat btn-floating" ] ++ attributes) [ i [ class "material-icons" ] [ text name ] ]
+    a ([ class "btn-flat btn-floating" ] ++ attributes)
+        [ i [ class "material-icons" ] [ text name ] ]
+
+
+smallIconButton name attributes =
+    a ([ class "btn-flat btn-floating x24 " ] ++ attributes)
+        [ i [ class "material-icons" ] [ text name ] ]

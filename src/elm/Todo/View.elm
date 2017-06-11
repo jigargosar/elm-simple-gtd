@@ -230,8 +230,7 @@ defaultView vm =
         [ class "layout horizontal end-justified"
         ]
         [ reminderView vm
-
-        {- , div [ style [ "padding" => "0 8px" ] ] [ editScheduleButton vm ] -}
+        , div [ style [ "margin" => "0 8px" ] ] [ editScheduleButton vm ]
         , div [ style [ "padding" => "0 8px" ] ] [ editContextButton vm ]
         , div [ style [ "padding" => "0 8px" ] ] [ projectProjectButton vm ]
         ]
@@ -274,15 +273,12 @@ projectProjectButton vm =
 
 
 editScheduleButton vm =
-    Paper.button
+    Material.smallIconButton "schedule"
         [ id ("edit-schedule-buton-" ++ vm.key)
-        , style [ "height" => "24px" ]
-        , class "small padding-0 margin-0 shrink"
+        , class ""
         , vm.tabindexAV
 
         {- , onClick vm.showProjectDropdownMsg -}
-        ]
-        [ Material.iconButton "clock" []
         ]
 
 

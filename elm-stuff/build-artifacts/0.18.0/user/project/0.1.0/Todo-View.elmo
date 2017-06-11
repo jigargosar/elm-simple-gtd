@@ -154,37 +154,21 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 	});
 var _user$project$Todo_View$editScheduleButton = function (vm) {
 	return A2(
-		_edvail$elm_polymer$Polymer_Paper$button,
+		_user$project$Material$smallIconButton,
+		'schedule',
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$id(
 				A2(_elm_lang$core$Basics_ops['++'], 'edit-schedule-buton-', vm.key)),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$style(
-					{
-						ctor: '::',
-						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'height', '24px'),
-						_1: {ctor: '[]'}
-					}),
+				_0: _elm_lang$html$Html_Attributes$class(''),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
-					_1: {
-						ctor: '::',
-						_0: vm.tabindexAV,
-						_1: {ctor: '[]'}
-					}
+					_0: vm.tabindexAV,
+					_1: {ctor: '[]'}
 				}
 			}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_user$project$Material$iconButton,
-				'clock',
-				{ctor: '[]'}),
-			_1: {ctor: '[]'}
 		});
 };
 var _user$project$Todo_View$projectProjectButton = function (vm) {
@@ -763,14 +747,14 @@ var _user$project$Todo_View$defaultView = function (vm) {
 								_0: _elm_lang$html$Html_Attributes$style(
 									{
 										ctor: '::',
-										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'margin', '0 8px'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
-								_0: _user$project$Todo_View$editContextButton(vm),
+								_0: _user$project$Todo_View$editScheduleButton(vm),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -789,10 +773,30 @@ var _user$project$Todo_View$defaultView = function (vm) {
 								},
 								{
 									ctor: '::',
-									_0: _user$project$Todo_View$projectProjectButton(vm),
+									_0: _user$project$Todo_View$editContextButton(vm),
 									_1: {ctor: '[]'}
 								}),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(
+											{
+												ctor: '::',
+												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _user$project$Todo_View$projectProjectButton(vm),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}
 					}
 				}),

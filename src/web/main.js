@@ -125,7 +125,7 @@ async function boot() {
                 of: $(ofSelector),
                 within: ".fullbleed-capture",
                 collision: "fit"
-            }).find(`[tabindex="0"]`).focus()
+            }).find(`[tabindex="0"]`).first().focus()
         })
     })
 

@@ -28,10 +28,14 @@ var _user$project$Todo_View$reminderPopup = F2(
 				_1: {
 					ctor: '::',
 					_0: 'i2',
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: 'aa',
+						_1: {ctor: '[]'}
+					}
 				}
 			},
-			_user$project$Menu$initState,
+			form.menuState,
 			A2(_user$project$Todo_View$createReminderMenuConfig, form, model));
 	});
 var _user$project$Todo_View$contextMenu = _user$project$Todo_View_Menu$context;
@@ -194,11 +198,16 @@ var _user$project$Todo_View$editScheduleButton = function (vm) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('layout horizontal center-center'),
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'edit-schedule-button-', vm.key)),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(reminderVM.startEditingMsg),
-				_1: {ctor: '[]'}
+				_0: _elm_lang$html$Html_Attributes$class('layout horizontal center-center'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(reminderVM.startEditingMsg),
+					_1: {ctor: '[]'}
+				}
 			}
 		},
 		{
@@ -231,13 +240,8 @@ var _user$project$Todo_View$editScheduleButton = function (vm) {
 					'schedule',
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$id(
-							A2(_elm_lang$core$Basics_ops['++'], 'edit-schedule-buton-', vm.key)),
-						_1: {
-							ctor: '::',
-							_0: vm.tabindexAV,
-							_1: {ctor: '[]'}
-						}
+						_0: vm.tabindexAV,
+						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
 			}
@@ -249,7 +253,7 @@ var _user$project$Todo_View$projectProjectButton = function (vm) {
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$id(
-				A2(_elm_lang$core$Basics_ops['++'], 'edit-project-buton-', vm.key)),
+				A2(_elm_lang$core$Basics_ops['++'], 'edit-project-button-', vm.key)),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$style(
@@ -296,7 +300,7 @@ var _user$project$Todo_View$editContextButton = function (vm) {
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$id(
-				A2(_elm_lang$core$Basics_ops['++'], 'edit-context-buton-', vm.key)),
+				A2(_elm_lang$core$Basics_ops['++'], 'edit-context-button-', vm.key)),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$style(
@@ -362,6 +366,114 @@ var _user$project$Todo_View$doneIconButton = function (vm) {
 			}
 		},
 		{ctor: '[]'});
+};
+var _user$project$Todo_View$defaultView = function (vm) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class(''),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Todo_View$doneIconButton(vm),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$span,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('display-text'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(vm.displayText),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('layout horizontal end-justified'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'margin', '0 8px'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$Todo_View$editScheduleButton(vm),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _user$project$Todo_View$editContextButton(vm),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
+											ctor: '::',
+											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _user$project$Todo_View$projectProjectButton(vm),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {ctor: '[]'}
+		}
+	};
 };
 var _user$project$Todo_View$getDisplayText = function (todo) {
 	var trimAndReplaceEmptyWithDefault = A2(
@@ -763,118 +875,6 @@ var _user$project$Todo_View$reminderView = function (vm) {
 				_1: {ctor: '[]'}
 			}
 		});
-};
-var _user$project$Todo_View$defaultView = function (vm) {
-	return {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class(''),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: _user$project$Todo_View$doneIconButton(vm),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('display-text'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(vm.displayText),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('layout horizontal end-justified'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _user$project$Todo_View$reminderView(vm),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$style(
-									{
-										ctor: '::',
-										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'margin', '0 8px'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _user$project$Todo_View$editScheduleButton(vm),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$style(
-										{
-											ctor: '::',
-											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _user$project$Todo_View$editContextButton(vm),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$style(
-											{
-												ctor: '::',
-												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _user$project$Todo_View$projectProjectButton(vm),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}),
-			_1: {ctor: '[]'}
-		}
-	};
 };
 var _user$project$Todo_View$init = function (vm) {
 	return A2(

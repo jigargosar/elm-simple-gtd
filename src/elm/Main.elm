@@ -228,7 +228,7 @@ update msg =
 
                 StartEditingReminder todo ->
                     Return.map (Model.startEditingReminder todo)
-                        >> autoFocusInputCmd
+                        >> Return.command (positionScheduleMenuCmd todo)
 
                 StartEditingContext todo ->
                     Return.map (Model.startEditingTodoContext todo)
@@ -551,11 +551,15 @@ firebaseSetupOnDisconnectCmd model =
 
 
 positionContextMenuCmd todo =
-    DomPorts.positionPopupMenu ("#edit-context-buton-" ++ Document.getId todo)
+    DomPorts.positionPopupMenu ("#edit-context-button-" ++ Document.getId todo)
 
 
 positionProjectMenuCmd todo =
-    DomPorts.positionPopupMenu ("#edit-project-buton-" ++ Document.getId todo)
+    DomPorts.positionPopupMenu ("#edit-project-button-" ++ Document.getId todo)
+
+
+positionScheduleMenuCmd todo =
+    DomPorts.positionPopupMenu ("#edit-schedule-button-" ++ Document.getId todo)
 
 
 startSyncWithFirebase user =

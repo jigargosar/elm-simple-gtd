@@ -1,6 +1,7 @@
 port module Todo.Main exposing (..)
 
 import Document
+import DomPorts
 import EditMode
 import Entity
 import Ext.Record as Record exposing (set)
@@ -75,6 +76,7 @@ update andThenUpdate now todoMsg =
                         |> EditMode.EditTodoReminder
                     )
                 )
+                >> DomPorts.autoFocusInputCmd
 
         ToggleRunning todoId ->
             mapOver timeTracker (Tracker.toggleStartStop todoId now)

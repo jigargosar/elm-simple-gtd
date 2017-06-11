@@ -231,8 +231,10 @@ defaultView vm =
     , div
         [ class "layout horizontal end-justified"
         ]
-        [ reminderView vm
-        , div [ style [ "margin" => "0 8px" ] ] [ editScheduleButton vm ]
+        [ {- reminderView vm
+             ,
+          -}
+          div [ style [ "margin" => "0 8px" ] ] [ editScheduleButton vm ]
         , div [ style [ "padding" => "0 8px" ] ] [ editContextButton vm ]
         , div [ style [ "padding" => "0 8px" ] ] [ projectProjectButton vm ]
         ]
@@ -252,7 +254,7 @@ doneIconButton vm =
 
 editContextButton vm =
     Paper.button
-        [ id ("edit-context-buton-" ++ vm.key)
+        [ id ("edit-context-button-" ++ vm.key)
         , style [ "height" => "24px" ]
         , class "small padding-0 margin-0 shrink"
         , vm.tabindexAV
@@ -264,7 +266,7 @@ editContextButton vm =
 
 projectProjectButton vm =
     Paper.button
-        [ id ("edit-project-buton-" ++ vm.key)
+        [ id ("edit-project-button-" ++ vm.key)
         , style [ "height" => "24px" ]
         , class "small padding-0 margin-0 shrink"
         , vm.tabindexAV
@@ -279,7 +281,11 @@ editScheduleButton vm =
         reminderVM =
             vm.reminder
     in
-        div [ class "layout horizontal center-center", onClick reminderVM.startEditingMsg ]
+        div
+            [ id ("edit-schedule-button-" ++ vm.key)
+            , class "layout horizontal center-center"
+            , onClick reminderVM.startEditingMsg
+            ]
             [ div
                 [ classList
                     [ "overdue" => reminderVM.isOverDue
@@ -288,8 +294,7 @@ editScheduleButton vm =
                 ]
                 [ reminderVM.displayText |> text ]
             , Material.smallIconButton "schedule"
-                [ id ("edit-schedule-buton-" ++ vm.key)
-                , vm.tabindexAV
+                [ vm.tabindexAV
                 ]
             ]
 
@@ -488,8 +493,8 @@ contextMenu =
 
 
 reminderPopup form model =
-    Menu.view ([ "i1", "i2" ])
-        Menu.initState
+    Menu.view ([ "i1", "i2", "aa" ])
+        form.menuState
         (createReminderMenuConfig form model)
 
 

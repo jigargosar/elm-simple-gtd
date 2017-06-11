@@ -150,10 +150,21 @@ var _user$project$Todo_Main$update = F3(
 		var _p5 = todoMsg;
 		switch (_p5.ctor) {
 			case 'OnEditReminderMenuStateChanged':
-				return _user$project$Todo_Main$map(
-					_user$project$Model$setEditMode(
-						_user$project$EditMode$EditTodoReminder(
-							A2(_user$project$Todo_ReminderForm$setMenuState, _p5._1, _p5._0))));
+				var _p9 = _p5._1;
+				var _p8 = _p5._0;
+				var _p6 = A2(
+					_elm_lang$core$Debug$log,
+					'form,menuState',
+					{ctor: '_Tuple2', _0: _p8, _1: _p9});
+				return function (_p7) {
+					return _user$project$DomPorts$autoFocusInputCmd(
+						A2(
+							_user$project$Todo_Main$map,
+							_user$project$Model$setEditMode(
+								_user$project$EditMode$EditTodoReminder(
+									A2(_user$project$Todo_ReminderForm$setMenuState, _p9, _p8))),
+							_p7));
+				};
 			case 'ToggleRunning':
 				return A2(
 					_user$project$Todo_Main$mapOver,
@@ -172,36 +183,36 @@ var _user$project$Todo_Main$update = F3(
 			case 'StopRunning':
 				return A2(_user$project$Todo_Main$mapSet, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none);
 			case 'GotoRunning':
-				return function (_p6) {
+				return function (_p10) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnSetDomFocusToFocusInEntity,
-						A2(_user$project$Todo_Main$map, _user$project$Todo_Main$gotoRunningTodo, _p6));
+						A2(_user$project$Todo_Main$map, _user$project$Todo_Main$gotoRunningTodo, _p10));
 				};
 			case 'UpdateTimeTracker':
 				return _user$project$Todo_Main$updateTimeTracker(now);
 			case 'Upsert':
-				var _p7 = _p5._0;
+				var _p11 = _p5._0;
 				return _user$project$Todo_Main$map(
 					function (model) {
-						var shouldDisableTracker = _user$project$Todo$isNotActive(_p7) || A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p7, model.timeTracker);
+						var shouldDisableTracker = _user$project$Todo$isNotActive(_p11) || A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p11, model.timeTracker);
 						return shouldDisableTracker ? A3(_user$project$Ext_Record$set, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
 					});
 			default:
-				var _p10 = _p5._0;
-				var todoId = _p10.data.id;
-				return function (_p8) {
+				var _p14 = _p5._0;
+				var todoId = _p14.data.id;
+				return function (_p12) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnCloseNotification(todoId),
 						function () {
-							var _p9 = _p10.action;
-							if (_p9 === 'stop') {
+							var _p13 = _p14.action;
+							if (_p13 === 'stop') {
 								return andThenUpdate(_user$project$Model$onTodoStopRunning);
 							} else {
 								return andThenUpdate(_user$project$Model$onGotoRunningTodo);
 							}
-						}()(_p8));
+						}()(_p12));
 				};
 		}
 	});

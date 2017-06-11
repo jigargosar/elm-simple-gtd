@@ -247,8 +247,16 @@ var _user$project$Main$update = function (msg) {
 					case 'OnCommonMsg':
 						return _user$project$CommonMsg$update(_p16._0);
 					case 'OnPouchDBChange':
-						return _Fresheyeball$elm_return$Return$map(
-							A2(_user$project$Model$upsertEncodedDocOnPouchDBChange, _p16._0, _p16._1));
+						return _user$project$Ext_Return$andThenMaybe(
+							A2(
+								_user$project$Ext_Function_Infix_ops['>>?'],
+								A2(
+									_user$project$Ext_Function_Infix_ops['>>?'],
+									A2(_user$project$Model$upsertEncodedDocOnPouchDBChange, _p16._0, _p16._1),
+									_elm_lang$core$Tuple$mapFirst(_user$project$Model$OnEntityUpsert)),
+								_elm_lang$core$Basics$uncurry(_user$project$Main$update)));
+					case 'OnEntityUpsert':
+						return _elm_lang$core$Basics$identity;
 					case 'OnFirebaseChange':
 						return _Fresheyeball$elm_return$Return$effect_(
 							A2(_user$project$Model$upsertEncodedDocOnFirebaseChange, _p16._0, _p16._1));

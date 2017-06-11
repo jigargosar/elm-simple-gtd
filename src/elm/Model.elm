@@ -9,7 +9,7 @@ import Entity exposing (Entity)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Ext.List as List
 import Ext.Predicate
-import Ext.Record as Record exposing (maybeOver, maybeSetIn, over, overReturn, set)
+import Ext.Record as Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
 import Firebase exposing (DeviceId)
 import Keyboard.Combo exposing (combo1, combo2, combo3)
 import Keyboard.Combo as Combo
@@ -47,6 +47,7 @@ import Todo.TimeTracker
 type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnPouchDBChange String D.Value
+    | OnEntityUpsert Entity
     | OnFirebaseChange String D.Value
     | OnUserChanged Firebase.User
     | OnFCMTokenChanged Firebase.FCMToken
@@ -833,16 +834,17 @@ setTodoStoreFromTuple tuple model =
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            over todoStore (Store.upsertOnPouchDBChange encodedEntity)
+            maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity) >>? Tuple.mapFirst Entity.TodoEntity
 
         "project-db" ->
-            over projectStore (Store.upsertOnPouchDBChange encodedEntity)
+            maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity) >>? Tuple.mapFirst Entity.ProjectEntity
 
         "context-db" ->
-            over contextStore (Store.upsertOnPouchDBChange encodedEntity)
+            maybeOverT2 contextStore (Store.upsertOnPouchDBChange encodedEntity)
+                >>? Tuple.mapFirst Entity.ContextEntity
 
         _ ->
-            identity
+            (\_ -> Nothing)
 
 
 upsertEncodedDocOnFirebaseChange : String -> E.Value -> Model -> Cmd msg

@@ -54,6 +54,15 @@ var _user$project$Ext_Record$overT2 = F3(
 			smallFT2(
 				A2(_user$project$Ext_Record$get, field, b)));
 	});
+var _user$project$Ext_Record$maybeOverT2 = F3(
+	function (field, smallFT2, b) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			smallFT2(
+				A2(_user$project$Ext_Record$get, field, b)),
+			_elm_lang$core$Tuple$mapSecond(
+				A2(_user$project$Ext_Record$setIn, b, field)));
+	});
 var _user$project$Ext_Record$overReturn = F3(
 	function (field, smallFT2, b) {
 		return A2(

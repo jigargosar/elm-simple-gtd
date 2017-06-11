@@ -212,9 +212,10 @@ upsertInPouchDbOnFirebaseChange jsonValue store =
         ?= Cmd.none
 
 
-upsertOnPouchDBChange : D.Value -> Store x -> Store x
+upsertOnPouchDBChange : D.Value -> Store x -> Maybe ( Document x, Store x )
 upsertOnPouchDBChange encodedDoc store =
-    decode encodedDoc store ?|> upsertDocOnPouchDBChange # store ?= store
+    decode encodedDoc store
+        ?|> (\doc -> ( doc, upsertDocOnPouchDBChange doc store ))
 
 
 upsertDocOnPouchDBChange doc store =

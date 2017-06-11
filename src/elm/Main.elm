@@ -112,7 +112,14 @@ update msg =
                     CommonMsg.update msg
 
                 OnPouchDBChange dbName encodedDoc ->
-                    Return.map (Model.upsertEncodedDocOnPouchDBChange dbName encodedDoc)
+                    Return.andThenMaybe
+                        (Model.upsertEncodedDocOnPouchDBChange dbName encodedDoc
+                            >>? Tuple.mapFirst OnEntityUpsert
+                            >>? uncurry update
+                        )
+
+                OnEntityUpsert entity ->
+                    identity
 
                 OnFirebaseChange dbName encodedDoc ->
                     Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)

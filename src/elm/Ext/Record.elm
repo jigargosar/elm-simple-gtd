@@ -1,4 +1,4 @@
-module Ext.Record exposing (init, get, set, setIn, over, overT2, overReturn, maybeSet, maybeSetIn, maybeOver)
+module Ext.Record exposing (init, get, set, setIn, over, overT2, maybeOverT2, overReturn, maybeSet, maybeSetIn, maybeOver)
 
 import Return
 import Toolkit.Operators exposing (..)
@@ -51,6 +51,12 @@ overT2 field smallFT2 b =
     get field b
         |> smallFT2
         |> Tuple.mapSecond (setIn b field)
+
+
+maybeOverT2 field smallFT2 b =
+    get field b
+        |> smallFT2
+        ?|> Tuple.mapSecond (setIn b field)
 
 
 overReturn : Field small big -> (small -> Return.Return msg small) -> big -> Return.Return msg big

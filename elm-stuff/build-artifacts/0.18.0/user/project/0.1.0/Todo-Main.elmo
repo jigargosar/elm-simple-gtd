@@ -186,7 +186,7 @@ var _user$project$Todo_Main$update = F3(
 				var _p8 = _p5._0;
 				return _user$project$Todo_Main$map(
 					function (model) {
-						var isTrackerTodoInactive = _user$project$Todo$isNotActive(_p8) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p8, model.timeTracker);
+						var isTrackerTodoInactive = _user$project$Todo$isInActive(_p8) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p8, model.timeTracker);
 						return isTrackerTodoInactive ? A3(_user$project$Ext_Record$set, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
 					});
 			default:

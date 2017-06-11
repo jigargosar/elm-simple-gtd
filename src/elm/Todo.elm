@@ -105,11 +105,11 @@ isDeleted =
 
 
 isActive =
+    isInActive >> not
+
+
+isInActive =
     anyPass [ isDeleted, isDone ]
-
-
-isNotActive =
-    isActive >> not
 
 
 getProjectId =

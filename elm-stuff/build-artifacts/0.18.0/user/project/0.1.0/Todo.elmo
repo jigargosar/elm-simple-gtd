@@ -248,7 +248,7 @@ var _user$project$Todo$getDeleted = function (_) {
 	return _.deleted;
 };
 var _user$project$Todo$isDeleted = _user$project$Todo$getDeleted;
-var _user$project$Todo$isActive = _user$project$Ext_Function$anyPass(
+var _user$project$Todo$isInActive = _user$project$Ext_Function$anyPass(
 	{
 		ctor: '::',
 		_0: _user$project$Todo$isDeleted,
@@ -258,8 +258,8 @@ var _user$project$Todo$isActive = _user$project$Ext_Function$anyPass(
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$Todo$isNotActive = function (_p13) {
-	return !_user$project$Todo$isActive(_p13);
+var _user$project$Todo$isActive = function (_p13) {
+	return !_user$project$Todo$isInActive(_p13);
 };
 var _user$project$Todo$isNotDeleted = function (_p14) {
 	return !_user$project$Todo$getDeleted(_p14);

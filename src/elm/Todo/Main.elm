@@ -101,7 +101,7 @@ update andThenUpdate now todoMsg =
                 (\model ->
                     let
                         isTrackerTodoInactive =
-                            Todo.isNotActive todo
+                            Todo.isInActive todo
                                 && Tracker.isTrackingTodo todo model.timeTracker
                     in
                         if isTrackerTodoInactive then

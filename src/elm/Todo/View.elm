@@ -368,78 +368,6 @@ createReminderViewModel vc todo =
         }
 
 
-reminderView : TodoViewModel -> Html Msg
-reminderView vm =
-    let
-        reminderVM =
-            vm.reminder
-
-        reminderTrigger =
-            if reminderVM.displayText == "" then
-                iconButton "alarm-add" [ vm.tabindexAV, slotDropdownTrigger, onClick reminderVM.startEditingMsg ]
-            else
-                dropdownTrigger vm
-                    (div
-                        [ onClick reminderVM.startEditingMsg
-                        , classList
-                            [ "reminder-text" => True
-                            , "overdue" => reminderVM.isOverDue
-                            ]
-                        ]
-                        [ icon "av:snooze" [ classList [ "display-none" => not reminderVM.isSnoozed ] ]
-                        , text reminderVM.displayText
-                        ]
-                    )
-
-        menuButton =
-            Paper.menuButton
-                [ boolProperty "opened" reminderVM.isDropdownOpen
-                , boolProperty "dynamicAlign" True
-                , boolProperty "stopKeyboardEventPropagation" True
-                ]
-                [ reminderTrigger
-                , div
-                    [ class "static"
-                    , attribute "slot" "dropdown-content"
-                    ]
-                    [ div [ class "font-subhead" ] [ text "Select date and time" ]
-                    , Paper.input
-                        [ type_ "date"
-                        , classList [ "auto-focus" => reminderVM.isDropdownOpen ]
-                        , labelA "Date"
-                        , value reminderVM.date
-                        , boolProperty "stopKeyboardEventPropagation" True
-                        , onChange reminderVM.onDateChanged
-                        ]
-                        []
-                    , Paper.input
-                        [ type_ "time"
-                        , labelA "Time"
-                        , value reminderVM.time
-                        , boolProperty "stopKeyboardEventPropagation" True
-                        , onChange reminderVM.onTimeChanged
-                        ]
-                        []
-                    , defaultOkCancelButtons
-                    ]
-                ]
-
-        timeToolTip =
-            Paper.tooltip [ intProperty "offset" 0 ]
-                (if reminderVM.dueAtToolTipText /= "" then
-                    [ div [ class "tooltip" ]
-                        [ div [ class "font-body1 font-nowrap" ] [ text reminderVM.dueAtToolTipText ]
-                        , div [ class "font-caption" ] [ text reminderVM.dayDiffInWords ]
-                        ]
-                    ]
-                 else
-                    []
-                )
-    in
-        div [ style [ "position" => "relative" ] ]
-            [ menuButton, timeToolTip ]
-
-
 type alias EditViewModel =
     { todo : { text : Todo.Text }
     , onTodoTextChanged : String -> Msg
@@ -515,7 +443,6 @@ reminderPopup form model =
                         [ type_ "date"
                         , class "auto-focus"
                         , value form.date
-                        , boolProperty "stopKeyboardEventPropagation" True
                         , Todo.ReminderForm.SetDate >> updateReminderForm |> onChange
                         ]
                         []
@@ -525,7 +452,6 @@ reminderPopup form model =
                     [ Html.input
                         [ type_ "time"
                         , value form.time
-                        , boolProperty "stopKeyboardEventPropagation" True
                         , Todo.ReminderForm.SetTime >> updateReminderForm |> onChange
                         ]
                         []

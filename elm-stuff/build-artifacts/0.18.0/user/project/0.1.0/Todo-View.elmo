@@ -87,16 +87,12 @@ var _user$project$Todo_View$reminderPopup = F2(
 													_0: _elm_lang$html$Html_Attributes$value(form.date),
 													_1: {
 														ctor: '::',
-														_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
-														_1: {
-															ctor: '::',
-															_0: _user$project$WebComponents$onChange(
-																function (_p3) {
-																	return updateReminderForm(
-																		_user$project$Todo_ReminderForm$SetDate(_p3));
-																}),
-															_1: {ctor: '[]'}
-														}
+														_0: _user$project$WebComponents$onChange(
+															function (_p3) {
+																return updateReminderForm(
+																	_user$project$Todo_ReminderForm$SetDate(_p3));
+															}),
+														_1: {ctor: '[]'}
 													}
 												}
 											}
@@ -140,16 +136,12 @@ var _user$project$Todo_View$reminderPopup = F2(
 													_0: _elm_lang$html$Html_Attributes$value(form.time),
 													_1: {
 														ctor: '::',
-														_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
-														_1: {
-															ctor: '::',
-															_0: _user$project$WebComponents$onChange(
-																function (_p4) {
-																	return updateReminderForm(
-																		_user$project$Todo_ReminderForm$SetTime(_p4));
-																}),
-															_1: {ctor: '[]'}
-														}
+														_0: _user$project$WebComponents$onChange(
+															function (_p4) {
+																return updateReminderForm(
+																	_user$project$Todo_ReminderForm$SetTime(_p4));
+															}),
+														_1: {ctor: '[]'}
 													}
 												}
 											},
@@ -771,255 +763,6 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 				_1: {ctor: '[]'}
 			});
 	});
-var _user$project$Todo_View$reminderView = function (vm) {
-	var reminderVM = vm.reminder;
-	var reminderTrigger = _elm_lang$core$Native_Utils.eq(reminderVM.displayText, '') ? A2(
-		_user$project$WebComponents$iconButton,
-		'alarm-add',
-		{
-			ctor: '::',
-			_0: vm.tabindexAV,
-			_1: {
-				ctor: '::',
-				_0: _user$project$WebComponents$slotDropdownTrigger,
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(reminderVM.startEditingMsg),
-					_1: {ctor: '[]'}
-				}
-			}
-		}) : A2(
-		_user$project$Todo_View$dropdownTrigger,
-		vm,
-		A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(reminderVM.startEditingMsg),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$classList(
-						{
-							ctor: '::',
-							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'reminder-text', true),
-							_1: {
-								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'overdue', reminderVM.isOverDue),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_user$project$WebComponents$icon,
-					'av:snooze',
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$classList(
-							{
-								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'display-none', !reminderVM.isSnoozed),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(reminderVM.displayText),
-					_1: {ctor: '[]'}
-				}
-			}));
-	var menuButton = A2(
-		_edvail$elm_polymer$Polymer_Paper$menuButton,
-		{
-			ctor: '::',
-			_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'opened', reminderVM.isDropdownOpen),
-			_1: {
-				ctor: '::',
-				_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'dynamicAlign', true),
-				_1: {
-					ctor: '::',
-					_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
-					_1: {ctor: '[]'}
-				}
-			}
-		},
-		{
-			ctor: '::',
-			_0: reminderTrigger,
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('static'),
-						_1: {
-							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-content'),
-							_1: {ctor: '[]'}
-						}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('font-subhead'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Select date and time'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_edvail$elm_polymer$Polymer_Paper$input,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$type_('date'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$classList(
-											{
-												ctor: '::',
-												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', reminderVM.isDropdownOpen),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: _user$project$WebComponents$labelA('Date'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$value(reminderVM.date),
-												_1: {
-													ctor: '::',
-													_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
-													_1: {
-														ctor: '::',
-														_0: _user$project$WebComponents$onChange(reminderVM.onDateChanged),
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}
-									}
-								},
-								{ctor: '[]'}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_edvail$elm_polymer$Polymer_Paper$input,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$type_('time'),
-										_1: {
-											ctor: '::',
-											_0: _user$project$WebComponents$labelA('Time'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$value(reminderVM.time),
-												_1: {
-													ctor: '::',
-													_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
-													_1: {
-														ctor: '::',
-														_0: _user$project$WebComponents$onChange(reminderVM.onTimeChanged),
-														_1: {ctor: '[]'}
-													}
-												}
-											}
-										}
-									},
-									{ctor: '[]'}),
-								_1: {
-									ctor: '::',
-									_0: _user$project$View_Shared$defaultOkCancelButtons,
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-	var timeToolTip = A2(
-		_edvail$elm_polymer$Polymer_Paper$tooltip,
-		{
-			ctor: '::',
-			_0: A2(_elm_community$html_extra$Html_Attributes_Extra$intProperty, 'offset', 0),
-			_1: {ctor: '[]'}
-		},
-		(!_elm_lang$core$Native_Utils.eq(reminderVM.dueAtToolTipText, '')) ? {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('tooltip'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('font-body1 font-nowrap'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(reminderVM.dueAtToolTipText),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('font-caption'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(reminderVM.dayDiffInWords),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {ctor: '[]'}
-		} : {ctor: '[]'});
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$style(
-				{
-					ctor: '::',
-					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'position', 'relative'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: menuButton,
-			_1: {
-				ctor: '::',
-				_0: timeToolTip,
-				_1: {ctor: '[]'}
-			}
-		});
-};
 var _user$project$Todo_View$init = function (vm) {
 	return A2(
 		_elm_lang$html$Html$div,

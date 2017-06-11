@@ -1,6 +1,7 @@
 port module Todo.Main exposing (..)
 
 import Document
+import Entity
 import Ext.Record
 import Model
 import Notification
@@ -55,7 +56,7 @@ subscriptions m =
         ]
 
 
-onTodoMsgWithTime andThenUpdate todoMsg now =
+update andThenUpdate todoMsg now =
     case todoMsg of
         ToggleRunning todoId ->
             over Model.timeTracker (Todo.TimeTracker.toggleStartStop todoId now)
@@ -70,7 +71,7 @@ onTodoMsgWithTime andThenUpdate todoMsg now =
             set Model.timeTracker Todo.TimeTracker.none
 
         GotoRunning ->
-            map (Model.gotoRunningTodo)
+            map (gotoRunningTodo)
                 >> andThenUpdate Model.OnSetDomFocusToFocusInEntity
 
         UpdateTimeTracker ->
@@ -119,3 +120,35 @@ onTodoMsgWithTime andThenUpdate todoMsg now =
                         andThenUpdate Model.onGotoRunningTodo
                 )
                     >> andThenUpdate (Model.OnCloseNotification todoId)
+
+
+gotoRunningTodo model =
+    Todo.TimeTracker.getMaybeTodoId model.timeTracker
+        ?|> gotoTodoWithIdIn model
+        ?= model
+
+
+gotoTodoWithIdIn =
+    flip gotoTodoWithId
+
+
+gotoTodoWithId todoId model =
+    let
+        maybeTodoEntity =
+            Model.getCurrentViewEntityList model
+                |> List.find
+                    (\entity ->
+                        case entity of
+                            Entity.TodoEntity doc ->
+                                Document.hasId todoId doc
+
+                            _ ->
+                                False
+                    )
+    in
+        maybeTodoEntity
+            |> Maybe.unpack
+                (\_ ->
+                    model |> Model.setFocusInEntityFromTodoId todoId |> Model.switchToContextsView
+                )
+                (Model.setFocusInEntity # model)

@@ -1221,41 +1221,6 @@ getNotificationCmdFromTodoChange uid (( old, new ) as change) =
 
 
 -- todo time tracking
-
-
-gotoRunningTodo model =
-    Todo.TimeTracker.getMaybeTodoId model.timeTracker
-        ?|> gotoTodoWithIdIn model
-        ?= model
-
-
-gotoTodoWithIdIn =
-    flip gotoTodoWithId
-
-
-gotoTodoWithId todoId model =
-    let
-        maybeTodoEntity =
-            getCurrentViewEntityList model
-                |> List.find
-                    (\entity ->
-                        case entity of
-                            Entity.TodoEntity doc ->
-                                Document.hasId todoId doc
-
-                            _ ->
-                                False
-                    )
-    in
-        maybeTodoEntity
-            |> Maybe.unpack
-                (\_ ->
-                    model |> setFocusInEntityFromTodoId todoId |> switchToContextsView
-                )
-                (setFocusInEntity # model)
-
-
-
 -- combo
 
 

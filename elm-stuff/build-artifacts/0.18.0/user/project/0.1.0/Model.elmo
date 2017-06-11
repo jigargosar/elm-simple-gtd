@@ -1627,41 +1627,9 @@ var _user$project$Model$createAndEditNewContext = function (model) {
 };
 var _user$project$Model$switchToContextsView = _user$project$Model$switchToView(
 	_user$project$Model$EntityListView(_user$project$Entity$ContextsView));
-var _user$project$Model$gotoTodoWithId = F2(
-	function (todoId, model) {
-		var maybeTodoEntity = A2(
-			_elm_community$list_extra$List_Extra$find,
-			function (entity) {
-				var _p80 = entity;
-				if (_p80.ctor === 'TodoEntity') {
-					return A2(_user$project$Document$hasId, todoId, _p80._0);
-				} else {
-					return false;
-				}
-			},
-			_user$project$Model$getCurrentViewEntityList(model));
-		return A3(
-			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p81) {
-				return _user$project$Model$switchToContextsView(
-					A2(_user$project$Model$setFocusInEntityFromTodoId, todoId, model));
-			},
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$setFocusInEntity, model),
-			maybeTodoEntity);
-	});
-var _user$project$Model$gotoTodoWithIdIn = _elm_lang$core$Basics$flip(_user$project$Model$gotoTodoWithId);
-var _user$project$Model$gotoRunningTodo = function (model) {
-	return A2(
-		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			_user$project$Todo_TimeTracker$getMaybeTodoId(model.timeTracker),
-			_user$project$Model$gotoTodoWithIdIn(model)),
-		model);
-};
-var _user$project$Model$setEntityListViewType = function (_p82) {
+var _user$project$Model$setEntityListViewType = function (_p80) {
 	return _user$project$Model$switchToView(
-		_user$project$Model$EntityListView(_p82));
+		_user$project$Model$EntityListView(_p80));
 };
 var _user$project$Model$switchToEntityListViewFromEntity = F2(
 	function (entity, model) {

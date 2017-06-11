@@ -1,6 +1,6 @@
-var _user$project$Todo_Msg$OnEditReminderMenuStateChanged = F2(
+var _user$project$Todo_Msg$UpdateReminderForm = F2(
 	function (a, b) {
-		return {ctor: 'OnEditReminderMenuStateChanged', _0: a, _1: b};
+		return {ctor: 'UpdateReminderForm', _0: a, _1: b};
 	});
 var _user$project$Todo_Msg$Upsert = function (a) {
 	return {ctor: 'Upsert', _0: a};

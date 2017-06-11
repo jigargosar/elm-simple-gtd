@@ -15,23 +15,22 @@ var _user$project$Todo_ReminderForm$getMaybeTime = function (_p0) {
 			}),
 		_elm_lang$core$Maybe$Nothing);
 };
-var _user$project$Todo_ReminderForm$setMenuState = F2(
-	function (menuState, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{menuState: menuState});
-	});
-var _user$project$Todo_ReminderForm$set = F2(
+var _user$project$Todo_ReminderForm$update = F2(
 	function (action, model) {
 		var _p3 = action;
-		if (_p3.ctor === 'SetDate') {
-			return _elm_lang$core$Native_Utils.update(
-				model,
-				{date: _p3._0});
-		} else {
-			return _elm_lang$core$Native_Utils.update(
-				model,
-				{time: _p3._0});
+		switch (_p3.ctor) {
+			case 'SetDate':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{date: _p3._0});
+			case 'SetTime':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{time: _p3._0});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{menuState: _p3._0});
 		}
 	});
 var _user$project$Todo_ReminderForm$create = F2(
@@ -51,6 +50,9 @@ var _user$project$Todo_ReminderForm$Model = F4(
 	function (a, b, c, d) {
 		return {id: a, date: b, time: c, menuState: d};
 	});
+var _user$project$Todo_ReminderForm$SetMenuState = function (a) {
+	return {ctor: 'SetMenuState', _0: a};
+};
 var _user$project$Todo_ReminderForm$SetTime = function (a) {
 	return {ctor: 'SetTime', _0: a};
 };

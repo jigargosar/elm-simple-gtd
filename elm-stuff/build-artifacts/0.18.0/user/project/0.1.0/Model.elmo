@@ -1422,10 +1422,6 @@ var _user$project$Model$OnEntityListKeyDown = F2(
 	function (a, b) {
 		return {ctor: 'OnEntityListKeyDown', _0: a, _1: b};
 	});
-var _user$project$Model$UpdateReminderForm = F2(
-	function (a, b) {
-		return {ctor: 'UpdateReminderForm', _0: a, _1: b};
-	});
 var _user$project$Model$UpdateTodoForm = F2(
 	function (a, b) {
 		return {ctor: 'UpdateTodoForm', _0: a, _1: b};

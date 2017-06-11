@@ -21,4 +21,4 @@ type Msg
     | GotoRunning
     | UpdateTimeTracker
     | Upsert Todo.Model
-    | OnEditReminderMenuStateChanged Todo.ReminderForm.Model Menu.State
+    | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action

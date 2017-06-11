@@ -268,13 +268,6 @@ update msg =
                             >> Model.setEditMode
                         )
 
-                UpdateReminderForm form action ->
-                    Return.map
-                        (Todo.ReminderForm.set action form
-                            |> EditMode.EditTodoReminder
-                            >> Model.setEditMode
-                        )
-
                 SwitchView viewType ->
                     Return.map (Model.switchToView viewType)
 

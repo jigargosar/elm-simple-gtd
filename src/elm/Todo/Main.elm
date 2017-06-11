@@ -69,12 +69,11 @@ subscriptions m =
 
 update andThenUpdate now todoMsg =
     case todoMsg of
-        OnEditReminderMenuStateChanged form menuState ->
-            map
-                (Model.setEditMode
-                    (Todo.ReminderForm.setMenuState menuState form
-                        |> EditMode.EditTodoReminder
-                    )
+        UpdateReminderForm form action ->
+            Return.map
+                (Todo.ReminderForm.update action form
+                    |> EditMode.EditTodoReminder
+                    >> Model.setEditMode
                 )
                 >> DomPorts.autoFocusInputCmd
 

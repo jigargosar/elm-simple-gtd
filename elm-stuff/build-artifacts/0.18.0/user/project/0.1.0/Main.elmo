@@ -506,13 +506,6 @@ var _user$project$Main$update = function (msg) {
 								_elm_lang$core$Native_Utils.update(
 									_p16._0,
 									{uri: _p16._1})));
-					case 'UpdateReminderForm':
-						return _Fresheyeball$elm_return$Return$map(
-							function (_p48) {
-								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditTodoReminder(_p48));
-							}(
-								A2(_user$project$Todo_ReminderForm$set, _p16._1, _p16._0)));
 					case 'SwitchView':
 						return _Fresheyeball$elm_return$Return$map(
 							_user$project$Model$switchToView(_p16._0));
@@ -525,7 +518,7 @@ var _user$project$Main$update = function (msg) {
 					case 'OnNowChanged':
 						return _user$project$Main$onUpdateNow(_p16._0);
 					case 'OnKeyboardMsg':
-						return function (_p49) {
+						return function (_p48) {
 							return A2(
 								_user$project$DomPorts$focusSelectorIfNoFocusCmd,
 								'.entity-list > [tabindex=0]',
@@ -533,107 +526,107 @@ var _user$project$Main$update = function (msg) {
 									_Fresheyeball$elm_return$Return$map,
 									_user$project$Model$updateKeyboardState(
 										_user$project$Ext_Keyboard$update(_p16._0)),
-									_p49));
+									_p48));
 						};
 					case 'SaveCurrentForm':
-						return function (_p50) {
+						return function (_p49) {
 							return A2(
 								_user$project$Main$andThenUpdate,
 								_user$project$Model$DeactivateEditingMode,
-								A2(_Fresheyeball$elm_return$Return$andThen, _user$project$Model$saveCurrentForm, _p50));
+								A2(_Fresheyeball$elm_return$Return$andThen, _user$project$Model$saveCurrentForm, _p49));
 						};
 					case 'NewTodo':
-						return function (_p51) {
+						return function (_p50) {
 							return _user$project$DomPorts$autoFocusInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoModeWithFocusInEntityAsReference, _p51));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoModeWithFocusInEntityAsReference, _p50));
 						};
 					case 'NewTodoForInbox':
-						return function (_p52) {
+						return function (_p51) {
 							return _user$project$DomPorts$autoFocusInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoModeWithInboxAsReference, _p52));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$activateNewTodoModeWithInboxAsReference, _p51));
 						};
 					case 'NewProject':
-						return function (_p53) {
+						return function (_p52) {
 							return _user$project$DomPorts$autoFocusInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewProject, _p53));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewProject, _p52));
 						};
 					case 'NewContext':
-						return function (_p54) {
+						return function (_p53) {
 							return _user$project$DomPorts$autoFocusInputCmd(
-								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewContext, _p54));
+								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$createAndEditNewContext, _p53));
 						};
 					case 'OnEntityAction':
-						var _p58 = _p16._0;
-						var _p55 = _p16._1;
-						switch (_p55.ctor) {
+						var _p57 = _p16._0;
+						var _p54 = _p16._1;
+						switch (_p54.ctor) {
 							case 'StartEditing':
-								return function (_p56) {
+								return function (_p55) {
 									return _user$project$DomPorts$autoFocusInputCmd(
 										A2(
 											_Fresheyeball$elm_return$Return$map,
-											_user$project$Model$startEditingEntity(_p58),
-											_p56));
+											_user$project$Model$startEditingEntity(_p57),
+											_p55));
 								};
 							case 'NameChanged':
 								return _Fresheyeball$elm_return$Return$map(
-									A2(_user$project$Model$updateEditModeNameChanged, _p55._0, _p58));
+									A2(_user$project$Model$updateEditModeNameChanged, _p54._0, _p57));
 							case 'Save':
 								return _user$project$Main$andThenUpdate(_user$project$Model$SaveCurrentForm);
 							case 'ToggleDeleted':
-								return function (_p57) {
+								return function (_p56) {
 									return A2(
 										_user$project$Main$andThenUpdate,
 										_user$project$Model$DeactivateEditingMode,
 										A2(
 											_Fresheyeball$elm_return$Return$andThen,
-											_user$project$Model$toggleDeleteEntity(_p58),
-											_p57));
+											_user$project$Model$toggleDeleteEntity(_p57),
+											_p56));
 								};
 							case 'OnFocusIn':
 								return _Fresheyeball$elm_return$Return$map(
-									_user$project$Model$setFocusInEntity(_p58));
+									_user$project$Model$setFocusInEntity(_p57));
 							case 'ToggleSelected':
 								return _Fresheyeball$elm_return$Return$map(
-									_user$project$Model$toggleEntitySelection(_p58));
+									_user$project$Model$toggleEntitySelection(_p57));
 							default:
 								return _Fresheyeball$elm_return$Return$map(
-									_user$project$Model$switchToEntityListViewFromEntity(_p58));
+									_user$project$Model$switchToEntityListViewFromEntity(_p57));
 						}
 					case 'OnLaunchBarMsgWithNow':
-						var _p63 = _p16._1;
-						var _p59 = _p16._0;
-						switch (_p59.ctor) {
+						var _p62 = _p16._1;
+						var _p58 = _p16._0;
+						switch (_p58.ctor) {
 							case 'OnEnter':
-								return function (_p60) {
+								return function (_p59) {
 									return function () {
-										var _p61 = _p59._0;
-										switch (_p61.ctor) {
+										var _p60 = _p58._0;
+										switch (_p60.ctor) {
 											case 'Project':
 												return _user$project$Main$map(
-													_user$project$Model$switchToProjectView(_p61._0));
+													_user$project$Model$switchToProjectView(_p60._0));
 											case 'Projects':
 												return _user$project$Main$map(
 													_user$project$Model$setEntityListViewType(_user$project$Entity$ProjectsView));
 											case 'Context':
 												return _user$project$Main$map(
-													_user$project$Model$switchToContextView(_p61._0));
+													_user$project$Model$switchToContextView(_p60._0));
 											default:
 												return _user$project$Main$map(
 													_user$project$Model$setEntityListViewType(_user$project$Entity$ContextsView));
 										}
 									}()(
-										A2(_user$project$Main$andThenUpdate, _user$project$Model$DeactivateEditingMode, _p60));
+										A2(_user$project$Main$andThenUpdate, _user$project$Model$DeactivateEditingMode, _p59));
 								};
 							case 'OnInputChanged':
 								return _user$project$Main$map(
-									A3(_user$project$Model$updateLaunchBarInput, _p63, _p59._1, _p59._0));
+									A3(_user$project$Model$updateLaunchBarInput, _p62, _p58._1, _p58._0));
 							default:
-								return function (_p62) {
+								return function (_p61) {
 									return _user$project$DomPorts$autoFocusInputCmd(
 										A2(
 											_user$project$Main$map,
-											_user$project$Model$activateLaunchBar(_p63),
-											_p62));
+											_user$project$Model$activateLaunchBar(_p62),
+											_p61));
 								};
 						}
 					case 'OnLaunchBarMsg':
@@ -657,22 +650,22 @@ var _user$project$Main$update = function (msg) {
 				_Fresheyeball$elm_return$Return$singleton(_p15)));
 	};
 };
-var _user$project$Main$andThenTodoMsg = function (_p64) {
+var _user$project$Main$andThenTodoMsg = function (_p63) {
 	return _user$project$Main$andThenUpdate(
-		_user$project$Model$OnTodoMsg(_p64));
+		_user$project$Model$OnTodoMsg(_p63));
 };
 var _user$project$Main$onGlobalKeyUp = function (key) {
 	return A2(
 		_user$project$Ext_Return$with,
 		_user$project$Model$getEditMode,
 		function (editMode) {
-			var _p65 = {ctor: '_Tuple2', _0: key, _1: editMode};
+			var _p64 = {ctor: '_Tuple2', _0: key, _1: editMode};
 			_v10_2:
 			do {
-				if (_p65.ctor === '_Tuple2') {
-					if (_p65._1.ctor === 'None') {
-						var _p66 = _p65._0;
-						switch (_p66.ctor) {
+				if (_p64.ctor === '_Tuple2') {
+					if (_p64._1.ctor === 'None') {
+						var _p65 = _p64._0;
+						switch (_p65.ctor) {
 							case 'Escape':
 								return _Fresheyeball$elm_return$Return$map(_user$project$Model$clearSelection);
 							case 'CharQ':
@@ -688,7 +681,7 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 								return _elm_lang$core$Basics$identity;
 						}
 					} else {
-						if (_p65._0.ctor === 'Escape') {
+						if (_p64._0.ctor === 'Escape') {
 							return _user$project$Main$andThenUpdate(_user$project$Model$DeactivateEditingMode);
 						} else {
 							break _v10_2;
@@ -756,9 +749,9 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(
 	_elm_lang$core$List$foldl(
-		function (_p67) {
+		function (_p66) {
 			return _Fresheyeball$elm_return$Return$andThen(
-				_user$project$Main$update(_p67));
+				_user$project$Main$update(_p66));
 		}));
 var _user$project$Main$triggerAlarmCmd = function (bool) {
 	return bool ? _user$project$Main$startAlarm(

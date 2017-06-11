@@ -324,7 +324,7 @@ createReminderViewModel vc todo =
                 |> Maybe.unpack (\_ -> Todo.ReminderForm.create todo vc.now) identity
 
         updateReminderForm =
-            Model.UpdateReminderForm form
+            Todo.Msg.UpdateReminderForm form >> Model.OnTodoMsg
 
         isDropdownOpen =
             Maybe.isJust maybeTodoReminderForm
@@ -426,7 +426,7 @@ reminderPopup form model =
     -}
     let
         updateReminderForm =
-            Model.UpdateReminderForm form
+            Todo.Msg.UpdateReminderForm form >> Model.OnTodoMsg
     in
         div
             [ class "fullbleed-capture"
@@ -469,7 +469,10 @@ createReminderMenuConfig form model =
     , itemKey = identity
     , itemSearchText = identity
     , itemView = text
-    , onStateChanged = Todo.Msg.OnEditReminderMenuStateChanged form >> Model.OnTodoMsg
+    , onStateChanged =
+        Todo.ReminderForm.SetMenuState
+            >> Todo.Msg.UpdateReminderForm form
+            >> Model.OnTodoMsg
     , noOp = commonMsg.noOp
     , onOutsideMouseDown = Model.DeactivateEditingMode
     }

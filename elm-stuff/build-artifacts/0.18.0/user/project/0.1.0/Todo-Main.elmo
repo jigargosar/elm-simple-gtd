@@ -149,14 +149,16 @@ var _user$project$Todo_Main$update = F3(
 	function (andThenUpdate, now, todoMsg) {
 		var _p5 = todoMsg;
 		switch (_p5.ctor) {
-			case 'OnEditReminderMenuStateChanged':
+			case 'UpdateReminderForm':
 				return function (_p6) {
 					return _user$project$DomPorts$autoFocusInputCmd(
 						A2(
-							_user$project$Todo_Main$map,
-							_user$project$Model$setEditMode(
-								_user$project$EditMode$EditTodoReminder(
-									A2(_user$project$Todo_ReminderForm$setMenuState, _p5._1, _p5._0))),
+							_Fresheyeball$elm_return$Return$map,
+							function (_p7) {
+								return _user$project$Model$setEditMode(
+									_user$project$EditMode$EditTodoReminder(_p7));
+							}(
+								A2(_user$project$Todo_ReminderForm$update, _p5._1, _p5._0)),
 							_p6));
 				};
 			case 'ToggleRunning':
@@ -177,36 +179,36 @@ var _user$project$Todo_Main$update = F3(
 			case 'StopRunning':
 				return A2(_user$project$Todo_Main$mapSet, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none);
 			case 'GotoRunning':
-				return function (_p7) {
+				return function (_p8) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnSetDomFocusToFocusInEntity,
-						A2(_user$project$Todo_Main$map, _user$project$Todo_Main$gotoRunningTodo, _p7));
+						A2(_user$project$Todo_Main$map, _user$project$Todo_Main$gotoRunningTodo, _p8));
 				};
 			case 'UpdateTimeTracker':
 				return _user$project$Todo_Main$updateTimeTracker(now);
 			case 'Upsert':
-				var _p8 = _p5._0;
+				var _p9 = _p5._0;
 				return _user$project$Todo_Main$map(
 					function (model) {
-						var isTrackerTodoInactive = _user$project$Todo$isNotActive(_p8) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p8, model.timeTracker);
+						var isTrackerTodoInactive = _user$project$Todo$isNotActive(_p9) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p9, model.timeTracker);
 						return isTrackerTodoInactive ? A3(_user$project$Ext_Record$set, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
 					});
 			default:
-				var _p11 = _p5._0;
-				var todoId = _p11.data.id;
-				return function (_p9) {
+				var _p12 = _p5._0;
+				var todoId = _p12.data.id;
+				return function (_p10) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnCloseNotification(todoId),
 						function () {
-							var _p10 = _p11.action;
-							if (_p10 === 'stop') {
+							var _p11 = _p12.action;
+							if (_p11 === 'stop') {
 								return andThenUpdate(_user$project$Model$onTodoStopRunning);
 							} else {
 								return andThenUpdate(_user$project$Model$onGotoRunningTodo);
 							}
-						}()(_p9));
+						}()(_p10));
 				};
 		}
 	});

@@ -79,7 +79,6 @@ type Msg
     | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model Menu.State
     | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model Menu.State
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
-    | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | OnEntityListKeyDown (List Entity) KeyboardEvent
     | SwitchView ViewType
     | SetGroupByView EntityListViewType

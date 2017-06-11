@@ -25,6 +25,7 @@ type alias Model =
 type Action
     = SetDate String
     | SetTime String
+    | SetMenuState Menu.State
 
 
 create : Todo.Model -> Time.Time -> Model
@@ -40,8 +41,8 @@ create todo now =
         }
 
 
-set : Action -> Model -> Model
-set action model =
+update : Action -> Model -> Model
+update action model =
     case action of
         SetDate value ->
             { model | date = value }
@@ -49,9 +50,8 @@ set action model =
         SetTime value ->
             { model | time = value }
 
-
-setMenuState menuState model =
-    { model | menuState = menuState }
+        SetMenuState value ->
+            { model | menuState = value }
 
 
 getMaybeTime : Model -> Maybe Time

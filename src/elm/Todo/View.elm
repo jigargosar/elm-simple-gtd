@@ -233,10 +233,7 @@ defaultView vm =
     , div
         [ class "layout horizontal end-justified"
         ]
-        [ {- reminderView vm
-             ,
-          -}
-          div [ style [ "margin" => "0 8px" ] ] [ editScheduleButton vm ]
+        [ div [ style [ "margin" => "0 8px" ] ] [ editScheduleButton vm ]
         , div [ style [ "padding" => "0 8px" ] ] [ editContextButton vm ]
         , div [ style [ "padding" => "0 8px" ] ] [ projectProjectButton vm ]
         ]

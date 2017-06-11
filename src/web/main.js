@@ -131,7 +131,6 @@ async function boot() {
             const $last = $focusable.last()
             $first.focus()
             $first.on("keydown", function (e) {
-                console.log(e.shiftKey, e)
                 if(e.key === "Tab" && e.shiftKey){
                     e.preventDefault()
                     e.stopPropagation()

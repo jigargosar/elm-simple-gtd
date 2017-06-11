@@ -627,7 +627,7 @@ var _user$project$Main$update = function (msg) {
 						return _user$project$Main$withNow(
 							_user$project$Model$OnTodoMsgWithTime(_p16._0));
 					default:
-						return A3(_user$project$Todo_Main$update, _user$project$Main$andThenUpdate, _p16._0, _p16._1);
+						return A3(_user$project$Todo_Main$update, _user$project$Main$andThenUpdate, _p16._1, _p16._0);
 				}
 			}()(
 				_Fresheyeball$elm_return$Return$singleton(_p15)));

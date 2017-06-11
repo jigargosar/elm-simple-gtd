@@ -159,6 +159,8 @@ gotoTodoWithId todoId model =
         maybeTodoEntity
             |> Maybe.unpack
                 (\_ ->
-                    model |> Model.setFocusInEntityFromTodoId todoId |> Model.switchToContextsView
+                    model
+                        |> Model.setFocusInEntityFromTodoId todoId
+                        |> Model.switchToContextsView
                 )
                 (Model.setFocusInEntity # model)

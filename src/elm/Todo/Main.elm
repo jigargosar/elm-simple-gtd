@@ -49,6 +49,10 @@ command =
     Return.command
 
 
+andThen =
+    Return.andThen
+
+
 maybeMapToCmd fn =
     Maybe.map fn >>?= Cmd.none
 
@@ -99,17 +103,15 @@ update andThenUpdate todoMsg now =
                     in
                         maybeTrackerInfo
                             ?+> (\info -> Model.findTodoById info.todoId model ?|> createRequest info)
-
-                foo ( maybeTrackerInfo, model ) =
-                    ( model
-                    , maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model
-                        |> maybeMapToCmd showRunningTodoNotification
-                    )
             in
-                Return.andThen
-                    (Record.overT2 timeTracker (Todo.TimeTracker.updateNextAlarmAt now)
-                        >> foo
-                    )
+                Record.overT2 timeTracker (Todo.TimeTracker.updateNextAlarmAt now)
+                    >> (\( maybeTrackerInfo, model ) ->
+                            ( model
+                            , maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model
+                                |> maybeMapToCmd showRunningTodoNotification
+                            )
+                       )
+                    |> andThen
 
         RunningNotificationResponse res ->
             let

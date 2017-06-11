@@ -36,6 +36,7 @@ var _user$project$Todo_Main$maybeMapToCmd = function (fn) {
 		_elm_lang$core$Maybe$map(fn),
 		_elm_lang$core$Platform_Cmd$none);
 };
+var _user$project$Todo_Main$andThen = _Fresheyeball$elm_return$Return$andThen;
 var _user$project$Todo_Main$command = _Fresheyeball$elm_return$Return$command;
 var _user$project$Todo_Main$map = _Fresheyeball$elm_return$Return$map;
 var _user$project$Todo_Main$set = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
@@ -157,26 +158,25 @@ var _user$project$Todo_Main$update = F3(
 									createRequest(info));
 							});
 					});
-				var foo = function (_p4) {
-					var _p5 = _p4;
-					var _p6 = _p5._1;
-					return {
-						ctor: '_Tuple2',
-						_0: _p6,
-						_1: A2(
-							_user$project$Todo_Main$maybeMapToCmd,
-							_user$project$Todo_Main$showRunningTodoNotification,
-							A2(maybeCreateRunningTodoNotificationRequest, _p5._0, _p6))
-					};
-				};
-				return _Fresheyeball$elm_return$Return$andThen(
-					function (_p7) {
-						return foo(
+				return _user$project$Todo_Main$andThen(
+					function (_p4) {
+						return function (_p5) {
+							var _p6 = _p5;
+							var _p7 = _p6._1;
+							return {
+								ctor: '_Tuple2',
+								_0: _p7,
+								_1: A2(
+									_user$project$Todo_Main$maybeMapToCmd,
+									_user$project$Todo_Main$showRunningTodoNotification,
+									A2(maybeCreateRunningTodoNotificationRequest, _p6._0, _p7))
+							};
+						}(
 							A3(
 								_user$project$Ext_Record$overT2,
 								_user$project$Todo_Main$timeTracker,
 								_user$project$Todo_TimeTracker$updateNextAlarmAt(now),
-								_p7));
+								_p4));
 					});
 			default:
 				var _p10 = _p2._0;

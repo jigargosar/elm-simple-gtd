@@ -15,6 +15,6 @@ type Msg
     | InitRunning Todo.Id
     | StopRunning
     | TogglePaused
-    | RunningTodoNotificationResponse Response
+    | RunningNotificationResponse Response
     | GotoRunning
     | UpdateTimeTracker

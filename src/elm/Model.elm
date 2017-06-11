@@ -121,7 +121,7 @@ onTodoInitRunning =
 
 
 onRunningTodoNotificationClicked =
-    Todo.Msg.RunningTodoNotificationResponse >> OnTodoMsg
+    Todo.Msg.RunningNotificationResponse >> OnTodoMsg
 
 
 onTodoStopRunning =

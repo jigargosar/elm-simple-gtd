@@ -89,7 +89,7 @@ onTodoMsgWithTime andThenUpdate todoMsg now =
                         >> foo
                     )
 
-        RunningTodoNotificationResponse res ->
+        RunningNotificationResponse res ->
             let
                 todoId =
                     res.data.id

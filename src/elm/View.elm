@@ -54,9 +54,9 @@ overlayViews model =
                 EditMode.EditTodoProject form ->
                     Todo.View.projectMenu form model
 
-                {- EditMode.EditTodoReminder form ->
-                   Todo.View.reminderPopup form model
-                -}
+                EditMode.EditTodoReminder form ->
+                    Todo.View.reminderPopup form model
+
                 _ ->
                     span [] []
     in

@@ -231,11 +231,11 @@ defaultView vm =
     , div
         [ class "layout horizontal end-justified"
         ]
-        [ reminderView vm
-        , {- div [ style [ "margin" => "0 8px" ] ] [ editScheduleButton vm ]
+        [ {- reminderView vm
              ,
           -}
-          div [ style [ "padding" => "0 8px" ] ] [ editContextButton vm ]
+          div [ style [ "margin" => "0 8px" ] ] [ editScheduleButton vm ]
+        , div [ style [ "padding" => "0 8px" ] ] [ editContextButton vm ]
         , div [ style [ "padding" => "0 8px" ] ] [ projectProjectButton vm ]
         ]
     ]
@@ -493,7 +493,7 @@ contextMenu =
 
 
 reminderPopup form model =
-    Menu.view ([ "i1", "i2", "aa", "Pick Date And Time" ])
+    Menu.view ([ "i1", "i2", "aa", "Pick date and time" ])
         form.menuState
         (createReminderMenuConfig form model)
 

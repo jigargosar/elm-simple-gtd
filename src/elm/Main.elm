@@ -228,8 +228,7 @@ update msg =
 
                 StartEditingReminder todo ->
                     Return.map (Model.startEditingReminder todo)
-                        --                        >> Return.command (positionScheduleMenuCmd todo)
-                        >> autoFocusInputCmd
+                        >> Return.command (positionScheduleMenuCmd todo)
 
                 StartEditingContext todo ->
                     Return.map (Model.startEditingTodoContext todo)

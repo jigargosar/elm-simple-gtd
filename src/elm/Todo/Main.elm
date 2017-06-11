@@ -2,7 +2,7 @@ port module Todo.Main exposing (..)
 
 import Document
 import Entity
-import Ext.Record
+import Ext.Record as Record
 import Model
 import Notification
 import Return
@@ -30,15 +30,15 @@ port onRunningTodoNotificationClicked : (Notification.Response -> msg) -> Sub ms
 
 
 timeTracker =
-    Ext.Record.init .timeTracker (\s b -> { b | timeTracker = s })
+    Record.init .timeTracker (\s b -> { b | timeTracker = s })
 
 
 over =
-    Ext.Record.over >>> Return.map
+    Record.over >>> Return.map
 
 
 set =
-    Ext.Record.set >>> Return.map
+    Record.set >>> Return.map
 
 
 map =
@@ -107,7 +107,7 @@ update andThenUpdate todoMsg now =
                     )
             in
                 Return.andThen
-                    (Ext.Record.overT2 timeTracker (Todo.TimeTracker.updateNextAlarmAt now)
+                    (Record.overT2 timeTracker (Todo.TimeTracker.updateNextAlarmAt now)
                         >> foo
                     )
 

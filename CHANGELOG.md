@@ -1,6 +1,10 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
+## Upcoming
+* fix running todo being canceled on update
+* edit reminder: get rid of polymer. so that we can add menu and edit date time form
+
 
 ## v0.18.4 - 2017-06-11
 * revert edit reminder incomplete commits: so as to fix running todo bug.

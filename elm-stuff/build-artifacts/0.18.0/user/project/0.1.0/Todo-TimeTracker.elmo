@@ -1,3 +1,11 @@
+var _user$project$Todo_TimeTracker$isTrackingTodo = function (todo) {
+	return A2(
+		_elm_community$maybe_extra$Maybe_Extra$unwrap,
+		false,
+		function (rec) {
+			return A2(_user$project$Document$hasId, rec.todoId, todo);
+		});
+};
 var _user$project$Todo_TimeTracker$alarmDelay = 10 * _elm_lang$core$Time$minute;
 var _user$project$Todo_TimeTracker$map = _elm_lang$core$Maybe$map;
 var _user$project$Todo_TimeTracker$getMaybeTodoId = _user$project$Todo_TimeTracker$map(

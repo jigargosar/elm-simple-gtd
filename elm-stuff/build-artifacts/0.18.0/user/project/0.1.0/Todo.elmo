@@ -248,8 +248,21 @@ var _user$project$Todo$getDeleted = function (_) {
 	return _.deleted;
 };
 var _user$project$Todo$isDeleted = _user$project$Todo$getDeleted;
-var _user$project$Todo$isNotDeleted = function (_p13) {
-	return !_user$project$Todo$getDeleted(_p13);
+var _user$project$Todo$isActive = _user$project$Ext_Function$anyPass(
+	{
+		ctor: '::',
+		_0: _user$project$Todo$isDeleted,
+		_1: {
+			ctor: '::',
+			_0: _user$project$Todo$isDone,
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$Todo$isNotActive = function (_p13) {
+	return !_user$project$Todo$isActive(_p13);
+};
+var _user$project$Todo$isNotDeleted = function (_p14) {
+	return !_user$project$Todo$getDeleted(_p14);
 };
 var _user$project$Todo$doneFilter = _user$project$Todo$toAllPassPredicate(
 	{
@@ -271,8 +284,8 @@ var _user$project$Todo$projectIdFilter = function (projectId) {
 				_0: _user$project$Todo$isNotDeleted,
 				_1: {
 					ctor: '::',
-					_0: function (_p14) {
-						return !_user$project$Todo$isDone(_p14);
+					_0: function (_p15) {
+						return !_user$project$Todo$isDone(_p15);
 					},
 					_1: {ctor: '[]'}
 				}
@@ -285,28 +298,28 @@ var _user$project$Todo$binFilter = _user$project$Todo$toAllPassPredicate(
 		_0: _user$project$Todo$getDeleted,
 		_1: {ctor: '[]'}
 	});
-var _user$project$Todo$getMaybeReminderTime = function (_p15) {
+var _user$project$Todo$getMaybeReminderTime = function (_p16) {
 	return _user$project$Todo_Schedule$getMaybeReminderTime(
 		function (_) {
 			return _.schedule;
-		}(_p15));
+		}(_p16));
 };
 var _user$project$Todo$isReminderOverdue = function (now) {
-	return function (_p16) {
+	return function (_p17) {
 		return A3(
 			_elm_community$maybe_extra$Maybe_Extra$unwrap,
 			false,
 			function (time) {
 				return _elm_lang$core$Native_Utils.cmp(time, now) < 1;
 			},
-			_user$project$Todo$getMaybeReminderTime(_p16));
+			_user$project$Todo$getMaybeReminderTime(_p17));
 	};
 };
-var _user$project$Todo$getMaybeDueAt = function (_p17) {
+var _user$project$Todo$getMaybeDueAt = function (_p18) {
 	return _user$project$Todo_Schedule$getMaybeDueAt(
 		function (_) {
 			return _.schedule;
-		}(_p17));
+		}(_p18));
 };
 var _user$project$Todo$getMaybeTime = function (model) {
 	return A2(
@@ -399,7 +412,7 @@ var _user$project$Todo$reminderDecoder = A3(
 		}));
 var _user$project$Todo$None = {ctor: 'None'};
 var _user$project$Todo$defaultReminder = _user$project$Todo$None;
-var _user$project$Todo$todoRecordDecoder = function (_p18) {
+var _user$project$Todo$todoRecordDecoder = function (_p19) {
 	return A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 		'reminder',
@@ -424,7 +437,7 @@ var _user$project$Todo$todoRecordDecoder = function (_p18) {
 						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 						'text',
 						_elm_lang$core$Json_Decode$string,
-						A4(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional, 'done', _elm_lang$core$Json_Decode$bool, _user$project$Todo$defaultDone, _p18))))));
+						A4(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional, 'done', _elm_lang$core$Json_Decode$bool, _user$project$Todo$defaultDone, _p19))))));
 };
 var _user$project$Todo$decoder = _user$project$Todo$todoRecordDecoder(
 	_user$project$Document$documentFieldsDecoder(
@@ -464,37 +477,37 @@ var _user$project$Todo$SetContextId = function (a) {
 	return {ctor: 'SetContextId', _0: a};
 };
 var _user$project$Todo$update = function (action) {
-	var _p19 = action;
-	switch (_p19.ctor) {
+	var _p20 = action;
+	switch (_p20.ctor) {
 		case 'SetText':
-			return A2(_user$project$Ext_Record$set, _user$project$Todo$text, _p19._0);
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$text, _p20._0);
 		case 'SetContextId':
-			return A2(_user$project$Ext_Record$set, _user$project$Todo$contextId, _p19._0);
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$contextId, _p20._0);
 		case 'SetProjectId':
-			return A2(_user$project$Ext_Record$set, _user$project$Todo$projectId, _p19._0);
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$projectId, _p20._0);
 		case 'SetSchedule':
-			return A2(_user$project$Ext_Record$set, _user$project$Todo$schedule, _p19._0);
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$schedule, _p20._0);
 		case 'CopyProjectAndContextId':
-			var _p21 = _p19._0;
-			return function (_p20) {
+			var _p22 = _p20._0;
+			return function (_p21) {
 				return A2(
 					_user$project$Todo$update,
-					_user$project$Todo$SetProjectId(_p21.projectId),
+					_user$project$Todo$SetProjectId(_p22.projectId),
 					A2(
 						_user$project$Todo$update,
-						_user$project$Todo$SetContextId(_p21.contextId),
-						_p20));
+						_user$project$Todo$SetContextId(_p22.contextId),
+						_p21));
 			};
 		case 'SetProject':
 			return A2(
 				_user$project$Ext_Record$set,
 				_user$project$Todo$projectId,
-				_user$project$Document$getId(_p19._0));
+				_user$project$Document$getId(_p20._0));
 		case 'SetContext':
 			return A2(
 				_user$project$Ext_Record$set,
 				_user$project$Todo$contextId,
-				_user$project$Document$getId(_p19._0));
+				_user$project$Document$getId(_p20._0));
 		case 'ToggleDone':
 			return A2(_user$project$Ext_Record$over, _user$project$Todo$done, _elm_lang$core$Basics$not);
 		case 'MarkDone':
@@ -505,15 +518,15 @@ var _user$project$Todo$update = function (action) {
 			return A2(
 				_user$project$Ext_Record$set,
 				_user$project$Todo$schedule,
-				_user$project$Todo_Schedule$fromMaybeTime(_p19._0));
+				_user$project$Todo_Schedule$fromMaybeTime(_p20._0));
 		case 'TurnReminderOff':
 			return _user$project$Todo$updateSchedule(_user$project$Todo_Schedule$turnReminderOff);
 		case 'SnoozeTill':
 			return _user$project$Todo$updateSchedule(
-				_user$project$Todo_Schedule$snoozeTill(_p19._0));
+				_user$project$Todo_Schedule$snoozeTill(_p20._0));
 		default:
 			return _user$project$Todo$updateSchedule(
-				_user$project$Todo_Schedule$snoozeTill(_p19._0 + (_elm_lang$core$Time$minute * 15)));
+				_user$project$Todo_Schedule$snoozeTill(_p20._0 + (_elm_lang$core$Time$minute * 15)));
 	}
 };
 var _user$project$Todo$SetText = function (a) {

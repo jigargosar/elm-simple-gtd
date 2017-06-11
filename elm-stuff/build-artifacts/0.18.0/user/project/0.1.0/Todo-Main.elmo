@@ -39,8 +39,8 @@ var _user$project$Todo_Main$maybeMapToCmd = function (fn) {
 var _user$project$Todo_Main$andThen = _Fresheyeball$elm_return$Return$andThen;
 var _user$project$Todo_Main$command = _Fresheyeball$elm_return$Return$command;
 var _user$project$Todo_Main$map = _Fresheyeball$elm_return$Return$map;
-var _user$project$Todo_Main$set = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
-var _user$project$Todo_Main$over = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _Fresheyeball$elm_return$Return$map);
+var _user$project$Todo_Main$mapSet = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
+var _user$project$Todo_Main$mapOver = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _Fresheyeball$elm_return$Return$map);
 var _user$project$Todo_Main$timeTracker = A2(
 	_user$project$Ext_Record$init,
 	function (_) {
@@ -151,21 +151,21 @@ var _user$project$Todo_Main$update = F3(
 		switch (_p5.ctor) {
 			case 'ToggleRunning':
 				return A2(
-					_user$project$Todo_Main$over,
+					_user$project$Todo_Main$mapOver,
 					_user$project$Todo_Main$timeTracker,
 					A2(_user$project$Todo_TimeTracker$toggleStartStop, _p5._0, now));
 			case 'InitRunning':
 				return A2(
-					_user$project$Todo_Main$set,
+					_user$project$Todo_Main$mapSet,
 					_user$project$Todo_Main$timeTracker,
 					A2(_user$project$Todo_TimeTracker$initRunning, _p5._0, now));
 			case 'TogglePaused':
 				return A2(
-					_user$project$Todo_Main$over,
+					_user$project$Todo_Main$mapOver,
 					_user$project$Todo_Main$timeTracker,
 					_user$project$Todo_TimeTracker$togglePause(now));
 			case 'StopRunning':
-				return A2(_user$project$Todo_Main$set, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none);
+				return A2(_user$project$Todo_Main$mapSet, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none);
 			case 'GotoRunning':
 				return function (_p6) {
 					return A2(
@@ -176,22 +176,27 @@ var _user$project$Todo_Main$update = F3(
 			case 'UpdateTimeTracker':
 				return _user$project$Todo_Main$updateTimeTracker(now);
 			case 'Upsert':
-				return _elm_lang$core$Basics$identity;
+				var _p7 = _p5._0;
+				return _user$project$Todo_Main$map(
+					function (model) {
+						var shouldDisableTracker = _user$project$Todo$isNotActive(_p7) || A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p7, model.timeTracker);
+						return shouldDisableTracker ? A3(_user$project$Ext_Record$set, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
+					});
 			default:
-				var _p9 = _p5._0;
-				var todoId = _p9.data.id;
-				return function (_p7) {
+				var _p10 = _p5._0;
+				var todoId = _p10.data.id;
+				return function (_p8) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnCloseNotification(todoId),
 						function () {
-							var _p8 = _p9.action;
-							if (_p8 === 'stop') {
+							var _p9 = _p10.action;
+							if (_p9 === 'stop') {
 								return andThenUpdate(_user$project$Model$onTodoStopRunning);
 							} else {
 								return andThenUpdate(_user$project$Model$onGotoRunningTodo);
 							}
-						}()(_p7));
+						}()(_p8));
 				};
 		}
 	});

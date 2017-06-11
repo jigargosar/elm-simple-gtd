@@ -104,6 +104,14 @@ isDeleted =
     getDeleted
 
 
+isActive =
+    anyPass [ isDeleted, isDone ]
+
+
+isNotActive =
+    isActive >> not
+
+
 getProjectId =
     (.projectId)
 

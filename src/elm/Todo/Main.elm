@@ -2,7 +2,7 @@ port module Todo.Main exposing (..)
 
 import Document
 import Entity
-import Ext.Record as Record
+import Ext.Record as Record exposing (set)
 import Model
 import Notification
 import Return
@@ -33,11 +33,11 @@ timeTracker =
     Record.init .timeTracker (\s b -> { b | timeTracker = s })
 
 
-over =
+mapOver =
     Record.over >>> Return.map
 
 
-set =
+mapSet =
     Record.set >>> Return.map
 
 
@@ -67,16 +67,16 @@ subscriptions m =
 update andThenUpdate now todoMsg =
     case todoMsg of
         ToggleRunning todoId ->
-            over timeTracker (Tracker.toggleStartStop todoId now)
+            mapOver timeTracker (Tracker.toggleStartStop todoId now)
 
         InitRunning todoId ->
-            set timeTracker (Tracker.initRunning todoId now)
+            mapSet timeTracker (Tracker.initRunning todoId now)
 
         TogglePaused ->
-            over timeTracker (Tracker.togglePause now)
+            mapOver timeTracker (Tracker.togglePause now)
 
         StopRunning ->
-            set timeTracker Tracker.none
+            mapSet timeTracker Tracker.none
 
         GotoRunning ->
             map (gotoRunningTodo)
@@ -86,7 +86,18 @@ update andThenUpdate now todoMsg =
             updateTimeTracker now
 
         Upsert todo ->
-            identity
+            map
+                (\model ->
+                    let
+                        shouldDisableTracker =
+                            Todo.isNotActive todo
+                                || Tracker.isTrackingTodo todo model.timeTracker
+                    in
+                        if shouldDisableTracker then
+                            set timeTracker Tracker.none model
+                        else
+                            model
+                )
 
         RunningNotificationResponse res ->
             let

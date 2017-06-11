@@ -1,5 +1,6 @@
 module Todo.TimeTracker exposing (..)
 
+import Document
 import Material
 import Time exposing (Time)
 import Todo
@@ -102,3 +103,7 @@ updateNextAlarmAt now model =
                 ( Nothing, rec )
             )
                 |> Tuple.mapSecond wrap
+
+
+isTrackingTodo todo =
+    Maybe.unwrap False (\rec -> Document.hasId rec.todoId todo)

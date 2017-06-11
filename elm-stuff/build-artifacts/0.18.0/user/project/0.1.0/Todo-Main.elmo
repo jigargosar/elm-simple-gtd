@@ -40,6 +40,17 @@ var _user$project$Todo_Main$command = _Fresheyeball$elm_return$Return$command;
 var _user$project$Todo_Main$map = _Fresheyeball$elm_return$Return$map;
 var _user$project$Todo_Main$set = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
 var _user$project$Todo_Main$over = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _Fresheyeball$elm_return$Return$map);
+var _user$project$Todo_Main$timeTracker = A2(
+	_user$project$Ext_Record$init,
+	function (_) {
+		return _.timeTracker;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{timeTracker: s});
+		}));
 var _user$project$Todo_Main$showTodoReminderNotification = _elm_lang$core$Native_Platform.outgoingPort(
 	'showTodoReminderNotification',
 	function (v) {
@@ -93,20 +104,20 @@ var _user$project$Todo_Main$update = F3(
 			case 'ToggleRunning':
 				return A2(
 					_user$project$Todo_Main$over,
-					_user$project$Model$timeTracker,
+					_user$project$Todo_Main$timeTracker,
 					A2(_user$project$Todo_TimeTracker$toggleStartStop, _p2._0, now));
 			case 'InitRunning':
 				return A2(
 					_user$project$Todo_Main$set,
-					_user$project$Model$timeTracker,
+					_user$project$Todo_Main$timeTracker,
 					A2(_user$project$Todo_TimeTracker$initRunning, _p2._0, now));
 			case 'TogglePaused':
 				return A2(
 					_user$project$Todo_Main$over,
-					_user$project$Model$timeTracker,
+					_user$project$Todo_Main$timeTracker,
 					_user$project$Todo_TimeTracker$togglePause(now));
 			case 'StopRunning':
-				return A2(_user$project$Todo_Main$set, _user$project$Model$timeTracker, _user$project$Todo_TimeTracker$none);
+				return A2(_user$project$Todo_Main$set, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none);
 			case 'GotoRunning':
 				return function (_p3) {
 					return A2(
@@ -163,7 +174,7 @@ var _user$project$Todo_Main$update = F3(
 						return foo(
 							A3(
 								_user$project$Ext_Record$overT2,
-								_user$project$Model$timeTracker,
+								_user$project$Todo_Main$timeTracker,
 								_user$project$Todo_TimeTracker$updateNextAlarmAt(now),
 								_p7));
 					});

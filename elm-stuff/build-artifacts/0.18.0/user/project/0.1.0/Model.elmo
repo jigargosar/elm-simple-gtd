@@ -788,17 +788,6 @@ var _user$project$Model$updateCombo = function (comboMsg) {
 		_user$project$Model$keyComboModel,
 		_scottcorgan$keyboard_combo$Keyboard_Combo$update(comboMsg));
 };
-var _user$project$Model$timeTracker = A2(
-	_user$project$Ext_Record$init,
-	function (_) {
-		return _.timeTracker;
-	},
-	F2(
-		function (s, b) {
-			return _elm_lang$core$Native_Utils.update(
-				b,
-				{timeTracker: s});
-		}));
 var _user$project$Model$focusInEntity = A2(
 	_user$project$Ext_Record$init,
 	function (_) {

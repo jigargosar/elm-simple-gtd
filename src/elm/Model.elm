@@ -251,10 +251,6 @@ focusInEntity =
     Record.init .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
-timeTracker =
-    Record.init .timeTracker (\s b -> { b | timeTracker = s })
-
-
 keyComboModel =
     Record.init .keyComboModel (\s b -> { b | keyComboModel = s })
 

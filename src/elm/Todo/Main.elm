@@ -29,6 +29,10 @@ port showRunningTodoNotification : Notification.Request -> Cmd msg
 port onRunningTodoNotificationClicked : (Notification.Response -> msg) -> Sub msg
 
 
+timeTracker =
+    Ext.Record.init .timeTracker (\s b -> { b | timeTracker = s })
+
+
 over =
     Ext.Record.over >>> Return.map
 
@@ -59,16 +63,16 @@ subscriptions m =
 update andThenUpdate todoMsg now =
     case todoMsg of
         ToggleRunning todoId ->
-            over Model.timeTracker (Todo.TimeTracker.toggleStartStop todoId now)
+            over timeTracker (Todo.TimeTracker.toggleStartStop todoId now)
 
         InitRunning todoId ->
-            set Model.timeTracker (Todo.TimeTracker.initRunning todoId now)
+            set timeTracker (Todo.TimeTracker.initRunning todoId now)
 
         TogglePaused ->
-            over Model.timeTracker (Todo.TimeTracker.togglePause now)
+            over timeTracker (Todo.TimeTracker.togglePause now)
 
         StopRunning ->
-            set Model.timeTracker Todo.TimeTracker.none
+            set timeTracker Todo.TimeTracker.none
 
         GotoRunning ->
             map (gotoRunningTodo)
@@ -103,7 +107,7 @@ update andThenUpdate todoMsg now =
                     )
             in
                 Return.andThen
-                    (Ext.Record.overT2 Model.timeTracker (Todo.TimeTracker.updateNextAlarmAt now)
+                    (Ext.Record.overT2 timeTracker (Todo.TimeTracker.updateNextAlarmAt now)
                         >> foo
                     )
 

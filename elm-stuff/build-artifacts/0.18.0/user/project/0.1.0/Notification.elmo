@@ -1,0 +1,4 @@
+var _user$project$Notification$Response = F2(
+	function (a, b) {
+		return {action: a, data: b};
+	});

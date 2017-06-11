@@ -12,6 +12,7 @@ import Ext.Decode exposing (traceDecoder)
 import Ext.Time
 import Html.Attributes.Extra exposing (intProperty)
 import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
+import Html.Keyed
 import Json.Decode
 import Json.Encode
 import Keyboard.Extra as Key exposing (Key)
@@ -45,6 +46,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import Polymer.Paper as Paper
+import View.FullBleedCapture
 import View.Shared exposing (SharedViewModel, defaultOkCancelButtons, defaultOkCancelDeleteButtons, hideOnHover)
 import WebComponents exposing (..)
 
@@ -493,9 +495,44 @@ contextMenu =
 
 
 reminderPopup form model =
-    Menu.view ([ "i1", "i2", "aa", "Pick date and time" ])
-        form.menuState
-        (createReminderMenuConfig form model)
+    {- Menu.view ([ "i1", "i2", "aa" , "Pick date and time"])
+       form.menuState
+       (createReminderMenuConfig form model)
+    -}
+    div
+        [ class "fullbleed-capture"
+        , onClickStopPropagation Model.DeactivateEditingMode
+        ]
+        [ div
+            [ id "popup-menu"
+            , class "z-depth-4"
+            , onClickStopPropagation commonMsg.noOp
+            ]
+            [ div [ class "font-subhead" ] [ text "Select date and time" ]
+            , Paper.input
+                [ type_ "date"
+                , class "auto-focus"
+                , labelA "Date"
+
+                {- , value reminderVM.date -}
+                , boolProperty "stopKeyboardEventPropagation" True
+
+                {- , onChange reminderVM.onDateChanged -}
+                ]
+                []
+            , Paper.input
+                [ type_ "time"
+                , labelA "Time"
+
+                {- , value reminderVM.time -}
+                , boolProperty "stopKeyboardEventPropagation" True
+
+                {- , onChange reminderVM.onTimeChanged -}
+                ]
+                []
+            , defaultOkCancelButtons
+            ]
+        ]
 
 
 createReminderMenuConfig : Todo.ReminderForm.Model -> Model.Model -> Menu.Config String Model.Msg

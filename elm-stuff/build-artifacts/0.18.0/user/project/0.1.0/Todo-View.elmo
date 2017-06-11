@@ -20,27 +20,98 @@ var _user$project$Todo_View$createReminderMenuConfig = F2(
 	});
 var _user$project$Todo_View$reminderPopup = F2(
 	function (form, model) {
-		return A3(
-			_user$project$Menu$view,
+		return A2(
+			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: 'i1',
+				_0: _elm_lang$html$Html_Attributes$class('fullbleed-capture'),
 				_1: {
 					ctor: '::',
-					_0: 'i2',
-					_1: {
-						ctor: '::',
-						_0: 'aa',
-						_1: {
-							ctor: '::',
-							_0: 'Pick date and time',
-							_1: {ctor: '[]'}
-						}
-					}
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$DeactivateEditingMode),
+					_1: {ctor: '[]'}
 				}
 			},
-			form.menuState,
-			A2(_user$project$Todo_View$createReminderMenuConfig, form, model));
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$id('popup-menu'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('z-depth-4'),
+							_1: {
+								ctor: '::',
+								_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$commonMsg.noOp),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('font-subhead'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Select date and time'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_edvail$elm_polymer$Polymer_Paper$input,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$type_('date'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+										_1: {
+											ctor: '::',
+											_0: _user$project$WebComponents$labelA('Date'),
+											_1: {
+												ctor: '::',
+												_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_edvail$elm_polymer$Polymer_Paper$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$type_('time'),
+										_1: {
+											ctor: '::',
+											_0: _user$project$WebComponents$labelA('Time'),
+											_1: {
+												ctor: '::',
+												_0: A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'stopKeyboardEventPropagation', true),
+												_1: {ctor: '[]'}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$View_Shared$defaultOkCancelButtons,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
 	});
 var _user$project$Todo_View$contextMenu = _user$project$Todo_View_Menu$context;
 var _user$project$Todo_View$projectMenu = _user$project$Todo_View_Menu$project;

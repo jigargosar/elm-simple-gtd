@@ -499,40 +499,44 @@ reminderPopup form model =
        form.menuState
        (createReminderMenuConfig form model)
     -}
-    div
-        [ class "fullbleed-capture"
-        , onClickStopPropagation Model.DeactivateEditingMode
-        ]
-        [ div
-            [ id "popup-menu"
-            , class "z-depth-4"
-            , onClickStopPropagation commonMsg.noOp
+    let
+        updateReminderForm =
+            Model.UpdateReminderForm form
+    in
+        div
+            [ class "fullbleed-capture"
+            , onClickStopPropagation Model.DeactivateEditingMode
             ]
-            [ div [ class "font-subhead" ] [ text "Select date and time" ]
-            , Paper.input
-                [ type_ "date"
-                , class "auto-focus"
-                , labelA "Date"
-
-                {- , value reminderVM.date -}
-                , boolProperty "stopKeyboardEventPropagation" True
-
-                {- , onChange reminderVM.onDateChanged -}
+            [ div
+                [ id "popup-menu"
+                , class "z-depth-4 static"
+                , onClickStopPropagation commonMsg.noOp
                 ]
-                []
-            , Paper.input
-                [ type_ "time"
-                , labelA "Time"
-
-                {- , value reminderVM.time -}
-                , boolProperty "stopKeyboardEventPropagation" True
-
-                {- , onChange reminderVM.onTimeChanged -}
+                [ div [ class "font-subhead" ] [ text "Select date and time" ]
+                , div [ class "input-field" ]
+                    [ Html.input
+                        [ type_ "date"
+                        , class "auto-focus"
+                        , value form.date
+                        , boolProperty "stopKeyboardEventPropagation" True
+                        , Todo.ReminderForm.SetDate >> updateReminderForm |> onChange
+                        ]
+                        []
+                    , Html.label [ class "active" ] [ "Date" |> text ]
+                    ]
+                , div [ class "input-field" ]
+                    [ Html.input
+                        [ type_ "time"
+                        , value form.time
+                        , boolProperty "stopKeyboardEventPropagation" True
+                        , Todo.ReminderForm.SetTime >> updateReminderForm |> onChange
+                        ]
+                        []
+                    , Html.label [ class "active" ] [ "Time" |> text ]
+                    ]
+                , defaultOkCancelButtons
                 ]
-                []
-            , defaultOkCancelButtons
             ]
-        ]
 
 
 createReminderMenuConfig : Todo.ReminderForm.Model -> Model.Model -> Menu.Config String Model.Msg

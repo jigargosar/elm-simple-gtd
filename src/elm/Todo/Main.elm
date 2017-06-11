@@ -101,11 +101,11 @@ update andThenUpdate now todoMsg =
             map
                 (\model ->
                     let
-                        shouldDisableTracker =
+                        isTrackerTodoInactive =
                             Todo.isNotActive todo
-                                || Tracker.isTrackingTodo todo model.timeTracker
+                                && Tracker.isTrackingTodo todo model.timeTracker
                     in
-                        if shouldDisableTracker then
+                        if isTrackerTodoInactive then
                             set timeTracker Tracker.none model
                         else
                             model

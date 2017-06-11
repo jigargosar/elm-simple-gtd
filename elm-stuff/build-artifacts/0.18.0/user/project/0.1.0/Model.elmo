@@ -1282,10 +1282,6 @@ var _user$project$Model$toggleDeleteEntity = F2(
 			}
 		}()(model);
 	});
-var _user$project$Model$NotificationRequest = F5(
-	function (a, b, c, d, e) {
-		return {tag: a, title: b, body: c, actions: d, data: e};
-	});
 var _user$project$Model$Model = function (a) {
 	return function (b) {
 		return function (c) {
@@ -1364,18 +1360,18 @@ var _user$project$Model$OnTodoMsg = function (a) {
 };
 var _user$project$Model$onTodoToggleRunning = function (_p65) {
 	return _user$project$Model$OnTodoMsg(
-		_user$project$Todo_Msg$OnTodoToggleRunning(_p65));
+		_user$project$Todo_Msg$ToggleRunning(_p65));
 };
 var _user$project$Model$onTodoInitRunning = function (_p66) {
 	return _user$project$Model$OnTodoMsg(
-		_user$project$Todo_Msg$OnTodoInitRunning(_p66));
+		_user$project$Todo_Msg$InitRunning(_p66));
 };
 var _user$project$Model$onRunningTodoNotificationClicked = function (_p67) {
 	return _user$project$Model$OnTodoMsg(
-		_user$project$Todo_Msg$OnRunningTodoNotificationClicked(_p67));
+		_user$project$Todo_Msg$RunningNotificationResponse(_p67));
 };
-var _user$project$Model$onTodoStopRunning = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$OnTodoStopRunning);
-var _user$project$Model$onTodoTogglePaused = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$OnTodoTogglePaused);
+var _user$project$Model$onTodoStopRunning = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$StopRunning);
+var _user$project$Model$onTodoTogglePaused = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$TogglePaused);
 var _user$project$Model$keyboardCombos = {
 	ctor: '::',
 	_0: A2(
@@ -1391,8 +1387,8 @@ var _user$project$Model$keyboardCombos = {
 		_1: {ctor: '[]'}
 	}
 };
-var _user$project$Model$onGotoRunningTodo = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$OnGotoRunningTodo);
-var _user$project$Model$onUpdateTodoTimeTracker = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$OnUpdateTodoTimeTracker);
+var _user$project$Model$onGotoRunningTodo = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$GotoRunning);
+var _user$project$Model$onUpdateTodoTimeTracker = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$UpdateTimeTracker);
 var _user$project$Model$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {
 		return {ctor: 'OnLaunchBarMsgWithNow', _0: a, _1: b};

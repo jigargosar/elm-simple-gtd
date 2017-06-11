@@ -2,3 +2,7 @@ var _user$project$Notification$Response = F2(
 	function (a, b) {
 		return {action: a, data: b};
 	});
+var _user$project$Notification$Request = F5(
+	function (a, b, c, d, e) {
+		return {tag: a, title: b, body: c, actions: d, data: e};
+	});

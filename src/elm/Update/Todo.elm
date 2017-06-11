@@ -2,7 +2,8 @@ port module Update.Todo exposing (..)
 
 import Document
 import Ext.Record
-import Model exposing (NotificationRequest)
+import Model
+import Notification
 import Return
 import Todo
 import Todo.Msg exposing (Msg(..))
@@ -15,7 +16,13 @@ import Maybe.Extra as Maybe
 import Todo.TimeTracker
 
 
-port showRunningTodoNotification : NotificationRequest -> Cmd msg
+port notificationClicked : (Model.TodoNotificationEvent -> msg) -> Sub msg
+
+
+port showRunningTodoNotification : Notification.Request -> Cmd msg
+
+
+port onRunningTodoNotificationClicked : (Notification.Response -> msg) -> Sub msg
 
 
 over =
@@ -36,6 +43,13 @@ command =
 
 maybeMapToCmd fn =
     Maybe.map fn >>?= Cmd.none
+
+
+subscriptions m =
+    Sub.batch
+        [ notificationClicked Model.OnNotificationClicked
+        , onRunningTodoNotificationClicked Model.onRunningTodoNotificationClicked
+        ]
 
 
 onTodoMsgWithTime andThenUpdate todoMsg now =

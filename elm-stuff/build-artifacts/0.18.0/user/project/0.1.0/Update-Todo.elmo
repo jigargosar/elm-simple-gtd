@@ -8,6 +8,29 @@ var _user$project$Update_Todo$command = _Fresheyeball$elm_return$Return$command;
 var _user$project$Update_Todo$map = _Fresheyeball$elm_return$Return$map;
 var _user$project$Update_Todo$set = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
 var _user$project$Update_Todo$over = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _Fresheyeball$elm_return$Return$map);
+var _user$project$Update_Todo$notificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+	'notificationClicked',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (action) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (data) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{action: action, data: data});
+				},
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'data',
+					A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (id) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{id: id});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
 var _user$project$Update_Todo$showRunningTodoNotification = _elm_lang$core$Native_Platform.outgoingPort(
 	'showRunningTodoNotification',
 	function (v) {
@@ -26,31 +49,31 @@ var _user$project$Update_Todo$onTodoMsgWithTime = F3(
 	function (andThenUpdate, todoMsg, now) {
 		var _p0 = todoMsg;
 		switch (_p0.ctor) {
-			case 'OnTodoToggleRunning':
+			case 'ToggleRunning':
 				return A2(
 					_user$project$Update_Todo$over,
 					_user$project$Model$timeTracker,
 					A2(_user$project$Todo_TimeTracker$toggleStartStop, _p0._0, now));
-			case 'OnTodoInitRunning':
+			case 'InitRunning':
 				return A2(
 					_user$project$Update_Todo$set,
 					_user$project$Model$timeTracker,
 					A2(_user$project$Todo_TimeTracker$initRunning, _p0._0, now));
-			case 'OnTodoTogglePaused':
+			case 'TogglePaused':
 				return A2(
 					_user$project$Update_Todo$over,
 					_user$project$Model$timeTracker,
 					_user$project$Todo_TimeTracker$togglePause(now));
-			case 'OnTodoStopRunning':
+			case 'StopRunning':
 				return A2(_user$project$Update_Todo$set, _user$project$Model$timeTracker, _user$project$Todo_TimeTracker$none);
-			case 'OnGotoRunningTodo':
+			case 'GotoRunning':
 				return function (_p1) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnSetDomFocusToFocusInEntity,
 						A2(_user$project$Update_Todo$map, _user$project$Model$gotoRunningTodo, _p1));
 				};
-			case 'OnUpdateTodoTimeTracker':
+			case 'UpdateTimeTracker':
 				var maybeCreateRunningTodoNotificationRequest = F2(
 					function (maybeTrackerInfo, model) {
 						var createRequest = F2(
@@ -121,3 +144,38 @@ var _user$project$Update_Todo$onTodoMsgWithTime = F3(
 				};
 		}
 	});
+var _user$project$Update_Todo$onRunningTodoNotificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+	'onRunningTodoNotificationClicked',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (action) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (data) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{action: action, data: data});
+				},
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'data',
+					A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (id) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{id: id});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
+var _user$project$Update_Todo$subscriptions = function (m) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: _user$project$Update_Todo$notificationClicked(_user$project$Model$OnNotificationClicked),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Update_Todo$onRunningTodoNotificationClicked(_user$project$Model$onRunningTodoNotificationClicked),
+				_1: {ctor: '[]'}
+			}
+		});
+};

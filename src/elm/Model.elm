@@ -44,15 +44,6 @@ import Todo.GroupForm
 import Todo.TimeTracker
 
 
-type alias NotificationRequest =
-    { tag : String
-    , title : String
-    , body : String
-    , actions : List { title : String, action : String }
-    , data : { id : String, notificationClickedPort : String }
-    }
-
-
 type Msg
     = OnCommonMsg CommonMsg.Msg
     | OnPouchDBChange String D.Value

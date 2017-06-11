@@ -49,12 +49,6 @@ createTodoNotification todo =
         { title = Todo.getText todo, tag = id, data = { id = id } }
 
 
-port notificationClicked : (TodoNotificationEvent -> msg) -> Sub msg
-
-
-port onRunningTodoNotificationClicked : (Notification.Response -> msg) -> Sub msg
-
-
 port syncWithRemotePouch : String -> Cmd msg
 
 
@@ -98,11 +92,10 @@ subscriptions m =
         [ Time.every (Time.second * 1) OnNowChanged
         , Keyboard.subscription OnKeyboardMsg
         , Keyboard.ups OnGlobalKeyUp
-        , notificationClicked OnNotificationClicked
-        , onRunningTodoNotificationClicked Model.onRunningTodoNotificationClicked
         , Store.onChange OnPouchDBChange
         , Firebase.onChange OnFirebaseChange
         , Keyboard.Combo.subscriptions m.keyComboModel
+        , Update.Todo.subscriptions m
         ]
 
 

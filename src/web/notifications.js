@@ -1,6 +1,7 @@
 "use strict";
 import _ from "ramda"
 import $ from "jquery"
+import sound from "./sound"
 
 export default {setup: setupNotifications}
 
@@ -65,6 +66,7 @@ const closeNotification = reg => async (tag) => {
 
 const showRunningTodoNotification = reg => async (req) => {
     const permission = await Notification.requestPermission()
+    sound.start()
     if (permission !== "granted") return
     reg.showNotification(req.title, {
         tag: req.tag,

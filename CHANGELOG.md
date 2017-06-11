@@ -1,7 +1,7 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
-## Upcoming
+## v0.18.5 - 2017-06-11
 * fix running todo being canceled on update
 * edit reminder: get rid of polymer. so that we can add menu and edit date time form
 * trap focus in popup menu: fix bug where arrow keys were not moving menu's highlighted item.

@@ -47,9 +47,9 @@
     </TaskOptions>
     <TaskOptions isEnabled="true">
       <option name="arguments" value="$FilePathRelativeToProjectRoot$ --yes --output /dev/null" />
-      <option name="checkSyntaxErrors" value="false" />
+      <option name="checkSyntaxErrors" value="true" />
       <option name="description" />
-      <option name="exitCodeBehavior" value="ALWAYS" />
+      <option name="exitCodeBehavior" value="ERROR" />
       <option name="fileExtension" value="elm" />
       <option name="immediateSync" value="false" />
       <option name="name" value="elm-compile-and-lint Copy" />

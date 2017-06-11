@@ -30,6 +30,7 @@ import Store
 import Time exposing (Time)
 import Todo
 import Todo.Form
+import Todo.Msg
 import Todo.NewForm
 import Todo.ReminderForm
 import Todo.Store
@@ -50,22 +51,6 @@ type alias NotificationRequest =
     , actions : List { title : String, action : String }
     , data : { id : String, notificationClickedPort : String }
     }
-
-
-type alias NotificationClickResponse =
-    { action : String
-    , data : { id : String }
-    }
-
-
-type TodoMsg
-    = OnTodoToggleRunning Todo.Id
-    | OnTodoInitRunning Todo.Id
-    | OnTodoStopRunning
-    | OnTodoTogglePaused
-    | OnRunningTodoNotificationClicked NotificationClickResponse
-    | OnGotoRunningTodo
-    | OnUpdateTodoTimeTracker
 
 
 type Msg
@@ -113,8 +98,8 @@ type Msg
     | OnEntityAction Entity Entity.Action
     | OnLaunchBarMsg LaunchBar.Action
     | OnLaunchBarMsgWithNow LaunchBar.Action Time
-    | OnTodoMsg TodoMsg
-    | OnTodoMsgWithTime TodoMsg Time
+    | OnTodoMsg Todo.Msg.Msg
+    | OnTodoMsgWithTime Todo.Msg.Msg Time
     | OnKeyCombo Combo.Msg
     | OnCloseNotification String
     | OnSetDomFocusToFocusInEntity
@@ -128,31 +113,31 @@ keyboardCombos =
 
 
 onTodoToggleRunning =
-    OnTodoToggleRunning >> OnTodoMsg
+    Todo.Msg.OnTodoToggleRunning >> OnTodoMsg
 
 
 onTodoInitRunning =
-    OnTodoInitRunning >> OnTodoMsg
+    Todo.Msg.OnTodoInitRunning >> OnTodoMsg
 
 
 onRunningTodoNotificationClicked =
-    OnRunningTodoNotificationClicked >> OnTodoMsg
+    Todo.Msg.OnRunningTodoNotificationClicked >> OnTodoMsg
 
 
 onTodoStopRunning =
-    OnTodoStopRunning |> OnTodoMsg
+    Todo.Msg.OnTodoStopRunning |> OnTodoMsg
 
 
 onTodoTogglePaused =
-    OnTodoTogglePaused |> OnTodoMsg
+    Todo.Msg.OnTodoTogglePaused |> OnTodoMsg
 
 
 onGotoRunningTodo =
-    OnGotoRunningTodo |> OnTodoMsg
+    Todo.Msg.OnGotoRunningTodo |> OnTodoMsg
 
 
 onUpdateTodoTimeTracker =
-    OnUpdateTodoTimeTracker |> OnTodoMsg
+    Todo.Msg.OnUpdateTodoTimeTracker |> OnTodoMsg
 
 
 commonMsg : CommonMsg.Helper Msg

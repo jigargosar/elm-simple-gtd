@@ -15,6 +15,7 @@ import LaunchBar
 import Ext.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Model as Model
+import Notification exposing (Response)
 import ReminderOverlay
 import Routes
 import Store
@@ -51,7 +52,7 @@ createTodoNotification todo =
 port notificationClicked : (TodoNotificationEvent -> msg) -> Sub msg
 
 
-port onRunningTodoNotificationClicked : (NotificationClickResponse -> msg) -> Sub msg
+port onRunningTodoNotificationClicked : (Notification.Response -> msg) -> Sub msg
 
 
 port syncWithRemotePouch : String -> Cmd msg

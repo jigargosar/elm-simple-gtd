@@ -5,6 +5,7 @@ import Ext.Record
 import Model exposing (NotificationRequest)
 import Return
 import Todo
+import Todo.Msg exposing (Msg(..))
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -39,23 +40,23 @@ maybeMapToCmd fn =
 
 onTodoMsgWithTime andThenUpdate todoMsg now =
     case todoMsg of
-        Model.OnTodoToggleRunning todoId ->
+        OnTodoToggleRunning todoId ->
             over Model.timeTracker (Todo.TimeTracker.toggleStartStop todoId now)
 
-        Model.OnTodoInitRunning todoId ->
+        OnTodoInitRunning todoId ->
             set Model.timeTracker (Todo.TimeTracker.initRunning todoId now)
 
-        Model.OnTodoTogglePaused ->
+        OnTodoTogglePaused ->
             over Model.timeTracker (Todo.TimeTracker.togglePause now)
 
-        Model.OnTodoStopRunning ->
+        OnTodoStopRunning ->
             set Model.timeTracker Todo.TimeTracker.none
 
-        Model.OnGotoRunningTodo ->
+        OnGotoRunningTodo ->
             map (Model.gotoRunningTodo)
                 >> andThenUpdate Model.OnSetDomFocusToFocusInEntity
 
-        Model.OnUpdateTodoTimeTracker ->
+        OnUpdateTodoTimeTracker ->
             let
                 maybeCreateRunningTodoNotificationRequest maybeTrackerInfo model =
                     let
@@ -88,7 +89,7 @@ onTodoMsgWithTime andThenUpdate todoMsg now =
                         >> foo
                     )
 
-        Model.OnRunningTodoNotificationClicked res ->
+        OnRunningTodoNotificationClicked res ->
             let
                 todoId =
                     res.data.id

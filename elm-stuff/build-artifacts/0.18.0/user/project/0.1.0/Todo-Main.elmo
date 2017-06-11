@@ -1,0 +1,190 @@
+var _user$project$Todo_Main$maybeMapToCmd = function (fn) {
+	return A2(
+		_user$project$Ext_Function_Infix_ops['>>?='],
+		_elm_lang$core$Maybe$map(fn),
+		_elm_lang$core$Platform_Cmd$none);
+};
+var _user$project$Todo_Main$command = _Fresheyeball$elm_return$Return$command;
+var _user$project$Todo_Main$map = _Fresheyeball$elm_return$Return$map;
+var _user$project$Todo_Main$set = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
+var _user$project$Todo_Main$over = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _Fresheyeball$elm_return$Return$map);
+var _user$project$Todo_Main$showTodoReminderNotification = _elm_lang$core$Native_Platform.outgoingPort(
+	'showTodoReminderNotification',
+	function (v) {
+		return {
+			title: v.title,
+			tag: v.tag,
+			data: {id: v.data.id}
+		};
+	});
+var _user$project$Todo_Main$notificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+	'notificationClicked',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (action) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (data) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{action: action, data: data});
+				},
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'data',
+					A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (id) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{id: id});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
+var _user$project$Todo_Main$showRunningTodoNotification = _elm_lang$core$Native_Platform.outgoingPort(
+	'showRunningTodoNotification',
+	function (v) {
+		return {
+			tag: v.tag,
+			title: v.title,
+			body: v.body,
+			actions: _elm_lang$core$Native_List.toArray(v.actions).map(
+				function (v) {
+					return {title: v.title, action: v.action};
+				}),
+			data: {id: v.data.id, notificationClickedPort: v.data.notificationClickedPort}
+		};
+	});
+var _user$project$Todo_Main$onTodoMsgWithTime = F3(
+	function (andThenUpdate, todoMsg, now) {
+		var _p0 = todoMsg;
+		switch (_p0.ctor) {
+			case 'ToggleRunning':
+				return A2(
+					_user$project$Todo_Main$over,
+					_user$project$Model$timeTracker,
+					A2(_user$project$Todo_TimeTracker$toggleStartStop, _p0._0, now));
+			case 'InitRunning':
+				return A2(
+					_user$project$Todo_Main$set,
+					_user$project$Model$timeTracker,
+					A2(_user$project$Todo_TimeTracker$initRunning, _p0._0, now));
+			case 'TogglePaused':
+				return A2(
+					_user$project$Todo_Main$over,
+					_user$project$Model$timeTracker,
+					_user$project$Todo_TimeTracker$togglePause(now));
+			case 'StopRunning':
+				return A2(_user$project$Todo_Main$set, _user$project$Model$timeTracker, _user$project$Todo_TimeTracker$none);
+			case 'GotoRunning':
+				return function (_p1) {
+					return A2(
+						andThenUpdate,
+						_user$project$Model$OnSetDomFocusToFocusInEntity,
+						A2(_user$project$Todo_Main$map, _user$project$Model$gotoRunningTodo, _p1));
+				};
+			case 'UpdateTimeTracker':
+				var maybeCreateRunningTodoNotificationRequest = F2(
+					function (maybeTrackerInfo, model) {
+						var createRequest = F2(
+							function (info, todo) {
+								var todoId = _user$project$Document$getId(todo);
+								return {
+									tag: todoId,
+									title: 'You are currently working on',
+									body: _user$project$Todo$getText(todo),
+									actions: {
+										ctor: '::',
+										_0: {title: 'Stop', action: 'stop'},
+										_1: {
+											ctor: '::',
+											_0: {title: 'Mark Done', action: 'mark-done'},
+											_1: {ctor: '[]'}
+										}
+									},
+									data: {id: todoId, notificationClickedPort: 'onRunningTodoNotificationClicked'}
+								};
+							});
+						return A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
+							maybeTrackerInfo,
+							function (info) {
+								return A2(
+									_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+									A2(_user$project$Model$findTodoById, info.todoId, model),
+									createRequest(info));
+							});
+					});
+				var foo = function (_p2) {
+					var _p3 = _p2;
+					var _p4 = _p3._1;
+					return {
+						ctor: '_Tuple2',
+						_0: _p4,
+						_1: A2(
+							_user$project$Todo_Main$maybeMapToCmd,
+							_user$project$Todo_Main$showRunningTodoNotification,
+							A2(maybeCreateRunningTodoNotificationRequest, _p3._0, _p4))
+					};
+				};
+				return _Fresheyeball$elm_return$Return$andThen(
+					function (_p5) {
+						return foo(
+							A3(
+								_user$project$Ext_Record$overT2,
+								_user$project$Model$timeTracker,
+								_user$project$Todo_TimeTracker$updateNextAlarmAt(now),
+								_p5));
+					});
+			default:
+				var _p8 = _p0._0;
+				var todoId = _p8.data.id;
+				return function (_p6) {
+					return A2(
+						andThenUpdate,
+						_user$project$Model$OnCloseNotification(todoId),
+						function () {
+							var _p7 = _p8.action;
+							if (_p7 === 'stop') {
+								return andThenUpdate(_user$project$Model$onTodoStopRunning);
+							} else {
+								return andThenUpdate(_user$project$Model$onGotoRunningTodo);
+							}
+						}()(_p6));
+				};
+		}
+	});
+var _user$project$Todo_Main$onRunningTodoNotificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+	'onRunningTodoNotificationClicked',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (action) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (data) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{action: action, data: data});
+				},
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'data',
+					A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (id) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{id: id});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
+var _user$project$Todo_Main$subscriptions = function (m) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: _user$project$Todo_Main$notificationClicked(_user$project$Model$OnNotificationClicked),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Todo_Main$onRunningTodoNotificationClicked(_user$project$Model$onRunningTodoNotificationClicked),
+				_1: {ctor: '[]'}
+			}
+		});
+};

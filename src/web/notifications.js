@@ -47,7 +47,7 @@ async function setupNotifications(fire, app) {
     }, 100)
 
 
-    app.ports["showNotification"].subscribe(showNotification(fire, reg))
+    app.ports["showTodoReminderNotification"].subscribe(showTodoReminderNotification(fire, reg))
 
     app.ports["closeNotification"].subscribe(closeNotification(reg))
 
@@ -81,7 +81,7 @@ const showRunningTodoNotification = reg => async (req) => {
 }
 
 // const showNotification = (fire, reg) => async ([uid, connected, msg]) => {
-const showNotification = (fire, reg) => async (msg) => {
+const showTodoReminderNotification = (fire, reg) => async (msg) => {
     const {tag, title, data} = msg
     /*
      console.info(connected, msg)

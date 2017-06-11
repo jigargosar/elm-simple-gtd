@@ -31,7 +31,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
 import Model exposing (..)
-import Update.Todo
+import Todo.Main
 import View
 
 
@@ -92,7 +92,7 @@ subscriptions m =
         , Store.onChange OnPouchDBChange
         , Firebase.onChange OnFirebaseChange
         , Keyboard.Combo.subscriptions m.keyComboModel
-        , Update.Todo.subscriptions m
+        , Todo.Main.subscriptions m
         ]
 
 
@@ -362,7 +362,7 @@ update msg =
                     withNow (OnTodoMsgWithTime todoMsg)
 
                 OnTodoMsgWithTime todoMsg now ->
-                    Update.Todo.onTodoMsgWithTime andThenUpdate todoMsg now
+                    Todo.Main.onTodoMsgWithTime andThenUpdate todoMsg now
            )
         >> persistAll
 
@@ -426,7 +426,7 @@ sendNotifications =
 showTodoNotificationCmd ( ( todo, model ), cmd ) =
     let
         cmds =
-            [ cmd, createTodoNotification todo |> Update.Todo.showTodoReminderNotification, startAlarm () ]
+            [ cmd, createTodoNotification todo |> Todo.Main.showTodoReminderNotification, startAlarm () ]
     in
         model ! cmds
 

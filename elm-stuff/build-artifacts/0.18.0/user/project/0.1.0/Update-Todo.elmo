@@ -8,6 +8,15 @@ var _user$project$Update_Todo$command = _Fresheyeball$elm_return$Return$command;
 var _user$project$Update_Todo$map = _Fresheyeball$elm_return$Return$map;
 var _user$project$Update_Todo$set = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
 var _user$project$Update_Todo$over = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _Fresheyeball$elm_return$Return$map);
+var _user$project$Update_Todo$showTodoReminderNotification = _elm_lang$core$Native_Platform.outgoingPort(
+	'showTodoReminderNotification',
+	function (v) {
+		return {
+			title: v.title,
+			tag: v.tag,
+			data: {id: v.data.id}
+		};
+	});
 var _user$project$Update_Todo$notificationClicked = _elm_lang$core$Native_Platform.incomingPort(
 	'notificationClicked',
 	A2(

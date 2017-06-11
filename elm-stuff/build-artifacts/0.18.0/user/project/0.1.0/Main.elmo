@@ -85,6 +85,38 @@ var _user$project$Main$withNow = function (toMsg) {
 };
 var _user$project$Main$set = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _user$project$Main$map);
 var _user$project$Main$over = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _user$project$Main$map);
+var _user$project$Main$subscriptions = function (m) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 1, _user$project$Model$OnNowChanged),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Ext_Keyboard$subscription(_user$project$Model$OnKeyboardMsg),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Ext_Keyboard$ups(_user$project$Model$OnGlobalKeyUp),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Store$onChange(_user$project$Model$OnPouchDBChange),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Firebase$onChange(_user$project$Model$OnFirebaseChange),
+							_1: {
+								ctor: '::',
+								_0: _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions(m.keyComboModel),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Todo_Main$subscriptions(m),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
 var _user$project$Main$init = function (_p2) {
 	return _Fresheyeball$elm_return$Return$singleton(
 		_user$project$Model$init(_p2));
@@ -97,15 +129,6 @@ var _user$project$Main$createTodoNotification = function (todo) {
 		data: {id: id}
 	};
 };
-var _user$project$Main$showNotification = _elm_lang$core$Native_Platform.outgoingPort(
-	'showNotification',
-	function (v) {
-		return {
-			title: v.title,
-			tag: v.tag,
-			data: {id: v.data.id}
-		};
-	});
 var _user$project$Main$closeNotification = _elm_lang$core$Native_Platform.outgoingPort(
 	'closeNotification',
 	function (v) {
@@ -168,88 +191,6 @@ var _user$project$Main$reminderOverlayAction = function (action) {
 			}()(model);
 		});
 };
-var _user$project$Main$notificationClicked = _elm_lang$core$Native_Platform.incomingPort(
-	'notificationClicked',
-	A2(
-		_elm_lang$core$Json_Decode$andThen,
-		function (action) {
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (data) {
-					return _elm_lang$core$Json_Decode$succeed(
-						{action: action, data: data});
-				},
-				A2(
-					_elm_lang$core$Json_Decode$field,
-					'data',
-					A2(
-						_elm_lang$core$Json_Decode$andThen,
-						function (id) {
-							return _elm_lang$core$Json_Decode$succeed(
-								{id: id});
-						},
-						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
-		},
-		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$onRunningTodoNotificationClicked = _elm_lang$core$Native_Platform.incomingPort(
-	'onRunningTodoNotificationClicked',
-	A2(
-		_elm_lang$core$Json_Decode$andThen,
-		function (action) {
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (data) {
-					return _elm_lang$core$Json_Decode$succeed(
-						{action: action, data: data});
-				},
-				A2(
-					_elm_lang$core$Json_Decode$field,
-					'data',
-					A2(
-						_elm_lang$core$Json_Decode$andThen,
-						function (id) {
-							return _elm_lang$core$Json_Decode$succeed(
-								{id: id});
-						},
-						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
-		},
-		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$subscriptions = function (m) {
-	return _elm_lang$core$Platform_Sub$batch(
-		{
-			ctor: '::',
-			_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 1, _user$project$Model$OnNowChanged),
-			_1: {
-				ctor: '::',
-				_0: _user$project$Ext_Keyboard$subscription(_user$project$Model$OnKeyboardMsg),
-				_1: {
-					ctor: '::',
-					_0: _user$project$Ext_Keyboard$ups(_user$project$Model$OnGlobalKeyUp),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Main$notificationClicked(_user$project$Model$OnNotificationClicked),
-						_1: {
-							ctor: '::',
-							_0: _user$project$Main$onRunningTodoNotificationClicked(_user$project$Model$onRunningTodoNotificationClicked),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Store$onChange(_user$project$Model$OnPouchDBChange),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Firebase$onChange(_user$project$Model$OnFirebaseChange),
-									_1: {
-										ctor: '::',
-										_0: _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions(m.keyComboModel),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		});
-};
 var _user$project$Main$syncWithRemotePouch = _elm_lang$core$Native_Platform.outgoingPort(
 	'syncWithRemotePouch',
 	function (v) {
@@ -267,7 +208,7 @@ var _user$project$Main$showTodoNotificationCmd = function (_p11) {
 		_0: _p12._1,
 		_1: {
 			ctor: '::',
-			_0: _user$project$Main$showNotification(
+			_0: _user$project$Todo_Main$showTodoReminderNotification(
 				_user$project$Main$createTodoNotification(_p12._0._0)),
 			_1: {
 				ctor: '::',
@@ -686,7 +627,7 @@ var _user$project$Main$update = function (msg) {
 						return _user$project$Main$withNow(
 							_user$project$Model$OnTodoMsgWithTime(_p16._0));
 					default:
-						return A3(_user$project$Update_Todo$onTodoMsgWithTime, _user$project$Main$andThenUpdate, _p16._0, _p16._1);
+						return A3(_user$project$Todo_Main$onTodoMsgWithTime, _user$project$Main$andThenUpdate, _p16._0, _p16._1);
 				}
 			}()(
 				_Fresheyeball$elm_return$Return$singleton(_p15)));

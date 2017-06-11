@@ -1,4 +1,4 @@
-port module Update.Todo exposing (..)
+port module Todo.Main exposing (..)
 
 import Document
 import Ext.Record

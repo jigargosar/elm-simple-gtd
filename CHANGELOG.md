@@ -2,7 +2,7 @@
 * edit reminder: add menu items for later, tomorrow, etc.
 
 
-## Upcoming
+## v0.18.4 - 2017-06-11
 * revert edit reminder incomplete commits: so as to fix running todo bug.
 * bug: on todo changes running todo gets discarded. 
 

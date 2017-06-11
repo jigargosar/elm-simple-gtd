@@ -98,73 +98,67 @@ var _user$project$Todo_Main$showRunningTodoNotification = _elm_lang$core$Native_
 			data: {id: v.data.id, notificationClickedPort: v.data.notificationClickedPort}
 		};
 	});
-var _user$project$Todo_Main$updateTimeTracker = function (now) {
-	var maybeCreateRunningTodoNotificationRequest = F2(
-		function (maybeTrackerInfo, model) {
-			var createRequest = F2(
-				function (info, todo) {
-					var todoId = _user$project$Document$getId(todo);
-					return {
-						tag: todoId,
-						title: 'You are currently working on',
-						body: _user$project$Todo$getText(todo),
-						actions: {
-							ctor: '::',
-							_0: {title: 'Stop', action: 'stop'},
-							_1: {
-								ctor: '::',
-								_0: {title: 'Mark Done', action: 'mark-done'},
-								_1: {ctor: '[]'}
-							}
-						},
-						data: {id: todoId, notificationClickedPort: 'onRunningTodoNotificationClicked'}
-					};
-				});
-			return A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
-				maybeTrackerInfo,
-				function (info) {
-					return A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-						A2(_user$project$Model$findTodoById, info.todoId, model),
-						createRequest(info));
-				});
+var _user$project$Todo_Main$showRunningNotificationCmd = function (_p2) {
+	var _p3 = _p2;
+	var createRequest = F2(
+		function (info, todo) {
+			var todoId = _user$project$Document$getId(todo);
+			return {
+				tag: todoId,
+				title: 'You are currently working on',
+				body: _user$project$Todo$getText(todo),
+				actions: {
+					ctor: '::',
+					_0: {title: 'Stop', action: 'stop'},
+					_1: {
+						ctor: '::',
+						_0: {title: 'Mark Done', action: 'mark-done'},
+						_1: {ctor: '[]'}
+					}
+				},
+				data: {id: todoId, notificationClickedPort: 'onRunningTodoNotificationClicked'}
+			};
 		});
+	return A2(
+		_user$project$Todo_Main$maybeMapToCmd,
+		_user$project$Todo_Main$showRunningTodoNotification,
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
+			_p3._0,
+			function (info) {
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					A2(_user$project$Model$findTodoById, info.todoId, _p3._1),
+					createRequest(info));
+			}));
+};
+var _user$project$Todo_Main$updateTimeTracker = function (now) {
 	return _user$project$Todo_Main$andThen(
-		function (_p2) {
-			return function (_p3) {
-				var _p4 = _p3;
-				var _p5 = _p4._1;
-				return {
-					ctor: '_Tuple2',
-					_0: _p5,
-					_1: A2(
-						_user$project$Todo_Main$maybeMapToCmd,
-						_user$project$Todo_Main$showRunningTodoNotification,
-						A2(maybeCreateRunningTodoNotificationRequest, _p4._0, _p5))
-				};
-			}(
+		function (_p4) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
+				{ctor: '_Tuple2', _0: _elm_lang$core$Tuple$second, _1: _user$project$Todo_Main$showRunningNotificationCmd},
 				A3(
 					_user$project$Ext_Record$overT2,
 					_user$project$Todo_Main$timeTracker,
 					_user$project$Todo_TimeTracker$updateNextAlarmAt(now),
-					_p2));
+					_p4));
 		});
 };
 var _user$project$Todo_Main$update = F3(
 	function (andThenUpdate, now, todoMsg) {
-		var _p6 = todoMsg;
-		switch (_p6.ctor) {
+		var _p5 = todoMsg;
+		switch (_p5.ctor) {
 			case 'ToggleRunning':
 				return A2(
 					_user$project$Todo_Main$over,
 					_user$project$Todo_Main$timeTracker,
-					A2(_user$project$Todo_TimeTracker$toggleStartStop, _p6._0, now));
+					A2(_user$project$Todo_TimeTracker$toggleStartStop, _p5._0, now));
 			case 'InitRunning':
 				return A2(
 					_user$project$Todo_Main$set,
 					_user$project$Todo_Main$timeTracker,
-					A2(_user$project$Todo_TimeTracker$initRunning, _p6._0, now));
+					A2(_user$project$Todo_TimeTracker$initRunning, _p5._0, now));
 			case 'TogglePaused':
 				return A2(
 					_user$project$Todo_Main$over,
@@ -173,29 +167,29 @@ var _user$project$Todo_Main$update = F3(
 			case 'StopRunning':
 				return A2(_user$project$Todo_Main$set, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none);
 			case 'GotoRunning':
-				return function (_p7) {
+				return function (_p6) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnSetDomFocusToFocusInEntity,
-						A2(_user$project$Todo_Main$map, _user$project$Todo_Main$gotoRunningTodo, _p7));
+						A2(_user$project$Todo_Main$map, _user$project$Todo_Main$gotoRunningTodo, _p6));
 				};
 			case 'UpdateTimeTracker':
 				return _user$project$Todo_Main$updateTimeTracker(now);
 			default:
-				var _p10 = _p6._0;
-				var todoId = _p10.data.id;
-				return function (_p8) {
+				var _p9 = _p5._0;
+				var todoId = _p9.data.id;
+				return function (_p7) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnCloseNotification(todoId),
 						function () {
-							var _p9 = _p10.action;
-							if (_p9 === 'stop') {
+							var _p8 = _p9.action;
+							if (_p8 === 'stop') {
 								return andThenUpdate(_user$project$Model$onTodoStopRunning);
 							} else {
 								return andThenUpdate(_user$project$Model$onGotoRunningTodo);
 							}
-						}()(_p8));
+						}()(_p7));
 				};
 		}
 	});

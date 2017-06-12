@@ -127,7 +127,7 @@ async function boot() {
                 within: ".fullbleed-capture",
                 collision: "fit"
             })
-            $popup.find(":focusable").first().focus()
+            $popup.find(".auto-focus").first().focus()
 
             $popup.on("keydown", ":focusable", function (e) {
                 if(e.key !== "Tab") return
@@ -152,8 +152,6 @@ async function boot() {
                         first.focus()
                     }
                 }
-
-
             })
 
             // todo: can't trap since focusable list will keep changing.

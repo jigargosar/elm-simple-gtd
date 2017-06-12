@@ -675,8 +675,6 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 							case 'Slash':
 								return _user$project$Main$andThenUpdate(
 									_user$project$Model$OnLaunchBarMsg(_user$project$LaunchBar$Open));
-							case 'CharR':
-								return _user$project$Main$andThenUpdate(_user$project$Model$onGotoRunningTodo);
 							default:
 								return _elm_lang$core$Basics$identity;
 						}

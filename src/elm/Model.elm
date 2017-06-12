@@ -100,6 +100,7 @@ keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
 keyboardCombos =
     [ combo2 ( Combo.shift, Combo.s ) (onTodoStopRunning)
     , combo2 ( Combo.shift, Combo.p ) (onTodoTogglePaused)
+    , combo2 ( Combo.shift, Combo.r ) (onGotoRunningTodo)
     ]
 
 

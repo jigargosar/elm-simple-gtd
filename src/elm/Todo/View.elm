@@ -175,6 +175,9 @@ createTodoViewModel vc tabindexAV todo =
                     Key.CharC ->
                         Model.StartEditingContext todo
 
+                    Key.CharR ->
+                        Model.StartEditingReminder todo
+
                     Key.CharG ->
                         createEntityActionMsg Entity.Goto
 

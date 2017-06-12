@@ -694,6 +694,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 						return _user$project$Model$StartEditingProject(todo);
 					case 'CharC':
 						return _user$project$Model$StartEditingContext(todo);
+					case 'CharR':
+						return _user$project$Model$StartEditingReminder(todo);
 					case 'CharG':
 						return createEntityActionMsg(_user$project$Entity$Goto);
 					case 'CharS':

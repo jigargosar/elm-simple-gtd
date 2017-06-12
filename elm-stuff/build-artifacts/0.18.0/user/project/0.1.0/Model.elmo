@@ -1372,6 +1372,7 @@ var _user$project$Model$onRunningTodoNotificationClicked = function (_p68) {
 };
 var _user$project$Model$onTodoStopRunning = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$StopRunning);
 var _user$project$Model$onTodoTogglePaused = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$TogglePaused);
+var _user$project$Model$onGotoRunningTodo = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$GotoRunning);
 var _user$project$Model$keyboardCombos = {
 	ctor: '::',
 	_0: A2(
@@ -1384,10 +1385,16 @@ var _user$project$Model$keyboardCombos = {
 			_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
 			{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$p},
 			_user$project$Model$onTodoTogglePaused),
-		_1: {ctor: '[]'}
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_scottcorgan$keyboard_combo$Keyboard_Combo$combo2,
+				{ctor: '_Tuple2', _0: _scottcorgan$keyboard_combo$Keyboard_Combo$shift, _1: _scottcorgan$keyboard_combo$Keyboard_Combo$r},
+				_user$project$Model$onGotoRunningTodo),
+			_1: {ctor: '[]'}
+		}
 	}
 };
-var _user$project$Model$onGotoRunningTodo = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$GotoRunning);
 var _user$project$Model$onUpdateTodoTimeTracker = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$UpdateTimeTracker);
 var _user$project$Model$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {

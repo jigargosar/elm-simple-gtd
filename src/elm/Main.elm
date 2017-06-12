@@ -514,9 +514,6 @@ onGlobalKeyUp key =
                         Key.Slash ->
                             LaunchBar.Open |> OnLaunchBarMsg |> andThenUpdate
 
-                        Key.CharR ->
-                            andThenUpdate Model.onGotoRunningTodo
-
                         _ ->
                             identity
 

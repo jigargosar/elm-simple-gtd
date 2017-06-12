@@ -1,10 +1,12 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
-## v0.18.8 - 2017-06-12
-* display version in left header  
+## Upcoming
+* add r keyboard shortcut to edit todo reminder/schedule
+* and change goto running todo shortcut to shift+r 
 
 ## v0.18.8 - 2017-06-12
+* display version in left header  
 * [fix] app header should always show its account menu and toggle sidebar menu icon.  
 
 ## v0.18.7 - 2017-06-12

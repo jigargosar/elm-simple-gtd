@@ -336,11 +336,54 @@ var _user$project$View_AppDrawer$navList = F2(
 								}
 							})))));
 	});
+var _user$project$View_AppDrawer$leftHeader = function (m) {
+	var _p12 = m.developmentMode ? {
+		ctor: '_Tuple2',
+		_0: A2(_elm_lang$core$Basics_ops['++'], 'Dev v', m.appVersion),
+		_1: ''
+	} : {
+		ctor: '_Tuple2',
+		_0: 'SimpleGTD.com',
+		_1: A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)
+	};
+	var t1 = _p12._0;
+	var t2 = _p12._1;
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(t1),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('small'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(t2),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _user$project$View_AppDrawer$view = F2(
 	function (viewModel, m) {
-		var _p12 = viewModel;
-		var contexts = _p12.contexts;
-		var projects = _p12.projects;
+		var _p13 = viewModel;
+		var contexts = _p13.contexts;
+		var projects = _p13.projects;
 		return A2(
 			_edvail$elm_polymer$Polymer_App$drawer,
 			{
@@ -423,7 +466,7 @@ var _user$project$View_AppDrawer$view = F2(
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$View_AppDrawer$headLineText('SimpleGTD.com'),
+											_0: _user$project$View_AppDrawer$leftHeader(m),
 											_1: {ctor: '[]'}
 										}
 									}),

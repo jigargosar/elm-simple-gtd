@@ -128,14 +128,18 @@ var _user$project$View_Header$menu = function (m) {
 						_0: userSignInLink,
 						_1: {
 							ctor: '::',
-							_0: A2(
-								_user$project$View_Header$itemLink,
-								'https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md',
-								A2(_elm_lang$core$Basics_ops['++'], 'Changelog v', m.appVersion)),
+							_0: A2(_user$project$View_Header$itemLink, 'https://groups.google.com/forum/#!forum/simplegtd', 'Forums/Discuss'),
 							_1: {
 								ctor: '::',
-								_0: A2(_user$project$View_Header$itemLink, 'https://github.com/jigargosar/elm-simple-gtd', 'Github'),
-								_1: {ctor: '[]'}
+								_0: A2(
+									_user$project$View_Header$itemLink,
+									'https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md',
+									A2(_elm_lang$core$Basics_ops['++'], 'Changelog v', m.appVersion)),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$View_Header$itemLink, 'https://github.com/jigargosar/elm-simple-gtd', 'Github'),
+									_1: {ctor: '[]'}
+								}
 							}
 						}
 					}),

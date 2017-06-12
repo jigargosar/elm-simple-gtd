@@ -138,6 +138,7 @@ menu m =
                 []
             , Paper.listbox [ class "", slotDropdownContent ]
                 [ userSignInLink
+                , itemLink "https://groups.google.com/forum/#!forum/simplegtd" "Forums/Discuss"
                 , itemLink "https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md"
                     ("Changelog v" ++ m.appVersion)
                 , itemLink "https://github.com/jigargosar/elm-simple-gtd" "Github"

@@ -201,7 +201,7 @@ exports.updateNotificationOnTodoChanged =
             const uid = event.params["uid"]
             const todoId = event.params["todoId"]
 
-            console.log(eventSnapShot.data.current.val(), eventSnapShot.data.previous.val())
+            console.log(eventSnapShot.current.val(), eventSnapShot.previous.val())
 
             const timestampSnapShot = eventSnapShot.child("reminder/at")
             if (timestampSnapShot.changed()) {

@@ -1,7 +1,7 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
-## Upcoming
+## v0.18.7 - 2017-06-12
 * bug: menu keyboard traversal stopped working 
 
 ## v0.18.5 - 2017-06-11

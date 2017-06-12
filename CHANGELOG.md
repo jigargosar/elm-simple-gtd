@@ -1,6 +1,9 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
+## Upcoming
+* [fix] app header should always show its account menu and toggle sidebar menu icon.  
+
 ## v0.18.7 - 2017-06-12
 * bug: menu keyboard traversal stopped working 
 

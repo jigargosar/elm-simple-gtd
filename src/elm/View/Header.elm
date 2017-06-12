@@ -54,14 +54,18 @@ init viewModel m =
 
 
 headerView viewModel m =
-    case m.editMode of
-        EditMode.NewTodo form ->
-            newTodoHeader form
+    let
+        content =
+            case m.editMode of
+                EditMode.NewTodo form ->
+                    newTodoHeader form
 
-        _ ->
-            Todo.TimeTracker.View.maybe m
-                ?|> List.singleton
-                ?= defaultHeader viewModel m
+                _ ->
+                    Todo.TimeTracker.View.maybe m
+                        ?|> List.singleton
+                        ?= titleHeaderContent viewModel m
+    in
+        headerWithContent content m
 
 
 newTodoHeader form =
@@ -79,6 +83,18 @@ newTodoHeader form =
     ]
 
 
+titleHeaderContent viewModel m =
+    let
+        title_ =
+            if m.developmentMode then
+                viewModel.viewName ++ " dev:" ++ m.appVersion
+            else
+                viewModel.viewName
+    in
+        [ h5 [ class "ellipsis title", title title_ ] [ title_ |> text ]
+        ]
+
+
 defaultHeader viewModel m =
     let
         title_ =
@@ -87,18 +103,24 @@ defaultHeader viewModel m =
             else
                 viewModel.viewName
     in
-        [ paperIconButton
-            [ iconA "menu"
-            , tabindex -1
-            , attribute "drawer-toggle" ""
-            , onClick Model.ToggleDrawer
-            , class "hide-when-wide"
+        headerWithContent
+            [ h5 [ class "ellipsis title", title title_ ] [ title_ |> text ]
             ]
-            []
-        , h5 [ class "ellipsis title", title title_ ] [ title_ |> text ]
-        , Paper.itemBody [] []
-        , menu m
+            m
+
+
+headerWithContent content m =
+    [ paperIconButton
+        [ iconA "menu"
+        , tabindex -1
+        , attribute "drawer-toggle" ""
+        , onClick Model.ToggleDrawer
+        , class "hide-when-wide"
         ]
+        []
+    , div [ class "flex-auto" ] content
+    , menu m
+    ]
 
 
 menu m =

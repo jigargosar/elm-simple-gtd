@@ -1,6 +1,9 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
+## Upcoming
+* add link to google group 
+
 ## v0.18.9 - 2017-06-12
 * add r keyboard shortcut to edit todo reminder/schedule
 * and change goto running todo shortcut to shift+r 

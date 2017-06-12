@@ -65,11 +65,25 @@ view viewModel m =
                                 ]
                                 []
                             ]
-                        , headLineText "SimpleGTD.com"
+                        , leftHeader m
                         ]
                     ]
                 , navList viewModel m
                 ]
+            ]
+
+
+leftHeader m =
+    let
+        ( t1, t2 ) =
+            if m.developmentMode then
+                ( "Dev v" ++ m.appVersion, "" )
+            else
+                ( "SimpleGTD.com", "v" ++ m.appVersion )
+    in
+        div []
+            [ div [] [ text t1 ]
+            , div [ class "small" ] [ text t2 ]
             ]
 
 

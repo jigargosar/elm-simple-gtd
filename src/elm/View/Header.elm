@@ -85,28 +85,15 @@ newTodoHeader form =
 
 titleHeaderContent viewModel m =
     let
-        title_ =
-            if m.developmentMode then
-                viewModel.viewName ++ " dev:" ++ m.appVersion
-            else
-                viewModel.viewName
+        titleText =
+            {- if m.developmentMode then
+                   viewModel.viewName ++ " dev:" ++ m.appVersion
+               else
+            -}
+            viewModel.viewName
     in
-        [ h5 [ class "ellipsis title", title title_ ] [ title_ |> text ]
+        [ h5 [ class "ellipsis title", title titleText ] [ titleText |> text ]
         ]
-
-
-defaultHeader viewModel m =
-    let
-        title_ =
-            if m.developmentMode then
-                viewModel.viewName ++ " dev:" ++ m.appVersion
-            else
-                viewModel.viewName
-    in
-        headerWithContent
-            [ h5 [ class "ellipsis title", title title_ ] [ title_ |> text ]
-            ]
-            m
 
 
 headerWithContent content m =

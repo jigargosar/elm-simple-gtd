@@ -143,12 +143,8 @@ var _user$project$View_Header$menu = function (m) {
 			}
 		});
 };
-var _user$project$View_Header$defaultHeader = F2(
-	function (viewModel, m) {
-		var title_ = m.developmentMode ? A2(
-			_elm_lang$core$Basics_ops['++'],
-			viewModel.viewName,
-			A2(_elm_lang$core$Basics_ops['++'], ' dev:', m.appVersion)) : viewModel.viewName;
+var _user$project$View_Header$headerWithContent = F2(
+	function (content, m) {
 		return {
 			ctor: '::',
 			_0: A2(
@@ -178,34 +174,43 @@ var _user$project$View_Header$defaultHeader = F2(
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$h5,
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('ellipsis title'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$title(title_),
-							_1: {ctor: '[]'}
-						}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(title_),
+						_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
 						_1: {ctor: '[]'}
-					}),
+					},
+					content),
 				_1: {
 					ctor: '::',
-					_0: A2(
-						_edvail$elm_polymer$Polymer_Paper$itemBody,
-						{ctor: '[]'},
-						{ctor: '[]'}),
-					_1: {
-						ctor: '::',
-						_0: _user$project$View_Header$menu(m),
-						_1: {ctor: '[]'}
-					}
+					_0: _user$project$View_Header$menu(m),
+					_1: {ctor: '[]'}
 				}
 			}
+		};
+	});
+var _user$project$View_Header$titleHeaderContent = F2(
+	function (viewModel, m) {
+		var titleText = viewModel.viewName;
+		return {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h5,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('ellipsis title'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$title(titleText),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(titleText),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
 		};
 	});
 var _user$project$View_Header$newTodoHeader = function (form) {
@@ -268,18 +273,21 @@ var _user$project$View_Header$newTodoHeader = function (form) {
 };
 var _user$project$View_Header$headerView = F2(
 	function (viewModel, m) {
-		var _p2 = m.editMode;
-		if (_p2.ctor === 'NewTodo') {
-			return _user$project$View_Header$newTodoHeader(_p2._0);
-		} else {
-			return A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-					_user$project$Todo_TimeTracker_View$maybe(m),
-					_elm_lang$core$List$singleton),
-				A2(_user$project$View_Header$defaultHeader, viewModel, m));
-		}
+		var content = function () {
+			var _p2 = m.editMode;
+			if (_p2.ctor === 'NewTodo') {
+				return _user$project$View_Header$newTodoHeader(_p2._0);
+			} else {
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+					A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+						_user$project$Todo_TimeTracker_View$maybe(m),
+						_elm_lang$core$List$singleton),
+					A2(_user$project$View_Header$titleHeaderContent, viewModel, m));
+			}
+		}();
+		return A2(_user$project$View_Header$headerWithContent, content, m);
 	});
 var _user$project$View_Header$init = F2(
 	function (viewModel, m) {

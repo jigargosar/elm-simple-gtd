@@ -107,52 +107,6 @@ var _user$project$Firebase$updateClientCmd = F2(
 				_1: _user$project$Firebase$encodeClient(client)
 			});
 	});
-var _user$project$Firebase$scheduledReminderNotificationCmd = F3(
-	function (maybeTime, uid, todoId) {
-		var value = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				maybeTime,
-				function (time) {
-					return _elm_lang$core$Json_Encode$object(
-						{
-							ctor: '::',
-							_0: A2(
-								_user$project$Ext_Function_Infix_ops['=>'],
-								'todoId',
-								_elm_lang$core$Json_Encode$string(todoId)),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_user$project$Ext_Function_Infix_ops['=>'],
-									'uid',
-									_elm_lang$core$Json_Encode$string(uid)),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_user$project$Ext_Function_Infix_ops['=>'],
-										'timestamp',
-										_elm_lang$core$Json_Encode$float(time)),
-									_1: {ctor: '[]'}
-								}
-							}
-						});
-				}),
-			_elm_lang$core$Json_Encode$null);
-		return _user$project$Firebase$firebaseRefSet(
-			{
-				ctor: '_Tuple2',
-				_0: A2(
-					_elm_lang$core$Basics_ops['++'],
-					'/notifications/',
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						uid,
-						A2(_elm_lang$core$Basics_ops['++'], '---', todoId))),
-				_1: value
-			});
-	});
 var _user$project$Firebase$firebaseRefPush = _elm_lang$core$Native_Platform.outgoingPort(
 	'firebaseRefPush',
 	function (v) {

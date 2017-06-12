@@ -1175,22 +1175,13 @@ updateEntityListCursorFromEntityIndexTuple model indexTuple =
 
 findAndUpdateAllTodos findFn action model =
     let
-        todoChangesToCmd ( changes, model ) =
-            case getMaybeUserId model of
-                Nothing ->
-                    Cmd.none
-
-                Just uid ->
-                    changes
-                        .|> getNotificationCmdFromTodoChange uid
-                        |> Cmd.batch
-
         updateFn =
             Todo.update action
     in
         Record.overT2 todoStore (Store.findAndUpdateAll findFn model.now updateFn) model
-            |> apply2 ( Tuple.second, todoChangesToCmd )
-            |> Return.map (updateEntityListCursor model)
+            |> Tuple.second
+            >> updateEntityListCursor model
+            |> Return.singleton
 
 
 updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg
@@ -1203,22 +1194,7 @@ updateAllTodos action idSet model =
     findAndUpdateAllTodos (Document.getId >> Set.member # idSet) action model
 
 
-getNotificationCmdFromTodoChange uid (( old, new ) as change) =
-    if Todo.hasReminderChanged change then
-        let
-            todoId =
-                Document.getId new
 
-            maybeTime =
-                Todo.getMaybeReminderTime new
-        in
-            Firebase.scheduledReminderNotificationCmd maybeTime uid todoId
-    else
-        Cmd.none
-
-
-
--- todo time tracking
 -- combo
 
 

@@ -179,26 +179,13 @@ type alias AppAttributes =
     List ( String, String )
 
 
+
+-- todo get rid of tokens, since we no longer use them.
+
+
 updateTokenCmd deviceId fcmToken uid =
     firebaseRefSet ( "/users/" ++ uid ++ "/tokens/" ++ deviceId, encodeFCMToken fcmToken )
 
 
 updateClientCmd client uid =
     firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, encodeClient client )
-
-
-scheduledReminderNotificationCmd : Maybe Time -> String -> String -> Cmd msg
-scheduledReminderNotificationCmd maybeTime uid todoId =
-    let
-        value =
-            maybeTime
-                ?|> (\time ->
-                        E.object
-                            [ "todoId" => E.string todoId
-                            , "uid" => E.string uid
-                            , "timestamp" => E.float time
-                            ]
-                    )
-                ?= E.null
-    in
-        firebaseRefSet ( "/notifications/" ++ uid ++ "---" ++ todoId, value )

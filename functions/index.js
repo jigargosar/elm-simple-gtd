@@ -178,3 +178,35 @@ exports.onTodoUpdated =
             }
 
         })
+
+function updateNotificationWithTimestamp(uid, todoId, timestamp) {
+    const notificationPath = `/notifications/${uid}---${todoId}`
+    const ref = admin.database().ref(notificationPath)
+    if (timestamp) {
+        const notificationValue = {uid,todoId, timestamp}
+        console.log("write: ", notificationPath, notificationValue)
+        return ref.set(notificationValue)
+    } else {
+        const notificationValue = null
+        console.log("write: ", notificationPath, notificationValue)
+        return ref.set(notificationValue)
+    }
+}
+
+exports.updateNotificationOnTodoChanged =
+    functions
+        .database.ref("/users/{uid}/todo-db/{todoId}")
+        .onWrite(event => {
+            const eventSnapShot = event.data
+            const uid = event.params["uid"]
+            const todoId = event.params["todoId"]
+
+            console.log(eventSnapShot.data.current.val(), eventSnapShot.data.previous.val())
+
+            const timestampSnapShot = eventSnapShot.child("reminder/at")
+            if (timestampSnapShot.changed()) {
+                return updateNotificationWithTimestamp(uid, todoId, timestampSnapShot.val())
+            }else{
+                console.log("reminder snapshot didn't change, not performing any write.", timestampSnapShot.val())
+            }
+        })

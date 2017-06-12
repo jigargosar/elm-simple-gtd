@@ -140,6 +140,18 @@ export const b = function () {
         build.prod()
     }
 }
+export const d = function () {
+    if (!this.options || !(this.options.d || this.options.p)) {
+        console.error("Invalid options please specify env: -d or -p")
+        process.exit(1)
+    }
+
+    if (this.options.d) {
+        deploy.dev()
+    } else {
+        deploy.prod()
+    }
+}
 export const build = {
     dev: function () {
         console.info("build:dev")

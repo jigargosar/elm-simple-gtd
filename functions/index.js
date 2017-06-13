@@ -193,10 +193,10 @@ function addNotification(uid, todoId, newTimestamp, shouldSendPush) {
 }
 
 
-const shouldDeleteNotification = (eventSnapShot) => {
-    const doneSnapshot = eventSnapShot.child("done")
-    const deletedSnapshot = eventSnapShot.child("deleted")
-    const timestampSnapShot = eventSnapShot.child("reminder/at")
+const shouldDeleteNotification = (deltaSnapshot) => {
+    const doneSnapshot = deltaSnapshot.child("done")
+    const deletedSnapshot = deltaSnapshot.child("deleted")
+    const timestampSnapShot = deltaSnapshot.child("reminder/at")
     return (doneSnapshot.changed() && doneSnapshot.val() === true)
            || (deletedSnapshot.changed() && doneSnapshot.val() === true)
            || (timestampSnapShot.changed() && timestampSnapShot.val() === null)
@@ -205,19 +205,19 @@ exports.updateNotificationOnTodoChanged =
     functions
         .database.ref("/users/{uid}/todo-db/{todoId}")
         .onWrite(event => {
-            const eventSnapShot = event.data
+            const deltaSnapshot = event.data
             const uid = event.params["uid"]
             const todoId = event.params["todoId"]
 
-            console.log(eventSnapShot.current.val(), eventSnapShot.previous.val())
+            console.log(deltaSnapshot.current.val(), deltaSnapshot.previous.val())
 
-            if (shouldDeleteNotification(eventSnapShot)) {
+            if (shouldDeleteNotification(deltaSnapshot)) {
                 return removeAt(notificationPath(uid, todoId))
             }
 
-            const timestampSnapshot = eventSnapShot.child("reminder/at")
+            const timestampSnapshot = deltaSnapshot.child("reminder/at")
             if (timestampSnapshot.changed()) {
-                const shouldTriggerPush = _.not(eventSnapShot.child("dueAt").changed())
+                const shouldTriggerPush = _.not(deltaSnapshot.child("dueAt").changed())
                 return addNotification(
                     uid, todoId,
                     timestampSnapshot.val(),

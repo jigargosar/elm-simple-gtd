@@ -192,15 +192,15 @@ const write = _.curry((value, refOrPath) => {
 
 const writeAt = _.flip(write)
 
-function updateNotificationWithTimestamp(uid, todoId, newTimestamp, dueAtChanged) {
+function updateNotificationWithTimestamp(uid, todoId, newTimestamp, sendPush) {
     const writeNotification = writeAt(`/notifications/${uid}---${todoId}`)
     if (newTimestamp) {
         const notificationData = {uid, todoId, newTimestamp}
         return _
             .ifElse(
-                _ => dueAtChanged,
-                Promise.resolve,
-                sendNotification
+                _ => sendPush,
+                sendNotification,
+                Promise.resolve
             )(notificationData)
             .then(_ => writeNotification(notificationData))
     } else {

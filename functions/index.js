@@ -168,11 +168,10 @@ const hasChildChangedToIn = _.curry((snapshot, child, value) => {
     }
 )
 const childEqIn = _.curry(
-    (snapshot, childPath, value)
-        => snapshot.child(childPath).val() === value
+    (snapshot, childPath, value) => { return snapshot.child(childPath).val() === value}
 )
 const childChangedIn = _.curry(
-    (snapshot, child) => snapshot.child(child).changed()
+    (snapshot, child) => { return snapshot.child(child).changed()}
 )
 const reminderAtPath = "schedule/reminderAt"
 const dueAtPath = "schedule/dueAt"

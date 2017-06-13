@@ -167,10 +167,15 @@ const hasChildChangedToIn = _.curry(function (snapshot, child, value) {
     return childSS.changed() && childSS.val() === value
 })
 /*const childEqIn = _.curry(function (snapshot, childPath, value) {
-    return snapshot.child(childPath).val() === value
-})*/
+ return snapshot.child(childPath).val() === value
+ })*/
 const childEqIn = function (snapshot, childPath, value) {
-    return snapshot.child(childPath).val() === value
+    try {
+        return snapshot.child(childPath).val() === value
+    }
+    catch (e) {
+        console.error("childEqIn",e)
+    }
 }
 const childChangedIn = _.curry(function (snapshot, child) {
     return snapshot.child(child).changed()

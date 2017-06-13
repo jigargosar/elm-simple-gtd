@@ -192,21 +192,20 @@ const write = _.curry((value, refOrPath) => {
 
 const writeAt = _.flip(write)
 
-function updateNotificationWithTimestamp(uid, todoId, newTimestamp, sendPush) {
-    const writeNotification = writeAt(`/notifications/${uid}---${todoId}`)
-    if (newTimestamp) {
+const removeAt = write(null)
+
+const notificationPath = (uid, todoId) => `/notifications/${uid}---${todoId}`
+
+const conditionalPromise = (fn, bool) => bool? fn() : Promise.resolve()
+
+function updateNotificationWithTimestamp(uid, todoId, newTimestamp, shouldSendPush) {
+    const writeNotification = writeAt(notificationPath(uid,todoId))
         const notificationData = {uid, todoId, newTimestamp}
-        return _
-            .ifElse(
-                _ => sendPush,
-                sendNotification,
-                Promise.resolve
-            )(notificationData)
+        return conditionalPromise(_ => sendNotification(notificationData), shouldSendPush)
             .then(_ => writeNotification(notificationData))
-    } else {
-        return writeNotification(null)
-    }
 }
+
+const deleteNotification = (deleteNotification)=>
 
 exports.updateNotificationOnTodoChanged =
     functions
@@ -220,9 +219,16 @@ exports.updateNotificationOnTodoChanged =
 
             const timestampSnapShot = eventSnapShot.child("reminder/at")
             if (timestampSnapShot.changed()) {
-                const dueAtSnapshot = eventSnapShot.child("dueAt")
-                return updateNotificationWithTimestamp(uid, todoId, timestampSnapShot.val(), dueAtSnapshot.changed())
+                const triggerPush = _.not(eventSnapShot.child("dueAt").changed())
+                const newTimestamp = timestampSnapShot.val()
+                if(newTimestamp){
+                    return updateNotificationWithTimestamp(
+                        uid, todoId, newTimestamp, triggerPush
+                    )
+                }else{
+                    return removeAt(notificationPath(uid, todoId))
+                }
             } else {
-                console.log("reminder snapshot didn't change, not performing any write.", timestampSnapShot.val())
+                console.log("reminder snapshot didn't change, not performing any write.")
             }
         })

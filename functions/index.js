@@ -135,35 +135,6 @@ const sendNotification = data =>
     getUserClients(data.uid)
         .then(sendNotificationToClients(data))
 
-// exports.onTodoUpdated =
-//     functions
-//         .database.ref("/users/{uid}/todo-db/{todoId}")
-//         .onWrite(event => {
-//             const oldTodo = event.data.previous.val();
-//             const newTodo = event.data.val()
-//             const uid = event.params["uid"]
-//             const todoId = event.params["todoId"]
-//
-//             if (oldTodo && newTodo) {
-//                 // todo was updated
-//                 if (oldTodo.dueAt && newTodo.dueAt
-//                     && oldTodo.dueAt === newTodo.dueAt
-//                     && oldTodo.reminder && oldTodo.reminder.at
-//                     && newTodo.reminder && newTodo.reminder.at
-//                     && oldTodo.reminder.at !== newTodo.reminder.at
-//                 ) {
-//                     const timestamp = oldTodo.reminder.at
-//                     //todo was snoozed
-//                     const notificationData = {uid, timestamp, todoId}
-//                     return getUserClients(uid)
-//                         .then(sendNotificationToClients(notificationData))
-//                 }
-//
-//
-//             }
-//
-//         })
-
 const createRef = path => admin.database().ref(path)
 
 const write = _.curry((value, refOrPath) => {

@@ -203,8 +203,8 @@ const shouldDeleteNotification = (deltaSnapshot) => {
 
 const shouldTriggerPush = deltaSnapshot => {
     const dueAtProp = "dueAt"
-    return deltaSnapshot.previous.child(dueAtProp).exists()
-           && !deltaSnapshot.child(dueAtProp).changed()
+    return !deltaSnapshot.child(dueAtProp).changed()
+           && deltaSnapshot.previous.child(dueAtProp).exists()
 }
 
 const shouldAddNotification = deltaSnapshot => {

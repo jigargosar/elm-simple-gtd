@@ -165,7 +165,7 @@ function addNotification(uid, todoId, newTimestamp, shouldSendPush) {
 const hasChildChangedToIn = _.curry(function (snapshot, child, value) {
     const childSS = snapshot.child(child)
     return childSS.changed() && childSS.val() === value
-})
+});
 /*const childEqIn = _.curry(function (snapshot, childPath, value) {
  return snapshot.child(childPath).val() === value
  })*/

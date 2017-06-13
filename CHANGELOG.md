@@ -5,6 +5,7 @@
 * firebase functions : auto notification creation from todo edits.
 * firebase functions: merge both todo update triggers
 * ff: delete notification if done or deleted
+* change schedule model, so that it is easy to check if todo was just snoozed. 
 
 ## v0.18.11 - 2017-06-12
 * add link to google group 

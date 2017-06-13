@@ -77,21 +77,6 @@ var _user$project$Firebase$firebaseRefSet = _elm_lang$core$Native_Platform.outgo
 	function (v) {
 		return [v._0, v._1];
 	});
-var _user$project$Firebase$updateTokenCmd = F3(
-	function (deviceId, fcmToken, uid) {
-		return _user$project$Firebase$firebaseRefSet(
-			{
-				ctor: '_Tuple2',
-				_0: A2(
-					_elm_lang$core$Basics_ops['++'],
-					'/users/',
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						uid,
-						A2(_elm_lang$core$Basics_ops['++'], '/tokens/', deviceId))),
-				_1: _user$project$Firebase$encodeFCMToken(fcmToken)
-			});
-	});
 var _user$project$Firebase$updateClientCmd = F2(
 	function (client, uid) {
 		return _user$project$Firebase$firebaseRefSet(

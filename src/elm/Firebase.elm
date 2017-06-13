@@ -179,13 +179,5 @@ type alias AppAttributes =
     List ( String, String )
 
 
-
--- todo get rid of tokens, since we no longer use them.
-
-
-updateTokenCmd deviceId fcmToken uid =
-    firebaseRefSet ( "/users/" ++ uid ++ "/tokens/" ++ deviceId, encodeFCMToken fcmToken )
-
-
 updateClientCmd client uid =
     firebaseRefSet ( "/users/" ++ uid ++ "/clients/" ++ client.id, encodeClient client )

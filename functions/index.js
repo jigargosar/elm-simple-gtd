@@ -62,11 +62,6 @@ exports.notificationCorn = functions.https.onRequest((req, res) => {
 })
 
 
-function getUserTokenMap(uid) {
-    return admin.database().ref("/users/" + uid + "/tokens").once("value")
-                .then(getMapFromSnapshot)
-}
-
 function getUserClients(uid) {
     return admin.database().ref("/users/" + uid + "/clients").once("value")
                 .then(getMapFromSnapshot)

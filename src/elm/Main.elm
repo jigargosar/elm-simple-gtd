@@ -14,6 +14,7 @@ import Keyboard.Combo
 import LaunchBar
 import Ext.Function.Infix exposing (..)
 import Keyboard.Extra as Key
+import Maybe.Extra as Maybe
 import Model as Model
 import Notification exposing (Response)
 import ReminderOverlay
@@ -527,12 +528,7 @@ onGlobalKeyUp key =
 
 firebaseUpdateClientCmd model =
     Model.getMaybeUserId model
-        ?|> apply2
-                ( Firebase.updateTokenCmd model.deviceId model.fcmToken
-                , Firebase.updateClientCmd model.firebaseClient
-                )
-        >> Tuple2.toList
-        >> Cmd.batch
+        ?|> Firebase.updateClientCmd model.firebaseClient
 
 
 firebaseSetupOnDisconnectCmd model =

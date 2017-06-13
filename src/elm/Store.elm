@@ -10,6 +10,7 @@ port module Store
         , reject
         , asIdDict
         , asList
+        , isEmpty
         , filter
         , updateAll
         , findAndUpdateAll
@@ -320,6 +321,10 @@ updateSeed updater model =
 asList : Store x -> List (Document x)
 asList =
     (.list)
+
+
+isEmpty =
+    asList >> List.isEmpty
 
 
 asIdDict =

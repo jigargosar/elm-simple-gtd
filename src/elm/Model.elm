@@ -286,10 +286,14 @@ init flags =
             Firebase.initClient flags.deviceId
 
         editMode =
-            if flags.config.isFirstVisit then
+            if
+                Store.isEmpty todoStore
+                    || Store.isEmpty contextStore
+                    || Store.isEmpty projectStore
+            then
                 EditMode.firstVisit
             else
-                EditMode.firstVisit
+                EditMode.none
 
         model =
             { now = now

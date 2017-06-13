@@ -69,6 +69,10 @@ turnReminderOff model =
             model
 
 
+autoSnooze now =
+    snoozeTill (now + (Time.minute * 15))
+
+
 snoozeTill snoozedTillTime model =
     case model of
         NoReminder dueAt ->

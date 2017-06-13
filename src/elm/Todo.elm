@@ -202,7 +202,7 @@ update action =
             updateSchedule (Todo.Schedule.snoozeTill time)
 
         AutoSnooze now ->
-            updateSchedule (Todo.Schedule.snoozeTill (now + (Time.minute * 15)))
+            updateSchedule (Todo.Schedule.autoSnooze now)
 
 
 hasReminderChanged ( old, new ) =

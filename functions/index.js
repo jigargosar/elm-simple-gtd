@@ -162,27 +162,18 @@ function addNotification(uid, todoId, newTimestamp, shouldSendPush) {
         .then(_ => writeNotification(notificationData))
 }
 
-const hasChildChangedToIn = _.curry(function (snapshot, child, value) {
-    const childSS = snapshot.child(child)
-    return childSS.changed() && childSS.val() === value
-});
-/*const childEqIn = _.curry(function (snapshot, childPath, value) {
- return snapshot.child(childPath).val() === value
- })*/
-
-function foobarFun (snapshot, childPath, value) {
-    try {
-        return snapshot.child(childPath).val() === value
+const hasChildChangedToIn = _.curry((snapshot, child, value) => {
+        const childSS = snapshot.child(child)
+        return childSS.changed() && childSS.val() === value
     }
-    catch (e) {
-        console.log("childEqIn", e)
-    }
-};
-
-const childChangedIn = _.curry(function (snapshot, child) {
-    return snapshot.child(child).changed()
-});
-
+)
+const childEqIn = _.curry(
+    (snapshot, childPath, value)
+        => snapshot.child(childPath).val() === value
+)
+const childChangedIn = _.curry(
+    (snapshot, child) => snapshot.child(child).changed()
+)
 const reminderAtPath = "schedule/reminderAt"
 const dueAtPath = "schedule/dueAt"
 const donePath = "done"
@@ -203,14 +194,13 @@ const hasTodoJustSnoozed = deltaSnapshot => {
 }
 
 const shouldAddNotification = deltaSnapshot => {
-    // const childEq = childEqIn(deltaSnapshot)
-    // console.log("childEq", childEq)
+    const childEq = childEqIn(deltaSnapshot)
     const childChanged = childChangedIn(deltaSnapshot)
     const reminderAtSS = deltaSnapshot.child(reminderAtPath)
     return reminderAtSS.exists()
-           && foobarFun(deltaSnapshot, donePath, false)
-           && foobarFun(deltaSnapshot, deletedPath, false)
-           (reminderAtSS.changed()
+           && childEq(donePath, false)
+           && childEq(deletedPath, false)
+           && (reminderAtSS.changed()
             || childChanged(donePath)
             || childChanged(deletedPath)
            )

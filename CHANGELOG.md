@@ -1,6 +1,9 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
+## Upcoming
+* add visible feedback links 
+
 ## v0.18.17 - 2017-06-13
 * fix ff errors 
 

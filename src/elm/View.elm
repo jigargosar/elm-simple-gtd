@@ -3,7 +3,7 @@ module View exposing (init)
 import EditMode
 import Firebase.View
 import Html.Attributes.Extra exposing (..)
-import Html exposing (Attribute, Html, div, form, h1, h2, h3, h4, hr, input, node, p, span, text)
+import Html exposing (Attribute, Html, a, div, form, h1, h2, h3, h4, h5, h6, hr, input, node, p, span, text)
 import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, tabindex, type_, value)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
@@ -73,12 +73,21 @@ overlayViews model =
 firstVisitModal =
     div
         [ class "fullbleed-capture dark"
-        , onClickStopPropagation Model.DeactivateEditingMode
+        , onClickStopPropagation Model.noop
         ]
-        [ div [ class "modal open modal-center" ]
+        [ div [ id "welcome", class "modal open modal-center" ]
             [ div [ class "modal-content" ]
-                [ h4 [] [ text "Welcome" ]
-                , div [ class "layout horizontal" ] []
+                [ h4 [] [ text "Welcome to SimpleGTD.com" ]
+                , div [ class "divider" ] []
+                , div [ class "section layout horizontal wrap center" ]
+                    [ h6 [] [ text "Already Have An Account?" ]
+                    , a [ class "btn" ] [ text "Signin" ]
+                    ]
+                , div [ class "divider" ] []
+                , div [ class "section layout horizontal wrap center" ]
+                    [ h6 [] [ text "Or let us create sample items and" ]
+                    , a [ class "btn" ] [ text "Start Exploring" ]
+                    ]
                 ]
             ]
         ]

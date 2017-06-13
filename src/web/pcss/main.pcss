@@ -46,14 +46,15 @@ i {
   color: black;
 }
 
-#left-header{
+#left-header {
   width: 100%;
 }
+
 #left-header a {
   color: white;
   /*text-decoration: underline;*/
   outline: none;
-  margin-right:1em;
+  margin-right: 1em;
   tab-index: -1;
 }
 
@@ -70,18 +71,25 @@ app-toolbar .btn-floating i {
 
 /*mat css END*/
 
-.fullbleed-capture.dark{
+.fullbleed-capture.dark {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal.open{
+.modal.open {
   display: block;
 }
-.modal-center{
+
+.modal-center {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+#welcome {
+  & p, & h6 {
+    margin-right: 1em;
+  }
 }
 
 iron-icon.account {
@@ -241,8 +249,7 @@ paper-listbox {
 
 #popup-menu {
   position: absolute;
-//left: 100px; //top: 100px; background-color: white; overflow-y: scroll; overflow-x: hidden;
-  max-height: 100vh;
+//left: 100px; //top: 100px; background-color: white; overflow-y: scroll; overflow-x: hidden; max-height: 100vh;
   min-width: 20vw;
   max-width: 80vw;
 }
@@ -287,8 +294,7 @@ paper-listbox {
     padding: 0 8px;
     /*white-space: pre-line; !*sequences of whitespace are collapsed*!*/
     /* when indenting items using star, whitespace should not be lost*/
-  //overflow-wrap: break-word; white-space: pre-wrap; /*sequences of whitespace are preserved*/
-  //word-break: normal; hyphens: auto;
+  //overflow-wrap: break-word; white-space: pre-wrap; /*sequences of whitespace are preserved*/ //word-break: normal; hyphens: auto;
   }
 
   & paper-item-body {

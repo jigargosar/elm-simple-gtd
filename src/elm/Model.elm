@@ -137,6 +137,10 @@ commonMsg =
     CommonMsg.createHelper OnCommonMsg
 
 
+noop =
+    commonMsg.noOp
+
+
 type alias EntityListViewType =
     Entity.ListViewType
 

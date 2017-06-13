@@ -13,6 +13,7 @@
       <w>listbox</w>
       <w>minification</w>
       <w>minify</w>
+      <w>noop</w>
       <w>pouchdb</w>
       <w>precache</w>
       <w>rimraf</w>

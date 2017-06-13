@@ -1505,6 +1505,7 @@ var _user$project$Model$OnCommonMsg = function (a) {
 	return {ctor: 'OnCommonMsg', _0: a};
 };
 var _user$project$Model$commonMsg = _user$project$CommonMsg$createHelper(_user$project$Model$OnCommonMsg);
+var _user$project$Model$noop = _user$project$Model$commonMsg.noOp;
 var _user$project$Model$SyncView = {ctor: 'SyncView'};
 var _user$project$Model$BinView = {ctor: 'BinView'};
 var _user$project$Model$DoneView = {ctor: 'DoneView'};

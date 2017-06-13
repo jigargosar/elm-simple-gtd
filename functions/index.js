@@ -168,8 +168,7 @@ const hasChildChangedToIn = _.curry((snapshot, child, value) => {
     }
 )
 const childEqIn = _.curryN(3,
-    (snapshot, childPath, value)
-        => snapshot.child(childPath).val() === value
+    function (snapshot, childPath, value) { return snapshot.child(childPath).val() === value }
 )
 const childChangedIn = _.curryN(2,
     (snapshot, child) => snapshot.child(child).changed()

@@ -201,7 +201,7 @@ const shouldDeleteNotification = (deltaSnapshot) => {
            || (timestampSnapShot.changed() && timestampSnapShot.val() === null)
 }
 
-const shouldTriggerPush = deltaSnapshot => {
+const hasTodoJustSnoozed = deltaSnapshot => {
     const dueAtProp = "dueAt"
     const timestampSnapShot = deltaSnapshot.child("reminder/at")
     return !deltaSnapshot.child(dueAtProp).changed()
@@ -238,7 +238,7 @@ exports.updateNotificationOnTodoChanged =
 
             if (shouldAddNotification(deltaSnapshot)) {
 
-                const shouldSendPush = shouldTriggerPush(deltaSnapshot)
+                const shouldSendPush = hasTodoJustSnoozed(deltaSnapshot)
                 console.log("shouldSendPush", shouldSendPush)
                 return addNotification(
                     uid, todoId,

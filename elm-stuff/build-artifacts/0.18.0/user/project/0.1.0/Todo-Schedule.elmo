@@ -26,6 +26,7 @@ var _user$project$Todo_Schedule$getMaybeDueAt = function (model) {
 			return _elm_lang$core$Maybe$Nothing;
 	}
 };
+var _user$project$Todo_Schedule$decodeV2 = _elm_lang$core$Json_Decode$fail('Not implemented');
 var _user$project$Todo_Schedule$Unscheduled = {ctor: 'Unscheduled'};
 var _user$project$Todo_Schedule$unscheduled = _user$project$Todo_Schedule$Unscheduled;
 var _user$project$Todo_Schedule$WithReminder = F2(
@@ -66,6 +67,56 @@ var _user$project$Todo_Schedule$NoReminder = function (a) {
 var _user$project$Todo_Schedule$initWithDueAt = function (dueAt) {
 	return _user$project$Todo_Schedule$NoReminder(dueAt);
 };
+var _user$project$Todo_Schedule$decodeV1 = function () {
+	var decodeWithDueAt = function (dueAt) {
+		return _elm_lang$core$Json_Decode$oneOf(
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Json_Decode$andThen,
+					function (reminder) {
+						return _elm_lang$core$Json_Decode$succeed(
+							A2(_user$project$Todo_Schedule$initWithDueAtAndReminder, dueAt, reminder));
+					},
+					A2(
+						_elm_lang$core$Json_Decode$at,
+						{
+							ctor: '::',
+							_0: 'reminder',
+							_1: {
+								ctor: '::',
+								_0: 'at',
+								_1: {ctor: '[]'}
+							}
+						},
+						_elm_lang$core$Json_Decode$float)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$Json_Decode$succeed(
+						_user$project$Todo_Schedule$initWithDueAt(dueAt)),
+					_1: {ctor: '[]'}
+				}
+			});
+	};
+	return A2(
+		_elm_lang$core$Json_Decode$andThen,
+		decodeWithDueAt,
+		A2(_elm_lang$core$Json_Decode$field, 'dueAt', _elm_lang$core$Json_Decode$float));
+}();
+var _user$project$Todo_Schedule$decode = _elm_lang$core$Json_Decode$oneOf(
+	{
+		ctor: '::',
+		_0: _user$project$Todo_Schedule$decodeV2,
+		_1: {
+			ctor: '::',
+			_0: _user$project$Todo_Schedule$decodeV1,
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$core$Json_Decode$succeed(_user$project$Todo_Schedule$unscheduled),
+				_1: {ctor: '[]'}
+			}
+		}
+	});
 var _user$project$Todo_Schedule$turnReminderOff = function (model) {
 	var _p3 = model;
 	switch (_p3.ctor) {

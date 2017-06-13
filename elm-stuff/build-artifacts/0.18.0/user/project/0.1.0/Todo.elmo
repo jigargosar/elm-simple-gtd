@@ -61,49 +61,6 @@ var _user$project$Todo$encodeReminder = function (maybeReminderTime) {
 			}),
 		_elm_lang$core$Json_Encode$null);
 };
-var _user$project$Todo$decodeScheduleWithDueAt = function (dueAt) {
-	return _elm_lang$core$Json_Decode$oneOf(
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (reminder) {
-					return _elm_lang$core$Json_Decode$succeed(
-						A2(_user$project$Todo_Schedule$initWithDueAtAndReminder, dueAt, reminder));
-				},
-				A2(
-					_elm_lang$core$Json_Decode$at,
-					{
-						ctor: '::',
-						_0: 'reminder',
-						_1: {
-							ctor: '::',
-							_0: 'at',
-							_1: {ctor: '[]'}
-						}
-					},
-					_elm_lang$core$Json_Decode$float)),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$core$Json_Decode$succeed(
-					_user$project$Todo_Schedule$initWithDueAt(dueAt)),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Todo$decodeSchedule = _elm_lang$core$Json_Decode$oneOf(
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$core$Json_Decode$andThen,
-			_user$project$Todo$decodeScheduleWithDueAt,
-			A2(_elm_lang$core$Json_Decode$field, 'dueAt', _elm_lang$core$Json_Decode$float)),
-		_1: {
-			ctor: '::',
-			_0: _elm_lang$core$Json_Decode$succeed(_user$project$Todo_Schedule$unscheduled),
-			_1: {ctor: '[]'}
-		}
-	});
 var _user$project$Todo$dueAtAndReminderToSchedule = F2(
 	function (dueAt, reminder) {
 		return A2(
@@ -160,7 +117,7 @@ var _user$project$Todo$todoRecordDecoder = function (_p7) {
 			_user$project$Todo$defaultProjectId,
 			A2(
 				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
-				_user$project$Todo$decodeSchedule,
+				_user$project$Todo_Schedule$decode,
 				A3(
 					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 					'text',

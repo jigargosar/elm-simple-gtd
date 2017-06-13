@@ -7,6 +7,9 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 
 
 type alias Model =
@@ -17,6 +20,36 @@ type Schedule
     = NoReminder Time
     | WithReminder Time Time
     | Unscheduled
+
+
+decode : Decoder Model
+decode =
+    D.oneOf
+        [ decodeV2
+        , decodeV1
+        , D.succeed unscheduled
+        ]
+
+
+decodeV2 =
+    D.fail "Not implemented"
+
+
+decodeV1 =
+    let
+        decodeWithDueAt dueAt =
+            D.oneOf
+                [ D.at [ "reminder", "at" ] D.float
+                    |> D.andThen
+                        (\reminder ->
+                            initWithDueAtAndReminder dueAt reminder
+                                |> D.succeed
+                        )
+                , D.succeed (initWithDueAt dueAt)
+                ]
+    in
+        D.field "dueAt" D.float
+            |> D.andThen decodeWithDueAt
 
 
 initWithReminder time =

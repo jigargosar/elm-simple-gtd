@@ -274,30 +274,9 @@ dueAtAndReminderToSchedule dueAt reminder =
 todoRecordDecoder =
     D.optional "done" D.bool defaultDone
         >> D.required "text" D.string
-        >> D.custom decodeSchedule
+        >> D.custom Todo.Schedule.decode
         >> D.optional "projectId" D.string defaultProjectId
         >> D.optional "contextId" D.string defaultContextId
-
-
-decodeSchedule : Decoder Todo.Schedule.Model
-decodeSchedule =
-    D.oneOf
-        [ D.field "dueAt" D.float
-            |> D.andThen decodeScheduleWithDueAt
-        , D.succeed Todo.Schedule.unscheduled
-        ]
-
-
-decodeScheduleWithDueAt dueAt =
-    D.oneOf
-        [ D.at [ "reminder", "at" ] D.float
-            |> D.andThen
-                (\reminder ->
-                    Todo.Schedule.initWithDueAtAndReminder dueAt reminder
-                        |> D.succeed
-                )
-        , D.succeed (Todo.Schedule.initWithDueAt dueAt)
-        ]
 
 
 reminderDecoder : Decoder Reminder

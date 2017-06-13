@@ -52,10 +52,25 @@ encode model =
         E.object fields
 
 
+decodeV2 : Decoder Model
 decodeV2 =
-    D.fail "Not implemented"
+    let
+        decodeWithDueAt dueAt =
+            D.oneOf
+                [ D.at [ "schedule", "reminderAt" ] D.float
+                    |> D.andThen
+                        (\reminderAt ->
+                            initWithDueAtAndReminder dueAt reminderAt
+                                |> D.succeed
+                        )
+                , initWithDueAt dueAt |> D.succeed
+                ]
+    in
+        D.at [ "schedule", "dueAt" ] D.float
+            |> D.andThen decodeWithDueAt
 
 
+decodeV1 : Decoder Model
 decodeV1 =
     let
         decodeWithDueAt dueAt =

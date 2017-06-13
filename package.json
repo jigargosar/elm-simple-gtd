@@ -11,7 +11,7 @@
     "url": "https://github.com/jigargosar/elm-simple-gtd"
   },
   "scripts": {
-    "postinstall": "yarn global add elm@0.18.0 polymer-cli@1.0.2 firebase-tools@3.9.0 bower@1.8.0",
+    "postinstall": "yarn global add elm@0.18.0 polymer-cli@1.0.2 firebase-tools@3.9.1 bower@1.8.0",
     "dev": "cross-env NODE_ENV=development webpack-dev-server",
     "hot": "cross-env NODE_ENV=development webpack-dev-server --hot --inline",
     "hot-hot": "nodemon --watch webpack.config.babel.js --watch package.json --exec \"npm run hot\"",

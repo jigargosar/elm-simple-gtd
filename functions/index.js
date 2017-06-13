@@ -219,10 +219,12 @@ exports.updateNotificationOnTodoChanged =
             const timestampSnapshot = deltaSnapshot.child("reminder/at")
             if (timestampSnapshot.changed()) {
 
+                const shouldSendPush = shouldTriggerPush(deltaSnapshot)
+                console.log("shouldSendPush", shouldSendPush)
                 return addNotification(
                     uid, todoId,
                     timestampSnapshot.val(),
-                    shouldTriggerPush(deltaSnapshot)
+                    shouldSendPush
                 )
             }
         })

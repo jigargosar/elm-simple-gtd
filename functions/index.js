@@ -180,9 +180,9 @@ const notificationPath = (uid, todoId) => `/notifications/${uid}---${todoId}`
 
 const conditionalPromise = (fn, bool) => bool ? fn() : Promise.resolve()
 
-function addNotification(uid, todoId, newTimestamp, shouldSendPush) {
+function addNotification(uid, todoId, timestamp, shouldSendPush) {
     const writeNotification = writeAt(notificationPath(uid, todoId))
-    const notificationData = {uid, todoId, newTimestamp}
+    const notificationData = {uid, todoId, timestamp}
     return conditionalPromise(_ => sendNotification(notificationData), shouldSendPush)
         .then(_ => writeNotification(notificationData))
 }

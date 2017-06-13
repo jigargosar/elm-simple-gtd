@@ -128,6 +128,33 @@ var _user$project$View$bottomSheet = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
+var _user$project$View$firstVisitModal = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('fullbleed-capture dark'),
+		_1: {
+			ctor: '::',
+			_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$DeactivateEditingMode),
+			_1: {ctor: '[]'}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('modal-center static z-depth-4'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('welcome'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	});
 var _user$project$View$overlayViews = function (model) {
 	var editModeOverlayView = function () {
 		var _p0 = _user$project$Model$getEditMode(model);
@@ -140,6 +167,8 @@ var _user$project$View$overlayViews = function (model) {
 				return A2(_user$project$Todo_View$projectMenu, _p0._0, model);
 			case 'EditTodoReminder':
 				return A2(_user$project$Todo_View$reminderPopup, _p0._0, model);
+			case 'FirstVisit':
+				return _user$project$View$firstVisitModal;
 			default:
 				return A2(
 					_elm_lang$html$Html$span,

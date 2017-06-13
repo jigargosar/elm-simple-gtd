@@ -6,6 +6,7 @@ import Html.Attributes.Extra exposing (..)
 import Html exposing (Attribute, Html, div, form, h1, h2, hr, input, node, span, text)
 import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, tabindex, type_, value)
 import Html.Events exposing (..)
+import Html.Events.Extra exposing (onClickStopPropagation)
 import Model
 import Model exposing (Msg, commonMsg)
 import View.Header
@@ -57,6 +58,9 @@ overlayViews model =
                 EditMode.EditTodoReminder form ->
                     Todo.View.reminderPopup form model
 
+                EditMode.FirstVisit ->
+                    firstVisitModal
+
                 _ ->
                     span [] []
     in
@@ -64,6 +68,14 @@ overlayViews model =
         , View.ReminderOverlay.maybe model
         ]
             |> List.filterMap identity
+
+
+firstVisitModal =
+    div
+        [ class "fullbleed-capture dark"
+        , onClickStopPropagation Model.DeactivateEditingMode
+        ]
+        [ div [ class "modal-center static z-depth-4" ] [ text "welcome" ] ]
 
 
 bottomSheet =

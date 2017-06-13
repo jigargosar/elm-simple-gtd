@@ -433,7 +433,7 @@ reminderPopup form model =
     in
         div
             [ class "fullbleed-capture"
-            , onClickStopPropagation Model.DeactivateEditingMode
+            , onClickStopPropagation Model.OnDeactivateEditingMode
             ]
             [ div
                 [ id "popup-menu"
@@ -477,5 +477,5 @@ createReminderMenuConfig form model =
             >> Todo.Msg.UpdateReminderForm form
             >> Model.OnTodoMsg
     , noOp = commonMsg.noOp
-    , onOutsideMouseDown = Model.DeactivateEditingMode
+    , onOutsideMouseDown = Model.OnDeactivateEditingMode
     }

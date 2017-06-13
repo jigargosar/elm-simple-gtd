@@ -47,7 +47,7 @@ init form m =
         div
             [ class "fullbleed-capture"
             , onKeyDownStopPropagation (keyHandler)
-            , onClickStopPropagation Model.DeactivateEditingMode
+            , onClickStopPropagation Model.OnDeactivateEditingMode
             ]
             [ div
                 [ id "launch-bar-container"

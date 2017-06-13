@@ -28,7 +28,7 @@ createProjectMenuConfig ({ todo } as form) model =
     , itemView = Project.getName >> text
     , onStateChanged = Model.OnEditTodoProjectMenuStateChanged form
     , noOp = commonMsg.noOp
-    , onOutsideMouseDown = Model.DeactivateEditingMode
+    , onOutsideMouseDown = Model.OnDeactivateEditingMode
     }
 
 
@@ -41,7 +41,7 @@ createContextMenuConfig ({ todo } as form) model =
     , itemView = Context.getName >> text
     , onStateChanged = Model.OnEditTodoContextMenuStateChanged form
     , noOp = commonMsg.noOp
-    , onOutsideMouseDown = Model.DeactivateEditingMode
+    , onOutsideMouseDown = Model.OnDeactivateEditingMode
     }
 
 

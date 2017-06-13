@@ -74,7 +74,7 @@ newTodoHeader form =
             [ class "auto-focus"
             , onInput (Model.NewTodoTextChanged form)
             , form |> Todo.NewForm.getText |> defaultValue
-            , onBlur Model.DeactivateEditingMode
+            , onBlur Model.OnDeactivateEditingMode
             , Keyboard.onKeyUp Model.NewTodoKeyUp
             ]
             []
@@ -123,7 +123,7 @@ menu m =
         userSignInLink =
             maybeUserProfile
                 ?|> (\_ -> Paper.item [ onClick Model.SignOut ] [ text "SignOut" ])
-                ?= Paper.item [ onClick Model.SignIn ] [ text "SignIn" ]
+                ?= Paper.item [ onClick Model.OnSignIn ] [ text "SignIn" ]
     in
         Paper.menuButton
             [ dynamicAlign

@@ -126,7 +126,7 @@ update msg =
                 OnFirebaseChange dbName encodedDoc ->
                     Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
-                SignIn ->
+                OnSignIn ->
                     Return.command (Firebase.signIn ())
 
                 SignOut ->
@@ -201,16 +201,16 @@ update msg =
 
                 SetTodoContext todoContext todo ->
                     updateTodoAndMaybeAlsoSelected (Todo.SetContext todoContext) todo
-                        >> andThenUpdate DeactivateEditingMode
+                        >> andThenUpdate OnDeactivateEditingMode
 
                 SetTodoProject project todo ->
                     updateTodoAndMaybeAlsoSelected (Todo.SetProject project) todo
-                        >> andThenUpdate DeactivateEditingMode
+                        >> andThenUpdate OnDeactivateEditingMode
 
                 NewTodoTextChanged form text ->
                     Return.map (Model.updateNewTodoText form text)
 
-                DeactivateEditingMode ->
+                OnDeactivateEditingMode ->
                     Return.map (Model.deactivateEditingMode)
                         >> andThenUpdate setDomFocusToFocusInEntityCmd
 
@@ -282,7 +282,7 @@ update msg =
 
                 SaveCurrentForm ->
                     Return.andThen Model.saveCurrentForm
-                        >> andThenUpdate DeactivateEditingMode
+                        >> andThenUpdate OnDeactivateEditingMode
 
                 NewTodo ->
                     Return.map (Model.activateNewTodoModeWithFocusInEntityAsReference)
@@ -314,7 +314,7 @@ update msg =
 
                         Entity.ToggleDeleted ->
                             Return.andThen (Model.toggleDeleteEntity entity)
-                                >> andThenUpdate DeactivateEditingMode
+                                >> andThenUpdate OnDeactivateEditingMode
 
                         Entity.OnFocusIn ->
                             Return.map (Model.setFocusInEntity entity)
@@ -328,7 +328,7 @@ update msg =
                 OnLaunchBarMsgWithNow msg now ->
                     case msg of
                         LaunchBar.OnEnter entity ->
-                            andThenUpdate DeactivateEditingMode
+                            andThenUpdate OnDeactivateEditingMode
                                 >> case entity of
                                     LaunchBar.Project project ->
                                         map (Model.switchToProjectView project)
@@ -514,7 +514,7 @@ onGlobalKeyUp key =
                             identity
 
                 ( Key.Escape, _ ) ->
-                    andThenUpdate DeactivateEditingMode
+                    andThenUpdate OnDeactivateEditingMode
 
                 _ ->
                     identity

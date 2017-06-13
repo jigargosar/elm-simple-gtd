@@ -52,7 +52,7 @@ type Msg
     | OnUserChanged Firebase.User
     | OnFCMTokenChanged Firebase.FCMToken
     | OnFirebaseConnectionChanged Bool
-    | SignIn
+    | OnSignIn
     | SignOut
     | RemotePouchSync EditMode.SyncForm
     | TodoAction Todo.UpdateAction Todo.Id
@@ -69,7 +69,7 @@ type Msg
     | NewProject
     | NewContext
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text
-    | DeactivateEditingMode
+    | OnDeactivateEditingMode
     | NewTodoKeyUp KeyboardEvent
     | StartEditingReminder Todo.Model
     | StartEditingContext Todo.Model

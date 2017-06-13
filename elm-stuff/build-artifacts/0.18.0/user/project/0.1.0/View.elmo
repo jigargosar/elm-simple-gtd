@@ -231,7 +231,11 @@ var _user$project$View$firstVisitModal = A2(
 														{
 															ctor: '::',
 															_0: _elm_lang$html$Html_Attributes$class('btn'),
-															_1: {ctor: '[]'}
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$SignIn),
+																_1: {ctor: '[]'}
+															}
 														},
 														{
 															ctor: '::',
@@ -282,7 +286,7 @@ var _user$project$View$firstVisitModal = A2(
 															},
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html$text('Or lets'),
+																_0: _elm_lang$html$Html$text('Or lets create some sample items'),
 																_1: {ctor: '[]'}
 															}),
 														_1: {ctor: '[]'}
@@ -321,7 +325,48 @@ var _user$project$View$firstVisitModal = A2(
 							}
 						}
 					}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('divider'),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('right-align'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$a,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn btn-flat'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$DeactivateEditingMode),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Skip creating sample items'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
 			}),
 		_1: {ctor: '[]'}
 	});

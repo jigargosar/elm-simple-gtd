@@ -285,7 +285,7 @@ init flags =
             if flags.config.isFirstVisit then
                 EditMode.firstVisit
             else
-                EditMode.none
+                EditMode.firstVisit
 
         model =
             { now = now

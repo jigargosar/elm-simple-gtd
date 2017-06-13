@@ -1239,6 +1239,8 @@ var _user$project$Model$saveCurrentForm = function (model) {
 					{pouchDBRemoteSyncURI: _p52._0.uri}));
 		case 'LaunchBar':
 			return _Fresheyeball$elm_return$Return$singleton(model);
+		case 'None':
+			return _Fresheyeball$elm_return$Return$singleton(model);
 		default:
 			return _Fresheyeball$elm_return$Return$singleton(model);
 	}
@@ -1510,6 +1512,7 @@ var _user$project$Model$EntityListView = function (a) {
 	return {ctor: 'EntityListView', _0: a};
 };
 var _user$project$Model$init = function (flags) {
+	var editMode = flags.config.isFirstVisit ? _user$project$EditMode$firstVisit : _user$project$EditMode$firstVisit;
 	var firebaseClient = _user$project$Firebase$initClient(flags.deviceId);
 	var _p64 = flags;
 	var now = _p64.now;
@@ -1539,7 +1542,7 @@ var _user$project$Model$init = function (flags) {
 		todoStore: todoStore,
 		projectStore: projectStore,
 		contextStore: contextStore,
-		editMode: _user$project$EditMode$none,
+		editMode: editMode,
 		mainViewType: _user$project$Model$EntityListView(_user$project$Entity$defaultListView),
 		keyboardState: _user$project$Ext_Keyboard$init,
 		showDeleted: false,

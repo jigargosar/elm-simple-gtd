@@ -207,14 +207,17 @@ const shouldTriggerPush = deltaSnapshot => {
            && !deltaSnapshot.child(dueAtProp).changed()
 }
 
-const shouldAddNotification = deltaSnapshot=>{
-    const doneSnapshot = deltaSnapshot.child("done")
-    const deletedSnapshot = deltaSnapshot.child("deleted")
+const shouldAddNotification = deltaSnapshot => {
+
     const timestampSnapShot = deltaSnapshot.child("reminder/at")
     return timestampSnapShot.exists() &&
-           (timestampSnapShot.changed()
-            || (deletedSnapshot.changed() && doneSnapshot.val() === false)
-            || (doneSnapshot.changed() && doneSnapshot.val() === false))
+           (function () {
+               const doneSnapshot = deltaSnapshot.child("done")
+               const deletedSnapshot = deltaSnapshot.child("deleted")
+               return timestampSnapShot.changed()
+                      || (deletedSnapshot.changed() && doneSnapshot.val() === false)
+                      || (doneSnapshot.changed() && doneSnapshot.val() === false)
+           }())
 
 }
 exports.updateNotificationOnTodoChanged =

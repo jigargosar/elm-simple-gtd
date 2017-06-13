@@ -1,6 +1,9 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
+## Upcoming
+* ff: remove user access to notifications.  
+
 ## v0.18.12 - 2017-06-13
 * firebase functions : auto notification creation from todo edits.
 * firebase functions: merge both todo update triggers

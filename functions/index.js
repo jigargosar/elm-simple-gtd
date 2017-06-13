@@ -196,17 +196,24 @@ const removeAt = write(null)
 
 const notificationPath = (uid, todoId) => `/notifications/${uid}---${todoId}`
 
-const conditionalPromise = (fn, bool) => bool? fn() : Promise.resolve()
+const conditionalPromise = (fn, bool) => bool ? fn() : Promise.resolve()
 
-function updateNotificationWithTimestamp(uid, todoId, newTimestamp, shouldSendPush) {
-    const writeNotification = writeAt(notificationPath(uid,todoId))
-        const notificationData = {uid, todoId, newTimestamp}
-        return conditionalPromise(_ => sendNotification(notificationData), shouldSendPush)
-            .then(_ => writeNotification(notificationData))
+function addNotification(uid, todoId, newTimestamp, shouldSendPush) {
+    const writeNotification = writeAt(notificationPath(uid, todoId))
+    const notificationData = {uid, todoId, newTimestamp}
+    return conditionalPromise(_ => sendNotification(notificationData), shouldSendPush)
+        .then(_ => writeNotification(notificationData))
 }
 
-const deleteNotification = (deleteNotification)=>
 
+const shouldDeleteNotification = (eventSnapShot) => {
+    const doneSnapshot = eventSnapShot.child("done")
+    const deletedSnapshot = eventSnapShot.child("deleted")
+    const timestampSnapShot = eventSnapShot.child("reminder/at")
+    return (doneSnapshot.changed() && doneSnapshot.val() === true)
+           || (deletedSnapshot.changed() && doneSnapshot.val() === true)
+           || (timestampSnapShot.changed() && timestampSnapShot.val() === null)
+}
 exports.updateNotificationOnTodoChanged =
     functions
         .database.ref("/users/{uid}/todo-db/{todoId}")
@@ -217,18 +224,17 @@ exports.updateNotificationOnTodoChanged =
 
             console.log(eventSnapShot.current.val(), eventSnapShot.previous.val())
 
-            const timestampSnapShot = eventSnapShot.child("reminder/at")
-            if (timestampSnapShot.changed()) {
-                const triggerPush = _.not(eventSnapShot.child("dueAt").changed())
-                const newTimestamp = timestampSnapShot.val()
-                if(newTimestamp){
-                    return updateNotificationWithTimestamp(
-                        uid, todoId, newTimestamp, triggerPush
-                    )
-                }else{
-                    return removeAt(notificationPath(uid, todoId))
-                }
-            } else {
-                console.log("reminder snapshot didn't change, not performing any write.")
+            if (shouldDeleteNotification(eventSnapShot)) {
+                return removeAt(notificationPath(uid, todoId))
+            }
+
+            const timestampSnapshot = eventSnapShot.child("reminder/at")
+            if (timestampSnapshot.changed()) {
+                const shouldTriggerPush = _.not(eventSnapShot.child("dueAt").changed())
+                return addNotification(
+                    uid, todoId,
+                    timestampSnapshot.val(),
+                    shouldTriggerPush
+                )
             }
         })

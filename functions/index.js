@@ -227,4 +227,5 @@ exports.updateNotificationOnTodoChanged =
                     shouldSendPush
                 )
             }
+            console.log("No notification changes to process, returning")
         })

@@ -177,10 +177,12 @@ function foobarFun (snapshot, childPath, value) {
     catch (e) {
         console.log("childEqIn", e)
     }
-}
+};
+
 const childChangedIn = _.curry(function (snapshot, child) {
     return snapshot.child(child).changed()
-})
+});
+
 const reminderAtPath = "schedule/reminderAt"
 const dueAtPath = "schedule/dueAt"
 const donePath = "done"

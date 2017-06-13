@@ -193,6 +193,7 @@ const hasTodoJustSnoozed = deltaSnapshot => {
 
 const shouldAddNotification = deltaSnapshot => {
     const childEq = childEqIn(deltaSnapshot)
+    console.log("childEq", childEq)
     const childChanged = childChangedIn(deltaSnapshot)
     const reminderAtSS = deltaSnapshot.child(reminderAtPath)
     return reminderAtSS.exists()

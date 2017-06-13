@@ -170,6 +170,7 @@ type alias Model =
     , focusInEntity : Entity.Entity
     , timeTracker : Todo.TimeTracker.Model
     , keyComboModel : Keyboard.Combo.Model Msg
+    , config : Config
     }
 
 
@@ -306,6 +307,7 @@ init flags =
                     { toMsg = OnKeyCombo
                     , combos = keyboardCombos
                     }
+            , config = flags.config
             }
     in
         model

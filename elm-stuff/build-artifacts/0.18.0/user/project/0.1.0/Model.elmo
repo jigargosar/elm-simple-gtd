@@ -1279,7 +1279,9 @@ var _user$project$Model$Model = function (a) {
 																		return function (s) {
 																			return function (t) {
 																				return function (u) {
-																					return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s, timeTracker: t, keyComboModel: u};
+																					return function (v) {
+																						return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s, timeTracker: t, keyComboModel: u, config: v};
+																					};
 																				};
 																			};
 																		};
@@ -1554,7 +1556,8 @@ var _user$project$Model$init = function (flags) {
 		timeTracker: _user$project$Todo_TimeTracker$none,
 		firebaseClient: firebaseClient,
 		keyComboModel: _scottcorgan$keyboard_combo$Keyboard_Combo$init(
-			{toMsg: _user$project$Model$OnKeyCombo, combos: _user$project$Model$keyboardCombos})
+			{toMsg: _user$project$Model$OnKeyCombo, combos: _user$project$Model$keyboardCombos}),
+		config: flags.config
 	};
 	return model;
 };

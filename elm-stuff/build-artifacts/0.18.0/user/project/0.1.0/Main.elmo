@@ -688,50 +688,64 @@ var _user$project$Main$main = _rgrempel$elm_route_url$RouteUrl$programWithFlags(
 		function (appVersion) {
 			return A2(
 				_elm_lang$core$Json_Decode$andThen,
-				function (developmentMode) {
+				function (config) {
 					return A2(
 						_elm_lang$core$Json_Decode$andThen,
-						function (deviceId) {
+						function (developmentMode) {
 							return A2(
 								_elm_lang$core$Json_Decode$andThen,
-								function (encodedContextList) {
+								function (deviceId) {
 									return A2(
 										_elm_lang$core$Json_Decode$andThen,
-										function (encodedProjectList) {
+										function (encodedContextList) {
 											return A2(
 												_elm_lang$core$Json_Decode$andThen,
-												function (encodedTodoList) {
+												function (encodedProjectList) {
 													return A2(
 														_elm_lang$core$Json_Decode$andThen,
-														function (now) {
+														function (encodedTodoList) {
 															return A2(
 																_elm_lang$core$Json_Decode$andThen,
-																function (pouchDBRemoteSyncURI) {
-																	return _elm_lang$core$Json_Decode$succeed(
-																		{appVersion: appVersion, developmentMode: developmentMode, deviceId: deviceId, encodedContextList: encodedContextList, encodedProjectList: encodedProjectList, encodedTodoList: encodedTodoList, now: now, pouchDBRemoteSyncURI: pouchDBRemoteSyncURI});
+																function (now) {
+																	return A2(
+																		_elm_lang$core$Json_Decode$andThen,
+																		function (pouchDBRemoteSyncURI) {
+																			return _elm_lang$core$Json_Decode$succeed(
+																				{appVersion: appVersion, config: config, developmentMode: developmentMode, deviceId: deviceId, encodedContextList: encodedContextList, encodedProjectList: encodedProjectList, encodedTodoList: encodedTodoList, now: now, pouchDBRemoteSyncURI: pouchDBRemoteSyncURI});
+																		},
+																		A2(_elm_lang$core$Json_Decode$field, 'pouchDBRemoteSyncURI', _elm_lang$core$Json_Decode$string));
 																},
-																A2(_elm_lang$core$Json_Decode$field, 'pouchDBRemoteSyncURI', _elm_lang$core$Json_Decode$string));
+																A2(_elm_lang$core$Json_Decode$field, 'now', _elm_lang$core$Json_Decode$float));
 														},
-														A2(_elm_lang$core$Json_Decode$field, 'now', _elm_lang$core$Json_Decode$float));
+														A2(
+															_elm_lang$core$Json_Decode$field,
+															'encodedTodoList',
+															_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value)));
 												},
 												A2(
 													_elm_lang$core$Json_Decode$field,
-													'encodedTodoList',
+													'encodedProjectList',
 													_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value)));
 										},
 										A2(
 											_elm_lang$core$Json_Decode$field,
-											'encodedProjectList',
+											'encodedContextList',
 											_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value)));
 								},
-								A2(
-									_elm_lang$core$Json_Decode$field,
-									'encodedContextList',
-									_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$value)));
+								A2(_elm_lang$core$Json_Decode$field, 'deviceId', _elm_lang$core$Json_Decode$string));
 						},
-						A2(_elm_lang$core$Json_Decode$field, 'deviceId', _elm_lang$core$Json_Decode$string));
+						A2(_elm_lang$core$Json_Decode$field, 'developmentMode', _elm_lang$core$Json_Decode$bool));
 				},
-				A2(_elm_lang$core$Json_Decode$field, 'developmentMode', _elm_lang$core$Json_Decode$bool));
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'config',
+					A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (isFirstVisit) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{isFirstVisit: isFirstVisit});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'isFirstVisit', _elm_lang$core$Json_Decode$bool))));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'appVersion', _elm_lang$core$Json_Decode$string)));
 var _user$project$Main$onMsgList = _elm_lang$core$Basics$flip(

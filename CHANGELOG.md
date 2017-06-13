@@ -2,7 +2,7 @@
 * edit reminder: add menu items for later, tomorrow, etc.
 
 ## Upcoming
-* firebase : auto notification creation from todo edits. 
+* firebase functions : auto notification creation from todo edits. 
 
 ## v0.18.11 - 2017-06-12
 * add link to google group 

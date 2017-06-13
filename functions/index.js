@@ -166,9 +166,12 @@ const hasChildChangedToIn = _.curry(function (snapshot, child, value) {
     const childSS = snapshot.child(child)
     return childSS.changed() && childSS.val() === value
 })
-const childEqIn = _.curry(function (snapshot, childPath, value) {
+/*const childEqIn = _.curry(function (snapshot, childPath, value) {
     return snapshot.child(childPath).val() === value
-})
+})*/
+const childEqIn = function (snapshot, childPath, value) {
+    return snapshot.child(childPath).val() === value
+}
 const childChangedIn = _.curry(function (snapshot, child) {
     return snapshot.child(child).changed()
 })
@@ -192,8 +195,8 @@ const hasTodoJustSnoozed = deltaSnapshot => {
 }
 
 const shouldAddNotification = deltaSnapshot => {
-    const childEq = childEqIn(deltaSnapshot)
-    console.log("childEq", childEq)
+    // const childEq = childEqIn(deltaSnapshot)
+    // console.log("childEq", childEq)
     const childChanged = childChangedIn(deltaSnapshot)
     const reminderAtSS = deltaSnapshot.child(reminderAtPath)
     return reminderAtSS.exists()

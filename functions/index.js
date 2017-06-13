@@ -196,6 +196,12 @@ const shouldDeleteNotification = (deltaSnapshot) => {
            || (deletedSnapshot.changed() && doneSnapshot.val() === true)
            || (timestampSnapShot.changed() && timestampSnapShot.val() === null)
 }
+
+const shouldTriggerPush = deltaSnapshot => {
+    const dueAtProp = "dueAt"
+    return deltaSnapshot.previous.child(dueAtProp).exists()
+           && !deltaSnapshot.child(dueAtProp).changed()
+}
 exports.updateNotificationOnTodoChanged =
     functions
         .database.ref("/users/{uid}/todo-db/{todoId}")
@@ -212,11 +218,11 @@ exports.updateNotificationOnTodoChanged =
 
             const timestampSnapshot = deltaSnapshot.child("reminder/at")
             if (timestampSnapshot.changed()) {
-                const shouldTriggerPush = _.not(deltaSnapshot.child("dueAt").changed())
+
                 return addNotification(
                     uid, todoId,
                     timestampSnapshot.val(),
-                    shouldTriggerPush
+                    shouldTriggerPush(deltaSnapshot)
                 )
             }
         })

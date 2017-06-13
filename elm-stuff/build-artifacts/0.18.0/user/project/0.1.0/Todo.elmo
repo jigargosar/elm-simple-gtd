@@ -61,6 +61,49 @@ var _user$project$Todo$encodeReminder = function (maybeReminderTime) {
 			}),
 		_elm_lang$core$Json_Encode$null);
 };
+var _user$project$Todo$decodeScheduleWithDueAt = function (dueAt) {
+	return _elm_lang$core$Json_Decode$oneOf(
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (reminder) {
+					return _elm_lang$core$Json_Decode$succeed(
+						A2(_user$project$Todo_Schedule$initWithDueAtAndReminder, dueAt, reminder));
+				},
+				A2(
+					_elm_lang$core$Json_Decode$at,
+					{
+						ctor: '::',
+						_0: 'reminder',
+						_1: {
+							ctor: '::',
+							_0: 'at',
+							_1: {ctor: '[]'}
+						}
+					},
+					_elm_lang$core$Json_Decode$float)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$core$Json_Decode$succeed(
+					_user$project$Todo_Schedule$initWithDueAt(dueAt)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Todo$decodeSchedule = _elm_lang$core$Json_Decode$oneOf(
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$core$Json_Decode$andThen,
+			_user$project$Todo$decodeScheduleWithDueAt,
+			A2(_elm_lang$core$Json_Decode$field, 'dueAt', _elm_lang$core$Json_Decode$float)),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$core$Json_Decode$succeed(_user$project$Todo_Schedule$unscheduled),
+			_1: {ctor: '[]'}
+		}
+	});
 var _user$project$Todo$dueAtAndReminderToSchedule = F2(
 	function (dueAt, reminder) {
 		return A2(
@@ -86,25 +129,10 @@ var _user$project$Todo$todoConstructor = function (id) {
 					return function (deviceId) {
 						return function (done) {
 							return function (text) {
-								return function (dueAt) {
+								return function (schedule) {
 									return function (projectId) {
 										return function (contextId) {
-											return function (reminder) {
-												return {
-													id: id,
-													rev: rev,
-													dirty: false,
-													createdAt: createdAt,
-													modifiedAt: modifiedAt,
-													deviceId: deviceId,
-													deleted: deleted,
-													done: done,
-													text: text,
-													schedule: A2(_user$project$Todo$dueAtAndReminderToSchedule, dueAt, reminder),
-													projectId: projectId,
-													contextId: contextId
-												};
-											};
+											return {id: id, rev: rev, dirty: false, createdAt: createdAt, modifiedAt: modifiedAt, deviceId: deviceId, deleted: deleted, done: done, text: text, schedule: schedule, projectId: projectId, contextId: contextId};
 										};
 									};
 								};
@@ -119,11 +147,38 @@ var _user$project$Todo$todoConstructor = function (id) {
 var _user$project$Todo$defaultContextId = '';
 var _user$project$Todo$defaultProjectId = '';
 var _user$project$Todo$defaultDone = false;
+var _user$project$Todo$todoRecordDecoder = function (_p7) {
+	return A4(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+		'contextId',
+		_elm_lang$core$Json_Decode$string,
+		_user$project$Todo$defaultContextId,
+		A4(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+			'projectId',
+			_elm_lang$core$Json_Decode$string,
+			_user$project$Todo$defaultProjectId,
+			A2(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$custom,
+				_user$project$Todo$decodeSchedule,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'text',
+					_elm_lang$core$Json_Decode$string,
+					A4(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional, 'done', _elm_lang$core$Json_Decode$bool, _user$project$Todo$defaultDone, _p7)))));
+};
+var _user$project$Todo$decoder = _user$project$Todo$todoRecordDecoder(
+	_user$project$Document$documentFieldsDecoder(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Todo$todoConstructor)));
 var _user$project$Todo$defaultDeleted = false;
+var _user$project$Todo$init = F4(
+	function (createdAt, text, deviceId, id) {
+		return _user$project$Todo$todoConstructor(id)(_user$project$Document$defaultRevision)(createdAt)(createdAt)(_user$project$Todo$defaultDeleted)(deviceId)(_user$project$Todo$defaultDone)(text)(_user$project$Todo_Schedule$unscheduled)(_user$project$Todo$defaultProjectId)(_user$project$Todo$defaultContextId);
+	});
 var _user$project$Todo$defaultDueAt = _elm_lang$core$Maybe$Nothing;
-var _user$project$Todo$hasReminderChanged = function (_p7) {
-	var _p8 = _p7;
-	return A2(_user$project$Todo_Schedule$hasReminderChanged, _p8._0.schedule, _p8._1.schedule);
+var _user$project$Todo$hasReminderChanged = function (_p8) {
+	var _p9 = _p8;
+	return A2(_user$project$Todo_Schedule$hasReminderChanged, _p9._0.schedule, _p9._1.schedule);
 };
 var _user$project$Todo$deleted = A2(
 	_user$project$Ext_Record$init,
@@ -199,21 +254,6 @@ var _user$project$Todo$getModifiedAt = function (_) {
 	return _.modifiedAt;
 };
 var _user$project$Todo$modifiedAtInWords = function (now) {
-	return function (_p9) {
-		return A3(
-			_alpacaaa$elm_date_distance$Date_Distance$inWordsWithConfig,
-			_elm_lang$core$Native_Utils.update(
-				_alpacaaa$elm_date_distance$Date_Distance$defaultConfig,
-				{includeSeconds: true}),
-			_elm_lang$core$Date$fromTime(now),
-			_elm_lang$core$Date$fromTime(
-				_user$project$Todo$getModifiedAt(_p9)));
-	};
-};
-var _user$project$Todo$getCreatedAt = function (_) {
-	return _.createdAt;
-};
-var _user$project$Todo$createdAtInWords = function (now) {
 	return function (_p10) {
 		return A3(
 			_alpacaaa$elm_date_distance$Date_Distance$inWordsWithConfig,
@@ -222,26 +262,41 @@ var _user$project$Todo$createdAtInWords = function (now) {
 				{includeSeconds: true}),
 			_elm_lang$core$Date$fromTime(now),
 			_elm_lang$core$Date$fromTime(
-				_user$project$Todo$getCreatedAt(_p10)));
+				_user$project$Todo$getModifiedAt(_p10)));
+	};
+};
+var _user$project$Todo$getCreatedAt = function (_) {
+	return _.createdAt;
+};
+var _user$project$Todo$createdAtInWords = function (now) {
+	return function (_p11) {
+		return A3(
+			_alpacaaa$elm_date_distance$Date_Distance$inWordsWithConfig,
+			_elm_lang$core$Native_Utils.update(
+				_alpacaaa$elm_date_distance$Date_Distance$defaultConfig,
+				{includeSeconds: true}),
+			_elm_lang$core$Date$fromTime(now),
+			_elm_lang$core$Date$fromTime(
+				_user$project$Todo$getCreatedAt(_p11)));
 	};
 };
 var _user$project$Todo$getProjectId = function (_) {
 	return _.projectId;
 };
 var _user$project$Todo$projectFilter = function (project) {
-	return function (_p11) {
-		return A2(
-			_user$project$Ext_Function$equals,
-			_user$project$Document$getId(project),
-			_user$project$Todo$getProjectId(_p11));
-	};
-};
-var _user$project$Todo$hasProjectId = function (projectId) {
 	return function (_p12) {
 		return A2(
 			_user$project$Ext_Function$equals,
-			projectId,
+			_user$project$Document$getId(project),
 			_user$project$Todo$getProjectId(_p12));
+	};
+};
+var _user$project$Todo$hasProjectId = function (projectId) {
+	return function (_p13) {
+		return A2(
+			_user$project$Ext_Function$equals,
+			projectId,
+			_user$project$Todo$getProjectId(_p13));
 	};
 };
 var _user$project$Todo$getDeleted = function (_) {
@@ -258,11 +313,11 @@ var _user$project$Todo$isInActive = _user$project$Ext_Function$anyPass(
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$Todo$isActive = function (_p13) {
-	return !_user$project$Todo$isInActive(_p13);
+var _user$project$Todo$isActive = function (_p14) {
+	return !_user$project$Todo$isInActive(_p14);
 };
-var _user$project$Todo$isNotDeleted = function (_p14) {
-	return !_user$project$Todo$getDeleted(_p14);
+var _user$project$Todo$isNotDeleted = function (_p15) {
+	return !_user$project$Todo$getDeleted(_p15);
 };
 var _user$project$Todo$doneFilter = _user$project$Todo$toAllPassPredicate(
 	{
@@ -284,8 +339,8 @@ var _user$project$Todo$projectIdFilter = function (projectId) {
 				_0: _user$project$Todo$isNotDeleted,
 				_1: {
 					ctor: '::',
-					_0: function (_p15) {
-						return !_user$project$Todo$isDone(_p15);
+					_0: function (_p16) {
+						return !_user$project$Todo$isDone(_p16);
 					},
 					_1: {ctor: '[]'}
 				}
@@ -298,28 +353,28 @@ var _user$project$Todo$binFilter = _user$project$Todo$toAllPassPredicate(
 		_0: _user$project$Todo$getDeleted,
 		_1: {ctor: '[]'}
 	});
-var _user$project$Todo$getMaybeReminderTime = function (_p16) {
+var _user$project$Todo$getMaybeReminderTime = function (_p17) {
 	return _user$project$Todo_Schedule$getMaybeReminderTime(
 		function (_) {
 			return _.schedule;
-		}(_p16));
+		}(_p17));
 };
 var _user$project$Todo$isReminderOverdue = function (now) {
-	return function (_p17) {
+	return function (_p18) {
 		return A3(
 			_elm_community$maybe_extra$Maybe_Extra$unwrap,
 			false,
 			function (time) {
 				return _elm_lang$core$Native_Utils.cmp(time, now) < 1;
 			},
-			_user$project$Todo$getMaybeReminderTime(_p17));
+			_user$project$Todo$getMaybeReminderTime(_p18));
 	};
 };
-var _user$project$Todo$getMaybeDueAt = function (_p18) {
+var _user$project$Todo$getMaybeDueAt = function (_p19) {
 	return _user$project$Todo_Schedule$getMaybeDueAt(
 		function (_) {
 			return _.schedule;
-		}(_p18));
+		}(_p19));
 };
 var _user$project$Todo$getMaybeTime = function (model) {
 	return A2(
@@ -412,40 +467,6 @@ var _user$project$Todo$reminderDecoder = A3(
 		}));
 var _user$project$Todo$None = {ctor: 'None'};
 var _user$project$Todo$defaultReminder = _user$project$Todo$None;
-var _user$project$Todo$todoRecordDecoder = function (_p19) {
-	return A4(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-		'reminder',
-		_user$project$Todo$reminderDecoder,
-		_user$project$Todo$defaultReminder,
-		A4(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-			'contextId',
-			_elm_lang$core$Json_Decode$string,
-			_user$project$Todo$defaultContextId,
-			A4(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-				'projectId',
-				_elm_lang$core$Json_Decode$string,
-				_user$project$Todo$defaultProjectId,
-				A4(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-					'dueAt',
-					_elm_lang$core$Json_Decode$maybe(_elm_lang$core$Json_Decode$float),
-					_user$project$Todo$defaultDueAt,
-					A3(
-						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-						'text',
-						_elm_lang$core$Json_Decode$string,
-						A4(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional, 'done', _elm_lang$core$Json_Decode$bool, _user$project$Todo$defaultDone, _p19))))));
-};
-var _user$project$Todo$decoder = _user$project$Todo$todoRecordDecoder(
-	_user$project$Document$documentFieldsDecoder(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Todo$todoConstructor)));
-var _user$project$Todo$init = F4(
-	function (createdAt, text, deviceId, id) {
-		return _user$project$Todo$todoConstructor(id)(_user$project$Document$defaultRevision)(createdAt)(createdAt)(_user$project$Todo$defaultDeleted)(deviceId)(_user$project$Todo$defaultDone)(text)(_user$project$Todo$defaultDueAt)(_user$project$Todo$defaultProjectId)(_user$project$Todo$defaultContextId)(_user$project$Todo$defaultReminder);
-	});
 var _user$project$Todo$AutoSnooze = function (a) {
 	return {ctor: 'AutoSnooze', _0: a};
 };
@@ -526,7 +547,7 @@ var _user$project$Todo$update = function (action) {
 				_user$project$Todo_Schedule$snoozeTill(_p20._0));
 		default:
 			return _user$project$Todo$updateSchedule(
-				_user$project$Todo_Schedule$snoozeTill(_p20._0 + (_elm_lang$core$Time$minute * 15)));
+				_user$project$Todo_Schedule$autoSnooze(_p20._0));
 	}
 };
 var _user$project$Todo$SetText = function (a) {

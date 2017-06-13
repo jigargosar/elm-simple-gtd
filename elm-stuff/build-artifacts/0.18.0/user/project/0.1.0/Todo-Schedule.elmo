@@ -41,6 +41,10 @@ var _user$project$Todo_Schedule$fromMaybeTime = function (maybeTime) {
 		A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeTime, _user$project$Todo_Schedule$initWithReminder),
 		_user$project$Todo_Schedule$unscheduled);
 };
+var _user$project$Todo_Schedule$initWithDueAtAndReminder = F2(
+	function (dueAt, reminder) {
+		return A2(_user$project$Todo_Schedule$WithReminder, dueAt, reminder);
+	});
 var _user$project$Todo_Schedule$snoozeTill = F2(
 	function (snoozedTillTime, model) {
 		var _p2 = model;
@@ -53,8 +57,14 @@ var _user$project$Todo_Schedule$snoozeTill = F2(
 				return model;
 		}
 	});
+var _user$project$Todo_Schedule$autoSnooze = function (now) {
+	return _user$project$Todo_Schedule$snoozeTill(now + (_elm_lang$core$Time$minute * 15));
+};
 var _user$project$Todo_Schedule$NoReminder = function (a) {
 	return {ctor: 'NoReminder', _0: a};
+};
+var _user$project$Todo_Schedule$initWithDueAt = function (dueAt) {
+	return _user$project$Todo_Schedule$NoReminder(dueAt);
 };
 var _user$project$Todo_Schedule$turnReminderOff = function (model) {
 	var _p3 = model;

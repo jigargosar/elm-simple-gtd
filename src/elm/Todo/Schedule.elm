@@ -23,6 +23,14 @@ initWithReminder time =
     WithReminder time time
 
 
+initWithDueAtAndReminder dueAt reminder =
+    WithReminder dueAt reminder
+
+
+initWithDueAt dueAt =
+    NoReminder dueAt
+
+
 unscheduled =
     Unscheduled
 

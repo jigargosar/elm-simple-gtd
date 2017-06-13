@@ -170,7 +170,7 @@ const hasChildChangedToIn = _.curry(function (snapshot, child, value) {
  return snapshot.child(childPath).val() === value
  })*/
 
-function childEqIn (snapshot, childPath, value) {
+function foobarFun (snapshot, childPath, value) {
     try {
         return snapshot.child(childPath).val() === value
     }
@@ -206,8 +206,8 @@ const shouldAddNotification = deltaSnapshot => {
     const childChanged = childChangedIn(deltaSnapshot)
     const reminderAtSS = deltaSnapshot.child(reminderAtPath)
     return reminderAtSS.exists()
-           && childEqIn(deltaSnapshot, donePath, false)
-           && childEqIn(deltaSnapshot, deletedPath, false)
+           && foobarFun(deltaSnapshot, donePath, false)
+           && foobarFun(deltaSnapshot, deletedPath, false)
            (reminderAtSS.changed()
             || childChanged(donePath)
             || childChanged(deletedPath)

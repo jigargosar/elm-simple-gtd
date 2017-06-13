@@ -81,7 +81,7 @@ firstVisitModal =
                 , div [ class "divider" ] []
                 , div [ class "row section" ]
                     [ div [ class "col s12 m6" ]
-                        [ span [ class "flow-text" ] [ text "Have an Account?" ]
+                        [ span [ class "flow-text" ] [ text "Have an account? signin to start syncing." ]
                         ]
                     , div [ class "col s12 m6" ]
                         [ a [ class "btn", onClick Model.OnSignIn ] [ text "Signin with Google" ]

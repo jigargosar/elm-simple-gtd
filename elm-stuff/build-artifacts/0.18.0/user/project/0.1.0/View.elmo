@@ -210,7 +210,7 @@ var _user$project$View$firstVisitModal = A2(
 													},
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html$text('Have an Account?'),
+														_0: _elm_lang$html$Html$text('Have an account? signin to start syncing.'),
 														_1: {ctor: '[]'}
 													}),
 												_1: {ctor: '[]'}

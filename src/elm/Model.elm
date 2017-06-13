@@ -281,12 +281,18 @@ init flags =
         firebaseClient =
             Firebase.initClient flags.deviceId
 
+        editMode =
+            if flags.config.isFirstVisit then
+                EditMode.firstVisit
+            else
+                EditMode.none
+
         model =
             { now = now
             , todoStore = todoStore
             , projectStore = projectStore
             , contextStore = contextStore
-            , editMode = EditMode.none
+            , editMode = editMode
             , mainViewType = EntityListView Entity.defaultListView
             , keyboardState = Keyboard.init
             , showDeleted = False
@@ -648,8 +654,10 @@ saveCurrentForm model =
                 |> Return.singleton
 
         EditMode.None ->
-            model
-                |> Return.singleton
+            model |> Return.singleton
+
+        EditMode.FirstVisit ->
+            model |> Return.singleton
 
 
 setFocusInEntityFromTodoId : Todo.Id -> ModelF

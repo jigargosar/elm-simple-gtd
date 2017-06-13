@@ -11,6 +11,8 @@ var _user$project$EditMode$SyncForm = function (a) {
 };
 var _user$project$EditMode$None = {ctor: 'None'};
 var _user$project$EditMode$none = _user$project$EditMode$None;
+var _user$project$EditMode$FirstVisit = {ctor: 'FirstVisit'};
+var _user$project$EditMode$firstVisit = _user$project$EditMode$FirstVisit;
 var _user$project$EditMode$EditSyncSettings = function (a) {
 	return {ctor: 'EditSyncSettings', _0: a};
 };

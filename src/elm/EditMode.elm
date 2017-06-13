@@ -56,11 +56,16 @@ type EditMode
     | LaunchBar LaunchBar.Form.Model
       -- different page !!
     | EditSyncSettings SyncForm
+    | FirstVisit
     | None
 
 
 none =
     None
+
+
+firstVisit =
+    FirstVisit
 
 
 editContextMode model =

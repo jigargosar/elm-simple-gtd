@@ -136,19 +136,6 @@ function deleteToken(uid, deviceId) {
 }
 
 
-// exports.onNotify =
-//     functions
-//         .database.ref("/users/{uid}/notify/{tag}")
-//         .onWrite(event =>{
-//             const oldData = event.data.previous.val();
-//             const newData = event.data.val()
-//             const uid = event.params["uid"]
-//
-//             if (!oldData && newData || oldData && newData && oldData.timestamp < newData.timestamp) {
-//                 return getUserClients(uid).then(sendPush(newData))
-//             }
-//         })
-
 const sendNotification = data =>
     getUserClients(data.uid)
         .then(sendNotificationToClients(data))

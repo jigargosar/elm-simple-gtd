@@ -184,18 +184,20 @@ const write = _.curry((value, ref) => {
     return ref.set(value)
 })
 
+const writeAt = _.flip(write)
+
 function updateNotificationWithTimestamp(uid, todoId, newTimestamp, dueAtChanged) {
     const notificationPath = `/notifications/${uid}---${todoId}`
     const ref = admin.database().ref(notificationPath)
+    const writeNotification = writeAt(ref)
     if (newTimestamp) {
         const notificationValue = {uid,todoId, newTimestamp}
         if(!dueAtChanged){
 
         }
-        return write(notificationValue,ref)
+        return writeNotification(notificationValue)
     } else {
-        const notificationValue = null
-        return write(notificationValue,ref)
+        return writeNotification(null)
     }
 }
 

@@ -162,17 +162,16 @@ function addNotification(uid, todoId, newTimestamp, shouldSendPush) {
         .then(_ => writeNotification(notificationData))
 }
 
-const hasChildChangedToIn = _.curry((snapshot, child, value) => {
-        const childSS = snapshot.child(child)
-        return childSS.changed() && childSS.val() === value
-    }
-)
-const childEqIn = _.curryN(3,
-    function (snapshot, childPath, value) { return snapshot.child(childPath).val() === value }
-)
-const childChangedIn = _.curryN(2,
-    (snapshot, child) => snapshot.child(child).changed()
-)
+const hasChildChangedToIn = _.curry(function (snapshot, child, value) {
+    const childSS = snapshot.child(child)
+    return childSS.changed() && childSS.val() === value
+})
+const childEqIn = _.curry(function (snapshot, childPath, value) {
+    return snapshot.child(childPath).val() === value
+})
+const childChangedIn = _.curry(function (snapshot, child) {
+    return snapshot.child(child).changed()
+})
 const reminderAtPath = "schedule/reminderAt"
 const dueAtPath = "schedule/dueAt"
 const donePath = "done"

@@ -167,11 +167,12 @@ const hasChildChangedToIn = _.curry((snapshot, child, value) => {
         return childSS.changed() && childSS.val() === value
     }
 )
-const childEqIn = _.curry((snapshot, childPath, value) => {
-    return snapshot.child(childPath).val() === value
-    }
+const childEqIn = _.curryN(3,
+    (snapshot, childPath, value)
+        => snapshot.child(childPath).val() === value
 )
-const childChangedIn = _.curry((snapshot, child) => snapshot.child(child).changed()
+const childChangedIn = _.curryN(2,
+    (snapshot, child) => snapshot.child(child).changed()
 )
 const reminderAtPath = "schedule/reminderAt"
 const dueAtPath = "schedule/dueAt"
@@ -200,8 +201,8 @@ const shouldAddNotification = deltaSnapshot => {
            && childEq(donePath, false)
            && childEq(deletedPath, false)
            (reminderAtSS.changed()
-               || childChanged(donePath)
-               || childChanged(deletedPath)
+            || childChanged(donePath)
+            || childChanged(deletedPath)
            )
 
 }

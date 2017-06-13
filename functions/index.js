@@ -179,17 +179,23 @@ exports.onTodoUpdated =
 
         })
 
-function updateNotificationWithTimestamp(uid, todoId, timestamp) {
+function writeAt(ref, value) {
+    console.log("write: path = ", ref.path(), "value = ", value)
+    return ref.set(value)
+}
+
+function updateNotificationWithTimestamp(uid, todoId, newTimestamp, dueAtChanged) {
     const notificationPath = `/notifications/${uid}---${todoId}`
     const ref = admin.database().ref(notificationPath)
-    if (timestamp) {
-        const notificationValue = {uid,todoId, timestamp}
-        console.log("write: ", notificationPath, notificationValue)
-        return ref.set(notificationValue)
+    if (newTimestamp) {
+        const notificationValue = {uid,todoId, newTimestamp}
+        if(!dueAtChanged){
+
+        }
+        return write(ref,notificationValue)
     } else {
         const notificationValue = null
-        console.log("write: ", notificationPath, notificationValue)
-        return ref.set(notificationValue)
+        return write(ref,notificationValue)
     }
 }
 
@@ -205,7 +211,8 @@ exports.updateNotificationOnTodoChanged =
 
             const timestampSnapShot = eventSnapShot.child("reminder/at")
             if (timestampSnapShot.changed()) {
-                return updateNotificationWithTimestamp(uid, todoId, timestampSnapShot.val())
+                const dueAtSnapshot = eventSnapShot.child("dueAt")
+                return updateNotificationWithTimestamp(uid, todoId, timestampSnapShot.val(), dueAtSnapshot.changed())
             }else{
                 console.log("reminder snapshot didn't change, not performing any write.", timestampSnapShot.val())
             }

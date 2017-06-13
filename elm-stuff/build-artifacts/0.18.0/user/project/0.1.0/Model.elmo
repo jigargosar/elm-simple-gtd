@@ -1513,7 +1513,6 @@ var _user$project$Model$EntityListView = function (a) {
 	return {ctor: 'EntityListView', _0: a};
 };
 var _user$project$Model$init = function (flags) {
-	var editMode = flags.config.isFirstVisit ? _user$project$EditMode$firstVisit : _user$project$EditMode$firstVisit;
 	var firebaseClient = _user$project$Firebase$initClient(flags.deviceId);
 	var _p64 = flags;
 	var now = _p64.now;
@@ -1538,6 +1537,7 @@ var _user$project$Model$init = function (flags) {
 	var projectStore = _p65._0._1;
 	var contextStore = _p65._0._2;
 	var seed = _p65._1;
+	var editMode = (_user$project$Store$isEmpty(todoStore) || (_user$project$Store$isEmpty(contextStore) || _user$project$Store$isEmpty(projectStore))) ? _user$project$EditMode$firstVisit : _user$project$EditMode$none;
 	var model = {
 		now: now,
 		todoStore: todoStore,

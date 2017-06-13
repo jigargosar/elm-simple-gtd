@@ -192,7 +192,7 @@ function addNotification(uid, todoId, newTimestamp, shouldSendPush) {
 }
 
 const hasChildChangedToIn = _.curry((snapshot, child, value) => {
-        const childSS = snapshot.child("child")
+        const childSS = snapshot.child(child)
         return childSS.changed() && childSS.val() === value
     }
 )
@@ -236,13 +236,14 @@ exports.updateNotificationOnTodoChanged =
             console.log(deltaSnapshot.current.val(), deltaSnapshot.previous.val())
 
             if (shouldDeleteNotification(deltaSnapshot)) {
+                console.log("deleting notification")
                 return removeAt(notificationPath(uid, todoId))
             }
 
             if (shouldAddNotification(deltaSnapshot)) {
 
                 const shouldSendPush = hasTodoJustSnoozed(deltaSnapshot)
-                console.log("shouldSendPush", shouldSendPush)
+                console.log("adding notification: shouldSendPush", shouldSendPush)
                 return addNotification(
                     uid, todoId,
                     deltaSnapshot.child(reminderAtPath).val(),

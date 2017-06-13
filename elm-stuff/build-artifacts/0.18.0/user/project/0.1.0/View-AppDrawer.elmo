@@ -336,6 +336,10 @@ var _user$project$View_AppDrawer$navList = F2(
 								}
 							})))));
 	});
+var _user$project$View_AppDrawer$newIssueURL = 'https://github.com/jigargosar/elm-simple-gtd/issues/new';
+var _user$project$View_AppDrawer$newPostURL = 'https://groups.google.com/forum/#!newtopic/simplegtd';
+var _user$project$View_AppDrawer$forumsURL = 'https://groups.google.com/forum/#!forum/simplegtd';
+var _user$project$View_AppDrawer$changeLogURL = 'https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md';
 var _user$project$View_AppDrawer$leftHeader = function (m) {
 	var _p12 = m.developmentMode ? {
 		ctor: '_Tuple2',
@@ -371,7 +375,7 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('small'),
+						_0: _elm_lang$html$Html_Attributes$class('small layout horizontal '),
 						_1: {ctor: '[]'}
 					},
 					{
@@ -383,20 +387,55 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 								_0: _elm_lang$html$Html_Attributes$target('_blank'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$href(''),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-										_1: {ctor: '[]'}
-									}
+									_0: _elm_lang$html$Html_Attributes$href(_user$project$View_AppDrawer$changeLogURL),
+									_1: {ctor: '[]'}
 								}
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(t2),
+								_0: _elm_lang$html$Html$text(
+									A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$a,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$target('_blank'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$href(_user$project$View_AppDrawer$newPostURL),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Discuss'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$a,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$target('_blank'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$href('mailto:jigar.gosar@gmail.com'),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Email Author'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
 					}),
 				_1: {ctor: '[]'}
 			}

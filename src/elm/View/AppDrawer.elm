@@ -73,6 +73,22 @@ view viewModel m =
             ]
 
 
+changeLogURL =
+    "https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md"
+
+
+forumsURL =
+    "https://groups.google.com/forum/#!forum/simplegtd"
+
+
+newPostURL =
+    "https://groups.google.com/forum/#!newtopic/simplegtd"
+
+
+newIssueURL =
+    "https://github.com/jigargosar/elm-simple-gtd/issues/new"
+
+
 leftHeader m =
     let
         ( t1, t2 ) =
@@ -83,8 +99,13 @@ leftHeader m =
     in
         div [ id "left-header" ]
             [ div [] [ text t1 ]
-            , div [ class "small" ]
-                [ a [ target "_blank", href "", tabindex -1 ] [ text t2 ]
+            , div [ class "small layout horizontal " ]
+                [ a [ target "_blank", href changeLogURL ]
+                    [ "v" ++ m.appVersion |> text ]
+                , a [ target "_blank", href newPostURL ] [ text "Discuss" ]
+
+                {- , a [ target "_blank", href newIssueURL ] [ text "Report Issue" ] -}
+                , a [ target "_blank", href "mailto:jigar.gosar@gmail.com" ] [ text "Email Author" ]
                 ]
             ]
 

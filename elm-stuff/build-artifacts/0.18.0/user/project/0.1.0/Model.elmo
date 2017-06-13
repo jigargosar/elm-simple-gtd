@@ -1305,9 +1305,12 @@ var _user$project$Model$Layout = F2(
 	function (a, b) {
 		return {narrow: a, forceNarrow: b};
 	});
-var _user$project$Model$Flags = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {now: a, encodedTodoList: b, encodedProjectList: c, encodedContextList: d, pouchDBRemoteSyncURI: e, developmentMode: f, appVersion: g, deviceId: h};
+var _user$project$Model$Config = function (a) {
+	return {isFirstVisit: a};
+};
+var _user$project$Model$Flags = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {now: a, encodedTodoList: b, encodedProjectList: c, encodedContextList: d, pouchDBRemoteSyncURI: e, developmentMode: f, appVersion: g, deviceId: h, config: i};
 	});
 var _user$project$Model$TodoNotification = F3(
 	function (a, b, c) {

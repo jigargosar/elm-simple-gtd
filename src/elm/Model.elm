@@ -183,6 +183,11 @@ type alias ModelF =
     Model -> Model
 
 
+type alias Config =
+    { isFirstVisit : Bool
+    }
+
+
 type alias Flags =
     { now : Time
     , encodedTodoList : List Todo.Encoded
@@ -192,6 +197,7 @@ type alias Flags =
     , developmentMode : Bool
     , appVersion : String
     , deviceId : String
+    , config : Config
     }
 
 

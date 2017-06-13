@@ -179,10 +179,10 @@ exports.onTodoUpdated =
 
         })
 
-function writeAt(ref, value) {
+const write = _.curry((value, ref) => {
     console.log("write: path = ", ref.path(), "value = ", value)
     return ref.set(value)
-}
+})
 
 function updateNotificationWithTimestamp(uid, todoId, newTimestamp, dueAtChanged) {
     const notificationPath = `/notifications/${uid}---${todoId}`
@@ -192,10 +192,10 @@ function updateNotificationWithTimestamp(uid, todoId, newTimestamp, dueAtChanged
         if(!dueAtChanged){
 
         }
-        return write(ref,notificationValue)
+        return write(notificationValue,ref)
     } else {
         const notificationValue = null
-        return write(ref,notificationValue)
+        return write(notificationValue,ref)
     }
 }
 

@@ -209,8 +209,15 @@ hasReminderChanged ( old, new ) =
     Todo.Schedule.hasReminderChanged old.schedule new.schedule
 
 
-isReminderOverdue now =
-    getMaybeReminderTime >> Maybe.unwrap False (\time -> time <= now)
+isReminderOverdue now model =
+    let
+        isOverDue =
+            getMaybeReminderTime >> Maybe.unwrap False (\time -> time <= now)
+    in
+        if isActive model then
+            isOverDue model
+        else
+            False
 
 
 isSnoozed todo =

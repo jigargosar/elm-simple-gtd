@@ -1,6 +1,9 @@
 ## Later
 * edit reminder: add menu items for later, tomorrow, etc.
 
+## Upcoming
+* disable local notification triggers for deleted/done items
+
 ## v0.18.13 - 2017-06-13
 * ff: remove user access to notifications.  
 

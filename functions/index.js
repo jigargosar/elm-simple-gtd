@@ -88,12 +88,12 @@ function sendPushNotifications(notificationMap) {
         const notificationData = notificationEntry.val()
         const uid = notificationData.uid
         const clients = getUserClientsMemo(uid)
-        promiseList.push(clients.then(sendPush(notificationData)))
+        promiseList.push(clients.then(sendNotificationToClients(notificationData)))
     })
     return Promise.all(promiseList)
 }
 
-const sendPush = notificationData => clients => {
+const sendNotificationToClients = notificationData => clients => {
     console.log("clients", clients)
     const {todoId, timestamp, uid} = notificationData
 
@@ -149,6 +149,9 @@ function deleteToken(uid, deviceId) {
 //             }
 //         })
 
+const sendNotification = data =>
+    getUserClients(data.uid)
+        .then(sendNotificationToClients(data))
 
 exports.onTodoUpdated =
     functions
@@ -171,7 +174,7 @@ exports.onTodoUpdated =
                     //todo was snoozed
                     const notificationData = {uid, timestamp, todoId}
                     return getUserClients(uid)
-                        .then(sendPush(notificationData))
+                        .then(sendNotificationToClients(notificationData))
                 }
 
 
@@ -192,11 +195,14 @@ const writeAt = _.flip(write)
 function updateNotificationWithTimestamp(uid, todoId, newTimestamp, dueAtChanged) {
     const writeNotification = writeAt(`/notifications/${uid}---${todoId}`)
     if (newTimestamp) {
-        const notificationValue = {uid,todoId, newTimestamp}
-        if(!dueAtChanged){
-
-        }
-        return writeNotification(notificationValue)
+        const notificationData = {uid, todoId, newTimestamp}
+        return _
+            .ifElse(
+                _ => dueAtChanged,
+                Promise.resolve,
+                sendNotification
+            )(notificationData)
+            .then(_ => writeNotification(notificationData))
     } else {
         return writeNotification(null)
     }
@@ -216,7 +222,7 @@ exports.updateNotificationOnTodoChanged =
             if (timestampSnapShot.changed()) {
                 const dueAtSnapshot = eventSnapShot.child("dueAt")
                 return updateNotificationWithTimestamp(uid, todoId, timestampSnapShot.val(), dueAtSnapshot.changed())
-            }else{
+            } else {
                 console.log("reminder snapshot didn't change, not performing any write.", timestampSnapShot.val())
             }
         })

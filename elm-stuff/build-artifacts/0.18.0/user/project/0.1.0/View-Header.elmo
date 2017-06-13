@@ -68,7 +68,7 @@ var _user$project$View_Header$menu = function (m) {
 			_edvail$elm_polymer$Polymer_Paper$item,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$SignIn),
+				_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnSignIn),
 				_1: {ctor: '[]'}
 			},
 			{
@@ -244,7 +244,7 @@ var _user$project$View_Header$newTodoHeader = function (form) {
 									_user$project$Todo_NewForm$getText(form)),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$DeactivateEditingMode),
+									_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$OnDeactivateEditingMode),
 									_1: {
 										ctor: '::',
 										_0: _user$project$Ext_Keyboard$onKeyUp(_user$project$Model$NewTodoKeyUp),

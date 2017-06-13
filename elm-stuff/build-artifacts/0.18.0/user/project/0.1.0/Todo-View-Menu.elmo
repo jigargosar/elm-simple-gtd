@@ -25,7 +25,7 @@ var _user$project$Todo_View_Menu$createContextMenuConfig = F2(
 			},
 			onStateChanged: _user$project$Model$OnEditTodoContextMenuStateChanged(_p2),
 			noOp: _user$project$Model$commonMsg.noOp,
-			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
+			onOutsideMouseDown: _user$project$Model$OnDeactivateEditingMode
 		};
 	});
 var _user$project$Todo_View_Menu$context = F2(
@@ -52,7 +52,7 @@ var _user$project$Todo_View_Menu$createProjectMenuConfig = F2(
 			},
 			onStateChanged: _user$project$Model$OnEditTodoProjectMenuStateChanged(_p6),
 			noOp: _user$project$Model$commonMsg.noOp,
-			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
+			onOutsideMouseDown: _user$project$Model$OnDeactivateEditingMode
 		};
 	});
 var _user$project$Todo_View_Menu$project = F2(

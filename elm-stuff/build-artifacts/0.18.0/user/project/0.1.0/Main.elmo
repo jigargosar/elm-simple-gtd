@@ -258,7 +258,7 @@ var _user$project$Main$update = function (msg) {
 					case 'OnFirebaseChange':
 						return _Fresheyeball$elm_return$Return$effect_(
 							A2(_user$project$Model$upsertEncodedDocOnFirebaseChange, _p14._0, _p14._1));
-					case 'SignIn':
+					case 'OnSignIn':
 						return _Fresheyeball$elm_return$Return$command(
 							_user$project$Firebase$signIn(
 								{ctor: '_Tuple0'}));
@@ -383,7 +383,7 @@ var _user$project$Main$update = function (msg) {
 						return function (_p30) {
 							return A2(
 								_user$project$Main$andThenUpdate,
-								_user$project$Model$DeactivateEditingMode,
+								_user$project$Model$OnDeactivateEditingMode,
 								A3(
 									_user$project$Main$updateTodoAndMaybeAlsoSelected,
 									_user$project$Todo$SetContext(_p14._0),
@@ -394,7 +394,7 @@ var _user$project$Main$update = function (msg) {
 						return function (_p31) {
 							return A2(
 								_user$project$Main$andThenUpdate,
-								_user$project$Model$DeactivateEditingMode,
+								_user$project$Model$OnDeactivateEditingMode,
 								A3(
 									_user$project$Main$updateTodoAndMaybeAlsoSelected,
 									_user$project$Todo$SetProject(_p14._0),
@@ -404,7 +404,7 @@ var _user$project$Main$update = function (msg) {
 					case 'NewTodoTextChanged':
 						return _Fresheyeball$elm_return$Return$map(
 							A2(_user$project$Model$updateNewTodoText, _p14._0, _p14._1));
-					case 'DeactivateEditingMode':
+					case 'OnDeactivateEditingMode':
 						return function (_p32) {
 							return A2(
 								_user$project$Main$andThenUpdate,
@@ -517,7 +517,7 @@ var _user$project$Main$update = function (msg) {
 						return function (_p47) {
 							return A2(
 								_user$project$Main$andThenUpdate,
-								_user$project$Model$DeactivateEditingMode,
+								_user$project$Model$OnDeactivateEditingMode,
 								A2(_Fresheyeball$elm_return$Return$andThen, _user$project$Model$saveCurrentForm, _p47));
 						};
 					case 'NewTodo':
@@ -561,7 +561,7 @@ var _user$project$Main$update = function (msg) {
 								return function (_p54) {
 									return A2(
 										_user$project$Main$andThenUpdate,
-										_user$project$Model$DeactivateEditingMode,
+										_user$project$Model$OnDeactivateEditingMode,
 										A2(
 											_Fresheyeball$elm_return$Return$andThen,
 											_user$project$Model$toggleDeleteEntity(_p55),
@@ -600,7 +600,7 @@ var _user$project$Main$update = function (msg) {
 													_user$project$Model$setEntityListViewType(_user$project$Entity$ContextsView));
 										}
 									}()(
-										A2(_user$project$Main$andThenUpdate, _user$project$Model$DeactivateEditingMode, _p57));
+										A2(_user$project$Main$andThenUpdate, _user$project$Model$OnDeactivateEditingMode, _p57));
 								};
 							case 'OnInputChanged':
 								return _user$project$Main$map(
@@ -665,7 +665,7 @@ var _user$project$Main$onGlobalKeyUp = function (key) {
 						}
 					} else {
 						if (_p62._0.ctor === 'Escape') {
-							return _user$project$Main$andThenUpdate(_user$project$Model$DeactivateEditingMode);
+							return _user$project$Main$andThenUpdate(_user$project$Model$OnDeactivateEditingMode);
 						} else {
 							break _v10_2;
 						}

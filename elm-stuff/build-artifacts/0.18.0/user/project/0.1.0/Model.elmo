@@ -1441,7 +1441,7 @@ var _user$project$Model$StartEditingReminder = function (a) {
 var _user$project$Model$NewTodoKeyUp = function (a) {
 	return {ctor: 'NewTodoKeyUp', _0: a};
 };
-var _user$project$Model$DeactivateEditingMode = {ctor: 'DeactivateEditingMode'};
+var _user$project$Model$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};
 var _user$project$Model$NewTodoTextChanged = F2(
 	function (a, b) {
 		return {ctor: 'NewTodoTextChanged', _0: a, _1: b};
@@ -1480,7 +1480,7 @@ var _user$project$Model$RemotePouchSync = function (a) {
 	return {ctor: 'RemotePouchSync', _0: a};
 };
 var _user$project$Model$SignOut = {ctor: 'SignOut'};
-var _user$project$Model$SignIn = {ctor: 'SignIn'};
+var _user$project$Model$OnSignIn = {ctor: 'OnSignIn'};
 var _user$project$Model$OnFirebaseConnectionChanged = function (a) {
 	return {ctor: 'OnFirebaseConnectionChanged', _0: a};
 };

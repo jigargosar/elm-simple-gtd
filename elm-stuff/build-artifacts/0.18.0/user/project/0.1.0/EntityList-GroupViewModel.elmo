@@ -44,7 +44,7 @@ var _user$project$EntityList_GroupViewModel$create = F3(
 				return createEntityActionMsg(
 					_user$project$Entity$NameChanged(_p3));
 			},
-			onCancelClicked: _user$project$Model$DeactivateEditingMode,
+			onCancelClicked: _user$project$Model$OnDeactivateEditingMode,
 			icon: icon,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
 			onKeyDownMsg: onKeyDownMsg,

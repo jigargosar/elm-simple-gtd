@@ -18,7 +18,7 @@ var _user$project$Todo_View$createReminderMenuConfig = F2(
 						_user$project$Todo_ReminderForm$SetMenuState(_p2)));
 			},
 			noOp: _user$project$Model$commonMsg.noOp,
-			onOutsideMouseDown: _user$project$Model$DeactivateEditingMode
+			onOutsideMouseDown: _user$project$Model$OnDeactivateEditingMode
 		};
 	});
 var _user$project$Todo_View$reminderPopup = F2(
@@ -34,7 +34,7 @@ var _user$project$Todo_View$reminderPopup = F2(
 				_0: _elm_lang$html$Html_Attributes$class('fullbleed-capture'),
 				_1: {
 					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$DeactivateEditingMode),
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
 					_1: {ctor: '[]'}
 				}
 			},

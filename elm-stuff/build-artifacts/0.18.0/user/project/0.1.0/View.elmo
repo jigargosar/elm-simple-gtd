@@ -233,7 +233,7 @@ var _user$project$View$firstVisitModal = A2(
 															_0: _elm_lang$html$Html_Attributes$class('btn'),
 															_1: {
 																ctor: '::',
-																_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$SignIn),
+																_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnSignIn),
 																_1: {ctor: '[]'}
 															}
 														},
@@ -286,7 +286,7 @@ var _user$project$View$firstVisitModal = A2(
 															},
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html$text('Or lets create some sample items'),
+																_0: _elm_lang$html$Html$text('Or lets create some sample items and '),
 																_1: {ctor: '[]'}
 															}),
 														_1: {ctor: '[]'}
@@ -311,7 +311,7 @@ var _user$project$View$firstVisitModal = A2(
 																},
 																{
 																	ctor: '::',
-																	_0: _elm_lang$html$Html$text('Start Exploring'),
+																	_0: _elm_lang$html$Html$text('Get Started'),
 																	_1: {ctor: '[]'}
 																}),
 															_1: {ctor: '[]'}
@@ -353,7 +353,7 @@ var _user$project$View$firstVisitModal = A2(
 										_0: _elm_lang$html$Html_Attributes$class('btn btn-flat'),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$DeactivateEditingMode),
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnDeactivateEditingMode),
 											_1: {ctor: '[]'}
 										}
 									},

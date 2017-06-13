@@ -191,14 +191,16 @@ function addNotification(uid, todoId, newTimestamp, shouldSendPush) {
         .then(_ => writeNotification(notificationData))
 }
 
-
+const hasChildChangedToIn = _.curry((snapshot, child, value) => {
+        const childSS = snapshot.child("child")
+        return childSS.changed() && childSS.val() === value
+    }
+)
 const shouldDeleteNotification = (deltaSnapshot) => {
-    const doneSnapshot = deltaSnapshot.child("done")
-    const deletedSnapshot = deltaSnapshot.child("deleted")
-    const timestampSnapShot = deltaSnapshot.child("reminder/at")
-    return (doneSnapshot.changed() && doneSnapshot.val() === true)
-           || (deletedSnapshot.changed() && doneSnapshot.val() === true)
-           || (timestampSnapShot.changed() && timestampSnapShot.val() === null)
+    const hasChildChangedTo = hasChildChangedToIn(deltaSnapshot)
+    return hasChildChangedTo("done", true)
+           || hasChildChangedTo("deleted", true)
+           || hasChildChangedTo("schedule/reminderAt", null)
 }
 
 const hasTodoJustSnoozed = deltaSnapshot => {

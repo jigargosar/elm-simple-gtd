@@ -214,6 +214,9 @@ update msg =
                     Return.map (Model.deactivateEditingMode)
                         >> andThenUpdate setDomFocusToFocusInEntityCmd
 
+                OnCreateDefaultEntities ->
+                    identity
+
                 NewTodoKeyUp { key } ->
                     case key of
                         Key.Enter ->

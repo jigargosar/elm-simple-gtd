@@ -70,6 +70,7 @@ type Msg
     | NewContext
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text
     | OnDeactivateEditingMode
+    | OnCreateDefaultEntities
     | NewTodoKeyUp KeyboardEvent
     | StartEditingReminder Todo.Model
     | StartEditingContext Todo.Model

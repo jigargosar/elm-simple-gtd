@@ -93,7 +93,7 @@ firstVisitModal =
                         [ span [ class "flow-text" ] [ text "Or lets create some sample items and " ]
                         ]
                     , div [ class "col s12 m6" ]
-                        [ a [ class "btn" ] [ text "Get Started" ]
+                        [ a [ class "btn", onClick Model.OnCreateDefaultEntities ] [ text "Get Started" ]
                         ]
                     ]
                 ]

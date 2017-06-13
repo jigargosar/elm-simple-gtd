@@ -263,7 +263,7 @@ keyComboModel =
     Record.init .keyComboModel (\s b -> { b | keyComboModel = s })
 
 
-init : Flags -> Model
+init : Flags -> Return.Return Msg Model
 init flags =
     let
         { now, encodedTodoList, encodedProjectList, encodedContextList, pouchDBRemoteSyncURI } =
@@ -310,7 +310,7 @@ init flags =
             , config = flags.config
             }
     in
-        model
+        model |> Return.singleton
 
 
 inboxEntity =

@@ -1559,7 +1559,7 @@ var _user$project$Model$init = function (flags) {
 			{toMsg: _user$project$Model$OnKeyCombo, combos: _user$project$Model$keyboardCombos}),
 		config: flags.config
 	};
-	return model;
+	return _Fresheyeball$elm_return$Return$singleton(model);
 };
 var _user$project$Model$projectView = function (_p66) {
 	return _user$project$Model$EntityListView(

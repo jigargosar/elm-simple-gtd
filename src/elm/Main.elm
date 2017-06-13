@@ -62,7 +62,7 @@ main =
     RouteUrl.programWithFlags
         { delta2url = Routes.delta2hash
         , location2messages = Routes.hash2messages
-        , init = init
+        , init = Model.init
         , update = update
         , view = View.init
         , subscriptions = subscriptions
@@ -79,11 +79,6 @@ type alias ReturnTuple a =
 
 type alias ReturnF =
     Return -> Return
-
-
-init : Flags -> Return
-init =
-    Model.init >> Return.singleton
 
 
 subscriptions m =

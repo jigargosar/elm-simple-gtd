@@ -179,17 +179,18 @@ exports.onTodoUpdated =
 
         })
 
-const write = _.curry((value, ref) => {
-    console.log("write: path = ", ref.path(), "value = ", value)
+const createRef = path => admin.database().ref(path)
+
+const write = _.curry((value, refOrPath) => {
+    const ref = _.when(_.is(String), createRef)(refOrPath)
+    console.log("write: ref = ", ref.toString(), "value = ", value)
     return ref.set(value)
 })
 
 const writeAt = _.flip(write)
 
 function updateNotificationWithTimestamp(uid, todoId, newTimestamp, dueAtChanged) {
-    const notificationPath = `/notifications/${uid}---${todoId}`
-    const ref = admin.database().ref(notificationPath)
-    const writeNotification = writeAt(ref)
+    const writeNotification = writeAt(`/notifications/${uid}---${todoId}`)
     if (newTimestamp) {
         const notificationValue = {uid,todoId, newTimestamp}
         if(!dueAtChanged){

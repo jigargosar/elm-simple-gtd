@@ -411,6 +411,8 @@ var _user$project$Main$update = function (msg) {
 								_user$project$Main$setDomFocusToFocusInEntityCmd,
 								A2(_Fresheyeball$elm_return$Return$map, _user$project$Model$deactivateEditingMode, _p32));
 						};
+					case 'OnCreateDefaultEntities':
+						return _elm_lang$core$Basics$identity;
 					case 'NewTodoKeyUp':
 						var _p33 = _p14._0.key;
 						if (_p33.ctor === 'Enter') {

@@ -1,5 +1,5 @@
-## Later
-* edit reminder: add menu items for later, tomorrow, etc.
+## Upcoming
+* On-boarding: create default set of entities. 
 
 ## v0.18.18 - 2017-06-13
 * add visible feedback links 

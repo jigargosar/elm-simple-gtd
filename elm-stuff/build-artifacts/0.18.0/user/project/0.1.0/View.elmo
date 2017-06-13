@@ -307,7 +307,11 @@ var _user$project$View$firstVisitModal = A2(
 																{
 																	ctor: '::',
 																	_0: _elm_lang$html$Html_Attributes$class('btn'),
-																	_1: {ctor: '[]'}
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnCreateDefaultEntities),
+																		_1: {ctor: '[]'}
+																	}
 																},
 																{
 																	ctor: '::',

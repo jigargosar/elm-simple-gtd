@@ -61,6 +61,46 @@ var _user$project$Todo$encodeReminder = function (maybeReminderTime) {
 			}),
 		_elm_lang$core$Json_Encode$null);
 };
+var _user$project$Todo$encodeOtherFields = function (todo) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_user$project$Ext_Function_Infix_ops['=>'],
+			'done',
+			_elm_lang$core$Json_Encode$bool(
+				_user$project$Todo$isDone(todo))),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_user$project$Ext_Function_Infix_ops['=>'],
+				'text',
+				_elm_lang$core$Json_Encode$string(
+					_user$project$Todo$getText(todo))),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Ext_Function_Infix_ops['=>'],
+					'projectId',
+					_elm_lang$core$Json_Encode$string(todo.projectId)),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_user$project$Ext_Function_Infix_ops['=>'],
+						'contextId',
+						_elm_lang$core$Json_Encode$string(todo.contextId)),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$Ext_Function_Infix_ops['=>'],
+							'schedule',
+							_user$project$Todo_Schedule$encode(todo.schedule)),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	};
+};
 var _user$project$Todo$dueAtAndReminderToSchedule = F2(
 	function (dueAt, reminder) {
 		return A2(
@@ -352,60 +392,6 @@ var _user$project$Todo$isSnoozed = function (todo) {
 				}),
 			_elm_lang$core$Basics$uncurry(_user$project$Ext_Function$notEquals)),
 		false);
-};
-var _user$project$Todo$encodeOtherFields = function (todo) {
-	return {
-		ctor: '::',
-		_0: A2(
-			_user$project$Ext_Function_Infix_ops['=>'],
-			'done',
-			_elm_lang$core$Json_Encode$bool(
-				_user$project$Todo$isDone(todo))),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_user$project$Ext_Function_Infix_ops['=>'],
-				'text',
-				_elm_lang$core$Json_Encode$string(
-					_user$project$Todo$getText(todo))),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_user$project$Ext_Function_Infix_ops['=>'],
-					'dueAt',
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(
-							_elm_lang$core$Maybe$map,
-							_elm_lang$core$Json_Encode$float,
-							_user$project$Todo$getMaybeDueAt(todo)),
-						_elm_lang$core$Json_Encode$null)),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_user$project$Ext_Function_Infix_ops['=>'],
-						'projectId',
-						_elm_lang$core$Json_Encode$string(todo.projectId)),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_user$project$Ext_Function_Infix_ops['=>'],
-							'contextId',
-							_elm_lang$core$Json_Encode$string(todo.contextId)),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_user$project$Ext_Function_Infix_ops['=>'],
-								'reminder',
-								_user$project$Todo$encodeReminder(
-									_user$project$Todo_Schedule$getMaybeReminderTime(todo.schedule))),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		}
-	};
 };
 var _user$project$Todo$Record = F5(
 	function (a, b, c, d, e) {

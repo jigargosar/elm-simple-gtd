@@ -295,10 +295,9 @@ decoder =
 encodeOtherFields todo =
     [ "done" => E.bool (isDone todo)
     , "text" => E.string (getText todo)
-    , "dueAt" => (getMaybeDueAt todo |> Maybe.map E.float ?= E.null)
     , "projectId" => (todo.projectId |> E.string)
     , "contextId" => (todo.contextId |> E.string)
-    , "reminder" => (Todo.Schedule.getMaybeReminderTime todo.schedule |> encodeReminder)
+    , "schedule" => (Todo.Schedule.encode todo.schedule)
     ]
 
 

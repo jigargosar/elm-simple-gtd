@@ -27,6 +27,41 @@ var _user$project$Todo_Schedule$getMaybeDueAt = function (model) {
 	}
 };
 var _user$project$Todo_Schedule$decodeV2 = _elm_lang$core$Json_Decode$fail('Not implemented');
+var _user$project$Todo_Schedule$encode = function (model) {
+	var encodeDueAt = function (dueAt) {
+		return A2(
+			_user$project$Ext_Function_Infix_ops['=>'],
+			'dueAt',
+			_elm_lang$core$Json_Encode$float(dueAt));
+	};
+	var fields = function () {
+		var _p2 = model;
+		switch (_p2.ctor) {
+			case 'NoReminder':
+				return {
+					ctor: '::',
+					_0: encodeDueAt(_p2._0),
+					_1: {ctor: '[]'}
+				};
+			case 'WithReminder':
+				return {
+					ctor: '::',
+					_0: encodeDueAt(_p2._0),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_user$project$Ext_Function_Infix_ops['=>'],
+							'reminderAt',
+							_elm_lang$core$Json_Encode$float(_p2._1)),
+						_1: {ctor: '[]'}
+					}
+				};
+			default:
+				return {ctor: '[]'};
+		}
+	}();
+	return _elm_lang$core$Json_Encode$object(fields);
+};
 var _user$project$Todo_Schedule$Unscheduled = {ctor: 'Unscheduled'};
 var _user$project$Todo_Schedule$unscheduled = _user$project$Todo_Schedule$Unscheduled;
 var _user$project$Todo_Schedule$WithReminder = F2(
@@ -48,12 +83,12 @@ var _user$project$Todo_Schedule$initWithDueAtAndReminder = F2(
 	});
 var _user$project$Todo_Schedule$snoozeTill = F2(
 	function (snoozedTillTime, model) {
-		var _p2 = model;
-		switch (_p2.ctor) {
+		var _p3 = model;
+		switch (_p3.ctor) {
 			case 'NoReminder':
-				return A2(_user$project$Todo_Schedule$WithReminder, _p2._0, snoozedTillTime);
+				return A2(_user$project$Todo_Schedule$WithReminder, _p3._0, snoozedTillTime);
 			case 'WithReminder':
-				return A2(_user$project$Todo_Schedule$WithReminder, _p2._0, snoozedTillTime);
+				return A2(_user$project$Todo_Schedule$WithReminder, _p3._0, snoozedTillTime);
 			default:
 				return model;
 		}
@@ -118,10 +153,10 @@ var _user$project$Todo_Schedule$decode = _elm_lang$core$Json_Decode$oneOf(
 		}
 	});
 var _user$project$Todo_Schedule$turnReminderOff = function (model) {
-	var _p3 = model;
-	switch (_p3.ctor) {
+	var _p4 = model;
+	switch (_p4.ctor) {
 		case 'WithReminder':
-			return _user$project$Todo_Schedule$NoReminder(_p3._0);
+			return _user$project$Todo_Schedule$NoReminder(_p4._0);
 		case 'NoReminder':
 			return model;
 		default:

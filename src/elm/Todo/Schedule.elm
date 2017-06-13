@@ -31,6 +31,27 @@ decode =
         ]
 
 
+encode model =
+    let
+        encodeDueAt dueAt =
+            "dueAt" => E.float dueAt
+
+        fields =
+            case model of
+                NoReminder dueAt ->
+                    [ encodeDueAt dueAt ]
+
+                WithReminder dueAt reminderAt ->
+                    [ encodeDueAt dueAt
+                    , "reminderAt" => E.float reminderAt
+                    ]
+
+                Unscheduled ->
+                    []
+    in
+        E.object fields
+
+
 decodeV2 =
     D.fail "Not implemented"
 

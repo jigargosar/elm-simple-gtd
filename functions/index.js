@@ -206,6 +206,17 @@ const shouldTriggerPush = deltaSnapshot => {
     return deltaSnapshot.previous.child(dueAtProp).exists()
            && !deltaSnapshot.child(dueAtProp).changed()
 }
+
+const shouldAddNotification = deltaSnapshot=>{
+    const doneSnapshot = deltaSnapshot.child("done")
+    const deletedSnapshot = deltaSnapshot.child("deleted")
+    const timestampSnapShot = deltaSnapshot.child("reminder/at")
+    return timestampSnapShot.exists() &&
+           (timestampSnapShot.changed()
+            || (deletedSnapshot.changed() && doneSnapshot.val() === false)
+            || (doneSnapshot.changed() && doneSnapshot.val() === false))
+
+}
 exports.updateNotificationOnTodoChanged =
     functions
         .database.ref("/users/{uid}/todo-db/{todoId}")
@@ -220,14 +231,13 @@ exports.updateNotificationOnTodoChanged =
                 return removeAt(notificationPath(uid, todoId))
             }
 
-            const timestampSnapshot = deltaSnapshot.child("reminder/at")
-            if (timestampSnapshot.changed()) {
+            if (shouldAddNotification(deltaSnapshot)) {
 
                 const shouldSendPush = shouldTriggerPush(deltaSnapshot)
                 console.log("shouldSendPush", shouldSendPush)
                 return addNotification(
                     uid, todoId,
-                    timestampSnapshot.val(),
+                    deltaSnapshot.child("reminder/at").val(),
                     shouldSendPush
                 )
             }

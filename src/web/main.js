@@ -25,6 +25,7 @@ const npmPackageVersion = env["npm_package_version"]
 
 async function boot() {
     const deviceId = getOrCreateDeviceId()
+    const isFirstVisit = getOrCreateFirstVisit()
     const $elm = $("#elm-app-container")
     $elm.trap();
 
@@ -73,7 +74,8 @@ async function boot() {
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
         developmentMode: isDevelopmentMode,
         appVersion: npmPackageVersion,
-        deviceId
+        deviceId,
+        config:{isFirstVisit, deviceId, npmPackageVersion, isDevelopmentMode}
     }
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]
@@ -229,4 +231,11 @@ function getOrCreateDeviceId() {
         localStorage.setItem("device-id", deviceId)
     }
     return deviceId
+}
+function getOrCreateFirstVisit() {
+    let firstVisit = localStorage.getItem("first-visit")
+    if (!firstVisit) {
+        localStorage.setItem("first-visit", "false")
+    }
+    return !!firstVisit
 }

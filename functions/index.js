@@ -196,32 +196,33 @@ const hasChildChangedToIn = _.curry((snapshot, child, value) => {
         return childSS.changed() && childSS.val() === value
     }
 )
+const reminderAtPath = "schedule/reminderAt"
+const dueAtPath = "schedule/dueAt"
+const donePath = "done"
+const deletedPath = "deleted"
+
+
 const shouldDeleteNotification = (deltaSnapshot) => {
     const hasChildChangedTo = hasChildChangedToIn(deltaSnapshot)
-    return hasChildChangedTo("done", true)
-           || hasChildChangedTo("deleted", true)
-           || hasChildChangedTo("schedule/reminderAt", null)
+    return hasChildChangedTo(donePath, true)
+           || hasChildChangedTo(deletedPath, true)
+           || hasChildChangedTo(reminderAtPath, null)
 }
 
 const hasTodoJustSnoozed = deltaSnapshot => {
-    const dueAtProp = "dueAt"
-    const timestampSnapShot = deltaSnapshot.child("reminder/at")
-    return !deltaSnapshot.child(dueAtProp).changed()
-           && deltaSnapshot.previous.child(dueAtProp).exists()
-           && timestampSnapShot.changed()
+    return !deltaSnapshot.child(dueAtPath).changed()
+           && deltaSnapshot.previous.child(dueAtPath).exists()
+           && deltaSnapshot.child(reminderAtPath).changed()
 }
 
 const shouldAddNotification = deltaSnapshot => {
-
-    const timestampSnapShot = deltaSnapshot.child("reminder/at")
-    return timestampSnapShot.exists() &&
-           (function () {
-               const doneSnapshot = deltaSnapshot.child("done")
-               const deletedSnapshot = deltaSnapshot.child("deleted")
-               return timestampSnapShot.changed()
-                      || (deletedSnapshot.changed() && doneSnapshot.val() === false)
-                      || (doneSnapshot.changed() && doneSnapshot.val() === false)
-           }())
+    const hasChildChangedTo = hasChildChangedToIn(deltaSnapshot)
+    const reminderAtSS = deltaSnapshot.child(reminderAtPath)
+    return reminderAtSS.exists() &&
+           (reminderAtSS.changed()
+               || hasChildChangedTo(donePath, false)
+               || hasChildChangedTo(deletedPath, false)
+           )
 
 }
 exports.updateNotificationOnTodoChanged =
@@ -244,7 +245,7 @@ exports.updateNotificationOnTodoChanged =
                 console.log("shouldSendPush", shouldSendPush)
                 return addNotification(
                     uid, todoId,
-                    deltaSnapshot.child("reminder/at").val(),
+                    deltaSnapshot.child(reminderAtPath).val(),
                     shouldSendPush
                 )
             }

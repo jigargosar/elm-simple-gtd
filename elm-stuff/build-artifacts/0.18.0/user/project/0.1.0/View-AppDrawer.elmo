@@ -340,7 +340,7 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 	var _p12 = m.developmentMode ? {
 		ctor: '_Tuple2',
 		_0: A2(_elm_lang$core$Basics_ops['++'], 'Dev v', m.appVersion),
-		_1: ''
+		_1: A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)
 	} : {
 		ctor: '_Tuple2',
 		_0: 'SimpleGTD.com',
@@ -350,7 +350,11 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 	var t2 = _p12._1;
 	return A2(
 		_elm_lang$html$Html$div,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('left-header'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A2(
@@ -372,7 +376,26 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 					},
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html$text(t2),
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$target('_blank'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$href(''),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+										_1: {ctor: '[]'}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(t2),
+								_1: {ctor: '[]'}
+							}),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}

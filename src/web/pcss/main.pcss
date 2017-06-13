@@ -1,13 +1,15 @@
 @import "polymer.pcss";
+
 @use cssnext;
 :root {
 
 }
+
 * {
   box-sizing: border-box;
 }
 
-a{
+a {
   cursor: pointer;
 }
 
@@ -23,21 +25,20 @@ a{
   width: 100%;
 }
 
-
 /*mat css*/
-.collection-item{
+.collection-item {
   outline: none;
 
-  &:focus{
+  &:focus {
     background-color: gray(92%);
   }
 }
 
-.collection .collection-item:not(.active):hover{
+.collection .collection-item:not(.active):hover {
   background-color: gray(98%);
 }
 
-i{
+i {
   user-select: none;
 }
 
@@ -45,11 +46,17 @@ i{
   color: black;
 }
 
+#left-header a {
+  color: white;
+  text-decoration: underline;
+  outline: none
+}
+
 app-toolbar .btn-floating i {
   color: white;
 }
 
-.btn-floating.x24, .btn-floating.x24 i{
+.btn-floating.x24, .btn-floating.x24 i {
   width: 24px;
   height: 24px;
   font-size: 18px;
@@ -58,23 +65,24 @@ app-toolbar .btn-floating i {
 
 /*mat css END*/
 
-iron-icon.account{
+iron-icon.account {
   border-radius: 50%;
   overflow: hidden;
 }
-#main-header{
+
+#main-header {
 
 }
 
-.new-todo.input-field{
+.new-todo.input-field {
 
   width: 100%;
-  top:6px;
-  
-  & input:focus, & label{
-    color:white!important;
-    border-color:white!important;
-    box-shadow: none!important;
+  top: 6px;
+
+  & input:focus, & label {
+    color: white !important;
+    border-color: white !important;
+    box-shadow: none !important;
   }
 
 }
@@ -146,7 +154,6 @@ iron-icon.account{
   bottom: 10px;
 }
 
-
 .flex-expand {
   flex: 1 1 auto;
 }
@@ -215,8 +222,7 @@ paper-listbox {
 
 #popup-menu {
   position: absolute;
-//left: 100px; //top: 100px; background-color: white; overflow-y: scroll;
-  overflow-x: hidden;
+//left: 100px; //top: 100px; background-color: white; overflow-y: scroll; overflow-x: hidden;
   max-height: 100vh;
   min-width: 20vw;
   max-width: 80vw;
@@ -262,10 +268,8 @@ paper-listbox {
     padding: 0 8px;
     /*white-space: pre-line; !*sequences of whitespace are collapsed*!*/
     /* when indenting items using star, whitespace should not be lost*/
-    //overflow-wrap: break-word;
-    white-space: pre-wrap; /*sequences of whitespace are preserved*/
-    //word-break: normal;
-    hyphens:auto;
+  //overflow-wrap: break-word; white-space: pre-wrap; /*sequences of whitespace are preserved*/
+  //word-break: normal; hyphens: auto;
   }
 
   & paper-item-body {
@@ -343,7 +347,7 @@ textarea.materialize-textarea {
   top: 30vh;
   left: 10vw;
   max-width: 80vw;
-  width:600px;
+  width: 600px;
   background-color: rgba(128, 128, 128, 0.99);
   color: white;
   border-radius: 5px;
@@ -356,8 +360,7 @@ textarea.materialize-textarea {
     background-color: transparent;
     border: none;
     outline: none;
-  //visibility: hidden; height: 0;
-    width: 0;
+  //visibility: hidden; height: 0; width: 0;
   }
 
   & .input {

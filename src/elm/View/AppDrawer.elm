@@ -6,8 +6,8 @@ import OldGroupEntity.ViewModel
 import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
 import Html.Keyed as Keyed
-import Html exposing (Attribute, Html, div, hr, node, span, text)
-import Html.Attributes exposing (attribute, autofocus, checked, class, classList, id, style, tabindex, value)
+import Html exposing (Attribute, Html, a, div, hr, node, span, text)
+import Html.Attributes exposing (attribute, autofocus, checked, class, classList, href, id, style, tabindex, target, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model exposing (Msg(SwitchView), commonMsg)
@@ -77,13 +77,15 @@ leftHeader m =
     let
         ( t1, t2 ) =
             if m.developmentMode then
-                ( "Dev v" ++ m.appVersion, "" )
+                ( "Dev v" ++ m.appVersion, "v" ++ m.appVersion )
             else
                 ( "SimpleGTD.com", "v" ++ m.appVersion )
     in
-        div []
+        div [ id "left-header" ]
             [ div [] [ text t1 ]
-            , div [ class "small" ] [ text t2 ]
+            , div [ class "small" ]
+                [ a [ target "_blank", href "", tabindex -1 ] [ text t2 ]
+                ]
             ]
 
 

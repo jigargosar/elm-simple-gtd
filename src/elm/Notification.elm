@@ -19,5 +19,9 @@ type alias Request =
     , title : String
     , body : String
     , actions : List { title : String, action : String }
-    , data : { id : String, notificationClickedPort : String }
+    , data :
+        { id : String
+        , notificationClickedPort : String
+        , skipFocusActionList : List String
+        }
     }

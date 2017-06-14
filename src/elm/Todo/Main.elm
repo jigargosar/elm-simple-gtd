@@ -145,7 +145,11 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
                     [ { title = "Continue", action = "continue" }
                     , { title = "Stop", action = "stop" }
                     ]
-                , data = { id = todoId, notificationClickedPort = "onRunningTodoNotificationClicked" }
+                , data =
+                    { id = todoId
+                    , notificationClickedPort = "onRunningTodoNotificationClicked"
+                    , skipFocusActionList = [ "continue" ]
+                    }
                 }
     in
         maybeTrackerInfo

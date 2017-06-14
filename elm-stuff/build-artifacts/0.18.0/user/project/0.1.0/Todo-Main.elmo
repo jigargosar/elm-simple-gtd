@@ -95,7 +95,14 @@ var _user$project$Todo_Main$showRunningTodoNotification = _elm_lang$core$Native_
 				function (v) {
 					return {title: v.title, action: v.action};
 				}),
-			data: {id: v.data.id, notificationClickedPort: v.data.notificationClickedPort}
+			data: {
+				id: v.data.id,
+				notificationClickedPort: v.data.notificationClickedPort,
+				skipFocusActionList: _elm_lang$core$Native_List.toArray(v.data.skipFocusActionList).map(
+					function (v) {
+						return v;
+					})
+			}
 		};
 	});
 var _user$project$Todo_Main$showRunningNotificationCmd = function (_p2) {
@@ -116,7 +123,15 @@ var _user$project$Todo_Main$showRunningNotificationCmd = function (_p2) {
 						_1: {ctor: '[]'}
 					}
 				},
-				data: {id: todoId, notificationClickedPort: 'onRunningTodoNotificationClicked'}
+				data: {
+					id: todoId,
+					notificationClickedPort: 'onRunningTodoNotificationClicked',
+					skipFocusActionList: {
+						ctor: '::',
+						_0: 'continue',
+						_1: {ctor: '[]'}
+					}
+				}
 			};
 		});
 	return A2(

@@ -16,28 +16,32 @@ self.addEventListener('install', function (event) {
 self.addEventListener('notificationclick', function (event) {
     // console.log("notification click", event)
     // event.notification.close();
+    const skipFocusActionList = (event.notification.data && event.notification.data.skipFocusActionList)? event.notification.data.skipFocusActionList : []
+    const skipFocus = skipFocusActionList.findIndex(action => action === event.action) >=0
 
     event.waitUntil(
         clients
             .matchAll({type: "window"})
             .then(function (clientList) {
-                for (var i = 0; i < clientList.length; i++) {
-                    const client = clientList[i]
+                const client = clientList[0]
+                if(client){
                     postMessage(client, event)
-                    if (client.focus) {
+                    if (!skipFocus && client.focus) {
                         return client.focus();
                     }
+                }else{
+                    if (clients.openWindow) {
+                        return clients
+                        // .openWindow(url)
+                            .openWindow("/")
+                            .then(function (client) {
+                                setTimeout(function () {
+                                    postMessage(client, event)
+                                }, 2000)
+                            })
+                    }
                 }
-                if (clients.openWindow) {
-                    return clients
-                    // .openWindow(url)
-                        .openWindow("/")
-                        .then(function (client) {
-                            setTimeout(function () {
-                                postMessage(client, event)
-                            }, 2000)
-                        })
-                }
+
             })
     );
 

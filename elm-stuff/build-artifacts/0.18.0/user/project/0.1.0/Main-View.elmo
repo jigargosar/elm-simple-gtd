@@ -25,22 +25,55 @@ var _user$project$Main_View$init = F2(
 							{
 								ctor: '::',
 								_0: A2(
-									_edvail$elm_polymer$Polymer_Paper$input,
+									_elm_lang$html$Html$div,
 									{
 										ctor: '::',
-										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'label', 'Cloudant URL or any CouchDB URL'),
+										_0: _elm_lang$html$Html_Attributes$class('input-field'),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$value(form.uri),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onInput(
-													_user$project$Model$UpdateRemoteSyncFormUri(form)),
-												_1: {ctor: '[]'}
-											}
+											_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+												function (_p1) {
+													return _user$project$Model$NOOP;
+												}),
+											_1: {ctor: '[]'}
 										}
 									},
-									{ctor: '[]'}),
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$input,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$defaultValue(form.uri),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$autofocus(true),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onInput(
+															_user$project$Model$UpdateRemoteSyncFormUri(form)),
+														_1: {ctor: '[]'}
+													}
+												}
+											},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$label,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('active'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Cloudant or any CouchDB URL'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
 								_1: {
 									ctor: '::',
 									_0: A2(
@@ -52,15 +85,15 @@ var _user$project$Main_View$init = F2(
 												_edvail$elm_polymer$Polymer_Paper$button,
 												{
 													ctor: '::',
-													_0: function (_p1) {
+													_0: function (_p2) {
 														return _elm_lang$html$Html_Events$onClick(
-															_user$project$Model$RemotePouchSync(_p1));
+															_user$project$Model$RemotePouchSync(_p2));
 													}(form),
 													_1: {ctor: '[]'}
 												},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text('Start Sync'),
+													_0: _elm_lang$html$Html$text('Sync Now'),
 													_1: {ctor: '[]'}
 												}),
 											_1: {ctor: '[]'}

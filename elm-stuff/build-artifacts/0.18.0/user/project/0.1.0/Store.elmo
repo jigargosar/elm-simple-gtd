@@ -310,6 +310,24 @@ var _user$project$Store$persist = function (s) {
 		_user$project$Store$upsertIn(s));
 	return A2(_elm_lang$core$Platform_Cmd_ops['!'], ns, cmds);
 };
+var _user$project$Store$updateAndPersist = F4(
+	function (pred, now, updateFn_, store) {
+		return A2(
+			_Fresheyeball$elm_tuple_extra$Tuple2$mapFirst,
+			function (_p15) {
+				return _elm_lang$core$Platform_Cmd$batch(
+					A2(
+						_elm_lang$core$List$map,
+						function (_p16) {
+							return A2(
+								_user$project$Store$upsertIn,
+								store,
+								_elm_lang$core$Tuple$second(_p16));
+						},
+						_p15));
+			},
+			A4(_user$project$Store$findAndUpdateAll, pred, now, updateFn_, store));
+	});
 var _user$project$Store$upsertInPouchDbOnFirebaseChange = F2(
 	function (jsonValue, store) {
 		return A2(
@@ -334,9 +352,9 @@ var _user$project$Store$pouchDBChanges = _elm_lang$core$Native_Platform.incoming
 				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
 		},
 		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
-var _user$project$Store$onChange = function (_p15) {
+var _user$project$Store$onChange = function (_p17) {
 	return _user$project$Store$pouchDBChanges(
-		_elm_lang$core$Basics$uncurry(_p15));
+		_elm_lang$core$Basics$uncurry(_p17));
 };
 var _user$project$Store$Store = F6(
 	function (a, b, c, d, e, f) {

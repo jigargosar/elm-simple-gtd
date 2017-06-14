@@ -13,6 +13,7 @@ port module Store
         , filterDocs
         , updateAll
         , findAndUpdateAll
+        , updateAndPersist
         , upsertOnPouchDBChange
         , upsertInPouchDbOnFirebaseChange
         , persist
@@ -163,10 +164,6 @@ type alias ChangeList x =
     List (Change x)
 
 
-type alias UpdateReturn x =
-    ( Change x, Store x )
-
-
 type alias UpdateAllReturn x =
     ( ChangeList x, Store x )
 
@@ -213,6 +210,11 @@ findAndUpdateAll pred now updateFn_ store =
                         |> Dict.filter (\id doc -> pred doc)
                         |> Dict.foldl updateAndCollectChanges ( [], dict )
                 )
+
+
+updateAndPersist pred now updateFn_ store =
+    findAndUpdateAll pred now updateFn_ store
+        |> Tuple2.mapFirst (List.map (Tuple.second >> upsertIn store) >> Cmd.batch)
 
 
 decode : D.Value -> Store x -> Maybe (Document x)

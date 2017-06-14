@@ -1181,10 +1181,9 @@ findAndUpdateAllTodos findFn action model =
         updateFn =
             Todo.update action
     in
-        Record.overT2 todoStore (Store.findAndUpdateAll findFn model.now updateFn) model
-            |> Tuple.second
-            >> updateEntityListCursor model
-            |> Return.singleton
+        Record.overT2 todoStore (Store.updateAndPersist findFn model.now updateFn) model
+            |> Tuple2.swap
+            |> Return.map (updateEntityListCursor model)
 
 
 updateTodo : Todo.UpdateAction -> Todo.Id -> ModelReturnF msg

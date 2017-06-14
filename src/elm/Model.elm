@@ -519,6 +519,18 @@ getActiveTodoListGroupedBy fn =
     getActiveTodoList >> Dict.Extra.groupBy (fn)
 
 
+createContext text model =
+    model
+        |> overT2 contextStore (Store.insert (Context.init text model.now))
+        |> Tuple.second
+
+
+createProject text model =
+    model
+        |> overT2 projectStore (Store.insert (Project.init text model.now))
+        |> Tuple.second
+
+
 createAndEditNewProject model =
     Store.insert (Project.init "<New Project>" model.now) model.projectStore
         |> Tuple2.mapSecond (setProjectStore # model)

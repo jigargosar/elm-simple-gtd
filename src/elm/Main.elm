@@ -215,7 +215,15 @@ update msg =
                         >> andThenUpdate setDomFocusToFocusInEntityCmd
 
                 OnCreateDefaultEntities ->
-                    identity
+                    map
+                        (Model.createProject "Explore SimpleGTD.com"
+                            >> Model.createProject "GTD: Learn"
+                            >> Model.createContext "1 Now"
+                            >> Model.createContext "2 Next Actions"
+                            >> Model.createContext "3 Waiting For"
+                            >> Model.createContext "zz SomeDay/Maybe"
+                        )
+                        >> andThenUpdate OnDeactivateEditingMode
 
                 NewTodoKeyUp { key } ->
                     case key of

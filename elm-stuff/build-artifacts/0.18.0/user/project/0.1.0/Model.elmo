@@ -1099,6 +1099,16 @@ var _user$project$Model$projectStore = A2(
 				b,
 				{projectStore: s});
 		}));
+var _user$project$Model$createProject = F2(
+	function (text, model) {
+		return _elm_lang$core$Tuple$second(
+			A3(
+				_user$project$Ext_Record$overT2,
+				_user$project$Model$projectStore,
+				_user$project$Store$insert(
+					A2(_user$project$Project$init, text, model.now)),
+				model));
+	});
 var _user$project$Model$updateProject = F2(
 	function (id, updateFn) {
 		return A3(
@@ -1118,6 +1128,16 @@ var _user$project$Model$contextStore = A2(
 				b,
 				{contextStore: s});
 		}));
+var _user$project$Model$createContext = F2(
+	function (text, model) {
+		return _elm_lang$core$Tuple$second(
+			A3(
+				_user$project$Ext_Record$overT2,
+				_user$project$Model$contextStore,
+				_user$project$Store$insert(
+					A2(_user$project$Context$init, text, model.now)),
+				model));
+	});
 var _user$project$Model$upsertEncodedDocOnPouchDBChange = F2(
 	function (dbName, encodedEntity) {
 		var _p50 = dbName;

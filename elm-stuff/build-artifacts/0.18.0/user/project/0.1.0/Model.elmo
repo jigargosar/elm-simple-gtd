@@ -999,6 +999,14 @@ var _user$project$Model$insertTodo = function (constructWithId) {
 		_user$project$Model$todoStore,
 		_user$project$Store$insert(constructWithId));
 };
+var _user$project$Model$createTodo = F2(
+	function (text, model) {
+		return _elm_lang$core$Tuple$second(
+			A2(
+				_user$project$Model$insertTodo,
+				A2(_user$project$Todo$init, model.now, text),
+				model));
+	});
 var _user$project$Model$findAndUpdateAllTodos = F3(
 	function (findFn, action, model) {
 		var updateFn = _user$project$Todo$update(action);

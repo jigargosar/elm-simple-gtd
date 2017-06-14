@@ -531,6 +531,12 @@ createProject text model =
         |> Tuple.second
 
 
+createTodo text model =
+    model
+        |> insertTodo (Todo.init model.now text)
+        |> Tuple.second
+
+
 createAndEditNewProject model =
     Store.insert (Project.init "<New Project>" model.now) model.projectStore
         |> Tuple2.mapSecond (setProjectStore # model)

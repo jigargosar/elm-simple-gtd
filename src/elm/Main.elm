@@ -222,6 +222,10 @@ update msg =
                             >> Model.createContext "2 Next Actions"
                             >> Model.createContext "3 Waiting For"
                             >> Model.createContext "zz SomeDay/Maybe"
+                            >> Model.createTodo "Click `+` or type `q` for quick add"
+                            >> Model.createTodo "type `i` to create and add to Inbox"
+                            >> Model.createTodo "type `c` to set context"
+                            >> Model.createTodo "type `p` to set project"
                         )
                         >> andThenUpdate OnDeactivateEditingMode
 

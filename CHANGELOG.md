@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.24 - 2017-06-14
 * add continue action on tracker notification 
 
 ## v0.18.23 - 2017-06-14

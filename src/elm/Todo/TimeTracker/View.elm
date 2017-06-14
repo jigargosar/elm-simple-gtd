@@ -52,15 +52,15 @@ maybe appModel =
 
 
 view vm =
-    div [ class "w100 layout vertical" ]
-        [ div [ class "flex-auto ellipsis" ] [ text vm.displayText ]
-        , div [ class "flex-auto layout horizontal" ]
-            [ div [ class "flex-auto" ] [ text vm.displayTime ]
-            , div [ class "" ]
-                [ Material.iconButton vm.playPauseIconName [ onClick vm.onTogglePause ]
-                , Material.iconButton "stop" [ onClick vm.onStop ]
-
-                {- , Material.iconButton "done" -}
+    div [ class "layout vertical", style [ "position" => "relative", "top" => "5px" ] ]
+        [ div [ class "ellipsis" ] [ text vm.displayText ]
+        , div [ class "layout horizontal start", style [ "position" => "relative", "top" => "-5px" ] ]
+            [ div
+                [ class "self-center"
+                , style [ "margin-right" => "1rem" ]
                 ]
+                [ text vm.displayTime ]
+            , Material.iconButton vm.playPauseIconName [ onClick vm.onTogglePause ]
+            , Material.iconButton "stop" [ onClick vm.onStop ]
             ]
         ]

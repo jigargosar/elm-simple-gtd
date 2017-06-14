@@ -3,8 +3,21 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('w100 layout vertical'),
-			_1: {ctor: '[]'}
+			_0: _elm_lang$html$Html_Attributes$class('layout vertical'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'position', 'relative'),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'top', '5px'),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
 		},
 		{
 			ctor: '::',
@@ -12,7 +25,7 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('flex-auto ellipsis'),
+					_0: _elm_lang$html$Html_Attributes$class('ellipsis'),
 					_1: {ctor: '[]'}
 				},
 				{
@@ -26,8 +39,21 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('flex-auto layout horizontal'),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('layout horizontal start'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'position', 'relative'),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'top', '-5px'),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
 					},
 					{
 						ctor: '::',
@@ -35,8 +61,17 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
-								_1: {ctor: '[]'}
+								_0: _elm_lang$html$Html_Attributes$class('self-center'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
+											ctor: '::',
+											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'margin-right', '1rem'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
 							},
 							{
 								ctor: '::',
@@ -46,36 +81,25 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$div,
+								_user$project$Material$iconButton,
+								vm.playPauseIconName,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class(''),
+									_0: _elm_lang$html$Html_Events$onClick(vm.onTogglePause),
 									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_user$project$Material$iconButton,
-										vm.playPauseIconName,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(vm.onTogglePause),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_user$project$Material$iconButton,
-											'stop',
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(vm.onStop),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
 								}),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_user$project$Material$iconButton,
+									'stop',
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Events$onClick(vm.onStop),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}
 					}),
 				_1: {ctor: '[]'}

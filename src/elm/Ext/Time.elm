@@ -5,6 +5,7 @@ import Date.Extra as Date
 import Date.Extra.Create exposing (getTimezoneOffset)
 import Date.Format
 import Ext.Date
+import List.Extra
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -17,6 +18,22 @@ import Tuple2
 toHHMMSS : Time -> String
 toHHMMSS =
     toHMSList >> List.map (toString >> String.padLeft 2 '0') >> String.join ":"
+
+
+toHHMMSSMin : Time -> String
+toHHMMSSMin =
+    let
+        suffixList =
+            [ "h", "m", "s" ]
+
+        tupleToString ( suffix, part ) =
+            (toString part) ++ suffix
+    in
+        toHMSList
+            >> List.Extra.zip suffixList
+            >> List.filterMap
+                (ifElse (Tuple.second >> equals 0) (\_ -> Nothing) (tupleToString >> Just))
+            >> String.join " "
 
 
 formatDateTime =

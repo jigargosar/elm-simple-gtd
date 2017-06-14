@@ -141,10 +141,10 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
                     Document.getId todo
 
                 formattedDuration =
-                    Ext.Time.toHHMMSS (info.elapsedTime)
+                    Ext.Time.toHHMMSSMin (info.elapsedTime)
             in
                 { tag = todoId
-                , title = "Duration " ++ formattedDuration
+                , title = "You have been working for " ++ formattedDuration
                 , body = Todo.getText todo
                 , actions =
                     [ { title = "Continue", action = "continue" }

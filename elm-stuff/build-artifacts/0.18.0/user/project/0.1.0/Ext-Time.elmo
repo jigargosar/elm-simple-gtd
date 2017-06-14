@@ -43,18 +43,66 @@ var _user$project$Ext_Time$dayDiffInWords = function () {
 	return A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Time$dayDiff, intToDaysInWords);
 }();
 var _user$project$Ext_Time$formatDateTime = _mgold$elm_date_format$Time_Format$format('%a %e %b %Y %l:%M%P');
-var _user$project$Ext_Time$toHHMMSS = function (_p1) {
+var _user$project$Ext_Time$toHHMMSSMin = function () {
+	var tupleToString = function (_p1) {
+		var _p2 = _p1;
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(_p2._1),
+			_p2._0);
+	};
+	var suffixList = {
+		ctor: '::',
+		_0: 'h',
+		_1: {
+			ctor: '::',
+			_0: 'm',
+			_1: {
+				ctor: '::',
+				_0: 's',
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+	return function (_p3) {
+		return A2(
+			_elm_lang$core$String$join,
+			' ',
+			A2(
+				_elm_lang$core$List$filterMap,
+				A3(
+					_user$project$Ext_Function$ifElse,
+					function (_p4) {
+						return A2(
+							_user$project$Ext_Function$equals,
+							0,
+							_elm_lang$core$Tuple$second(_p4));
+					},
+					function (_p5) {
+						return _elm_lang$core$Maybe$Nothing;
+					},
+					function (_p6) {
+						return _elm_lang$core$Maybe$Just(
+							tupleToString(_p6));
+					}),
+				A2(
+					_elm_community$list_extra$List_Extra$zip,
+					suffixList,
+					_user$project$Ext_Time$toHMSList(_p3))));
+	};
+}();
+var _user$project$Ext_Time$toHHMMSS = function (_p7) {
 	return A2(
 		_elm_lang$core$String$join,
 		':',
 		A2(
 			_elm_lang$core$List$map,
-			function (_p2) {
+			function (_p8) {
 				return A3(
 					_elm_lang$core$String$padLeft,
 					2,
 					_elm_lang$core$Native_Utils.chr('0'),
-					_elm_lang$core$Basics$toString(_p2));
+					_elm_lang$core$Basics$toString(_p8));
 			},
-			_user$project$Ext_Time$toHMSList(_p1)));
+			_user$project$Ext_Time$toHMSList(_p7)));
 };

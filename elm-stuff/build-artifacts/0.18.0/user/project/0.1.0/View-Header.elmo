@@ -182,13 +182,33 @@ var _user$project$View_Header$headerWithContent = F2(
 					{
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'max-width', '80%'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
 					},
 					content),
 				_1: {
 					ctor: '::',
-					_0: _user$project$View_Header$menu(m),
-					_1: {ctor: '[]'}
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('flex-auto'),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: _user$project$View_Header$menu(m),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		};

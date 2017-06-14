@@ -105,7 +105,8 @@ headerWithContent content m =
         , class "hide-when-wide"
         ]
         []
-    , div [ class "flex-auto" ] content
+    , div [ class "flex-auto", style [ "max-width" => "80%" ] ] content
+    , div [ class "flex-auto" ] []
     , menu m
     ]
 

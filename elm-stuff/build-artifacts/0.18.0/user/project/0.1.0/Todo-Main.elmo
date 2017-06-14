@@ -109,11 +109,11 @@ var _user$project$Todo_Main$showRunningNotificationCmd = function (_p2) {
 	var _p3 = _p2;
 	var createRequest = F2(
 		function (info, todo) {
-			var formattedDuration = _user$project$Ext_Time$toHHMMSS(info.elapsedTime);
+			var formattedDuration = _user$project$Ext_Time$toHHMMSSMin(info.elapsedTime);
 			var todoId = _user$project$Document$getId(todo);
 			return {
 				tag: todoId,
-				title: A2(_elm_lang$core$Basics_ops['++'], 'Duration ', formattedDuration),
+				title: A2(_elm_lang$core$Basics_ops['++'], 'You have been working for ', formattedDuration),
 				body: _user$project$Todo$getText(todo),
 				actions: {
 					ctor: '::',

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.19 - 2017-06-14
 * On-boarding: create default set of entities. 
 
 ## v0.18.18 - 2017-06-13

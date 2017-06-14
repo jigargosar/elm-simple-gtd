@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.21 - 2017-06-14
 * schedule: switch instead of starting with `s` shortcut 
 
 ## v0.18.20 - 2017-06-14

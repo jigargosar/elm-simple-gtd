@@ -38,7 +38,7 @@ var _user$project$ActionList_View$init = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('overlay dark'),
+				_0: _elm_lang$html$Html_Attributes$class('overlay'),
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnDeactivateEditingMode),
@@ -51,7 +51,7 @@ var _user$project$ActionList_View$init = F2(
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('modal open fixed-top-20p'),
+						_0: _elm_lang$html$Html_Attributes$class('modal fixed-top-20p'),
 						_1: {
 							ctor: '::',
 							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$noop),

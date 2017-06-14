@@ -23,10 +23,10 @@ init appModel model =
             resList .|> (\str -> div [] [ text str ])
     in
         div
-            [ class "overlay dark"
+            [ class "overlay"
             , onClick Model.OnDeactivateEditingMode
             ]
-            [ div [ class "modal open fixed-top-20p", onClickStopPropagation Model.noop ]
+            [ div [ class "modal fixed-top-20p", onClickStopPropagation Model.noop ]
                 [ div [ class "modal-content" ]
                     [ div [ class "input-field" ]
                         [ input [ autofocus True ] [ text "" ]

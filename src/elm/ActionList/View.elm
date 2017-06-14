@@ -15,16 +15,24 @@ import Html.Events.Extra exposing (onClickPreventDefault, onClickStopPropagation
 
 
 init appModel model =
-    div
-        [ class "fullbleed-capture dark"
-        , onClick Model.OnDeactivateEditingMode
-        ]
-        [ div [ class "modal open modal-center", onClickStopPropagation Model.noop ]
-            [ div [ class "modal-content" ]
-                [ div [ class "input-field" ]
-                    [ input [ autofocus True ] [ text "" ]
-                    , label [ class "active" ] [ text "Enter action or option name" ]
+    let
+        resList =
+            [ "r1", "222", "r3", "r4", "r5" ]
+
+        resultListView =
+            resList .|> (\str -> div [] [ text str ])
+    in
+        div
+            [ class "fullbleed-capture dark"
+            , onClick Model.OnDeactivateEditingMode
+            ]
+            [ div [ class "modal open modal-top-20p", onClickStopPropagation Model.noop ]
+                [ div [ class "modal-content" ]
+                    [ div [ class "input-field" ]
+                        [ input [ autofocus True ] [ text "" ]
+                        , label [ class "active" ] [ text "Enter action or option name" ]
+                        ]
+                    , div [] resultListView
                     ]
                 ]
             ]
-        ]

@@ -1,5 +1,39 @@
 var _user$project$ActionList_View$init = F2(
 	function (appModel, model) {
+		var resList = {
+			ctor: '::',
+			_0: 'r1',
+			_1: {
+				ctor: '::',
+				_0: '222',
+				_1: {
+					ctor: '::',
+					_0: 'r3',
+					_1: {
+						ctor: '::',
+						_0: 'r4',
+						_1: {
+							ctor: '::',
+							_0: 'r5',
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		};
+		var resultListView = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+			resList,
+			function (str) {
+				return A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(str),
+						_1: {ctor: '[]'}
+					});
+			});
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -17,7 +51,7 @@ var _user$project$ActionList_View$init = F2(
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('modal open modal-center'),
+						_0: _elm_lang$html$Html_Attributes$class('modal open modal-top-20p'),
 						_1: {
 							ctor: '::',
 							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$noop),
@@ -73,7 +107,14 @@ var _user$project$ActionList_View$init = F2(
 											_1: {ctor: '[]'}
 										}
 									}),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{ctor: '[]'},
+										resultListView),
+									_1: {ctor: '[]'}
+								}
 							}),
 						_1: {ctor: '[]'}
 					}),

@@ -14,8 +14,6 @@ var _user$project$Main_View$init = F2(
 					switch (_p0.ctor) {
 						case 'EntityListView':
 							return A3(_user$project$EntityList_View$listView, _p0._0, model, viewModel);
-						case 'BinView':
-							return A2(_user$project$View_TodoList$filtered, viewModel, model);
 						case 'DoneView':
 							return A2(_user$project$View_TodoList$filtered, viewModel, model);
 						default:

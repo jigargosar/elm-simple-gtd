@@ -31,9 +31,6 @@ init viewModel model =
             EntityListView viewType ->
                 EntityList.View.listView viewType model viewModel
 
-            BinView ->
-                View.TodoList.filtered viewModel model
-
             DoneView ->
                 View.TodoList.filtered viewModel model
 

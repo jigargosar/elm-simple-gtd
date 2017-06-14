@@ -164,9 +164,6 @@ getSelectedIndex { mainViewType, projects, contexts } =
                     Entity.BinView ->
                         lastProjectIndex + 1
 
-            BinView ->
-                lastProjectIndex + 1
-
             DoneView ->
                 lastProjectIndex + 2
 

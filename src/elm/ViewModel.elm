@@ -85,9 +85,6 @@ getViewInfo mainViewType projectsVM contextsVM =
                     Entity.BinView ->
                         ( "Bin", sgtdBlue )
 
-            BinView ->
-                ( "Bin", sgtdBlue )
-
             DoneView ->
                 ( "Done", sgtdBlue )
 

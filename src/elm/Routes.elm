@@ -24,9 +24,6 @@ getPathFromModel model =
         EntityListView viewType ->
             Entity.routes viewType
 
-        BinView ->
-            [ "lists", "bin" ]
-
         DoneView ->
             [ "lists", "done" ]
 
@@ -47,9 +44,6 @@ builder2messages builder =
 
         "lists" :: "projects" :: [] ->
             [ Model.OnSetEntityListView Entity.ProjectsView ]
-
-        "lists" :: "bin" :: [] ->
-            [ Model.SwitchView BinView ]
 
         "bin" :: [] ->
             [ Model.OnSetEntityListView Entity.BinView ]

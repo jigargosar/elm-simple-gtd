@@ -45,8 +45,6 @@ var _user$project$ViewModel$getViewInfo = F3(
 					default:
 						return {ctor: '_Tuple2', _0: 'Bin', _1: _user$project$ViewModel$sgtdBlue};
 				}
-			case 'BinView':
-				return {ctor: '_Tuple2', _0: 'Bin', _1: _user$project$ViewModel$sgtdBlue};
 			case 'DoneView':
 				return {ctor: '_Tuple2', _0: 'Done', _1: _user$project$ViewModel$sgtdBlue};
 			default:

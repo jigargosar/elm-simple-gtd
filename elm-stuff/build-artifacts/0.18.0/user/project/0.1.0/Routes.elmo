@@ -1,6 +1,6 @@
 var _user$project$Routes$builder2messages = function (builder) {
 	var _p0 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
-	_v0_11:
+	_v0_10:
 	do {
 		if (_p0.ctor === '::') {
 			if (_p0._1.ctor === '::') {
@@ -20,12 +20,6 @@ var _user$project$Routes$builder2messages = function (builder) {
 										_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$ProjectsView),
 										_1: {ctor: '[]'}
 									};
-								case 'bin':
-									return {
-										ctor: '::',
-										_0: _user$project$Model$SwitchView(_user$project$Model$BinView),
-										_1: {ctor: '[]'}
-									};
 								case 'done':
 									return {
 										ctor: '::',
@@ -33,7 +27,7 @@ var _user$project$Routes$builder2messages = function (builder) {
 										_1: {ctor: '[]'}
 									};
 								default:
-									break _v0_11;
+									break _v0_10;
 							}
 						case 'context':
 							return {
@@ -65,10 +59,10 @@ var _user$project$Routes$builder2messages = function (builder) {
 								_1: {ctor: '[]'}
 							};
 						default:
-							break _v0_11;
+							break _v0_10;
 					}
 				} else {
-					break _v0_11;
+					break _v0_10;
 				}
 			} else {
 				switch (_p0._0) {
@@ -92,11 +86,11 @@ var _user$project$Routes$builder2messages = function (builder) {
 							_1: {ctor: '[]'}
 						};
 					default:
-						break _v0_11;
+						break _v0_10;
 				}
 			}
 		} else {
-			break _v0_11;
+			break _v0_10;
 		}
 	} while(false);
 	return {ctor: '[]'};
@@ -110,16 +104,6 @@ var _user$project$Routes$getPathFromModel = function (model) {
 	switch (_p1.ctor) {
 		case 'EntityListView':
 			return _user$project$Entity$routes(_p1._0);
-		case 'BinView':
-			return {
-				ctor: '::',
-				_0: 'lists',
-				_1: {
-					ctor: '::',
-					_0: 'bin',
-					_1: {ctor: '[]'}
-				}
-			};
 		case 'DoneView':
 			return {
 				ctor: '::',

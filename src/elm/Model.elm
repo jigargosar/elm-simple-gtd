@@ -149,7 +149,6 @@ type alias EntityListViewType =
 type ViewType
     = EntityListView EntityListViewType
     | DoneView
-    | BinView
     | SyncView
 
 
@@ -812,9 +811,6 @@ getTodoListPredicateForCurrentView model =
                 [ Todo.isDone >> not, Todo.isDeleted >> equals model.showDeleted ]
     in
         case getMainViewType model of
-            BinView ->
-                Todo.isDeleted
-
             DoneView ->
                 Pred.all [ Todo.isNotDeleted, Todo.isDone ]
 

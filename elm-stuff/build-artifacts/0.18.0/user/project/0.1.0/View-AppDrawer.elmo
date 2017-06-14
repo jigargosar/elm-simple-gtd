@@ -311,8 +311,6 @@ var _user$project$View_AppDrawer$getSelectedIndex = function (_p3) {
 				default:
 					return lastProjectIndex + 1;
 			}
-		case 'BinView':
-			return lastProjectIndex + 1;
 		case 'DoneView':
 			return lastProjectIndex + 2;
 		default:

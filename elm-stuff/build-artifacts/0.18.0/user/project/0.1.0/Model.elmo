@@ -307,8 +307,6 @@ var _user$project$Model$getTodoListPredicateForCurrentView = function (model) {
 		});
 	var _p15 = _user$project$Model$getMainViewType(model);
 	switch (_p15.ctor) {
-		case 'BinView':
-			return _user$project$Todo$isDeleted;
 		case 'DoneView':
 			return _user$project$Ext_Predicate$all(
 				{
@@ -1545,7 +1543,6 @@ var _user$project$Model$OnCommonMsg = function (a) {
 var _user$project$Model$commonMsg = _user$project$CommonMsg$createHelper(_user$project$Model$OnCommonMsg);
 var _user$project$Model$noop = _user$project$Model$commonMsg.noOp;
 var _user$project$Model$SyncView = {ctor: 'SyncView'};
-var _user$project$Model$BinView = {ctor: 'BinView'};
 var _user$project$Model$DoneView = {ctor: 'DoneView'};
 var _user$project$Model$EntityListView = function (a) {
 	return {ctor: 'EntityListView', _0: a};

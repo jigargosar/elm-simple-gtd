@@ -73,6 +73,7 @@ initRunning todoId now =
 switchOrStartRunning : Todo.Id -> Time -> Model -> Model
 switchOrStartRunning todoId now =
     Maybe.unpack (\_ -> initRunning todoId now) ((\rec -> { rec | todoId = todoId } |> wrap))
+        |> Debug.log "switchOrStartRunning"
 
 
 togglePause : Time -> Model -> Model

@@ -4,6 +4,7 @@ import Document
 import DomPorts
 import ExclusiveMode
 import Entity
+import Ext.Debug
 import Ext.Record as Record exposing (set)
 import Model
 import Notification

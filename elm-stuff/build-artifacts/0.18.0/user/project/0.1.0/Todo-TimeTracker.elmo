@@ -70,16 +70,19 @@ var _user$project$Todo_TimeTracker$toggleStartStop = F3(
 var _user$project$Todo_TimeTracker$switchOrStartRunning = F2(
 	function (todoId, now) {
 		return A2(
-			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p3) {
-				return A2(_user$project$Todo_TimeTracker$initRunning, todoId, now);
-			},
-			function (rec) {
-				return _user$project$Todo_TimeTracker$wrap(
-					_elm_lang$core$Native_Utils.update(
-						rec,
-						{todoId: todoId}));
-			});
+			_elm_lang$core$Debug$log,
+			'switchOrStartRunning',
+			A2(
+				_elm_community$maybe_extra$Maybe_Extra$unpack,
+				function (_p3) {
+					return A2(_user$project$Todo_TimeTracker$initRunning, todoId, now);
+				},
+				function (rec) {
+					return _user$project$Todo_TimeTracker$wrap(
+						_elm_lang$core$Native_Utils.update(
+							rec,
+							{todoId: todoId}));
+				}));
 	});
 var _user$project$Todo_TimeTracker$togglePause = function (now) {
 	return _user$project$Todo_TimeTracker$map(

@@ -385,11 +385,37 @@ update msg =
                     Todo.Main.update andThenUpdate now todoMsg
            )
         >> persistAll
+        >> Return.map (logMsg msg)
 
 
 withNow : (Time -> Msg) -> ReturnF
 withNow toMsg =
     command (Task.perform toMsg Time.now)
+
+
+logMsg msg model =
+    let
+        _ =
+            case msg of
+                OnNowChanged _ ->
+                    Nothing
+
+                OnTodoMsg Todo.Msg.UpdateTimeTracker ->
+                    Nothing
+
+                OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker _ ->
+                    Nothing
+
+                _ ->
+                    let
+                        _ =
+                            1
+
+                        --                            Debug.log "msg" (msg)
+                    in
+                        Nothing
+    in
+        model
 
 
 map =

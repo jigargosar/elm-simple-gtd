@@ -1,6 +1,7 @@
 ## Upcoming
 * custom-sync view: remove paper input
 * remove all paper inputs
+* remove unnecessary Paper deps
 
 ## v0.18.22 - 2017-06-14
 * disable input field propagation so as not to trigger global combos  

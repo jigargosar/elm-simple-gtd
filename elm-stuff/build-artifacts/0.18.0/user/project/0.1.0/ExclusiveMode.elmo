@@ -16,6 +16,9 @@ var _user$project$ExclusiveMode$firstVisit = _user$project$ExclusiveMode$FirstVi
 var _user$project$ExclusiveMode$EditSyncSettings = function (a) {
 	return {ctor: 'EditSyncSettings', _0: a};
 };
+var _user$project$ExclusiveMode$ActionList = function (a) {
+	return {ctor: 'ActionList', _0: a};
+};
 var _user$project$ExclusiveMode$LaunchBar = function (a) {
 	return {ctor: 'LaunchBar', _0: a};
 };

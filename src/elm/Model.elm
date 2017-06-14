@@ -693,8 +693,10 @@ saveCurrentForm model =
                 |> Return.singleton
 
         ExclusiveMode.LaunchBar form ->
-            model
-                |> Return.singleton
+            model |> Return.singleton
+
+        ExclusiveMode.ActionList _ ->
+            model |> Return.singleton
 
         ExclusiveMode.None ->
             model |> Return.singleton

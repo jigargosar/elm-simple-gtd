@@ -1,5 +1,6 @@
 module ExclusiveMode exposing (..)
 
+import ActionList
 import Context
 import Document
 import Form
@@ -54,6 +55,7 @@ type ExclusiveMode
     | EditTodoContext Todo.GroupForm.Model
     | EditTodoProject Todo.GroupForm.Model
     | LaunchBar LaunchBar.Form.Model
+    | ActionList ActionList.Model
       -- different page !!
     | EditSyncSettings SyncForm
     | FirstVisit

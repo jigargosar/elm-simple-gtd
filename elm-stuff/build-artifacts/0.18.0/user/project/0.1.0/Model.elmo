@@ -1197,6 +1197,8 @@ var _user$project$Model$saveCurrentForm = function (model) {
 					{pouchDBRemoteSyncURI: _p42._0.uri}));
 		case 'LaunchBar':
 			return _Fresheyeball$elm_return$Return$singleton(model);
+		case 'ActionList':
+			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'None':
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		default:

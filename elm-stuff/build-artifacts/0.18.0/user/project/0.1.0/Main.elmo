@@ -420,21 +420,42 @@ var _user$project$Main$update = function (msg) {
 									_user$project$Main$map,
 									function (_p34) {
 										return A2(
-											_user$project$Model$createContext,
-											'zz SomeDay/Maybe',
+											_user$project$Model$createTodo,
+											'use `ArrowUp` and `ArrowDown` keys to focus item',
 											A2(
-												_user$project$Model$createContext,
-												'3 Waiting For',
+												_user$project$Model$createTodo,
+												'press `s` to set schedule/reminder',
 												A2(
-													_user$project$Model$createContext,
-													'2 Next Actions',
+													_user$project$Model$createTodo,
+													'press `p` to set project',
 													A2(
-														_user$project$Model$createContext,
-														'1 Now',
+														_user$project$Model$createTodo,
+														'press `c` to set context',
 														A2(
-															_user$project$Model$createProject,
-															'GTD: Learn',
-															A2(_user$project$Model$createProject, 'Explore SimpleGTD.com', _p34))))));
+															_user$project$Model$createTodo,
+															'press `e` to edit text',
+															A2(
+																_user$project$Model$createTodo,
+																'press `i` to create and add to Inbox',
+																A2(
+																	_user$project$Model$createTodo,
+																	'Click `+` or press `q` for quick add',
+																	A2(
+																		_user$project$Model$createContext,
+																		'zz SomeDay/Maybe',
+																		A2(
+																			_user$project$Model$createContext,
+																			'3 Waiting For',
+																			A2(
+																				_user$project$Model$createContext,
+																				'2 Next Actions',
+																				A2(
+																					_user$project$Model$createContext,
+																					'1 Now',
+																					A2(
+																						_user$project$Model$createProject,
+																						'GTD: Learn',
+																						A2(_user$project$Model$createProject, 'Explore SimpleGTD.com', _p34)))))))))))));
 									},
 									_p33));
 						};

@@ -85,9 +85,13 @@ type alias Store x =
     }
 
 
+type alias OtherFieldsEncoder x =
+    Document x -> List ( String, E.Value )
+
+
 generator :
     String
-    -> (Document x -> List ( String, E.Value ))
+    -> OtherFieldsEncoder x
     -> Decoder (Document x)
     -> DeviceId
     -> List E.Value

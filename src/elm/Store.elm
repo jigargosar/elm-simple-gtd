@@ -6,11 +6,11 @@ port module Store
         , insert
         , findById
         , findBy
-        , map
-        , reject
+        , mapDocs
+        , rejectDocs
         , asIdDict
         , isEmpty
-        , filter
+        , filterDocs
         , updateAll
         , findAndUpdateAll
         , upsertOnPouchDBChange
@@ -124,14 +124,14 @@ encode doc s =
     Document.encode s.otherFieldsEncoder doc
 
 
+persist : Store x -> ( Store x, Cmd msg )
 persist s =
     let
         dirtyList =
-            s.list
-                |> List.filter .dirty
+            filterDocs .dirty s
 
         ns =
-            s.list .|> (\d -> { d | dirty = False }) |> setDict # s
+            over dict (Dict.map (\id d -> { d | dirty = False })) s
 
         cmds =
             dirtyList .|> upsertIn s
@@ -279,16 +279,16 @@ insertDocInDict doc =
     over dict (Dict.insert (Document.getId doc) doc)
 
 
-map fn =
-    get dict >> Dict.map (\id doc -> fn doc)
+mapDocs fn =
+    get dict >> Dict.map (\id doc -> fn doc) >> Dict.values
 
 
-filter fn =
-    get dict >> Dict.filter (\id doc -> fn doc)
+filterDocs fn =
+    get dict >> Dict.filter (\id doc -> fn doc) >> Dict.values
 
 
-reject fn =
-    filter (fn >> not)
+rejectDocs fn =
+    filterDocs (fn >> not)
 
 
 findBy : (Document x -> Bool) -> Store x -> Maybe (Document x)

@@ -373,7 +373,7 @@ isLayoutAutoNarrow =
 
 
 filterTodosAndSortBy pred sortBy model =
-    Store.filter pred model.todoStore
+    Store.filterDocs pred model.todoStore
         |> List.sortBy sortBy
 
 
@@ -386,13 +386,13 @@ filterTodosAndSortByLatestModified pred =
 
 
 filterContexts pred model =
-    Store.filter pred model.contextStore
+    Store.filterDocs pred model.contextStore
         |> List.append (Context.filterNull pred)
         |> Context.sort
 
 
 filterProjects pred model =
-    Store.filter pred model.projectStore
+    Store.filterDocs pred model.projectStore
         |> List.append (Project.filterNull pred)
         |> Project.sort
 
@@ -480,11 +480,11 @@ createGrouping viewType model =
 
 
 getActiveTodoList =
-    .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
+    .todoStore >> Store.rejectDocs (anyPass [ Todo.isDeleted, Todo.isDone ])
 
 
 getActiveTodoListWithReminderTime model =
-    model.todoStore |> Store.filter (Todo.isReminderOverdue model.now)
+    model.todoStore |> Store.filterDocs (Todo.isReminderOverdue model.now)
 
 
 findTodoWithOverDueReminder model =

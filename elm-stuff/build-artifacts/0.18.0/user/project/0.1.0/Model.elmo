@@ -438,13 +438,13 @@ var _user$project$Model$findTodoWithOverDueReminder = function (model) {
 };
 var _user$project$Model$getActiveTodoListWithReminderTime = function (model) {
 	return A2(
-		_user$project$Store$filter,
+		_user$project$Store$filterDocs,
 		_user$project$Todo$isReminderOverdue(model.now),
 		model.todoStore);
 };
 var _user$project$Model$getActiveTodoList = function (_p19) {
 	return A2(
-		_user$project$Store$reject,
+		_user$project$Store$rejectDocs,
 		_user$project$Ext_Function$anyPass(
 			{
 				ctor: '::',
@@ -476,7 +476,7 @@ var _user$project$Model$filterProjects = F2(
 			A2(
 				_elm_lang$core$List$append,
 				_user$project$Project$filterNull(pred),
-				A2(_user$project$Store$filter, pred, model.projectStore)));
+				A2(_user$project$Store$filterDocs, pred, model.projectStore)));
 	});
 var _user$project$Model$filterCurrentProjects = function (model) {
 	return A2(
@@ -491,7 +491,7 @@ var _user$project$Model$filterContexts = F2(
 			A2(
 				_elm_lang$core$List$append,
 				_user$project$Context$filterNull(pred),
-				A2(_user$project$Store$filter, pred, model.contextStore)));
+				A2(_user$project$Store$filterDocs, pred, model.contextStore)));
 	});
 var _user$project$Model$filterCurrentContexts = function (model) {
 	return A2(
@@ -505,7 +505,7 @@ var _user$project$Model$filterTodosAndSortBy = F3(
 		return A2(
 			_elm_lang$core$List$sortBy,
 			sortBy,
-			A2(_user$project$Store$filter, pred, model.todoStore));
+			A2(_user$project$Store$filterDocs, pred, model.todoStore));
 	});
 var _user$project$Model$filterTodosAndSortByLatestCreated = function (pred) {
 	return A2(

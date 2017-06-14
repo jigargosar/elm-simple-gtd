@@ -165,30 +165,32 @@ var _user$project$Store$insert = F2(
 				_user$project$Ext_Random$mapWithIdGenerator(
 					constructor(store.deviceId))));
 	});
-var _user$project$Store$map = function (fn) {
+var _user$project$Store$mapDocs = function (fn) {
 	return function (_p6) {
-		return A2(
-			_elm_lang$core$Dict$map,
-			F2(
-				function (id, doc) {
-					return fn(doc);
-				}),
-			A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p6));
+		return _elm_lang$core$Dict$values(
+			A2(
+				_elm_lang$core$Dict$map,
+				F2(
+					function (id, doc) {
+						return fn(doc);
+					}),
+				A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p6)));
 	};
 };
-var _user$project$Store$filter = function (fn) {
+var _user$project$Store$filterDocs = function (fn) {
 	return function (_p7) {
-		return A2(
-			_elm_lang$core$Dict$filter,
-			F2(
-				function (id, doc) {
-					return fn(doc);
-				}),
-			A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p7));
+		return _elm_lang$core$Dict$values(
+			A2(
+				_elm_lang$core$Dict$filter,
+				F2(
+					function (id, doc) {
+						return fn(doc);
+					}),
+				A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p7)));
 	};
 };
-var _user$project$Store$reject = function (fn) {
-	return _user$project$Store$filter(
+var _user$project$Store$rejectDocs = function (fn) {
+	return _user$project$Store$filterDocs(
 		function (_p8) {
 			return !fn(_p8);
 		});
@@ -285,21 +287,23 @@ var _user$project$Store$upsertIn = F2(
 			});
 	});
 var _user$project$Store$persist = function (s) {
-	var ns = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$setDict, s)(
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-			s.list,
-			function (d) {
-				return _elm_lang$core$Native_Utils.update(
-					d,
-					{dirty: false});
-			}));
+	var ns = A3(
+		_user$project$Ext_Record$over,
+		_user$project$Store$dict,
+		_elm_lang$core$Dict$map(
+			F2(
+				function (id, d) {
+					return _elm_lang$core$Native_Utils.update(
+						d,
+						{dirty: false});
+				})),
+		s);
 	var dirtyList = A2(
-		_elm_lang$core$List$filter,
+		_user$project$Store$filterDocs,
 		function (_) {
 			return _.dirty;
 		},
-		s.list);
+		s);
 	var cmds = A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 		dirtyList,

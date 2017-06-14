@@ -8,7 +8,7 @@ import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Ext.List as List
-import Ext.Predicate
+import Ext.Predicate as Pred
 import Ext.Record as Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
 import Firebase exposing (DeviceId)
 import Keyboard.Combo exposing (combo1, combo2, combo3)
@@ -417,11 +417,11 @@ createGrouping viewType model =
             if model.showDeleted then
                 Document.isDeleted
             else
-                Ext.Predicate.all [ Todo.isNotDeleted, Todo.isNotDone ]
+                Pred.all [ Todo.isNotDeleted, Todo.isNotDone ]
 
         filterTodosForContext context =
             filterTodos
-                (Ext.Predicate.all
+                (Pred.all
                     [ todoFilter
                     , Todo.contextFilter context
                     ]
@@ -430,7 +430,7 @@ createGrouping viewType model =
 
         filterTodosForProject project =
             filterTodos
-                (Ext.Predicate.all
+                (Pred.all
                     [ todoFilter
                     , Todo.projectFilter project
                     ]
@@ -778,7 +778,7 @@ clearSelection =
 getTodoListForCurrentView model =
     let
         filter =
-            model |> getTodoListFilterForCurrentView
+            model |> getTodoListPredicateForCurrentView
 
         allTodos =
             model |> getTodoStore >> Store.asList
@@ -792,14 +792,15 @@ getTodoListForCurrentView model =
             |> List.sortBy sortFunction
 
 
-getTodoListFilterForCurrentView model =
+getTodoListPredicateForCurrentView model =
     let
-        default =
-            Todo.toAllPassPredicate [ Todo.isDone >> not, Todo.isDeleted >> equals model.showDeleted ]
+        defaultPredicate =
+            Pred.any
+                [ Todo.isDone >> not, Todo.isDeleted >> equals model.showDeleted ]
     in
         case getMainViewType model of
             BinView ->
-                Todo.binFilter
+                Todo.isDeleted
 
             DoneView ->
                 Todo.doneFilter
@@ -807,16 +808,16 @@ getTodoListFilterForCurrentView model =
             EntityListView viewType ->
                 case viewType of
                     Entity.ContextsView ->
-                        default
+                        defaultPredicate
 
                     Entity.ContextView id ->
-                        Todo.toAllPassPredicate [ Todo.getContextId >> equals id, default ]
+                        Todo.toAllPassPredicate [ Todo.getContextId >> equals id, defaultPredicate ]
 
                     Entity.ProjectsView ->
-                        default
+                        defaultPredicate
 
                     Entity.ProjectView id ->
-                        Todo.toAllPassPredicate [ Todo.getProjectId >> equals id, default ]
+                        Todo.toAllPassPredicate [ Todo.getProjectId >> equals id, defaultPredicate ]
 
             _ ->
                 always (True)

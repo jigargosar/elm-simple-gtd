@@ -31,17 +31,8 @@ type alias Text =
     String
 
 
-type Reminder
-    = None
-    | At Time
-
-
 type alias Id =
     Document.Id
-
-
-defaultReminder =
-    None
 
 
 type alias Record =
@@ -265,31 +256,12 @@ todoConstructor id rev createdAt modifiedAt deleted deviceId done text schedule 
     }
 
 
-dueAtAndReminderToSchedule dueAt reminder =
-    dueAt
-        ?|> (\dueAt ->
-                case reminder of
-                    None ->
-                        Todo.Schedule.NoReminder dueAt
-
-                    At reminderTime ->
-                        Todo.Schedule.WithReminder dueAt reminderTime
-            )
-        ?= Todo.Schedule.unscheduled
-
-
 todoRecordDecoder =
     D.optional "done" D.bool defaultDone
         >> D.required "text" D.string
         >> D.custom Todo.Schedule.decode
         >> D.optional "projectId" D.string defaultProjectId
         >> D.optional "contextId" D.string defaultContextId
-
-
-reminderDecoder : Decoder Reminder
-reminderDecoder =
-    D.decode (\time -> At time)
-        |> D.required "at" D.float
 
 
 decoder : Decoder Model
@@ -354,14 +326,6 @@ isNotDeleted =
 
 isNotDone =
     isDone >> not
-
-
-filterAllPass =
-    toAllPassPredicate >> List.filter
-
-
-rejectAnyPass =
-    toAnyPassPredicate >> List.filterNot
 
 
 binFilter =

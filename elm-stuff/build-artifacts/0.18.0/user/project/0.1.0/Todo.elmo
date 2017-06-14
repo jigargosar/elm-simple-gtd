@@ -14,30 +14,22 @@ var _user$project$Todo$toAllPassPredicate = function (predicateList) {
 			A2(_danielnarey$elm_toolkit$Toolkit_Helpers$applyList, predicateList, _p1));
 	};
 };
-var _user$project$Todo$rejectAnyPass = function (_p2) {
-	return _elm_community$list_extra$List_Extra$filterNot(
-		_user$project$Todo$toAnyPassPredicate(_p2));
-};
-var _user$project$Todo$filterAllPass = function (_p3) {
-	return _elm_lang$core$List$filter(
-		_user$project$Todo$toAllPassPredicate(_p3));
-};
 var _user$project$Todo$getContextId = function (_) {
 	return _.contextId;
 };
 var _user$project$Todo$contextFilter = function (context) {
-	return function (_p4) {
+	return function (_p2) {
 		return A2(
 			_user$project$Ext_Function$equals,
 			_user$project$Document$getId(context),
-			_user$project$Todo$getContextId(_p4));
+			_user$project$Todo$getContextId(_p2));
 	};
 };
 var _user$project$Todo$isDone = function (_) {
 	return _.done;
 };
-var _user$project$Todo$isNotDone = function (_p5) {
-	return !_user$project$Todo$isDone(_p5);
+var _user$project$Todo$isNotDone = function (_p3) {
+	return !_user$project$Todo$isDone(_p3);
 };
 var _user$project$Todo$getText = function (_) {
 	return _.text;
@@ -101,23 +93,6 @@ var _user$project$Todo$encodeOtherFields = function (todo) {
 		}
 	};
 };
-var _user$project$Todo$dueAtAndReminderToSchedule = F2(
-	function (dueAt, reminder) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				dueAt,
-				function (dueAt) {
-					var _p6 = reminder;
-					if (_p6.ctor === 'None') {
-						return _user$project$Todo_Schedule$NoReminder(dueAt);
-					} else {
-						return A2(_user$project$Todo_Schedule$WithReminder, dueAt, _p6._0);
-					}
-				}),
-			_user$project$Todo_Schedule$unscheduled);
-	});
 var _user$project$Todo$todoConstructor = function (id) {
 	return function (rev) {
 		return function (createdAt) {
@@ -144,7 +119,7 @@ var _user$project$Todo$todoConstructor = function (id) {
 var _user$project$Todo$defaultContextId = '';
 var _user$project$Todo$defaultProjectId = '';
 var _user$project$Todo$defaultDone = false;
-var _user$project$Todo$todoRecordDecoder = function (_p7) {
+var _user$project$Todo$todoRecordDecoder = function (_p4) {
 	return A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 		'contextId',
@@ -162,7 +137,7 @@ var _user$project$Todo$todoRecordDecoder = function (_p7) {
 					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 					'text',
 					_elm_lang$core$Json_Decode$string,
-					A4(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional, 'done', _elm_lang$core$Json_Decode$bool, _user$project$Todo$defaultDone, _p7)))));
+					A4(_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional, 'done', _elm_lang$core$Json_Decode$bool, _user$project$Todo$defaultDone, _p4)))));
 };
 var _user$project$Todo$decoder = _user$project$Todo$todoRecordDecoder(
 	_user$project$Document$documentFieldsDecoder(
@@ -173,9 +148,9 @@ var _user$project$Todo$init = F4(
 		return _user$project$Todo$todoConstructor(id)(_user$project$Document$defaultRevision)(createdAt)(createdAt)(_user$project$Todo$defaultDeleted)(deviceId)(_user$project$Todo$defaultDone)(text)(_user$project$Todo_Schedule$unscheduled)(_user$project$Todo$defaultProjectId)(_user$project$Todo$defaultContextId);
 	});
 var _user$project$Todo$defaultDueAt = _elm_lang$core$Maybe$Nothing;
-var _user$project$Todo$hasReminderChanged = function (_p8) {
-	var _p9 = _p8;
-	return A2(_user$project$Todo_Schedule$hasReminderChanged, _p9._0.schedule, _p9._1.schedule);
+var _user$project$Todo$hasReminderChanged = function (_p5) {
+	var _p6 = _p5;
+	return A2(_user$project$Todo_Schedule$hasReminderChanged, _p6._0.schedule, _p6._1.schedule);
 };
 var _user$project$Todo$deleted = A2(
 	_user$project$Ext_Record$init,
@@ -251,7 +226,7 @@ var _user$project$Todo$getModifiedAt = function (_) {
 	return _.modifiedAt;
 };
 var _user$project$Todo$modifiedAtInWords = function (now) {
-	return function (_p10) {
+	return function (_p7) {
 		return A3(
 			_alpacaaa$elm_date_distance$Date_Distance$inWordsWithConfig,
 			_elm_lang$core$Native_Utils.update(
@@ -259,14 +234,14 @@ var _user$project$Todo$modifiedAtInWords = function (now) {
 				{includeSeconds: true}),
 			_elm_lang$core$Date$fromTime(now),
 			_elm_lang$core$Date$fromTime(
-				_user$project$Todo$getModifiedAt(_p10)));
+				_user$project$Todo$getModifiedAt(_p7)));
 	};
 };
 var _user$project$Todo$getCreatedAt = function (_) {
 	return _.createdAt;
 };
 var _user$project$Todo$createdAtInWords = function (now) {
-	return function (_p11) {
+	return function (_p8) {
 		return A3(
 			_alpacaaa$elm_date_distance$Date_Distance$inWordsWithConfig,
 			_elm_lang$core$Native_Utils.update(
@@ -274,26 +249,26 @@ var _user$project$Todo$createdAtInWords = function (now) {
 				{includeSeconds: true}),
 			_elm_lang$core$Date$fromTime(now),
 			_elm_lang$core$Date$fromTime(
-				_user$project$Todo$getCreatedAt(_p11)));
+				_user$project$Todo$getCreatedAt(_p8)));
 	};
 };
 var _user$project$Todo$getProjectId = function (_) {
 	return _.projectId;
 };
 var _user$project$Todo$projectFilter = function (project) {
-	return function (_p12) {
+	return function (_p9) {
 		return A2(
 			_user$project$Ext_Function$equals,
 			_user$project$Document$getId(project),
-			_user$project$Todo$getProjectId(_p12));
+			_user$project$Todo$getProjectId(_p9));
 	};
 };
 var _user$project$Todo$hasProjectId = function (projectId) {
-	return function (_p13) {
+	return function (_p10) {
 		return A2(
 			_user$project$Ext_Function$equals,
 			projectId,
-			_user$project$Todo$getProjectId(_p13));
+			_user$project$Todo$getProjectId(_p10));
 	};
 };
 var _user$project$Todo$getDeleted = function (_) {
@@ -310,11 +285,11 @@ var _user$project$Todo$isInActive = _user$project$Ext_Function$anyPass(
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$Todo$isActive = function (_p14) {
-	return !_user$project$Todo$isInActive(_p14);
+var _user$project$Todo$isActive = function (_p11) {
+	return !_user$project$Todo$isInActive(_p11);
 };
-var _user$project$Todo$isNotDeleted = function (_p15) {
-	return !_user$project$Todo$getDeleted(_p15);
+var _user$project$Todo$isNotDeleted = function (_p12) {
+	return !_user$project$Todo$getDeleted(_p12);
 };
 var _user$project$Todo$doneFilter = _user$project$Todo$toAllPassPredicate(
 	{
@@ -336,8 +311,8 @@ var _user$project$Todo$projectIdFilter = function (projectId) {
 				_0: _user$project$Todo$isNotDeleted,
 				_1: {
 					ctor: '::',
-					_0: function (_p16) {
-						return !_user$project$Todo$isDone(_p16);
+					_0: function (_p13) {
+						return !_user$project$Todo$isDone(_p13);
 					},
 					_1: {ctor: '[]'}
 				}
@@ -350,30 +325,30 @@ var _user$project$Todo$binFilter = _user$project$Todo$toAllPassPredicate(
 		_0: _user$project$Todo$getDeleted,
 		_1: {ctor: '[]'}
 	});
-var _user$project$Todo$getMaybeReminderTime = function (_p17) {
+var _user$project$Todo$getMaybeReminderTime = function (_p14) {
 	return _user$project$Todo_Schedule$getMaybeReminderTime(
 		function (_) {
 			return _.schedule;
-		}(_p17));
+		}(_p14));
 };
 var _user$project$Todo$isReminderOverdue = F2(
 	function (now, model) {
-		var isOverDue = function (_p18) {
+		var isOverDue = function (_p15) {
 			return A3(
 				_elm_community$maybe_extra$Maybe_Extra$unwrap,
 				false,
 				function (time) {
 					return _elm_lang$core$Native_Utils.cmp(time, now) < 1;
 				},
-				_user$project$Todo$getMaybeReminderTime(_p18));
+				_user$project$Todo$getMaybeReminderTime(_p15));
 		};
 		return _user$project$Todo$isActive(model) ? isOverDue(model) : false;
 	});
-var _user$project$Todo$getMaybeDueAt = function (_p19) {
+var _user$project$Todo$getMaybeDueAt = function (_p16) {
 	return _user$project$Todo_Schedule$getMaybeDueAt(
 		function (_) {
 			return _.schedule;
-		}(_p19));
+		}(_p16));
 };
 var _user$project$Todo$getMaybeTime = function (model) {
 	return A2(
@@ -399,19 +374,6 @@ var _user$project$Todo$Record = F5(
 	function (a, b, c, d, e) {
 		return {done: a, text: b, schedule: c, projectId: d, contextId: e};
 	});
-var _user$project$Todo$At = function (a) {
-	return {ctor: 'At', _0: a};
-};
-var _user$project$Todo$reminderDecoder = A3(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'at',
-	_elm_lang$core$Json_Decode$float,
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(
-		function (time) {
-			return _user$project$Todo$At(time);
-		}));
-var _user$project$Todo$None = {ctor: 'None'};
-var _user$project$Todo$defaultReminder = _user$project$Todo$None;
 var _user$project$Todo$AutoSnooze = function (a) {
 	return {ctor: 'AutoSnooze', _0: a};
 };
@@ -443,37 +405,37 @@ var _user$project$Todo$SetContextId = function (a) {
 	return {ctor: 'SetContextId', _0: a};
 };
 var _user$project$Todo$update = function (action) {
-	var _p20 = action;
-	switch (_p20.ctor) {
+	var _p17 = action;
+	switch (_p17.ctor) {
 		case 'SetText':
-			return A2(_user$project$Ext_Record$set, _user$project$Todo$text, _p20._0);
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$text, _p17._0);
 		case 'SetContextId':
-			return A2(_user$project$Ext_Record$set, _user$project$Todo$contextId, _p20._0);
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$contextId, _p17._0);
 		case 'SetProjectId':
-			return A2(_user$project$Ext_Record$set, _user$project$Todo$projectId, _p20._0);
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$projectId, _p17._0);
 		case 'SetSchedule':
-			return A2(_user$project$Ext_Record$set, _user$project$Todo$schedule, _p20._0);
+			return A2(_user$project$Ext_Record$set, _user$project$Todo$schedule, _p17._0);
 		case 'CopyProjectAndContextId':
-			var _p22 = _p20._0;
-			return function (_p21) {
+			var _p19 = _p17._0;
+			return function (_p18) {
 				return A2(
 					_user$project$Todo$update,
-					_user$project$Todo$SetProjectId(_p22.projectId),
+					_user$project$Todo$SetProjectId(_p19.projectId),
 					A2(
 						_user$project$Todo$update,
-						_user$project$Todo$SetContextId(_p22.contextId),
-						_p21));
+						_user$project$Todo$SetContextId(_p19.contextId),
+						_p18));
 			};
 		case 'SetProject':
 			return A2(
 				_user$project$Ext_Record$set,
 				_user$project$Todo$projectId,
-				_user$project$Document$getId(_p20._0));
+				_user$project$Document$getId(_p17._0));
 		case 'SetContext':
 			return A2(
 				_user$project$Ext_Record$set,
 				_user$project$Todo$contextId,
-				_user$project$Document$getId(_p20._0));
+				_user$project$Document$getId(_p17._0));
 		case 'ToggleDone':
 			return A2(_user$project$Ext_Record$over, _user$project$Todo$done, _elm_lang$core$Basics$not);
 		case 'MarkDone':
@@ -484,15 +446,15 @@ var _user$project$Todo$update = function (action) {
 			return A2(
 				_user$project$Ext_Record$set,
 				_user$project$Todo$schedule,
-				_user$project$Todo_Schedule$fromMaybeTime(_p20._0));
+				_user$project$Todo_Schedule$fromMaybeTime(_p17._0));
 		case 'TurnReminderOff':
 			return _user$project$Todo$updateSchedule(_user$project$Todo_Schedule$turnReminderOff);
 		case 'SnoozeTill':
 			return _user$project$Todo$updateSchedule(
-				_user$project$Todo_Schedule$snoozeTill(_p20._0));
+				_user$project$Todo_Schedule$snoozeTill(_p17._0));
 		default:
 			return _user$project$Todo$updateSchedule(
-				_user$project$Todo_Schedule$autoSnooze(_p20._0));
+				_user$project$Todo_Schedule$autoSnooze(_p17._0));
 	}
 };
 var _user$project$Todo$SetText = function (a) {

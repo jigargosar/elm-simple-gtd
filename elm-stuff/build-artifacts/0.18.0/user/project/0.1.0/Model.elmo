@@ -307,8 +307,8 @@ var _user$project$Model$getCurrentTodoListSortByFunction = function (model) {
 			};
 	}
 };
-var _user$project$Model$getTodoListFilterForCurrentView = function (model) {
-	var $default = _user$project$Todo$toAllPassPredicate(
+var _user$project$Model$getTodoListPredicateForCurrentView = function (model) {
+	var defaultPredicate = _user$project$Ext_Predicate$any(
 		{
 			ctor: '::',
 			_0: function (_p17) {
@@ -328,14 +328,14 @@ var _user$project$Model$getTodoListFilterForCurrentView = function (model) {
 	var _p19 = _user$project$Model$getMainViewType(model);
 	switch (_p19.ctor) {
 		case 'BinView':
-			return _user$project$Todo$binFilter;
+			return _user$project$Todo$isDeleted;
 		case 'DoneView':
 			return _user$project$Todo$doneFilter;
 		case 'EntityListView':
 			var _p20 = _p19._0;
 			switch (_p20.ctor) {
 				case 'ContextsView':
-					return $default;
+					return defaultPredicate;
 				case 'ContextView':
 					return _user$project$Todo$toAllPassPredicate(
 						{
@@ -348,12 +348,12 @@ var _user$project$Model$getTodoListFilterForCurrentView = function (model) {
 							},
 							_1: {
 								ctor: '::',
-								_0: $default,
+								_0: defaultPredicate,
 								_1: {ctor: '[]'}
 							}
 						});
 				case 'ProjectsView':
-					return $default;
+					return defaultPredicate;
 				default:
 					return _user$project$Todo$toAllPassPredicate(
 						{
@@ -366,7 +366,7 @@ var _user$project$Model$getTodoListFilterForCurrentView = function (model) {
 							},
 							_1: {
 								ctor: '::',
-								_0: $default,
+								_0: defaultPredicate,
 								_1: {ctor: '[]'}
 							}
 						});
@@ -381,7 +381,7 @@ var _user$project$Model$getTodoListForCurrentView = function (model) {
 		return _user$project$Store$asList(
 			_user$project$Model$getTodoStore(_p23));
 	}(model);
-	var filter = _user$project$Model$getTodoListFilterForCurrentView(model);
+	var filter = _user$project$Model$getTodoListPredicateForCurrentView(model);
 	return A2(
 		_elm_lang$core$List$sortBy,
 		sortFunction,

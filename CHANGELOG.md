@@ -2,6 +2,7 @@
 * ExclusiveMode: centralize edit forms
 * schedule: switch instead of starting with `s` shortcut
 * use Predicate module instead of custom fn in Todo
+* replace bin/done views with entity list views.
 
 ## v0.18.19 - 2017-06-14
 * On-boarding: create default set of entities. 

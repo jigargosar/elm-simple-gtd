@@ -85,16 +85,6 @@ type alias Store x =
     }
 
 
-init name otherFieldsEncoder decoder deviceId encodedList seed =
-    { seed = seed
-    , list = decodeList decoder encodedList
-    , name = name
-    , otherFieldsEncoder = otherFieldsEncoder
-    , decoder = decoder
-    , deviceId = deviceId
-    }
-
-
 generator :
     String
     -> (Document x -> List ( String, E.Value ))
@@ -103,11 +93,16 @@ generator :
     -> List E.Value
     -> Random.Generator (Store x)
 generator name otherFieldsEncoder decoder deviceId encodedList =
-    init name otherFieldsEncoder decoder deviceId encodedList |> Random.mapWithIndependentSeed
-
-
-
---upsert : String -> (Document x -> List ( String, E.Value )) -> Document x -> Cmd msg
+    Random.mapWithIndependentSeed
+        (\seed ->
+            { seed = seed
+            , list = decodeList decoder encodedList
+            , name = name
+            , otherFieldsEncoder = otherFieldsEncoder
+            , decoder = decoder
+            , deviceId = deviceId
+            }
+        )
 
 
 upsertIn store doc =

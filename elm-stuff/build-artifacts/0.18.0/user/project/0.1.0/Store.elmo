@@ -261,21 +261,19 @@ var _user$project$Store$decodeList = function (decoder) {
 				_p13));
 	};
 };
-var _user$project$Store$init = F6(
-	function (name, otherFieldsEncoder, decoder, deviceId, encodedList, seed) {
-		return {
-			seed: seed,
-			list: A2(_user$project$Store$decodeList, decoder, encodedList),
-			name: name,
-			otherFieldsEncoder: otherFieldsEncoder,
-			decoder: decoder,
-			deviceId: deviceId
-		};
-	});
 var _user$project$Store$generator = F5(
 	function (name, otherFieldsEncoder, decoder, deviceId, encodedList) {
 		return _user$project$Ext_Random$mapWithIndependentSeed(
-			A5(_user$project$Store$init, name, otherFieldsEncoder, decoder, deviceId, encodedList));
+			function (seed) {
+				return {
+					seed: seed,
+					list: A2(_user$project$Store$decodeList, decoder, encodedList),
+					name: name,
+					otherFieldsEncoder: otherFieldsEncoder,
+					decoder: decoder,
+					deviceId: deviceId
+				};
+			});
 	});
 var _user$project$Store$pouchDBUpsert = _elm_lang$core$Native_Platform.outgoingPort(
 	'pouchDBUpsert',

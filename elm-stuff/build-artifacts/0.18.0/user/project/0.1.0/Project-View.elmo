@@ -1,6 +1,0 @@
-var _user$project$Project_View$getKey = function (_p0) {
-	return A2(
-		_elm_lang$core$String$append,
-		'project-key-',
-		_user$project$Document$getId(_p0));
-};

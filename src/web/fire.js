@@ -69,8 +69,8 @@ export const setup = (app, dbList, localDeviceId) => {
                 return change.seq
             }
             if (isDocChangeLocal(change.doc)) {
-                console.log("[PouchToFire]: sending local change: ",
-                    change, change.doc.deviceId, localDeviceId)
+                // console.log("[PouchToFire]: sending local change: ",
+                //     change, change.doc.deviceId, localDeviceId)
 
                 const fireDoc =
                     _.compose(_.omit("_rev"), _.merge(change.doc)
@@ -83,8 +83,8 @@ export const setup = (app, dbList, localDeviceId) => {
                     .then(updateLastSeq)
             }
             else {
-                console.log("[PouchToFire]: ignoring non-local change: ",
-                    change, change.doc.deviceId, localDeviceId)
+                // console.log("[PouchToFire]: ignoring non-local change: ",
+                //     change, change.doc.deviceId, localDeviceId)
                 return Promise.resolve(updateLastSeq())
             }
         }
@@ -96,7 +96,7 @@ export const setup = (app, dbList, localDeviceId) => {
              // .log()
              .map(onChange)
              .flatMap(Kefir.fromPromise)
-             .onValue(msg => console.log("[PouchToFire] ", msg))
+             // .onValue(msg => console.log("[PouchToFire] ", msg))
              .onError(e => console.error("[PouchToFire] ", e))
         return changes
     }
@@ -154,7 +154,7 @@ export const setup = (app, dbList, localDeviceId) => {
                   })
             )
             .flatMap(Kefir.fromPromise)
-            .onValue(msg => console.log(msg))
+            // .onValue(msg => console.log(msg))
             .onError(e => {
                 console.error("[FireToELm] ", e)
             })
@@ -183,7 +183,7 @@ export const setup = (app, dbList, localDeviceId) => {
     })
 
     app.ports["firebaseRefPush"].subscribe(([path, value]) => {
-        console.log(`firebaseApp.database().ref(path).push(value)`, {path, value})
+        // console.log(`firebaseApp.database().ref(path).push(value)`, {path, value})
         firebaseApp.database().ref(path).push(value)
     })
 

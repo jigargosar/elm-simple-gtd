@@ -140,12 +140,8 @@ update msg =
                         >> startSyncWithFirebase user
 
                 OnFCMTokenChanged token ->
-                    let
-                        _ =
-                            Debug.log "fcm: token" (token)
-                    in
-                        Return.map (Model.setFCMToken token)
-                            >> Return.maybeEffect firebaseUpdateClientCmd
+                    Return.map (Model.setFCMToken token)
+                        >> Return.maybeEffect firebaseUpdateClientCmd
 
                 OnFirebaseConnectionChanged connected ->
                     Return.map (Model.updateFirebaseConnection connected)

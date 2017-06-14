@@ -75,6 +75,16 @@ decodeList decoder =
             )
 
 
+type alias Store x =
+    { seed : Seed
+    , list : List (Document x)
+    , otherFieldsEncoder : Document x -> List ( String, E.Value )
+    , decoder : Decoder (Document x)
+    , name : String
+    , deviceId : DeviceId
+    }
+
+
 init name otherFieldsEncoder decoder deviceId encodedList seed =
     { seed = seed
     , list = decodeList decoder encodedList
@@ -263,16 +273,6 @@ insert constructor store =
                 in
                     ( newDoc, prepend newDoc store )
            )
-
-
-type alias Store x =
-    { seed : Seed
-    , list : List (Document x)
-    , otherFieldsEncoder : Document x -> List ( String, E.Value )
-    , decoder : Decoder (Document x)
-    , name : String
-    , deviceId : DeviceId
-    }
 
 
 prepend : Document x -> Store x -> Store x

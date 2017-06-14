@@ -117,28 +117,3 @@ setDeviceId deviceId model =
 
 toggleDeleted model =
     { model | deleted = not model.deleted }
-
-
-
---type alias TT msg =
---    Tracker {} {} msg
---
---
---createTracker : TT msg
---createTracker =
---    Port.init (\req -> ping req)
---
---
---port ping : { portRequestId : Int } -> Cmd msg
---
---
---port pong : ({ portRequestId : Int } -> msg) -> Sub msg
---
---
---tt =
---    createTracker
---
---
---test : ( TT msg, Cmd msg )
---test =
---    Port.call { portRequestId = 0 } (\res -> Cmd.none) tt

@@ -6,6 +6,7 @@ import ExclusiveMode
 import Entity
 import Ext.Debug
 import Ext.Record as Record exposing (set)
+import Ext.Time
 import Model
 import Notification
 import Return
@@ -138,9 +139,12 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
             let
                 todoId =
                     Document.getId todo
+
+                formattedDuration =
+                    Ext.Time.toHHMMSS (info.elapsedTime)
             in
                 { tag = todoId
-                , title = "You are currently working on"
+                , title = "Duration " ++ formattedDuration
                 , body = Todo.getText todo
                 , actions =
                     [ { title = "Continue", action = "continue" }

@@ -17,8 +17,10 @@ type State
     | Paused
 
 
-type alias AlarmInfo =
-    ModelRec
+type alias Info =
+    { todoId : Todo.Id
+    , elapsedTime : Time
+    }
 
 
 type alias ModelRec =
@@ -93,6 +95,7 @@ getMaybeTodoId =
     map .todoId
 
 
+updateNextAlarmAt : Time -> Model -> ( Maybe Info, Model )
 updateNextAlarmAt now model =
     case model of
         Nothing ->
@@ -103,12 +106,26 @@ updateNextAlarmAt now model =
                 let
                     newRec =
                         { rec | nextAlarmAt = now + alarmDelay }
+
+                    info =
+                        { todoId = rec.todoId
+                        , elapsedTime = getElapsedTime now newRec
+                        }
                 in
-                    ( Just newRec, newRec )
+                    ( Just info, newRec )
              else
                 ( Nothing, rec )
             )
                 |> Tuple.mapSecond wrap
+
+
+getElapsedTime now rec =
+    case rec.state of
+        Running startedAt ->
+            rec.totalTime + (now - startedAt)
+
+        Paused ->
+            rec.totalTime
 
 
 isTrackingTodo todo =

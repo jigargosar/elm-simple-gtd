@@ -6,6 +6,15 @@ var _user$project$Todo_TimeTracker$isTrackingTodo = function (todo) {
 			return A2(_user$project$Document$hasId, rec.todoId, todo);
 		});
 };
+var _user$project$Todo_TimeTracker$getElapsedTime = F2(
+	function (now, rec) {
+		var _p0 = rec.state;
+		if (_p0.ctor === 'Running') {
+			return rec.totalTime + (now - _p0._0);
+		} else {
+			return rec.totalTime;
+		}
+	});
 var _user$project$Todo_TimeTracker$alarmDelay = 3 * _elm_lang$core$Time$second;
 var _user$project$Todo_TimeTracker$map = _elm_lang$core$Maybe$map;
 var _user$project$Todo_TimeTracker$getMaybeTodoId = _user$project$Todo_TimeTracker$map(
@@ -15,31 +24,39 @@ var _user$project$Todo_TimeTracker$getMaybeTodoId = _user$project$Todo_TimeTrack
 var _user$project$Todo_TimeTracker$wrap = _elm_lang$core$Maybe$Just;
 var _user$project$Todo_TimeTracker$updateNextAlarmAt = F2(
 	function (now, model) {
-		var _p0 = model;
-		if (_p0.ctor === 'Nothing') {
+		var _p1 = model;
+		if (_p1.ctor === 'Nothing') {
 			return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: model};
 		} else {
-			var _p1 = _p0._0;
+			var _p2 = _p1._0;
 			return A2(
 				_elm_lang$core$Tuple$mapSecond,
 				_user$project$Todo_TimeTracker$wrap,
 				function () {
-					if (_elm_lang$core$Native_Utils.cmp(now, _p1.nextAlarmAt) > -1) {
+					if (_elm_lang$core$Native_Utils.cmp(now, _p2.nextAlarmAt) > -1) {
 						var newRec = _elm_lang$core$Native_Utils.update(
-							_p1,
+							_p2,
 							{nextAlarmAt: now + _user$project$Todo_TimeTracker$alarmDelay});
+						var info = {
+							todoId: _p2.todoId,
+							elapsedTime: A2(_user$project$Todo_TimeTracker$getElapsedTime, now, newRec)
+						};
 						return {
 							ctor: '_Tuple2',
-							_0: _elm_lang$core$Maybe$Just(newRec),
+							_0: _elm_lang$core$Maybe$Just(info),
 							_1: newRec
 						};
 					} else {
-						return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: _p1};
+						return {ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: _p2};
 					}
 				}());
 		}
 	});
 var _user$project$Todo_TimeTracker$none = _elm_lang$core$Maybe$Nothing;
+var _user$project$Todo_TimeTracker$Info = F2(
+	function (a, b) {
+		return {todoId: a, elapsedTime: b};
+	});
 var _user$project$Todo_TimeTracker$ModelRec = F4(
 	function (a, b, c, d) {
 		return {todoId: a, totalTime: b, state: c, nextAlarmAt: d};
@@ -60,8 +77,8 @@ var _user$project$Todo_TimeTracker$initRunning = F2(
 	});
 var _user$project$Todo_TimeTracker$toggleStartStop = F3(
 	function (todoId, now, model) {
-		var _p2 = model;
-		if (_p2.ctor === 'Nothing') {
+		var _p3 = model;
+		if (_p3.ctor === 'Nothing') {
 			return A2(_user$project$Todo_TimeTracker$initRunning, todoId, now);
 		} else {
 			return _user$project$Todo_TimeTracker$none;
@@ -74,7 +91,7 @@ var _user$project$Todo_TimeTracker$switchOrStartRunning = F2(
 			'switchOrStartRunning',
 			A2(
 				_elm_community$maybe_extra$Maybe_Extra$unpack,
-				function (_p3) {
+				function (_p4) {
 					return A2(_user$project$Todo_TimeTracker$initRunning, todoId, now);
 				},
 				function (rec) {
@@ -87,11 +104,11 @@ var _user$project$Todo_TimeTracker$switchOrStartRunning = F2(
 var _user$project$Todo_TimeTracker$togglePause = function (now) {
 	return _user$project$Todo_TimeTracker$map(
 		function (rec) {
-			var _p4 = rec.state;
-			if (_p4.ctor === 'Running') {
+			var _p5 = rec.state;
+			if (_p5.ctor === 'Running') {
 				return _elm_lang$core$Native_Utils.update(
 					rec,
-					{totalTime: rec.totalTime + (now - _p4._0), state: _user$project$Todo_TimeTracker$Paused});
+					{totalTime: rec.totalTime + (now - _p5._0), state: _user$project$Todo_TimeTracker$Paused});
 			} else {
 				return _elm_lang$core$Native_Utils.update(
 					rec,

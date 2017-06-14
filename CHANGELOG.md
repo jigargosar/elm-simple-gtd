@@ -1,6 +1,8 @@
+## Upcoming
+* fix running todo header UX 
+
 ## v0.18.24 - 2017-06-14
 * add continue action on tracker notification
-* fix running todo header UX
 
 ## v0.18.23 - 2017-06-14
 * custom-sync view: remove paper input

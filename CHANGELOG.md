@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.25 - 2017-06-14
 * fix running todo header UX 
 
 ## v0.18.24 - 2017-06-14

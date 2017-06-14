@@ -118,7 +118,3 @@ findNameById id =
 
 findByName name =
     Store.findBy (getName >> equals (String.trim name))
-
-
-getEncodedNames =
-    Store.map (.name >> E.string) >> E.list

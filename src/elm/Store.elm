@@ -9,12 +9,10 @@ port module Store
         , map
         , reject
         , asIdDict
-        , asList
         , isEmpty
         , filter
         , updateAll
         , findAndUpdateAll
-        , findAllByIdSetIn
         , upsertOnPouchDBChange
         , upsertInPouchDbOnFirebaseChange
         , persist
@@ -22,12 +20,13 @@ port module Store
         , ChangeList
         )
 
-import Dict
+import Dict exposing (Dict)
 import Dict.Extra
 import Document exposing (Document, Id)
 import Ext.Debug
 import Ext.List as List
 import Ext.Random as Random
+import Ext.Record as Record exposing (get, over, overT2)
 import Firebase exposing (DeviceId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -77,12 +76,16 @@ decodeList decoder =
 
 type alias Store x =
     { seed : Seed
-    , list : List (Document x)
+    , dict : Dict Document.Id (Document x)
     , otherFieldsEncoder : Document x -> List ( String, E.Value )
     , decoder : Decoder (Document x)
     , name : String
     , deviceId : DeviceId
     }
+
+
+dict =
+    Record.init .dict (\s b -> { b | dict = s })
 
 
 type alias OtherFieldsEncoder x =
@@ -100,7 +103,10 @@ generator name otherFieldsEncoder decoder deviceId encodedList =
     Random.mapWithIndependentSeed
         (\seed ->
             { seed = seed
-            , list = decodeList decoder encodedList
+            , dict =
+                decodeList decoder encodedList
+                    .|> apply2 ( Document.getId, identity )
+                    |> Dict.fromList
             , name = name
             , otherFieldsEncoder = otherFieldsEncoder
             , decoder = decoder
@@ -125,7 +131,7 @@ persist s =
                 |> List.filter .dirty
 
         ns =
-            s.list .|> (\d -> { d | dirty = False }) |> setList # s
+            s.list .|> (\d -> { d | dirty = False }) |> setDict # s
 
         cmds =
             dirtyList .|> upsertIn s
@@ -133,14 +139,12 @@ persist s =
         ns ! cmds
 
 
-replaceDoc : Document x -> Store x -> Store x
-replaceDoc doc s =
+replaceDoc doc =
     let
         newDoc =
             { doc | dirty = True }
     in
-        List.replaceIf (Document.equalById doc) (newDoc) s.list
-            |> (setList # s)
+        Dict.insert (Document.getId newDoc) newDoc
 
 
 replaceDocIn =
@@ -192,20 +196,23 @@ findAndUpdateAll pred now updateFn_ store =
         updateFn =
             (getUpdateFnDecorator updateFn_ now store)
 
-        updateAndCollectChanges : Document x -> UpdateAllReturnF x
         updateAndCollectChanges =
-            (\oldDoc ( list, store ) ->
+            (\id oldDoc ( changeList, dict ) ->
                 let
                     newDoc =
                         updateFn oldDoc
                 in
                     -- todo: replace doc actually marks it dirty so we need to get new doc from that function.
-                    ( ( oldDoc, newDoc ) :: list, replaceDocIn store newDoc )
+                    ( ( oldDoc, newDoc ) :: changeList, replaceDocIn dict newDoc )
             )
     in
-        asList store
-            |> List.filter pred
-            |> List.foldl updateAndCollectChanges ( [], store )
+        store
+            |> overT2 dict
+                (\dict ->
+                    dict
+                        |> Dict.filter (\id doc -> pred doc)
+                        |> Dict.foldl updateAndCollectChanges ( [], dict )
+                )
 
 
 decode : D.Value -> Store x -> Maybe (Document x)
@@ -225,14 +232,7 @@ upsertInPouchDbOnFirebaseChange jsonValue store =
 upsertOnPouchDBChange : D.Value -> Store x -> Maybe ( Document x, Store x )
 upsertOnPouchDBChange encodedDoc store =
     decode encodedDoc store
-        ?|> (\doc -> ( doc, upsertDocOnPouchDBChange doc store ))
-
-
-upsertDocOnPouchDBChange doc store =
-    asIdDict store
-        |> Dict.insert (Document.getId doc) doc
-        |> Dict.values
-        |> (setList # store)
+        ?|> (\doc -> ( doc, insertDocInDict doc store ))
 
 
 updateExternalHelp newDoc store =
@@ -248,7 +248,7 @@ updateExternalHelp newDoc store =
                 store
 
         add =
-            prepend newDoc store
+            insertDocInDict newDoc store
     in
         findById id store
             ?|> merge
@@ -270,39 +270,35 @@ insert constructor store =
                     newDoc =
                         { doc | dirty = True }
                 in
-                    ( newDoc, prepend newDoc store )
+                    ( newDoc, insertDocInDict newDoc store )
            )
 
 
-prepend : Document x -> Store x -> Store x
-prepend model =
-    updateList (asList >> (::) model)
+insertDocInDict : Document x -> Store x -> Store x
+insertDocInDict doc =
+    over dict (Dict.insert (Document.getId doc) doc)
 
 
 map fn =
-    asList >> List.map fn
+    get dict >> Dict.map (\id doc -> fn doc)
 
 
 filter fn =
-    asList >> List.filter fn
-
-
-findAllByIdSetIn store idSet =
-    asIdDict store |> Dict.Extra.keepOnly idSet |> Dict.values
+    get dict >> Dict.filter (\id doc -> fn doc)
 
 
 reject fn =
-    asList >> Ext.Function.reject fn
+    filter (fn >> not)
 
 
 findBy : (Document x -> Bool) -> Store x -> Maybe (Document x)
 findBy predicate =
-    asList >> List.find predicate
+    get dict >> Dict.values >> List.find predicate
 
 
 findById : Document.Id -> Store x -> Maybe (Document x)
 findById id =
-    findBy (Document.hasId id)
+    get dict >> Dict.get id
 
 
 getSeed =
@@ -317,23 +313,17 @@ updateSeed updater model =
     setSeed (updater model) model
 
 
-asList : Store x -> List (Document x)
-asList =
-    (.list)
-
-
 isEmpty =
-    asList >> List.isEmpty
+    get dict >> Dict.isEmpty
 
 
 asIdDict =
-    map (apply2 ( Document.getId, identity )) >> Dict.fromList
+    get dict
 
 
-setList list model =
-    { model | list = list }
+setDict dict model =
+    { model | dict = dict }
 
 
-updateList : (Store x -> List (Document x)) -> Store x -> Store x
-updateList updater model =
-    setList (updater model) model
+setDictIn =
+    flip setDict

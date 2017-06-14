@@ -1,15 +1,3 @@
-var _user$project$Context$getEncodedNames = function (_p0) {
-	return _elm_lang$core$Json_Encode$list(
-		A2(
-			_user$project$Store$map,
-			function (_p1) {
-				return _elm_lang$core$Json_Encode$string(
-					function (_) {
-						return _.name;
-					}(_p1));
-			},
-			_p0));
-};
 var _user$project$Context$setName = F2(
 	function (name, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -27,11 +15,11 @@ var _user$project$Context$findNameById = function (id) {
 };
 var _user$project$Context$findByName = function (name) {
 	return _user$project$Store$findBy(
-		function (_p2) {
+		function (_p0) {
 			return A2(
 				_user$project$Ext_Function$equals,
 				_elm_lang$core$String$trim(name),
-				_user$project$Context$getName(_p2));
+				_user$project$Context$getName(_p0));
 		});
 };
 var _user$project$Context$otherFieldsEncoder = function (project) {
@@ -75,19 +63,19 @@ var _user$project$Context$isNull = _user$project$Ext_Function$equals(_user$proje
 var _user$project$Context$sort = _elm_lang$core$List$sortWith(
 	F2(
 		function (v1, v2) {
-			var _p3 = {
+			var _p1 = {
 				ctor: '_Tuple2',
 				_0: _user$project$Context$isNull(v1),
 				_1: _user$project$Context$isNull(v2)
 			};
-			if (_p3._0 === true) {
-				if (_p3._1 === false) {
+			if (_p1._0 === true) {
+				if (_p1._1 === false) {
 					return _elm_lang$core$Basics$LT;
 				} else {
 					return _elm_lang$core$Basics$EQ;
 				}
 			} else {
-				if (_p3._1 === true) {
+				if (_p1._1 === true) {
 					return _elm_lang$core$Basics$GT;
 				} else {
 					return A2(

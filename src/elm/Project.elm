@@ -43,14 +43,6 @@ type alias Store =
     Store.Store Record
 
 
-getEncodedProjectNames =
-    Store.map (getName >> E.string) >> E.list
-
-
-getProjectIdToNameDict =
-    Store.map (apply2 ( Document.getId, getName )) >> Dict.fromList
-
-
 findNameById id =
     Store.findById id >>? getName
 

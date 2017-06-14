@@ -125,24 +125,6 @@ var _user$project$Project$findNameById = function (id) {
 		_user$project$Store$findById(id),
 		_user$project$Project$getName);
 };
-var _user$project$Project$getProjectIdToNameDict = function (_p2) {
-	return _elm_lang$core$Dict$fromList(
-		A2(
-			_user$project$Store$map,
-			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2(
-				{ctor: '_Tuple2', _0: _user$project$Document$getId, _1: _user$project$Project$getName}),
-			_p2));
-};
-var _user$project$Project$getEncodedProjectNames = function (_p3) {
-	return _elm_lang$core$Json_Encode$list(
-		A2(
-			_user$project$Store$map,
-			function (_p4) {
-				return _elm_lang$core$Json_Encode$string(
-					_user$project$Project$getName(_p4));
-			},
-			_p3));
-};
 var _user$project$Project$Record = function (a) {
 	return {name: a};
 };

@@ -1,23 +1,10 @@
-var _user$project$Store$setList = F2(
-	function (list, model) {
+var _user$project$Store$setDict = F2(
+	function (dict, model) {
 		return _elm_lang$core$Native_Utils.update(
 			model,
-			{list: list});
+			{dict: dict});
 	});
-var _user$project$Store$updateList = F2(
-	function (updater, model) {
-		return A2(
-			_user$project$Store$setList,
-			updater(model),
-			model);
-	});
-var _user$project$Store$asList = function (_) {
-	return _.list;
-};
-var _user$project$Store$isEmpty = function (_p0) {
-	return _elm_lang$core$List$isEmpty(
-		_user$project$Store$asList(_p0));
-};
+var _user$project$Store$setDictIn = _elm_lang$core$Basics$flip(_user$project$Store$setDict);
 var _user$project$Store$setSeed = F2(
 	function (seed, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -34,70 +21,6 @@ var _user$project$Store$updateSeed = F2(
 var _user$project$Store$getSeed = function (_) {
 	return _.seed;
 };
-var _user$project$Store$findBy = function (predicate) {
-	return function (_p1) {
-		return A2(
-			_elm_community$list_extra$List_Extra$find,
-			predicate,
-			_user$project$Store$asList(_p1));
-	};
-};
-var _user$project$Store$findById = function (id) {
-	return _user$project$Store$findBy(
-		_user$project$Document$hasId(id));
-};
-var _user$project$Store$reject = function (fn) {
-	return function (_p2) {
-		return A2(
-			_user$project$Ext_Function$reject,
-			fn,
-			_user$project$Store$asList(_p2));
-	};
-};
-var _user$project$Store$filter = function (fn) {
-	return function (_p3) {
-		return A2(
-			_elm_lang$core$List$filter,
-			fn,
-			_user$project$Store$asList(_p3));
-	};
-};
-var _user$project$Store$map = function (fn) {
-	return function (_p4) {
-		return A2(
-			_elm_lang$core$List$map,
-			fn,
-			_user$project$Store$asList(_p4));
-	};
-};
-var _user$project$Store$asIdDict = function (_p5) {
-	return _elm_lang$core$Dict$fromList(
-		A2(
-			_user$project$Store$map,
-			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2(
-				{ctor: '_Tuple2', _0: _user$project$Document$getId, _1: _elm_lang$core$Basics$identity}),
-			_p5));
-};
-var _user$project$Store$findAllByIdSetIn = F2(
-	function (store, idSet) {
-		return _elm_lang$core$Dict$values(
-			A2(
-				_elm_community$dict_extra$Dict_Extra$keepOnly,
-				idSet,
-				_user$project$Store$asIdDict(store)));
-	});
-var _user$project$Store$prepend = function (model) {
-	return _user$project$Store$updateList(
-		function (_p6) {
-			return A2(
-				F2(
-					function (x, y) {
-						return {ctor: '::', _0: x, _1: y};
-					}),
-				model,
-				_user$project$Store$asList(_p6));
-		});
-};
 var _user$project$Store$generate = F2(
 	function (generator, m) {
 		return A2(
@@ -108,26 +31,188 @@ var _user$project$Store$generate = F2(
 				generator,
 				_user$project$Store$getSeed(m)));
 	});
+var _user$project$Store$decode = F2(
+	function (encodedDoc, store) {
+		return _elm_lang$core$Result$toMaybe(
+			A2(
+				_elm_lang$core$Result$mapError,
+				_elm_lang$core$Debug$log(
+					A2(_elm_lang$core$Basics_ops['++'], 'Store ', store.name)),
+				A2(_elm_lang$core$Json_Decode$decodeValue, store.decoder, encodedDoc)));
+	});
+var _user$project$Store$getUpdateFnDecorator = F3(
+	function (updateFn, now, store) {
+		return function (_p0) {
+			return A2(
+				_user$project$Document$setDeviceId,
+				store.deviceId,
+				A2(
+					_user$project$Document$setModifiedAt,
+					now,
+					updateFn(_p0)));
+		};
+	});
+var _user$project$Store$replaceDoc = function (doc) {
+	var newDoc = _elm_lang$core$Native_Utils.update(
+		doc,
+		{dirty: true});
+	return A2(
+		_elm_lang$core$Dict$insert,
+		_user$project$Document$getId(newDoc),
+		newDoc);
+};
+var _user$project$Store$replaceDocIn = _elm_lang$core$Basics$flip(_user$project$Store$replaceDoc);
+var _user$project$Store$encode = F2(
+	function (doc, s) {
+		return A2(_user$project$Document$encode, s.otherFieldsEncoder, doc);
+	});
+var _user$project$Store$dict = A2(
+	_user$project$Ext_Record$init,
+	function (_) {
+		return _.dict;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{dict: s});
+		}));
+var _user$project$Store$findAndUpdateAll = F4(
+	function (pred, now, updateFn_, store) {
+		var updateFn = A3(_user$project$Store$getUpdateFnDecorator, updateFn_, now, store);
+		var updateAndCollectChanges = F3(
+			function (id, oldDoc, _p1) {
+				var _p2 = _p1;
+				var newDoc = updateFn(oldDoc);
+				return {
+					ctor: '_Tuple2',
+					_0: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: oldDoc, _1: newDoc},
+						_1: _p2._0
+					},
+					_1: A2(_user$project$Store$replaceDocIn, _p2._1, newDoc)
+				};
+			});
+		return A3(
+			_user$project$Ext_Record$overT2,
+			_user$project$Store$dict,
+			function (dict) {
+				return A3(
+					_elm_lang$core$Dict$foldl,
+					updateAndCollectChanges,
+					{
+						ctor: '_Tuple2',
+						_0: {ctor: '[]'},
+						_1: dict
+					},
+					A2(
+						_elm_lang$core$Dict$filter,
+						F2(
+							function (id, doc) {
+								return pred(doc);
+							}),
+						dict));
+			},
+			store);
+	});
+var _user$project$Store$updateAll = function (idSet) {
+	return _user$project$Store$findAndUpdateAll(
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
+			function (_p3) {
+				return _elm_lang$core$Set$member(
+					_user$project$Document$getId(_p3));
+			},
+			idSet));
+};
+var _user$project$Store$insertDocInDict = function (doc) {
+	return A2(
+		_user$project$Ext_Record$over,
+		_user$project$Store$dict,
+		A2(
+			_elm_lang$core$Dict$insert,
+			_user$project$Document$getId(doc),
+			doc));
+};
+var _user$project$Store$upsertOnPouchDBChange = F2(
+	function (encodedDoc, store) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			A2(_user$project$Store$decode, encodedDoc, store),
+			function (doc) {
+				return {
+					ctor: '_Tuple2',
+					_0: doc,
+					_1: A2(_user$project$Store$insertDocInDict, doc, store)
+				};
+			});
+	});
 var _user$project$Store$insert = F2(
 	function (constructor, store) {
-		return function (_p7) {
-			var _p8 = _p7;
+		return function (_p4) {
+			var _p5 = _p4;
 			var newDoc = _elm_lang$core$Native_Utils.update(
-				_p8._0,
+				_p5._0,
 				{dirty: true});
 			return {
 				ctor: '_Tuple2',
 				_0: newDoc,
-				_1: A2(_user$project$Store$prepend, newDoc, _p8._1)
+				_1: A2(_user$project$Store$insertDocInDict, newDoc, _p5._1)
 			};
 		}(
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$generate, store)(
 				_user$project$Ext_Random$mapWithIdGenerator(
 					constructor(store.deviceId))));
 	});
+var _user$project$Store$map = function (fn) {
+	return function (_p6) {
+		return A2(
+			_elm_lang$core$Dict$map,
+			F2(
+				function (id, doc) {
+					return fn(doc);
+				}),
+			A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p6));
+	};
+};
+var _user$project$Store$filter = function (fn) {
+	return function (_p7) {
+		return A2(
+			_elm_lang$core$Dict$filter,
+			F2(
+				function (id, doc) {
+					return fn(doc);
+				}),
+			A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p7));
+	};
+};
+var _user$project$Store$reject = function (fn) {
+	return _user$project$Store$filter(
+		function (_p8) {
+			return !fn(_p8);
+		});
+};
+var _user$project$Store$findBy = function (predicate) {
+	return function (_p9) {
+		return A2(
+			_elm_community$list_extra$List_Extra$find,
+			predicate,
+			_elm_lang$core$Dict$values(
+				A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p9)));
+	};
+};
+var _user$project$Store$findById = function (id) {
+	return function (_p10) {
+		return A2(
+			_elm_lang$core$Dict$get,
+			id,
+			A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p10));
+	};
+};
 var _user$project$Store$updateExternalHelp = F2(
 	function (newDoc, store) {
-		var add = A2(_user$project$Store$prepend, newDoc, store);
+		var add = A2(_user$project$Store$insertDocInDict, newDoc, store);
 		var merge = function (oldDoc) {
 			var mergedDoc = 1;
 			return store;
@@ -141,124 +226,28 @@ var _user$project$Store$updateExternalHelp = F2(
 				merge),
 			add);
 	});
-var _user$project$Store$upsertDocOnPouchDBChange = F2(
-	function (doc, store) {
-		return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$setList, store)(
-			_elm_lang$core$Dict$values(
-				A3(
-					_elm_lang$core$Dict$insert,
-					_user$project$Document$getId(doc),
-					doc,
-					_user$project$Store$asIdDict(store))));
-	});
-var _user$project$Store$decode = F2(
-	function (encodedDoc, store) {
-		return _elm_lang$core$Result$toMaybe(
-			A2(
-				_elm_lang$core$Result$mapError,
-				_elm_lang$core$Debug$log(
-					A2(_elm_lang$core$Basics_ops['++'], 'Store ', store.name)),
-				A2(_elm_lang$core$Json_Decode$decodeValue, store.decoder, encodedDoc)));
-	});
-var _user$project$Store$upsertOnPouchDBChange = F2(
-	function (encodedDoc, store) {
-		return A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			A2(_user$project$Store$decode, encodedDoc, store),
-			function (doc) {
-				return {
-					ctor: '_Tuple2',
-					_0: doc,
-					_1: A2(_user$project$Store$upsertDocOnPouchDBChange, doc, store)
-				};
-			});
-	});
-var _user$project$Store$getUpdateFnDecorator = F3(
-	function (updateFn, now, store) {
-		return function (_p9) {
-			return A2(
-				_user$project$Document$setDeviceId,
-				store.deviceId,
-				A2(
-					_user$project$Document$setModifiedAt,
-					now,
-					updateFn(_p9)));
-		};
-	});
-var _user$project$Store$replaceDoc = F2(
-	function (doc, s) {
-		var newDoc = _elm_lang$core$Native_Utils.update(
-			doc,
-			{dirty: true});
-		return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$setList, s)(
-			A3(
-				_elm_community$list_extra$List_Extra$replaceIf,
-				_user$project$Document$equalById(doc),
-				newDoc,
-				s.list));
-	});
-var _user$project$Store$replaceDocIn = _elm_lang$core$Basics$flip(_user$project$Store$replaceDoc);
-var _user$project$Store$findAndUpdateAll = F4(
-	function (pred, now, updateFn_, store) {
-		var updateFn = A3(_user$project$Store$getUpdateFnDecorator, updateFn_, now, store);
-		var updateAndCollectChanges = F2(
-			function (oldDoc, _p10) {
-				var _p11 = _p10;
-				var newDoc = updateFn(oldDoc);
-				return {
-					ctor: '_Tuple2',
-					_0: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: oldDoc, _1: newDoc},
-						_1: _p11._0
-					},
-					_1: A2(_user$project$Store$replaceDocIn, _p11._1, newDoc)
-				};
-			});
-		return A3(
-			_elm_lang$core$List$foldl,
-			updateAndCollectChanges,
-			{
-				ctor: '_Tuple2',
-				_0: {ctor: '[]'},
-				_1: store
-			},
-			A2(
-				_elm_lang$core$List$filter,
-				pred,
-				_user$project$Store$asList(store)));
-	});
-var _user$project$Store$updateAll = function (idSet) {
-	return _user$project$Store$findAndUpdateAll(
-		A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-			function (_p12) {
-				return _elm_lang$core$Set$member(
-					_user$project$Document$getId(_p12));
-			},
-			idSet));
+var _user$project$Store$isEmpty = function (_p11) {
+	return _elm_lang$core$Dict$isEmpty(
+		A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p11));
 };
-var _user$project$Store$encode = F2(
-	function (doc, s) {
-		return A2(_user$project$Document$encode, s.otherFieldsEncoder, doc);
-	});
+var _user$project$Store$asIdDict = _user$project$Ext_Record$get(_user$project$Store$dict);
 var _user$project$Store$decodeList = function (decoder) {
-	return function (_p13) {
+	return function (_p12) {
 		return A2(
 			_elm_lang$core$List$filterMap,
 			function (result) {
-				var _p14 = result;
-				if (_p14.ctor === 'Ok') {
-					return _elm_lang$core$Maybe$Just(_p14._0);
+				var _p13 = result;
+				if (_p13.ctor === 'Ok') {
+					return _elm_lang$core$Maybe$Just(_p13._0);
 				} else {
-					var _p15 = A2(_elm_lang$core$Debug$log, 'Error while decoding Project', _p14._0);
+					var _p14 = A2(_elm_lang$core$Debug$log, 'Error while decoding Project', _p13._0);
 					return _elm_lang$core$Maybe$Nothing;
 				}
 			},
 			A2(
 				_elm_lang$core$List$map,
 				_elm_lang$core$Json_Decode$decodeValue(decoder),
-				_p13));
+				_p12));
 	};
 };
 var _user$project$Store$generator = F5(
@@ -267,7 +256,12 @@ var _user$project$Store$generator = F5(
 			function (seed) {
 				return {
 					seed: seed,
-					list: A2(_user$project$Store$decodeList, decoder, encodedList),
+					dict: _elm_lang$core$Dict$fromList(
+						A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+							A2(_user$project$Store$decodeList, decoder, encodedList),
+							_danielnarey$elm_toolkit$Toolkit_Helpers$apply2(
+								{ctor: '_Tuple2', _0: _user$project$Document$getId, _1: _elm_lang$core$Basics$identity}))),
 					name: name,
 					otherFieldsEncoder: otherFieldsEncoder,
 					decoder: decoder,
@@ -291,7 +285,7 @@ var _user$project$Store$upsertIn = F2(
 			});
 	});
 var _user$project$Store$persist = function (s) {
-	var ns = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$setList, s)(
+	var ns = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$setDict, s)(
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 			s.list,
@@ -336,11 +330,11 @@ var _user$project$Store$pouchDBChanges = _elm_lang$core$Native_Platform.incoming
 				A2(_elm_lang$core$Json_Decode$index, 1, _elm_lang$core$Json_Decode$value));
 		},
 		A2(_elm_lang$core$Json_Decode$index, 0, _elm_lang$core$Json_Decode$string)));
-var _user$project$Store$onChange = function (_p16) {
+var _user$project$Store$onChange = function (_p15) {
 	return _user$project$Store$pouchDBChanges(
-		_elm_lang$core$Basics$uncurry(_p16));
+		_elm_lang$core$Basics$uncurry(_p15));
 };
 var _user$project$Store$Store = F6(
 	function (a, b, c, d, e, f) {
-		return {seed: a, list: b, otherFieldsEncoder: c, decoder: d, name: e, deviceId: f};
+		return {seed: a, dict: b, otherFieldsEncoder: c, decoder: d, name: e, deviceId: f};
 	});

@@ -82,7 +82,7 @@ type Msg
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | OnEntityListKeyDown (List Entity) KeyboardEvent
     | SwitchView ViewType
-    | SetGroupByView EntityListViewType
+    | OnSetEntityListView EntityListViewType
     | ShowReminderOverlayForTodoId Todo.Id
     | OnNowChanged Time
     | OnKeyboardMsg Keyboard.Msg
@@ -372,9 +372,17 @@ isLayoutAutoNarrow =
         >> uncurry and
 
 
-filterTodos pred model =
+filterTodosAndSortBy pred sortBy model =
     Store.filter pred model.todoStore
-        |> List.sortBy (Todo.getCreatedAt >> negate)
+        |> List.sortBy sortBy
+
+
+filterTodosAndSortByLatestCreated pred =
+    filterTodosAndSortBy pred (Todo.getCreatedAt >> negate)
+
+
+filterTodosAndSortByLatestModified pred =
+    filterTodosAndSortBy pred (Todo.getModifiedAt >> negate)
 
 
 filterContexts pred model =
@@ -420,7 +428,7 @@ createGrouping viewType model =
                 Pred.all [ Todo.isNotDeleted, Todo.isNotDone ]
 
         filterTodosForContext context =
-            filterTodos
+            filterTodosAndSortByLatestCreated
                 (Pred.all
                     [ todoFilter
                     , Todo.contextFilter context
@@ -429,7 +437,7 @@ createGrouping viewType model =
                 model
 
         filterTodosForProject project =
-            filterTodos
+            filterTodosAndSortByLatestCreated
                 (Pred.all
                     [ todoFilter
                     , Todo.projectFilter project
@@ -461,6 +469,10 @@ createGrouping viewType model =
                 findProjectById id model
                     ?= Project.null
                     |> Entity.createGroupingForProject filterTodosForProject findContextByIdHelp
+
+            Entity.BinView ->
+                Entity.createGroupingForTodoList
+                    (filterTodosAndSortByLatestModified Document.isDeleted model)
 
 
 getActiveTodoList =
@@ -609,7 +621,9 @@ switchToEntityListViewFromEntity entity model =
         maybeEntityListViewType =
             maybeGetCurrentEntityListViewType model
     in
-        entity |> Entity.getGotoEntityViewType maybeEntityListViewType |> (setEntityListViewType # model)
+        entity
+            |> Entity.getGotoEntityViewType maybeEntityListViewType
+            |> (setEntityListViewType # model)
 
 
 updateEditModeNameChanged newName entity model =
@@ -817,6 +831,9 @@ getTodoListPredicateForCurrentView model =
 
                     Entity.ProjectView id ->
                         Pred.all [ Todo.getProjectId >> equals id, defaultPredicate ]
+
+                    Entity.BinView ->
+                        Document.isDeleted
 
             _ ->
                 always (True)

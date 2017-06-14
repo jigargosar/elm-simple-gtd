@@ -82,6 +82,9 @@ getViewInfo mainViewType projectsVM contextsVM =
                     Entity.ProjectView id ->
                         projectsVM.entityList |> appHeaderInfoById id
 
+                    Entity.BinView ->
+                        ( "Bin", sgtdBlue )
+
             BinView ->
                 ( "Bin", sgtdBlue )
 

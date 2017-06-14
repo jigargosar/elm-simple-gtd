@@ -547,7 +547,7 @@ var _user$project$Main$update = function (msg) {
 					case 'SwitchView':
 						return _Fresheyeball$elm_return$Return$map(
 							_user$project$Model$switchToView(_p14._0));
-					case 'SetGroupByView':
+					case 'OnSetEntityListView':
 						return _Fresheyeball$elm_return$Return$map(
 							_user$project$Model$setEntityListViewType(_p14._0));
 					case 'ShowReminderOverlayForTodoId':

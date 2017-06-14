@@ -343,7 +343,7 @@ var _user$project$Model$getTodoListPredicateForCurrentView = function (model) {
 						});
 				case 'ProjectsView':
 					return defaultPredicate;
-				default:
+				case 'ProjectView':
 					return _user$project$Ext_Predicate$all(
 						{
 							ctor: '::',
@@ -359,6 +359,8 @@ var _user$project$Model$getTodoListPredicateForCurrentView = function (model) {
 								_1: {ctor: '[]'}
 							}
 						});
+				default:
+					return _user$project$Document$isDeleted;
 			}
 		default:
 			return _elm_lang$core$Basics$always(true);
@@ -592,16 +594,31 @@ var _user$project$Model$filterCurrentContexts = function (model) {
 		model);
 };
 var _user$project$Model$getActiveContexts = _user$project$Model$filterContexts(_user$project$Document$isNotDeleted);
-var _user$project$Model$filterTodos = F2(
-	function (pred, model) {
+var _user$project$Model$filterTodosAndSortBy = F3(
+	function (pred, sortBy, model) {
 		return A2(
 			_elm_lang$core$List$sortBy,
-			function (_p29) {
-				return _elm_lang$core$Basics$negate(
-					_user$project$Todo$getCreatedAt(_p29));
-			},
+			sortBy,
 			A2(_user$project$Store$filter, pred, model.todoStore));
 	});
+var _user$project$Model$filterTodosAndSortByLatestCreated = function (pred) {
+	return A2(
+		_user$project$Model$filterTodosAndSortBy,
+		pred,
+		function (_p29) {
+			return _elm_lang$core$Basics$negate(
+				_user$project$Todo$getCreatedAt(_p29));
+		});
+};
+var _user$project$Model$filterTodosAndSortByLatestModified = function (pred) {
+	return A2(
+		_user$project$Model$filterTodosAndSortBy,
+		pred,
+		function (_p30) {
+			return _elm_lang$core$Basics$negate(
+				_user$project$Todo$getModifiedAt(_p30));
+		});
+};
 var _user$project$Model$createGrouping = F2(
 	function (viewType, model) {
 		var findContextByIdHelp = function (id) {
@@ -622,7 +639,7 @@ var _user$project$Model$createGrouping = F2(
 			});
 		var filterTodosForContext = function (context) {
 			return A2(
-				_user$project$Model$filterTodos,
+				_user$project$Model$filterTodosAndSortByLatestCreated,
 				_user$project$Ext_Predicate$all(
 					{
 						ctor: '::',
@@ -637,7 +654,7 @@ var _user$project$Model$createGrouping = F2(
 		};
 		var filterTodosForProject = function (project) {
 			return A2(
-				_user$project$Model$filterTodos,
+				_user$project$Model$filterTodosAndSortByLatestCreated,
 				_user$project$Ext_Predicate$all(
 					{
 						ctor: '::',
@@ -650,11 +667,11 @@ var _user$project$Model$createGrouping = F2(
 					}),
 				model);
 		};
-		var deletedFilter = model.showDeleted ? _user$project$Document$isDeleted : function (_p30) {
-			return !_user$project$Document$isDeleted(_p30);
+		var deletedFilter = model.showDeleted ? _user$project$Document$isDeleted : function (_p31) {
+			return !_user$project$Document$isDeleted(_p31);
 		};
-		var _p31 = viewType;
-		switch (_p31.ctor) {
+		var _p32 = viewType;
+		switch (_p32.ctor) {
 			case 'ContextsView':
 				return A2(
 					_user$project$Entity$createGroupingForContexts,
@@ -672,29 +689,32 @@ var _user$project$Model$createGrouping = F2(
 					findProjectByIdHelp,
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(_user$project$Model$findContextById, _p31._0, model),
+						A2(_user$project$Model$findContextById, _p32._0, model),
 						_user$project$Context$null));
-			default:
+			case 'ProjectView':
 				return A3(
 					_user$project$Entity$createGroupingForProject,
 					filterTodosForProject,
 					findContextByIdHelp,
 					A2(
 						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-						A2(_user$project$Model$findProjectById, _p31._0, model),
+						A2(_user$project$Model$findProjectById, _p32._0, model),
 						_user$project$Project$null));
+			default:
+				return _user$project$Entity$createGroupingForTodoList(
+					A2(_user$project$Model$filterTodosAndSortByLatestModified, _user$project$Document$isDeleted, model));
 		}
 	});
 var _user$project$Model$getCurrentViewEntityList = function (model) {
-	var _p32 = model.mainViewType;
-	if (_p32.ctor === 'EntityListView') {
+	var _p33 = model.mainViewType;
+	if (_p33.ctor === 'EntityListView') {
 		return _user$project$Entity$flattenGrouping(
-			A2(_user$project$Model$createGrouping, _p32._0, model));
+			A2(_user$project$Model$createGrouping, _p33._0, model));
 	} else {
 		return {ctor: '[]'};
 	}
 };
-var _user$project$Model$isLayoutAutoNarrow = function (_p33) {
+var _user$project$Model$isLayoutAutoNarrow = function (_p34) {
 	return A2(
 		_elm_lang$core$Basics$uncurry,
 		_user$project$Ext_Function$and,
@@ -702,24 +722,24 @@ var _user$project$Model$isLayoutAutoNarrow = function (_p33) {
 			_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
 			{
 				ctor: '_Tuple2',
-				_0: function (_p34) {
+				_0: function (_p35) {
 					return !function (_) {
 						return _.forceNarrow;
-					}(_p34);
+					}(_p35);
 				},
 				_1: function (_) {
 					return _.narrow;
 				}
 			},
-			_user$project$Model$getLayout(_p33)));
+			_user$project$Model$getLayout(_p34)));
 };
-var _user$project$Model$getLayoutForceNarrow = function (_p35) {
+var _user$project$Model$getLayoutForceNarrow = function (_p36) {
 	return function (_) {
 		return _.forceNarrow;
 	}(
 		function (_) {
 			return _.layout;
-		}(_p35));
+		}(_p36));
 };
 var _user$project$Model$setLayoutNarrow = function (narrow) {
 	return _user$project$Model$updateLayout(
@@ -735,17 +755,17 @@ var _user$project$Model$toggleLayoutForceNarrow = _user$project$Model$updateLayo
 			layout,
 			{forceNarrow: !layout.forceNarrow});
 	});
-var _user$project$Model$getMaybeUserId = function (_p36) {
+var _user$project$Model$getMaybeUserId = function (_p37) {
 	return _user$project$Firebase$getMaybeUserId(
 		function (_) {
 			return _.user;
-		}(_p36));
+		}(_p37));
 };
-var _user$project$Model$getMaybeUserProfile = function (_p37) {
+var _user$project$Model$getMaybeUserProfile = function (_p38) {
 	return _user$project$Firebase$getMaybeUserProfile(
 		function (_) {
 			return _.user;
-		}(_p37));
+		}(_p38));
 };
 var _user$project$Model$inboxEntity = _user$project$Entity$ContextEntity(_user$project$Context$null);
 var _user$project$Model$keyComboModel = A2(
@@ -822,9 +842,9 @@ var _user$project$Model$updateEntityListCursorFromEntityIndexTuple = F2(
 				_user$project$Model$getCurrentViewEntityList(model));
 		};
 		return function () {
-			var _p38 = indexTuple;
-			if (((_p38.ctor === '_Tuple2') && (_p38._0.ctor === 'Just')) && (_p38._1.ctor === 'Nothing')) {
-				return setFocusInIndex(_p38._0._0);
+			var _p39 = indexTuple;
+			if (((_p39.ctor === '_Tuple2') && (_p39._0.ctor === 'Just')) && (_p39._1.ctor === 'Nothing')) {
+				return setFocusInIndex(_p39._0._0);
 			} else {
 				return _elm_lang$core$Basics$identity;
 			}
@@ -837,9 +857,9 @@ var _user$project$Model$updateEntityListCursor = F2(
 			newModel,
 			A2(
 				_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth,
-				function (_p39) {
+				function (_p40) {
 					return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$getMaybeFocusInEntityIndex, oldModel)(
-						_user$project$Model$getCurrentViewEntityList(_p39));
+						_user$project$Model$getCurrentViewEntityList(_p40));
 				},
 				{ctor: '_Tuple2', _0: oldModel, _1: newModel}));
 	});
@@ -1000,11 +1020,11 @@ var _user$project$Model$findAndUpdateAllTodos = F3(
 	function (findFn, action, model) {
 		var updateFn = _user$project$Todo$update(action);
 		return _Fresheyeball$elm_return$Return$singleton(
-			function (_p40) {
+			function (_p41) {
 				return A2(
 					_user$project$Model$updateEntityListCursor,
 					model,
-					_elm_lang$core$Tuple$second(_p40));
+					_elm_lang$core$Tuple$second(_p41));
 			}(
 				A3(
 					_user$project$Ext_Record$overT2,
@@ -1022,7 +1042,7 @@ var _user$project$Model$updateTodo = F2(
 var _user$project$Model$snoozeTodoWithOffset = F3(
 	function (snoozeOffset, todoId, model) {
 		var time = A2(_user$project$ReminderOverlay$addSnoozeOffset, model.now, snoozeOffset);
-		return function (_p41) {
+		return function (_p42) {
 			return A2(
 				_elm_lang$core$Tuple$mapFirst,
 				_user$project$Model$removeReminderOverlay,
@@ -1030,22 +1050,22 @@ var _user$project$Model$snoozeTodoWithOffset = F3(
 					_user$project$Model$updateTodo,
 					_user$project$Todo$SnoozeTill(time),
 					todoId,
-					_p41));
+					_p42));
 		}(model);
 	});
 var _user$project$Model$findAndSnoozeOverDueTodo = function (model) {
 	var snooze = function (todoId) {
-		return function (_p42) {
-			var _p43 = _p42;
-			var _p44 = _p43._0;
+		return function (_p43) {
+			var _p44 = _p43;
+			var _p45 = _p44._0;
 			return A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-				A2(_user$project$Model$findTodoById, todoId, _p44),
+				A2(_user$project$Model$findTodoById, todoId, _p45),
 				function (todo) {
 					return {
 						ctor: '_Tuple2',
-						_0: {ctor: '_Tuple2', _0: todo, _1: _p44},
-						_1: _p43._1
+						_0: {ctor: '_Tuple2', _0: todo, _1: _p45},
+						_1: _p44._1
 					};
 				});
 		}(
@@ -1061,9 +1081,9 @@ var _user$project$Model$findAndSnoozeOverDueTodo = function (model) {
 			_user$project$Store$findBy,
 			_user$project$Todo$isReminderOverdue(model.now),
 			model.todoStore),
-		function (_p45) {
+		function (_p46) {
 			return snooze(
-				_user$project$Document$getId(_p45));
+				_user$project$Document$getId(_p46));
 		});
 };
 var _user$project$Model$updateAllTodos = F3(
@@ -1072,9 +1092,9 @@ var _user$project$Model$updateAllTodos = F3(
 			_user$project$Model$findAndUpdateAllTodos,
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'],
-				function (_p46) {
+				function (_p47) {
 					return _elm_lang$core$Set$member(
-						_user$project$Document$getId(_p46));
+						_user$project$Document$getId(_p47));
 				},
 				idSet),
 			action,
@@ -1137,8 +1157,8 @@ var _user$project$Model$createContext = F2(
 	});
 var _user$project$Model$upsertEncodedDocOnPouchDBChange = F2(
 	function (dbName, encodedEntity) {
-		var _p47 = dbName;
-		switch (_p47) {
+		var _p48 = dbName;
+		switch (_p48) {
 			case 'todo-db':
 				return A2(
 					_user$project$Ext_Function_Infix_ops['>>?'],
@@ -1164,7 +1184,7 @@ var _user$project$Model$upsertEncodedDocOnPouchDBChange = F2(
 						_user$project$Store$upsertOnPouchDBChange(encodedEntity)),
 					_elm_lang$core$Tuple$mapFirst(_user$project$Entity$ContextEntity));
 			default:
-				return function (_p48) {
+				return function (_p49) {
 					return _elm_lang$core$Maybe$Nothing;
 				};
 		}
@@ -1178,65 +1198,65 @@ var _user$project$Model$updateContext = F2(
 			_user$project$Model$contextStore);
 	});
 var _user$project$Model$saveCurrentForm = function (model) {
-	var _p49 = model.editMode;
-	switch (_p49.ctor) {
+	var _p50 = model.editMode;
+	switch (_p50.ctor) {
 		case 'EditContext':
-			var _p50 = _p49._0;
+			var _p51 = _p50._0;
 			return A3(
 				_user$project$Model$updateContext,
-				_p50.id,
-				_user$project$Context$setName(_p50.name),
+				_p51.id,
+				_user$project$Context$setName(_p51.name),
 				model);
 		case 'EditProject':
-			var _p51 = _p49._0;
+			var _p52 = _p50._0;
 			return A3(
 				_user$project$Model$updateProject,
-				_p51.id,
-				_user$project$Project$setName(_p51.name),
+				_p52.id,
+				_user$project$Project$setName(_p52.name),
 				model);
 		case 'EditTodo':
-			var _p52 = _p49._0;
+			var _p53 = _p50._0;
 			return A3(
 				_user$project$Model$updateTodo,
-				_user$project$Todo$SetText(_p52.todoText),
-				_p52.id,
+				_user$project$Todo$SetText(_p53.todoText),
+				_p53.id,
 				model);
 		case 'EditTodoReminder':
-			var _p53 = _p49._0;
+			var _p54 = _p50._0;
 			return A3(
 				_user$project$Model$updateTodo,
 				_user$project$Todo$SetScheduleFromMaybeTime(
-					_user$project$Todo_ReminderForm$getMaybeTime(_p53)),
-				_p53.id,
+					_user$project$Todo_ReminderForm$getMaybeTime(_p54)),
+				_p54.id,
 				model);
 		case 'EditTodoContext':
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'EditTodoProject':
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'NewTodo':
-			var _p56 = _p49._0;
+			var _p57 = _p50._0;
 			return A2(
 				_elm_lang$core$Basics$uncurry,
 				function (todoId) {
-					return function (_p54) {
+					return function (_p55) {
 						return A2(
 							_elm_lang$core$Tuple$mapFirst,
 							_user$project$Model$setFocusInEntityFromTodoId(todoId),
 							A3(
 								_user$project$Model$updateTodo,
 								function () {
-									var _p55 = _p56.referenceEntity;
-									switch (_p55.ctor) {
+									var _p56 = _p57.referenceEntity;
+									switch (_p56.ctor) {
 										case 'TodoEntity':
-											return _user$project$Todo$CopyProjectAndContextId(_p55._0);
+											return _user$project$Todo$CopyProjectAndContextId(_p56._0);
 										case 'ContextEntity':
-											return _user$project$Todo$SetContext(_p55._0);
+											return _user$project$Todo$SetContext(_p56._0);
 										default:
-											return _user$project$Todo$SetProject(_p55._0);
+											return _user$project$Todo$SetProject(_p56._0);
 									}
 								}(),
 								todoId,
-								_p54));
+								_p55));
 					};
 				},
 				A2(
@@ -1247,13 +1267,13 @@ var _user$project$Model$saveCurrentForm = function (model) {
 						A2(
 							_user$project$Todo$init,
 							model.now,
-							_user$project$Todo_NewForm$getText(_p56)),
+							_user$project$Todo_NewForm$getText(_p57)),
 						model)));
 		case 'EditSyncSettings':
 			return _Fresheyeball$elm_return$Return$singleton(
 				_elm_lang$core$Native_Utils.update(
 					model,
-					{pouchDBRemoteSyncURI: _p49._0.uri}));
+					{pouchDBRemoteSyncURI: _p50._0.uri}));
 		case 'LaunchBar':
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'None':
@@ -1266,8 +1286,8 @@ var _user$project$Model$toggleDeleteEntity = F2(
 	function (entity, model) {
 		var entityId = _user$project$Model$getEntityId(entity);
 		return function () {
-			var _p57 = entity;
-			switch (_p57.ctor) {
+			var _p58 = entity;
+			switch (_p58.ctor) {
 				case 'ContextEntity':
 					return A2(_user$project$Model$updateContext, entityId, _user$project$Document$toggleDeleted);
 				case 'ProjectEntity':
@@ -1358,17 +1378,17 @@ var _user$project$Model$OnTodoMsgWithTime = F2(
 var _user$project$Model$OnTodoMsg = function (a) {
 	return {ctor: 'OnTodoMsg', _0: a};
 };
-var _user$project$Model$onTodoToggleRunning = function (_p58) {
+var _user$project$Model$onTodoToggleRunning = function (_p59) {
 	return _user$project$Model$OnTodoMsg(
-		_user$project$Todo_Msg$ToggleRunning(_p58));
+		_user$project$Todo_Msg$ToggleRunning(_p59));
 };
-var _user$project$Model$onTodoInitRunning = function (_p59) {
+var _user$project$Model$onTodoInitRunning = function (_p60) {
 	return _user$project$Model$OnTodoMsg(
-		_user$project$Todo_Msg$InitRunning(_p59));
+		_user$project$Todo_Msg$InitRunning(_p60));
 };
-var _user$project$Model$onRunningTodoNotificationClicked = function (_p60) {
+var _user$project$Model$onRunningTodoNotificationClicked = function (_p61) {
 	return _user$project$Model$OnTodoMsg(
-		_user$project$Todo_Msg$RunningNotificationResponse(_p60));
+		_user$project$Todo_Msg$RunningNotificationResponse(_p61));
 };
 var _user$project$Model$onTodoStopRunning = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$StopRunning);
 var _user$project$Model$onTodoTogglePaused = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$TogglePaused);
@@ -1419,8 +1439,8 @@ var _user$project$Model$OnNowChanged = function (a) {
 var _user$project$Model$ShowReminderOverlayForTodoId = function (a) {
 	return {ctor: 'ShowReminderOverlayForTodoId', _0: a};
 };
-var _user$project$Model$SetGroupByView = function (a) {
-	return {ctor: 'SetGroupByView', _0: a};
+var _user$project$Model$OnSetEntityListView = function (a) {
+	return {ctor: 'OnSetEntityListView', _0: a};
 };
 var _user$project$Model$SwitchView = function (a) {
 	return {ctor: 'SwitchView', _0: a};
@@ -1532,12 +1552,12 @@ var _user$project$Model$EntityListView = function (a) {
 };
 var _user$project$Model$init = function (flags) {
 	var firebaseClient = _user$project$Firebase$initClient(flags.deviceId);
-	var _p61 = flags;
-	var now = _p61.now;
-	var encodedTodoList = _p61.encodedTodoList;
-	var encodedProjectList = _p61.encodedProjectList;
-	var encodedContextList = _p61.encodedContextList;
-	var pouchDBRemoteSyncURI = _p61.pouchDBRemoteSyncURI;
+	var _p62 = flags;
+	var now = _p62.now;
+	var encodedTodoList = _p62.encodedTodoList;
+	var encodedProjectList = _p62.encodedProjectList;
+	var encodedContextList = _p62.encodedContextList;
+	var pouchDBRemoteSyncURI = _p62.pouchDBRemoteSyncURI;
 	var storeGenerator = A4(
 		_mgold$elm_random_pcg$Random_Pcg$map3,
 		F3(
@@ -1547,14 +1567,14 @@ var _user$project$Model$init = function (flags) {
 		A2(_user$project$Todo_Store$generator, flags.deviceId, encodedTodoList),
 		A2(_user$project$Project$storeGenerator, flags.deviceId, encodedProjectList),
 		A2(_user$project$Context$storeGenerator, flags.deviceId, encodedContextList));
-	var _p62 = A2(
+	var _p63 = A2(
 		_mgold$elm_random_pcg$Random_Pcg$step,
 		storeGenerator,
 		_user$project$Ext_Random$seedFromTime(now));
-	var todoStore = _p62._0._0;
-	var projectStore = _p62._0._1;
-	var contextStore = _p62._0._2;
-	var seed = _p62._1;
+	var todoStore = _p63._0._0;
+	var projectStore = _p63._0._1;
+	var contextStore = _p63._0._2;
+	var seed = _p63._1;
 	var editMode = (_user$project$Store$isEmpty(todoStore) || (_user$project$Store$isEmpty(contextStore) || _user$project$Store$isEmpty(projectStore))) ? _user$project$ExclusiveMode$firstVisit : _user$project$ExclusiveMode$none;
 	var model = {
 		now: now,
@@ -1583,23 +1603,23 @@ var _user$project$Model$init = function (flags) {
 	};
 	return _Fresheyeball$elm_return$Return$singleton(model);
 };
-var _user$project$Model$projectView = function (_p63) {
+var _user$project$Model$projectView = function (_p64) {
 	return _user$project$Model$EntityListView(
 		_user$project$Entity$ProjectView(
-			_user$project$Document$getId(_p63)));
+			_user$project$Document$getId(_p64)));
 };
-var _user$project$Model$switchToProjectView = function (_p64) {
+var _user$project$Model$switchToProjectView = function (_p65) {
 	return _user$project$Model$switchToView(
-		_user$project$Model$projectView(_p64));
+		_user$project$Model$projectView(_p65));
 };
 var _user$project$Model$createAndEditNewProject = function (model) {
-	return function (_p65) {
-		var _p66 = _p65;
-		var _p67 = _p66._0;
+	return function (_p66) {
+		var _p67 = _p66;
+		var _p68 = _p67._0;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Entity$ProjectEntity(_p67),
-			A2(_user$project$Model$switchToProjectView, _p67, _p66._1));
+			_user$project$Entity$ProjectEntity(_p68),
+			A2(_user$project$Model$switchToProjectView, _p68, _p67._1));
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -1609,23 +1629,23 @@ var _user$project$Model$createAndEditNewProject = function (model) {
 				A2(_user$project$Project$init, '<New Project>', model.now),
 				model.projectStore)));
 };
-var _user$project$Model$contextView = function (_p68) {
+var _user$project$Model$contextView = function (_p69) {
 	return _user$project$Model$EntityListView(
 		_user$project$Entity$ContextView(
-			_user$project$Document$getId(_p68)));
+			_user$project$Document$getId(_p69)));
 };
-var _user$project$Model$switchToContextView = function (_p69) {
+var _user$project$Model$switchToContextView = function (_p70) {
 	return _user$project$Model$switchToView(
-		_user$project$Model$contextView(_p69));
+		_user$project$Model$contextView(_p70));
 };
 var _user$project$Model$createAndEditNewContext = function (model) {
-	return function (_p70) {
-		var _p71 = _p70;
-		var _p72 = _p71._0;
+	return function (_p71) {
+		var _p72 = _p71;
+		var _p73 = _p72._0;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Entity$ContextEntity(_p72),
-			A2(_user$project$Model$switchToContextView, _p72, _p71._1));
+			_user$project$Entity$ContextEntity(_p73),
+			A2(_user$project$Model$switchToContextView, _p73, _p72._1));
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -1637,9 +1657,9 @@ var _user$project$Model$createAndEditNewContext = function (model) {
 };
 var _user$project$Model$switchToContextsView = _user$project$Model$switchToView(
 	_user$project$Model$EntityListView(_user$project$Entity$ContextsView));
-var _user$project$Model$setEntityListViewType = function (_p73) {
+var _user$project$Model$setEntityListViewType = function (_p74) {
 	return _user$project$Model$switchToView(
-		_user$project$Model$EntityListView(_p73));
+		_user$project$Model$EntityListView(_p74));
 };
 var _user$project$Model$switchToEntityListViewFromEntity = F2(
 	function (entity, model) {

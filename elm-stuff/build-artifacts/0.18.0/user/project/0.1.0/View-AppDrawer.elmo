@@ -1,3 +1,38 @@
+var _user$project$View_AppDrawer$onSetEntityListView = F3(
+	function (iconName, viewType, title) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$item,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Model$OnSetEntityListView(viewType)),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A3(
+					_elm_lang$html$Html$node,
+					'iron-icon',
+					{
+						ctor: '::',
+						_0: _user$project$WebComponents$iconA(iconName),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_edvail$elm_polymer$Polymer_Paper$itemBody,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(title),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
 var _user$project$View_AppDrawer$switchViewItem = F3(
 	function (iconName, viewType, title) {
 		return A2(
@@ -271,8 +306,10 @@ var _user$project$View_AppDrawer$getSelectedIndex = function (_p3) {
 					return 1 + contextIndexById(_p8._0);
 				case 'ProjectsView':
 					return projectsIndex;
-				default:
+				case 'ProjectView':
 					return (1 + projectsIndex) + projectIndexById(_p8._0);
+				default:
+					return lastProjectIndex + 1;
 			}
 		case 'BinView':
 			return lastProjectIndex + 1;
@@ -324,7 +361,7 @@ var _user$project$View_AppDrawer$navList = F2(
 							},
 							{
 								ctor: '::',
-								_0: A3(_user$project$View_AppDrawer$switchViewItem, 'delete', _user$project$Model$BinView, 'Bin'),
+								_0: A3(_user$project$View_AppDrawer$onSetEntityListView, 'delete', _user$project$Entity$BinView, 'Bin'),
 								_1: {
 									ctor: '::',
 									_0: A3(_user$project$View_AppDrawer$switchViewItem, 'done', _user$project$Model$DoneView, 'Done'),

@@ -26,6 +26,7 @@ type ListViewType
     | ContextView Document.Id
     | ProjectsView
     | ProjectView Document.Id
+    | BinView
 
 
 type Action
@@ -93,6 +94,9 @@ routes viewType =
             else
                 [ "context", id ]
 
+        BinView ->
+            [ "bin" ]
+
 
 getTodoGotoGroupView todo prevView =
     let
@@ -114,6 +118,9 @@ getTodoGotoGroupView todo prevView =
 
             ContextView _ ->
                 projectView
+
+            BinView ->
+                ContextsView
 
 
 getGotoEntityViewType : Maybe ListViewType -> Entity -> ListViewType
@@ -155,6 +162,7 @@ type Grouping
     | SingleProject TodoProjectGroup (List TodoContextGroup)
     | MultiContext (List TodoContextGroup)
     | MultiProject (List TodoProjectGroup)
+    | FlatTodoList TodoList
 
 
 createContextTodoGroup getTodoList context =
@@ -223,6 +231,11 @@ createGroupingForProject getTodoList findProjectById project =
         |> (\tcg -> SingleProject tcg (createContextSubGroups findProjectById tcg))
 
 
+createGroupingForTodoList : TodoList -> Grouping
+createGroupingForTodoList =
+    FlatTodoList
+
+
 flattenGrouping : Grouping -> List Entity
 flattenGrouping grouping =
     case grouping of
@@ -249,6 +262,9 @@ flattenGrouping grouping =
                         (ProjectEntity g.project)
                             :: (g.list .|> TodoEntity)
                     )
+
+        FlatTodoList list ->
+            list .|> TodoEntity
 
 
 findEntityByOffsetIn offsetIndex entityList fromEntity =

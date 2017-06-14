@@ -1,6 +1,6 @@
 var _user$project$Routes$builder2messages = function (builder) {
 	var _p0 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
-	_v0_10:
+	_v0_11:
 	do {
 		if (_p0.ctor === '::') {
 			if (_p0._1.ctor === '::') {
@@ -11,13 +11,13 @@ var _user$project$Routes$builder2messages = function (builder) {
 								case 'contexts':
 									return {
 										ctor: '::',
-										_0: _user$project$Model$SetGroupByView(_user$project$Entity$ContextsView),
+										_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$ContextsView),
 										_1: {ctor: '[]'}
 									};
 								case 'projects':
 									return {
 										ctor: '::',
-										_0: _user$project$Model$SetGroupByView(_user$project$Entity$ProjectsView),
+										_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$ProjectsView),
 										_1: {ctor: '[]'}
 									};
 								case 'bin':
@@ -33,12 +33,12 @@ var _user$project$Routes$builder2messages = function (builder) {
 										_1: {ctor: '[]'}
 									};
 								default:
-									break _v0_10;
+									break _v0_11;
 							}
 						case 'context':
 							return {
 								ctor: '::',
-								_0: _user$project$Model$SetGroupByView(
+								_0: _user$project$Model$OnSetEntityListView(
 									_user$project$Entity$ContextView(_p0._1._0)),
 								_1: {ctor: '[]'}
 							};
@@ -46,14 +46,14 @@ var _user$project$Routes$builder2messages = function (builder) {
 							if (_p0._1._0 === 'NotAssigned') {
 								return {
 									ctor: '::',
-									_0: _user$project$Model$SetGroupByView(
+									_0: _user$project$Model$OnSetEntityListView(
 										_user$project$Entity$ProjectView('')),
 									_1: {ctor: '[]'}
 								};
 							} else {
 								return {
 									ctor: '::',
-									_0: _user$project$Model$SetGroupByView(
+									_0: _user$project$Model$OnSetEntityListView(
 										_user$project$Entity$ProjectView(_p0._1._0)),
 									_1: {ctor: '[]'}
 								};
@@ -65,17 +65,23 @@ var _user$project$Routes$builder2messages = function (builder) {
 								_1: {ctor: '[]'}
 							};
 						default:
-							break _v0_10;
+							break _v0_11;
 					}
 				} else {
-					break _v0_10;
+					break _v0_11;
 				}
 			} else {
 				switch (_p0._0) {
+					case 'bin':
+						return {
+							ctor: '::',
+							_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$BinView),
+							_1: {ctor: '[]'}
+						};
 					case 'Inbox':
 						return {
 							ctor: '::',
-							_0: _user$project$Model$SetGroupByView(
+							_0: _user$project$Model$OnSetEntityListView(
 								_user$project$Entity$ContextView('')),
 							_1: {ctor: '[]'}
 						};
@@ -86,11 +92,11 @@ var _user$project$Routes$builder2messages = function (builder) {
 							_1: {ctor: '[]'}
 						};
 					default:
-						break _v0_10;
+						break _v0_11;
 				}
 			}
 		} else {
-			break _v0_10;
+			break _v0_11;
 		}
 	} while(false);
 	return {ctor: '[]'};

@@ -43,28 +43,31 @@ builder2messages : Builder -> List Msg
 builder2messages builder =
     case path builder of
         "lists" :: "contexts" :: [] ->
-            [ Model.SetGroupByView Entity.ContextsView ]
+            [ Model.OnSetEntityListView Entity.ContextsView ]
 
         "lists" :: "projects" :: [] ->
-            [ Model.SetGroupByView Entity.ProjectsView ]
+            [ Model.OnSetEntityListView Entity.ProjectsView ]
 
         "lists" :: "bin" :: [] ->
             [ Model.SwitchView BinView ]
+
+        "bin" :: [] ->
+            [ Model.OnSetEntityListView Entity.BinView ]
 
         "lists" :: "done" :: [] ->
             [ Model.SwitchView DoneView ]
 
         "Inbox" :: [] ->
-            [ Model.SetGroupByView (Entity.ContextView "") ]
+            [ Model.OnSetEntityListView (Entity.ContextView "") ]
 
         "context" :: id :: [] ->
-            [ Model.SetGroupByView (Entity.ContextView id) ]
+            [ Model.OnSetEntityListView (Entity.ContextView id) ]
 
         "project" :: "NotAssigned" :: [] ->
-            [ Model.SetGroupByView (Entity.ProjectView "") ]
+            [ Model.OnSetEntityListView (Entity.ProjectView "") ]
 
         "project" :: id :: [] ->
-            [ Model.SetGroupByView (Entity.ProjectView id) ]
+            [ Model.OnSetEntityListView (Entity.ProjectView id) ]
 
         "notification" :: todoId :: [] ->
             [ Model.ShowReminderOverlayForTodoId todoId ]

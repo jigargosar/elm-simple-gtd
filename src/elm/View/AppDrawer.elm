@@ -125,7 +125,7 @@ navList viewModel m =
                 ++ [ divider ]
                 ++ entityListView projects m.mainViewType
                 ++ [ divider ]
-                ++ [ switchViewItem "delete" BinView "Bin"
+                ++ [ onSetEntityListView "delete" Entity.BinView "Bin"
                    , switchViewItem "done" DoneView "Done"
                    , switchViewItem "notification:sync" SyncView "Custom Sync"
                    ]
@@ -160,6 +160,9 @@ getSelectedIndex { mainViewType, projects, contexts } =
 
                     Entity.ProjectView id ->
                         1 + projectsIndex + (projectIndexById id)
+
+                    Entity.BinView ->
+                        lastProjectIndex + 1
 
             BinView ->
                 lastProjectIndex + 1
@@ -208,6 +211,13 @@ headLineText title =
 
 switchViewItem iconName viewType title =
     item [ onClick (SwitchView viewType) ]
+        [ Html.node "iron-icon" [ iconA iconName ] []
+        , itemBody [] [ text title ]
+        ]
+
+
+onSetEntityListView iconName viewType title =
+    item [ onClick (OnSetEntityListView viewType) ]
         [ Html.node "iron-icon" [ iconA iconName ] []
         , itemBody [] [ text title ]
         ]

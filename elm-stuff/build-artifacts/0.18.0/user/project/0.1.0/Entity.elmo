@@ -98,7 +98,7 @@ var _user$project$Entity$routes = function (viewType) {
 					_1: {ctor: '[]'}
 				}
 			};
-		default:
+		case 'ContextView':
 			var _p2 = _p0._0;
 			return _elm_lang$core$String$isEmpty(_p2) ? {
 				ctor: '::',
@@ -112,6 +112,12 @@ var _user$project$Entity$routes = function (viewType) {
 					_0: _p2,
 					_1: {ctor: '[]'}
 				}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: 'bin',
+				_1: {ctor: '[]'}
 			};
 	}
 };
@@ -198,6 +204,7 @@ var _user$project$Entity$ContextEntity = function (a) {
 var _user$project$Entity$ProjectEntity = function (a) {
 	return {ctor: 'ProjectEntity', _0: a};
 };
+var _user$project$Entity$BinView = {ctor: 'BinView'};
 var _user$project$Entity$ProjectView = function (a) {
 	return {ctor: 'ProjectView', _0: a};
 };
@@ -205,6 +212,8 @@ var _user$project$Entity$ProjectsView = {ctor: 'ProjectsView'};
 var _user$project$Entity$ContextView = function (a) {
 	return {ctor: 'ContextView', _0: a};
 };
+var _user$project$Entity$ContextsView = {ctor: 'ContextsView'};
+var _user$project$Entity$defaultListView = _user$project$Entity$ContextsView;
 var _user$project$Entity$getTodoGotoGroupView = F2(
 	function (todo, prevView) {
 		var projectView = _user$project$Entity$ProjectView(
@@ -219,8 +228,10 @@ var _user$project$Entity$getTodoGotoGroupView = F2(
 				return contextView;
 			case 'ContextsView':
 				return projectView;
-			default:
+			case 'ContextView':
 				return projectView;
+			default:
+				return _user$project$Entity$ContextsView;
 		}
 	});
 var _user$project$Entity$getGotoEntityViewType = F2(
@@ -245,8 +256,6 @@ var _user$project$Entity$getGotoEntityViewType = F2(
 						_user$project$Todo$getContextId(_p7)));
 		}
 	});
-var _user$project$Entity$ContextsView = {ctor: 'ContextsView'};
-var _user$project$Entity$defaultListView = _user$project$Entity$ContextsView;
 var _user$project$Entity$Goto = {ctor: 'Goto'};
 var _user$project$Entity$ToggleSelected = {ctor: 'ToggleSelected'};
 var _user$project$Entity$OnFocusIn = {ctor: 'OnFocusIn'};
@@ -262,6 +271,10 @@ var _user$project$Entity$ContextGroup = function (a) {
 var _user$project$Entity$ProjectGroup = function (a) {
 	return {ctor: 'ProjectGroup', _0: a};
 };
+var _user$project$Entity$FlatTodoList = function (a) {
+	return {ctor: 'FlatTodoList', _0: a};
+};
+var _user$project$Entity$createGroupingForTodoList = _user$project$Entity$FlatTodoList;
 var _user$project$Entity$MultiProject = function (a) {
 	return {ctor: 'MultiProject', _0: a};
 };
@@ -312,7 +325,7 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 					};
 				},
 				_p8._0);
-		default:
+		case 'MultiProject':
 			return A2(
 				_elm_lang$core$List$concatMap,
 				function (g) {
@@ -323,6 +336,8 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 					};
 				},
 				_p8._0);
+		default:
+			return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p8._0, _user$project$Entity$TodoEntity);
 	}
 };
 var _user$project$Entity$SingleProject = F2(

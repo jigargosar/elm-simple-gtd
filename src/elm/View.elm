@@ -15,7 +15,7 @@ import View.Header
 import Main.View
 import View.AppDrawer
 import Model exposing (..)
-import Polymer.Paper as Paper exposing (dialog, material)
+import Polymer.Paper as Paper
 import Polymer.App as App
 import Ext.Function.Infix exposing (..)
 import View.ReminderOverlay exposing (maybe)
@@ -106,16 +106,6 @@ firstVisitModal =
             , div [ class "right-align" ]
                 [ a [ class "btn btn-flat", onClick Model.OnDeactivateEditingMode ] [ text "Skip creating sample items" ]
                 ]
-            ]
-        ]
-
-
-bottomSheet =
-    div [ class "full-view" ]
-        [ Paper.material [ style [ "background-color" => "white" ], class "fixed-bottom", attribute "elevation" "5" ]
-            [ Paper.item [] [ text "bottom" ]
-            , Paper.item [] [ text "bottom" ]
-            , Paper.item [] [ text "bottom" ]
             ]
         ]
 

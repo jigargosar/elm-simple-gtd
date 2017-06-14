@@ -7,7 +7,6 @@ import Html.Attributes.Extra exposing (stringProperty)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import Model
-import Polymer.Paper as Paper
 import Svg.Events exposing (onFocusIn)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)

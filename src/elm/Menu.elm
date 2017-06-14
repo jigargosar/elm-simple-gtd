@@ -17,7 +17,6 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Polymer.Paper as Paper
 import Project
 import Todo
 import Tuple2

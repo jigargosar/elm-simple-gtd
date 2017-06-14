@@ -30,25 +30,24 @@ var _user$project$ViewModel$getViewInfo = F3(
 			};
 		};
 		var _p4 = mainViewType;
-		switch (_p4.ctor) {
-			case 'EntityListView':
-				var _p5 = _p4._0;
-				switch (_p5.ctor) {
-					case 'ContextsView':
-						return {ctor: '_Tuple2', _0: contextsVM.title, _1: contextsVM.icon.color};
-					case 'ContextView':
-						return A2(appHeaderInfoById, _p5._0, contextsVM.entityList);
-					case 'ProjectsView':
-						return {ctor: '_Tuple2', _0: projectsVM.title, _1: projectsVM.icon.color};
-					case 'ProjectView':
-						return A2(appHeaderInfoById, _p5._0, projectsVM.entityList);
-					default:
-						return {ctor: '_Tuple2', _0: 'Bin', _1: _user$project$ViewModel$sgtdBlue};
-				}
-			case 'DoneView':
-				return {ctor: '_Tuple2', _0: 'Done', _1: _user$project$ViewModel$sgtdBlue};
-			default:
-				return {ctor: '_Tuple2', _0: 'Custom Sync', _1: _user$project$ViewModel$sgtdBlue};
+		if (_p4.ctor === 'EntityListView') {
+			var _p5 = _p4._0;
+			switch (_p5.ctor) {
+				case 'ContextsView':
+					return {ctor: '_Tuple2', _0: contextsVM.title, _1: contextsVM.icon.color};
+				case 'ContextView':
+					return A2(appHeaderInfoById, _p5._0, contextsVM.entityList);
+				case 'ProjectsView':
+					return {ctor: '_Tuple2', _0: projectsVM.title, _1: projectsVM.icon.color};
+				case 'ProjectView':
+					return A2(appHeaderInfoById, _p5._0, projectsVM.entityList);
+				case 'BinView':
+					return {ctor: '_Tuple2', _0: 'Bin', _1: _user$project$ViewModel$sgtdBlue};
+				default:
+					return {ctor: '_Tuple2', _0: 'Done', _1: _user$project$ViewModel$sgtdBlue};
+			}
+		} else {
+			return {ctor: '_Tuple2', _0: 'Custom Sync', _1: _user$project$ViewModel$sgtdBlue};
 		}
 	});
 var _user$project$ViewModel$create = function (model) {

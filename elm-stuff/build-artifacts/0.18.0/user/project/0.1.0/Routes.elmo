@@ -20,12 +20,6 @@ var _user$project$Routes$builder2messages = function (builder) {
 										_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$ProjectsView),
 										_1: {ctor: '[]'}
 									};
-								case 'done':
-									return {
-										ctor: '::',
-										_0: _user$project$Model$SwitchView(_user$project$Model$DoneView),
-										_1: {ctor: '[]'}
-									};
 								default:
 									break _v0_10;
 							}
@@ -72,6 +66,12 @@ var _user$project$Routes$builder2messages = function (builder) {
 							_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$BinView),
 							_1: {ctor: '[]'}
 						};
+					case 'done':
+						return {
+							ctor: '::',
+							_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$DoneView),
+							_1: {ctor: '[]'}
+						};
 					case 'Inbox':
 						return {
 							ctor: '::',
@@ -101,25 +101,14 @@ var _user$project$Routes$hash2messages = function (location) {
 };
 var _user$project$Routes$getPathFromModel = function (model) {
 	var _p1 = _user$project$Model$getMainViewType(model);
-	switch (_p1.ctor) {
-		case 'EntityListView':
-			return _user$project$Entity$routes(_p1._0);
-		case 'DoneView':
-			return {
-				ctor: '::',
-				_0: 'lists',
-				_1: {
-					ctor: '::',
-					_0: 'done',
-					_1: {ctor: '[]'}
-				}
-			};
-		default:
-			return {
-				ctor: '::',
-				_0: 'custom-sync',
-				_1: {ctor: '[]'}
-			};
+	if (_p1.ctor === 'EntityListView') {
+		return _user$project$Entity$routes(_p1._0);
+	} else {
+		return {
+			ctor: '::',
+			_0: 'custom-sync',
+			_1: {ctor: '[]'}
+		};
 	}
 };
 var _user$project$Routes$delta2builder = F2(

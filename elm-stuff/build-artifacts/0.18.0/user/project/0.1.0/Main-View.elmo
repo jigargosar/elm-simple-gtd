@@ -11,66 +11,63 @@ var _user$project$Main_View$init = F2(
 				ctor: '::',
 				_0: function () {
 					var _p0 = _user$project$Model$getMainViewType(model);
-					switch (_p0.ctor) {
-						case 'EntityListView':
-							return A3(_user$project$EntityList_View$listView, _p0._0, model, viewModel);
-						case 'DoneView':
-							return A2(_user$project$View_TodoList$filtered, viewModel, model);
-						default:
-							var form = _user$project$Model$getRemoteSyncForm(model);
-							return A2(
-								_edvail$elm_polymer$Polymer_Paper$material,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('static layout vertical'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_edvail$elm_polymer$Polymer_Paper$input,
-										{
+					if (_p0.ctor === 'EntityListView') {
+						return A3(_user$project$EntityList_View$listView, _p0._0, model, viewModel);
+					} else {
+						var form = _user$project$Model$getRemoteSyncForm(model);
+						return A2(
+							_edvail$elm_polymer$Polymer_Paper$material,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('static layout vertical'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_edvail$elm_polymer$Polymer_Paper$input,
+									{
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'label', 'Cloudant URL or any CouchDB URL'),
+										_1: {
 											ctor: '::',
-											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'label', 'Cloudant URL or any CouchDB URL'),
+											_0: _elm_lang$html$Html_Attributes$value(form.uri),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$value(form.uri),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onInput(
-														_user$project$Model$UpdateRemoteSyncFormUri(form)),
-													_1: {ctor: '[]'}
-												}
-											}
-										},
-										{ctor: '[]'}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$div,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: A2(
-													_edvail$elm_polymer$Polymer_Paper$button,
-													{
-														ctor: '::',
-														_0: function (_p1) {
-															return _elm_lang$html$Html_Events$onClick(
-																_user$project$Model$RemotePouchSync(_p1));
-														}(form),
-														_1: {ctor: '[]'}
-													},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('Start Sync'),
-														_1: {ctor: '[]'}
-													}),
+												_0: _elm_lang$html$Html_Events$onInput(
+													_user$project$Model$UpdateRemoteSyncFormUri(form)),
 												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								});
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_edvail$elm_polymer$Polymer_Paper$button,
+												{
+													ctor: '::',
+													_0: function (_p1) {
+														return _elm_lang$html$Html_Events$onClick(
+															_user$project$Model$RemotePouchSync(_p1));
+													}(form),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Start Sync'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							});
 					}
 				}(),
 				_1: {ctor: '[]'}

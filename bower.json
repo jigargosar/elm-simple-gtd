@@ -33,7 +33,6 @@
     "paper-styles": "PolymerElements/paper-styles#2.0.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#2.0.0",
     "web-animations-js": "^2.2.5",
-    "paper-material": "PolymerElements/paper-material#2.0.0",
     "paper-tooltip": "PolymerElements/paper-tooltip#2.0.0",
     "polymerfire": "firebase/polymerfire#2.0.0",
     "pouchdb": "^6.2.0"

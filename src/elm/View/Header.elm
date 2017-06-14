@@ -75,7 +75,7 @@ newTodoHeader form =
             , onInput (Model.NewTodoTextChanged form)
             , form |> Todo.NewForm.getText |> defaultValue
             , onBlur Model.OnDeactivateEditingMode
-            , Keyboard.onKeyUp Model.NewTodoKeyUp
+            , Keyboard.onKeyDownStopPropagation Model.NewTodoKeyDown
             ]
             []
         , label [ class "active" ] [ text "New Todo" ]

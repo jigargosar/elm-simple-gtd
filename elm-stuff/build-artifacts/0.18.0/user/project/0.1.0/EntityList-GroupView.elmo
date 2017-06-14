@@ -6,35 +6,68 @@ var _user$project$EntityList_GroupView$editEntityView = F3(
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('layout vertical'),
+					_0: _elm_lang$html$Html_Attributes$class('static layout vertical'),
 					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
 					_0: A2(
-						_edvail$elm_polymer$Polymer_Paper$input,
+						_elm_lang$html$Html$div,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+							_0: _elm_lang$html$Html_Attributes$class('input-field'),
 							_1: {
 								ctor: '::',
-								_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'label', 'Name'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$value(form.name),
-									_1: {
-										ctor: '::',
-										_0: _elm_community$html_extra$Html_Events_Extra$onEnter(_user$project$Model$SaveCurrentForm),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onInput(vm.onNameChanged),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
+								_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+									function (_p0) {
+										return _user$project$Model$NOOP;
+									}),
+								_1: {ctor: '[]'}
 							}
 						},
-						{ctor: '[]'}),
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$input,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$autofocus(true),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$defaultValue(form.name),
+											_1: {
+												ctor: '::',
+												_0: _elm_community$html_extra$Html_Events_Extra$onEnter(_user$project$Model$SaveCurrentForm),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Events$onInput(vm.onNameChanged),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$label,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('active'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Name'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}),
 					_1: {
 						ctor: '::',
 						_0: _user$project$View_Shared$defaultOkCancelDeleteButtons(vm.onDeleteClicked),
@@ -97,20 +130,30 @@ var _user$project$EntityList_GroupView$init = F2(
 	function (vc, vm) {
 		var tabindexAV = vm.tabindexAV;
 		var maybeForm = (!_elm_lang$core$Native_Utils.eq(vm.id, '')) ? vc.getMaybeEditEntityFormForEntityId(vm.id) : _elm_lang$core$Maybe$Nothing;
+		var isEditing = _elm_community$maybe_extra$Maybe_Extra$isJust(maybeForm);
 		return A2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('entity-item'),
+				_0: tabindexAV,
 				_1: {
 					ctor: '::',
-					_0: tabindexAV,
+					_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
+						_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
+							_0: _elm_lang$html$Html_Attributes$classList(
+								{
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'edit z-depth-2', isEditing),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item focusable-list-item', true),
+										_1: {ctor: '[]'}
+									}
+								}),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -118,7 +161,7 @@ var _user$project$EntityList_GroupView$init = F2(
 			},
 			A3(
 				_elm_community$maybe_extra$Maybe_Extra$unpack,
-				function (_p0) {
+				function (_p1) {
 					return A2(_user$project$EntityList_GroupView$defaultView, tabindexAV, vm);
 				},
 				A2(_user$project$EntityList_GroupView$editEntityView, tabindexAV, vm),

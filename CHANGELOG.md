@@ -1,3 +1,6 @@
+## Upcoming
+* disable input field propagation so as not to trigger global combos  
+
 ## v0.18.21 - 2017-06-14
 * schedule: switch instead of starting with `s` shortcut 
 

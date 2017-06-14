@@ -466,7 +466,7 @@ var _user$project$Main$update = function (msg) {
 									},
 									_p32));
 						};
-					case 'NewTodoKeyUp':
+					case 'NewTodoKeyDown':
 						var _p34 = _p14._0.key;
 						if (_p34.ctor === 'Enter') {
 							return _user$project$Main$andThenUpdate(_user$project$Model$SaveCurrentForm);

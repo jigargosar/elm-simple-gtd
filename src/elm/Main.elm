@@ -232,7 +232,7 @@ update msg =
                         )
                         >> andThenUpdate OnDeactivateEditingMode
 
-                NewTodoKeyUp { key } ->
+                NewTodoKeyDown { key } ->
                     case key of
                         Key.Enter ->
                             andThenUpdate (SaveCurrentForm)

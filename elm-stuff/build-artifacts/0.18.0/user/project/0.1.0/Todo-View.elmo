@@ -35,7 +35,14 @@ var _user$project$Todo_View$reminderPopup = F2(
 				_1: {
 					ctor: '::',
 					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+							function (_p4) {
+								return _user$project$Model$NOOP;
+							}),
+						_1: {ctor: '[]'}
+					}
 				}
 			},
 			{
@@ -94,9 +101,9 @@ var _user$project$Todo_View$reminderPopup = F2(
 													_1: {
 														ctor: '::',
 														_0: _user$project$WebComponents$onChange(
-															function (_p4) {
+															function (_p5) {
 																return updateReminderForm(
-																	_user$project$Todo_ReminderForm$SetDate(_p4));
+																	_user$project$Todo_ReminderForm$SetDate(_p5));
 															}),
 														_1: {ctor: '[]'}
 													}
@@ -143,9 +150,9 @@ var _user$project$Todo_View$reminderPopup = F2(
 													_1: {
 														ctor: '::',
 														_0: _user$project$WebComponents$onChange(
-															function (_p5) {
+															function (_p6) {
 																return updateReminderForm(
-																	_user$project$Todo_ReminderForm$SetTime(_p5));
+																	_user$project$Todo_ReminderForm$SetTime(_p6));
 															}),
 														_1: {ctor: '[]'}
 													}
@@ -211,8 +218,8 @@ var _user$project$Todo_View$editView = function (edit) {
 								_1: {
 									ctor: '::',
 									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-										function (_p6) {
-											return _user$project$Model$commonMsg.noOp;
+										function (_p7) {
+											return _user$project$Model$NOOP;
 										}),
 									_1: {ctor: '[]'}
 								}
@@ -265,9 +272,9 @@ var _user$project$Todo_View$createEditTodoViewModel = F2(
 		var todoId = form.id;
 		return {
 			todo: {text: form.todoText},
-			onTodoTextChanged: function (_p7) {
+			onTodoTextChanged: function (_p8) {
 				return updateTodoFormMsg(
-					_user$project$Todo_Form$SetText(_p7));
+					_user$project$Todo_Form$SetText(_p8));
 			},
 			onDeleteClicked: A2(
 				_user$project$Model$OnEntityAction,
@@ -295,14 +302,14 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 		var maybeTodoReminderForm = vc.getMaybeTodoReminderFormForTodo(todo);
 		var form = A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p8) {
+			function (_p9) {
 				return A2(_user$project$Todo_ReminderForm$create, todo, vc.now);
 			},
 			_elm_lang$core$Basics$identity,
 			maybeTodoReminderForm);
-		var updateReminderForm = function (_p9) {
+		var updateReminderForm = function (_p10) {
 			return _user$project$Model$OnTodoMsg(
-				A2(_user$project$Todo_Msg$UpdateReminderForm, form, _p9));
+				A2(_user$project$Todo_Msg$UpdateReminderForm, form, _p10));
 		};
 		var isDropdownOpen = _elm_community$maybe_extra$Maybe_Extra$isJust(maybeTodoReminderForm);
 		return {
@@ -326,13 +333,13 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 					dueAt,
 					_user$project$Ext_Time$dayDiffInWords(vc.now)),
 				''),
-			onDateChanged: function (_p10) {
+			onDateChanged: function (_p11) {
 				return updateReminderForm(
-					_user$project$Todo_ReminderForm$SetDate(_p10));
+					_user$project$Todo_ReminderForm$SetDate(_p11));
 			},
-			onTimeChanged: function (_p11) {
+			onTimeChanged: function (_p12) {
 				return updateReminderForm(
-					_user$project$Todo_ReminderForm$SetTime(_p11));
+					_user$project$Todo_ReminderForm$SetTime(_p12));
 			},
 			startEditingMsg: _user$project$Model$StartEditingReminder(todo)
 		};
@@ -623,9 +630,9 @@ var _user$project$Todo_View$defaultView = function (vm) {
 var _user$project$Todo_View$getDisplayText = function (todo) {
 	var trimAndReplaceEmptyWithDefault = A2(
 		_user$project$Ext_Function_Infix_ops['>>?='],
-		function (_p12) {
+		function (_p13) {
 			return _elm_community$string_extra$String_Extra$nonEmpty(
-				_elm_lang$core$String$trim(_p12));
+				_elm_lang$core$String$trim(_p13));
 		},
 		'< empty >');
 	var tripleNewLineAndRestRegex = _elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*');
@@ -678,11 +685,11 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					'Inbox')));
 		var todoId = _user$project$Document$getId(todo);
 		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
-		var onKeyDownMsg = function (_p13) {
-			var _p14 = _p13;
-			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p14)) {
-				var _p15 = _p14.key;
-				switch (_p15.ctor) {
+		var onKeyDownMsg = function (_p14) {
+			var _p15 = _p14;
+			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p15)) {
+				var _p16 = _p15.key;
+				switch (_p16.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 					case 'CharE':
@@ -733,8 +740,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p16, content) {
-		var _p17 = _p16;
+	function (_p17, content) {
+		var _p18 = _p17;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$button,
 			{
@@ -753,7 +760,7 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
 						_1: {
 							ctor: '::',
-							_0: _p17.tabindexAV,
+							_0: _p18.tabindexAV,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -784,7 +791,7 @@ var _user$project$Todo_View$init = function (vm) {
 			_0: _elm_lang$html$Html_Attributes$classList(
 				{
 					ctor: '::',
-					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'todo-item', true),
+					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'todo-item focusable-list-item z-depth-2', true),
 					_1: {
 						ctor: '::',
 						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'selected', vm.isSelected),
@@ -815,7 +822,7 @@ var _user$project$Todo_View$init = function (vm) {
 		},
 		A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p18) {
+			function (_p19) {
 				return _user$project$Todo_View$defaultView(vm);
 			},
 			_user$project$Todo_View$editView,

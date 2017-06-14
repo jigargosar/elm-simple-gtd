@@ -1,6 +1,7 @@
 module ActionList.View exposing (..)
 
 import ActionList
+import Ext.Keyboard exposing (onKeyDownStopPropagation)
 import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -31,7 +32,7 @@ init appModel model =
             [ class "overlay"
             , onClick Model.OnDeactivateEditingMode
             ]
-            [ div [ class "modal fixed-top-20p", onClickStopPropagation Model.NOOP ]
+            [ div [ class "modal fixed-top-20p", onClickStopPropagation Model.NOOP, onKeyDownStopPropagation (\_ -> Model.NOOP) ]
                 [ div [ class "modal-content" ]
                     [ div [ class "input-field" ]
                         [ input

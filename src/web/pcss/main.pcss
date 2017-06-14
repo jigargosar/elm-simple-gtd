@@ -128,7 +128,7 @@ iron-icon.account {
 
 }
 
-.focusable-list > * {
+.focusable-list  .focusable-list-item {
   outline: none;
   position: relative;
 
@@ -245,10 +245,11 @@ paper-listbox {
 
 .entity-item {
   margin-top: 2rem;
+  z-index: 1;
 //padding: 0.5rem; outline: none; border-left: 2px solid transparent;
 }
 
-.entity-item {
+.focusable-list  .entity-item {
   &[tabindex="0"] .title {
     font-weight: bolder;
     color: rgba(0, 0, 172, 0.44);
@@ -258,7 +259,10 @@ paper-listbox {
     font-weight: bolder;
     color: rgba(0, 0, 172, 0.77)
   }
-
+  &.edit[tabindex="0"]:before {
+      background-color: transparent;
+      opacity: 1;
+  }
 }
 
 #popup-menu {
@@ -268,10 +272,10 @@ paper-listbox {
   max-width: 80vw;
 }
 
-.focusable-list > .todo-item {
+.focusable-list  .todo-item {
   padding: 0.5rem 1rem;
   background-color: white;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  //box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
   outline: none;
   border-left: 2px solid transparent;
 

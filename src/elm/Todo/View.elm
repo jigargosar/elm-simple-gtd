@@ -59,7 +59,7 @@ initKeyed vm =
 init : TodoViewModel -> Html Msg
 init vm =
     div
-        [ classList [ "todo-item" => True, "selected" => vm.isSelected, "editing" => vm.isEditing ]
+        [ classList [ "todo-item focusable-list-item z-depth-2" => True, "selected" => vm.isSelected, "editing" => vm.isEditing ]
         , onFocusIn vm.onFocusIn
         , vm.tabindexAV
         , onKeyDown vm.onKeyDownMsg
@@ -402,7 +402,7 @@ editView : EditViewModel -> List (Html Msg)
 editView edit =
     [ div [ class "vertical layout flex-auto" ]
         [ div [ class "flex" ]
-            [ div [ class "input-field", onKeyDownStopPropagation (\_ -> commonMsg.noOp) ]
+            [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
                 [ Html.textarea
                     [ class "materialize-textarea auto-focus"
                     , defaultValue (edit.todo.text)
@@ -437,6 +437,7 @@ reminderPopup form model =
         div
             [ class "overlay"
             , onClickStopPropagation Model.OnDeactivateEditingMode
+            , onKeyDownStopPropagation (\_ -> Model.NOOP)
             ]
             [ div
                 [ id "popup-menu"

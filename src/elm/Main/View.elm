@@ -22,7 +22,6 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Model exposing (ViewType(..), Model)
-import View.TodoList
 
 
 init viewModel model =
@@ -30,9 +29,6 @@ init viewModel model =
         [ case Model.getMainViewType model of
             EntityListView viewType ->
                 EntityList.View.listView viewType model viewModel
-
-            DoneView ->
-                View.TodoList.filtered viewModel model
 
             SyncView ->
                 let

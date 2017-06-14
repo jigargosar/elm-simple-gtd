@@ -27,6 +27,7 @@ type ListViewType
     | ProjectsView
     | ProjectView Document.Id
     | BinView
+    | DoneView
 
 
 type Action
@@ -97,6 +98,9 @@ routes viewType =
         BinView ->
             [ "bin" ]
 
+        DoneView ->
+            [ "done" ]
+
 
 getTodoGotoGroupView todo prevView =
     let
@@ -120,6 +124,9 @@ getTodoGotoGroupView todo prevView =
                 projectView
 
             BinView ->
+                ContextsView
+
+            DoneView ->
                 ContextsView
 
 

@@ -126,7 +126,7 @@ navList viewModel m =
                 ++ entityListView projects m.mainViewType
                 ++ [ divider ]
                 ++ [ onSetEntityListView "delete" Entity.BinView "Bin"
-                   , switchViewItem "done" DoneView "Done"
+                   , onSetEntityListView "done" Entity.DoneView "Done"
                    , switchViewItem "notification:sync" SyncView "Custom Sync"
                    ]
             )
@@ -164,8 +164,8 @@ getSelectedIndex { mainViewType, projects, contexts } =
                     Entity.BinView ->
                         lastProjectIndex + 1
 
-            DoneView ->
-                lastProjectIndex + 2
+                    Entity.DoneView ->
+                        lastProjectIndex + 2
 
             SyncView ->
                 lastProjectIndex + 3

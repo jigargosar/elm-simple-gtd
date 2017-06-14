@@ -85,8 +85,8 @@ getViewInfo mainViewType projectsVM contextsVM =
                     Entity.BinView ->
                         ( "Bin", sgtdBlue )
 
-            DoneView ->
-                ( "Done", sgtdBlue )
+                    Entity.DoneView ->
+                        ( "Done", sgtdBlue )
 
             SyncView ->
                 ( "Custom Sync", sgtdBlue )

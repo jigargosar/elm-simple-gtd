@@ -148,7 +148,6 @@ type alias EntityListViewType =
 
 type ViewType
     = EntityListView EntityListViewType
-    | DoneView
     | SyncView
 
 
@@ -473,6 +472,10 @@ createGrouping viewType model =
                 Entity.createGroupingForTodoList
                     (filterTodosAndSortByLatestModified Document.isDeleted model)
 
+            Entity.DoneView ->
+                Entity.createGroupingForTodoList
+                    (filterTodosAndSortByLatestModified (Pred.all [ Document.isNotDeleted, Todo.isDone ]) model)
+
 
 getActiveTodoList =
     .todoStore >> Store.reject (anyPass [ Todo.isDeleted, Todo.isDone ])
@@ -786,53 +789,6 @@ updateEditModeM updater model =
 
 clearSelection =
     setSelectedEntityIdSet Set.empty
-
-
-getTodoListForCurrentView model =
-    let
-        filter =
-            model |> getTodoListPredicateForCurrentView
-
-        allTodos =
-            model |> getTodoStore >> Store.asList
-
-        sortFunction =
-            Todo.getModifiedAt >> negate
-    in
-        allTodos
-            |> List.filter filter
-            |> List.sortBy sortFunction
-
-
-getTodoListPredicateForCurrentView model =
-    let
-        defaultPredicate =
-            Pred.any
-                [ Todo.isDone >> not, Todo.isDeleted >> equals model.showDeleted ]
-    in
-        case getMainViewType model of
-            DoneView ->
-                Pred.all [ Todo.isNotDeleted, Todo.isDone ]
-
-            EntityListView viewType ->
-                case viewType of
-                    Entity.ContextsView ->
-                        defaultPredicate
-
-                    Entity.ContextView id ->
-                        Pred.all [ Todo.getContextId >> equals id, defaultPredicate ]
-
-                    Entity.ProjectsView ->
-                        defaultPredicate
-
-                    Entity.ProjectView id ->
-                        Pred.all [ Todo.getProjectId >> equals id, defaultPredicate ]
-
-                    Entity.BinView ->
-                        Document.isDeleted
-
-            _ ->
-                always (True)
 
 
 findTodoById : Document.Id -> Model -> Maybe Todo.Model

@@ -24,9 +24,6 @@ getPathFromModel model =
         EntityListView viewType ->
             Entity.routes viewType
 
-        DoneView ->
-            [ "lists", "done" ]
-
         SyncView ->
             [ "custom-sync" ]
 
@@ -48,8 +45,8 @@ builder2messages builder =
         "bin" :: [] ->
             [ Model.OnSetEntityListView Entity.BinView ]
 
-        "lists" :: "done" :: [] ->
-            [ Model.SwitchView DoneView ]
+        "done" :: [] ->
+            [ Model.OnSetEntityListView Entity.DoneView ]
 
         "Inbox" :: [] ->
             [ Model.OnSetEntityListView (Entity.ContextView "") ]

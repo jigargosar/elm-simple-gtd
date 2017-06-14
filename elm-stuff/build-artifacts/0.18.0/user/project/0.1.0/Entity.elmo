@@ -113,10 +113,16 @@ var _user$project$Entity$routes = function (viewType) {
 					_1: {ctor: '[]'}
 				}
 			};
-		default:
+		case 'BinView':
 			return {
 				ctor: '::',
 				_0: 'bin',
+				_1: {ctor: '[]'}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: 'done',
 				_1: {ctor: '[]'}
 			};
 	}
@@ -204,6 +210,7 @@ var _user$project$Entity$ContextEntity = function (a) {
 var _user$project$Entity$ProjectEntity = function (a) {
 	return {ctor: 'ProjectEntity', _0: a};
 };
+var _user$project$Entity$DoneView = {ctor: 'DoneView'};
 var _user$project$Entity$BinView = {ctor: 'BinView'};
 var _user$project$Entity$ProjectView = function (a) {
 	return {ctor: 'ProjectView', _0: a};
@@ -230,6 +237,8 @@ var _user$project$Entity$getTodoGotoGroupView = F2(
 				return projectView;
 			case 'ContextView':
 				return projectView;
+			case 'BinView':
+				return _user$project$Entity$ContextsView;
 			default:
 				return _user$project$Entity$ContextsView;
 		}

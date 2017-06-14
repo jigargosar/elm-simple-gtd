@@ -128,6 +128,7 @@ update msg =
 
                 OnSignIn ->
                     Return.command (Firebase.signIn ())
+                        >> andThenUpdate OnDeactivateEditingMode
 
                 SignOut ->
                     Return.command (Firebase.signOut ())

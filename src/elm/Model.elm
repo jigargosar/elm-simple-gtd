@@ -790,7 +790,6 @@ getTodoListForCurrentView model =
         allTodos
             |> List.filter filter
             |> List.sortBy sortFunction
-            |> List.take 50
 
 
 getTodoListFilterForCurrentView model =

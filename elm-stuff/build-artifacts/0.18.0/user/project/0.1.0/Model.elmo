@@ -383,12 +383,9 @@ var _user$project$Model$getTodoListForCurrentView = function (model) {
 	}(model);
 	var filter = _user$project$Model$getTodoListFilterForCurrentView(model);
 	return A2(
-		_elm_lang$core$List$take,
-		50,
-		A2(
-			_elm_lang$core$List$sortBy,
-			sortFunction,
-			A2(_elm_lang$core$List$filter, filter, allTodos)));
+		_elm_lang$core$List$sortBy,
+		sortFunction,
+		A2(_elm_lang$core$List$filter, filter, allTodos));
 };
 var _user$project$Model$clearSelection = _user$project$Model$setSelectedEntityIdSet(_elm_lang$core$Set$empty);
 var _user$project$Model$switchToView = F2(

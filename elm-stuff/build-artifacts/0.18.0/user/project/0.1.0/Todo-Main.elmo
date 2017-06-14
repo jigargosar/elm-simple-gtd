@@ -166,6 +166,11 @@ var _user$project$Todo_Main$update = F3(
 					_user$project$Todo_Main$mapSet,
 					_user$project$Todo_Main$timeTracker,
 					A2(_user$project$Todo_TimeTracker$initRunning, _p5._0, now));
+			case 'SwitchOrStartRunning':
+				return A2(
+					_user$project$Todo_Main$mapOver,
+					_user$project$Todo_Main$timeTracker,
+					A2(_user$project$Todo_TimeTracker$switchOrStartRunning, _p5._0, now));
 			case 'TogglePaused':
 				return A2(
 					_user$project$Todo_Main$mapOver,

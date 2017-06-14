@@ -641,6 +641,7 @@ var _user$project$Todo_View$getDisplayText = function (todo) {
 };
 var _user$project$Todo_View$createTodoViewModel = F3(
 	function (vc, tabindexAV, todo) {
+		var onTodoMsg = _user$project$Model$OnTodoMsg;
 		var maybeEditTodoForm = vc.getMaybeEditTodoFormForTodo(todo);
 		var maybeEditVM = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
@@ -699,7 +700,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					case 'CharG':
 						return createEntityActionMsg(_user$project$Entity$Goto);
 					case 'CharS':
-						return _user$project$Model$onTodoInitRunning(todoId);
+						return onTodoMsg(
+							_user$project$Todo_Msg$SwitchOrStartRunning(todoId));
 					default:
 						return _user$project$Model$commonMsg.noOp;
 				}

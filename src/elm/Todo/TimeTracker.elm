@@ -70,6 +70,11 @@ initRunning todoId now =
         }
 
 
+switchOrStartRunning : Todo.Id -> Time -> Model -> Model
+switchOrStartRunning todoId now =
+    Maybe.unpack (\_ -> initRunning todoId now) ((\rec -> { rec | todoId = todoId } |> wrap))
+
+
 togglePause : Time -> Model -> Model
 togglePause now =
     map

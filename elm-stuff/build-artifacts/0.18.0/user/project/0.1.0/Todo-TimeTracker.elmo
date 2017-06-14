@@ -67,14 +67,28 @@ var _user$project$Todo_TimeTracker$toggleStartStop = F3(
 			return _user$project$Todo_TimeTracker$none;
 		}
 	});
+var _user$project$Todo_TimeTracker$switchOrStartRunning = F2(
+	function (todoId, now) {
+		return A2(
+			_elm_community$maybe_extra$Maybe_Extra$unpack,
+			function (_p3) {
+				return A2(_user$project$Todo_TimeTracker$initRunning, todoId, now);
+			},
+			function (rec) {
+				return _user$project$Todo_TimeTracker$wrap(
+					_elm_lang$core$Native_Utils.update(
+						rec,
+						{todoId: todoId}));
+			});
+	});
 var _user$project$Todo_TimeTracker$togglePause = function (now) {
 	return _user$project$Todo_TimeTracker$map(
 		function (rec) {
-			var _p3 = rec.state;
-			if (_p3.ctor === 'Running') {
+			var _p4 = rec.state;
+			if (_p4.ctor === 'Running') {
 				return _elm_lang$core$Native_Utils.update(
 					rec,
-					{totalTime: rec.totalTime + (now - _p3._0), state: _user$project$Todo_TimeTracker$Paused});
+					{totalTime: rec.totalTime + (now - _p4._0), state: _user$project$Todo_TimeTracker$Paused});
 			} else {
 				return _elm_lang$core$Native_Utils.update(
 					rec,

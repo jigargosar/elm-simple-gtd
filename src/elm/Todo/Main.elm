@@ -83,6 +83,9 @@ update andThenUpdate now todoMsg =
         InitRunning todoId ->
             mapSet timeTracker (Tracker.initRunning todoId now)
 
+        SwitchOrStartRunning todoId ->
+            mapOver timeTracker (Tracker.switchOrStartRunning todoId now)
+
         TogglePaused ->
             mapOver timeTracker (Tracker.togglePause now)
 

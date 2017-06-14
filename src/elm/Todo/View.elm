@@ -154,6 +154,9 @@ createTodoViewModel vc tabindexAV todo =
         maybeEditTodoForm =
             vc.getMaybeEditTodoFormForTodo todo
 
+        onTodoMsg =
+            Model.OnTodoMsg
+
         onKeyDownMsg ({ key } as ke) =
             if Ext.Keyboard.isNoSoftKeyDown ke then
                 case key of
@@ -182,7 +185,7 @@ createTodoViewModel vc tabindexAV todo =
                         createEntityActionMsg Entity.Goto
 
                     Key.CharS ->
-                        Model.onTodoInitRunning todoId
+                        Todo.Msg.SwitchOrStartRunning todoId |> onTodoMsg
 
                     _ ->
                         commonMsg.noOp

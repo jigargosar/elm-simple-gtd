@@ -4,7 +4,7 @@ var _user$project$Main_View$init = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$id('main-view'),
+				_0: _elm_lang$html$Html_Attributes$id('main-content'),
 				_1: {ctor: '[]'}
 			},
 			{
@@ -16,10 +16,10 @@ var _user$project$Main_View$init = F2(
 					} else {
 						var form = _user$project$Model$getRemoteSyncForm(model);
 						return A2(
-							_edvail$elm_polymer$Polymer_Paper$material,
+							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('static layout vertical'),
+								_0: _elm_lang$html$Html_Attributes$class('z-depth-2 static layout vertical'),
 								_1: {ctor: '[]'}
 							},
 							{

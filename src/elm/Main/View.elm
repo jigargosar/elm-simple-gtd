@@ -25,7 +25,7 @@ import Model exposing (ViewType(..), Model)
 
 
 init viewModel model =
-    div [ id "main-view" ]
+    div [ id "main-content" ]
         [ case Model.getMainViewType model of
             EntityListView viewType ->
                 EntityList.View.listView viewType model viewModel
@@ -35,7 +35,7 @@ init viewModel model =
                     form =
                         Model.getRemoteSyncForm model
                 in
-                    Paper.material [ class "static layout vertical" ]
+                    div [ class "z-depth-2 static layout vertical" ]
                         [ Paper.input
                             [ attribute "label" "Cloudant URL or any CouchDB URL"
                             , value form.uri

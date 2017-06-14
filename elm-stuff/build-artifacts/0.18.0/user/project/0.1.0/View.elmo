@@ -374,20 +374,22 @@ var _user$project$View$firstVisitModal = A2(
 			}),
 		_1: {ctor: '[]'}
 	});
-var _user$project$View$overlayViews = function (model) {
+var _user$project$View$overlayViews = function (appModel) {
 	var editModeOverlayView = function () {
-		var _p0 = _user$project$Model$getEditMode(model);
+		var _p0 = _user$project$Model$getEditMode(appModel);
 		switch (_p0.ctor) {
 			case 'LaunchBar':
-				return A2(_user$project$LaunchBar_View$init, _p0._0, model);
+				return A2(_user$project$LaunchBar_View$init, _p0._0, appModel);
 			case 'EditTodoContext':
-				return A2(_user$project$Todo_View$contextMenu, _p0._0, model);
+				return A2(_user$project$Todo_View$contextMenu, _p0._0, appModel);
 			case 'EditTodoProject':
-				return A2(_user$project$Todo_View$projectMenu, _p0._0, model);
+				return A2(_user$project$Todo_View$projectMenu, _p0._0, appModel);
 			case 'EditTodoReminder':
-				return A2(_user$project$Todo_View$reminderPopup, _p0._0, model);
+				return A2(_user$project$Todo_View$reminderPopup, _p0._0, appModel);
 			case 'FirstVisit':
 				return _user$project$View$firstVisitModal;
+			case 'ActionList':
+				return A2(_user$project$ActionList_View$init, appModel, _p0._0);
 			default:
 				return A2(
 					_elm_lang$html$Html$span,
@@ -403,7 +405,7 @@ var _user$project$View$overlayViews = function (model) {
 			_0: _elm_lang$core$Maybe$Just(editModeOverlayView),
 			_1: {
 				ctor: '::',
-				_0: _user$project$View_ReminderOverlay$maybe(model),
+				_0: _user$project$View_ReminderOverlay$maybe(appModel),
 				_1: {ctor: '[]'}
 			}
 		});

@@ -70,6 +70,10 @@ firstVisit =
     FirstVisit
 
 
+initActionList =
+    ActionList ActionList.init
+
+
 editContextMode model =
     EditContext { id = Document.getId model, name = Context.getName model }
 

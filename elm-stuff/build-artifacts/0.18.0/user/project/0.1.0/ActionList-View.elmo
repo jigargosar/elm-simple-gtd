@@ -1,0 +1,19 @@
+var _user$project$ActionList_View$init = F2(
+	function (appModel, model) {
+		return _user$project$View_FullBleedCapture$init(
+			{
+				onMouseDown: _user$project$Model$OnDeactivateEditingMode,
+				children: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('modal modal-center'),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});

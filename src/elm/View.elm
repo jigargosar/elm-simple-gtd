@@ -1,6 +1,7 @@
 module View exposing (init)
 
 import ActionList
+import ActionList.View
 import ExclusiveMode
 import Firebase.View
 import Html.Attributes.Extra exposing (..)
@@ -63,7 +64,7 @@ overlayViews appModel =
                     firstVisitModal
 
                 ExclusiveMode.ActionList model ->
-                    ActionList.view appModel model
+                    ActionList.View.init appModel model
 
                 _ ->
                     span [] []

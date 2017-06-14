@@ -19,6 +19,7 @@ var _user$project$ExclusiveMode$EditSyncSettings = function (a) {
 var _user$project$ExclusiveMode$ActionList = function (a) {
 	return {ctor: 'ActionList', _0: a};
 };
+var _user$project$ExclusiveMode$initActionList = _user$project$ExclusiveMode$ActionList(_user$project$ActionList$init);
 var _user$project$ExclusiveMode$LaunchBar = function (a) {
 	return {ctor: 'LaunchBar', _0: a};
 };

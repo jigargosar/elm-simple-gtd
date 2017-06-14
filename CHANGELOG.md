@@ -1,3 +1,6 @@
+## Upcoming
+* add continue action on tracker notification 
+
 ## v0.18.23 - 2017-06-14
 * custom-sync view: remove paper input
 * remove all paper inputs

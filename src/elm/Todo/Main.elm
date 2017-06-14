@@ -122,6 +122,9 @@ update andThenUpdate now todoMsg =
                     "stop" ->
                         andThenUpdate Model.onTodoStopRunning
 
+                    "continue" ->
+                        identity
+
                     _ ->
                         andThenUpdate Model.onGotoRunningTodo
                 )
@@ -139,8 +142,8 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
                 , title = "You are currently working on"
                 , body = Todo.getText todo
                 , actions =
-                    [ { title = "Stop", action = "stop" }
-                    , { title = "Mark Done", action = "mark-done" }
+                    [ { title = "Continue", action = "continue" }
+                    , { title = "Stop", action = "stop" }
                     ]
                 , data = { id = todoId, notificationClickedPort = "onRunningTodoNotificationClicked" }
                 }

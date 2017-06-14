@@ -109,10 +109,10 @@ var _user$project$Todo_Main$showRunningNotificationCmd = function (_p2) {
 				body: _user$project$Todo$getText(todo),
 				actions: {
 					ctor: '::',
-					_0: {title: 'Stop', action: 'stop'},
+					_0: {title: 'Continue', action: 'continue'},
 					_1: {
 						ctor: '::',
-						_0: {title: 'Mark Done', action: 'mark-done'},
+						_0: {title: 'Stop', action: 'stop'},
 						_1: {ctor: '[]'}
 					}
 				},
@@ -203,10 +203,13 @@ var _user$project$Todo_Main$update = F3(
 						_user$project$Model$OnCloseNotification(todoId),
 						function () {
 							var _p10 = _p11.action;
-							if (_p10 === 'stop') {
-								return andThenUpdate(_user$project$Model$onTodoStopRunning);
-							} else {
-								return andThenUpdate(_user$project$Model$onGotoRunningTodo);
+							switch (_p10) {
+								case 'stop':
+									return andThenUpdate(_user$project$Model$onTodoStopRunning);
+								case 'continue':
+									return _elm_lang$core$Basics$identity;
+								default:
+									return andThenUpdate(_user$project$Model$onGotoRunningTodo);
 							}
 						}()(_p9));
 				};

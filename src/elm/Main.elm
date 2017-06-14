@@ -384,7 +384,6 @@ update msg =
                 OnTodoMsgWithTime todoMsg now ->
                     Todo.Main.update andThenUpdate now todoMsg
            )
-        >> persistAll
         >> Return.map (logMsg msg)
 
 
@@ -424,21 +423,6 @@ map =
 
 modelTapLog =
     Ext.Debug.tapLog >>> Return.map
-
-
-persistAll =
-    persist Model.projectStore
-        >> persist Model.todoStore
-        >> persist Model.contextStore
-
-
-persist lens =
-    Return.andThen
-        (\m ->
-            Record.get lens m
-                |> Store.persist
-                |> Tuple.mapFirst (Record.set lens # m)
-        )
 
 
 updateTodoAndMaybeAlsoSelected action todo =

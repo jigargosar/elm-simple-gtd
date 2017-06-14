@@ -1133,8 +1133,14 @@ updateProject id updateFn =
 
 
 updateAllNamedDocsDocs idSet updateFn store model =
-    Record.overT2 store (Store.updateAll idSet model.now updateFn) model
-        |> apply2 ( Tuple.second, (\changes -> Cmd.none) )
+    Record.overT2 store
+        (Store.updateAndPersist
+            (Document.getId >> Set.member # idSet)
+            model.now
+            updateFn
+        )
+        model
+        |> Tuple2.swap
         |> Return.map (updateEntityListCursor model)
 
 

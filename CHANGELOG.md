@@ -1,3 +1,7 @@
+## Upcoming
+* ExclusiveMode: centralize edit forms
+* schedule: switch instead of starting with `s` shortcut
+
 ## v0.18.19 - 2017-06-14
 * On-boarding: create default set of entities. 
 

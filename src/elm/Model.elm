@@ -293,8 +293,8 @@ init flags =
             then
                 ExclusiveMode.firstVisit
             else
-                -- ExclusiveMode.none
-                ExclusiveMode.initActionList
+                -- ExclusiveMode.initActionList
+                ExclusiveMode.none
 
         model =
             { now = now

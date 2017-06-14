@@ -1497,7 +1497,7 @@ var _user$project$Model$init = function (flags) {
 	var projectStore = _p55._0._1;
 	var contextStore = _p55._0._2;
 	var seed = _p55._1;
-	var editMode = (_user$project$Store$isEmpty(todoStore) || (_user$project$Store$isEmpty(contextStore) || _user$project$Store$isEmpty(projectStore))) ? _user$project$ExclusiveMode$firstVisit : _user$project$ExclusiveMode$initActionList;
+	var editMode = (_user$project$Store$isEmpty(todoStore) || (_user$project$Store$isEmpty(contextStore) || _user$project$Store$isEmpty(projectStore))) ? _user$project$ExclusiveMode$firstVisit : _user$project$ExclusiveMode$none;
 	var model = {
 		now: now,
 		todoStore: todoStore,

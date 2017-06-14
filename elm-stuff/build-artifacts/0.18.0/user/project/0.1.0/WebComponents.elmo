@@ -4,50 +4,6 @@ var _user$project$WebComponents$onChange = function (tagger) {
 		'change',
 		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
 };
-var _user$project$WebComponents$testDialog = A2(
-	_edvail$elm_polymer$Polymer_Paper$dialog,
-	{
-		ctor: '::',
-		_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'opened', true),
-		_1: {
-			ctor: '::',
-			_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'alwaysOnTop', true),
-			_1: {
-				ctor: '::',
-				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'verticalAlign', 'top'),
-				_1: {
-					ctor: '::',
-					_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'horizontalAlign', 'left'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$style(
-							{
-								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'margin', '0'),
-								_1: {
-									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'position', 'absolute'),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		}
-	},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$h2,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text('Big Header'),
-				_1: {ctor: '[]'}
-			}),
-		_1: {ctor: '[]'}
-	});
 var _user$project$WebComponents$onStringPropertyChanged = F2(
 	function (propertyName, tagger) {
 		return A2(

@@ -153,7 +153,7 @@ var _user$project$Todo_Main$update = F3(
 				return _Fresheyeball$elm_return$Return$map(
 					function (_p6) {
 						return _user$project$Model$setEditMode(
-							_user$project$EditMode$EditTodoReminder(_p6));
+							_user$project$ExclusiveMode$EditTodoReminder(_p6));
 					}(
 						A2(_user$project$Todo_ReminderForm$update, _p5._1, _p5._0)));
 			case 'ToggleRunning':

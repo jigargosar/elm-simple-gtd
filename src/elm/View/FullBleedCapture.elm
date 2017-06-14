@@ -20,7 +20,7 @@ type alias ViewModel msg =
 
 init vm =
     div
-        [ class "fullbleed-capture"
+        [ class "fullbleed-capture dark"
         , onMouseDown vm.onMouseDown
         ]
         vm.children

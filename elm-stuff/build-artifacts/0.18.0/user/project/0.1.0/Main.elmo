@@ -510,7 +510,7 @@ var _user$project$Main$update = function (msg) {
 						return _Fresheyeball$elm_return$Return$map(
 							function (_p43) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditTodo(_p43));
+									_user$project$ExclusiveMode$EditTodo(_p43));
 							}(
 								A2(_user$project$Todo_Form$set, _p14._1, _p14._0)));
 					case 'OnEditTodoProjectMenuStateChanged':
@@ -520,7 +520,7 @@ var _user$project$Main$update = function (msg) {
 									_Fresheyeball$elm_return$Return$map,
 									function (_p45) {
 										return _user$project$Model$setEditMode(
-											_user$project$EditMode$EditTodoProject(_p45));
+											_user$project$ExclusiveMode$EditTodoProject(_p45));
 									}(
 										A2(_user$project$Todo_GroupForm$setMenuState, _p14._1, _p14._0)),
 									_p44));
@@ -532,7 +532,7 @@ var _user$project$Main$update = function (msg) {
 									_Fresheyeball$elm_return$Return$map,
 									function (_p47) {
 										return _user$project$Model$setEditMode(
-											_user$project$EditMode$EditTodoContext(_p47));
+											_user$project$ExclusiveMode$EditTodoContext(_p47));
 									}(
 										A2(_user$project$Todo_GroupForm$setMenuState, _p14._1, _p14._0)),
 									_p46));
@@ -541,7 +541,7 @@ var _user$project$Main$update = function (msg) {
 						return _Fresheyeball$elm_return$Return$map(
 							function (_p48) {
 								return _user$project$Model$setEditMode(
-									_user$project$EditMode$EditSyncSettings(_p48));
+									_user$project$ExclusiveMode$EditSyncSettings(_p48));
 							}(
 								_elm_lang$core$Native_Utils.update(
 									_p14._0,

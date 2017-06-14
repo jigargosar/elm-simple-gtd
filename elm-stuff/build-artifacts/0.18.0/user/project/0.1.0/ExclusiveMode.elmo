@@ -1,0 +1,70 @@
+var _user$project$ExclusiveMode$EditContextForm = F2(
+	function (a, b) {
+		return {id: a, name: b};
+	});
+var _user$project$ExclusiveMode$EditProjectForm = F2(
+	function (a, b) {
+		return {id: a, name: b};
+	});
+var _user$project$ExclusiveMode$SyncForm = function (a) {
+	return {uri: a};
+};
+var _user$project$ExclusiveMode$None = {ctor: 'None'};
+var _user$project$ExclusiveMode$none = _user$project$ExclusiveMode$None;
+var _user$project$ExclusiveMode$FirstVisit = {ctor: 'FirstVisit'};
+var _user$project$ExclusiveMode$firstVisit = _user$project$ExclusiveMode$FirstVisit;
+var _user$project$ExclusiveMode$EditSyncSettings = function (a) {
+	return {ctor: 'EditSyncSettings', _0: a};
+};
+var _user$project$ExclusiveMode$LaunchBar = function (a) {
+	return {ctor: 'LaunchBar', _0: a};
+};
+var _user$project$ExclusiveMode$EditTodoProject = function (a) {
+	return {ctor: 'EditTodoProject', _0: a};
+};
+var _user$project$ExclusiveMode$EditTodoContext = function (a) {
+	return {ctor: 'EditTodoContext', _0: a};
+};
+var _user$project$ExclusiveMode$EditTodoReminder = function (a) {
+	return {ctor: 'EditTodoReminder', _0: a};
+};
+var _user$project$ExclusiveMode$EditProject = function (a) {
+	return {ctor: 'EditProject', _0: a};
+};
+var _user$project$ExclusiveMode$editProjectMode = function (model) {
+	return _user$project$ExclusiveMode$EditProject(
+		{
+			id: _user$project$Document$getId(model),
+			name: _user$project$Project$getName(model)
+		});
+};
+var _user$project$ExclusiveMode$editProjectSetName = F2(
+	function (name, epm) {
+		return _user$project$ExclusiveMode$EditProject(
+			_elm_lang$core$Native_Utils.update(
+				epm,
+				{name: name}));
+	});
+var _user$project$ExclusiveMode$EditContext = function (a) {
+	return {ctor: 'EditContext', _0: a};
+};
+var _user$project$ExclusiveMode$editContextMode = function (model) {
+	return _user$project$ExclusiveMode$EditContext(
+		{
+			id: _user$project$Document$getId(model),
+			name: _user$project$Context$getName(model)
+		});
+};
+var _user$project$ExclusiveMode$editContextSetName = F2(
+	function (name, ecm) {
+		return _user$project$ExclusiveMode$EditContext(
+			_elm_lang$core$Native_Utils.update(
+				ecm,
+				{name: name}));
+	});
+var _user$project$ExclusiveMode$EditTodo = function (a) {
+	return {ctor: 'EditTodo', _0: a};
+};
+var _user$project$ExclusiveMode$NewTodo = function (a) {
+	return {ctor: 'NewTodo', _0: a};
+};

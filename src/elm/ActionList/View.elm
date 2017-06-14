@@ -11,13 +11,20 @@ import View.FullBleedCapture
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
+import Html.Events.Extra exposing (onClickPreventDefault, onClickStopPropagation)
 
 
 init appModel model =
-    View.FullBleedCapture.init
-        { onMouseDown = Model.OnDeactivateEditingMode
-        , children =
-            [ div [ class "modal modal-center" ] []
+    div
+        [ class "fullbleed-capture dark"
+        , onClick Model.OnDeactivateEditingMode
+        ]
+        [ div [ class "modal open modal-center", onClickStopPropagation Model.noop ]
+            [ div [ class "modal-content" ]
+                [ div [ class "input-field" ]
+                    [ input [ autofocus True ] [ text "" ]
+                    , label [ class "active" ] [ text "Enter action or option name" ]
+                    ]
+                ]
             ]
-        }
+        ]

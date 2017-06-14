@@ -292,6 +292,7 @@ init flags =
             then
                 ExclusiveMode.firstVisit
             else
+                -- ExclusiveMode.none
                 ExclusiveMode.initActionList
 
         model =

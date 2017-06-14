@@ -1,19 +1,82 @@
 var _user$project$ActionList_View$init = F2(
 	function (appModel, model) {
-		return _user$project$View_FullBleedCapture$init(
+		return A2(
+			_elm_lang$html$Html$div,
 			{
-				onMouseDown: _user$project$Model$OnDeactivateEditingMode,
-				children: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('fullbleed-capture dark'),
+				_1: {
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('modal modal-center'),
-							_1: {ctor: '[]'}
-						},
-						{ctor: '[]'}),
+					_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnDeactivateEditingMode),
 					_1: {ctor: '[]'}
 				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('modal open modal-center'),
+						_1: {
+							ctor: '::',
+							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$noop),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('modal-content'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('input-field'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$input,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$autofocus(true),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(''),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$label,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('active'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Enter action or option name'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
 			});
 	});

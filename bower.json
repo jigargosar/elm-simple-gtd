@@ -31,7 +31,6 @@
     "paper-toolbar": "PolymerElements/paper-toolbar#2.0.0",
     "paper-toggle-button": "PolymerElements/paper-toggle-button#2.0.0",
     "paper-listbox": "PolymerElements/paper-listbox#2.0.0",
-    "paper-dialog": "PolymerElements/paper-dialog#2.0.0",
     "paper-styles": "PolymerElements/paper-styles#2.0.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#2.0.0",
     "web-animations-js": "^2.2.5",

@@ -21,7 +21,7 @@ import Ext.Function.Infix exposing (..)
 import View.ReminderOverlay exposing (maybe)
 import Todo.View
 import ViewModel
-import WebComponents exposing (doneAllIconP, dynamicAlign, icon, iconA, iconButton, iconTextButton, onBoolPropertyChanged, onPropertyChanged, paperIconButton, slotDropdownContent, slotDropdownTrigger, testDialog)
+import WebComponents exposing (onBoolPropertyChanged)
 import LaunchBar.View
 
 

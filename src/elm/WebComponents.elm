@@ -90,21 +90,6 @@ onStringPropertyChanged propertyName tagger =
         (Json.Decode.map tagger (Json.Decode.at [ "detail", "value" ] Json.Decode.string))
 
 
-testDialog =
-    Polymer.Paper.dialog
-        [ boolProperty "opened" True
-        , boolProperty "alwaysOnTop" True
-
-        --        , boolProperty "no-cancel-on-outside-click" True
-        , stringProperty "verticalAlign" "top"
-        , stringProperty "horizontalAlign" "left"
-        , style [ "margin" => "0", "position" => "absolute" ]
-
-        --        , class "full-view"
-        ]
-        [ h2 [] [ text "Big Header" ] ]
-
-
 onChange : (String -> msg) -> Attribute msg
 onChange tagger =
     on "change" (Json.Decode.map tagger targetValue)

@@ -1,6 +1,7 @@
+## Upcoming
+* schedule: switch instead of starting with `s` shortcut 
+
 ## v0.18.20 - 2017-06-14
-* ExclusiveMode: centralize edit forms
-* schedule: switch instead of starting with `s` shortcut
 * use Predicate module instead of custom fn in Todo
 * replace bin/done views with entity list views.
 

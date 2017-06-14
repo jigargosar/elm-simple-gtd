@@ -1,4 +1,5 @@
-var _user$project$ActionList$init = {menuState: _user$project$Menu$initState};
-var _user$project$ActionList$Model = function (a) {
-	return {menuState: a};
-};
+var _user$project$ActionList$init = {menuState: _user$project$Menu$initState, searchText: ''};
+var _user$project$ActionList$Model = F2(
+	function (a, b) {
+		return {menuState: a, searchText: b};
+	});

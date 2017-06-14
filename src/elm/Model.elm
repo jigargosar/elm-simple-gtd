@@ -45,7 +45,8 @@ import Todo.TimeTracker
 
 
 type Msg
-    = OnCommonMsg CommonMsg.Msg
+    = NOOP
+    | OnCommonMsg CommonMsg.Msg
     | OnPouchDBChange String D.Value
     | OnEntityUpsert Entity
     | OnFirebaseChange String D.Value

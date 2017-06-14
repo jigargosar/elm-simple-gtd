@@ -236,6 +236,8 @@ var _user$project$Main$update = function (msg) {
 			function () {
 				var _p14 = msg;
 				switch (_p14.ctor) {
+					case 'NOOP':
+						return _elm_lang$core$Basics$identity;
 					case 'OnCommonMsg':
 						return _user$project$CommonMsg$update(_p14._0);
 					case 'OnPouchDBChange':

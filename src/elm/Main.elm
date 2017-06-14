@@ -105,6 +105,9 @@ update : Msg -> Model -> Return
 update msg =
     Return.singleton
         >> (case msg of
+                NOOP ->
+                    identity
+
                 OnCommonMsg msg ->
                     CommonMsg.update msg
 

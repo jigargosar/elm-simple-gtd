@@ -15,8 +15,11 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 
 type alias Model =
     { menuState : Menu.State
+    , searchText : String
     }
 
 
 init =
-    { menuState = Menu.initState }
+    { menuState = Menu.initState
+    , searchText = ""
+    }

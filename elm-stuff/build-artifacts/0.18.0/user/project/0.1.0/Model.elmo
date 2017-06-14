@@ -1467,6 +1467,7 @@ var _user$project$Model$OnCommonMsg = function (a) {
 };
 var _user$project$Model$commonMsg = _user$project$CommonMsg$createHelper(_user$project$Model$OnCommonMsg);
 var _user$project$Model$noop = _user$project$Model$commonMsg.noOp;
+var _user$project$Model$NOOP = {ctor: 'NOOP'};
 var _user$project$Model$SyncView = {ctor: 'SyncView'};
 var _user$project$Model$EntityListView = function (a) {
 	return {ctor: 'EntityListView', _0: a};

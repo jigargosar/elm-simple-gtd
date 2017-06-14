@@ -34,6 +34,7 @@ var _user$project$ActionList_View$init = F2(
 						_1: {ctor: '[]'}
 					});
 			});
+		var searchText = model.searchText;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -54,7 +55,7 @@ var _user$project$ActionList_View$init = F2(
 						_0: _elm_lang$html$Html_Attributes$class('modal fixed-top-20p'),
 						_1: {
 							ctor: '::',
-							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$noop),
+							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -83,13 +84,13 @@ var _user$project$ActionList_View$init = F2(
 											{
 												ctor: '::',
 												_0: _elm_lang$html$Html_Attributes$autofocus(true),
-												_1: {ctor: '[]'}
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$defaultValue(searchText),
+													_1: {ctor: '[]'}
+												}
 											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text(''),
-												_1: {ctor: '[]'}
-											}),
+											{ctor: '[]'}),
 										_1: {
 											ctor: '::',
 											_0: A2(

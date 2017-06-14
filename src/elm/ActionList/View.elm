@@ -1,5 +1,6 @@
 module ActionList.View exposing (..)
 
+import ActionList
 import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -14,8 +15,12 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickPreventDefault, onClickStopPropagation)
 
 
+init : Model.Model -> ActionList.Model -> Html Model.Msg
 init appModel model =
     let
+        searchText =
+            model.searchText
+
         resList =
             [ "r1", "222", "r3", "r4", "r5" ]
 
@@ -26,10 +31,14 @@ init appModel model =
             [ class "overlay"
             , onClick Model.OnDeactivateEditingMode
             ]
-            [ div [ class "modal fixed-top-20p", onClickStopPropagation Model.noop ]
+            [ div [ class "modal fixed-top-20p", onClickStopPropagation Model.NOOP ]
                 [ div [ class "modal-content" ]
                     [ div [ class "input-field" ]
-                        [ input [ autofocus True ] [ text "" ]
+                        [ input
+                            [ autofocus True
+                            , defaultValue searchText
+                            ]
+                            []
                         , label [ class "active" ] [ text "Enter action or option name" ]
                         ]
                     , div [] resultListView

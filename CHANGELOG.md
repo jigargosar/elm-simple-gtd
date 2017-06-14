@@ -1,5 +1,6 @@
 ## v0.18.25 - 2017-06-14
-* fix running todo header UX 
+* fix running todo header UX
+* running : add duration to "you are currently working on"
 
 ## v0.18.24 - 2017-06-14
 * add continue action on tracker notification

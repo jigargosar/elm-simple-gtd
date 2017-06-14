@@ -784,8 +784,7 @@ getTodoListForCurrentView model =
             model |> getTodoStore >> Store.asList
 
         sortFunction =
-            model
-                |> getCurrentTodoListSortByFunction
+            Todo.getModifiedAt >> negate
     in
         allTodos
             |> List.filter filter
@@ -803,7 +802,7 @@ getTodoListPredicateForCurrentView model =
                 Todo.isDeleted
 
             DoneView ->
-                Todo.doneFilter
+                Pred.all [ Todo.isNotDeleted, Todo.isDone ]
 
             EntityListView viewType ->
                 case viewType of
@@ -811,28 +810,16 @@ getTodoListPredicateForCurrentView model =
                         defaultPredicate
 
                     Entity.ContextView id ->
-                        Todo.toAllPassPredicate [ Todo.getContextId >> equals id, defaultPredicate ]
+                        Pred.all [ Todo.getContextId >> equals id, defaultPredicate ]
 
                     Entity.ProjectsView ->
                         defaultPredicate
 
                     Entity.ProjectView id ->
-                        Todo.toAllPassPredicate [ Todo.getProjectId >> equals id, defaultPredicate ]
+                        Pred.all [ Todo.getProjectId >> equals id, defaultPredicate ]
 
             _ ->
                 always (True)
-
-
-getCurrentTodoListSortByFunction model =
-    case getMainViewType model of
-        BinView ->
-            Todo.getModifiedAt >> negate
-
-        DoneView ->
-            Todo.getModifiedAt >> negate
-
-        _ ->
-            Todo.getModifiedAt >> negate
 
 
 findTodoById : Document.Id -> Model -> Maybe Todo.Model

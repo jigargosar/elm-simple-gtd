@@ -78,6 +78,18 @@ lt =
     (<)
 
 
+lte =
+    (<=)
+
+
+isLT =
+    flip lt
+
+
+isLTE =
+    flip lte
+
+
 or =
     (||)
 

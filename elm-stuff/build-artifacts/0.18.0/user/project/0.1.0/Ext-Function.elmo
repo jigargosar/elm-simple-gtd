@@ -23,10 +23,16 @@ var _user$project$Ext_Function$or = F2(
 	function (x, y) {
 		return x || y;
 	});
+var _user$project$Ext_Function$lte = F2(
+	function (x, y) {
+		return _elm_lang$core$Native_Utils.cmp(x, y) < 1;
+	});
+var _user$project$Ext_Function$isLTE = _elm_lang$core$Basics$flip(_user$project$Ext_Function$lte);
 var _user$project$Ext_Function$lt = F2(
 	function (x, y) {
 		return _elm_lang$core$Native_Utils.cmp(x, y) < 0;
 	});
+var _user$project$Ext_Function$isLT = _elm_lang$core$Basics$flip(_user$project$Ext_Function$lt);
 var _user$project$Ext_Function$gt = F2(
 	function (x, y) {
 		return _elm_lang$core$Native_Utils.cmp(x, y) > 0;

@@ -61,7 +61,7 @@ export default async (dbName, indices = []) => {
                  )*/
                 return cleanNewDoc
             })
-            .then(_.tap(res => console.log("upsert results: ", res)))
+            // .then(_.tap(res => console.log("upsert results: ", res)))
 
     }
 

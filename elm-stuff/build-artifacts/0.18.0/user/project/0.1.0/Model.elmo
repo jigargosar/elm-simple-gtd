@@ -411,17 +411,17 @@ var _user$project$Model$updateEditModeM = F2(
 var _user$project$Model$getEditMode = function (_) {
 	return _.editMode;
 };
-var _user$project$Model$deactivateEditingMode = _user$project$Model$setEditMode(_user$project$EditMode$none);
+var _user$project$Model$deactivateEditingMode = _user$project$Model$setEditMode(_user$project$ExclusiveMode$none);
 var _user$project$Model$createEntityEditForm = F2(
 	function (entity, model) {
 		var _p24 = entity;
 		switch (_p24.ctor) {
 			case 'ContextEntity':
-				return _user$project$EditMode$editContextMode(_p24._0);
+				return _user$project$ExclusiveMode$editContextMode(_p24._0);
 			case 'ProjectEntity':
-				return _user$project$EditMode$editProjectMode(_p24._0);
+				return _user$project$ExclusiveMode$editProjectMode(_p24._0);
 			default:
-				return _user$project$EditMode$EditTodo(
+				return _user$project$ExclusiveMode$EditTodo(
 					_user$project$Todo_Form$create(_p24._0));
 		}
 	});
@@ -457,12 +457,12 @@ var _user$project$Model$updateEditModeNameChanged = F3(
 			case 'EditContext':
 				return A2(
 					_user$project$Model$setEditMode,
-					A2(_user$project$EditMode$editContextSetName, newName, _p27._0),
+					A2(_user$project$ExclusiveMode$editContextSetName, newName, _p27._0),
 					model);
 			case 'EditProject':
 				return A2(
 					_user$project$Model$setEditMode,
-					A2(_user$project$EditMode$editProjectSetName, newName, _p27._0),
+					A2(_user$project$ExclusiveMode$editProjectSetName, newName, _p27._0),
 					model);
 			default:
 				return model;
@@ -477,18 +477,18 @@ var _user$project$Model$startEditingEntity = F2(
 	});
 var _user$project$Model$startEditingTodoContext = function (todo) {
 	return _user$project$Model$setEditMode(
-		_user$project$EditMode$EditTodoContext(
+		_user$project$ExclusiveMode$EditTodoContext(
 			_user$project$Todo_GroupForm$init(todo)));
 };
 var _user$project$Model$startEditingTodoProject = function (todo) {
 	return _user$project$Model$setEditMode(
-		_user$project$EditMode$EditTodoProject(
+		_user$project$ExclusiveMode$EditTodoProject(
 			_user$project$Todo_GroupForm$init(todo)));
 };
 var _user$project$Model$startEditingReminder = function (todo) {
 	return _user$project$Model$updateEditModeM(
 		function (_p28) {
-			return _user$project$EditMode$EditTodoReminder(
+			return _user$project$ExclusiveMode$EditTodoReminder(
 				A2(
 					_user$project$Todo_ReminderForm$create,
 					todo,
@@ -898,7 +898,7 @@ var _user$project$Model$activateLaunchBar = function (now) {
 	return A2(
 		_user$project$Ext_Record$set,
 		_user$project$Model$editMode,
-		_user$project$EditMode$LaunchBar(
+		_user$project$ExclusiveMode$LaunchBar(
 			_user$project$LaunchBar_Form$create(now)));
 };
 var _user$project$Model$updateLaunchBarInput = F3(
@@ -906,28 +906,28 @@ var _user$project$Model$updateLaunchBarInput = F3(
 		return A2(
 			_user$project$Ext_Record$set,
 			_user$project$Model$editMode,
-			_user$project$EditMode$LaunchBar(
+			_user$project$ExclusiveMode$LaunchBar(
 				A3(_user$project$LaunchBar_Form$updateInput, now, text, form)));
 	});
 var _user$project$Model$activateNewTodoModeWithFocusInEntityAsReference = function (model) {
 	return A3(
 		_user$project$Ext_Record$set,
 		_user$project$Model$editMode,
-		_user$project$EditMode$NewTodo(
+		_user$project$ExclusiveMode$NewTodo(
 			A2(_user$project$Todo_NewForm$create, model.focusInEntity, '')),
 		model);
 };
 var _user$project$Model$activateNewTodoModeWithInboxAsReference = A2(
 	_user$project$Ext_Record$set,
 	_user$project$Model$editMode,
-	_user$project$EditMode$NewTodo(
+	_user$project$ExclusiveMode$NewTodo(
 		A2(_user$project$Todo_NewForm$create, _user$project$Model$inboxEntity, '')));
 var _user$project$Model$updateNewTodoText = F2(
 	function (form, text) {
 		return A2(
 			_user$project$Ext_Record$set,
 			_user$project$Model$editMode,
-			_user$project$EditMode$NewTodo(
+			_user$project$ExclusiveMode$NewTodo(
 				A2(_user$project$Todo_NewForm$setText, text, form)));
 	});
 var _user$project$Model$firebaseClient = A2(
@@ -1563,7 +1563,7 @@ var _user$project$Model$init = function (flags) {
 	var projectStore = _p65._0._1;
 	var contextStore = _p65._0._2;
 	var seed = _p65._1;
-	var editMode = (_user$project$Store$isEmpty(todoStore) || (_user$project$Store$isEmpty(contextStore) || _user$project$Store$isEmpty(projectStore))) ? _user$project$EditMode$firstVisit : _user$project$EditMode$none;
+	var editMode = (_user$project$Store$isEmpty(todoStore) || (_user$project$Store$isEmpty(contextStore) || _user$project$Store$isEmpty(projectStore))) ? _user$project$ExclusiveMode$firstVisit : _user$project$ExclusiveMode$none;
 	var model = {
 		now: now,
 		todoStore: todoStore,

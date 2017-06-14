@@ -5,7 +5,7 @@ import Dict exposing (Dict)
 import Dict.Extra as Dict
 import Document
 import Dom
-import EditMode
+import ExclusiveMode
 import Entity
 import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)

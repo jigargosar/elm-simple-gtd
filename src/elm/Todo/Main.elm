@@ -2,7 +2,7 @@ port module Todo.Main exposing (..)
 
 import Document
 import DomPorts
-import EditMode
+import ExclusiveMode
 import Entity
 import Ext.Record as Record exposing (set)
 import Model
@@ -72,7 +72,7 @@ update andThenUpdate now todoMsg =
         UpdateReminderForm form action ->
             Return.map
                 (Todo.ReminderForm.update action form
-                    |> EditMode.EditTodoReminder
+                    |> ExclusiveMode.EditTodoReminder
                     >> Model.setEditMode
                 )
 

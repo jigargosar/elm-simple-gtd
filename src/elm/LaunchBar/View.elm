@@ -1,7 +1,7 @@
 module LaunchBar.View exposing (..)
 
 import Context
-import EditMode
+import ExclusiveMode
 import Ext.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Fuzzy
 import Keyboard.Extra as Key exposing (Key(..))

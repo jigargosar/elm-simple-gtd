@@ -3,7 +3,7 @@ port module Main exposing (..)
 import CommonMsg
 import Document
 import DomPorts exposing (autoFocusInputCmd, focusInputCmd, focusSelectorIfNoFocusCmd)
-import EditMode
+import ExclusiveMode
 import Entity
 import Ext.Debug
 import Ext.Keyboard as Keyboard exposing (Key)
@@ -256,14 +256,14 @@ update msg =
                 UpdateTodoForm form action ->
                     Return.map
                         (Todo.Form.set action form
-                            |> EditMode.EditTodo
+                            |> ExclusiveMode.EditTodo
                             >> Model.setEditMode
                         )
 
                 OnEditTodoProjectMenuStateChanged form menuState ->
                     Return.map
                         (Todo.GroupForm.setMenuState menuState form
-                            |> EditMode.EditTodoProject
+                            |> ExclusiveMode.EditTodoProject
                             >> Model.setEditMode
                         )
                         >> autoFocusInputCmd
@@ -271,7 +271,7 @@ update msg =
                 OnEditTodoContextMenuStateChanged form menuState ->
                     Return.map
                         (Todo.GroupForm.setMenuState menuState form
-                            |> EditMode.EditTodoContext
+                            |> ExclusiveMode.EditTodoContext
                             >> Model.setEditMode
                         )
                         >> autoFocusInputCmd
@@ -279,7 +279,7 @@ update msg =
                 UpdateRemoteSyncFormUri form uri ->
                     Return.map
                         ({ form | uri = uri }
-                            |> EditMode.EditSyncSettings
+                            |> ExclusiveMode.EditSyncSettings
                             >> Model.setEditMode
                         )
 
@@ -515,7 +515,7 @@ onGlobalKeyUp key =
     Return.with (Model.getEditMode)
         (\editMode ->
             case ( key, editMode ) of
-                ( key, EditMode.None ) ->
+                ( key, ExclusiveMode.None ) ->
                     case key of
                         Key.Escape ->
                             Return.map (Model.clearSelection)

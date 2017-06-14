@@ -1,4 +1,4 @@
-module EditMode exposing (..)
+module ExclusiveMode exposing (..)
 
 import Context
 import Document
@@ -44,7 +44,7 @@ type alias SyncForm =
     { uri : String }
 
 
-type EditMode
+type ExclusiveMode
     = NewTodo Todo.NewForm.Model
     | EditTodo Todo.Form.Model
     | EditContext EditContextForm

@@ -4,7 +4,7 @@ import CommonMsg
 import Context
 import Dict.Extra
 import Document exposing (Document)
-import EditMode exposing (EditMode)
+import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Ext.List as List
@@ -54,7 +54,7 @@ type Msg
     | OnFirebaseConnectionChanged Bool
     | OnSignIn
     | SignOut
-    | RemotePouchSync EditMode.SyncForm
+    | RemotePouchSync ExclusiveMode.SyncForm
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction ReminderOverlay.Action
     | OnNotificationClicked TodoNotificationEvent
@@ -76,7 +76,7 @@ type Msg
     | StartEditingContext Todo.Model
     | StartEditingProject Todo.Model
     | SaveCurrentForm
-    | UpdateRemoteSyncFormUri EditMode.SyncForm String
+    | UpdateRemoteSyncFormUri ExclusiveMode.SyncForm String
     | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model Menu.State
     | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model Menu.State
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
@@ -158,7 +158,7 @@ type alias Model =
     , todoStore : Todo.Store
     , projectStore : Project.Store
     , contextStore : Context.Store
-    , editMode : EditMode
+    , editMode : ExclusiveMode
     , mainViewType : ViewType
     , keyboardState : Keyboard.State
     , showDeleted : Bool
@@ -292,9 +292,9 @@ init flags =
                     || Store.isEmpty contextStore
                     || Store.isEmpty projectStore
             then
-                EditMode.firstVisit
+                ExclusiveMode.firstVisit
             else
-                EditMode.none
+                ExclusiveMode.none
 
         model =
             { now = now
@@ -563,40 +563,40 @@ isShowDetailsKeyPressed =
 
 activateLaunchBar : Time -> ModelF
 activateLaunchBar now =
-    set editMode (LaunchBar.Form.create now |> EditMode.LaunchBar)
+    set editMode (LaunchBar.Form.create now |> ExclusiveMode.LaunchBar)
 
 
 updateLaunchBarInput now text form =
-    set editMode (LaunchBar.Form.updateInput now text form |> EditMode.LaunchBar)
+    set editMode (LaunchBar.Form.updateInput now text form |> ExclusiveMode.LaunchBar)
 
 
 activateNewTodoModeWithFocusInEntityAsReference : ModelF
 activateNewTodoModeWithFocusInEntityAsReference model =
-    set editMode (Todo.NewForm.create (model.focusInEntity) "" |> EditMode.NewTodo) model
+    set editMode (Todo.NewForm.create (model.focusInEntity) "" |> ExclusiveMode.NewTodo) model
 
 
 activateNewTodoModeWithInboxAsReference : ModelF
 activateNewTodoModeWithInboxAsReference =
-    set editMode (Todo.NewForm.create inboxEntity "" |> EditMode.NewTodo)
+    set editMode (Todo.NewForm.create inboxEntity "" |> ExclusiveMode.NewTodo)
 
 
 updateNewTodoText form text =
-    set editMode (Todo.NewForm.setText text form |> EditMode.NewTodo)
+    set editMode (Todo.NewForm.setText text form |> ExclusiveMode.NewTodo)
 
 
 startEditingReminder : Todo.Model -> ModelF
 startEditingReminder todo =
-    updateEditModeM (.now >> Todo.ReminderForm.create todo >> EditMode.EditTodoReminder)
+    updateEditModeM (.now >> Todo.ReminderForm.create todo >> ExclusiveMode.EditTodoReminder)
 
 
 startEditingTodoProject : Todo.Model -> ModelF
 startEditingTodoProject todo =
-    setEditMode (Todo.GroupForm.init todo |> EditMode.EditTodoProject)
+    setEditMode (Todo.GroupForm.init todo |> ExclusiveMode.EditTodoProject)
 
 
 startEditingTodoContext : Todo.Model -> ModelF
 startEditingTodoContext todo =
-    setEditMode (Todo.GroupForm.init todo |> EditMode.EditTodoContext)
+    setEditMode (Todo.GroupForm.init todo |> ExclusiveMode.EditTodoContext)
 
 
 startEditingEntity : Entity -> ModelF
@@ -614,11 +614,11 @@ switchToEntityListViewFromEntity entity model =
 
 updateEditModeNameChanged newName entity model =
     case model.editMode of
-        EditMode.EditContext ecm ->
-            setEditMode (EditMode.editContextSetName newName ecm) model
+        ExclusiveMode.EditContext ecm ->
+            setEditMode (ExclusiveMode.editContextSetName newName ecm) model
 
-        EditMode.EditProject epm ->
-            setEditMode (EditMode.editProjectSetName newName epm) model
+        ExclusiveMode.EditProject epm ->
+            setEditMode (ExclusiveMode.editProjectSetName newName epm) model
 
         _ ->
             model
@@ -626,33 +626,33 @@ updateEditModeNameChanged newName entity model =
 
 saveCurrentForm model =
     case model.editMode of
-        EditMode.EditContext form ->
+        ExclusiveMode.EditContext form ->
             model
                 |> updateContext form.id
                     (Context.setName form.name)
 
-        EditMode.EditProject form ->
+        ExclusiveMode.EditProject form ->
             model
                 |> updateProject form.id
                     (Project.setName form.name)
 
-        EditMode.EditTodo form ->
+        ExclusiveMode.EditTodo form ->
             model
                 |> updateTodo (Todo.SetText form.todoText) form.id
 
-        EditMode.EditTodoReminder form ->
+        ExclusiveMode.EditTodoReminder form ->
             model
                 |> updateTodo (Todo.SetScheduleFromMaybeTime (Todo.ReminderForm.getMaybeTime form)) form.id
 
-        EditMode.EditTodoContext form ->
+        ExclusiveMode.EditTodoContext form ->
             model
                 |> Return.singleton
 
-        EditMode.EditTodoProject form ->
+        ExclusiveMode.EditTodoProject form ->
             model
                 |> Return.singleton
 
-        EditMode.NewTodo form ->
+        ExclusiveMode.NewTodo form ->
             insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model
                 |> Tuple.mapFirst Document.getId
                 |> uncurry
@@ -672,18 +672,18 @@ saveCurrentForm model =
                             >> Tuple.mapFirst (setFocusInEntityFromTodoId todoId)
                     )
 
-        EditMode.EditSyncSettings form ->
+        ExclusiveMode.EditSyncSettings form ->
             { model | pouchDBRemoteSyncURI = form.uri }
                 |> Return.singleton
 
-        EditMode.LaunchBar form ->
+        ExclusiveMode.LaunchBar form ->
             model
                 |> Return.singleton
 
-        EditMode.None ->
+        ExclusiveMode.None ->
             model |> Return.singleton
 
-        EditMode.FirstVisit ->
+        ExclusiveMode.FirstVisit ->
             model |> Return.singleton
 
 
@@ -714,7 +714,7 @@ toggleDeleteEntity entity model =
 
 getMaybeEditTodoReminderForm model =
     case model.editMode of
-        EditMode.EditTodoReminder form ->
+        ExclusiveMode.EditTodoReminder form ->
             Just form
 
         _ ->
@@ -725,7 +725,7 @@ getRemoteSyncForm model =
     let
         maybeForm =
             case model.editMode of
-                EditMode.EditSyncSettings form ->
+                ExclusiveMode.EditSyncSettings form ->
                     Just form
 
                 _ ->
@@ -734,39 +734,39 @@ getRemoteSyncForm model =
         maybeForm ?= createRemoteSyncForm model
 
 
-createRemoteSyncForm : Model -> EditMode.SyncForm
+createRemoteSyncForm : Model -> ExclusiveMode.SyncForm
 createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
 
 
-createEntityEditForm : Entity -> Model -> EditMode
+createEntityEditForm : Entity -> Model -> ExclusiveMode
 createEntityEditForm entity model =
     case entity of
         Entity.ContextEntity context ->
-            EditMode.editContextMode context
+            ExclusiveMode.editContextMode context
 
         Entity.ProjectEntity project ->
-            EditMode.editProjectMode project
+            ExclusiveMode.editProjectMode project
 
         Entity.TodoEntity todo ->
-            Todo.Form.create todo |> EditMode.EditTodo
+            Todo.Form.create todo |> ExclusiveMode.EditTodo
 
 
 deactivateEditingMode =
-    setEditMode EditMode.none
+    setEditMode ExclusiveMode.none
 
 
-getEditMode : Model -> EditMode
+getEditMode : Model -> ExclusiveMode
 getEditMode =
     (.editMode)
 
 
-setEditMode : EditMode -> ModelF
+setEditMode : ExclusiveMode -> ModelF
 setEditMode editMode =
     (\model -> { model | editMode = editMode })
 
 
-updateEditModeM : (Model -> EditMode) -> ModelF
+updateEditModeM : (Model -> ExclusiveMode) -> ModelF
 updateEditModeM updater model =
     setEditMode (updater model) model
 

@@ -3,7 +3,7 @@ module OldGroupEntity.ViewModel exposing (..)
 import Context
 import Dict
 import Document
-import EditMode exposing (EditMode)
+import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
 import Ext.Keyboard exposing (KeyboardEvent)
 import Lazy

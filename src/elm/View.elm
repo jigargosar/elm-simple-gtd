@@ -1,6 +1,6 @@
 module View exposing (init)
 
-import EditMode
+import ExclusiveMode
 import Firebase.View
 import Html.Attributes.Extra exposing (..)
 import Html exposing (Attribute, Html, a, div, form, h1, h2, h3, h4, h5, h6, hr, input, node, p, span, text)
@@ -46,19 +46,19 @@ overlayViews model =
     let
         editModeOverlayView =
             case Model.getEditMode model of
-                EditMode.LaunchBar form ->
+                ExclusiveMode.LaunchBar form ->
                     LaunchBar.View.init form model
 
-                EditMode.EditTodoContext form ->
+                ExclusiveMode.EditTodoContext form ->
                     Todo.View.contextMenu form model
 
-                EditMode.EditTodoProject form ->
+                ExclusiveMode.EditTodoProject form ->
                     Todo.View.projectMenu form model
 
-                EditMode.EditTodoReminder form ->
+                ExclusiveMode.EditTodoReminder form ->
                     Todo.View.reminderPopup form model
 
-                EditMode.FirstVisit ->
+                ExclusiveMode.FirstVisit ->
                     firstVisitModal
 
                 _ ->
@@ -93,7 +93,7 @@ firstVisitModal =
                         [ span [ class "flow-text" ] [ text "Or lets create some sample items and " ]
                         ]
                     , div [ class "col s12 m6" ]
-                        [ a [ class "btn", onClick Model.OnCreateDefaultEntities ] [ text "Get Started" ]
+                        [ a [ class "btn" , onClick Model.OnCreateDefaultEntities] [ text "Get Started" ]
                         ]
                     ]
                 ]

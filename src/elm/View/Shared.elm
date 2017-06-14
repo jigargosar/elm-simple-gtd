@@ -3,7 +3,7 @@ module View.Shared exposing (..)
 import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
-import EditMode exposing (EditMode)
+import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
 import OldGroupEntity.ViewModel
 import Html exposing (Html, div, span, text)
@@ -37,7 +37,7 @@ type alias SharedViewModel =
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
     , getMaybeTodoReminderFormForTodo : Todo.Model -> Maybe Todo.ReminderForm.Model
     , getTodoReminderForm : Todo.Model -> Todo.ReminderForm.Model
-    , getMaybeEditEntityFormForEntityId : Document.Id -> Maybe EditMode.EntityForm
+    , getMaybeEditEntityFormForEntityId : Document.Id -> Maybe ExclusiveMode.EntityForm
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
     , activeProjects : List Project.Model
@@ -56,7 +56,7 @@ createSharedViewModel model =
         getMaybeTodoReminderFormForTodo =
             \todo ->
                 case editMode of
-                    EditMode.EditTodoReminder form ->
+                    ExclusiveMode.EditTodoReminder form ->
                         if Document.hasId form.id todo then
                             Just form
                         else
@@ -71,7 +71,7 @@ createSharedViewModel model =
         getMaybeEditTodoFormForTodo =
             \todo ->
                 case editMode of
-                    EditMode.EditTodo form ->
+                    ExclusiveMode.EditTodo form ->
                         if Document.hasId form.id todo then
                             Just form
                         else
@@ -96,13 +96,13 @@ createSharedViewModel model =
         , getMaybeEditEntityFormForEntityId =
             \entityId ->
                 case editMode of
-                    EditMode.EditContext form ->
+                    ExclusiveMode.EditContext form ->
                         if entityId == form.id then
                             Just form
                         else
                             Nothing
 
-                    EditMode.EditProject form ->
+                    ExclusiveMode.EditProject form ->
                         if entityId == form.id then
                             Just form
                         else

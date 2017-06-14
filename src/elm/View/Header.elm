@@ -1,6 +1,6 @@
 module View.Header exposing (..)
 
-import EditMode
+import ExclusiveMode
 import Ext.Keyboard as Keyboard
 import Ext.Time
 import Firebase
@@ -57,7 +57,7 @@ headerView viewModel m =
     let
         content =
             case m.editMode of
-                EditMode.NewTodo form ->
+                ExclusiveMode.NewTodo form ->
                     newTodoHeader form
 
                 _ ->

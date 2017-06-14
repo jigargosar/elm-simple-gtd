@@ -6,7 +6,7 @@ import Date.Distance exposing (inWords)
 import Dict
 import Document
 import Dom
-import EditMode
+import ExclusiveMode
 import Entity
 import Ext.Decode exposing (traceDecoder)
 import Ext.Time

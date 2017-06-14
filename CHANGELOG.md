@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.22 - 2017-06-14
 * disable input field propagation so as not to trigger global combos  
 
 ## v0.18.21 - 2017-06-14

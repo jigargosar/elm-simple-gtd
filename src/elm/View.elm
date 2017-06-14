@@ -1,5 +1,6 @@
 module View exposing (init)
 
+import ActionList
 import ExclusiveMode
 import Firebase.View
 import Html.Attributes.Extra exposing (..)
@@ -42,30 +43,33 @@ appView model =
         div [ id "app-view" ] children
 
 
-overlayViews model =
+overlayViews appModel =
     let
         editModeOverlayView =
-            case Model.getEditMode model of
+            case Model.getEditMode appModel of
                 ExclusiveMode.LaunchBar form ->
-                    LaunchBar.View.init form model
+                    LaunchBar.View.init form appModel
 
                 ExclusiveMode.EditTodoContext form ->
-                    Todo.View.contextMenu form model
+                    Todo.View.contextMenu form appModel
 
                 ExclusiveMode.EditTodoProject form ->
-                    Todo.View.projectMenu form model
+                    Todo.View.projectMenu form appModel
 
                 ExclusiveMode.EditTodoReminder form ->
-                    Todo.View.reminderPopup form model
+                    Todo.View.reminderPopup form appModel
 
                 ExclusiveMode.FirstVisit ->
                     firstVisitModal
+
+                ExclusiveMode.ActionList model ->
+                    ActionList.view appModel model
 
                 _ ->
                     span [] []
     in
         [ Just editModeOverlayView
-        , View.ReminderOverlay.maybe model
+        , View.ReminderOverlay.maybe appModel
         ]
             |> List.filterMap identity
 
@@ -93,7 +97,7 @@ firstVisitModal =
                         [ span [ class "flow-text" ] [ text "Or lets create some sample items and " ]
                         ]
                     , div [ class "col s12 m6" ]
-                        [ a [ class "btn" , onClick Model.OnCreateDefaultEntities] [ text "Get Started" ]
+                        [ a [ class "btn", onClick Model.OnCreateDefaultEntities ] [ text "Get Started" ]
                         ]
                     ]
                 ]

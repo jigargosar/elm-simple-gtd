@@ -22,7 +22,6 @@
 <link rel="import" href="bower_components/paper-menu-button/paper-menu-button.html">
 <link rel="import" href="bower_components/paper-button/paper-button.html">
 <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
-<link rel="import" href="bower_components/paper-input/all-imports.html">
 <link rel="import" href="bower_components/paper-card/paper-card.html">
 <link rel="import" href="bower_components/paper-item/all-imports.html">
 <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
@@ -67,13 +66,6 @@
                     display: none;
                 };
 
-                --ss: {
-                    --paper-input-container-input-color: red;
-                    --paper-input-container-label: {
-                        color: red;
-                    }
-                };
-
                 --paper-tooltip-opacity: 1;
 
             }
@@ -90,26 +82,6 @@
                 margin: 0;
                 --iron-icon-fill-color:white;
                 /*--iron-icon-stroke-color:white;*/
-            }
-
-            paper-dropdown-menu.red_ {
-                /*@apply(--ss);*/
-                --paper-dropdown-menu-input: {
-                    color: red;
-                    height: 100px;
-                    --paper-input-container-input-color: red;
-                    --paper-input-container-label: {
-                        color: red;
-                    }
-                };
-
-            }
-
-            .blue_ {
-                --paper-input-container-label: {
-                    color: red;
-                };
-                --paper-input-container-input-color: blue;
             }
 
             html, body {
@@ -133,11 +105,6 @@
             /*background-color: #4285f4;*/
             /*color: #fff;*/
             /*}*/
-
-            #new-todo-input {
-                --paper-input-container-focus-color: var(--paper-blue-grey-100);
-                --paper-input-container-input-color: var(--paper-grey-50);
-            }
 
             paper-icon-button + [main-title] {
                 margin-left: 24px;

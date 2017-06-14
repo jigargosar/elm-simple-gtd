@@ -126,7 +126,7 @@ async function boot() {
                 my: "right top",
                 at: "right top",
                 of: $(ofSelector),
-                within: ".fullbleed-capture",
+                within: ".overlay",
                 collision: "fit"
             })
             $popup.find(".auto-focus").first().focus()

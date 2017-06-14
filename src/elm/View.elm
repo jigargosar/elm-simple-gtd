@@ -77,10 +77,10 @@ overlayViews appModel =
 
 firstVisitModal =
     div
-        [ class "fullbleed-capture dark"
+        [ class "overlay dark"
         , onClickStopPropagation Model.noop
         ]
-        [ div [ id "welcome", class "modal open modal-center" ]
+        [ div [ id "welcome", class "modal open fixed-center" ]
             [ div [ class "modal-content" ]
                 [ h4 [] [ text "Welcome to SimpleGTD.com" ]
                 , div [ class "divider" ] []

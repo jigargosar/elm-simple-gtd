@@ -45,7 +45,7 @@ init form m =
                     commonMsg.noOp
     in
         div
-            [ class "fullbleed-capture"
+            [ class "overlay"
             , onKeyDownStopPropagation (keyHandler)
             , onClickStopPropagation Model.OnDeactivateEditingMode
             ]

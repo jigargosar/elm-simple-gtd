@@ -3,7 +3,7 @@ var _user$project$View_FullBleedCapture$init = function (vm) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('fullbleed-capture dark'),
+			_0: _elm_lang$html$Html_Attributes$class('overlay dark'),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$html$Html_Events$onMouseDown(vm.onMouseDown),

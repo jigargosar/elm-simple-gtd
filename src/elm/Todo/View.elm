@@ -435,7 +435,7 @@ reminderPopup form model =
             Todo.Msg.UpdateReminderForm form >> Model.OnTodoMsg
     in
         div
-            [ class "fullbleed-capture"
+            [ class "overlay"
             , onClickStopPropagation Model.OnDeactivateEditingMode
             ]
             [ div

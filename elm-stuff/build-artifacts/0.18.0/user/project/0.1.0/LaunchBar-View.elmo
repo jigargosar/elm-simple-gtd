@@ -27,7 +27,7 @@ var _user$project$LaunchBar_View$init = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('fullbleed-capture'),
+				_0: _elm_lang$html$Html_Attributes$class('overlay'),
 				_1: {
 					ctor: '::',
 					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(keyHandler),

@@ -2,6 +2,13 @@
 
 @use cssnext;
 :root {
+  --overlay:{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
 
 }
 
@@ -71,23 +78,25 @@ app-toolbar .btn-floating i {
 
 /*mat css END*/
 
-.fullbleed-capture.dark {
+
+.overlay {
+  @apply --overlay;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal.open {
+.overlay .modal{
   display: block;
 }
 
-.modal-center {
-  position: absolute;
+.fixed-center {
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
 }
 
-.modal-top-20p {
-  position: absolute;
+.fixed-top-20p {
+  position: fixed;
   left: 50%;
   top: 20%;
   transform: translate(-50%, 0);
@@ -363,14 +372,6 @@ textarea.materialize-textarea {
 //min-height: 2em; //padding-bottom: 0.5rem;
 }
 
-.fullbleed-capture {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  /*background-color: rgba(0, 0, 0, 0.05);*/
-}
 
 #launch-bar-container {
   position: fixed;

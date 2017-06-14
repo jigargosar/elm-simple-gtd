@@ -132,7 +132,7 @@ var _user$project$View$firstVisitModal = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('fullbleed-capture dark'),
+		_0: _elm_lang$html$Html_Attributes$class('overlay dark'),
 		_1: {
 			ctor: '::',
 			_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$noop),
@@ -148,7 +148,7 @@ var _user$project$View$firstVisitModal = A2(
 				_0: _elm_lang$html$Html_Attributes$id('welcome'),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('modal open modal-center'),
+					_0: _elm_lang$html$Html_Attributes$class('modal open fixed-center'),
 					_1: {ctor: '[]'}
 				}
 			},

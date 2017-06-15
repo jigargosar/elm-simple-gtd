@@ -183,8 +183,8 @@ var _user$project$EntityList_View$listView = F3(
 					return _user$project$Todo_View$initKeyed(_p9._0);
 			}
 		};
-		var entityList = _user$project$Entity$flattenGrouping(
-			A2(_user$project$Model$createGrouping, viewType, model));
+		var grouping = A2(_user$project$Model$createGrouping, viewType, model);
+		var entityList = _user$project$Entity$flattenGrouping(grouping);
 		var vmList = A3(_user$project$EntityList_View$createVMList, entityList, appViewModel, model);
 		return A3(
 			_elm_lang$html$Html_Keyed$node,

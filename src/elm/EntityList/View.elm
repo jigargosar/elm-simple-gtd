@@ -139,8 +139,16 @@ createVMList entityList appViewModel model =
 listView : Entity.ListViewType -> Model.Model -> ViewModel.Model -> Html.Html Msg
 listView viewType model appViewModel =
     let
+        grouping =
+            Model.createGrouping viewType model
+
+        _ =
+            case grouping of
+                Entity.SingleContext { context, todoList } projectSubgroups ->
+                    identity
+
         entityList =
-            Model.createGrouping viewType model |> Entity.flattenGrouping
+            grouping |> Entity.flattenGrouping
 
         vmList =
             createVMList entityList appViewModel model

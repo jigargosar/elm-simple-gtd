@@ -1,0 +1,116 @@
+var _user$project$Context_View$edit = function (form) {
+	var fireCancel = _user$project$Model$OnDeactivateEditingMode;
+	var fireSaveForm = _user$project$Model$OnSaveCurrentForm;
+	var toMsg = _user$project$Model$OnEntityAction(form.entity);
+	var fireToggleDelete = _user$project$Context$isNullId(form.id) ? _user$project$Model$NOOP : toMsg(_user$project$Entity$ToggleDeleted);
+	var fireNameChanged = function (_p0) {
+		return toMsg(
+			_user$project$Entity$NameChanged(_p0));
+	};
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('overlay'),
+			_1: {
+				ctor: '::',
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
+					_1: {
+						ctor: '::',
+						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(fireCancel),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('modal-content'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('input-field'),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+											function (_p1) {
+												return _user$project$Model$NOOP;
+											}),
+										_1: {
+											ctor: '::',
+											_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$input,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$autofocus(true),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$defaultValue(form.name),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Ext_Keyboard$onEnter(fireSaveForm),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Events$onInput(fireNameChanged),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$label,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('active'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Name'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$View_Shared$defaultOkCancelDeleteButtons(fireToggleDelete),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};

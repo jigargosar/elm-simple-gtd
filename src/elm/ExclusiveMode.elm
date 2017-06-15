@@ -2,6 +2,7 @@ module ExclusiveMode exposing (..)
 
 import ActionList
 import Context
+import Context.EditForm
 import Document
 import Entity
 import Form
@@ -24,10 +25,7 @@ import Todo.ReminderForm
 
 
 type alias EditContextForm =
-    { id : Document.Id
-    , name : Context.Name
-    , entity : Entity.Entity
-    }
+    Context.EditForm.Model
 
 
 type alias EntityForm =
@@ -75,21 +73,17 @@ initActionList =
     ActionList ActionList.init
 
 
-editContextMode context =
-    EditContext
-        { id = Document.getId context
-        , name = Context.getName context
-        , entity = Entity.ContextEntity context
-        }
-
-
-editContextSetName name ecm =
-    EditContext { ecm | name = name }
-
-
 editProjectMode =
     Project.EditForm.init >> EditProject
 
 
 editProjectSetName =
     Project.EditForm.setName >>> EditProject
+
+
+editContextMode =
+    Context.EditForm.init >> EditContext
+
+
+editContextSetName =
+    Context.EditForm.setName >>> EditContext

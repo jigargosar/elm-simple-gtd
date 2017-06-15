@@ -69,7 +69,15 @@ decoder =
 
 null : Model
 null =
-    constructor "" "" 0 0 False "" "Inbox"
+    constructor nullId "" 0 0 False "" "Inbox"
+
+
+nullId =
+    ""
+
+
+isNullId =
+    equals nullId
 
 
 filterNull pred =

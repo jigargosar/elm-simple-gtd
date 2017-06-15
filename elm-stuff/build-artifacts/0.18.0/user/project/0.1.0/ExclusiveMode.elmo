@@ -1,7 +1,3 @@
-var _user$project$ExclusiveMode$EditContextForm = F3(
-	function (a, b, c) {
-		return {id: a, name: b, entity: c};
-	});
 var _user$project$ExclusiveMode$SyncForm = function (a) {
 	return {uri: a};
 };
@@ -39,21 +35,11 @@ var _user$project$ExclusiveMode$editProjectSetName = A2(_user$project$Ext_Functi
 var _user$project$ExclusiveMode$EditContext = function (a) {
 	return {ctor: 'EditContext', _0: a};
 };
-var _user$project$ExclusiveMode$editContextMode = function (context) {
+var _user$project$ExclusiveMode$editContextMode = function (_p1) {
 	return _user$project$ExclusiveMode$EditContext(
-		{
-			id: _user$project$Document$getId(context),
-			name: _user$project$Context$getName(context),
-			entity: _user$project$Entity$ContextEntity(context)
-		});
+		_user$project$Context_EditForm$init(_p1));
 };
-var _user$project$ExclusiveMode$editContextSetName = F2(
-	function (name, ecm) {
-		return _user$project$ExclusiveMode$EditContext(
-			_elm_lang$core$Native_Utils.update(
-				ecm,
-				{name: name}));
-	});
+var _user$project$ExclusiveMode$editContextSetName = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Context_EditForm$setName, _user$project$ExclusiveMode$EditContext);
 var _user$project$ExclusiveMode$EditTodo = function (a) {
 	return {ctor: 'EditTodo', _0: a};
 };

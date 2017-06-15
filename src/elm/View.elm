@@ -2,6 +2,7 @@ module View exposing (init)
 
 import ActionList
 import ActionList.View
+import Context.View
 import ExclusiveMode
 import Firebase.View
 import Html.Attributes.Extra exposing (..)
@@ -69,6 +70,9 @@ overlayViews appModel =
 
                 ExclusiveMode.EditProject form ->
                     Project.View.edit form
+
+                ExclusiveMode.EditContext form ->
+                    Context.View.edit form
 
                 _ ->
                     span [] []

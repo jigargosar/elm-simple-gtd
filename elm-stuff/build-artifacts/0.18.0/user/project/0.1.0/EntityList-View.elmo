@@ -1,10 +1,10 @@
 var _user$project$EntityList_View$groupHeaderView = F2(
 	function (appViewModel, vm) {
-		return A2(_user$project$EntityList_GroupView2$initHeaderKeyed, appViewModel, vm);
+		return A2(_user$project$EntityList_GroupView$initHeaderKeyed, appViewModel, vm);
 	});
 var _user$project$EntityList_View$groupView = F2(
 	function (appViewModel, vm) {
-		return A2(_user$project$EntityList_GroupView2$initKeyed, appViewModel, vm);
+		return A2(_user$project$EntityList_GroupView$initKeyed, appViewModel, vm);
 	});
 var _user$project$EntityList_View$listView = F3(
 	function (viewType, model, appViewModel) {
@@ -24,7 +24,7 @@ var _user$project$EntityList_View$listView = F3(
 			var tabindexValue = hasFocusIn(entity) ? 0 : -1;
 			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
 		};
-		var tempList = function () {
+		var keyedViewList = function () {
 			var createProjectVM = function (_p0) {
 				var _p1 = _p0;
 				return A3(_user$project$EntityList_ViewModel$projectGroup, getTabIndexAVForEntity, _p1.todoList, _p1.project);
@@ -111,5 +111,5 @@ var _user$project$EntityList_View$listView = F3(
 					_1: {ctor: '[]'}
 				}
 			},
-			tempList);
+			keyedViewList);
 	});

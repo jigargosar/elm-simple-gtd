@@ -2,8 +2,7 @@ module EntityList.View exposing (..)
 
 import Document
 import Entity exposing (Entity)
-import EntityList.GroupView2
-import EntityList.GroupViewModel exposing (DocumentWithName)
+import EntityList.GroupView
 import EntityList.ViewModel
 import Html
 import Todo
@@ -47,7 +46,7 @@ listView viewType model appViewModel =
             in
                 tabindex tabindexValue
 
-        tempList =
+        keyedViewList =
             let
                 createContextVM { context, todoList } =
                     EntityList.ViewModel.contextGroup
@@ -103,12 +102,12 @@ listView viewType model appViewModel =
             [ class "entity-list focusable-list"
             , Model.OnEntityListKeyDown entityList |> onKeyDown
             ]
-            tempList
+            keyedViewList
 
 
 groupView appViewModel vm =
-    EntityList.GroupView2.initKeyed appViewModel vm
+    EntityList.GroupView.initKeyed appViewModel vm
 
 
 groupHeaderView appViewModel vm =
-    EntityList.GroupView2.initHeaderKeyed appViewModel vm
+    EntityList.GroupView.initHeaderKeyed appViewModel vm

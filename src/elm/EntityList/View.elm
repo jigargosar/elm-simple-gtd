@@ -31,16 +31,6 @@ type ViewModel
     | Todo TodoViewModel
 
 
-type alias EntityViewModel =
-    { id : Document.Id
-    , onFocusIn : Msg
-    , startEditingMsg : Msg
-    , toggleDeleteMsg : Msg
-    , startEditingMsg : Msg
-    , tabIndexAV : Html.Attribute Msg
-    }
-
-
 {-| todo: refactoring: build tree in model then flatten it there , don't build tree here, its easier there
 -}
 updateCount vmList =

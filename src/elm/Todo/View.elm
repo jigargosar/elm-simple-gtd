@@ -122,10 +122,10 @@ getDisplayText todo =
 
 
 createTodoViewModel : ViewModel.Model -> Attribute Msg -> Todo.Model -> TodoViewModel
-createTodoViewModel vc tabindexAV todo =
+createTodoViewModel appVM tabindexAV todo =
     let
         now =
-            vc.now
+            appVM.now
 
         todoId =
             Document.getId todo
@@ -138,7 +138,7 @@ createTodoViewModel vc tabindexAV todo =
 
         projectDisplayName =
             projectId
-                |> (Dict.get # vc.projectByIdDict >>? Project.getName)
+                |> (Dict.get # appVM.projectByIdDict >>? Project.getName)
                 ?= ""
                 |> truncateName
                 |> String.append "#"
@@ -148,7 +148,7 @@ createTodoViewModel vc tabindexAV todo =
 
         contextDisplayName =
             contextId
-                |> (Dict.get # vc.contextByIdDict >>? Context.getName)
+                |> (Dict.get # appVM.contextByIdDict >>? Context.getName)
                 ?= "Inbox"
                 |> String.append "@"
                 |> truncateName
@@ -157,7 +157,7 @@ createTodoViewModel vc tabindexAV todo =
             Model.OnEntityAction (Entity.TodoEntity todo)
 
         maybeEditTodoForm =
-            vc.getMaybeEditTodoFormForTodo todo
+            appVM.getMaybeEditTodoFormForTodo todo
 
         onTodoMsg =
             Model.OnTodoMsg
@@ -228,7 +228,7 @@ createTodoViewModel vc tabindexAV todo =
         , onDeleteClicked = toggleDeleteMsg
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
         , tabindexAV = tabindexAV
-        , isSelected = vc.selectedEntityIdSet |> Set.member todoId
+        , isSelected = appVM.selectedEntityIdSet |> Set.member todoId
         }
 
 

@@ -24,15 +24,6 @@ initKeyed mainViewModel vm =
 
 init vc vm =
     let
-        maybeForm =
-            if vm.id /= "" then
-                vc.getMaybeEditEntityFormForEntityId vm.id
-            else
-                Nothing
-
-        isEditing =
-            maybeForm |> Maybe.isJust
-
         tabindexAV =
             vm.tabindexAV
     in
@@ -40,12 +31,8 @@ init vc vm =
             [ tabindexAV
             , onFocusIn vm.onFocusIn
             , onKeyDown vm.onKeyDownMsg
-            , classList [ "edit z-depth-2" => isEditing, "entity-item focusable-list-item" => True ]
+            , classList [ "entity-item focusable-list-item" => True ]
             ]
-            {- (maybeForm
-                   |> Maybe.unpack (\_ -> defaultView tabindexAV vm) (editEntityView tabindexAV vm)
-               )
-            -}
             (defaultView tabindexAV vm)
 
 
@@ -63,21 +50,3 @@ defaultView tabindexAV vm =
             , editButton
             ]
         ]
-
-
-editEntityView tabindexAV vm form =
-    [ div [ class "static layout vertical" ]
-        [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
-            [ input
-                [ class "auto-focus"
-                , autofocus True
-                , defaultValue (form.name)
-                , onEnter Model.OnSaveCurrentForm
-                , onInput vm.onNameChanged
-                ]
-                []
-            , label [ class "active" ] [ text "Name" ]
-            ]
-        , defaultOkCancelDeleteButtons vm.onDeleteClicked
-        ]
-    ]

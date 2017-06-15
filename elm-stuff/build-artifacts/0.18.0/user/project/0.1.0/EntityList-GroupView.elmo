@@ -1,82 +1,3 @@
-var _user$project$EntityList_GroupView$editEntityView = F3(
-	function (tabindexAV, vm, form) {
-		return {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('static layout vertical'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('input-field'),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-									function (_p0) {
-										return _user$project$Model$NOOP;
-									}),
-								_1: {ctor: '[]'}
-							}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$input,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$autofocus(true),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$defaultValue(form.name),
-											_1: {
-												ctor: '::',
-												_0: _elm_community$html_extra$Html_Events_Extra$onEnter(_user$project$Model$OnSaveCurrentForm),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onInput(vm.onNameChanged),
-													_1: {ctor: '[]'}
-												}
-											}
-										}
-									}
-								},
-								{ctor: '[]'}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$label,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('active'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Name'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: _user$project$View_Shared$defaultOkCancelDeleteButtons(vm.onDeleteClicked),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {ctor: '[]'}
-		};
-	});
 var _user$project$EntityList_GroupView$defaultView = F2(
 	function (tabindexAV, vm) {
 		var editButton = vm.isEditable ? A2(
@@ -133,8 +54,6 @@ var _user$project$EntityList_GroupView$defaultView = F2(
 var _user$project$EntityList_GroupView$init = F2(
 	function (vc, vm) {
 		var tabindexAV = vm.tabindexAV;
-		var maybeForm = (!_elm_lang$core$Native_Utils.eq(vm.id, '')) ? vc.getMaybeEditEntityFormForEntityId(vm.id) : _elm_lang$core$Maybe$Nothing;
-		var isEditing = _elm_community$maybe_extra$Maybe_Extra$isJust(maybeForm);
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -151,12 +70,8 @@ var _user$project$EntityList_GroupView$init = F2(
 							_0: _elm_lang$html$Html_Attributes$classList(
 								{
 									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'edit z-depth-2', isEditing),
-									_1: {
-										ctor: '::',
-										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item focusable-list-item', true),
-										_1: {ctor: '[]'}
-									}
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item focusable-list-item', true),
+									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
 						}

@@ -144,7 +144,10 @@ listView viewType model appViewModel =
 
         _ =
             case grouping of
-                Entity.SingleContext { context, todoList } projectSubgroups ->
+                {- Entity.SingleContext { context, todoList } projectSubgroups ->
+                   identity
+                -}
+                Entity.MultiContext contextGroupList ->
                     identity
 
                 _ ->

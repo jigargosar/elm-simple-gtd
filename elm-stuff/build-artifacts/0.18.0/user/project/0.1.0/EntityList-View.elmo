@@ -186,7 +186,7 @@ var _user$project$EntityList_View$listView = F3(
 		var grouping = A2(_user$project$Model$createGrouping, viewType, model);
 		var _p10 = function () {
 			var _p11 = grouping;
-			if (_p11.ctor === 'SingleContext') {
+			if (_p11.ctor === 'MultiContext') {
 				return _elm_lang$core$Basics$identity;
 			} else {
 				return _elm_lang$core$Basics$identity;

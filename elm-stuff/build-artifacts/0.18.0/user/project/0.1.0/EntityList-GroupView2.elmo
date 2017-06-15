@@ -1,5 +1,9 @@
-var _user$project$EntityList_GroupView2$defaultView = F2(
-	function (tabindexAV, vm) {
+var _user$project$EntityList_GroupView2$init = F2(
+	function (appViewModel, vm) {
+		var getTabIndexAVForTodo = function (_p0) {
+			return vm.getTabIndexAVForEntity(
+				_user$project$Entity$TodoEntity(_p0));
+		};
 		var editButton = vm.isEditable ? A2(
 			_user$project$WebComponents$iconButton,
 			'create',
@@ -11,7 +15,7 @@ var _user$project$EntityList_GroupView2$defaultView = F2(
 					_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
 					_1: {
 						ctor: '::',
-						_0: tabindexAV,
+						_0: vm.tabindexAV,
 						_1: {ctor: '[]'}
 					}
 				}
@@ -19,70 +23,91 @@ var _user$project$EntityList_GroupView2$defaultView = F2(
 			_elm_lang$html$Html$span,
 			{ctor: '[]'},
 			{ctor: '[]'});
-		return {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('layout horizontal justified'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('title font-nowrap flex-auto'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _user$project$View_Shared$defaultBadge(vm),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: editButton,
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {ctor: '[]'}
-		};
-	});
-var _user$project$EntityList_GroupView2$init = function (vm) {
-	var tabindexAV = vm.tabindexAV;
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: tabindexAV,
-			_1: {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
 				ctor: '::',
-				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
-				_1: {
-					ctor: '::',
-					_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
-					_1: {
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$classList(
+						_0: vm.tabindexAV,
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$classList(
+										{
+											ctor: '::',
+											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item group-item focusable-list-item', true),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item focusable-list-item', true),
+								_0: _elm_lang$html$Html_Attributes$class('layout horizontal justified'),
 								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('title font-nowrap flex-auto'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _user$project$View_Shared$defaultBadge(vm),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: editButton,
+									_1: {ctor: '[]'}
+								}
 							}),
 						_1: {ctor: '[]'}
-					}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_elm_lang$html$Html_Keyed$node,
+						'div',
+						{ctor: '[]'},
+						A2(
+							_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+							vm.todoList,
+							function (todo) {
+								return _user$project$Todo_View$initKeyed(
+									A2(
+										appViewModel.createTodoViewModel,
+										getTabIndexAVForTodo(todo),
+										todo));
+							})),
+					_1: {ctor: '[]'}
 				}
-			}
-		},
-		A2(_user$project$EntityList_GroupView2$defaultView, tabindexAV, vm));
-};
-var _user$project$EntityList_GroupView2$initKeyed = function (vm) {
-	return {
-		ctor: '_Tuple2',
-		_0: vm.id,
-		_1: _user$project$EntityList_GroupView2$init(vm)
-	};
-};
+			});
+	});
+var _user$project$EntityList_GroupView2$initKeyed = F2(
+	function (appViewModel, vm) {
+		return {
+			ctor: '_Tuple2',
+			_0: vm.id,
+			_1: A2(_user$project$EntityList_GroupView2$init, appViewModel, vm)
+		};
+	});

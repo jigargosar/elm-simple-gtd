@@ -772,7 +772,11 @@ var _user$project$Todo_View$init = function (vm) {
 						_1: {
 							ctor: '::',
 							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-key', vm.key),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
+								_1: {ctor: '[]'}
+							}
 						}
 					}
 				}

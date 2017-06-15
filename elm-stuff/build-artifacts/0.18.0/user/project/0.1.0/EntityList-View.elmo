@@ -1,6 +1,7 @@
-var _user$project$EntityList_View$groupView = function (vm) {
-	return _user$project$EntityList_GroupView2$initKeyed(vm);
-};
+var _user$project$EntityList_View$groupView = F2(
+	function (appViewModel, vm) {
+		return A2(_user$project$EntityList_GroupView2$initKeyed, appViewModel, vm);
+	});
 var _user$project$EntityList_View$Todo = function (a) {
 	return {ctor: 'Todo', _0: a};
 };
@@ -206,7 +207,9 @@ var _user$project$EntityList_View$listView = F3(
 					_p10._0,
 					function (_p11) {
 						var _p12 = _p11;
-						return _user$project$EntityList_View$groupView(
+						return A2(
+							_user$project$EntityList_View$groupView,
+							appViewModel,
 							A3(_user$project$EntityList_ViewModel$contextGroup, getTabindexAVForEntity, _p12.todoList, _p12.context));
 					});
 			} else {

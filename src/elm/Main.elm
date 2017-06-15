@@ -296,7 +296,7 @@ update msg =
 
                 OnKeyboardMsg msg ->
                     Return.map (Model.updateKeyboardState (Keyboard.update msg))
-                        >> focusSelectorIfNoFocusCmd ".entity-list > [tabindex=0]"
+                        >> focusSelectorIfNoFocusCmd ".entity-list .focusable-list-item[tabindex=0]"
 
                 OnSaveCurrentForm ->
                     Return.andThen Model.saveCurrentForm
@@ -443,7 +443,7 @@ andThenTodoMsg =
 
 
 setDomFocusToFocusInEntityCmd =
-    (commonMsg.focus ".entity-list > [tabindex=0]")
+    (commonMsg.focus ".entity-list .focusable-list-item[tabindex=0]")
 
 
 onUpdateNow now =

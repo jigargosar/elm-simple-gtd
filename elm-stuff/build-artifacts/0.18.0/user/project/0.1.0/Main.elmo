@@ -42,7 +42,7 @@ var _user$project$Main$maybeMapToCmd = function (fn) {
 		_elm_lang$core$Maybe$map(fn),
 		_elm_lang$core$Platform_Cmd$none);
 };
-var _user$project$Main$setDomFocusToFocusInEntityCmd = _user$project$Model$commonMsg.focus('.entity-list > [tabindex=0]');
+var _user$project$Main$setDomFocusToFocusInEntityCmd = _user$project$Model$commonMsg.focus('.entity-list .focusable-list-item[tabindex=0]');
 var _user$project$Main$updateTodoAndMaybeAlsoSelected = F2(
 	function (action, todo) {
 		return _Fresheyeball$elm_return$Return$andThen(
@@ -570,7 +570,7 @@ var _user$project$Main$update = function (msg) {
 						return function (_p49) {
 							return A2(
 								_user$project$DomPorts$focusSelectorIfNoFocusCmd,
-								'.entity-list > [tabindex=0]',
+								'.entity-list .focusable-list-item[tabindex=0]',
 								A2(
 									_Fresheyeball$elm_return$Return$map,
 									_user$project$Model$updateKeyboardState(

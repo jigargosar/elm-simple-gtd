@@ -166,7 +166,7 @@ listView viewType model appViewModel =
                                     getTabindexAVForEntity
                                     todoList
                                     context
-                                    |> groupView
+                                    |> groupView appViewModel
                             )
 
                 _ ->
@@ -200,5 +200,5 @@ listView viewType model appViewModel =
             tempList
 
 
-groupView vm =
-    EntityList.GroupView2.initKeyed vm
+groupView appViewModel vm =
+    EntityList.GroupView2.initKeyed appViewModel vm

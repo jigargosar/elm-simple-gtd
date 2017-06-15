@@ -32,7 +32,16 @@ listView viewType model appViewModel =
 
         maybeFocusInEntity =
             Model.getMaybeFocusInEntity entityList model
+    in
+        Html.Keyed.node "div"
+            [ class "entity-list focusable-list"
+            , Model.OnEntityListKeyDown entityList |> onKeyDown
+            ]
+            (keyedViewList grouping maybeFocusInEntity appViewModel)
 
+
+keyedViewList grouping maybeFocusInEntity appViewModel =
+    let
         hasFocusIn entity =
             maybeFocusInEntity ?|> Entity.equalById entity ?= False
 
@@ -46,63 +55,55 @@ listView viewType model appViewModel =
             in
                 tabindex tabindexValue
 
-        keyedViewList =
-            let
-                createContextVM { context, todoList } =
-                    EntityList.ViewModel.contextGroup
-                        getTabIndexAVForEntity
-                        todoList
-                        context
+        createContextVM { context, todoList } =
+            EntityList.ViewModel.contextGroup
+                getTabIndexAVForEntity
+                todoList
+                context
 
-                multiContextView list =
-                    list .|> (createContextVM >> groupView appViewModel)
+        multiContextView list =
+            list .|> (createContextVM >> groupView appViewModel)
 
-                createProjectVM { project, todoList } =
-                    EntityList.ViewModel.projectGroup
-                        getTabIndexAVForEntity
-                        todoList
-                        project
+        createProjectVM { project, todoList } =
+            EntityList.ViewModel.projectGroup
+                getTabIndexAVForEntity
+                todoList
+                project
 
-                multiProjectView list =
-                    list .|> (createProjectVM >> groupView appViewModel)
-            in
-                case grouping of
-                    Entity.SingleContext contextGroup subGroupList ->
-                        let
-                            header =
-                                createContextVM contextGroup |> groupHeaderView appViewModel
-                        in
-                            header :: multiProjectView subGroupList
-
-                    Entity.SingleProject projectGroup subGroupList ->
-                        let
-                            header =
-                                createProjectVM projectGroup |> groupHeaderView appViewModel
-                        in
-                            header :: multiContextView subGroupList
-
-                    Entity.MultiContext groupList ->
-                        multiContextView groupList
-
-                    Entity.MultiProject groupList ->
-                        multiProjectView groupList
-
-                    Entity.FlatTodoList todoList ->
-                        let
-                            getTabIndexAVForTodo =
-                                Entity.TodoEntity >> getTabIndexAVForEntity
-                        in
-                            todoList
-                                .|> (\todo ->
-                                        appViewModel.createTodoViewModel (getTabIndexAVForTodo todo) todo
-                                            |> Todo.View.initKeyed
-                                    )
+        multiProjectView list =
+            list .|> (createProjectVM >> groupView appViewModel)
     in
-        Html.Keyed.node "div"
-            [ class "entity-list focusable-list"
-            , Model.OnEntityListKeyDown entityList |> onKeyDown
-            ]
-            keyedViewList
+        case grouping of
+            Entity.SingleContext contextGroup subGroupList ->
+                let
+                    header =
+                        createContextVM contextGroup |> groupHeaderView appViewModel
+                in
+                    header :: multiProjectView subGroupList
+
+            Entity.SingleProject projectGroup subGroupList ->
+                let
+                    header =
+                        createProjectVM projectGroup |> groupHeaderView appViewModel
+                in
+                    header :: multiContextView subGroupList
+
+            Entity.MultiContext groupList ->
+                multiContextView groupList
+
+            Entity.MultiProject groupList ->
+                multiProjectView groupList
+
+            Entity.FlatTodoList todoList ->
+                let
+                    getTabIndexAVForTodo =
+                        Entity.TodoEntity >> getTabIndexAVForEntity
+                in
+                    todoList
+                        .|> (\todo ->
+                                appViewModel.createTodoViewModel (getTabIndexAVForTodo todo) todo
+                                    |> Todo.View.initKeyed
+                            )
 
 
 groupView appViewModel vm =

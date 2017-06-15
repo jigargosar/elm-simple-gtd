@@ -1,0 +1,88 @@
+var _user$project$EntityList_GroupView2$defaultView = F2(
+	function (tabindexAV, vm) {
+		var editButton = vm.isEditable ? A2(
+			_user$project$WebComponents$iconButton,
+			'create',
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('flex-none'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+					_1: {
+						ctor: '::',
+						_0: tabindexAV,
+						_1: {ctor: '[]'}
+					}
+				}
+			}) : A2(
+			_elm_lang$html$Html$span,
+			{ctor: '[]'},
+			{ctor: '[]'});
+		return {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('layout horizontal justified'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('title font-nowrap flex-auto'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$View_Shared$defaultBadge(vm),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: editButton,
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		};
+	});
+var _user$project$EntityList_GroupView2$init = function (vm) {
+	var tabindexAV = vm.tabindexAV;
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: tabindexAV,
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item focusable-list-item', true),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		A2(_user$project$EntityList_GroupView2$defaultView, tabindexAV, vm));
+};
+var _user$project$EntityList_GroupView2$initKeyed = function (vm) {
+	return {
+		ctor: '_Tuple2',
+		_0: vm.id,
+		_1: _user$project$EntityList_GroupView2$init(vm)
+	};
+};

@@ -1,3 +1,6 @@
+var _user$project$EntityList_View$groupView = function (vm) {
+	return _user$project$EntityList_GroupView2$initKeyed(vm);
+};
 var _user$project$EntityList_View$Todo = function (a) {
 	return {ctor: 'Todo', _0: a};
 };
@@ -195,16 +198,17 @@ var _user$project$EntityList_View$listView = F3(
 			var tabindexValue = hasFocusIn(entity) ? 0 : -1;
 			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
 		};
-		var _p10 = function () {
-			var _p11 = grouping;
-			if (_p11.ctor === 'MultiContext') {
+		var tempList = function () {
+			var _p10 = grouping;
+			if (_p10.ctor === 'MultiContext') {
 				return A2(
-					_elm_lang$core$List$map,
-					function (_p12) {
-						var _p13 = _p12;
-						return A3(_user$project$EntityList_ViewModel$contextGroup, getTabindexAVForEntity, _p13.todoList, _p13.context);
-					},
-					_p11._0);
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+					_p10._0,
+					function (_p11) {
+						var _p12 = _p11;
+						return _user$project$EntityList_View$groupView(
+							A3(_user$project$EntityList_ViewModel$contextGroup, getTabindexAVForEntity, _p12.todoList, _p12.context));
+					});
 			} else {
 				return {ctor: '[]'};
 			}
@@ -223,5 +227,8 @@ var _user$project$EntityList_View$listView = F3(
 					_1: {ctor: '[]'}
 				}
 			},
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vmList, createEntityView));
+			tempList);
 	});
+var _user$project$EntityList_View$Multi = function (a) {
+	return {ctor: 'Multi', _0: a};
+};

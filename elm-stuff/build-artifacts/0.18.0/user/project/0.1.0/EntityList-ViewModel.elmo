@@ -35,7 +35,8 @@ var _user$project$EntityList_ViewModel$create = F3(
 		return {
 			id: id,
 			name: name,
-			count: 0,
+			count: _elm_lang$core$List$length(todoList),
+			isEditable: !isNull,
 			isDeleted: _user$project$Document$isDeleted(entityModel),
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,
@@ -103,7 +104,9 @@ var _user$project$EntityList_ViewModel$GroupViewModel = function (a) {
 												return function (m) {
 													return function (n) {
 														return function (o) {
-															return {id: a, count: b, name: c, isDeleted: d, startEditingMsg: e, onDeleteClicked: f, onSaveClicked: g, onNameChanged: h, onCancelClicked: i, icon: j, onFocusIn: k, onKeyDownMsg: l, tabindexAV: m, todoList: n, getTabIndexAVForEntity: o};
+															return function (p) {
+																return {id: a, count: b, name: c, isDeleted: d, isEditable: e, startEditingMsg: f, onDeleteClicked: g, onSaveClicked: h, onNameChanged: i, onCancelClicked: j, icon: k, onFocusIn: l, onKeyDownMsg: m, tabindexAV: n, todoList: o, getTabIndexAVForEntity: p};
+															};
 														};
 													};
 												};

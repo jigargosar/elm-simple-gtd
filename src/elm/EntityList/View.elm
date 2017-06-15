@@ -3,6 +3,7 @@ module EntityList.View exposing (..)
 import Document
 import Entity exposing (Entity)
 import EntityList.GroupView
+import EntityList.GroupView2
 import EntityList.GroupViewModel exposing (DocumentWithName)
 import EntityList.ViewModel
 import Html
@@ -30,6 +31,10 @@ type ViewModel
     = Context GroupViewModel
     | Project GroupViewModel
     | Todo TodoViewModel
+
+
+type VM2
+    = Multi (List EntityList.ViewModel.GroupViewModel)
 
 
 {-| todo: refactoring: build tree in model then flatten it there , don't build tree here, its easier there
@@ -149,19 +154,19 @@ listView viewType model appViewModel =
             in
                 tabindex tabindexValue
 
-        _ =
+        tempList =
             case grouping of
                 {- Entity.SingleContext { context, todoList } projectSubgroups ->
                    identity
                 -}
-                Entity.MultiContext contextGroupList ->
-                    contextGroupList
-                        |> List.map
-                            (\{ context, todoList } ->
+                Entity.MultiContext list ->
+                    list
+                        .|> (\{ context, todoList } ->
                                 EntityList.ViewModel.contextGroup
                                     getTabindexAVForEntity
                                     todoList
                                     context
+                                    |> groupView
                             )
 
                 _ ->
@@ -188,6 +193,12 @@ listView viewType model appViewModel =
             [ class "entity-list focusable-list"
             , Model.OnEntityListKeyDown entityList |> onKeyDown
             ]
-            (vmList
-                .|> createEntityView
-            )
+            {- (vmList
+                   .|> createEntityView
+               )
+            -}
+            tempList
+
+
+groupView vm =
+    EntityList.GroupView2.initKeyed vm

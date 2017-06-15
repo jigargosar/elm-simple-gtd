@@ -33,6 +33,7 @@ type alias GroupViewModel =
     , count : Int
     , name : String
     , isDeleted : Bool
+    , isEditable : Bool
     , startEditingMsg : Msg
     , onDeleteClicked : Msg
     , onSaveClicked : Msg
@@ -112,7 +113,8 @@ create config todoList entityModel =
     in
         { id = id
         , name = name
-        , count = 0
+        , count = todoList |> List.length
+        , isEditable = not isNull
         , isDeleted = Document.isDeleted entityModel
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg

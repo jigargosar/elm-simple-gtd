@@ -175,20 +175,11 @@ var _user$project$View_Shared$defaultBadge = function (vm) {
 var _user$project$View_Shared$createSharedViewModel = function (model) {
 	var now = _user$project$Model$getNow(model);
 	var editMode = _user$project$Model$getEditMode(model);
-	var getMaybeTodoReminderFormForTodo = function (todo) {
+	var getMaybeEditTodoFormForTodo = function (todo) {
 		var _p0 = editMode;
-		if (_p0.ctor === 'EditTodoReminder') {
+		if (_p0.ctor === 'EditTodo') {
 			var _p1 = _p0._0;
 			return A2(_user$project$Document$hasId, _p1.id, todo) ? _elm_lang$core$Maybe$Just(_p1) : _elm_lang$core$Maybe$Nothing;
-		} else {
-			return _elm_lang$core$Maybe$Nothing;
-		}
-	};
-	var getMaybeEditTodoFormForTodo = function (todo) {
-		var _p2 = editMode;
-		if (_p2.ctor === 'EditTodo') {
-			var _p3 = _p2._0;
-			return A2(_user$project$Document$hasId, _p3.id, todo) ? _elm_lang$core$Maybe$Just(_p3) : _elm_lang$core$Maybe$Nothing;
 		} else {
 			return _elm_lang$core$Maybe$Nothing;
 		}
@@ -201,37 +192,10 @@ var _user$project$View_Shared$createSharedViewModel = function (model) {
 		activeProjects: _user$project$Model$getActiveProjects(model),
 		activeContexts: _user$project$Model$getActiveContexts(model),
 		getMaybeEditTodoFormForTodo: getMaybeEditTodoFormForTodo,
-		getMaybeTodoReminderFormForTodo: getMaybeTodoReminderFormForTodo,
-		getTodoReminderForm: function (todo) {
-			return A3(
-				_elm_community$maybe_extra$Maybe_Extra$unpack,
-				function (_p4) {
-					return A2(_user$project$Todo_ReminderForm$create, todo, now);
-				},
-				_elm_lang$core$Basics$identity,
-				getMaybeTodoReminderFormForTodo(todo));
-		},
 		showDetails: _user$project$Model$isShowDetailsKeyPressed(model)
 	};
 };
-var _user$project$View_Shared$SharedViewModel = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return {now: a, getMaybeEditTodoFormForTodo: b, getMaybeTodoReminderFormForTodo: c, getTodoReminderForm: d, projectByIdDict: e, contextByIdDict: f, activeProjects: g, activeContexts: h, showDetails: i, selectedEntityIdSet: j};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
+var _user$project$View_Shared$SharedViewModel = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {now: a, getMaybeEditTodoFormForTodo: b, projectByIdDict: c, contextByIdDict: d, activeProjects: e, activeContexts: f, showDetails: g, selectedEntityIdSet: h};
+	});

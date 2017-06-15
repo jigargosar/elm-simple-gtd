@@ -35,8 +35,6 @@ import Todo.ReminderForm
 type alias SharedViewModel =
     { now : Time
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
-    , getMaybeTodoReminderFormForTodo : Todo.Model -> Maybe Todo.ReminderForm.Model
-    , getTodoReminderForm : Todo.Model -> Todo.ReminderForm.Model
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
     , activeProjects : List Project.Model
@@ -51,18 +49,6 @@ createSharedViewModel model =
     let
         editMode =
             Model.getEditMode model
-
-        getMaybeTodoReminderFormForTodo =
-            \todo ->
-                case editMode of
-                    ExclusiveMode.EditTodoReminder form ->
-                        if Document.hasId form.id todo then
-                            Just form
-                        else
-                            Nothing
-
-                    _ ->
-                        Nothing
 
         now =
             Model.getNow model
@@ -86,12 +72,6 @@ createSharedViewModel model =
         , activeProjects = Model.getActiveProjects model
         , activeContexts = Model.getActiveContexts model
         , getMaybeEditTodoFormForTodo = getMaybeEditTodoFormForTodo
-        , getMaybeTodoReminderFormForTodo = getMaybeTodoReminderFormForTodo
-        , getTodoReminderForm =
-            \todo ->
-                todo
-                    |> getMaybeTodoReminderFormForTodo
-                    |> Maybe.unpack (\_ -> Todo.ReminderForm.create todo now) identity
         , showDetails = Model.isShowDetailsKeyPressed model
         }
 

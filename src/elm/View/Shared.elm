@@ -157,11 +157,11 @@ hideOnHover bool children =
 
 
 defaultOkCancelButtons =
-    okCancelButtons Model.SaveCurrentForm Model.OnDeactivateEditingMode
+    okCancelButtons Model.OnSaveCurrentForm Model.OnDeactivateEditingMode
 
 
 defaultOkCancelDeleteButtons deleteMsg =
-    okCancelDeleteButtons Model.SaveCurrentForm Model.OnDeactivateEditingMode deleteMsg
+    okCancelDeleteButtons Model.OnSaveCurrentForm Model.OnDeactivateEditingMode deleteMsg
 
 
 layoutHorizontalReverse =

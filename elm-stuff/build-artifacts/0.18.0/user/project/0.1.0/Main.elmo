@@ -365,7 +365,7 @@ var _user$project$Main$update = function (msg) {
 											return _.pouchDBRemoteSyncURI;
 										}(_p28));
 								},
-								A2(_user$project$Main$andThenUpdate, _user$project$Model$SaveCurrentForm, _p27));
+								A2(_user$project$Main$andThenUpdate, _user$project$Model$OnSaveCurrentForm, _p27));
 						};
 					case 'OnNotificationClicked':
 						var todoId = _p16._0.data.id;
@@ -478,7 +478,7 @@ var _user$project$Main$update = function (msg) {
 					case 'NewTodoKeyDown':
 						var _p36 = _p16._0.key;
 						if (_p36.ctor === 'Enter') {
-							return _user$project$Main$andThenUpdate(_user$project$Model$SaveCurrentForm);
+							return _user$project$Main$andThenUpdate(_user$project$Model$OnSaveCurrentForm);
 						} else {
 							return _elm_lang$core$Basics$identity;
 						}
@@ -577,7 +577,7 @@ var _user$project$Main$update = function (msg) {
 										_user$project$Ext_Keyboard$update(_p16._0)),
 									_p49));
 						};
-					case 'SaveCurrentForm':
+					case 'OnSaveCurrentForm':
 						return function (_p50) {
 							return A2(
 								_user$project$Main$andThenUpdate,
@@ -620,7 +620,7 @@ var _user$project$Main$update = function (msg) {
 								return _Fresheyeball$elm_return$Return$map(
 									A2(_user$project$Model$updateEditModeNameChanged, _p55._0, _p58));
 							case 'Save':
-								return _user$project$Main$andThenUpdate(_user$project$Model$SaveCurrentForm);
+								return _user$project$Main$andThenUpdate(_user$project$Model$OnSaveCurrentForm);
 							case 'ToggleDeleted':
 								return function (_p57) {
 									return A2(

@@ -1387,7 +1387,7 @@ var _user$project$Model$UpdateRemoteSyncFormUri = F2(
 	function (a, b) {
 		return {ctor: 'UpdateRemoteSyncFormUri', _0: a, _1: b};
 	});
-var _user$project$Model$SaveCurrentForm = {ctor: 'SaveCurrentForm'};
+var _user$project$Model$OnSaveCurrentForm = {ctor: 'OnSaveCurrentForm'};
 var _user$project$Model$StartEditingProject = function (a) {
 	return {ctor: 'StartEditingProject', _0: a};
 };

@@ -1,3 +1,5 @@
+var _user$project$Project$nullId = '';
+var _user$project$Project$isNullId = _user$project$Ext_Function$equals(_user$project$Project$nullId);
 var _user$project$Project$constructor = F7(
 	function (id, rev, createdAt, modifiedAt, deleted, deviceId, name) {
 		return {id: id, rev: rev, deviceId: deviceId, createdAt: createdAt, modifiedAt: modifiedAt, deleted: deleted, name: name};
@@ -6,7 +8,7 @@ var _user$project$Project$init = F4(
 	function (name, now, deviceId, id) {
 		return A7(_user$project$Project$constructor, id, '', now, now, false, deviceId, name);
 	});
-var _user$project$Project$null = A7(_user$project$Project$constructor, '', '', 0, 0, false, '', 'No Project');
+var _user$project$Project$null = A7(_user$project$Project$constructor, _user$project$Project$nullId, '', 0, 0, false, '', 'No Project');
 var _user$project$Project$filterNull = function (pred) {
 	return A2(
 		_elm_lang$core$List$filter,

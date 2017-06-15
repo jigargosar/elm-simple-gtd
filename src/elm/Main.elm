@@ -173,7 +173,7 @@ update msg =
                     Return.map (Model.setLayoutNarrow bool)
 
                 RemotePouchSync form ->
-                    andThenUpdate SaveCurrentForm
+                    andThenUpdate OnSaveCurrentForm
                         >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
                 OnNotificationClicked { action, data } ->
@@ -235,7 +235,7 @@ update msg =
                 NewTodoKeyDown { key } ->
                     case key of
                         Key.Enter ->
-                            andThenUpdate (SaveCurrentForm)
+                            andThenUpdate (OnSaveCurrentForm)
 
                         _ ->
                             identity
@@ -298,7 +298,7 @@ update msg =
                     Return.map (Model.updateKeyboardState (Keyboard.update msg))
                         >> focusSelectorIfNoFocusCmd ".entity-list > [tabindex=0]"
 
-                SaveCurrentForm ->
+                OnSaveCurrentForm ->
                     Return.andThen Model.saveCurrentForm
                         >> andThenUpdate OnDeactivateEditingMode
 
@@ -328,7 +328,7 @@ update msg =
                             Return.map (Model.updateEditModeNameChanged newName entity)
 
                         Entity.Save ->
-                            andThenUpdate SaveCurrentForm
+                            andThenUpdate OnSaveCurrentForm
 
                         Entity.ToggleDeleted ->
                             Return.andThen (Model.toggleDeleteEntity entity)

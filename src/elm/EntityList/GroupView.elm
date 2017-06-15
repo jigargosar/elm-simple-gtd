@@ -72,7 +72,7 @@ editEntityView tabindexAV vm form =
                 [ class "auto-focus"
                 , autofocus True
                 , defaultValue (form.name)
-                , onEnter Model.SaveCurrentForm
+                , onEnter Model.OnSaveCurrentForm
                 , onInput vm.onNameChanged
                 ]
                 []

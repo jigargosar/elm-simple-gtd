@@ -76,7 +76,7 @@ type Msg
     | StartEditingReminder Todo.Model
     | StartEditingContext Todo.Model
     | StartEditingProject Todo.Model
-    | SaveCurrentForm
+    | OnSaveCurrentForm
     | UpdateRemoteSyncFormUri ExclusiveMode.SyncForm String
     | OnEditTodoProjectMenuStateChanged Todo.GroupForm.Model Menu.State
     | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model Menu.State

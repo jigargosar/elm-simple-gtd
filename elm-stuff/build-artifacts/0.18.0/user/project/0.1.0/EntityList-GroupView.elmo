@@ -40,7 +40,7 @@ var _user$project$EntityList_GroupView$editEntityView = F3(
 											_0: _elm_lang$html$Html_Attributes$defaultValue(form.name),
 											_1: {
 												ctor: '::',
-												_0: _elm_community$html_extra$Html_Events_Extra$onEnter(_user$project$Model$SaveCurrentForm),
+												_0: _elm_community$html_extra$Html_Events_Extra$onEnter(_user$project$Model$OnSaveCurrentForm),
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$html$Html_Events$onInput(vm.onNameChanged),

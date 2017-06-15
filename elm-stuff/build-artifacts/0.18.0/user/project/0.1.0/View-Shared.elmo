@@ -77,9 +77,9 @@ var _user$project$View_Shared$okCancelDeleteButtons = F3(
 			});
 	});
 var _user$project$View_Shared$defaultOkCancelDeleteButtons = function (deleteMsg) {
-	return A3(_user$project$View_Shared$okCancelDeleteButtons, _user$project$Model$SaveCurrentForm, _user$project$Model$OnDeactivateEditingMode, deleteMsg);
+	return A3(_user$project$View_Shared$okCancelDeleteButtons, _user$project$Model$OnSaveCurrentForm, _user$project$Model$OnDeactivateEditingMode, deleteMsg);
 };
-var _user$project$View_Shared$defaultOkCancelButtons = A2(_user$project$View_Shared$okCancelButtons, _user$project$Model$SaveCurrentForm, _user$project$Model$OnDeactivateEditingMode);
+var _user$project$View_Shared$defaultOkCancelButtons = A2(_user$project$View_Shared$okCancelButtons, _user$project$Model$OnSaveCurrentForm, _user$project$Model$OnDeactivateEditingMode);
 var _user$project$View_Shared$hideOnHover = F2(
 	function (bool, children) {
 		return A2(

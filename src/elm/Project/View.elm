@@ -1,7 +1,9 @@
 module Project.View exposing (..)
 
+import Entity
 import Ext.Keyboard exposing (onEnter, onKeyDownStopPropagation)
 import Model
+import Project
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -16,25 +18,47 @@ import View.Shared exposing (defaultOkCancelDeleteButtons)
 
 
 edit form =
-    div
-        [ class "overlay"
-        , onClickStopPropagation Model.OnDeactivateEditingMode
-        ]
-        [ div [ class "modal fixed-center", onClickStopPropagation Model.NOOP ]
-            [ div [ class "modal-content" ]
-                [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
-                    [ input
-                        [ class "auto-focus"
-                        , autofocus True
-                        , defaultValue (form.name)
-                        , onEnter Model.SaveCurrentForm
+    let
+        toMsg =
+            Model.OnEntityAction form.entity
 
-                        --                                  , onInput vm.onNameChanged
+        fireToggleDelete =
+            if Project.isNullId form.id then
+                Model.NOOP
+            else
+                toMsg Entity.ToggleDeleted
+
+        fireNameChanged =
+            Entity.NameChanged >> toMsg
+
+        fireSaveForm =
+            Model.OnSaveCurrentForm
+
+        fireCancel =
+            Model.OnDeactivateEditingMode
+    in
+        div
+            [ class "overlay"
+            , onClickStopPropagation Model.OnDeactivateEditingMode
+            ]
+            [ div [ class "modal fixed-center", onClickStopPropagation fireCancel ]
+                [ div [ class "modal-content" ]
+                    [ div
+                        [ class "input-field"
+                        , onKeyDownStopPropagation (\_ -> Model.NOOP)
+                        , onClickStopPropagation Model.NOOP
                         ]
-                        []
-                    , label [ class "active" ] [ text "Name" ]
+                        [ input
+                            [ class "auto-focus"
+                            , autofocus True
+                            , defaultValue (form.name)
+                            , onEnter fireSaveForm
+                            , onInput fireNameChanged
+                            ]
+                            []
+                        , label [ class "active" ] [ text "Name" ]
+                        ]
+                    , defaultOkCancelDeleteButtons fireToggleDelete
                     ]
-                , defaultOkCancelDeleteButtons {- vm.onDeleteClicked -} Model.NOOP
                 ]
             ]
-        ]

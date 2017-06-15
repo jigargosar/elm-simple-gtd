@@ -1,3 +1,6 @@
+## Upcoming
+* ExclusiveMode: centralize edit forms 
+
 ## v0.18.26 - 2017-06-15
 * persistence: remove dep on every second update 
 

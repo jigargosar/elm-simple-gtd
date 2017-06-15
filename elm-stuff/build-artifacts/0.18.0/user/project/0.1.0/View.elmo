@@ -320,7 +320,7 @@ var _user$project$View$overlayViews = function (appModel) {
 			case 'EditTodoProject':
 				return A2(_user$project$Todo_View$projectMenu, _p0._0, appModel);
 			case 'EditTodoReminder':
-				return A2(_user$project$Todo_View$reminderPopup, _p0._0, appModel);
+				return _user$project$Todo_View$reminderPopup(_p0._0);
 			case 'FirstVisit':
 				return _user$project$View$firstVisitModal;
 			case 'ActionList':

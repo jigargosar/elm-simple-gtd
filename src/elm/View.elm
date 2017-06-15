@@ -60,7 +60,7 @@ overlayViews appModel =
                     Todo.View.projectMenu form appModel
 
                 ExclusiveMode.EditTodoReminder form ->
-                    Todo.View.reminderPopup form appModel
+                    Todo.View.reminderPopup form
 
                 ExclusiveMode.FirstVisit ->
                     firstVisitModal

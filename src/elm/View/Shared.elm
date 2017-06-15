@@ -37,7 +37,6 @@ type alias SharedViewModel =
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
     , getMaybeTodoReminderFormForTodo : Todo.Model -> Maybe Todo.ReminderForm.Model
     , getTodoReminderForm : Todo.Model -> Todo.ReminderForm.Model
-    , getMaybeEditEntityFormForEntityId : Document.Id -> Maybe ExclusiveMode.EntityForm
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
     , activeProjects : List Project.Model
@@ -93,23 +92,6 @@ createSharedViewModel model =
                 todo
                     |> getMaybeTodoReminderFormForTodo
                     |> Maybe.unpack (\_ -> Todo.ReminderForm.create todo now) identity
-        , getMaybeEditEntityFormForEntityId =
-            \entityId ->
-                case editMode of
-                    ExclusiveMode.EditContext form ->
-                        if entityId == form.id then
-                            Just form
-                        else
-                            Nothing
-
-                    ExclusiveMode.EditProject form ->
-                        if entityId == form.id then
-                            Just form
-                        else
-                            Nothing
-
-                    _ ->
-                        Nothing
         , showDetails = Model.isShowDetailsKeyPressed model
         }
 

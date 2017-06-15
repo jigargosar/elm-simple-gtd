@@ -65,7 +65,7 @@ var _user$project$ViewModel$create = function (model) {
 		mainViewType: mainViewType,
 		header: {backgroundColor: headerBackgroundColor},
 		shared: sharedViewModel,
-		createTodoViewModel: _user$project$Todo_View$createTodoViewModel(sharedViewModel)
+		createTodoViewModel: A2(_user$project$Todo_View$createTodoViewModel, model.now, sharedViewModel)
 	};
 };
 var _user$project$ViewModel$Model = F7(

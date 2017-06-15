@@ -21,60 +21,111 @@ var _user$project$Todo_View$createReminderMenuConfig = F2(
 			onOutsideMouseDown: _user$project$Model$OnDeactivateEditingMode
 		};
 	});
-var _user$project$Todo_View$reminderPopup = F2(
-	function (form, model) {
-		var updateReminderForm = function (_p3) {
-			return _user$project$Model$OnTodoMsg(
-				A2(_user$project$Todo_Msg$UpdateReminderForm, form, _p3));
-		};
-		return A2(
-			_elm_lang$html$Html$div,
-			{
+var _user$project$Todo_View$reminderPopup = function (form) {
+	var updateReminderForm = function (_p3) {
+		return _user$project$Model$OnTodoMsg(
+			A2(_user$project$Todo_Msg$UpdateReminderForm, form, _p3));
+	};
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('overlay'),
+			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('overlay'),
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
 				_1: {
 					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
+					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+						function (_p4) {
+							return _user$project$Model$NOOP;
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('popup-menu'),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-							function (_p4) {
-								return _user$project$Model$NOOP;
-							}),
-						_1: {ctor: '[]'}
-					}
-				}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$id('popup-menu'),
+						_0: _elm_lang$html$Html_Attributes$class('z-depth-4 static'),
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('z-depth-4 static'),
-							_1: {
-								ctor: '::',
-								_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$commonMsg.noOp),
-								_1: {ctor: '[]'}
-							}
+							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$commonMsg.noOp),
+							_1: {ctor: '[]'}
 						}
-					},
-					{
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('font-subhead'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Select date and time'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('font-subhead'),
+								_0: _elm_lang$html$Html_Attributes$class('input-field'),
 								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Select date and time'),
-								_1: {ctor: '[]'}
+								_0: A2(
+									_elm_lang$html$Html$input,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$type_('date'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$value(form.date),
+												_1: {
+													ctor: '::',
+													_0: _user$project$WebComponents$onChange(
+														function (_p5) {
+															return updateReminderForm(
+																_user$project$Todo_ReminderForm$SetDate(_p5));
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$label,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('active'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Date'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}),
 						_1: {
 							ctor: '::',
@@ -91,22 +142,18 @@ var _user$project$Todo_View$reminderPopup = F2(
 										_elm_lang$html$Html$input,
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$type_('date'),
+											_0: _elm_lang$html$Html_Attributes$type_('time'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+												_0: _elm_lang$html$Html_Attributes$value(form.time),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$value(form.date),
-													_1: {
-														ctor: '::',
-														_0: _user$project$WebComponents$onChange(
-															function (_p5) {
-																return updateReminderForm(
-																	_user$project$Todo_ReminderForm$SetDate(_p5));
-															}),
-														_1: {ctor: '[]'}
-													}
+													_0: _user$project$WebComponents$onChange(
+														function (_p6) {
+															return updateReminderForm(
+																_user$project$Todo_ReminderForm$SetTime(_p6));
+														}),
+													_1: {ctor: '[]'}
 												}
 											}
 										},
@@ -122,7 +169,7 @@ var _user$project$Todo_View$reminderPopup = F2(
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('Date'),
+												_0: _elm_lang$html$Html$text('Time'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -130,63 +177,15 @@ var _user$project$Todo_View$reminderPopup = F2(
 								}),
 							_1: {
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('input-field'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$input,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$type_('time'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$value(form.time),
-													_1: {
-														ctor: '::',
-														_0: _user$project$WebComponents$onChange(
-															function (_p6) {
-																return updateReminderForm(
-																	_user$project$Todo_ReminderForm$SetTime(_p6));
-															}),
-														_1: {ctor: '[]'}
-													}
-												}
-											},
-											{ctor: '[]'}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$label,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('active'),
-													_1: {ctor: '[]'}
-												},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Time'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {
-									ctor: '::',
-									_0: _user$project$View_Shared$defaultOkCancelButtons,
-									_1: {ctor: '[]'}
-								}
+								_0: _user$project$View_Shared$defaultOkCancelButtons,
+								_1: {ctor: '[]'}
 							}
 						}
-					}),
-				_1: {ctor: '[]'}
-			});
-	});
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Todo_View$contextMenu = _user$project$Todo_View_Menu$context;
 var _user$project$Todo_View$projectMenu = _user$project$Todo_View_Menu$project;
 var _user$project$Todo_View$editView = function (edit) {
@@ -283,14 +282,12 @@ var _user$project$Todo_View$createEditTodoViewModel = F2(
 		};
 	});
 var _user$project$Todo_View$createReminderViewModel = F2(
-	function (vc, todo) {
-		var dueAt = _user$project$Todo$getMaybeDueAt(todo);
-		var smartFormat = _user$project$Ext_Time$smartFormat(vc.now);
+	function (now, todo) {
 		var overDueText = 'Overdue';
 		var formatReminderTime = function (time) {
-			var now = _elm_lang$core$Date$fromTime(vc.now);
-			var due = _elm_lang$core$Date$fromTime(time);
-			return (_elm_lang$core$Native_Utils.cmp(time, vc.now) < 0) ? overDueText : A2(_user$project$Ext_Time$smartFormat, vc.now, time);
+			var nowDate = _elm_lang$core$Date$fromTime(now);
+			var dueDate = _elm_lang$core$Date$fromTime(time);
+			return (_elm_lang$core$Native_Utils.cmp(time, now) < 0) ? overDueText : A2(_user$project$Ext_Time$smartFormat, now, time);
 		};
 		var displayText = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
@@ -299,48 +296,9 @@ var _user$project$Todo_View$createReminderViewModel = F2(
 				_user$project$Todo$getMaybeTime(todo),
 				formatReminderTime),
 			'');
-		var maybeTodoReminderForm = vc.getMaybeTodoReminderFormForTodo(todo);
-		var form = A3(
-			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p9) {
-				return A2(_user$project$Todo_ReminderForm$create, todo, vc.now);
-			},
-			_elm_lang$core$Basics$identity,
-			maybeTodoReminderForm);
-		var updateReminderForm = function (_p10) {
-			return _user$project$Model$OnTodoMsg(
-				A2(_user$project$Todo_Msg$UpdateReminderForm, form, _p10));
-		};
-		var isDropdownOpen = _elm_community$maybe_extra$Maybe_Extra$isJust(maybeTodoReminderForm);
 		return {
-			isDropdownOpen: isDropdownOpen,
-			date: form.date,
-			time: form.time,
 			displayText: displayText,
 			isOverDue: _elm_lang$core$Native_Utils.eq(displayText, overDueText),
-			isSnoozed: _user$project$Todo$isSnoozed(todo),
-			dueAtToolTipText: A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-					_user$project$Todo$getMaybeDueAt(todo),
-					_user$project$Ext_Time$formatDateTime),
-				''),
-			dayDiffInWords: A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-				A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-					dueAt,
-					_user$project$Ext_Time$dayDiffInWords(vc.now)),
-				''),
-			onDateChanged: function (_p11) {
-				return updateReminderForm(
-					_user$project$Todo_ReminderForm$SetDate(_p11));
-			},
-			onTimeChanged: function (_p12) {
-				return updateReminderForm(
-					_user$project$Todo_ReminderForm$SetTime(_p12));
-			},
 			startEditingMsg: _user$project$Model$StartEditingReminder(todo)
 		};
 	});
@@ -630,9 +588,9 @@ var _user$project$Todo_View$defaultView = function (vm) {
 var _user$project$Todo_View$getDisplayText = function (todo) {
 	var trimAndReplaceEmptyWithDefault = A2(
 		_user$project$Ext_Function_Infix_ops['>>?='],
-		function (_p13) {
+		function (_p9) {
 			return _elm_community$string_extra$String_Extra$nonEmpty(
-				_elm_lang$core$String$trim(_p13));
+				_elm_lang$core$String$trim(_p9));
 		},
 		'< empty >');
 	var tripleNewLineAndRestRegex = _elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*');
@@ -646,8 +604,8 @@ var _user$project$Todo_View$getDisplayText = function (todo) {
 		trimAndReplaceEmptyWithDefault(
 			_user$project$Todo$getText(todo)));
 };
-var _user$project$Todo_View$createTodoViewModel = F3(
-	function (vc, tabindexAV, todo) {
+var _user$project$Todo_View$createTodoViewModel = F4(
+	function (now, vc, tabindexAV, todo) {
 		var onTodoMsg = _user$project$Model$OnTodoMsg;
 		var maybeEditTodoForm = vc.getMaybeEditTodoFormForTodo(todo);
 		var maybeEditVM = A2(
@@ -685,11 +643,11 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					'Inbox')));
 		var todoId = _user$project$Document$getId(todo);
 		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
-		var onKeyDownMsg = function (_p14) {
-			var _p15 = _p14;
-			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p15)) {
-				var _p16 = _p15.key;
-				switch (_p16.ctor) {
+		var onKeyDownMsg = function (_p10) {
+			var _p11 = _p10;
+			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p11)) {
+				var _p12 = _p11.key;
+				switch (_p12.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 					case 'CharE':
@@ -730,7 +688,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			showProjectDropdownMsg: _user$project$Model$StartEditingProject(todo),
 			startEditingMsg: startEditingMsg,
 			toggleDoneMsg: toggleDoneMsg,
-			reminder: A2(_user$project$Todo_View$createReminderViewModel, vc, todo),
+			reminder: A2(_user$project$Todo_View$createReminderViewModel, now, todo),
 			edit: maybeEditVM,
 			isEditing: _elm_community$maybe_extra$Maybe_Extra$isJust(maybeEditVM),
 			onDeleteClicked: toggleDeleteMsg,
@@ -740,8 +698,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p17, content) {
-		var _p18 = _p17;
+	function (_p13, content) {
+		var _p14 = _p13;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$button,
 			{
@@ -760,7 +718,7 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
 						_1: {
 							ctor: '::',
-							_0: _p18.tabindexAV,
+							_0: _p14.tabindexAV,
 							_1: {ctor: '[]'}
 						}
 					}
@@ -822,7 +780,7 @@ var _user$project$Todo_View$init = function (vm) {
 		},
 		A3(
 			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p19) {
+			function (_p15) {
 				return _user$project$Todo_View$defaultView(vm);
 			},
 			_user$project$Todo_View$editView,
@@ -876,29 +834,10 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 		};
 	};
 };
-var _user$project$Todo_View$ReminderViewModel = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return {isDropdownOpen: a, date: b, time: c, displayText: d, isOverDue: e, isSnoozed: f, dueAtToolTipText: g, dayDiffInWords: h, onDateChanged: i, onTimeChanged: j, startEditingMsg: k};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
+var _user$project$Todo_View$ReminderViewModel = F3(
+	function (a, b, c) {
+		return {displayText: a, isOverDue: b, startEditingMsg: c};
+	});
 var _user$project$Todo_View$EditViewModel = F3(
 	function (a, b, c) {
 		return {todo: a, onTodoTextChanged: b, onDeleteClicked: c};

@@ -31,6 +31,7 @@ import RegexBuilder.Extra as RegexBuilder
 import Set
 import String.Extra as String
 import Svg.Events exposing (onFocusIn, onFocusOut)
+import Time exposing (Time)
 import Time.Format
 import Todo
 import Todo.Form
@@ -119,8 +120,8 @@ getDisplayText todo =
                 (\match -> "\n...")
 
 
-createTodoViewModel : SharedViewModel -> Attribute Msg -> Todo.Model -> TodoViewModel
-createTodoViewModel vc tabindexAV todo =
+createTodoViewModel : Time -> SharedViewModel -> Attribute Msg -> Todo.Model -> TodoViewModel
+createTodoViewModel now vc tabindexAV todo =
     let
         todoId =
             Document.getId todo
@@ -217,7 +218,7 @@ createTodoViewModel vc tabindexAV todo =
         , showProjectDropdownMsg = Model.StartEditingProject todo
         , startEditingMsg = startEditingMsg
         , toggleDoneMsg = toggleDoneMsg
-        , reminder = createReminderViewModel vc todo
+        , reminder = createReminderViewModel now todo
         , edit = maybeEditVM
         , isEditing = Maybe.isJust maybeEditVM
         , onDeleteClicked = toggleDeleteMsg
@@ -305,71 +306,36 @@ editScheduleButton vm =
 
 
 type alias ReminderViewModel =
-    { isDropdownOpen : Bool
-    , date : String
-    , time : String
-    , displayText : String
+    { displayText : String
     , isOverDue : Bool
-    , isSnoozed : Bool
-    , dueAtToolTipText : String
-    , dayDiffInWords : String
-    , onDateChanged : String -> Msg
-    , onTimeChanged : String -> Msg
     , startEditingMsg : Msg
     }
 
 
-createReminderViewModel : SharedViewModel -> Todo.Model -> ReminderViewModel
-createReminderViewModel vc todo =
+createReminderViewModel : Time -> Todo.Model -> ReminderViewModel
+createReminderViewModel now todo =
     let
-        maybeTodoReminderForm =
-            vc.getMaybeTodoReminderFormForTodo todo
-
-        form =
-            maybeTodoReminderForm
-                |> Maybe.unpack (\_ -> Todo.ReminderForm.create todo vc.now) identity
-
-        updateReminderForm =
-            Todo.Msg.UpdateReminderForm form >> Model.OnTodoMsg
-
-        isDropdownOpen =
-            Maybe.isJust maybeTodoReminderForm
-
         overDueText =
             "Overdue"
 
         formatReminderTime time =
             let
-                due =
+                dueDate =
                     Date.fromTime time
 
-                now =
-                    Date.fromTime vc.now
+                nowDate =
+                    Date.fromTime now
             in
-                if time < vc.now then
+                if time < now then
                     overDueText
                 else
-                    Ext.Time.smartFormat vc.now time
-
-        smartFormat =
-            Ext.Time.smartFormat vc.now
+                    Ext.Time.smartFormat now time
 
         displayText =
             Todo.getMaybeTime todo ?|> formatReminderTime ?= ""
-
-        dueAt =
-            Todo.getMaybeDueAt todo
     in
-        { isDropdownOpen = isDropdownOpen
-        , date = form.date
-        , time = form.time
-        , displayText = displayText
+        { displayText = displayText
         , isOverDue = displayText == overDueText
-        , isSnoozed = Todo.isSnoozed todo
-        , dueAtToolTipText = Todo.getMaybeDueAt todo ?|> Ext.Time.formatDateTime ?= ""
-        , dayDiffInWords = dueAt ?|> Ext.Time.dayDiffInWords vc.now ?= ""
-        , onDateChanged = updateReminderForm << Todo.ReminderForm.SetDate
-        , onTimeChanged = updateReminderForm << Todo.ReminderForm.SetTime
         , startEditingMsg = Model.StartEditingReminder todo
         }
 
@@ -425,11 +391,7 @@ contextMenu =
     Todo.View.Menu.context
 
 
-reminderPopup form model =
-    {- Menu.view ([ "i1", "i2", "aa" , "Pick date and time"])
-       form.menuState
-       (createReminderMenuConfig form model)
-    -}
+reminderPopup form =
     let
         updateReminderForm =
             Todo.Msg.UpdateReminderForm form >> Model.OnTodoMsg

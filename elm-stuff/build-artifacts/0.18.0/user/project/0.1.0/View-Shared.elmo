@@ -211,19 +211,6 @@ var _user$project$View_Shared$createSharedViewModel = function (model) {
 				_elm_lang$core$Basics$identity,
 				getMaybeTodoReminderFormForTodo(todo));
 		},
-		getMaybeEditEntityFormForEntityId: function (entityId) {
-			var _p5 = editMode;
-			switch (_p5.ctor) {
-				case 'EditContext':
-					var _p6 = _p5._0;
-					return _elm_lang$core$Native_Utils.eq(entityId, _p6.id) ? _elm_lang$core$Maybe$Just(_p6) : _elm_lang$core$Maybe$Nothing;
-				case 'EditProject':
-					var _p7 = _p5._0;
-					return _elm_lang$core$Native_Utils.eq(entityId, _p7.id) ? _elm_lang$core$Maybe$Just(_p7) : _elm_lang$core$Maybe$Nothing;
-				default:
-					return _elm_lang$core$Maybe$Nothing;
-			}
-		},
 		showDetails: _user$project$Model$isShowDetailsKeyPressed(model)
 	};
 };
@@ -237,9 +224,7 @@ var _user$project$View_Shared$SharedViewModel = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return function (k) {
-											return {now: a, getMaybeEditTodoFormForTodo: b, getMaybeTodoReminderFormForTodo: c, getTodoReminderForm: d, getMaybeEditEntityFormForEntityId: e, projectByIdDict: f, contextByIdDict: g, activeProjects: h, activeContexts: i, showDetails: j, selectedEntityIdSet: k};
-										};
+										return {now: a, getMaybeEditTodoFormForTodo: b, getMaybeTodoReminderFormForTodo: c, getTodoReminderForm: d, projectByIdDict: e, contextByIdDict: f, activeProjects: g, activeContexts: h, showDetails: i, selectedEntityIdSet: j};
 									};
 								};
 							};

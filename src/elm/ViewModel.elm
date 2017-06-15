@@ -52,7 +52,7 @@ create model =
         , mainViewType = mainViewType
         , header = { backgroundColor = headerBackgroundColor }
         , shared = sharedViewModel
-        , createTodoViewModel = (Todo.View.createTodoViewModel sharedViewModel)
+        , createTodoViewModel = (Todo.View.createTodoViewModel model.now sharedViewModel)
         }
 
 

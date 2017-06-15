@@ -15,8 +15,8 @@ var _user$project$EntityList_ViewModel$create = F3(
 		};
 		var createEntityActionMsg = _user$project$Model$OnEntityAction(
 			config.entityWrapper(entityModel));
-		var toggleDeleteMsg = isNull ? _user$project$Model$commonMsg.noOp : createEntityActionMsg(_user$project$Entity$ToggleDeleted);
-		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
+		var toggleDeleteMsg = isNull ? _user$project$Model$NOOP : createEntityActionMsg(_user$project$Entity$ToggleDeleted);
+		var startEditingMsg = isNull ? _user$project$Model$NOOP : createEntityActionMsg(_user$project$Entity$StartEditing);
 		var onKeyDownMsg = function (_p0) {
 			var _p1 = _p0;
 			var _p2 = _p1.key;

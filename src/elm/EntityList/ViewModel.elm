@@ -78,9 +78,15 @@ create config todoList entityModel =
 
         toggleDeleteMsg =
             if isNull then
-                (commonMsg.noOp)
+                Model.NOOP
             else
-                (createEntityActionMsg Entity.ToggleDeleted)
+                createEntityActionMsg Entity.ToggleDeleted
+
+        startEditingMsg =
+            if isNull then
+                Model.NOOP
+            else
+                createEntityActionMsg Entity.StartEditing
 
         icon =
             if isNull then
@@ -107,9 +113,6 @@ create config todoList entityModel =
 
                 _ ->
                     commonMsg.noOp
-
-        startEditingMsg =
-            createEntityActionMsg Entity.StartEditing
     in
         { id = id
         , name = name

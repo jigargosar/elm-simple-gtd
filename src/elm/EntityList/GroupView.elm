@@ -42,9 +42,11 @@ init vc vm =
             , onKeyDown vm.onKeyDownMsg
             , classList [ "edit z-depth-2" => isEditing, "entity-item focusable-list-item" => True ]
             ]
-            (maybeForm
-                |> Maybe.unpack (\_ -> defaultView tabindexAV vm) (editEntityView tabindexAV vm)
-            )
+            {- (maybeForm
+                   |> Maybe.unpack (\_ -> defaultView tabindexAV vm) (editEntityView tabindexAV vm)
+               )
+            -}
+            (defaultView tabindexAV vm)
 
 
 defaultView tabindexAV vm =

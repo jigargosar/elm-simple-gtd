@@ -1,10 +1,6 @@
-var _user$project$ExclusiveMode$EditContextForm = F2(
-	function (a, b) {
-		return {id: a, name: b};
-	});
-var _user$project$ExclusiveMode$EditProjectForm = F2(
-	function (a, b) {
-		return {id: a, name: b};
+var _user$project$ExclusiveMode$EditContextForm = F3(
+	function (a, b, c) {
+		return {id: a, name: b, entity: c};
 	});
 var _user$project$ExclusiveMode$SyncForm = function (a) {
 	return {uri: a};
@@ -35,28 +31,20 @@ var _user$project$ExclusiveMode$EditTodoReminder = function (a) {
 var _user$project$ExclusiveMode$EditProject = function (a) {
 	return {ctor: 'EditProject', _0: a};
 };
-var _user$project$ExclusiveMode$editProjectMode = function (model) {
+var _user$project$ExclusiveMode$editProjectMode = function (_p0) {
 	return _user$project$ExclusiveMode$EditProject(
-		{
-			id: _user$project$Document$getId(model),
-			name: _user$project$Project$getName(model)
-		});
+		_user$project$Project_EditForm$init(_p0));
 };
-var _user$project$ExclusiveMode$editProjectSetName = F2(
-	function (name, epm) {
-		return _user$project$ExclusiveMode$EditProject(
-			_elm_lang$core$Native_Utils.update(
-				epm,
-				{name: name}));
-	});
+var _user$project$ExclusiveMode$editProjectSetName = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Project_EditForm$setName, _user$project$ExclusiveMode$EditProject);
 var _user$project$ExclusiveMode$EditContext = function (a) {
 	return {ctor: 'EditContext', _0: a};
 };
-var _user$project$ExclusiveMode$editContextMode = function (model) {
+var _user$project$ExclusiveMode$editContextMode = function (context) {
 	return _user$project$ExclusiveMode$EditContext(
 		{
-			id: _user$project$Document$getId(model),
-			name: _user$project$Context$getName(model)
+			id: _user$project$Document$getId(context),
+			name: _user$project$Context$getName(context),
+			entity: _user$project$Entity$ContextEntity(context)
 		});
 };
 var _user$project$ExclusiveMode$editContextSetName = F2(

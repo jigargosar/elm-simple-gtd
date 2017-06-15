@@ -1,0 +1,100 @@
+var _user$project$Project_View$edit = function (form) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('overlay'),
+			_1: {
+				ctor: '::',
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
+					_1: {
+						ctor: '::',
+						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('modal-content'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('input-field'),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+											function (_p0) {
+												return _user$project$Model$NOOP;
+											}),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$input,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$autofocus(true),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$defaultValue(form.name),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Ext_Keyboard$onEnter(_user$project$Model$SaveCurrentForm),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$label,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('active'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Name'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$View_Shared$defaultOkCancelDeleteButtons(_user$project$Model$NOOP),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};

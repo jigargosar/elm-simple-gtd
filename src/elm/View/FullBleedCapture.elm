@@ -20,7 +20,7 @@ type alias ViewModel msg =
 
 init vm =
     div
-        [ class "overlay dark"
+        [ class "overlay"
         , onMouseDown vm.onMouseDown
         ]
         vm.children

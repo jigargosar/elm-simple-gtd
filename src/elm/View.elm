@@ -23,6 +23,7 @@ import Todo.View
 import ViewModel
 import WebComponents exposing (onBoolPropertyChanged)
 import LaunchBar.View
+import Project.View
 
 
 init m =
@@ -66,6 +67,9 @@ overlayViews appModel =
                 ExclusiveMode.ActionList model ->
                     ActionList.View.init appModel model
 
+                ExclusiveMode.EditProject form ->
+                    Project.View.edit form
+
                 _ ->
                     span [] []
     in
@@ -77,7 +81,7 @@ overlayViews appModel =
 
 firstVisitModal =
     div
-        [ class "overlay dark"
+        [ class "overlay"
         , onClickStopPropagation Model.noop
         ]
         [ div [ id "welcome", class "modal open fixed-center" ]

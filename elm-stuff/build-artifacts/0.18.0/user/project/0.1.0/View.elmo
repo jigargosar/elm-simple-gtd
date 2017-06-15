@@ -67,7 +67,7 @@ var _user$project$View$firstVisitModal = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('overlay dark'),
+		_0: _elm_lang$html$Html_Attributes$class('overlay'),
 		_1: {
 			ctor: '::',
 			_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$noop),
@@ -325,6 +325,8 @@ var _user$project$View$overlayViews = function (appModel) {
 				return _user$project$View$firstVisitModal;
 			case 'ActionList':
 				return A2(_user$project$ActionList_View$init, appModel, _p0._0);
+			case 'EditProject':
+				return _user$project$Project_View$edit(_p0._0);
 			default:
 				return A2(
 					_elm_lang$html$Html$span,

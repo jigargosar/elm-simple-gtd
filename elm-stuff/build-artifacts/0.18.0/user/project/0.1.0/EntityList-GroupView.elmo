@@ -159,13 +159,7 @@ var _user$project$EntityList_GroupView$init = F2(
 					}
 				}
 			},
-			A3(
-				_elm_community$maybe_extra$Maybe_Extra$unpack,
-				function (_p1) {
-					return A2(_user$project$EntityList_GroupView$defaultView, tabindexAV, vm);
-				},
-				A2(_user$project$EntityList_GroupView$editEntityView, tabindexAV, vm),
-				maybeForm));
+			A2(_user$project$EntityList_GroupView$defaultView, tabindexAV, vm));
 	});
 var _user$project$EntityList_GroupView$initKeyed = F2(
 	function (mainViewModel, vm) {

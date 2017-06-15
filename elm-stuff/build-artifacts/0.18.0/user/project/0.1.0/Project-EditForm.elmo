@@ -1,0 +1,17 @@
+var _user$project$Project_EditForm$setName = F2(
+	function (name, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{name: name});
+	});
+var _user$project$Project_EditForm$init = function (project) {
+	return {
+		id: _user$project$Document$getId(project),
+		name: _user$project$Project$getName(project),
+		entity: _user$project$Entity$ProjectEntity(project)
+	};
+};
+var _user$project$Project_EditForm$Model = F3(
+	function (a, b, c) {
+		return {id: a, name: b, entity: c};
+	});

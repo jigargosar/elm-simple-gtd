@@ -80,8 +80,7 @@ var _user$project$ViewModel$create = function (model) {
 		selectedEntityIdSet: model.selectedEntityIdSet,
 		projectByIdDict: _user$project$Model$getProjectsAsIdDict(model),
 		contextByIdDict: _user$project$Model$getContextsAsIdDict(model),
-		getMaybeEditTodoFormForTodo: getMaybeEditTodoFormForTodo,
-		createTodoViewModel: _user$project$Todo_View$createTodoViewModel(sharedViewModel)
+		getMaybeEditTodoFormForTodo: getMaybeEditTodoFormForTodo
 	};
 };
 var _user$project$ViewModel$Model = function (a) {
@@ -95,9 +94,7 @@ var _user$project$ViewModel$Model = function (a) {
 								return function (i) {
 									return function (j) {
 										return function (k) {
-											return function (l) {
-												return {contexts: a, projects: b, viewName: c, mainViewType: d, header: e, shared: f, now: g, getMaybeEditTodoFormForTodo: h, projectByIdDict: i, contextByIdDict: j, selectedEntityIdSet: k, createTodoViewModel: l};
-											};
+											return {contexts: a, projects: b, viewName: c, mainViewType: d, header: e, shared: f, now: g, getMaybeEditTodoFormForTodo: h, projectByIdDict: i, contextByIdDict: j, selectedEntityIdSet: k};
 										};
 									};
 								};

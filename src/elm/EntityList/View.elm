@@ -79,7 +79,7 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
                     Entity.TodoEntity todo |> getTabIndexAVForEntity
             in
                 todo
-                    |> Todo.View.createTodoViewModel appViewModel.shared tabIndexAV
+                    |> Todo.View.createTodoViewModel appViewModel tabIndexAV
                     |> Todo.View.initKeyed
 
         todoListView =

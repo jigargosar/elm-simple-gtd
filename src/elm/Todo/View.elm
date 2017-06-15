@@ -49,6 +49,7 @@ import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreve
 import Polymer.Paper as Paper
 import View.FullBleedCapture
 import View.Shared exposing (SharedViewModel, defaultOkCancelButtons, defaultOkCancelDeleteButtons, hideOnHover)
+import ViewModel
 import WebComponents exposing (..)
 
 
@@ -120,7 +121,7 @@ getDisplayText todo =
                 (\match -> "\n...")
 
 
-createTodoViewModel : SharedViewModel -> Attribute Msg -> Todo.Model -> TodoViewModel
+createTodoViewModel : ViewModel.Model -> Attribute Msg -> Todo.Model -> TodoViewModel
 createTodoViewModel vc tabindexAV todo =
     let
         now =

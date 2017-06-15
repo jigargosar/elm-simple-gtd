@@ -13,7 +13,6 @@ import Set exposing (Set)
 import Time exposing (Time)
 import Todo
 import Todo.Form
-import Todo.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -36,7 +35,6 @@ type alias Model =
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
     , selectedEntityIdSet : Set Document.Id
-    , createTodoViewModel : Attribute Msg -> Todo.Model -> Todo.View.TodoViewModel
     }
 
 
@@ -87,7 +85,6 @@ create model =
         , projectByIdDict = Model.getProjectsAsIdDict model
         , contextByIdDict = Model.getContextsAsIdDict model
         , getMaybeEditTodoFormForTodo = getMaybeEditTodoFormForTodo
-        , createTodoViewModel = (Todo.View.createTodoViewModel sharedViewModel)
         }
 
 

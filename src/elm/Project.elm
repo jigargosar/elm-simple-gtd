@@ -107,7 +107,6 @@ constructor id rev createdAt modifiedAt deleted deviceId name =
     , createdAt = createdAt
     , modifiedAt = modifiedAt
     , deleted = deleted
-    , dirty = False
     , name = name
     }
 

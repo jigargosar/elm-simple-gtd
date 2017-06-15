@@ -11,12 +11,9 @@ port module Store
         , asIdDict
         , isEmpty
         , filterDocs
-        , updateAll
-        , findAndUpdateAll
         , updateAndPersist
         , upsertOnPouchDBChange
         , upsertInPouchDbOnFirebaseChange
-        , persist
         , UpdateAllReturn
         , ChangeList
         )
@@ -125,27 +122,8 @@ encode doc s =
     Document.encode s.otherFieldsEncoder doc
 
 
-persist : Store x -> ( Store x, Cmd msg )
-persist s =
-    let
-        dirtyList =
-            filterDocs .dirty s
-
-        ns =
-            over dict (Dict.map (\id d -> { d | dirty = False })) s
-
-        cmds =
-            dirtyList .|> upsertIn s
-    in
-        ns ! cmds
-
-
 replaceDoc doc =
-    let
-        newDoc =
-            { doc | dirty = True }
-    in
-        Dict.insert (Document.getId newDoc) newDoc
+    Dict.insert (Document.getId doc) doc
 
 
 replaceDocIn =
@@ -199,7 +177,6 @@ findAndUpdateAll pred now updateFn_ store =
                     newDoc =
                         updateFn oldDoc
                 in
-                    -- todo: replace doc actually marks it dirty so we need to get new doc from that function.
                     ( ( oldDoc, newDoc ) :: changeList, replaceDocIn dict newDoc )
             )
     in
@@ -268,11 +245,7 @@ insert constructor store =
     Random.mapWithIdGenerator (constructor store.deviceId)
         |> (generate # store)
         |> (\( doc, store ) ->
-                let
-                    newDoc =
-                        { doc | dirty = True }
-                in
-                    ( newDoc, insertDocInDict newDoc store )
+                ( doc, insertDocInDict doc store )
            )
 
 

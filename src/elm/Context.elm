@@ -44,7 +44,6 @@ constructor id rev createdAt modifiedAt deleted deviceId name =
     , rev = rev
     , createdAt = createdAt
     , modifiedAt = modifiedAt
-    , dirty = False
     , deleted = deleted
     , deviceId = deviceId
     , name = name

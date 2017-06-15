@@ -241,7 +241,6 @@ defaultContextId =
 todoConstructor id rev createdAt modifiedAt deleted deviceId done text schedule projectId contextId =
     { id = id
     , rev = rev
-    , dirty = False
     , createdAt = createdAt
     , modifiedAt = modifiedAt
     , deviceId = deviceId

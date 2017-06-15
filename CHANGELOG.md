@@ -1,3 +1,6 @@
+## Upcoming
+* persistence: remove dep on every second update 
+
 ## v0.18.25 - 2017-06-14
 * fix running todo header UX
 * running : add duration to "you are currently working on"

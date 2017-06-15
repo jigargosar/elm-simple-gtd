@@ -1,6 +1,6 @@
 var _user$project$Project$constructor = F7(
 	function (id, rev, createdAt, modifiedAt, deleted, deviceId, name) {
-		return {id: id, rev: rev, deviceId: deviceId, createdAt: createdAt, modifiedAt: modifiedAt, deleted: deleted, dirty: false, name: name};
+		return {id: id, rev: rev, deviceId: deviceId, createdAt: createdAt, modifiedAt: modifiedAt, deleted: deleted, name: name};
 	});
 var _user$project$Project$init = F4(
 	function (name, now, deviceId, id) {

@@ -104,7 +104,7 @@ var _user$project$Todo$todoConstructor = function (id) {
 								return function (schedule) {
 									return function (projectId) {
 										return function (contextId) {
-											return {id: id, rev: rev, dirty: false, createdAt: createdAt, modifiedAt: modifiedAt, deviceId: deviceId, deleted: deleted, done: done, text: text, schedule: schedule, projectId: projectId, contextId: contextId};
+											return {id: id, rev: rev, createdAt: createdAt, modifiedAt: modifiedAt, deviceId: deviceId, deleted: deleted, done: done, text: text, schedule: schedule, projectId: projectId, contextId: contextId};
 										};
 									};
 								};

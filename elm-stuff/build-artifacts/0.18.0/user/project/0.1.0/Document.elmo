@@ -128,7 +128,7 @@ var _user$project$Document$equalById = F2(
 			_user$project$Document$getId(doc1),
 			_user$project$Document$getId(doc2));
 	});
-var _user$project$Document$Meta = F6(
-	function (a, b, c, d, e, f) {
-		return {id: a, rev: b, dirty: c, deleted: d, createdAt: e, modifiedAt: f};
+var _user$project$Document$Meta = F5(
+	function (a, b, c, d, e) {
+		return {id: a, rev: b, deleted: c, createdAt: d, modifiedAt: e};
 	});

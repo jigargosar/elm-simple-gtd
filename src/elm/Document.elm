@@ -45,7 +45,6 @@ defaultRevision =
 type alias Meta =
     { id : Id
     , rev : Revision
-    , dirty : Bool
     , deleted : Bool
     , createdAt : Time
     , modifiedAt : Time
@@ -60,7 +59,6 @@ type alias Document moreFields =
     { moreFields
         | id : Id
         , rev : Revision
-        , dirty : Bool
         , deleted : Bool
         , createdAt : Time
         , modifiedAt : Time

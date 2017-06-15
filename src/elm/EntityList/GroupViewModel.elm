@@ -32,6 +32,7 @@ type alias ViewModel =
     { id : String
     , count : Int
     , name : String
+    , isEditable : Bool
     , isDeleted : Bool
     , startEditingMsg : Msg
     , onDeleteClicked : Msg
@@ -79,6 +80,12 @@ create tabindexAV config entityModel =
             else
                 (createEntityActionMsg Entity.ToggleDeleted)
 
+        startEditingMsg =
+            if isNull then
+                Model.NOOP
+            else
+                createEntityActionMsg Entity.StartEditing
+
         icon =
             if isNull then
                 config.nullIcon
@@ -104,13 +111,11 @@ create tabindexAV config entityModel =
 
                 _ ->
                     commonMsg.noOp
-
-        startEditingMsg =
-            createEntityActionMsg Entity.StartEditing
     in
         { id = id
         , name = name
         , count = 0
+        , isEditable = isNull
         , isDeleted = Document.isDeleted entityModel
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg

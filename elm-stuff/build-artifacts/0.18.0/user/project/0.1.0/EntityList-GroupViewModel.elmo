@@ -16,7 +16,7 @@ var _user$project$EntityList_GroupViewModel$create = F3(
 		var createEntityActionMsg = _user$project$Model$OnEntityAction(
 			config.entityWrapper(entityModel));
 		var toggleDeleteMsg = isNull ? _user$project$Model$commonMsg.noOp : createEntityActionMsg(_user$project$Entity$ToggleDeleted);
-		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
+		var startEditingMsg = isNull ? _user$project$Model$NOOP : createEntityActionMsg(_user$project$Entity$StartEditing);
 		var onKeyDownMsg = function (_p0) {
 			var _p1 = _p0;
 			var _p2 = _p1.key;
@@ -36,6 +36,7 @@ var _user$project$EntityList_GroupViewModel$create = F3(
 			id: id,
 			name: name,
 			count: 0,
+			isEditable: isNull,
 			isDeleted: _user$project$Document$isDeleted(entityModel),
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,
@@ -98,7 +99,9 @@ var _user$project$EntityList_GroupViewModel$ViewModel = function (a) {
 										return function (k) {
 											return function (l) {
 												return function (m) {
-													return {id: a, count: b, name: c, isDeleted: d, startEditingMsg: e, onDeleteClicked: f, onSaveClicked: g, onNameChanged: h, onCancelClicked: i, icon: j, onFocusIn: k, onKeyDownMsg: l, tabindexAV: m};
+													return function (n) {
+														return {id: a, count: b, name: c, isEditable: d, isDeleted: e, startEditingMsg: f, onDeleteClicked: g, onSaveClicked: h, onNameChanged: i, onCancelClicked: j, icon: k, onFocusIn: l, onKeyDownMsg: m, tabindexAV: n};
+													};
 												};
 											};
 										};

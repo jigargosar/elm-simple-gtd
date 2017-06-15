@@ -25,6 +25,10 @@ initKeyed appViewModel vm =
     ( vm.id, init appViewModel vm )
 
 
+initHeaderKeyed appViewModel vm =
+    ( vm.id, initHeader appViewModel vm )
+
+
 init appViewModel vm =
     let
         editButton =
@@ -57,4 +61,29 @@ init appViewModel vm =
                                 |> Todo.View.initKeyed
                         )
                 )
+            ]
+
+
+initHeader appViewModel vm =
+    let
+        editButton =
+            if vm.isEditable then
+                WebComponents.iconButton "create"
+                    [ class "flex-none", onClick vm.startEditingMsg, vm.tabindexAV ]
+            else
+                span [] []
+
+        getTabIndexAVForTodo =
+            Entity.TodoEntity >> vm.getTabIndexAVForEntity
+    in
+        div
+            [ vm.tabindexAV
+            , onFocusIn vm.onFocusIn
+            , onKeyDown vm.onKeyDownMsg
+            , classList [ "entity-item group-item focusable-list-item" => True ]
+            ]
+            [ div [ class "layout horizontal justified" ]
+                [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
+                , editButton
+                ]
             ]

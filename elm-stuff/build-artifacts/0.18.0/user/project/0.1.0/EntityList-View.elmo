@@ -1,3 +1,7 @@
+var _user$project$EntityList_View$groupHeaderView = F2(
+	function (appViewModel, vm) {
+		return A2(_user$project$EntityList_GroupView2$initHeaderKeyed, appViewModel, vm);
+	});
 var _user$project$EntityList_View$groupView = F2(
 	function (appViewModel, vm) {
 		return A2(_user$project$EntityList_GroupView2$initKeyed, appViewModel, vm);
@@ -195,16 +199,16 @@ var _user$project$EntityList_View$listView = F3(
 					_user$project$Entity$equalById(entity)),
 				false);
 		};
-		var getTabindexAVForEntity = function (entity) {
+		var getTabIndexAVForEntity = function (entity) {
 			var tabindexValue = hasFocusIn(entity) ? 0 : -1;
 			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
 		};
 		var tempList = function () {
 			var createProjectVM = function (_p10) {
 				var _p11 = _p10;
-				return A3(_user$project$EntityList_ViewModel$projectGroup, getTabindexAVForEntity, _p11.todoList, _p11.project);
+				return A3(_user$project$EntityList_ViewModel$projectGroup, getTabIndexAVForEntity, _p11.todoList, _p11.project);
 			};
-			var projectViewList = function (list) {
+			var multiProjectView = function (list) {
 				return A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 					list,
@@ -217,9 +221,9 @@ var _user$project$EntityList_View$listView = F3(
 			};
 			var createContextVM = function (_p13) {
 				var _p14 = _p13;
-				return A3(_user$project$EntityList_ViewModel$contextGroup, getTabindexAVForEntity, _p14.todoList, _p14.context);
+				return A3(_user$project$EntityList_ViewModel$contextGroup, getTabIndexAVForEntity, _p14.todoList, _p14.context);
 			};
-			var contextViewList = function (list) {
+			var multiContextView = function (list) {
 				return A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 					list,
@@ -233,15 +237,44 @@ var _user$project$EntityList_View$listView = F3(
 			var _p16 = grouping;
 			switch (_p16.ctor) {
 				case 'SingleContext':
-					return projectViewList(_p16._1);
+					var header = A2(
+						_user$project$EntityList_View$groupHeaderView,
+						appViewModel,
+						createContextVM(_p16._0));
+					return {
+						ctor: '::',
+						_0: header,
+						_1: multiProjectView(_p16._1)
+					};
 				case 'SingleProject':
-					return contextViewList(_p16._1);
+					var header = A2(
+						_user$project$EntityList_View$groupHeaderView,
+						appViewModel,
+						createProjectVM(_p16._0));
+					return {
+						ctor: '::',
+						_0: header,
+						_1: multiContextView(_p16._1)
+					};
 				case 'MultiContext':
-					return contextViewList(_p16._0);
+					return multiContextView(_p16._0);
 				case 'MultiProject':
-					return projectViewList(_p16._0);
+					return multiProjectView(_p16._0);
 				default:
-					return {ctor: '[]'};
+					var getTabIndexAVForTodo = function (_p17) {
+						return getTabIndexAVForEntity(
+							_user$project$Entity$TodoEntity(_p17));
+					};
+					return A2(
+						_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+						_p16._0,
+						function (todo) {
+							return _user$project$Todo_View$initKeyed(
+								A2(
+									appViewModel.createTodoViewModel,
+									getTabIndexAVForTodo(todo),
+									todo));
+						});
 			}
 		}();
 		var vmList = A3(_user$project$EntityList_View$createVMList, entityList, appViewModel, model);

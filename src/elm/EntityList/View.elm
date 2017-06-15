@@ -144,7 +144,7 @@ listView viewType model appViewModel =
         hasFocusIn entity =
             maybeFocusInEntity ?|> Entity.equalById entity ?= False
 
-        getTabindexAVForEntity entity =
+        getTabIndexAVForEntity entity =
             let
                 tabindexValue =
                     if hasFocusIn entity then
@@ -158,37 +158,53 @@ listView viewType model appViewModel =
             let
                 createContextVM { context, todoList } =
                     EntityList.ViewModel.contextGroup
-                        getTabindexAVForEntity
+                        getTabIndexAVForEntity
                         todoList
                         context
 
-                contextViewList list =
+                multiContextView list =
                     list .|> (createContextVM >> groupView appViewModel)
 
                 createProjectVM { project, todoList } =
                     EntityList.ViewModel.projectGroup
-                        getTabindexAVForEntity
+                        getTabIndexAVForEntity
                         todoList
                         project
 
-                projectViewList list =
+                multiProjectView list =
                     list .|> (createProjectVM >> groupView appViewModel)
             in
                 case grouping of
-                    Entity.SingleContext { context, todoList } groupList ->
-                        projectViewList groupList
+                    Entity.SingleContext contextGroup subGroupList ->
+                        let
+                            header =
+                                createContextVM contextGroup |> groupHeaderView appViewModel
+                        in
+                            header :: multiProjectView subGroupList
 
-                    Entity.SingleProject { project, todoList } groupList ->
-                        contextViewList groupList
+                    Entity.SingleProject projectGroup subGroupList ->
+                        let
+                            header =
+                                createProjectVM projectGroup |> groupHeaderView appViewModel
+                        in
+                            header :: multiContextView subGroupList
 
                     Entity.MultiContext groupList ->
-                        contextViewList groupList
+                        multiContextView groupList
 
                     Entity.MultiProject groupList ->
-                        projectViewList groupList
+                        multiProjectView groupList
 
-                    _ ->
-                        []
+                    Entity.FlatTodoList todoList ->
+                        let
+                            getTabIndexAVForTodo =
+                                Entity.TodoEntity >> getTabIndexAVForEntity
+                        in
+                            todoList
+                                .|> (\todo ->
+                                        appViewModel.createTodoViewModel (getTabIndexAVForTodo todo) todo
+                                            |> Todo.View.initKeyed
+                                    )
 
         entityList =
             grouping |> Entity.flattenGrouping
@@ -220,3 +236,7 @@ listView viewType model appViewModel =
 
 groupView appViewModel vm =
     EntityList.GroupView2.initKeyed appViewModel vm
+
+
+groupHeaderView appViewModel vm =
+    EntityList.GroupView2.initHeaderKeyed appViewModel vm

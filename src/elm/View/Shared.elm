@@ -37,9 +37,6 @@ type alias SharedViewModel =
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
-    , activeProjects : List Project.Model
-    , activeContexts : List Context.Model
-    , showDetails : Bool
     , selectedEntityIdSet : Set Document.Id
     }
 
@@ -69,10 +66,7 @@ createSharedViewModel model =
         , selectedEntityIdSet = model.selectedEntityIdSet
         , projectByIdDict = Model.getProjectsAsIdDict model
         , contextByIdDict = Model.getContextsAsIdDict model
-        , activeProjects = Model.getActiveProjects model
-        , activeContexts = Model.getActiveContexts model
         , getMaybeEditTodoFormForTodo = getMaybeEditTodoFormForTodo
-        , showDetails = Model.isShowDetailsKeyPressed model
         }
 
 

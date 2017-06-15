@@ -189,13 +189,10 @@ var _user$project$View_Shared$createSharedViewModel = function (model) {
 		selectedEntityIdSet: model.selectedEntityIdSet,
 		projectByIdDict: _user$project$Model$getProjectsAsIdDict(model),
 		contextByIdDict: _user$project$Model$getContextsAsIdDict(model),
-		activeProjects: _user$project$Model$getActiveProjects(model),
-		activeContexts: _user$project$Model$getActiveContexts(model),
-		getMaybeEditTodoFormForTodo: getMaybeEditTodoFormForTodo,
-		showDetails: _user$project$Model$isShowDetailsKeyPressed(model)
+		getMaybeEditTodoFormForTodo: getMaybeEditTodoFormForTodo
 	};
 };
-var _user$project$View_Shared$SharedViewModel = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {now: a, getMaybeEditTodoFormForTodo: b, projectByIdDict: c, contextByIdDict: d, activeProjects: e, activeContexts: f, showDetails: g, selectedEntityIdSet: h};
+var _user$project$View_Shared$SharedViewModel = F5(
+	function (a, b, c, d, e) {
+		return {now: a, getMaybeEditTodoFormForTodo: b, projectByIdDict: c, contextByIdDict: d, selectedEntityIdSet: e};
 	});

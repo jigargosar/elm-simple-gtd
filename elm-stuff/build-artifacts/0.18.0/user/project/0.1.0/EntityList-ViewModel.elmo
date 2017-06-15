@@ -70,7 +70,7 @@ var _user$project$EntityList_ViewModel$contextGroup = F3(
 		};
 		return A3(_user$project$EntityList_ViewModel$create, config, todoList, context);
 	});
-var _user$project$EntityList_ViewModel$forProject = F3(
+var _user$project$EntityList_ViewModel$projectGroup = F3(
 	function (getTabIndexAVForEntity, todoList, project) {
 		var config = {
 			groupByFn: _user$project$Todo$getProjectId,

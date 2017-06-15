@@ -152,8 +152,8 @@ contextGroup getTabIndexAVForEntity todoList context =
         create config todoList context
 
 
-forProject : (Entity.Entity -> Html.Attribute Msg) -> Entity.TodoList -> Project.Model -> GroupViewModel
-forProject getTabIndexAVForEntity todoList project =
+projectGroup : (Entity.Entity -> Html.Attribute Msg) -> Entity.TodoList -> Project.Model -> GroupViewModel
+projectGroup getTabIndexAVForEntity todoList project =
     let
         config : Config
         config =

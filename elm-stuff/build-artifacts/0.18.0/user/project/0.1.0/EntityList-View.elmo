@@ -200,20 +200,45 @@ var _user$project$EntityList_View$listView = F3(
 			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
 		};
 		var tempList = function () {
-			var _p10 = grouping;
-			if (_p10.ctor === 'MultiContext') {
+			var createContextVM = function (_p10) {
+				var _p11 = _p10;
+				return A3(_user$project$EntityList_ViewModel$contextGroup, getTabindexAVForEntity, _p11.todoList, _p11.context);
+			};
+			var contextViewList = function (list) {
 				return A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-					_p10._0,
-					function (_p11) {
-						var _p12 = _p11;
+					list,
+					function (_p12) {
 						return A2(
 							_user$project$EntityList_View$groupView,
 							appViewModel,
-							A3(_user$project$EntityList_ViewModel$contextGroup, getTabindexAVForEntity, _p12.todoList, _p12.context));
+							createContextVM(_p12));
 					});
-			} else {
-				return {ctor: '[]'};
+			};
+			var projectViewList = function (list) {
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+					list,
+					function (_p13) {
+						var _p14 = _p13;
+						return A2(
+							_user$project$EntityList_View$groupView,
+							appViewModel,
+							A3(_user$project$EntityList_ViewModel$projectGroup, getTabindexAVForEntity, _p14.todoList, _p14.project));
+					});
+			};
+			var _p15 = grouping;
+			switch (_p15.ctor) {
+				case 'SingleContext':
+					return projectViewList(_p15._1);
+				case 'SingleProject':
+					return contextViewList(_p15._1);
+				case 'MultiContext':
+					return contextViewList(_p15._0);
+				case 'MultiProject':
+					return projectViewList(_p15._0);
+				default:
+					return {ctor: '[]'};
 			}
 		}();
 		var vmList = A3(_user$project$EntityList_View$createVMList, entityList, appViewModel, model);

@@ -155,22 +155,42 @@ listView viewType model appViewModel =
                 tabindex tabindexValue
 
         tempList =
-            case grouping of
-                {- Entity.SingleContext { context, todoList } projectSubgroups ->
-                   identity
-                -}
-                Entity.MultiContext list ->
+            let
+                projectViewList list =
                     list
-                        .|> (\{ context, todoList } ->
-                                EntityList.ViewModel.contextGroup
+                        .|> (\{ project, todoList } ->
+                                EntityList.ViewModel.projectGroup
                                     getTabindexAVForEntity
                                     todoList
-                                    context
+                                    project
                                     |> groupView appViewModel
                             )
 
-                _ ->
-                    []
+                createContextVM { context, todoList } =
+                    EntityList.ViewModel.contextGroup
+                        getTabindexAVForEntity
+                        todoList
+                        context
+
+                contextViewList list =
+                    list
+                        .|> (createContextVM >> groupView appViewModel)
+            in
+                case grouping of
+                    Entity.SingleContext { context, todoList } groupList ->
+                        projectViewList groupList
+
+                    Entity.SingleProject { project, todoList } groupList ->
+                        contextViewList groupList
+
+                    Entity.MultiContext groupList ->
+                        contextViewList groupList
+
+                    Entity.MultiProject groupList ->
+                        projectViewList groupList
+
+                    _ ->
+                        []
 
         entityList =
             grouping |> Entity.flattenGrouping

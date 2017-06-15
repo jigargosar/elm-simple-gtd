@@ -1,11 +1,18 @@
 module ViewModel exposing (..)
 
-import Document
+import Context
+import Dict exposing (Dict)
+import Document exposing (Id)
 import Entity
+import ExclusiveMode
 import OldGroupEntity.ViewModel exposing (DocumentWithNameViewModel)
 import Html exposing (Attribute)
 import Model exposing (Msg)
+import Project
+import Set exposing (Set)
+import Time exposing (Time)
 import Todo
+import Todo.Form
 import Todo.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -24,6 +31,11 @@ type alias Model =
     , mainViewType : ViewType
     , header : { backgroundColor : String }
     , shared : SharedViewModel
+    , now : Time
+    , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
+    , projectByIdDict : Dict Id Project.Model
+    , contextByIdDict : Dict Id Context.Model
+    , selectedEntityIdSet : Set Document.Id
     , createTodoViewModel : Attribute Msg -> Todo.Model -> Todo.View.TodoViewModel
     }
 
@@ -45,6 +57,24 @@ create model =
 
         sharedViewModel =
             View.Shared.createSharedViewModel model
+
+        editMode =
+            Model.getEditMode model
+
+        now =
+            Model.getNow model
+
+        getMaybeEditTodoFormForTodo =
+            \todo ->
+                case editMode of
+                    ExclusiveMode.EditTodo form ->
+                        if Document.hasId form.id todo then
+                            Just form
+                        else
+                            Nothing
+
+                    _ ->
+                        Nothing
     in
         { contexts = contextsVM
         , projects = projectsVM
@@ -52,7 +82,12 @@ create model =
         , mainViewType = mainViewType
         , header = { backgroundColor = headerBackgroundColor }
         , shared = sharedViewModel
-        , createTodoViewModel = (Todo.View.createTodoViewModel model.now sharedViewModel)
+        , now = now
+        , selectedEntityIdSet = model.selectedEntityIdSet
+        , projectByIdDict = Model.getProjectsAsIdDict model
+        , contextByIdDict = Model.getContextsAsIdDict model
+        , getMaybeEditTodoFormForTodo = getMaybeEditTodoFormForTodo
+        , createTodoViewModel = (Todo.View.createTodoViewModel sharedViewModel)
         }
 
 

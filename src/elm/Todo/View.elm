@@ -120,9 +120,12 @@ getDisplayText todo =
                 (\match -> "\n...")
 
 
-createTodoViewModel : Time -> SharedViewModel -> Attribute Msg -> Todo.Model -> TodoViewModel
-createTodoViewModel now vc tabindexAV todo =
+createTodoViewModel : SharedViewModel -> Attribute Msg -> Todo.Model -> TodoViewModel
+createTodoViewModel vc tabindexAV todo =
     let
+        now =
+            vc.now
+
         todoId =
             Document.getId todo
 

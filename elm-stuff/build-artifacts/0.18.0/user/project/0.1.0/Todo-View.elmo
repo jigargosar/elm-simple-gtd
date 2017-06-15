@@ -604,8 +604,8 @@ var _user$project$Todo_View$getDisplayText = function (todo) {
 		trimAndReplaceEmptyWithDefault(
 			_user$project$Todo$getText(todo)));
 };
-var _user$project$Todo_View$createTodoViewModel = F4(
-	function (now, vc, tabindexAV, todo) {
+var _user$project$Todo_View$createTodoViewModel = F3(
+	function (vc, tabindexAV, todo) {
 		var onTodoMsg = _user$project$Model$OnTodoMsg;
 		var maybeEditTodoForm = vc.getMaybeEditTodoFormForTodo(todo);
 		var maybeEditVM = A2(
@@ -674,6 +674,7 @@ var _user$project$Todo_View$createTodoViewModel = F4(
 				return _user$project$Model$commonMsg.noOp;
 			}
 		};
+		var now = vc.now;
 		return {
 			isDone: _user$project$Todo$isDone(todo),
 			key: todoId,

@@ -35,42 +35,38 @@ import WebComponents exposing (iconA, onBoolPropertyChanged, paperIconButton)
 
 view : ViewModel.Model -> Model.Model -> Html Msg
 view viewModel m =
-    let
-        { contexts, projects } =
-            viewModel
-    in
-        App.drawer
-            [ boolProperty "swipeOpen" True
-            , attribute "slot" "drawer"
+    App.drawer
+        [ boolProperty "swipeOpen" True
+        , attribute "slot" "drawer"
+        ]
+        [ App.headerLayout
+            [ attribute "has-scrolling-region" ""
             ]
-            [ App.headerLayout
-                [ attribute "has-scrolling-region" ""
+            [ App.header
+                [ boolProperty "fixed" True
+                , attribute "slot" "header"
                 ]
-                [ App.header
-                    [ boolProperty "fixed" True
-                    , attribute "slot" "header"
-                    ]
-                    [ App.toolbar
-                        [ style
-                            [ "color" => "white"
-                            , "background-color" => viewModel.header.backgroundColor
-                            ]
-                        ]
-                        [ div []
-                            [ paperIconButton
-                                [ iconA "menu"
-                                , tabindex -1
-                                , attribute "drawer-toggle" ""
-                                , onClick Model.ToggleDrawer
-                                ]
-                                []
-                            ]
-                        , leftHeader m
+                [ App.toolbar
+                    [ style
+                        [ "color" => "white"
+                        , "background-color" => viewModel.header.backgroundColor
                         ]
                     ]
-                , navList viewModel m
+                    [ div []
+                        [ paperIconButton
+                            [ iconA "menu"
+                            , tabindex -1
+                            , attribute "drawer-toggle" ""
+                            , onClick Model.ToggleDrawer
+                            ]
+                            []
+                        ]
+                    , leftHeader m
+                    ]
                 ]
+            , navList viewModel m
             ]
+        ]
 
 
 changeLogURL =

@@ -477,9 +477,6 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 };
 var _user$project$View_AppDrawer$view = F2(
 	function (viewModel, m) {
-		var _p13 = viewModel;
-		var contexts = _p13.contexts;
-		var projects = _p13.projects;
 		return A2(
 			_edvail$elm_polymer$Polymer_App$drawer,
 			{

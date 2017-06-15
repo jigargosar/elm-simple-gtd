@@ -143,11 +143,6 @@ getGotoEntityViewType maybePrevView entity =
             maybePrevView ?|> getTodoGotoGroupView model ?= (Todo.getContextId model |> ContextView)
 
 
-type GroupEntity
-    = ProjectGroup Project.Model
-    | ContextGroup Context.Model
-
-
 type alias TodoList =
     List Todo.Model
 

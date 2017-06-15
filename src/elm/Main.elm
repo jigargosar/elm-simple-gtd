@@ -454,13 +454,16 @@ onUpdateNow now =
 
 sendNotifications =
     Return.andThenMaybe
-        (Model.findAndSnoozeOverDueTodo >>? showTodoNotificationCmd)
+        (Model.findAndSnoozeOverDueTodo >>? Return.andThen showTodoNotificationCmd)
 
 
-showTodoNotificationCmd ( ( todo, model ), cmd ) =
+showTodoNotificationCmd ( todo, model ) =
     let
         cmds =
-            [ cmd, createTodoNotification todo |> Todo.Main.showTodoReminderNotification, startAlarm () ]
+            [ createTodoNotification todo
+                |> Todo.Main.showTodoReminderNotification
+            , startAlarm ()
+            ]
     in
         model ! cmds
 

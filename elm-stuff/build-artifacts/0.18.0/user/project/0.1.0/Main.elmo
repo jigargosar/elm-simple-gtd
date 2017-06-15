@@ -205,23 +205,22 @@ var _user$project$Main$showTodoNotificationCmd = function (_p11) {
 	var _p12 = _p11;
 	var cmds = {
 		ctor: '::',
-		_0: _p12._1,
+		_0: _user$project$Todo_Main$showTodoReminderNotification(
+			_user$project$Main$createTodoNotification(_p12._0)),
 		_1: {
 			ctor: '::',
-			_0: _user$project$Todo_Main$showTodoReminderNotification(
-				_user$project$Main$createTodoNotification(_p12._0._0)),
-			_1: {
-				ctor: '::',
-				_0: _user$project$Main$startAlarm(
-					{ctor: '_Tuple0'}),
-				_1: {ctor: '[]'}
-			}
+			_0: _user$project$Main$startAlarm(
+				{ctor: '_Tuple0'}),
+			_1: {ctor: '[]'}
 		}
 	};
-	return A2(_elm_lang$core$Platform_Cmd_ops['!'], _p12._0._1, cmds);
+	return A2(_elm_lang$core$Platform_Cmd_ops['!'], _p12._1, cmds);
 };
 var _user$project$Main$sendNotifications = _user$project$Ext_Return$andThenMaybe(
-	A2(_user$project$Ext_Function_Infix_ops['>>?'], _user$project$Model$findAndSnoozeOverDueTodo, _user$project$Main$showTodoNotificationCmd));
+	A2(
+		_user$project$Ext_Function_Infix_ops['>>?'],
+		_user$project$Model$findAndSnoozeOverDueTodo,
+		_Fresheyeball$elm_return$Return$andThen(_user$project$Main$showTodoNotificationCmd)));
 var _user$project$Main$onUpdateNow = function (now) {
 	return function (_p13) {
 		return A2(

@@ -29,7 +29,6 @@ type alias Model =
     , viewName : String
     , mainViewType : ViewType
     , header : { backgroundColor : String }
-    , shared : SharedViewModel
     , now : Time
     , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
     , projectByIdDict : Dict Id Project.Model
@@ -79,7 +78,6 @@ create model =
         , viewName = viewName
         , mainViewType = mainViewType
         , header = { backgroundColor = headerBackgroundColor }
-        , shared = sharedViewModel
         , now = now
         , selectedEntityIdSet = model.selectedEntityIdSet
         , projectByIdDict = Model.getProjectsAsIdDict model

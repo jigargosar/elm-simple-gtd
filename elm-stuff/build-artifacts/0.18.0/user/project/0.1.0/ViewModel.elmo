@@ -75,7 +75,6 @@ var _user$project$ViewModel$create = function (model) {
 		viewName: viewName,
 		mainViewType: mainViewType,
 		header: {backgroundColor: headerBackgroundColor},
-		shared: sharedViewModel,
 		now: now,
 		selectedEntityIdSet: model.selectedEntityIdSet,
 		projectByIdDict: _user$project$Model$getProjectsAsIdDict(model),
@@ -93,9 +92,7 @@ var _user$project$ViewModel$Model = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return function (k) {
-											return {contexts: a, projects: b, viewName: c, mainViewType: d, header: e, shared: f, now: g, getMaybeEditTodoFormForTodo: h, projectByIdDict: i, contextByIdDict: j, selectedEntityIdSet: k};
-										};
+										return {contexts: a, projects: b, viewName: c, mainViewType: d, header: e, now: f, getMaybeEditTodoFormForTodo: g, projectByIdDict: h, contextByIdDict: i, selectedEntityIdSet: j};
 									};
 								};
 							};

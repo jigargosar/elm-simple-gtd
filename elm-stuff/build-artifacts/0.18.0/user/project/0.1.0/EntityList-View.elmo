@@ -32,7 +32,7 @@ var _user$project$EntityList_View$keyedViewList = F3(
 			var tabIndexAV = getTabIndexAVForEntity(
 				_user$project$Entity$TodoEntity(todo));
 			return _user$project$Todo_View$initKeyed(
-				A3(_user$project$Todo_View$createTodoViewModel, appViewModel.shared, tabIndexAV, todo));
+				A3(_user$project$Todo_View$createTodoViewModel, appViewModel, tabIndexAV, todo));
 		};
 		var multiContextView = function (list) {
 			return A2(

@@ -18,11 +18,11 @@ import View.Shared exposing (defaultOkCancelDeleteButtons)
 import WebComponents
 
 
-initKeyed mainViewModel vm =
-    ( vm.id, init mainViewModel.shared vm )
+initKeyed vm =
+    ( vm.id, init vm )
 
 
-init vc vm =
+init vm =
     let
         tabindexAV =
             vm.tabindexAV

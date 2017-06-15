@@ -162,10 +162,10 @@ listView viewType model appViewModel =
         createEntityView vm =
             case vm of
                 Context vm ->
-                    EntityList.GroupView.initKeyed appViewModel vm
+                    EntityList.GroupView.initKeyed vm
 
                 Project vm ->
-                    EntityList.GroupView.initKeyed appViewModel vm
+                    EntityList.GroupView.initKeyed vm
 
                 Todo vm ->
                     Todo.View.initKeyed vm

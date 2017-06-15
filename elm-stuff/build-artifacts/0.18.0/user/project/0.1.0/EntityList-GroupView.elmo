@@ -51,40 +51,38 @@ var _user$project$EntityList_GroupView$defaultView = F2(
 			_1: {ctor: '[]'}
 		};
 	});
-var _user$project$EntityList_GroupView$init = F2(
-	function (vc, vm) {
-		var tabindexAV = vm.tabindexAV;
-		return A2(
-			_elm_lang$html$Html$div,
-			{
+var _user$project$EntityList_GroupView$init = function (vm) {
+	var tabindexAV = vm.tabindexAV;
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: tabindexAV,
+			_1: {
 				ctor: '::',
-				_0: tabindexAV,
+				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
+					_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$classList(
-								{
-									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item focusable-list-item', true),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item focusable-list-item', true),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
 					}
 				}
-			},
-			A2(_user$project$EntityList_GroupView$defaultView, tabindexAV, vm));
-	});
-var _user$project$EntityList_GroupView$initKeyed = F2(
-	function (mainViewModel, vm) {
-		return {
-			ctor: '_Tuple2',
-			_0: vm.id,
-			_1: A2(_user$project$EntityList_GroupView$init, mainViewModel.shared, vm)
-		};
-	});
+			}
+		},
+		A2(_user$project$EntityList_GroupView$defaultView, tabindexAV, vm));
+};
+var _user$project$EntityList_GroupView$initKeyed = function (vm) {
+	return {
+		ctor: '_Tuple2',
+		_0: vm.id,
+		_1: _user$project$EntityList_GroupView$init(vm)
+	};
+};

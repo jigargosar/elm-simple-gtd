@@ -20,7 +20,6 @@ import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model exposing (ViewType(..))
-import View.Shared exposing (SharedViewModel)
 
 
 type alias Model =
@@ -51,9 +50,6 @@ create model =
 
         ( viewName, headerBackgroundColor ) =
             getViewInfo mainViewType projectsVM contextsVM
-
-        sharedViewModel =
-            View.Shared.createSharedViewModel model
 
         editMode =
             Model.getEditMode model

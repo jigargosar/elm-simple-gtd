@@ -62,7 +62,6 @@ var _user$project$ViewModel$create = function (model) {
 			return _elm_lang$core$Maybe$Nothing;
 		}
 	};
-	var sharedViewModel = _user$project$View_Shared$createSharedViewModel(model);
 	var mainViewType = model.mainViewType;
 	var projectsVM = _user$project$OldGroupEntity_ViewModel$projects(model);
 	var contextsVM = _user$project$OldGroupEntity_ViewModel$contexts(model);

@@ -172,27 +172,3 @@ var _user$project$View_Shared$defaultBadge = function (vm) {
 			}
 		});
 };
-var _user$project$View_Shared$createSharedViewModel = function (model) {
-	var now = _user$project$Model$getNow(model);
-	var editMode = _user$project$Model$getEditMode(model);
-	var getMaybeEditTodoFormForTodo = function (todo) {
-		var _p0 = editMode;
-		if (_p0.ctor === 'EditTodo') {
-			var _p1 = _p0._0;
-			return A2(_user$project$Document$hasId, _p1.id, todo) ? _elm_lang$core$Maybe$Just(_p1) : _elm_lang$core$Maybe$Nothing;
-		} else {
-			return _elm_lang$core$Maybe$Nothing;
-		}
-	};
-	return {
-		now: now,
-		selectedEntityIdSet: model.selectedEntityIdSet,
-		projectByIdDict: _user$project$Model$getProjectsAsIdDict(model),
-		contextByIdDict: _user$project$Model$getContextsAsIdDict(model),
-		getMaybeEditTodoFormForTodo: getMaybeEditTodoFormForTodo
-	};
-};
-var _user$project$View_Shared$SharedViewModel = F5(
-	function (a, b, c, d, e) {
-		return {now: a, getMaybeEditTodoFormForTodo: b, projectByIdDict: c, contextByIdDict: d, selectedEntityIdSet: e};
-	});

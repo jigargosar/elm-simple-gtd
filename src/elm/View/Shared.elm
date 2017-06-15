@@ -32,44 +32,6 @@ import Todo.Form
 import Todo.ReminderForm
 
 
-type alias SharedViewModel =
-    { now : Time
-    , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
-    , projectByIdDict : Dict Id Project.Model
-    , contextByIdDict : Dict Id Context.Model
-    , selectedEntityIdSet : Set Document.Id
-    }
-
-
-createSharedViewModel : Model -> SharedViewModel
-createSharedViewModel model =
-    let
-        editMode =
-            Model.getEditMode model
-
-        now =
-            Model.getNow model
-
-        getMaybeEditTodoFormForTodo =
-            \todo ->
-                case editMode of
-                    ExclusiveMode.EditTodo form ->
-                        if Document.hasId form.id todo then
-                            Just form
-                        else
-                            Nothing
-
-                    _ ->
-                        Nothing
-    in
-        { now = now
-        , selectedEntityIdSet = model.selectedEntityIdSet
-        , projectByIdDict = Model.getProjectsAsIdDict model
-        , contextByIdDict = Model.getContextsAsIdDict model
-        , getMaybeEditTodoFormForTodo = getMaybeEditTodoFormForTodo
-        }
-
-
 defaultBadge : { x | name : String, count : Int } -> Html msg
 defaultBadge vm =
     div [ class "layout horizontal center" ]

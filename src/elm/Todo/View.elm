@@ -48,7 +48,7 @@ import Html.Events exposing (..)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import Polymer.Paper as Paper
 import View.FullBleedCapture
-import View.Shared exposing (SharedViewModel, defaultOkCancelButtons, defaultOkCancelDeleteButtons, hideOnHover)
+import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons, hideOnHover)
 import ViewModel
 import WebComponents exposing (..)
 

@@ -36,7 +36,7 @@ var _user$project$EntityList_GroupViewModel$create = F3(
 			id: id,
 			name: name,
 			count: 0,
-			isEditable: isNull,
+			isEditable: !isNull,
 			isDeleted: _user$project$Document$isDeleted(entityModel),
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,

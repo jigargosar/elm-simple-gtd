@@ -79,6 +79,25 @@ var _user$project$EntityList_GroupView$editEntityView = F3(
 	});
 var _user$project$EntityList_GroupView$defaultView = F2(
 	function (tabindexAV, vm) {
+		var editButton = vm.isEditable ? A2(
+			_user$project$WebComponents$iconButton,
+			'create',
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('flex-none'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+					_1: {
+						ctor: '::',
+						_0: tabindexAV,
+						_1: {ctor: '[]'}
+					}
+				}
+			}) : A2(
+			_elm_lang$html$Html$span,
+			{ctor: '[]'},
+			{ctor: '[]'});
 		return {
 			ctor: '::',
 			_0: A2(
@@ -104,22 +123,7 @@ var _user$project$EntityList_GroupView$defaultView = F2(
 						}),
 					_1: {
 						ctor: '::',
-						_0: A2(
-							_user$project$WebComponents$iconButton,
-							'create',
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('flex-none'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
-									_1: {
-										ctor: '::',
-										_0: tabindexAV,
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
+						_0: editButton,
 						_1: {ctor: '[]'}
 					}
 				}),

@@ -65,7 +65,6 @@ init vm =
         , vm.tabindexAV
         , onKeyDown vm.onKeyDownMsg
         , attribute "data-key" vm.key
-        , onClickStopPropagation Model.NOOP
         ]
         (vm.edit |> Maybe.unpack (\_ -> defaultView vm) editView)
 

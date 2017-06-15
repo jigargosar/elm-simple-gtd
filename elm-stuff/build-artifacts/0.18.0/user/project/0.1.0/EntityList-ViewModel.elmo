@@ -1,0 +1,118 @@
+var _user$project$EntityList_ViewModel$lightGray = '#9e9e9e';
+var _user$project$EntityList_ViewModel$sgtdBlue = 'rgb(68, 138, 255)';
+var _user$project$EntityList_ViewModel$projectsColor = 'rgb(124, 77, 255)';
+var _user$project$EntityList_ViewModel$nullProjectColor = 'rgb(179, 157, 219)';
+var _user$project$EntityList_ViewModel$contextsColor = _user$project$EntityList_ViewModel$sgtdBlue;
+var _user$project$EntityList_ViewModel$inboxColor = '#42a5f5';
+var _user$project$EntityList_ViewModel$create = F4(
+	function (tabindexAV, config, todoList, entityModel) {
+		var name = entityModel.name;
+		var isNull = config.isNull(entityModel);
+		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$EntityList_ViewModel$lightGray};
+		var appHeader = {
+			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
+			backgroundColor: icon.color
+		};
+		var createEntityActionMsg = _user$project$Model$OnEntityAction(
+			config.entityWrapper(entityModel));
+		var toggleDeleteMsg = isNull ? _user$project$Model$commonMsg.noOp : createEntityActionMsg(_user$project$Entity$ToggleDeleted);
+		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
+		var onKeyDownMsg = function (_p0) {
+			var _p1 = _p0;
+			var _p2 = _p1.key;
+			switch (_p2.ctor) {
+				case 'CharE':
+					return startEditingMsg;
+				case 'Delete':
+					return toggleDeleteMsg;
+				case 'CharG':
+					return createEntityActionMsg(_user$project$Entity$Goto);
+				default:
+					return _user$project$Model$commonMsg.noOp;
+			}
+		};
+		var id = _user$project$Document$getId(entityModel);
+		return {
+			id: id,
+			name: name,
+			count: 0,
+			isDeleted: _user$project$Document$isDeleted(entityModel),
+			startEditingMsg: startEditingMsg,
+			onDeleteClicked: toggleDeleteMsg,
+			onSaveClicked: createEntityActionMsg(_user$project$Entity$Save),
+			onNameChanged: function (_p3) {
+				return createEntityActionMsg(
+					_user$project$Entity$NameChanged(_p3));
+			},
+			onCancelClicked: _user$project$Model$OnDeactivateEditingMode,
+			icon: icon,
+			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
+			onKeyDownMsg: onKeyDownMsg,
+			tabindexAV: tabindexAV
+		};
+	});
+var _user$project$EntityList_ViewModel$forContext = F3(
+	function (tabindexAV, todoList, context) {
+		var config = {
+			groupByFn: _user$project$Todo$getContextId,
+			namePrefix: '@',
+			entityWrapper: _user$project$Entity$ContextEntity,
+			nullEntity: _user$project$Context$null,
+			isNull: _user$project$Context$isNull,
+			nullIcon: {name: 'inbox', color: _user$project$EntityList_ViewModel$inboxColor},
+			defaultIconName: 'av:fiber-manual-record',
+			getViewType: _user$project$Entity$ContextView,
+			tabindexAV: tabindexAV
+		};
+		return A4(_user$project$EntityList_ViewModel$create, tabindexAV, config, todoList, context);
+	});
+var _user$project$EntityList_ViewModel$forProject = F3(
+	function (tabindexAV, todoList, project) {
+		var config = {
+			groupByFn: _user$project$Todo$getProjectId,
+			namePrefix: '@',
+			entityWrapper: _user$project$Entity$ProjectEntity,
+			nullEntity: _user$project$Project$null,
+			isNull: _user$project$Project$isNull,
+			nullIcon: {name: 'inbox', color: _user$project$EntityList_ViewModel$inboxColor},
+			defaultIconName: 'av:fiber-manual-record',
+			getViewType: _user$project$Entity$ProjectView,
+			tabindexAV: tabindexAV
+		};
+		return A4(_user$project$EntityList_ViewModel$create, tabindexAV, config, todoList, project);
+	});
+var _user$project$EntityList_ViewModel$IconVM = F2(
+	function (a, b) {
+		return {name: a, color: b};
+	});
+var _user$project$EntityList_ViewModel$GroupViewModel = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return {id: a, count: b, name: c, isDeleted: d, startEditingMsg: e, onDeleteClicked: f, onSaveClicked: g, onNameChanged: h, onCancelClicked: i, icon: j, onFocusIn: k, onKeyDownMsg: l, tabindexAV: m};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$EntityList_ViewModel$Config = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {groupByFn: a, namePrefix: b, entityWrapper: c, nullEntity: d, isNull: e, nullIcon: f, defaultIconName: g, getViewType: h, tabindexAV: i};
+	});

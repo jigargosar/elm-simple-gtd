@@ -62,7 +62,7 @@ type alias Config =
     }
 
 
-create tabindexAV config entityModel =
+create tabindexAV config todoList entityModel =
     let
         id =
             Document.getId entityModel
@@ -124,8 +124,8 @@ create tabindexAV config entityModel =
         }
 
 
-forContext : Html.Attribute Msg -> Context.Model -> GroupViewModel
-forContext tabindexAV context =
+forContext : Html.Attribute Msg -> Entity.TodoList -> Context.Model -> GroupViewModel
+forContext tabindexAV todoList context =
     let
         config : Config
         config =
@@ -140,11 +140,11 @@ forContext tabindexAV context =
             , tabindexAV = tabindexAV
             }
     in
-        create tabindexAV config context
+        create tabindexAV config todoList context
 
 
-forProject : Html.Attribute Msg -> Project.Model -> GroupViewModel
-forProject tabindexAV project =
+forProject : Html.Attribute Msg -> Entity.TodoList -> Project.Model -> GroupViewModel
+forProject tabindexAV todoList project =
     let
         config : Config
         config =
@@ -159,7 +159,7 @@ forProject tabindexAV project =
             , tabindexAV = tabindexAV
             }
     in
-        create tabindexAV config project
+        create tabindexAV config todoList project
 
 
 inboxColor =

@@ -1,7 +1,3 @@
-var _user$project$EntityList_View$EntityViewModel = F6(
-	function (a, b, c, d, e, f) {
-		return {id: a, onFocusIn: b, startEditingMsg: c, toggleDeleteMsg: d, startEditingMsg: e, tabIndexAV: f};
-	});
 var _user$project$EntityList_View$Todo = function (a) {
 	return {ctor: 'Todo', _0: a};
 };
@@ -184,15 +180,41 @@ var _user$project$EntityList_View$listView = F3(
 			}
 		};
 		var grouping = A2(_user$project$Model$createGrouping, viewType, model);
+		var entityList = _user$project$Entity$flattenGrouping(grouping);
+		var maybeFocusInEntity = A2(_user$project$Model$getMaybeFocusInEntity, entityList, model);
+		var hasFocusIn = function (entity) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+				A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					maybeFocusInEntity,
+					_user$project$Entity$equalById(entity)),
+				false);
+		};
+		var getTabindexAV = function (entity) {
+			var tabindexValue = hasFocusIn(entity) ? 0 : -1;
+			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
+		};
 		var _p10 = function () {
 			var _p11 = grouping;
 			if (_p11.ctor === 'MultiContext') {
-				return _elm_lang$core$Basics$identity;
+				return A2(
+					_elm_lang$core$List$map,
+					function (_p12) {
+						var _p13 = _p12;
+						var _p14 = _p13.context;
+						return A3(
+							_user$project$EntityList_ViewModel$forContext,
+							getTabindexAV(
+								_user$project$Entity$ContextEntity(_p14)),
+							_p13.todoList,
+							_p14);
+					},
+					_p11._0);
 			} else {
-				return _elm_lang$core$Basics$identity;
+				return {ctor: '[]'};
 			}
 		}();
-		var entityList = _user$project$Entity$flattenGrouping(grouping);
 		var vmList = A3(_user$project$EntityList_View$createVMList, entityList, appViewModel, model);
 		return A3(
 			_elm_lang$html$Html_Keyed$node,

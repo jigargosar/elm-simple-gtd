@@ -4,6 +4,7 @@ import Document
 import Entity exposing (Entity)
 import EntityList.GroupView
 import EntityList.GroupViewModel exposing (DocumentWithName)
+import EntityList.ViewModel
 import Html
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -132,16 +133,39 @@ listView viewType model appViewModel =
         grouping =
             Model.createGrouping viewType model
 
+        maybeFocusInEntity =
+            Model.getMaybeFocusInEntity entityList model
+
+        hasFocusIn entity =
+            maybeFocusInEntity ?|> Entity.equalById entity ?= False
+
+        getTabindexAV entity =
+            let
+                tabindexValue =
+                    if hasFocusIn entity then
+                        0
+                    else
+                        -1
+            in
+                tabindex tabindexValue
+
         _ =
             case grouping of
                 {- Entity.SingleContext { context, todoList } projectSubgroups ->
                    identity
                 -}
                 Entity.MultiContext contextGroupList ->
-                    identity
+                    contextGroupList
+                        |> List.map
+                            (\{ context, todoList } ->
+                                EntityList.ViewModel.forContext
+                                    (getTabindexAV (Entity.ContextEntity context))
+                                    todoList
+                                    context
+                            )
 
                 _ ->
-                    identity
+                    []
 
         entityList =
             grouping |> Entity.flattenGrouping

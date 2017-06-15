@@ -1,5 +1,6 @@
 ## Upcoming
-* ExclusiveMode: centralize edit forms 
+* ExclusiveMode: centralize edit project/context forms
+  * cleanup SharedVM
 
 ## v0.18.26 - 2017-06-15
 * persistence: remove dep on every second update 

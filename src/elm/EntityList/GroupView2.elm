@@ -31,28 +31,11 @@ initHeaderKeyed appViewModel vm =
 
 init appViewModel vm =
     let
-        editButton =
-            if vm.isEditable then
-                WebComponents.iconButton "create"
-                    [ class "flex-none", onClick vm.startEditingMsg, vm.tabindexAV ]
-            else
-                span [] []
-
         getTabIndexAVForTodo =
             Entity.TodoEntity >> vm.getTabIndexAVForEntity
     in
         div []
-            [ div
-                [ vm.tabindexAV
-                , onFocusIn vm.onFocusIn
-                , onKeyDown vm.onKeyDownMsg
-                , classList [ "entity-item group-item focusable-list-item" => True ]
-                ]
-                [ div [ class "layout horizontal justified" ]
-                    [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
-                    , editButton
-                    ]
-                ]
+            [ initHeader appViewModel vm
             , Html.Keyed.node "div"
                 []
                 (vm.todoList
@@ -72,9 +55,6 @@ initHeader appViewModel vm =
                     [ class "flex-none", onClick vm.startEditingMsg, vm.tabindexAV ]
             else
                 span [] []
-
-        getTabIndexAVForTodo =
-            Entity.TodoEntity >> vm.getTabIndexAVForEntity
     in
         div
             [ vm.tabindexAV

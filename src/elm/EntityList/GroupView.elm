@@ -21,33 +21,28 @@ import View.Shared exposing (defaultOkCancelDeleteButtons)
 import WebComponents
 
 
-initKeyed appViewModel vm =
-    ( vm.id, init appViewModel vm )
+initKeyed todoView vm =
+    ( vm.id, init todoView vm )
 
 
-initHeaderKeyed appViewModel vm =
-    ( vm.id, initHeader appViewModel vm )
+initHeaderKeyed vm =
+    ( vm.id, initHeader vm )
 
 
-init appViewModel vm =
+init todoView vm =
     let
         getTabIndexAVForTodo =
             Entity.TodoEntity >> vm.getTabIndexAVForEntity
     in
         div []
-            [ initHeader appViewModel vm
+            [ initHeader vm
             , Html.Keyed.node "div"
                 []
-                (vm.todoList
-                    .|> (\todo ->
-                            appViewModel.createTodoViewModel (getTabIndexAVForTodo todo) todo
-                                |> Todo.View.initKeyed
-                        )
-                )
+                (vm.todoList .|> todoView)
             ]
 
 
-initHeader appViewModel vm =
+initHeader vm =
     let
         editButton =
             if vm.isEditable then

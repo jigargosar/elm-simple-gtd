@@ -62,7 +62,7 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
                 context
 
         multiContextView list =
-            list .|> (createContextVM >> groupView appViewModel)
+            list .|> (createContextVM >> groupView todoView)
 
         createProjectVM { project, todoList } =
             EntityList.ViewModel.projectGroup
@@ -71,20 +71,32 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
                 project
 
         multiProjectView list =
-            list .|> (createProjectVM >> groupView appViewModel)
+            list .|> (createProjectVM >> groupView todoView)
+
+        todoView todo =
+            let
+                tabIndexAV =
+                    Entity.TodoEntity todo |> getTabIndexAVForEntity
+            in
+                todo
+                    |> Todo.View.createTodoViewModel appViewModel.shared tabIndexAV
+                    |> Todo.View.initKeyed
+
+        todoListView =
+            List.map todoView
     in
         case grouping of
             Entity.SingleContext contextGroup subGroupList ->
                 let
                     header =
-                        createContextVM contextGroup |> groupHeaderView appViewModel
+                        createContextVM contextGroup |> groupHeaderView
                 in
                     header :: multiProjectView subGroupList
 
             Entity.SingleProject projectGroup subGroupList ->
                 let
                     header =
-                        createProjectVM projectGroup |> groupHeaderView appViewModel
+                        createProjectVM projectGroup |> groupHeaderView
                 in
                     header :: multiContextView subGroupList
 
@@ -95,20 +107,12 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
                 multiProjectView groupList
 
             Entity.FlatTodoList todoList ->
-                let
-                    getTabIndexAVForTodo =
-                        Entity.TodoEntity >> getTabIndexAVForEntity
-                in
-                    todoList
-                        .|> (\todo ->
-                                appViewModel.createTodoViewModel (getTabIndexAVForTodo todo) todo
-                                    |> Todo.View.initKeyed
-                            )
+                todoListView todoList
 
 
-groupView appViewModel vm =
-    EntityList.GroupView.initKeyed appViewModel vm
+groupView todoView vm =
+    EntityList.GroupView.initKeyed todoView vm
 
 
-groupHeaderView appViewModel vm =
-    EntityList.GroupView.initHeaderKeyed appViewModel vm
+groupHeaderView vm =
+    EntityList.GroupView.initHeaderKeyed vm

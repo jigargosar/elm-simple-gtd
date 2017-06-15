@@ -1,3 +1,6 @@
+## Upcoming
+* UX: entity-list view grouping 
+
 ## v0.18.27 - 2017-06-15
 * ExclusiveMode: centralize edit project/context forms
   * cleanup SharedVM

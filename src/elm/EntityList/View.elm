@@ -156,16 +156,6 @@ listView viewType model appViewModel =
 
         tempList =
             let
-                projectViewList list =
-                    list
-                        .|> (\{ project, todoList } ->
-                                EntityList.ViewModel.projectGroup
-                                    getTabindexAVForEntity
-                                    todoList
-                                    project
-                                    |> groupView appViewModel
-                            )
-
                 createContextVM { context, todoList } =
                     EntityList.ViewModel.contextGroup
                         getTabindexAVForEntity
@@ -173,8 +163,16 @@ listView viewType model appViewModel =
                         context
 
                 contextViewList list =
-                    list
-                        .|> (createContextVM >> groupView appViewModel)
+                    list .|> (createContextVM >> groupView appViewModel)
+
+                createProjectVM { project, todoList } =
+                    EntityList.ViewModel.projectGroup
+                        getTabindexAVForEntity
+                        todoList
+                        project
+
+                projectViewList list =
+                    list .|> (createProjectVM >> groupView appViewModel)
             in
                 case grouping of
                     Entity.SingleContext { context, todoList } groupList ->

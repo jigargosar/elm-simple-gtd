@@ -147,35 +147,35 @@ type alias TodoList =
     List Todo.Model
 
 
-type alias TodoContextGroup =
+type alias ContextGroup =
     { context : Context.Model
-    , list : TodoList
+    , todoList : TodoList
     }
 
 
-type alias TodoProjectGroup =
+type alias ProjectGroup =
     { project : Project.Model
-    , list : TodoList
+    , todoList : TodoList
     }
 
 
 type Grouping
-    = SingleContext TodoContextGroup (List TodoProjectGroup)
-    | SingleProject TodoProjectGroup (List TodoContextGroup)
-    | MultiContext (List TodoContextGroup)
-    | MultiProject (List TodoProjectGroup)
+    = SingleContext ContextGroup (List ProjectGroup)
+    | SingleProject ProjectGroup (List ContextGroup)
+    | MultiContext (List ContextGroup)
+    | MultiProject (List ProjectGroup)
     | FlatTodoList TodoList
 
 
 createContextTodoGroup getTodoList context =
     { context = context
-    , list = getTodoList context
+    , todoList = getTodoList context
     }
 
 
 createProjectTodoGroup getTodoList project =
     { project = project
-    , list = getTodoList project
+    , todoList = getTodoList project
     }
 
 
@@ -186,7 +186,7 @@ createGroupingForContexts getTodoList contexts =
 createProjectSubGroups findProjectById tcg =
     let
         projects =
-            tcg.list
+            tcg.todoList
                 .|> Todo.getProjectId
                 |> List.unique
                 .|> findProjectById
@@ -194,7 +194,7 @@ createProjectSubGroups findProjectById tcg =
                 |> Project.sort
 
         filterTodoForProject project =
-            tcg.list
+            tcg.todoList
                 |> List.filter (Todo.projectFilter project)
     in
         projects .|> createProjectTodoGroup filterTodoForProject
@@ -213,7 +213,7 @@ createGroupingForProjects getTodoList projects =
 createContextSubGroups findContextById tcg =
     let
         contexts =
-            tcg.list
+            tcg.todoList
                 .|> Todo.getContextId
                 |> List.unique
                 .|> findContextById
@@ -221,7 +221,7 @@ createContextSubGroups findContextById tcg =
                 |> Context.sort
 
         filterTodoForContext context =
-            tcg.list
+            tcg.todoList
                 |> List.filter (Todo.contextFilter context)
     in
         contexts .|> createContextTodoGroup filterTodoForContext
@@ -254,7 +254,7 @@ flattenGrouping grouping =
                 |> List.concatMap
                     (\g ->
                         (ContextEntity g.context)
-                            :: (g.list .|> TodoEntity)
+                            :: (g.todoList .|> TodoEntity)
                     )
 
         MultiProject groupList ->
@@ -262,11 +262,11 @@ flattenGrouping grouping =
                 |> List.concatMap
                     (\g ->
                         (ProjectEntity g.project)
-                            :: (g.list .|> TodoEntity)
+                            :: (g.todoList .|> TodoEntity)
                     )
 
-        FlatTodoList list ->
-            list .|> TodoEntity
+        FlatTodoList todoList ->
+            todoList .|> TodoEntity
 
 
 findEntityByOffsetIn offsetIndex entityList fromEntity =

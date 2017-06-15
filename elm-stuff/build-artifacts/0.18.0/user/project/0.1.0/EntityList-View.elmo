@@ -184,6 +184,14 @@ var _user$project$EntityList_View$listView = F3(
 			}
 		};
 		var grouping = A2(_user$project$Model$createGrouping, viewType, model);
+		var _p10 = function () {
+			var _p11 = grouping;
+			if (_p11.ctor === 'SingleContext') {
+				return _elm_lang$core$Basics$identity;
+			} else {
+				return _elm_lang$core$Basics$identity;
+			}
+		}();
 		var entityList = _user$project$Entity$flattenGrouping(grouping);
 		var vmList = A3(_user$project$EntityList_View$createVMList, entityList, appViewModel, model);
 		return A3(

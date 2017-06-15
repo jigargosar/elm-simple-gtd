@@ -139,7 +139,7 @@ listView viewType model appViewModel =
         hasFocusIn entity =
             maybeFocusInEntity ?|> Entity.equalById entity ?= False
 
-        getTabindexAV entity =
+        getTabindexAVForEntity entity =
             let
                 tabindexValue =
                     if hasFocusIn entity then
@@ -158,8 +158,8 @@ listView viewType model appViewModel =
                     contextGroupList
                         |> List.map
                             (\{ context, todoList } ->
-                                EntityList.ViewModel.forContext
-                                    (getTabindexAV (Entity.ContextEntity context))
+                                EntityList.ViewModel.contextGroup
+                                    getTabindexAVForEntity
                                     todoList
                                     context
                             )

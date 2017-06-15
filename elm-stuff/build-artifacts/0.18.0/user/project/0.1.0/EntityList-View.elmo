@@ -191,7 +191,7 @@ var _user$project$EntityList_View$listView = F3(
 					_user$project$Entity$equalById(entity)),
 				false);
 		};
-		var getTabindexAV = function (entity) {
+		var getTabindexAVForEntity = function (entity) {
 			var tabindexValue = hasFocusIn(entity) ? 0 : -1;
 			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
 		};
@@ -202,13 +202,7 @@ var _user$project$EntityList_View$listView = F3(
 					_elm_lang$core$List$map,
 					function (_p12) {
 						var _p13 = _p12;
-						var _p14 = _p13.context;
-						return A3(
-							_user$project$EntityList_ViewModel$forContext,
-							getTabindexAV(
-								_user$project$Entity$ContextEntity(_p14)),
-							_p13.todoList,
-							_p14);
+						return A3(_user$project$EntityList_ViewModel$contextGroup, getTabindexAVForEntity, _p13.todoList, _p13.context);
 					},
 					_p11._0);
 			} else {

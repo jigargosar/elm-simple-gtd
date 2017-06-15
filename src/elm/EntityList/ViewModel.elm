@@ -42,6 +42,8 @@ type alias GroupViewModel =
     , onFocusIn : Msg
     , onKeyDownMsg : KeyboardEvent -> Msg
     , tabindexAV : Html.Attribute Msg
+    , todoList : Entity.TodoList
+    , getTabIndexAVForEntity : Entity.Entity -> Html.Attribute Msg
     }
 
 
@@ -58,11 +60,11 @@ type alias Config =
     , nullIcon : IconVM
     , defaultIconName : String
     , getViewType : Document.Id -> EntityListViewType
-    , tabindexAV : Html.Attribute Msg
+    , getTabIndexAVForEntity : Entity.Entity -> Html.Attribute Msg
     }
 
 
-create tabindexAV config todoList entityModel =
+create config todoList entityModel =
     let
         id =
             Document.getId entityModel
@@ -120,12 +122,14 @@ create tabindexAV config todoList entityModel =
         , icon = icon
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
         , onKeyDownMsg = onKeyDownMsg
-        , tabindexAV = tabindexAV
+        , tabindexAV = config.getTabIndexAVForEntity (config.entityWrapper entityModel)
+        , todoList = todoList
+        , getTabIndexAVForEntity = config.getTabIndexAVForEntity
         }
 
 
-forContext : Html.Attribute Msg -> Entity.TodoList -> Context.Model -> GroupViewModel
-forContext tabindexAV todoList context =
+contextGroup : (Entity.Entity -> Html.Attribute Msg) -> Entity.TodoList -> Context.Model -> GroupViewModel
+contextGroup getTabIndexAVForEntity todoList context =
     let
         config : Config
         config =
@@ -137,14 +141,14 @@ forContext tabindexAV todoList context =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.ContextView
-            , tabindexAV = tabindexAV
+            , getTabIndexAVForEntity = getTabIndexAVForEntity
             }
     in
-        create tabindexAV config todoList context
+        create config todoList context
 
 
-forProject : Html.Attribute Msg -> Entity.TodoList -> Project.Model -> GroupViewModel
-forProject tabindexAV todoList project =
+forProject : (Entity.Entity -> Html.Attribute Msg) -> Entity.TodoList -> Project.Model -> GroupViewModel
+forProject getTabIndexAVForEntity todoList project =
     let
         config : Config
         config =
@@ -156,10 +160,10 @@ forProject tabindexAV todoList project =
             , nullIcon = { name = "inbox", color = inboxColor }
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.ProjectView
-            , tabindexAV = tabindexAV
+            , getTabIndexAVForEntity = getTabIndexAVForEntity
             }
     in
-        create tabindexAV config todoList project
+        create config todoList project
 
 
 inboxColor =

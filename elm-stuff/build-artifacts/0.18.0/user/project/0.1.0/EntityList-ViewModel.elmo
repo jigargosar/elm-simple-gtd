@@ -4,8 +4,8 @@ var _user$project$EntityList_ViewModel$projectsColor = 'rgb(124, 77, 255)';
 var _user$project$EntityList_ViewModel$nullProjectColor = 'rgb(179, 157, 219)';
 var _user$project$EntityList_ViewModel$contextsColor = _user$project$EntityList_ViewModel$sgtdBlue;
 var _user$project$EntityList_ViewModel$inboxColor = '#42a5f5';
-var _user$project$EntityList_ViewModel$create = F4(
-	function (tabindexAV, config, todoList, entityModel) {
+var _user$project$EntityList_ViewModel$create = F3(
+	function (config, todoList, entityModel) {
 		var name = entityModel.name;
 		var isNull = config.isNull(entityModel);
 		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$EntityList_ViewModel$lightGray};
@@ -48,11 +48,14 @@ var _user$project$EntityList_ViewModel$create = F4(
 			icon: icon,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
 			onKeyDownMsg: onKeyDownMsg,
-			tabindexAV: tabindexAV
+			tabindexAV: config.getTabIndexAVForEntity(
+				config.entityWrapper(entityModel)),
+			todoList: todoList,
+			getTabIndexAVForEntity: config.getTabIndexAVForEntity
 		};
 	});
-var _user$project$EntityList_ViewModel$forContext = F3(
-	function (tabindexAV, todoList, context) {
+var _user$project$EntityList_ViewModel$contextGroup = F3(
+	function (getTabIndexAVForEntity, todoList, context) {
 		var config = {
 			groupByFn: _user$project$Todo$getContextId,
 			namePrefix: '@',
@@ -62,12 +65,12 @@ var _user$project$EntityList_ViewModel$forContext = F3(
 			nullIcon: {name: 'inbox', color: _user$project$EntityList_ViewModel$inboxColor},
 			defaultIconName: 'av:fiber-manual-record',
 			getViewType: _user$project$Entity$ContextView,
-			tabindexAV: tabindexAV
+			getTabIndexAVForEntity: getTabIndexAVForEntity
 		};
-		return A4(_user$project$EntityList_ViewModel$create, tabindexAV, config, todoList, context);
+		return A3(_user$project$EntityList_ViewModel$create, config, todoList, context);
 	});
 var _user$project$EntityList_ViewModel$forProject = F3(
-	function (tabindexAV, todoList, project) {
+	function (getTabIndexAVForEntity, todoList, project) {
 		var config = {
 			groupByFn: _user$project$Todo$getProjectId,
 			namePrefix: '@',
@@ -77,9 +80,9 @@ var _user$project$EntityList_ViewModel$forProject = F3(
 			nullIcon: {name: 'inbox', color: _user$project$EntityList_ViewModel$inboxColor},
 			defaultIconName: 'av:fiber-manual-record',
 			getViewType: _user$project$Entity$ProjectView,
-			tabindexAV: tabindexAV
+			getTabIndexAVForEntity: getTabIndexAVForEntity
 		};
-		return A4(_user$project$EntityList_ViewModel$create, tabindexAV, config, todoList, project);
+		return A3(_user$project$EntityList_ViewModel$create, config, todoList, project);
 	});
 var _user$project$EntityList_ViewModel$IconVM = F2(
 	function (a, b) {
@@ -98,7 +101,11 @@ var _user$project$EntityList_ViewModel$GroupViewModel = function (a) {
 										return function (k) {
 											return function (l) {
 												return function (m) {
-													return {id: a, count: b, name: c, isDeleted: d, startEditingMsg: e, onDeleteClicked: f, onSaveClicked: g, onNameChanged: h, onCancelClicked: i, icon: j, onFocusIn: k, onKeyDownMsg: l, tabindexAV: m};
+													return function (n) {
+														return function (o) {
+															return {id: a, count: b, name: c, isDeleted: d, startEditingMsg: e, onDeleteClicked: f, onSaveClicked: g, onNameChanged: h, onCancelClicked: i, icon: j, onFocusIn: k, onKeyDownMsg: l, tabindexAV: m, todoList: n, getTabIndexAVForEntity: o};
+														};
+													};
 												};
 											};
 										};
@@ -114,5 +121,5 @@ var _user$project$EntityList_ViewModel$GroupViewModel = function (a) {
 };
 var _user$project$EntityList_ViewModel$Config = F9(
 	function (a, b, c, d, e, f, g, h, i) {
-		return {groupByFn: a, namePrefix: b, entityWrapper: c, nullEntity: d, isNull: e, nullIcon: f, defaultIconName: g, getViewType: h, tabindexAV: i};
+		return {groupByFn: a, namePrefix: b, entityWrapper: c, nullEntity: d, isNull: e, nullIcon: f, defaultIconName: g, getViewType: h, getTabIndexAVForEntity: i};
 	});

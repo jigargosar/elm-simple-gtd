@@ -227,7 +227,7 @@ update msg =
                             >> Model.createTodo "press `e` to edit text"
                             >> Model.createTodo "press `c` to set context"
                             >> Model.createTodo "press `p` to set project"
-                            >> Model.createTodo "press `s` to set schedule/reminder"
+                            >> Model.createTodo "press `r` to set schedule/reminder"
                             >> Model.createTodo "use `ArrowUp` and `ArrowDown` keys to focus item"
                         )
                         >> andThenUpdate OnDeactivateEditingMode

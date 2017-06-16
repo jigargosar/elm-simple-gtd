@@ -1,3 +1,6 @@
+## Upcoming
+* Simplify: first screen. 
+
 ## v0.18.32 - 2017-06-16
 * press `r` to set schedule/reminder 
 

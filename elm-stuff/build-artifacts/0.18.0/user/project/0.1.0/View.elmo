@@ -83,7 +83,7 @@ var _user$project$View$firstVisitModal = A2(
 				_0: _elm_lang$html$Html_Attributes$id('welcome'),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('modal open fixed-center'),
+					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 					_1: {ctor: '[]'}
 				}
 			},
@@ -145,7 +145,7 @@ var _user$project$View$firstVisitModal = A2(
 													},
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html$text('Have an account? signin to start syncing.'),
+														_0: _elm_lang$html$Html$text('Already have an account with us?'),
 														_1: {ctor: '[]'}
 													}),
 												_1: {ctor: '[]'}
@@ -174,7 +174,7 @@ var _user$project$View$firstVisitModal = A2(
 														},
 														{
 															ctor: '::',
-															_0: _elm_lang$html$Html$text('Signin with Google'),
+															_0: _elm_lang$html$Html$text('Signin'),
 															_1: {ctor: '[]'}
 														}),
 													_1: {ctor: '[]'}
@@ -221,7 +221,7 @@ var _user$project$View$firstVisitModal = A2(
 															},
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html$text('Or lets create some sample items and '),
+																_0: _elm_lang$html$Html$text('Or lets'),
 																_1: {ctor: '[]'}
 															}),
 														_1: {ctor: '[]'}

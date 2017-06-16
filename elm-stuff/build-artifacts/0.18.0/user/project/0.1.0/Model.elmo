@@ -1401,9 +1401,6 @@ var _user$project$Model$StartEditingContext = function (a) {
 var _user$project$Model$StartEditingReminder = function (a) {
 	return {ctor: 'StartEditingReminder', _0: a};
 };
-var _user$project$Model$NewTodoKeyDown = function (a) {
-	return {ctor: 'NewTodoKeyDown', _0: a};
-};
 var _user$project$Model$OnCreateDefaultEntities = {ctor: 'OnCreateDefaultEntities'};
 var _user$project$Model$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};
 var _user$project$Model$NewTodoTextChanged = F2(

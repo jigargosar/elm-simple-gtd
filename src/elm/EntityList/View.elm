@@ -79,11 +79,11 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
 
         todoView todo =
             let
-                tabIndexAV =
-                    Entity.TodoEntity todo |> getTabIndexAVForEntity
+                canBeFocused =
+                    Entity.TodoEntity todo |> hasFocusIn
             in
                 todo
-                    |> Todo.View.createTodoViewModel appViewModel tabIndexAV
+                    |> Todo.View.createTodoViewModel appViewModel canBeFocused
                     |> Todo.View.keyedItem
 
         todoListView =

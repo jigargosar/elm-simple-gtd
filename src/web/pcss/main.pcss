@@ -261,6 +261,12 @@ paper-listbox {
 }
 
 .focusable-list .todo-item {
+  &.can-be-focused .display-text {
+    cursor: pointer;
+  }
+}
+
+.focusable-list .todo-item {
   border-left: 2px solid transparent;
 
   &:not(.selected):before {
@@ -297,11 +303,7 @@ paper-listbox {
     padding: 0 8px;
     /*white-space: pre-line; !*sequences of whitespace are collapsed*!*/
     /* when indenting items using star, whitespace should not be lost*/
-  //overflow-wrap: break-word; white-space: pre-wrap; /*sequences of whitespace are preserved*/ //word-break: normal; hyphens: auto;
-  }
-
-  & paper-item-body {
-    cursor: pointer;
+    //overflow-wrap: break-word; white-space: pre-wrap; /*sequences of whitespace are preserved*/ //word-break: normal; hyphens: auto;
   }
 
   & .reminder-text.overdue {

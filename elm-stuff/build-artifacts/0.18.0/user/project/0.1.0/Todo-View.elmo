@@ -583,7 +583,11 @@ var _user$project$Todo_View$item = function (vm) {
 					_1: {
 						ctor: '::',
 						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'selected', vm.isSelected),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'can-be-focused', vm.canBeFocused),
+							_1: {ctor: '[]'}
+						}
 					}
 				}),
 			_1: {
@@ -610,12 +614,8 @@ var _user$project$Todo_View$item = function (vm) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class(''),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
-						_1: {ctor: '[]'}
-					}
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.startEditingMsg),
+					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
@@ -738,11 +738,11 @@ var _user$project$Todo_View$getDisplayText = function (todo) {
 			_user$project$Todo$getText(todo)));
 };
 var _user$project$Todo_View$createTodoViewModel = F3(
-	function (appVM, tabindexAV, todo) {
+	function (appVM, canBeFocused, todo) {
 		var onTodoMsg = _user$project$Model$OnTodoMsg;
 		var createEntityActionMsg = _user$project$Model$OnEntityAction(
 			_user$project$Entity$TodoEntity(todo));
-		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
+		var startEditingMsg = canBeFocused ? createEntityActionMsg(_user$project$Entity$StartEditing) : _user$project$Model$NOOP;
 		var toggleDeleteMsg = createEntityActionMsg(_user$project$Entity$ToggleDeleted);
 		var contextId = _user$project$Todo$getContextId(todo);
 		var projectId = _user$project$Todo$getProjectId(todo);
@@ -804,6 +804,10 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 				return _user$project$Model$commonMsg.noOp;
 			}
 		};
+		var tabindexAV = function () {
+			var tabindexValue = canBeFocused ? 0 : -1;
+			return _elm_lang$html$Html_Attributes$tabindex(tabindexValue);
+		}();
 		return {
 			isDone: _user$project$Todo$isDone(todo),
 			key: todoId,
@@ -815,6 +819,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			showContextDropdownMsg: _user$project$Model$StartEditingContext(todo),
 			showProjectDropdownMsg: _user$project$Model$StartEditingProject(todo),
 			startEditingMsg: startEditingMsg,
+			canBeFocused: canBeFocused,
 			toggleDoneMsg: toggleDoneMsg,
 			reminder: reminder,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
@@ -837,7 +842,9 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 												return function (m) {
 													return function (n) {
 														return function (o) {
-															return {key: a, displayText: b, isDone: c, isDeleted: d, onKeyDownMsg: e, projectDisplayName: f, contextDisplayName: g, startEditingMsg: h, toggleDoneMsg: i, showContextDropdownMsg: j, showProjectDropdownMsg: k, reminder: l, onFocusIn: m, tabindexAV: n, isSelected: o};
+															return function (p) {
+																return {key: a, displayText: b, isDone: c, isDeleted: d, onKeyDownMsg: e, projectDisplayName: f, contextDisplayName: g, startEditingMsg: h, toggleDoneMsg: i, canBeFocused: j, showContextDropdownMsg: k, showProjectDropdownMsg: l, reminder: m, onFocusIn: n, tabindexAV: o, isSelected: p};
+															};
 														};
 													};
 												};

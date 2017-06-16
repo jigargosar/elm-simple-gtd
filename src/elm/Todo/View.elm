@@ -64,6 +64,7 @@ type alias TodoViewModel =
     , contextDisplayName : String
     , startEditingMsg : Msg
     , toggleDoneMsg : Msg
+    , canBeFocused : Bool
     , showContextDropdownMsg : Msg
     , showProjectDropdownMsg : Msg
     , reminder : ScheduleViewModel
@@ -89,9 +90,19 @@ getDisplayText todo =
                 (\match -> "\n...")
 
 
-createTodoViewModel : ViewModel.Model -> Attribute Msg -> Todo.Model -> TodoViewModel
-createTodoViewModel appVM tabindexAV todo =
+createTodoViewModel : ViewModel.Model -> Bool -> Todo.Model -> TodoViewModel
+createTodoViewModel appVM canBeFocused todo =
     let
+        tabindexAV =
+            let
+                tabindexValue =
+                    if canBeFocused then
+                        0
+                    else
+                        -1
+            in
+                tabindex tabindexValue
+
         now =
             appVM.now
 
@@ -166,7 +177,10 @@ createTodoViewModel appVM tabindexAV todo =
                 commonMsg.noOp
 
         startEditingMsg =
-            createEntityActionMsg Entity.StartEditing
+            if canBeFocused then
+                createEntityActionMsg Entity.StartEditing
+            else
+                Model.NOOP
 
         toggleDeleteMsg =
             createEntityActionMsg Entity.ToggleDeleted
@@ -184,6 +198,7 @@ createTodoViewModel appVM tabindexAV todo =
         , showContextDropdownMsg = Model.StartEditingContext todo
         , showProjectDropdownMsg = Model.StartEditingProject todo
         , startEditingMsg = startEditingMsg
+        , canBeFocused = canBeFocused
         , toggleDoneMsg = toggleDoneMsg
         , reminder = reminder
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
@@ -203,6 +218,7 @@ item vm =
         [ classList
             [ "todo-item focusable-list-item collection-item" => True
             , "selected" => vm.isSelected
+            , "can-be-focused" => vm.canBeFocused
             ]
         , onFocusIn vm.onFocusIn
         , vm.tabindexAV
@@ -210,8 +226,7 @@ item vm =
         , attribute "data-key" vm.key
         ]
         [ div
-            [ class ""
-            , onClick vm.startEditingMsg
+            [ onClickStopPropagation vm.startEditingMsg
             ]
             [ doneIconButton vm
             , span [ class "display-text" ] [ text vm.displayText ]

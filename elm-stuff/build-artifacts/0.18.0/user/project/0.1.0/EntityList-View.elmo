@@ -75,10 +75,10 @@ var _user$project$EntityList_View$keyedViewList = F3(
 			return A3(_user$project$EntityList_ViewModel$projectGroup, getTabIndexAVForEntity, _p3.todoList, _p3.project);
 		};
 		var todoView = function (todo) {
-			var tabIndexAV = getTabIndexAVForEntity(
+			var canBeFocused = hasFocusIn(
 				_user$project$Entity$TodoEntity(todo));
 			return _user$project$Todo_View$keyedItem(
-				A3(_user$project$Todo_View$createTodoViewModel, appViewModel, tabIndexAV, todo));
+				A3(_user$project$Todo_View$createTodoViewModel, appViewModel, canBeFocused, todo));
 		};
 		var multiContextView = function (list) {
 			return A2(

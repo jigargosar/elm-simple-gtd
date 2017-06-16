@@ -127,6 +127,9 @@ createTodoViewModel appVM tabindexAV todo =
         onTodoMsg =
             Model.OnTodoMsg
 
+        reminder =
+            createScheduleViewModel now todo
+
         onKeyDownMsg ({ key } as ke) =
             if Ext.Keyboard.isNoSoftKeyDown ke then
                 case key of
@@ -149,7 +152,7 @@ createTodoViewModel appVM tabindexAV todo =
                         Model.StartEditingContext todo
 
                     Key.CharR ->
-                        Model.StartEditingReminder todo
+                        reminder.startEditingMsg
 
                     Key.CharG ->
                         createEntityActionMsg Entity.Goto
@@ -182,7 +185,7 @@ createTodoViewModel appVM tabindexAV todo =
         , showProjectDropdownMsg = Model.StartEditingProject todo
         , startEditingMsg = startEditingMsg
         , toggleDoneMsg = toggleDoneMsg
-        , reminder = createScheduleViewModel now todo
+        , reminder = reminder
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
         , tabindexAV = tabindexAV
         , isSelected = appVM.selectedEntityIdSet |> Set.member todoId

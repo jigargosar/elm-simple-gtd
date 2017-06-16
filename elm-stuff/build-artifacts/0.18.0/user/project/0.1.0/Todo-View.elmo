@@ -771,6 +771,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					'Inbox')));
 		var todoId = _user$project$Document$getId(todo);
 		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
+		var now = appVM.now;
+		var reminder = A2(_user$project$Todo_View$createScheduleViewModel, now, todo);
 		var onKeyDownMsg = function (_p9) {
 			var _p10 = _p9;
 			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p10)) {
@@ -789,7 +791,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					case 'CharC':
 						return _user$project$Model$StartEditingContext(todo);
 					case 'CharR':
-						return _user$project$Model$StartEditingReminder(todo);
+						return reminder.startEditingMsg;
 					case 'CharG':
 						return createEntityActionMsg(_user$project$Entity$Goto);
 					case 'CharS':
@@ -802,7 +804,6 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 				return _user$project$Model$commonMsg.noOp;
 			}
 		};
-		var now = appVM.now;
 		return {
 			isDone: _user$project$Todo$isDone(todo),
 			key: todoId,
@@ -815,7 +816,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			showProjectDropdownMsg: _user$project$Model$StartEditingProject(todo),
 			startEditingMsg: startEditingMsg,
 			toggleDoneMsg: toggleDoneMsg,
-			reminder: A2(_user$project$Todo_View$createScheduleViewModel, now, todo),
+			reminder: reminder,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
 			tabindexAV: tabindexAV,
 			isSelected: A2(_elm_lang$core$Set$member, todoId, appVM.selectedEntityIdSet)

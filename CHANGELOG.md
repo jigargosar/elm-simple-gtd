@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.32 - 2017-06-16
 * press `r` to set schedule/reminder 
 
 ## v0.18.31 - 2017-06-16

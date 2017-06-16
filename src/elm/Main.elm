@@ -232,14 +232,6 @@ update msg =
                         )
                         >> andThenUpdate OnDeactivateEditingMode
 
-                NewTodoKeyDown { key } ->
-                    case key of
-                        Key.Enter ->
-                            andThenUpdate (OnSaveCurrentForm)
-
-                        _ ->
-                            identity
-
                 StartEditingReminder todo ->
                     Return.map (Model.startEditingReminder todo)
                         >> Return.command (positionScheduleMenuCmd todo)

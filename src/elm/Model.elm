@@ -72,7 +72,6 @@ type Msg
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text
     | OnDeactivateEditingMode
     | OnCreateDefaultEntities
-    | NewTodoKeyDown KeyboardEvent
     | StartEditingReminder Todo.Model
     | StartEditingContext Todo.Model
     | StartEditingProject Todo.Model

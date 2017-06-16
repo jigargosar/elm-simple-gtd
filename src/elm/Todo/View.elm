@@ -380,7 +380,6 @@ new form =
                         [ class "materialize-textarea auto-focus"
                         , onInput (Model.NewTodoTextChanged form)
                         , form |> Todo.NewForm.getText |> defaultValue
-                        , onKeyDownStopPropagation Model.NewTodoKeyDown
                         ]
                         []
                     , label [ class "active" ] [ text "New Todo" ]

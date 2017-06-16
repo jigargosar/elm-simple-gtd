@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.31 - 2017-06-16
 * remove new todo enter key handling 
 
 ## v0.18.30 - 2017-06-16

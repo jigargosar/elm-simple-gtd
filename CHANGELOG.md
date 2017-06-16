@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.29 - 2017-06-16
 * todo edit mode: get rid of maybe mode and use overlay.
 
 ## v0.18.28 - 2017-06-16

@@ -33,16 +33,12 @@ a {
 }
 
 /*mat css*/
-.collection .collection-item {
+.collection > .collection-item {
   outline: none;
 
-  &.collection-item:not(.active):focus {
+  &:not(.active):focus {
     background-color: gray(95%);
   }
-}
-
-.collection .collection-item:not(.active):hover {
-  background-color: gray(98%);
 }
 
 i {
@@ -259,8 +255,7 @@ paper-listbox {
 
 #popup-menu {
   position: absolute;
-//left: 100px; //top: 100px; background-color: white; overflow-y: scroll; overflow-x: hidden; max-height: 100vh; min-width: 20vw;
-  max-width: 80vw;
+//left: 100px; //top: 100px; background-color: white; overflow-y: scroll; overflow-x: hidden; max-height: 100vh; min-width: 20vw; max-width: 80vw;
 }
 
 .entity-list > .collection {

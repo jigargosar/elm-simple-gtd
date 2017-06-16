@@ -14,7 +14,7 @@ var _user$project$Project_View$edit = function (form) {
 			_0: _elm_lang$html$Html_Attributes$class('overlay'),
 			_1: {
 				ctor: '::',
-				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(fireCancel),
 				_1: {ctor: '[]'}
 			}
 		},
@@ -27,7 +27,7 @@ var _user$project$Project_View$edit = function (form) {
 					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 					_1: {
 						ctor: '::',
-						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(fireCancel),
+						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
 						_1: {ctor: '[]'}
 					}
 				},

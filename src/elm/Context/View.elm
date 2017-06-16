@@ -39,9 +39,9 @@ edit form =
     in
         div
             [ class "overlay"
-            , onClickStopPropagation Model.OnDeactivateEditingMode
+            , onClickStopPropagation fireCancel
             ]
-            [ div [ class "modal fixed-center", onClickStopPropagation fireCancel ]
+            [ div [ class "modal fixed-center", onClickStopPropagation Model.NOOP ]
                 [ div [ class "modal-content" ]
                     [ div
                         [ class "input-field"

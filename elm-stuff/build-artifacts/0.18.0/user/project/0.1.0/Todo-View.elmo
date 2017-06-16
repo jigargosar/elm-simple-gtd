@@ -206,7 +206,7 @@ var _user$project$Todo_View$edit = F2(
 				_0: _elm_lang$html$Html_Attributes$class('overlay'),
 				_1: {
 					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Todo_View$fireCancel),
 					_1: {ctor: '[]'}
 				}
 			},
@@ -219,7 +219,7 @@ var _user$project$Todo_View$edit = F2(
 						_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 						_1: {
 							ctor: '::',
-							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Todo_View$fireCancel),
+							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -298,7 +298,7 @@ var _user$project$Todo_View$new = function (form) {
 			_0: _elm_lang$html$Html_Attributes$class('overlay'),
 			_1: {
 				ctor: '::',
-				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Todo_View$fireCancel),
 				_1: {ctor: '[]'}
 			}
 		},
@@ -311,7 +311,7 @@ var _user$project$Todo_View$new = function (form) {
 					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 					_1: {
 						ctor: '::',
-						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Todo_View$fireCancel),
+						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -330,16 +330,16 @@ var _user$project$Todo_View$new = function (form) {
 								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('new-todo input-field'),
+									_0: _elm_lang$html$Html_Attributes$class('input-field'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
 									_0: A2(
-										_elm_lang$html$Html$input,
+										_elm_lang$html$Html$textarea,
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+											_0: _elm_lang$html$Html_Attributes$class('materialize-textarea auto-focus'),
 											_1: {
 												ctor: '::',
 												_0: _elm_lang$html$Html_Events$onInput(
@@ -350,12 +350,8 @@ var _user$project$Todo_View$new = function (form) {
 														_user$project$Todo_NewForm$getText(form)),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$OnDeactivateEditingMode),
-														_1: {
-															ctor: '::',
-															_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(_user$project$Model$NewTodoKeyDown),
-															_1: {ctor: '[]'}
-														}
+														_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(_user$project$Model$NewTodoKeyDown),
+														_1: {ctor: '[]'}
 													}
 												}
 											}

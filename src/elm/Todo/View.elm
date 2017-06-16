@@ -351,12 +351,12 @@ edit form appModel =
     in
         div
             [ class "overlay"
-            , onClickStopPropagation Model.OnDeactivateEditingMode
+            , onClickStopPropagation fireCancel
             ]
-            [ div [ class "modal fixed-center", onClickStopPropagation fireCancel ]
+            [ div [ class "modal fixed-center", onClickStopPropagation Model.NOOP ]
                 [ div [ class "modal-content" ]
                     [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
-                        [ Html.textarea
+                        [ textarea
                             [ class "materialize-textarea auto-focus"
                             , defaultValue todoText
                             , onInput fireTextChanged
@@ -373,16 +373,15 @@ edit form appModel =
 new form =
     div
         [ class "overlay"
-        , onClickStopPropagation Model.OnDeactivateEditingMode
+        , onClickStopPropagation fireCancel
         ]
-        [ div [ class "modal fixed-center", onClickStopPropagation fireCancel ]
+        [ div [ class "modal fixed-center", onClickStopPropagation Model.NOOP ]
             [ div [ class "modal-content" ]
-                [ div [ class "new-todo input-field" ]
-                    [ input
-                        [ class "auto-focus"
+                [ div [ class "input-field" ]
+                    [ textarea
+                        [ class "materialize-textarea auto-focus"
                         , onInput (Model.NewTodoTextChanged form)
                         , form |> Todo.NewForm.getText |> defaultValue
-                        , onBlur Model.OnDeactivateEditingMode
                         , onKeyDownStopPropagation Model.NewTodoKeyDown
                         ]
                         []

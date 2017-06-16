@@ -331,6 +331,8 @@ var _user$project$View$overlayViews = function (appModel) {
 				return _user$project$Context_View$edit(_p0._0);
 			case 'EditTodo':
 				return A2(_user$project$Todo_View$edit, _p0._0, appModel);
+			case 'NewTodo':
+				return _user$project$Todo_View$new(_p0._0);
 			default:
 				return A2(
 					_elm_lang$html$Html$span,

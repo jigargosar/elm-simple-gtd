@@ -237,80 +237,15 @@ var _user$project$View_Header$titleHeaderContent = F2(
 			_1: {ctor: '[]'}
 		};
 	});
-var _user$project$View_Header$newTodoHeader = function (form) {
-	return {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('new-todo input-field'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$input,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onInput(
-								_user$project$Model$NewTodoTextChanged(form)),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$defaultValue(
-									_user$project$Todo_NewForm$getText(form)),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$OnDeactivateEditingMode),
-									_1: {
-										ctor: '::',
-										_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(_user$project$Model$NewTodoKeyDown),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$label,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('active'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('New Todo'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}),
-		_1: {ctor: '[]'}
-	};
-};
 var _user$project$View_Header$headerView = F2(
 	function (viewModel, m) {
-		var content = function () {
-			var _p2 = m.editMode;
-			if (_p2.ctor === 'NewTodo') {
-				return _user$project$View_Header$newTodoHeader(_p2._0);
-			} else {
-				return A2(
-					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-					A2(
-						_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-						_user$project$Todo_TimeTracker_View$maybe(m),
-						_elm_lang$core$List$singleton),
-					A2(_user$project$View_Header$titleHeaderContent, viewModel, m));
-			}
-		}();
+		var content = A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				_user$project$Todo_TimeTracker_View$maybe(m),
+				_elm_lang$core$List$singleton),
+			A2(_user$project$View_Header$titleHeaderContent, viewModel, m));
 		return A2(_user$project$View_Header$headerWithContent, content, m);
 	});
 var _user$project$View_Header$init = F2(

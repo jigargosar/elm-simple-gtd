@@ -56,31 +56,11 @@ init viewModel m =
 headerView viewModel m =
     let
         content =
-            case m.editMode of
-                ExclusiveMode.NewTodo form ->
-                    newTodoHeader form
-
-                _ ->
-                    Todo.TimeTracker.View.maybe m
-                        ?|> List.singleton
-                        ?= titleHeaderContent viewModel m
+            Todo.TimeTracker.View.maybe m
+                ?|> List.singleton
+                ?= titleHeaderContent viewModel m
     in
         headerWithContent content m
-
-
-newTodoHeader form =
-    [ div [ class "new-todo input-field" ]
-        [ input
-            [ class "auto-focus"
-            , onInput (Model.NewTodoTextChanged form)
-            , form |> Todo.NewForm.getText |> defaultValue
-            , onBlur Model.OnDeactivateEditingMode
-            , Keyboard.onKeyDownStopPropagation Model.NewTodoKeyDown
-            ]
-            []
-        , label [ class "active" ] [ text "New Todo" ]
-        ]
-    ]
 
 
 titleHeaderContent viewModel m =

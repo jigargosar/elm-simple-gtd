@@ -226,7 +226,7 @@ item vm =
         , attribute "data-key" vm.key
         ]
         [ div
-            [ onClickStopPropagation vm.startEditingMsg
+            [ onClick vm.startEditingMsg
             , class "display-text-container"
             ]
             [ doneIconButton vm

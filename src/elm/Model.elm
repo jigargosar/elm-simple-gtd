@@ -472,10 +472,12 @@ createGrouping viewType model =
 
             Entity.BinView ->
                 Entity.createGroupingForTodoList
+                    "Bin"
                     (filterTodosAndSortByLatestModified Document.isDeleted model)
 
             Entity.DoneView ->
                 Entity.createGroupingForTodoList
+                    "Done"
                     (filterTodosAndSortByLatestModified (Pred.all [ Document.isNotDeleted, Todo.isDone ]) model)
 
 

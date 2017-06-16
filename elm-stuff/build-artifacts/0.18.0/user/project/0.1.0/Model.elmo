@@ -607,10 +607,14 @@ var _user$project$Model$createGrouping = F2(
 						A2(_user$project$Model$findProjectById, _p24._0, model),
 						_user$project$Project$null));
 			case 'BinView':
-				return _user$project$Entity$createGroupingForTodoList(
+				return A2(
+					_user$project$Entity$createGroupingForTodoList,
+					'Bin',
 					A2(_user$project$Model$filterTodosAndSortByLatestModified, _user$project$Document$isDeleted, model));
 			default:
-				return _user$project$Entity$createGroupingForTodoList(
+				return A2(
+					_user$project$Entity$createGroupingForTodoList,
+					'Done',
 					A2(
 						_user$project$Model$filterTodosAndSortByLatestModified,
 						_user$project$Ext_Predicate$all(

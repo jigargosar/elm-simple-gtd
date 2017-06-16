@@ -1,3 +1,49 @@
+var _user$project$EntityList_View$flatTodoListView = F2(
+	function (title, todoListView) {
+		return {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple2',
+				_0: title,
+				_1: A3(
+					_elm_lang$html$Html_Keyed$node,
+					'div',
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('todo-list collection'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: title,
+							_1: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('collection-item'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$h4,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(title),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								})
+						},
+						_1: todoListView
+					})
+			},
+			_1: {ctor: '[]'}
+		};
+	});
 var _user$project$EntityList_View$groupHeaderView = function (vm) {
 	return _user$project$EntityList_GroupView$initHeaderKeyed(vm);
 };
@@ -80,7 +126,10 @@ var _user$project$EntityList_View$keyedViewList = F3(
 			case 'MultiProject':
 				return multiProjectView(_p6._0);
 			default:
-				return todoListView(_p6._0);
+				return A2(
+					_user$project$EntityList_View$flatTodoListView,
+					_p6._0,
+					todoListView(_p6._1));
 		}
 	});
 var _user$project$EntityList_View$listView = F3(

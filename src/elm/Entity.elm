@@ -164,7 +164,7 @@ type Grouping
     | SingleProject ProjectGroup (List ContextGroup)
     | MultiContext (List ContextGroup)
     | MultiProject (List ProjectGroup)
-    | FlatTodoList TodoList
+    | FlatTodoList String TodoList
 
 
 createContextTodoGroup getTodoList context =
@@ -233,7 +233,7 @@ createGroupingForProject getTodoList findProjectById project =
         |> (\tcg -> SingleProject tcg (createContextSubGroups findProjectById tcg))
 
 
-createGroupingForTodoList : TodoList -> Grouping
+createGroupingForTodoList : String -> TodoList -> Grouping
 createGroupingForTodoList =
     FlatTodoList
 
@@ -265,7 +265,7 @@ flattenGrouping grouping =
                             :: (g.todoList .|> TodoEntity)
                     )
 
-        FlatTodoList todoList ->
+        FlatTodoList title todoList ->
             todoList .|> TodoEntity
 
 

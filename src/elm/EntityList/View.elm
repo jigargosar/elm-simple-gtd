@@ -19,6 +19,10 @@ import Model
 import Model exposing (Msg)
 import Todo.View exposing (TodoViewModel)
 import ViewModel
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
+import Html.Events.Extra exposing (onClickStopPropagation)
 
 
 listView : Entity.ListViewType -> Model.Model -> ViewModel.Model -> Html.Html Msg
@@ -106,8 +110,9 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
             Entity.MultiProject groupList ->
                 multiProjectView groupList
 
-            Entity.FlatTodoList todoList ->
+            Entity.FlatTodoList title todoList ->
                 todoListView todoList
+                    |> flatTodoListView title
 
 
 groupView todoView vm =
@@ -116,3 +121,12 @@ groupView todoView vm =
 
 groupHeaderView vm =
     EntityList.GroupView.initHeaderKeyed vm
+
+
+flatTodoListView title todoListView =
+    [ ( title
+      , Html.Keyed.node "div"
+            [ class "todo-list collection" ]
+            (( title, div [ class "collection-item" ] [ h4 [] [ text title ] ] ) :: todoListView)
+      )
+    ]

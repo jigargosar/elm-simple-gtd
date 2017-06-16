@@ -274,9 +274,10 @@ var _user$project$Entity$NameChanged = function (a) {
 var _user$project$Entity$Save = {ctor: 'Save'};
 var _user$project$Entity$ToggleDeleted = {ctor: 'ToggleDeleted'};
 var _user$project$Entity$StartEditing = {ctor: 'StartEditing'};
-var _user$project$Entity$FlatTodoList = function (a) {
-	return {ctor: 'FlatTodoList', _0: a};
-};
+var _user$project$Entity$FlatTodoList = F2(
+	function (a, b) {
+		return {ctor: 'FlatTodoList', _0: a, _1: b};
+	});
 var _user$project$Entity$createGroupingForTodoList = _user$project$Entity$FlatTodoList;
 var _user$project$Entity$MultiProject = function (a) {
 	return {ctor: 'MultiProject', _0: a};
@@ -340,7 +341,7 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 				},
 				_p8._0);
 		default:
-			return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p8._0, _user$project$Entity$TodoEntity);
+			return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p8._1, _user$project$Entity$TodoEntity);
 	}
 };
 var _user$project$Entity$SingleProject = F2(

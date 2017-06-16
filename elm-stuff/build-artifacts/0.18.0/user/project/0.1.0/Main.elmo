@@ -440,7 +440,7 @@ var _user$project$Main$update = function (msg) {
 											'use `ArrowUp` and `ArrowDown` keys to focus item',
 											A2(
 												_user$project$Model$createTodo,
-												'press `s` to set schedule/reminder',
+												'press `r` to set schedule/reminder',
 												A2(
 													_user$project$Model$createTodo,
 													'press `p` to set project',

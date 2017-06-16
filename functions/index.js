@@ -103,7 +103,7 @@ const sendNotificationToClients = notificationData => clients => {
                 msg: "ignoring push for connected client", client, notificationData
             })
         }
-        console.log("sending push to client", client)
+        console.log("sending push to client", client, "uid", uid)
         return admin
             .messaging()
             .sendToDevice(

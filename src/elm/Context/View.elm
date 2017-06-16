@@ -39,8 +39,8 @@ edit form =
     in
         div
             [ class "overlay"
-            , onClickStopPropagation
-            , onKeyDownStopPropagation (\_ -> Model.NOOP) fireCancel
+            , onClickStopPropagation fireCancel
+            , onKeyDownStopPropagation (\_ -> Model.NOOP)
             ]
             [ div [ class "modal fixed-center", onClickStopPropagation Model.NOOP ]
                 [ div [ class "modal-content" ]

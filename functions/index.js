@@ -103,6 +103,11 @@ const sendNotificationToClients = notificationData => clients => {
                 msg: "ignoring push for connected client", client, notificationData
             })
         }
+        if(!client.token){
+            return Promise.resolve({
+                msg: "ignoring push for disconnected client, without any token", client, notificationData
+            })
+        }
         console.log("sending push to client", client, "uid", uid)
         return admin
             .messaging()

@@ -36,15 +36,17 @@ import Time.Format
 import Todo
 import Todo.Form
 import Todo.Msg
+import Todo.NewForm
 import Todo.ReminderForm
 import Todo.View.Menu
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
-import Html exposing (Attribute, Html, div, h1, h3, span, text)
+import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Html.Events.Extra exposing (onClickStopPropagation)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import Polymer.Paper as Paper
 import View.FullBleedCapture
@@ -331,6 +333,10 @@ createReminderViewModel now todo =
         }
 
 
+fireCancel =
+    Model.OnDeactivateEditingMode
+
+
 edit : Todo.Form.Model -> Model.Model -> Html Msg
 edit form appModel =
     let
@@ -342,9 +348,6 @@ edit form appModel =
 
         fireToggleDelete =
             Model.OnEntityAction form.entity Entity.ToggleDeleted
-
-        fireCancel =
-            Model.OnDeactivateEditingMode
     in
         div
             [ class "overlay"
@@ -365,6 +368,30 @@ edit form appModel =
                     ]
                 ]
             ]
+
+
+new form =
+    div
+        [ class "overlay"
+        , onClickStopPropagation Model.OnDeactivateEditingMode
+        ]
+        [ div [ class "modal fixed-center", onClickStopPropagation fireCancel ]
+            [ div [ class "modal-content" ]
+                [ div [ class "new-todo input-field" ]
+                    [ input
+                        [ class "auto-focus"
+                        , onInput (Model.NewTodoTextChanged form)
+                        , form |> Todo.NewForm.getText |> defaultValue
+                        , onBlur Model.OnDeactivateEditingMode
+                        , onKeyDownStopPropagation Model.NewTodoKeyDown
+                        ]
+                        []
+                    , label [ class "active" ] [ text "New Todo" ]
+                    ]
+                , defaultOkCancelButtons
+                ]
+            ]
+        ]
 
 
 projectMenu =

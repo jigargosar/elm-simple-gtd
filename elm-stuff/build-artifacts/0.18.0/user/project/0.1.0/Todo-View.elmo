@@ -188,9 +188,9 @@ var _user$project$Todo_View$reminderPopup = function (form) {
 };
 var _user$project$Todo_View$contextMenu = _user$project$Todo_View_Menu$context;
 var _user$project$Todo_View$projectMenu = _user$project$Todo_View_Menu$project;
+var _user$project$Todo_View$fireCancel = _user$project$Model$OnDeactivateEditingMode;
 var _user$project$Todo_View$edit = F2(
 	function (form, appModel) {
-		var fireCancel = _user$project$Model$OnDeactivateEditingMode;
 		var fireToggleDelete = A2(_user$project$Model$OnEntityAction, form.entity, _user$project$Entity$ToggleDeleted);
 		var fireTextChanged = function (_p7) {
 			return A2(
@@ -219,7 +219,7 @@ var _user$project$Todo_View$edit = F2(
 						_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 						_1: {
 							ctor: '::',
-							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(fireCancel),
+							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Todo_View$fireCancel),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -290,6 +290,105 @@ var _user$project$Todo_View$edit = F2(
 				_1: {ctor: '[]'}
 			});
 	});
+var _user$project$Todo_View$new = function (form) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('overlay'),
+			_1: {
+				ctor: '::',
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
+					_1: {
+						ctor: '::',
+						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Todo_View$fireCancel),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('modal-content'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('new-todo input-field'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$input,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onInput(
+													_user$project$Model$NewTodoTextChanged(form)),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$defaultValue(
+														_user$project$Todo_NewForm$getText(form)),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onBlur(_user$project$Model$OnDeactivateEditingMode),
+														_1: {
+															ctor: '::',
+															_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(_user$project$Model$NewTodoKeyDown),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$label,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('active'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('New Todo'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$View_Shared$defaultOkCancelButtons,
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Todo_View$createReminderViewModel = F2(
 	function (now, todo) {
 		var overDueText = 'Overdue';

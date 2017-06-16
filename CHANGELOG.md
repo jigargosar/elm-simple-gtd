@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.30 - 2017-06-16
 * click/edit annoyance: workaround: trigger editing on text click, only when item is tav 0 
 
 ## v0.18.29 - 2017-06-16

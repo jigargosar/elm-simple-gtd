@@ -1,0 +1,147 @@
+var _rgrempel$elm_route_url$RouteHash$list2hash = F2(
+	function (prefix, list) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			prefix,
+			A2(
+				_elm_lang$core$String$join,
+				'/',
+				A2(_elm_lang$core$List$map, _elm_lang$http$Http$encodeUri, list)));
+	});
+var _rgrempel$elm_route_url$RouteHash$removeInitial = F2(
+	function (initial, original) {
+		var _p0 = _elm_lang$core$String$uncons(original);
+		if ((_p0.ctor === 'Just') && (_p0._0.ctor === '_Tuple2')) {
+			return _elm_lang$core$Native_Utils.eq(_p0._0._0, initial) ? _p0._0._1 : original;
+		} else {
+			return original;
+		}
+	});
+var _rgrempel$elm_route_url$RouteHash$removeInitialSequence = F2(
+	function (initial, original) {
+		return A3(_elm_lang$core$String$foldl, _rgrempel$elm_route_url$RouteHash$removeInitial, original, initial);
+	});
+var _rgrempel$elm_route_url$RouteHash$hash2list = F2(
+	function (prefix, hash) {
+		return A2(
+			_elm_lang$core$List$map,
+			function (part) {
+				return A2(
+					_elm_lang$core$Maybe$withDefault,
+					part,
+					_elm_lang$http$Http$decodeUri(part));
+			},
+			A2(
+				_elm_lang$core$String$split,
+				'/',
+				A2(_rgrempel$elm_route_url$RouteHash$removeInitialSequence, prefix, hash)));
+	});
+var _rgrempel$elm_route_url$RouteHash$location2messages = F2(
+	function (config, location) {
+		return config.location2action(
+			A2(_rgrempel$elm_route_url$RouteHash$hash2list, config.prefix, location.hash));
+	});
+var _rgrempel$elm_route_url$RouteHash$location2messagesWithFlags = F2(
+	function (config, location) {
+		return config.location2action(
+			A2(_rgrempel$elm_route_url$RouteHash$hash2list, config.prefix, location.hash));
+	});
+var _rgrempel$elm_route_url$RouteHash$defaultPrefix = '#!/';
+var _rgrempel$elm_route_url$RouteHash$extract = function (action) {
+	var _p1 = action;
+	if (_p1.ctor === 'SetPath') {
+		return _p1._0;
+	} else {
+		return _p1._0;
+	}
+};
+var _rgrempel$elm_route_url$RouteHash$hashUpdate2urlChange = F2(
+	function (prefix, hashUpdate) {
+		var _p2 = hashUpdate;
+		if (_p2.ctor === 'SetPath') {
+			return {
+				entry: _rgrempel$elm_route_url$RouteUrl$NewEntry,
+				url: A2(_rgrempel$elm_route_url$RouteHash$list2hash, prefix, _p2._0)
+			};
+		} else {
+			return {
+				entry: _rgrempel$elm_route_url$RouteUrl$ModifyEntry,
+				url: A2(_rgrempel$elm_route_url$RouteHash$list2hash, prefix, _p2._0)
+			};
+		}
+	});
+var _rgrempel$elm_route_url$RouteHash$delta2urlWithFlags = F3(
+	function (config, old, $new) {
+		return A2(
+			_elm_lang$core$Maybe$map,
+			_rgrempel$elm_route_url$RouteHash$hashUpdate2urlChange(config.prefix),
+			A2(config.delta2update, old, $new));
+	});
+var _rgrempel$elm_route_url$RouteHash$appWithFlags = function (config) {
+	return {
+		delta2url: _rgrempel$elm_route_url$RouteHash$delta2urlWithFlags(config),
+		location2messages: _rgrempel$elm_route_url$RouteHash$location2messagesWithFlags(config),
+		init: config.init,
+		update: config.update,
+		subscriptions: config.subscriptions,
+		view: config.view
+	};
+};
+var _rgrempel$elm_route_url$RouteHash$programWithFlags = function (_p3) {
+	return _rgrempel$elm_route_url$RouteUrl$runNavigationAppWithFlags(
+		_rgrempel$elm_route_url$RouteUrl$navigationAppWithFlags(
+			_rgrempel$elm_route_url$RouteHash$appWithFlags(_p3)));
+};
+var _rgrempel$elm_route_url$RouteHash$delta2url = F3(
+	function (config, old, $new) {
+		return A2(
+			_elm_lang$core$Maybe$map,
+			_rgrempel$elm_route_url$RouteHash$hashUpdate2urlChange(config.prefix),
+			A2(config.delta2update, old, $new));
+	});
+var _rgrempel$elm_route_url$RouteHash$app = function (config) {
+	return {
+		delta2url: _rgrempel$elm_route_url$RouteHash$delta2url(config),
+		location2messages: _rgrempel$elm_route_url$RouteHash$location2messages(config),
+		init: config.init,
+		update: config.update,
+		subscriptions: config.subscriptions,
+		view: config.view
+	};
+};
+var _rgrempel$elm_route_url$RouteHash$program = function (_p4) {
+	return _rgrempel$elm_route_url$RouteUrl$runNavigationApp(
+		_rgrempel$elm_route_url$RouteUrl$navigationApp(
+			_rgrempel$elm_route_url$RouteHash$app(_p4)));
+};
+var _rgrempel$elm_route_url$RouteHash$Config = F7(
+	function (a, b, c, d, e, f, g) {
+		return {prefix: a, delta2update: b, location2action: c, init: d, update: e, subscriptions: f, view: g};
+	});
+var _rgrempel$elm_route_url$RouteHash$ConfigWithFlags = F7(
+	function (a, b, c, d, e, f, g) {
+		return {prefix: a, delta2update: b, location2action: c, init: d, update: e, subscriptions: f, view: g};
+	});
+var _rgrempel$elm_route_url$RouteHash$ReplacePath = function (a) {
+	return {ctor: 'ReplacePath', _0: a};
+};
+var _rgrempel$elm_route_url$RouteHash$replace = _rgrempel$elm_route_url$RouteHash$ReplacePath;
+var _rgrempel$elm_route_url$RouteHash$SetPath = function (a) {
+	return {ctor: 'SetPath', _0: a};
+};
+var _rgrempel$elm_route_url$RouteHash$set = _rgrempel$elm_route_url$RouteHash$SetPath;
+var _rgrempel$elm_route_url$RouteHash$apply = F2(
+	function (func, update) {
+		var _p5 = update;
+		if (_p5.ctor === 'SetPath') {
+			return _rgrempel$elm_route_url$RouteHash$SetPath(
+				func(_p5._0));
+		} else {
+			return _rgrempel$elm_route_url$RouteHash$ReplacePath(
+				func(_p5._0));
+		}
+	});
+var _rgrempel$elm_route_url$RouteHash$map = function (_p6) {
+	return _elm_lang$core$Maybe$map(
+		_rgrempel$elm_route_url$RouteHash$apply(_p6));
+};

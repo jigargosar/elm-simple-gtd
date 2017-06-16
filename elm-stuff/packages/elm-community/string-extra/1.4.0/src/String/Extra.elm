@@ -41,13 +41,16 @@ module String.Extra
         , fromCodePoints
         , pluralize
         , nonEmpty
+        , removeAccents
         )
 
 {-| Additional functions for working with Strings
 
+
 ## Change words casing
 
 @docs toSentenceCase, toTitleCase, decapitalize
+
 
 ## Inflector functions
 
@@ -55,37 +58,46 @@ Functions borrowed from the Rails Inflector class
 
 @docs camelize, classify, underscored, dasherize, humanize
 
+
 ## Replace and Splice
 
-@docs replace, replaceSlice, insertAt, clean, nonEmpty
+@docs replace, replaceSlice, insertAt, clean, nonEmpty, removeAccents
+
 
 ## Splitting
 
 @docs break, softBreak
 
+
 ## Wrapping
 
 @docs wrap, wrapWith, softWrap, softWrapWith, quote, surround
+
 
 ## Checks
 
 @docs isBlank, countOccurrences
 
+
 ## Formatting
 
 @docs clean, unquote, unsurround, unindent, ellipsis, softEllipsis, ellipsisWith, stripTags, pluralize
+
 
 ## Converting Lists
 
 @docs toSentence, toSentenceOxford
 
+
 ## Finding
 
 @docs rightOf, leftOf, rightOfBack, leftOfBack
 
+
 ## Converting Numbers
 
 @docs fromInt, fromFloat
+
 
 ## Converting UTF-32
 
@@ -102,9 +114,8 @@ import Bitwise
 
 
 {-| Change the case of the first letter of a string to either uppercase or
-    lowercase, depending of the value of `wantedCase`. This is an internal
-    function for use in `toSentenceCase` and `decapitalize`.
-
+lowercase, depending of the value of `wantedCase`. This is an internal
+function for use in `toSentenceCase` and `decapitalize`.
 -}
 changeCase : (Char -> Char) -> String -> String
 changeCase mutator word =
@@ -181,6 +192,7 @@ replaceSlice substitution start end string =
 {-| Insert a substring at the specified index.
 
     insertAt "world" 6 "Hello " == "Hello world"
+
 -}
 insertAt : String -> Int -> String -> String
 insertAt insert pos string =
@@ -507,6 +519,7 @@ unindent multilineSting =
 
     countOccurrences "Hello" "Hello World" == 1
     countOccurrences "o" "Hello World" == 2
+
 -}
 countOccurrences : String -> String -> Int
 countOccurrences needle haystack =
@@ -669,6 +682,7 @@ or the plural string otherwise.
     pluralize "elf" "elves" 2 == "2 elves"
     pluralize "elf" "elves" 1 == "1 elf"
     pluralize "elf" "elves" 0 == "0 elves"
+
 -}
 pluralize : String -> String -> number -> String
 pluralize singular plural count =
@@ -682,6 +696,7 @@ pluralize singular plural count =
 consisting of the characters in the string that are to the right of the pattern.
 
     rightOf "_" "This_is_a_test_string" == "is_a_test_string"
+
 -}
 rightOf : String -> String -> String
 rightOf pattern string =
@@ -695,6 +710,7 @@ rightOf pattern string =
 consisting of the characters in the string that are to the left of the pattern.
 
     leftOf "_" "This_is_a_test_string" == "This"
+
 -}
 leftOf : String -> String -> String
 leftOf pattern string =
@@ -726,6 +742,7 @@ firstResultHelp default list =
 consisting of the characters in the string that are to the right of the pattern.
 
     rightOfBack "_" "This_is_a_test_string" == "string"
+
 -}
 rightOfBack : String -> String -> String
 rightOfBack pattern string =
@@ -741,6 +758,7 @@ rightOfBack pattern string =
 consisting of the characters in the string that are to the left of the pattern.
 
     leftOfBack "_" "This_is_a_test_string" == "This_is_a_test"
+
 -}
 leftOfBack : String -> String -> String
 leftOfBack pattern string =
@@ -756,6 +774,7 @@ leftOfBack pattern string =
 
 This works the same way as `Basics.toString` except its type is restricted,
 so if you accidentally pass it something other than an `Int`, you get an error.
+
 -}
 fromInt : Int -> String
 fromInt =
@@ -766,6 +785,7 @@ fromInt =
 
 This works the same way as `Basics.toString` except its type is restricted,
 so if you accidentally pass it something other than a `Float`, you get an error.
+
 -}
 fromFloat : Float -> String
 fromFloat =
@@ -774,7 +794,7 @@ fromFloat =
 
 {-| Code point of Unicode character to use to indicate an 'unknown or
 unrepresentable character'
-(https://en.wikipedia.org/wiki/Specials_(Unicode_block))
+(<https://en.wikipedia.org/wiki/Specials_(Unicode_block)>)
 -}
 replacementCodePoint : Int
 replacementCodePoint =
@@ -807,6 +827,7 @@ Note that this still does not necessarily correspond to logical/visual
 characters, since it is possible for things like accented characters to be
 represented as two separate UTF-32 code points (a base character and a
 combining accent).
+
 -}
 toCodePoints : String -> List Int
 toCodePoints string =
@@ -899,6 +920,7 @@ the Basic Multilingual Plane (BMP) can be included in the resulting string:
 
     -- Code point 128169 is 💩, U+1F4A9 PILE OF POO
     fromCodePoints [ 128169, 33 ] == "💩!"
+
 -}
 fromCodePoints : List Int -> String
 fromCodePoints allCodePoints =
@@ -952,6 +974,7 @@ fromCodePoints allCodePoints =
 
     nonEmpty "" == Nothing
     nonEmpty "Hello world" == Just "Hello world"
+
 -}
 nonEmpty : String -> Maybe String
 nonEmpty string =
@@ -959,3 +982,49 @@ nonEmpty string =
         Nothing
     else
         Just string
+
+
+{-| Remove accents from string.
+
+    removeAccents "andré" == "andre"
+    removeAccents "Atenção" == "Atencao"
+
+-}
+removeAccents : String -> String
+removeAccents string =
+    if String.isEmpty string then
+        string
+    else
+        let
+            do_regex_to_remove_acents ( regex, replace_character ) =
+                Regex.replace Regex.All regex (\_ -> replace_character)
+        in
+            List.foldl do_regex_to_remove_acents string accentRegex
+
+
+{-| Create list with regex and char to replace.
+-}
+accentRegex : List ( Regex.Regex, String )
+accentRegex =
+    let
+        matches =
+            [ ( "[à-æ]", "a" )
+            , ( "[À-Æ]", "A" )
+            , ( "ç", "c" )
+            , ( "Ç", "C" )
+            , ( "[è-ë]", "e" )
+            , ( "[È-Ë]", "E" )
+            , ( "[ì-ï]", "i" )
+            , ( "[Ì-Ï]", "I" )
+            , ( "ñ", "n" )
+            , ( "Ñ", "N" )
+            , ( "[ò-ö]", "o" )
+            , ( "[Ò-Ö]", "O" )
+            , ( "[ù-ü]", "u" )
+            , ( "[Ù-Ü]", "U" )
+            , ( "ý", "y" )
+            , ( "ÿ", "y" )
+            , ( "Ý", "Y" )
+            ]
+    in
+        List.map (\( rule, char ) -> ( (Regex.regex rule), char )) matches

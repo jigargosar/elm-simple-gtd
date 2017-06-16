@@ -177,6 +177,9 @@ export const deploy = {
     dev:runF(firebaseDeployDev),
 }
 
+export function setStorageCors (){
+    run("gsutil cors set firebase-storage-cors.json gs://simple-gtd-prod.appspot.com")
+}
 
 export function dummy(...args) {
     console.log("running dummy", this.options, args)

@@ -10,6 +10,7 @@ import Ext.Keyboard as Keyboard exposing (Key)
 import Ext.Record as Record exposing (set)
 import Ext.Return as Return
 import Firebase
+import Http
 import Keyboard.Combo
 import LaunchBar
 import Ext.Function.Infix exposing (..)
@@ -35,6 +36,9 @@ import Tuple2
 import Model exposing (..)
 import Todo.Main
 import View
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 
 
 port closeNotification : String -> Cmd msg
@@ -99,6 +103,10 @@ over =
 
 set =
     Record.set >>> map
+
+
+welcomeEntitiesURL =
+    "https://firebasestorage.googleapis.com/v0/b/simple-gtd-prod.appspot.com/o/public%2Fwelcome-entities.json?alt=media"
 
 
 update : Msg -> Model -> Return
@@ -214,23 +222,36 @@ update msg =
                     Return.map (Model.deactivateEditingMode)
                         >> andThenUpdate setDomFocusToFocusInEntityCmd
 
+                OnCreateDefaultEntitiesWithResult result ->
+                    let
+                        _ =
+                            Debug.log "result" (result)
+                    in
+                        identity
+
                 OnCreateDefaultEntities ->
-                    map
-                        (Model.createProject "Explore SimpleGTD.com"
-                            >> Model.createProject "GTD: Learn"
-                            >> Model.createContext "1 Now"
-                            >> Model.createContext "2 Next Actions"
-                            >> Model.createContext "3 Waiting For"
-                            >> Model.createContext "zz SomeDay/Maybe"
-                            >> Model.createTodo "Click `+` or press `q` for quick add"
-                            >> Model.createTodo "press `i` to create and add to Inbox"
-                            >> Model.createTodo "press `e` to edit text"
-                            >> Model.createTodo "press `c` to set context"
-                            >> Model.createTodo "press `p` to set project"
-                            >> Model.createTodo "press `r` to set schedule/reminder"
-                            >> Model.createTodo "use `ArrowUp` and `ArrowDown` keys to focus item"
-                        )
-                        >> andThenUpdate OnDeactivateEditingMode
+                    let
+                        cmd =
+                            Http.get welcomeEntitiesURL D.value
+                                |> Http.send OnCreateDefaultEntitiesWithResult
+                    in
+                        map
+                            (Model.createProject "Explore SimpleGTD.com"
+                                >> Model.createProject "GTD: Learn"
+                                >> Model.createContext "1 Now"
+                                >> Model.createContext "2 Next Actions"
+                                >> Model.createContext "3 Waiting For"
+                                >> Model.createContext "zz SomeDay/Maybe"
+                                >> Model.createTodo "Click `+` or press `q` for quick add"
+                                >> Model.createTodo "press `i` to create and add to Inbox"
+                                >> Model.createTodo "press `e` to edit text"
+                                >> Model.createTodo "press `c` to set context"
+                                >> Model.createTodo "press `p` to set project"
+                                >> Model.createTodo "press `r` to set schedule/reminder"
+                                >> Model.createTodo "use `ArrowUp` and `ArrowDown` keys to focus item"
+                            )
+                            >> andThenUpdate OnDeactivateEditingMode
+                            >> command cmd
 
                 StartEditingReminder todo ->
                     Return.map (Model.startEditingReminder todo)

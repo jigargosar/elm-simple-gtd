@@ -2,7 +2,7 @@
 
 @use cssnext;
 :root {
-  --overlay:{
+  --overlay: {
     position: fixed;
     top: 0;
     left: 0;
@@ -33,11 +33,11 @@ a {
 }
 
 /*mat css*/
-.collection-item {
+.collection .collection-item {
   outline: none;
 
-  &:focus {
-    background-color: gray(92%);
+  &.collection-item:not(.active):focus {
+    background-color: gray(95%);
   }
 }
 
@@ -78,13 +78,12 @@ app-toolbar .btn-floating i {
 
 /*mat css END*/
 
-
 .overlay {
   @apply --overlay;
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.overlay .modal{
+.overlay .modal {
   display: block;
 }
 
@@ -103,7 +102,7 @@ app-toolbar .btn-floating i {
 }
 
 #welcome {
-  
+
 }
 
 iron-icon.account {
@@ -128,7 +127,7 @@ iron-icon.account {
 
 }
 
-.focusable-list  .focusable-list-item {
+.focusable-list .focusable-list-item {
   outline: none;
   position: relative;
 
@@ -256,24 +255,27 @@ paper-listbox {
     border-left: 2px solid rgba(0, 0, 172, 0.77);
   }
 
-
 }
 
 #popup-menu {
   position: absolute;
-//left: 100px; //top: 100px; background-color: white; overflow-y: scroll; overflow-x: hidden; max-height: 100vh;
-  min-width: 20vw;
+//left: 100px; //top: 100px; background-color: white; overflow-y: scroll; overflow-x: hidden; max-height: 100vh; min-width: 20vw;
   max-width: 80vw;
 }
 
-.focusable-list  .todo-item {
+.entity-list > .collection {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.focusable-list .todo-item {
   background-color: white;
   border-left: 2px solid transparent;
 
   &:not(.selected):before {
     background-color: transparent;
   }
-  
+
   & paper-button.small .title {
     text-transform: none;
     font-size: 14px;
@@ -358,7 +360,6 @@ app-drawer-layout:not([narrow]) .hide-when-wide {
 textarea.materialize-textarea {
 //min-height: 2em; //padding-bottom: 0.5rem;
 }
-
 
 #launch-bar-container {
   position: fixed;

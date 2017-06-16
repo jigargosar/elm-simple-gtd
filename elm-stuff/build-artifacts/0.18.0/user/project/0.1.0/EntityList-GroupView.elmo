@@ -95,8 +95,9 @@ var _user$project$EntityList_GroupView$init = F2(
 			return vm.getTabIndexAVForEntity(
 				_user$project$Entity$TodoEntity(_p0));
 		};
-		return A2(
-			_elm_lang$html$Html$div,
+		return A3(
+			_elm_lang$html$Html_Keyed$node,
+			'div',
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$class('collection'),
@@ -104,16 +105,12 @@ var _user$project$EntityList_GroupView$init = F2(
 			},
 			{
 				ctor: '::',
-				_0: _user$project$EntityList_GroupView$initHeader(vm),
-				_1: {
-					ctor: '::',
-					_0: A3(
-						_elm_lang$html$Html_Keyed$node,
-						'div',
-						{ctor: '[]'},
-						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.todoList, todoView)),
-					_1: {ctor: '[]'}
-				}
+				_0: {
+					ctor: '_Tuple2',
+					_0: vm.id,
+					_1: _user$project$EntityList_GroupView$initHeader(vm)
+				},
+				_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.todoList, todoView)
 			});
 	});
 var _user$project$EntityList_GroupView$initHeaderKeyed = function (vm) {

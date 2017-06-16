@@ -35,10 +35,9 @@ init todoView vm =
         getTabIndexAVForTodo =
             Entity.TodoEntity >> vm.getTabIndexAVForEntity
     in
-        div [ class "collection" ]
-            [ initHeader vm
-            , Html.Keyed.node "div" [] (vm.todoList .|> todoView)
-            ]
+        Html.Keyed.node "div"
+            [ class "collection" ]
+            (( vm.id, initHeader vm ) :: (vm.todoList .|> todoView))
 
 
 initHeader : GroupViewModel -> Html Model.Msg

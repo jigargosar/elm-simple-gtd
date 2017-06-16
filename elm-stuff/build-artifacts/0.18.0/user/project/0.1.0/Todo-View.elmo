@@ -188,15 +188,27 @@ var _user$project$Todo_View$reminderPopup = function (form) {
 };
 var _user$project$Todo_View$contextMenu = _user$project$Todo_View_Menu$context;
 var _user$project$Todo_View$projectMenu = _user$project$Todo_View_Menu$project;
-var _user$project$Todo_View$editView = function (edit) {
-	return {
-		ctor: '::',
-		_0: A2(
+var _user$project$Todo_View$edit = F2(
+	function (form, appModel) {
+		var fireCancel = _user$project$Model$OnDeactivateEditingMode;
+		var fireToggleDelete = A2(_user$project$Model$OnEntityAction, form.entity, _user$project$Entity$ToggleDeleted);
+		var fireTextChanged = function (_p7) {
+			return A2(
+				_user$project$Model$UpdateTodoForm,
+				form,
+				_user$project$Todo_Form$SetText(_p7));
+		};
+		var todoText = form.todoText;
+		return A2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('vertical layout flex-auto'),
-				_1: {ctor: '[]'}
+				_0: _elm_lang$html$Html_Attributes$class('overlay'),
+				_1: {
+					ctor: '::',
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
+					_1: {ctor: '[]'}
+				}
 			},
 			{
 				ctor: '::',
@@ -204,8 +216,12 @@ var _user$project$Todo_View$editView = function (edit) {
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('flex'),
-						_1: {ctor: '[]'}
+						_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
+						_1: {
+							ctor: '::',
+							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(fireCancel),
+							_1: {ctor: '[]'}
+						}
 					},
 					{
 						ctor: '::',
@@ -213,73 +229,66 @@ var _user$project$Todo_View$editView = function (edit) {
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('input-field'),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-										function (_p7) {
-											return _user$project$Model$NOOP;
-										}),
-									_1: {ctor: '[]'}
-								}
+								_0: _elm_lang$html$Html_Attributes$class('modal-content'),
+								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
 								_0: A2(
-									_elm_lang$html$Html$textarea,
+									_elm_lang$html$Html$div,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('materialize-textarea auto-focus'),
+										_0: _elm_lang$html$Html_Attributes$class('input-field'),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$defaultValue(edit.todo.text),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onInput(edit.onTodoTextChanged),
-												_1: {ctor: '[]'}
-											}
+											_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+												function (_p8) {
+													return _user$project$Model$NOOP;
+												}),
+											_1: {ctor: '[]'}
 										}
 									},
-									{ctor: '[]'}),
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$textarea,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('materialize-textarea auto-focus'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$defaultValue(todoText),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Events$onInput(fireTextChanged),
+														_1: {ctor: '[]'}
+													}
+												}
+											},
+											{ctor: '[]'}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$label,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Todo'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
 								_1: {
 									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$label,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Todo'),
-											_1: {ctor: '[]'}
-										}),
+									_0: _user$project$View_Shared$defaultOkCancelDeleteButtons(fireToggleDelete),
 									_1: {ctor: '[]'}
 								}
 							}),
 						_1: {ctor: '[]'}
 					}),
-				_1: {
-					ctor: '::',
-					_0: _user$project$View_Shared$defaultOkCancelDeleteButtons(edit.onDeleteClicked),
-					_1: {ctor: '[]'}
-				}
-			}),
-		_1: {ctor: '[]'}
-	};
-};
-var _user$project$Todo_View$createEditTodoViewModel = F2(
-	function (form, todo) {
-		var updateTodoFormMsg = _user$project$Model$UpdateTodoForm(form);
-		var todoId = form.id;
-		return {
-			todo: {text: form.todoText},
-			onTodoTextChanged: function (_p8) {
-				return updateTodoFormMsg(
-					_user$project$Todo_Form$SetText(_p8));
-			},
-			onDeleteClicked: A2(
-				_user$project$Model$OnEntityAction,
-				_user$project$Entity$TodoEntity(todo),
-				_user$project$Entity$ToggleDeleted)
-		};
+				_1: {ctor: '[]'}
+			});
 	});
 var _user$project$Todo_View$createReminderViewModel = F2(
 	function (now, todo) {
@@ -607,11 +616,6 @@ var _user$project$Todo_View$getDisplayText = function (todo) {
 var _user$project$Todo_View$createTodoViewModel = F3(
 	function (appVM, tabindexAV, todo) {
 		var onTodoMsg = _user$project$Model$OnTodoMsg;
-		var maybeEditTodoForm = appVM.getMaybeEditTodoFormForTodo(todo);
-		var maybeEditVM = A2(
-			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-			maybeEditTodoForm,
-			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Todo_View$createEditTodoViewModel, todo));
 		var createEntityActionMsg = _user$project$Model$OnEntityAction(
 			_user$project$Entity$TodoEntity(todo));
 		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
@@ -683,16 +687,11 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			displayText: _user$project$Todo_View$getDisplayText(todo),
 			projectDisplayName: projectDisplayName,
 			contextDisplayName: contextDisplayName,
-			setContextMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoContext, todo),
-			setProjectMsg: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$SetTodoProject, todo),
 			showContextDropdownMsg: _user$project$Model$StartEditingContext(todo),
 			showProjectDropdownMsg: _user$project$Model$StartEditingProject(todo),
 			startEditingMsg: startEditingMsg,
 			toggleDoneMsg: toggleDoneMsg,
 			reminder: A2(_user$project$Todo_View$createReminderViewModel, now, todo),
-			edit: maybeEditVM,
-			isEditing: _elm_community$maybe_extra$Maybe_Extra$isJust(maybeEditVM),
-			onDeleteClicked: toggleDeleteMsg,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
 			tabindexAV: tabindexAV,
 			isSelected: A2(_elm_lang$core$Set$member, todoId, appVM.selectedEntityIdSet)
@@ -754,11 +753,7 @@ var _user$project$Todo_View$init = function (vm) {
 					_1: {
 						ctor: '::',
 						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'selected', vm.isSelected),
-						_1: {
-							ctor: '::',
-							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'editing', vm.isEditing),
-							_1: {ctor: '[]'}
-						}
+						_1: {ctor: '[]'}
 					}
 				}),
 			_1: {
@@ -779,13 +774,7 @@ var _user$project$Todo_View$init = function (vm) {
 				}
 			}
 		},
-		A3(
-			_elm_community$maybe_extra$Maybe_Extra$unpack,
-			function (_p15) {
-				return _user$project$Todo_View$defaultView(vm);
-			},
-			_user$project$Todo_View$editView,
-			vm.edit));
+		_user$project$Todo_View$defaultView(vm));
 };
 var _user$project$Todo_View$initKeyed = function (vm) {
 	return {
@@ -809,17 +798,7 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 												return function (m) {
 													return function (n) {
 														return function (o) {
-															return function (p) {
-																return function (q) {
-																	return function (r) {
-																		return function (s) {
-																			return function (t) {
-																				return {key: a, displayText: b, isDone: c, isDeleted: d, onKeyDownMsg: e, projectDisplayName: f, contextDisplayName: g, setContextMsg: h, setProjectMsg: i, startEditingMsg: j, toggleDoneMsg: k, onDeleteClicked: l, showContextDropdownMsg: m, showProjectDropdownMsg: n, reminder: o, edit: p, isEditing: q, onFocusIn: r, tabindexAV: s, isSelected: t};
-																			};
-																		};
-																	};
-																};
-															};
+															return {key: a, displayText: b, isDone: c, isDeleted: d, onKeyDownMsg: e, projectDisplayName: f, contextDisplayName: g, startEditingMsg: h, toggleDoneMsg: i, showContextDropdownMsg: j, showProjectDropdownMsg: k, reminder: l, onFocusIn: m, tabindexAV: n, isSelected: o};
 														};
 													};
 												};
@@ -838,8 +817,4 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 var _user$project$Todo_View$ReminderViewModel = F3(
 	function (a, b, c) {
 		return {displayText: a, isOverDue: b, startEditingMsg: c};
-	});
-var _user$project$Todo_View$EditViewModel = F3(
-	function (a, b, c) {
-		return {todo: a, onTodoTextChanged: b, onDeleteClicked: c};
 	});

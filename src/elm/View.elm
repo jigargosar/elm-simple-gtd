@@ -74,6 +74,9 @@ overlayViews appModel =
                 ExclusiveMode.EditContext form ->
                     Context.View.edit form
 
+                ExclusiveMode.EditTodo form ->
+                    Todo.View.edit form appModel
+
                 _ ->
                     span [] []
     in

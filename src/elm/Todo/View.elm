@@ -61,13 +61,16 @@ initKeyed vm =
 init : TodoViewModel -> Html Msg
 init vm =
     div
-        [ classList [ "todo-item focusable-list-item collection-item" => True, "selected" => vm.isSelected, "editing" => vm.isEditing ]
+        [ classList
+            [ "todo-item focusable-list-item collection-item" => True
+            , "selected" => vm.isSelected
+            ]
         , onFocusIn vm.onFocusIn
         , vm.tabindexAV
         , onKeyDown vm.onKeyDownMsg
         , attribute "data-key" vm.key
         ]
-        (vm.edit |> Maybe.unpack (\_ -> defaultView vm) editView)
+        (defaultView vm)
 
 
 dropdownTrigger { tabindexAV } content =
@@ -89,16 +92,11 @@ type alias TodoViewModel =
     , onKeyDownMsg : KeyboardEvent -> Msg
     , projectDisplayName : String
     , contextDisplayName : String
-    , setContextMsg : Context.Model -> Msg
-    , setProjectMsg : Project.Model -> Msg
     , startEditingMsg : Msg
     , toggleDoneMsg : Msg
-    , onDeleteClicked : Msg
     , showContextDropdownMsg : Msg
     , showProjectDropdownMsg : Msg
     , reminder : ReminderViewModel
-    , edit : Maybe EditViewModel
-    , isEditing : Bool
     , onFocusIn : Msg
     , tabindexAV : Attribute Msg
     , isSelected : Bool
@@ -156,9 +154,6 @@ createTodoViewModel appVM tabindexAV todo =
         createEntityActionMsg =
             Model.OnEntityAction (Entity.TodoEntity todo)
 
-        maybeEditTodoForm =
-            appVM.getMaybeEditTodoFormForTodo todo
-
         onTodoMsg =
             Model.OnTodoMsg
 
@@ -205,9 +200,6 @@ createTodoViewModel appVM tabindexAV todo =
 
         toggleDoneMsg =
             Model.ToggleTodoDone todoId
-
-        maybeEditVM =
-            maybeEditTodoForm ?|> createEditTodoViewModel # todo
     in
         { isDone = Todo.isDone todo
         , key = todoId
@@ -216,16 +208,11 @@ createTodoViewModel appVM tabindexAV todo =
         , displayText = getDisplayText todo
         , projectDisplayName = projectDisplayName
         , contextDisplayName = contextDisplayName
-        , setContextMsg = Model.SetTodoContext # todo
-        , setProjectMsg = Model.SetTodoProject # todo
         , showContextDropdownMsg = Model.StartEditingContext todo
         , showProjectDropdownMsg = Model.StartEditingProject todo
         , startEditingMsg = startEditingMsg
         , toggleDoneMsg = toggleDoneMsg
         , reminder = createReminderViewModel now todo
-        , edit = maybeEditVM
-        , isEditing = Maybe.isJust maybeEditVM
-        , onDeleteClicked = toggleDeleteMsg
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
         , tabindexAV = tabindexAV
         , isSelected = appVM.selectedEntityIdSet |> Set.member todoId
@@ -344,47 +331,40 @@ createReminderViewModel now todo =
         }
 
 
-type alias EditViewModel =
-    { todo : { text : Todo.Text }
-    , onTodoTextChanged : String -> Msg
-    , onDeleteClicked : Msg
-    }
-
-
-createEditTodoViewModel : Todo.Form.Model -> Todo.Model -> EditViewModel
-createEditTodoViewModel form todo =
+edit : Todo.Form.Model -> Model.Model -> Html Msg
+edit form appModel =
     let
-        todoId =
-            form.id
+        todoText =
+            form.todoText
 
-        updateTodoFormMsg =
-            Model.UpdateTodoForm form
+        fireTextChanged =
+            Todo.Form.SetText >> Model.UpdateTodoForm form
+
+        fireToggleDelete =
+            Model.OnEntityAction form.entity Entity.ToggleDeleted
+
+        fireCancel =
+            Model.OnDeactivateEditingMode
     in
-        { todo =
-            { text = form.todoText
-            }
-        , onTodoTextChanged = updateTodoFormMsg << Todo.Form.SetText
-        , onDeleteClicked = Model.OnEntityAction (Entity.TodoEntity todo) Entity.ToggleDeleted
-        }
-
-
-editView : EditViewModel -> List (Html Msg)
-editView edit =
-    [ div [ class "vertical layout flex-auto" ]
-        [ div [ class "flex" ]
-            [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
-                [ Html.textarea
-                    [ class "materialize-textarea auto-focus"
-                    , defaultValue (edit.todo.text)
-                    , onInput edit.onTodoTextChanged
+        div
+            [ class "overlay"
+            , onClickStopPropagation Model.OnDeactivateEditingMode
+            ]
+            [ div [ class "modal fixed-center", onClickStopPropagation fireCancel ]
+                [ div [ class "modal-content" ]
+                    [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
+                        [ Html.textarea
+                            [ class "materialize-textarea auto-focus"
+                            , defaultValue todoText
+                            , onInput fireTextChanged
+                            ]
+                            []
+                        , Html.label [] [ text "Todo" ]
+                        ]
+                    , defaultOkCancelDeleteButtons fireToggleDelete
                     ]
-                    []
-                , Html.label [] [ text "Todo" ]
                 ]
             ]
-        , defaultOkCancelDeleteButtons edit.onDeleteClicked
-        ]
-    ]
 
 
 projectMenu =

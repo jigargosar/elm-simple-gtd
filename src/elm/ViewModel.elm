@@ -26,10 +26,8 @@ type alias Model =
     { contexts : OldGroupEntity.ViewModel.ViewModel
     , projects : OldGroupEntity.ViewModel.ViewModel
     , viewName : String
-    , mainViewType : ViewType
     , header : { backgroundColor : String }
     , now : Time
-    , getMaybeEditTodoFormForTodo : Todo.Model -> Maybe Todo.Form.Model
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model
     , selectedEntityIdSet : Set Document.Id
@@ -56,29 +54,15 @@ create model =
 
         now =
             Model.getNow model
-
-        getMaybeEditTodoFormForTodo =
-            \todo ->
-                case editMode of
-                    ExclusiveMode.EditTodo form ->
-                        if Document.hasId form.id todo then
-                            Just form
-                        else
-                            Nothing
-
-                    _ ->
-                        Nothing
     in
         { contexts = contextsVM
         , projects = projectsVM
         , viewName = viewName
-        , mainViewType = mainViewType
         , header = { backgroundColor = headerBackgroundColor }
         , now = now
         , selectedEntityIdSet = model.selectedEntityIdSet
         , projectByIdDict = Model.getProjectsAsIdDict model
         , contextByIdDict = Model.getContextsAsIdDict model
-        , getMaybeEditTodoFormForTodo = getMaybeEditTodoFormForTodo
         }
 
 

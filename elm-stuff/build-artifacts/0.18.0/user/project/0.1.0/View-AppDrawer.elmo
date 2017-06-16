@@ -261,61 +261,62 @@ var _user$project$View_AppDrawer$divider = A2(
 		_1: {ctor: '[]'}
 	},
 	{ctor: '[]'});
-var _user$project$View_AppDrawer$getSelectedIndex = function (_p3) {
-	var _p4 = _p3;
-	var _p10 = _p4.projects;
-	var _p9 = _p4.contexts;
-	var projectIndexById = function (id) {
-		return A2(
-			_user$project$Ext_Function_Infix_ops['>>?='],
-			_elm_community$list_extra$List_Extra$findIndex(
-				function (_p5) {
-					return A2(
-						_user$project$Ext_Function$equals,
-						id,
-						function (_) {
-							return _.id;
-						}(_p5));
-				}),
-			0)(_p10.entityList);
-	};
-	var contextIndexById = function (id) {
-		return A2(
-			_user$project$Ext_Function_Infix_ops['>>?='],
-			_elm_community$list_extra$List_Extra$findIndex(
-				function (_p6) {
-					return A2(
-						_user$project$Ext_Function$equals,
-						id,
-						function (_) {
-							return _.id;
-						}(_p6));
-				}),
-			0)(_p9.entityList);
-	};
-	var projectsIndex = 1 + _elm_lang$core$List$length(_p9.entityList);
-	var lastProjectIndex = projectsIndex + _elm_lang$core$List$length(_p10.entityList);
-	var _p7 = _p4.mainViewType;
-	if (_p7.ctor === 'EntityListView') {
-		var _p8 = _p7._0;
-		switch (_p8.ctor) {
-			case 'ContextsView':
-				return 0;
-			case 'ContextView':
-				return 1 + contextIndexById(_p8._0);
-			case 'ProjectsView':
-				return projectsIndex;
-			case 'ProjectView':
-				return (1 + projectsIndex) + projectIndexById(_p8._0);
-			case 'BinView':
-				return lastProjectIndex + 1;
-			default:
-				return lastProjectIndex + 2;
+var _user$project$View_AppDrawer$getSelectedIndex = F2(
+	function (mainViewType, _p3) {
+		var _p4 = _p3;
+		var _p10 = _p4.projects;
+		var _p9 = _p4.contexts;
+		var projectIndexById = function (id) {
+			return A2(
+				_user$project$Ext_Function_Infix_ops['>>?='],
+				_elm_community$list_extra$List_Extra$findIndex(
+					function (_p5) {
+						return A2(
+							_user$project$Ext_Function$equals,
+							id,
+							function (_) {
+								return _.id;
+							}(_p5));
+					}),
+				0)(_p10.entityList);
+		};
+		var contextIndexById = function (id) {
+			return A2(
+				_user$project$Ext_Function_Infix_ops['>>?='],
+				_elm_community$list_extra$List_Extra$findIndex(
+					function (_p6) {
+						return A2(
+							_user$project$Ext_Function$equals,
+							id,
+							function (_) {
+								return _.id;
+							}(_p6));
+					}),
+				0)(_p9.entityList);
+		};
+		var projectsIndex = 1 + _elm_lang$core$List$length(_p9.entityList);
+		var lastProjectIndex = projectsIndex + _elm_lang$core$List$length(_p10.entityList);
+		var _p7 = mainViewType;
+		if (_p7.ctor === 'EntityListView') {
+			var _p8 = _p7._0;
+			switch (_p8.ctor) {
+				case 'ContextsView':
+					return 0;
+				case 'ContextView':
+					return 1 + contextIndexById(_p8._0);
+				case 'ProjectsView':
+					return projectsIndex;
+				case 'ProjectView':
+					return (1 + projectsIndex) + projectIndexById(_p8._0);
+				case 'BinView':
+					return lastProjectIndex + 1;
+				default:
+					return lastProjectIndex + 2;
+			}
+		} else {
+			return lastProjectIndex + 3;
 		}
-	} else {
-		return lastProjectIndex + 3;
-	}
-};
+	});
 var _user$project$View_AppDrawer$navList = F2(
 	function (viewModel, m) {
 		var _p11 = viewModel;
@@ -332,7 +333,7 @@ var _user$project$View_AppDrawer$navList = F2(
 					_0: A2(
 						_elm_community$html_extra$Html_Attributes_Extra$intProperty,
 						'selected',
-						_user$project$View_AppDrawer$getSelectedIndex(viewModel)),
+						A2(_user$project$View_AppDrawer$getSelectedIndex, m.mainViewType, viewModel)),
 					_1: {ctor: '[]'}
 				}
 			},

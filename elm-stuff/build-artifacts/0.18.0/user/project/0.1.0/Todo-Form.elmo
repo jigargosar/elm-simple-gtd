@@ -8,12 +8,13 @@ var _user$project$Todo_Form$set = F2(
 var _user$project$Todo_Form$create = function (todo) {
 	return {
 		id: _user$project$Document$getId(todo),
-		todoText: _user$project$Todo$getText(todo)
+		todoText: _user$project$Todo$getText(todo),
+		entity: _user$project$Entity$TodoEntity(todo)
 	};
 };
-var _user$project$Todo_Form$Model = F2(
-	function (a, b) {
-		return {id: a, todoText: b};
+var _user$project$Todo_Form$Model = F3(
+	function (a, b, c) {
+		return {id: a, todoText: b, entity: c};
 	});
 var _user$project$Todo_Form$SetText = function (a) {
 	return {ctor: 'SetText', _0: a};

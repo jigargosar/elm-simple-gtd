@@ -2,6 +2,7 @@ module Todo.Form exposing (..)
 
 import Context
 import Document
+import Entity
 import Project
 import Time exposing (Time)
 import Time.Format
@@ -17,6 +18,7 @@ import Todo
 type alias Model =
     { id : Document.Id
     , todoText : Todo.Text
+    , entity : Entity.Entity
     }
 
 
@@ -28,6 +30,7 @@ create : Todo.Model -> Model
 create todo =
     { id = Document.getId todo
     , todoText = Todo.getText todo
+    , entity = Entity.TodoEntity todo
     }
 
 

@@ -113,9 +113,7 @@ navList viewModel m =
     in
         Html.node "paper-listbox"
             [ stringProperty "selectable" "paper-item"
-            , intProperty "selected" (getSelectedIndex viewModel)
-
-            --                , stringProperty "attrForSelected" "draweritemselected"
+            , intProperty "selected" (getSelectedIndex m.mainViewType viewModel)
             ]
             (entityListView contexts m.mainViewType
                 ++ [ divider ]
@@ -128,7 +126,7 @@ navList viewModel m =
             )
 
 
-getSelectedIndex { mainViewType, projects, contexts } =
+getSelectedIndex mainViewType { projects, contexts } =
     let
         projectsIndex =
             1 + (List.length contexts.entityList)

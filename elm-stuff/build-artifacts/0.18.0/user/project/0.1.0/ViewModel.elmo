@@ -53,52 +53,24 @@ var _user$project$ViewModel$getViewInfo = F3(
 var _user$project$ViewModel$create = function (model) {
 	var now = _user$project$Model$getNow(model);
 	var editMode = _user$project$Model$getEditMode(model);
-	var getMaybeEditTodoFormForTodo = function (todo) {
-		var _p6 = editMode;
-		if (_p6.ctor === 'EditTodo') {
-			var _p7 = _p6._0;
-			return A2(_user$project$Document$hasId, _p7.id, todo) ? _elm_lang$core$Maybe$Just(_p7) : _elm_lang$core$Maybe$Nothing;
-		} else {
-			return _elm_lang$core$Maybe$Nothing;
-		}
-	};
 	var mainViewType = model.mainViewType;
 	var projectsVM = _user$project$OldGroupEntity_ViewModel$projects(model);
 	var contextsVM = _user$project$OldGroupEntity_ViewModel$contexts(model);
-	var _p8 = A3(_user$project$ViewModel$getViewInfo, mainViewType, projectsVM, contextsVM);
-	var viewName = _p8._0;
-	var headerBackgroundColor = _p8._1;
+	var _p6 = A3(_user$project$ViewModel$getViewInfo, mainViewType, projectsVM, contextsVM);
+	var viewName = _p6._0;
+	var headerBackgroundColor = _p6._1;
 	return {
 		contexts: contextsVM,
 		projects: projectsVM,
 		viewName: viewName,
-		mainViewType: mainViewType,
 		header: {backgroundColor: headerBackgroundColor},
 		now: now,
 		selectedEntityIdSet: model.selectedEntityIdSet,
 		projectByIdDict: _user$project$Model$getProjectsAsIdDict(model),
-		contextByIdDict: _user$project$Model$getContextsAsIdDict(model),
-		getMaybeEditTodoFormForTodo: getMaybeEditTodoFormForTodo
+		contextByIdDict: _user$project$Model$getContextsAsIdDict(model)
 	};
 };
-var _user$project$ViewModel$Model = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return {contexts: a, projects: b, viewName: c, mainViewType: d, header: e, now: f, getMaybeEditTodoFormForTodo: g, projectByIdDict: h, contextByIdDict: i, selectedEntityIdSet: j};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
+var _user$project$ViewModel$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {contexts: a, projects: b, viewName: c, header: d, now: e, projectByIdDict: f, contextByIdDict: g, selectedEntityIdSet: h};
+	});

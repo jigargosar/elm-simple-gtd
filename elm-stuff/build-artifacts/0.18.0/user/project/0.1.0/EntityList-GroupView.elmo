@@ -57,7 +57,7 @@ var _user$project$EntityList_GroupView$initHeader = function (vm) {
 						_elm_lang$html$Html$h5,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('title font-nowrap flex-auto layout horizontal'),
+							_0: _elm_lang$html$Html_Attributes$class('font-nowrap flex-auto layout horizontal'),
 							_1: {ctor: '[]'}
 						},
 						{

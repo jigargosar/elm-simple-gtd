@@ -1,30 +1,7 @@
-var _user$project$Todo_View$createReminderMenuConfig = F2(
-	function (form, model) {
-		return {
-			onSelect: function (_p0) {
-				return _user$project$Model$commonMsg.noOp;
-			},
-			isSelected: function (_p1) {
-				return false;
-			},
-			itemKey: _elm_lang$core$Basics$identity,
-			itemSearchText: _elm_lang$core$Basics$identity,
-			itemView: _elm_lang$html$Html$text,
-			onStateChanged: function (_p2) {
-				return _user$project$Model$OnTodoMsg(
-					A2(
-						_user$project$Todo_Msg$UpdateReminderForm,
-						form,
-						_user$project$Todo_ReminderForm$SetMenuState(_p2)));
-			},
-			noOp: _user$project$Model$commonMsg.noOp,
-			onOutsideMouseDown: _user$project$Model$OnDeactivateEditingMode
-		};
-	});
 var _user$project$Todo_View$reminderPopup = function (form) {
-	var updateReminderForm = function (_p3) {
+	var updateReminderForm = function (_p0) {
 		return _user$project$Model$OnTodoMsg(
-			A2(_user$project$Todo_Msg$UpdateReminderForm, form, _p3));
+			A2(_user$project$Todo_Msg$UpdateReminderForm, form, _p0));
 	};
 	return A2(
 		_elm_lang$html$Html$div,
@@ -37,7 +14,7 @@ var _user$project$Todo_View$reminderPopup = function (form) {
 				_1: {
 					ctor: '::',
 					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-						function (_p4) {
+						function (_p1) {
 							return _user$project$Model$NOOP;
 						}),
 					_1: {ctor: '[]'}
@@ -100,9 +77,9 @@ var _user$project$Todo_View$reminderPopup = function (form) {
 												_1: {
 													ctor: '::',
 													_0: _user$project$WebComponents$onChange(
-														function (_p5) {
+														function (_p2) {
 															return updateReminderForm(
-																_user$project$Todo_ReminderForm$SetDate(_p5));
+																_user$project$Todo_ReminderForm$SetDate(_p2));
 														}),
 													_1: {ctor: '[]'}
 												}
@@ -149,9 +126,9 @@ var _user$project$Todo_View$reminderPopup = function (form) {
 												_1: {
 													ctor: '::',
 													_0: _user$project$WebComponents$onChange(
-														function (_p6) {
+														function (_p3) {
 															return updateReminderForm(
-																_user$project$Todo_ReminderForm$SetTime(_p6));
+																_user$project$Todo_ReminderForm$SetTime(_p3));
 														}),
 													_1: {ctor: '[]'}
 												}
@@ -192,11 +169,11 @@ var _user$project$Todo_View$fireCancel = _user$project$Model$OnDeactivateEditing
 var _user$project$Todo_View$edit = F2(
 	function (form, appModel) {
 		var fireToggleDelete = A2(_user$project$Model$OnEntityAction, form.entity, _user$project$Entity$ToggleDeleted);
-		var fireTextChanged = function (_p7) {
+		var fireTextChanged = function (_p4) {
 			return A2(
 				_user$project$Model$UpdateTodoForm,
 				form,
-				_user$project$Todo_Form$SetText(_p7));
+				_user$project$Todo_Form$SetText(_p4));
 		};
 		var todoText = form.todoText;
 		return A2(
@@ -210,7 +187,7 @@ var _user$project$Todo_View$edit = F2(
 					_1: {
 						ctor: '::',
 						_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-							function (_p8) {
+							function (_p5) {
 								return _user$project$Model$NOOP;
 							}),
 						_1: {ctor: '[]'}
@@ -249,7 +226,7 @@ var _user$project$Todo_View$edit = F2(
 										_1: {
 											ctor: '::',
 											_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-												function (_p9) {
+												function (_p6) {
 													return _user$project$Model$NOOP;
 												}),
 											_1: {ctor: '[]'}
@@ -309,7 +286,7 @@ var _user$project$Todo_View$new = function (form) {
 				_1: {
 					ctor: '::',
 					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-						function (_p10) {
+						function (_p7) {
 							return _user$project$Model$NOOP;
 						}),
 					_1: {ctor: '[]'}
@@ -399,7 +376,7 @@ var _user$project$Todo_View$new = function (form) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Todo_View$createReminderViewModel = F2(
+var _user$project$Todo_View$createScheduleViewModel = F2(
 	function (now, todo) {
 		var overDueText = 'Overdue';
 		var formatReminderTime = function (time) {
@@ -595,69 +572,82 @@ var _user$project$Todo_View$doneIconButton = function (vm) {
 		},
 		{ctor: '[]'});
 };
-var _user$project$Todo_View$defaultView = function (vm) {
-	return {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$div,
-			{
+var _user$project$Todo_View$item = function (vm) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$classList(
+				{
+					ctor: '::',
+					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'todo-item focusable-list-item collection-item', true),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'selected', vm.isSelected),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class(''),
+				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: _user$project$Todo_View$doneIconButton(vm),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$span,
-						{
+					_0: vm.tabindexAV,
+					_1: {
+						ctor: '::',
+						_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
+						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('display-text'),
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-key', vm.key),
 							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(vm.displayText),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
+						}
+					}
 				}
-			}),
-		_1: {
+			}
+		},
+		{
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('layout horizontal end-justified'),
-					_1: {ctor: '[]'}
+					_0: _elm_lang$html$Html_Attributes$class(''),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+						_1: {ctor: '[]'}
+					}
 				},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'margin', '0 8px'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _user$project$Todo_View$editScheduleButton(vm),
-							_1: {ctor: '[]'}
-						}),
+					_0: _user$project$Todo_View$doneIconButton(vm),
 					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$span,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('display-text'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(vm.displayText),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('layout horizontal end-justified'),
+						_1: {ctor: '[]'}
+					},
+					{
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$div,
@@ -666,14 +656,14 @@ var _user$project$Todo_View$defaultView = function (vm) {
 								_0: _elm_lang$html$Html_Attributes$style(
 									{
 										ctor: '::',
-										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'margin', '0 8px'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
-								_0: _user$project$Todo_View$editContextButton(vm),
+								_0: _user$project$Todo_View$editScheduleButton(vm),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -692,23 +682,49 @@ var _user$project$Todo_View$defaultView = function (vm) {
 								},
 								{
 									ctor: '::',
-									_0: _user$project$Todo_View$projectProjectButton(vm),
+									_0: _user$project$Todo_View$editContextButton(vm),
 									_1: {ctor: '[]'}
 								}),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(
+											{
+												ctor: '::',
+												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _user$project$Todo_View$projectProjectButton(vm),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}
-					}
-				}),
-			_1: {ctor: '[]'}
-		}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Todo_View$keyedItem = function (vm) {
+	return {
+		ctor: '_Tuple2',
+		_0: vm.key,
+		_1: _user$project$Todo_View$item(vm)
 	};
 };
 var _user$project$Todo_View$getDisplayText = function (todo) {
 	var trimAndReplaceEmptyWithDefault = A2(
 		_user$project$Ext_Function_Infix_ops['>>?='],
-		function (_p11) {
+		function (_p8) {
 			return _elm_community$string_extra$String_Extra$nonEmpty(
-				_elm_lang$core$String$trim(_p11));
+				_elm_lang$core$String$trim(_p8));
 		},
 		'< empty >');
 	var tripleNewLineAndRestRegex = _elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*');
@@ -756,11 +772,11 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					'Inbox')));
 		var todoId = _user$project$Document$getId(todo);
 		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
-		var onKeyDownMsg = function (_p12) {
-			var _p13 = _p12;
-			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p13)) {
-				var _p14 = _p13.key;
-				switch (_p14.ctor) {
+		var onKeyDownMsg = function (_p9) {
+			var _p10 = _p9;
+			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p10)) {
+				var _p11 = _p10.key;
+				switch (_p11.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 					case 'CharE':
@@ -800,98 +816,12 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			showProjectDropdownMsg: _user$project$Model$StartEditingProject(todo),
 			startEditingMsg: startEditingMsg,
 			toggleDoneMsg: toggleDoneMsg,
-			reminder: A2(_user$project$Todo_View$createReminderViewModel, now, todo),
+			reminder: A2(_user$project$Todo_View$createScheduleViewModel, now, todo),
 			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
 			tabindexAV: tabindexAV,
 			isSelected: A2(_elm_lang$core$Set$member, todoId, appVM.selectedEntityIdSet)
 		};
 	});
-var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p15, content) {
-		var _p16 = _p15;
-		return A2(
-			_edvail$elm_polymer$Polymer_Paper$button,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$style(
-					{
-						ctor: '::',
-						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'height', '24px'),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: _user$project$WebComponents$slotDropdownTrigger,
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
-						_1: {
-							ctor: '::',
-							_0: _p16.tabindexAV,
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('title primary-text-color'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: content,
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			});
-	});
-var _user$project$Todo_View$init = function (vm) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$classList(
-				{
-					ctor: '::',
-					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'todo-item focusable-list-item collection-item', true),
-					_1: {
-						ctor: '::',
-						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'selected', vm.isSelected),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
-				_1: {
-					ctor: '::',
-					_0: vm.tabindexAV,
-					_1: {
-						ctor: '::',
-						_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
-						_1: {
-							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-key', vm.key),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		},
-		_user$project$Todo_View$defaultView(vm));
-};
-var _user$project$Todo_View$initKeyed = function (vm) {
-	return {
-		ctor: '_Tuple2',
-		_0: vm.key,
-		_1: _user$project$Todo_View$init(vm)
-	};
-};
 var _user$project$Todo_View$TodoViewModel = function (a) {
 	return function (b) {
 		return function (c) {
@@ -923,7 +853,7 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 		};
 	};
 };
-var _user$project$Todo_View$ReminderViewModel = F3(
+var _user$project$Todo_View$ScheduleViewModel = F3(
 	function (a, b, c) {
 		return {displayText: a, isOverDue: b, startEditingMsg: c};
 	});

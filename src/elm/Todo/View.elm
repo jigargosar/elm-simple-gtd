@@ -54,37 +54,6 @@ import ViewModel
 import WebComponents exposing (..)
 
 
-initKeyed : TodoViewModel -> ( String, Html Msg )
-initKeyed vm =
-    ( vm.key, init vm )
-
-
-init : TodoViewModel -> Html Msg
-init vm =
-    div
-        [ classList
-            [ "todo-item focusable-list-item collection-item" => True
-            , "selected" => vm.isSelected
-            ]
-        , onFocusIn vm.onFocusIn
-        , vm.tabindexAV
-        , onKeyDown vm.onKeyDownMsg
-        , attribute "data-key" vm.key
-        ]
-        (defaultView vm)
-
-
-dropdownTrigger { tabindexAV } content =
-    Paper.button
-        [ style [ "height" => "24px" ]
-        , slotDropdownTrigger
-        , class "small padding-0 margin-0 shrink"
-        , tabindexAV
-        ]
-        [ div [ class "title primary-text-color" ] [ content ]
-        ]
-
-
 type alias TodoViewModel =
     { key : String
     , displayText : String
@@ -97,7 +66,7 @@ type alias TodoViewModel =
     , toggleDoneMsg : Msg
     , showContextDropdownMsg : Msg
     , showProjectDropdownMsg : Msg
-    , reminder : ReminderViewModel
+    , reminder : ScheduleViewModel
     , onFocusIn : Msg
     , tabindexAV : Attribute Msg
     , isSelected : Bool
@@ -213,30 +182,45 @@ createTodoViewModel appVM tabindexAV todo =
         , showProjectDropdownMsg = Model.StartEditingProject todo
         , startEditingMsg = startEditingMsg
         , toggleDoneMsg = toggleDoneMsg
-        , reminder = createReminderViewModel now todo
+        , reminder = createScheduleViewModel now todo
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
         , tabindexAV = tabindexAV
         , isSelected = appVM.selectedEntityIdSet |> Set.member todoId
         }
 
 
-defaultView : TodoViewModel -> List (Html Msg)
-defaultView vm =
-    [ div
-        [ class ""
-        , onClick vm.startEditingMsg
+keyedItem : TodoViewModel -> ( String, Html Msg )
+keyedItem vm =
+    ( vm.key, item vm )
+
+
+item : TodoViewModel -> Html Msg
+item vm =
+    div
+        [ classList
+            [ "todo-item focusable-list-item collection-item" => True
+            , "selected" => vm.isSelected
+            ]
+        , onFocusIn vm.onFocusIn
+        , vm.tabindexAV
+        , onKeyDown vm.onKeyDownMsg
+        , attribute "data-key" vm.key
         ]
-        [ doneIconButton vm
-        , span [ class "display-text" ] [ text vm.displayText ]
+        [ div
+            [ class ""
+            , onClick vm.startEditingMsg
+            ]
+            [ doneIconButton vm
+            , span [ class "display-text" ] [ text vm.displayText ]
+            ]
+        , div
+            [ class "layout horizontal end-justified"
+            ]
+            [ div [ style [ "margin" => "0 8px" ] ] [ editScheduleButton vm ]
+            , div [ style [ "padding" => "0 8px" ] ] [ editContextButton vm ]
+            , div [ style [ "padding" => "0 8px" ] ] [ projectProjectButton vm ]
+            ]
         ]
-    , div
-        [ class "layout horizontal end-justified"
-        ]
-        [ div [ style [ "margin" => "0 8px" ] ] [ editScheduleButton vm ]
-        , div [ style [ "padding" => "0 8px" ] ] [ editContextButton vm ]
-        , div [ style [ "padding" => "0 8px" ] ] [ projectProjectButton vm ]
-        ]
-    ]
 
 
 doneIconButton : TodoViewModel -> Html Msg
@@ -297,15 +281,15 @@ editScheduleButton vm =
             ]
 
 
-type alias ReminderViewModel =
+type alias ScheduleViewModel =
     { displayText : String
     , isOverDue : Bool
     , startEditingMsg : Msg
     }
 
 
-createReminderViewModel : Time -> Todo.Model -> ReminderViewModel
-createReminderViewModel now todo =
+createScheduleViewModel : Time -> Todo.Model -> ScheduleViewModel
+createScheduleViewModel now todo =
     let
         overDueText =
             "Overdue"
@@ -440,19 +424,3 @@ reminderPopup form =
                 , defaultOkCancelButtons
                 ]
             ]
-
-
-createReminderMenuConfig : Todo.ReminderForm.Model -> Model.Model -> Menu.Config String Model.Msg
-createReminderMenuConfig form model =
-    { onSelect = (\_ -> commonMsg.noOp)
-    , isSelected = (\_ -> False)
-    , itemKey = identity
-    , itemSearchText = identity
-    , itemView = text
-    , onStateChanged =
-        Todo.ReminderForm.SetMenuState
-            >> Todo.Msg.UpdateReminderForm form
-            >> Model.OnTodoMsg
-    , noOp = commonMsg.noOp
-    , onOutsideMouseDown = Model.OnDeactivateEditingMode
-    }

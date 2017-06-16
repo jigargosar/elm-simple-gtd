@@ -84,7 +84,7 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
             in
                 todo
                     |> Todo.View.createTodoViewModel appViewModel tabIndexAV
-                    |> Todo.View.initKeyed
+                    |> Todo.View.keyedItem
 
         todoListView =
             List.map todoView

@@ -61,7 +61,7 @@ initKeyed vm =
 init : TodoViewModel -> Html Msg
 init vm =
     div
-        [ classList [ "todo-item focusable-list-item z-depth-2" => True, "selected" => vm.isSelected, "editing" => vm.isEditing ]
+        [ classList [ "todo-item focusable-list-item collection-item" => True, "selected" => vm.isSelected, "editing" => vm.isEditing ]
         , onFocusIn vm.onFocusIn
         , vm.tabindexAV
         , onKeyDown vm.onKeyDownMsg

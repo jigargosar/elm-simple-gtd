@@ -1,6 +1,7 @@
 module EntityList.GroupView exposing (..)
 
 import Entity
+import EntityList.ViewModel exposing (GroupViewModel)
 import Ext.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -34,20 +35,19 @@ init todoView vm =
         getTabIndexAVForTodo =
             Entity.TodoEntity >> vm.getTabIndexAVForEntity
     in
-        div []
+        div [ class "collection" ]
             [ initHeader vm
-            , Html.Keyed.node "div"
-                []
-                (vm.todoList .|> todoView)
+            , Html.Keyed.node "div" [] (vm.todoList .|> todoView)
             ]
 
 
+initHeader : GroupViewModel -> Html Model.Msg
 initHeader vm =
     let
         editButton =
             if vm.isEditable then
                 WebComponents.iconButton "create"
-                    [ class "flex-none", onClick vm.startEditingMsg, vm.tabindexAV ]
+                    [ class "self-center flex-none", onClick vm.startEditingMsg, vm.tabindexAV ]
             else
                 span [] []
     in
@@ -55,10 +55,11 @@ initHeader vm =
             [ vm.tabindexAV
             , onFocusIn vm.onFocusIn
             , onKeyDown vm.onKeyDownMsg
-            , classList [ "entity-item group-item focusable-list-item" => True ]
+            , classList [ "entity-item focusable-list-item collection-item" => True ]
             ]
             [ div [ class "layout horizontal justified" ]
-                [ div [ class "title font-nowrap flex-auto" ] [ View.Shared.defaultBadge vm ]
+                [ h5 [ class "title font-nowrap flex-auto layout horizontal" ]
+                    [ div [ class "self-center" ] [ text vm.namePrefix ], View.Shared.defaultBadge vm ]
                 , editButton
                 ]
             ]

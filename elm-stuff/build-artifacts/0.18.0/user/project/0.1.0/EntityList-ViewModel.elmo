@@ -35,6 +35,7 @@ var _user$project$EntityList_ViewModel$create = F3(
 		return {
 			id: id,
 			name: name,
+			namePrefix: config.namePrefix,
 			count: _elm_lang$core$List$length(todoList),
 			isEditable: !isNull,
 			isDeleted: _user$project$Document$isDeleted(entityModel),
@@ -74,7 +75,7 @@ var _user$project$EntityList_ViewModel$projectGroup = F3(
 	function (getTabIndexAVForEntity, todoList, project) {
 		var config = {
 			groupByFn: _user$project$Todo$getProjectId,
-			namePrefix: '@',
+			namePrefix: '#',
 			entityWrapper: _user$project$Entity$ProjectEntity,
 			nullEntity: _user$project$Project$null,
 			isNull: _user$project$Project$isNull,
@@ -105,7 +106,9 @@ var _user$project$EntityList_ViewModel$GroupViewModel = function (a) {
 													return function (n) {
 														return function (o) {
 															return function (p) {
-																return {id: a, count: b, name: c, isDeleted: d, isEditable: e, startEditingMsg: f, onDeleteClicked: g, onSaveClicked: h, onNameChanged: i, onCancelClicked: j, icon: k, onFocusIn: l, onKeyDownMsg: m, tabindexAV: n, todoList: o, getTabIndexAVForEntity: p};
+																return function (q) {
+																	return {id: a, count: b, name: c, namePrefix: d, isDeleted: e, isEditable: f, startEditingMsg: g, onDeleteClicked: h, onSaveClicked: i, onNameChanged: j, onCancelClicked: k, icon: l, onFocusIn: m, onKeyDownMsg: n, tabindexAV: o, todoList: p, getTabIndexAVForEntity: q};
+																};
 															};
 														};
 													};

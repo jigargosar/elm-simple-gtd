@@ -4,7 +4,7 @@ var _user$project$EntityList_GroupView$initHeader = function (vm) {
 		'create',
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('flex-none'),
+			_0: _elm_lang$html$Html_Attributes$class('self-center flex-none'),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
@@ -34,7 +34,7 @@ var _user$project$EntityList_GroupView$initHeader = function (vm) {
 						_0: _elm_lang$html$Html_Attributes$classList(
 							{
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item group-item focusable-list-item', true),
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item focusable-list-item collection-item', true),
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
@@ -54,16 +54,31 @@ var _user$project$EntityList_GroupView$initHeader = function (vm) {
 				{
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$div,
+						_elm_lang$html$Html$h5,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('title font-nowrap flex-auto'),
+							_0: _elm_lang$html$Html_Attributes$class('title font-nowrap flex-auto layout horizontal'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: _user$project$View_Shared$defaultBadge(vm),
-							_1: {ctor: '[]'}
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('self-center'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(vm.namePrefix),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _user$project$View_Shared$defaultBadge(vm),
+								_1: {ctor: '[]'}
+							}
 						}),
 					_1: {
 						ctor: '::',
@@ -82,7 +97,11 @@ var _user$project$EntityList_GroupView$init = F2(
 		};
 		return A2(
 			_elm_lang$html$Html$div,
-			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('collection'),
+				_1: {ctor: '[]'}
+			},
 			{
 				ctor: '::',
 				_0: _user$project$EntityList_GroupView$initHeader(vm),

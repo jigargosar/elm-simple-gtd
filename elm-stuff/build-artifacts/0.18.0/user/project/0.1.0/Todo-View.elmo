@@ -605,9 +605,9 @@ var _user$project$Todo_View$getDisplayText = function (todo) {
 			_user$project$Todo$getText(todo)));
 };
 var _user$project$Todo_View$createTodoViewModel = F3(
-	function (vc, tabindexAV, todo) {
+	function (appVM, tabindexAV, todo) {
 		var onTodoMsg = _user$project$Model$OnTodoMsg;
-		var maybeEditTodoForm = vc.getMaybeEditTodoFormForTodo(todo);
+		var maybeEditTodoForm = appVM.getMaybeEditTodoFormForTodo(todo);
 		var maybeEditVM = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			maybeEditTodoForm,
@@ -627,7 +627,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 					A2(
 						_user$project$Ext_Function_Infix_ops['>>?'],
-						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, vc.projectByIdDict),
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, appVM.projectByIdDict),
 						_user$project$Project$getName)(projectId),
 					'')));
 		var contextDisplayName = truncateName(
@@ -638,7 +638,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 					A2(
 						_user$project$Ext_Function_Infix_ops['>>?'],
-						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, vc.contextByIdDict),
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, appVM.contextByIdDict),
 						_user$project$Context$getName)(contextId),
 					'Inbox')));
 		var todoId = _user$project$Document$getId(todo);
@@ -674,7 +674,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 				return _user$project$Model$commonMsg.noOp;
 			}
 		};
-		var now = vc.now;
+		var now = appVM.now;
 		return {
 			isDone: _user$project$Todo$isDone(todo),
 			key: todoId,
@@ -695,7 +695,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			onDeleteClicked: toggleDeleteMsg,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
 			tabindexAV: tabindexAV,
-			isSelected: A2(_elm_lang$core$Set$member, todoId, vc.selectedEntityIdSet)
+			isSelected: A2(_elm_lang$core$Set$member, todoId, appVM.selectedEntityIdSet)
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
@@ -750,7 +750,7 @@ var _user$project$Todo_View$init = function (vm) {
 			_0: _elm_lang$html$Html_Attributes$classList(
 				{
 					ctor: '::',
-					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'todo-item focusable-list-item z-depth-2', true),
+					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'todo-item focusable-list-item collection-item', true),
 					_1: {
 						ctor: '::',
 						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'selected', vm.isSelected),

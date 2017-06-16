@@ -32,6 +32,7 @@ type alias GroupViewModel =
     { id : String
     , count : Int
     , name : String
+    , namePrefix : String
     , isDeleted : Bool
     , isEditable : Bool
     , startEditingMsg : Msg
@@ -116,6 +117,7 @@ create config todoList entityModel =
     in
         { id = id
         , name = name
+        , namePrefix = config.namePrefix
         , count = todoList |> List.length
         , isEditable = not isNull
         , isDeleted = Document.isDeleted entityModel
@@ -158,7 +160,7 @@ projectGroup getTabIndexAVForEntity todoList project =
         config : Config
         config =
             { groupByFn = Todo.getProjectId
-            , namePrefix = "@"
+            , namePrefix = "#"
             , entityWrapper = Entity.ProjectEntity
             , nullEntity = Project.null
             , isNull = Project.isNull

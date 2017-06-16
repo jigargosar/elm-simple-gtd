@@ -222,35 +222,12 @@ paper-item, .has-hover-elements {
   }
 }
 
-.project-list {
-  background-color: white;
-
-  & .project-item {
-    border-top: 1px solid rgba(179, 179, 179, 0.53);
-  }
-}
-
-.entity-list-title {
-  text-transform: capitalize;
-//font-size: 0.9rem; font-weight: 600; color: rgba(0, 0, 0, 0.44); display: inline-block;
-}
-
-paper-item {
-//min-height:40px;
-}
-
 paper-listbox {
   background-color: transparent;
 }
 
-.entity-item {
-  margin-top: 2rem;
-  z-index: 1;
-//padding: 0.5rem; outline: none; border-left: 2px solid transparent;
-}
-
-.focusable-list  .entity-item {
-  &[tabindex="0"] .title {
+.focusable-list .entity-item {
+  /*&[tabindex="0"] .title {
     font-weight: bolder;
     color: rgba(0, 0, 172, 0.44);
   }
@@ -262,7 +239,24 @@ paper-listbox {
   &.edit[tabindex="0"]:before {
       background-color: transparent;
       opacity: 1;
+  }*/
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border-left: 2px solid transparent;
+
+  &:not(.selected):before {
+    background-color: transparent;
   }
+
+  &[tabindex="0"] {
+    border-left: 2px solid rgba(0, 0, 172, 0.44);
+  }
+
+  &:focus[tabindex="0"] {
+    border-left: 2px solid rgba(0, 0, 172, 0.77);
+  }
+
+
 }
 
 #popup-menu {
@@ -273,15 +267,13 @@ paper-listbox {
 }
 
 .focusable-list  .todo-item {
-  padding: 0.5rem 1rem;
   background-color: white;
-  //box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-  outline: none;
   border-left: 2px solid transparent;
 
   &:not(.selected):before {
     background-color: transparent;
   }
+  
   & paper-button.small .title {
     text-transform: none;
     font-size: 14px;
@@ -329,11 +321,6 @@ paper-listbox {
 
 }
 
-#in-basket-flow-container {
-  padding: 1rem;
-  background-color: white;
-}
-
 .big-dialog {
   position: absolute;
   width: 300px;
@@ -351,10 +338,6 @@ paper-listbox {
 
 .padding-0 {
   padding: 0;
-}
-
-.padding-left-1rem {
-  padding-left: 1rem;
 }
 
 .margin-0 {

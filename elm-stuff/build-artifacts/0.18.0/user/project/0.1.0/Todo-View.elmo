@@ -398,7 +398,6 @@ var _user$project$Todo_View$createScheduleViewModel = F2(
 		};
 	});
 var _user$project$Todo_View$editScheduleButton = function (vm) {
-	var reminderVM = vm.reminder;
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -410,7 +409,7 @@ var _user$project$Todo_View$editScheduleButton = function (vm) {
 				_0: _elm_lang$html$Html_Attributes$class('layout horizontal center-center'),
 				_1: {
 					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(reminderVM.startEditingMsg),
+					_0: _elm_lang$html$Html_Events$onClick(vm.reminder.startEditingMsg),
 					_1: {ctor: '[]'}
 				}
 			}
@@ -424,7 +423,7 @@ var _user$project$Todo_View$editScheduleButton = function (vm) {
 					_0: _elm_lang$html$Html_Attributes$classList(
 						{
 							ctor: '::',
-							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'overdue', reminderVM.isOverDue),
+							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'overdue', vm.reminder.isOverDue),
 							_1: {
 								ctor: '::',
 								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'reminder-text', true),
@@ -435,7 +434,7 @@ var _user$project$Todo_View$editScheduleButton = function (vm) {
 				},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(reminderVM.displayText),
+					_0: _elm_lang$html$Html$text(vm.reminder.displayText),
 					_1: {ctor: '[]'}
 				}),
 			_1: {

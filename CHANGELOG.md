@@ -1,3 +1,6 @@
+## Upcoming
+* click/edit annoyance: workaround: trigger editing on text click, only when item is tav 0 
+
 ## v0.18.29 - 2017-06-16
 * todo edit mode: get rid of maybe mode and use overlay.
 

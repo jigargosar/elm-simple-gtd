@@ -261,7 +261,10 @@ paper-listbox {
 }
 
 .focusable-list .todo-item {
-  &.can-be-focused .display-text {
+  & .display-text-container {
+    cursor: default;
+  }
+  &.can-be-focused .display-text-container {
     cursor: pointer;
   }
 }

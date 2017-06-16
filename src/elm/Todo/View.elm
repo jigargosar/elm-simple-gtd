@@ -227,6 +227,7 @@ item vm =
         ]
         [ div
             [ onClickStopPropagation vm.startEditingMsg
+            , class "display-text-container"
             ]
             [ doneIconButton vm
             , span [ class "display-text" ] [ text vm.displayText ]

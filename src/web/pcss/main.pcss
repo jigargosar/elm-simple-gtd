@@ -41,6 +41,8 @@ a {
   }
 }
 
+
+
 i {
   user-select: none;
 }
@@ -267,8 +269,9 @@ paper-listbox {
   margin-bottom: 1rem;
 }
 
-.entity-list > .collection-item:first-child[tabindex="-1"] {
-  background-color: transparent !important;
+.entity-list > .collection-item:first-child[tabindex="0"] {
+  background-color: white;
+  border-bottom: 1px solid gray(90%);
 }
 
 .focusable-list .todo-item {

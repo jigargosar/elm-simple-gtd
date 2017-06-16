@@ -97,7 +97,7 @@ var _user$project$Project_View$edit = function (form) {
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('Name'),
+												_0: _elm_lang$html$Html$text('Project Name'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}

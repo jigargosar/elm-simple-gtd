@@ -56,7 +56,7 @@ edit form =
                             , onInput fireNameChanged
                             ]
                             []
-                        , label [ class "active" ] [ text "Name" ]
+                        , label [ class "active" ] [ text "Context Name" ]
                         ]
                     , defaultOkCancelDeleteButtons fireToggleDelete
                     ]

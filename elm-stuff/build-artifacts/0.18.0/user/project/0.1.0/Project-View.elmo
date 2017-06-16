@@ -15,7 +15,14 @@ var _user$project$Project_View$edit = function (form) {
 			_1: {
 				ctor: '::',
 				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(fireCancel),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+						function (_p1) {
+							return _user$project$Model$NOOP;
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		},
 		{
@@ -50,7 +57,7 @@ var _user$project$Project_View$edit = function (form) {
 									_1: {
 										ctor: '::',
 										_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-											function (_p1) {
+											function (_p2) {
 												return _user$project$Model$NOOP;
 											}),
 										_1: {

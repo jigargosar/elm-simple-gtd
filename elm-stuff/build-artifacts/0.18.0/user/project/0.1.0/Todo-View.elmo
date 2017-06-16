@@ -207,7 +207,14 @@ var _user$project$Todo_View$edit = F2(
 				_1: {
 					ctor: '::',
 					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Todo_View$fireCancel),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+							function (_p8) {
+								return _user$project$Model$NOOP;
+							}),
+						_1: {ctor: '[]'}
+					}
 				}
 			},
 			{
@@ -242,7 +249,7 @@ var _user$project$Todo_View$edit = F2(
 										_1: {
 											ctor: '::',
 											_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
-												function (_p8) {
+												function (_p9) {
 													return _user$project$Model$NOOP;
 												}),
 											_1: {ctor: '[]'}
@@ -299,7 +306,14 @@ var _user$project$Todo_View$new = function (form) {
 			_1: {
 				ctor: '::',
 				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Todo_View$fireCancel),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+						function (_p10) {
+							return _user$project$Model$NOOP;
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		},
 		{
@@ -692,9 +706,9 @@ var _user$project$Todo_View$defaultView = function (vm) {
 var _user$project$Todo_View$getDisplayText = function (todo) {
 	var trimAndReplaceEmptyWithDefault = A2(
 		_user$project$Ext_Function_Infix_ops['>>?='],
-		function (_p9) {
+		function (_p11) {
 			return _elm_community$string_extra$String_Extra$nonEmpty(
-				_elm_lang$core$String$trim(_p9));
+				_elm_lang$core$String$trim(_p11));
 		},
 		'< empty >');
 	var tripleNewLineAndRestRegex = _elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*');
@@ -742,11 +756,11 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 					'Inbox')));
 		var todoId = _user$project$Document$getId(todo);
 		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
-		var onKeyDownMsg = function (_p10) {
-			var _p11 = _p10;
-			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p11)) {
-				var _p12 = _p11.key;
-				switch (_p12.ctor) {
+		var onKeyDownMsg = function (_p12) {
+			var _p13 = _p12;
+			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p13)) {
+				var _p14 = _p13.key;
+				switch (_p14.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 					case 'CharE':
@@ -793,8 +807,8 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		};
 	});
 var _user$project$Todo_View$dropdownTrigger = F2(
-	function (_p13, content) {
-		var _p14 = _p13;
+	function (_p15, content) {
+		var _p16 = _p15;
 		return A2(
 			_edvail$elm_polymer$Polymer_Paper$button,
 			{
@@ -813,7 +827,7 @@ var _user$project$Todo_View$dropdownTrigger = F2(
 						_0: _elm_lang$html$Html_Attributes$class('small padding-0 margin-0 shrink'),
 						_1: {
 							ctor: '::',
-							_0: _p14.tabindexAV,
+							_0: _p16.tabindexAV,
 							_1: {ctor: '[]'}
 						}
 					}

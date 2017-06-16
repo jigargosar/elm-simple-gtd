@@ -202,30 +202,44 @@ var _user$project$Menu$view = F3(
 				_user$project$Ext_Function_Infix_ops['>>>'],
 				_user$project$Menu$createItemViewModel(menuVM),
 				_user$project$Menu$menuItemView));
-		return _user$project$View_FullBleedCapture$init(
+		return A2(
+			_elm_lang$html$Html$div,
 			{
-				onMouseDown: config.onOutsideMouseDown,
-				children: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('overlay'),
+				_1: {
 					ctor: '::',
-					_0: A3(
-						_elm_lang$html$Html_Keyed$node,
-						'ul',
-						{
+					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(config.onOutsideMouseDown),
+					_1: {
+						ctor: '::',
+						_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+							function (_p11) {
+								return config.noOp;
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A3(
+					_elm_lang$html$Html_Keyed$node,
+					'ul',
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$id('popup-menu'),
+						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$id('popup-menu'),
+							_0: _elm_lang$html$Html_Attributes$class('collection z-depth-4'),
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('collection z-depth-4'),
-								_1: {
-									ctor: '::',
-									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
-									_1: {ctor: '[]'}
-								}
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prevent-default-keys', 'Tab'),
+								_1: {ctor: '[]'}
 							}
-						},
-						itemViewList),
-					_1: {ctor: '[]'}
-				}
+						}
+					},
+					itemViewList),
+				_1: {ctor: '[]'}
 			});
 	});
 var _user$project$Menu$initState = {maybeFocusKey: _elm_lang$core$Maybe$Nothing};

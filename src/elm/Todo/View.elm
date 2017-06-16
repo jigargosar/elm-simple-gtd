@@ -49,7 +49,6 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import Polymer.Paper as Paper
-import View.FullBleedCapture
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons, hideOnHover)
 import ViewModel
 import WebComponents exposing (..)
@@ -352,6 +351,7 @@ edit form appModel =
         div
             [ class "overlay"
             , onClickStopPropagation fireCancel
+            , onKeyDownStopPropagation (\_ -> Model.NOOP)
             ]
             [ div [ class "modal fixed-center", onClickStopPropagation Model.NOOP ]
                 [ div [ class "modal-content" ]
@@ -374,6 +374,7 @@ new form =
     div
         [ class "overlay"
         , onClickStopPropagation fireCancel
+        , onKeyDownStopPropagation (\_ -> Model.NOOP)
         ]
         [ div [ class "modal fixed-center", onClickStopPropagation Model.NOOP ]
             [ div [ class "modal-content" ]

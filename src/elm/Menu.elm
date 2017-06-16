@@ -170,17 +170,18 @@ view items state config =
                 .#|> createItemViewModel menuVM
                 >>> menuItemView
     in
-        View.FullBleedCapture.init
-            { onMouseDown = config.onOutsideMouseDown
-            , children =
-                [ Html.Keyed.node "ul"
-                    [ id "popup-menu"
-                    , class "collection z-depth-4"
-                    , attribute "data-prevent-default-keys" "Tab"
-                    ]
-                    itemViewList
+        div
+            [ class "overlay"
+            , onClickStopPropagation config.onOutsideMouseDown
+            , onKeyDownStopPropagation (\_ -> config.noOp)
+            ]
+            [ Html.Keyed.node "ul"
+                [ id "popup-menu"
+                , class "collection z-depth-4"
+                , attribute "data-prevent-default-keys" "Tab"
                 ]
-            }
+                itemViewList
+            ]
 
 
 type alias ItemViewModel msg =

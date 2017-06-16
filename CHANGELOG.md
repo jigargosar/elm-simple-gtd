@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.28 - 2017-06-16
 * UX: entity-list view grouping 
 
 ## v0.18.27 - 2017-06-15

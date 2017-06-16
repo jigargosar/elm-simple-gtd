@@ -36,7 +36,7 @@ a {
 .collection > .collection-item {
   outline: none;
 
-  &:not(.active):focus {
+  &[tabindex="0"]:not(.active) {
     background-color: gray(95%);
   }
 }
@@ -137,9 +137,6 @@ iron-icon.account {
     background-color: transparent;
     pointer-events: none;
   }
-  &:focus:before {
-    opacity: 0.15;
-  }
 
   &.selected:before {
     background-color: rgb(255, 255, 0);
@@ -235,7 +232,6 @@ paper-listbox {
       background-color: transparent;
       opacity: 1;
   }*/
-  background-color: white;
   padding: 0.5rem 1rem;
   border-left: 2px solid transparent;
 
@@ -253,6 +249,10 @@ paper-listbox {
 
 }
 
+.focusable-list .entity-item[tab-index="0"] {
+
+}
+
 #popup-menu {
   position: absolute;
 //left: 100px; //top: 100px; background-color: white; overflow-y: scroll; overflow-x: hidden; max-height: 100vh; min-width: 20vw; max-width: 80vw;
@@ -263,12 +263,15 @@ paper-listbox {
   margin-right: 1rem;
 }
 
-.entity-list > .collection-item:first-child{
+.entity-list > .collection-item:first-child {
   margin-bottom: 1rem;
 }
 
+.entity-list > .collection-item:first-child[tabindex="-1"] {
+  background-color: transparent !important;
+}
+
 .focusable-list .todo-item {
-  background-color: white;
   border-left: 2px solid transparent;
 
   &:not(.selected):before {

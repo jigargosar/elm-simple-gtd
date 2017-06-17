@@ -10,38 +10,38 @@
     height: 100vh;
   };
 
-  --layout-vertical:{
+  --layout-vertical: {
     display: flex;
     align-items: stretch;
     flex-direction: column;
   };
 
-  --layout-horizontal:{
+  --layout-horizontal: {
     display: flex;
     align-items: center;
     flex-direction: row;
   };
 
+  --ul-layout: {
+    @apply --layout-vertical;
 
+    & li{
+      @apply --layout-horizontal;
+      width: 100%;
+      & ul{
+        width: 100%;
+      }
+    }
+  };
 }
 
 * {
   box-sizing: border-box;
 }
 
-
-ul{
-  @apply --layout-vertical;
-
-  & li{
-    @apply --layout-horizontal;
-    width: 100%;
-    & ul{
-      width: 100%;
-    }
-  }
+ul {
+  @apply  --ul-layout;
 }
-
 
 a {
   cursor: pointer;
@@ -333,7 +333,7 @@ paper-listbox {
     padding: 0 8px;
     /*white-space: pre-line; !*sequences of whitespace are collapsed*!*/
     /* when indenting items using star, whitespace should not be lost*/
-    //overflow-wrap: break-word; white-space: pre-wrap; /*sequences of whitespace are preserved*/ //word-break: normal; hyphens: auto;
+  //overflow-wrap: break-word; white-space: pre-wrap; /*sequences of whitespace are preserved*/ //word-break: normal; hyphens: auto;
   }
 
   & .reminder-text.overdue {

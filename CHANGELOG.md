@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.35 - 2017-06-17
 * fix: edit todo only when selected. by using onMouseDown, instead of onClick event. 
 
 ## v0.18.34 - 2017-06-17

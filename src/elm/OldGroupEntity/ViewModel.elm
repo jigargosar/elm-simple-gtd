@@ -202,7 +202,7 @@ contexts model =
         , title = "Contexts"
         , showDeleted = model.showDeleted
         , onAddClicked = Model.NewContext
-        , icon = { name = "group-work", color = contextsColor }
+        , icon = { name = "group_work", color = contextsColor }
         }
 
 
@@ -232,7 +232,7 @@ projects model =
         , showDeleted = model.showDeleted
         , onAddClicked = Model.NewProject
         , icon =
-            { name = "group-work"
+            { name = "group_work"
             , color = projectsColor
             }
         }

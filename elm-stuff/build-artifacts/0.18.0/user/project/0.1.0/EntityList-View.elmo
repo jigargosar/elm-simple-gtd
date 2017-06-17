@@ -28,7 +28,7 @@ var _user$project$EntityList_View$flatTodoListView = F2(
 								{
 									ctor: '::',
 									_0: A2(
-										_elm_lang$html$Html$h4,
+										_elm_lang$html$Html$h5,
 										{ctor: '[]'},
 										{
 											ctor: '::',

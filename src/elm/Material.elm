@@ -12,8 +12,16 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 
 
-icon name =
+smallIcon name =
     i [ class "material-icons small" ] [ text name ]
+
+
+icon name =
+    i [ class "material-icons" ] [ text name ]
+
+
+iconA name attr =
+    div attr [ i [ class "material-icons" ] [ text name ] ]
 
 
 iconButton name attributes =
@@ -24,3 +32,7 @@ iconButton name attributes =
 smallIconButton name attributes =
     a ([ class "btn-flat btn-floating x24 " ] ++ attributes)
         [ i [ class "material-icons" ] [ text name ] ]
+
+
+divider =
+    div [ class "divider" ] []

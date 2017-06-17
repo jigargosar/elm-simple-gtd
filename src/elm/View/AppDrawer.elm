@@ -1,5 +1,6 @@
 module View.AppDrawer exposing (..)
 
+import AppDrawer.List
 import Document
 import Entity
 import OldGroupEntity.ViewModel
@@ -34,7 +35,7 @@ import WebComponents exposing (iconA, onBoolPropertyChanged, paperIconButton)
 
 
 view : ViewModel.Model -> Model.Model -> Html Msg
-view viewModel m =
+view appVM model =
     App.drawer
         [ boolProperty "swipeOpen" True
         , attribute "slot" "drawer"
@@ -49,7 +50,7 @@ view viewModel m =
                 [ App.toolbar
                     [ style
                         [ "color" => "white"
-                        , "background-color" => viewModel.header.backgroundColor
+                        , "background-color" => appVM.header.backgroundColor
                         ]
                     ]
                     [ div []
@@ -61,10 +62,10 @@ view viewModel m =
                             ]
                             []
                         ]
-                    , leftHeader m
+                    , leftHeader model
                     ]
                 ]
-            , navList viewModel m
+            , AppDrawer.List.view appVM model
             ]
         ]
 
@@ -104,111 +105,3 @@ leftHeader m =
                 , a [ target "_blank", href "mailto:jigar.gosar@gmail.com" ] [ text "Email Author" ]
                 ]
             ]
-
-
-navList viewModel m =
-    let
-        { contexts, projects } =
-            viewModel
-    in
-        Html.node "paper-listbox"
-            [ stringProperty "selectable" "paper-item"
-            , intProperty "selected" (getSelectedIndex m.mainViewType viewModel)
-            ]
-            (entityListView contexts m.mainViewType
-                ++ [ divider ]
-                ++ entityListView projects m.mainViewType
-                ++ [ divider ]
-                ++ [ onSetEntityListView "delete" Entity.BinView "Bin"
-                   , onSetEntityListView "done" Entity.DoneView "Done"
-                   , switchViewItem "notification:sync" SyncView "Custom Sync"
-                   ]
-            )
-
-
-getSelectedIndex mainViewType { projects, contexts } =
-    let
-        projectsIndex =
-            1 + (List.length contexts.entityList)
-
-        contextIndexById id =
-            contexts.entityList |> List.findIndex (.id >> equals id) >>?= 0
-
-        projectIndexById id =
-            projects.entityList |> List.findIndex (.id >> equals id) >>?= 0
-
-        lastProjectIndex =
-            projectsIndex + (List.length projects.entityList)
-    in
-        case mainViewType of
-            EntityListView viewType ->
-                case viewType of
-                    Entity.ContextsView ->
-                        0
-
-                    Entity.ContextView id ->
-                        1 + (contextIndexById id)
-
-                    Entity.ProjectsView ->
-                        projectsIndex
-
-                    Entity.ProjectView id ->
-                        1 + projectsIndex + (projectIndexById id)
-
-                    Entity.BinView ->
-                        lastProjectIndex + 1
-
-                    Entity.DoneView ->
-                        lastProjectIndex + 2
-
-            SyncView ->
-                lastProjectIndex + 3
-
-
-divider =
-    div [ class "divider" ] []
-
-
-entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
-    [ item [ class "has-hover-elements" ]
-        [ Html.node "iron-icon" [ iconA icon.name, style [ "color" => icon.color ] ] []
-        , itemBody [ onClick (SwitchView (EntityListView viewType)) ] [ headLineText title ]
-        , div [ class "show-on-hover layout horizontal center" ]
-            [ toggleButton [ checked showDeleted, onClick Model.ToggleShowDeletedEntity ] []
-            , WebComponents.icon "delete" []
-            , iconButton [ iconA "add", onClickPreventDefaultAndStopPropagation onAddClicked ] []
-            ]
-        ]
-
-    --    , divider
-    ]
-        ++ (List.map entityListItem entityList)
-
-
-entityListItem : OldGroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg
-entityListItem vm =
-    item [ onClick (vm.onActiveStateChanged True) ]
-        [ Html.node "iron-icon" [ iconA vm.icon.name, style [ "color" => vm.icon.color ] ] []
-        , itemBody [] [ View.Shared.defaultBadge vm ]
-        , div [ class "show-on-hover" ]
-            [ WebComponents.iconButton "settings" [ onClick vm.startEditingMsg ]
-            ]
-        ]
-
-
-headLineText title =
-    div [ class "big-paper-item-text" ] [ text title ]
-
-
-switchViewItem iconName viewType title =
-    item [ onClick (SwitchView viewType) ]
-        [ Html.node "iron-icon" [ iconA iconName ] []
-        , itemBody [] [ text title ]
-        ]
-
-
-onSetEntityListView iconName viewType title =
-    item [ onClick (OnSetEntityListView viewType) ]
-        [ Html.node "iron-icon" [ iconA iconName ] []
-        , itemBody [] [ text title ]
-        ]

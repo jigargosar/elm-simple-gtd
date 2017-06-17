@@ -1,3 +1,11 @@
+var _user$project$Material$divider = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('divider'),
+		_1: {ctor: '[]'}
+	},
+	{ctor: '[]'});
 var _user$project$Material$smallIconButton = F2(
 	function (name, attributes) {
 		return A2(
@@ -56,7 +64,43 @@ var _user$project$Material$iconButton = F2(
 				_1: {ctor: '[]'}
 			});
 	});
+var _user$project$Material$iconA = F2(
+	function (name, attr) {
+		return A2(
+			_elm_lang$html$Html$div,
+			attr,
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$i,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(name),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
 var _user$project$Material$icon = function (name) {
+	return A2(
+		_elm_lang$html$Html$i,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(name),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Material$smallIcon = function (name) {
 	return A2(
 		_elm_lang$html$Html$i,
 		{

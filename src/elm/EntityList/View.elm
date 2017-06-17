@@ -127,6 +127,6 @@ flatTodoListView title todoListView =
     [ ( title
       , Html.Keyed.node "div"
             [ class "todo-list collection" ]
-            (( title, div [ class "collection-item" ] [ h4 [] [ text title ] ] ) :: todoListView)
+            (( title, div [ class "collection-item" ] [ h5 [] [ text title ] ] ) :: todoListView)
       )
     ]

@@ -1,382 +1,9 @@
-var _user$project$View_AppDrawer$onSetEntityListView = F3(
-	function (iconName, viewType, title) {
-		return A2(
-			_edvail$elm_polymer$Polymer_Paper$item,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Model$OnSetEntityListView(viewType)),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A3(
-					_elm_lang$html$Html$node,
-					'iron-icon',
-					{
-						ctor: '::',
-						_0: _user$project$WebComponents$iconA(iconName),
-						_1: {ctor: '[]'}
-					},
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_edvail$elm_polymer$Polymer_Paper$itemBody,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(title),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			});
-	});
-var _user$project$View_AppDrawer$switchViewItem = F3(
-	function (iconName, viewType, title) {
-		return A2(
-			_edvail$elm_polymer$Polymer_Paper$item,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Model$SwitchView(viewType)),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A3(
-					_elm_lang$html$Html$node,
-					'iron-icon',
-					{
-						ctor: '::',
-						_0: _user$project$WebComponents$iconA(iconName),
-						_1: {ctor: '[]'}
-					},
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_edvail$elm_polymer$Polymer_Paper$itemBody,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(title),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			});
-	});
-var _user$project$View_AppDrawer$headLineText = function (title) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('big-paper-item-text'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text(title),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$View_AppDrawer$entityListItem = function (vm) {
-	return A2(
-		_edvail$elm_polymer$Polymer_Paper$item,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(
-				vm.onActiveStateChanged(true)),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A3(
-				_elm_lang$html$Html$node,
-				'iron-icon',
-				{
-					ctor: '::',
-					_0: _user$project$WebComponents$iconA(vm.icon.name),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$style(
-							{
-								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', vm.icon.color),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				},
-				{ctor: '[]'}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_Paper$itemBody,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _user$project$View_Shared$defaultBadge(vm),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('show-on-hover'),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_user$project$WebComponents$iconButton,
-								'settings',
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
-var _user$project$View_AppDrawer$entityListView = F2(
-	function (_p0, mainViewType) {
-		var _p1 = _p0;
-		var _p2 = _p1.icon;
-		return A2(
-			_elm_lang$core$Basics_ops['++'],
-			{
-				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_Paper$item,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('has-hover-elements'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A3(
-							_elm_lang$html$Html$node,
-							'iron-icon',
-							{
-								ctor: '::',
-								_0: _user$project$WebComponents$iconA(_p2.name),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$style(
-										{
-											ctor: '::',
-											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', _p2.color),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							},
-							{ctor: '[]'}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_edvail$elm_polymer$Polymer_Paper$itemBody,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(
-										_user$project$Model$SwitchView(
-											_user$project$Model$EntityListView(_p1.viewType))),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _user$project$View_AppDrawer$headLineText(_p1.title),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('show-on-hover layout horizontal center'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: A2(
-											_edvail$elm_polymer$Polymer_Paper$toggleButton,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$checked(_p1.showDeleted),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleShowDeletedEntity),
-													_1: {ctor: '[]'}
-												}
-											},
-											{ctor: '[]'}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_user$project$WebComponents$icon,
-												'delete',
-												{ctor: '[]'}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_edvail$elm_polymer$Polymer_Paper$iconButton,
-													{
-														ctor: '::',
-														_0: _user$project$WebComponents$iconA('add'),
-														_1: {
-															ctor: '::',
-															_0: _elm_community$html_extra$Html_Events_Extra$onClickPreventDefaultAndStopPropagation(_p1.onAddClicked),
-															_1: {ctor: '[]'}
-														}
-													},
-													{ctor: '[]'}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}
-					}),
-				_1: {ctor: '[]'}
-			},
-			A2(_elm_lang$core$List$map, _user$project$View_AppDrawer$entityListItem, _p1.entityList));
-	});
-var _user$project$View_AppDrawer$divider = A2(
-	_elm_lang$html$Html$div,
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('divider'),
-		_1: {ctor: '[]'}
-	},
-	{ctor: '[]'});
-var _user$project$View_AppDrawer$getSelectedIndex = F2(
-	function (mainViewType, _p3) {
-		var _p4 = _p3;
-		var _p10 = _p4.projects;
-		var _p9 = _p4.contexts;
-		var projectIndexById = function (id) {
-			return A2(
-				_user$project$Ext_Function_Infix_ops['>>?='],
-				_elm_community$list_extra$List_Extra$findIndex(
-					function (_p5) {
-						return A2(
-							_user$project$Ext_Function$equals,
-							id,
-							function (_) {
-								return _.id;
-							}(_p5));
-					}),
-				0)(_p10.entityList);
-		};
-		var contextIndexById = function (id) {
-			return A2(
-				_user$project$Ext_Function_Infix_ops['>>?='],
-				_elm_community$list_extra$List_Extra$findIndex(
-					function (_p6) {
-						return A2(
-							_user$project$Ext_Function$equals,
-							id,
-							function (_) {
-								return _.id;
-							}(_p6));
-					}),
-				0)(_p9.entityList);
-		};
-		var projectsIndex = 1 + _elm_lang$core$List$length(_p9.entityList);
-		var lastProjectIndex = projectsIndex + _elm_lang$core$List$length(_p10.entityList);
-		var _p7 = mainViewType;
-		if (_p7.ctor === 'EntityListView') {
-			var _p8 = _p7._0;
-			switch (_p8.ctor) {
-				case 'ContextsView':
-					return 0;
-				case 'ContextView':
-					return 1 + contextIndexById(_p8._0);
-				case 'ProjectsView':
-					return projectsIndex;
-				case 'ProjectView':
-					return (1 + projectsIndex) + projectIndexById(_p8._0);
-				case 'BinView':
-					return lastProjectIndex + 1;
-				default:
-					return lastProjectIndex + 2;
-			}
-		} else {
-			return lastProjectIndex + 3;
-		}
-	});
-var _user$project$View_AppDrawer$navList = F2(
-	function (viewModel, m) {
-		var _p11 = viewModel;
-		var contexts = _p11.contexts;
-		var projects = _p11.projects;
-		return A3(
-			_elm_lang$html$Html$node,
-			'paper-listbox',
-			{
-				ctor: '::',
-				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$stringProperty, 'selectable', 'paper-item'),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_community$html_extra$Html_Attributes_Extra$intProperty,
-						'selected',
-						A2(_user$project$View_AppDrawer$getSelectedIndex, m.mainViewType, viewModel)),
-					_1: {ctor: '[]'}
-				}
-			},
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				A2(_user$project$View_AppDrawer$entityListView, contexts, m.mainViewType),
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					{
-						ctor: '::',
-						_0: _user$project$View_AppDrawer$divider,
-						_1: {ctor: '[]'}
-					},
-					A2(
-						_elm_lang$core$Basics_ops['++'],
-						A2(_user$project$View_AppDrawer$entityListView, projects, m.mainViewType),
-						A2(
-							_elm_lang$core$Basics_ops['++'],
-							{
-								ctor: '::',
-								_0: _user$project$View_AppDrawer$divider,
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A3(_user$project$View_AppDrawer$onSetEntityListView, 'delete', _user$project$Entity$BinView, 'Bin'),
-								_1: {
-									ctor: '::',
-									_0: A3(_user$project$View_AppDrawer$onSetEntityListView, 'done', _user$project$Entity$DoneView, 'Done'),
-									_1: {
-										ctor: '::',
-										_0: A3(_user$project$View_AppDrawer$switchViewItem, 'notification:sync', _user$project$Model$SyncView, 'Custom Sync'),
-										_1: {ctor: '[]'}
-									}
-								}
-							})))));
-	});
 var _user$project$View_AppDrawer$newIssueURL = 'https://github.com/jigargosar/elm-simple-gtd/issues/new';
 var _user$project$View_AppDrawer$newPostURL = 'https://groups.google.com/forum/#!newtopic/simplegtd';
 var _user$project$View_AppDrawer$forumsURL = 'https://groups.google.com/forum/#!forum/simplegtd';
 var _user$project$View_AppDrawer$changeLogURL = 'https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md';
 var _user$project$View_AppDrawer$leftHeader = function (m) {
-	var _p12 = m.developmentMode ? {
+	var _p0 = m.developmentMode ? {
 		ctor: '_Tuple2',
 		_0: A2(_elm_lang$core$Basics_ops['++'], 'Dev v', m.appVersion),
 		_1: A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)
@@ -385,8 +12,8 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 		_0: 'SimpleGTD.com',
 		_1: A2(_elm_lang$core$Basics_ops['++'], 'v', m.appVersion)
 	};
-	var t1 = _p12._0;
-	var t2 = _p12._1;
+	var t1 = _p0._0;
+	var t2 = _p0._1;
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -477,7 +104,7 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 		});
 };
 var _user$project$View_AppDrawer$view = F2(
-	function (viewModel, m) {
+	function (appVM, model) {
 		return A2(
 			_edvail$elm_polymer$Polymer_App$drawer,
 			{
@@ -523,7 +150,7 @@ var _user$project$View_AppDrawer$view = F2(
 												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', 'white'),
 												_1: {
 													ctor: '::',
-													_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'background-color', viewModel.header.backgroundColor),
+													_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'background-color', appVM.header.backgroundColor),
 													_1: {ctor: '[]'}
 												}
 											}),
@@ -560,7 +187,7 @@ var _user$project$View_AppDrawer$view = F2(
 											}),
 										_1: {
 											ctor: '::',
-											_0: _user$project$View_AppDrawer$leftHeader(m),
+											_0: _user$project$View_AppDrawer$leftHeader(model),
 											_1: {ctor: '[]'}
 										}
 									}),
@@ -568,7 +195,7 @@ var _user$project$View_AppDrawer$view = F2(
 							}),
 						_1: {
 							ctor: '::',
-							_0: A2(_user$project$View_AppDrawer$navList, viewModel, m),
+							_0: A2(_user$project$AppDrawer_List$view, appVM, model),
 							_1: {ctor: '[]'}
 						}
 					}),

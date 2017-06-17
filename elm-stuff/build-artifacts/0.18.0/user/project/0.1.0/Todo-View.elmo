@@ -610,7 +610,7 @@ var _user$project$Todo_View$item = function (vm) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+					_0: _elm_lang$html$Html_Events$onMouseDown(vm.startEditingMsg),
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$class('display-text-container'),

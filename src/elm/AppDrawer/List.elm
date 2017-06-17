@@ -46,13 +46,15 @@ view appVM model =
         { contexts, projects } =
             appVM
     in
-        ul [ class "app-drawer-list" ]
-            [ toggleDeletedItem model
-            , entityListView contexts model.mainViewType
-            , entityListView projects model.mainViewType
-            , onSetEntityListViewItem "delete" Entity.BinView "Bin"
-            , onSetEntityListViewItem "done" Entity.DoneView "Done"
-            , switchViewItem "notification:sync" SyncView "Custom Sync"
+        div [ class "app-drawer-list" ]
+            [ ul []
+                [ toggleDeletedItem model
+                , entityListView contexts model.mainViewType
+                , entityListView projects model.mainViewType
+                , onSetEntityListViewItem "delete" Entity.BinView "Bin"
+                , onSetEntityListViewItem "done" Entity.DoneView "Done"
+                , switchViewItem "notification:sync" SyncView "Custom Sync"
+                ]
             ]
 
 

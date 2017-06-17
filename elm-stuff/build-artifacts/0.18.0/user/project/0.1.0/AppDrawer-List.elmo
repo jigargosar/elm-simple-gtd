@@ -306,7 +306,7 @@ var _user$project$AppDrawer_List$view = F2(
 		var contexts = _p3.contexts;
 		var projects = _p3.projects;
 		return A2(
-			_elm_lang$html$Html$ul,
+			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html_Attributes$class('app-drawer-list'),
@@ -314,27 +314,34 @@ var _user$project$AppDrawer_List$view = F2(
 			},
 			{
 				ctor: '::',
-				_0: _user$project$AppDrawer_List$toggleDeletedItem(model),
-				_1: {
-					ctor: '::',
-					_0: A2(_user$project$AppDrawer_List$entityListView, contexts, model.mainViewType),
-					_1: {
+				_0: A2(
+					_elm_lang$html$Html$ul,
+					{ctor: '[]'},
+					{
 						ctor: '::',
-						_0: A2(_user$project$AppDrawer_List$entityListView, projects, model.mainViewType),
+						_0: _user$project$AppDrawer_List$toggleDeletedItem(model),
 						_1: {
 							ctor: '::',
-							_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'delete', _user$project$Entity$BinView, 'Bin'),
+							_0: A2(_user$project$AppDrawer_List$entityListView, contexts, model.mainViewType),
 							_1: {
 								ctor: '::',
-								_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'done', _user$project$Entity$DoneView, 'Done'),
+								_0: A2(_user$project$AppDrawer_List$entityListView, projects, model.mainViewType),
 								_1: {
 									ctor: '::',
-									_0: A3(_user$project$AppDrawer_List$switchViewItem, 'notification:sync', _user$project$Model$SyncView, 'Custom Sync'),
-									_1: {ctor: '[]'}
+									_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'delete', _user$project$Entity$BinView, 'Bin'),
+									_1: {
+										ctor: '::',
+										_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'done', _user$project$Entity$DoneView, 'Done'),
+										_1: {
+											ctor: '::',
+											_0: A3(_user$project$AppDrawer_List$switchViewItem, 'notification:sync', _user$project$Model$SyncView, 'Custom Sync'),
+											_1: {ctor: '[]'}
+										}
+									}
 								}
 							}
 						}
-					}
-				}
+					}),
+				_1: {ctor: '[]'}
 			});
 	});

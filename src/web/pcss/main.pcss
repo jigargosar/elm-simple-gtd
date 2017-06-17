@@ -23,24 +23,25 @@
   };
 
   --ul-layout: {
-    @apply --layout-vertical;
-
-    & li{
-      @apply --layout-horizontal;
+    & ul {
+      @apply --layout-vertical;
       width: 100%;
-      & ul{
+      & li {
+        @apply --layout-horizontal;
+        padding-left: 1rem;
         width: 100%;
       }
     }
   };
+
 }
 
 * {
   box-sizing: border-box;
 }
 
-.app-drawer-list.ul {
-  @apply  --ul-layout;
+.app-drawer-list {
+  @apply --ul-layout;
 }
 
 a {

@@ -1,8 +1,6 @@
 ## Upcoming
-* fix: entity list focus ux 
-
-## Upcoming
-* fix: notification cron error 
+* fix: notification cron error
+* fix: entity list focus ux
 
 ## v0.18.33 - 2017-06-16
 * Simplify: first screen. 

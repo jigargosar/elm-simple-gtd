@@ -1,3 +1,7 @@
+## Upcoming
+* adding sass loader for configuring material styling options. And perhaps we could use sass to make our styles more modular than what postcss-cssnext has to offer.
+* simplify app drawer: use custom styling
+
 ## v0.18.35 - 2017-06-17
 * fix: edit todo only when selected. by using onMouseDown, instead of onClick event. 
 

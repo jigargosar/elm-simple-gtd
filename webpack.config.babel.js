@@ -26,7 +26,7 @@ export default {
     // devtool: isDevEnv? "": "source-map",
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
-        common: ["materialize-loader!./materialize.config.js", "./src/web/common-require.js"],
+        common: ["./src/web/common-require.js"],
         main: ["./src/web/main.js"]
     },
 

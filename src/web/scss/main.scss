@@ -1,5 +1,12 @@
-@import "material/materialize";
+@charset "UTF-8";
 
-.app-drawer-list {
-  color:red;
-}
+@import "material/components/color";
+
+$primary-color: color("red", "lighten-2")!default;
+$secondary-color: color("red", "lighten-1")!default;
+
+$primary-color: color("indigo", "lighten-2");
+$secondary-color: color("indigo", "lighten-1");
+
+
+@import "material/materialize";

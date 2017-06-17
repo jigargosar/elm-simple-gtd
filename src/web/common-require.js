@@ -4,9 +4,9 @@ require("./bower_components/webcomponentsjs/webcomponents-loader")
 
 // style
 // require("materialize-css/bin/materialize.css")
-require("materialize-css")
-require("./pcss/main.pcss")
+require("materialize-css/dist/js/materialize.min")
 require("./scss/main.scss")
+require("./pcss/main.pcss")
 
 
 // lib

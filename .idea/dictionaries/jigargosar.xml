@@ -18,6 +18,7 @@
       <w>noop</w>
       <w>pouchdb</w>
       <w>precache</w>
+      <w>prefixer</w>
       <w>rimraf</w>
       <w>runfile</w>
       <w>sgtd</w>

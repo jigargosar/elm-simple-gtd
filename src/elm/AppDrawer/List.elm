@@ -13,9 +13,10 @@ import OldGroupEntity.ViewModel
 import Html.Attributes.Extra exposing (..)
 import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
 import Html.Keyed as Keyed
-import Html exposing (Attribute, Html, a, div, hr, li, node, span, text, ul)
-import Html.Attributes exposing (attribute, autofocus, checked, class, classList, href, id, style, tabindex, target, value)
+import Html exposing (..)
+import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Html.Events.Extra exposing (onClickStopPropagation)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model exposing (Msg(SwitchView), commonMsg)
 import String.Extra
@@ -30,7 +31,7 @@ import Json.Encode
 import List.Extra as List
 import Model exposing (..)
 import Todo
-import Polymer.Paper exposing (..)
+import Polymer.Paper as Paper
 import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
@@ -56,12 +57,29 @@ view appVM model =
 
 
 toggleDeletedItem model =
-    toggleButton
-        [ class ""
-        , checked model.showDeleted
-        , onClick Model.ToggleShowDeletedEntity
+    {- toggleButton
+       [ class ""
+       , checked model.showDeleted
+       , onClick Model.ToggleShowDeletedEntity
+       ]
+       [ text "Toggle Deleted" ]
+    -}
+    div []
+        [ div [ class "switch" ]
+            [ label []
+                [ input
+                    [ type_ "checkbox"
+                    , checked model.showDeleted
+                    , onClick Model.ToggleShowDeletedEntity
+                    ]
+                    []
+                , text "off"
+                , span [ class "lever" ] []
+                , text "on"
+                ]
+            ]
+        , div [] [ text "Show Deleted" ]
         ]
-        [ text "Toggle Deleted" ]
 
 
 entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
@@ -89,19 +107,19 @@ entityListItem vm =
         , onClick (vm.onActiveStateChanged True)
         ]
         [ Html.node "iron-icon" [ iconA vm.icon.name, style [ "color" => vm.icon.color ] ] []
-        , itemBody [] [ View.Shared.defaultBadge vm ]
+        , Paper.itemBody [] [ View.Shared.defaultBadge vm ]
         ]
 
 
 switchViewItem iconName viewType title =
-    item [ onClick (SwitchView viewType) ]
+    Paper.item [ onClick (SwitchView viewType) ]
         [ Html.node "iron-icon" [ iconA iconName ] []
-        , itemBody [] [ text title ]
+        , Paper.itemBody [] [ text title ]
         ]
 
 
 onSetEntityListViewItem iconName viewType title =
-    item [ onClick (OnSetEntityListView viewType) ]
+    Paper.item [ onClick (OnSetEntityListView viewType) ]
         [ Html.node "iron-icon" [ iconA iconName ] []
-        , itemBody [] [ text title ]
+        , Paper.itemBody [] [ text title ]
         ]

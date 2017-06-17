@@ -213,6 +213,79 @@ var _user$project$AppDrawer_List$entityListView = F2(
 				}
 			});
 	});
+var _user$project$AppDrawer_List$toggleDeletedItem = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('switch'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$label,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$input,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$type_('checkbox'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$checked(model.showDeleted),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleShowDeletedEntity),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('off'),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('lever'),
+											_1: {ctor: '[]'}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('on'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Show Deleted'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _user$project$AppDrawer_List$view = F2(
 	function (appVM, model) {
 		var _p3 = appVM;
@@ -227,26 +300,7 @@ var _user$project$AppDrawer_List$view = F2(
 			},
 			{
 				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_Paper$toggleButton,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class(''),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$checked(model.showDeleted),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleShowDeletedEntity),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('Toggle Deleted'),
-						_1: {ctor: '[]'}
-					}),
+				_0: _user$project$AppDrawer_List$toggleDeletedItem(model),
 				_1: {
 					ctor: '::',
 					_0: A2(_user$project$AppDrawer_List$entityListView, contexts, model.mainViewType),

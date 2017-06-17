@@ -46,7 +46,7 @@ view appVM model =
         { contexts, projects } =
             appVM
     in
-        ul [ class "" ]
+        ul [ class "app-drawer-list" ]
             [ toggleDeletedItem model
             , entityListView contexts model.mainViewType
             , entityListView projects model.mainViewType
@@ -64,7 +64,7 @@ toggleDeletedItem model =
        ]
        [ text "Toggle Deleted" ]
     -}
-    div []
+    li []
         [ div [ class "switch" ]
             [ label []
                 [ input
@@ -84,19 +84,21 @@ toggleDeletedItem model =
 
 entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
     li [ class "" ]
-        [ div [ class "" ]
-            [ Material.iconA icon.name [ style [ "color" => icon.color ] ]
-            , Html.h5 [ onClick (SwitchView (EntityListView viewType)) ] [ text title ]
+        [ ul []
+            [ li [ class "" ]
+                [ Material.iconA icon.name [ style [ "color" => icon.color ] ]
+                , Html.h5 [ onClick (SwitchView (EntityListView viewType)) ] [ text title ]
+                ]
+            , li
+                [ class ""
+                , onClickPreventDefaultAndStopPropagation onAddClicked
+                ]
+                [ Material.icon "add"
+                , div [] [ text "Add New" ]
+                ]
+            , li [] [ ul [] (List.map entityListItem entityList) ]
+            , Material.divider
             ]
-        , div
-            [ class ""
-            , onClickPreventDefaultAndStopPropagation onAddClicked
-            ]
-            [ Material.icon "add"
-            , div [] [ text "Add New" ]
-            ]
-        , div [] (List.map entityListItem entityList)
-        , Material.divider
         ]
 
 

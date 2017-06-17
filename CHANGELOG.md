@@ -1,4 +1,7 @@
 ## Upcoming
+* fix: entity list focus ux 
+
+## Upcoming
 * fix: notification cron error 
 
 ## v0.18.33 - 2017-06-16

@@ -46,18 +46,22 @@ view appVM model =
             appVM
     in
         ul [ class "" ]
-            [ toggleButton
-                [ class ""
-                , checked model.showDeleted
-                , onClick Model.ToggleShowDeletedEntity
-                ]
-                [ text "Toggle Deleted" ]
+            [ toggleDeletedItem model
             , entityListView contexts model.mainViewType
             , entityListView projects model.mainViewType
             , onSetEntityListViewItem "delete" Entity.BinView "Bin"
             , onSetEntityListViewItem "done" Entity.DoneView "Done"
             , switchViewItem "notification:sync" SyncView "Custom Sync"
             ]
+
+
+toggleDeletedItem model =
+    toggleButton
+        [ class ""
+        , checked model.showDeleted
+        , onClick Model.ToggleShowDeletedEntity
+        ]
+        [ text "Toggle Deleted" ]
 
 
 entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =

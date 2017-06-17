@@ -309,14 +309,18 @@ var _user$project$AppDrawer_List$view = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('app-drawer-list'),
+				_0: _elm_lang$html$Html_Attributes$class('_app-drawer-list'),
 				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$ul,
-					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('app-drawer-list'),
+						_1: {ctor: '[]'}
+					},
 					{
 						ctor: '::',
 						_0: _user$project$AppDrawer_List$toggleDeletedItem(model),

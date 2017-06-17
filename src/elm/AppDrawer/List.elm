@@ -46,8 +46,8 @@ view appVM model =
         { contexts, projects } =
             appVM
     in
-        div [ class "app-drawer-list" ]
-            [ ul []
+        div [ class "_app-drawer-list" ]
+            [ ul [ class "app-drawer-list" ]
                 [ toggleDeletedItem model
                 , entityListView contexts model.mainViewType
                 , entityListView projects model.mainViewType

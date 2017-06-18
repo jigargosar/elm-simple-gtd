@@ -8,14 +8,14 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 
 
-type alias GroupModel =
-    { expanded : Bool
-    }
-
-
 type Msg
     = OnToggleExpandProjectList
     | OnToggleExpandContextList
+
+
+type alias GroupModel =
+    { expanded : Bool
+    }
 
 
 type alias Model =

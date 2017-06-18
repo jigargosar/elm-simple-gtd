@@ -21,7 +21,6 @@ import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model exposing (Msg(SwitchView), commonMsg)
 import String.Extra
 import Maybe.Extra as Maybe
-import Polymer.Attributes exposing (icon)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Debug exposing (tapLog)
@@ -31,8 +30,6 @@ import Json.Encode
 import List.Extra as List
 import Model exposing (..)
 import Todo
-import Polymer.Paper as Paper
-import Polymer.App as App
 import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import Model exposing (..)
@@ -62,13 +59,6 @@ view appVM model =
 
 
 toggleDeletedItem model =
-    {- toggleButton
-       [ class ""
-       , checked model.showDeleted
-       , onClick Model.ToggleShowDeletedEntity
-       ]
-       [ text "Toggle Deleted" ]
-    -}
     li []
         [ div [ class "switch" ]
             [ label []

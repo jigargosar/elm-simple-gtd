@@ -48,13 +48,15 @@ view appVM model =
     in
         div [ class "app-drawer-list-container" ]
             [ ul []
-                ([ toggleDeletedItem model ]
+                ([]
                     ++ entityListView contexts model.mainViewType
                     ++ entityListView projects model.mainViewType
                     ++ [ onSetEntityListViewItem "delete" Entity.BinView "Bin"
                        , onSetEntityListViewItem "done" Entity.DoneView "Done"
                        , switchViewItem "settings" SyncView "Custom Sync"
                        ]
+                    ++ [ Material.divider ]
+                    ++ [ toggleDeletedItem model ]
                 )
             ]
 
@@ -79,7 +81,7 @@ toggleDeletedItem model =
                 , span [ class "lever" ] []
                 ]
             ]
-        , div [] [ text "Toggle Deleted" ]
+        , div [] [ text "Show/Hide Deleted Contexts/Projects" ]
         ]
 
 

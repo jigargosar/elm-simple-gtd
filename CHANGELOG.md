@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.40 - 2017-06-18
 * fix bug: clicking on done todo button also triggers edit mode. 
 
 ## v0.18.39 - 2017-06-18

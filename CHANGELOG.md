@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.43 - 2017-06-18
 * fix clickable edit area of todo text 
 
 ## v0.18.42 - 2017-06-18

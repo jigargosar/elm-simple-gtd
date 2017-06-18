@@ -46,7 +46,6 @@ view appVM model =
         div [ class "app-drawer-list-container" ]
             [ ul []
                 ([]
-
                     ++ entityListView contexts model.mainViewType
                     ++ entityListView projects model.mainViewType
                     ++ [ onSetEntityListViewItem "delete" Entity.BinView "Bin"
@@ -81,11 +80,12 @@ entityListView { className, entityList, viewType, title, showDeleted, onAddClick
     let
         fireSwitchView =
             SwitchView (EntityListView viewType)
-        expandIconName = if isExpanded then
-            "expand_less"
-        else
-            "expand_more"
 
+        expandIconName =
+            if isExpanded then
+                "expand_less"
+            else
+                "expand_more"
     in
         [ li [ onClick onToggleExpanded ]
             [ Material.iconA icon.name [ onClick fireSwitchView, style [ "color" => icon.color ] ]

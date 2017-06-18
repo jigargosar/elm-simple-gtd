@@ -98,12 +98,20 @@ var _user$project$AppDrawer_List$entityListItem = function (vm) {
 var _user$project$AppDrawer_List$entityListView = F2(
 	function (_p0, mainViewType) {
 		var _p1 = _p0;
+		var _p3 = _p1.isExpanded;
 		var _p2 = _p1.icon;
+		var expandIconName = _p3 ? 'expand_less' : 'expand_more';
+		var fireSwitchView = _user$project$Model$SwitchView(
+			_user$project$Model$EntityListView(_p1.viewType));
 		return {
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$li,
-				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(_p1.onToggleExpanded),
+					_1: {ctor: '[]'}
+				},
 				{
 					ctor: '::',
 					_0: A2(
@@ -111,13 +119,17 @@ var _user$project$AppDrawer_List$entityListView = F2(
 						_p2.name,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', _p2.color),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
+							_0: _elm_lang$html$Html_Events$onClick(fireSwitchView),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', _p2.color),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
 						}),
 					_1: {
 						ctor: '::',
@@ -125,9 +137,7 @@ var _user$project$AppDrawer_List$entityListView = F2(
 							_elm_lang$html$Html$h5,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(
-									_user$project$Model$SwitchView(
-										_user$project$Model$EntityListView(_p1.viewType))),
+								_0: _elm_lang$html$Html_Events$onClick(fireSwitchView),
 								_1: {ctor: '[]'}
 							},
 							{
@@ -139,12 +149,8 @@ var _user$project$AppDrawer_List$entityListView = F2(
 							ctor: '::',
 							_0: A2(
 								_user$project$Material$iconButton,
-								'expand_more',
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_p1.onToggleExpanded),
-									_1: {ctor: '[]'}
-								}),
+								expandIconName,
+								{ctor: '[]'}),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -161,7 +167,7 @@ var _user$project$AppDrawer_List$entityListView = F2(
 								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'list-container', true),
 								_1: {
 									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'expanded', _p1.isExpanded),
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'expanded', _p3),
 									_1: {ctor: '[]'}
 								}
 							}),
@@ -290,9 +296,9 @@ var _user$project$AppDrawer_List$toggleDeletedItem = function (model) {
 };
 var _user$project$AppDrawer_List$view = F2(
 	function (appVM, model) {
-		var _p3 = appVM;
-		var contexts = _p3.contexts;
-		var projects = _p3.projects;
+		var _p4 = appVM;
+		var contexts = _p4.contexts;
+		var projects = _p4.projects;
 		return A2(
 			_elm_lang$html$Html$div,
 			{

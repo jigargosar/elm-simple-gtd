@@ -76,27 +76,35 @@ toggleDeletedItem model =
 
 
 entityListView { className, entityList, viewType, title, showDeleted, onAddClicked, icon, onToggleExpanded, isExpanded } mainViewType =
-    [ li []
-        [ Material.iconA icon.name
-            [ style [ "color" => icon.color ] ]
-        , Html.h5 [ onClick (SwitchView (EntityListView viewType)) ] [ text title ]
-        , Material.iconButton "expand_more" [ onClick onToggleExpanded ]
+    let
+        fireSwitchView =
+            SwitchView (EntityListView viewType)
+        expandIconName = if isExpanded then
+            "expand_less"
+        else
+            "expand_more"
+
+    in
+        [ li [ onClick onToggleExpanded ]
+            [ Material.iconA icon.name [ onClick fireSwitchView, style [ "color" => icon.color ] ]
+            , Html.h5 [ onClick fireSwitchView ] [ text title ]
+            , Material.iconButton expandIconName []
+            ]
+        , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
+            [ ul []
+                ([ li
+                    [ class ""
+                    , onClickPreventDefaultAndStopPropagation onAddClicked
+                    ]
+                    [ Material.icon "add"
+                    , div [] [ text "Add New" ]
+                    ]
+                 ]
+                    ++ List.map entityListItem entityList
+                    ++ [ Material.divider ]
+                )
+            ]
         ]
-    , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
-        [ ul []
-            ([ li
-                [ class ""
-                , onClickPreventDefaultAndStopPropagation onAddClicked
-                ]
-                [ Material.icon "add"
-                , div [] [ text "Add New" ]
-                ]
-             ]
-                ++ List.map entityListItem entityList
-                ++ [ Material.divider ]
-            )
-        ]
-    ]
 
 
 entityListItem : OldGroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg

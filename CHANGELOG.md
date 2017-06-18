@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.41 - 2017-06-18
 * fix/use mat icon button instead of iron-icon/paper button
 * appDrawer: clicking on group should not collapse it. smart toggle added.
 

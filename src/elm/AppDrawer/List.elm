@@ -76,21 +76,33 @@ toggleDeletedItem model =
         ]
 
 
-entityListView { className, entityList, viewType, title, showDeleted, onAddClicked, icon, onToggleExpanded, isExpanded } mainViewType =
+entityListView vm mainViewType =
     let
+        { entityList, viewType, title, showDeleted, onAddClicked, icon, onToggleExpanded, isExpanded } =
+            vm
+
+        isCurrentView =
+            EntityListView viewType == mainViewType
+
         fireSwitchView =
             SwitchView (EntityListView viewType)
 
-        expandIconName =
-            if isExpanded then
-                "expand_less"
+        fireSmart =
+            if isCurrentView then
+                onToggleExpanded
             else
-                "expand_more"
+                fireSwitchView
+
+        ( expandIconName, expandButtonClickType ) =
+            if isExpanded then
+                ( "expand_less", onClickStopPropagation )
+            else
+                ( "expand_more", onClickStopPropagation )
     in
-        [ li [ onClick onToggleExpanded ]
-            [ Material.iconA icon.name [ onClick fireSwitchView, style [ "color" => icon.color ] ]
-            , Html.h5 [ onClick fireSwitchView ] [ text title ]
-            , Material.iconButton expandIconName []
+        [ li [ onClick fireSmart ]
+            [ Material.iconA icon.name [ style [ "color" => icon.color ] ]
+            , Html.h5 [] [ text title ]
+            , Material.iconButton expandIconName [ expandButtonClickType onToggleExpanded ]
             ]
         , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
             [ ul []

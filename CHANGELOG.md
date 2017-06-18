@@ -1,5 +1,6 @@
 ## Upcoming
-* fix/use mat icon button instead of iron-icon/paper button 
+* fix/use mat icon button instead of iron-icon/paper button
+* appDrawer: clicking on group should not collapse it. smart toggle added.
 
 ## v0.18.40 - 2017-06-18
 * fix bug: clicking on done todo button also triggers edit mode. 

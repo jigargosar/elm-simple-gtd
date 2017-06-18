@@ -48,13 +48,14 @@ view appVM model =
     in
         div [ class "app-drawer-list-container" ]
             [ ul []
-                [ toggleDeletedItem model
-                , entityListView contexts model.mainViewType
-                , entityListView projects model.mainViewType
-                , onSetEntityListViewItem "delete" Entity.BinView "Bin"
-                , onSetEntityListViewItem "done" Entity.DoneView "Done"
-                , switchViewItem "settings" SyncView "Custom Sync"
-                ]
+                ([ toggleDeletedItem model ]
+                    ++ entityListView contexts model.mainViewType
+                    ++ entityListView projects model.mainViewType
+                    ++ [ onSetEntityListViewItem "delete" Entity.BinView "Bin"
+                       , onSetEntityListViewItem "done" Entity.DoneView "Done"
+                       , switchViewItem "settings" SyncView "Custom Sync"
+                       ]
+                )
             ]
 
 
@@ -75,23 +76,21 @@ toggleDeletedItem model =
                     , onClick Model.ToggleShowDeletedEntity
                     ]
                     []
-                , text "off"
                 , span [ class "lever" ] []
-                , text "on"
                 ]
             ]
-        , div [] [ text "Show Deleted" ]
+        , div [] [ text "Toggle Deleted" ]
         ]
 
 
 entityListView { className, entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
-    li [ class "list-container" ]
+    [ li [ class "header-item" ]
+        [ Material.iconA icon.name [ style [ "color" => icon.color ] ]
+        , Html.h5 [ onClick (SwitchView (EntityListView viewType)) ] [ text title ]
+        ]
+    , li [ class "list-container" ]
         [ ul []
-            ([ li [ class "" ]
-                [ Material.iconA icon.name [ style [ "color" => icon.color ] ]
-                , Html.h5 [ onClick (SwitchView (EntityListView viewType)) ] [ text title ]
-                ]
-             , li
+            ([ li
                 [ class ""
                 , onClickPreventDefaultAndStopPropagation onAddClicked
                 ]
@@ -103,6 +102,7 @@ entityListView { className, entityList, viewType, title, showDeleted, onAddClick
                 ++ [ Material.divider ]
             )
         ]
+    ]
 
 
 entityListItem : OldGroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg
@@ -122,7 +122,7 @@ switchViewItem iconName viewType title =
         , onClick (SwitchView viewType)
         ]
         [ Material.icon iconName
-        , div [] [ text title ]
+        , h5 [] [ text title ]
         ]
 
 
@@ -132,5 +132,5 @@ onSetEntityListViewItem iconName viewType title =
         , onClick (OnSetEntityListView viewType)
         ]
         [ Material.icon iconName
-        , div [] [ text title ]
+        , h5 [] [ text title ]
         ]

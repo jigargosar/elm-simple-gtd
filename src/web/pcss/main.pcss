@@ -41,10 +41,16 @@
 
 .app-drawer-list-container {
   @apply --ul-layout;
+
 }
 
-.app-drawer-list-container > ul > li {
+.app-drawer-list-container li:not(.list-container) {
   cursor: pointer;
+  min-height: 3rem;
+}
+
+.app-drawer-list-container li.header-item{
+
 }
 
 a {

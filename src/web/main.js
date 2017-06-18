@@ -8,6 +8,7 @@ import _ from "ramda"
 import Notifications from "./notifications"
 import cryptoRandomString from "crypto-random-string"
 import autosize from "autosize"
+import localforage from "localforage"
 
 
 //noinspection JSUnresolvedVariable
@@ -63,6 +64,13 @@ async function boot() {
     }
     const allDocsMap = _.map(db => db.findAll())(dbMap)
 
+    const store = localforage.createInstance({
+        name: "SimpleGTD.com offline store"
+    });
+
+    const localPref = await store.getItem("local-pref")
+
+    
     const flags = {
         now: Date.now(),
         encodedTodoList: await allDocsMap["todo-db"],
@@ -75,7 +83,8 @@ async function boot() {
         developmentMode: isDevelopmentMode,
         appVersion: npmPackageVersion,
         deviceId,
-        config:{isFirstVisit, deviceId, npmPackageVersion, isDevelopmentMode}
+        config:{isFirstVisit, deviceId, npmPackageVersion, isDevelopmentMode},
+        localPref:localPref
     }
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]

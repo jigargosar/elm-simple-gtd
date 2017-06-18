@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.36 - 2017-06-18
 * adding sass loader for configuring material styling options. And perhaps we could use sass to make our styles more modular than what postcss-cssnext has to offer.
 * simplify app drawer: use custom styling
 

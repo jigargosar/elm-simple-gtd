@@ -90,6 +90,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		entityList: contextList,
 		viewType: _user$project$Entity$ContextsView,
 		title: 'Contexts',
+		className: 'contexts',
 		showDeleted: model.showDeleted,
 		onAddClicked: _user$project$Model$NewContext,
 		icon: {name: 'group_work', color: _user$project$OldGroupEntity_ViewModel$contextsColor}
@@ -112,6 +113,7 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		entityList: projectList,
 		viewType: _user$project$Entity$ProjectsView,
 		title: 'Projects',
+		className: 'projects',
 		showDeleted: model.showDeleted,
 		onAddClicked: _user$project$Model$NewProject,
 		icon: {name: 'group_work', color: _user$project$OldGroupEntity_ViewModel$projectsColor}
@@ -121,9 +123,9 @@ var _user$project$OldGroupEntity_ViewModel$IconVM = F2(
 	function (a, b) {
 		return {name: a, color: b};
 	});
-var _user$project$OldGroupEntity_ViewModel$ViewModel = F6(
-	function (a, b, c, d, e, f) {
-		return {entityList: a, viewType: b, title: c, showDeleted: d, onAddClicked: e, icon: f};
+var _user$project$OldGroupEntity_ViewModel$ViewModel = F7(
+	function (a, b, c, d, e, f, g) {
+		return {entityList: a, viewType: b, title: c, className: d, showDeleted: e, onAddClicked: f, icon: g};
 	});
 var _user$project$OldGroupEntity_ViewModel$DocumentWithNameViewModel = function (a) {
 	return function (b) {

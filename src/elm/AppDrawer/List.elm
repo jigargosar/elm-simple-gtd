@@ -84,9 +84,9 @@ toggleDeletedItem model =
         ]
 
 
-entityListView { entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
+entityListView { className, entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
     li [ class "" ]
-        [ ul []
+        [ ul [ class className ]
             [ li [ class "" ]
                 [ Material.iconA icon.name [ style [ "color" => icon.color ] ]
                 , Html.h5 [ onClick (SwitchView (EntityListView viewType)) ] [ text title ]

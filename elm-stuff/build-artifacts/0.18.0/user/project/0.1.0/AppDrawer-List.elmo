@@ -130,7 +130,11 @@ var _user$project$AppDrawer_List$entityListView = F2(
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$ul,
-					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class(_p1.className),
+						_1: {ctor: '[]'}
+					},
 					{
 						ctor: '::',
 						_0: A2(

@@ -32,6 +32,7 @@ type alias ViewModel =
     { entityList : List DocumentWithNameViewModel
     , viewType : EntityListViewType
     , title : String
+    , className : String
     , showDeleted : Bool
     , onAddClicked : Msg
     , icon : IconVM
@@ -200,6 +201,7 @@ contexts model =
         { entityList = contextList
         , viewType = Entity.ContextsView
         , title = "Contexts"
+        , className = "contexts"
         , showDeleted = model.showDeleted
         , onAddClicked = Model.NewContext
         , icon = { name = "group_work", color = contextsColor }
@@ -229,6 +231,7 @@ projects model =
         { entityList = projectList
         , viewType = Entity.ProjectsView
         , title = "Projects"
+        , className = "projects"
         , showDeleted = model.showDeleted
         , onAddClicked = Model.NewProject
         , icon =

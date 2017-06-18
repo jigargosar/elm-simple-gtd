@@ -76,12 +76,13 @@ toggleDeletedItem model =
         ]
 
 
-entityListView { className, entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
+entityListView { className, entityList, viewType, title, showDeleted, onAddClicked, icon, onToggleExpanded, isExpanded } mainViewType =
     [ li [ class "header-item" ]
-        [ Material.iconA icon.name [ style [ "color" => icon.color ] ]
+        [ Material.iconA icon.name
+            [ style [ "color" => icon.color ], onClick onToggleExpanded ]
         , Html.h5 [ onClick (SwitchView (EntityListView viewType)) ] [ text title ]
         ]
-    , li [ class "list-container" ]
+    , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
         [ ul []
             ([ li
                 [ class ""

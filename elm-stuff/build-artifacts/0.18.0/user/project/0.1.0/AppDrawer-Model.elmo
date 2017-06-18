@@ -22,6 +22,12 @@ var _user$project$AppDrawer_Model$projects = A2(
 				{projects: s});
 		}));
 var _user$project$AppDrawer_Model$toggleProjectListExpanded = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$projects, _user$project$AppDrawer_Model$toggleExpanded);
+var _user$project$AppDrawer_Model$isProjectListExpanded = function (_p0) {
+	return A2(
+		_user$project$Ext_Record$get,
+		_user$project$AppDrawer_Model$expanded,
+		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$projects, _p0));
+};
 var _user$project$AppDrawer_Model$contexts = A2(
 	_user$project$Ext_Record$field,
 	function (_) {
@@ -33,6 +39,13 @@ var _user$project$AppDrawer_Model$contexts = A2(
 				b,
 				{contexts: s});
 		}));
+var _user$project$AppDrawer_Model$toggleContextListExpanded = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$contexts, _user$project$AppDrawer_Model$toggleExpanded);
+var _user$project$AppDrawer_Model$isContextListExpanded = function (_p1) {
+	return A2(
+		_user$project$Ext_Record$get,
+		_user$project$AppDrawer_Model$expanded,
+		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p1));
+};
 var _user$project$AppDrawer_Model$defaultGroupModel = {expanded: true};
 var _user$project$AppDrawer_Model$init = {contexts: _user$project$AppDrawer_Model$defaultGroupModel, projects: _user$project$AppDrawer_Model$defaultGroupModel};
 var _user$project$AppDrawer_Model$GroupModel = function (a) {

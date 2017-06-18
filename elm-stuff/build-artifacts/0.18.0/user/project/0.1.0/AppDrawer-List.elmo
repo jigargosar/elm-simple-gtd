@@ -121,7 +121,11 @@ var _user$project$AppDrawer_List$entityListView = F2(
 									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', _p2.color),
 									_1: {ctor: '[]'}
 								}),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(_p1.onToggleExpanded),
+								_1: {ctor: '[]'}
+							}
 						}),
 					_1: {
 						ctor: '::',
@@ -148,7 +152,16 @@ var _user$project$AppDrawer_List$entityListView = F2(
 					_elm_lang$html$Html$li,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('list-container'),
+						_0: _elm_lang$html$Html_Attributes$classList(
+							{
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'list-container', true),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'expanded', _p1.isExpanded),
+									_1: {ctor: '[]'}
+								}
+							}),
 						_1: {ctor: '[]'}
 					},
 					{

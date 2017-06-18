@@ -98,6 +98,7 @@ type Msg
     | OnKeyCombo Combo.Msg
     | OnCloseNotification String
     | OnSetDomFocusToFocusInEntity
+    | OnAppDrawerMsg AppDrawer.Model.Msg
 
 
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
@@ -232,6 +233,10 @@ type alias TodoNotificationEvent =
 
 appDrawerModel =
     Ext.Record.field .appDrawerModel (\s b -> { b | appDrawerModel = s })
+
+
+overAppDrawerModel =
+    over appDrawerModel
 
 
 contextStore =

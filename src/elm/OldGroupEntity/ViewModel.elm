@@ -1,5 +1,6 @@
 module OldGroupEntity.ViewModel exposing (..)
 
+import AppDrawer.Model
 import Context
 import Dict
 import Document
@@ -35,6 +36,8 @@ type alias ViewModel =
     , className : String
     , showDeleted : Bool
     , onAddClicked : Msg
+    , onToggleExpanded : Msg
+    , isExpanded : Bool
     , icon : IconVM
     }
 
@@ -205,6 +208,8 @@ contexts model =
         , showDeleted = model.showDeleted
         , onAddClicked = Model.NewContext
         , icon = { name = "group_work", color = contextsColor }
+        , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleExpandContextList
+        , isExpanded = AppDrawer.Model.isContextListExpanded model.appDrawerModel
         }
 
 
@@ -234,10 +239,9 @@ projects model =
         , className = "projects"
         , showDeleted = model.showDeleted
         , onAddClicked = Model.NewProject
-        , icon =
-            { name = "group_work"
-            , color = projectsColor
-            }
+        , icon = { name = "group_work", color = projectsColor }
+        , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleExpandProjectList
+        , isExpanded = AppDrawer.Model.isProjectListExpanded model.appDrawerModel
         }
 
 

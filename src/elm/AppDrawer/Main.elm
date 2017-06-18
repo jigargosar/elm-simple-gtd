@@ -14,13 +14,12 @@ import Time
 
 update :
     (Model.Msg -> Model.ReturnF)
-    -> Time.Time
     -> AppDrawer.Model.Msg
     -> Model.ReturnF
-update andThenUpdate now msg =
+update andThenUpdate msg =
     case msg of
         AppDrawer.Model.OnToggleExpandContextList ->
-            Return.map (Model.overAppDrawerModel (AppDrawer.Model.toggleProjectListExpanded))
+            Return.map (Model.overAppDrawerModel (AppDrawer.Model.toggleContextListExpanded))
 
         AppDrawer.Model.OnToggleExpandProjectList ->
-            identity
+            Return.map (Model.overAppDrawerModel (AppDrawer.Model.toggleProjectListExpanded))

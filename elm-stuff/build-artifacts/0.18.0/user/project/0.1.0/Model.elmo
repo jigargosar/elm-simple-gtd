@@ -1234,6 +1234,7 @@ var _user$project$Model$appDrawerModel = A2(
 				b,
 				{appDrawerModel: s});
 		}));
+var _user$project$Model$overAppDrawerModel = _user$project$Ext_Record$over(_user$project$Model$appDrawerModel);
 var _user$project$Model$Model = function (a) {
 	return function (b) {
 		return function (c) {
@@ -1303,6 +1304,9 @@ var _user$project$Model$TodoNotificationEvent = F2(
 	function (a, b) {
 		return {action: a, data: b};
 	});
+var _user$project$Model$OnAppDrawerMsg = function (a) {
+	return {ctor: 'OnAppDrawerMsg', _0: a};
+};
 var _user$project$Model$OnSetDomFocusToFocusInEntity = {ctor: 'OnSetDomFocusToFocusInEntity'};
 var _user$project$Model$OnCloseNotification = function (a) {
 	return {ctor: 'OnCloseNotification', _0: a};

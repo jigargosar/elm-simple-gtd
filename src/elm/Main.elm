@@ -1,5 +1,6 @@
 port module Main exposing (..)
 
+import AppDrawer.Main
 import CommonMsg
 import Document
 import DomPorts exposing (autoFocusInputCmd, focusInputCmd, focusSelectorIfNoFocusCmd)
@@ -396,6 +397,9 @@ update msg =
 
                 OnTodoMsgWithTime todoMsg now ->
                     Todo.Main.update andThenUpdate now todoMsg
+
+                OnAppDrawerMsg msg ->
+                    AppDrawer.Main.update andThenUpdate msg
            )
         >> Return.map (logMsg msg)
 

@@ -55,3 +55,15 @@ toggleExpanded =
 
 toggleProjectListExpanded =
     Ext.Record.over projects (toggleExpanded)
+
+
+isProjectListExpanded =
+    Ext.Record.get projects >> Ext.Record.get expanded
+
+
+toggleContextListExpanded =
+    Ext.Record.over contexts (toggleExpanded)
+
+
+isContextListExpanded =
+    Ext.Record.get contexts >> Ext.Record.get expanded

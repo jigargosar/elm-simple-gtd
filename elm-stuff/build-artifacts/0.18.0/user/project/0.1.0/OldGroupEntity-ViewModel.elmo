@@ -93,7 +93,9 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		className: 'contexts',
 		showDeleted: model.showDeleted,
 		onAddClicked: _user$project$Model$NewContext,
-		icon: {name: 'group_work', color: _user$project$OldGroupEntity_ViewModel$contextsColor}
+		icon: {name: 'group_work', color: _user$project$OldGroupEntity_ViewModel$contextsColor},
+		onToggleExpanded: _user$project$Model$OnAppDrawerMsg(_user$project$AppDrawer_Model$OnToggleExpandContextList),
+		isExpanded: _user$project$AppDrawer_Model$isContextListExpanded(model.appDrawerModel)
 	};
 };
 var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
@@ -116,16 +118,18 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		className: 'projects',
 		showDeleted: model.showDeleted,
 		onAddClicked: _user$project$Model$NewProject,
-		icon: {name: 'group_work', color: _user$project$OldGroupEntity_ViewModel$projectsColor}
+		icon: {name: 'group_work', color: _user$project$OldGroupEntity_ViewModel$projectsColor},
+		onToggleExpanded: _user$project$Model$OnAppDrawerMsg(_user$project$AppDrawer_Model$OnToggleExpandProjectList),
+		isExpanded: _user$project$AppDrawer_Model$isProjectListExpanded(model.appDrawerModel)
 	};
 };
 var _user$project$OldGroupEntity_ViewModel$IconVM = F2(
 	function (a, b) {
 		return {name: a, color: b};
 	});
-var _user$project$OldGroupEntity_ViewModel$ViewModel = F7(
-	function (a, b, c, d, e, f, g) {
-		return {entityList: a, viewType: b, title: c, className: d, showDeleted: e, onAddClicked: f, icon: g};
+var _user$project$OldGroupEntity_ViewModel$ViewModel = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {entityList: a, viewType: b, title: c, className: d, showDeleted: e, onAddClicked: f, onToggleExpanded: g, isExpanded: h, icon: i};
 	});
 var _user$project$OldGroupEntity_ViewModel$DocumentWithNameViewModel = function (a) {
 	return function (b) {

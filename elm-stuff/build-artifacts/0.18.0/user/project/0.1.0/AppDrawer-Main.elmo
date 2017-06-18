@@ -1,9 +1,11 @@
-var _user$project$AppDrawer_Main$update = F3(
-	function (andThenUpdate, now, msg) {
+var _user$project$AppDrawer_Main$update = F2(
+	function (andThenUpdate, msg) {
 		var _p0 = msg;
 		if (_p0.ctor === 'OnToggleExpandContextList') {
-			return _elm_lang$core$Basics$identity;
+			return _Fresheyeball$elm_return$Return$map(
+				_user$project$Model$overAppDrawerModel(_user$project$AppDrawer_Model$toggleContextListExpanded));
 		} else {
-			return _elm_lang$core$Basics$identity;
+			return _Fresheyeball$elm_return$Return$map(
+				_user$project$Model$overAppDrawerModel(_user$project$AppDrawer_Model$toggleProjectListExpanded));
 		}
 	});

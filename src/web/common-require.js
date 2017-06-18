@@ -16,6 +16,5 @@ require("kefir")
 
 
 
-require("./jquery.trap")
 require("jquery-ui/ui/position")
 require("jquery-ui/ui/focusable")

@@ -97,11 +97,11 @@ leftHeader m =
         div [ id "left-header" ]
             [ div [] [ text t1 ]
             , div [ class "small layout horizontal " ]
-                [ a [ target "_blank", href changeLogURL ]
+                [ a [ target "_blank", href changeLogURL, tabindex -1 ]
                     [ "v" ++ m.appVersion |> text ]
-                , a [ target "_blank", href newPostURL ] [ text "Discuss" ]
-
-                {- , a [ target "_blank", href newIssueURL ] [ text "Report Issue" ] -}
-                , a [ target "_blank", href "mailto:jigar.gosar@gmail.com" ] [ text "Email Author" ]
+                , a [ target "_blank", href newPostURL, tabindex -1 ]
+                    [ text "Discuss" ]
+                , a [ target "_blank", href "mailto:jigar.gosar@gmail.com", tabindex -1 ]
+                    [ text "Feedback" ]
                 ]
             ]

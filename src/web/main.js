@@ -27,7 +27,7 @@ async function boot() {
     const deviceId = getOrCreateDeviceId()
     const isFirstVisit = getOrCreateFirstVisit()
     const $elm = $("#elm-app-container")
-    $elm.trap();
+    // $elm.trap();
 
     $elm.on("keydown", `.entity-list`, e => {
         // console.log(e.keyCode, e.key, e.target, e);

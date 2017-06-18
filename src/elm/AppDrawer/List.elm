@@ -66,6 +66,7 @@ toggleDeletedItem model =
                     [ type_ "checkbox"
                     , checked model.showDeleted
                     , onClick Model.ToggleShowDeletedEntity
+                    , tabindex -1
                     ]
                     []
                 , span [ class "lever" ] []

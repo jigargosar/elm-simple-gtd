@@ -1,3 +1,40 @@
+var _user$project$AppDrawer_Model$expanded = A2(
+	_user$project$Ext_Record$bool,
+	function (_) {
+		return _.expanded;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{expanded: s});
+		}));
+var _user$project$AppDrawer_Model$toggleExpanded = _user$project$Ext_Record$toggle(_user$project$AppDrawer_Model$expanded);
+var _user$project$AppDrawer_Model$projects = A2(
+	_user$project$Ext_Record$field,
+	function (_) {
+		return _.projects;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{projects: s});
+		}));
+var _user$project$AppDrawer_Model$toggleProjectListExpanded = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$projects, _user$project$AppDrawer_Model$toggleExpanded);
+var _user$project$AppDrawer_Model$contexts = A2(
+	_user$project$Ext_Record$field,
+	function (_) {
+		return _.contexts;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{contexts: s});
+		}));
+var _user$project$AppDrawer_Model$defaultGroupModel = {expanded: true};
+var _user$project$AppDrawer_Model$init = {contexts: _user$project$AppDrawer_Model$defaultGroupModel, projects: _user$project$AppDrawer_Model$defaultGroupModel};
 var _user$project$AppDrawer_Model$GroupModel = function (a) {
 	return {expanded: a};
 };

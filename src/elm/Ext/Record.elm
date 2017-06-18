@@ -1,4 +1,19 @@
-module Ext.Record exposing (init, get, set, setIn, over, overT2, maybeOverT2, overReturn, maybeSet, maybeSetIn, maybeOver)
+module Ext.Record
+    exposing
+        ( field
+        , bool
+        , toggle
+        , get
+        , set
+        , setIn
+        , over
+        , overT2
+        , maybeOverT2
+        , overReturn
+        , maybeSet
+        , maybeSetIn
+        , maybeOver
+        )
 
 import Return
 import Toolkit.Operators exposing (..)
@@ -12,9 +27,23 @@ type Field small big
     = Field (FieldModel small big)
 
 
-init : (big -> small) -> (small -> big -> big) -> Field small big
-init getter setter =
+type alias BoolField big =
+    Field Bool big
+
+
+field : (big -> small) -> (small -> big -> big) -> Field small big
+field getter setter =
     Field { get = getter, set = setter }
+
+
+bool : (big -> Bool) -> (Bool -> big -> big) -> Field Bool big
+bool getter setter =
+    Field { get = getter, set = setter }
+
+
+toggle : BoolField big -> big -> big
+toggle boolField big =
+    over boolField (not) big
 
 
 get (Field field) big =

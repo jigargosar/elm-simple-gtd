@@ -36,7 +36,7 @@ port onRunningTodoNotificationClicked : (Notification.Response -> msg) -> Sub ms
 
 
 timeTracker =
-    Record.init .timeTracker (\s b -> { b | timeTracker = s })
+    Record.field .timeTracker (\s b -> { b | timeTracker = s })
 
 
 mapOver =

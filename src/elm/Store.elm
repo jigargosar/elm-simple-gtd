@@ -83,7 +83,7 @@ type alias Store x =
 
 
 dict =
-    Record.init .dict (\s b -> { b | dict = s })
+    Record.field .dict (\s b -> { b | dict = s })
 
 
 type alias OtherFieldsEncoder x =

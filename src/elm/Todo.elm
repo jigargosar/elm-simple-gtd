@@ -122,27 +122,27 @@ getMaybeTime model =
 
 
 done =
-    Ext.Record.init .done (\s b -> { b | done = s })
+    Ext.Record.field .done (\s b -> { b | done = s })
 
 
 text =
-    Ext.Record.init .text (\s b -> { b | text = s })
+    Ext.Record.field .text (\s b -> { b | text = s })
 
 
 schedule =
-    Ext.Record.init .schedule (\s b -> { b | schedule = s })
+    Ext.Record.field .schedule (\s b -> { b | schedule = s })
 
 
 projectId =
-    Ext.Record.init .projectId (\s b -> { b | projectId = s })
+    Ext.Record.field .projectId (\s b -> { b | projectId = s })
 
 
 contextId =
-    Ext.Record.init .contextId (\s b -> { b | contextId = s })
+    Ext.Record.field .contextId (\s b -> { b | contextId = s })
 
 
 deleted =
-    Ext.Record.init .deleted (\s b -> { b | deleted = s })
+    Ext.Record.field .deleted (\s b -> { b | deleted = s })
 
 
 updateSchedule fn model =

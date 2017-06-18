@@ -42,7 +42,7 @@ var _user$project$Todo_Main$map = _Fresheyeball$elm_return$Return$map;
 var _user$project$Todo_Main$mapSet = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
 var _user$project$Todo_Main$mapOver = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _Fresheyeball$elm_return$Return$map);
 var _user$project$Todo_Main$timeTracker = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.timeTracker;
 	},

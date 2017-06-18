@@ -71,6 +71,10 @@ var _user$project$Ext_Record$overReturn = F3(
 			smallFT2(
 				A2(_user$project$Ext_Record$get, field, b)));
 	});
+var _user$project$Ext_Record$toggle = F2(
+	function (boolField, big) {
+		return A3(_user$project$Ext_Record$over, boolField, _elm_lang$core$Basics$not, big);
+	});
 var _user$project$Ext_Record$FieldModel = F2(
 	function (a, b) {
 		return {get: a, set: b};
@@ -78,7 +82,12 @@ var _user$project$Ext_Record$FieldModel = F2(
 var _user$project$Ext_Record$Field = function (a) {
 	return {ctor: 'Field', _0: a};
 };
-var _user$project$Ext_Record$init = F2(
+var _user$project$Ext_Record$field = F2(
+	function (getter, setter) {
+		return _user$project$Ext_Record$Field(
+			{get: getter, set: setter});
+	});
+var _user$project$Ext_Record$bool = F2(
 	function (getter, setter) {
 		return _user$project$Ext_Record$Field(
 			{get: getter, set: setter});

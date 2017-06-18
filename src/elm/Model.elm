@@ -1,5 +1,6 @@
 module Model exposing (..)
 
+import AppDrawer.Model
 import CommonMsg
 import Context
 import Dict.Extra
@@ -9,7 +10,7 @@ import Entity exposing (Entity)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
 import Ext.List as List
 import Ext.Predicate as Pred
-import Ext.Record as Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
+import Ext.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
 import Firebase exposing (DeviceId)
 import Http
 import Keyboard.Combo exposing (combo1, combo2, combo3)
@@ -176,6 +177,7 @@ type alias Model =
     , timeTracker : Todo.TimeTracker.Model
     , keyComboModel : Keyboard.Combo.Model Msg
     , config : Config
+    , appDrawerModel : AppDrawer.Model.Model
     }
 
 
@@ -228,44 +230,48 @@ type alias TodoNotificationEvent =
 -- Model Lens
 
 
+appDrawerModel =
+    Ext.Record.field .appDrawerModel (\s b -> { b | appDrawerModel = s })
+
+
 contextStore =
-    Record.init .contextStore (\s b -> { b | contextStore = s })
+    Ext.Record.field .contextStore (\s b -> { b | contextStore = s })
 
 
 projectStore =
-    Record.init .projectStore (\s b -> { b | projectStore = s })
+    Ext.Record.field .projectStore (\s b -> { b | projectStore = s })
 
 
 todoStore =
-    Record.init .todoStore (\s b -> { b | todoStore = s })
+    Ext.Record.field .todoStore (\s b -> { b | todoStore = s })
 
 
 keyboardState =
-    Record.init .keyboardState (\s b -> { b | keyboardState = s })
+    Ext.Record.field .keyboardState (\s b -> { b | keyboardState = s })
 
 
 now =
-    Record.init .now (\s b -> { b | now = s })
+    Ext.Record.field .now (\s b -> { b | now = s })
 
 
 firebaseClient =
-    Record.init .firebaseClient (\s b -> { b | firebaseClient = s })
+    Ext.Record.field .firebaseClient (\s b -> { b | firebaseClient = s })
 
 
 editMode =
-    Record.init .editMode (\s b -> { b | editMode = s })
+    Ext.Record.field .editMode (\s b -> { b | editMode = s })
 
 
 user =
-    Record.init .user (\s b -> { b | user = s })
+    Ext.Record.field .user (\s b -> { b | user = s })
 
 
 focusInEntity =
-    Record.init .focusInEntity (\s b -> { b | focusInEntity = s })
+    Ext.Record.field .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
 keyComboModel =
-    Record.init .keyComboModel (\s b -> { b | keyComboModel = s })
+    Ext.Record.field .keyComboModel (\s b -> { b | keyComboModel = s })
 
 
 init : Flags -> Return.Return Msg Model
@@ -324,6 +330,7 @@ init flags =
                     , combos = keyboardCombos
                     }
             , config = flags.config
+            , appDrawerModel = AppDrawer.Model.init
             }
     in
         model |> Return.singleton
@@ -834,7 +841,7 @@ updateTodoAndMaybeAlsoSelected action todoId model =
 
 insertTodo : (DeviceId -> Document.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodo constructWithId =
-    Record.overT2 todoStore (Store.insert (constructWithId))
+    Ext.Record.overT2 todoStore (Store.insert (constructWithId))
 
 
 setTodoStoreFromTuple tuple model =
@@ -1140,7 +1147,7 @@ updateProject id updateFn =
 
 
 updateAllNamedDocsDocs idSet updateFn store model =
-    Record.overT2 store
+    Ext.Record.overT2 store
         (Store.updateAndPersist
             (Document.getId >> Set.member # idSet)
             model.now
@@ -1194,7 +1201,7 @@ findAndUpdateAllTodos findFn action model =
         updateFn =
             Todo.update action
     in
-        Record.overT2 todoStore (Store.updateAndPersist findFn model.now updateFn) model
+        Ext.Record.overT2 todoStore (Store.updateAndPersist findFn model.now updateFn) model
             |> Tuple2.swap
             |> Return.map (updateEntityListCursor model)
 

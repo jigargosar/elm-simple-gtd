@@ -1,6 +1,7 @@
 module AppDrawer.Main exposing (..)
 
 import AppDrawer.Model
+import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -19,7 +20,7 @@ update :
 update andThenUpdate now msg =
     case msg of
         AppDrawer.Model.OnToggleExpandContextList ->
-            identity
+            Return.map (Model.overAppDrawerModel (AppDrawer.Model.toggleProjectListExpanded))
 
         AppDrawer.Model.OnToggleExpandProjectList ->
             identity

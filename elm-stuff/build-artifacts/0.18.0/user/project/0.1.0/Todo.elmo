@@ -153,7 +153,7 @@ var _user$project$Todo$hasReminderChanged = function (_p5) {
 	return A2(_user$project$Todo_Schedule$hasReminderChanged, _p6._0.schedule, _p6._1.schedule);
 };
 var _user$project$Todo$deleted = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.deleted;
 	},
@@ -164,7 +164,7 @@ var _user$project$Todo$deleted = A2(
 				{deleted: s});
 		}));
 var _user$project$Todo$contextId = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.contextId;
 	},
@@ -175,7 +175,7 @@ var _user$project$Todo$contextId = A2(
 				{contextId: s});
 		}));
 var _user$project$Todo$projectId = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.projectId;
 	},
@@ -186,7 +186,7 @@ var _user$project$Todo$projectId = A2(
 				{projectId: s});
 		}));
 var _user$project$Todo$schedule = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.schedule;
 	},
@@ -201,7 +201,7 @@ var _user$project$Todo$updateSchedule = F2(
 		return A3(_user$project$Ext_Record$over, _user$project$Todo$schedule, fn, model);
 	});
 var _user$project$Todo$text = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.text;
 	},
@@ -212,7 +212,7 @@ var _user$project$Todo$text = A2(
 				{text: s});
 		}));
 var _user$project$Todo$done = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.done;
 	},

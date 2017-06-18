@@ -694,7 +694,7 @@ var _user$project$Model$getMaybeUserProfile = function (_p30) {
 };
 var _user$project$Model$inboxEntity = _user$project$Entity$ContextEntity(_user$project$Context$null);
 var _user$project$Model$keyComboModel = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.keyComboModel;
 	},
@@ -711,7 +711,7 @@ var _user$project$Model$updateCombo = function (comboMsg) {
 		_scottcorgan$keyboard_combo$Keyboard_Combo$update(comboMsg));
 };
 var _user$project$Model$focusInEntity = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.focusInEntity;
 	},
@@ -811,7 +811,7 @@ var _user$project$Model$updateAllNamedDocsDocs = F4(
 					model)));
 	});
 var _user$project$Model$user = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.user;
 	},
@@ -823,7 +823,7 @@ var _user$project$Model$user = A2(
 		}));
 var _user$project$Model$setUser = _user$project$Ext_Record$set(_user$project$Model$user);
 var _user$project$Model$editMode = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.editMode;
 	},
@@ -870,7 +870,7 @@ var _user$project$Model$updateNewTodoText = F2(
 				A2(_user$project$Todo_NewForm$setText, text, form)));
 	});
 var _user$project$Model$firebaseClient = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.firebaseClient;
 	},
@@ -897,7 +897,7 @@ var _user$project$Model$updateFirebaseConnection = function (connected) {
 		_user$project$Firebase$updateConnection(connected));
 };
 var _user$project$Model$now = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.now;
 	},
@@ -908,7 +908,7 @@ var _user$project$Model$now = A2(
 				{now: s});
 		}));
 var _user$project$Model$keyboardState = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.keyboardState;
 	},
@@ -919,7 +919,7 @@ var _user$project$Model$keyboardState = A2(
 				{keyboardState: s});
 		}));
 var _user$project$Model$todoStore = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.todoStore;
 	},
@@ -1030,7 +1030,7 @@ var _user$project$Model$updateTodoAndMaybeAlsoSelected = F3(
 		return A3(_user$project$Model$updateAllTodos, action, idSet, model);
 	});
 var _user$project$Model$projectStore = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.projectStore;
 	},
@@ -1059,7 +1059,7 @@ var _user$project$Model$updateProject = F2(
 			_user$project$Model$projectStore);
 	});
 var _user$project$Model$contextStore = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.contextStore;
 	},
@@ -1223,6 +1223,17 @@ var _user$project$Model$toggleDeleteEntity = F2(
 			}
 		}()(model);
 	});
+var _user$project$Model$appDrawerModel = A2(
+	_user$project$Ext_Record$field,
+	function (_) {
+		return _.appDrawerModel;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{appDrawerModel: s});
+		}));
 var _user$project$Model$Model = function (a) {
 	return function (b) {
 		return function (c) {
@@ -1245,7 +1256,9 @@ var _user$project$Model$Model = function (a) {
 																			return function (t) {
 																				return function (u) {
 																					return function (v) {
-																						return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s, timeTracker: t, keyComboModel: u, config: v};
+																						return function (w) {
+																							return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s, timeTracker: t, keyComboModel: u, config: v, appDrawerModel: w};
+																						};
 																					};
 																				};
 																			};
@@ -1524,7 +1537,8 @@ var _user$project$Model$init = function (flags) {
 		firebaseClient: firebaseClient,
 		keyComboModel: _scottcorgan$keyboard_combo$Keyboard_Combo$init(
 			{toMsg: _user$project$Model$OnKeyCombo, combos: _user$project$Model$keyboardCombos}),
-		config: flags.config
+		config: flags.config,
+		appDrawerModel: _user$project$AppDrawer_Model$init
 	};
 	return _Fresheyeball$elm_return$Return$singleton(model);
 };

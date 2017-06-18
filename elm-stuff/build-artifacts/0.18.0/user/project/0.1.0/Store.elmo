@@ -64,7 +64,7 @@ var _user$project$Store$encode = F2(
 		return A2(_user$project$Document$encode, s.otherFieldsEncoder, doc);
 	});
 var _user$project$Store$dict = A2(
-	_user$project$Ext_Record$init,
+	_user$project$Ext_Record$field,
 	function (_) {
 		return _.dict;
 	},

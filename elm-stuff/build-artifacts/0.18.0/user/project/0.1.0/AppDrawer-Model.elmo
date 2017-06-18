@@ -1,0 +1,9 @@
+var _user$project$AppDrawer_Model$GroupModel = function (a) {
+	return {expanded: a};
+};
+var _user$project$AppDrawer_Model$Model = F2(
+	function (a, b) {
+		return {contexts: a, projects: b};
+	});
+var _user$project$AppDrawer_Model$OnToggleExpandContextList = {ctor: 'OnToggleExpandContextList'};
+var _user$project$AppDrawer_Model$OnToggleExpandProjectList = {ctor: 'OnToggleExpandProjectList'};

@@ -1,0 +1,9 @@
+var _user$project$AppDrawer_Main$update = F3(
+	function (andThenUpdate, now, msg) {
+		var _p0 = msg;
+		if (_p0.ctor === 'OnToggleExpandContextList') {
+			return _elm_lang$core$Basics$identity;
+		} else {
+			return _elm_lang$core$Basics$identity;
+		}
+	});

@@ -329,6 +329,10 @@ init flags =
         model |> Return.singleton
 
 
+type alias ReturnF =
+    Return.Return Msg Model -> Return.Return Msg Model
+
+
 inboxEntity =
     Entity.ContextEntity Context.null
 

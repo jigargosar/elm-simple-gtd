@@ -10,6 +10,7 @@ import Ext.Time
 import Model
 import Notification
 import Return
+import Time
 import Todo
 import Todo.Msg exposing (Msg(..))
 import Todo.ReminderForm
@@ -69,6 +70,11 @@ subscriptions m =
         ]
 
 
+update :
+    (Model.Msg -> Model.ReturnF)
+    -> Time.Time
+    -> Todo.Msg.Msg
+    -> Model.ReturnF
 update andThenUpdate now todoMsg =
     case todoMsg of
         UpdateReminderForm form action ->

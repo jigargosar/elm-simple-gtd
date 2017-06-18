@@ -226,11 +226,14 @@ item vm =
         , attribute "data-key" vm.key
         ]
         [ div
-            [ onMouseDown vm.startEditingMsg
-            , class "display-text-container"
+            [ class "display-text-container layout horizontal"
             ]
             [ doneIconButton vm
-            , span [ class "display-text" ] [ text vm.displayText ]
+            , div
+                [ onMouseDown vm.startEditingMsg
+                , class "display-text"
+                ]
+                [ text vm.displayText ]
             ]
         , div
             [ class "layout horizontal end-justified"

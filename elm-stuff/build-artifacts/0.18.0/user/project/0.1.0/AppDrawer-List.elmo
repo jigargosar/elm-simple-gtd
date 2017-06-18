@@ -1,28 +1,24 @@
 var _user$project$AppDrawer_List$onSetEntityListViewItem = F3(
 	function (iconName, viewType, title) {
 		return A2(
-			_edvail$elm_polymer$Polymer_Paper$item,
+			_elm_lang$html$Html$li,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Model$OnSetEntityListView(viewType)),
-				_1: {ctor: '[]'}
+				_0: _elm_lang$html$Html_Attributes$class(''),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$Model$OnSetEntityListView(viewType)),
+					_1: {ctor: '[]'}
+				}
 			},
 			{
 				ctor: '::',
-				_0: A3(
-					_elm_lang$html$Html$node,
-					'iron-icon',
-					{
-						ctor: '::',
-						_0: _user$project$WebComponents$iconA(iconName),
-						_1: {ctor: '[]'}
-					},
-					{ctor: '[]'}),
+				_0: _user$project$Material$icon(iconName),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_edvail$elm_polymer$Polymer_Paper$itemBody,
+						_elm_lang$html$Html$div,
 						{ctor: '[]'},
 						{
 							ctor: '::',
@@ -36,28 +32,24 @@ var _user$project$AppDrawer_List$onSetEntityListViewItem = F3(
 var _user$project$AppDrawer_List$switchViewItem = F3(
 	function (iconName, viewType, title) {
 		return A2(
-			_edvail$elm_polymer$Polymer_Paper$item,
+			_elm_lang$html$Html$li,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Model$SwitchView(viewType)),
-				_1: {ctor: '[]'}
+				_0: _elm_lang$html$Html_Attributes$class(''),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$Model$SwitchView(viewType)),
+					_1: {ctor: '[]'}
+				}
 			},
 			{
 				ctor: '::',
-				_0: A3(
-					_elm_lang$html$Html$node,
-					'iron-icon',
-					{
-						ctor: '::',
-						_0: _user$project$WebComponents$iconA(iconName),
-						_1: {ctor: '[]'}
-					},
-					{ctor: '[]'}),
+				_0: _user$project$Material$icon(iconName),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_edvail$elm_polymer$Polymer_Paper$itemBody,
+						_elm_lang$html$Html$div,
 						{ctor: '[]'},
 						{
 							ctor: '::',
@@ -70,10 +62,10 @@ var _user$project$AppDrawer_List$switchViewItem = F3(
 	});
 var _user$project$AppDrawer_List$entityListItem = function (vm) {
 	return A2(
-		_elm_lang$html$Html$div,
+		_elm_lang$html$Html$li,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('collection-item layout horizontal center'),
+			_0: _elm_lang$html$Html_Attributes$class(''),
 			_1: {
 				ctor: '::',
 				_0: _elm_lang$html$Html_Events$onClick(
@@ -83,34 +75,22 @@ var _user$project$AppDrawer_List$entityListItem = function (vm) {
 		},
 		{
 			ctor: '::',
-			_0: A3(
-				_elm_lang$html$Html$node,
-				'iron-icon',
+			_0: A2(
+				_user$project$Material$iconA,
+				vm.icon.name,
 				{
 					ctor: '::',
-					_0: _user$project$WebComponents$iconA(vm.icon.name),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$style(
-							{
-								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', vm.icon.color),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				},
-				{ctor: '[]'}),
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', vm.icon.color),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
 			_1: {
 				ctor: '::',
-				_0: A2(
-					_edvail$elm_polymer$Polymer_Paper$itemBody,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _user$project$View_Shared$defaultBadge(vm),
-						_1: {ctor: '[]'}
-					}),
+				_0: _user$project$View_Shared$defaultBadge(vm),
 				_1: {ctor: '[]'}
 			}
 		});
@@ -123,85 +103,54 @@ var _user$project$AppDrawer_List$entityListView = F2(
 			_elm_lang$html$Html$li,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class(''),
+				_0: _elm_lang$html$Html_Attributes$class('list-container'),
 				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$ul,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class(_p1.className),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$li,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class(''),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_user$project$Material$iconA,
-									_p2.name,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$style(
-											{
-												ctor: '::',
-												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', _p2.color),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$h5,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(
-												_user$project$Model$SwitchView(
-													_user$project$Model$EntityListView(_p1.viewType))),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text(_p1.title),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}),
-						_1: {
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						{
 							ctor: '::',
 							_0: A2(
 								_elm_lang$html$Html$li,
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html_Attributes$class(''),
-									_1: {
-										ctor: '::',
-										_0: _elm_community$html_extra$Html_Events_Extra$onClickPreventDefaultAndStopPropagation(_p1.onAddClicked),
-										_1: {ctor: '[]'}
-									}
+									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _user$project$Material$icon('add'),
+									_0: A2(
+										_user$project$Material$iconA,
+										_p2.name,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(
+												{
+													ctor: '::',
+													_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', _p2.color),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
 									_1: {
 										ctor: '::',
 										_0: A2(
-											_elm_lang$html$Html$div,
-											{ctor: '[]'},
+											_elm_lang$html$Html$h5,
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('Add New'),
+												_0: _elm_lang$html$Html_Events$onClick(
+													_user$project$Model$SwitchView(
+														_user$project$Model$EntityListView(_p1.viewType))),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(_p1.title),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -211,23 +160,42 @@ var _user$project$AppDrawer_List$entityListView = F2(
 								ctor: '::',
 								_0: A2(
 									_elm_lang$html$Html$li,
-									{ctor: '[]'},
 									{
 										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$ul,
-											{ctor: '[]'},
-											A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, _p1.entityList)),
-										_1: {ctor: '[]'}
+										_0: _elm_lang$html$Html_Attributes$class(''),
+										_1: {
+											ctor: '::',
+											_0: _elm_community$html_extra$Html_Events_Extra$onClickPreventDefaultAndStopPropagation(_p1.onAddClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _user$project$Material$icon('add'),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Add New'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
 									}),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Material$divider,
-									_1: {ctor: '[]'}
-								}
+								_1: {ctor: '[]'}
 							}
-						}
-					}),
+						},
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, _p1.entityList),
+							{
+								ctor: '::',
+								_0: _user$project$Material$divider,
+								_1: {ctor: '[]'}
+							}))),
 				_1: {ctor: '[]'}
 			});
 	});
@@ -313,18 +281,14 @@ var _user$project$AppDrawer_List$view = F2(
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('app-drawer-list'),
+				_0: _elm_lang$html$Html_Attributes$class('app-drawer-list-container'),
 				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$ul,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('_app-drawer-list'),
-						_1: {ctor: '[]'}
-					},
+					{ctor: '[]'},
 					{
 						ctor: '::',
 						_0: _user$project$AppDrawer_List$toggleDeletedItem(model),
@@ -342,7 +306,7 @@ var _user$project$AppDrawer_List$view = F2(
 										_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'done', _user$project$Entity$DoneView, 'Done'),
 										_1: {
 											ctor: '::',
-											_0: A3(_user$project$AppDrawer_List$switchViewItem, 'notification:sync', _user$project$Model$SyncView, 'Custom Sync'),
+											_0: A3(_user$project$AppDrawer_List$switchViewItem, 'settings', _user$project$Model$SyncView, 'Custom Sync'),
 											_1: {ctor: '[]'}
 										}
 									}

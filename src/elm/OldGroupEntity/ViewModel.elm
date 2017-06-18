@@ -190,7 +190,7 @@ contexts model =
             , nullEntity = Context.null
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
-            , defaultIconName = "av:fiber-manual-record"
+            , defaultIconName = "album"
             , getViewType = Entity.ContextView
             }
 

@@ -46,14 +46,14 @@ view appVM model =
         { contexts, projects } =
             appVM
     in
-        div [ class "app-drawer-list" ]
-            [ ul [ class "_app-drawer-list" ]
+        div [ class "app-drawer-list-container" ]
+            [ ul []
                 [ toggleDeletedItem model
                 , entityListView contexts model.mainViewType
                 , entityListView projects model.mainViewType
                 , onSetEntityListViewItem "delete" Entity.BinView "Bin"
                 , onSetEntityListViewItem "done" Entity.DoneView "Done"
-                , switchViewItem "notification:sync" SyncView "Custom Sync"
+                , switchViewItem "settings" SyncView "Custom Sync"
                 ]
             ]
 
@@ -85,45 +85,52 @@ toggleDeletedItem model =
 
 
 entityListView { className, entityList, viewType, title, showDeleted, onAddClicked, icon } mainViewType =
-    li [ class "" ]
-        [ ul [ class className ]
-            [ li [ class "" ]
+    li [ class "list-container" ]
+        [ ul []
+            ([ li [ class "" ]
                 [ Material.iconA icon.name [ style [ "color" => icon.color ] ]
                 , Html.h5 [ onClick (SwitchView (EntityListView viewType)) ] [ text title ]
                 ]
-            , li
+             , li
                 [ class ""
                 , onClickPreventDefaultAndStopPropagation onAddClicked
                 ]
                 [ Material.icon "add"
                 , div [] [ text "Add New" ]
                 ]
-            , li [] [ ul [] (List.map entityListItem entityList) ]
-            , Material.divider
-            ]
+             ]
+                ++ List.map entityListItem entityList
+                ++ [ Material.divider ]
+            )
         ]
 
 
 entityListItem : OldGroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg
 entityListItem vm =
-    div
-        [ class "collection-item layout horizontal center"
+    li
+        [ class ""
         , onClick (vm.onActiveStateChanged True)
         ]
-        [ Html.node "iron-icon" [ iconA vm.icon.name, style [ "color" => vm.icon.color ] ] []
-        , Paper.itemBody [] [ View.Shared.defaultBadge vm ]
+        [ Material.iconA vm.icon.name [ style [ "color" => vm.icon.color ] ]
+        , View.Shared.defaultBadge vm
         ]
 
 
 switchViewItem iconName viewType title =
-    Paper.item [ onClick (SwitchView viewType) ]
-        [ Html.node "iron-icon" [ iconA iconName ] []
-        , Paper.itemBody [] [ text title ]
+    li
+        [ class ""
+        , onClick (SwitchView viewType)
+        ]
+        [ Material.icon iconName
+        , div [] [ text title ]
         ]
 
 
 onSetEntityListViewItem iconName viewType title =
-    Paper.item [ onClick (OnSetEntityListView viewType) ]
-        [ Html.node "iron-icon" [ iconA iconName ] []
-        , Paper.itemBody [] [ text title ]
+    li
+        [ class ""
+        , onClick (OnSetEntityListView viewType)
+        ]
+        [ Material.icon iconName
+        , div [] [ text title ]
         ]

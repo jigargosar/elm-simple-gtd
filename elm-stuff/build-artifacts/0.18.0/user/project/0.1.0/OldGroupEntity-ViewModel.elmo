@@ -82,7 +82,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		nullEntity: _user$project$Context$null,
 		isNull: _user$project$Context$isNull,
 		nullIcon: {name: 'inbox', color: _user$project$OldGroupEntity_ViewModel$inboxColor},
-		defaultIconName: 'av:fiber-manual-record',
+		defaultIconName: 'album',
 		getViewType: _user$project$Entity$ContextView
 	};
 	var contextList = A2(_user$project$OldGroupEntity_ViewModel$createList, config, model);

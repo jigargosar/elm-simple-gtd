@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.37 - 2017-06-18
 * app drawer: make contexts/projects collapsible. 
 
 ## v0.18.36 - 2017-06-18

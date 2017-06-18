@@ -27,6 +27,12 @@ groupModelDecoder =
         |> D.required "expanded" D.bool
 
 
+encodeGroupModel model =
+    E.object
+        [ "expanded" => E.bool model.expanded
+        ]
+
+
 defaultGroupModel : GroupModel
 defaultGroupModel =
     { expanded = True }
@@ -42,6 +48,13 @@ decode =
     D.succeed Model
         |> D.required "contexts" groupModelDecoder
         |> D.required "projects" groupModelDecoder
+
+
+encode model =
+    E.object
+        [ "contexts" => encodeGroupModel model.contexts
+        , "projects" => encodeGroupModel model.projects
+        ]
 
 
 default : Model

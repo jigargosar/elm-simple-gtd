@@ -100,6 +100,7 @@ type Msg
     | OnCloseNotification String
     | OnSetDomFocusToFocusInEntity
     | OnAppDrawerMsg AppDrawer.Model.Msg
+    | OnPersistLocalPref
 
 
 keyboardCombos : List (Keyboard.Combo.KeyCombo Msg)
@@ -208,6 +209,12 @@ localPrefDecoder =
         |> D.optional "appDrawer" AppDrawer.Model.decode AppDrawer.Model.default
 
 
+encodeLocalPref model =
+    E.object
+        [ "appDrawer" => AppDrawer.Model.encode model.appDrawerModel
+        ]
+
+
 defaultLocalPref =
     { appDrawer = AppDrawer.Model.default }
 
@@ -253,6 +260,10 @@ appDrawerModel =
 
 overAppDrawerModel =
     over appDrawerModel
+
+
+mapOverAppDrawerModel =
+    over appDrawerModel >> Return.map
 
 
 contextStore =

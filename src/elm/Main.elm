@@ -62,6 +62,9 @@ port startAlarm : () -> Cmd msg
 port stopAlarm : () -> Cmd msg
 
 
+port persistLocalPref : D.Value -> Cmd msg
+
+
 main : RouteUrlProgram Flags Model Msg
 main =
     RouteUrl.programWithFlags
@@ -400,6 +403,9 @@ update msg =
 
                 OnAppDrawerMsg msg ->
                     AppDrawer.Main.update andThenUpdate msg
+
+                OnPersistLocalPref ->
+                    Return.effect_ (Model.encodeLocalPref >> persistLocalPref)
            )
         >> Return.map (logMsg msg)
 

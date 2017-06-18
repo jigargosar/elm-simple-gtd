@@ -19,7 +19,9 @@ update :
 update andThenUpdate msg =
     case msg of
         AppDrawer.Model.OnToggleExpandContextList ->
-            Return.map (Model.overAppDrawerModel (AppDrawer.Model.toggleContextListExpanded))
+            Model.mapOverAppDrawerModel AppDrawer.Model.toggleContextListExpanded
+                >> andThenUpdate Model.OnPersistLocalPref
 
         AppDrawer.Model.OnToggleExpandProjectList ->
-            Return.map (Model.overAppDrawerModel (AppDrawer.Model.toggleProjectListExpanded))
+            Model.mapOverAppDrawerModel AppDrawer.Model.toggleProjectListExpanded
+                >> andThenUpdate Model.OnPersistLocalPref

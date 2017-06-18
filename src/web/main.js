@@ -109,6 +109,13 @@ async function boot() {
         dbMap[dbName].upsert(id, doc).catch(console.error)
     });
 
+
+    app.ports["persistLocalPref"].subscribe(async (localPref) => {
+        store.setItem("local-pref", localPref)
+            .catch(console.error)
+    });
+
+
     Notifications.setup(fire, app).catch(console.error)
 
     app.ports["focusSelector"].subscribe((selector) => {

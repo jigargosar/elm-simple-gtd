@@ -1,3 +1,7 @@
+## Upcoming
+* use localforage to persist local user pref
+  * contexts/projects collapsible state. 
+
 ## v0.18.37 - 2017-06-18
 * app drawer: make contexts/projects collapsible. 
 

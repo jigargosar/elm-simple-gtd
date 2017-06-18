@@ -2,10 +2,18 @@ var _user$project$AppDrawer_Main$update = F2(
 	function (andThenUpdate, msg) {
 		var _p0 = msg;
 		if (_p0.ctor === 'OnToggleExpandContextList') {
-			return _Fresheyeball$elm_return$Return$map(
-				_user$project$Model$overAppDrawerModel(_user$project$AppDrawer_Model$toggleContextListExpanded));
+			return function (_p1) {
+				return A2(
+					andThenUpdate,
+					_user$project$Model$OnPersistLocalPref,
+					A2(_user$project$Model$mapOverAppDrawerModel, _user$project$AppDrawer_Model$toggleContextListExpanded, _p1));
+			};
 		} else {
-			return _Fresheyeball$elm_return$Return$map(
-				_user$project$Model$overAppDrawerModel(_user$project$AppDrawer_Model$toggleProjectListExpanded));
+			return function (_p2) {
+				return A2(
+					andThenUpdate,
+					_user$project$Model$OnPersistLocalPref,
+					A2(_user$project$Model$mapOverAppDrawerModel, _user$project$AppDrawer_Model$toggleProjectListExpanded, _p2));
+			};
 		}
 	});

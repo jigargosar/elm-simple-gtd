@@ -247,13 +247,11 @@ item vm =
 
 doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
-    Paper.iconButton
-        [ class ("done-icon done-" ++ toString (vm.isDone))
+    Material.iconButton "done"
+        [ classList [ "done-icon" => True, "is-done" => vm.isDone ]
         , onClickStopPropagation (vm.toggleDoneMsg)
-        , iconA "done"
         , vm.tabindexAV
         ]
-        []
 
 
 editContextButton vm =

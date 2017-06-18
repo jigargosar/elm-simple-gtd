@@ -32,8 +32,10 @@ iconButton name attributes =
 
 
 smallIconButton name attributes =
-    a ([ class "btn-flat btn-floating x24 " ] ++ attributes)
-        [ i [ class "material-icons" ] [ text name ] ]
+    div attributes
+        [ a ([ class "btn-flat btn-floating x24 " ])
+            [ i [ class "material-icons" ] [ text name ] ]
+        ]
 
 
 divider =

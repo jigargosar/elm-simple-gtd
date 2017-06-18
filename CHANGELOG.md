@@ -1,3 +1,6 @@
+## Upcoming
+* fix/use mat icon button instead of iron-icon/paper button 
+
 ## v0.18.40 - 2017-06-18
 * fix bug: clicking on done todo button also triggers edit mode. 
 

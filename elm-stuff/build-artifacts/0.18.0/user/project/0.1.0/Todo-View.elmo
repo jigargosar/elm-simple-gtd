@@ -543,29 +543,30 @@ var _user$project$Todo_View$editContextButton = function (vm) {
 };
 var _user$project$Todo_View$doneIconButton = function (vm) {
 	return A2(
-		_edvail$elm_polymer$Polymer_Paper$iconButton,
+		_user$project$Material$iconButton,
+		'done',
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class(
-				A2(
-					_elm_lang$core$Basics_ops['++'],
-					'done-icon done-',
-					_elm_lang$core$Basics$toString(vm.isDone))),
+			_0: _elm_lang$html$Html_Attributes$classList(
+				{
+					ctor: '::',
+					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'done-icon', true),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'is-done', vm.isDone),
+						_1: {ctor: '[]'}
+					}
+				}),
 			_1: {
 				ctor: '::',
 				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.toggleDoneMsg),
 				_1: {
 					ctor: '::',
-					_0: _user$project$WebComponents$iconA('done'),
-					_1: {
-						ctor: '::',
-						_0: vm.tabindexAV,
-						_1: {ctor: '[]'}
-					}
+					_0: vm.tabindexAV,
+					_1: {ctor: '[]'}
 				}
 			}
-		},
-		{ctor: '[]'});
+		});
 };
 var _user$project$Todo_View$item = function (vm) {
 	return A2(

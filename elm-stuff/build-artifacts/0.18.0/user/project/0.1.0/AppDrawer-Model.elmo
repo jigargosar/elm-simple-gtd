@@ -47,13 +47,27 @@ var _user$project$AppDrawer_Model$isContextListExpanded = function (_p1) {
 		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p1));
 };
 var _user$project$AppDrawer_Model$defaultGroupModel = {expanded: true};
-var _user$project$AppDrawer_Model$init = {contexts: _user$project$AppDrawer_Model$defaultGroupModel, projects: _user$project$AppDrawer_Model$defaultGroupModel};
+var _user$project$AppDrawer_Model$default = {contexts: _user$project$AppDrawer_Model$defaultGroupModel, projects: _user$project$AppDrawer_Model$defaultGroupModel};
 var _user$project$AppDrawer_Model$GroupModel = function (a) {
 	return {expanded: a};
 };
+var _user$project$AppDrawer_Model$groupModelDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'expanded',
+	_elm_lang$core$Json_Decode$bool,
+	_elm_lang$core$Json_Decode$succeed(_user$project$AppDrawer_Model$GroupModel));
 var _user$project$AppDrawer_Model$Model = F2(
 	function (a, b) {
 		return {contexts: a, projects: b};
 	});
+var _user$project$AppDrawer_Model$decode = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'projects',
+	_user$project$AppDrawer_Model$groupModelDecoder,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'contexts',
+		_user$project$AppDrawer_Model$groupModelDecoder,
+		_elm_lang$core$Json_Decode$succeed(_user$project$AppDrawer_Model$Model)));
 var _user$project$AppDrawer_Model$OnToggleExpandContextList = {ctor: 'OnToggleExpandContextList'};
 var _user$project$AppDrawer_Model$OnToggleExpandProjectList = {ctor: 'OnToggleExpandProjectList'};

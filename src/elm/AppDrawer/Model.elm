@@ -7,6 +7,9 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 
 
 type Msg
@@ -17,6 +20,11 @@ type Msg
 type alias GroupModel =
     { expanded : Bool
     }
+
+
+groupModelDecoder =
+    D.succeed GroupModel
+        |> D.required "expanded" D.bool
 
 
 defaultGroupModel : GroupModel
@@ -30,8 +38,14 @@ type alias Model =
     }
 
 
-init : Model
-init =
+decode =
+    D.succeed Model
+        |> D.required "contexts" groupModelDecoder
+        |> D.required "projects" groupModelDecoder
+
+
+default : Model
+default =
     { contexts = defaultGroupModel
     , projects = defaultGroupModel
     }

@@ -40,6 +40,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
 import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
 import Json.Encode as E
 import LaunchBar
 import Todo.GroupForm
@@ -197,6 +198,20 @@ type alias Config =
     }
 
 
+type alias LocalPref =
+    { appDrawer : AppDrawer.Model.Model
+    }
+
+
+localPrefDecoder =
+    D.succeed LocalPref
+        |> D.optional "appDrawer" AppDrawer.Model.decode AppDrawer.Model.default
+
+
+defaultLocalPref =
+    { appDrawer = AppDrawer.Model.default }
+
+
 type alias Flags =
     { now : Time
     , encodedTodoList : List Todo.Encoded
@@ -207,6 +222,7 @@ type alias Flags =
     , appVersion : String
     , deviceId : String
     , config : Config
+    , localPref : D.Value
     }
 
 
@@ -308,6 +324,11 @@ init flags =
                 -- ExclusiveMode.initActionList
                 ExclusiveMode.none
 
+        localPref =
+            D.decodeValue localPrefDecoder flags.localPref
+                |> Result.mapError (Debug.log "Unable to decode localPref")
+                != defaultLocalPref
+
         model =
             { now = now
             , todoStore = todoStore
@@ -335,7 +356,7 @@ init flags =
                     , combos = keyboardCombos
                     }
             , config = flags.config
-            , appDrawerModel = AppDrawer.Model.init
+            , appDrawerModel = localPref.appDrawer
             }
     in
         model |> Return.singleton

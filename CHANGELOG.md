@@ -1,3 +1,6 @@
+## Upcoming
+* fix clickable edit area of todo text 
+
 ## v0.18.42 - 2017-06-18
 * toggle done icon hover color 
 

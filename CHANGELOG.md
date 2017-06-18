@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.42 - 2017-06-18
 * toggle done icon hover color 
 
 ## v0.18.41 - 2017-06-18

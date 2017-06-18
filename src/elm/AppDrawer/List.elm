@@ -59,13 +59,12 @@ view appVM model =
 
 
 toggleDeletedItem model =
-    li []
+    li [ onClick Model.ToggleShowDeletedEntity ]
         [ div [ class "switch" ]
             [ label []
                 [ input
                     [ type_ "checkbox"
                     , checked model.showDeleted
-                    , onClick Model.ToggleShowDeletedEntity
                     , tabindex -1
                     ]
                     []
@@ -81,7 +80,7 @@ entityListView { className, entityList, viewType, title, showDeleted, onAddClick
         [ Material.iconA icon.name
             [ style [ "color" => icon.color ] ]
         , Html.h5 [ onClick (SwitchView (EntityListView viewType)) ] [ text title ]
-        , Material.iconA "expand_more" [ onClick onToggleExpanded ]
+        , Material.iconButton "expand_more" [ onClick onToggleExpanded ]
         ]
     , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
         [ ul []

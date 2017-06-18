@@ -138,7 +138,7 @@ var _user$project$AppDrawer_List$entityListView = F2(
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_user$project$Material$iconA,
+								_user$project$Material$iconButton,
 								'expand_more',
 								{
 									ctor: '::',
@@ -222,7 +222,11 @@ var _user$project$AppDrawer_List$entityListView = F2(
 var _user$project$AppDrawer_List$toggleDeletedItem = function (model) {
 	return A2(
 		_elm_lang$html$Html$li,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleShowDeletedEntity),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: A2(
@@ -249,12 +253,8 @@ var _user$project$AppDrawer_List$toggleDeletedItem = function (model) {
 										_0: _elm_lang$html$Html_Attributes$checked(model.showDeleted),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleShowDeletedEntity),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$tabindex(-1),
-												_1: {ctor: '[]'}
-											}
+											_0: _elm_lang$html$Html_Attributes$tabindex(-1),
+											_1: {ctor: '[]'}
 										}
 									}
 								},

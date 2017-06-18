@@ -48,10 +48,9 @@
   min-height: 2.5rem;
 }
 
-
-.app-drawer-list-container li:not(.list-container) > *{
-  &:first-child, &:last-child {
-    padding-right: 1rem;
+.app-drawer-list-container li:not(.list-container) > * {
+  &:nth-child(1), &:nth-child(3) {
+    margin-right: 1rem;
     flex: 0 0 auto;
   }
 }

@@ -46,6 +46,7 @@ view appVM model =
         div [ class "app-drawer-list-container" ]
             [ ul []
                 ([]
+
                     ++ entityListView contexts model.mainViewType
                     ++ entityListView projects model.mainViewType
                     ++ [ onSetEntityListViewItem "delete" Entity.BinView "Bin"
@@ -66,6 +67,7 @@ toggleDeletedItem model =
                     [ type_ "checkbox"
                     , checked model.showDeleted
                     , tabindex -1
+                    , onClick Model.ToggleShowDeletedEntity
                     ]
                     []
                 , span [ class "lever" ] []

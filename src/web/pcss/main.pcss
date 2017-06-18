@@ -55,14 +55,18 @@
   }
 }
 
-.done-icon.is-done .material-icons{
+.done-icon.is-done .material-icons, .done-icon:not(.is-done) .material-icons:hover {
   color: #4caf50;
 }
 
-.done-icon a .material-icons, .done-icon a{
+.done-icon.is-done .material-icons:hover {
+  color: unset;
+}
+
+.done-icon a .material-icons, .done-icon a {
   line-height: 2rem;
-  height:2rem;
-  width:2rem;
+  height: 2rem;
+  width: 2rem;
   font-size: 1.5rem;
 }
 

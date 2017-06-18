@@ -50,7 +50,7 @@ view appVM model =
                     ++ entityListView projects model.mainViewType
                     ++ [ onSetEntityListViewItem "delete" Entity.BinView "Bin"
                        , onSetEntityListViewItem "done" Entity.DoneView "Done"
-                       , switchViewItem "settings" SyncView "Custom Sync"
+                       , switchViewItem "sync" SyncView "Custom Sync"
                        ]
                     ++ [ Material.divider ]
                     ++ [ toggleDeletedItem model ]
@@ -77,10 +77,11 @@ toggleDeletedItem model =
 
 
 entityListView { className, entityList, viewType, title, showDeleted, onAddClicked, icon, onToggleExpanded, isExpanded } mainViewType =
-    [ li [ class "header-item" ]
+    [ li []
         [ Material.iconA icon.name
-            [ style [ "color" => icon.color ], onClick onToggleExpanded ]
+            [ style [ "color" => icon.color ] ]
         , Html.h5 [ onClick (SwitchView (EntityListView viewType)) ] [ text title ]
+        , Material.iconA "expand_more" [ onClick onToggleExpanded ]
         ]
     , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
         [ ul []

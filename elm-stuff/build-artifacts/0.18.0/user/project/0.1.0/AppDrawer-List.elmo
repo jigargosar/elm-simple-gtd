@@ -103,11 +103,7 @@ var _user$project$AppDrawer_List$entityListView = F2(
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$li,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('header-item'),
-					_1: {ctor: '[]'}
-				},
+				{ctor: '[]'},
 				{
 					ctor: '::',
 					_0: A2(
@@ -121,11 +117,7 @@ var _user$project$AppDrawer_List$entityListView = F2(
 									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', _p2.color),
 									_1: {ctor: '[]'}
 								}),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_p1.onToggleExpanded),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						}),
 					_1: {
 						ctor: '::',
@@ -143,7 +135,18 @@ var _user$project$AppDrawer_List$entityListView = F2(
 								_0: _elm_lang$html$Html$text(_p1.title),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_user$project$Material$iconA,
+								'expand_more',
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(_p1.onToggleExpanded),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				}),
 			_1: {
@@ -321,7 +324,7 @@ var _user$project$AppDrawer_List$view = F2(
 											_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'done', _user$project$Entity$DoneView, 'Done'),
 											_1: {
 												ctor: '::',
-												_0: A3(_user$project$AppDrawer_List$switchViewItem, 'settings', _user$project$Model$SyncView, 'Custom Sync'),
+												_0: A3(_user$project$AppDrawer_List$switchViewItem, 'sync', _user$project$Model$SyncView, 'Custom Sync'),
 												_1: {ctor: '[]'}
 											}
 										}

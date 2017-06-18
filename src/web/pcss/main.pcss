@@ -41,8 +41,6 @@
 
 .app-drawer-list-container {
   @apply --ul-layout;
-
-
 }
 
 .app-drawer-list-container li:not(.list-container) {
@@ -50,10 +48,21 @@
   min-height: 2.5rem;
 }
 
+
+.app-drawer-list-container li:not(.list-container) > *{
+  &:first-child, &:last-child {
+    padding-right: 1rem;
+    flex: 0 0 auto;
+  }
+}
+
+.app-drawer-list-container li:not(.list-container) > * {
+  flex: 1 1 auto;
+}
+
 .app-drawer-list-container li.list-container:not(.expanded) {
   display: none;
 }
-
 
 a {
   cursor: pointer;

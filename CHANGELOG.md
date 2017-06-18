@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.38 - 2017-06-18
 * use localforage to persist local user pref
   * contexts/projects collapsible state. 
 

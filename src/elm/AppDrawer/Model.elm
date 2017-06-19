@@ -93,6 +93,10 @@ toggleShowArchived =
     Ext.Record.toggle showArchived
 
 
+setShowArchived bool =
+    Ext.Record.set showArchived bool
+
+
 toggleProjectListExpanded =
     Ext.Record.over projects (toggleExpanded)
 
@@ -103,6 +107,12 @@ isProjectListExpanded =
 
 toggleContextListExpanded =
     Ext.Record.over contexts (toggleExpanded)
+        >> (\model ->
+                if isContextListExpanded model then
+                    model
+                else
+                    hideArchivedContexts model
+           )
 
 
 isContextListExpanded =
@@ -115,6 +125,14 @@ getShowArchivedForContexts =
 
 getShowArchivedForProjects =
     Ext.Record.get projects >> Ext.Record.get showArchived
+
+
+hideArchivedContexts =
+    Ext.Record.over contexts (setShowArchived False)
+
+
+hideArchivedProjects =
+    Ext.Record.over projects (setShowArchived False)
 
 
 toggleContextShowArchived =

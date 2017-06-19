@@ -127,9 +127,9 @@ archivedItems vm =
     let
         ( iconName, buttonText, viewItems ) =
             if vm.showArchived then
-                ( "visibility", "Hide Archived", List.map entityListItem vm.archivedEntityList )
+                ( "visibility_off", "Hide Archived", List.map entityListItem vm.archivedEntityList )
             else
-                ( "visibility_off", " Show Archived", [] )
+                ( "visibility", " Show Archived", [] )
     in
         [ li
             [ class ""

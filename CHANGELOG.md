@@ -1,3 +1,7 @@
+## Upcoming
+* drawer: move add to bottom of list
+  show archived count. 
+
 ## v0.18.44 - 2017-06-19
 * app drawer: show archived  contexts/projects
   add archive/unarchive icon. 

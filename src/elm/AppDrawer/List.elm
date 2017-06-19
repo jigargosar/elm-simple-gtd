@@ -136,7 +136,9 @@ archivedItems vm =
             , onClick vm.onToggleShowArchived
             ]
             [ Material.icon iconName
-            , div [] [ text buttonText ]
+            , div [ class "font-nowrap" ]
+                [ View.Shared.badge buttonText (vm.archivedEntityList |> List.length)
+                ]
             ]
         , li [ classList [ "list-container" => True, "expanded" => vm.showArchived ] ]
             [ ul [] viewItems ]

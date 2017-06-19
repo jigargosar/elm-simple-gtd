@@ -137,10 +137,17 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 					ctor: '::',
 					_0: A2(
 						_elm_lang$html$Html$div,
-						{ctor: '[]'},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text(buttonText),
+							_0: _elm_lang$html$Html_Attributes$class('font-nowrap'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_user$project$View_Shared$badge,
+								buttonText,
+								_elm_lang$core$List$length(vm.archivedEntityList)),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}

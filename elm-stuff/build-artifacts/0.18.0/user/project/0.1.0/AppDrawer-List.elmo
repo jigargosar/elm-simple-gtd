@@ -117,40 +117,64 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 	var iconName = _p0._0;
 	var buttonText = _p0._1;
 	var viewItems = _p0._2;
-	return A2(
-		_elm_lang$core$Basics_ops['++'],
-		{
+	return {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$li,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class(''),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.onToggleShowArchived),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Material$icon(iconName),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(buttonText),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$li,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class(''),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(vm.onToggleShowArchived),
-						_1: {ctor: '[]'}
-					}
+					_0: _elm_lang$html$Html_Attributes$classList(
+						{
+							ctor: '::',
+							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'list-container', true),
+							_1: {
+								ctor: '::',
+								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'expanded', vm.showArchived),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
 				},
 				{
 					ctor: '::',
-					_0: _user$project$Material$icon(iconName),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(buttonText),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+					_0: A2(
+						_elm_lang$html$Html$ul,
+						{ctor: '[]'},
+						viewItems),
+					_1: {ctor: '[]'}
 				}),
 			_1: {ctor: '[]'}
-		},
-		viewItems);
+		}
+	};
 };
 var _user$project$AppDrawer_List$entityListView = F2(
 	function (vm, mainViewType) {

@@ -137,8 +137,9 @@ archivedItems vm =
             [ Material.icon iconName
             , div [] [ text buttonText ]
             ]
+        , li [ classList [ "list-container" => True, "expanded" => vm.showArchived ] ]
+            [ ul [] viewItems ]
         ]
-            ++ viewItems
 
 
 entityListItem : OldGroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg

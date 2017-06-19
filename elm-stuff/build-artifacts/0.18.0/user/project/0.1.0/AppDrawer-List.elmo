@@ -117,6 +117,7 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 	var iconName = _p0._0;
 	var buttonText = _p0._1;
 	var viewItems = _p0._2;
+	var badgeCount = _elm_lang$core$List$length(vm.archivedEntityList);
 	return {
 		ctor: '::',
 		_0: A2(
@@ -144,10 +145,7 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 						},
 						{
 							ctor: '::',
-							_0: A2(
-								_user$project$View_Shared$badge,
-								buttonText,
-								_elm_lang$core$List$length(vm.archivedEntityList)),
+							_0: A2(_user$project$View_Shared$badge, buttonText, badgeCount),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}

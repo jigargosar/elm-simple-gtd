@@ -125,11 +125,20 @@ entityListView vm mainViewType =
 
 archivedItems vm =
     let
+        badgeCount =
+            (vm.archivedEntityList |> List.length)
+
         ( iconName, buttonText, viewItems ) =
             if vm.showArchived then
-                ( "visibility_off", "Hide Archived", List.map entityListItem vm.archivedEntityList )
+                ( "visibility_off"
+                , "Hide Archived"
+                , List.map entityListItem vm.archivedEntityList
+                )
             else
-                ( "visibility", " Show Archived", [] )
+                ( "visibility"
+                , " Show Archived"
+                , []
+                )
     in
         [ li
             [ class ""
@@ -137,7 +146,7 @@ archivedItems vm =
             ]
             [ Material.icon iconName
             , div [ class "font-nowrap" ]
-                [ View.Shared.badge buttonText (vm.archivedEntityList |> List.length)
+                [ View.Shared.badge buttonText badgeCount
                 ]
             ]
         , li [ classList [ "list-container" => True, "expanded" => vm.showArchived ] ]

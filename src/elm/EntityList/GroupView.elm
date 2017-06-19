@@ -24,25 +24,25 @@ import WebComponents
 
 
 initKeyed todoView vm =
-    ( vm.id, init todoView vm )
+    ( vm.id, item todoView vm )
 
 
-initHeaderKeyed vm =
-    ( vm.id, initHeader vm )
-
-
-init todoView vm =
+item todoView vm =
     let
         getTabIndexAVForTodo =
             Entity.TodoEntity >> vm.getTabIndexAVForEntity
     in
         Html.Keyed.node "div"
             [ class "collection" ]
-            (( vm.id, initHeader vm ) :: (vm.todoList .|> todoView))
+            (( vm.id, headerItem vm ) :: (vm.todoList .|> todoView))
 
 
-initHeader : GroupViewModel -> Html Model.Msg
-initHeader vm =
+initHeaderKeyed vm =
+    ( vm.id, headerItem vm )
+
+
+headerItem : GroupViewModel -> Html Model.Msg
+headerItem vm =
     let
         editButton =
             if vm.isEditable then

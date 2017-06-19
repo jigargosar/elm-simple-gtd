@@ -81,6 +81,18 @@ var _user$project$GroupDoc$constructor = F7(
 	function (id, rev, createdAt, modifiedAt, deleted, deviceId, name) {
 		return {id: id, rev: rev, createdAt: createdAt, modifiedAt: modifiedAt, deleted: false, archived: deleted, deviceId: deviceId, name: name};
 	});
+var _user$project$GroupDoc$archived = A2(
+	_user$project$Ext_Record$bool,
+	function (_) {
+		return _.archived;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{archived: s});
+		}));
+var _user$project$GroupDoc$toggleArchived = _user$project$Ext_Record$toggle(_user$project$GroupDoc$archived);
 var _user$project$GroupDoc$Record = F2(
 	function (a, b) {
 		return {name: a, archived: b};

@@ -2,6 +2,7 @@ module GroupDoc exposing (..)
 
 import Document
 import Ext.Predicate
+import Ext.Record
 import Firebase exposing (DeviceId)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -22,6 +23,10 @@ type alias Record =
     { name : Name
     , archived : Bool
     }
+
+
+archived =
+    Ext.Record.bool .archived (\s b -> { b | archived = s })
 
 
 type alias Model =
@@ -47,6 +52,10 @@ constructor id rev createdAt modifiedAt deleted deviceId name =
     , deviceId = deviceId
     , name = name
     }
+
+
+toggleArchived =
+    Ext.Record.toggle archived
 
 
 getName =

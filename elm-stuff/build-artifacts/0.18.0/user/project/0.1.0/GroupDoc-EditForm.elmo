@@ -1,0 +1,19 @@
+var _user$project$GroupDoc_EditForm$setName = F2(
+	function (name, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{name: name});
+	});
+var _user$project$GroupDoc_EditForm$init = F2(
+	function (toEntity, groupDoc) {
+		return {
+			id: _user$project$Document$getId(groupDoc),
+			name: _user$project$GroupDoc$getName(groupDoc),
+			entity: toEntity(groupDoc),
+			isArchived: _user$project$GroupDoc$isArchived(groupDoc)
+		};
+	});
+var _user$project$GroupDoc_EditForm$Model = F4(
+	function (a, b, c, d) {
+		return {id: a, name: b, entity: c, isArchived: d};
+	});

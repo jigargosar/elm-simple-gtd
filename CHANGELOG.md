@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.46 - 2017-06-19
 * sort archived groupDocs by modifiedAt
   use activePred rather than incorrect isNotArchived when filtering
 * collapse archived when parent is collapsed.

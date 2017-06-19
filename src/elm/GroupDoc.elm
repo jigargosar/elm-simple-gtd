@@ -1,6 +1,7 @@
 module GroupDoc exposing (..)
 
 import Document
+import Ext.Predicate
 import Firebase exposing (DeviceId)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -52,6 +53,14 @@ getName =
     .name
 
 
+isArchived =
+    .archived
+
+
+isNotArchived =
+    isArchived >> not
+
+
 type alias Store =
     Store.Store Record
 
@@ -95,3 +104,11 @@ compareNotNulls tuple =
                         ( False, False ) ->
                             compareName tuple
                )
+
+
+activeFilter =
+    Ext.Predicate.all [ Document.isNotDeleted, isNotArchived ]
+
+
+archivedFilter =
+    Ext.Predicate.all [ Document.isNotDeleted, isArchived ]

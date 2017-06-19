@@ -1,23 +1,49 @@
+var _user$project$GroupDoc$isArchived = function (_) {
+	return _.archived;
+};
+var _user$project$GroupDoc$isNotArchived = function (_p0) {
+	return !_user$project$GroupDoc$isArchived(_p0);
+};
+var _user$project$GroupDoc$activeFilter = _user$project$Ext_Predicate$all(
+	{
+		ctor: '::',
+		_0: _user$project$Document$isNotDeleted,
+		_1: {
+			ctor: '::',
+			_0: _user$project$GroupDoc$isNotArchived,
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$GroupDoc$archivedFilter = _user$project$Ext_Predicate$all(
+	{
+		ctor: '::',
+		_0: _user$project$Document$isNotDeleted,
+		_1: {
+			ctor: '::',
+			_0: _user$project$GroupDoc$isArchived,
+			_1: {ctor: '[]'}
+		}
+	});
 var _user$project$GroupDoc$getName = function (_) {
 	return _.name;
 };
 var _user$project$GroupDoc$compareNotNulls = function (tuple) {
-	var compareName = function (_p0) {
+	var compareName = function (_p1) {
 		return A2(
 			_elm_lang$core$Basics$uncurry,
 			_elm_lang$core$Basics$compare,
-			A2(_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth, _user$project$GroupDoc$getName, _p0));
+			A2(_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth, _user$project$GroupDoc$getName, _p1));
 	};
 	return function (deletedTuple) {
-		var _p1 = deletedTuple;
-		if (_p1._0 === true) {
-			if (_p1._1 === false) {
+		var _p2 = deletedTuple;
+		if (_p2._0 === true) {
+			if (_p2._1 === false) {
 				return _elm_lang$core$Basics$GT;
 			} else {
 				return compareName(tuple);
 			}
 		} else {
-			if (_p1._1 === true) {
+			if (_p2._1 === true) {
 				return _elm_lang$core$Basics$LT;
 			} else {
 				return compareName(tuple);
@@ -30,19 +56,19 @@ var _user$project$GroupDoc$sort = function (isNull) {
 	return _elm_lang$core$List$sortWith(
 		F2(
 			function (v1, v2) {
-				var _p2 = {
+				var _p3 = {
 					ctor: '_Tuple2',
 					_0: isNull(v1),
 					_1: isNull(v2)
 				};
-				if (_p2._0 === true) {
-					if (_p2._1 === false) {
+				if (_p3._0 === true) {
+					if (_p3._1 === false) {
 						return _elm_lang$core$Basics$LT;
 					} else {
 						return _elm_lang$core$Basics$EQ;
 					}
 				} else {
-					if (_p2._1 === true) {
+					if (_p3._1 === true) {
 						return _elm_lang$core$Basics$GT;
 					} else {
 						return _user$project$GroupDoc$compareNotNulls(

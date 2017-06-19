@@ -1,4 +1,3 @@
-var _user$project$Project$decoder = _user$project$GroupDoc$decoder;
 var _user$project$Project$nullId = '';
 var _user$project$Project$isNullId = _user$project$Ext_Function$equals(_user$project$Project$nullId);
 var _user$project$Project$constructor = _user$project$GroupDoc$constructor;
@@ -34,17 +33,6 @@ var _user$project$Project$updateName = F2(
 	});
 var _user$project$Project$getName = function (_) {
 	return _.name;
-};
-var _user$project$Project$otherFieldsEncoder = function (project) {
-	return {
-		ctor: '::',
-		_0: A2(
-			_user$project$Ext_Function_Infix_ops['=>'],
-			'name',
-			_elm_lang$core$Json_Encode$string(
-				_user$project$Project$getName(project))),
-		_1: {ctor: '[]'}
-	};
 };
 var _user$project$Project$setRev = F2(
 	function (rev, model) {
@@ -88,7 +76,7 @@ var _user$project$Project$findByName = function (projectName) {
 		_user$project$Project$nameEquals(
 			_elm_lang$core$String$trim(projectName)));
 };
-var _user$project$Project$storeGenerator = A3(_user$project$Store$generator, 'project-db', _user$project$Project$otherFieldsEncoder, _user$project$Project$decoder);
+var _user$project$Project$storeGenerator = _user$project$GroupDoc$storeGenerator('project-db');
 var _user$project$Project$findNameById = function (id) {
 	return A2(
 		_user$project$Ext_Function_Infix_ops['>>?'],

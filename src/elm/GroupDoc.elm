@@ -16,6 +16,7 @@ import Tuple2
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import Random.Pcg
 
 
 type alias Name =
@@ -72,6 +73,18 @@ decoder =
         |> Document.documentFieldsDecoder
         |> D.required "name" D.string
         |> D.optional "archived" D.bool False
+
+
+encodeRecordFields : Model -> List ( String, E.Value )
+encodeRecordFields model =
+    [ "name" => E.string model.name
+    , "archived" => E.bool model.archived
+    ]
+
+
+storeGenerator : String -> DeviceId -> List E.Value -> Random.Pcg.Generator Store
+storeGenerator dbName =
+    Store.generator dbName encodeRecordFields decoder
 
 
 toggleArchived =

@@ -1,3 +1,4 @@
+var _user$project$Context$storeGenerator = _user$project$GroupDoc$storeGenerator('context-db');
 var _user$project$Context$setName = F2(
 	function (name, model) {
 		return _elm_lang$core$Native_Utils.update(
@@ -24,19 +25,6 @@ var _user$project$Context$findByName = function (name) {
 };
 var _user$project$Context$nullId = '';
 var _user$project$Context$isNullId = _user$project$Ext_Function$equals(_user$project$Context$nullId);
-var _user$project$Context$decoder = _user$project$GroupDoc$decoder;
-var _user$project$Context$otherFieldsEncoder = function (project) {
-	return {
-		ctor: '::',
-		_0: A2(
-			_user$project$Ext_Function_Infix_ops['=>'],
-			'name',
-			_elm_lang$core$Json_Encode$string(
-				_user$project$Context$getName(project))),
-		_1: {ctor: '[]'}
-	};
-};
-var _user$project$Context$storeGenerator = A3(_user$project$Store$generator, 'context-db', _user$project$Context$otherFieldsEncoder, _user$project$Context$decoder);
 var _user$project$Context$constructor = _user$project$GroupDoc$constructor;
 var _user$project$Context$init = F4(
 	function (name, now, deviceId, id) {

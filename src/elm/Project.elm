@@ -45,7 +45,7 @@ findNameById id =
 
 storeGenerator : DeviceId -> List E.Value -> Random.Generator Store
 storeGenerator =
-    Store.generator "project-db" otherFieldsEncoder decoder
+    GroupDoc.storeGenerator "project-db"
 
 
 findByName projectName =
@@ -128,13 +128,3 @@ isNull =
 
 sort =
     GroupDoc.sort isNull
-
-
-otherFieldsEncoder : GroupDoc.Model -> List ( String, E.Value )
-otherFieldsEncoder project =
-    [ "name" => E.string (getName project) ]
-
-
-decoder : Decoder Project
-decoder =
-    GroupDoc.decoder

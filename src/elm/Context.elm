@@ -47,16 +47,6 @@ init name now deviceId id =
     constructor id "" now now False deviceId name False
 
 
-otherFieldsEncoder : Document Record -> List ( String, E.Value )
-otherFieldsEncoder project =
-    [ "name" => E.string (getName project) ]
-
-
-decoder : Decoder Model
-decoder =
-    GroupDoc.decoder
-
-
 null : Model
 null =
     constructor nullId "" 0 0 False "" "Inbox" False
@@ -92,7 +82,7 @@ setName name model =
 
 storeGenerator : DeviceId -> List E.Value -> Random.Generator Store
 storeGenerator =
-    Store.generator "context-db" otherFieldsEncoder decoder
+    GroupDoc.storeGenerator "context-db"
 
 
 findNameById id =

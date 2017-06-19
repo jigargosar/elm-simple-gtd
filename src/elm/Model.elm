@@ -223,8 +223,8 @@ defaultLocalPref =
 type alias Flags =
     { now : Time
     , encodedTodoList : List Todo.Encoded
-    , encodedProjectList : List Project.Encoded
-    , encodedContextList : List Context.Encoded
+    , encodedProjectList : List E.Value
+    , encodedContextList : List E.Value
     , pouchDBRemoteSyncURI : String
     , developmentMode : Bool
     , appVersion : String

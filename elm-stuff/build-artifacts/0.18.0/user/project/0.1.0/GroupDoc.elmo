@@ -77,6 +77,23 @@ var _user$project$GroupDoc$sort = function (isNull) {
 				}
 			}));
 };
+var _user$project$GroupDoc$encodeRecordFields = function (model) {
+	return {
+		ctor: '::',
+		_0: A2(
+			_user$project$Ext_Function_Infix_ops['=>'],
+			'name',
+			_elm_lang$core$Json_Encode$string(model.name)),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_user$project$Ext_Function_Infix_ops['=>'],
+				'archived',
+				_elm_lang$core$Json_Encode$bool(model.archived)),
+			_1: {ctor: '[]'}
+		}
+	};
+};
 var _user$project$GroupDoc$constructor = F8(
 	function (id, rev, createdAt, modifiedAt, deleted, deviceId, name, archived) {
 		return {
@@ -101,6 +118,9 @@ var _user$project$GroupDoc$decoder = A4(
 		_elm_lang$core$Json_Decode$string,
 		_user$project$Document$documentFieldsDecoder(
 			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$GroupDoc$constructor))));
+var _user$project$GroupDoc$storeGenerator = function (dbName) {
+	return A3(_user$project$Store$generator, dbName, _user$project$GroupDoc$encodeRecordFields, _user$project$GroupDoc$decoder);
+};
 var _user$project$GroupDoc$archived = A2(
 	_user$project$Ext_Record$bool,
 	function (_) {

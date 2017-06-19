@@ -6,6 +6,7 @@ import Document
 import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
 import Ext.Keyboard exposing (KeyboardEvent)
+import GroupDoc
 import Html
 import Lazy
 import Model exposing (EntityListViewType, ViewType(..))
@@ -34,6 +35,7 @@ type alias GroupViewModel =
     , name : String
     , namePrefix : String
     , isDeleted : Bool
+    , isArchived : Bool
     , isEditable : Bool
     , startEditingMsg : Msg
     , onDeleteClicked : Msg
@@ -49,16 +51,16 @@ type alias GroupViewModel =
     }
 
 
-type alias DocumentWithName =
-    Document.Document { name : String, archived : Bool }
+type alias GroupDoc =
+    GroupDoc.Model
 
 
 type alias Config =
     { groupByFn : Todo.Model -> Document.Id
     , namePrefix : String
-    , entityWrapper : DocumentWithName -> Entity
-    , nullEntity : DocumentWithName
-    , isNull : DocumentWithName -> Bool
+    , entityWrapper : GroupDoc -> Entity
+    , nullEntity : GroupDoc
+    , isNull : GroupDoc -> Bool
     , nullIcon : IconVM
     , defaultIconName : String
     , getViewType : Document.Id -> EntityListViewType
@@ -66,28 +68,28 @@ type alias Config =
     }
 
 
-create config todoList entityModel =
+create config todoList groupDoc =
     let
         id =
-            Document.getId entityModel
+            Document.getId groupDoc
 
-        createEntityActionMsg =
-            Model.OnEntityAction (config.entityWrapper entityModel)
+        onEntityAction =
+            Model.OnEntityAction (config.entityWrapper groupDoc)
 
         isNull =
-            config.isNull entityModel
+            config.isNull groupDoc
 
         toggleDeleteMsg =
             if isNull then
                 Model.NOOP
             else
-                createEntityActionMsg Entity.ToggleDeleted
+                onEntityAction Entity.ToggleDeleted
 
         startEditingMsg =
             if isNull then
                 Model.NOOP
             else
-                createEntityActionMsg Entity.StartEditing
+                onEntityAction Entity.StartEditing
 
         icon =
             if isNull then
@@ -96,7 +98,7 @@ create config todoList entityModel =
                 { name = config.defaultIconName, color = lightGray }
 
         name =
-            entityModel.name
+            groupDoc.name
 
         appHeader =
             { name = config.namePrefix ++ name, backgroundColor = icon.color }
@@ -110,26 +112,41 @@ create config todoList entityModel =
                     toggleDeleteMsg
 
                 Key.CharG ->
-                    createEntityActionMsg Entity.Goto
+                    onEntityAction Entity.Goto
 
                 _ ->
                     commonMsg.noOp
+
+        isArchived =
+            GroupDoc.isArchived groupDoc
+
+        archivedIconName =
+            if isArchived then
+                "unarchive"
+            else
+                "archive"
+
+        archived =
+            { iconName = "archive"
+            , onToggle = onEntityAction Entity.ToggleArchived
+            }
     in
         { id = id
         , name = name
         , namePrefix = config.namePrefix
         , count = todoList |> List.length
         , isEditable = not isNull
-        , isDeleted = Document.isDeleted entityModel
+        , isDeleted = Document.isDeleted groupDoc
+        , isArchived = GroupDoc.isArchived groupDoc
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg
-        , onSaveClicked = createEntityActionMsg Entity.Save
-        , onNameChanged = Entity.NameChanged >> createEntityActionMsg
+        , onSaveClicked = onEntityAction Entity.Save
+        , onNameChanged = Entity.NameChanged >> onEntityAction
         , onCancelClicked = Model.OnDeactivateEditingMode
         , icon = icon
-        , onFocusIn = createEntityActionMsg Entity.OnFocusIn
+        , onFocusIn = onEntityAction Entity.OnFocusIn
         , onKeyDownMsg = onKeyDownMsg
-        , tabindexAV = config.getTabIndexAVForEntity (config.entityWrapper entityModel)
+        , tabindexAV = config.getTabIndexAVForEntity (config.entityWrapper groupDoc)
         , todoList = todoList
         , getTabIndexAVForEntity = config.getTabIndexAVForEntity
         }

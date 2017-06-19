@@ -33,6 +33,7 @@ type ListViewType
 type Action
     = StartEditing
     | ToggleDeleted
+    | ToggleArchived
     | Save
     | NameChanged String
     | OnFocusIn

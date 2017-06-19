@@ -5,18 +5,20 @@ var _user$project$EntityList_ViewModel$nullProjectColor = 'rgb(179, 157, 219)';
 var _user$project$EntityList_ViewModel$contextsColor = _user$project$EntityList_ViewModel$sgtdBlue;
 var _user$project$EntityList_ViewModel$inboxColor = '#42a5f5';
 var _user$project$EntityList_ViewModel$create = F3(
-	function (config, todoList, entityModel) {
-		var name = entityModel.name;
-		var isNull = config.isNull(entityModel);
+	function (config, todoList, groupDoc) {
+		var isArchived = _user$project$GroupDoc$isArchived(groupDoc);
+		var archivedIconName = isArchived ? 'unarchive' : 'archive';
+		var name = groupDoc.name;
+		var isNull = config.isNull(groupDoc);
 		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$EntityList_ViewModel$lightGray};
 		var appHeader = {
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
 		};
-		var createEntityActionMsg = _user$project$Model$OnEntityAction(
-			config.entityWrapper(entityModel));
-		var toggleDeleteMsg = isNull ? _user$project$Model$NOOP : createEntityActionMsg(_user$project$Entity$ToggleDeleted);
-		var startEditingMsg = isNull ? _user$project$Model$NOOP : createEntityActionMsg(_user$project$Entity$StartEditing);
+		var onEntityAction = _user$project$Model$OnEntityAction(
+			config.entityWrapper(groupDoc));
+		var toggleDeleteMsg = isNull ? _user$project$Model$NOOP : onEntityAction(_user$project$Entity$ToggleDeleted);
+		var startEditingMsg = isNull ? _user$project$Model$NOOP : onEntityAction(_user$project$Entity$StartEditing);
 		var onKeyDownMsg = function (_p0) {
 			var _p1 = _p0;
 			var _p2 = _p1.key;
@@ -26,32 +28,37 @@ var _user$project$EntityList_ViewModel$create = F3(
 				case 'Delete':
 					return toggleDeleteMsg;
 				case 'CharG':
-					return createEntityActionMsg(_user$project$Entity$Goto);
+					return onEntityAction(_user$project$Entity$Goto);
 				default:
 					return _user$project$Model$commonMsg.noOp;
 			}
 		};
-		var id = _user$project$Document$getId(entityModel);
+		var archived = {
+			iconName: 'archive',
+			onToggle: onEntityAction(_user$project$Entity$ToggleArchived)
+		};
+		var id = _user$project$Document$getId(groupDoc);
 		return {
 			id: id,
 			name: name,
 			namePrefix: config.namePrefix,
 			count: _elm_lang$core$List$length(todoList),
 			isEditable: !isNull,
-			isDeleted: _user$project$Document$isDeleted(entityModel),
+			isDeleted: _user$project$Document$isDeleted(groupDoc),
+			isArchived: _user$project$GroupDoc$isArchived(groupDoc),
 			startEditingMsg: startEditingMsg,
 			onDeleteClicked: toggleDeleteMsg,
-			onSaveClicked: createEntityActionMsg(_user$project$Entity$Save),
+			onSaveClicked: onEntityAction(_user$project$Entity$Save),
 			onNameChanged: function (_p3) {
-				return createEntityActionMsg(
+				return onEntityAction(
 					_user$project$Entity$NameChanged(_p3));
 			},
 			onCancelClicked: _user$project$Model$OnDeactivateEditingMode,
 			icon: icon,
-			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
+			onFocusIn: onEntityAction(_user$project$Entity$OnFocusIn),
 			onKeyDownMsg: onKeyDownMsg,
 			tabindexAV: config.getTabIndexAVForEntity(
-				config.entityWrapper(entityModel)),
+				config.entityWrapper(groupDoc)),
 			todoList: todoList,
 			getTabIndexAVForEntity: config.getTabIndexAVForEntity
 		};
@@ -107,7 +114,9 @@ var _user$project$EntityList_ViewModel$GroupViewModel = function (a) {
 														return function (o) {
 															return function (p) {
 																return function (q) {
-																	return {id: a, count: b, name: c, namePrefix: d, isDeleted: e, isEditable: f, startEditingMsg: g, onDeleteClicked: h, onSaveClicked: i, onNameChanged: j, onCancelClicked: k, icon: l, onFocusIn: m, onKeyDownMsg: n, tabindexAV: o, todoList: p, getTabIndexAVForEntity: q};
+																	return function (r) {
+																		return {id: a, count: b, name: c, namePrefix: d, isDeleted: e, isArchived: f, isEditable: g, startEditingMsg: h, onDeleteClicked: i, onSaveClicked: j, onNameChanged: k, onCancelClicked: l, icon: m, onFocusIn: n, onKeyDownMsg: o, tabindexAV: p, todoList: q, getTabIndexAVForEntity: r};
+																	};
 																};
 															};
 														};

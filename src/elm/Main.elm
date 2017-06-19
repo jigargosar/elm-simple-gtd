@@ -351,6 +351,10 @@ update msg =
                             Return.andThen (Model.toggleDeleteEntity entity)
                                 >> andThenUpdate OnDeactivateEditingMode
 
+                        Entity.ToggleArchived ->
+                            Return.andThen (Model.toggleArchiveEntity entity)
+                                >> andThenUpdate OnDeactivateEditingMode
+
                         Entity.OnFocusIn ->
                             Return.map (Model.setFocusInEntity entity)
 

@@ -272,6 +272,7 @@ var _user$project$Entity$NameChanged = function (a) {
 	return {ctor: 'NameChanged', _0: a};
 };
 var _user$project$Entity$Save = {ctor: 'Save'};
+var _user$project$Entity$ToggleArchived = {ctor: 'ToggleArchived'};
 var _user$project$Entity$ToggleDeleted = {ctor: 'ToggleDeleted'};
 var _user$project$Entity$StartEditing = {ctor: 'StartEditing'};
 var _user$project$Entity$FlatTodoList = F2(

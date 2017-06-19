@@ -98,29 +98,33 @@ entityListView vm mainViewType =
                 "expand_less"
             else
                 "expand_more"
+
+        nullViewAsList =
+            vm.nullVMAsList .|> entityListItem
     in
-        [ li [ onClick fireSmart ]
-            [ Material.iconA vm.icon.name [ style [ "color" => vm.icon.color ] ]
-            , Html.h5 [] [ text vm.title ]
-            , Material.iconButton expandIconName [ onClickStopPropagation onToggleExpanded ]
-            ]
-        , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
-            [ ul []
-                ([]
-                    ++ List.map entityListItem vm.entityList
-                    ++ [ li
-                            [ class ""
-                            , onClickPreventDefaultAndStopPropagation onAddClicked
-                            ]
-                            [ Material.icon "add"
-                            , div [] [ text "Add New" ]
-                            ]
-                       ]
-                    ++ archivedItems vm
-                    ++ [ Material.divider ]
-                )
-            ]
-        ]
+        nullViewAsList
+            ++ [ li [ onClick fireSmart ]
+                    [ Material.iconA vm.icon.name [ style [ "color" => vm.icon.color ] ]
+                    , Html.h5 [] [ text vm.title ]
+                    , Material.iconButton expandIconName [ onClickStopPropagation onToggleExpanded ]
+                    ]
+               , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
+                    [ ul []
+                        ([]
+                            ++ List.map entityListItem vm.entityList
+                            ++ [ li
+                                    [ class ""
+                                    , onClickPreventDefaultAndStopPropagation onAddClicked
+                                    ]
+                                    [ Material.icon "add"
+                                    , div [] [ text "Add New" ]
+                                    ]
+                               ]
+                            ++ archivedItems vm
+                            ++ [ Material.divider ]
+                        )
+                    ]
+               ]
 
 
 archivedItems vm =

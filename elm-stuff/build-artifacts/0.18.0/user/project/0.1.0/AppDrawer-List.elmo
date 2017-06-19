@@ -183,6 +183,7 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 };
 var _user$project$AppDrawer_List$entityListView = F2(
 	function (vm, mainViewType) {
+		var nullViewAsList = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.nullVMAsList, _user$project$AppDrawer_List$entityListItem);
 		var _p1 = vm;
 		var viewType = _p1.viewType;
 		var onAddClicked = _p1.onAddClicked;
@@ -195,129 +196,132 @@ var _user$project$AppDrawer_List$entityListView = F2(
 			_user$project$Model$EntityListView(viewType));
 		var fireSmart = isCurrentView ? onToggleExpanded : fireSwitchView;
 		var expandIconName = isExpanded ? 'expand_less' : 'expand_more';
-		return {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$li,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(fireSmart),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_user$project$Material$iconA,
-						vm.icon.name,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', vm.icon.color),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$h5,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(vm.title),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_user$project$Material$iconButton,
-								expandIconName,
-								{
-									ctor: '::',
-									_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(onToggleExpanded),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}
-				}),
-			_1: {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			nullViewAsList,
+			{
 				ctor: '::',
 				_0: A2(
 					_elm_lang$html$Html$li,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$classList(
-							{
-								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'list-container', true),
-								_1: {
-									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'expanded', isExpanded),
-									_1: {ctor: '[]'}
-								}
-							}),
+						_0: _elm_lang$html$Html_Events$onClick(fireSmart),
 						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$ul,
-							{ctor: '[]'},
-							A2(
-								_elm_lang$core$Basics_ops['++'],
+							_user$project$Material$iconA,
+							vm.icon.name,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', vm.icon.color),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$h5,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(vm.title),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_user$project$Material$iconButton,
+									expandIconName,
+									{
+										ctor: '::',
+										_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(onToggleExpanded),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$li,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$classList(
+								{
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'list-container', true),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'expanded', isExpanded),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$ul,
 								{ctor: '[]'},
 								A2(
 									_elm_lang$core$Basics_ops['++'],
-									A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, vm.entityList),
+									{ctor: '[]'},
 									A2(
 										_elm_lang$core$Basics_ops['++'],
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$li,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class(''),
-													_1: {
-														ctor: '::',
-														_0: _elm_community$html_extra$Html_Events_Extra$onClickPreventDefaultAndStopPropagation(onAddClicked),
-														_1: {ctor: '[]'}
-													}
-												},
-												{
-													ctor: '::',
-													_0: _user$project$Material$icon('add'),
-													_1: {
-														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html$div,
-															{ctor: '[]'},
-															{
-																ctor: '::',
-																_0: _elm_lang$html$Html$text('Add New'),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}),
-											_1: {ctor: '[]'}
-										},
+										A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, vm.entityList),
 										A2(
 											_elm_lang$core$Basics_ops['++'],
-											_user$project$AppDrawer_List$archivedItems(vm),
 											{
 												ctor: '::',
-												_0: _user$project$Material$divider,
+												_0: A2(
+													_elm_lang$html$Html$li,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class(''),
+														_1: {
+															ctor: '::',
+															_0: _elm_community$html_extra$Html_Events_Extra$onClickPreventDefaultAndStopPropagation(onAddClicked),
+															_1: {ctor: '[]'}
+														}
+													},
+													{
+														ctor: '::',
+														_0: _user$project$Material$icon('add'),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$div,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Add New'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}),
 												_1: {ctor: '[]'}
-											}))))),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		};
+											},
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												_user$project$AppDrawer_List$archivedItems(vm),
+												{
+													ctor: '::',
+													_0: _user$project$Material$divider,
+													_1: {ctor: '[]'}
+												}))))),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
 	});
 var _user$project$AppDrawer_List$toggleDeletedItem = function (model) {
 	return A2(

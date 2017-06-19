@@ -63,12 +63,16 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		defaultIconName: 'fiber_manual_record',
 		getViewType: _user$project$Entity$ContextView
 	};
+	var entityList = A2(_user$project$OldGroupEntity_ViewModel$createList, config, model);
+	var nullVMAsList = _elm_community$maybe_extra$Maybe_Extra$toList(
+		_elm_lang$core$List$head(entityList));
 	var archivedFilter = _user$project$Model$filterContexts(_user$project$GroupDoc$archivedButNotDeletedPred);
 	var archivedConfig = _elm_lang$core$Native_Utils.update(
 		config,
 		{filter: archivedFilter});
 	return {
-		entityList: A2(_user$project$OldGroupEntity_ViewModel$createList, config, model),
+		entityList: A2(_elm_lang$core$List$drop, 1, entityList),
+		nullVMAsList: nullVMAsList,
 		archivedEntityList: A2(_user$project$OldGroupEntity_ViewModel$createList, archivedConfig, model),
 		viewType: _user$project$Entity$ContextsView,
 		title: 'Contexts',
@@ -96,12 +100,16 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		defaultIconName: 'apps',
 		getViewType: _user$project$Entity$ProjectView
 	};
+	var entityList = A2(_user$project$OldGroupEntity_ViewModel$createList, config, model);
+	var nullVMAsList = _elm_community$maybe_extra$Maybe_Extra$toList(
+		_elm_lang$core$List$head(entityList));
 	var archivedFilter = _user$project$Model$filterProjects(_user$project$GroupDoc$archivedButNotDeletedPred);
 	var archivedConfig = _elm_lang$core$Native_Utils.update(
 		config,
 		{filter: archivedFilter});
 	return {
-		entityList: A2(_user$project$OldGroupEntity_ViewModel$createList, config, model),
+		entityList: A2(_elm_lang$core$List$drop, 1, entityList),
+		nullVMAsList: {ctor: '[]'},
 		archivedEntityList: A2(_user$project$OldGroupEntity_ViewModel$createList, archivedConfig, model),
 		viewType: _user$project$Entity$ProjectsView,
 		title: 'Projects',
@@ -131,7 +139,9 @@ var _user$project$OldGroupEntity_ViewModel$ViewModel = function (a) {
 									return function (j) {
 										return function (k) {
 											return function (l) {
-												return {entityList: a, archivedEntityList: b, viewType: c, title: d, className: e, showDeleted: f, showArchived: g, onAddClicked: h, onToggleExpanded: i, onToggleShowArchived: j, isExpanded: k, icon: l};
+												return function (m) {
+													return {nullVMAsList: a, entityList: b, archivedEntityList: c, viewType: d, title: e, className: f, showDeleted: g, showArchived: h, onAddClicked: i, onToggleExpanded: j, onToggleShowArchived: k, isExpanded: l, icon: m};
+												};
 											};
 										};
 									};

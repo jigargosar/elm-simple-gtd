@@ -32,7 +32,8 @@ type alias IconVM =
 
 
 type alias ViewModel =
-    { entityList : List DocumentWithNameViewModel
+    { nullVMAsList : List DocumentWithNameViewModel
+    , entityList : List DocumentWithNameViewModel
     , archivedEntityList : List DocumentWithNameViewModel
     , viewType : EntityListViewType
     , title : String
@@ -168,8 +169,15 @@ contexts model =
 
         archivedConfig =
             { config | filter = archivedFilter }
+
+        entityList =
+            createList config model
+
+        nullVMAsList =
+            entityList |> List.head |> Maybe.toList
     in
-        { entityList = createList config model
+        { entityList = entityList |> List.drop 1
+        , nullVMAsList = nullVMAsList
         , archivedEntityList = createList archivedConfig model
         , viewType = Entity.ContextsView
         , title = "Contexts"
@@ -209,8 +217,15 @@ projects model =
 
         archivedConfig =
             { config | filter = archivedFilter }
+
+        entityList =
+            createList config model
+
+        nullVMAsList =
+            entityList |> List.head |> Maybe.toList
     in
-        { entityList = createList config model
+        { entityList = entityList |> List.drop 1
+        , nullVMAsList = []
         , archivedEntityList = createList archivedConfig model
         , viewType = Entity.ProjectsView
         , title = "Projects"

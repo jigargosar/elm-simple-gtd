@@ -121,7 +121,7 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 					_0: _elm_lang$html$Html_Attributes$class(''),
 					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleShowDeletedEntity),
+						_0: _elm_lang$html$Html_Events$onClick(vm.onToggleShowArchived),
 						_1: {ctor: '[]'}
 					}
 				},

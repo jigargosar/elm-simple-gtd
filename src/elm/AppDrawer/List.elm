@@ -132,7 +132,7 @@ archivedItems vm =
     in
         [ li
             [ class ""
-            , onClick Model.ToggleShowDeletedEntity
+            , onClick vm.onToggleShowArchived
             ]
             [ Material.icon iconName
             , div [] [ text buttonText ]

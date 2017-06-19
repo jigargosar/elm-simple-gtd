@@ -472,16 +472,17 @@ createGrouping viewType model =
                 Document.isDeleted >> not
 
         todoFilter =
-            if model.showDeleted then
-                Document.isDeleted
-            else
-                Pred.all [ Todo.isNotDeleted, Todo.isNotDone ]
+            Pred.all [ Todo.isNotDeleted, Todo.isNotDone ]
 
         filterTodosForContext context =
             filterTodosAndSortByLatestCreated
                 (Pred.all
                     [ todoFilter
                     , Todo.contextFilter context
+                    , Todo.getProjectId
+                        >> findProjectByIdIn model
+                        >>? GroupDoc.isNotArchived
+                        >>?= True
                     ]
                 )
                 model
@@ -491,6 +492,10 @@ createGrouping viewType model =
                 (Pred.all
                     [ todoFilter
                     , Todo.projectFilter project
+                    , Todo.getContextId
+                        >> findContextByIdIn model
+                        >>? GroupDoc.isNotArchived
+                        >>?= True
                     ]
                 )
                 model
@@ -528,7 +533,10 @@ createGrouping viewType model =
             Entity.DoneView ->
                 Entity.createGroupingForTodoList
                     "Done"
-                    (filterTodosAndSortByLatestModified (Pred.all [ Document.isNotDeleted, Todo.isDone ]) model)
+                    (filterTodosAndSortByLatestModified
+                        (Pred.all [ Document.isNotDeleted, Todo.isDone ])
+                        model
+                    )
 
 
 getActiveTodoList =
@@ -877,11 +885,19 @@ findProjectById id =
         >> Maybe.orElseLazy (\_ -> ([ Project.null ] |> List.find (Document.hasId id)))
 
 
+findProjectByIdIn =
+    flip findProjectById
+
+
 findContextById : Document.Id -> Model -> Maybe Context.Model
 findContextById id =
     .contextStore
         >> Store.findById id
         >> Maybe.orElseLazy (\_ -> ([ Context.null ] |> List.find (Document.hasId id)))
+
+
+findContextByIdIn =
+    flip findContextById
 
 
 updateTodoAndMaybeAlsoSelected action todoId model =

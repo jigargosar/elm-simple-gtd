@@ -13,6 +13,12 @@ var _user$project$AppDrawer_Model$toggleShowArchived = _user$project$Ext_Record$
 var _user$project$AppDrawer_Model$setShowArchived = function (bool) {
 	return A2(_user$project$Ext_Record$set, _user$project$AppDrawer_Model$showArchived, bool);
 };
+var _user$project$AppDrawer_Model$hideArchived = function (groupModel) {
+	return A2(
+		_user$project$Ext_Record$over,
+		groupModel,
+		_user$project$AppDrawer_Model$setShowArchived(false));
+};
 var _user$project$AppDrawer_Model$expanded = A2(
 	_user$project$Ext_Record$bool,
 	function (_) {
@@ -36,23 +42,25 @@ var _user$project$AppDrawer_Model$projects = A2(
 				b,
 				{projects: s});
 		}));
-var _user$project$AppDrawer_Model$toggleProjectListExpanded = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$projects, _user$project$AppDrawer_Model$toggleExpanded);
 var _user$project$AppDrawer_Model$isProjectListExpanded = function (_p0) {
 	return A2(
 		_user$project$Ext_Record$get,
 		_user$project$AppDrawer_Model$expanded,
 		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$projects, _p0));
 };
-var _user$project$AppDrawer_Model$getShowArchivedForProjects = function (_p1) {
+var _user$project$AppDrawer_Model$toggleProjectListExpanded = function (_p1) {
+	return A3(
+		_user$project$Ext_Function$unless,
+		_user$project$AppDrawer_Model$isProjectListExpanded,
+		_user$project$AppDrawer_Model$hideArchived(_user$project$AppDrawer_Model$projects),
+		A3(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$projects, _user$project$AppDrawer_Model$toggleExpanded, _p1));
+};
+var _user$project$AppDrawer_Model$getShowArchivedForProjects = function (_p2) {
 	return A2(
 		_user$project$Ext_Record$get,
 		_user$project$AppDrawer_Model$showArchived,
-		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$projects, _p1));
+		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$projects, _p2));
 };
-var _user$project$AppDrawer_Model$hideArchivedProjects = A2(
-	_user$project$Ext_Record$over,
-	_user$project$AppDrawer_Model$projects,
-	_user$project$AppDrawer_Model$setShowArchived(false));
 var _user$project$AppDrawer_Model$toggleProjectShowArchived = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$projects, _user$project$AppDrawer_Model$toggleShowArchived);
 var _user$project$AppDrawer_Model$contexts = A2(
 	_user$project$Ext_Record$field,
@@ -65,27 +73,24 @@ var _user$project$AppDrawer_Model$contexts = A2(
 				b,
 				{contexts: s});
 		}));
-var _user$project$AppDrawer_Model$isContextListExpanded = function (_p2) {
+var _user$project$AppDrawer_Model$isContextListExpanded = function (_p3) {
 	return A2(
 		_user$project$Ext_Record$get,
 		_user$project$AppDrawer_Model$expanded,
-		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p2));
+		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p3));
 };
-var _user$project$AppDrawer_Model$getShowArchivedForContexts = function (_p3) {
+var _user$project$AppDrawer_Model$toggleContextListExpanded = function (_p4) {
+	return A3(
+		_user$project$Ext_Function$unless,
+		_user$project$AppDrawer_Model$isContextListExpanded,
+		_user$project$AppDrawer_Model$hideArchived(_user$project$AppDrawer_Model$contexts),
+		A3(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$contexts, _user$project$AppDrawer_Model$toggleExpanded, _p4));
+};
+var _user$project$AppDrawer_Model$getShowArchivedForContexts = function (_p5) {
 	return A2(
 		_user$project$Ext_Record$get,
 		_user$project$AppDrawer_Model$showArchived,
-		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p3));
-};
-var _user$project$AppDrawer_Model$hideArchivedContexts = A2(
-	_user$project$Ext_Record$over,
-	_user$project$AppDrawer_Model$contexts,
-	_user$project$AppDrawer_Model$setShowArchived(false));
-var _user$project$AppDrawer_Model$toggleContextListExpanded = function (_p4) {
-	return function (model) {
-		return _user$project$AppDrawer_Model$isContextListExpanded(model) ? model : _user$project$AppDrawer_Model$hideArchivedContexts(model);
-	}(
-		A3(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$contexts, _user$project$AppDrawer_Model$toggleExpanded, _p4));
+		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p5));
 };
 var _user$project$AppDrawer_Model$toggleContextShowArchived = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$contexts, _user$project$AppDrawer_Model$toggleShowArchived);
 var _user$project$AppDrawer_Model$defaultGroupModel = {expanded: true, showArchived: false};

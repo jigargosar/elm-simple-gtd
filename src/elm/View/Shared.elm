@@ -59,10 +59,7 @@ defaultOkCancelButtonsWith list =
 
 
 defaultOkCancelDeleteButtons deleteMsg =
-    okCancelButtonsWith
-        Model.OnSaveCurrentForm
-        Model.OnDeactivateEditingMode
-        [ deleteButton deleteMsg ]
+    defaultOkCancelButtonsWith [ deleteButton deleteMsg ]
 
 
 okCancelButtonsWith okMsg cancelMsg list =

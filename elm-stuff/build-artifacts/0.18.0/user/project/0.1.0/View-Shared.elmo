@@ -62,19 +62,16 @@ var _user$project$View_Shared$okCancelButtonsWith = F3(
 				},
 				list));
 	});
+var _user$project$View_Shared$defaultOkCancelButtonsWith = function (list) {
+	return A3(_user$project$View_Shared$okCancelButtonsWith, _user$project$Model$OnSaveCurrentForm, _user$project$Model$OnDeactivateEditingMode, list);
+};
 var _user$project$View_Shared$defaultOkCancelDeleteButtons = function (deleteMsg) {
-	return A3(
-		_user$project$View_Shared$okCancelButtonsWith,
-		_user$project$Model$OnSaveCurrentForm,
-		_user$project$Model$OnDeactivateEditingMode,
+	return _user$project$View_Shared$defaultOkCancelButtonsWith(
 		{
 			ctor: '::',
 			_0: _user$project$View_Shared$deleteButton(deleteMsg),
 			_1: {ctor: '[]'}
 		});
-};
-var _user$project$View_Shared$defaultOkCancelButtonsWith = function (list) {
-	return A3(_user$project$View_Shared$okCancelButtonsWith, _user$project$Model$OnSaveCurrentForm, _user$project$Model$OnDeactivateEditingMode, list);
 };
 var _user$project$View_Shared$defaultOkCancelButtons = _user$project$View_Shared$defaultOkCancelButtonsWith(
 	{ctor: '[]'});

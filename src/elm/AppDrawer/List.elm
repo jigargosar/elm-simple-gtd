@@ -124,11 +124,11 @@ entityListView vm mainViewType =
 
 archivedItems vm =
     let
-        ( iconName, buttonText ) =
+        ( iconName, buttonText, viewItems ) =
             if vm.showDeleted then
-                ( "visibility", "Archived" )
+                ( "visibility", "Archived", List.map entityListItem vm.archivedEntityList )
             else
-                ( "visibility_off", "Archived" )
+                ( "visibility_off", "Archived", [] )
     in
         [ li
             [ class ""
@@ -138,7 +138,7 @@ archivedItems vm =
             , div [] [ text buttonText ]
             ]
         ]
-            ++ List.map entityListItem vm.archivedEntityList
+            ++ viewItems
 
 
 entityListItem : OldGroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg

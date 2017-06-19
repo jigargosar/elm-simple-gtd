@@ -96,9 +96,20 @@ var _user$project$AppDrawer_List$entityListItem = function (vm) {
 		});
 };
 var _user$project$AppDrawer_List$archivedItems = function (vm) {
-	var _p0 = vm.showDeleted ? {ctor: '_Tuple2', _0: 'visibility', _1: 'Archived'} : {ctor: '_Tuple2', _0: 'visibility_off', _1: 'Archived'};
+	var _p0 = vm.showDeleted ? {
+		ctor: '_Tuple3',
+		_0: 'visibility',
+		_1: 'Archived',
+		_2: A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, vm.archivedEntityList)
+	} : {
+		ctor: '_Tuple3',
+		_0: 'visibility_off',
+		_1: 'Archived',
+		_2: {ctor: '[]'}
+	};
 	var iconName = _p0._0;
 	var buttonText = _p0._1;
+	var viewItems = _p0._2;
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
 		{
@@ -132,7 +143,7 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 				}),
 			_1: {ctor: '[]'}
 		},
-		A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, vm.archivedEntityList));
+		viewItems);
 };
 var _user$project$AppDrawer_List$entityListView = F2(
 	function (vm, mainViewType) {

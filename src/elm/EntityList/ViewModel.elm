@@ -35,7 +35,7 @@ type alias GroupViewModel =
     , name : String
     , namePrefix : String
     , isDeleted : Bool
-    , isArchived : Bool
+    , archive : { iconName : String, onClick : Msg }
     , isEditable : Bool
     , startEditingMsg : Msg
     , onDeleteClicked : Msg
@@ -120,15 +120,13 @@ create config todoList groupDoc =
         isArchived =
             GroupDoc.isArchived groupDoc
 
-        archivedIconName =
-            if isArchived then
-                "unarchive"
-            else
-                "archive"
-
-        archived =
-            { iconName = "archive"
-            , onToggle = onEntityAction Entity.ToggleArchived
+        archive =
+            { iconName =
+                if isArchived then
+                    "unarchive"
+                else
+                    "archive"
+            , onClick = onEntityAction Entity.ToggleArchived
             }
     in
         { id = id
@@ -137,7 +135,7 @@ create config todoList groupDoc =
         , count = todoList |> List.length
         , isEditable = not isNull
         , isDeleted = Document.isDeleted groupDoc
-        , isArchived = GroupDoc.isArchived groupDoc
+        , archive = archive
         , startEditingMsg = startEditingMsg
         , onDeleteClicked = toggleDeleteMsg
         , onSaveClicked = onEntityAction Entity.Save

@@ -21,6 +21,12 @@
     flex-direction: row;
   };
 
+  --font-nowrap: {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  };
+
   --ul-layout: {
     @nest & ul {
       @apply --layout-vertical;
@@ -46,6 +52,7 @@
 .app-drawer-list-container li:not(.list-container) {
   cursor: pointer;
   min-height: 2.5rem;
+
 }
 
 .app-drawer-list-container li:not(.list-container) > * {
@@ -55,7 +62,7 @@
   }
 }
 
-.done-icon{
+.done-icon {
   &.is-done .material-icons, &:not(.is-done) .material-icons:hover {
     color: #4caf50;
   }
@@ -65,7 +72,6 @@
   }
 
 }
-
 
 .done-icon a .material-icons, .done-icon a {
   line-height: 2rem;
@@ -203,9 +209,7 @@ iron-icon.account {
 }
 
 .ellipsis {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  @apply --font-nowrap;
 }
 
 .small {
@@ -369,7 +373,7 @@ paper-listbox {
 
   & .display-text {
     padding: 0 8px;
-    flex:1 1 ;
+    flex: 1 1;
     /*white-space: pre-line; !*sequences of whitespace are collapsed*!*/
     /* when indenting items using star, whitespace should not be lost*/
   //overflow-wrap: break-word; white-space: pre-wrap; /*sequences of whitespace are preserved*/ //word-break: normal; hyphens: auto;

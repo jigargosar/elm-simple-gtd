@@ -65,13 +65,9 @@ var _user$project$AppDrawer_List$entityListItem = function (vm) {
 		_elm_lang$html$Html$li,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class(''),
-			_1: {
-				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					vm.onActiveStateChanged(true)),
-				_1: {ctor: '[]'}
-			}
+			_0: _elm_lang$html$Html_Events$onClick(
+				vm.onActiveStateChanged(true)),
+			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
@@ -90,7 +86,18 @@ var _user$project$AppDrawer_List$entityListItem = function (vm) {
 				}),
 			_1: {
 				ctor: '::',
-				_0: _user$project$View_Shared$defaultBadge(vm),
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('font-nowrap'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _user$project$View_Shared$defaultBadge(vm),
+						_1: {ctor: '[]'}
+					}),
 				_1: {ctor: '[]'}
 			}
 		});

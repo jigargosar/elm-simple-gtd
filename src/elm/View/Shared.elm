@@ -35,7 +35,7 @@ import Todo.ReminderForm
 defaultBadge : { x | name : String, count : Int } -> Html msg
 defaultBadge vm =
     div [ class "layout horizontal center" ]
-        [ div [ class "ellipsis" ] [ vm.name |> text ]
+        [ div [ class "font-nowrap" ] [ vm.name |> text ]
         , div [ style [ "padding" => "0 0 1rem 0.1rem " ], class "text-secondary" ]
             [ " " ++ (vm.count |> toString) ++ "" |> text ]
         ]
@@ -44,7 +44,7 @@ defaultBadge vm =
 badge : String -> Int -> Html msg
 badge name count =
     div [ class "layout horizontal center" ]
-        [ div [ class "font-nowrap ellipsis" ] [ name |> text ]
+        [ div [ class "font-nowrap" ] [ name |> text ]
         , div [ style [ "padding" => "0 0 1rem 0.1rem " ], class "text-secondary" ]
             [ " " ++ (count |> toString) ++ "" |> text ]
         ]

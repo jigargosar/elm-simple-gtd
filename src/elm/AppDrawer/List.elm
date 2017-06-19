@@ -144,11 +144,10 @@ archivedItems vm =
 entityListItem : OldGroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg
 entityListItem vm =
     li
-        [ class ""
-        , onClick (vm.onActiveStateChanged True)
+        [ onClick (vm.onActiveStateChanged True)
         ]
         [ Material.iconA vm.icon.name [ style [ "color" => vm.icon.color ] ]
-        , View.Shared.defaultBadge vm
+        , div [ class "font-nowrap" ] [ View.Shared.defaultBadge vm ]
         ]
 
 

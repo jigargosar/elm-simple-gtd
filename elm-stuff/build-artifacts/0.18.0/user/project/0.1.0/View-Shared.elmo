@@ -131,7 +131,7 @@ var _user$project$View_Shared$badge = F2(
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('font-nowrap ellipsis'),
+						_0: _elm_lang$html$Html_Attributes$class('font-nowrap'),
 						_1: {ctor: '[]'}
 					},
 					{
@@ -187,7 +187,7 @@ var _user$project$View_Shared$defaultBadge = function (vm) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('ellipsis'),
+					_0: _elm_lang$html$Html_Attributes$class('font-nowrap'),
 					_1: {ctor: '[]'}
 				},
 				{

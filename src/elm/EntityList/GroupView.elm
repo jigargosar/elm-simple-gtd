@@ -9,6 +9,7 @@ import Html.Attributes.Extra exposing (stringProperty)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import Html.Keyed
+import Material
 import Model
 import Svg.Events exposing (onFocusIn)
 import Todo.View
@@ -45,8 +46,8 @@ initHeader vm =
     let
         editButton =
             if vm.isEditable then
-                WebComponents.iconButton "create"
-                    [ class "self-center flex-none", onClick vm.startEditingMsg, vm.tabindexAV ]
+                Material.iconButton "create"
+                    [ onClick vm.startEditingMsg, vm.tabindexAV ]
             else
                 span [] []
     in
@@ -56,7 +57,7 @@ initHeader vm =
             , onKeyDown vm.onKeyDownMsg
             , classList [ "entity-item focusable-list-item collection-item" => True ]
             ]
-            [ div [ class "layout horizontal justified" ]
+            [ div [ class "layout horizontal justified center" ]
                 [ h5 [ class "font-nowrap ellipsis" ]
                     [ View.Shared.badge (vm.namePrefix ++ vm.name) vm.count
                     ]

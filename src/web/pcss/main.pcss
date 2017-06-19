@@ -45,6 +45,23 @@
   box-sizing: border-box;
 }
 
+/*
+[tabindex="0"], [tabindex="1"]{
+  outline: none!important;
+}
+
+[tabindex="0"]:focus, [tabindex="1"]:focus{
+  outline: none!important;
+  text-decoration: underline;
+}
+
+[tabindex="0"]:focus > * , [tabindex="1"]:focus > *{
+  text-decoration: unset;
+}
+*/
+
+
+
 .app-drawer-list-container {
   @apply --ul-layout;
 }

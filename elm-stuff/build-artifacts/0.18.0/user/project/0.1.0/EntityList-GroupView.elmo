@@ -1,18 +1,14 @@
 var _user$project$EntityList_GroupView$initHeader = function (vm) {
 	var editButton = vm.isEditable ? A2(
-		_user$project$WebComponents$iconButton,
+		_user$project$Material$iconButton,
 		'create',
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('self-center flex-none'),
+			_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
 			_1: {
 				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
-				_1: {
-					ctor: '::',
-					_0: vm.tabindexAV,
-					_1: {ctor: '[]'}
-				}
+				_0: vm.tabindexAV,
+				_1: {ctor: '[]'}
 			}
 		}) : A2(
 		_elm_lang$html$Html$span,
@@ -48,7 +44,7 @@ var _user$project$EntityList_GroupView$initHeader = function (vm) {
 				_elm_lang$html$Html$div,
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('layout horizontal justified'),
+					_0: _elm_lang$html$Html_Attributes$class('layout horizontal justified center'),
 					_1: {ctor: '[]'}
 				},
 				{

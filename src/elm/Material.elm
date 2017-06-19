@@ -17,11 +17,11 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 
 
 icon name =
-    i [ class "material-icons" ] [ text name ]
+    i [ class "default-color material-icons" ] [ text name ]
 
 
 iconA name attr =
-    div attr [ icon name ]
+    div attr [ i [ class "material-icons" ] [ text name ] ]
 
 
 iconButton name attributes =

@@ -72,12 +72,34 @@ var _user$project$Material$iconButton = F2(
 				_1: {ctor: '[]'}
 			});
 	});
+var _user$project$Material$iconA = F2(
+	function (name, attr) {
+		return A2(
+			_elm_lang$html$Html$div,
+			attr,
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$i,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(name),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	});
 var _user$project$Material$icon = function (name) {
 	return A2(
 		_elm_lang$html$Html$i,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('material-icons'),
+			_0: _elm_lang$html$Html_Attributes$class('default-color material-icons'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -86,14 +108,3 @@ var _user$project$Material$icon = function (name) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Material$iconA = F2(
-	function (name, attr) {
-		return A2(
-			_elm_lang$html$Html$div,
-			attr,
-			{
-				ctor: '::',
-				_0: _user$project$Material$icon(name),
-				_1: {ctor: '[]'}
-			});
-	});

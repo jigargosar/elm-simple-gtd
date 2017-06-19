@@ -106,12 +106,12 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 	var _p0 = vm.showArchived ? {
 		ctor: '_Tuple3',
 		_0: 'visibility',
-		_1: 'Archived',
+		_1: 'Hide Archived',
 		_2: A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, vm.archivedEntityList)
 	} : {
 		ctor: '_Tuple3',
 		_0: 'visibility_off',
-		_1: 'Archived',
+		_1: ' Show Archived',
 		_2: {ctor: '[]'}
 	};
 	var iconName = _p0._0;

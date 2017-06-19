@@ -47,7 +47,6 @@ type alias DocumentWithNameViewModel =
     , name : String
     , appHeader : { name : String, backgroundColor : String }
     , isDeleted : Bool
-    , todoList : List Todo.Model
     , isEmpty : Bool
     , count : Int
     , onActiveStateChanged : Bool -> Msg
@@ -100,8 +99,7 @@ createList config model =
         list =
             config.filter model
     in
-        list
-            .|> create getTodoListWithGroupId config
+        list .|> create getTodoListWithGroupId config
 
 
 create todoListByEntityId config entity =
@@ -112,11 +110,8 @@ create todoListByEntityId config entity =
         createEntityActionMsg =
             Model.OnEntityAction (config.entityWrapper entity)
 
-        todoList =
-            todoListByEntityId id
-
         count =
-            List.length todoList
+            todoListByEntityId id |> List.length
 
         isNull =
             config.isNull entity
@@ -159,9 +154,8 @@ create todoListByEntityId config entity =
         { id = id
         , name = name
         , isDeleted = Document.isDeleted entity
-        , todoList = todoList
         , isEmpty = count == 0
-        , count = List.length todoList
+        , count = count
         , onActiveStateChanged =
             (\bool ->
                 if bool then

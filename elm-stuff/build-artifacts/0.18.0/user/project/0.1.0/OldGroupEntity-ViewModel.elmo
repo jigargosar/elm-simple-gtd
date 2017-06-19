@@ -30,15 +30,14 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 			}
 		};
 		var id = _user$project$Document$getId(entity);
-		var todoList = todoListByEntityId(id);
-		var count = _elm_lang$core$List$length(todoList);
+		var count = _elm_lang$core$List$length(
+			todoListByEntityId(id));
 		return {
 			id: id,
 			name: name,
 			isDeleted: _user$project$Document$isDeleted(entity),
-			todoList: todoList,
 			isEmpty: _elm_lang$core$Native_Utils.eq(count, 0),
-			count: _elm_lang$core$List$length(todoList),
+			count: count,
 			onActiveStateChanged: function (bool) {
 				return bool ? _user$project$Model$SwitchView(
 					_user$project$Model$EntityListView(
@@ -144,9 +143,7 @@ var _user$project$OldGroupEntity_ViewModel$DocumentWithNameViewModel = function 
 												return function (m) {
 													return function (n) {
 														return function (o) {
-															return function (p) {
-																return {id: a, name: b, appHeader: c, isDeleted: d, todoList: e, isEmpty: f, count: g, onActiveStateChanged: h, startEditingMsg: i, onDeleteClicked: j, onSaveClicked: k, onNameChanged: l, onCancelClicked: m, icon: n, onFocusIn: o, onKeyDownMsg: p};
-															};
+															return {id: a, name: b, appHeader: c, isDeleted: d, isEmpty: e, count: f, onActiveStateChanged: g, startEditingMsg: h, onDeleteClicked: i, onSaveClicked: j, onNameChanged: k, onCancelClicked: l, icon: m, onFocusIn: n, onKeyDownMsg: o};
 														};
 													};
 												};

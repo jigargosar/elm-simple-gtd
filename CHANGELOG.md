@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.47 - 2017-06-19
 * move inbox on top
   hide no project todos 
 

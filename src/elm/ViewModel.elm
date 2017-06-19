@@ -47,7 +47,7 @@ create model =
             model.mainViewType
 
         ( viewName, headerBackgroundColor ) =
-            getViewInfo mainViewType projectsVM contextsVM
+            getViewInfo mainViewType projectsVM contextsVM model
 
         editMode =
             Model.getEditMode model
@@ -66,13 +66,14 @@ create model =
         }
 
 
-getViewInfo mainViewType projectsVM contextsVM =
+getViewInfo mainViewType projectsVM contextsVM model =
     let
         entityById id =
             List.find (.id >> equals id)
 
-        appHeaderInfoById id =
-            entityById id
+        appHeaderInfoById id vm =
+            entityById id vm.entityList
+                |> Maybe.orElseLazy (\_ -> entityById id vm.archivedEntityList)
                 >>? (.appHeader)
                 >>?= { name = "o_O", backgroundColor = sgtdBlue }
                 >> (\{ name, backgroundColor } -> ( name, backgroundColor ))
@@ -84,13 +85,13 @@ getViewInfo mainViewType projectsVM contextsVM =
                         ( contextsVM.title, contextsVM.icon.color )
 
                     Entity.ContextView id ->
-                        contextsVM.entityList |> appHeaderInfoById id
+                        appHeaderInfoById id contextsVM
 
                     Entity.ProjectsView ->
                         ( projectsVM.title, projectsVM.icon.color )
 
                     Entity.ProjectView id ->
-                        projectsVM.entityList |> appHeaderInfoById id
+                        appHeaderInfoById id projectsVM
 
                     Entity.BinView ->
                         ( "Bin", sgtdBlue )

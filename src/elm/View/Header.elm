@@ -47,7 +47,10 @@ init viewModel m =
         App.header
             attributes
             [ App.toolbar
-                [ style [ "color" => "white", "background-color" => viewModel.header.backgroundColor ]
+                [ style
+                    [ "color" => "white"
+                    , "background-color" => viewModel.header.backgroundColor
+                    ]
                 ]
                 (headerView viewModel m)
             ]
@@ -66,10 +69,6 @@ headerView viewModel m =
 titleHeaderContent viewModel m =
     let
         titleText =
-            {- if m.developmentMode then
-                   viewModel.viewName ++ " dev:" ++ m.appVersion
-               else
-            -}
             viewModel.viewName
     in
         [ h5 [ class "ellipsis title", title titleText ] [ titleText |> text ]

@@ -1,6 +1,6 @@
 var _user$project$ViewModel$sgtdBlue = 'rgb(68, 138, 255)';
-var _user$project$ViewModel$getViewInfo = F3(
-	function (mainViewType, projectsVM, contextsVM) {
+var _user$project$ViewModel$getViewInfo = F4(
+	function (mainViewType, projectsVM, contextsVM, model) {
 		var entityById = function (id) {
 			return _elm_community$list_extra$List_Extra$find(
 				function (_p0) {
@@ -12,35 +12,40 @@ var _user$project$ViewModel$getViewInfo = F3(
 						}(_p0));
 				});
 		};
-		var appHeaderInfoById = function (id) {
-			return function (_p1) {
-				return function (_p2) {
-					var _p3 = _p2;
-					return {ctor: '_Tuple2', _0: _p3.name, _1: _p3.backgroundColor};
-				}(
-					A2(
-						_user$project$Ext_Function_Infix_ops['>>?='],
+		var appHeaderInfoById = F2(
+			function (id, vm) {
+				return function (_p1) {
+					return function (_p2) {
+						var _p3 = _p2;
+						return {ctor: '_Tuple2', _0: _p3.name, _1: _p3.backgroundColor};
+					}(
 						A2(
-							_user$project$Ext_Function_Infix_ops['>>?'],
-							entityById(id),
-							function (_) {
-								return _.appHeader;
-							}),
-						{name: 'o_O', backgroundColor: _user$project$ViewModel$sgtdBlue})(_p1));
-			};
-		};
-		var _p4 = mainViewType;
-		if (_p4.ctor === 'EntityListView') {
-			var _p5 = _p4._0;
-			switch (_p5.ctor) {
+							_user$project$Ext_Function_Infix_ops['>>?='],
+							A2(
+								_user$project$Ext_Function_Infix_ops['>>?'],
+								_elm_community$maybe_extra$Maybe_Extra$orElseLazy(
+									function (_p4) {
+										return A2(entityById, id, vm.archivedEntityList);
+									}),
+								function (_) {
+									return _.appHeader;
+								}),
+							{name: 'o_O', backgroundColor: _user$project$ViewModel$sgtdBlue})(_p1));
+				}(
+					A2(entityById, id, vm.entityList));
+			});
+		var _p5 = mainViewType;
+		if (_p5.ctor === 'EntityListView') {
+			var _p6 = _p5._0;
+			switch (_p6.ctor) {
 				case 'ContextsView':
 					return {ctor: '_Tuple2', _0: contextsVM.title, _1: contextsVM.icon.color};
 				case 'ContextView':
-					return A2(appHeaderInfoById, _p5._0, contextsVM.entityList);
+					return A2(appHeaderInfoById, _p6._0, contextsVM);
 				case 'ProjectsView':
 					return {ctor: '_Tuple2', _0: projectsVM.title, _1: projectsVM.icon.color};
 				case 'ProjectView':
-					return A2(appHeaderInfoById, _p5._0, projectsVM.entityList);
+					return A2(appHeaderInfoById, _p6._0, projectsVM);
 				case 'BinView':
 					return {ctor: '_Tuple2', _0: 'Bin', _1: _user$project$ViewModel$sgtdBlue};
 				default:
@@ -56,9 +61,9 @@ var _user$project$ViewModel$create = function (model) {
 	var mainViewType = model.mainViewType;
 	var projectsVM = _user$project$OldGroupEntity_ViewModel$projects(model);
 	var contextsVM = _user$project$OldGroupEntity_ViewModel$contexts(model);
-	var _p6 = A3(_user$project$ViewModel$getViewInfo, mainViewType, projectsVM, contextsVM);
-	var viewName = _p6._0;
-	var headerBackgroundColor = _p6._1;
+	var _p7 = A4(_user$project$ViewModel$getViewInfo, mainViewType, projectsVM, contextsVM, model);
+	var viewName = _p7._0;
+	var headerBackgroundColor = _p7._1;
 	return {
 		contexts: contextsVM,
 		projects: projectsVM,

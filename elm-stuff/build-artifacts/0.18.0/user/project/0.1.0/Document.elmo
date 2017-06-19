@@ -27,7 +27,7 @@ var _user$project$Document$isDeleted = function (_) {
 var _user$project$Document$isNotDeleted = function (_p0) {
 	return !_user$project$Document$isDeleted(_p0);
 };
-var _user$project$Document$encodeMetaFields = function (doc) {
+var _user$project$Document$encodeModel = function (doc) {
 	return {
 		ctor: '::',
 		_0: A2(
@@ -75,12 +75,12 @@ var _user$project$Document$encodeMetaFields = function (doc) {
 	};
 };
 var _user$project$Document$encode = F2(
-	function (encodeOtherFields, doc) {
+	function (encodeRecord, doc) {
 		return _elm_lang$core$Json_Encode$object(
 			A2(
 				_elm_lang$core$Basics_ops['++'],
-				_user$project$Document$encodeMetaFields(doc),
-				encodeOtherFields(doc)));
+				_user$project$Document$encodeModel(doc),
+				encodeRecord(doc)));
 	});
 var _user$project$Document$defaultRevision = '';
 var _user$project$Document$documentFieldsDecoder = function (_p1) {
@@ -128,7 +128,7 @@ var _user$project$Document$equalById = F2(
 			_user$project$Document$getId(doc1),
 			_user$project$Document$getId(doc2));
 	});
-var _user$project$Document$Meta = F5(
-	function (a, b, c, d, e) {
-		return {id: a, rev: b, deleted: c, createdAt: d, modifiedAt: e};
+var _user$project$Document$Model = F6(
+	function (a, b, c, d, e, f) {
+		return {id: a, rev: b, deleted: c, createdAt: d, modifiedAt: e, deviceId: f};
 	});

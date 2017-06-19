@@ -34,20 +34,25 @@ type alias Revision =
     String
 
 
-type alias DocF x =
-    Document x -> Document x
+type alias Deleted =
+    Bool
+
+
+type alias DocF record =
+    Document record -> Document record
 
 
 defaultRevision =
     ""
 
 
-type alias Meta =
+type alias Model =
     { id : Id
     , rev : Revision
     , deleted : Bool
     , createdAt : Time
     , modifiedAt : Time
+    , deviceId : DeviceId
     }
 
 
@@ -55,8 +60,8 @@ type alias IdSet =
     Set Id
 
 
-type alias Document moreFields =
-    { moreFields
+type alias Document record =
+    { record
         | id : Id
         , rev : Revision
         , deleted : Bool
@@ -66,7 +71,7 @@ type alias Document moreFields =
     }
 
 
-encodeMetaFields doc =
+encodeModel doc =
     [ "_id" => E.string (doc.id)
     , "_rev" => E.string (doc.rev)
     , "createdAt" => E.int (doc.createdAt |> round)
@@ -76,14 +81,16 @@ encodeMetaFields doc =
     ]
 
 
-encode encodeOtherFields doc =
+encode encodeRecord doc =
     E.object
-        (encodeMetaFields doc
-            ++ encodeOtherFields doc
+        (encodeModel doc
+            ++ encodeRecord doc
         )
 
 
-documentFieldsDecoder : Decoder (Id -> Revision -> Time -> Time -> Bool -> DeviceId -> x) -> Decoder x
+documentFieldsDecoder :
+    Decoder (Id -> Revision -> Time -> Time -> Bool -> DeviceId -> record)
+    -> Decoder record
 documentFieldsDecoder =
     D.required "_id" D.string
         >> D.optional "_rev" D.string defaultRevision

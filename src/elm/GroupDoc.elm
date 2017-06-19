@@ -17,10 +17,6 @@ type alias Name =
     String
 
 
-type alias Deleted =
-    Bool
-
-
 type alias Record =
     { name : Name
     , archived : Bool
@@ -36,7 +32,7 @@ constructor :
     -> Document.Revision
     -> Time
     -> Time
-    -> Deleted
+    -> Document.Deleted
     -> DeviceId
     -> Name
     -> Model

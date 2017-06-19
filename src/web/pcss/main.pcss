@@ -1,5 +1,3 @@
-@import "polymer.pcss";
-
 :root {
   --overlay: {
     position: fixed;
@@ -47,6 +45,20 @@
 
 .default-color.material-icons{
   color: gray(30%);
+}
+
+#main-header .title{
+  margin-right:1rem;
+}
+
+
+paper-menu-button paper-item {
+  flex: 1 1 auto;
+  text-align: left;
+
+  & a, & .a:visited {
+    color: black;
+  }
 }
 
 

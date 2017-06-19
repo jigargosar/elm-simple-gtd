@@ -115,8 +115,27 @@ entityListView vm mainViewType =
                     ]
                  ]
                     ++ List.map entityListItem entityList
+                    ++ archivedItems vm
                     ++ [ Material.divider ]
                 )
+            ]
+        ]
+
+
+archivedItems vm =
+    let
+        ( iconName, buttonText ) =
+            if vm.showDeleted then
+                ( "visibility", "Archived" )
+            else
+                ( "visibility_off", "Archived" )
+    in
+        [ li
+            [ class ""
+            , onClick Model.ToggleShowDeletedEntity
+            ]
+            [ Material.icon iconName
+            , div [] [ text buttonText ]
             ]
         ]
 

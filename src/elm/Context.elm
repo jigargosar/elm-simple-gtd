@@ -16,6 +16,7 @@ import Json.Encode as E
 import Random.Pcg as Random
 import String.Extra
 import Time exposing (Time)
+import Tuple2
 
 
 type alias Name =
@@ -98,8 +99,31 @@ sort =
                     EQ
 
                 ( False, False ) ->
-                    compare (getName v1) (getName v2)
+                    compareNotNulls ( v1, v2 )
         )
+
+
+compareNotNulls tuple =
+    let
+        compareName =
+            Tuple2.mapBoth getName >> uncurry compare
+    in
+        tuple
+            |> Tuple2.mapBoth Document.isDeleted
+            |> (\deletedTuple ->
+                    case deletedTuple of
+                        ( True, False ) ->
+                            GT
+
+                        ( False, True ) ->
+                            LT
+
+                        ( True, True ) ->
+                            compareName tuple
+
+                        ( False, False ) ->
+                            compareName tuple
+               )
 
 
 isNull =

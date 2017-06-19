@@ -95,26 +95,62 @@ var _user$project$AppDrawer_List$entityListItem = function (vm) {
 			}
 		});
 };
+var _user$project$AppDrawer_List$archivedItems = function (vm) {
+	var _p0 = vm.showDeleted ? {ctor: '_Tuple2', _0: 'visibility', _1: 'Archived'} : {ctor: '_Tuple2', _0: 'visibility_off', _1: 'Archived'};
+	var iconName = _p0._0;
+	var buttonText = _p0._1;
+	return {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$li,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class(''),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleShowDeletedEntity),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Material$icon(iconName),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(buttonText),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}),
+		_1: {ctor: '[]'}
+	};
+};
 var _user$project$AppDrawer_List$entityListView = F2(
 	function (vm, mainViewType) {
-		var _p0 = vm;
-		var entityList = _p0.entityList;
-		var viewType = _p0.viewType;
-		var title = _p0.title;
-		var showDeleted = _p0.showDeleted;
-		var onAddClicked = _p0.onAddClicked;
-		var icon = _p0.icon;
-		var onToggleExpanded = _p0.onToggleExpanded;
-		var isExpanded = _p0.isExpanded;
+		var _p1 = vm;
+		var entityList = _p1.entityList;
+		var viewType = _p1.viewType;
+		var title = _p1.title;
+		var showDeleted = _p1.showDeleted;
+		var onAddClicked = _p1.onAddClicked;
+		var icon = _p1.icon;
+		var onToggleExpanded = _p1.onToggleExpanded;
+		var isExpanded = _p1.isExpanded;
 		var isCurrentView = _elm_lang$core$Native_Utils.eq(
 			_user$project$Model$EntityListView(viewType),
 			mainViewType);
 		var fireSwitchView = _user$project$Model$SwitchView(
 			_user$project$Model$EntityListView(viewType));
 		var fireSmart = isCurrentView ? onToggleExpanded : fireSwitchView;
-		var _p1 = isExpanded ? {ctor: '_Tuple2', _0: 'expand_less', _1: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation} : {ctor: '_Tuple2', _0: 'expand_more', _1: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation};
-		var expandIconName = _p1._0;
-		var expandButtonClickType = _p1._1;
+		var _p2 = isExpanded ? {ctor: '_Tuple2', _0: 'expand_less', _1: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation} : {ctor: '_Tuple2', _0: 'expand_more', _1: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation};
+		var expandIconName = _p2._0;
+		var expandButtonClickType = _p2._1;
 		return {
 			ctor: '::',
 			_0: A2(
@@ -222,11 +258,14 @@ var _user$project$AppDrawer_List$entityListView = F2(
 								A2(
 									_elm_lang$core$Basics_ops['++'],
 									A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, entityList),
-									{
-										ctor: '::',
-										_0: _user$project$Material$divider,
-										_1: {ctor: '[]'}
-									}))),
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										_user$project$AppDrawer_List$archivedItems(vm),
+										{
+											ctor: '::',
+											_0: _user$project$Material$divider,
+											_1: {ctor: '[]'}
+										})))),
 						_1: {ctor: '[]'}
 					}),
 				_1: {ctor: '[]'}
@@ -308,9 +347,9 @@ var _user$project$AppDrawer_List$toggleDeletedItem = function (model) {
 };
 var _user$project$AppDrawer_List$view = F2(
 	function (appVM, model) {
-		var _p2 = appVM;
-		var contexts = _p2.contexts;
-		var projects = _p2.projects;
+		var _p3 = appVM;
+		var contexts = _p3.contexts;
+		var projects = _p3.projects;
 		return A2(
 			_elm_lang$html$Html$div,
 			{

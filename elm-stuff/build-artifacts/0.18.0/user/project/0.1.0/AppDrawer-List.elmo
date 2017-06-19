@@ -400,18 +400,11 @@ var _user$project$AppDrawer_List$view = F2(
 											}
 										}
 									},
-									A2(
-										_elm_lang$core$Basics_ops['++'],
-										{
-											ctor: '::',
-											_0: _user$project$Material$divider,
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _user$project$AppDrawer_List$toggleDeletedItem(model),
-											_1: {ctor: '[]'}
-										})))))),
+									{
+										ctor: '::',
+										_0: _user$project$Material$divider,
+										_1: {ctor: '[]'}
+									}))))),
 				_1: {ctor: '[]'}
 			});
 	});

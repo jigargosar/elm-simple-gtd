@@ -53,7 +53,7 @@ view appVM model =
                        , switchViewItem "sync" SyncView "Custom Sync"
                        ]
                     ++ [ Material.divider ]
-                    ++ [ toggleDeletedItem model ]
+                 --                    ++ [ toggleDeletedItem model ]
                 )
             ]
 

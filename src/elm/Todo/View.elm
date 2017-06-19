@@ -360,7 +360,7 @@ edit form appModel =
                             , onInput fireTextChanged
                             ]
                             []
-                        , Html.label [] [ text "Todo" ]
+                        , Html.label [] [ text "Task" ]
                         ]
                     , defaultOkCancelDeleteButtons fireToggleDelete
                     ]
@@ -383,7 +383,7 @@ new form =
                         , form |> Todo.NewForm.getText |> defaultValue
                         ]
                         []
-                    , label [ class "active" ] [ text "New Todo" ]
+                    , label [ class "active" ] [ text "New Task" ]
                     ]
                 , defaultOkCancelButtons
                 ]

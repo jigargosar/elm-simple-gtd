@@ -257,7 +257,7 @@ var _user$project$Todo_View$edit = F2(
 												{ctor: '[]'},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text('Todo'),
+													_0: _elm_lang$html$Html$text('Task'),
 													_1: {ctor: '[]'}
 												}),
 											_1: {ctor: '[]'}
@@ -355,7 +355,7 @@ var _user$project$Todo_View$new = function (form) {
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('New Todo'),
+												_0: _elm_lang$html$Html$text('New Task'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}

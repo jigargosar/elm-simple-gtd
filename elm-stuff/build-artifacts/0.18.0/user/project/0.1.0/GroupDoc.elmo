@@ -77,10 +77,30 @@ var _user$project$GroupDoc$sort = function (isNull) {
 				}
 			}));
 };
-var _user$project$GroupDoc$constructor = F7(
-	function (id, rev, createdAt, modifiedAt, deleted, deviceId, name) {
-		return {id: id, rev: rev, createdAt: createdAt, modifiedAt: modifiedAt, deleted: false, archived: deleted, deviceId: deviceId, name: name};
+var _user$project$GroupDoc$constructor = F8(
+	function (id, rev, createdAt, modifiedAt, deleted, deviceId, name, archived) {
+		return {
+			id: id,
+			rev: rev,
+			deviceId: deviceId,
+			createdAt: createdAt,
+			modifiedAt: modifiedAt,
+			deleted: false,
+			archived: deleted ? true : archived,
+			name: name
+		};
 	});
+var _user$project$GroupDoc$decoder = A4(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+	'archived',
+	_elm_lang$core$Json_Decode$bool,
+	false,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'name',
+		_elm_lang$core$Json_Decode$string,
+		_user$project$Document$documentFieldsDecoder(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$GroupDoc$constructor))));
 var _user$project$GroupDoc$archived = A2(
 	_user$project$Ext_Record$bool,
 	function (_) {

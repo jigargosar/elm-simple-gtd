@@ -31,15 +31,11 @@ type alias Record =
 
 
 type alias Model =
-    Document.Document Record
+    GroupDoc.Model
 
 
 type alias Store =
-    Store.Store Record
-
-
-type alias Encoded =
-    E.Value
+    GroupDoc.Store
 
 
 constructor =
@@ -48,7 +44,7 @@ constructor =
 
 init : Name -> Time -> DeviceId -> Id -> Model
 init name now deviceId id =
-    constructor id "" now now False deviceId name
+    constructor id "" now now False deviceId name False
 
 
 otherFieldsEncoder : Document Record -> List ( String, E.Value )
@@ -58,14 +54,12 @@ otherFieldsEncoder project =
 
 decoder : Decoder Model
 decoder =
-    D.decode constructor
-        |> Document.documentFieldsDecoder
-        |> D.required "name" D.string
+    GroupDoc.decoder
 
 
 null : Model
 null =
-    constructor nullId "" 0 0 False "" "Inbox"
+    constructor nullId "" 0 0 False "" "Inbox" False
 
 
 nullId =
@@ -96,7 +90,7 @@ setName name model =
     { model | name = name }
 
 
-storeGenerator : DeviceId -> List Encoded -> Random.Generator Store
+storeGenerator : DeviceId -> List E.Value -> Random.Generator Store
 storeGenerator =
     Store.generator "context-db" otherFieldsEncoder decoder
 

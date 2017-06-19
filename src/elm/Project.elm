@@ -43,7 +43,7 @@ findNameById id =
     Store.findById id >>? getName
 
 
-storeGenerator : DeviceId -> List Encoded -> Random.Generator Store
+storeGenerator : DeviceId -> List E.Value -> Random.Generator Store
 storeGenerator =
     Store.generator "project-db" otherFieldsEncoder decoder
 
@@ -96,26 +96,18 @@ updateName updater model =
     setName (updater model) model
 
 
-constructor id rev createdAt modifiedAt deleted deviceId name =
-    { id = id
-    , rev = rev
-    , deviceId = deviceId
-    , createdAt = createdAt
-    , modifiedAt = modifiedAt
-    , deleted = False
-    , archived = deleted
-    , name = name
-    }
+constructor =
+    GroupDoc.constructor
 
 
 init : Name -> Time -> DeviceId -> Id -> Model
 init name now deviceId id =
-    constructor id "" now now False deviceId name
+    constructor id "" now now False deviceId name False
 
 
 null : Model
 null =
-    constructor nullId "" 0 0 False "" "No Project"
+    constructor nullId "" 0 0 False "" "No Project" False
 
 
 nullId =
@@ -138,10 +130,6 @@ sort =
     GroupDoc.sort isNull
 
 
-type alias Encoded =
-    E.Value
-
-
 otherFieldsEncoder : GroupDoc.Model -> List ( String, E.Value )
 otherFieldsEncoder project =
     [ "name" => E.string (getName project) ]
@@ -149,6 +137,4 @@ otherFieldsEncoder project =
 
 decoder : Decoder Project
 decoder =
-    D.decode constructor
-        |> Document.documentFieldsDecoder
-        |> D.required "name" D.string
+    GroupDoc.decoder

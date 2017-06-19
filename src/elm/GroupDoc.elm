@@ -13,10 +13,17 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Store
 import Tuple2
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 
 
 type alias Name =
     String
+
+
+type alias Archived =
+    Bool
 
 
 type alias Record =
@@ -41,17 +48,30 @@ constructor :
     -> Document.Deleted
     -> DeviceId
     -> Name
+    -> Archived
     -> Model
-constructor id rev createdAt modifiedAt deleted deviceId name =
+constructor id rev createdAt modifiedAt deleted deviceId name archived =
     { id = id
     , rev = rev
+    , deviceId = deviceId
     , createdAt = createdAt
     , modifiedAt = modifiedAt
     , deleted = False
-    , archived = deleted
-    , deviceId = deviceId
+    , archived =
+        if deleted then
+            True
+        else
+            archived
     , name = name
     }
+
+
+decoder : Decoder Model
+decoder =
+    D.decode constructor
+        |> Document.documentFieldsDecoder
+        |> D.required "name" D.string
+        |> D.optional "archived" D.bool False
 
 
 toggleArchived =

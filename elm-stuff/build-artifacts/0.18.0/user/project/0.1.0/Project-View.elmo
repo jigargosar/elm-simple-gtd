@@ -2,7 +2,6 @@ var _user$project$Project_View$edit = function (form) {
 	var fireCancel = _user$project$Model$OnDeactivateEditingMode;
 	var fireSaveForm = _user$project$Model$OnSaveCurrentForm;
 	var toMsg = _user$project$Model$OnEntityAction(form.entity);
-	var fireToggleDelete = _user$project$Project$isNullId(form.id) ? _user$project$Model$NOOP : toMsg(_user$project$Entity$ToggleDeleted);
 	var fireNameChanged = function (_p0) {
 		return toMsg(
 			_user$project$Entity$NameChanged(_p0));

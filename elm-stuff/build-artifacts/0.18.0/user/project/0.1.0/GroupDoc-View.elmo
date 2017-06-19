@@ -1,4 +1,4 @@
-var _user$project$Context_View$edit = function (form) {
+var _user$project$GroupDoc_View$edit = function (form) {
 	var fireCancel = _user$project$Model$OnDeactivateEditingMode;
 	var fireSaveForm = _user$project$Model$OnSaveCurrentForm;
 	var toMsg = _user$project$Model$OnEntityAction(form.entity);
@@ -104,7 +104,7 @@ var _user$project$Context_View$edit = function (form) {
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('Context Name'),
+												_0: _elm_lang$html$Html$text(form.nameLabel),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}

@@ -29,7 +29,7 @@ var _user$project$ExclusiveMode$EditProject = function (a) {
 };
 var _user$project$ExclusiveMode$editProjectMode = function (_p0) {
 	return _user$project$ExclusiveMode$EditProject(
-		A2(_user$project$GroupDoc_EditForm$init, _user$project$Entity$ProjectEntity, _p0));
+		_user$project$GroupDoc_EditForm$forProject(_p0));
 };
 var _user$project$ExclusiveMode$editProjectSetName = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$GroupDoc_EditForm$setName, _user$project$ExclusiveMode$EditProject);
 var _user$project$ExclusiveMode$EditContext = function (a) {
@@ -37,9 +37,9 @@ var _user$project$ExclusiveMode$EditContext = function (a) {
 };
 var _user$project$ExclusiveMode$editContextMode = function (_p1) {
 	return _user$project$ExclusiveMode$EditContext(
-		_user$project$Context_EditForm$init(_p1));
+		_user$project$GroupDoc_EditForm$forContext(_p1));
 };
-var _user$project$ExclusiveMode$editContextSetName = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Context_EditForm$setName, _user$project$ExclusiveMode$EditContext);
+var _user$project$ExclusiveMode$editContextSetName = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$GroupDoc_EditForm$setName, _user$project$ExclusiveMode$EditContext);
 var _user$project$ExclusiveMode$EditTodo = function (a) {
 	return {ctor: 'EditTodo', _0: a};
 };

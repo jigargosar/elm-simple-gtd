@@ -1,7 +1,8 @@
-module Context.View exposing (..)
+module GroupDoc.View exposing (..)
 
 import Entity
 import Ext.Keyboard exposing (onEnter, onKeyDownStopPropagation)
+import GroupDoc.EditForm
 import Model
 import Context
 import Toolkit.Helpers exposing (..)
@@ -14,19 +15,14 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import View.Shared exposing (defaultOkCancelDeleteButtons)
+import View.Shared exposing (defaultOkCancelArchiveButtons)
 
 
+edit : GroupDoc.EditForm.Model -> Html Model.Msg
 edit form =
     let
         toMsg =
             Model.OnEntityAction form.entity
-
-        fireToggleDelete =
-            if Context.isNullId form.id then
-                Model.NOOP
-            else
-                toMsg Entity.ToggleDeleted
 
         fireNameChanged =
             Entity.NameChanged >> toMsg
@@ -36,6 +32,9 @@ edit form =
 
         fireCancel =
             Model.OnDeactivateEditingMode
+
+        fireToggleArchive =
+            toMsg Entity.ToggleArchived
     in
         div
             [ class "overlay"
@@ -57,9 +56,9 @@ edit form =
                             , onInput fireNameChanged
                             ]
                             []
-                        , label [ class "active" ] [ text "Context Name" ]
+                        , label [ class "active" ] [ text form.nameLabel ]
                         ]
-                    , defaultOkCancelDeleteButtons fireToggleDelete
+                    , defaultOkCancelArchiveButtons form.isArchived fireToggleArchive
                     ]
                 ]
             ]

@@ -54,14 +54,7 @@ type alias DocumentWithNameViewModel =
     , isEmpty : Bool
     , count : Int
     , onActiveStateChanged : Bool -> Msg
-    , startEditingMsg : Msg
-    , onDeleteClicked : Msg
-    , onSaveClicked : Msg
-    , onNameChanged : String -> Msg
-    , onCancelClicked : Msg
     , icon : IconVM
-    , onFocusIn : Msg
-    , onKeyDownMsg : KeyboardEvent -> Msg
     }
 
 
@@ -116,12 +109,6 @@ create todoListByEntityId config entity =
         isNull =
             config.isNull entity
 
-        toggleDeleteMsg =
-            if isNull then
-                (commonMsg.noOp)
-            else
-                (createEntityActionMsg Entity.ToggleDeleted)
-
         icon =
             if isNull then
                 config.nullIcon
@@ -133,20 +120,6 @@ create todoListByEntityId config entity =
 
         appHeader =
             { name = config.namePrefix ++ name, backgroundColor = icon.color }
-
-        onKeyDownMsg { key } =
-            case key of
-                {- Key.Space ->
-                   createEntityActionMsg Model.ToggleSelected
-                -}
-                Key.CharE ->
-                    startEditingMsg
-
-                Key.Delete ->
-                    toggleDeleteMsg
-
-                _ ->
-                    commonMsg.noOp
 
         startEditingMsg =
             createEntityActionMsg Entity.StartEditing
@@ -163,15 +136,8 @@ create todoListByEntityId config entity =
                 else
                     commonMsg.noOp
             )
-        , startEditingMsg = startEditingMsg
-        , onDeleteClicked = toggleDeleteMsg
-        , onSaveClicked = createEntityActionMsg Entity.Save
-        , onNameChanged = Entity.NameChanged >> createEntityActionMsg
-        , onCancelClicked = Model.OnDeactivateEditingMode
         , icon = icon
         , appHeader = appHeader
-        , onFocusIn = createEntityActionMsg Entity.OnFocusIn
-        , onKeyDownMsg = onKeyDownMsg
         }
 
 

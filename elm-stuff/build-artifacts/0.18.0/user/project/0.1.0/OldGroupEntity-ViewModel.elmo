@@ -15,20 +15,7 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 		};
 		var createEntityActionMsg = _user$project$Model$OnEntityAction(
 			config.entityWrapper(entity));
-		var toggleDeleteMsg = isNull ? _user$project$Model$commonMsg.noOp : createEntityActionMsg(_user$project$Entity$ToggleDeleted);
 		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
-		var onKeyDownMsg = function (_p0) {
-			var _p1 = _p0;
-			var _p2 = _p1.key;
-			switch (_p2.ctor) {
-				case 'CharE':
-					return startEditingMsg;
-				case 'Delete':
-					return toggleDeleteMsg;
-				default:
-					return _user$project$Model$commonMsg.noOp;
-			}
-		};
 		var id = _user$project$Document$getId(entity);
 		var count = _elm_lang$core$List$length(
 			todoListByEntityId(id));
@@ -43,18 +30,8 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 					_user$project$Model$EntityListView(
 						config.getViewType(id))) : _user$project$Model$commonMsg.noOp;
 			},
-			startEditingMsg: startEditingMsg,
-			onDeleteClicked: toggleDeleteMsg,
-			onSaveClicked: createEntityActionMsg(_user$project$Entity$Save),
-			onNameChanged: function (_p3) {
-				return createEntityActionMsg(
-					_user$project$Entity$NameChanged(_p3));
-			},
-			onCancelClicked: _user$project$Model$OnDeactivateEditingMode,
 			icon: icon,
-			appHeader: appHeader,
-			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
-			onKeyDownMsg: onKeyDownMsg
+			appHeader: appHeader
 		};
 	});
 var _user$project$OldGroupEntity_ViewModel$createList = F2(
@@ -165,37 +142,10 @@ var _user$project$OldGroupEntity_ViewModel$ViewModel = function (a) {
 		};
 	};
 };
-var _user$project$OldGroupEntity_ViewModel$DocumentWithNameViewModel = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return function (n) {
-														return function (o) {
-															return {id: a, name: b, appHeader: c, isDeleted: d, isEmpty: e, count: f, onActiveStateChanged: g, startEditingMsg: h, onDeleteClicked: i, onSaveClicked: j, onNameChanged: k, onCancelClicked: l, icon: m, onFocusIn: n, onKeyDownMsg: o};
-														};
-													};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
+var _user$project$OldGroupEntity_ViewModel$DocumentWithNameViewModel = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {id: a, name: b, appHeader: c, isDeleted: d, isEmpty: e, count: f, onActiveStateChanged: g, icon: h};
+	});
 var _user$project$OldGroupEntity_ViewModel$Record = F2(
 	function (a, b) {
 		return {name: a, archived: b};

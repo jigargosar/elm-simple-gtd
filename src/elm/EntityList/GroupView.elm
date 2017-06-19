@@ -58,7 +58,9 @@ initHeader vm =
             ]
             [ div [ class "layout horizontal justified" ]
                 [ h5 [ class "font-nowrap flex-auto layout horizontal" ]
-                    [ div [ class "self-center" ] [ text vm.namePrefix ], View.Shared.defaultBadge vm ]
+                    [ div [ class "self-center" ] [ text vm.namePrefix ]
+                    , View.Shared.defaultBadge vm
+                    ]
                 , editButton
                 ]
             ]

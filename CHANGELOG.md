@@ -1,3 +1,7 @@
+## Upcoming
+* app drawer: show archived  contexts/projects
+  add archive/unarchive icon. 
+
 ## v0.18.43 - 2017-06-18
 * fix clickable edit area of todo text 
 

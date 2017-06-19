@@ -63,6 +63,6 @@ headerItem vm =
                 [ h5 [ class "font-nowrap ellipsis" ]
                     [ View.Shared.badge (vm.namePrefix ++ vm.name) vm.count
                     ]
-                , div [ class "layout horizontal center" ] [ editButton, archiveButton ]
+                , div [ class "layout horizontal center" ] [ editButton ]
                 ]
             ]

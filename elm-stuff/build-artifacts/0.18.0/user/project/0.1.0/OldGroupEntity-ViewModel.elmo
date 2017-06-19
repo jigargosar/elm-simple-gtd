@@ -85,9 +85,8 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		defaultIconName: 'fiber_manual_record',
 		getViewType: _user$project$Entity$ContextView
 	};
-	var contextList = A2(_user$project$OldGroupEntity_ViewModel$createList, config, model);
 	return {
-		entityList: contextList,
+		entityList: A2(_user$project$OldGroupEntity_ViewModel$createList, config, model),
 		viewType: _user$project$Entity$ContextsView,
 		title: 'Contexts',
 		className: 'contexts',
@@ -110,9 +109,8 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		defaultIconName: 'apps',
 		getViewType: _user$project$Entity$ProjectView
 	};
-	var projectList = A2(_user$project$OldGroupEntity_ViewModel$createList, config, model);
 	return {
-		entityList: projectList,
+		entityList: A2(_user$project$OldGroupEntity_ViewModel$createList, config, model),
 		viewType: _user$project$Entity$ProjectsView,
 		title: 'Projects',
 		className: 'projects',

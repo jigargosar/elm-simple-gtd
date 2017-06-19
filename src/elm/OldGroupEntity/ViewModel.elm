@@ -196,12 +196,8 @@ contexts model =
             , defaultIconName = "fiber_manual_record"
             , getViewType = Entity.ContextView
             }
-
-        contextList : List DocumentWithNameViewModel
-        contextList =
-            createList config model
     in
-        { entityList = contextList
+        { entityList = createList config model
         , viewType = Entity.ContextsView
         , title = "Contexts"
         , className = "contexts"
@@ -228,12 +224,8 @@ projects model =
             , defaultIconName = "apps"
             , getViewType = Entity.ProjectView
             }
-
-        projectList : List DocumentWithNameViewModel
-        projectList =
-            createList config model
     in
-        { entityList = projectList
+        { entityList = createList config model
         , viewType = Entity.ProjectsView
         , title = "Projects"
         , className = "projects"

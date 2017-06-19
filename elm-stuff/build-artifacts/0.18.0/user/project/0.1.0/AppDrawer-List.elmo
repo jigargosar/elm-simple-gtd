@@ -96,7 +96,7 @@ var _user$project$AppDrawer_List$entityListItem = function (vm) {
 		});
 };
 var _user$project$AppDrawer_List$archivedItems = function (vm) {
-	var _p0 = vm.showDeleted ? {
+	var _p0 = vm.showArchived ? {
 		ctor: '_Tuple3',
 		_0: 'visibility',
 		_1: 'Archived',

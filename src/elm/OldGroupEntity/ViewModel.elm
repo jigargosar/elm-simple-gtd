@@ -39,6 +39,7 @@ type alias ViewModel =
     , showArchived : Bool
     , onAddClicked : Msg
     , onToggleExpanded : Msg
+    , onToggleShowArchived : Msg
     , isExpanded : Bool
     , icon : IconVM
     }
@@ -212,6 +213,7 @@ contexts model =
         , onAddClicked = Model.NewContext
         , icon = { name = "group_work", color = contextsColor }
         , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleExpandContextList
+        , onToggleShowArchived = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleShowArchivedContexts
         , isExpanded = AppDrawer.Model.isContextListExpanded model.appDrawerModel
         }
 
@@ -251,6 +253,7 @@ projects model =
         , onAddClicked = Model.NewProject
         , icon = { name = "group_work", color = projectsColor }
         , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleExpandProjectList
+        , onToggleShowArchived = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleShowArchivedProjects
         , isExpanded = AppDrawer.Model.isProjectListExpanded model.appDrawerModel
         }
 

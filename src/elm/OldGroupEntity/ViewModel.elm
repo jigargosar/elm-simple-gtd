@@ -31,6 +31,7 @@ type alias IconVM =
 
 type alias ViewModel =
     { entityList : List DocumentWithNameViewModel
+    , archivedEntityList : List DocumentWithNameViewModel
     , viewType : EntityListViewType
     , title : String
     , className : String
@@ -178,11 +179,17 @@ create todoListByEntityId config entity =
 contexts : Model.Model -> ViewModel
 contexts model =
     let
+        archivedFilter =
+            Model.filterContexts Document.isDeleted
+
+        activeFilter =
+            Model.filterContexts Document.isNotDeleted
+
         config : Config
         config =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
-            , filter = Model.filterCurrentContexts
+            , filter = activeFilter
             , entityWrapper = Entity.ContextEntity
             , nullEntity = Context.null
             , isNull = Context.isNull
@@ -190,8 +197,12 @@ contexts model =
             , defaultIconName = "fiber_manual_record"
             , getViewType = Entity.ContextView
             }
+
+        archivedConfig =
+            { config | filter = archivedFilter }
     in
         { entityList = createList config model
+        , archivedEntityList = createList archivedConfig model
         , viewType = Entity.ContextsView
         , title = "Contexts"
         , className = "contexts"
@@ -206,11 +217,17 @@ contexts model =
 projects : Model.Model -> ViewModel
 projects model =
     let
+        archivedFilter =
+            Model.filterProjects Document.isDeleted
+
+        activeFilter =
+            Model.filterProjects Document.isNotDeleted
+
         config : Config
         config =
             { groupByFn = Todo.getProjectId
             , namePrefix = "#"
-            , filter = Model.filterCurrentProjects
+            , filter = activeFilter
             , entityWrapper = Entity.ProjectEntity
             , nullEntity = Project.null
             , isNull = Project.isNull
@@ -218,8 +235,12 @@ projects model =
             , defaultIconName = "apps"
             , getViewType = Entity.ProjectView
             }
+
+        archivedConfig =
+            { config | filter = archivedFilter }
     in
         { entityList = createList config model
+        , archivedEntityList = createList archivedConfig model
         , viewType = Entity.ProjectsView
         , title = "Projects"
         , className = "projects"

@@ -73,10 +73,11 @@ var _user$project$OldGroupEntity_ViewModel$createList = F2(
 			A2(_user$project$OldGroupEntity_ViewModel$create, getTodoListWithGroupId, config));
 	});
 var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
+	var activeFilter = _user$project$Model$filterContexts(_user$project$Document$isNotDeleted);
 	var config = {
 		groupByFn: _user$project$Todo$getContextId,
 		namePrefix: '@',
-		filter: _user$project$Model$filterCurrentContexts,
+		filter: activeFilter,
 		entityWrapper: _user$project$Entity$ContextEntity,
 		nullEntity: _user$project$Context$null,
 		isNull: _user$project$Context$isNull,
@@ -84,8 +85,13 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		defaultIconName: 'fiber_manual_record',
 		getViewType: _user$project$Entity$ContextView
 	};
+	var archivedFilter = _user$project$Model$filterContexts(_user$project$Document$isDeleted);
+	var archivedConfig = _elm_lang$core$Native_Utils.update(
+		config,
+		{filter: archivedFilter});
 	return {
 		entityList: A2(_user$project$OldGroupEntity_ViewModel$createList, config, model),
+		archivedEntityList: A2(_user$project$OldGroupEntity_ViewModel$createList, archivedConfig, model),
 		viewType: _user$project$Entity$ContextsView,
 		title: 'Contexts',
 		className: 'contexts',
@@ -97,10 +103,11 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 	};
 };
 var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
+	var activeFilter = _user$project$Model$filterProjects(_user$project$Document$isNotDeleted);
 	var config = {
 		groupByFn: _user$project$Todo$getProjectId,
 		namePrefix: '#',
-		filter: _user$project$Model$filterCurrentProjects,
+		filter: activeFilter,
 		entityWrapper: _user$project$Entity$ProjectEntity,
 		nullEntity: _user$project$Project$null,
 		isNull: _user$project$Project$isNull,
@@ -108,8 +115,13 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		defaultIconName: 'apps',
 		getViewType: _user$project$Entity$ProjectView
 	};
+	var archivedFilter = _user$project$Model$filterProjects(_user$project$Document$isDeleted);
+	var archivedConfig = _elm_lang$core$Native_Utils.update(
+		config,
+		{filter: archivedFilter});
 	return {
 		entityList: A2(_user$project$OldGroupEntity_ViewModel$createList, config, model),
+		archivedEntityList: A2(_user$project$OldGroupEntity_ViewModel$createList, archivedConfig, model),
 		viewType: _user$project$Entity$ProjectsView,
 		title: 'Projects',
 		className: 'projects',
@@ -124,10 +136,27 @@ var _user$project$OldGroupEntity_ViewModel$IconVM = F2(
 	function (a, b) {
 		return {name: a, color: b};
 	});
-var _user$project$OldGroupEntity_ViewModel$ViewModel = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {entityList: a, viewType: b, title: c, className: d, showDeleted: e, onAddClicked: f, onToggleExpanded: g, isExpanded: h, icon: i};
-	});
+var _user$project$OldGroupEntity_ViewModel$ViewModel = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {entityList: a, archivedEntityList: b, viewType: c, title: d, className: e, showDeleted: f, onAddClicked: g, onToggleExpanded: h, isExpanded: i, icon: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _user$project$OldGroupEntity_ViewModel$DocumentWithNameViewModel = function (a) {
 	return function (b) {
 		return function (c) {

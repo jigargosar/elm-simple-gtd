@@ -99,37 +99,40 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 	var _p0 = vm.showDeleted ? {ctor: '_Tuple2', _0: 'visibility', _1: 'Archived'} : {ctor: '_Tuple2', _0: 'visibility_off', _1: 'Archived'};
 	var iconName = _p0._0;
 	var buttonText = _p0._1;
-	return {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$li,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class(''),
-				_1: {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$li,
+				{
 					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleShowDeletedEntity),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: _user$project$Material$icon(iconName),
-				_1: {
+					_0: _elm_lang$html$Html_Attributes$class(''),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$ToggleShowDeletedEntity),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(buttonText),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}),
-		_1: {ctor: '[]'}
-	};
+					_0: _user$project$Material$icon(iconName),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(buttonText),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, vm.archivedEntityList));
 };
 var _user$project$AppDrawer_List$entityListView = F2(
 	function (vm, mainViewType) {

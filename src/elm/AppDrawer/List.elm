@@ -138,6 +138,7 @@ archivedItems vm =
             , div [] [ text buttonText ]
             ]
         ]
+            ++ List.map entityListItem vm.archivedEntityList
 
 
 entityListItem : OldGroupEntity.ViewModel.DocumentWithNameViewModel -> Html Msg

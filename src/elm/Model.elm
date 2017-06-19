@@ -508,21 +508,27 @@ createGrouping viewType model =
         case viewType of
             Entity.ContextsView ->
                 getActiveContexts model
-                    |> Entity.createGroupingForContexts getActiveTodoListForContextHelp
+                    |> Entity.createGroupingForContexts
+                        getActiveTodoListForContextHelp
 
             Entity.ProjectsView ->
                 getActiveProjects model
-                    |> Entity.createGroupingForProjects getActiveTodoListForProjectHelp
+                    |> Entity.createGroupingForProjects
+                        getActiveTodoListForProjectHelp
 
             Entity.ContextView id ->
                 findContextById id model
                     ?= Context.null
-                    |> Entity.createGroupingForContext getActiveTodoListForContextHelp findProjectByIdHelp
+                    |> Entity.createGroupingForContext
+                        getActiveTodoListForContextHelp
+                        findProjectByIdHelp
 
             Entity.ProjectView id ->
                 findProjectById id model
                     ?= Project.null
-                    |> Entity.createGroupingForProject getActiveTodoListForProjectHelp findContextByIdHelp
+                    |> Entity.createGroupingForProject
+                        getActiveTodoListForProjectHelp
+                        findContextByIdHelp
 
             Entity.BinView ->
                 Entity.createGroupingForTodoList

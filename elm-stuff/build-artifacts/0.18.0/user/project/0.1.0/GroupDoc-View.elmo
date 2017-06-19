@@ -26,6 +26,7 @@ var _user$project$GroupDoc_View$headerItem = function (vm) {
 		_elm_lang$html$Html$span,
 		{ctor: '[]'},
 		{ctor: '[]'});
+	var editOrArchiveButton = vm.archive.isArchived ? archiveButton : editButton;
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -87,7 +88,7 @@ var _user$project$GroupDoc_View$headerItem = function (vm) {
 							},
 							{
 								ctor: '::',
-								_0: editButton,
+								_0: editOrArchiveButton,
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}

@@ -52,6 +52,12 @@ headerItem vm =
 
         archiveButton =
             Material.iconButton vm.archive.iconName [ onClickStopPropagation vm.archive.onClick, vm.tabindexAV ]
+
+        editOrArchiveButton =
+            if vm.archive.isArchived then
+                archiveButton
+            else
+                editButton
     in
         div
             [ vm.tabindexAV
@@ -63,6 +69,6 @@ headerItem vm =
                 [ h5 [ class "font-nowrap ellipsis" ]
                     [ View.Shared.badge (vm.namePrefix ++ vm.name) vm.count
                     ]
-                , div [ class "layout horizontal center" ] [ editButton ]
+                , div [ class "layout horizontal center" ] [ editOrArchiveButton ]
                 ]
             ]

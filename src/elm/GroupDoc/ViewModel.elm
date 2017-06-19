@@ -35,7 +35,7 @@ type alias ViewModel =
     , name : String
     , namePrefix : String
     , isDeleted : Bool
-    , archive : { iconName : String, onClick : Msg }
+    , archive : { iconName : String, onClick : Msg, isArchived : Bool }
     , isEditable : Bool
     , startEditingMsg : Msg
     , onDeleteClicked : Msg
@@ -117,17 +117,21 @@ create config todoList groupDoc =
                 _ ->
                     commonMsg.noOp
 
-        isArchived =
-            GroupDoc.isArchived groupDoc
-
         archive =
-            { iconName =
-                if isArchived then
-                    "unarchive"
-                else
-                    "archive"
-            , onClick = onEntityAction Entity.ToggleArchived
-            }
+            let
+                isArchived =
+                    GroupDoc.isArchived groupDoc
+
+                iconName =
+                    if isArchived then
+                        "unarchive"
+                    else
+                        "archive"
+            in
+                { iconName = iconName
+                , onClick = onEntityAction Entity.ToggleArchived
+                , isArchived = isArchived
+                }
     in
         { id = id
         , name = name

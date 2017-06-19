@@ -6,7 +6,6 @@ var _user$project$GroupDoc_ViewModel$contextsColor = _user$project$GroupDoc_View
 var _user$project$GroupDoc_ViewModel$inboxColor = '#42a5f5';
 var _user$project$GroupDoc_ViewModel$create = F3(
 	function (config, todoList, groupDoc) {
-		var isArchived = _user$project$GroupDoc$isArchived(groupDoc);
 		var name = groupDoc.name;
 		var isNull = config.isNull(groupDoc);
 		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$GroupDoc_ViewModel$lightGray};
@@ -32,10 +31,15 @@ var _user$project$GroupDoc_ViewModel$create = F3(
 					return _user$project$Model$commonMsg.noOp;
 			}
 		};
-		var archive = {
-			iconName: isArchived ? 'unarchive' : 'archive',
-			onClick: onEntityAction(_user$project$Entity$ToggleArchived)
-		};
+		var archive = function () {
+			var isArchived = _user$project$GroupDoc$isArchived(groupDoc);
+			var iconName = isArchived ? 'unarchive' : 'archive';
+			return {
+				iconName: iconName,
+				onClick: onEntityAction(_user$project$Entity$ToggleArchived),
+				isArchived: isArchived
+			};
+		}();
 		var id = _user$project$Document$getId(groupDoc);
 		return {
 			id: id,

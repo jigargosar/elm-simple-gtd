@@ -1,0 +1,61 @@
+var _user$project$GroupDoc$getName = function (_) {
+	return _.name;
+};
+var _user$project$GroupDoc$compareNotNulls = function (tuple) {
+	var compareName = function (_p0) {
+		return A2(
+			_elm_lang$core$Basics$uncurry,
+			_elm_lang$core$Basics$compare,
+			A2(_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth, _user$project$GroupDoc$getName, _p0));
+	};
+	return function (deletedTuple) {
+		var _p1 = deletedTuple;
+		if (_p1._0 === true) {
+			if (_p1._1 === false) {
+				return _elm_lang$core$Basics$GT;
+			} else {
+				return compareName(tuple);
+			}
+		} else {
+			if (_p1._1 === true) {
+				return _elm_lang$core$Basics$LT;
+			} else {
+				return compareName(tuple);
+			}
+		}
+	}(
+		A2(_Fresheyeball$elm_tuple_extra$Tuple2$mapBoth, _user$project$Document$isDeleted, tuple));
+};
+var _user$project$GroupDoc$sort = function (isNull) {
+	return _elm_lang$core$List$sortWith(
+		F2(
+			function (v1, v2) {
+				var _p2 = {
+					ctor: '_Tuple2',
+					_0: isNull(v1),
+					_1: isNull(v2)
+				};
+				if (_p2._0 === true) {
+					if (_p2._1 === false) {
+						return _elm_lang$core$Basics$LT;
+					} else {
+						return _elm_lang$core$Basics$EQ;
+					}
+				} else {
+					if (_p2._1 === true) {
+						return _elm_lang$core$Basics$GT;
+					} else {
+						return _user$project$GroupDoc$compareNotNulls(
+							{ctor: '_Tuple2', _0: v1, _1: v2});
+					}
+				}
+			}));
+};
+var _user$project$GroupDoc$constructor = F7(
+	function (id, rev, createdAt, modifiedAt, deleted, deviceId, name) {
+		return {id: id, rev: rev, createdAt: createdAt, modifiedAt: modifiedAt, deleted: false, archived: deleted, deviceId: deviceId, name: name};
+	});
+var _user$project$GroupDoc$Record = F2(
+	function (a, b) {
+		return {name: a, archived: b};
+	});

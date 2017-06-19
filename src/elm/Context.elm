@@ -3,6 +3,7 @@ module Context exposing (..)
 import Dict
 import Document exposing (Document, Id, Revision)
 import Firebase exposing (DeviceId)
+import GroupDoc
 import Store
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -41,17 +42,8 @@ type alias Encoded =
     E.Value
 
 
-constructor : Id -> Revision -> Time -> Time -> Bool -> DeviceId -> Name -> Model
-constructor id rev createdAt modifiedAt deleted deviceId name =
-    { id = id
-    , rev = rev
-    , createdAt = createdAt
-    , modifiedAt = modifiedAt
-    , deleted = False
-    , archived = deleted
-    , deviceId = deviceId
-    , name = name
-    }
+constructor =
+    GroupDoc.constructor
 
 
 init : Name -> Time -> DeviceId -> Id -> Model
@@ -89,44 +81,7 @@ filterNull pred =
 
 
 sort =
-    List.sortWith
-        (\v1 v2 ->
-            case ( isNull v1, isNull v2 ) of
-                ( True, False ) ->
-                    LT
-
-                ( False, True ) ->
-                    GT
-
-                ( True, True ) ->
-                    EQ
-
-                ( False, False ) ->
-                    compareNotNulls ( v1, v2 )
-        )
-
-
-compareNotNulls tuple =
-    let
-        compareName =
-            Tuple2.mapBoth getName >> uncurry compare
-    in
-        tuple
-            |> Tuple2.mapBoth Document.isDeleted
-            |> (\deletedTuple ->
-                    case deletedTuple of
-                        ( True, False ) ->
-                            GT
-
-                        ( False, True ) ->
-                            LT
-
-                        ( True, True ) ->
-                            compareName tuple
-
-                        ( False, False ) ->
-                            compareName tuple
-               )
+    GroupDoc.sort isNull
 
 
 isNull =

@@ -3,6 +3,7 @@ module Project exposing (..)
 import Dict
 import Document exposing (Document, Id, Revision)
 import Firebase exposing (DeviceId)
+import GroupDoc
 import Maybe.Extra
 import Store
 import Toolkit.Helpers exposing (..)
@@ -18,14 +19,8 @@ import String.Extra
 import Time exposing (Time)
 
 
-type alias Record =
-    { name : Name
-    , archived : Bool
-    }
-
-
 type alias Project =
-    Document Record
+    GroupDoc.Model
 
 
 type alias Model =
@@ -41,7 +36,7 @@ type alias Name =
 
 
 type alias Store =
-    Store.Store Record
+    GroupDoc.Store
 
 
 findNameById id =
@@ -161,7 +156,7 @@ type alias Encoded =
     E.Value
 
 
-otherFieldsEncoder : Document Record -> List ( String, E.Value )
+otherFieldsEncoder : GroupDoc.Model -> List ( String, E.Value )
 otherFieldsEncoder project =
     [ "name" => E.string (getName project) ]
 

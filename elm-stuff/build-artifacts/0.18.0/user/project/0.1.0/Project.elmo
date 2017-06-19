@@ -127,7 +127,3 @@ var _user$project$Project$findNameById = function (id) {
 		_user$project$Store$findById(id),
 		_user$project$Project$getName);
 };
-var _user$project$Project$Record = F2(
-	function (a, b) {
-		return {name: a, archived: b};
-	});

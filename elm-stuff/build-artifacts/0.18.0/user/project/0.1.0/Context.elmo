@@ -62,7 +62,7 @@ var _user$project$Context$otherFieldsEncoder = function (project) {
 };
 var _user$project$Context$constructor = F7(
 	function (id, rev, createdAt, modifiedAt, deleted, deviceId, name) {
-		return {id: id, rev: rev, createdAt: createdAt, modifiedAt: modifiedAt, deleted: deleted, deviceId: deviceId, name: name};
+		return {id: id, rev: rev, createdAt: createdAt, modifiedAt: modifiedAt, deleted: false, archived: deleted, deviceId: deviceId, name: name};
 	});
 var _user$project$Context$init = F4(
 	function (name, now, deviceId, id) {
@@ -110,6 +110,7 @@ var _user$project$Context$sort = _elm_lang$core$List$sortWith(
 				}
 			}
 		}));
-var _user$project$Context$Record = function (a) {
-	return {name: a};
-};
+var _user$project$Context$Record = F2(
+	function (a, b) {
+		return {name: a, archived: b};
+	});

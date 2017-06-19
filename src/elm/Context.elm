@@ -24,7 +24,9 @@ type alias Name =
 
 
 type alias Record =
-    { name : Name }
+    { name : Name
+    , archived : Bool
+    }
 
 
 type alias Model =
@@ -45,7 +47,8 @@ constructor id rev createdAt modifiedAt deleted deviceId name =
     , rev = rev
     , createdAt = createdAt
     , modifiedAt = modifiedAt
-    , deleted = deleted
+    , deleted = False
+    , archived = deleted
     , deviceId = deviceId
     , name = name
     }

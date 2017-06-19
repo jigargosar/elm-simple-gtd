@@ -50,7 +50,7 @@ type alias GroupViewModel =
 
 
 type alias DocumentWithName =
-    Document.Document { name : String }
+    Document.Document { name : String, archived : Bool }
 
 
 type alias Config =

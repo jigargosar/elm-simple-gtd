@@ -20,6 +20,7 @@ import Time exposing (Time)
 
 type alias Record =
     { name : Name
+    , archived : Bool
     }
 
 
@@ -106,7 +107,8 @@ constructor id rev createdAt modifiedAt deleted deviceId name =
     , deviceId = deviceId
     , createdAt = createdAt
     , modifiedAt = modifiedAt
-    , deleted = deleted
+    , deleted = False
+    , archived = deleted
     , name = name
     }
 

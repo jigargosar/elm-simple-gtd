@@ -196,9 +196,10 @@ var _user$project$OldGroupEntity_ViewModel$DocumentWithNameViewModel = function 
 		};
 	};
 };
-var _user$project$OldGroupEntity_ViewModel$Record = function (a) {
-	return {name: a};
-};
+var _user$project$OldGroupEntity_ViewModel$Record = F2(
+	function (a, b) {
+		return {name: a, archived: b};
+	});
 var _user$project$OldGroupEntity_ViewModel$Config = F9(
 	function (a, b, c, d, e, f, g, h, i) {
 		return {groupByFn: a, namePrefix: b, filter: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i};

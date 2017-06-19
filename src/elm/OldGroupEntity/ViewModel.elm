@@ -65,7 +65,7 @@ type alias DocumentWithNameViewModel =
 
 
 type alias Record =
-    { name : String }
+    { name : String, archived : Bool }
 
 
 type alias DocumentWithName =

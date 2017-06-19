@@ -2,7 +2,7 @@ var _user$project$Project$nullId = '';
 var _user$project$Project$isNullId = _user$project$Ext_Function$equals(_user$project$Project$nullId);
 var _user$project$Project$constructor = F7(
 	function (id, rev, createdAt, modifiedAt, deleted, deviceId, name) {
-		return {id: id, rev: rev, deviceId: deviceId, createdAt: createdAt, modifiedAt: modifiedAt, deleted: deleted, name: name};
+		return {id: id, rev: rev, deviceId: deviceId, createdAt: createdAt, modifiedAt: modifiedAt, deleted: false, archived: deleted, name: name};
 	});
 var _user$project$Project$init = F4(
 	function (name, now, deviceId, id) {
@@ -127,6 +127,7 @@ var _user$project$Project$findNameById = function (id) {
 		_user$project$Store$findById(id),
 		_user$project$Project$getName);
 };
-var _user$project$Project$Record = function (a) {
-	return {name: a};
-};
+var _user$project$Project$Record = F2(
+	function (a, b) {
+		return {name: a, archived: b};
+	});

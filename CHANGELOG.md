@@ -1,6 +1,7 @@
 ## Upcoming
 * sort archived groupDocs by modifiedAt
-  use activePred rather than incorrect isNotArchived when filtering 
+  use activePred rather than incorrect isNotArchived when filtering
+* collapse archived when parent is collapsed.
 
 ## v0.18.45 - 2017-06-19
 * drawer: move add to bottom of list

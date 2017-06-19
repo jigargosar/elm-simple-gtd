@@ -106,15 +106,16 @@ entityListView vm mainViewType =
             ]
         , li [ classList [ "list-container" => True, "expanded" => isExpanded ] ]
             [ ul []
-                ([ li
-                    [ class ""
-                    , onClickPreventDefaultAndStopPropagation onAddClicked
-                    ]
-                    [ Material.icon "add"
-                    , div [] [ text "Add New" ]
-                    ]
-                 ]
+                ([]
                     ++ List.map entityListItem entityList
+                    ++ [ li
+                            [ class ""
+                            , onClickPreventDefaultAndStopPropagation onAddClicked
+                            ]
+                            [ Material.icon "add"
+                            , div [] [ text "Add New" ]
+                            ]
+                       ]
                     ++ archivedItems vm
                     ++ [ Material.divider ]
                 )

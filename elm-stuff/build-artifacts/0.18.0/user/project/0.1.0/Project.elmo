@@ -20,6 +20,7 @@ var _user$project$Project$filterNull = function (pred) {
 		});
 };
 var _user$project$Project$isNull = _user$project$Ext_Function$equals(_user$project$Project$null);
+var _user$project$Project$sort = _user$project$GroupDoc$sort(_user$project$Project$isNull);
 var _user$project$Project$decoder = A3(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
 	'name',
@@ -42,31 +43,6 @@ var _user$project$Project$updateName = F2(
 var _user$project$Project$getName = function (_) {
 	return _.name;
 };
-var _user$project$Project$sort = _elm_lang$core$List$sortWith(
-	F2(
-		function (v1, v2) {
-			var _p0 = {
-				ctor: '_Tuple2',
-				_0: _user$project$Project$isNull(v1),
-				_1: _user$project$Project$isNull(v2)
-			};
-			if (_p0._0 === true) {
-				if (_p0._1 === false) {
-					return _elm_lang$core$Basics$LT;
-				} else {
-					return _elm_lang$core$Basics$EQ;
-				}
-			} else {
-				if (_p0._1 === true) {
-					return _elm_lang$core$Basics$GT;
-				} else {
-					return A2(
-						_elm_lang$core$Basics$compare,
-						_user$project$Project$getName(v1),
-						_user$project$Project$getName(v2));
-				}
-			}
-		}));
 var _user$project$Project$otherFieldsEncoder = function (project) {
 	return {
 		ctor: '::',
@@ -108,11 +84,11 @@ var _user$project$Project$updateId = F2(
 			model);
 	});
 var _user$project$Project$nameEquals = function (name) {
-	return function (_p1) {
+	return function (_p0) {
 		return A2(
 			_user$project$Ext_Function$equals,
 			name,
-			_user$project$Project$getName(_p1));
+			_user$project$Project$getName(_p0));
 	};
 };
 var _user$project$Project$findByName = function (projectName) {

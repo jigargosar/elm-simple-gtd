@@ -12,6 +12,7 @@ import Ext.List as List
 import Ext.Predicate as Pred
 import Ext.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
 import Firebase exposing (DeviceId)
+import GroupDoc
 import Http
 import Keyboard.Combo exposing (combo1, combo2, combo3)
 import Keyboard.Combo as Combo
@@ -502,11 +503,11 @@ createGrouping viewType model =
     in
         case viewType of
             Entity.ContextsView ->
-                filterCurrentContexts model
+                getActiveContexts model
                     |> Entity.createGroupingForContexts filterTodosForContext
 
             Entity.ProjectsView ->
-                filterCurrentProjects model
+                getActiveProjects model
                     |> Entity.createGroupingForProjects filterTodosForProject
 
             Entity.ContextView id ->
@@ -1148,11 +1149,11 @@ moveFocusBy =
 
 
 getActiveProjects =
-    filterProjects Document.isNotDeleted
+    filterProjects GroupDoc.activeFilter
 
 
 getActiveContexts =
-    filterContexts Document.isNotDeleted
+    filterContexts GroupDoc.activeFilter
 
 
 getContextsAsIdDict =

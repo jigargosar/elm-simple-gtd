@@ -484,7 +484,7 @@ var _user$project$Model$filterCurrentProjects = function (model) {
 		_user$project$Model$currentDocPredicate(model),
 		model);
 };
-var _user$project$Model$getActiveProjects = _user$project$Model$filterProjects(_user$project$Document$isNotDeleted);
+var _user$project$Model$getActiveProjects = _user$project$Model$filterProjects(_user$project$GroupDoc$activeFilter);
 var _user$project$Model$filterContexts = F2(
 	function (pred, model) {
 		return _user$project$Context$sort(
@@ -499,7 +499,7 @@ var _user$project$Model$filterCurrentContexts = function (model) {
 		_user$project$Model$currentDocPredicate(model),
 		model);
 };
-var _user$project$Model$getActiveContexts = _user$project$Model$filterContexts(_user$project$Document$isNotDeleted);
+var _user$project$Model$getActiveContexts = _user$project$Model$filterContexts(_user$project$GroupDoc$activeFilter);
 var _user$project$Model$filterTodosAndSortBy = F3(
 	function (pred, sortBy, model) {
 		return A2(
@@ -582,12 +582,12 @@ var _user$project$Model$createGrouping = F2(
 				return A2(
 					_user$project$Entity$createGroupingForContexts,
 					filterTodosForContext,
-					_user$project$Model$filterCurrentContexts(model));
+					_user$project$Model$getActiveContexts(model));
 			case 'ProjectsView':
 				return A2(
 					_user$project$Entity$createGroupingForProjects,
 					filterTodosForProject,
-					_user$project$Model$filterCurrentProjects(model));
+					_user$project$Model$getActiveProjects(model));
 			case 'ContextView':
 				return A3(
 					_user$project$Entity$createGroupingForContext,

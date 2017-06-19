@@ -45,11 +45,11 @@ var _user$project$EntityList_View$flatTodoListView = F2(
 		};
 	});
 var _user$project$EntityList_View$groupHeaderView = function (vm) {
-	return _user$project$EntityList_GroupView$initHeaderKeyed(vm);
+	return _user$project$GroupDoc_View$initHeaderKeyed(vm);
 };
 var _user$project$EntityList_View$groupView = F2(
 	function (todoView, vm) {
-		return A2(_user$project$EntityList_GroupView$initKeyed, todoView, vm);
+		return A2(_user$project$GroupDoc_View$initKeyed, todoView, vm);
 	});
 var _user$project$EntityList_View$keyedViewList = F3(
 	function (grouping, maybeFocusInEntity, appViewModel) {
@@ -68,11 +68,11 @@ var _user$project$EntityList_View$keyedViewList = F3(
 		};
 		var createContextVM = function (_p0) {
 			var _p1 = _p0;
-			return A3(_user$project$EntityList_ViewModel$contextGroup, getTabIndexAVForEntity, _p1.todoList, _p1.context);
+			return A3(_user$project$GroupDoc_ViewModel$contextGroup, getTabIndexAVForEntity, _p1.todoList, _p1.context);
 		};
 		var createProjectVM = function (_p2) {
 			var _p3 = _p2;
-			return A3(_user$project$EntityList_ViewModel$projectGroup, getTabIndexAVForEntity, _p3.todoList, _p3.project);
+			return A3(_user$project$GroupDoc_ViewModel$projectGroup, getTabIndexAVForEntity, _p3.todoList, _p3.project);
 		};
 		var todoView = function (todo) {
 			var canBeFocused = hasFocusIn(

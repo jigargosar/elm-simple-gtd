@@ -1,0 +1,123 @@
+var _user$project$GroupDoc_EditView$init = function (form) {
+	var fireCancel = _user$project$Model$OnDeactivateEditingMode;
+	var fireSaveForm = _user$project$Model$OnSaveCurrentForm;
+	var toMsg = _user$project$Model$OnEntityAction(form.entity);
+	var fireNameChanged = function (_p0) {
+		return toMsg(
+			_user$project$Entity$NameChanged(_p0));
+	};
+	var fireToggleArchive = toMsg(_user$project$Entity$ToggleArchived);
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('overlay'),
+			_1: {
+				ctor: '::',
+				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(fireCancel),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+						function (_p1) {
+							return _user$project$Model$NOOP;
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
+					_1: {
+						ctor: '::',
+						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('modal-content'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('input-field'),
+									_1: {
+										ctor: '::',
+										_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+											function (_p2) {
+												return _user$project$Model$NOOP;
+											}),
+										_1: {
+											ctor: '::',
+											_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$input,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('auto-focus'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$autofocus(true),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$defaultValue(form.name),
+													_1: {
+														ctor: '::',
+														_0: _user$project$Ext_Keyboard$onEnter(fireSaveForm),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Events$onInput(fireNameChanged),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$label,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('active'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(form.nameLabel),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(_user$project$View_Shared$defaultOkCancelArchiveButtons, form.isArchived, fireToggleArchive),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};

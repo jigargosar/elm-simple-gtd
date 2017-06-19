@@ -1,4 +1,4 @@
-var _user$project$GroupDoc_View$headerItem = function (vm) {
+var _user$project$GroupDoc_ListItemView$headerItem = function (vm) {
 	var archiveButton = A2(
 		_user$project$Material$iconButton,
 		vm.archive.iconName,
@@ -100,14 +100,14 @@ var _user$project$GroupDoc_View$headerItem = function (vm) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$GroupDoc_View$initHeaderKeyed = function (vm) {
+var _user$project$GroupDoc_ListItemView$initHeaderKeyed = function (vm) {
 	return {
 		ctor: '_Tuple2',
 		_0: vm.id,
-		_1: _user$project$GroupDoc_View$headerItem(vm)
+		_1: _user$project$GroupDoc_ListItemView$headerItem(vm)
 	};
 };
-var _user$project$GroupDoc_View$item = F2(
+var _user$project$GroupDoc_ListItemView$item = F2(
 	function (todoView, vm) {
 		var getTabIndexAVForTodo = function (_p0) {
 			return vm.getTabIndexAVForEntity(
@@ -126,16 +126,16 @@ var _user$project$GroupDoc_View$item = F2(
 				_0: {
 					ctor: '_Tuple2',
 					_0: vm.id,
-					_1: _user$project$GroupDoc_View$headerItem(vm)
+					_1: _user$project$GroupDoc_ListItemView$headerItem(vm)
 				},
 				_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.todoList, todoView)
 			});
 	});
-var _user$project$GroupDoc_View$initKeyed = F2(
+var _user$project$GroupDoc_ListItemView$initKeyed = F2(
 	function (todoView, vm) {
 		return {
 			ctor: '_Tuple2',
 			_0: vm.id,
-			_1: A2(_user$project$GroupDoc_View$item, todoView, vm)
+			_1: A2(_user$project$GroupDoc_ListItemView$item, todoView, vm)
 		};
 	});

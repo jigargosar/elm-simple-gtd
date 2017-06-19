@@ -2,7 +2,7 @@ module View exposing (init)
 
 import ActionList
 import ActionList.View
-import GroupDoc.View
+import GroupDoc.EditView
 import ExclusiveMode
 import Firebase.View
 import Html.Attributes.Extra exposing (..)
@@ -24,7 +24,7 @@ import Todo.View
 import ViewModel
 import WebComponents exposing (onBoolPropertyChanged)
 import LaunchBar.View
-import GroupDoc.View
+import GroupDoc.EditView
 
 
 init m =
@@ -69,10 +69,10 @@ overlayViews appModel =
                     ActionList.View.init appModel model
 
                 ExclusiveMode.EditProject form ->
-                    GroupDoc.View.edit form
+                    GroupDoc.EditView.init form
 
                 ExclusiveMode.EditContext form ->
-                    GroupDoc.View.edit form
+                    GroupDoc.EditView.init form
 
                 ExclusiveMode.EditTodo form ->
                     Todo.View.edit form appModel

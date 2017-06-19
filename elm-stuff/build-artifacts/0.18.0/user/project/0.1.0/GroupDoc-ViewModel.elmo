@@ -1,0 +1,139 @@
+var _user$project$GroupDoc_ViewModel$lightGray = '#9e9e9e';
+var _user$project$GroupDoc_ViewModel$sgtdBlue = 'rgb(68, 138, 255)';
+var _user$project$GroupDoc_ViewModel$projectsColor = 'rgb(124, 77, 255)';
+var _user$project$GroupDoc_ViewModel$nullProjectColor = 'rgb(179, 157, 219)';
+var _user$project$GroupDoc_ViewModel$contextsColor = _user$project$GroupDoc_ViewModel$sgtdBlue;
+var _user$project$GroupDoc_ViewModel$inboxColor = '#42a5f5';
+var _user$project$GroupDoc_ViewModel$create = F3(
+	function (config, todoList, groupDoc) {
+		var isArchived = _user$project$GroupDoc$isArchived(groupDoc);
+		var name = groupDoc.name;
+		var isNull = config.isNull(groupDoc);
+		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$GroupDoc_ViewModel$lightGray};
+		var appHeader = {
+			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
+			backgroundColor: icon.color
+		};
+		var onEntityAction = _user$project$Model$OnEntityAction(
+			config.entityWrapper(groupDoc));
+		var toggleDeleteMsg = isNull ? _user$project$Model$NOOP : onEntityAction(_user$project$Entity$ToggleDeleted);
+		var startEditingMsg = isNull ? _user$project$Model$NOOP : onEntityAction(_user$project$Entity$StartEditing);
+		var onKeyDownMsg = function (_p0) {
+			var _p1 = _p0;
+			var _p2 = _p1.key;
+			switch (_p2.ctor) {
+				case 'CharE':
+					return startEditingMsg;
+				case 'Delete':
+					return toggleDeleteMsg;
+				case 'CharG':
+					return onEntityAction(_user$project$Entity$Goto);
+				default:
+					return _user$project$Model$commonMsg.noOp;
+			}
+		};
+		var archive = {
+			iconName: isArchived ? 'unarchive' : 'archive',
+			onClick: onEntityAction(_user$project$Entity$ToggleArchived)
+		};
+		var id = _user$project$Document$getId(groupDoc);
+		return {
+			id: id,
+			name: name,
+			namePrefix: config.namePrefix,
+			count: _elm_lang$core$List$length(todoList),
+			isEditable: !isNull,
+			isDeleted: _user$project$Document$isDeleted(groupDoc),
+			archive: archive,
+			startEditingMsg: startEditingMsg,
+			onDeleteClicked: toggleDeleteMsg,
+			onSaveClicked: onEntityAction(_user$project$Entity$Save),
+			onNameChanged: function (_p3) {
+				return onEntityAction(
+					_user$project$Entity$NameChanged(_p3));
+			},
+			onCancelClicked: _user$project$Model$OnDeactivateEditingMode,
+			icon: icon,
+			onFocusIn: onEntityAction(_user$project$Entity$OnFocusIn),
+			onKeyDownMsg: onKeyDownMsg,
+			tabindexAV: config.getTabIndexAVForEntity(
+				config.entityWrapper(groupDoc)),
+			todoList: todoList,
+			getTabIndexAVForEntity: config.getTabIndexAVForEntity
+		};
+	});
+var _user$project$GroupDoc_ViewModel$contextGroup = F3(
+	function (getTabIndexAVForEntity, todoList, context) {
+		var config = {
+			groupByFn: _user$project$Todo$getContextId,
+			namePrefix: '@',
+			entityWrapper: _user$project$Entity$ContextEntity,
+			nullEntity: _user$project$Context$null,
+			isNull: _user$project$Context$isNull,
+			nullIcon: {name: 'inbox', color: _user$project$GroupDoc_ViewModel$inboxColor},
+			defaultIconName: 'av:fiber-manual-record',
+			getViewType: _user$project$Entity$ContextView,
+			getTabIndexAVForEntity: getTabIndexAVForEntity
+		};
+		return A3(_user$project$GroupDoc_ViewModel$create, config, todoList, context);
+	});
+var _user$project$GroupDoc_ViewModel$projectGroup = F3(
+	function (getTabIndexAVForEntity, todoList, project) {
+		var config = {
+			groupByFn: _user$project$Todo$getProjectId,
+			namePrefix: '#',
+			entityWrapper: _user$project$Entity$ProjectEntity,
+			nullEntity: _user$project$Project$null,
+			isNull: _user$project$Project$isNull,
+			nullIcon: {name: 'inbox', color: _user$project$GroupDoc_ViewModel$inboxColor},
+			defaultIconName: 'av:fiber-manual-record',
+			getViewType: _user$project$Entity$ProjectView,
+			getTabIndexAVForEntity: getTabIndexAVForEntity
+		};
+		return A3(_user$project$GroupDoc_ViewModel$create, config, todoList, project);
+	});
+var _user$project$GroupDoc_ViewModel$IconVM = F2(
+	function (a, b) {
+		return {name: a, color: b};
+	});
+var _user$project$GroupDoc_ViewModel$ViewModel = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return function (r) {
+																		return {id: a, count: b, name: c, namePrefix: d, isDeleted: e, archive: f, isEditable: g, startEditingMsg: h, onDeleteClicked: i, onSaveClicked: j, onNameChanged: k, onCancelClicked: l, icon: m, onFocusIn: n, onKeyDownMsg: o, tabindexAV: p, todoList: q, getTabIndexAVForEntity: r};
+																	};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$GroupDoc_ViewModel$Config = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {groupByFn: a, namePrefix: b, entityWrapper: c, nullEntity: d, isNull: e, nullIcon: f, defaultIconName: g, getViewType: h, getTabIndexAVForEntity: i};
+	});

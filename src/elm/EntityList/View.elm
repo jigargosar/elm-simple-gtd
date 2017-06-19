@@ -2,8 +2,8 @@ module EntityList.View exposing (..)
 
 import Document
 import Entity exposing (Entity)
-import EntityList.GroupView
-import EntityList.ViewModel
+import GroupDoc.View
+import GroupDoc.ViewModel
 import Html
 import Todo
 import Toolkit.Helpers exposing (..)
@@ -60,7 +60,7 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
                 tabindex tabindexValue
 
         createContextVM { context, todoList } =
-            EntityList.ViewModel.contextGroup
+            GroupDoc.ViewModel.contextGroup
                 getTabIndexAVForEntity
                 todoList
                 context
@@ -69,7 +69,7 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
             list .|> (createContextVM >> groupView todoView)
 
         createProjectVM { project, todoList } =
-            EntityList.ViewModel.projectGroup
+            GroupDoc.ViewModel.projectGroup
                 getTabIndexAVForEntity
                 todoList
                 project
@@ -116,11 +116,11 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
 
 
 groupView todoView vm =
-    EntityList.GroupView.initKeyed todoView vm
+    GroupDoc.View.initKeyed todoView vm
 
 
 groupHeaderView vm =
-    EntityList.GroupView.initHeaderKeyed vm
+    GroupDoc.View.initHeaderKeyed vm
 
 
 flatTodoListView title todoListView =

@@ -19,23 +19,26 @@ type Msg
 
 type alias GroupModel =
     { expanded : Bool
+    , showDeleted : Bool
     }
 
 
 groupModelDecoder =
     D.succeed GroupModel
         |> D.required "expanded" D.bool
+        |> D.optional "showDeleted" D.bool False
 
 
 encodeGroupModel model =
     E.object
         [ "expanded" => E.bool model.expanded
+        , "showDeleted" => E.bool model.showDeleted
         ]
 
 
 defaultGroupModel : GroupModel
 defaultGroupModel =
-    { expanded = True }
+    { expanded = True, showDeleted = False }
 
 
 type alias Model =

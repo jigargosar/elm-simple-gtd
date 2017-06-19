@@ -46,7 +46,7 @@ var _user$project$AppDrawer_Model$isContextListExpanded = function (_p1) {
 		_user$project$AppDrawer_Model$expanded,
 		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p1));
 };
-var _user$project$AppDrawer_Model$defaultGroupModel = {expanded: true};
+var _user$project$AppDrawer_Model$defaultGroupModel = {expanded: true, showDeleted: false};
 var _user$project$AppDrawer_Model$default = {contexts: _user$project$AppDrawer_Model$defaultGroupModel, projects: _user$project$AppDrawer_Model$defaultGroupModel};
 var _user$project$AppDrawer_Model$encodeGroupModel = function (model) {
 	return _elm_lang$core$Json_Encode$object(
@@ -56,7 +56,14 @@ var _user$project$AppDrawer_Model$encodeGroupModel = function (model) {
 				_user$project$Ext_Function_Infix_ops['=>'],
 				'expanded',
 				_elm_lang$core$Json_Encode$bool(model.expanded)),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$Ext_Function_Infix_ops['=>'],
+					'showDeleted',
+					_elm_lang$core$Json_Encode$bool(model.showDeleted)),
+				_1: {ctor: '[]'}
+			}
 		});
 };
 var _user$project$AppDrawer_Model$encode = function (model) {
@@ -77,14 +84,20 @@ var _user$project$AppDrawer_Model$encode = function (model) {
 			}
 		});
 };
-var _user$project$AppDrawer_Model$GroupModel = function (a) {
-	return {expanded: a};
-};
-var _user$project$AppDrawer_Model$groupModelDecoder = A3(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'expanded',
+var _user$project$AppDrawer_Model$GroupModel = F2(
+	function (a, b) {
+		return {expanded: a, showDeleted: b};
+	});
+var _user$project$AppDrawer_Model$groupModelDecoder = A4(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+	'showDeleted',
 	_elm_lang$core$Json_Decode$bool,
-	_elm_lang$core$Json_Decode$succeed(_user$project$AppDrawer_Model$GroupModel));
+	false,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'expanded',
+		_elm_lang$core$Json_Decode$bool,
+		_elm_lang$core$Json_Decode$succeed(_user$project$AppDrawer_Model$GroupModel)));
 var _user$project$AppDrawer_Model$Model = F2(
 	function (a, b) {
 		return {contexts: a, projects: b};

@@ -27,14 +27,14 @@ iconA name attr =
 iconButton name attributes =
     div attributes
         [ a [ class "btn-flat btn-floating" ]
-            [ i [ class "material-icons" ] [ text name ] ]
+            [ i [ class "default-color material-icons" ] [ text name ] ]
         ]
 
 
 smallIconButton name attributes =
     div attributes
         [ a [ class "btn-flat btn-floating x24 " ]
-            [ i [ class "material-icons" ] [ text name ] ]
+            [ i [ class "default-color material-icons" ] [ text name ] ]
         ]
 
 

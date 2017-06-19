@@ -19,28 +19,20 @@ import String.Extra
 import Time exposing (Time)
 
 
-type alias Project =
-    GroupDoc.Model
+type alias Name =
+    GroupDoc.Name
 
 
 type alias Model =
-    Project
-
-
-type alias ModelF =
-    Model -> Model
-
-
-type alias Name =
-    String
+    GroupDoc.Model
 
 
 type alias Store =
     GroupDoc.Store
 
 
-findNameById id =
-    Store.findById id >>? getName
+type alias ModelF =
+    Model -> Model
 
 
 storeGenerator : DeviceId -> List E.Value -> Random.Generator Store
@@ -48,59 +40,21 @@ storeGenerator =
     GroupDoc.storeGenerator "project-db"
 
 
-findByName projectName =
-    Store.findBy (nameEquals (String.trim projectName))
-
-
-nameEquals name =
-    getName >> equals name
-
-
-setId : Id -> ModelF
-setId id model =
-    { model | id = id }
-
-
-updateId : (Model -> Id) -> ModelF
-updateId updater model =
-    setId (updater model) model
-
-
-getRev : Model -> Revision
-getRev =
-    (.rev)
-
-
-setRev : Revision -> ModelF
-setRev rev model =
-    { model | rev = rev }
-
-
-updateRev : (Model -> Revision) -> ModelF
-updateRev updater model =
-    setRev (updater model) model
-
-
-getName : Model -> Name
+getName : Model -> GroupDoc.Name
 getName =
     (.name)
 
 
-setName : Name -> ModelF
+setName : GroupDoc.Name -> ModelF
 setName name model =
     { model | name = name }
-
-
-updateName : (Model -> Name) -> ModelF
-updateName updater model =
-    setName (updater model) model
 
 
 constructor =
     GroupDoc.constructor
 
 
-init : Name -> Time -> DeviceId -> Id -> Model
+init : GroupDoc.Name -> Time -> DeviceId -> Id -> Model
 init name now deviceId id =
     constructor id "" now now False deviceId name False
 

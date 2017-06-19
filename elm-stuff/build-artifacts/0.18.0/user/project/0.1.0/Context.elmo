@@ -8,21 +8,6 @@ var _user$project$Context$setName = F2(
 var _user$project$Context$getName = function (_) {
 	return _.name;
 };
-var _user$project$Context$findNameById = function (id) {
-	return A2(
-		_user$project$Ext_Function_Infix_ops['>>?'],
-		_user$project$Store$findById(id),
-		_user$project$Context$getName);
-};
-var _user$project$Context$findByName = function (name) {
-	return _user$project$Store$findBy(
-		function (_p0) {
-			return A2(
-				_user$project$Ext_Function$equals,
-				_elm_lang$core$String$trim(name),
-				_user$project$Context$getName(_p0));
-		});
-};
 var _user$project$Context$nullId = '';
 var _user$project$Context$isNullId = _user$project$Ext_Function$equals(_user$project$Context$nullId);
 var _user$project$Context$constructor = _user$project$GroupDoc$constructor;
@@ -43,7 +28,3 @@ var _user$project$Context$filterNull = function (pred) {
 };
 var _user$project$Context$isNull = _user$project$Ext_Function$equals(_user$project$Context$null);
 var _user$project$Context$sort = _user$project$GroupDoc$sort(_user$project$Context$isNull);
-var _user$project$Context$Record = F2(
-	function (a, b) {
-		return {name: a, archived: b};
-	});

@@ -21,13 +21,7 @@ import Tuple2
 
 
 type alias Name =
-    String
-
-
-type alias Record =
-    { name : Name
-    , archived : Bool
-    }
+    GroupDoc.Name
 
 
 type alias Model =
@@ -83,11 +77,3 @@ setName name model =
 storeGenerator : DeviceId -> List E.Value -> Random.Generator Store
 storeGenerator =
     GroupDoc.storeGenerator "context-db"
-
-
-findNameById id =
-    Store.findById id >>? getName
-
-
-findByName name =
-    Store.findBy (getName >> equals (String.trim name))

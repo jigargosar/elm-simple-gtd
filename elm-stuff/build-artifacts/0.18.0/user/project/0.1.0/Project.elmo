@@ -24,62 +24,7 @@ var _user$project$Project$setName = F2(
 			model,
 			{name: name});
 	});
-var _user$project$Project$updateName = F2(
-	function (updater, model) {
-		return A2(
-			_user$project$Project$setName,
-			updater(model),
-			model);
-	});
 var _user$project$Project$getName = function (_) {
 	return _.name;
 };
-var _user$project$Project$setRev = F2(
-	function (rev, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{rev: rev});
-	});
-var _user$project$Project$updateRev = F2(
-	function (updater, model) {
-		return A2(
-			_user$project$Project$setRev,
-			updater(model),
-			model);
-	});
-var _user$project$Project$getRev = function (_) {
-	return _.rev;
-};
-var _user$project$Project$setId = F2(
-	function (id, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{id: id});
-	});
-var _user$project$Project$updateId = F2(
-	function (updater, model) {
-		return A2(
-			_user$project$Project$setId,
-			updater(model),
-			model);
-	});
-var _user$project$Project$nameEquals = function (name) {
-	return function (_p0) {
-		return A2(
-			_user$project$Ext_Function$equals,
-			name,
-			_user$project$Project$getName(_p0));
-	};
-};
-var _user$project$Project$findByName = function (projectName) {
-	return _user$project$Store$findBy(
-		_user$project$Project$nameEquals(
-			_elm_lang$core$String$trim(projectName)));
-};
 var _user$project$Project$storeGenerator = _user$project$GroupDoc$storeGenerator('project-db');
-var _user$project$Project$findNameById = function (id) {
-	return A2(
-		_user$project$Ext_Function_Infix_ops['>>?'],
-		_user$project$Store$findById(id),
-		_user$project$Project$getName);
-};

@@ -20,7 +20,7 @@
 * fix bug: clicking on done todo button also triggers edit mode. 
 
 ## v0.18.39 - 2017-06-18
-* fix bug: show deleted toggle button didn't work as expected. 
+* fix bug: show deleted toggle button did't work as expected. 
 
 ## v0.18.38 - 2017-06-18
 * use localforage to persist local user pref

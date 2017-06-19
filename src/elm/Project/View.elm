@@ -14,7 +14,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import View.Shared exposing (defaultOkCancelDeleteButtons)
+import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
 
 
 edit form =
@@ -59,7 +59,7 @@ edit form =
                             []
                         , label [ class "active" ] [ text "Project Name" ]
                         ]
-                    , defaultOkCancelDeleteButtons fireToggleDelete
+                    , defaultOkCancelButtons
                     ]
                 ]
             ]

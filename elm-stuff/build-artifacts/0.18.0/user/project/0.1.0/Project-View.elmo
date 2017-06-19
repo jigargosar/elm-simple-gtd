@@ -112,7 +112,7 @@ var _user$project$Project_View$edit = function (form) {
 								}),
 							_1: {
 								ctor: '::',
-								_0: _user$project$View_Shared$defaultOkCancelDeleteButtons(fireToggleDelete),
+								_0: _user$project$View_Shared$defaultOkCancelButtons,
 								_1: {ctor: '[]'}
 							}
 						}),

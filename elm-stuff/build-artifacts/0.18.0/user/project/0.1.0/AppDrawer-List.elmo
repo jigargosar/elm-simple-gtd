@@ -184,12 +184,8 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 var _user$project$AppDrawer_List$entityListView = F2(
 	function (vm, mainViewType) {
 		var _p1 = vm;
-		var entityList = _p1.entityList;
 		var viewType = _p1.viewType;
-		var title = _p1.title;
-		var showDeleted = _p1.showDeleted;
 		var onAddClicked = _p1.onAddClicked;
-		var icon = _p1.icon;
 		var onToggleExpanded = _p1.onToggleExpanded;
 		var isExpanded = _p1.isExpanded;
 		var isCurrentView = _elm_lang$core$Native_Utils.eq(
@@ -198,9 +194,7 @@ var _user$project$AppDrawer_List$entityListView = F2(
 		var fireSwitchView = _user$project$Model$SwitchView(
 			_user$project$Model$EntityListView(viewType));
 		var fireSmart = isCurrentView ? onToggleExpanded : fireSwitchView;
-		var _p2 = isExpanded ? {ctor: '_Tuple2', _0: 'expand_less', _1: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation} : {ctor: '_Tuple2', _0: 'expand_more', _1: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation};
-		var expandIconName = _p2._0;
-		var expandButtonClickType = _p2._1;
+		var expandIconName = isExpanded ? 'expand_less' : 'expand_more';
 		return {
 			ctor: '::',
 			_0: A2(
@@ -214,13 +208,13 @@ var _user$project$AppDrawer_List$entityListView = F2(
 					ctor: '::',
 					_0: A2(
 						_user$project$Material$iconA,
-						icon.name,
+						vm.icon.name,
 						{
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$style(
 								{
 									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', icon.color),
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', vm.icon.color),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -232,7 +226,7 @@ var _user$project$AppDrawer_List$entityListView = F2(
 							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(title),
+								_0: _elm_lang$html$Html$text(vm.title),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -242,7 +236,7 @@ var _user$project$AppDrawer_List$entityListView = F2(
 								expandIconName,
 								{
 									ctor: '::',
-									_0: expandButtonClickType(onToggleExpanded),
+									_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(onToggleExpanded),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -277,7 +271,7 @@ var _user$project$AppDrawer_List$entityListView = F2(
 								{ctor: '[]'},
 								A2(
 									_elm_lang$core$Basics_ops['++'],
-									A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, entityList),
+									A2(_elm_lang$core$List$map, _user$project$AppDrawer_List$entityListItem, vm.entityList),
 									A2(
 										_elm_lang$core$Basics_ops['++'],
 										{
@@ -400,9 +394,9 @@ var _user$project$AppDrawer_List$toggleDeletedItem = function (model) {
 };
 var _user$project$AppDrawer_List$view = F2(
 	function (appVM, model) {
-		var _p3 = appVM;
-		var contexts = _p3.contexts;
-		var projects = _p3.projects;
+		var _p2 = appVM;
+		var contexts = _p2.contexts;
+		var projects = _p2.projects;
 		return A2(
 			_elm_lang$html$Html$div,
 			{

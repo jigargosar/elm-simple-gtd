@@ -50,7 +50,7 @@ var _user$project$OldGroupEntity_ViewModel$createList = F2(
 			A2(_user$project$OldGroupEntity_ViewModel$create, getTodoListWithGroupId, config));
 	});
 var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
-	var activeFilter = _user$project$Model$filterContexts(_user$project$GroupDoc$activeFilter);
+	var activeFilter = _user$project$Model$filterContexts(_user$project$GroupDoc$activePred);
 	var config = {
 		groupByFn: _user$project$Todo$getContextId,
 		todoList: _user$project$Model$getActiveTodoListHavingActiveProjects(model),
@@ -63,7 +63,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		defaultIconName: 'fiber_manual_record',
 		getViewType: _user$project$Entity$ContextView
 	};
-	var archivedFilter = _user$project$Model$filterContexts(_user$project$GroupDoc$archivedFilter);
+	var archivedFilter = _user$project$Model$filterContexts(_user$project$GroupDoc$archivedPred);
 	var archivedConfig = _elm_lang$core$Native_Utils.update(
 		config,
 		{filter: archivedFilter});
@@ -83,7 +83,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 	};
 };
 var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
-	var activeFilter = _user$project$Model$filterProjects(_user$project$GroupDoc$activeFilter);
+	var activeFilter = _user$project$Model$filterProjects(_user$project$GroupDoc$activePred);
 	var config = {
 		groupByFn: _user$project$Todo$getProjectId,
 		todoList: _user$project$Model$getActiveTodoListHavingActiveContexts(model),
@@ -96,7 +96,7 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		defaultIconName: 'apps',
 		getViewType: _user$project$Entity$ProjectView
 	};
-	var archivedFilter = _user$project$Model$filterProjects(_user$project$GroupDoc$archivedFilter);
+	var archivedFilter = _user$project$Model$filterProjects(_user$project$GroupDoc$archivedPred);
 	var archivedConfig = _elm_lang$core$Native_Utils.update(
 		config,
 		{filter: archivedFilter});

@@ -129,28 +129,31 @@ compareNotNulls tuple =
     let
         compareName =
             Tuple2.mapBoth getName >> uncurry compare
+
+        compareModifiedAt =
+            Tuple2.mapBoth (Document.getModifiedAt >> negate) >> uncurry compare
     in
         tuple
-            |> Tuple2.mapBoth Document.isDeleted
-            |> (\deletedTuple ->
-                    case deletedTuple of
+            |> Tuple2.mapBoth isArchived
+            |> (\archivedTuple ->
+                    case archivedTuple of
                         ( True, False ) ->
-                            GT
-
-                        ( False, True ) ->
                             LT
 
+                        ( False, True ) ->
+                            GT
+
                         ( True, True ) ->
-                            compareName tuple
+                            compareModifiedAt tuple
 
                         ( False, False ) ->
                             compareName tuple
                )
 
 
-activeFilter =
+isActive =
     Ext.Predicate.all [ Document.isNotDeleted, isNotArchived ]
 
 
-archivedFilter =
+archivedButNotDeletedPred =
     Ext.Predicate.all [ Document.isNotDeleted, isArchived ]

@@ -455,7 +455,7 @@ var _user$project$Model$isTodoProjectActive = function (model) {
 					model,
 					_user$project$Todo$getProjectId(_p19));
 			},
-			_user$project$GroupDoc$isNotArchived),
+			_user$project$GroupDoc$isActive),
 		true);
 };
 var _user$project$Model$getActiveTodoListHavingActiveProjects = function (model) {
@@ -484,7 +484,7 @@ var _user$project$Model$isTodoContextActive = function (model) {
 					model,
 					_user$project$Todo$getContextId(_p20));
 			},
-			_user$project$GroupDoc$isNotArchived),
+			_user$project$GroupDoc$isActive),
 		true);
 };
 var _user$project$Model$getActiveTodoListHavingActiveContexts = function (model) {
@@ -519,7 +519,7 @@ var _user$project$Model$filterCurrentProjects = function (model) {
 		_user$project$Model$currentDocPredicate(model),
 		model);
 };
-var _user$project$Model$getActiveProjects = _user$project$Model$filterProjects(_user$project$GroupDoc$activeFilter);
+var _user$project$Model$getActiveProjects = _user$project$Model$filterProjects(_user$project$GroupDoc$isActive);
 var _user$project$Model$filterContexts = F2(
 	function (pred, model) {
 		return _user$project$Context$sort(
@@ -534,7 +534,7 @@ var _user$project$Model$filterCurrentContexts = function (model) {
 		_user$project$Model$currentDocPredicate(model),
 		model);
 };
-var _user$project$Model$getActiveContexts = _user$project$Model$filterContexts(_user$project$GroupDoc$activeFilter);
+var _user$project$Model$getActiveContexts = _user$project$Model$filterContexts(_user$project$GroupDoc$isActive);
 var _user$project$Model$filterTodosAndSortBy = F3(
 	function (pred, sortBy, model) {
 		return A2(

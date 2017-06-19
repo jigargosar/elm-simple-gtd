@@ -1,3 +1,7 @@
+## Upcoming
+* sort archived groupDocs by modifiedAt
+  use activePred rather than incorrect isNotArchived when filtering 
+
 ## v0.18.45 - 2017-06-19
 * drawer: move add to bottom of list
   show archived count. 

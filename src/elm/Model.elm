@@ -465,14 +465,14 @@ filterCurrentProjects model =
 isTodoContextActive model =
     Todo.getContextId
         >> findContextByIdIn model
-        >>? GroupDoc.isNotArchived
+        >>? GroupDoc.isActive
         >>?= True
 
 
 isTodoProjectActive model =
     Todo.getProjectId
         >> findProjectByIdIn model
-        >>? GroupDoc.isNotArchived
+        >>? GroupDoc.isActive
         >>?= True
 
 
@@ -1196,11 +1196,11 @@ moveFocusBy =
 
 
 getActiveProjects =
-    filterProjects GroupDoc.activeFilter
+    filterProjects GroupDoc.isActive
 
 
 getActiveContexts =
-    filterContexts GroupDoc.activeFilter
+    filterContexts GroupDoc.isActive
 
 
 getContextsAsIdDict =

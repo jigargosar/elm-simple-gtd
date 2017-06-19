@@ -21,6 +21,9 @@ var _user$project$Document$setDeleted = F2(
 			model,
 			{deleted: deleted});
 	});
+var _user$project$Document$getModifiedAt = function (_) {
+	return _.modifiedAt;
+};
 var _user$project$Document$isDeleted = function (_) {
 	return _.deleted;
 };

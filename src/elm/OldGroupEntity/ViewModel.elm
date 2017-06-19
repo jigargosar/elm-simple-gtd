@@ -147,10 +147,10 @@ contexts : Model.Model -> ViewModel
 contexts model =
     let
         archivedFilter =
-            Model.filterContexts GroupDoc.archivedFilter
+            Model.filterContexts GroupDoc.archivedButNotDeletedPred
 
         activeFilter =
-            Model.filterContexts GroupDoc.activeFilter
+            Model.filterContexts GroupDoc.isActive
 
         config : Config
         config =
@@ -188,10 +188,10 @@ projects : Model.Model -> ViewModel
 projects model =
     let
         archivedFilter =
-            Model.filterProjects GroupDoc.archivedFilter
+            Model.filterProjects GroupDoc.archivedButNotDeletedPred
 
         activeFilter =
-            Model.filterProjects GroupDoc.activeFilter
+            Model.filterProjects GroupDoc.isActive
 
         config : Config
         config =

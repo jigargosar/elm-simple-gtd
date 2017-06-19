@@ -108,6 +108,10 @@ isNotDeleted =
     isDeleted >> not
 
 
+getModifiedAt =
+    (.modifiedAt)
+
+
 setDeleted deleted model =
     { model | deleted = deleted }
 

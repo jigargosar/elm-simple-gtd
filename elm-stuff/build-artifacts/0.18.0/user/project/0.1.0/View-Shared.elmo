@@ -40,46 +40,44 @@ var _user$project$View_Shared$okButton = function (msg) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$View_Shared$layoutHorizontalReverse = _elm_lang$html$Html$div(
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('layout horizontal-reverse'),
-		_1: {ctor: '[]'}
-	});
-var _user$project$View_Shared$okCancelButtons = F2(
-	function (okMsg, cancelMsg) {
-		return _user$project$View_Shared$layoutHorizontalReverse(
+var _user$project$View_Shared$okCancelButtonsWith = F3(
+	function (okMsg, cancelMsg, list) {
+		return A2(
+			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _user$project$View_Shared$okButton(okMsg),
-				_1: {
+				_0: _elm_lang$html$Html_Attributes$class('layout horizontal-reverse'),
+				_1: {ctor: '[]'}
+			},
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
 					ctor: '::',
-					_0: _user$project$View_Shared$cancelButton(cancelMsg),
-					_1: {ctor: '[]'}
-				}
-			});
-	});
-var _user$project$View_Shared$okCancelDeleteButtons = F3(
-	function (okMsg, cancelMsg, deleteMsg) {
-		return _user$project$View_Shared$layoutHorizontalReverse(
-			{
-				ctor: '::',
-				_0: _user$project$View_Shared$okButton(okMsg),
-				_1: {
-					ctor: '::',
-					_0: _user$project$View_Shared$cancelButton(cancelMsg),
+					_0: _user$project$View_Shared$okButton(okMsg),
 					_1: {
 						ctor: '::',
-						_0: _user$project$View_Shared$deleteButton(deleteMsg),
+						_0: _user$project$View_Shared$cancelButton(cancelMsg),
 						_1: {ctor: '[]'}
 					}
-				}
-			});
+				},
+				list));
 	});
 var _user$project$View_Shared$defaultOkCancelDeleteButtons = function (deleteMsg) {
-	return A3(_user$project$View_Shared$okCancelDeleteButtons, _user$project$Model$OnSaveCurrentForm, _user$project$Model$OnDeactivateEditingMode, deleteMsg);
+	return A3(
+		_user$project$View_Shared$okCancelButtonsWith,
+		_user$project$Model$OnSaveCurrentForm,
+		_user$project$Model$OnDeactivateEditingMode,
+		{
+			ctor: '::',
+			_0: _user$project$View_Shared$deleteButton(deleteMsg),
+			_1: {ctor: '[]'}
+		});
 };
-var _user$project$View_Shared$defaultOkCancelButtons = A2(_user$project$View_Shared$okCancelButtons, _user$project$Model$OnSaveCurrentForm, _user$project$Model$OnDeactivateEditingMode);
+var _user$project$View_Shared$defaultOkCancelButtonsWith = function (list) {
+	return A3(_user$project$View_Shared$okCancelButtonsWith, _user$project$Model$OnSaveCurrentForm, _user$project$Model$OnDeactivateEditingMode, list);
+};
+var _user$project$View_Shared$defaultOkCancelButtons = _user$project$View_Shared$defaultOkCancelButtonsWith(
+	{ctor: '[]'});
 var _user$project$View_Shared$hideOnHover = F2(
 	function (bool, children) {
 		return A2(

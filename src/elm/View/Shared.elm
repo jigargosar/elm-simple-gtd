@@ -84,30 +84,27 @@ hideOnHover bool children =
 
 
 defaultOkCancelButtons =
-    okCancelButtons Model.OnSaveCurrentForm Model.OnDeactivateEditingMode
+    defaultOkCancelButtonsWith []
+
+
+defaultOkCancelButtonsWith list =
+    okCancelButtonsWith Model.OnSaveCurrentForm Model.OnDeactivateEditingMode list
 
 
 defaultOkCancelDeleteButtons deleteMsg =
-    okCancelDeleteButtons Model.OnSaveCurrentForm Model.OnDeactivateEditingMode deleteMsg
+    okCancelButtonsWith
+        Model.OnSaveCurrentForm
+        Model.OnDeactivateEditingMode
+        [ deleteButton deleteMsg ]
 
 
-layoutHorizontalReverse =
+okCancelButtonsWith okMsg cancelMsg list =
     div [ class "layout horizontal-reverse" ]
-
-
-okCancelButtons okMsg cancelMsg =
-    layoutHorizontalReverse
-        [ okButton okMsg
-        , cancelButton cancelMsg
-        ]
-
-
-okCancelDeleteButtons okMsg cancelMsg deleteMsg =
-    layoutHorizontalReverse
-        [ okButton okMsg
-        , cancelButton cancelMsg
-        , deleteButton deleteMsg
-        ]
+        ([ okButton okMsg
+         , cancelButton cancelMsg
+         ]
+            ++ list
+        )
 
 
 okButton msg =

@@ -46,12 +46,12 @@ initHeader vm =
     let
         editButton =
             if vm.isEditable then
-                Material.iconButton "create" [ onClick vm.startEditingMsg, vm.tabindexAV ]
+                Material.iconButton "create" [ onClickStopPropagation vm.startEditingMsg, vm.tabindexAV ]
             else
                 span [] []
 
         archiveButton =
-            Material.iconButton "archive" [ onClick vm.startEditingMsg, vm.tabindexAV ]
+            Material.iconButton vm.archive.iconName [ onClickStopPropagation vm.archive.onClick, vm.tabindexAV ]
     in
         div
             [ vm.tabindexAV

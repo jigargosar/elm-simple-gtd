@@ -1,10 +1,10 @@
 var _user$project$EntityList_GroupView$initHeader = function (vm) {
 	var archiveButton = A2(
 		_user$project$Material$iconButton,
-		'archive',
+		vm.archive.iconName,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+			_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.archive.onClick),
 			_1: {
 				ctor: '::',
 				_0: vm.tabindexAV,
@@ -16,7 +16,7 @@ var _user$project$EntityList_GroupView$initHeader = function (vm) {
 		'create',
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+			_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.startEditingMsg),
 			_1: {
 				ctor: '::',
 				_0: vm.tabindexAV,

@@ -462,15 +462,34 @@ filterCurrentProjects model =
     filterProjects (currentDocPredicate model) model
 
 
+isTodoContextActive model =
+    Todo.getContextId
+        >> findContextByIdIn model
+        >>? GroupDoc.isNotArchived
+        >>?= True
+
+
+isTodoProjectActive model =
+    Todo.getProjectId
+        >> findProjectByIdIn model
+        >>? GroupDoc.isNotArchived
+        >>?= True
+
+
+getActiveTodoListHavingActiveContexts model =
+    model.todoStore |> Store.filterDocs (allPass [ Todo.isActive, isTodoContextActive model ])
+
+
+getActiveTodoListHavingActiveProjects model =
+    model.todoStore |> Store.filterDocs (allPass [ Todo.isActive, isTodoProjectActive model ])
+
+
 getActiveTodoListForContext context model =
     filterTodosAndSortByLatestCreated
         (Pred.all
             [ Todo.isActive
             , Todo.contextFilter context
-            , Todo.getProjectId
-                >> findProjectByIdIn model
-                >>? GroupDoc.isNotArchived
-                >>?= True
+            , isTodoProjectActive model
             ]
         )
         model
@@ -480,11 +499,8 @@ getActiveTodoListForProject project model =
     filterTodosAndSortByLatestCreated
         (Pred.all
             [ Todo.isActive
-            , Todo.projectFilter project
-            , Todo.getContextId
-                >> findContextByIdIn model
-                >>? GroupDoc.isNotArchived
-                >>?= True
+            , Todo.hasProject project
+            , isTodoContextActive model
             ]
         )
         model
@@ -544,10 +560,6 @@ createGrouping viewType model =
                     )
 
 
-getActiveTodoList =
-    .todoStore >> Store.rejectDocs (anyPass [ Todo.isDeleted, Todo.isDone ])
-
-
 getActiveTodoListWithReminderTime model =
     model.todoStore |> Store.filterDocs (Todo.isReminderOverdue model.now)
 
@@ -594,10 +606,6 @@ findAndSnoozeOverDueTodo model =
     in
         Store.findBy (Todo.isReminderOverdue model.now) model.todoStore
             ?+> (Document.getId >> snooze)
-
-
-getActiveTodoListGroupedBy fn =
-    getActiveTodoList >> Dict.Extra.groupBy (fn)
 
 
 createContext text model =

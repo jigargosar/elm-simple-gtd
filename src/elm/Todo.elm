@@ -315,7 +315,7 @@ contextFilter context =
     getContextId >> equals (Document.getId context)
 
 
-projectFilter project =
+hasProject project =
     getProjectId >> equals (Document.getId project)
 
 

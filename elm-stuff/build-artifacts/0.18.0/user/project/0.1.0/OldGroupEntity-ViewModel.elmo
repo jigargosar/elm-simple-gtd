@@ -5,7 +5,7 @@ var _user$project$OldGroupEntity_ViewModel$nullProjectColor = 'rgb(179, 157, 219
 var _user$project$OldGroupEntity_ViewModel$contextsColor = _user$project$OldGroupEntity_ViewModel$sgtdBlue;
 var _user$project$OldGroupEntity_ViewModel$inboxColor = '#42a5f5';
 var _user$project$OldGroupEntity_ViewModel$create = F3(
-	function (todoListByEntityId, config, entity) {
+	function (getTodoListByEntityId, config, entity) {
 		var name = entity.name;
 		var isNull = config.isNull(entity);
 		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$OldGroupEntity_ViewModel$lightGray};
@@ -18,7 +18,7 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
 		var id = _user$project$Document$getId(entity);
 		var count = _elm_lang$core$List$length(
-			todoListByEntityId(id));
+			getTodoListByEntityId(id));
 		return {
 			id: id,
 			name: name,
@@ -37,7 +37,7 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 var _user$project$OldGroupEntity_ViewModel$createList = F2(
 	function (config, model) {
 		var list = config.filter(model);
-		var todoListDict = A2(_user$project$Model$getActiveTodoListGroupedBy, config.groupByFn, model);
+		var todoListDict = A2(_elm_community$dict_extra$Dict_Extra$groupBy, config.groupByFn, config.todoList);
 		var getTodoListWithGroupId = function (id) {
 			return A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
@@ -53,6 +53,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 	var activeFilter = _user$project$Model$filterContexts(_user$project$GroupDoc$activeFilter);
 	var config = {
 		groupByFn: _user$project$Todo$getContextId,
+		todoList: _user$project$Model$getActiveTodoListHavingActiveProjects(model),
 		namePrefix: '@',
 		filter: activeFilter,
 		entityWrapper: _user$project$Entity$ContextEntity,
@@ -85,6 +86,7 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 	var activeFilter = _user$project$Model$filterProjects(_user$project$GroupDoc$activeFilter);
 	var config = {
 		groupByFn: _user$project$Todo$getProjectId,
+		todoList: _user$project$Model$getActiveTodoListHavingActiveContexts(model),
 		namePrefix: '#',
 		filter: activeFilter,
 		entityWrapper: _user$project$Entity$ProjectEntity,
@@ -150,7 +152,24 @@ var _user$project$OldGroupEntity_ViewModel$Record = F2(
 	function (a, b) {
 		return {name: a, archived: b};
 	});
-var _user$project$OldGroupEntity_ViewModel$Config = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {groupByFn: a, namePrefix: b, filter: c, entityWrapper: d, nullEntity: e, isNull: f, nullIcon: g, defaultIconName: h, getViewType: i};
-	});
+var _user$project$OldGroupEntity_ViewModel$Config = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {groupByFn: a, todoList: b, namePrefix: c, filter: d, entityWrapper: e, nullEntity: f, isNull: g, nullIcon: h, defaultIconName: i, getViewType: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};

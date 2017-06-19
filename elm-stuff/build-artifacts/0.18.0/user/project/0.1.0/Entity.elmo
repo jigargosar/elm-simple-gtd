@@ -10,7 +10,7 @@ var _user$project$Entity$createProjectSubGroups = F2(
 		var filterTodoForProject = function (project) {
 			return A2(
 				_elm_lang$core$List$filter,
-				_user$project$Todo$projectFilter(project),
+				_user$project$Todo$hasProject(project),
 				tcg.todoList);
 		};
 		var projects = _user$project$Project$sort(

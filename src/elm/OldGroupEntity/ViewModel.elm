@@ -3,6 +3,7 @@ module OldGroupEntity.ViewModel exposing (..)
 import AppDrawer.Model
 import Context
 import Dict
+import Dict.Extra
 import Document
 import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
@@ -68,6 +69,7 @@ type alias GroupDoc =
 
 type alias Config =
     { groupByFn : Todo.Model -> Document.Id
+    , todoList : List Todo.Model
     , namePrefix : String
     , filter : Model.Model -> List GroupDoc
     , entityWrapper : GroupDoc -> Entity
@@ -83,7 +85,7 @@ createList : Config -> Model.Model -> List DocumentWithNameViewModel
 createList config model =
     let
         todoListDict =
-            Model.getActiveTodoListGroupedBy config.groupByFn model
+            config.todoList |> Dict.Extra.groupBy config.groupByFn
 
         getTodoListWithGroupId id =
             todoListDict |> Dict.get id ?= []
@@ -95,7 +97,7 @@ createList config model =
         list .|> create getTodoListWithGroupId config
 
 
-create todoListByEntityId config entity =
+create getTodoListByEntityId config entity =
     let
         id =
             Document.getId entity
@@ -104,7 +106,7 @@ create todoListByEntityId config entity =
             Model.OnEntityAction (config.entityWrapper entity)
 
         count =
-            todoListByEntityId id |> List.length
+            getTodoListByEntityId id |> List.length
 
         isNull =
             config.isNull entity
@@ -153,6 +155,7 @@ contexts model =
         config : Config
         config =
             { groupByFn = Todo.getContextId
+            , todoList = Model.getActiveTodoListHavingActiveProjects model
             , namePrefix = "@"
             , filter = activeFilter
             , entityWrapper = Entity.ContextEntity
@@ -193,6 +196,7 @@ projects model =
         config : Config
         config =
             { groupByFn = Todo.getProjectId
+            , todoList = Model.getActiveTodoListHavingActiveContexts model
             , namePrefix = "#"
             , filter = activeFilter
             , entityWrapper = Entity.ProjectEntity

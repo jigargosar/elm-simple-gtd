@@ -196,7 +196,7 @@ createProjectSubGroups findProjectById tcg =
 
         filterTodoForProject project =
             tcg.todoList
-                |> List.filter (Todo.projectFilter project)
+                |> List.filter (Todo.hasProject project)
     in
         projects .|> createProjectTodoGroup filterTodoForProject
 

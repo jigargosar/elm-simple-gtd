@@ -255,7 +255,7 @@ var _user$project$Todo$createdAtInWords = function (now) {
 var _user$project$Todo$getProjectId = function (_) {
 	return _.projectId;
 };
-var _user$project$Todo$projectFilter = function (project) {
+var _user$project$Todo$hasProject = function (project) {
 	return function (_p9) {
 		return A2(
 			_user$project$Ext_Function$equals,

@@ -7,6 +7,7 @@ import Document
 import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
 import Ext.Keyboard exposing (KeyboardEvent)
+import GroupDoc
 import Lazy
 import Model exposing (EntityListViewType, ViewType(..))
 import Model exposing (Msg, commonMsg)
@@ -68,21 +69,17 @@ type alias Record =
     { name : String, archived : Bool }
 
 
-type alias DocumentWithName =
-    Document.Document Record
-
-
-type alias DocumentWithNameStore =
-    Store.Store Record
+type alias GroupDoc =
+    GroupDoc.Model
 
 
 type alias Config =
     { groupByFn : Todo.Model -> Document.Id
     , namePrefix : String
-    , filter : Model.Model -> List DocumentWithName
-    , entityWrapper : DocumentWithName -> Entity
-    , nullEntity : DocumentWithName
-    , isNull : DocumentWithName -> Bool
+    , filter : Model.Model -> List GroupDoc
+    , entityWrapper : GroupDoc -> Entity
+    , nullEntity : GroupDoc
+    , isNull : GroupDoc -> Bool
     , nullIcon : IconVM
     , defaultIconName : String
     , getViewType : Document.Id -> EntityListViewType
@@ -98,7 +95,7 @@ createList config model =
         getTodoListWithGroupId id =
             todoListDict |> Dict.get id ?= []
 
-        list : List DocumentWithName
+        list : List GroupDoc
         list =
             config.filter model
     in

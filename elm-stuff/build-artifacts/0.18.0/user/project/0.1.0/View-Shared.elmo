@@ -78,42 +78,6 @@ var _user$project$View_Shared$defaultOkCancelButtonsWith = function (list) {
 };
 var _user$project$View_Shared$defaultOkCancelButtons = _user$project$View_Shared$defaultOkCancelButtonsWith(
 	{ctor: '[]'});
-var _user$project$View_Shared$hideOnHover = F2(
-	function (bool, children) {
-		return A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('hide-on-hover'),
-				_1: {ctor: '[]'}
-			},
-			bool ? children : {ctor: '[]'});
-	});
-var _user$project$View_Shared$showOnHover = _elm_lang$html$Html$div(
-	{
-		ctor: '::',
-		_0: _elm_lang$html$Html_Attributes$class('show-on-hover'),
-		_1: {ctor: '[]'}
-	});
-var _user$project$View_Shared$sharedIconButton = F2(
-	function (iconName, onClickHandler) {
-		return A2(
-			_edvail$elm_polymer$Polymer_Paper$iconButton,
-			{
-				ctor: '::',
-				_0: _edvail$elm_polymer$Polymer_Attributes$icon(iconName),
-				_1: {
-					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(onClickHandler),
-					_1: {ctor: '[]'}
-				}
-			},
-			{ctor: '[]'});
-	});
-var _user$project$View_Shared$doneButton = _user$project$View_Shared$sharedIconButton('done');
-var _user$project$View_Shared$dismissButton = _user$project$View_Shared$sharedIconButton('cancel');
-var _user$project$View_Shared$snoozeButton = _user$project$View_Shared$sharedIconButton('av:snooze');
-var _user$project$View_Shared$settingsButton = _user$project$View_Shared$sharedIconButton('settings');
 var _user$project$View_Shared$badge = F2(
 	function (name, count) {
 		return A2(

@@ -50,39 +50,6 @@ badge name count =
         ]
 
 
-sharedIconButton iconName onClickHandler =
-    Paper.iconButton [ icon iconName, onClickStopPropagation onClickHandler ] []
-
-
-doneButton =
-    sharedIconButton "done"
-
-
-dismissButton =
-    sharedIconButton "cancel"
-
-
-snoozeButton =
-    sharedIconButton "av:snooze"
-
-
-settingsButton =
-    sharedIconButton "settings"
-
-
-showOnHover =
-    div [ class "show-on-hover" ]
-
-
-hideOnHover bool children =
-    div [ class "hide-on-hover" ]
-        (if bool then
-            children
-         else
-            []
-        )
-
-
 defaultOkCancelButtons =
     defaultOkCancelButtonsWith []
 

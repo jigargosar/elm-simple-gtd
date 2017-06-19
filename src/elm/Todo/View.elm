@@ -49,7 +49,7 @@ import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import Polymer.Paper as Paper
-import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons, hideOnHover)
+import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
 import ViewModel
 import WebComponents exposing (..)
 

@@ -57,28 +57,16 @@ var _user$project$EntityList_GroupView$initHeader = function (vm) {
 						_elm_lang$html$Html$h5,
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('font-nowrap flex-auto layout horizontal'),
+							_0: _elm_lang$html$Html_Attributes$class('font-nowrap ellipsis'),
 							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('self-center'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(vm.namePrefix),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: _user$project$View_Shared$defaultBadge(vm),
-								_1: {ctor: '[]'}
-							}
+								_user$project$View_Shared$badge,
+								A2(_elm_lang$core$Basics_ops['++'], vm.namePrefix, vm.name),
+								vm.count),
+							_1: {ctor: '[]'}
 						}),
 					_1: {
 						ctor: '::',

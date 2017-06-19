@@ -116,6 +116,63 @@ var _user$project$View_Shared$doneButton = _user$project$View_Shared$sharedIconB
 var _user$project$View_Shared$dismissButton = _user$project$View_Shared$sharedIconButton('cancel');
 var _user$project$View_Shared$snoozeButton = _user$project$View_Shared$sharedIconButton('av:snooze');
 var _user$project$View_Shared$settingsButton = _user$project$View_Shared$sharedIconButton('settings');
+var _user$project$View_Shared$badge = F2(
+	function (name, count) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('layout horizontal center'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('font-nowrap ellipsis'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(name),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 0 1rem 0.1rem '),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('text-secondary'),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									' ',
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										_elm_lang$core$Basics$toString(count),
+										''))),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
 var _user$project$View_Shared$defaultBadge = function (vm) {
 	return A2(
 		_elm_lang$html$Html$div,

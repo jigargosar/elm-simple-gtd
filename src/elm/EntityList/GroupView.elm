@@ -57,9 +57,8 @@ initHeader vm =
             , classList [ "entity-item focusable-list-item collection-item" => True ]
             ]
             [ div [ class "layout horizontal justified" ]
-                [ h5 [ class "font-nowrap flex-auto layout horizontal" ]
-                    [ div [ class "self-center" ] [ text vm.namePrefix ]
-                    , View.Shared.defaultBadge vm
+                [ h5 [ class "font-nowrap ellipsis" ]
+                    [ View.Shared.badge (vm.namePrefix ++ vm.name) vm.count
                     ]
                 , editButton
                 ]

@@ -41,6 +41,15 @@ defaultBadge vm =
         ]
 
 
+badge : String -> Int -> Html msg
+badge name count =
+    div [ class "layout horizontal center" ]
+        [ div [ class "font-nowrap ellipsis" ] [ name |> text ]
+        , div [ style [ "padding" => "0 0 1rem 0.1rem " ], class "text-secondary" ]
+            [ " " ++ (count |> toString) ++ "" |> text ]
+        ]
+
+
 sharedIconButton iconName onClickHandler =
     Paper.iconButton [ icon iconName, onClickStopPropagation onClickHandler ] []
 

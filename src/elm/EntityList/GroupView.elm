@@ -46,10 +46,12 @@ initHeader vm =
     let
         editButton =
             if vm.isEditable then
-                Material.iconButton "create"
-                    [ onClick vm.startEditingMsg, vm.tabindexAV ]
+                Material.iconButton "create" [ onClick vm.startEditingMsg, vm.tabindexAV ]
             else
                 span [] []
+
+        archiveButton =
+            Material.iconButton "archive" [ onClick vm.startEditingMsg, vm.tabindexAV ]
     in
         div
             [ vm.tabindexAV
@@ -61,6 +63,6 @@ initHeader vm =
                 [ h5 [ class "font-nowrap ellipsis" ]
                     [ View.Shared.badge (vm.namePrefix ++ vm.name) vm.count
                     ]
-                , editButton
+                , div [ class "layout horizontal center" ] [ editButton, archiveButton ]
                 ]
             ]

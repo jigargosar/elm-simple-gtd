@@ -1,4 +1,16 @@
 var _user$project$EntityList_GroupView$initHeader = function (vm) {
+	var archiveButton = A2(
+		_user$project$Material$iconButton,
+		'archive',
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(vm.startEditingMsg),
+			_1: {
+				ctor: '::',
+				_0: vm.tabindexAV,
+				_1: {ctor: '[]'}
+			}
+		});
 	var editButton = vm.isEditable ? A2(
 		_user$project$Material$iconButton,
 		'create',
@@ -66,7 +78,22 @@ var _user$project$EntityList_GroupView$initHeader = function (vm) {
 						}),
 					_1: {
 						ctor: '::',
-						_0: editButton,
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('layout horizontal center'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: editButton,
+								_1: {
+									ctor: '::',
+									_0: archiveButton,
+									_1: {ctor: '[]'}
+								}
+							}),
 						_1: {ctor: '[]'}
 					}
 				}),

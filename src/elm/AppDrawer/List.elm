@@ -125,7 +125,7 @@ entityListView vm mainViewType =
 archivedItems vm =
     let
         ( iconName, buttonText, viewItems ) =
-            if vm.showDeleted then
+            if vm.showArchived then
                 ( "visibility", "Archived", List.map entityListItem vm.archivedEntityList )
             else
                 ( "visibility_off", "Archived", [] )

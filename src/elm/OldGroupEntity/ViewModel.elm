@@ -36,6 +36,7 @@ type alias ViewModel =
     , title : String
     , className : String
     , showDeleted : Bool
+    , showArchived : Bool
     , onAddClicked : Msg
     , onToggleExpanded : Msg
     , isExpanded : Bool
@@ -207,6 +208,7 @@ contexts model =
         , title = "Contexts"
         , className = "contexts"
         , showDeleted = model.showDeleted
+        , showArchived = AppDrawer.Model.getShowArchivedForContexts model.appDrawerModel
         , onAddClicked = Model.NewContext
         , icon = { name = "group_work", color = contextsColor }
         , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleExpandContextList
@@ -245,6 +247,7 @@ projects model =
         , title = "Projects"
         , className = "projects"
         , showDeleted = model.showDeleted
+        , showArchived = AppDrawer.Model.getShowArchivedForProjects model.appDrawerModel
         , onAddClicked = Model.NewProject
         , icon = { name = "group_work", color = projectsColor }
         , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleExpandProjectList

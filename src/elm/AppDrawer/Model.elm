@@ -15,30 +15,32 @@ import Json.Encode as E
 type Msg
     = OnToggleExpandProjectList
     | OnToggleExpandContextList
+    | OnToggleShowArchivedContexts
+    | OnToggleShowArchivedProjects
 
 
 type alias GroupModel =
     { expanded : Bool
-    , showDeleted : Bool
+    , showArchived : Bool
     }
 
 
 groupModelDecoder =
     D.succeed GroupModel
         |> D.required "expanded" D.bool
-        |> D.optional "showDeleted" D.bool False
+        |> D.optional "showArchived" D.bool False
 
 
 encodeGroupModel model =
     E.object
         [ "expanded" => E.bool model.expanded
-        , "showDeleted" => E.bool model.showDeleted
+        , "showArchived" => E.bool model.showArchived
         ]
 
 
 defaultGroupModel : GroupModel
 defaultGroupModel =
-    { expanded = True, showDeleted = False }
+    { expanded = True, showArchived = False }
 
 
 type alias Model =
@@ -79,8 +81,16 @@ expanded =
     Ext.Record.bool .expanded (\s b -> { b | expanded = s })
 
 
+showArchived =
+    Ext.Record.bool .showArchived (\s b -> { b | showArchived = s })
+
+
 toggleExpanded =
     Ext.Record.toggle expanded
+
+
+toggleShowArchived =
+    Ext.Record.toggle showArchived
 
 
 toggleProjectListExpanded =
@@ -97,3 +107,19 @@ toggleContextListExpanded =
 
 isContextListExpanded =
     Ext.Record.get contexts >> Ext.Record.get expanded
+
+
+getShowArchivedForContexts =
+    Ext.Record.get contexts >> Ext.Record.get showArchived
+
+
+getShowArchivedForProjects =
+    Ext.Record.get projects >> Ext.Record.get showArchived
+
+
+toggleContextShowArchived =
+    Ext.Record.over contexts (toggleShowArchived)
+
+
+toggleProjectShowArchived =
+    Ext.Record.over projects (toggleShowArchived)

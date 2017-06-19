@@ -1,19 +1,34 @@
 var _user$project$AppDrawer_Main$update = F2(
 	function (andThenUpdate, msg) {
 		var _p0 = msg;
-		if (_p0.ctor === 'OnToggleExpandContextList') {
-			return function (_p1) {
-				return A2(
-					andThenUpdate,
-					_user$project$Model$OnPersistLocalPref,
-					A2(_user$project$Model$mapOverAppDrawerModel, _user$project$AppDrawer_Model$toggleContextListExpanded, _p1));
-			};
-		} else {
-			return function (_p2) {
-				return A2(
-					andThenUpdate,
-					_user$project$Model$OnPersistLocalPref,
-					A2(_user$project$Model$mapOverAppDrawerModel, _user$project$AppDrawer_Model$toggleProjectListExpanded, _p2));
-			};
+		switch (_p0.ctor) {
+			case 'OnToggleExpandContextList':
+				return function (_p1) {
+					return A2(
+						andThenUpdate,
+						_user$project$Model$OnPersistLocalPref,
+						A2(_user$project$Model$mapOverAppDrawerModel, _user$project$AppDrawer_Model$toggleContextListExpanded, _p1));
+				};
+			case 'OnToggleExpandProjectList':
+				return function (_p2) {
+					return A2(
+						andThenUpdate,
+						_user$project$Model$OnPersistLocalPref,
+						A2(_user$project$Model$mapOverAppDrawerModel, _user$project$AppDrawer_Model$toggleProjectListExpanded, _p2));
+				};
+			case 'OnToggleShowArchivedContexts':
+				return function (_p3) {
+					return A2(
+						andThenUpdate,
+						_user$project$Model$OnPersistLocalPref,
+						A2(_user$project$Model$mapOverAppDrawerModel, _user$project$AppDrawer_Model$toggleContextShowArchived, _p3));
+				};
+			default:
+				return function (_p4) {
+					return A2(
+						andThenUpdate,
+						_user$project$Model$OnPersistLocalPref,
+						A2(_user$project$Model$mapOverAppDrawerModel, _user$project$AppDrawer_Model$toggleProjectShowArchived, _p4));
+				};
 		}
 	});

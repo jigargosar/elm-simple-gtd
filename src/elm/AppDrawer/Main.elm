@@ -25,3 +25,11 @@ update andThenUpdate msg =
         AppDrawer.Model.OnToggleExpandProjectList ->
             Model.mapOverAppDrawerModel AppDrawer.Model.toggleProjectListExpanded
                 >> andThenUpdate Model.OnPersistLocalPref
+
+        AppDrawer.Model.OnToggleShowArchivedContexts ->
+            Model.mapOverAppDrawerModel AppDrawer.Model.toggleContextShowArchived
+                >> andThenUpdate Model.OnPersistLocalPref
+
+        AppDrawer.Model.OnToggleShowArchivedProjects ->
+            Model.mapOverAppDrawerModel AppDrawer.Model.toggleProjectShowArchived
+                >> andThenUpdate Model.OnPersistLocalPref

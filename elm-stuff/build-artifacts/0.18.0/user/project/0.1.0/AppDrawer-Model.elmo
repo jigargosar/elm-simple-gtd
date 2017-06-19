@@ -1,3 +1,15 @@
+var _user$project$AppDrawer_Model$showArchived = A2(
+	_user$project$Ext_Record$bool,
+	function (_) {
+		return _.showArchived;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{showArchived: s});
+		}));
+var _user$project$AppDrawer_Model$toggleShowArchived = _user$project$Ext_Record$toggle(_user$project$AppDrawer_Model$showArchived);
 var _user$project$AppDrawer_Model$expanded = A2(
 	_user$project$Ext_Record$bool,
 	function (_) {
@@ -28,6 +40,13 @@ var _user$project$AppDrawer_Model$isProjectListExpanded = function (_p0) {
 		_user$project$AppDrawer_Model$expanded,
 		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$projects, _p0));
 };
+var _user$project$AppDrawer_Model$getShowArchivedForProjects = function (_p1) {
+	return A2(
+		_user$project$Ext_Record$get,
+		_user$project$AppDrawer_Model$showArchived,
+		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$projects, _p1));
+};
+var _user$project$AppDrawer_Model$toggleProjectShowArchived = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$projects, _user$project$AppDrawer_Model$toggleShowArchived);
 var _user$project$AppDrawer_Model$contexts = A2(
 	_user$project$Ext_Record$field,
 	function (_) {
@@ -40,13 +59,20 @@ var _user$project$AppDrawer_Model$contexts = A2(
 				{contexts: s});
 		}));
 var _user$project$AppDrawer_Model$toggleContextListExpanded = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$contexts, _user$project$AppDrawer_Model$toggleExpanded);
-var _user$project$AppDrawer_Model$isContextListExpanded = function (_p1) {
+var _user$project$AppDrawer_Model$isContextListExpanded = function (_p2) {
 	return A2(
 		_user$project$Ext_Record$get,
 		_user$project$AppDrawer_Model$expanded,
-		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p1));
+		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p2));
 };
-var _user$project$AppDrawer_Model$defaultGroupModel = {expanded: true, showDeleted: false};
+var _user$project$AppDrawer_Model$getShowArchivedForContexts = function (_p3) {
+	return A2(
+		_user$project$Ext_Record$get,
+		_user$project$AppDrawer_Model$showArchived,
+		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p3));
+};
+var _user$project$AppDrawer_Model$toggleContextShowArchived = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$contexts, _user$project$AppDrawer_Model$toggleShowArchived);
+var _user$project$AppDrawer_Model$defaultGroupModel = {expanded: true, showArchived: false};
 var _user$project$AppDrawer_Model$default = {contexts: _user$project$AppDrawer_Model$defaultGroupModel, projects: _user$project$AppDrawer_Model$defaultGroupModel};
 var _user$project$AppDrawer_Model$encodeGroupModel = function (model) {
 	return _elm_lang$core$Json_Encode$object(
@@ -60,8 +86,8 @@ var _user$project$AppDrawer_Model$encodeGroupModel = function (model) {
 				ctor: '::',
 				_0: A2(
 					_user$project$Ext_Function_Infix_ops['=>'],
-					'showDeleted',
-					_elm_lang$core$Json_Encode$bool(model.showDeleted)),
+					'showArchived',
+					_elm_lang$core$Json_Encode$bool(model.showArchived)),
 				_1: {ctor: '[]'}
 			}
 		});
@@ -86,11 +112,11 @@ var _user$project$AppDrawer_Model$encode = function (model) {
 };
 var _user$project$AppDrawer_Model$GroupModel = F2(
 	function (a, b) {
-		return {expanded: a, showDeleted: b};
+		return {expanded: a, showArchived: b};
 	});
 var _user$project$AppDrawer_Model$groupModelDecoder = A4(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-	'showDeleted',
+	'showArchived',
 	_elm_lang$core$Json_Decode$bool,
 	false,
 	A3(
@@ -111,5 +137,7 @@ var _user$project$AppDrawer_Model$decode = A3(
 		'contexts',
 		_user$project$AppDrawer_Model$groupModelDecoder,
 		_elm_lang$core$Json_Decode$succeed(_user$project$AppDrawer_Model$Model)));
+var _user$project$AppDrawer_Model$OnToggleShowArchivedProjects = {ctor: 'OnToggleShowArchivedProjects'};
+var _user$project$AppDrawer_Model$OnToggleShowArchivedContexts = {ctor: 'OnToggleShowArchivedContexts'};
 var _user$project$AppDrawer_Model$OnToggleExpandContextList = {ctor: 'OnToggleExpandContextList'};
 var _user$project$AppDrawer_Model$OnToggleExpandProjectList = {ctor: 'OnToggleExpandProjectList'};

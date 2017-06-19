@@ -96,6 +96,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		title: 'Contexts',
 		className: 'contexts',
 		showDeleted: model.showDeleted,
+		showArchived: _user$project$AppDrawer_Model$getShowArchivedForContexts(model.appDrawerModel),
 		onAddClicked: _user$project$Model$NewContext,
 		icon: {name: 'group_work', color: _user$project$OldGroupEntity_ViewModel$contextsColor},
 		onToggleExpanded: _user$project$Model$OnAppDrawerMsg(_user$project$AppDrawer_Model$OnToggleExpandContextList),
@@ -126,6 +127,7 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		title: 'Projects',
 		className: 'projects',
 		showDeleted: model.showDeleted,
+		showArchived: _user$project$AppDrawer_Model$getShowArchivedForProjects(model.appDrawerModel),
 		onAddClicked: _user$project$Model$NewProject,
 		icon: {name: 'group_work', color: _user$project$OldGroupEntity_ViewModel$projectsColor},
 		onToggleExpanded: _user$project$Model$OnAppDrawerMsg(_user$project$AppDrawer_Model$OnToggleExpandProjectList),
@@ -146,7 +148,9 @@ var _user$project$OldGroupEntity_ViewModel$ViewModel = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {entityList: a, archivedEntityList: b, viewType: c, title: d, className: e, showDeleted: f, onAddClicked: g, onToggleExpanded: h, isExpanded: i, icon: j};
+										return function (k) {
+											return {entityList: a, archivedEntityList: b, viewType: c, title: d, className: e, showDeleted: f, showArchived: g, onAddClicked: h, onToggleExpanded: i, isExpanded: j, icon: k};
+										};
 									};
 								};
 							};

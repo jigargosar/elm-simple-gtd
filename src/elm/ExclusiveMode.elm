@@ -8,7 +8,7 @@ import Entity
 import Form
 import LaunchBar.Form
 import Project
-import Project.EditForm
+import GroupDoc.EditForm
 import Todo
 import Todo.NewForm
 import Todo.GroupForm
@@ -33,7 +33,7 @@ type alias EntityForm =
 
 
 type alias EditProjectForm =
-    Project.EditForm.Model
+    GroupDoc.EditForm.Model
 
 
 type alias NewTodoModel =
@@ -74,11 +74,11 @@ initActionList =
 
 
 editProjectMode =
-    Project.EditForm.init >> EditProject
+    GroupDoc.EditForm.init Entity.ProjectEntity >> EditProject
 
 
 editProjectSetName =
-    Project.EditForm.setName >>> EditProject
+    GroupDoc.EditForm.setName >>> EditProject
 
 
 editContextMode =

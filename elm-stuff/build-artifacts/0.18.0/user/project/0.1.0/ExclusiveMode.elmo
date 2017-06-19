@@ -29,9 +29,9 @@ var _user$project$ExclusiveMode$EditProject = function (a) {
 };
 var _user$project$ExclusiveMode$editProjectMode = function (_p0) {
 	return _user$project$ExclusiveMode$EditProject(
-		_user$project$Project_EditForm$init(_p0));
+		A2(_user$project$GroupDoc_EditForm$init, _user$project$Entity$ProjectEntity, _p0));
 };
-var _user$project$ExclusiveMode$editProjectSetName = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Project_EditForm$setName, _user$project$ExclusiveMode$EditProject);
+var _user$project$ExclusiveMode$editProjectSetName = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$GroupDoc_EditForm$setName, _user$project$ExclusiveMode$EditProject);
 var _user$project$ExclusiveMode$EditContext = function (a) {
 	return {ctor: 'EditContext', _0: a};
 };

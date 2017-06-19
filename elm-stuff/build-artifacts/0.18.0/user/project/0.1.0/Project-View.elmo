@@ -7,6 +7,7 @@ var _user$project$Project_View$edit = function (form) {
 		return toMsg(
 			_user$project$Entity$NameChanged(_p0));
 	};
+	var fireToggleArchive = toMsg(_user$project$Entity$ToggleArchived);
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -112,7 +113,7 @@ var _user$project$Project_View$edit = function (form) {
 								}),
 							_1: {
 								ctor: '::',
-								_0: _user$project$View_Shared$defaultOkCancelButtons,
+								_0: A2(_user$project$View_Shared$defaultOkCancelArchiveButtons, form.isArchived, fireToggleArchive),
 								_1: {ctor: '[]'}
 							}
 						}),

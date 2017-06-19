@@ -14,7 +14,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
+import View.Shared exposing (defaultOkCancelArchiveButtons, defaultOkCancelButtons, defaultOkCancelButtonsWith, defaultOkCancelDeleteButtons)
 
 
 edit form =
@@ -36,6 +36,9 @@ edit form =
 
         fireCancel =
             Model.OnDeactivateEditingMode
+
+        fireToggleArchive =
+            toMsg Entity.ToggleArchived
     in
         div
             [ class "overlay"
@@ -59,7 +62,7 @@ edit form =
                             []
                         , label [ class "active" ] [ text "Project Name" ]
                         ]
-                    , defaultOkCancelButtons
+                    , defaultOkCancelArchiveButtons form.isArchived fireToggleArchive
                     ]
                 ]
             ]

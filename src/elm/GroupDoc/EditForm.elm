@@ -1,4 +1,4 @@
-module Project.EditForm exposing (..)
+module GroupDoc.EditForm exposing (..)
 
 import Document
 import Entity
@@ -8,21 +8,24 @@ import Ext.Function exposing (..)
 import Ext.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Project
+import Context
+import GroupDoc
 
 
 type alias Model =
     { id : Document.Id
-    , name : Project.Name
+    , name : GroupDoc.Name
     , entity : Entity.Entity
+    , isArchived : Bool
     }
 
 
-init : Project.Model -> Model
-init project =
-    { id = Document.getId project
-    , name = Project.getName project
-    , entity = Entity.ProjectEntity project
+init : (GroupDoc.Model -> Entity.Entity) -> GroupDoc.Model -> Model
+init toEntity groupDoc =
+    { id = Document.getId groupDoc
+    , name = GroupDoc.getName groupDoc
+    , entity = toEntity groupDoc
+    , isArchived = GroupDoc.isArchived groupDoc
     }
 
 

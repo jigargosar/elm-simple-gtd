@@ -62,6 +62,10 @@ defaultOkCancelDeleteButtons deleteMsg =
     defaultOkCancelButtonsWith [ deleteButton deleteMsg ]
 
 
+defaultOkCancelArchiveButtons isArchived archiveMsg =
+    defaultOkCancelButtonsWith [ archiveButton isArchived archiveMsg ]
+
+
 okCancelButtonsWith okMsg cancelMsg list =
     div [ class "layout horizontal-reverse" ]
         ([ okButton okMsg
@@ -81,3 +85,14 @@ cancelButton msg =
 
 deleteButton msg =
     Paper.button [ onClick msg ] [ text "Delete" ]
+
+
+archiveButton isArchived msg =
+    Paper.button [ onClick msg ]
+        [ text
+            (if isArchived then
+                "Unarchive"
+             else
+                "Archive"
+            )
+        ]

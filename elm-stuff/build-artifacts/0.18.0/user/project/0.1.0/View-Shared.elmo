@@ -1,3 +1,19 @@
+var _user$project$View_Shared$archiveButton = F2(
+	function (isArchived, msg) {
+		return A2(
+			_edvail$elm_polymer$Polymer_Paper$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(msg),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					isArchived ? 'Unarchive' : 'Archive'),
+				_1: {ctor: '[]'}
+			});
+	});
 var _user$project$View_Shared$deleteButton = function (msg) {
 	return A2(
 		_edvail$elm_polymer$Polymer_Paper$button,
@@ -73,6 +89,15 @@ var _user$project$View_Shared$defaultOkCancelDeleteButtons = function (deleteMsg
 			_1: {ctor: '[]'}
 		});
 };
+var _user$project$View_Shared$defaultOkCancelArchiveButtons = F2(
+	function (isArchived, archiveMsg) {
+		return _user$project$View_Shared$defaultOkCancelButtonsWith(
+			{
+				ctor: '::',
+				_0: A2(_user$project$View_Shared$archiveButton, isArchived, archiveMsg),
+				_1: {ctor: '[]'}
+			});
+	});
 var _user$project$View_Shared$defaultOkCancelButtons = _user$project$View_Shared$defaultOkCancelButtonsWith(
 	{ctor: '[]'});
 var _user$project$View_Shared$badge = F2(

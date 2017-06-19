@@ -462,68 +462,67 @@ filterCurrentProjects model =
     filterProjects (currentDocPredicate model) model
 
 
+getActiveTodoListForContext context model =
+    filterTodosAndSortByLatestCreated
+        (Pred.all
+            [ Todo.isActive
+            , Todo.contextFilter context
+            , Todo.getProjectId
+                >> findProjectByIdIn model
+                >>? GroupDoc.isNotArchived
+                >>?= True
+            ]
+        )
+        model
+
+
+getActiveTodoListForProject project model =
+    filterTodosAndSortByLatestCreated
+        (Pred.all
+            [ Todo.isActive
+            , Todo.projectFilter project
+            , Todo.getContextId
+                >> findContextByIdIn model
+                >>? GroupDoc.isNotArchived
+                >>?= True
+            ]
+        )
+        model
+
+
 createGrouping : Entity.ListViewType -> Model -> Entity.Grouping
 createGrouping viewType model =
     let
-        deletedFilter =
-            if model.showDeleted then
-                Document.isDeleted
-            else
-                Document.isDeleted >> not
+        getActiveTodoListForContextHelp =
+            getActiveTodoListForContext # model
 
-        todoFilter =
-            Pred.all [ Todo.isNotDeleted, Todo.isNotDone ]
+        getActiveTodoListForProjectHelp =
+            getActiveTodoListForProject # model
 
-        filterTodosForContext context =
-            filterTodosAndSortByLatestCreated
-                (Pred.all
-                    [ todoFilter
-                    , Todo.contextFilter context
-                    , Todo.getProjectId
-                        >> findProjectByIdIn model
-                        >>? GroupDoc.isNotArchived
-                        >>?= True
-                    ]
-                )
-                model
+        findProjectByIdHelp =
+            findProjectById # model
 
-        filterTodosForProject project =
-            filterTodosAndSortByLatestCreated
-                (Pred.all
-                    [ todoFilter
-                    , Todo.projectFilter project
-                    , Todo.getContextId
-                        >> findContextByIdIn model
-                        >>? GroupDoc.isNotArchived
-                        >>?= True
-                    ]
-                )
-                model
-
-        findProjectByIdHelp id =
-            findProjectById id model
-
-        findContextByIdHelp id =
-            findContextById id model
+        findContextByIdHelp =
+            findContextById # model
     in
         case viewType of
             Entity.ContextsView ->
                 getActiveContexts model
-                    |> Entity.createGroupingForContexts filterTodosForContext
+                    |> Entity.createGroupingForContexts getActiveTodoListForContextHelp
 
             Entity.ProjectsView ->
                 getActiveProjects model
-                    |> Entity.createGroupingForProjects filterTodosForProject
+                    |> Entity.createGroupingForProjects getActiveTodoListForProjectHelp
 
             Entity.ContextView id ->
                 findContextById id model
                     ?= Context.null
-                    |> Entity.createGroupingForContext filterTodosForContext findProjectByIdHelp
+                    |> Entity.createGroupingForContext getActiveTodoListForContextHelp findProjectByIdHelp
 
             Entity.ProjectView id ->
                 findProjectById id model
                     ?= Project.null
-                    |> Entity.createGroupingForProject filterTodosForProject findContextByIdHelp
+                    |> Entity.createGroupingForProject getActiveTodoListForProjectHelp findContextByIdHelp
 
             Entity.BinView ->
                 Entity.createGroupingForTodoList

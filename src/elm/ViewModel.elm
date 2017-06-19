@@ -74,6 +74,7 @@ getViewInfo mainViewType projectsVM contextsVM model =
         appHeaderInfoById id vm =
             entityById id vm.entityList
                 |> Maybe.orElseLazy (\_ -> entityById id vm.archivedEntityList)
+                |> Maybe.orElseLazy (\_ -> entityById id vm.nullVMAsList)
                 >>? (.appHeader)
                 >>?= { name = "o_O", backgroundColor = sgtdBlue }
                 >> (\{ name, backgroundColor } -> ( name, backgroundColor ))

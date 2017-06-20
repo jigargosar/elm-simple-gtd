@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.50 - 2017-06-20
 *  merge prj and ctx into grp entity
 
 ## v0.18.48 - 2017-06-20

@@ -4,10 +4,10 @@ var _user$project$Todo_Menu$setMenuState = F2(
 			form,
 			{menuState: menuState});
 	});
-var _user$project$Todo_Menu$init = function (todo) {
-	return {todo: todo, menuState: _user$project$Menu$initState};
+var _user$project$Todo_Menu$init = function (task) {
+	return {task: task, menuState: _user$project$Menu$initState};
 };
 var _user$project$Todo_Menu$Model = F2(
 	function (a, b) {
-		return {todo: a, menuState: b};
+		return {task: a, menuState: b};
 	});

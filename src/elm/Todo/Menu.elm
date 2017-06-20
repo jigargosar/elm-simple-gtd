@@ -12,13 +12,13 @@ import Maybe.Extra as Maybe
 
 
 type alias Model =
-    { todo : Todo.Model
+    { task : Todo.Model
     , menuState : Menu.State
     }
 
 
-init todo =
-    { todo = todo, menuState = Menu.initState }
+init task =
+    { task = task, menuState = Menu.initState }
 
 
 setMenuState menuState form =

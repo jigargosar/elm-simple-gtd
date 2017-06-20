@@ -159,7 +159,7 @@ contexts model =
             , todoList = Model.getActiveTodoListHavingActiveProjects model
             , namePrefix = "@"
             , filter = activeFilter
-            , entityWrapper = Entity.ContextEntity
+            , entityWrapper = Entity.Context
             , nullEntity = Context.null
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
@@ -207,7 +207,7 @@ projects model =
             , todoList = Model.getActiveTodoListHavingActiveContexts model
             , namePrefix = "#"
             , filter = activeFilter
-            , entityWrapper = Entity.ProjectEntity
+            , entityWrapper = Entity.Project
             , nullEntity = Project.null
             , isNull = Project.isNull
             , nullIcon = { name = "apps", color = nullProjectColor }

@@ -379,7 +379,7 @@ type alias ReturnF =
 
 
 inboxEntity =
-    Entity.ContextEntity Context.null
+    Entity.Context Context.null
 
 
 getMaybeUserProfile =
@@ -632,7 +632,7 @@ createAndEditNewProject model =
         |> (\( project, model ) ->
                 model
                     |> switchToProjectView project
-                    |> startEditingEntity (Entity.ProjectEntity project)
+                    |> startEditingEntity (Entity.Project project)
            )
 
 
@@ -642,7 +642,7 @@ createAndEditNewContext model =
         |> (\( context, model ) ->
                 model
                     |> switchToContextView context
-                    |> startEditingEntity (Entity.ContextEntity context)
+                    |> startEditingEntity (Entity.Context context)
            )
 
 
@@ -750,13 +750,13 @@ saveCurrentForm model =
                     (\todoId ->
                         updateTodo
                             (case form.referenceEntity of
-                                Entity.TodoEntity fromTodo ->
+                                Entity.Task fromTodo ->
                                     (Todo.CopyProjectAndContextId fromTodo)
 
-                                Entity.ContextEntity context ->
+                                Entity.Context context ->
                                     (Todo.SetContext context)
 
-                                Entity.ProjectEntity project ->
+                                Entity.Project project ->
                                     (Todo.SetProject project)
                             )
                             todoId
@@ -782,7 +782,7 @@ saveCurrentForm model =
 
 setFocusInEntityFromTodoId : Todo.Id -> ModelF
 setFocusInEntityFromTodoId todoId model =
-    maybe2Tuple ( findTodoById todoId model ?|> Entity.TodoEntity, Just model )
+    maybe2Tuple ( findTodoById todoId model ?|> Entity.Task, Just model )
         ?|> uncurry setFocusInEntity
         ?= model
 
@@ -795,13 +795,13 @@ toggleDeleteEntity entity model =
     in
         model
             |> case entity of
-                Entity.ContextEntity context ->
+                Entity.Context context ->
                     updateContext entityId Document.toggleDeleted
 
-                Entity.ProjectEntity project ->
+                Entity.Project project ->
                     updateProject entityId Document.toggleDeleted
 
-                Entity.TodoEntity todo ->
+                Entity.Task todo ->
                     updateTodo (Todo.ToggleDeleted) entityId
 
 
@@ -813,13 +813,13 @@ toggleArchiveEntity entity model =
     in
         model
             |> case entity of
-                Entity.ContextEntity context ->
+                Entity.Context context ->
                     updateContext entityId GroupDoc.toggleArchived
 
-                Entity.ProjectEntity project ->
+                Entity.Project project ->
                     updateProject entityId GroupDoc.toggleArchived
 
-                Entity.TodoEntity todo ->
+                Entity.Task todo ->
                     updateTodo (Todo.ToggleDone) entityId
 
 
@@ -853,13 +853,13 @@ createRemoteSyncForm model =
 createEntityEditForm : Entity -> Model -> ExclusiveMode
 createEntityEditForm entity model =
     case entity of
-        Entity.ContextEntity context ->
+        Entity.Context context ->
             ExclusiveMode.editContextMode context
 
-        Entity.ProjectEntity project ->
+        Entity.Project project ->
             ExclusiveMode.editProjectMode project
 
-        Entity.TodoEntity todo ->
+        Entity.Task todo ->
             Todo.Form.create todo |> ExclusiveMode.EditTodo
 
 
@@ -936,14 +936,14 @@ setTodoStoreFromTuple tuple model =
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity) >>? Tuple.mapFirst Entity.TodoEntity
+            maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity) >>? Tuple.mapFirst Entity.Task
 
         "project-db" ->
-            maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity) >>? Tuple.mapFirst Entity.ProjectEntity
+            maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity) >>? Tuple.mapFirst Entity.Project
 
         "context-db" ->
             maybeOverT2 contextStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst Entity.ContextEntity
+                >>? Tuple.mapFirst Entity.Context
 
         _ ->
             (\_ -> Nothing)

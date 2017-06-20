@@ -138,7 +138,7 @@ createTodoViewModel appVM canBeFocused todo =
                 |> truncateName
 
         createEntityActionMsg =
-            Model.OnEntityAction (Entity.TodoEntity todo)
+            Model.OnEntityAction (Entity.Task todo)
 
         onTodoMsg =
             Model.OnTodoMsg

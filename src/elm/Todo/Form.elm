@@ -30,7 +30,7 @@ create : Todo.Model -> Model
 create todo =
     { id = Document.getId todo
     , todoText = Todo.getText todo
-    , entity = Entity.TodoEntity todo
+    , entity = Entity.Task todo
     }
 
 

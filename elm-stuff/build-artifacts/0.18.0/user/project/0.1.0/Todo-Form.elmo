@@ -9,7 +9,7 @@ var _user$project$Todo_Form$create = function (todo) {
 	return {
 		id: _user$project$Document$getId(todo),
 		todoText: _user$project$Todo$getText(todo),
-		entity: _user$project$Entity$TodoEntity(todo)
+		entity: _user$project$Entity$Task(todo)
 	};
 };
 var _user$project$Todo_Form$Model = F3(

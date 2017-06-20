@@ -16,9 +16,9 @@ import Todo
 
 
 type Entity
-    = ProjectEntity Project.Model
-    | ContextEntity Context.Model
-    | TodoEntity Todo.Model
+    = Project Project.Model
+    | Context Context.Model
+    | Task Todo.Model
 
 
 type ListViewType
@@ -43,13 +43,13 @@ type Action
 
 getId entity =
     case entity of
-        TodoEntity doc ->
+        Task doc ->
             Document.getId doc
 
-        ProjectEntity doc ->
+        Project doc ->
             Document.getId doc
 
-        ContextEntity doc ->
+        Context doc ->
             Document.getId doc
 
 
@@ -59,13 +59,13 @@ equalById e1 e2 =
             Document.equalById
     in
         case ( e1, e2 ) of
-            ( ProjectEntity m1, ProjectEntity m2 ) ->
+            ( Project m1, Project m2 ) ->
                 eq m1 m2
 
-            ( ContextEntity m1, ContextEntity m2 ) ->
+            ( Context m1, Context m2 ) ->
                 eq m1 m2
 
-            ( TodoEntity m1, TodoEntity m2 ) ->
+            ( Task m1, Task m2 ) ->
                 eq m1 m2
 
             _ ->
@@ -134,13 +134,13 @@ getTodoGotoGroupView todo prevView =
 getGotoEntityViewType : Maybe ListViewType -> Entity -> ListViewType
 getGotoEntityViewType maybePrevView entity =
     case entity of
-        ContextEntity model ->
+        Context model ->
             Document.getId model |> ContextView
 
-        ProjectEntity model ->
+        Project model ->
             Document.getId model |> ProjectView
 
-        TodoEntity model ->
+        Task model ->
             maybePrevView ?|> getTodoGotoGroupView model ?= (Todo.getContextId model |> ContextView)
 
 
@@ -243,31 +243,31 @@ flattenGrouping : Grouping -> List Entity
 flattenGrouping grouping =
     case grouping of
         SingleContext cg pgList ->
-            (ContextEntity cg.context)
+            (Context cg.context)
                 :: flattenGrouping (MultiProject pgList)
 
         SingleProject pg cgList ->
-            (ProjectEntity pg.project)
+            (Project pg.project)
                 :: flattenGrouping (MultiContext cgList)
 
         MultiContext groupList ->
             groupList
                 |> List.concatMap
                     (\g ->
-                        (ContextEntity g.context)
-                            :: (g.todoList .|> TodoEntity)
+                        (Context g.context)
+                            :: (g.todoList .|> Task)
                     )
 
         MultiProject groupList ->
             groupList
                 |> List.concatMap
                     (\g ->
-                        (ProjectEntity g.project)
-                            :: (g.todoList .|> TodoEntity)
+                        (Project g.project)
+                            :: (g.todoList .|> Task)
                     )
 
         FlatTodoList title todoList ->
-            todoList .|> TodoEntity
+            todoList .|> Task
 
 
 findEntityByOffsetIn offsetIndex entityList fromEntity =

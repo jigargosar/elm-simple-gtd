@@ -30,7 +30,7 @@ initKeyed todoView vm =
 item todoView vm =
     let
         getTabIndexAVForTodo =
-            Entity.TodoEntity >> vm.getTabIndexAVForEntity
+            Entity.Task >> vm.getTabIndexAVForEntity
     in
         Html.Keyed.node "div"
             [ class "collection" ]

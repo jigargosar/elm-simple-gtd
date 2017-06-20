@@ -135,20 +135,20 @@ var _user$project$Entity$equalById = F2(
 		do {
 			if (_p3.ctor === '_Tuple2') {
 				switch (_p3._0.ctor) {
-					case 'ProjectEntity':
-						if (_p3._1.ctor === 'ProjectEntity') {
+					case 'Project':
+						if (_p3._1.ctor === 'Project') {
 							return A2(eq, _p3._0._0, _p3._1._0);
 						} else {
 							break _v1_3;
 						}
-					case 'ContextEntity':
-						if (_p3._1.ctor === 'ContextEntity') {
+					case 'Context':
+						if (_p3._1.ctor === 'Context') {
 							return A2(eq, _p3._0._0, _p3._1._0);
 						} else {
 							break _v1_3;
 						}
 					default:
-						if (_p3._1.ctor === 'TodoEntity') {
+						if (_p3._1.ctor === 'Task') {
 							return A2(eq, _p3._0._0, _p3._1._0);
 						} else {
 							break _v1_3;
@@ -185,9 +185,9 @@ var _user$project$Entity$findEntityByOffsetIn = F3(
 var _user$project$Entity$getId = function (entity) {
 	var _p4 = entity;
 	switch (_p4.ctor) {
-		case 'TodoEntity':
+		case 'Task':
 			return _user$project$Document$getId(_p4._0);
-		case 'ProjectEntity':
+		case 'Project':
 			return _user$project$Document$getId(_p4._0);
 		default:
 			return _user$project$Document$getId(_p4._0);
@@ -201,14 +201,14 @@ var _user$project$Entity$ProjectGroup = F2(
 	function (a, b) {
 		return {project: a, todoList: b};
 	});
-var _user$project$Entity$TodoEntity = function (a) {
-	return {ctor: 'TodoEntity', _0: a};
+var _user$project$Entity$Task = function (a) {
+	return {ctor: 'Task', _0: a};
 };
-var _user$project$Entity$ContextEntity = function (a) {
-	return {ctor: 'ContextEntity', _0: a};
+var _user$project$Entity$Context = function (a) {
+	return {ctor: 'Context', _0: a};
 };
-var _user$project$Entity$ProjectEntity = function (a) {
-	return {ctor: 'ProjectEntity', _0: a};
+var _user$project$Entity$Project = function (a) {
+	return {ctor: 'Project', _0: a};
 };
 var _user$project$Entity$DoneView = {ctor: 'DoneView'};
 var _user$project$Entity$BinView = {ctor: 'BinView'};
@@ -247,10 +247,10 @@ var _user$project$Entity$getGotoEntityViewType = F2(
 	function (maybePrevView, entity) {
 		var _p6 = entity;
 		switch (_p6.ctor) {
-			case 'ContextEntity':
+			case 'Context':
 				return _user$project$Entity$ContextView(
 					_user$project$Document$getId(_p6._0));
-			case 'ProjectEntity':
+			case 'Project':
 				return _user$project$Entity$ProjectView(
 					_user$project$Document$getId(_p6._0));
 			default:
@@ -308,14 +308,14 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 		case 'SingleContext':
 			return {
 				ctor: '::',
-				_0: _user$project$Entity$ContextEntity(_p8._0.context),
+				_0: _user$project$Entity$Context(_p8._0.context),
 				_1: _user$project$Entity$flattenGrouping(
 					_user$project$Entity$MultiProject(_p8._1))
 			};
 		case 'SingleProject':
 			return {
 				ctor: '::',
-				_0: _user$project$Entity$ProjectEntity(_p8._0.project),
+				_0: _user$project$Entity$Project(_p8._0.project),
 				_1: _user$project$Entity$flattenGrouping(
 					_user$project$Entity$MultiContext(_p8._1))
 			};
@@ -325,8 +325,8 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 				function (g) {
 					return {
 						ctor: '::',
-						_0: _user$project$Entity$ContextEntity(g.context),
-						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.todoList, _user$project$Entity$TodoEntity)
+						_0: _user$project$Entity$Context(g.context),
+						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.todoList, _user$project$Entity$Task)
 					};
 				},
 				_p8._0);
@@ -336,13 +336,13 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 				function (g) {
 					return {
 						ctor: '::',
-						_0: _user$project$Entity$ProjectEntity(g.project),
-						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.todoList, _user$project$Entity$TodoEntity)
+						_0: _user$project$Entity$Project(g.project),
+						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.todoList, _user$project$Entity$Task)
 					};
 				},
 				_p8._0);
 		default:
-			return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p8._1, _user$project$Entity$TodoEntity);
+			return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p8._1, _user$project$Entity$Task);
 	}
 };
 var _user$project$Entity$SingleProject = F2(

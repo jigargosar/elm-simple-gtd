@@ -161,7 +161,7 @@ contextGroup getTabIndexAVForEntity todoList context =
         config =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
-            , entityWrapper = Entity.ContextEntity
+            , entityWrapper = Entity.Context
             , nullEntity = Context.null
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
@@ -180,7 +180,7 @@ projectGroup getTabIndexAVForEntity todoList project =
         config =
             { groupByFn = Todo.getProjectId
             , namePrefix = "#"
-            , entityWrapper = Entity.ProjectEntity
+            , entityWrapper = Entity.Project
             , nullEntity = Project.null
             , isNull = Project.isNull
             , nullIcon = { name = "inbox", color = inboxColor }

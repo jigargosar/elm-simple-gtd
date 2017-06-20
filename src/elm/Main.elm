@@ -132,7 +132,7 @@ update msg =
 
                 OnEntityUpsert entity ->
                     case entity of
-                        Entity.TodoEntity model ->
+                        Entity.Task model ->
                             Todo.Msg.Upsert model |> andThenTodoMsg
 
                         _ ->

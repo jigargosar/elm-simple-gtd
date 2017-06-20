@@ -43,14 +43,13 @@
   box-sizing: border-box;
 }
 
-.default-color.material-icons{
+.default-color.material-icons {
   color: gray(30%);
 }
 
-#main-header .title{
-  margin-right:1rem;
+#main-header .title {
+  margin-right: 1rem;
 }
-
 
 paper-menu-button paper-item {
   flex: 1 1 auto;
@@ -60,7 +59,6 @@ paper-menu-button paper-item {
     color: black;
   }
 }
-
 
 /*
 [tabindex="0"], [tabindex="1"]{
@@ -364,6 +362,14 @@ paper-listbox {
 .focusable-list .todo-item {
   & .display-text-container {
     cursor: default;
+    & .display-text a {
+      text-decoration: underline ;
+      color: rgba(0,0,0,0.60);
+    }
+    & .display-text a:hover {
+      color: rgba(0,0,0,0.77);
+      text-decoration: underline ;
+    }
   }
   &.can-be-focused .display-text-container {
     cursor: pointer;

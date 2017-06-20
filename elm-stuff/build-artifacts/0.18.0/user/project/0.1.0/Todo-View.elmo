@@ -596,10 +596,11 @@ var _user$project$Todo_View$parseDisplayText = function (displayText) {
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html$text(
-					A2(
-						_elm_community$string_extra$String_Extra$ellipsis,
-						30,
-						_user$project$RegexHelper$stripUrlPrefix(url))),
+					_elm_lang$core$String$toLower(
+						A2(
+							_elm_community$string_extra$String_Extra$ellipsis,
+							30,
+							_user$project$RegexHelper$stripUrlPrefix(url)))),
 				_1: {ctor: '[]'}
 			});
 	};

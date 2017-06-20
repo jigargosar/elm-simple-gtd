@@ -541,32 +541,12 @@ var _user$project$Todo_View$editContextButton = function (vm) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Todo_View$doneIconButton = function (vm) {
-	return A2(
-		_user$project$Material$iconButton,
-		'done',
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$classList(
-				{
-					ctor: '::',
-					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'done-icon', true),
-					_1: {
-						ctor: '::',
-						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'is-done', vm.isDone),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.toggleDoneMsg),
-				_1: {
-					ctor: '::',
-					_0: vm.tabindexAV,
-					_1: {ctor: '[]'}
-				}
-			}
-		});
+var _user$project$Todo_View$onMouseDownStopPropagation = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'mousedown',
+		_user$project$Ext_Keyboard$stopPropagation,
+		_elm_lang$core$Json_Decode$succeed(msg));
 };
 var _user$project$Todo_View$parseDisplayText = function (displayText) {
 	var nonLinkStrings = A2(
@@ -584,11 +564,7 @@ var _user$project$Todo_View$parseDisplayText = function (displayText) {
 					_0: _elm_lang$html$Html_Attributes$target('_blank'),
 					_1: {
 						ctor: '::',
-						_0: A3(
-							_elm_lang$html$Html_Events$onWithOptions,
-							'mousedown',
-							_user$project$Ext_Keyboard$stopPropagation,
-							_elm_lang$core$Json_Decode$succeed(_user$project$Model$NOOP)),
+						_0: _user$project$Todo_View$onMouseDownStopPropagation(_user$project$Model$NOOP),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -614,6 +590,37 @@ var _user$project$Todo_View$parseDisplayText = function (displayText) {
 				}(_p8));
 		});
 	return A2(_elm_community$list_extra$List_Extra$interweave, nonLinkStrings, linkStrings);
+};
+var _user$project$Todo_View$doneIconButton = function (vm) {
+	return A2(
+		_user$project$Material$iconButton,
+		'done',
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$classList(
+				{
+					ctor: '::',
+					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'done-icon', true),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'is-done', vm.isDone),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Todo_View$onMouseDownStopPropagation(_user$project$Model$NOOP),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.toggleDoneMsg),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
 };
 var _user$project$Todo_View$item = function (vm) {
 	return A2(
@@ -659,23 +666,34 @@ var _user$project$Todo_View$item = function (vm) {
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html_Attributes$class('display-text-container layout horizontal'),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onMouseDown(vm.startEditingMsg),
+						_1: {ctor: '[]'}
+					}
 				},
 				{
 					ctor: '::',
-					_0: _user$project$Todo_View$doneIconButton(vm),
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('self-start'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$Todo_View$doneIconButton(vm),
+							_1: {ctor: '[]'}
+						}),
 					_1: {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onMouseDown(vm.startEditingMsg),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('display-text'),
-									_1: {ctor: '[]'}
-								}
+								_0: _elm_lang$html$Html_Attributes$class('display-text'),
+								_1: {ctor: '[]'}
 							},
 							_user$project$Todo_View$parseDisplayText(vm.displayText)),
 						_1: {ctor: '[]'}

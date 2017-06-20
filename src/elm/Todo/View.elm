@@ -232,11 +232,11 @@ item vm =
         ]
         [ div
             [ class "display-text-container layout horizontal"
+            , onMouseDown vm.startEditingMsg
             ]
-            [ doneIconButton vm
+            [ div [ class "self-start" ] [ doneIconButton vm ]
             , div
-                [ onMouseDown vm.startEditingMsg
-                , class "display-text"
+                [ class "display-text"
                 ]
               <|
                 parseDisplayText vm.displayText
@@ -251,6 +251,10 @@ item vm =
         ]
 
 
+onMouseDownStopPropagation msg =
+    onWithOptions "mousedown" stopPropagation (D.succeed msg)
+
+
 parseDisplayText displayText =
     --Markdown.toHtml Nothing displayText
     let
@@ -258,7 +262,7 @@ parseDisplayText displayText =
             a
                 [ href url
                 , target "_blank"
-                , onWithOptions "mousedown" stopPropagation (D.succeed Model.NOOP)
+                , onMouseDownStopPropagation Model.NOOP
                 ]
                 [ url |> RegexHelper.stripUrlPrefix |> String.ellipsis 30 |> String.toLower |> text ]
 
@@ -278,7 +282,8 @@ doneIconButton : TodoViewModel -> Html Msg
 doneIconButton vm =
     Material.iconButton "done"
         [ classList [ "done-icon" => True, "is-done" => vm.isDone ]
-        , onClickStopPropagation (vm.toggleDoneMsg)
+        , onMouseDownStopPropagation (Model.NOOP)
+        , onClick (vm.toggleDoneMsg)
         , vm.tabindexAV
         ]
 

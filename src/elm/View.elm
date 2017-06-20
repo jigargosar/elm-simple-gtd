@@ -25,6 +25,7 @@ import ViewModel
 import WebComponents exposing (onBoolPropertyChanged)
 import LaunchBar.View
 import GroupDoc.EditView
+import Todo.MoreMenu
 
 
 init m =
@@ -52,6 +53,9 @@ overlayViews appModel =
             case Model.getEditMode appModel of
                 ExclusiveMode.LaunchBar form ->
                     LaunchBar.View.init form appModel
+
+                ExclusiveMode.TodoMoreMenu model ->
+                    Todo.MoreMenu.view model
 
                 ExclusiveMode.EditTodoContext form ->
                     Todo.View.contextMenu form appModel

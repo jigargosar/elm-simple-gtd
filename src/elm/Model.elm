@@ -736,12 +736,13 @@ saveCurrentForm model =
                 |> updateTodo (Todo.SetScheduleFromMaybeTime (Todo.ReminderForm.getMaybeTime form)) form.id
 
         ExclusiveMode.EditTodoContext form ->
-            model
-                |> Return.singleton
+            model |> Return.singleton
 
         ExclusiveMode.EditTodoProject form ->
-            model
-                |> Return.singleton
+            model |> Return.singleton
+
+        ExclusiveMode.TodoMoreMenu _ ->
+            model |> Return.singleton
 
         ExclusiveMode.NewTodo form ->
             insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model

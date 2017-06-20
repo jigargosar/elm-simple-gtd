@@ -1,0 +1,31 @@
+var _user$project$Todo_MoreMenu$moreMenuConfig = function (model) {
+	return {
+		onSelect: function (_p0) {
+			return _user$project$Model$NOOP;
+		},
+		isSelected: function (_p1) {
+			return false;
+		},
+		itemKey: _elm_lang$core$Basics$identity,
+		itemSearchText: _elm_lang$core$Basics$identity,
+		itemView: _elm_lang$html$Html$text,
+		onStateChanged: _user$project$Model$OnEditTodoContextMenuStateChanged(model),
+		noOp: _user$project$Model$NOOP,
+		onOutsideMouseDown: _user$project$Model$OnDeactivateEditingMode
+	};
+};
+var _user$project$Todo_MoreMenu$view = function (model) {
+	return A3(
+		_user$project$Menu$view,
+		{
+			ctor: '::',
+			_0: 'foo',
+			_1: {
+				ctor: '::',
+				_0: 'bar',
+				_1: {ctor: '[]'}
+			}
+		},
+		model.menuState,
+		_user$project$Todo_MoreMenu$moreMenuConfig(model));
+};

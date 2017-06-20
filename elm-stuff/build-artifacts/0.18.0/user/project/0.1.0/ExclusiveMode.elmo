@@ -24,6 +24,9 @@ var _user$project$ExclusiveMode$EditTodoContext = function (a) {
 var _user$project$ExclusiveMode$EditTodoReminder = function (a) {
 	return {ctor: 'EditTodoReminder', _0: a};
 };
+var _user$project$ExclusiveMode$TodoMoreMenu = function (a) {
+	return {ctor: 'TodoMoreMenu', _0: a};
+};
 var _user$project$ExclusiveMode$EditProject = function (a) {
 	return {ctor: 'EditProject', _0: a};
 };

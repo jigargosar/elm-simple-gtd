@@ -1,0 +1,13 @@
+var _user$project$Todo_Menu$setMenuState = F2(
+	function (menuState, form) {
+		return _elm_lang$core$Native_Utils.update(
+			form,
+			{menuState: menuState});
+	});
+var _user$project$Todo_Menu$init = function (todo) {
+	return {todo: todo, menuState: _user$project$Menu$initState};
+};
+var _user$project$Todo_Menu$Model = F2(
+	function (a, b) {
+		return {todo: a, menuState: b};
+	});

@@ -10,6 +10,7 @@ import LaunchBar.Form
 import Project
 import GroupDoc.EditForm
 import Todo
+import Todo.Menu
 import Todo.NewForm
 import Todo.GroupForm
 import Toolkit.Helpers exposing (..)
@@ -46,6 +47,7 @@ type ExclusiveMode
     | EditContext EditContextForm
     | EditProject EditProjectForm
       -- overlay
+    | TodoMoreMenu Todo.Menu.Model
     | EditTodoReminder Todo.ReminderForm.Model
     | EditTodoContext Todo.GroupForm.Model
     | EditTodoProject Todo.GroupForm.Model

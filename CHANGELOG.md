@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.48 - 2017-06-20
 * use regex to parse split links and then use target blank. ;) 
 
 ## v0.18.47 - 2017-06-19

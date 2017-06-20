@@ -1,3 +1,6 @@
+## Upcoming
+* use regex to parse split links and then use target blank. ;) 
+
 ## v0.18.47 - 2017-06-19
 * move inbox on top
   hide no project todos 

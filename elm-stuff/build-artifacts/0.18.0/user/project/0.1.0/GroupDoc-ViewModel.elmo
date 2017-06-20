@@ -71,7 +71,7 @@ var _user$project$GroupDoc_ViewModel$contextGroup = F3(
 		var config = {
 			groupByFn: _user$project$Todo$getContextId,
 			namePrefix: '@',
-			entityWrapper: _user$project$Entity$ContextEntity,
+			entityWrapper: _user$project$Entity$Context,
 			nullEntity: _user$project$Context$null,
 			isNull: _user$project$Context$isNull,
 			nullIcon: {name: 'inbox', color: _user$project$GroupDoc_ViewModel$inboxColor},
@@ -86,7 +86,7 @@ var _user$project$GroupDoc_ViewModel$projectGroup = F3(
 		var config = {
 			groupByFn: _user$project$Todo$getProjectId,
 			namePrefix: '#',
-			entityWrapper: _user$project$Entity$ProjectEntity,
+			entityWrapper: _user$project$Entity$Project,
 			nullEntity: _user$project$Project$null,
 			isNull: _user$project$Project$isNull,
 			nullIcon: {name: 'inbox', color: _user$project$GroupDoc_ViewModel$inboxColor},

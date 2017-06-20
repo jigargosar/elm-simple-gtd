@@ -318,9 +318,9 @@ var _user$project$Model$createEntityEditForm = F2(
 	function (entity, model) {
 		var _p13 = entity;
 		switch (_p13.ctor) {
-			case 'ContextEntity':
+			case 'Context':
 				return _user$project$ExclusiveMode$editContextMode(_p13._0);
-			case 'ProjectEntity':
+			case 'Project':
 				return _user$project$ExclusiveMode$editProjectMode(_p13._0);
 			default:
 				return _user$project$ExclusiveMode$EditTodo(
@@ -722,7 +722,7 @@ var _user$project$Model$getMaybeUserProfile = function (_p29) {
 			return _.user;
 		}(_p29));
 };
-var _user$project$Model$inboxEntity = _user$project$Entity$ContextEntity(_user$project$Context$null);
+var _user$project$Model$inboxEntity = _user$project$Entity$Context(_user$project$Context$null);
 var _user$project$Model$keyComboModel = A2(
 	_user$project$Ext_Record$field,
 	function (_) {
@@ -766,7 +766,7 @@ var _user$project$Model$setFocusInEntityFromTodoId = F2(
 						_0: A2(
 							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 							A2(_user$project$Model$findTodoById, todoId, model),
-							_user$project$Entity$TodoEntity),
+							_user$project$Entity$Task),
 						_1: _elm_lang$core$Maybe$Just(model)
 					}),
 				_elm_lang$core$Basics$uncurry(_user$project$Model$setFocusInEntity)),
@@ -1120,7 +1120,7 @@ var _user$project$Model$upsertEncodedDocOnPouchDBChange = F2(
 						_user$project$Ext_Record$maybeOverT2,
 						_user$project$Model$todoStore,
 						_user$project$Store$upsertOnPouchDBChange(encodedEntity)),
-					_elm_lang$core$Tuple$mapFirst(_user$project$Entity$TodoEntity));
+					_elm_lang$core$Tuple$mapFirst(_user$project$Entity$Task));
 			case 'project-db':
 				return A2(
 					_user$project$Ext_Function_Infix_ops['>>?'],
@@ -1128,7 +1128,7 @@ var _user$project$Model$upsertEncodedDocOnPouchDBChange = F2(
 						_user$project$Ext_Record$maybeOverT2,
 						_user$project$Model$projectStore,
 						_user$project$Store$upsertOnPouchDBChange(encodedEntity)),
-					_elm_lang$core$Tuple$mapFirst(_user$project$Entity$ProjectEntity));
+					_elm_lang$core$Tuple$mapFirst(_user$project$Entity$Project));
 			case 'context-db':
 				return A2(
 					_user$project$Ext_Function_Infix_ops['>>?'],
@@ -1136,7 +1136,7 @@ var _user$project$Model$upsertEncodedDocOnPouchDBChange = F2(
 						_user$project$Ext_Record$maybeOverT2,
 						_user$project$Model$contextStore,
 						_user$project$Store$upsertOnPouchDBChange(encodedEntity)),
-					_elm_lang$core$Tuple$mapFirst(_user$project$Entity$ContextEntity));
+					_elm_lang$core$Tuple$mapFirst(_user$project$Entity$Context));
 			default:
 				return function (_p40) {
 					return _elm_lang$core$Maybe$Nothing;
@@ -1201,9 +1201,9 @@ var _user$project$Model$saveCurrentForm = function (model) {
 								function () {
 									var _p47 = _p48.referenceEntity;
 									switch (_p47.ctor) {
-										case 'TodoEntity':
+										case 'Task':
 											return _user$project$Todo$CopyProjectAndContextId(_p47._0);
-										case 'ContextEntity':
+										case 'Context':
 											return _user$project$Todo$SetContext(_p47._0);
 										default:
 											return _user$project$Todo$SetProject(_p47._0);
@@ -1244,9 +1244,9 @@ var _user$project$Model$toggleDeleteEntity = F2(
 		return function () {
 			var _p49 = entity;
 			switch (_p49.ctor) {
-				case 'ContextEntity':
+				case 'Context':
 					return A2(_user$project$Model$updateContext, entityId, _user$project$Document$toggleDeleted);
-				case 'ProjectEntity':
+				case 'Project':
 					return A2(_user$project$Model$updateProject, entityId, _user$project$Document$toggleDeleted);
 				default:
 					return A2(_user$project$Model$updateTodo, _user$project$Todo$ToggleDeleted, entityId);
@@ -1259,9 +1259,9 @@ var _user$project$Model$toggleArchiveEntity = F2(
 		return function () {
 			var _p50 = entity;
 			switch (_p50.ctor) {
-				case 'ContextEntity':
+				case 'Context':
 					return A2(_user$project$Model$updateContext, entityId, _user$project$GroupDoc$toggleArchived);
-				case 'ProjectEntity':
+				case 'Project':
 					return A2(_user$project$Model$updateProject, entityId, _user$project$GroupDoc$toggleArchived);
 				default:
 					return A2(_user$project$Model$updateTodo, _user$project$Todo$ToggleDone, entityId);
@@ -1656,7 +1656,7 @@ var _user$project$Model$createAndEditNewProject = function (model) {
 		var _p61 = _p60._0;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Entity$ProjectEntity(_p61),
+			_user$project$Entity$Project(_p61),
 			A2(_user$project$Model$switchToProjectView, _p61, _p60._1));
 	}(
 		A2(
@@ -1682,7 +1682,7 @@ var _user$project$Model$createAndEditNewContext = function (model) {
 		var _p66 = _p65._0;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Entity$ContextEntity(_p66),
+			_user$project$Entity$Context(_p66),
 			A2(_user$project$Model$switchToContextView, _p66, _p65._1));
 	}(
 		A2(

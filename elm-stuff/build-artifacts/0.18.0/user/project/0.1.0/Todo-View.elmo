@@ -785,7 +785,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 	function (appVM, canBeFocused, todo) {
 		var onTodoMsg = _user$project$Model$OnTodoMsg;
 		var createEntityActionMsg = _user$project$Model$OnEntityAction(
-			_user$project$Entity$TodoEntity(todo));
+			_user$project$Entity$Task(todo));
 		var startEditingMsg = canBeFocused ? createEntityActionMsg(_user$project$Entity$StartEditing) : _user$project$Model$NOOP;
 		var toggleDeleteMsg = createEntityActionMsg(_user$project$Entity$ToggleDeleted);
 		var contextId = _user$project$Todo$getContextId(todo);

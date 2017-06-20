@@ -259,7 +259,7 @@ var _user$project$Main$update = function (msg) {
 								_elm_lang$core$Basics$uncurry(_user$project$Main$update)));
 					case 'OnEntityUpsert':
 						var _p15 = _p14._0;
-						if (_p15.ctor === 'TodoEntity') {
+						if (_p15.ctor === 'Task') {
 							return _user$project$Main$andThenTodoMsg(
 								_user$project$Todo_Msg$Upsert(_p15._0));
 						} else {

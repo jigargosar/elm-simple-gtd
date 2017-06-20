@@ -76,7 +76,7 @@ var _user$project$EntityList_View$keyedViewList = F3(
 		};
 		var todoView = function (todo) {
 			var canBeFocused = hasFocusIn(
-				_user$project$Entity$TodoEntity(todo));
+				_user$project$Entity$Task(todo));
 			return _user$project$Todo_View$keyedItem(
 				A3(_user$project$Todo_View$createTodoViewModel, appViewModel, canBeFocused, todo));
 		};

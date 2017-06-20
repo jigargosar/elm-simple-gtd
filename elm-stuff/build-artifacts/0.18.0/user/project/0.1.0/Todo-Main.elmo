@@ -4,7 +4,7 @@ var _user$project$Todo_Main$gotoTodoWithId = F2(
 			_elm_community$list_extra$List_Extra$find,
 			function (entity) {
 				var _p0 = entity;
-				if (_p0.ctor === 'TodoEntity') {
+				if (_p0.ctor === 'Task') {
 					return A2(_user$project$Document$hasId, todoId, _p0._0);
 				} else {
 					return false;

@@ -108,7 +108,7 @@ var _user$project$GroupDoc_View$item = F2(
 	function (todoView, vm) {
 		var getTabIndexAVForTodo = function (_p0) {
 			return vm.getTabIndexAVForEntity(
-				_user$project$Entity$TodoEntity(_p0));
+				_user$project$Entity$Task(_p0));
 		};
 		return A3(
 			_elm_lang$html$Html_Keyed$node,

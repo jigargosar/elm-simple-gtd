@@ -15,10 +15,26 @@ import Project
 import Todo
 
 
-type Entity
+type GroupEntity
     = Project Project.Model
     | Context Context.Model
+
+
+type Entity
+    = Group GroupEntity
     | Task Todo.Model
+
+
+fromContext =
+    Context >> Group
+
+
+fromProject =
+    Project >> Group
+
+
+fromTask =
+    Task
 
 
 type ListViewType
@@ -43,14 +59,16 @@ type Action
 
 getId entity =
     case entity of
-        Task doc ->
-            Document.getId doc
+        Task model ->
+            Document.getId model
 
-        Project doc ->
-            Document.getId doc
+        Group group ->
+            case group of
+                Project model ->
+                    Document.getId model
 
-        Context doc ->
-            Document.getId doc
+                Context model ->
+                    Document.getId model
 
 
 equalById e1 e2 =
@@ -59,11 +77,16 @@ equalById e1 e2 =
             Document.equalById
     in
         case ( e1, e2 ) of
-            ( Project m1, Project m2 ) ->
-                eq m1 m2
+            ( Group g1, Group g2 ) ->
+                case ( g1, g2 ) of
+                    ( Project m1, Project m2 ) ->
+                        eq m1 m2
 
-            ( Context m1, Context m2 ) ->
-                eq m1 m2
+                    ( Context m1, Context m2 ) ->
+                        eq m1 m2
+
+                    _ ->
+                        False
 
             ( Task m1, Task m2 ) ->
                 eq m1 m2
@@ -131,17 +154,21 @@ getTodoGotoGroupView todo prevView =
                 ContextsView
 
 
-getGotoEntityViewType : Maybe ListViewType -> Entity -> ListViewType
-getGotoEntityViewType maybePrevView entity =
+toViewType : Maybe ListViewType -> Entity -> ListViewType
+toViewType maybePrevView entity =
     case entity of
-        Context model ->
-            Document.getId model |> ContextView
+        Group group ->
+            case group of
+                Context model ->
+                    Document.getId model |> ContextView
 
-        Project model ->
-            Document.getId model |> ProjectView
+                Project model ->
+                    Document.getId model |> ProjectView
 
         Task model ->
-            maybePrevView ?|> getTodoGotoGroupView model ?= (Todo.getContextId model |> ContextView)
+            maybePrevView
+                ?|> getTodoGotoGroupView model
+                ?= (Todo.getContextId model |> ContextView)
 
 
 type alias TodoList =
@@ -243,18 +270,18 @@ flattenGrouping : Grouping -> List Entity
 flattenGrouping grouping =
     case grouping of
         SingleContext cg pgList ->
-            (Context cg.context)
+            fromContext cg.context
                 :: flattenGrouping (MultiProject pgList)
 
         SingleProject pg cgList ->
-            (Project pg.project)
+            fromProject pg.project
                 :: flattenGrouping (MultiContext cgList)
 
         MultiContext groupList ->
             groupList
                 |> List.concatMap
                     (\g ->
-                        (Context g.context)
+                        fromContext g.context
                             :: (g.todoList .|> Task)
                     )
 
@@ -262,7 +289,7 @@ flattenGrouping grouping =
             groupList
                 |> List.concatMap
                     (\g ->
-                        (Project g.project)
+                        fromProject g.project
                             :: (g.todoList .|> Task)
                     )
 

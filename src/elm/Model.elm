@@ -699,7 +699,7 @@ switchToEntityListViewFromEntity entity model =
             maybeGetCurrentEntityListViewType model
     in
         entity
-            |> Entity.getGotoEntityViewType maybeEntityListViewType
+            |> Entity.toViewType maybeEntityListViewType
             |> (setEntityListViewType # model)
 
 

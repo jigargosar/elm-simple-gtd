@@ -12,6 +12,17 @@ import Maybe.Extra as Maybe
 import Model
 
 
+type alias MenuItem =
+    { type_ : ItemType
+    , displayName : String
+    }
+
+
+type ItemType
+    = Foo
+    | Bar
+
+
 moreMenuConfig : Todo.Menu.Model -> Menu.Config String Model.Msg
 moreMenuConfig model =
     { onSelect = (\_ -> Model.NOOP)
@@ -19,7 +30,7 @@ moreMenuConfig model =
     , itemKey = identity
     , itemSearchText = identity
     , itemView = Html.text
-    , onStateChanged = Model.OnEditTodoContextMenuStateChanged model
+    , onStateChanged = (\_ -> Model.NOOP)
     , noOp = Model.NOOP
     , onOutsideMouseDown = Model.OnDeactivateEditingMode
     }

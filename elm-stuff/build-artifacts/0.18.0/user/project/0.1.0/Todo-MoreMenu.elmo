@@ -9,7 +9,9 @@ var _user$project$Todo_MoreMenu$moreMenuConfig = function (model) {
 		itemKey: _elm_lang$core$Basics$identity,
 		itemSearchText: _elm_lang$core$Basics$identity,
 		itemView: _elm_lang$html$Html$text,
-		onStateChanged: _user$project$Model$OnEditTodoContextMenuStateChanged(model),
+		onStateChanged: function (_p2) {
+			return _user$project$Model$NOOP;
+		},
 		noOp: _user$project$Model$NOOP,
 		onOutsideMouseDown: _user$project$Model$OnDeactivateEditingMode
 	};
@@ -29,3 +31,9 @@ var _user$project$Todo_MoreMenu$view = function (model) {
 		model.menuState,
 		_user$project$Todo_MoreMenu$moreMenuConfig(model));
 };
+var _user$project$Todo_MoreMenu$MenuItem = F2(
+	function (a, b) {
+		return {type_: a, displayName: b};
+	});
+var _user$project$Todo_MoreMenu$Bar = {ctor: 'Bar'};
+var _user$project$Todo_MoreMenu$Foo = {ctor: 'Foo'};

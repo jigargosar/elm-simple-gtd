@@ -1,3 +1,6 @@
+## Upcoming
+*  merge prj and ctx into grp entity
+
 ## v0.18.48 - 2017-06-20
 * use regex to parse split links and then use target blank. ;) 
 

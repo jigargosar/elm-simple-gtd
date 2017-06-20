@@ -329,7 +329,7 @@ var _user$project$View$overlayViews = function (appModel) {
 				return _user$project$GroupDoc_EditView$init(_p0._0);
 			case 'EditContext':
 				return _user$project$GroupDoc_EditView$init(_p0._0);
-			case 'EditTodo':
+			case 'EditTask':
 				return A2(_user$project$Todo_View$edit, _p0._0, appModel);
 			case 'NewTodo':
 				return _user$project$Todo_View$new(_p0._0);

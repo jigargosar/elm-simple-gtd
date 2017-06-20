@@ -622,6 +622,20 @@ var _user$project$Todo_View$doneIconButton = function (vm) {
 			}
 		});
 };
+var _user$project$Todo_View$moreIconButton = function (vm) {
+	return A2(
+		_user$project$Material$smallIconButton,
+		'more_vert',
+		{
+			ctor: '::',
+			_0: _user$project$Todo_View$onMouseDownStopPropagation(_user$project$Model$NOOP),
+			_1: {
+				ctor: '::',
+				_0: vm.tabindexAV,
+				_1: {ctor: '[]'}
+			}
+		});
+};
 var _user$project$Todo_View$item = function (vm) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -696,7 +710,22 @@ var _user$project$Todo_View$item = function (vm) {
 								_1: {ctor: '[]'}
 							},
 							_user$project$Todo_View$parseDisplayText(vm.displayText)),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('self-start'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _user$project$Todo_View$moreIconButton(vm),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
 					}
 				}),
 			_1: {

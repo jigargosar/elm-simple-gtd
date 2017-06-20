@@ -240,6 +240,7 @@ item vm =
                 ]
               <|
                 parseDisplayText vm.displayText
+            , div [ class "self-start" ] [ moreIconButton vm ]
             ]
         , div
             [ class "layout horizontal end-justified"
@@ -284,6 +285,16 @@ doneIconButton vm =
         [ classList [ "done-icon" => True, "is-done" => vm.isDone ]
         , onMouseDownStopPropagation (Model.NOOP)
         , onClick (vm.toggleDoneMsg)
+        , vm.tabindexAV
+        ]
+
+
+moreIconButton : TodoViewModel -> Html Msg
+moreIconButton vm =
+    Material.smallIconButton "more_vert"
+        [ onMouseDownStopPropagation (Model.NOOP)
+
+        --        , onClick (vm.toggleDoneMsg)
         , vm.tabindexAV
         ]
 

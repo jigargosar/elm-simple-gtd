@@ -1,29 +1,14 @@
-var _user$project$RegexHelper$urlPrefixPattern = function (_p0) {
-	return A2(
-		_ydschneider$regex_builder$RegexBuilder$exactly,
-		'://',
-		A2(
-			_ydschneider$regex_builder$RegexBuilder$many,
-			_ydschneider$regex_builder$RegexBuilder$noWhiteSpace,
-			_ydschneider$regex_builder$RegexBuilder_Extra$wordBoundary(_p0)));
-};
+var _user$project$RegexHelper$urlPrefixRegexString = '[A-Za-z]+://';
 var _user$project$RegexHelper$stripUrlPrefix = function () {
-	var urlPrefix = A2(
-		_ydschneider$regex_builder$RegexBuilder_Extra$toRegex,
-		{alignBeginning: true, alignEnd: false},
-		_user$project$RegexHelper$urlPrefixPattern);
+	var urlPrefix = _elm_lang$core$Regex$regex(
+		A2(_elm_lang$core$Basics_ops['++'], '^', _user$project$RegexHelper$urlPrefixRegexString));
 	return A3(
 		_elm_lang$core$Regex$replace,
 		_elm_lang$core$Regex$All,
 		urlPrefix,
-		function (_p1) {
+		function (_p0) {
 			return '';
 		});
 }();
-var _user$project$RegexHelper$url = _ydschneider$regex_builder$RegexBuilder$toRegex(
-	function (_p2) {
-		return A2(
-			_ydschneider$regex_builder$RegexBuilder$many,
-			_ydschneider$regex_builder$RegexBuilder$noWhiteSpace,
-			_user$project$RegexHelper$urlPrefixPattern(_p2));
-	});
+var _user$project$RegexHelper$url = _elm_lang$core$Regex$regex(
+	A2(_elm_lang$core$Basics_ops['++'], _user$project$RegexHelper$urlPrefixRegexString, '\\S+'));

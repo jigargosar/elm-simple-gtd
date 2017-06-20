@@ -1,8 +1,6 @@
 module RegexHelper exposing (..)
 
 import Regex exposing (HowMany(All))
-import RegexBuilder exposing (..)
-import RegexBuilder.Extra exposing (..)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import Ext.Function exposing (..)
@@ -12,24 +10,16 @@ import Maybe.Extra as Maybe
 
 
 url =
-    urlPrefixPattern
-        >> many noWhiteSpace
-        |> RegexBuilder.toRegex
+    urlPrefixRegexString ++ "\\S+" |> Regex.regex
 
 
-urlPrefixPattern =
-    wordBoundary
-        >> many (noWhiteSpace)
-        >> exactly "://"
+urlPrefixRegexString =
+    "[A-Za-z]+://"
 
 
 stripUrlPrefix =
     let
         urlPrefix =
-            urlPrefixPattern
-                |> RegexBuilder.Extra.toRegex
-                    { alignBeginning = True
-                    , alignEnd = False
-                    }
+            Regex.regex ("^" ++ urlPrefixRegexString)
     in
         Regex.replace All urlPrefix (\_ -> "")

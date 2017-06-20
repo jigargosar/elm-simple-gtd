@@ -260,15 +260,15 @@ parseDisplayText displayText =
                 , target "_blank"
                 , onWithOptions "mousedown" stopPropagation (D.succeed Model.NOOP)
                 ]
-                [ url |> String.ellipsis 20 |> text ]
+                [ url |> RegexHelper.stripUrlPrefix |> String.ellipsis 30 |> text ]
 
         linkStrings =
-            Regex.find Regex.All RegexHelper.linkUrl displayText
+            Regex.find Regex.All RegexHelper.url displayText
                 .|> .match
                 >> createLink
 
         nonLinkStrings =
-            Regex.split Regex.All RegexHelper.linkUrl displayText
+            Regex.split Regex.All RegexHelper.url displayText
                 .|> text
     in
         List.interweave nonLinkStrings linkStrings

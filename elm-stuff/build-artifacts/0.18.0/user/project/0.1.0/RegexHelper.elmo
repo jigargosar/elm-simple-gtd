@@ -7,10 +7,23 @@ var _user$project$RegexHelper$urlPrefixPattern = function (_p0) {
 			_ydschneider$regex_builder$RegexBuilder$noWhiteSpace,
 			_ydschneider$regex_builder$RegexBuilder_Extra$wordBoundary(_p0)));
 };
-var _user$project$RegexHelper$linkUrl = _ydschneider$regex_builder$RegexBuilder$toRegex(
-	function (_p1) {
+var _user$project$RegexHelper$stripUrlPrefix = function () {
+	var urlPrefix = A2(
+		_ydschneider$regex_builder$RegexBuilder_Extra$toRegex,
+		{alignBeginning: true, alignEnd: false},
+		_user$project$RegexHelper$urlPrefixPattern);
+	return A3(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$All,
+		urlPrefix,
+		function (_p1) {
+			return '';
+		});
+}();
+var _user$project$RegexHelper$url = _ydschneider$regex_builder$RegexBuilder$toRegex(
+	function (_p2) {
 		return A2(
 			_ydschneider$regex_builder$RegexBuilder$many,
 			_ydschneider$regex_builder$RegexBuilder$noWhiteSpace,
-			_user$project$RegexHelper$urlPrefixPattern(_p1));
+			_user$project$RegexHelper$urlPrefixPattern(_p2));
 	});

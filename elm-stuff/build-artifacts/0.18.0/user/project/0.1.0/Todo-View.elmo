@@ -571,7 +571,7 @@ var _user$project$Todo_View$doneIconButton = function (vm) {
 var _user$project$Todo_View$parseDisplayText = function (displayText) {
 	var nonLinkStrings = A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-		A3(_elm_lang$core$Regex$split, _elm_lang$core$Regex$All, _user$project$RegexHelper$linkUrl, displayText),
+		A3(_elm_lang$core$Regex$split, _elm_lang$core$Regex$All, _user$project$RegexHelper$url, displayText),
 		_elm_lang$html$Html$text);
 	var createLink = function (url) {
 		return A2(
@@ -596,13 +596,16 @@ var _user$project$Todo_View$parseDisplayText = function (displayText) {
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html$text(
-					A2(_elm_community$string_extra$String_Extra$ellipsis, 20, url)),
+					A2(
+						_elm_community$string_extra$String_Extra$ellipsis,
+						30,
+						_user$project$RegexHelper$stripUrlPrefix(url))),
 				_1: {ctor: '[]'}
 			});
 	};
 	var linkStrings = A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _user$project$RegexHelper$linkUrl, displayText),
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _user$project$RegexHelper$url, displayText),
 		function (_p8) {
 			return createLink(
 				function (_) {

@@ -1,5 +1,6 @@
 module RegexHelper exposing (..)
 
+import Regex exposing (HowMany(All))
 import RegexBuilder exposing (..)
 import RegexBuilder.Extra exposing (..)
 import Toolkit.Helpers exposing (..)
@@ -10,7 +11,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 
 
-linkUrl =
+url =
     urlPrefixPattern
         >> many noWhiteSpace
         |> RegexBuilder.toRegex
@@ -20,3 +21,15 @@ urlPrefixPattern =
     wordBoundary
         >> many (noWhiteSpace)
         >> exactly "://"
+
+
+stripUrlPrefix =
+    let
+        urlPrefix =
+            urlPrefixPattern
+                |> RegexBuilder.Extra.toRegex
+                    { alignBeginning = True
+                    , alignEnd = False
+                    }
+    in
+        Regex.replace All urlPrefix (\_ -> "")

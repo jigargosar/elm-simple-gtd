@@ -47,7 +47,7 @@ type ExclusiveMode
     | EditContext EditContextForm
     | EditProject EditProjectForm
       -- overlay
-    | TodoMoreMenu Todo.Menu.Model
+    | TaskMoreMenu Todo.Menu.Model
     | EditTodoReminder Todo.ReminderForm.Model
     | EditTodoContext Todo.GroupForm.Model
     | EditTodoProject Todo.GroupForm.Model
@@ -69,6 +69,10 @@ firstVisit =
 
 initActionList =
     ActionList ActionList.init
+
+
+taskMoreMenu =
+    Todo.Menu.init >> TaskMoreMenu
 
 
 editProject =

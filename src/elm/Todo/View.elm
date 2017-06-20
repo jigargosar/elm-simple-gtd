@@ -76,6 +76,7 @@ type alias TodoViewModel =
     , onFocusIn : Msg
     , tabindexAV : Attribute Msg
     , isSelected : Bool
+    , onMoreMenuClicked : Msg
     }
 
 
@@ -209,6 +210,7 @@ createTodoViewModel appVM canBeFocused todo =
         , onFocusIn = createEntityActionMsg Entity.OnFocusIn
         , tabindexAV = tabindexAV
         , isSelected = appVM.selectedEntityIdSet |> Set.member todoId
+        , onMoreMenuClicked = Todo.Msg.OnShowMoreMenu todoId |> onTodoMsg
         }
 
 
@@ -292,9 +294,9 @@ doneIconButton vm =
 moreIconButton : TodoViewModel -> Html Msg
 moreIconButton vm =
     Material.smallIconButton "more_vert"
-        [ onMouseDownStopPropagation (Model.NOOP)
-
-        --        , onClick (vm.toggleDoneMsg)
+        [ "todo-more-menu-button-" ++ vm.key |> id
+        , onMouseDownStopPropagation (Model.NOOP)
+        , onClick (vm.onMoreMenuClicked)
         , vm.tabindexAV
         ]
 

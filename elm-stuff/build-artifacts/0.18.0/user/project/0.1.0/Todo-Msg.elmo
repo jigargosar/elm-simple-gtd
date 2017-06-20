@@ -1,3 +1,6 @@
+var _user$project$Todo_Msg$OnShowMoreMenu = function (a) {
+	return {ctor: 'OnShowMoreMenu', _0: a};
+};
 var _user$project$Todo_Msg$UpdateReminderForm = F2(
 	function (a, b) {
 		return {ctor: 'UpdateReminderForm', _0: a, _1: b};

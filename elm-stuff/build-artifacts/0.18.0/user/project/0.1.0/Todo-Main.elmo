@@ -1,3 +1,7 @@
+var _user$project$Todo_Main$positionMoreMenuCmd = function (taskId) {
+	return _user$project$DomPorts$positionPopupMenu(
+		A2(_elm_lang$core$Basics_ops['++'], '#todo-more-menu-button-', taskId));
+};
 var _user$project$Todo_Main$gotoTodoWithId = F2(
 	function (todoId, model) {
 		var maybeTodoEntity = A2(
@@ -165,11 +169,23 @@ var _user$project$Todo_Main$update = F3(
 	function (andThenUpdate, now, todoMsg) {
 		var _p5 = todoMsg;
 		switch (_p5.ctor) {
+			case 'OnShowMoreMenu':
+				var _p7 = _p5._0;
+				return function (_p6) {
+					return A2(
+						_Fresheyeball$elm_return$Return$command,
+						_user$project$Todo_Main$positionMoreMenuCmd(_p7),
+						A2(
+							_Fresheyeball$elm_return$Return$map,
+							_user$project$Model$setEditMode(
+								_user$project$ExclusiveMode$taskMoreMenu(_p7)),
+							_p6));
+				};
 			case 'UpdateReminderForm':
 				return _Fresheyeball$elm_return$Return$map(
-					function (_p6) {
+					function (_p8) {
 						return _user$project$Model$setEditMode(
-							_user$project$ExclusiveMode$EditTodoReminder(_p6));
+							_user$project$ExclusiveMode$EditTodoReminder(_p8));
 					}(
 						A2(_user$project$Todo_ReminderForm$update, _p5._1, _p5._0)));
 			case 'ToggleRunning':
@@ -195,31 +211,31 @@ var _user$project$Todo_Main$update = F3(
 			case 'StopRunning':
 				return A2(_user$project$Todo_Main$mapSet, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none);
 			case 'GotoRunning':
-				return function (_p7) {
+				return function (_p9) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnSetDomFocusToFocusInEntity,
-						A2(_user$project$Todo_Main$map, _user$project$Todo_Main$gotoRunningTodo, _p7));
+						A2(_user$project$Todo_Main$map, _user$project$Todo_Main$gotoRunningTodo, _p9));
 				};
 			case 'UpdateTimeTracker':
 				return _user$project$Todo_Main$updateTimeTracker(now);
 			case 'Upsert':
-				var _p8 = _p5._0;
+				var _p10 = _p5._0;
 				return _user$project$Todo_Main$map(
 					function (model) {
-						var isTrackerTodoInactive = _user$project$Todo$isInActive(_p8) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p8, model.timeTracker);
+						var isTrackerTodoInactive = _user$project$Todo$isInActive(_p10) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p10, model.timeTracker);
 						return isTrackerTodoInactive ? A3(_user$project$Ext_Record$set, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
 					});
 			default:
-				var _p11 = _p5._0;
-				var todoId = _p11.data.id;
-				return function (_p9) {
+				var _p13 = _p5._0;
+				var todoId = _p13.data.id;
+				return function (_p11) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnCloseNotification(todoId),
 						function () {
-							var _p10 = _p11.action;
-							switch (_p10) {
+							var _p12 = _p13.action;
+							switch (_p12) {
 								case 'stop':
 									return andThenUpdate(_user$project$Model$onTodoStopRunning);
 								case 'continue':
@@ -227,7 +243,7 @@ var _user$project$Todo_Main$update = F3(
 								default:
 									return andThenUpdate(_user$project$Model$onGotoRunningTodo);
 							}
-						}()(_p9));
+						}()(_p11));
 				};
 		}
 	});

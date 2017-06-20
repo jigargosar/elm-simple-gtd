@@ -54,7 +54,7 @@ overlayViews appModel =
                 ExclusiveMode.LaunchBar form ->
                     LaunchBar.View.init form appModel
 
-                ExclusiveMode.TodoMoreMenu model ->
+                ExclusiveMode.TaskMoreMenu model ->
                     Todo.MoreMenu.view model
 
                 ExclusiveMode.EditTodoContext form ->

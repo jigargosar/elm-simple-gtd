@@ -628,11 +628,20 @@ var _user$project$Todo_View$moreIconButton = function (vm) {
 		'more_vert',
 		{
 			ctor: '::',
-			_0: _user$project$Todo_View$onMouseDownStopPropagation(_user$project$Model$NOOP),
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'todo-more-menu-button-', vm.key)),
 			_1: {
 				ctor: '::',
-				_0: vm.tabindexAV,
-				_1: {ctor: '[]'}
+				_0: _user$project$Todo_View$onMouseDownStopPropagation(_user$project$Model$NOOP),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.onMoreMenuClicked),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {ctor: '[]'}
+					}
+				}
 			}
 		});
 };
@@ -915,7 +924,9 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 			reminder: reminder,
 			onFocusIn: createEntityActionMsg(_user$project$Entity$OnFocusIn),
 			tabindexAV: tabindexAV,
-			isSelected: A2(_elm_lang$core$Set$member, todoId, appVM.selectedEntityIdSet)
+			isSelected: A2(_elm_lang$core$Set$member, todoId, appVM.selectedEntityIdSet),
+			onMoreMenuClicked: onTodoMsg(
+				_user$project$Todo_Msg$OnShowMoreMenu(todoId))
 		};
 	});
 var _user$project$Todo_View$TodoViewModel = function (a) {
@@ -934,7 +945,9 @@ var _user$project$Todo_View$TodoViewModel = function (a) {
 													return function (n) {
 														return function (o) {
 															return function (p) {
-																return {key: a, displayText: b, isDone: c, isDeleted: d, onKeyDownMsg: e, projectDisplayName: f, contextDisplayName: g, startEditingMsg: h, toggleDoneMsg: i, canBeFocused: j, showContextDropdownMsg: k, showProjectDropdownMsg: l, reminder: m, onFocusIn: n, tabindexAV: o, isSelected: p};
+																return function (q) {
+																	return {key: a, displayText: b, isDone: c, isDeleted: d, onKeyDownMsg: e, projectDisplayName: f, contextDisplayName: g, startEditingMsg: h, toggleDoneMsg: i, canBeFocused: j, showContextDropdownMsg: k, showProjectDropdownMsg: l, reminder: m, onFocusIn: n, tabindexAV: o, isSelected: p, onMoreMenuClicked: q};
+																};
 															};
 														};
 													};

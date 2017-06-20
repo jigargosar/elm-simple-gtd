@@ -741,7 +741,7 @@ saveCurrentForm model =
         ExclusiveMode.EditTodoProject form ->
             model |> Return.singleton
 
-        ExclusiveMode.TodoMoreMenu _ ->
+        ExclusiveMode.TaskMoreMenu _ ->
             model |> Return.singleton
 
         ExclusiveMode.NewTodo form ->

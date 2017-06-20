@@ -23,3 +23,4 @@ type Msg
     | UpdateTimeTracker
     | Upsert Todo.Model
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
+    | OnShowMoreMenu Todo.Id

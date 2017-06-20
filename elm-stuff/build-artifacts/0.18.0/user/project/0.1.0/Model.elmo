@@ -1174,7 +1174,7 @@ var _user$project$Model$saveCurrentForm = function (model) {
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'EditTodoProject':
 			return _Fresheyeball$elm_return$Return$singleton(model);
-		case 'TodoMoreMenu':
+		case 'TaskMoreMenu':
 			return _Fresheyeball$elm_return$Return$singleton(model);
 		case 'NewTodo':
 			var _p48 = _p40._0;

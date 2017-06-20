@@ -77,6 +77,10 @@ update :
     -> Model.ReturnF
 update andThenUpdate now todoMsg =
     case todoMsg of
+        OnShowMoreMenu taskId ->
+            Return.map (ExclusiveMode.taskMoreMenu taskId |> Model.setEditMode)
+                >> Return.command (positionMoreMenuCmd taskId)
+
         UpdateReminderForm form action ->
             Return.map
                 (Todo.ReminderForm.update action form
@@ -206,3 +210,7 @@ gotoTodoWithId todoId model =
                         |> Model.switchToContextsView
                 )
                 (Model.setFocusInEntity # model)
+
+
+positionMoreMenuCmd taskId =
+    DomPorts.positionPopupMenu ("#todo-more-menu-button-" ++ taskId)

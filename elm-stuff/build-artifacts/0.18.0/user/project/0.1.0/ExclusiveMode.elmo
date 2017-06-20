@@ -27,7 +27,7 @@ var _user$project$ExclusiveMode$EditTodoReminder = function (a) {
 var _user$project$ExclusiveMode$EditProject = function (a) {
 	return {ctor: 'EditProject', _0: a};
 };
-var _user$project$ExclusiveMode$editProjectMode = function (_p0) {
+var _user$project$ExclusiveMode$editProject = function (_p0) {
 	return _user$project$ExclusiveMode$EditProject(
 		_user$project$GroupDoc_EditForm$forProject(_p0));
 };
@@ -35,13 +35,30 @@ var _user$project$ExclusiveMode$editProjectSetName = A2(_user$project$Ext_Functi
 var _user$project$ExclusiveMode$EditContext = function (a) {
 	return {ctor: 'EditContext', _0: a};
 };
-var _user$project$ExclusiveMode$editContextMode = function (_p1) {
+var _user$project$ExclusiveMode$editContext = function (_p1) {
 	return _user$project$ExclusiveMode$EditContext(
 		_user$project$GroupDoc_EditForm$forContext(_p1));
 };
 var _user$project$ExclusiveMode$editContextSetName = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$GroupDoc_EditForm$setName, _user$project$ExclusiveMode$EditContext);
-var _user$project$ExclusiveMode$EditTodo = function (a) {
-	return {ctor: 'EditTodo', _0: a};
+var _user$project$ExclusiveMode$EditTask = function (a) {
+	return {ctor: 'EditTask', _0: a};
+};
+var _user$project$ExclusiveMode$editTask = function (_p2) {
+	return _user$project$ExclusiveMode$EditTask(
+		_user$project$Todo_Form$create(_p2));
+};
+var _user$project$ExclusiveMode$createEntityEditForm = function (entity) {
+	var _p3 = entity;
+	if (_p3.ctor === 'Group') {
+		var _p4 = _p3._0;
+		if (_p4.ctor === 'Context') {
+			return _user$project$ExclusiveMode$editContext(_p4._0);
+		} else {
+			return _user$project$ExclusiveMode$editProject(_p4._0);
+		}
+	} else {
+		return _user$project$ExclusiveMode$editTask(_p3._0);
+	}
 };
 var _user$project$ExclusiveMode$NewTodo = function (a) {
 	return {ctor: 'NewTodo', _0: a};

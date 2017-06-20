@@ -58,7 +58,7 @@ type alias GroupDoc =
 type alias Config =
     { groupByFn : Todo.Model -> Document.Id
     , namePrefix : String
-    , entityWrapper : GroupDoc -> Entity
+    , toEntity : GroupDoc -> Entity
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
     , nullIcon : IconVM
@@ -74,7 +74,7 @@ create config todoList groupDoc =
             Document.getId groupDoc
 
         onEntityAction =
-            Model.OnEntityAction (config.entityWrapper groupDoc)
+            Model.OnEntityAction (config.toEntity groupDoc)
 
         isNull =
             config.isNull groupDoc
@@ -148,7 +148,7 @@ create config todoList groupDoc =
         , icon = icon
         , onFocusIn = onEntityAction Entity.OnFocusIn
         , onKeyDownMsg = onKeyDownMsg
-        , tabindexAV = config.getTabIndexAVForEntity (config.entityWrapper groupDoc)
+        , tabindexAV = config.getTabIndexAVForEntity (config.toEntity groupDoc)
         , todoList = todoList
         , getTabIndexAVForEntity = config.getTabIndexAVForEntity
         }
@@ -161,7 +161,7 @@ contextGroup getTabIndexAVForEntity todoList context =
         config =
             { groupByFn = Todo.getContextId
             , namePrefix = "@"
-            , entityWrapper = Entity.Context
+            , toEntity = Entity.fromContext
             , nullEntity = Context.null
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
@@ -180,7 +180,7 @@ projectGroup getTabIndexAVForEntity todoList project =
         config =
             { groupByFn = Todo.getProjectId
             , namePrefix = "#"
-            , entityWrapper = Entity.Project
+            , toEntity = Entity.fromProject
             , nullEntity = Project.null
             , isNull = Project.isNull
             , nullIcon = { name = "inbox", color = inboxColor }

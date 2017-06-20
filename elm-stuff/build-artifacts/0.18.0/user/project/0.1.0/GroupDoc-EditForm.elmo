@@ -14,8 +14,8 @@ var _user$project$GroupDoc_EditForm$init = F3(
 			nameLabel: nameLabel
 		};
 	});
-var _user$project$GroupDoc_EditForm$forContext = A2(_user$project$GroupDoc_EditForm$init, _user$project$Entity$Context, 'Context Name');
-var _user$project$GroupDoc_EditForm$forProject = A2(_user$project$GroupDoc_EditForm$init, _user$project$Entity$Project, 'Project Name');
+var _user$project$GroupDoc_EditForm$forContext = A2(_user$project$GroupDoc_EditForm$init, _user$project$Entity$fromContext, 'Context Name');
+var _user$project$GroupDoc_EditForm$forProject = A2(_user$project$GroupDoc_EditForm$init, _user$project$Entity$fromProject, 'Project Name');
 var _user$project$GroupDoc_EditForm$Model = F5(
 	function (a, b, c, d, e) {
 		return {id: a, name: b, entity: c, isArchived: d, nameLabel: e};

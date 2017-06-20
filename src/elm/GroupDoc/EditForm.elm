@@ -40,8 +40,8 @@ setName name model =
 
 
 forContext =
-    init Entity.Context "Context Name"
+    init Entity.fromContext "Context Name"
 
 
 forProject =
-    init Entity.Project "Project Name"
+    init Entity.fromProject "Project Name"

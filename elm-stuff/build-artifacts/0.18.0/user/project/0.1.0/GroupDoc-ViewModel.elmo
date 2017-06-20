@@ -14,7 +14,7 @@ var _user$project$GroupDoc_ViewModel$create = F3(
 			backgroundColor: icon.color
 		};
 		var onEntityAction = _user$project$Model$OnEntityAction(
-			config.entityWrapper(groupDoc));
+			config.toEntity(groupDoc));
 		var toggleDeleteMsg = isNull ? _user$project$Model$NOOP : onEntityAction(_user$project$Entity$ToggleDeleted);
 		var startEditingMsg = isNull ? _user$project$Model$NOOP : onEntityAction(_user$project$Entity$StartEditing);
 		var onKeyDownMsg = function (_p0) {
@@ -61,7 +61,7 @@ var _user$project$GroupDoc_ViewModel$create = F3(
 			onFocusIn: onEntityAction(_user$project$Entity$OnFocusIn),
 			onKeyDownMsg: onKeyDownMsg,
 			tabindexAV: config.getTabIndexAVForEntity(
-				config.entityWrapper(groupDoc)),
+				config.toEntity(groupDoc)),
 			todoList: todoList,
 			getTabIndexAVForEntity: config.getTabIndexAVForEntity
 		};
@@ -71,7 +71,7 @@ var _user$project$GroupDoc_ViewModel$contextGroup = F3(
 		var config = {
 			groupByFn: _user$project$Todo$getContextId,
 			namePrefix: '@',
-			entityWrapper: _user$project$Entity$Context,
+			toEntity: _user$project$Entity$fromContext,
 			nullEntity: _user$project$Context$null,
 			isNull: _user$project$Context$isNull,
 			nullIcon: {name: 'inbox', color: _user$project$GroupDoc_ViewModel$inboxColor},
@@ -86,7 +86,7 @@ var _user$project$GroupDoc_ViewModel$projectGroup = F3(
 		var config = {
 			groupByFn: _user$project$Todo$getProjectId,
 			namePrefix: '#',
-			entityWrapper: _user$project$Entity$Project,
+			toEntity: _user$project$Entity$fromProject,
 			nullEntity: _user$project$Project$null,
 			isNull: _user$project$Project$isNull,
 			nullIcon: {name: 'inbox', color: _user$project$GroupDoc_ViewModel$inboxColor},
@@ -139,5 +139,5 @@ var _user$project$GroupDoc_ViewModel$ViewModel = function (a) {
 };
 var _user$project$GroupDoc_ViewModel$Config = F9(
 	function (a, b, c, d, e, f, g, h, i) {
-		return {groupByFn: a, namePrefix: b, entityWrapper: c, nullEntity: d, isNull: e, nullIcon: f, defaultIconName: g, getViewType: h, getTabIndexAVForEntity: i};
+		return {groupByFn: a, namePrefix: b, toEntity: c, nullEntity: d, isNull: e, nullIcon: f, defaultIconName: g, getViewType: h, getTabIndexAVForEntity: i};
 	});

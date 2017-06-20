@@ -73,7 +73,7 @@ type alias Config =
     , todoList : List Todo.Model
     , namePrefix : String
     , filter : Model.Model -> List GroupDoc
-    , entityWrapper : GroupDoc -> Entity
+    , toEntity : GroupDoc -> Entity
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
     , nullIcon : IconVM
@@ -104,7 +104,7 @@ create getTodoListByEntityId config entity =
             Document.getId entity
 
         createEntityActionMsg =
-            Model.OnEntityAction (config.entityWrapper entity)
+            Model.OnEntityAction (config.toEntity entity)
 
         count =
             getTodoListByEntityId id |> List.length
@@ -159,7 +159,7 @@ contexts model =
             , todoList = Model.getActiveTodoListHavingActiveProjects model
             , namePrefix = "@"
             , filter = activeFilter
-            , entityWrapper = Entity.Context
+            , toEntity = Entity.fromContext
             , nullEntity = Context.null
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
@@ -207,7 +207,7 @@ projects model =
             , todoList = Model.getActiveTodoListHavingActiveContexts model
             , namePrefix = "#"
             , filter = activeFilter
-            , entityWrapper = Entity.Project
+            , toEntity = Entity.fromProject
             , nullEntity = Project.null
             , isNull = Project.isNull
             , nullIcon = { name = "apps", color = nullProjectColor }

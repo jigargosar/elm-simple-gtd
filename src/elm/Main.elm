@@ -272,7 +272,7 @@ update msg =
                 UpdateTodoForm form action ->
                     Return.map
                         (Todo.Form.set action form
-                            |> ExclusiveMode.EditTodo
+                            |> ExclusiveMode.EditTask
                             >> Model.setEditMode
                         )
 

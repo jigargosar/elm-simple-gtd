@@ -42,7 +42,7 @@ type alias SyncForm =
 
 type ExclusiveMode
     = NewTodo Todo.NewForm.Model
-    | EditTodo Todo.Form.Model
+    | EditTask Todo.Form.Model
     | EditContext EditContextForm
     | EditProject EditProjectForm
       -- overlay
@@ -69,7 +69,7 @@ initActionList =
     ActionList ActionList.init
 
 
-editProjectMode =
+editProject =
     GroupDoc.EditForm.forProject >> EditProject
 
 
@@ -77,9 +77,28 @@ editProjectSetName =
     GroupDoc.EditForm.setName >>> EditProject
 
 
-editContextMode =
+editContext =
     GroupDoc.EditForm.forContext >> EditContext
 
 
 editContextSetName =
     GroupDoc.EditForm.setName >>> EditContext
+
+
+editTask =
+    Todo.Form.create >> EditTask
+
+
+createEntityEditForm : Entity.Entity -> ExclusiveMode
+createEntityEditForm entity =
+    case entity of
+        Entity.Group g ->
+            case g of
+                Entity.Context model ->
+                    editContext model
+
+                Entity.Project model ->
+                    editProject model
+
+        Entity.Task model ->
+            editTask model

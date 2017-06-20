@@ -14,7 +14,7 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 			backgroundColor: icon.color
 		};
 		var createEntityActionMsg = _user$project$Model$OnEntityAction(
-			config.entityWrapper(entity));
+			config.toEntity(entity));
 		var startEditingMsg = createEntityActionMsg(_user$project$Entity$StartEditing);
 		var id = _user$project$Document$getId(entity);
 		var count = _elm_lang$core$List$length(
@@ -56,7 +56,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		todoList: _user$project$Model$getActiveTodoListHavingActiveProjects(model),
 		namePrefix: '@',
 		filter: activeFilter,
-		entityWrapper: _user$project$Entity$Context,
+		toEntity: _user$project$Entity$fromContext,
 		nullEntity: _user$project$Context$null,
 		isNull: _user$project$Context$isNull,
 		nullIcon: {name: 'inbox', color: _user$project$OldGroupEntity_ViewModel$inboxColor},
@@ -93,7 +93,7 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		todoList: _user$project$Model$getActiveTodoListHavingActiveContexts(model),
 		namePrefix: '#',
 		filter: activeFilter,
-		entityWrapper: _user$project$Entity$Project,
+		toEntity: _user$project$Entity$fromProject,
 		nullEntity: _user$project$Project$null,
 		isNull: _user$project$Project$isNull,
 		nullIcon: {name: 'apps', color: _user$project$OldGroupEntity_ViewModel$nullProjectColor},
@@ -172,7 +172,7 @@ var _user$project$OldGroupEntity_ViewModel$Config = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {groupByFn: a, todoList: b, namePrefix: c, filter: d, entityWrapper: e, nullEntity: f, isNull: g, nullIcon: h, defaultIconName: i, getViewType: j};
+										return {groupByFn: a, todoList: b, namePrefix: c, filter: d, toEntity: e, nullEntity: f, isNull: g, nullIcon: h, defaultIconName: i, getViewType: j};
 									};
 								};
 							};

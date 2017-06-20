@@ -74,7 +74,7 @@ overlayViews appModel =
                 ExclusiveMode.EditContext form ->
                     GroupDoc.EditView.init form
 
-                ExclusiveMode.EditTodo form ->
+                ExclusiveMode.EditTask form ->
                     Todo.View.edit form appModel
 
                 ExclusiveMode.NewTodo form ->

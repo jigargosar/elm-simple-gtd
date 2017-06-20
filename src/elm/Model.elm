@@ -379,7 +379,7 @@ type alias ReturnF =
 
 
 inboxEntity =
-    Entity.Context Context.null
+    Entity.fromContext Context.null
 
 
 getMaybeUserProfile =
@@ -632,7 +632,7 @@ createAndEditNewProject model =
         |> (\( project, model ) ->
                 model
                     |> switchToProjectView project
-                    |> startEditingEntity (Entity.Project project)
+                    |> startEditingEntity (Entity.fromProject project)
            )
 
 
@@ -642,7 +642,7 @@ createAndEditNewContext model =
         |> (\( context, model ) ->
                 model
                     |> switchToContextView context
-                    |> startEditingEntity (Entity.Context context)
+                    |> startEditingEntity (Entity.fromContext context)
            )
 
 
@@ -690,7 +690,7 @@ startEditingTodoContext todo =
 
 startEditingEntity : Entity -> ModelF
 startEditingEntity entity model =
-    setEditMode (createEntityEditForm entity model) model
+    setEditMode (ExclusiveMode.createEntityEditForm entity) model
 
 
 switchToEntityListViewFromEntity entity model =
@@ -727,7 +727,7 @@ saveCurrentForm model =
                 |> updateProject form.id
                     (Project.setName form.name)
 
-        ExclusiveMode.EditTodo form ->
+        ExclusiveMode.EditTask form ->
             model
                 |> updateTodo (Todo.SetText form.todoText) form.id
 
@@ -753,11 +753,13 @@ saveCurrentForm model =
                                 Entity.Task fromTodo ->
                                     (Todo.CopyProjectAndContextId fromTodo)
 
-                                Entity.Context context ->
-                                    (Todo.SetContext context)
+                                Entity.Group g ->
+                                    case g of
+                                        Entity.Context context ->
+                                            (Todo.SetContext context)
 
-                                Entity.Project project ->
-                                    (Todo.SetProject project)
+                                        Entity.Project project ->
+                                            (Todo.SetProject project)
                             )
                             todoId
                             >> Tuple.mapFirst (setFocusInEntityFromTodoId todoId)
@@ -795,11 +797,13 @@ toggleDeleteEntity entity model =
     in
         model
             |> case entity of
-                Entity.Context context ->
-                    updateContext entityId Document.toggleDeleted
+                Entity.Group g ->
+                    case g of
+                        Entity.Context context ->
+                            updateContext entityId Document.toggleDeleted
 
-                Entity.Project project ->
-                    updateProject entityId Document.toggleDeleted
+                        Entity.Project project ->
+                            updateProject entityId Document.toggleDeleted
 
                 Entity.Task todo ->
                     updateTodo (Todo.ToggleDeleted) entityId
@@ -813,11 +817,13 @@ toggleArchiveEntity entity model =
     in
         model
             |> case entity of
-                Entity.Context context ->
-                    updateContext entityId GroupDoc.toggleArchived
+                Entity.Group g ->
+                    case g of
+                        Entity.Context context ->
+                            updateContext entityId GroupDoc.toggleArchived
 
-                Entity.Project project ->
-                    updateProject entityId GroupDoc.toggleArchived
+                        Entity.Project project ->
+                            updateProject entityId GroupDoc.toggleArchived
 
                 Entity.Task todo ->
                     updateTodo (Todo.ToggleDone) entityId
@@ -848,19 +854,6 @@ getRemoteSyncForm model =
 createRemoteSyncForm : Model -> ExclusiveMode.SyncForm
 createRemoteSyncForm model =
     { uri = model.pouchDBRemoteSyncURI }
-
-
-createEntityEditForm : Entity -> Model -> ExclusiveMode
-createEntityEditForm entity model =
-    case entity of
-        Entity.Context context ->
-            ExclusiveMode.editContextMode context
-
-        Entity.Project project ->
-            ExclusiveMode.editProjectMode project
-
-        Entity.Task todo ->
-            Todo.Form.create todo |> ExclusiveMode.EditTodo
 
 
 deactivateEditingMode =
@@ -936,14 +929,16 @@ setTodoStoreFromTuple tuple model =
 upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
-            maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity) >>? Tuple.mapFirst Entity.Task
+            maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity)
+                >>? Tuple.mapFirst Entity.fromTask
 
         "project-db" ->
-            maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity) >>? Tuple.mapFirst Entity.Project
+            maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity)
+                >>? Tuple.mapFirst Entity.fromProject
 
         "context-db" ->
             maybeOverT2 contextStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst Entity.Context
+                >>? Tuple.mapFirst Entity.fromContext
 
         _ ->
             (\_ -> Nothing)

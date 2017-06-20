@@ -521,7 +521,7 @@ var _user$project$Main$update = function (msg) {
 						return _Fresheyeball$elm_return$Return$map(
 							function (_p41) {
 								return _user$project$Model$setEditMode(
-									_user$project$ExclusiveMode$EditTodo(_p41));
+									_user$project$ExclusiveMode$EditTask(_p41));
 							}(
 								A2(_user$project$Todo_Form$set, _p14._1, _p14._0)));
 					case 'OnEditTodoProjectMenuStateChanged':

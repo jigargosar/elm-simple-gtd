@@ -1,0 +1,225 @@
+var _gampleman$elm_visualization$Visualization_Scale_Time$tickFormat = F3(
+	function (_p1, _p0, date) {
+		var time = _elm_lang$core$Date$toTime(date);
+		var significant = function (interval) {
+			return _elm_lang$core$Native_Utils.cmp(
+				_elm_lang$core$Date$toTime(
+					A2(_justinmimbs$elm_date_extra$Date_Extra$floor, interval, date)),
+				time) < 0;
+		};
+		return significant(_justinmimbs$elm_date_extra$Date_Extra$Second) ? A2(_justinmimbs$elm_date_extra$Date_Extra$toFormattedString, '.SSS', date) : (significant(_justinmimbs$elm_date_extra$Date_Extra$Minute) ? A2(_justinmimbs$elm_date_extra$Date_Extra$toFormattedString, ':ss', date) : (significant(_justinmimbs$elm_date_extra$Date_Extra$Hour) ? A2(_justinmimbs$elm_date_extra$Date_Extra$toFormattedString, 'hh:mm', date) : (significant(_justinmimbs$elm_date_extra$Date_Extra$Day) ? A2(_justinmimbs$elm_date_extra$Date_Extra$toFormattedString, 'hh a', date) : (significant(_justinmimbs$elm_date_extra$Date_Extra$Month) ? A2(_justinmimbs$elm_date_extra$Date_Extra$toFormattedString, 'dd MMM', date) : (significant(_justinmimbs$elm_date_extra$Date_Extra$Year) ? A2(_justinmimbs$elm_date_extra$Date_Extra$toFormattedString, 'MMMM', date) : A2(_justinmimbs$elm_date_extra$Date_Extra$toFormattedString, 'yyyy', date))))));
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Time$timeLength = function (interval) {
+	var _p2 = interval;
+	switch (_p2.ctor) {
+		case 'Millisecond':
+			return 1;
+		case 'Second':
+			return 1000;
+		case 'Minute':
+			return 60 * 1000;
+		case 'Hour':
+			return (60 * 60) * 1000;
+		case 'Day':
+			return ((24 * 60) * 60) * 1000;
+		case 'Month':
+			return (((30 * 24) * 60) * 60) * 1000;
+		case 'Year':
+			return ((((365 * 30) * 24) * 60) * 60) * 1000;
+		case 'Quarter':
+			return ((((4 * 30) * 24) * 60) * 60) * 1000;
+		case 'Week':
+			return (((7 * 24) * 60) * 60) * 1000;
+		default:
+			return 0;
+	}
+};
+var _gampleman$elm_visualization$Visualization_Scale_Time$findInterval = F2(
+	function (target, intervals) {
+		findInterval:
+		while (true) {
+			var _p3 = intervals;
+			if (_p3.ctor === '[]') {
+				return {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Year, _1: 1};
+			} else {
+				if (((_p3._0.ctor === '_Tuple2') && (_p3._1.ctor === '::')) && (_p3._1._0.ctor === '_Tuple2')) {
+					var _p7 = _p3._1._0._1;
+					var _p6 = _p3._0._1;
+					var _p5 = _p3._1._0._0;
+					var _p4 = _p3._0._0;
+					var ratio_ = (_p7 * _gampleman$elm_visualization$Visualization_Scale_Time$timeLength(_p5)) / target;
+					var ratio = target / (_p6 * _gampleman$elm_visualization$Visualization_Scale_Time$timeLength(_p4));
+					if (_elm_lang$core$Native_Utils.cmp(ratio, ratio_) < 0) {
+						return {ctor: '_Tuple2', _0: _p4, _1: _p6};
+					} else {
+						var _v2 = target,
+							_v3 = {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: _p5, _1: _p7},
+							_1: _p3._1._1
+						};
+						target = _v2;
+						intervals = _v3;
+						continue findInterval;
+					}
+				} else {
+					return _p3._0;
+				}
+			}
+		}
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Time$tickIntervals = {
+	ctor: '::',
+	_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Second, _1: 1},
+	_1: {
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Second, _1: 5},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Second, _1: 15},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Second, _1: 30},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Minute, _1: 1},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Minute, _1: 5},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Minute, _1: 15},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Minute, _1: 30},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Hour, _1: 1},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Hour, _1: 3},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Hour, _1: 6},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Hour, _1: 12},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Day, _1: 1},
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Day, _1: 2},
+														_1: {
+															ctor: '::',
+															_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Week, _1: 1},
+															_1: {
+																ctor: '::',
+																_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Month, _1: 1},
+																_1: {
+																	ctor: '::',
+																	_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Month, _1: 3},
+																	_1: {
+																		ctor: '::',
+																		_0: {ctor: '_Tuple2', _0: _justinmimbs$elm_date_extra$Date_Extra$Year, _1: 1},
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _gampleman$elm_visualization$Visualization_Scale_Time$interpolate = F2(
+	function (a, b) {
+		return A2(_gampleman$elm_visualization$Visualization_Interpolate$interpolateFloat, a, b);
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Time$deinterpolate = _gampleman$elm_visualization$Visualization_Scale_Linear$deinterpolate;
+var _gampleman$elm_visualization$Visualization_Scale_Time$rangeExtent = F2(
+	function (d, r) {
+		return r;
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Time$toTime = function (_p8) {
+	var _p9 = _p8;
+	return {
+		ctor: '_Tuple2',
+		_0: _elm_lang$core$Date$toTime(_p9._0),
+		_1: _elm_lang$core$Date$toTime(_p9._1)
+	};
+};
+var _gampleman$elm_visualization$Visualization_Scale_Time$convert = F2(
+	function (domain, range) {
+		return A4(
+			_gampleman$elm_visualization$Visualization_Scale_Internal$bimap,
+			_gampleman$elm_visualization$Visualization_Scale_Time$toTime(domain),
+			range,
+			F3(
+				function (d, r, v) {
+					return A3(
+						_gampleman$elm_visualization$Visualization_Scale_Time$deinterpolate,
+						d,
+						r,
+						_elm_lang$core$Date$toTime(v));
+				}),
+			_gampleman$elm_visualization$Visualization_Interpolate$interpolateFloat);
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Time$invert = F2(
+	function (domain, range) {
+		return A4(
+			_gampleman$elm_visualization$Visualization_Scale_Internal$bimap,
+			range,
+			_gampleman$elm_visualization$Visualization_Scale_Time$toTime(domain),
+			_gampleman$elm_visualization$Visualization_Scale_Time$deinterpolate,
+			F3(
+				function (d, r, v) {
+					return _elm_lang$core$Date$fromTime(
+						A3(_gampleman$elm_visualization$Visualization_Scale_Time$interpolate, d, r, v));
+				}));
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Time$ticks = F2(
+	function (domain, count) {
+		var _p10 = _gampleman$elm_visualization$Visualization_Scale_Time$toTime(domain);
+		var start = _p10._0;
+		var end = _p10._1;
+		var target = _elm_lang$core$Basics$abs(start - end) / _elm_lang$core$Basics$toFloat(count);
+		var _p11 = A2(_gampleman$elm_visualization$Visualization_Scale_Time$findInterval, target, _gampleman$elm_visualization$Visualization_Scale_Time$tickIntervals);
+		var interval = _p11._0;
+		var step = _p11._1;
+		return A4(
+			_justinmimbs$elm_date_extra$Date_Extra$range,
+			interval,
+			_elm_lang$core$Basics$round(step),
+			_elm_lang$core$Date$fromTime(start),
+			_elm_lang$core$Date$fromTime(end));
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Time$nice = F2(
+	function (domain, count) {
+		var _p12 = _gampleman$elm_visualization$Visualization_Scale_Time$toTime(domain);
+		var start = _p12._0;
+		var end = _p12._1;
+		var target = _elm_lang$core$Basics$abs(start - end) / _elm_lang$core$Basics$toFloat(count);
+		var _p13 = A2(_gampleman$elm_visualization$Visualization_Scale_Time$findInterval, target, _gampleman$elm_visualization$Visualization_Scale_Time$tickIntervals);
+		var interval = _p13._0;
+		return {
+			ctor: '_Tuple2',
+			_0: A2(
+				_justinmimbs$elm_date_extra$Date_Extra$floor,
+				interval,
+				_elm_lang$core$Date$fromTime(start)),
+			_1: A2(
+				_justinmimbs$elm_date_extra$Date_Extra$ceiling,
+				interval,
+				_elm_lang$core$Date$fromTime(end))
+		};
+	});

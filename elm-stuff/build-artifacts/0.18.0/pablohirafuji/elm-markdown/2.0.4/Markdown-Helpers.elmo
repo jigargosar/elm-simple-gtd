@@ -1,0 +1,137 @@
+var _pablohirafuji$elm_markdown$Markdown_Helpers$isEven = function ($int) {
+	return _elm_lang$core$Native_Utils.eq(
+		A2(_elm_lang$core$Basics_ops['%'], $int, 2),
+		0);
+};
+var _pablohirafuji$elm_markdown$Markdown_Helpers$ifError = F2(
+	function ($function, result) {
+		var _p0 = result;
+		if (_p0.ctor === 'Ok') {
+			return result;
+		} else {
+			return $function(_p0._0);
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Helpers$whiteSpaceChars = ' \\t\\f\\v\\r\\n';
+var _pablohirafuji$elm_markdown$Markdown_Helpers$cleanWhitespaces = function (_p1) {
+	return A4(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$All,
+		_elm_lang$core$Regex$regex(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'[',
+				A2(_elm_lang$core$Basics_ops['++'], _pablohirafuji$elm_markdown$Markdown_Helpers$whiteSpaceChars, ']+'))),
+		function (_p2) {
+			return ' ';
+		},
+		_elm_lang$core$String$trim(_p1));
+};
+var _pablohirafuji$elm_markdown$Markdown_Helpers$returnFirstJust = function (maybes) {
+	var process = F2(
+		function (a, maybeFound) {
+			var _p3 = maybeFound;
+			if (_p3.ctor === 'Just') {
+				return _elm_lang$core$Maybe$Just(_p3._0);
+			} else {
+				return a;
+			}
+		});
+	return A3(_elm_lang$core$List$foldl, process, _elm_lang$core$Maybe$Nothing, maybes);
+};
+var _pablohirafuji$elm_markdown$Markdown_Helpers$escapableRegex = _elm_lang$core$Regex$regex('(\\\\+)([!\"#$%&\\\'()*+,./:;<=>?@[\\\\\\]^_`{|}~-])');
+var _pablohirafuji$elm_markdown$Markdown_Helpers$replaceEscapable = A3(
+	_elm_lang$core$Regex$replace,
+	_elm_lang$core$Regex$All,
+	_pablohirafuji$elm_markdown$Markdown_Helpers$escapableRegex,
+	function (regexMatch) {
+		var _p4 = regexMatch.submatches;
+		if ((((_p4.ctor === '::') && (_p4._0.ctor === 'Just')) && (_p4._1.ctor === '::')) && (_p4._1._0.ctor === 'Just')) {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				A2(
+					_elm_lang$core$String$repeat,
+					(_elm_lang$core$String$length(_p4._0._0) / 2) | 0,
+					'\\'),
+				_p4._1._0._0);
+		} else {
+			return regexMatch.match;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Helpers$formatStr = function (str) {
+	return _pablohirafuji$elm_markdown$Markdown_Entity$replaceHexadecimals(
+		_pablohirafuji$elm_markdown$Markdown_Entity$replaceDecimals(
+			_pablohirafuji$elm_markdown$Markdown_Entity$replaceEntities(
+				_pablohirafuji$elm_markdown$Markdown_Helpers$replaceEscapable(str))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Helpers$indentLine = function (indentLength) {
+	return function (_p5) {
+		return A4(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$AtMost(1),
+			_elm_lang$core$Regex$regex(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'^ {0,',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(indentLength),
+						'}'))),
+			function (_p6) {
+				return '';
+			},
+			A4(
+				_elm_lang$core$Regex$replace,
+				_elm_lang$core$Regex$All,
+				_elm_lang$core$Regex$regex('\\t'),
+				function (_p7) {
+					return '    ';
+				},
+				_p5));
+	};
+};
+var _pablohirafuji$elm_markdown$Markdown_Helpers$initSpacesRegex = _elm_lang$core$Regex$regex('^ +');
+var _pablohirafuji$elm_markdown$Markdown_Helpers$indentLength = function (_p8) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		0,
+		A2(
+			_elm_lang$core$Maybe$map,
+			function (_p9) {
+				return _elm_lang$core$String$length(
+					function (_) {
+						return _.match;
+					}(_p9));
+			},
+			_elm_lang$core$List$head(
+				A3(
+					_elm_lang$core$Regex$find,
+					_elm_lang$core$Regex$AtMost(1),
+					_pablohirafuji$elm_markdown$Markdown_Helpers$initSpacesRegex,
+					A4(
+						_elm_lang$core$Regex$replace,
+						_elm_lang$core$Regex$All,
+						_elm_lang$core$Regex$regex('\\t'),
+						function (_p10) {
+							return '    ';
+						},
+						_p8)))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Helpers$prepareRefLabel = function (_p11) {
+	return _elm_lang$core$String$toLower(
+		_pablohirafuji$elm_markdown$Markdown_Helpers$cleanWhitespaces(_p11));
+};
+var _pablohirafuji$elm_markdown$Markdown_Helpers$titleRegex = A2(
+	_elm_lang$core$Basics_ops['++'],
+	'(?:[',
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		_pablohirafuji$elm_markdown$Markdown_Helpers$whiteSpaceChars,
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			']+',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'(?:\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\'|',
+				A2(_elm_lang$core$Basics_ops['++'], '\"([^\"\\\\]*(?:\\\\.[^\"\\\\]*)*)\"|', '\\(([^\\)\\\\]*(?:\\\\.[^\\)\\\\]*)*)\\)))?')))));
+var _pablohirafuji$elm_markdown$Markdown_Helpers$insideSquareBracketRegex = '[^\\[\\]\\\\]*(?:\\\\.[^\\[\\]\\\\]*)*';

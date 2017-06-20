@@ -17,6 +17,7 @@ import Json.Decode
 import Json.Encode
 import Keyboard.Extra as Key exposing (Key)
 import List.Extra as List
+import Markdown
 import Material
 import Maybe.Extra as Maybe
 import Menu
@@ -28,6 +29,7 @@ import Project
 import Regex
 import RegexBuilder
 import RegexBuilder.Extra as RegexBuilder
+import RegexHelper
 import Set
 import String.Extra as String
 import Svg.Events exposing (onFocusIn, onFocusOut)
@@ -47,11 +49,14 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
-import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
+import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp, stopPropagation)
 import Polymer.Paper as Paper
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
 import ViewModel
 import WebComponents exposing (..)
+import Json.Decode as D exposing (Decoder)
+import Json.Decode.Pipeline as D
+import Json.Encode as E
 
 
 type alias TodoViewModel =
@@ -233,7 +238,8 @@ item vm =
                 [ onMouseDown vm.startEditingMsg
                 , class "display-text"
                 ]
-                [ text vm.displayText ]
+              <|
+                parseDisplayText vm.displayText
             ]
         , div
             [ class "layout horizontal end-justified"
@@ -243,6 +249,29 @@ item vm =
             , div [ style [ "padding" => "0 8px" ] ] [ projectProjectButton vm ]
             ]
         ]
+
+
+parseDisplayText displayText =
+    --Markdown.toHtml Nothing displayText
+    let
+        createLink url =
+            a
+                [ href url
+                , target "_blank"
+                , onWithOptions "mousedown" stopPropagation (D.succeed Model.NOOP)
+                ]
+                [ url |> String.ellipsis 20 |> text ]
+
+        linkStrings =
+            Regex.find Regex.All RegexHelper.linkUrl displayText
+                .|> .match
+                >> createLink
+
+        nonLinkStrings =
+            Regex.split Regex.All RegexHelper.linkUrl displayText
+                .|> text
+    in
+        List.interweave nonLinkStrings linkStrings
 
 
 doneIconButton : TodoViewModel -> Html Msg

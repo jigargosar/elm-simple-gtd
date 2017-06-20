@@ -568,6 +568,49 @@ var _user$project$Todo_View$doneIconButton = function (vm) {
 			}
 		});
 };
+var _user$project$Todo_View$parseDisplayText = function (displayText) {
+	var nonLinkStrings = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+		A3(_elm_lang$core$Regex$split, _elm_lang$core$Regex$All, _user$project$RegexHelper$linkUrl, displayText),
+		_elm_lang$html$Html$text);
+	var createLink = function (url) {
+		return A2(
+			_elm_lang$html$Html$a,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$href(url),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$target('_blank'),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_elm_lang$html$Html_Events$onWithOptions,
+							'mousedown',
+							_user$project$Ext_Keyboard$stopPropagation,
+							_elm_lang$core$Json_Decode$succeed(_user$project$Model$NOOP)),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					A2(_elm_community$string_extra$String_Extra$ellipsis, 20, url)),
+				_1: {ctor: '[]'}
+			});
+	};
+	var linkStrings = A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _user$project$RegexHelper$linkUrl, displayText),
+		function (_p8) {
+			return createLink(
+				function (_) {
+					return _.match;
+				}(_p8));
+		});
+	return A2(_elm_community$list_extra$List_Extra$interweave, nonLinkStrings, linkStrings);
+};
 var _user$project$Todo_View$item = function (vm) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -630,11 +673,7 @@ var _user$project$Todo_View$item = function (vm) {
 									_1: {ctor: '[]'}
 								}
 							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text(vm.displayText),
-								_1: {ctor: '[]'}
-							}),
+							_user$project$Todo_View$parseDisplayText(vm.displayText)),
 						_1: {ctor: '[]'}
 					}
 				}),
@@ -722,9 +761,9 @@ var _user$project$Todo_View$keyedItem = function (vm) {
 var _user$project$Todo_View$getDisplayText = function (todo) {
 	var trimAndReplaceEmptyWithDefault = A2(
 		_user$project$Ext_Function_Infix_ops['>>?='],
-		function (_p8) {
+		function (_p9) {
 			return _elm_community$string_extra$String_Extra$nonEmpty(
-				_elm_lang$core$String$trim(_p8));
+				_elm_lang$core$String$trim(_p9));
 		},
 		'< empty >');
 	var tripleNewLineAndRestRegex = _elm_lang$core$Regex$regex('\\n\\n\\n(.|\n)*');
@@ -774,11 +813,11 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		var toggleDoneMsg = _user$project$Model$ToggleTodoDone(todoId);
 		var now = appVM.now;
 		var reminder = A2(_user$project$Todo_View$createScheduleViewModel, now, todo);
-		var onKeyDownMsg = function (_p9) {
-			var _p10 = _p9;
-			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p10)) {
-				var _p11 = _p10.key;
-				switch (_p11.ctor) {
+		var onKeyDownMsg = function (_p10) {
+			var _p11 = _p10;
+			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p11)) {
+				var _p12 = _p11.key;
+				switch (_p12.ctor) {
 					case 'Space':
 						return createEntityActionMsg(_user$project$Entity$ToggleSelected);
 					case 'CharE':

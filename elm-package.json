@@ -43,6 +43,7 @@
         "mgold/elm-date-format": "1.2.0 <= v < 2.0.0",
         "mgold/elm-random-pcg": "5.0.0 <= v < 6.0.0",
         "ohanhi/keyboard-extra": "2.0.2 <= v < 3.0.0",
+        "pablohirafuji/elm-markdown": "2.0.4 <= v < 3.0.0",
         "rgrempel/elm-route-url": "3.0.0 <= v < 4.0.0",
         "rluiten/elm-date-extra": "8.4.0 <= v < 9.0.0",
         "rluiten/elm-text-search": "3.1.1 <= v < 4.0.0",

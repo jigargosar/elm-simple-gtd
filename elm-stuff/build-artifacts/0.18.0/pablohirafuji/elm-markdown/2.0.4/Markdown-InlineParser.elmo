@@ -1,0 +1,2032 @@
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$query = F2(
+	function ($function, inline) {
+		var _p0 = inline;
+		switch (_p0.ctor) {
+			case 'Link':
+				var _p1 = _p0._2;
+				return A2(
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					$function(
+						A3(_pablohirafuji$elm_markdown$Markdown_Inline$Link, _p0._0, _p0._1, _p1)),
+					_elm_lang$core$List$concat(
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$query($function),
+							_p1)));
+			case 'Image':
+				var _p2 = _p0._2;
+				return A2(
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					$function(
+						A3(_pablohirafuji$elm_markdown$Markdown_Inline$Image, _p0._0, _p0._1, _p2)),
+					_elm_lang$core$List$concat(
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$query($function),
+							_p2)));
+			case 'HtmlInline':
+				var _p3 = _p0._2;
+				return A2(
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					$function(
+						A3(_pablohirafuji$elm_markdown$Markdown_Inline$HtmlInline, _p0._0, _p0._1, _p3)),
+					_elm_lang$core$List$concat(
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$query($function),
+							_p3)));
+			case 'Emphasis':
+				var _p4 = _p0._1;
+				return A2(
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					$function(
+						A2(_pablohirafuji$elm_markdown$Markdown_Inline$Emphasis, _p0._0, _p4)),
+					_elm_lang$core$List$concat(
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$query($function),
+							_p4)));
+			default:
+				return $function(inline);
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$walk = F2(
+	function ($function, inline) {
+		var _p5 = inline;
+		switch (_p5.ctor) {
+			case 'Link':
+				return $function(
+					A3(
+						_pablohirafuji$elm_markdown$Markdown_Inline$Link,
+						_p5._0,
+						_p5._1,
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$walk($function),
+							_p5._2)));
+			case 'Image':
+				return $function(
+					A3(
+						_pablohirafuji$elm_markdown$Markdown_Inline$Image,
+						_p5._0,
+						_p5._1,
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$walk($function),
+							_p5._2)));
+			case 'HtmlInline':
+				return $function(
+					A3(
+						_pablohirafuji$elm_markdown$Markdown_Inline$HtmlInline,
+						_p5._0,
+						_p5._1,
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$walk($function),
+							_p5._2)));
+			case 'Emphasis':
+				return $function(
+					A2(
+						_pablohirafuji$elm_markdown$Markdown_Inline$Emphasis,
+						_p5._0,
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$walk($function),
+							_p5._1)));
+			default:
+				return $function(inline);
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$matchesToInlines = function (matches) {
+	return A2(_elm_lang$core$List$map, _pablohirafuji$elm_markdown$Markdown_InlineParser$matchToInline, matches);
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$matchToInline = function (_p6) {
+	var _p7 = _p6;
+	var _p10 = _p7._0;
+	var _p8 = _p10.type_;
+	switch (_p8.ctor) {
+		case 'NormalType':
+			return _pablohirafuji$elm_markdown$Markdown_Inline$Text(_p10.text);
+		case 'HardLineBreakType':
+			return _pablohirafuji$elm_markdown$Markdown_Inline$HardLineBreak;
+		case 'CodeType':
+			return _pablohirafuji$elm_markdown$Markdown_Inline$CodeInline(_p10.text);
+		case 'AutolinkType':
+			return A3(
+				_pablohirafuji$elm_markdown$Markdown_Inline$Link,
+				_p8._0._1,
+				_elm_lang$core$Maybe$Nothing,
+				{
+					ctor: '::',
+					_0: _pablohirafuji$elm_markdown$Markdown_Inline$Text(_p8._0._0),
+					_1: {ctor: '[]'}
+				});
+		case 'LinkType':
+			return A3(
+				_pablohirafuji$elm_markdown$Markdown_Inline$Link,
+				_p8._0._0,
+				_p8._0._1,
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$matchesToInlines(_p10.matches));
+		case 'ImageType':
+			return A3(
+				_pablohirafuji$elm_markdown$Markdown_Inline$Image,
+				_p8._0._0,
+				_p8._0._1,
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$matchesToInlines(_p10.matches));
+		case 'HtmlType':
+			var _p9 = _p8._0;
+			return A3(
+				_pablohirafuji$elm_markdown$Markdown_Inline$HtmlInline,
+				_p9.tag,
+				_p9.attributes,
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$matchesToInlines(_p10.matches));
+		default:
+			return A2(
+				_pablohirafuji$elm_markdown$Markdown_Inline$Emphasis,
+				_p8._0,
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$matchesToInlines(_p10.matches));
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$isOpenEmphasisToken = F2(
+	function (closeToken, openToken) {
+		var _p11 = openToken.meaning;
+		if ((_p11.ctor === 'EmphasisToken') && (_p11._1.ctor === '_Tuple2')) {
+			var _p12 = closeToken.meaning;
+			if ((_p12.ctor === 'EmphasisToken') && (_p12._1.ctor === '_Tuple2')) {
+				return _elm_lang$core$Native_Utils.eq(_p11._0, _p12._0) ? ((_elm_lang$core$Native_Utils.eq(_p11._1._0, _p11._1._1) || _elm_lang$core$Native_Utils.eq(_p12._1._0, _p12._1._1)) ? (!_elm_lang$core$Native_Utils.eq(
+					A2(_elm_lang$core$Basics_ops['%'], closeToken.length + openToken.length, 3),
+					0)) : true) : false;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$decodeUrlRegex = _elm_lang$core$Regex$regex('%(?:3B|2C|2F|3F|3A|40|26|3D|2B|24|23|25)');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$encodeUrl = function (_p13) {
+	return A4(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$All,
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$decodeUrlRegex,
+		function (match) {
+			return A2(
+				_elm_lang$core$Maybe$withDefault,
+				match.match,
+				_elm_lang$http$Http$decodeUri(match.match));
+		},
+		_elm_lang$http$Http$encodeUri(_p13));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$refLabelRegex = _elm_lang$core$Regex$regex(
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		'^\\[\\s*(',
+		A2(_elm_lang$core$Basics_ops['++'], _pablohirafuji$elm_markdown$Markdown_Helpers$insideSquareBracketRegex, ')\\s*\\]')));
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$prepareUrlAndTitle = function (_p14) {
+	var _p15 = _p14;
+	return {
+		ctor: '_Tuple2',
+		_0: _pablohirafuji$elm_markdown$Markdown_InlineParser$encodeUrl(
+			_pablohirafuji$elm_markdown$Markdown_Helpers$formatStr(_p15._0)),
+		_1: A2(_elm_lang$core$Maybe$map, _pablohirafuji$elm_markdown$Markdown_Helpers$formatStr, _p15._1)
+	};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$hrefRegex = A2(
+	_elm_lang$core$Basics_ops['++'],
+	'(?:<([^<>',
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		_pablohirafuji$elm_markdown$Markdown_Helpers$whiteSpaceChars,
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			']*)>|([^',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_pablohirafuji$elm_markdown$Markdown_Helpers$whiteSpaceChars,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'\\(\\)\\\\]*(?:\\\\.[^',
+					A2(_elm_lang$core$Basics_ops['++'], _pablohirafuji$elm_markdown$Markdown_Helpers$whiteSpaceChars, '\\(\\)\\\\]*)*))'))))));
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$inlineLinkTypeOrImageTypeRegex = _elm_lang$core$Regex$regex(
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		'^\\(\\s*',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$hrefRegex,
+			A2(_elm_lang$core$Basics_ops['++'], _pablohirafuji$elm_markdown$Markdown_Helpers$titleRegex, '\\s*\\)'))));
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$removeParsedAheadTokens = F2(
+	function (tokensTail, parser) {
+		var _p16 = parser.matches;
+		if (_p16.ctor === '[]') {
+			return {ctor: '_Tuple2', _0: tokensTail, _1: parser};
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: A2(
+					_elm_lang$core$List$filter,
+					function (token) {
+						return _elm_lang$core$Native_Utils.cmp(token.index, _p16._0._0.end) > -1;
+					},
+					tokensTail),
+				_1: parser
+			};
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$checkParsedAheadOverlapping = function (parser) {
+	var _p17 = parser.matches;
+	if (_p17.ctor === '[]') {
+		return _elm_lang$core$Result$Err(
+			{ctor: '_Tuple0'});
+	} else {
+		var _p22 = _p17._1;
+		var _p21 = _p17._0._0;
+		var overlappingMatches = A2(
+			_elm_lang$core$List$filter,
+			function (_p18) {
+				var _p19 = _p18;
+				var _p20 = _p19._0;
+				return (_elm_lang$core$Native_Utils.cmp(_p21.end, _p20.start) > 0) && (_elm_lang$core$Native_Utils.cmp(_p21.end, _p20.end) < 0);
+			},
+			_p22);
+		return (_elm_lang$core$List$isEmpty(_p22) || _elm_lang$core$List$isEmpty(overlappingMatches)) ? _elm_lang$core$Result$Ok(parser) : _elm_lang$core$Result$Err(
+			{ctor: '_Tuple0'});
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$isLinkTypeOrImageOpenToken = function (token) {
+	var _p23 = token.meaning;
+	switch (_p23.ctor) {
+		case 'LinkOpenToken':
+			return true;
+		case 'ImageOpenToken':
+			return true;
+		default:
+			return false;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$isCloseToken = F2(
+	function (htmlModel, token) {
+		var _p24 = token.meaning;
+		if ((_p24.ctor === 'HtmlToken') && (_p24._0 === false)) {
+			return _elm_lang$core$Native_Utils.eq(htmlModel.tag, _p24._1.tag);
+		} else {
+			return false;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$voidHtmlTags = {
+	ctor: '::',
+	_0: 'area',
+	_1: {
+		ctor: '::',
+		_0: 'base',
+		_1: {
+			ctor: '::',
+			_0: 'br',
+			_1: {
+				ctor: '::',
+				_0: 'col',
+				_1: {
+					ctor: '::',
+					_0: 'embed',
+					_1: {
+						ctor: '::',
+						_0: 'hr',
+						_1: {
+							ctor: '::',
+							_0: 'img',
+							_1: {
+								ctor: '::',
+								_0: 'input',
+								_1: {
+									ctor: '::',
+									_0: 'keygen',
+									_1: {
+										ctor: '::',
+										_0: 'link',
+										_1: {
+											ctor: '::',
+											_0: 'meta',
+											_1: {
+												ctor: '::',
+												_0: 'param',
+												_1: {
+													ctor: '::',
+													_0: 'source',
+													_1: {
+														ctor: '::',
+														_0: 'track',
+														_1: {
+															ctor: '::',
+															_0: 'wbr',
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$isVoidTag = function (htmlModel) {
+	return A2(_elm_lang$core$List$member, htmlModel.tag, _pablohirafuji$elm_markdown$Markdown_InlineParser$voidHtmlTags);
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$attributesFromRegex = function (regexMatch) {
+	var _p25 = regexMatch.submatches;
+	_v12_2:
+	do {
+		if ((_p25.ctor === '::') && (_p25._0.ctor === 'Just')) {
+			if (_p25._0._0 === '') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				if (((_p25._1.ctor === '::') && (_p25._1._1.ctor === '::')) && (_p25._1._1._1.ctor === '::')) {
+					var maybeValue = _pablohirafuji$elm_markdown$Markdown_Helpers$returnFirstJust(
+						{
+							ctor: '::',
+							_0: _p25._1._0,
+							_1: {
+								ctor: '::',
+								_0: _p25._1._1._0,
+								_1: {
+									ctor: '::',
+									_0: _p25._1._1._1._0,
+									_1: {ctor: '[]'}
+								}
+							}
+						});
+					return _elm_lang$core$Maybe$Just(
+						{ctor: '_Tuple2', _0: _p25._0._0, _1: maybeValue});
+				} else {
+					break _v12_2;
+				}
+			}
+		} else {
+			break _v12_2;
+		}
+	} while(false);
+	return _elm_lang$core$Maybe$Nothing;
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$htmlAttributesRegex = _elm_lang$core$Regex$regex('([a-zA-Z:_][a-zA-Z0-9\\-_.:]*)(?: ?= ?(?:\"([^\"]*)\"|\'([^\']*)\'|([^\\s\"\'=<>`]*)))?');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$applyAttributesRegex = function (_p26) {
+	return A2(
+		_elm_lang$core$List$filterMap,
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$attributesFromRegex,
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _pablohirafuji$elm_markdown$Markdown_InlineParser$htmlAttributesRegex, _p26));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$htmlRegex = _elm_lang$core$Regex$regex('^(\\/)?([a-zA-Z][a-zA-Z0-9\\-]*)(?:\\s+([^<>]*?))?(\\/)?$');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$emailRegex = _elm_lang$core$Regex$regex('^([a-zA-Z0-9.!#$%&\'*+\\/=?^_`{|}~\\-]+@[a-zA-Z0-9](?:[a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)*)$');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$urlRegex = _elm_lang$core$Regex$regex('^([A-Za-z][A-Za-z0-9.+\\-]{1,31}:[^<>\\x00-\\x20]*)$');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$isCodeTokenPair = F2(
+	function (closeToken, openToken) {
+		var _p27 = openToken.meaning;
+		if (_p27.ctor === 'CodeToken') {
+			return _p27._0 ? _elm_lang$core$Native_Utils.eq(openToken.length - 1, closeToken.length) : _elm_lang$core$Native_Utils.eq(openToken.length, closeToken.length);
+		} else {
+			return false;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$applyTTM = F2(
+	function (finderFunction, model) {
+		return finderFunction(
+			{
+				ctor: '_Tuple2',
+				_0: model.tokens,
+				_1: _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						tokens: {ctor: '[]'}
+					})
+			});
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$softAsHardLineBreakTokenRegex = _elm_lang$core$Regex$regex('(?:(\\\\+)|( *))\\n');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$hardBreakTokenRegex = _elm_lang$core$Regex$regex('(?:(\\\\+)|( {2,}))\\n');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$angleBracketLTokenRegex = _elm_lang$core$Regex$regex('(\\\\*)(\\<)');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$angleBracketRTokenRegex = _elm_lang$core$Regex$regex('(\\\\*)(\\>)');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$linkImageCloseTokenRegex = _elm_lang$core$Regex$regex('(\\\\*)(\\])');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$linkImageOpenTokenRegex = _elm_lang$core$Regex$regex('(\\\\*)(\\!)?(\\[)');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$containPunctuation = _elm_lang$core$Regex$contains(
+	_elm_lang$core$Regex$regex('[!-#%-\\*,-/:;\\?@\\[-\\]_\\{\\}]'));
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$containSpace = _elm_lang$core$Regex$contains(
+	_elm_lang$core$Regex$regex('\\s'));
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$charFringeRank = function ($char) {
+	var string = _elm_lang$core$String$fromChar($char);
+	return _pablohirafuji$elm_markdown$Markdown_InlineParser$containSpace(string) ? 0 : (_pablohirafuji$elm_markdown$Markdown_InlineParser$containPunctuation(string) ? 1 : 2);
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$maybeCharFringeRank = function (maybeChar) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		0,
+		A2(_elm_lang$core$Maybe$map, _pablohirafuji$elm_markdown$Markdown_InlineParser$charFringeRank, maybeChar));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$getFringeRank = function (_p28) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		0,
+		A2(
+			_elm_lang$core$Maybe$map,
+			function (_p29) {
+				return _pablohirafuji$elm_markdown$Markdown_InlineParser$maybeCharFringeRank(
+					A2(
+						_elm_lang$core$Maybe$map,
+						_elm_lang$core$Tuple$first,
+						_elm_lang$core$String$uncons(_p29)));
+			},
+			_p28));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$underlineEmphasisTokenRegex = _elm_lang$core$Regex$regex('(\\\\*)([^_])?(\\_+)([^_])?');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$asteriskEmphasisTokenRegex = _elm_lang$core$Regex$regex('(\\\\*)([^*])?(\\*+)([^*])?');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$codeTokenRegex = _elm_lang$core$Regex$regex('(\\\\*)(\\`+)');
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$findToken = F2(
+	function (isToken, tokens) {
+		var $return = function (_p30) {
+			var _p31 = _p30;
+			return A2(
+				_elm_lang$core$Maybe$map,
+				function (token) {
+					return {
+						ctor: '_Tuple3',
+						_0: token,
+						_1: _elm_lang$core$List$reverse(_p31._1),
+						_2: _elm_lang$core$List$reverse(_p31._2)
+					};
+				},
+				_p31._0);
+		};
+		var search = F2(
+			function (token, _p32) {
+				var _p33 = _p32;
+				var _p36 = _p33._0;
+				var _p35 = _p33._1;
+				var _p34 = _p36;
+				if (_p34.ctor === 'Nothing') {
+					return isToken(token) ? {
+						ctor: '_Tuple3',
+						_0: _elm_lang$core$Maybe$Just(token),
+						_1: _p35,
+						_2: {ctor: '[]'}
+					} : {
+						ctor: '_Tuple3',
+						_0: _elm_lang$core$Maybe$Nothing,
+						_1: {ctor: '::', _0: token, _1: _p35},
+						_2: {ctor: '[]'}
+					};
+				} else {
+					return {
+						ctor: '_Tuple3',
+						_0: _p36,
+						_1: _p35,
+						_2: {ctor: '::', _0: token, _1: _p33._2}
+					};
+				}
+			});
+		return $return(
+			A3(
+				_elm_lang$core$List$foldl,
+				search,
+				{
+					ctor: '_Tuple3',
+					_0: _elm_lang$core$Maybe$Nothing,
+					_1: {ctor: '[]'},
+					_2: {ctor: '[]'}
+				},
+				tokens));
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$reverseTokens = function (model) {
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			tokens: _elm_lang$core$List$reverse(model.tokens)
+		});
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$filterTokens = F2(
+	function (filter, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				tokens: A2(_elm_lang$core$List$filter, filter, model.tokens)
+			});
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$addToken = F2(
+	function (model, token) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				tokens: {ctor: '::', _0: token, _1: model.tokens}
+			});
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$addMatch = F2(
+	function (model, match) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				matches: {ctor: '::', _0: match, _1: model.matches}
+			});
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$initParser = F3(
+	function (options, refs, rawText) {
+		return {
+			rawText: rawText,
+			tokens: {ctor: '[]'},
+			matches: {ctor: '[]'},
+			options: options,
+			refs: refs
+		};
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$Parser = F5(
+	function (a, b, c, d, e) {
+		return {rawText: a, tokens: b, matches: c, options: d, refs: e};
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$Token = F3(
+	function (a, b, c) {
+		return {index: a, length: b, meaning: c};
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$MatchModel = F7(
+	function (a, b, c, d, e, f, g) {
+		return {type_: a, start: b, end: c, textStart: d, textEnd: e, text: f, matches: g};
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$HtmlModel = F2(
+	function (a, b) {
+		return {tag: a, attributes: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$HardLineBreakToken = {ctor: 'HardLineBreakToken'};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToHardBreakToken = function (regMatch) {
+	var _p37 = regMatch.submatches;
+	_v17_2:
+	do {
+		if (_p37.ctor === '::') {
+			if (_p37._0.ctor === 'Just') {
+				var backslashesLength = _elm_lang$core$String$length(_p37._0._0);
+				return (!_pablohirafuji$elm_markdown$Markdown_Helpers$isEven(backslashesLength)) ? _elm_lang$core$Maybe$Just(
+					{index: (regMatch.index + backslashesLength) - 1, length: 2, meaning: _pablohirafuji$elm_markdown$Markdown_InlineParser$HardLineBreakToken}) : _elm_lang$core$Maybe$Nothing;
+			} else {
+				if ((_p37._1.ctor === '::') && (_p37._1._0.ctor === 'Just')) {
+					return _elm_lang$core$Maybe$Just(
+						{
+							index: regMatch.index,
+							length: _elm_lang$core$String$length(regMatch.match),
+							meaning: _pablohirafuji$elm_markdown$Markdown_InlineParser$HardLineBreakToken
+						});
+				} else {
+					break _v17_2;
+				}
+			}
+		} else {
+			break _v17_2;
+		}
+	} while(false);
+	return _elm_lang$core$Maybe$Nothing;
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToSoftHardBreakToken = function (regMatch) {
+	var _p38 = regMatch.submatches;
+	_v18_2:
+	do {
+		if (_p38.ctor === '::') {
+			if (_p38._0.ctor === 'Just') {
+				var backslashesLength = _elm_lang$core$String$length(_p38._0._0);
+				return _pablohirafuji$elm_markdown$Markdown_Helpers$isEven(backslashesLength) ? _elm_lang$core$Maybe$Just(
+					{index: regMatch.index + backslashesLength, length: 1, meaning: _pablohirafuji$elm_markdown$Markdown_InlineParser$HardLineBreakToken}) : _elm_lang$core$Maybe$Just(
+					{index: (regMatch.index + backslashesLength) - 1, length: 2, meaning: _pablohirafuji$elm_markdown$Markdown_InlineParser$HardLineBreakToken});
+			} else {
+				if ((_p38._1.ctor === '::') && (_p38._1._0.ctor === 'Just')) {
+					return _elm_lang$core$Maybe$Just(
+						{
+							index: regMatch.index,
+							length: _elm_lang$core$String$length(regMatch.match),
+							meaning: _pablohirafuji$elm_markdown$Markdown_InlineParser$HardLineBreakToken
+						});
+				} else {
+					break _v18_2;
+				}
+			}
+		} else {
+			break _v18_2;
+		}
+	} while(false);
+	return _elm_lang$core$Maybe$Nothing;
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$findHardBreakTokens = F2(
+	function (softAsHardLineBreak, str) {
+		return softAsHardLineBreak ? A2(
+			_elm_lang$core$List$filterMap,
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToSoftHardBreakToken,
+			A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _pablohirafuji$elm_markdown$Markdown_InlineParser$softAsHardLineBreakTokenRegex, str)) : A2(
+			_elm_lang$core$List$filterMap,
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToHardBreakToken,
+			A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _pablohirafuji$elm_markdown$Markdown_InlineParser$hardBreakTokenRegex, str));
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$SoftLineBreakToken = {ctor: 'SoftLineBreakToken'};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$EmphasisToken = F2(
+	function (a, b) {
+		return {ctor: 'EmphasisToken', _0: a, _1: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToEmphasisToken = F3(
+	function ($char, rawText, regMatch) {
+		var _p39 = regMatch.submatches;
+		if ((((((_p39.ctor === '::') && (_p39._0.ctor === 'Just')) && (_p39._1.ctor === '::')) && (_p39._1._1.ctor === '::')) && (_p39._1._1._0.ctor === 'Just')) && (_p39._1._1._1.ctor === '::')) {
+			var _p41 = _p39._1._0;
+			var _p40 = _p39._1._1._0._0;
+			var leftFringeLength = A2(
+				_elm_lang$core$Maybe$withDefault,
+				0,
+				A2(_elm_lang$core$Maybe$map, _elm_lang$core$String$length, _p41));
+			var mLeftFringe = ((!_elm_lang$core$Native_Utils.eq(regMatch.index, 0)) && _elm_lang$core$Native_Utils.eq(leftFringeLength, 0)) ? _elm_lang$core$Maybe$Just(
+				A3(_elm_lang$core$String$slice, regMatch.index - 1, regMatch.index, rawText)) : _p41;
+			var backslashesLength = _elm_lang$core$String$length(_p39._0._0);
+			var isEscaped = ((!_pablohirafuji$elm_markdown$Markdown_Helpers$isEven(backslashesLength)) && _elm_lang$core$Native_Utils.eq(leftFringeLength, 0)) || _elm_lang$core$Native_Utils.eq(
+				mLeftFringe,
+				_elm_lang$core$Maybe$Just('\\'));
+			var fringeRank = {
+				ctor: '_Tuple2',
+				_0: isEscaped ? 1 : _pablohirafuji$elm_markdown$Markdown_InlineParser$getFringeRank(mLeftFringe),
+				_1: _pablohirafuji$elm_markdown$Markdown_InlineParser$getFringeRank(_p39._1._1._1._0)
+			};
+			var delimiterLength = isEscaped ? (_elm_lang$core$String$length(_p40) - 1) : _elm_lang$core$String$length(_p40);
+			var index = ((regMatch.index + backslashesLength) + leftFringeLength) + (isEscaped ? 1 : 0);
+			return ((_elm_lang$core$Native_Utils.cmp(delimiterLength, 0) < 1) || (_elm_lang$core$Native_Utils.eq(
+				$char,
+				_elm_lang$core$Native_Utils.chr('_')) && _elm_lang$core$Native_Utils.eq(
+				fringeRank,
+				{ctor: '_Tuple2', _0: 2, _1: 2}))) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+				{
+					index: index,
+					length: delimiterLength,
+					meaning: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$EmphasisToken, $char, fringeRank)
+				});
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$findAsteriskEmphasisTokens = function (str) {
+	return A2(
+		_elm_lang$core$List$filterMap,
+		A2(
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToEmphasisToken,
+			_elm_lang$core$Native_Utils.chr('*'),
+			str),
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _pablohirafuji$elm_markdown$Markdown_InlineParser$asteriskEmphasisTokenRegex, str));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$findUnderlineEmphasisTokens = function (str) {
+	return A2(
+		_elm_lang$core$List$filterMap,
+		A2(
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToEmphasisToken,
+			_elm_lang$core$Native_Utils.chr('_'),
+			str),
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _pablohirafuji$elm_markdown$Markdown_InlineParser$underlineEmphasisTokenRegex, str));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$HtmlToken = F2(
+	function (a, b) {
+		return {ctor: 'HtmlToken', _0: a, _1: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$htmlFromRegex = F3(
+	function (model, match, regexMatch) {
+		var _p42 = regexMatch.submatches;
+		_v20_2:
+		do {
+			if (((_p42.ctor === '::') && (_p42._1.ctor === '::')) && (_p42._1._0.ctor === 'Just')) {
+				if (_p42._1._0._0 === '') {
+					return _elm_lang$core$Maybe$Nothing;
+				} else {
+					if ((_p42._1._1.ctor === '::') && (_p42._1._1._1.ctor === '::')) {
+						var _p45 = _p42._1._0._0;
+						var _p44 = _p42._0;
+						var filterAttributes = F2(
+							function (attrs, allowed) {
+								return A2(
+									_elm_lang$core$List$filter,
+									function (attr) {
+										return A2(
+											_elm_lang$core$List$member,
+											_elm_lang$core$Tuple$first(attr),
+											allowed);
+									},
+									attrs);
+							});
+						var attributes = A2(
+							_elm_lang$core$Maybe$withDefault,
+							{ctor: '[]'},
+							A2(_elm_lang$core$Maybe$map, _pablohirafuji$elm_markdown$Markdown_InlineParser$applyAttributesRegex, _p42._1._1._0));
+						var noAttributesInCloseTag = _elm_lang$core$Native_Utils.eq(_p44, _elm_lang$core$Maybe$Nothing) || ((!_elm_lang$core$Native_Utils.eq(_p44, _elm_lang$core$Maybe$Nothing)) && _elm_lang$core$Native_Utils.eq(
+							attributes,
+							{ctor: '[]'}));
+						var updateModel = function (attrs) {
+							return A2(
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$addToken,
+								model,
+								{
+									index: match.start,
+									length: match.end - match.start,
+									meaning: A2(
+										_pablohirafuji$elm_markdown$Markdown_InlineParser$HtmlToken,
+										_elm_lang$core$Native_Utils.eq(_p44, _elm_lang$core$Maybe$Nothing) && _elm_lang$core$Native_Utils.eq(_p42._1._1._1._0, _elm_lang$core$Maybe$Nothing),
+										A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$HtmlModel, _p45, attrs))
+								});
+						};
+						var _p43 = model.options.rawHtml;
+						switch (_p43.ctor) {
+							case 'ParseUnsafe':
+								return noAttributesInCloseTag ? _elm_lang$core$Maybe$Just(
+									updateModel(attributes)) : _elm_lang$core$Maybe$Nothing;
+							case 'Sanitize':
+								return (A2(_elm_lang$core$List$member, _p45, _p43._0.allowedHtmlElements) && noAttributesInCloseTag) ? _elm_lang$core$Maybe$Just(
+									updateModel(
+										A2(filterAttributes, attributes, _p43._0.allowedHtmlAttributes))) : _elm_lang$core$Maybe$Nothing;
+							default:
+								return _elm_lang$core$Maybe$Nothing;
+						}
+					} else {
+						break _v20_2;
+					}
+				}
+			} else {
+				break _v20_2;
+			}
+		} while(false);
+		return _elm_lang$core$Maybe$Nothing;
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$htmlToToken = F2(
+	function (model, _p46) {
+		var _p47 = _p46;
+		var _p49 = _p47._0;
+		var _p48 = model.options.rawHtml;
+		if (_p48.ctor === 'DontParse') {
+			return _elm_lang$core$Maybe$Nothing;
+		} else {
+			return A2(
+				_elm_lang$core$Maybe$andThen,
+				A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$htmlFromRegex, model, _p49),
+				_elm_lang$core$List$head(
+					A3(
+						_elm_lang$core$Regex$find,
+						_elm_lang$core$Regex$AtMost(1),
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$htmlRegex,
+						_p49.text)));
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$RightAngleBracket = function (a) {
+	return {ctor: 'RightAngleBracket', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToAngleBracketRToken = function (regMatch) {
+	var _p50 = regMatch.submatches;
+	if ((((_p50.ctor === '::') && (_p50._0.ctor === 'Just')) && (_p50._1.ctor === '::')) && (_p50._1._0.ctor === 'Just')) {
+		var backslashesLength = _elm_lang$core$String$length(_p50._0._0);
+		return _elm_lang$core$Maybe$Just(
+			{
+				index: regMatch.index + backslashesLength,
+				length: 1,
+				meaning: _pablohirafuji$elm_markdown$Markdown_InlineParser$RightAngleBracket(
+					!_pablohirafuji$elm_markdown$Markdown_Helpers$isEven(backslashesLength))
+			});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$findAngleBracketRTokens = function (str) {
+	return A2(
+		_elm_lang$core$List$filterMap,
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToAngleBracketRToken,
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _pablohirafuji$elm_markdown$Markdown_InlineParser$angleBracketRTokenRegex, str));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$CharToken = function (a) {
+	return {ctor: 'CharToken', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToLinkImageCloseToken = function (regMatch) {
+	var _p51 = regMatch.submatches;
+	if ((((_p51.ctor === '::') && (_p51._0.ctor === 'Just')) && (_p51._1.ctor === '::')) && (_p51._1._0.ctor === 'Just')) {
+		var backslashesLength = _elm_lang$core$String$length(_p51._0._0);
+		return _pablohirafuji$elm_markdown$Markdown_Helpers$isEven(backslashesLength) ? _elm_lang$core$Maybe$Just(
+			{
+				index: regMatch.index + backslashesLength,
+				length: 1,
+				meaning: _pablohirafuji$elm_markdown$Markdown_InlineParser$CharToken(
+					_elm_lang$core$Native_Utils.chr(']'))
+			}) : _elm_lang$core$Maybe$Nothing;
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$findLinkImageCloseTokens = function (str) {
+	return A2(
+		_elm_lang$core$List$filterMap,
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToLinkImageCloseToken,
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _pablohirafuji$elm_markdown$Markdown_InlineParser$linkImageCloseTokenRegex, str));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToAngleBracketLToken = function (regMatch) {
+	var _p52 = regMatch.submatches;
+	if ((((_p52.ctor === '::') && (_p52._0.ctor === 'Just')) && (_p52._1.ctor === '::')) && (_p52._1._0.ctor === 'Just')) {
+		var backslashesLength = _elm_lang$core$String$length(_p52._0._0);
+		return _pablohirafuji$elm_markdown$Markdown_Helpers$isEven(backslashesLength) ? _elm_lang$core$Maybe$Just(
+			{
+				index: regMatch.index + backslashesLength,
+				length: 1,
+				meaning: _pablohirafuji$elm_markdown$Markdown_InlineParser$CharToken(
+					_elm_lang$core$Native_Utils.chr('<'))
+			}) : _elm_lang$core$Maybe$Nothing;
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$findAngleBracketLTokens = function (str) {
+	return A2(
+		_elm_lang$core$List$filterMap,
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToAngleBracketLToken,
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _pablohirafuji$elm_markdown$Markdown_InlineParser$angleBracketLTokenRegex, str));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$ImageOpenToken = {ctor: 'ImageOpenToken'};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$LinkOpenToken = function (a) {
+	return {ctor: 'LinkOpenToken', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToLinkImageOpenToken = function (regMatch) {
+	var _p53 = regMatch.submatches;
+	if (((((_p53.ctor === '::') && (_p53._0.ctor === 'Just')) && (_p53._1.ctor === '::')) && (_p53._1._1.ctor === '::')) && (_p53._1._1._0.ctor === 'Just')) {
+		var _p56 = _p53._1._0;
+		var backslashesLength = _elm_lang$core$String$length(_p53._0._0);
+		var isEscaped = !_pablohirafuji$elm_markdown$Markdown_Helpers$isEven(backslashesLength);
+		var meaning = isEscaped ? A2(
+			_elm_lang$core$Maybe$map,
+			function (_p54) {
+				return _pablohirafuji$elm_markdown$Markdown_InlineParser$LinkOpenToken(true);
+			},
+			_p56) : _elm_lang$core$Maybe$Just(
+			A2(
+				_elm_lang$core$Maybe$withDefault,
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$LinkOpenToken(true),
+				A2(
+					_elm_lang$core$Maybe$map,
+					function (_p55) {
+						return _pablohirafuji$elm_markdown$Markdown_InlineParser$ImageOpenToken;
+					},
+					_p56)));
+		var length = _elm_lang$core$Native_Utils.eq(
+			meaning,
+			_elm_lang$core$Maybe$Just(_pablohirafuji$elm_markdown$Markdown_InlineParser$ImageOpenToken)) ? 2 : 1;
+		var index = (regMatch.index + backslashesLength) + ((isEscaped && _elm_lang$core$Native_Utils.eq(
+			_p56,
+			_elm_lang$core$Maybe$Just('!'))) ? 1 : 0);
+		var toModel = function (m) {
+			return {index: index, length: length, meaning: m};
+		};
+		return A2(_elm_lang$core$Maybe$map, toModel, meaning);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$findLinkImageOpenTokens = function (str) {
+	return A2(
+		_elm_lang$core$List$filterMap,
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToLinkImageOpenToken,
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _pablohirafuji$elm_markdown$Markdown_InlineParser$linkImageOpenTokenRegex, str));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$CodeToken = function (a) {
+	return {ctor: 'CodeToken', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToCodeToken = function (regMatch) {
+	var _p57 = regMatch.submatches;
+	if ((((_p57.ctor === '::') && (_p57._0.ctor === 'Just')) && (_p57._1.ctor === '::')) && (_p57._1._0.ctor === 'Just')) {
+		var backslashesLength = _elm_lang$core$String$length(_p57._0._0);
+		return _elm_lang$core$Maybe$Just(
+			{
+				index: regMatch.index + backslashesLength,
+				length: _elm_lang$core$String$length(_p57._1._0._0),
+				meaning: _pablohirafuji$elm_markdown$Markdown_InlineParser$CodeToken(
+					!_pablohirafuji$elm_markdown$Markdown_Helpers$isEven(backslashesLength))
+			});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$findCodeTokens = function (str) {
+	return A2(
+		_elm_lang$core$List$filterMap,
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$regMatchToCodeToken,
+		A3(_elm_lang$core$Regex$find, _elm_lang$core$Regex$All, _pablohirafuji$elm_markdown$Markdown_InlineParser$codeTokenRegex, str));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$tokenize = function (model) {
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			tokens: A2(
+				_elm_lang$core$List$sortBy,
+				function (_) {
+					return _.index;
+				},
+				A2(
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					_pablohirafuji$elm_markdown$Markdown_InlineParser$findAngleBracketRTokens(model.rawText),
+					A2(
+						F2(
+							function (x, y) {
+								return A2(_elm_lang$core$Basics_ops['++'], x, y);
+							}),
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$findAngleBracketLTokens(model.rawText),
+						A2(
+							F2(
+								function (x, y) {
+									return A2(_elm_lang$core$Basics_ops['++'], x, y);
+								}),
+							A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$findHardBreakTokens, model.options.softAsHardLineBreak, model.rawText),
+							A2(
+								F2(
+									function (x, y) {
+										return A2(_elm_lang$core$Basics_ops['++'], x, y);
+									}),
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$findLinkImageCloseTokens(model.rawText),
+								A2(
+									F2(
+										function (x, y) {
+											return A2(_elm_lang$core$Basics_ops['++'], x, y);
+										}),
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$findLinkImageOpenTokens(model.rawText),
+									A2(
+										F2(
+											function (x, y) {
+												return A2(_elm_lang$core$Basics_ops['++'], x, y);
+											}),
+										_pablohirafuji$elm_markdown$Markdown_InlineParser$findUnderlineEmphasisTokens(model.rawText),
+										A2(
+											F2(
+												function (x, y) {
+													return A2(_elm_lang$core$Basics_ops['++'], x, y);
+												}),
+											_pablohirafuji$elm_markdown$Markdown_InlineParser$findAsteriskEmphasisTokens(model.rawText),
+											_pablohirafuji$elm_markdown$Markdown_InlineParser$findCodeTokens(model.rawText)))))))))
+		});
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$Match = function (a) {
+	return {ctor: 'Match', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$tokenToMatch = F2(
+	function (token, type_) {
+		return _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+			{
+				type_: type_,
+				start: token.index,
+				end: token.index + token.length,
+				textStart: 0,
+				textEnd: 0,
+				text: '',
+				matches: {ctor: '[]'}
+			});
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$prepareChildMatch = F2(
+	function (parentMatch, childMatch) {
+		return _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+			_elm_lang$core$Native_Utils.update(
+				childMatch,
+				{start: childMatch.start - parentMatch.textStart, end: childMatch.end - parentMatch.textStart, textStart: childMatch.textStart - parentMatch.textStart, textEnd: childMatch.textEnd - parentMatch.textStart}));
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$addChild = F2(
+	function (parentMatch, childMatch) {
+		return _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+			_elm_lang$core$Native_Utils.update(
+				parentMatch,
+				{
+					matches: {
+						ctor: '::',
+						_0: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$prepareChildMatch, parentMatch, childMatch),
+						_1: parentMatch.matches
+					}
+				}));
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$organizeMatch = F2(
+	function (_p58, matches) {
+		var _p59 = _p58;
+		var _p62 = _p59._0;
+		var _p60 = matches;
+		if (_p60.ctor === '[]') {
+			return {
+				ctor: '::',
+				_0: _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(_p62),
+				_1: {ctor: '[]'}
+			};
+		} else {
+			var _p61 = _p60._0._0;
+			return (_elm_lang$core$Native_Utils.cmp(_p61.end, _p62.start) < 1) ? {
+				ctor: '::',
+				_0: _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(_p62),
+				_1: matches
+			} : (((_elm_lang$core$Native_Utils.cmp(_p61.start, _p62.start) < 0) && (_elm_lang$core$Native_Utils.cmp(_p61.end, _p62.end) > 0)) ? {
+				ctor: '::',
+				_0: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$addChild, _p61, _p62),
+				_1: _p60._1
+			} : matches);
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$organizeMatches = function (_p63) {
+	return A2(
+		_elm_lang$core$List$map,
+		function (_p64) {
+			var _p65 = _p64;
+			var _p66 = _p65._0;
+			return _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+				_elm_lang$core$Native_Utils.update(
+					_p66,
+					{
+						matches: _pablohirafuji$elm_markdown$Markdown_InlineParser$organizeMatches(_p66.matches)
+					}));
+		},
+		A3(
+			_elm_lang$core$List$foldl,
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$organizeMatch,
+			{ctor: '[]'},
+			A2(
+				_elm_lang$core$List$sortBy,
+				function (_p67) {
+					var _p68 = _p67;
+					return _p68._0.start;
+				},
+				_p63)));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$organizeParserMatches = function (model) {
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			matches: _pablohirafuji$elm_markdown$Markdown_InlineParser$organizeMatches(model.matches)
+		});
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$EmphasisType = function (a) {
+	return {ctor: 'EmphasisType', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$HtmlType = function (a) {
+	return {ctor: 'HtmlType', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$ImageType = function (a) {
+	return {ctor: 'ImageType', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$LinkType = function (a) {
+	return {ctor: 'LinkType', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$inlineLinkTypeOrImageTypeRegexToMatch = F3(
+	function (matchModel, model, regexMatch) {
+		var _p69 = regexMatch.submatches;
+		if (((((_p69.ctor === '::') && (_p69._1.ctor === '::')) && (_p69._1._1.ctor === '::')) && (_p69._1._1._1.ctor === '::')) && (_p69._1._1._1._1.ctor === '::')) {
+			var maybeTitle = _pablohirafuji$elm_markdown$Markdown_Helpers$returnFirstJust(
+				{
+					ctor: '::',
+					_0: _p69._1._1._0,
+					_1: {
+						ctor: '::',
+						_0: _p69._1._1._1._0,
+						_1: {
+							ctor: '::',
+							_0: _p69._1._1._1._1._0,
+							_1: {ctor: '[]'}
+						}
+					}
+				});
+			var toMatch = function (rawUrl) {
+				return _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+					_elm_lang$core$Native_Utils.update(
+						matchModel,
+						{
+							type_: function () {
+								var _p70 = matchModel.type_;
+								if (_p70.ctor === 'ImageType') {
+									return _pablohirafuji$elm_markdown$Markdown_InlineParser$ImageType;
+								} else {
+									return _pablohirafuji$elm_markdown$Markdown_InlineParser$LinkType;
+								}
+							}()(
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$prepareUrlAndTitle(
+									{ctor: '_Tuple2', _0: rawUrl, _1: maybeTitle})),
+							end: matchModel.end + _elm_lang$core$String$length(regexMatch.match)
+						}));
+			};
+			var maybeRawUrl = _pablohirafuji$elm_markdown$Markdown_Helpers$returnFirstJust(
+				{
+					ctor: '::',
+					_0: _p69._0,
+					_1: {
+						ctor: '::',
+						_0: _p69._1._0,
+						_1: {ctor: '[]'}
+					}
+				});
+			return A2(_elm_lang$core$Maybe$map, toMatch, maybeRawUrl);
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$checkForInlineLinkTypeOrImageType = function (_p71) {
+	var _p72 = _p71;
+	var _p75 = _p72._1._0;
+	var _p74 = _p72._0;
+	var _p73 = _p72._2;
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		{
+			ctor: '_Tuple3',
+			_0: _p74,
+			_1: _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(_p75),
+			_2: _p73
+		},
+		A2(
+			_elm_lang$core$Maybe$map,
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$addMatch(_p73),
+			A2(
+				_elm_lang$core$Maybe$andThen,
+				A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$inlineLinkTypeOrImageTypeRegexToMatch, _p75, _p73),
+				_elm_lang$core$List$head(
+					A3(
+						_elm_lang$core$Regex$find,
+						_elm_lang$core$Regex$AtMost(1),
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$inlineLinkTypeOrImageTypeRegex,
+						_p74)))));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$refRegexToMatch = F3(
+	function (matchModel, model, maybeRegexMatch) {
+		var regexMatchLength = A2(
+			_elm_lang$core$Maybe$withDefault,
+			0,
+			A2(
+				_elm_lang$core$Maybe$map,
+				function (_p76) {
+					return _elm_lang$core$String$length(
+						function (_) {
+							return _.match;
+						}(_p76));
+				},
+				maybeRegexMatch));
+		var toMatch = function (urlTitle) {
+			return _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+				_elm_lang$core$Native_Utils.update(
+					matchModel,
+					{
+						type_: function () {
+							var _p77 = matchModel.type_;
+							if (_p77.ctor === 'ImageType') {
+								return _pablohirafuji$elm_markdown$Markdown_InlineParser$ImageType;
+							} else {
+								return _pablohirafuji$elm_markdown$Markdown_InlineParser$LinkType;
+							}
+						}()(
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$prepareUrlAndTitle(urlTitle)),
+						end: matchModel.end + regexMatchLength
+					}));
+		};
+		var refLabel = function (str) {
+			return _elm_lang$core$String$isEmpty(str) ? matchModel.text : str;
+		}(
+			A2(
+				_elm_lang$core$Maybe$withDefault,
+				matchModel.text,
+				A2(
+					_elm_lang$core$Maybe$withDefault,
+					_elm_lang$core$Maybe$Nothing,
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						_elm_lang$core$Maybe$Nothing,
+						A2(
+							_elm_lang$core$Maybe$map,
+							function (_p78) {
+								return _elm_lang$core$List$head(
+									function (_) {
+										return _.submatches;
+									}(_p78));
+							},
+							maybeRegexMatch)))));
+		var maybeRefItem = A2(
+			_elm_lang$core$Dict$get,
+			_pablohirafuji$elm_markdown$Markdown_Helpers$prepareRefLabel(refLabel),
+			model.refs);
+		return A2(_elm_lang$core$Maybe$map, toMatch, maybeRefItem);
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$checkForRefLinkTypeOrImageType = function (_p79) {
+	var _p80 = _p79;
+	var _p83 = _p80._1._0;
+	var _p82 = _p80._0;
+	var _p81 = _p80._2;
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		{
+			ctor: '_Tuple3',
+			_0: _p82,
+			_1: _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(_p83),
+			_2: _p81
+		},
+		A2(
+			_elm_lang$core$Maybe$map,
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$addMatch(_p81),
+			A3(
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$refRegexToMatch,
+				_p83,
+				_p81,
+				_elm_lang$core$List$head(
+					A3(
+						_elm_lang$core$Regex$find,
+						_elm_lang$core$Regex$AtMost(1),
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$refLabelRegex,
+						_p82)))));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$AutolinkType = function (a) {
+	return {ctor: 'AutolinkType', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$autolinkToMatch = function (_p84) {
+	var _p85 = _p84;
+	var _p86 = _p85._0;
+	return A2(_elm_lang$core$Regex$contains, _pablohirafuji$elm_markdown$Markdown_InlineParser$urlRegex, _p86.text) ? _elm_lang$core$Result$Ok(
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+			_elm_lang$core$Native_Utils.update(
+				_p86,
+				{
+					type_: _pablohirafuji$elm_markdown$Markdown_InlineParser$AutolinkType(
+						{
+							ctor: '_Tuple2',
+							_0: _p86.text,
+							_1: _pablohirafuji$elm_markdown$Markdown_InlineParser$encodeUrl(_p86.text)
+						})
+				}))) : _elm_lang$core$Result$Err(
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$Match(_p86));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$emailAutolinkTypeToMatch = function (_p87) {
+	var _p88 = _p87;
+	var _p89 = _p88._0;
+	return A2(_elm_lang$core$Regex$contains, _pablohirafuji$elm_markdown$Markdown_InlineParser$emailRegex, _p89.text) ? _elm_lang$core$Result$Ok(
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+			_elm_lang$core$Native_Utils.update(
+				_p89,
+				{
+					type_: _pablohirafuji$elm_markdown$Markdown_InlineParser$AutolinkType(
+						{
+							ctor: '_Tuple2',
+							_0: _p89.text,
+							_1: A2(
+								_elm_lang$core$Basics_ops['++'],
+								'mailto:',
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$encodeUrl(_p89.text))
+						})
+				}))) : _elm_lang$core$Result$Err(
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$Match(_p89));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$CodeType = {ctor: 'CodeType'};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$HardLineBreakType = {ctor: 'HardLineBreakType'};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$lineBreakTTM = function (_p90) {
+	lineBreakTTM:
+	while (true) {
+		var _p91 = _p90;
+		var _p95 = _p91._1;
+		var _p92 = _p91._0;
+		if (_p92.ctor === '[]') {
+			return _pablohirafuji$elm_markdown$Markdown_InlineParser$reverseTokens(_p95);
+		} else {
+			var _p94 = _p92._1;
+			var _p93 = _p92._0;
+			if (_elm_lang$core$Native_Utils.eq(_p93.meaning, _pablohirafuji$elm_markdown$Markdown_InlineParser$HardLineBreakToken) || (_elm_lang$core$Native_Utils.eq(_p93.meaning, _pablohirafuji$elm_markdown$Markdown_InlineParser$SoftLineBreakToken) && _p95.options.softAsHardLineBreak)) {
+				var _v42 = A2(
+					F2(
+						function (v0, v1) {
+							return {ctor: '_Tuple2', _0: v0, _1: v1};
+						}),
+					_p94,
+					_elm_lang$core$Native_Utils.update(
+						_p95,
+						{
+							matches: {
+								ctor: '::',
+								_0: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$tokenToMatch, _p93, _pablohirafuji$elm_markdown$Markdown_InlineParser$HardLineBreakType),
+								_1: _p95.matches
+							}
+						}));
+				_p90 = _v42;
+				continue lineBreakTTM;
+			} else {
+				var _v43 = {
+					ctor: '_Tuple2',
+					_0: _p94,
+					_1: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$addToken, _p95, _p93)
+				};
+				_p90 = _v43;
+				continue lineBreakTTM;
+			}
+		}
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$tokensToMatches = function (_p96) {
+	return A2(
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$applyTTM,
+		_pablohirafuji$elm_markdown$Markdown_InlineParser$lineBreakTTM,
+		A2(
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$applyTTM,
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$emphasisTTM,
+			A2(
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$applyTTM,
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$linkImageTypeTTM,
+				A2(
+					_pablohirafuji$elm_markdown$Markdown_InlineParser$applyTTM,
+					_pablohirafuji$elm_markdown$Markdown_InlineParser$htmlElementTTM,
+					A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$applyTTM, _pablohirafuji$elm_markdown$Markdown_InlineParser$codeAutolinkTypeHtmlTagTTM, _p96)))));
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$codeAutolinkTypeHtmlTagTTM = function (_p97) {
+	codeAutolinkTypeHtmlTagTTM:
+	while (true) {
+		var _p98 = _p97;
+		var _p105 = _p98._1;
+		var _p99 = _p98._0;
+		if (_p99.ctor === '[]') {
+			return _pablohirafuji$elm_markdown$Markdown_InlineParser$reverseTokens(_p105);
+		} else {
+			var _p104 = _p99._1;
+			var _p103 = _p99._0;
+			var _p100 = _p103.meaning;
+			switch (_p100.ctor) {
+				case 'CodeToken':
+					var _v47 = A2(
+						F2(
+							function (v0, v1) {
+								return {ctor: '_Tuple2', _0: v0, _1: v1};
+							}),
+						_p104,
+						A2(
+							_elm_lang$core$Maybe$withDefault,
+							A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$addToken, _p105, _p103),
+							A2(
+								_elm_lang$core$Maybe$map,
+								A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$codeToMatch, _p103, _p105),
+								A2(
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$findToken,
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$isCodeTokenPair(_p103),
+									_p105.tokens))));
+					_p97 = _v47;
+					continue codeAutolinkTypeHtmlTagTTM;
+				case 'RightAngleBracket':
+					var _v48 = A2(
+						F2(
+							function (v0, v1) {
+								return {ctor: '_Tuple2', _0: v0, _1: v1};
+							}),
+						_p104,
+						A2(
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$filterTokens,
+							function (_p101) {
+								return A2(
+									F2(
+										function (x, y) {
+											return !_elm_lang$core$Native_Utils.eq(x, y);
+										}),
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$CharToken(
+										_elm_lang$core$Native_Utils.chr('<')),
+									function (_) {
+										return _.meaning;
+									}(_p101));
+							},
+							A2(
+								_elm_lang$core$Maybe$withDefault,
+								_p105,
+								A2(
+									_elm_lang$core$Maybe$andThen,
+									A3(_pablohirafuji$elm_markdown$Markdown_InlineParser$angleBracketsToMatch, _p103, _p100._0, _p105),
+									A2(
+										_pablohirafuji$elm_markdown$Markdown_InlineParser$findToken,
+										function (_p102) {
+											return A2(
+												F2(
+													function (x, y) {
+														return _elm_lang$core$Native_Utils.eq(x, y);
+													}),
+												_pablohirafuji$elm_markdown$Markdown_InlineParser$CharToken(
+													_elm_lang$core$Native_Utils.chr('<')),
+												function (_) {
+													return _.meaning;
+												}(_p102));
+										},
+										_p105.tokens)))));
+					_p97 = _v48;
+					continue codeAutolinkTypeHtmlTagTTM;
+				default:
+					var _v49 = {
+						ctor: '_Tuple2',
+						_0: _p104,
+						_1: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$addToken, _p105, _p103)
+					};
+					_p97 = _v49;
+					continue codeAutolinkTypeHtmlTagTTM;
+			}
+		}
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$angleBracketsToMatch = F4(
+	function (closeToken, isEscaped, model, _p106) {
+		var _p107 = _p106;
+		var _p109 = _p107._2;
+		return function (result) {
+			var _p108 = result;
+			if (_p108.ctor === 'Err') {
+				return (!isEscaped) ? A2(
+					_pablohirafuji$elm_markdown$Markdown_InlineParser$htmlToToken,
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{tokens: _p109}),
+					_p108._0) : _elm_lang$core$Result$toMaybe(result);
+			} else {
+				return _elm_lang$core$Result$toMaybe(result);
+			}
+		}(
+			A2(
+				_elm_lang$core$Result$map,
+				function (newMatch) {
+					return _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							matches: {ctor: '::', _0: newMatch, _1: model.matches},
+							tokens: _p109
+						});
+				},
+				A2(
+					_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+					_pablohirafuji$elm_markdown$Markdown_InlineParser$emailAutolinkTypeToMatch,
+					_pablohirafuji$elm_markdown$Markdown_InlineParser$autolinkToMatch(
+						A6(
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$tokenPairToMatch,
+							model,
+							function (s) {
+								return s;
+							},
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$CodeType,
+							_p107._0,
+							closeToken,
+							{ctor: '[]'})))));
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$tokenPairToMatch = F6(
+	function (model, processText, type_, openToken, closeToken, innerTokens) {
+		var textEnd = closeToken.index;
+		var textStart = openToken.index + openToken.length;
+		var end = closeToken.index + closeToken.length;
+		var start = openToken.index;
+		var match = {
+			type_: type_,
+			start: start,
+			end: end,
+			textStart: textStart,
+			textEnd: textEnd,
+			text: processText(
+				A3(_elm_lang$core$String$slice, textStart, textEnd, model.rawText)),
+			matches: {ctor: '[]'}
+		};
+		var matches = A2(
+			_elm_lang$core$List$map,
+			function (_p110) {
+				var _p111 = _p110;
+				return A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$prepareChildMatch, match, _p111._0);
+			},
+			function (_) {
+				return _.matches;
+			}(
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$tokensToMatches(
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							tokens: innerTokens,
+							matches: {ctor: '[]'}
+						}))));
+		return _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+			_elm_lang$core$Native_Utils.update(
+				match,
+				{matches: matches}));
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$codeToMatch = F3(
+	function (closeToken, model, _p112) {
+		var _p113 = _p112;
+		var _p114 = _p113._0;
+		var updtOpenToken = _elm_lang$core$Native_Utils.eq(
+			_p114.meaning,
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$CodeToken(true)) ? _elm_lang$core$Native_Utils.update(
+			_p114,
+			{index: _p114.index + 1, length: _p114.length - 1}) : _p114;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				matches: {
+					ctor: '::',
+					_0: A6(
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$tokenPairToMatch,
+						model,
+						_pablohirafuji$elm_markdown$Markdown_Helpers$cleanWhitespaces,
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$CodeType,
+						updtOpenToken,
+						closeToken,
+						{ctor: '[]'}),
+					_1: model.matches
+				},
+				tokens: _p113._2
+			});
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$emphasisTTM = function (_p115) {
+	emphasisTTM:
+	while (true) {
+		var _p116 = _p115;
+		var _p123 = _p116._1;
+		var _p117 = _p116._0;
+		if (_p117.ctor === '[]') {
+			return _pablohirafuji$elm_markdown$Markdown_InlineParser$reverseTokens(_p123);
+		} else {
+			var _p122 = _p117._1;
+			var _p121 = _p117._0;
+			var _p118 = _p121.meaning;
+			if ((_p118.ctor === 'EmphasisToken') && (_p118._1.ctor === '_Tuple2')) {
+				var _p120 = _p118._1._1;
+				var _p119 = _p118._1._0;
+				if (_elm_lang$core$Native_Utils.eq(_p119, _p120)) {
+					if ((!_elm_lang$core$Native_Utils.eq(_p120, 0)) && ((!_elm_lang$core$Native_Utils.eq(
+						_p118._0,
+						_elm_lang$core$Native_Utils.chr('_'))) || _elm_lang$core$Native_Utils.eq(_p120, 1))) {
+						var _v57 = A2(
+							_elm_lang$core$Maybe$withDefault,
+							{
+								ctor: '_Tuple2',
+								_0: _p122,
+								_1: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$addToken, _p123, _p121)
+							},
+							A2(
+								_elm_lang$core$Maybe$map,
+								A3(_pablohirafuji$elm_markdown$Markdown_InlineParser$emphasisToMatch, _p121, _p122, _p123),
+								A2(
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$findToken,
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$isOpenEmphasisToken(_p121),
+									_p123.tokens)));
+						_p115 = _v57;
+						continue emphasisTTM;
+					} else {
+						var _v58 = {ctor: '_Tuple2', _0: _p122, _1: _p123};
+						_p115 = _v58;
+						continue emphasisTTM;
+					}
+				} else {
+					if (_elm_lang$core$Native_Utils.cmp(_p119, _p120) < 0) {
+						var _v59 = {
+							ctor: '_Tuple2',
+							_0: _p122,
+							_1: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$addToken, _p123, _p121)
+						};
+						_p115 = _v59;
+						continue emphasisTTM;
+					} else {
+						var _v60 = A2(
+							_elm_lang$core$Maybe$withDefault,
+							{ctor: '_Tuple2', _0: _p122, _1: _p123},
+							A2(
+								_elm_lang$core$Maybe$map,
+								A3(_pablohirafuji$elm_markdown$Markdown_InlineParser$emphasisToMatch, _p121, _p122, _p123),
+								A2(
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$findToken,
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$isOpenEmphasisToken(_p121),
+									_p123.tokens)));
+						_p115 = _v60;
+						continue emphasisTTM;
+					}
+				}
+			} else {
+				var _v61 = {
+					ctor: '_Tuple2',
+					_0: _p122,
+					_1: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$addToken, _p123, _p121)
+				};
+				_p115 = _v61;
+				continue emphasisTTM;
+			}
+		}
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$emphasisToMatch = F4(
+	function (closeToken, tokensTail, model, _p124) {
+		var _p125 = _p124;
+		var _p128 = _p125._2;
+		var _p127 = _p125._0;
+		var remainLength = _p127.length - closeToken.length;
+		var _p126 = _elm_lang$core$Native_Utils.eq(remainLength, 0) ? {ctor: '_Tuple4', _0: _p127, _1: closeToken, _2: _p128, _3: tokensTail} : ((_elm_lang$core$Native_Utils.cmp(remainLength, 0) > 0) ? {
+			ctor: '_Tuple4',
+			_0: _elm_lang$core$Native_Utils.update(
+				_p127,
+				{index: _p127.index + remainLength, length: closeToken.length}),
+			_1: closeToken,
+			_2: {
+				ctor: '::',
+				_0: _elm_lang$core$Native_Utils.update(
+					_p127,
+					{length: remainLength}),
+				_1: _p128
+			},
+			_3: tokensTail
+		} : {
+			ctor: '_Tuple4',
+			_0: _p127,
+			_1: _elm_lang$core$Native_Utils.update(
+				closeToken,
+				{length: _p127.length}),
+			_2: _p128,
+			_3: {
+				ctor: '::',
+				_0: _elm_lang$core$Native_Utils.update(
+					closeToken,
+					{index: closeToken.index + _p127.length, length: 0 - remainLength}),
+				_1: tokensTail
+			}
+		});
+		var updtOpenToken = _p126._0;
+		var updtCloseToken = _p126._1;
+		var updtRemainTokens = _p126._2;
+		var updtTokensTail = _p126._3;
+		var match = A6(
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$tokenPairToMatch,
+			model,
+			function (s) {
+				return s;
+			},
+			_pablohirafuji$elm_markdown$Markdown_InlineParser$EmphasisType(updtOpenToken.length),
+			updtOpenToken,
+			updtCloseToken,
+			_elm_lang$core$List$reverse(_p125._1));
+		return {
+			ctor: '_Tuple2',
+			_0: updtTokensTail,
+			_1: _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					matches: {ctor: '::', _0: match, _1: model.matches},
+					tokens: updtRemainTokens
+				})
+		};
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$htmlElementTTM = function (_p129) {
+	htmlElementTTM:
+	while (true) {
+		var _p130 = _p129;
+		var _p136 = _p130._1;
+		var _p131 = _p130._0;
+		if (_p131.ctor === '[]') {
+			return _pablohirafuji$elm_markdown$Markdown_InlineParser$reverseTokens(_p136);
+		} else {
+			var _p135 = _p131._1;
+			var _p134 = _p131._0;
+			var _p132 = _p134.meaning;
+			if (_p132.ctor === 'HtmlToken') {
+				var _p133 = _p132._1;
+				if (_pablohirafuji$elm_markdown$Markdown_InlineParser$isVoidTag(_p133) || (!_p132._0)) {
+					var _v66 = A2(
+						F2(
+							function (v0, v1) {
+								return {ctor: '_Tuple2', _0: v0, _1: v1};
+							}),
+						_p135,
+						A2(
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$addMatch,
+							_p136,
+							A2(
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$tokenToMatch,
+								_p134,
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$HtmlType(_p133))));
+					_p129 = _v66;
+					continue htmlElementTTM;
+				} else {
+					var _v67 = A2(
+						_elm_lang$core$Maybe$withDefault,
+						A2(
+							F2(
+								function (v0, v1) {
+									return {ctor: '_Tuple2', _0: v0, _1: v1};
+								}),
+							_p135,
+							A2(
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$addMatch,
+								_p136,
+								A2(
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$tokenToMatch,
+									_p134,
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$HtmlType(_p133)))),
+						A2(
+							_elm_lang$core$Maybe$map,
+							A3(_pablohirafuji$elm_markdown$Markdown_InlineParser$htmlElementToMatch, _p134, _p136, _p133),
+							A2(
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$findToken,
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$isCloseToken(_p133),
+								_p135)));
+					_p129 = _v67;
+					continue htmlElementTTM;
+				}
+			} else {
+				var _v68 = {
+					ctor: '_Tuple2',
+					_0: _p135,
+					_1: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$addToken, _p136, _p134)
+				};
+				_p129 = _v68;
+				continue htmlElementTTM;
+			}
+		}
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$htmlElementToMatch = F4(
+	function (openToken, model, htmlModel, _p137) {
+		var _p138 = _p137;
+		return {
+			ctor: '_Tuple2',
+			_0: _p138._2,
+			_1: _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					matches: {
+						ctor: '::',
+						_0: A6(
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$tokenPairToMatch,
+							model,
+							function (s) {
+								return s;
+							},
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$HtmlType(htmlModel),
+							openToken,
+							_p138._0,
+							_p138._1),
+						_1: model.matches
+					}
+				})
+		};
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$linkImageTypeTTM = function (_p139) {
+	linkImageTypeTTM:
+	while (true) {
+		var _p140 = _p139;
+		var _p145 = _p140._1;
+		var _p141 = _p140._0;
+		if (_p141.ctor === '[]') {
+			return _pablohirafuji$elm_markdown$Markdown_InlineParser$reverseTokens(_p145);
+		} else {
+			var _p144 = _p141._1;
+			var _p143 = _p141._0;
+			var _p142 = _p143.meaning;
+			if ((_p142.ctor === 'CharToken') && (_p142._0.valueOf() === ']')) {
+				var _v73 = A2(
+					_elm_lang$core$Maybe$withDefault,
+					{ctor: '_Tuple2', _0: _p144, _1: _p145},
+					A2(
+						_elm_lang$core$Maybe$andThen,
+						A3(_pablohirafuji$elm_markdown$Markdown_InlineParser$linkOrImageTypeToMatch, _p143, _p144, _p145),
+						A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$findToken, _pablohirafuji$elm_markdown$Markdown_InlineParser$isLinkTypeOrImageOpenToken, _p145.tokens)));
+				_p139 = _v73;
+				continue linkImageTypeTTM;
+			} else {
+				var _v74 = {
+					ctor: '_Tuple2',
+					_0: _p144,
+					_1: A2(_pablohirafuji$elm_markdown$Markdown_InlineParser$addToken, _p145, _p143)
+				};
+				_p139 = _v74;
+				continue linkImageTypeTTM;
+			}
+		}
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$linkOrImageTypeToMatch = F4(
+	function (closeToken, tokensTail, model, _p146) {
+		var _p147 = _p146;
+		var _p156 = _p147._2;
+		var _p155 = _p147._0;
+		var _p154 = _p147._1;
+		var linkOpenTokenToInactive = function (model_) {
+			var process = function (token) {
+				var _p148 = token.meaning;
+				if (_p148.ctor === 'LinkOpenToken') {
+					return _elm_lang$core$Native_Utils.update(
+						token,
+						{
+							meaning: _pablohirafuji$elm_markdown$Markdown_InlineParser$LinkOpenToken(false)
+						});
+				} else {
+					return token;
+				}
+			};
+			return _elm_lang$core$Native_Utils.update(
+				model_,
+				{
+					tokens: A2(_elm_lang$core$List$map, process, model_.tokens)
+				});
+		};
+		var removeOpenToken = {
+			ctor: '_Tuple2',
+			_0: tokensTail,
+			_1: _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					tokens: A2(_elm_lang$core$Basics_ops['++'], _p154, _p156)
+				})
+		};
+		var tempMatch = function (isLinkType) {
+			return A6(
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$tokenPairToMatch,
+				model,
+				function (s) {
+					return s;
+				},
+				isLinkType ? _pablohirafuji$elm_markdown$Markdown_InlineParser$LinkType(
+					{ctor: '_Tuple2', _0: '', _1: _elm_lang$core$Maybe$Nothing}) : _pablohirafuji$elm_markdown$Markdown_InlineParser$ImageType(
+					{ctor: '_Tuple2', _0: '', _1: _elm_lang$core$Maybe$Nothing}),
+				_p155,
+				closeToken,
+				_elm_lang$core$List$reverse(_p154));
+		};
+		var remainText = A2(_elm_lang$core$String$dropLeft, closeToken.index + 1, model.rawText);
+		var args = function (isLinkType) {
+			return {
+				ctor: '_Tuple3',
+				_0: remainText,
+				_1: tempMatch(isLinkType),
+				_2: _elm_lang$core$Native_Utils.update(
+					model,
+					{tokens: _p156})
+			};
+		};
+		var _p149 = _p155.meaning;
+		switch (_p149.ctor) {
+			case 'ImageOpenToken':
+				return _elm_lang$core$Result$toMaybe(
+					A2(
+						_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+						function (_p150) {
+							return _elm_lang$core$Result$Ok(removeOpenToken);
+						},
+						A2(
+							_elm_lang$core$Result$map,
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$removeParsedAheadTokens(tokensTail),
+							A2(
+								_elm_lang$core$Result$andThen,
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$checkParsedAheadOverlapping,
+								A2(
+									_elm_lang$core$Result$mapError,
+									function (_p151) {
+										return {ctor: '_Tuple0'};
+									},
+									A2(
+										_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+										_pablohirafuji$elm_markdown$Markdown_InlineParser$checkForRefLinkTypeOrImageType,
+										_pablohirafuji$elm_markdown$Markdown_InlineParser$checkForInlineLinkTypeOrImageType(
+											args(false))))))));
+			case 'LinkOpenToken':
+				if (_p149._0 === true) {
+					return _elm_lang$core$Result$toMaybe(
+						A2(
+							_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+							function (_p152) {
+								return _elm_lang$core$Result$Ok(removeOpenToken);
+							},
+							A2(
+								_elm_lang$core$Result$map,
+								_pablohirafuji$elm_markdown$Markdown_InlineParser$removeParsedAheadTokens(tokensTail),
+								A2(
+									_elm_lang$core$Result$map,
+									linkOpenTokenToInactive,
+									A2(
+										_elm_lang$core$Result$andThen,
+										_pablohirafuji$elm_markdown$Markdown_InlineParser$checkParsedAheadOverlapping,
+										A2(
+											_elm_lang$core$Result$mapError,
+											function (_p153) {
+												return {ctor: '_Tuple0'};
+											},
+											A2(
+												_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+												_pablohirafuji$elm_markdown$Markdown_InlineParser$checkForRefLinkTypeOrImageType,
+												_pablohirafuji$elm_markdown$Markdown_InlineParser$checkForInlineLinkTypeOrImageType(
+													args(true)))))))));
+				} else {
+					return _elm_lang$core$Maybe$Just(removeOpenToken);
+				}
+			default:
+				return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$NormalType = {ctor: 'NormalType'};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$normalMatch = function (text) {
+	return _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+		{
+			type_: _pablohirafuji$elm_markdown$Markdown_InlineParser$NormalType,
+			start: 0,
+			end: 0,
+			textStart: 0,
+			textEnd: 0,
+			text: _pablohirafuji$elm_markdown$Markdown_Helpers$formatStr(text),
+			matches: {ctor: '[]'}
+		});
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$parseTextMatch = F3(
+	function (rawText, _p157, parsedMatches) {
+		var _p158 = _p157;
+		var _p161 = _p158._0;
+		var updtMatch = _pablohirafuji$elm_markdown$Markdown_InlineParser$Match(
+			_elm_lang$core$Native_Utils.update(
+				_p161,
+				{
+					matches: A3(
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$parseTextMatches,
+						_p161.text,
+						{ctor: '[]'},
+						_p161.matches)
+				}));
+		var _p159 = parsedMatches;
+		if (_p159.ctor === '[]') {
+			var finalStr = A2(_elm_lang$core$String$dropLeft, _p161.end, rawText);
+			return _elm_lang$core$String$isEmpty(finalStr) ? {
+				ctor: '::',
+				_0: updtMatch,
+				_1: {ctor: '[]'}
+			} : {
+				ctor: '::',
+				_0: updtMatch,
+				_1: {
+					ctor: '::',
+					_0: _pablohirafuji$elm_markdown$Markdown_InlineParser$normalMatch(finalStr),
+					_1: {ctor: '[]'}
+				}
+			};
+		} else {
+			var _p160 = _p159._0._0;
+			return _elm_lang$core$Native_Utils.eq(_p160.type_, _pablohirafuji$elm_markdown$Markdown_InlineParser$NormalType) ? {ctor: '::', _0: updtMatch, _1: parsedMatches} : (_elm_lang$core$Native_Utils.eq(_p161.end, _p160.start) ? {ctor: '::', _0: updtMatch, _1: parsedMatches} : ((_elm_lang$core$Native_Utils.cmp(_p161.end, _p160.start) < 0) ? {
+				ctor: '::',
+				_0: updtMatch,
+				_1: {
+					ctor: '::',
+					_0: _pablohirafuji$elm_markdown$Markdown_InlineParser$normalMatch(
+						A3(_elm_lang$core$String$slice, _p161.end, _p160.start, rawText)),
+					_1: parsedMatches
+				}
+			} : parsedMatches));
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$parseTextMatches = F3(
+	function (rawText, parsedMatches, matches) {
+		parseTextMatches:
+		while (true) {
+			var _p162 = matches;
+			if (_p162.ctor === '[]') {
+				var _p163 = parsedMatches;
+				if (_p163.ctor === '[]') {
+					return _elm_lang$core$String$isEmpty(rawText) ? {ctor: '[]'} : {
+						ctor: '::',
+						_0: _pablohirafuji$elm_markdown$Markdown_InlineParser$normalMatch(rawText),
+						_1: {ctor: '[]'}
+					};
+				} else {
+					var _p164 = _p163._0._0;
+					return (_elm_lang$core$Native_Utils.cmp(_p164.start, 0) > 0) ? {
+						ctor: '::',
+						_0: _pablohirafuji$elm_markdown$Markdown_InlineParser$normalMatch(
+							A2(_elm_lang$core$String$left, _p164.start, rawText)),
+						_1: parsedMatches
+					} : parsedMatches;
+				}
+			} else {
+				var _v82 = rawText,
+					_v83 = A3(_pablohirafuji$elm_markdown$Markdown_InlineParser$parseTextMatch, rawText, _p162._0, parsedMatches),
+					_v84 = _p162._1;
+				rawText = _v82;
+				parsedMatches = _v83;
+				matches = _v84;
+				continue parseTextMatches;
+			}
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$parseText = function (model) {
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			matches: A3(
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$parseTextMatches,
+				model.rawText,
+				{ctor: '[]'},
+				model.matches)
+		});
+};
+var _pablohirafuji$elm_markdown$Markdown_InlineParser$parse = F3(
+	function (options, refs, rawText) {
+		return _pablohirafuji$elm_markdown$Markdown_InlineParser$matchesToInlines(
+			function (_) {
+				return _.matches;
+			}(
+				_pablohirafuji$elm_markdown$Markdown_InlineParser$parseText(
+					_pablohirafuji$elm_markdown$Markdown_InlineParser$organizeParserMatches(
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$tokensToMatches(
+							_pablohirafuji$elm_markdown$Markdown_InlineParser$tokenize(
+								A3(
+									_pablohirafuji$elm_markdown$Markdown_InlineParser$initParser,
+									options,
+									refs,
+									_elm_lang$core$String$trim(rawText))))))));
+	});

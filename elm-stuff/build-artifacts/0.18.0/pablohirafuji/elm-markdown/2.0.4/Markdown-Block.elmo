@@ -1,0 +1,1770 @@
+var _pablohirafuji$elm_markdown$Markdown_Block$queryInlinesHelp = F2(
+	function ($function, block) {
+		var _p0 = block;
+		switch (_p0.ctor) {
+			case 'Paragraph':
+				return _elm_lang$core$List$concat(
+					A2(
+						_elm_lang$core$List$map,
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$query($function),
+						_p0._1));
+			case 'Heading':
+				return _elm_lang$core$List$concat(
+					A2(
+						_elm_lang$core$List$map,
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$query($function),
+						_p0._2));
+			case 'PlainInlines':
+				return _elm_lang$core$List$concat(
+					A2(
+						_elm_lang$core$List$map,
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$query($function),
+						_p0._0));
+			default:
+				return {ctor: '[]'};
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$defaultHtml = F3(
+	function (customHtml, customInlineHtml, block) {
+		var blockToHtml = A2(
+			_elm_lang$core$Maybe$withDefault,
+			A2(_pablohirafuji$elm_markdown$Markdown_Block$defaultHtml, _elm_lang$core$Maybe$Nothing, customInlineHtml),
+			customHtml);
+		var inlineToHtml = A2(_elm_lang$core$Maybe$withDefault, _pablohirafuji$elm_markdown$Markdown_Inline$toHtml, customInlineHtml);
+		var _p1 = block;
+		switch (_p1.ctor) {
+			case 'BlankLine':
+				return {ctor: '[]'};
+			case 'Heading':
+				var hElement = function () {
+					var _p2 = _p1._1;
+					switch (_p2) {
+						case 1:
+							return _elm_lang$html$Html$h1(
+								{ctor: '[]'});
+						case 2:
+							return _elm_lang$html$Html$h2(
+								{ctor: '[]'});
+						case 3:
+							return _elm_lang$html$Html$h3(
+								{ctor: '[]'});
+						case 4:
+							return _elm_lang$html$Html$h4(
+								{ctor: '[]'});
+						case 5:
+							return _elm_lang$html$Html$h5(
+								{ctor: '[]'});
+						default:
+							return _elm_lang$html$Html$h6(
+								{ctor: '[]'});
+					}
+				}();
+				return {
+					ctor: '::',
+					_0: hElement(
+						A2(_elm_lang$core$List$map, inlineToHtml, _p1._2)),
+					_1: {ctor: '[]'}
+				};
+			case 'ThematicBreak':
+				return {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$hr,
+						{ctor: '[]'},
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				};
+			case 'Paragraph':
+				return {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						A2(_elm_lang$core$List$map, inlineToHtml, _p1._1)),
+					_1: {ctor: '[]'}
+				};
+			case 'CodeBlock':
+				if (_p1._0.ctor === 'Fenced') {
+					var basicView = function (attrs) {
+						return {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$pre,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$code,
+										attrs,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text(_p1._1),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						};
+					};
+					var _p3 = _p1._0._1.language;
+					if (_p3.ctor === 'Just') {
+						return basicView(
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class(
+									A2(_elm_lang$core$Basics_ops['++'], 'language-', _p3._0)),
+								_1: {ctor: '[]'}
+							});
+					} else {
+						return basicView(
+							{ctor: '[]'});
+					}
+				} else {
+					return {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$pre,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$code,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(_p1._1),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					};
+				}
+			case 'BlockQuote':
+				return A3(
+					_elm_lang$core$Basics$flip,
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						}),
+					{ctor: '[]'},
+					A2(
+						_elm_lang$html$Html$blockquote,
+						{ctor: '[]'},
+						_elm_lang$core$List$concat(
+							A2(_elm_lang$core$List$map, blockToHtml, _p1._0))));
+			case 'List':
+				return A3(
+					_elm_lang$core$Basics$flip,
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						}),
+					{ctor: '[]'},
+					function () {
+						var _p4 = _p1._0.type_;
+						if (_p4.ctor === 'Ordered') {
+							var _p5 = _p4._0;
+							return _elm_lang$core$Native_Utils.eq(_p5, 1) ? _elm_lang$html$Html$ol(
+								{ctor: '[]'}) : _elm_lang$html$Html$ol(
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$start(_p5),
+									_1: {ctor: '[]'}
+								});
+						} else {
+							return _elm_lang$html$Html$ul(
+								{ctor: '[]'});
+						}
+					}()(
+						A2(
+							_elm_lang$core$List$map,
+							function (_p6) {
+								return A2(
+									_elm_lang$html$Html$li,
+									{ctor: '[]'},
+									_elm_lang$core$List$concat(
+										A2(_elm_lang$core$List$map, blockToHtml, _p6)));
+							},
+							_p1._1)));
+			case 'PlainInlines':
+				return A2(_elm_lang$core$List$map, inlineToHtml, _p1._0);
+			default:
+				return A3(
+					_elm_lang$core$Basics$flip,
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						}),
+					{ctor: '[]'},
+					A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						A2(
+							F2(
+								function (x, y) {
+									return {ctor: '::', _0: x, _1: y};
+								}),
+							_elm_lang$html$Html$text(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'Unhandled custom block:',
+									_elm_lang$core$Basics$toString(_p1._0))),
+							_elm_lang$core$List$concat(
+								A2(_elm_lang$core$List$map, blockToHtml, _p1._1)))));
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$toHtml = A2(_pablohirafuji$elm_markdown$Markdown_Block$defaultHtml, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing);
+var _pablohirafuji$elm_markdown$Markdown_Block$insertLinkMatch = F2(
+	function (refs, linkMatch) {
+		return A2(_elm_lang$core$Dict$member, linkMatch.inside, refs) ? refs : A3(
+			_elm_lang$core$Dict$insert,
+			linkMatch.inside,
+			{ctor: '_Tuple2', _0: linkMatch.url, _1: linkMatch.maybeTitle},
+			refs);
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$hrefRegex = '\\s*(?:<([^<>\\s]*)>|([^\\s]*))';
+var _pablohirafuji$elm_markdown$Markdown_Block$refRegex = _elm_lang$core$Regex$regex(
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		'^\\s*\\[(',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_pablohirafuji$elm_markdown$Markdown_Helpers$insideSquareBracketRegex,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				')\\]:',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_pablohirafuji$elm_markdown$Markdown_Block$hrefRegex,
+					A2(_elm_lang$core$Basics_ops['++'], _pablohirafuji$elm_markdown$Markdown_Helpers$titleRegex, '\\s*(?![^\\n])'))))));
+var _pablohirafuji$elm_markdown$Markdown_Block$extractUrlTitleRegex = function (regexMatch) {
+	var _p7 = regexMatch.submatches;
+	if (((((((_p7.ctor === '::') && (_p7._0.ctor === 'Just')) && (_p7._1.ctor === '::')) && (_p7._1._1.ctor === '::')) && (_p7._1._1._1.ctor === '::')) && (_p7._1._1._1._1.ctor === '::')) && (_p7._1._1._1._1._1.ctor === '::')) {
+		var toReturn = function (rawUrl) {
+			return {
+				matchLength: _elm_lang$core$String$length(regexMatch.match),
+				inside: _p7._0._0,
+				url: rawUrl,
+				maybeTitle: _pablohirafuji$elm_markdown$Markdown_Helpers$returnFirstJust(
+					{
+						ctor: '::',
+						_0: _p7._1._1._1._0,
+						_1: {
+							ctor: '::',
+							_0: _p7._1._1._1._1._0,
+							_1: {
+								ctor: '::',
+								_0: _p7._1._1._1._1._1._0,
+								_1: {ctor: '[]'}
+							}
+						}
+					})
+			};
+		};
+		var maybeRawUrl = _pablohirafuji$elm_markdown$Markdown_Helpers$returnFirstJust(
+			{
+				ctor: '::',
+				_0: _p7._1._0,
+				_1: {
+					ctor: '::',
+					_0: _p7._1._1._0,
+					_1: {ctor: '[]'}
+				}
+			});
+		return A2(_elm_lang$core$Maybe$map, toReturn, maybeRawUrl);
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$maybeLinkMatch = function (rawText) {
+	return A2(
+		_elm_lang$core$Maybe$andThen,
+		function (linkMatch) {
+			return (_elm_lang$core$Native_Utils.eq(linkMatch.url, '') || _elm_lang$core$Native_Utils.eq(linkMatch.inside, '')) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(linkMatch);
+		},
+		A2(
+			_elm_lang$core$Maybe$map,
+			function (linkMatch) {
+				return _elm_lang$core$Native_Utils.update(
+					linkMatch,
+					{
+						inside: _pablohirafuji$elm_markdown$Markdown_Helpers$prepareRefLabel(linkMatch.inside)
+					});
+			},
+			A2(
+				_elm_lang$core$Maybe$andThen,
+				_pablohirafuji$elm_markdown$Markdown_Block$extractUrlTitleRegex,
+				_elm_lang$core$List$head(
+					A3(
+						_elm_lang$core$Regex$find,
+						_elm_lang$core$Regex$AtMost(1),
+						_pablohirafuji$elm_markdown$Markdown_Block$refRegex,
+						rawText)))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$formatParagraphLine = function (rawParagraph) {
+	return _elm_lang$core$Native_Utils.eq(
+		A2(_elm_lang$core$String$right, 2, rawParagraph),
+		'  ') ? A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$String$trim(rawParagraph),
+		'  ') : _elm_lang$core$String$trim(rawParagraph);
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$isBlankLineLast = function (items) {
+	isBlankLineLast:
+	while (true) {
+		var _p8 = items;
+		if (_p8.ctor === '[]') {
+			return false;
+		} else {
+			var _p9 = _p8._0;
+			_v7_3:
+			do {
+				if (_p9.ctor === '::') {
+					switch (_p9._0.ctor) {
+						case 'BlankLine':
+							if (_p9._1.ctor === '[]') {
+								return false;
+							} else {
+								return true;
+							}
+						case 'List':
+							var _v8 = _p9._0._1;
+							items = _v8;
+							continue isBlankLineLast;
+						default:
+							break _v7_3;
+					}
+				} else {
+					break _v7_3;
+				}
+			} while(false);
+			return false;
+		}
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$unorderedListLineRegex = _elm_lang$core$Regex$regex('^( *([\\*\\-\\+])( {0,4}))(?:[ \\t](.*))?$');
+var _pablohirafuji$elm_markdown$Markdown_Block$orderedListLineRegex = _elm_lang$core$Regex$regex('^( *(\\d{1,9})([.)])( {0,4}))(?:[ \\t](.*))?$');
+var _pablohirafuji$elm_markdown$Markdown_Block$isCloseFenceLineHelp = F2(
+	function (fence, match) {
+		var _p10 = match.submatches;
+		if ((_p10.ctor === '::') && (_p10._0.ctor === 'Just')) {
+			var _p11 = _p10._0._0;
+			return (_elm_lang$core$Native_Utils.cmp(
+				_elm_lang$core$String$length(_p11),
+				fence.fenceLength) > -1) && _elm_lang$core$Native_Utils.eq(
+				A2(_elm_lang$core$String$left, 1, _p11),
+				fence.fenceChar);
+		} else {
+			return false;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$closeCodeFenceLineRegex = _elm_lang$core$Regex$regex('^ {0,3}(`{3,}|~{3,})\\s*$');
+var _pablohirafuji$elm_markdown$Markdown_Block$isCloseFenceLine = function (fence) {
+	return function (_p12) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			false,
+			A2(
+				_elm_lang$core$Maybe$map,
+				_pablohirafuji$elm_markdown$Markdown_Block$isCloseFenceLineHelp(fence),
+				_elm_lang$core$List$head(
+					A3(
+						_elm_lang$core$Regex$find,
+						_elm_lang$core$Regex$AtMost(1),
+						_pablohirafuji$elm_markdown$Markdown_Block$closeCodeFenceLineRegex,
+						_p12))));
+	};
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$openCodeFenceLineRegex = _elm_lang$core$Regex$regex('^( {0,3})(`{3,}(?!.*`)|~{3,}(?!.*~))(.*)$');
+var _pablohirafuji$elm_markdown$Markdown_Block$blocksAfterBlankLines = F2(
+	function (ast, blankLines) {
+		blocksAfterBlankLines:
+		while (true) {
+			var _p13 = ast;
+			if ((_p13.ctor === '::') && (_p13._0.ctor === 'BlankLine')) {
+				var _v11 = _p13._1,
+					_v12 = {ctor: '::', _0: _p13._0._0, _1: blankLines};
+				ast = _v11;
+				blankLines = _v12;
+				continue blocksAfterBlankLines;
+			} else {
+				return {ctor: '_Tuple2', _0: ast, _1: blankLines};
+			}
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$indentedCodeLineRegex = _elm_lang$core$Regex$regex('^(?: {4,4}| {0,3}\\t)(.*)$');
+var _pablohirafuji$elm_markdown$Markdown_Block$blockQuoteLineRegex = _elm_lang$core$Regex$regex('^ {0,3}(?:>[ ]?)(.*)$');
+var _pablohirafuji$elm_markdown$Markdown_Block$thematicBreakLineRegex = _elm_lang$core$Regex$regex(
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		'^ {0,3}(?:',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'(?:\\*[ \\t]*){3,}',
+			A2(_elm_lang$core$Basics_ops['++'], '|(?:_[ \\t]*){3,}', '|(?:-[ \\t]*){3,})[ \\t]*$'))));
+var _pablohirafuji$elm_markdown$Markdown_Block$extractSetextHeadingRM = function (match) {
+	var _p14 = match.submatches;
+	if ((_p14.ctor === '::') && (_p14._0.ctor === 'Just')) {
+		var _p15 = _p14._0._0;
+		return A2(_elm_lang$core$String$startsWith, '=', _p15) ? _elm_lang$core$Maybe$Just(
+			{ctor: '_Tuple2', _0: 1, _1: _p15}) : _elm_lang$core$Maybe$Just(
+			{ctor: '_Tuple2', _0: 2, _1: _p15});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$setextHeadingLineRegex = _elm_lang$core$Regex$regex('^ {0,3}(=+|-+)[ \\t]*$');
+var _pablohirafuji$elm_markdown$Markdown_Block$atxHeadingLineRegex = _elm_lang$core$Regex$regex(
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		'^ {0,3}(#{1,6})',
+		A2(_elm_lang$core$Basics_ops['++'], '(?:[ \\t]+[ \\t#]+$|[ \\t]+|$)', '(.*?)(?:\\s+[ \\t#]*)?$')));
+var _pablohirafuji$elm_markdown$Markdown_Block$blankLineRegex = _elm_lang$core$Regex$regex('^\\s*$');
+var _pablohirafuji$elm_markdown$Markdown_Block$calcListIndentLength = function (_p16) {
+	var _p17 = _p16;
+	var _p20 = _p17._2;
+	var _p19 = _p17._0;
+	var _p18 = _p17._1;
+	var indentSpaceLength = _elm_lang$core$String$length(_p18);
+	var isIndentedCode = _elm_lang$core$Native_Utils.cmp(indentSpaceLength, 4) > -1;
+	var updtRawLine = isIndentedCode ? A2(_elm_lang$core$Basics_ops['++'], _p18, _p20) : _p20;
+	var indentLength = (isIndentedCode || A2(_elm_lang$core$Regex$contains, _pablohirafuji$elm_markdown$Markdown_Block$blankLineRegex, _p20)) ? (_p19.indentLength - indentSpaceLength) : _p19.indentLength;
+	return {
+		ctor: '_Tuple2',
+		_0: _elm_lang$core$Native_Utils.update(
+			_p19,
+			{indentLength: indentLength}),
+		_1: updtRawLine
+	};
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$dropRefString = F2(
+	function (rawText, inlineMatch) {
+		var strippedText = A2(_elm_lang$core$String$dropLeft, inlineMatch.matchLength, rawText);
+		return A2(_elm_lang$core$Regex$contains, _pablohirafuji$elm_markdown$Markdown_Block$blankLineRegex, strippedText) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(strippedText);
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$parseReference = F2(
+	function (refs, rawText) {
+		parseReference:
+		while (true) {
+			var _p21 = _pablohirafuji$elm_markdown$Markdown_Block$maybeLinkMatch(rawText);
+			if (_p21.ctor === 'Just') {
+				var _p23 = _p21._0;
+				var updtRefs = A2(_pablohirafuji$elm_markdown$Markdown_Block$insertLinkMatch, refs, _p23);
+				var maybeStrippedText = A2(_pablohirafuji$elm_markdown$Markdown_Block$dropRefString, rawText, _p23);
+				var _p22 = maybeStrippedText;
+				if (_p22.ctor === 'Just') {
+					var _v17 = updtRefs,
+						_v18 = _p22._0;
+					refs = _v17;
+					rawText = _v18;
+					continue parseReference;
+				} else {
+					return {ctor: '_Tuple2', _0: updtRefs, _1: _elm_lang$core$Maybe$Nothing};
+				}
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: refs,
+					_1: _elm_lang$core$Maybe$Just(rawText)
+				};
+			}
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$Fence = F4(
+	function (a, b, c, d) {
+		return {indentLength: a, fenceLength: b, fenceChar: c, language: d};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$ListBlock = F4(
+	function (a, b, c, d) {
+		return {type_: a, indentLength: b, delimiter: c, isLoose: d};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$LinkMatch = F4(
+	function (a, b, c, d) {
+		return {matchLength: a, inside: b, url: c, maybeTitle: d};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$Custom = F2(
+	function (a, b) {
+		return {ctor: 'Custom', _0: a, _1: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$PlainInlines = function (a) {
+	return {ctor: 'PlainInlines', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$List = F2(
+	function (a, b) {
+		return {ctor: 'List', _0: a, _1: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$BlockQuote = function (a) {
+	return {ctor: 'BlockQuote', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$walk = F2(
+	function ($function, block) {
+		var _p24 = block;
+		switch (_p24.ctor) {
+			case 'BlockQuote':
+				return $function(
+					_pablohirafuji$elm_markdown$Markdown_Block$BlockQuote(
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_Block$walk($function),
+							_p24._0)));
+			case 'List':
+				return $function(
+					A2(
+						_pablohirafuji$elm_markdown$Markdown_Block$List,
+						_p24._0,
+						A2(
+							_elm_lang$core$List$map,
+							_elm_lang$core$List$map(
+								_pablohirafuji$elm_markdown$Markdown_Block$walk($function)),
+							_p24._1)));
+			case 'Custom':
+				return $function(
+					A2(
+						_pablohirafuji$elm_markdown$Markdown_Block$Custom,
+						_p24._0,
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_Block$walk($function),
+							_p24._1)));
+			default:
+				return $function(block);
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$query = F2(
+	function ($function, block) {
+		var _p25 = block;
+		switch (_p25.ctor) {
+			case 'BlockQuote':
+				var _p26 = _p25._0;
+				return A2(
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					$function(
+						_pablohirafuji$elm_markdown$Markdown_Block$BlockQuote(_p26)),
+					_elm_lang$core$List$concat(
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_Block$query($function),
+							_p26)));
+			case 'List':
+				var _p27 = _p25._1;
+				return A2(
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					$function(
+						A2(_pablohirafuji$elm_markdown$Markdown_Block$List, _p25._0, _p27)),
+					_elm_lang$core$List$concat(
+						_elm_lang$core$List$concat(
+							A2(
+								_elm_lang$core$List$map,
+								_elm_lang$core$List$map(
+									_pablohirafuji$elm_markdown$Markdown_Block$query($function)),
+								_p27))));
+			case 'Custom':
+				var _p28 = _p25._1;
+				return A2(
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					$function(
+						A2(_pablohirafuji$elm_markdown$Markdown_Block$Custom, _p25._0, _p28)),
+					_elm_lang$core$List$concat(
+						A2(
+							_elm_lang$core$List$map,
+							_pablohirafuji$elm_markdown$Markdown_Block$query($function),
+							_p28)));
+			default:
+				return $function(block);
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$queryInlines = F2(
+	function ($function, block) {
+		return A2(
+			_pablohirafuji$elm_markdown$Markdown_Block$query,
+			_pablohirafuji$elm_markdown$Markdown_Block$queryInlinesHelp($function),
+			block);
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$Paragraph = F2(
+	function (a, b) {
+		return {ctor: 'Paragraph', _0: a, _1: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$addToParagraph = F2(
+	function (paragraph, rawLine) {
+		return A2(
+			_pablohirafuji$elm_markdown$Markdown_Block$Paragraph,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				paragraph,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'\n',
+					_pablohirafuji$elm_markdown$Markdown_Block$formatParagraphLine(rawLine))),
+			{ctor: '[]'});
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$maybeContinueParagraph = F2(
+	function (rawLine, ast) {
+		var _p29 = ast;
+		_v21_3:
+		do {
+			if (_p29.ctor === '::') {
+				switch (_p29._0.ctor) {
+					case 'Paragraph':
+						return _elm_lang$core$Maybe$Just(
+							{
+								ctor: '::',
+								_0: A2(_pablohirafuji$elm_markdown$Markdown_Block$addToParagraph, _p29._0._0, rawLine),
+								_1: _p29._1
+							});
+					case 'BlockQuote':
+						return A2(
+							_elm_lang$core$Maybe$map,
+							function (updtBqAST) {
+								return {
+									ctor: '::',
+									_0: _pablohirafuji$elm_markdown$Markdown_Block$BlockQuote(updtBqAST),
+									_1: _p29._1
+								};
+							},
+							A2(_pablohirafuji$elm_markdown$Markdown_Block$maybeContinueParagraph, rawLine, _p29._0._0));
+					case 'List':
+						var _p30 = _p29._0._1;
+						if (_p30.ctor === '::') {
+							return A2(
+								_elm_lang$core$Maybe$map,
+								function (_p31) {
+									return A3(
+										_elm_lang$core$Basics$flip,
+										F2(
+											function (x, y) {
+												return {ctor: '::', _0: x, _1: y};
+											}),
+										_p29._1,
+										A2(
+											_pablohirafuji$elm_markdown$Markdown_Block$List,
+											_p29._0._0,
+											A3(
+												_elm_lang$core$Basics$flip,
+												F2(
+													function (x, y) {
+														return {ctor: '::', _0: x, _1: y};
+													}),
+												_p30._1,
+												_p31)));
+								},
+								A2(_pablohirafuji$elm_markdown$Markdown_Block$maybeContinueParagraph, rawLine, _p30._0));
+						} else {
+							return _elm_lang$core$Maybe$Nothing;
+						}
+					default:
+						break _v21_3;
+				}
+			} else {
+				break _v21_3;
+			}
+		} while(false);
+		return _elm_lang$core$Maybe$Nothing;
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$parseTextLine = F2(
+	function (rawLine, ast) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			{
+				ctor: '::',
+				_0: A2(
+					_pablohirafuji$elm_markdown$Markdown_Block$Paragraph,
+					_pablohirafuji$elm_markdown$Markdown_Block$formatParagraphLine(rawLine),
+					{ctor: '[]'}),
+				_1: ast
+			},
+			A2(_pablohirafuji$elm_markdown$Markdown_Block$maybeContinueParagraph, rawLine, ast));
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$parseReferencesHelp = F2(
+	function (block, _p32) {
+		var _p33 = _p32;
+		var _p41 = _p33._0;
+		var _p40 = _p33._1;
+		var _p34 = block;
+		switch (_p34.ctor) {
+			case 'Paragraph':
+				var _p35 = A2(_pablohirafuji$elm_markdown$Markdown_Block$parseReference, _elm_lang$core$Dict$empty, _p34._0);
+				var paragraphRefs = _p35._0;
+				var maybeUpdtText = _p35._1;
+				var updtRefs = A2(_elm_lang$core$Dict$union, paragraphRefs, _p41);
+				var _p36 = maybeUpdtText;
+				if (_p36.ctor === 'Just') {
+					return {
+						ctor: '_Tuple2',
+						_0: updtRefs,
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_pablohirafuji$elm_markdown$Markdown_Block$Paragraph,
+								_p36._0,
+								{ctor: '[]'}),
+							_1: _p40
+						}
+					};
+				} else {
+					return {ctor: '_Tuple2', _0: updtRefs, _1: _p40};
+				}
+			case 'List':
+				var _p37 = A3(
+					_elm_lang$core$List$foldl,
+					F2(
+						function (item, _p38) {
+							var _p39 = _p38;
+							return A2(
+								_elm_lang$core$Tuple$mapSecond,
+								A2(
+									_elm_lang$core$Basics$flip,
+									F2(
+										function (x, y) {
+											return {ctor: '::', _0: x, _1: y};
+										}),
+									_p39._1),
+								A2(_pablohirafuji$elm_markdown$Markdown_Block$parseReferences, _p39._0, item));
+						}),
+					{
+						ctor: '_Tuple2',
+						_0: _p41,
+						_1: {ctor: '[]'}
+					},
+					_p34._1);
+				var updtRefs = _p37._0;
+				var updtItems = _p37._1;
+				return {
+					ctor: '_Tuple2',
+					_0: updtRefs,
+					_1: {
+						ctor: '::',
+						_0: A2(_pablohirafuji$elm_markdown$Markdown_Block$List, _p34._0, updtItems),
+						_1: _p40
+					}
+				};
+			case 'BlockQuote':
+				return A2(
+					_elm_lang$core$Tuple$mapSecond,
+					A2(
+						_elm_lang$core$Basics$flip,
+						F2(
+							function (x, y) {
+								return {ctor: '::', _0: x, _1: y};
+							}),
+						_p40),
+					A2(
+						_elm_lang$core$Tuple$mapSecond,
+						_pablohirafuji$elm_markdown$Markdown_Block$BlockQuote,
+						A2(_pablohirafuji$elm_markdown$Markdown_Block$parseReferences, _p41, _p34._0)));
+			case 'Custom':
+				return A2(
+					_elm_lang$core$Tuple$mapSecond,
+					A2(
+						_elm_lang$core$Basics$flip,
+						F2(
+							function (x, y) {
+								return {ctor: '::', _0: x, _1: y};
+							}),
+						_p40),
+					A2(
+						_elm_lang$core$Tuple$mapSecond,
+						_pablohirafuji$elm_markdown$Markdown_Block$Custom(_p34._0),
+						A2(_pablohirafuji$elm_markdown$Markdown_Block$parseReferences, _p41, _p34._1)));
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _p41,
+					_1: {ctor: '::', _0: block, _1: _p40}
+				};
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$parseReferences = function (refs) {
+	return A2(
+		_elm_lang$core$List$foldl,
+		_pablohirafuji$elm_markdown$Markdown_Block$parseReferencesHelp,
+		{
+			ctor: '_Tuple2',
+			_0: refs,
+			_1: {ctor: '[]'}
+		});
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$CodeBlock = F2(
+	function (a, b) {
+		return {ctor: 'CodeBlock', _0: a, _1: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$Heading = F3(
+	function (a, b, c) {
+		return {ctor: 'Heading', _0: a, _1: b, _2: c};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$extractATXHeadingRM = function (match) {
+	var _p42 = match.submatches;
+	if ((((_p42.ctor === '::') && (_p42._0.ctor === 'Just')) && (_p42._1.ctor === '::')) && (_p42._1._0.ctor === 'Just')) {
+		return _elm_lang$core$Maybe$Just(
+			A3(
+				_pablohirafuji$elm_markdown$Markdown_Block$Heading,
+				_p42._1._0._0,
+				_elm_lang$core$String$length(_p42._0._0),
+				{ctor: '[]'}));
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$checkATXHeadingLine = function (_p43) {
+	var _p44 = _p43;
+	var _p46 = _p44._0;
+	var _p45 = _p44._1;
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		{ctor: '_Tuple2', _0: _p46, _1: _p45},
+		A2(
+			_elm_lang$core$Maybe$map,
+			A2(
+				_elm_lang$core$Basics$flip,
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					}),
+				_p45),
+			A2(
+				_elm_lang$core$Maybe$andThen,
+				_pablohirafuji$elm_markdown$Markdown_Block$extractATXHeadingRM,
+				_elm_lang$core$List$head(
+					A3(
+						_elm_lang$core$Regex$find,
+						_elm_lang$core$Regex$AtMost(1),
+						_pablohirafuji$elm_markdown$Markdown_Block$atxHeadingLineRegex,
+						_p46)))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$parseSetextHeadingLine = F3(
+	function (rawLine, ast, _p47) {
+		var _p48 = _p47;
+		var _p49 = ast;
+		if ((_p49.ctor === '::') && (_p49._0.ctor === 'Paragraph')) {
+			return _elm_lang$core$Maybe$Just(
+				{
+					ctor: '::',
+					_0: A3(
+						_pablohirafuji$elm_markdown$Markdown_Block$Heading,
+						_p49._0._0,
+						_p48._0,
+						{ctor: '[]'}),
+					_1: _p49._1
+				});
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$checkSetextHeadingLine = function (_p50) {
+	var _p51 = _p50;
+	var _p53 = _p51._0;
+	var _p52 = _p51._1;
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		{ctor: '_Tuple2', _0: _p53, _1: _p52},
+		A2(
+			_elm_lang$core$Maybe$andThen,
+			A2(_pablohirafuji$elm_markdown$Markdown_Block$parseSetextHeadingLine, _p53, _p52),
+			A2(
+				_elm_lang$core$Maybe$andThen,
+				_pablohirafuji$elm_markdown$Markdown_Block$extractSetextHeadingRM,
+				_elm_lang$core$List$head(
+					A3(
+						_elm_lang$core$Regex$find,
+						_elm_lang$core$Regex$AtMost(1),
+						_pablohirafuji$elm_markdown$Markdown_Block$setextHeadingLineRegex,
+						_p53)))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$parseInline = F4(
+	function (maybeOptions, textAsParagraph, refs, block) {
+		var options = A2(_elm_lang$core$Maybe$withDefault, _pablohirafuji$elm_markdown$Markdown_Config$defaultOptions, maybeOptions);
+		var _p54 = block;
+		switch (_p54.ctor) {
+			case 'Heading':
+				var _p55 = _p54._0;
+				return A3(
+					_pablohirafuji$elm_markdown$Markdown_Block$Heading,
+					_p55,
+					_p54._1,
+					A3(_pablohirafuji$elm_markdown$Markdown_InlineParser$parse, options, refs, _p55));
+			case 'Paragraph':
+				var _p57 = _p54._0;
+				var inlines = A3(_pablohirafuji$elm_markdown$Markdown_InlineParser$parse, options, refs, _p57);
+				var _p56 = inlines;
+				if (((_p56.ctor === '::') && (_p56._0.ctor === 'HtmlInline')) && (_p56._1.ctor === '[]')) {
+					return _pablohirafuji$elm_markdown$Markdown_Block$PlainInlines(inlines);
+				} else {
+					return textAsParagraph ? A2(_pablohirafuji$elm_markdown$Markdown_Block$Paragraph, _p57, inlines) : _pablohirafuji$elm_markdown$Markdown_Block$PlainInlines(inlines);
+				}
+			case 'BlockQuote':
+				return _pablohirafuji$elm_markdown$Markdown_Block$BlockQuote(
+					A3(
+						_pablohirafuji$elm_markdown$Markdown_Block$parseInlines,
+						maybeOptions,
+						true,
+						{ctor: '_Tuple2', _0: refs, _1: _p54._0}));
+			case 'List':
+				var _p59 = _p54._0;
+				return A2(
+					_pablohirafuji$elm_markdown$Markdown_Block$List,
+					_p59,
+					A3(
+						_elm_lang$core$Basics$flip,
+						_elm_lang$core$List$map,
+						_p54._1,
+						function (_p58) {
+							return A3(
+								_pablohirafuji$elm_markdown$Markdown_Block$parseInlines,
+								maybeOptions,
+								_p59.isLoose,
+								A2(
+									F2(
+										function (v0, v1) {
+											return {ctor: '_Tuple2', _0: v0, _1: v1};
+										}),
+									refs,
+									_p58));
+						}));
+			case 'Custom':
+				return A2(
+					_pablohirafuji$elm_markdown$Markdown_Block$Custom,
+					_p54._0,
+					A3(
+						_pablohirafuji$elm_markdown$Markdown_Block$parseInlines,
+						maybeOptions,
+						true,
+						{ctor: '_Tuple2', _0: refs, _1: _p54._1}));
+			default:
+				return block;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$parseInlines = F3(
+	function (maybeOptions, textAsParagraph, _p60) {
+		var _p61 = _p60;
+		return A2(
+			_elm_lang$core$List$map,
+			A3(_pablohirafuji$elm_markdown$Markdown_Block$parseInline, maybeOptions, textAsParagraph, _p61._0),
+			_p61._1);
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$walkInlinesHelp = F2(
+	function ($function, block) {
+		var _p62 = block;
+		switch (_p62.ctor) {
+			case 'Paragraph':
+				return A2(
+					_pablohirafuji$elm_markdown$Markdown_Block$Paragraph,
+					_p62._0,
+					A2(
+						_elm_lang$core$List$map,
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$walk($function),
+						_p62._1));
+			case 'Heading':
+				return A3(
+					_pablohirafuji$elm_markdown$Markdown_Block$Heading,
+					_p62._0,
+					_p62._1,
+					A2(
+						_elm_lang$core$List$map,
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$walk($function),
+						_p62._2));
+			case 'PlainInlines':
+				return _pablohirafuji$elm_markdown$Markdown_Block$PlainInlines(
+					A2(
+						_elm_lang$core$List$map,
+						_pablohirafuji$elm_markdown$Markdown_InlineParser$walk($function),
+						_p62._0));
+			default:
+				return block;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$walkInlines = F2(
+	function ($function, block) {
+		return A2(
+			_pablohirafuji$elm_markdown$Markdown_Block$walk,
+			_pablohirafuji$elm_markdown$Markdown_Block$walkInlinesHelp($function),
+			block);
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$ThematicBreak = {ctor: 'ThematicBreak'};
+var _pablohirafuji$elm_markdown$Markdown_Block$checkThematicBreakLine = function (_p63) {
+	var _p64 = _p63;
+	var _p67 = _p64._0;
+	var _p66 = _p64._1;
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		{ctor: '_Tuple2', _0: _p67, _1: _p66},
+		A2(
+			_elm_lang$core$Maybe$map,
+			function (_p65) {
+				return {ctor: '::', _0: _pablohirafuji$elm_markdown$Markdown_Block$ThematicBreak, _1: _p66};
+			},
+			_elm_lang$core$List$head(
+				A3(
+					_elm_lang$core$Regex$find,
+					_elm_lang$core$Regex$AtMost(1),
+					_pablohirafuji$elm_markdown$Markdown_Block$thematicBreakLineRegex,
+					_p67))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$BlankLine = function (a) {
+	return {ctor: 'BlankLine', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$Fenced = F2(
+	function (a, b) {
+		return {ctor: 'Fenced', _0: a, _1: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$parseBlankLine = F2(
+	function (ast, match) {
+		var _p68 = ast;
+		_v37_2:
+		do {
+			if (_p68.ctor === '::') {
+				switch (_p68._0.ctor) {
+					case 'CodeBlock':
+						if ((_p68._0._0.ctor === 'Fenced') && (_p68._0._0._0 === true)) {
+							return A3(
+								_elm_lang$core$Basics$flip,
+								F2(
+									function (x, y) {
+										return {ctor: '::', _0: x, _1: y};
+									}),
+								_p68._1,
+								A2(
+									_pablohirafuji$elm_markdown$Markdown_Block$CodeBlock,
+									A2(_pablohirafuji$elm_markdown$Markdown_Block$Fenced, true, _p68._0._0._1),
+									A2(_elm_lang$core$Basics_ops['++'], _p68._0._1, '\n')));
+						} else {
+							break _v37_2;
+						}
+					case 'List':
+						return {
+							ctor: '::',
+							_0: A2(
+								_pablohirafuji$elm_markdown$Markdown_Block$List,
+								_p68._0._0,
+								A2(_pablohirafuji$elm_markdown$Markdown_Block$addBlankLineToListBlock, match, _p68._0._1)),
+							_1: _p68._1
+						};
+					default:
+						break _v37_2;
+				}
+			} else {
+				break _v37_2;
+			}
+		} while(false);
+		return {
+			ctor: '::',
+			_0: _pablohirafuji$elm_markdown$Markdown_Block$BlankLine(match.match),
+			_1: ast
+		};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$addBlankLineToListBlock = F2(
+	function (match, asts) {
+		var _p69 = asts;
+		if (_p69.ctor === '[]') {
+			return {
+				ctor: '::',
+				_0: {
+					ctor: '::',
+					_0: _pablohirafuji$elm_markdown$Markdown_Block$BlankLine(match.match),
+					_1: {ctor: '[]'}
+				},
+				_1: {ctor: '[]'}
+			};
+		} else {
+			return {
+				ctor: '::',
+				_0: A2(_pablohirafuji$elm_markdown$Markdown_Block$parseBlankLine, _p69._0, match),
+				_1: _p69._1
+			};
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$checkBlankLine = function (_p70) {
+	var _p71 = _p70;
+	var _p73 = _p71._0;
+	var _p72 = _p71._1;
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		{ctor: '_Tuple2', _0: _p73, _1: _p72},
+		A2(
+			_elm_lang$core$Maybe$map,
+			_pablohirafuji$elm_markdown$Markdown_Block$parseBlankLine(_p72),
+			_elm_lang$core$List$head(
+				A3(
+					_elm_lang$core$Regex$find,
+					_elm_lang$core$Regex$AtMost(1),
+					_pablohirafuji$elm_markdown$Markdown_Block$blankLineRegex,
+					_p73))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$extractOpenCodeFenceRM = function (match) {
+	var _p74 = match.submatches;
+	if ((((((_p74.ctor === '::') && (_p74._0.ctor === 'Just')) && (_p74._1.ctor === '::')) && (_p74._1._0.ctor === 'Just')) && (_p74._1._1.ctor === '::')) && (_p74._1._1._0.ctor === 'Just')) {
+		var _p75 = _p74._1._0._0;
+		return _elm_lang$core$Maybe$Just(
+			A2(
+				_pablohirafuji$elm_markdown$Markdown_Block$Fenced,
+				true,
+				{
+					indentLength: _elm_lang$core$String$length(_p74._0._0),
+					fenceLength: _elm_lang$core$String$length(_p75),
+					fenceChar: A2(_elm_lang$core$String$left, 1, _p75),
+					language: A2(
+						_elm_lang$core$Maybe$map,
+						_pablohirafuji$elm_markdown$Markdown_Helpers$formatStr,
+						A2(
+							_elm_lang$core$Maybe$andThen,
+							function (lang) {
+								return _elm_lang$core$Native_Utils.eq(lang, '') ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(lang);
+							},
+							_elm_lang$core$List$head(
+								_elm_lang$core$String$words(_p74._1._1._0._0))))
+				}));
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$checkOpenCodeFenceLine = function (_p76) {
+	var _p77 = _p76;
+	var _p79 = _p77._0;
+	var _p78 = _p77._1;
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		{ctor: '_Tuple2', _0: _p79, _1: _p78},
+		A2(
+			_elm_lang$core$Maybe$map,
+			A2(
+				_elm_lang$core$Basics$flip,
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					}),
+				_p78),
+			A2(
+				_elm_lang$core$Maybe$map,
+				function (f) {
+					return A2(_pablohirafuji$elm_markdown$Markdown_Block$CodeBlock, f, '');
+				},
+				A2(
+					_elm_lang$core$Maybe$andThen,
+					_pablohirafuji$elm_markdown$Markdown_Block$extractOpenCodeFenceRM,
+					_elm_lang$core$List$head(
+						A3(
+							_elm_lang$core$Regex$find,
+							_elm_lang$core$Regex$AtMost(1),
+							_pablohirafuji$elm_markdown$Markdown_Block$openCodeFenceLineRegex,
+							_p79))))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$continueOrCloseCodeFence = F3(
+	function (fence, previousCode, rawLine) {
+		return A2(_pablohirafuji$elm_markdown$Markdown_Block$isCloseFenceLine, fence, rawLine) ? A2(
+			_pablohirafuji$elm_markdown$Markdown_Block$CodeBlock,
+			A2(_pablohirafuji$elm_markdown$Markdown_Block$Fenced, false, fence),
+			previousCode) : A2(
+			_pablohirafuji$elm_markdown$Markdown_Block$CodeBlock,
+			A2(_pablohirafuji$elm_markdown$Markdown_Block$Fenced, true, fence),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				previousCode,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A2(_pablohirafuji$elm_markdown$Markdown_Helpers$indentLine, fence.indentLength, rawLine),
+					'\n')));
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$Indented = {ctor: 'Indented'};
+var _pablohirafuji$elm_markdown$Markdown_Block$resumeIndentedCodeBlock = F2(
+	function (codeLine, _p80) {
+		var _p81 = _p80;
+		var _p82 = _p81._0;
+		if (((_p82.ctor === '::') && (_p82._0.ctor === 'CodeBlock')) && (_p82._0._0.ctor === 'Indented')) {
+			return _elm_lang$core$Maybe$Just(
+				A3(
+					_elm_lang$core$Basics$flip,
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						}),
+					_p82._1,
+					A2(
+						_pablohirafuji$elm_markdown$Markdown_Block$CodeBlock,
+						_pablohirafuji$elm_markdown$Markdown_Block$Indented,
+						A3(
+							_elm_lang$core$Basics$flip,
+							F2(
+								function (x, y) {
+									return A2(_elm_lang$core$Basics_ops['++'], x, y);
+								}),
+							A2(_elm_lang$core$Basics_ops['++'], codeLine, '\n'),
+							A2(
+								F2(
+									function (x, y) {
+										return A2(_elm_lang$core$Basics_ops['++'], x, y);
+									}),
+								_p82._0._1,
+								_elm_lang$core$String$concat(
+									A2(
+										_elm_lang$core$List$map,
+										function (bl) {
+											return A2(
+												_elm_lang$core$Basics_ops['++'],
+												A2(_pablohirafuji$elm_markdown$Markdown_Helpers$indentLine, 4, bl),
+												'\n');
+										},
+										_p81._1)))))));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$parseIndentedCodeLine = F2(
+	function (ast, codeLine) {
+		var _p83 = ast;
+		_v44_2:
+		do {
+			if (_p83.ctor === '::') {
+				switch (_p83._0.ctor) {
+					case 'CodeBlock':
+						if (_p83._0._0.ctor === 'Indented') {
+							return A3(
+								_elm_lang$core$Basics$flip,
+								F2(
+									function (x, y) {
+										return {ctor: '::', _0: x, _1: y};
+									}),
+								_p83._1,
+								A2(
+									_pablohirafuji$elm_markdown$Markdown_Block$CodeBlock,
+									_pablohirafuji$elm_markdown$Markdown_Block$Indented,
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										_p83._0._1,
+										A2(_elm_lang$core$Basics_ops['++'], codeLine, '\n'))));
+						} else {
+							break _v44_2;
+						}
+					case 'BlankLine':
+						return A2(
+							_elm_lang$core$Maybe$withDefault,
+							A3(
+								_elm_lang$core$Basics$flip,
+								F2(
+									function (x, y) {
+										return {ctor: '::', _0: x, _1: y};
+									}),
+								ast,
+								A2(
+									_pablohirafuji$elm_markdown$Markdown_Block$CodeBlock,
+									_pablohirafuji$elm_markdown$Markdown_Block$Indented,
+									A2(_elm_lang$core$Basics_ops['++'], codeLine, '\n'))),
+							A2(
+								_pablohirafuji$elm_markdown$Markdown_Block$resumeIndentedCodeBlock,
+								codeLine,
+								A2(
+									_pablohirafuji$elm_markdown$Markdown_Block$blocksAfterBlankLines,
+									_p83._1,
+									{
+										ctor: '::',
+										_0: _p83._0._0,
+										_1: {ctor: '[]'}
+									})));
+					default:
+						break _v44_2;
+				}
+			} else {
+				break _v44_2;
+			}
+		} while(false);
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			A3(
+				_elm_lang$core$Basics$flip,
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					}),
+				ast,
+				A2(
+					_pablohirafuji$elm_markdown$Markdown_Block$CodeBlock,
+					_pablohirafuji$elm_markdown$Markdown_Block$Indented,
+					A2(_elm_lang$core$Basics_ops['++'], codeLine, '\n'))),
+			A2(_pablohirafuji$elm_markdown$Markdown_Block$maybeContinueParagraph, codeLine, ast));
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$checkIndentedCode = function (_p84) {
+	var _p85 = _p84;
+	var _p88 = _p85._0;
+	var _p87 = _p85._1;
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		{ctor: '_Tuple2', _0: _p88, _1: _p87},
+		A2(
+			_elm_lang$core$Maybe$map,
+			_pablohirafuji$elm_markdown$Markdown_Block$parseIndentedCodeLine(_p87),
+			A2(
+				_elm_lang$core$Maybe$withDefault,
+				_elm_lang$core$Maybe$Nothing,
+				A2(
+					_elm_lang$core$Maybe$withDefault,
+					_elm_lang$core$Maybe$Nothing,
+					A2(
+						_elm_lang$core$Maybe$map,
+						function (_p86) {
+							return _elm_lang$core$List$head(
+								function (_) {
+									return _.submatches;
+								}(_p86));
+						},
+						_elm_lang$core$List$head(
+							A3(
+								_elm_lang$core$Regex$find,
+								_elm_lang$core$Regex$AtMost(1),
+								_pablohirafuji$elm_markdown$Markdown_Block$indentedCodeLineRegex,
+								_p88)))))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$Ordered = function (a) {
+	return {ctor: 'Ordered', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$Unordered = {ctor: 'Unordered'};
+var _pablohirafuji$elm_markdown$Markdown_Block$extractOrderedListRM = function (match) {
+	var _p89 = match.submatches;
+	if (((((((((_p89.ctor === '::') && (_p89._0.ctor === 'Just')) && (_p89._1.ctor === '::')) && (_p89._1._0.ctor === 'Just')) && (_p89._1._1.ctor === '::')) && (_p89._1._1._0.ctor === 'Just')) && (_p89._1._1._1.ctor === '::')) && (_p89._1._1._1._0.ctor === 'Just')) && (_p89._1._1._1._1.ctor === '::')) {
+		return _elm_lang$core$Maybe$Just(
+			{
+				ctor: '_Tuple3',
+				_0: {
+					type_: A2(
+						_elm_lang$core$Result$withDefault,
+						_pablohirafuji$elm_markdown$Markdown_Block$Unordered,
+						A2(
+							_elm_lang$core$Result$map,
+							_pablohirafuji$elm_markdown$Markdown_Block$Ordered,
+							_elm_lang$core$String$toInt(_p89._1._0._0))),
+					indentLength: _elm_lang$core$String$length(_p89._0._0) + 1,
+					delimiter: _p89._1._1._0._0,
+					isLoose: false
+				},
+				_1: _p89._1._1._1._0._0,
+				_2: A2(_elm_lang$core$Maybe$withDefault, '', _p89._1._1._1._1._0)
+			});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$checkOrderedListLine = function (rawLine) {
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		rawLine,
+		A2(
+			_elm_lang$core$Maybe$andThen,
+			_pablohirafuji$elm_markdown$Markdown_Block$extractOrderedListRM,
+			_elm_lang$core$List$head(
+				A3(
+					_elm_lang$core$Regex$find,
+					_elm_lang$core$Regex$AtMost(1),
+					_pablohirafuji$elm_markdown$Markdown_Block$orderedListLineRegex,
+					rawLine))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$extractUnorderedListRM = function (match) {
+	var _p90 = match.submatches;
+	if ((((((((_p90.ctor === '::') && (_p90._0.ctor === 'Just')) && (_p90._1.ctor === '::')) && (_p90._1._0.ctor === 'Just')) && (_p90._1._1.ctor === '::')) && (_p90._1._1._0.ctor === 'Just')) && (_p90._1._1._1.ctor === '::')) && (_p90._1._1._1._1.ctor === '[]')) {
+		return _elm_lang$core$Maybe$Just(
+			{
+				ctor: '_Tuple3',
+				_0: {
+					type_: _pablohirafuji$elm_markdown$Markdown_Block$Unordered,
+					indentLength: _elm_lang$core$String$length(_p90._0._0) + 1,
+					delimiter: _p90._1._0._0,
+					isLoose: false
+				},
+				_1: _p90._1._1._0._0,
+				_2: A2(_elm_lang$core$Maybe$withDefault, '', _p90._1._1._1._0)
+			});
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$checkUnorderedListLine = function (rawLine) {
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		rawLine,
+		A2(
+			_elm_lang$core$Maybe$andThen,
+			_pablohirafuji$elm_markdown$Markdown_Block$extractUnorderedListRM,
+			_elm_lang$core$List$head(
+				A3(
+					_elm_lang$core$Regex$find,
+					_elm_lang$core$Regex$AtMost(1),
+					_pablohirafuji$elm_markdown$Markdown_Block$unorderedListLineRegex,
+					rawLine))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$checkListLine = function (_p91) {
+	var _p92 = _p91;
+	var _p94 = _p92._0;
+	var _p93 = _p92._1;
+	return A2(
+		_elm_lang$core$Result$mapError,
+		A2(
+			_elm_lang$core$Basics$flip,
+			F2(
+				function (v0, v1) {
+					return {ctor: '_Tuple2', _0: v0, _1: v1};
+				}),
+			_p93),
+		A2(
+			_elm_lang$core$Result$map,
+			A2(_pablohirafuji$elm_markdown$Markdown_Block$parseListLine, _p94, _p93),
+			A2(
+				_elm_lang$core$Result$map,
+				_pablohirafuji$elm_markdown$Markdown_Block$calcListIndentLength,
+				A2(
+					_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+					_pablohirafuji$elm_markdown$Markdown_Block$checkUnorderedListLine,
+					_pablohirafuji$elm_markdown$Markdown_Block$checkOrderedListLine(_p94)))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$parseListLine = F3(
+	function (rawLine, ast, _p95) {
+		var _p96 = _p95;
+		var _p104 = _p96._0;
+		var parsedRawLine = A2(
+			_pablohirafuji$elm_markdown$Markdown_Block$incorporateLine,
+			_p96._1,
+			{ctor: '[]'});
+		var newList = {
+			ctor: '::',
+			_0: A2(
+				_pablohirafuji$elm_markdown$Markdown_Block$List,
+				_p104,
+				{
+					ctor: '::',
+					_0: parsedRawLine,
+					_1: {ctor: '[]'}
+				}),
+			_1: ast
+		};
+		var _p97 = ast;
+		_v50_2:
+		do {
+			if (_p97.ctor === '::') {
+				switch (_p97._0.ctor) {
+					case 'List':
+						var _p99 = _p97._0._0;
+						var _p98 = _p97._0._1;
+						return _elm_lang$core$Native_Utils.eq(_p104.delimiter, _p99.delimiter) ? A3(
+							_elm_lang$core$Basics$flip,
+							F2(
+								function (x, y) {
+									return {ctor: '::', _0: x, _1: y};
+								}),
+							_p97._1,
+							A2(
+								_pablohirafuji$elm_markdown$Markdown_Block$List,
+								_elm_lang$core$Native_Utils.update(
+									_p99,
+									{
+										indentLength: _p104.indentLength,
+										isLoose: _p99.isLoose || _pablohirafuji$elm_markdown$Markdown_Block$isBlankLineLast(_p98)
+									}),
+								{ctor: '::', _0: parsedRawLine, _1: _p98})) : newList;
+					case 'Paragraph':
+						var _p103 = _p97._0._0;
+						var _p102 = _p97._1;
+						var _p100 = parsedRawLine;
+						if (((_p100.ctor === '::') && (_p100._0.ctor === 'BlankLine')) && (_p100._1.ctor === '[]')) {
+							return {
+								ctor: '::',
+								_0: A2(_pablohirafuji$elm_markdown$Markdown_Block$addToParagraph, _p103, rawLine),
+								_1: _p102
+							};
+						} else {
+							var _p101 = _p104.type_;
+							if (_p101.ctor === 'Ordered') {
+								if (_p101._0 === 1) {
+									return newList;
+								} else {
+									return {
+										ctor: '::',
+										_0: A2(_pablohirafuji$elm_markdown$Markdown_Block$addToParagraph, _p103, rawLine),
+										_1: _p102
+									};
+								}
+							} else {
+								return newList;
+							}
+						}
+					default:
+						break _v50_2;
+				}
+			} else {
+				break _v50_2;
+			}
+		} while(false);
+		return newList;
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$incorporateLine = F2(
+	function (rawLine, ast) {
+		var _p105 = ast;
+		_v53_2:
+		do {
+			if (_p105.ctor === '::') {
+				switch (_p105._0.ctor) {
+					case 'CodeBlock':
+						if ((_p105._0._0.ctor === 'Fenced') && (_p105._0._0._0 === true)) {
+							return A3(
+								_elm_lang$core$Basics$flip,
+								F2(
+									function (x, y) {
+										return {ctor: '::', _0: x, _1: y};
+									}),
+								_p105._1,
+								A3(_pablohirafuji$elm_markdown$Markdown_Block$continueOrCloseCodeFence, _p105._0._0._1, _p105._0._1, rawLine));
+						} else {
+							break _v53_2;
+						}
+					case 'List':
+						var _p106 = _p105._0._0;
+						return (_elm_lang$core$Native_Utils.cmp(
+							_pablohirafuji$elm_markdown$Markdown_Helpers$indentLength(rawLine),
+							_p106.indentLength) > -1) ? A5(_pablohirafuji$elm_markdown$Markdown_Block$parseIndentedListLine, rawLine, _p106, _p105._0._1, ast, _p105._1) : A2(
+							_elm_lang$core$Result$withDefault,
+							A2(_pablohirafuji$elm_markdown$Markdown_Block$parseTextLine, rawLine, ast),
+							A2(
+								_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+								_pablohirafuji$elm_markdown$Markdown_Block$checkBlockQuote,
+								A2(
+									_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+									_pablohirafuji$elm_markdown$Markdown_Block$checkATXHeadingLine,
+									A2(
+										_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+										_pablohirafuji$elm_markdown$Markdown_Block$checkSetextHeadingLine,
+										A2(
+											_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+											_pablohirafuji$elm_markdown$Markdown_Block$checkOpenCodeFenceLine,
+											A2(
+												_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+												_pablohirafuji$elm_markdown$Markdown_Block$checkIndentedCode,
+												A2(
+													_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+													_pablohirafuji$elm_markdown$Markdown_Block$checkBlankLine,
+													A2(
+														_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+														_pablohirafuji$elm_markdown$Markdown_Block$checkListLine,
+														_pablohirafuji$elm_markdown$Markdown_Block$checkThematicBreakLine(
+															{ctor: '_Tuple2', _0: rawLine, _1: ast})))))))));
+					default:
+						break _v53_2;
+				}
+			} else {
+				break _v53_2;
+			}
+		} while(false);
+		return A2(_pablohirafuji$elm_markdown$Markdown_Block$parseRawLine, rawLine, ast);
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$checkBlockQuote = function (_p107) {
+	var _p108 = _p107;
+	var _p111 = _p108._0;
+	var _p110 = _p108._1;
+	return A2(
+		_elm_lang$core$Result$fromMaybe,
+		{ctor: '_Tuple2', _0: _p111, _1: _p110},
+		A2(
+			_elm_lang$core$Maybe$map,
+			_pablohirafuji$elm_markdown$Markdown_Block$parseBlockQuoteLine(_p110),
+			A2(
+				_elm_lang$core$Maybe$withDefault,
+				_elm_lang$core$Maybe$Nothing,
+				A2(
+					_elm_lang$core$Maybe$withDefault,
+					_elm_lang$core$Maybe$Nothing,
+					A2(
+						_elm_lang$core$Maybe$map,
+						function (_p109) {
+							return _elm_lang$core$List$head(
+								function (_) {
+									return _.submatches;
+								}(_p109));
+						},
+						_elm_lang$core$List$head(
+							A3(
+								_elm_lang$core$Regex$find,
+								_elm_lang$core$Regex$AtMost(1),
+								_pablohirafuji$elm_markdown$Markdown_Block$blockQuoteLineRegex,
+								_p111)))))));
+};
+var _pablohirafuji$elm_markdown$Markdown_Block$parseBlockQuoteLine = F2(
+	function (ast, rawLine) {
+		var _p112 = ast;
+		if ((_p112.ctor === '::') && (_p112._0.ctor === 'BlockQuote')) {
+			return A3(
+				_elm_lang$core$Basics$flip,
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					}),
+				_p112._1,
+				_pablohirafuji$elm_markdown$Markdown_Block$BlockQuote(
+					A2(_pablohirafuji$elm_markdown$Markdown_Block$incorporateLine, rawLine, _p112._0._0)));
+		} else {
+			return A3(
+				_elm_lang$core$Basics$flip,
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					}),
+				ast,
+				_pablohirafuji$elm_markdown$Markdown_Block$BlockQuote(
+					A2(
+						_pablohirafuji$elm_markdown$Markdown_Block$incorporateLine,
+						rawLine,
+						{ctor: '[]'})));
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$parseIndentedListLine = F5(
+	function (rawLine, model, items, ast, astTail) {
+		var _p113 = items;
+		if (_p113.ctor === '[]') {
+			return A3(
+				_elm_lang$core$Basics$flip,
+				F2(
+					function (x, y) {
+						return {ctor: '::', _0: x, _1: y};
+					}),
+				astTail,
+				A2(
+					_pablohirafuji$elm_markdown$Markdown_Block$List,
+					model,
+					A3(
+						_elm_lang$core$Basics$flip,
+						F2(
+							function (x, y) {
+								return {ctor: '::', _0: x, _1: y};
+							}),
+						{ctor: '[]'},
+						A3(
+							_elm_lang$core$Basics$flip,
+							_pablohirafuji$elm_markdown$Markdown_Block$incorporateLine,
+							{ctor: '[]'},
+							A2(_pablohirafuji$elm_markdown$Markdown_Helpers$indentLine, model.indentLength, rawLine)))));
+		} else {
+			var _p116 = _p113._0;
+			var indentedRawLine = A2(_pablohirafuji$elm_markdown$Markdown_Helpers$indentLine, model.indentLength, rawLine);
+			var updateList = function (model_) {
+				return A3(
+					_elm_lang$core$Basics$flip,
+					F2(
+						function (x, y) {
+							return {ctor: '::', _0: x, _1: y};
+						}),
+					astTail,
+					A2(
+						_pablohirafuji$elm_markdown$Markdown_Block$List,
+						model_,
+						A3(
+							_elm_lang$core$Basics$flip,
+							F2(
+								function (x, y) {
+									return {ctor: '::', _0: x, _1: y};
+								}),
+							_p113._1,
+							A2(_pablohirafuji$elm_markdown$Markdown_Block$incorporateLine, indentedRawLine, _p116))));
+			};
+			var _p114 = _p116;
+			_v57_3:
+			do {
+				if (_p114.ctor === '::') {
+					switch (_p114._0.ctor) {
+						case 'BlankLine':
+							if (_p114._1.ctor === '[]') {
+								return updateList(model);
+							} else {
+								return A2(
+									_elm_lang$core$List$all,
+									function (block) {
+										var _p115 = block;
+										if (_p115.ctor === 'BlankLine') {
+											return true;
+										} else {
+											return false;
+										}
+									},
+									_p114._1) ? A2(_pablohirafuji$elm_markdown$Markdown_Block$parseRawLine, rawLine, ast) : updateList(
+									_elm_lang$core$Native_Utils.update(
+										model,
+										{isLoose: true}));
+							}
+						case 'List':
+							return (_elm_lang$core$Native_Utils.cmp(
+								_pablohirafuji$elm_markdown$Markdown_Helpers$indentLength(indentedRawLine),
+								_p114._0._0.indentLength) > -1) ? updateList(model) : (_pablohirafuji$elm_markdown$Markdown_Block$isBlankLineLast(_p114._0._1) ? updateList(
+								_elm_lang$core$Native_Utils.update(
+									model,
+									{isLoose: true})) : updateList(model));
+						default:
+							break _v57_3;
+					}
+				} else {
+					break _v57_3;
+				}
+			} while(false);
+			return updateList(model);
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$parseRawLine = F2(
+	function (rawLine, ast) {
+		return A2(
+			_elm_lang$core$Result$withDefault,
+			A2(_pablohirafuji$elm_markdown$Markdown_Block$parseTextLine, rawLine, ast),
+			A2(
+				_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+				_pablohirafuji$elm_markdown$Markdown_Block$checkListLine,
+				A2(
+					_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+					_pablohirafuji$elm_markdown$Markdown_Block$checkThematicBreakLine,
+					A2(
+						_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+						_pablohirafuji$elm_markdown$Markdown_Block$checkBlockQuote,
+						A2(
+							_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+							_pablohirafuji$elm_markdown$Markdown_Block$checkATXHeadingLine,
+							A2(
+								_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+								_pablohirafuji$elm_markdown$Markdown_Block$checkSetextHeadingLine,
+								A2(
+									_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+									_pablohirafuji$elm_markdown$Markdown_Block$checkOpenCodeFenceLine,
+									A2(
+										_pablohirafuji$elm_markdown$Markdown_Helpers$ifError,
+										_pablohirafuji$elm_markdown$Markdown_Block$checkIndentedCode,
+										_pablohirafuji$elm_markdown$Markdown_Block$checkBlankLine(
+											{ctor: '_Tuple2', _0: rawLine, _1: ast})))))))));
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$incorporateLines = F2(
+	function (rawLines, ast) {
+		incorporateLines:
+		while (true) {
+			var _p117 = rawLines;
+			if (_p117.ctor === '[]') {
+				return ast;
+			} else {
+				var _v60 = _p117._1,
+					_v61 = A2(_pablohirafuji$elm_markdown$Markdown_Block$incorporateLine, _p117._0, ast);
+				rawLines = _v60;
+				ast = _v61;
+				continue incorporateLines;
+			}
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Block$parse = function (maybeOptions) {
+	return function (_p118) {
+		return A3(
+			_pablohirafuji$elm_markdown$Markdown_Block$parseInlines,
+			maybeOptions,
+			true,
+			A2(
+				_pablohirafuji$elm_markdown$Markdown_Block$parseReferences,
+				_elm_lang$core$Dict$empty,
+				A3(
+					_elm_lang$core$Basics$flip,
+					_pablohirafuji$elm_markdown$Markdown_Block$incorporateLines,
+					{ctor: '[]'},
+					_elm_lang$core$String$lines(_p118))));
+	};
+};

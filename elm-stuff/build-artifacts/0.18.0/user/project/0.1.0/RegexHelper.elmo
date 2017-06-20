@@ -1,0 +1,16 @@
+var _user$project$RegexHelper$urlPrefixPattern = function (_p0) {
+	return A2(
+		_ydschneider$regex_builder$RegexBuilder$exactly,
+		'://',
+		A2(
+			_ydschneider$regex_builder$RegexBuilder$many,
+			_ydschneider$regex_builder$RegexBuilder$noWhiteSpace,
+			_ydschneider$regex_builder$RegexBuilder_Extra$wordBoundary(_p0)));
+};
+var _user$project$RegexHelper$linkUrl = _ydschneider$regex_builder$RegexBuilder$toRegex(
+	function (_p1) {
+		return A2(
+			_ydschneider$regex_builder$RegexBuilder$many,
+			_ydschneider$regex_builder$RegexBuilder$noWhiteSpace,
+			_user$project$RegexHelper$urlPrefixPattern(_p1));
+	});

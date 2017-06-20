@@ -1,0 +1,4 @@
+var _gampleman$elm_visualization$Visualization_Interpolate$interpolateFloat = F3(
+	function (from, to, time) {
+		return from + ((to - from) * time);
+	});

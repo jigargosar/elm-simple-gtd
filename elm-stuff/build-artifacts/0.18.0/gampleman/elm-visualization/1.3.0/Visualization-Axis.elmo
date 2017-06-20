@@ -1,0 +1,270 @@
+var _gampleman$elm_visualization$Visualization_Axis$Options = F7(
+	function (a, b, c, d, e, f, g) {
+		return {orientation: a, ticks: b, tickFormat: c, tickCount: d, tickSizeInner: e, tickSizeOuter: f, tickPadding: g};
+	});
+var _gampleman$elm_visualization$Visualization_Axis$Bottom = {ctor: 'Bottom'};
+var _gampleman$elm_visualization$Visualization_Axis$Top = {ctor: 'Top'};
+var _gampleman$elm_visualization$Visualization_Axis$Right = {ctor: 'Right'};
+var _gampleman$elm_visualization$Visualization_Axis$Left = {ctor: 'Left'};
+var _gampleman$elm_visualization$Visualization_Axis$defaultOptions = {orientation: _gampleman$elm_visualization$Visualization_Axis$Left, ticks: _elm_lang$core$Maybe$Nothing, tickFormat: _elm_lang$core$Maybe$Nothing, tickCount: 10, tickSizeInner: 6, tickSizeOuter: 6, tickPadding: 3};
+var _gampleman$elm_visualization$Visualization_Axis$axis = F2(
+	function (opts, scale) {
+		var verticalAttrs = {
+			ctor: '_Tuple6',
+			_0: function (_p0) {
+				return _elm_lang$svg$Svg_Attributes$y(
+					_elm_lang$core$Basics$toString(_p0));
+			},
+			_1: function (_p1) {
+				return _elm_lang$svg$Svg_Attributes$x(
+					_elm_lang$core$Basics$toString(_p1));
+			},
+			_2: function (_p2) {
+				return _elm_lang$svg$Svg_Attributes$y1(
+					_elm_lang$core$Basics$toString(_p2));
+			},
+			_3: function (_p3) {
+				return _elm_lang$svg$Svg_Attributes$y2(
+					_elm_lang$core$Basics$toString(_p3));
+			},
+			_4: function (_p4) {
+				return _elm_lang$svg$Svg_Attributes$x1(
+					_elm_lang$core$Basics$toString(_p4));
+			},
+			_5: function (_p5) {
+				return _elm_lang$svg$Svg_Attributes$x2(
+					_elm_lang$core$Basics$toString(_p5));
+			}
+		};
+		var horizontalAttrs = {
+			ctor: '_Tuple6',
+			_0: function (_p6) {
+				return _elm_lang$svg$Svg_Attributes$x(
+					_elm_lang$core$Basics$toString(_p6));
+			},
+			_1: function (_p7) {
+				return _elm_lang$svg$Svg_Attributes$y(
+					_elm_lang$core$Basics$toString(_p7));
+			},
+			_2: function (_p8) {
+				return _elm_lang$svg$Svg_Attributes$x1(
+					_elm_lang$core$Basics$toString(_p8));
+			},
+			_3: function (_p9) {
+				return _elm_lang$svg$Svg_Attributes$x2(
+					_elm_lang$core$Basics$toString(_p9));
+			},
+			_4: function (_p10) {
+				return _elm_lang$svg$Svg_Attributes$y1(
+					_elm_lang$core$Basics$toString(_p10));
+			},
+			_5: function (_p11) {
+				return _elm_lang$svg$Svg_Attributes$y2(
+					_elm_lang$core$Basics$toString(_p11));
+			}
+		};
+		var position = _gampleman$elm_visualization$Visualization_Scale$convert(scale);
+		var translateX = function (point) {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'translate(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(
+						position(point)),
+					', 0)'));
+		};
+		var translateY = function (point) {
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'translate(0, ',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(
+						position(point)),
+					')'));
+		};
+		var _p12 = function () {
+			var _p13 = opts.orientation;
+			switch (_p13.ctor) {
+				case 'Left':
+					return {ctor: '_Tuple5', _0: -1, _1: '0.32em', _2: 'end', _3: translateY, _4: horizontalAttrs};
+				case 'Top':
+					return {ctor: '_Tuple5', _0: -1, _1: '0em', _2: 'middle', _3: translateX, _4: verticalAttrs};
+				case 'Right':
+					return {ctor: '_Tuple5', _0: 1, _1: '0.32em', _2: 'start', _3: translateY, _4: horizontalAttrs};
+				default:
+					return {ctor: '_Tuple5', _0: 1, _1: '0.71em', _2: 'middle', _3: translateX, _4: verticalAttrs};
+			}
+		}();
+		var k = _p12._0;
+		var dy_ = _p12._1;
+		var textAnchorPosition = _p12._2;
+		var translate = _p12._3;
+		var x = _p12._4._0;
+		var y = _p12._4._1;
+		var x1 = _p12._4._2;
+		var x2 = _p12._4._3;
+		var y1 = _p12._4._4;
+		var y2 = _p12._4._5;
+		var rangeExtent = _gampleman$elm_visualization$Visualization_Scale$rangeExtent(scale);
+		var range0 = _elm_lang$core$Tuple$first(rangeExtent) + 0.5;
+		var range1 = _elm_lang$core$Tuple$second(rangeExtent) + 0.5;
+		var domainLine = (_elm_lang$core$Native_Utils.eq(opts.orientation, _gampleman$elm_visualization$Visualization_Axis$Left) || _elm_lang$core$Native_Utils.eq(opts.orientation, _gampleman$elm_visualization$Visualization_Axis$Right)) ? A2(
+			_elm_lang$core$Basics_ops['++'],
+			'M',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(k * opts.tickSizeOuter),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					',',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(range0),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'H0.5V',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(range1),
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'H',
+									_elm_lang$core$Basics$toString(k * opts.tickSizeOuter)))))))) : A2(
+			_elm_lang$core$Basics_ops['++'],
+			'M',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(range0),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					',',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(k * opts.tickSizeOuter),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'V0.5H',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(range1),
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'V',
+									_elm_lang$core$Basics$toString(k * opts.tickSizeOuter))))))));
+		var spacing = A2(_elm_lang$core$Basics$max, opts.tickSizeInner, 0) + opts.tickPadding;
+		var format = A2(
+			_elm_lang$core$Maybe$withDefault,
+			A2(_gampleman$elm_visualization$Visualization_Scale$tickFormat, scale, opts.tickCount),
+			opts.tickFormat);
+		var drawTick = function (tick) {
+			return A2(
+				_elm_lang$svg$Svg$g,
+				{
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$class('tick'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$transform(
+							translate(tick)),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$line,
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$stroke('#000'),
+							_1: {
+								ctor: '::',
+								_0: x2(k * opts.tickSizeInner),
+								_1: {
+									ctor: '::',
+									_0: y1(0.5),
+									_1: {
+										ctor: '::',
+										_0: y2(0.5),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$svg$Svg$text_,
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$fill('#000'),
+								_1: {
+									ctor: '::',
+									_0: x(k * spacing),
+									_1: {
+										ctor: '::',
+										_0: y(0.5),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$svg$Svg_Attributes$dy(dy_),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$svg$Svg$text(
+									format(tick)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				});
+		};
+		var ticks = A2(
+			_elm_lang$core$Maybe$withDefault,
+			A2(_gampleman$elm_visualization$Visualization_Scale$ticks, scale, opts.tickCount),
+			opts.ticks);
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$fill('none'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$fontSize('10'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$fontFamily('sans-serif'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$textAnchor(textAnchorPosition),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$path,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$class('domain'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$stroke('#000'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$d(domainLine),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: A2(_elm_lang$core$List$map, drawTick, ticks)
+			});
+	});

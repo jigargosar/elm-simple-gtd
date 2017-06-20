@@ -1,0 +1,180 @@
+var _gampleman$elm_visualization$Visualization_Scale_Quantize$nice = function (_p0) {
+	return _elm_lang$core$Native_Utils.crash(
+		'Visualization.Scale.Quantize',
+		{
+			start: {line: 100, column: 5},
+			end: {line: 100, column: 16}
+		})('not implemented');
+};
+var _gampleman$elm_visualization$Visualization_Scale_Quantize$tickFormat = function (_p1) {
+	return _elm_lang$core$Native_Utils.crash(
+		'Visualization.Scale.Quantize',
+		{
+			start: {line: 95, column: 5},
+			end: {line: 95, column: 16}
+		})('not implemented');
+};
+var _gampleman$elm_visualization$Visualization_Scale_Quantize$ticks = function (_p2) {
+	return _elm_lang$core$Native_Utils.crash(
+		'Visualization.Scale.Quantize',
+		{
+			start: {line: 90, column: 5},
+			end: {line: 90, column: 16}
+		})('not implemented');
+};
+var _gampleman$elm_visualization$Visualization_Scale_Quantize$computeDomain = F2(
+	function (_p3, tail) {
+		var _p4 = _p3;
+		var _p6 = _p4._0;
+		var _p5 = _p4._1;
+		var l = _elm_lang$core$List$length(tail);
+		var step = (_p5 - _p6) / _elm_lang$core$Basics$toFloat(l + 1);
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			{
+				ctor: '::',
+				_0: 0,
+				_1: {ctor: '[]'}
+			},
+			_elm_lang$core$List$tail(
+				A3(_gampleman$elm_visualization$Visualization_List$range, _p6, _p5, step)));
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Quantize$convert = F3(
+	function (domain, _p7, val) {
+		var _p8 = _p7;
+		var _p15 = _p8._1;
+		var _p14 = _p8._0;
+		var last = F2(
+			function (head, tail) {
+				last:
+				while (true) {
+					var _p9 = tail;
+					if (_p9.ctor === '[]') {
+						return head;
+					} else {
+						var _v3 = _p9._0,
+							_v4 = _p9._1;
+						head = _v3;
+						tail = _v4;
+						continue last;
+					}
+				}
+			});
+		var helper = F2(
+			function (dom, range) {
+				helper:
+				while (true) {
+					var _p10 = dom;
+					if (_p10.ctor === '[]') {
+						var _p11 = range;
+						if (_p11.ctor === '[]') {
+							return A2(last, _p14, _p15);
+						} else {
+							return _p11._0;
+						}
+					} else {
+						var _p12 = range;
+						if (_p12.ctor === '[]') {
+							return _elm_lang$core$Native_Utils.crashCase(
+								'Visualization.Scale.Quantize',
+								{
+									start: {line: 45, column: 21},
+									end: {line: 53, column: 34}
+								},
+								_p12)('Invariant breached: ran out of range');
+						} else {
+							if (_elm_lang$core$Native_Utils.cmp(val, _p10._0) > 0) {
+								var _v8 = _p10._1,
+									_v9 = _p12._1;
+								dom = _v8;
+								range = _v9;
+								continue helper;
+							} else {
+								return _p12._0;
+							}
+						}
+					}
+				}
+			});
+		return A2(
+			helper,
+			A2(_gampleman$elm_visualization$Visualization_Scale_Quantize$computeDomain, domain, _p15),
+			{ctor: '::', _0: _p14, _1: _p15});
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Quantize$invertExtent = F3(
+	function (_p17, _p16, val) {
+		var _p18 = _p17;
+		var _p25 = _p18._0;
+		var _p24 = _p18._1;
+		var _p19 = _p16;
+		var _p23 = _p19._1;
+		var helper = F2(
+			function (domain, range) {
+				helper:
+				while (true) {
+					var _p20 = range;
+					if (_p20.ctor === '[]') {
+						return _elm_lang$core$Maybe$Nothing;
+					} else {
+						if (_elm_lang$core$Native_Utils.eq(_p20._0, val)) {
+							var _p21 = domain;
+							if ((_p21.ctor === '::') && (_p21._1.ctor === '::')) {
+								return _elm_lang$core$Maybe$Just(
+									{ctor: '_Tuple2', _0: _p21._0, _1: _p21._1._0});
+							} else {
+								return _elm_lang$core$Maybe$Nothing;
+							}
+						} else {
+							var _p22 = domain;
+							if (_p22.ctor === '[]') {
+								return _elm_lang$core$Maybe$Nothing;
+							} else {
+								var _v15 = _p22._1,
+									_v16 = _p20._1;
+								domain = _v15;
+								range = _v16;
+								continue helper;
+							}
+						}
+					}
+				}
+			});
+		var domain = A2(
+			_gampleman$elm_visualization$Visualization_Scale_Quantize$computeDomain,
+			{ctor: '_Tuple2', _0: _p25, _1: _p24},
+			_p23);
+		return A2(
+			helper,
+			{
+				ctor: '::',
+				_0: _p25,
+				_1: A2(
+					_elm_lang$core$Basics_ops['++'],
+					domain,
+					{
+						ctor: '::',
+						_0: _p24,
+						_1: {ctor: '[]'}
+					})
+			},
+			{ctor: '::', _0: _p19._0, _1: _p23});
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Quantize$rangeExtent = F2(
+	function (_p26, range) {
+		var _p27 = _p26;
+		var _p29 = _p27._0;
+		var _p28 = _p27._1;
+		return {
+			ctor: '_Tuple2',
+			_0: A3(
+				_gampleman$elm_visualization$Visualization_Scale_Quantize$convert,
+				{ctor: '_Tuple2', _0: _p29, _1: _p28},
+				range,
+				_p29),
+			_1: A3(
+				_gampleman$elm_visualization$Visualization_Scale_Quantize$convert,
+				{ctor: '_Tuple2', _0: _p29, _1: _p28},
+				range,
+				_p28)
+		};
+	});

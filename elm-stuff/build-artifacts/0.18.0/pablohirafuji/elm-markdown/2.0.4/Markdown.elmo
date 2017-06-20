@@ -1,0 +1,8 @@
+var _pablohirafuji$elm_markdown$Markdown$toHtml = F2(
+	function (maybeOptions, rawText) {
+		return _elm_lang$core$List$concat(
+			A2(
+				_elm_lang$core$List$map,
+				_pablohirafuji$elm_markdown$Markdown_Block$toHtml,
+				A2(_pablohirafuji$elm_markdown$Markdown_Block$parse, maybeOptions, rawText)));
+	});

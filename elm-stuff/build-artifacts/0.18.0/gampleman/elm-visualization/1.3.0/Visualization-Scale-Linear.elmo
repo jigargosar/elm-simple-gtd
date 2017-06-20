@@ -1,0 +1,48 @@
+var _gampleman$elm_visualization$Visualization_Scale_Linear$interpolate = _gampleman$elm_visualization$Visualization_Interpolate$interpolateFloat;
+var _gampleman$elm_visualization$Visualization_Scale_Linear$ticks = F2(
+	function (_p0, count) {
+		var _p1 = _p0;
+		return A3(_gampleman$elm_visualization$Visualization_List$ticks, _p1._0, _p1._1, count);
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Linear$deinterpolate = F3(
+	function (a, b, x) {
+		var normalizedB = b - a;
+		return _elm_lang$core$Native_Utils.eq(normalizedB, 0) ? 0 : ((x - a) / normalizedB);
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Linear$invert = F2(
+	function (domain, range) {
+		return A4(_gampleman$elm_visualization$Visualization_Scale_Internal$bimap, range, domain, _gampleman$elm_visualization$Visualization_Scale_Linear$deinterpolate, _gampleman$elm_visualization$Visualization_Scale_Linear$interpolate);
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Linear$convert = F2(
+	function (domain, range) {
+		return A4(_gampleman$elm_visualization$Visualization_Scale_Internal$bimap, domain, range, _gampleman$elm_visualization$Visualization_Scale_Linear$deinterpolate, _gampleman$elm_visualization$Visualization_Interpolate$interpolateFloat);
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Linear$tickFormat = F2(
+	function (_p3, _p2) {
+		return _elm_lang$core$Basics$toString;
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Linear$nice = F2(
+	function (_p4, count) {
+		var _p5 = _p4;
+		var _p7 = _p5._1;
+		var _p6 = _p5._0;
+		var step0 = A3(_gampleman$elm_visualization$Visualization_List$tickStep, _p6, _p7, count);
+		var step1 = A3(
+			_gampleman$elm_visualization$Visualization_List$tickStep,
+			_elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$floor(_p6 / step0)) * step0,
+			_elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$ceiling(_p7 / step0)) * step0,
+			count);
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$floor(_p6 / step1)) * step1,
+			_1: _elm_lang$core$Basics$toFloat(
+				_elm_lang$core$Basics$ceiling(_p7 / step1)) * step1
+		};
+	});
+var _gampleman$elm_visualization$Visualization_Scale_Linear$rangeExtent = F2(
+	function (d, r) {
+		return r;
+	});

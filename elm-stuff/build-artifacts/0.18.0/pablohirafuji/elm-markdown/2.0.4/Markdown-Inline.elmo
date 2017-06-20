@@ -1,0 +1,207 @@
+var _pablohirafuji$elm_markdown$Markdown_Inline$extractText = function (inlines) {
+	return A3(_elm_lang$core$List$foldl, _pablohirafuji$elm_markdown$Markdown_Inline$extractTextHelp, '', inlines);
+};
+var _pablohirafuji$elm_markdown$Markdown_Inline$extractTextHelp = F2(
+	function (inline, text) {
+		var _p0 = inline;
+		switch (_p0.ctor) {
+			case 'Text':
+				return A2(_elm_lang$core$Basics_ops['++'], text, _p0._0);
+			case 'HardLineBreak':
+				return A2(_elm_lang$core$Basics_ops['++'], text, ' ');
+			case 'CodeInline':
+				return A2(_elm_lang$core$Basics_ops['++'], text, _p0._0);
+			case 'Link':
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					text,
+					_pablohirafuji$elm_markdown$Markdown_Inline$extractText(_p0._2));
+			case 'Image':
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					text,
+					_pablohirafuji$elm_markdown$Markdown_Inline$extractText(_p0._2));
+			case 'HtmlInline':
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					text,
+					_pablohirafuji$elm_markdown$Markdown_Inline$extractText(_p0._2));
+			case 'Emphasis':
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					text,
+					_pablohirafuji$elm_markdown$Markdown_Inline$extractText(_p0._1));
+			default:
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					text,
+					_pablohirafuji$elm_markdown$Markdown_Inline$extractText(_p0._1));
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Inline$attributeToAttribute = function (_p1) {
+	var _p2 = _p1;
+	var _p3 = _p2._0;
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		_p3,
+		A2(_elm_lang$core$Maybe$withDefault, _p3, _p2._1));
+};
+var _pablohirafuji$elm_markdown$Markdown_Inline$attributesToHtmlAttributes = _elm_lang$core$List$map(_pablohirafuji$elm_markdown$Markdown_Inline$attributeToAttribute);
+var _pablohirafuji$elm_markdown$Markdown_Inline$Custom = F2(
+	function (a, b) {
+		return {ctor: 'Custom', _0: a, _1: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Inline$Emphasis = F2(
+	function (a, b) {
+		return {ctor: 'Emphasis', _0: a, _1: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Inline$defaultHtml = F2(
+	function (customTransformer, inline) {
+		var transformer = A2(
+			_elm_lang$core$Maybe$withDefault,
+			_pablohirafuji$elm_markdown$Markdown_Inline$defaultHtml(_elm_lang$core$Maybe$Nothing),
+			customTransformer);
+		var _p4 = inline;
+		switch (_p4.ctor) {
+			case 'Text':
+				return _elm_lang$html$Html$text(_p4._0);
+			case 'HardLineBreak':
+				return A2(
+					_elm_lang$html$Html$br,
+					{ctor: '[]'},
+					{ctor: '[]'});
+			case 'CodeInline':
+				return A2(
+					_elm_lang$html$Html$code,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(_p4._0),
+						_1: {ctor: '[]'}
+					});
+			case 'Link':
+				var _p7 = _p4._0;
+				var _p6 = _p4._2;
+				var _p5 = _p4._1;
+				if (_p5.ctor === 'Just') {
+					return A2(
+						_elm_lang$html$Html$a,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href(_p7),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$title(_p5._0),
+								_1: {ctor: '[]'}
+							}
+						},
+						A2(_elm_lang$core$List$map, transformer, _p6));
+				} else {
+					return A2(
+						_elm_lang$html$Html$a,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href(_p7),
+							_1: {ctor: '[]'}
+						},
+						A2(_elm_lang$core$List$map, transformer, _p6));
+				}
+			case 'Image':
+				var _p10 = _p4._0;
+				var _p9 = _p4._2;
+				var _p8 = _p4._1;
+				if (_p8.ctor === 'Just') {
+					return A2(
+						_elm_lang$html$Html$img,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$alt(
+								_pablohirafuji$elm_markdown$Markdown_Inline$extractText(_p9)),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$src(_p10),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$title(_p8._0),
+									_1: {ctor: '[]'}
+								}
+							}
+						},
+						{ctor: '[]'});
+				} else {
+					return A2(
+						_elm_lang$html$Html$img,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$alt(
+								_pablohirafuji$elm_markdown$Markdown_Inline$extractText(_p9)),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$src(_p10),
+								_1: {ctor: '[]'}
+							}
+						},
+						{ctor: '[]'});
+				}
+			case 'HtmlInline':
+				return A3(
+					_elm_lang$html$Html$node,
+					_p4._0,
+					_pablohirafuji$elm_markdown$Markdown_Inline$attributesToHtmlAttributes(_p4._1),
+					A2(_elm_lang$core$List$map, transformer, _p4._2));
+			case 'Emphasis':
+				var _p13 = _p4._0;
+				var _p12 = _p4._1;
+				var _p11 = _p13;
+				switch (_p11) {
+					case 1:
+						return A2(
+							_elm_lang$html$Html$em,
+							{ctor: '[]'},
+							A2(_elm_lang$core$List$map, transformer, _p12));
+					case 2:
+						return A2(
+							_elm_lang$html$Html$strong,
+							{ctor: '[]'},
+							A2(_elm_lang$core$List$map, transformer, _p12));
+					default:
+						return (_elm_lang$core$Native_Utils.cmp(_p13 - 2, 0) > 0) ? A2(
+							_elm_lang$html$Html$strong,
+							{ctor: '[]'},
+							A3(
+								_elm_lang$core$Basics$flip,
+								F2(
+									function (x, y) {
+										return {ctor: '::', _0: x, _1: y};
+									}),
+								{ctor: '[]'},
+								transformer(
+									A2(_pablohirafuji$elm_markdown$Markdown_Inline$Emphasis, _p13 - 2, _p12)))) : A2(
+							_elm_lang$html$Html$em,
+							{ctor: '[]'},
+							A2(_elm_lang$core$List$map, transformer, _p12));
+				}
+			default:
+				return _elm_lang$html$Html$text('');
+		}
+	});
+var _pablohirafuji$elm_markdown$Markdown_Inline$toHtml = _pablohirafuji$elm_markdown$Markdown_Inline$defaultHtml(_elm_lang$core$Maybe$Nothing);
+var _pablohirafuji$elm_markdown$Markdown_Inline$HtmlInline = F3(
+	function (a, b, c) {
+		return {ctor: 'HtmlInline', _0: a, _1: b, _2: c};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Inline$Image = F3(
+	function (a, b, c) {
+		return {ctor: 'Image', _0: a, _1: b, _2: c};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Inline$Link = F3(
+	function (a, b, c) {
+		return {ctor: 'Link', _0: a, _1: b, _2: c};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Inline$CodeInline = function (a) {
+	return {ctor: 'CodeInline', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_Inline$HardLineBreak = {ctor: 'HardLineBreak'};
+var _pablohirafuji$elm_markdown$Markdown_Inline$Text = function (a) {
+	return {ctor: 'Text', _0: a};
+};

@@ -1,0 +1,228 @@
+var _pablohirafuji$elm_markdown$Markdown_Config$defaultAllowedHtmlAttributes = {
+	ctor: '::',
+	_0: 'name',
+	_1: {
+		ctor: '::',
+		_0: 'class',
+		_1: {ctor: '[]'}
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_Config$defaultAllowedHtmlElements = {
+	ctor: '::',
+	_0: 'address',
+	_1: {
+		ctor: '::',
+		_0: 'article',
+		_1: {
+			ctor: '::',
+			_0: 'aside',
+			_1: {
+				ctor: '::',
+				_0: 'b',
+				_1: {
+					ctor: '::',
+					_0: 'blockquote',
+					_1: {
+						ctor: '::',
+						_0: 'br',
+						_1: {
+							ctor: '::',
+							_0: 'caption',
+							_1: {
+								ctor: '::',
+								_0: 'center',
+								_1: {
+									ctor: '::',
+									_0: 'cite',
+									_1: {
+										ctor: '::',
+										_0: 'code',
+										_1: {
+											ctor: '::',
+											_0: 'col',
+											_1: {
+												ctor: '::',
+												_0: 'colgroup',
+												_1: {
+													ctor: '::',
+													_0: 'dd',
+													_1: {
+														ctor: '::',
+														_0: 'details',
+														_1: {
+															ctor: '::',
+															_0: 'div',
+															_1: {
+																ctor: '::',
+																_0: 'dl',
+																_1: {
+																	ctor: '::',
+																	_0: 'dt',
+																	_1: {
+																		ctor: '::',
+																		_0: 'figcaption',
+																		_1: {
+																			ctor: '::',
+																			_0: 'figure',
+																			_1: {
+																				ctor: '::',
+																				_0: 'footer',
+																				_1: {
+																					ctor: '::',
+																					_0: 'h1',
+																					_1: {
+																						ctor: '::',
+																						_0: 'h2',
+																						_1: {
+																							ctor: '::',
+																							_0: 'h3',
+																							_1: {
+																								ctor: '::',
+																								_0: 'h4',
+																								_1: {
+																									ctor: '::',
+																									_0: 'h5',
+																									_1: {
+																										ctor: '::',
+																										_0: 'h6',
+																										_1: {
+																											ctor: '::',
+																											_0: 'hr',
+																											_1: {
+																												ctor: '::',
+																												_0: 'i',
+																												_1: {
+																													ctor: '::',
+																													_0: 'legend',
+																													_1: {
+																														ctor: '::',
+																														_0: 'li',
+																														_1: {
+																															ctor: '::',
+																															_0: 'menu',
+																															_1: {
+																																ctor: '::',
+																																_0: 'menuitem',
+																																_1: {
+																																	ctor: '::',
+																																	_0: 'nav',
+																																	_1: {
+																																		ctor: '::',
+																																		_0: 'ol',
+																																		_1: {
+																																			ctor: '::',
+																																			_0: 'optgroup',
+																																			_1: {
+																																				ctor: '::',
+																																				_0: 'option',
+																																				_1: {
+																																					ctor: '::',
+																																					_0: 'p',
+																																					_1: {
+																																						ctor: '::',
+																																						_0: 'pre',
+																																						_1: {
+																																							ctor: '::',
+																																							_0: 'section',
+																																							_1: {
+																																								ctor: '::',
+																																								_0: 'strike',
+																																								_1: {
+																																									ctor: '::',
+																																									_0: 'summary',
+																																									_1: {
+																																										ctor: '::',
+																																										_0: 'small',
+																																										_1: {
+																																											ctor: '::',
+																																											_0: 'table',
+																																											_1: {
+																																												ctor: '::',
+																																												_0: 'tbody',
+																																												_1: {
+																																													ctor: '::',
+																																													_0: 'td',
+																																													_1: {
+																																														ctor: '::',
+																																														_0: 'tfoot',
+																																														_1: {
+																																															ctor: '::',
+																																															_0: 'th',
+																																															_1: {
+																																																ctor: '::',
+																																																_0: 'thead',
+																																																_1: {
+																																																	ctor: '::',
+																																																	_0: 'tr',
+																																																	_1: {
+																																																		ctor: '::',
+																																																		_0: 'ul',
+																																																		_1: {ctor: '[]'}
+																																																	}
+																																																}
+																																															}
+																																														}
+																																													}
+																																												}
+																																											}
+																																										}
+																																									}
+																																								}
+																																							}
+																																						}
+																																					}
+																																				}
+																																			}
+																																		}
+																																	}
+																																}
+																															}
+																														}
+																													}
+																												}
+																											}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+};
+var _pablohirafuji$elm_markdown$Markdown_Config$defaultSanitizeOptions = {allowedHtmlElements: _pablohirafuji$elm_markdown$Markdown_Config$defaultAllowedHtmlElements, allowedHtmlAttributes: _pablohirafuji$elm_markdown$Markdown_Config$defaultAllowedHtmlAttributes};
+var _pablohirafuji$elm_markdown$Markdown_Config$Options = F2(
+	function (a, b) {
+		return {softAsHardLineBreak: a, rawHtml: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Config$SanitizeOptions = F2(
+	function (a, b) {
+		return {allowedHtmlElements: a, allowedHtmlAttributes: b};
+	});
+var _pablohirafuji$elm_markdown$Markdown_Config$DontParse = {ctor: 'DontParse'};
+var _pablohirafuji$elm_markdown$Markdown_Config$Sanitize = function (a) {
+	return {ctor: 'Sanitize', _0: a};
+};
+var _pablohirafuji$elm_markdown$Markdown_Config$defaultOptions = {
+	softAsHardLineBreak: false,
+	rawHtml: _pablohirafuji$elm_markdown$Markdown_Config$Sanitize(_pablohirafuji$elm_markdown$Markdown_Config$defaultSanitizeOptions)
+};
+var _pablohirafuji$elm_markdown$Markdown_Config$ParseUnsafe = {ctor: 'ParseUnsafe'};

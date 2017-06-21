@@ -343,7 +343,7 @@ var _user$project$Task_Main$subscriptions = function (m) {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$core$Time$every,
-							_elm_lang$core$Time$second * 1,
+							_elm_lang$core$Time$second * 30,
 							function (_p21) {
 								return _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$OnProcessPendingNotificationCronTick);
 							}),

@@ -1,3 +1,6 @@
+## Upcoming
+* delay notification processing by x seconds, so that we can get some time to sync data with firebase. There by not triggering old offline reminders. 
+
 ## v0.18.52 - 2017-06-21
 * move task subscriptions to Task.Main
   task notification refactoring

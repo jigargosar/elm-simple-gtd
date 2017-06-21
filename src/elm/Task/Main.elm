@@ -69,7 +69,7 @@ subscriptions m =
         [ notificationClicked (Todo.Msg.OnReminderNotificationClicked >> Model.OnTodoMsg)
         , onRunningTodoNotificationClicked (Todo.Msg.RunningNotificationResponse >> Model.OnTodoMsg)
         , Time.every (Time.second * 1) (Model.OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker)
-        , Time.every (Time.second * 1)
+        , Time.every (Time.second * 30)
             (\_ -> Model.OnTodoMsg Todo.Msg.OnProcessPendingNotificationCronTick)
         ]
 

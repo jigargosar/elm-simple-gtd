@@ -48,6 +48,7 @@ view appVM model =
                 ([]
                     ++ entityGroupView contexts model.mainViewType
                     ++ entityGroupView projects model.mainViewType
+                    ++ [ Material.divider ]
                     ++ [ onSetEntityListViewItem "sort" Entity.RecentView "Recent"
                        , onSetEntityListViewItem "delete" Entity.BinView "Bin"
                        , onSetEntityListViewItem "done" Entity.DoneView "Done"
@@ -122,7 +123,7 @@ entityGroupView vm mainViewType =
                                     ]
                                ]
                             ++ archivedItems vm
-                            ++ [ Material.divider ]
+                         --                            ++ [ Material.divider ]
                         )
                     ]
                ]

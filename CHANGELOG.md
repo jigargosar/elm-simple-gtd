@@ -1,3 +1,6 @@
+## Upcoming
+* move entity grouping to entity tree, and combine project / context as groupEntity 
+
 ## v0.18.51 - 2017-06-21
 * when todo text is multiline, ensure done button click area doesn't take up entire height
 * more menu: in progress

@@ -1,6 +1,6 @@
 var _user$project$Routes$builder2messages = function (builder) {
 	var _p0 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
-	_v0_10:
+	_v0_9:
 	do {
 		if (_p0.ctor === '::') {
 			if (_p0._1.ctor === '::') {
@@ -21,7 +21,7 @@ var _user$project$Routes$builder2messages = function (builder) {
 										_1: {ctor: '[]'}
 									};
 								default:
-									break _v0_10;
+									break _v0_9;
 							}
 						case 'context':
 							return {
@@ -46,17 +46,11 @@ var _user$project$Routes$builder2messages = function (builder) {
 									_1: {ctor: '[]'}
 								};
 							}
-						case 'notification':
-							return {
-								ctor: '::',
-								_0: _user$project$Model$ShowReminderOverlayForTodoId(_p0._1._0),
-								_1: {ctor: '[]'}
-							};
 						default:
-							break _v0_10;
+							break _v0_9;
 					}
 				} else {
-					break _v0_10;
+					break _v0_9;
 				}
 			} else {
 				switch (_p0._0) {
@@ -86,11 +80,11 @@ var _user$project$Routes$builder2messages = function (builder) {
 							_1: {ctor: '[]'}
 						};
 					default:
-						break _v0_10;
+						break _v0_9;
 				}
 			}
 		} else {
-			break _v0_10;
+			break _v0_9;
 		}
 	} while(false);
 	return {ctor: '[]'};

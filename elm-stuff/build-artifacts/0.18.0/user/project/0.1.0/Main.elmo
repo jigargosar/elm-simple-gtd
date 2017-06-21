@@ -553,9 +553,6 @@ var _user$project$Main$update = function (msg) {
 					case 'OnSetEntityListView':
 						return _Fresheyeball$elm_return$Return$map(
 							_user$project$Model$setEntityListViewType(_p15._0));
-					case 'ShowReminderOverlayForTodoId':
-						return _Fresheyeball$elm_return$Return$map(
-							_user$project$Model$showReminderOverlayForTodoId(_p15._0));
 					case 'OnNowChanged':
 						return _user$project$Main$onUpdateNow(_p15._0);
 					case 'OnKeyboardMsg':

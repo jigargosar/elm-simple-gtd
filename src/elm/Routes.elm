@@ -10,6 +10,7 @@ import RouteUrl exposing (UrlChange)
 import Ext.Function.Infix exposing (..)
 import Model exposing (..)
 import Project
+import Todo.Msg
 
 
 delta2builder : Model -> Model -> Maybe Builder
@@ -59,9 +60,6 @@ builder2messages builder =
 
         "project" :: id :: [] ->
             [ Model.OnSetEntityListView (Entity.ProjectView id) ]
-
-        "notification" :: todoId :: [] ->
-            [ Model.ShowReminderOverlayForTodoId todoId ]
 
         "custom-sync" :: [] ->
             [ Model.SwitchView SyncView ]

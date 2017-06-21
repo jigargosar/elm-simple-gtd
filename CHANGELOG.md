@@ -1,4 +1,6 @@
 ## Upcoming
+* move task subscriptions to Task.Main
+  task notification refactoring
 * move entity grouping to entity tree, and combine project / context as groupEntity 
 
 ## v0.18.51 - 2017-06-21

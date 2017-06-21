@@ -105,7 +105,7 @@ var _user$project$EntityList_View$keyedViewList = F3(
 		var todoListView = _elm_lang$core$List$map(todoView);
 		var _p6 = grouping;
 		switch (_p6.ctor) {
-			case 'SingleContext':
+			case 'ContextRoot':
 				var header = _user$project$EntityList_View$groupHeaderView(
 					createContextVM(_p6._0));
 				return {
@@ -113,7 +113,7 @@ var _user$project$EntityList_View$keyedViewList = F3(
 					_0: header,
 					_1: multiProjectView(_p6._1)
 				};
-			case 'SingleProject':
+			case 'ProjectRoot':
 				var header = _user$project$EntityList_View$groupHeaderView(
 					createProjectVM(_p6._0));
 				return {
@@ -121,9 +121,9 @@ var _user$project$EntityList_View$keyedViewList = F3(
 					_0: header,
 					_1: multiContextView(_p6._1)
 				};
-			case 'MultiContext':
+			case 'ContextForest':
 				return multiContextView(_p6._0);
-			case 'MultiProject':
+			case 'ProjectForest':
 				return multiProjectView(_p6._0);
 			default:
 				return A2(

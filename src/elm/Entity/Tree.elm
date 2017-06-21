@@ -12,28 +12,44 @@ import Maybe.Extra as Maybe
 import Project
 
 
-type alias TodoList =
+type alias TodoNode =
+    Todo.Model
+
+
+type alias TodoNodeList =
     List Todo.Model
 
 
 type alias ContextNode =
     { context : Context.Model
-    , todoList : TodoList
+    , todoList : TodoNodeList
     }
 
 
 type alias ProjectNode =
     { project : Project.Model
-    , todoList : TodoList
+    , todoList : TodoNodeList
     }
 
 
+type alias ProjectNodeList =
+    List ProjectNode
+
+
+type alias ContextNodeList =
+    List ContextNode
+
+
+type alias TitleNode =
+    String
+
+
 type Tree
-    = ContextRoot ContextNode (List ProjectNode)
-    | ProjectRoot ProjectNode (List ContextNode)
-    | ContextForest (List ContextNode)
-    | ProjectForest (List ProjectNode)
-    | TodoForest String TodoList
+    = ContextRoot ContextNode ProjectNodeList
+    | ProjectRoot ProjectNode ContextNodeList
+    | ContextForest ContextNodeList
+    | ProjectForest ProjectNodeList
+    | TodoForest TitleNode TodoNodeList
 
 
 createContextTodoGroup getTodoList context =
@@ -102,7 +118,7 @@ createGroupingForProject getTodoList findProjectById project =
         |> (\tcg -> ProjectRoot tcg (createContextSubGroups findProjectById tcg))
 
 
-createGroupingForTodoList : String -> TodoList -> Tree
+createGroupingForTodoList : String -> TodoNodeList -> Tree
 createGroupingForTodoList =
     TodoForest
 

@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.58 - 2017-06-21
 * when group sort order changes, focus tracking goes completely haywire.
   * perhaps we can skip changing focus when group is edited.
   * but then on deleting a group focus will move to top, since that group is no no longer available.

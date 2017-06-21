@@ -1,4 +1,4 @@
-var _user$project$Entity_Tree$initGroupDocNode = F2(
+var _user$project$Entity_Tree$initGroupNode = F2(
 	function (getTodoList, groupDoc) {
 		return {
 			groupDoc: groupDoc,
@@ -11,15 +11,15 @@ var _user$project$Entity_Tree$initGroupDocNodeList = F2(
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 			groupDocList,
-			_user$project$Entity_Tree$initGroupDocNode(getTodoList));
+			_user$project$Entity_Tree$initGroupNode(getTodoList));
 	});
 var _user$project$Entity_Tree$createProjectSubGroups = F2(
-	function (findProjectById, tcg) {
+	function (findProjectById, node) {
 		var filterTodoForProject = function (project) {
 			return A2(
 				_elm_lang$core$List$filter,
 				_user$project$Todo$hasProject(project),
-				tcg.todoList);
+				node.todoList);
 		};
 		var projects = _user$project$Project$sort(
 			A2(
@@ -28,12 +28,12 @@ var _user$project$Entity_Tree$createProjectSubGroups = F2(
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 					_elm_community$list_extra$List_Extra$unique(
-						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], tcg.todoList, _user$project$Todo$getProjectId)),
+						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], node.todoList, _user$project$Todo$getProjectId)),
 					findProjectById)));
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 			projects,
-			_user$project$Entity_Tree$initGroupDocNode(filterTodoForProject));
+			_user$project$Entity_Tree$initGroupNode(filterTodoForProject));
 	});
 var _user$project$Entity_Tree$createContextSubGroups = F2(
 	function (findContextById, tcg) {
@@ -55,9 +55,9 @@ var _user$project$Entity_Tree$createContextSubGroups = F2(
 		return A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
 			contexts,
-			_user$project$Entity_Tree$initGroupDocNode(filterTodoForContext));
+			_user$project$Entity_Tree$initGroupNode(filterTodoForContext));
 	});
-var _user$project$Entity_Tree$GroupDocNode = F3(
+var _user$project$Entity_Tree$GroupNode = F3(
 	function (a, b, c) {
 		return {groupDoc: a, todoList: b, groupEntity: c};
 	});
@@ -129,7 +129,7 @@ var _user$project$Entity_Tree$initProjectRoot = F3(
 				tcg,
 				A2(_user$project$Entity_Tree$createContextSubGroups, findProjectById, tcg));
 		}(
-			A2(_user$project$Entity_Tree$initGroupDocNode, getTodoList, project));
+			A2(_user$project$Entity_Tree$initGroupNode, getTodoList, project));
 	});
 var _user$project$Entity_Tree$ContextRoot = F2(
 	function (a, b) {
@@ -137,11 +137,11 @@ var _user$project$Entity_Tree$ContextRoot = F2(
 	});
 var _user$project$Entity_Tree$initContextRoot = F3(
 	function (getTodoList, findContextById, context) {
-		return function (tcg) {
+		return function (groupNode) {
 			return A2(
 				_user$project$Entity_Tree$ContextRoot,
-				tcg,
-				A2(_user$project$Entity_Tree$createProjectSubGroups, findContextById, tcg));
+				groupNode,
+				A2(_user$project$Entity_Tree$createProjectSubGroups, findContextById, groupNode));
 		}(
-			A2(_user$project$Entity_Tree$initGroupDocNode, getTodoList, context));
+			A2(_user$project$Entity_Tree$initGroupNode, getTodoList, context));
 	});

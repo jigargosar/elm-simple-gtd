@@ -85,6 +85,12 @@ createProjectSubGroups findProjectById node =
         projects .|> initGroupNode filterTodoForProject
 
 
+initProjectRoot getTodoList findProjectById project =
+    project
+        |> initGroupNode getTodoList
+        |> (\tcg -> ProjectRoot tcg (createContextSubGroups findProjectById tcg))
+
+
 createContextSubGroups findContextById tcg =
     let
         contexts =
@@ -100,12 +106,6 @@ createContextSubGroups findContextById tcg =
                 |> List.filter (Todo.contextFilter context)
     in
         contexts .|> initGroupNode filterTodoForContext
-
-
-initProjectRoot getTodoList findProjectById project =
-    project
-        |> initGroupNode getTodoList
-        |> (\tcg -> ProjectRoot tcg (createContextSubGroups findProjectById tcg))
 
 
 initTodoForest : String -> TodoNodeList -> Tree

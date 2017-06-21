@@ -1,8 +1,8 @@
-var _user$project$Todo_Main$positionMoreMenuCmd = function (taskId) {
+var _user$project$Task_Main$positionMoreMenuCmd = function (taskId) {
 	return _user$project$DomPorts$positionPopupMenu(
 		A2(_elm_lang$core$Basics_ops['++'], '#todo-more-menu-button-', taskId));
 };
-var _user$project$Todo_Main$gotoTodoWithId = F2(
+var _user$project$Task_Main$gotoTodoWithId = F2(
 	function (todoId, model) {
 		var maybeTodoEntity = A2(
 			_elm_community$list_extra$List_Extra$find,
@@ -24,28 +24,28 @@ var _user$project$Todo_Main$gotoTodoWithId = F2(
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Model$setFocusInEntity, model),
 			maybeTodoEntity);
 	});
-var _user$project$Todo_Main$gotoTodoWithIdIn = _elm_lang$core$Basics$flip(_user$project$Todo_Main$gotoTodoWithId);
-var _user$project$Todo_Main$gotoRunningTodo = function (model) {
+var _user$project$Task_Main$gotoTodoWithIdIn = _elm_lang$core$Basics$flip(_user$project$Task_Main$gotoTodoWithId);
+var _user$project$Task_Main$gotoRunningTodo = function (model) {
 	return A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			_user$project$Todo_TimeTracker$getMaybeTodoId(model.timeTracker),
-			_user$project$Todo_Main$gotoTodoWithIdIn(model)),
+			_user$project$Task_Main$gotoTodoWithIdIn(model)),
 		model);
 };
-var _user$project$Todo_Main$maybeMapToCmd = function (fn) {
+var _user$project$Task_Main$maybeMapToCmd = function (fn) {
 	return A2(
 		_user$project$Ext_Function_Infix_ops['>>?='],
 		_elm_lang$core$Maybe$map(fn),
 		_elm_lang$core$Platform_Cmd$none);
 };
-var _user$project$Todo_Main$andThen = _Fresheyeball$elm_return$Return$andThen;
-var _user$project$Todo_Main$command = _Fresheyeball$elm_return$Return$command;
-var _user$project$Todo_Main$map = _Fresheyeball$elm_return$Return$map;
-var _user$project$Todo_Main$mapSet = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
-var _user$project$Todo_Main$mapOver = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _Fresheyeball$elm_return$Return$map);
-var _user$project$Todo_Main$timeTracker = A2(
+var _user$project$Task_Main$andThen = _Fresheyeball$elm_return$Return$andThen;
+var _user$project$Task_Main$command = _Fresheyeball$elm_return$Return$command;
+var _user$project$Task_Main$map = _Fresheyeball$elm_return$Return$map;
+var _user$project$Task_Main$mapSet = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
+var _user$project$Task_Main$mapOver = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _Fresheyeball$elm_return$Return$map);
+var _user$project$Task_Main$timeTracker = A2(
 	_user$project$Ext_Record$field,
 	function (_) {
 		return _.timeTracker;
@@ -56,7 +56,7 @@ var _user$project$Todo_Main$timeTracker = A2(
 				b,
 				{timeTracker: s});
 		}));
-var _user$project$Todo_Main$showTodoReminderNotification = _elm_lang$core$Native_Platform.outgoingPort(
+var _user$project$Task_Main$showTodoReminderNotification = _elm_lang$core$Native_Platform.outgoingPort(
 	'showTodoReminderNotification',
 	function (v) {
 		return {
@@ -65,7 +65,7 @@ var _user$project$Todo_Main$showTodoReminderNotification = _elm_lang$core$Native
 			data: {id: v.data.id}
 		};
 	});
-var _user$project$Todo_Main$notificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+var _user$project$Task_Main$notificationClicked = _elm_lang$core$Native_Platform.incomingPort(
 	'notificationClicked',
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
@@ -88,7 +88,7 @@ var _user$project$Todo_Main$notificationClicked = _elm_lang$core$Native_Platform
 						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
-var _user$project$Todo_Main$showRunningTodoNotification = _elm_lang$core$Native_Platform.outgoingPort(
+var _user$project$Task_Main$showRunningTodoNotification = _elm_lang$core$Native_Platform.outgoingPort(
 	'showRunningTodoNotification',
 	function (v) {
 		return {
@@ -109,7 +109,7 @@ var _user$project$Todo_Main$showRunningTodoNotification = _elm_lang$core$Native_
 			}
 		};
 	});
-var _user$project$Todo_Main$showRunningNotificationCmd = function (_p2) {
+var _user$project$Task_Main$showRunningNotificationCmd = function (_p2) {
 	var _p3 = _p2;
 	var createRequest = F2(
 		function (info, todo) {
@@ -140,8 +140,8 @@ var _user$project$Todo_Main$showRunningNotificationCmd = function (_p2) {
 			};
 		});
 	return A2(
-		_user$project$Todo_Main$maybeMapToCmd,
-		_user$project$Todo_Main$showRunningTodoNotification,
+		_user$project$Task_Main$maybeMapToCmd,
+		_user$project$Task_Main$showRunningTodoNotification,
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
 			_p3._0,
@@ -152,20 +152,20 @@ var _user$project$Todo_Main$showRunningNotificationCmd = function (_p2) {
 					createRequest(info));
 			}));
 };
-var _user$project$Todo_Main$updateTimeTracker = function (now) {
-	return _user$project$Todo_Main$andThen(
+var _user$project$Task_Main$updateTimeTracker = function (now) {
+	return _user$project$Task_Main$andThen(
 		function (_p4) {
 			return A2(
 				_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
-				{ctor: '_Tuple2', _0: _elm_lang$core$Tuple$second, _1: _user$project$Todo_Main$showRunningNotificationCmd},
+				{ctor: '_Tuple2', _0: _elm_lang$core$Tuple$second, _1: _user$project$Task_Main$showRunningNotificationCmd},
 				A3(
 					_user$project$Ext_Record$overT2,
-					_user$project$Todo_Main$timeTracker,
+					_user$project$Task_Main$timeTracker,
 					_user$project$Todo_TimeTracker$updateNextAlarmAt(now),
 					_p4));
 		});
 };
-var _user$project$Todo_Main$update = F3(
+var _user$project$Task_Main$update = F3(
 	function (andThenUpdate, now, todoMsg) {
 		var _p5 = todoMsg;
 		switch (_p5.ctor) {
@@ -174,7 +174,7 @@ var _user$project$Todo_Main$update = F3(
 				return function (_p6) {
 					return A2(
 						_Fresheyeball$elm_return$Return$command,
-						_user$project$Todo_Main$positionMoreMenuCmd(_p7),
+						_user$project$Task_Main$positionMoreMenuCmd(_p7),
 						A2(
 							_Fresheyeball$elm_return$Return$map,
 							_user$project$Model$setEditMode(
@@ -190,41 +190,41 @@ var _user$project$Todo_Main$update = F3(
 						A2(_user$project$Todo_ReminderForm$update, _p5._1, _p5._0)));
 			case 'ToggleRunning':
 				return A2(
-					_user$project$Todo_Main$mapOver,
-					_user$project$Todo_Main$timeTracker,
+					_user$project$Task_Main$mapOver,
+					_user$project$Task_Main$timeTracker,
 					A2(_user$project$Todo_TimeTracker$toggleStartStop, _p5._0, now));
 			case 'InitRunning':
 				return A2(
-					_user$project$Todo_Main$mapSet,
-					_user$project$Todo_Main$timeTracker,
+					_user$project$Task_Main$mapSet,
+					_user$project$Task_Main$timeTracker,
 					A2(_user$project$Todo_TimeTracker$initRunning, _p5._0, now));
 			case 'SwitchOrStartRunning':
 				return A2(
-					_user$project$Todo_Main$mapOver,
-					_user$project$Todo_Main$timeTracker,
+					_user$project$Task_Main$mapOver,
+					_user$project$Task_Main$timeTracker,
 					A2(_user$project$Todo_TimeTracker$switchOrStartRunning, _p5._0, now));
 			case 'TogglePaused':
 				return A2(
-					_user$project$Todo_Main$mapOver,
-					_user$project$Todo_Main$timeTracker,
+					_user$project$Task_Main$mapOver,
+					_user$project$Task_Main$timeTracker,
 					_user$project$Todo_TimeTracker$togglePause(now));
 			case 'StopRunning':
-				return A2(_user$project$Todo_Main$mapSet, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none);
+				return A2(_user$project$Task_Main$mapSet, _user$project$Task_Main$timeTracker, _user$project$Todo_TimeTracker$none);
 			case 'GotoRunning':
 				return function (_p9) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnSetDomFocusToFocusInEntity,
-						A2(_user$project$Todo_Main$map, _user$project$Todo_Main$gotoRunningTodo, _p9));
+						A2(_user$project$Task_Main$map, _user$project$Task_Main$gotoRunningTodo, _p9));
 				};
 			case 'UpdateTimeTracker':
-				return _user$project$Todo_Main$updateTimeTracker(now);
+				return _user$project$Task_Main$updateTimeTracker(now);
 			case 'Upsert':
 				var _p10 = _p5._0;
-				return _user$project$Todo_Main$map(
+				return _user$project$Task_Main$map(
 					function (model) {
 						var isTrackerTodoInactive = _user$project$Todo$isInActive(_p10) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p10, model.timeTracker);
-						return isTrackerTodoInactive ? A3(_user$project$Ext_Record$set, _user$project$Todo_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
+						return isTrackerTodoInactive ? A3(_user$project$Ext_Record$set, _user$project$Task_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
 					});
 			default:
 				var _p13 = _p5._0;
@@ -247,7 +247,7 @@ var _user$project$Todo_Main$update = F3(
 				};
 		}
 	});
-var _user$project$Todo_Main$onRunningTodoNotificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+var _user$project$Task_Main$onRunningTodoNotificationClicked = _elm_lang$core$Native_Platform.incomingPort(
 	'onRunningTodoNotificationClicked',
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
@@ -270,14 +270,14 @@ var _user$project$Todo_Main$onRunningTodoNotificationClicked = _elm_lang$core$Na
 						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
-var _user$project$Todo_Main$subscriptions = function (m) {
+var _user$project$Task_Main$subscriptions = function (m) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
 			ctor: '::',
-			_0: _user$project$Todo_Main$notificationClicked(_user$project$Model$OnNotificationClicked),
+			_0: _user$project$Task_Main$notificationClicked(_user$project$Model$OnNotificationClicked),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Todo_Main$onRunningTodoNotificationClicked(
+				_0: _user$project$Task_Main$onRunningTodoNotificationClicked(
 					function (_p14) {
 						return _user$project$Model$OnTodoMsg(
 							_user$project$Todo_Msg$RunningNotificationResponse(_p14));

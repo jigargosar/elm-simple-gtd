@@ -120,10 +120,6 @@ onTodoInitRunning =
     Todo.Msg.InitRunning >> OnTodoMsg
 
 
-onRunningTodoNotificationClicked =
-    Todo.Msg.RunningNotificationResponse >> OnTodoMsg
-
-
 onTodoStopRunning =
     Todo.Msg.StopRunning |> OnTodoMsg
 
@@ -134,10 +130,6 @@ onTodoTogglePaused =
 
 onGotoRunningTodo =
     Todo.Msg.GotoRunning |> OnTodoMsg
-
-
-onUpdateTodoTimeTracker =
-    Todo.Msg.UpdateTimeTracker |> OnTodoMsg
 
 
 commonMsg : CommonMsg.Helper Msg

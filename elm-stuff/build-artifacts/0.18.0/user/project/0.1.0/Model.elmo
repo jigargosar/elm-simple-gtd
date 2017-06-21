@@ -1412,10 +1412,6 @@ var _user$project$Model$onTodoInitRunning = function (_p55) {
 	return _user$project$Model$OnTodoMsg(
 		_user$project$Todo_Msg$InitRunning(_p55));
 };
-var _user$project$Model$onRunningTodoNotificationClicked = function (_p56) {
-	return _user$project$Model$OnTodoMsg(
-		_user$project$Todo_Msg$RunningNotificationResponse(_p56));
-};
 var _user$project$Model$onTodoStopRunning = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$StopRunning);
 var _user$project$Model$onTodoTogglePaused = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$TogglePaused);
 var _user$project$Model$onGotoRunningTodo = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$GotoRunning);
@@ -1441,7 +1437,6 @@ var _user$project$Model$keyboardCombos = {
 		}
 	}
 };
-var _user$project$Model$onUpdateTodoTimeTracker = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$UpdateTimeTracker);
 var _user$project$Model$OnLaunchBarMsgWithNow = F2(
 	function (a, b) {
 		return {ctor: 'OnLaunchBarMsgWithNow', _0: a, _1: b};
@@ -1584,12 +1579,12 @@ var _user$project$Model$init = function (flags) {
 			A2(_elm_lang$core$Json_Decode$decodeValue, _user$project$Model$localPrefDecoder, flags.localPref)),
 		_user$project$Model$defaultLocalPref);
 	var firebaseClient = _user$project$Firebase$initClient(flags.deviceId);
-	var _p57 = flags;
-	var now = _p57.now;
-	var encodedTodoList = _p57.encodedTodoList;
-	var encodedProjectList = _p57.encodedProjectList;
-	var encodedContextList = _p57.encodedContextList;
-	var pouchDBRemoteSyncURI = _p57.pouchDBRemoteSyncURI;
+	var _p56 = flags;
+	var now = _p56.now;
+	var encodedTodoList = _p56.encodedTodoList;
+	var encodedProjectList = _p56.encodedProjectList;
+	var encodedContextList = _p56.encodedContextList;
+	var pouchDBRemoteSyncURI = _p56.pouchDBRemoteSyncURI;
 	var storeGenerator = A4(
 		_mgold$elm_random_pcg$Random_Pcg$map3,
 		F3(
@@ -1599,14 +1594,14 @@ var _user$project$Model$init = function (flags) {
 		A2(_user$project$Todo_Store$generator, flags.deviceId, encodedTodoList),
 		A2(_user$project$Project$storeGenerator, flags.deviceId, encodedProjectList),
 		A2(_user$project$Context$storeGenerator, flags.deviceId, encodedContextList));
-	var _p58 = A2(
+	var _p57 = A2(
 		_mgold$elm_random_pcg$Random_Pcg$step,
 		storeGenerator,
 		_user$project$Ext_Random$seedFromTime(now));
-	var todoStore = _p58._0._0;
-	var projectStore = _p58._0._1;
-	var contextStore = _p58._0._2;
-	var seed = _p58._1;
+	var todoStore = _p57._0._0;
+	var projectStore = _p57._0._1;
+	var contextStore = _p57._0._2;
+	var seed = _p57._1;
 	var editMode = (_user$project$Store$isEmpty(todoStore) || (_user$project$Store$isEmpty(contextStore) || _user$project$Store$isEmpty(projectStore))) ? _user$project$ExclusiveMode$firstVisit : _user$project$ExclusiveMode$none;
 	var model = {
 		now: now,
@@ -1636,23 +1631,23 @@ var _user$project$Model$init = function (flags) {
 	};
 	return _Fresheyeball$elm_return$Return$singleton(model);
 };
-var _user$project$Model$projectView = function (_p59) {
+var _user$project$Model$projectView = function (_p58) {
 	return _user$project$Model$EntityListView(
 		_user$project$Entity$ProjectView(
-			_user$project$Document$getId(_p59)));
+			_user$project$Document$getId(_p58)));
 };
-var _user$project$Model$switchToProjectView = function (_p60) {
+var _user$project$Model$switchToProjectView = function (_p59) {
 	return _user$project$Model$switchToView(
-		_user$project$Model$projectView(_p60));
+		_user$project$Model$projectView(_p59));
 };
 var _user$project$Model$createAndEditNewProject = function (model) {
-	return function (_p61) {
-		var _p62 = _p61;
-		var _p63 = _p62._0;
+	return function (_p60) {
+		var _p61 = _p60;
+		var _p62 = _p61._0;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Entity$fromProject(_p63),
-			A2(_user$project$Model$switchToProjectView, _p63, _p62._1));
+			_user$project$Entity$fromProject(_p62),
+			A2(_user$project$Model$switchToProjectView, _p62, _p61._1));
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -1662,23 +1657,23 @@ var _user$project$Model$createAndEditNewProject = function (model) {
 				A2(_user$project$Project$init, '<New Project>', model.now),
 				model.projectStore)));
 };
-var _user$project$Model$contextView = function (_p64) {
+var _user$project$Model$contextView = function (_p63) {
 	return _user$project$Model$EntityListView(
 		_user$project$Entity$ContextView(
-			_user$project$Document$getId(_p64)));
+			_user$project$Document$getId(_p63)));
 };
-var _user$project$Model$switchToContextView = function (_p65) {
+var _user$project$Model$switchToContextView = function (_p64) {
 	return _user$project$Model$switchToView(
-		_user$project$Model$contextView(_p65));
+		_user$project$Model$contextView(_p64));
 };
 var _user$project$Model$createAndEditNewContext = function (model) {
-	return function (_p66) {
-		var _p67 = _p66;
-		var _p68 = _p67._0;
+	return function (_p65) {
+		var _p66 = _p65;
+		var _p67 = _p66._0;
 		return A2(
 			_user$project$Model$startEditingEntity,
-			_user$project$Entity$fromContext(_p68),
-			A2(_user$project$Model$switchToContextView, _p68, _p67._1));
+			_user$project$Entity$fromContext(_p67),
+			A2(_user$project$Model$switchToContextView, _p67, _p66._1));
 	}(
 		A2(
 			_Fresheyeball$elm_tuple_extra$Tuple2$mapSecond,
@@ -1690,9 +1685,9 @@ var _user$project$Model$createAndEditNewContext = function (model) {
 };
 var _user$project$Model$switchToContextsView = _user$project$Model$switchToView(
 	_user$project$Model$EntityListView(_user$project$Entity$ContextsView));
-var _user$project$Model$setEntityListViewType = function (_p69) {
+var _user$project$Model$setEntityListViewType = function (_p68) {
 	return _user$project$Model$switchToView(
-		_user$project$Model$EntityListView(_p69));
+		_user$project$Model$EntityListView(_p68));
 };
 var _user$project$Model$switchToEntityListViewFromEntity = F2(
 	function (entity, model) {

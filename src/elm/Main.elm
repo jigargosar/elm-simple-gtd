@@ -35,7 +35,7 @@ import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import Tuple2
 import Model exposing (..)
-import Todo.Main
+import Task.Main
 import View
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
@@ -97,7 +97,7 @@ subscriptions m =
         , Store.onChange OnPouchDBChange
         , Firebase.onChange OnFirebaseChange
         , Keyboard.Combo.subscriptions m.keyComboModel
-        , Todo.Main.subscriptions m
+        , Task.Main.subscriptions m
         ]
 
 
@@ -403,7 +403,7 @@ update msg =
                     withNow (OnTodoMsgWithTime todoMsg)
 
                 OnTodoMsgWithTime todoMsg now ->
-                    Todo.Main.update andThenUpdate now todoMsg
+                    Task.Main.update andThenUpdate now todoMsg
 
                 OnAppDrawerMsg msg ->
                     AppDrawer.Main.update andThenUpdate msg
@@ -475,11 +475,10 @@ setDomFocusToFocusInEntityCmd =
 
 onUpdateNow now =
     Return.map (Model.setNow now)
-        >> sendNotifications
-        >> andThenUpdate Model.onUpdateTodoTimeTracker
+        >> sendPendingNotifications
 
 
-sendNotifications =
+sendPendingNotifications =
     Return.andThenMaybe
         (Model.findAndSnoozeOverDueTodo >>? Return.andThen showTodoNotificationCmd)
 
@@ -488,7 +487,7 @@ showTodoNotificationCmd ( todo, model ) =
     let
         cmds =
             [ createTodoNotification todo
-                |> Todo.Main.showTodoReminderNotification
+                |> Task.Main.showTodoReminderNotification
             , startAlarm ()
             ]
     in

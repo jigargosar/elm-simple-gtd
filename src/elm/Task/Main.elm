@@ -1,4 +1,4 @@
-port module Todo.Main exposing (..)
+port module Task.Main exposing (..)
 
 import Document
 import DomPorts
@@ -66,7 +66,8 @@ maybeMapToCmd fn =
 subscriptions m =
     Sub.batch
         [ notificationClicked Model.OnNotificationClicked
-        , onRunningTodoNotificationClicked Model.onRunningTodoNotificationClicked
+        , onRunningTodoNotificationClicked (Todo.Msg.RunningNotificationResponse >> Model.OnTodoMsg)
+        , Time.every (Time.second * 1) (Model.OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker)
         ]
 
 

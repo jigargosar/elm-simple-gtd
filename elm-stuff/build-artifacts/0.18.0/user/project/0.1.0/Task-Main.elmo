@@ -65,6 +65,29 @@ var _user$project$Task_Main$showTodoReminderNotification = _elm_lang$core$Native
 			data: {id: v.data.id}
 		};
 	});
+var _user$project$Task_Main$showTodoNotificationCmd = function (_p2) {
+	var _p3 = _p2;
+	var createTodoNotification = function (todo) {
+		var id = _user$project$Document$getId(todo);
+		return {
+			title: _user$project$Todo$getText(todo),
+			tag: id,
+			data: {id: id}
+		};
+	};
+	var cmds = {
+		ctor: '::',
+		_0: _user$project$Task_Main$showTodoReminderNotification(
+			createTodoNotification(_p3._0)),
+		_1: {
+			ctor: '::',
+			_0: _user$project$Notification$startAlarm(
+				{ctor: '_Tuple0'}),
+			_1: {ctor: '[]'}
+		}
+	};
+	return A2(_elm_lang$core$Platform_Cmd_ops['!'], _p3._1, cmds);
+};
 var _user$project$Task_Main$notificationClicked = _elm_lang$core$Native_Platform.incomingPort(
 	'notificationClicked',
 	A2(
@@ -109,8 +132,8 @@ var _user$project$Task_Main$showRunningTodoNotification = _elm_lang$core$Native_
 			}
 		};
 	});
-var _user$project$Task_Main$showRunningNotificationCmd = function (_p2) {
-	var _p3 = _p2;
+var _user$project$Task_Main$showRunningNotificationCmd = function (_p4) {
+	var _p5 = _p4;
 	var createRequest = F2(
 		function (info, todo) {
 			var formattedDuration = _user$project$Ext_Time$toHHMMSSMin(info.elapsedTime);
@@ -144,17 +167,17 @@ var _user$project$Task_Main$showRunningNotificationCmd = function (_p2) {
 		_user$project$Task_Main$showRunningTodoNotification,
 		A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
-			_p3._0,
+			_p5._0,
 			function (info) {
 				return A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
-					A2(_user$project$Model$findTodoById, info.todoId, _p3._1),
+					A2(_user$project$Model$findTodoById, info.todoId, _p5._1),
 					createRequest(info));
 			}));
 };
 var _user$project$Task_Main$updateTimeTracker = function (now) {
 	return _user$project$Task_Main$andThen(
-		function (_p4) {
+		function (_p6) {
 			return A2(
 				_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
 				{ctor: '_Tuple2', _0: _elm_lang$core$Tuple$second, _1: _user$project$Task_Main$showRunningNotificationCmd},
@@ -162,47 +185,47 @@ var _user$project$Task_Main$updateTimeTracker = function (now) {
 					_user$project$Ext_Record$overT2,
 					_user$project$Task_Main$timeTracker,
 					_user$project$Todo_TimeTracker$updateNextAlarmAt(now),
-					_p4));
+					_p6));
 		});
 };
 var _user$project$Task_Main$update = F3(
 	function (andThenUpdate, now, todoMsg) {
-		var _p5 = todoMsg;
-		switch (_p5.ctor) {
+		var _p7 = todoMsg;
+		switch (_p7.ctor) {
 			case 'OnShowMoreMenu':
-				var _p7 = _p5._0;
-				return function (_p6) {
+				var _p9 = _p7._0;
+				return function (_p8) {
 					return A2(
 						_Fresheyeball$elm_return$Return$command,
-						_user$project$Task_Main$positionMoreMenuCmd(_p7),
+						_user$project$Task_Main$positionMoreMenuCmd(_p9),
 						A2(
 							_Fresheyeball$elm_return$Return$map,
 							_user$project$Model$setEditMode(
-								_user$project$ExclusiveMode$taskMoreMenu(_p7)),
-							_p6));
+								_user$project$ExclusiveMode$taskMoreMenu(_p9)),
+							_p8));
 				};
 			case 'UpdateReminderForm':
 				return _Fresheyeball$elm_return$Return$map(
-					function (_p8) {
+					function (_p10) {
 						return _user$project$Model$setEditMode(
-							_user$project$ExclusiveMode$EditTodoReminder(_p8));
+							_user$project$ExclusiveMode$EditTodoReminder(_p10));
 					}(
-						A2(_user$project$Todo_ReminderForm$update, _p5._1, _p5._0)));
+						A2(_user$project$Todo_ReminderForm$update, _p7._1, _p7._0)));
 			case 'ToggleRunning':
 				return A2(
 					_user$project$Task_Main$mapOver,
 					_user$project$Task_Main$timeTracker,
-					A2(_user$project$Todo_TimeTracker$toggleStartStop, _p5._0, now));
+					A2(_user$project$Todo_TimeTracker$toggleStartStop, _p7._0, now));
 			case 'InitRunning':
 				return A2(
 					_user$project$Task_Main$mapSet,
 					_user$project$Task_Main$timeTracker,
-					A2(_user$project$Todo_TimeTracker$initRunning, _p5._0, now));
+					A2(_user$project$Todo_TimeTracker$initRunning, _p7._0, now));
 			case 'SwitchOrStartRunning':
 				return A2(
 					_user$project$Task_Main$mapOver,
 					_user$project$Task_Main$timeTracker,
-					A2(_user$project$Todo_TimeTracker$switchOrStartRunning, _p5._0, now));
+					A2(_user$project$Todo_TimeTracker$switchOrStartRunning, _p7._0, now));
 			case 'TogglePaused':
 				return A2(
 					_user$project$Task_Main$mapOver,
@@ -211,49 +234,49 @@ var _user$project$Task_Main$update = F3(
 			case 'StopRunning':
 				return A2(_user$project$Task_Main$mapSet, _user$project$Task_Main$timeTracker, _user$project$Todo_TimeTracker$none);
 			case 'GotoRunning':
-				return function (_p9) {
+				return function (_p11) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnSetDomFocusToFocusInEntity,
-						A2(_user$project$Task_Main$map, _user$project$Task_Main$gotoRunningTodo, _p9));
+						A2(_user$project$Task_Main$map, _user$project$Task_Main$gotoRunningTodo, _p11));
 				};
 			case 'UpdateTimeTracker':
 				return _user$project$Task_Main$updateTimeTracker(now);
 			case 'Upsert':
-				var _p10 = _p5._0;
+				var _p12 = _p7._0;
 				return _user$project$Task_Main$map(
 					function (model) {
-						var isTrackerTodoInactive = _user$project$Todo$isInActive(_p10) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p10, model.timeTracker);
+						var isTrackerTodoInactive = _user$project$Todo$isInActive(_p12) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p12, model.timeTracker);
 						return isTrackerTodoInactive ? A3(_user$project$Ext_Record$set, _user$project$Task_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
 					});
 			case 'OnReminderNotificationClicked':
-				var todoId = _p5._0.data.id;
-				return _elm_lang$core$Native_Utils.eq(_p5._0.action, 'mark-done') ? function (_p11) {
+				var todoId = _p7._0.data.id;
+				return _elm_lang$core$Native_Utils.eq(_p7._0.action, 'mark-done') ? function (_p13) {
 					return A2(
 						_user$project$Task_Main$command,
 						_user$project$Notification$closeNotification(todoId),
 						A2(
 							_Fresheyeball$elm_return$Return$andThen,
 							A2(_user$project$Model$updateTodo, _user$project$Todo$MarkDone, todoId),
-							_p11));
-				} : function (_p12) {
+							_p13));
+				} : function (_p14) {
 					return andThenUpdate(
 						_user$project$Model$OnTodoMsg(
-							_user$project$Todo_Msg$ShowReminderOverlayForTodoId(_p12)));
+							_user$project$Todo_Msg$ShowReminderOverlayForTodoId(_p14)));
 				}(todoId);
 			case 'ShowReminderOverlayForTodoId':
 				return _Fresheyeball$elm_return$Return$map(
-					_user$project$Model$showReminderOverlayForTodoId(_p5._0));
-			default:
-				var _p15 = _p5._0;
-				var todoId = _p15.data.id;
-				return function (_p13) {
+					_user$project$Model$showReminderOverlayForTodoId(_p7._0));
+			case 'RunningNotificationResponse':
+				var _p17 = _p7._0;
+				var todoId = _p17.data.id;
+				return function (_p15) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnCloseNotification(todoId),
 						function () {
-							var _p14 = _p15.action;
-							switch (_p14) {
+							var _p16 = _p17.action;
+							switch (_p16) {
 								case 'stop':
 									return andThenUpdate(_user$project$Model$onTodoStopRunning);
 								case 'continue':
@@ -261,8 +284,14 @@ var _user$project$Task_Main$update = F3(
 								default:
 									return andThenUpdate(_user$project$Model$onGotoRunningTodo);
 							}
-						}()(_p13));
+						}()(_p15));
 				};
+			default:
+				return _user$project$Ext_Return$andThenMaybe(
+					A2(
+						_user$project$Ext_Function_Infix_ops['>>?'],
+						_user$project$Model$findAndSnoozeOverDueTodo,
+						_Fresheyeball$elm_return$Return$andThen(_user$project$Task_Main$showTodoNotificationCmd)));
 		}
 	});
 var _user$project$Task_Main$onRunningTodoNotificationClicked = _elm_lang$core$Native_Platform.incomingPort(
@@ -293,16 +322,16 @@ var _user$project$Task_Main$subscriptions = function (m) {
 		{
 			ctor: '::',
 			_0: _user$project$Task_Main$notificationClicked(
-				function (_p16) {
+				function (_p18) {
 					return _user$project$Model$OnTodoMsg(
-						_user$project$Todo_Msg$OnReminderNotificationClicked(_p16));
+						_user$project$Todo_Msg$OnReminderNotificationClicked(_p18));
 				}),
 			_1: {
 				ctor: '::',
 				_0: _user$project$Task_Main$onRunningTodoNotificationClicked(
-					function (_p17) {
+					function (_p19) {
 						return _user$project$Model$OnTodoMsg(
-							_user$project$Todo_Msg$RunningNotificationResponse(_p17));
+							_user$project$Todo_Msg$RunningNotificationResponse(_p19));
 					}),
 				_1: {
 					ctor: '::',
@@ -310,7 +339,16 @@ var _user$project$Task_Main$subscriptions = function (m) {
 						_elm_lang$core$Time$every,
 						_elm_lang$core$Time$second * 1,
 						_user$project$Model$OnTodoMsgWithTime(_user$project$Todo_Msg$UpdateTimeTracker)),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$core$Time$every,
+							_elm_lang$core$Time$second * 1,
+							function (_p20) {
+								return _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$OnProcessPendingNotificationCronTick);
+							}),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		});

@@ -42,21 +42,7 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 
 
-createTodoNotification todo =
-    let
-        id =
-            Document.getId todo
-    in
-        { title = Todo.getText todo, tag = id, data = { id = id } }
-
-
 port syncWithRemotePouch : String -> Cmd msg
-
-
-port startAlarm : () -> Cmd msg
-
-
-port stopAlarm : () -> Cmd msg
 
 
 port persistLocalPref : D.Value -> Cmd msg
@@ -458,30 +444,6 @@ setDomFocusToFocusInEntityCmd =
 
 onUpdateNow now =
     Return.map (Model.setNow now)
-        >> sendPendingNotifications
-
-
-sendPendingNotifications =
-    Return.andThenMaybe
-        (Model.findAndSnoozeOverDueTodo >>? Return.andThen showTodoNotificationCmd)
-
-
-showTodoNotificationCmd ( todo, model ) =
-    let
-        cmds =
-            [ createTodoNotification todo
-                |> Task.Main.showTodoReminderNotification
-            , startAlarm ()
-            ]
-    in
-        model ! cmds
-
-
-triggerAlarmCmd bool =
-    if bool then
-        startAlarm ()
-    else
-        Cmd.none
 
 
 maybeMapToCmd fn =

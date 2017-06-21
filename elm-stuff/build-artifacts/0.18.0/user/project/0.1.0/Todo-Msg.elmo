@@ -1,3 +1,4 @@
+var _user$project$Todo_Msg$OnProcessPendingNotificationCronTick = {ctor: 'OnProcessPendingNotificationCronTick'};
 var _user$project$Todo_Msg$OnShowMoreMenu = function (a) {
 	return {ctor: 'OnShowMoreMenu', _0: a};
 };

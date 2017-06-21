@@ -6,6 +6,7 @@ import ExclusiveMode
 import Entity
 import Ext.Debug
 import Ext.Record as Record exposing (set)
+import Ext.Return
 import Ext.Time
 import Model
 import Notification
@@ -68,6 +69,8 @@ subscriptions m =
         [ notificationClicked (Todo.Msg.OnReminderNotificationClicked >> Model.OnTodoMsg)
         , onRunningTodoNotificationClicked (Todo.Msg.RunningNotificationResponse >> Model.OnTodoMsg)
         , Time.every (Time.second * 1) (Model.OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker)
+        , Time.every (Time.second * 1)
+            (\_ -> Model.OnTodoMsg Todo.Msg.OnProcessPendingNotificationCronTick)
         ]
 
 
@@ -159,6 +162,28 @@ update andThenUpdate now todoMsg =
                         andThenUpdate Model.onGotoRunningTodo
                 )
                     >> andThenUpdate (Model.OnCloseNotification todoId)
+
+        OnProcessPendingNotificationCronTick ->
+            Ext.Return.andThenMaybe
+                (Model.findAndSnoozeOverDueTodo >>? Return.andThen showTodoNotificationCmd)
+
+
+showTodoNotificationCmd ( todo, model ) =
+    let
+        createTodoNotification todo =
+            let
+                id =
+                    Document.getId todo
+            in
+                { title = Todo.getText todo, tag = id, data = { id = id } }
+
+        cmds =
+            [ createTodoNotification todo
+                |> showTodoReminderNotification
+            , Notification.startAlarm ()
+            ]
+    in
+        model ! cmds
 
 
 showRunningNotificationCmd ( maybeTrackerInfo, model ) =

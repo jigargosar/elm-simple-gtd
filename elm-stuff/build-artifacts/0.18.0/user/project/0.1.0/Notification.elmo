@@ -1,3 +1,13 @@
+var _user$project$Notification$startAlarm = _elm_lang$core$Native_Platform.outgoingPort(
+	'startAlarm',
+	function (v) {
+		return null;
+	});
+var _user$project$Notification$stopAlarm = _elm_lang$core$Native_Platform.outgoingPort(
+	'stopAlarm',
+	function (v) {
+		return null;
+	});
 var _user$project$Notification$closeNotification = _elm_lang$core$Native_Platform.outgoingPort(
 	'closeNotification',
 	function (v) {

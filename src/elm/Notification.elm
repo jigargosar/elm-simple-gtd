@@ -8,6 +8,12 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 
 
+port startAlarm : () -> Cmd msg
+
+
+port stopAlarm : () -> Cmd msg
+
+
 port closeNotification : String -> Cmd msg
 
 

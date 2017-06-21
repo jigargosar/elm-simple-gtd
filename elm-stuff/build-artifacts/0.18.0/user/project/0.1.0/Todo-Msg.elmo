@@ -10,6 +10,9 @@ var _user$project$Todo_Msg$Upsert = function (a) {
 };
 var _user$project$Todo_Msg$UpdateTimeTracker = {ctor: 'UpdateTimeTracker'};
 var _user$project$Todo_Msg$GotoRunning = {ctor: 'GotoRunning'};
+var _user$project$Todo_Msg$OnReminderNotificationClicked = function (a) {
+	return {ctor: 'OnReminderNotificationClicked', _0: a};
+};
 var _user$project$Todo_Msg$RunningNotificationResponse = function (a) {
 	return {ctor: 'RunningNotificationResponse', _0: a};
 };

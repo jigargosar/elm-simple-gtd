@@ -62,7 +62,6 @@ type Msg
     | RemotePouchSync ExclusiveMode.SyncForm
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction ReminderOverlay.Action
-    | OnReminderNotificationClicked TodoNotificationEvent
     | ToggleShowDeletedEntity
     | ToggleDrawer
     | OnLayoutNarrowChanged Bool
@@ -223,23 +222,6 @@ type alias Flags =
     , deviceId : String
     , config : Config
     , localPref : D.Value
-    }
-
-
-type alias TodoNotification =
-    { title : String
-    , tag : String
-    , data : TodoNotificationData
-    }
-
-
-type alias TodoNotificationData =
-    { id : String }
-
-
-type alias TodoNotificationEvent =
-    { action : String
-    , data : TodoNotificationData
     }
 
 

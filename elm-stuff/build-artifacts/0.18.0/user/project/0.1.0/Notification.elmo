@@ -1,3 +1,8 @@
+var _user$project$Notification$closeNotification = _elm_lang$core$Native_Platform.outgoingPort(
+	'closeNotification',
+	function (v) {
+		return v;
+	});
 var _user$project$Notification$Response = F2(
 	function (a, b) {
 		return {action: a, data: b};
@@ -5,4 +10,15 @@ var _user$project$Notification$Response = F2(
 var _user$project$Notification$Request = F5(
 	function (a, b, c, d, e) {
 		return {tag: a, title: b, body: c, actions: d, data: e};
+	});
+var _user$project$Notification$TodoNotification = F3(
+	function (a, b, c) {
+		return {title: a, tag: b, data: c};
+	});
+var _user$project$Notification$TodoNotificationData = function (a) {
+	return {id: a};
+};
+var _user$project$Notification$TodoNotificationEvent = F2(
+	function (a, b) {
+		return {action: a, data: b};
 	});

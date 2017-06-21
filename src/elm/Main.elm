@@ -42,9 +42,6 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 
 
-port closeNotification : String -> Cmd msg
-
-
 createTodoNotification todo =
     let
         id =
@@ -187,17 +184,6 @@ update msg =
                 RemotePouchSync form ->
                     andThenUpdate OnSaveCurrentForm
                         >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
-
-                OnReminderNotificationClicked { action, data } ->
-                    let
-                        todoId =
-                            data.id
-                    in
-                        if action == "mark-done" then
-                            Return.andThen (Model.updateTodo Todo.MarkDone todoId)
-                                >> command (closeNotification todoId)
-                        else
-                            todoId |> ShowReminderOverlayForTodoId >> andThenUpdate
 
                 ToggleShowDeletedEntity ->
                     Return.map ((\m -> { m | showDeleted = not m.showDeleted }))
@@ -391,7 +377,7 @@ update msg =
                     withNow (OnLaunchBarMsgWithNow msg)
 
                 OnCloseNotification tag ->
-                    command (closeNotification tag)
+                    command (Notification.closeNotification tag)
 
                 OnGlobalKeyUp key ->
                     onGlobalKeyUp key
@@ -519,7 +505,7 @@ reminderOverlayAction action =
                                 ReminderOverlay.Dismiss ->
                                     Model.updateTodo (Todo.TurnReminderOff) todoId
                                         >> Tuple.mapFirst Model.removeReminderOverlay
-                                        >> Return.command (closeNotification todoId)
+                                        >> Return.command (Notification.closeNotification todoId)
 
                                 ReminderOverlay.ShowSnoozeOptions ->
                                     Model.setReminderOverlayToSnoozeView todoDetails
@@ -528,7 +514,7 @@ reminderOverlayAction action =
                                 ReminderOverlay.SnoozeTill snoozeOffset ->
                                     Return.singleton
                                         >> Return.andThen (Model.snoozeTodoWithOffset snoozeOffset todoId)
-                                        >> Return.command (closeNotification todoId)
+                                        >> Return.command (Notification.closeNotification todoId)
 
                                 ReminderOverlay.Close ->
                                     Model.removeReminderOverlay
@@ -537,7 +523,7 @@ reminderOverlayAction action =
                                 ReminderOverlay.MarkDone ->
                                     Model.updateTodo Todo.MarkDone todoId
                                         >> Tuple.mapFirst Model.removeReminderOverlay
-                                        >> Return.command (closeNotification todoId)
+                                        >> Return.command (Notification.closeNotification todoId)
 
                     _ ->
                         Return.singleton

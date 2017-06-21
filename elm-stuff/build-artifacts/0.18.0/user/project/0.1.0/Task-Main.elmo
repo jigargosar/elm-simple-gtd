@@ -226,16 +226,30 @@ var _user$project$Task_Main$update = F3(
 						var isTrackerTodoInactive = _user$project$Todo$isInActive(_p10) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p10, model.timeTracker);
 						return isTrackerTodoInactive ? A3(_user$project$Ext_Record$set, _user$project$Task_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
 					});
+			case 'OnReminderNotificationClicked':
+				var todoId = _p5._0.data.id;
+				return _elm_lang$core$Native_Utils.eq(_p5._0.action, 'mark-done') ? function (_p11) {
+					return A2(
+						_user$project$Task_Main$command,
+						_user$project$Notification$closeNotification(todoId),
+						A2(
+							_Fresheyeball$elm_return$Return$andThen,
+							A2(_user$project$Model$updateTodo, _user$project$Todo$MarkDone, todoId),
+							_p11));
+				} : function (_p12) {
+					return andThenUpdate(
+						_user$project$Model$ShowReminderOverlayForTodoId(_p12));
+				}(todoId);
 			default:
-				var _p13 = _p5._0;
-				var todoId = _p13.data.id;
-				return function (_p11) {
+				var _p15 = _p5._0;
+				var todoId = _p15.data.id;
+				return function (_p13) {
 					return A2(
 						andThenUpdate,
 						_user$project$Model$OnCloseNotification(todoId),
 						function () {
-							var _p12 = _p13.action;
-							switch (_p12) {
+							var _p14 = _p15.action;
+							switch (_p14) {
 								case 'stop':
 									return andThenUpdate(_user$project$Model$onTodoStopRunning);
 								case 'continue':
@@ -243,7 +257,7 @@ var _user$project$Task_Main$update = F3(
 								default:
 									return andThenUpdate(_user$project$Model$onGotoRunningTodo);
 							}
-						}()(_p11));
+						}()(_p13));
 				};
 		}
 	});
@@ -274,13 +288,17 @@ var _user$project$Task_Main$subscriptions = function (m) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
 			ctor: '::',
-			_0: _user$project$Task_Main$notificationClicked(_user$project$Model$OnNotificationClicked),
+			_0: _user$project$Task_Main$notificationClicked(
+				function (_p16) {
+					return _user$project$Model$OnTodoMsg(
+						_user$project$Todo_Msg$OnReminderNotificationClicked(_p16));
+				}),
 			_1: {
 				ctor: '::',
 				_0: _user$project$Task_Main$onRunningTodoNotificationClicked(
-					function (_p14) {
+					function (_p17) {
 						return _user$project$Model$OnTodoMsg(
-							_user$project$Todo_Msg$RunningNotificationResponse(_p14));
+							_user$project$Todo_Msg$RunningNotificationResponse(_p17));
 					}),
 				_1: {
 					ctor: '::',

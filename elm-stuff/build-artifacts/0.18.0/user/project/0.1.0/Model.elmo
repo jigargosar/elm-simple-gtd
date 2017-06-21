@@ -1375,17 +1375,6 @@ var _user$project$Model$Flags = function (a) {
 		};
 	};
 };
-var _user$project$Model$TodoNotification = F3(
-	function (a, b, c) {
-		return {title: a, tag: b, data: c};
-	});
-var _user$project$Model$TodoNotificationData = function (a) {
-	return {id: a};
-};
-var _user$project$Model$TodoNotificationEvent = F2(
-	function (a, b) {
-		return {action: a, data: b};
-	});
 var _user$project$Model$OnPersistLocalPref = {ctor: 'OnPersistLocalPref'};
 var _user$project$Model$OnAppDrawerMsg = function (a) {
 	return {ctor: 'OnAppDrawerMsg', _0: a};
@@ -1525,9 +1514,6 @@ var _user$project$Model$OnLayoutNarrowChanged = function (a) {
 };
 var _user$project$Model$ToggleDrawer = {ctor: 'ToggleDrawer'};
 var _user$project$Model$ToggleShowDeletedEntity = {ctor: 'ToggleShowDeletedEntity'};
-var _user$project$Model$OnNotificationClicked = function (a) {
-	return {ctor: 'OnNotificationClicked', _0: a};
-};
 var _user$project$Model$ReminderOverlayAction = function (a) {
 	return {ctor: 'ReminderOverlayAction', _0: a};
 };

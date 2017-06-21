@@ -23,10 +23,10 @@ import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
 
 
-port showTodoReminderNotification : Model.TodoNotification -> Cmd msg
+port showTodoReminderNotification : Notification.TodoNotification -> Cmd msg
 
 
-port notificationClicked : (Model.TodoNotificationEvent -> msg) -> Sub msg
+port notificationClicked : (Notification.TodoNotificationEvent -> msg) -> Sub msg
 
 
 port showRunningTodoNotification : Notification.Request -> Cmd msg
@@ -65,7 +65,7 @@ maybeMapToCmd fn =
 
 subscriptions m =
     Sub.batch
-        [ notificationClicked Model.OnReminderNotificationClicked
+        [ notificationClicked (Todo.Msg.OnReminderNotificationClicked >> Model.OnTodoMsg)
         , onRunningTodoNotificationClicked (Todo.Msg.RunningNotificationResponse >> Model.OnTodoMsg)
         , Time.every (Time.second * 1) (Model.OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker)
         ]
@@ -125,6 +125,17 @@ update andThenUpdate now todoMsg =
                         else
                             model
                 )
+
+        OnReminderNotificationClicked { action, data } ->
+            let
+                todoId =
+                    data.id
+            in
+                if action == "mark-done" then
+                    Return.andThen (Model.updateTodo Todo.MarkDone todoId)
+                        >> command (Notification.closeNotification todoId)
+                else
+                    todoId |> Model.ShowReminderOverlayForTodoId >> andThenUpdate
 
         RunningNotificationResponse res ->
             let

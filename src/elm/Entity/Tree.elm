@@ -21,15 +21,15 @@ type alias TodoNodeList =
     List Todo.Model
 
 
-type alias GroupDocNode =
+type alias GroupNode =
     { groupDoc : GroupDoc.Model
     , todoList : TodoNodeList
     , groupEntity : Entity.GroupEntity
     }
 
 
-type alias GroupDocNodeList =
-    List GroupDocNode
+type alias GroupNodeList =
+    List GroupNode
 
 
 type alias TitleNode =
@@ -37,14 +37,14 @@ type alias TitleNode =
 
 
 type Tree
-    = ContextRoot GroupDocNode GroupDocNodeList
-    | ProjectRoot GroupDocNode GroupDocNodeList
-    | ContextForest GroupDocNodeList
-    | ProjectForest GroupDocNodeList
+    = ContextRoot GroupNode GroupNodeList
+    | ProjectRoot GroupNode GroupNodeList
+    | ContextForest GroupNodeList
+    | ProjectForest GroupNodeList
     | TodoForest TitleNode TodoNodeList
 
 
-initGroupDocNode getTodoList groupDoc =
+initGroupNode getTodoList groupDoc =
     { groupDoc = groupDoc
     , todoList = getTodoList groupDoc
     , groupEntity = Entity.initContextGroupEntity groupDoc
@@ -52,7 +52,7 @@ initGroupDocNode getTodoList groupDoc =
 
 
 initGroupDocNodeList getTodoList groupDocList =
-    groupDocList .|> initGroupDocNode getTodoList
+    groupDocList .|> initGroupNode getTodoList
 
 
 initContextForest =
@@ -63,10 +63,15 @@ initProjectForest =
     initGroupDocNodeList >>> ProjectForest
 
 
-createProjectSubGroups findProjectById tcg =
+initContextRoot getTodoList findContextById context =
+    initGroupNode getTodoList context
+        |> (\groupNode -> ContextRoot groupNode (createProjectSubGroups findContextById groupNode))
+
+
+createProjectSubGroups findProjectById node =
     let
         projects =
-            tcg.todoList
+            node.todoList
                 .|> Todo.getProjectId
                 |> List.unique
                 .|> findProjectById
@@ -74,16 +79,10 @@ createProjectSubGroups findProjectById tcg =
                 |> Project.sort
 
         filterTodoForProject project =
-            tcg.todoList
+            node.todoList
                 |> List.filter (Todo.hasProject project)
     in
-        projects .|> initGroupDocNode filterTodoForProject
-
-
-initContextRoot getTodoList findContextById context =
-    context
-        |> initGroupDocNode getTodoList
-        |> (\tcg -> ContextRoot tcg (createProjectSubGroups findContextById tcg))
+        projects .|> initGroupNode filterTodoForProject
 
 
 createContextSubGroups findContextById tcg =
@@ -100,12 +99,12 @@ createContextSubGroups findContextById tcg =
             tcg.todoList
                 |> List.filter (Todo.contextFilter context)
     in
-        contexts .|> initGroupDocNode filterTodoForContext
+        contexts .|> initGroupNode filterTodoForContext
 
 
 initProjectRoot getTodoList findProjectById project =
     project
-        |> initGroupDocNode getTodoList
+        |> initGroupNode getTodoList
         |> (\tcg -> ProjectRoot tcg (createContextSubGroups findProjectById tcg))
 
 

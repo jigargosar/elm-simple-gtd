@@ -20,18 +20,20 @@ view model =
         form =
             Model.getRemoteSyncForm model
     in
-        div [ class "z-depth-2 static layout vertical" ]
-            [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
-                [ input
-                    [ defaultValue form.uri
-                    , autofocus True
-                    , onInput (Model.UpdateRemoteSyncFormUri form)
+        div [ id "custom-sync-container" ]
+            [ div [ class "z-depth-2 static layout vertical " ]
+                [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
+                    [ input
+                        [ defaultValue form.uri
+                        , autofocus True
+                        , onInput (Model.UpdateRemoteSyncFormUri form)
+                        ]
+                        []
+                    , label [ class "active" ] [ text "Cloudant or any CouchDB URL" ]
                     ]
-                    []
-                , label [ class "active" ] [ text "Cloudant or any CouchDB URL" ]
-                ]
-            , div []
-                [ Polymer.Paper.button [ form |> Model.RemotePouchSync >> onClick ]
-                    [ text "Sync Now" ]
+                , div []
+                    [ Polymer.Paper.button [ form |> Model.RemotePouchSync >> onClick ]
+                        [ text "Sync Now" ]
+                    ]
                 ]
             ]

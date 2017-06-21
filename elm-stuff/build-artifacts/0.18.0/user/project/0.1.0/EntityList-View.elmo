@@ -1,5 +1,7 @@
 var _user$project$EntityList_View$flatTodoListView = F2(
 	function (title, todoListView) {
+		var truncatedList = A2(_elm_lang$core$List$take, 75, todoListView);
+		var count = _elm_lang$core$List$length(todoListView);
 		return {
 			ctor: '::',
 			_0: {
@@ -32,13 +34,13 @@ var _user$project$EntityList_View$flatTodoListView = F2(
 										{ctor: '[]'},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text(title),
+											_0: A2(_user$project$View_Shared$badge, title, count),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
 								})
 						},
-						_1: todoListView
+						_1: truncatedList
 					})
 			},
 			_1: {ctor: '[]'}

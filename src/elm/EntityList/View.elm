@@ -24,6 +24,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
+import View.Shared exposing (badge)
 
 
 listView : Entity.ListViewType -> Model.Model -> ViewModel.Model -> Html.Html Msg
@@ -125,9 +126,16 @@ groupHeaderView vm =
 
 
 flatTodoListView title todoListView =
-    [ ( title
-      , Html.Keyed.node "div"
-            [ class "todo-list collection" ]
-            (( title, div [ class "collection-item" ] [ h5 [] [ text title ] ] ) :: todoListView)
-      )
-    ]
+    let
+        count =
+            todoListView |> List.length
+
+        truncatedList =
+            todoListView |> List.take 75
+    in
+        [ ( title
+          , Html.Keyed.node "div"
+                [ class "todo-list collection" ]
+                (( title, div [ class "collection-item" ] [ h5 [] [ badge title count ] ] ) :: truncatedList)
+          )
+        ]

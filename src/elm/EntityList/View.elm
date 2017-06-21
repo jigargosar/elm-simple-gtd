@@ -33,7 +33,7 @@ listView viewType model appViewModel =
             Model.createGrouping viewType model
 
         entityList =
-            grouping |> Entity.Tree.flattenGrouping
+            grouping |> Entity.Tree.flatten
 
         maybeFocusInEntity =
             Model.getMaybeFocusInEntity entityList model

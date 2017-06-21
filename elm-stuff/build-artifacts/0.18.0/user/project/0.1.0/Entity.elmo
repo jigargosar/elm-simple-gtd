@@ -154,9 +154,11 @@ var _user$project$Entity$getId = function (entity) {
 var _user$project$Entity$Context = function (a) {
 	return {ctor: 'Context', _0: a};
 };
+var _user$project$Entity$initContextGroup = _user$project$Entity$Context;
 var _user$project$Entity$Project = function (a) {
 	return {ctor: 'Project', _0: a};
 };
+var _user$project$Entity$initProjectGroup = _user$project$Entity$Project;
 var _user$project$Entity$Task = function (a) {
 	return {ctor: 'Task', _0: a};
 };

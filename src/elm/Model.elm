@@ -502,35 +502,35 @@ createGrouping viewType model =
         case viewType of
             Entity.ContextsView ->
                 getActiveContexts model
-                    |> Entity.Tree.createGroupingForContexts
+                    |> Entity.Tree.initContextForest
                         getActiveTodoListForContextHelp
 
             Entity.ProjectsView ->
                 getActiveProjects model
-                    |> Entity.Tree.createGroupingForProjects
+                    |> Entity.Tree.initProjectForest
                         getActiveTodoListForProjectHelp
 
             Entity.ContextView id ->
                 findContextById id model
                     ?= Context.null
-                    |> Entity.Tree.createGroupingForContext
+                    |> Entity.Tree.initContextRoot
                         getActiveTodoListForContextHelp
                         findProjectByIdHelp
 
             Entity.ProjectView id ->
                 findProjectById id model
                     ?= Project.null
-                    |> Entity.Tree.createGroupingForProject
+                    |> Entity.Tree.initProjectRoot
                         getActiveTodoListForProjectHelp
                         findContextByIdHelp
 
             Entity.BinView ->
-                Entity.Tree.createGroupingForTodoList
+                Entity.Tree.initTodoForest
                     "Bin"
                     (filterTodosAndSortByLatestModified Document.isDeleted model)
 
             Entity.DoneView ->
-                Entity.Tree.createGroupingForTodoList
+                Entity.Tree.initTodoForest
                     "Done"
                     (filterTodosAndSortByLatestModified
                         (Pred.all [ Document.isNotDeleted, Todo.isDone ])
@@ -982,7 +982,7 @@ getCurrentViewEntityList model =
     --todo: can use maybeGetCurrentEntityListViewType
     case model.mainViewType of
         EntityListView viewType ->
-            createGrouping viewType model |> Entity.Tree.flattenGrouping
+            createGrouping viewType model |> Entity.Tree.flatten
 
         _ ->
             []

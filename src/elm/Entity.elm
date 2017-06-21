@@ -38,6 +38,14 @@ fromTask =
     Task
 
 
+initProjectGroup =
+    Project
+
+
+initContextGroup =
+    Context
+
+
 type ListViewType
     = ContextsView
     | ContextView Document.Id

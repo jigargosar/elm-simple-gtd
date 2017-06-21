@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.54 - 2017-06-21
 * sync view: extract and style 
 
 ## v0.18.53 - 2017-06-21

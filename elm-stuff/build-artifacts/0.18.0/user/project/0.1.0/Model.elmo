@@ -1446,9 +1446,6 @@ var _user$project$Model$OnKeyboardMsg = function (a) {
 var _user$project$Model$OnNowChanged = function (a) {
 	return {ctor: 'OnNowChanged', _0: a};
 };
-var _user$project$Model$ShowReminderOverlayForTodoId = function (a) {
-	return {ctor: 'ShowReminderOverlayForTodoId', _0: a};
-};
 var _user$project$Model$OnSetEntityListView = function (a) {
 	return {ctor: 'OnSetEntityListView', _0: a};
 };

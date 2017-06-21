@@ -291,9 +291,6 @@ update msg =
                 OnSetEntityListView viewType ->
                     Return.map (Model.setEntityListViewType viewType)
 
-                ShowReminderOverlayForTodoId todoId ->
-                    Return.map (Model.showReminderOverlayForTodoId todoId)
-
                 OnNowChanged now ->
                     onUpdateNow now
 

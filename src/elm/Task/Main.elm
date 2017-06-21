@@ -135,7 +135,13 @@ update andThenUpdate now todoMsg =
                     Return.andThen (Model.updateTodo Todo.MarkDone todoId)
                         >> command (Notification.closeNotification todoId)
                 else
-                    todoId |> Model.ShowReminderOverlayForTodoId >> andThenUpdate
+                    todoId
+                        |> Todo.Msg.ShowReminderOverlayForTodoId
+                        >> Model.OnTodoMsg
+                        >> andThenUpdate
+
+        ShowReminderOverlayForTodoId todoId ->
+            Return.map (Model.showReminderOverlayForTodoId todoId)
 
         RunningNotificationResponse res ->
             let

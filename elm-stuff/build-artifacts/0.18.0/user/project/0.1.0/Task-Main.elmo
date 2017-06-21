@@ -238,8 +238,12 @@ var _user$project$Task_Main$update = F3(
 							_p11));
 				} : function (_p12) {
 					return andThenUpdate(
-						_user$project$Model$ShowReminderOverlayForTodoId(_p12));
+						_user$project$Model$OnTodoMsg(
+							_user$project$Todo_Msg$ShowReminderOverlayForTodoId(_p12)));
 				}(todoId);
+			case 'ShowReminderOverlayForTodoId':
+				return _Fresheyeball$elm_return$Return$map(
+					_user$project$Model$showReminderOverlayForTodoId(_p5._0));
 			default:
 				var _p15 = _p5._0;
 				var todoId = _p15.data.id;

@@ -20,6 +20,7 @@ type Msg
     | TogglePaused
     | RunningNotificationResponse Response
     | OnReminderNotificationClicked Notification.TodoNotificationEvent
+    | ShowReminderOverlayForTodoId Todo.Id
     | GotoRunning
     | UpdateTimeTracker
     | Upsert Todo.Model

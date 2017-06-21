@@ -87,7 +87,6 @@ type Msg
     | OnEntityListKeyDown (List Entity) KeyboardEvent
     | SwitchView ViewType
     | OnSetEntityListView EntityListViewType
-    | ShowReminderOverlayForTodoId Todo.Id
     | OnNowChanged Time
     | OnKeyboardMsg Keyboard.Msg
     | OnGlobalKeyUp Keyboard.Key

@@ -165,20 +165,20 @@ update andThenUpdate now todoMsg =
 
         OnProcessPendingNotificationCronTick ->
             Ext.Return.andThenMaybe
-                (Model.findAndSnoozeOverDueTodo >>? Return.andThen showTodoNotificationCmd)
+                (Model.findAndSnoozeOverDueTodo >>? Return.andThen showReminderNotificationCmd)
 
 
-showTodoNotificationCmd ( todo, model ) =
+showReminderNotificationCmd ( task, model ) =
     let
-        createTodoNotification todo =
+        createNotification =
             let
                 id =
-                    Document.getId todo
+                    Document.getId task
             in
-                { title = Todo.getText todo, tag = id, data = { id = id } }
+                { title = Todo.getText task, tag = id, data = { id = id } }
 
         cmds =
-            [ createTodoNotification todo
+            [ createNotification
                 |> showTodoReminderNotification
             , Notification.startAlarm ()
             ]

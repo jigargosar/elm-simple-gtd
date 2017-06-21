@@ -44,13 +44,7 @@ async function boot() {
         }
 
     })
-    /*$elm.on("keydown", `input[type="date"], input[type="time"]`, e => {
-        // console.log(e.keyCode, e.key, e.target, e);
-            if(e.key === "Tab"){
-                e.preventDefault()
-            }
-    })
-*/
+
     $elm.get(0).addEventListener("keydown", e => {
         const $closest = $(e.target).closest("[data-prevent-default-keys]")
         if ($closest.length === 0)return
@@ -153,12 +147,14 @@ async function boot() {
             })
             $popup.find(".auto-focus").first().focus()
 
-            $popup.on("keydown", ":focusable", function (e) {
+            const focusableSelector = ":focusable, input:focusable"
+            $popup.on("keydown", focusableSelector, function (e) {
                 if(e.key !== "Tab") return
-                const $focusables = $popup.find(":focusable")
+                const $focusable = $popup.find(focusableSelector)
 
-                const first = $focusables.first().get(0)
-                const last = $focusables.last().get(0)
+                const first = $focusable.first().get(0)
+                const last = $focusable.last().get(0)
+                const dateTimeInputSelector = `input[type="date"], input[type="time"]`
                 
                 if(e.shiftKey){
 
@@ -166,14 +162,23 @@ async function boot() {
                         e.preventDefault()
                         e.stopPropagation()
                         last.focus()
+                    }else if ($(this).is(dateTimeInputSelector)){
+                        e.preventDefault()
+                        e.stopPropagation()
+                        $focusable.get($.inArray(this, $focusable) - 1).focus()
                     }
                 }
                 else {
+
 
                     if(this === last){
                         e.preventDefault()
                         e.stopPropagation()
                         first.focus()
+                    }else if ($(this).is(dateTimeInputSelector)){
+                        e.preventDefault()
+                        e.stopPropagation()
+                        $focusable.get($.inArray(this, $focusable) + 1).focus()
                     }
                 }
             })

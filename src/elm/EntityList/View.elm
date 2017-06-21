@@ -60,20 +60,20 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
             in
                 tabindex tabindexValue
 
-        createContextVM { groupDoc, todoList } =
+        createContextVM { context, todoList } =
             GroupDoc.ViewModel.contextGroup
                 getTabIndexAVForEntity
                 todoList
-                groupDoc
+                context
 
         multiContextView list =
             list .|> (createContextVM >> groupView todoView)
 
-        createProjectVM { groupDoc, todoList } =
+        createProjectVM { project, todoList } =
             GroupDoc.ViewModel.projectGroup
                 getTabIndexAVForEntity
                 todoList
-                groupDoc
+                project
 
         multiProjectView list =
             list .|> (createProjectVM >> groupView todoView)

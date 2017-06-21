@@ -1,3 +1,6 @@
+## Upcoming
+* reverting part of entity group refactoring, since it caused bugs in entity-view arrow key navigation.  
+
 ## v0.18.54 - 2017-06-21
 * sync view: extract and style 
 

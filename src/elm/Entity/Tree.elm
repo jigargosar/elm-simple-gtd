@@ -2,7 +2,6 @@ module Entity.Tree exposing (..)
 
 import Context
 import Entity
-import GroupDoc
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -21,15 +20,26 @@ type alias TodoNodeList =
     List Todo.Model
 
 
-type alias GroupNode =
-    { groupDoc : GroupDoc.Model
+type alias ContextNode =
+    { context : Context.Model
     , todoList : TodoNodeList
     , groupEntity : Entity.GroupEntity
     }
 
 
-type alias GroupNodeList =
-    List GroupNode
+type alias ProjectNode =
+    { project : Project.Model
+    , todoList : TodoNodeList
+    , groupEntity : Entity.GroupEntity
+    }
+
+
+type alias ProjectNodeList =
+    List ProjectNode
+
+
+type alias ContextNodeList =
+    List ContextNode
 
 
 type alias TitleNode =
@@ -37,41 +47,35 @@ type alias TitleNode =
 
 
 type Tree
-    = ContextRoot GroupNode GroupNodeList
-    | ProjectRoot GroupNode GroupNodeList
-    | ContextForest GroupNodeList
-    | ProjectForest GroupNodeList
+    = ContextRoot ContextNode ProjectNodeList
+    | ProjectRoot ProjectNode ContextNodeList
+    | ContextForest ContextNodeList
+    | ProjectForest ProjectNodeList
     | TodoForest TitleNode TodoNodeList
 
 
-initGroupNode getTodoList groupDoc =
-    { groupDoc = groupDoc
-    , todoList = getTodoList groupDoc
-    , groupEntity = Entity.initContextGroupEntity groupDoc
+initContextNode getTodoList context =
+    { context = context
+    , todoList = getTodoList context
+    , groupEntity = Entity.initContextGroup context
     }
 
 
-initGroupDocNodeList getTodoList groupDocList =
-    groupDocList .|> initGroupNode getTodoList
+initProjectNode getTodoList project =
+    { project = project
+    , todoList = getTodoList project
+    , groupEntity = Entity.initProjectGroup project
+    }
 
 
-initContextForest =
-    initGroupDocNodeList >>> ContextForest
+initContextForest getTodoList contexts =
+    contexts .|> initContextNode getTodoList |> ContextForest
 
 
-initProjectForest =
-    initGroupDocNodeList >>> ProjectForest
-
-
-initContextRoot getTodoList findContextById context =
-    initGroupNode getTodoList context
-        |> (\groupNode -> ContextRoot groupNode (createProjectSubGroups findContextById groupNode))
-
-
-createProjectSubGroups findProjectById node =
+createProjectSubGroups findProjectById tcg =
     let
         projects =
-            node.todoList
+            tcg.todoList
                 .|> Todo.getProjectId
                 |> List.unique
                 .|> findProjectById
@@ -79,16 +83,20 @@ createProjectSubGroups findProjectById node =
                 |> Project.sort
 
         filterTodoForProject project =
-            node.todoList
+            tcg.todoList
                 |> List.filter (Todo.hasProject project)
     in
-        projects .|> initGroupNode filterTodoForProject
+        projects .|> initProjectNode filterTodoForProject
 
 
-initProjectRoot getTodoList findProjectById project =
-    project
-        |> initGroupNode getTodoList
-        |> (\tcg -> ProjectRoot tcg (createContextSubGroups findProjectById tcg))
+initContextRoot getTodoList findContextById context =
+    context
+        |> initContextNode getTodoList
+        |> (\tcg -> ContextRoot tcg (createProjectSubGroups findContextById tcg))
+
+
+initProjectForest getTodoList projects =
+    projects .|> initProjectNode getTodoList |> ProjectForest
 
 
 createContextSubGroups findContextById tcg =
@@ -105,7 +113,13 @@ createContextSubGroups findContextById tcg =
             tcg.todoList
                 |> List.filter (Todo.contextFilter context)
     in
-        contexts .|> initGroupNode filterTodoForContext
+        contexts .|> initContextNode filterTodoForContext
+
+
+initProjectRoot getTodoList findProjectById project =
+    project
+        |> initProjectNode getTodoList
+        |> (\tcg -> ProjectRoot tcg (createContextSubGroups findProjectById tcg))
 
 
 initTodoForest : String -> TodoNodeList -> Tree
@@ -117,28 +131,25 @@ flatten : Tree -> List Entity.Entity
 flatten tree =
     case tree of
         ContextRoot node nodeList ->
-            Entity.fromGroupEntity node.groupEntity
+            Entity.fromContext node.context
                 :: flatten (ProjectForest nodeList)
 
         ProjectRoot node nodeList ->
-            Entity.fromGroupEntity node.groupEntity
+            Entity.fromProject node.project
                 :: flatten (ContextForest nodeList)
 
         ContextForest nodeList ->
             nodeList
                 |> List.concatMap
-                    (\node ->
-                        Entity.fromGroupEntity node.groupEntity
-                            :: (node.todoList .|> Entity.fromTask)
-                    )
+                    (\node -> Entity.fromContext node.context :: (node.todoList .|> Entity.Task))
 
         ProjectForest groupList ->
             groupList
                 |> List.concatMap
-                    (\node ->
-                        Entity.fromGroupEntity node.groupEntity
-                            :: (node.todoList .|> Entity.fromTask)
+                    (\g ->
+                        Entity.fromProject g.project
+                            :: (g.todoList .|> Entity.Task)
                     )
 
         TodoForest title todoList ->
-            todoList .|> Entity.fromTask
+            todoList .|> Entity.Task

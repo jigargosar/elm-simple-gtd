@@ -37,7 +37,7 @@ delta2hash =
 
 builder2messages : Builder -> List Msg
 builder2messages builder =
-    Entity.builderToMaybeListViewType builder
+    Entity.routeUrlBuilderToMaybeListViewType builder
         |> Maybe.Extra.unpack
             (\_ ->
                 case path builder of

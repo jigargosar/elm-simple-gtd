@@ -5,6 +5,7 @@ import CommonMsg
 import Context
 import Dict.Extra
 import Document exposing (Document)
+import Entity.Tree
 import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
 import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
@@ -483,7 +484,7 @@ getActiveTodoListForProject project model =
         model
 
 
-createGrouping : Entity.ListViewType -> Model -> Entity.Grouping
+createGrouping : Entity.ListViewType -> Model -> Entity.Tree.Grouping
 createGrouping viewType model =
     let
         getActiveTodoListForContextHelp =
@@ -501,35 +502,35 @@ createGrouping viewType model =
         case viewType of
             Entity.ContextsView ->
                 getActiveContexts model
-                    |> Entity.createGroupingForContexts
+                    |> Entity.Tree.createGroupingForContexts
                         getActiveTodoListForContextHelp
 
             Entity.ProjectsView ->
                 getActiveProjects model
-                    |> Entity.createGroupingForProjects
+                    |> Entity.Tree.createGroupingForProjects
                         getActiveTodoListForProjectHelp
 
             Entity.ContextView id ->
                 findContextById id model
                     ?= Context.null
-                    |> Entity.createGroupingForContext
+                    |> Entity.Tree.createGroupingForContext
                         getActiveTodoListForContextHelp
                         findProjectByIdHelp
 
             Entity.ProjectView id ->
                 findProjectById id model
                     ?= Project.null
-                    |> Entity.createGroupingForProject
+                    |> Entity.Tree.createGroupingForProject
                         getActiveTodoListForProjectHelp
                         findContextByIdHelp
 
             Entity.BinView ->
-                Entity.createGroupingForTodoList
+                Entity.Tree.createGroupingForTodoList
                     "Bin"
                     (filterTodosAndSortByLatestModified Document.isDeleted model)
 
             Entity.DoneView ->
-                Entity.createGroupingForTodoList
+                Entity.Tree.createGroupingForTodoList
                     "Done"
                     (filterTodosAndSortByLatestModified
                         (Pred.all [ Document.isNotDeleted, Todo.isDone ])
@@ -981,7 +982,7 @@ getCurrentViewEntityList model =
     --todo: can use maybeGetCurrentEntityListViewType
     case model.mainViewType of
         EntityListView viewType ->
-            createGrouping viewType model |> Entity.flattenGrouping
+            createGrouping viewType model |> Entity.Tree.flattenGrouping
 
         _ ->
             []

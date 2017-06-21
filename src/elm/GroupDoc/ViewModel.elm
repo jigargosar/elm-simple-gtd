@@ -46,7 +46,7 @@ type alias ViewModel =
     , onFocusIn : Msg
     , onKeyDownMsg : KeyboardEvent -> Msg
     , tabindexAV : Html.Attribute Msg
-    , todoList : Entity.TodoList
+    , todoList : List Todo.Model
     , getTabIndexAVForEntity : Entity.Entity -> Html.Attribute Msg
     }
 
@@ -154,7 +154,7 @@ create config todoList groupDoc =
         }
 
 
-contextGroup : (Entity.Entity -> Html.Attribute Msg) -> Entity.TodoList -> Context.Model -> ViewModel
+contextGroup : (Entity.Entity -> Html.Attribute Msg) -> List Todo.Model -> Context.Model -> ViewModel
 contextGroup getTabIndexAVForEntity todoList context =
     let
         config : Config
@@ -173,7 +173,7 @@ contextGroup getTabIndexAVForEntity todoList context =
         create config todoList context
 
 
-projectGroup : (Entity.Entity -> Html.Attribute Msg) -> Entity.TodoList -> Project.Model -> ViewModel
+projectGroup : (Entity.Entity -> Html.Attribute Msg) -> List Todo.Model -> Project.Model -> ViewModel
 projectGroup getTabIndexAVForEntity todoList project =
     let
         config : Config

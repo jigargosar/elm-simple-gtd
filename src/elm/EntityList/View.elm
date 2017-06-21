@@ -2,6 +2,7 @@ module EntityList.View exposing (..)
 
 import Document
 import Entity exposing (Entity)
+import Entity.Tree
 import GroupDoc.View
 import GroupDoc.ViewModel
 import Html
@@ -32,7 +33,7 @@ listView viewType model appViewModel =
             Model.createGrouping viewType model
 
         entityList =
-            grouping |> Entity.flattenGrouping
+            grouping |> Entity.Tree.flattenGrouping
 
         maybeFocusInEntity =
             Model.getMaybeFocusInEntity entityList model
@@ -90,27 +91,27 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
             List.map todoView
     in
         case grouping of
-            Entity.SingleContext contextGroup subGroupList ->
+            Entity.Tree.SingleContext contextGroup subGroupList ->
                 let
                     header =
                         createContextVM contextGroup |> groupHeaderView
                 in
                     header :: multiProjectView subGroupList
 
-            Entity.SingleProject projectGroup subGroupList ->
+            Entity.Tree.SingleProject projectGroup subGroupList ->
                 let
                     header =
                         createProjectVM projectGroup |> groupHeaderView
                 in
                     header :: multiContextView subGroupList
 
-            Entity.MultiContext groupList ->
+            Entity.Tree.MultiContext groupList ->
                 multiContextView groupList
 
-            Entity.MultiProject groupList ->
+            Entity.Tree.MultiProject groupList ->
                 multiProjectView groupList
 
-            Entity.FlatTodoList title todoList ->
+            Entity.Tree.FlatTodoList title todoList ->
                 todoListView todoList
                     |> flatTodoListView title
 

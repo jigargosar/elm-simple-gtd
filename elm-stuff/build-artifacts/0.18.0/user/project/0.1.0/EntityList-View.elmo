@@ -135,7 +135,7 @@ var _user$project$EntityList_View$keyedViewList = F3(
 var _user$project$EntityList_View$listView = F3(
 	function (viewType, model, appViewModel) {
 		var grouping = A2(_user$project$Model$createGrouping, viewType, model);
-		var entityList = _user$project$Entity$flattenGrouping(grouping);
+		var entityList = _user$project$Entity_Tree$flattenGrouping(grouping);
 		var maybeFocusInEntity = A2(_user$project$Model$getMaybeFocusInEntity, entityList, model);
 		return A3(
 			_elm_lang$html$Html_Keyed$node,

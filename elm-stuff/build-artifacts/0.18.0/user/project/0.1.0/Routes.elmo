@@ -21,7 +21,7 @@ var _user$project$Routes$builder2messages = function (builder) {
 			return _elm_lang$core$List$singleton(
 				_user$project$Model$OnSetEntityListView(_p2));
 		},
-		_user$project$Entity$builderToMaybeListViewType(builder));
+		_user$project$Entity$routeUrlBuilderToMaybeListViewType(builder));
 };
 var _user$project$Routes$hash2messages = function (location) {
 	return _user$project$Routes$builder2messages(

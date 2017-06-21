@@ -597,17 +597,17 @@ var _user$project$Model$createGrouping = F2(
 		switch (_p22.ctor) {
 			case 'ContextsView':
 				return A2(
-					_user$project$Entity$createGroupingForContexts,
+					_user$project$Entity_Tree$createGroupingForContexts,
 					getActiveTodoListForContextHelp,
 					_user$project$Model$getActiveContexts(model));
 			case 'ProjectsView':
 				return A2(
-					_user$project$Entity$createGroupingForProjects,
+					_user$project$Entity_Tree$createGroupingForProjects,
 					getActiveTodoListForProjectHelp,
 					_user$project$Model$getActiveProjects(model));
 			case 'ContextView':
 				return A3(
-					_user$project$Entity$createGroupingForContext,
+					_user$project$Entity_Tree$createGroupingForContext,
 					getActiveTodoListForContextHelp,
 					findProjectByIdHelp,
 					A2(
@@ -616,7 +616,7 @@ var _user$project$Model$createGrouping = F2(
 						_user$project$Context$null));
 			case 'ProjectView':
 				return A3(
-					_user$project$Entity$createGroupingForProject,
+					_user$project$Entity_Tree$createGroupingForProject,
 					getActiveTodoListForProjectHelp,
 					findContextByIdHelp,
 					A2(
@@ -625,12 +625,12 @@ var _user$project$Model$createGrouping = F2(
 						_user$project$Project$null));
 			case 'BinView':
 				return A2(
-					_user$project$Entity$createGroupingForTodoList,
+					_user$project$Entity_Tree$createGroupingForTodoList,
 					'Bin',
 					A2(_user$project$Model$filterTodosAndSortByLatestModified, _user$project$Document$isDeleted, model));
 			default:
 				return A2(
-					_user$project$Entity$createGroupingForTodoList,
+					_user$project$Entity_Tree$createGroupingForTodoList,
 					'Done',
 					A2(
 						_user$project$Model$filterTodosAndSortByLatestModified,
@@ -650,7 +650,7 @@ var _user$project$Model$createGrouping = F2(
 var _user$project$Model$getCurrentViewEntityList = function (model) {
 	var _p23 = model.mainViewType;
 	if (_p23.ctor === 'EntityListView') {
-		return _user$project$Entity$flattenGrouping(
+		return _user$project$Entity_Tree$flattenGrouping(
 			A2(_user$project$Model$createGrouping, _p23._0, model));
 	} else {
 		return {ctor: '[]'};

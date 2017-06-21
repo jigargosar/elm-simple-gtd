@@ -50,9 +50,9 @@ view appVM model =
                     ++ entityListView projects model.mainViewType
                     ++ [ onSetEntityListViewItem "delete" Entity.BinView "Bin"
                        , onSetEntityListViewItem "done" Entity.DoneView "Done"
-                       , switchViewItem "sync" SyncView "Custom Sync"
+                       , Material.divider
+                       , switchViewItem "settings" SyncView "Advance Settings"
                        ]
-                    ++ [ Material.divider ]
                  --                    ++ [ toggleDeletedItem model ]
                 )
             ]
@@ -174,7 +174,7 @@ switchViewItem iconName viewType title =
         , onClick (OnSetViewType viewType)
         ]
         [ Material.icon iconName
-        , h5 [] [ text title ]
+        , div [] [ text title ]
         ]
 
 

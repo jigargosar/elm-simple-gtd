@@ -49,7 +49,7 @@ var _user$project$AppDrawer_List$switchViewItem = F3(
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$h5,
+						_elm_lang$html$Html$div,
 						{ctor: '[]'},
 						{
 							ctor: '::',
@@ -422,26 +422,23 @@ var _user$project$AppDrawer_List$view = F2(
 							A2(
 								_elm_lang$core$Basics_ops['++'],
 								A2(_user$project$AppDrawer_List$entityListView, projects, model.mainViewType),
-								A2(
-									_elm_lang$core$Basics_ops['++'],
-									{
+								{
+									ctor: '::',
+									_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'delete', _user$project$Entity$BinView, 'Bin'),
+									_1: {
 										ctor: '::',
-										_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'delete', _user$project$Entity$BinView, 'Bin'),
+										_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'done', _user$project$Entity$DoneView, 'Done'),
 										_1: {
 											ctor: '::',
-											_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'done', _user$project$Entity$DoneView, 'Done'),
+											_0: _user$project$Material$divider,
 											_1: {
 												ctor: '::',
-												_0: A3(_user$project$AppDrawer_List$switchViewItem, 'sync', _user$project$Model$SyncView, 'Custom Sync'),
+												_0: A3(_user$project$AppDrawer_List$switchViewItem, 'settings', _user$project$Model$SyncView, 'Advance Settings'),
 												_1: {ctor: '[]'}
 											}
 										}
-									},
-									{
-										ctor: '::',
-										_0: _user$project$Material$divider,
-										_1: {ctor: '[]'}
-									}))))),
+									}
+								})))),
 				_1: {ctor: '[]'}
 			});
 	});

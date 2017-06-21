@@ -1,6 +1,7 @@
 module CustomSync exposing (..)
 
 import Ext.Keyboard exposing (onKeyDownStopPropagation)
+import Material
 import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -22,7 +23,9 @@ view model =
     in
         div [ id "custom-sync-container" ]
             [ div [ class "z-depth-2 static layout vertical " ]
-                [ div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
+                [ h5 [ class "layout horizontal center" ] [ Material.icon "settings", text "Advance Settings" ]
+                , p [] [ text "Sync your data with any CouchDB compatible server" ]
+                , div [ class "input-field", onKeyDownStopPropagation (\_ -> Model.NOOP) ]
                     [ input
                         [ defaultValue form.uri
                         , autofocus True

@@ -44,7 +44,13 @@ async function boot() {
         }
 
     })
-
+    /*$elm.on("keydown", `input[type="date"], input[type="time"]`, e => {
+        // console.log(e.keyCode, e.key, e.target, e);
+            if(e.key === "Tab"){
+                e.preventDefault()
+            }
+    })
+*/
     $elm.get(0).addEventListener("keydown", e => {
         const $closest = $(e.target).closest("[data-prevent-default-keys]")
         if ($closest.length === 0)return

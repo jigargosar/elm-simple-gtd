@@ -52,20 +52,20 @@ type Tree
     | TodoForest TitleNode TodoNodeList
 
 
-createContextTodoGroup getTodoList context =
+initContextNode getTodoList context =
     { context = context
     , todoList = getTodoList context
     }
 
 
-createProjectTodoGroup getTodoList project =
+initProjectNode getTodoList project =
     { project = project
     , todoList = getTodoList project
     }
 
 
 createGroupingForContexts getTodoList contexts =
-    contexts .|> createContextTodoGroup getTodoList |> ContextForest
+    contexts .|> initContextNode getTodoList |> ContextForest
 
 
 createProjectSubGroups findProjectById tcg =
@@ -82,17 +82,17 @@ createProjectSubGroups findProjectById tcg =
             tcg.todoList
                 |> List.filter (Todo.hasProject project)
     in
-        projects .|> createProjectTodoGroup filterTodoForProject
+        projects .|> initProjectNode filterTodoForProject
 
 
 createGroupingForContext getTodoList findContextById context =
     context
-        |> createContextTodoGroup getTodoList
+        |> initContextNode getTodoList
         |> (\tcg -> ContextRoot tcg (createProjectSubGroups findContextById tcg))
 
 
 createGroupingForProjects getTodoList projects =
-    projects .|> createProjectTodoGroup getTodoList |> ProjectForest
+    projects .|> initProjectNode getTodoList |> ProjectForest
 
 
 createContextSubGroups findContextById tcg =
@@ -109,12 +109,12 @@ createContextSubGroups findContextById tcg =
             tcg.todoList
                 |> List.filter (Todo.contextFilter context)
     in
-        contexts .|> createContextTodoGroup filterTodoForContext
+        contexts .|> initContextNode filterTodoForContext
 
 
 createGroupingForProject getTodoList findProjectById project =
     project
-        |> createProjectTodoGroup getTodoList
+        |> initProjectNode getTodoList
         |> (\tcg -> ProjectRoot tcg (createContextSubGroups findProjectById tcg))
 
 

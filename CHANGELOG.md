@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.56 - 2017-06-21
 * fix tabbing in set reminder popup. 
 
 ## v0.18.55 - 2017-06-21

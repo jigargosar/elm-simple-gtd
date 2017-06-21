@@ -182,23 +182,6 @@ async function boot() {
                     }
                 }
             })
-
-            // todo: can't trap since focusable list will keep changing.
-            /*$first.on("keydown", function (e) {
-                if(e.key === "Tab" && e.shiftKey){
-                    e.preventDefault()
-                    e.stopPropagation()
-                    $last.focus()
-                }
-            })
-
-            $last.on("keydown", function (e) {
-                if(e.key === "Tab" && !e.shiftKey){
-                    e.preventDefault()
-                    e.stopPropagation()
-                    $first.focus()
-                }
-            })*/
         })
     })
 

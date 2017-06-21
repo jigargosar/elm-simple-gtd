@@ -1219,7 +1219,45 @@ updateAllNamedDocsDocs idSet updateFn store model =
         )
         model
         |> Tuple2.swap
-        |> Return.map (updateEntityListCursor model)
+        |> Return.map (updateEntityListCursorOnGroupDocChange model)
+
+
+updateEntityListCursorOnGroupDocChange oldModel newModel =
+    let
+        updateEntityListCursorFromEntityIndexTuple model indexTuple =
+            let
+                setFocusInEntityByIndex index entityList model =
+                    List.clampIndex index entityList
+                        |> (List.getAt # entityList)
+                        |> Maybe.orElse (List.head entityList)
+                        |> maybeSetIn model focusInEntity
+
+                setFocusInIndex index =
+                    setFocusInEntityByIndex
+                        index
+                        (getCurrentViewEntityList model)
+            in
+                model
+                    |> case indexTuple of
+                        -- not we want focus to remain on group entity, when edited, since its sort order may change. But if removed from view, we want to focus on next entity.
+                        {- ( Just oldIndex, Just newIndex ) ->
+                           if oldIndex < newIndex then
+                               setFocusInIndex (oldIndex)
+                           else if oldIndex > newIndex then
+                               setFocusInIndex (oldIndex + 1)
+                           else
+                               identity
+                        -}
+                        ( Just oldIndex, Nothing ) ->
+                            setFocusInIndex oldIndex
+
+                        _ ->
+                            identity
+    in
+        ( oldModel, newModel )
+            |> Tuple2.mapBoth
+                (getCurrentViewEntityList >> (getMaybeFocusInEntityIndex # oldModel))
+            |> updateEntityListCursorFromEntityIndexTuple newModel
 
 
 updateEntityListCursor oldModel newModel =

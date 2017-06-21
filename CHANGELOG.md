@@ -1,3 +1,9 @@
+## Upcoming
+* when group sort order changes, focus tracking goes completely haywire.
+  * perhaps we can skip changing focus when group is edited.
+  * but then on deleting a group focus will move to top, since that group is no no longer available.
+  * we will have to write separate logic to track focus on group modification. 
+
 ## v0.18.57 - 2017-06-21
 * when editing entity if its position changes, don't jump to it.
 * add recent view to check what was touched recently. 

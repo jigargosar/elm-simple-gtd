@@ -2,6 +2,8 @@ module View exposing (init)
 
 import ActionList
 import ActionList.View
+import CustomSync
+import EntityList.View
 import GroupDoc.EditView
 import ExclusiveMode
 import Firebase.View
@@ -13,7 +15,6 @@ import Html.Events.Extra exposing (onClickStopPropagation)
 import Model
 import Model exposing (Msg, commonMsg)
 import View.Header
-import Main.View
 import View.AppDrawer
 import Model exposing (..)
 import Polymer.Paper as Paper
@@ -147,9 +148,20 @@ appDrawerLayoutView m =
             [ View.AppDrawer.view viewModel m
             , App.headerLayout [ attribute "has-scrolling-region" "" ]
                 [ View.Header.init viewModel m
-                , Main.View.init viewModel m
+                , mainContent viewModel m
                 ]
             ]
+
+
+mainContent viewModel model =
+    div [ id "main-content" ]
+        [ case Model.getMainViewType model of
+            EntityListView viewType ->
+                EntityList.View.listView viewType model viewModel
+
+            SyncView ->
+                CustomSync.view model
+        ]
 
 
 addTodoFab m =

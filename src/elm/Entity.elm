@@ -38,12 +38,16 @@ fromTask =
     Task
 
 
-initProjectGroup =
+initProjectGroupEntity =
     Project
 
 
-initContextGroup =
+initContextGroupEntity =
     Context
+
+
+fromGroupEntity =
+    Group
 
 
 type ListViewType

@@ -1,6 +1,6 @@
 ## v0.18.57 - 2017-06-21
 * when editing entity if its position changes, don't jump to it.
-  add recent view to check what was touched recently. 
+* add recent view to check what was touched recently. 
 
 ## v0.18.56 - 2017-06-21
 * fix tabbing in set reminder popup. 

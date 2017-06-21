@@ -16,24 +16,24 @@ type alias TodoList =
     List Todo.Model
 
 
-type alias ContextGroup =
+type alias ContextNode =
     { context : Context.Model
     , todoList : TodoList
     }
 
 
-type alias ProjectGroup =
+type alias ProjectNode =
     { project : Project.Model
     , todoList : TodoList
     }
 
 
-type Grouping
-    = SingleContext ContextGroup (List ProjectGroup)
-    | SingleProject ProjectGroup (List ContextGroup)
-    | MultiContext (List ContextGroup)
-    | MultiProject (List ProjectGroup)
-    | FlatTodoList String TodoList
+type Tree
+    = ContextRoot ContextNode (List ProjectNode)
+    | ProjectRoot ProjectNode (List ContextNode)
+    | ContextForest (List ContextNode)
+    | ProjectForest (List ProjectNode)
+    | TodoForest String TodoList
 
 
 createContextTodoGroup getTodoList context =
@@ -49,7 +49,7 @@ createProjectTodoGroup getTodoList project =
 
 
 createGroupingForContexts getTodoList contexts =
-    contexts .|> createContextTodoGroup getTodoList |> MultiContext
+    contexts .|> createContextTodoGroup getTodoList |> ContextForest
 
 
 createProjectSubGroups findProjectById tcg =
@@ -72,11 +72,11 @@ createProjectSubGroups findProjectById tcg =
 createGroupingForContext getTodoList findContextById context =
     context
         |> createContextTodoGroup getTodoList
-        |> (\tcg -> SingleContext tcg (createProjectSubGroups findContextById tcg))
+        |> (\tcg -> ContextRoot tcg (createProjectSubGroups findContextById tcg))
 
 
 createGroupingForProjects getTodoList projects =
-    projects .|> createProjectTodoGroup getTodoList |> MultiProject
+    projects .|> createProjectTodoGroup getTodoList |> ProjectForest
 
 
 createContextSubGroups findContextById tcg =
@@ -99,26 +99,26 @@ createContextSubGroups findContextById tcg =
 createGroupingForProject getTodoList findProjectById project =
     project
         |> createProjectTodoGroup getTodoList
-        |> (\tcg -> SingleProject tcg (createContextSubGroups findProjectById tcg))
+        |> (\tcg -> ProjectRoot tcg (createContextSubGroups findProjectById tcg))
 
 
-createGroupingForTodoList : String -> TodoList -> Grouping
+createGroupingForTodoList : String -> TodoList -> Tree
 createGroupingForTodoList =
-    FlatTodoList
+    TodoForest
 
 
-flattenGrouping : Grouping -> List Entity.Entity
+flattenGrouping : Tree -> List Entity.Entity
 flattenGrouping grouping =
     case grouping of
-        SingleContext cg pgList ->
+        ContextRoot cg pgList ->
             Entity.fromContext cg.context
-                :: flattenGrouping (MultiProject pgList)
+                :: flattenGrouping (ProjectForest pgList)
 
-        SingleProject pg cgList ->
+        ProjectRoot pg cgList ->
             Entity.fromProject pg.project
-                :: flattenGrouping (MultiContext cgList)
+                :: flattenGrouping (ContextForest cgList)
 
-        MultiContext groupList ->
+        ContextForest groupList ->
             groupList
                 |> List.concatMap
                     (\g ->
@@ -126,7 +126,7 @@ flattenGrouping grouping =
                             :: (g.todoList .|> Entity.Task)
                     )
 
-        MultiProject groupList ->
+        ProjectForest groupList ->
             groupList
                 |> List.concatMap
                     (\g ->
@@ -134,5 +134,5 @@ flattenGrouping grouping =
                             :: (g.todoList .|> Entity.Task)
                     )
 
-        FlatTodoList title todoList ->
+        TodoForest title todoList ->
             todoList .|> Entity.Task

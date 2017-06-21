@@ -484,7 +484,7 @@ getActiveTodoListForProject project model =
         model
 
 
-createGrouping : Entity.ListViewType -> Model -> Entity.Tree.Grouping
+createGrouping : Entity.ListViewType -> Model -> Entity.Tree.Tree
 createGrouping viewType model =
     let
         getActiveTodoListForContextHelp =

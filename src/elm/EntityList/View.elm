@@ -91,27 +91,27 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
             List.map todoView
     in
         case grouping of
-            Entity.Tree.SingleContext contextGroup subGroupList ->
+            Entity.Tree.ContextRoot contextGroup subGroupList ->
                 let
                     header =
                         createContextVM contextGroup |> groupHeaderView
                 in
                     header :: multiProjectView subGroupList
 
-            Entity.Tree.SingleProject projectGroup subGroupList ->
+            Entity.Tree.ProjectRoot projectGroup subGroupList ->
                 let
                     header =
                         createProjectVM projectGroup |> groupHeaderView
                 in
                     header :: multiContextView subGroupList
 
-            Entity.Tree.MultiContext groupList ->
+            Entity.Tree.ContextForest groupList ->
                 multiContextView groupList
 
-            Entity.Tree.MultiProject groupList ->
+            Entity.Tree.ProjectForest groupList ->
                 multiProjectView groupList
 
-            Entity.Tree.FlatTodoList title todoList ->
+            Entity.Tree.TodoForest title todoList ->
                 todoListView todoList
                     |> flatTodoListView title
 

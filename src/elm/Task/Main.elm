@@ -65,7 +65,7 @@ maybeMapToCmd fn =
 
 subscriptions m =
     Sub.batch
-        [ notificationClicked Model.OnNotificationClicked
+        [ notificationClicked Model.OnReminderNotificationClicked
         , onRunningTodoNotificationClicked (Todo.Msg.RunningNotificationResponse >> Model.OnTodoMsg)
         , Time.every (Time.second * 1) (Model.OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker)
         ]

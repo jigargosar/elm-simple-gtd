@@ -188,7 +188,7 @@ update msg =
                     andThenUpdate OnSaveCurrentForm
                         >> Return.effect_ (.pouchDBRemoteSyncURI >> syncWithRemotePouch)
 
-                OnNotificationClicked { action, data } ->
+                OnReminderNotificationClicked { action, data } ->
                     let
                         todoId =
                             data.id

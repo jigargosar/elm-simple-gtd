@@ -62,7 +62,7 @@ type Msg
     | RemotePouchSync ExclusiveMode.SyncForm
     | TodoAction Todo.UpdateAction Todo.Id
     | ReminderOverlayAction ReminderOverlay.Action
-    | OnNotificationClicked TodoNotificationEvent
+    | OnReminderNotificationClicked TodoNotificationEvent
     | ToggleShowDeletedEntity
     | ToggleDrawer
     | OnLayoutNarrowChanged Bool

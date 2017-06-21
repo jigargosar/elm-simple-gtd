@@ -21,33 +21,11 @@ type alias TodoNodeList =
     List Todo.Model
 
 
-type alias ContextNode =
-    { context : Context.Model
-    , todoList : TodoNodeList
-    , groupEntity : Entity.GroupEntity
-    }
-
-
-type alias ProjectNode =
-    { project : Project.Model
-    , todoList : TodoNodeList
-    , groupEntity : Entity.GroupEntity
-    }
-
-
 type alias GroupDocNode =
     { groupDoc : GroupDoc.Model
     , todoList : TodoNodeList
     , groupEntity : Entity.GroupEntity
     }
-
-
-type alias ProjectNodeList =
-    List ProjectNode
-
-
-type alias ContextNodeList =
-    List ContextNode
 
 
 type alias GroupDocNodeList =
@@ -73,8 +51,16 @@ initGroupDocNode getTodoList groupDoc =
     }
 
 
-initContextForest getTodoList contexts =
-    contexts .|> initGroupDocNode getTodoList |> ContextForest
+initGroupDocNodeList getTodoList groupDocList =
+    groupDocList .|> initGroupDocNode getTodoList
+
+
+initContextForest =
+    initGroupDocNodeList >>> ContextForest
+
+
+initProjectForest =
+    initGroupDocNodeList >>> ProjectForest
 
 
 createProjectSubGroups findProjectById tcg =
@@ -98,10 +84,6 @@ initContextRoot getTodoList findContextById context =
     context
         |> initGroupDocNode getTodoList
         |> (\tcg -> ContextRoot tcg (createProjectSubGroups findContextById tcg))
-
-
-initProjectForest getTodoList projects =
-    projects .|> initGroupDocNode getTodoList |> ProjectForest
 
 
 createContextSubGroups findContextById tcg =

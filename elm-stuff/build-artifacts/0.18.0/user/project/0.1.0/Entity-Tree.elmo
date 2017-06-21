@@ -6,6 +6,13 @@ var _user$project$Entity_Tree$initGroupDocNode = F2(
 			groupEntity: _user$project$Entity$initContextGroupEntity(groupDoc)
 		};
 	});
+var _user$project$Entity_Tree$initGroupDocNodeList = F2(
+	function (getTodoList, groupDocList) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
+			groupDocList,
+			_user$project$Entity_Tree$initGroupDocNode(getTodoList));
+	});
 var _user$project$Entity_Tree$createProjectSubGroups = F2(
 	function (findProjectById, tcg) {
 		var filterTodoForProject = function (project) {
@@ -50,14 +57,6 @@ var _user$project$Entity_Tree$createContextSubGroups = F2(
 			contexts,
 			_user$project$Entity_Tree$initGroupDocNode(filterTodoForContext));
 	});
-var _user$project$Entity_Tree$ContextNode = F3(
-	function (a, b, c) {
-		return {context: a, todoList: b, groupEntity: c};
-	});
-var _user$project$Entity_Tree$ProjectNode = F3(
-	function (a, b, c) {
-		return {project: a, todoList: b, groupEntity: c};
-	});
 var _user$project$Entity_Tree$GroupDocNode = F3(
 	function (a, b, c) {
 		return {groupDoc: a, todoList: b, groupEntity: c};
@@ -70,25 +69,11 @@ var _user$project$Entity_Tree$initTodoForest = _user$project$Entity_Tree$TodoFor
 var _user$project$Entity_Tree$ProjectForest = function (a) {
 	return {ctor: 'ProjectForest', _0: a};
 };
-var _user$project$Entity_Tree$initProjectForest = F2(
-	function (getTodoList, projects) {
-		return _user$project$Entity_Tree$ProjectForest(
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				projects,
-				_user$project$Entity_Tree$initGroupDocNode(getTodoList)));
-	});
+var _user$project$Entity_Tree$initProjectForest = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Entity_Tree$initGroupDocNodeList, _user$project$Entity_Tree$ProjectForest);
 var _user$project$Entity_Tree$ContextForest = function (a) {
 	return {ctor: 'ContextForest', _0: a};
 };
-var _user$project$Entity_Tree$initContextForest = F2(
-	function (getTodoList, contexts) {
-		return _user$project$Entity_Tree$ContextForest(
-			A2(
-				_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'],
-				contexts,
-				_user$project$Entity_Tree$initGroupDocNode(getTodoList)));
-	});
+var _user$project$Entity_Tree$initContextForest = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Entity_Tree$initGroupDocNodeList, _user$project$Entity_Tree$ContextForest);
 var _user$project$Entity_Tree$flatten = function (tree) {
 	var _p0 = tree;
 	switch (_p0.ctor) {

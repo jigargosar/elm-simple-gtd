@@ -37,6 +37,6 @@ moreMenuConfig model =
 
 
 view model =
-    Menu.view [ "foo", "bar" ]
+    Menu.view [ "Comming Soon", "Split", "Delete" ]
         model.menuState
         (moreMenuConfig model)

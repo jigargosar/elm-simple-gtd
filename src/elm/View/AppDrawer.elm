@@ -11,7 +11,7 @@ import Html exposing (Attribute, Html, a, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, checked, class, classList, href, id, style, tabindex, target, value)
 import Html.Events exposing (..)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
-import Model exposing (Msg(SwitchView), commonMsg)
+import Model exposing (Msg(OnSetViewType), commonMsg)
 import String.Extra
 import Maybe.Extra as Maybe
 import Polymer.Attributes exposing (icon)

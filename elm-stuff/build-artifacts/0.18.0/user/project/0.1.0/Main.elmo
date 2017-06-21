@@ -547,7 +547,7 @@ var _user$project$Main$update = function (msg) {
 								_elm_lang$core$Native_Utils.update(
 									_p15._0,
 									{uri: _p15._1})));
-					case 'SwitchView':
+					case 'OnSetViewType':
 						return _Fresheyeball$elm_return$Return$map(
 							_user$project$Model$switchToView(_p15._0));
 					case 'OnSetEntityListView':

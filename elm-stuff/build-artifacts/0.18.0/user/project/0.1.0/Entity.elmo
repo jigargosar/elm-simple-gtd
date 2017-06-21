@@ -56,7 +56,7 @@ var _user$project$Entity$createContextSubGroups = F2(
 			contexts,
 			_user$project$Entity$createContextTodoGroup(filterTodoForContext));
 	});
-var _user$project$Entity$routes = function (viewType) {
+var _user$project$Entity$getPathFromViewType = function (viewType) {
 	var _p0 = viewType;
 	switch (_p0.ctor) {
 		case 'ContextsView':
@@ -249,14 +249,67 @@ var _user$project$Entity$ContextView = function (a) {
 };
 var _user$project$Entity$ContextsView = {ctor: 'ContextsView'};
 var _user$project$Entity$defaultListView = _user$project$Entity$ContextsView;
+var _user$project$Entity$builderToMaybeListViewType = function (builder) {
+	var _p9 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
+	_v5_8:
+	do {
+		if (_p9.ctor === '::') {
+			if (_p9._1.ctor === '[]') {
+				switch (_p9._0) {
+					case 'bin':
+						return _elm_lang$core$Maybe$Just(_user$project$Entity$BinView);
+					case 'done':
+						return _elm_lang$core$Maybe$Just(_user$project$Entity$DoneView);
+					case 'Inbox':
+						return _elm_lang$core$Maybe$Just(
+							_user$project$Entity$ContextView(''));
+					default:
+						break _v5_8;
+				}
+			} else {
+				if (_p9._1._1.ctor === '[]') {
+					switch (_p9._0) {
+						case 'lists':
+							switch (_p9._1._0) {
+								case 'contexts':
+									return _elm_lang$core$Maybe$Just(_user$project$Entity$ContextsView);
+								case 'projects':
+									return _elm_lang$core$Maybe$Just(_user$project$Entity$ProjectsView);
+								default:
+									break _v5_8;
+							}
+						case 'context':
+							return _elm_lang$core$Maybe$Just(
+								_user$project$Entity$ContextView(_p9._1._0));
+						case 'project':
+							if (_p9._1._0 === 'NotAssigned') {
+								return _elm_lang$core$Maybe$Just(
+									_user$project$Entity$ProjectView(''));
+							} else {
+								return _elm_lang$core$Maybe$Just(
+									_user$project$Entity$ProjectView(_p9._1._0));
+							}
+						default:
+							break _v5_8;
+					}
+				} else {
+					break _v5_8;
+				}
+			}
+		} else {
+			break _v5_8;
+		}
+	} while(false);
+	return _elm_lang$core$Maybe$Nothing;
+};
 var _user$project$Entity$getTodoGotoGroupView = F2(
 	function (todo, prevView) {
 		var projectView = _user$project$Entity$ProjectView(
 			_user$project$Todo$getProjectId(todo));
 		var contextView = _user$project$Entity$ContextView(
 			_user$project$Todo$getContextId(todo));
-		var _p9 = prevView;
-		switch (_p9.ctor) {
+		var _p10 = prevView;
+		switch (_p10.ctor) {
 			case 'ProjectsView':
 				return contextView;
 			case 'ProjectView':
@@ -273,26 +326,26 @@ var _user$project$Entity$getTodoGotoGroupView = F2(
 	});
 var _user$project$Entity$toViewType = F2(
 	function (maybePrevView, entity) {
-		var _p10 = entity;
-		if (_p10.ctor === 'Group') {
-			var _p11 = _p10._0;
-			if (_p11.ctor === 'Context') {
+		var _p11 = entity;
+		if (_p11.ctor === 'Group') {
+			var _p12 = _p11._0;
+			if (_p12.ctor === 'Context') {
 				return _user$project$Entity$ContextView(
-					_user$project$Document$getId(_p11._0));
+					_user$project$Document$getId(_p12._0));
 			} else {
 				return _user$project$Entity$ProjectView(
-					_user$project$Document$getId(_p11._0));
+					_user$project$Document$getId(_p12._0));
 			}
 		} else {
-			var _p12 = _p10._0;
+			var _p13 = _p11._0;
 			return A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 					maybePrevView,
-					_user$project$Entity$getTodoGotoGroupView(_p12)),
+					_user$project$Entity$getTodoGotoGroupView(_p13)),
 				_user$project$Entity$ContextView(
-					_user$project$Todo$getContextId(_p12)));
+					_user$project$Todo$getContextId(_p13)));
 		}
 	});
 var _user$project$Entity$Goto = {ctor: 'Goto'};
@@ -333,21 +386,21 @@ var _user$project$Entity$createGroupingForContexts = F2(
 				_user$project$Entity$createContextTodoGroup(getTodoList)));
 	});
 var _user$project$Entity$flattenGrouping = function (grouping) {
-	var _p13 = grouping;
-	switch (_p13.ctor) {
+	var _p14 = grouping;
+	switch (_p14.ctor) {
 		case 'SingleContext':
 			return {
 				ctor: '::',
-				_0: _user$project$Entity$fromContext(_p13._0.context),
+				_0: _user$project$Entity$fromContext(_p14._0.context),
 				_1: _user$project$Entity$flattenGrouping(
-					_user$project$Entity$MultiProject(_p13._1))
+					_user$project$Entity$MultiProject(_p14._1))
 			};
 		case 'SingleProject':
 			return {
 				ctor: '::',
-				_0: _user$project$Entity$fromProject(_p13._0.project),
+				_0: _user$project$Entity$fromProject(_p14._0.project),
 				_1: _user$project$Entity$flattenGrouping(
-					_user$project$Entity$MultiContext(_p13._1))
+					_user$project$Entity$MultiContext(_p14._1))
 			};
 		case 'MultiContext':
 			return A2(
@@ -359,7 +412,7 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.todoList, _user$project$Entity$Task)
 					};
 				},
-				_p13._0);
+				_p14._0);
 		case 'MultiProject':
 			return A2(
 				_elm_lang$core$List$concatMap,
@@ -370,9 +423,9 @@ var _user$project$Entity$flattenGrouping = function (grouping) {
 						_1: A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], g.todoList, _user$project$Entity$Task)
 					};
 				},
-				_p13._0);
+				_p14._0);
 		default:
-			return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p13._1, _user$project$Entity$Task);
+			return A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p14._1, _user$project$Entity$Task);
 	}
 };
 var _user$project$Entity$SingleProject = F2(

@@ -26,7 +26,7 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 			isEmpty: _elm_lang$core$Native_Utils.eq(count, 0),
 			count: count,
 			onActiveStateChanged: function (bool) {
-				return bool ? _user$project$Model$SwitchView(
+				return bool ? _user$project$Model$OnSetViewType(
 					_user$project$Model$EntityListView(
 						config.getViewType(id))) : _user$project$Model$commonMsg.noOp;
 			},

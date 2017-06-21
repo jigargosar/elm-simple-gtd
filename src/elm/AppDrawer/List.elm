@@ -18,7 +18,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Html.Events.Extra exposing (onClickStopPropagation)
 import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
-import Model exposing (Msg(SwitchView), commonMsg)
+import Model exposing (Msg(OnSetViewType), commonMsg)
 import String.Extra
 import Maybe.Extra as Maybe
 import Toolkit.Helpers exposing (..)
@@ -85,7 +85,7 @@ entityListView vm mainViewType =
             EntityListView viewType == mainViewType
 
         fireSwitchView =
-            SwitchView (EntityListView viewType)
+            OnSetViewType (EntityListView viewType)
 
         fireSmart =
             if isCurrentView then
@@ -171,7 +171,7 @@ entityListItem vm =
 switchViewItem iconName viewType title =
     li
         [ class ""
-        , onClick (SwitchView viewType)
+        , onClick (OnSetViewType viewType)
         ]
         [ Material.icon iconName
         , h5 [] [ text title ]

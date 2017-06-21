@@ -85,7 +85,7 @@ type Msg
     | OnEditTodoContextMenuStateChanged Todo.GroupForm.Model Menu.State
     | UpdateTodoForm Todo.Form.Model Todo.Form.Action
     | OnEntityListKeyDown (List Entity) KeyboardEvent
-    | SwitchView ViewType
+    | OnSetViewType ViewType
     | OnSetEntityListView EntityListViewType
     | OnNowChanged Time
     | OnKeyboardMsg Keyboard.Msg
@@ -320,7 +320,7 @@ init flags =
             , projectStore = projectStore
             , contextStore = contextStore
             , editMode = editMode
-            , mainViewType = EntityListView Entity.defaultListView
+            , mainViewType = defaultView
             , keyboardState = Keyboard.init
             , showDeleted = False
             , reminderOverlay = ReminderOverlay.none
@@ -345,6 +345,10 @@ init flags =
             }
     in
         model |> Return.singleton
+
+
+defaultView =
+    EntityListView Entity.defaultListView
 
 
 type alias ReturnF =

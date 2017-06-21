@@ -1449,8 +1449,8 @@ var _user$project$Model$OnNowChanged = function (a) {
 var _user$project$Model$OnSetEntityListView = function (a) {
 	return {ctor: 'OnSetEntityListView', _0: a};
 };
-var _user$project$Model$SwitchView = function (a) {
-	return {ctor: 'SwitchView', _0: a};
+var _user$project$Model$OnSetViewType = function (a) {
+	return {ctor: 'OnSetViewType', _0: a};
 };
 var _user$project$Model$OnEntityListKeyDown = F2(
 	function (a, b) {
@@ -1553,6 +1553,7 @@ var _user$project$Model$SyncView = {ctor: 'SyncView'};
 var _user$project$Model$EntityListView = function (a) {
 	return {ctor: 'EntityListView', _0: a};
 };
+var _user$project$Model$defaultView = _user$project$Model$EntityListView(_user$project$Entity$defaultListView);
 var _user$project$Model$init = function (flags) {
 	var localPref = A2(
 		_danielnarey$elm_toolkit$Toolkit_Operators_ops['!='],
@@ -1592,7 +1593,7 @@ var _user$project$Model$init = function (flags) {
 		projectStore: projectStore,
 		contextStore: contextStore,
 		editMode: editMode,
-		mainViewType: _user$project$Model$EntityListView(_user$project$Entity$defaultListView),
+		mainViewType: _user$project$Model$defaultView,
 		keyboardState: _user$project$Ext_Keyboard$init,
 		showDeleted: false,
 		reminderOverlay: _user$project$ReminderOverlay$none,

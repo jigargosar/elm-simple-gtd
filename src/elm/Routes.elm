@@ -2,6 +2,7 @@ module Routes exposing (..)
 
 import Document
 import Entity
+import Maybe.Extra
 import Model as Model
 import Model exposing (Msg)
 import Navigation exposing (Location)
@@ -23,7 +24,7 @@ delta2builder previous current =
 getPathFromModel model =
     case Model.getMainViewType model of
         EntityListView viewType ->
-            Entity.routes viewType
+            Entity.getPathFromViewType viewType
 
         SyncView ->
             [ "custom-sync" ]
@@ -36,37 +37,18 @@ delta2hash =
 
 builder2messages : Builder -> List Msg
 builder2messages builder =
-    case path builder of
-        "lists" :: "contexts" :: [] ->
-            [ Model.OnSetEntityListView Entity.ContextsView ]
+    Entity.builderToMaybeListViewType builder
+        |> Maybe.Extra.unpack
+            (\_ ->
+                case path builder of
+                    "custom-sync" :: [] ->
+                        [ Model.OnSetViewType SyncView ]
 
-        "lists" :: "projects" :: [] ->
-            [ Model.OnSetEntityListView Entity.ProjectsView ]
-
-        "bin" :: [] ->
-            [ Model.OnSetEntityListView Entity.BinView ]
-
-        "done" :: [] ->
-            [ Model.OnSetEntityListView Entity.DoneView ]
-
-        "Inbox" :: [] ->
-            [ Model.OnSetEntityListView (Entity.ContextView "") ]
-
-        "context" :: id :: [] ->
-            [ Model.OnSetEntityListView (Entity.ContextView id) ]
-
-        "project" :: "NotAssigned" :: [] ->
-            [ Model.OnSetEntityListView (Entity.ProjectView "") ]
-
-        "project" :: id :: [] ->
-            [ Model.OnSetEntityListView (Entity.ProjectView id) ]
-
-        "custom-sync" :: [] ->
-            [ Model.SwitchView SyncView ]
-
-        _ ->
-            -- If nothing provided for this part of the URL, return empty list
-            []
+                    _ ->
+                        -- If nothing provided for this part of the URL, return empty list
+                        [ Model.OnSetViewType Model.defaultView ]
+            )
+            (Model.OnSetEntityListView >> List.singleton)
 
 
 hash2messages : Location -> List Msg

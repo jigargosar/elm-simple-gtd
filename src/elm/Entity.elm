@@ -3,6 +3,7 @@ module Entity exposing (..)
 import Context
 import Document
 import Ext.List as List
+import RouteUrl.Builder
 import Set
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
@@ -99,7 +100,38 @@ defaultListView =
     ContextsView
 
 
-routes viewType =
+builderToMaybeListViewType : RouteUrl.Builder.Builder -> Maybe ListViewType
+builderToMaybeListViewType builder =
+    case RouteUrl.Builder.path builder of
+        "lists" :: "contexts" :: [] ->
+            ContextsView |> Just
+
+        "lists" :: "projects" :: [] ->
+            ProjectsView |> Just
+
+        "bin" :: [] ->
+            BinView |> Just
+
+        "done" :: [] ->
+            DoneView |> Just
+
+        "Inbox" :: [] ->
+            (ContextView "") |> Just
+
+        "context" :: id :: [] ->
+            (ContextView id) |> Just
+
+        "project" :: "NotAssigned" :: [] ->
+            (ProjectView "") |> Just
+
+        "project" :: id :: [] ->
+            (ProjectView id) |> Just
+
+        _ ->
+            Nothing
+
+
+getPathFromViewType viewType =
     case viewType of
         ContextsView ->
             [ "lists", "contexts" ]

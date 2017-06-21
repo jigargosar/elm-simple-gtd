@@ -135,7 +135,7 @@ create getTodoListByEntityId config entity =
         , onActiveStateChanged =
             (\bool ->
                 if bool then
-                    Model.SwitchView (config.getViewType id |> EntityListView)
+                    Model.OnSetViewType (config.getViewType id |> EntityListView)
                 else
                     commonMsg.noOp
             )

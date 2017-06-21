@@ -1,102 +1,36 @@
 var _user$project$Routes$builder2messages = function (builder) {
-	var _p0 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
-	_v0_9:
-	do {
-		if (_p0.ctor === '::') {
-			if (_p0._1.ctor === '::') {
-				if (_p0._1._1.ctor === '[]') {
-					switch (_p0._0) {
-						case 'lists':
-							switch (_p0._1._0) {
-								case 'contexts':
-									return {
-										ctor: '::',
-										_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$ContextsView),
-										_1: {ctor: '[]'}
-									};
-								case 'projects':
-									return {
-										ctor: '::',
-										_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$ProjectsView),
-										_1: {ctor: '[]'}
-									};
-								default:
-									break _v0_9;
-							}
-						case 'context':
-							return {
-								ctor: '::',
-								_0: _user$project$Model$OnSetEntityListView(
-									_user$project$Entity$ContextView(_p0._1._0)),
-								_1: {ctor: '[]'}
-							};
-						case 'project':
-							if (_p0._1._0 === 'NotAssigned') {
-								return {
-									ctor: '::',
-									_0: _user$project$Model$OnSetEntityListView(
-										_user$project$Entity$ProjectView('')),
-									_1: {ctor: '[]'}
-								};
-							} else {
-								return {
-									ctor: '::',
-									_0: _user$project$Model$OnSetEntityListView(
-										_user$project$Entity$ProjectView(_p0._1._0)),
-									_1: {ctor: '[]'}
-								};
-							}
-						default:
-							break _v0_9;
-					}
-				} else {
-					break _v0_9;
-				}
+	return A3(
+		_elm_community$maybe_extra$Maybe_Extra$unpack,
+		function (_p0) {
+			var _p1 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
+			if (((_p1.ctor === '::') && (_p1._0 === 'custom-sync')) && (_p1._1.ctor === '[]')) {
+				return {
+					ctor: '::',
+					_0: _user$project$Model$OnSetViewType(_user$project$Model$SyncView),
+					_1: {ctor: '[]'}
+				};
 			} else {
-				switch (_p0._0) {
-					case 'bin':
-						return {
-							ctor: '::',
-							_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$BinView),
-							_1: {ctor: '[]'}
-						};
-					case 'done':
-						return {
-							ctor: '::',
-							_0: _user$project$Model$OnSetEntityListView(_user$project$Entity$DoneView),
-							_1: {ctor: '[]'}
-						};
-					case 'Inbox':
-						return {
-							ctor: '::',
-							_0: _user$project$Model$OnSetEntityListView(
-								_user$project$Entity$ContextView('')),
-							_1: {ctor: '[]'}
-						};
-					case 'custom-sync':
-						return {
-							ctor: '::',
-							_0: _user$project$Model$SwitchView(_user$project$Model$SyncView),
-							_1: {ctor: '[]'}
-						};
-					default:
-						break _v0_9;
-				}
+				return {
+					ctor: '::',
+					_0: _user$project$Model$OnSetViewType(_user$project$Model$defaultView),
+					_1: {ctor: '[]'}
+				};
 			}
-		} else {
-			break _v0_9;
-		}
-	} while(false);
-	return {ctor: '[]'};
+		},
+		function (_p2) {
+			return _elm_lang$core$List$singleton(
+				_user$project$Model$OnSetEntityListView(_p2));
+		},
+		_user$project$Entity$builderToMaybeListViewType(builder));
 };
 var _user$project$Routes$hash2messages = function (location) {
 	return _user$project$Routes$builder2messages(
 		_rgrempel$elm_route_url$RouteUrl_Builder$fromHash(location.href));
 };
 var _user$project$Routes$getPathFromModel = function (model) {
-	var _p1 = _user$project$Model$getMainViewType(model);
-	if (_p1.ctor === 'EntityListView') {
-		return _user$project$Entity$routes(_p1._0);
+	var _p3 = _user$project$Model$getMainViewType(model);
+	if (_p3.ctor === 'EntityListView') {
+		return _user$project$Entity$getPathFromViewType(_p3._0);
 	} else {
 		return {
 			ctor: '::',

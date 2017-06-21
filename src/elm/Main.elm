@@ -285,7 +285,7 @@ update msg =
                             >> Model.setEditMode
                         )
 
-                SwitchView viewType ->
+                OnSetViewType viewType ->
                     Return.map (Model.switchToView viewType)
 
                 OnSetEntityListView viewType ->

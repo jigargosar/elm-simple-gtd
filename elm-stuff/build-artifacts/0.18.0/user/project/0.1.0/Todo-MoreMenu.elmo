@@ -21,11 +21,15 @@ var _user$project$Todo_MoreMenu$view = function (model) {
 		_user$project$Menu$view,
 		{
 			ctor: '::',
-			_0: 'foo',
+			_0: 'Comming Soon',
 			_1: {
 				ctor: '::',
-				_0: 'bar',
-				_1: {ctor: '[]'}
+				_0: 'Split',
+				_1: {
+					ctor: '::',
+					_0: 'Delete',
+					_1: {ctor: '[]'}
+				}
 			}
 		},
 		model.menuState,

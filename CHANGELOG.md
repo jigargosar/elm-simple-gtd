@@ -1,5 +1,6 @@
 ## Upcoming
-* when todo text is multiline, ensure done button click area doesn't take up entire height 
+* when todo text is multiline, ensure done button click area doesn't take up entire height
+* more menu: in progress
 
 ## v0.18.50 - 2017-06-20
 *  merge prj and ctx into grp entity

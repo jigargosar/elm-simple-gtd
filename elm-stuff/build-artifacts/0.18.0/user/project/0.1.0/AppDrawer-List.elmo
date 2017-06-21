@@ -29,7 +29,7 @@ var _user$project$AppDrawer_List$onSetEntityListViewItem = F3(
 				}
 			});
 	});
-var _user$project$AppDrawer_List$switchViewItem = F3(
+var _user$project$AppDrawer_List$switchViewItemSmall = F3(
 	function (iconName, viewType, title) {
 		return A2(
 			_elm_lang$html$Html$li,
@@ -50,6 +50,37 @@ var _user$project$AppDrawer_List$switchViewItem = F3(
 					ctor: '::',
 					_0: A2(
 						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(title),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$AppDrawer_List$switchViewItem = F3(
+	function (iconName, viewType, title) {
+		return A2(
+			_elm_lang$html$Html$li,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class(''),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$Model$OnSetViewType(viewType)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Material$icon(iconName),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h5,
 						{ctor: '[]'},
 						{
 							ctor: '::',
@@ -181,7 +212,7 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 		}
 	};
 };
-var _user$project$AppDrawer_List$entityListView = F2(
+var _user$project$AppDrawer_List$entityGroupView = F2(
 	function (vm, mainViewType) {
 		var nullViewAsList = A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], vm.nullVMAsList, _user$project$AppDrawer_List$entityListItem);
 		var _p1 = vm;
@@ -418,23 +449,27 @@ var _user$project$AppDrawer_List$view = F2(
 						{ctor: '[]'},
 						A2(
 							_elm_lang$core$Basics_ops['++'],
-							A2(_user$project$AppDrawer_List$entityListView, contexts, model.mainViewType),
+							A2(_user$project$AppDrawer_List$entityGroupView, contexts, model.mainViewType),
 							A2(
 								_elm_lang$core$Basics_ops['++'],
-								A2(_user$project$AppDrawer_List$entityListView, projects, model.mainViewType),
+								A2(_user$project$AppDrawer_List$entityGroupView, projects, model.mainViewType),
 								{
 									ctor: '::',
-									_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'delete', _user$project$Entity$BinView, 'Bin'),
+									_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'sort', _user$project$Entity$RecentView, 'Recent'),
 									_1: {
 										ctor: '::',
-										_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'done', _user$project$Entity$DoneView, 'Done'),
+										_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'delete', _user$project$Entity$BinView, 'Bin'),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Material$divider,
+											_0: A3(_user$project$AppDrawer_List$onSetEntityListViewItem, 'done', _user$project$Entity$DoneView, 'Done'),
 											_1: {
 												ctor: '::',
-												_0: A3(_user$project$AppDrawer_List$switchViewItem, 'settings', _user$project$Model$SyncView, 'Advance Settings'),
-												_1: {ctor: '[]'}
+												_0: _user$project$Material$divider,
+												_1: {
+													ctor: '::',
+													_0: A3(_user$project$AppDrawer_List$switchViewItemSmall, 'settings', _user$project$Model$SyncView, 'Advance Settings'),
+													_1: {ctor: '[]'}
+												}
 											}
 										}
 									}

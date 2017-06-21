@@ -20,3 +20,7 @@ all list =
 any : List (Predicate a) -> Predicate a
 any list =
     applyList list >> List.any identity
+
+
+always =
+    (\_ -> True)

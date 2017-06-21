@@ -53,8 +53,10 @@ var _user$project$ViewModel$getViewInfo = F4(
 					return A2(appHeaderInfoById, _p7._0, projectsVM);
 				case 'BinView':
 					return {ctor: '_Tuple2', _0: 'Bin', _1: _user$project$ViewModel$sgtdBlue};
-				default:
+				case 'DoneView':
 					return {ctor: '_Tuple2', _0: 'Done', _1: _user$project$ViewModel$sgtdBlue};
+				default:
+					return {ctor: '_Tuple2', _0: 'Recent', _1: _user$project$ViewModel$sgtdBlue};
 			}
 		} else {
 			return {ctor: '_Tuple2', _0: 'Custom Sync', _1: _user$project$ViewModel$sgtdBlue};

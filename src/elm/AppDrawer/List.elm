@@ -46,12 +46,13 @@ view appVM model =
         div [ class "app-drawer-list-container" ]
             [ ul []
                 ([]
-                    ++ entityListView contexts model.mainViewType
-                    ++ entityListView projects model.mainViewType
-                    ++ [ onSetEntityListViewItem "delete" Entity.BinView "Bin"
+                    ++ entityGroupView contexts model.mainViewType
+                    ++ entityGroupView projects model.mainViewType
+                    ++ [ onSetEntityListViewItem "sort" Entity.RecentView "Recent"
+                       , onSetEntityListViewItem "delete" Entity.BinView "Bin"
                        , onSetEntityListViewItem "done" Entity.DoneView "Done"
                        , Material.divider
-                       , switchViewItem "settings" SyncView "Advance Settings"
+                       , switchViewItemSmall "settings" SyncView "Advance Settings"
                        ]
                  --                    ++ [ toggleDeletedItem model ]
                 )
@@ -76,7 +77,7 @@ toggleDeletedItem model =
         ]
 
 
-entityListView vm mainViewType =
+entityGroupView vm mainViewType =
     let
         { viewType, onAddClicked, onToggleExpanded, isExpanded } =
             vm
@@ -169,6 +170,16 @@ entityListItem vm =
 
 
 switchViewItem iconName viewType title =
+    li
+        [ class ""
+        , onClick (OnSetViewType viewType)
+        ]
+        [ Material.icon iconName
+        , h5 [] [ text title ]
+        ]
+
+
+switchViewItemSmall iconName viewType title =
     li
         [ class ""
         , onClick (OnSetViewType viewType)

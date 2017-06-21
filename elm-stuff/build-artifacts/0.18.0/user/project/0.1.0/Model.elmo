@@ -628,7 +628,7 @@ var _user$project$Model$createGrouping = F2(
 					_user$project$Entity_Tree$initTodoForest,
 					'Bin',
 					A2(_user$project$Model$filterTodosAndSortByLatestModified, _user$project$Document$isDeleted, model));
-			default:
+			case 'DoneView':
 				return A2(
 					_user$project$Entity_Tree$initTodoForest,
 					'Done',
@@ -645,6 +645,11 @@ var _user$project$Model$createGrouping = F2(
 								}
 							}),
 						model));
+			default:
+				return A2(
+					_user$project$Entity_Tree$initTodoForest,
+					'Recent',
+					A2(_user$project$Model$filterTodosAndSortByLatestModified, _user$project$Ext_Predicate$always, model));
 		}
 	});
 var _user$project$Model$getCurrentViewEntityList = function (model) {

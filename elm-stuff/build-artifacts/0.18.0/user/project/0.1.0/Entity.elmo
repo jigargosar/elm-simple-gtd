@@ -61,10 +61,16 @@ var _user$project$Entity$getPathFromViewType = function (viewType) {
 				_0: 'bin',
 				_1: {ctor: '[]'}
 			};
-		default:
+		case 'DoneView':
 			return {
 				ctor: '::',
 				_0: 'done',
+				_1: {ctor: '[]'}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: 'recent',
 				_1: {ctor: '[]'}
 			};
 	}
@@ -174,6 +180,7 @@ var _user$project$Entity$fromProject = function (_p8) {
 	return _user$project$Entity$Group(
 		_user$project$Entity$Project(_p8));
 };
+var _user$project$Entity$RecentView = {ctor: 'RecentView'};
 var _user$project$Entity$DoneView = {ctor: 'DoneView'};
 var _user$project$Entity$BinView = {ctor: 'BinView'};
 var _user$project$Entity$ProjectView = function (a) {
@@ -187,7 +194,7 @@ var _user$project$Entity$ContextsView = {ctor: 'ContextsView'};
 var _user$project$Entity$defaultListView = _user$project$Entity$ContextsView;
 var _user$project$Entity$routeUrlBuilderToMaybeListViewType = function (builder) {
 	var _p9 = _rgrempel$elm_route_url$RouteUrl_Builder$path(builder);
-	_v5_8:
+	_v5_9:
 	do {
 		if (_p9.ctor === '::') {
 			if (_p9._1.ctor === '[]') {
@@ -196,11 +203,13 @@ var _user$project$Entity$routeUrlBuilderToMaybeListViewType = function (builder)
 						return _elm_lang$core$Maybe$Just(_user$project$Entity$BinView);
 					case 'done':
 						return _elm_lang$core$Maybe$Just(_user$project$Entity$DoneView);
+					case 'recent':
+						return _elm_lang$core$Maybe$Just(_user$project$Entity$RecentView);
 					case 'Inbox':
 						return _elm_lang$core$Maybe$Just(
 							_user$project$Entity$ContextView(''));
 					default:
-						break _v5_8;
+						break _v5_9;
 				}
 			} else {
 				if (_p9._1._1.ctor === '[]') {
@@ -212,7 +221,7 @@ var _user$project$Entity$routeUrlBuilderToMaybeListViewType = function (builder)
 								case 'projects':
 									return _elm_lang$core$Maybe$Just(_user$project$Entity$ProjectsView);
 								default:
-									break _v5_8;
+									break _v5_9;
 							}
 						case 'context':
 							return _elm_lang$core$Maybe$Just(
@@ -226,14 +235,14 @@ var _user$project$Entity$routeUrlBuilderToMaybeListViewType = function (builder)
 									_user$project$Entity$ProjectView(_p9._1._0));
 							}
 						default:
-							break _v5_8;
+							break _v5_9;
 					}
 				} else {
-					break _v5_8;
+					break _v5_9;
 				}
 			}
 		} else {
-			break _v5_8;
+			break _v5_9;
 		}
 	} while(false);
 	return _elm_lang$core$Maybe$Nothing;
@@ -255,6 +264,8 @@ var _user$project$Entity$getTodoGotoGroupView = F2(
 			case 'ContextView':
 				return projectView;
 			case 'BinView':
+				return _user$project$Entity$ContextsView;
+			case 'DoneView':
 				return _user$project$Entity$ContextsView;
 			default:
 				return _user$project$Entity$ContextsView;

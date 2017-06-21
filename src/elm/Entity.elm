@@ -53,6 +53,7 @@ type ListViewType
     | ProjectView Document.Id
     | BinView
     | DoneView
+    | RecentView
 
 
 type Action
@@ -123,6 +124,9 @@ routeUrlBuilderToMaybeListViewType builder =
         "done" :: [] ->
             DoneView |> Just
 
+        "recent" :: [] ->
+            RecentView |> Just
+
         "Inbox" :: [] ->
             (ContextView "") |> Just
 
@@ -165,6 +169,9 @@ getPathFromViewType viewType =
         DoneView ->
             [ "done" ]
 
+        RecentView ->
+            [ "recent" ]
+
 
 getTodoGotoGroupView todo prevView =
     let
@@ -191,6 +198,9 @@ getTodoGotoGroupView todo prevView =
                 ContextsView
 
             DoneView ->
+                ContextsView
+
+            RecentView ->
                 ContextsView
 
 

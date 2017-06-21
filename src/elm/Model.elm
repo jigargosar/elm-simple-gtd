@@ -537,6 +537,11 @@ createGrouping viewType model =
                         model
                     )
 
+            Entity.RecentView ->
+                Entity.Tree.initTodoForest
+                    "Recent"
+                    (filterTodosAndSortByLatestModified Pred.always model)
+
 
 getActiveTodoListWithReminderTime model =
     model.todoStore |> Store.filterDocs (Todo.isReminderOverdue model.now)

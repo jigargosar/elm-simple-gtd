@@ -100,6 +100,9 @@ getViewInfo mainViewType projectsVM contextsVM model =
                     Entity.DoneView ->
                         ( "Done", sgtdBlue )
 
+                    Entity.RecentView ->
+                        ( "Recent", sgtdBlue )
+
             SyncView ->
                 ( "Custom Sync", sgtdBlue )
 

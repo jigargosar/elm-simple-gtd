@@ -68,11 +68,11 @@ var _user$project$EntityList_View$keyedViewList = F3(
 		};
 		var createContextVM = function (_p0) {
 			var _p1 = _p0;
-			return A3(_user$project$GroupDoc_ViewModel$contextGroup, getTabIndexAVForEntity, _p1.todoList, _p1.context);
+			return A3(_user$project$GroupDoc_ViewModel$contextGroup, getTabIndexAVForEntity, _p1.todoList, _p1.groupDoc);
 		};
 		var createProjectVM = function (_p2) {
 			var _p3 = _p2;
-			return A3(_user$project$GroupDoc_ViewModel$projectGroup, getTabIndexAVForEntity, _p3.todoList, _p3.project);
+			return A3(_user$project$GroupDoc_ViewModel$projectGroup, getTabIndexAVForEntity, _p3.todoList, _p3.groupDoc);
 		};
 		var todoView = function (todo) {
 			var canBeFocused = hasFocusIn(

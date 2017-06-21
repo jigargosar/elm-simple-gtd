@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.55 - 2017-06-21
 * reverting part of entity group refactoring, since it caused bugs in entity-view arrow key navigation.  
 
 ## v0.18.54 - 2017-06-21

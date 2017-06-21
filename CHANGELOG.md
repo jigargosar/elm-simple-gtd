@@ -1,3 +1,6 @@
+## Upcoming
+* fix tabbing in set reminder popup. 
+
 ## v0.18.55 - 2017-06-21
 * reverting part of entity group refactoring, since it caused bugs in entity-view arrow key navigation.  
 

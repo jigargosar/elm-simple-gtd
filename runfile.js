@@ -120,7 +120,7 @@ export const bump = function () {
 
     }
 }
-bump.help  =
+bump.help =
     `
         <no options>: bump and push, let travis handle the build.
         -g --github-commit-docs: after bump, build and commit github docs for deployment
@@ -129,30 +129,19 @@ bump.help  =
 
 const travisRunPrefix = TRAVIS ? "sysconfcpus -n 2" : ""
 
-export const b = function () {
-    if (!this.options || !(this.options.d || this.options.p)) {
-        console.error("Invalid options please specify env: -d or -p")
-        process.exit(1)
-    }
 
-    if (this.options.d) {
-        build.dev()
-    } else {
-        build.prod()
-    }
-}
-export const d = function () {
-    if (!this.options || !(this.options.d || this.options.p)) {
-        console.error("Invalid options please specify env: -d or -p")
-        process.exit(1)
-    }
+export const b = () => build.dev()
+export const pb = () => build.prod()
 
-    if (this.options.d) {
-        deploy.dev()
-    } else {
-        deploy.prod()
-    }
+export const d = () => deploy.dev()
+export const pd = () => deploy.prod()
+
+
+export const bd = () => {
+    b()
+    d()
 }
+
 export const build = {
     dev: function () {
         console.info("build:dev")
@@ -174,11 +163,11 @@ export const build = {
 }
 
 export const deploy = {
-    prod:runF(firebaseDeployProd),
-    dev:runF(firebaseDeployDev),
+    prod: runF(firebaseDeployProd),
+    dev: runF(firebaseDeployDev),
 }
 
-export function setStorageCors (){
+export function setStorageCors() {
     run("gsutil cors set firebase-storage-cors.json gs://simple-gtd-prod.appspot.com")
 }
 

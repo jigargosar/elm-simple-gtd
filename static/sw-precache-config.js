@@ -7,6 +7,8 @@ module.exports = {
         "*.ico",
         "common.js",
         "main.js",
+        "*.woff",
+        "*.woff2",
         "bower_components/pouchdb/dist/pouchdb.js"
     ],
     importScripts:["notification-sw.js"]

@@ -13,6 +13,9 @@
     "main.js",
     "firebase-messaging-sw.js",
     "*.js.map",
+    "*.woff",
+    "*.woff2",
+    "*.js.map",
     "CNAME"
   ],
   "extraDependencies": [

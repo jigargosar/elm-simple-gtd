@@ -11,6 +11,7 @@
     "*.png",
     "*.ico",
     "common.js",
+    "vendor.js",
     "app.js",
     "firebase-messaging-sw.js",
     "*.js.map",

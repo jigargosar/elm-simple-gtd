@@ -6,7 +6,8 @@ module.exports = {
         "*.png",
         "*.ico",
         "common.js",
-        "main.js",
+        "app.js",
+        "vendor.js",
         "*.woff",
         "*.woff2",
         "bower_components/pouchdb/dist/pouchdb.js"

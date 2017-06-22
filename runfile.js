@@ -144,7 +144,7 @@ export const pd = () => deploy.prod()
 
 export const bd = () => {
     b()
-
+    d()
 }
 
 export const build = {

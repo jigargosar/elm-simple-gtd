@@ -29,7 +29,8 @@ export default {
     entry: {
         common: ["./src/web/common-require.js"],
         app: ["./src/web/app.js"],
-        "start-app": ["./src/web/start-app.js"]
+        "start-app": ["./src/web/start-app.js"],
+        "start-landing-page": ["./src/web/start-landing-page.js"]
     },
 
     output: {
@@ -40,11 +41,13 @@ export default {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'static/index.template.html',
-            filename:"index.html"
+            filename:"index.html",
+            excludeChunks:["start-app"],
         }),
         new HtmlWebpackPlugin({
             template: 'static/index.template.html',
-            filename:"app/index.html"
+            filename:"app/index.html",
+            excludeChunks:["start-landing-page"],
         }),
         new webpack["ProvidePlugin"]({
             $: "jquery",

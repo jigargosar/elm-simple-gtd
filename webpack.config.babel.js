@@ -24,6 +24,7 @@ console.log("webpack: isWebPackDevServer: ", isWebPackDevServer)
 const envOutputDir = isDevEnv ? "dev" : "app"
 
 const outputPath = path.resolve(__dirname , envOutputDir)
+const styleFileName = isWebPackDevServer ? "style.css": '/assets/css/style.css'
 export default {
     resolve: {
         alias: {elm: path.resolve(__dirname, 'src/elm/')}
@@ -42,7 +43,7 @@ export default {
     },
 
     plugins: [
-        new ExtractTextPlugin('style.css'),
+        // new ExtractTextPlugin(styleFileName),
         new webpack["ProvidePlugin"]({
             $: "jquery",
             jQuery: "jquery",
@@ -83,14 +84,14 @@ export default {
                 // use: ["elm-hot-loader","elm-webpack-loader?debug=true"],
                 // use: ["elm-hot-loader", "elm-webpack-loader"],
             },
-            {
+            /*{
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
                         "css-loader",
                         "sass-loader",
-                    ]
+                    ],
                 })
             },
             {
@@ -101,10 +102,10 @@ export default {
                     use: [
                         'css-loader',
                         'postcss-loader',
-                    ]
+                    ],
                 })
-            },
-            /*{
+            },*/
+            {
                 test: /\.(pcss|css)$/,
 
                 use: [
@@ -112,15 +113,15 @@ export default {
                     {loader: 'css-loader', options: {importLoaders: 1}},
                     'postcss-loader'
                 ]
-            },*/
-            /*{
+            },
+            {
                 test: /\.scss$/,
                 use: [
                     {loader: "style-loader"},
                     {loader: "css-loader"},
                     {loader: "sass-loader"}
                 ]
-            },*/
+            },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use:[{

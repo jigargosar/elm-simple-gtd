@@ -1,5 +1,7 @@
 ## Upcoming
-* using extract text plugin to extract styles. so it is easier to debug. 
+* using extract text plugin to extract styles. so it is easier to debug.
+  * removed it for now. more trouble than worth.
+  * This whole web dev build stuff is a nightmare !!!
 
 ## v0.18.59 - 2017-06-22
 * Tonne of changes just to add gdotdesign/elm-ui

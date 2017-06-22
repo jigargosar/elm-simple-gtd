@@ -27,7 +27,7 @@ export default {
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
         common: ["./src/web/common-require.js"],
-        main: ["./src/web/main.js"]
+        app: ["./src/web/app.js"]
     },
 
     output: {

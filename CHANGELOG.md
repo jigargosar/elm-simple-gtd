@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.59 - 2017-06-22
 * Tonne of changes just to add gdotdesign/elm-ui
 * adding woff files to polymer build
 * fix woff files not found on server.

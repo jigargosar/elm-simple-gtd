@@ -44,7 +44,6 @@ export default {
         new HtmlWebpackPlugin({
             template: 'static/index.template.html',
             filename:"app/index.html",
-            chunksSortMode:"dependency"
         }),
         new webpack["ProvidePlugin"]({
             $: "jquery",

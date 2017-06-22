@@ -2,7 +2,7 @@
 * Tonne of changes just to add gdotdesign/elm-ui
 * adding woff files to polymer build
 * fix woff files not found on server.
-* for now landing page will show app, in addition to /app.
+* For now landing page will show app, in addition to /app.
 
 ## v0.18.58 - 2017-06-21
 * when group sort order changes, focus tracking goes completely haywire.

@@ -21,7 +21,7 @@ const env = process.env
 
 const npmPackageVersion = env["npm_package_version"]
 
-export default async function boot() {
+global.appBoot= async function appBoot() {
     const deviceId = getOrCreateDeviceId()
     const isFirstVisit = getOrCreateFirstVisit()
     const $elm = $("#elm-app-container")

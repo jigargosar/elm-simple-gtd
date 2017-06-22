@@ -28,7 +28,7 @@ export default {
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
         "vendor":["./src/web/common-require.js"],
-        "start-app": ["./src/web/start-app.js"],
+        "app": ["./src/web/app.js"],
         "start-landing-page": ["./src/web/start-landing-page.js"]
     },
 
@@ -40,14 +40,12 @@ export default {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'static/index.template.html',
-            filename:"index.html",
-            chunks:["common","vendor","start-landing-page"],
+            filename:"index.html"
         }),
         new HtmlWebpackPlugin({
             template: 'static/index.template.html',
             filename:"app/index.html",
-            chunksSortMode:"dependency",
-            chunks:["common","vendor", "start-app"],
+            chunksSortMode:"dependency"
         }),
         new webpack["ProvidePlugin"]({
             $: "jquery",

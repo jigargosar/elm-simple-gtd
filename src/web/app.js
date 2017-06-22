@@ -21,10 +21,10 @@ const env = process.env
 
 const npmPackageVersion = env["npm_package_version"]
 
-global.appBoot= async function appBoot() {
+window.appBoot= async function appBoot() {
     const deviceId = getOrCreateDeviceId()
     const isFirstVisit = getOrCreateFirstVisit()
-    const $elm = $("#elm-app-container")
+    const $elm = $("#elm-container")
     // $elm.trap();
 
     $elm.on("keydown", `.entity-list`, e => {
@@ -85,7 +85,7 @@ global.appBoot= async function appBoot() {
     }
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]
-        .embed(document.getElementById("elm-app-container"), flags)
+        .embed(document.getElementById("elm-container"), flags)
 
     const fire = Fire.setup(app, _.values(dbMap), deviceId)
 

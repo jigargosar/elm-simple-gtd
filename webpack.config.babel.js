@@ -29,7 +29,6 @@ export default {
     entry: {
         "vendor":["./src/web/common-require.js"],
         "app": ["./src/web/app.js"],
-        "start-landing-page": ["./src/web/start-landing-page.js"]
     },
 
     output: {

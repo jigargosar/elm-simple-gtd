@@ -14,9 +14,6 @@ import localforage from "localforage"
 //noinspection JSUnresolvedVariable
 const isDevelopmentMode = IS_DEVELOPMENT_ENV
 
-window.addEventListener('WebComponentsReady', () => {
-    boot().catch(console.error)
-});
 
 const env = process.env
 
@@ -24,7 +21,7 @@ const env = process.env
 
 const npmPackageVersion = env["npm_package_version"]
 
-async function boot() {
+export default async function boot() {
     const deviceId = getOrCreateDeviceId()
     const isFirstVisit = getOrCreateFirstVisit()
     const $elm = $("#elm-app-container")

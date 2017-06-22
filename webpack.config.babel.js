@@ -39,11 +39,11 @@ export default {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'static/index.template.html',
-            fileName:"index.html"
+            filename:"index.html"
         }),
         new HtmlWebpackPlugin({
             template: 'static/index.template.html',
-            fileName:"app/index.html"
+            filename:"app/index.html"
         }),
         new webpack["ProvidePlugin"]({
             $: "jquery",

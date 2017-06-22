@@ -27,8 +27,7 @@ export default {
     // devtool: isDevEnv? "": "source-map",
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
-        // common: ["./src/web/common-require.js"],
-        // app: ["./src/web/app.js"],
+        "vendor":["./src/web/common-require.js"],
         "start-app": ["./src/web/start-app.js"],
         "start-landing-page": ["./src/web/start-landing-page.js"]
     },
@@ -42,14 +41,13 @@ export default {
         new HtmlWebpackPlugin({
             template: 'static/index.template.html',
             filename:"index.html",
-            // excludeChunks:["start-app"],
-            chunks:["common","start-landing-page"],
+            chunks:["common","vendor","start-landing-page"],
         }),
         new HtmlWebpackPlugin({
             template: 'static/index.template.html',
             filename:"app/index.html",
-            // excludeChunks:["start-landing-page"],
-            chunks:["common","start-app"],
+            chunksSortMode:"dependency",
+            chunks:["common","vendor", "start-app"],
         }),
         new webpack["ProvidePlugin"]({
             $: "jquery",

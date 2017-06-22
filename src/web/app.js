@@ -1,6 +1,5 @@
 "use strict";
 
-import "./common-require"
 import sound from "./sound"
 import Fire from "./fire"
 import DB from "./pouchdb-wrapper"

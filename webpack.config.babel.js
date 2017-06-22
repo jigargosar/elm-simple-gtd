@@ -3,6 +3,7 @@ import path from "path"
 import ServiceWorkerWebpackPlugin from "serviceworker-webpack-plugin"
 import _ from "ramda"
 import HtmlWebpackPlugin from "html-webpack-plugin"
+import ExtractTextPlugin from "extract-text-webpack-plugin"
 
 const nodeENV = process.env.NODE_ENV
 const isWebPackDevServer = process.env.WEBPACK_DEV_SERVER
@@ -41,6 +42,7 @@ export default {
     },
 
     plugins: [
+        new ExtractTextPlugin('style.css'),
         new webpack["ProvidePlugin"]({
             $: "jquery",
             jQuery: "jquery",
@@ -82,21 +84,43 @@ export default {
                 // use: ["elm-hot-loader", "elm-webpack-loader"],
             },
             {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        "css-loader",
+                        "sass-loader",
+                    ]
+                })
+            },
+            {
                 test: /\.(pcss|css)$/,
+
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        'css-loader',
+                        'postcss-loader',
+                    ]
+                })
+            },
+            /*{
+                test: /\.(pcss|css)$/,
+
                 use: [
                     'style-loader',
                     {loader: 'css-loader', options: {importLoaders: 1}},
                     'postcss-loader'
                 ]
-            },
-            {
+            },*/
+            /*{
                 test: /\.scss$/,
                 use: [
                     {loader: "style-loader"},
                     {loader: "css-loader"},
                     {loader: "sass-loader"}
                 ]
-            },
+            },*/
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use:[{

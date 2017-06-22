@@ -25,17 +25,6 @@
     text-overflow: ellipsis;
   };
 
-  --ul-layout: {
-    @nest & ul {
-      @apply --layout-vertical;
-      width: 100%;
-      & li {
-        @apply --layout-horizontal;
-        padding-left: 1rem;
-        width: 100%;
-      }
-    }
-  };
 
 }
 
@@ -76,7 +65,15 @@ paper-menu-button paper-item {
 */
 
 .app-drawer-list-container {
-  @apply --ul-layout;
+  @nest & ul {
+    @apply --layout-vertical;
+    width: 100%;
+    & li {
+      @apply --layout-horizontal;
+      padding-left: 1rem;
+      width: 100%;
+    }
+  }
 }
 
 .app-drawer-list-container li:not(.list-container) {
@@ -94,7 +91,7 @@ paper-menu-button paper-item {
 
 .done-icon {
   &.is-done .material-icons, &:not(.is-done) .material-icons:hover {
-    color: #4caf50;
+    color: rgb(76, 175, 80);
   }
 
   &.is-done .material-icons:hover {

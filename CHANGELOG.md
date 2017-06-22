@@ -1,3 +1,6 @@
+## Upcoming
+* using extract text plugin to extract styles. so it is easier to debug. 
+
 ## v0.18.59 - 2017-06-22
 * Tonne of changes just to add gdotdesign/elm-ui
 * adding woff files to polymer build

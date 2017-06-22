@@ -2,6 +2,7 @@ import webpack from "webpack"
 import path from "path"
 import ServiceWorkerWebpackPlugin from "serviceworker-webpack-plugin"
 import _ from "ramda"
+import HtmlWebpackPlugin from "html-webpack-plugin"
 
 const nodeENV = process.env.NODE_ENV
 console.log(`webpack: process.env.NODE_ENV: "${nodeENV}"`)
@@ -31,11 +32,19 @@ export default {
     },
 
     output: {
-        path: path.resolve(__dirname + "/" + outputDir),
+        path: path.resolve(__dirname , outputDir),
         filename: '[name].js',
     },
 
     plugins: [
+        new HtmlWebpackPlugin({
+            template: 'static/index.template.html',
+            fileName:"index.html"
+        }),
+        new HtmlWebpackPlugin({
+            template: 'static/index.template.html',
+            fileName:"app/index.html"
+        }),
         new webpack["ProvidePlugin"]({
             $: "jquery",
             jQuery: "jquery",
@@ -94,7 +103,7 @@ export default {
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                use: 'url-loader?limit=10000&mimetype=application/font-woff',
+                use: 'url-loader?name=[name].[ext]&outputPath=/assets&useRelativePath=true&limit=10000&mimetype=application/font-woff',
             },
             {
                 test: /\.(ttf|eot|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,

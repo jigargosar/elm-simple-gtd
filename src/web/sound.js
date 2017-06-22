@@ -6,7 +6,7 @@ export default  (function () {
     const Howl = howler.Howl
 
     const sound = new Howl({
-        src: ['alarm.ogg']
+        src: ['/alarm.ogg']
     });
 
     let id1 = null;

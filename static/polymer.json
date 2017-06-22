@@ -4,6 +4,7 @@
   "fragments": [
   ],
   "sources": [
+    "assets/**",
     "manifest.json",
     "app/index.html",
     "*.ogg",

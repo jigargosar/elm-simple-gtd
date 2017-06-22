@@ -27,7 +27,7 @@ export default {
     // devtool: isDevEnv? "": "source-map",
     // devtool: 'source-map', // not much useful for elm, and slows down dev-server
     entry: {
-        "vendor":["./src/web/common-require.js"],
+        "vendor":["./src/web/vendor.js"],
         "app": ["./src/web/app.js"],
     },
 

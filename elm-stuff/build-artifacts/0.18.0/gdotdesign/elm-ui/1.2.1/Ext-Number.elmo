@@ -1,0 +1,14 @@
+var _gdotdesign$elm_ui$Ext_Number$roundTo = F2(
+	function (precision, number) {
+		var magnitude = _elm_lang$core$Basics$toFloat(10 * precision);
+		return _elm_lang$core$Basics$toFloat(
+			_elm_lang$core$Basics$round(number * magnitude)) / magnitude;
+	});
+var _gdotdesign$elm_ui$Ext_Number$remFloat = F2(
+	function (a, b) {
+		return A2(_gdotdesign$elm_ui$Native_Number.rem, a, b);
+	});
+var _gdotdesign$elm_ui$Ext_Number$toFixed = F2(
+	function (precision, number) {
+		return A2(_gdotdesign$elm_ui$Native_Number.toFixed, number, precision);
+	});

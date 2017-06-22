@@ -1,10 +1,10 @@
 module View.Header exposing (..)
 
 import ExclusiveMode
-import Ext.Keyboard as Keyboard
-import Ext.Time
+import X.Html exposing (boolProperty)
+import X.Keyboard as Keyboard
+import X.Time
 import Firebase
-import Html.Attributes.Extra exposing (..)
 import Model
 import Todo.NewForm
 import Model exposing (Model)
@@ -14,17 +14,17 @@ import Polymer.Paper as Paper
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
 import Todo.TimeTracker
 import Todo.TimeTracker.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Set
 import WebComponents exposing (..)
+import XList
 
 
 init viewModel m =
@@ -60,7 +60,7 @@ headerView viewModel m =
     let
         content =
             Todo.TimeTracker.View.maybe m
-                ?|> List.singleton
+                ?|> XList.singleton
                 ?= titleHeaderContent viewModel m
     in
         headerWithContent content m

@@ -121,7 +121,7 @@ var _user$project$View_AppDrawer$view = F2(
 			_edvail$elm_polymer$Polymer_App$drawer,
 			{
 				ctor: '::',
-				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'swipeOpen', true),
+				_0: A2(_user$project$X_Html$boolProperty, 'swipeOpen', true),
 				_1: {
 					ctor: '::',
 					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'drawer'),
@@ -143,7 +143,7 @@ var _user$project$View_AppDrawer$view = F2(
 							_edvail$elm_polymer$Polymer_App$header,
 							{
 								ctor: '::',
-								_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'fixed', true),
+								_0: A2(_user$project$X_Html$boolProperty, 'fixed', true),
 								_1: {
 									ctor: '::',
 									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'header'),
@@ -159,10 +159,10 @@ var _user$project$View_AppDrawer$view = F2(
 										_0: _elm_lang$html$Html_Attributes$style(
 											{
 												ctor: '::',
-												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', 'white'),
+												_0: A2(_user$project$X_Function_Infix_ops['=>'], 'color', 'white'),
 												_1: {
 													ctor: '::',
-													_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'background-color', appVM.header.backgroundColor),
+													_0: A2(_user$project$X_Function_Infix_ops['=>'], 'background-color', appVM.header.backgroundColor),
 													_1: {ctor: '[]'}
 												}
 											}),

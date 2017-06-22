@@ -1,0 +1,146 @@
+var _gdotdesign$elm_ui$Ui_Styles_ScrolledPanel$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Css_Properties$maxHeight(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$relative),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$flex),
+						_1: {
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$flex_('1'),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gdotdesign$elm_ui$Ui_Css$selector,
+									'ui-scrolled-panel-wrapper',
+									{
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$paddingRight(
+											_gdotdesign$elm_ui$Ui_Css_Properties$px(5)),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$maxHeight(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$overflowY(_gdotdesign$elm_ui$Ui_Css_Properties$scroll),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$flex_('1'),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_gdotdesign$elm_ui$Ui_Css$selector,
+																'&::-webkit-scrollbar',
+																{
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+																		_gdotdesign$elm_ui$Ui_Css_Properties$px(10)),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+																			_gdotdesign$elm_ui$Ui_Css_Properties$px(10)),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_gdotdesign$elm_ui$Ui_Css$selector,
+																	'&::-webkit-scrollbar-button',
+																	{
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																			_1: {ctor: '[]'}
+																		}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_gdotdesign$elm_ui$Ui_Css$selector,
+																		'&::-webkit-scrollbar-thumb',
+																		{
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$background(theme.scrollbar.thumbColor),
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(theme.borderRadius),
+																				_1: {
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Css_Properties$border(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																					_1: {ctor: '[]'}
+																				}
+																			}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_gdotdesign$elm_ui$Ui_Css$selector,
+																			'&::-webkit-scrollbar-thumb:hover',
+																			{
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$background(theme.scrollbar.thumbHoverColor),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_gdotdesign$elm_ui$Ui_Css$selector,
+																				'&::-webkit-scrollbar-track',
+																				{
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Css_Properties$background(theme.scrollbar.trackColor),
+																					_1: {
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(theme.borderRadius),
+																						_1: {
+																							ctor: '::',
+																							_0: _gdotdesign$elm_ui$Ui_Css_Properties$border(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																							_1: {ctor: '[]'}
+																						}
+																					}
+																				}),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_gdotdesign$elm_ui$Ui_Css$selector,
+																					'&::-webkit-scrollbar-corner',
+																					{
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$background(_gdotdesign$elm_ui$Ui_Css_Properties$transparent),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_ScrolledPanel$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_ScrolledPanel$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

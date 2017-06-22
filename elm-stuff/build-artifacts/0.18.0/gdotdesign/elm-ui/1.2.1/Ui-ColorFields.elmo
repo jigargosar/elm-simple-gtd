@@ -1,0 +1,521 @@
+var _gdotdesign$elm_ui$Ui_ColorFields$renderInput = F7(
+	function (name, min, max, msg, blurMsg, value, model) {
+		var attributes = _elm_lang$core$List$concat(
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui$attributeList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'disabled', _1: model.disabled},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'readonly', _1: model.readonly},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html_Events$on,
+							'change',
+							_elm_lang$core$Json_Decode$succeed(blurMsg)),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$min(min),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$max(max),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onInput(msg),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					},
+					_1: {ctor: '[]'}
+				}
+			});
+		var baseAttributes = {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					model.uid,
+					A2(_elm_lang$core$Basics_ops['++'], '-', name))),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$defaultValue(value),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$spellcheck(false),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('number'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		};
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-color-fields-column',
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					A2(_elm_lang$core$Basics_ops['++'], baseAttributes, attributes),
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_elm_lang$html$Html$node,
+						'ui-color-fields-label',
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								_elm_lang$core$String$toUpper(
+									A2(_elm_lang$core$String$left, 1, name))),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _gdotdesign$elm_ui$Ui_ColorFields$updateInputs = function (_p0) {
+	var _p1 = _p0;
+	var _p3 = _p1;
+	var hex = _elm_lang$core$String$toUpper(
+		_eskimoblood$elm_color_extra$Color_Convert$colorToHex(
+			_gdotdesign$elm_ui$Ext_Color$hsvToRgb(_p3.value)));
+	var _p2 = _elm_lang$core$Color$toRgb(
+		_gdotdesign$elm_ui$Ext_Color$hsvToRgb(_p3.value));
+	var red = _p2.red;
+	var green = _p2.green;
+	var blue = _p2.blue;
+	var alpha = _p2.alpha;
+	var updatedInputs = _elm_lang$core$Native_Utils.update(
+		_p1.inputs,
+		{
+			alpha: _elm_lang$core$Basics$toString(
+				_elm_lang$core$Basics$round(alpha * 100)),
+			green: _elm_lang$core$Basics$toString(green),
+			blue: _elm_lang$core$Basics$toString(blue),
+			red: _elm_lang$core$Basics$toString(red),
+			hex: hex
+		});
+	return _elm_lang$core$Native_Utils.update(
+		_p3,
+		{inputs: updatedInputs});
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$sendValue = function (_p4) {
+	var _p5 = _p4;
+	var _p6 = _p5._0;
+	return {
+		ctor: '_Tuple2',
+		_0: _p6,
+		_1: _elm_lang$core$Platform_Cmd$batch(
+			{
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Ui_Helpers_Emitter$send,
+					_p6.uid,
+					_gdotdesign$elm_ui$Ext_Color$encodeHsv(_p6.value)),
+				_1: {
+					ctor: '::',
+					_0: _p5._1,
+					_1: {ctor: '[]'}
+				}
+			})
+	};
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$onChange = F2(
+	function (msg, model) {
+		return A2(
+			_gdotdesign$elm_ui$Ui_Helpers_Emitter$listen,
+			model.uid,
+			A3(
+				_gdotdesign$elm_ui$Ui_Helpers_Emitter$decode,
+				_gdotdesign$elm_ui$Ext_Color$decodeHsv,
+				_gdotdesign$elm_ui$Ext_Color$toHsv(_elm_lang$core$Color$black),
+				msg));
+	});
+var _gdotdesign$elm_ui$Ui_ColorFields$init = function (_p7) {
+	return _gdotdesign$elm_ui$Ui_ColorFields$updateInputs(
+		{
+			value: _gdotdesign$elm_ui$Ext_Color$toHsv(_elm_lang$core$Color$black),
+			uid: _gdotdesign$elm_ui$Ui_Native_Uid$uid(
+				{ctor: '_Tuple0'}),
+			disabled: false,
+			readonly: false,
+			inputs: {green: '', alpha: '', blue: '', red: '', hex: ''}
+		});
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$Inputs = F5(
+	function (a, b, c, d, e) {
+		return {green: a, alpha: b, blue: c, hex: d, red: e};
+	});
+var _gdotdesign$elm_ui$Ui_ColorFields$Model = F5(
+	function (a, b, c, d, e) {
+		return {disabled: a, readonly: b, inputs: c, uid: d, value: e};
+	});
+var _gdotdesign$elm_ui$Ui_ColorFields$BlurRed = {ctor: 'BlurRed'};
+var _gdotdesign$elm_ui$Ui_ColorFields$BlurHex = {ctor: 'BlurHex'};
+var _gdotdesign$elm_ui$Ui_ColorFields$BlurBlue = {ctor: 'BlurBlue'};
+var _gdotdesign$elm_ui$Ui_ColorFields$BlurAlpha = {ctor: 'BlurAlpha'};
+var _gdotdesign$elm_ui$Ui_ColorFields$BlurGreen = {ctor: 'BlurGreen'};
+var _gdotdesign$elm_ui$Ui_ColorFields$Red = function (a) {
+	return {ctor: 'Red', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$Hex = function (a) {
+	return {ctor: 'Hex', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$Blue = function (a) {
+	return {ctor: 'Blue', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$Green = function (a) {
+	return {ctor: 'Green', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$Alpha = function (a) {
+	return {ctor: 'Alpha', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$render = function (_p8) {
+	var _p9 = _p8;
+	var _p11 = _p9;
+	var _p10 = _p9.inputs;
+	var hexAttributes = _elm_lang$core$List$concat(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui$attributeList(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'disabled', _1: _p11.disabled},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'readonly', _1: _p11.readonly},
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html_Events$on,
+						'change',
+						_elm_lang$core$Json_Decode$succeed(_gdotdesign$elm_ui$Ui_ColorFields$BlurHex)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onBlur(_gdotdesign$elm_ui$Ui_ColorFields$BlurHex),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onInput(_gdotdesign$elm_ui$Ui_ColorFields$Hex),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				_1: {ctor: '[]'}
+			}
+		});
+	var baseHexAttributes = {
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$defaultValue(_p10.hex),
+		_1: {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], _p11.uid, '-hex')),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$spellcheck(false),
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+	return A3(
+		_elm_lang$html$Html$node,
+		'ui-color-fields',
+		_elm_lang$core$List$concat(
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui$attributeList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'disabled', _1: _p11.disabled},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'readonly', _1: _p11.readonly},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_ColorFields$defaultStyle),
+					_1: {ctor: '[]'}
+				}
+			}),
+		{
+			ctor: '::',
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'ui-color-fields-column',
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$input,
+						A2(_elm_lang$core$Basics_ops['++'], baseHexAttributes, hexAttributes),
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_elm_lang$html$Html$node,
+							'ui-color-fields-label',
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Hex'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A7(_gdotdesign$elm_ui$Ui_ColorFields$renderInput, 'red', '0', '255', _gdotdesign$elm_ui$Ui_ColorFields$Red, _gdotdesign$elm_ui$Ui_ColorFields$BlurRed, _p10.red, _p11),
+				_1: {
+					ctor: '::',
+					_0: A7(_gdotdesign$elm_ui$Ui_ColorFields$renderInput, 'green', '0', '255', _gdotdesign$elm_ui$Ui_ColorFields$Green, _gdotdesign$elm_ui$Ui_ColorFields$BlurGreen, _p10.green, _p11),
+					_1: {
+						ctor: '::',
+						_0: A7(_gdotdesign$elm_ui$Ui_ColorFields$renderInput, 'blue', '0', '255', _gdotdesign$elm_ui$Ui_ColorFields$Blue, _gdotdesign$elm_ui$Ui_ColorFields$BlurBlue, _p10.blue, _p11),
+						_1: {
+							ctor: '::',
+							_0: A7(_gdotdesign$elm_ui$Ui_ColorFields$renderInput, 'alpha', '0', '100', _gdotdesign$elm_ui$Ui_ColorFields$Alpha, _gdotdesign$elm_ui$Ui_ColorFields$BlurAlpha, _p10.alpha, _p11),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$view = function (model) {
+	return A2(_elm_lang$html$Html_Lazy$lazy, _gdotdesign$elm_ui$Ui_ColorFields$render, model);
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$Done = function (a) {
+	return {ctor: 'Done', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$setInputs = function (model) {
+	var _p12 = _gdotdesign$elm_ui$Ui_ColorFields$updateInputs(model);
+	var updatedModel = _p12;
+	var inputs = _p12.inputs;
+	var setCommand = A2(
+		_elm_lang$core$Task$attempt,
+		_gdotdesign$elm_ui$Ui_ColorFields$Done,
+		_elm_lang$core$Task$sequence(
+			{
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_dom$DOM$setValue,
+					inputs.green,
+					_gdotdesign$elm_dom$DOM$idSelector(
+						A2(_elm_lang$core$Basics_ops['++'], model.uid, '-green'))),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gdotdesign$elm_dom$DOM$setValue,
+						inputs.alpha,
+						_gdotdesign$elm_dom$DOM$idSelector(
+							A2(_elm_lang$core$Basics_ops['++'], model.uid, '-alpha'))),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_gdotdesign$elm_dom$DOM$setValue,
+							inputs.blue,
+							_gdotdesign$elm_dom$DOM$idSelector(
+								A2(_elm_lang$core$Basics_ops['++'], model.uid, '-blue'))),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_dom$DOM$setValue,
+								inputs.red,
+								_gdotdesign$elm_dom$DOM$idSelector(
+									A2(_elm_lang$core$Basics_ops['++'], model.uid, '-red'))),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gdotdesign$elm_dom$DOM$setValue,
+									inputs.hex,
+									_gdotdesign$elm_dom$DOM$idSelector(
+										A2(_elm_lang$core$Basics_ops['++'], model.uid, '-hex'))),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}));
+	return {ctor: '_Tuple2', _0: updatedModel, _1: setCommand};
+};
+var _gdotdesign$elm_ui$Ui_ColorFields$update = F2(
+	function (msg_, _p13) {
+		var _p14 = _p13;
+		var _p22 = _p14;
+		var _p21 = _p14.inputs;
+		var _p15 = msg_;
+		switch (_p15.ctor) {
+			case 'Green':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						_p22,
+						{
+							inputs: _elm_lang$core$Native_Utils.update(
+								_p21,
+								{green: _p15._0})
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Alpha':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						_p22,
+						{
+							inputs: _elm_lang$core$Native_Utils.update(
+								_p21,
+								{alpha: _p15._0})
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Blue':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						_p22,
+						{
+							inputs: _elm_lang$core$Native_Utils.update(
+								_p21,
+								{blue: _p15._0})
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Red':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						_p22,
+						{
+							inputs: _elm_lang$core$Native_Utils.update(
+								_p21,
+								{red: _p15._0})
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Hex':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						_p22,
+						{
+							inputs: _elm_lang$core$Native_Utils.update(
+								_p21,
+								{hex: _p15._0})
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'BlurHex':
+				var updatedModel = function () {
+					var _p16 = _eskimoblood$elm_color_extra$Color_Convert$hexToColor(_p21.hex);
+					if (_p16.ctor === 'Ok') {
+						var alpha = function (_) {
+							return _.alpha;
+						}(
+							_elm_lang$core$Color$toRgb(
+								_gdotdesign$elm_ui$Ext_Color$hsvToRgb(_p22.value)));
+						var value = A2(
+							_gdotdesign$elm_ui$Ext_Color$setAlpha,
+							alpha,
+							_gdotdesign$elm_ui$Ext_Color$toHsv(_p16._0));
+						return _elm_lang$core$Native_Utils.update(
+							_p22,
+							{value: value});
+					} else {
+						return _p22;
+					}
+				}();
+				return _gdotdesign$elm_ui$Ui_ColorFields$sendValue(
+					_gdotdesign$elm_ui$Ui_ColorFields$setInputs(updatedModel));
+			case 'BlurRed':
+				var updatedModel = function () {
+					var _p17 = _elm_lang$core$String$toInt(_p21.red);
+					if (_p17.ctor === 'Ok') {
+						return _elm_lang$core$Native_Utils.update(
+							_p22,
+							{
+								value: A2(_gdotdesign$elm_ui$Ext_Color$setRed, _p17._0, _p22.value)
+							});
+					} else {
+						return _p22;
+					}
+				}();
+				return _gdotdesign$elm_ui$Ui_ColorFields$sendValue(
+					_gdotdesign$elm_ui$Ui_ColorFields$setInputs(updatedModel));
+			case 'BlurBlue':
+				var updatedModel = function () {
+					var _p18 = _elm_lang$core$String$toInt(_p21.blue);
+					if (_p18.ctor === 'Ok') {
+						return _elm_lang$core$Native_Utils.update(
+							_p22,
+							{
+								value: A2(_gdotdesign$elm_ui$Ext_Color$setBlue, _p18._0, _p22.value)
+							});
+					} else {
+						return _p22;
+					}
+				}();
+				return _gdotdesign$elm_ui$Ui_ColorFields$sendValue(
+					_gdotdesign$elm_ui$Ui_ColorFields$setInputs(updatedModel));
+			case 'BlurGreen':
+				var updatedModel = function () {
+					var _p19 = _elm_lang$core$String$toInt(_p21.green);
+					if (_p19.ctor === 'Ok') {
+						return _elm_lang$core$Native_Utils.update(
+							_p22,
+							{
+								value: A2(_gdotdesign$elm_ui$Ext_Color$setGreen, _p19._0, _p22.value)
+							});
+					} else {
+						return _p22;
+					}
+				}();
+				return _gdotdesign$elm_ui$Ui_ColorFields$sendValue(
+					_gdotdesign$elm_ui$Ui_ColorFields$setInputs(updatedModel));
+			case 'BlurAlpha':
+				var updatedModel = function () {
+					var _p20 = _elm_lang$core$String$toFloat(_p21.alpha);
+					if (_p20.ctor === 'Ok') {
+						return _elm_lang$core$Native_Utils.update(
+							_p22,
+							{
+								value: A2(_gdotdesign$elm_ui$Ext_Color$setAlpha, _p20._0 / 100, _p22.value)
+							});
+					} else {
+						return _p22;
+					}
+				}();
+				return _gdotdesign$elm_ui$Ui_ColorFields$sendValue(
+					_gdotdesign$elm_ui$Ui_ColorFields$setInputs(updatedModel));
+			default:
+				return {ctor: '_Tuple2', _0: _p22, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _gdotdesign$elm_ui$Ui_ColorFields$setValue = F2(
+	function (value, model) {
+		return _gdotdesign$elm_ui$Ui_ColorFields$setInputs(
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{value: value}));
+	});

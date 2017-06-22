@@ -1,0 +1,174 @@
+var _gdotdesign$elm_ui$Ui_Input$showClearIcon = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{showClearIcon: value});
+	});
+var _gdotdesign$elm_ui$Ui_Input$onChange = F2(
+	function (msg, model) {
+		return A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$listenString, model.uid, msg);
+	});
+var _gdotdesign$elm_ui$Ui_Input$kind = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{kind: value});
+	});
+var _gdotdesign$elm_ui$Ui_Input$placeholder = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{placeholder: value});
+	});
+var _gdotdesign$elm_ui$Ui_Input$init = function (_p0) {
+	return {
+		showClearIcon: false,
+		placeholder: '',
+		uid: _gdotdesign$elm_ui$Ui_Native_Uid$uid(
+			{ctor: '_Tuple0'}),
+		disabled: false,
+		readonly: false,
+		kind: 'text',
+		value: ''
+	};
+};
+var _gdotdesign$elm_ui$Ui_Input$Model = F7(
+	function (a, b, c, d, e, f, g) {
+		return {placeholder: a, showClearIcon: b, disabled: c, readonly: d, value: e, kind: f, uid: g};
+	});
+var _gdotdesign$elm_ui$Ui_Input$Clear = {ctor: 'Clear'};
+var _gdotdesign$elm_ui$Ui_Input$Input = function (a) {
+	return {ctor: 'Input', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Input$render = function (model) {
+	var showClearIcon = !((!model.showClearIcon) || (model.disabled || (model.readonly || _elm_lang$core$Native_Utils.eq(model.value, ''))));
+	var clearIcon = showClearIcon ? _gdotdesign$elm_ui$Ui_Icons$close(
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(_gdotdesign$elm_ui$Ui_Input$Clear),
+			_1: {ctor: '[]'}
+		}) : _elm_lang$html$Html$text('');
+	return A3(
+		_elm_lang$html$Html$node,
+		'ui-input',
+		_elm_lang$core$List$concat(
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui$attributeList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'clearable', _1: showClearIcon},
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_Input$defaultStyle),
+					_1: {ctor: '[]'}
+				}
+			}),
+		{
+			ctor: '::',
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'input',
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$placeholder(model.placeholder),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$defaultValue(model.value),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$readonly(model.readonly),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$disabled(model.disabled),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$spellcheck(false),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$type_(model.kind),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onInput(_gdotdesign$elm_ui$Ui_Input$Input),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$id(model.uid),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: clearIcon,
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Input$view = function (model) {
+	return A2(_elm_lang$html$Html_Lazy$lazy, _gdotdesign$elm_ui$Ui_Input$render, model);
+};
+var _gdotdesign$elm_ui$Ui_Input$Done = function (a) {
+	return {ctor: 'Done', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Input$setValue = F2(
+	function (value, model) {
+		var selector = _gdotdesign$elm_dom$DOM$idSelector(model.uid);
+		var equals = function () {
+			var _p1 = _gdotdesign$elm_dom$DOM$getValueSync(selector);
+			if (_p1.ctor === 'Ok') {
+				return _elm_lang$core$Native_Utils.eq(model.value, value) && _elm_lang$core$Native_Utils.eq(_p1._0, value);
+			} else {
+				return false;
+			}
+		}();
+		return equals ? {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none} : {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{value: value}),
+			_1: A2(
+				_elm_lang$core$Task$attempt,
+				_gdotdesign$elm_ui$Ui_Input$Done,
+				A2(_gdotdesign$elm_dom$DOM$setValue, value, selector))
+		};
+	});
+var _gdotdesign$elm_ui$Ui_Input$update = F2(
+	function (msg, model) {
+		var _p2 = msg;
+		switch (_p2.ctor) {
+			case 'Done':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'Input':
+				var _p3 = _p2._0;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{value: _p3}),
+					_1: A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$sendString, model.uid, _p3)
+				};
+			default:
+				var _p4 = A2(_gdotdesign$elm_ui$Ui_Input$setValue, '', model);
+				var updatedInput = _p4._0;
+				var cmd = _p4._1;
+				var commands = _elm_lang$core$Platform_Cmd$batch(
+					{
+						ctor: '::',
+						_0: A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$sendString, model.uid, ''),
+						_1: {
+							ctor: '::',
+							_0: cmd,
+							_1: {ctor: '[]'}
+						}
+					});
+				return {ctor: '_Tuple2', _0: updatedInput, _1: commands};
+		}
+	});

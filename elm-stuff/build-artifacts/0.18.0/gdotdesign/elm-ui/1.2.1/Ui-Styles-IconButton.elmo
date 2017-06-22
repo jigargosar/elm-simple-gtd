@@ -1,0 +1,122 @@
+var _gdotdesign$elm_ui$Ui_Styles_IconButton$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Styles_Button$style(theme),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Ui_Css$selector,
+					'ui-icon-button-icon + span:not(:empty)',
+					{
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginLeft(
+							_gdotdesign$elm_ui$Ui_Css_Properties$em(0.625)),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gdotdesign$elm_ui$Ui_Css$selector,
+						'span:not(:empty) + ui-icon-button-icon',
+						{
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginLeft(
+								_gdotdesign$elm_ui$Ui_Css_Properties$em(0.625)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_gdotdesign$elm_ui$Ui_Css$selector,
+							'ui-icon-button-icon',
+							{
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$inlineFlex),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_gdotdesign$elm_ui$Ui_Css$selector,
+										'> *',
+										{
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_gdotdesign$elm_ui$Ui_Css$selector,
+											'svg',
+											{
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$fill(_gdotdesign$elm_ui$Ui_Css_Properties$currentColor),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Ui_Css$selector,
+								'&[size=medium] ui-icon-button-icon',
+								{
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+										_gdotdesign$elm_ui$Ui_Css_Properties$px(12)),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+											_gdotdesign$elm_ui$Ui_Css_Properties$px(12)),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gdotdesign$elm_ui$Ui_Css$selector,
+									'&[size=big] ui-icon-button-icon',
+									{
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+											_gdotdesign$elm_ui$Ui_Css_Properties$px(18)),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+												_gdotdesign$elm_ui$Ui_Css_Properties$px(18)),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_gdotdesign$elm_ui$Ui_Css$selector,
+										'&[size=small] ui-icon-button-icon',
+										{
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+												_gdotdesign$elm_ui$Ui_Css_Properties$px(10)),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+													_gdotdesign$elm_ui$Ui_Css_Properties$px(10)),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_IconButton$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_IconButton$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

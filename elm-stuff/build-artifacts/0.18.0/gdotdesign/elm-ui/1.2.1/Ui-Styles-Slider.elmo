@@ -1,0 +1,291 @@
+var _gdotdesign$elm_ui$Ui_Styles_Slider$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$defaults,
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Css_Properties$minWidth(
+					_gdotdesign$elm_ui$Ui_Css_Properties$px(100)),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Css_Properties$alignItems(_gdotdesign$elm_ui$Ui_Css_Properties$center),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$relative),
+						_1: {
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$cursor(_gdotdesign$elm_ui$Ui_Css_Properties$colResize),
+							_1: {
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$userSelect(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+								_1: {
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+										_gdotdesign$elm_ui$Ui_Css_Properties$px(36)),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$flex),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$outline(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_gdotdesign$elm_ui$Ui_Css$selector,
+													'*',
+													{
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$pointerEvents(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_gdotdesign$elm_ui$Ui_Css$selector,
+														'ui-slider-bar',
+														{
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$focusedIdle(theme),
+															_1: {
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$border(
+																	A2(
+																		_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																		A2(
+																			_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																			_gdotdesign$elm_ui$Ui_Css_Properties$px(1),
+																			_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+																		theme.colors.border)),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$background(theme.colors.input.color),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(theme.borderRadius),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$relative),
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+																					_gdotdesign$elm_ui$Ui_Css_Properties$px(18)),
+																				_1: {
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$block),
+																					_1: {
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$flex_('1'),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_gdotdesign$elm_ui$Ui_Css$selector,
+															'ui-slider-progress',
+															{
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRight(
+																	A2(
+																		_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																		A2(
+																			_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																			_gdotdesign$elm_ui$Ui_Css_Properties$px(6),
+																			_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+																		_gdotdesign$elm_ui$Ui_Css_Properties$transparent)),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$backgroundColor(theme.colors.primary.color),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(theme.borderRadius),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$backgroundClip(_gdotdesign$elm_ui$Ui_Css_Properties$contentBox),
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$boxSizing(_gdotdesign$elm_ui$Ui_Css_Properties$borderBox),
+																				_1: {
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$absolute),
+																					_1: {
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$bottom(
+																							_gdotdesign$elm_ui$Ui_Css_Properties$px(3)),
+																						_1: {
+																							ctor: '::',
+																							_0: _gdotdesign$elm_ui$Ui_Css_Properties$left(
+																								_gdotdesign$elm_ui$Ui_Css_Properties$px(3)),
+																							_1: {
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$top(
+																									_gdotdesign$elm_ui$Ui_Css_Properties$px(3)),
+																								_1: {ctor: '[]'}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_gdotdesign$elm_ui$Ui_Css$selector,
+																'ui-slider-handle',
+																{
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$boxShadow(
+																		{
+																			ctor: '::',
+																			_0: {
+																				color: 'rgba(0,0,0,0.5)',
+																				spread: _gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																				blur: _gdotdesign$elm_ui$Ui_Css_Properties$px(4),
+																				inset: false,
+																				x: _gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																				y: _gdotdesign$elm_ui$Ui_Css_Properties$zero
+																			},
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$border(
+																			A2(
+																				_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																				A2(
+																					_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																					_gdotdesign$elm_ui$Ui_Css_Properties$px(2),
+																					_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+																				theme.colors.input.color)),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$background('rgba(102,102,102,.5)'),
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(theme.borderRadius),
+																				_1: {
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Css_Properties$boxSizing(_gdotdesign$elm_ui$Ui_Css_Properties$borderBox),
+																					_1: {
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginLeft(
+																							_gdotdesign$elm_ui$Ui_Css_Properties$px(-4)),
+																						_1: {
+																							ctor: '::',
+																							_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$absolute),
+																							_1: {
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+																									_gdotdesign$elm_ui$Ui_Css_Properties$px(8)),
+																								_1: {
+																									ctor: '::',
+																									_0: _gdotdesign$elm_ui$Ui_Css_Properties$bottom(
+																										_gdotdesign$elm_ui$Ui_Css_Properties$px(3)),
+																									_1: {
+																										ctor: '::',
+																										_0: _gdotdesign$elm_ui$Ui_Css_Properties$top(
+																											_gdotdesign$elm_ui$Ui_Css_Properties$px(3)),
+																										_1: {ctor: '[]'}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_gdotdesign$elm_ui$Ui_Css$selector,
+																	'&[readonly]',
+																	{
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$readonly,
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_gdotdesign$elm_ui$Ui_Css$selector,
+																		'&[disabled]',
+																		{
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$disabled,
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_gdotdesign$elm_ui$Ui_Css$selector,
+																					'ui-slider-bar',
+																					{
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$disabledColors(theme),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_gdotdesign$elm_ui$Ui_Css$selector,
+																						'ui-slider-progress',
+																						{
+																							ctor: '::',
+																							_0: _gdotdesign$elm_ui$Ui_Css_Properties$backgroundColor(theme.colors.disabledSecondary.color),
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_gdotdesign$elm_ui$Ui_Css$selector,
+																							'ui-slider-handle',
+																							{
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$opacity(0.6),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_gdotdesign$elm_ui$Ui_Css$selector,
+																			'&:focus ui-slider-bar',
+																			{
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$focused(theme),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_Slider$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_Slider$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

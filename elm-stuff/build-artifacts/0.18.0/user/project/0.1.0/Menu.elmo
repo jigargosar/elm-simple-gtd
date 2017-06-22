@@ -12,19 +12,19 @@ var _user$project$Menu$menuItemView = function (itemVM) {
 					_0: _elm_lang$html$Html_Attributes$tabindex(itemVM.tabIndexValue),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(itemVM.onKeyDown),
+						_0: _user$project$X_Keyboard$onKeyDownStopPropagation(itemVM.onKeyDown),
 						_1: {
 							ctor: '::',
 							_0: _elm_lang$html$Html_Attributes$classList(
 								{
 									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'auto-focus', itemVM.isFocused),
+									_0: A2(_user$project$X_Function_Infix_ops['=>'], 'auto-focus', itemVM.isFocused),
 									_1: {
 										ctor: '::',
-										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'collection-item', true),
+										_0: A2(_user$project$X_Function_Infix_ops['=>'], 'collection-item', true),
 										_1: {
 											ctor: '::',
-											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'active', itemVM.isSelected),
+											_0: A2(_user$project$X_Function_Infix_ops['=>'], 'active', itemVM.isSelected),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -97,7 +97,7 @@ var _user$project$Menu$createViewModel = F3(
 					_elm_community$list_extra$List_Extra$findIndex,
 					function (_p2) {
 						return A2(
-							_user$project$Ext_Function$equals,
+							_user$project$X_Function$equals,
 							key,
 							config.itemKey(_p2));
 					},
@@ -107,11 +107,11 @@ var _user$project$Menu$createViewModel = F3(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
 				state.maybeFocusKey,
 				A2(
-					_user$project$Ext_Function_Infix_ops['>>?'],
+					_user$project$X_Function_Infix_ops['>>?'],
 					findIndexOfItemWithKey,
-					_user$project$Ext_List$clampIndexIn(items)));
+					_user$project$X_List$clampIndexIn(items)));
 		}();
-		var clampIndex = _user$project$Ext_List$clampIndexIn(items);
+		var clampIndex = _user$project$X_List$clampIndexIn(items);
 		var maybeSelectedIndex = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 			A2(_elm_community$list_extra$List_Extra$findIndex, config.isSelected, items),
@@ -138,7 +138,7 @@ var _user$project$Menu$createViewModel = F3(
 					findPred,
 					A2(_user$project$Menu$splitSwapListAt, focusedIndex + 1, items)));
 		};
-		var isFocusedAt = _user$project$Ext_Function$equals(focusedIndex);
+		var isFocusedAt = _user$project$X_Function$equals(focusedIndex);
 		var onFocusedItemKeyDown = function (_p4) {
 			var _p5 = _p4;
 			var onFocusIndexChangeByMsg = function (offset) {
@@ -178,7 +178,7 @@ var _user$project$Menu$createViewModel = F3(
 			isFocusedAt: isFocusedAt,
 			isSelectedAt: A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
-				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeSelectedIndex, _user$project$Ext_Function$equals),
+				A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'], maybeSelectedIndex, _user$project$X_Function$equals),
 				function (_p9) {
 					return false;
 				}),
@@ -196,10 +196,10 @@ var _user$project$Menu$view = F3(
 	function (items, state, config) {
 		var menuVM = A3(_user$project$Menu$createViewModel, items, state, config);
 		var itemViewList = A2(
-			_user$project$Ext_Function_Infix_ops['.#|>'],
+			_user$project$X_Function_Infix_ops['.#|>'],
 			items,
 			A2(
-				_user$project$Ext_Function_Infix_ops['>>>'],
+				_user$project$X_Function_Infix_ops['>>>'],
 				_user$project$Menu$createItemViewModel(menuVM),
 				_user$project$Menu$menuItemView));
 		return A2(
@@ -209,10 +209,10 @@ var _user$project$Menu$view = F3(
 				_0: _elm_lang$html$Html_Attributes$class('overlay'),
 				_1: {
 					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(config.onOutsideMouseDown),
+					_0: _user$project$X_Html$onClickStopPropagation(config.onOutsideMouseDown),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+						_0: _user$project$X_Keyboard$onKeyDownStopPropagation(
 							function (_p11) {
 								return config.noOp;
 							}),

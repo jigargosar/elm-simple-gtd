@@ -1,0 +1,506 @@
+var _gdotdesign$elm_ui$Ui_NumberPad$sendValue = function (model) {
+	return {
+		ctor: '_Tuple2',
+		_0: model,
+		_1: A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$sendInt, model.uid, model.value)
+	};
+};
+var _gdotdesign$elm_ui$Ui_NumberPad$clampValue = F2(
+	function (value, model) {
+		return (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$String$length(
+				_elm_lang$core$Basics$toString(value)),
+			model.maximumDigits) > 0) ? model.value : value;
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$addDigit = F2(
+	function (number, model) {
+		var result = A2(
+			_elm_lang$core$Result$withDefault,
+			0,
+			_elm_lang$core$String$toInt(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(model.value),
+					_elm_lang$core$Basics$toString(number))));
+		var value = A2(_gdotdesign$elm_ui$Ui_NumberPad$clampValue, result, model);
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{value: value});
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$deleteDigit = function (model) {
+	var value = A2(
+		_elm_lang$core$Result$withDefault,
+		0,
+		_elm_lang$core$String$toInt(
+			A2(
+				_elm_lang$core$String$dropRight,
+				1,
+				_elm_lang$core$Basics$toString(model.value))));
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{value: value});
+};
+var _gdotdesign$elm_ui$Ui_NumberPad$setValue = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				value: A2(_gdotdesign$elm_ui$Ui_NumberPad$clampValue, value, model)
+			});
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		if (_p0.ctor === 'Pressed') {
+			return _gdotdesign$elm_ui$Ui_NumberPad$sendValue(
+				A2(_gdotdesign$elm_ui$Ui_NumberPad$addDigit, _p0._0, model));
+		} else {
+			return _gdotdesign$elm_ui$Ui_NumberPad$sendValue(
+				_gdotdesign$elm_ui$Ui_NumberPad$deleteDigit(model));
+		}
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$prefix = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{prefix: value});
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$affix = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{affix: value});
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$format = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{format: value});
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$maximumDigits = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{maximumDigits: value});
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$onChange = F2(
+	function (msg, model) {
+		return A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$listenInt, model.uid, msg);
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$init = function (_p1) {
+	return {
+		maximumDigits: 10,
+		uid: _gdotdesign$elm_ui$Ui_Native_Uid$uid(
+			{ctor: '_Tuple0'}),
+		disabled: false,
+		readonly: false,
+		format: true,
+		prefix: '',
+		affix: '',
+		value: 0
+	};
+};
+var _gdotdesign$elm_ui$Ui_NumberPad$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {maximumDigits: a, disabled: b, readonly: c, prefix: d, affix: e, format: f, uid: g, value: h};
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$ViewModel = F3(
+	function (a, b, c) {
+		return {bottomRight: a, bottomLeft: b, address: c};
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$Delete = {ctor: 'Delete'};
+var _gdotdesign$elm_ui$Ui_NumberPad$Pressed = function (a) {
+	return {ctor: 'Pressed', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_NumberPad$renderButton = F3(
+	function (address, model, number) {
+		var click = A2(
+			_gdotdesign$elm_ui$Ui$enabledActions,
+			model,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					address(
+						_gdotdesign$elm_ui$Ui_NumberPad$Pressed(number))),
+				_1: {ctor: '[]'}
+			});
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-number-pad-button',
+			click,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					_elm_lang$core$Basics$toString(number)),
+				_1: {ctor: '[]'}
+			});
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$render = F2(
+	function (_p2, model) {
+		var _p3 = _p2;
+		var _p5 = _p3;
+		var _p4 = _p3.address;
+		var actions = A2(
+			_gdotdesign$elm_ui$Ui$enabledActions,
+			model,
+			{
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Html_Events_Extra$onKeys,
+					true,
+					{
+						ctor: '::',
+						_0: {
+							ctor: '_Tuple2',
+							_0: 8,
+							_1: _p4(_gdotdesign$elm_ui$Ui_NumberPad$Delete)
+						},
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '_Tuple2',
+								_0: 46,
+								_1: _p4(_gdotdesign$elm_ui$Ui_NumberPad$Delete)
+							},
+							_1: {
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 48,
+									_1: _p4(
+										_gdotdesign$elm_ui$Ui_NumberPad$Pressed(0))
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 49,
+										_1: _p4(
+											_gdotdesign$elm_ui$Ui_NumberPad$Pressed(1))
+									},
+									_1: {
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: 50,
+											_1: _p4(
+												_gdotdesign$elm_ui$Ui_NumberPad$Pressed(2))
+										},
+										_1: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 51,
+												_1: _p4(
+													_gdotdesign$elm_ui$Ui_NumberPad$Pressed(3))
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: 52,
+													_1: _p4(
+														_gdotdesign$elm_ui$Ui_NumberPad$Pressed(4))
+												},
+												_1: {
+													ctor: '::',
+													_0: {
+														ctor: '_Tuple2',
+														_0: 53,
+														_1: _p4(
+															_gdotdesign$elm_ui$Ui_NumberPad$Pressed(5))
+													},
+													_1: {
+														ctor: '::',
+														_0: {
+															ctor: '_Tuple2',
+															_0: 54,
+															_1: _p4(
+																_gdotdesign$elm_ui$Ui_NumberPad$Pressed(6))
+														},
+														_1: {
+															ctor: '::',
+															_0: {
+																ctor: '_Tuple2',
+																_0: 55,
+																_1: _p4(
+																	_gdotdesign$elm_ui$Ui_NumberPad$Pressed(7))
+															},
+															_1: {
+																ctor: '::',
+																_0: {
+																	ctor: '_Tuple2',
+																	_0: 56,
+																	_1: _p4(
+																		_gdotdesign$elm_ui$Ui_NumberPad$Pressed(8))
+																},
+																_1: {
+																	ctor: '::',
+																	_0: {
+																		ctor: '_Tuple2',
+																		_0: 57,
+																		_1: _p4(
+																			_gdotdesign$elm_ui$Ui_NumberPad$Pressed(9))
+																	},
+																	_1: {
+																		ctor: '::',
+																		_0: {
+																			ctor: '_Tuple2',
+																			_0: 96,
+																			_1: _p4(
+																				_gdotdesign$elm_ui$Ui_NumberPad$Pressed(0))
+																		},
+																		_1: {
+																			ctor: '::',
+																			_0: {
+																				ctor: '_Tuple2',
+																				_0: 97,
+																				_1: _p4(
+																					_gdotdesign$elm_ui$Ui_NumberPad$Pressed(1))
+																			},
+																			_1: {
+																				ctor: '::',
+																				_0: {
+																					ctor: '_Tuple2',
+																					_0: 98,
+																					_1: _p4(
+																						_gdotdesign$elm_ui$Ui_NumberPad$Pressed(2))
+																				},
+																				_1: {
+																					ctor: '::',
+																					_0: {
+																						ctor: '_Tuple2',
+																						_0: 99,
+																						_1: _p4(
+																							_gdotdesign$elm_ui$Ui_NumberPad$Pressed(3))
+																					},
+																					_1: {
+																						ctor: '::',
+																						_0: {
+																							ctor: '_Tuple2',
+																							_0: 100,
+																							_1: _p4(
+																								_gdotdesign$elm_ui$Ui_NumberPad$Pressed(4))
+																						},
+																						_1: {
+																							ctor: '::',
+																							_0: {
+																								ctor: '_Tuple2',
+																								_0: 101,
+																								_1: _p4(
+																									_gdotdesign$elm_ui$Ui_NumberPad$Pressed(5))
+																							},
+																							_1: {
+																								ctor: '::',
+																								_0: {
+																									ctor: '_Tuple2',
+																									_0: 102,
+																									_1: _p4(
+																										_gdotdesign$elm_ui$Ui_NumberPad$Pressed(6))
+																								},
+																								_1: {
+																									ctor: '::',
+																									_0: {
+																										ctor: '_Tuple2',
+																										_0: 103,
+																										_1: _p4(
+																											_gdotdesign$elm_ui$Ui_NumberPad$Pressed(7))
+																									},
+																									_1: {
+																										ctor: '::',
+																										_0: {
+																											ctor: '_Tuple2',
+																											_0: 104,
+																											_1: _p4(
+																												_gdotdesign$elm_ui$Ui_NumberPad$Pressed(8))
+																										},
+																										_1: {
+																											ctor: '::',
+																											_0: {
+																												ctor: '_Tuple2',
+																												_0: 105,
+																												_1: _p4(
+																													_gdotdesign$elm_ui$Ui_NumberPad$Pressed(9))
+																											},
+																											_1: {ctor: '[]'}
+																										}
+																									}
+																								}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+		var back = A2(
+			_gdotdesign$elm_ui$Ui$enabledActions,
+			model,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_p4(_gdotdesign$elm_ui$Ui_NumberPad$Delete)),
+				_1: {ctor: '[]'}
+			});
+		var buttons = A2(
+			_elm_lang$core$List$map,
+			A2(_gdotdesign$elm_ui$Ui_NumberPad$renderButton, _p4, model),
+			{
+				ctor: '::',
+				_0: 1,
+				_1: {
+					ctor: '::',
+					_0: 2,
+					_1: {
+						ctor: '::',
+						_0: 3,
+						_1: {
+							ctor: '::',
+							_0: 4,
+							_1: {
+								ctor: '::',
+								_0: 5,
+								_1: {
+									ctor: '::',
+									_0: 6,
+									_1: {
+										ctor: '::',
+										_0: 7,
+										_1: {
+											ctor: '::',
+											_0: 8,
+											_1: {
+												ctor: '::',
+												_0: 9,
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			});
+		var value = model.format ? A2(
+			_ggb$numeral_elm$Numeral$format,
+			'0,0',
+			_elm_lang$core$Basics$toFloat(model.value)) : _elm_lang$core$Basics$toString(model.value);
+		var textValue = _elm_lang$html$Html$text(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				model.prefix,
+				A2(_elm_lang$core$Basics_ops['++'], value, model.affix)));
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-number-pad',
+			_elm_lang$core$List$concat(
+				{
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_NumberPad$defaultStyle),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui$tabIndex(model),
+						_1: {
+							ctor: '::',
+							_0: actions,
+							_1: {
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui$attributeList(
+									{
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'disabled', _1: model.disabled},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'readonly', _1: model.readonly},
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}),
+			{
+				ctor: '::',
+				_0: A3(
+					_elm_lang$html$Html$node,
+					'ui-number-pad-value',
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A3(
+							_elm_lang$html$Html$node,
+							'span',
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: textValue,
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Icons$backspace(back),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_elm_lang$html$Html$node,
+						'ui-number-pad-buttons',
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							buttons,
+							{
+								ctor: '::',
+								_0: A3(
+									_elm_lang$html$Html$node,
+									'ui-number-pad-button',
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _p5.bottomLeft,
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A3(_gdotdesign$elm_ui$Ui_NumberPad$renderButton, _p4, model, 0),
+									_1: {
+										ctor: '::',
+										_0: A3(
+											_elm_lang$html$Html$node,
+											'ui-number-pad-button',
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _p5.bottomRight,
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							})),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _gdotdesign$elm_ui$Ui_NumberPad$view = F2(
+	function (viewModel, model) {
+		return A3(_elm_lang$html$Html_Lazy$lazy2, _gdotdesign$elm_ui$Ui_NumberPad$render, viewModel, model);
+	});

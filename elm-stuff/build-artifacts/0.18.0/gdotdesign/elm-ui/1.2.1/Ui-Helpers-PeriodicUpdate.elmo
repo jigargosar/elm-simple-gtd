@@ -1,0 +1,102 @@
+var _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$setInterval = _gdotdesign$elm_ui$Native_DateTime.setInterval;
+var _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$onSelfMsg = F3(
+	function (router, _p0, state) {
+		var mapSub = function (sub) {
+			var _p1 = sub;
+			return _p1._0;
+		};
+		var value = _gdotdesign$elm_ui$Ext_Date$nowTime(
+			{ctor: '_Tuple0'});
+		return A2(
+			_elm_lang$core$Task$andThen,
+			function (_p2) {
+				return _elm_lang$core$Task$succeed(state);
+			},
+			_elm_lang$core$Task$sequence(
+				A2(
+					_elm_lang$core$List$map,
+					function (tagger) {
+						return A2(
+							_elm_lang$core$Platform$sendToApp,
+							router,
+							tagger(value));
+					},
+					A2(_elm_lang$core$List$map, mapSub, state.subs))));
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$onEffects = F3(
+	function (router, newSubs, _p3) {
+		var _p4 = _p3;
+		var updatedState = _elm_lang$core$Native_Utils.update(
+			_p4,
+			{subs: newSubs});
+		var updateProcess = function (process) {
+			return _elm_lang$core$Task$succeed(
+				_elm_lang$core$Native_Utils.update(
+					updatedState,
+					{process: process}));
+		};
+		var haveSubs = !_elm_lang$core$List$isEmpty(newSubs);
+		var _p5 = {ctor: '_Tuple2', _0: _p4.process, _1: haveSubs};
+		if (_p5._0.ctor === 'Just') {
+			if (_p5._1 === true) {
+				return _elm_lang$core$Task$succeed(updatedState);
+			} else {
+				return A2(
+					_elm_lang$core$Task$andThen,
+					function (_p7) {
+						return updateProcess(_elm_lang$core$Maybe$Nothing);
+					},
+					_elm_lang$core$Process$kill(_p5._0._0));
+			}
+		} else {
+			if (_p5._1 === true) {
+				return A2(
+					_elm_lang$core$Task$andThen,
+					function (_p6) {
+						return updateProcess(
+							_elm_lang$core$Maybe$Just(_p6));
+					},
+					_elm_lang$core$Process$spawn(
+						A2(
+							_gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$setInterval,
+							5000,
+							A2(
+								_elm_lang$core$Platform$sendToSelf,
+								router,
+								{ctor: '_Tuple0'}))));
+			} else {
+				return _elm_lang$core$Task$succeed(
+					{
+						process: _elm_lang$core$Maybe$Nothing,
+						subs: {ctor: '[]'}
+					});
+			}
+		}
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$init = _elm_lang$core$Task$succeed(
+	{
+		process: _elm_lang$core$Maybe$Nothing,
+		subs: {ctor: '[]'}
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$subscription = _elm_lang$core$Native_Platform.leaf('Ui.Helpers.PeriodicUpdate');
+var _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$State = F2(
+	function (a, b) {
+		return {process: a, subs: b};
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$Sub = function (a) {
+	return {ctor: 'Sub', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$listen = function (msg) {
+	return _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$subscription(
+		_gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$Sub(msg));
+};
+var _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$subMap = F2(
+	function (f, _p8) {
+		var _p9 = _p8;
+		return _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$Sub(
+			function (_p10) {
+				return f(
+					_p9._0(_p10));
+			});
+	});
+_elm_lang$core$Native_Platform.effectManagers['Ui.Helpers.PeriodicUpdate'] = {pkg: 'gdotdesign/elm-ui', init: _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$init, onEffects: _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$onEffects, onSelfMsg: _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$onSelfMsg, tag: 'sub', subMap: _gdotdesign$elm_ui$Ui_Helpers_PeriodicUpdate$subMap};

@@ -36,17 +36,17 @@ var _user$project$Task_Main$gotoRunningTodo = function (model) {
 };
 var _user$project$Task_Main$maybeMapToCmd = function (fn) {
 	return A2(
-		_user$project$Ext_Function_Infix_ops['>>?='],
+		_user$project$X_Function_Infix_ops['>>?='],
 		_elm_lang$core$Maybe$map(fn),
 		_elm_lang$core$Platform_Cmd$none);
 };
 var _user$project$Task_Main$andThen = _Fresheyeball$elm_return$Return$andThen;
 var _user$project$Task_Main$command = _Fresheyeball$elm_return$Return$command;
 var _user$project$Task_Main$map = _Fresheyeball$elm_return$Return$map;
-var _user$project$Task_Main$mapSet = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _Fresheyeball$elm_return$Return$map);
-var _user$project$Task_Main$mapOver = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _Fresheyeball$elm_return$Return$map);
+var _user$project$Task_Main$mapSet = A2(_user$project$X_Function_Infix_ops['>>>'], _user$project$X_Record$set, _Fresheyeball$elm_return$Return$map);
+var _user$project$Task_Main$mapOver = A2(_user$project$X_Function_Infix_ops['>>>'], _user$project$X_Record$over, _Fresheyeball$elm_return$Return$map);
 var _user$project$Task_Main$timeTracker = A2(
-	_user$project$Ext_Record$field,
+	_user$project$X_Record$field,
 	function (_) {
 		return _.timeTracker;
 	},
@@ -136,7 +136,7 @@ var _user$project$Task_Main$showRunningNotificationCmd = function (_p5) {
 	var _p6 = _p5;
 	var createRequest = F2(
 		function (info, todo) {
-			var formattedDuration = _user$project$Ext_Time$toHHMMSSMin(info.elapsedTime);
+			var formattedDuration = _user$project$X_Time$toHHMMSSMin(info.elapsedTime);
 			var todoId = _user$project$Document$getId(todo);
 			return {
 				tag: todoId,
@@ -182,7 +182,7 @@ var _user$project$Task_Main$updateTimeTracker = function (now) {
 				_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
 				{ctor: '_Tuple2', _0: _elm_lang$core$Tuple$second, _1: _user$project$Task_Main$showRunningNotificationCmd},
 				A3(
-					_user$project$Ext_Record$overT2,
+					_user$project$X_Record$overT2,
 					_user$project$Task_Main$timeTracker,
 					_user$project$Todo_TimeTracker$updateNextAlarmAt(now),
 					_p7));
@@ -247,7 +247,7 @@ var _user$project$Task_Main$update = F3(
 				return _user$project$Task_Main$map(
 					function (model) {
 						var isTrackerTodoInactive = _user$project$Todo$isInActive(_p13) && A2(_user$project$Todo_TimeTracker$isTrackingTodo, _p13, model.timeTracker);
-						return isTrackerTodoInactive ? A3(_user$project$Ext_Record$set, _user$project$Task_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
+						return isTrackerTodoInactive ? A3(_user$project$X_Record$set, _user$project$Task_Main$timeTracker, _user$project$Todo_TimeTracker$none, model) : model;
 					});
 			case 'OnReminderNotificationClicked':
 				var todoId = _p8._0.data.id;
@@ -287,9 +287,9 @@ var _user$project$Task_Main$update = F3(
 						}()(_p16));
 				};
 			default:
-				return _user$project$Ext_Return$andThenMaybe(
+				return _user$project$X_Return$andThenMaybe(
 					A2(
-						_user$project$Ext_Function_Infix_ops['>>?'],
+						_user$project$X_Function_Infix_ops['>>?'],
 						_user$project$Model$findAndSnoozeOverDueTodo,
 						_Fresheyeball$elm_return$Return$andThen(_user$project$Task_Main$showReminderNotificationCmd)));
 		}

@@ -1,3 +1,6 @@
+## Upcoming
+* Tonne of changes just to add gdotdesign/elm-ui 
+
 ## v0.18.58 - 2017-06-21
 * when group sort order changes, focus tracking goes completely haywire.
   * perhaps we can skip changing focus when group is edited.

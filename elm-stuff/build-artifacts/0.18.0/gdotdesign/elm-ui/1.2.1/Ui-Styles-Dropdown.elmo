@@ -1,0 +1,183 @@
+var _gdotdesign$elm_ui$Ui_Styles_Dropdown$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Css_Properties$border(
+				A2(
+					_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+					A2(
+						_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+						_gdotdesign$elm_ui$Ui_Css_Properties$px(1),
+						_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+					theme.colors.border)),
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Css_Properties$backgroundColor(theme.colors.input.color),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(theme.borderRadius),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontFamily(theme.fontFamily),
+						_1: {
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(theme.colors.input.bw),
+							_1: {
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$zIndex(theme.zIndexes.dropdown),
+								_1: {
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$pointerEvents(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$visibility(_gdotdesign$elm_ui$Ui_Css_Properties$hidden),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$fixed),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$block),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$opacity(0),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$boxShadow(
+															{
+																ctor: '::',
+																_0: {
+																	color: 'rgba(0,0,0,0.1)',
+																	blur: _gdotdesign$elm_ui$Ui_Css_Properties$px(20),
+																	inset: false,
+																	spread: _gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																	y: _gdotdesign$elm_ui$Ui_Css_Properties$px(5),
+																	x: _gdotdesign$elm_ui$Ui_Css_Properties$zero
+																},
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Css_Properties$transform(
+																{
+																	ctor: '::',
+																	_0: A3(_gdotdesign$elm_ui$Ui_Css_Properties$translate3d, _gdotdesign$elm_ui$Ui_Css_Properties$zero, _gdotdesign$elm_ui$Ui_Css_Properties$zero, _gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$translateY(
+																			_gdotdesign$elm_ui$Ui_Css_Properties$px(10)),
+																		_1: {ctor: '[]'}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$transition(
+																	{
+																		ctor: '::',
+																		_0: {
+																			property: 'opacity',
+																			duration: _gdotdesign$elm_ui$Ui_Css_Properties$ms(150),
+																			easing: 'ease',
+																			delay: _gdotdesign$elm_ui$Ui_Css_Properties$ms(0)
+																		},
+																		_1: {
+																			ctor: '::',
+																			_0: {
+																				property: 'transform',
+																				duration: _gdotdesign$elm_ui$Ui_Css_Properties$ms(150),
+																				easing: 'ease',
+																				delay: _gdotdesign$elm_ui$Ui_Css_Properties$ms(0)
+																			},
+																			_1: {
+																				ctor: '::',
+																				_0: {
+																					property: 'visibility',
+																					duration: _gdotdesign$elm_ui$Ui_Css_Properties$ms(1),
+																					delay: _gdotdesign$elm_ui$Ui_Css_Properties$ms(150),
+																					easing: 'ease'
+																				},
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_gdotdesign$elm_ui$Ui_Css$selector,
+																		'&[open]',
+																		{
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$pointerEvents(_gdotdesign$elm_ui$Ui_Css_Properties$auto),
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$visibility(_gdotdesign$elm_ui$Ui_Css_Properties$visible),
+																				_1: {
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Css_Properties$opacity(1),
+																					_1: {
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$transform(
+																							{
+																								ctor: '::',
+																								_0: A3(_gdotdesign$elm_ui$Ui_Css_Properties$translate3d, _gdotdesign$elm_ui$Ui_Css_Properties$zero, _gdotdesign$elm_ui$Ui_Css_Properties$zero, _gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																								_1: {
+																									ctor: '::',
+																									_0: _gdotdesign$elm_ui$Ui_Css_Properties$translateY(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																									_1: {ctor: '[]'}
+																								}
+																							}),
+																						_1: {
+																							ctor: '::',
+																							_0: _gdotdesign$elm_ui$Ui_Css_Properties$transition(
+																								{
+																									ctor: '::',
+																									_0: {
+																										property: 'opacity',
+																										duration: _gdotdesign$elm_ui$Ui_Css_Properties$ms(150),
+																										easing: 'ease',
+																										delay: _gdotdesign$elm_ui$Ui_Css_Properties$ms(0)
+																									},
+																									_1: {
+																										ctor: '::',
+																										_0: {
+																											property: 'transform',
+																											duration: _gdotdesign$elm_ui$Ui_Css_Properties$ms(150),
+																											easing: 'ease',
+																											delay: _gdotdesign$elm_ui$Ui_Css_Properties$ms(0)
+																										},
+																										_1: {
+																											ctor: '::',
+																											_0: {
+																												property: 'visibility',
+																												duration: _gdotdesign$elm_ui$Ui_Css_Properties$ms(1),
+																												easing: 'ease',
+																												delay: _gdotdesign$elm_ui$Ui_Css_Properties$ms(0)
+																											},
+																											_1: {ctor: '[]'}
+																										}
+																									}
+																								}),
+																							_1: {ctor: '[]'}
+																						}
+																					}
+																				}
+																			}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_Dropdown$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_Dropdown$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

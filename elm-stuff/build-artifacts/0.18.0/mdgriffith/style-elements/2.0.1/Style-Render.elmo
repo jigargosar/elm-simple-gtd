@@ -1,0 +1,1280 @@
+var _mdgriffith$style_elements$Style_Render$inlineError = '\n.not-inlineable > * {\n    float: none !important;\n}\n.not-inlineable > .inline {\n    border: 3px solid red;\n}\n.not-inlineable > .inline::after {\n    display: block;\n    content: \'Inline Elements can only be in Text Layouts\';\n    color: black;\n    background-color: red;\n}\n';
+var _mdgriffith$style_elements$Style_Render$floatError = '\n.not-floatable > * {\n    float: none !important;\n}\n.not-floatable > .floating {\n    border: 3px solid red; !important;\n}\n.not-floatable > .floating::after {\n    display: inline-block;\n    color: black;\n    background-color: red;\n}\n.not-floatable > .floating:hover::after {\n    content: \'Floating elements can only be in text layouts\';\n}\n';
+var _mdgriffith$style_elements$Style_Render$missingError = '\n.missing-from-stylesheet {\n    border: 3px solid yellow; !important;\n}\n.missing-from-stylesheet::after {\n    border: 3px solid yellow; !important;\n    display: inline-block;\n    color: black;\n    background-color: yellow;\n    content: \'missing from stylesheet\';\n}\n\n';
+var _mdgriffith$style_elements$Style_Render$clearfix = '\n.floating:after {\n    visibility: hidden;\n    display: block;\n    clear: both;\n    height: 0px;\n}\n';
+var _mdgriffith$style_elements$Style_Render$cssProp = function (_p0) {
+	var _p1 = _p0;
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'  ',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_p1._0,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				': ',
+				A2(_elm_lang$core$Basics_ops['++'], _p1._1, ';'))));
+};
+var _mdgriffith$style_elements$Style_Render$indent = F2(
+	function (x, str) {
+		return A2(
+			_elm_lang$core$String$join,
+			'\n',
+			A2(
+				_elm_lang$core$List$filterMap,
+				function (s) {
+					return _elm_lang$core$String$isEmpty(
+						_elm_lang$core$String$trim(s)) ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							A2(_elm_lang$core$String$repeat, x, ' '),
+							s));
+				},
+				A2(_elm_lang$core$String$split, '\n', str)));
+	});
+var _mdgriffith$style_elements$Style_Render$brace = function (str) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		' {\n',
+		A2(_elm_lang$core$Basics_ops['++'], str, '\n}'));
+};
+var _mdgriffith$style_elements$Style_Render$cssClass = F3(
+	function (x, name, props) {
+		return ((_elm_lang$core$Native_Utils.cmp(x, 0) > 0) ? _mdgriffith$style_elements$Style_Render$indent(x) : _elm_lang$core$Basics$identity)(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				name,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_mdgriffith$style_elements$Style_Render$brace(
+						A2(
+							_elm_lang$core$String$join,
+							'\n',
+							A2(_elm_lang$core$List$map, _mdgriffith$style_elements$Style_Render$cssProp, props))),
+					'\n')));
+	});
+var _mdgriffith$style_elements$Style_Render$hash = function (value) {
+	return _elm_lang$core$String$toLower(
+		_elm_lang$core$String$fromList(
+			A2(
+				_elm_lang$core$List$map,
+				function (_p2) {
+					return _elm_lang$core$Char$fromCode(
+						A2(
+							F2(
+								function (x, y) {
+									return x + y;
+								}),
+							65,
+							A2(
+								_elm_lang$core$Result$withDefault,
+								0,
+								_elm_lang$core$String$toInt(
+									_elm_lang$core$String$fromChar(_p2)))));
+				},
+				_elm_lang$core$String$toList(
+					_elm_lang$core$Basics$toString(
+						A2(_Skinney$murmur3$Murmur3$hashString, 8675309, value))))));
+};
+var _mdgriffith$style_elements$Style_Render$formatName = function ($class) {
+	return _elm_community$string_extra$String_Extra$dasherize(
+		_elm_community$string_extra$String_Extra$decapitalize(
+			_elm_community$string_extra$String_Extra$unquote(
+				_elm_lang$core$Basics$toString($class))));
+};
+var _mdgriffith$style_elements$Style_Render$renderLength = function (l) {
+	var _p3 = l;
+	switch (_p3.ctor) {
+		case 'Px':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(_p3._0),
+				'px');
+		case 'Percent':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(_p3._0),
+				'%');
+		default:
+			return 'auto';
+	}
+};
+var _mdgriffith$style_elements$Style_Render$colorToString = function (color) {
+	var _p4 = _elm_lang$core$Color$toRgb(color);
+	var red = _p4.red;
+	var green = _p4.green;
+	var blue = _p4.blue;
+	var alpha = _p4.alpha;
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'rgba(',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(red),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				',',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(green),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						',',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(blue),
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								',',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_elm_lang$core$Basics$toString(alpha),
+									')'))))))));
+};
+var _mdgriffith$style_elements$Style_Render$render4tuplePx = function (_p5) {
+	var _p6 = _p5;
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(_p6._0),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'px ',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(_p6._1),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'px ',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(_p6._2),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'px ',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(_p6._3),
+								'px')))))));
+};
+var _mdgriffith$style_elements$Style_Render$shadowValue = function (_p7) {
+	var _p8 = _p7;
+	var _p9 = _p8._0;
+	return A2(
+		_elm_lang$core$String$join,
+		' ',
+		{
+			ctor: '::',
+			_0: _elm_lang$core$Native_Utils.eq(_p9.kind, 'inset') ? 'inset' : '',
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(
+						_elm_lang$core$Tuple$first(_p9.offset)),
+					'px'),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(
+							_elm_lang$core$Tuple$second(_p9.offset)),
+						'px'),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(_p9.blur),
+							'px'),
+						_1: {
+							ctor: '::',
+							_0: (_elm_lang$core$Native_Utils.eq(_p9.kind, 'text') || _elm_lang$core$Native_Utils.eq(_p9.kind, 'drop')) ? '' : A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(_p9.size),
+								'px'),
+							_1: {
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Style_Render$colorToString(_p9.color),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _mdgriffith$style_elements$Style_Render$filterToString = function (filter) {
+	var _p10 = filter;
+	switch (_p10.ctor) {
+		case 'FilterUrl':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'url(',
+				A2(_elm_lang$core$Basics_ops['++'], _p10._0, ')'));
+		case 'Blur':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'blur(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p10._0),
+					'px)'));
+		case 'Brightness':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'brightness(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p10._0),
+					'%)'));
+		case 'Contrast':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'contrast(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p10._0),
+					'%)'));
+		case 'Grayscale':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'grayscale(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p10._0),
+					'%)'));
+		case 'HueRotate':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'hueRotate(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p10._0),
+					'deg)'));
+		case 'Invert':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'invert(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p10._0),
+					'%)'));
+		case 'Opacity':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'opacity(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p10._0),
+					'%)'));
+		case 'Saturate':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'saturate(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p10._0),
+					'%)'));
+		case 'Sepia':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'sepia(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p10._0),
+					'%)'));
+		default:
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'drop-shadow(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_mdgriffith$style_elements$Style_Render$shadowValue(_p10._0),
+					')'));
+	}
+};
+var _mdgriffith$style_elements$Style_Render$transformToString = function (transform) {
+	var _p11 = transform;
+	switch (_p11.ctor) {
+		case 'Translate':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'translate3d(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p11._0),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'px, ',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(_p11._1),
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'px, ',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_elm_lang$core$Basics$toString(_p11._2),
+									'px)'))))));
+		case 'Rotate':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'rotateX(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p11._0),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'rad) rotateY(',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(_p11._1),
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'rad) rotateZ(',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_elm_lang$core$Basics$toString(_p11._2),
+									'rad)'))))));
+		default:
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				'scale3d(',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p11._0),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						', ',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(_p11._1),
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								', ',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_elm_lang$core$Basics$toString(_p11._2),
+									')'))))));
+	}
+};
+var _mdgriffith$style_elements$Style_Render$renderIntermediates = F2(
+	function (className, intermediates) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (point, _p12) {
+					var _p13 = _p12;
+					var _p18 = _p13._0;
+					var _p17 = _p13._2;
+					var _p16 = _p13._1;
+					var _p14 = point;
+					switch (_p14.ctor) {
+						case 'Single':
+							return {
+								ctor: '_Tuple3',
+								_0: _p18,
+								_1: {ctor: '::', _0: _p14._0, _1: _p16},
+								_2: _p17
+							};
+						case 'Multiple':
+							return {
+								ctor: '_Tuple3',
+								_0: _p18,
+								_1: A2(_elm_lang$core$Basics_ops['++'], _p14._0, _p16),
+								_2: _p17
+							};
+						case 'Tagged':
+							return {
+								ctor: '_Tuple3',
+								_0: {ctor: '::', _0: _p14._0, _1: _p18},
+								_1: A2(_elm_lang$core$Basics_ops['++'], _p14._1, _p16),
+								_2: _p17
+							};
+						case 'AlmostStyle':
+							return {
+								ctor: '_Tuple3',
+								_0: _p18,
+								_1: _p16,
+								_2: {
+									ctor: '::',
+									_0: A3(
+										_mdgriffith$style_elements$Style_Render$cssClass,
+										0,
+										A2(_elm_lang$core$Basics_ops['++'], className, _p14._0),
+										_p14._1),
+									_1: _p17
+								}
+							};
+						case 'Block':
+							return {
+								ctor: '_Tuple3',
+								_0: _p18,
+								_1: A2(_elm_lang$core$Basics_ops['++'], _p14._1, _p16),
+								_2: {ctor: '::', _0: _p14._0, _1: _p17}
+							};
+						case 'MediaIntermediate':
+							return {
+								ctor: '_Tuple3',
+								_0: _p18,
+								_1: _p16,
+								_2: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$core$Basics_ops['++'],
+										_p14._0,
+										_mdgriffith$style_elements$Style_Render$brace(
+											A3(_mdgriffith$style_elements$Style_Render$cssClass, 2, className, _p14._1))),
+									_1: _p17
+								}
+							};
+						case 'SubElementIntermediate':
+							return {
+								ctor: '_Tuple3',
+								_0: _p18,
+								_1: _p16,
+								_2: {
+									ctor: '::',
+									_0: A3(
+										_mdgriffith$style_elements$Style_Render$cssClass,
+										0,
+										A2(_elm_lang$core$Basics_ops['++'], className, _p14._0),
+										_p14._1),
+									_1: _p17
+								}
+							};
+						default:
+							var _p15 = A2(_mdgriffith$style_elements$Style_Render$renderIntermediates, className, _p14._0);
+							var childTags = _p15._0;
+							var childStyles = _p15._1;
+							var childSubstyles = _p15._2;
+							return {
+								ctor: '_Tuple3',
+								_0: A2(_elm_lang$core$Basics_ops['++'], _p18, childTags),
+								_1: A2(_elm_lang$core$Basics_ops['++'], _p16, childStyles),
+								_2: A2(_elm_lang$core$Basics_ops['++'], _p17, childSubstyles)
+							};
+					}
+				}),
+			{
+				ctor: '_Tuple3',
+				_0: {ctor: '[]'},
+				_1: {ctor: '[]'},
+				_2: {ctor: '[]'}
+			},
+			intermediates);
+	});
+var _mdgriffith$style_elements$Style_Render$find = F2(
+	function (cls, models) {
+		return _elm_lang$core$List$head(
+			A2(
+				_elm_lang$core$List$filterMap,
+				function (_p19) {
+					var _p20 = _p19;
+					var _p22 = _p20._0;
+					var _p21 = _p22.selector;
+					if (_p21.ctor === 'Class') {
+						return _elm_lang$core$Native_Utils.eq(cls, _p21._0) ? _elm_lang$core$Maybe$Just(
+							_mdgriffith$style_elements$Style_Model$Model(_p22)) : _elm_lang$core$Maybe$Nothing;
+					} else {
+						return _elm_lang$core$Maybe$Nothing;
+					}
+				},
+				models));
+	});
+var _mdgriffith$style_elements$Style_Render_ops = _mdgriffith$style_elements$Style_Render_ops || {};
+_mdgriffith$style_elements$Style_Render_ops['=>'] = F2(
+	function (v0, v1) {
+		return {ctor: '_Tuple2', _0: v0, _1: v1};
+	});
+var _mdgriffith$style_elements$Style_Render$renderTransition = function (_p23) {
+	var _p24 = _p23;
+	var _p25 = _p24.easing;
+	return {
+		ctor: '::',
+		_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'transition-property', _p24.property),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_mdgriffith$style_elements$Style_Render_ops['=>'],
+				'transition-duration',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(_p24.duration),
+					'ms')),
+			_1: {
+				ctor: '::',
+				_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], '-webkit-transition-timing-function', _p25),
+				_1: {
+					ctor: '::',
+					_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'transition-timing-function', _p25),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_mdgriffith$style_elements$Style_Render_ops['=>'],
+							'transition-delay',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(_p24.delay),
+								'ms')),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	};
+};
+var _mdgriffith$style_elements$Style_Render$renderVisibility = function (vis) {
+	var _p26 = vis;
+	if (_p26.ctor === 'Hidden') {
+		return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'display', 'none');
+	} else {
+		return A2(
+			_mdgriffith$style_elements$Style_Render_ops['=>'],
+			'opacity',
+			_elm_lang$core$Basics$toString(1.0 - _p26._0));
+	}
+};
+var _mdgriffith$style_elements$Style_Render$renderFloating = function (floating) {
+	var _p27 = floating;
+	switch (_p27.ctor) {
+		case 'FloatLeft':
+			return {
+				ctor: '::',
+				_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'float', 'left'),
+				_1: {
+					ctor: '::',
+					_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'margin-left', '0px !important'),
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'FloatRight':
+			return {
+				ctor: '::',
+				_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'float', 'right'),
+				_1: {
+					ctor: '::',
+					_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'margin-right', '0px !important'),
+					_1: {ctor: '[]'}
+				}
+			};
+		case 'FloatTopLeft':
+			return {
+				ctor: '::',
+				_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'float', 'left'),
+				_1: {
+					ctor: '::',
+					_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'margin-left', '0px !important'),
+					_1: {
+						ctor: '::',
+						_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'margin-top', '0px !important'),
+						_1: {ctor: '[]'}
+					}
+				}
+			};
+		default:
+			return {
+				ctor: '::',
+				_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'float', 'right'),
+				_1: {
+					ctor: '::',
+					_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'margin-right', '0px !important'),
+					_1: {
+						ctor: '::',
+						_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'margin-top', '0px !important'),
+						_1: {ctor: '[]'}
+					}
+				}
+			};
+	}
+};
+var _mdgriffith$style_elements$Style_Render$renderBackgroundImage = function (image) {
+	return {
+		ctor: '::',
+		_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'background-image', image.src),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_mdgriffith$style_elements$Style_Render_ops['=>'],
+				'background-repeat',
+				function () {
+					var _p28 = image.repeat;
+					switch (_p28.ctor) {
+						case 'RepeatX':
+							return 'repeat-x';
+						case 'RepeatY':
+							return 'repeat-y';
+						case 'Repeat':
+							return 'repeat';
+						case 'Space':
+							return 'space';
+						case 'Round':
+							return 'round';
+						default:
+							return 'no-repeat';
+					}
+				}()),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_mdgriffith$style_elements$Style_Render_ops['=>'],
+					'background-position',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(
+							_elm_lang$core$Tuple$first(image.position)),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'px ',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(
+									_elm_lang$core$Tuple$second(image.position)),
+								'px')))),
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+};
+var _mdgriffith$style_elements$Style_Render$renderTransforms = function (transforms) {
+	return A2(
+		_mdgriffith$style_elements$Style_Render_ops['=>'],
+		'transform',
+		A2(
+			_elm_lang$core$String$join,
+			' ',
+			A2(_elm_lang$core$List$map, _mdgriffith$style_elements$Style_Render$transformToString, transforms)));
+};
+var _mdgriffith$style_elements$Style_Render$renderFilters = function (filters) {
+	return A2(
+		_mdgriffith$style_elements$Style_Render_ops['=>'],
+		'filter',
+		A2(
+			_elm_lang$core$String$join,
+			' ',
+			A2(_elm_lang$core$List$map, _mdgriffith$style_elements$Style_Render$filterToString, filters)));
+};
+var _mdgriffith$style_elements$Style_Render$renderShadow = function (shadows) {
+	var _p29 = A2(
+		_elm_lang$core$List$partition,
+		function (_p30) {
+			var _p31 = _p30;
+			return _elm_lang$core$Native_Utils.eq(_p31._0.kind, 'text');
+		},
+		shadows);
+	var text = _p29._0;
+	var box = _p29._1;
+	var renderedBox = A2(
+		_elm_lang$core$String$join,
+		', ',
+		A2(_elm_lang$core$List$map, _mdgriffith$style_elements$Style_Render$shadowValue, box));
+	var renderedText = A2(
+		_elm_lang$core$String$join,
+		', ',
+		A2(_elm_lang$core$List$map, _mdgriffith$style_elements$Style_Render$shadowValue, text));
+	return A2(
+		_elm_lang$core$List$filterMap,
+		_elm_lang$core$Basics$identity,
+		{
+			ctor: '::',
+			_0: _elm_lang$core$Native_Utils.eq(renderedBox, '') ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+				A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'box-shadow', renderedBox)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$core$Native_Utils.eq(renderedText, '') ? _elm_lang$core$Maybe$Nothing : _elm_lang$core$Maybe$Just(
+					A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'text-shadow', renderedText)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _mdgriffith$style_elements$Style_Render$renderColor = F2(
+	function (name, color) {
+		return A2(
+			_mdgriffith$style_elements$Style_Render_ops['=>'],
+			name,
+			_mdgriffith$style_elements$Style_Render$colorToString(color));
+	});
+var _mdgriffith$style_elements$Style_Render$renderPositionBy = function (relativeTo) {
+	var _p32 = relativeTo;
+	switch (_p32.ctor) {
+		case 'Screen':
+			return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'position', 'fixed');
+		case 'CurrentPosition':
+			return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'position', 'relative');
+		default:
+			return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'position', 'absolute');
+	}
+};
+var _mdgriffith$style_elements$Style_Render$renderPosition = F2(
+	function (anchor, position) {
+		var _p33 = position;
+		var x = _p33._0;
+		var y = _p33._1;
+		var _p34 = anchor;
+		if (_p34._0.ctor === 'AnchorTop') {
+			if (_p34._1.ctor === 'AnchorLeft') {
+				return {
+					ctor: '::',
+					_0: A2(
+						_mdgriffith$style_elements$Style_Render_ops['=>'],
+						'top',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(y),
+							'px')),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_mdgriffith$style_elements$Style_Render_ops['=>'],
+							'left',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(x),
+								'px')),
+						_1: {ctor: '[]'}
+					}
+				};
+			} else {
+				return {
+					ctor: '::',
+					_0: A2(
+						_mdgriffith$style_elements$Style_Render_ops['=>'],
+						'top',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(y),
+							'px')),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_mdgriffith$style_elements$Style_Render_ops['=>'],
+							'right',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(-1 * x),
+								'px')),
+						_1: {ctor: '[]'}
+					}
+				};
+			}
+		} else {
+			if (_p34._1.ctor === 'AnchorLeft') {
+				return {
+					ctor: '::',
+					_0: A2(
+						_mdgriffith$style_elements$Style_Render_ops['=>'],
+						'bottom',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(-1 * y),
+							'px')),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_mdgriffith$style_elements$Style_Render_ops['=>'],
+							'left',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(x),
+								'px')),
+						_1: {ctor: '[]'}
+					}
+				};
+			} else {
+				return {
+					ctor: '::',
+					_0: A2(
+						_mdgriffith$style_elements$Style_Render_ops['=>'],
+						'bottom',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(-1 * y),
+							'px')),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_mdgriffith$style_elements$Style_Render_ops['=>'],
+							'right',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(-1 * x),
+								'px')),
+						_1: {ctor: '[]'}
+					}
+				};
+			}
+		}
+	});
+var _mdgriffith$style_elements$Style_Render$renderLayout = function (layout) {
+	var _p35 = layout;
+	switch (_p35.ctor) {
+		case 'TextLayout':
+			return {
+				ctor: '_Tuple2',
+				_0: {
+					ctor: '::',
+					_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'display', 'block'),
+					_1: {ctor: '[]'}
+				},
+				_1: 'pos'
+			};
+		case 'InlineLayout':
+			return {
+				ctor: '_Tuple2',
+				_0: {
+					ctor: '::',
+					_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'display', 'inline-block'),
+					_1: {ctor: '[]'}
+				},
+				_1: 'inline'
+			};
+		case 'TableLayout':
+			return {
+				ctor: '_Tuple2',
+				_0: {
+					ctor: '::',
+					_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'display', 'table'),
+					_1: {
+						ctor: '::',
+						_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'border-collapse', 'collapse'),
+						_1: {ctor: '[]'}
+					}
+				},
+				_1: 'pos not-floatable not-inlineable'
+			};
+		default:
+			var _p47 = _p35._0._0;
+			return {
+				ctor: '_Tuple2',
+				_0: {
+					ctor: '::',
+					_0: A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'display', 'flex'),
+					_1: {
+						ctor: '::',
+						_0: function () {
+							var _p36 = _p47.go;
+							switch (_p36.ctor) {
+								case 'Right':
+									return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'flex-direction', 'row');
+								case 'Left':
+									return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'flex-direction', 'row-reverse');
+								case 'Down':
+									return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'flex-direction', 'column');
+								default:
+									return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'flex-direction', 'column-reverse');
+							}
+						}(),
+						_1: {
+							ctor: '::',
+							_0: _p47.wrap ? A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'flex-wrap', 'wrap') : A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'flex-wrap', 'nowrap'),
+							_1: {
+								ctor: '::',
+								_0: function () {
+									var _p37 = _p47.go;
+									switch (_p37.ctor) {
+										case 'Right':
+											var _p38 = _p47.horizontal;
+											switch (_p38.ctor) {
+												case 'AlignLeft':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'flex-start');
+												case 'AlignRight':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'flex-end');
+												case 'AlignCenter':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'center');
+												case 'Justify':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'space-between');
+												default:
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'space-between');
+											}
+										case 'Left':
+											var _p39 = _p47.horizontal;
+											switch (_p39.ctor) {
+												case 'AlignLeft':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'flex-end');
+												case 'AlignRight':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'flex-start');
+												case 'AlignCenter':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'center');
+												case 'Justify':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'space-between');
+												default:
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'space-between');
+											}
+										case 'Down':
+											var _p40 = _p47.horizontal;
+											switch (_p40.ctor) {
+												case 'AlignLeft':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'flex-start');
+												case 'AlignRight':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'flex-end');
+												case 'AlignCenter':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'center');
+												case 'Justify':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'stretch');
+												default:
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'stretch');
+											}
+										default:
+											var _p41 = _p47.horizontal;
+											switch (_p41.ctor) {
+												case 'AlignLeft':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'flex-start');
+												case 'AlignRight':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'flex-end');
+												case 'AlignCenter':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'center');
+												case 'Justify':
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'stretch');
+												default:
+													return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'stretch');
+											}
+									}
+								}(),
+								_1: {
+									ctor: '::',
+									_0: function () {
+										var _p42 = _p47.go;
+										switch (_p42.ctor) {
+											case 'Right':
+												var _p43 = _p47.vertical;
+												switch (_p43.ctor) {
+													case 'AlignTop':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'flex-start');
+													case 'AlignBottom':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'flex-end');
+													case 'VCenter':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'center');
+													default:
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'stretch');
+												}
+											case 'Left':
+												var _p44 = _p47.vertical;
+												switch (_p44.ctor) {
+													case 'AlignTop':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'flex-start');
+													case 'AlignBottom':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'flex-end');
+													case 'VCenter':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'center');
+													default:
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'align-items', 'stretch');
+												}
+											case 'Down':
+												var _p45 = _p47.vertical;
+												switch (_p45.ctor) {
+													case 'AlignTop':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'flex-start');
+													case 'AlignBottom':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'flex-end');
+													case 'VCenter':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'center');
+													default:
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'space-between');
+												}
+											default:
+												var _p46 = _p47.vertical;
+												switch (_p46.ctor) {
+													case 'AlignTop':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'flex-end');
+													case 'AlignBottom':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'flex-start');
+													case 'VCenter':
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'center');
+													default:
+														return A2(_mdgriffith$style_elements$Style_Render_ops['=>'], 'justify-content', 'space-between');
+												}
+										}
+									}(),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				},
+				_1: 'pos not-floatable not-inlineable'
+			};
+	}
+};
+var _mdgriffith$style_elements$Style_Render$Intermediates = function (a) {
+	return {ctor: 'Intermediates', _0: a};
+};
+var _mdgriffith$style_elements$Style_Render$SubElementIntermediate = F2(
+	function (a, b) {
+		return {ctor: 'SubElementIntermediate', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Render$MediaIntermediate = F2(
+	function (a, b) {
+		return {ctor: 'MediaIntermediate', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Render$Block = F2(
+	function (a, b) {
+		return {ctor: 'Block', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Render$AlmostStyle = F2(
+	function (a, b) {
+		return {ctor: 'AlmostStyle', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Render$Tagged = F2(
+	function (a, b) {
+		return {ctor: 'Tagged', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Render$Multiple = function (a) {
+	return {ctor: 'Multiple', _0: a};
+};
+var _mdgriffith$style_elements$Style_Render$Single = function (a) {
+	return {ctor: 'Single', _0: a};
+};
+var _mdgriffith$style_elements$Style_Render$renderProperty = function (prop) {
+	var _p48 = prop;
+	switch (_p48.ctor) {
+		case 'Property':
+			return _mdgriffith$style_elements$Style_Render$Single(
+				{ctor: '_Tuple2', _0: _p48._0, _1: _p48._1});
+		case 'Mix':
+			return _mdgriffith$style_elements$Style_Render$Intermediates(
+				A2(_elm_lang$core$List$map, _mdgriffith$style_elements$Style_Render$renderProperty, _p48._0));
+		case 'Box':
+			return _mdgriffith$style_elements$Style_Render$Single(
+				{
+					ctor: '_Tuple2',
+					_0: _p48._0,
+					_1: _mdgriffith$style_elements$Style_Render$render4tuplePx(_p48._1)
+				});
+		case 'Len':
+			return _mdgriffith$style_elements$Style_Render$Single(
+				{
+					ctor: '_Tuple2',
+					_0: _p48._0,
+					_1: _mdgriffith$style_elements$Style_Render$renderLength(_p48._1)
+				});
+		case 'Filters':
+			return _mdgriffith$style_elements$Style_Render$Single(
+				_mdgriffith$style_elements$Style_Render$renderFilters(_p48._0));
+		case 'Transforms':
+			return _mdgriffith$style_elements$Style_Render$Single(
+				_mdgriffith$style_elements$Style_Render$renderTransforms(_p48._0));
+		case 'TransitionProperty':
+			return _mdgriffith$style_elements$Style_Render$Multiple(
+				_mdgriffith$style_elements$Style_Render$renderTransition(_p48._0));
+		case 'Shadows':
+			return _mdgriffith$style_elements$Style_Render$Multiple(
+				_mdgriffith$style_elements$Style_Render$renderShadow(_p48._0));
+		case 'BackgroundImageProp':
+			return _mdgriffith$style_elements$Style_Render$Multiple(
+				_mdgriffith$style_elements$Style_Render$renderBackgroundImage(_p48._0));
+		case 'LayoutProp':
+			var _p49 = _mdgriffith$style_elements$Style_Render$renderLayout(_p48._0);
+			var style = _p49._0;
+			var tag = _p49._1;
+			return A2(_mdgriffith$style_elements$Style_Render$Tagged, tag, style);
+		case 'Spacing':
+			return A2(
+				_mdgriffith$style_elements$Style_Render$AlmostStyle,
+				' > .pos',
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'margin',
+						_1: _mdgriffith$style_elements$Style_Render$render4tuplePx(_p48._0)
+					},
+					_1: {ctor: '[]'}
+				});
+		case 'AnimationProp':
+			var _p50 = _mdgriffith$style_elements$Style_Render$renderAnimation(_p48._0);
+			var style = _p50._0;
+			var keyframes = _p50._1;
+			return A2(
+				_mdgriffith$style_elements$Style_Render$Block,
+				keyframes,
+				{
+					ctor: '::',
+					_0: style,
+					_1: {ctor: '[]'}
+				});
+		case 'VisibilityProp':
+			return _mdgriffith$style_elements$Style_Render$Single(
+				_mdgriffith$style_elements$Style_Render$renderVisibility(_p48._0));
+		case 'FloatProp':
+			return A2(
+				_mdgriffith$style_elements$Style_Render$Tagged,
+				'floating',
+				_mdgriffith$style_elements$Style_Render$renderFloating(_p48._0));
+		case 'RelProp':
+			return _mdgriffith$style_elements$Style_Render$Single(
+				_mdgriffith$style_elements$Style_Render$renderPositionBy(_p48._0));
+		case 'PositionProp':
+			return _mdgriffith$style_elements$Style_Render$Multiple(
+				A2(
+					_mdgriffith$style_elements$Style_Render$renderPosition,
+					_p48._0,
+					{ctor: '_Tuple2', _0: _p48._1, _1: _p48._2}));
+		case 'ColorProp':
+			return _mdgriffith$style_elements$Style_Render$Single(
+				A2(_mdgriffith$style_elements$Style_Render$renderColor, _p48._0, _p48._1));
+		case 'MediaQuery':
+			var intermediates = _mdgriffith$style_elements$Style_Render$renderProperties(_p48._1);
+			var _p51 = A2(_mdgriffith$style_elements$Style_Render$renderIntermediates, 'media-query', intermediates);
+			var style = _p51._1;
+			return A2(
+				_mdgriffith$style_elements$Style_Render$MediaIntermediate,
+				A2(_elm_lang$core$Basics_ops['++'], '@media ', _p48._0),
+				style);
+		default:
+			var _p53 = _p48._0;
+			var intermediates = _mdgriffith$style_elements$Style_Render$renderProperties(_p48._1);
+			var _p52 = A2(_mdgriffith$style_elements$Style_Render$renderIntermediates, _p53, intermediates);
+			var style = _p52._1;
+			return A2(_mdgriffith$style_elements$Style_Render$SubElementIntermediate, _p53, style);
+	}
+};
+var _mdgriffith$style_elements$Style_Render$renderAnimation = function (_p54) {
+	var _p55 = _p54;
+	var _p61 = _p55._0.repeat;
+	var _p56 = function () {
+		var _p57 = _elm_lang$core$List$unzip(
+			A2(
+				_elm_lang$core$List$map,
+				function (_p58) {
+					var _p59 = _p58;
+					var intermediates = _mdgriffith$style_elements$Style_Render$renderProperties(_p59._1);
+					var name = _mdgriffith$style_elements$Style_Render$hash(
+						_elm_lang$core$Basics$toString(intermediates));
+					var _p60 = A2(_mdgriffith$style_elements$Style_Render$renderIntermediates, 'animation', intermediates);
+					var style = _p60._1;
+					var block = A3(
+						_mdgriffith$style_elements$Style_Render$cssClass,
+						2,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(_p59._0),
+							'%'),
+						style);
+					return {
+						ctor: '_Tuple2',
+						_0: name,
+						_1: A2(_elm_lang$core$Basics_ops['++'], block, '\n')
+					};
+				},
+				_p55._0.steps));
+		var allNames = _p57._0;
+		var renderedSteps = _p57._1;
+		var animationName = A2(
+			_elm_lang$core$Basics_ops['++'],
+			'animation-',
+			_mdgriffith$style_elements$Style_Render$hash(
+				_elm_lang$core$String$concat(allNames)));
+		var iterations = _elm_lang$core$Basics$isInfinite(_p61) ? 'infinite' : _elm_lang$core$Basics$toString(_p61);
+		var renderedDuration = A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(_p55._0.duration),
+			'ms');
+		return {
+			ctor: '_Tuple2',
+			_0: A2(
+				_mdgriffith$style_elements$Style_Render_ops['=>'],
+				'animation',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					animationName,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						' ',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							renderedDuration,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								' ',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_p55._0.easing,
+									A2(_elm_lang$core$Basics_ops['++'], ' ', iterations))))))),
+			_1: A2(
+				_elm_lang$core$Basics_ops['++'],
+				'@keyframes ',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					animationName,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						' {\n',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							A2(_elm_lang$core$String$join, '', renderedSteps),
+							'}'))))
+		};
+	}();
+	var renderedStyle = _p56._0;
+	var renderedFrames = _p56._1;
+	return {ctor: '_Tuple2', _0: renderedStyle, _1: renderedFrames};
+};
+var _mdgriffith$style_elements$Style_Render$renderProperties = function (props) {
+	return A2(
+		_elm_lang$core$List$map,
+		_mdgriffith$style_elements$Style_Render$renderProperty,
+		_elm_lang$core$List$reverse(
+			A2(
+				_elm_community$list_extra$List_Extra$uniqueBy,
+				_mdgriffith$style_elements$Style_Model$propertyName,
+				_elm_lang$core$List$reverse(props))));
+};
+var _mdgriffith$style_elements$Style_Render$renderInline = function (_p62) {
+	var _p63 = _p62;
+	var intermediates = _mdgriffith$style_elements$Style_Render$renderProperties(_p63._0.properties);
+	var _p64 = A2(_mdgriffith$style_elements$Style_Render$renderIntermediates, 'rendered-inline', intermediates);
+	var tags = _p64._0;
+	var style = _p64._1;
+	var blocks = _p64._2;
+	return style;
+};
+var _mdgriffith$style_elements$Style_Render$render = function (_p65) {
+	var _p66 = _p65;
+	var _p70 = _p66._0;
+	var intermediates = _mdgriffith$style_elements$Style_Render$renderProperties(_p70.properties);
+	var hashedName = _mdgriffith$style_elements$Style_Render$hash(
+		_elm_lang$core$Basics$toString(intermediates));
+	var _p67 = function () {
+		var _p68 = _p70.selector;
+		switch (_p68.ctor) {
+			case 'AutoClass':
+				return {
+					ctor: '_Tuple2',
+					_0: hashedName,
+					_1: A2(_elm_lang$core$Basics_ops['++'], '.', hashedName)
+				};
+			case 'Exactly':
+				return {ctor: '_Tuple2', _0: '', _1: _p68._0};
+			default:
+				var formatted = A2(
+					_elm_lang$core$Basics_ops['++'],
+					_mdgriffith$style_elements$Style_Render$formatName(_p68._0),
+					A2(_elm_lang$core$Basics_ops['++'], '-', hashedName));
+				return {
+					ctor: '_Tuple2',
+					_0: formatted,
+					_1: A2(_elm_lang$core$Basics_ops['++'], '.', formatted)
+				};
+		}
+	}();
+	var name = _p67._0;
+	var selector = _p67._1;
+	var _p69 = A2(_mdgriffith$style_elements$Style_Render$renderIntermediates, selector, intermediates);
+	var tags = _p69._0;
+	var style = _p69._1;
+	var blocks = _p69._2;
+	return {
+		ctor: '_Tuple2',
+		_0: A2(
+			_elm_lang$core$String$join,
+			' ',
+			{ctor: '::', _0: name, _1: tags}),
+		_1: A2(
+			_elm_lang$core$Basics_ops['++'],
+			A3(_mdgriffith$style_elements$Style_Render$cssClass, 0, selector, style),
+			A2(_elm_lang$core$String$join, '\n', blocks))
+	};
+};
+var _mdgriffith$style_elements$Style_Render$getName = function (model) {
+	return _elm_lang$core$Tuple$first(
+		_mdgriffith$style_elements$Style_Render$render(model));
+};

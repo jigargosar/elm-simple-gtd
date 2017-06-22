@@ -1,0 +1,366 @@
+var _gdotdesign$elm_ui$Ui_Styles_NotificationCenter_ops = _gdotdesign$elm_ui$Ui_Styles_NotificationCenter_ops || {};
+_gdotdesign$elm_ui$Ui_Styles_NotificationCenter_ops['=>'] = F2(
+	function (v0, v1) {
+		return {ctor: '_Tuple2', _0: v0, _1: v1};
+	});
+var _gdotdesign$elm_ui$Ui_Styles_NotificationCenter$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$defaults,
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Ui_Css$keyframes,
+					'ui-notification-show',
+					{
+						ctor: '::',
+						_0: A2(
+							_gdotdesign$elm_ui$Ui_Styles_NotificationCenter_ops['=>'],
+							'0%',
+							{
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$transform(
+									{
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$translateX(
+											_gdotdesign$elm_ui$Ui_Css_Properties$pct(100)),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$translateX(
+												_gdotdesign$elm_ui$Ui_Css_Properties$px(50)),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$opacity(0),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Ui_Styles_NotificationCenter_ops['=>'],
+								'100%',
+								{
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$transform(
+										{
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$translateX(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$opacity(1),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gdotdesign$elm_ui$Ui_Css$keyframes,
+						'ui-notification-hide',
+						{
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Ui_Styles_NotificationCenter_ops['=>'],
+								'0%',
+								{
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$transform(
+										{
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$translateX(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginBottom(
+											_gdotdesign$elm_ui$Ui_Css_Properties$px(10)),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$maxHeight(
+												_gdotdesign$elm_ui$Ui_Css_Properties$px(100)),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$opacity(1),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gdotdesign$elm_ui$Ui_Styles_NotificationCenter_ops['=>'],
+									'50%',
+									{
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$transform(
+											{
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$translateX(
+													_gdotdesign$elm_ui$Ui_Css_Properties$pct(100)),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$translateX(
+														_gdotdesign$elm_ui$Ui_Css_Properties$px(50)),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginBottom(
+												_gdotdesign$elm_ui$Ui_Css_Properties$px(10)),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$maxHeight(
+													_gdotdesign$elm_ui$Ui_Css_Properties$px(100)),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$opacity(0),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_gdotdesign$elm_ui$Ui_Styles_NotificationCenter_ops['=>'],
+										'100%',
+										{
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$transform(
+												{
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$translateX(
+														_gdotdesign$elm_ui$Ui_Css_Properties$pct(100)),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$translateX(
+															_gdotdesign$elm_ui$Ui_Css_Properties$px(50)),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginBottom(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$maxHeight(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$opacity(0),
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$transform(
+							{
+								ctor: '::',
+								_0: A3(_gdotdesign$elm_ui$Ui_Css_Properties$translate3d, _gdotdesign$elm_ui$Ui_Css_Properties$zero, _gdotdesign$elm_ui$Ui_Css_Properties$zero, _gdotdesign$elm_ui$Ui_Css_Properties$zero),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$zIndex(theme.zIndexes.notifications),
+							_1: {
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$fixed),
+								_1: {
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$right(
+										_gdotdesign$elm_ui$Ui_Css_Properties$px(20)),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$top(
+											_gdotdesign$elm_ui$Ui_Css_Properties$px(20)),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$flexDirection(_gdotdesign$elm_ui$Ui_Css_Properties$column),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$alignItems(_gdotdesign$elm_ui$Ui_Css_Properties$flexEnd),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$flex),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_gdotdesign$elm_ui$Ui_Css$selector,
+															'ui-notification',
+															{
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontFamily(theme.fontFamily),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginBottom(
+																		_gdotdesign$elm_ui$Ui_Css_Properties$px(10)),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$maxHeight(
+																			_gdotdesign$elm_ui$Ui_Css_Properties$px(100)),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$overflow(_gdotdesign$elm_ui$Ui_Css_Properties$visible),
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$block),
+																				_1: {
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Css_Properties$boxShadow(
+																						{
+																							ctor: '::',
+																							_0: {
+																								color: 'rgba(0, 0, 0, 0.5)',
+																								blur: _gdotdesign$elm_ui$Ui_Css_Properties$px(10),
+																								inset: false,
+																								spread: _gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																								x: _gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																								y: _gdotdesign$elm_ui$Ui_Css_Properties$zero
+																							},
+																							_1: {ctor: '[]'}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_gdotdesign$elm_ui$Ui_Css$selector,
+																							'&:hover',
+																							{
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$cursor(_gdotdesign$elm_ui$Ui_Css_Properties$pointer),
+																								_1: {
+																									ctor: '::',
+																									_0: A2(
+																										_gdotdesign$elm_ui$Ui_Css$selector,
+																										'ui-notification-body',
+																										{
+																											ctor: '::',
+																											_0: _gdotdesign$elm_ui$Ui_Css_Properties$background('rgba(34, 34, 34, 0.8)'),
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {ctor: '[]'}
+																								}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_gdotdesign$elm_ui$Ui_Css$selector,
+																'ui-notification-body',
+																{
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$background('rgba(17, 17, 17, 0.8)'),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(theme.borderRadius),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$padding(
+																				A2(
+																					_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																					_gdotdesign$elm_ui$Ui_Css_Properties$px(14),
+																					_gdotdesign$elm_ui$Ui_Css_Properties$px(24))),
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontWeight(_gdotdesign$elm_ui$Ui_Css_Properties$bold),
+																				_1: {
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$block),
+																					_1: {
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$color('#FFF'),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_gdotdesign$elm_ui$Ui_Css$selector,
+																	'[ui-notification-show]',
+																	{
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$animation(
+																			{
+																				ctor: '::',
+																				_0: {
+																					easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+																					name: 'ui-notification-show',
+																					playState: 'running',
+																					iterationCount: '1',
+																					direction: 'normal',
+																					duration: _gdotdesign$elm_ui$Ui_Css_Properties$ms(0),
+																					fillMode: 'both',
+																					delay: _gdotdesign$elm_ui$Ui_Css_Properties$ms(0)
+																				},
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_gdotdesign$elm_ui$Ui_Css$selector,
+																		'[ui-notification-hide]',
+																		{
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$animation(
+																				{
+																					ctor: '::',
+																					_0: {
+																						easing: 'cubic-bezier(0.645, 0.045, 0.355, 1)',
+																						name: 'ui-notification-hide',
+																						playState: 'running',
+																						iterationCount: '1',
+																						direction: 'normal',
+																						duration: _gdotdesign$elm_ui$Ui_Css_Properties$ms(0),
+																						fillMode: 'both',
+																						delay: _gdotdesign$elm_ui$Ui_Css_Properties$ms(0)
+																					},
+																					_1: {ctor: '[]'}
+																				}),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_NotificationCenter$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_NotificationCenter$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

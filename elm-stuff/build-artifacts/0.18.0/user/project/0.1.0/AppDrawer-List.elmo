@@ -110,7 +110,7 @@ var _user$project$AppDrawer_List$entityListItem = function (vm) {
 					_0: _elm_lang$html$Html_Attributes$style(
 						{
 							ctor: '::',
-							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', vm.icon.color),
+							_0: A2(_user$project$X_Function_Infix_ops['=>'], 'color', vm.icon.color),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -191,10 +191,10 @@ var _user$project$AppDrawer_List$archivedItems = function (vm) {
 					_0: _elm_lang$html$Html_Attributes$classList(
 						{
 							ctor: '::',
-							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'list-container', true),
+							_0: A2(_user$project$X_Function_Infix_ops['=>'], 'list-container', true),
 							_1: {
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'expanded', vm.showArchived),
+								_0: A2(_user$project$X_Function_Infix_ops['=>'], 'expanded', vm.showArchived),
 								_1: {ctor: '[]'}
 							}
 						}),
@@ -249,7 +249,7 @@ var _user$project$AppDrawer_List$entityGroupView = F2(
 								_0: _elm_lang$html$Html_Attributes$style(
 									{
 										ctor: '::',
-										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', vm.icon.color),
+										_0: A2(_user$project$X_Function_Infix_ops['=>'], 'color', vm.icon.color),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -271,7 +271,7 @@ var _user$project$AppDrawer_List$entityGroupView = F2(
 									expandIconName,
 									{
 										ctor: '::',
-										_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(onToggleExpanded),
+										_0: _user$project$X_Html$onClickStopPropagation(onToggleExpanded),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -287,10 +287,10 @@ var _user$project$AppDrawer_List$entityGroupView = F2(
 							_0: _elm_lang$html$Html_Attributes$classList(
 								{
 									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'list-container', true),
+									_0: A2(_user$project$X_Function_Infix_ops['=>'], 'list-container', true),
 									_1: {
 										ctor: '::',
-										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'expanded', isExpanded),
+										_0: A2(_user$project$X_Function_Infix_ops['=>'], 'expanded', isExpanded),
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -318,7 +318,7 @@ var _user$project$AppDrawer_List$entityGroupView = F2(
 														_0: _elm_lang$html$Html_Attributes$class(''),
 														_1: {
 															ctor: '::',
-															_0: _elm_community$html_extra$Html_Events_Extra$onClickPreventDefaultAndStopPropagation(onAddClicked),
+															_0: _user$project$X_Html$onClickStopAll(onAddClicked),
 															_1: {ctor: '[]'}
 														}
 													},

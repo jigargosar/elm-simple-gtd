@@ -1,0 +1,16 @@
+var _gdotdesign$elm_dom$DOM_Window$height = function (_p0) {
+	return _gdotdesign$elm_dom$Native_DOM.windowHeight(
+		{ctor: '_Tuple0'});
+};
+var _gdotdesign$elm_dom$DOM_Window$width = function (_p1) {
+	return _gdotdesign$elm_dom$Native_DOM.windowWidth(
+		{ctor: '_Tuple0'});
+};
+var _gdotdesign$elm_dom$DOM_Window$scrollLeft = function (_p2) {
+	return _gdotdesign$elm_dom$Native_DOM.windowScrollLeft(
+		{ctor: '_Tuple0'});
+};
+var _gdotdesign$elm_dom$DOM_Window$scrollTop = function (_p3) {
+	return _gdotdesign$elm_dom$Native_DOM.windowScrollTop(
+		{ctor: '_Tuple0'});
+};

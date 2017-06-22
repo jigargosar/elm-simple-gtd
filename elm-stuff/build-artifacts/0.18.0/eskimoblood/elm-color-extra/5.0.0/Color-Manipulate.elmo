@@ -1,0 +1,151 @@
+var _eskimoblood$elm_color_extra$Color_Manipulate$mixChannel = F3(
+	function (weight, c1, c2) {
+		return _elm_lang$core$Basics$round(
+			(_elm_lang$core$Basics$toFloat(c1) * weight) + (_elm_lang$core$Basics$toFloat(c2) * (1 - weight)));
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$calculateWeight = F3(
+	function (a1, a2, weight) {
+		var w1 = (weight * 2) - 1;
+		var a = a1 - a2;
+		var w2 = _elm_lang$core$Native_Utils.eq(w1 * a, -1) ? w1 : ((w1 + a) / (1 + (w1 * a)));
+		return (w2 + 1) / 2;
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$weightedMix = F3(
+	function (color1, color2, weight) {
+		var c2 = _elm_lang$core$Color$toRgb(color2);
+		var c1 = _elm_lang$core$Color$toRgb(color1);
+		var clampedWeight = A3(_elm_lang$core$Basics$clamp, 0, 1, weight);
+		var w = A3(_eskimoblood$elm_color_extra$Color_Manipulate$calculateWeight, c1.alpha, c2.alpha, clampedWeight);
+		var rMixed = A3(_eskimoblood$elm_color_extra$Color_Manipulate$mixChannel, w, c1.red, c2.red);
+		var gMixed = A3(_eskimoblood$elm_color_extra$Color_Manipulate$mixChannel, w, c1.green, c2.green);
+		var bMixed = A3(_eskimoblood$elm_color_extra$Color_Manipulate$mixChannel, w, c1.blue, c2.blue);
+		var alphaMixed = (c1.alpha * clampedWeight) + (c2.alpha * (1 - clampedWeight));
+		return A4(_elm_lang$core$Color$rgba, rMixed, gMixed, bMixed, alphaMixed);
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$mix = F2(
+	function (c1, c2) {
+		return A3(_eskimoblood$elm_color_extra$Color_Manipulate$weightedMix, c1, c2, 0.5);
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$scale = F3(
+	function (max, scaleAmount, value) {
+		var clampedValue = A3(_elm_lang$core$Basics$clamp, 0, max, value);
+		var clampedScale = A3(_elm_lang$core$Basics$clamp, -1.0, 1.0, scaleAmount);
+		var diff = (_elm_lang$core$Native_Utils.cmp(clampedScale, 0) > 0) ? (max - clampedValue) : clampedValue;
+		return clampedValue + (diff * clampedScale);
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$scaleRgb = F2(
+	function (scaleBy, color) {
+		var rgb = _elm_lang$core$Color$toRgb(color);
+		var _p0 = scaleBy;
+		var rScale = _p0._0;
+		var gScale = _p0._1;
+		var bScale = _p0._2;
+		var aScale = _p0._3;
+		return A4(
+			_elm_lang$core$Color$rgba,
+			_elm_lang$core$Basics$round(
+				A3(
+					_eskimoblood$elm_color_extra$Color_Manipulate$scale,
+					255,
+					rScale,
+					_elm_lang$core$Basics$toFloat(rgb.red))),
+			_elm_lang$core$Basics$round(
+				A3(
+					_eskimoblood$elm_color_extra$Color_Manipulate$scale,
+					255,
+					gScale,
+					_elm_lang$core$Basics$toFloat(rgb.green))),
+			_elm_lang$core$Basics$round(
+				A3(
+					_eskimoblood$elm_color_extra$Color_Manipulate$scale,
+					255,
+					bScale,
+					_elm_lang$core$Basics$toFloat(rgb.blue))),
+			A3(_eskimoblood$elm_color_extra$Color_Manipulate$scale, 1.0, aScale, rgb.alpha));
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$scaleHsl = F2(
+	function (scaleBy, color) {
+		var hsl = _elm_lang$core$Color$toHsl(color);
+		var _p1 = scaleBy;
+		var saturationScale = _p1._0;
+		var lightnessScale = _p1._1;
+		var alphaScale = _p1._2;
+		return A4(
+			_elm_lang$core$Color$hsla,
+			hsl.hue,
+			A3(_eskimoblood$elm_color_extra$Color_Manipulate$scale, 1.0, saturationScale, hsl.saturation),
+			A3(_eskimoblood$elm_color_extra$Color_Manipulate$scale, 1.0, lightnessScale, hsl.lightness),
+			A3(_eskimoblood$elm_color_extra$Color_Manipulate$scale, 1.0, alphaScale, hsl.alpha));
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$rotateHue = F2(
+	function (angle, cl) {
+		var _p2 = _elm_lang$core$Color$toHsl(cl);
+		var hue = _p2.hue;
+		var saturation = _p2.saturation;
+		var lightness = _p2.lightness;
+		var alpha = _p2.alpha;
+		return A4(
+			_elm_lang$core$Color$hsla,
+			hue + _elm_lang$core$Basics$degrees(angle),
+			saturation,
+			lightness,
+			alpha);
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$limit = A2(_elm_lang$core$Basics$clamp, 0, 1);
+var _eskimoblood$elm_color_extra$Color_Manipulate$darken = F2(
+	function (offset, cl) {
+		var _p3 = _elm_lang$core$Color$toHsl(cl);
+		var hue = _p3.hue;
+		var saturation = _p3.saturation;
+		var lightness = _p3.lightness;
+		var alpha = _p3.alpha;
+		return A4(
+			_elm_lang$core$Color$hsla,
+			hue,
+			saturation,
+			_eskimoblood$elm_color_extra$Color_Manipulate$limit(lightness - offset),
+			alpha);
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$lighten = F2(
+	function (offset, cl) {
+		return A2(_eskimoblood$elm_color_extra$Color_Manipulate$darken, 0 - offset, cl);
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$saturate = F2(
+	function (offset, cl) {
+		var _p4 = _elm_lang$core$Color$toHsl(cl);
+		var hue = _p4.hue;
+		var saturation = _p4.saturation;
+		var lightness = _p4.lightness;
+		var alpha = _p4.alpha;
+		return A4(
+			_elm_lang$core$Color$hsla,
+			hue,
+			_eskimoblood$elm_color_extra$Color_Manipulate$limit(saturation + offset),
+			lightness,
+			alpha);
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$desaturate = F2(
+	function (offset, cl) {
+		return A2(_eskimoblood$elm_color_extra$Color_Manipulate$saturate, 0 - offset, cl);
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$grayscale = function (cl) {
+	return A2(_eskimoblood$elm_color_extra$Color_Manipulate$saturate, -1, cl);
+};
+var _eskimoblood$elm_color_extra$Color_Manipulate$fadeIn = F2(
+	function (offset, cl) {
+		var _p5 = _elm_lang$core$Color$toHsl(cl);
+		var hue = _p5.hue;
+		var saturation = _p5.saturation;
+		var lightness = _p5.lightness;
+		var alpha = _p5.alpha;
+		return A4(
+			_elm_lang$core$Color$hsla,
+			hue,
+			saturation,
+			lightness,
+			_eskimoblood$elm_color_extra$Color_Manipulate$limit(alpha + offset));
+	});
+var _eskimoblood$elm_color_extra$Color_Manipulate$fadeOut = F2(
+	function (offset, cl) {
+		return A2(_eskimoblood$elm_color_extra$Color_Manipulate$fadeIn, 0 - offset, cl);
+	});

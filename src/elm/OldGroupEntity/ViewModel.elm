@@ -7,7 +7,7 @@ import Dict.Extra
 import Document
 import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
-import Ext.Keyboard exposing (KeyboardEvent)
+import X.Keyboard exposing (KeyboardEvent)
 import GroupDoc
 import Lazy
 import Model exposing (EntityListViewType, ViewType(..))
@@ -15,14 +15,15 @@ import Model exposing (Msg, commonMsg)
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model
 import Project
 import Keyboard.Extra as Key exposing (Key)
 import Store
+import X.Maybe
 
 
 type alias IconVM =
@@ -174,7 +175,7 @@ contexts model =
             createList config model
 
         nullVMAsList =
-            entityList |> List.head |> Maybe.toList
+            entityList |> List.head |> X.Maybe.toList
     in
         { entityList = entityList |> List.drop 1
         , nullVMAsList = nullVMAsList
@@ -222,7 +223,7 @@ projects model =
             createList config model
 
         nullVMAsList =
-            entityList |> List.head |> Maybe.toList
+            entityList |> List.head |> X.Maybe.toList
     in
         { entityList = entityList |> List.drop 1
         , nullVMAsList = []

@@ -1,37 +1,35 @@
 module AppDrawer.List exposing (..)
 
+import X.Html exposing (onClickStopPropagation)
 import Material
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Document
 import Entity
 import OldGroupEntity.ViewModel
-import Html.Attributes.Extra exposing (..)
-import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
 import Html.Keyed as Keyed
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
-import Ext.Keyboard as Keyboard exposing (onEscape, onKeyUp)
+import X.Keyboard as Keyboard exposing (onEscape, onKeyUp)
 import Model exposing (Msg(OnSetViewType), commonMsg)
 import String.Extra
 import Maybe.Extra as Maybe
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Debug exposing (tapLog)
-import Ext.Decode exposing (traceDecoder)
+import X.Debug exposing (tapLog)
+import X.Decode exposing (traceDecoder)
 import Json.Decode
 import Json.Encode
 import List.Extra as List
 import Model exposing (..)
 import Todo
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import Model exposing (..)
 import View.Shared exposing (..)
 import ViewModel
@@ -116,7 +114,7 @@ entityGroupView vm mainViewType =
                             ++ List.map entityListItem vm.entityList
                             ++ [ li
                                     [ class ""
-                                    , onClickPreventDefaultAndStopPropagation onAddClicked
+                                    , X.Html.onClickStopAll onAddClicked
                                     ]
                                     [ Material.icon "add"
                                     , div [] [ text "Add New" ]

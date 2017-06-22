@@ -53,7 +53,7 @@ var _user$project$CustomSync$view = function (model) {
 									_0: _elm_lang$html$Html_Attributes$class('input-field'),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+										_0: _user$project$X_Keyboard$onKeyDownStopPropagation(
 											function (_p0) {
 												return _user$project$Model$NOOP;
 											}),

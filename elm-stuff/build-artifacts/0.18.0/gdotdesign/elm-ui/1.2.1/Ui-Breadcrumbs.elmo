@@ -1,0 +1,43 @@
+var _gdotdesign$elm_ui$Ui_Breadcrumbs$view = F2(
+	function (separator, items) {
+		var renderItem = function (item) {
+			var attributes = function () {
+				var _p0 = {ctor: '_Tuple2', _0: item.url, _1: item.msg};
+				if (((_p0.ctor === '_Tuple2') && (_p0._0.ctor === 'Nothing')) && (_p0._1.ctor === 'Nothing')) {
+					return {ctor: '[]'};
+				} else {
+					return {
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'clickable', ''),
+						_1: {ctor: '[]'}
+					};
+				}
+			}();
+			return A3(
+				_elm_lang$html$Html$node,
+				'ui-breadcrumb',
+				attributes,
+				{
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Link$view(item),
+					_1: {ctor: '[]'}
+				});
+		};
+		var renderedItems = A2(
+			_elm_lang$core$List$intersperse,
+			A3(
+				_elm_lang$html$Html$node,
+				'ui-breadcrumb-separator',
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: separator,
+					_1: {ctor: '[]'}
+				}),
+			A2(_elm_lang$core$List$map, renderItem, items));
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-breadcrumbs',
+			_gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_Breadcrumbs$defaultStyle),
+			renderedItems);
+	});

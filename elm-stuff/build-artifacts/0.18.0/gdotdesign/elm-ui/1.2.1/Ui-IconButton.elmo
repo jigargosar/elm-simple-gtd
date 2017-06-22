@@ -1,0 +1,62 @@
+var _gdotdesign$elm_ui$Ui_IconButton$render = F2(
+	function (msg, model) {
+		var span = A3(
+			_elm_lang$html$Html$node,
+			'span',
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(model.text),
+				_1: {ctor: '[]'}
+			});
+		var icon = A3(
+			_elm_lang$html$Html$node,
+			'ui-icon-button-icon',
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: model.glyph,
+				_1: {ctor: '[]'}
+			});
+		var children = _elm_lang$core$Native_Utils.eq(model.side, 'left') ? {
+			ctor: '::',
+			_0: icon,
+			_1: {
+				ctor: '::',
+				_0: span,
+				_1: {ctor: '[]'}
+			}
+		} : {
+			ctor: '::',
+			_0: span,
+			_1: {
+				ctor: '::',
+				_0: icon,
+				_1: {ctor: '[]'}
+			}
+		};
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-icon-button',
+			A3(_gdotdesign$elm_ui$Ui_Button$attributes, _gdotdesign$elm_ui$Ui_Styles_IconButton$defaultStyle, msg, model),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Helpers_Ripple$view,
+					_1: {ctor: '[]'}
+				},
+				children));
+	});
+var _gdotdesign$elm_ui$Ui_IconButton$view = F2(
+	function (msg, model) {
+		return A3(_elm_lang$html$Html_Lazy$lazy2, _gdotdesign$elm_ui$Ui_IconButton$render, msg, model);
+	});
+var _gdotdesign$elm_ui$Ui_IconButton$model = F2(
+	function (text, glyph) {
+		return {disabled: false, readonly: false, kind: 'primary', size: 'medium', glyph: glyph, side: 'left', text: text};
+	});
+var _gdotdesign$elm_ui$Ui_IconButton$Model = F7(
+	function (a, b, c, d, e, f, g) {
+		return {glyph: a, disabled: b, readonly: c, text: d, kind: e, side: f, size: g};
+	});

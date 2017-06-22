@@ -1,0 +1,419 @@
+var _gdotdesign$elm_ui$Ui_Css_Properties$transition = function (transitions) {
+	var render = function (item) {
+		return A2(
+			_elm_lang$core$String$join,
+			' ',
+			{
+				ctor: '::',
+				_0: item.property,
+				_1: {
+					ctor: '::',
+					_0: item.duration,
+					_1: {
+						ctor: '::',
+						_0: item.delay,
+						_1: {
+							ctor: '::',
+							_0: item.easing,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+	};
+	var value = A2(
+		_elm_lang$core$String$join,
+		', ',
+		A2(_elm_lang$core$List$map, render, transitions));
+	return A2(_gdotdesign$elm_ui$Ui_Css$property, 'transition', value);
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$animation = function (animations) {
+	var render = function (item) {
+		return A2(
+			_elm_lang$core$String$join,
+			' ',
+			{
+				ctor: '::',
+				_0: item.name,
+				_1: {
+					ctor: '::',
+					_0: item.duration,
+					_1: {
+						ctor: '::',
+						_0: item.easing,
+						_1: {
+							ctor: '::',
+							_0: item.delay,
+							_1: {
+								ctor: '::',
+								_0: item.iterationCount,
+								_1: {
+									ctor: '::',
+									_0: item.direction,
+									_1: {
+										ctor: '::',
+										_0: item.fillMode,
+										_1: {
+											ctor: '::',
+											_0: item.playState,
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			});
+	};
+	var value = A2(
+		_elm_lang$core$String$join,
+		', ',
+		A2(_elm_lang$core$List$map, render, animations));
+	return A2(_gdotdesign$elm_ui$Ui_Css$property, 'animation', value);
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$boxShadow = function (shadows) {
+	var render = function (item) {
+		return A2(
+			_elm_lang$core$String$join,
+			' ',
+			{
+				ctor: '::',
+				_0: item.x,
+				_1: {
+					ctor: '::',
+					_0: item.y,
+					_1: {
+						ctor: '::',
+						_0: item.blur,
+						_1: {
+							ctor: '::',
+							_0: item.spread,
+							_1: {
+								ctor: '::',
+								_0: item.color,
+								_1: {
+									ctor: '::',
+									_0: item.inset ? 'inset' : '',
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			});
+	};
+	var value = A2(
+		_elm_lang$core$String$join,
+		', ',
+		A2(_elm_lang$core$List$map, render, shadows));
+	return A2(_gdotdesign$elm_ui$Ui_Css$property, 'box-shadow', value);
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$opacity = function (value) {
+	return A2(
+		_gdotdesign$elm_ui$Ui_Css$property,
+		'opacity',
+		_elm_lang$core$Basics$toString(value));
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$transform = function (transforms) {
+	var render = function (item) {
+		var _p0 = item;
+		switch (_p0.ctor) {
+			case 'Scale':
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					'scale(',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(_p0._0),
+						')'));
+			case 'Rotate':
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					'rotate(',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Basics$toString(_p0._0),
+						'deg)'));
+			case 'Translate':
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					'translate(',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_p0._0,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							',',
+							A2(_elm_lang$core$Basics_ops['++'], _p0._1, ')'))));
+			case 'TranslateX':
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					'translateX(',
+					A2(_elm_lang$core$Basics_ops['++'], _p0._0, ')'));
+			case 'TranslateY':
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					'translateY(',
+					A2(_elm_lang$core$Basics_ops['++'], _p0._0, ')'));
+			default:
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					'translate3d(',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_p0._0,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							',',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_p0._1,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									',',
+									A2(_elm_lang$core$Basics_ops['++'], _p0._2, ')'))))));
+		}
+	};
+	var value = A2(
+		_elm_lang$core$String$join,
+		' ',
+		A2(_elm_lang$core$List$map, render, transforms));
+	return A2(_gdotdesign$elm_ui$Ui_Css$property, 'transform', value);
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$transformOrigin = F2(
+	function (top, left) {
+		return A2(
+			_gdotdesign$elm_ui$Ui_Css$property,
+			'transform-origin',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				top,
+				A2(_elm_lang$core$Basics_ops['++'], ' ', left)));
+	});
+var _gdotdesign$elm_ui$Ui_Css_Properties$userSelect = function (value) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: A2(_gdotdesign$elm_ui$Ui_Css$property, '-webkit-user-select', value),
+			_1: {
+				ctor: '::',
+				_0: A2(_gdotdesign$elm_ui$Ui_Css$property, '-moz-user-select', value),
+				_1: {
+					ctor: '::',
+					_0: A2(_gdotdesign$elm_ui$Ui_Css$property, '-ms-user-select', value),
+					_1: {
+						ctor: '::',
+						_0: A2(_gdotdesign$elm_ui$Ui_Css$property, 'user-select', value),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$maxWidth = _gdotdesign$elm_ui$Ui_Css$property('max-width');
+var _gdotdesign$elm_ui$Ui_Css_Properties$maxHeight = _gdotdesign$elm_ui$Ui_Css$property('max-height');
+var _gdotdesign$elm_ui$Ui_Css_Properties$minHeight = _gdotdesign$elm_ui$Ui_Css$property('min-height');
+var _gdotdesign$elm_ui$Ui_Css_Properties$minWidth = _gdotdesign$elm_ui$Ui_Css$property('min-width');
+var _gdotdesign$elm_ui$Ui_Css_Properties$width = _gdotdesign$elm_ui$Ui_Css$property('width');
+var _gdotdesign$elm_ui$Ui_Css_Properties$height = _gdotdesign$elm_ui$Ui_Css$property('height');
+var _gdotdesign$elm_ui$Ui_Css_Properties$right = _gdotdesign$elm_ui$Ui_Css$property('right');
+var _gdotdesign$elm_ui$Ui_Css_Properties$bottom = _gdotdesign$elm_ui$Ui_Css$property('bottom');
+var _gdotdesign$elm_ui$Ui_Css_Properties$top = _gdotdesign$elm_ui$Ui_Css$property('top');
+var _gdotdesign$elm_ui$Ui_Css_Properties$left = _gdotdesign$elm_ui$Ui_Css$property('left');
+var _gdotdesign$elm_ui$Ui_Css_Properties$whiteSpace = _gdotdesign$elm_ui$Ui_Css$property('white-space');
+var _gdotdesign$elm_ui$Ui_Css_Properties$textOverflow = _gdotdesign$elm_ui$Ui_Css$property('text-overflow');
+var _gdotdesign$elm_ui$Ui_Css_Properties$pointerEvents = _gdotdesign$elm_ui$Ui_Css$property('pointer-events');
+var _gdotdesign$elm_ui$Ui_Css_Properties$textAlign = _gdotdesign$elm_ui$Ui_Css$property('text-align');
+var _gdotdesign$elm_ui$Ui_Css_Properties$justifyContent = _gdotdesign$elm_ui$Ui_Css$property('justify-content');
+var _gdotdesign$elm_ui$Ui_Css_Properties$alignItems = _gdotdesign$elm_ui$Ui_Css$property('align-items');
+var _gdotdesign$elm_ui$Ui_Css_Properties$display = _gdotdesign$elm_ui$Ui_Css$property('display');
+var _gdotdesign$elm_ui$Ui_Css_Properties$position = _gdotdesign$elm_ui$Ui_Css$property('position');
+var _gdotdesign$elm_ui$Ui_Css_Properties$overflowY = _gdotdesign$elm_ui$Ui_Css$property('overflow-y');
+var _gdotdesign$elm_ui$Ui_Css_Properties$overflow = _gdotdesign$elm_ui$Ui_Css$property('overflow');
+var _gdotdesign$elm_ui$Ui_Css_Properties$color = _gdotdesign$elm_ui$Ui_Css$property('color');
+var _gdotdesign$elm_ui$Ui_Css_Properties$zIndex = function (value) {
+	return A2(
+		_gdotdesign$elm_ui$Ui_Css$property,
+		'z-index',
+		_elm_lang$core$Basics$toString(value));
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$fontFamily = _gdotdesign$elm_ui$Ui_Css$property('font-family');
+var _gdotdesign$elm_ui$Ui_Css_Properties$marginRight = _gdotdesign$elm_ui$Ui_Css$property('margin-right');
+var _gdotdesign$elm_ui$Ui_Css_Properties$marginLeft = _gdotdesign$elm_ui$Ui_Css$property('margin-left');
+var _gdotdesign$elm_ui$Ui_Css_Properties$marginBottom = _gdotdesign$elm_ui$Ui_Css$property('margin-bottom');
+var _gdotdesign$elm_ui$Ui_Css_Properties$marginTop = _gdotdesign$elm_ui$Ui_Css$property('margin-top');
+var _gdotdesign$elm_ui$Ui_Css_Properties$margin = _gdotdesign$elm_ui$Ui_Css$property('margin');
+var _gdotdesign$elm_ui$Ui_Css_Properties$paddingRight = _gdotdesign$elm_ui$Ui_Css$property('padding-right');
+var _gdotdesign$elm_ui$Ui_Css_Properties$paddingTop = _gdotdesign$elm_ui$Ui_Css$property('padding-top');
+var _gdotdesign$elm_ui$Ui_Css_Properties$paddingLeft = _gdotdesign$elm_ui$Ui_Css$property('padding-left');
+var _gdotdesign$elm_ui$Ui_Css_Properties$padding = _gdotdesign$elm_ui$Ui_Css$property('padding');
+var _gdotdesign$elm_ui$Ui_Css_Properties$contentString = function (value) {
+	return A2(
+		_gdotdesign$elm_ui$Ui_Css$property,
+		'content',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'\"',
+			A2(_elm_lang$core$Basics_ops['++'], value, '\"')));
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$content = function (value) {
+	return A2(_gdotdesign$elm_ui$Ui_Css$property, 'content', value);
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$resize = _gdotdesign$elm_ui$Ui_Css$property('resize');
+var _gdotdesign$elm_ui$Ui_Css_Properties$visibility = _gdotdesign$elm_ui$Ui_Css$property('visibility');
+var _gdotdesign$elm_ui$Ui_Css_Properties$cursor = _gdotdesign$elm_ui$Ui_Css$property('cursor');
+var _gdotdesign$elm_ui$Ui_Css_Properties$fontStyle = _gdotdesign$elm_ui$Ui_Css$property('font-style');
+var _gdotdesign$elm_ui$Ui_Css_Properties$fontSize = _gdotdesign$elm_ui$Ui_Css$property('font-size');
+var _gdotdesign$elm_ui$Ui_Css_Properties$fontWeight = _gdotdesign$elm_ui$Ui_Css$property('font-weight');
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius = _gdotdesign$elm_ui$Ui_Css$property('border-radius');
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderColor = _gdotdesign$elm_ui$Ui_Css$property('border-color');
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderTopColor = _gdotdesign$elm_ui$Ui_Css$property('border-top-color');
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderRightColor = _gdotdesign$elm_ui$Ui_Css$property('border-right-color');
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderRight = _gdotdesign$elm_ui$Ui_Css$property('border-right');
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderTop = _gdotdesign$elm_ui$Ui_Css$property('border-top');
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderBottom = _gdotdesign$elm_ui$Ui_Css$property('border-bottom');
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderLeft = _gdotdesign$elm_ui$Ui_Css$property('border-left');
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderStyle = _gdotdesign$elm_ui$Ui_Css$property('border-style');
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderWidth = _gdotdesign$elm_ui$Ui_Css$property('border-width');
+var _gdotdesign$elm_ui$Ui_Css_Properties$border = _gdotdesign$elm_ui$Ui_Css$property('border');
+var _gdotdesign$elm_ui$Ui_Css_Properties$important = '!important';
+var _gdotdesign$elm_ui$Ui_Css_Properties$outline = _gdotdesign$elm_ui$Ui_Css$property('outline');
+var _gdotdesign$elm_ui$Ui_Css_Properties$boxSizing = _gdotdesign$elm_ui$Ui_Css$property('box-sizing');
+var _gdotdesign$elm_ui$Ui_Css_Properties$backgroundPositionX = _gdotdesign$elm_ui$Ui_Css$property('background-position-x');
+var _gdotdesign$elm_ui$Ui_Css_Properties$backgroundClip = _gdotdesign$elm_ui$Ui_Css$property('background-clip');
+var _gdotdesign$elm_ui$Ui_Css_Properties$background = _gdotdesign$elm_ui$Ui_Css$property('background');
+var _gdotdesign$elm_ui$Ui_Css_Properties$backgroundSize = _gdotdesign$elm_ui$Ui_Css$property('background-size');
+var _gdotdesign$elm_ui$Ui_Css_Properties$backgroundColor = _gdotdesign$elm_ui$Ui_Css$property('background-color');
+var _gdotdesign$elm_ui$Ui_Css_Properties$flexDirection = _gdotdesign$elm_ui$Ui_Css$property('flex-direction');
+var _gdotdesign$elm_ui$Ui_Css_Properties$lineHeight = _gdotdesign$elm_ui$Ui_Css$property('line-height');
+var _gdotdesign$elm_ui$Ui_Css_Properties$alignSelf = _gdotdesign$elm_ui$Ui_Css$property('align-self');
+var _gdotdesign$elm_ui$Ui_Css_Properties$flexWrap = _gdotdesign$elm_ui$Ui_Css$property('flex-wrap');
+var _gdotdesign$elm_ui$Ui_Css_Properties$flex_ = _gdotdesign$elm_ui$Ui_Css$property('flex');
+var _gdotdesign$elm_ui$Ui_Css_Properties$fill = _gdotdesign$elm_ui$Ui_Css$property('fill');
+var _gdotdesign$elm_ui$Ui_Css_Properties$wordBreak = _gdotdesign$elm_ui$Ui_Css$property('word-break');
+var _gdotdesign$elm_ui$Ui_Css_Properties$wordWrap = _gdotdesign$elm_ui$Ui_Css$property('word-wrap');
+var _gdotdesign$elm_ui$Ui_Css_Properties$textDecoration = _gdotdesign$elm_ui$Ui_Css$property('text-decoration');
+var _gdotdesign$elm_ui$Ui_Css_Properties$textTransform = _gdotdesign$elm_ui$Ui_Css$property('text-transform');
+var _gdotdesign$elm_ui$Ui_Css_Properties$scroll = 'scroll';
+var _gdotdesign$elm_ui$Ui_Css_Properties$italic = 'italic';
+var _gdotdesign$elm_ui$Ui_Css_Properties$auto = 'auto';
+var _gdotdesign$elm_ui$Ui_Css_Properties$colResize = 'col-resize';
+var _gdotdesign$elm_ui$Ui_Css_Properties$rowResize = 'row-resize';
+var _gdotdesign$elm_ui$Ui_Css_Properties$bold = 'bold';
+var _gdotdesign$elm_ui$Ui_Css_Properties$breakWord = 'break-word';
+var _gdotdesign$elm_ui$Ui_Css_Properties$normal = 'normal';
+var _gdotdesign$elm_ui$Ui_Css_Properties$uppercase = 'uppercase';
+var _gdotdesign$elm_ui$Ui_Css_Properties$preWrap = 'pre-wrap';
+var _gdotdesign$elm_ui$Ui_Css_Properties$wrap = 'wrap';
+var _gdotdesign$elm_ui$Ui_Css_Properties$transparent = 'transparent';
+var _gdotdesign$elm_ui$Ui_Css_Properties$currentColor = 'currentColor';
+var _gdotdesign$elm_ui$Ui_Css_Properties$spaceAround = 'space-around';
+var _gdotdesign$elm_ui$Ui_Css_Properties$spaceBetween = 'space-between';
+var _gdotdesign$elm_ui$Ui_Css_Properties$flexEnd = 'flex-end';
+var _gdotdesign$elm_ui$Ui_Css_Properties$flexStart = 'flex-start';
+var _gdotdesign$elm_ui$Ui_Css_Properties$row = 'row';
+var _gdotdesign$elm_ui$Ui_Css_Properties$column = 'column';
+var _gdotdesign$elm_ui$Ui_Css_Properties$contentBox = 'content-box';
+var _gdotdesign$elm_ui$Ui_Css_Properties$borderBox = 'border-box';
+var _gdotdesign$elm_ui$Ui_Css_Properties$pointer = 'pointer';
+var _gdotdesign$elm_ui$Ui_Css_Properties$block = 'block';
+var _gdotdesign$elm_ui$Ui_Css_Properties$stretch = 'stretch';
+var _gdotdesign$elm_ui$Ui_Css_Properties$flex = 'flex';
+var _gdotdesign$elm_ui$Ui_Css_Properties$inlineBlock = 'inline-block';
+var _gdotdesign$elm_ui$Ui_Css_Properties$inlineFlex = 'inline-flex';
+var _gdotdesign$elm_ui$Ui_Css_Properties$dashed = 'dashed';
+var _gdotdesign$elm_ui$Ui_Css_Properties$solid = 'solid';
+var _gdotdesign$elm_ui$Ui_Css_Properties$center = 'center';
+var _gdotdesign$elm_ui$Ui_Css_Properties$nowrap = 'nowrap';
+var _gdotdesign$elm_ui$Ui_Css_Properties$ellipsis = 'ellipsis';
+var _gdotdesign$elm_ui$Ui_Css_Properties$visible = 'visible';
+var _gdotdesign$elm_ui$Ui_Css_Properties$none = 'none';
+var _gdotdesign$elm_ui$Ui_Css_Properties$hidden = 'hidden';
+var _gdotdesign$elm_ui$Ui_Css_Properties$fixed = 'fixed';
+var _gdotdesign$elm_ui$Ui_Css_Properties$relative = 'relative';
+var _gdotdesign$elm_ui$Ui_Css_Properties$absolute = 'absolute';
+var _gdotdesign$elm_ui$Ui_Css_Properties$inherit = 'inherit';
+var _gdotdesign$elm_ui$Ui_Css_Properties$em = function (value) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(value),
+		'em');
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$vw = function (value) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(value),
+		'vw');
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$vh = function (value) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(value),
+		'vh');
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$px = function (value) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(value),
+		'px');
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$pct = function (value) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(value),
+		'%');
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$ms = function (value) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(value),
+		'ms');
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties_ops = _gdotdesign$elm_ui$Ui_Css_Properties_ops || {};
+_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'] = F2(
+	function (a, b) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			a,
+			A2(_elm_lang$core$Basics_ops['++'], ' ', b));
+	});
+var _gdotdesign$elm_ui$Ui_Css_Properties$zero = '0';
+var _gdotdesign$elm_ui$Ui_Css_Properties$Transition = F4(
+	function (a, b, c, d) {
+		return {easing: a, duration: b, property: c, delay: d};
+	});
+var _gdotdesign$elm_ui$Ui_Css_Properties$BoxShadow = F6(
+	function (a, b, c, d, e, f) {
+		return {x: a, y: b, blur: c, spread: d, color: e, inset: f};
+	});
+var _gdotdesign$elm_ui$Ui_Css_Properties$Animation = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {name: a, duration: b, easing: c, delay: d, iterationCount: e, direction: f, fillMode: g, playState: h};
+	});
+var _gdotdesign$elm_ui$Ui_Css_Properties$Translate3D = F3(
+	function (a, b, c) {
+		return {ctor: 'Translate3D', _0: a, _1: b, _2: c};
+	});
+var _gdotdesign$elm_ui$Ui_Css_Properties$translate3d = _gdotdesign$elm_ui$Ui_Css_Properties$Translate3D;
+var _gdotdesign$elm_ui$Ui_Css_Properties$Translate = F2(
+	function (a, b) {
+		return {ctor: 'Translate', _0: a, _1: b};
+	});
+var _gdotdesign$elm_ui$Ui_Css_Properties$translate = _gdotdesign$elm_ui$Ui_Css_Properties$Translate;
+var _gdotdesign$elm_ui$Ui_Css_Properties$TranslateY = function (a) {
+	return {ctor: 'TranslateY', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$translateY = _gdotdesign$elm_ui$Ui_Css_Properties$TranslateY;
+var _gdotdesign$elm_ui$Ui_Css_Properties$TranslateX = function (a) {
+	return {ctor: 'TranslateX', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$translateX = _gdotdesign$elm_ui$Ui_Css_Properties$TranslateX;
+var _gdotdesign$elm_ui$Ui_Css_Properties$Rotate = function (a) {
+	return {ctor: 'Rotate', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$rotate = _gdotdesign$elm_ui$Ui_Css_Properties$Rotate;
+var _gdotdesign$elm_ui$Ui_Css_Properties$Scale = function (a) {
+	return {ctor: 'Scale', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Css_Properties$scale = _gdotdesign$elm_ui$Ui_Css_Properties$Scale;

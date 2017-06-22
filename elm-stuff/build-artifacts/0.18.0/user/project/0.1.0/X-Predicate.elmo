@@ -1,0 +1,19 @@
+var _user$project$X_Predicate$always = function (_p0) {
+	return true;
+};
+var _user$project$X_Predicate$any = function (list) {
+	return function (_p1) {
+		return A2(
+			_elm_lang$core$List$any,
+			_elm_lang$core$Basics$identity,
+			A2(_danielnarey$elm_toolkit$Toolkit_Helpers$applyList, list, _p1));
+	};
+};
+var _user$project$X_Predicate$all = function (list) {
+	return function (_p2) {
+		return A2(
+			_elm_lang$core$List$all,
+			_elm_lang$core$Basics$identity,
+			A2(_danielnarey$elm_toolkit$Toolkit_Helpers$applyList, list, _p2));
+	};
+};

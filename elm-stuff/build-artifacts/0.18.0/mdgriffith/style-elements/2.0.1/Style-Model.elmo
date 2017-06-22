@@ -1,0 +1,240 @@
+var _mdgriffith$style_elements$Style_Model$propertyName = function (prop) {
+	var _p0 = prop;
+	switch (_p0.ctor) {
+		case 'Property':
+			return _p0._0;
+		case 'Mix':
+			return A2(
+				_elm_lang$core$String$join,
+				'',
+				A2(_elm_lang$core$List$map, _mdgriffith$style_elements$Style_Model$propertyName, _p0._0));
+		case 'Box':
+			return _p0._0;
+		case 'Spacing':
+			return 'spacing';
+		case 'LayoutProp':
+			return 'layout';
+		case 'Len':
+			return _p0._0;
+		case 'Filters':
+			return 'filters';
+		case 'Transforms':
+			return 'transforms';
+		case 'TransitionProperty':
+			return 'trans';
+		case 'Shadows':
+			return 'shadows';
+		case 'BackgroundImageProp':
+			return 'bg-image';
+		case 'AnimationProp':
+			return 'anim';
+		case 'VisibilityProp':
+			return 'vis';
+		case 'FloatProp':
+			return 'float';
+		case 'RelProp':
+			return 'rel';
+		case 'PositionProp':
+			return 'pos';
+		case 'ColorProp':
+			return _p0._0;
+		case 'MediaQuery':
+			return _p0._0;
+		default:
+			return _p0._0;
+	}
+};
+var _mdgriffith$style_elements$Style_Model$Transition = F4(
+	function (a, b, c, d) {
+		return {property: a, duration: b, easing: c, delay: d};
+	});
+var _mdgriffith$style_elements$Style_Model$BackgroundImage = F3(
+	function (a, b, c) {
+		return {src: a, position: b, repeat: c};
+	});
+var _mdgriffith$style_elements$Style_Model$Model = function (a) {
+	return {ctor: 'Model', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$AutoClass = {ctor: 'AutoClass'};
+var _mdgriffith$style_elements$Style_Model$Class = function (a) {
+	return {ctor: 'Class', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Exactly = function (a) {
+	return {ctor: 'Exactly', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$SubElement = F2(
+	function (a, b) {
+		return {ctor: 'SubElement', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Model$MediaQuery = F2(
+	function (a, b) {
+		return {ctor: 'MediaQuery', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Model$ColorProp = F2(
+	function (a, b) {
+		return {ctor: 'ColorProp', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Model$PositionProp = F3(
+	function (a, b, c) {
+		return {ctor: 'PositionProp', _0: a, _1: b, _2: c};
+	});
+var _mdgriffith$style_elements$Style_Model$RelProp = function (a) {
+	return {ctor: 'RelProp', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$FloatProp = function (a) {
+	return {ctor: 'FloatProp', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$VisibilityProp = function (a) {
+	return {ctor: 'VisibilityProp', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$AnimationProp = function (a) {
+	return {ctor: 'AnimationProp', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$BackgroundImageProp = function (a) {
+	return {ctor: 'BackgroundImageProp', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Shadows = function (a) {
+	return {ctor: 'Shadows', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$TransitionProperty = function (a) {
+	return {ctor: 'TransitionProperty', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Transforms = function (a) {
+	return {ctor: 'Transforms', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Filters = function (a) {
+	return {ctor: 'Filters', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Len = F2(
+	function (a, b) {
+		return {ctor: 'Len', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Model$LayoutProp = function (a) {
+	return {ctor: 'LayoutProp', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Spacing = function (a) {
+	return {ctor: 'Spacing', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Box = F2(
+	function (a, b) {
+		return {ctor: 'Box', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Model$Mix = function (a) {
+	return {ctor: 'Mix', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Property = F2(
+	function (a, b) {
+		return {ctor: 'Property', _0: a, _1: b};
+	});
+var _mdgriffith$style_elements$Style_Model$Animation = function (a) {
+	return {ctor: 'Animation', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$NoRepeat = {ctor: 'NoRepeat'};
+var _mdgriffith$style_elements$Style_Model$Round = {ctor: 'Round'};
+var _mdgriffith$style_elements$Style_Model$Space = {ctor: 'Space'};
+var _mdgriffith$style_elements$Style_Model$Repeat = {ctor: 'Repeat'};
+var _mdgriffith$style_elements$Style_Model$RepeatY = {ctor: 'RepeatY'};
+var _mdgriffith$style_elements$Style_Model$RepeatX = {ctor: 'RepeatX'};
+var _mdgriffith$style_elements$Style_Model$DropShadow = function (a) {
+	return {ctor: 'DropShadow', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Sepia = function (a) {
+	return {ctor: 'Sepia', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Saturate = function (a) {
+	return {ctor: 'Saturate', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Opacity = function (a) {
+	return {ctor: 'Opacity', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Invert = function (a) {
+	return {ctor: 'Invert', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$HueRotate = function (a) {
+	return {ctor: 'HueRotate', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Grayscale = function (a) {
+	return {ctor: 'Grayscale', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Contrast = function (a) {
+	return {ctor: 'Contrast', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Brightness = function (a) {
+	return {ctor: 'Brightness', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Blur = function (a) {
+	return {ctor: 'Blur', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$FilterUrl = function (a) {
+	return {ctor: 'FilterUrl', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$FloatTopLeft = {ctor: 'FloatTopLeft'};
+var _mdgriffith$style_elements$Style_Model$FloatTopRight = {ctor: 'FloatTopRight'};
+var _mdgriffith$style_elements$Style_Model$FloatRight = {ctor: 'FloatRight'};
+var _mdgriffith$style_elements$Style_Model$FloatLeft = {ctor: 'FloatLeft'};
+var _mdgriffith$style_elements$Style_Model$Parent = {ctor: 'Parent'};
+var _mdgriffith$style_elements$Style_Model$CurrentPosition = {ctor: 'CurrentPosition'};
+var _mdgriffith$style_elements$Style_Model$Screen = {ctor: 'Screen'};
+var _mdgriffith$style_elements$Style_Model$AnchorBottom = {ctor: 'AnchorBottom'};
+var _mdgriffith$style_elements$Style_Model$AnchorTop = {ctor: 'AnchorTop'};
+var _mdgriffith$style_elements$Style_Model$AnchorRight = {ctor: 'AnchorRight'};
+var _mdgriffith$style_elements$Style_Model$AnchorLeft = {ctor: 'AnchorLeft'};
+var _mdgriffith$style_elements$Style_Model$Auto = {ctor: 'Auto'};
+var _mdgriffith$style_elements$Style_Model$Percent = function (a) {
+	return {ctor: 'Percent', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Px = function (a) {
+	return {ctor: 'Px', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$InlineLayout = {ctor: 'InlineLayout'};
+var _mdgriffith$style_elements$Style_Model$TableLayout = {ctor: 'TableLayout'};
+var _mdgriffith$style_elements$Style_Model$TextLayout = {ctor: 'TextLayout'};
+var _mdgriffith$style_elements$Style_Model$FlexLayout = function (a) {
+	return {ctor: 'FlexLayout', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Flexible = function (a) {
+	return {ctor: 'Flexible', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Left = {ctor: 'Left'};
+var _mdgriffith$style_elements$Style_Model$Down = {ctor: 'Down'};
+var _mdgriffith$style_elements$Style_Model$Right = {ctor: 'Right'};
+var _mdgriffith$style_elements$Style_Model$Up = {ctor: 'Up'};
+var _mdgriffith$style_elements$Style_Model$VStretch = {ctor: 'VStretch'};
+var _mdgriffith$style_elements$Style_Model$VCenter = {ctor: 'VCenter'};
+var _mdgriffith$style_elements$Style_Model$AlignBottom = {ctor: 'AlignBottom'};
+var _mdgriffith$style_elements$Style_Model$AlignTop = {ctor: 'AlignTop'};
+var _mdgriffith$style_elements$Style_Model$JustifyAll = {ctor: 'JustifyAll'};
+var _mdgriffith$style_elements$Style_Model$Justify = {ctor: 'Justify'};
+var _mdgriffith$style_elements$Style_Model$AlignCenter = {ctor: 'AlignCenter'};
+var _mdgriffith$style_elements$Style_Model$AlignRight = {ctor: 'AlignRight'};
+var _mdgriffith$style_elements$Style_Model$AlignLeft = {ctor: 'AlignLeft'};
+var _mdgriffith$style_elements$Style_Model$Strike = {ctor: 'Strike'};
+var _mdgriffith$style_elements$Style_Model$Overline = {ctor: 'Overline'};
+var _mdgriffith$style_elements$Style_Model$Underline = {ctor: 'Underline'};
+var _mdgriffith$style_elements$Style_Model$Dotted = {ctor: 'Dotted'};
+var _mdgriffith$style_elements$Style_Model$Dashed = {ctor: 'Dashed'};
+var _mdgriffith$style_elements$Style_Model$Solid = {ctor: 'Solid'};
+var _mdgriffith$style_elements$Style_Model$Hidden = {ctor: 'Hidden'};
+var _mdgriffith$style_elements$Style_Model$Transparent = function (a) {
+	return {ctor: 'Transparent', _0: a};
+};
+var _mdgriffith$style_elements$Style_Model$Scale = F3(
+	function (a, b, c) {
+		return {ctor: 'Scale', _0: a, _1: b, _2: c};
+	});
+var _mdgriffith$style_elements$Style_Model$Rotate = F3(
+	function (a, b, c) {
+		return {ctor: 'Rotate', _0: a, _1: b, _2: c};
+	});
+var _mdgriffith$style_elements$Style_Model$Translate = F3(
+	function (a, b, c) {
+		return {ctor: 'Translate', _0: a, _1: b, _2: c};
+	});
+var _mdgriffith$style_elements$Style_Model$NoWrap = {ctor: 'NoWrap'};
+var _mdgriffith$style_elements$Style_Model$PreLine = {ctor: 'PreLine'};
+var _mdgriffith$style_elements$Style_Model$PreWrap = {ctor: 'PreWrap'};
+var _mdgriffith$style_elements$Style_Model$Pre = {ctor: 'Pre'};
+var _mdgriffith$style_elements$Style_Model$Normal = {ctor: 'Normal'};
+var _mdgriffith$style_elements$Style_Model$Shadow = function (a) {
+	return {ctor: 'Shadow', _0: a};
+};

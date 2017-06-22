@@ -40,7 +40,7 @@
       </option>
       <option name="outputFromStdout" value="false" />
       <option name="program" value="$USER_HOME$/.config/yarn/global/node_modules/.bin/elm-format" />
-      <option name="scopeName" value="all-src" />
+      <option name="scopeName" value="elm-src" />
       <option name="trackOnlyRoot" value="false" />
       <option name="workingDir" value="" />
       <envs />

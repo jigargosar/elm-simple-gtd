@@ -1,0 +1,321 @@
+var _gdotdesign$elm_ui$Ui_Calendar$dayNames = function (locale) {
+	var config = function (_) {
+		return _.i18n;
+	}(
+		_rluiten$elm_date_extra$Date_Extra_Config_Configs$getConfig(locale));
+	return A2(
+		_elm_lang$core$List$map,
+		config.dayShort,
+		{
+			ctor: '::',
+			_0: _elm_lang$core$Date$Mon,
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$core$Date$Tue,
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$Date$Wed,
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$core$Date$Thu,
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Date$Fri,
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$core$Date$Sat,
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$core$Date$Sun,
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Calendar$paddingLeft = function (date) {
+	var _p0 = _elm_lang$core$Date$dayOfWeek(date);
+	switch (_p0.ctor) {
+		case 'Mon':
+			return 0;
+		case 'Tue':
+			return 1;
+		case 'Wed':
+			return 2;
+		case 'Thu':
+			return 3;
+		case 'Fri':
+			return 4;
+		case 'Sat':
+			return 5;
+		default:
+			return 6;
+	}
+};
+var _gdotdesign$elm_ui$Ui_Calendar$fixDate = function (model) {
+	return A2(_gdotdesign$elm_ui$Ext_Date$isSameMonth, model.date, model.value) ? model : _elm_lang$core$Native_Utils.update(
+		model,
+		{date: model.value});
+};
+var _gdotdesign$elm_ui$Ui_Calendar$previousDay = function (model) {
+	return _gdotdesign$elm_ui$Ui_Calendar$fixDate(
+		_elm_lang$core$Native_Utils.update(
+			model,
+			{
+				value: _gdotdesign$elm_ui$Ext_Date$previousDay(model.value)
+			}));
+};
+var _gdotdesign$elm_ui$Ui_Calendar$nextDay = function (model) {
+	return _gdotdesign$elm_ui$Ui_Calendar$fixDate(
+		_elm_lang$core$Native_Utils.update(
+			model,
+			{
+				value: _gdotdesign$elm_ui$Ext_Date$nextDay(model.value)
+			}));
+};
+var _gdotdesign$elm_ui$Ui_Calendar$setValue = F2(
+	function (date, model) {
+		return _gdotdesign$elm_ui$Ui_Calendar$fixDate(
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{value: date}));
+	});
+var _gdotdesign$elm_ui$Ui_Calendar$update = F2(
+	function (msg, model) {
+		var _p1 = msg;
+		switch (_p1.ctor) {
+			case 'PreviousMonth':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							date: _gdotdesign$elm_ui$Ext_Date$previousMonth(model.date)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'NextMonth':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							date: _gdotdesign$elm_ui$Ext_Date$nextMonth(model.date)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				var _p2 = _p1._0;
+				return A2(_gdotdesign$elm_ui$Ext_Date$isSameDate, model.value, _p2) ? {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none} : {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{value: _p2}),
+					_1: A2(
+						_gdotdesign$elm_ui$Ui_Helpers_Emitter$sendFloat,
+						model.uid,
+						_elm_lang$core$Date$toTime(_p2))
+				};
+		}
+	});
+var _gdotdesign$elm_ui$Ui_Calendar$onChange = F2(
+	function (msg, model) {
+		return A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$listenFloat, model.uid, msg);
+	});
+var _gdotdesign$elm_ui$Ui_Calendar$selectable = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{selectable: value});
+	});
+var _gdotdesign$elm_ui$Ui_Calendar$init = function (_p3) {
+	return {
+		value: _gdotdesign$elm_ui$Ext_Date$now(
+			{ctor: '_Tuple0'}),
+		date: _gdotdesign$elm_ui$Ext_Date$now(
+			{ctor: '_Tuple0'}),
+		selectable: true,
+		disabled: false,
+		readonly: false,
+		uid: _gdotdesign$elm_ui$Ui_Native_Uid$uid(
+			{ctor: '_Tuple0'})
+	};
+};
+var _gdotdesign$elm_ui$Ui_Calendar$Model = F6(
+	function (a, b, c, d, e, f) {
+		return {selectable: a, value: b, date: c, disabled: d, readonly: e, uid: f};
+	});
+var _gdotdesign$elm_ui$Ui_Calendar$NextMonth = {ctor: 'NextMonth'};
+var _gdotdesign$elm_ui$Ui_Calendar$PreviousMonth = {ctor: 'PreviousMonth'};
+var _gdotdesign$elm_ui$Ui_Calendar$Select = function (a) {
+	return {ctor: 'Select', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Calendar$renderCell = F2(
+	function (model, date) {
+		var value = model.selectable && A2(_gdotdesign$elm_ui$Ext_Date$isSameDate, date, model.value);
+		var sameMonth = A2(_gdotdesign$elm_ui$Ext_Date$isSameMonth, date, model.date);
+		var click = ((!model.disabled) && ((!model.readonly) && (model.selectable && sameMonth))) ? {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(
+				_gdotdesign$elm_ui$Ui_Calendar$Select(date)),
+			_1: {ctor: '[]'}
+		} : {ctor: '[]'};
+		var attributes = _gdotdesign$elm_ui$Ui$attributeList(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'inactive', _1: !sameMonth},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'selected', _1: value},
+					_1: {ctor: '[]'}
+				}
+			});
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-calendar-cell',
+			A2(_elm_lang$core$Basics_ops['++'], attributes, click),
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					_elm_lang$core$Basics$toString(
+						_elm_lang$core$Date$day(date))),
+				_1: {ctor: '[]'}
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Calendar$render = F2(
+	function (locale, model) {
+		var previousAction = A2(
+			_gdotdesign$elm_ui$Ui$enabledActions,
+			model,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_gdotdesign$elm_ui$Ui_Calendar$PreviousMonth),
+				_1: {ctor: '[]'}
+			});
+		var nextAction = A2(
+			_gdotdesign$elm_ui$Ui$enabledActions,
+			model,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(_gdotdesign$elm_ui$Ui_Calendar$NextMonth),
+				_1: {ctor: '[]'}
+			});
+		var month = _gdotdesign$elm_ui$Ext_Date$begginingOfMonth(model.date);
+		var dates = _gdotdesign$elm_ui$Ext_Date$datesInMonth(month);
+		var leftPadding = _gdotdesign$elm_ui$Ui_Calendar$paddingLeft(month);
+		var paddingLeftItems = _elm_lang$core$List$reverse(
+			A2(
+				_elm_lang$core$List$take,
+				_gdotdesign$elm_ui$Ui_Calendar$paddingLeft(month),
+				_elm_lang$core$List$reverse(
+					_gdotdesign$elm_ui$Ext_Date$datesInMonth(
+						_gdotdesign$elm_ui$Ext_Date$previousMonth(month)))));
+		var paddingRightItems = A2(
+			_elm_lang$core$List$take,
+			(42 - leftPadding) - _elm_lang$core$List$length(dates),
+			_gdotdesign$elm_ui$Ext_Date$datesInMonth(
+				_gdotdesign$elm_ui$Ext_Date$nextMonth(month)));
+		var cells = A2(
+			_elm_lang$core$List$map,
+			_gdotdesign$elm_ui$Ui_Calendar$renderCell(model),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				paddingLeftItems,
+				A2(_elm_lang$core$Basics_ops['++'], dates, paddingRightItems)));
+		var container = A3(
+			_gdotdesign$elm_ui$Ui_Container$view,
+			{compact: true, align: 'stretch', direction: 'row'},
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Icons$chevronLeft(previousAction),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_elm_lang$html$Html$node,
+						'div',
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								A3(
+									_rluiten$elm_date_extra$Date_Extra_Format$format,
+									_rluiten$elm_date_extra$Date_Extra_Config_Configs$getConfig(locale),
+									'%Y - %B',
+									month)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Icons$chevronRight(nextAction),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-calendar',
+			_elm_lang$core$List$concat(
+				{
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui$attributeList(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'selectable', _1: model.selectable},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'disabled', _1: model.disabled},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'readonly', _1: model.readonly},
+									_1: {ctor: '[]'}
+								}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_Calendar$defaultStyle),
+						_1: {ctor: '[]'}
+					}
+				}),
+			{
+				ctor: '::',
+				_0: container,
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_elm_lang$html$Html$node,
+						'ui-calendar-header',
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$List$map,
+							function (item) {
+								return A2(
+									_elm_lang$html$Html$span,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(item),
+										_1: {ctor: '[]'}
+									});
+							},
+							_gdotdesign$elm_ui$Ui_Calendar$dayNames(locale))),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_elm_lang$html$Html$node,
+							'ui-calendar-table',
+							{ctor: '[]'},
+							cells),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Calendar$view = F2(
+	function (locale, model) {
+		return A3(_elm_lang$html$Html_Lazy$lazy2, _gdotdesign$elm_ui$Ui_Calendar$render, locale, model);
+	});

@@ -76,12 +76,12 @@ var _user$project$WebComponents$onBoolPropertyChanged = F2(
 					},
 					_elm_lang$core$Json_Decode$bool)));
 	});
-var _user$project$WebComponents$noLabelFloatP = A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'noLabelFloatP', true);
+var _user$project$WebComponents$noLabelFloatP = A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'noLabelFloatP', true);
 var _user$project$WebComponents$selectedA = _elm_lang$html$Html_Attributes$attribute('selected');
 var _user$project$WebComponents$labelA = _elm_lang$html$Html_Attributes$attribute('label');
 var _user$project$WebComponents$slotDropdownContent = A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-content');
 var _user$project$WebComponents$slotDropdownTrigger = A2(_elm_lang$html$Html_Attributes$attribute, 'slot', 'dropdown-trigger');
-var _user$project$WebComponents$dynamicAlign = A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'dynamicAlign', true);
+var _user$project$WebComponents$dynamicAlign = A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'dynamicAlign', true);
 var _user$project$WebComponents$secondaryA = A2(_elm_lang$html$Html_Attributes$attribute, 'secondary', 'true');
 var _user$project$WebComponents$paperIconButton = _elm_lang$html$Html$node('paper-icon-button');
 var _user$project$WebComponents$iconA = _elm_lang$html$Html_Attributes$attribute('icon');
@@ -124,7 +124,7 @@ var _user$project$WebComponents$iconTextButton = F3(
 				_0: _elm_lang$html$Html_Attributes$class('icon-text font-caption'),
 				_1: {
 					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(clickHandler),
+					_0: _user$project$X_Html$onClickStopPropagation(clickHandler),
 					_1: {ctor: '[]'}
 				}
 			},

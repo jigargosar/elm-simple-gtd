@@ -1,6 +1,6 @@
 var _user$project$Main$startSyncWithFirebase = function (user) {
-	return _user$project$Ext_Return$maybeEffect(
-		A2(_user$project$Ext_Function_Infix_ops['>>?'], _user$project$Model$getMaybeUserId, _user$project$Firebase$startSyncCmd));
+	return _user$project$X_Return$maybeEffect(
+		A2(_user$project$X_Function_Infix_ops['>>?'], _user$project$Model$getMaybeUserId, _user$project$Firebase$startSyncCmd));
 };
 var _user$project$Main$positionScheduleMenuCmd = function (todo) {
 	return _user$project$DomPorts$positionPopupMenu(
@@ -95,7 +95,7 @@ var _user$project$Main$reminderOverlayAction = function (action) {
 };
 var _user$project$Main$maybeMapToCmd = function (fn) {
 	return A2(
-		_user$project$Ext_Function_Infix_ops['>>?='],
+		_user$project$X_Function_Infix_ops['>>?='],
 		_elm_lang$core$Maybe$map(fn),
 		_elm_lang$core$Platform_Cmd$none);
 };
@@ -112,7 +112,7 @@ var _user$project$Main$updateTodoAndMaybeAlsoSelected = F2(
 				action,
 				_user$project$Document$getId(todo)));
 	});
-var _user$project$Main$modelTapLog = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Debug$tapLog, _Fresheyeball$elm_return$Return$map);
+var _user$project$Main$modelTapLog = A2(_user$project$X_Function_Infix_ops['>>>'], _user$project$X_Debug$tapLog, _Fresheyeball$elm_return$Return$map);
 var _user$project$Main$map = _Fresheyeball$elm_return$Return$map;
 var _user$project$Main$logMsg = F2(
 	function (msg, model) {
@@ -149,8 +149,8 @@ var _user$project$Main$withNow = function (toMsg) {
 		A2(_elm_lang$core$Task$perform, toMsg, _elm_lang$core$Time$now));
 };
 var _user$project$Main$welcomeEntitiesURL = 'https://firebasestorage.googleapis.com/v0/b/simple-gtd-prod.appspot.com/o/public%2Fwelcome-entities.json?alt=media';
-var _user$project$Main$set = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$set, _user$project$Main$map);
-var _user$project$Main$over = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$Ext_Record$over, _user$project$Main$map);
+var _user$project$Main$set = A2(_user$project$X_Function_Infix_ops['>>>'], _user$project$X_Record$set, _user$project$Main$map);
+var _user$project$Main$over = A2(_user$project$X_Function_Infix_ops['>>>'], _user$project$X_Record$over, _user$project$Main$map);
 var _user$project$Main$subscriptions = function (m) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
@@ -158,10 +158,10 @@ var _user$project$Main$subscriptions = function (m) {
 			_0: A2(_elm_lang$core$Time$every, _elm_lang$core$Time$second * 1, _user$project$Model$OnNowChanged),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Ext_Keyboard$subscription(_user$project$Model$OnKeyboardMsg),
+				_0: _user$project$X_Keyboard$subscription(_user$project$Model$OnKeyboardMsg),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$ups(_user$project$Model$OnGlobalKeyUp),
+					_0: _user$project$X_Keyboard$ups(_user$project$Model$OnGlobalKeyUp),
 					_1: {
 						ctor: '::',
 						_0: _user$project$Store$onChange(_user$project$Model$OnPouchDBChange),
@@ -206,11 +206,11 @@ var _user$project$Main$update = function (msg) {
 					case 'OnCommonMsg':
 						return _user$project$CommonMsg$update(_p12._0);
 					case 'OnPouchDBChange':
-						return _user$project$Ext_Return$andThenMaybe(
+						return _user$project$X_Return$andThenMaybe(
 							A2(
-								_user$project$Ext_Function_Infix_ops['>>?'],
+								_user$project$X_Function_Infix_ops['>>?'],
 								A2(
-									_user$project$Ext_Function_Infix_ops['>>?'],
+									_user$project$X_Function_Infix_ops['>>?'],
 									A2(_user$project$Model$upsertEncodedDocOnPouchDBChange, _p12._0, _p12._1),
 									_elm_lang$core$Tuple$mapFirst(_user$project$Model$OnEntityUpsert)),
 								_elm_lang$core$Basics$uncurry(_user$project$Main$update)));
@@ -247,10 +247,10 @@ var _user$project$Main$update = function (msg) {
 								_user$project$Main$startSyncWithFirebase,
 								_p16,
 								A2(
-									_user$project$Ext_Return$maybeEffect,
+									_user$project$X_Return$maybeEffect,
 									_user$project$Main$firebaseSetupOnDisconnectCmd,
 									A2(
-										_user$project$Ext_Return$maybeEffect,
+										_user$project$X_Return$maybeEffect,
 										_user$project$Main$firebaseUpdateClientCmd,
 										A2(
 											_Fresheyeball$elm_return$Return$map,
@@ -260,7 +260,7 @@ var _user$project$Main$update = function (msg) {
 					case 'OnFCMTokenChanged':
 						return function (_p17) {
 							return A2(
-								_user$project$Ext_Return$maybeEffect,
+								_user$project$X_Return$maybeEffect,
 								_user$project$Main$firebaseUpdateClientCmd,
 								A2(
 									_Fresheyeball$elm_return$Return$map,
@@ -270,7 +270,7 @@ var _user$project$Main$update = function (msg) {
 					case 'OnFirebaseConnectionChanged':
 						return function (_p18) {
 							return A2(
-								_user$project$Ext_Return$maybeEffect,
+								_user$project$X_Return$maybeEffect,
 								_user$project$Main$firebaseUpdateClientCmd,
 								A2(
 									_Fresheyeball$elm_return$Return$map,
@@ -516,7 +516,7 @@ var _user$project$Main$update = function (msg) {
 								A2(
 									_Fresheyeball$elm_return$Return$map,
 									_user$project$Model$updateKeyboardState(
-										_user$project$Ext_Keyboard$update(_p12._0)),
+										_user$project$X_Keyboard$update(_p12._0)),
 									_p43));
 						};
 					case 'OnSaveCurrentForm':
@@ -669,7 +669,7 @@ var _user$project$Main$andThenUpdate = function (_p61) {
 };
 var _user$project$Main$onGlobalKeyUp = function (key) {
 	return A2(
-		_user$project$Ext_Return$with,
+		_user$project$X_Return$with,
 		_user$project$Model$getEditMode,
 		function (editMode) {
 			var _p62 = {ctor: '_Tuple2', _0: key, _1: editMode};

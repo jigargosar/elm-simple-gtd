@@ -9,11 +9,11 @@ import Html
 import Todo
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Ext.Keyboard exposing (onKeyDown)
+import X.Keyboard exposing (onKeyDown)
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
 import Model
@@ -23,7 +23,7 @@ import ViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
+import X.Html exposing (onClickStopPropagation)
 import View.Shared exposing (badge)
 
 

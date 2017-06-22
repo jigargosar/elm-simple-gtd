@@ -1,0 +1,122 @@
+var _gdotdesign$elm_ui$Ext_Date$ago = F2(
+	function (date, other) {
+		var format = F2(
+			function (number, affix) {
+				var prefix = _elm_lang$core$Native_Utils.eq(affix, 'hour') ? 'an' : 'a';
+				return (_elm_lang$core$Native_Utils.cmp(number, 2) < 0) ? A2(
+					_elm_lang$core$Basics_ops['++'],
+					prefix,
+					A2(_elm_lang$core$Basics_ops['++'], ' ', affix)) : A2(
+					_elm_lang$core$Basics_ops['++'],
+					_elm_lang$core$Basics$toString(number),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						' ',
+						A2(_elm_lang$core$Basics_ops['++'], affix, 's')));
+			});
+		var seconds = (_elm_lang$core$Date$toTime(other) - _elm_lang$core$Date$toTime(date)) / 1000;
+		var year = _elm_lang$core$Basics$floor(seconds / 31536000);
+		var month = _elm_lang$core$Basics$floor(seconds / 2592000);
+		var day = _elm_lang$core$Basics$floor(seconds / 86400);
+		var hour = _elm_lang$core$Basics$floor(seconds / 3600);
+		var minute = _elm_lang$core$Basics$floor(seconds / 60);
+		var value = (_elm_lang$core$Native_Utils.cmp(year, 1) > -1) ? A2(format, year, 'year') : ((_elm_lang$core$Native_Utils.cmp(month, 1) > -1) ? A2(format, month, 'month') : ((_elm_lang$core$Native_Utils.cmp(day, 1) > -1) ? A2(format, day, 'day') : ((_elm_lang$core$Native_Utils.cmp(hour, 1) > -1) ? A2(format, hour, 'hour') : ((_elm_lang$core$Native_Utils.cmp(minute, 1) > -1) ? A2(format, minute, 'minute') : A2(
+			format,
+			_elm_lang$core$Basics$floor(seconds),
+			'second')))));
+		return (_elm_lang$core$Native_Utils.cmp(minute, 0) > 0) ? ((_elm_lang$core$Native_Utils.cmp(seconds, 0) > 0) ? A2(_elm_lang$core$Basics_ops['++'], value, ' ago') : A2(_elm_lang$core$Basics_ops['++'], 'in ', value)) : 'just now';
+	});
+var _gdotdesign$elm_ui$Ext_Date$daysInMonth = function (date) {
+	return _gdotdesign$elm_ui$Native_DateTime.daysInMonth(date);
+};
+var _gdotdesign$elm_ui$Ext_Date$month = function (date) {
+	return _gdotdesign$elm_ui$Native_DateTime.month(date);
+};
+var _gdotdesign$elm_ui$Ext_Date$isSameMonth = F2(
+	function (date, other) {
+		return _elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$Date$year(date),
+			_elm_lang$core$Date$year(other)) && _elm_lang$core$Native_Utils.eq(
+			_gdotdesign$elm_ui$Ext_Date$month(date),
+			_gdotdesign$elm_ui$Ext_Date$month(other));
+	});
+var _gdotdesign$elm_ui$Ext_Date$isSameDate = F2(
+	function (date, other) {
+		return _elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$Date$year(date),
+			_elm_lang$core$Date$year(other)) && (_elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$Date$day(date),
+			_elm_lang$core$Date$day(other)) && _elm_lang$core$Native_Utils.eq(
+			_gdotdesign$elm_ui$Ext_Date$month(date),
+			_gdotdesign$elm_ui$Ext_Date$month(other)));
+	});
+var _gdotdesign$elm_ui$Ext_Date$createDate = F3(
+	function (year, month, day) {
+		return A3(_gdotdesign$elm_ui$Native_DateTime.create, year, month, day);
+	});
+var _gdotdesign$elm_ui$Ext_Date$datesInMonth = function (date) {
+	var create = function (day) {
+		return A3(
+			_gdotdesign$elm_ui$Ext_Date$createDate,
+			_elm_lang$core$Date$year(date),
+			_gdotdesign$elm_ui$Ext_Date$month(date),
+			day + 1);
+	};
+	return _elm_lang$core$Array$toList(
+		A2(
+			_elm_lang$core$Array$initialize,
+			_gdotdesign$elm_ui$Ext_Date$daysInMonth(date),
+			create));
+};
+var _gdotdesign$elm_ui$Ext_Date$previousDay = function (date) {
+	return A3(
+		_gdotdesign$elm_ui$Ext_Date$createDate,
+		_elm_lang$core$Date$year(date),
+		_gdotdesign$elm_ui$Ext_Date$month(date),
+		_elm_lang$core$Date$day(date) - 1);
+};
+var _gdotdesign$elm_ui$Ext_Date$nextDay = function (date) {
+	return A3(
+		_gdotdesign$elm_ui$Ext_Date$createDate,
+		_elm_lang$core$Date$year(date),
+		_gdotdesign$elm_ui$Ext_Date$month(date),
+		_elm_lang$core$Date$day(date) + 1);
+};
+var _gdotdesign$elm_ui$Ext_Date$begginingOfMonth = function (date) {
+	return A3(
+		_gdotdesign$elm_ui$Ext_Date$createDate,
+		_elm_lang$core$Date$year(date),
+		_gdotdesign$elm_ui$Ext_Date$month(date),
+		1);
+};
+var _gdotdesign$elm_ui$Ext_Date$nextMonth = function (date) {
+	return _gdotdesign$elm_ui$Ext_Date$begginingOfMonth(
+		A3(
+			_gdotdesign$elm_ui$Ext_Date$createDate,
+			_elm_lang$core$Date$year(date),
+			_gdotdesign$elm_ui$Ext_Date$month(date) + 1,
+			_elm_lang$core$Date$day(date)));
+};
+var _gdotdesign$elm_ui$Ext_Date$previousMonth = function (date) {
+	return _gdotdesign$elm_ui$Ext_Date$begginingOfMonth(
+		A3(
+			_gdotdesign$elm_ui$Ext_Date$createDate,
+			_elm_lang$core$Date$year(date),
+			_gdotdesign$elm_ui$Ext_Date$month(date),
+			0));
+};
+var _gdotdesign$elm_ui$Ext_Date$endOfMonth = function (date) {
+	return A3(
+		_gdotdesign$elm_ui$Ext_Date$createDate,
+		_elm_lang$core$Date$year(date),
+		_gdotdesign$elm_ui$Ext_Date$month(date) + 1,
+		0);
+};
+var _gdotdesign$elm_ui$Ext_Date$now = function (_p0) {
+	return _gdotdesign$elm_ui$Native_DateTime.now(_elm_lang$core$Maybe$Nothing);
+};
+var _gdotdesign$elm_ui$Ext_Date$nowTime = function (_p1) {
+	return _elm_lang$core$Date$toTime(
+		_gdotdesign$elm_ui$Ext_Date$now(
+			{ctor: '_Tuple0'}));
+};

@@ -1,0 +1,133 @@
+var _gdotdesign$elm_ui$Ui_Styles_ColorPicker$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Styles_Picker$style(theme),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Ui_Css$selector,
+					'ui-color-panel',
+					{
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderColor(_gdotdesign$elm_ui$Ui_Css_Properties$transparent),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gdotdesign$elm_ui$Ui_Css$selector,
+						'ui-picker-input',
+						{
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$paddingRight(
+								_gdotdesign$elm_ui$Ui_Css_Properties$px(52)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_gdotdesign$elm_ui$Ui_Css$selector,
+							'ui-color-picker-text',
+							{
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$ellipsis,
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Ui_Css$selector,
+								'ui-color-picker-rect',
+								{
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$backgroundColor('#DDD'),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_gdotdesign$elm_ui$Ui_Css$property,
+											'background-image',
+											A2(_elm_lang$core$Basics_ops['++'], 'linear-gradient(45deg, #F5F5F5 25%, transparent 25%, transparent 75%, #F5F5F5 75%, #F5F5F5),', 'linear-gradient(45deg, #F5F5F5 25%, transparent 25%, transparent 75%, #F5F5F5 75%, #F5F5F5)')),
+										_1: {
+											ctor: '::',
+											_0: A2(_gdotdesign$elm_ui$Ui_Css$property, 'background-position', '0 0, 9px 9px'),
+											_1: {
+												ctor: '::',
+												_0: A2(_gdotdesign$elm_ui$Ui_Css$property, 'background-size', '18px 18px'),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(theme.borderRadius),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$absolute),
+														_1: {
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$flex),
+															_1: {
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+																	_gdotdesign$elm_ui$Ui_Css_Properties$px(36)),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$bottom(
+																		_gdotdesign$elm_ui$Ui_Css_Properties$px(5)),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$right(
+																			_gdotdesign$elm_ui$Ui_Css_Properties$px(4)),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$top(
+																				_gdotdesign$elm_ui$Ui_Css_Properties$px(4)),
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_gdotdesign$elm_ui$Ui_Css$selector,
+																					'ui-color-picker-background',
+																					{
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$boxShadow(
+																							{
+																								ctor: '::',
+																								_0: {
+																									color: 'rgba(0,0,0,0.2)',
+																									spread: _gdotdesign$elm_ui$Ui_Css_Properties$px(1),
+																									blur: _gdotdesign$elm_ui$Ui_Css_Properties$px(1),
+																									inset: true,
+																									y: _gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																									x: _gdotdesign$elm_ui$Ui_Css_Properties$zero
+																								},
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {
+																							ctor: '::',
+																							_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(theme.borderRadius),
+																							_1: {
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$flex_('1'),
+																								_1: {ctor: '[]'}
+																							}
+																						}
+																					}),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_ColorPicker$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_ColorPicker$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

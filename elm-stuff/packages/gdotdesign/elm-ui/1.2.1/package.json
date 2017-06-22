@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "docs": "elm-make --docs=documentation.json",
+    "start": "elm-reactor -p 8002",
+    "spec": "elm-spec -f progress",
+    "install": "elm-install"
+  },
+  "dependencies": {
+    "elm": "^0.18.0",
+    "elm-spec": "^1.1.0",
+    "elm-github-install": "^0.3.0"
+  },
+  "engines": {
+    "node": ">= 4"
+  }
+}

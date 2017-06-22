@@ -1,0 +1,149 @@
+var _gdotdesign$elm_ui$Ui_Helpers_Picker$update = F2(
+	function (action, model) {
+		var _p0 = action;
+		switch (_p0.ctor) {
+			case 'Toggle':
+				return _gdotdesign$elm_dom$DOM$contains(
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'[id=\'',
+						A2(_elm_lang$core$Basics_ops['++'], model.uid, '\']:focus'))) ? _gdotdesign$elm_ui$Ui_Helpers_Dropdown$toggle(model) : model;
+			case 'Blur':
+				var selector = A2(
+					_elm_lang$core$Basics_ops['++'],
+					'[id=\'',
+					A2(_elm_lang$core$Basics_ops['++'], model.uid, '\'] *:focus'));
+				return _gdotdesign$elm_dom$DOM$contains(selector) ? model : _gdotdesign$elm_ui$Ui_Helpers_Dropdown$close(model);
+			case 'Dropdown':
+				return A2(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$update, _p0._0, model);
+			case 'Close':
+				return _gdotdesign$elm_ui$Ui_Helpers_Dropdown$close(model);
+			default:
+				return _gdotdesign$elm_ui$Ui_Helpers_Dropdown$open(model);
+		}
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Picker$ViewModel = F5(
+	function (a, b, c, d, e) {
+		return {dropdownContents: a, attributes: b, contents: c, keyActions: d, address: e};
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Picker$Blur = {ctor: 'Blur'};
+var _gdotdesign$elm_ui$Ui_Helpers_Picker$Close = {ctor: 'Close'};
+var _gdotdesign$elm_ui$Ui_Helpers_Picker$Focus = {ctor: 'Focus'};
+var _gdotdesign$elm_ui$Ui_Helpers_Picker$Toggle = {ctor: 'Toggle'};
+var _gdotdesign$elm_ui$Ui_Helpers_Picker$Dropdown = function (a) {
+	return {ctor: 'Dropdown', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Picker$subscriptions = function (model) {
+	return A2(
+		_elm_lang$core$Platform_Sub$map,
+		_gdotdesign$elm_ui$Ui_Helpers_Picker$Dropdown,
+		_gdotdesign$elm_ui$Ui_Helpers_Dropdown$subscriptions(model));
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Picker$view = F2(
+	function (_p1, model) {
+		var _p2 = _p1;
+		var _p5 = _p2;
+		var _p4 = _p2.address;
+		var toggleAction = _gdotdesign$elm_dom$DOM$contains(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'[id=\'',
+				A2(_elm_lang$core$Basics_ops['++'], model.uid, '\']:focus'))) ? {
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onMouseDown(_gdotdesign$elm_ui$Ui_Helpers_Picker$Toggle),
+			_1: {ctor: '[]'}
+		} : {ctor: '[]'};
+		var toggleAttributes = A2(
+			_elm_lang$core$List$map,
+			_elm_lang$html$Html_Attributes$map(_p5.address),
+			toggleAction);
+		var actions = A2(
+			_gdotdesign$elm_ui$Ui$enabledActions,
+			model,
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Html_Events_Extra$onFocusOut(
+					_p4(_gdotdesign$elm_ui$Ui_Helpers_Picker$Blur)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onFocus(
+						_p4(_gdotdesign$elm_ui$Ui_Helpers_Picker$Focus)),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onBlur(
+							_p4(_gdotdesign$elm_ui$Ui_Helpers_Picker$Blur)),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Html_Events_Extra$onKeys,
+								false,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									{
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: 13,
+											_1: _p4(_gdotdesign$elm_ui$Ui_Helpers_Picker$Toggle)
+										},
+										_1: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 27,
+												_1: _p4(_gdotdesign$elm_ui$Ui_Helpers_Picker$Close)
+											},
+											_1: {ctor: '[]'}
+										}
+									},
+									_p5.keyActions)),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+		var finalActions = _elm_lang$core$List$concat(
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui$attributeList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'disabled', _1: model.disabled},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'readonly', _1: model.readonly},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: actions,
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui$tabIndex(model),
+						_1: {
+							ctor: '::',
+							_0: _p5.attributes,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+		return A2(
+			_gdotdesign$elm_ui$Ui_Helpers_Dropdown$view,
+			{
+				address: function (_p3) {
+					return _p5.address(
+						_gdotdesign$elm_ui$Ui_Helpers_Picker$Dropdown(_p3));
+				},
+				contents: _p5.dropdownContents,
+				attributes: finalActions,
+				tag: 'ui-picker',
+				children: {
+					ctor: '::',
+					_0: A3(_elm_lang$html$Html$node, 'ui-picker-input', toggleAttributes, _p5.contents),
+					_1: {ctor: '[]'}
+				}
+			},
+			model);
+	});

@@ -14,10 +14,10 @@ var _user$project$GroupDoc_EditView$init = function (form) {
 			_0: _elm_lang$html$Html_Attributes$class('overlay'),
 			_1: {
 				ctor: '::',
-				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(fireCancel),
+				_0: _user$project$X_Html$onClickStopPropagation(fireCancel),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+					_0: _user$project$X_Keyboard$onKeyDownStopPropagation(
 						function (_p1) {
 							return _user$project$Model$NOOP;
 						}),
@@ -34,7 +34,7 @@ var _user$project$GroupDoc_EditView$init = function (form) {
 					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 					_1: {
 						ctor: '::',
-						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
+						_0: _user$project$X_Html$onClickStopPropagation(_user$project$Model$NOOP),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -56,13 +56,13 @@ var _user$project$GroupDoc_EditView$init = function (form) {
 									_0: _elm_lang$html$Html_Attributes$class('input-field'),
 									_1: {
 										ctor: '::',
-										_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+										_0: _user$project$X_Keyboard$onKeyDownStopPropagation(
 											function (_p2) {
 												return _user$project$Model$NOOP;
 											}),
 										_1: {
 											ctor: '::',
-											_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
+											_0: _user$project$X_Html$onClickStopPropagation(_user$project$Model$NOOP),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -82,7 +82,7 @@ var _user$project$GroupDoc_EditView$init = function (form) {
 													_0: _elm_lang$html$Html_Attributes$defaultValue(form.name),
 													_1: {
 														ctor: '::',
-														_0: _user$project$Ext_Keyboard$onEnter(fireSaveForm),
+														_0: _user$project$X_Keyboard$onEnter(fireSaveForm),
 														_1: {
 															ctor: '::',
 															_0: _elm_lang$html$Html_Events$onInput(fireNameChanged),

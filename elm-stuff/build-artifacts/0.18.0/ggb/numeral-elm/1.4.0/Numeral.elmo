@@ -1,0 +1,859 @@
+var _ggb$numeral_elm$Numeral$createFinalString = function (_p0) {
+	var _p1 = _p0;
+	var _p2 = _p1.parens;
+	return A2(
+		_elm_lang$core$String$join,
+		'',
+		{
+			ctor: '::',
+			_0: _elm_lang$core$Tuple$first(_p2),
+			_1: {
+				ctor: '::',
+				_0: _p1.minus,
+				_1: {
+					ctor: '::',
+					_0: _p1.plus,
+					_1: {
+						ctor: '::',
+						_0: _p1.word,
+						_1: {
+							ctor: '::',
+							_0: _p1.decimal,
+							_1: {
+								ctor: '::',
+								_0: _p1.ordinal,
+								_1: {
+									ctor: '::',
+									_0: _p1.abbreviation,
+									_1: {
+										ctor: '::',
+										_0: _p1.bytes,
+										_1: {
+											ctor: '::',
+											_0: _p1.customSuffix,
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$core$Tuple$second(_p2),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _ggb$numeral_elm$Numeral$hasPlus = function (numeral) {
+	return ((!numeral.neg) && numeral.signed) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{plus: '+'}) : numeral;
+};
+var _ggb$numeral_elm$Numeral$hasMinus = function (numeral) {
+	return ((!numeral.negP) && numeral.neg) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{minus: '-'}) : numeral;
+};
+var _ggb$numeral_elm$Numeral$createParens = function (numeral) {
+	return (numeral.negP && numeral.neg) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			parens: {ctor: '_Tuple2', _0: '(', _1: ')'}
+		}) : numeral;
+};
+var _ggb$numeral_elm$Numeral$checkIfNegative = function (numeral) {
+	return A2(_elm_lang$core$String$contains, '-', numeral.word) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			word: A3(
+				_elm_lang$core$String$slice,
+				1,
+				_elm_lang$core$String$length(numeral.word),
+				numeral.word),
+			neg: true
+		}) : numeral;
+};
+var _ggb$numeral_elm$Numeral$processDecimal = function (numeral) {
+	var d = numeral.decimal;
+	var result = A2(
+		_elm_lang$core$Maybe$withDefault,
+		1,
+		_elm_lang$core$Result$toMaybe(
+			_elm_lang$core$String$toInt(
+				A3(
+					_elm_lang$core$String$slice,
+					1,
+					_elm_lang$core$String$length(d),
+					d))));
+	return (numeral.optionalDecimal && _elm_lang$core$Native_Utils.eq(result, 0)) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{decimal: ''}) : _elm_lang$core$Native_Utils.update(
+		numeral,
+		{decimal: d});
+};
+var _ggb$numeral_elm$Numeral$processLeadingZeros = function (numeral) {
+	var w = _elm_lang$core$String$length(
+		A2(
+			_elm_lang$core$Maybe$withDefault,
+			'',
+			_elm_lang$core$List$head(
+				A2(_elm_lang$core$String$split, '.', numeral.word))));
+	var n = numeral.leadingZeros - w;
+	var prefix = A2(_elm_lang$core$String$repeat, n, '0');
+	return _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			word: A2(_elm_lang$core$Basics_ops['++'], prefix, numeral.word)
+		});
+};
+var _ggb$numeral_elm$Numeral$getPrecision = function (numeral) {
+	var splitted = A2(_elm_lang$core$String$split, '.', numeral.format);
+	var leadingZeros = _elm_lang$core$String$length(
+		A2(
+			_elm_lang$core$Maybe$withDefault,
+			'',
+			_elm_lang$core$List$head(splitted)));
+	var leadingZeros_ = A2(_elm_lang$core$String$contains, ',', numeral.format) ? 0 : leadingZeros;
+	var precision = A2(
+		_elm_lang$core$Maybe$withDefault,
+		'',
+		_elm_lang$core$List$head(
+			A2(_elm_lang$core$List$drop, 1, splitted)));
+	return _elm_lang$core$Native_Utils.update(
+		numeral,
+		{precision: precision, leadingZeros: leadingZeros_});
+};
+var _ggb$numeral_elm$Numeral$processWord = function (numeral) {
+	var w = A2(
+		_elm_lang$core$Maybe$withDefault,
+		'',
+		_elm_lang$core$List$head(
+			A2(_elm_lang$core$String$split, '.', numeral.strValue)));
+	return _elm_lang$core$Native_Utils.update(
+		numeral,
+		{word: w});
+};
+var _ggb$numeral_elm$Numeral$updateStringValue = function (numeral) {
+	return _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			strValue: _elm_lang$core$Basics$toString(numeral.value)
+		});
+};
+var _ggb$numeral_elm$Numeral$addThousandsDelimiter = F2(
+	function (lang, word) {
+		return A4(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$All,
+			_elm_lang$core$Regex$regex('(\\d)(?=(\\d{3})+(?!\\d))'),
+			function (_p3) {
+				var _p4 = _p3;
+				return A2(_elm_lang$core$Basics_ops['++'], _p4.match, lang.delimiters.thousands);
+			},
+			word);
+	});
+var _ggb$numeral_elm$Numeral$checkThousandsDelimiter = function (numeral) {
+	return A2(_elm_lang$core$String$contains, ',', numeral.format) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			word: A2(_ggb$numeral_elm$Numeral$addThousandsDelimiter, numeral.language, numeral.word)
+		}) : numeral;
+};
+var _ggb$numeral_elm$Numeral$toFixed = F2(
+	function (precision, value) {
+		var pad = function (num) {
+			var _p5 = num;
+			_v2_2:
+			do {
+				if (_p5.ctor === '::') {
+					if (_p5._1.ctor === '::') {
+						if (_p5._1._1.ctor === '[]') {
+							return {
+								ctor: '::',
+								_0: _p5._0,
+								_1: {
+									ctor: '::',
+									_0: A3(
+										_elm_lang$core$String$padRight,
+										precision,
+										_elm_lang$core$Native_Utils.chr('0'),
+										_p5._1._0),
+									_1: {ctor: '[]'}
+								}
+							};
+						} else {
+							break _v2_2;
+						}
+					} else {
+						return {
+							ctor: '::',
+							_0: _p5._0,
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_elm_lang$core$String$padRight,
+									precision,
+									_elm_lang$core$Native_Utils.chr('0'),
+									''),
+								_1: {ctor: '[]'}
+							}
+						};
+					}
+				} else {
+					break _v2_2;
+				}
+			} while(false);
+			return _p5;
+		};
+		var power = Math.pow(
+			_elm_lang$core$Basics$toFloat(10),
+			_elm_lang$core$Basics$toFloat(precision));
+		return A2(
+			_elm_lang$core$String$join,
+			'.',
+			pad(
+				A2(
+					_elm_lang$core$String$split,
+					'.',
+					_elm_lang$core$Basics$toString(
+						_elm_lang$core$Basics$toFloat(
+							_elm_lang$core$Basics$round((value * power) + 1.0e-2)) / power))));
+	});
+var _ggb$numeral_elm$Numeral$checkForCustomSuffix = function (numeral) {
+	var hasSuffix = _elm_lang$core$List$head(
+		A3(
+			_elm_lang$core$Regex$find,
+			_elm_lang$core$Regex$All,
+			_elm_lang$core$Regex$regex('\\[\\D+\\]$'),
+			numeral.format));
+	var _p6 = hasSuffix;
+	if (_p6.ctor === 'Nothing') {
+		return numeral;
+	} else {
+		var _p9 = _p6._0.match;
+		return _elm_lang$core$Native_Utils.update(
+			numeral,
+			{
+				format: A4(
+					_elm_lang$core$Regex$replace,
+					_elm_lang$core$Regex$All,
+					_elm_lang$core$Regex$regex(
+						_elm_lang$core$Regex$escape(_p9)),
+					function (_p7) {
+						return '';
+					},
+					numeral.format),
+				customSuffix: A4(
+					_elm_lang$core$Regex$replace,
+					_elm_lang$core$Regex$All,
+					_elm_lang$core$Regex$regex('\\[|\\]'),
+					function (_p8) {
+						return '';
+					},
+					_p9)
+			});
+	}
+};
+var _ggb$numeral_elm$Numeral$checkOptionalDec = function (numeral) {
+	return A2(_elm_lang$core$String$contains, '[.]', numeral.format) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			format: A4(
+				_elm_lang$core$Regex$replace,
+				_elm_lang$core$Regex$All,
+				_elm_lang$core$Regex$regex(
+					_elm_lang$core$Regex$escape('[.]')),
+				function (_p10) {
+					return '.';
+				},
+				numeral.format),
+			optionalDecimal: true
+		}) : numeral;
+};
+var _ggb$numeral_elm$Numeral$formatTime = F4(
+	function (lang, format, value, strValue) {
+		var hours = _elm_lang$core$Basics$toFloat(
+			_elm_lang$core$Basics$floor((value / 60) / 60));
+		var minutes = _elm_lang$core$Basics$toFloat(
+			_elm_lang$core$Basics$floor((value - ((hours * 60) * 60)) / 60));
+		var seconds = _elm_lang$core$Basics$round((value - ((hours * 60) * 60)) - (minutes * 60));
+		var hasOneDigit = function (val) {
+			return (_elm_lang$core$Native_Utils.cmp(
+				_elm_lang$core$String$length(val),
+				2) < 0) ? A2(_elm_lang$core$Basics_ops['++'], '0', val) : val;
+		};
+		return A2(
+			_elm_lang$core$String$join,
+			':',
+			{
+				ctor: '::',
+				_0: _elm_lang$core$Basics$toString(hours),
+				_1: {
+					ctor: '::',
+					_0: hasOneDigit(
+						_elm_lang$core$Basics$toString(minutes)),
+					_1: {
+						ctor: '::',
+						_0: hasOneDigit(
+							_elm_lang$core$Basics$toString(seconds)),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	});
+var _ggb$numeral_elm$Numeral$emptyReplace = function (str) {
+	return A3(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$All,
+		_elm_lang$core$Regex$regex(str),
+		function (_p11) {
+			return '';
+		});
+};
+var _ggb$numeral_elm$Numeral$formatWithoutCurrency = function (format) {
+	return A2(_elm_lang$core$String$contains, ' $', format) ? {
+		ctor: '_Tuple2',
+		_0: ' ',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, ' \\$', format)
+	} : (A2(_elm_lang$core$String$contains, '$ ', format) ? {
+		ctor: '_Tuple2',
+		_0: ' ',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, '\\$ ', format)
+	} : {
+		ctor: '_Tuple2',
+		_0: '',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, '\\$', format)
+	});
+};
+var _ggb$numeral_elm$Numeral$formatWithoutPercent = function (format) {
+	return A2(_elm_lang$core$String$contains, ' %', format) ? {
+		ctor: '_Tuple2',
+		_0: ' ',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, ' %', format)
+	} : {
+		ctor: '_Tuple2',
+		_0: '',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, '%', format)
+	};
+};
+var _ggb$numeral_elm$Numeral$checkParensAndSign = function (numeral) {
+	return A2(_elm_lang$core$String$contains, '(', numeral.format) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			format: A3(_elm_lang$core$String$slice, 1, -1, numeral.format),
+			negP: true,
+			signed: false
+		}) : (A2(_elm_lang$core$String$contains, '+', numeral.format) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			format: A2(_ggb$numeral_elm$Numeral$emptyReplace, '\\+', numeral.format),
+			negP: false,
+			signed: true
+		}) : numeral);
+};
+var _ggb$numeral_elm$Numeral$checkAbbreviation = function (numeral) {
+	var _p12 = numeral;
+	var language = _p12.language;
+	var format = _p12.format;
+	var value = _p12.value;
+	var abbrK = A2(_elm_lang$core$String$contains, 'aK', format);
+	var abbrM = A2(_elm_lang$core$String$contains, 'aM', format);
+	var abbrB = A2(_elm_lang$core$String$contains, 'aB', format);
+	var abbrT = A2(_elm_lang$core$String$contains, 'aT', format);
+	var abbrForce = !(abbrK || (abbrM || (abbrB || abbrT)));
+	var absValue = _elm_lang$core$Basics$abs(value);
+	var _p13 = A2(_elm_lang$core$String$contains, ' a', format) ? {
+		ctor: '_Tuple2',
+		_0: ' ',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, ' a', format)
+	} : {
+		ctor: '_Tuple2',
+		_0: '',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, 'a', format)
+	};
+	var abbr = _p13._0;
+	var format1 = _p13._1;
+	return (!A2(_elm_lang$core$String$contains, 'a', format)) ? numeral : ((((_elm_lang$core$Native_Utils.cmp(
+		absValue,
+		Math.pow(10, 12)) > -1) && abbrForce) || abbrT) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			format: format1,
+			abbreviation: A2(_elm_lang$core$Basics_ops['++'], abbr, language.abbreviations.trillion),
+			value: value / Math.pow(10, 12)
+		}) : ((((_elm_lang$core$Native_Utils.cmp(
+		absValue,
+		Math.pow(10, 12)) < 0) && ((_elm_lang$core$Native_Utils.cmp(
+		absValue,
+		Math.pow(10, 9)) > -1) && abbrForce)) || abbrB) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			format: format1,
+			abbreviation: A2(_elm_lang$core$Basics_ops['++'], abbr, language.abbreviations.billion),
+			value: value / Math.pow(10, 9)
+		}) : ((((_elm_lang$core$Native_Utils.cmp(
+		absValue,
+		Math.pow(10, 9)) < 0) && ((_elm_lang$core$Native_Utils.cmp(
+		absValue,
+		Math.pow(10, 6)) > -1) && abbrForce)) || abbrM) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			format: format1,
+			abbreviation: A2(_elm_lang$core$Basics_ops['++'], abbr, language.abbreviations.million),
+			value: value / Math.pow(10, 6)
+		}) : ((((_elm_lang$core$Native_Utils.cmp(
+		absValue,
+		Math.pow(10, 6)) < 0) && ((_elm_lang$core$Native_Utils.cmp(
+		absValue,
+		Math.pow(10, 3)) > -1) && abbrForce)) || abbrK) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			format: format1,
+			abbreviation: A2(_elm_lang$core$Basics_ops['++'], abbr, language.abbreviations.thousand),
+			value: value / Math.pow(10, 3)
+		}) : _elm_lang$core$Native_Utils.update(
+		numeral,
+		{format: format1, abbreviation: abbr})))));
+};
+var _ggb$numeral_elm$Numeral$checkOrdinal = function (numeral) {
+	var _p14 = numeral;
+	var language = _p14.language;
+	var format = _p14.format;
+	var value = _p14.value;
+	var _p15 = A2(_elm_lang$core$String$contains, ' o', format) ? {
+		ctor: '_Tuple2',
+		_0: ' ',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, ' o', format)
+	} : {
+		ctor: '_Tuple2',
+		_0: '',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, 'o', format)
+	};
+	var ord = _p15._0;
+	var format1 = _p15._1;
+	return A2(_elm_lang$core$String$contains, 'o', format) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			format: format1,
+			ordinal: A2(
+				_elm_lang$core$Basics_ops['++'],
+				ord,
+				numeral.language.ordinal(value))
+		}) : numeral;
+};
+var _ggb$numeral_elm$Numeral$toFixedWithOptional = F2(
+	function (prs, value) {
+		var _p16 = prs;
+		_v4_2:
+		do {
+			if (_p16.ctor === '::') {
+				if (_p16._1.ctor === '::') {
+					if (_p16._1._1.ctor === '[]') {
+						var _p17 = _p16._1._0;
+						return A2(
+							_ggb$numeral_elm$Numeral$emptyReplace,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'0{1,',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_elm_lang$core$Basics$toString(_p17),
+									'}$')),
+							A2(_ggb$numeral_elm$Numeral$toFixed, _p16._0 + _p17, value));
+					} else {
+						break _v4_2;
+					}
+				} else {
+					return A2(_ggb$numeral_elm$Numeral$toFixed, _p16._0, value);
+				}
+			} else {
+				break _v4_2;
+			}
+		} while(false);
+		return _elm_lang$core$Basics$toString(value);
+	});
+var _ggb$numeral_elm$Numeral$processPrecision = function (numeral) {
+	var _p18 = numeral;
+	var language = _p18.language;
+	var format = _p18.format;
+	var value = _p18.value;
+	var precision = _p18.precision;
+	var fst = A2(_elm_lang$core$String$contains, '[', precision) ? A3(
+		_elm_lang$core$Basics$flip,
+		_ggb$numeral_elm$Numeral$toFixedWithOptional,
+		value,
+		A2(
+			_elm_lang$core$List$take,
+			2,
+			A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$String$length,
+				A2(
+					_elm_lang$core$String$split,
+					'[',
+					A2(_ggb$numeral_elm$Numeral$emptyReplace, ']', precision))))) : A2(
+		_ggb$numeral_elm$Numeral$toFixed,
+		_elm_lang$core$String$length(precision),
+		value);
+	var w = A2(
+		_elm_lang$core$Maybe$withDefault,
+		'',
+		_elm_lang$core$List$head(
+			A2(_elm_lang$core$String$split, '.', fst)));
+	var snd = function () {
+		var _p19 = A2(_elm_lang$core$String$split, '.', fst);
+		if (((_p19.ctor === '::') && (_p19._1.ctor === '::')) && (_p19._1._1.ctor === '[]')) {
+			var _p20 = _p19._1._0;
+			return (_elm_lang$core$Native_Utils.cmp(
+				_elm_lang$core$String$length(_p20),
+				0) > 0) ? A2(_elm_lang$core$Basics_ops['++'], language.delimiters.decimal, _p20) : '';
+		} else {
+			return '';
+		}
+	}();
+	return _elm_lang$core$Native_Utils.eq(precision, '') ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{word: w, decimal: ''}) : _elm_lang$core$Native_Utils.update(
+		numeral,
+		{word: w, decimal: snd});
+};
+var _ggb$numeral_elm$Numeral$indexOf = F2(
+	function (part, word) {
+		return A2(
+			_elm_lang$core$Maybe$withDefault,
+			-1,
+			_elm_lang$core$List$head(
+				A2(_elm_lang$core$String$indexes, part, word)));
+	});
+var _ggb$numeral_elm$Numeral$createFinalWord = function (numeral) {
+	return _elm_lang$core$Native_Utils.eq(
+		A2(_ggb$numeral_elm$Numeral$indexOf, '.', numeral.format),
+		0) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{word: ''}) : numeral;
+};
+var _ggb$numeral_elm$Numeral$suffixes = _elm_lang$core$Array$fromList(
+	{
+		ctor: '::',
+		_0: 'B',
+		_1: {
+			ctor: '::',
+			_0: 'KB',
+			_1: {
+				ctor: '::',
+				_0: 'MB',
+				_1: {
+					ctor: '::',
+					_0: 'GB',
+					_1: {
+						ctor: '::',
+						_0: 'TB',
+						_1: {
+							ctor: '::',
+							_0: 'PB',
+							_1: {
+								ctor: '::',
+								_0: 'EB',
+								_1: {
+									ctor: '::',
+									_0: 'ZB',
+									_1: {
+										ctor: '::',
+										_0: 'YB',
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	});
+var _ggb$numeral_elm$Numeral$checkByte = function (numeral) {
+	var _p21 = numeral;
+	var format = _p21.format;
+	var value = _p21.value;
+	var _p22 = A2(_elm_lang$core$String$contains, ' b', format) ? {
+		ctor: '_Tuple2',
+		_0: ' ',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, ' b', format)
+	} : {
+		ctor: '_Tuple2',
+		_0: '',
+		_1: A2(_ggb$numeral_elm$Numeral$emptyReplace, 'b', format)
+	};
+	var bytes = _p22._0;
+	var format1 = _p22._1;
+	var suffixIndex1 = function (power) {
+		suffixIndex1:
+		while (true) {
+			var maxValue = Math.pow(1024, power + 1);
+			var minValue = Math.pow(1024, power);
+			if ((_elm_lang$core$Native_Utils.cmp(value, minValue) > -1) && (_elm_lang$core$Native_Utils.cmp(value, maxValue) < 0)) {
+				return (_elm_lang$core$Native_Utils.cmp(minValue, 0) > 0) ? {ctor: '_Tuple2', _0: power, _1: value / minValue} : {ctor: '_Tuple2', _0: power, _1: value};
+			} else {
+				if (_elm_lang$core$Native_Utils.cmp(power, 10) < 0) {
+					var _v6 = power + 1;
+					power = _v6;
+					continue suffixIndex1;
+				} else {
+					return {ctor: '_Tuple2', _0: -1, _1: value};
+				}
+			}
+		}
+	};
+	var _p23 = suffixIndex1(0);
+	var suffixIndex = _p23._0;
+	var value1 = _p23._1;
+	var suffix = A2(
+		_elm_lang$core$Maybe$withDefault,
+		'',
+		A2(_elm_lang$core$Array$get, suffixIndex, _ggb$numeral_elm$Numeral$suffixes));
+	return A2(_elm_lang$core$String$contains, 'b', format) ? _elm_lang$core$Native_Utils.update(
+		numeral,
+		{
+			format: format1,
+			value: value1,
+			bytes: A2(_elm_lang$core$Basics_ops['++'], bytes, suffix)
+		}) : numeral;
+};
+var _ggb$numeral_elm$Numeral$formatNumber = function (numeral) {
+	return _ggb$numeral_elm$Numeral$createFinalString(
+		_ggb$numeral_elm$Numeral$hasPlus(
+			_ggb$numeral_elm$Numeral$hasMinus(
+				_ggb$numeral_elm$Numeral$createParens(
+					_ggb$numeral_elm$Numeral$createFinalWord(
+						_ggb$numeral_elm$Numeral$checkIfNegative(
+							_ggb$numeral_elm$Numeral$checkThousandsDelimiter(
+								_ggb$numeral_elm$Numeral$processDecimal(
+									_ggb$numeral_elm$Numeral$processLeadingZeros(
+										_ggb$numeral_elm$Numeral$processPrecision(
+											_ggb$numeral_elm$Numeral$getPrecision(
+												_ggb$numeral_elm$Numeral$processWord(
+													_ggb$numeral_elm$Numeral$updateStringValue(
+														_ggb$numeral_elm$Numeral$checkOptionalDec(
+															_ggb$numeral_elm$Numeral$checkOrdinal(
+																_ggb$numeral_elm$Numeral$checkByte(
+																	_ggb$numeral_elm$Numeral$checkAbbreviation(
+																		_ggb$numeral_elm$Numeral$checkForCustomSuffix(
+																			_ggb$numeral_elm$Numeral$checkParensAndSign(numeral)))))))))))))))))));
+};
+var _ggb$numeral_elm$Numeral$empty = F3(
+	function (lang, format, value) {
+		return {
+			language: lang,
+			format: format,
+			value: value,
+			word: '',
+			strValue: _elm_lang$core$Basics$toString(value),
+			signed: false,
+			neg: false,
+			negP: false,
+			customSuffix: '',
+			abbreviation: '',
+			bytes: '',
+			ordinal: '',
+			decimal: '',
+			optionalDecimal: false,
+			parens: {ctor: '_Tuple2', _0: '', _1: ''},
+			precision: '',
+			leadingZeros: 0,
+			minus: '',
+			plus: ''
+		};
+	});
+var _ggb$numeral_elm$Numeral$formatCurrency = F4(
+	function (lang, format, value, strValue) {
+		var currencySymbol = lang.currency.symbol;
+		var _p24 = _ggb$numeral_elm$Numeral$formatWithoutCurrency(format);
+		var space = _p24._0;
+		var format1 = _p24._1;
+		var formatted = _ggb$numeral_elm$Numeral$formatNumber(
+			A3(_ggb$numeral_elm$Numeral$empty, lang, format1, value));
+		var minusSignIndex = A2(_ggb$numeral_elm$Numeral$indexOf, '-', format);
+		var openParenIndex = A2(_ggb$numeral_elm$Numeral$indexOf, '(', format);
+		var symbolIndex = A2(_ggb$numeral_elm$Numeral$indexOf, '$', format);
+		return (_elm_lang$core$Native_Utils.cmp(symbolIndex, 1) < 1) ? ((A2(_elm_lang$core$String$contains, '(', formatted) || A2(_elm_lang$core$String$contains, '-', formatted)) ? (((_elm_lang$core$Native_Utils.cmp(symbolIndex, openParenIndex) < 0) || (_elm_lang$core$Native_Utils.cmp(symbolIndex, minusSignIndex) < 0)) ? A2(
+			_elm_lang$core$String$join,
+			'',
+			{
+				ctor: '::',
+				_0: currencySymbol,
+				_1: {
+					ctor: '::',
+					_0: space,
+					_1: {
+						ctor: '::',
+						_0: A2(_elm_lang$core$String$contains, '-', formatted) ? '-' : '',
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$core$String$contains, '(', formatted) ? '(' : '',
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_elm_lang$core$String$slice,
+									1,
+									_elm_lang$core$String$length(formatted),
+									formatted),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}) : A2(
+			_elm_lang$core$String$join,
+			'',
+			{
+				ctor: '::',
+				_0: A2(_elm_lang$core$String$contains, '-', formatted) ? '-' : '',
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$core$String$contains, '(', formatted) ? '(' : '',
+					_1: {
+						ctor: '::',
+						_0: currencySymbol,
+						_1: {
+							ctor: '::',
+							_0: space,
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_elm_lang$core$String$slice,
+									1,
+									_elm_lang$core$String$length(formatted),
+									formatted),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			})) : A2(
+			_elm_lang$core$Basics_ops['++'],
+			currencySymbol,
+			A2(_elm_lang$core$Basics_ops['++'], space, formatted))) : (A2(_elm_lang$core$String$contains, ')', formatted) ? A2(
+			_elm_lang$core$String$join,
+			'',
+			{
+				ctor: '::',
+				_0: A3(
+					_elm_lang$core$String$slice,
+					0,
+					_elm_lang$core$String$length(formatted) - 1,
+					formatted),
+				_1: {
+					ctor: '::',
+					_0: space,
+					_1: {
+						ctor: '::',
+						_0: currencySymbol,
+						_1: {
+							ctor: '::',
+							_0: ')',
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}) : A2(
+			_elm_lang$core$Basics_ops['++'],
+			formatted,
+			A2(_elm_lang$core$Basics_ops['++'], space, currencySymbol)));
+	});
+var _ggb$numeral_elm$Numeral$formatPercentage = F4(
+	function (lang, format, value, strValue) {
+		var _p25 = _ggb$numeral_elm$Numeral$formatWithoutPercent(format);
+		var space = _p25._0;
+		var format1 = _p25._1;
+		var value1 = value * 100;
+		var formatted = _ggb$numeral_elm$Numeral$formatNumber(
+			A3(_ggb$numeral_elm$Numeral$empty, lang, format1, value1));
+		return A2(_elm_lang$core$String$contains, ')', formatted) ? A2(
+			_elm_lang$core$String$join,
+			'',
+			{
+				ctor: '::',
+				_0: A3(
+					_elm_lang$core$String$slice,
+					0,
+					_elm_lang$core$String$length(formatted) - 1,
+					formatted),
+				_1: {
+					ctor: '::',
+					_0: space,
+					_1: {
+						ctor: '::',
+						_0: '%',
+						_1: {
+							ctor: '::',
+							_0: ')',
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}) : A2(
+			_elm_lang$core$Basics_ops['++'],
+			formatted,
+			A2(_elm_lang$core$Basics_ops['++'], space, '%'));
+	});
+var _ggb$numeral_elm$Numeral$formatWithLanguage = F3(
+	function (lang, format, value) {
+		return A2(_elm_lang$core$String$contains, '$', format) ? A4(
+			_ggb$numeral_elm$Numeral$formatCurrency,
+			lang,
+			format,
+			value,
+			_elm_lang$core$Basics$toString(value)) : (A2(_elm_lang$core$String$contains, '%', format) ? A4(
+			_ggb$numeral_elm$Numeral$formatPercentage,
+			lang,
+			format,
+			value,
+			_elm_lang$core$Basics$toString(value)) : (A2(_elm_lang$core$String$contains, ':', format) ? A4(
+			_ggb$numeral_elm$Numeral$formatTime,
+			lang,
+			format,
+			value,
+			_elm_lang$core$Basics$toString(value)) : _ggb$numeral_elm$Numeral$formatNumber(
+			A3(_ggb$numeral_elm$Numeral$empty, lang, format, value))));
+	});
+var _ggb$numeral_elm$Numeral$format = _ggb$numeral_elm$Numeral$formatWithLanguage(_ggb$numeral_elm$Languages_English$lang);
+var _ggb$numeral_elm$Numeral$Numeral = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return function (r) {
+																		return function (s) {
+																			return {language: a, format: b, value: c, word: d, strValue: e, signed: f, neg: g, negP: h, customSuffix: i, abbreviation: j, bytes: k, ordinal: l, decimal: m, optionalDecimal: n, parens: o, precision: p, leadingZeros: q, minus: r, plus: s};
+																		};
+																	};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};

@@ -1,0 +1,15 @@
+var _ggb$numeral_elm$Languages_BritishEnglish$englishOrdinal = function (number) {
+	var number1 = _elm_lang$core$Basics$floor(number);
+	var b = A2(_elm_lang$core$Basics_ops['%'], number1, 10);
+	return _elm_lang$core$Native_Utils.eq(
+		_elm_lang$core$Basics$floor(
+			_elm_lang$core$Basics$toFloat(
+				A2(_elm_lang$core$Basics_ops['%'], number1, 100)) / 10),
+		1) ? 'th' : (_elm_lang$core$Native_Utils.eq(b, 1) ? 'st' : (_elm_lang$core$Native_Utils.eq(b, 2) ? 'nd' : (_elm_lang$core$Native_Utils.eq(b, 3) ? 'rd' : 'th')));
+};
+var _ggb$numeral_elm$Languages_BritishEnglish$lang = {
+	delimiters: {thousands: ',', decimal: '.'},
+	abbreviations: {thousand: 'k', million: 'm', billion: 'b', trillion: 't'},
+	ordinal: _ggb$numeral_elm$Languages_BritishEnglish$englishOrdinal,
+	currency: {symbol: '£'}
+};

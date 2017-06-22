@@ -4,7 +4,7 @@ var _user$project$GroupDoc_View$headerItem = function (vm) {
 		vm.archive.iconName,
 		{
 			ctor: '::',
-			_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.archive.onClick),
+			_0: _user$project$X_Html$onClickStopPropagation(vm.archive.onClick),
 			_1: {
 				ctor: '::',
 				_0: vm.tabindexAV,
@@ -16,7 +16,7 @@ var _user$project$GroupDoc_View$headerItem = function (vm) {
 		'create',
 		{
 			ctor: '::',
-			_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(vm.startEditingMsg),
+			_0: _user$project$X_Html$onClickStopPropagation(vm.startEditingMsg),
 			_1: {
 				ctor: '::',
 				_0: vm.tabindexAV,
@@ -37,13 +37,13 @@ var _user$project$GroupDoc_View$headerItem = function (vm) {
 				_0: _elm_lang$svg$Svg_Events$onFocusIn(vm.onFocusIn),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
+					_0: _user$project$X_Keyboard$onKeyDown(vm.onKeyDownMsg),
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$html$Html_Attributes$classList(
 							{
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'entity-item focusable-list-item collection-item', true),
+								_0: A2(_user$project$X_Function_Infix_ops['=>'], 'entity-item focusable-list-item collection-item', true),
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}

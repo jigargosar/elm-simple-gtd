@@ -9,10 +9,10 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 				_0: _elm_lang$html$Html_Attributes$style(
 					{
 						ctor: '::',
-						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'position', 'relative'),
+						_0: A2(_user$project$X_Function_Infix_ops['=>'], 'position', 'relative'),
 						_1: {
 							ctor: '::',
-							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'top', '5px'),
+							_0: A2(_user$project$X_Function_Infix_ops['=>'], 'top', '5px'),
 							_1: {ctor: '[]'}
 						}
 					}),
@@ -45,10 +45,10 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 							_0: _elm_lang$html$Html_Attributes$style(
 								{
 									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'position', 'relative'),
+									_0: A2(_user$project$X_Function_Infix_ops['=>'], 'position', 'relative'),
 									_1: {
 										ctor: '::',
-										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'top', '-5px'),
+										_0: A2(_user$project$X_Function_Infix_ops['=>'], 'top', '-5px'),
 										_1: {ctor: '[]'}
 									}
 								}),
@@ -67,7 +67,7 @@ var _user$project$Todo_TimeTracker_View$view = function (vm) {
 									_0: _elm_lang$html$Html_Attributes$style(
 										{
 											ctor: '::',
-											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'margin-right', '1rem'),
+											_0: A2(_user$project$X_Function_Infix_ops['=>'], 'margin-right', '1rem'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -127,7 +127,7 @@ var _user$project$Todo_TimeTracker_View$createViewModel = F2(
 		var playPauseIconName = _p0._1;
 		return {
 			displayText: todoText,
-			displayTime: _user$project$Ext_Time$toHHMMSS(elapsedTime),
+			displayTime: _user$project$X_Time$toHHMMSS(elapsedTime),
 			playPauseIconName: playPauseIconName,
 			onStop: _user$project$Model$onTodoStopRunning,
 			onTogglePause: _user$project$Model$onTodoTogglePaused

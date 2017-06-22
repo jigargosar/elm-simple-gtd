@@ -1,0 +1,485 @@
+var _gdotdesign$elm_ui$Ui_ColorPanel$renderHandle = F2(
+	function (top, left) {
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-color-panel-handle',
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'top', _1: top},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'left', _1: left},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{ctor: '[]'});
+	});
+var _gdotdesign$elm_ui$Ui_ColorPanel$handleClick = function (model) {
+	var drag = _gdotdesign$elm_ui$Ui_Helpers_Drag$end(model.drag);
+	var hueDrag = _gdotdesign$elm_ui$Ui_Helpers_Drag$end(model.hueDrag);
+	var alphaDrag = _gdotdesign$elm_ui$Ui_Helpers_Drag$end(model.alphaDrag);
+	return (_elm_lang$core$Native_Utils.eq(model.alphaDrag, alphaDrag) && (_elm_lang$core$Native_Utils.eq(model.hueDrag, hueDrag) && _elm_lang$core$Native_Utils.eq(model.drag, drag))) ? model : _elm_lang$core$Native_Utils.update(
+		model,
+		{alphaDrag: alphaDrag, hueDrag: hueDrag, drag: drag});
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$onChange = F2(
+	function (msg, model) {
+		return A2(
+			_gdotdesign$elm_ui$Ui_Helpers_Emitter$listen,
+			model.uid,
+			A3(
+				_gdotdesign$elm_ui$Ui_Helpers_Emitter$decode,
+				_gdotdesign$elm_ui$Ext_Color$decodeHsv,
+				_gdotdesign$elm_ui$Ext_Color$toHsv(_elm_lang$core$Color$black),
+				msg));
+	});
+var _gdotdesign$elm_ui$Ui_ColorPanel$initDrag = function (id) {
+	return {drag: _gdotdesign$elm_ui$Ui_Helpers_Drag$init, uid: id};
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$init = function (_p0) {
+	var uid = _gdotdesign$elm_ui$Ui_Native_Uid$uid(
+		{ctor: '_Tuple0'});
+	return {
+		alphaDrag: _gdotdesign$elm_ui$Ui_ColorPanel$initDrag(
+			A2(_elm_lang$core$Basics_ops['++'], uid, 'alpha')),
+		value: _gdotdesign$elm_ui$Ext_Color$toHsv(_elm_lang$core$Color$black),
+		hueDrag: _gdotdesign$elm_ui$Ui_ColorPanel$initDrag(
+			A2(_elm_lang$core$Basics_ops['++'], uid, 'hue')),
+		drag: _gdotdesign$elm_ui$Ui_ColorPanel$initDrag(
+			A2(_elm_lang$core$Basics_ops['++'], uid, 'rect')),
+		fields: _gdotdesign$elm_ui$Ui_ColorFields$init(
+			{ctor: '_Tuple0'}),
+		disabled: false,
+		readonly: false,
+		uid: uid
+	};
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {fields: a, alphaDrag: b, hueDrag: c, drag: d, disabled: e, readonly: f, uid: g, value: h};
+	});
+var _gdotdesign$elm_ui$Ui_ColorPanel$DragModel = F2(
+	function (a, b) {
+		return {drag: a, uid: b};
+	});
+var _gdotdesign$elm_ui$Ui_ColorPanel$End = {ctor: 'End'};
+var _gdotdesign$elm_ui$Ui_ColorPanel$SetValue = function (a) {
+	return {ctor: 'SetValue', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$LiftHue = function (a) {
+	return {ctor: 'LiftHue', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$MoveHue = function (a) {
+	return {ctor: 'MoveHue', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$MoveRect = function (a) {
+	return {ctor: 'MoveRect', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$LiftRect = function (a) {
+	return {ctor: 'LiftRect', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$MoveAlpha = function (a) {
+	return {ctor: 'MoveAlpha', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: A2(_gdotdesign$elm_ui$Ui_ColorFields$onChange, _gdotdesign$elm_ui$Ui_ColorPanel$SetValue, model.fields),
+			_1: {
+				ctor: '::',
+				_0: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$onMove, _gdotdesign$elm_ui$Ui_ColorPanel$MoveAlpha, model.alphaDrag),
+				_1: {
+					ctor: '::',
+					_0: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$onMove, _gdotdesign$elm_ui$Ui_ColorPanel$MoveHue, model.hueDrag),
+					_1: {
+						ctor: '::',
+						_0: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$onMove, _gdotdesign$elm_ui$Ui_ColorPanel$MoveRect, model.drag),
+						_1: {
+							ctor: '::',
+							_0: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$onEnd, _gdotdesign$elm_ui$Ui_ColorPanel$End, model.alphaDrag),
+							_1: {
+								ctor: '::',
+								_0: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$onEnd, _gdotdesign$elm_ui$Ui_ColorPanel$End, model.hueDrag),
+								_1: {
+									ctor: '::',
+									_0: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$onEnd, _gdotdesign$elm_ui$Ui_ColorPanel$End, model.drag),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$LiftAlpha = function (a) {
+	return {ctor: 'LiftAlpha', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$Fields = function (a) {
+	return {ctor: 'Fields', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$render = function (_p1) {
+	var _p2 = _p1;
+	var _p3 = _p2;
+	var action = function (act) {
+		return A2(
+			_gdotdesign$elm_ui$Ui$enabledActions,
+			_p3,
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Helpers_Drag$liftHandler(act),
+				_1: {ctor: '[]'}
+			});
+	};
+	var asPercent = function (value) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(
+				A2(_gdotdesign$elm_ui$Ext_Number$roundTo, 2, value * 100)),
+			'%');
+	};
+	var color = _p3.value;
+	var colorTransparent = _gdotdesign$elm_ui$Ext_Color$toCSSRgba(
+		_elm_lang$core$Native_Utils.update(
+			color,
+			{alpha: 0}));
+	var colorFull = _gdotdesign$elm_ui$Ext_Color$toCSSRgba(
+		_elm_lang$core$Native_Utils.update(
+			color,
+			{alpha: 1}));
+	var gradient = A2(
+		_elm_lang$core$Basics_ops['++'],
+		'linear-gradient(90deg, ',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			colorTransparent,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				',',
+				A2(_elm_lang$core$Basics_ops['++'], colorFull, ')'))));
+	var background = A2(
+		_elm_lang$core$Basics_ops['++'],
+		'hsla(',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(
+				_elm_lang$core$Basics$round(_p3.value.hue * 360)),
+			', 100%, 50%, 1)'));
+	return A3(
+		_elm_lang$html$Html$node,
+		'ui-color-panel',
+		_elm_lang$core$List$concat(
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui$attributeList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'disabled', _1: _p3.disabled},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'readonly', _1: _p3.readonly},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_ColorPanel$defaultStyle),
+					_1: {ctor: '[]'}
+				}
+			}),
+		{
+			ctor: '::',
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'ui-color-panel-hsv',
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A3(
+						_elm_lang$html$Html$node,
+						'ui-color-panel-box',
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A3(
+								_elm_lang$html$Html$node,
+								'ui-color-panel-rect',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$id(_p3.drag.uid),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$style(
+												{
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'background-color', _1: background},
+													_1: {
+														ctor: '::',
+														_0: {
+															ctor: '_Tuple2',
+															_0: 'cursor',
+															_1: _p3.drag.drag.dragging ? 'move' : ''
+														},
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									},
+									action(_gdotdesign$elm_ui$Ui_ColorPanel$LiftRect)),
+								{
+									ctor: '::',
+									_0: A2(
+										_gdotdesign$elm_ui$Ui_ColorPanel$renderHandle,
+										asPercent(1 - color.value),
+										asPercent(color.saturation)),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_elm_lang$html$Html$node,
+									'ui-color-panel-hue',
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$id(_p3.hueDrag.uid),
+										_1: action(_gdotdesign$elm_ui$Ui_ColorPanel$LiftHue)
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_gdotdesign$elm_ui$Ui_ColorPanel$renderHandle,
+											asPercent(color.hue),
+											''),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_elm_lang$html$Html$node,
+							'ui-color-panel-alpha',
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$id(_p3.alphaDrag.uid),
+								_1: action(_gdotdesign$elm_ui$Ui_ColorPanel$LiftAlpha)
+							},
+							{
+								ctor: '::',
+								_0: A3(
+									_elm_lang$html$Html$node,
+									'ui-color-panel-alpha-background',
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$style(
+											{
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'background-image', _1: gradient},
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_gdotdesign$elm_ui$Ui_ColorPanel$renderHandle,
+										'',
+										asPercent(color.alpha)),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$map,
+					_gdotdesign$elm_ui$Ui_ColorPanel$Fields,
+					_gdotdesign$elm_ui$Ui_ColorFields$view(
+						_elm_lang$core$Native_Utils.update(
+							_p2.fields,
+							{disabled: _p3.disabled, readonly: _p3.readonly}))),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$view = function (model) {
+	return A2(_elm_lang$html$Html_Lazy$lazy, _gdotdesign$elm_ui$Ui_ColorPanel$render, model);
+};
+var _gdotdesign$elm_ui$Ui_ColorPanel$setValue = F2(
+	function (color, model) {
+		var hsv = _gdotdesign$elm_ui$Ext_Color$toHsv(color);
+		var _p4 = A2(_gdotdesign$elm_ui$Ui_ColorFields$setValue, hsv, model.fields);
+		var fields = _p4._0;
+		var cmd = _p4._1;
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{value: hsv, fields: fields}),
+			_1: A2(_elm_lang$core$Platform_Cmd$map, _gdotdesign$elm_ui$Ui_ColorPanel$Fields, cmd)
+		};
+	});
+var _gdotdesign$elm_ui$Ui_ColorPanel$updateValue = F2(
+	function (value, model) {
+		if (_elm_lang$core$Native_Utils.eq(model.value, value)) {
+			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		} else {
+			var _p5 = A2(_gdotdesign$elm_ui$Ui_ColorFields$setValue, value, model.fields);
+			var fields = _p5._0;
+			var cmd = _p5._1;
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{value: value, fields: fields}),
+				_1: _elm_lang$core$Platform_Cmd$batch(
+					{
+						ctor: '::',
+						_0: A2(
+							_gdotdesign$elm_ui$Ui_Helpers_Emitter$send,
+							model.uid,
+							_gdotdesign$elm_ui$Ext_Color$encodeHsv(value)),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$core$Platform_Cmd$map, _gdotdesign$elm_ui$Ui_ColorPanel$Fields, cmd),
+							_1: {ctor: '[]'}
+						}
+					})
+			};
+		}
+	});
+var _gdotdesign$elm_ui$Ui_ColorPanel$handleHue = F2(
+	function (position, _p6) {
+		var _p7 = _p6;
+		var _p9 = _p7.value;
+		var _p8 = _p7;
+		var hue = A3(
+			_elm_lang$core$Basics$clamp,
+			0,
+			1,
+			function (_) {
+				return _.top;
+			}(
+				A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$relativePercentPosition, position, _p8.hueDrag)));
+		var updatedValue = _elm_lang$core$Native_Utils.eq(_p9.hue, hue) ? _p9 : _elm_lang$core$Native_Utils.update(
+			_p9,
+			{hue: hue});
+		return A2(_gdotdesign$elm_ui$Ui_ColorPanel$updateValue, updatedValue, _p8);
+	});
+var _gdotdesign$elm_ui$Ui_ColorPanel$handleRect = F2(
+	function (position, _p10) {
+		var _p11 = _p10;
+		var _p14 = _p11.value;
+		var _p13 = _p11;
+		var _p12 = A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$relativePercentPosition, position, _p13.drag);
+		var top = _p12.top;
+		var left = _p12.left;
+		var saturation = A3(_elm_lang$core$Basics$clamp, 0, 1, left);
+		var colorValue = 1 - A3(_elm_lang$core$Basics$clamp, 0, 1, top);
+		var updatedValue = (_elm_lang$core$Native_Utils.eq(_p14.saturation, saturation) && _elm_lang$core$Native_Utils.eq(_p14.value, colorValue)) ? _p14 : _elm_lang$core$Native_Utils.update(
+			_p14,
+			{saturation: saturation, value: colorValue});
+		return A2(_gdotdesign$elm_ui$Ui_ColorPanel$updateValue, updatedValue, _p13);
+	});
+var _gdotdesign$elm_ui$Ui_ColorPanel$handleAlpha = F2(
+	function (position, _p15) {
+		var _p16 = _p15;
+		var _p18 = _p16.value;
+		var _p17 = _p16;
+		var alpha = A3(
+			_elm_lang$core$Basics$clamp,
+			0,
+			1,
+			function (_) {
+				return _.left;
+			}(
+				A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$relativePercentPosition, position, _p17.alphaDrag)));
+		var updatedValue = _elm_lang$core$Native_Utils.eq(_p18.alpha, alpha) ? _p18 : _elm_lang$core$Native_Utils.update(
+			_p18,
+			{alpha: alpha});
+		return A2(_gdotdesign$elm_ui$Ui_ColorPanel$updateValue, updatedValue, _p17);
+	});
+var _gdotdesign$elm_ui$Ui_ColorPanel$update = F2(
+	function (action, model) {
+		var _p19 = action;
+		switch (_p19.ctor) {
+			case 'LiftAlpha':
+				var _p20 = _p19._0;
+				return A2(
+					_gdotdesign$elm_ui$Ui_ColorPanel$handleAlpha,
+					_p20,
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							alphaDrag: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$lift, _p20, model.alphaDrag)
+						}));
+			case 'LiftHue':
+				var _p21 = _p19._0;
+				return A2(
+					_gdotdesign$elm_ui$Ui_ColorPanel$handleHue,
+					_p21,
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							hueDrag: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$lift, _p21, model.hueDrag)
+						}));
+			case 'LiftRect':
+				var _p22 = _p19._0;
+				return A2(
+					_gdotdesign$elm_ui$Ui_ColorPanel$handleRect,
+					_p22,
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							drag: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$lift, _p22, model.drag)
+						}));
+			case 'MoveAlpha':
+				return A2(_gdotdesign$elm_ui$Ui_ColorPanel$handleAlpha, _p19._0, model);
+			case 'MoveRect':
+				return A2(_gdotdesign$elm_ui$Ui_ColorPanel$handleRect, _p19._0, model);
+			case 'MoveHue':
+				return A2(_gdotdesign$elm_ui$Ui_ColorPanel$handleHue, _p19._0, model);
+			case 'End':
+				return {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_ColorPanel$handleClick(model),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'SetValue':
+				var _p23 = _p19._0;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{value: _p23}),
+					_1: A2(
+						_gdotdesign$elm_ui$Ui_Helpers_Emitter$send,
+						model.uid,
+						_gdotdesign$elm_ui$Ext_Color$encodeHsv(_p23))
+				};
+			default:
+				var _p24 = A2(_gdotdesign$elm_ui$Ui_ColorFields$update, _p19._0, model.fields);
+				var fields = _p24._0;
+				var cmd = _p24._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{fields: fields}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _gdotdesign$elm_ui$Ui_ColorPanel$Fields, cmd)
+				};
+		}
+	});

@@ -21,15 +21,15 @@ port module Store
 import Dict exposing (Dict)
 import Dict.Extra
 import Document exposing (Document, Id)
-import Ext.Debug
-import Ext.List as List
-import Ext.Random as Random
-import Ext.Record as Record exposing (get, over, overT2)
+import X.Debug
+import X.List as List
+import X.Random as Random
+import X.Record as Record exposing (get, over, overT2)
 import Firebase exposing (DeviceId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Json.Decode as D exposing (Decoder)

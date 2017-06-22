@@ -1,5 +1,5 @@
 var _user$project$Project$nullId = '';
-var _user$project$Project$isNullId = _user$project$Ext_Function$equals(_user$project$Project$nullId);
+var _user$project$Project$isNullId = _user$project$X_Function$equals(_user$project$Project$nullId);
 var _user$project$Project$constructor = _user$project$GroupDoc$constructor;
 var _user$project$Project$init = F4(
 	function (name, now, deviceId, id) {
@@ -16,7 +16,7 @@ var _user$project$Project$filterNull = function (pred) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Project$isNull = _user$project$Ext_Function$equals(_user$project$Project$null);
+var _user$project$Project$isNull = _user$project$X_Function$equals(_user$project$Project$null);
 var _user$project$Project$sort = _user$project$GroupDoc$sort(_user$project$Project$isNull);
 var _user$project$Project$setName = F2(
 	function (name, model) {

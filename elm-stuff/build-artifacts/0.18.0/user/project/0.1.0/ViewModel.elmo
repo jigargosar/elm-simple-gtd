@@ -5,7 +5,7 @@ var _user$project$ViewModel$getViewInfo = F4(
 			return _elm_community$list_extra$List_Extra$find(
 				function (_p0) {
 					return A2(
-						_user$project$Ext_Function$equals,
+						_user$project$X_Function$equals,
 						id,
 						function (_) {
 							return _.id;
@@ -20,9 +20,9 @@ var _user$project$ViewModel$getViewInfo = F4(
 						return {ctor: '_Tuple2', _0: _p3.name, _1: _p3.backgroundColor};
 					}(
 						A2(
-							_user$project$Ext_Function_Infix_ops['>>?='],
+							_user$project$X_Function_Infix_ops['>>?='],
 							A2(
-								_user$project$Ext_Function_Infix_ops['>>?'],
+								_user$project$X_Function_Infix_ops['>>?'],
 								_elm_community$maybe_extra$Maybe_Extra$orElseLazy(
 									function (_p4) {
 										return A2(entityById, id, vm.nullVMAsList);

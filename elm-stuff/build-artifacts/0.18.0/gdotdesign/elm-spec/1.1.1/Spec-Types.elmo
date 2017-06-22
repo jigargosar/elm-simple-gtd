@@ -1,0 +1,209 @@
+var _gdotdesign$elm_spec$Spec_Types$flatten = F2(
+	function (tests, node) {
+		var _p0 = node;
+		switch (_p0.ctor) {
+			case 'Before':
+				return tests;
+			case 'After':
+				return tests;
+			case 'Http':
+				return tests;
+			case 'Layout':
+				return tests;
+			case 'GroupNode':
+				var _p6 = _p0._0;
+				var filterNodes = function (nd) {
+					var _p1 = nd;
+					switch (_p1.ctor) {
+						case 'After':
+							return false;
+						case 'Before':
+							return false;
+						default:
+							return true;
+					}
+				};
+				var filteredNodes = A2(_elm_lang$core$List$filter, filterNodes, _p6.nodes);
+				var getLayouts = function (nd) {
+					var _p2 = nd;
+					if (_p2.ctor === 'Layout') {
+						return _p2._0;
+					} else {
+						return {ctor: '[]'};
+					}
+				};
+				var layout = A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					{ctor: '[]'},
+					A2(_elm_lang$core$List$map, getLayouts, _p6.nodes));
+				var getAfters = function (nd) {
+					var _p3 = nd;
+					if (_p3.ctor === 'After') {
+						return _p3._0;
+					} else {
+						return {ctor: '[]'};
+					}
+				};
+				var afterSteps = A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					{ctor: '[]'},
+					A2(_elm_lang$core$List$map, getAfters, _p6.nodes));
+				var getBefores = function (nd) {
+					var _p4 = nd;
+					if (_p4.ctor === 'Before') {
+						return _p4._0;
+					} else {
+						return {ctor: '[]'};
+					}
+				};
+				var beforeSteps = A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					{ctor: '[]'},
+					A2(_elm_lang$core$List$map, getBefores, _p6.nodes));
+				var getRequests = function (nd) {
+					var _p5 = nd;
+					if (_p5.ctor === 'Http') {
+						return _p5._0;
+					} else {
+						return {ctor: '[]'};
+					}
+				};
+				var requests = A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					{ctor: '[]'},
+					A2(_elm_lang$core$List$map, getRequests, _p6.nodes));
+				return A2(
+					_elm_lang$core$List$map,
+					function (test) {
+						return _elm_lang$core$Native_Utils.update(
+							test,
+							{
+								steps: A2(
+									_elm_lang$core$Basics_ops['++'],
+									beforeSteps,
+									A2(_elm_lang$core$Basics_ops['++'], test.steps, afterSteps)),
+								requests: A2(_elm_lang$core$Basics_ops['++'], test.requests, requests),
+								path: A2(
+									_elm_lang$core$Basics_ops['++'],
+									{
+										ctor: '::',
+										_0: _p6.name,
+										_1: {ctor: '[]'}
+									},
+									test.path),
+								layout: A2(_elm_lang$core$Basics_ops['++'], test.layout, layout)
+							});
+					},
+					A3(
+						_elm_lang$core$List$foldr,
+						F2(
+							function (x, y) {
+								return A2(_elm_lang$core$Basics_ops['++'], x, y);
+							}),
+						tests,
+						A2(
+							_elm_lang$core$List$map,
+							_gdotdesign$elm_spec$Spec_Types$flatten(
+								{ctor: '[]'}),
+							filteredNodes)));
+			default:
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					tests,
+					{
+						ctor: '::',
+						_0: _p0._0,
+						_1: {ctor: '[]'}
+					});
+		}
+	});
+var _gdotdesign$elm_spec$Spec_Types$outcomeToString = function (outcome) {
+	var _p7 = outcome;
+	switch (_p7.ctor) {
+		case 'Error':
+			return _p7._0;
+		case 'Pass':
+			return _p7._0;
+		default:
+			return _p7._0;
+	}
+};
+var _gdotdesign$elm_spec$Spec_Types$Test = F7(
+	function (a, b, c, d, e, f, g) {
+		return {layout: a, requests: b, results: c, steps: d, path: e, name: f, id: g};
+	});
+var _gdotdesign$elm_spec$Spec_Types$Request = F3(
+	function (a, b, c) {
+		return {method: a, url: b, response: c};
+	});
+var _gdotdesign$elm_spec$Spec_Types$Rect = F7(
+	function (a, b, c, d, e, f, g) {
+		return {top: a, left: b, bottom: c, right: d, width: e, height: f, zIndex: g};
+	});
+var _gdotdesign$elm_spec$Spec_Types$Group = F2(
+	function (a, b) {
+		return {nodes: a, name: b};
+	});
+var _gdotdesign$elm_spec$Spec_Types$TextData = F2(
+	function (a, b) {
+		return {text: a, selector: b};
+	});
+var _gdotdesign$elm_spec$Spec_Types$ValueData = F2(
+	function (a, b) {
+		return {value: a, selector: b};
+	});
+var _gdotdesign$elm_spec$Spec_Types$AttributeData = F3(
+	function (a, b, c) {
+		return {text: a, selector: b, attribute: c};
+	});
+var _gdotdesign$elm_spec$Spec_Types$ClassData = F2(
+	function (a, b) {
+		return {$class: a, selector: b};
+	});
+var _gdotdesign$elm_spec$Spec_Types$StyleData = F3(
+	function (a, b, c) {
+		return {style: a, value: b, selector: c};
+	});
+var _gdotdesign$elm_spec$Spec_Types$TestNode = function (a) {
+	return {ctor: 'TestNode', _0: a};
+};
+var _gdotdesign$elm_spec$Spec_Types$GroupNode = function (a) {
+	return {ctor: 'GroupNode', _0: a};
+};
+var _gdotdesign$elm_spec$Spec_Types$Http = function (a) {
+	return {ctor: 'Http', _0: a};
+};
+var _gdotdesign$elm_spec$Spec_Types$After = function (a) {
+	return {ctor: 'After', _0: a};
+};
+var _gdotdesign$elm_spec$Spec_Types$Before = function (a) {
+	return {ctor: 'Before', _0: a};
+};
+var _gdotdesign$elm_spec$Spec_Types$Layout = function (a) {
+	return {ctor: 'Layout', _0: a};
+};
+var _gdotdesign$elm_spec$Spec_Types$Pass = function (a) {
+	return {ctor: 'Pass', _0: a};
+};
+var _gdotdesign$elm_spec$Spec_Types$Fail = function (a) {
+	return {ctor: 'Fail', _0: a};
+};
+var _gdotdesign$elm_spec$Spec_Types$Error = function (a) {
+	return {ctor: 'Error', _0: a};
+};

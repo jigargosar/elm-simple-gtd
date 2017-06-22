@@ -1,0 +1,173 @@
+var _gdotdesign$elm_spec$Spec$runWithProgram = _gdotdesign$elm_spec$Spec_Runner$runWithProgram;
+var _gdotdesign$elm_spec$Spec$run = _gdotdesign$elm_spec$Spec_Runner$run;
+var _gdotdesign$elm_spec$Spec$steps = {dispatchEvent: _gdotdesign$elm_spec$Native_Spec.dispatchEvent, getAttribute: _gdotdesign$elm_spec$Native_Spec.getAttribute, clearValue: _gdotdesign$elm_spec$Native_Spec.clearValue, getTitle: _gdotdesign$elm_spec$Native_Spec.getTitle, setValue: _gdotdesign$elm_spec$Native_Spec.setValue, getUrl: _gdotdesign$elm_spec$Native_Spec.getUrl, click: _gdotdesign$elm_spec$Native_Spec.click};
+var _gdotdesign$elm_spec$Spec$stepGroup = F2(
+	function (message, steps) {
+		var mapTask = function (task) {
+			return A2(
+				_elm_lang$core$Task$andThen,
+				function (_p0) {
+					return task;
+				},
+				_gdotdesign$elm_spec$Native_Spec.raf);
+		};
+		var isFail = function (outcome) {
+			var _p1 = outcome;
+			if (_p1.ctor === 'Fail') {
+				return true;
+			} else {
+				return false;
+			}
+		};
+		var isError = function (outcome) {
+			var _p2 = outcome;
+			if (_p2.ctor === 'Error') {
+				return true;
+			} else {
+				return false;
+			}
+		};
+		var handleResults = function (results) {
+			if (A2(_elm_lang$core$List$any, isError, results)) {
+				var errorMessage = A2(
+					_elm_lang$core$Maybe$withDefault,
+					'',
+					A2(
+						_elm_lang$core$Maybe$map,
+						_gdotdesign$elm_spec$Spec_Types$outcomeToString,
+						_elm_lang$core$List$head(
+							A2(_elm_lang$core$List$filter, isError, results))));
+				return _elm_lang$core$Task$succeed(
+					_gdotdesign$elm_spec$Spec_Assertions$error(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							message,
+							A2(_elm_lang$core$Basics_ops['++'], ':\n  ', errorMessage))));
+			} else {
+				if (A2(_elm_lang$core$List$any, isFail, results)) {
+					var failureMessage = A2(
+						_elm_lang$core$Maybe$withDefault,
+						'',
+						A2(
+							_elm_lang$core$Maybe$map,
+							_gdotdesign$elm_spec$Spec_Types$outcomeToString,
+							_elm_lang$core$List$head(
+								A2(_elm_lang$core$List$filter, isFail, results))));
+					return _elm_lang$core$Task$succeed(
+						_gdotdesign$elm_spec$Spec_Assertions$fail(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								message,
+								A2(_elm_lang$core$Basics_ops['++'], ':\n  ', failureMessage))));
+				} else {
+					return _elm_lang$core$Task$succeed(
+						_gdotdesign$elm_spec$Spec_Assertions$pass(message));
+				}
+			}
+		};
+		return A2(
+			_elm_lang$core$Task$andThen,
+			handleResults,
+			_elm_lang$core$Task$sequence(
+				A2(_elm_lang$core$List$map, mapTask, steps)));
+	});
+var _gdotdesign$elm_spec$Spec$http = _gdotdesign$elm_spec$Spec_Types$Http;
+var _gdotdesign$elm_spec$Spec$after = _gdotdesign$elm_spec$Spec_Types$After;
+var _gdotdesign$elm_spec$Spec$layout = _gdotdesign$elm_spec$Spec_Types$Layout;
+var _gdotdesign$elm_spec$Spec$before = _gdotdesign$elm_spec$Spec_Types$Before;
+var _gdotdesign$elm_spec$Spec$test = F2(
+	function (name, steps) {
+		return _gdotdesign$elm_spec$Spec_Types$TestNode(
+			{
+				steps: steps,
+				requests: {ctor: '[]'},
+				results: {ctor: '[]'},
+				layout: {ctor: '[]'},
+				name: name,
+				path: {ctor: '[]'},
+				id: -1
+			});
+	});
+var _gdotdesign$elm_spec$Spec$it = _gdotdesign$elm_spec$Spec$test;
+var _gdotdesign$elm_spec$Spec$group = F2(
+	function (name, nodes) {
+		return _gdotdesign$elm_spec$Spec_Types$GroupNode(
+			{name: name, nodes: nodes});
+	});
+var _gdotdesign$elm_spec$Spec$context = _gdotdesign$elm_spec$Spec$group;
+var _gdotdesign$elm_spec$Spec$describe = _gdotdesign$elm_spec$Spec$group;
+var _gdotdesign$elm_spec$Spec$flip = _gdotdesign$elm_spec$Spec_Assertions$flip;
+var _gdotdesign$elm_spec$Spec$assert = {
+	attributeContains: _gdotdesign$elm_spec$Spec_Native$attributeContains,
+	inlineStyleEquals: _gdotdesign$elm_spec$Spec_Native$inlineStyleEquals,
+	attributeEquals: _gdotdesign$elm_spec$Spec_Native$attributeEquals,
+	elementPresent: _gdotdesign$elm_spec$Spec_Native$elementPresent,
+	elementVisible: _gdotdesign$elm_spec$Spec_Native$elementVisible,
+	valueContains: _gdotdesign$elm_spec$Spec_Native$valueContains,
+	titleContains: _gdotdesign$elm_spec$Spec_Native$titleContains,
+	containsText: _gdotdesign$elm_spec$Spec_Native$containsText,
+	classPresent: _gdotdesign$elm_spec$Spec_Native$classPresent,
+	styleEquals: _gdotdesign$elm_spec$Spec_Native$styleEquals,
+	titleEquals: _gdotdesign$elm_spec$Spec_Native$titleEquals,
+	valueEquals: _gdotdesign$elm_spec$Spec_Native$valueEquals,
+	urlContains: _gdotdesign$elm_spec$Spec_Native$urlContains,
+	urlEquals: _gdotdesign$elm_spec$Spec_Native$urlEquals,
+	not: {
+		attributeContains: function (_p3) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$attributeContains(_p3));
+		},
+		inlineStyleEquals: function (_p4) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$inlineStyleEquals(_p4));
+		},
+		attributeEquals: function (_p5) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$attributeEquals(_p5));
+		},
+		elementPresent: function (_p6) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$elementPresent(_p6));
+		},
+		elementVisible: function (_p7) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$elementVisible(_p7));
+		},
+		valueContains: function (_p8) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$valueContains(_p8));
+		},
+		titleContains: function (_p9) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$titleContains(_p9));
+		},
+		containsText: function (_p10) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$containsText(_p10));
+		},
+		classPresent: function (_p11) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$classPresent(_p11));
+		},
+		styleEquals: function (_p12) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$styleEquals(_p12));
+		},
+		titleEquals: function (_p13) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$titleEquals(_p13));
+		},
+		valueEquals: function (_p14) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$valueEquals(_p14));
+		},
+		urlContains: function (_p15) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$urlContains(_p15));
+		},
+		urlEquals: function (_p16) {
+			return _gdotdesign$elm_spec$Spec$flip(
+				_gdotdesign$elm_spec$Spec_Native$urlEquals(_p16));
+		}
+	}
+};

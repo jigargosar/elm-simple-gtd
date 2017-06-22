@@ -4,14 +4,13 @@ import ActionList
 import ActionList.View
 import CustomSync
 import EntityList.View
+import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
 import ExclusiveMode
 import Firebase.View
-import Html.Attributes.Extra exposing (..)
 import Html exposing (Attribute, Html, a, div, form, h1, h2, h3, h4, h5, h6, hr, input, node, p, span, text)
 import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, tabindex, type_, value)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
 import Model
 import Model exposing (Msg, commonMsg)
 import View.Header
@@ -19,7 +18,7 @@ import View.AppDrawer
 import Model exposing (..)
 import Polymer.Paper as Paper
 import Polymer.App as App
-import Ext.Function.Infix exposing (..)
+import X.Function.Infix exposing (..)
 import View.ReminderOverlay exposing (maybe)
 import Todo.View
 import ViewModel

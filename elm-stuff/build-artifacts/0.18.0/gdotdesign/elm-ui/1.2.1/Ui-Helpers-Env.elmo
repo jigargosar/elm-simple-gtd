@@ -1,0 +1,10 @@
+var _gdotdesign$elm_ui$Ui_Helpers_Env$get = F2(
+	function (key, decoder) {
+		return A2(
+			_elm_lang$core$Json_Decode$decodeValue,
+			decoder,
+			_gdotdesign$elm_ui$Native_Env.get(key));
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Env$getString = function (name) {
+	return A2(_gdotdesign$elm_ui$Ui_Helpers_Env$get, name, _elm_lang$core$Json_Decode$string);
+};

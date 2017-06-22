@@ -4,7 +4,7 @@ var _user$project$GroupDoc$isArchived = function (_) {
 var _user$project$GroupDoc$isNotArchived = function (_p0) {
 	return !_user$project$GroupDoc$isArchived(_p0);
 };
-var _user$project$GroupDoc$isActive = _user$project$Ext_Predicate$all(
+var _user$project$GroupDoc$isActive = _user$project$X_Predicate$all(
 	{
 		ctor: '::',
 		_0: _user$project$Document$isNotDeleted,
@@ -14,7 +14,7 @@ var _user$project$GroupDoc$isActive = _user$project$Ext_Predicate$all(
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$GroupDoc$archivedButNotDeletedPred = _user$project$Ext_Predicate$all(
+var _user$project$GroupDoc$archivedButNotDeletedPred = _user$project$X_Predicate$all(
 	{
 		ctor: '::',
 		_0: _user$project$Document$isNotDeleted,
@@ -93,13 +93,13 @@ var _user$project$GroupDoc$encodeRecordFields = function (model) {
 	return {
 		ctor: '::',
 		_0: A2(
-			_user$project$Ext_Function_Infix_ops['=>'],
+			_user$project$X_Function_Infix_ops['=>'],
 			'name',
 			_elm_lang$core$Json_Encode$string(model.name)),
 		_1: {
 			ctor: '::',
 			_0: A2(
-				_user$project$Ext_Function_Infix_ops['=>'],
+				_user$project$X_Function_Infix_ops['=>'],
 				'archived',
 				_elm_lang$core$Json_Encode$bool(model.archived)),
 			_1: {ctor: '[]'}
@@ -134,7 +134,7 @@ var _user$project$GroupDoc$storeGenerator = function (dbName) {
 	return A3(_user$project$Store$generator, dbName, _user$project$GroupDoc$encodeRecordFields, _user$project$GroupDoc$decoder);
 };
 var _user$project$GroupDoc$archived = A2(
-	_user$project$Ext_Record$bool,
+	_user$project$X_Record$bool,
 	function (_) {
 		return _.archived;
 	},
@@ -144,7 +144,7 @@ var _user$project$GroupDoc$archived = A2(
 				b,
 				{archived: s});
 		}));
-var _user$project$GroupDoc$toggleArchived = _user$project$Ext_Record$toggle(_user$project$GroupDoc$archived);
+var _user$project$GroupDoc$toggleArchived = _user$project$X_Record$toggle(_user$project$GroupDoc$archived);
 var _user$project$GroupDoc$Record = F2(
 	function (a, b) {
 		return {name: a, archived: b};

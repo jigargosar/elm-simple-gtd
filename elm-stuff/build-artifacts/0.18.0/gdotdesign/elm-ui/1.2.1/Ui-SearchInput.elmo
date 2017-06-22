@@ -1,0 +1,128 @@
+var _gdotdesign$elm_ui$Ui_SearchInput$onChange = F2(
+	function (msg, model) {
+		return A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$listenString, model.uid, msg);
+	});
+var _gdotdesign$elm_ui$Ui_SearchInput$timeout = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{timeout: value});
+	});
+var _gdotdesign$elm_ui$Ui_SearchInput$showClearIcon = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				input: A2(_gdotdesign$elm_ui$Ui_Input$showClearIcon, value, model.input)
+			});
+	});
+var _gdotdesign$elm_ui$Ui_SearchInput$placeholder = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				input: A2(_gdotdesign$elm_ui$Ui_Input$placeholder, value, model.input)
+			});
+	});
+var _gdotdesign$elm_ui$Ui_SearchInput$init = function (_p0) {
+	return {
+		input: _gdotdesign$elm_ui$Ui_Input$init(
+			{ctor: '_Tuple0'}),
+		uid: _gdotdesign$elm_ui$Ui_Native_Uid$uid(
+			{ctor: '_Tuple0'}),
+		disabled: false,
+		readonly: false,
+		timeout: 1000,
+		timestamp: 0,
+		value: ''
+	};
+};
+var _gdotdesign$elm_ui$Ui_SearchInput$Model = F7(
+	function (a, b, c, d, e, f, g) {
+		return {input: a, timestamp: b, disabled: c, readonly: d, value: e, timeout: f, uid: g};
+	});
+var _gdotdesign$elm_ui$Ui_SearchInput$Update = function (a) {
+	return {ctor: 'Update', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_SearchInput$Input = function (a) {
+	return {ctor: 'Input', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_SearchInput$update = F2(
+	function (msg_, model) {
+		var _p1 = msg_;
+		if (_p1.ctor === 'Update') {
+			var value = model.input.value;
+			return (_elm_lang$core$Native_Utils.eq(_p1._0, model.timestamp + model.timeout) && (!_elm_lang$core$Native_Utils.eq(model.value, value))) ? {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{value: value}),
+				_1: A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$sendString, model.uid, value)
+			} : {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		} else {
+			var _p2 = A2(_gdotdesign$elm_ui$Ui_Input$update, _p1._0, model.input);
+			var input = _p2._0;
+			var inputCmd = _p2._1;
+			var justNow = _gdotdesign$elm_ui$Ext_Date$nowTime(
+				{ctor: '_Tuple0'});
+			var updatedModel = _elm_lang$core$Native_Utils.update(
+				model,
+				{timestamp: justNow, input: input});
+			var delayedUpdateCmd = A2(
+				_elm_lang$core$Task$perform,
+				function (_p3) {
+					return _gdotdesign$elm_ui$Ui_SearchInput$Update(justNow + model.timeout);
+				},
+				_elm_lang$core$Process$sleep(model.timeout));
+			var cmd = _elm_lang$core$Platform_Cmd$batch(
+				{
+					ctor: '::',
+					_0: A2(_elm_lang$core$Platform_Cmd$map, _gdotdesign$elm_ui$Ui_SearchInput$Input, inputCmd),
+					_1: {
+						ctor: '::',
+						_0: delayedUpdateCmd,
+						_1: {ctor: '[]'}
+					}
+				});
+			return {ctor: '_Tuple2', _0: updatedModel, _1: cmd};
+		}
+	});
+var _gdotdesign$elm_ui$Ui_SearchInput$render = function (_p4) {
+	var _p5 = _p4;
+	var updatedInput = _elm_lang$core$Native_Utils.update(
+		_p5.input,
+		{disabled: _p5.disabled, readonly: _p5.readonly});
+	return A3(
+		_elm_lang$html$Html$node,
+		'ui-search-input',
+		_gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_SearchInput$defaultStyle),
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$map,
+				_gdotdesign$elm_ui$Ui_SearchInput$Input,
+				_gdotdesign$elm_ui$Ui_Input$view(updatedInput)),
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Icons$search(
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_SearchInput$view = function (model) {
+	return A2(_elm_lang$html$Html_Lazy$lazy, _gdotdesign$elm_ui$Ui_SearchInput$render, model);
+};
+var _gdotdesign$elm_ui$Ui_SearchInput$setValue = F2(
+	function (value, model) {
+		var _p6 = A2(_gdotdesign$elm_ui$Ui_Input$setValue, value, model.input);
+		var input = _p6._0;
+		var cmd = _p6._1;
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{value: value, input: input}),
+			_1: A2(_elm_lang$core$Platform_Cmd$map, _gdotdesign$elm_ui$Ui_SearchInput$Input, cmd)
+		};
+	});

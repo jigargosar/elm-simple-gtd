@@ -1,0 +1,54 @@
+var _gdotdesign$elm_ui$Ui_Image$update = F2(
+	function (action, model) {
+		var _p0 = action;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{loaded: true});
+	});
+var _gdotdesign$elm_ui$Ui_Image$init = function (url) {
+	return {loaded: false, src: url};
+};
+var _gdotdesign$elm_ui$Ui_Image$Model = F2(
+	function (a, b) {
+		return {loaded: a, src: b};
+	});
+var _gdotdesign$elm_ui$Ui_Image$Loaded = {ctor: 'Loaded'};
+var _gdotdesign$elm_ui$Ui_Image$render = function (model) {
+	return A3(
+		_elm_lang$html$Html$node,
+		'ui-image',
+		_elm_lang$core$List$concat(
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui$attributeList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'loaded', _1: model.loaded},
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_Image$defaultStyle),
+					_1: {ctor: '[]'}
+				}
+			}),
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$img,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$src(model.src),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Html_Events_Extra$onLoad(_gdotdesign$elm_ui$Ui_Image$Loaded),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {ctor: '[]'}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Image$view = function (model) {
+	return A2(_elm_lang$html$Html_Lazy$lazy, _gdotdesign$elm_ui$Ui_Image$render, model);
+};

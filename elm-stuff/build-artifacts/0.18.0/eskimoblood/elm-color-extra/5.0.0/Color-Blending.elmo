@@ -1,0 +1,116 @@
+var _eskimoblood$elm_color_extra$Color_Blending$colorDodge_ = F2(
+	function (cB, cS) {
+		return _elm_lang$core$Native_Utils.eq(cB, 0) ? 0 : (_elm_lang$core$Native_Utils.eq(cS, 1) ? 1 : (A2(_elm_lang$core$Basics$min, 1, cB) / (1 - cS)));
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$colorBurn_ = F2(
+	function (cB, cS) {
+		return _elm_lang$core$Native_Utils.eq(cB, 1) ? 1 : (_elm_lang$core$Native_Utils.eq(cS, 0) ? 0 : (1 - (A2(_elm_lang$core$Basics$min, 1, 1 - cB) / cS)));
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$softlight_ = F2(
+	function (cB, cS) {
+		var _p0 = (_elm_lang$core$Native_Utils.cmp(cS, 0.5) > 0) ? ((_elm_lang$core$Native_Utils.cmp(cB, 0.25) > 0) ? {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Basics$sqrt(cB),
+			_1: 1
+		} : {ctor: '_Tuple2', _0: ((((16 * cB) - 12) * cB) + 4) * cB, _1: 1}) : {ctor: '_Tuple2', _0: 1, _1: cB};
+		var d = _p0._0;
+		var e = _p0._1;
+		return cB - (((1 - (2 * cS)) * e) * (d - cB));
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$screen_ = F2(
+	function (cB, cS) {
+		return (cB + cS) - (cB * cS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$overlay_ = F2(
+	function (cB, cS) {
+		var cB_ = cB * 2;
+		return (_elm_lang$core$Native_Utils.cmp(cB_, 1) < 1) ? (cB_ * cS) : A2(_eskimoblood$elm_color_extra$Color_Blending$screen_, cB_ - 1, cS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$clampChannel = A2(_elm_lang$core$Basics$clamp, 0, 1);
+var _eskimoblood$elm_color_extra$Color_Blending$calcChanel = F6(
+	function (fn, aB, aS, ar, cB, cS) {
+		var cS_ = _elm_lang$core$Basics$toFloat(cS) / 255;
+		var cB_ = _elm_lang$core$Basics$toFloat(cB) / 255;
+		var cr = A2(fn, cB_, cS_);
+		var cr_ = _elm_lang$core$Native_Utils.eq(ar, 0) ? cr : (((aS * cS_) + (aB * (cB_ - (aS * ((cB_ + cS_) - cr))))) / ar);
+		return _elm_lang$core$Basics$round(
+			_eskimoblood$elm_color_extra$Color_Blending$clampChannel(cr_) * 255);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$colorBlend = F3(
+	function (fn, clB, clS) {
+		var rgba2 = _elm_lang$core$Color$toRgb(clS);
+		var rgba1 = _elm_lang$core$Color$toRgb(clB);
+		var ar = rgba2.alpha + (rgba1.alpha * (1 - rgba2.alpha));
+		var calc = A4(_eskimoblood$elm_color_extra$Color_Blending$calcChanel, fn, rgba1.alpha, rgba2.alpha, ar);
+		return A4(
+			_elm_lang$core$Color$rgba,
+			A2(calc, rgba1.red, rgba2.red),
+			A2(calc, rgba1.green, rgba2.green),
+			A2(calc, rgba1.blue, rgba2.blue),
+			ar);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$colorDodge = F2(
+	function (clB, clS) {
+		return A3(_eskimoblood$elm_color_extra$Color_Blending$colorBlend, _eskimoblood$elm_color_extra$Color_Blending$colorDodge_, clB, clS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$colorBurn = F2(
+	function (clB, clS) {
+		return A3(_eskimoblood$elm_color_extra$Color_Blending$colorBlend, _eskimoblood$elm_color_extra$Color_Blending$colorBurn_, clB, clS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$softlight = F2(
+	function (clB, clS) {
+		return A3(_eskimoblood$elm_color_extra$Color_Blending$colorBlend, _eskimoblood$elm_color_extra$Color_Blending$softlight_, clB, clS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$exclusion = F2(
+	function (clB, clS) {
+		return A3(
+			_eskimoblood$elm_color_extra$Color_Blending$colorBlend,
+			F2(
+				function (cB, cS) {
+					return (cB + cS) - ((2 * cB) * cS);
+				}),
+			clB,
+			clS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$difference = F2(
+	function (clB, clS) {
+		return A3(
+			_eskimoblood$elm_color_extra$Color_Blending$colorBlend,
+			F2(
+				function (cB, cS) {
+					return _elm_lang$core$Basics$abs(cB - cS);
+				}),
+			clB,
+			clS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$lighten = F2(
+	function (clB, clS) {
+		return A3(_eskimoblood$elm_color_extra$Color_Blending$colorBlend, _elm_lang$core$Basics$max, clB, clS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$darken = F2(
+	function (clB, clS) {
+		return A3(_eskimoblood$elm_color_extra$Color_Blending$colorBlend, _elm_lang$core$Basics$min, clB, clS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$overlay = F2(
+	function (clB, clS) {
+		return A3(_eskimoblood$elm_color_extra$Color_Blending$colorBlend, _eskimoblood$elm_color_extra$Color_Blending$overlay_, clB, clS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$hardlight = F2(
+	function (clB, clS) {
+		return A2(_eskimoblood$elm_color_extra$Color_Blending$overlay, clS, clB);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$screen = F2(
+	function (clB, clS) {
+		return A3(_eskimoblood$elm_color_extra$Color_Blending$colorBlend, _eskimoblood$elm_color_extra$Color_Blending$screen_, clB, clS);
+	});
+var _eskimoblood$elm_color_extra$Color_Blending$multiply = F2(
+	function (clB, clS) {
+		return A3(
+			_eskimoblood$elm_color_extra$Color_Blending$colorBlend,
+			F2(
+				function (x, y) {
+					return x * y;
+				}),
+			clB,
+			clS);
+	});

@@ -1,0 +1,180 @@
+var _gdotdesign$elm_ui$Ui_Styles_NumberRange$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$defaults,
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Styles_Input$inputStyle(theme),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$inlineBlock),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$relative),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Ui_Css$selectors,
+								{
+									ctor: '::',
+									_0: '&:before',
+									_1: {
+										ctor: '::',
+										_0: '&:after',
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$pointerEvents(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderStyle(_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$absolute),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginTop(
+													_gdotdesign$elm_ui$Ui_Css_Properties$px(-5)),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$contentString(''),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$top(
+															_gdotdesign$elm_ui$Ui_Css_Properties$pct(50)),
+														_1: {
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Css_Properties$opacity(0.5),
+															_1: {
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$zIndex(1),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gdotdesign$elm_ui$Ui_Css$selector,
+									'&:after',
+									{
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderColor(
+											A2(
+												_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+												A2(
+													_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+													A2(_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'], _gdotdesign$elm_ui$Ui_Css_Properties$transparent, _gdotdesign$elm_ui$Ui_Css_Properties$currentColor),
+													_gdotdesign$elm_ui$Ui_Css_Properties$transparent),
+												_gdotdesign$elm_ui$Ui_Css_Properties$transparent)),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderWidth(
+												A2(
+													_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+													A2(
+														_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+														A2(
+															_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+															_gdotdesign$elm_ui$Ui_Css_Properties$px(5),
+															_gdotdesign$elm_ui$Ui_Css_Properties$px(6)),
+														_gdotdesign$elm_ui$Ui_Css_Properties$px(5)),
+													_gdotdesign$elm_ui$Ui_Css_Properties$zero)),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$left(
+													_gdotdesign$elm_ui$Ui_Css_Properties$px(12)),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_gdotdesign$elm_ui$Ui_Css$selector,
+										'&:before',
+										{
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderColor(
+												A2(
+													_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+													A2(
+														_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+														A2(_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'], _gdotdesign$elm_ui$Ui_Css_Properties$transparent, _gdotdesign$elm_ui$Ui_Css_Properties$transparent),
+														_gdotdesign$elm_ui$Ui_Css_Properties$transparent),
+													_gdotdesign$elm_ui$Ui_Css_Properties$currentColor)),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderWidth(
+													A2(
+														_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+														A2(
+															_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+															A2(
+																_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																_gdotdesign$elm_ui$Ui_Css_Properties$px(5),
+																_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+															_gdotdesign$elm_ui$Ui_Css_Properties$px(5)),
+														_gdotdesign$elm_ui$Ui_Css_Properties$px(6))),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$right(
+														_gdotdesign$elm_ui$Ui_Css_Properties$px(12)),
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_gdotdesign$elm_ui$Ui_Css$selector,
+											'input',
+											{
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$textAlign(_gdotdesign$elm_ui$Ui_Css_Properties$center),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$zIndex(0),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_gdotdesign$elm_ui$Ui_Css$selector,
+												'&:not([readonly]):not([disabled]) input',
+												{
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$cursor(
+														A2(_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'], _gdotdesign$elm_ui$Ui_Css_Properties$colResize, _gdotdesign$elm_ui$Ui_Css_Properties$important)),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_NumberRange$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_NumberRange$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

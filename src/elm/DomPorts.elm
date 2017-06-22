@@ -4,7 +4,7 @@ import Dom
 import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
+import X.Function exposing (..)
 
 
 type alias DomSelector =

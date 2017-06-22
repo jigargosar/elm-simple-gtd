@@ -64,7 +64,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		getViewType: _user$project$Entity$ContextView
 	};
 	var entityList = A2(_user$project$OldGroupEntity_ViewModel$createList, config, model);
-	var nullVMAsList = _elm_community$maybe_extra$Maybe_Extra$toList(
+	var nullVMAsList = _user$project$X_Maybe$toList(
 		_elm_lang$core$List$head(entityList));
 	var archivedFilter = _user$project$Model$filterContexts(_user$project$GroupDoc$archivedButNotDeletedPred);
 	var archivedConfig = _elm_lang$core$Native_Utils.update(
@@ -101,7 +101,7 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		getViewType: _user$project$Entity$ProjectView
 	};
 	var entityList = A2(_user$project$OldGroupEntity_ViewModel$createList, config, model);
-	var nullVMAsList = _elm_community$maybe_extra$Maybe_Extra$toList(
+	var nullVMAsList = _user$project$X_Maybe$toList(
 		_elm_lang$core$List$head(entityList));
 	var archivedFilter = _user$project$Model$filterProjects(_user$project$GroupDoc$archivedButNotDeletedPred);
 	var archivedConfig = _elm_lang$core$Native_Utils.update(

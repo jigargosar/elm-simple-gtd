@@ -6,15 +6,15 @@ import Document
 import DomPorts exposing (autoFocusInputCmd, focusInputCmd, focusSelectorIfNoFocusCmd)
 import ExclusiveMode
 import Entity
-import Ext.Debug
-import Ext.Keyboard as Keyboard exposing (Key)
-import Ext.Record as Record exposing (set)
-import Ext.Return as Return
+import X.Debug
+import X.Keyboard as Keyboard exposing (Key)
+import X.Record as Record exposing (set)
+import X.Return as Return
 import Firebase
 import Http
 import Keyboard.Combo
 import LaunchBar
-import Ext.Function.Infix exposing (..)
+import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Maybe.Extra as Maybe
 import Model as Model
@@ -418,7 +418,7 @@ map =
 
 
 modelTapLog =
-    Ext.Debug.tapLog >>> Return.map
+    X.Debug.tapLog >>> Return.map
 
 
 updateTodoAndMaybeAlsoSelected action todo =

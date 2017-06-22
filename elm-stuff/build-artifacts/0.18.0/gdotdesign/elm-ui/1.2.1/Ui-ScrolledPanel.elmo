@@ -1,0 +1,25 @@
+var _gdotdesign$elm_ui$Ui_ScrolledPanel$view = F2(
+	function (attributes, contents) {
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-scrolled-panel',
+			_elm_lang$core$List$concat(
+				{
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_ScrolledPanel$defaultStyle),
+					_1: {
+						ctor: '::',
+						_0: attributes,
+						_1: {ctor: '[]'}
+					}
+				}),
+			{
+				ctor: '::',
+				_0: A3(
+					_elm_lang$html$Html$node,
+					'ui-scrolled-panel-wrapper',
+					{ctor: '[]'},
+					contents),
+				_1: {ctor: '[]'}
+			});
+	});

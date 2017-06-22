@@ -1,0 +1,38 @@
+var _gdotdesign$elm_spec$Spec_Native$inlineStyleEquals = function (_p0) {
+	var _p1 = _p0;
+	return A3(_gdotdesign$elm_spec$Native_Spec.inlineStyleEquals, _p1.style, _p1.value, _p1.selector);
+};
+var _gdotdesign$elm_spec$Spec_Native$valueEquals = function (_p2) {
+	var _p3 = _p2;
+	return A2(_gdotdesign$elm_spec$Native_Spec.valueEquals, _p3.text, _p3.selector);
+};
+var _gdotdesign$elm_spec$Spec_Native$valueContains = function (_p4) {
+	var _p5 = _p4;
+	return A2(_gdotdesign$elm_spec$Native_Spec.valueContains, _p5.text, _p5.selector);
+};
+var _gdotdesign$elm_spec$Spec_Native$urlEquals = _gdotdesign$elm_spec$Native_Spec.urlEquals;
+var _gdotdesign$elm_spec$Spec_Native$urlContains = _gdotdesign$elm_spec$Native_Spec.urlContains;
+var _gdotdesign$elm_spec$Spec_Native$titleEquals = _gdotdesign$elm_spec$Native_Spec.titleEquals;
+var _gdotdesign$elm_spec$Spec_Native$titleContains = _gdotdesign$elm_spec$Native_Spec.titleContains;
+var _gdotdesign$elm_spec$Spec_Native$elementVisible = _gdotdesign$elm_spec$Native_Spec.elementVisible;
+var _gdotdesign$elm_spec$Spec_Native$elementPresent = _gdotdesign$elm_spec$Native_Spec.elementPresent;
+var _gdotdesign$elm_spec$Spec_Native$styleEquals = function (_p6) {
+	var _p7 = _p6;
+	return A3(_gdotdesign$elm_spec$Native_Spec.styleEquals, _p7.style, _p7.value, _p7.selector);
+};
+var _gdotdesign$elm_spec$Spec_Native$classPresent = function (_p8) {
+	var _p9 = _p8;
+	return A2(_gdotdesign$elm_spec$Native_Spec.classPresent, _p9.$class, _p9.selector);
+};
+var _gdotdesign$elm_spec$Spec_Native$attributeEquals = function (_p10) {
+	var _p11 = _p10;
+	return A3(_gdotdesign$elm_spec$Native_Spec.attributeEquals, _p11.attribute, _p11.text, _p11.selector);
+};
+var _gdotdesign$elm_spec$Spec_Native$attributeContains = function (_p12) {
+	var _p13 = _p12;
+	return A3(_gdotdesign$elm_spec$Native_Spec.attributeContains, _p13.attribute, _p13.text, _p13.selector);
+};
+var _gdotdesign$elm_spec$Spec_Native$containsText = function (_p14) {
+	var _p15 = _p14;
+	return A2(_gdotdesign$elm_spec$Native_Spec.containsText, _p15.text, _p15.selector);
+};

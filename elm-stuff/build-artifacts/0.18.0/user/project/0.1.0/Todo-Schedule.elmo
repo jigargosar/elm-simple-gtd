@@ -29,7 +29,7 @@ var _user$project$Todo_Schedule$getMaybeDueAt = function (model) {
 var _user$project$Todo_Schedule$encode = function (model) {
 	var encodeDueAt = function (dueAt) {
 		return A2(
-			_user$project$Ext_Function_Infix_ops['=>'],
+			_user$project$X_Function_Infix_ops['=>'],
 			'dueAt',
 			_elm_lang$core$Json_Encode$float(dueAt));
 	};
@@ -49,7 +49,7 @@ var _user$project$Todo_Schedule$encode = function (model) {
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_user$project$Ext_Function_Infix_ops['=>'],
+							_user$project$X_Function_Infix_ops['=>'],
 							'reminderAt',
 							_elm_lang$core$Json_Encode$float(_p2._1)),
 						_1: {ctor: '[]'}

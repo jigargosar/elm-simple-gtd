@@ -2,12 +2,10 @@ module GroupDoc.View exposing (..)
 
 import Entity
 import GroupDoc.ViewModel exposing (ViewModel)
-import Ext.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
+import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Attributes.Extra exposing (stringProperty)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation, onEnter)
 import Html.Keyed
 import Material
 import Model
@@ -15,12 +13,13 @@ import Svg.Events exposing (onFocusIn)
 import Todo.View
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import View.Shared exposing (defaultOkCancelDeleteButtons)
 import WebComponents
+import X.Html exposing (onClickStopPropagation)
 
 
 initKeyed todoView vm =

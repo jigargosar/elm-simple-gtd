@@ -1,14 +1,14 @@
 module GroupDoc exposing (..)
 
 import Document
-import Ext.Predicate
-import Ext.Record
+import X.Predicate
+import X.Record
 import Firebase exposing (DeviceId)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Store
@@ -34,7 +34,7 @@ type alias Record =
 
 
 archived =
-    Ext.Record.bool .archived (\s b -> { b | archived = s })
+    X.Record.bool .archived (\s b -> { b | archived = s })
 
 
 type alias Model =
@@ -88,7 +88,7 @@ storeGenerator dbName =
 
 
 toggleArchived =
-    Ext.Record.toggle archived
+    X.Record.toggle archived
 
 
 getName =
@@ -152,8 +152,8 @@ compareNotNulls tuple =
 
 
 isActive =
-    Ext.Predicate.all [ Document.isNotDeleted, isNotArchived ]
+    X.Predicate.all [ Document.isNotDeleted, isNotArchived ]
 
 
 archivedButNotDeletedPred =
-    Ext.Predicate.all [ Document.isNotDeleted, isArchived ]
+    X.Predicate.all [ Document.isNotDeleted, isArchived ]

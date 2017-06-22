@@ -1,0 +1,454 @@
+var _gdotdesign$elm_ui$Ui_Styles_Header$item = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: A2(_gdotdesign$elm_ui$Ui_Css$property, '-webkit-filter', 'drop-shadow(0px 1px 0px rgba(0,0,0,0.3))'),
+			_1: {
+				ctor: '::',
+				_0: A2(_gdotdesign$elm_ui$Ui_Css$property, 'filter', 'drop-shadow(0px 1px 0px rgba(0,0,0,0.3))'),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(theme.header.colors.text),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$margin(
+							A2(
+								_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+								_gdotdesign$elm_ui$Ui_Css_Properties$zero,
+								_gdotdesign$elm_ui$Ui_Css_Properties$px(2))),
+						_1: {
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontSize(
+								_gdotdesign$elm_ui$Ui_Css_Properties$px(18)),
+							_1: {
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontWeight(_gdotdesign$elm_ui$Ui_Css_Properties$bold),
+								_1: {
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_gdotdesign$elm_ui$Ui_Css$selector,
+											'&[interactive] a',
+											{
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Styles_Ripple$style,
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRight(
+														A2(
+															_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+															A2(
+																_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																_gdotdesign$elm_ui$Ui_Css_Properties$px(1),
+																_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+															_gdotdesign$elm_ui$Ui_Css_Properties$transparent)),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderLeft(
+															A2(
+																_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																A2(
+																	_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																	_gdotdesign$elm_ui$Ui_Css_Properties$px(1),
+																	_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+																_gdotdesign$elm_ui$Ui_Css_Properties$transparent)),
+														_1: {
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Css_Properties$transform(
+																{
+																	ctor: '::',
+																	_0: A3(_gdotdesign$elm_ui$Ui_Css_Properties$translate3d, _gdotdesign$elm_ui$Ui_Css_Properties$zero, _gdotdesign$elm_ui$Ui_Css_Properties$zero, _gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$textDecoration(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(_gdotdesign$elm_ui$Ui_Css_Properties$currentColor),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$relative),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$cursor(_gdotdesign$elm_ui$Ui_Css_Properties$pointer),
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$transition(
+																					{
+																						ctor: '::',
+																						_0: {
+																							duration: _gdotdesign$elm_ui$Ui_Css_Properties$ms(200),
+																							property: 'all',
+																							easing: 'ease',
+																							delay: _gdotdesign$elm_ui$Ui_Css_Properties$ms(0)
+																						},
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_gdotdesign$elm_ui$Ui_Css$selector,
+																						'&:focus',
+																						{
+																							ctor: '::',
+																							_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderColor('rgba(0,0,0,0.6)'),
+																							_1: {
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$outline(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+																								_1: {
+																									ctor: '::',
+																									_0: _gdotdesign$elm_ui$Ui_Css_Properties$transition(
+																										{
+																											ctor: '::',
+																											_0: {
+																												duration: _gdotdesign$elm_ui$Ui_Css_Properties$ms(200),
+																												delay: _gdotdesign$elm_ui$Ui_Css_Properties$ms(100),
+																												property: 'all',
+																												easing: 'ease'
+																											},
+																											_1: {ctor: '[]'}
+																										}),
+																									_1: {ctor: '[]'}
+																								}
+																							}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_gdotdesign$elm_ui$Ui_Css$selector,
+																							'&:active',
+																							{
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderColor('rgba(0,0,0,0.6)'),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_gdotdesign$elm_ui$Ui_Css$selector,
+												'&:not([interactive]) svg[ripple]',
+												{
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_gdotdesign$elm_ui$Ui_Css$selector,
+													'span',
+													{
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+															_gdotdesign$elm_ui$Ui_Css_Properties$px(18)),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_gdotdesign$elm_ui$Ui_Css$selector,
+														'a',
+														{
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Css_Properties$padding(
+																A2(
+																	_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																	_gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																	_gdotdesign$elm_ui$Ui_Css_Properties$px(12))),
+															_1: {
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$textOverflow(_gdotdesign$elm_ui$Ui_Css_Properties$ellipsis),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$alignItems(_gdotdesign$elm_ui$Ui_Css_Properties$center),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$whiteSpace(_gdotdesign$elm_ui$Ui_Css_Properties$nowrap),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontSize(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$userSelect(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+																				_1: {
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+																					_1: {
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$flex),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_Header$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Css_Properties$background(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'linear-gradient(',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						theme.header.colors.backgroundTop,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							', ',
+							A2(_elm_lang$core$Basics_ops['++'], theme.header.colors.backgroundBottom, ')'))))),
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Css_Properties$zIndex(theme.zIndexes.header),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontFamily(theme.fontFamily),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$padding(
+							A2(
+								_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+								_gdotdesign$elm_ui$Ui_Css_Properties$zero,
+								_gdotdesign$elm_ui$Ui_Css_Properties$px(20))),
+						_1: {
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$relative),
+							_1: {
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$flex_('0 0 auto'),
+								_1: {
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$flexDirection(_gdotdesign$elm_ui$Ui_Css_Properties$row),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$alignItems(_gdotdesign$elm_ui$Ui_Css_Properties$center),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$flex),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+													_gdotdesign$elm_ui$Ui_Css_Properties$px(60)),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$boxShadow(
+														{
+															ctor: '::',
+															_0: {
+																color: 'rgba(0,0,0,0.1)',
+																blur: _gdotdesign$elm_ui$Ui_Css_Properties$px(3),
+																inset: false,
+																spread: _gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																y: _gdotdesign$elm_ui$Ui_Css_Properties$px(2),
+																x: _gdotdesign$elm_ui$Ui_Css_Properties$zero
+															},
+															_1: {
+																ctor: '::',
+																_0: {
+																	color: 'rgba(0,0,0,0.1)',
+																	blur: _gdotdesign$elm_ui$Ui_Css_Properties$px(10),
+																	inset: false,
+																	spread: _gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																	y: _gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																	x: _gdotdesign$elm_ui$Ui_Css_Properties$zero
+																},
+																_1: {ctor: '[]'}
+															}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_gdotdesign$elm_ui$Ui_Css$selector,
+															'ui-header-separator',
+															{
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$background(theme.header.colors.border),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$margin(
+																		A2(
+																			_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																			_gdotdesign$elm_ui$Ui_Css_Properties$zero,
+																			_gdotdesign$elm_ui$Ui_Css_Properties$px(8))),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+																			_gdotdesign$elm_ui$Ui_Css_Properties$px(40)),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+																				_gdotdesign$elm_ui$Ui_Css_Properties$px(2)),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_gdotdesign$elm_ui$Ui_Css$selector,
+																'ui-header-spacer',
+																{
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$flex_('1'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_gdotdesign$elm_ui$Ui_Css$selector,
+																	'ui-header-title',
+																	{
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Styles_Header$item(theme),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontSize(
+																				_gdotdesign$elm_ui$Ui_Css_Properties$px(20)),
+																			_1: {ctor: '[]'}
+																		}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_gdotdesign$elm_ui$Ui_Css$selector,
+																		'ui-header-item',
+																		{
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Styles_Header$item(theme),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_gdotdesign$elm_ui$Ui_Css$selector,
+																			'ui-header-icon-item',
+																			{
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Styles_Header$item(theme),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_gdotdesign$elm_ui$Ui_Css$selector,
+																						'svg:not([ripple])',
+																						{
+																							ctor: '::',
+																							_0: _gdotdesign$elm_ui$Ui_Css_Properties$fill(_gdotdesign$elm_ui$Ui_Css_Properties$currentColor),
+																							_1: {
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+																									_gdotdesign$elm_ui$Ui_Css_Properties$px(20)),
+																								_1: {
+																									ctor: '::',
+																									_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+																										_gdotdesign$elm_ui$Ui_Css_Properties$px(20)),
+																									_1: {ctor: '[]'}
+																								}
+																							}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_gdotdesign$elm_ui$Ui_Css$selectors,
+																							{
+																								ctor: '::',
+																								_0: 'svg + span',
+																								_1: {
+																									ctor: '::',
+																									_0: 'span + svg',
+																									_1: {ctor: '[]'}
+																								}
+																							},
+																							{
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginLeft(
+																									_gdotdesign$elm_ui$Ui_Css_Properties$px(12)),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				}
+																			}),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_gdotdesign$elm_ui$Ui_Css$selector,
+																				'ui-header-icon',
+																				{
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Styles_Header$item(theme),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_gdotdesign$elm_ui$Ui_Css$selector,
+																							'svg:not([ripple])',
+																							{
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$fill(_gdotdesign$elm_ui$Ui_Css_Properties$currentColor),
+																								_1: {
+																									ctor: '::',
+																									_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+																										_gdotdesign$elm_ui$Ui_Css_Properties$px(20)),
+																									_1: {
+																										ctor: '::',
+																										_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+																											_gdotdesign$elm_ui$Ui_Css_Properties$px(20)),
+																										_1: {ctor: '[]'}
+																									}
+																								}
+																							}),
+																						_1: {ctor: '[]'}
+																					}
+																				}),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_Header$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_Header$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

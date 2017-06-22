@@ -1,0 +1,248 @@
+var _gdotdesign$elm_ui$Ui_InplaceInput$isEmpty = function (model) {
+	return _elm_lang$core$String$isEmpty(
+		_elm_lang$core$String$trim(model.textarea.value));
+};
+var _gdotdesign$elm_ui$Ui_InplaceInput$close = function (model) {
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{open: false});
+};
+var _gdotdesign$elm_ui$Ui_InplaceInput$onChange = F2(
+	function (msg, model) {
+		return A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$listenString, model.uid, msg);
+	});
+var _gdotdesign$elm_ui$Ui_InplaceInput$ctrlSave = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{ctrlSave: value});
+	});
+var _gdotdesign$elm_ui$Ui_InplaceInput$placeholder = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				textarea: A2(_gdotdesign$elm_ui$Ui_Textarea$placeholder, value, model.textarea)
+			});
+	});
+var _gdotdesign$elm_ui$Ui_InplaceInput$required = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{required: value});
+	});
+var _gdotdesign$elm_ui$Ui_InplaceInput$init = function (_p0) {
+	return {
+		textarea: _gdotdesign$elm_ui$Ui_Textarea$init(
+			{ctor: '_Tuple0'}),
+		uid: _gdotdesign$elm_ui$Ui_Native_Uid$uid(
+			{ctor: '_Tuple0'}),
+		disabled: false,
+		readonly: false,
+		required: true,
+		ctrlSave: true,
+		open: false,
+		value: ''
+	};
+};
+var _gdotdesign$elm_ui$Ui_InplaceInput$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {textarea: a, required: b, ctrlSave: c, disabled: d, readonly: e, value: f, uid: g, open: h};
+	});
+var _gdotdesign$elm_ui$Ui_InplaceInput$Edit = {ctor: 'Edit'};
+var _gdotdesign$elm_ui$Ui_InplaceInput$display = function (model) {
+	var click = A2(
+		_gdotdesign$elm_ui$Ui$enabledActions,
+		model,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(_gdotdesign$elm_ui$Ui_InplaceInput$Edit),
+			_1: {ctor: '[]'}
+		});
+	var attributes = A2(
+		_elm_lang$core$Basics_ops['++'],
+		{
+			ctor: '::',
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, 'placeholder', model.textarea.placeholder),
+			_1: {ctor: '[]'}
+		},
+		click);
+	return A3(
+		_elm_lang$html$Html$node,
+		'ui-inplace-input-content',
+		attributes,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(model.value),
+			_1: {ctor: '[]'}
+		});
+};
+var _gdotdesign$elm_ui$Ui_InplaceInput$Save = {ctor: 'Save'};
+var _gdotdesign$elm_ui$Ui_InplaceInput$Close = {ctor: 'Close'};
+var _gdotdesign$elm_ui$Ui_InplaceInput$Textarea = function (a) {
+	return {ctor: 'Textarea', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_InplaceInput$form = function (model) {
+	var disabled = _gdotdesign$elm_ui$Ui_InplaceInput$isEmpty(model) && model.required;
+	return A2(
+		_gdotdesign$elm_ui$Ui_Container$column,
+		{
+			ctor: '::',
+			_0: A2(_gdotdesign$elm_ui$Html_Events_Extra$onEnter, model.ctrlSave, _gdotdesign$elm_ui$Ui_InplaceInput$Save),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Html_Events_Extra$onKeys,
+					false,
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 27, _1: _gdotdesign$elm_ui$Ui_InplaceInput$Close},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$map,
+				_gdotdesign$elm_ui$Ui_InplaceInput$Textarea,
+				_gdotdesign$elm_ui$Ui_Textarea$view(model.textarea)),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_gdotdesign$elm_ui$Ui_Container$view,
+					{compact: true, direction: 'row', align: 'stretch'},
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_gdotdesign$elm_ui$Ui_Button$view,
+							_gdotdesign$elm_ui$Ui_InplaceInput$Save,
+							{disabled: disabled, readonly: false, kind: 'primary', size: 'medium', text: 'Save'}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Ui_Button$view,
+								_gdotdesign$elm_ui$Ui_InplaceInput$Close,
+								{disabled: false, readonly: false, kind: 'secondary', size: 'medium', text: 'Close'}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_InplaceInput$render = function (model) {
+	var content = (model.open && (!(model.disabled || model.readonly))) ? _gdotdesign$elm_ui$Ui_InplaceInput$form(model) : _gdotdesign$elm_ui$Ui_InplaceInput$display(model);
+	return A3(
+		_elm_lang$html$Html$node,
+		'ui-inplace-input',
+		_elm_lang$core$List$concat(
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_InplaceInput$defaultStyle),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui$attributeList(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'disabled', _1: model.disabled},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'readonly', _1: model.readonly},
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}),
+		{
+			ctor: '::',
+			_0: content,
+			_1: {ctor: '[]'}
+		});
+};
+var _gdotdesign$elm_ui$Ui_InplaceInput$view = function (model) {
+	return A2(_elm_lang$html$Html_Lazy$lazy, _gdotdesign$elm_ui$Ui_InplaceInput$render, model);
+};
+var _gdotdesign$elm_ui$Ui_InplaceInput$setValue = F2(
+	function (value, model) {
+		var _p1 = A2(_gdotdesign$elm_ui$Ui_Textarea$setValue, value, model.textarea);
+		var textarea = _p1._0;
+		var cmd = _p1._1;
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{textarea: textarea, value: value}),
+			_1: A2(_elm_lang$core$Platform_Cmd$map, _gdotdesign$elm_ui$Ui_InplaceInput$Textarea, cmd)
+		};
+	});
+var _gdotdesign$elm_ui$Ui_InplaceInput$Done = function (a) {
+	return {ctor: 'Done', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_InplaceInput$open = function (model) {
+	var _p2 = A2(_gdotdesign$elm_ui$Ui_Textarea$setValue, model.value, model.textarea);
+	var textarea = _p2._0;
+	var cmd = _p2._1;
+	return {
+		ctor: '_Tuple2',
+		_0: _elm_lang$core$Native_Utils.update(
+			model,
+			{open: true, textarea: textarea}),
+		_1: _elm_lang$core$Platform_Cmd$batch(
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$core$Task$attempt,
+					_gdotdesign$elm_ui$Ui_InplaceInput$Done,
+					_elm_lang$dom$Dom$focus(model.textarea.uid)),
+				_1: {
+					ctor: '::',
+					_0: A2(_elm_lang$core$Platform_Cmd$map, _gdotdesign$elm_ui$Ui_InplaceInput$Textarea, cmd),
+					_1: {ctor: '[]'}
+				}
+			})
+	};
+};
+var _gdotdesign$elm_ui$Ui_InplaceInput$update = F2(
+	function (action, model) {
+		var _p3 = action;
+		switch (_p3.ctor) {
+			case 'Textarea':
+				var _p4 = A2(_gdotdesign$elm_ui$Ui_Textarea$update, _p3._0, model.textarea);
+				var textarea = _p4._0;
+				var effect = _p4._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{textarea: textarea}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _gdotdesign$elm_ui$Ui_InplaceInput$Textarea, effect)
+				};
+			case 'Save':
+				return (_gdotdesign$elm_ui$Ui_InplaceInput$isEmpty(model) && model.required) ? {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none} : (_elm_lang$core$Native_Utils.eq(model.textarea.value, model.value) ? {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_InplaceInput$close(model),
+					_1: _elm_lang$core$Platform_Cmd$none
+				} : {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_InplaceInput$close(
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{value: model.textarea.value})),
+					_1: A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$sendString, model.uid, model.textarea.value)
+				});
+			case 'Edit':
+				return model.disabled ? {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none} : _gdotdesign$elm_ui$Ui_InplaceInput$open(model);
+			case 'Close':
+				return {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_InplaceInput$close(model),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});

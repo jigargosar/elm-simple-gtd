@@ -2,18 +2,18 @@ module WebComponents exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Attributes.Extra exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Decode
+import Polymer.Attributes exposing (boolProperty)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Polymer.Paper
 import String.Extra
+import X.Html exposing (onClickStopPropagation)
 
 
 ironIcon =

@@ -1,0 +1,184 @@
+var _eskimoblood$elm_color_extra$Color_Gradient$calcCosine = F5(
+	function (a, b, c, d, t) {
+		return _elm_lang$core$Basics$round(
+			A2(
+				F2(
+					function (x, y) {
+						return x * y;
+					}),
+				255,
+				A3(
+					_elm_lang$core$Basics$clamp,
+					0,
+					1,
+					a + (b * _elm_lang$core$Basics$cos((_elm_lang$core$Basics$pi * 2) * ((c * t) + d))))));
+	});
+var _eskimoblood$elm_color_extra$Color_Gradient$calcCosineColor = F5(
+	function (_p3, _p2, _p1, _p0, t) {
+		var _p4 = _p3;
+		var _p5 = _p2;
+		var _p6 = _p1;
+		var _p7 = _p0;
+		return A3(
+			_elm_lang$core$Color$rgb,
+			A5(_eskimoblood$elm_color_extra$Color_Gradient$calcCosine, _p4._0, _p5._0, _p6._0, _p7._0, t),
+			A5(_eskimoblood$elm_color_extra$Color_Gradient$calcCosine, _p4._1, _p5._1, _p6._1, _p7._1, t),
+			A5(_eskimoblood$elm_color_extra$Color_Gradient$calcCosine, _p4._2, _p5._2, _p6._2, _p7._2, t));
+	});
+var _eskimoblood$elm_color_extra$Color_Gradient$cosineGradient = F5(
+	function (offset, amp, fmod, phase, l) {
+		return A2(
+			_elm_lang$core$List$map,
+			A4(_eskimoblood$elm_color_extra$Color_Gradient$calcCosineColor, offset, amp, fmod, phase),
+			A2(
+				_elm_lang$core$List$map,
+				function (_p8) {
+					return A2(
+						F2(
+							function (x, y) {
+								return x * y;
+							}),
+						1.0 / _elm_lang$core$Basics$toFloat(l),
+						_elm_lang$core$Basics$toFloat(_p8));
+				},
+				A2(_elm_lang$core$List$range, 0, l)));
+	});
+var _eskimoblood$elm_color_extra$Color_Gradient$getNextGradientStop = F2(
+	function (currentStop, gradient) {
+		var nextStop = _elm_lang$core$List$head(gradient);
+		var _p9 = nextStop;
+		if (_p9.ctor === 'Just') {
+			return {
+				ctor: '_Tuple2',
+				_0: _p9._0,
+				_1: A2(
+					_elm_lang$core$Maybe$withDefault,
+					{ctor: '[]'},
+					_elm_lang$core$List$tail(gradient))
+			};
+		} else {
+			return {ctor: '_Tuple2', _0: currentStop, _1: gradient};
+		}
+	});
+var _eskimoblood$elm_color_extra$Color_Gradient$calculateColor = F4(
+	function (space, _p11, _p10, t) {
+		var _p12 = _p11;
+		var _p16 = _p12._0;
+		var _p15 = _p12._1;
+		var _p13 = _p10;
+		var _p14 = _p13._1;
+		return _elm_lang$core$Native_Utils.eq(t, 0) ? _p15 : (_elm_lang$core$Native_Utils.eq(t, 1) ? _p14 : A4(_eskimoblood$elm_color_extra$Color_Interpolate$interpolate, space, _p15, _p14, (t - _p16) / (_p13._0 - _p16)));
+	});
+var _eskimoblood$elm_color_extra$Color_Gradient$calculateGradient = F5(
+	function (space, stop1, stop2, gradient, t) {
+		if (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$Tuple$first(stop2),
+			t) < 0) {
+			var _p17 = A2(_eskimoblood$elm_color_extra$Color_Gradient$getNextGradientStop, stop2, gradient);
+			var stop2_ = _p17._0;
+			var gradient_ = _p17._1;
+			var stop1_ = stop2;
+			return {
+				ctor: '_Tuple4',
+				_0: stop1_,
+				_1: stop2_,
+				_2: gradient_,
+				_3: A4(_eskimoblood$elm_color_extra$Color_Gradient$calculateColor, space, stop1_, stop2_, t)
+			};
+		} else {
+			return {
+				ctor: '_Tuple4',
+				_0: stop1,
+				_1: stop2,
+				_2: gradient,
+				_3: A4(_eskimoblood$elm_color_extra$Color_Gradient$calculateColor, space, stop1, stop2, t)
+			};
+		}
+	});
+var _eskimoblood$elm_color_extra$Color_Gradient$c = F3(
+	function (space, t, _p18) {
+		var _p19 = _p18;
+		var _p20 = A5(_eskimoblood$elm_color_extra$Color_Gradient$calculateGradient, space, _p19._0, _p19._1, _p19._2, t);
+		var stop1_ = _p20._0;
+		var stop2_ = _p20._1;
+		var gradient_ = _p20._2;
+		var color = _p20._3;
+		return {
+			ctor: '_Tuple4',
+			_0: stop1_,
+			_1: stop2_,
+			_2: gradient_,
+			_3: {ctor: '::', _0: color, _1: _p19._3}
+		};
+	});
+var _eskimoblood$elm_color_extra$Color_Gradient$linearGradientFromStops = F3(
+	function (space, stops, size) {
+		var purifiedStops = A2(
+			_elm_lang$core$List$sortBy,
+			function (_p21) {
+				var _p22 = _p21;
+				return _p22._0;
+			},
+			A2(
+				_elm_lang$core$List$filter,
+				function (_p23) {
+					var _p24 = _p23;
+					var _p25 = _p24._0;
+					return (_elm_lang$core$Native_Utils.cmp(_p25, 0) > -1) && (_elm_lang$core$Native_Utils.cmp(_p25, 1) < 1);
+				},
+				stops));
+		var stop1 = _elm_lang$core$List$head(purifiedStops);
+		var _p26 = stop1;
+		if (_p26.ctor === 'Just') {
+			var _p30 = _p26._0;
+			var currentStops = A2(
+				_elm_lang$core$Maybe$withDefault,
+				{ctor: '[]'},
+				_elm_lang$core$List$tail(purifiedStops));
+			var _p27 = A2(_eskimoblood$elm_color_extra$Color_Gradient$getNextGradientStop, _p30, currentStops);
+			var s2 = _p27._0;
+			var g = _p27._1;
+			var l = size - 1;
+			var stops = A2(
+				_elm_lang$core$List$map,
+				function (i) {
+					return _elm_lang$core$Basics$toFloat(i) / _elm_lang$core$Basics$toFloat(l);
+				},
+				A2(_elm_lang$core$List$range, 0, l));
+			return _elm_lang$core$List$reverse(
+				function (_p28) {
+					var _p29 = _p28;
+					return _p29._3;
+				}(
+					A3(
+						_elm_lang$core$List$foldl,
+						_eskimoblood$elm_color_extra$Color_Gradient$c(space),
+						{
+							ctor: '_Tuple4',
+							_0: _p30,
+							_1: s2,
+							_2: g,
+							_3: {ctor: '[]'}
+						},
+						stops)));
+		} else {
+			return {ctor: '[]'};
+		}
+	});
+var _eskimoblood$elm_color_extra$Color_Gradient$linearGradient = F3(
+	function (space, palette, size) {
+		var l = _elm_lang$core$List$length(palette) - 1;
+		var gr = A3(
+			_elm_lang$core$List$map2,
+			F2(
+				function (i, cl) {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Basics$toFloat(i) / _elm_lang$core$Basics$toFloat(l),
+						_1: cl
+					};
+				}),
+			A2(_elm_lang$core$List$range, 0, l),
+			palette);
+		return A3(_eskimoblood$elm_color_extra$Color_Gradient$linearGradientFromStops, space, gr, size);
+	});

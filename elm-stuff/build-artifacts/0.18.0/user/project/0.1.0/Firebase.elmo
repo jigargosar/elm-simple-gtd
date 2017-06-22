@@ -1,4 +1,4 @@
-var _user$project$Firebase$customSw = A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'customSw', true);
+var _user$project$Firebase$customSw = A2(_edvail$elm_polymer$Polymer_Attributes$boolProperty, 'customSw', true);
 var _user$project$Firebase$updateToken = F2(
 	function (token, client) {
 		return _elm_lang$core$Native_Utils.update(
@@ -16,19 +16,19 @@ var _user$project$Firebase$encodeClient = function (client) {
 		{
 			ctor: '::',
 			_0: A2(
-				_user$project$Ext_Function_Infix_ops['=>'],
+				_user$project$X_Function_Infix_ops['=>'],
 				'id',
 				_elm_lang$core$Json_Encode$string(client.id)),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_user$project$Ext_Function_Infix_ops['=>'],
+					_user$project$X_Function_Infix_ops['=>'],
 					'token',
 					A2(_elm_community$json_extra$Json_Encode_Extra$maybe, _elm_lang$core$Json_Encode$string, client.token)),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_user$project$Ext_Function_Infix_ops['=>'],
+						_user$project$X_Function_Infix_ops['=>'],
 						'connected',
 						_elm_lang$core$Json_Encode$bool(client.connected)),
 					_1: {ctor: '[]'}

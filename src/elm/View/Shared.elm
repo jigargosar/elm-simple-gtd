@@ -8,9 +8,7 @@ import Entity exposing (Entity)
 import OldGroupEntity.ViewModel
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
-import Html.Attributes.Extra exposing (boolProperty, intProperty)
 import Html.Events exposing (onClick)
-import Html.Events.Extra exposing (onClickStopPropagation)
 import Json.Encode
 import Model
 import Model
@@ -20,8 +18,8 @@ import Set exposing (Set)
 import Time exposing (Time)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Model exposing (Model)

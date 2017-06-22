@@ -1,0 +1,316 @@
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$decideSide = F5(
+	function (side, positiveOptimal, negativeOptimal, bound, size) {
+		var _p0 = side;
+		if (_p0.ctor === 'Positive') {
+			return (_elm_lang$core$Native_Utils.cmp(positiveOptimal + size, bound) > 0) ? negativeOptimal : positiveOptimal;
+		} else {
+			return (_elm_lang$core$Native_Utils.cmp(negativeOptimal, 0) < 0) ? positiveOptimal : negativeOptimal;
+		}
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$favored = F5(
+	function (model, high, low, bound, size) {
+		var negativeOptimal = (high - size) - model.offset;
+		var positiveOptimal = low + model.offset;
+		return A5(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$decideSide, model.favoring, positiveOptimal, negativeOptimal, bound, size);
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$align = F5(
+	function (model, high, low, bound, size) {
+		var negativeOptimal = low - size;
+		var positiveOptimal = high;
+		return A5(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$decideSide, model.alignTo, positiveOptimal, negativeOptimal, bound, size);
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$calculateLeft = F4(
+	function (window, parent, dropdown, model) {
+		var optimal = function () {
+			var _p1 = model.direction;
+			if (_p1.ctor === 'Horizontal') {
+				return A5(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$favored, model, parent.left, parent.right, window.width, dropdown.width);
+			} else {
+				return A5(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$align, model, parent.left, parent.right, window.width, dropdown.width);
+			}
+		}();
+		var maxiumum = window.width - dropdown.width;
+		return A2(_elm_lang$core$Basics$min, maxiumum, optimal);
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$calculateTop = F4(
+	function (window, parent, dropdown, model) {
+		var optimal = function () {
+			var _p2 = model.direction;
+			if (_p2.ctor === 'Horizontal') {
+				return A5(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$align, model, parent.top, parent.bottom, window.height, dropdown.height);
+			} else {
+				return A5(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$favored, model, parent.top, parent.bottom, window.height, dropdown.height);
+			}
+		}();
+		var maxiumum = window.height - dropdown.height;
+		return A2(_elm_lang$core$Basics$min, maxiumum, optimal);
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$defaultRect = {top: 0, left: 0, right: 0, bottom: 0, width: 0, height: 0};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$openDropdown = F2(
+	function (uid, model) {
+		var dropdown = A2(
+			_elm_lang$core$Result$withDefault,
+			_gdotdesign$elm_ui$Ui_Helpers_Dropdown$defaultRect,
+			_gdotdesign$elm_dom$DOM$getDimensionsSync(
+				_gdotdesign$elm_dom$DOM$idSelector(
+					A2(_elm_lang$core$Basics_ops['++'], uid, '-dropdown'))));
+		var parent = A2(
+			_elm_lang$core$Result$withDefault,
+			_gdotdesign$elm_ui$Ui_Helpers_Dropdown$defaultRect,
+			_gdotdesign$elm_dom$DOM$getDimensionsSync(
+				_gdotdesign$elm_dom$DOM$idSelector(uid)));
+		var window = {
+			height: _gdotdesign$elm_dom$DOM_Window$height(
+				{ctor: '_Tuple0'}),
+			width: _gdotdesign$elm_dom$DOM_Window$width(
+				{ctor: '_Tuple0'})
+		};
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				left: A4(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$calculateLeft, window, parent, dropdown, model),
+				top: A4(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$calculateTop, window, parent, dropdown, model),
+				open: true
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$updateDropdown = F2(
+	function ($function, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				dropdown: $function(model.dropdown)
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$isOver = F2(
+	function (id, position) {
+		return A2(
+			_elm_lang$core$Result$withDefault,
+			false,
+			A2(
+				_gdotdesign$elm_dom$DOM$isOver,
+				_gdotdesign$elm_dom$DOM$idSelector(id),
+				{
+					top: _elm_lang$core$Basics$toFloat(position.y),
+					left: _elm_lang$core$Basics$toFloat(position.x)
+				}));
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$render = F2(
+	function (viewModel, model) {
+		var dropdown = A3(
+			_elm_lang$html$Html$node,
+			'ui-dropdown-panel',
+			_elm_lang$core$List$concat(
+				{
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui$attributeList(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'open', _1: model.dropdown.open},
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$id(
+								A2(_elm_lang$core$Basics_ops['++'], model.uid, '-dropdown')),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: {
+											ctor: '_Tuple2',
+											_0: 'left',
+											_1: A2(
+												_elm_lang$core$Basics_ops['++'],
+												_elm_lang$core$Basics$toString(model.dropdown.left),
+												'px')
+										},
+										_1: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 'top',
+												_1: A2(
+													_elm_lang$core$Basics_ops['++'],
+													_elm_lang$core$Basics$toString(model.dropdown.top),
+													'px')
+											},
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						},
+						_1: {
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_Dropdown$defaultStyle),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			viewModel.contents);
+		var children = A2(
+			_elm_lang$core$Basics_ops['++'],
+			viewModel.children,
+			{
+				ctor: '::',
+				_0: dropdown,
+				_1: {ctor: '[]'}
+			});
+		var attributes = A2(
+			F2(
+				function (x, y) {
+					return A2(_elm_lang$core$Basics_ops['++'], x, y);
+				}),
+			viewModel.attributes,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id(model.uid),
+				_1: {ctor: '[]'}
+			});
+		return A3(_elm_lang$html$Html$node, viewModel.tag, attributes, children);
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$view = F2(
+	function (viewModel, model) {
+		return A3(_elm_lang$html$Html_Lazy$lazy2, _gdotdesign$elm_ui$Ui_Helpers_Dropdown$render, viewModel, model);
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$close = function (model) {
+	return A2(
+		_gdotdesign$elm_ui$Ui_Helpers_Dropdown$updateDropdown,
+		function (dropdown) {
+			return _elm_lang$core$Native_Utils.update(
+				dropdown,
+				{open: false});
+		},
+		model);
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$update = F2(
+	function (msg, model) {
+		var _p3 = msg;
+		if (_p3.ctor === 'Click') {
+			return A2(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$isOver, model.uid, _p3._0) ? model : _gdotdesign$elm_ui$Ui_Helpers_Dropdown$close(model);
+		} else {
+			return _gdotdesign$elm_ui$Ui_Helpers_Dropdown$close(model);
+		}
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$open = function (model) {
+	return A2(
+		_gdotdesign$elm_ui$Ui_Helpers_Dropdown$updateDropdown,
+		function (dropdown) {
+			return A2(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$openDropdown, model.uid, dropdown);
+		},
+		model);
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$toggle = function (model) {
+	return model.dropdown.open ? _gdotdesign$elm_ui$Ui_Helpers_Dropdown$close(model) : _gdotdesign$elm_ui$Ui_Helpers_Dropdown$open(model);
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$offset = F2(
+	function (offset, model) {
+		return A2(
+			_gdotdesign$elm_ui$Ui_Helpers_Dropdown$updateDropdown,
+			function (dropdown) {
+				return _elm_lang$core$Native_Utils.update(
+					dropdown,
+					{offset: offset});
+			},
+			model);
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$direction = F2(
+	function (value, model) {
+		return A2(
+			_gdotdesign$elm_ui$Ui_Helpers_Dropdown$updateDropdown,
+			function (dropdown) {
+				return _elm_lang$core$Native_Utils.update(
+					dropdown,
+					{direction: value});
+			},
+			model);
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$ViewModel = F5(
+	function (a, b, c, d, e) {
+		return {attributes: a, children: b, contents: c, address: d, tag: e};
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Dropdown = F7(
+	function (a, b, c, d, e, f, g) {
+		return {direction: a, favoring: b, alignTo: c, offset: d, left: e, top: f, open: g};
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Vertical = {ctor: 'Vertical'};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Horizontal = {ctor: 'Horizontal'};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Top = {ctor: 'Top'};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Left = {ctor: 'Left'};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Right = {ctor: 'Right'};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Bottom = {ctor: 'Bottom'};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Negative = {ctor: 'Negative'};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Positive = {ctor: 'Positive'};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$init = {direction: _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Vertical, favoring: _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Positive, alignTo: _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Positive, open: false, offset: 0, left: 0, top: 0};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$getSpaceFromSide = function (side) {
+	var _p4 = side;
+	switch (_p4.ctor) {
+		case 'Bottom':
+			return _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Positive;
+		case 'Right':
+			return _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Positive;
+		case 'Left':
+			return _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Negative;
+		default:
+			return _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Negative;
+	}
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$favoring = F2(
+	function (side, model) {
+		return A2(
+			_gdotdesign$elm_ui$Ui_Helpers_Dropdown$updateDropdown,
+			function (dropdown) {
+				return _elm_lang$core$Native_Utils.update(
+					dropdown,
+					{
+						favoring: _gdotdesign$elm_ui$Ui_Helpers_Dropdown$getSpaceFromSide(side)
+					});
+			},
+			model);
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$stwitchSpace = function (space) {
+	var _p5 = space;
+	if (_p5.ctor === 'Positive') {
+		return _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Negative;
+	} else {
+		return _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Positive;
+	}
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$alignTo = F2(
+	function (side, model) {
+		return A2(
+			_gdotdesign$elm_ui$Ui_Helpers_Dropdown$updateDropdown,
+			function (dropdown) {
+				return _elm_lang$core$Native_Utils.update(
+					dropdown,
+					{
+						alignTo: _gdotdesign$elm_ui$Ui_Helpers_Dropdown$stwitchSpace(
+							_gdotdesign$elm_ui$Ui_Helpers_Dropdown$getSpaceFromSide(side))
+					});
+			},
+			model);
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Close = {ctor: 'Close'};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$Click = function (a) {
+	return {ctor: 'Click', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Dropdown$subscriptions = function (model) {
+	return model.dropdown.open ? _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: _elm_lang$window$Window$resizes(
+				_elm_lang$core$Basics$always(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$Close)),
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Native_Scrolls$scrolls(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$Close),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$mouse$Mouse$downs(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$Click),
+					_1: {ctor: '[]'}
+				}
+			}
+		}) : _elm_lang$core$Platform_Sub$none;
+};

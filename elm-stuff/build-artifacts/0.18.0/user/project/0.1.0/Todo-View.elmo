@@ -10,10 +10,10 @@ var _user$project$Todo_View$reminderPopup = function (form) {
 			_0: _elm_lang$html$Html_Attributes$class('overlay'),
 			_1: {
 				ctor: '::',
-				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
+				_0: _user$project$X_Html$onClickStopPropagation(_user$project$Model$OnDeactivateEditingMode),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+					_0: _user$project$X_Keyboard$onKeyDownStopPropagation(
 						function (_p1) {
 							return _user$project$Model$NOOP;
 						}),
@@ -33,7 +33,7 @@ var _user$project$Todo_View$reminderPopup = function (form) {
 						_0: _elm_lang$html$Html_Attributes$class('z-depth-4 static'),
 						_1: {
 							ctor: '::',
-							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$commonMsg.noOp),
+							_0: _user$project$X_Html$onClickStopPropagation(_user$project$Model$commonMsg.noOp),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -183,10 +183,10 @@ var _user$project$Todo_View$edit = F2(
 				_0: _elm_lang$html$Html_Attributes$class('overlay'),
 				_1: {
 					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Todo_View$fireCancel),
+					_0: _user$project$X_Html$onClickStopPropagation(_user$project$Todo_View$fireCancel),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+						_0: _user$project$X_Keyboard$onKeyDownStopPropagation(
 							function (_p5) {
 								return _user$project$Model$NOOP;
 							}),
@@ -203,7 +203,7 @@ var _user$project$Todo_View$edit = F2(
 						_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 						_1: {
 							ctor: '::',
-							_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
+							_0: _user$project$X_Html$onClickStopPropagation(_user$project$Model$NOOP),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -225,7 +225,7 @@ var _user$project$Todo_View$edit = F2(
 										_0: _elm_lang$html$Html_Attributes$class('input-field'),
 										_1: {
 											ctor: '::',
-											_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+											_0: _user$project$X_Keyboard$onKeyDownStopPropagation(
 												function (_p6) {
 													return _user$project$Model$NOOP;
 												}),
@@ -282,10 +282,10 @@ var _user$project$Todo_View$new = function (form) {
 			_0: _elm_lang$html$Html_Attributes$class('overlay'),
 			_1: {
 				ctor: '::',
-				_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Todo_View$fireCancel),
+				_0: _user$project$X_Html$onClickStopPropagation(_user$project$Todo_View$fireCancel),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$onKeyDownStopPropagation(
+					_0: _user$project$X_Keyboard$onKeyDownStopPropagation(
 						function (_p7) {
 							return _user$project$Model$NOOP;
 						}),
@@ -302,7 +302,7 @@ var _user$project$Todo_View$new = function (form) {
 					_0: _elm_lang$html$Html_Attributes$class('modal fixed-center'),
 					_1: {
 						ctor: '::',
-						_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(_user$project$Model$NOOP),
+						_0: _user$project$X_Html$onClickStopPropagation(_user$project$Model$NOOP),
 						_1: {ctor: '[]'}
 					}
 				},
@@ -378,7 +378,7 @@ var _user$project$Todo_View$createScheduleViewModel = F2(
 		var formatReminderTime = function (time) {
 			var nowDate = _elm_lang$core$Date$fromTime(now);
 			var dueDate = _elm_lang$core$Date$fromTime(time);
-			return (_elm_lang$core$Native_Utils.cmp(time, now) < 0) ? overDueText : A2(_user$project$Ext_Time$smartFormat, now, time);
+			return (_elm_lang$core$Native_Utils.cmp(time, now) < 0) ? overDueText : A2(_user$project$X_Time$smartFormat, now, time);
 		};
 		var displayText = A2(
 			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
@@ -419,10 +419,10 @@ var _user$project$Todo_View$editScheduleButton = function (vm) {
 					_0: _elm_lang$html$Html_Attributes$classList(
 						{
 							ctor: '::',
-							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'overdue', vm.reminder.isOverDue),
+							_0: A2(_user$project$X_Function_Infix_ops['=>'], 'overdue', vm.reminder.isOverDue),
 							_1: {
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'reminder-text', true),
+								_0: A2(_user$project$X_Function_Infix_ops['=>'], 'reminder-text', true),
 								_1: {ctor: '[]'}
 							}
 						}),
@@ -459,7 +459,7 @@ var _user$project$Todo_View$projectProjectButton = function (vm) {
 				_0: _elm_lang$html$Html_Attributes$style(
 					{
 						ctor: '::',
-						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'height', '24px'),
+						_0: A2(_user$project$X_Function_Infix_ops['=>'], 'height', '24px'),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -506,7 +506,7 @@ var _user$project$Todo_View$editContextButton = function (vm) {
 				_0: _elm_lang$html$Html_Attributes$style(
 					{
 						ctor: '::',
-						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'height', '24px'),
+						_0: A2(_user$project$X_Function_Infix_ops['=>'], 'height', '24px'),
 						_1: {ctor: '[]'}
 					}),
 				_1: {
@@ -541,12 +541,59 @@ var _user$project$Todo_View$editContextButton = function (vm) {
 			_1: {ctor: '[]'}
 		});
 };
-var _user$project$Todo_View$onMouseDownStopPropagation = function (msg) {
-	return A3(
-		_elm_lang$html$Html_Events$onWithOptions,
-		'mousedown',
-		_user$project$Ext_Keyboard$stopPropagation,
-		_elm_lang$core$Json_Decode$succeed(msg));
+var _user$project$Todo_View$moreIconButton = function (vm) {
+	return A2(
+		_user$project$Material$smallIconButton,
+		'more_vert',
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id(
+				A2(_elm_lang$core$Basics_ops['++'], 'todo-more-menu-button-', vm.key)),
+			_1: {
+				ctor: '::',
+				_0: _user$project$X_Html$onMouseDownStopPropagation(_user$project$Model$NOOP),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.onMoreMenuClicked),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _user$project$Todo_View$doneIconButton = function (vm) {
+	return A2(
+		_user$project$Material$iconButton,
+		'done',
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$classList(
+				{
+					ctor: '::',
+					_0: A2(_user$project$X_Function_Infix_ops['=>'], 'done-icon', true),
+					_1: {
+						ctor: '::',
+						_0: A2(_user$project$X_Function_Infix_ops['=>'], 'is-done', vm.isDone),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _user$project$X_Html$onMouseDownStopPropagation(_user$project$Model$NOOP),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(vm.toggleDoneMsg),
+					_1: {
+						ctor: '::',
+						_0: vm.tabindexAV,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
 };
 var _user$project$Todo_View$parseDisplayText = function (displayText) {
 	var nonLinkStrings = A2(
@@ -564,7 +611,7 @@ var _user$project$Todo_View$parseDisplayText = function (displayText) {
 					_0: _elm_lang$html$Html_Attributes$target('_blank'),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Todo_View$onMouseDownStopPropagation(_user$project$Model$NOOP),
+						_0: _user$project$X_Html$onMouseDownStopPropagation(_user$project$Model$NOOP),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -591,60 +638,6 @@ var _user$project$Todo_View$parseDisplayText = function (displayText) {
 		});
 	return A2(_elm_community$list_extra$List_Extra$interweave, nonLinkStrings, linkStrings);
 };
-var _user$project$Todo_View$doneIconButton = function (vm) {
-	return A2(
-		_user$project$Material$iconButton,
-		'done',
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$classList(
-				{
-					ctor: '::',
-					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'done-icon', true),
-					_1: {
-						ctor: '::',
-						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'is-done', vm.isDone),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: _user$project$Todo_View$onMouseDownStopPropagation(_user$project$Model$NOOP),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(vm.toggleDoneMsg),
-					_1: {
-						ctor: '::',
-						_0: vm.tabindexAV,
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-};
-var _user$project$Todo_View$moreIconButton = function (vm) {
-	return A2(
-		_user$project$Material$smallIconButton,
-		'more_vert',
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id(
-				A2(_elm_lang$core$Basics_ops['++'], 'todo-more-menu-button-', vm.key)),
-			_1: {
-				ctor: '::',
-				_0: _user$project$Todo_View$onMouseDownStopPropagation(_user$project$Model$NOOP),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Events$onClick(vm.onMoreMenuClicked),
-					_1: {
-						ctor: '::',
-						_0: vm.tabindexAV,
-						_1: {ctor: '[]'}
-					}
-				}
-			}
-		});
-};
 var _user$project$Todo_View$item = function (vm) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -653,13 +646,13 @@ var _user$project$Todo_View$item = function (vm) {
 			_0: _elm_lang$html$Html_Attributes$classList(
 				{
 					ctor: '::',
-					_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'todo-item focusable-list-item collection-item', true),
+					_0: A2(_user$project$X_Function_Infix_ops['=>'], 'todo-item focusable-list-item collection-item', true),
 					_1: {
 						ctor: '::',
-						_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'selected', vm.isSelected),
+						_0: A2(_user$project$X_Function_Infix_ops['=>'], 'selected', vm.isSelected),
 						_1: {
 							ctor: '::',
-							_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'can-be-focused', vm.canBeFocused),
+							_0: A2(_user$project$X_Function_Infix_ops['=>'], 'can-be-focused', vm.canBeFocused),
 							_1: {ctor: '[]'}
 						}
 					}
@@ -672,7 +665,7 @@ var _user$project$Todo_View$item = function (vm) {
 					_0: vm.tabindexAV,
 					_1: {
 						ctor: '::',
-						_0: _user$project$Ext_Keyboard$onKeyDown(vm.onKeyDownMsg),
+						_0: _user$project$X_Keyboard$onKeyDown(vm.onKeyDownMsg),
 						_1: {
 							ctor: '::',
 							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-key', vm.key),
@@ -755,7 +748,7 @@ var _user$project$Todo_View$item = function (vm) {
 								_0: _elm_lang$html$Html_Attributes$style(
 									{
 										ctor: '::',
-										_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'margin', '0 8px'),
+										_0: A2(_user$project$X_Function_Infix_ops['=>'], 'margin', '0 8px'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}
@@ -774,7 +767,7 @@ var _user$project$Todo_View$item = function (vm) {
 									_0: _elm_lang$html$Html_Attributes$style(
 										{
 											ctor: '::',
-											_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+											_0: A2(_user$project$X_Function_Infix_ops['=>'], 'padding', '0 8px'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -793,7 +786,7 @@ var _user$project$Todo_View$item = function (vm) {
 										_0: _elm_lang$html$Html_Attributes$style(
 											{
 												ctor: '::',
-												_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'padding', '0 8px'),
+												_0: A2(_user$project$X_Function_Infix_ops['=>'], 'padding', '0 8px'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -820,7 +813,7 @@ var _user$project$Todo_View$keyedItem = function (vm) {
 };
 var _user$project$Todo_View$getDisplayText = function (todo) {
 	var trimAndReplaceEmptyWithDefault = A2(
-		_user$project$Ext_Function_Infix_ops['>>?='],
+		_user$project$X_Function_Infix_ops['>>?='],
 		function (_p9) {
 			return _elm_community$string_extra$String_Extra$nonEmpty(
 				_elm_lang$core$String$trim(_p9));
@@ -854,7 +847,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 					A2(
-						_user$project$Ext_Function_Infix_ops['>>?'],
+						_user$project$X_Function_Infix_ops['>>?'],
 						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, appVM.projectByIdDict),
 						_user$project$Project$getName)(projectId),
 					'')));
@@ -865,7 +858,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 				A2(
 					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
 					A2(
-						_user$project$Ext_Function_Infix_ops['>>?'],
+						_user$project$X_Function_Infix_ops['>>?'],
 						A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _elm_lang$core$Dict$get, appVM.contextByIdDict),
 						_user$project$Context$getName)(contextId),
 					'Inbox')));
@@ -875,7 +868,7 @@ var _user$project$Todo_View$createTodoViewModel = F3(
 		var reminder = A2(_user$project$Todo_View$createScheduleViewModel, now, todo);
 		var onKeyDownMsg = function (_p10) {
 			var _p11 = _p10;
-			if (_user$project$Ext_Keyboard$isNoSoftKeyDown(_p11)) {
+			if (_user$project$X_Keyboard$isNoSoftKeyDown(_p11)) {
 				var _p12 = _p11.key;
 				switch (_p12.ctor) {
 					case 'Space':

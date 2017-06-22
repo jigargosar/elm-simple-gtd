@@ -1,0 +1,125 @@
+var _gdotdesign$elm_ui$Ui_Styles_InplaceInput$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$inlineBlock),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Ui_Css$selector,
+					'ui-textarea',
+					{
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$zIndex(0),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gdotdesign$elm_ui$Ui_Css$selector,
+						'ui-button[kind=primary]',
+						{
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginRight(
+								_gdotdesign$elm_ui$Ui_Css_Properties$px(10)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_gdotdesign$elm_ui$Ui_Css$selector,
+							'ui-button[kind=secondary]',
+							{
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginLeft(_gdotdesign$elm_ui$Ui_Css_Properties$auto),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Ui_Css$selector,
+								'ui-inplace-input-content',
+								{
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontFamily(theme.fontFamily),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(theme.colors.input.bw),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$padding(
+												A2(
+													_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+													_gdotdesign$elm_ui$Ui_Css_Properties$px(6),
+													_gdotdesign$elm_ui$Ui_Css_Properties$px(9))),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$wordBreak(_gdotdesign$elm_ui$Ui_Css_Properties$breakWord),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$lineHeight(
+														_gdotdesign$elm_ui$Ui_Css_Properties$px(24)),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$whiteSpace(_gdotdesign$elm_ui$Ui_Css_Properties$preWrap),
+														_1: {
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$block),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_gdotdesign$elm_ui$Ui_Css$selector,
+																	'&:empty:before',
+																	{
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$content('attr(placeholder)'),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$opacity(0.5),
+																			_1: {ctor: '[]'}
+																		}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gdotdesign$elm_ui$Ui_Css$selector,
+									'&:not([disabled]):not([readonly])',
+									{
+										ctor: '::',
+										_0: A2(
+											_gdotdesign$elm_ui$Ui_Css$selectors,
+											{
+												ctor: '::',
+												_0: 'ui-inplace-input-content',
+												_1: {
+													ctor: '::',
+													_0: 'ui-inplace-input-content:empty:before',
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$cursor(_gdotdesign$elm_ui$Ui_Css_Properties$pointer),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_InplaceInput$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_InplaceInput$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

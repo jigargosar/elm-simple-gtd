@@ -15,12 +15,11 @@ import Todo.NewForm
 import Todo.GroupForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Time exposing (Time)
-import Time.Format
 import Todo.Form
 import Todo.ReminderForm
 

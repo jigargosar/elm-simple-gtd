@@ -1,0 +1,236 @@
+var _gdotdesign$elm_ui$Ui_Styles_Input$inputStyle = function (theme) {
+	return A2(
+		_gdotdesign$elm_ui$Ui_Css$selector,
+		'input',
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$focusedIdle(theme),
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$defaults,
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Css_Properties$border(
+						A2(
+							_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+							A2(
+								_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+								_gdotdesign$elm_ui$Ui_Css_Properties$px(1),
+								_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+							theme.colors.border)),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$backgroundColor(theme.colors.input.color),
+						_1: {
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(theme.borderRadius),
+							_1: {
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontFamily(theme.fontFamily),
+								_1: {
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(theme.colors.input.bw),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$padding(
+											A2(
+												_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+												_gdotdesign$elm_ui$Ui_Css_Properties$px(6),
+												_gdotdesign$elm_ui$Ui_Css_Properties$px(9))),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$lineHeight(
+												_gdotdesign$elm_ui$Ui_Css_Properties$px(16)),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontSize(
+													_gdotdesign$elm_ui$Ui_Css_Properties$px(16)),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+														_gdotdesign$elm_ui$Ui_Css_Properties$pct(100)),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+															_gdotdesign$elm_ui$Ui_Css_Properties$px(36)),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_gdotdesign$elm_ui$Ui_Css$selector,
+																'&::-webkit-input-placeholder',
+																{
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$lineHeight(
+																		_gdotdesign$elm_ui$Ui_Css_Properties$px(22)),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_gdotdesign$elm_ui$Ui_Css$selector,
+																	'&[disabled]',
+																	{
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$disabledColors(theme),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$disabled,
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderColor(_gdotdesign$elm_ui$Ui_Css_Properties$transparent),
+																				_1: {ctor: '[]'}
+																			}
+																		}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_gdotdesign$elm_ui$Ui_Css$selector,
+																		'&[readonly]',
+																		{
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$readonly,
+																			_1: {
+																				ctor: '::',
+																				_0: A2(
+																					_gdotdesign$elm_ui$Ui_Css$selectors,
+																					{
+																						ctor: '::',
+																						_0: '&::-moz-selection',
+																						_1: {
+																							ctor: '::',
+																							_0: '&::selection',
+																							_1: {ctor: '[]'}
+																						}
+																					},
+																					{
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$background(_gdotdesign$elm_ui$Ui_Css_Properties$transparent),
+																						_1: {ctor: '[]'}
+																					}),
+																				_1: {ctor: '[]'}
+																			}
+																		}),
+																	_1: {
+																		ctor: '::',
+																		_0: A2(
+																			_gdotdesign$elm_ui$Ui_Css$selector,
+																			'&:focus',
+																			{
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$focused(theme),
+																				_1: {ctor: '[]'}
+																			}),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_Input$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$defaults,
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(theme.colors.input.bw),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$inlineBlock),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$relative),
+						_1: {
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Styles_Input$inputStyle(theme),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gdotdesign$elm_ui$Ui_Css$selector,
+									'&[clearable]',
+									{
+										ctor: '::',
+										_0: A2(
+											_gdotdesign$elm_ui$Ui_Css$selector,
+											'input',
+											{
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$paddingRight(
+													_gdotdesign$elm_ui$Ui_Css_Properties$px(30)),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_gdotdesign$elm_ui$Ui_Css$selector,
+												'svg',
+												{
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$fill(_gdotdesign$elm_ui$Ui_Css_Properties$currentColor),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$absolute),
+														_1: {
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Css_Properties$height(
+																_gdotdesign$elm_ui$Ui_Css_Properties$px(12)),
+															_1: {
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$width(
+																	_gdotdesign$elm_ui$Ui_Css_Properties$px(12)),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$right(
+																		_gdotdesign$elm_ui$Ui_Css_Properties$px(12)),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$top(
+																			_gdotdesign$elm_ui$Ui_Css_Properties$px(12)),
+																		_1: {
+																			ctor: '::',
+																			_0: A2(
+																				_gdotdesign$elm_ui$Ui_Css$selector,
+																				'&:hover',
+																				{
+																					ctor: '::',
+																					_0: _gdotdesign$elm_ui$Ui_Css_Properties$fill(theme.colors.focus.color),
+																					_1: {
+																						ctor: '::',
+																						_0: _gdotdesign$elm_ui$Ui_Css_Properties$cursor(_gdotdesign$elm_ui$Ui_Css_Properties$pointer),
+																						_1: {ctor: '[]'}
+																					}
+																				}),
+																			_1: {ctor: '[]'}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_Input$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_Input$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

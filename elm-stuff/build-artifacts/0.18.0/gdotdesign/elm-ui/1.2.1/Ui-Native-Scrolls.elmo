@@ -1,0 +1,91 @@
+var _gdotdesign$elm_ui$Ui_Native_Scrolls$onSelfMsg = F3(
+	function (router, msg, state) {
+		var send = function (msg) {
+			var _p0 = msg;
+			return A2(_elm_lang$core$Platform$sendToApp, router, _p0._0);
+		};
+		return A2(
+			_elm_lang$core$Task$andThen,
+			function (_p1) {
+				return _elm_lang$core$Task$succeed(state);
+			},
+			_elm_lang$core$Task$sequence(
+				A2(_elm_lang$core$List$map, send, state.subs)));
+	});
+var _gdotdesign$elm_ui$Ui_Native_Scrolls$init = _elm_lang$core$Task$succeed(
+	{
+		subs: {ctor: '[]'},
+		pid: _elm_lang$core$Maybe$Nothing
+	});
+var _gdotdesign$elm_ui$Ui_Native_Scrolls$subscription = _elm_lang$core$Native_Platform.leaf('Ui.Native.Scrolls');
+var _gdotdesign$elm_ui$Ui_Native_Scrolls$State = F2(
+	function (a, b) {
+		return {subs: a, pid: b};
+	});
+var _gdotdesign$elm_ui$Ui_Native_Scrolls$MySub = function (a) {
+	return {ctor: 'MySub', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Native_Scrolls$scrolls = function (msg) {
+	return _gdotdesign$elm_ui$Ui_Native_Scrolls$subscription(
+		_gdotdesign$elm_ui$Ui_Native_Scrolls$MySub(msg));
+};
+var _gdotdesign$elm_ui$Ui_Native_Scrolls$subMap = F2(
+	function (func, _p2) {
+		var _p3 = _p2;
+		return _gdotdesign$elm_ui$Ui_Native_Scrolls$MySub(
+			func(_p3._0));
+	});
+var _gdotdesign$elm_ui$Ui_Native_Scrolls$Msg = {ctor: 'Msg'};
+var _gdotdesign$elm_ui$Ui_Native_Scrolls$onEffects = F3(
+	function (router, newSubs, oldState) {
+		var state = {
+			ctor: '_Tuple2',
+			_0: oldState.pid,
+			_1: !_elm_lang$core$List$isEmpty(newSubs)
+		};
+		var _p4 = state;
+		if (_p4._0.ctor === 'Just') {
+			if (_p4._1 === true) {
+				return _elm_lang$core$Task$succeed(
+					_elm_lang$core$Native_Utils.update(
+						oldState,
+						{subs: newSubs}));
+			} else {
+				return A2(
+					_elm_lang$core$Task$andThen,
+					function (_p5) {
+						return _elm_lang$core$Task$succeed(
+							_elm_lang$core$Native_Utils.update(
+								oldState,
+								{
+									subs: {ctor: '[]'},
+									pid: _elm_lang$core$Maybe$Nothing
+								}));
+					},
+					_elm_lang$core$Process$kill(_p4._0._0));
+			}
+		} else {
+			if (_p4._1 === true) {
+				return A2(
+					_elm_lang$core$Task$andThen,
+					function (pid) {
+						return _elm_lang$core$Task$succeed(
+							{
+								pid: _elm_lang$core$Maybe$Just(pid),
+								subs: newSubs
+							});
+					},
+					_elm_lang$core$Process$spawn(
+						A3(
+							_elm_lang$dom$Dom_LowLevel$onWindow,
+							'scroll',
+							_elm_lang$core$Json_Decode$succeed(''),
+							function (_p6) {
+								return A2(_elm_lang$core$Platform$sendToSelf, router, _gdotdesign$elm_ui$Ui_Native_Scrolls$Msg);
+							})));
+			} else {
+				return _elm_lang$core$Task$succeed(oldState);
+			}
+		}
+	});
+_elm_lang$core$Native_Platform.effectManagers['Ui.Native.Scrolls'] = {pkg: 'gdotdesign/elm-ui', init: _gdotdesign$elm_ui$Ui_Native_Scrolls$init, onEffects: _gdotdesign$elm_ui$Ui_Native_Scrolls$onEffects, onSelfMsg: _gdotdesign$elm_ui$Ui_Native_Scrolls$onSelfMsg, tag: 'sub', subMap: _gdotdesign$elm_ui$Ui_Native_Scrolls$subMap};

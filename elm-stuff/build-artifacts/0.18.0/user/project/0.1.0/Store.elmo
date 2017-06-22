@@ -64,7 +64,7 @@ var _user$project$Store$encode = F2(
 		return A2(_user$project$Document$encode, s.otherFieldsEncoder, doc);
 	});
 var _user$project$Store$dict = A2(
-	_user$project$Ext_Record$field,
+	_user$project$X_Record$field,
 	function (_) {
 		return _.dict;
 	},
@@ -92,7 +92,7 @@ var _user$project$Store$findAndUpdateAll = F4(
 				};
 			});
 		return A3(
-			_user$project$Ext_Record$overT2,
+			_user$project$X_Record$overT2,
 			_user$project$Store$dict,
 			function (dict) {
 				return A3(
@@ -125,7 +125,7 @@ var _user$project$Store$updateAll = function (idSet) {
 };
 var _user$project$Store$insertDocInDict = function (doc) {
 	return A2(
-		_user$project$Ext_Record$over,
+		_user$project$X_Record$over,
 		_user$project$Store$dict,
 		A2(
 			_elm_lang$core$Dict$insert,
@@ -157,7 +157,7 @@ var _user$project$Store$insert = F2(
 			};
 		}(
 			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _user$project$Store$generate, store)(
-				_user$project$Ext_Random$mapWithIdGenerator(
+				_user$project$X_Random$mapWithIdGenerator(
 					constructor(store.deviceId))));
 	});
 var _user$project$Store$mapDocs = function (fn) {
@@ -169,7 +169,7 @@ var _user$project$Store$mapDocs = function (fn) {
 					function (id, doc) {
 						return fn(doc);
 					}),
-				A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p7)));
+				A2(_user$project$X_Record$get, _user$project$Store$dict, _p7)));
 	};
 };
 var _user$project$Store$filterDocs = function (fn) {
@@ -181,7 +181,7 @@ var _user$project$Store$filterDocs = function (fn) {
 					function (id, doc) {
 						return fn(doc);
 					}),
-				A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p8)));
+				A2(_user$project$X_Record$get, _user$project$Store$dict, _p8)));
 	};
 };
 var _user$project$Store$rejectDocs = function (fn) {
@@ -196,7 +196,7 @@ var _user$project$Store$findBy = function (predicate) {
 			_elm_community$list_extra$List_Extra$find,
 			predicate,
 			_elm_lang$core$Dict$values(
-				A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p10)));
+				A2(_user$project$X_Record$get, _user$project$Store$dict, _p10)));
 	};
 };
 var _user$project$Store$findById = function (id) {
@@ -204,7 +204,7 @@ var _user$project$Store$findById = function (id) {
 		return A2(
 			_elm_lang$core$Dict$get,
 			id,
-			A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p11));
+			A2(_user$project$X_Record$get, _user$project$Store$dict, _p11));
 	};
 };
 var _user$project$Store$updateExternalHelp = F2(
@@ -225,9 +225,9 @@ var _user$project$Store$updateExternalHelp = F2(
 	});
 var _user$project$Store$isEmpty = function (_p12) {
 	return _elm_lang$core$Dict$isEmpty(
-		A2(_user$project$Ext_Record$get, _user$project$Store$dict, _p12));
+		A2(_user$project$X_Record$get, _user$project$Store$dict, _p12));
 };
-var _user$project$Store$asIdDict = _user$project$Ext_Record$get(_user$project$Store$dict);
+var _user$project$Store$asIdDict = _user$project$X_Record$get(_user$project$Store$dict);
 var _user$project$Store$decodeList = function (decoder) {
 	return function (_p13) {
 		return A2(
@@ -249,7 +249,7 @@ var _user$project$Store$decodeList = function (decoder) {
 };
 var _user$project$Store$generator = F5(
 	function (name, otherFieldsEncoder, decoder, deviceId, encodedList) {
-		return _user$project$Ext_Random$mapWithIndependentSeed(
+		return _user$project$X_Random$mapWithIndependentSeed(
 			function (seed) {
 				return {
 					seed: seed,

@@ -1,10 +1,10 @@
 module AppDrawer.Model exposing (..)
 
-import Ext.Record
+import X.Record
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Json.Decode as D exposing (Decoder)
@@ -70,66 +70,66 @@ default =
 
 
 contexts =
-    Ext.Record.field .contexts (\s b -> { b | contexts = s })
+    X.Record.field .contexts (\s b -> { b | contexts = s })
 
 
 projects =
-    Ext.Record.field .projects (\s b -> { b | projects = s })
+    X.Record.field .projects (\s b -> { b | projects = s })
 
 
 expanded =
-    Ext.Record.bool .expanded (\s b -> { b | expanded = s })
+    X.Record.bool .expanded (\s b -> { b | expanded = s })
 
 
 showArchived =
-    Ext.Record.bool .showArchived (\s b -> { b | showArchived = s })
+    X.Record.bool .showArchived (\s b -> { b | showArchived = s })
 
 
 toggleExpanded =
-    Ext.Record.toggle expanded
+    X.Record.toggle expanded
 
 
 toggleShowArchived =
-    Ext.Record.toggle showArchived
+    X.Record.toggle showArchived
 
 
 setShowArchived bool =
-    Ext.Record.set showArchived bool
+    X.Record.set showArchived bool
 
 
 hideArchived groupModel =
-    Ext.Record.over groupModel (setShowArchived False)
+    X.Record.over groupModel (setShowArchived False)
 
 
 toggleProjectListExpanded =
-    Ext.Record.over projects (toggleExpanded)
+    X.Record.over projects (toggleExpanded)
         >> unless isProjectListExpanded (hideArchived projects)
 
 
 toggleContextListExpanded =
-    Ext.Record.over contexts (toggleExpanded)
+    X.Record.over contexts (toggleExpanded)
         >> unless isContextListExpanded (hideArchived contexts)
 
 
 isProjectListExpanded =
-    Ext.Record.get projects >> Ext.Record.get expanded
+    X.Record.get projects >> X.Record.get expanded
 
 
 isContextListExpanded =
-    Ext.Record.get contexts >> Ext.Record.get expanded
+    X.Record.get contexts >> X.Record.get expanded
 
 
 getShowArchivedForContexts =
-    Ext.Record.get contexts >> Ext.Record.get showArchived
+    X.Record.get contexts >> X.Record.get showArchived
 
 
 getShowArchivedForProjects =
-    Ext.Record.get projects >> Ext.Record.get showArchived
+    X.Record.get projects >> X.Record.get showArchived
 
 
 toggleContextShowArchived =
-    Ext.Record.over contexts (toggleShowArchived)
+    X.Record.over contexts (toggleShowArchived)
 
 
 toggleProjectShowArchived =
-    Ext.Record.over projects (toggleShowArchived)
+    X.Record.over projects (toggleShowArchived)

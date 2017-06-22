@@ -8,10 +8,11 @@ import Model exposing (Msg)
 import Navigation exposing (Location)
 import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
-import Ext.Function.Infix exposing (..)
+import X.Function.Infix exposing (..)
 import Model exposing (..)
 import Project
 import Todo.Msg
+import XList
 
 
 delta2builder : Model -> Model -> Maybe Builder
@@ -48,7 +49,7 @@ builder2messages builder =
                         -- If nothing provided for this part of the URL, return empty list
                         [ Model.OnSetViewType Model.defaultView ]
             )
-            (Model.OnSetEntityListView >> List.singleton)
+            (Model.OnSetEntityListView >> XList.singleton)
 
 
 hash2messages : Location -> List Msg

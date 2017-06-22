@@ -4,18 +4,18 @@ import Context
 import Date
 import Date.Distance exposing (defaultConfig)
 import Document exposing (Revision)
-import Ext.Record exposing (over, set)
+import X.Record exposing (over, set)
 import Firebase exposing (DeviceId)
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Maybe.Extra as Maybe
-import Ext.Random as Random
+import X.Random as Random
 import Random.Pcg as Random exposing (Seed)
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import Result.Extra as Result
 import List
 import List.Extra as List
@@ -122,27 +122,27 @@ getMaybeTime model =
 
 
 done =
-    Ext.Record.field .done (\s b -> { b | done = s })
+    X.Record.field .done (\s b -> { b | done = s })
 
 
 text =
-    Ext.Record.field .text (\s b -> { b | text = s })
+    X.Record.field .text (\s b -> { b | text = s })
 
 
 schedule =
-    Ext.Record.field .schedule (\s b -> { b | schedule = s })
+    X.Record.field .schedule (\s b -> { b | schedule = s })
 
 
 projectId =
-    Ext.Record.field .projectId (\s b -> { b | projectId = s })
+    X.Record.field .projectId (\s b -> { b | projectId = s })
 
 
 contextId =
-    Ext.Record.field .contextId (\s b -> { b | contextId = s })
+    X.Record.field .contextId (\s b -> { b | contextId = s })
 
 
 deleted =
-    Ext.Record.field .deleted (\s b -> { b | deleted = s })
+    X.Record.field .deleted (\s b -> { b | deleted = s })
 
 
 updateSchedule fn model =

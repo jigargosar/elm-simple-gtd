@@ -2,21 +2,21 @@ module LaunchBar.View exposing (..)
 
 import Context
 import ExclusiveMode
-import Ext.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
+import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Fuzzy
 import Keyboard.Extra as Key exposing (Key(..))
 import LaunchBar
 import Model
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
+import X.Html exposing (onClickStopPropagation)
 import Model exposing (commonMsg)
 import Project
 import String.Extra as String

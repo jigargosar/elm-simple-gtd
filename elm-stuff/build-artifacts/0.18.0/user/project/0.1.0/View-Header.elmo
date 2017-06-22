@@ -83,10 +83,10 @@ var _user$project$View_Header$menu = function (m) {
 			_0: _user$project$WebComponents$dynamicAlign,
 			_1: {
 				ctor: '::',
-				_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'noOverlap', true),
+				_0: A2(_user$project$X_Html$boolProperty, 'noOverlap', true),
 				_1: {
 					ctor: '::',
-					_0: A2(_elm_community$html_extra$Html_Attributes_Extra$boolProperty, 'closeOnActivate', true),
+					_0: A2(_user$project$X_Html$boolProperty, 'closeOnActivate', true),
 					_1: {ctor: '[]'}
 				}
 			}
@@ -187,7 +187,7 @@ var _user$project$View_Header$headerWithContent = F2(
 							_0: _elm_lang$html$Html_Attributes$style(
 								{
 									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'max-width', '80%'),
+									_0: A2(_user$project$X_Function_Infix_ops['=>'], 'max-width', '80%'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -244,7 +244,7 @@ var _user$project$View_Header$headerView = F2(
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 				_user$project$Todo_TimeTracker_View$maybe(m),
-				_elm_lang$core$List$singleton),
+				_user$project$XList$singleton),
 			A2(_user$project$View_Header$titleHeaderContent, viewModel, m));
 		return A2(_user$project$View_Header$headerWithContent, content, m);
 	});
@@ -291,10 +291,10 @@ var _user$project$View_Header$init = F2(
 						_0: _elm_lang$html$Html_Attributes$style(
 							{
 								ctor: '::',
-								_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'color', 'white'),
+								_0: A2(_user$project$X_Function_Infix_ops['=>'], 'color', 'white'),
 								_1: {
 									ctor: '::',
-									_0: A2(_user$project$Ext_Function_Infix_ops['=>'], 'background-color', viewModel.header.backgroundColor),
+									_0: A2(_user$project$X_Function_Infix_ops['=>'], 'background-color', viewModel.header.backgroundColor),
 									_1: {ctor: '[]'}
 								}
 							}),

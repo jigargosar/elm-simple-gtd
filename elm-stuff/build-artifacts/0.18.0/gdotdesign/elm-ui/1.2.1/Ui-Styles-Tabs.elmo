@@ -1,0 +1,310 @@
+var _gdotdesign$elm_ui$Ui_Styles_Tabs$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$defaults,
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontFamily(theme.fontFamily),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$relative),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$block),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Ui_Css$selector,
+								'ui-tabs-handles',
+								{
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderBottom(
+										A2(
+											_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+											A2(
+												_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+												_gdotdesign$elm_ui$Ui_Css_Properties$px(1),
+												_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+											theme.colors.border)),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$flex),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gdotdesign$elm_ui$Ui_Css$selector,
+									'ui-tabs-content',
+									{
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(
+											A2(
+												_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+												A2(
+													_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+													A2(_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'], _gdotdesign$elm_ui$Ui_Css_Properties$zero, _gdotdesign$elm_ui$Ui_Css_Properties$zero),
+													theme.borderRadius),
+												theme.borderRadius)),
+										_1: {
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$border(
+												A2(
+													_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+													A2(
+														_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+														_gdotdesign$elm_ui$Ui_Css_Properties$px(1),
+														_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+													theme.colors.border)),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$backgroundColor(theme.colors.input.color),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(theme.colors.input.bw),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$padding(
+															A2(
+																_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																_gdotdesign$elm_ui$Ui_Css_Properties$px(15),
+																_gdotdesign$elm_ui$Ui_Css_Properties$px(20))),
+														_1: {
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$relative),
+															_1: {
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderTop(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$block),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$zIndex(1),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_gdotdesign$elm_ui$Ui_Css$selector,
+										'ui-tabs-handle',
+										{
+											ctor: '::',
+											_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderRadius(
+												A2(
+													_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+													A2(
+														_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+														A2(_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'], theme.borderRadius, theme.borderRadius),
+														_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+													_gdotdesign$elm_ui$Ui_Css_Properties$zero)),
+											_1: {
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Css_Properties$backgroundColor(theme.colors.inputSecondary.color),
+												_1: {
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Css_Properties$border(
+														A2(
+															_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+															A2(
+																_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																_gdotdesign$elm_ui$Ui_Css_Properties$px(1),
+																_gdotdesign$elm_ui$Ui_Css_Properties$solid),
+															theme.colors.border)),
+													_1: {
+														ctor: '::',
+														_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(theme.colors.inputSecondary.bw),
+														_1: {
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Css_Properties$padding(
+																A2(
+																	_gdotdesign$elm_ui$Ui_Css_Properties_ops['.'],
+																	_gdotdesign$elm_ui$Ui_Css_Properties$px(10),
+																	_gdotdesign$elm_ui$Ui_Css_Properties$px(20))),
+															_1: {
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$position(_gdotdesign$elm_ui$Ui_Css_Properties$relative),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$fontWeight(_gdotdesign$elm_ui$Ui_Css_Properties$bold),
+																	_1: {
+																		ctor: '::',
+																		_0: _gdotdesign$elm_ui$Ui_Css_Properties$cursor(_gdotdesign$elm_ui$Ui_Css_Properties$pointer),
+																		_1: {
+																			ctor: '::',
+																			_0: _gdotdesign$elm_ui$Ui_Css_Properties$outline(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+																			_1: {
+																				ctor: '::',
+																				_0: _gdotdesign$elm_ui$Ui_Css_Properties$top(
+																					_gdotdesign$elm_ui$Ui_Css_Properties$px(1)),
+																				_1: {
+																					ctor: '::',
+																					_0: A2(
+																						_gdotdesign$elm_ui$Ui_Css$selector,
+																						'&[selected]',
+																						{
+																							ctor: '::',
+																							_0: _gdotdesign$elm_ui$Ui_Css_Properties$backgroundColor(theme.colors.input.color),
+																							_1: {
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(theme.colors.input.bw),
+																								_1: {
+																									ctor: '::',
+																									_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderBottom(_gdotdesign$elm_ui$Ui_Css_Properties$zero),
+																									_1: {ctor: '[]'}
+																								}
+																							}
+																						}),
+																					_1: {
+																						ctor: '::',
+																						_0: A2(
+																							_gdotdesign$elm_ui$Ui_Css$selector,
+																							'&:hover',
+																							{
+																								ctor: '::',
+																								_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(theme.colors.primary.color),
+																								_1: {ctor: '[]'}
+																							}),
+																						_1: {
+																							ctor: '::',
+																							_0: A2(
+																								_gdotdesign$elm_ui$Ui_Css$selectors,
+																								{
+																									ctor: '::',
+																									_0: '&:focus',
+																									_1: {
+																										ctor: '::',
+																										_0: '&[selected]:focus',
+																										_1: {ctor: '[]'}
+																									}
+																								},
+																								{
+																									ctor: '::',
+																									_0: _gdotdesign$elm_ui$Ui_Css_Properties$color(theme.colors.focus.color),
+																									_1: {ctor: '[]'}
+																								}),
+																							_1: {
+																								ctor: '::',
+																								_0: A2(
+																									_gdotdesign$elm_ui$Ui_Css$selector,
+																									'+ ui-tabs-handle',
+																									{
+																										ctor: '::',
+																										_0: _gdotdesign$elm_ui$Ui_Css_Properties$marginLeft(
+																											_gdotdesign$elm_ui$Ui_Css_Properties$px(5)),
+																										_1: {ctor: '[]'}
+																									}),
+																								_1: {ctor: '[]'}
+																							}
+																						}
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_gdotdesign$elm_ui$Ui_Css$selector,
+											'&[disabled]',
+											{
+												ctor: '::',
+												_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$disabled,
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_gdotdesign$elm_ui$Ui_Css$selector,
+														'> *',
+														{
+															ctor: '::',
+															_0: _gdotdesign$elm_ui$Ui_Css_Properties$pointerEvents(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_gdotdesign$elm_ui$Ui_Css$selectors,
+															{
+																ctor: '::',
+																_0: 'ui-tabs-handle',
+																_1: {
+																	ctor: '::',
+																	_0: 'ui-tabs-content',
+																	_1: {ctor: '[]'}
+																}
+															},
+															{
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$disabledColors(theme),
+																_1: {
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$borderColor(theme.colors.borderDisabled),
+																	_1: {ctor: '[]'}
+																}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_gdotdesign$elm_ui$Ui_Css$selector,
+												'&[readonly]',
+												{
+													ctor: '::',
+													_0: _gdotdesign$elm_ui$Ui_Styles_Mixins$readonly,
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_gdotdesign$elm_ui$Ui_Css$selector,
+															'ui-tabs-content',
+															{
+																ctor: '::',
+																_0: _gdotdesign$elm_ui$Ui_Css_Properties$pointerEvents(_gdotdesign$elm_ui$Ui_Css_Properties$none),
+																_1: {ctor: '[]'}
+															}),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_gdotdesign$elm_ui$Ui_Css$selector,
+																'ui-tabs-handle',
+																{
+																	ctor: '::',
+																	_0: _gdotdesign$elm_ui$Ui_Css_Properties$cursor(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_Tabs$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_Tabs$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

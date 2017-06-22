@@ -8,10 +8,10 @@ import Document exposing (Document)
 import Entity.Tree
 import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
-import Ext.Keyboard as Keyboard exposing (KeyboardEvent)
-import Ext.List as List
-import Ext.Predicate as Pred
-import Ext.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
+import X.Keyboard as Keyboard exposing (KeyboardEvent)
+import X.List as List
+import X.Predicate as Pred
+import X.Record exposing (maybeOver, maybeOverT2, maybeSetIn, over, overReturn, overT2, set)
 import Firebase exposing (DeviceId)
 import GroupDoc
 import Http
@@ -24,9 +24,9 @@ import ReminderOverlay
 import Json.Encode as E
 import List.Extra as List
 import Maybe.Extra as Maybe
-import Ext.Random as Random
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Random as Random
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import Random.Pcg as Random exposing (Seed)
 import Return
 import Set exposing (Set)
@@ -230,7 +230,7 @@ type alias Flags =
 
 
 appDrawerModel =
-    Ext.Record.field .appDrawerModel (\s b -> { b | appDrawerModel = s })
+    X.Record.field .appDrawerModel (\s b -> { b | appDrawerModel = s })
 
 
 overAppDrawerModel =
@@ -242,43 +242,43 @@ mapOverAppDrawerModel =
 
 
 contextStore =
-    Ext.Record.field .contextStore (\s b -> { b | contextStore = s })
+    X.Record.field .contextStore (\s b -> { b | contextStore = s })
 
 
 projectStore =
-    Ext.Record.field .projectStore (\s b -> { b | projectStore = s })
+    X.Record.field .projectStore (\s b -> { b | projectStore = s })
 
 
 todoStore =
-    Ext.Record.field .todoStore (\s b -> { b | todoStore = s })
+    X.Record.field .todoStore (\s b -> { b | todoStore = s })
 
 
 keyboardState =
-    Ext.Record.field .keyboardState (\s b -> { b | keyboardState = s })
+    X.Record.field .keyboardState (\s b -> { b | keyboardState = s })
 
 
 now =
-    Ext.Record.field .now (\s b -> { b | now = s })
+    X.Record.field .now (\s b -> { b | now = s })
 
 
 firebaseClient =
-    Ext.Record.field .firebaseClient (\s b -> { b | firebaseClient = s })
+    X.Record.field .firebaseClient (\s b -> { b | firebaseClient = s })
 
 
 editMode =
-    Ext.Record.field .editMode (\s b -> { b | editMode = s })
+    X.Record.field .editMode (\s b -> { b | editMode = s })
 
 
 user =
-    Ext.Record.field .user (\s b -> { b | user = s })
+    X.Record.field .user (\s b -> { b | user = s })
 
 
 focusInEntity =
-    Ext.Record.field .focusInEntity (\s b -> { b | focusInEntity = s })
+    X.Record.field .focusInEntity (\s b -> { b | focusInEntity = s })
 
 
 keyComboModel =
-    Ext.Record.field .keyComboModel (\s b -> { b | keyComboModel = s })
+    X.Record.field .keyComboModel (\s b -> { b | keyComboModel = s })
 
 
 init : Flags -> Return.Return Msg Model
@@ -903,7 +903,7 @@ updateTodoAndMaybeAlsoSelected action todoId model =
 
 insertTodo : (DeviceId -> Document.Id -> Todo.Model) -> Model -> ( Todo.Model, Model )
 insertTodo constructWithId =
-    Ext.Record.overT2 todoStore (Store.insert (constructWithId))
+    X.Record.overT2 todoStore (Store.insert (constructWithId))
 
 
 setTodoStoreFromTuple tuple model =
@@ -1211,7 +1211,7 @@ updateProject id updateFn =
 
 
 updateAllNamedDocsDocs idSet updateFn store model =
-    Ext.Record.overT2 store
+    X.Record.overT2 store
         (Store.updateAndPersist
             (Document.getId >> Set.member # idSet)
             model.now
@@ -1302,7 +1302,7 @@ findAndUpdateAllTodos findFn action model =
         updateFn =
             Todo.update action
     in
-        Ext.Record.overT2 todoStore (Store.updateAndPersist findFn model.now updateFn) model
+        X.Record.overT2 todoStore (Store.updateAndPersist findFn model.now updateFn) model
             |> Tuple2.swap
             |> Return.map (updateEntityListCursor model)
 

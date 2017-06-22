@@ -38,7 +38,7 @@ var _user$project$ExclusiveMode$editProject = function (_p1) {
 	return _user$project$ExclusiveMode$EditProject(
 		_user$project$GroupDoc_EditForm$forProject(_p1));
 };
-var _user$project$ExclusiveMode$editProjectSetName = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$GroupDoc_EditForm$setName, _user$project$ExclusiveMode$EditProject);
+var _user$project$ExclusiveMode$editProjectSetName = A2(_user$project$X_Function_Infix_ops['>>>'], _user$project$GroupDoc_EditForm$setName, _user$project$ExclusiveMode$EditProject);
 var _user$project$ExclusiveMode$EditContext = function (a) {
 	return {ctor: 'EditContext', _0: a};
 };
@@ -46,7 +46,7 @@ var _user$project$ExclusiveMode$editContext = function (_p2) {
 	return _user$project$ExclusiveMode$EditContext(
 		_user$project$GroupDoc_EditForm$forContext(_p2));
 };
-var _user$project$ExclusiveMode$editContextSetName = A2(_user$project$Ext_Function_Infix_ops['>>>'], _user$project$GroupDoc_EditForm$setName, _user$project$ExclusiveMode$EditContext);
+var _user$project$ExclusiveMode$editContextSetName = A2(_user$project$X_Function_Infix_ops['>>>'], _user$project$GroupDoc_EditForm$setName, _user$project$ExclusiveMode$EditContext);
 var _user$project$ExclusiveMode$EditTask = function (a) {
 	return {ctor: 'EditTask', _0: a};
 };

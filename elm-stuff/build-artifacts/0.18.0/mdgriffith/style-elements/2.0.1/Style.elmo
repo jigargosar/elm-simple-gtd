@@ -1,0 +1,760 @@
+var _mdgriffith$style_elements$Style$selection = function (props) {
+	return A2(_mdgriffith$style_elements$Style_Model$SubElement, ':selection', props);
+};
+var _mdgriffith$style_elements$Style$checked = function (props) {
+	return A2(_mdgriffith$style_elements$Style_Model$SubElement, ':checked', props);
+};
+var _mdgriffith$style_elements$Style$focus = function (props) {
+	return A2(_mdgriffith$style_elements$Style_Model$SubElement, ':focus', props);
+};
+var _mdgriffith$style_elements$Style$hover = function (props) {
+	return A2(_mdgriffith$style_elements$Style_Model$SubElement, ':hover', props);
+};
+var _mdgriffith$style_elements$Style$animate = function (_p0) {
+	var _p1 = _p0;
+	return _mdgriffith$style_elements$Style_Model$AnimationProp(
+		_mdgriffith$style_elements$Style_Model$Animation(
+			{duration: _p1.duration, easing: _p1.easing, repeat: _p1.repeat, steps: _p1.steps}));
+};
+var _mdgriffith$style_elements$Style$transition = function (value) {
+	return _mdgriffith$style_elements$Style_Model$TransitionProperty(value);
+};
+var _mdgriffith$style_elements$Style$sepia = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Sepia(x);
+};
+var _mdgriffith$style_elements$Style$saturate = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Saturate(x);
+};
+var _mdgriffith$style_elements$Style$opacityFilter = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Opacity(x);
+};
+var _mdgriffith$style_elements$Style$invert = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Invert(x);
+};
+var _mdgriffith$style_elements$Style$hueRotate = function (x) {
+	return _mdgriffith$style_elements$Style_Model$HueRotate(x);
+};
+var _mdgriffith$style_elements$Style$grayscale = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Grayscale(x);
+};
+var _mdgriffith$style_elements$Style$contrast = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Contrast(x);
+};
+var _mdgriffith$style_elements$Style$brightness = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Brightness(x);
+};
+var _mdgriffith$style_elements$Style$blur = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Blur(x);
+};
+var _mdgriffith$style_elements$Style$filterUrl = function (s) {
+	return _mdgriffith$style_elements$Style_Model$FilterUrl(s);
+};
+var _mdgriffith$style_elements$Style$scale = F3(
+	function (x, y, z) {
+		return A3(_mdgriffith$style_elements$Style_Model$Scale, x, y, z);
+	});
+var _mdgriffith$style_elements$Style$translate = F3(
+	function (x, y, z) {
+		return A3(_mdgriffith$style_elements$Style_Model$Translate, x, y, z);
+	});
+var _mdgriffith$style_elements$Style$rotate = F3(
+	function (x, y, z) {
+		return A3(_mdgriffith$style_elements$Style_Model$Rotate, x, y, z);
+	});
+var _mdgriffith$style_elements$Style$dropShadow = function (_p2) {
+	var _p3 = _p2;
+	return _mdgriffith$style_elements$Style_Model$Shadow(
+		{kind: 'drop', offset: _p3.offset, size: 0, blur: _p3.blur, color: _p3.color});
+};
+var _mdgriffith$style_elements$Style$textShadow = function (_p4) {
+	var _p5 = _p4;
+	return _mdgriffith$style_elements$Style_Model$Shadow(
+		{kind: 'text', offset: _p5.offset, size: 0, blur: _p5.blur, color: _p5.color});
+};
+var _mdgriffith$style_elements$Style$insetShadow = function (_p6) {
+	var _p7 = _p6;
+	return _mdgriffith$style_elements$Style_Model$Shadow(
+		{kind: 'inset', offset: _p7.offset, size: _p7.size, blur: _p7.blur, color: _p7.color});
+};
+var _mdgriffith$style_elements$Style$shadow = function (_p8) {
+	var _p9 = _p8;
+	return _mdgriffith$style_elements$Style_Model$Shadow(
+		{kind: 'box', offset: _p9.offset, size: _p9.size, blur: _p9.blur, color: _p9.color});
+};
+var _mdgriffith$style_elements$Style$opacity = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Transparent(1.0 - x);
+};
+var _mdgriffith$style_elements$Style$transparency = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Transparent(x);
+};
+var _mdgriffith$style_elements$Style$visible = _mdgriffith$style_elements$Style_Model$Transparent(0);
+var _mdgriffith$style_elements$Style$hidden = _mdgriffith$style_elements$Style_Model$Hidden;
+var _mdgriffith$style_elements$Style$dotted = _mdgriffith$style_elements$Style_Model$Dotted;
+var _mdgriffith$style_elements$Style$dashed = _mdgriffith$style_elements$Style_Model$Dashed;
+var _mdgriffith$style_elements$Style$solid = _mdgriffith$style_elements$Style_Model$Solid;
+var _mdgriffith$style_elements$Style$allButBottom = function (x) {
+	return {ctor: '_Tuple4', _0: x, _1: x, _2: 0, _3: x};
+};
+var _mdgriffith$style_elements$Style$allButTop = function (x) {
+	return {ctor: '_Tuple4', _0: 0, _1: x, _2: x, _3: x};
+};
+var _mdgriffith$style_elements$Style$allButLeft = function (x) {
+	return {ctor: '_Tuple4', _0: x, _1: x, _2: x, _3: 0};
+};
+var _mdgriffith$style_elements$Style$allButRight = function (x) {
+	return {ctor: '_Tuple4', _0: x, _1: 0, _2: x, _3: x};
+};
+var _mdgriffith$style_elements$Style$leftRightTopBottom = F4(
+	function (l, r, t, b) {
+		return {ctor: '_Tuple4', _0: t, _1: r, _2: b, _3: l};
+	});
+var _mdgriffith$style_elements$Style$leftRightAndTopBottom = F2(
+	function (x, y) {
+		return {ctor: '_Tuple4', _0: y, _1: x, _2: y, _3: x};
+	});
+var _mdgriffith$style_elements$Style$leftRight = function (x) {
+	return {ctor: '_Tuple4', _0: 0, _1: x, _2: 0, _3: x};
+};
+var _mdgriffith$style_elements$Style$topBottom = function (x) {
+	return {ctor: '_Tuple4', _0: x, _1: 0, _2: x, _3: 0};
+};
+var _mdgriffith$style_elements$Style$bottom = function (x) {
+	return {ctor: '_Tuple4', _0: 0, _1: 0, _2: x, _3: 0};
+};
+var _mdgriffith$style_elements$Style$top = function (x) {
+	return {ctor: '_Tuple4', _0: x, _1: 0, _2: 0, _3: 0};
+};
+var _mdgriffith$style_elements$Style$right = function (x) {
+	return {ctor: '_Tuple4', _0: 0, _1: x, _2: 0, _3: 0};
+};
+var _mdgriffith$style_elements$Style$left = function (x) {
+	return {ctor: '_Tuple4', _0: 0, _1: 0, _2: 0, _3: x};
+};
+var _mdgriffith$style_elements$Style$all = function (x) {
+	return {ctor: '_Tuple4', _0: x, _1: x, _2: x, _3: x};
+};
+var _mdgriffith$style_elements$Style$alignCenter = _mdgriffith$style_elements$Style_Model$AlignCenter;
+var _mdgriffith$style_elements$Style$alignRight = _mdgriffith$style_elements$Style_Model$AlignRight;
+var _mdgriffith$style_elements$Style$alignLeft = _mdgriffith$style_elements$Style_Model$AlignLeft;
+var _mdgriffith$style_elements$Style$justifyAll = _mdgriffith$style_elements$Style_Model$JustifyAll;
+var _mdgriffith$style_elements$Style$justify = _mdgriffith$style_elements$Style_Model$Justify;
+var _mdgriffith$style_elements$Style$verticalCenter = _mdgriffith$style_elements$Style_Model$VCenter;
+var _mdgriffith$style_elements$Style$verticalStretch = _mdgriffith$style_elements$Style_Model$VStretch;
+var _mdgriffith$style_elements$Style$alignBottom = _mdgriffith$style_elements$Style_Model$AlignBottom;
+var _mdgriffith$style_elements$Style$alignTop = _mdgriffith$style_elements$Style_Model$AlignTop;
+var _mdgriffith$style_elements$Style$noWrap = _mdgriffith$style_elements$Style_Model$NoWrap;
+var _mdgriffith$style_elements$Style$preLine = _mdgriffith$style_elements$Style_Model$PreLine;
+var _mdgriffith$style_elements$Style$preWrap = _mdgriffith$style_elements$Style_Model$PreWrap;
+var _mdgriffith$style_elements$Style$pre = _mdgriffith$style_elements$Style_Model$Pre;
+var _mdgriffith$style_elements$Style$normal = _mdgriffith$style_elements$Style_Model$Normal;
+var _mdgriffith$style_elements$Style$flowLeft = function (_p10) {
+	var _p11 = _p10;
+	var layout = _mdgriffith$style_elements$Style_Model$FlexLayout(
+		_mdgriffith$style_elements$Style_Model$Flexible(
+			{go: _mdgriffith$style_elements$Style_Model$Left, wrap: _p11.wrap, horizontal: _p11.horizontal, vertical: _p11.vertical}));
+	return _mdgriffith$style_elements$Style_Model$LayoutProp(layout);
+};
+var _mdgriffith$style_elements$Style$flowRight = function (_p12) {
+	var _p13 = _p12;
+	var layout = _mdgriffith$style_elements$Style_Model$FlexLayout(
+		_mdgriffith$style_elements$Style_Model$Flexible(
+			{go: _mdgriffith$style_elements$Style_Model$Right, wrap: _p13.wrap, horizontal: _p13.horizontal, vertical: _p13.vertical}));
+	return _mdgriffith$style_elements$Style_Model$LayoutProp(layout);
+};
+var _mdgriffith$style_elements$Style$flowDown = function (_p14) {
+	var _p15 = _p14;
+	var layout = _mdgriffith$style_elements$Style_Model$FlexLayout(
+		_mdgriffith$style_elements$Style_Model$Flexible(
+			{go: _mdgriffith$style_elements$Style_Model$Down, wrap: _p15.wrap, horizontal: _p15.horizontal, vertical: _p15.vertical}));
+	return _mdgriffith$style_elements$Style_Model$LayoutProp(layout);
+};
+var _mdgriffith$style_elements$Style$flowUp = function (_p16) {
+	var _p17 = _p16;
+	var layout = _mdgriffith$style_elements$Style_Model$FlexLayout(
+		_mdgriffith$style_elements$Style_Model$Flexible(
+			{go: _mdgriffith$style_elements$Style_Model$Up, wrap: _p17.wrap, horizontal: _p17.horizontal, vertical: _p17.vertical}));
+	return _mdgriffith$style_elements$Style_Model$LayoutProp(layout);
+};
+var _mdgriffith$style_elements$Style$tableLayout = _mdgriffith$style_elements$Style_Model$LayoutProp(_mdgriffith$style_elements$Style_Model$TableLayout);
+var _mdgriffith$style_elements$Style$textLayout = _mdgriffith$style_elements$Style_Model$LayoutProp(_mdgriffith$style_elements$Style_Model$TextLayout);
+var _mdgriffith$style_elements$Style$inline = _mdgriffith$style_elements$Style_Model$LayoutProp(_mdgriffith$style_elements$Style_Model$InlineLayout);
+var _mdgriffith$style_elements$Style$property = F2(
+	function (name, value) {
+		return A2(_mdgriffith$style_elements$Style_Model$Property, name, value);
+	});
+var _mdgriffith$style_elements$Style$after = F2(
+	function (content, props) {
+		return A2(
+			_mdgriffith$style_elements$Style_Model$SubElement,
+			'::after',
+			{
+				ctor: '::',
+				_0: A2(_mdgriffith$style_elements$Style$property, 'content', content),
+				_1: props
+			});
+	});
+var _mdgriffith$style_elements$Style$before = F2(
+	function (content, props) {
+		return A2(
+			_mdgriffith$style_elements$Style_Model$SubElement,
+			'::before',
+			{
+				ctor: '::',
+				_0: A2(_mdgriffith$style_elements$Style$property, 'content', content),
+				_1: props
+			});
+	});
+var _mdgriffith$style_elements$Style$mix = _mdgriffith$style_elements$Style_Model$Mix;
+var _mdgriffith$style_elements$Style$filters = function (value) {
+	return _mdgriffith$style_elements$Style_Model$Filters(value);
+};
+var _mdgriffith$style_elements$Style$transforms = function (value) {
+	return _mdgriffith$style_elements$Style_Model$Transforms(value);
+};
+var _mdgriffith$style_elements$Style$shadows = function (value) {
+	return _mdgriffith$style_elements$Style_Model$Shadows(value);
+};
+var _mdgriffith$style_elements$Style$backgroundImage = function (value) {
+	return _mdgriffith$style_elements$Style_Model$BackgroundImageProp(value);
+};
+var _mdgriffith$style_elements$Style$borderStyle = function (bStyle) {
+	var val = function () {
+		var _p18 = bStyle;
+		switch (_p18.ctor) {
+			case 'Solid':
+				return 'solid';
+			case 'Dashed':
+				return 'dashed';
+			default:
+				return 'dotted';
+		}
+	}();
+	return A2(_mdgriffith$style_elements$Style_Model$Property, 'border-style', val);
+};
+var _mdgriffith$style_elements$Style$light = A2(_mdgriffith$style_elements$Style_Model$Property, 'font-weight', '300');
+var _mdgriffith$style_elements$Style$bold = A2(_mdgriffith$style_elements$Style_Model$Property, 'font-weight', '700');
+var _mdgriffith$style_elements$Style$italicize = A2(_mdgriffith$style_elements$Style_Model$Property, 'font-style', 'italic');
+var _mdgriffith$style_elements$Style$strike = A2(_mdgriffith$style_elements$Style_Model$Property, 'text-decoration', 'line-through');
+var _mdgriffith$style_elements$Style$underline = A2(_mdgriffith$style_elements$Style_Model$Property, 'text-decoration', 'underline');
+var _mdgriffith$style_elements$Style$whitespace = function (ws) {
+	var _p19 = ws;
+	switch (_p19.ctor) {
+		case 'Normal':
+			return A2(_mdgriffith$style_elements$Style_Model$Property, 'white-space', 'normal');
+		case 'Pre':
+			return A2(_mdgriffith$style_elements$Style_Model$Property, 'white-space', 'pre');
+		case 'PreWrap':
+			return A2(_mdgriffith$style_elements$Style_Model$Property, 'white-space', 'pre-wrap');
+		case 'PreLine':
+			return A2(_mdgriffith$style_elements$Style_Model$Property, 'white-space', 'pre-line');
+		default:
+			return A2(_mdgriffith$style_elements$Style_Model$Property, 'white-space', 'no-wrap');
+	}
+};
+var _mdgriffith$style_elements$Style$textAlign = function (alignment) {
+	var _p20 = alignment;
+	switch (_p20.ctor) {
+		case 'AlignLeft':
+			return A2(_mdgriffith$style_elements$Style_Model$Property, 'text-align', 'left');
+		case 'AlignRight':
+			return A2(_mdgriffith$style_elements$Style_Model$Property, 'text-align', 'right');
+		case 'AlignCenter':
+			return A2(_mdgriffith$style_elements$Style_Model$Property, 'text-align', 'center');
+		case 'Justify':
+			return A2(_mdgriffith$style_elements$Style_Model$Property, 'text-align', 'justify');
+		default:
+			return A2(_mdgriffith$style_elements$Style_Model$Property, 'text-align', 'justify-all');
+	}
+};
+var _mdgriffith$style_elements$Style$letterOffset = function (offset) {
+	return A2(
+		_mdgriffith$style_elements$Style_Model$Property,
+		'letter-offset',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(offset),
+			'px'));
+};
+var _mdgriffith$style_elements$Style$lineHeight = function (size) {
+	return A2(
+		_mdgriffith$style_elements$Style_Model$Property,
+		'line-height',
+		_elm_lang$core$Basics$toString(size));
+};
+var _mdgriffith$style_elements$Style$fontsize = function (size) {
+	return A2(
+		_mdgriffith$style_elements$Style_Model$Property,
+		'font-size',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(size),
+			'px'));
+};
+var _mdgriffith$style_elements$Style$font = function (family) {
+	return A2(_mdgriffith$style_elements$Style_Model$Property, 'font-family', family);
+};
+var _mdgriffith$style_elements$Style$padding = function (value) {
+	return A2(_mdgriffith$style_elements$Style_Model$Box, 'padding', value);
+};
+var _mdgriffith$style_elements$Style$spacing = function (s) {
+	return _mdgriffith$style_elements$Style_Model$Spacing(s);
+};
+var _mdgriffith$style_elements$Style$borderRadius = function (value) {
+	return A2(_mdgriffith$style_elements$Style_Model$Box, 'border-radius', value);
+};
+var _mdgriffith$style_elements$Style$borderWidth = function (value) {
+	return A2(_mdgriffith$style_elements$Style_Model$Box, 'border-width', value);
+};
+var _mdgriffith$style_elements$Style$borderColor = function (color) {
+	return A2(_mdgriffith$style_elements$Style_Model$ColorProp, 'border-color', color);
+};
+var _mdgriffith$style_elements$Style$border = function (_p21) {
+	var _p22 = _p21;
+	return _mdgriffith$style_elements$Style_Model$Mix(
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Style$borderColor(_p22.color),
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Style$borderWidth(_p22.width),
+				_1: {
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Style$borderStyle(_p22.style),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _mdgriffith$style_elements$Style$backgroundColor = function (color) {
+	return A2(_mdgriffith$style_elements$Style_Model$ColorProp, 'background-color', color);
+};
+var _mdgriffith$style_elements$Style$textColor = function (color) {
+	return A2(_mdgriffith$style_elements$Style_Model$ColorProp, 'color', color);
+};
+var _mdgriffith$style_elements$Style$maxHeight = function (value) {
+	return A2(_mdgriffith$style_elements$Style_Model$Len, 'max-height', value);
+};
+var _mdgriffith$style_elements$Style$minHeight = function (value) {
+	return A2(_mdgriffith$style_elements$Style_Model$Len, 'min-height', value);
+};
+var _mdgriffith$style_elements$Style$height = function (value) {
+	return A2(_mdgriffith$style_elements$Style_Model$Len, 'height', value);
+};
+var _mdgriffith$style_elements$Style$maxWidth = function (value) {
+	return A2(_mdgriffith$style_elements$Style_Model$Len, 'max-width', value);
+};
+var _mdgriffith$style_elements$Style$minWidth = function (value) {
+	return A2(_mdgriffith$style_elements$Style_Model$Len, 'min-width', value);
+};
+var _mdgriffith$style_elements$Style$width = function (value) {
+	return A2(_mdgriffith$style_elements$Style_Model$Len, 'width', value);
+};
+var _mdgriffith$style_elements$Style$zIndex = function (i) {
+	return A2(
+		_mdgriffith$style_elements$Style_Model$Property,
+		'z-index',
+		_elm_lang$core$Basics$toString(i));
+};
+var _mdgriffith$style_elements$Style$cursor = function (value) {
+	return A2(_mdgriffith$style_elements$Style_Model$Property, 'cursor', value);
+};
+var _mdgriffith$style_elements$Style$positionBy = _mdgriffith$style_elements$Style_Model$RelProp;
+var _mdgriffith$style_elements$Style$currentPosition = _mdgriffith$style_elements$Style_Model$CurrentPosition;
+var _mdgriffith$style_elements$Style$parent = _mdgriffith$style_elements$Style_Model$Parent;
+var _mdgriffith$style_elements$Style$screen = _mdgriffith$style_elements$Style_Model$Screen;
+var _mdgriffith$style_elements$Style$visibility = function (vis) {
+	return _mdgriffith$style_elements$Style_Model$VisibilityProp(vis);
+};
+var _mdgriffith$style_elements$Style$auto = _mdgriffith$style_elements$Style_Model$Auto;
+var _mdgriffith$style_elements$Style$percent = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Percent(x);
+};
+var _mdgriffith$style_elements$Style$px = function (x) {
+	return _mdgriffith$style_elements$Style_Model$Px(x);
+};
+var _mdgriffith$style_elements$Style$floatTopRight = _mdgriffith$style_elements$Style_Model$FloatProp(_mdgriffith$style_elements$Style_Model$FloatTopRight);
+var _mdgriffith$style_elements$Style$floatTopLeft = _mdgriffith$style_elements$Style_Model$FloatProp(_mdgriffith$style_elements$Style_Model$FloatTopLeft);
+var _mdgriffith$style_elements$Style$floatRight = _mdgriffith$style_elements$Style_Model$FloatProp(_mdgriffith$style_elements$Style_Model$FloatRight);
+var _mdgriffith$style_elements$Style$floatLeft = _mdgriffith$style_elements$Style_Model$FloatProp(_mdgriffith$style_elements$Style_Model$FloatLeft);
+var _mdgriffith$style_elements$Style$noRepeat = _mdgriffith$style_elements$Style_Model$NoRepeat;
+var _mdgriffith$style_elements$Style$round = _mdgriffith$style_elements$Style_Model$Round;
+var _mdgriffith$style_elements$Style$space = _mdgriffith$style_elements$Style_Model$Space;
+var _mdgriffith$style_elements$Style$repeat = _mdgriffith$style_elements$Style_Model$Repeat;
+var _mdgriffith$style_elements$Style$repeatY = _mdgriffith$style_elements$Style_Model$RepeatY;
+var _mdgriffith$style_elements$Style$repeatX = _mdgriffith$style_elements$Style_Model$RepeatX;
+var _mdgriffith$style_elements$Style_ops = _mdgriffith$style_elements$Style_ops || {};
+_mdgriffith$style_elements$Style_ops['=>'] = F2(
+	function (v0, v1) {
+		return {ctor: '_Tuple2', _0: v0, _1: v1};
+	});
+var _mdgriffith$style_elements$Style$topLeft = F2(
+	function (x, y) {
+		var anchor = A2(_mdgriffith$style_elements$Style_ops['=>'], _mdgriffith$style_elements$Style_Model$AnchorTop, _mdgriffith$style_elements$Style_Model$AnchorLeft);
+		return A3(_mdgriffith$style_elements$Style_Model$PositionProp, anchor, x, y);
+	});
+var _mdgriffith$style_elements$Style$topRight = F2(
+	function (x, y) {
+		var anchor = A2(_mdgriffith$style_elements$Style_ops['=>'], _mdgriffith$style_elements$Style_Model$AnchorTop, _mdgriffith$style_elements$Style_Model$AnchorRight);
+		return A3(_mdgriffith$style_elements$Style_Model$PositionProp, anchor, x, y);
+	});
+var _mdgriffith$style_elements$Style$bottomLeft = F2(
+	function (x, y) {
+		var anchor = A2(_mdgriffith$style_elements$Style_ops['=>'], _mdgriffith$style_elements$Style_Model$AnchorBottom, _mdgriffith$style_elements$Style_Model$AnchorLeft);
+		return A3(_mdgriffith$style_elements$Style_Model$PositionProp, anchor, x, y);
+	});
+var _mdgriffith$style_elements$Style$bottomRight = F2(
+	function (x, y) {
+		var anchor = A2(_mdgriffith$style_elements$Style_ops['=>'], _mdgriffith$style_elements$Style_Model$AnchorBottom, _mdgriffith$style_elements$Style_Model$AnchorRight);
+		return A3(_mdgriffith$style_elements$Style_Model$PositionProp, anchor, x, y);
+	});
+var _mdgriffith$style_elements$Style$flatten = function (props) {
+	return A2(
+		_elm_lang$core$List$concatMap,
+		function (prop) {
+			var _p23 = prop;
+			if (_p23.ctor === 'Mix') {
+				return _p23._0;
+			} else {
+				return {
+					ctor: '::',
+					_0: _p23,
+					_1: {ctor: '[]'}
+				};
+			}
+		},
+		props);
+};
+var _mdgriffith$style_elements$Style$getFontNames = function (_p24) {
+	var _p25 = _p24;
+	var getFonts = function (prop) {
+		var _p26 = prop;
+		if (_p26.ctor === 'Property') {
+			return _elm_lang$core$Native_Utils.eq(_p26._0, 'font-family') ? _elm_lang$core$Maybe$Just(
+				A2(
+					_elm_lang$core$List$map,
+					function (_p27) {
+						return A3(
+							_elm_community$string_extra$String_Extra$replace,
+							'\'',
+							'',
+							_elm_community$string_extra$String_Extra$unquote(
+								A3(
+									_elm_community$string_extra$String_Extra$replace,
+									' ',
+									'+',
+									_elm_lang$core$String$trim(_p27))));
+					},
+					A2(_elm_lang$core$String$split, ',', _p26._1))) : _elm_lang$core$Maybe$Nothing;
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	};
+	return _elm_lang$core$List$concat(
+		A2(_elm_lang$core$List$filterMap, getFonts, _p25._0.properties));
+};
+var _mdgriffith$style_elements$Style$isWebfont = function (str) {
+	return A2(
+		_elm_lang$core$List$member,
+		_elm_lang$core$String$toLower(str),
+		{
+			ctor: '::',
+			_0: 'arial',
+			_1: {
+				ctor: '::',
+				_0: 'sans-serif',
+				_1: {
+					ctor: '::',
+					_0: 'serif',
+					_1: {
+						ctor: '::',
+						_0: 'courier',
+						_1: {
+							ctor: '::',
+							_0: 'times',
+							_1: {
+								ctor: '::',
+								_0: 'times new roman',
+								_1: {
+									ctor: '::',
+									_0: 'verdana',
+									_1: {
+										ctor: '::',
+										_0: 'tahoma',
+										_1: {
+											ctor: '::',
+											_0: 'georgia',
+											_1: {
+												ctor: '::',
+												_0: 'helvetica',
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _mdgriffith$style_elements$Style$embed = function (stylesheet) {
+	return A3(
+		_elm_lang$html$Html$node,
+		'style',
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(stylesheet.css),
+			_1: {ctor: '[]'}
+		});
+};
+var _mdgriffith$style_elements$Style$selector = F2(
+	function (sel, props) {
+		return _mdgriffith$style_elements$Style_Model$Model(
+			{
+				selector: _mdgriffith$style_elements$Style_Model$Exactly(sel),
+				properties: props
+			});
+	});
+var _mdgriffith$style_elements$Style$class = F2(
+	function (cls, props) {
+		return _mdgriffith$style_elements$Style_Model$Model(
+			{
+				selector: _mdgriffith$style_elements$Style_Model$Class(cls),
+				properties: props
+			});
+	});
+var _mdgriffith$style_elements$Style$foundation = {
+	ctor: '::',
+	_0: A2(_mdgriffith$style_elements$Style_Model$Property, 'box-sizing', 'border-box'),
+	_1: {
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Style_Model$LayoutProp(_mdgriffith$style_elements$Style_Model$TextLayout),
+		_1: {
+			ctor: '::',
+			_0: A3(
+				_mdgriffith$style_elements$Style_Model$PositionProp,
+				{ctor: '_Tuple2', _0: _mdgriffith$style_elements$Style_Model$AnchorTop, _1: _mdgriffith$style_elements$Style_Model$AnchorLeft},
+				0,
+				0),
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Style_Model$RelProp(_mdgriffith$style_elements$Style$currentPosition),
+				_1: {ctor: '[]'}
+			}
+		}
+	}
+};
+var _mdgriffith$style_elements$Style$StyleSheet = F3(
+	function (a, b, c) {
+		return {$class: a, classList: b, css: c};
+	});
+var _mdgriffith$style_elements$Style$BackgroundImage = F3(
+	function (a, b, c) {
+		return {src: a, position: b, repeat: c};
+	});
+var _mdgriffith$style_elements$Style$Border = F3(
+	function (a, b, c) {
+		return {width: a, style: b, color: c};
+	});
+var _mdgriffith$style_elements$Style$Flow = F3(
+	function (a, b, c) {
+		return {wrap: a, horizontal: b, vertical: c};
+	});
+var _mdgriffith$style_elements$Style$Animation = F4(
+	function (a, b, c, d) {
+		return {duration: a, easing: b, repeat: c, steps: d};
+	});
+var _mdgriffith$style_elements$Style$DebugStyles = {ctor: 'DebugStyles'};
+var _mdgriffith$style_elements$Style$debug = _mdgriffith$style_elements$Style$DebugStyles;
+var _mdgriffith$style_elements$Style$renderWith = F2(
+	function (opts, styles) {
+		var debug = A2(
+			_elm_lang$core$List$any,
+			function (x) {
+				return _elm_lang$core$Native_Utils.eq(x, _mdgriffith$style_elements$Style$DebugStyles);
+			},
+			opts);
+		var renderStyle = function (styles) {
+			var _p28 = _elm_lang$core$List$unzip(
+				A2(
+					_elm_community$list_extra$List_Extra$uniqueBy,
+					_elm_lang$core$Tuple$first,
+					A2(_elm_lang$core$List$map, _mdgriffith$style_elements$Style_Render$render, styles)));
+			var names = _p28._0;
+			var cssStyles = _p28._1;
+			return {
+				css: A2(_elm_lang$core$String$join, '\n', cssStyles),
+				$class: function (cls) {
+					var _p29 = A2(_mdgriffith$style_elements$Style_Render$find, cls, styles);
+					if (_p29.ctor === 'Nothing') {
+						if (debug) {
+							var _p30 = A2(
+								_elm_lang$core$Debug$log,
+								'style',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_elm_lang$core$Basics$toString(cls),
+									' is not in your stylesheet.'));
+							return _elm_lang$html$Html_Attributes$class(
+								_mdgriffith$style_elements$Style_Render$formatName(cls));
+						} else {
+							return _elm_lang$html$Html_Attributes$class(
+								_mdgriffith$style_elements$Style_Render$formatName(cls));
+						}
+					} else {
+						return _elm_lang$html$Html_Attributes$class(
+							_mdgriffith$style_elements$Style_Render$getName(_p29._0));
+					}
+				},
+				classList: function (classes) {
+					var found = A2(
+						_elm_lang$core$List$map,
+						function (_p31) {
+							var _p32 = _p31;
+							var _p33 = _p32._0;
+							return {
+								ctor: '_Tuple3',
+								_0: _p33,
+								_1: _p32._1,
+								_2: A2(_mdgriffith$style_elements$Style_Render$find, _p33, styles)
+							};
+						},
+						classes);
+					return _elm_lang$html$Html_Attributes$class(
+						A2(
+							_elm_lang$core$String$join,
+							' ',
+							A2(
+								_elm_lang$core$List$filterMap,
+								function (_p34) {
+									var _p35 = _p34;
+									var _p36 = _p35._2;
+									if (_p36.ctor === 'Nothing') {
+										var _p37 = A2(
+											_elm_lang$core$Debug$log,
+											'style',
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												_elm_lang$core$Basics$toString(_p35._0),
+												' is not in your stylesheet.'));
+										return _elm_lang$core$Maybe$Nothing;
+									} else {
+										return _p35._1 ? _elm_lang$core$Maybe$Just(
+											_mdgriffith$style_elements$Style_Render$getName(_p36._0)) : _elm_lang$core$Maybe$Nothing;
+									}
+								},
+								found)));
+				}
+			};
+		};
+		var forBase = function (opt) {
+			var _p38 = opt;
+			if (_p38.ctor === 'BaseStyle') {
+				return _elm_lang$core$Maybe$Just(_p38._0);
+			} else {
+				return _elm_lang$core$Maybe$Nothing;
+			}
+		};
+		var base = A2(
+			_elm_lang$core$Maybe$withDefault,
+			_mdgriffith$style_elements$Style$foundation,
+			_elm_lang$core$List$head(
+				A2(_elm_lang$core$List$filterMap, forBase, opts)));
+		var basedStyles = A2(
+			_elm_lang$core$List$map,
+			function (_p39) {
+				var _p40 = _p39;
+				var _p41 = _p40._0;
+				return _mdgriffith$style_elements$Style_Model$Model(
+					_elm_lang$core$Native_Utils.update(
+						_p41,
+						{
+							properties: _mdgriffith$style_elements$Style$flatten(
+								A2(_elm_lang$core$Basics_ops['++'], base, _p41.properties))
+						}));
+			},
+			styles);
+		var renderAdd = function (add) {
+			var _p42 = add;
+			switch (_p42.ctor) {
+				case 'AutoImportGoogleFonts':
+					return function (family) {
+						var _p43 = family;
+						if (_p43 === '') {
+							return _elm_lang$core$Maybe$Nothing;
+						} else {
+							return _elm_lang$core$Maybe$Just(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'@import url(\'https://fonts.googleapis.com/css?family=',
+									A2(_elm_lang$core$Basics_ops['++'], family, '\');')));
+						}
+					}(
+						A2(
+							_elm_lang$core$String$join,
+							'|',
+							A2(
+								_elm_lang$core$List$filter,
+								function (_p44) {
+									return !_mdgriffith$style_elements$Style$isWebfont(_p44);
+								},
+								A2(
+									_elm_community$list_extra$List_Extra$uniqueBy,
+									_elm_lang$core$Basics$identity,
+									A2(_elm_lang$core$List$concatMap, _mdgriffith$style_elements$Style$getFontNames, basedStyles)))));
+				case 'Import':
+					return _elm_lang$core$Maybe$Just(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'@import ',
+							A2(_elm_lang$core$Basics_ops['++'], _p42._0, ';')));
+				case 'ImportUrl':
+					return _elm_lang$core$Maybe$Just(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'@import url(\'',
+							A2(_elm_lang$core$Basics_ops['++'], _p42._0, '\');')));
+				case 'BaseStyle':
+					return _elm_lang$core$Maybe$Nothing;
+				default:
+					return _elm_lang$core$Maybe$Just(
+						A2(_elm_lang$core$Basics_ops['++'], _mdgriffith$style_elements$Style_Render$inlineError, _mdgriffith$style_elements$Style_Render$floatError));
+			}
+		};
+		var rendered = renderStyle(basedStyles);
+		var _p45 = A2(_elm_lang$core$List$filterMap, renderAdd, opts);
+		if (_p45.ctor === '[]') {
+			return rendered;
+		} else {
+			return _elm_lang$core$Native_Utils.update(
+				rendered,
+				{
+					css: A2(
+						_elm_lang$core$Basics_ops['++'],
+						A2(_elm_lang$core$String$join, '\n', _p45),
+						A2(_elm_lang$core$Basics_ops['++'], '\n\n', rendered.css))
+				});
+		}
+	});
+var _mdgriffith$style_elements$Style$render = function (styles) {
+	return A2(
+		_mdgriffith$style_elements$Style$renderWith,
+		{ctor: '[]'},
+		styles);
+};
+var _mdgriffith$style_elements$Style$BaseStyle = function (a) {
+	return {ctor: 'BaseStyle', _0: a};
+};
+var _mdgriffith$style_elements$Style$base = _mdgriffith$style_elements$Style$BaseStyle;
+var _mdgriffith$style_elements$Style$ImportUrl = function (a) {
+	return {ctor: 'ImportUrl', _0: a};
+};
+var _mdgriffith$style_elements$Style$importUrl = _mdgriffith$style_elements$Style$ImportUrl;
+var _mdgriffith$style_elements$Style$Import = function (a) {
+	return {ctor: 'Import', _0: a};
+};
+var _mdgriffith$style_elements$Style$importCSS = _mdgriffith$style_elements$Style$Import;
+var _mdgriffith$style_elements$Style$AutoImportGoogleFonts = {ctor: 'AutoImportGoogleFonts'};
+var _mdgriffith$style_elements$Style$autoImportGoogleFonts = _mdgriffith$style_elements$Style$AutoImportGoogleFonts;

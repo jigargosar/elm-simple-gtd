@@ -1,0 +1,9 @@
+var _ggb$numeral_elm$Languages_Italian$italianOrdinal = function (number) {
+	return '°';
+};
+var _ggb$numeral_elm$Languages_Italian$lang = {
+	delimiters: {thousands: '.', decimal: ','},
+	abbreviations: {thousand: 'mila', million: 'mln', billion: 'mld', trillion: 'bil'},
+	ordinal: _ggb$numeral_elm$Languages_Italian$italianOrdinal,
+	currency: {symbol: '€'}
+};

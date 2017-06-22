@@ -1,0 +1,3 @@
+var _gdotdesign$elm_ui$Html_Events_Options$stopOptions = {stopPropagation: true, preventDefault: true};
+var _gdotdesign$elm_ui$Html_Events_Options$stopPropagationOptions = {stopPropagation: true, preventDefault: false};
+var _gdotdesign$elm_ui$Html_Events_Options$preventDefaultOptions = {stopPropagation: false, preventDefault: true};

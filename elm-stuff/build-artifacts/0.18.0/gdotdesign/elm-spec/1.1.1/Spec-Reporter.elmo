@@ -1,0 +1,153 @@
+var _gdotdesign$elm_spec$Spec_Reporter$renderOutcome = function (outcome) {
+	var styles = function () {
+		var _p0 = outcome;
+		switch (_p0.ctor) {
+			case 'Pass':
+				return _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'color', _1: 'green'},
+						_1: {ctor: '[]'}
+					});
+			case 'Error':
+				return _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'color', _1: 'white'},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'background-color', _1: 'red'},
+							_1: {ctor: '[]'}
+						}
+					});
+			default:
+				return _elm_lang$html$Html_Attributes$style(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
+						_1: {ctor: '[]'}
+					});
+		}
+	}();
+	var html = _elm_lang$core$Json_Encode$string(
+		_gdotdesign$elm_spec$Native_Spec.ansiToHtml(
+			_gdotdesign$elm_spec$Spec_Types$outcomeToString(outcome)));
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_spec$Spec_Styles$stylesheet.$class(_gdotdesign$elm_spec$Spec_Styles$Test),
+			_1: {
+				ctor: '::',
+				_0: A2(_elm_lang$html$Html_Attributes$property, 'innerHTML', html),
+				_1: {
+					ctor: '::',
+					_0: styles,
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{ctor: '[]'});
+};
+var _gdotdesign$elm_spec$Spec_Reporter$renderTest = function (model) {
+	var renderRequest = F2(
+		function ($class, request) {
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _gdotdesign$elm_spec$Spec_Styles$stylesheet.$class($class),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							request.method,
+							A2(_elm_lang$core$Basics_ops['++'], ' - ', request.url))),
+					_1: {ctor: '[]'}
+				});
+		});
+	var results = A2(_elm_lang$core$List$map, _gdotdesign$elm_spec$Spec_Reporter$renderOutcome, model.results);
+	var title = {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$strong,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(model.name),
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	};
+	var requests = _gdotdesign$elm_spec$Native_Spec.getMockResults(model);
+	var notCalled = A2(
+		_elm_lang$core$List$filter,
+		function (item) {
+			return !A2(_elm_lang$core$List$member, item, requests.called);
+		},
+		model.requests);
+	var requestResults = (_elm_lang$core$List$isEmpty(requests.called) && (_elm_lang$core$List$isEmpty(requests.unhandled) && _elm_lang$core$List$isEmpty(notCalled))) ? {ctor: '[]'} : A2(
+		_elm_lang$core$Basics_ops['++'],
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _gdotdesign$elm_spec$Spec_Styles$stylesheet.$class(_gdotdesign$elm_spec$Spec_Styles$SubTitle),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Requets:'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		},
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(
+				_elm_lang$core$List$map,
+				renderRequest(_gdotdesign$elm_spec$Spec_Styles$CalledRequest),
+				requests.called),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				A2(
+					_elm_lang$core$List$map,
+					renderRequest(_gdotdesign$elm_spec$Spec_Styles$NotCalledRequest),
+					notCalled),
+				A2(
+					_elm_lang$core$List$map,
+					renderRequest(_gdotdesign$elm_spec$Spec_Styles$UnhandledRequest),
+					requests.unhandled))));
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_spec$Spec_Styles$stylesheet.$class(_gdotdesign$elm_spec$Spec_Styles$Row),
+			_1: {ctor: '[]'}
+		},
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			title,
+			A2(_elm_lang$core$Basics_ops['++'], results, requestResults)));
+};
+var _gdotdesign$elm_spec$Spec_Reporter$render = function (tests) {
+	var rows = A2(_elm_lang$core$List$map, _gdotdesign$elm_spec$Spec_Reporter$renderTest, tests);
+	var styles = {
+		ctor: '::',
+		_0: _gdotdesign$elm_spec$Spec_Styles$embed,
+		_1: {ctor: '[]'}
+	};
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_spec$Spec_Styles$stylesheet.$class(_gdotdesign$elm_spec$Spec_Styles$Container),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$Basics_ops['++'], styles, rows));
+};

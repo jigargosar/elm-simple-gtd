@@ -1,0 +1,445 @@
+var _gdotdesign$elm_ui$Ui_Css$renderProperties = function (properties) {
+	return A2(
+		_elm_lang$core$String$join,
+		'\n',
+		A2(
+			_elm_lang$core$List$map,
+			function (_p0) {
+				var _p1 = _p0;
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					'  ',
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_p1._0,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							': ',
+							A2(_elm_lang$core$Basics_ops['++'], _p1._1, ';'))));
+			},
+			A2(_elm_community$list_extra$List_Extra$uniqueBy, _elm_lang$core$Tuple$first, properties)));
+};
+var _gdotdesign$elm_ui$Ui_Css$group = function (list) {
+	var fn = F2(
+		function (item, dict) {
+			var properties = A2(
+				_elm_lang$core$Maybe$withDefault,
+				{ctor: '[]'},
+				A2(_elm_lang$core$Dict$get, item.name, dict));
+			return A3(
+				_elm_lang$core$Dict$insert,
+				item.name,
+				A2(_elm_lang$core$Basics_ops['++'], properties, item.properties),
+				dict);
+		});
+	return A2(
+		_elm_lang$core$List$map,
+		function (_p2) {
+			var _p3 = _p2;
+			return {name: _p3._0, properties: _p3._1};
+		},
+		_elm_lang$core$Dict$toList(
+			A3(_elm_lang$core$List$foldr, fn, _elm_lang$core$Dict$empty, list)));
+};
+var _gdotdesign$elm_ui$Ui_Css$render = function (selectors) {
+	var renderSelector = function (selector) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			selector.name,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				' {\n',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_gdotdesign$elm_ui$Ui_Css$renderProperties(selector.properties),
+					'\n}')));
+	};
+	return A2(
+		_elm_lang$core$String$join,
+		'\n',
+		A2(
+			_elm_lang$core$List$map,
+			renderSelector,
+			A2(
+				_elm_lang$core$List$filter,
+				function (_p4) {
+					return !_elm_lang$core$List$isEmpty(
+						function (_) {
+							return _.properties;
+						}(_p4));
+				},
+				_gdotdesign$elm_ui$Ui_Css$group(selectors))));
+};
+var _gdotdesign$elm_ui$Ui_Css$getKeyFrames = function (nodes) {
+	var renderBody = function (_p5) {
+		var _p6 = _p5;
+		var prop = function (nd) {
+			var _p7 = nd;
+			if (_p7.ctor === 'PropertyNode') {
+				return {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: _p7._0, _1: _p7._1},
+					_1: {ctor: '[]'}
+				};
+			} else {
+				return {ctor: '[]'};
+			}
+		};
+		var props = A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (x, y) {
+					return A2(_elm_lang$core$Basics_ops['++'], x, y);
+				}),
+			{ctor: '[]'},
+			A2(_elm_lang$core$List$map, prop, _p6._1));
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_p6._0,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				'{\n',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_gdotdesign$elm_ui$Ui_Css$renderProperties(props),
+					'\n}')));
+	};
+	var renderKeyframe = function (_p8) {
+		var _p9 = _p8;
+		var renderedBody = A2(
+			_elm_lang$core$String$join,
+			'\n',
+			A2(_elm_lang$core$List$map, renderBody, _p9._1));
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			'@keyframes ',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_p9._0,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					' {\n',
+					A2(_elm_lang$core$Basics_ops['++'], renderedBody, '\n}'))));
+	};
+	var getFrame = function (node) {
+		var _p10 = node;
+		switch (_p10.ctor) {
+			case 'KeyFrames':
+				return {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: _p10._0, _1: _p10._1},
+					_1: {ctor: '[]'}
+				};
+			case 'SelectorNode':
+				return frames(_p10._0.nodes);
+			case 'SelectorsNode':
+				return A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$List$map,
+						function (_p11) {
+							return frames(
+								function (_) {
+									return _.nodes;
+								}(_p11));
+						},
+						_p10._0));
+			case 'Mixin':
+				return frames(_p10._0);
+			default:
+				return {ctor: '[]'};
+		}
+	};
+	var frames = function (nds) {
+		return A3(
+			_elm_lang$core$List$foldr,
+			F2(
+				function (x, y) {
+					return A2(_elm_lang$core$Basics_ops['++'], x, y);
+				}),
+			{ctor: '[]'},
+			A2(_elm_lang$core$List$map, getFrame, nds));
+	};
+	var allKeyframes = frames(nodes);
+	return A2(
+		_elm_lang$core$String$join,
+		'\n',
+		A2(_elm_lang$core$List$map, renderKeyframe, allKeyframes));
+};
+var _gdotdesign$elm_ui$Ui_Css$properties = function (node) {
+	var getProperty = function (item) {
+		var _p12 = item;
+		if (_p12.ctor === 'PropertyNode') {
+			return {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: _p12._0, _1: _p12._1},
+				_1: {ctor: '[]'}
+			};
+		} else {
+			return {ctor: '[]'};
+		}
+	};
+	var _p13 = node;
+	switch (_p13.ctor) {
+		case 'Mixin':
+			return A3(
+				_elm_lang$core$List$foldr,
+				F2(
+					function (x, y) {
+						return A2(_elm_lang$core$Basics_ops['++'], x, y);
+					}),
+				{ctor: '[]'},
+				A2(_elm_lang$core$List$map, getProperty, _p13._0));
+		case 'SelectorNode':
+			return A3(
+				_elm_lang$core$List$foldr,
+				F2(
+					function (x, y) {
+						return A2(_elm_lang$core$Basics_ops['++'], x, y);
+					}),
+				{ctor: '[]'},
+				A2(_elm_lang$core$List$map, getProperty, _p13._0.nodes));
+		case 'PropertyNode':
+			return {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: _p13._0, _1: _p13._1},
+				_1: {ctor: '[]'}
+			};
+		default:
+			return {ctor: '[]'};
+	}
+};
+var _gdotdesign$elm_ui$Ui_Css$Mixin = function (a) {
+	return {ctor: 'Mixin', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Css$mixin = function (nodes) {
+	return _gdotdesign$elm_ui$Ui_Css$Mixin(nodes);
+};
+var _gdotdesign$elm_ui$Ui_Css$KeyFrames = F2(
+	function (a, b) {
+		return {ctor: 'KeyFrames', _0: a, _1: b};
+	});
+var _gdotdesign$elm_ui$Ui_Css$keyframes = _gdotdesign$elm_ui$Ui_Css$KeyFrames;
+var _gdotdesign$elm_ui$Ui_Css$SelectorsNode = function (a) {
+	return {ctor: 'SelectorsNode', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Css$selectors = F2(
+	function (bases, nodes) {
+		return _gdotdesign$elm_ui$Ui_Css$SelectorsNode(
+			A2(
+				_elm_lang$core$List$map,
+				function (base) {
+					return {name: base, nodes: nodes};
+				},
+				bases));
+	});
+var _gdotdesign$elm_ui$Ui_Css$PropertyNode = F2(
+	function (a, b) {
+		return {ctor: 'PropertyNode', _0: a, _1: b};
+	});
+var _gdotdesign$elm_ui$Ui_Css$property = _gdotdesign$elm_ui$Ui_Css$PropertyNode;
+var _gdotdesign$elm_ui$Ui_Css$SelectorNode = function (a) {
+	return {ctor: 'SelectorNode', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Css$selector = F2(
+	function (base, nodes) {
+		return _gdotdesign$elm_ui$Ui_Css$SelectorNode(
+			{name: base, nodes: nodes});
+	});
+var _gdotdesign$elm_ui$Ui_Css$substituteSelector = F2(
+	function (selectors, item) {
+		return A2(_elm_lang$core$String$contains, '&', item.name) ? A2(
+			_elm_lang$core$List$map,
+			function (selector) {
+				return _gdotdesign$elm_ui$Ui_Css$SelectorNode(
+					_elm_lang$core$Native_Utils.update(
+						item,
+						{
+							name: A4(
+								_elm_lang$core$Regex$replace,
+								_elm_lang$core$Regex$All,
+								_elm_lang$core$Regex$regex('\\&'),
+								function (_p14) {
+									return selector;
+								},
+								item.name)
+						}));
+			},
+			selectors) : A2(
+			_elm_lang$core$List$map,
+			function (selector) {
+				return _gdotdesign$elm_ui$Ui_Css$SelectorNode(
+					_elm_lang$core$Native_Utils.update(
+						item,
+						{
+							name: A2(
+								_elm_lang$core$Basics_ops['++'],
+								selector,
+								A2(_elm_lang$core$Basics_ops['++'], ' ', item.name))
+						}));
+			},
+			selectors);
+	});
+var _gdotdesign$elm_ui$Ui_Css$flatten = F2(
+	function (selectors, node) {
+		var _p15 = node;
+		switch (_p15.ctor) {
+			case 'KeyFrames':
+				return selectors;
+			case 'Mixin':
+				return selectors;
+			case 'PropertyNode':
+				return selectors;
+			case 'SelectorsNode':
+				return A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					selectors,
+					A2(
+						_elm_lang$core$List$map,
+						_gdotdesign$elm_ui$Ui_Css$flatten(
+							{ctor: '[]'}),
+						A2(_elm_lang$core$List$map, _gdotdesign$elm_ui$Ui_Css$SelectorNode, _p15._0)));
+			default:
+				var _p19 = _p15._0;
+				var subSelectors = A2(_elm_lang$core$String$split, ',', _p19.name);
+				var subsSelector = function (item_) {
+					var _p16 = item_;
+					switch (_p16.ctor) {
+						case 'SelectorsNode':
+							return A3(
+								_elm_lang$core$List$foldr,
+								F2(
+									function (x, y) {
+										return A2(_elm_lang$core$Basics_ops['++'], x, y);
+									}),
+								{ctor: '[]'},
+								A2(
+									_elm_lang$core$List$map,
+									_gdotdesign$elm_ui$Ui_Css$substituteSelector(subSelectors),
+									_p16._0));
+						case 'SelectorNode':
+							return A2(_gdotdesign$elm_ui$Ui_Css$substituteSelector, subSelectors, _p16._0);
+						default:
+							return {
+								ctor: '::',
+								_0: item_,
+								_1: {ctor: '[]'}
+							};
+					}
+				};
+				var mixinNodes = function (nodes) {
+					return A3(
+						_elm_lang$core$List$foldr,
+						F2(
+							function (x, y) {
+								return A2(_elm_lang$core$Basics_ops['++'], x, y);
+							}),
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$List$map,
+							function (item) {
+								var _p17 = item;
+								if (_p17.ctor === 'Mixin') {
+									var _p18 = _p17._0;
+									return A2(
+										_elm_lang$core$Basics_ops['++'],
+										_p18,
+										mixinNodes(_p18));
+								} else {
+									return {
+										ctor: '::',
+										_0: item,
+										_1: {ctor: '[]'}
+									};
+								}
+							},
+							nodes));
+				};
+				var mxNodes = mixinNodes(_p19.nodes);
+				var otherSelectors = A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$List$map,
+						_gdotdesign$elm_ui$Ui_Css$flatten(
+							{ctor: '[]'}),
+						A3(
+							_elm_lang$core$List$foldr,
+							F2(
+								function (x, y) {
+									return A2(_elm_lang$core$Basics_ops['++'], x, y);
+								}),
+							{ctor: '[]'},
+							A2(_elm_lang$core$List$map, subsSelector, mxNodes))));
+				return _elm_lang$core$List$concat(
+					{
+						ctor: '::',
+						_0: {
+							ctor: '::',
+							_0: {
+								name: _p19.name,
+								properties: _gdotdesign$elm_ui$Ui_Css$properties(
+									_gdotdesign$elm_ui$Ui_Css$SelectorNode(
+										{name: _p19.name, nodes: mxNodes}))
+							},
+							_1: {ctor: '[]'}
+						},
+						_1: {
+							ctor: '::',
+							_0: otherSelectors,
+							_1: {
+								ctor: '::',
+								_0: selectors,
+								_1: {ctor: '[]'}
+							}
+						}
+					});
+		}
+	});
+var _gdotdesign$elm_ui$Ui_Css$resolve = function (nodes) {
+	var flattened = A3(
+		_elm_lang$core$List$foldr,
+		F2(
+			function (x, y) {
+				return A2(_elm_lang$core$Basics_ops['++'], x, y);
+			}),
+		{ctor: '[]'},
+		A2(
+			_elm_lang$core$List$map,
+			_gdotdesign$elm_ui$Ui_Css$flatten(
+				{ctor: '[]'}),
+			nodes));
+	var keyframes = _gdotdesign$elm_ui$Ui_Css$getKeyFrames(nodes);
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		keyframes,
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			'\n\n',
+			_gdotdesign$elm_ui$Ui_Css$render(flattened)));
+};
+var _gdotdesign$elm_ui$Ui_Css$embed = function (nodes) {
+	return A3(
+		_elm_lang$html$Html$node,
+		'style',
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(
+				_gdotdesign$elm_ui$Ui_Css$resolve(nodes)),
+			_1: {ctor: '[]'}
+		});
+};

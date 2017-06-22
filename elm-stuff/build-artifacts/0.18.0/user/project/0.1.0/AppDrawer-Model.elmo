@@ -1,5 +1,5 @@
 var _user$project$AppDrawer_Model$showArchived = A2(
-	_user$project$Ext_Record$bool,
+	_user$project$X_Record$bool,
 	function (_) {
 		return _.showArchived;
 	},
@@ -9,18 +9,18 @@ var _user$project$AppDrawer_Model$showArchived = A2(
 				b,
 				{showArchived: s});
 		}));
-var _user$project$AppDrawer_Model$toggleShowArchived = _user$project$Ext_Record$toggle(_user$project$AppDrawer_Model$showArchived);
+var _user$project$AppDrawer_Model$toggleShowArchived = _user$project$X_Record$toggle(_user$project$AppDrawer_Model$showArchived);
 var _user$project$AppDrawer_Model$setShowArchived = function (bool) {
-	return A2(_user$project$Ext_Record$set, _user$project$AppDrawer_Model$showArchived, bool);
+	return A2(_user$project$X_Record$set, _user$project$AppDrawer_Model$showArchived, bool);
 };
 var _user$project$AppDrawer_Model$hideArchived = function (groupModel) {
 	return A2(
-		_user$project$Ext_Record$over,
+		_user$project$X_Record$over,
 		groupModel,
 		_user$project$AppDrawer_Model$setShowArchived(false));
 };
 var _user$project$AppDrawer_Model$expanded = A2(
-	_user$project$Ext_Record$bool,
+	_user$project$X_Record$bool,
 	function (_) {
 		return _.expanded;
 	},
@@ -30,9 +30,9 @@ var _user$project$AppDrawer_Model$expanded = A2(
 				b,
 				{expanded: s});
 		}));
-var _user$project$AppDrawer_Model$toggleExpanded = _user$project$Ext_Record$toggle(_user$project$AppDrawer_Model$expanded);
+var _user$project$AppDrawer_Model$toggleExpanded = _user$project$X_Record$toggle(_user$project$AppDrawer_Model$expanded);
 var _user$project$AppDrawer_Model$projects = A2(
-	_user$project$Ext_Record$field,
+	_user$project$X_Record$field,
 	function (_) {
 		return _.projects;
 	},
@@ -44,26 +44,26 @@ var _user$project$AppDrawer_Model$projects = A2(
 		}));
 var _user$project$AppDrawer_Model$isProjectListExpanded = function (_p0) {
 	return A2(
-		_user$project$Ext_Record$get,
+		_user$project$X_Record$get,
 		_user$project$AppDrawer_Model$expanded,
-		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$projects, _p0));
+		A2(_user$project$X_Record$get, _user$project$AppDrawer_Model$projects, _p0));
 };
 var _user$project$AppDrawer_Model$toggleProjectListExpanded = function (_p1) {
 	return A3(
-		_user$project$Ext_Function$unless,
+		_user$project$X_Function$unless,
 		_user$project$AppDrawer_Model$isProjectListExpanded,
 		_user$project$AppDrawer_Model$hideArchived(_user$project$AppDrawer_Model$projects),
-		A3(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$projects, _user$project$AppDrawer_Model$toggleExpanded, _p1));
+		A3(_user$project$X_Record$over, _user$project$AppDrawer_Model$projects, _user$project$AppDrawer_Model$toggleExpanded, _p1));
 };
 var _user$project$AppDrawer_Model$getShowArchivedForProjects = function (_p2) {
 	return A2(
-		_user$project$Ext_Record$get,
+		_user$project$X_Record$get,
 		_user$project$AppDrawer_Model$showArchived,
-		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$projects, _p2));
+		A2(_user$project$X_Record$get, _user$project$AppDrawer_Model$projects, _p2));
 };
-var _user$project$AppDrawer_Model$toggleProjectShowArchived = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$projects, _user$project$AppDrawer_Model$toggleShowArchived);
+var _user$project$AppDrawer_Model$toggleProjectShowArchived = A2(_user$project$X_Record$over, _user$project$AppDrawer_Model$projects, _user$project$AppDrawer_Model$toggleShowArchived);
 var _user$project$AppDrawer_Model$contexts = A2(
-	_user$project$Ext_Record$field,
+	_user$project$X_Record$field,
 	function (_) {
 		return _.contexts;
 	},
@@ -75,24 +75,24 @@ var _user$project$AppDrawer_Model$contexts = A2(
 		}));
 var _user$project$AppDrawer_Model$isContextListExpanded = function (_p3) {
 	return A2(
-		_user$project$Ext_Record$get,
+		_user$project$X_Record$get,
 		_user$project$AppDrawer_Model$expanded,
-		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p3));
+		A2(_user$project$X_Record$get, _user$project$AppDrawer_Model$contexts, _p3));
 };
 var _user$project$AppDrawer_Model$toggleContextListExpanded = function (_p4) {
 	return A3(
-		_user$project$Ext_Function$unless,
+		_user$project$X_Function$unless,
 		_user$project$AppDrawer_Model$isContextListExpanded,
 		_user$project$AppDrawer_Model$hideArchived(_user$project$AppDrawer_Model$contexts),
-		A3(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$contexts, _user$project$AppDrawer_Model$toggleExpanded, _p4));
+		A3(_user$project$X_Record$over, _user$project$AppDrawer_Model$contexts, _user$project$AppDrawer_Model$toggleExpanded, _p4));
 };
 var _user$project$AppDrawer_Model$getShowArchivedForContexts = function (_p5) {
 	return A2(
-		_user$project$Ext_Record$get,
+		_user$project$X_Record$get,
 		_user$project$AppDrawer_Model$showArchived,
-		A2(_user$project$Ext_Record$get, _user$project$AppDrawer_Model$contexts, _p5));
+		A2(_user$project$X_Record$get, _user$project$AppDrawer_Model$contexts, _p5));
 };
-var _user$project$AppDrawer_Model$toggleContextShowArchived = A2(_user$project$Ext_Record$over, _user$project$AppDrawer_Model$contexts, _user$project$AppDrawer_Model$toggleShowArchived);
+var _user$project$AppDrawer_Model$toggleContextShowArchived = A2(_user$project$X_Record$over, _user$project$AppDrawer_Model$contexts, _user$project$AppDrawer_Model$toggleShowArchived);
 var _user$project$AppDrawer_Model$defaultGroupModel = {expanded: true, showArchived: false};
 var _user$project$AppDrawer_Model$default = {contexts: _user$project$AppDrawer_Model$defaultGroupModel, projects: _user$project$AppDrawer_Model$defaultGroupModel};
 var _user$project$AppDrawer_Model$encodeGroupModel = function (model) {
@@ -100,13 +100,13 @@ var _user$project$AppDrawer_Model$encodeGroupModel = function (model) {
 		{
 			ctor: '::',
 			_0: A2(
-				_user$project$Ext_Function_Infix_ops['=>'],
+				_user$project$X_Function_Infix_ops['=>'],
 				'expanded',
 				_elm_lang$core$Json_Encode$bool(model.expanded)),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_user$project$Ext_Function_Infix_ops['=>'],
+					_user$project$X_Function_Infix_ops['=>'],
 					'showArchived',
 					_elm_lang$core$Json_Encode$bool(model.showArchived)),
 				_1: {ctor: '[]'}
@@ -118,13 +118,13 @@ var _user$project$AppDrawer_Model$encode = function (model) {
 		{
 			ctor: '::',
 			_0: A2(
-				_user$project$Ext_Function_Infix_ops['=>'],
+				_user$project$X_Function_Infix_ops['=>'],
 				'contexts',
 				_user$project$AppDrawer_Model$encodeGroupModel(model.contexts)),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_user$project$Ext_Function_Infix_ops['=>'],
+					_user$project$X_Function_Infix_ops['=>'],
 					'projects',
 					_user$project$AppDrawer_Model$encodeGroupModel(model.projects)),
 				_1: {ctor: '[]'}

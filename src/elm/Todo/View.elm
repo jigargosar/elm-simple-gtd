@@ -8,10 +8,9 @@ import Document
 import Dom
 import ExclusiveMode
 import Entity
-import Ext.Decode exposing (traceDecoder)
-import Ext.Time
-import Html.Attributes.Extra exposing (intProperty)
-import Html.Events.Extra exposing (onClickPreventDefaultAndStopPropagation, onClickStopPropagation)
+import X.Decode exposing (traceDecoder)
+import X.Html exposing (onClickStopPropagation, onMouseDownStopPropagation)
+import X.Time
 import Html.Keyed
 import Json.Decode
 import Json.Encode
@@ -34,7 +33,6 @@ import Set
 import String.Extra as String
 import Svg.Events exposing (onFocusIn, onFocusOut)
 import Time exposing (Time)
-import Time.Format
 import Todo
 import Todo.Form
 import Todo.Msg
@@ -43,13 +41,12 @@ import Todo.ReminderForm
 import Todo.View.Menu
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Html.Events.Extra exposing (onClickStopPropagation)
-import Ext.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp, stopPropagation)
+import X.Keyboard exposing (KeyboardEvent, onEscape, onKeyDown, onKeyDownPreventDefault, onKeyDownStopPropagation, onKeyUp)
 import Polymer.Paper as Paper
 import View.Shared exposing (defaultOkCancelButtons, defaultOkCancelDeleteButtons)
 import ViewModel
@@ -148,7 +145,7 @@ createTodoViewModel appVM canBeFocused todo =
             createScheduleViewModel now todo
 
         onKeyDownMsg ({ key } as ke) =
-            if Ext.Keyboard.isNoSoftKeyDown ke then
+            if X.Keyboard.isNoSoftKeyDown ke then
                 case key of
                     Key.Space ->
                         createEntityActionMsg Entity.ToggleSelected
@@ -252,10 +249,6 @@ item vm =
             , div [ style [ "padding" => "0 8px" ] ] [ projectProjectButton vm ]
             ]
         ]
-
-
-onMouseDownStopPropagation msg =
-    onWithOptions "mousedown" stopPropagation (D.succeed msg)
 
 
 parseDisplayText displayText =
@@ -366,7 +359,7 @@ createScheduleViewModel now todo =
                 if time < now then
                     overDueText
                 else
-                    Ext.Time.smartFormat now time
+                    X.Time.smartFormat now time
 
         displayText =
             Todo.getMaybeTime todo ?|> formatReminderTime ?= ""

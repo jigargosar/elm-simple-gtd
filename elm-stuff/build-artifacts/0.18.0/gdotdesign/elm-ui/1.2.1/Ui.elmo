@@ -1,0 +1,43 @@
+var _gdotdesign$elm_ui$Ui$attributeList = function (items) {
+	var attr = function (_p0) {
+		var _p1 = _p0;
+		return _p1._1 ? {
+			ctor: '::',
+			_0: A2(_elm_lang$html$Html_Attributes$attribute, _p1._0, ''),
+			_1: {ctor: '[]'}
+		} : {ctor: '[]'};
+	};
+	return _elm_lang$core$List$concat(
+		A2(_elm_lang$core$List$map, attr, items));
+};
+var _gdotdesign$elm_ui$Ui$enabledActions = F2(
+	function (model, attributes) {
+		return (model.disabled || model.readonly) ? {ctor: '[]'} : attributes;
+	});
+var _gdotdesign$elm_ui$Ui$tabIndex = function (model) {
+	return model.disabled ? {ctor: '[]'} : {
+		ctor: '::',
+		_0: A2(_elm_lang$html$Html_Attributes$attribute, 'tabindex', '0'),
+		_1: {ctor: '[]'}
+	};
+};
+var _gdotdesign$elm_ui$Ui$stylesheetLink = F2(
+	function (path, msg) {
+		return A3(
+			_elm_lang$html$Html$node,
+			'link',
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$rel('stylesheet'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$href(path),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Html_Events_Extra$onLoad(msg),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{ctor: '[]'});
+	});

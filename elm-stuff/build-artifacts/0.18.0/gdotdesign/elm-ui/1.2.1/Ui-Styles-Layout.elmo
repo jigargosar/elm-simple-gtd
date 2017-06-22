@@ -1,0 +1,107 @@
+var _gdotdesign$elm_ui$Ui_Styles_Layout$style = function (theme) {
+	return _gdotdesign$elm_ui$Ui_Css$mixin(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Css_Properties$minHeight(
+				_gdotdesign$elm_ui$Ui_Css_Properties$vh(100)),
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$flex),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_gdotdesign$elm_ui$Ui_Css$selector,
+						'ui-layout-app-wrapper',
+						{
+							ctor: '::',
+							_0: _gdotdesign$elm_ui$Ui_Css_Properties$flexDirection(_gdotdesign$elm_ui$Ui_Css_Properties$column),
+							_1: {
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$minHeight(_gdotdesign$elm_ui$Ui_Css_Properties$inherit),
+								_1: {
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$flex),
+									_1: {
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$flex_('1'),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_gdotdesign$elm_ui$Ui_Css$selectors,
+							{
+								ctor: '::',
+								_0: 'ui-layout-sidebar-content',
+								_1: {
+									ctor: '::',
+									_0: 'ui-layout-website-content',
+									_1: {
+										ctor: '::',
+										_0: 'ui-layout-app-content',
+										_1: {ctor: '[]'}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _gdotdesign$elm_ui$Ui_Css_Properties$display(_gdotdesign$elm_ui$Ui_Css_Properties$block),
+								_1: {
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$flex_('1'),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Ui_Css$selector,
+								'&[kind=website]',
+								{
+									ctor: '::',
+									_0: _gdotdesign$elm_ui$Ui_Css_Properties$flexDirection(_gdotdesign$elm_ui$Ui_Css_Properties$column),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_gdotdesign$elm_ui$Ui_Css$selectors,
+									{
+										ctor: '::',
+										_0: 'ui-layout-sidebar-bar',
+										_1: {
+											ctor: '::',
+											_0: 'ui-layout-app-sidebar',
+											_1: {
+												ctor: '::',
+												_0: 'ui-layout-app-toolbar',
+												_1: {
+													ctor: '::',
+													_0: 'ui-layout-website-header',
+													_1: {
+														ctor: '::',
+														_0: 'ui-layout-website-footer',
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _gdotdesign$elm_ui$Ui_Css_Properties$flex_('0 0 auto'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Styles_Layout$defaultStyle = _gdotdesign$elm_ui$Ui_Styles$attributes(
+	_gdotdesign$elm_ui$Ui_Styles_Layout$style(_gdotdesign$elm_ui$Ui_Styles_Theme$default));

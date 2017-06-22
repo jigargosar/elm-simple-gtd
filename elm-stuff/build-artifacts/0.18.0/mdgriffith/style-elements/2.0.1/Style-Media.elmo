@@ -1,0 +1,9 @@
+var _mdgriffith$style_elements$Style_Media$query = _mdgriffith$style_elements$Style_Model$MediaQuery;
+var _mdgriffith$style_elements$Style_Media$phoneOnly = _mdgriffith$style_elements$Style_Media$query('(max-width: 599px)');
+var _mdgriffith$style_elements$Style_Media$tabletPortraitUp = _mdgriffith$style_elements$Style_Media$query('(min-width: 600px)');
+var _mdgriffith$style_elements$Style_Media$tabletPortraitOnly = _mdgriffith$style_elements$Style_Media$query('(min-width: 600px) and (max-width: 899px)');
+var _mdgriffith$style_elements$Style_Media$tabletLandscapeUp = _mdgriffith$style_elements$Style_Media$query('(min-width: 900px)');
+var _mdgriffith$style_elements$Style_Media$tabletLandscapeOnly = _mdgriffith$style_elements$Style_Media$query('(min-width: 900px) and (max-width: 1199px)');
+var _mdgriffith$style_elements$Style_Media$desktopUp = _mdgriffith$style_elements$Style_Media$query('(min-width: 1200px)');
+var _mdgriffith$style_elements$Style_Media$desktopOnly = _mdgriffith$style_elements$Style_Media$query('(min-width: 1200px) and (max-width: 1799px)');
+var _mdgriffith$style_elements$Style_Media$bigDesktopUp = _mdgriffith$style_elements$Style_Media$query('(min-width: 1800px)');

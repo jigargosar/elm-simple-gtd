@@ -8,7 +8,7 @@ var _user$project$View_ReminderOverlay$activeViewShell = F2(
 				_0: _elm_lang$html$Html_Attributes$class('full-view fixed-top'),
 				_1: {
 					ctor: '::',
-					_0: _elm_community$html_extra$Html_Events_Extra$onClickStopPropagation(onOutsideMouseDown),
+					_0: _user$project$X_Html$onClickStopPropagation(onOutsideMouseDown),
 					_1: {ctor: '[]'}
 				}
 			},

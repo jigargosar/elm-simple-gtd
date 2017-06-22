@@ -1,0 +1,93 @@
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$end = function (_p0) {
+	var _p1 = _p0;
+	var _p2 = _p1;
+	return _p2.drag.dragging ? _elm_lang$core$Native_Utils.update(
+		_p2,
+		{
+			drag: _elm_lang$core$Native_Utils.update(
+				_p1.drag,
+				{dragging: false})
+		}) : _p2;
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$relativePosition = F2(
+	function (_p4, _p3) {
+		var _p5 = _p4;
+		var _p6 = _p3;
+		var _p7 = _p6.drag;
+		return {
+			left: _p5.left - (_p7.dimensions.left + _gdotdesign$elm_dom$DOM_Window$scrollLeft(
+				{ctor: '_Tuple0'})),
+			top: _p5.top - (_p7.dimensions.top + _gdotdesign$elm_dom$DOM_Window$scrollTop(
+				{ctor: '_Tuple0'}))
+		};
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$relativePercentPosition = F2(
+	function (position, _p8) {
+		var _p9 = _p8;
+		var _p10 = _p9.drag;
+		var point = A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$relativePosition, position, _p9);
+		return {left: point.left / _p10.dimensions.width, top: point.top / _p10.dimensions.height};
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$diff = F2(
+	function (_p12, _p11) {
+		var _p13 = _p12;
+		var _p14 = _p11;
+		var _p15 = _p14.drag;
+		return {left: _p13.left - _p15.startPosition.left, top: _p13.top - _p15.startPosition.top};
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$onEnd = F2(
+	function (msg, _p16) {
+		var _p17 = _p16;
+		return _p17.drag.dragging ? _elm_lang$mouse$Mouse$ups(
+			_elm_lang$core$Basics$always(msg)) : _elm_lang$core$Platform_Sub$none;
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$emptyDimensions = {height: 0, bottom: 0, width: 0, right: 0, left: 0, top: 0};
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$lift = F2(
+	function (position, _p18) {
+		var _p19 = _p18;
+		var _p20 = _p19;
+		var dimensions = A2(
+			_elm_lang$core$Result$withDefault,
+			_gdotdesign$elm_ui$Ui_Helpers_Drag$emptyDimensions,
+			_gdotdesign$elm_dom$DOM$getDimensionsSync(
+				_gdotdesign$elm_dom$DOM$idSelector(_p20.uid)));
+		return _elm_lang$core$Native_Utils.update(
+			_p20,
+			{
+				drag: _elm_lang$core$Native_Utils.update(
+					_p19.drag,
+					{startPosition: position, dimensions: dimensions, dragging: true})
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$convertPosition = F2(
+	function (msg, pos) {
+		return msg(
+			{
+				top: _elm_lang$core$Basics$toFloat(pos.y),
+				left: _elm_lang$core$Basics$toFloat(pos.x)
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$onMove = F2(
+	function (msg, _p21) {
+		var _p22 = _p21;
+		return _p22.drag.dragging ? _elm_lang$mouse$Mouse$moves(
+			_gdotdesign$elm_ui$Ui_Helpers_Drag$convertPosition(msg)) : _elm_lang$core$Platform_Sub$none;
+	});
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$liftHandler = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mousedown',
+		A2(
+			_elm_lang$core$Json_Decode$map,
+			_gdotdesign$elm_ui$Ui_Helpers_Drag$convertPosition(msg),
+			_elm_lang$mouse$Mouse$position));
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$init = {
+	startPosition: {left: 0, top: 0},
+	dimensions: _gdotdesign$elm_ui$Ui_Helpers_Drag$emptyDimensions,
+	dragging: false
+};
+var _gdotdesign$elm_ui$Ui_Helpers_Drag$Drag = F3(
+	function (a, b, c) {
+		return {startPosition: a, dimensions: b, dragging: c};
+	});

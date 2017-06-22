@@ -1,0 +1,232 @@
+var _gdotdesign$elm_ui$Ui_Slider$sendValue = function (model) {
+	return {
+		ctor: '_Tuple2',
+		_0: model,
+		_1: A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$sendFloat, model.uid, model.value)
+	};
+};
+var _gdotdesign$elm_ui$Ui_Slider$setValue = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				value: A3(_elm_lang$core$Basics$clamp, 0, 100, value)
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Slider$updateValue = F2(
+	function (position, _p0) {
+		var _p1 = _p0;
+		var _p2 = _p1;
+		var value = A3(
+			_elm_lang$core$Basics$clamp,
+			0,
+			100,
+			A2(
+				F2(
+					function (x, y) {
+						return x * y;
+					}),
+				100,
+				function (_) {
+					return _.left;
+				}(
+					A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$relativePercentPosition, position, _p2))));
+		return _gdotdesign$elm_ui$Ui_Slider$sendValue(
+			A2(_gdotdesign$elm_ui$Ui_Slider$setValue, value, _p2));
+	});
+var _gdotdesign$elm_ui$Ui_Slider$increment = function (model) {
+	return _gdotdesign$elm_ui$Ui_Slider$sendValue(
+		A2(_gdotdesign$elm_ui$Ui_Slider$setValue, model.value + 1, model));
+};
+var _gdotdesign$elm_ui$Ui_Slider$decrement = function (model) {
+	return _gdotdesign$elm_ui$Ui_Slider$sendValue(
+		A2(_gdotdesign$elm_ui$Ui_Slider$setValue, model.value - 1, model));
+};
+var _gdotdesign$elm_ui$Ui_Slider$update = F2(
+	function (action, _p3) {
+		var _p4 = _p3;
+		var _p7 = _p4;
+		var _p5 = action;
+		switch (_p5.ctor) {
+			case 'Move':
+				return A2(_gdotdesign$elm_ui$Ui_Slider$updateValue, _p5._0, _p7);
+			case 'End':
+				return {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_Helpers_Drag$end(_p7),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Decrement':
+				return _gdotdesign$elm_ui$Ui_Slider$decrement(_p7);
+			case 'Increment':
+				return _gdotdesign$elm_ui$Ui_Slider$increment(_p7);
+			default:
+				var _p6 = _p5._0;
+				return A2(
+					_gdotdesign$elm_ui$Ui_Slider$updateValue,
+					_p6,
+					A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$lift, _p6, _p7));
+		}
+	});
+var _gdotdesign$elm_ui$Ui_Slider$onChange = F2(
+	function (msg, model) {
+		return A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$listenFloat, model.uid, msg);
+	});
+var _gdotdesign$elm_ui$Ui_Slider$init = function (_p8) {
+	return {
+		uid: _gdotdesign$elm_ui$Ui_Native_Uid$uid(
+			{ctor: '_Tuple0'}),
+		disabled: false,
+		readonly: false,
+		drag: _gdotdesign$elm_ui$Ui_Helpers_Drag$init,
+		value: 0
+	};
+};
+var _gdotdesign$elm_ui$Ui_Slider$Model = F5(
+	function (a, b, c, d, e) {
+		return {drag: a, disabled: b, readonly: c, value: d, uid: e};
+	});
+var _gdotdesign$elm_ui$Ui_Slider$End = {ctor: 'End'};
+var _gdotdesign$elm_ui$Ui_Slider$Decrement = {ctor: 'Decrement'};
+var _gdotdesign$elm_ui$Ui_Slider$Increment = {ctor: 'Increment'};
+var _gdotdesign$elm_ui$Ui_Slider$Move = function (a) {
+	return {ctor: 'Move', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Slider$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$onMove, _gdotdesign$elm_ui$Ui_Slider$Move, model),
+			_1: {
+				ctor: '::',
+				_0: A2(_gdotdesign$elm_ui$Ui_Helpers_Drag$onEnd, _gdotdesign$elm_ui$Ui_Slider$End, model),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Slider$Lift = function (a) {
+	return {ctor: 'Lift', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Slider$render = function (model) {
+	var actions = A2(
+		_gdotdesign$elm_ui$Ui$enabledActions,
+		model,
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Helpers_Drag$liftHandler(_gdotdesign$elm_ui$Ui_Slider$Lift),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Html_Events_Extra$onKeys,
+					true,
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 40, _1: _gdotdesign$elm_ui$Ui_Slider$Decrement},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 38, _1: _gdotdesign$elm_ui$Ui_Slider$Increment},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 37, _1: _gdotdesign$elm_ui$Ui_Slider$Decrement},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 39, _1: _gdotdesign$elm_ui$Ui_Slider$Increment},
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+	var attributes = _elm_lang$core$List$concat(
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui$attributeList(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'disabled', _1: model.disabled},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'readonly', _1: model.readonly},
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_Slider$defaultStyle),
+				_1: {
+					ctor: '::',
+					_0: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$id(model.uid),
+						_1: {ctor: '[]'}
+					},
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui$tabIndex(model),
+						_1: {
+							ctor: '::',
+							_0: actions,
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+	var position = A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Basics$toString(model.value),
+		'%');
+	var bar = A3(
+		_elm_lang$html$Html$node,
+		'ui-slider-bar',
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'ui-slider-progress',
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$style(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'width', _1: position},
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				},
+				{ctor: '[]'}),
+			_1: {ctor: '[]'}
+		});
+	return A3(
+		_elm_lang$html$Html$node,
+		'ui-slider',
+		attributes,
+		{
+			ctor: '::',
+			_0: bar,
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_elm_lang$html$Html$node,
+					'ui-slider-handle',
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'left', _1: position},
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Slider$view = function (model) {
+	return A2(_elm_lang$html$Html_Lazy$lazy, _gdotdesign$elm_ui$Ui_Slider$render, model);
+};

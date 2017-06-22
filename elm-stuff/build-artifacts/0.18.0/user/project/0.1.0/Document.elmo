@@ -34,39 +34,39 @@ var _user$project$Document$encodeModel = function (doc) {
 	return {
 		ctor: '::',
 		_0: A2(
-			_user$project$Ext_Function_Infix_ops['=>'],
+			_user$project$X_Function_Infix_ops['=>'],
 			'_id',
 			_elm_lang$core$Json_Encode$string(doc.id)),
 		_1: {
 			ctor: '::',
 			_0: A2(
-				_user$project$Ext_Function_Infix_ops['=>'],
+				_user$project$X_Function_Infix_ops['=>'],
 				'_rev',
 				_elm_lang$core$Json_Encode$string(doc.rev)),
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_user$project$Ext_Function_Infix_ops['=>'],
+					_user$project$X_Function_Infix_ops['=>'],
 					'createdAt',
 					_elm_lang$core$Json_Encode$int(
 						_elm_lang$core$Basics$round(doc.createdAt))),
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_user$project$Ext_Function_Infix_ops['=>'],
+						_user$project$X_Function_Infix_ops['=>'],
 						'modifiedAt',
 						_elm_lang$core$Json_Encode$int(
 							_elm_lang$core$Basics$round(doc.modifiedAt))),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_user$project$Ext_Function_Infix_ops['=>'],
+							_user$project$X_Function_Infix_ops['=>'],
 							'deleted',
 							_elm_lang$core$Json_Encode$bool(doc.deleted)),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_user$project$Ext_Function_Infix_ops['=>'],
+								_user$project$X_Function_Infix_ops['=>'],
 								'deviceId',
 								_elm_lang$core$Json_Encode$string(doc.deviceId)),
 							_1: {ctor: '[]'}
@@ -120,7 +120,7 @@ var _user$project$Document$getId = function (_) {
 var _user$project$Document$hasId = function (id) {
 	return function (_p2) {
 		return A2(
-			_user$project$Ext_Function$equals,
+			_user$project$X_Function$equals,
 			id,
 			_user$project$Document$getId(_p2));
 	};

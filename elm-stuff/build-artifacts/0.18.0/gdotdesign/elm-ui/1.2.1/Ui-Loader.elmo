@@ -1,0 +1,125 @@
+var _gdotdesign$elm_ui$Ui_Loader$loadingRectangles = A3(
+	_elm_lang$html$Html$node,
+	'ui-loader-rectangles',
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A3(
+			_elm_lang$html$Html$node,
+			'ui-loader-rectangle',
+			{ctor: '[]'},
+			{ctor: '[]'}),
+		_1: {
+			ctor: '::',
+			_0: A3(
+				_elm_lang$html$Html$node,
+				'ui-loader-rectangle',
+				{ctor: '[]'},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_elm_lang$html$Html$node,
+					'ui-loader-rectangle',
+					{ctor: '[]'},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _gdotdesign$elm_ui$Ui_Loader$finish = function (model) {
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{loading: false, shown: false});
+};
+var _gdotdesign$elm_ui$Ui_Loader$render = F3(
+	function (kind, content, model) {
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-loader',
+			_elm_lang$core$List$concat(
+				{
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui$attributeList(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'loading', _1: model.shown},
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_Loader$defaultStyle),
+						_1: {
+							ctor: '::',
+							_0: {
+								ctor: '::',
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'kind', kind),
+								_1: {ctor: '[]'}
+							},
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			content);
+	});
+var _gdotdesign$elm_ui$Ui_Loader$view = F3(
+	function (kind, content, model) {
+		return A4(_elm_lang$html$Html_Lazy$lazy3, _gdotdesign$elm_ui$Ui_Loader$render, kind, content, model);
+	});
+var _gdotdesign$elm_ui$Ui_Loader$overlayView = function (model) {
+	return A3(
+		_gdotdesign$elm_ui$Ui_Loader$view,
+		'overlay',
+		{
+			ctor: '::',
+			_0: _gdotdesign$elm_ui$Ui_Loader$loadingRectangles,
+			_1: {ctor: '[]'}
+		},
+		model);
+};
+var _gdotdesign$elm_ui$Ui_Loader$barView = function (model) {
+	return A3(
+		_gdotdesign$elm_ui$Ui_Loader$view,
+		'bar',
+		{ctor: '[]'},
+		model);
+};
+var _gdotdesign$elm_ui$Ui_Loader$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		return model.loading ? {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{shown: true}),
+			_1: _elm_lang$core$Platform_Cmd$none
+		} : {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+	});
+var _gdotdesign$elm_ui$Ui_Loader$timeout = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{timeout: value});
+	});
+var _gdotdesign$elm_ui$Ui_Loader$init = function (_p1) {
+	return {loading: false, timeout: 200, shown: false};
+};
+var _gdotdesign$elm_ui$Ui_Loader$Model = F3(
+	function (a, b, c) {
+		return {timeout: a, loading: b, shown: c};
+	});
+var _gdotdesign$elm_ui$Ui_Loader$Show = {ctor: 'Show'};
+var _gdotdesign$elm_ui$Ui_Loader$start = function (model) {
+	return {
+		ctor: '_Tuple2',
+		_0: _elm_lang$core$Native_Utils.update(
+			model,
+			{loading: true}),
+		_1: A2(
+			_elm_lang$core$Task$perform,
+			function (_p2) {
+				return _gdotdesign$elm_ui$Ui_Loader$Show;
+			},
+			_elm_lang$core$Process$sleep(model.timeout))
+	};
+};

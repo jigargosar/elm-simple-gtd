@@ -1,0 +1,240 @@
+var _gdotdesign$elm_ui$Ui_Tagger$onRemove = F2(
+	function (msg, model) {
+		return A2(
+			_gdotdesign$elm_ui$Ui_Helpers_Emitter$listenString,
+			A2(_elm_lang$core$Basics_ops['++'], model.uid, '-remove'),
+			msg);
+	});
+var _gdotdesign$elm_ui$Ui_Tagger$onCreate = F2(
+	function (msg, model) {
+		return A2(
+			_gdotdesign$elm_ui$Ui_Helpers_Emitter$listenString,
+			A2(_elm_lang$core$Basics_ops['++'], model.uid, '-create'),
+			msg);
+	});
+var _gdotdesign$elm_ui$Ui_Tagger$placeholder = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				input: A2(_gdotdesign$elm_ui$Ui_Input$placeholder, value, model.input)
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Tagger$removeable = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{removeable: value});
+	});
+var _gdotdesign$elm_ui$Ui_Tagger$init = function (_p0) {
+	return {
+		input: _gdotdesign$elm_ui$Ui_Input$init(
+			{ctor: '_Tuple0'}),
+		removeable: true,
+		disabled: false,
+		readonly: false,
+		uid: _gdotdesign$elm_ui$Ui_Native_Uid$uid(
+			{ctor: '_Tuple0'})
+	};
+};
+var _gdotdesign$elm_ui$Ui_Tagger$Tag = F2(
+	function (a, b) {
+		return {label: a, id: b};
+	});
+var _gdotdesign$elm_ui$Ui_Tagger$Model = F5(
+	function (a, b, c, d, e) {
+		return {input: a, removeable: b, disabled: c, readonly: d, uid: e};
+	});
+var _gdotdesign$elm_ui$Ui_Tagger$Create = {ctor: 'Create'};
+var _gdotdesign$elm_ui$Ui_Tagger$Remove = function (a) {
+	return {ctor: 'Remove', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Tagger$renderTag = F2(
+	function (model, tag) {
+		var icon = (model.disabled || (model.readonly || (!model.removeable))) ? _elm_lang$html$Html$text('') : _gdotdesign$elm_ui$Ui_Icons$close(
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_gdotdesign$elm_ui$Ui_Tagger$Remove(tag.id)),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_gdotdesign$elm_ui$Html_Events_Extra$onKeys,
+							true,
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 13,
+									_1: _gdotdesign$elm_ui$Ui_Tagger$Remove(tag.id)
+								},
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				},
+				_gdotdesign$elm_ui$Ui$tabIndex(model)));
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-tagger-tag',
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(tag.label),
+				_1: {
+					ctor: '::',
+					_0: icon,
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Tagger$Input = function (a) {
+	return {ctor: 'Input', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Tagger$update = F2(
+	function (action, model) {
+		var _p1 = action;
+		switch (_p1.ctor) {
+			case 'Input':
+				var _p2 = A2(_gdotdesign$elm_ui$Ui_Input$update, _p1._0, model.input);
+				var input = _p2._0;
+				var effect = _p2._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{input: input}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _gdotdesign$elm_ui$Ui_Tagger$Input, effect)
+				};
+			case 'Create':
+				var isEmpty = _elm_lang$core$String$isEmpty(
+					_elm_lang$core$String$trim(model.input.value));
+				return isEmpty ? {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none} : {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(
+						_gdotdesign$elm_ui$Ui_Helpers_Emitter$sendString,
+						A2(_elm_lang$core$Basics_ops['++'], model.uid, '-create'),
+						model.input.value)
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: A2(
+						_gdotdesign$elm_ui$Ui_Helpers_Emitter$sendString,
+						A2(_elm_lang$core$Basics_ops['++'], model.uid, '-remove'),
+						_p1._0)
+				};
+		}
+	});
+var _gdotdesign$elm_ui$Ui_Tagger$render = F2(
+	function (tags, model) {
+		var actions = A2(
+			_gdotdesign$elm_ui$Ui$enabledActions,
+			model,
+			{
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Html_Events_Extra$onKeys,
+					true,
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 13, _1: _gdotdesign$elm_ui$Ui_Tagger$Create},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+		var attributes = _elm_lang$core$List$concat(
+			{
+				ctor: '::',
+				_0: _gdotdesign$elm_ui$Ui$attributeList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'disabled', _1: model.disabled},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'readonly', _1: model.readonly},
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_Tagger$defaultStyle),
+					_1: {
+						ctor: '::',
+						_0: actions,
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+		var input = model.input;
+		var isEmpty = _elm_lang$core$String$isEmpty(
+			_elm_lang$core$String$trim(input.value));
+		var button = {
+			disabled: model.disabled || (model.readonly || isEmpty),
+			glyph: _gdotdesign$elm_ui$Ui_Icons$plus(
+				{ctor: '[]'}),
+			readonly: false,
+			kind: 'primary',
+			size: 'medium',
+			side: 'left',
+			text: ''
+		};
+		var updatedInput = _elm_lang$core$Native_Utils.update(
+			input,
+			{disabled: model.disabled, readonly: model.readonly});
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-tagger',
+			attributes,
+			{
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Ui_Container$row,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$map,
+							_gdotdesign$elm_ui$Ui_Tagger$Input,
+							_gdotdesign$elm_ui$Ui_Input$view(updatedInput)),
+						_1: {
+							ctor: '::',
+							_0: A2(_gdotdesign$elm_ui$Ui_IconButton$view, _gdotdesign$elm_ui$Ui_Tagger$Create, button),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_elm_lang$html$Html$node,
+						'ui-tagger-tags',
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$List$map,
+							_gdotdesign$elm_ui$Ui_Tagger$renderTag(model),
+							tags)),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Tagger$view = F2(
+	function (tags, model) {
+		return A3(_elm_lang$html$Html_Lazy$lazy2, _gdotdesign$elm_ui$Ui_Tagger$render, tags, model);
+	});
+var _gdotdesign$elm_ui$Ui_Tagger$setValue = F2(
+	function (value, model) {
+		var _p3 = A2(_gdotdesign$elm_ui$Ui_Input$setValue, value, model.input);
+		var input = _p3._0;
+		var cmd = _p3._1;
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_Utils.update(
+				model,
+				{input: input}),
+			_1: A2(_elm_lang$core$Platform_Cmd$map, _gdotdesign$elm_ui$Ui_Tagger$Input, cmd)
+		};
+	});

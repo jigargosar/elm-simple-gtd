@@ -147,7 +147,7 @@ var _user$project$EntityList_View$listView = F3(
 				_0: _elm_lang$html$Html_Attributes$class('entity-list focusable-list'),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Ext_Keyboard$onKeyDown(
+					_0: _user$project$X_Keyboard$onKeyDown(
 						_user$project$Model$OnEntityListKeyDown(entityList)),
 					_1: {ctor: '[]'}
 				}

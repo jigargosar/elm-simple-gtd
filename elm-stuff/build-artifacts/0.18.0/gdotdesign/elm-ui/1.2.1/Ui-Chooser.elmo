@@ -1,0 +1,575 @@
+var _gdotdesign$elm_ui$Ui_Chooser$createRegex = function (value) {
+	return _elm_lang$core$Regex$caseInsensitive(
+		_elm_lang$core$Regex$regex(
+			_elm_lang$core$Regex$escape(value)));
+};
+var _gdotdesign$elm_ui$Ui_Chooser$items_ = function (model) {
+	var test = function (item) {
+		return A2(
+			_elm_lang$core$Regex$contains,
+			_gdotdesign$elm_ui$Ui_Chooser$createRegex(model.value),
+			item.label);
+	};
+	return _elm_lang$core$String$isEmpty(
+		_elm_lang$core$String$trim(model.value)) ? model.data : A2(_elm_lang$core$List$filter, test, model.data);
+};
+var _gdotdesign$elm_ui$Ui_Chooser$availableItems = function (model) {
+	return A2(
+		_elm_lang$core$List$map,
+		function (_) {
+			return _.value;
+		},
+		_gdotdesign$elm_ui$Ui_Chooser$items_(model));
+};
+var _gdotdesign$elm_ui$Ui_Chooser$label = function (model) {
+	return A2(
+		_elm_lang$core$String$join,
+		', ',
+		A2(
+			_elm_lang$core$List$map,
+			function (_) {
+				return _.label;
+			},
+			A2(
+				_elm_lang$core$List$filter,
+				function (item) {
+					return A2(_elm_lang$core$Set$member, item.value, model.selected);
+				},
+				model.data)));
+};
+var _gdotdesign$elm_ui$Ui_Chooser$setInputValue = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{value: value});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$intendFirst = function (model) {
+	var available = _gdotdesign$elm_ui$Ui_Chooser$availableItems(model);
+	var index = A2(_gdotdesign$elm_ui$Ui_Helpers_Intendable$index, model.intended, available);
+	return _elm_lang$core$Native_Utils.eq(index, -1) ? _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			intended: A2(_gdotdesign$elm_ui$Ui_Helpers_Intendable$next, '', available)
+		}) : model;
+};
+var _gdotdesign$elm_ui$Ui_Chooser$sendValue = function (model) {
+	var value = _elm_lang$core$Json_Encode$list(
+		A2(
+			_elm_lang$core$List$map,
+			_elm_lang$core$Json_Encode$string,
+			_elm_lang$core$Set$toList(model.selected)));
+	return {
+		ctor: '_Tuple2',
+		_0: model,
+		_1: A2(_gdotdesign$elm_ui$Ui_Helpers_Emitter$send, model.uid, value)
+	};
+};
+var _gdotdesign$elm_ui$Ui_Chooser$toggleMultipleItem = F2(
+	function (value, model) {
+		var updated_set = A2(_elm_lang$core$Set$member, value, model.selected) ? ((model.deselectable || (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$Set$size(model.selected),
+			1) > 0)) ? A2(_elm_lang$core$Set$remove, value, model.selected) : model.selected) : A2(_elm_lang$core$Set$insert, value, model.selected);
+		return _gdotdesign$elm_ui$Ui_Chooser$sendValue(
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{selected: updated_set}));
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$toggleSingleItem = F2(
+	function (value, model) {
+		var updatedModel = (A2(_elm_lang$core$Set$member, value, model.selected) && model.deselectable) ? _elm_lang$core$Native_Utils.update(
+			model,
+			{selected: _elm_lang$core$Set$empty}) : _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				selected: _elm_lang$core$Set$singleton(value)
+			});
+		return _gdotdesign$elm_ui$Ui_Chooser$sendValue(updatedModel);
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$selectFirst = function (model) {
+	var _p0 = _elm_lang$core$List$head(model.data);
+	if (_p0.ctor === 'Just') {
+		return _gdotdesign$elm_ui$Ui_Chooser$sendValue(
+			_elm_lang$core$Native_Utils.update(
+				model,
+				{
+					selected: _elm_lang$core$Set$singleton(_p0._0.value)
+				}));
+	} else {
+		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+	}
+};
+var _gdotdesign$elm_ui$Ui_Chooser$updateData = F2(
+	function (data, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{data: data});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$getFirstSelected = function (model) {
+	return _elm_lang$core$List$head(
+		_elm_lang$core$Set$toList(model.selected));
+};
+var _gdotdesign$elm_ui$Ui_Chooser$toggleItem = F2(
+	function (value, model) {
+		return model.multiple ? A2(_gdotdesign$elm_ui$Ui_Chooser$toggleMultipleItem, value, model) : A2(_gdotdesign$elm_ui$Ui_Chooser$toggleSingleItem, value, model);
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$close = function (model) {
+	return A2(
+		_gdotdesign$elm_ui$Ui_Chooser$setInputValue,
+		'',
+		_gdotdesign$elm_ui$Ui_Helpers_Dropdown$close(model));
+};
+var _gdotdesign$elm_ui$Ui_Chooser$closeIfShouldClose = function (model) {
+	return model.closeOnSelect ? _gdotdesign$elm_ui$Ui_Chooser$close(model) : model;
+};
+var _gdotdesign$elm_ui$Ui_Chooser$toggleItemAndClose = F2(
+	function (value, model) {
+		var _p1 = A2(_gdotdesign$elm_ui$Ui_Chooser$toggleItem, value, model);
+		var updatedModel = _p1._0;
+		var effect = _p1._1;
+		return {
+			ctor: '_Tuple2',
+			_0: _gdotdesign$elm_ui$Ui_Chooser$closeIfShouldClose(updatedModel),
+			_1: effect
+		};
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$setValue = F2(
+	function (value, model) {
+		var newSelected = _elm_lang$core$Set$singleton(value);
+		return _elm_lang$core$Native_Utils.eq(
+			_elm_lang$core$Set$size(
+				A2(_elm_lang$core$Set$diff, newSelected, model.selected)),
+			0) ? model : _elm_lang$core$Native_Utils.update(
+			model,
+			{selected: newSelected});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$update = F2(
+	function (action, model) {
+		var _p2 = action;
+		switch (_p2.ctor) {
+			case 'Enter':
+				var $function = model.closeOnSelect ? _gdotdesign$elm_ui$Ui_Helpers_Dropdown$toggle : _gdotdesign$elm_ui$Ui_Helpers_Dropdown$open;
+				var _p3 = A2(_gdotdesign$elm_ui$Ui_Chooser$toggleItem, model.intended, model);
+				var updatedModel = _p3._0;
+				var effect = _p3._1;
+				return {
+					ctor: '_Tuple2',
+					_0: $function(updatedModel),
+					_1: effect
+				};
+			case 'Dropdown':
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_gdotdesign$elm_ui$Ui_Helpers_Dropdown$update, _p2._0, model),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Select':
+				return A2(_gdotdesign$elm_ui$Ui_Chooser$toggleItemAndClose, _p2._0, model);
+			case 'Filter':
+				return {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_Chooser$intendFirst(
+						A2(_gdotdesign$elm_ui$Ui_Chooser$setInputValue, _p2._0, model)),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Toggle':
+				return {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_Chooser$intendFirst(
+						_gdotdesign$elm_ui$Ui_Helpers_Dropdown$open(model)),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Focus':
+				return {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_Chooser$intendFirst(
+						_gdotdesign$elm_ui$Ui_Helpers_Dropdown$open(model)),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Close':
+				return {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_Chooser$close(model),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Blur':
+				return {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_Chooser$close(model),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Next':
+				return {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_Helpers_Dropdown$open(
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								intended: A2(
+									_gdotdesign$elm_ui$Ui_Helpers_Intendable$next,
+									model.intended,
+									_gdotdesign$elm_ui$Ui_Chooser$availableItems(model))
+							})),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Prev':
+				return {
+					ctor: '_Tuple2',
+					_0: _gdotdesign$elm_ui$Ui_Helpers_Dropdown$open(
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								intended: A2(
+									_gdotdesign$elm_ui$Ui_Helpers_Intendable$previous,
+									model.intended,
+									_gdotdesign$elm_ui$Ui_Chooser$availableItems(model))
+							})),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$renderWhenClosed = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{renderWhenClosed: value});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$items = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{data: value});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$multiple = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{multiple: value});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$searchable = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{searchable: value});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$deselectable = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{deselectable: value});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$closeOnSelect = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{closeOnSelect: value});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$emptyContent = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{emptyContent: value});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$placeholder = F2(
+	function (value, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{placeholder: value});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$onChange = F2(
+	function (msg, model) {
+		var decoder = A2(
+			_elm_lang$core$Json_Decode$map,
+			_elm_lang$core$Set$fromList,
+			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string));
+		return A2(
+			_gdotdesign$elm_ui$Ui_Helpers_Emitter$listen,
+			model.uid,
+			A3(_gdotdesign$elm_ui$Ui_Helpers_Emitter$decode, decoder, _elm_lang$core$Set$empty, msg));
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$init = function (_p4) {
+	return A2(
+		_gdotdesign$elm_ui$Ui_Helpers_Dropdown$offset,
+		5,
+		{
+			render: function (item) {
+				return _elm_lang$html$Html$text(item.label);
+			},
+			dropdown: _gdotdesign$elm_ui$Ui_Helpers_Dropdown$init,
+			renderWhenClosed: true,
+			closeOnSelect: false,
+			deselectable: false,
+			selected: _elm_lang$core$Set$empty,
+			placeholder: '',
+			emptyContent: _elm_lang$html$Html$text('No items to display!'),
+			searchable: false,
+			multiple: false,
+			disabled: false,
+			readonly: false,
+			uid: _gdotdesign$elm_ui$Ui_Native_Uid$uid(
+				{ctor: '_Tuple0'}),
+			intended: '',
+			value: '',
+			data: {ctor: '[]'}
+		});
+};
+var _gdotdesign$elm_ui$Ui_Chooser$Item = F3(
+	function (a, b, c) {
+		return {label: a, value: b, id: c};
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return {render: a, dropdown: b, renderWhenClosed: c, selected: d, placeholder: e, emptyContent: f, closeOnSelect: g, deselectable: h, intended: i, searchable: j, data: k, multiple: l, disabled: m, readonly: n, value: o, uid: p};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _gdotdesign$elm_ui$Ui_Chooser$Blur = {ctor: 'Blur'};
+var _gdotdesign$elm_ui$Ui_Chooser$NoOp = {ctor: 'NoOp'};
+var _gdotdesign$elm_ui$Ui_Chooser$Prev = {ctor: 'Prev'};
+var _gdotdesign$elm_ui$Ui_Chooser$Next = {ctor: 'Next'};
+var _gdotdesign$elm_ui$Ui_Chooser$Enter = {ctor: 'Enter'};
+var _gdotdesign$elm_ui$Ui_Chooser$Close = {ctor: 'Close'};
+var _gdotdesign$elm_ui$Ui_Chooser$Focus = {ctor: 'Focus'};
+var _gdotdesign$elm_ui$Ui_Chooser$Toggle = {ctor: 'Toggle'};
+var _gdotdesign$elm_ui$Ui_Chooser$Select = function (a) {
+	return {ctor: 'Select', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Chooser$renderItem = F2(
+	function (model, item) {
+		return A3(
+			_elm_lang$html$Html$node,
+			'ui-chooser-item',
+			_elm_lang$core$List$concat(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '::',
+						_0: A2(
+							_gdotdesign$elm_ui$Html_Events_Extra$onPreventDefault,
+							'mousedown',
+							_gdotdesign$elm_ui$Ui_Chooser$Select(item.value)),
+						_1: {ctor: '[]'}
+					},
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui$attributeList(
+							{
+								ctor: '::',
+								_0: {
+									ctor: '_Tuple2',
+									_0: 'selected',
+									_1: A2(_elm_lang$core$Set$member, item.value, model.selected)
+								},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'intended',
+										_1: _elm_lang$core$Native_Utils.eq(item.value, model.intended)
+									},
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			{
+				ctor: '::',
+				_0: model.render(item),
+				_1: {ctor: '[]'}
+			});
+	});
+var _gdotdesign$elm_ui$Ui_Chooser$Filter = function (a) {
+	return {ctor: 'Filter', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Chooser$Dropdown = function (a) {
+	return {ctor: 'Dropdown', _0: a};
+};
+var _gdotdesign$elm_ui$Ui_Chooser$subscriptions = function (model) {
+	return A2(
+		_elm_lang$core$Platform_Sub$map,
+		_gdotdesign$elm_ui$Ui_Chooser$Dropdown,
+		_gdotdesign$elm_ui$Ui_Helpers_Dropdown$subscriptions(model));
+};
+var _gdotdesign$elm_ui$Ui_Chooser$render = function (model) {
+	var actions = A2(
+		_gdotdesign$elm_ui$Ui$enabledActions,
+		model,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onMouseDown(_gdotdesign$elm_ui$Ui_Chooser$Toggle),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onInput(_gdotdesign$elm_ui$Ui_Chooser$Filter),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onFocus(_gdotdesign$elm_ui$Ui_Chooser$Focus),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onBlur(_gdotdesign$elm_ui$Ui_Chooser$Blur),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_gdotdesign$elm_ui$Html_Events_Extra$onKeys,
+								true,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									{
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 27, _1: _gdotdesign$elm_ui$Ui_Chooser$Close},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 13, _1: _gdotdesign$elm_ui$Ui_Chooser$Enter},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 40, _1: _gdotdesign$elm_ui$Ui_Chooser$Next},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 38, _1: _gdotdesign$elm_ui$Ui_Chooser$Prev},
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									},
+									(!model.searchable) ? {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 32, _1: _gdotdesign$elm_ui$Ui_Chooser$Enter},
+										_1: {ctor: '[]'}
+									} : {ctor: '[]'})),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+	var isReadOnly = (!model.searchable) || ((!model.dropdown.open) || model.readonly);
+	var placeholder_ = _elm_lang$core$Set$isEmpty(model.selected) ? model.placeholder : _gdotdesign$elm_ui$Ui_Chooser$label(model);
+	var val = (model.dropdown.open && model.searchable) ? model.value : _gdotdesign$elm_ui$Ui_Chooser$label(model);
+	var children = (model.dropdown.open || ((!model.dropdown.open) && model.renderWhenClosed)) ? ((_elm_lang$core$Native_Utils.cmp(
+		_elm_lang$core$List$length(
+			_gdotdesign$elm_ui$Ui_Chooser$items_(model)),
+		0) > 0) ? A2(
+		_elm_lang$core$List$map,
+		A2(_elm_lang$html$Html_Lazy$lazy2, _gdotdesign$elm_ui$Ui_Chooser$renderItem, model),
+		_gdotdesign$elm_ui$Ui_Chooser$items_(model)) : {
+		ctor: '::',
+		_0: A3(
+			_elm_lang$html$Html$node,
+			'ui-chooser-empty-content',
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: model.emptyContent,
+				_1: {ctor: '[]'}
+			}),
+		_1: {ctor: '[]'}
+	}) : {ctor: '[]'};
+	return A2(
+		_gdotdesign$elm_ui$Ui_Helpers_Dropdown$view,
+		{
+			address: _gdotdesign$elm_ui$Ui_Chooser$Dropdown,
+			tag: 'ui-chooser',
+			attributes: _elm_lang$core$List$concat(
+				{
+					ctor: '::',
+					_0: _gdotdesign$elm_ui$Ui$attributeList(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'searchable', _1: model.searchable},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'open', _1: model.dropdown.open},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'disabled', _1: model.disabled},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'readonly', _1: model.readonly},
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_Chooser$defaultStyle),
+						_1: {ctor: '[]'}
+					}
+				}),
+			contents: {
+				ctor: '::',
+				_0: A2(
+					_gdotdesign$elm_ui$Ui_ScrolledPanel$view,
+					{
+						ctor: '::',
+						_0: A2(_gdotdesign$elm_ui$Html_Events_Extra$onPreventDefault, 'mousedown', _gdotdesign$elm_ui$Ui_Chooser$NoOp),
+						_1: {ctor: '[]'}
+					},
+					children),
+				_1: {ctor: '[]'}
+			},
+			children: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$placeholder(placeholder_),
+							_1: {
+								ctor: '::',
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'id', model.uid),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$disabled(model.disabled),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$readonly(isReadOnly),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$value(val),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						},
+						actions),
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			}
+		},
+		model);
+};
+var _gdotdesign$elm_ui$Ui_Chooser$view = function (model) {
+	return A2(_elm_lang$html$Html_Lazy$lazy, _gdotdesign$elm_ui$Ui_Chooser$render, model);
+};

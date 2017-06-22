@@ -128,13 +128,13 @@ var _user$project$Entity$findEntityByOffsetIn = F3(
 			_elm_community$maybe_extra$Maybe_Extra$orElse,
 			_elm_lang$core$List$head(entityList),
 			A2(
-				_user$project$Ext_List$atIndexIn,
+				_user$project$X_List$atIndexIn,
 				entityList,
 				A2(
-					_user$project$Ext_List$clampIndexIn,
+					_user$project$X_List$clampIndexIn,
 					entityList,
 					A2(
-						_user$project$Ext_Function$add,
+						_user$project$X_Function$add,
 						offsetIndex,
 						A2(
 							_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],

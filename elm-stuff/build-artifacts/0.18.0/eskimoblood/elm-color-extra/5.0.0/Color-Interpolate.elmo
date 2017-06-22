@@ -1,0 +1,58 @@
+var _eskimoblood$elm_color_extra$Color_Interpolate$linear = F3(
+	function (t, i1, i2) {
+		return i1 + ((i2 - i1) * t);
+	});
+var _eskimoblood$elm_color_extra$Color_Interpolate$degree360 = _elm_lang$core$Basics$degrees(360);
+var _eskimoblood$elm_color_extra$Color_Interpolate$degree180 = _elm_lang$core$Basics$degrees(180);
+var _eskimoblood$elm_color_extra$Color_Interpolate$interpolate = F4(
+	function (space, cl1, cl2, t) {
+		var i = _eskimoblood$elm_color_extra$Color_Interpolate$linear(t);
+		var _p0 = space;
+		switch (_p0.ctor) {
+			case 'RGB':
+				var cl2_ = _elm_lang$core$Color$toRgb(cl2);
+				var cl1_ = _elm_lang$core$Color$toRgb(cl1);
+				return A4(
+					_elm_lang$core$Color$rgba,
+					_elm_lang$core$Basics$round(
+						A2(
+							i,
+							_elm_lang$core$Basics$toFloat(cl1_.red),
+							_elm_lang$core$Basics$toFloat(cl2_.red))),
+					_elm_lang$core$Basics$round(
+						A2(
+							i,
+							_elm_lang$core$Basics$toFloat(cl1_.green),
+							_elm_lang$core$Basics$toFloat(cl2_.green))),
+					_elm_lang$core$Basics$round(
+						A2(
+							i,
+							_elm_lang$core$Basics$toFloat(cl1_.blue),
+							_elm_lang$core$Basics$toFloat(cl2_.blue))),
+					A2(i, cl1_.alpha, cl2_.alpha));
+			case 'HSL':
+				var cl2_ = _elm_lang$core$Color$toHsl(cl2);
+				var h2 = cl2_.hue;
+				var cl1_ = _elm_lang$core$Color$toHsl(cl1);
+				var h1 = cl1_.hue;
+				var dH = ((_elm_lang$core$Native_Utils.cmp(h2, h1) > 0) && (_elm_lang$core$Native_Utils.cmp(h2 - h1, _eskimoblood$elm_color_extra$Color_Interpolate$degree180) > 0)) ? ((h2 - h1) + _eskimoblood$elm_color_extra$Color_Interpolate$degree360) : (((_elm_lang$core$Native_Utils.cmp(h2, h1) < 0) && (_elm_lang$core$Native_Utils.cmp(h1 - h2, _eskimoblood$elm_color_extra$Color_Interpolate$degree180) > 0)) ? ((h2 + _eskimoblood$elm_color_extra$Color_Interpolate$degree360) - h1) : (h2 - h1));
+				return A4(
+					_elm_lang$core$Color$hsla,
+					h1 + (t * dH),
+					A2(i, cl1_.saturation, cl2_.saturation),
+					A2(i, cl1_.lightness, cl2_.lightness),
+					A2(i, cl1_.alpha, cl2_.alpha));
+			default:
+				var lab2 = _eskimoblood$elm_color_extra$Color_Convert$colorToLab(cl2);
+				var lab1 = _eskimoblood$elm_color_extra$Color_Convert$colorToLab(cl1);
+				return _eskimoblood$elm_color_extra$Color_Convert$labToColor(
+					{
+						l: A2(i, lab1.l, lab2.l),
+						a: A2(i, lab1.a, lab2.a),
+						b: A2(i, lab1.b, lab2.b)
+					});
+		}
+	});
+var _eskimoblood$elm_color_extra$Color_Interpolate$LAB = {ctor: 'LAB'};
+var _eskimoblood$elm_color_extra$Color_Interpolate$HSL = {ctor: 'HSL'};
+var _eskimoblood$elm_color_extra$Color_Interpolate$RGB = {ctor: 'RGB'};

@@ -4,10 +4,10 @@ import Document
 import DomPorts
 import ExclusiveMode
 import Entity
-import Ext.Debug
-import Ext.Record as Record exposing (set)
-import Ext.Return
-import Ext.Time
+import X.Debug
+import X.Record as Record exposing (set)
+import X.Return
+import X.Time
 import Model
 import Notification
 import Return
@@ -17,8 +17,8 @@ import Todo.Msg exposing (Msg(..))
 import Todo.ReminderForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import Ext.Function exposing (..)
-import Ext.Function.Infix exposing (..)
+import X.Function exposing (..)
+import X.Function.Infix exposing (..)
 import List.Extra as List
 import Maybe.Extra as Maybe
 import Todo.TimeTracker as Tracker
@@ -164,7 +164,7 @@ update andThenUpdate now todoMsg =
                     >> andThenUpdate (Model.OnCloseNotification todoId)
 
         OnProcessPendingNotificationCronTick ->
-            Ext.Return.andThenMaybe
+            X.Return.andThenMaybe
                 (Model.findAndSnoozeOverDueTodo >>? Return.andThen showReminderNotificationCmd)
 
 
@@ -194,7 +194,7 @@ showRunningNotificationCmd ( maybeTrackerInfo, model ) =
                     Document.getId todo
 
                 formattedDuration =
-                    Ext.Time.toHHMMSSMin (info.elapsedTime)
+                    X.Time.toHHMMSSMin (info.elapsedTime)
             in
                 { tag = todoId
                 , title = "You have been working for " ++ formattedDuration

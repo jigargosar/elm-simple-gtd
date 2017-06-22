@@ -1,0 +1,28 @@
+var _gdotdesign$elm_ui$Ui_ButtonGroup$renderButton = F2(
+	function (model, _p0) {
+		var _p1 = _p0;
+		return A2(
+			_gdotdesign$elm_ui$Ui_Button$view,
+			_p1._1,
+			{disabled: model.disabled, readonly: model.readonly, kind: model.kind, size: model.size, text: _p1._0});
+	});
+var _gdotdesign$elm_ui$Ui_ButtonGroup$render = function (model) {
+	return A3(
+		_elm_lang$html$Html$node,
+		'ui-button-group',
+		_gdotdesign$elm_ui$Ui_Styles$apply(_gdotdesign$elm_ui$Ui_Styles_ButtonGroup$defaultStyle),
+		A2(
+			_elm_lang$core$List$map,
+			_gdotdesign$elm_ui$Ui_ButtonGroup$renderButton(model),
+			model.items));
+};
+var _gdotdesign$elm_ui$Ui_ButtonGroup$view = function (model) {
+	return A2(_elm_lang$html$Html_Lazy$lazy, _gdotdesign$elm_ui$Ui_ButtonGroup$render, model);
+};
+var _gdotdesign$elm_ui$Ui_ButtonGroup$model = function (items) {
+	return {disabled: false, readonly: false, kind: 'primary', size: 'medium', items: items};
+};
+var _gdotdesign$elm_ui$Ui_ButtonGroup$Model = F5(
+	function (a, b, c, d, e) {
+		return {items: a, disabled: b, readonly: c, kind: d, size: e};
+	});

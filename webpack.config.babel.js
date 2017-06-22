@@ -97,9 +97,11 @@ export default {
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 use:[{
-                    loader: 'url-loader?name=[name].[ext]',
+                    loader: 'url-loader',
                     query: {
-                        outputPath:"assets/fonts/",
+                        name:"[name].[ext]",
+                        outputPath:"/assets/fonts/",
+                        //todo: change this value based on dev server mode.
                         useRelativePath: false,
                         "limit": 10000,
                         "mimetype": "application/font-woff",

@@ -17,8 +17,9 @@ const isDevEnv = nodeENV === "development"
 console.log("webpack: isDevEnv: ", isDevEnv)
 
 
-const outputDir = isDevEnv ? "dev" : "app"
+const envOutputDir = isDevEnv ? "dev" : "app"
 
+const outputPath = path.resolve(__dirname , envOutputDir)
 export default {
     resolve: {
         alias: {elm: path.resolve(__dirname, 'src/elm/')}
@@ -32,7 +33,7 @@ export default {
     },
 
     output: {
-        path: path.resolve(__dirname , outputDir),
+        path: outputPath,
         filename: '[name].js',
     },
 
@@ -95,7 +96,14 @@ export default {
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                use: 'url-loader?name=[name].[ext]&outputPath=/assets&useRelativePath=true&limit=10000&mimetype=application/font-woff',
+                use:[{
+                    loader: 'url-loader?name=[name].[ext]',
+                    query: {
+                        outputPath:"assets/fonts/",
+                        useRelativePath: false,
+                        "limit": 10000,
+                        "mimetype": "application/font-woff",
+                    }}]
             },
             {
                 test: /\.(ttf|eot|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,

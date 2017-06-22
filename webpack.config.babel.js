@@ -5,6 +5,8 @@ import _ from "ramda"
 import HtmlWebpackPlugin from "html-webpack-plugin"
 
 const nodeENV = process.env.NODE_ENV
+const isWebPackDevServer = process.env.WEBPACK_DEV_SERVER
+
 console.log(`webpack: process.env.NODE_ENV: "${nodeENV}"`)
 
 const envList = ["development", "production"]
@@ -15,6 +17,7 @@ if (!_.contains(nodeENV)(envList)) {
 
 const isDevEnv = nodeENV === "development"
 console.log("webpack: isDevEnv: ", isDevEnv)
+console.log("webpack: isWebPackDevServer: ", isWebPackDevServer)
 
 
 const envOutputDir = isDevEnv ? "dev" : "app"
@@ -102,7 +105,7 @@ export default {
                         name:"[name].[ext]",
                         outputPath:"/assets/fonts/",
                         //todo: change this value based on dev server mode.
-                        useRelativePath: false,
+                        useRelativePath: isWebPackDevServer,
                         "limit": 10000,
                         "mimetype": "application/font-woff",
                     }}]
@@ -114,17 +117,27 @@ export default {
         ],
 
         noParse: [/\.elm$/],
+
     },
 
     devServer: {
         // stats: {colors: false, "errors-only":true},
         stats: "minimal",
         port: 8020,
+        overlay: true,
+        watchContentBase: true,
         // open:true,
         // inline: false,
         contentBase: ["src/web/", "static/",],
         host: "0.0.0.0",
+
     },
+
+
+
+    // performance: {
+    //     hints: "warning"
+    // },
 
 };
 

@@ -95,12 +95,17 @@ const prod = () => {
     }
 }
 
-export const hot = runF(`webpack-dev-server --hot --inline`, dev().buildRunOptions)
+export const hot = runF(`webpack-dev-server --hot --inline`, {
+    env: {
+        NODE_ENV: "development",
+        npm_package_version: fetchPackageJson().version,
+        WEBPACK_DEV_SERVER:true
+    }
+})
 
 export const hotmon = () => {
     run(`nodemon --watch runfile.js --watch webpack.config.babel.js --watch package.json \
-            --watch elm-package.json --exec "run hot"`,
-        dev().buildRunOptions)
+            --watch elm-package.json --exec "run hot"`)
 }
 
 export const bump = function () {
@@ -139,7 +144,7 @@ export const pd = () => deploy.prod()
 
 export const bd = () => {
     b()
-    d()
+
 }
 
 export const build = {

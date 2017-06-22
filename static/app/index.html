@@ -25,13 +25,15 @@
 </head>
 <body unresolved>
 
-<h1>Welcome</h1>
+<div id="elm-container"></div>
 
 <script src="/common.js"></script>
 <script src="/vendor.js"></script>
 <script src="/app.js"></script>
 <script>
-    window.appBoot()
+    document.addEventListener('WebComponentsReady', () => {
+        window.appBoot().catch(console.error)
+    });
 </script>
 </body>
 </html>

@@ -147,6 +147,11 @@ export const bd = () => {
     d()
 }
 
+export const pbd = () => {
+    pb()
+    pd()
+}
+
 export const build = {
     dev: function () {
         console.info("build:dev")

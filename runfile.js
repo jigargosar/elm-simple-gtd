@@ -109,18 +109,17 @@ export const hotmon = () => {
 }
 
 export const bump = function () {
-    if (this.options && (this.options["p"] || this.options["prod"])) {
-        run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
-        pbd()
-    } else if (this.options && (this.options["d"] || this.options["dev"])) {
-        run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
+    run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
+
+    if (this.options && (this.options["d"] || this.options["dev"])) {
         bd()
     }
-    else {
-        run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
-
+    if (this.options && (this.options["p"] || this.options["prod"])) {
+        pbd()
     }
 }
+
+
 bump.help =
     `
         <no options>: bump and push, let travis handle the build.

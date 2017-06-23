@@ -1,3 +1,6 @@
+## Upcoming
+* on bump manually deploying to prod or dev. disabling travis for now. 
+
 ## v0.18.61 - 2017-06-23
 * fix: deployment failure on travis. 
 

@@ -31,7 +31,7 @@ const TRAVIS_COMMIT_MESSAGE = process.env["TRAVIS_COMMIT_MESSAGE"]
 const TRAVIS_BRANCH = process.env["TRAVIS_BRANCH"]
 
 const firebaseDeployDev = `firebase deploy --except functions --project dev --public dev/build/unbundled --token ${FIREBASE_TOKEN}`
-const firebaseDeployProd = `firebase deploy --except functions --project prod --public docs --token ${FIREBASE_TOKEN}`
+const firebaseDeployProd = `firebase deploy --except functions --project prod --public app/build/unbundled/ --token ${FIREBASE_TOKEN}`
 
 const doesTravisTagMatchReleaseSemVer =
     _.test(/^v[0-9]+\.[0-9]+\.[0-9]+$/, TRAVIS_TAG)
@@ -109,16 +109,12 @@ export const hotmon = () => {
 }
 
 export const bump = function () {
-    if (this.options && (this.options["g"] || this.options["github-commit-docs"])) {
-        run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
-        build.prod()
-        docs.gitStatus()
-        docs.commit()
-        docs.gitStatus()
+    if (this.options && (this.options["p"] || this.options["prod"])) {
+        run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
+        pbd()
     } else if (this.options && (this.options["d"] || this.options["dev-deploy"])) {
-        run("npm_bump --auto --auto-fallback patch --skip-push 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
-        build.dev()
-        deploy.dev()
+        run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
+        bd()
     }
     else {
         run("npm_bump --auto --auto-fallback patch 2>&1 | awk 'BEGIN{s=0} /Error/{s=1} 1; END{exit(s)}'")
@@ -161,14 +157,16 @@ export const build = {
         run("polymer --version", {cwd: "dev"})
         run(`${travisRunPrefix} polymer build`, {cwd: "dev"})
     },
+    // skip copying files to docs.
     prod: function () {
         console.info("build:prod")
-        run("rimraf app && rimraf docs && rimraf build")
+        run("rimraf app")
+        // run("rimraf app && rimraf docs && rimraf build")
         run("cp -R static/ app")
         run(`${travisRunPrefix} webpack -p --progress`, prod().buildRunOptions)
         run("polymer --version", {cwd: "app"})
         run(`${travisRunPrefix} polymer build`, {cwd: "app"})
-        run("cp -R app/build/unbundled/ docs")
+        // run("cp -R app/build/unbundled/ docs")
     }
 }
 

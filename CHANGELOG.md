@@ -1,3 +1,6 @@
+## Upcoming
+* fix: deployment failure on travis. 
+
 ## v0.18.60 - 2017-06-22
 * using extract text plugin to extract styles. so it is easier to debug.
   * removed it for now. more trouble than worth.

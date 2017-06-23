@@ -1,4 +1,4 @@
-## Upcoming
+## v0.18.61 - 2017-06-23
 * fix: deployment failure on travis. 
 
 ## v0.18.60 - 2017-06-22

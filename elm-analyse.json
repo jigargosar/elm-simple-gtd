@@ -1,0 +1,8 @@
+{
+  "checks" : {
+    "ImportAll": false,
+    "DebugLog": false,
+    "DuplicateImport": false,
+    "ExposeAll": false
+  }
+}

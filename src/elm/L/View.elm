@@ -63,13 +63,10 @@ bannerMock =
 overview =
     div [ class "container overview center" ]
         [ div [ class "row" ]
-            --            [ div [ class "col s12" ]
             [ section [ class "section" ]
                 [ h5 []
-                    [ header [] [ text "Start accomplishing with focus and peace of mind" ]
+                    [ header [] [ text "Start accomplishing more with peace of mind and focus" ]
                     ]
                 ]
             ]
-
-        --            ]
         ]

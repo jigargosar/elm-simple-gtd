@@ -35,7 +35,7 @@ var _user$project$L_View$overview = A2(
 									{ctor: '[]'},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('Start accomplishing with focus and peace of mind'),
+										_0: _elm_lang$html$Html$text('Start accomplishing more with peace of mind and focus'),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}

@@ -1,5 +1,6 @@
 ## Upcoming
-* centralize and fix app colors. 
+* centralize and fix app colors.
+* landing page
 
 ## v0.18.63 - 2017-06-23
 * on bump manually deploying to prod or dev. disabling travis for now. 

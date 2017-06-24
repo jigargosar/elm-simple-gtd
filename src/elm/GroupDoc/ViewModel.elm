@@ -64,6 +64,7 @@ type alias Config =
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
     , nullIcon : IconVM
+    , defaultColor : Color.Color
     , defaultIconName : String
     , getViewType : Document.Id -> EntityListViewType
     , getTabIndexAVForEntity : Entity.Entity -> Html.Attribute Msg
@@ -97,7 +98,7 @@ create config todoList groupDoc =
             if isNull then
                 config.nullIcon
             else
-                { name = config.defaultIconName, color = AppColors.defaultGroupColor }
+                { name = config.defaultIconName, color = config.defaultColor }
 
         name =
             groupDoc.name
@@ -167,6 +168,7 @@ contextGroup getTabIndexAVForEntity todoList context =
             , nullEntity = Context.null
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
+            , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.ContextView
             , getTabIndexAVForEntity = getTabIndexAVForEntity
@@ -186,6 +188,7 @@ projectGroup getTabIndexAVForEntity todoList project =
             , nullEntity = Project.null
             , isNull = Project.isNull
             , nullIcon = { name = "inbox", color = inboxColor }
+            , defaultColor = AppColors.defaultProjectColor
             , defaultIconName = "av:fiber-manual-record"
             , getViewType = Entity.ProjectView
             , getTabIndexAVForEntity = getTabIndexAVForEntity

@@ -3,7 +3,7 @@ var _user$project$GroupDoc_ViewModel$create = F3(
 	function (config, todoList, groupDoc) {
 		var name = groupDoc.name;
 		var isNull = config.isNull(groupDoc);
-		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$AppColors$defaultGroupColor};
+		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: config.defaultColor};
 		var appHeader = {
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
@@ -70,6 +70,7 @@ var _user$project$GroupDoc_ViewModel$contextGroup = F3(
 			nullEntity: _user$project$Context$null,
 			isNull: _user$project$Context$isNull,
 			nullIcon: {name: 'inbox', color: _user$project$GroupDoc_ViewModel$inboxColor},
+			defaultColor: _user$project$AppColors$defaultProjectColor,
 			defaultIconName: 'av:fiber-manual-record',
 			getViewType: _user$project$Entity$ContextView,
 			getTabIndexAVForEntity: getTabIndexAVForEntity
@@ -85,6 +86,7 @@ var _user$project$GroupDoc_ViewModel$projectGroup = F3(
 			nullEntity: _user$project$Project$null,
 			isNull: _user$project$Project$isNull,
 			nullIcon: {name: 'inbox', color: _user$project$GroupDoc_ViewModel$inboxColor},
+			defaultColor: _user$project$AppColors$defaultProjectColor,
 			defaultIconName: 'av:fiber-manual-record',
 			getViewType: _user$project$Entity$ProjectView,
 			getTabIndexAVForEntity: getTabIndexAVForEntity
@@ -132,7 +134,24 @@ var _user$project$GroupDoc_ViewModel$ViewModel = function (a) {
 		};
 	};
 };
-var _user$project$GroupDoc_ViewModel$Config = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {groupByFn: a, namePrefix: b, toEntity: c, nullEntity: d, isNull: e, nullIcon: f, defaultIconName: g, getViewType: h, getTabIndexAVForEntity: i};
-	});
+var _user$project$GroupDoc_ViewModel$Config = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {groupByFn: a, namePrefix: b, toEntity: c, nullEntity: d, isNull: e, nullIcon: f, defaultColor: g, defaultIconName: h, getViewType: i, getTabIndexAVForEntity: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};

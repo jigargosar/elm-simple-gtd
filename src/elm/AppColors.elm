@@ -51,11 +51,11 @@ defaultProjectColor =
 
 
 mixDefaultGroupColor =
-    Color.Mixing.fadeOut 0.3
+    Color.Mixing.lighten 0.2
 
 
 mixNullGroupColor =
-    Color.Mixing.fadeIn 0.1
+    Color.Mixing.lighten 0.3
 
 
 

@@ -136,6 +136,7 @@ a.primary-action {
 
 #landing {
   .logo-font {
+    text-rendering: geometricPrecision;
     margin: 0 1rem;
     font-family: Sriracha-Regular, sans-serif;
     font-size: 42px;
@@ -155,6 +156,7 @@ a.primary-action {
   }
 
   .logo-font-letter {
+    text-rendering: geometricPrecision;
     font-family: Sriracha-Regular, sans-serif;
     font-size: 2.8rem;
   }

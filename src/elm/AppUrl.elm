@@ -34,3 +34,7 @@ contact =
 
 getStarted =
     "/app"
+
+
+landing =
+    "/?landing=true"

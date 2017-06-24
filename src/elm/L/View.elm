@@ -26,7 +26,7 @@ navHeader =
     div [ class "navbar-fixed" ]
         [ nav []
             [ div [ class "nav-wrapper" ]
-                [ a [ class "brand-logo", href "/?landing=true" ]
+                [ a [ class "brand-logo", href AppUrl.landing ]
                     [ div [ class "layout horizontal center" ]
                         [ img [ src "/logo.png", class "logo" ] []
                         , div [ class "app-name" ] [ text "Simple GTD" ]

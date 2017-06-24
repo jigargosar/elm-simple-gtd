@@ -528,7 +528,7 @@ var _user$project$L_View$navHeader = A2(
 								_0: _elm_lang$html$Html_Attributes$class('brand-logo'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$href('/?landing=true'),
+									_0: _elm_lang$html$Html_Attributes$href(_user$project$AppUrl$landing),
 									_1: {ctor: '[]'}
 								}
 							},

@@ -30,3 +30,7 @@ github =
 
 contact =
     "mailto:jigar.gosar@gmail.com"
+
+
+getStarted =
+    "/app"

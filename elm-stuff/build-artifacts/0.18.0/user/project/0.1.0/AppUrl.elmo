@@ -1,3 +1,4 @@
+var _user$project$AppUrl$getStarted = '/app';
 var _user$project$AppUrl$contact = 'mailto:jigar.gosar@gmail.com';
 var _user$project$AppUrl$github = 'https://github.com/jigargosar/elm-simple-gtd';
 var _user$project$AppUrl$newIssueURL = 'https://github.com/jigargosar/elm-simple-gtd/issues/new';

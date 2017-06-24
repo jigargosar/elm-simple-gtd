@@ -3,3 +3,4 @@
 /dev/
 /*.log
 /out/
+/*.patch

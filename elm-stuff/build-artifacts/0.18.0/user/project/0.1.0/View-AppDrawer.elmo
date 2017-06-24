@@ -21,7 +21,11 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$a,
-				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$href(_user$project$AppUrl$landing),
+					_1: {ctor: '[]'}
+				},
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html$text(t1),

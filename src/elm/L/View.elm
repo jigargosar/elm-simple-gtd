@@ -1,5 +1,6 @@
 module L.View exposing (..)
 
+import AppUrl
 import Material
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -121,7 +122,7 @@ footerView =
     footer [ class "page-footer" ]
         [ div [ class "container footer" ]
             [ div [ class "row" ]
-                [ div [ class "col s12 m6 offset-m2" ]
+                [ div [ class "col s12" ]
                     [ {- h5 [] [ text "LEARN MORE" ]
                          ,
                       -}
@@ -146,11 +147,12 @@ learnMoreLinks =
         linkV ( hrefV, textV ) =
             li [] [ a [ class "white-text", href hrefV, target "_blank" ] [ text textV ] ]
     in
-        ul []
-            [ linkV ( "https://github.com/jigargosar/elm-simple-gtd", "Github" )
-            , linkV ( "", "Github" )
-            , linkV ( "", "Github" )
-            , linkV ( "", "Github" )
+        ul [ class "layout horizontal center-center" ]
+            [ linkV ( AppUrl.github, "Github" )
+            , linkV ( AppUrl.forumsURL, "Forums" )
+            , linkV ( AppUrl.newIssueURL, "Report Issue" )
+            , linkV ( AppUrl.changeLogURL, "Change Log" )
+            , linkV ( AppUrl.contact, "Contact us" )
             ]
 
 

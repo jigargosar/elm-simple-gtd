@@ -26,3 +26,7 @@ newIssueURL =
 
 github =
     "https://github.com/jigargosar/elm-simple-gtd"
+
+
+contact =
+    "mailto:jigar.gosar@gmail.com"

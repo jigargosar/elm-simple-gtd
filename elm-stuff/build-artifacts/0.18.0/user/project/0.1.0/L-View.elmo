@@ -113,24 +113,33 @@ var _user$project$L_View$learnMoreLinks = function () {
 	};
 	return A2(
 		_elm_lang$html$Html$ul,
-		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('layout horizontal center-center'),
+			_1: {ctor: '[]'}
+		},
 		{
 			ctor: '::',
 			_0: linkV(
-				{ctor: '_Tuple2', _0: 'https://github.com/jigargosar/elm-simple-gtd', _1: 'Github'}),
+				{ctor: '_Tuple2', _0: _user$project$AppUrl$github, _1: 'Github'}),
 			_1: {
 				ctor: '::',
 				_0: linkV(
-					{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+					{ctor: '_Tuple2', _0: _user$project$AppUrl$forumsURL, _1: 'Forums'}),
 				_1: {
 					ctor: '::',
 					_0: linkV(
-						{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+						{ctor: '_Tuple2', _0: _user$project$AppUrl$newIssueURL, _1: 'Report Issue'}),
 					_1: {
 						ctor: '::',
 						_0: linkV(
-							{ctor: '_Tuple2', _0: '', _1: 'Github'}),
-						_1: {ctor: '[]'}
+							{ctor: '_Tuple2', _0: _user$project$AppUrl$changeLogURL, _1: 'Change Log'}),
+						_1: {
+							ctor: '::',
+							_0: linkV(
+								{ctor: '_Tuple2', _0: _user$project$AppUrl$contact, _1: 'Contact us'}),
+							_1: {ctor: '[]'}
+						}
 					}
 				}
 			}
@@ -167,7 +176,7 @@ var _user$project$L_View$footerView = A2(
 							_elm_lang$html$Html$div,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('col s12 m6 offset-m2'),
+								_0: _elm_lang$html$Html_Attributes$class('col s12'),
 								_1: {ctor: '[]'}
 							},
 							{

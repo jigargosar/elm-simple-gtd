@@ -85,7 +85,7 @@ leftHeader m =
                     [ "v" ++ m.appVersion |> text ]
                 , a [ target "_blank", href AppUrl.newPostURL, tabindex -1 ]
                     [ text "Discuss" ]
-                , a [ target "_blank", href "mailto:jigar.gosar@gmail.com", tabindex -1 ]
+                , a [ target "_blank", href AppUrl.contact, tabindex -1 ]
                     [ text "Feedback" ]
                 ]
             ]

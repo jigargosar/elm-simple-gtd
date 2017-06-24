@@ -90,7 +90,7 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 										_0: _elm_lang$html$Html_Attributes$target('_blank'),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$href('mailto:jigar.gosar@gmail.com'),
+											_0: _elm_lang$html$Html_Attributes$href(_user$project$AppUrl$contact),
 											_1: {
 												ctor: '::',
 												_0: _elm_lang$html$Html_Attributes$tabindex(-1),

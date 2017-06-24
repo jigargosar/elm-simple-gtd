@@ -1,0 +1,450 @@
+var _danielnarey$elm_css_basics$CssBasics_Properties$property = {alignContent: 'align-content', alignItems: 'align-items', alignSelf: 'align-self', all: 'all', animation: 'animation', animationDelay: 'animation-delay', animationDirection: 'animation-direction', animationDuration: 'animation-duration', animationFillMode: 'animation-fill-mode', animationIterationCount: 'animation-iteration-count', animationName: 'animation-name', animationPlayState: 'animation-play-state', animationTimingFunction: 'animation-timing-function', azimuth: 'azimuth', backfaceVisibility: 'backface-visibility', backgroundAttachment: 'background-attachment', backgroundBlendMode: 'background-blend-mode', backgroundClip: 'background-clip', backgroundColor: 'background-color', backgroundImage: 'background-image', backgroundOrigin: 'background-origin', backgroundPosition: 'background-position', backgroundRepeat: 'background-repeat', backgroundSize: 'background-size', background: 'background', bleed: 'bleed', borderBottomColor: 'border-bottom-color', borderBottomLeftRadius: 'border-bottom-left-radius', borderBottomRightRadius: 'border-bottom-right-radius', borderBottomStyle: 'border-bottom-style', borderBottomWidth: 'border-bottom-width', borderBottom: 'border-bottom', borderCollapse: 'border-collapse', borderColor: 'border-color', borderImage: 'border-image', borderImageOutset: 'border-image-outset', borderImageRepeat: 'border-image-repeat', borderImageSource: 'border-image-source', borderImageSlice: 'border-image-slice', borderImageWidth: 'border-image-width', borderLeftColor: 'border-left-color', borderLeftStyle: 'border-left-style', borderLeftWidth: 'border-left-width', borderLeft: 'border-left', borderRadius: 'border-radius', borderRightColor: 'border-right-color', borderRightStyle: 'border-right-style', borderRightWidth: 'border-right-width', borderRight: 'border-right', borderSpacing: 'border-spacing', borderStyle: 'border-style', borderTopColor: 'border-top-color', borderTopLeftRadius: 'border-top-left-radius', borderTopRightRadius: 'border-top-right-radius', borderTopStyle: 'border-top-style', borderTopWidth: 'border-top-width', borderTop: 'border-top', borderWidth: 'border-width', border: 'border', bottom: 'bottom', boxDecorationBreak: 'box-decoration-break', boxShadow: 'box-shadow', boxSizing: 'box-sizing', breakAfter: 'break-after', breakBefore: 'break-before', breakInside: 'break-inside', captionSide: 'caption-side', clear: 'clear', clip: 'clip', color: 'color', columns: 'columns', columnCount: 'column-count', columnFill: 'column-fill', columnGap: 'column-gap', columnRule: 'column-rule', columnRuleColor: 'column-rule-color', columnRuleStyle: 'column-rule-style', columnRuleWidth: 'column-rule-width', columnSpan: 'column-span', columnWidth: 'column-width', content: 'content', counterIncrement: 'counter-increment', counterReset: 'counter-reset', cueAfter: 'cue-after', cueBefore: 'cue-before', cue: 'cue', cursor: 'cursor', direction: 'direction', display: 'display', elevation: 'elevation', emptyCells: 'empty-cells', filter: 'filter', flex: 'flex', flexBasis: 'flex-basis', flexDirection: 'flex-direction', flexFlow: 'flex-flow', flexGrow: 'flex-grow', flexShrink: 'flex-shrink', flexWrap: 'flex-wrap', $float: 'float', fontFamily: 'font-family', fontKerning: 'font-kerning', fontSizeAdjust: 'font-size-adjust', fontSize: 'font-size', fontStretch: 'font-stretch', fontStyle: 'font-style', fontVariant: 'font-variant', fontWeight: 'font-weight', font: 'font', hangingPunctuation: 'hanging-punctuation', height: 'height', hyphens: 'hyphens', isolation: 'isolation', justifyContent: 'justify-content', left: 'left', letterSpacing: 'letter-spacing', lineBreak: 'line-break', lineHeight: 'line-height', listStyleImage: 'list-style-image', listStylePosition: 'list-style-position', listStyleType: 'list-style-type', listStyle: 'list-style', marginBottom: 'margin-bottom', marginLeft: 'margin-left', marginRight: 'margin-right', marginTop: 'margin-top', margin: 'margin', markerOffset: 'marker-offset', marks: 'marks', maxHeight: 'max-height', maxWidth: 'max-width', minHeight: 'min-height', minWidth: 'min-width', mixBlendMode: 'mix-blend-mode', navUp: 'nav-up', navDown: 'nav-down', navLeft: 'nav-left', navRight: 'nav-right', opacity: 'opacity', order: 'order', orphans: 'orphans', outlineColor: 'outline-color', outlineOffset: 'outline-offset', outlineStyle: 'outline-style', outlineWidth: 'outline-width', outline: 'outline', overflow: 'overflow', overflowWrap: 'overflow-wrap', overflowX: 'overflow-x', overflowY: 'overflow-y', paddingBottom: 'padding-bottom', paddingLeft: 'padding-left', paddingRight: 'padding-right', paddingTop: 'padding-top', padding: 'padding', pageBreakAfter: 'page-break-after', pageBreakBefore: 'page-break-before', pageBreakInside: 'page-break-inside', page: 'page', pauseAfter: 'pause-after', pauseBefore: 'pause-before', pause: 'pause', perspective: 'perspective', perspectiveOrigin: 'perspective-origin', pitchRange: 'pitch-range', pitch: 'pitch', playDuring: 'play-during', position: 'position', quotes: 'quotes', resize: 'resize', restAfter: 'rest-after', restBefore: 'rest-before', rest: 'rest', richness: 'richness', right: 'right', size: 'size', speakHeader: 'speak-header', speakNumeral: 'speak-numeral', speakPunctuation: 'speak-punctuation', speak: 'speak', speechRate: 'speech-rate', stress: 'stress', tabSize: 'tab-size', tableLayout: 'table-layout', textAlign: 'text-align', textAlignLast: 'text-align-last', textDecoration: 'text-decoration', textDecorationColor: 'text-decoration-color', textDecorationLine: 'text-decoration-line', textDecorationSkip: 'text-decoration-skip', textDecorationStyle: 'text-decoration-style', textIndent: 'text-indent', textOverflow: 'text-overflow', textShadow: 'text-shadow', textTransform: 'text-transform', textUnderlinePosition: 'text-underline-position', top: 'top', transform: 'transform', transformOrigin: 'transform-origin', transformStyle: 'transform-style', transition: 'transition', transitionDelay: 'transition-delay', transitionDuration: 'transition-duration', transitionProperty: 'transition-property', transitionTimingFunction: 'transition-timing-function', unicodeBidi: 'unicode-bidi', verticalAlign: 'vertical-align', visibility: 'visibility', voiceBalance: 'voice-balance', voiceDuration: 'voice-duration', voiceFamily: 'voice-family', voicePitch: 'voice-pitch', voiceRange: 'voice-range', voiceRate: 'voice-rate', voiceStress: 'voice-stress', voiceVolume: 'voice-volume', volume: 'volume', whiteSpace: 'white-space', widows: 'widows', width: 'width', wordBreak: 'word-break', wordSpacing: 'word-spacing', wordWrap: 'word-wrap', zIndex: 'z-index'};
+var _danielnarey$elm_css_basics$CssBasics_Properties$Property = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return function (p) {
+																return function (q) {
+																	return function (r) {
+																		return function (s) {
+																			return function (t) {
+																				return function (u) {
+																					return function (v) {
+																						return function (w) {
+																							return function (x) {
+																								return function (y) {
+																									return function (z) {
+																										return function (_1) {
+																											return function (_2) {
+																												return function (_3) {
+																													return function (_4) {
+																														return function (_5) {
+																															return function (_6) {
+																																return function (_7) {
+																																	return function (_8) {
+																																		return function (_9) {
+																																			return function (_10) {
+																																				return function (_11) {
+																																					return function (_12) {
+																																						return function (_13) {
+																																							return function (_14) {
+																																								return function (_15) {
+																																									return function (_16) {
+																																										return function (_17) {
+																																											return function (_18) {
+																																												return function (_19) {
+																																													return function (_20) {
+																																														return function (_21) {
+																																															return function (_22) {
+																																																return function (_23) {
+																																																	return function (_24) {
+																																																		return function (_25) {
+																																																			return function (_26) {
+																																																				return function (_27) {
+																																																					return function (_28) {
+																																																						return function (_29) {
+																																																							return function (_30) {
+																																																								return function (_31) {
+																																																									return function (_32) {
+																																																										return function (_33) {
+																																																											return function (_34) {
+																																																												return function (_35) {
+																																																													return function (_36) {
+																																																														return function (_37) {
+																																																															return function (_38) {
+																																																																return function (_39) {
+																																																																	return function (_40) {
+																																																																		return function (_41) {
+																																																																			return function (_42) {
+																																																																				return function (_43) {
+																																																																					return function (_44) {
+																																																																						return function (_45) {
+																																																																							return function (_46) {
+																																																																								return function (_47) {
+																																																																									return function (_48) {
+																																																																										return function (_49) {
+																																																																											return function (_50) {
+																																																																												return function (_51) {
+																																																																													return function (_52) {
+																																																																														return function (_53) {
+																																																																															return function (_54) {
+																																																																																return function (_55) {
+																																																																																	return function (_56) {
+																																																																																		return function (_57) {
+																																																																																			return function (_58) {
+																																																																																				return function (_59) {
+																																																																																					return function (_60) {
+																																																																																						return function (_61) {
+																																																																																							return function (_62) {
+																																																																																								return function (_63) {
+																																																																																									return function (_64) {
+																																																																																										return function (_65) {
+																																																																																											return function (_66) {
+																																																																																												return function (_67) {
+																																																																																													return function (_68) {
+																																																																																														return function (_69) {
+																																																																																															return function (_70) {
+																																																																																																return function (_71) {
+																																																																																																	return function (_72) {
+																																																																																																		return function (_73) {
+																																																																																																			return function (_74) {
+																																																																																																				return function (_75) {
+																																																																																																					return function (_76) {
+																																																																																																						return function (_77) {
+																																																																																																							return function (_78) {
+																																																																																																								return function (_79) {
+																																																																																																									return function (_80) {
+																																																																																																										return function (_81) {
+																																																																																																											return function (_82) {
+																																																																																																												return function (_83) {
+																																																																																																													return function (_84) {
+																																																																																																														return function (_85) {
+																																																																																																															return function (_86) {
+																																																																																																																return function (_87) {
+																																																																																																																	return function (_88) {
+																																																																																																																		return function (_89) {
+																																																																																																																			return function (_90) {
+																																																																																																																				return function (_91) {
+																																																																																																																					return function (_92) {
+																																																																																																																						return function (_93) {
+																																																																																																																							return function (_94) {
+																																																																																																																								return function (_95) {
+																																																																																																																									return function (_96) {
+																																																																																																																										return function (_97) {
+																																																																																																																											return function (_98) {
+																																																																																																																												return function (_99) {
+																																																																																																																													return function (_100) {
+																																																																																																																														return function (_101) {
+																																																																																																																															return function (_102) {
+																																																																																																																																return function (_103) {
+																																																																																																																																	return function (_104) {
+																																																																																																																																		return function (_105) {
+																																																																																																																																			return function (_106) {
+																																																																																																																																				return function (_107) {
+																																																																																																																																					return function (_108) {
+																																																																																																																																						return function (_109) {
+																																																																																																																																							return function (_110) {
+																																																																																																																																								return function (_111) {
+																																																																																																																																									return function (_112) {
+																																																																																																																																										return function (_113) {
+																																																																																																																																											return function (_114) {
+																																																																																																																																												return function (_115) {
+																																																																																																																																													return function (_116) {
+																																																																																																																																														return function (_117) {
+																																																																																																																																															return function (_118) {
+																																																																																																																																																return function (_119) {
+																																																																																																																																																	return function (_120) {
+																																																																																																																																																		return function (_121) {
+																																																																																																																																																			return function (_122) {
+																																																																																																																																																				return function (_123) {
+																																																																																																																																																					return function (_124) {
+																																																																																																																																																						return function (_125) {
+																																																																																																																																																							return function (_126) {
+																																																																																																																																																								return function (_127) {
+																																																																																																																																																									return function (_128) {
+																																																																																																																																																										return function (_129) {
+																																																																																																																																																											return function (_130) {
+																																																																																																																																																												return function (_131) {
+																																																																																																																																																													return function (_132) {
+																																																																																																																																																														return function (_133) {
+																																																																																																																																																															return function (_134) {
+																																																																																																																																																																return function (_135) {
+																																																																																																																																																																	return function (_136) {
+																																																																																																																																																																		return function (_137) {
+																																																																																																																																																																			return function (_138) {
+																																																																																																																																																																				return function (_139) {
+																																																																																																																																																																					return function (_140) {
+																																																																																																																																																																						return function (_141) {
+																																																																																																																																																																							return function (_142) {
+																																																																																																																																																																								return function (_143) {
+																																																																																																																																																																									return function (_144) {
+																																																																																																																																																																										return function (_145) {
+																																																																																																																																																																											return function (_146) {
+																																																																																																																																																																												return function (_147) {
+																																																																																																																																																																													return function (_148) {
+																																																																																																																																																																														return function (_149) {
+																																																																																																																																																																															return function (_150) {
+																																																																																																																																																																																return function (_151) {
+																																																																																																																																																																																	return function (_152) {
+																																																																																																																																																																																		return function (_153) {
+																																																																																																																																																																																			return function (_154) {
+																																																																																																																																																																																				return function (_155) {
+																																																																																																																																																																																					return function (_156) {
+																																																																																																																																																																																						return function (_157) {
+																																																																																																																																																																																							return function (_158) {
+																																																																																																																																																																																								return function (_159) {
+																																																																																																																																																																																									return function (_160) {
+																																																																																																																																																																																										return function (_161) {
+																																																																																																																																																																																											return function (_162) {
+																																																																																																																																																																																												return function (_163) {
+																																																																																																																																																																																													return function (_164) {
+																																																																																																																																																																																														return function (_165) {
+																																																																																																																																																																																															return function (_166) {
+																																																																																																																																																																																																return function (_167) {
+																																																																																																																																																																																																	return function (_168) {
+																																																																																																																																																																																																		return function (_169) {
+																																																																																																																																																																																																			return function (_170) {
+																																																																																																																																																																																																				return function (_171) {
+																																																																																																																																																																																																					return function (_172) {
+																																																																																																																																																																																																						return function (_173) {
+																																																																																																																																																																																																							return function (_174) {
+																																																																																																																																																																																																								return function (_175) {
+																																																																																																																																																																																																									return function (_176) {
+																																																																																																																																																																																																										return function (_177) {
+																																																																																																																																																																																																											return function (_178) {
+																																																																																																																																																																																																												return function (_179) {
+																																																																																																																																																																																																													return function (_180) {
+																																																																																																																																																																																																														return function (_181) {
+																																																																																																																																																																																																															return function (_182) {
+																																																																																																																																																																																																																return function (_183) {
+																																																																																																																																																																																																																	return function (_184) {
+																																																																																																																																																																																																																		return function (_185) {
+																																																																																																																																																																																																																			return function (_186) {
+																																																																																																																																																																																																																				return function (_187) {
+																																																																																																																																																																																																																					return function (_188) {
+																																																																																																																																																																																																																						return function (_189) {
+																																																																																																																																																																																																																							return function (_190) {
+																																																																																																																																																																																																																								return function (_191) {
+																																																																																																																																																																																																																									return function (_192) {
+																																																																																																																																																																																																																										return function (_193) {
+																																																																																																																																																																																																																											return function (_194) {
+																																																																																																																																																																																																																												return function (_195) {
+																																																																																																																																																																																																																													return function (_196) {
+																																																																																																																																																																																																																														return function (_197) {
+																																																																																																																																																																																																																															return function (_198) {
+																																																																																																																																																																																																																																return {alignContent: a, alignItems: b, alignSelf: c, all: d, animation: e, animationDelay: f, animationDirection: g, animationDuration: h, animationFillMode: i, animationIterationCount: j, animationName: k, animationPlayState: l, animationTimingFunction: m, azimuth: n, backfaceVisibility: o, backgroundAttachment: p, backgroundBlendMode: q, backgroundClip: r, backgroundColor: s, backgroundImage: t, backgroundOrigin: u, backgroundPosition: v, backgroundRepeat: w, backgroundSize: x, background: y, bleed: z, borderBottomColor: _1, borderBottomLeftRadius: _2, borderBottomRightRadius: _3, borderBottomStyle: _4, borderBottomWidth: _5, borderBottom: _6, borderCollapse: _7, borderColor: _8, borderImage: _9, borderImageOutset: _10, borderImageRepeat: _11, borderImageSource: _12, borderImageSlice: _13, borderImageWidth: _14, borderLeftColor: _15, borderLeftStyle: _16, borderLeftWidth: _17, borderLeft: _18, borderRadius: _19, borderRightColor: _20, borderRightStyle: _21, borderRightWidth: _22, borderRight: _23, borderSpacing: _24, borderStyle: _25, borderTopColor: _26, borderTopLeftRadius: _27, borderTopRightRadius: _28, borderTopStyle: _29, borderTopWidth: _30, borderTop: _31, borderWidth: _32, border: _33, bottom: _34, boxDecorationBreak: _35, boxShadow: _36, boxSizing: _37, breakAfter: _38, breakBefore: _39, breakInside: _40, captionSide: _41, clear: _42, clip: _43, color: _44, columns: _45, columnCount: _46, columnFill: _47, columnGap: _48, columnRule: _49, columnRuleColor: _50, columnRuleStyle: _51, columnRuleWidth: _52, columnSpan: _53, columnWidth: _54, content: _55, counterIncrement: _56, counterReset: _57, cueAfter: _58, cueBefore: _59, cue: _60, cursor: _61, direction: _62, display: _63, elevation: _64, emptyCells: _65, filter: _66, flex: _67, flexBasis: _68, flexDirection: _69, flexFlow: _70, flexGrow: _71, flexShrink: _72, flexWrap: _73, $float: _74, fontFamily: _75, fontKerning: _76, fontSizeAdjust: _77, fontSize: _78, fontStretch: _79, fontStyle: _80, fontVariant: _81, fontWeight: _82, font: _83, hangingPunctuation: _84, height: _85, hyphens: _86, isolation: _87, justifyContent: _88, left: _89, letterSpacing: _90, lineBreak: _91, lineHeight: _92, listStyleImage: _93, listStylePosition: _94, listStyleType: _95, listStyle: _96, marginBottom: _97, marginLeft: _98, marginRight: _99, marginTop: _100, margin: _101, markerOffset: _102, marks: _103, maxHeight: _104, maxWidth: _105, minHeight: _106, minWidth: _107, mixBlendMode: _108, navUp: _109, navDown: _110, navLeft: _111, navRight: _112, opacity: _113, order: _114, orphans: _115, outlineColor: _116, outlineOffset: _117, outlineStyle: _118, outlineWidth: _119, outline: _120, overflow: _121, overflowWrap: _122, overflowX: _123, overflowY: _124, paddingBottom: _125, paddingLeft: _126, paddingRight: _127, paddingTop: _128, padding: _129, pageBreakAfter: _130, pageBreakBefore: _131, pageBreakInside: _132, page: _133, pauseAfter: _134, pauseBefore: _135, pause: _136, perspective: _137, perspectiveOrigin: _138, pitchRange: _139, pitch: _140, playDuring: _141, position: _142, quotes: _143, resize: _144, restAfter: _145, restBefore: _146, rest: _147, richness: _148, right: _149, size: _150, speakHeader: _151, speakNumeral: _152, speakPunctuation: _153, speak: _154, speechRate: _155, stress: _156, tabSize: _157, tableLayout: _158, textAlign: _159, textAlignLast: _160, textDecoration: _161, textDecorationColor: _162, textDecorationLine: _163, textDecorationSkip: _164, textDecorationStyle: _165, textIndent: _166, textOverflow: _167, textShadow: _168, textTransform: _169, textUnderlinePosition: _170, top: _171, transform: _172, transformOrigin: _173, transformStyle: _174, transition: _175, transitionDelay: _176, transitionDuration: _177, transitionProperty: _178, transitionTimingFunction: _179, unicodeBidi: _180, verticalAlign: _181, visibility: _182, voiceBalance: _183, voiceDuration: _184, voiceFamily: _185, voicePitch: _186, voiceRange: _187, voiceRate: _188, voiceStress: _189, voiceVolume: _190, volume: _191, whiteSpace: _192, widows: _193, width: _194, wordBreak: _195, wordSpacing: _196, wordWrap: _197, zIndex: _198};
+																																																																																																																																																																																																																															};
+																																																																																																																																																																																																																														};
+																																																																																																																																																																																																																													};
+																																																																																																																																																																																																																												};
+																																																																																																																																																																																																																											};
+																																																																																																																																																																																																																										};
+																																																																																																																																																																																																																									};
+																																																																																																																																																																																																																								};
+																																																																																																																																																																																																																							};
+																																																																																																																																																																																																																						};
+																																																																																																																																																																																																																					};
+																																																																																																																																																																																																																				};
+																																																																																																																																																																																																																			};
+																																																																																																																																																																																																																		};
+																																																																																																																																																																																																																	};
+																																																																																																																																																																																																																};
+																																																																																																																																																																																																															};
+																																																																																																																																																																																																														};
+																																																																																																																																																																																																													};
+																																																																																																																																																																																																												};
+																																																																																																																																																																																																											};
+																																																																																																																																																																																																										};
+																																																																																																																																																																																																									};
+																																																																																																																																																																																																								};
+																																																																																																																																																																																																							};
+																																																																																																																																																																																																						};
+																																																																																																																																																																																																					};
+																																																																																																																																																																																																				};
+																																																																																																																																																																																																			};
+																																																																																																																																																																																																		};
+																																																																																																																																																																																																	};
+																																																																																																																																																																																																};
+																																																																																																																																																																																															};
+																																																																																																																																																																																														};
+																																																																																																																																																																																													};
+																																																																																																																																																																																												};
+																																																																																																																																																																																											};
+																																																																																																																																																																																										};
+																																																																																																																																																																																									};
+																																																																																																																																																																																								};
+																																																																																																																																																																																							};
+																																																																																																																																																																																						};
+																																																																																																																																																																																					};
+																																																																																																																																																																																				};
+																																																																																																																																																																																			};
+																																																																																																																																																																																		};
+																																																																																																																																																																																	};
+																																																																																																																																																																																};
+																																																																																																																																																																															};
+																																																																																																																																																																														};
+																																																																																																																																																																													};
+																																																																																																																																																																												};
+																																																																																																																																																																											};
+																																																																																																																																																																										};
+																																																																																																																																																																									};
+																																																																																																																																																																								};
+																																																																																																																																																																							};
+																																																																																																																																																																						};
+																																																																																																																																																																					};
+																																																																																																																																																																				};
+																																																																																																																																																																			};
+																																																																																																																																																																		};
+																																																																																																																																																																	};
+																																																																																																																																																																};
+																																																																																																																																																															};
+																																																																																																																																																														};
+																																																																																																																																																													};
+																																																																																																																																																												};
+																																																																																																																																																											};
+																																																																																																																																																										};
+																																																																																																																																																									};
+																																																																																																																																																								};
+																																																																																																																																																							};
+																																																																																																																																																						};
+																																																																																																																																																					};
+																																																																																																																																																				};
+																																																																																																																																																			};
+																																																																																																																																																		};
+																																																																																																																																																	};
+																																																																																																																																																};
+																																																																																																																																															};
+																																																																																																																																														};
+																																																																																																																																													};
+																																																																																																																																												};
+																																																																																																																																											};
+																																																																																																																																										};
+																																																																																																																																									};
+																																																																																																																																								};
+																																																																																																																																							};
+																																																																																																																																						};
+																																																																																																																																					};
+																																																																																																																																				};
+																																																																																																																																			};
+																																																																																																																																		};
+																																																																																																																																	};
+																																																																																																																																};
+																																																																																																																															};
+																																																																																																																														};
+																																																																																																																													};
+																																																																																																																												};
+																																																																																																																											};
+																																																																																																																										};
+																																																																																																																									};
+																																																																																																																								};
+																																																																																																																							};
+																																																																																																																						};
+																																																																																																																					};
+																																																																																																																				};
+																																																																																																																			};
+																																																																																																																		};
+																																																																																																																	};
+																																																																																																																};
+																																																																																																															};
+																																																																																																														};
+																																																																																																													};
+																																																																																																												};
+																																																																																																											};
+																																																																																																										};
+																																																																																																									};
+																																																																																																								};
+																																																																																																							};
+																																																																																																						};
+																																																																																																					};
+																																																																																																				};
+																																																																																																			};
+																																																																																																		};
+																																																																																																	};
+																																																																																																};
+																																																																																															};
+																																																																																														};
+																																																																																													};
+																																																																																												};
+																																																																																											};
+																																																																																										};
+																																																																																									};
+																																																																																								};
+																																																																																							};
+																																																																																						};
+																																																																																					};
+																																																																																				};
+																																																																																			};
+																																																																																		};
+																																																																																	};
+																																																																																};
+																																																																															};
+																																																																														};
+																																																																													};
+																																																																												};
+																																																																											};
+																																																																										};
+																																																																									};
+																																																																								};
+																																																																							};
+																																																																						};
+																																																																					};
+																																																																				};
+																																																																			};
+																																																																		};
+																																																																	};
+																																																																};
+																																																															};
+																																																														};
+																																																													};
+																																																												};
+																																																											};
+																																																										};
+																																																									};
+																																																								};
+																																																							};
+																																																						};
+																																																					};
+																																																				};
+																																																			};
+																																																		};
+																																																	};
+																																																};
+																																															};
+																																														};
+																																													};
+																																												};
+																																											};
+																																										};
+																																									};
+																																								};
+																																							};
+																																						};
+																																					};
+																																				};
+																																			};
+																																		};
+																																	};
+																																};
+																															};
+																														};
+																													};
+																												};
+																											};
+																										};
+																									};
+																								};
+																							};
+																						};
+																					};
+																				};
+																			};
+																		};
+																	};
+																};
+															};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};

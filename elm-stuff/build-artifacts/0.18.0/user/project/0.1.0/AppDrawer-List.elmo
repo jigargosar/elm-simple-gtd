@@ -110,7 +110,10 @@ var _user$project$AppDrawer_List$entityListItem = function (vm) {
 					_0: _elm_lang$html$Html_Attributes$style(
 						{
 							ctor: '::',
-							_0: A2(_user$project$X_Function_Infix_ops['=>'], 'color', vm.icon.color),
+							_0: A2(
+								_user$project$X_Function_Infix_ops['=>'],
+								'color',
+								_user$project$AppColors$encode(vm.icon.color)),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -249,7 +252,10 @@ var _user$project$AppDrawer_List$entityGroupView = F2(
 								_0: _elm_lang$html$Html_Attributes$style(
 									{
 										ctor: '::',
-										_0: A2(_user$project$X_Function_Infix_ops['=>'], 'color', vm.icon.color),
+										_0: A2(
+											_user$project$X_Function_Infix_ops['=>'],
+											'color',
+											_user$project$AppColors$encode(vm.icon.color)),
 										_1: {ctor: '[]'}
 									}),
 								_1: {ctor: '[]'}

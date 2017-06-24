@@ -1,3 +1,7 @@
+var _user$project$AppColors$encode = function (_p0) {
+	return _danielnarey$elm_css_basics$CssBasics$encodeCssValue(
+		_danielnarey$elm_css_basics$CssBasics$Col(_p0));
+};
 var _user$project$AppColors$sgtdBlue = A3(_elm_lang$core$Color$rgb, 33, 150, 243);
 var _user$project$AppColors$defaultGroupColor = _user$project$AppColors$sgtdBlue;
 var _user$project$AppColors$defaultProjectColor = A3(_elm_lang$core$Color$rgb, 124, 77, 255);

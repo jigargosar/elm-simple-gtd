@@ -162,7 +162,10 @@ var _user$project$View_AppDrawer$view = F2(
 												_0: A2(_user$project$X_Function_Infix_ops['=>'], 'color', 'white'),
 												_1: {
 													ctor: '::',
-													_0: A2(_user$project$X_Function_Infix_ops['=>'], 'background-color', appVM.header.backgroundColor),
+													_0: A2(
+														_user$project$X_Function_Infix_ops['=>'],
+														'background-color',
+														_user$project$AppColors$encode(appVM.header.backgroundColor)),
 													_1: {ctor: '[]'}
 												}
 											}),

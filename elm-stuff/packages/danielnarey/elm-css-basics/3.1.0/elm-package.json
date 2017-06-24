@@ -1,0 +1,19 @@
+{
+    "version": "3.1.0",
+    "summary": "Some basic helpers for generating CSS style declarations in Elm",
+    "repository": "https://github.com/danielnarey/elm-css-basics.git",
+    "license": "BSD2",
+    "source-directories": [
+        "./src",
+        "./src/CssBasics"
+    ],
+    "exposed-modules": [
+        "CssBasics",
+        "CssBasics.Properties"
+    ],
+    "dependencies": {
+        "elm-lang/core": "5.0.0 <= v < 6.0.0",
+        "elm-lang/html": "2.0.0 <= v < 3.0.0"
+    },
+    "elm-version": "0.18.0 <= v < 0.19.0"
+}

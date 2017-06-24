@@ -1,5 +1,6 @@
 module View.Header exposing (..)
 
+import AppColors
 import AppUrl
 import ExclusiveMode
 import X.Html exposing (boolProperty)
@@ -50,7 +51,7 @@ init viewModel m =
             [ App.toolbar
                 [ style
                     [ "color" => "white"
-                    , "background-color" => viewModel.header.backgroundColor
+                    , "background-color" => AppColors.encode viewModel.header.backgroundColor
                     ]
                 ]
                 (headerView viewModel m)

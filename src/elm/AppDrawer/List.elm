@@ -1,5 +1,7 @@
 module AppDrawer.List exposing (..)
 
+import AppColors
+import CssBasics
 import X.Html exposing (onClickStopPropagation)
 import Material
 import Toolkit.Helpers exposing (..)
@@ -104,7 +106,7 @@ entityGroupView vm mainViewType =
     in
         nullViewAsList
             ++ [ li [ onClick fireSmart ]
-                    [ Material.iconA vm.icon.name [ style [ "color" => vm.icon.color ] ]
+                    [ Material.iconA vm.icon.name [ style [ "color" => AppColors.encode vm.icon.color ] ]
                     , Html.h5 [] [ text vm.title ]
                     , Material.iconButton expandIconName [ onClickStopPropagation onToggleExpanded ]
                     ]
@@ -163,7 +165,7 @@ entityListItem vm =
     li
         [ onClick (vm.onActiveStateChanged True)
         ]
-        [ Material.iconA vm.icon.name [ style [ "color" => vm.icon.color ] ]
+        [ Material.iconA vm.icon.name [ style [ "color" => AppColors.encode vm.icon.color ] ]
         , div [ class "font-nowrap" ] [ View.Shared.defaultBadge vm ]
         ]
 

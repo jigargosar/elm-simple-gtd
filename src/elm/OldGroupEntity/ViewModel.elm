@@ -54,7 +54,7 @@ type alias ViewModel =
 type alias DocumentWithNameViewModel =
     { id : String
     , name : String
-    , appHeader : { name : String, backgroundColor : String }
+    , appHeader : { name : String, backgroundColor : Color.Color }
     , isDeleted : Bool
     , isEmpty : Bool
     , count : Int

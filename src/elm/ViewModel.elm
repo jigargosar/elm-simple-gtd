@@ -1,6 +1,7 @@
 module ViewModel exposing (..)
 
 import AppColors
+import Color
 import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
@@ -27,7 +28,7 @@ type alias Model =
     { contexts : OldGroupEntity.ViewModel.ViewModel
     , projects : OldGroupEntity.ViewModel.ViewModel
     , viewName : String
-    , header : { backgroundColor : String }
+    , header : { backgroundColor : Color.Color }
     , now : Time
     , projectByIdDict : Dict Id Project.Model
     , contextByIdDict : Dict Id Context.Model

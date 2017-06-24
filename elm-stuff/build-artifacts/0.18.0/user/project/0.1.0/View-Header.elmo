@@ -294,7 +294,10 @@ var _user$project$View_Header$init = F2(
 								_0: A2(_user$project$X_Function_Infix_ops['=>'], 'color', 'white'),
 								_1: {
 									ctor: '::',
-									_0: A2(_user$project$X_Function_Infix_ops['=>'], 'background-color', viewModel.header.backgroundColor),
+									_0: A2(
+										_user$project$X_Function_Infix_ops['=>'],
+										'background-color',
+										_user$project$AppColors$encode(viewModel.header.backgroundColor)),
 									_1: {ctor: '[]'}
 								}
 							}),

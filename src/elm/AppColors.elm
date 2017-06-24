@@ -1,6 +1,7 @@
 module AppColors exposing (..)
 
 import Color
+import CssBasics
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -58,3 +59,7 @@ defaultGroupColor =
 --    --paper-grey-500
 --    Color.rgb
 --    "#9e9e9e"
+
+
+encode =
+    CssBasics.Col >> CssBasics.encodeCssValue

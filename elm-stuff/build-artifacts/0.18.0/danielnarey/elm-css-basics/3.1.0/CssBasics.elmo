@@ -1,0 +1,184 @@
+var _danielnarey$elm_css_basics$CssBasics$encodeCssValue = function (value) {
+	var unitToString = function (unit) {
+		var _p0 = unit;
+		switch (_p0.ctor) {
+			case 'Percent':
+				return '%';
+			case 'NoUnit':
+				return '';
+			default:
+				return _elm_lang$core$String$toLower(
+					_elm_lang$core$Basics$toString(unit));
+		}
+	};
+	var quoteMultiWord = function (string) {
+		return (_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(
+				_elm_lang$core$String$words(string)),
+			1) > 0) ? A2(
+			_elm_lang$core$Basics_ops['++'],
+			'\'',
+			A2(_elm_lang$core$Basics_ops['++'], string, '\'')) : string;
+	};
+	var rgbToString = function (rgb) {
+		return _elm_lang$core$String$concat(
+			{
+				ctor: '::',
+				_0: 'rgba(',
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$core$Basics$toString(rgb.red),
+					_1: {
+						ctor: '::',
+						_0: ',',
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$core$Basics$toString(rgb.green),
+							_1: {
+								ctor: '::',
+								_0: ',',
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$core$Basics$toString(rgb.blue),
+									_1: {
+										ctor: '::',
+										_0: ',',
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$core$Basics$toString(rgb.alpha),
+											_1: {
+												ctor: '::',
+												_0: ')',
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			});
+	};
+	var _p1 = value;
+	switch (_p1.ctor) {
+		case 'Str':
+			return _p1._0;
+		case 'Col':
+			return rgbToString(
+				_elm_lang$core$Color$toRgb(_p1._0));
+		case 'Num':
+			return _elm_lang$core$Basics$toString(_p1._0);
+		case 'Integer':
+			return _elm_lang$core$Basics$toString(_p1._0);
+		case 'Unit':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(_p1._0),
+				unitToString(_p1._1));
+		case 'FontStack':
+			return A2(
+				_elm_lang$core$String$join,
+				',',
+				A2(_elm_lang$core$List$map, quoteMultiWord, _p1._0));
+		case 'Sides':
+			return A2(
+				_elm_lang$core$String$join,
+				' ',
+				A2(_elm_lang$core$List$map, _danielnarey$elm_css_basics$CssBasics$encodeCssValue, _p1._0));
+		case 'Multiple':
+			return A2(
+				_elm_lang$core$String$join,
+				_p1._0,
+				A2(_elm_lang$core$List$map, _danielnarey$elm_css_basics$CssBasics$encodeCssValue, _p1._1));
+		case 'Important':
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				_danielnarey$elm_css_basics$CssBasics$encodeCssValue(_p1._0),
+				'!important');
+		default:
+			return 'inherit';
+	}
+};
+var _danielnarey$elm_css_basics$CssBasics$encodeDeclaration = function (_p2) {
+	var _p3 = _p2;
+	return _elm_lang$core$String$concat(
+		{
+			ctor: '::',
+			_0: _p3._0,
+			_1: {
+				ctor: '::',
+				_0: ':',
+				_1: {
+					ctor: '::',
+					_0: _danielnarey$elm_css_basics$CssBasics$encodeCssValue(_p3._1),
+					_1: {
+						ctor: '::',
+						_0: ';',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};
+var _danielnarey$elm_css_basics$CssBasics$toStyleAttribute = function (declarationList) {
+	return _elm_lang$html$Html_Attributes$style(
+		A2(
+			_elm_lang$core$List$map,
+			_elm_lang$core$Tuple$mapSecond(_danielnarey$elm_css_basics$CssBasics$encodeCssValue),
+			declarationList));
+};
+var _danielnarey$elm_css_basics$CssBasics$Undefined = {ctor: 'Undefined'};
+var _danielnarey$elm_css_basics$CssBasics$Important = function (a) {
+	return {ctor: 'Important', _0: a};
+};
+var _danielnarey$elm_css_basics$CssBasics$important = function (_p4) {
+	var _p5 = _p4;
+	return {
+		ctor: '_Tuple2',
+		_0: _p5._0,
+		_1: _danielnarey$elm_css_basics$CssBasics$Important(_p5._1)
+	};
+};
+var _danielnarey$elm_css_basics$CssBasics$Multiple = F2(
+	function (a, b) {
+		return {ctor: 'Multiple', _0: a, _1: b};
+	});
+var _danielnarey$elm_css_basics$CssBasics$Sides = function (a) {
+	return {ctor: 'Sides', _0: a};
+};
+var _danielnarey$elm_css_basics$CssBasics$FontStack = function (a) {
+	return {ctor: 'FontStack', _0: a};
+};
+var _danielnarey$elm_css_basics$CssBasics$Unit = F2(
+	function (a, b) {
+		return {ctor: 'Unit', _0: a, _1: b};
+	});
+var _danielnarey$elm_css_basics$CssBasics$Integer = function (a) {
+	return {ctor: 'Integer', _0: a};
+};
+var _danielnarey$elm_css_basics$CssBasics$Num = function (a) {
+	return {ctor: 'Num', _0: a};
+};
+var _danielnarey$elm_css_basics$CssBasics$Col = function (a) {
+	return {ctor: 'Col', _0: a};
+};
+var _danielnarey$elm_css_basics$CssBasics$Str = function (a) {
+	return {ctor: 'Str', _0: a};
+};
+var _danielnarey$elm_css_basics$CssBasics$NoUnit = {ctor: 'NoUnit'};
+var _danielnarey$elm_css_basics$CssBasics$Vmax = {ctor: 'Vmax'};
+var _danielnarey$elm_css_basics$CssBasics$Vmin = {ctor: 'Vmin'};
+var _danielnarey$elm_css_basics$CssBasics$Vw = {ctor: 'Vw'};
+var _danielnarey$elm_css_basics$CssBasics$Vh = {ctor: 'Vh'};
+var _danielnarey$elm_css_basics$CssBasics$Pc = {ctor: 'Pc'};
+var _danielnarey$elm_css_basics$CssBasics$Pt = {ctor: 'Pt'};
+var _danielnarey$elm_css_basics$CssBasics$In = {ctor: 'In'};
+var _danielnarey$elm_css_basics$CssBasics$Mm = {ctor: 'Mm'};
+var _danielnarey$elm_css_basics$CssBasics$Cm = {ctor: 'Cm'};
+var _danielnarey$elm_css_basics$CssBasics$Px = {ctor: 'Px'};
+var _danielnarey$elm_css_basics$CssBasics$Rem = {ctor: 'Rem'};
+var _danielnarey$elm_css_basics$CssBasics$Ch = {ctor: 'Ch'};
+var _danielnarey$elm_css_basics$CssBasics$Ex = {ctor: 'Ex'};
+var _danielnarey$elm_css_basics$CssBasics$Em = {ctor: 'Em'};
+var _danielnarey$elm_css_basics$CssBasics$Percent = {ctor: 'Percent'};

@@ -1,5 +1,6 @@
 module View.AppDrawer exposing (..)
 
+import AppColors
 import AppDrawer.List
 import AppUrl
 import Document
@@ -51,7 +52,7 @@ view appVM model =
                 [ App.toolbar
                     [ style
                         [ "color" => "white"
-                        , "background-color" => appVM.header.backgroundColor
+                        , "background-color" => AppColors.encode appVM.header.backgroundColor
                         ]
                     ]
                     [ div []

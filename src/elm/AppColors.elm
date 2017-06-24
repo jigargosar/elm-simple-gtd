@@ -39,7 +39,6 @@ sgtdBlue =
 
 
 defaultGroupColor =
-    --paper-grey-500
     sgtdBlue
 
 

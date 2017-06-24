@@ -13,6 +13,7 @@
     "common.js",
     "vendor.js",
     "app.js",
+    "landing.js",
     "firebase-messaging-sw.js",
     "*.js.map",
     "*.woff",

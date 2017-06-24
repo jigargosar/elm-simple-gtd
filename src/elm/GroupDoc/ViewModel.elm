@@ -198,4 +198,4 @@ projectGroup getTabIndexAVForEntity todoList project =
 
 
 inboxColor =
-    AppColors.inboxColor
+    AppColors.nullContextColor

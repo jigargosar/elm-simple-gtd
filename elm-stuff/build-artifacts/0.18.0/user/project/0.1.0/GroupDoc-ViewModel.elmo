@@ -1,4 +1,4 @@
-var _user$project$GroupDoc_ViewModel$inboxColor = _user$project$AppColors$inboxColor;
+var _user$project$GroupDoc_ViewModel$inboxColor = _user$project$AppColors$nullContextColor;
 var _user$project$GroupDoc_ViewModel$create = F3(
 	function (config, todoList, groupDoc) {
 		var name = groupDoc.name;

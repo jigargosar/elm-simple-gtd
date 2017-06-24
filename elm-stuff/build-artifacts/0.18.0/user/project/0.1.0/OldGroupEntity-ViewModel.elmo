@@ -53,7 +53,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		toEntity: _user$project$Entity$fromContext,
 		nullEntity: _user$project$Context$null,
 		isNull: _user$project$Context$isNull,
-		nullIcon: {name: 'inbox', color: _user$project$AppColors$inboxColor},
+		nullIcon: {name: 'inbox', color: _user$project$AppColors$nullContextColor},
 		defaultIconName: 'fiber_manual_record',
 		defaultColor: _user$project$AppColors$defaultContextColor,
 		getViewType: _user$project$Entity$ContextView

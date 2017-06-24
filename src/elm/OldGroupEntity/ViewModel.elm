@@ -166,7 +166,7 @@ contexts model =
             , toEntity = Entity.fromContext
             , nullEntity = Context.null
             , isNull = Context.isNull
-            , nullIcon = { name = "inbox", color = AppColors.inboxColor }
+            , nullIcon = { name = "inbox", color = AppColors.nullContextColor }
             , defaultIconName = "fiber_manual_record"
             , defaultColor = AppColors.defaultContextColor
             , getViewType = Entity.ContextView

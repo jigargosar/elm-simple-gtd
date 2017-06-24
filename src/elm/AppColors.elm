@@ -10,16 +10,20 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 
 
-inboxColor =
-    nullContextColor
-
-
-nullContextColor =
+primaryColor =
     Color.rgb 68 138 255
 
 
-contextsColor =
+sgtdBlue =
+    Color.rgb 33 150 243
+
+
+nullContextColor =
     sgtdBlue
+
+
+contextsColor =
+    primaryColor
 
 
 defaultContextColor =
@@ -36,14 +40,6 @@ projectsColor =
 
 defaultProjectColor =
     projectsColor
-
-
-sgtdBlue =
-    Color.rgb 33 150 243
-
-
-defaultGroupColor =
-    sgtdBlue
 
 
 encode =

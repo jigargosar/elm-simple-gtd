@@ -6,5 +6,5 @@ var _user$project$AppColors$projectsColor = 'rgb(124, 77, 255)';
 var _user$project$AppColors$nullProjectColor = 'rgb(179, 157, 219)';
 var _user$project$AppColors$defaultContextColor = 'rgb(124, 77, 255)';
 var _user$project$AppColors$contextsColor = _user$project$AppColors$sgtdBlue;
-var _user$project$AppColors$inboxColor = 'rgb(68, 138, 255)';
-var _user$project$AppColors$nullContextColor = _user$project$AppColors$inboxColor;
+var _user$project$AppColors$nullContextColor = 'rgb(68, 138, 255)';
+var _user$project$AppColors$inboxColor = _user$project$AppColors$nullContextColor;

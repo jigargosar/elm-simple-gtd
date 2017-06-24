@@ -9,12 +9,12 @@ import Maybe.Extra as Maybe
 
 
 inboxColor =
-    --paper-blue-a200
-    "rgb(68, 138, 255)"
+    nullContextColor
 
 
 nullContextColor =
-    inboxColor
+    --paper-blue-a200
+    "rgb(68, 138, 255)"
 
 
 contextsColor =

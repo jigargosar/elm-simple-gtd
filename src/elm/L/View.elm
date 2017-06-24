@@ -25,21 +25,21 @@ view model =
 navHeader =
     div [ class "navbar-fixed" ]
         [ nav []
-            [ div [ class "nav-wrapper" ]
+            [ div [ class "nav-wrapper container" ]
                 [ a [ class "brand-logo", href AppUrl.landing ]
                     [ div [ class "layout horizontal center" ]
                         [ {- img [ src "/logo.png", class "logo" ] []
                              ,
                           -}
-                          div [ class "logo-font" ] [ div [ class "logo-content" ] [ text "SG" ] ]
+                          div [ class "logo-font-icon" ] [ div [ class "logo-content" ] [ text "SG" ] ]
                         , div [ class "app-name" ]
-                            [ span [ class "logo-font-letter" ] [ text "S" ]
+                            [ span [ class "brand-name-font" ] [ text "S" ]
                             , text "imple"
-                            , span [ class "logo-font-letter" ] [ text "GTD" ]
+                            , span [ class "brand-name-font" ] [ text "GTD" ]
                             ]
                         ]
                     ]
-                , ul [ class "right hide-on-small-and-down" ]
+                , ul [ class "right hide-on-med-and-down" ]
                     [ {- li [] [ a [] [ text "Open Source" ] ]
                          ,
                       -}
@@ -72,15 +72,17 @@ bannerMock =
 
 overview =
     div [ class "container overview center" ]
-        [ div [ class "row" ]
-            [ section [ class "section" ]
-                [ h5 []
-                    [ header [] [ text "Simply start accomplishing more with peace of mind and focus" ]
-                    ]
-                , p [] [ text "Work offline, in browser on any platform. And your work syncs automatically." ]
-                ]
-            ]
-        , primaryFeatures
+        [ {- div [ class "row" ]
+                 [ section [ class "section" ]
+                     [ h5 []
+                         [ header [] [ text "Simply start accomplishing more with peace of mind and focus" ]
+                         ]
+                     , p [] [ text "Work offline, in browser on any platform. And your work syncs automatically." ]
+                     ]
+                 ]
+             ,
+          -}
+          primaryFeatures
         ]
 
 
@@ -90,10 +92,12 @@ primaryFeatures =
             p [] [ text desc ]
 
         feature ( iconName, heading, desc ) =
-            div [ class "feature col s12 m4 center" ]
-                [ Material.icon iconName
-                , h5 [] [ text heading ]
-                , div [] (desc .|> descriptionLine)
+            div [ class "feature col s12 m4 center-align" ]
+                [ div [ class "section" ]
+                    [ Material.icon iconName
+                    , h5 [] [ text heading ]
+                    , div [] (desc .|> descriptionLine)
+                    ]
                 ]
 
         seamlessly =

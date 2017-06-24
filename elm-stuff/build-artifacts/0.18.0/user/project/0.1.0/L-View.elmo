@@ -208,31 +208,42 @@ var _user$project$L_View$primaryFeatures = function () {
 			_elm_lang$html$Html$div,
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('feature col s12 m4 center'),
+				_0: _elm_lang$html$Html_Attributes$class('feature col s12 m4 center-align'),
 				_1: {ctor: '[]'}
 			},
 			{
 				ctor: '::',
-				_0: _user$project$Material$icon(_p3._0),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$h5,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(_p3._1),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
 						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p3._2, descriptionLine)),
+						_0: _elm_lang$html$Html_Attributes$class('section'),
 						_1: {ctor: '[]'}
-					}
-				}
+					},
+					{
+						ctor: '::',
+						_0: _user$project$Material$icon(_p3._0),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$h5,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(_p3._1),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{ctor: '[]'},
+									A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p3._2, descriptionLine)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
 			});
 	};
 	return A2(
@@ -253,59 +264,8 @@ var _user$project$L_View$overview = A2(
 	},
 	{
 		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$div,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('row'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$section,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('section'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$h5,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$header,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Simply start accomplishing more with peace of mind and focus'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$p,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Work offline, in browser on any platform. And your work syncs automatically.'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
-			ctor: '::',
-			_0: _user$project$L_View$primaryFeatures,
-			_1: {ctor: '[]'}
-		}
+		_0: _user$project$L_View$primaryFeatures,
+		_1: {ctor: '[]'}
 	});
 var _user$project$L_View$bannerMock = A2(
 	_elm_lang$html$Html$img,
@@ -434,7 +394,7 @@ var _user$project$L_View$navHeader = A2(
 					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('nav-wrapper'),
+						_0: _elm_lang$html$Html_Attributes$class('nav-wrapper container'),
 						_1: {ctor: '[]'}
 					},
 					{
@@ -465,7 +425,7 @@ var _user$project$L_View$navHeader = A2(
 											_elm_lang$html$Html$div,
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('logo-font'),
+												_0: _elm_lang$html$Html_Attributes$class('logo-font-icon'),
 												_1: {ctor: '[]'}
 											},
 											{
@@ -499,7 +459,7 @@ var _user$project$L_View$navHeader = A2(
 														_elm_lang$html$Html$span,
 														{
 															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$class('logo-font-letter'),
+															_0: _elm_lang$html$Html_Attributes$class('brand-name-font'),
 															_1: {ctor: '[]'}
 														},
 														{
@@ -516,7 +476,7 @@ var _user$project$L_View$navHeader = A2(
 																_elm_lang$html$Html$span,
 																{
 																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('logo-font-letter'),
+																	_0: _elm_lang$html$Html_Attributes$class('brand-name-font'),
 																	_1: {ctor: '[]'}
 																},
 																{
@@ -539,7 +499,7 @@ var _user$project$L_View$navHeader = A2(
 								_elm_lang$html$Html$ul,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('right hide-on-small-and-down'),
+									_0: _elm_lang$html$Html_Attributes$class('right hide-on-med-and-down'),
 									_1: {ctor: '[]'}
 								},
 								{

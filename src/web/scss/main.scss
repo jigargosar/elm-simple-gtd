@@ -69,22 +69,32 @@ a.primary-action {
   //background-color: transparent;
 
   .brand-logo {
-    //color: unset;
-    img {
-      width: 48px;
-      height: auto;
+    .logo-font-icon {
+      text-rendering: geometricPrecision;
+      margin: 0 1rem;
+      font-family: Sriracha-Regular, sans-serif;
+      font-size: 42px;
+      color: $primary-color;
+      background-color: $background;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
+      overflow: hidden;
+      border-radius: 25%;
+      letter-spacing: -3px;
+      .logo-content {
+        position: relative;
+        left: -8px;
+      }
+
     }
 
-    @media #{$medium-only} {
-      left: 0;
-      transform: translateX(0%);
+    .brand-name-font {
+      text-rendering: geometricPrecision;
+      font-family: Sriracha-Regular, sans-serif;
+      font-size: 2.8rem;
     }
-
-    @media #{$large-and-up} {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
+    
     .app-name {
       color: $brand-text-color
     }
@@ -112,12 +122,9 @@ a.primary-action {
   color: $background;
 }
 
-#landing .overview header {
-  font-weight: 500;
-}
-
 #landing .features.primary {
   .feature {
+    margin-top:2rem;
     i {
       font-size: 10rem;
       color: $primary-color;
@@ -131,34 +138,6 @@ a.primary-action {
   a {
     white-space: nowrap;
     padding: 0 1rem;
-  }
-}
-
-#landing {
-  .logo-font {
-    text-rendering: geometricPrecision;
-    margin: 0 1rem;
-    font-family: Sriracha-Regular, sans-serif;
-    font-size: 42px;
-    color: $primary-color;
-    background-color: $background;
-    width: 32px;
-    height: 32px;
-    line-height: 32px;
-    overflow: hidden;
-    border-radius: 25%;
-    letter-spacing: -3px;
-    .logo-content {
-      position: relative;
-      left: -8px;
-    }
-
-  }
-
-  .logo-font-letter {
-    text-rendering: geometricPrecision;
-    font-family: Sriracha-Regular, sans-serif;
-    font-size: 2.8rem;
   }
 }
 

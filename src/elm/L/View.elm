@@ -28,8 +28,15 @@ navHeader =
             [ div [ class "nav-wrapper" ]
                 [ a [ class "brand-logo", href AppUrl.landing ]
                     [ div [ class "layout horizontal center" ]
-                        [ img [ src "/logo.png", class "logo" ] []
-                        , div [ class "app-name" ] [ text "Simple GTD" ]
+                        [ {- img [ src "/logo.png", class "logo" ] []
+                             ,
+                          -}
+                          div [ class "logo-font" ] [ div [ class "logo-content" ] [ text "SG" ] ]
+                        , div [ class "app-name" ]
+                            [ span [ class "logo-font-letter" ] [ text "S" ]
+                            , text "imple"
+                            , span [ class "logo-font-letter" ] [ text "GTD" ]
+                            ]
                         ]
                     ]
                 , ul [ class "right hide-on-small-and-down" ]

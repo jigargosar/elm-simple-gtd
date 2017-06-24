@@ -116,27 +116,51 @@ a.primary-action {
   font-weight: 500;
 }
 
-#landing .features.primary{
-  .feature{
-    i{
+#landing .features.primary {
+  .feature {
+    i {
       font-size: 10rem;
       color: $primary-color;
     }
   }
 
-
 }
 
-
-#landing .page-footer{
+#landing .page-footer {
   color: $background;
-  a{
+  a {
     white-space: nowrap;
     padding: 0 1rem;
   }
 }
 
+#landing {
+  .logo-font {
+    margin: 0 1rem;
+    font-family: Sriracha-Regular, sans-serif;
+    font-size: 42px;
+    color: $primary-color;
+    background-color: $background;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+    border-radius: 25%;
+    letter-spacing: -3px;
+    .logo-content {
+      position: relative;
+      left: -8px;
+    }
 
-#app-view{
+  }
+
+  .logo-font-letter {
+    font-family: Sriracha-Regular, sans-serif;
+    font-size: 2.8rem;
+  }
+}
+
+#app-view {
   background-color: color("grey", "lighten-4");
 }
+

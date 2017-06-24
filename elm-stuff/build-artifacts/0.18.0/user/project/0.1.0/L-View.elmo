@@ -462,17 +462,28 @@ var _user$project$L_View$navHeader = A2(
 									{
 										ctor: '::',
 										_0: A2(
-											_elm_lang$html$Html$img,
+											_elm_lang$html$Html$div,
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$src('/logo.png'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('logo'),
-													_1: {ctor: '[]'}
-												}
+												_0: _elm_lang$html$Html_Attributes$class('logo-font'),
+												_1: {ctor: '[]'}
 											},
-											{ctor: '[]'}),
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('logo-content'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('SG'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}),
 										_1: {
 											ctor: '::',
 											_0: A2(
@@ -484,8 +495,38 @@ var _user$project$L_View$navHeader = A2(
 												},
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html$text('Simple GTD'),
-													_1: {ctor: '[]'}
+													_0: A2(
+														_elm_lang$html$Html$span,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('logo-font-letter'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('S'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('imple'),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$span,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('logo-font-letter'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('GTD'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
+													}
 												}),
 											_1: {ctor: '[]'}
 										}

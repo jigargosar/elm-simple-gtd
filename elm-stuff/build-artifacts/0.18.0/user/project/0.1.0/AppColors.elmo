@@ -2,11 +2,13 @@ var _user$project$AppColors$encode = function (_p0) {
 	return _danielnarey$elm_css_basics$CssBasics$encodeCssValue(
 		_danielnarey$elm_css_basics$CssBasics$Col(_p0));
 };
-var _user$project$AppColors$projectsColor = A3(_elm_lang$core$Color$rgb, 124, 77, 255);
-var _user$project$AppColors$defaultProjectColor = _user$project$AppColors$projectsColor;
+var _user$project$AppColors$mixNullGroupColor = _mdgriffith$elm_color_mixing$Color_Mixing$fadeIn(0.1);
+var _user$project$AppColors$mixDefaultGroupColor = _mdgriffith$elm_color_mixing$Color_Mixing$fadeIn(0.1);
 var _user$project$AppColors$nullProjectColor = A3(_elm_lang$core$Color$rgb, 179, 157, 219);
+var _user$project$AppColors$projectsColor = A3(_elm_lang$core$Color$rgb, 124, 77, 255);
+var _user$project$AppColors$defaultProjectColor = _user$project$AppColors$mixDefaultGroupColor(_user$project$AppColors$projectsColor);
 var _user$project$AppColors$sgtdBlue = A3(_elm_lang$core$Color$rgb, 33, 150, 243);
 var _user$project$AppColors$nullContextColor = _user$project$AppColors$sgtdBlue;
 var _user$project$AppColors$primaryColor = A3(_elm_lang$core$Color$rgb, 68, 138, 255);
 var _user$project$AppColors$contextsColor = _user$project$AppColors$primaryColor;
-var _user$project$AppColors$defaultContextColor = A2(_mdgriffith$elm_color_mixing$Color_Mixing$fadeIn, 0.1, _user$project$AppColors$contextsColor);
+var _user$project$AppColors$defaultContextColor = _user$project$AppColors$mixDefaultGroupColor(_user$project$AppColors$contextsColor);

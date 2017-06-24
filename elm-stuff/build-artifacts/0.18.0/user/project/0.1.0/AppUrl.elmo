@@ -1,0 +1,5 @@
+var _user$project$AppUrl$github = 'https://github.com/jigargosar/elm-simple-gtd';
+var _user$project$AppUrl$newIssueURL = 'https://github.com/jigargosar/elm-simple-gtd/issues/new';
+var _user$project$AppUrl$newPostURL = 'https://groups.google.com/forum/#!newtopic/simplegtd';
+var _user$project$AppUrl$forumsURL = 'https://groups.google.com/forum/#!forum/simplegtd';
+var _user$project$AppUrl$changeLogURL = 'https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md';

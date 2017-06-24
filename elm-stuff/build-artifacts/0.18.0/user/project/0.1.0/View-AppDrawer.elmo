@@ -1,7 +1,3 @@
-var _user$project$View_AppDrawer$newIssueURL = 'https://github.com/jigargosar/elm-simple-gtd/issues/new';
-var _user$project$View_AppDrawer$newPostURL = 'https://groups.google.com/forum/#!newtopic/simplegtd';
-var _user$project$View_AppDrawer$forumsURL = 'https://groups.google.com/forum/#!forum/simplegtd';
-var _user$project$View_AppDrawer$changeLogURL = 'https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md';
 var _user$project$View_AppDrawer$leftHeader = function (m) {
 	var _p0 = m.developmentMode ? {
 		ctor: '_Tuple2',
@@ -49,7 +45,7 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 								_0: _elm_lang$html$Html_Attributes$target('_blank'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$href(_user$project$View_AppDrawer$changeLogURL),
+									_0: _elm_lang$html$Html_Attributes$href(_user$project$AppUrl$changeLogURL),
 									_1: {
 										ctor: '::',
 										_0: _elm_lang$html$Html_Attributes$tabindex(-1),
@@ -72,7 +68,7 @@ var _user$project$View_AppDrawer$leftHeader = function (m) {
 									_0: _elm_lang$html$Html_Attributes$target('_blank'),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$href(_user$project$View_AppDrawer$newPostURL),
+										_0: _elm_lang$html$Html_Attributes$href(_user$project$AppUrl$newPostURL),
 										_1: {
 											ctor: '::',
 											_0: _elm_lang$html$Html_Attributes$tabindex(-1),

@@ -1,6 +1,7 @@
 module View.AppDrawer exposing (..)
 
 import AppDrawer.List
+import AppUrl
 import Document
 import Entity
 import X.Html exposing (boolProperty)
@@ -69,22 +70,6 @@ view appVM model =
         ]
 
 
-changeLogURL =
-    "https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md"
-
-
-forumsURL =
-    "https://groups.google.com/forum/#!forum/simplegtd"
-
-
-newPostURL =
-    "https://groups.google.com/forum/#!newtopic/simplegtd"
-
-
-newIssueURL =
-    "https://github.com/jigargosar/elm-simple-gtd/issues/new"
-
-
 leftHeader m =
     let
         ( t1, t2 ) =
@@ -96,9 +81,9 @@ leftHeader m =
         div [ id "left-header" ]
             [ div [] [ text t1 ]
             , div [ class "small layout horizontal " ]
-                [ a [ target "_blank", href changeLogURL, tabindex -1 ]
+                [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
                     [ "v" ++ m.appVersion |> text ]
-                , a [ target "_blank", href newPostURL, tabindex -1 ]
+                , a [ target "_blank", href AppUrl.newPostURL, tabindex -1 ]
                     [ text "Discuss" ]
                 , a [ target "_blank", href "mailto:jigar.gosar@gmail.com", tabindex -1 ]
                     [ text "Feedback" ]

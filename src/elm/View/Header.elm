@@ -1,5 +1,6 @@
 module View.Header exposing (..)
 
+import AppUrl
 import ExclusiveMode
 import X.Html exposing (boolProperty)
 import X.Keyboard as Keyboard
@@ -118,10 +119,10 @@ menu m =
                 []
             , Paper.listbox [ class "", slotDropdownContent ]
                 [ userSignInLink
-                , itemLink "https://groups.google.com/forum/#!forum/simplegtd" "Forums/Discuss"
-                , itemLink "https://github.com/jigargosar/elm-simple-gtd/blob/master/CHANGELOG.md"
+                , itemLink AppUrl.forumsURL "Forums/Discuss"
+                , itemLink AppUrl.changeLogURL
                     ("Changelog v" ++ m.appVersion)
-                , itemLink "https://github.com/jigargosar/elm-simple-gtd" "Github"
+                , itemLink AppUrl.github "Github"
                 ]
             ]
 

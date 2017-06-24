@@ -17,6 +17,7 @@ view model =
         [ navHeader
         , banner
         , overview
+        , footerView
         ]
 
 
@@ -114,3 +115,59 @@ primaryFeatures =
     in
         div [ class "row features primary" ]
             (list .|> feature)
+
+
+footerView =
+    footer [ class "page-footer" ]
+        [ div [ class "container footer" ]
+            [ div [ class "row" ]
+                [ div [ class "col s12 m6 offset-m2" ]
+                    [ {- h5 [] [ text "LEARN MORE" ]
+                         ,
+                      -}
+                      learnMoreLinks
+                    ]
+
+                {- , div [ class "col s12 m6" ]
+                   [ h5 [] [ text "HELP CENTER" ]
+                   , helpCenterLinks
+                   ]
+                -}
+                ]
+            ]
+        , div
+            [ class "footer-copyright" ]
+            [ div [ class "container" ] [ text "© 2017 Copyright simplegtd.com" ] ]
+        ]
+
+
+learnMoreLinks =
+    let
+        linkV ( hrefV, textV ) =
+            li [] [ a [ class "white-text", href hrefV, target "_blank" ] [ text textV ] ]
+    in
+        ul []
+            [ linkV ( "https://github.com/jigargosar/elm-simple-gtd", "Github" )
+            , linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            ]
+
+
+helpCenterLinks =
+    let
+        linkV ( hrefV, textV ) =
+            li [] [ a [ class "white-text", href hrefV ] [ text textV ] ]
+    in
+        ul []
+            [ linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            , linkV ( "", "Github" )
+            ]

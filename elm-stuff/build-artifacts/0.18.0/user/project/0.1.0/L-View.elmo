@@ -1,3 +1,212 @@
+var _user$project$L_View$helpCenterLinks = function () {
+	var linkV = function (_p0) {
+		var _p1 = _p0;
+		return A2(
+			_elm_lang$html$Html$li,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('white-text'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href(_p1._0),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(_p1._1),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_elm_lang$html$Html$ul,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: linkV(
+				{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+			_1: {
+				ctor: '::',
+				_0: linkV(
+					{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+				_1: {
+					ctor: '::',
+					_0: linkV(
+						{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+					_1: {
+						ctor: '::',
+						_0: linkV(
+							{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+						_1: {
+							ctor: '::',
+							_0: linkV(
+								{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+							_1: {
+								ctor: '::',
+								_0: linkV(
+									{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+								_1: {
+									ctor: '::',
+									_0: linkV(
+										{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+									_1: {
+										ctor: '::',
+										_0: linkV(
+											{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+										_1: {
+											ctor: '::',
+											_0: linkV(
+												{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+											_1: {
+												ctor: '::',
+												_0: linkV(
+													{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+}();
+var _user$project$L_View$learnMoreLinks = function () {
+	var linkV = function (_p2) {
+		var _p3 = _p2;
+		return A2(
+			_elm_lang$html$Html$li,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$a,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('white-text'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$href(_p3._0),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$target('_blank'),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(_p3._1),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_elm_lang$html$Html$ul,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: linkV(
+				{ctor: '_Tuple2', _0: 'https://github.com/jigargosar/elm-simple-gtd', _1: 'Github'}),
+			_1: {
+				ctor: '::',
+				_0: linkV(
+					{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+				_1: {
+					ctor: '::',
+					_0: linkV(
+						{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+					_1: {
+						ctor: '::',
+						_0: linkV(
+							{ctor: '_Tuple2', _0: '', _1: 'Github'}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+}();
+var _user$project$L_View$footerView = A2(
+	_elm_lang$html$Html$footer,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('page-footer'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('container footer'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('row'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('col s12 m6 offset-m2'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _user$project$L_View$learnMoreLinks,
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('footer-copyright'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('container'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('© 2017 Copyright simplegtd.com'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
 var _user$project$L_View$primaryFeatures = function () {
 	var list = {
 		ctor: '::',
@@ -66,8 +275,8 @@ var _user$project$L_View$primaryFeatures = function () {
 				_1: {ctor: '[]'}
 			});
 	};
-	var feature = function (_p0) {
-		var _p1 = _p0;
+	var feature = function (_p4) {
+		var _p5 = _p4;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -77,7 +286,7 @@ var _user$project$L_View$primaryFeatures = function () {
 			},
 			{
 				ctor: '::',
-				_0: _user$project$Material$icon(_p1._0),
+				_0: _user$project$Material$icon(_p5._0),
 				_1: {
 					ctor: '::',
 					_0: A2(
@@ -85,7 +294,7 @@ var _user$project$L_View$primaryFeatures = function () {
 						{ctor: '[]'},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text(_p1._1),
+							_0: _elm_lang$html$Html$text(_p5._1),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -93,7 +302,7 @@ var _user$project$L_View$primaryFeatures = function () {
 						_0: A2(
 							_elm_lang$html$Html$div,
 							{ctor: '[]'},
-							A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p1._2, descriptionLine)),
+							A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p5._2, descriptionLine)),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -426,7 +635,11 @@ var _user$project$L_View$view = function (model) {
 				_1: {
 					ctor: '::',
 					_0: _user$project$L_View$overview,
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: _user$project$L_View$footerView,
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		});

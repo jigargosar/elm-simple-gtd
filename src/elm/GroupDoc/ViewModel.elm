@@ -1,6 +1,7 @@
 module GroupDoc.ViewModel exposing (..)
 
 import AppColors
+import Color
 import Context
 import Dict
 import Document
@@ -26,7 +27,7 @@ import Keyboard.Extra as Key exposing (Key)
 
 type alias IconVM =
     { name : String
-    , color : String
+    , color : Color.Color
     }
 
 

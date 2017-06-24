@@ -2,6 +2,7 @@ module OldGroupEntity.ViewModel exposing (..)
 
 import AppColors
 import AppDrawer.Model
+import Color
 import Context
 import Dict
 import Dict.Extra
@@ -29,7 +30,7 @@ import X.Maybe
 
 type alias IconVM =
     { name : String
-    , color : String
+    , color : Color.Color
     }
 
 

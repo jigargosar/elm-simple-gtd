@@ -1,5 +1,6 @@
 module GroupDoc.ViewModel exposing (..)
 
+import AppColors
 import Context
 import Dict
 import Document
@@ -95,7 +96,7 @@ create config todoList groupDoc =
             if isNull then
                 config.nullIcon
             else
-                { name = config.defaultIconName, color = lightGray }
+                { name = config.defaultIconName, color = AppColors.defaultGroupColor }
 
         name =
             groupDoc.name
@@ -193,28 +194,4 @@ projectGroup getTabIndexAVForEntity todoList project =
 
 
 inboxColor =
-    "#42a5f5"
-
-
-contextsColor =
-    sgtdBlue
-
-
-nullProjectColor =
-    --paper-deep-purple-200
-    "rgb(179, 157, 219)"
-
-
-projectsColor =
-    --paper-deep-purple-a200
-    "rgb(124, 77, 255)"
-
-
-sgtdBlue =
-    --paper-blue-a200
-    "rgb(68, 138, 255)"
-
-
-lightGray =
-    --paper-grey-500
-    "#9e9e9e"
+    AppColors.inboxColor

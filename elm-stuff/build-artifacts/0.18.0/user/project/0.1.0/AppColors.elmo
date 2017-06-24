@@ -1,0 +1,8 @@
+var _user$project$AppColors$lightGray = '#9e9e9e';
+var _user$project$AppColors$sgtdBlue = 'rgb(33, 150, 243)';
+var _user$project$AppColors$defaultGroupColor = _user$project$AppColors$sgtdBlue;
+var _user$project$AppColors$projectsColor = 'rgb(124, 77, 255)';
+var _user$project$AppColors$nullProjectColor = 'rgb(179, 157, 219)';
+var _user$project$AppColors$contextsColor = _user$project$AppColors$sgtdBlue;
+var _user$project$AppColors$inboxColor = 'rgb(68, 138, 255)';
+var _user$project$AppColors$nullContextColor = _user$project$AppColors$inboxColor;

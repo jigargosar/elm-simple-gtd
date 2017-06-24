@@ -1,14 +1,9 @@
-var _user$project$GroupDoc_ViewModel$lightGray = '#9e9e9e';
-var _user$project$GroupDoc_ViewModel$sgtdBlue = 'rgb(68, 138, 255)';
-var _user$project$GroupDoc_ViewModel$projectsColor = 'rgb(124, 77, 255)';
-var _user$project$GroupDoc_ViewModel$nullProjectColor = 'rgb(179, 157, 219)';
-var _user$project$GroupDoc_ViewModel$contextsColor = _user$project$GroupDoc_ViewModel$sgtdBlue;
-var _user$project$GroupDoc_ViewModel$inboxColor = '#42a5f5';
+var _user$project$GroupDoc_ViewModel$inboxColor = _user$project$AppColors$inboxColor;
 var _user$project$GroupDoc_ViewModel$create = F3(
 	function (config, todoList, groupDoc) {
 		var name = groupDoc.name;
 		var isNull = config.isNull(groupDoc);
-		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$GroupDoc_ViewModel$lightGray};
+		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$AppColors$defaultGroupColor};
 		var appHeader = {
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color

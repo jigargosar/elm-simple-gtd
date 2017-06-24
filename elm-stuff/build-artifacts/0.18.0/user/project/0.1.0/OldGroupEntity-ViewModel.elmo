@@ -1,14 +1,8 @@
-var _user$project$OldGroupEntity_ViewModel$lightGray = '#9e9e9e';
-var _user$project$OldGroupEntity_ViewModel$sgtdBlue = 'rgb(68, 138, 255)';
-var _user$project$OldGroupEntity_ViewModel$projectsColor = 'rgb(124, 77, 255)';
-var _user$project$OldGroupEntity_ViewModel$nullProjectColor = 'rgb(179, 157, 219)';
-var _user$project$OldGroupEntity_ViewModel$contextsColor = _user$project$OldGroupEntity_ViewModel$sgtdBlue;
-var _user$project$OldGroupEntity_ViewModel$inboxColor = '#42a5f5';
 var _user$project$OldGroupEntity_ViewModel$create = F3(
 	function (getTodoListByEntityId, config, entity) {
 		var name = entity.name;
 		var isNull = config.isNull(entity);
-		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$OldGroupEntity_ViewModel$lightGray};
+		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$AppColors$defaultGroupColor};
 		var appHeader = {
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
@@ -59,7 +53,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		toEntity: _user$project$Entity$fromContext,
 		nullEntity: _user$project$Context$null,
 		isNull: _user$project$Context$isNull,
-		nullIcon: {name: 'inbox', color: _user$project$OldGroupEntity_ViewModel$inboxColor},
+		nullIcon: {name: 'inbox', color: _user$project$AppColors$inboxColor},
 		defaultIconName: 'fiber_manual_record',
 		getViewType: _user$project$Entity$ContextView
 	};
@@ -80,7 +74,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		showDeleted: model.showDeleted,
 		showArchived: _user$project$AppDrawer_Model$getShowArchivedForContexts(model.appDrawerModel),
 		onAddClicked: _user$project$Model$NewContext,
-		icon: {name: 'group_work', color: _user$project$OldGroupEntity_ViewModel$contextsColor},
+		icon: {name: 'group_work', color: _user$project$AppColors$contextsColor},
 		onToggleExpanded: _user$project$Model$OnAppDrawerMsg(_user$project$AppDrawer_Model$OnToggleExpandContextList),
 		onToggleShowArchived: _user$project$Model$OnAppDrawerMsg(_user$project$AppDrawer_Model$OnToggleShowArchivedContexts),
 		isExpanded: _user$project$AppDrawer_Model$isContextListExpanded(model.appDrawerModel)
@@ -96,7 +90,7 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		toEntity: _user$project$Entity$fromProject,
 		nullEntity: _user$project$Project$null,
 		isNull: _user$project$Project$isNull,
-		nullIcon: {name: 'apps', color: _user$project$OldGroupEntity_ViewModel$nullProjectColor},
+		nullIcon: {name: 'apps', color: _user$project$AppColors$nullProjectColor},
 		defaultIconName: 'apps',
 		getViewType: _user$project$Entity$ProjectView
 	};
@@ -117,7 +111,7 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		showDeleted: model.showDeleted,
 		showArchived: _user$project$AppDrawer_Model$getShowArchivedForProjects(model.appDrawerModel),
 		onAddClicked: _user$project$Model$NewProject,
-		icon: {name: 'group_work', color: _user$project$OldGroupEntity_ViewModel$projectsColor},
+		icon: {name: 'group_work', color: _user$project$AppColors$projectsColor},
 		onToggleExpanded: _user$project$Model$OnAppDrawerMsg(_user$project$AppDrawer_Model$OnToggleExpandProjectList),
 		onToggleShowArchived: _user$project$Model$OnAppDrawerMsg(_user$project$AppDrawer_Model$OnToggleShowArchivedProjects),
 		isExpanded: _user$project$AppDrawer_Model$isProjectListExpanded(model.appDrawerModel)

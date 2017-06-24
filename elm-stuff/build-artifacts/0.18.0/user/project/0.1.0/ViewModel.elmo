@@ -1,4 +1,4 @@
-var _user$project$ViewModel$sgtdBlue = 'rgb(68, 138, 255)';
+var _user$project$ViewModel$sgtdBlue = _user$project$AppColors$sgtdBlue;
 var _user$project$ViewModel$getViewInfo = F4(
 	function (mainViewType, projectsVM, contextsVM, model) {
 		var entityById = function (id) {

@@ -46,6 +46,7 @@ view appVM model =
             [ App.header
                 [ boolProperty "fixed" True
                 , attribute "slot" "header"
+                , class "app-header"
                 ]
                 [ App.toolbar
                     [ style

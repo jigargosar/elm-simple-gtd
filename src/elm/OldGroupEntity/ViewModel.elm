@@ -1,5 +1,6 @@
 module OldGroupEntity.ViewModel exposing (..)
 
+import AppColors
 import AppDrawer.Model
 import Context
 import Dict
@@ -117,7 +118,7 @@ create getTodoListByEntityId config entity =
             if isNull then
                 config.nullIcon
             else
-                { name = config.defaultIconName, color = lightGray }
+                { name = config.defaultIconName, color = AppColors.defaultGroupColor }
 
         name =
             entity.name
@@ -163,7 +164,7 @@ contexts model =
             , toEntity = Entity.fromContext
             , nullEntity = Context.null
             , isNull = Context.isNull
-            , nullIcon = { name = "inbox", color = inboxColor }
+            , nullIcon = { name = "inbox", color = AppColors.inboxColor }
             , defaultIconName = "fiber_manual_record"
             , getViewType = Entity.ContextView
             }
@@ -186,7 +187,7 @@ contexts model =
         , showDeleted = model.showDeleted
         , showArchived = AppDrawer.Model.getShowArchivedForContexts model.appDrawerModel
         , onAddClicked = Model.NewContext
-        , icon = { name = "group_work", color = contextsColor }
+        , icon = { name = "group_work", color = AppColors.contextsColor }
         , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleExpandContextList
         , onToggleShowArchived = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleShowArchivedContexts
         , isExpanded = AppDrawer.Model.isContextListExpanded model.appDrawerModel
@@ -211,7 +212,7 @@ projects model =
             , toEntity = Entity.fromProject
             , nullEntity = Project.null
             , isNull = Project.isNull
-            , nullIcon = { name = "apps", color = nullProjectColor }
+            , nullIcon = { name = "apps", color = AppColors.nullProjectColor }
             , defaultIconName = "apps"
             , getViewType = Entity.ProjectView
             }
@@ -234,36 +235,8 @@ projects model =
         , showDeleted = model.showDeleted
         , showArchived = AppDrawer.Model.getShowArchivedForProjects model.appDrawerModel
         , onAddClicked = Model.NewProject
-        , icon = { name = "group_work", color = projectsColor }
+        , icon = { name = "group_work", color = AppColors.projectsColor }
         , onToggleExpanded = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleExpandProjectList
         , onToggleShowArchived = Model.OnAppDrawerMsg AppDrawer.Model.OnToggleShowArchivedProjects
         , isExpanded = AppDrawer.Model.isProjectListExpanded model.appDrawerModel
         }
-
-
-inboxColor =
-    "#42a5f5"
-
-
-contextsColor =
-    sgtdBlue
-
-
-nullProjectColor =
-    --paper-deep-purple-200
-    "rgb(179, 157, 219)"
-
-
-projectsColor =
-    --paper-deep-purple-a200
-    "rgb(124, 77, 255)"
-
-
-sgtdBlue =
-    --paper-blue-a200
-    "rgb(68, 138, 255)"
-
-
-lightGray =
-    --paper-grey-500
-    "#9e9e9e"

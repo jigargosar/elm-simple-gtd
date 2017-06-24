@@ -1,5 +1,6 @@
 module ViewModel exposing (..)
 
+import AppColors
 import Context
 import Dict exposing (Dict)
 import Document exposing (Id)
@@ -108,5 +109,4 @@ getViewInfo mainViewType projectsVM contextsVM model =
 
 
 sgtdBlue =
-    --paper-blue-a200
-    "rgb(68, 138, 255)"
+    AppColors.sgtdBlue

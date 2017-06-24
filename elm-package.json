@@ -41,6 +41,7 @@
         "gampleman/elm-visualization": "1.1.0 <= v < 2.0.0",
         "justinmimbs/elm-date-extra": "2.0.3 <= v < 3.0.0",
         "jystic/elm-font-awesome": "2.0.1 <= v < 3.0.0",
+        "mdgriffith/elm-color-mixing": "1.1.1 <= v < 2.0.0",
         "mgold/elm-date-format": "1.3.0 <= v < 2.0.0",
         "mgold/elm-random-pcg": "5.0.0 <= v < 6.0.0",
         "ohanhi/keyboard-extra": "2.0.2 <= v < 3.0.0",

@@ -9,4 +9,4 @@ var _user$project$AppColors$sgtdBlue = A3(_elm_lang$core$Color$rgb, 33, 150, 243
 var _user$project$AppColors$nullContextColor = _user$project$AppColors$sgtdBlue;
 var _user$project$AppColors$primaryColor = A3(_elm_lang$core$Color$rgb, 68, 138, 255);
 var _user$project$AppColors$contextsColor = _user$project$AppColors$primaryColor;
-var _user$project$AppColors$defaultContextColor = _user$project$AppColors$contextsColor;
+var _user$project$AppColors$defaultContextColor = A2(_mdgriffith$elm_color_mixing$Color_Mixing$fadeIn, 0.1, _user$project$AppColors$contextsColor);

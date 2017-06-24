@@ -1,6 +1,7 @@
 module AppColors exposing (..)
 
 import Color
+import Color.Mixing
 import CssBasics
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -27,7 +28,7 @@ contextsColor =
 
 
 defaultContextColor =
-    contextsColor
+    mixDefaultGroupColor contextsColor
 
 
 nullProjectColor =
@@ -39,7 +40,11 @@ projectsColor =
 
 
 defaultProjectColor =
-    projectsColor
+    mixDefaultGroupColor projectsColor
+
+
+mixDefaultGroupColor =
+    Color.Mixing.fadeIn 0.1
 
 
 encode =

@@ -2,7 +2,7 @@ var _user$project$OldGroupEntity_ViewModel$create = F3(
 	function (getTodoListByEntityId, config, entity) {
 		var name = entity.name;
 		var isNull = config.isNull(entity);
-		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: _user$project$AppColors$defaultGroupColor};
+		var icon = isNull ? config.nullIcon : {name: config.defaultIconName, color: config.defaultColor};
 		var appHeader = {
 			name: A2(_elm_lang$core$Basics_ops['++'], config.namePrefix, name),
 			backgroundColor: icon.color
@@ -55,6 +55,7 @@ var _user$project$OldGroupEntity_ViewModel$contexts = function (model) {
 		isNull: _user$project$Context$isNull,
 		nullIcon: {name: 'inbox', color: _user$project$AppColors$inboxColor},
 		defaultIconName: 'fiber_manual_record',
+		defaultColor: _user$project$AppColors$defaultContextColor,
 		getViewType: _user$project$Entity$ContextView
 	};
 	var entityList = A2(_user$project$OldGroupEntity_ViewModel$createList, config, model);
@@ -92,6 +93,7 @@ var _user$project$OldGroupEntity_ViewModel$projects = function (model) {
 		isNull: _user$project$Project$isNull,
 		nullIcon: {name: 'apps', color: _user$project$AppColors$nullProjectColor},
 		defaultIconName: 'apps',
+		defaultColor: _user$project$AppColors$defaultProjectColor,
 		getViewType: _user$project$Entity$ProjectView
 	};
 	var entityList = A2(_user$project$OldGroupEntity_ViewModel$createList, config, model);
@@ -166,7 +168,9 @@ var _user$project$OldGroupEntity_ViewModel$Config = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {groupByFn: a, todoList: b, namePrefix: c, filter: d, toEntity: e, nullEntity: f, isNull: g, nullIcon: h, defaultIconName: i, getViewType: j};
+										return function (k) {
+											return {groupByFn: a, todoList: b, namePrefix: c, filter: d, toEntity: e, nullEntity: f, isNull: g, nullIcon: h, defaultColor: i, defaultIconName: j, getViewType: k};
+										};
 									};
 								};
 							};

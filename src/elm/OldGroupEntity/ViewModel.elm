@@ -80,6 +80,7 @@ type alias Config =
     , nullEntity : GroupDoc
     , isNull : GroupDoc -> Bool
     , nullIcon : IconVM
+    , defaultColor : Color.Color
     , defaultIconName : String
     , getViewType : Document.Id -> EntityListViewType
     }
@@ -119,7 +120,7 @@ create getTodoListByEntityId config entity =
             if isNull then
                 config.nullIcon
             else
-                { name = config.defaultIconName, color = AppColors.defaultGroupColor }
+                { name = config.defaultIconName, color = config.defaultColor }
 
         name =
             entity.name
@@ -167,6 +168,7 @@ contexts model =
             , isNull = Context.isNull
             , nullIcon = { name = "inbox", color = AppColors.inboxColor }
             , defaultIconName = "fiber_manual_record"
+            , defaultColor = AppColors.defaultContextColor
             , getViewType = Entity.ContextView
             }
 
@@ -215,6 +217,7 @@ projects model =
             , isNull = Project.isNull
             , nullIcon = { name = "apps", color = AppColors.nullProjectColor }
             , defaultIconName = "apps"
+            , defaultColor = AppColors.defaultProjectColor
             , getViewType = Entity.ProjectView
             }
 

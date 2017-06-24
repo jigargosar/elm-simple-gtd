@@ -23,7 +23,7 @@ contextsColor =
 
 
 defaultContextColor =
-    Color.rgb 124 77 255
+    contextsColor
 
 
 nullProjectColor =
@@ -35,7 +35,7 @@ projectsColor =
 
 
 defaultProjectColor =
-    Color.rgb 124 77 255
+    projectsColor
 
 
 sgtdBlue =

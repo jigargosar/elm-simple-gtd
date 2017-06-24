@@ -48,6 +48,11 @@ $navbar-font-color: $off-black;
 @import "material/components/date_picker/default.date";
 @import "material/components/date_picker/default.time";
 
+
+// --
+@import "sriracha";
+// --
+
 $text-color: $off-black;
 $background: #fff;
 //$brand-text-color: darken($primary-color, 5%);
@@ -71,8 +76,8 @@ a.primary-action {
   .brand-logo {
     .logo-font-icon {
       text-rendering: geometricPrecision;
+      font-family: Sriracha, sans-serif;
       margin: 0 1rem;
-      font-family: Sriracha-Regular, sans-serif;
       font-size: 42px;
       color: $primary-color;
       background-color: $background;
@@ -91,7 +96,7 @@ a.primary-action {
 
     .brand-name-font {
       text-rendering: geometricPrecision;
-      font-family: Sriracha-Regular, sans-serif;
+      font-family: Sriracha, sans-serif;
       font-size: 2.8rem;
     }
     

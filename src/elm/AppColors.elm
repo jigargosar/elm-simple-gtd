@@ -21,12 +21,22 @@ contextsColor =
     sgtdBlue
 
 
+defaultContextColor =
+    --paper-deep-purple-a200
+    "rgb(124, 77, 255)"
+
+
 nullProjectColor =
     --paper-deep-purple-200
     "rgb(179, 157, 219)"
 
 
 projectsColor =
+    --paper-deep-purple-a200
+    "rgb(124, 77, 255)"
+
+
+defaultProjectColor =
     --paper-deep-purple-a200
     "rgb(124, 77, 255)"
 

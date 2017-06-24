@@ -103,7 +103,7 @@ a.primary-action {
 }
 
 #landing .banner {
-  background: url("/assets/stock-images/banner2-cropped.jpg") no-repeat center center;
+  background: url("/assets/stock-images/banner2-cropped-compressor-resize-retouch.jpg") no-repeat center center;
   background-size: cover;
   width: 100vw;
   min-height: 20rem;
@@ -131,6 +131,7 @@ a.primary-action {
 #landing .page-footer{
   color: $background;
   a{
+    white-space: nowrap;
     padding: 0 1rem;
   }
 }

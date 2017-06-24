@@ -123,17 +123,8 @@ footerView =
         [ div [ class "container footer" ]
             [ div [ class "row" ]
                 [ div [ class "col s12" ]
-                    [ {- h5 [] [ text "LEARN MORE" ]
-                         ,
-                      -}
-                      learnMoreLinks
+                    [ learnMoreLinks
                     ]
-
-                {- , div [ class "col s12 m6" ]
-                   [ h5 [] [ text "HELP CENTER" ]
-                   , helpCenterLinks
-                   ]
-                -}
                 ]
             ]
         , div
@@ -147,29 +138,10 @@ learnMoreLinks =
         linkV ( hrefV, textV ) =
             li [] [ a [ class "white-text", href hrefV, target "_blank" ] [ text textV ] ]
     in
-        ul [ class "layout horizontal center-center" ]
+        ul [ class "layout horizontal center-center wrap" ]
             [ linkV ( AppUrl.github, "Github" )
             , linkV ( AppUrl.forumsURL, "Forums" )
             , linkV ( AppUrl.newIssueURL, "Report Issue" )
             , linkV ( AppUrl.changeLogURL, "Change Log" )
             , linkV ( AppUrl.contact, "Contact us" )
-            ]
-
-
-helpCenterLinks =
-    let
-        linkV ( hrefV, textV ) =
-            li [] [ a [ class "white-text", href hrefV ] [ text textV ] ]
-    in
-        ul []
-            [ linkV ( "", "Github" )
-            , linkV ( "", "Github" )
-            , linkV ( "", "Github" )
-            , linkV ( "", "Github" )
-            , linkV ( "", "Github" )
-            , linkV ( "", "Github" )
-            , linkV ( "", "Github" )
-            , linkV ( "", "Github" )
-            , linkV ( "", "Github" )
-            , linkV ( "", "Github" )
             ]

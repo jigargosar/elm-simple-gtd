@@ -81,7 +81,7 @@ leftHeader m =
                 ( "SimpleGTD.com", "v" ++ m.appVersion )
     in
         div [ id "left-header" ]
-            [ a [] [ text t1 ]
+            [ a [ href AppUrl.landing ] [ text t1 ]
             , div [ class "small layout horizontal " ]
                 [ a [ target "_blank", href AppUrl.changeLogURL, tabindex -1 ]
                     [ "v" ++ m.appVersion |> text ]

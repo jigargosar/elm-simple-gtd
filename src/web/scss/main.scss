@@ -16,7 +16,6 @@ $navbar-font-color: $off-black;
 // Reset
 @import "material/components/normalize";
 
-
 // components
 @import "material/components/global";
 @import "material/components/badges";
@@ -49,17 +48,15 @@ $navbar-font-color: $off-black;
 @import "material/components/date_picker/default.date";
 @import "material/components/date_picker/default.time";
 
-
 $text-color: $off-black;
 $background: #fff;
 //$brand-text-color: darken($primary-color, 5%);
 $brand-text-color: $background;
 
-a.primary-action{
+a.primary-action {
   @extend .btn;
   //background-color: $primary-color;
 }
-
 
 #landing {
   background-color: $background;
@@ -94,7 +91,7 @@ a.primary-action{
   }
 
   ul li {
-    a{
+    a {
       color: $background;
     }
     a.primary-action {
@@ -104,7 +101,6 @@ a.primary-action{
     }
   }
 }
-
 
 #landing .banner {
   background: url("/assets/stock-images/banner2-cropped.jpg") no-repeat center center;
@@ -116,6 +112,17 @@ a.primary-action{
   color: $background;
 }
 
-  #landing .overview header{
-    font-weight: 500;
+#landing .overview header {
+  font-weight: 500;
+}
+
+#landing .features.primary{
+  .feature{
+    i{
+      font-size: 10rem;
+      color: $primary-color;
+    }
   }
+
+
+}

@@ -1,3 +1,92 @@
+var _user$project$L_View$primaryFeatures = function () {
+	var featureClass = 'feature col s12 m4';
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('row features primary'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class(featureClass),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _user$project$Material$icon('palette'),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h5,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Minimalistic Design'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class(featureClass),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _user$project$Material$icon('sync'),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$h5,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Works offline'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class(featureClass),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$Material$icon('nature_people'),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$h5,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Free and Open Source'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+}();
 var _user$project$L_View$overview = A2(
 	_elm_lang$html$Html$div,
 	{
@@ -47,7 +136,7 @@ var _user$project$L_View$overview = A2(
 								{ctor: '[]'},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text(''),
+									_0: _elm_lang$html$Html$text('Work offline, in browser on any platform. And your work syncs automatically.'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
@@ -55,7 +144,11 @@ var _user$project$L_View$overview = A2(
 					}),
 				_1: {ctor: '[]'}
 			}),
-		_1: {ctor: '[]'}
+		_1: {
+			ctor: '::',
+			_0: _user$project$L_View$primaryFeatures,
+			_1: {ctor: '[]'}
+		}
 	});
 var _user$project$L_View$bannerMock = A2(
 	_elm_lang$html$Html$img,

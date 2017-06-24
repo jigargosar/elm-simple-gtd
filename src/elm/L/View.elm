@@ -1,5 +1,6 @@
 module L.View exposing (..)
 
+import Material
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -67,7 +68,29 @@ overview =
                 [ h5 []
                     [ header [] [ text "Simply start accomplishing more with peace of mind and focus" ]
                     ]
-                , p [] [ text "" ]
+                , p [] [ text "Work offline, in browser on any platform. And your work syncs automatically." ]
                 ]
             ]
+        , primaryFeatures
         ]
+
+
+primaryFeatures =
+    let
+        featureClass =
+            "feature col s12 m4"
+    in
+        div [ class "row features primary" ]
+            [ div [ class featureClass ]
+                [ Material.icon "palette"
+                , h5 [] [ text "Minimalistic Design" ]
+                ]
+            , div [ class featureClass ]
+                [ Material.icon "sync"
+                , h5 [] [ text "Works offline" ]
+                ]
+            , div [ class featureClass ]
+                [ Material.icon "nature_people"
+                , h5 [] [ text "Free and Open Source" ]
+                ]
+            ]

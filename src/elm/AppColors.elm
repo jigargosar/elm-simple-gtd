@@ -51,11 +51,11 @@ defaultProjectColor =
 
 
 mixDefaultGroupColor =
-    Color.Mixing.lighten 0.8
+    Color.Mixing.lighten 0.06
 
 
 mixNullGroupColor =
-    Color.Mixing.lighten 0.7
+    Color.Mixing.lighten 0.06
 
 
 

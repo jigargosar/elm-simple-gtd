@@ -2,8 +2,8 @@ var _user$project$AppColors$encode = function (_p0) {
 	return _danielnarey$elm_css_basics$CssBasics$encodeCssValue(
 		_danielnarey$elm_css_basics$CssBasics$Col(_p0));
 };
-var _user$project$AppColors$mixNullGroupColor = _mdgriffith$elm_color_mixing$Color_Mixing$lighten(0.7);
-var _user$project$AppColors$mixDefaultGroupColor = _mdgriffith$elm_color_mixing$Color_Mixing$lighten(0.8);
+var _user$project$AppColors$mixNullGroupColor = _mdgriffith$elm_color_mixing$Color_Mixing$lighten(6.0e-2);
+var _user$project$AppColors$mixDefaultGroupColor = _mdgriffith$elm_color_mixing$Color_Mixing$lighten(6.0e-2);
 var _user$project$AppColors$nullProjectColor = A3(_elm_lang$core$Color$rgb, 179, 157, 219);
 var _user$project$AppColors$projectsColor = A3(_elm_lang$core$Color$rgb, 124, 77, 255);
 var _user$project$AppColors$defaultProjectColor = _user$project$AppColors$mixDefaultGroupColor(_user$project$AppColors$projectsColor);

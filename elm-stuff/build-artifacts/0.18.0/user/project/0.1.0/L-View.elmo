@@ -1,5 +1,104 @@
 var _user$project$L_View$primaryFeatures = function () {
-	var featureClass = 'feature col s12 m4';
+	var list = {
+		ctor: '::',
+		_0: {
+			ctor: '_Tuple3',
+			_0: 'palette',
+			_1: 'Minimalistic Design',
+			_2: {
+				ctor: '::',
+				_0: 'Focus on doing with our simple & beautiful interface',
+				_1: {
+					ctor: '::',
+					_0: 'Less is more, that\'s our philosophy',
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		_1: {
+			ctor: '::',
+			_0: {
+				ctor: '_Tuple3',
+				_0: 'sync',
+				_1: 'Work seamlessly',
+				_2: {
+					ctor: '::',
+					_0: 'We will sync automatically when you get online',
+					_1: {
+						ctor: '::',
+						_0: 'Additionally you never have to worry about upgrading, it just happens automatically',
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			_1: {
+				ctor: '::',
+				_0: {
+					ctor: '_Tuple3',
+					_0: 'nature_people',
+					_1: 'Free and Open Source',
+					_2: {
+						ctor: '::',
+						_0: 'And we are proud of it',
+						_1: {
+							ctor: '::',
+							_0: 'You can contribute, tinker, learn, host yourself, sky is the limit',
+							_1: {
+								ctor: '::',
+								_0: 'No more worries about propriety software',
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				_1: {ctor: '[]'}
+			}
+		}
+	};
+	var seamlessly = '';
+	var descriptionLine = function (desc) {
+		return A2(
+			_elm_lang$html$Html$p,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(desc),
+				_1: {ctor: '[]'}
+			});
+	};
+	var feature = function (_p0) {
+		var _p1 = _p0;
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('feature col s12 m4 center'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _user$project$Material$icon(_p1._0),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h5,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(_p1._1),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], _p1._2, descriptionLine)),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	};
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -7,85 +106,7 @@ var _user$project$L_View$primaryFeatures = function () {
 			_0: _elm_lang$html$Html_Attributes$class('row features primary'),
 			_1: {ctor: '[]'}
 		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class(featureClass),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _user$project$Material$icon('palette'),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$h5,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Minimalistic Design'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class(featureClass),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _user$project$Material$icon('sync'),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$h5,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Works offline'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class(featureClass),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _user$project$Material$icon('nature_people'),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$h5,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Free and Open Source'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
+		A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['.|>'], list, feature));
 }();
 var _user$project$L_View$overview = A2(
 	_elm_lang$html$Html$div,

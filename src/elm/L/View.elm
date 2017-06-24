@@ -77,20 +77,40 @@ overview =
 
 primaryFeatures =
     let
-        featureClass =
-            "feature col s12 m4"
+        descriptionLine desc =
+            p [] [ text desc ]
+
+        feature ( iconName, heading, desc ) =
+            div [ class "feature col s12 m4 center" ]
+                [ Material.icon iconName
+                , h5 [] [ text heading ]
+                , div [] (desc .|> descriptionLine)
+                ]
+
+        seamlessly =
+            ""
+
+        list =
+            [ ( "palette"
+              , "Minimalistic Design"
+              , [ "Focus on doing with our simple & beautiful interface"
+                , "Less is more, that's our philosophy"
+                ]
+              )
+            , ( "sync"
+              , "Work seamlessly"
+              , [ "We will sync automatically when you get online"
+                , "Additionally you never have to worry about upgrading, it just happens automatically"
+                ]
+              )
+            , ( "nature_people"
+              , "Free and Open Source"
+              , [ "And we are proud of it"
+                , "You can contribute, tinker, learn, host yourself, sky is the limit"
+                , "No more worries about propriety software"
+                ]
+              )
+            ]
     in
         div [ class "row features primary" ]
-            [ div [ class featureClass ]
-                [ Material.icon "palette"
-                , h5 [] [ text "Minimalistic Design" ]
-                ]
-            , div [ class featureClass ]
-                [ Material.icon "sync"
-                , h5 [] [ text "Works offline" ]
-                ]
-            , div [ class featureClass ]
-                [ Material.icon "nature_people"
-                , h5 [] [ text "Free and Open Source" ]
-                ]
-            ]
+            (list .|> feature)

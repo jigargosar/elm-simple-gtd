@@ -1,12 +1,121 @@
 @charset "UTF-8";
 
+// Mixins
+// @import "components/prefixer";
+@import "material/components/mixins";
 @import "material/components/color";
 
-$primary-color: color("red", "lighten-2")!default;
-$secondary-color: color("red", "lighten-1")!default;
+$primary-color: color("blue", "base");
+$secondary-color: color("red", "lighten-1");
 
-$primary-color: color("indigo", "lighten-2");
-$secondary-color: color("indigo", "lighten-1");
+// Variables;
+@import "material/components/variables";
+
+$navbar-font-color: $off-black;
+
+// Reset
+@import "material/components/normalize";
 
 
-@import "material/materialize";
+// components
+@import "material/components/global";
+@import "material/components/badges";
+@import "material/components/icons-material-design";
+@import "material/components/grid";
+@import "material/components/navbar";
+@import "material/components/roboto";
+@import "material/components/typography";
+@import "material/components/transitions";
+@import "material/components/cards";
+@import "material/components/toast";
+@import "material/components/tabs";
+@import "material/components/tooltip";
+@import "material/components/buttons";
+@import "material/components/dropdown";
+@import "material/components/waves";
+@import "material/components/modal";
+@import "material/components/collapsible";
+@import "material/components/chips";
+@import "material/components/materialbox";
+@import "material/components/forms/forms";
+@import "material/components/table_of_contents";
+@import "material/components/sideNav";
+@import "material/components/preloader";
+@import "material/components/slider";
+@import "material/components/carousel";
+@import "material/components/tapTarget";
+@import "material/components/pulse";
+@import "material/components/date_picker/default";
+@import "material/components/date_picker/default.date";
+@import "material/components/date_picker/default.time";
+
+
+$text-color: $off-black;
+$background: #fff;
+//$brand-text-color: darken($primary-color, 5%);
+$brand-text-color: $background;
+
+a.primary-action{
+  @extend .btn;
+  //background-color: $primary-color;
+}
+
+
+#landing {
+  background-color: $background;
+  width: 100vw;
+  //min-height: 100vh;
+}
+
+#landing nav {
+  //box-shadow: unset;
+  //background-color: transparent;
+
+  .brand-logo {
+    //color: unset;
+    img {
+      width: 48px;
+      height: auto;
+    }
+
+    @media #{$medium-only} {
+      left: 0;
+      transform: translateX(0%);
+    }
+
+    @media #{$large-and-up} {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .app-name {
+      color: $brand-text-color
+    }
+  }
+
+  ul li {
+    a{
+      color: $background;
+    }
+    a.primary-action {
+      //@extend .btn-flat;
+      color: $background;
+      //background-color: $primary-color;
+    }
+  }
+}
+
+
+#landing .banner {
+  background: url("/assets/stock-images/banner2-cropped.jpg") no-repeat center center;
+  background-size: cover;
+  width: 100vw;
+  min-height: 20rem;
+  height: auto;
+  padding: 10rem 0;
+  color: $background;
+}
+
+  #landing .overview header{
+    font-weight: 500;
+  }

@@ -25,16 +25,19 @@
 </head>
 <body unresolved>
 
-<div id="landing" class="container"></div>
-
 <div id="elm-container"></div>
 
 <script src="/common.js"></script>
 <script src="/vendor.js"></script>
 <script src="/app.js"></script>
+<script src="/landing.js"></script>
 <script>
     document.addEventListener('WebComponentsReady', () => {
-        window.appBoot().catch(console.error)
+        if(window.location.search === "?landing=true"){
+            window.landingBoot().catch(console.error)
+        }else{
+            window.appBoot().catch(console.error)
+        }
     });
 </script>
 </body>

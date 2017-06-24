@@ -1,0 +1,16 @@
+var _user$project$L_Main$update = function (msg) {
+	return _Fresheyeball$elm_return$Return$singleton;
+};
+var _user$project$L_Main$init = _Fresheyeball$elm_return$Return$singleton(
+	{});
+var _user$project$L_Main$main = _elm_lang$html$Html$program(
+	{
+		init: _user$project$L_Main$init,
+		view: _user$project$L_View$view,
+		update: _user$project$L_Main$update,
+		subscriptions: function (_p0) {
+			return _elm_lang$core$Platform_Sub$none;
+		}
+	})();
+var _user$project$L_Main$Model = {};
+var _user$project$L_Main$NOOP = {ctor: 'NOOP'};

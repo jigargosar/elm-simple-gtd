@@ -35,6 +35,7 @@ export default {
     entry: {
         "vendor":["./src/web/vendor.js"],
         "app": ["./src/web/app.js"],
+        "landing": ["./src/web/landing.js"],
     },
 
     output: {

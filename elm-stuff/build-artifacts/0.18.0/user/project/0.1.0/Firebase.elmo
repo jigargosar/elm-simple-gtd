@@ -42,7 +42,7 @@ var _user$project$Firebase$getPhotoURL = function (_) {
 };
 var _user$project$Firebase$getMaybeUserId = function (user) {
 	var _p0 = user;
-	if (_p0.ctor === 'NotLoggedIn') {
+	if (_p0.ctor === 'SignedOut') {
 		return _elm_lang$core$Maybe$Nothing;
 	} else {
 		return _elm_lang$core$Maybe$Just(_p0._0.id);
@@ -50,7 +50,7 @@ var _user$project$Firebase$getMaybeUserId = function (user) {
 };
 var _user$project$Firebase$getMaybeUserProfile = function (user) {
 	var _p1 = user;
-	if (_p1.ctor === 'NotLoggedIn') {
+	if (_p1.ctor === 'SignedOut') {
 		return _elm_lang$core$Maybe$Nothing;
 	} else {
 		return _elm_lang$core$List$head(_p1._0.providerData);
@@ -126,17 +126,17 @@ var _user$project$Firebase$Client = F3(
 var _user$project$Firebase$AfterUserChanged = {ctor: 'AfterUserChanged'};
 var _user$project$Firebase$OnSignOut = {ctor: 'OnSignOut'};
 var _user$project$Firebase$OnSignIn = {ctor: 'OnSignIn'};
-var _user$project$Firebase$LoggedIn = function (a) {
-	return {ctor: 'LoggedIn', _0: a};
+var _user$project$Firebase$SignedIn = function (a) {
+	return {ctor: 'SignedIn', _0: a};
 };
-var _user$project$Firebase$NotLoggedIn = {ctor: 'NotLoggedIn'};
+var _user$project$Firebase$SignedOut = {ctor: 'SignedOut'};
 var _user$project$Firebase$userDecoder = _elm_lang$core$Json_Decode$oneOf(
 	{
 		ctor: '::',
-		_0: A2(_elm_lang$core$Json_Decode$map, _user$project$Firebase$LoggedIn, _user$project$Firebase_User$decoder),
+		_0: A2(_elm_lang$core$Json_Decode$map, _user$project$Firebase$SignedIn, _user$project$Firebase_User$decoder),
 		_1: {
 			ctor: '::',
-			_0: _elm_lang$core$Json_Decode$succeed(_user$project$Firebase$NotLoggedIn),
+			_0: _elm_lang$core$Json_Decode$succeed(_user$project$Firebase$SignedOut),
 			_1: {ctor: '[]'}
 		}
 	});

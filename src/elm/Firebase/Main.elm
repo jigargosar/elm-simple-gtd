@@ -40,6 +40,7 @@ update andThenUpdate now msg =
         Firebase.OnSkipSignIn ->
             andThenUpdate Model.OnDeactivateEditingMode
                 >> Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
+                >> andThenUpdate Model.OnPersistLocalPref
 
         Firebase.OnSignOut ->
             Return.command (signOut ())

@@ -232,7 +232,8 @@ var _user$project$Main$update = function (msg) {
 						return _user$project$Main$andThenUpdate(
 							_user$project$Model$OnFirebaseMsg(_user$project$Firebase$OnSignOut));
 					case 'OnSkipSignIn':
-						return _user$project$Main$andThenUpdate(_user$project$Model$OnDeactivateEditingMode);
+						return _user$project$Main$andThenUpdate(
+							_user$project$Model$OnFirebaseMsg(_user$project$Firebase$OnSkipSignIn));
 					case 'OnUserChanged':
 						var _p15 = _p12._0;
 						return function (_p14) {

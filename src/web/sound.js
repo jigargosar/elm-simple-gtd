@@ -14,7 +14,7 @@ export default  (function () {
     const start = () => {
         stop()
         id1 = sound.play()
-        sound.fade(1, 0, 2000, id1)
+        sound.fade(1, 0, 3000, id1)
     }
 
     const stop = () => {

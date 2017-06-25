@@ -11,20 +11,34 @@ var _user$project$Firebase_Main$signOut = _elm_lang$core$Native_Platform.outgoin
 var _user$project$Firebase_Main$update = F3(
 	function (andThenUpdate, now, msg) {
 		var _p0 = msg;
-		if (_p0.ctor === 'OnSignIn') {
-			return _Fresheyeball$elm_return$Return$command(
-				_user$project$Firebase_Main$signIn(
-					{ctor: '_Tuple0'}));
-		} else {
-			return function (_p1) {
-				return A2(
-					_Fresheyeball$elm_return$Return$command,
-					_elm_lang$navigation$Navigation$load(_user$project$AppUrl$landing),
-					A2(
+		switch (_p0.ctor) {
+			case 'OnSignIn':
+				return _Fresheyeball$elm_return$Return$command(
+					_user$project$Firebase_Main$signIn(
+						{ctor: '_Tuple0'}));
+			case 'OnSignOut':
+				return function (_p1) {
+					return A2(
 						_Fresheyeball$elm_return$Return$command,
-						_user$project$Firebase_Main$signOut(
-							{ctor: '_Tuple0'}),
-						_p1));
-			};
+						_elm_lang$navigation$Navigation$load(_user$project$AppUrl$landing),
+						A2(
+							_Fresheyeball$elm_return$Return$command,
+							_user$project$Firebase_Main$signOut(
+								{ctor: '_Tuple0'}),
+							_p1));
+				};
+			default:
+				return _Fresheyeball$elm_return$Return$andThen(
+					function (model) {
+						return function () {
+							var _p2 = model.user;
+							if (_p2.ctor === 'NotLoggedIn') {
+								return _elm_lang$core$Basics$identity;
+							} else {
+								return andThenUpdate(_user$project$Model$OnDeactivateEditingMode);
+							}
+						}()(
+							_Fresheyeball$elm_return$Return$singleton(model));
+					});
 		}
 	});

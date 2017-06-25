@@ -20,6 +20,7 @@ import Time exposing (Time)
 type Msg
     = OnSignIn
     | OnSignOut
+    | AfterUserChanged
 
 
 type alias UID =

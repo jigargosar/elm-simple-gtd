@@ -142,16 +142,7 @@ update msg =
                         >> startSyncWithFirebase user
 
                 AfterUserChanged ->
-                    Return.andThen
-                        (\model ->
-                            Return.singleton model
-                                |> case model.user of
-                                    Firebase.NotLoggedIn ->
-                                        identity
-
-                                    Firebase.LoggedIn user ->
-                                        andThenUpdate OnDeactivateEditingMode
-                        )
+                    OnFirebaseMsg Firebase.AfterUserChanged |> andThenUpdate
 
                 OnFCMTokenChanged token ->
                     Return.map (Model.setFCMToken token)

@@ -254,6 +254,8 @@ var _user$project$Main$update = function (msg) {
 												_user$project$Model$setUser(_p15),
 												_p14)))));
 						};
+					case 'OnCheckForFirstTimeSetup':
+						return _elm_lang$core$Basics$identity;
 					case 'AfterUserChanged':
 						return _user$project$Main$andThenUpdate(
 							_user$project$Model$OnFirebaseMsg(_user$project$Firebase$AfterUserChanged));

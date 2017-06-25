@@ -142,7 +142,7 @@ update msg =
                         >> startSyncWithFirebase user
 
                 OnCheckForFirstTimeSetup ->
-                    identity
+                    Return.map (Model.checkAndUpdateSetupMode)
 
                 AfterUserChanged ->
                     OnFirebaseMsg Firebase.AfterUserChanged |> andThenUpdate

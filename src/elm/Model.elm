@@ -649,6 +649,13 @@ isShowDetailsKeyPressed =
     .keyboardState >> Keyboard.isAltDown >> not
 
 
+checkAndUpdateSetupMode model =
+    if Store.isEmpty model.todoStore then
+        deactivateEditingMode model
+    else
+        deactivateEditingMode model
+
+
 activateLaunchBar : Time -> ModelF
 activateLaunchBar now =
     set editMode (LaunchBar.Form.create now |> ExclusiveMode.LaunchBar)

@@ -31,10 +31,14 @@ var _user$project$View_GetStarted$setupOverlay = A2(
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$h5,
-							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Name one thing that you would like to get done today'),
+								_0: _elm_lang$html$Html_Attributes$class('flow-text'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Enter one thing that you would like to get done Today'),
 								_1: {ctor: '[]'}
 							}),
 						_1: {

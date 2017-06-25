@@ -1,3 +1,8 @@
+var _user$project$Firebase_Main$signIn = _elm_lang$core$Native_Platform.outgoingPort(
+	'signIn',
+	function (v) {
+		return null;
+	});
 var _user$project$Firebase_Main$update = F3(
 	function (andThenUpdate, now, msg) {
 		var _p0 = msg;
@@ -7,7 +12,7 @@ var _user$project$Firebase_Main$update = F3(
 				_user$project$Model$OnDeactivateEditingMode,
 				A2(
 					_Fresheyeball$elm_return$Return$command,
-					_user$project$Firebase$signIn(
+					_user$project$Firebase_Main$signIn(
 						{ctor: '_Tuple0'}),
 					_p1));
 		};

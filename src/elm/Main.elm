@@ -126,7 +126,7 @@ update msg =
                     Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
                 OnSignIn ->
-                    OnFirebaseMsg Firebase.OnSignIn >> andThenUpdate
+                    OnFirebaseMsg Firebase.OnSignIn |> andThenUpdate
 
                 OnSkipSignIn ->
                     andThenUpdate OnDeactivateEditingMode

@@ -37,6 +37,10 @@ update andThenUpdate now msg =
         Firebase.OnSignIn ->
             Return.command (signIn ())
 
+        Firebase.OnSkipSignIn ->
+            andThenUpdate Model.OnDeactivateEditingMode
+                >> Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
+
         Firebase.OnSignOut ->
             Return.command (signOut ())
                 >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignOut)

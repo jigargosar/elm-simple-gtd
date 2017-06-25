@@ -123,6 +123,7 @@ var _user$project$Firebase$Client = F3(
 	function (a, b, c) {
 		return {id: a, connected: b, token: c};
 	});
+var _user$project$Firebase$OnSkipSignIn = {ctor: 'OnSkipSignIn'};
 var _user$project$Firebase$AfterUserChanged = {ctor: 'AfterUserChanged'};
 var _user$project$Firebase$OnSignOut = {ctor: 'OnSignOut'};
 var _user$project$Firebase$OnSignIn = {ctor: 'OnSignIn'};

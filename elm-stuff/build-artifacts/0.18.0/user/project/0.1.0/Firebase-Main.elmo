@@ -17,8 +17,15 @@ var _user$project$Firebase_Main$update = F3(
 				return _Fresheyeball$elm_return$Return$command(
 					_user$project$Firebase_Main$signIn(
 						{ctor: '_Tuple0'}));
-			case 'OnSignOut':
+			case 'OnSkipSignIn':
 				return function (_p1) {
+					return A2(
+						_Fresheyeball$elm_return$Return$map,
+						_user$project$Firebase_Main$overSignInModel(_user$project$Firebase_SignIn$setSkipSignIn),
+						A2(andThenUpdate, _user$project$Model$OnDeactivateEditingMode, _p1));
+				};
+			case 'OnSignOut':
+				return function (_p2) {
 					return A2(
 						_Fresheyeball$elm_return$Return$command,
 						_elm_lang$navigation$Navigation$load(_user$project$AppUrl$landing),
@@ -32,24 +39,24 @@ var _user$project$Firebase_Main$update = F3(
 									_Fresheyeball$elm_return$Return$command,
 									_user$project$Firebase_Main$signOut(
 										{ctor: '_Tuple0'}),
-									_p1))));
+									_p2))));
 				};
 			default:
 				return _Fresheyeball$elm_return$Return$andThen(
 					function (model) {
 						return function () {
-							var _p2 = model.user;
-							if (_p2.ctor === 'SignedOut') {
+							var _p3 = model.user;
+							if (_p3.ctor === 'SignedOut') {
 								return _elm_lang$core$Basics$identity;
 							} else {
-								return function (_p3) {
+								return function (_p4) {
 									return A2(
 										andThenUpdate,
 										_user$project$Model$OnPersistLocalPref,
 										A2(
 											_Fresheyeball$elm_return$Return$map,
 											_user$project$Firebase_Main$overSignInModel(_user$project$Firebase_SignIn$setStateToSignInSuccess),
-											A2(andThenUpdate, _user$project$Model$OnDeactivateEditingMode, _p3)));
+											A2(andThenUpdate, _user$project$Model$OnDeactivateEditingMode, _p4)));
 								};
 							}
 						}()(

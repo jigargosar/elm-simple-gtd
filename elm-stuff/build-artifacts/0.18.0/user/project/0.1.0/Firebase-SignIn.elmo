@@ -36,6 +36,7 @@ var _user$project$Firebase_SignIn$skipSignIn = A2(
 				b,
 				{skipSignIn: s});
 		}));
+var _user$project$Firebase_SignIn$setSkipSignIn = A2(_user$project$X_Record$set, _user$project$Firebase_SignIn$skipSignIn, true);
 var _user$project$Firebase_SignIn$state = A2(
 	_user$project$X_Record$field,
 	function (_) {

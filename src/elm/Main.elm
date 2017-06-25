@@ -132,7 +132,7 @@ update msg =
                     OnFirebaseMsg Firebase.OnSignOut |> andThenUpdate
 
                 OnSkipSignIn ->
-                    andThenUpdate OnDeactivateEditingMode
+                    OnFirebaseMsg Firebase.OnSkipSignIn |> andThenUpdate
 
                 OnUserChanged user ->
                     Return.map (Model.setUser user)

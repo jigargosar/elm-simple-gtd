@@ -21,6 +21,7 @@ type Msg
     = OnSignIn
     | OnSignOut
     | AfterUserChanged
+    | OnSkipSignIn
 
 
 type alias UID =

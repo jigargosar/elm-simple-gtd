@@ -85,6 +85,10 @@ shouldSkipSignIn model =
             False
 
 
+setSkipSignIn =
+    X.Record.set skipSignIn True
+
+
 setStateToTriedSignOut =
     X.Record.set state TriedSignOut
 

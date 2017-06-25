@@ -75,6 +75,7 @@ type Msg
     | NewContext
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text
     | OnDeactivateEditingMode
+    | OnSkipSignIn
     | OnCreateDefaultEntities
     | OnCreateDefaultEntitiesWithResult (Result Http.Error D.Value)
     | StartEditingReminder Todo.Model

@@ -33,7 +33,7 @@ overlay =
                     ]
                 ]
             , div [ class "right-align" ]
-                [ a [ class "btn btn-flat", onClick Model.OnDeactivateEditingMode ]
+                [ a [ class "btn btn-flat", onClick Model.OnSkipSignIn ]
                     [ text "Skip" ]
                 ]
             ]

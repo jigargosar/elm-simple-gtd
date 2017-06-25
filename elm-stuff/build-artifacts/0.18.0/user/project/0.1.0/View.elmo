@@ -101,8 +101,8 @@ var _user$project$View$overlayViews = function (appModel) {
 				return _user$project$Todo_View$reminderPopup(_p1._0);
 			case 'SignInOverlay':
 				return _user$project$View_GetStarted$signInOverlay;
-			case 'SetupOverlay':
-				return _user$project$View_GetStarted$setupOverlay;
+			case 'Setup':
+				return _user$project$View_GetStarted$setup(_p1._0);
 			case 'ActionList':
 				return A2(_user$project$ActionList_View$init, appModel, _p1._0);
 			case 'EditProject':

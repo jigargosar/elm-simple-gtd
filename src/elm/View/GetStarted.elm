@@ -45,7 +45,7 @@ signInOverlay =
 setup form =
     let
         addTaskMsg =
-            Model.saveCurrentForm
+            Model.OnSaveCurrentForm
 
         updateSetupFormTaskText =
             Todo.Msg.UpdateSetupFormTaskText form >> Model.OnTaskMsg

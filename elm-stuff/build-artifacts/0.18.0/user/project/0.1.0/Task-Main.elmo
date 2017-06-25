@@ -192,6 +192,11 @@ var _user$project$Task_Main$update = F3(
 	function (andThenUpdate, now, todoMsg) {
 		var _p8 = todoMsg;
 		switch (_p8.ctor) {
+			case 'UpdateSetupFormTaskText':
+				return _Fresheyeball$elm_return$Return$map(
+					_user$project$Model$setEditMode(
+						_user$project$ExclusiveMode$Setup(
+							A2(_user$project$Todo_NewForm$setText, _p8._1, _p8._0))));
 			case 'OnShowMoreMenu':
 				var _p10 = _p8._0;
 				return function (_p9) {

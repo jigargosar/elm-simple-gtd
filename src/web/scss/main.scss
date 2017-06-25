@@ -160,9 +160,19 @@ img.google-sign-in{
 
 .google-sign-up.btn{
   background-color: $google-primary-color;
+  text-transform: none;
+  padding-left: 0;
+
   img.google-logo{
     width: 36px;
     height: 36px;
+    margin-right: 1rem;
   }
 
+}
+
+
+img.google-logo{
+  width: 36px;
+  height: 36px;
 }

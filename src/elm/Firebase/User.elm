@@ -11,13 +11,13 @@ import Json.Decode.Pipeline as D
 import Json.Encode as E
 
 
-type alias UserModel =
+type alias Model =
     { id : String
-    , providerData : List ProviderData
+    , providerData : List Provider
     }
 
 
-type alias ProviderData =
+type alias Provider =
     { displayName : String
     , email : String
     , photoURL : String
@@ -27,7 +27,7 @@ type alias ProviderData =
 
 
 providerDataDecoder =
-    D.succeed ProviderData
+    D.succeed Provider
         |> D.required "displayName" D.string
         |> D.required "email" D.string
         |> D.required "photoURL" D.string
@@ -36,6 +36,6 @@ providerDataDecoder =
 
 
 decoder =
-    D.succeed UserModel
+    D.succeed Model
         |> D.required "uid" D.string
         |> D.required "providerData" (D.list providerDataDecoder)

@@ -71,7 +71,7 @@ initClient deviceId =
 
 type User
     = NotLoggedIn
-    | LoggedIn Firebase.User.UserModel
+    | LoggedIn Firebase.User.Model
 
 
 userDecoder : Decoder User

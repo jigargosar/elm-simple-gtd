@@ -2,14 +2,16 @@ module View exposing (init)
 
 import ActionList
 import ActionList.View
+import AppUrl
 import CustomSync
 import EntityList.View
+import Svg
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
 import ExclusiveMode
 import Firebase.View
-import Html exposing (Attribute, Html, a, div, form, h1, h2, h3, h4, h5, h6, hr, input, node, p, span, text)
-import Html.Attributes exposing (action, attribute, autofocus, class, classList, id, method, required, style, tabindex, type_, value)
+import Html exposing (..)
+import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Model
 import Model exposing (Msg, commonMsg)
@@ -100,7 +102,7 @@ firstVisitModal =
         ]
         [ div [ id "welcome", class "modal fixed-center" ]
             [ div [ class "modal-content" ]
-                [ h4 [] [ text "Welcome to SimpleGTD.com" ]
+                [ p [] [ text "One Click Signup" ]
                 , div [ class "divider" ] []
                 , div [ class "row section" ]
                     [ div [ class "col s12 m6" ]
@@ -108,7 +110,9 @@ firstVisitModal =
                             [ text "Already have an account with us?" ]
                         ]
                     , div [ class "col s12 m6" ]
-                        [ a [ class "btn", onClick Model.OnSignIn ] [ text "Signin" ]
+                        [ a [ onClick Model.OnSignIn ]
+                            [ img [ class "google-sign-in", src AppUrl.googleSignInImage2X ] []
+                            ]
                         ]
                     ]
                 , div [ class "divider" ] []

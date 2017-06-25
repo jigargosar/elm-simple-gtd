@@ -38,3 +38,15 @@ getStarted =
 
 landing =
     "/?landing=true"
+
+
+googleSignInImage =
+    "/assets/images/btn_google_signin_dark_normal_web.png"
+
+
+googleSignInImage2X =
+    "/assets/images/btn_google_signin_dark_normal_web@2x.png"
+
+
+googleIconSvg =
+    "/assets/images/btn_google_dark_focus_ios.svg"

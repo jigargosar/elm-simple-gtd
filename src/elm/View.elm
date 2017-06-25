@@ -72,8 +72,8 @@ overlayViews appModel =
                 ExclusiveMode.SignInOverlay ->
                     View.GetStarted.signInOverlay
 
-                ExclusiveMode.SetupOverlay ->
-                    View.GetStarted.setupOverlay
+                ExclusiveMode.Setup form ->
+                    View.GetStarted.setup form
 
                 ExclusiveMode.ActionList model ->
                     ActionList.View.init appModel model

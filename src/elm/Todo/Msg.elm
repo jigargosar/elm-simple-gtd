@@ -3,6 +3,7 @@ module Todo.Msg exposing (..)
 import Menu
 import Notification exposing (Response)
 import Todo
+import Todo.NewForm
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -23,6 +24,7 @@ type Msg
     | ShowReminderOverlayForTodoId Todo.Id
     | GotoRunning
     | UpdateTimeTracker
+    | UpdateSetupFormTaskText Todo.NewForm.Model String
     | Upsert Todo.Model
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | OnShowMoreMenu Todo.Id

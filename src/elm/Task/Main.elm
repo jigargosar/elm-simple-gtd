@@ -4,6 +4,7 @@ import Document
 import DomPorts
 import ExclusiveMode
 import Entity
+import Todo.NewForm
 import X.Debug
 import X.Record as Record exposing (set)
 import X.Return
@@ -81,6 +82,13 @@ update :
     -> Model.ReturnF
 update andThenUpdate now todoMsg =
     case todoMsg of
+        UpdateSetupFormTaskText form taskText ->
+            Return.map
+                (Todo.NewForm.setText taskText form
+                    |> ExclusiveMode.Setup
+                    |> Model.setEditMode
+                )
+
         OnShowMoreMenu taskId ->
             Return.map (ExclusiveMode.taskMoreMenu taskId |> Model.setEditMode)
                 >> Return.command (positionMoreMenuCmd taskId)

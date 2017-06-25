@@ -324,7 +324,7 @@ init flags =
         editMode =
             if Firebase.SignIn.shouldSkipSignIn localPref.signIn then
                 if Store.isEmpty todoStore then
-                    ExclusiveMode.SetupOverlay
+                    createSetupExclusiveMode
                 else
                     ExclusiveMode.none
             else
@@ -651,9 +651,13 @@ isShowDetailsKeyPressed =
 
 checkAndUpdateSetupMode model =
     if Store.isEmpty model.todoStore then
-        setEditMode ExclusiveMode.SetupOverlay model
+        setEditMode createSetupExclusiveMode model
     else
         deactivateEditingMode model
+
+
+createSetupExclusiveMode =
+    ExclusiveMode.Setup (Todo.NewForm.create inboxEntity "")
 
 
 activateLaunchBar : Time -> ModelF
@@ -751,26 +755,7 @@ saveCurrentForm model =
             model |> Return.singleton
 
         ExclusiveMode.NewTodo form ->
-            insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model
-                |> Tuple.mapFirst Document.getId
-                |> uncurry
-                    (\todoId ->
-                        updateTodo
-                            (case form.referenceEntity of
-                                Entity.Task fromTodo ->
-                                    (Todo.CopyProjectAndContextId fromTodo)
-
-                                Entity.Group g ->
-                                    case g of
-                                        Entity.Context context ->
-                                            (Todo.SetContext context)
-
-                                        Entity.Project project ->
-                                            (Todo.SetProject project)
-                            )
-                            todoId
-                            >> Tuple.mapFirst (setFocusInEntityFromTodoId todoId)
-                    )
+            saveNewTodoForm form model
 
         ExclusiveMode.EditSyncSettings form ->
             { model | pouchDBRemoteSyncURI = form.uri }
@@ -788,8 +773,31 @@ saveCurrentForm model =
         ExclusiveMode.SignInOverlay ->
             model |> Return.singleton
 
-        ExclusiveMode.SetupOverlay ->
-            model |> Return.singleton
+        ExclusiveMode.Setup form ->
+            saveNewTodoForm form model
+
+
+saveNewTodoForm form model =
+    insertTodo (Todo.init model.now (form |> Todo.NewForm.getText)) model
+        |> Tuple.mapFirst Document.getId
+        |> uncurry
+            (\todoId ->
+                updateTodo
+                    (case form.referenceEntity of
+                        Entity.Task fromTodo ->
+                            (Todo.CopyProjectAndContextId fromTodo)
+
+                        Entity.Group g ->
+                            case g of
+                                Entity.Context context ->
+                                    (Todo.SetContext context)
+
+                                Entity.Project project ->
+                                    (Todo.SetProject project)
+                    )
+                    todoId
+                    >> Tuple.mapFirst (setFocusInEntityFromTodoId todoId)
+            )
 
 
 setFocusInEntityFromTodoId : Todo.Id -> ModelF

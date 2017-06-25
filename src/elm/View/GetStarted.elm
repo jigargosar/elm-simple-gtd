@@ -2,6 +2,7 @@ module View.GetStarted exposing (..)
 
 import AppUrl
 import Model
+import Todo.Msg
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -12,6 +13,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import X.Html exposing (onClickStopPropagation)
+import X.Keyboard
 
 
 signInOverlay =
@@ -40,25 +42,38 @@ signInOverlay =
         ]
 
 
-setupOverlay =
-    div
-        [ class "overlay"
-        , onClickStopPropagation Model.noop
-        ]
-        [ div [ class "modal fixed-center" ]
-            [ div [ class "modal-content" ]
-                [ h5 [ class "flow-text" ]
-                    [ text "Enter one thing that you would like to get done Today" ]
-                , div [ class "section" ]
-                    [ div [ class "input-field" ]
-                        [ input [ autofocus True, placeholder "E.g. Get Milk, Check Email" ] []
-                        , label [ class "active" ] [ text "Task" ]
+setup form =
+    let
+        addTaskMsg =
+            Model.saveCurrentForm
+
+        updateSetupFormTaskText =
+            Todo.Msg.UpdateSetupFormTaskText form >> Model.OnTaskMsg
+    in
+        div
+            [ class "overlay"
+            , onClickStopPropagation Model.noop
+            ]
+            [ div [ class "modal fixed-center" ]
+                [ div [ class "modal-content" ]
+                    [ h5 [ class "flow-text" ]
+                        [ text "Enter one thing that you would like to get done Today" ]
+                    , div [ class "section" ]
+                        [ div [ class "input-field" ]
+                            [ input
+                                [ autofocus True
+                                , placeholder "E.g. Get Milk, Check Email"
+                                , X.Keyboard.onEnter addTaskMsg
+                                , onInput updateSetupFormTaskText
+                                ]
+                                []
+                            , label [ class "active" ] [ text "Task" ]
+                            ]
                         ]
-                    ]
-                , div [ class "right-align" ]
-                    [ button [ class "btn", onClick Model.OnDeactivateEditingMode ]
-                        [ text "Ok" ]
+                    , div [ class "right-align" ]
+                        [ button [ class "btn", onClick addTaskMsg ]
+                            [ text "Ok" ]
+                        ]
                     ]
                 ]
             ]
-        ]

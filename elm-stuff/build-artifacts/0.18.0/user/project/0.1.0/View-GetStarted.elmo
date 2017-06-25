@@ -110,7 +110,7 @@ var _user$project$View_GetStarted$setupOverlay = A2(
 												_0: _elm_lang$html$Html_Attributes$class('btn'),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnDeactivateEditingMode),
+													_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnSaveCurrentForm),
 													_1: {ctor: '[]'}
 												}
 											},

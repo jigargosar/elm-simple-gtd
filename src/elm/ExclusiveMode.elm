@@ -32,10 +32,6 @@ type alias EditProjectForm =
     GroupDoc.EditForm.Model
 
 
-type alias NewTodoModel =
-    Todo.Text
-
-
 type alias SyncForm =
     { uri : String }
 
@@ -55,7 +51,7 @@ type ExclusiveMode
       -- different page !!
     | EditSyncSettings SyncForm
     | SignInOverlay
-    | SetupOverlay
+    | Setup Todo.NewForm.Model
     | None
 
 

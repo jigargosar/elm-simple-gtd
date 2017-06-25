@@ -25,6 +25,17 @@ var _user$project$Firebase_SignIn$encode = function (model) {
 			}
 		});
 };
+var _user$project$Firebase_SignIn$skipSignIn = A2(
+	_user$project$X_Record$field,
+	function (_) {
+		return _.skipSignIn;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{skipSignIn: s});
+		}));
 var _user$project$Firebase_SignIn$state = A2(
 	_user$project$X_Record$field,
 	function (_) {
@@ -41,11 +52,17 @@ var _user$project$Firebase_SignIn$Model = F2(
 		return {skipSignIn: a, state: b};
 	});
 var _user$project$Firebase_SignIn$SignInSuccess = {ctor: 'SignInSuccess'};
-var _user$project$Firebase_SignIn$setStateToSignInSuccess = A2(_user$project$X_Record$set, _user$project$Firebase_SignIn$state, _user$project$Firebase_SignIn$SignInSuccess);
+var _user$project$Firebase_SignIn$setStateToSignInSuccess = function (_p1) {
+	return A3(
+		_user$project$X_Record$set,
+		_user$project$Firebase_SignIn$skipSignIn,
+		false,
+		A3(_user$project$X_Record$set, _user$project$Firebase_SignIn$state, _user$project$Firebase_SignIn$SignInSuccess, _p1));
+};
 var _user$project$Firebase_SignIn$updateStateAfterUserChanged = F2(
 	function (user, state) {
-		var _p1 = user;
-		if (_p1.ctor === 'SignedIn') {
+		var _p2 = user;
+		if (_p2.ctor === 'SignedIn') {
 			return _user$project$Firebase_SignIn$SignInSuccess;
 		} else {
 			return state;
@@ -58,14 +75,9 @@ var _user$project$Firebase_SignIn$updateAfterUserChanged = function (user) {
 		_user$project$Firebase_SignIn$updateStateAfterUserChanged(user));
 };
 var _user$project$Firebase_SignIn$TriedSignOut = {ctor: 'TriedSignOut'};
-var _user$project$Firebase_SignIn$default = {skipSignIn: false, state: _user$project$Firebase_SignIn$TriedSignOut};
-var _user$project$Firebase_SignIn$setStateToTriedSignOut = A2(_user$project$X_Record$set, _user$project$Firebase_SignIn$state, _user$project$Firebase_SignIn$TriedSignOut);
-var _user$project$Firebase_SignIn$TriedSignIn = {ctor: 'TriedSignIn'};
 var _user$project$Firebase_SignIn$stringToMaybeState = function (string) {
-	var _p2 = string;
-	switch (_p2) {
-		case 'TriedSignIn':
-			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$TriedSignIn);
+	var _p3 = string;
+	switch (_p3) {
 		case 'TriedSignOut':
 			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$TriedSignOut);
 		case 'SignInSuccess':
@@ -96,4 +108,5 @@ var _user$project$Firebase_SignIn$decoder = A3(
 		'skipSignIn',
 		_elm_lang$core$Json_Decode$bool,
 		_elm_lang$core$Json_Decode$succeed(_user$project$Firebase_SignIn$Model)));
-var _user$project$Firebase_SignIn$setStateToTriedSignIn = A2(_user$project$X_Record$set, _user$project$Firebase_SignIn$state, _user$project$Firebase_SignIn$TriedSignIn);
+var _user$project$Firebase_SignIn$default = {skipSignIn: false, state: _user$project$Firebase_SignIn$TriedSignOut};
+var _user$project$Firebase_SignIn$setStateToTriedSignOut = A2(_user$project$X_Record$set, _user$project$Firebase_SignIn$state, _user$project$Firebase_SignIn$TriedSignOut);

@@ -36,8 +36,6 @@ update andThenUpdate now msg =
     case msg of
         Firebase.OnSignIn ->
             Return.command (signIn ())
-                >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignIn)
-                >> andThenUpdate Model.OnPersistLocalPref
 
         Firebase.OnSignOut ->
             Return.command (signOut ())

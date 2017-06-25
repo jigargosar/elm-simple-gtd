@@ -1425,7 +1425,7 @@ var _user$project$Model$LocalPref = F2(
 var _user$project$Model$localPrefDecoder = A4(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
 	'signIn',
-	_user$project$Firebase_SignIn$decode,
+	_user$project$Firebase_SignIn$decoder,
 	_user$project$Firebase_SignIn$default,
 	A4(
 		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,

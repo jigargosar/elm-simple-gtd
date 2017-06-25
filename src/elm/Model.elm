@@ -204,7 +204,7 @@ type alias LocalPref =
 localPrefDecoder =
     D.succeed LocalPref
         |> D.optional "appDrawer" AppDrawer.Model.decode AppDrawer.Model.default
-        |> D.optional "signIn" Firebase.SignIn.decode Firebase.SignIn.default
+        |> D.optional "signIn" Firebase.SignIn.decoder Firebase.SignIn.default
 
 
 encodeLocalPref model =

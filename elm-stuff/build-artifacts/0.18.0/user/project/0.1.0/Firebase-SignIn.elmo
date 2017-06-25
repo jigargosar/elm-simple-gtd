@@ -1,7 +1,6 @@
 var _user$project$Firebase_SignIn$shouldSkipSignIn = function (_) {
 	return _.skipSignIn;
 };
-var _user$project$Firebase_SignIn$default = {skipSignIn: false};
 var _user$project$Firebase_SignIn$encode = function (model) {
 	return _elm_lang$core$Json_Encode$object(
 		{
@@ -10,14 +9,60 @@ var _user$project$Firebase_SignIn$encode = function (model) {
 				_user$project$X_Function_Infix_ops['=>'],
 				'skipSignIn',
 				_elm_lang$core$Json_Encode$bool(model.skipSignIn)),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$X_Function_Infix_ops['=>'],
+					'state',
+					_elm_lang$core$Json_Encode$string(
+						_elm_lang$core$Basics$toString(model.state))),
+				_1: {ctor: '[]'}
+			}
 		});
 };
-var _user$project$Firebase_SignIn$Model = function (a) {
-	return {skipSignIn: a};
+var _user$project$Firebase_SignIn$Model = F2(
+	function (a, b) {
+		return {skipSignIn: a, state: b};
+	});
+var _user$project$Firebase_SignIn$SignedOut = {ctor: 'SignedOut'};
+var _user$project$Firebase_SignIn$default = {skipSignIn: false, state: _user$project$Firebase_SignIn$SignedOut};
+var _user$project$Firebase_SignIn$SignedIn = {ctor: 'SignedIn'};
+var _user$project$Firebase_SignIn$TriedSignOut = {ctor: 'TriedSignOut'};
+var _user$project$Firebase_SignIn$TriedSignIn = {ctor: 'TriedSignIn'};
+var _user$project$Firebase_SignIn$stringToMaybeState = function (string) {
+	var _p0 = string;
+	switch (_p0) {
+		case 'TriedSignIn':
+			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$TriedSignIn);
+		case 'TriedSignOut':
+			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$TriedSignOut);
+		case 'SignedIn':
+			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$SignedIn);
+		case 'SignedOut':
+			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$SignedOut);
+		default:
+			return _elm_lang$core$Maybe$Nothing;
+	}
 };
-var _user$project$Firebase_SignIn$decode = A3(
+var _user$project$Firebase_SignIn$stateDecoder = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	function (string) {
+		return A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+			A2(
+				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+				_user$project$Firebase_SignIn$stringToMaybeState(string),
+				_elm_lang$core$Json_Decode$succeed),
+			_elm_lang$core$Json_Decode$fail(
+				A2(_elm_lang$core$Basics_ops['++'], 'Unknown State: ', string)));
+	},
+	_elm_lang$core$Json_Decode$string);
+var _user$project$Firebase_SignIn$decoder = A3(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'skipSignIn',
-	_elm_lang$core$Json_Decode$bool,
-	_elm_lang$core$Json_Decode$succeed(_user$project$Firebase_SignIn$Model));
+	'state',
+	_user$project$Firebase_SignIn$stateDecoder,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'skipSignIn',
+		_elm_lang$core$Json_Decode$bool,
+		_elm_lang$core$Json_Decode$succeed(_user$project$Firebase_SignIn$Model)));

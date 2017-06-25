@@ -1686,7 +1686,7 @@ var _user$project$Model$init = function (flags) {
 		showDeleted: false,
 		reminderOverlay: _user$project$ReminderOverlay$none,
 		pouchDBRemoteSyncURI: pouchDBRemoteSyncURI,
-		user: _user$project$Firebase$NotLoggedIn,
+		user: _user$project$Firebase$SignedOut,
 		fcmToken: _elm_lang$core$Maybe$Nothing,
 		developmentMode: flags.developmentMode,
 		selectedEntityIdSet: _elm_lang$core$Set$empty,

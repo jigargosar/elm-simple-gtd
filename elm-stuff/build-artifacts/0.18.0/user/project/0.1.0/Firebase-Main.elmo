@@ -30,45 +30,45 @@ var _user$project$Firebase_Main$update = F3(
 			case 'OnSignOut':
 				return function (_p2) {
 					return A2(
-						_Fresheyeball$elm_return$Return$command,
-						_elm_lang$navigation$Navigation$load(_user$project$AppUrl$landing),
+						andThenUpdate,
+						_user$project$Model$OnPersistLocalPref,
 						A2(
-							andThenUpdate,
-							_user$project$Model$OnPersistLocalPref,
+							_Fresheyeball$elm_return$Return$map,
+							_user$project$Firebase_Main$overSignInModel(_user$project$Firebase_SignIn$updateOnTriedSignOut),
 							A2(
-								_Fresheyeball$elm_return$Return$map,
-								_user$project$Firebase_Main$overSignInModel(_user$project$Firebase_SignIn$updateOnTriedSignOut),
-								A2(
-									_Fresheyeball$elm_return$Return$command,
-									_user$project$Firebase_Main$signOut(
-										{ctor: '_Tuple0'}),
-									_p2))));
+								_Fresheyeball$elm_return$Return$command,
+								_user$project$Firebase_Main$signOut(
+									{ctor: '_Tuple0'}),
+								_p2)));
 				};
 			default:
 				return function (_p3) {
-					return A3(
-						_user$project$X_Return$mapModelWith,
-						function (_) {
-							return _.user;
-						},
-						function (user) {
-							return _user$project$Firebase_Main$overSignInModel(
-								_user$project$Firebase_SignIn$updateAfterUserChanged(user));
-						},
-						A2(
-							_Fresheyeball$elm_return$Return$andThen,
-							function (model) {
-								return function () {
-									var _p4 = model.user;
-									if (_p4.ctor === 'NotLoggedIn') {
-										return _elm_lang$core$Basics$identity;
-									} else {
-										return andThenUpdate(_user$project$Model$OnDeactivateEditingMode);
-									}
-								}()(
-									_Fresheyeball$elm_return$Return$singleton(model));
+					return A2(
+						andThenUpdate,
+						_user$project$Model$OnPersistLocalPref,
+						A3(
+							_user$project$X_Return$mapModelWith,
+							function (_) {
+								return _.user;
 							},
-							_p3));
+							function (user) {
+								return _user$project$Firebase_Main$overSignInModel(
+									_user$project$Firebase_SignIn$updateAfterUserChanged(user));
+							},
+							A2(
+								_Fresheyeball$elm_return$Return$andThen,
+								function (model) {
+									return function () {
+										var _p4 = model.user;
+										if (_p4.ctor === 'SignedOut') {
+											return _elm_lang$core$Basics$identity;
+										} else {
+											return andThenUpdate(_user$project$Model$OnDeactivateEditingMode);
+										}
+									}()(
+										_Fresheyeball$elm_return$Return$singleton(model));
+								},
+								_p3)));
 				};
 		}
 	});

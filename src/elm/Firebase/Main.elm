@@ -43,8 +43,8 @@ update andThenUpdate now msg =
             Return.command (signOut ())
                 >> Return.map (overSignInModel Firebase.SignIn.updateOnTriedSignOut)
                 >> andThenUpdate Model.OnPersistLocalPref
-                >> Return.command (Navigation.load AppUrl.landing)
 
+        --                >> Return.command (Navigation.load AppUrl.landing)
         Firebase.AfterUserChanged ->
             Return.andThen
                 (\model ->
@@ -58,3 +58,4 @@ update andThenUpdate now msg =
                 )
                 >> X.Return.mapModelWith (.user)
                     (\user -> overSignInModel (Firebase.SignIn.updateAfterUserChanged user))
+                >> andThenUpdate Model.OnPersistLocalPref

@@ -79,8 +79,14 @@ default =
     }
 
 
-shouldSkipSignIn =
-    .skipSignIn
+shouldSkipSignIn model =
+    --    .skipSignIn
+    case model.state of
+        SignInSuccess ->
+            True
+
+        _ ->
+            False
 
 
 updateOnTriedSignIn =
@@ -109,7 +115,7 @@ updateAfterUserChanged user =
 
 updateStateAfterUserChanged user state =
     case ( state, user ) of
-        ( TriedSignIn, Firebase.SignedIn _ ) ->
+        ( _, Firebase.SignedIn _ ) ->
             SignInSuccess
 
         ( TriedSignOut, Firebase.SignedOut ) ->

@@ -29,7 +29,7 @@
         "minify": true
       },
       "css": {
-        "minify": true
+        "minify": false
       },
       "html": {
         "minify": true

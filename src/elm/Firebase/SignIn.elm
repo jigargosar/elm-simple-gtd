@@ -100,3 +100,13 @@ updateStateOnTriedSignOut state =
     case state of
         _ ->
             TriedSignOut
+
+
+updateAfterUserChanged user =
+    X.Record.over state (updateStateAfterUserChanged user)
+
+
+updateStateAfterUserChanged user state =
+    case state of
+        _ ->
+            state

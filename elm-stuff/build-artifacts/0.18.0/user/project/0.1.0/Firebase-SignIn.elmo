@@ -1,3 +1,8 @@
+var _user$project$Firebase_SignIn$updateStateAfterUserChanged = F2(
+	function (user, state) {
+		var _p0 = state;
+		return state;
+	});
 var _user$project$Firebase_SignIn$shouldSkipSignIn = function (_) {
 	return _.skipSignIn;
 };
@@ -31,6 +36,12 @@ var _user$project$Firebase_SignIn$state = A2(
 				b,
 				{state: s});
 		}));
+var _user$project$Firebase_SignIn$updateAfterUserChanged = function (user) {
+	return A2(
+		_user$project$X_Record$over,
+		_user$project$Firebase_SignIn$state,
+		_user$project$Firebase_SignIn$updateStateAfterUserChanged(user));
+};
 var _user$project$Firebase_SignIn$Model = F2(
 	function (a, b) {
 		return {skipSignIn: a, state: b};
@@ -40,14 +51,14 @@ var _user$project$Firebase_SignIn$default = {skipSignIn: false, state: _user$pro
 var _user$project$Firebase_SignIn$SignInSuccess = {ctor: 'SignInSuccess'};
 var _user$project$Firebase_SignIn$TriedSignOut = {ctor: 'TriedSignOut'};
 var _user$project$Firebase_SignIn$updateStateOnTriedSignOut = function (state) {
-	var _p0 = state;
+	var _p1 = state;
 	return _user$project$Firebase_SignIn$TriedSignOut;
 };
 var _user$project$Firebase_SignIn$updateOnTriedSignOut = A2(_user$project$X_Record$over, _user$project$Firebase_SignIn$state, _user$project$Firebase_SignIn$updateStateOnTriedSignOut);
 var _user$project$Firebase_SignIn$TriedSignIn = {ctor: 'TriedSignIn'};
 var _user$project$Firebase_SignIn$stringToMaybeState = function (string) {
-	var _p1 = string;
-	switch (_p1) {
+	var _p2 = string;
+	switch (_p2) {
 		case 'TriedSignIn':
 			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$TriedSignIn);
 		case 'TriedSignOut':
@@ -83,7 +94,7 @@ var _user$project$Firebase_SignIn$decoder = A3(
 		_elm_lang$core$Json_Decode$bool,
 		_elm_lang$core$Json_Decode$succeed(_user$project$Firebase_SignIn$Model)));
 var _user$project$Firebase_SignIn$updateStateOnTriedSignIn = function (state) {
-	var _p2 = state;
+	var _p3 = state;
 	return _user$project$Firebase_SignIn$TriedSignIn;
 };
 var _user$project$Firebase_SignIn$updateOnTriedSignIn = A2(_user$project$X_Record$over, _user$project$Firebase_SignIn$state, _user$project$Firebase_SignIn$updateStateOnTriedSignIn);

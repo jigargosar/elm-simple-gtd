@@ -14,6 +14,7 @@ import List.Extra as List
 import Maybe.Extra as Maybe
 import Time
 import X.Record
+import X.Return
 
 
 port signIn : () -> Cmd msg
@@ -55,3 +56,5 @@ update andThenUpdate now msg =
                             Firebase.LoggedIn user ->
                                 andThenUpdate Model.OnDeactivateEditingMode
                 )
+                >> X.Return.mapModelWith (.user)
+                    (\user -> overSignInModel (Firebase.SignIn.updateAfterUserChanged user))

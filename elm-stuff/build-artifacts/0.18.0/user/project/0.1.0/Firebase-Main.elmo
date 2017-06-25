@@ -45,17 +45,30 @@ var _user$project$Firebase_Main$update = F3(
 									_p2))));
 				};
 			default:
-				return _Fresheyeball$elm_return$Return$andThen(
-					function (model) {
-						return function () {
-							var _p3 = model.user;
-							if (_p3.ctor === 'NotLoggedIn') {
-								return _elm_lang$core$Basics$identity;
-							} else {
-								return andThenUpdate(_user$project$Model$OnDeactivateEditingMode);
-							}
-						}()(
-							_Fresheyeball$elm_return$Return$singleton(model));
-					});
+				return function (_p3) {
+					return A3(
+						_user$project$X_Return$mapModelWith,
+						function (_) {
+							return _.user;
+						},
+						function (user) {
+							return _user$project$Firebase_Main$overSignInModel(
+								_user$project$Firebase_SignIn$updateAfterUserChanged(user));
+						},
+						A2(
+							_Fresheyeball$elm_return$Return$andThen,
+							function (model) {
+								return function () {
+									var _p4 = model.user;
+									if (_p4.ctor === 'NotLoggedIn') {
+										return _elm_lang$core$Basics$identity;
+									} else {
+										return andThenUpdate(_user$project$Model$OnDeactivateEditingMode);
+									}
+								}()(
+									_Fresheyeball$elm_return$Return$singleton(model));
+							},
+							_p3));
+				};
 		}
 	});

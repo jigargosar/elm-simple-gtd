@@ -61,10 +61,3 @@ update andThenUpdate now msg =
                                         (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
                                     >> andThenUpdate Model.OnPersistLocalPref
                 )
-
-
-
-{- >> X.Return.mapModelWith (.user)
-       (\user -> overSignInModel (Firebase.SignIn.updateAfterUserChanged user))
-   >> andThenUpdate Model.OnPersistLocalPref
--}

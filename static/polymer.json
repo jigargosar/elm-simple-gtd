@@ -12,7 +12,6 @@
     "manifest.json",
     "app/index.html",
     "common.js",
-    "vendor.js",
     "app.js",
     "landing.js",
     "CNAME"

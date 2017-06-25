@@ -1,3 +1,4 @@
+import "./entry"
 window.landingBoot = async function appBoot() {
     const Elm = require("elm/L/Main.elm")
     console.log(Elm)

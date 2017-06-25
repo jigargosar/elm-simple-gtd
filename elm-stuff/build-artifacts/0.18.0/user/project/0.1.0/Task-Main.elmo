@@ -261,7 +261,7 @@ var _user$project$Task_Main$update = F3(
 							_p14));
 				} : function (_p15) {
 					return andThenUpdate(
-						_user$project$Model$OnTodoMsg(
+						_user$project$Model$OnTaskMsg(
 							_user$project$Todo_Msg$ShowReminderOverlayForTodoId(_p15)));
 				}(todoId);
 			case 'ShowReminderOverlayForTodoId':
@@ -323,14 +323,14 @@ var _user$project$Task_Main$subscriptions = function (m) {
 			ctor: '::',
 			_0: _user$project$Task_Main$notificationClicked(
 				function (_p19) {
-					return _user$project$Model$OnTodoMsg(
+					return _user$project$Model$OnTaskMsg(
 						_user$project$Todo_Msg$OnReminderNotificationClicked(_p19));
 				}),
 			_1: {
 				ctor: '::',
 				_0: _user$project$Task_Main$onRunningTodoNotificationClicked(
 					function (_p20) {
-						return _user$project$Model$OnTodoMsg(
+						return _user$project$Model$OnTaskMsg(
 							_user$project$Todo_Msg$RunningNotificationResponse(_p20));
 					}),
 				_1: {
@@ -338,14 +338,14 @@ var _user$project$Task_Main$subscriptions = function (m) {
 					_0: A2(
 						_elm_lang$core$Time$every,
 						_elm_lang$core$Time$second * 1,
-						_user$project$Model$OnTodoMsgWithTime(_user$project$Todo_Msg$UpdateTimeTracker)),
+						_user$project$Model$OnTaskMsgWithTime(_user$project$Todo_Msg$UpdateTimeTracker)),
 					_1: {
 						ctor: '::',
 						_0: A2(
 							_elm_lang$core$Time$every,
 							_elm_lang$core$Time$second * 30,
 							function (_p21) {
-								return _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$OnProcessPendingNotificationCronTick);
+								return _user$project$Model$OnTaskMsg(_user$project$Todo_Msg$OnProcessPendingNotificationCronTick);
 							}),
 						_1: {ctor: '[]'}
 					}

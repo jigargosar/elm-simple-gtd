@@ -123,13 +123,13 @@ var _user$project$Main$logMsg = F2(
 				switch (_p9.ctor) {
 					case 'OnNowChanged':
 						return _elm_lang$core$Maybe$Nothing;
-					case 'OnTodoMsg':
+					case 'OnTaskMsg':
 						if (_p9._0.ctor === 'UpdateTimeTracker') {
 							return _elm_lang$core$Maybe$Nothing;
 						} else {
 							break _v2_3;
 						}
-					case 'OnTodoMsgWithTime':
+					case 'OnTaskMsgWithTime':
 						if (_p9._0.ctor === 'UpdateTimeTracker') {
 							return _elm_lang$core$Maybe$Nothing;
 						} else {
@@ -659,11 +659,16 @@ var _user$project$Main$update = function (msg) {
 					case 'OnKeyCombo':
 						return _Fresheyeball$elm_return$Return$andThen(
 							_user$project$Model$updateCombo(_p12._0));
-					case 'OnTodoMsg':
+					case 'OnTaskMsg':
 						return _user$project$Main$withNow(
-							_user$project$Model$OnTodoMsgWithTime(_p12._0));
-					case 'OnTodoMsgWithTime':
+							_user$project$Model$OnTaskMsgWithTime(_p12._0));
+					case 'OnTaskMsgWithTime':
 						return A3(_user$project$Task_Main$update, _user$project$Main$andThenUpdate, _p12._1, _p12._0);
+					case 'OnFirebaseMsg':
+						return _user$project$Main$withNow(
+							_user$project$Model$OnFirebaseMsgWithTime(_p12._0));
+					case 'OnFirebaseMsgWithTime':
+						return A3(_user$project$Firebase_Main$update, _user$project$Main$andThenUpdate, _p12._1, _p12._0);
 					case 'OnAppDrawerMsg':
 						return A2(_user$project$AppDrawer_Main$update, _user$project$Main$andThenUpdate, _p12._0);
 					default:
@@ -679,7 +684,7 @@ var _user$project$Main$update = function (msg) {
 };
 var _user$project$Main$andThenTodoMsg = function (_p61) {
 	return _user$project$Main$andThenUpdate(
-		_user$project$Model$OnTodoMsg(_p61));
+		_user$project$Model$OnTaskMsg(_p61));
 };
 var _user$project$Main$andThenUpdate = function (_p62) {
 	return _Fresheyeball$elm_return$Return$andThen(

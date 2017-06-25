@@ -17,15 +17,16 @@ import Json.Encode.Extra as E
 import Time exposing (Time)
 
 
+type Msg
+    = OnSignIn
+
+
 type alias UID =
     String
 
 
 type alias DeviceId =
     String
-
-
-port signIn : () -> Cmd msg
 
 
 port signOut : () -> Cmd msg

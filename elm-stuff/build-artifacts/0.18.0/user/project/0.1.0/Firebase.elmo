@@ -60,11 +60,6 @@ var _user$project$Firebase$fcmTokenDecoder = _elm_lang$core$Json_Decode$nullable
 var _user$project$Firebase$initClient = function (deviceId) {
 	return {id: deviceId, connected: false, token: _elm_lang$core$Maybe$Nothing};
 };
-var _user$project$Firebase$signIn = _elm_lang$core$Native_Platform.outgoingPort(
-	'signIn',
-	function (v) {
-		return null;
-	});
 var _user$project$Firebase$signOut = _elm_lang$core$Native_Platform.outgoingPort(
 	'signOut',
 	function (v) {
@@ -133,6 +128,7 @@ var _user$project$Firebase$Client = F3(
 	function (a, b, c) {
 		return {id: a, connected: b, token: c};
 	});
+var _user$project$Firebase$OnSignIn = {ctor: 'OnSignIn'};
 var _user$project$Firebase$LoggedIn = function (a) {
 	return {ctor: 'LoggedIn', _0: a};
 };

@@ -6,6 +6,7 @@ import Document
 import DomPorts exposing (autoFocusInputCmd, focusInputCmd, focusSelectorIfNoFocusCmd)
 import ExclusiveMode
 import Entity
+import Firebase.Main
 import X.Debug
 import X.Keyboard as Keyboard exposing (Key)
 import X.Record as Record exposing (set)
@@ -125,8 +126,7 @@ update msg =
                     Return.effect_ (Model.upsertEncodedDocOnFirebaseChange dbName encodedDoc)
 
                 OnSignIn ->
-                    Return.command (Firebase.signIn ())
-                        >> andThenUpdate OnDeactivateEditingMode
+                    OnFirebaseMsg Firebase.OnSignIn >> andThenUpdate
 
                 OnSkipSignIn ->
                     andThenUpdate OnDeactivateEditingMode
@@ -384,11 +384,17 @@ update msg =
                 OnKeyCombo comboMsg ->
                     Return.andThen (Model.updateCombo comboMsg)
 
-                OnTodoMsg todoMsg ->
-                    withNow (OnTodoMsgWithTime todoMsg)
+                OnTaskMsg taskMsg ->
+                    withNow (OnTaskMsgWithTime taskMsg)
 
-                OnTodoMsgWithTime todoMsg now ->
-                    Task.Main.update andThenUpdate now todoMsg
+                OnTaskMsgWithTime taskMsg now ->
+                    Task.Main.update andThenUpdate now taskMsg
+
+                OnFirebaseMsg firebaseMsg ->
+                    withNow (OnFirebaseMsgWithTime firebaseMsg)
+
+                OnFirebaseMsgWithTime firebaseMsg now ->
+                    Firebase.Main.update andThenUpdate now firebaseMsg
 
                 OnAppDrawerMsg msg ->
                     AppDrawer.Main.update andThenUpdate msg
@@ -411,10 +417,10 @@ logMsg msg model =
                 OnNowChanged _ ->
                     Nothing
 
-                OnTodoMsg Todo.Msg.UpdateTimeTracker ->
+                OnTaskMsg Todo.Msg.UpdateTimeTracker ->
                     Nothing
 
-                OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker _ ->
+                OnTaskMsgWithTime Todo.Msg.UpdateTimeTracker _ ->
                     Nothing
 
                 _ ->
@@ -451,7 +457,7 @@ andThenUpdate =
 
 
 andThenTodoMsg =
-    OnTodoMsg >> andThenUpdate
+    OnTaskMsg >> andThenUpdate
 
 
 setDomFocusToFocusInEntityCmd =

@@ -1465,24 +1465,31 @@ var _user$project$Model$OnCloseNotification = function (a) {
 var _user$project$Model$OnKeyCombo = function (a) {
 	return {ctor: 'OnKeyCombo', _0: a};
 };
-var _user$project$Model$OnTodoMsgWithTime = F2(
+var _user$project$Model$OnFirebaseMsgWithTime = F2(
 	function (a, b) {
-		return {ctor: 'OnTodoMsgWithTime', _0: a, _1: b};
+		return {ctor: 'OnFirebaseMsgWithTime', _0: a, _1: b};
 	});
-var _user$project$Model$OnTodoMsg = function (a) {
-	return {ctor: 'OnTodoMsg', _0: a};
+var _user$project$Model$OnFirebaseMsg = function (a) {
+	return {ctor: 'OnFirebaseMsg', _0: a};
+};
+var _user$project$Model$OnTaskMsgWithTime = F2(
+	function (a, b) {
+		return {ctor: 'OnTaskMsgWithTime', _0: a, _1: b};
+	});
+var _user$project$Model$OnTaskMsg = function (a) {
+	return {ctor: 'OnTaskMsg', _0: a};
 };
 var _user$project$Model$onTodoToggleRunning = function (_p58) {
-	return _user$project$Model$OnTodoMsg(
+	return _user$project$Model$OnTaskMsg(
 		_user$project$Todo_Msg$ToggleRunning(_p58));
 };
 var _user$project$Model$onTodoInitRunning = function (_p59) {
-	return _user$project$Model$OnTodoMsg(
+	return _user$project$Model$OnTaskMsg(
 		_user$project$Todo_Msg$InitRunning(_p59));
 };
-var _user$project$Model$onTodoStopRunning = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$StopRunning);
-var _user$project$Model$onTodoTogglePaused = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$TogglePaused);
-var _user$project$Model$onGotoRunningTodo = _user$project$Model$OnTodoMsg(_user$project$Todo_Msg$GotoRunning);
+var _user$project$Model$onTodoStopRunning = _user$project$Model$OnTaskMsg(_user$project$Todo_Msg$StopRunning);
+var _user$project$Model$onTodoTogglePaused = _user$project$Model$OnTaskMsg(_user$project$Todo_Msg$TogglePaused);
+var _user$project$Model$onGotoRunningTodo = _user$project$Model$OnTaskMsg(_user$project$Todo_Msg$GotoRunning);
 var _user$project$Model$keyboardCombos = {
 	ctor: '::',
 	_0: A2(

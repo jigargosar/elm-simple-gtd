@@ -139,7 +139,7 @@ createTodoViewModel appVM canBeFocused todo =
             Model.OnEntityAction (Entity.Task todo)
 
         onTodoMsg =
-            Model.OnTodoMsg
+            Model.OnTaskMsg
 
         reminder =
             createScheduleViewModel now todo
@@ -442,7 +442,7 @@ contextMenu =
 reminderPopup form =
     let
         updateReminderForm =
-            Todo.Msg.UpdateReminderForm form >> Model.OnTodoMsg
+            Todo.Msg.UpdateReminderForm form >> Model.OnTaskMsg
     in
         div
             [ class "overlay"

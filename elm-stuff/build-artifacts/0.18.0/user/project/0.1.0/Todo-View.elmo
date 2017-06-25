@@ -1,6 +1,6 @@
 var _user$project$Todo_View$reminderPopup = function (form) {
 	var updateReminderForm = function (_p0) {
-		return _user$project$Model$OnTodoMsg(
+		return _user$project$Model$OnTaskMsg(
 			A2(_user$project$Todo_Msg$UpdateReminderForm, form, _p0));
 	};
 	return A2(
@@ -832,7 +832,7 @@ var _user$project$Todo_View$getDisplayText = function (todo) {
 };
 var _user$project$Todo_View$createTodoViewModel = F3(
 	function (appVM, canBeFocused, todo) {
-		var onTodoMsg = _user$project$Model$OnTodoMsg;
+		var onTodoMsg = _user$project$Model$OnTaskMsg;
 		var createEntityActionMsg = _user$project$Model$OnEntityAction(
 			_user$project$Entity$Task(todo));
 		var startEditingMsg = canBeFocused ? createEntityActionMsg(_user$project$Entity$StartEditing) : _user$project$Model$NOOP;

@@ -97,8 +97,10 @@ type Msg
     | OnEntityAction Entity Entity.Action
     | OnLaunchBarMsg LaunchBar.Action
     | OnLaunchBarMsgWithNow LaunchBar.Action Time
-    | OnTodoMsg Todo.Msg.Msg
-    | OnTodoMsgWithTime Todo.Msg.Msg Time
+    | OnTaskMsg Todo.Msg.Msg
+    | OnTaskMsgWithTime Todo.Msg.Msg Time
+    | OnFirebaseMsg Firebase.Msg
+    | OnFirebaseMsgWithTime Firebase.Msg Time
     | OnKeyCombo Combo.Msg
     | OnCloseNotification String
     | OnSetDomFocusToFocusInEntity
@@ -115,23 +117,23 @@ keyboardCombos =
 
 
 onTodoToggleRunning =
-    Todo.Msg.ToggleRunning >> OnTodoMsg
+    Todo.Msg.ToggleRunning >> OnTaskMsg
 
 
 onTodoInitRunning =
-    Todo.Msg.InitRunning >> OnTodoMsg
+    Todo.Msg.InitRunning >> OnTaskMsg
 
 
 onTodoStopRunning =
-    Todo.Msg.StopRunning |> OnTodoMsg
+    Todo.Msg.StopRunning |> OnTaskMsg
 
 
 onTodoTogglePaused =
-    Todo.Msg.TogglePaused |> OnTodoMsg
+    Todo.Msg.TogglePaused |> OnTaskMsg
 
 
 onGotoRunningTodo =
-    Todo.Msg.GotoRunning |> OnTodoMsg
+    Todo.Msg.GotoRunning |> OnTaskMsg
 
 
 commonMsg : CommonMsg.Helper Msg

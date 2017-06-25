@@ -66,11 +66,11 @@ maybeMapToCmd fn =
 
 subscriptions m =
     Sub.batch
-        [ notificationClicked (Todo.Msg.OnReminderNotificationClicked >> Model.OnTodoMsg)
-        , onRunningTodoNotificationClicked (Todo.Msg.RunningNotificationResponse >> Model.OnTodoMsg)
-        , Time.every (Time.second * 1) (Model.OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker)
+        [ notificationClicked (Todo.Msg.OnReminderNotificationClicked >> Model.OnTaskMsg)
+        , onRunningTodoNotificationClicked (Todo.Msg.RunningNotificationResponse >> Model.OnTaskMsg)
+        , Time.every (Time.second * 1) (Model.OnTaskMsgWithTime Todo.Msg.UpdateTimeTracker)
         , Time.every (Time.second * 30)
-            (\_ -> Model.OnTodoMsg Todo.Msg.OnProcessPendingNotificationCronTick)
+            (\_ -> Model.OnTaskMsg Todo.Msg.OnProcessPendingNotificationCronTick)
         ]
 
 
@@ -140,7 +140,7 @@ update andThenUpdate now todoMsg =
                 else
                     todoId
                         |> Todo.Msg.ShowReminderOverlayForTodoId
-                        >> Model.OnTodoMsg
+                        >> Model.OnTaskMsg
                         >> andThenUpdate
 
         ShowReminderOverlayForTodoId todoId ->

@@ -61,8 +61,12 @@ var _user$project$View_GetStarted$setupOverlay = A2(
 												_elm_lang$html$Html$input,
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$placeholder('E.g. Get Milk, Check Email'),
-													_1: {ctor: '[]'}
+													_0: _elm_lang$html$Html_Attributes$autofocus(true),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$placeholder('E.g. Get Milk, Check Email'),
+														_1: {ctor: '[]'}
+													}
 												},
 												{ctor: '[]'}),
 											_1: {

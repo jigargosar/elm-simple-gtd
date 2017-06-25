@@ -51,7 +51,7 @@ setupOverlay =
                     [ text "Name one thing that you would like to get done today" ]
                 , div [ class "section" ]
                     [ div [ class "input-field" ]
-                        [ input [ placeholder "E.g. Get Milk, Check Email" ] []
+                        [ input [ autofocus True, placeholder "E.g. Get Milk, Check Email" ] []
                         , label [ class "active" ] [ text "Task" ]
                         ]
                     ]

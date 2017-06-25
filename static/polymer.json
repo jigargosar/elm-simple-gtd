@@ -27,15 +27,15 @@
   "builds": [
     {
       "name": "unbundled",
-      "bundle": false,
+      "bundle": true,
       "js": {
-        "minify": false
+        "minify": true
       },
       "css": {
-        "minify": false
+        "minify": true
       },
       "html": {
-        "minify": false
+        "minify": true
       },
       "addServiceWorker": true,
       "swPrecacheConfig": "sw-precache-config.js"

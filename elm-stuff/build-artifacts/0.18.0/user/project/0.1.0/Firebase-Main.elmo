@@ -16,8 +16,15 @@ var _user$project$Firebase_Main$update = F3(
 				_user$project$Firebase_Main$signIn(
 					{ctor: '_Tuple0'}));
 		} else {
-			return _Fresheyeball$elm_return$Return$command(
-				_user$project$Firebase_Main$signOut(
-					{ctor: '_Tuple0'}));
+			return function (_p1) {
+				return A2(
+					_Fresheyeball$elm_return$Return$command,
+					_elm_lang$navigation$Navigation$load(_user$project$AppUrl$landing),
+					A2(
+						_Fresheyeball$elm_return$Return$command,
+						_user$project$Firebase_Main$signOut(
+							{ctor: '_Tuple0'}),
+						_p1));
+			};
 		}
 	});

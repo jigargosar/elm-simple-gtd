@@ -1,7 +1,9 @@
 port module Firebase.Main exposing (..)
 
+import AppUrl
 import Firebase
 import Model
+import Navigation
 import Return
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
@@ -30,3 +32,4 @@ update andThenUpdate now msg =
 
         Firebase.OnSignOut ->
             Return.command (signOut ())
+                >> Return.command (Navigation.load AppUrl.landing)

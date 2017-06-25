@@ -56,7 +56,8 @@ type Msg
     | OnPouchDBChange String D.Value
     | OnEntityUpsert Entity
     | OnFirebaseChange String D.Value
-    | OnSetUser Firebase.User
+    | OnUserChanged Firebase.User
+    | AfterUserChanged
     | OnFCMTokenChanged Firebase.FCMToken
     | OnFirebaseConnectionChanged Bool
     | OnSignIn

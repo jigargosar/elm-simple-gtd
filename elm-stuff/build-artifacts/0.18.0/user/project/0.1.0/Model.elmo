@@ -1609,8 +1609,9 @@ var _user$project$Model$OnFirebaseConnectionChanged = function (a) {
 var _user$project$Model$OnFCMTokenChanged = function (a) {
 	return {ctor: 'OnFCMTokenChanged', _0: a};
 };
-var _user$project$Model$OnSetUser = function (a) {
-	return {ctor: 'OnSetUser', _0: a};
+var _user$project$Model$AfterUserChanged = {ctor: 'AfterUserChanged'};
+var _user$project$Model$OnUserChanged = function (a) {
+	return {ctor: 'OnUserChanged', _0: a};
 };
 var _user$project$Model$OnFirebaseChange = F2(
 	function (a, b) {

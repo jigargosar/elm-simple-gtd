@@ -28,7 +28,7 @@ init m =
     div [ id "firebase-container" ]
         ([ Html.node "firebase-auth"
             [ id "firebase-auth"
-            , onUserChanged Model.OnSetUser
+            , onUserChanged Model.OnUserChanged
             ]
             []
          , Html.node "firebase-messaging"

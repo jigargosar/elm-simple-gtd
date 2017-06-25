@@ -134,11 +134,24 @@ update msg =
                 SignOut ->
                     Return.command (Firebase.signOut ())
 
-                OnSetUser user ->
+                OnUserChanged user ->
                     Return.map (Model.setUser user)
+                        >> andThenUpdate AfterUserChanged
                         >> Return.maybeEffect firebaseUpdateClientCmd
                         >> Return.maybeEffect firebaseSetupOnDisconnectCmd
                         >> startSyncWithFirebase user
+
+                AfterUserChanged ->
+                    Return.andThen
+                        (\model ->
+                            Return.singleton model
+                                |> case model.user of
+                                    Firebase.NotLoggedIn ->
+                                        identity
+
+                                    Firebase.LoggedIn user ->
+                                        andThenUpdate OnDeactivateEditingMode
+                        )
 
                 OnFCMTokenChanged token ->
                     Return.map (Model.setFCMToken token)

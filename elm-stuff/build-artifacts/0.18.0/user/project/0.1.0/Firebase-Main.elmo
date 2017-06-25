@@ -3,17 +3,21 @@ var _user$project$Firebase_Main$signIn = _elm_lang$core$Native_Platform.outgoing
 	function (v) {
 		return null;
 	});
+var _user$project$Firebase_Main$signOut = _elm_lang$core$Native_Platform.outgoingPort(
+	'signOut',
+	function (v) {
+		return null;
+	});
 var _user$project$Firebase_Main$update = F3(
 	function (andThenUpdate, now, msg) {
 		var _p0 = msg;
-		return function (_p1) {
-			return A2(
-				andThenUpdate,
-				_user$project$Model$OnDeactivateEditingMode,
-				A2(
-					_Fresheyeball$elm_return$Return$command,
-					_user$project$Firebase_Main$signIn(
-						{ctor: '_Tuple0'}),
-					_p1));
-		};
+		if (_p0.ctor === 'OnSignIn') {
+			return _Fresheyeball$elm_return$Return$command(
+				_user$project$Firebase_Main$signIn(
+					{ctor: '_Tuple0'}));
+		} else {
+			return _Fresheyeball$elm_return$Return$command(
+				_user$project$Firebase_Main$signOut(
+					{ctor: '_Tuple0'}));
+		}
 	});

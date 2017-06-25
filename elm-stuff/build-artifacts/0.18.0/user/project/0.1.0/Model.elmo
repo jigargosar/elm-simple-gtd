@@ -1608,7 +1608,7 @@ var _user$project$Model$TodoAction = F2(
 var _user$project$Model$RemotePouchSync = function (a) {
 	return {ctor: 'RemotePouchSync', _0: a};
 };
-var _user$project$Model$SignOut = {ctor: 'SignOut'};
+var _user$project$Model$OnSignOut = {ctor: 'OnSignOut'};
 var _user$project$Model$OnSignIn = {ctor: 'OnSignIn'};
 var _user$project$Model$OnFirebaseConnectionChanged = function (a) {
 	return {ctor: 'OnFirebaseConnectionChanged', _0: a};

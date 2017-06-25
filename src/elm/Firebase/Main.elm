@@ -15,6 +15,9 @@ import Time
 port signIn : () -> Cmd msg
 
 
+port signOut : () -> Cmd msg
+
+
 update :
     (Model.Msg -> Model.ReturnF)
     -> Time.Time
@@ -24,4 +27,6 @@ update andThenUpdate now msg =
     case msg of
         Firebase.OnSignIn ->
             Return.command (signIn ())
-                >> andThenUpdate Model.OnDeactivateEditingMode
+
+        Firebase.OnSignOut ->
+            Return.command (signOut ())

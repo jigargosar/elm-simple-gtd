@@ -104,7 +104,7 @@ menu m =
 
         userSignInLink =
             maybeUserProfile
-                ?|> (\_ -> Paper.item [ onClick Model.SignOut ] [ text "SignOut" ])
+                ?|> (\_ -> Paper.item [ onClick Model.OnSignOut ] [ text "SignOut" ])
                 ?= Paper.item [ onClick Model.OnSignIn ] [ text "SignIn" ]
     in
         Paper.menuButton

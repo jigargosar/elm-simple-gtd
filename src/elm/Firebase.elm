@@ -19,6 +19,7 @@ import Time exposing (Time)
 
 type Msg
     = OnSignIn
+    | OnSignOut
 
 
 type alias UID =
@@ -27,9 +28,6 @@ type alias UID =
 
 type alias DeviceId =
     String
-
-
-port signOut : () -> Cmd msg
 
 
 port firebaseRefSet : ( String, E.Value ) -> Cmd msg

@@ -1,4 +1,5 @@
-var _user$project$AppUrl$googleIconSvg = '/assets/images/btn_google_dark_focus_ios.svg';
+var _user$project$AppUrl$googleIconPng = '/assets/images/btn_google_dark_normal_ios.png';
+var _user$project$AppUrl$googleIconSvg = '/assets/vector/btn_google_light_normal_ios.svg';
 var _user$project$AppUrl$googleSignInImage2X = '/assets/images/btn_google_signin_dark_normal_web@2x.png';
 var _user$project$AppUrl$googleSignInImage = '/assets/images/btn_google_signin_dark_normal_web.png';
 var _user$project$AppUrl$landing = '/?landing=true';

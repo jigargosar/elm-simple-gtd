@@ -7,6 +7,7 @@
 
 $primary-color: color("blue", "base");
 $secondary-color: color("red", "lighten-1");
+$google-primary-color: color("blue", "darken-2");
 
 // Variables;
 @import "material/components/variables";
@@ -99,7 +100,7 @@ a.primary-action {
       font-family: Sriracha, sans-serif;
       font-size: 2.8rem;
     }
-    
+
     .app-name {
       color: $brand-text-color
     }
@@ -154,4 +155,14 @@ a.primary-action {
 img.google-sign-in{
   width: 191px;
   height: 46px;
+}
+
+
+.google-sign-up.btn{
+  background-color: $google-primary-color;
+  img.google-logo{
+    width: 36px;
+    height: 36px;
+  }
+
 }

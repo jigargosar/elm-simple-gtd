@@ -49,4 +49,8 @@ googleSignInImage2X =
 
 
 googleIconSvg =
-    "/assets/images/btn_google_dark_focus_ios.svg"
+    "/assets/vector/btn_google_light_normal_ios.svg"
+
+
+googleIconPng =
+    "/assets/images/btn_google_dark_normal_ios.png"

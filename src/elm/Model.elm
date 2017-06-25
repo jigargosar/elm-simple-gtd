@@ -328,7 +328,7 @@ init flags =
                 else
                     ExclusiveMode.none
             else
-                ExclusiveMode.firstVisit
+                ExclusiveMode.signInOverlay
 
         model =
             { now = now

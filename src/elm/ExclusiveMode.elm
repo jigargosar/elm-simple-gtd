@@ -62,7 +62,7 @@ none =
     None
 
 
-firstVisit =
+signInOverlay =
     SignInOverlay
 
 

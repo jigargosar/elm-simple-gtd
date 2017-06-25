@@ -28,7 +28,6 @@ import WebComponents exposing (onBoolPropertyChanged)
 import LaunchBar.View
 import GroupDoc.EditView
 import Todo.MoreMenu
-import View.FirstVisit
 import View.GetStarted
 
 

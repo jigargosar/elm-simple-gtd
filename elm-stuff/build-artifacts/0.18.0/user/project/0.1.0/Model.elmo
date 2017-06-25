@@ -386,6 +386,9 @@ var _user$project$Model$startEditingReminder = function (todo) {
 					}(_p16)));
 		});
 };
+var _user$project$Model$checkAndUpdateSetupMode = function (model) {
+	return _user$project$Store$isEmpty(model.todoStore) ? _user$project$Model$deactivateEditingMode(model) : _user$project$Model$deactivateEditingMode(model);
+};
 var _user$project$Model$isShowDetailsKeyPressed = function (_p17) {
 	return !_user$project$X_Keyboard$isAltDown(
 		function (_) {

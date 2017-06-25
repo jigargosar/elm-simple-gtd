@@ -10,18 +10,6 @@ export default  (function () {
         loop: true,
     });
 
-    /*let id1 = null;
-
-    const start = () => {
-        stop()
-        id1 = sound.play()
-        sound.fade(1, 0, 3000, id1)
-    }
-
-    const stop = () => {
-        if (id1) sound.stop()
-    }*/
-
     function start() {
         const id1 = sound.play()
 

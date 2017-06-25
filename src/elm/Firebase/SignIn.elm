@@ -17,7 +17,6 @@ type State
     = TriedSignIn
     | TriedSignOut
     | SignInSuccess
-    | SignOutSuccess
 
 
 stringToMaybeState string =
@@ -30,9 +29,6 @@ stringToMaybeState string =
 
         "SignInSuccess" ->
             Just SignInSuccess
-
-        "SignOutSuccess" ->
-            Just SignOutSuccess
 
         _ ->
             Nothing
@@ -75,7 +71,7 @@ encode model =
 default : Model
 default =
     { skipSignIn = False
-    , state = SignOutSuccess
+    , state = TriedSignOut
     }
 
 
@@ -89,24 +85,16 @@ shouldSkipSignIn model =
             False
 
 
-updateOnTriedSignIn =
-    X.Record.over state updateStateOnTriedSignIn
+setStateToTriedSignIn =
+    X.Record.set state TriedSignIn
 
 
-updateStateOnTriedSignIn state =
-    case state of
-        _ ->
-            TriedSignIn
+setStateToTriedSignOut =
+    X.Record.set state TriedSignOut
 
 
-updateOnTriedSignOut =
-    X.Record.over state updateStateOnTriedSignOut
-
-
-updateStateOnTriedSignOut state =
-    case state of
-        _ ->
-            TriedSignOut
+setStateToSignInSuccess =
+    X.Record.set state SignInSuccess
 
 
 updateAfterUserChanged user =
@@ -114,12 +102,9 @@ updateAfterUserChanged user =
 
 
 updateStateAfterUserChanged user state =
-    case ( state, user ) of
-        ( _, Firebase.SignedIn _ ) ->
+    case user of
+        Firebase.SignedIn _ ->
             SignInSuccess
-
-        ( TriedSignOut, Firebase.SignedOut ) ->
-            SignOutSuccess
 
         _ ->
             state

@@ -36,15 +36,15 @@ update andThenUpdate now msg =
     case msg of
         Firebase.OnSignIn ->
             Return.command (signIn ())
-                >> Return.map (overSignInModel Firebase.SignIn.updateOnTriedSignIn)
+                >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignIn)
                 >> andThenUpdate Model.OnPersistLocalPref
 
         Firebase.OnSignOut ->
             Return.command (signOut ())
-                >> Return.map (overSignInModel Firebase.SignIn.updateOnTriedSignOut)
+                >> Return.map (overSignInModel Firebase.SignIn.setStateToTriedSignOut)
                 >> andThenUpdate Model.OnPersistLocalPref
+                >> Return.command (Navigation.load AppUrl.landing)
 
-        --                >> Return.command (Navigation.load AppUrl.landing)
         Firebase.AfterUserChanged ->
             Return.andThen
                 (\model ->
@@ -55,7 +55,14 @@ update andThenUpdate now msg =
 
                             Firebase.SignedIn user ->
                                 andThenUpdate Model.OnDeactivateEditingMode
+                                    >> Return.map
+                                        (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
+                                    >> andThenUpdate Model.OnPersistLocalPref
                 )
-                >> X.Return.mapModelWith (.user)
-                    (\user -> overSignInModel (Firebase.SignIn.updateAfterUserChanged user))
-                >> andThenUpdate Model.OnPersistLocalPref
+
+
+
+{- >> X.Return.mapModelWith (.user)
+       (\user -> overSignInModel (Firebase.SignIn.updateAfterUserChanged user))
+   >> andThenUpdate Model.OnPersistLocalPref
+-}

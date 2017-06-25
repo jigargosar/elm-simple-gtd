@@ -23,8 +23,9 @@ console.log("webpack: isWebPackDevServer: ", isWebPackDevServer)
 
 const envOutputDir = isDevEnv ? "dev" : "app"
 
-const outputPath = path.resolve(__dirname , envOutputDir)
-const styleFileName = isWebPackDevServer ? "style.css": '/assets/css/style.css'
+const outputPath = path.resolve(__dirname, envOutputDir)
+const styleFileName = isWebPackDevServer ? "style.css" : '/assets/css/style.css'
+
 export default {
     resolve: {
         alias: {elm: path.resolve(__dirname, 'src/elm/')}
@@ -125,16 +126,18 @@ export default {
             },
             {
                 test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                use:[{
-                    loader: 'url-loader',
-                    query: {
-                        name:"[name].[ext]",
-                        outputPath:"/assets/fonts/",
-                        //todo: change this value based on dev server mode.
-                        useRelativePath: isWebPackDevServer,
-                        "limit": 50000,
-                        "mimetype": "application/font-woff",
-                    }}]
+                use: [
+                    {
+                        loader: 'url-loader',
+                        query: {
+                            name: "[name].[ext]",
+                            outputPath: "/assets/fonts/",
+                            useRelativePath: isWebPackDevServer,
+                            "limit": 10000,
+                            "mimetype": "application/font-woff",
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(ttf|eot|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -158,7 +161,6 @@ export default {
         host: "0.0.0.0",
 
     },
-
 
 
     // performance: {

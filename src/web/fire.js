@@ -28,6 +28,7 @@ const firebaseConfig = (() => {
 
 export const setup = (app, dbList, localDeviceId) => {
     const firebaseApp = firebase.initializeApp(firebaseConfig);
+    console.log("firebaseApp.auth().currentUser",firebaseApp.auth().currentUser)
     let changesEmitters = []
 
     app.ports["signIn"].subscribe(() => {

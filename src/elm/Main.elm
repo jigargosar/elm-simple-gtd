@@ -134,7 +134,7 @@ update msg =
                 SignOut ->
                     Return.command (Firebase.signOut ())
 
-                OnUserChanged user ->
+                OnSetUser user ->
                     Return.map (Model.setUser user)
                         >> Return.maybeEffect firebaseUpdateClientCmd
                         >> Return.maybeEffect firebaseSetupOnDisconnectCmd

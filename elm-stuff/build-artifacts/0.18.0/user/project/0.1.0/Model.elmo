@@ -1316,6 +1316,17 @@ var _user$project$Model$toggleArchiveEntity = F2(
 			}
 		}()(model);
 	});
+var _user$project$Model$signInModel = A2(
+	_user$project$X_Record$field,
+	function (_) {
+		return _.signInModel;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{signInModel: s});
+		}));
 var _user$project$Model$appDrawerModel = A2(
 	_user$project$X_Record$field,
 	function (_) {
@@ -1332,7 +1343,7 @@ var _user$project$Model$mapOverAppDrawerModel = function (_p57) {
 	return _Fresheyeball$elm_return$Return$map(
 		A2(_user$project$X_Record$over, _user$project$Model$appDrawerModel, _p57));
 };
-var _user$project$Model$defaultLocalPref = {appDrawer: _user$project$AppDrawer_Model$default};
+var _user$project$Model$defaultLocalPref = {appDrawer: _user$project$AppDrawer_Model$default, signIn: _user$project$Firebase_SignIn$default};
 var _user$project$Model$encodeLocalPref = function (model) {
 	return _elm_lang$core$Json_Encode$object(
 		{
@@ -1341,7 +1352,14 @@ var _user$project$Model$encodeLocalPref = function (model) {
 				_user$project$X_Function_Infix_ops['=>'],
 				'appDrawer',
 				_user$project$AppDrawer_Model$encode(model.appDrawerModel)),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$X_Function_Infix_ops['=>'],
+					'signIn',
+					_user$project$Firebase_SignIn$encode(model.signInModel)),
+				_1: {ctor: '[]'}
+			}
 		});
 };
 var _user$project$Model$Model = function (a) {
@@ -1367,7 +1385,9 @@ var _user$project$Model$Model = function (a) {
 																				return function (u) {
 																					return function (v) {
 																						return function (w) {
-																							return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s, timeTracker: t, keyComboModel: u, config: v, appDrawerModel: w};
+																							return function (x) {
+																								return {now: a, todoStore: b, projectStore: c, contextStore: d, editMode: e, mainViewType: f, keyboardState: g, showDeleted: h, reminderOverlay: i, pouchDBRemoteSyncURI: j, user: k, fcmToken: l, developmentMode: m, selectedEntityIdSet: n, layout: o, appVersion: p, deviceId: q, firebaseClient: r, focusInEntity: s, timeTracker: t, keyComboModel: u, config: v, appDrawerModel: w, signInModel: x};
+																							};
 																						};
 																					};
 																				};
@@ -1398,15 +1418,21 @@ var _user$project$Model$Layout = F2(
 var _user$project$Model$Config = function (a) {
 	return {isFirstVisit: a};
 };
-var _user$project$Model$LocalPref = function (a) {
-	return {appDrawer: a};
-};
+var _user$project$Model$LocalPref = F2(
+	function (a, b) {
+		return {appDrawer: a, signIn: b};
+	});
 var _user$project$Model$localPrefDecoder = A4(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
-	'appDrawer',
-	_user$project$AppDrawer_Model$decode,
-	_user$project$AppDrawer_Model$default,
-	_elm_lang$core$Json_Decode$succeed(_user$project$Model$LocalPref));
+	'signIn',
+	_user$project$Firebase_SignIn$decode,
+	_user$project$Firebase_SignIn$default,
+	A4(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$optional,
+		'appDrawer',
+		_user$project$AppDrawer_Model$decode,
+		_user$project$AppDrawer_Model$default,
+		_elm_lang$core$Json_Decode$succeed(_user$project$Model$LocalPref)));
 var _user$project$Model$Flags = function (a) {
 	return function (b) {
 		return function (c) {
@@ -1539,6 +1565,7 @@ var _user$project$Model$OnCreateDefaultEntitiesWithResult = function (a) {
 	return {ctor: 'OnCreateDefaultEntitiesWithResult', _0: a};
 };
 var _user$project$Model$OnCreateDefaultEntities = {ctor: 'OnCreateDefaultEntities'};
+var _user$project$Model$OnSkipSignIn = {ctor: 'OnSkipSignIn'};
 var _user$project$Model$OnDeactivateEditingMode = {ctor: 'OnDeactivateEditingMode'};
 var _user$project$Model$NewTodoTextChanged = F2(
 	function (a, b) {
@@ -1582,8 +1609,8 @@ var _user$project$Model$OnFirebaseConnectionChanged = function (a) {
 var _user$project$Model$OnFCMTokenChanged = function (a) {
 	return {ctor: 'OnFCMTokenChanged', _0: a};
 };
-var _user$project$Model$OnUserChanged = function (a) {
-	return {ctor: 'OnUserChanged', _0: a};
+var _user$project$Model$OnSetUser = function (a) {
+	return {ctor: 'OnSetUser', _0: a};
 };
 var _user$project$Model$OnFirebaseChange = F2(
 	function (a, b) {
@@ -1615,6 +1642,7 @@ var _user$project$Model$init = function (flags) {
 			_elm_lang$core$Debug$log('Unable to decode localPref'),
 			A2(_elm_lang$core$Json_Decode$decodeValue, _user$project$Model$localPrefDecoder, flags.localPref)),
 		_user$project$Model$defaultLocalPref);
+	var editMode = _user$project$Firebase_SignIn$shouldSkipSignIn(localPref.signIn) ? _user$project$ExclusiveMode$none : _user$project$ExclusiveMode$firstVisit;
 	var firebaseClient = _user$project$Firebase$initClient(flags.deviceId);
 	var _p60 = flags;
 	var now = _p60.now;
@@ -1639,7 +1667,6 @@ var _user$project$Model$init = function (flags) {
 	var projectStore = _p61._0._1;
 	var contextStore = _p61._0._2;
 	var seed = _p61._1;
-	var editMode = (_user$project$Store$isEmpty(todoStore) || (_user$project$Store$isEmpty(contextStore) || _user$project$Store$isEmpty(projectStore))) ? _user$project$ExclusiveMode$firstVisit : _user$project$ExclusiveMode$none;
 	var model = {
 		now: now,
 		todoStore: todoStore,
@@ -1664,7 +1691,8 @@ var _user$project$Model$init = function (flags) {
 		keyComboModel: _scottcorgan$keyboard_combo$Keyboard_Combo$init(
 			{toMsg: _user$project$Model$OnKeyCombo, combos: _user$project$Model$keyboardCombos}),
 		config: flags.config,
-		appDrawerModel: localPref.appDrawer
+		appDrawerModel: localPref.appDrawer,
+		signInModel: localPref.signIn
 	};
 	return _Fresheyeball$elm_return$Return$singleton(model);
 };

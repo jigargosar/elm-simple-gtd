@@ -124,7 +124,7 @@ var _user$project$View_GetStarted$overlay = A2(
 									_0: _elm_lang$html$Html_Attributes$class('btn btn-flat'),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnDeactivateEditingMode),
+										_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnSkipSignIn),
 										_1: {ctor: '[]'}
 									}
 								},

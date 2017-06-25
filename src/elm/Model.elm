@@ -8,6 +8,7 @@ import Document exposing (Document)
 import Entity.Tree
 import ExclusiveMode exposing (ExclusiveMode)
 import Entity exposing (Entity)
+import Firebase.SignIn
 import X.Keyboard as Keyboard exposing (KeyboardEvent)
 import X.List as List
 import X.Predicate as Pred
@@ -55,7 +56,7 @@ type Msg
     | OnPouchDBChange String D.Value
     | OnEntityUpsert Entity
     | OnFirebaseChange String D.Value
-    | OnUserChanged Firebase.User
+    | OnSetUser Firebase.User
     | OnFCMTokenChanged Firebase.FCMToken
     | OnFirebaseConnectionChanged Bool
     | OnSignIn
@@ -174,6 +175,7 @@ type alias Model =
     , keyComboModel : Keyboard.Combo.Model Msg
     , config : Config
     , appDrawerModel : AppDrawer.Model.Model
+    , signInModel : Firebase.SignIn.Model
     }
 
 
@@ -194,22 +196,28 @@ type alias Config =
 
 type alias LocalPref =
     { appDrawer : AppDrawer.Model.Model
+    , signIn : Firebase.SignIn.Model
     }
 
 
 localPrefDecoder =
     D.succeed LocalPref
         |> D.optional "appDrawer" AppDrawer.Model.decode AppDrawer.Model.default
+        |> D.optional "signIn" Firebase.SignIn.decode Firebase.SignIn.default
 
 
 encodeLocalPref model =
     E.object
         [ "appDrawer" => AppDrawer.Model.encode model.appDrawerModel
+        , "signIn" => Firebase.SignIn.encode model.signInModel
         ]
 
 
+defaultLocalPref : LocalPref
 defaultLocalPref =
-    { appDrawer = AppDrawer.Model.default }
+    { appDrawer = AppDrawer.Model.default
+    , signIn = Firebase.SignIn.default
+    }
 
 
 type alias Flags =
@@ -232,6 +240,10 @@ type alias Flags =
 
 appDrawerModel =
     X.Record.field .appDrawerModel (\s b -> { b | appDrawerModel = s })
+
+
+signInModel =
+    X.Record.field .signInModel (\s b -> { b | signInModel = s })
 
 
 overAppDrawerModel =
@@ -300,21 +312,17 @@ init flags =
         firebaseClient =
             Firebase.initClient flags.deviceId
 
-        editMode =
-            if
-                Store.isEmpty todoStore
-                    || Store.isEmpty contextStore
-                    || Store.isEmpty projectStore
-            then
-                ExclusiveMode.firstVisit
-            else
-                -- ExclusiveMode.initActionList
-                ExclusiveMode.none
-
         localPref =
             D.decodeValue localPrefDecoder flags.localPref
                 |> Result.mapError (Debug.log "Unable to decode localPref")
                 != defaultLocalPref
+
+        editMode =
+            if Firebase.SignIn.shouldSkipSignIn localPref.signIn then
+                -- ExclusiveMode.initActionList
+                ExclusiveMode.none
+            else
+                ExclusiveMode.firstVisit
 
         model =
             { now = now
@@ -344,6 +352,7 @@ init flags =
                     }
             , config = flags.config
             , appDrawerModel = localPref.appDrawer
+            , signInModel = localPref.signIn
             }
     in
         model |> Return.singleton

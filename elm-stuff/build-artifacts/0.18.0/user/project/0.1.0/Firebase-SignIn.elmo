@@ -1,0 +1,23 @@
+var _user$project$Firebase_SignIn$shouldSkipSignIn = function (_) {
+	return _.skipSignIn;
+};
+var _user$project$Firebase_SignIn$default = {skipSignIn: false};
+var _user$project$Firebase_SignIn$encode = function (model) {
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: A2(
+				_user$project$X_Function_Infix_ops['=>'],
+				'skipSignIn',
+				_elm_lang$core$Json_Encode$bool(model.skipSignIn)),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Firebase_SignIn$Model = function (a) {
+	return {skipSignIn: a};
+};
+var _user$project$Firebase_SignIn$decode = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'skipSignIn',
+	_elm_lang$core$Json_Decode$bool,
+	_elm_lang$core$Json_Decode$succeed(_user$project$Firebase_SignIn$Model));

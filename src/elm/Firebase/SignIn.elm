@@ -15,8 +15,8 @@ import X.Record
 type State
     = TriedSignIn
     | TriedSignOut
-    | SignedIn
-    | SignedOut
+    | SignInSuccess
+    | SignOutSuccess
 
 
 stringToMaybeState string =
@@ -27,11 +27,11 @@ stringToMaybeState string =
         "TriedSignOut" ->
             Just TriedSignOut
 
-        "SignedIn" ->
-            Just SignedIn
+        "SignInSuccess" ->
+            Just SignInSuccess
 
-        "SignedOut" ->
-            Just SignedOut
+        "SignOutSuccess" ->
+            Just SignOutSuccess
 
         _ ->
             Nothing
@@ -74,7 +74,7 @@ encode model =
 default : Model
 default =
     { skipSignIn = False
-    , state = SignedOut
+    , state = SignOutSuccess
     }
 
 

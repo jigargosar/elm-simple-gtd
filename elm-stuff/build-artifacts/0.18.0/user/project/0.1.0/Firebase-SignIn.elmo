@@ -35,9 +35,9 @@ var _user$project$Firebase_SignIn$Model = F2(
 	function (a, b) {
 		return {skipSignIn: a, state: b};
 	});
-var _user$project$Firebase_SignIn$SignedOut = {ctor: 'SignedOut'};
-var _user$project$Firebase_SignIn$default = {skipSignIn: false, state: _user$project$Firebase_SignIn$SignedOut};
-var _user$project$Firebase_SignIn$SignedIn = {ctor: 'SignedIn'};
+var _user$project$Firebase_SignIn$SignOutSuccess = {ctor: 'SignOutSuccess'};
+var _user$project$Firebase_SignIn$default = {skipSignIn: false, state: _user$project$Firebase_SignIn$SignOutSuccess};
+var _user$project$Firebase_SignIn$SignInSuccess = {ctor: 'SignInSuccess'};
 var _user$project$Firebase_SignIn$TriedSignOut = {ctor: 'TriedSignOut'};
 var _user$project$Firebase_SignIn$updateStateOnTriedSignOut = function (state) {
 	var _p0 = state;
@@ -52,10 +52,10 @@ var _user$project$Firebase_SignIn$stringToMaybeState = function (string) {
 			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$TriedSignIn);
 		case 'TriedSignOut':
 			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$TriedSignOut);
-		case 'SignedIn':
-			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$SignedIn);
-		case 'SignedOut':
-			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$SignedOut);
+		case 'SignInSuccess':
+			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$SignInSuccess);
+		case 'SignOutSuccess':
+			return _elm_lang$core$Maybe$Just(_user$project$Firebase_SignIn$SignOutSuccess);
 		default:
 			return _elm_lang$core$Maybe$Nothing;
 	}

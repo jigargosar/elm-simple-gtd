@@ -1,5 +1,6 @@
 module Firebase.SignIn exposing (..)
 
+import Firebase
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
@@ -107,6 +108,12 @@ updateAfterUserChanged user =
 
 
 updateStateAfterUserChanged user state =
-    case state of
+    case ( state, user ) of
+        ( TriedSignIn, Firebase.LoggedIn _ ) ->
+            SignInSuccess
+
+        ( TriedSignOut, Firebase.NotLoggedIn ) ->
+            SignOutSuccess
+
         _ ->
             state

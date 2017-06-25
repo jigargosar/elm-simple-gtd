@@ -55,6 +55,7 @@ type ExclusiveMode
       -- different page !!
     | EditSyncSettings SyncForm
     | SignInOverlay
+    | SetupOverlay
     | None
 
 

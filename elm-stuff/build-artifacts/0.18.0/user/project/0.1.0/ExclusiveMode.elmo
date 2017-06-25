@@ -3,8 +3,9 @@ var _user$project$ExclusiveMode$SyncForm = function (a) {
 };
 var _user$project$ExclusiveMode$None = {ctor: 'None'};
 var _user$project$ExclusiveMode$none = _user$project$ExclusiveMode$None;
-var _user$project$ExclusiveMode$FirstVisit = {ctor: 'FirstVisit'};
-var _user$project$ExclusiveMode$firstVisit = _user$project$ExclusiveMode$FirstVisit;
+var _user$project$ExclusiveMode$SetupOverlay = {ctor: 'SetupOverlay'};
+var _user$project$ExclusiveMode$SignInOverlay = {ctor: 'SignInOverlay'};
+var _user$project$ExclusiveMode$signInOverlay = _user$project$ExclusiveMode$SignInOverlay;
 var _user$project$ExclusiveMode$EditSyncSettings = function (a) {
 	return {ctor: 'EditSyncSettings', _0: a};
 };

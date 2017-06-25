@@ -324,7 +324,7 @@ init flags =
         editMode =
             if Firebase.SignIn.shouldSkipSignIn localPref.signIn then
                 if Store.isEmpty todoStore then
-                    ExclusiveMode.none
+                    ExclusiveMode.SetupOverlay
                 else
                     ExclusiveMode.none
             else
@@ -651,7 +651,7 @@ isShowDetailsKeyPressed =
 
 checkAndUpdateSetupMode model =
     if Store.isEmpty model.todoStore then
-        deactivateEditingMode model
+        setEditMode ExclusiveMode.SetupOverlay model
     else
         deactivateEditingMode model
 
@@ -786,6 +786,9 @@ saveCurrentForm model =
             model |> Return.singleton
 
         ExclusiveMode.SignInOverlay ->
+            model |> Return.singleton
+
+        ExclusiveMode.SetupOverlay ->
             model |> Return.singleton
 
 

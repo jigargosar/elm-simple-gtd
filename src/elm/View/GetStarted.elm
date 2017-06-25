@@ -38,3 +38,27 @@ signInOverlay =
                 ]
             ]
         ]
+
+
+setupOverlay =
+    div
+        [ class "overlay"
+        , onClickStopPropagation Model.noop
+        ]
+        [ div [ class "modal fixed-center" ]
+            [ div [ class "modal-content" ]
+                [ h5 []
+                    [ text "Name one thing that you would like to get done today" ]
+                , div [ class "section" ]
+                    [ div [ class "input-field" ]
+                        [ input [ placeholder "E.g. Get Milk, Check Email" ] []
+                        , label [ class "active" ] [ text "Task" ]
+                        ]
+                    ]
+                , div [ class "right-align" ]
+                    [ button [ class "btn", onClick Model.OnDeactivateEditingMode ]
+                        [ text "Ok" ]
+                    ]
+                ]
+            ]
+        ]

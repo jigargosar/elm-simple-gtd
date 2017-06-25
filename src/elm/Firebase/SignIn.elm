@@ -16,6 +16,7 @@ import X.Record
 type State
     = TriedSignOut
     | SignInSuccess
+    | FirstVisitNotSignedIn
 
 
 stringToMaybeState string =
@@ -25,6 +26,9 @@ stringToMaybeState string =
 
         "SignInSuccess" ->
             Just SignInSuccess
+
+        "FirstVisitNotSignedIn" ->
+            Just FirstVisitNotSignedIn
 
         _ ->
             Nothing
@@ -71,18 +75,17 @@ encode model =
 default : Model
 default =
     { skipSignIn = False
-    , state = TriedSignOut
+    , state = FirstVisitNotSignedIn
     }
 
 
 shouldSkipSignIn model =
-    --    .skipSignIn
     case model.state of
         SignInSuccess ->
             True
 
         _ ->
-            False
+            model.skipSignIn
 
 
 setSkipSignIn =

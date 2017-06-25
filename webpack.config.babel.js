@@ -132,7 +132,7 @@ export default {
                         outputPath:"/assets/fonts/",
                         //todo: change this value based on dev server mode.
                         useRelativePath: isWebPackDevServer,
-                        "limit": 10000,
+                        "limit": 50000,
                         "mimetype": "application/font-woff",
                     }}]
             },

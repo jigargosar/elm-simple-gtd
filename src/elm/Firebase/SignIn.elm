@@ -9,6 +9,7 @@ import Maybe.Extra as Maybe
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
+import X.Record
 
 
 type State
@@ -51,6 +52,10 @@ type alias Model =
     }
 
 
+state =
+    X.Record.field .state (\s b -> { b | state = s })
+
+
 decoder : Decoder Model
 decoder =
     D.succeed Model
@@ -75,3 +80,23 @@ default =
 
 shouldSkipSignIn =
     .skipSignIn
+
+
+updateOnTriedSignIn =
+    X.Record.over state updateStateOnTriedSignIn
+
+
+updateStateOnTriedSignIn state =
+    case state of
+        _ ->
+            TriedSignIn
+
+
+updateOnTriedSignOut =
+    X.Record.over state updateStateOnTriedSignOut
+
+
+updateStateOnTriedSignOut state =
+    case state of
+        _ ->
+            TriedSignOut

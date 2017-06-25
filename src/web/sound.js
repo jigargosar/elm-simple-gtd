@@ -14,8 +14,8 @@ export default  (function () {
         const id1 = sound.play()
 
         setTimeout(function () {
-            sound.fade(1, 0, 2, id1)
-        },2000)
+            sound.fade(1, 0, 2000, id1)
+        },1000)
         
         setTimeout(function () {
             sound.stop(id1)

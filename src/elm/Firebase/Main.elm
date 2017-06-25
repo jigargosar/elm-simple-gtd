@@ -38,9 +38,9 @@ update andThenUpdate now msg =
             Return.command (signIn ())
 
         Firebase.OnSkipSignIn ->
-            andThenUpdate Model.OnDeactivateEditingMode
-                >> Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
+            Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
                 >> andThenUpdate Model.OnPersistLocalPref
+                >> andThenUpdate Model.OnDeactivateEditingMode
 
         Firebase.OnSignOut ->
             Return.command (signOut ())
@@ -57,8 +57,8 @@ update andThenUpdate now msg =
                                 identity
 
                             Firebase.SignedIn user ->
-                                andThenUpdate Model.OnDeactivateEditingMode
-                                    >> Return.map
-                                        (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
+                                Return.map
+                                    (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
                                     >> andThenUpdate Model.OnPersistLocalPref
+                                    >> andThenUpdate Model.OnDeactivateEditingMode
                 )

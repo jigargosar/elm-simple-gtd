@@ -21,11 +21,14 @@ var _user$project$Firebase_Main$update = F3(
 				return function (_p1) {
 					return A2(
 						andThenUpdate,
-						_user$project$Model$OnPersistLocalPref,
+						_user$project$Model$OnDeactivateEditingMode,
 						A2(
-							_Fresheyeball$elm_return$Return$map,
-							_user$project$Firebase_Main$overSignInModel(_user$project$Firebase_SignIn$setSkipSignIn),
-							A2(andThenUpdate, _user$project$Model$OnDeactivateEditingMode, _p1)));
+							andThenUpdate,
+							_user$project$Model$OnPersistLocalPref,
+							A2(
+								_Fresheyeball$elm_return$Return$map,
+								_user$project$Firebase_Main$overSignInModel(_user$project$Firebase_SignIn$setSkipSignIn),
+								_p1)));
 				};
 			case 'OnSignOut':
 				return function (_p2) {
@@ -55,11 +58,14 @@ var _user$project$Firebase_Main$update = F3(
 								return function (_p4) {
 									return A2(
 										andThenUpdate,
-										_user$project$Model$OnPersistLocalPref,
+										_user$project$Model$OnDeactivateEditingMode,
 										A2(
-											_Fresheyeball$elm_return$Return$map,
-											_user$project$Firebase_Main$overSignInModel(_user$project$Firebase_SignIn$setStateToSignInSuccess),
-											A2(andThenUpdate, _user$project$Model$OnDeactivateEditingMode, _p4)));
+											andThenUpdate,
+											_user$project$Model$OnPersistLocalPref,
+											A2(
+												_Fresheyeball$elm_return$Return$map,
+												_user$project$Firebase_Main$overSignInModel(_user$project$Firebase_SignIn$setStateToSignInSuccess),
+												_p4)));
 								};
 							}
 						}()(

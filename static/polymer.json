@@ -5,11 +5,8 @@
   ],
   "sources": [
     "assets/**",
-    "*.ogg",
     "*.png",
     "*.ico",
-    "*.woff",
-    "*.woff2",
     "*.js.map",
     "firebase-messaging-sw.js",
     "manifest.json",

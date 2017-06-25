@@ -14,13 +14,17 @@ import X.Record
 
 
 type State
-    = TriedSignOut
+    = FirstVisitNotSignedIn
+    | SkipSignIn
     | SignInSuccess
-    | FirstVisitNotSignedIn
+    | TriedSignOut
 
 
 stringToMaybeState string =
     case string of
+        "SkipSignIn" ->
+            Just SkipSignIn
+
         "TriedSignOut" ->
             Just TriedSignOut
 
@@ -44,8 +48,7 @@ stateDecoder =
 
 
 type alias Model =
-    { skipSignIn : Bool
-    , state : State
+    { state : State
     }
 
 
@@ -53,29 +56,22 @@ state =
     X.Record.field .state (\s b -> { b | state = s })
 
 
-skipSignIn =
-    X.Record.field .skipSignIn (\s b -> { b | skipSignIn = s })
-
-
 decoder : Decoder Model
 decoder =
     D.succeed Model
-        |> D.required "skipSignIn" D.bool
         |> D.required "state" stateDecoder
 
 
 encode : Model -> E.Value
 encode model =
     E.object
-        [ "skipSignIn" => E.bool model.skipSignIn
-        , "state" => E.string (toString model.state)
+        [ "state" => E.string (toString model.state)
         ]
 
 
 default : Model
 default =
-    { skipSignIn = False
-    , state = FirstVisitNotSignedIn
+    { state = FirstVisitNotSignedIn
     }
 
 
@@ -84,12 +80,15 @@ shouldSkipSignIn model =
         SignInSuccess ->
             True
 
+        SkipSignIn ->
+            True
+
         _ ->
-            model.skipSignIn
+            False
 
 
 setSkipSignIn =
-    X.Record.set skipSignIn True
+    X.Record.set state SkipSignIn
 
 
 setStateToTriedSignOut =
@@ -98,7 +97,6 @@ setStateToTriedSignOut =
 
 setStateToSignInSuccess =
     X.Record.set state SignInSuccess
-        >> X.Record.set skipSignIn False
 
 
 updateAfterUserChanged user =

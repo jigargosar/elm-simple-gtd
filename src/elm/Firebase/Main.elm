@@ -1,4 +1,4 @@
-module Firebase.Main exposing (..)
+port module Firebase.Main exposing (..)
 
 import Firebase
 import Model

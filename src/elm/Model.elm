@@ -785,7 +785,7 @@ saveCurrentForm model =
         ExclusiveMode.None ->
             model |> Return.singleton
 
-        ExclusiveMode.FirstVisit ->
+        ExclusiveMode.SignInOverlay ->
             model |> Return.singleton
 
 

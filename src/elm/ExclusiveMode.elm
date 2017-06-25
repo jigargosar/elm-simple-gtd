@@ -54,7 +54,7 @@ type ExclusiveMode
     | ActionList ActionList.Model
       -- different page !!
     | EditSyncSettings SyncForm
-    | FirstVisit
+    | SignInOverlay
     | None
 
 
@@ -63,7 +63,7 @@ none =
 
 
 firstVisit =
-    FirstVisit
+    SignInOverlay
 
 
 initActionList =

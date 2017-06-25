@@ -23,9 +23,14 @@ export default  (function () {
     }*/
 
     function start() {
-        sound.play()
+        const id1 = sound.play()
+
         setTimeout(function () {
-            sound.stop()
+            sound.fade(1, 0, 2, id1)
+        },2000)
+        
+        setTimeout(function () {
+            sound.stop(id1)
         },5000)
     }
 

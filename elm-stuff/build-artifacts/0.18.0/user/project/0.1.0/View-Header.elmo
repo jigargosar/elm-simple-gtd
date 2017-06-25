@@ -55,7 +55,7 @@ var _user$project$View_Header$menu = function (m) {
 					_edvail$elm_polymer$Polymer_Paper$item,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$SignOut),
+						_0: _elm_lang$html$Html_Events$onClick(_user$project$Model$OnSignOut),
 						_1: {ctor: '[]'}
 					},
 					{

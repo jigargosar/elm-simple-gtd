@@ -21,7 +21,7 @@ var _user$project$Firebase_Main$update = F3(
 				return function (_p1) {
 					return A2(
 						andThenUpdate,
-						_user$project$Model$OnDeactivateEditingMode,
+						_user$project$Model$OnCheckForFirstTimeSetup,
 						A2(
 							andThenUpdate,
 							_user$project$Model$OnPersistLocalPref,
@@ -58,7 +58,7 @@ var _user$project$Firebase_Main$update = F3(
 								return function (_p4) {
 									return A2(
 										andThenUpdate,
-										_user$project$Model$OnDeactivateEditingMode,
+										_user$project$Model$OnCheckForFirstTimeSetup,
 										A2(
 											andThenUpdate,
 											_user$project$Model$OnPersistLocalPref,

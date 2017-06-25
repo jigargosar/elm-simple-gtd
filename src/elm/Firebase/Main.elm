@@ -40,7 +40,7 @@ update andThenUpdate now msg =
         Firebase.OnSkipSignIn ->
             Return.map (overSignInModel Firebase.SignIn.setSkipSignIn)
                 >> andThenUpdate Model.OnPersistLocalPref
-                >> andThenUpdate Model.OnDeactivateEditingMode
+                >> andThenUpdate Model.OnCheckForFirstTimeSetup
 
         Firebase.OnSignOut ->
             Return.command (signOut ())
@@ -60,5 +60,5 @@ update andThenUpdate now msg =
                                 Return.map
                                     (overSignInModel Firebase.SignIn.setStateToSignInSuccess)
                                     >> andThenUpdate Model.OnPersistLocalPref
-                                    >> andThenUpdate Model.OnDeactivateEditingMode
+                                    >> andThenUpdate Model.OnCheckForFirstTimeSetup
                 )

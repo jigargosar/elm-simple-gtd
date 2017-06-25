@@ -141,6 +141,9 @@ update msg =
                         >> Return.maybeEffect firebaseSetupOnDisconnectCmd
                         >> startSyncWithFirebase user
 
+                OnCheckForFirstTimeSetup ->
+                    identity
+
                 AfterUserChanged ->
                     OnFirebaseMsg Firebase.AfterUserChanged |> andThenUpdate
 

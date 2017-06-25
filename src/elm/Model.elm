@@ -77,6 +77,7 @@ type Msg
     | NewContext
     | NewTodoTextChanged Todo.NewForm.Model Todo.Text
     | OnDeactivateEditingMode
+    | OnCheckForFirstTimeSetup
     | OnSkipSignIn
     | OnCreateDefaultEntities
     | OnCreateDefaultEntitiesWithResult (Result Http.Error D.Value)
@@ -322,8 +323,10 @@ init flags =
 
         editMode =
             if Firebase.SignIn.shouldSkipSignIn localPref.signIn then
-                -- ExclusiveMode.initActionList
-                ExclusiveMode.none
+                if Store.isEmpty todoStore then
+                    ExclusiveMode.none
+                else
+                    ExclusiveMode.none
             else
                 ExclusiveMode.firstVisit
 

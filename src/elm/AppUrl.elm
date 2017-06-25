@@ -37,7 +37,8 @@ getStarted =
 
 
 landing =
-    "/?landing=true"
+    --    "/?landing=true"
+    "/"
 
 
 googleSignInImage =

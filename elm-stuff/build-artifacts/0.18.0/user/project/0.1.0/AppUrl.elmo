@@ -2,7 +2,7 @@ var _user$project$AppUrl$googleIconPng = '/assets/images/btn_google_dark_normal_
 var _user$project$AppUrl$googleIconSvg = '/assets/vector/btn_google_light_normal_ios.svg';
 var _user$project$AppUrl$googleSignInImage2X = '/assets/images/btn_google_signin_dark_normal_web@2x.png';
 var _user$project$AppUrl$googleSignInImage = '/assets/images/btn_google_signin_dark_normal_web.png';
-var _user$project$AppUrl$landing = '/?landing=true';
+var _user$project$AppUrl$landing = '/';
 var _user$project$AppUrl$getStarted = '/app/#!/lists/contexts';
 var _user$project$AppUrl$contact = 'mailto:jigar.gosar@gmail.com';
 var _user$project$AppUrl$github = 'https://github.com/jigargosar/elm-simple-gtd';

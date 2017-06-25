@@ -31,11 +31,11 @@
 <script src="/landing.js"></script>
 <script>
     document.addEventListener('WebComponentsReady', () => {
-        if(window.location.search === "?landing=true"){
+//        if(window.location.search === "?landing=true"){
             window.landingBoot().catch(console.error)
-        }else{
-            window.appBoot().catch(console.error)
-        }
+//        }else{
+//            window.appBoot().catch(console.error)
+//        }
     });
 </script>
 <script async src="/app.js"></script>

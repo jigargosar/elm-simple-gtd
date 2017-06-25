@@ -1,4 +1,7 @@
 ## Upcoming
+* remove: landing flag 
+
+## Upcoming
 * centralize and fix app colors.
 * landing page
 * remove get started page, add sign in model to ensure user preferences are saved and appropriate sign in prompt is displayed. 

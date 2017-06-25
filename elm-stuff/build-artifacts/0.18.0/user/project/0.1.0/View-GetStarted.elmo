@@ -1,4 +1,4 @@
-var _user$project$View_GetStarted$overlay = A2(
+var _user$project$View_GetStarted$signInOverlay = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',

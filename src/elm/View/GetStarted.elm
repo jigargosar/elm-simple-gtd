@@ -14,7 +14,7 @@ import Html.Events exposing (..)
 import X.Html exposing (onClickStopPropagation)
 
 
-overlay =
+signInOverlay =
     div
         [ class "overlay"
         , onClickStopPropagation Model.noop

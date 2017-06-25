@@ -70,7 +70,7 @@ overlayViews appModel =
                     Todo.View.reminderPopup form
 
                 ExclusiveMode.FirstVisit ->
-                    View.GetStarted.overlay
+                    View.GetStarted.signInOverlay
 
                 ExclusiveMode.ActionList model ->
                     ActionList.View.init appModel model

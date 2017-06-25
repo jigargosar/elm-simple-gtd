@@ -255,7 +255,7 @@ var _user$project$Main$update = function (msg) {
 												_p14)))));
 						};
 					case 'OnCheckForFirstTimeSetup':
-						return _elm_lang$core$Basics$identity;
+						return _Fresheyeball$elm_return$Return$map(_user$project$Model$checkAndUpdateSetupMode);
 					case 'AfterUserChanged':
 						return _user$project$Main$andThenUpdate(
 							_user$project$Model$OnFirebaseMsg(_user$project$Firebase$AfterUserChanged));

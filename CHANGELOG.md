@@ -1,11 +1,9 @@
 ## Upcoming
-* remove: landing flag 
-
-## Upcoming
 * centralize and fix app colors.
 * landing page
 * remove get started page, add sign in model to ensure user preferences are saved and appropriate sign in prompt is displayed. 
   * replace it with one thing today
+* remove: landing flag
 
 ## v0.18.63 - 2017-06-23
 * on bump manually deploying to prod or dev. disabling travis for now. 

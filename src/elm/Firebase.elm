@@ -1,5 +1,6 @@
 port module Firebase exposing (..)
 
+import Firebase.User
 import Json.Decode
 import Polymer.Attributes exposing (boolProperty)
 import Toolkit.Helpers exposing (..)
@@ -57,21 +58,6 @@ startSyncCmd =
     fireStartSync
 
 
-type alias UserModel =
-    { id : String
-    , providerData : List ProviderData
-    }
-
-
-type alias ProviderData =
-    { displayName : String
-    , email : String
-    , photoURL : String
-    , providerId : String
-    , uid : String
-    }
-
-
 type alias Client =
     { id : DeviceId
     , connected : Bool
@@ -83,27 +69,15 @@ initClient deviceId =
     { id = deviceId, connected = False, token = Nothing }
 
 
-providerDataDecoder =
-    D.succeed ProviderData
-        |> D.required "displayName" D.string
-        |> D.required "email" D.string
-        |> D.required "photoURL" D.string
-        |> D.required "providerId" D.string
-        |> D.required "uid" D.string
-
-
 type User
     = NotLoggedIn
-    | LoggedIn UserModel
+    | LoggedIn Firebase.User.UserModel
 
 
 userDecoder : Decoder User
 userDecoder =
     D.oneOf
-        [ D.succeed UserModel
-            |> D.required "uid" D.string
-            |> D.required "providerData" (D.list providerDataDecoder)
-            |> D.map LoggedIn
+        [ Firebase.User.decoder |> D.map LoggedIn
         , D.succeed NotLoggedIn
         ]
 
@@ -115,14 +89,6 @@ onUserChanged =
 fcmTokenDecoder : Decoder FCMToken
 fcmTokenDecoder =
     D.nullable D.string
-
-
-onFCMTokenChanged =
-    onPropertyChanged "token" fcmTokenDecoder
-
-
-onConnectionChange =
-    onBoolPropertyChanged "data"
 
 
 getMaybeUserProfile user =

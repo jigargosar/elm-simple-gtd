@@ -56,9 +56,7 @@ var _user$project$Firebase$getMaybeUserProfile = function (user) {
 		return _elm_lang$core$List$head(_p1._0.providerData);
 	}
 };
-var _user$project$Firebase$onConnectionChange = _user$project$WebComponents$onBoolPropertyChanged('data');
 var _user$project$Firebase$fcmTokenDecoder = _elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string);
-var _user$project$Firebase$onFCMTokenChanged = A2(_user$project$WebComponents$onPropertyChanged, 'token', _user$project$Firebase$fcmTokenDecoder);
 var _user$project$Firebase$initClient = function (deviceId) {
 	return {id: deviceId, connected: false, token: _elm_lang$core$Maybe$Nothing};
 };
@@ -131,35 +129,6 @@ var _user$project$Firebase$onChange = function (tagger) {
 	return _user$project$Firebase$onFirebaseChange(
 		_elm_lang$core$Basics$uncurry(tagger));
 };
-var _user$project$Firebase$UserModel = F2(
-	function (a, b) {
-		return {id: a, providerData: b};
-	});
-var _user$project$Firebase$ProviderData = F5(
-	function (a, b, c, d, e) {
-		return {displayName: a, email: b, photoURL: c, providerId: d, uid: e};
-	});
-var _user$project$Firebase$providerDataDecoder = A3(
-	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-	'uid',
-	_elm_lang$core$Json_Decode$string,
-	A3(
-		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-		'providerId',
-		_elm_lang$core$Json_Decode$string,
-		A3(
-			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-			'photoURL',
-			_elm_lang$core$Json_Decode$string,
-			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'email',
-				_elm_lang$core$Json_Decode$string,
-				A3(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-					'displayName',
-					_elm_lang$core$Json_Decode$string,
-					_elm_lang$core$Json_Decode$succeed(_user$project$Firebase$ProviderData))))));
 var _user$project$Firebase$Client = F3(
 	function (a, b, c) {
 		return {id: a, connected: b, token: c};
@@ -171,18 +140,7 @@ var _user$project$Firebase$NotLoggedIn = {ctor: 'NotLoggedIn'};
 var _user$project$Firebase$userDecoder = _elm_lang$core$Json_Decode$oneOf(
 	{
 		ctor: '::',
-		_0: A2(
-			_elm_lang$core$Json_Decode$map,
-			_user$project$Firebase$LoggedIn,
-			A3(
-				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-				'providerData',
-				_elm_lang$core$Json_Decode$list(_user$project$Firebase$providerDataDecoder),
-				A3(
-					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-					'uid',
-					_elm_lang$core$Json_Decode$string,
-					_elm_lang$core$Json_Decode$succeed(_user$project$Firebase$UserModel)))),
+		_0: A2(_elm_lang$core$Json_Decode$map, _user$project$Firebase$LoggedIn, _user$project$Firebase_User$decoder),
 		_1: {
 			ctor: '::',
 			_0: _elm_lang$core$Json_Decode$succeed(_user$project$Firebase$NotLoggedIn),

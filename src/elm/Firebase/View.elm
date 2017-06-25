@@ -24,6 +24,14 @@ attributes =
     List.map (uncurry attribute)
 
 
+onFCMTokenChanged =
+    onPropertyChanged "token" fcmTokenDecoder
+
+
+onConnectionChange =
+    onBoolPropertyChanged "data"
+
+
 init m =
     div [ id "firebase-container" ]
         ([ Html.node "firebase-auth"

@@ -1,0 +1,38 @@
+var _user$project$Firebase_User$UserModel = F2(
+	function (a, b) {
+		return {id: a, providerData: b};
+	});
+var _user$project$Firebase_User$ProviderData = F5(
+	function (a, b, c, d, e) {
+		return {displayName: a, email: b, photoURL: c, providerId: d, uid: e};
+	});
+var _user$project$Firebase_User$providerDataDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'uid',
+	_elm_lang$core$Json_Decode$string,
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'providerId',
+		_elm_lang$core$Json_Decode$string,
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'photoURL',
+			_elm_lang$core$Json_Decode$string,
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'email',
+				_elm_lang$core$Json_Decode$string,
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'displayName',
+					_elm_lang$core$Json_Decode$string,
+					_elm_lang$core$Json_Decode$succeed(_user$project$Firebase_User$ProviderData))))));
+var _user$project$Firebase_User$decoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'providerData',
+	_elm_lang$core$Json_Decode$list(_user$project$Firebase_User$providerDataDecoder),
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'uid',
+		_elm_lang$core$Json_Decode$string,
+		_elm_lang$core$Json_Decode$succeed(_user$project$Firebase_User$UserModel)));

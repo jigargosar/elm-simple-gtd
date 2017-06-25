@@ -70,15 +70,15 @@ initClient deviceId =
 
 
 type User
-    = NotLoggedIn
-    | LoggedIn Firebase.User.Model
+    = SignedOut
+    | SignedIn Firebase.User.Model
 
 
 userDecoder : Decoder User
 userDecoder =
     D.oneOf
-        [ Firebase.User.decoder |> D.map LoggedIn
-        , D.succeed NotLoggedIn
+        [ Firebase.User.decoder |> D.map SignedIn
+        , D.succeed SignedOut
         ]
 
 
@@ -93,19 +93,19 @@ fcmTokenDecoder =
 
 getMaybeUserProfile user =
     case user of
-        NotLoggedIn ->
+        SignedOut ->
             Nothing
 
-        LoggedIn userModel ->
+        SignedIn userModel ->
             userModel.providerData |> List.head
 
 
 getMaybeUserId user =
     case user of
-        NotLoggedIn ->
+        SignedOut ->
             Nothing
 
-        LoggedIn userModel ->
+        SignedIn userModel ->
             userModel.id |> Just
 
 

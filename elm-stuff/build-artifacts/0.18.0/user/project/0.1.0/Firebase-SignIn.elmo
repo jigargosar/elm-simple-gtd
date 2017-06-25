@@ -1,8 +1,3 @@
-var _user$project$Firebase_SignIn$updateStateAfterUserChanged = F2(
-	function (user, state) {
-		var _p0 = state;
-		return state;
-	});
 var _user$project$Firebase_SignIn$shouldSkipSignIn = function (_) {
 	return _.skipSignIn;
 };
@@ -36,12 +31,6 @@ var _user$project$Firebase_SignIn$state = A2(
 				b,
 				{state: s});
 		}));
-var _user$project$Firebase_SignIn$updateAfterUserChanged = function (user) {
-	return A2(
-		_user$project$X_Record$over,
-		_user$project$Firebase_SignIn$state,
-		_user$project$Firebase_SignIn$updateStateAfterUserChanged(user));
-};
 var _user$project$Firebase_SignIn$Model = F2(
 	function (a, b) {
 		return {skipSignIn: a, state: b};
@@ -49,6 +38,37 @@ var _user$project$Firebase_SignIn$Model = F2(
 var _user$project$Firebase_SignIn$SignOutSuccess = {ctor: 'SignOutSuccess'};
 var _user$project$Firebase_SignIn$default = {skipSignIn: false, state: _user$project$Firebase_SignIn$SignOutSuccess};
 var _user$project$Firebase_SignIn$SignInSuccess = {ctor: 'SignInSuccess'};
+var _user$project$Firebase_SignIn$updateStateAfterUserChanged = F2(
+	function (user, state) {
+		var _p0 = {ctor: '_Tuple2', _0: state, _1: user};
+		_v0_2:
+		do {
+			if (_p0.ctor === '_Tuple2') {
+				if (_p0._1.ctor === 'SignedIn') {
+					if (_p0._0.ctor === 'TriedSignIn') {
+						return _user$project$Firebase_SignIn$SignInSuccess;
+					} else {
+						break _v0_2;
+					}
+				} else {
+					if (_p0._0.ctor === 'TriedSignOut') {
+						return _user$project$Firebase_SignIn$SignOutSuccess;
+					} else {
+						break _v0_2;
+					}
+				}
+			} else {
+				break _v0_2;
+			}
+		} while(false);
+		return state;
+	});
+var _user$project$Firebase_SignIn$updateAfterUserChanged = function (user) {
+	return A2(
+		_user$project$X_Record$over,
+		_user$project$Firebase_SignIn$state,
+		_user$project$Firebase_SignIn$updateStateAfterUserChanged(user));
+};
 var _user$project$Firebase_SignIn$TriedSignOut = {ctor: 'TriedSignOut'};
 var _user$project$Firebase_SignIn$updateStateOnTriedSignOut = function (state) {
 	var _p1 = state;

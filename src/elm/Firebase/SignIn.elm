@@ -109,10 +109,10 @@ updateAfterUserChanged user =
 
 updateStateAfterUserChanged user state =
     case ( state, user ) of
-        ( TriedSignIn, Firebase.LoggedIn _ ) ->
+        ( TriedSignIn, Firebase.SignedIn _ ) ->
             SignInSuccess
 
-        ( TriedSignOut, Firebase.NotLoggedIn ) ->
+        ( TriedSignOut, Firebase.SignedOut ) ->
             SignOutSuccess
 
         _ ->

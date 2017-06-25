@@ -50,10 +50,10 @@ update andThenUpdate now msg =
                 (\model ->
                     Return.singleton model
                         |> case model.user of
-                            Firebase.NotLoggedIn ->
+                            Firebase.SignedOut ->
                                 identity
 
-                            Firebase.LoggedIn user ->
+                            Firebase.SignedIn user ->
                                 andThenUpdate Model.OnDeactivateEditingMode
                 )
                 >> X.Return.mapModelWith (.user)

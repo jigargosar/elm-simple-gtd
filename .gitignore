@@ -4,6 +4,6 @@
 /*.log
 /out/
 /*.patch
-/other-assets/*
+/other-assets/
 .idea/shelf/
 /.gtm/

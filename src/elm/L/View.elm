@@ -27,16 +27,11 @@ navHeader =
         [ nav []
             [ div [ class "nav-wrapper container" ]
                 [ a [ class "brand-logo", href AppUrl.landing ]
-                    [ div [ class "layout horizontal center" ]
-                        [ {- img [ src "/logo.png", class "logo" ] []
-                             ,
-                          -}
-                          div [ class "logo-font-icon" ] [ div [ class "logo-content" ] [ text "SG" ] ]
-                        , div [ class "app-name" ]
-                            [ span [ class "brand-name-font" ] [ text "S" ]
-                            , text "imple"
-                            , span [ class "brand-name-font" ] [ text "GTD" ]
-                            ]
+                    [ div [ class "logo-font-icon" ] [ div [ class "logo-content" ] [ text "SG" ] ]
+                    , div [ class "app-name" ]
+                        [ span [ class "brand-name-font" ] [ text "S" ]
+                        , text "imple"
+                        , span [ class "brand-name-font" ] [ text "GTD" ]
                         ]
                     ]
                 , ul [ class "right hide-on-med-and-down" ]
@@ -68,17 +63,7 @@ bannerMock =
 
 overview =
     div [ class "container overview center" ]
-        [ {- div [ class "row" ]
-                 [ section [ class "section" ]
-                     [ h5 []
-                         [ header [] [ text "Simply start accomplishing more with peace of mind and focus" ]
-                         ]
-                     , p [] [ text "Work offline, in browser on any platform. And your work syncs automatically." ]
-                     ]
-                 ]
-             ,
-          -}
-          primaryFeatures
+        [ primaryFeatures
         ]
 
 

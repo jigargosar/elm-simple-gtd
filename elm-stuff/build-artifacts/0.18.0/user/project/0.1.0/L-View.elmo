@@ -416,7 +416,7 @@ var _user$project$L_View$navHeader = A2(
 									_elm_lang$html$Html$div,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('layout horizontal center'),
+										_0: _elm_lang$html$Html_Attributes$class('logo-font-icon'),
 										_1: {ctor: '[]'}
 									},
 									{
@@ -425,35 +425,43 @@ var _user$project$L_View$navHeader = A2(
 											_elm_lang$html$Html$div,
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('logo-font-icon'),
+												_0: _elm_lang$html$Html_Attributes$class('logo-content'),
 												_1: {ctor: '[]'}
 											},
 											{
 												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$div,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('logo-content'),
-														_1: {ctor: '[]'}
-													},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('SG'),
-														_1: {ctor: '[]'}
-													}),
+												_0: _elm_lang$html$Html$text('SG'),
 												_1: {ctor: '[]'}
 											}),
-										_1: {
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('app-name'),
+											_1: {ctor: '[]'}
+										},
+										{
 											ctor: '::',
 											_0: A2(
-												_elm_lang$html$Html$div,
+												_elm_lang$html$Html$span,
 												{
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('app-name'),
+													_0: _elm_lang$html$Html_Attributes$class('brand-name-font'),
 													_1: {ctor: '[]'}
 												},
 												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('S'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('imple'),
+												_1: {
 													ctor: '::',
 													_0: A2(
 														_elm_lang$html$Html$span,
@@ -464,34 +472,15 @@ var _user$project$L_View$navHeader = A2(
 														},
 														{
 															ctor: '::',
-															_0: _elm_lang$html$Html$text('S'),
+															_0: _elm_lang$html$Html$text('GTD'),
 															_1: {ctor: '[]'}
 														}),
-													_1: {
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('imple'),
-														_1: {
-															ctor: '::',
-															_0: A2(
-																_elm_lang$html$Html$span,
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html_Attributes$class('brand-name-font'),
-																	_1: {ctor: '[]'}
-																},
-																{
-																	ctor: '::',
-																	_0: _elm_lang$html$Html$text('GTD'),
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
-													}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}),
-								_1: {ctor: '[]'}
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}),
 						_1: {
 							ctor: '::',

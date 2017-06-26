@@ -66,6 +66,8 @@ $brand-text-color: $background;
 #landing nav {
 
   .brand-logo {
+    display: flex;
+    align-items: center;
     .logo-font-icon {
       text-rendering: geometricPrecision;
       font-family: Sriracha, sans-serif;
@@ -96,7 +98,6 @@ $brand-text-color: $background;
       color: $brand-text-color
     }
   }
-
 }
 
 #landing .banner {

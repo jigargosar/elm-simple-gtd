@@ -1,4 +1,4 @@
-module AppDrawer.ListView exposing (..)
+module AppDrawer.View exposing (..)
 
 import AppColors
 import X.Html exposing (onClickStopPropagation)
@@ -18,7 +18,7 @@ import Model exposing (..)
 import View.Shared exposing (..)
 
 
-init appVM model =
+list appVM model =
     let
         { contexts, projects } =
             appVM

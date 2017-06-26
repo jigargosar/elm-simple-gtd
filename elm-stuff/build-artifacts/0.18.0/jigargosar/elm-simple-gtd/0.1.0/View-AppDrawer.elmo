@@ -214,7 +214,7 @@ var _jigargosar$elm_simple_gtd$View_AppDrawer$view = F2(
 							}),
 						_1: {
 							ctor: '::',
-							_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_ListView$init, appVM, model),
+							_0: A2(_jigargosar$elm_simple_gtd$AppDrawer_View$list, appVM, model),
 							_1: {ctor: '[]'}
 						}
 					}),

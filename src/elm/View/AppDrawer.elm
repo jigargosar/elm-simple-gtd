@@ -1,7 +1,7 @@
 module View.AppDrawer exposing (..)
 
 import AppColors
-import AppDrawer.ListView
+import AppDrawer.View
 import AppUrl
 import X.Html exposing (boolProperty)
 import Html exposing (Attribute, Html, a, div, hr, node, span, text)
@@ -48,7 +48,7 @@ view appVM model =
                     , leftHeader model
                     ]
                 ]
-            , AppDrawer.ListView.init appVM model
+            , AppDrawer.View.list appVM model
             ]
         ]
 

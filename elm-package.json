@@ -6,6 +6,7 @@
     "source-directories": [
         "src/elm"
     ],
+    "native-modules": true,
     "exposed-modules": [],
     "dependencies": {
         "Fresheyeball/elm-function-extra": "3.0.0 <= v < 4.0.0",
@@ -39,6 +40,7 @@
         "elm-lang/window": "1.0.1 <= v < 2.0.0",
         "evancz/url-parser": "2.0.1 <= v < 3.0.0",
         "gampleman/elm-visualization": "1.1.0 <= v < 2.0.0",
+        "iosphere/elm-logger": "1.0.1 <= v < 2.0.0",
         "justinmimbs/elm-date-extra": "2.0.3 <= v < 3.0.0",
         "jystic/elm-font-awesome": "2.0.1 <= v < 3.0.0",
         "mdgriffith/elm-color-mixing": "1.1.1 <= v < 2.0.0",

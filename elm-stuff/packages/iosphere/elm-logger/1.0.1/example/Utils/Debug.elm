@@ -1,25 +1,24 @@
-module X.Debug exposing (tap, tapLog)
+module Utils.Debug
+    exposing
+        ( log
+        , logVerbose
+        , logInfo
+        , logWarning
+        , logError
+        )
 
-import Logger
+{-|
+This is the template implementation of a logger helper that should reside in the
+elm app's code base. It sets the minimum log level and provides convenience
+log functions to avoid importing `Logger` at the call sites.
+-}
+
 import Logger
 
 
 -- Only needed when using nativeLog to print logs:
 
 import Native.Logger
-
-
-tap : (value -> ignore) -> value -> value
-tap tapperFunction value =
-    let
-        _ =
-            tapperFunction value
-    in
-        value
-
-
-tapLog transformerFunction logString =
-    tap (transformerFunction >> log logString)
 
 
 nativeLog : Logger.ExternalLoggingFunction a

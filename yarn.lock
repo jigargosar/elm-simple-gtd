@@ -2666,6 +2666,10 @@ lie@3.1.1:
   dependencies:
     immediate "~3.0.5"
 
+line-driver@1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/line-driver/-/line-driver-1.1.9.tgz#95c5fd3edefd708678c2c647016a80e5d5e5e497"
+
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"

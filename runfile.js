@@ -190,4 +190,4 @@ export function dummy2(...args) {
 
 dummy.help = 'logs all options and args to console'
 
-const removeUnusedImports = runElm
+export const removeUnusedImports = runElm

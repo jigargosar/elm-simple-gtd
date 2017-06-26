@@ -56,13 +56,11 @@ $navbar-font-color: $off-black;
 
 $text-color: $off-black;
 $background: #fff;
-//$brand-text-color: darken($primary-color, 5%);
 $brand-text-color: $background;
 
 #landing {
   background-color: $background;
   width: 100vw;
-  //min-height: 100vh;
 }
 
 #landing nav {

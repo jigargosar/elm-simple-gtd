@@ -339,7 +339,7 @@ var _user$project$L_View$banner = A2(
 											_elm_lang$html$Html$a,
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('primary-action'),
+												_0: _elm_lang$html$Html_Attributes$class('btn primary-action'),
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$html$Html_Attributes$href(_user$project$AppUrl$getStarted),
@@ -530,7 +530,7 @@ var _user$project$L_View$navHeader = A2(
 													_elm_lang$html$Html$a,
 													{
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('primary-action'),
+														_0: _elm_lang$html$Html_Attributes$class('btn primary-action'),
 														_1: {
 															ctor: '::',
 															_0: _elm_lang$html$Html_Attributes$href(_user$project$AppUrl$getStarted),

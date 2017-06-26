@@ -1,3 +1,10 @@
+var _jigargosar$elm_simple_gtd$X_List$singleton = function (item) {
+	return {
+		ctor: '::',
+		_0: item,
+		_1: {ctor: '[]'}
+	};
+};
 var _jigargosar$elm_simple_gtd$X_List$toMaybe = function (list) {
 	var _p0 = list;
 	if (_p0.ctor === '[]') {

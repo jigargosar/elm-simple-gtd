@@ -2,13 +2,9 @@ module View.Header exposing (..)
 
 import AppColors
 import AppUrl
-
 import X.Html exposing (boolProperty)
-
-
 import Firebase
 import Model
-
 import Model exposing (Model)
 import Model exposing (Msg)
 import Polymer.App as App
@@ -16,17 +12,11 @@ import Polymer.Paper as Paper
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-
 import Todo.TimeTracker.View
-
 import Toolkit.Operators exposing (..)
-
 import X.Function.Infix exposing (..)
-
-
-
 import WebComponents exposing (..)
-import XList
+import X.List
 
 
 init viewModel m =
@@ -62,7 +52,7 @@ headerView viewModel m =
     let
         content =
             Todo.TimeTracker.View.maybe m
-                ?|> XList.singleton
+                ?|> X.List.singleton
                 ?= titleHeaderContent viewModel m
     in
         headerWithContent content m

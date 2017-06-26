@@ -1,11 +1,7 @@
 module X.List exposing (..)
 
-
 import Toolkit.Operators exposing (..)
-
-
 import List.Extra as List
-
 
 
 listLastIndex list =
@@ -40,3 +36,7 @@ toMaybe list =
 
         _ ->
             Just list
+
+
+singleton item =
+    [ item ]

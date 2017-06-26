@@ -128,7 +128,7 @@ var _jigargosar$elm_simple_gtd$View$overlayViews = function (appModel) {
 			_0: _elm_lang$core$Maybe$Just(editModeOverlayView),
 			_1: {
 				ctor: '::',
-				_0: _jigargosar$elm_simple_gtd$View_ReminderOverlay$maybe(appModel),
+				_0: _jigargosar$elm_simple_gtd$Task_ReminderOverlay$maybe(appModel),
 				_1: {ctor: '[]'}
 			}
 		});

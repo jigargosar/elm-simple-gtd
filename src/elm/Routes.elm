@@ -1,6 +1,5 @@
 module Routes exposing (..)
 
-
 import Entity
 import Maybe.Extra
 import Model as Model
@@ -10,9 +9,7 @@ import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
 import X.Function.Infix exposing (..)
 import Model exposing (..)
-
-
-import XList
+import X.List
 
 
 delta2builder : Model -> Model -> Maybe Builder
@@ -49,7 +46,7 @@ builder2messages builder =
                         -- If nothing provided for this part of the URL, return empty list
                         [ Model.OnSetViewType Model.defaultView ]
             )
-            (Model.OnSetEntityListView >> XList.singleton)
+            (Model.OnSetEntityListView >> X.List.singleton)
 
 
 hash2messages : Location -> List Msg

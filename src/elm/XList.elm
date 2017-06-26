@@ -1,11 +1,4 @@
-module XList exposing (..)
-
-
-
-
-
-
-
+module X.List exposing (..)
 
 
 singleton item =

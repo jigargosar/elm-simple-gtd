@@ -18,7 +18,7 @@ var _jigargosar$elm_simple_gtd$Routes$builder2messages = function (builder) {
 			}
 		},
 		function (_p2) {
-			return _jigargosar$elm_simple_gtd$XList$singleton(
+			return _jigargosar$elm_simple_gtd$X_List$singleton(
 				_jigargosar$elm_simple_gtd$Model$OnSetEntityListView(_p2));
 		},
 		_jigargosar$elm_simple_gtd$Entity$routeUrlBuilderToMaybeListViewType(builder));

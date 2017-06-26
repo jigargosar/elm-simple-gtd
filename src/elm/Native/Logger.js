@@ -2,7 +2,7 @@ const _jigargosar$elm_simple_gtd$Native_Logger = function () {
 
     function log(level, color, tag, value) {
         const stringValue = _elm_lang$core$Native_Utils.toString(value)
-        const process = process || {}
+        let process = process || {}
         if (process.stdout) {
             process.stdout.write(tag + ": " + stringValue)
         }

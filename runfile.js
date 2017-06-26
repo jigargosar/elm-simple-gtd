@@ -95,7 +95,8 @@ const prod = () => {
     }
 }
 
-export const hot = runF(`webpack-dev-server --hot --inline`, {
+export const hot = runF(`webpack-dev-server --hot --inline | tee -a \\
+        >( sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g' >> wp.txt )`, {
     env: {
         NODE_ENV: "development",
         npm_package_version: fetchPackageJson().version,

@@ -1,13 +1,10 @@
 module Menu exposing (..)
 
-
-
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard exposing (KeyboardEvent, onKeyDown, onKeyDownStopPropagation)
 import X.List as List
 import Html.Keyed
 import Keyboard.Extra as Key
-
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
@@ -16,10 +13,7 @@ import Maybe.Extra as Maybe
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-
-
 import Tuple2
-
 
 
 type alias State =

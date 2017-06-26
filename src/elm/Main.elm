@@ -17,7 +17,6 @@ import Keyboard.Combo
 import LaunchBar
 import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
-
 import Model as Model
 import Notification exposing (Response)
 import ReminderOverlay
@@ -27,20 +26,15 @@ import Todo
 import Todo.Form
 import Todo.GroupForm
 import Todo.Msg
-
 import Return
 import RouteUrl exposing (RouteUrlProgram)
 import Task
 import Time exposing (Time)
 import Toolkit.Operators exposing (..)
-
-
 import Model exposing (..)
 import Task.Main
 import View
 import Json.Decode as D exposing (Decoder)
-
-
 
 
 port syncWithRemotePouch : String -> Cmd msg

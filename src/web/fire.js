@@ -170,7 +170,7 @@ export const setup = (app, dbList, localDeviceId) => {
     })
 
     app.ports["firebaseSetupOnDisconnect"].subscribe(([uid, deviceId]) => {
-        console.log("[FJS]:firebaseSetupOnDisconnect: called")
+        // console.log("[FJS]:firebaseSetupOnDisconnect: called")
         const connectedRef = firebaseApp.database().ref(`/users/${uid}/clients/${deviceId}/connected`)
         connectedRef.onDisconnect().set(false)
     })

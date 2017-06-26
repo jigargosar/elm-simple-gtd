@@ -6,7 +6,7 @@ import sound from "./sound"
 export default {setup: setupNotifications}
 
 async function setupNotifications(fire, app) {
-    console.info("Setting up notification ports and sw registration")
+    // console.info("Setting up notification ports and sw registration")
     if (!'serviceWorker' in navigator) {
         console.warn("serviceWorker not found in navigator")
         return
@@ -17,23 +17,23 @@ async function setupNotifications(fire, app) {
 
     navigator.serviceWorker.addEventListener('message', event => {
         const data = event.data;
-        console.log("JS: serviceWorker.onMessage", event.data, event)
+        // console.log("JS: serviceWorker.onMessage", event.data, event)
         if (data["firebase-messaging-msg-type"]) {
-            console.info("FBJS: ignoring message event received", data, event)
+            // console.info("FBJS: ignoring message event received", data, event)
         } else {
             if (data && data["data"] && data["data"]["notificationClickedPort"]) {
                 const replyPort = data["data"]["notificationClickedPort"]
-                console.log("JS: sending to port: ",replyPort, data)
+                // console.log("JS: sending to port: ",replyPort, data)
                 app.ports[replyPort].send(data)
 
             } else {
-                console.log("JS: sending to port: notificationClicked ", data)
+                // console.log("JS: sending to port: notificationClicked ", data)
                 app.ports["notificationClicked"].send(data)
             }
         }
     });
 
-    console.info("navigator.serviceWorker.register: ", swScriptPath)
+    // console.info("navigator.serviceWorker.register: ", swScriptPath)
     const reg = await navigator.serviceWorker.register(swScriptPath)
 
     const intervalId = setInterval(() => {

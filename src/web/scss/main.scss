@@ -56,78 +56,8 @@ $navbar-font-color: $off-black;
 
 $text-color: $off-black;
 $background: #fff;
-$brand-text-color: $background;
 
-#landing {
-  background-color: $background;
-  width: 100vw;
-}
-
-#landing nav {
-
-  .brand-logo {
-    display: flex;
-    align-items: center;
-    .logo-font-icon {
-      text-rendering: geometricPrecision;
-      font-family: Sriracha, sans-serif;
-      margin: 0 1rem;
-      font-size: 42px;
-      color: $primary-color;
-      background-color: $background;
-      width: 32px;
-      height: 32px;
-      line-height: 32px;
-      overflow: hidden;
-      border-radius: 25%;
-      letter-spacing: -3px;
-      .logo-content {
-        position: relative;
-        left: -8px;
-      }
-
-    }
-
-    .brand-name-font {
-      text-rendering: geometricPrecision;
-      font-family: Sriracha, sans-serif;
-      font-size: 2.8rem;
-    }
-
-    .app-name {
-      color: $brand-text-color
-    }
-  }
-}
-
-#landing .banner {
-  background: url("/assets/stock-images/banner2-cropped-compressor-resize-retouch.jpg") no-repeat center center;
-  background-size: cover;
-  width: 100vw;
-  min-height: 20rem;
-  height: auto;
-  padding: 10rem 0;
-  color: $background;
-}
-
-#landing .features.primary {
-  .feature {
-    margin-top:2rem;
-    i {
-      font-size: 10rem;
-      color: $primary-color;
-    }
-  }
-
-}
-
-#landing .page-footer {
-  color: $background;
-  a {
-    white-space: nowrap;
-    padding: 0 1rem;
-  }
-}
+@import "landing";
 
 #app-view {
   background-color: color("grey", "lighten-4");

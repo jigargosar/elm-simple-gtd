@@ -3,18 +3,10 @@ port module Firebase exposing (..)
 import Firebase.User
 import Json.Decode
 import Polymer.Attributes exposing (boolProperty)
-
-
-
 import X.Function.Infix exposing (..)
-
-
-import WebComponents exposing (..)
 import Json.Decode as D exposing (Decoder)
-
 import Json.Encode as E
 import Json.Encode.Extra as E
-
 
 
 type Msg
@@ -81,10 +73,6 @@ userDecoder =
         [ Firebase.User.decoder |> D.map SignedIn
         , D.succeed SignedOut
         ]
-
-
-onUserChanged =
-    onPropertyChanged "user" userDecoder
 
 
 fcmTokenDecoder : Decoder FCMToken

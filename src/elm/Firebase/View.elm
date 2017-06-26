@@ -3,21 +3,8 @@ module Firebase.View exposing (..)
 import Firebase exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-
-
-
 import Model
-
-
-
-
-
-
 import WebComponents exposing (..)
-
-
-
-
 
 
 attributes =
@@ -30,6 +17,10 @@ onFCMTokenChanged =
 
 onConnectionChange =
     onBoolPropertyChanged "data"
+
+
+onUserChanged =
+    onPropertyChanged "user" userDecoder
 
 
 init m =

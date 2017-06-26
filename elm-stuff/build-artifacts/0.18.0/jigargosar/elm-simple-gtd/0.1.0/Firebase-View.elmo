@@ -1,3 +1,4 @@
+var _jigargosar$elm_simple_gtd$Firebase_View$onUserChanged = A2(_jigargosar$elm_simple_gtd$WebComponents$onPropertyChanged, 'user', _jigargosar$elm_simple_gtd$Firebase$userDecoder);
 var _jigargosar$elm_simple_gtd$Firebase_View$onConnectionChange = _jigargosar$elm_simple_gtd$WebComponents$onBoolPropertyChanged('data');
 var _jigargosar$elm_simple_gtd$Firebase_View$onFCMTokenChanged = A2(_jigargosar$elm_simple_gtd$WebComponents$onPropertyChanged, 'token', _jigargosar$elm_simple_gtd$Firebase$fcmTokenDecoder);
 var _jigargosar$elm_simple_gtd$Firebase_View$init = function (m) {
@@ -18,7 +19,7 @@ var _jigargosar$elm_simple_gtd$Firebase_View$init = function (m) {
 					_0: _elm_lang$html$Html_Attributes$id('firebase-auth'),
 					_1: {
 						ctor: '::',
-						_0: _jigargosar$elm_simple_gtd$Firebase$onUserChanged(_jigargosar$elm_simple_gtd$Model$OnUserChanged),
+						_0: _jigargosar$elm_simple_gtd$Firebase_View$onUserChanged(_jigargosar$elm_simple_gtd$Model$OnUserChanged),
 						_1: {ctor: '[]'}
 					}
 				},

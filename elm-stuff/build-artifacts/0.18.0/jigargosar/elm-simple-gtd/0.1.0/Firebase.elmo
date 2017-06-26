@@ -141,4 +141,3 @@ var _jigargosar$elm_simple_gtd$Firebase$userDecoder = _elm_lang$core$Json_Decode
 			_1: {ctor: '[]'}
 		}
 	});
-var _jigargosar$elm_simple_gtd$Firebase$onUserChanged = A2(_jigargosar$elm_simple_gtd$WebComponents$onPropertyChanged, 'user', _jigargosar$elm_simple_gtd$Firebase$userDecoder);

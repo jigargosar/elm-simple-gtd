@@ -19,29 +19,6 @@ const env = process.env
 const npmPackageVersion = env["npm_package_version"]
 
 
-const dt = (function () {
-    function getApi() {
-        if (withDevTools) {
-            const devTools = window["__REDUX_DEVTOOLS_EXTENSION__"].connect()
-            return {
-                devTools: devTools,
-                unsubscribe: devTools.subscribe((message) => {
-                    // Implement monitors actions.
-                    // For example time traveling:
-                    if (message.type === 'DISPATCH' && message.payload.type === 'JUMP_TO_STATE') {
-                        this.setState(message.state);
-                    }
-                })
-            }
-        }
-    }
-
-    const api = getApi()
-    console.log("DT:API", api)
-
-    return {}
-
-})()
 
 window.appBoot = async function appBoot() {
     const deviceId = getOrCreateDeviceId()
@@ -108,6 +85,37 @@ window.appBoot = async function appBoot() {
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]
         .embed(document.getElementById("elm-container"), flags)
+
+
+    // const dt = (function () {
+    //     function getApi() {
+    //         if (withDevTools) {
+    //             const devTools = window["__REDUX_DEVTOOLS_EXTENSION__"].connect()
+    //             return {
+    //                 devTools: devTools,
+    //                 unsubscribe: devTools.subscribe((message) => {
+    //                     // Implement monitors actions.
+    //                     // For example time traveling:
+    //                     if (message.type === 'DISPATCH' && message.payload.type === 'JUMP_TO_STATE') {
+    //                         app.ports["setState"].send(message.state)
+    //                     }
+    //                 })
+    //             }
+    //         }
+    //     }
+    //
+    //     const api = getApi()
+    //     console.log("DT:API", api)
+    //     if (api){
+    //         app.ports["onStateChanged"].subscribe(([msg, state]) =>{
+    //             api.devTools.send('msg', state);
+    //         })
+    //     }
+    //
+    //     return {}
+    //
+    // })()
+
 
     const fire = Fire.setup(app, _.values(dbMap), deviceId)
 

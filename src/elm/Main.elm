@@ -43,6 +43,13 @@ port syncWithRemotePouch : String -> Cmd msg
 port persistLocalPref : D.Value -> Cmd msg
 
 
+
+--port setState : D.Value -> Cmd msg
+--
+--
+--port onStateChanged : (Model.Model -> msg) -> Sub msg
+
+
 main : RouteUrlProgram Flags Model Msg
 main =
     RouteUrl.programWithFlags

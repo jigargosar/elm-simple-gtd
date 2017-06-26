@@ -434,11 +434,6 @@ updateTodoAndMaybeAlsoSelected action todo =
     Return.andThen (Model.updateTodoAndMaybeAlsoSelected action (Document.getId todo))
 
 
-onMsgList : List Msg -> ReturnF
-onMsgList =
-    flip (List.foldl (update >> Return.andThen))
-
-
 andThenUpdate =
     update >> Return.andThen
 

@@ -18,7 +18,32 @@ const isDevelopmentMode = process.env["NODE_ENV"] === "development"
 const env = process.env
 const npmPackageVersion = env["npm_package_version"]
 
-window.appBoot= async function appBoot() {
+
+const dt = (function () {
+    function getApi() {
+        if (withDevTools) {
+            const devTools = window["__REDUX_DEVTOOLS_EXTENSION__"].connect()
+            return {
+                devTools: devTools,
+                unsubscribe: devTools.subscribe((message) => {
+                    // Implement monitors actions.
+                    // For example time traveling:
+                    if (message.type === 'DISPATCH' && message.payload.type === 'JUMP_TO_STATE') {
+                        this.setState(message.state);
+                    }
+                })
+            }
+        }
+    }
+
+    const api = getApi()
+    console.log("DT:API", api)
+
+    return {}
+
+})()
+
+window.appBoot = async function appBoot() {
     const deviceId = getOrCreateDeviceId()
     const isFirstVisit = getOrCreateFirstVisit()
     const $elm = $("#elm-container")
@@ -64,7 +89,7 @@ window.appBoot= async function appBoot() {
 
     const localPref = await store.getItem("local-pref")
 
-    
+
     const flags = {
         now: Date.now(),
         encodedTodoList: await allDocsMap["todo-db"],
@@ -77,8 +102,8 @@ window.appBoot= async function appBoot() {
         developmentMode: isDevelopmentMode,
         appVersion: npmPackageVersion,
         deviceId,
-        config:{isFirstVisit, deviceId, npmPackageVersion, isDevelopmentMode},
-        localPref:localPref
+        config: {isFirstVisit, deviceId, npmPackageVersion, isDevelopmentMode},
+        localPref: localPref
     }
     const Elm = require("elm/Main.elm")
     const app = Elm["Main"]
@@ -106,7 +131,7 @@ window.appBoot= async function appBoot() {
 
     app.ports["persistLocalPref"].subscribe(async (localPref) => {
         store.setItem("local-pref", localPref)
-            .catch(console.error)
+             .catch(console.error)
     });
 
 
@@ -143,20 +168,20 @@ window.appBoot= async function appBoot() {
 
             const focusableSelector = ":focusable, input:focusable"
             $popup.on("keydown", focusableSelector, function (e) {
-                if(e.key !== "Tab") return
+                if (e.key !== "Tab") return
                 const $focusable = $popup.find(focusableSelector)
 
                 const first = $focusable.first().get(0)
                 const last = $focusable.last().get(0)
                 const dateTimeInputSelector = `input[type="date"], input[type="time"]`
-                
-                if(e.shiftKey){
 
-                    if(this === first){
+                if (e.shiftKey) {
+
+                    if (this === first) {
                         e.preventDefault()
                         e.stopPropagation()
                         last.focus()
-                    }else if ($(this).is(dateTimeInputSelector)){
+                    } else if ($(this).is(dateTimeInputSelector)) {
                         e.preventDefault()
                         e.stopPropagation()
                         $focusable.get($.inArray(this, $focusable) - 1).focus()
@@ -165,11 +190,11 @@ window.appBoot= async function appBoot() {
                 else {
 
 
-                    if(this === last){
+                    if (this === last) {
                         e.preventDefault()
                         e.stopPropagation()
                         first.focus()
-                    }else if ($(this).is(dateTimeInputSelector)){
+                    } else if ($(this).is(dateTimeInputSelector)) {
                         e.preventDefault()
                         e.stopPropagation()
                         $focusable.get($.inArray(this, $focusable) + 1).focus()

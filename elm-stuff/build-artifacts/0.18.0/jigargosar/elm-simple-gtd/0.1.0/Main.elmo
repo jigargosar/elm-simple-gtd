@@ -139,7 +139,7 @@ var _jigargosar$elm_simple_gtd$Main$logMsg = F2(
 						break _v2_3;
 				}
 			} while(false);
-			var _p10 = A2(_jigargosar$elm_simple_gtd$X_Debug$log, 'Msg', msg);
+			var _p10 = 1;
 			return _elm_lang$core$Maybe$Nothing;
 		}();
 		return model;

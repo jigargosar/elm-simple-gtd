@@ -414,7 +414,8 @@ logMsg msg model =
                 _ ->
                     let
                         _ =
-                            X.Debug.log "Msg" (msg)
+                            --                            X.Debug.log "Msg" (msg)
+                            1
                     in
                         Nothing
     in

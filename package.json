@@ -5,7 +5,6 @@
   "license": "MIT",
   "engines": {
     "node": "v7.10.0"
-    
   },
   "private": true,
   "repository": {

@@ -13,6 +13,8 @@ import autosize from "autosize"
 import localforage from "localforage"
 
 
+//noinspection JSUnresolvedVariable
+const isDevelopmentMode = IS_DEVELOPMENT_ENV
 const env = process.env
 const npmPackageVersion = env["npm_package_version"]
 
@@ -72,7 +74,7 @@ window.appBoot= async function appBoot() {
         // encodedProjectList: [],
         // encodedContextList: [],
         pouchDBRemoteSyncURI: localStorage.getItem("pouchdb.remote-sync-uri") || "",
-        developmentMode: IS_DEVELOPMENT_ENV,
+        developmentMode: isDevelopmentMode,
         appVersion: npmPackageVersion,
         deviceId,
         config:{isFirstVisit, deviceId, npmPackageVersion, isDevelopmentMode},

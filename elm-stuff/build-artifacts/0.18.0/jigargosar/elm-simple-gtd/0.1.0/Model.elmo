@@ -397,20 +397,20 @@ var _jigargosar$elm_simple_gtd$Model$setReminderOverlayToSnoozeView = F2(
 		return _elm_lang$core$Native_Utils.update(
 			model,
 			{
-				reminderOverlay: _jigargosar$elm_simple_gtd$ReminderOverlay$snoozeView(details)
+				reminderOverlay: _jigargosar$elm_simple_gtd$Task_Notification_Model$snoozeView(details)
 			});
 	});
 var _jigargosar$elm_simple_gtd$Model$removeReminderOverlay = function (model) {
 	return _elm_lang$core$Native_Utils.update(
 		model,
-		{reminderOverlay: _jigargosar$elm_simple_gtd$ReminderOverlay$none});
+		{reminderOverlay: _jigargosar$elm_simple_gtd$Task_Notification_Model$none});
 };
 var _jigargosar$elm_simple_gtd$Model$setReminderOverlayToInitialView = F2(
 	function (todo, model) {
 		return _elm_lang$core$Native_Utils.update(
 			model,
 			{
-				reminderOverlay: _jigargosar$elm_simple_gtd$ReminderOverlay$initialView(todo)
+				reminderOverlay: _jigargosar$elm_simple_gtd$Task_Notification_Model$initialView(todo)
 			});
 	});
 var _jigargosar$elm_simple_gtd$Model$showReminderOverlayForTodoId = function (todoId) {
@@ -1040,7 +1040,7 @@ var _jigargosar$elm_simple_gtd$Model$updateTodo = F2(
 	});
 var _jigargosar$elm_simple_gtd$Model$snoozeTodoWithOffset = F3(
 	function (snoozeOffset, todoId, model) {
-		var time = A2(_jigargosar$elm_simple_gtd$ReminderOverlay$addSnoozeOffset, model.now, snoozeOffset);
+		var time = A2(_jigargosar$elm_simple_gtd$Task_Notification_Model$addSnoozeOffset, model.now, snoozeOffset);
 		return function (_p36) {
 			return A2(
 				_elm_lang$core$Tuple$mapFirst,
@@ -1695,7 +1695,7 @@ var _jigargosar$elm_simple_gtd$Model$init = function (flags) {
 		mainViewType: _jigargosar$elm_simple_gtd$Model$defaultView,
 		keyboardState: _jigargosar$elm_simple_gtd$X_Keyboard$init,
 		showDeleted: false,
-		reminderOverlay: _jigargosar$elm_simple_gtd$ReminderOverlay$none,
+		reminderOverlay: _jigargosar$elm_simple_gtd$Task_Notification_Model$none,
 		pouchDBRemoteSyncURI: pouchDBRemoteSyncURI,
 		user: _jigargosar$elm_simple_gtd$Firebase$SignedOut,
 		fcmToken: _elm_lang$core$Maybe$Nothing,

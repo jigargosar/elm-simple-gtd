@@ -1,6 +1,6 @@
 var _jigargosar$elm_simple_gtd$Task_Notification_View$activeViewShell = F2(
 	function (todoDetails, children) {
-		var onOutsideMouseDown = _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$ReminderOverlay$Close);
+		var onOutsideMouseDown = _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$Task_Notification_Model$Close);
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -56,9 +56,9 @@ var _jigargosar$elm_simple_gtd$Task_Notification_View$reminderOverlayActiveView 
 		var _p0 = activeView;
 		if (_p0.ctor === 'InitialView') {
 			var vm = {
-				onDismissClicked: _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$ReminderOverlay$Dismiss),
-				onDoneClicked: _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$ReminderOverlay$MarkDone),
-				onSnoozeClicked: _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$ReminderOverlay$ShowSnoozeOptions)
+				onDismissClicked: _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$Task_Notification_Model$Dismiss),
+				onDoneClicked: _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$Task_Notification_Model$MarkDone),
+				onSnoozeClicked: _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(_jigargosar$elm_simple_gtd$Task_Notification_Model$ShowSnoozeOptions)
 			};
 			return A2(
 				_jigargosar$elm_simple_gtd$Task_Notification_View$activeViewShell,
@@ -79,16 +79,16 @@ var _jigargosar$elm_simple_gtd$Task_Notification_View$reminderOverlayActiveView 
 		} else {
 			var msg = function (_p1) {
 				return _jigargosar$elm_simple_gtd$Model$ReminderOverlayAction(
-					_jigargosar$elm_simple_gtd$ReminderOverlay$SnoozeTill(_p1));
+					_jigargosar$elm_simple_gtd$Task_Notification_Model$SnoozeTill(_p1));
 			};
 			var vm = {
 				snoozeFor15Min: msg(
-					_jigargosar$elm_simple_gtd$ReminderOverlay$SnoozeForMilli(_elm_lang$core$Time$minute * 15)),
+					_jigargosar$elm_simple_gtd$Task_Notification_Model$SnoozeForMilli(_elm_lang$core$Time$minute * 15)),
 				snoozeFor1Hour: msg(
-					_jigargosar$elm_simple_gtd$ReminderOverlay$SnoozeForMilli(_elm_lang$core$Time$hour)),
+					_jigargosar$elm_simple_gtd$Task_Notification_Model$SnoozeForMilli(_elm_lang$core$Time$hour)),
 				snoozeFor3Hours: msg(
-					_jigargosar$elm_simple_gtd$ReminderOverlay$SnoozeForMilli(_elm_lang$core$Time$hour * 3)),
-				snoozeTillTomorrow: msg(_jigargosar$elm_simple_gtd$ReminderOverlay$SnoozeTillTomorrow)
+					_jigargosar$elm_simple_gtd$Task_Notification_Model$SnoozeForMilli(_elm_lang$core$Time$hour * 3)),
+				snoozeTillTomorrow: msg(_jigargosar$elm_simple_gtd$Task_Notification_Model$SnoozeTillTomorrow)
 			};
 			return A2(
 				_jigargosar$elm_simple_gtd$Task_Notification_View$activeViewShell,
@@ -112,7 +112,7 @@ var _jigargosar$elm_simple_gtd$Task_Notification_View$reminderOverlayActiveView 
 				});
 		}
 	});
-var _jigargosar$elm_simple_gtd$Task_Notification_View$maybe = function (m) {
+var _jigargosar$elm_simple_gtd$Task_Notification_View$maybeOverlay = function (m) {
 	var _p2 = m.reminderOverlay;
 	if (_p2.ctor === 'Active') {
 		return _elm_lang$core$Maybe$Just(

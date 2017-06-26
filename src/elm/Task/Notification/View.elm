@@ -4,28 +4,28 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import X.Html exposing (onClickStopPropagation)
 import Model
-import ReminderOverlay
+import Task.Notification.Model
 import Time
 import WebComponents exposing (..)
 
 
 maybeOverlay m =
     case m.reminderOverlay of
-        ReminderOverlay.Active activeView todoDetails ->
+        Task.Notification.Model.Active activeView todoDetails ->
             reminderOverlayActiveView activeView todoDetails |> Just
 
-        ReminderOverlay.None ->
+        Task.Notification.Model.None ->
             Nothing
 
 
 reminderOverlayActiveView activeView todoDetails =
     case activeView of
-        ReminderOverlay.InitialView ->
+        Task.Notification.Model.InitialView ->
             let
                 vm =
-                    { onDismissClicked = Model.ReminderOverlayAction ReminderOverlay.Dismiss
-                    , onDoneClicked = Model.ReminderOverlayAction ReminderOverlay.MarkDone
-                    , onSnoozeClicked = Model.ReminderOverlayAction ReminderOverlay.ShowSnoozeOptions
+                    { onDismissClicked = Model.ReminderOverlayAction Task.Notification.Model.Dismiss
+                    , onDoneClicked = Model.ReminderOverlayAction Task.Notification.Model.MarkDone
+                    , onSnoozeClicked = Model.ReminderOverlayAction Task.Notification.Model.ShowSnoozeOptions
                     }
             in
                 activeViewShell todoDetails
@@ -34,16 +34,16 @@ reminderOverlayActiveView activeView todoDetails =
                     , iconTextButton "done" "done!" vm.onDoneClicked
                     ]
 
-        ReminderOverlay.SnoozeView ->
+        Task.Notification.Model.SnoozeView ->
             let
                 msg =
-                    ReminderOverlay.SnoozeTill >> Model.ReminderOverlayAction
+                    Task.Notification.Model.SnoozeTill >> Model.ReminderOverlayAction
 
                 vm =
-                    { snoozeFor15Min = msg (ReminderOverlay.SnoozeForMilli (Time.minute * 15))
-                    , snoozeFor1Hour = msg (ReminderOverlay.SnoozeForMilli (Time.hour))
-                    , snoozeFor3Hours = msg (ReminderOverlay.SnoozeForMilli (Time.hour * 3))
-                    , snoozeTillTomorrow = msg (ReminderOverlay.SnoozeTillTomorrow)
+                    { snoozeFor15Min = msg (Task.Notification.Model.SnoozeForMilli (Time.minute * 15))
+                    , snoozeFor1Hour = msg (Task.Notification.Model.SnoozeForMilli (Time.hour))
+                    , snoozeFor3Hours = msg (Task.Notification.Model.SnoozeForMilli (Time.hour * 3))
+                    , snoozeTillTomorrow = msg (Task.Notification.Model.SnoozeTillTomorrow)
                     }
             in
                 activeViewShell todoDetails
@@ -57,7 +57,7 @@ reminderOverlayActiveView activeView todoDetails =
 activeViewShell todoDetails children =
     let
         onOutsideMouseDown =
-            Model.ReminderOverlayAction ReminderOverlay.Close
+            Model.ReminderOverlayAction Task.Notification.Model.Close
     in
         div [ class "full-view fixed-top", onClickStopPropagation onOutsideMouseDown ]
             [ div [ class "fixed-bottom top-shadow static" ]

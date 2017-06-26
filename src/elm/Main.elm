@@ -19,7 +19,7 @@ import X.Function.Infix exposing (..)
 import Keyboard.Extra as Key
 import Model as Model
 import Notification exposing (Response)
-import ReminderOverlay
+import Task.Notification.Model
 import Routes
 import Store
 import Todo
@@ -463,31 +463,31 @@ reminderOverlayAction action =
         (\model ->
             model
                 |> case model.reminderOverlay of
-                    ReminderOverlay.Active activeView todoDetails ->
+                    Task.Notification.Model.Active activeView todoDetails ->
                         let
                             todoId =
                                 todoDetails.id
                         in
                             case action of
-                                ReminderOverlay.Dismiss ->
+                                Task.Notification.Model.Dismiss ->
                                     Model.updateTodo (Todo.TurnReminderOff) todoId
                                         >> Tuple.mapFirst Model.removeReminderOverlay
                                         >> Return.command (Notification.closeNotification todoId)
 
-                                ReminderOverlay.ShowSnoozeOptions ->
+                                Task.Notification.Model.ShowSnoozeOptions ->
                                     Model.setReminderOverlayToSnoozeView todoDetails
                                         >> Return.singleton
 
-                                ReminderOverlay.SnoozeTill snoozeOffset ->
+                                Task.Notification.Model.SnoozeTill snoozeOffset ->
                                     Return.singleton
                                         >> Return.andThen (Model.snoozeTodoWithOffset snoozeOffset todoId)
                                         >> Return.command (Notification.closeNotification todoId)
 
-                                ReminderOverlay.Close ->
+                                Task.Notification.Model.Close ->
                                     Model.removeReminderOverlay
                                         >> Return.singleton
 
-                                ReminderOverlay.MarkDone ->
+                                Task.Notification.Model.MarkDone ->
                                     Model.updateTodo Todo.MarkDone todoId
                                         >> Tuple.mapFirst Model.removeReminderOverlay
                                         >> Return.command (Notification.closeNotification todoId)

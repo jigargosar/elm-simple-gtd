@@ -3,7 +3,6 @@ module Model exposing (..)
 import AppDrawer.Model
 import CommonMsg
 import Context
-
 import Document exposing (Document)
 import Entity.Tree
 import ExclusiveMode exposing (ExclusiveMode)
@@ -21,7 +20,7 @@ import Keyboard.Combo as Combo
 import LaunchBar.Form
 import Menu
 import Project
-import ReminderOverlay
+import Task.Notification.Model
 import Json.Encode as E
 import List.Extra as List
 import Maybe.Extra as Maybe
@@ -65,7 +64,7 @@ type Msg
     | OnSignOut
     | RemotePouchSync ExclusiveMode.SyncForm
     | TodoAction Todo.UpdateAction Todo.Id
-    | ReminderOverlayAction ReminderOverlay.Action
+    | ReminderOverlayAction Task.Notification.Model.Action
     | ToggleShowDeletedEntity
     | ToggleDrawer
     | OnLayoutNarrowChanged Bool
@@ -165,7 +164,7 @@ type alias Model =
     , mainViewType : ViewType
     , keyboardState : Keyboard.State
     , showDeleted : Bool
-    , reminderOverlay : ReminderOverlay.Model
+    , reminderOverlay : Task.Notification.Model.Model
     , pouchDBRemoteSyncURI : String
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken
@@ -340,7 +339,7 @@ init flags =
             , mainViewType = defaultView
             , keyboardState = Keyboard.init
             , showDeleted = False
-            , reminderOverlay = ReminderOverlay.none
+            , reminderOverlay = Task.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , user = Firebase.SignedOut
             , fcmToken = Nothing
@@ -569,7 +568,7 @@ findTodoWithOverDueReminder model =
 
 
 setReminderOverlayToInitialView todo model =
-    { model | reminderOverlay = ReminderOverlay.initialView todo }
+    { model | reminderOverlay = Task.Notification.Model.initialView todo }
 
 
 showReminderOverlayForTodoId todoId =
@@ -578,17 +577,17 @@ showReminderOverlayForTodoId todoId =
 
 
 removeReminderOverlay model =
-    { model | reminderOverlay = ReminderOverlay.none }
+    { model | reminderOverlay = Task.Notification.Model.none }
 
 
 setReminderOverlayToSnoozeView details model =
-    { model | reminderOverlay = ReminderOverlay.snoozeView details }
+    { model | reminderOverlay = Task.Notification.Model.snoozeView details }
 
 
 snoozeTodoWithOffset snoozeOffset todoId model =
     let
         time =
-            ReminderOverlay.addSnoozeOffset model.now snoozeOffset
+            Task.Notification.Model.addSnoozeOffset model.now snoozeOffset
     in
         model
             |> updateTodo (time |> Todo.SnoozeTill) todoId

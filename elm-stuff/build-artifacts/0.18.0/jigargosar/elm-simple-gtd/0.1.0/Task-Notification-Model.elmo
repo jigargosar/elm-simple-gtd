@@ -1,0 +1,57 @@
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$addSnoozeOffset = F2(
+	function (time, offset) {
+		var _p0 = offset;
+		if (_p0.ctor === 'SnoozeForMilli') {
+			return time + _p0._0;
+		} else {
+			return _elm_lang$core$Date$toTime(
+				A3(
+					_justinmimbs$elm_date_extra$Date_Extra$add,
+					_justinmimbs$elm_date_extra$Date_Extra$Hour,
+					10,
+					A2(
+						_justinmimbs$elm_date_extra$Date_Extra$ceiling,
+						_justinmimbs$elm_date_extra$Date_Extra$Day,
+						_elm_lang$core$Date$fromTime(time))));
+		}
+	});
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$TodoDetails = F2(
+	function (a, b) {
+		return {id: a, text: b};
+	});
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$createTodoDetails = function (todo) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Task_Notification_Model$TodoDetails,
+		_jigargosar$elm_simple_gtd$Document$getId(todo),
+		_jigargosar$elm_simple_gtd$Todo$getText(todo));
+};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$SnoozeView = {ctor: 'SnoozeView'};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$InitialView = {ctor: 'InitialView'};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$Active = F2(
+	function (a, b) {
+		return {ctor: 'Active', _0: a, _1: b};
+	});
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$initialView = function (_p1) {
+	return A2(
+		_jigargosar$elm_simple_gtd$Task_Notification_Model$Active,
+		_jigargosar$elm_simple_gtd$Task_Notification_Model$InitialView,
+		_jigargosar$elm_simple_gtd$Task_Notification_Model$createTodoDetails(_p1));
+};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$snoozeView = _jigargosar$elm_simple_gtd$Task_Notification_Model$Active(_jigargosar$elm_simple_gtd$Task_Notification_Model$SnoozeView);
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$dummy = A2(
+	_jigargosar$elm_simple_gtd$Task_Notification_Model$Active,
+	_jigargosar$elm_simple_gtd$Task_Notification_Model$InitialView,
+	A2(_jigargosar$elm_simple_gtd$Task_Notification_Model$TodoDetails, 'dummy-todo-id', 'dummy todo'));
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$None = {ctor: 'None'};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$none = _jigargosar$elm_simple_gtd$Task_Notification_Model$None;
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$Close = {ctor: 'Close'};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$MarkDone = {ctor: 'MarkDone'};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$Dismiss = {ctor: 'Dismiss'};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$SnoozeTill = function (a) {
+	return {ctor: 'SnoozeTill', _0: a};
+};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$ShowSnoozeOptions = {ctor: 'ShowSnoozeOptions'};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$SnoozeTillTomorrow = {ctor: 'SnoozeTillTomorrow'};
+var _jigargosar$elm_simple_gtd$Task_Notification_Model$SnoozeForMilli = function (a) {
+	return {ctor: 'SnoozeForMilli', _0: a};
+};

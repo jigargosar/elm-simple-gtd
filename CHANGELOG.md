@@ -48,7 +48,7 @@
 * delay notification processing by x seconds, so that we can get some time to sync data with firebase. There by not triggering old offline reminders. 
 
 ## v0.18.52 - 2017-06-21
-* move task subscriptions to Task.Main
+* move task subscriptions to Todo.Main
   task notification refactoring
 * move entity grouping to entity tree, and combine project / context as groupEntity 
 

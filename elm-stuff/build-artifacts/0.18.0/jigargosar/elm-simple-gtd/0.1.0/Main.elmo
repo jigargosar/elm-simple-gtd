@@ -173,7 +173,7 @@ var _jigargosar$elm_simple_gtd$Main$subscriptions = function (m) {
 								_0: _scottcorgan$keyboard_combo$Keyboard_Combo$subscriptions(m.keyComboModel),
 								_1: {
 									ctor: '::',
-									_0: _jigargosar$elm_simple_gtd$Task_Main$subscriptions(m),
+									_0: _jigargosar$elm_simple_gtd$Todo_Main$subscriptions(m),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -647,7 +647,7 @@ var _jigargosar$elm_simple_gtd$Main$update = function (msg) {
 						return _jigargosar$elm_simple_gtd$Main$withNow(
 							_jigargosar$elm_simple_gtd$Model$OnTaskMsgWithTime(_p12._0));
 					case 'OnTaskMsgWithTime':
-						return A3(_jigargosar$elm_simple_gtd$Task_Main$update, _jigargosar$elm_simple_gtd$Main$andThenUpdate, _p12._1, _p12._0);
+						return A3(_jigargosar$elm_simple_gtd$Todo_Main$update, _jigargosar$elm_simple_gtd$Main$andThenUpdate, _p12._1, _p12._0);
 					case 'OnFirebaseMsg':
 						return _jigargosar$elm_simple_gtd$Main$withNow(
 							_jigargosar$elm_simple_gtd$Model$OnFirebaseMsgWithTime(_p12._0));

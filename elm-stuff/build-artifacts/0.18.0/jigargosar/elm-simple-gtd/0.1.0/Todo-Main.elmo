@@ -1,0 +1,360 @@
+var _jigargosar$elm_simple_gtd$Todo_Main$positionMoreMenuCmd = function (taskId) {
+	return _jigargosar$elm_simple_gtd$DomPorts$positionPopupMenu(
+		A2(_elm_lang$core$Basics_ops['++'], '#todo-more-menu-button-', taskId));
+};
+var _jigargosar$elm_simple_gtd$Todo_Main$gotoTodoWithId = F2(
+	function (todoId, model) {
+		var maybeTodoEntity = A2(
+			_elm_community$list_extra$List_Extra$find,
+			function (entity) {
+				var _p0 = entity;
+				if (_p0.ctor === 'Task') {
+					return A2(_jigargosar$elm_simple_gtd$Document$hasId, todoId, _p0._0);
+				} else {
+					return false;
+				}
+			},
+			_jigargosar$elm_simple_gtd$Model$getCurrentViewEntityList(model));
+		return A3(
+			_elm_community$maybe_extra$Maybe_Extra$unpack,
+			function (_p1) {
+				return _jigargosar$elm_simple_gtd$Model$switchToContextsView(
+					A2(_jigargosar$elm_simple_gtd$Model$setFocusInEntityFromTodoId, todoId, model));
+			},
+			A2(_danielnarey$elm_toolkit$Toolkit_Operators_ops['#'], _jigargosar$elm_simple_gtd$Model$setFocusInEntity, model),
+			maybeTodoEntity);
+	});
+var _jigargosar$elm_simple_gtd$Todo_Main$gotoTodoWithIdIn = _elm_lang$core$Basics$flip(_jigargosar$elm_simple_gtd$Todo_Main$gotoTodoWithId);
+var _jigargosar$elm_simple_gtd$Todo_Main$gotoRunningTodo = function (model) {
+	return A2(
+		_danielnarey$elm_toolkit$Toolkit_Operators_ops['?='],
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+			_jigargosar$elm_simple_gtd$Todo_TimeTracker$getMaybeTodoId(model.timeTracker),
+			_jigargosar$elm_simple_gtd$Todo_Main$gotoTodoWithIdIn(model)),
+		model);
+};
+var _jigargosar$elm_simple_gtd$Todo_Main$maybeMapToCmd = function (fn) {
+	return A2(
+		_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?='],
+		_elm_lang$core$Maybe$map(fn),
+		_elm_lang$core$Platform_Cmd$none);
+};
+var _jigargosar$elm_simple_gtd$Todo_Main$andThen = _Fresheyeball$elm_return$Return$andThen;
+var _jigargosar$elm_simple_gtd$Todo_Main$command = _Fresheyeball$elm_return$Return$command;
+var _jigargosar$elm_simple_gtd$Todo_Main$map = _Fresheyeball$elm_return$Return$map;
+var _jigargosar$elm_simple_gtd$Todo_Main$mapSet = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$X_Record$set, _Fresheyeball$elm_return$Return$map);
+var _jigargosar$elm_simple_gtd$Todo_Main$mapOver = A2(_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>>'], _jigargosar$elm_simple_gtd$X_Record$over, _Fresheyeball$elm_return$Return$map);
+var _jigargosar$elm_simple_gtd$Todo_Main$timeTracker = A2(
+	_jigargosar$elm_simple_gtd$X_Record$field,
+	function (_) {
+		return _.timeTracker;
+	},
+	F2(
+		function (s, b) {
+			return _elm_lang$core$Native_Utils.update(
+				b,
+				{timeTracker: s});
+		}));
+var _jigargosar$elm_simple_gtd$Todo_Main$showTodoReminderNotification = _elm_lang$core$Native_Platform.outgoingPort(
+	'showTodoReminderNotification',
+	function (v) {
+		return {
+			title: v.title,
+			tag: v.tag,
+			data: {id: v.data.id}
+		};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Main$showReminderNotificationCmd = function (_p2) {
+	var _p3 = _p2;
+	var _p4 = _p3._0;
+	var createNotification = function () {
+		var id = _jigargosar$elm_simple_gtd$Document$getId(_p4);
+		return {
+			title: _jigargosar$elm_simple_gtd$Todo$getText(_p4),
+			tag: id,
+			data: {id: id}
+		};
+	}();
+	var cmds = {
+		ctor: '::',
+		_0: _jigargosar$elm_simple_gtd$Todo_Main$showTodoReminderNotification(createNotification),
+		_1: {
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$Notification$startAlarm(
+				{ctor: '_Tuple0'}),
+			_1: {ctor: '[]'}
+		}
+	};
+	return A2(_elm_lang$core$Platform_Cmd_ops['!'], _p3._1, cmds);
+};
+var _jigargosar$elm_simple_gtd$Todo_Main$notificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+	'notificationClicked',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (action) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (data) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{action: action, data: data});
+				},
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'data',
+					A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (id) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{id: id});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
+var _jigargosar$elm_simple_gtd$Todo_Main$showRunningTodoNotification = _elm_lang$core$Native_Platform.outgoingPort(
+	'showRunningTodoNotification',
+	function (v) {
+		return {
+			tag: v.tag,
+			title: v.title,
+			body: v.body,
+			actions: _elm_lang$core$Native_List.toArray(v.actions).map(
+				function (v) {
+					return {title: v.title, action: v.action};
+				}),
+			data: {
+				id: v.data.id,
+				notificationClickedPort: v.data.notificationClickedPort,
+				skipFocusActionList: _elm_lang$core$Native_List.toArray(v.data.skipFocusActionList).map(
+					function (v) {
+						return v;
+					})
+			}
+		};
+	});
+var _jigargosar$elm_simple_gtd$Todo_Main$showRunningNotificationCmd = function (_p5) {
+	var _p6 = _p5;
+	var createRequest = F2(
+		function (info, todo) {
+			var formattedDuration = _jigargosar$elm_simple_gtd$X_Time$toHHMMSSMin(info.elapsedTime);
+			var todoId = _jigargosar$elm_simple_gtd$Document$getId(todo);
+			return {
+				tag: todoId,
+				title: A2(_elm_lang$core$Basics_ops['++'], 'You have been working for ', formattedDuration),
+				body: _jigargosar$elm_simple_gtd$Todo$getText(todo),
+				actions: {
+					ctor: '::',
+					_0: {title: 'Continue', action: 'continue'},
+					_1: {
+						ctor: '::',
+						_0: {title: 'Stop', action: 'stop'},
+						_1: {ctor: '[]'}
+					}
+				},
+				data: {
+					id: todoId,
+					notificationClickedPort: 'onRunningTodoNotificationClicked',
+					skipFocusActionList: {
+						ctor: '::',
+						_0: 'continue',
+						_1: {ctor: '[]'}
+					}
+				}
+			};
+		});
+	return A2(
+		_jigargosar$elm_simple_gtd$Todo_Main$maybeMapToCmd,
+		_jigargosar$elm_simple_gtd$Todo_Main$showRunningTodoNotification,
+		A2(
+			_danielnarey$elm_toolkit$Toolkit_Operators_ops['?+>'],
+			_p6._0,
+			function (info) {
+				return A2(
+					_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
+					A2(_jigargosar$elm_simple_gtd$Model$findTodoById, info.todoId, _p6._1),
+					createRequest(info));
+			}));
+};
+var _jigargosar$elm_simple_gtd$Todo_Main$updateTimeTracker = function (now) {
+	return _jigargosar$elm_simple_gtd$Todo_Main$andThen(
+		function (_p7) {
+			return A2(
+				_danielnarey$elm_toolkit$Toolkit_Helpers$apply2,
+				{ctor: '_Tuple2', _0: _elm_lang$core$Tuple$second, _1: _jigargosar$elm_simple_gtd$Todo_Main$showRunningNotificationCmd},
+				A3(
+					_jigargosar$elm_simple_gtd$X_Record$overT2,
+					_jigargosar$elm_simple_gtd$Todo_Main$timeTracker,
+					_jigargosar$elm_simple_gtd$Todo_TimeTracker$updateNextAlarmAt(now),
+					_p7));
+		});
+};
+var _jigargosar$elm_simple_gtd$Todo_Main$update = F3(
+	function (andThenUpdate, now, todoMsg) {
+		var _p8 = todoMsg;
+		switch (_p8.ctor) {
+			case 'UpdateSetupFormTaskText':
+				return _Fresheyeball$elm_return$Return$map(
+					_jigargosar$elm_simple_gtd$Model$setEditMode(
+						_jigargosar$elm_simple_gtd$ExclusiveMode$Setup(
+							A2(_jigargosar$elm_simple_gtd$Todo_NewForm$setText, _p8._1, _p8._0))));
+			case 'OnShowMoreMenu':
+				var _p10 = _p8._0;
+				return function (_p9) {
+					return A2(
+						_Fresheyeball$elm_return$Return$command,
+						_jigargosar$elm_simple_gtd$Todo_Main$positionMoreMenuCmd(_p10),
+						A2(
+							_Fresheyeball$elm_return$Return$map,
+							_jigargosar$elm_simple_gtd$Model$setEditMode(
+								_jigargosar$elm_simple_gtd$ExclusiveMode$taskMoreMenu(_p10)),
+							_p9));
+				};
+			case 'UpdateReminderForm':
+				return _Fresheyeball$elm_return$Return$map(
+					function (_p11) {
+						return _jigargosar$elm_simple_gtd$Model$setEditMode(
+							_jigargosar$elm_simple_gtd$ExclusiveMode$EditTodoReminder(_p11));
+					}(
+						A2(_jigargosar$elm_simple_gtd$Todo_ReminderForm$update, _p8._1, _p8._0)));
+			case 'ToggleRunning':
+				return A2(
+					_jigargosar$elm_simple_gtd$Todo_Main$mapOver,
+					_jigargosar$elm_simple_gtd$Todo_Main$timeTracker,
+					A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker$toggleStartStop, _p8._0, now));
+			case 'InitRunning':
+				return A2(
+					_jigargosar$elm_simple_gtd$Todo_Main$mapSet,
+					_jigargosar$elm_simple_gtd$Todo_Main$timeTracker,
+					A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker$initRunning, _p8._0, now));
+			case 'SwitchOrStartRunning':
+				return A2(
+					_jigargosar$elm_simple_gtd$Todo_Main$mapOver,
+					_jigargosar$elm_simple_gtd$Todo_Main$timeTracker,
+					A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker$switchOrStartRunning, _p8._0, now));
+			case 'TogglePaused':
+				return A2(
+					_jigargosar$elm_simple_gtd$Todo_Main$mapOver,
+					_jigargosar$elm_simple_gtd$Todo_Main$timeTracker,
+					_jigargosar$elm_simple_gtd$Todo_TimeTracker$togglePause(now));
+			case 'StopRunning':
+				return A2(_jigargosar$elm_simple_gtd$Todo_Main$mapSet, _jigargosar$elm_simple_gtd$Todo_Main$timeTracker, _jigargosar$elm_simple_gtd$Todo_TimeTracker$none);
+			case 'GotoRunning':
+				return function (_p12) {
+					return A2(
+						andThenUpdate,
+						_jigargosar$elm_simple_gtd$Model$OnSetDomFocusToFocusInEntity,
+						A2(_jigargosar$elm_simple_gtd$Todo_Main$map, _jigargosar$elm_simple_gtd$Todo_Main$gotoRunningTodo, _p12));
+				};
+			case 'UpdateTimeTracker':
+				return _jigargosar$elm_simple_gtd$Todo_Main$updateTimeTracker(now);
+			case 'Upsert':
+				var _p13 = _p8._0;
+				return _jigargosar$elm_simple_gtd$Todo_Main$map(
+					function (model) {
+						var isTrackerTodoInactive = _jigargosar$elm_simple_gtd$Todo$isInActive(_p13) && A2(_jigargosar$elm_simple_gtd$Todo_TimeTracker$isTrackingTodo, _p13, model.timeTracker);
+						return isTrackerTodoInactive ? A3(_jigargosar$elm_simple_gtd$X_Record$set, _jigargosar$elm_simple_gtd$Todo_Main$timeTracker, _jigargosar$elm_simple_gtd$Todo_TimeTracker$none, model) : model;
+					});
+			case 'OnReminderNotificationClicked':
+				var todoId = _p8._0.data.id;
+				return _elm_lang$core$Native_Utils.eq(_p8._0.action, 'mark-done') ? function (_p14) {
+					return A2(
+						_jigargosar$elm_simple_gtd$Todo_Main$command,
+						_jigargosar$elm_simple_gtd$Notification$closeNotification(todoId),
+						A2(
+							_Fresheyeball$elm_return$Return$andThen,
+							A2(_jigargosar$elm_simple_gtd$Model$updateTodo, _jigargosar$elm_simple_gtd$Todo$MarkDone, todoId),
+							_p14));
+				} : function (_p15) {
+					return andThenUpdate(
+						_jigargosar$elm_simple_gtd$Model$OnTaskMsg(
+							_jigargosar$elm_simple_gtd$Todo_Msg$ShowReminderOverlayForTodoId(_p15)));
+				}(todoId);
+			case 'ShowReminderOverlayForTodoId':
+				return _Fresheyeball$elm_return$Return$map(
+					_jigargosar$elm_simple_gtd$Model$showReminderOverlayForTodoId(_p8._0));
+			case 'RunningNotificationResponse':
+				var _p18 = _p8._0;
+				var todoId = _p18.data.id;
+				return function (_p16) {
+					return A2(
+						andThenUpdate,
+						_jigargosar$elm_simple_gtd$Model$OnCloseNotification(todoId),
+						function () {
+							var _p17 = _p18.action;
+							switch (_p17) {
+								case 'stop':
+									return andThenUpdate(_jigargosar$elm_simple_gtd$Model$onTodoStopRunning);
+								case 'continue':
+									return _elm_lang$core$Basics$identity;
+								default:
+									return andThenUpdate(_jigargosar$elm_simple_gtd$Model$onGotoRunningTodo);
+							}
+						}()(_p16));
+				};
+			default:
+				return _jigargosar$elm_simple_gtd$X_Return$andThenMaybe(
+					A2(
+						_jigargosar$elm_simple_gtd$X_Function_Infix_ops['>>?'],
+						_jigargosar$elm_simple_gtd$Model$findAndSnoozeOverDueTodo,
+						_Fresheyeball$elm_return$Return$andThen(_jigargosar$elm_simple_gtd$Todo_Main$showReminderNotificationCmd)));
+		}
+	});
+var _jigargosar$elm_simple_gtd$Todo_Main$onRunningTodoNotificationClicked = _elm_lang$core$Native_Platform.incomingPort(
+	'onRunningTodoNotificationClicked',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (action) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (data) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{action: action, data: data});
+				},
+				A2(
+					_elm_lang$core$Json_Decode$field,
+					'data',
+					A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (id) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{id: id});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string))));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'action', _elm_lang$core$Json_Decode$string)));
+var _jigargosar$elm_simple_gtd$Todo_Main$subscriptions = function (m) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: _jigargosar$elm_simple_gtd$Todo_Main$notificationClicked(
+				function (_p19) {
+					return _jigargosar$elm_simple_gtd$Model$OnTaskMsg(
+						_jigargosar$elm_simple_gtd$Todo_Msg$OnReminderNotificationClicked(_p19));
+				}),
+			_1: {
+				ctor: '::',
+				_0: _jigargosar$elm_simple_gtd$Todo_Main$onRunningTodoNotificationClicked(
+					function (_p20) {
+						return _jigargosar$elm_simple_gtd$Model$OnTaskMsg(
+							_jigargosar$elm_simple_gtd$Todo_Msg$RunningNotificationResponse(_p20));
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$core$Time$every,
+						_elm_lang$core$Time$second * 1,
+						_jigargosar$elm_simple_gtd$Model$OnTaskMsgWithTime(_jigargosar$elm_simple_gtd$Todo_Msg$UpdateTimeTracker)),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$core$Time$every,
+							_elm_lang$core$Time$second * 30,
+							function (_p21) {
+								return _jigargosar$elm_simple_gtd$Model$OnTaskMsg(_jigargosar$elm_simple_gtd$Todo_Msg$OnProcessPendingNotificationCronTick);
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};

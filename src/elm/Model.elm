@@ -20,7 +20,7 @@ import Keyboard.Combo as Combo
 import LaunchBar.Form
 import Menu
 import Project
-import Task.Notification.Model
+import Todo.Notification.Model
 import Json.Encode as E
 import List.Extra as List
 import Maybe.Extra as Maybe
@@ -64,7 +64,7 @@ type Msg
     | OnSignOut
     | RemotePouchSync ExclusiveMode.SyncForm
     | TodoAction Todo.UpdateAction Todo.Id
-    | ReminderOverlayAction Task.Notification.Model.Action
+    | ReminderOverlayAction Todo.Notification.Model.Action
     | ToggleShowDeletedEntity
     | ToggleDrawer
     | OnLayoutNarrowChanged Bool
@@ -164,7 +164,7 @@ type alias Model =
     , mainViewType : ViewType
     , keyboardState : Keyboard.State
     , showDeleted : Bool
-    , reminderOverlay : Task.Notification.Model.Model
+    , reminderOverlay : Todo.Notification.Model.Model
     , pouchDBRemoteSyncURI : String
     , user : Firebase.User
     , fcmToken : Firebase.FCMToken
@@ -339,7 +339,7 @@ init flags =
             , mainViewType = defaultView
             , keyboardState = Keyboard.init
             , showDeleted = False
-            , reminderOverlay = Task.Notification.Model.none
+            , reminderOverlay = Todo.Notification.Model.none
             , pouchDBRemoteSyncURI = pouchDBRemoteSyncURI
             , user = Firebase.SignedOut
             , fcmToken = Nothing
@@ -568,7 +568,7 @@ findTodoWithOverDueReminder model =
 
 
 setReminderOverlayToInitialView todo model =
-    { model | reminderOverlay = Task.Notification.Model.initialView todo }
+    { model | reminderOverlay = Todo.Notification.Model.initialView todo }
 
 
 showReminderOverlayForTodoId todoId =
@@ -577,17 +577,17 @@ showReminderOverlayForTodoId todoId =
 
 
 removeReminderOverlay model =
-    { model | reminderOverlay = Task.Notification.Model.none }
+    { model | reminderOverlay = Todo.Notification.Model.none }
 
 
 setReminderOverlayToSnoozeView details model =
-    { model | reminderOverlay = Task.Notification.Model.snoozeView details }
+    { model | reminderOverlay = Todo.Notification.Model.snoozeView details }
 
 
 snoozeTodoWithOffset snoozeOffset todoId model =
     let
         time =
-            Task.Notification.Model.addSnoozeOffset model.now snoozeOffset
+            Todo.Notification.Model.addSnoozeOffset model.now snoozeOffset
     in
         model
             |> updateTodo (time |> Todo.SnoozeTill) todoId

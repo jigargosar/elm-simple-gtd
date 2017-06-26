@@ -244,7 +244,7 @@ var _jigargosar$elm_simple_gtd$View_Header$headerView = F2(
 			A2(
 				_danielnarey$elm_toolkit$Toolkit_Operators_ops['?|>'],
 				_jigargosar$elm_simple_gtd$Todo_TimeTracker_View$maybe(m),
-				_jigargosar$elm_simple_gtd$XList$singleton),
+				_jigargosar$elm_simple_gtd$X_List$singleton),
 			A2(_jigargosar$elm_simple_gtd$View_Header$titleHeaderContent, viewModel, m));
 		return A2(_jigargosar$elm_simple_gtd$View_Header$headerWithContent, content, m);
 	});

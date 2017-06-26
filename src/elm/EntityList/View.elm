@@ -1,18 +1,11 @@
 module EntityList.View exposing (..)
 
-
 import Entity exposing (Entity)
 import Entity.Tree
 import GroupDoc.View
 import GroupDoc.ViewModel
 import Html
-
-
 import Toolkit.Operators exposing (..)
-
-
-
-
 import X.Keyboard exposing (onKeyDown)
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
@@ -22,8 +15,6 @@ import Todo.View exposing (TodoViewModel)
 import ViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
-
-
 import View.Shared exposing (badge)
 
 
@@ -82,7 +73,7 @@ keyedViewList grouping maybeFocusInEntity appViewModel =
         todoView todo =
             let
                 canBeFocused =
-                    Entity.Task todo |> hasFocusIn
+                    Entity.Todo todo |> hasFocusIn
             in
                 todo
                     |> Todo.View.createTodoViewModel appViewModel canBeFocused

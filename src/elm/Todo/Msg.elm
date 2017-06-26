@@ -17,7 +17,7 @@ type Msg
     | ShowReminderOverlayForTodoId Todo.Id
     | GotoRunning
     | UpdateTimeTracker
-    | UpdateSetupFormTaskText Todo.NewForm.Model String
+    | UpdateSetupFormTodoText Todo.NewForm.Model String
     | Upsert Todo.Model
     | UpdateReminderForm Todo.ReminderForm.Model Todo.ReminderForm.Action
     | OnShowMoreMenu Todo.Id

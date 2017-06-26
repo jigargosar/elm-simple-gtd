@@ -110,7 +110,7 @@ update msg =
 
                 OnEntityUpsert entity ->
                     case entity of
-                        Entity.Task model ->
+                        Entity.Todo model ->
                             Todo.Msg.Upsert model |> andThenTodoMsg
 
                         _ ->
@@ -248,7 +248,7 @@ update msg =
                 UpdateTodoForm form action ->
                     Return.map
                         (Todo.Form.set action form
-                            |> ExclusiveMode.EditTask
+                            |> ExclusiveMode.EditTodo
                             >> Model.setEditMode
                         )
 
@@ -372,11 +372,11 @@ update msg =
                 OnKeyCombo comboMsg ->
                     Return.andThen (Model.updateCombo comboMsg)
 
-                OnTaskMsg taskMsg ->
-                    withNow (OnTaskMsgWithTime taskMsg)
+                OnTodoMsg todoMsg ->
+                    withNow (OnTodoMsgWithTime todoMsg)
 
-                OnTaskMsgWithTime taskMsg now ->
-                    Todo.Main.update andThenUpdate now taskMsg
+                OnTodoMsgWithTime todoMsg now ->
+                    Todo.Main.update andThenUpdate now todoMsg
 
                 OnFirebaseMsg firebaseMsg ->
                     withNow (OnFirebaseMsgWithTime firebaseMsg)
@@ -405,10 +405,10 @@ logMsg msg model =
                 OnNowChanged _ ->
                     Nothing
 
-                OnTaskMsg Todo.Msg.UpdateTimeTracker ->
+                OnTodoMsg Todo.Msg.UpdateTimeTracker ->
                     Nothing
 
-                OnTaskMsgWithTime Todo.Msg.UpdateTimeTracker _ ->
+                OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker _ ->
                     Nothing
 
                 _ ->
@@ -443,7 +443,7 @@ andThenUpdate =
 
 
 andThenTodoMsg =
-    OnTaskMsg >> andThenUpdate
+    OnTodoMsg >> andThenUpdate
 
 
 setDomFocusToFocusInEntityCmd =

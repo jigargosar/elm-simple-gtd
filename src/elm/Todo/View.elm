@@ -117,10 +117,10 @@ createTodoViewModel appVM canBeFocused todo =
                 |> truncateName
 
         createEntityActionMsg =
-            Model.OnEntityAction (Entity.Task todo)
+            Model.OnEntityAction (Entity.Todo todo)
 
         onTodoMsg =
-            Model.OnTaskMsg
+            Model.OnTodoMsg
 
         reminder =
             createScheduleViewModel now todo
@@ -381,7 +381,7 @@ edit form appModel =
                             , onInput fireTextChanged
                             ]
                             []
-                        , Html.label [] [ text "Task" ]
+                        , Html.label [] [ text "Todo" ]
                         ]
                     , defaultOkCancelDeleteButtons fireToggleDelete
                     ]
@@ -404,7 +404,7 @@ new form =
                         , form |> Todo.NewForm.getText |> defaultValue
                         ]
                         []
-                    , label [ class "active" ] [ text "New Task" ]
+                    , label [ class "active" ] [ text "New Todo" ]
                     ]
                 , defaultOkCancelButtons
                 ]
@@ -423,7 +423,7 @@ contextMenu =
 reminderPopup form =
     let
         updateReminderForm =
-            Todo.Msg.UpdateReminderForm form >> Model.OnTaskMsg
+            Todo.Msg.UpdateReminderForm form >> Model.OnTodoMsg
     in
         div
             [ class "overlay"

@@ -5,13 +5,13 @@ import Todo
 
 
 type alias Model =
-    { taskId : Todo.Id
+    { todoId : Todo.Id
     , menuState : Menu.State
     }
 
 
-init taskId =
-    { taskId = taskId, menuState = Menu.initState }
+init todoId =
+    { todoId = todoId, menuState = Menu.initState }
 
 
 setMenuState menuState form =

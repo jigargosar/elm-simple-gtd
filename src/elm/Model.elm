@@ -98,8 +98,8 @@ type Msg
     | OnEntityAction Entity Entity.Action
     | OnLaunchBarMsg LaunchBar.Action
     | OnLaunchBarMsgWithNow LaunchBar.Action Time
-    | OnTaskMsg Todo.Msg.Msg
-    | OnTaskMsgWithTime Todo.Msg.Msg Time
+    | OnTodoMsg Todo.Msg.Msg
+    | OnTodoMsgWithTime Todo.Msg.Msg Time
     | OnFirebaseMsg Firebase.Msg
     | OnFirebaseMsgWithTime Firebase.Msg Time
     | OnKeyCombo Combo.Msg
@@ -118,23 +118,23 @@ keyboardCombos =
 
 
 onTodoToggleRunning =
-    Todo.Msg.ToggleRunning >> OnTaskMsg
+    Todo.Msg.ToggleRunning >> OnTodoMsg
 
 
 onTodoInitRunning =
-    Todo.Msg.InitRunning >> OnTaskMsg
+    Todo.Msg.InitRunning >> OnTodoMsg
 
 
 onTodoStopRunning =
-    Todo.Msg.StopRunning |> OnTaskMsg
+    Todo.Msg.StopRunning |> OnTodoMsg
 
 
 onTodoTogglePaused =
-    Todo.Msg.TogglePaused |> OnTaskMsg
+    Todo.Msg.TogglePaused |> OnTodoMsg
 
 
 onGotoRunningTodo =
-    Todo.Msg.GotoRunning |> OnTaskMsg
+    Todo.Msg.GotoRunning |> OnTodoMsg
 
 
 commonMsg : CommonMsg.Helper Msg
@@ -737,7 +737,7 @@ saveCurrentForm model =
                 |> updateProject form.id
                     (Project.setName form.name)
 
-        ExclusiveMode.EditTask form ->
+        ExclusiveMode.EditTodo form ->
             model
                 |> updateTodo (Todo.SetText form.todoText) form.id
 
@@ -751,7 +751,7 @@ saveCurrentForm model =
         ExclusiveMode.EditTodoProject form ->
             model |> Return.singleton
 
-        ExclusiveMode.TaskMoreMenu _ ->
+        ExclusiveMode.TodoMoreMenu _ ->
             model |> Return.singleton
 
         ExclusiveMode.NewTodo form ->
@@ -784,7 +784,7 @@ saveNewTodoForm form model =
             (\todoId ->
                 updateTodo
                     (case form.referenceEntity of
-                        Entity.Task fromTodo ->
+                        Entity.Todo fromTodo ->
                             (Todo.CopyProjectAndContextId fromTodo)
 
                         Entity.Group g ->
@@ -802,7 +802,7 @@ saveNewTodoForm form model =
 
 setFocusInEntityFromTodoId : Todo.Id -> ModelF
 setFocusInEntityFromTodoId todoId model =
-    maybe2Tuple ( findTodoById todoId model ?|> Entity.Task, Just model )
+    maybe2Tuple ( findTodoById todoId model ?|> Entity.Todo, Just model )
         ?|> uncurry setFocusInEntity
         ?= model
 
@@ -823,7 +823,7 @@ toggleDeleteEntity entity model =
                         Entity.Project project ->
                             updateProject entityId Document.toggleDeleted
 
-                Entity.Task todo ->
+                Entity.Todo todo ->
                     updateTodo (Todo.ToggleDeleted) entityId
 
 
@@ -843,7 +843,7 @@ toggleArchiveEntity entity model =
                         Entity.Project project ->
                             updateProject entityId GroupDoc.toggleArchived
 
-                Entity.Task todo ->
+                Entity.Todo todo ->
                     updateTodo (Todo.ToggleDone) entityId
 
 
@@ -948,7 +948,7 @@ upsertEncodedDocOnPouchDBChange dbName encodedEntity =
     case dbName of
         "todo-db" ->
             maybeOverT2 todoStore (Store.upsertOnPouchDBChange encodedEntity)
-                >>? Tuple.mapFirst Entity.fromTask
+                >>? Tuple.mapFirst Entity.fromTodo
 
         "project-db" ->
             maybeOverT2 projectStore (Store.upsertOnPouchDBChange encodedEntity)

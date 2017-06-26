@@ -38,11 +38,11 @@ signInOverlay =
 
 setup form =
     let
-        addTaskMsg =
+        addTodoMsg =
             Model.OnSaveCurrentForm
 
-        updateSetupFormTaskText =
-            Todo.Msg.UpdateSetupFormTaskText form >> Model.OnTaskMsg
+        updateSetupFormTodoText =
+            Todo.Msg.UpdateSetupFormTodoText form >> Model.OnTodoMsg
     in
         div
             [ class "overlay"
@@ -57,15 +57,15 @@ setup form =
                             [ input
                                 [ autofocus True
                                 , placeholder "E.g. Get Milk, Check Email"
-                                , X.Keyboard.onEnter addTaskMsg
-                                , onInput updateSetupFormTaskText
+                                , X.Keyboard.onEnter addTodoMsg
+                                , onInput updateSetupFormTodoText
                                 ]
                                 []
-                            , label [ class "active" ] [ text "Task" ]
+                            , label [ class "active" ] [ text "Todo" ]
                             ]
                         ]
                     , div [ class "right-align" ]
-                        [ button [ class "btn", onClick addTaskMsg ]
+                        [ button [ class "btn", onClick addTodoMsg ]
                             [ text "Ok" ]
                         ]
                     ]

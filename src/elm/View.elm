@@ -53,7 +53,7 @@ overlayViews appModel =
                 ExclusiveMode.LaunchBar form ->
                     LaunchBar.View.init form appModel
 
-                ExclusiveMode.TaskMoreMenu model ->
+                ExclusiveMode.TodoMoreMenu model ->
                     Todo.MoreMenu.view model
 
                 ExclusiveMode.EditTodoContext form ->
@@ -80,7 +80,7 @@ overlayViews appModel =
                 ExclusiveMode.EditContext form ->
                     GroupDoc.EditView.init form
 
-                ExclusiveMode.EditTask form ->
+                ExclusiveMode.EditTodo form ->
                     Todo.View.edit form appModel
 
                 ExclusiveMode.NewTodo form ->

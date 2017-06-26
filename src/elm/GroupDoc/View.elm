@@ -5,20 +5,13 @@ import GroupDoc.ViewModel exposing (ViewModel)
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-
 import Html.Keyed
 import Material
 import Model
 import Svg.Events exposing (onFocusIn)
-
-
 import Toolkit.Operators exposing (..)
-
 import X.Function.Infix exposing (..)
-
-
 import View.Shared exposing (defaultOkCancelDeleteButtons)
-
 import X.Html exposing (onClickStopPropagation)
 
 
@@ -29,7 +22,7 @@ initKeyed todoView vm =
 item todoView vm =
     let
         getTabIndexAVForTodo =
-            Entity.Task >> vm.getTabIndexAVForEntity
+            Entity.Todo >> vm.getTabIndexAVForEntity
     in
         Html.Keyed.node "div"
             [ class "collection" ]

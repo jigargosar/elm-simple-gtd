@@ -19,7 +19,7 @@ type GroupEntity
 
 type Entity
     = Group GroupEntity
-    | Task Todo.Model
+    | Todo Todo.Model
 
 
 fromContext =
@@ -30,8 +30,8 @@ fromProject =
     Project >> Group
 
 
-fromTask =
-    Task
+fromTodo =
+    Todo
 
 
 initProjectGroup =
@@ -65,7 +65,7 @@ type Action
 
 getId entity =
     case entity of
-        Task model ->
+        Todo model ->
             Document.getId model
 
         Group group ->
@@ -94,7 +94,7 @@ equalById e1 e2 =
                     _ ->
                         False
 
-            ( Task m1, Task m2 ) ->
+            ( Todo m1, Todo m2 ) ->
                 eq m1 m2
 
             _ ->
@@ -211,7 +211,7 @@ toViewType maybePrevView entity =
                 Project model ->
                     Document.getId model |> ProjectView
 
-        Task model ->
+        Todo model ->
             maybePrevView
                 ?|> getTodoGotoGroupView model
                 ?= (Todo.getContextId model |> ContextView)

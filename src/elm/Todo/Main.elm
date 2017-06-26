@@ -65,11 +65,11 @@ maybeMapToCmd fn =
 
 subscriptions m =
     Sub.batch
-        [ notificationClicked (Todo.Msg.OnReminderNotificationClicked >> Model.OnTaskMsg)
-        , onRunningTodoNotificationClicked (Todo.Msg.RunningNotificationResponse >> Model.OnTaskMsg)
-        , Time.every (Time.second * 1) (Model.OnTaskMsgWithTime Todo.Msg.UpdateTimeTracker)
+        [ notificationClicked (Todo.Msg.OnReminderNotificationClicked >> Model.OnTodoMsg)
+        , onRunningTodoNotificationClicked (Todo.Msg.RunningNotificationResponse >> Model.OnTodoMsg)
+        , Time.every (Time.second * 1) (Model.OnTodoMsgWithTime Todo.Msg.UpdateTimeTracker)
         , Time.every (Time.second * 30)
-            (\_ -> Model.OnTaskMsg Todo.Msg.OnProcessPendingNotificationCronTick)
+            (\_ -> Model.OnTodoMsg Todo.Msg.OnProcessPendingNotificationCronTick)
         ]
 
 
@@ -80,16 +80,16 @@ update :
     -> Model.ReturnF
 update andThenUpdate now todoMsg =
     case todoMsg of
-        UpdateSetupFormTaskText form taskText ->
+        UpdateSetupFormTodoText form todoText ->
             Return.map
-                (Todo.NewForm.setText taskText form
+                (Todo.NewForm.setText todoText form
                     |> ExclusiveMode.Setup
                     |> Model.setEditMode
                 )
 
-        OnShowMoreMenu taskId ->
-            Return.map (ExclusiveMode.taskMoreMenu taskId |> Model.setEditMode)
-                >> Return.command (positionMoreMenuCmd taskId)
+        OnShowMoreMenu todoId ->
+            Return.map (ExclusiveMode.todoMoreMenu todoId |> Model.setEditMode)
+                >> Return.command (positionMoreMenuCmd todoId)
 
         UpdateReminderForm form action ->
             Return.map
@@ -146,7 +146,7 @@ update andThenUpdate now todoMsg =
                 else
                     todoId
                         |> Todo.Msg.ShowReminderOverlayForTodoId
-                        >> Model.OnTaskMsg
+                        >> Model.OnTodoMsg
                         >> andThenUpdate
 
         ShowReminderOverlayForTodoId todoId ->
@@ -174,14 +174,14 @@ update andThenUpdate now todoMsg =
                 (Model.findAndSnoozeOverDueTodo >>? Return.andThen showReminderNotificationCmd)
 
 
-showReminderNotificationCmd ( task, model ) =
+showReminderNotificationCmd ( todo, model ) =
     let
         createNotification =
             let
                 id =
-                    Document.getId task
+                    Document.getId todo
             in
-                { title = Todo.getText task, tag = id, data = { id = id } }
+                { title = Todo.getText todo, tag = id, data = { id = id } }
 
         cmds =
             [ createNotification
@@ -244,7 +244,7 @@ gotoTodoWithId todoId model =
                 |> List.find
                     (\entity ->
                         case entity of
-                            Entity.Task doc ->
+                            Entity.Todo doc ->
                                 Document.hasId todoId doc
 
                             _ ->
@@ -261,5 +261,5 @@ gotoTodoWithId todoId model =
                 (Model.setFocusInEntity # model)
 
 
-positionMoreMenuCmd taskId =
-    DomPorts.positionPopupMenu ("#todo-more-menu-button-" ++ taskId)
+positionMoreMenuCmd todoId =
+    DomPorts.positionPopupMenu ("#todo-more-menu-button-" ++ todoId)

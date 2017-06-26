@@ -137,15 +137,15 @@ flatten tree =
         ContextForest nodeList ->
             nodeList
                 |> List.concatMap
-                    (\node -> Entity.fromContext node.context :: (node.todoList .|> Entity.Task))
+                    (\node -> Entity.fromContext node.context :: (node.todoList .|> Entity.Todo))
 
         ProjectForest groupList ->
             groupList
                 |> List.concatMap
                     (\g ->
                         Entity.fromProject g.project
-                            :: (g.todoList .|> Entity.Task)
+                            :: (g.todoList .|> Entity.Todo)
                     )
 
         TodoForest title todoList ->
-            todoList .|> Entity.Task
+            todoList .|> Entity.Todo

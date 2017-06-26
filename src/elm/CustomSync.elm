@@ -3,16 +3,16 @@ module CustomSync exposing (..)
 import X.Keyboard exposing (onKeyDownStopPropagation)
 import Material
 import Model
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
+
+
+
+
+
+
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import X.Html exposing (onClickStopPropagation)
+
 import Polymer.Paper
 
 

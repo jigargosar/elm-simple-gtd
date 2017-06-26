@@ -1,8 +1,8 @@
 module X.Return exposing (..)
 
-import Maybe.Extra as Maybe
+
 import Return exposing (Return, ReturnF)
-import Toolkit.Helpers exposing (..)
+
 import Toolkit.Operators exposing (..)
 import X.Function as F exposing (..)
 

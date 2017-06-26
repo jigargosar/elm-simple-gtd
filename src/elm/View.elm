@@ -1,11 +1,11 @@
 module View exposing (init)
 
-import ActionList
+
 import ActionList.View
-import AppUrl
+
 import CustomSync
 import EntityList.View
-import Svg
+
 import X.Html exposing (boolProperty, onClickStopPropagation)
 import GroupDoc.EditView
 import ExclusiveMode
@@ -20,7 +20,7 @@ import View.AppDrawer
 import Model exposing (..)
 import Polymer.Paper as Paper
 import Polymer.App as App
-import X.Function.Infix exposing (..)
+
 import View.ReminderOverlay exposing (maybe)
 import Todo.View
 import ViewModel

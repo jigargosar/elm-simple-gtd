@@ -5,20 +5,20 @@ import GroupDoc.ViewModel exposing (ViewModel)
 import X.Keyboard exposing (onKeyDown, onKeyDownStopPropagation)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
+
 import Html.Keyed
 import Material
 import Model
 import Svg.Events exposing (onFocusIn)
-import Todo.View
-import Toolkit.Helpers exposing (..)
+
+
 import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
+
 import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
+
+
 import View.Shared exposing (defaultOkCancelDeleteButtons)
-import WebComponents
+
 import X.Html exposing (onClickStopPropagation)
 
 

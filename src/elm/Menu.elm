@@ -1,13 +1,13 @@
 module Menu exposing (..)
 
-import Char
-import Document
+
+
 import X.Html exposing (onClickStopPropagation)
 import X.Keyboard exposing (KeyboardEvent, onKeyDown, onKeyDownStopPropagation)
 import X.List as List
 import Html.Keyed
 import Keyboard.Extra as Key
-import Toolkit.Helpers exposing (..)
+
 import Toolkit.Operators exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
@@ -16,10 +16,10 @@ import Maybe.Extra as Maybe
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Project
-import Todo
+
+
 import Tuple2
-import View.FullBleedCapture
+
 
 
 type alias State =

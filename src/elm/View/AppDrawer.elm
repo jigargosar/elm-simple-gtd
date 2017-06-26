@@ -3,34 +3,34 @@ module View.AppDrawer exposing (..)
 import AppColors
 import AppDrawer.List
 import AppUrl
-import Document
-import Entity
+
+
 import X.Html exposing (boolProperty)
-import OldGroupEntity.ViewModel
-import Html.Keyed as Keyed
+
+
 import Html exposing (Attribute, Html, a, div, hr, node, span, text)
 import Html.Attributes exposing (attribute, autofocus, checked, class, classList, href, id, style, tabindex, target, value)
 import Html.Events exposing (..)
-import X.Keyboard as Keyboard exposing (onEscape, onKeyUp)
+
 import Model exposing (Msg(OnSetViewType), commonMsg)
-import String.Extra
-import Maybe.Extra as Maybe
-import Polymer.Attributes exposing (icon)
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Debug exposing (tapLog)
-import X.Decode exposing (traceDecoder)
-import Json.Decode
-import Json.Encode
-import List.Extra as List
+
+
+
+
+
+
+
+
+
+
 import Model exposing (..)
-import Todo
-import Polymer.Paper exposing (..)
+
+
 import Polymer.App as App
-import X.Function exposing (..)
+
 import X.Function.Infix exposing (..)
 import Model exposing (..)
-import View.Shared exposing (..)
+
 import ViewModel
 import WebComponents exposing (iconA, onBoolPropertyChanged, paperIconButton)
 

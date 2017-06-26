@@ -1,21 +1,21 @@
 module Project exposing (..)
 
-import Dict
+
 import Document exposing (Document, Id, Revision)
 import Firebase exposing (DeviceId)
 import GroupDoc
-import Maybe.Extra
-import Store
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
+
+
+
+
 import X.Function exposing (..)
-import X.Function.Infix exposing (..)
+
 import Random.Pcg as Random exposing (..)
-import X.Random as Random
-import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
+
+
+
 import Json.Encode as E
-import String.Extra
+
 import Time exposing (Time)
 
 

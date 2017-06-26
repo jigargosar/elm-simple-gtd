@@ -1,6 +1,6 @@
 module Routes exposing (..)
 
-import Document
+
 import Entity
 import Maybe.Extra
 import Model as Model
@@ -10,8 +10,8 @@ import RouteUrl.Builder as Builder exposing (..)
 import RouteUrl exposing (UrlChange)
 import X.Function.Infix exposing (..)
 import Model exposing (..)
-import Project
-import Todo.Msg
+
+
 import XList
 
 

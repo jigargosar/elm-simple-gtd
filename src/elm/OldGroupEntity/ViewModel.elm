@@ -7,24 +7,24 @@ import Context
 import Dict
 import Dict.Extra
 import Document
-import ExclusiveMode exposing (ExclusiveMode)
+
 import Entity exposing (Entity)
-import X.Keyboard exposing (KeyboardEvent)
+
 import GroupDoc
-import Lazy
+
 import Model exposing (EntityListViewType, ViewType(..))
 import Model exposing (Msg, commonMsg)
 import Todo
-import Toolkit.Helpers exposing (..)
+
 import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
+
+
+
+
 import Model
 import Project
-import Keyboard.Extra as Key exposing (Key)
-import Store
+
+
 import X.Maybe
 
 

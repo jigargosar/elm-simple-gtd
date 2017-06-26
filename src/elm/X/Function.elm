@@ -1,6 +1,6 @@
 module X.Function exposing (..)
 
-import List.Extra
+
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
 

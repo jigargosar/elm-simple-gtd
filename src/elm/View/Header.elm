@@ -2,13 +2,13 @@ module View.Header exposing (..)
 
 import AppColors
 import AppUrl
-import ExclusiveMode
+
 import X.Html exposing (boolProperty)
-import X.Keyboard as Keyboard
-import X.Time
+
+
 import Firebase
 import Model
-import Todo.NewForm
+
 import Model exposing (Model)
 import Model exposing (Msg)
 import Polymer.App as App
@@ -16,15 +16,15 @@ import Polymer.Paper as Paper
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Todo.TimeTracker
+
 import Todo.TimeTracker.View
-import Toolkit.Helpers exposing (..)
+
 import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
+
 import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
-import Set
+
+
+
 import WebComponents exposing (..)
 import XList
 

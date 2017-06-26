@@ -6,16 +6,16 @@ import Menu
 import Model exposing (commonMsg)
 import Project
 import Todo
-import Toolkit.Helpers exposing (..)
+
 import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
+
+
+
+
 import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import X.Html exposing (onClickStopPropagation)
+
+
+
 import Todo.GroupForm
 
 

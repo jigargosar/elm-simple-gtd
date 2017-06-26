@@ -19,24 +19,24 @@ port module Store
         )
 
 import Dict exposing (Dict)
-import Dict.Extra
+
 import Document exposing (Document, Id)
 import X.Debug
-import X.List as List
+
 import X.Random as Random
 import X.Record as Record exposing (get, over, overT2)
 import Firebase exposing (DeviceId)
 import Toolkit.Helpers exposing (..)
 import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
+
+
 import List.Extra as List
-import Maybe.Extra as Maybe
+
 import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
+
 import Json.Encode as E
 import Json.Decode as J exposing (Decoder)
-import Json.Decode.Pipeline as J
+
 import Json.Encode as J
 import Random.Pcg as Random exposing (Seed)
 import Set exposing (Set)

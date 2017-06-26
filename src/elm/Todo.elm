@@ -5,22 +5,22 @@ import Date
 import Date.Distance exposing (defaultConfig)
 import Document exposing (Revision)
 import X.Record exposing (over, set)
-import Firebase exposing (DeviceId)
+
 import Json.Decode as D exposing (Decoder)
 import Json.Decode.Pipeline as D
 import Json.Encode as E
 import Maybe.Extra as Maybe
-import X.Random as Random
-import Random.Pcg as Random exposing (Seed)
+
+
 import Toolkit.Operators exposing (..)
 import Toolkit.Helpers exposing (..)
 import X.Function exposing (..)
 import X.Function.Infix exposing (..)
-import Result.Extra as Result
+
 import List
-import List.Extra as List
-import Dict
-import Dict.Extra as Dict
+
+
+
 import Time exposing (Time)
 import Project
 import Store

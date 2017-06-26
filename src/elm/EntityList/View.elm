@@ -1,18 +1,18 @@
 module EntityList.View exposing (..)
 
-import Document
+
 import Entity exposing (Entity)
 import Entity.Tree
 import GroupDoc.View
 import GroupDoc.ViewModel
 import Html
-import Todo
-import Toolkit.Helpers exposing (..)
+
+
 import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
+
+
+
+
 import X.Keyboard exposing (onKeyDown)
 import Html.Attributes exposing (class, tabindex)
 import Html.Keyed
@@ -22,8 +22,8 @@ import Todo.View exposing (TodoViewModel)
 import ViewModel
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import X.Html exposing (onClickStopPropagation)
+
+
 import View.Shared exposing (badge)
 
 

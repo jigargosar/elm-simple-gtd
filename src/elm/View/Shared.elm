@@ -1,33 +1,33 @@
 module View.Shared exposing (..)
 
-import Context
-import Dict exposing (Dict)
-import Document exposing (Id)
-import ExclusiveMode exposing (ExclusiveMode)
-import Entity exposing (Entity)
-import OldGroupEntity.ViewModel
+
+
+
+
+
+
 import Html exposing (Html, div, span, text)
 import Html.Attributes exposing (class, style, tabindex)
 import Html.Events exposing (onClick)
-import Json.Encode
+
 import Model
 import Model
-import Polymer.Attributes exposing (icon)
+
 import Polymer.Paper as Paper exposing (badge)
-import Set exposing (Set)
-import Time exposing (Time)
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
-import X.Function exposing (..)
+
+
+
+
+
 import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
+
+
 import Model exposing (Model)
-import Project
-import Project
-import Todo
-import Todo.Form
-import Todo.ReminderForm
+
+
+
+
+
 
 
 defaultBadge : { x | name : String, count : Int } -> Html msg

@@ -1,23 +1,23 @@
 module Context exposing (..)
 
-import Dict
+
 import Document exposing (Document, Id, Revision)
 import Firebase exposing (DeviceId)
 import GroupDoc
-import Store
-import Toolkit.Helpers exposing (..)
-import Toolkit.Operators exposing (..)
+
+
+
 import X.Function exposing (..)
-import X.Function.Infix exposing (..)
-import List.Extra as List
-import Maybe.Extra as Maybe
-import Json.Decode as D exposing (Decoder)
-import Json.Decode.Pipeline as D
+
+
+
+
+
 import Json.Encode as E
 import Random.Pcg as Random
-import String.Extra
+
 import Time exposing (Time)
-import Tuple2
+
 
 
 type alias Name =

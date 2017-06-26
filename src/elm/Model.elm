@@ -3,7 +3,7 @@ module Model exposing (..)
 import AppDrawer.Model
 import CommonMsg
 import Context
-import Dict.Extra
+
 import Document exposing (Document)
 import Entity.Tree
 import ExclusiveMode exposing (ExclusiveMode)

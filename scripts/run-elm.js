@@ -3,9 +3,9 @@ import * as _ from "ramda"
 import LineDriver from "line-driver"
 
 export default function () {
-    run("elm-make --warn src/elm/Main.elm 2> main-warn.txt")
+    run("elm-make --warn src/elm/Main.elm --output /dev/null 2> /tmp/main-warn.txt")
     LineDriver.read({
-        in: 'main-warn.txt',
+        in: '/tmp/main-warn.txt',
         line: function (props, parser) {
             const line = parser.line
             // console.log(parser.line);
